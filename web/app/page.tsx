@@ -5,7 +5,7 @@ export default function Home() {
     return (
         <div style={{ textAlign: 'center', padding: '2rem' }}>
             <Image
-                src="/images/logo.png"
+                src="/images/Stratolink.png"
                 alt="Stratolink Logo"
                 width={300}
                 height={300}

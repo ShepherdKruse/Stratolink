@@ -1,6 +1,6 @@
 <div align="center">
 
-![Stratolink Logo](assets/images/logo.png)
+![Stratolink Logo](assets/images/Stratolink.png)
 
 # Stratolink
 

@@ -34,6 +34,9 @@ yarn-error.log*
 *.tmp
 *.temp
 
+# Internal documentation (not for public)
+.internal/
+
 # Hardware Design Tools
 *.bak
 *.backup
