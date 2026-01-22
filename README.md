@@ -1,6 +1,14 @@
+<div align="center">
+
+![Stratolink Logo](assets/images/logo.png)
+
 # Stratolink
 
+**Global Pico-Connectivity**
+
 Global pico-balloon telemetry system using RAK3172 LoRaWAN module with Next.js ground station.
+
+</div>
 
 ## Architecture
 
@@ -24,6 +32,8 @@ Global pico-balloon telemetry system using RAK3172 LoRaWAN module with Next.js g
 │   │   └── secrets.h          # GITIGNORED
 │   ├── platformio.ini
 │   └── flash_firmware.bat
+├── /assets                    # Brand assets and images
+│   └── /images               # Logo and branding files
 ├── /hardware                  # PCB and Circuit Designs
 │   ├── /pcb                   # PCB design files
 │   ├── /circuits              # Circuit schematics
