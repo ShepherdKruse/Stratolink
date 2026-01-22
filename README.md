@@ -1,6 +1,6 @@
 <div align="center">
 
-![Stratolink Logo](assets/images/Stratolink.png)
+<img src="assets/images/Stratolink.png" alt="Stratolink Logo" width="200" height="200">
 
 # Stratolink
 
