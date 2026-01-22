@@ -30,7 +30,7 @@ For partnership inquiries, please contact: [Your Contact Information]
 ## License Compatibility
 
 Partners using Stratolink under MIT License must:
-- Include copyright notice: "Copyright (c) 2024 Stratolink (Nonprofit Organization)"
+- Include copyright notice: "Copyright (c) 2026 Stratolink (Nonprofit Organization)"
 - Include full MIT License text
 - Maintain attribution in distributed software
 
