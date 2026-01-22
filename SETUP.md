@@ -1,14 +1,6 @@
 # Stratolink Setup Instructions
 
-## Step 1: Git Repository Initialization
-
-Git repository has been initialized. To connect to GitHub:
-
-1. Create a new repository on GitHub.com
-2. Run: `git remote add origin <your-github-repo-url>`
-3. Run: `git push -u origin main`
-
-## Step 2: Configure Firmware Secrets
+## Step 1: Configure Firmware Secrets
 
 Edit `firmware/include/secrets.h` and replace the placeholder values:
 
@@ -20,7 +12,7 @@ Edit `firmware/include/secrets.h` and replace the placeholder values:
 
 These values are obtained from The Things Network (TTN) console when you register your device.
 
-## Step 3: Configure Supabase Environment Variables
+## Step 2: Configure Supabase Environment Variables
 
 1. Create a Supabase project at https://supabase.com
 2. Copy `web/.env.local.example` to `web/.env.local`
@@ -28,7 +20,7 @@ These values are obtained from The Things Network (TTN) console when you registe
    - `NEXT_PUBLIC_SUPABASE_URL`: Found in Project Settings > API
    - `NEXT_PUBLIC_SUPABASE_ANON_KEY`: Found in Project Settings > API
 
-## Step 4: Install Web Dependencies
+## Step 3: Install Web Dependencies
 
 Dependencies have been installed. If you need to reinstall:
 
@@ -37,7 +29,7 @@ cd web
 npm install
 ```
 
-## Step 5: Create Supabase Database Schema
+## Step 4: Create Supabase Database Schema
 
 1. Open your Supabase project dashboard
 2. Navigate to SQL Editor
