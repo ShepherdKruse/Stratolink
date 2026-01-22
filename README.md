@@ -24,6 +24,11 @@ Global pico-balloon telemetry system using RAK3172 LoRaWAN module with Next.js g
 │   │   └── secrets.h          # GITIGNORED
 │   ├── platformio.ini
 │   └── flash_firmware.bat
+├── /hardware                  # PCB and Circuit Designs
+│   ├── /pcb                   # PCB design files
+│   ├── /circuits              # Circuit schematics
+│   ├── /3d-models             # Mechanical designs
+│   └── /docs                  # Hardware documentation
 ├── /web                       # Next.js Project (Ground Station)
 │   ├── /app
 │   │   ├── /api/ttn-webhook   # API Route
@@ -155,10 +160,14 @@ See `web/supabase_schema.sql` for complete schema definition.
 4. Validate and sanitize all webhook inputs
 5. Use HTTPS for all production endpoints
 
+## Contributors
+
+- Shepherd Kruse - Lead Systems Architect
+- Caleb Kruse - Development Contributor
+- Teddy Warner - Hardware Design (PCB and Circuit Design)
+
 ## License
 
-[Specify your license here]
+MIT License
 
-## Contributing
-
-[Specify contribution guidelines here]
+See [LICENSE](LICENSE) file for details.

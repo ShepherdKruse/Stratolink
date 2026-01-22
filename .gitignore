@@ -33,3 +33,28 @@ yarn-error.log*
 # Temporary files
 *.tmp
 *.temp
+
+# Hardware Design Tools
+*.bak
+*.backup
+*.swp
+hardware/**/*.zip
+hardware/**/*.rar
+hardware/**/backup/
+hardware/**/Backup/
+# KiCad
+hardware/**/*.kicad_pcb-bak
+hardware/**/*.sch-bak
+hardware/**/*.pro-bak
+hardware/**/*.kicad_prl
+hardware/**/*.kicad_dru
+# Altium
+hardware/**/*.PrjPcbStructure
+hardware/**/*.SchDoc.Zip
+hardware/**/*.PcbDoc.Zip
+# Eagle
+hardware/**/*.b#*
+hardware/**/*.s#*
+# Gerber/Manufacturing (keep final versions, ignore temp)
+hardware/**/*.gbr
+hardware/**/*.GBR
