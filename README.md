@@ -171,3 +171,5 @@ See `web/supabase_schema.sql` for complete schema definition.
 MIT License
 
 See [LICENSE](LICENSE) file for details.
+
+For commercial partnership inquiries, see [PARTNERSHIPS.md](PARTNERSHIPS.md).
