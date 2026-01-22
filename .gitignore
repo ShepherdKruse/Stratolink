@@ -1,0 +1,35 @@
+# PlatformIO
+.pio/
+.vscode/
+*.bin
+*.hex
+*.elf
+**/secrets.h
+
+# Node.js / Next.js
+node_modules/
+.next/
+.env.local
+.env*.local
+dist/
+build/
+
+# IDE
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Temporary files
+*.tmp
+*.temp
