@@ -25,7 +25,7 @@ For commercial partnerships, custom licensing terms may be available that includ
 
 ## Contact
 
-For partnership inquiries, please contact: [Your Contact Information]
+For partnership inquiries, please contact: contact@stratolink.org
 
 ## License Compatibility
 
