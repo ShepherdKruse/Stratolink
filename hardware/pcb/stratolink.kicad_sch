@@ -1,0 +1,20 @@
+(kicad_sch
+	(version 20231120)
+	(generator "eeschema")
+	(generator_version "8.0")
+	(uuid "4d146a28-be53-49f1-b1c6-484192820e45")
+	(paper "A4")
+	(title_block
+		(title "PICO Mainboard")
+		(date "2026-01-21")
+		(rev "2026-01-21")
+		(company "Stratolink")
+		(comment 1 "Global pico-balloon telemetry system.")
+	)
+	(lib_symbols)
+	(sheet_instances
+		(path "/"
+			(page "1")
+		)
+	)
+)
