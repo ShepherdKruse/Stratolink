@@ -53,6 +53,7 @@ export default function MissionControl() {
                 }
 
                 // Get landed balloons (altitude < 100m in last 24 hours)
+                const oneDayAgo = new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString();
                 const { data: landed, error: landedError } = await supabase
                     .from('telemetry')
                     .select('device_id')
