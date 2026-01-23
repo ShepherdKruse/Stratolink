@@ -88,8 +88,12 @@ export default function MissionControl() {
                             });
                         }
                     });
-                    setBalloonData(Array.from(latestByDevice.values()));
-                    console.log('Balloons for map:', Array.from(latestByDevice.values()));
+                    const processedBalloons = Array.from(latestByDevice.values());
+                    console.log('Raw balloons from Supabase:', balloons);
+                    console.log('Processed balloons for map:', processedBalloons);
+                    setBalloonData(processedBalloons);
+                } else if (balloonsError) {
+                    console.error('Error fetching balloons:', balloonsError);
                 }
             } catch (error) {
                 // Silently handle Supabase errors if not configured
