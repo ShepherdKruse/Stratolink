@@ -1,6 +1,9 @@
 -- Stratolink Mission Control Database Schema
 -- Run this SQL in your Supabase SQL Editor to create the telemetry table
 
+-- Enable PostGIS extension for geospatial queries
+CREATE EXTENSION IF NOT EXISTS postgis;
+
 -- Create telemetry table for balloon tracking data
 CREATE TABLE IF NOT EXISTS telemetry (
     id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
