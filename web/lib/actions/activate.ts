@@ -18,9 +18,20 @@ export async function activateDevice(
     try {
         const supabase = createClient();
         
-        // Log environment for debugging
-        const isDevelopment = process.env.NODE_ENV === 'development' || process.env.NEXT_PUBLIC_DEV_MODE === 'true';
-        console.log(`[activateDevice] NODE_ENV: ${process.env.NODE_ENV}, isDevelopment: ${isDevelopment}, deviceId: ${deviceId}`);
+        // Check if we're in development mode or have admin override
+        // In production, only allow auto-creation if ADMIN_ACTIVATION_KEY is provided and matches
+        const hasAdminKey = process.env.ADMIN_ACTIVATION_KEY && 
+            typeof deviceId === 'string' && 
+            deviceId.includes(process.env.ADMIN_ACTIVATION_KEY);
+        
+        const isDevelopment = 
+            process.env.NODE_ENV === 'development' || 
+            process.env.NEXT_PUBLIC_DEV_MODE === 'true' ||
+            (process.env.VERCEL_ENV !== 'production' && process.env.VERCEL_ENV !== undefined);
+        
+        const allowAutoCreate = isDevelopment || hasAdminKey;
+        
+        console.log(`[activateDevice] NODE_ENV: ${process.env.NODE_ENV}, VERCEL_ENV: ${process.env.VERCEL_ENV}, isDevelopment: ${isDevelopment}, allowAutoCreate: ${allowAutoCreate}, deviceId: ${deviceId}`);
 
         // Step 1: Query for the device
         const { data: device, error: fetchError } = await supabase
@@ -29,11 +40,11 @@ export async function activateDevice(
             .eq('device_id', deviceId)
             .single();
 
-        // Development mode: Auto-create device if it doesn't exist
+        // Development mode or admin: Auto-create device if it doesn't exist
         if (fetchError || !device) {
-            console.log(`[activateDevice] Device not found. fetchError:`, fetchError, `isDevelopment:`, isDevelopment);
+            console.log(`[activateDevice] Device not found. fetchError:`, fetchError, `allowAutoCreate:`, allowAutoCreate);
             
-            if (isDevelopment) {
+            if (allowAutoCreate) {
                 // In dev mode, use the PIN provided by user as the claim_code
                 // This allows testing with any PIN
                 const claimCode = pin.length === 6 ? pin : Math.floor(100000 + Math.random() * 900000).toString();
@@ -97,11 +108,11 @@ export async function activateDevice(
                 };
             }
 
-            // Not in dev mode
-            console.log(`[activateDevice] Not in development mode. NODE_ENV: ${process.env.NODE_ENV}`);
+            // Not in dev mode and no admin key
+            console.log(`[activateDevice] Device not found and auto-creation not allowed. NODE_ENV: ${process.env.NODE_ENV}, VERCEL_ENV: ${process.env.VERCEL_ENV}`);
             return {
                 success: false,
-                error: `Device not found. Current mode: ${process.env.NODE_ENV || 'unknown'}. In development mode (NODE_ENV=development), devices are auto-created. Check your environment variables.`,
+                error: `Device not found. Please check that you entered the correct Device ID. If you received this device, ensure it was properly registered. Contact support if you believe this is an error.`,
             };
         }
 

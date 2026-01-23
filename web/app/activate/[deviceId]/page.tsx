@@ -144,6 +144,8 @@ export default function ActivatePage({ params }: PageProps) {
             origin: { y: 0.6 },
         });
 
+        console.log('[ActivatePage] Starting activation:', { deviceId, pin, name, location });
+
         // Call server action
         const result = await activateDevice(
             deviceId,
@@ -153,7 +155,10 @@ export default function ActivatePage({ params }: PageProps) {
             location.lon
         );
 
+        console.log('[ActivatePage] Activation result:', result);
+
         if (result.success) {
+            console.log('[ActivatePage] Activation successful, redirecting...');
             // Small delay to show confetti
             setTimeout(() => {
                 router.push(`/dashboard?mode=ride_along&balloon=${deviceId}`);
@@ -161,12 +166,15 @@ export default function ActivatePage({ params }: PageProps) {
         } else {
             // Show error in a more user-friendly way
             const errorMessage = result.error || 'Launch failed';
+            console.error('[ActivatePage] Activation failed:', errorMessage);
             setIsActivating(false);
             setIsHolding(false);
             setHoldProgress(0);
             
             // Show error with helpful context
-            alert(`Activation Failed\n\n${errorMessage}\n\n${errorMessage.includes('Device not found') ? 'Note: In development mode, devices should be auto-created. If you see this error, check the browser console for details.' : ''}`);
+            const fullMessage = `Activation Failed\n\n${errorMessage}\n\n${errorMessage.includes('Device not found') ? 'Note: In development mode, devices should be auto-created. Check the browser console (F12) for detailed logs.' : 'Check the browser console (F12) for detailed error information.'}`;
+            console.error('[ActivatePage] Full error message:', fullMessage);
+            alert(fullMessage);
         }
     };
 
@@ -225,8 +233,13 @@ export default function ActivatePage({ params }: PageProps) {
                                             Device ID
                                         </label>
                                         <div className="bg-[#141414] border border-[#333] px-3 py-2 font-mono text-[12px] text-[#4a90d9]">
-                                            {deviceId || 'Loading...'}
+                                            {deviceId || 'Scan QR code or enter device ID'}
                                         </div>
+                                        {!deviceId && (
+                                            <p className="text-[10px] text-[#666] mt-1">
+                                                The QR code on your device should automatically open this page. If not, enter the device ID manually.
+                                            </p>
+                                        )}
                                     </div>
 
                                     <div>
