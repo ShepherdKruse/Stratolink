@@ -18,22 +18,20 @@ interface MissionSidebarProps {
 }
 
 export default function MissionSidebar({ isOpen, onClose, balloonId, telemetryData = [] }: MissionSidebarProps) {
-    // Generate mock data if no telemetry data provided (for demo)
+    // Generate mock data if no telemetry data provided
     const generateMockData = (baseValue: number, variance: number, count: number = 24) => {
         const now = new Date();
         return Array.from({ length: count }, (_, i) => {
-            const time = new Date(now.getTime() - (count - i) * 60 * 60 * 1000); // Last 24 hours
+            const time = new Date(now.getTime() - (count - i) * 60 * 60 * 1000);
             const value = baseValue + (Math.random() - 0.5) * variance;
             return { time, value: Math.max(0, value) };
         });
     };
 
-    // Get current values (latest telemetry or mock)
     const latestTelemetry = telemetryData.length > 0 
         ? telemetryData[telemetryData.length - 1]
         : { battery_voltage: 3.72, temperature: -45.2, pressure: 120.5, rssi: -112 };
 
-    // Prepare sparkline data
     const batteryData = telemetryData.length > 0
         ? telemetryData.map(t => ({ time: t.time, value: t.battery_voltage ?? 3.7 }))
         : generateMockData(3.7, 0.3, 24);
@@ -49,7 +47,7 @@ export default function MissionSidebar({ isOpen, onClose, balloonId, telemetryDa
     const rssiData = telemetryData.length > 0
         ? telemetryData.map(t => ({ time: t.time, value: t.rssi ?? -112 }))
         : generateMockData(-112, 5, 24);
-    // Prevent body scroll when sidebar is open
+
     useEffect(() => {
         if (isOpen) {
             document.body.style.overflow = 'hidden';
@@ -61,139 +59,219 @@ export default function MissionSidebar({ isOpen, onClose, balloonId, telemetryDa
         };
     }, [isOpen]);
 
+    // System log entries - exposed inner workings
+    const systemLogs = [
+        { time: '02:48:12.847', level: 'info', msg: 'Telemetry packet TX complete, seq=1847' },
+        { time: '02:48:00.123', level: 'info', msg: 'GPS fix acquired: 12 sats, HDOP=1.2' },
+        { time: '02:47:45.892', level: 'warn', msg: 'Battery voltage below 3.8V threshold' },
+        { time: '02:47:30.456', level: 'info', msg: 'LoRaWAN uplink SF7BW125, freq=903.9MHz' },
+        { time: '02:47:15.234', level: 'info', msg: 'Sensor read: T=-45.2°C, P=120.5mbar' },
+        { time: '02:47:00.001', level: 'info', msg: 'Sleep cycle exit, runtime 847ms' },
+        { time: '02:46:45.789', level: 'info', msg: 'ADC calibration complete' },
+        { time: '02:46:30.567', level: 'info', msg: 'Power mode: ACTIVE, V_bat=3.72V' },
+        { time: '02:46:15.345', level: 'info', msg: 'Entering TX window slot 3' },
+        { time: '02:46:00.123', level: 'info', msg: 'GNSS cold start, searching...' },
+    ];
+
     return (
         <>
-            {/* Backdrop overlay */}
+            {/* Backdrop - subtle */}
             {isOpen && (
                 <div
-                    className="fixed inset-0 bg-black/50 backdrop-blur-sm z-30 transition-opacity duration-300"
+                    className="fixed inset-0 bg-black/60 z-30"
                     onClick={onClose}
                 />
             )}
 
             {/* Sidebar */}
             <div
-                className={`fixed top-0 right-0 h-full w-[600px] bg-black/90 backdrop-blur-md border-l border-cyan-500/30 z-40 transform transition-transform duration-500 ease-in-out ${
+                className={`fixed top-0 right-0 h-full w-[520px] bg-[#1a1a1a] border-l border-[#333] z-40 transform transition-transform duration-300 ${
                     isOpen ? 'translate-x-0' : 'translate-x-full'
-                } flex flex-col shadow-2xl`}
+                } flex flex-col`}
             >
-                {/* Header */}
-                <div className="flex items-center justify-between p-6 border-b border-cyan-500/30">
+                {/* Header - compact */}
+                <div className="flex items-center justify-between p-3 border-b border-[#333]">
                     <div>
-                        <h2 className="text-2xl font-bold text-cyan-400">SYSTEM INTERNALS</h2>
-                        <p className="text-gray-400 text-sm mt-1">Payload Diagnostics - {balloonId}</p>
+                        <div className="flex items-baseline gap-2">
+                            <span className="text-[13px] font-semibold text-[#e5e5e5]">Device Internals</span>
+                            <span className="font-mono text-[11px] text-[#4a90d9]">{balloonId}</span>
+                        </div>
+                        <p className="text-[10px] text-[#666] mt-0.5 font-mono">
+                            {telemetryData.length} telemetry points loaded
+                        </p>
                     </div>
                     <button
                         onClick={onClose}
-                        className="text-gray-400 hover:text-white transition-colors p-2 hover:bg-white/10 rounded-lg"
+                        className="text-[#666] hover:text-[#e5e5e5] transition-colors p-1 border border-[#333] hover:border-[#666]"
                         aria-label="Close sidebar"
                     >
-                        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M6 18L18 6M6 6l12 12" />
                         </svg>
                     </button>
                 </div>
 
                 {/* Content - Scrollable */}
                 <div className="flex-1 overflow-y-auto">
-                    {/* 3D PCB Viewer */}
-                    <div className="p-6 border-b border-cyan-500/20">
-                        <h3 className="text-cyan-400 text-sm uppercase tracking-wider mb-4">PCB 3D Model</h3>
-                        <div className="h-64 bg-black/40 rounded-lg border border-cyan-500/20 overflow-hidden">
-                            <Payload3DViewer />
-                        </div>
-                    </div>
-
-                    {/* Mission Log */}
-                    <div className="p-6 border-b border-cyan-500/20">
-                        <h3 className="text-cyan-400 text-sm uppercase tracking-wider mb-4">Mission Log</h3>
-                        <div className="bg-black/40 rounded-lg border border-cyan-500/20 p-4 font-mono text-xs text-gray-300 h-48 overflow-y-auto">
-                            <div className="space-y-2">
-                                <div className="text-cyan-400/60">[2026-01-23 02:45:12 UTC]</div>
-                                <div className="text-green-400">SYSTEM INIT: All subsystems nominal</div>
-                                
-                                <div className="text-cyan-400/60">[2026-01-23 02:45:15 UTC]</div>
-                                <div className="text-green-400">LORAWAN: Connected to TTN network</div>
-                                
-                                <div className="text-cyan-400/60">[2026-01-23 02:45:18 UTC]</div>
-                                <div className="text-green-400">GNSS: GPS lock acquired (12 satellites)</div>
-                                
-                                <div className="text-cyan-400/60">[2026-01-23 02:45:20 UTC]</div>
-                                <div className="text-yellow-400">POWER: Battery at 3.7V (85% capacity)</div>
-                                
-                                <div className="text-cyan-400/60">[2026-01-23 02:45:25 UTC]</div>
-                                <div className="text-green-400">TELEMETRY: First packet transmitted</div>
-                                
-                                <div className="text-cyan-400/60">[2026-01-23 02:46:00 UTC]</div>
-                                <div className="text-green-400">ALTITUDE: 15,000m reached</div>
-                                
-                                <div className="text-cyan-400/60">[2026-01-23 02:47:30 UTC]</div>
-                                <div className="text-blue-400">WIND: Detected crosswind pattern</div>
-                                
-                                <div className="text-cyan-400/60">[2026-01-23 02:48:00 UTC]</div>
-                                <div className="text-green-400">STATUS: All systems operational</div>
+                    {/* Two-column layout for density */}
+                    <div className="grid grid-cols-2 gap-px bg-[#333]">
+                        {/* Left Column: 3D View + Telemetry */}
+                        <div className="bg-[#1a1a1a]">
+                            {/* PCB 3D Viewer */}
+                            <div className="p-3 border-b border-[#333]">
+                                <div className="text-[10px] font-semibold text-[#666] uppercase tracking-wider mb-2">Hardware Model</div>
+                                <div className="h-40 bg-[#141414] border border-[#333]">
+                                    <Payload3DViewer />
+                                </div>
                             </div>
-                        </div>
-                    </div>
 
-                    {/* Science Telemetry with Sparklines */}
-                    <div className="p-6">
-                        <h3 className="text-cyan-400 text-sm uppercase tracking-wider mb-4">Science Telemetry</h3>
-                        <div className="bg-black/40 rounded-lg border border-cyan-500/20 p-4 space-y-4">
-                            {/* Power System */}
-                            <div>
-                                <div className="text-cyan-400/60 text-xs uppercase tracking-wider mb-2">POWER SYSTEM</div>
+                            {/* Power Telemetry */}
+                            <div className="p-3 border-b border-[#333]">
+                                <div className="text-[10px] font-semibold text-[#666] uppercase tracking-wider mb-2">Power System</div>
                                 <MetricSparkline
                                     data={batteryData}
-                                    dataKey="battery_voltage"
-                                    color="#00ffff"
+                                    dataKey="V_bat"
+                                    color="#4a90d9"
                                     currentValue={latestTelemetry.battery_voltage ?? 3.72}
                                     unit="V"
                                 />
                             </div>
 
                             {/* Environmental */}
-                            <div>
-                                <div className="text-cyan-400/60 text-xs uppercase tracking-wider mb-2">ENVIRONMENTAL</div>
+                            <div className="p-3 border-b border-[#333]">
+                                <div className="text-[10px] font-semibold text-[#666] uppercase tracking-wider mb-2">Environment</div>
                                 <div className="space-y-3">
                                     <MetricSparkline
                                         data={temperatureData}
-                                        dataKey="temperature"
-                                        color="#ff6b6b"
+                                        dataKey="temp"
+                                        color="#c44"
                                         currentValue={latestTelemetry.temperature ?? -45.2}
                                         unit="°C"
                                     />
                                     <MetricSparkline
                                         data={pressureData}
-                                        dataKey="pressure"
-                                        color="#4ecdc4"
+                                        dataKey="pres"
+                                        color="#4a9"
                                         currentValue={latestTelemetry.pressure ?? 120.5}
-                                        unit=" mbar"
+                                        unit="mbar"
                                     />
                                 </div>
                             </div>
 
-                            {/* Communications */}
-                            <div>
-                                <div className="text-cyan-400/60 text-xs uppercase tracking-wider mb-2">COMMUNICATIONS</div>
+                            {/* RF */}
+                            <div className="p-3">
+                                <div className="text-[10px] font-semibold text-[#666] uppercase tracking-wider mb-2">RF Link</div>
                                 <MetricSparkline
                                     data={rssiData}
                                     dataKey="rssi"
-                                    color="#ffd93d"
+                                    color="#b84"
                                     currentValue={latestTelemetry.rssi ?? -112}
-                                    unit=" dBm"
+                                    unit="dBm"
                                 />
                             </div>
+                        </div>
 
-                            {/* Static Navigation Data */}
-                            <div>
-                                <div className="text-cyan-400/60 text-xs uppercase tracking-wider mb-2">NAVIGATION</div>
-                                <div className="space-y-1 text-gray-300 font-mono text-xs">
-                                    <div>GPS Sats: 12</div>
-                                    <div>HDOP: 1.2</div>
-                                    <div>Speed: 45.2 m/s</div>
+                        {/* Right Column: System State + Logs */}
+                        <div className="bg-[#1a1a1a]">
+                            {/* Raw State Dump */}
+                            <div className="p-3 border-b border-[#333]">
+                                <div className="text-[10px] font-semibold text-[#666] uppercase tracking-wider mb-2">System State</div>
+                                <div className="font-mono text-[10px] space-y-1 text-[#999]">
+                                    <div className="flex justify-between">
+                                        <span>device_id</span>
+                                        <span className="text-[#e5e5e5]">{balloonId}</span>
+                                    </div>
+                                    <div className="flex justify-between">
+                                        <span>firmware</span>
+                                        <span className="text-[#e5e5e5]">v2.1.4</span>
+                                    </div>
+                                    <div className="flex justify-between">
+                                        <span>uptime_s</span>
+                                        <span className="text-[#e5e5e5]">847293</span>
+                                    </div>
+                                    <div className="flex justify-between">
+                                        <span>tx_count</span>
+                                        <span className="text-[#e5e5e5]">1847</span>
+                                    </div>
+                                    <div className="flex justify-between">
+                                        <span>gps_sats</span>
+                                        <span className="text-[#e5e5e5]">12</span>
+                                    </div>
+                                    <div className="flex justify-between">
+                                        <span>hdop</span>
+                                        <span className="text-[#e5e5e5]">1.2</span>
+                                    </div>
+                                    <div className="flex justify-between">
+                                        <span>sf</span>
+                                        <span className="text-[#e5e5e5]">SF7BW125</span>
+                                    </div>
+                                    <div className="flex justify-between">
+                                        <span>freq_mhz</span>
+                                        <span className="text-[#e5e5e5]">903.9</span>
+                                    </div>
+                                    <div className="flex justify-between">
+                                        <span>power_mode</span>
+                                        <span className="text-[#4a9]">ACTIVE</span>
+                                    </div>
+                                    <div className="flex justify-between">
+                                        <span>sleep_ms</span>
+                                        <span className="text-[#e5e5e5]">60000</span>
+                                    </div>
                                 </div>
                             </div>
+
+                            {/* Navigation Data */}
+                            <div className="p-3 border-b border-[#333]">
+                                <div className="text-[10px] font-semibold text-[#666] uppercase tracking-wider mb-2">Navigation</div>
+                                <div className="font-mono text-[10px] space-y-1 text-[#999]">
+                                    <div className="flex justify-between">
+                                        <span>ground_speed</span>
+                                        <span className="text-[#e5e5e5]">45.2 m/s</span>
+                                    </div>
+                                    <div className="flex justify-between">
+                                        <span>track_deg</span>
+                                        <span className="text-[#e5e5e5]">087.4°</span>
+                                    </div>
+                                    <div className="flex justify-between">
+                                        <span>climb_rate</span>
+                                        <span className="text-[#e5e5e5]">+2.1 m/s</span>
+                                    </div>
+                                    <div className="flex justify-between">
+                                        <span>dist_traveled</span>
+                                        <span className="text-[#e5e5e5]">847.3 km</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            {/* System Log - exposed inner workings */}
+                            <div className="p-3">
+                                <div className="text-[10px] font-semibold text-[#666] uppercase tracking-wider mb-2">System Log</div>
+                                <div className="bg-[#141414] border border-[#333] p-2 h-[200px] overflow-y-auto font-mono text-[9px]">
+                                    {systemLogs.map((log, i) => (
+                                        <div key={i} className="flex gap-2 py-0.5">
+                                            <span className="text-[#666] shrink-0">{log.time}</span>
+                                            <span className={`shrink-0 w-10 ${
+                                                log.level === 'warn' ? 'text-[#b84]' : 
+                                                log.level === 'error' ? 'text-[#c44]' : 'text-[#666]'
+                                            }`}>
+                                                [{log.level.toUpperCase()}]
+                                            </span>
+                                            <span className="text-[#999]">{log.msg}</span>
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                {/* Footer - raw data access */}
+                <div className="p-2 border-t border-[#333] bg-[#141414]">
+                    <div className="flex items-center justify-between text-[9px] font-mono text-[#666]">
+                        <span>Updated: {new Date().toISOString().substring(11, 23)} UTC</span>
+                        <div className="flex gap-2">
+                            <button className="hover:text-[#999] transition-colors">[Export JSON]</button>
+                            <button className="hover:text-[#999] transition-colors">[Export CSV]</button>
                         </div>
                     </div>
                 </div>
