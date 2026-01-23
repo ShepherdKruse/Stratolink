@@ -108,22 +108,11 @@ export default function MissionMap({ projection = 'globe', onProjectionChange, b
                         filter={['<=', ['get', 'altitude'], 100]}
                         paint={{
                             'circle-color': '#888888',
-                            'circle-radius': 6,
-                            'circle-opacity': 0.7,
-                            'circle-stroke-width': 1,
-                            'circle-stroke-color': '#666666',
-                            'circle-stroke-opacity': 0.5,
-                        }}
-                    />
-                    
-                    {/* White circles representing ground connection points */}
-                    <Layer
-                        id="balloon-ground"
-                        type="circle"
-                        paint={{
-                            'circle-color': '#ffffff',
-                            'circle-radius': 3,
-                            'circle-opacity': 0.4,
+                            'circle-radius': 8,
+                            'circle-opacity': 0.8,
+                            'circle-stroke-width': 2,
+                            'circle-stroke-color': '#aaaaaa',
+                            'circle-stroke-opacity': 0.6,
                         }}
                     />
                 </Source>
