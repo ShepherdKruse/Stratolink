@@ -33,13 +33,23 @@ export default function MissionControl() {
                 // Get active balloons (recent telemetry within last hour)
                 const oneHourAgo = new Date(Date.now() - 60 * 60 * 1000).toISOString();
                 
-                const { data: active, error: activeError } = await supabase
+                const { data: active, error: activeError, count } = await supabase
                     .from('telemetry')
-                    .select('device_id', { count: 'exact', head: true })
-                    .gte('time', oneHourAgo);
+                    .select('device_id', { count: 'exact' })
+                    .gte('time', oneHourAgo)
+                    .gt('altitude_m', 100);
                 
-                if (!activeError && active) {
-                    setActiveCount(active.length || 0);
+                if (!activeError) {
+                    // Count distinct device_ids
+                    if (active && active.length > 0) {
+                        const distinctDevices = new Set(active.map((row: any) => row.device_id));
+                        setActiveCount(distinctDevices.size);
+                    } else if (count !== null) {
+                        // Fallback to count if available
+                        setActiveCount(count);
+                    } else {
+                        setActiveCount(0);
+                    }
                 }
 
                 // Get landed balloons (altitude < 100m in last 24 hours)
