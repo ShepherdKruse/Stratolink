@@ -10,6 +10,7 @@ interface MissionSidebarProps {
     isOpen: boolean;
     onClose: () => void;
     balloonId: string;
+    launcherName?: string;
     telemetryData?: Array<{
         time: Date | string;
         battery_voltage?: number;
@@ -25,7 +26,7 @@ interface MissionSidebarProps {
     } | null;
 }
 
-export default function MissionSidebar({ isOpen, onClose, balloonId, telemetryData = [], timelineProps }: MissionSidebarProps) {
+export default function MissionSidebar({ isOpen, onClose, balloonId, launcherName, telemetryData = [], timelineProps }: MissionSidebarProps) {
     // Generate mock data if no telemetry data provided
     const generateMockData = (baseValue: number, variance: number, count: number = 24) => {
         const now = new Date();
@@ -113,6 +114,7 @@ export default function MissionSidebar({ isOpen, onClose, balloonId, telemetryDa
                             <span className="font-mono text-[11px] text-[#4a90d9]">{balloonId}</span>
                         </div>
                         <p className="text-[10px] text-[#666] mt-0.5 font-mono">
+                            {launcherName && `Launched by: ${launcherName} • `}
                             {telemetryData.length} telemetry points loaded
                         </p>
                     </div>

@@ -59,10 +59,13 @@ export default function MobileMissions({ balloonData, onBalloonClick, onLaunch }
                                     </div>
                                     <Rocket size={16} className="text-[#666]" />
                                 </div>
-                                <div className="font-mono text-[11px] text-[#999] space-y-0.5">
-                                    <div>Alt: {(balloon.altitude_m * 3.28084 / 1000).toFixed(1)}k ft</div>
-                                    <div>{balloon.lat.toFixed(4)}°, {balloon.lon.toFixed(4)}°</div>
-                                </div>
+                                    <div className="font-mono text-[11px] text-[#999] space-y-0.5">
+                                        <div>Alt: {(balloon.altitude_m * 3.28084 / 1000).toFixed(1)}k ft</div>
+                                        <div>{balloon.lat.toFixed(4)}°, {balloon.lon.toFixed(4)}°</div>
+                                        {balloon.launcher_name && (
+                                            <div className="text-[10px] text-[#666]">Launched by: {balloon.launcher_name}</div>
+                                        )}
+                                    </div>
                             </button>
                         ))}
                     </div>

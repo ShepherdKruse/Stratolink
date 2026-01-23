@@ -15,6 +15,7 @@ interface BottomSheetProps {
         lon: number;
         battery_voltage?: number;
         velocity_heading?: number;
+        launcher_name?: string;
     };
     telemetryData?: Array<{
         time: Date | string;
@@ -155,6 +156,11 @@ export default function BottomSheet({
                                 <div className="font-mono text-[20px] text-[#e5e5e5] font-bold">
                                     {altitudeFt > 0 ? `${(altitudeFt / 1000).toFixed(1)}k ft` : '—'}
                                 </div>
+                                {balloonData?.launcher_name && (
+                                    <div className="font-mono text-[9px] text-[#666] mt-0.5">
+                                        {balloonData.launcher_name}
+                                    </div>
+                                )}
                             </div>
                         </div>
                         <button

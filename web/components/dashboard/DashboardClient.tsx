@@ -14,6 +14,7 @@ interface BalloonData {
     altitude_m: number;
     velocity_heading?: number;
     battery_voltage?: number;
+    launcher_name?: string;
 }
 
 interface DashboardClientProps {
@@ -54,76 +55,105 @@ export default function DashboardClient({ initialBalloonId = null, initialMode =
                 const supabase = createClient();
                 setConnectionStatus('connected');
                 
-                // Get active balloons (recent telemetry within last 2 hours)
-                const twoHoursAgo = new Date(Date.now() - 2 * 60 * 60 * 1000).toISOString();
+                // Fetch activated devices (only 'flying' status for map display)
+                const { data: activatedDevices, error: devicesError } = await supabase
+                    .from('devices')
+                    .select('device_id, launcher_name, status')
+                    .eq('status', 'flying');
+
+                if (devicesError) {
+                    console.error('Error fetching activated devices:', devicesError);
+                    setConnectionStatus('error');
+                }
+
+                const activatedDeviceIds = activatedDevices ? activatedDevices.map((d: any) => d.device_id) : [];
+                const launcherMap = new Map<string, string>();
                 
-                const { data: active, error: activeError, count } = await supabase
-                    .from('telemetry')
-                    .select('device_id', { count: 'exact' })
-                    .gte('time', twoHoursAgo)
-                    .gt('altitude_m', 100);
-                
-                if (!activeError) {
-                    if (active && active.length > 0) {
+                // Create launcher name map
+                if (activatedDevices) {
+                    activatedDevices.forEach((d: any) => {
+                        launcherMap.set(d.device_id, d.launcher_name || 'Unknown');
+                    });
+                }
+
+                if (activatedDeviceIds.length > 0) {
+                    const twoHoursAgo = new Date(Date.now() - 2 * 60 * 60 * 1000).toISOString();
+                    const oneDayAgo = new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString();
+                    
+                    // Get active balloons (recent telemetry within last 2 hours, only for activated devices)
+                    const { data: active, error: activeError } = await supabase
+                        .from('telemetry')
+                        .select('device_id')
+                        .in('device_id', activatedDeviceIds)
+                        .gte('time', twoHoursAgo)
+                        .gt('altitude_m', 100);
+                    
+                    if (!activeError && active) {
                         const distinctDevices = new Set(active.map((row: any) => row.device_id));
                         setActiveCount(distinctDevices.size);
-                    } else if (count !== null) {
-                        setActiveCount(count);
                     } else {
                         setActiveCount(0);
                     }
-                }
 
-                // Get landed balloons (altitude < 100m in last 24 hours)
-                const oneDayAgo = new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString();
-                const { data: landed, error: landedError } = await supabase
-                    .from('telemetry')
-                    .select('device_id')
-                    .gte('time', oneDayAgo)
-                    .lt('altitude_m', 100);
-                
-                if (landedError) {
-                    console.error('Error fetching landed balloons:', landedError);
-                } else {
-                    if (landed && landed.length > 0) {
-                        const distinctLanded = new Set(landed.map((row: any) => row.device_id));
-                        setLandedCount(distinctLanded.size);
+                    // Get landed balloons (altitude < 100m in last 24 hours, only for activated devices)
+                    const { data: landed, error: landedError } = await supabase
+                        .from('telemetry')
+                        .select('device_id')
+                        .in('device_id', activatedDeviceIds)
+                        .gte('time', oneDayAgo)
+                        .lt('altitude_m', 100);
+                    
+                    if (landedError) {
+                        console.error('Error fetching landed balloons:', landedError);
                     } else {
-                        setLandedCount(0);
-                    }
-                }
-
-                // Also fetch balloon positions for the map
-                const { data: balloons, error: balloonsError } = await supabase
-                    .from('telemetry')
-                    .select('device_id, lat, lon, altitude_m, time, velocity_x, velocity_y')
-                    .gte('time', oneDayAgo)
-                    .order('time', { ascending: false });
-
-                if (!balloonsError && balloons) {
-                    const latestByDevice = new Map<string, BalloonData>();
-                    balloons.forEach((row: any) => {
-                        if (!latestByDevice.has(row.device_id)) {
-                            let velocity_heading = 90;
-                            if (row.velocity_x !== null && row.velocity_y !== null) {
-                                const headingRad = Math.atan2(row.velocity_x, row.velocity_y);
-                                velocity_heading = (headingRad * 180 / Math.PI + 360) % 360;
-                            }
-                            
-                            latestByDevice.set(row.device_id, {
-                                id: row.device_id,
-                                lat: row.lat,
-                                lon: row.lon,
-                                altitude_m: row.altitude_m,
-                                velocity_heading: velocity_heading,
-                                battery_voltage: 3.7,
-                            });
+                        if (landed && landed.length > 0) {
+                            const distinctLanded = new Set(landed.map((row: any) => row.device_id));
+                            setLandedCount(distinctLanded.size);
+                        } else {
+                            setLandedCount(0);
                         }
-                    });
-                    setBalloonData(Array.from(latestByDevice.values()));
-                } else if (balloonsError) {
-                    console.error('Error fetching balloons:', balloonsError);
-                    setConnectionStatus('error');
+                    }
+
+                    // Fetch balloon positions for the map (only activated devices)
+                    const { data: balloons, error: balloonsError } = await supabase
+                        .from('telemetry')
+                        .select('device_id, lat, lon, altitude_m, time, velocity_x, velocity_y')
+                        .in('device_id', activatedDeviceIds)
+                        .gte('time', oneDayAgo)
+                        .order('time', { ascending: false });
+
+                    if (!balloonsError && balloons) {
+                        const latestByDevice = new Map<string, BalloonData>();
+
+                        balloons.forEach((row: any) => {
+                            if (!latestByDevice.has(row.device_id)) {
+                                let velocity_heading = 90;
+                                if (row.velocity_x !== null && row.velocity_y !== null) {
+                                    const headingRad = Math.atan2(row.velocity_x, row.velocity_y);
+                                    velocity_heading = (headingRad * 180 / Math.PI + 360) % 360;
+                                }
+                                
+                                latestByDevice.set(row.device_id, {
+                                    id: row.device_id,
+                                    lat: row.lat,
+                                    lon: row.lon,
+                                    altitude_m: row.altitude_m,
+                                    velocity_heading: velocity_heading,
+                                    battery_voltage: 3.7,
+                                    launcher_name: launcherMap.get(row.device_id),
+                                });
+                            }
+                        });
+                        setBalloonData(Array.from(latestByDevice.values()));
+                    } else if (balloonsError) {
+                        console.error('Error fetching balloons:', balloonsError);
+                        setConnectionStatus('error');
+                    }
+                } else {
+                    // No activated devices
+                    setActiveCount(0);
+                    setLandedCount(0);
+                    setBalloonData([]);
                 }
                 
                 setLastUpdate(new Date());
@@ -255,6 +285,7 @@ export default function DashboardClient({ initialBalloonId = null, initialMode =
                     isOpen={isSidebarOpen}
                     onClose={() => setIsSidebarOpen(false)}
                     balloonId={activeBalloonId}
+                    launcherName={activeBalloon?.launcher_name}
                     telemetryData={flightPathData.map(point => ({
                         time: point.time,
                         battery_voltage: 3.7 + Math.random() * 0.5,
@@ -367,6 +398,9 @@ export default function DashboardClient({ initialBalloonId = null, initialMode =
                                             <div className="font-mono text-[10px] text-[#999] space-y-0.5">
                                                 <div>{balloon.lat.toFixed(4)}°, {balloon.lon.toFixed(4)}°</div>
                                                 <div>Alt: {balloon.altitude_m.toLocaleString()}m ({(balloon.altitude_m * 3.28084).toLocaleString(undefined, { maximumFractionDigits: 0 })}ft)</div>
+                                                {balloon.launcher_name && (
+                                                    <div className="text-[#666]">Launched by: {balloon.launcher_name}</div>
+                                                )}
                                             </div>
                                         </button>
                                     ))}
