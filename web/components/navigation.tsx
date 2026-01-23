@@ -54,6 +54,12 @@ export function Navigation() {
               Contact
             </Link>
             <Link
+              href="/docs"
+              className="text-sm font-light text-muted-foreground transition-colors hover:text-foreground"
+            >
+              Docs
+            </Link>
+            <Link
               href="/dashboard"
               className="rounded-sm bg-foreground px-4 py-2 text-sm font-medium text-background transition-colors hover:bg-foreground/90"
             >

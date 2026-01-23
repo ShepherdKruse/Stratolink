@@ -90,9 +90,15 @@ Global pico-balloon telemetry system using RAK3172 LoRaWAN module with Next.js g
 4. Set webhook URL: `https://your-vercel-domain.com/api/ttn-webhook`
 5. Save webhook configuration
 
-## Detailed Setup Guide
+## Documentation
 
-For step-by-step setup instructions, see [SETUP.md](SETUP.md).
+- **Quick Start**: See [SETUP.md](SETUP.md) for detailed setup instructions
+- **Full Documentation**: [stratolink.org/docs](https://stratolink.org/docs)
+  - [Getting Started](https://stratolink.org/docs/getting-started)
+  - [Dashboard Guide](https://stratolink.org/docs/dashboard)
+  - [Hardware Setup](https://stratolink.org/docs/hardware)
+  - [API Reference](https://stratolink.org/docs/api)
+  - [Troubleshooting](https://stratolink.org/docs/troubleshooting)
 
 ## Configuration Files
 
