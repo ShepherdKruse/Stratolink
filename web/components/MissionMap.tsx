@@ -1,7 +1,7 @@
 'use client';
 
-import { useState, useMemo, useCallback, useEffect, useRef } from 'react';
-import Map, { Source, Layer, MapRef } from 'react-map-gl/mapbox';
+import { useState, useMemo, useCallback } from 'react';
+import Map, { Source, Layer } from 'react-map-gl/mapbox';
 import 'mapbox-gl/dist/mapbox-gl.css';
 
 interface MissionMapProps {
@@ -17,39 +17,13 @@ interface BalloonData {
 }
 
 export default function MissionMap({ projection = 'globe', onProjectionChange }: MissionMapProps) {
-    const mapRef = useRef<MapRef>(null);
     const [viewState, setViewState] = useState({
         longitude: -75,
         latitude: 40,
         zoom: 3,
-        pitch: 45,
+        pitch: projection === 'globe' ? 45 : 0,
         bearing: 0,
     });
-
-    // Update projection when it changes
-    useEffect(() => {
-        if (mapRef.current) {
-            const map = mapRef.current.getMap();
-            if (projection === 'globe') {
-                map.setProjection({ name: 'globe' });
-                // Enable fog and terrain for 3D
-                map.setFog({
-                    color: 'rgb(4, 7, 37)',
-                    'high-color': 'rgb(0, 0, 0)',
-                    'horizon-blend': 0.02,
-                    'space-color': 'rgb(0, 0, 0)',
-                    'star-intensity': 0.6,
-                });
-                map.setTerrain({ source: 'mapbox-dem', exaggeration: 1.5 });
-            } else {
-                // Switch to Mercator (2D)
-                map.setProjection('mercator');
-                // Disable fog and terrain for 2D
-                map.setFog(null);
-                map.setTerrain(null);
-            }
-        }
-    }, [projection]);
 
     // Adjust view state when projection changes
     const handleViewStateChange = useCallback((evt: any) => {
@@ -93,7 +67,7 @@ export default function MissionMap({ projection = 'globe', onProjectionChange }:
     return (
         <div className="w-full h-full relative">
             <Map
-                ref={mapRef}
+                key={projection}
                 {...adjustedViewState}
                 onMove={handleViewStateChange}
                 mapboxAccessToken={process.env.NEXT_PUBLIC_MAPBOX_TOKEN}
