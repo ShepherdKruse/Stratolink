@@ -1,8 +1,9 @@
 'use client';
 
-import { useState, useMemo, useCallback } from 'react';
+import { useState, useMemo, useCallback, useEffect } from 'react';
 import Map, { Source, Layer } from 'react-map-gl/mapbox';
 import 'mapbox-gl/dist/mapbox-gl.css';
+import { createClient } from '@/lib/supabase';
 
 interface MissionMapProps {
     projection?: 'globe' | 'mercator';
@@ -25,6 +26,61 @@ export default function MissionMap({ projection = 'globe', onProjectionChange }:
         bearing: 0,
     });
 
+    const [balloonData, setBalloonData] = useState<BalloonData[]>([]);
+
+    // Fetch active balloons from Supabase
+    useEffect(() => {
+        async function fetchBalloons() {
+            const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+            if (!supabaseUrl || supabaseUrl.includes('your_supabase') || supabaseUrl === '') {
+                return;
+            }
+
+            try {
+                const supabase = createClient();
+                
+                // Get active balloons (recent telemetry within last hour)
+                const oneHourAgo = new Date(Date.now() - 60 * 60 * 1000).toISOString();
+                
+                const { data, error } = await supabase
+                    .from('telemetry')
+                    .select('device_id, lat, lon, altitude_m, time')
+                    .gte('time', oneHourAgo)
+                    .gt('altitude_m', 100)
+                    .order('time', { ascending: false });
+
+                if (error) {
+                    console.error('Error fetching balloons:', error);
+                    return;
+                }
+
+                if (data) {
+                    // Get latest telemetry per device
+                    const latestByDevice = new Map<string, BalloonData>();
+                    data.forEach((row: any) => {
+                        if (!latestByDevice.has(row.device_id)) {
+                            latestByDevice.set(row.device_id, {
+                                id: row.device_id,
+                                lat: row.lat,
+                                lon: row.lon,
+                                altitude_m: row.altitude_m,
+                            });
+                        }
+                    });
+                    setBalloonData(Array.from(latestByDevice.values()));
+                }
+            } catch (error) {
+                console.debug('Supabase fetch error:', error);
+            }
+        }
+
+        fetchBalloons();
+        // Refresh every 30 seconds
+        const interval = setInterval(fetchBalloons, 30000);
+        
+        return () => clearInterval(interval);
+    }, []);
+
     // Adjust view state when projection changes
     const handleViewStateChange = useCallback((evt: any) => {
         setViewState(evt.viewState);
@@ -37,13 +93,6 @@ export default function MissionMap({ projection = 'globe', onProjectionChange }:
         }
         return viewState;
     }, [viewState, projection]);
-
-    // Placeholder balloon data - replace with real data from Supabase
-    const balloonData: BalloonData[] = useMemo(() => [
-        // Example balloons (replace with real data)
-        // { id: '1', lat: 40.7128, lon: -74.0060, altitude_m: 15000 },
-        // { id: '2', lat: 34.0522, lon: -118.2437, altitude_m: 18000 },
-    ], []);
 
     // Create GeoJSON for balloon positions (markers at altitude)
     const balloonGeoJSON = useMemo(() => {
