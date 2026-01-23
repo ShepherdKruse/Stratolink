@@ -16,13 +16,26 @@ interface BalloonData {
     battery_voltage?: number;
 }
 
-export default function DashboardClient() {
+interface DashboardClientProps {
+    initialBalloonId?: string | null;
+    initialMode?: string | null;
+}
+
+export default function DashboardClient({ initialBalloonId = null, initialMode = null }: DashboardClientProps = {}) {
     const [projection, setProjection] = useState<'globe' | 'mercator'>('globe');
     const [activeCount, setActiveCount] = useState(0);
     const [landedCount, setLandedCount] = useState(0);
     const [balloonData, setBalloonData] = useState<BalloonData[]>([]);
-    const [activeBalloonId, setActiveBalloonId] = useState<string | null>(null);
-    const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+    const [activeBalloonId, setActiveBalloonId] = useState<string | null>(initialBalloonId);
+    const [isSidebarOpen, setIsSidebarOpen] = useState(initialMode === 'ride_along' ? true : false);
+
+    // Auto-enter ride along mode if initialBalloonId is provided
+    useEffect(() => {
+        if (initialBalloonId && initialMode === 'ride_along') {
+            setActiveBalloonId(initialBalloonId);
+            setIsSidebarOpen(true);
+        }
+    }, [initialBalloonId, initialMode]);
     const [playbackTime, setPlaybackTime] = useState<Date | null>(null);
     const [flightPathData, setFlightPathData] = useState<Array<{ lat: number; lon: number; time: Date }>>([]);
     const [lastUpdate, setLastUpdate] = useState<Date>(new Date());

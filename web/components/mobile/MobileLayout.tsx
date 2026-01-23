@@ -19,13 +19,25 @@ interface BalloonData {
     battery_voltage?: number;
 }
 
-export default function MobileLayout() {
+interface MobileLayoutProps {
+    initialBalloonId?: string | null;
+}
+
+export default function MobileLayout({ initialBalloonId = null }: MobileLayoutProps = {}) {
     const [activeTab, setActiveTab] = useState<Tab>('radar');
     const [balloonData, setBalloonData] = useState<BalloonData[]>([]);
-    const [selectedBalloonId, setSelectedBalloonId] = useState<string | null>(null);
+    const [selectedBalloonId, setSelectedBalloonId] = useState<string | null>(initialBalloonId);
     const [activeCount, setActiveCount] = useState(0);
     const [landedCount, setLandedCount] = useState(0);
     const [userLocation, setUserLocation] = useState<{ lat: number; lon: number } | null>(null);
+
+    // Auto-select balloon if initialBalloonId is provided
+    useEffect(() => {
+        if (initialBalloonId) {
+            setSelectedBalloonId(initialBalloonId);
+            setActiveTab('radar');
+        }
+    }, [initialBalloonId]);
 
     // Get user location for "Nearest" calculation
     useEffect(() => {
