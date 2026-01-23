@@ -31,6 +31,8 @@ export async function activateDevice(
 
         // Development mode: Auto-create device if it doesn't exist
         if (fetchError || !device) {
+            console.log(`[activateDevice] Device not found. fetchError:`, fetchError, `isDevelopment:`, isDevelopment);
+            
             if (isDevelopment) {
                 // In dev mode, use the PIN provided by user as the claim_code
                 // This allows testing with any PIN
@@ -50,21 +52,22 @@ export async function activateDevice(
 
                 if (createError) {
                     console.error('[DEV MODE] Error creating device:', createError);
+                    console.error('[DEV MODE] Error details:', JSON.stringify(createError, null, 2));
                     return {
                         success: false,
-                        error: `Failed to create test device: ${createError.message}. Make sure the devices table exists.`,
+                        error: `Failed to create test device: ${createError.message || createError.code || 'Unknown error'}. Check Supabase RLS policies. Error code: ${createError.code || 'N/A'}`,
                     };
                 }
 
                 if (!newDevice) {
+                    console.error('[DEV MODE] Device was not returned after insert');
                     return {
                         success: false,
-                        error: 'Failed to create test device. Device was not returned after creation.',
+                        error: 'Failed to create test device. Device was not returned after creation. Check Supabase RLS policies.',
                     };
                 }
 
-                // Use the newly created device - PIN already matches since we used it
-                const createdDevice = newDevice;
+                console.log(`[DEV MODE] Device created successfully:`, newDevice);
 
                 // Update device to flying status
                 const { error: updateError } = await supabase
@@ -80,21 +83,25 @@ export async function activateDevice(
 
                 if (updateError) {
                     console.error('[DEV MODE] Error updating device:', updateError);
+                    console.error('[DEV MODE] Update error details:', JSON.stringify(updateError, null, 2));
                     return {
                         success: false,
-                        error: `Failed to activate device: ${updateError.message}`,
+                        error: `Failed to activate device: ${updateError.message || updateError.code || 'Unknown error'}. Check Supabase RLS policies. Error code: ${updateError.code || 'N/A'}`,
                     };
                 }
 
+                console.log(`[DEV MODE] Device activated successfully`);
                 return {
                     success: true,
                     message: 'Launch Confirmed (Test Device Created)',
                 };
             }
 
+            // Not in dev mode
+            console.log(`[activateDevice] Not in development mode. NODE_ENV: ${process.env.NODE_ENV}`);
             return {
                 success: false,
-                error: 'Device not found. In development mode, devices are auto-created. Check your environment variables.',
+                error: `Device not found. Current mode: ${process.env.NODE_ENV || 'unknown'}. In development mode (NODE_ENV=development), devices are auto-created. Check your environment variables.`,
             };
         }
 
