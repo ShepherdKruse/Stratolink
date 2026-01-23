@@ -29,13 +29,18 @@ export async function POST(request: NextRequest) {
         // Insert into Supabase
         const supabase = createClient();
         
+        // TODO: Parse telemetry data from decoded payload
+        // For now, insert with placeholder values - update when payload format is defined
         const { error } = await supabase
             .from('telemetry')
             .insert({
-                device_id: deviceId,
-                received_at: receivedAt,
-                payload: decodedPayload.toString('hex'),
-                // TODO: Add parsed fields (latitude, longitude, altitude, etc.)
+                device_id: deviceId || 'unknown',
+                time: receivedAt || new Date().toISOString(),
+                lat: 0, // TODO: Parse from payload
+                lon: 0, // TODO: Parse from payload
+                altitude_m: 0, // TODO: Parse from payload
+                velocity_x: null, // TODO: Parse from payload
+                velocity_y: null, // TODO: Parse from payload
             });
         
         if (error) {
