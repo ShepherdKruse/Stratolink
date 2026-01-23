@@ -55,16 +55,21 @@ export default function MissionControl() {
                 // Get landed balloons (altitude < 100m in last 24 hours)
                 const { data: landed, error: landedError } = await supabase
                     .from('telemetry')
-                    .select('device_id', { count: 'exact' })
+                    .select('device_id')
                     .gte('time', oneDayAgo)
                     .lt('altitude_m', 100);
                 
-                if (!landedError) {
+                if (landedError) {
+                    console.error('Error fetching landed balloons:', landedError);
+                } else {
                     // Count distinct device_ids
                     if (landed && landed.length > 0) {
                         const distinctLanded = new Set(landed.map((row: any) => row.device_id));
+                        console.log('Landed balloons data:', landed);
+                        console.log('Distinct landed devices:', distinctLanded.size);
                         setLandedCount(distinctLanded.size);
                     } else {
+                        console.log('No landed balloons found');
                         setLandedCount(0);
                     }
                 }
