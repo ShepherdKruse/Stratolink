@@ -73,7 +73,7 @@ export default function MissionMap({ projection = 'globe', onProjectionChange }:
                 mapboxAccessToken={process.env.NEXT_PUBLIC_MAPBOX_TOKEN}
                 style={{ width: '100%', height: '100%' }}
                 mapStyle="mapbox://styles/mapbox/dark-v11"
-                projection={projection === 'globe' ? { name: 'globe' } : undefined}
+                projection={projection === 'globe' ? 'globe' : 'mercator'}
                 fog={projection === 'globe' ? {
                     color: 'rgb(4, 7, 37)',
                     'high-color': 'rgb(0, 0, 0)',
