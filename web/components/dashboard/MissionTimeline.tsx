@@ -10,9 +10,7 @@ interface MissionTimelineProps {
 }
 
 export default function MissionTimeline({ startTime, endTime, currentTime, onChange }: MissionTimelineProps) {
-    // Validate inputs
     if (!startTime || !endTime || !currentTime) {
-        console.error('❌ MissionTimeline: Invalid time props', { startTime, endTime, currentTime });
         return null;
     }
     
@@ -22,34 +20,44 @@ export default function MissionTimeline({ startTime, endTime, currentTime, onCha
     const range = endTimestamp - startTimestamp;
     const progress = Math.max(0, Math.min(100, range > 0 ? ((currentTimestamp - startTimestamp) / range) * 100 : 0));
 
+    // Duration in human readable format
+    const durationMs = range;
+    const durationHrs = Math.floor(durationMs / (1000 * 60 * 60));
+    const durationMins = Math.floor((durationMs % (1000 * 60 * 60)) / (1000 * 60));
+
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const value = parseFloat(e.target.value);
         const newTimestamp = startTimestamp + (value / 100) * range;
-        const newDate = new Date(newTimestamp);
-        console.log('🎚️ Timeline scrubber changed:', {
-            sliderValue: value,
-            newTimestamp,
-            newDate: newDate.toISOString()
-        });
-        onChange(newDate);
+        onChange(new Date(newTimestamp));
     };
 
     return (
-        <div className="fixed bottom-6 left-1/2 transform -translate-x-1/2 z-30 w-[80%] max-w-4xl">
-            <div className="backdrop-blur-md bg-black/60 border border-cyan-500/30 rounded-lg p-4">
-                {/* Selected Time Display */}
-                <div className="text-center mb-3">
-                    <div className="text-cyan-400 text-xs uppercase tracking-wider mb-1">Mission Time</div>
-                    <div className="text-white text-lg font-mono font-bold">
+        <div className="fixed bottom-3 left-1/2 transform -translate-x-1/2 z-30 w-[70%] max-w-3xl">
+            <div className="bg-[#1a1a1a]/95 border border-[#333] p-3">
+                {/* Top row: metadata */}
+                <div className="flex items-baseline justify-between mb-2 text-[10px] font-mono">
+                    <span className="text-[#666]">
+                        {format(startTime, 'yyyy-MM-dd HH:mm')}
+                    </span>
+                    <span className="text-[#e5e5e5] font-semibold">
                         {format(currentTime, 'HH:mm:ss')} UTC
-                    </div>
-                    <div className="text-gray-400 text-xs font-mono mt-1">
-                        {format(currentTime, 'yyyy-MM-dd')}
-                    </div>
+                    </span>
+                    <span className="text-[#666]">
+                        {format(endTime, 'yyyy-MM-dd HH:mm')}
+                    </span>
                 </div>
 
-                {/* Range Slider */}
-                <div className="relative">
+                {/* Scrubber */}
+                <div className="relative h-4 flex items-center">
+                    {/* Track background */}
+                    <div className="absolute inset-x-0 h-[2px] bg-[#333]">
+                        {/* Progress fill */}
+                        <div 
+                            className="h-full bg-[#4a90d9]" 
+                            style={{ width: `${progress}%` }}
+                        />
+                    </div>
+                    {/* Input range - invisible but interactive */}
                     <input
                         type="range"
                         min="0"
@@ -57,17 +65,20 @@ export default function MissionTimeline({ startTime, endTime, currentTime, onCha
                         step="0.1"
                         value={progress}
                         onChange={handleChange}
-                        className="w-full h-2 bg-gray-700 rounded-lg appearance-none cursor-pointer accent-cyan-500"
-                        style={{
-                            background: `linear-gradient(to right, rgb(6, 182, 212) 0%, rgb(6, 182, 212) ${progress}%, rgb(55, 65, 81) ${progress}%, rgb(55, 65, 81) 100%)`
-                        }}
+                        className="absolute inset-0 w-full opacity-0 cursor-pointer"
                     />
-                    
-                    {/* Time Labels */}
-                    <div className="flex justify-between mt-2 text-xs text-gray-400 font-mono">
-                        <span>{format(startTime, 'HH:mm')}</span>
-                        <span>{format(endTime, 'HH:mm')}</span>
-                    </div>
+                    {/* Thumb indicator */}
+                    <div 
+                        className="absolute w-2 h-2 bg-[#4a90d9] border border-[#1a1a1a] pointer-events-none"
+                        style={{ left: `calc(${progress}% - 4px)` }}
+                    />
+                </div>
+
+                {/* Bottom row: stats */}
+                <div className="flex items-baseline justify-between mt-2 text-[9px] font-mono text-[#666]">
+                    <span>Duration: {durationHrs}h {durationMins}m</span>
+                    <span>Position: {progress.toFixed(1)}%</span>
+                    <span>Points: {Math.floor(progress)}+</span>
                 </div>
             </div>
         </div>

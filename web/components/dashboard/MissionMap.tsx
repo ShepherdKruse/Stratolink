@@ -28,7 +28,6 @@ interface MissionMapProps {
     onActiveBalloonChange?: (balloonId: string | null) => void;
     flightPathData?: FlightPathPoint[];
     playbackTime?: Date | null;
-    mapboxToken: string;
 }
 
 export default function MissionMap({ 
@@ -38,8 +37,7 @@ export default function MissionMap({
     activeBalloonId = null,
     onActiveBalloonChange,
     flightPathData = [],
-    playbackTime = null,
-    mapboxToken
+    playbackTime = null
 }: MissionMapProps) {
     const mapRef = useRef<MapRef>(null);
     const [viewState, setViewState] = useState({
@@ -50,7 +48,6 @@ export default function MissionMap({
         bearing: 0,
     });
 
-    // Enter Ride Along mode
     const enterRideAlongMode = useCallback((balloon: BalloonData) => {
         if (!mapRef.current) return;
         
@@ -69,7 +66,6 @@ export default function MissionMap({
         }
     }, [onActiveBalloonChange]);
 
-    // Reset camera when exiting Ride Along mode
     useEffect(() => {
         if (!activeBalloonId && mapRef.current) {
             mapRef.current.flyTo({
@@ -82,7 +78,6 @@ export default function MissionMap({
         }
     }, [activeBalloonId, projection]);
 
-    // Handle marker click
     const handleMarkerClick = useCallback((e: any) => {
         const feature = e.features?.[0];
         if (!feature) return;
@@ -95,13 +90,10 @@ export default function MissionMap({
         }
     }, [balloonData, enterRideAlongMode]);
 
-
-    // Adjust view state when projection changes
     const handleViewStateChange = useCallback((evt: any) => {
         setViewState(evt.viewState);
     }, []);
 
-    // Reset pitch when switching to 2D
     const adjustedViewState = useMemo(() => {
         if (projection === 'mercator') {
             return { ...viewState, pitch: 0, bearing: 0 };
@@ -109,7 +101,6 @@ export default function MissionMap({
         return viewState;
     }, [viewState, projection]);
 
-    // Create GeoJSON for balloon positions (markers at altitude)
     const balloonGeoJSON = useMemo(() => {
         return {
             type: 'FeatureCollection' as const,
@@ -128,7 +119,6 @@ export default function MissionMap({
         };
     }, [balloonData]);
 
-    // Create GeoJSON for active balloon 3D model
     const activeBalloonGeoJSON = useMemo(() => {
         if (!activeBalloonId) return null;
         
@@ -152,16 +142,11 @@ export default function MissionMap({
         };
     }, [activeBalloonId, balloonData]);
 
-    // Create GeoJSON for flight path with lineMetrics for gradient
     const flightPathGeoJSON = useMemo(() => {
         if (!activeBalloonId || !flightPathData || flightPathData.length < 2) {
-            if (activeBalloonId && flightPathData.length < 2) {
-                console.warn('⚠️ Not enough flight path points:', flightPathData.length);
-            }
             return null;
         }
         
-        // Filter path points up to playbackTime if specified
         let pathPoints = flightPathData;
         if (playbackTime) {
             const playbackTimestamp = playbackTime.getTime();
@@ -172,24 +157,21 @@ export default function MissionMap({
         }
         
         if (pathPoints.length < 2) {
-            console.warn('⚠️ Filtered path has less than 2 points:', pathPoints.length);
             return null;
         }
         
         const coordinates = pathPoints.map(point => {
             if (typeof point.lat !== 'number' || typeof point.lon !== 'number') {
-                console.error('❌ Invalid coordinate:', point);
                 return null;
             }
             return [point.lon, point.lat] as [number, number];
         }).filter((coord): coord is [number, number] => coord !== null);
         
         if (coordinates.length < 2) {
-            console.error('❌ Not enough valid coordinates:', coordinates.length);
             return null;
         }
         
-        const geoJSON = {
+        return {
             type: 'FeatureCollection' as const,
             features: [{
                 type: 'Feature' as const,
@@ -200,19 +182,6 @@ export default function MissionMap({
                 properties: {},
             }],
         };
-        
-        // Debug log
-        console.log('🛤️ Flight path GeoJSON created:', {
-            activeBalloonId,
-            pathPoints: pathPoints.length,
-            totalPoints: flightPathData.length,
-            playbackTime: playbackTime ? playbackTime.toISOString() : 'null',
-            coordinates: coordinates.length,
-            firstCoord: coordinates[0],
-            lastCoord: coordinates[coordinates.length - 1]
-        });
-        
-        return geoJSON;
     }, [activeBalloonId, flightPathData, playbackTime]);
 
     return (
@@ -222,63 +191,62 @@ export default function MissionMap({
                 key={projection}
                 {...adjustedViewState}
                 onMove={handleViewStateChange}
-                mapboxAccessToken={mapboxToken}
+                mapboxAccessToken={process.env.NEXT_PUBLIC_MAPBOX_TOKEN}
                 style={{ width: '100%', height: '100%' }}
                 mapStyle="mapbox://styles/mapbox/dark-v11"
                 projection={projection === 'globe' ? 'globe' : 'mercator'}
                 fog={projection === 'globe' ? {
-                    color: 'rgb(4, 7, 37)',
-                    'high-color': 'rgb(0, 0, 0)',
+                    color: 'rgb(20, 20, 20)',
+                    'high-color': 'rgb(10, 10, 10)',
                     'horizon-blend': 0.02,
-                    'space-color': 'rgb(0, 0, 0)',
-                    'star-intensity': 0.6,
+                    'space-color': 'rgb(5, 5, 5)',
+                    'star-intensity': 0.4,
                 } : undefined}
                 terrain={projection === 'globe' ? { source: 'mapbox-dem', exaggeration: 1.5 } : undefined}
                 interactiveLayerIds={['balloon-markers-active', 'balloon-markers-landed']}
                 onClick={handleMarkerClick}
                 cursor="pointer"
             >
-                {/* Balloon markers with 3D visualization */}
+                {/* Balloon markers - functional colors from palette */}
                 <Source id="balloons" type="geojson" data={balloonGeoJSON}>
-                    {/* Glowing cyan dots for active balloons (altitude > 100m) */}
+                    {/* Active balloons - accent blue */}
                     <Layer
                         id="balloon-markers-active"
                         type="circle"
                         filter={['>', ['get', 'altitude'], 100]}
                         paint={{
-                            'circle-color': '#00ffff',
+                            'circle-color': '#4a90d9',
                             'circle-radius': [
                                 'interpolate',
                                 ['linear'],
                                 ['get', 'altitude'],
-                                0, 6,
-                                20000, 12
+                                0, 5,
+                                20000, 8
                             ],
                             'circle-opacity': 0.9,
-                            'circle-stroke-width': 2,
-                            'circle-stroke-color': '#00ffff',
-                            'circle-stroke-opacity': 0.5,
-                            'circle-blur': 0.5,
+                            'circle-stroke-width': 1,
+                            'circle-stroke-color': '#6ba3e0',
+                            'circle-stroke-opacity': 0.7,
                         }}
                     />
                     
-                    {/* Gray dots for landed/inactive balloons (altitude <= 100m) */}
+                    {/* Landed balloons - tertiary gray */}
                     <Layer
                         id="balloon-markers-landed"
                         type="circle"
                         filter={['<=', ['get', 'altitude'], 100]}
                         paint={{
-                            'circle-color': '#888888',
-                            'circle-radius': 8,
-                            'circle-opacity': 0.8,
-                            'circle-stroke-width': 2,
-                            'circle-stroke-color': '#aaaaaa',
-                            'circle-stroke-opacity': 0.6,
+                            'circle-color': '#666',
+                            'circle-radius': 5,
+                            'circle-opacity': 0.7,
+                            'circle-stroke-width': 1,
+                            'circle-stroke-color': '#999',
+                            'circle-stroke-opacity': 0.5,
                         }}
                     />
                 </Source>
 
-                {/* Flight Path Trail for Active Balloon */}
+                {/* Flight Path Trail - accent blue with fade */}
                 {flightPathGeoJSON && flightPathGeoJSON.features[0]?.geometry.coordinates.length >= 2 && (
                     <Source 
                         key={`flight-path-${activeBalloonId}-${playbackTime?.getTime() || 'full'}`}
@@ -295,52 +263,37 @@ export default function MissionMap({
                                     'interpolate',
                                     ['linear'],
                                     ['zoom'],
-                                    3, 2,
-                                    12, 4,
-                                    15, 6
+                                    3, 1.5,
+                                    12, 3,
+                                    15, 4
                                 ],
-                                'line-blur': 2,
-                                'line-opacity': 0.9,
+                                'line-opacity': 0.8,
                                 'line-gradient': [
                                     'interpolate',
                                     ['linear'],
                                     ['line-progress'],
-                                    0, 'rgba(255, 255, 255, 1)',      // White at head (most recent)
-                                    0.3, 'rgba(0, 255, 255, 0.9)',    // Cyan
-                                    0.7, 'rgba(0, 255, 255, 0.6)',    // Fading cyan
-                                    1, 'rgba(0, 255, 255, 0)'         // Transparent at tail (oldest)
+                                    0, 'rgba(74, 144, 217, 0)',
+                                    0.7, 'rgba(74, 144, 217, 0.6)',
+                                    1, 'rgba(74, 144, 217, 1)'
                                 ],
                             }}
                         />
                     </Source>
                 )}
 
-                {/* 3D Model for Active Balloon */}
+                {/* Active Balloon Marker - highlighted */}
                 {activeBalloonGeoJSON && (
                     <Source id="active-balloon" type="geojson" data={activeBalloonGeoJSON}>
-                        {/* 3D Sphere representation using circle layer with elevation */}
                         <Layer
-                            id="active-balloon-3d"
+                            id="active-balloon-marker"
                             type="circle"
                             paint={{
-                                'circle-color': '#00ff00',
-                                'circle-radius': 20,
-                                'circle-opacity': 0.8,
-                                'circle-stroke-width': 3,
-                                'circle-stroke-color': '#00ff00',
-                                'circle-stroke-opacity': 1,
-                                'circle-blur': 1,
-                            }}
-                        />
-                        {/* Glow effect */}
-                        <Layer
-                            id="active-balloon-glow"
-                            type="circle"
-                            paint={{
-                                'circle-color': '#00ff00',
-                                'circle-radius': 30,
-                                'circle-opacity': 0.3,
-                                'circle-blur': 2,
+                                'circle-color': '#4a9',
+                                'circle-radius': 8,
+                                'circle-opacity': 0.9,
+                                'circle-stroke-width': 2,
+                                'circle-stroke-color': '#4a9',
+                                'circle-stroke-opacity': 0.5,
                             }}
                         />
                     </Source>
