@@ -1,7 +1,10 @@
 -- Test Data for Stratolink Telemetry
 -- Run this in Supabase SQL Editor to add sample balloon telemetry
 
--- Insert test balloons at various locations and altitudes
+-- Delete old test data first (optional - comment out if you want to keep old data)
+-- DELETE FROM telemetry WHERE device_id LIKE 'balloon-%';
+
+-- Insert test balloons at various locations and altitudes with fresh timestamps
 INSERT INTO telemetry (device_id, time, lat, lon, altitude_m, velocity_x, velocity_y) VALUES
 -- Active balloon over New York (recent, high altitude)
 ('balloon-001', NOW() - INTERVAL '30 minutes', 40.7128, -74.0060, 15000, 5.2, 3.1),
@@ -15,11 +18,12 @@ INSERT INTO telemetry (device_id, time, lat, lon, altitude_m, velocity_x, veloci
 -- Active balloon over Florida (recent)
 ('balloon-004', NOW() - INTERVAL '45 minutes', 25.7617, -80.1918, 16000, 3.8, 2.1),
 
--- Landed balloon (low altitude, older)
-('balloon-005', NOW() - INTERVAL '2 hours', 39.9526, -75.1652, 50, 0, 0),
+-- Landed balloon (low altitude, older but within 24 hours)
+('balloon-005', NOW() - INTERVAL '3 hours', 39.9526, -75.1652, 50, 0, 0),
 
 -- Active balloon over Atlantic (recent)
-('balloon-006', NOW() - INTERVAL '20 minutes', 35.0, -50.0, 14000, 4.5, -2.3);
+('balloon-006', NOW() - INTERVAL '20 minutes', 35.0, -50.0, 14000, 4.5, -2.3)
+ON CONFLICT DO NOTHING;
 
 -- Verify the data was inserted
 SELECT 

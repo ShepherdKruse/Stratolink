@@ -2,6 +2,9 @@
 
 import { useState, useEffect } from 'react';
 import MissionMap from '@/components/MissionMap';
+import PilotHUD from '@/components/PilotHUD';
+import MissionSidebar from '@/components/MissionSidebar';
+import MissionTimeline from '@/components/MissionTimeline';
 import { createClient } from '@/lib/supabase';
 
 interface BalloonData {
@@ -9,6 +12,8 @@ interface BalloonData {
     lat: number;
     lon: number;
     altitude_m: number;
+    velocity_heading?: number;
+    battery_voltage?: number;
 }
 
 export default function MissionControl() {
@@ -16,6 +21,10 @@ export default function MissionControl() {
     const [activeCount, setActiveCount] = useState(0);
     const [landedCount, setLandedCount] = useState(0);
     const [balloonData, setBalloonData] = useState<BalloonData[]>([]);
+    const [activeBalloonId, setActiveBalloonId] = useState<string | null>(null);
+    const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+    const [playbackTime, setPlaybackTime] = useState<Date | null>(null);
+    const [flightPathData, setFlightPathData] = useState<Array<{ lat: number; lon: number; time: Date }>>([]);
 
     // Fetch balloon counts from Supabase
     useEffect(() => {
@@ -66,11 +75,8 @@ export default function MissionControl() {
                     // Count distinct device_ids
                     if (landed && landed.length > 0) {
                         const distinctLanded = new Set(landed.map((row: any) => row.device_id));
-                        console.log('Landed balloons data:', landed);
-                        console.log('Distinct landed devices:', distinctLanded.size);
                         setLandedCount(distinctLanded.size);
                     } else {
-                        console.log('No landed balloons found');
                         setLandedCount(0);
                     }
                 }
@@ -80,7 +86,7 @@ export default function MissionControl() {
                 // Reuse oneDayAgo from above
                 const { data: balloons, error: balloonsError } = await supabase
                     .from('telemetry')
-                    .select('device_id, lat, lon, altitude_m, time')
+                    .select('device_id, lat, lon, altitude_m, time, velocity_x, velocity_y')
                     .gte('time', oneDayAgo)
                     .order('time', { ascending: false });
 
@@ -89,17 +95,24 @@ export default function MissionControl() {
                     const latestByDevice = new Map<string, BalloonData>();
                     balloons.forEach((row: any) => {
                         if (!latestByDevice.has(row.device_id)) {
+                            // Calculate heading from velocity components (in degrees, 0-360)
+                            let velocity_heading = 90; // Default
+                            if (row.velocity_x !== null && row.velocity_y !== null) {
+                                const headingRad = Math.atan2(row.velocity_x, row.velocity_y);
+                                velocity_heading = (headingRad * 180 / Math.PI + 360) % 360;
+                            }
+                            
                             latestByDevice.set(row.device_id, {
                                 id: row.device_id,
                                 lat: row.lat,
                                 lon: row.lon,
                                 altitude_m: row.altitude_m,
+                                velocity_heading: velocity_heading,
+                                battery_voltage: 3.7, // Mock data for now
                             });
                         }
                     });
                     const processedBalloons = Array.from(latestByDevice.values());
-                    console.log('Raw balloons from Supabase:', balloons);
-                    console.log('Processed balloons for map:', processedBalloons);
                     setBalloonData(processedBalloons);
                 } else if (balloonsError) {
                     console.error('Error fetching balloons:', balloonsError);
@@ -117,6 +130,109 @@ export default function MissionControl() {
         return () => clearInterval(interval);
     }, []);
 
+    // Get active balloon data for HUD
+    const activeBalloon = activeBalloonId 
+        ? balloonData.find(b => b.id === activeBalloonId) || null
+        : null;
+
+    // Fetch flight path data when active balloon changes
+    useEffect(() => {
+        async function fetchFlightPath() {
+            if (!activeBalloonId) {
+                setFlightPathData([]);
+                setPlaybackTime(null);
+                return;
+            }
+
+            const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+            if (!supabaseUrl || supabaseUrl.includes('your_supabase') || supabaseUrl === '') {
+                return;
+            }
+
+            try {
+                const supabase = createClient();
+                const oneDayAgo = new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString();
+                
+                const { data: pathData, error } = await supabase
+                    .from('telemetry')
+                    .select('lat, lon, time, altitude_m')
+                    .eq('device_id', activeBalloonId)
+                    .gte('time', oneDayAgo)
+                    .order('time', { ascending: true });
+
+                if (!error && pathData && pathData.length > 0) {
+                    const path = pathData.map((row: any) => ({
+                        lat: row.lat,
+                        lon: row.lon,
+                        time: new Date(row.time) as Date,
+                    }));
+                    setFlightPathData(path);
+                    
+                    // Debug log
+                    console.log('✅ Flight path data fetched:', {
+                        balloonId: activeBalloonId,
+                        points: path.length,
+                        firstPoint: path[0] ? { lat: path[0].lat, lon: path[0].lon, time: path[0].time.toISOString() } : null,
+                        lastPoint: path[path.length - 1] ? { lat: path[path.length - 1].lat, lon: path[path.length - 1].lon, time: path[path.length - 1].time.toISOString() } : null
+                    });
+                    
+                    // Set initial playback time to most recent
+                    const lastTime = path[path.length - 1].time;
+                    setPlaybackTime(lastTime instanceof Date ? lastTime : new Date(lastTime));
+                } else if (error) {
+                    console.error('❌ Error fetching flight path:', error);
+                } else {
+                    console.warn('⚠️ No flight path data found for balloon:', activeBalloonId, '- Make sure you ran flight-path-data.sql in Supabase');
+                    setFlightPathData([]);
+                    setPlaybackTime(null);
+                }
+            } catch (error) {
+                console.debug('Error fetching flight path:', error);
+            }
+        }
+
+        fetchFlightPath();
+    }, [activeBalloonId]);
+
+    // Get time range for timeline
+    const timelineStart: Date = flightPathData.length > 0 
+        ? (flightPathData[0].time instanceof Date ? flightPathData[0].time : new Date(flightPathData[0].time))
+        : new Date();
+    const timelineEnd: Date = flightPathData.length > 0
+        ? (flightPathData[flightPathData.length - 1].time instanceof Date 
+            ? flightPathData[flightPathData.length - 1].time 
+            : new Date(flightPathData[flightPathData.length - 1].time))
+        : new Date();
+    const currentPlaybackTime: Date = playbackTime || timelineEnd;
+    
+    // Debug timeline
+    useEffect(() => {
+        if (activeBalloonId) {
+            console.log('⏱️ Timeline state:', {
+                hasData: flightPathData.length > 0,
+                dataPoints: flightPathData.length,
+                start: timelineStart.toISOString(),
+                end: timelineEnd.toISOString(),
+                current: currentPlaybackTime.toISOString(),
+                playbackTime: playbackTime?.toISOString() || 'null'
+            });
+        }
+    }, [playbackTime, timelineStart, timelineEnd, currentPlaybackTime, activeBalloonId, flightPathData.length]);
+
+    // Exit Ride Along mode
+    const handleExitRideAlong = () => {
+        setActiveBalloonId(null);
+        setIsSidebarOpen(false); // Close sidebar when exiting ride along
+        // Camera reset is handled by MissionMap when activeBalloonId changes
+    };
+
+    // Toggle sidebar (only works when in Ride Along mode)
+    const toggleSidebar = () => {
+        if (activeBalloonId) {
+            setIsSidebarOpen(prev => !prev);
+        }
+    };
+
     return (
         <div className="w-screen h-screen relative overflow-hidden">
             {/* Full-screen 3D Map */}
@@ -125,10 +241,50 @@ export default function MissionControl() {
                     projection={projection}
                     onProjectionChange={setProjection}
                     balloonData={balloonData}
+                    activeBalloonId={activeBalloonId}
+                    onActiveBalloonChange={setActiveBalloonId}
+                    flightPathData={flightPathData}
+                    playbackTime={playbackTime}
                 />
             </div>
 
-            {/* Glassmorphism Sidebar */}
+            {/* Pilot HUD Overlay */}
+            <PilotHUD 
+                activeBalloonId={activeBalloonId}
+                balloonData={activeBalloon}
+                onExit={handleExitRideAlong}
+                onToggleSidebar={toggleSidebar}
+                isSidebarOpen={isSidebarOpen}
+            />
+
+            {/* Mission Sidebar - Systems Panel */}
+            {activeBalloonId && (
+                <MissionSidebar
+                    isOpen={isSidebarOpen}
+                    onClose={() => setIsSidebarOpen(false)}
+                    balloonId={activeBalloonId}
+                    telemetryData={flightPathData.map(point => ({
+                        time: point.time,
+                        battery_voltage: 3.7 + Math.random() * 0.5, // Mock data for now
+                        temperature: -45 + Math.random() * 10,
+                        pressure: 120 + Math.random() * 20,
+                        rssi: -112 + Math.random() * 10,
+                    }))}
+                />
+            )}
+
+            {/* Mission Timeline Scrubber */}
+            {activeBalloonId && flightPathData.length > 0 && (
+                <MissionTimeline
+                    startTime={timelineStart}
+                    endTime={timelineEnd}
+                    currentTime={currentPlaybackTime}
+                    onChange={setPlaybackTime}
+                />
+            )}
+
+            {/* Glassmorphism Sidebar - Hidden during Ride Along mode */}
+            {!activeBalloonId && (
             <div className="absolute left-0 top-0 h-full w-80 backdrop-blur-md bg-black/30 border-r border-white/10 z-10 p-6 flex flex-col">
                 <div className="mb-8">
                     <h1 className="text-2xl font-bold text-white mb-2">Mission Control</h1>
@@ -161,6 +317,7 @@ export default function MissionControl() {
                     </button>
                 </div>
             </div>
+            )}
         </div>
     );
 }
