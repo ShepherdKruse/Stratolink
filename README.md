@@ -79,7 +79,7 @@ Global pico-balloon telemetry system using RAK3172 LoRaWAN module with Next.js g
 4. Configure Supabase credentials in `.env.local`:
    - NEXT_PUBLIC_SUPABASE_URL
    - NEXT_PUBLIC_SUPABASE_ANON_KEY
-5. Run database schema: Execute `supabase_schema.sql` in Supabase SQL Editor
+5. Run database schema: Execute `web/lib/supabase/schema.sql` in Supabase SQL Editor
 6. Start development server: `npm run dev`
 
 ### TTN Webhook Configuration
@@ -164,7 +164,7 @@ The telemetry table stores:
 - Environmental data (temperature, pressure)
 - Raw payload data
 
-See `web/supabase_schema.sql` for complete schema definition.
+See `web/lib/supabase/schema.sql` for complete schema definition.
 
 ## Security Notes
 
