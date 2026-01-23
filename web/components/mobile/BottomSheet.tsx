@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { motion, PanInfo, useMotionValue, useTransform } from 'framer-motion';
+import { motion } from 'framer-motion';
 import Payload3DViewer from '../dashboard/Payload3DViewer';
 import MetricSparkline from '../dashboard/MetricSparkline';
 
@@ -44,8 +44,6 @@ export default function BottomSheet({
 
     const PEEK_HEIGHT = sheetHeight * 0.25; // 25% peek
     const EXPANDED_HEIGHT = sheetHeight * 0.9; // 90% expanded
-    
-    const y = useMotionValue(0); // Start at bottom (y: 0 means no offset from bottom)
 
     // Generate mock data if no telemetry data provided
     const generateMockData = (baseValue: number, variance: number, count: number = 24) => {
@@ -81,42 +79,13 @@ export default function BottomSheet({
     useEffect(() => {
         if (isOpen) {
             setIsExpanded(false);
-            y.set(0); // Start at peek position (bottom of screen)
-        } else {
-            y.set(0); // Reset when closed
         }
-    }, [isOpen, y]);
+    }, [isOpen]);
 
-    const handleDragEnd = (_event: MouseEvent | TouchEvent | PointerEvent, info: PanInfo) => {
-        const velocity = info.velocity.y;
+    // Removed drag functionality - now uses button toggle only
 
-        // Fast swipe down closes
-        if (velocity > 500) {
-            onClose();
-            return;
-        }
-
-        // Fast swipe up expands
-        if (velocity < -500) {
-            setIsExpanded(true);
-            y.set(-(sheetHeight - EXPANDED_HEIGHT));
-            return;
-        }
-
-        // Slow drag: snap to nearest position
-        const currentY = y.get();
-        const midPoint = -(sheetHeight - EXPANDED_HEIGHT) / 2;
-
-        if (currentY < midPoint) {
-            setIsExpanded(true);
-            y.set(-(sheetHeight - EXPANDED_HEIGHT));
-        } else {
-            setIsExpanded(false);
-            y.set(0);
-        }
-    };
-
-    const opacity = useTransform(y, [-(sheetHeight - EXPANDED_HEIGHT), 0], [1, 0.3]);
+    // Opacity based on expanded state
+    const opacity = isExpanded ? 1 : 0.3;
 
     if (!isOpen) return null;
 
@@ -136,28 +105,47 @@ export default function BottomSheet({
 
             {/* Bottom Sheet */}
             <motion.div
-                drag="y"
-                dragConstraints={{ top: -(sheetHeight - PEEK_HEIGHT), bottom: 0 }}
-                dragElastic={0.2}
-                onDragEnd={handleDragEnd}
                 animate={{
                     y: isExpanded ? -(sheetHeight - EXPANDED_HEIGHT) : 0,
                 }}
-                transition={{ type: 'spring', damping: 30, stiffness: 300 }}
+                transition={{ type: 'spring', damping: 40, stiffness: 400 }}
                 style={{ 
-                    y,
                     maxHeight: `${EXPANDED_HEIGHT}px`, 
                     height: isExpanded ? `${EXPANDED_HEIGHT}px` : `${PEEK_HEIGHT}px` 
                 }}
                 className="fixed bottom-0 left-0 right-0 z-50 bg-[#1a1a1a] border-t border-[#333] rounded-t-3xl shadow-2xl"
             >
-                {/* Drag Handle */}
-                <div className="flex justify-center pt-3 pb-2">
-                    <div className="w-12 h-1.5 bg-[#333] rounded-full" />
+                {/* Header with Toggle Button */}
+                <div className="flex items-center justify-between px-4 pt-3 pb-2 border-b border-[#333]">
+                    <div className="flex-1" />
+                    <button
+                        onClick={() => setIsExpanded(!isExpanded)}
+                        className="flex items-center justify-center w-10 h-10 rounded-full bg-[#333] hover:bg-[#444] transition-colors"
+                        aria-label={isExpanded ? "Collapse" : "Expand"}
+                    >
+                        {isExpanded ? (
+                            <svg className="w-5 h-5 text-[#999]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                            </svg>
+                        ) : (
+                            <svg className="w-5 h-5 text-[#999]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 15l7-7 7 7" />
+                            </svg>
+                        )}
+                    </button>
+                    <button
+                        onClick={onClose}
+                        className="flex items-center justify-center w-10 h-10 rounded-full bg-[#333] hover:bg-[#c44] transition-colors ml-2"
+                        aria-label="Close"
+                    >
+                        <svg className="w-5 h-5 text-[#999] hover:text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    </button>
                 </div>
 
                 {/* Stage 1: Glance View (Always Visible) */}
-                <motion.div style={{ opacity }} className="px-4 pb-4 border-b border-[#333]">
+                <div style={{ opacity }} className="px-4 pb-4 border-b border-[#333]">
                     <div className="flex items-center justify-between">
                         <div className="flex items-center gap-3">
                             {/* Status Dot */}
@@ -181,7 +169,7 @@ export default function BottomSheet({
                             Ping
                         </button>
                     </div>
-                </motion.div>
+                </div>
 
                 {/* Stage 2: Deep Dive (Scrollable when expanded) */}
                 <div className="overflow-y-auto" style={{ height: isExpanded ? `${EXPANDED_HEIGHT - PEEK_HEIGHT - 20}px` : '0px' }}>
