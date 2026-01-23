@@ -8,9 +8,15 @@ interface MobileIntelProps {
     totalTracked: number;
     connectionStatus?: 'connected' | 'disconnected' | 'error';
     lastUpdate?: Date;
+    balloonData?: Array<{
+        id: string;
+        lat: number;
+        lon: number;
+        altitude_m: number;
+    }>;
 }
 
-export default function MobileIntel({ activeCount, landedCount, totalTracked, connectionStatus = 'disconnected', lastUpdate }: MobileIntelProps) {
+export default function MobileIntel({ activeCount, landedCount, totalTracked, connectionStatus = 'disconnected', lastUpdate, balloonData = [] }: MobileIntelProps) {
     return (
         <div className="h-full bg-[#1a1a1a] overflow-y-auto pb-20">
             {/* Header */}
@@ -70,41 +76,68 @@ export default function MobileIntel({ activeCount, landedCount, totalTracked, co
                     </div>
                 </div>
 
-                {/* Weather Predictions */}
+                {/* Environmental Conditions - From Balloons */}
                 <div className="bg-[#141414] border border-[#333] rounded-lg p-4">
                     <div className="flex items-center gap-3 mb-3">
                         <Cloud size={20} className="text-[#4a90d9]" />
-                        <div className="text-[12px] font-semibold text-[#666] uppercase tracking-wider">Weather Forecast</div>
+                        <div className="text-[12px] font-semibold text-[#666] uppercase tracking-wider">Fleet Conditions</div>
                     </div>
-                    <div className="space-y-3">
-                        <div>
-                            <div className="flex justify-between items-center mb-1">
-                                <span className="text-[11px] text-[#999] font-mono">Jet Stream (30k ft)</span>
-                                <span className="text-[12px] text-[#4a90d9] font-mono font-semibold">110 mph →</span>
+                    {balloonData.length > 0 ? (
+                        <div className="space-y-3">
+                            <div>
+                                <div className="flex justify-between items-center mb-1">
+                                    <span className="text-[11px] text-[#999] font-mono">Avg Altitude</span>
+                                    <span className="text-[12px] text-[#4a90d9] font-mono font-semibold">
+                                        {Math.round(balloonData.reduce((sum, b) => sum + b.altitude_m, 0) / balloonData.length)}m
+                                    </span>
+                                </div>
+                                <div className="h-1 bg-[#333] rounded-full overflow-hidden">
+                                    <div 
+                                        className="h-full bg-[#4a90d9]" 
+                                        style={{ 
+                                            width: `${Math.min(100, (balloonData.reduce((sum, b) => sum + b.altitude_m, 0) / balloonData.length) / 40000 * 100)}%` 
+                                        }} 
+                                    />
+                                </div>
                             </div>
-                            <div className="h-1 bg-[#333] rounded-full overflow-hidden">
-                                <div className="h-full bg-[#4a90d9]" style={{ width: '75%' }} />
+                            <div>
+                                <div className="flex justify-between items-center mb-1">
+                                    <span className="text-[11px] text-[#999] font-mono">Active Balloons</span>
+                                    <span className="text-[12px] text-[#4a90d9] font-mono font-semibold">
+                                        {balloonData.filter(b => b.altitude_m > 100).length} / {balloonData.length}
+                                    </span>
+                                </div>
+                                <div className="h-1 bg-[#333] rounded-full overflow-hidden">
+                                    <div 
+                                        className="h-full bg-[#4a90d9]" 
+                                        style={{ 
+                                            width: `${balloonData.length > 0 ? (balloonData.filter(b => b.altitude_m > 100).length / balloonData.length) * 100 : 0}%` 
+                                        }} 
+                                    />
+                                </div>
+                            </div>
+                            <div>
+                                <div className="flex justify-between items-center mb-1">
+                                    <span className="text-[11px] text-[#999] font-mono">Coverage</span>
+                                    <span className="text-[12px] text-[#4a90d9] font-mono font-semibold">
+                                        {balloonData.length} locations
+                                    </span>
+                                </div>
+                                <div className="h-1 bg-[#333] rounded-full overflow-hidden">
+                                    <div 
+                                        className="h-full bg-[#4a90d9]" 
+                                        style={{ 
+                                            width: `${Math.min(100, (balloonData.length / 10) * 100)}%` 
+                                        }} 
+                                    />
+                                </div>
                             </div>
                         </div>
-                        <div>
-                            <div className="flex justify-between items-center mb-1">
-                                <span className="text-[11px] text-[#999] font-mono">Wind Speed (20k ft)</span>
-                                <span className="text-[12px] text-[#4a90d9] font-mono font-semibold">85 mph ↖</span>
-                            </div>
-                            <div className="h-1 bg-[#333] rounded-full overflow-hidden">
-                                <div className="h-full bg-[#4a90d9]" style={{ width: '60%' }} />
-                            </div>
+                    ) : (
+                        <div className="text-[11px] text-[#666] font-mono py-2">
+                            No active balloons to report conditions
                         </div>
-                        <div>
-                            <div className="flex justify-between items-center mb-1">
-                                <span className="text-[11px] text-[#999] font-mono">Stratospheric Temp</span>
-                                <span className="text-[12px] text-[#c44] font-mono font-semibold">-45°C</span>
-                            </div>
-                            <div className="h-1 bg-[#333] rounded-full overflow-hidden">
-                                <div className="h-full bg-[#c44]" style={{ width: '20%' }} />
-                            </div>
-                        </div>
-                    </div>
+                    )}
                 </div>
 
                 {/* System Status */}

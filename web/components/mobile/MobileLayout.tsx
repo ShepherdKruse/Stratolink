@@ -173,6 +173,8 @@ export default function MobileLayout() {
 
     const handleBalloonClick = (balloonId: string) => {
         setSelectedBalloonId(balloonId);
+        // Switch to Radar tab to see the map when a balloon is selected
+        setActiveTab('radar');
     };
 
     const handleLaunch = () => {
@@ -193,6 +195,7 @@ export default function MobileLayout() {
                         balloonData={balloonData}
                         onBalloonClick={handleBalloonClick}
                         userLocation={userLocation}
+                        selectedBalloonId={selectedBalloonId}
                     />
                 )}
 
@@ -209,6 +212,7 @@ export default function MobileLayout() {
                         activeCount={activeCount}
                         landedCount={landedCount}
                         totalTracked={balloonData.length}
+                        balloonData={balloonData}
                     />
                 )}
             </div>

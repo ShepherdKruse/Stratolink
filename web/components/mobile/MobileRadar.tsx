@@ -17,9 +17,10 @@ interface MobileRadarProps {
     balloonData: BalloonData[];
     onBalloonClick: (balloonId: string) => void;
     userLocation?: { lat: number; lon: number } | null;
+    selectedBalloonId?: string | null;
 }
 
-export default function MobileRadar({ balloonData, onBalloonClick, userLocation, selectedBalloonId, flightPathData = [], playbackTime }: MobileRadarProps) {
+export default function MobileRadar({ balloonData, onBalloonClick, userLocation, selectedBalloonId }: MobileRadarProps) {
     const mapRef = useRef<MapRef>(null);
     const [mapBearing, setMapBearing] = useState(0);
     const [compassEnabled, setCompassEnabled] = useState(false);
@@ -116,24 +117,6 @@ export default function MobileRadar({ balloonData, onBalloonClick, userLocation,
         })),
     };
 
-    // Create flight path GeoJSON if balloon is selected
-    const flightPathGeoJSON = flightPathData.length > 0 && selectedBalloonId ? {
-        type: 'FeatureCollection' as const,
-        features: [{
-            type: 'Feature' as const,
-            geometry: {
-                type: 'LineString' as const,
-                coordinates: flightPathData
-                    .filter(point => {
-                        if (!playbackTime) return true;
-                        const pointTime = point.time instanceof Date ? point.time : new Date(point.time);
-                        return pointTime <= playbackTime;
-                    })
-                    .map(point => [point.lon, point.lat]),
-            },
-        }],
-    } : null;
-
     const handleMarkerClick = useCallback((e: any) => {
         const feature = e.features?.[0];
         if (!feature) return;
@@ -171,39 +154,35 @@ export default function MobileRadar({ balloonData, onBalloonClick, userLocation,
                         paint={{
                             'circle-color': [
                                 'case',
+                                ['==', ['get', 'deviceId'], selectedBalloonId || ''],
+                                '#4a9',
                                 ['>', ['get', 'altitude'], 100],
                                 '#4a90d9',
                                 '#666'
                             ],
-                            'circle-radius': 8,
+                            'circle-radius': [
+                                'case',
+                                ['==', ['get', 'deviceId'], selectedBalloonId || ''],
+                                12,
+                                8
+                            ],
                             'circle-opacity': 0.9,
-                            'circle-stroke-width': 2,
-                            'circle-stroke-color': '#fff',
+                            'circle-stroke-width': [
+                                'case',
+                                ['==', ['get', 'deviceId'], selectedBalloonId || ''],
+                                3,
+                                2
+                            ],
+                            'circle-stroke-color': [
+                                'case',
+                                ['==', ['get', 'deviceId'], selectedBalloonId || ''],
+                                '#4a9',
+                                '#fff'
+                            ],
                             'circle-stroke-opacity': 0.8,
                         }}
                     />
                 </Source>
-
-                {/* Flight Path Line - Only show if balloon is selected */}
-                {flightPathGeoJSON && (
-                    <Source id="flight-path" type="geojson" data={flightPathGeoJSON} lineMetrics={true}>
-                        <Layer
-                            id="flight-path-line"
-                            type="line"
-                            paint={{
-                                'line-width': 3,
-                                'line-opacity': 0.8,
-                                'line-gradient': [
-                                    'interpolate',
-                                    ['linear'],
-                                    ['line-progress'],
-                                    0, '#4a90d9',
-                                    1, 'rgba(74, 144, 217, 0)'
-                                ],
-                            }}
-                        />
-                    </Source>
-                )}
             </Map>
 
             {/* Nearby Pill - Top Center */}
