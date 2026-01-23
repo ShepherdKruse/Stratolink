@@ -258,7 +258,7 @@ export default function BottomSheet({
                             <div className="bg-[#141414] border border-[#333] p-4 rounded">
                                 <div className="text-[10px] font-semibold text-[#666] uppercase tracking-wider mb-2">Signal</div>
                                 <div className="font-mono text-[18px] text-[#e5e5e5] font-bold">
-                                    {latestTelemetry.rssi ?? -112} dBm
+                                    {Math.round(latestTelemetry.rssi ?? -112)} dBm
                                 </div>
                                 <div className="text-[10px] text-[#666] mt-1">LoRaWAN</div>
                             </div>
