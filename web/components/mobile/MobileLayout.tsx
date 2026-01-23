@@ -265,8 +265,8 @@ export default function MobileLayout({ initialBalloonId = null }: MobileLayoutPr
     };
 
     const handleLaunch = () => {
-        // TODO: Implement launch flow (card swiper)
-        console.log('Launch new mission');
+        // Navigate to activation page
+        window.location.href = '/activate';
     };
 
     const handleCloseSheet = () => {

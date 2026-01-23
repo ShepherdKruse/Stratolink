@@ -60,6 +60,12 @@ export function Navigation() {
               Docs
             </Link>
             <Link
+              href="/activate"
+              className="text-sm font-light text-muted-foreground transition-colors hover:text-foreground"
+            >
+              Activate Device
+            </Link>
+            <Link
               href="/dashboard"
               className="rounded-sm bg-foreground px-4 py-2 text-sm font-medium text-background transition-colors hover:bg-foreground/90"
             >
