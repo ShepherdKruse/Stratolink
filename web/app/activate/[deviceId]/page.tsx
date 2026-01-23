@@ -175,25 +175,25 @@ export default function ActivatePage({ params }: PageProps) {
     };
 
     return (
-        <div className="min-h-screen bg-slate-900 text-white">
+        <div className="min-h-screen bg-[#1a1a1a] text-[#e5e5e5]">
             {/* Progress Indicator */}
-            <div className="fixed top-0 left-0 right-0 h-1 bg-slate-800 z-50">
+            <div className="fixed top-0 left-0 right-0 h-px bg-[#333] z-50">
                 <div
-                    className="h-full bg-green-500 transition-all duration-300"
+                    className="h-full bg-[#4a90d9] transition-all duration-300"
                     style={{ width: `${(step / 4) * 100}%` }}
                 />
             </div>
 
             {/* Step Counter */}
-            <div className="fixed top-4 right-4 z-40">
-                <div className="bg-slate-800/90 backdrop-blur-sm px-4 py-2 rounded border border-slate-700">
-                    <span className="text-sm font-mono text-green-400">
-                        Step {step} of 4
+            <div className="fixed top-3 right-3 z-40">
+                <div className="bg-[#1a1a1a]/95 backdrop-blur-md border border-[#333] px-3 py-1.5">
+                    <span className="text-[10px] font-mono text-[#666] uppercase tracking-wider">
+                        Step {step} / 4
                     </span>
                 </div>
             </div>
 
-            <div className="container mx-auto px-4 py-16 pt-24">
+            <div className="container mx-auto px-4 py-12 pt-16">
                 <AnimatePresence mode="wait" custom={direction}>
                     <motion.div
                         key={step}
@@ -207,25 +207,25 @@ export default function ActivatePage({ params }: PageProps) {
                     >
                         {/* Step 1: Identity */}
                         {step === 1 && (
-                            <div className="space-y-8">
-                                <div>
-                                    <h1 className="text-3xl font-bold mb-2 text-green-400">Device Activation</h1>
-                                    <p className="text-slate-400">Enter your activation credentials</p>
+                            <div className="space-y-6">
+                                <div className="border-b border-[#333] pb-4">
+                                    <h1 className="text-[18px] font-semibold text-[#e5e5e5] mb-1">Device Activation</h1>
+                                    <p className="text-[11px] text-[#666] font-mono">Enter activation credentials</p>
                                 </div>
 
-                                <div className="space-y-6">
+                                <div className="space-y-4">
                                     <div>
-                                        <label className="block text-sm font-semibold mb-2 text-slate-300">
+                                        <label className="block text-[10px] font-semibold text-[#666] uppercase tracking-wider mb-2">
                                             Device ID
                                         </label>
-                                        <div className="bg-slate-800 border border-slate-700 px-4 py-3 rounded font-mono text-lg">
+                                        <div className="bg-[#141414] border border-[#333] px-3 py-2 font-mono text-[12px] text-[#4a90d9]">
                                             {deviceId || 'Loading...'}
                                         </div>
                                     </div>
 
                                     <div>
-                                        <label className="block text-sm font-semibold mb-2 text-slate-300">
-                                            Activation PIN (6 digits)
+                                        <label className="block text-[10px] font-semibold text-[#666] uppercase tracking-wider mb-2">
+                                            Activation PIN
                                         </label>
                                         <input
                                             type="text"
@@ -233,20 +233,20 @@ export default function ActivatePage({ params }: PageProps) {
                                             maxLength={6}
                                             value={pin}
                                             onChange={(e) => setPin(e.target.value.replace(/\D/g, ''))}
-                                            className="w-full bg-slate-800 border border-slate-700 px-4 py-4 rounded text-2xl font-mono text-center tracking-widest focus:outline-none focus:border-green-500"
+                                            className="w-full bg-[#141414] border border-[#333] px-4 py-3 font-mono text-[20px] text-center tracking-widest text-[#e5e5e5] focus:outline-none focus:border-[#4a90d9] transition-colors"
                                             placeholder="000000"
                                         />
                                     </div>
 
                                     <div>
-                                        <label className="block text-sm font-semibold mb-2 text-slate-300">
-                                            Mission Commander Name
+                                        <label className="block text-[10px] font-semibold text-[#666] uppercase tracking-wider mb-2">
+                                            Mission Commander
                                         </label>
                                         <input
                                             type="text"
                                             value={name}
                                             onChange={(e) => setName(e.target.value)}
-                                            className="w-full bg-slate-800 border border-slate-700 px-4 py-4 rounded text-lg focus:outline-none focus:border-green-500"
+                                            className="w-full bg-[#141414] border border-[#333] px-3 py-2 text-[12px] text-[#e5e5e5] focus:outline-none focus:border-[#4a90d9] transition-colors"
                                             placeholder="Your name"
                                         />
                                     </div>
@@ -255,7 +255,7 @@ export default function ActivatePage({ params }: PageProps) {
                                 <button
                                     onClick={nextStep}
                                     disabled={!canProceedFromStep1}
-                                    className="w-full bg-green-500 hover:bg-green-600 disabled:bg-slate-700 disabled:text-slate-500 disabled:cursor-not-allowed py-4 rounded text-lg font-semibold transition-colors"
+                                    className="w-full bg-[#4a90d9] hover:bg-[#4a90d9]/90 disabled:bg-[#333] disabled:text-[#666] disabled:cursor-not-allowed py-3 text-[12px] font-mono font-semibold border border-[#4a90d9] disabled:border-[#333] transition-colors min-h-[44px]"
                                 >
                                     Continue
                                 </button>
@@ -264,51 +264,51 @@ export default function ActivatePage({ params }: PageProps) {
 
                         {/* Step 2: Hardware Verification */}
                         {step === 2 && (
-                            <div className="space-y-8">
-                                <div>
-                                    <h1 className="text-3xl font-bold mb-2 text-green-400">Hardware Check</h1>
-                                    <p className="text-slate-400">Verify device is powered on</p>
+                            <div className="space-y-6">
+                                <div className="border-b border-[#333] pb-4">
+                                    <h1 className="text-[18px] font-semibold text-[#e5e5e5] mb-1">Hardware Verification</h1>
+                                    <p className="text-[11px] text-[#666] font-mono">Confirm device power state</p>
                                 </div>
 
                                 <div className="flex flex-col items-center space-y-6">
                                     {/* Animated Switch */}
-                                    <div className="relative w-32 h-16">
+                                    <div className="relative w-24 h-12">
                                         <motion.div
                                             animate={{
-                                                scale: [1, 1.1, 1],
+                                                scale: [1, 1.05, 1],
                                             }}
                                             transition={{
                                                 duration: 1.5,
                                                 repeat: Infinity,
                                                 ease: 'easeInOut',
                                             }}
-                                            className="absolute inset-0 bg-slate-800 rounded-full border-4 border-slate-700"
+                                            className="absolute inset-0 bg-[#141414] rounded-full border border-[#333]"
                                         />
                                         <motion.div
                                             animate={{
-                                                x: [0, 64, 0],
+                                                x: [0, 48, 0],
                                             }}
                                             transition={{
                                                 duration: 1.5,
                                                 repeat: Infinity,
                                                 ease: 'easeInOut',
                                             }}
-                                            className="absolute top-1 left-1 w-14 h-14 bg-green-500 rounded-full shadow-lg shadow-green-500/50"
+                                            className="absolute top-0.5 left-0.5 w-11 h-11 bg-[#4a9] rounded-full"
                                         />
                                     </div>
 
-                                    <div className="text-center space-y-4">
-                                        <p className="text-xl font-semibold">Power Switch ON</p>
-                                        <p className="text-slate-400">Do you see the Green LED flashing?</p>
+                                    <div className="text-center space-y-3">
+                                        <p className="text-[12px] font-semibold text-[#e5e5e5] font-mono">Power Switch ON</p>
+                                        <p className="text-[11px] text-[#666] font-mono">Do you see the Green LED flashing?</p>
                                     </div>
 
-                                    <div className="flex gap-4 w-full">
+                                    <div className="flex gap-3 w-full">
                                         <button
                                             onClick={() => {
                                                 setLedConfirmed(false);
                                                 prevStep();
                                             }}
-                                            className="flex-1 bg-slate-800 border border-slate-700 hover:border-slate-600 py-4 rounded text-lg font-semibold transition-colors"
+                                            className="flex-1 bg-[#141414] border border-[#333] hover:border-[#666] py-3 text-[12px] font-mono font-semibold text-[#999] hover:text-[#e5e5e5] transition-colors min-h-[44px]"
                                         >
                                             No
                                         </button>
@@ -317,7 +317,7 @@ export default function ActivatePage({ params }: PageProps) {
                                                 setLedConfirmed(true);
                                                 nextStep();
                                             }}
-                                            className="flex-1 bg-green-500 hover:bg-green-600 py-4 rounded text-lg font-semibold transition-colors"
+                                            className="flex-1 bg-[#4a90d9] hover:bg-[#4a90d9]/90 border border-[#4a90d9] py-3 text-[12px] font-mono font-semibold text-[#e5e5e5] transition-colors min-h-[44px]"
                                         >
                                             Yes
                                         </button>
@@ -328,28 +328,28 @@ export default function ActivatePage({ params }: PageProps) {
 
                         {/* Step 3: Location Lock */}
                         {step === 3 && (
-                            <div className="space-y-8">
-                                <div>
-                                    <h1 className="text-3xl font-bold mb-2 text-green-400">Location Lock</h1>
-                                    <p className="text-slate-400">Confirm launch coordinates</p>
+                            <div className="space-y-6">
+                                <div className="border-b border-[#333] pb-4">
+                                    <h1 className="text-[18px] font-semibold text-[#e5e5e5] mb-1">Location Lock</h1>
+                                    <p className="text-[11px] text-[#666] font-mono">Confirm launch coordinates</p>
                                 </div>
 
                                 {locationError ? (
-                                    <div className="bg-red-900/30 border border-red-700 px-4 py-3 rounded text-red-400">
-                                        {locationError}
+                                    <div className="bg-[#141414] border border-[#c44] px-3 py-2">
+                                        <p className="text-[11px] text-[#c44] font-mono">{locationError}</p>
                                     </div>
                                 ) : location ? (
                                     <div className="space-y-4">
-                                        <div className="bg-slate-800 border border-slate-700 rounded p-4">
-                                            <div className="text-sm text-slate-400 mb-1">Launch Location</div>
-                                            <div className="text-xl font-semibold">{locationName}</div>
-                                            <div className="text-sm text-slate-500 font-mono mt-1">
+                                        <div className="bg-[#141414] border border-[#333] p-3">
+                                            <div className="text-[10px] font-semibold text-[#666] uppercase tracking-wider mb-1">Launch Location</div>
+                                            <div className="text-[14px] font-semibold text-[#e5e5e5] font-mono mb-1">{locationName}</div>
+                                            <div className="text-[10px] text-[#666] font-mono">
                                                 {location.lat.toFixed(6)}, {location.lon.toFixed(6)}
                                             </div>
                                         </div>
 
                                         {/* Mini Map */}
-                                        <div className="h-64 rounded border border-slate-700 overflow-hidden">
+                                        <div className="h-48 border border-[#333] overflow-hidden">
                                             <Map
                                                 mapboxAccessToken={process.env.NEXT_PUBLIC_MAPBOX_TOKEN}
                                                 initialViewState={{
@@ -365,31 +365,31 @@ export default function ActivatePage({ params }: PageProps) {
                                                     latitude={location.lat}
                                                     anchor="center"
                                                 >
-                                                    <div className="w-6 h-6 bg-red-500 rounded-full border-2 border-white shadow-lg animate-pulse" />
+                                                    <div className="w-4 h-4 bg-[#4a90d9] rounded-full border border-[#e5e5e5]" />
                                                 </Marker>
                                             </Map>
                                         </div>
                                     </div>
                                 ) : (
                                     <div className="text-center py-8">
-                                        <div className="inline-block animate-spin rounded-full h-12 w-12 border-4 border-green-500 border-t-transparent mb-4" />
-                                        <p className="text-slate-400">Acquiring location...</p>
+                                        <div className="inline-block animate-spin rounded-full h-8 w-8 border-2 border-[#4a90d9] border-t-transparent mb-3" />
+                                        <p className="text-[11px] text-[#666] font-mono">Acquiring location...</p>
                                     </div>
                                 )}
 
-                                <div className="flex gap-4">
+                                <div className="flex gap-3">
                                     <button
                                         onClick={prevStep}
-                                        className="flex-1 bg-slate-800 border border-slate-700 hover:border-slate-600 py-4 rounded text-lg font-semibold transition-colors"
+                                        className="flex-1 bg-[#141414] border border-[#333] hover:border-[#666] py-3 text-[12px] font-mono font-semibold text-[#999] hover:text-[#e5e5e5] transition-colors min-h-[44px]"
                                     >
                                         Back
                                     </button>
                                     <button
                                         onClick={nextStep}
                                         disabled={!canProceedFromStep3}
-                                        className="flex-1 bg-green-500 hover:bg-green-600 disabled:bg-slate-700 disabled:text-slate-500 disabled:cursor-not-allowed py-4 rounded text-lg font-semibold transition-colors"
+                                        className="flex-1 bg-[#4a90d9] hover:bg-[#4a90d9]/90 disabled:bg-[#333] disabled:text-[#666] disabled:cursor-not-allowed border border-[#4a90d9] disabled:border-[#333] py-3 text-[12px] font-mono font-semibold transition-colors min-h-[44px]"
                                     >
-                                        Confirm Location
+                                        Confirm
                                     </button>
                                 </div>
                             </div>
@@ -397,32 +397,32 @@ export default function ActivatePage({ params }: PageProps) {
 
                         {/* Step 4: The Launch */}
                         {step === 4 && (
-                            <div className="space-y-8">
-                                <div>
-                                    <h1 className="text-3xl font-bold mb-2 text-red-400">Launch Confirmation</h1>
-                                    <p className="text-slate-400">Hold the button to launch</p>
+                            <div className="space-y-6">
+                                <div className="border-b border-[#333] pb-4">
+                                    <h1 className="text-[18px] font-semibold text-[#e5e5e5] mb-1">Launch Confirmation</h1>
+                                    <p className="text-[11px] text-[#666] font-mono">Hold button to confirm launch</p>
                                 </div>
 
                                 <div className="flex flex-col items-center space-y-6">
                                     {/* Hold-to-Launch Button */}
                                     <div className="relative">
                                         {/* Progress Ring */}
-                                        <svg className="w-64 h-64 transform -rotate-90" viewBox="0 0 100 100">
+                                        <svg className="w-56 h-56 transform -rotate-90" viewBox="0 0 100 100">
                                             <circle
                                                 cx="50"
                                                 cy="50"
                                                 r="45"
                                                 fill="none"
-                                                stroke="rgba(239, 68, 68, 0.2)"
-                                                strokeWidth="4"
+                                                stroke="rgba(204, 68, 68, 0.2)"
+                                                strokeWidth="3"
                                             />
                                             <motion.circle
                                                 cx="50"
                                                 cy="50"
                                                 r="45"
                                                 fill="none"
-                                                stroke="#ef4444"
-                                                strokeWidth="4"
+                                                stroke="#c44"
+                                                strokeWidth="3"
                                                 strokeLinecap="round"
                                                 strokeDasharray={`${2 * Math.PI * 45}`}
                                                 initial={{ strokeDashoffset: 2 * Math.PI * 45 }}
@@ -441,25 +441,25 @@ export default function ActivatePage({ params }: PageProps) {
                                             onTouchStart={handleMouseDown}
                                             onTouchEnd={handleMouseUp}
                                             disabled={isActivating}
-                                            className="absolute inset-0 m-auto w-48 h-48 bg-red-600 hover:bg-red-700 disabled:bg-slate-700 rounded-full flex items-center justify-center text-white font-bold text-xl shadow-2xl shadow-red-600/50 transition-all active:scale-95"
+                                            className="absolute inset-0 m-auto w-40 h-40 bg-[#c44] hover:bg-[#c44]/90 disabled:bg-[#333] rounded-full flex items-center justify-center text-[#e5e5e5] font-mono text-[11px] font-semibold border border-[#c44] disabled:border-[#333] transition-all active:scale-95 min-h-[160px] min-w-[160px]"
                                         >
                                             {isActivating ? (
                                                 <div className="flex flex-col items-center">
-                                                    <div className="animate-spin rounded-full h-8 w-8 border-4 border-white border-t-transparent mb-2" />
-                                                    <span>Launching...</span>
+                                                    <div className="animate-spin rounded-full h-6 w-6 border-2 border-[#e5e5e5] border-t-transparent mb-2" />
+                                                    <span className="text-[10px]">Launching...</span>
                                                 </div>
                                             ) : (
-                                                'HOLD TO LAUNCH'
+                                                <span className="text-center px-2">HOLD TO<br />LAUNCH</span>
                                             )}
                                         </button>
                                     </div>
 
                                     <div className="text-center space-y-2">
-                                        <p className="text-lg font-semibold">
+                                        <p className="text-[11px] font-mono text-[#666]">
                                             {isHolding ? 'Keep holding...' : 'Hold for 3 seconds'}
                                         </p>
                                         {isHolding && (
-                                            <p className="text-2xl font-bold text-red-400">
+                                            <p className="text-[18px] font-bold text-[#c44] font-mono">
                                                 {Math.ceil((100 - holdProgress) / (100 / 3))}s
                                             </p>
                                         )}
@@ -467,7 +467,7 @@ export default function ActivatePage({ params }: PageProps) {
 
                                     <button
                                         onClick={prevStep}
-                                        className="w-full bg-slate-800 border border-slate-700 hover:border-slate-600 py-4 rounded text-lg font-semibold transition-colors"
+                                        className="w-full bg-[#141414] border border-[#333] hover:border-[#666] py-3 text-[12px] font-mono font-semibold text-[#999] hover:text-[#e5e5e5] transition-colors min-h-[44px]"
                                     >
                                         Back
                                     </button>
