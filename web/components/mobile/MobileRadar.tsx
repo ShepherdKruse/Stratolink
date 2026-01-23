@@ -19,7 +19,7 @@ interface MobileRadarProps {
     userLocation?: { lat: number; lon: number } | null;
 }
 
-export default function MobileRadar({ balloonData, onBalloonClick, userLocation }: MobileRadarProps) {
+export default function MobileRadar({ balloonData, onBalloonClick, userLocation, selectedBalloonId, flightPathData = [], playbackTime }: MobileRadarProps) {
     const mapRef = useRef<MapRef>(null);
     const [mapBearing, setMapBearing] = useState(0);
     const [compassEnabled, setCompassEnabled] = useState(false);
@@ -116,6 +116,24 @@ export default function MobileRadar({ balloonData, onBalloonClick, userLocation 
         })),
     };
 
+    // Create flight path GeoJSON if balloon is selected
+    const flightPathGeoJSON = flightPathData.length > 0 && selectedBalloonId ? {
+        type: 'FeatureCollection' as const,
+        features: [{
+            type: 'Feature' as const,
+            geometry: {
+                type: 'LineString' as const,
+                coordinates: flightPathData
+                    .filter(point => {
+                        if (!playbackTime) return true;
+                        const pointTime = point.time instanceof Date ? point.time : new Date(point.time);
+                        return pointTime <= playbackTime;
+                    })
+                    .map(point => [point.lon, point.lat]),
+            },
+        }],
+    } : null;
+
     const handleMarkerClick = useCallback((e: any) => {
         const feature = e.features?.[0];
         if (!feature) return;
@@ -165,6 +183,27 @@ export default function MobileRadar({ balloonData, onBalloonClick, userLocation 
                         }}
                     />
                 </Source>
+
+                {/* Flight Path Line - Only show if balloon is selected */}
+                {flightPathGeoJSON && (
+                    <Source id="flight-path" type="geojson" data={flightPathGeoJSON} lineMetrics={true}>
+                        <Layer
+                            id="flight-path-line"
+                            type="line"
+                            paint={{
+                                'line-width': 3,
+                                'line-opacity': 0.8,
+                                'line-gradient': [
+                                    'interpolate',
+                                    ['linear'],
+                                    ['line-progress'],
+                                    0, '#4a90d9',
+                                    1, 'rgba(74, 144, 217, 0)'
+                                ],
+                            }}
+                        />
+                    </Source>
+                )}
             </Map>
 
             {/* Nearby Pill - Top Center */}

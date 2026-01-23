@@ -6,9 +6,11 @@ interface MobileIntelProps {
     activeCount: number;
     landedCount: number;
     totalTracked: number;
+    connectionStatus?: 'connected' | 'disconnected' | 'error';
+    lastUpdate?: Date;
 }
 
-export default function MobileIntel({ activeCount, landedCount, totalTracked }: MobileIntelProps) {
+export default function MobileIntel({ activeCount, landedCount, totalTracked, connectionStatus = 'disconnected', lastUpdate }: MobileIntelProps) {
     return (
         <div className="h-full bg-[#1a1a1a] overflow-y-auto pb-20">
             {/* Header */}
@@ -111,11 +113,19 @@ export default function MobileIntel({ activeCount, landedCount, totalTracked }: 
                     <div className="space-y-2 font-mono text-[11px]">
                         <div className="flex justify-between">
                             <span className="text-[#999]">Database</span>
-                            <span className="text-[#4a9]">CONNECTED</span>
+                            <span className={
+                                connectionStatus === 'connected' ? 'text-[#4a9]' : 
+                                connectionStatus === 'error' ? 'text-[#c44]' : 
+                                'text-[#b84]'
+                            }>
+                                {connectionStatus.toUpperCase()}
+                            </span>
                         </div>
                         <div className="flex justify-between">
                             <span className="text-[#999]">Last Update</span>
-                            <span className="text-[#e5e5e5]">{new Date().toISOString().substring(11, 19)}</span>
+                            <span className="text-[#e5e5e5]">
+                                {lastUpdate ? lastUpdate.toISOString().substring(11, 19) : '—'}
+                            </span>
                         </div>
                         <div className="flex justify-between">
                             <span className="text-[#999]">Refresh Rate</span>

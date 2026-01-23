@@ -126,42 +126,78 @@ export default function MobileLayout() {
         ? balloonData.find(b => b.id === selectedBalloonId) || null
         : null;
 
-    // Fetch flight path for selected balloon
+    // Fetch flight path and telemetry data for selected balloon
     const [flightPathData, setFlightPathData] = useState<Array<{ lat: number; lon: number; time: Date }>>([]);
+    const [telemetryData, setTelemetryData] = useState<Array<{
+        time: Date | string;
+        battery_voltage?: number;
+        temperature?: number;
+        pressure?: number;
+        rssi?: number;
+    }>>([]);
+    const [playbackTime, setPlaybackTime] = useState<Date | null>(null);
     
     useEffect(() => {
         async function fetchFlightPath() {
             if (!selectedBalloonId) {
                 setFlightPathData([]);
+                setTelemetryData([]);
+                setPlaybackTime(null);
                 return;
             }
 
             const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
             if (!supabaseUrl || supabaseUrl.includes('your_supabase') || supabaseUrl === '') {
+                setConnectionStatus('disconnected');
                 return;
             }
 
             try {
                 const supabase = createClient();
+                setConnectionStatus('connected');
                 const oneDayAgo = new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString();
                 
-                const { data: pathData, error } = await supabase
+                // Fetch full telemetry data (not just lat/lon)
+                const { data: telemetryRows, error } = await supabase
                     .from('telemetry')
-                    .select('lat, lon, time, altitude_m')
+                    .select('lat, lon, time, altitude_m, battery_voltage, temperature, pressure, rssi')
                     .eq('device_id', selectedBalloonId)
                     .gte('time', oneDayAgo)
                     .order('time', { ascending: true });
 
-                if (!error && pathData && pathData.length > 0) {
-                    const path = pathData.map((row: any) => ({
+                if (!error && telemetryRows && telemetryRows.length > 0) {
+                    const path = telemetryRows.map((row: any) => ({
                         lat: row.lat,
                         lon: row.lon,
                         time: new Date(row.time) as Date,
                     }));
                     setFlightPathData(path);
+
+                    // Set telemetry data with actual values
+                    const telemetry = telemetryRows.map((row: any) => ({
+                        time: new Date(row.time) as Date,
+                        battery_voltage: row.battery_voltage ?? undefined,
+                        temperature: row.temperature ?? undefined,
+                        pressure: row.pressure ?? undefined,
+                        rssi: row.rssi ?? undefined,
+                    }));
+                    setTelemetryData(telemetry);
+
+                    // Set playback time to latest
+                    const lastTime = path[path.length - 1].time;
+                    setPlaybackTime(lastTime instanceof Date ? lastTime : new Date(lastTime));
+                    setLastUpdate(new Date());
+                } else {
+                    setFlightPathData([]);
+                    setTelemetryData([]);
+                    setPlaybackTime(null);
+                    if (error) {
+                        setConnectionStatus('error');
+                    }
                 }
             } catch (error) {
                 console.debug('Error fetching flight path:', error);
+                setConnectionStatus('error');
             }
         }
 

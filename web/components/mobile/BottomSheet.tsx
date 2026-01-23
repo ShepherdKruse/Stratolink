@@ -116,7 +116,7 @@ export default function BottomSheet({
         }
     };
 
-    const opacity = useTransform(y, [0, SHEET_HEIGHT - PEEK_HEIGHT], [1, 0.3]);
+    const opacity = useTransform(y, [0, sheetHeight - PEEK_HEIGHT], [1, 0.3]);
 
     if (!isOpen) return null;
 
@@ -168,8 +168,11 @@ export default function BottomSheet({
                         <button
                             onClick={() => {
                                 // Ping action - request immediate update
+                                // In a real implementation, this would trigger a refresh of telemetry data
+                                console.log('Ping requested for', balloonId);
+                                // Could trigger a refetch or send a command to the device
                             }}
-                            className="bg-[#4a90d9]/20 border border-[#4a90d9] text-[#4a90d9] px-4 py-2 rounded-lg text-[12px] font-mono min-h-[44px]"
+                            className="bg-[#4a90d9]/20 border border-[#4a90d9] text-[#4a90d9] px-4 py-2 rounded-lg text-[12px] font-mono min-h-[44px] active:bg-[#4a90d9]/30 transition-colors"
                         >
                             Ping
                         </button>
