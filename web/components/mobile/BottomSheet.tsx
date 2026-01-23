@@ -45,7 +45,7 @@ export default function BottomSheet({
     const PEEK_HEIGHT = sheetHeight * 0.25; // 25% peek
     const EXPANDED_HEIGHT = sheetHeight * 0.9; // 90% expanded
     
-    const y = useMotionValue(isExpanded ? 0 : sheetHeight - PEEK_HEIGHT);
+    const y = useMotionValue(0); // Start at bottom (y: 0 means no offset from bottom)
 
     // Generate mock data if no telemetry data provided
     const generateMockData = (baseValue: number, variance: number, count: number = 24) => {
@@ -81,11 +81,11 @@ export default function BottomSheet({
     useEffect(() => {
         if (isOpen) {
             setIsExpanded(false);
-            y.set(sheetHeight - PEEK_HEIGHT);
+            y.set(0); // Start at peek position (bottom of screen)
         } else {
-            y.set(sheetHeight);
+            y.set(0); // Reset when closed
         }
-    }, [isOpen, y, sheetHeight, PEEK_HEIGHT]);
+    }, [isOpen, y]);
 
     const handleDragEnd = (_event: MouseEvent | TouchEvent | PointerEvent, info: PanInfo) => {
         const velocity = info.velocity.y;
@@ -99,24 +99,24 @@ export default function BottomSheet({
         // Fast swipe up expands
         if (velocity < -500) {
             setIsExpanded(true);
-            y.set(0);
+            y.set(-(sheetHeight - EXPANDED_HEIGHT));
             return;
         }
 
         // Slow drag: snap to nearest position
         const currentY = y.get();
-        const midPoint = sheetHeight - (PEEK_HEIGHT + EXPANDED_HEIGHT) / 2;
+        const midPoint = -(sheetHeight - EXPANDED_HEIGHT) / 2;
 
         if (currentY < midPoint) {
             setIsExpanded(true);
-            y.set(0);
+            y.set(-(sheetHeight - EXPANDED_HEIGHT));
         } else {
             setIsExpanded(false);
-            y.set(sheetHeight - PEEK_HEIGHT);
+            y.set(0);
         }
     };
 
-    const opacity = useTransform(y, [0, sheetHeight - PEEK_HEIGHT], [1, 0.3]);
+    const opacity = useTransform(y, [-(sheetHeight - EXPANDED_HEIGHT), 0], [1, 0.3]);
 
     if (!isOpen) return null;
 
@@ -137,15 +137,19 @@ export default function BottomSheet({
             {/* Bottom Sheet */}
             <motion.div
                 drag="y"
-                dragConstraints={{ top: 0, bottom: sheetHeight - PEEK_HEIGHT }}
+                dragConstraints={{ top: -(sheetHeight - PEEK_HEIGHT), bottom: 0 }}
                 dragElastic={0.2}
                 onDragEnd={handleDragEnd}
                 animate={{
-                    y: isExpanded ? 0 : sheetHeight - PEEK_HEIGHT,
+                    y: isExpanded ? -(sheetHeight - EXPANDED_HEIGHT) : 0,
                 }}
                 transition={{ type: 'spring', damping: 30, stiffness: 300 }}
-                style={{ y }}
-                className="fixed left-0 right-0 z-50 bg-[#1a1a1a] border-t border-[#333] rounded-t-3xl shadow-2xl"
+                style={{ 
+                    y,
+                    maxHeight: `${EXPANDED_HEIGHT}px`, 
+                    height: isExpanded ? `${EXPANDED_HEIGHT}px` : `${PEEK_HEIGHT}px` 
+                }}
+                className="fixed bottom-0 left-0 right-0 z-50 bg-[#1a1a1a] border-t border-[#333] rounded-t-3xl shadow-2xl"
             >
                 {/* Drag Handle */}
                 <div className="flex justify-center pt-3 pb-2">
@@ -180,7 +184,7 @@ export default function BottomSheet({
                 </motion.div>
 
                 {/* Stage 2: Deep Dive (Scrollable when expanded) */}
-                <div className="overflow-y-auto" style={{ height: isExpanded ? EXPANDED_HEIGHT - 100 : 0 }}>
+                <div className="overflow-y-auto" style={{ height: isExpanded ? `${EXPANDED_HEIGHT - PEEK_HEIGHT - 20}px` : '0px' }}>
                     <div className="p-4 space-y-4">
                         {/* 3D PCB Render */}
                         <div>
