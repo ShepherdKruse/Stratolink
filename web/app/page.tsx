@@ -3,7 +3,6 @@ import { Mission } from "@/components/mission"
 import { HowItWorks } from "@/components/how-it-works"
 import { DashboardShowcase } from "@/components/dashboard-showcase"
 import { Applications } from "@/components/applications"
-import { AltitudeControl } from "@/components/altitude-control"
 import { FutureApplications } from "@/components/future-applications"
 import { Roadmap } from "@/components/roadmap"
 import { Contact } from "@/components/contact"
@@ -19,7 +18,6 @@ export default function Page() {
         <Mission />
         <HowItWorks />
         <DashboardShowcase />
-        <AltitudeControl />
         <Applications />
         <FutureApplications />
         <Roadmap />

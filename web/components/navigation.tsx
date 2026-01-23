@@ -16,42 +16,12 @@ export function Navigation() {
               priority
             />
           </Link>
-          <div className="hidden items-center gap-8 md:flex">
+          <div className="hidden items-center gap-6 md:flex">
             <Link
-              href="#mission"
+              href="/activate"
               className="text-sm font-light text-muted-foreground transition-colors hover:text-foreground"
             >
-              Mission
-            </Link>
-            <Link
-              href="#how-it-works"
-              className="text-sm font-light text-muted-foreground transition-colors hover:text-foreground"
-            >
-              How It Works
-            </Link>
-            <Link
-              href="#applications"
-              className="text-sm font-light text-muted-foreground transition-colors hover:text-foreground"
-            >
-              Built For
-            </Link>
-            <Link
-              href="#future-applications"
-              className="text-sm font-light text-muted-foreground transition-colors hover:text-foreground"
-            >
-              Future Applications
-            </Link>
-            <Link
-              href="#roadmap"
-              className="text-sm font-light text-muted-foreground transition-colors hover:text-foreground"
-            >
-              Roadmap
-            </Link>
-            <Link
-              href="#contact"
-              className="text-sm font-light text-muted-foreground transition-colors hover:text-foreground"
-            >
-              Contact
+              Activate Device
             </Link>
             <Link
               href="/docs"
@@ -60,10 +30,10 @@ export function Navigation() {
               Docs
             </Link>
             <Link
-              href="/activate"
+              href="#contact"
               className="text-sm font-light text-muted-foreground transition-colors hover:text-foreground"
             >
-              Activate Device
+              Contact
             </Link>
             <Link
               href="/dashboard"
