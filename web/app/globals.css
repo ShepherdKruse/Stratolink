@@ -140,3 +140,85 @@
     @apply bg-background text-foreground antialiased;
   }
 }
+
+/* Documentation Styles */
+.docs-content {
+  @apply text-foreground;
+}
+
+.docs-content h2 {
+  @apply mt-12 mb-6 text-2xl font-semibold text-foreground border-b border-border pb-2;
+}
+
+.docs-content h3 {
+  @apply mt-8 mb-4 text-xl font-semibold text-foreground;
+}
+
+.docs-content h4 {
+  @apply mt-6 mb-3 text-lg font-medium text-foreground;
+}
+
+.docs-content p {
+  @apply mb-6 text-base leading-7 text-muted-foreground;
+}
+
+.docs-content ul,
+.docs-content ol {
+  @apply mb-6 ml-6 space-y-2;
+}
+
+.docs-content ul {
+  @apply list-disc;
+}
+
+.docs-content ol {
+  @apply list-decimal;
+}
+
+.docs-content li {
+  @apply text-base leading-7 text-muted-foreground;
+}
+
+.docs-content li::marker {
+  @apply text-foreground/60;
+}
+
+.docs-content code {
+  @apply px-1.5 py-0.5 text-sm font-mono bg-muted text-foreground rounded border border-border;
+}
+
+.docs-content pre {
+  @apply mb-6 p-4 bg-muted border border-border rounded-sm overflow-x-auto;
+}
+
+.docs-content pre code {
+  @apply p-0 bg-transparent border-0 text-sm;
+}
+
+.docs-content a {
+  @apply text-foreground underline underline-offset-4 hover:text-foreground/80 transition-colors;
+}
+
+.docs-content strong {
+  @apply font-semibold text-foreground;
+}
+
+.docs-content blockquote {
+  @apply pl-4 border-l-4 border-border italic text-muted-foreground;
+}
+
+.docs-content table {
+  @apply w-full mb-6 border-collapse;
+}
+
+.docs-content th {
+  @apply px-4 py-2 text-left font-semibold text-foreground border-b-2 border-border bg-muted/50;
+}
+
+.docs-content td {
+  @apply px-4 py-2 text-muted-foreground border-b border-border;
+}
+
+.docs-content hr {
+  @apply my-8 border-t border-border;
+}

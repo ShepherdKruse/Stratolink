@@ -28,7 +28,7 @@ export default function GettingStartedPage() {
                 </div>
 
                 <div className="mx-auto max-w-4xl px-6 py-16 sm:px-8 sm:py-24">
-                    <div className="prose prose-slate max-w-none dark:prose-invert">
+                    <div className="docs-content">
                         <h2>Prerequisites</h2>
                         <ul>
                             <li>RAK3172 development board or compatible LoRaWAN module</li>
@@ -56,40 +56,40 @@ export default function GettingStartedPage() {
                             Set up your LoRaWAN credentials in the firmware:
                         </p>
                         <ol>
-                            <li>Copy <code>firmware/include/config.h</code> values to <code>firmware/include/secrets.h</code></li>
-                            <li>Edit <code>firmware/include/secrets.h</code> with your TTN credentials:
+                            <li>Copy <code className="text-sm">firmware/include/config.h</code> values to <code className="text-sm">firmware/include/secrets.h</code></li>
+                            <li>Edit <code className="text-sm">firmware/include/secrets.h</code> with your TTN credentials:
                                 <ul>
-                                    <li>DEV_EUI</li>
-                                    <li>APP_EUI</li>
-                                    <li>APP_KEY</li>
+                                    <li><code className="text-sm">DEV_EUI</code></li>
+                                    <li><code className="text-sm">APP_EUI</code></li>
+                                    <li><code className="text-sm">APP_KEY</code></li>
                                 </ul>
                             </li>
-                            <li>Build firmware: <code>pio run</code></li>
-                            <li>Upload to device: <code>pio run --target upload</code></li>
+                            <li>Build firmware: <code className="text-sm">pio run</code></li>
+                            <li>Upload to device: <code className="text-sm">pio run --target upload</code></li>
                         </ol>
 
                         <h2>Step 3: Set Up Supabase</h2>
                         <ol>
-                            <li>Create a new Supabase project at <a href="https://supabase.com" target="_blank" rel="noopener noreferrer">supabase.com</a></li>
+                            <li>Create a new Supabase project at <a href="https://supabase.com" target="_blank" rel="noopener noreferrer" className="text-foreground underline">supabase.com</a></li>
                             <li>Navigate to the SQL Editor</li>
-                            <li>Run the schema SQL from <code>web/lib/supabase/schema.sql</code></li>
+                            <li>Run the schema SQL from <code className="text-sm">web/lib/supabase/schema.sql</code></li>
                             <li>Enable the PostGIS extension if not already enabled</li>
                             <li>Copy your project URL and anon key from Settings → API</li>
                         </ol>
 
                         <h2>Step 4: Configure Web Application</h2>
                         <ol>
-                            <li>Navigate to the <code>web</code> directory</li>
-                            <li>Install dependencies: <code>npm install</code></li>
-                            <li>Copy <code>.env.local.example</code> to <code>.env.local</code></li>
-                            <li>Add your credentials to <code>.env.local</code>:
+                            <li>Navigate to the <code className="text-sm">web</code> directory</li>
+                            <li>Install dependencies: <code className="text-sm">npm install</code></li>
+                            <li>Copy <code className="text-sm">.env.local.example</code> to <code className="text-sm">.env.local</code></li>
+                            <li>Add your credentials to <code className="text-sm">.env.local</code>:
                                 <ul>
-                                    <li><code>NEXT_PUBLIC_SUPABASE_URL</code> - Your Supabase project URL</li>
-                                    <li><code>NEXT_PUBLIC_SUPABASE_ANON_KEY</code> - Your Supabase anon key</li>
-                                    <li><code>NEXT_PUBLIC_MAPBOX_TOKEN</code> - Your Mapbox access token</li>
+                                    <li><code className="text-sm">NEXT_PUBLIC_SUPABASE_URL</code> - Your Supabase project URL</li>
+                                    <li><code className="text-sm">NEXT_PUBLIC_SUPABASE_ANON_KEY</code> - Your Supabase anon key</li>
+                                    <li><code className="text-sm">NEXT_PUBLIC_MAPBOX_TOKEN</code> - Your Mapbox access token</li>
                                 </ul>
                             </li>
-                            <li>Start the development server: <code>npm run dev</code></li>
+                            <li>Start the development server: <code className="text-sm">npm run dev</code></li>
                         </ol>
 
                         <h2>Step 5: Configure TTN Webhook</h2>
@@ -97,7 +97,7 @@ export default function GettingStartedPage() {
                             <li>Log into <a href="https://console.thethingsnetwork.org" target="_blank" rel="noopener noreferrer">The Things Network Console</a></li>
                             <li>Navigate to Applications → Your Application → Integrations → Webhooks</li>
                             <li>Add a new webhook with format: <strong>JSON</strong></li>
-                            <li>Set webhook URL: <code>https://your-vercel-domain.com/api/ttn-webhook</code></li>
+                            <li>Set webhook URL: <code className="text-sm">https://your-vercel-domain.com/api/ttn-webhook</code></li>
                             <li>Save the webhook configuration</li>
                         </ol>
 

@@ -28,7 +28,7 @@ export default function APIPage() {
                 </div>
 
                 <div className="mx-auto max-w-4xl px-6 py-16 sm:px-8 sm:py-24">
-                    <div className="prose prose-slate max-w-none dark:prose-invert">
+                    <div className="docs-content">
                         <h2>Overview</h2>
                         <p>
                             Stratolink uses webhooks to receive telemetry data from The Things Network (TTN).
@@ -37,8 +37,8 @@ export default function APIPage() {
 
                         <h2>TTN Webhook Integration</h2>
                         <h3>Endpoint</h3>
-                        <pre className="bg-muted p-4 rounded-sm overflow-x-auto">
-                            <code>POST https://your-domain.com/api/ttn-webhook</code>
+                        <pre className="bg-muted p-4 rounded-sm border border-border overflow-x-auto">
+                            <code className="text-sm font-mono text-foreground">POST https://your-domain.com/api/ttn-webhook</code>
                         </pre>
 
                         <h3>Configuration</h3>
@@ -56,8 +56,8 @@ export default function APIPage() {
                         <p>
                             The webhook receives JSON payloads from TTN with the following structure:
                         </p>
-                        <pre className="bg-muted p-4 rounded-sm overflow-x-auto">
-                            <code>{`{
+                        <pre className="bg-muted p-4 rounded-sm border border-border overflow-x-auto">
+                            <code className="text-sm font-mono text-foreground whitespace-pre">{`{
   "end_device_ids": {
     "device_id": "balloon-001",
     "dev_eui": "...",
@@ -88,7 +88,7 @@ export default function APIPage() {
                         <p>
                             The webhook handler automatically decodes base64-encoded payloads. Ensure your firmware
                             encodes telemetry data in a format compatible with the decoder in{' '}
-                            <code>web/app/api/ttn-webhook/route.ts</code>.
+                            <code className="text-sm">web/app/api/ttn-webhook/route.ts</code>.
                         </p>
 
                         <h2>Data Storage</h2>
@@ -96,8 +96,8 @@ export default function APIPage() {
                             Telemetry data is stored in Supabase with the following schema:
                         </p>
                         <h3>Telemetry Table</h3>
-                        <pre className="bg-muted p-4 rounded-sm overflow-x-auto">
-                            <code>{`CREATE TABLE telemetry (
+                        <pre className="bg-muted p-4 rounded-sm border border-border overflow-x-auto">
+                            <code className="text-sm font-mono text-foreground whitespace-pre">{`CREATE TABLE telemetry (
   id BIGSERIAL PRIMARY KEY,
   device_id TEXT NOT NULL,
   time TIMESTAMPTZ NOT NULL,
@@ -121,16 +121,16 @@ export default function APIPage() {
                         </p>
 
                         <h3>Example: Get Latest Telemetry</h3>
-                        <pre className="bg-muted p-4 rounded-sm overflow-x-auto">
-                            <code>{`SELECT * FROM telemetry
+                        <pre className="bg-muted p-4 rounded-sm border border-border overflow-x-auto">
+                            <code className="text-sm font-mono text-foreground whitespace-pre">{`SELECT * FROM telemetry
 WHERE device_id = 'balloon-001'
 ORDER BY time DESC
 LIMIT 1;`}</code>
                         </pre>
 
                         <h3>Example: Get Flight Path</h3>
-                        <pre className="bg-muted p-4 rounded-sm overflow-x-auto">
-                            <code>{`SELECT lat, lon, time, altitude_m
+                        <pre className="bg-muted p-4 rounded-sm border border-border overflow-x-auto">
+                            <code className="text-sm font-mono text-foreground whitespace-pre">{`SELECT lat, lon, time, altitude_m
 FROM telemetry
 WHERE device_id = 'balloon-001'
   AND time >= NOW() - INTERVAL '24 hours'
@@ -138,8 +138,8 @@ ORDER BY time ASC;`}</code>
                         </pre>
 
                         <h3>Example: Active Balloons</h3>
-                        <pre className="bg-muted p-4 rounded-sm overflow-x-auto">
-                            <code>{`SELECT DISTINCT device_id
+                        <pre className="bg-muted p-4 rounded-sm border border-border overflow-x-auto">
+                            <code className="text-sm font-mono text-foreground whitespace-pre">{`SELECT DISTINCT device_id
 FROM telemetry
 WHERE time >= NOW() - INTERVAL '2 hours'
   AND altitude_m > 100;`}</code>
@@ -149,8 +149,8 @@ WHERE time >= NOW() - INTERVAL '2 hours'
                         <p>
                             Use the Supabase JavaScript client to query data programmatically:
                         </p>
-                        <pre className="bg-muted p-4 rounded-sm overflow-x-auto">
-                            <code>{`import { createClient } from '@supabase/supabase-js';
+                        <pre className="bg-muted p-4 rounded-sm border border-border overflow-x-auto">
+                            <code className="text-sm font-mono text-foreground whitespace-pre">{`import { createClient } from '@supabase/supabase-js';
 
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL,

@@ -28,7 +28,7 @@ export default function TroubleshootingPage() {
                 </div>
 
                 <div className="mx-auto max-w-4xl px-6 py-16 sm:px-8 sm:py-24">
-                    <div className="prose prose-slate max-w-none dark:prose-invert">
+                    <div className="docs-content">
                         <h2>Hardware Issues</h2>
                         
                         <h3>Device Not Detected by PlatformIO</h3>
@@ -42,15 +42,15 @@ export default function TroubleshootingPage() {
 
                         <h3>Firmware Won't Build</h3>
                         <ul>
-                            <li>Update PlatformIO: <code>pio upgrade</code></li>
-                            <li>Check <code>platformio.ini</code> for correct board configuration</li>
+                            <li>Update PlatformIO: <code className="text-sm">pio upgrade</code></li>
+                            <li>Check <code className="text-sm">platformio.ini</code> for correct board configuration</li>
                             <li>Verify all required libraries are installed</li>
-                            <li>Clear build cache: <code>pio run --target clean</code></li>
+                            <li>Clear build cache: <code className="text-sm">pio run --target clean</code></li>
                         </ul>
 
                         <h3>LoRaWAN Connection Fails</h3>
                         <ul>
-                            <li>Verify credentials in <code>secrets.h</code> match TTN console</li>
+                            <li>Verify credentials in <code className="text-sm">secrets.h</code> match TTN console</li>
                             <li>Check that region setting matches your TTN application region</li>
                             <li>Ensure antennas are properly connected</li>
                             <li>Check TTN console for device activation status</li>
@@ -69,15 +69,15 @@ export default function TroubleshootingPage() {
 
                         <h3>Build Errors</h3>
                         <ul>
-                            <li>Clear <code>.next</code> directory and rebuild</li>
-                            <li>Delete <code>node_modules</code> and reinstall: <code>npm install</code></li>
+                            <li>Clear <code className="text-sm">.next</code> directory and rebuild</li>
+                            <li>Delete <code className="text-sm">node_modules</code> and reinstall: <code className="text-sm">npm install</code></li>
                             <li>Check Node.js version (requires 18+)</li>
-                            <li>Verify all environment variables are set in <code>.env.local</code></li>
+                            <li>Verify all environment variables are set in <code className="text-sm">.env.local</code></li>
                         </ul>
 
                         <h3>Supabase Connection Issues</h3>
                         <ul>
-                            <li>Verify <code>NEXT_PUBLIC_SUPABASE_URL</code> and <code>NEXT_PUBLIC_SUPABASE_ANON_KEY</code> are correct</li>
+                            <li>Verify <code className="text-sm">NEXT_PUBLIC_SUPABASE_URL</code> and <code className="text-sm">NEXT_PUBLIC_SUPABASE_ANON_KEY</code> are correct</li>
                             <li>Check Supabase project status in dashboard</li>
                             <li>Ensure PostGIS extension is enabled</li>
                             <li>Verify database schema has been applied</li>
@@ -86,7 +86,7 @@ export default function TroubleshootingPage() {
 
                         <h3>Map Not Displaying</h3>
                         <ul>
-                            <li>Verify <code>NEXT_PUBLIC_MAPBOX_TOKEN</code> is set</li>
+                            <li>Verify <code className="text-sm">NEXT_PUBLIC_MAPBOX_TOKEN</code> is set</li>
                             <li>Check Mapbox token permissions and usage limits</li>
                             <li>Ensure token has access to required styles</li>
                             <li>Check browser console for Mapbox API errors</li>
@@ -147,17 +147,17 @@ export default function TroubleshootingPage() {
                         <ul>
                             <li>Check build logs for specific error messages</li>
                             <li>Verify all environment variables are set in Vercel dashboard</li>
-                            <li>Ensure <code>package.json</code> has correct build scripts</li>
+                            <li>Ensure <code className="text-sm">package.json</code> has correct build scripts</li>
                             <li>Check for TypeScript or linting errors locally first</li>
                             <li>Verify Node.js version in Vercel matches local version</li>
                         </ul>
 
                         <h3>Environment Variables Not Working</h3>
                         <ul>
-                            <li>Ensure variables are prefixed with <code>NEXT_PUBLIC_</code> for client-side access</li>
+                            <li>Ensure variables are prefixed with <code className="text-sm">NEXT_PUBLIC_</code> for client-side access</li>
                             <li>Redeploy after adding new environment variables</li>
                             <li>Check Vercel dashboard for variable typos</li>
-                            <li>Verify variables are not in <code>.gitignore</code> (they shouldn't be committed, but should be in Vercel)</li>
+                            <li>Verify variables are not in <code className="text-sm">.gitignore</code> (they shouldn't be committed, but should be in Vercel)</li>
                         </ul>
 
                         <h2>General Debugging Tips</h2>

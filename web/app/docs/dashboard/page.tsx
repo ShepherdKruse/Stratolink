@@ -28,7 +28,7 @@ export default function DashboardPage() {
                 </div>
 
                 <div className="mx-auto max-w-4xl px-6 py-16 sm:px-8 sm:py-24">
-                    <div className="prose prose-slate max-w-none dark:prose-invert">
+                    <div className="docs-content">
                         <h2>Overview</h2>
                         <p>
                             The Mission Control dashboard provides real-time visualization of your balloon fleet with

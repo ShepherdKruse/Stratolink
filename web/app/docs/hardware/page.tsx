@@ -28,7 +28,7 @@ export default function HardwarePage() {
                 </div>
 
                 <div className="mx-auto max-w-4xl px-6 py-16 sm:px-8 sm:py-24">
-                    <div className="prose prose-slate max-w-none dark:prose-invert">
+                    <div className="docs-content">
                         <h2>Hardware Requirements</h2>
                         <ul>
                             <li>RAK3172-SIP development board or compatible LoRaWAN module</li>
@@ -53,8 +53,8 @@ export default function HardwarePage() {
                         </p>
 
                         <h3>2. Clone Repository</h3>
-                        <pre className="bg-muted p-4 rounded-sm overflow-x-auto">
-                            <code>git clone https://github.com/ShepherdKruse/Stratolink.git
+                        <pre className="bg-muted p-4 rounded-sm border border-border overflow-x-auto">
+                            <code className="text-sm font-mono text-foreground whitespace-pre">git clone https://github.com/ShepherdKruse/Stratolink.git
 cd Stratolink</code>
                         </pre>
 
@@ -79,20 +79,20 @@ cd Stratolink</code>
                             The firmware uses a gitignored secrets file to store sensitive credentials:
                         </p>
                         <ol>
-                            <li>Copy <code>firmware/include/config.h</code> to <code>firmware/include/secrets.h</code></li>
-                            <li>Edit <code>secrets.h</code> and replace placeholder values:
-                                <pre className="bg-muted p-4 rounded-sm overflow-x-auto">
-                                    <code>{`#define LORAWAN_DEV_EUI "YOUR_DEV_EUI_HERE"
+                            <li>Copy <code className="text-sm">firmware/include/config.h</code> to <code className="text-sm">firmware/include/secrets.h</code></li>
+                            <li>Edit <code className="text-sm">secrets.h</code> and replace placeholder values:
+                                <pre className="bg-muted p-4 rounded-sm border border-border overflow-x-auto mt-2">
+                                    <code className="text-sm font-mono text-foreground whitespace-pre">{`#define LORAWAN_DEV_EUI "YOUR_DEV_EUI_HERE"
 #define LORAWAN_APP_EUI "YOUR_APP_EUI_HERE"
 #define LORAWAN_APP_KEY "YOUR_APP_KEY_HERE"`}</code>
                                 </pre>
                             </li>
-                            <li><strong>Important:</strong> Never commit <code>secrets.h</code> to version control</li>
+                            <li><strong>Important:</strong> Never commit <code className="text-sm">secrets.h</code> to version control</li>
                         </ol>
 
                         <h3>5. Configure Region</h3>
                         <p>
-                            Set your LoRaWAN region in <code>config.h</code>:
+                            Set your LoRaWAN region in <code className="text-sm">config.h</code>:
                         </p>
                         <ul>
                             <li>US915 - United States</li>
@@ -103,8 +103,8 @@ cd Stratolink</code>
 
                         <h2>Building and Flashing</h2>
                         <h3>Build Firmware</h3>
-                        <pre className="bg-muted p-4 rounded-sm overflow-x-auto">
-                            <code>cd firmware
+                        <pre className="bg-muted p-4 rounded-sm border border-border overflow-x-auto">
+                            <code className="text-sm font-mono text-foreground whitespace-pre">cd firmware
 pio run</code>
                         </pre>
 
@@ -112,22 +112,22 @@ pio run</code>
                         <p>
                             Connect your RAK3172 via USB and flash the firmware:
                         </p>
-                        <pre className="bg-muted p-4 rounded-sm overflow-x-auto">
-                            <code>pio run --target upload</code>
+                        <pre className="bg-muted p-4 rounded-sm border border-border overflow-x-auto">
+                            <code className="text-sm font-mono text-foreground">pio run --target upload</code>
                         </pre>
                         <p>
                             Or use the provided script:
                         </p>
-                        <pre className="bg-muted p-4 rounded-sm overflow-x-auto">
-                            <code>./flash_firmware.bat</code>
+                        <pre className="bg-muted p-4 rounded-sm border border-border overflow-x-auto">
+                            <code className="text-sm font-mono text-foreground">./flash_firmware.bat</code>
                         </pre>
 
                         <h3>Monitor Serial Output</h3>
                         <p>
                             View debug messages and telemetry:
                         </p>
-                        <pre className="bg-muted p-4 rounded-sm overflow-x-auto">
-                            <code>pio device monitor</code>
+                        <pre className="bg-muted p-4 rounded-sm border border-border overflow-x-auto">
+                            <code className="text-sm font-mono text-foreground">pio device monitor</code>
                         </pre>
 
                         <h2>PCB and Circuit Design</h2>
@@ -149,14 +149,14 @@ pio run</code>
 
                         <h3>Build Errors</h3>
                         <ul>
-                            <li>Ensure PlatformIO is up to date: <code>pio upgrade</code></li>
+                            <li>Ensure PlatformIO is up to date: <code className="text-sm">pio upgrade</code></li>
                             <li>Check that all required libraries are installed</li>
-                            <li>Verify <code>platformio.ini</code> configuration</li>
+                            <li>Verify <code className="text-sm">platformio.ini</code> configuration</li>
                         </ul>
 
                         <h3>LoRaWAN Connection Issues</h3>
                         <ul>
-                            <li>Verify credentials in <code>secrets.h</code></li>
+                            <li>Verify credentials in <code className="text-sm">secrets.h</code></li>
                             <li>Check that your region matches TTN configuration</li>
                             <li>Ensure antennas are properly connected</li>
                             <li>Check TTN console for device registration status</li>
