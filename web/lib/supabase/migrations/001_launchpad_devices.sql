@@ -61,3 +61,22 @@ CREATE TRIGGER devices_updated_at_trigger
     BEFORE UPDATE ON devices
     FOR EACH ROW
     EXECUTE FUNCTION update_devices_updated_at();
+
+-- Enable Row Level Security (RLS)
+ALTER TABLE devices ENABLE ROW LEVEL SECURITY;
+
+-- Create policy to allow public read access
+CREATE POLICY "Allow public read access" ON devices
+    FOR SELECT
+    USING (true);
+
+-- Create policy to allow insert (for device activation)
+CREATE POLICY "Allow insert for activation" ON devices
+    FOR INSERT
+    WITH CHECK (true);
+
+-- Create policy to allow update (for device activation and status changes)
+CREATE POLICY "Allow update for activation" ON devices
+    FOR UPDATE
+    USING (true)
+    WITH CHECK (true);

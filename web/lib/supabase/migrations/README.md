@@ -18,6 +18,13 @@ Creates test devices for development and testing.
 
 **Run this after 001** to populate test data.
 
+### 003_fix_devices_rls.sql
+Fixes Row Level Security (RLS) policies for the devices table.
+
+**Run this if you're getting "device not found" errors when trying to activate devices.**
+
+This migration ensures that the anon key can insert and update devices, which is required for the auto-creation feature in development mode.
+
 ## Test Devices
 
 After running `002_test_devices.sql`, you can use these devices for testing:
