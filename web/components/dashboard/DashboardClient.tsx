@@ -58,7 +58,7 @@ export default function DashboardClient({ initialBalloonId = null, initialMode =
                 // Fetch activated devices (only 'flying' status for map display)
                 const { data: activatedDevices, error: devicesError } = await supabase
                     .from('devices')
-                    .select('device_id, launcher_name, status')
+                    .select('device_id, launcher_name, status, launch_lat, launch_lon, launched_at')
                     .eq('status', 'flying');
 
                 if (devicesError) {
@@ -68,11 +68,15 @@ export default function DashboardClient({ initialBalloonId = null, initialMode =
 
                 const activatedDeviceIds = activatedDevices ? activatedDevices.map((d: any) => d.device_id) : [];
                 const launcherMap = new Map<string, string>();
+                const launchLocationMap = new Map<string, { lat: number; lon: number }>();
                 
-                // Create launcher name map
+                // Create launcher name and launch location maps
                 if (activatedDevices) {
                     activatedDevices.forEach((d: any) => {
                         launcherMap.set(d.device_id, d.launcher_name || 'Unknown');
+                        if (d.launch_lat && d.launch_lon) {
+                            launchLocationMap.set(d.device_id, { lat: d.launch_lat, lon: d.launch_lon });
+                        }
                     });
                 }
 
@@ -144,10 +148,47 @@ export default function DashboardClient({ initialBalloonId = null, initialMode =
                                 });
                             }
                         });
+                        
+                        // Add devices that are activated but don't have telemetry yet (use launch location)
+                        activatedDeviceIds.forEach((deviceId: string) => {
+                            if (!latestByDevice.has(deviceId)) {
+                                const launchLoc = launchLocationMap.get(deviceId);
+                                if (launchLoc) {
+                                    latestByDevice.set(deviceId, {
+                                        id: deviceId,
+                                        lat: launchLoc.lat,
+                                        lon: launchLoc.lon,
+                                        altitude_m: 0, // Ground level until first telemetry
+                                        velocity_heading: 90,
+                                        battery_voltage: 3.7,
+                                        launcher_name: launcherMap.get(deviceId),
+                                    });
+                                }
+                            }
+                        });
+                        
                         setBalloonData(Array.from(latestByDevice.values()));
                     } else if (balloonsError) {
                         console.error('Error fetching balloons:', balloonsError);
                         setConnectionStatus('error');
+                    } else {
+                        // No telemetry data, but we have activated devices - use launch locations
+                        const launchLocationBalloons: BalloonData[] = [];
+                        activatedDeviceIds.forEach((deviceId: string) => {
+                            const launchLoc = launchLocationMap.get(deviceId);
+                            if (launchLoc) {
+                                launchLocationBalloons.push({
+                                    id: deviceId,
+                                    lat: launchLoc.lat,
+                                    lon: launchLoc.lon,
+                                    altitude_m: 0,
+                                    velocity_heading: 90,
+                                    battery_voltage: 3.7,
+                                    launcher_name: launcherMap.get(deviceId),
+                                });
+                            }
+                        });
+                        setBalloonData(launchLocationBalloons);
                     }
                 } else {
                     // No activated devices
