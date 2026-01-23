@@ -4,10 +4,18 @@ import { useState, useEffect } from 'react';
 import MissionMap from '@/components/MissionMap';
 import { createClient } from '@/lib/supabase';
 
+interface BalloonData {
+    id: string;
+    lat: number;
+    lon: number;
+    altitude_m: number;
+}
+
 export default function MissionControl() {
     const [projection, setProjection] = useState<'globe' | 'mercator'>('globe');
     const [activeCount, setActiveCount] = useState(0);
     const [landedCount, setLandedCount] = useState(0);
+    const [balloonData, setBalloonData] = useState<BalloonData[]>([]);
 
     // Fetch balloon counts from Supabase
     useEffect(() => {
@@ -46,6 +54,31 @@ export default function MissionControl() {
                 if (!landedError && landed) {
                     setLandedCount(landed.length || 0);
                 }
+
+                // Also fetch balloon positions for the map
+                const { data: balloons, error: balloonsError } = await supabase
+                    .from('telemetry')
+                    .select('device_id, lat, lon, altitude_m, time')
+                    .gte('time', oneHourAgo)
+                    .gt('altitude_m', 100)
+                    .order('time', { ascending: false });
+
+                if (!balloonsError && balloons) {
+                    // Get latest telemetry per device
+                    const latestByDevice = new Map<string, BalloonData>();
+                    balloons.forEach((row: any) => {
+                        if (!latestByDevice.has(row.device_id)) {
+                            latestByDevice.set(row.device_id, {
+                                id: row.device_id,
+                                lat: row.lat,
+                                lon: row.lon,
+                                altitude_m: row.altitude_m,
+                            });
+                        }
+                    });
+                    setBalloonData(Array.from(latestByDevice.values()));
+                    console.log('Balloons for map:', Array.from(latestByDevice.values()));
+                }
             } catch (error) {
                 // Silently handle Supabase errors if not configured
                 console.debug('Supabase not configured or error:', error);
@@ -66,6 +99,7 @@ export default function MissionControl() {
                 <MissionMap 
                     projection={projection}
                     onProjectionChange={setProjection}
+                    balloonData={balloonData}
                 />
             </div>
 

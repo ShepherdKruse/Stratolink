@@ -3,12 +3,6 @@
 import { useState, useMemo, useCallback, useEffect } from 'react';
 import Map, { Source, Layer } from 'react-map-gl/mapbox';
 import 'mapbox-gl/dist/mapbox-gl.css';
-import { createClient as createSupabaseClient } from '@/lib/supabase';
-
-interface MissionMapProps {
-    projection?: 'globe' | 'mercator';
-    onProjectionChange?: (projection: 'globe' | 'mercator') => void;
-}
 
 interface BalloonData {
     id: string;
@@ -17,7 +11,13 @@ interface BalloonData {
     altitude_m: number;
 }
 
-export default function MissionMap({ projection = 'globe', onProjectionChange }: MissionMapProps) {
+interface MissionMapProps {
+    projection?: 'globe' | 'mercator';
+    onProjectionChange?: (projection: 'globe' | 'mercator') => void;
+    balloonData?: BalloonData[];
+}
+
+export default function MissionMap({ projection = 'globe', onProjectionChange, balloonData = [] }: MissionMapProps) {
     const [viewState, setViewState] = useState({
         longitude: -75,
         latitude: 40,
@@ -25,68 +25,6 @@ export default function MissionMap({ projection = 'globe', onProjectionChange }:
         pitch: projection === 'globe' ? 45 : 0,
         bearing: 0,
     });
-
-    const [balloonData, setBalloonData] = useState<BalloonData[]>([]);
-
-    // Fetch active balloons from Supabase
-    useEffect(() => {
-        async function fetchBalloons() {
-            const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
-            if (!supabaseUrl || supabaseUrl.includes('your_supabase') || supabaseUrl === '') {
-                return;
-            }
-
-            try {
-                const supabase = createSupabaseClient();
-                
-                // Get active balloons (recent telemetry within last hour)
-                const oneHourAgo = new Date(Date.now() - 60 * 60 * 1000).toISOString();
-                
-                const { data, error } = await supabase
-                    .from('telemetry')
-                    .select('device_id, lat, lon, altitude_m, time')
-                    .gte('time', oneHourAgo)
-                    .gt('altitude_m', 100)
-                    .order('time', { ascending: false });
-
-                if (error) {
-                    console.error('Error fetching balloons:', error);
-                    return;
-                }
-
-                console.log('Fetched balloons from Supabase:', data);
-
-                if (data && data.length > 0) {
-                    // Get latest telemetry per device
-                    const latestByDevice = new Map<string, BalloonData>();
-                    data.forEach((row: any) => {
-                        if (!latestByDevice.has(row.device_id)) {
-                            latestByDevice.set(row.device_id, {
-                                id: row.device_id,
-                                lat: row.lat,
-                                lon: row.lon,
-                                altitude_m: row.altitude_m,
-                            });
-                        }
-                    });
-                    const balloons = Array.from(latestByDevice.values());
-                    console.log('Processed balloons for map:', balloons);
-                    setBalloonData(balloons);
-                } else {
-                    console.log('No active balloons found in last hour');
-                    setBalloonData([]);
-                }
-            } catch (error) {
-                console.error('Supabase fetch error:', error);
-            }
-        }
-
-        fetchBalloons();
-        // Refresh every 30 seconds
-        const interval = setInterval(fetchBalloons, 30000);
-        
-        return () => clearInterval(interval);
-    }, []);
 
     // Adjust view state when projection changes
     const handleViewStateChange = useCallback((evt: any) => {
