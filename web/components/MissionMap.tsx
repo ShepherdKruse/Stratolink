@@ -54,7 +54,9 @@ export default function MissionMap({ projection = 'globe', onProjectionChange }:
                     return;
                 }
 
-                if (data) {
+                console.log('Fetched balloons from Supabase:', data);
+
+                if (data && data.length > 0) {
                     // Get latest telemetry per device
                     const latestByDevice = new Map<string, BalloonData>();
                     data.forEach((row: any) => {
@@ -67,10 +69,15 @@ export default function MissionMap({ projection = 'globe', onProjectionChange }:
                             });
                         }
                     });
-                    setBalloonData(Array.from(latestByDevice.values()));
+                    const balloons = Array.from(latestByDevice.values());
+                    console.log('Processed balloons for map:', balloons);
+                    setBalloonData(balloons);
+                } else {
+                    console.log('No active balloons found in last hour');
+                    setBalloonData([]);
                 }
             } catch (error) {
-                console.debug('Supabase fetch error:', error);
+                console.error('Supabase fetch error:', error);
             }
         }
 
