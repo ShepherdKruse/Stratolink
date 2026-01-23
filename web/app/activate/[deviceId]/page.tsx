@@ -157,10 +157,18 @@ export default function ActivatePage({ params }: PageProps) {
             // Redirect to dashboard with ride along mode
             router.push(`/dashboard?mode=ride_along&balloon=${deviceId}`);
         } else {
-            alert(result.error || 'Launch failed');
+            // Show error in a more user-friendly way
+            const errorMessage = result.error || 'Launch failed';
             setIsActivating(false);
             setIsHolding(false);
             setHoldProgress(0);
+            
+            // For development, show helpful message
+            if (errorMessage.includes('Test device PIN')) {
+                alert(`${errorMessage}\n\nUse this PIN to activate the device.`);
+            } else {
+                alert(errorMessage);
+            }
         }
     };
 
