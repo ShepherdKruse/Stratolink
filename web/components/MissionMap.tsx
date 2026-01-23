@@ -79,10 +79,11 @@ export default function MissionMap({ projection = 'globe', onProjectionChange, b
             >
                 {/* Balloon markers with 3D visualization */}
                 <Source id="balloons" type="geojson" data={balloonGeoJSON}>
-                    {/* Glowing cyan dots at balloon positions */}
+                    {/* Glowing cyan dots for active balloons (altitude > 100m) */}
                     <Layer
-                        id="balloon-markers"
+                        id="balloon-markers-active"
                         type="circle"
+                        filter={['>', ['get', 'altitude'], 100]}
                         paint={{
                             'circle-color': '#00ffff',
                             'circle-radius': [
@@ -97,6 +98,21 @@ export default function MissionMap({ projection = 'globe', onProjectionChange, b
                             'circle-stroke-color': '#00ffff',
                             'circle-stroke-opacity': 0.5,
                             'circle-blur': 0.5,
+                        }}
+                    />
+                    
+                    {/* Gray dots for landed/inactive balloons (altitude <= 100m) */}
+                    <Layer
+                        id="balloon-markers-landed"
+                        type="circle"
+                        filter={['<=', ['get', 'altitude'], 100]}
+                        paint={{
+                            'circle-color': '#888888',
+                            'circle-radius': 6,
+                            'circle-opacity': 0.7,
+                            'circle-stroke-width': 1,
+                            'circle-stroke-color': '#666666',
+                            'circle-stroke-opacity': 0.5,
                         }}
                     />
                     
