@@ -7,9 +7,10 @@ interface MissionTimelineProps {
     endTime: Date;
     currentTime: Date;
     onChange: (timestamp: Date) => void;
+    isInsideSidebar?: boolean;
 }
 
-export default function MissionTimeline({ startTime, endTime, currentTime, onChange }: MissionTimelineProps) {
+export default function MissionTimeline({ startTime, endTime, currentTime, onChange, isInsideSidebar = false }: MissionTimelineProps) {
     if (!startTime || !endTime || !currentTime) {
         return null;
     }
@@ -31,55 +32,74 @@ export default function MissionTimeline({ startTime, endTime, currentTime, onCha
         onChange(new Date(newTimestamp));
     };
 
-    return (
-        <div className="fixed bottom-3 left-1/2 transform -translate-x-1/2 z-30 w-[70%] max-w-3xl">
-            <div className="bg-[#1a1a1a]/95 border border-[#333] p-3">
-                {/* Top row: metadata */}
-                <div className="flex items-baseline justify-between mb-2 text-[10px] font-mono">
-                    <span className="text-[#666]">
-                        {format(startTime, 'yyyy-MM-dd HH:mm')}
-                    </span>
-                    <span className="text-[#e5e5e5] font-semibold">
-                        {format(currentTime, 'HH:mm:ss')} UTC
-                    </span>
-                    <span className="text-[#666]">
-                        {format(endTime, 'yyyy-MM-dd HH:mm')}
-                    </span>
-                </div>
+    // Shared timeline content
+    const timelineContent = (
+        <>
+            {/* Top row: metadata */}
+            <div className="flex items-baseline justify-between mb-2 text-[10px] font-mono">
+                <span className="text-[#666]">
+                    {format(startTime, 'yyyy-MM-dd HH:mm')}
+                </span>
+                <span className="text-[#e5e5e5] font-semibold">
+                    {format(currentTime, 'HH:mm:ss')} UTC
+                </span>
+                <span className="text-[#666]">
+                    {format(endTime, 'yyyy-MM-dd HH:mm')}
+                </span>
+            </div>
 
-                {/* Scrubber */}
-                <div className="relative h-4 flex items-center">
-                    {/* Track background */}
-                    <div className="absolute inset-x-0 h-[2px] bg-[#333]">
-                        {/* Progress fill */}
-                        <div 
-                            className="h-full bg-[#4a90d9]" 
-                            style={{ width: `${progress}%` }}
-                        />
-                    </div>
-                    {/* Input range - invisible but interactive */}
-                    <input
-                        type="range"
-                        min="0"
-                        max="100"
-                        step="0.1"
-                        value={progress}
-                        onChange={handleChange}
-                        className="absolute inset-0 w-full opacity-0 cursor-pointer"
-                    />
-                    {/* Thumb indicator */}
+            {/* Scrubber */}
+            <div className="relative h-4 flex items-center">
+                {/* Track background */}
+                <div className="absolute inset-x-0 h-[2px] bg-[#333]">
+                    {/* Progress fill */}
                     <div 
-                        className="absolute w-2 h-2 bg-[#4a90d9] border border-[#1a1a1a] pointer-events-none"
-                        style={{ left: `calc(${progress}% - 4px)` }}
+                        className="h-full bg-[#4a90d9]" 
+                        style={{ width: `${progress}%` }}
                     />
                 </div>
+                {/* Input range - invisible but interactive */}
+                <input
+                    type="range"
+                    min="0"
+                    max="100"
+                    step="0.1"
+                    value={progress}
+                    onChange={handleChange}
+                    className="absolute inset-0 w-full opacity-0 cursor-pointer"
+                />
+                {/* Thumb indicator */}
+                <div 
+                    className="absolute w-2 h-2 bg-[#4a90d9] border border-[#1a1a1a] pointer-events-none"
+                    style={{ left: `calc(${progress}% - 4px)` }}
+                />
+            </div>
 
-                {/* Bottom row: stats */}
-                <div className="flex items-baseline justify-between mt-2 text-[9px] font-mono text-[#666]">
-                    <span>Duration: {durationHrs}h {durationMins}m</span>
-                    <span>Position: {progress.toFixed(1)}%</span>
-                    <span>Points: {Math.floor(progress)}+</span>
+            {/* Bottom row: stats */}
+            <div className="flex items-baseline justify-between mt-2 text-[9px] font-mono text-[#666]">
+                <span>Duration: {durationHrs}h {durationMins}m</span>
+                <span>Position: {progress.toFixed(1)}%</span>
+                <span>Points: {Math.floor(progress)}+</span>
+            </div>
+        </>
+    );
+
+    // Mobile: render inside sidebar, Desktop: floating at bottom
+    if (isInsideSidebar) {
+        return (
+            <div className="w-full">
+                <div className="bg-[#1a1a1a] border-b border-[#333] p-3">
+                    {timelineContent}
                 </div>
+            </div>
+        );
+    }
+
+    // Desktop: Floating at bottom center
+    return (
+        <div className="hidden md:block fixed bottom-3 left-1/2 transform -translate-x-1/2 z-30 w-[70%] max-w-3xl">
+            <div className="bg-[#1a1a1a]/95 border border-[#333] p-3">
+                {timelineContent}
             </div>
         </div>
     );

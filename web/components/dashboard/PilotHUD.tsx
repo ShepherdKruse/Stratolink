@@ -43,9 +43,39 @@ export default function PilotHUD({ activeBalloonId, balloonData, onExit, onToggl
     };
 
     return (
-        <div className={`absolute inset-0 pointer-events-none z-20 transition-transform duration-300 ${isSidebarOpen ? 'translate-x-[-260px]' : ''}`}>
-            {/* Top Left: Primary Data Panel */}
-            <div className="absolute top-3 left-3">
+        <div className={`absolute inset-0 pointer-events-none z-20 transition-transform duration-300 ${isSidebarOpen ? 'md:translate-x-[-260px]' : ''}`}>
+            {/* Mobile: Compact Top Bar */}
+            <div className="md:hidden absolute top-4 left-4 right-4 flex items-center justify-between gap-2 pointer-events-auto">
+                {/* Altitude Widget */}
+                <div className="bg-[#1a1a1a]/95 border border-[#333] px-3 py-2 flex-1">
+                    <div className="text-[9px] font-semibold text-[#666] uppercase tracking-wider mb-0.5">Altitude</div>
+                    <div className="font-mono text-[12px] text-[#e5e5e5] font-semibold">
+                        {(altitudeFt / 1000).toFixed(1)}k ft
+                    </div>
+                </div>
+                
+                {/* Battery Widget */}
+                <div className="bg-[#1a1a1a]/95 border border-[#333] px-3 py-2 flex-1">
+                    <div className="text-[9px] font-semibold text-[#666] uppercase tracking-wider mb-0.5">Power</div>
+                    <div className="font-mono text-[12px] text-[#e5e5e5] font-semibold">
+                        {batteryVoltage.toFixed(2)}V
+                    </div>
+                    <div className={`text-[9px] font-mono ${batteryPercentage > 30 ? 'text-[#4a9]' : batteryPercentage > 15 ? 'text-[#b84]' : 'text-[#c44]'}`}>
+                        {batteryPercentage.toFixed(0)}%
+                    </div>
+                </div>
+
+                {/* Exit Button */}
+                <button
+                    onClick={onExit}
+                    className="bg-[#1a1a1a]/95 border border-[#333] hover:border-[#c44] text-[#999] hover:text-[#c44] px-3 py-2 text-[10px] font-mono transition-colors"
+                >
+                    Exit
+                </button>
+            </div>
+
+            {/* Desktop: Top Left: Primary Data Panel */}
+            <div className="hidden md:block absolute top-3 left-3">
                 <div className="bg-[#1a1a1a]/95 border border-[#333] p-3 min-w-[200px]">
                     {/* Device ID */}
                     <div className="flex items-baseline justify-between border-b border-[#333] pb-2 mb-2">
@@ -89,8 +119,8 @@ export default function PilotHUD({ activeBalloonId, balloonData, onExit, onToggl
                 </div>
             </div>
 
-            {/* Top Right: Controls + Power */}
-            <div className="absolute top-3 right-3 space-y-2">
+            {/* Desktop: Top Right: Controls + Power */}
+            <div className="hidden md:block absolute top-3 right-3 space-y-2">
                 {/* Exit button */}
                 <button
                     onClick={onExit}
@@ -138,8 +168,8 @@ export default function PilotHUD({ activeBalloonId, balloonData, onExit, onToggl
                 </div>
             </div>
 
-            {/* Right Side: Altitude Scale */}
-            <div className="absolute top-1/2 right-3 transform -translate-y-1/2">
+            {/* Desktop: Right Side: Altitude Scale */}
+            <div className="hidden md:block absolute top-1/2 right-3 transform -translate-y-1/2">
                 <div className="bg-[#1a1a1a]/95 border border-[#333] p-2">
                     <div className="text-[9px] font-semibold text-[#666] uppercase tracking-wider mb-2 text-center">ALT (ft)</div>
                     <div className="relative w-8 h-[180px]">
@@ -167,8 +197,8 @@ export default function PilotHUD({ activeBalloonId, balloonData, onExit, onToggl
                 </div>
             </div>
 
-            {/* Bottom Left: Heading/Track */}
-            <div className="absolute bottom-3 left-3">
+            {/* Desktop: Bottom Left: Heading/Track */}
+            <div className="hidden md:block absolute bottom-3 left-3">
                 <div className="bg-[#1a1a1a]/95 border border-[#333] p-3">
                     <div className="text-[10px] font-semibold text-[#666] uppercase tracking-wider mb-2">Track</div>
                     <div className="font-mono text-[11px] space-y-1">

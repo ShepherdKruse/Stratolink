@@ -223,6 +223,7 @@ export default function DashboardClient() {
                     onActiveBalloonChange={setActiveBalloonId}
                     flightPathData={flightPathData}
                     playbackTime={playbackTime}
+                    isSidebarOpen={isSidebarOpen}
                 />
             </div>
 
@@ -248,16 +249,23 @@ export default function DashboardClient() {
                         pressure: 120 + Math.random() * 20,
                         rssi: -112 + Math.random() * 10,
                     }))}
+                    timelineProps={flightPathData.length > 0 ? {
+                        startTime: timelineStart,
+                        endTime: timelineEnd,
+                        currentTime: currentPlaybackTime,
+                        onChange: setPlaybackTime,
+                    } : null}
                 />
             )}
 
-            {/* Mission Timeline Scrubber */}
+            {/* Mission Timeline Scrubber - Desktop Only (mobile renders inside sidebar) */}
             {activeBalloonId && flightPathData.length > 0 && (
                 <MissionTimeline
                     startTime={timelineStart}
                     endTime={timelineEnd}
                     currentTime={currentPlaybackTime}
                     onChange={setPlaybackTime}
+                    isInsideSidebar={false}
                 />
             )}
 

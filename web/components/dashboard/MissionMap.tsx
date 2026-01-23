@@ -28,6 +28,7 @@ interface MissionMapProps {
     onActiveBalloonChange?: (balloonId: string | null) => void;
     flightPathData?: FlightPathPoint[];
     playbackTime?: Date | null;
+    isSidebarOpen?: boolean;
 }
 
 export default function MissionMap({ 
@@ -37,7 +38,8 @@ export default function MissionMap({
     activeBalloonId = null,
     onActiveBalloonChange,
     flightPathData = [],
-    playbackTime = null
+    playbackTime = null,
+    isSidebarOpen = false
 }: MissionMapProps) {
     const mapRef = useRef<MapRef>(null);
     const [viewState, setViewState] = useState({
@@ -48,14 +50,28 @@ export default function MissionMap({
         bearing: 0,
     });
 
+    // Track mobile state for responsive behavior
+    const [isMobile, setIsMobile] = useState(false);
+    
+    useEffect(() => {
+        const checkMobile = () => {
+            setIsMobile(window.innerWidth < 768);
+        };
+        checkMobile();
+        window.addEventListener('resize', checkMobile);
+        return () => window.removeEventListener('resize', checkMobile);
+    }, []);
+
     const enterRideAlongMode = useCallback((balloon: BalloonData) => {
         if (!mapRef.current) return;
         
         const bearing = balloon.velocity_heading ?? 90;
+        // Mobile: zoom 10 (wider field of view), Desktop: zoom 12 (closer)
+        const zoom = isMobile ? 10 : 12;
         
         mapRef.current.flyTo({
             center: [balloon.lon, balloon.lat],
-            zoom: 12,
+            zoom: zoom,
             pitch: 75,
             bearing: bearing,
             duration: 2000,
@@ -64,7 +80,7 @@ export default function MissionMap({
         if (onActiveBalloonChange) {
             onActiveBalloonChange(balloon.id);
         }
-    }, [onActiveBalloonChange]);
+    }, [onActiveBalloonChange, isMobile]);
 
     useEffect(() => {
         if (!activeBalloonId && mapRef.current) {
@@ -184,6 +200,15 @@ export default function MissionMap({
         };
     }, [activeBalloonId, flightPathData, playbackTime]);
 
+    // Calculate padding for mobile when sidebar is open
+    const mapPadding = useMemo(() => {
+        if (isMobile && isSidebarOpen && activeBalloonId) {
+            // Push map center up so balloon is visible above bottom sheet
+            return { bottom: 300, top: 0, left: 0, right: 0 };
+        }
+        return undefined;
+    }, [isMobile, isSidebarOpen, activeBalloonId]);
+
     return (
         <div className="w-full h-full relative">
             <Map
@@ -195,6 +220,7 @@ export default function MissionMap({
                 style={{ width: '100%', height: '100%' }}
                 mapStyle="mapbox://styles/mapbox/dark-v11"
                 projection={projection === 'globe' ? 'globe' : 'mercator'}
+                padding={mapPadding}
                 fog={projection === 'globe' ? {
                     color: 'rgb(20, 20, 20)',
                     'high-color': 'rgb(10, 10, 10)',

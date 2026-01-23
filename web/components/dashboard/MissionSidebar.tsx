@@ -4,6 +4,8 @@ import { useEffect } from 'react';
 import Payload3DViewer from './Payload3DViewer';
 import MetricSparkline from './MetricSparkline';
 
+import MissionTimeline from './MissionTimeline';
+
 interface MissionSidebarProps {
     isOpen: boolean;
     onClose: () => void;
@@ -15,9 +17,15 @@ interface MissionSidebarProps {
         pressure?: number;
         rssi?: number;
     }>;
+    timelineProps?: {
+        startTime: Date;
+        endTime: Date;
+        currentTime: Date;
+        onChange: (timestamp: Date) => void;
+    } | null;
 }
 
-export default function MissionSidebar({ isOpen, onClose, balloonId, telemetryData = [] }: MissionSidebarProps) {
+export default function MissionSidebar({ isOpen, onClose, balloonId, telemetryData = [], timelineProps }: MissionSidebarProps) {
     // Generate mock data if no telemetry data provided
     const generateMockData = (baseValue: number, variance: number, count: number = 24) => {
         const now = new Date();
@@ -75,20 +83,28 @@ export default function MissionSidebar({ isOpen, onClose, balloonId, telemetryDa
 
     return (
         <>
-            {/* Backdrop - subtle */}
+            {/* Backdrop - Desktop only (mobile bottom sheet doesn't need backdrop) */}
             {isOpen && (
                 <div
-                    className="fixed inset-0 bg-black/60 z-30"
+                    className="hidden md:block fixed inset-0 bg-black/60 z-30"
                     onClick={onClose}
                 />
             )}
 
-            {/* Sidebar */}
+            {/* Sidebar - Mobile: Bottom Sheet, Desktop: Side Panel */}
             <div
-                className={`fixed top-0 right-0 h-full w-[520px] bg-[#1a1a1a] border-l border-[#333] z-40 transform transition-transform duration-300 ${
-                    isOpen ? 'translate-x-0' : 'translate-x-full'
-                } flex flex-col`}
+                className={`fixed bottom-0 left-0 w-full h-[50vh] z-40 bg-[#1a1a1a] border-t border-[#333] rounded-t-3xl transform transition-transform duration-300 flex flex-col
+                    md:fixed md:right-0 md:top-0 md:bottom-auto md:left-auto md:w-[520px] md:h-full md:rounded-t-none md:rounded-l-3xl md:border-t-0 md:border-l ${
+                    isOpen 
+                        ? 'translate-y-0 md:translate-y-0 md:translate-x-0' 
+                        : 'translate-y-full md:translate-y-0 md:translate-x-full'
+                    }`}
             >
+                {/* Drag Handle - Mobile Only */}
+                <div className="md:hidden flex justify-center pt-2 pb-1">
+                    <div className="w-12 h-1 bg-[#333] rounded-full" />
+                </div>
+
                 {/* Header - compact */}
                 <div className="flex items-center justify-between p-3 border-b border-[#333]">
                     <div>
@@ -111,10 +127,22 @@ export default function MissionSidebar({ isOpen, onClose, balloonId, telemetryDa
                     </button>
                 </div>
 
+                {/* Mission Timeline - Mobile Only (inside sidebar) */}
+                {timelineProps && (
+                    <div className="md:hidden border-b border-[#333]">
+                        <MissionTimeline
+                            startTime={timelineProps.startTime}
+                            endTime={timelineProps.endTime}
+                            currentTime={timelineProps.currentTime}
+                            onChange={timelineProps.onChange}
+                        />
+                    </div>
+                )}
+
                 {/* Content - Scrollable */}
                 <div className="flex-1 overflow-y-auto">
-                    {/* Two-column layout for density */}
-                    <div className="grid grid-cols-2 gap-px bg-[#333]">
+                    {/* Two-column layout for density - Desktop, Single column on mobile */}
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-[#333]">
                         {/* Left Column: 3D View + Telemetry */}
                         <div className="bg-[#1a1a1a]">
                             {/* PCB 3D Viewer */}
