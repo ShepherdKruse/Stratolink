@@ -1,202 +1,142 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+@import "tw-animate-css";
 
+@custom-variant dark (&:is(.dark *));
+
+/* Updated to atmospheric, scientific color palette with pale blues and soft grays */
 :root {
-    /* Tufte-inspired gray palette */
-    --color-primary: #333;
-    --color-secondary: #666;
-    --color-tertiary: #999;
-    --color-muted: #ccc;
-    --color-bg: #fafafa;
-    --color-bg-alt: #f5f5f5;
-    --color-border: #e5e5e5;
-    --color-accent: #4a90d9;
-    --color-accent-muted: #6ba3e0;
-    --color-danger: #c44;
-    --color-success: #4a9;
-    --color-warning: #b84;
-    
-    /* Dark mode - functional, not decorative */
-    --color-dark-bg: #1a1a1a;
-    --color-dark-bg-alt: #242424;
-    --color-dark-border: #333;
-    --color-dark-primary: #e5e5e5;
-    --color-dark-secondary: #999;
-    --color-dark-tertiary: #666;
+  /* Off-white background with slight warmth */
+  --background: oklch(0.99 0.001 240);
+  --foreground: oklch(0.25 0.01 250);
+
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.25 0.01 250);
+
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.25 0.01 250);
+
+  /* Deep charcoal primary */
+  --primary: oklch(0.28 0.015 250);
+  --primary-foreground: oklch(0.99 0.001 240);
+
+  /* Very light gray secondary */
+  --secondary: oklch(0.96 0.002 240);
+  --secondary-foreground: oklch(0.25 0.01 250);
+
+  --muted: oklch(0.94 0.003 240);
+  --muted-foreground: oklch(0.48 0.01 250);
+
+  /* Soft sky blue accent - restrained and atmospheric */
+  --accent: oklch(0.92 0.015 230);
+  --accent-foreground: oklch(0.22 0.03 230);
+
+  --destructive: oklch(0.577 0.245 27.325);
+  --destructive-foreground: oklch(0.99 0 0);
+
+  /* Subtle, thin borders */
+  --border: oklch(0.91 0.003 240);
+  --input: oklch(0.91 0.003 240);
+  --ring: oklch(0.28 0.015 250);
+
+  --chart-1: oklch(0.58 0.05 230);
+  --chart-2: oklch(0.55 0.04 210);
+  --chart-3: oklch(0.62 0.035 240);
+  --chart-4: oklch(0.6 0.04 220);
+  --chart-5: oklch(0.64 0.045 235);
+
+  /* Minimal radius for precise, technical feel */
+  --radius: 0.25rem;
+
+  --sidebar: oklch(0.99 0.001 240);
+  --sidebar-foreground: oklch(0.25 0.01 250);
+  --sidebar-primary: oklch(0.28 0.015 250);
+  --sidebar-primary-foreground: oklch(0.99 0.001 240);
+  --sidebar-accent: oklch(0.96 0.002 240);
+  --sidebar-accent-foreground: oklch(0.25 0.01 250);
+  --sidebar-border: oklch(0.91 0.003 240);
+  --sidebar-ring: oklch(0.48 0.01 250);
 }
 
-* {
-    box-sizing: border-box;
-    padding: 0;
-    margin: 0;
+.dark {
+  --background: oklch(0.15 0.01 250);
+  --foreground: oklch(0.98 0 0);
+  --card: oklch(0.15 0.01 250);
+  --card-foreground: oklch(0.98 0 0);
+  --popover: oklch(0.15 0.01 250);
+  --popover-foreground: oklch(0.98 0 0);
+  --primary: oklch(0.98 0 0);
+  --primary-foreground: oklch(0.25 0.01 250);
+  --secondary: oklch(0.25 0.015 250);
+  --secondary-foreground: oklch(0.98 0 0);
+  --muted: oklch(0.25 0.015 250);
+  --muted-foreground: oklch(0.65 0.01 250);
+  --accent: oklch(0.3 0.02 220);
+  --accent-foreground: oklch(0.85 0.03 220);
+  --destructive: oklch(0.396 0.141 25.723);
+  --destructive-foreground: oklch(0.985 0 0);
+  --border: oklch(0.25 0.015 250);
+  --input: oklch(0.25 0.015 250);
+  --ring: oklch(0.55 0.01 250);
+  --chart-1: oklch(0.55 0.08 220);
+  --chart-2: oklch(0.6 0.06 200);
+  --chart-3: oklch(0.5 0.05 240);
+  --chart-4: oklch(0.65 0.07 210);
+  --chart-5: oklch(0.6 0.06 230);
+  --sidebar: oklch(0.2 0.01 250);
+  --sidebar-foreground: oklch(0.98 0 0);
+  --sidebar-primary: oklch(0.55 0.08 220);
+  --sidebar-primary-foreground: oklch(0.98 0 0);
+  --sidebar-accent: oklch(0.25 0.015 250);
+  --sidebar-accent-foreground: oklch(0.98 0 0);
+  --sidebar-border: oklch(0.25 0.015 250);
+  --sidebar-ring: oklch(0.55 0.01 250);
 }
 
-html,
-body {
-    max-width: 100vw;
-    overflow-x: hidden;
-    height: 100%;
-    background: var(--color-dark-bg);
-    color: var(--color-dark-primary);
+@theme inline {
+  --font-sans: "Inter", "Inter Fallback", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
 }
 
-body {
-    /* System fonts - fast, readable, unfashionable */
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
-        Ubuntu, Cantarell, 'Helvetica Neue', Arial, sans-serif;
-    font-size: 12px;
-    line-height: 1.4;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground antialiased;
+  }
 }
-
-/* Utilitarian form controls */
-input[type="range"] {
-    -webkit-appearance: none;
-    appearance: none;
-    background: transparent;
-    cursor: pointer;
-    height: 16px;
-}
-
-input[type="range"]::-webkit-slider-runnable-track {
-    height: 2px;
-    background: var(--color-dark-border);
-}
-
-input[type="range"]::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    appearance: none;
-    width: 10px;
-    height: 10px;
-    background: var(--color-accent);
-    border: none;
-    margin-top: -4px;
-}
-
-input[type="range"]::-moz-range-track {
-    height: 2px;
-    background: var(--color-dark-border);
-}
-
-input[type="range"]::-moz-range-thumb {
-    width: 10px;
-    height: 10px;
-    background: var(--color-accent);
-    border: none;
-    border-radius: 0;
-}
-
-/* Functional button styles */
-button {
-    font-family: inherit;
-    font-size: 11px;
-    cursor: pointer;
-}
-
-/* Monospace for data */
-.font-mono {
-    font-family: 'SF Mono', 'Monaco', 'Inconsolata', 'Fira Mono', 'Droid Sans Mono',
-        'Source Code Pro', 'Menlo', Consolas, monospace;
-    font-size: 11px;
-}
-
-/* Dense data tables */
-.data-table {
-    font-size: 11px;
-    border-collapse: collapse;
-}
-
-.data-table th,
-.data-table td {
-    padding: 2px 8px;
-    text-align: left;
-    border-bottom: 1px solid var(--color-dark-border);
-}
-
-.data-table th {
-    font-weight: 600;
-    color: var(--color-dark-secondary);
-    text-transform: uppercase;
-    font-size: 10px;
-    letter-spacing: 0.5px;
-}
-
-/* Scrollbar styling - minimal */
-::-webkit-scrollbar {
-    width: 6px;
-    height: 6px;
-}
-
-::-webkit-scrollbar-track {
-    background: transparent;
-}
-
-::-webkit-scrollbar-thumb {
-    background: var(--color-dark-border);
-}
-
-::-webkit-scrollbar-thumb:hover {
-    background: var(--color-dark-tertiary);
-}
-
-/* Log styling */
-.log-entry {
-    font-family: 'SF Mono', monospace;
-    font-size: 10px;
-    line-height: 1.5;
-    padding: 1px 0;
-}
-
-.log-timestamp {
-    color: var(--color-dark-tertiary);
-}
-
-.log-info { color: var(--color-dark-secondary); }
-.log-success { color: var(--color-success); }
-.log-warning { color: var(--color-warning); }
-.log-error { color: var(--color-danger); }
-
-/* Utility classes for the design system */
-.text-primary { color: var(--color-dark-primary); }
-.text-secondary { color: var(--color-dark-secondary); }
-.text-tertiary { color: var(--color-dark-tertiary); }
-.text-accent { color: var(--color-accent); }
-
-.bg-base { background: var(--color-dark-bg); }
-.bg-alt { background: var(--color-dark-bg-alt); }
-.border-base { border-color: var(--color-dark-border); }
-
-/* Label styling - weight over size */
-.label {
-    font-size: 10px;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    color: var(--color-dark-secondary);
-}
-
-/* Value styling */
-.value {
-    font-family: 'SF Mono', monospace;
-    font-size: 11px;
-    color: var(--color-dark-primary);
-}
-
-.value-large {
-    font-size: 14px;
-    font-weight: 600;
-}
-
-/* Panel borders - subtle */
-.panel {
-    border: 1px solid var(--color-dark-border);
-    background: var(--color-dark-bg-alt);
-}
-
-/* Tight spacing helpers */
-.gap-tight { gap: 4px; }
-.gap-normal { gap: 8px; }
-.p-tight { padding: 4px; }
-.p-normal { padding: 8px; }
