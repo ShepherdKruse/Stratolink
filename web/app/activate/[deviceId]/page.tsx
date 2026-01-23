@@ -154,8 +154,10 @@ export default function ActivatePage({ params }: PageProps) {
         );
 
         if (result.success) {
-            // Redirect to dashboard with ride along mode
-            router.push(`/dashboard?mode=ride_along&balloon=${deviceId}`);
+            // Small delay to show confetti
+            setTimeout(() => {
+                router.push(`/dashboard?mode=ride_along&balloon=${deviceId}`);
+            }, 1000);
         } else {
             // Show error in a more user-friendly way
             const errorMessage = result.error || 'Launch failed';
@@ -163,12 +165,8 @@ export default function ActivatePage({ params }: PageProps) {
             setIsHolding(false);
             setHoldProgress(0);
             
-            // For development, show helpful message
-            if (errorMessage.includes('Test device PIN')) {
-                alert(`${errorMessage}\n\nUse this PIN to activate the device.`);
-            } else {
-                alert(errorMessage);
-            }
+            // Show error with helpful context
+            alert(`Activation Failed\n\n${errorMessage}\n\n${errorMessage.includes('Device not found') ? 'Note: In development mode, devices should be auto-created. If you see this error, check the browser console for details.' : ''}`);
         }
     };
 
