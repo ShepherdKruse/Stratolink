@@ -33,7 +33,7 @@ npm install
 
 1. Open your Supabase project dashboard
 2. Navigate to SQL Editor
-3. Copy and paste the contents of `web/supabase_schema.sql`
+3. Copy and paste the contents of `web/lib/supabase/schema.sql`
 4. Execute the SQL to create the telemetry table and indexes
 
 ## Additional Configuration
