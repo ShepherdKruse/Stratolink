@@ -12,31 +12,43 @@ export default function MissionControl() {
     // Fetch balloon counts from Supabase
     useEffect(() => {
         async function fetchFleetStatus() {
-            const supabase = createClient();
-            
-            // Get active balloons (recent telemetry within last hour)
-            const oneHourAgo = new Date(Date.now() - 60 * 60 * 1000).toISOString();
-            
-            const { data: active, error: activeError } = await supabase
-                .from('telemetry')
-                .select('device_id', { count: 'exact', head: true })
-                .gte('time', oneHourAgo);
-            
-            if (!activeError && active) {
-                setActiveCount(active.length || 0);
+            // Check if Supabase is configured
+            const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+            if (!supabaseUrl || supabaseUrl.includes('your_supabase') || supabaseUrl === '') {
+                // Supabase not configured yet, skip fetching
+                return;
             }
 
-            // Get landed balloons (altitude < 100m in last 24 hours)
-            const oneDayAgo = new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString();
-            
-            const { data: landed, error: landedError } = await supabase
-                .from('telemetry')
-                .select('device_id', { count: 'exact', head: true })
-                .gte('time', oneDayAgo)
-                .lt('altitude_m', 100);
-            
-            if (!landedError && landed) {
-                setLandedCount(landed.length || 0);
+            try {
+                const supabase = createClient();
+                
+                // Get active balloons (recent telemetry within last hour)
+                const oneHourAgo = new Date(Date.now() - 60 * 60 * 1000).toISOString();
+                
+                const { data: active, error: activeError } = await supabase
+                    .from('telemetry')
+                    .select('device_id', { count: 'exact', head: true })
+                    .gte('time', oneHourAgo);
+                
+                if (!activeError && active) {
+                    setActiveCount(active.length || 0);
+                }
+
+                // Get landed balloons (altitude < 100m in last 24 hours)
+                const oneDayAgo = new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString();
+                
+                const { data: landed, error: landedError } = await supabase
+                    .from('telemetry')
+                    .select('device_id', { count: 'exact', head: true })
+                    .gte('time', oneDayAgo)
+                    .lt('altitude_m', 100);
+                
+                if (!landedError && landed) {
+                    setLandedCount(landed.length || 0);
+                }
+            } catch (error) {
+                // Silently handle Supabase errors if not configured
+                console.debug('Supabase not configured or error:', error);
             }
         }
 
