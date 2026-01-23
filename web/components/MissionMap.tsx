@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useCallback } from 'react';
 import Map, { Source, Layer } from 'react-map-gl/mapbox';
 import 'mapbox-gl/dist/mapbox-gl.css';
 
@@ -24,6 +24,19 @@ export default function MissionMap({ projection = 'globe', onProjectionChange }:
         pitch: 45,
         bearing: 0,
     });
+
+    // Adjust view state when projection changes
+    const handleViewStateChange = useCallback((evt: any) => {
+        setViewState(evt.viewState);
+    }, []);
+
+    // Reset pitch when switching to 2D
+    const adjustedViewState = useMemo(() => {
+        if (projection === 'mercator') {
+            return { ...viewState, pitch: 0 };
+        }
+        return viewState;
+    }, [viewState, projection]);
 
     // Placeholder balloon data - replace with real data from Supabase
     const balloonData: BalloonData[] = useMemo(() => [
@@ -54,20 +67,21 @@ export default function MissionMap({ projection = 'globe', onProjectionChange }:
     return (
         <div className="w-full h-full relative">
             <Map
-                {...viewState}
-                onMove={(evt) => setViewState(evt.viewState)}
+                key={projection}
+                {...adjustedViewState}
+                onMove={handleViewStateChange}
                 mapboxAccessToken={process.env.NEXT_PUBLIC_MAPBOX_TOKEN}
                 style={{ width: '100%', height: '100%' }}
                 mapStyle="mapbox://styles/mapbox/dark-v11"
                 projection={projection === 'globe' ? { name: 'globe' } : undefined}
-                fog={{
+                fog={projection === 'globe' ? {
                     color: 'rgb(4, 7, 37)',
                     'high-color': 'rgb(0, 0, 0)',
                     'horizon-blend': 0.02,
                     'space-color': 'rgb(0, 0, 0)',
                     'star-intensity': 0.6,
-                }}
-                terrain={{ source: 'mapbox-dem', exaggeration: 1.5 }}
+                } : undefined}
+                terrain={projection === 'globe' ? { source: 'mapbox-dem', exaggeration: 1.5 } : undefined}
             >
                 {/* Balloon markers with 3D visualization */}
                 <Source id="balloons" type="geojson" data={balloonGeoJSON}>
