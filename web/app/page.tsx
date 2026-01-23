@@ -67,7 +67,7 @@ export default function MissionControl() {
 
                 // Also fetch balloon positions for the map
                 // Get all balloons (active and landed) within last 24 hours
-                const oneDayAgo = new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString();
+                // Reuse oneDayAgo from above
                 const { data: balloons, error: balloonsError } = await supabase
                     .from('telemetry')
                     .select('device_id, lat, lon, altitude_m, time')
