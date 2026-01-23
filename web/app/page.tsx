@@ -30,13 +30,13 @@ export default function MissionControl() {
             try {
                 const supabase = createClient();
                 
-                // Get active balloons (recent telemetry within last hour)
-                const oneHourAgo = new Date(Date.now() - 60 * 60 * 1000).toISOString();
+                // Get active balloons (recent telemetry within last 2 hours)
+                const twoHoursAgo = new Date(Date.now() - 2 * 60 * 60 * 1000).toISOString();
                 
                 const { data: active, error: activeError, count } = await supabase
                     .from('telemetry')
                     .select('device_id', { count: 'exact' })
-                    .gte('time', oneHourAgo)
+                    .gte('time', twoHoursAgo)
                     .gt('altitude_m', 100);
                 
                 if (!activeError) {
