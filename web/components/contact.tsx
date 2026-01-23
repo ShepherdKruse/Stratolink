@@ -36,7 +36,7 @@ export function Contact() {
   }
 
   return (
-    <section id="contact" className="py-24 sm:py-32">
+    <section id="contact" className="scroll-mt-20 py-24 sm:py-32">
       <div className="mx-auto max-w-5xl px-6 sm:px-8">
         <div className="mx-auto max-w-2xl">
           <h2 className="text-3xl font-light tracking-tight text-foreground sm:text-4xl">Contact</h2>

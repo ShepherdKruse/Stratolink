@@ -115,7 +115,7 @@ export function Hero() {
               size="lg"
               className="rounded-sm border border-primary/20 bg-primary px-8 py-6 text-base font-normal text-primary-foreground shadow-sm transition-all hover:bg-primary/90 hover:shadow-md"
             >
-              <Link href="#contact">Request Access</Link>
+              <Link href="#contact" className="scroll-smooth">Request Access</Link>
             </Button>
             <Button
               asChild
