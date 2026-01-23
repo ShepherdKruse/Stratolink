@@ -1,0 +1,109 @@
+'use client';
+
+import { useState, useMemo } from 'react';
+import Map, { Source, Layer } from 'react-map-gl/mapbox';
+import 'mapbox-gl/dist/mapbox-gl.css';
+
+interface MissionMapProps {
+    projection?: 'globe' | 'mercator';
+    onProjectionChange?: (projection: 'globe' | 'mercator') => void;
+}
+
+interface BalloonData {
+    id: string;
+    lat: number;
+    lon: number;
+    altitude_m: number;
+}
+
+export default function MissionMap({ projection = 'globe', onProjectionChange }: MissionMapProps) {
+    const [viewState, setViewState] = useState({
+        longitude: -75,
+        latitude: 40,
+        zoom: 3,
+        pitch: 45,
+        bearing: 0,
+    });
+
+    // Placeholder balloon data - replace with real data from Supabase
+    const balloonData: BalloonData[] = useMemo(() => [
+        // Example balloons (replace with real data)
+        // { id: '1', lat: 40.7128, lon: -74.0060, altitude_m: 15000 },
+        // { id: '2', lat: 34.0522, lon: -118.2437, altitude_m: 18000 },
+    ], []);
+
+    // Create GeoJSON for balloon positions (markers at altitude)
+    const balloonGeoJSON = useMemo(() => {
+        return {
+            type: 'FeatureCollection' as const,
+            features: balloonData.map((balloon) => ({
+                type: 'Feature' as const,
+                id: balloon.id,
+                geometry: {
+                    type: 'Point' as const,
+                    coordinates: [balloon.lon, balloon.lat],
+                },
+                properties: {
+                    altitude: balloon.altitude_m,
+                    deviceId: balloon.id,
+                },
+            })),
+        };
+    }, [balloonData]);
+
+    return (
+        <div className="w-full h-full relative">
+            <Map
+                {...viewState}
+                onMove={(evt) => setViewState(evt.viewState)}
+                mapboxAccessToken={process.env.NEXT_PUBLIC_MAPBOX_TOKEN}
+                style={{ width: '100%', height: '100%' }}
+                mapStyle="mapbox://styles/mapbox/dark-v11"
+                projection={projection === 'globe' ? { name: 'globe' } : undefined}
+                fog={{
+                    color: 'rgb(4, 7, 37)',
+                    'high-color': 'rgb(0, 0, 0)',
+                    'horizon-blend': 0.02,
+                    'space-color': 'rgb(0, 0, 0)',
+                    'star-intensity': 0.6,
+                }}
+                terrain={{ source: 'mapbox-dem', exaggeration: 1.5 }}
+            >
+                {/* Balloon markers with 3D visualization */}
+                <Source id="balloons" type="geojson" data={balloonGeoJSON}>
+                    {/* Glowing cyan dots at balloon positions */}
+                    <Layer
+                        id="balloon-markers"
+                        type="circle"
+                        paint={{
+                            'circle-color': '#00ffff',
+                            'circle-radius': [
+                                'interpolate',
+                                ['linear'],
+                                ['get', 'altitude'],
+                                0, 6,
+                                20000, 12
+                            ],
+                            'circle-opacity': 0.9,
+                            'circle-stroke-width': 2,
+                            'circle-stroke-color': '#00ffff',
+                            'circle-stroke-opacity': 0.5,
+                            'circle-blur': 0.5,
+                        }}
+                    />
+                    
+                    {/* White circles representing ground connection points */}
+                    <Layer
+                        id="balloon-ground"
+                        type="circle"
+                        paint={{
+                            'circle-color': '#ffffff',
+                            'circle-radius': 3,
+                            'circle-opacity': 0.4,
+                        }}
+                    />
+                </Source>
+            </Map>
+        </div>
+    );
+}

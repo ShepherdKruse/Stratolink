@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 * {
     box-sizing: border-box;
     padding: 0;
@@ -8,6 +12,7 @@ html,
 body {
     max-width: 100vw;
     overflow-x: hidden;
+    height: 100%;
 }
 
 body {
@@ -18,20 +23,7 @@ body {
     -moz-osx-font-smoothing: grayscale;
 }
 
-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 1rem;
-}
-
-th,
-td {
-    padding: 0.5rem;
-    text-align: left;
-    border-bottom: 1px solid #ddd;
-}
-
-th {
-    background-color: #f2f2f2;
-    font-weight: 600;
+#root {
+    height: 100vh;
+    width: 100vw;
 }
