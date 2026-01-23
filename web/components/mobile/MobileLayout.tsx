@@ -42,7 +42,7 @@ export default function MobileLayout({ initialBalloonId = null }: MobileLayoutPr
 
     // Get user location for "Nearest" calculation
     useEffect(() => {
-        if (navigator.geolocation) {
+        if (typeof window !== 'undefined' && navigator?.geolocation) {
             navigator.geolocation.getCurrentPosition(
                 (position) => {
                     setUserLocation({
@@ -60,6 +60,11 @@ export default function MobileLayout({ initialBalloonId = null }: MobileLayoutPr
     // Fetch balloon data
     useEffect(() => {
         async function fetchFleetStatus() {
+            // Skip if in iframe preview mode (no Supabase access needed)
+            if (typeof window !== 'undefined' && window.self !== window.top) {
+                return;
+            }
+            
             const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
             if (!supabaseUrl || supabaseUrl.includes('your_supabase') || supabaseUrl === '') {
                 return;
@@ -217,11 +222,17 @@ export default function MobileLayout({ initialBalloonId = null }: MobileLayoutPr
     const [flightPathData, setFlightPathData] = useState<Array<{ lat: number; lon: number; time: Date }>>([]);
     
     useEffect(() => {
-            async function fetchFlightPath() {
-                if (!selectedBalloonId) {
-                    setFlightPathData([]);
-                    return;
-                }
+        async function fetchFlightPath() {
+            if (!selectedBalloonId) {
+                setFlightPathData([]);
+                return;
+            }
+
+            // Skip if in iframe preview mode
+            if (typeof window !== 'undefined' && window.self !== window.top) {
+                setFlightPathData([]);
+                return;
+            }
 
             const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
             if (!supabaseUrl || supabaseUrl.includes('your_supabase') || supabaseUrl === '') {
@@ -272,6 +283,9 @@ export default function MobileLayout({ initialBalloonId = null }: MobileLayoutPr
     const handleCloseSheet = () => {
         setSelectedBalloonId(null);
     };
+
+    // Check if we're in an iframe (for showcase preview)
+    const isInIframe = typeof window !== 'undefined' && window.self !== window.top;
 
     return (
         <div className="w-screen h-screen relative overflow-hidden bg-[#1a1a1a]">

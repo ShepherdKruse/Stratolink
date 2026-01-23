@@ -67,29 +67,41 @@ export default function MobileRadar({ balloonData, onBalloonClick, userLocation,
             }
         };
 
+        // Skip device orientation in iframe context
+        if (typeof window === 'undefined' || window.self !== window.top) {
+            return;
+        }
+
         if (typeof DeviceOrientationEvent !== 'undefined' && typeof (DeviceOrientationEvent as any).requestPermission === 'function') {
             // iOS 13+ requires permission
             (DeviceOrientationEvent as any).requestPermission()
                 .then((response: string) => {
-                    if (response === 'granted') {
+                    if (response === 'granted' && typeof window !== 'undefined') {
                         window.addEventListener('deviceorientation', handleOrientation);
                     }
                 })
                 .catch(() => {
                     console.log('Compass permission denied');
                 });
-        } else {
+        } else if (typeof window !== 'undefined') {
             window.addEventListener('deviceorientation', handleOrientation);
         }
 
         return () => {
-            window.removeEventListener('deviceorientation', handleOrientation);
+            if (typeof window !== 'undefined') {
+                window.removeEventListener('deviceorientation', handleOrientation);
+            }
         };
     }, [compassEnabled]);
 
     // Get user location
     useEffect(() => {
-        if (navigator.geolocation) {
+        // Skip geolocation in iframe context
+        if (typeof window === 'undefined' || window.self !== window.top) {
+            return;
+        }
+        
+        if (typeof navigator !== 'undefined' && navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(
                 (position) => {
                     // Store in state or context if needed

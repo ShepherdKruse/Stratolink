@@ -37,10 +37,16 @@ export default function BottomSheet({
     const [isExpanded, setIsExpanded] = useState(false);
     
     useEffect(() => {
-        setSheetHeight(window.innerHeight);
-        const handleResize = () => setSheetHeight(window.innerHeight);
-        window.addEventListener('resize', handleResize);
-        return () => window.removeEventListener('resize', handleResize);
+        if (typeof window !== 'undefined') {
+            setSheetHeight(window.innerHeight);
+            const handleResize = () => {
+                if (typeof window !== 'undefined') {
+                    setSheetHeight(window.innerHeight);
+                }
+            };
+            window.addEventListener('resize', handleResize);
+            return () => window.removeEventListener('resize', handleResize);
+        }
     }, []);
 
     const PEEK_HEIGHT = sheetHeight * 0.25; // 25% peek

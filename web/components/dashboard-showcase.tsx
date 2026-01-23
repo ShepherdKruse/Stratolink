@@ -154,10 +154,11 @@ export function DashboardShowcase() {
                                         {/* Screen */}
                                         <div className="relative bg-[#1a1a1a] rounded-[1.5rem] overflow-hidden aspect-[9/19.5]">
                                             <iframe
-                                                src="/dashboard"
+                                                src="/dashboard?preview=mobile"
                                                 className="w-full h-full border-0 pointer-events-none"
                                                 style={{ transform: 'scale(0.35)', transformOrigin: 'top left', width: '285.7%', height: '285.7%' }}
                                                 title="Mobile Dashboard Preview"
+                                                sandbox="allow-same-origin allow-scripts"
                                             />
                                             {/* Overlay gradient */}
                                             <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-background/20 pointer-events-none" />
