@@ -3,7 +3,7 @@
 import { useState, useMemo, useCallback, useEffect } from 'react';
 import Map, { Source, Layer } from 'react-map-gl/mapbox';
 import 'mapbox-gl/dist/mapbox-gl.css';
-import { createClient } from '@/lib/supabase';
+import { createClient as createSupabaseClient } from '@/lib/supabase';
 
 interface MissionMapProps {
     projection?: 'globe' | 'mercator';
@@ -37,7 +37,7 @@ export default function MissionMap({ projection = 'globe', onProjectionChange }:
             }
 
             try {
-                const supabase = createClient();
+                const supabase = createSupabaseClient();
                 
                 // Get active balloons (recent telemetry within last hour)
                 const oneHourAgo = new Date(Date.now() - 60 * 60 * 1000).toISOString();
