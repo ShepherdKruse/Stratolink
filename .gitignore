@@ -61,3 +61,25 @@ hardware/**/*.s#*
 # Gerber/Manufacturing (keep final versions, ignore temp)
 hardware/**/*.gbr
 hardware/**/*.GBR
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg-info/
+.installed.cfg
+*.egg
+.venv/
+venv/
+.env/
+env/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Simulation
+simulation/data/
+simulation/outputs/
+simulation/.claude/
