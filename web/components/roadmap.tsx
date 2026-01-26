@@ -1,3 +1,5 @@
+import { VideoShowcase } from "./video-showcase"
+
 export function Roadmap() {
   return (
     <section id="roadmap" className="border-b py-24 sm:py-32">
@@ -18,26 +20,11 @@ export function Roadmap() {
         </div>
 
         <div className="mt-16">
-          <div className="rounded-sm border border-border bg-card overflow-hidden shadow-sm">
-            <div className="aspect-video bg-slate-50 relative">
-              <video
-                src="/videos/balloon_trajectories_quiver_14_days_30_balloons_robinson_coverage.mp4"
-                controls
-                autoPlay
-                loop
-                muted
-                playsInline
-                className="w-full h-full object-contain"
-              >
-                Your browser does not support the video tag.
-              </video>
-            </div>
-            <div className="p-4 border-t border-border">
-              <p className="text-sm text-muted-foreground text-center">
-                14-day coverage simulation showing 30 balloon trajectories and wind patterns
-              </p>
-            </div>
-          </div>
+          <VideoShowcase
+            src="/videos/balloon_trajectories_quiver_14_days_30_balloons_robinson_coverage.mp4"
+            title="Fleet Coverage Simulation"
+            description="14-day trajectory simulation showing 30 balloon fleet coverage patterns. The visualization demonstrates how distributed balloon platforms create comprehensive atmospheric observation coverage over time, with quiver plots indicating wind vector fields and trajectory paths showing balloon drift patterns across the stratosphere."
+          />
         </div>
 
         <div className="mt-16 grid gap-12 sm:grid-cols-3">
