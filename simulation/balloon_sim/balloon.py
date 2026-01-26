@@ -25,6 +25,7 @@ class Balloon:
         lat: Initial latitude in standard format
         lon: Initial longitude in standard format
         balloon_id: Optional identifier string
+        launch_hour: Hour when balloon launches (0 = start of simulation)
         lats: Array of latitude values after simulation
         lons: Array of longitude values after simulation
         times: Array of time values after simulation
@@ -33,6 +34,7 @@ class Balloon:
     lat: float
     lon: float
     balloon_id: Optional[str] = None
+    launch_hour: int = 0
     lats: np.ndarray = field(default_factory=lambda: np.array([]))
     lons: np.ndarray = field(default_factory=lambda: np.array([]))
     times: np.ndarray = field(default_factory=lambda: np.array([]))
@@ -47,6 +49,9 @@ class Balloon:
         """
         Simulate the balloon trajectory.
 
+        If launch_hour > 0, the balloon stays at its initial position until
+        launch_hour, then begins moving with the wind.
+
         Args:
             wind: WindField instance with loaded wind data
             num_steps: Number of hourly steps to simulate
@@ -56,9 +61,36 @@ class Balloon:
             Self for method chaining
         """
         computer = TrajectoryComputer(wind)
-        self.lats, self.lons = computer.compute_trajectory_arrays(
-            self.lat, self.lon, num_steps, start_hour
-        )
+
+        # Handle launch_hour: balloon stays at initial position until launch
+        if self.launch_hour > 0 and self.launch_hour < num_steps:
+            # Pre-launch: balloon at initial position
+            pre_launch_steps = min(self.launch_hour, num_steps)
+            pre_lats = np.full(pre_launch_steps, self.lat)
+            pre_lons = np.full(pre_launch_steps, self.lon)
+
+            # Post-launch: simulate from launch_hour
+            post_launch_steps = num_steps - self.launch_hour
+            if post_launch_steps > 0:
+                wind_start_hour = start_hour + self.launch_hour
+                post_lats, post_lons = computer.compute_trajectory_arrays(
+                    self.lat, self.lon, post_launch_steps, wind_start_hour
+                )
+                self.lats = np.concatenate([pre_lats, post_lats])
+                self.lons = np.concatenate([pre_lons, post_lons])
+            else:
+                # Balloon never launches within simulation period
+                self.lats = np.full(num_steps + 1, self.lat)
+                self.lons = np.full(num_steps + 1, self.lon)
+        elif self.launch_hour >= num_steps:
+            # Balloon never launches within simulation period
+            self.lats = np.full(num_steps + 1, self.lat)
+            self.lons = np.full(num_steps + 1, self.lon)
+        else:
+            # Normal case: launch_hour == 0
+            self.lats, self.lons = computer.compute_trajectory_arrays(
+                self.lat, self.lon, num_steps, start_hour
+            )
 
         # Create time array based on wind data times
         if start_hour + num_steps < len(wind.times) * 6:

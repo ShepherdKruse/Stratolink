@@ -111,6 +111,96 @@ class Fleet:
 
         return cls(balloons)
 
+    @classmethod
+    def create_staggered(
+        cls,
+        lat: float,
+        lon: float,
+        n_balloons: int,
+        launch_interval_hours: int = 24,
+        balloon_id_prefix: str = "B",
+    ) -> "Fleet":
+        """
+        Create a fleet with balloons launched at regular intervals from a single location.
+
+        Args:
+            lat: Launch latitude in standard format
+            lon: Launch longitude in standard format
+            n_balloons: Number of balloons to create
+            launch_interval_hours: Hours between each balloon launch (default 24)
+            balloon_id_prefix: Prefix for balloon IDs (default "B")
+
+        Returns:
+            Fleet instance with staggered launch times
+
+        Example:
+            # Launch a balloon every 24 hours from California
+            fleet = Fleet.create_staggered(
+                lat=35.0, lon=-120.0,
+                n_balloons=10,
+                launch_interval_hours=24
+            )
+            fleet.simulate(wind, num_steps=720)  # 30 days
+        """
+        balloons = []
+        for i in range(n_balloons):
+            launch_hour = i * launch_interval_hours
+            balloon = Balloon(
+                lat=lat,
+                lon=lon,
+                balloon_id=f"{balloon_id_prefix}{i:03d}",
+                launch_hour=launch_hour,
+            )
+            balloons.append(balloon)
+
+        return cls(balloons)
+
+    @classmethod
+    def create_staggered_multi_site(
+        cls,
+        sites: list[tuple[float, float]],
+        n_balloons_per_site: int,
+        launch_interval_hours: int = 24,
+        site_names: Optional[list[str]] = None,
+    ) -> "Fleet":
+        """
+        Create a fleet with staggered launches from multiple sites.
+
+        Args:
+            sites: List of (lat, lon) tuples for launch sites
+            n_balloons_per_site: Number of balloons to launch from each site
+            launch_interval_hours: Hours between each balloon launch (default 24)
+            site_names: Optional list of site names for balloon IDs
+
+        Returns:
+            Fleet instance with staggered launches from all sites
+
+        Example:
+            # Launch from California and Argentina
+            fleet = Fleet.create_staggered_multi_site(
+                sites=[(35.0, -120.0), (-35.0, -65.0)],
+                n_balloons_per_site=10,
+                launch_interval_hours=24,
+                site_names=["CA", "AR"]
+            )
+        """
+        if site_names is None:
+            site_names = [f"S{i}" for i in range(len(sites))]
+
+        balloons = []
+        for site_idx, ((lat, lon), site_name) in enumerate(zip(sites, site_names)):
+            for i in range(n_balloons_per_site):
+                launch_hour = i * launch_interval_hours
+                balloon = Balloon(
+                    lat=lat,
+                    lon=lon,
+                    balloon_id=f"{site_name}_{i:03d}",
+                    launch_hour=launch_hour,
+                )
+                balloons.append(balloon)
+
+        return cls(balloons)
+
     def simulate(
         self,
         wind: WindField,

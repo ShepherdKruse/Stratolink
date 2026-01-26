@@ -248,19 +248,29 @@ def create_trajectory_animation(
 
         # Update balloon positions and coverage circles
         for i, (balloon, scatter, trail) in enumerate(zip(balloons, scatters, trails)):
-            lat = balloon.lats[hour]
-            lon = balloon.lons[hour]
-            scatter.set_offsets([[lon, lat]])
+            # Only show balloon if it has launched
+            if hour >= balloon.launch_hour:
+                lat = balloon.lats[hour]
+                lon = balloon.lons[hour]
+                scatter.set_offsets([[lon, lat]])
 
-            start = max(0, hour - trail_length * frame_step)
-            trail_lons = balloon.lons[start : hour + 1]
-            trail_lats = balloon.lats[start : hour + 1]
-            trail.set_offsets(np.column_stack([trail_lons, trail_lats]))
+                # Trail starts from launch hour, not before
+                start = max(balloon.launch_hour, hour - trail_length * frame_step)
+                trail_lons = balloon.lons[start : hour + 1]
+                trail_lats = balloon.lats[start : hour + 1]
+                trail.set_offsets(np.column_stack([trail_lons, trail_lats]))
 
-            # Update coverage circle
-            if show_coverage and i < len(coverage_patches):
-                circle_coords = _compute_coverage_circle(lat, lon, coverage_radius_km)
-                coverage_patches[i].set_xy(circle_coords)
+                # Update coverage circle
+                if show_coverage and i < len(coverage_patches):
+                    circle_coords = _compute_coverage_circle(lat, lon, coverage_radius_km)
+                    coverage_patches[i].set_xy(circle_coords)
+                    coverage_patches[i].set_visible(True)
+            else:
+                # Hide balloon before launch
+                scatter.set_offsets(np.empty((0, 2)))
+                trail.set_offsets(np.empty((0, 2)))
+                if show_coverage and i < len(coverage_patches):
+                    coverage_patches[i].set_visible(False)
 
         # Update wind (use interpolation to match balloon trajectories)
         if show_wind and wind_field is not None:
@@ -381,18 +391,24 @@ def create_coverage_animation(
     fig, ax = plt.subplots(1, 1, figsize=figsize, subplot_kw={"projection": proj})
     ax.set_global()
 
-    # Initial empty coverage
-    img_extent = [-180, 180, -90, 90]
+    # Initial empty coverage - use pcolormesh for proper projection handling
     grid = analyzer.create_grid()
-    im = ax.imshow(
+
+    # Create coordinate arrays for pcolormesh (cell edges)
+    lon_edges = np.linspace(-180, 180, analyzer.grid_width + 1)
+    lat_edges = np.linspace(-90, 90, analyzer.grid_height + 1)
+    lon_grid, lat_grid = np.meshgrid(lon_edges, lat_edges)
+
+    im = ax.pcolormesh(
+        lon_grid,
+        lat_grid,
         grid,
         transform=ccrs.PlateCarree(),
-        extent=img_extent,
-        origin="lower",
         cmap="viridis",
         vmin=0,
         vmax=1,
         zorder=2,
+        shading='flat',
     )
 
     ax.coastlines(color="white", linewidth=0.5, zorder=3)
@@ -434,9 +450,11 @@ def create_coverage_animation(
                     balloon.lats[i], balloon.lons[i], grid, frame - i + 1
                 )
 
-        # Normalize for display
+        # Normalize for display and roll to fix coordinate alignment
         display_grid = grid / (np.max(grid) + 1e-10)
-        im.set_array(display_grid)
+        display_grid = np.roll(display_grid, analyzer.grid_width // 2, axis=1)
+        # pcolormesh requires flattened array for set_array
+        im.set_array(display_grid.ravel())
 
         # Update balloon positions
         for balloon, scatter in zip(balloons, scatters):
@@ -461,6 +479,285 @@ def create_coverage_animation(
     if save_path:
         writer = animation.FFMpegWriter(fps=30, bitrate=8192)
         anim.save(save_path, writer=writer, dpi=dpi)
+
+    return anim
+
+
+def create_time_since_visit_animation(
+    fleet: Fleet,
+    analyzer: CoverageAnalyzer,
+    projection: str = "robinson",
+    figsize: tuple[int, int] = (12, 8),
+    interval: int = 100,
+    save_path: Optional[str] = None,
+    dpi: int = 150,
+    fps: int = 30,
+    step_size: int = 1,
+    max_hours_colorscale: int = 48,
+    show_coverage_circles: bool = True,
+    coverage_alpha: float = 0.3,
+    fade_after_hours: Optional[int] = None,
+) -> animation.FuncAnimation:
+    """
+    Create animated visualization showing time since each location was last visited.
+
+    Shows a heatmap where colors indicate how long ago each location was covered
+    by a balloon's coverage circle. Green = recently visited, yellow = moderate,
+    red = long ago, gray = never visited.
+
+    Args:
+        fleet: Fleet of balloons to animate
+        analyzer: CoverageAnalyzer instance
+        projection: Map projection ('robinson', 'platecarree', 'mollweide')
+        figsize: Figure size in inches
+        interval: Milliseconds between frames
+        save_path: Optional path to save animation (e.g., 'output.mp4')
+        dpi: Resolution for saved animation
+        fps: Frames per second for saved video
+        step_size: Compute coverage every N steps (for performance)
+        max_hours_colorscale: Maximum hours for colorscale (values above this
+            are clamped to the maximum color)
+        show_coverage_circles: Whether to show coverage ellipses around balloons
+        coverage_alpha: Transparency of coverage circles (default 0.3)
+        fade_after_hours: Hours after which coverage starts to fade out (None to disable).
+            Should be less than max_hours_colorscale. Example: max_hours_colorscale=144,
+            fade_after_hours=96 will start fading at 96h and be nearly transparent at 144h.
+
+    Returns:
+        matplotlib FuncAnimation object
+    """
+    _check_cartopy()
+
+    # Get projection
+    projections = {
+        "robinson": ccrs.Robinson(),
+        "platecarree": ccrs.PlateCarree(),
+        "mollweide": ccrs.Mollweide(),
+    }
+    proj = projections.get(projection.lower(), ccrs.Robinson())
+
+    # Create figure
+    fig, ax = plt.subplots(1, 1, figsize=figsize, subplot_kw={"projection": proj})
+    fig.subplots_adjust(left=0.02, right=0.88, top=0.95, bottom=0.02)
+    ax.set_global()
+
+    # Create custom colormap: gray for never visited, then green->yellow->red
+    # With optional alpha fading for old coverage
+    from matplotlib.colors import ListedColormap, LinearSegmentedColormap
+
+    # Base colormap for time since visit (green=recent, yellow=moderate, red=old)
+    base_cmap = plt.cm.RdYlGn_r
+
+    # Create colormap with alpha fading if requested
+    if fade_after_hours is not None and fade_after_hours < max_hours_colorscale:
+        # Sample the base colormap and add alpha channel
+        n_colors = 256
+        base_colors = base_cmap(np.linspace(0, 1, n_colors))
+
+        # Calculate where fading starts (as fraction of colorscale)
+        fade_start = fade_after_hours / max_hours_colorscale
+
+        # Create alpha values: 1.0 until fade_start, then linear fade to 0.1
+        alphas = np.ones(n_colors)
+        fade_start_idx = int(fade_start * n_colors)
+        fade_indices = np.arange(fade_start_idx, n_colors)
+        if len(fade_indices) > 0:
+            # Linear fade from 1.0 to 0.1
+            alphas[fade_start_idx:] = np.linspace(1.0, 0.1, len(fade_indices))
+
+        # Apply alpha to colors
+        base_colors[:, 3] = alphas
+        base_cmap = LinearSegmentedColormap.from_list('RdYlGn_r_fade', base_colors)
+
+    # Initial grid for last visit time (-1 = never visited)
+    last_visit_grid = np.full(
+        (analyzer.grid_height, analyzer.grid_width), -1.0, dtype=np.float32
+    )
+
+    # Create coordinate arrays for pcolormesh (cell edges, not centers)
+    # This ensures proper alignment in all projections
+    lon_edges = np.linspace(-180, 180, analyzer.grid_width + 1)
+    lat_edges = np.linspace(-90, 90, analyzer.grid_height + 1)
+    lon_grid, lat_grid = np.meshgrid(lon_edges, lat_edges)
+
+    # Initial display grid - roll to align with lon_edges starting at -180
+    initial_display = np.roll(last_visit_grid, analyzer.grid_width // 2, axis=1)
+    initial_display = np.ma.masked_where(initial_display == -1, initial_display)
+
+    # Use pcolormesh for proper projection handling
+    im = ax.pcolormesh(
+        lon_grid,
+        lat_grid,
+        initial_display,
+        transform=ccrs.PlateCarree(),
+        cmap=base_cmap,
+        vmin=0,
+        vmax=max_hours_colorscale,
+        zorder=2,
+        shading='flat',
+    )
+
+    # Add gray background for never-visited areas
+    gray_bg = ax.pcolormesh(
+        lon_grid,
+        lat_grid,
+        np.ones((analyzer.grid_height, analyzer.grid_width)),
+        transform=ccrs.PlateCarree(),
+        cmap=ListedColormap(["lightgray"]),
+        zorder=1,
+        shading='flat',
+    )
+
+    ax.coastlines(color="white", linewidth=0.5, zorder=3)
+
+    # Add colorbar
+    cbar_ax = fig.add_axes([0.90, 0.15, 0.02, 0.7])
+    cbar = fig.colorbar(im, cax=cbar_ax)
+    cbar.set_label("Hours since last visit")
+
+    # Balloon position markers and coverage circles
+    balloons = fleet.balloons
+    scatters = []
+    coverage_patches = []
+
+    for i, balloon in enumerate(balloons):
+        # Coverage circle (ellipse)
+        if show_coverage_circles:
+            initial_coords = _compute_coverage_circle(
+                balloon.lats[0], balloon.lons[0], analyzer.coverage_radius_km
+            )
+            patch = Polygon(
+                initial_coords,
+                closed=True,
+                facecolor=f"C{i % 10}",
+                edgecolor=f"C{i % 10}",
+                alpha=coverage_alpha,
+                linewidth=1,
+                transform=ccrs.PlateCarree(),
+                zorder=4,
+            )
+            ax.add_patch(patch)
+            coverage_patches.append(patch)
+
+        # Balloon marker
+        scatter = ax.scatter(
+            [],
+            [],
+            s=40,
+            c=f"C{i % 10}",
+            edgecolors="white",
+            linewidths=1,
+            transform=ccrs.PlateCarree(),
+            zorder=10,
+            marker="o",
+        )
+        scatters.append(scatter)
+
+    title = ax.set_title("Hour 0 | Coverage: 0.0%")
+
+    # Determine number of frames
+    num_frames = min(len(b.lats) for b in balloons) // step_size
+
+    def init():
+        for scatter in scatters:
+            scatter.set_offsets(np.empty((0, 2)))
+        return [im] + scatters + coverage_patches + [title]
+
+    def update(frame_idx):
+        nonlocal last_visit_grid
+
+        current_hour = frame_idx * step_size
+
+        # Update last visit time for current balloon positions
+        for balloon in balloons:
+            # Only update coverage if balloon has launched
+            if current_hour >= balloon.launch_hour and current_hour < len(balloon.lats):
+                analyzer.update_coverage(
+                    balloon.lats[current_hour],
+                    balloon.lons[current_hour],
+                    last_visit_grid,
+                    float(current_hour),  # Write current hour as the visit time
+                )
+
+        # Compute time since last visit
+        # For cells that have been visited: current_hour - last_visit_time
+        # For cells never visited (-1): keep them masked
+        time_since_visit = np.where(
+            last_visit_grid >= 0,
+            current_hour - last_visit_grid,
+            -1,
+        )
+
+        # Roll by half to fix coordinate system alignment
+        display_grid = np.roll(time_since_visit, analyzer.grid_width // 2, axis=1)
+        # Create masked array for display (mask never-visited cells)
+        display_grid = np.ma.masked_where(display_grid < 0, display_grid)
+        # pcolormesh requires flattened array for set_array
+        im.set_array(display_grid.ravel())
+
+        # Update balloon positions and coverage circles
+        for i, (balloon, scatter) in enumerate(zip(balloons, scatters)):
+            # Only show balloon if it has launched
+            if current_hour >= balloon.launch_hour and current_hour < len(balloon.lats):
+                lat = balloon.lats[current_hour]
+                lon = balloon.lons[current_hour]
+                scatter.set_offsets([[lon, lat]])
+
+                # Update coverage circle
+                if show_coverage_circles and i < len(coverage_patches):
+                    circle_coords = _compute_coverage_circle(
+                        lat, lon, analyzer.coverage_radius_km
+                    )
+                    coverage_patches[i].set_xy(circle_coords)
+                    coverage_patches[i].set_visible(True)
+            else:
+                # Hide balloon before launch
+                scatter.set_offsets(np.empty((0, 2)))
+                if show_coverage_circles and i < len(coverage_patches):
+                    coverage_patches[i].set_visible(False)
+
+        # Compute coverage stats
+        visited_mask = last_visit_grid >= 0
+        coverage_pct = np.sum(visited_mask) / visited_mask.size * 100
+
+        # Also compute "fresh" coverage (visited within last N hours)
+        fresh_hours = min(24, max_hours_colorscale // 2)
+        fresh_mask = (time_since_visit >= 0) & (time_since_visit <= fresh_hours)
+        fresh_pct = np.sum(fresh_mask) / visited_mask.size * 100
+
+        title.set_text(
+            f"Hour {current_hour} | Ever visited: {coverage_pct:.1f}% | "
+            f"Fresh (<{fresh_hours}h): {fresh_pct:.1f}%"
+        )
+
+        return [im] + scatters + coverage_patches + [title]
+
+    # Can't use blit with coverage patches and cartopy
+    anim = animation.FuncAnimation(
+        fig,
+        update,
+        init_func=init,
+        frames=num_frames,
+        interval=interval,
+        blit=False,
+    )
+
+    if save_path:
+        print(f"Saving animation to {save_path}...")
+        writer = animation.FFMpegWriter(
+            fps=fps,
+            codec="libx264",
+            extra_args=["-crf", "28", "-preset", "fast", "-pix_fmt", "yuv420p"],
+        )
+        anim.save(
+            save_path,
+            writer=writer,
+            dpi=dpi,
+            progress_callback=lambda i, n: print(
+                f"\r  Frame {i+1}/{n}", end="", flush=True
+            ),
+        )
+        print("\n  Done!")
 
     return anim
 

@@ -96,7 +96,8 @@ class CoverageAnalyzer:
         """
         Update coverage grid for a balloon at given position.
 
-        Bug #2 fix: Uses proper if/elif/else for grid wrapping cases.
+        Uses proper geodesic distance checking to create elliptical coverage
+        areas instead of rectangular approximations.
 
         Args:
             lat: Balloon latitude in standard format (-90 to 90)
@@ -110,58 +111,65 @@ class CoverageAnalyzer:
         # Convert to internal coordinates
         internal_lat, internal_lon = standard_to_internal(lat, lon)
 
-        # Calculate coverage extent in degrees
+        # Calculate coverage extent in degrees (for bounding box)
         lat_degrees = self.coverage_radius_km / KM_PER_DEGREE_LAT
         lon_degrees = self.coverage_radius_km / km_per_degree_lon_internal(internal_lat)
 
-        # Coverage bounds in internal coordinates
+        # Coverage bounds in internal coordinates (bounding box for efficiency)
         min_lat = internal_lat - lat_degrees
         max_lat = internal_lat + lat_degrees
-        min_lon = (360 + internal_lon - lon_degrees) % 360
-        max_lon = (360 + internal_lon + lon_degrees) % 360
 
         # Convert bounds to grid indices
-        # Latitude: use (grid_height - 1) to map 0-180 to indices 0-(grid_height-1)
-        min_y = int(round((self.grid_height - 1) * min_lat / 180.0))
-        max_y = int(round((self.grid_height - 1) * max_lat / 180.0))
-        # Clamp latitude indices (they don't wrap)
+        min_y = int(np.floor((self.grid_height - 1) * min_lat / 180.0))
+        max_y = int(np.ceil((self.grid_height - 1) * max_lat / 180.0))
         min_y = max(0, min(min_y, self.grid_height - 1))
         max_y = max(0, min(max_y, self.grid_height - 1))
-        # Longitude: wraps around
-        min_x = int(round(self.grid_width * min_lon / 360.0)) % self.grid_width
-        max_x = int(round(self.grid_width * max_lon / 360.0)) % self.grid_width
 
-        # Handle different wrapping cases with if/elif/else (Bug #2 fix)
-        if min_x < max_x and min_y < max_y:
-            # Case 1: Normal range, no wrapping
-            grid[min_y:max_y, min_x:max_x] = value
+        # For longitude, we need to handle wrapping - get range of x indices
+        min_lon = internal_lon - lon_degrees
+        max_lon = internal_lon + lon_degrees
+        min_x = int(np.floor(self.grid_width * min_lon / 360.0))
+        max_x = int(np.ceil(self.grid_width * max_lon / 360.0))
 
-        elif min_x > max_x and min_y < max_y:
-            # Case 2: Longitude wraps around (crossing antimeridian)
-            grid[min_y:max_y, min_x:] = value
-            grid[min_y:max_y, :max_x] = value
+        # Create arrays of y and x indices for the bounding box
+        y_indices = np.arange(min_y, max_y + 1)
+        x_indices = np.arange(min_x, max_x + 1)  # Don't wrap yet, keep original for distance calc
 
-        elif min_y > max_y and internal_lat > 90:
-            # Case 3: Coverage crosses north pole
-            # Fill from min_y to top of grid, all longitudes
-            grid[min_y:, :] = value
-            # Also fill reflected region
-            grid[:max_y, :] = value
+        # Convert y indices to cell center latitudes (standard coordinates)
+        # Cell centers are at (y + 0.5) / grid_height * 180 - 90 to match imshow extent
+        cell_lats = (y_indices + 0.5) * 180.0 / self.grid_height - 90.0
 
-        elif min_y > max_y and internal_lat <= 90:
-            # Case 4: Coverage crosses south pole
-            # Fill from bottom of grid to max_y, all longitudes
-            grid[:max_y, :] = value
-            # Also fill reflected region
-            grid[min_y:, :] = value
+        # Convert x indices to cell center longitudes (standard coordinates)
+        # Cell centers are at (x + 0.5) / grid_width * 360 in internal coords
+        # Internal lon 0 = standard lon 0, internal lon 180 = standard lon 180/-180
+        cell_internal_lons = (x_indices + 0.5) * 360.0 / self.grid_width
+        cell_lons = np.where(cell_internal_lons <= 180, cell_internal_lons, cell_internal_lons - 360)
 
-        elif min_x > max_x and min_y > max_y:
-            # Case 5: Both longitude and latitude wrap (rare, near poles)
-            # Fill all four quadrants
-            grid[min_y:, min_x:] = value
-            grid[min_y:, :max_x] = value
-            grid[:max_y, min_x:] = value
-            grid[:max_y, :max_x] = value
+        # Wrap x_indices for grid indexing
+        x_indices_wrapped = x_indices % self.grid_width
+
+        # Create meshgrid for vectorized distance calculation
+        cell_lats_grid, cell_lons_grid = np.meshgrid(cell_lats, cell_lons, indexing='ij')
+        y_idx_grid, x_idx_grid = np.meshgrid(y_indices, x_indices_wrapped, indexing='ij')
+
+        # Convert to radians
+        lat_rad = np.deg2rad(lat)
+        lon_rad = np.deg2rad(lon)
+        cell_lats_rad = np.deg2rad(cell_lats_grid)
+        cell_lons_rad = np.deg2rad(cell_lons_grid)
+
+        # Compute great circle distance using spherical law of cosines (vectorized)
+        dlon = cell_lons_rad - lon_rad
+        cos_dist = (np.sin(lat_rad) * np.sin(cell_lats_rad) +
+                    np.cos(lat_rad) * np.cos(cell_lats_rad) * np.cos(dlon))
+        cos_dist = np.clip(cos_dist, -1.0, 1.0)
+        dist_km = np.arccos(cos_dist) * 6371.0  # Earth radius in km
+
+        # Find cells within coverage radius and update grid using advanced indexing
+        within_coverage = dist_km <= self.coverage_radius_km
+        y_covered = y_idx_grid[within_coverage]
+        x_covered = x_idx_grid[within_coverage]  # Already wrapped
+        grid[y_covered, x_covered] = value
 
         return grid
 

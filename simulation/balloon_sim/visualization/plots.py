@@ -150,16 +150,24 @@ def plot_coverage(
     # Set up map
     ax.set_global()
 
-    # Plot coverage
-    # Transform grid to proper extent (-180 to 180, -90 to 90)
-    img_extent = [-180, 180, -90, 90]
-    im = ax.imshow(
-        coverage_grid,
+    # Plot coverage using pcolormesh for proper projection handling
+    # Roll grid by half to fix coordinate alignment (grid has x=0 at prime meridian)
+    display_grid = np.roll(coverage_grid, coverage_grid.shape[1] // 2, axis=1)
+
+    # Create coordinate arrays for pcolormesh (cell edges)
+    grid_height, grid_width = coverage_grid.shape
+    lon_edges = np.linspace(-180, 180, grid_width + 1)
+    lat_edges = np.linspace(-90, 90, grid_height + 1)
+    lon_grid, lat_grid = np.meshgrid(lon_edges, lat_edges)
+
+    im = ax.pcolormesh(
+        lon_grid,
+        lat_grid,
+        display_grid,
         transform=ccrs.PlateCarree(),
-        extent=img_extent,
-        origin="lower",
         cmap=cmap,
         zorder=2,
+        shading='flat',
     )
 
     if show_coastlines:
