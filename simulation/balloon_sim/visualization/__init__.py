@@ -14,6 +14,7 @@ from balloon_sim.visualization.animation import (
     create_trajectory_animation,
     create_trajectory_animation_parallel,
     create_coverage_animation,
+    create_time_since_visit_animation,
 )
 from balloon_sim.visualization.kepler import (
     create_kepler_trajectory_map,
@@ -28,6 +29,7 @@ __all__ = [
     "create_trajectory_animation",
     "create_trajectory_animation_parallel",
     "create_coverage_animation",
+    "create_time_since_visit_animation",
     "create_kepler_trajectory_map",
     "export_kepler_html",
 ]
