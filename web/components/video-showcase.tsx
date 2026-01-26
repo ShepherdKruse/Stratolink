@@ -18,23 +18,18 @@ export function VideoShowcase({ src, title, description, className = '' }: Video
         </p>
       </div>
 
-      {/* Video Container - Professional styling with dark background, non-interactive */}
-      <div className="relative bg-slate-950 aspect-video overflow-hidden">
+      {/* Video Container - Seamless integration with site styling */}
+      <div className="relative bg-background aspect-video overflow-hidden">
         <video
           src={src}
           autoPlay
           loop
           muted
           playsInline
-          className="w-full h-full object-contain pointer-events-none"
-          style={{
-            backgroundColor: '#0f172a',
-          }}
+          className="w-full h-full object-cover pointer-events-none"
         >
           Your browser does not support the video tag.
         </video>
-        {/* Subtle border around video */}
-        <div className="absolute inset-0 pointer-events-none border border-slate-800/50" />
       </div>
     </div>
   );

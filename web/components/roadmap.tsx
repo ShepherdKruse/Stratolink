@@ -22,8 +22,8 @@ export function Roadmap() {
         <div className="mt-16">
           <VideoShowcase
             src="/videos/balloon_trajectories_quiver_14_days_30_balloons_robinson_coverage.mp4"
-            title="Fleet Coverage Simulation"
-            description="14-day trajectory simulation showing 30 balloon fleet coverage patterns. The visualization demonstrates how distributed balloon platforms create comprehensive atmospheric observation coverage over time, with quiver plots indicating wind vector fields and trajectory paths showing balloon drift patterns across the stratosphere."
+            title="Global Coverage"
+            description="Simulated 14-day trajectory showing how our distributed balloon fleet creates comprehensive atmospheric observation coverage across the stratosphere."
           />
         </div>
 
