@@ -18,15 +18,15 @@ export function VideoShowcase({ src, title, description, className = '' }: Video
         </p>
       </div>
 
-      {/* Video Container - Professional styling with dark background */}
+      {/* Video Container - Professional styling with dark background, non-interactive */}
       <div className="relative bg-slate-950 aspect-video overflow-hidden">
         <video
           src={src}
-          controls
+          autoPlay
           loop
           muted
           playsInline
-          className="w-full h-full object-contain"
+          className="w-full h-full object-contain pointer-events-none"
           style={{
             backgroundColor: '#0f172a',
           }}
