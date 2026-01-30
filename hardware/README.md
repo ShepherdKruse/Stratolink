@@ -21,7 +21,7 @@ PCB layouts, circuit diagrams, and mechanical designs for Stratolink pico-balloo
     - Murata [DMF4B5R5G105M3DTA0](https://www.digikey.com/en/products/detail/cap-xx/DMF4B5R5G105M3DTA0/16376499)
         - 1F, 5.5V, 40mΩ ESR
 4. Audio
-    - TDK InvenSense [ICS-43434](https://www.digikey.com/en/products/detail/tdk-invensense/ICS-43434/5872875)
+    - TDK InvenSense [ICS-43434](https://www.digikey.com/en/products/detail/tdk-invensense/ICS-43434/6140298)
         - I2S digital MEMS microphone, bottom port
         - 3.50×2.65×0.98mm, ~0.03g
         - 1.8V supply, 490µA active / 12µA sleep
