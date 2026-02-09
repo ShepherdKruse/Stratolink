@@ -21,10 +21,10 @@ PCB layouts, circuit diagrams, and mechanical designs for Stratolink pico-balloo
     - Murata [DMF4B5R5G105M3DTA0](https://www.digikey.com/en/products/detail/cap-xx/DMF4B5R5G105M3DTA0/16376499)
         - 1F, 5.5V, 40mΩ ESR
 4. Audio
-    - TDK InvenSense [MMICT390200012](https://www.lcsc.com/product-detail/C5656610.html?s_z=n_ICS-43434)
+    - TDK InvenSense [MMICT390200012](https://www.lcsc.com/product-detail/C3171752.html?s_z=n_MMICT390200012)
         - Use cases: thunder detection, aircraft proximity, envelope stress monitoring
 5. Pressure Sensor
-    - TE [MS5611](https://www.lcsc.com/product-detail/C3171752.html?s_z=n_MMICT390200012)
+    - TE [MS5611](https://www.lcsc.com/product-detail/C15639.html?s_z=n_MS5611)
         - seems like only viable option above 40k feet. 10-1200 mbar
 ### Weight Budget
 Estimated weight budget may be found [here](https://docs.google.com/spreadsheets/d/1s64bTjT7GJ9_eSN0aLWiRmVTLvOQ8GIDuoYdtb-1NMI/edit?usp=sharing).
