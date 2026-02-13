@@ -8393,7 +8393,7 @@
 		(descr "Resistor SMD 0402 (1005 Metric), square (rectangular) end terminal, IPC_7351 nominal, (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf), generated with kicad-footprint-generator")
 		(tags "resistor")
 		(property "Reference" "R8"
-			(at 0 1.17 0)
+			(at 0 1.17 180)
 			(layer "B.SilkS")
 			(hide yes)
 			(uuid "2f599003-f0a2-4cd2-ab12-f1ff5e8b7a85")
@@ -8406,7 +8406,7 @@
 			)
 		)
 		(property "Value" "100kΩ"
-			(at 0 -1.17 0)
+			(at 0 -1.17 180)
 			(layer "B.Fab")
 			(hide yes)
 			(uuid "e0f70d66-ac96-4bb6-b176-e33851bd7e22")
@@ -8465,26 +8465,6 @@
 		(sheetname "Root")
 		(sheetfile "stratolink.kicad_sch")
 		(attr smd)
-		(fp_line
-			(start 0.15364 -0.379999)
-			(end -0.153641 -0.38)
-			(stroke
-				(width 0.12)
-				(type solid)
-			)
-			(layer "B.SilkS")
-			(uuid "420711c6-0786-406f-bbb7-6aeaf8c7fd95")
-		)
-		(fp_line
-			(start 0.153641 0.38)
-			(end -0.15364 0.379999)
-			(stroke
-				(width 0.12)
-				(type solid)
-			)
-			(layer "B.SilkS")
-			(uuid "8a874ba8-bfa5-413e-bd05-627bb67dbc2c")
-		)
 		(fp_line
 			(start -0.930002 0.470001)
 			(end -0.929998 -0.47)
@@ -8566,7 +8546,7 @@
 			(uuid "17ae73ba-81e0-44d0-a858-f30fe91e4f11")
 		)
 		(fp_text user "${REFERENCE}"
-			(at 0 0 0)
+			(at 0 0 180)
 			(layer "B.Fab")
 			(uuid "81aa6817-2f3c-4d2a-ac95-cdfe77b1b94a")
 			(effects
