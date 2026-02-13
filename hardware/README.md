@@ -8,6 +8,7 @@ PCB layouts, circuit diagrams, and mechanical designs for Stratolink pico-balloo
 ## Hardware Components
 1. [RAK3172](https://www.lcsc.com/product-detail/C18548052.html?s_z=n_RAK3172) LoRaWAN Module (STM32WLE5)
     - w/ some wire monopole ant (multi band [868/915/923 MHz] we want to target center frequency ~900 MHz)
+    -     [4269](https://www.digikey.com/en/products/detail/adafruit-industries-llc/4269/10313908) sprint antenna
     - Can use STM32's `VREFINT ADC` for voltage monitor on both solar cells and supercap
     - 1.69µA sleep current
 2. uBlox [MAX-M10S-00B](https://www.lcsc.com/product-detail/C4153167.html?s_z=n_u-blox%2520Max%2520m10s)
@@ -18,7 +19,7 @@ PCB layouts, circuit diagrams, and mechanical designs for Stratolink pico-balloo
         - x2 4.8V/50mA cells
     - [BQ25570](https://www.lcsc.com/product-detail/C506250.html?s_z=n_BQ25570)
         - TI nano-power PMIC, 330mV cold start
-    - Murata [DMF4B5R5G105M3DTA0](https://www.digikey.com/en/products/detail/cap-xx/DMF4B5R5G105M3DTA0/16376499)
+    - [DMF4B5R5G105M3DTA0](https://www.cap-xx.com/products/dmf4b5r5g105m3dta0)
         - 1F, 5.5V, 40mΩ ESR
 4. Audio
     - TDK InvenSense [MMICT390200012](https://www.lcsc.com/product-detail/C3171752.html?s_z=n_MMICT390200012)
