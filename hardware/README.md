@@ -1,10 +1,12 @@
 # Hardware Design
 PCB layouts, circuit diagrams, and mechanical designs for Stratolink pico-balloon hardware.
+
 ## Directory Structure
 - `/pcb` - PCB design files and project files
 - `/gerbers` - Manufacturing-ready Gerber files and drill files
 - `/3d-models` - 3D enclosure and mechanical designs
 - `/docs` - Hardware documentation and specifications
+  
 ## Hardware Components
 1. [RAK3172](https://www.lcsc.com/product-detail/C18548052.html?s_z=n_RAK3172) LoRaWAN Module (STM32WLE5)
     - w/ some wire monopole ant (multi band [868/915/923 MHz] we want to target center frequency ~900 MHz)
@@ -27,6 +29,7 @@ PCB layouts, circuit diagrams, and mechanical designs for Stratolink pico-balloo
 5. Pressure Sensor
     - TE [MS5611](https://www.lcsc.com/product-detail/C15639.html?s_z=n_MS5611)
         - seems like only viable option above 40k feet. 10-1200 mbar
+          
 ### Weight Budget
 Estimated weight budget may be found [here](https://docs.google.com/spreadsheets/d/1s64bTjT7GJ9_eSN0aLWiRmVTLvOQ8GIDuoYdtb-1NMI/edit?usp=sharing).
 
@@ -37,14 +40,13 @@ Estimated weight budget may be found [here](https://docs.google.com/spreadsheets
     Minimum capacitance = (2µA × 57,600s) / 0.5V = 0.23F
     Selected: 1F provides 4× margin
     ```
-- Standard FR4 (0.4mm maybe) feels sufficient here, *maybe* flexi offers marginal benefit, yet I imagine also significantly impedes design
-- ICS-43434 requires 1.8V supply - can tap from BQ25570 regulated output
-- ICS-43434 needs acoustic port hole in PCB (~0.5mm diameter minimum)
-- *I still need to spec out peripherals for all components on this list, for now this is just the high level stuff*
+- Standard FR4 (0.4mm maybe) is sufficient here
+
 ## Design Tools
 #### PCB Design
 - KiCad - Primary PCB design tool for schematics and layouts
-- Manufacturing files exported as Gerber files in `/gerbers`
+- Production files exported as Gerber files in `/gerbers`
+
 #### 3D Mechanical Design
 - Fusion 360 - Primary CAD tool for enclosures and mechanical designs
 - CAD files provided in both formats:
