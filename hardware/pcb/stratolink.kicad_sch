@@ -448,6 +448,154 @@
 				)
 			)
 		)
+		(symbol "Device:FerriteBead_Small"
+			(pin_numbers hide)
+			(pin_names
+				(offset 0)
+			)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "FB"
+				(at 1.905 1.27 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+				)
+			)
+			(property "Value" "FerriteBead_Small"
+				(at 1.905 -1.27 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+				)
+			)
+			(property "Footprint" ""
+				(at -1.778 0 90)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" "~"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Description" "Ferrite bead, small symbol"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_keywords" "L ferrite bead inductor filter"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_fp_filters" "Inductor_* L_* *Ferrite*"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(symbol "FerriteBead_Small_0_1"
+				(polyline
+					(pts
+						(xy 0 -1.27) (xy 0 -0.7874)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 0 0.889) (xy 0 1.2954)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy -1.8288 0.2794) (xy -1.1176 1.4986) (xy 1.8288 -0.2032) (xy 1.1176 -1.4224) (xy -1.8288 0.2794)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+			)
+			(symbol "FerriteBead_Small_1_1"
+				(pin passive line
+					(at 0 2.54 270)
+					(length 1.27)
+					(name "~"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 0 -2.54 90)
+					(length 1.27)
+					(name "~"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+		)
 		(symbol "Device:L"
 			(pin_numbers hide)
 			(pin_names
@@ -2631,6 +2779,311 @@
 				)
 			)
 		)
+		(symbol "T3902:T3902"
+			(pin_names
+				(offset 1.016)
+			)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "MK"
+				(at -12.7 10.922 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left bottom)
+				)
+			)
+			(property "Value" "T3902"
+				(at -12.7 -12.7 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left bottom)
+				)
+			)
+			(property "Footprint" "T3902:MIC_T3902"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify bottom)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Description" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "MF" "TDK InvenSense"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify bottom)
+					(hide yes)
+				)
+			)
+			(property "MAXIMUM_PACKAGE_HEIGHT" "0.98mm"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify bottom)
+					(hide yes)
+				)
+			)
+			(property "Package" "None"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify bottom)
+					(hide yes)
+				)
+			)
+			(property "Price" "None"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify bottom)
+					(hide yes)
+				)
+			)
+			(property "Check_prices" "https://www.snapeda.com/parts/T3902/TDK+InvenSense/view-part/?ref=eda"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify bottom)
+					(hide yes)
+				)
+			)
+			(property "STANDARD" "Manufacturer Recommendations"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify bottom)
+					(hide yes)
+				)
+			)
+			(property "PARTREV" "1.0"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify bottom)
+					(hide yes)
+				)
+			)
+			(property "SnapEDA_Link" "https://www.snapeda.com/parts/T3902/TDK+InvenSense/view-part/?ref=snap"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify bottom)
+					(hide yes)
+				)
+			)
+			(property "MP" "T3902"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify bottom)
+					(hide yes)
+				)
+			)
+			(property "Purchase-URL" "https://www.snapeda.com/api/url_track_click_mouser/?unipart_id=11605520&manufacturer=TDK InvenSense&part_name=T3902&search_term=mmict390200012"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify bottom)
+					(hide yes)
+				)
+			)
+			(property "Description_1" "\n                        \n                            EVAL BOARD FOR MMICT390200012\n                        \n"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify bottom)
+					(hide yes)
+				)
+			)
+			(property "Availability" "In Stock"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify bottom)
+					(hide yes)
+				)
+			)
+			(property "MANUFACTURER" "TDK InvenSense"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify bottom)
+					(hide yes)
+				)
+			)
+			(symbol "T3902_0_0"
+				(rectangle
+					(start -12.7 -10.16)
+					(end 12.7 10.16)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type background)
+					)
+				)
+				(pin output line
+					(at 17.78 2.54 180)
+					(length 5.08)
+					(name "DATA"
+						(effects
+							(font
+								(size 1.016 1.016)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.016 1.016)
+							)
+						)
+					)
+				)
+				(pin input line
+					(at -17.78 -2.54 0)
+					(length 5.08)
+					(name "SELECT"
+						(effects
+							(font
+								(size 1.016 1.016)
+							)
+						)
+					)
+					(number "2"
+						(effects
+							(font
+								(size 1.016 1.016)
+							)
+						)
+					)
+				)
+				(pin power_in line
+					(at 17.78 -7.62 180)
+					(length 5.08)
+					(name "GND"
+						(effects
+							(font
+								(size 1.016 1.016)
+							)
+						)
+					)
+					(number "3_1"
+						(effects
+							(font
+								(size 1.016 1.016)
+							)
+						)
+					)
+				)
+				(pin power_in line
+					(at 17.78 -7.62 180)
+					(length 5.08) hide
+					(name "GND"
+						(effects
+							(font
+								(size 1.016 1.016)
+							)
+						)
+					)
+					(number "3_2"
+						(effects
+							(font
+								(size 1.016 1.016)
+							)
+						)
+					)
+				)
+				(pin input clock
+					(at -17.78 2.54 0)
+					(length 5.08)
+					(name "CLK"
+						(effects
+							(font
+								(size 1.016 1.016)
+							)
+						)
+					)
+					(number "4"
+						(effects
+							(font
+								(size 1.016 1.016)
+							)
+						)
+					)
+				)
+				(pin power_in line
+					(at 17.78 7.62 180)
+					(length 5.08)
+					(name "VDD"
+						(effects
+							(font
+								(size 1.016 1.016)
+							)
+						)
+					)
+					(number "5"
+						(effects
+							(font
+								(size 1.016 1.016)
+							)
+						)
+					)
+				)
+			)
+		)
 		(symbol "fab:Conn_Header_JST_PH_1x02_P2mm_Vertical_SMD"
 			(exclude_from_sim no)
 			(in_bom yes)
@@ -2748,29 +3201,28 @@
 				)
 			)
 		)
-		(symbol "fab:Conn_PinHeader_1x01_P2.54mm_Horizontal_SMD"
-			(pin_names
-				(offset 1.016) hide)
+		(symbol "fab:Conn_PinHeader_1x07_P2.54mm_Vertical_THT_D1mm"
+			(pin_names hide)
 			(exclude_from_sim no)
 			(in_bom yes)
 			(on_board yes)
 			(property "Reference" "J"
-				(at 0 2.54 0)
+				(at 0 10.16 0)
 				(effects
 					(font
 						(size 1.27 1.27)
 					)
 				)
 			)
-			(property "Value" "Conn_PinHeader_1x01_P2.54mm_Horizontal_SMD"
-				(at 0 -2.54 0)
+			(property "Value" "Conn_PinHeader_1x07_P2.54mm_Vertical_THT_D1mm"
+				(at 0 -10.16 0)
 				(effects
 					(font
 						(size 1.27 1.27)
 					)
 				)
 			)
-			(property "Footprint" "fab:PinHeader_1x01_P2.54mm_Horizontal_SMD"
+			(property "Footprint" "fab:PinHeader_1x07_P2.54mm_Vertical_THT_D1mm"
 				(at 0 0 0)
 				(effects
 					(font
@@ -2788,7 +3240,7 @@
 					(hide yes)
 				)
 			)
-			(property "Description" "Connector pin header 2.54mm pitch horizontal SMD"
+			(property "Description" "Connector Header Through Hole 7 positions 0.100\" (2.54mm)"
 				(at 0 0 0)
 				(effects
 					(font
@@ -2797,7 +3249,7 @@
 					(hide yes)
 				)
 			)
-			(property "ki_keywords" "Connector pin header 2.54mm pitch horizontal SMD GBC36SGSN-M89"
+			(property "ki_keywords" "connector"
 				(at 0 0 0)
 				(effects
 					(font
@@ -2806,7 +3258,7 @@
 					(hide yes)
 				)
 			)
-			(property "ki_fp_filters" "*PinHeader*1x01*"
+			(property "ki_fp_filters" "*PinHeader*1x07*"
 				(at 0 0 0)
 				(effects
 					(font
@@ -2815,12 +3267,78 @@
 					(hide yes)
 				)
 			)
-			(symbol "Conn_PinHeader_1x01_P2.54mm_Horizontal_SMD_1_1"
+			(symbol "Conn_PinHeader_1x07_P2.54mm_Vertical_THT_D1mm_1_1"
+				(rectangle
+					(start -1.27 -6.985)
+					(end 1.27 -8.255)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type outline)
+					)
+				)
+				(rectangle
+					(start -1.27 -4.445)
+					(end 1.27 -5.715)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type outline)
+					)
+				)
+				(rectangle
+					(start -1.27 -1.905)
+					(end 1.27 -3.175)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type outline)
+					)
+				)
 				(rectangle
 					(start -1.27 0.635)
 					(end 1.27 -0.635)
 					(stroke
-						(width 0.1524)
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type outline)
+					)
+				)
+				(rectangle
+					(start -1.27 3.175)
+					(end 1.27 1.905)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type outline)
+					)
+				)
+				(rectangle
+					(start -1.27 5.715)
+					(end 1.27 4.445)
+					(stroke
+						(width 0.254)
+						(type default)
+					)
+					(fill
+						(type outline)
+					)
+				)
+				(rectangle
+					(start -1.27 8.255)
+					(end 1.27 6.985)
+					(stroke
+						(width 0.254)
 						(type default)
 					)
 					(fill
@@ -2828,7 +3346,7 @@
 					)
 				)
 				(pin passive line
-					(at 5.08 0 180)
+					(at 5.08 7.62 180)
 					(length 3.81)
 					(name "Pin_1"
 						(effects
@@ -2845,145 +3363,10 @@
 						)
 					)
 				)
-			)
-		)
-		(symbol "mic:MMICT390200012"
-			(exclude_from_sim no)
-			(in_bom yes)
-			(on_board yes)
-			(property "Reference" "MIC"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Value" ""
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-				)
-			)
-			(property "Footprint" "mic:MIC-SMD_5P-L3.5-W2.7-TL_MMICT390200012"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Datasheet" "https://item.szlcsc.com/datasheet/MMICT390200012/3733689.html"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Description" "Direction:Omnidirectional Voltage - Supply:1.65V~3.63V Voltage - Supply:1.65V~3.63V Current Consumption:650uA Current Consumption:650uA S/N Ratio:64dB Sensitivity:-32dB Sensitivity:-32dB Impedance:- Length:3.5mm Width:2.65mm Height:0.98mm Operating Temper"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Manufacturer Part" "MMICT390200012"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Manufacturer" "TDK InvenSense(应美盛)"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Supplier Part" "C3171752"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Supplier" "LCSC"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "LCSC Part Name" "1.65V~3.63V32dB"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(symbol "MMICT390200012_1_0"
-				(rectangle
-					(start -8.89 -5.08)
-					(end 8.89 7.62)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(circle
-					(center -7.62 6.35)
-					(radius 0.381)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(pin unspecified line
-					(at -11.43 5.08 0)
-					(length 2.54)
-					(name "DATA"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-					(number "1"
-						(effects
-							(font
-								(size 1.27 1.27)
-							)
-						)
-					)
-				)
-				(pin unspecified line
-					(at -11.43 2.54 0)
-					(length 2.54)
-					(name "SELECT"
+				(pin passive line
+					(at 5.08 5.08 180)
+					(length 3.81)
+					(name "Pin_2"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -2998,10 +3381,10 @@
 						)
 					)
 				)
-				(pin unspecified line
-					(at 0 -7.62 90)
-					(length 2.54)
-					(name "GND"
+				(pin passive line
+					(at 5.08 2.54 180)
+					(length 3.81)
+					(name "Pin_3"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -3016,10 +3399,10 @@
 						)
 					)
 				)
-				(pin unspecified line
-					(at 11.43 2.54 180)
-					(length 2.54)
-					(name "CLK"
+				(pin passive line
+					(at 5.08 0 180)
+					(length 3.81)
+					(name "Pin_4"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -3034,10 +3417,10 @@
 						)
 					)
 				)
-				(pin unspecified line
-					(at 11.43 5.08 180)
-					(length 2.54)
-					(name "VDD"
+				(pin passive line
+					(at 5.08 -2.54 180)
+					(length 3.81)
+					(name "Pin_5"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -3045,6 +3428,42 @@
 						)
 					)
 					(number "5"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 5.08 -5.08 180)
+					(length 3.81)
+					(name "Pin_6"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "6"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 5.08 -7.62 180)
+					(length 3.81)
+					(name "Pin_7"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "7"
 						(effects
 							(font
 								(size 1.27 1.27)
@@ -3648,10 +4067,10 @@
 		(uuid "9583937b-c2ad-4050-9adc-966ef16a6527")
 	)
 	(junction
-		(at 100.33 154.94)
+		(at 99.06 171.45)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "96db5644-851a-48dd-9c2d-9961f87827be")
+		(uuid "96ace5a1-f35e-4e7d-b7a0-b673b1ce359a")
 	)
 	(junction
 		(at 76.2 125.73)
@@ -3678,12 +4097,6 @@
 		(uuid "a7662b9d-7774-46e7-88fd-5d57f2790bf6")
 	)
 	(junction
-		(at 81.28 170.18)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "a9533df8-e8c9-4f01-aa3b-ceeb62418a58")
-	)
-	(junction
 		(at 160.02 54.61)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -3700,6 +4113,12 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "b0d5c50f-d38f-4b42-81af-c614cb28108f")
+	)
+	(junction
+		(at 104.14 152.4)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "ba27e3dc-ece0-4661-bd25-c7becfaa61b6")
 	)
 	(junction
 		(at 193.04 107.95)
@@ -3853,6 +4272,16 @@
 	)
 	(wire
 		(pts
+			(xy 104.14 171.45) (xy 99.06 171.45)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "0df345f2-21d0-4a97-96c2-01a78f8c729d")
+	)
+	(wire
+		(pts
 			(xy 156.21 140.97) (xy 156.21 125.73)
 		)
 		(stroke
@@ -3863,13 +4292,13 @@
 	)
 	(wire
 		(pts
-			(xy 100.33 154.94) (xy 92.71 154.94)
+			(xy 100.33 158.75) (xy 100.33 157.48)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "1100e241-4851-4b6c-9405-86365f486cc6")
+		(uuid "0ea187e6-0d44-413c-879c-8ad922110048")
 	)
 	(wire
 		(pts
@@ -3913,16 +4342,6 @@
 	)
 	(wire
 		(pts
-			(xy 81.28 167.64) (xy 81.28 170.18)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "1a444e48-2746-4e10-8fcb-8cdd56d300e0")
-	)
-	(wire
-		(pts
 			(xy 165.1 57.15) (xy 165.1 29.21)
 		)
 		(stroke
@@ -3940,6 +4359,16 @@
 			(type default)
 		)
 		(uuid "1c649875-451e-4375-90ff-31e579c5669d")
+	)
+	(wire
+		(pts
+			(xy 22.86 124.46) (xy 29.21 124.46)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "1ce67633-3b22-4e1d-963b-56aa42ec06a1")
 	)
 	(wire
 		(pts
@@ -4003,6 +4432,26 @@
 	)
 	(wire
 		(pts
+			(xy 63.5 171.45) (xy 99.06 171.45)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "23e032a8-a8a4-4170-9d34-e75203bb2293")
+	)
+	(wire
+		(pts
+			(xy 22.86 129.54) (xy 29.21 129.54)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "240e07cd-ef89-41dc-bca8-66acee44157b")
+	)
+	(wire
+		(pts
 			(xy 36.83 156.21) (xy 36.83 158.75)
 		)
 		(stroke
@@ -4010,16 +4459,6 @@
 			(type default)
 		)
 		(uuid "24d19a66-e428-418f-83b2-d7937a2f0d60")
-	)
-	(wire
-		(pts
-			(xy 100.33 170.18) (xy 100.33 165.1)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "26cb540e-2cf1-4c4b-a8a7-64dd984493a9")
 	)
 	(wire
 		(pts
@@ -4123,16 +4562,6 @@
 	)
 	(wire
 		(pts
-			(xy 68.58 154.94) (xy 69.85 154.94)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "3298073c-27a8-4f49-a35b-ad778ca7b7a7")
-	)
-	(wire
-		(pts
 			(xy 67.31 74.93) (xy 69.85 74.93)
 		)
 		(stroke
@@ -4150,6 +4579,16 @@
 			(type default)
 		)
 		(uuid "350ef80c-ff66-4686-89e8-2acd907556e9")
+	)
+	(wire
+		(pts
+			(xy 57.15 121.92) (xy 58.42 121.92)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "35884ed7-e4bb-4e0b-83d8-59c837e9486c")
 	)
 	(wire
 		(pts
@@ -4193,26 +4632,6 @@
 	)
 	(wire
 		(pts
-			(xy 68.58 170.18) (xy 81.28 170.18)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "3adcea58-c3d9-4e00-8be0-c293a8c6e295")
-	)
-	(wire
-		(pts
-			(xy 29.21 118.11) (xy 25.4 118.11)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "3b63ee39-e5a4-4490-9ba0-dafc7b8e1fbb")
-	)
-	(wire
-		(pts
 			(xy 166.37 130.81) (xy 170.18 130.81)
 		)
 		(stroke
@@ -4223,6 +4642,16 @@
 	)
 	(wire
 		(pts
+			(xy 104.14 160.02) (xy 104.14 171.45)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "3bc44fb9-4170-4be6-bd6e-48dae1acb9c4")
+	)
+	(wire
+		(pts
 			(xy 58.42 123.19) (xy 68.58 123.19)
 		)
 		(stroke
@@ -4230,16 +4659,6 @@
 			(type default)
 		)
 		(uuid "3c3bf965-53ce-4c00-b6c8-7d0573fddcd0")
-	)
-	(wire
-		(pts
-			(xy 25.4 125.73) (xy 27.94 125.73)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "40ac5471-5dfb-4192-afb3-6dbaed66723e")
 	)
 	(wire
 		(pts
@@ -4300,16 +4719,6 @@
 			(type default)
 		)
 		(uuid "4b2457e8-387a-4c73-b056-1ac9cd88c9ce")
-	)
-	(wire
-		(pts
-			(xy 95.25 157.48) (xy 92.71 157.48)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "4cde6c23-0942-4e81-8255-b5c77e6e949f")
 	)
 	(wire
 		(pts
@@ -4423,16 +4832,6 @@
 	)
 	(wire
 		(pts
-			(xy 69.85 157.48) (xy 68.58 157.48)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "57ff0349-6ec0-4a9a-84d6-4a0c85b7a8c5")
-	)
-	(wire
-		(pts
 			(xy 186.69 107.95) (xy 193.04 107.95)
 		)
 		(stroke
@@ -4493,13 +4892,13 @@
 	)
 	(wire
 		(pts
-			(xy 26.67 59.69) (xy 29.21 59.69)
+			(xy 99.06 152.4) (xy 104.14 152.4)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "69aa9c6c-1ca5-414c-861c-c9d7a95d34da")
+		(uuid "6a1f8c79-0156-49e9-b642-0a19eaf40807")
 	)
 	(wire
 		(pts
@@ -4560,6 +4959,26 @@
 			(type default)
 		)
 		(uuid "7290cc99-c9af-4a79-a00a-1b3f6e1c6e04")
+	)
+	(wire
+		(pts
+			(xy 62.23 157.48) (xy 63.5 157.48)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "77f192c1-2b1a-4c22-a86c-8f7f05fa0f95")
+	)
+	(wire
+		(pts
+			(xy 100.33 157.48) (xy 99.06 157.48)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "78093016-fe02-45e6-b5ff-daa53a2d254f")
 	)
 	(wire
 		(pts
@@ -4733,6 +5152,16 @@
 	)
 	(wire
 		(pts
+			(xy 63.5 162.56) (xy 63.5 171.45)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "87bb8ca0-fd7c-482e-a463-100b937d010d")
+	)
+	(wire
+		(pts
 			(xy 58.42 132.08) (xy 67.31 132.08)
 		)
 		(stroke
@@ -4780,16 +5209,6 @@
 			(type default)
 		)
 		(uuid "8e10aec2-9a98-416a-bfb1-0f28a3799006")
-	)
-	(wire
-		(pts
-			(xy 25.4 114.3) (xy 27.94 114.3)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "8f40b949-8848-4ab6-acde-6b8d8dbe2f0c")
 	)
 	(wire
 		(pts
@@ -4853,6 +5272,16 @@
 	)
 	(wire
 		(pts
+			(xy 25.4 36.83) (xy 29.21 36.83)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "934e6934-dcf5-40c7-a2ea-07c2e903db70")
+	)
+	(wire
+		(pts
 			(xy 152.4 63.5) (xy 152.4 21.59)
 		)
 		(stroke
@@ -4873,13 +5302,13 @@
 	)
 	(wire
 		(pts
-			(xy 81.28 170.18) (xy 100.33 170.18)
+			(xy 62.23 148.59) (xy 62.23 149.86)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "955cc6ae-ef2f-4183-b862-82596d03c7e0")
+		(uuid "9590f8d7-bbd4-4081-9c21-40af03c20606")
 	)
 	(wire
 		(pts
@@ -4923,6 +5352,16 @@
 	)
 	(wire
 		(pts
+			(xy 24.13 77.47) (xy 31.75 77.47)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "9968b323-f569-48d4-b67e-d991eceeb4b2")
+	)
+	(wire
+		(pts
 			(xy 170.18 133.35) (xy 168.91 133.35)
 		)
 		(stroke
@@ -4960,16 +5399,6 @@
 			(type default)
 		)
 		(uuid "9e88ef43-001c-4381-996d-c87d987da909")
-	)
-	(wire
-		(pts
-			(xy 26.67 74.93) (xy 29.21 74.93)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "a0160872-a046-4d6a-a0a0-e9bb3cf5b692")
 	)
 	(wire
 		(pts
@@ -5013,16 +5442,6 @@
 	)
 	(wire
 		(pts
-			(xy 26.67 78.74) (xy 29.21 78.74)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "a425c77c-135e-41b6-8e29-6e4f2424a604")
-	)
-	(wire
-		(pts
 			(xy 167.64 59.69) (xy 165.1 59.69)
 		)
 		(stroke
@@ -5063,6 +5482,26 @@
 	)
 	(wire
 		(pts
+			(xy 24.13 67.31) (xy 30.48 67.31)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "aacc7b96-0e3f-4829-b7f0-e4e1f3fee4c7")
+	)
+	(wire
+		(pts
+			(xy 99.06 171.45) (xy 99.06 167.64)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "ab24abbb-a860-450f-a765-2f4d8b02b6b9")
+	)
+	(wire
+		(pts
 			(xy 208.28 93.98) (xy 208.28 62.23)
 		)
 		(stroke
@@ -5070,6 +5509,16 @@
 			(type default)
 		)
 		(uuid "abb716ad-2cdf-4401-839e-5df5da1816e4")
+	)
+	(wire
+		(pts
+			(xy 24.13 72.39) (xy 31.75 72.39)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "af39fd92-c9de-47c5-b764-a24a74404f36")
 	)
 	(wire
 		(pts
@@ -5083,16 +5532,6 @@
 	)
 	(wire
 		(pts
-			(xy 93.98 167.64) (xy 95.25 167.64)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "b17e9f75-757c-4170-9e36-75a53f3c094f")
-	)
-	(wire
-		(pts
 			(xy 205.74 54.61) (xy 207.01 54.61)
 		)
 		(stroke
@@ -5100,16 +5539,6 @@
 			(type default)
 		)
 		(uuid "b2240d38-06f6-45e6-ab2b-519fee681a3e")
-	)
-	(wire
-		(pts
-			(xy 26.67 71.12) (xy 29.21 71.12)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "b46e920c-f84e-43be-97eb-b8a627e5d855")
 	)
 	(wire
 		(pts
@@ -5130,16 +5559,6 @@
 			(type default)
 		)
 		(uuid "b7986bbf-3b69-42f6-8ec6-4d13805627c5")
-	)
-	(wire
-		(pts
-			(xy 26.67 63.5) (xy 29.21 63.5)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "bb6b99bb-bb14-4392-87e5-1b12f0f946e9")
 	)
 	(wire
 		(pts
@@ -5303,16 +5722,6 @@
 	)
 	(wire
 		(pts
-			(xy 25.4 121.92) (xy 29.21 121.92)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "c9733700-cf5e-4a07-a030-acab128bbe14")
-	)
-	(wire
-		(pts
 			(xy 212.09 35.56) (xy 212.09 36.83)
 		)
 		(stroke
@@ -5320,16 +5729,6 @@
 			(type default)
 		)
 		(uuid "c9b8b0fd-47d4-4636-addf-9a8997b1fc5c")
-	)
-	(wire
-		(pts
-			(xy 95.25 158.75) (xy 95.25 157.48)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "cb2b5cf1-cf13-4626-bf0f-f8fc7fc88980")
 	)
 	(wire
 		(pts
@@ -5393,6 +5792,16 @@
 	)
 	(wire
 		(pts
+			(xy 66.04 148.59) (xy 62.23 148.59)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "cfc3f2be-cb3b-43d2-9937-3488b41591e1")
+	)
+	(wire
+		(pts
 			(xy 166.37 64.77) (xy 167.64 64.77)
 		)
 		(stroke
@@ -5403,16 +5812,6 @@
 	)
 	(wire
 		(pts
-			(xy 26.67 67.31) (xy 29.21 67.31)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "d0816d34-48f5-44dd-aa4a-fc303a0c5dd4")
-	)
-	(wire
-		(pts
 			(xy 92.71 85.09) (xy 92.71 88.9)
 		)
 		(stroke
@@ -5420,16 +5819,6 @@
 			(type default)
 		)
 		(uuid "d09c229b-d765-408d-9238-f7d76c97505d")
-	)
-	(wire
-		(pts
-			(xy 100.33 157.48) (xy 100.33 154.94)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "d0b71f51-ed64-4dae-a4d6-f209835c5cbe")
 	)
 	(wire
 		(pts
@@ -5533,6 +5922,16 @@
 	)
 	(wire
 		(pts
+			(xy 22.86 119.38) (xy 30.48 119.38)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "db13a2ac-ab26-4515-8c58-d688ac941b23")
+	)
+	(wire
+		(pts
 			(xy 119.38 114.3) (xy 133.35 114.3)
 		)
 		(stroke
@@ -5573,6 +5972,26 @@
 	)
 	(wire
 		(pts
+			(xy 50.8 121.92) (xy 52.07 121.92)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "dde6a659-ae46-4bcb-b164-575f5293c093")
+	)
+	(wire
+		(pts
+			(xy 25.4 34.29) (xy 27.94 34.29)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "e04999ef-925f-4fa7-b5b5-255a9378b761")
+	)
+	(wire
+		(pts
 			(xy 62.23 107.95) (xy 67.31 107.95)
 		)
 		(stroke
@@ -5583,16 +6002,6 @@
 	)
 	(wire
 		(pts
-			(xy 25.4 133.35) (xy 27.94 133.35)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "e20e9bb6-978b-4d72-84f8-a86226ccdae7")
-	)
-	(wire
-		(pts
 			(xy 181.61 26.67) (xy 181.61 29.21)
 		)
 		(stroke
@@ -5600,26 +6009,6 @@
 			(type default)
 		)
 		(uuid "e315182f-42d7-47eb-aa4e-c6901687f9ed")
-	)
-	(wire
-		(pts
-			(xy 95.25 167.64) (xy 95.25 166.37)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "e379893d-b5f6-46a2-80aa-7837f23e3f56")
-	)
-	(wire
-		(pts
-			(xy 100.33 153.67) (xy 100.33 154.94)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "e4effd95-a845-4214-a051-d7fbe5c731bc")
 	)
 	(wire
 		(pts
@@ -5763,26 +6152,6 @@
 	)
 	(wire
 		(pts
-			(xy 25.4 129.54) (xy 27.94 129.54)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "f1e4c01a-3bfb-48d5-a576-bfebc48974b5")
-	)
-	(wire
-		(pts
-			(xy 26.67 55.88) (xy 29.21 55.88)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "f2c88425-4478-4dd1-844f-ff6624a2981a")
-	)
-	(wire
-		(pts
 			(xy 34.29 158.75) (xy 34.29 152.4)
 		)
 		(stroke
@@ -5790,16 +6159,6 @@
 			(type default)
 		)
 		(uuid "f3ffcecb-508e-4601-8060-22a27605ff9f")
-	)
-	(wire
-		(pts
-			(xy 68.58 157.48) (xy 68.58 170.18)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "f47d653d-f894-4b4e-a833-718103b03305")
 	)
 	(wire
 		(pts
@@ -5904,7 +6263,7 @@
 		(uuid 275ad946-ef35-422d-b8c6-93f7fa28e155)
 	)
 	(rectangle
-		(start 13.843 35.179)
+		(start 13.843 46.355)
 		(end 41.148 99.06)
 		(stroke
 			(width 0)
@@ -5941,7 +6300,7 @@
 	)
 	(rectangle
 		(start 13.97 13.97)
-		(end 41.275 33.655)
+		(end 41.275 44.45)
 		(stroke
 			(width 0)
 			(type default)
@@ -50220,7 +50579,7 @@
 	)
 	(text "GPIO"
 		(exclude_from_sim no)
-		(at 36.83 38.735 0)
+		(at 37.338 50.038 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -50230,7 +50589,7 @@
 	)
 	(text "Mic\n"
 		(exclude_from_sim no)
-		(at 104.648 149.352 0)
+		(at 105.41 148.336 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -50240,7 +50599,7 @@
 	)
 	(global_label "BOOT0"
 		(shape input)
-		(at 27.94 133.35 0)
+		(at 29.21 129.54 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -50250,7 +50609,7 @@
 		)
 		(uuid "002c1708-dad7-4924-aa86-0154437897e1")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 37.0333 133.35 0)
+			(at 38.3033 129.54 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -50262,7 +50621,7 @@
 	)
 	(global_label "RSTN"
 		(shape input)
-		(at 27.94 114.3 0)
+		(at 22.86 116.84 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -50272,7 +50631,7 @@
 		)
 		(uuid "00697083-f2c1-44bf-ac5a-61d0ab2029ac")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 35.7028 114.3 0)
+			(at 30.6228 116.84 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -50300,28 +50659,6 @@
 					(size 1.27 1.27)
 				)
 				(justify left)
-				(hide yes)
-			)
-		)
-	)
-	(global_label "PB4"
-		(shape input)
-		(at 62.23 54.61 180)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right)
-		)
-		(uuid "046085fe-c1d7-4b4e-96af-2863ce0a1a73")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 55.4953 54.61 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
 				(hide yes)
 			)
 		)
@@ -50394,7 +50731,7 @@
 	)
 	(global_label "PA9"
 		(shape input)
-		(at 29.21 63.5 0)
+		(at 24.13 69.85 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -50404,7 +50741,7 @@
 		)
 		(uuid "19183822-071b-4988-bda0-4c6d401b4753")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 35.7633 63.5 0)
+			(at 30.6833 69.85 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -50502,9 +50839,31 @@
 			)
 		)
 	)
+	(global_label "PDM"
+		(shape input)
+		(at 100.33 158.75 270)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "433bc5ca-0391-4f94-87da-760579017802")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 100.33 165.7266 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+				(hide yes)
+			)
+		)
+	)
 	(global_label "TX"
 		(shape input)
-		(at 27.94 125.73 0)
+		(at 29.21 124.46 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -50514,7 +50873,7 @@
 		)
 		(uuid "4976adcc-68a7-4d4a-9ac9-f3e6dd5357fd")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 33.1023 125.73 0)
+			(at 34.3723 124.46 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -50592,7 +50951,7 @@
 	)
 	(global_label "PDM"
 		(shape input)
-		(at 68.58 154.94 180)
+		(at 62.23 54.61 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -50600,9 +50959,9 @@
 			)
 			(justify right)
 		)
-		(uuid "621555bf-724c-4156-b7c5-b317e29aac3b")
+		(uuid "626d5fe4-74d1-4391-9c49-a6ca1c20ae20")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 61.6034 154.94 0)
+			(at 55.2534 54.61 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -50614,7 +50973,7 @@
 	)
 	(global_label "PB5"
 		(shape input)
-		(at 29.21 67.31 0)
+		(at 31.75 72.39 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -50624,7 +50983,7 @@
 		)
 		(uuid "6751373a-c11c-4eaf-b1ba-f2249d539d61")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 35.9447 67.31 0)
+			(at 38.4847 72.39 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -50702,7 +51061,7 @@
 	)
 	(global_label "VSTOR"
 		(shape input)
-		(at 29.21 118.11 0)
+		(at 30.48 119.38 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -50712,7 +51071,7 @@
 		)
 		(uuid "8dc32737-b7c6-45e8-b352-d64b134d5f60")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 38.0614 118.11 0)
+			(at 39.3314 119.38 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -50724,7 +51083,7 @@
 	)
 	(global_label "PB2"
 		(shape input)
-		(at 29.21 74.93 0)
+		(at 31.75 77.47 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -50734,7 +51093,7 @@
 		)
 		(uuid "938798d3-1971-4cfb-a379-370b26e1bdce")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 35.9447 74.93 0)
+			(at 38.4847 77.47 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -50922,7 +51281,7 @@
 	)
 	(global_label "PA8"
 		(shape input)
-		(at 29.21 59.69 0)
+		(at 30.48 67.31 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -50932,7 +51291,7 @@
 		)
 		(uuid "aabe3af3-fa25-40e4-bedf-9962cf947392")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 35.7633 59.69 0)
+			(at 37.0333 67.31 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -50944,7 +51303,7 @@
 	)
 	(global_label "RX"
 		(shape input)
-		(at 27.94 129.54 0)
+		(at 22.86 127 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -50954,7 +51313,7 @@
 		)
 		(uuid "b7d93e63-603f-437f-8f5a-0f925ca18363")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 33.4047 129.54 0)
+			(at 28.3247 127 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -50988,7 +51347,7 @@
 	)
 	(global_label "PA10"
 		(shape input)
-		(at 29.21 71.12 0)
+		(at 24.13 74.93 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -50998,7 +51357,7 @@
 		)
 		(uuid "c653860b-7511-4b74-9684-8d76a8e2de91")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 36.9728 71.12 0)
+			(at 31.8928 74.93 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -51021,28 +51380,6 @@
 		(uuid "c8ac8bf1-6db4-419e-b2aa-5168247fef41")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 110.6933 86.36 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-	)
-	(global_label "PB5"
-		(shape input)
-		(at 29.21 121.92 0)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left)
-		)
-		(uuid "cb4b3ccc-d6ae-437c-b81e-cc8c2616f141")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 35.9447 121.92 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -51076,7 +51413,7 @@
 	)
 	(global_label "PA15"
 		(shape input)
-		(at 29.21 78.74 0)
+		(at 24.13 80.01 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -51086,12 +51423,34 @@
 		)
 		(uuid "da1e632f-9d44-41d0-8f9c-18dad179f912")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 36.9728 78.74 0)
+			(at 31.8928 80.01 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 				(justify left)
+				(hide yes)
+			)
+		)
+	)
+	(global_label "CLK"
+		(shape input)
+		(at 66.04 148.59 270)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify right)
+		)
+		(uuid "dd981c71-737b-4593-aff9-1f38c9c19692")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 66.04 155.1433 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
 				(hide yes)
 			)
 		)
@@ -51140,31 +51499,9 @@
 			)
 		)
 	)
-	(global_label "CLK"
-		(shape input)
-		(at 93.98 167.64 180)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right)
-		)
-		(uuid "f6dd154d-db42-4c8e-a957-2035b0ac9826")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 87.4267 167.64 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-				(hide yes)
-			)
-		)
-	)
 	(global_label "PA1"
 		(shape input)
-		(at 29.21 55.88 0)
+		(at 24.13 64.77 0)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -51174,7 +51511,7 @@
 		)
 		(uuid "f721c8c2-cd2e-4302-b0bf-af6ccf0cece6")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 35.7633 55.88 0)
+			(at 30.6833 64.77 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -51258,7 +51595,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "lib:4269"
 			(at 121.92 31.75 0)
 			(effects
 				(font
@@ -51267,7 +51604,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "~"
+		(property "Datasheet" "https://www.digikey.com/en/products/detail/adafruit-industries-llc/4269/10313908"
 			(at 121.92 31.75 0)
 			(effects
 				(font
@@ -51276,7 +51613,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Antenna"
+		(property "Description" "1528-4269-ND"
 			(at 121.92 31.75 0)
 			(effects
 				(font
@@ -51298,7 +51635,7 @@
 		)
 	)
 	(symbol
-		(lib_id "Device:R_US")
+		(lib_id "Device:FerriteBead_Small")
 		(at 54.61 121.92 270)
 		(unit 1)
 		(exclude_from_sim no)
@@ -51316,17 +51653,18 @@
 				(hide yes)
 			)
 		)
-		(property "Value" "0Ω"
+		(property "Value" "~"
 			(at 52.324 124.206 90)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 				(justify left)
+				(hide yes)
 			)
 		)
-		(property "Footprint" ""
-			(at 54.356 122.936 90)
+		(property "Footprint" "Capacitor_SMD:C_0402_1005Metric"
+			(at 54.61 120.142 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -51334,7 +51672,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "~"
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C76884.html?s_z=n_BLM15AG601SN1%2520"
 			(at 54.61 121.92 0)
 			(effects
 				(font
@@ -51343,7 +51681,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Resistor, US symbol"
+		(property "Description" "BLM15AG601SN1D"
 			(at 54.61 121.92 0)
 			(effects
 				(font
@@ -51589,7 +51927,7 @@
 				)
 			)
 		)
-		(property "Footprint" "ProLib_pcs_2026-02-08:SMD-18_L10.1-W9.7-P1.10-TL_SKG09F"
+		(property "Footprint" "lib:XCVR_MAX-M10S-00B"
 			(at 96.52 115.57 0)
 			(effects
 				(font
@@ -51784,73 +52122,6 @@
 			(project "stratolink"
 				(path "/4d146a28-be53-49f1-b1c6-484192820e45"
 					(reference "#PWR08")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "fab:Conn_PinHeader_1x01_P2.54mm_Horizontal_SMD")
-		(at 21.59 55.88 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "12bd2ae7-fa2e-4466-b429-765c82852ff6")
-		(property "Reference" "J12"
-			(at 21.59 50.8 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value" "Conn_PinHeader_1x01_P2.54mm_Horizontal_SMD"
-			(at 21.59 53.34 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Footprint" "fab:PinHeader_1x01_P2.54mm_Horizontal_SMD"
-			(at 21.59 55.88 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "~"
-			(at 21.59 55.88 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Connector pin header 2.54mm pitch horizontal SMD"
-			(at 21.59 55.88 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "ade37acf-2b4f-48be-8bb4-8b0ca3265369")
-		)
-		(instances
-			(project "stratolink"
-				(path "/4d146a28-be53-49f1-b1c6-484192820e45"
-					(reference "J12")
 					(unit 1)
 				)
 			)
@@ -52079,7 +52350,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "lib:INDC1608X90N"
 			(at 203.2 36.83 0)
 			(effects
 				(font
@@ -52088,7 +52359,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "~"
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C194437.html?s_z=n_10uH%2520inductor"
 			(at 203.2 36.83 0)
 			(effects
 				(font
@@ -52097,7 +52368,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Inductor"
+		(property "Description" "MLZ1608N100LT000"
 			(at 203.2 36.83 0)
 			(effects
 				(font
@@ -52122,17 +52393,16 @@
 		)
 	)
 	(symbol
-		(lib_id "fab:Conn_PinHeader_1x01_P2.54mm_Horizontal_SMD")
-		(at 21.59 78.74 0)
+		(lib_id "power:+5V")
+		(at 22.86 132.08 270)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "21d95382-096f-4f29-b513-35ed59ccd0b9")
-		(property "Reference" "J18"
-			(at 21.59 73.66 0)
+		(uuid "232e9347-5e5a-4ff0-afa8-62a4ec220cd1")
+		(property "Reference" "#PWR026"
+			(at 19.05 132.08 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -52140,8 +52410,16 @@
 				(hide yes)
 			)
 		)
-		(property "Value" "Conn_PinHeader_1x01_P2.54mm_Horizontal_SMD"
-			(at 21.59 76.2 0)
+		(property "Value" "+3.3V"
+			(at 28.956 132.588 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 22.86 132.08 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -52149,8 +52427,8 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "fab:PinHeader_1x01_P2.54mm_Horizontal_SMD"
-			(at 21.59 78.74 0)
+		(property "Datasheet" ""
+			(at 22.86 132.08 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -52158,17 +52436,8 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "~"
-			(at 21.59 78.74 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Connector pin header 2.54mm pitch horizontal SMD"
-			(at 21.59 78.74 0)
+		(property "Description" "Power symbol creates a global label with name \"+5V\""
+			(at 22.86 132.08 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -52177,29 +52446,29 @@
 			)
 		)
 		(pin "1"
-			(uuid "a7b3dd93-2f8f-4e50-8169-e4d4f6d823b5")
+			(uuid "aaedb61f-c105-4789-b3ac-9e735b75db4b")
 		)
 		(instances
 			(project "stratolink"
 				(path "/4d146a28-be53-49f1-b1c6-484192820e45"
-					(reference "J18")
+					(reference "#PWR026")
 					(unit 1)
 				)
 			)
 		)
 	)
 	(symbol
-		(lib_id "fab:Conn_PinHeader_1x01_P2.54mm_Horizontal_SMD")
-		(at 21.59 63.5 0)
+		(lib_id "fab:Conn_PinHeader_1x07_P2.54mm_Vertical_THT_D1mm")
+		(at 17.78 124.46 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
 		(fields_autoplaced yes)
-		(uuid "24ab59b5-f9c3-4a69-ab65-3c38d91e02b7")
-		(property "Reference" "J14"
-			(at 21.59 58.42 0)
+		(uuid "28bf207b-2684-4a81-96b2-e527eebfaf15")
+		(property "Reference" "J4"
+			(at 17.78 111.76 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -52207,8 +52476,8 @@
 				(hide yes)
 			)
 		)
-		(property "Value" "Conn_PinHeader_1x01_P2.54mm_Horizontal_SMD"
-			(at 21.59 60.96 0)
+		(property "Value" "Conn_PinHeader_1x07_P2.54mm_Vertical_THT_D1mm"
+			(at 17.78 114.3 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -52216,8 +52485,8 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "fab:PinHeader_1x01_P2.54mm_Horizontal_SMD"
-			(at 21.59 63.5 0)
+		(property "Footprint" "Connector_PinHeader_1.00mm:PinHeader_1x07_P1.00mm_Vertical"
+			(at 17.78 124.46 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -52226,7 +52495,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 21.59 63.5 0)
+			(at 17.78 124.46 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -52234,8 +52503,8 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Connector pin header 2.54mm pitch horizontal SMD"
-			(at 21.59 63.5 0)
+		(property "Description" "Connector Header Through Hole 7 positions 0.100\" (2.54mm)"
+			(at 17.78 124.46 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -52244,12 +52513,30 @@
 			)
 		)
 		(pin "1"
-			(uuid "d325607c-5882-4915-a1b1-a84247d366c5")
+			(uuid "37603810-4771-43aa-b6d4-61bdfe379775")
+		)
+		(pin "7"
+			(uuid "b48abee1-a5b7-4644-b079-5d0b7d223a0f")
+		)
+		(pin "6"
+			(uuid "e4fe8008-6134-41e0-83b0-8d358e6c3e99")
+		)
+		(pin "3"
+			(uuid "9ab3f682-b242-4957-a493-c174e327ceae")
+		)
+		(pin "4"
+			(uuid "c8316dd1-16fc-4354-ae39-8914c4381da2")
+		)
+		(pin "5"
+			(uuid "284ab5ad-39db-4784-9198-5b5a64a36488")
+		)
+		(pin "2"
+			(uuid "930912bd-79e8-4e22-8d7e-78a2bb49c5bc")
 		)
 		(instances
 			(project "stratolink"
 				(path "/4d146a28-be53-49f1-b1c6-484192820e45"
-					(reference "J14")
+					(reference "J4")
 					(unit 1)
 				)
 			)
@@ -52283,7 +52570,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0402_1005Metric"
 			(at 194.056 104.394 90)
 			(effects
 				(font
@@ -52320,140 +52607,6 @@
 			(project "stratolink"
 				(path "/4d146a28-be53-49f1-b1c6-484192820e45"
 					(reference "R5")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "fab:Conn_PinHeader_1x01_P2.54mm_Horizontal_SMD")
-		(at 20.32 118.11 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "2fbfbb2e-df81-4efa-b72e-b223198198b7")
-		(property "Reference" "J3"
-			(at 20.32 113.03 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value" "Conn_PinHeader_1x01_P2.54mm_Horizontal_SMD"
-			(at 20.32 115.57 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Footprint" "fab:PinHeader_1x01_P2.54mm_Horizontal_SMD"
-			(at 20.32 118.11 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "~"
-			(at 20.32 118.11 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Connector pin header 2.54mm pitch horizontal SMD"
-			(at 20.32 118.11 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "a717ee6e-e115-421f-bc19-817b49f18945")
-		)
-		(instances
-			(project "stratolink"
-				(path "/4d146a28-be53-49f1-b1c6-484192820e45"
-					(reference "J3")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "fab:Conn_PinHeader_1x01_P2.54mm_Horizontal_SMD")
-		(at 20.32 121.92 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "396023aa-6c26-4662-96b8-0abaeb7fa741")
-		(property "Reference" "J4"
-			(at 20.32 116.84 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value" "Conn_PinHeader_1x01_P2.54mm_Horizontal_SMD"
-			(at 20.32 119.38 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Footprint" "fab:PinHeader_1x01_P2.54mm_Horizontal_SMD"
-			(at 20.32 121.92 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "~"
-			(at 20.32 121.92 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Connector pin header 2.54mm pitch horizontal SMD"
-			(at 20.32 121.92 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "ce5eb604-631a-435b-89ce-f92f2b7ca6d2")
-		)
-		(instances
-			(project "stratolink"
-				(path "/4d146a28-be53-49f1-b1c6-484192820e45"
-					(reference "J4")
 					(unit 1)
 				)
 			)
@@ -52590,17 +52743,16 @@
 		)
 	)
 	(symbol
-		(lib_id "fab:Conn_PinHeader_1x01_P2.54mm_Horizontal_SMD")
-		(at 20.32 114.3 0)
+		(lib_id "power:+5V")
+		(at 27.94 34.29 270)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "461b35b3-4cd6-4ec4-b381-2d3341604ddb")
-		(property "Reference" "J11"
-			(at 20.32 109.22 0)
+		(uuid "4afa2819-6995-4822-8112-17190d4e0ba3")
+		(property "Reference" "#PWR030"
+			(at 24.13 34.29 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -52608,8 +52760,16 @@
 				(hide yes)
 			)
 		)
-		(property "Value" "Conn_PinHeader_1x01_P2.54mm_Horizontal_SMD"
-			(at 20.32 111.76 0)
+		(property "Value" "+SOLAR"
+			(at 35.052 34.29 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 27.94 34.29 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -52617,8 +52777,8 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "fab:PinHeader_1x01_P2.54mm_Horizontal_SMD"
-			(at 20.32 114.3 0)
+		(property "Datasheet" ""
+			(at 27.94 34.29 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -52626,17 +52786,8 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "~"
-			(at 20.32 114.3 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Connector pin header 2.54mm pitch horizontal SMD"
-			(at 20.32 114.3 0)
+		(property "Description" "Power symbol creates a global label with name \"+5V\""
+			(at 27.94 34.29 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -52645,79 +52796,12 @@
 			)
 		)
 		(pin "1"
-			(uuid "8b3bf36e-8fe4-49a3-9fac-92d35fad39df")
+			(uuid "33dabff6-ec28-45d8-a225-2d0467ed4f3c")
 		)
 		(instances
 			(project "stratolink"
 				(path "/4d146a28-be53-49f1-b1c6-484192820e45"
-					(reference "J11")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "fab:Conn_PinHeader_1x01_P2.54mm_Horizontal_SMD")
-		(at 21.59 74.93 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "48f7eb25-7011-4c4c-bcc3-a3ff4ac3ba8c")
-		(property "Reference" "J17"
-			(at 21.59 69.85 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value" "Conn_PinHeader_1x01_P2.54mm_Horizontal_SMD"
-			(at 21.59 72.39 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Footprint" "fab:PinHeader_1x01_P2.54mm_Horizontal_SMD"
-			(at 21.59 74.93 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "~"
-			(at 21.59 74.93 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Connector pin header 2.54mm pitch horizontal SMD"
-			(at 21.59 74.93 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "0de3bc13-7460-4432-b70c-05e7767aa0ad")
-		)
-		(instances
-			(project "stratolink"
-				(path "/4d146a28-be53-49f1-b1c6-484192820e45"
-					(reference "J17")
+					(reference "#PWR030")
 					(unit 1)
 				)
 			)
@@ -52749,7 +52833,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "lib:DMF4B5R5G105M3DTA0"
 			(at 186.9948 29.21 0)
 			(effects
 				(font
@@ -52792,210 +52876,6 @@
 		)
 	)
 	(symbol
-		(lib_id "fab:Conn_PinHeader_1x01_P2.54mm_Horizontal_SMD")
-		(at 20.32 129.54 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "4c4eab85-fb00-4df6-89de-7426ffb27edd")
-		(property "Reference" "J10"
-			(at 20.32 124.46 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value" "Conn_PinHeader_1x01_P2.54mm_Horizontal_SMD"
-			(at 20.32 127 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Footprint" "fab:PinHeader_1x01_P2.54mm_Horizontal_SMD"
-			(at 20.32 129.54 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "~"
-			(at 20.32 129.54 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Connector pin header 2.54mm pitch horizontal SMD"
-			(at 20.32 129.54 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "b665c4dd-b104-4560-a068-bc1b86a23cdd")
-		)
-		(instances
-			(project "stratolink"
-				(path "/4d146a28-be53-49f1-b1c6-484192820e45"
-					(reference "J10")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "fab:Conn_PinHeader_1x01_P2.54mm_Horizontal_SMD")
-		(at 20.32 125.73 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "4fc581c4-6433-41e2-b344-0571df9e5c0d")
-		(property "Reference" "J9"
-			(at 20.32 120.65 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value" "Conn_PinHeader_1x01_P2.54mm_Horizontal_SMD"
-			(at 20.32 123.19 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Footprint" "fab:PinHeader_1x01_P2.54mm_Horizontal_SMD"
-			(at 20.32 125.73 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "~"
-			(at 20.32 125.73 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Connector pin header 2.54mm pitch horizontal SMD"
-			(at 20.32 125.73 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "6a04bc4c-1c8a-4828-a02c-f32cf716becc")
-		)
-		(instances
-			(project "stratolink"
-				(path "/4d146a28-be53-49f1-b1c6-484192820e45"
-					(reference "J9")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Device:R_US")
-		(at 95.25 162.56 180)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "5309e07e-4166-4528-a078-3f30dcd09de0")
-		(property "Reference" "R19"
-			(at 92.71 163.8301 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Value" "33Ω"
-			(at 93.218 160.528 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" ""
-			(at 94.234 162.306 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "~"
-			(at 95.25 162.56 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Resistor, US symbol"
-			(at 95.25 162.56 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "2"
-			(uuid "5f3e554b-8672-4bff-9000-f46380cdf7ae")
-		)
-		(pin "1"
-			(uuid "14bebafc-d48d-4e02-acee-0f6b17423135")
-		)
-		(instances
-			(project "stratolink"
-				(path "/4d146a28-be53-49f1-b1c6-484192820e45"
-					(reference "R19")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "Device:L")
 		(at 181.61 34.29 180)
 		(unit 1)
@@ -53023,7 +52903,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "lib:IND_ETQP4M220YFN"
 			(at 181.61 34.29 0)
 			(effects
 				(font
@@ -53032,7 +52912,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "~"
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C542325.html?s_z=n_ETQP4M220YFN"
 			(at 181.61 34.29 0)
 			(effects
 				(font
@@ -53041,7 +52921,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Inductor"
+		(property "Description" "ETQP4M220YFN"
 			(at 181.61 34.29 0)
 			(effects
 				(font
@@ -53132,15 +53012,15 @@
 	)
 	(symbol
 		(lib_id "power:+5V")
-		(at 100.33 153.67 0)
+		(at 104.14 152.4 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "59559617-c3b3-4eca-aa4e-a8321f906a33")
-		(property "Reference" "#PWR025"
-			(at 100.33 157.48 0)
+		(uuid "5952916e-97d3-4159-8e9e-b047e014cc01")
+		(property "Reference" "#PWR033"
+			(at 104.14 156.21 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -53149,7 +53029,7 @@
 			)
 		)
 		(property "Value" "+3.3V"
-			(at 96.012 152.4 0)
+			(at 99.822 151.13 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -53157,7 +53037,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 100.33 153.67 0)
+			(at 104.14 152.4 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -53166,7 +53046,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 100.33 153.67 0)
+			(at 104.14 152.4 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -53175,7 +53055,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"+5V\""
-			(at 100.33 153.67 0)
+			(at 104.14 152.4 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -53184,29 +53064,29 @@
 			)
 		)
 		(pin "1"
-			(uuid "eb4e91dc-234d-40f8-b3be-f3d842b0f6e4")
+			(uuid "dd849119-cdb6-4e29-8e9b-e1c5833ffb93")
 		)
 		(instances
 			(project "stratolink"
 				(path "/4d146a28-be53-49f1-b1c6-484192820e45"
-					(reference "#PWR025")
+					(reference "#PWR033")
 					(unit 1)
 				)
 			)
 		)
 	)
 	(symbol
-		(lib_id "fab:Conn_PinHeader_1x01_P2.54mm_Horizontal_SMD")
-		(at 20.32 133.35 0)
+		(lib_id "fab:Conn_Header_JST_PH_1x02_P2mm_Vertical_SMD")
+		(at 20.32 34.29 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
 		(fields_autoplaced yes)
-		(uuid "600ba9ec-d7f3-497e-964e-bcd1a549d576")
-		(property "Reference" "J19"
-			(at 20.32 128.27 0)
+		(uuid "5b862f3e-eacd-4a04-8cd1-e5cafbe9ab8c")
+		(property "Reference" "J1"
+			(at 20.32 25.4 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -53214,8 +53094,8 @@
 				(hide yes)
 			)
 		)
-		(property "Value" "Conn_PinHeader_1x01_P2.54mm_Horizontal_SMD"
-			(at 20.32 130.81 0)
+		(property "Value" "Conn_Header_JST_PH_1x02_P2mm_Vertical_SMD"
+			(at 20.32 27.94 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -53223,8 +53103,8 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "fab:PinHeader_1x01_P2.54mm_Horizontal_SMD"
-			(at 20.32 133.35 0)
+		(property "Footprint" "Connector_PinHeader_1.00mm:PinHeader_1x02_P1.00mm_Vertical"
+			(at 20.32 34.29 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -53232,8 +53112,8 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "~"
-			(at 20.32 133.35 0)
+		(property "Datasheet" "https://www.jst-mfg.com/product/pdf/eng/ePH.pdf"
+			(at 20.32 34.29 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -53241,8 +53121,8 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Connector pin header 2.54mm pitch horizontal SMD"
-			(at 20.32 133.35 0)
+		(property "Description" "Male JST PH 2 pin connector"
+			(at 20.32 34.29 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -53251,12 +53131,80 @@
 			)
 		)
 		(pin "1"
-			(uuid "7098aa18-8167-40a4-9257-c982da3486fa")
+			(uuid "f9d889b5-58f5-4175-97f2-2e32d898e862")
+		)
+		(pin "2"
+			(uuid "56bb8655-7061-4843-80e4-b0c235e5d3e7")
 		)
 		(instances
 			(project "stratolink"
 				(path "/4d146a28-be53-49f1-b1c6-484192820e45"
-					(reference "J19")
+					(reference "J1")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 99.06 171.45 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "5e051c7e-db1e-4188-a2ce-aad13914d391")
+		(property "Reference" "#PWR034"
+			(at 99.06 177.8 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 98.806 175.26 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 99.06 171.45 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 99.06 171.45 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 99.06 171.45 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "2881f4a3-667d-4a04-88be-60bae0392b02")
+		)
+		(instances
+			(project "stratolink"
+				(path "/4d146a28-be53-49f1-b1c6-484192820e45"
+					(reference "#PWR034")
 					(unit 1)
 				)
 			)
@@ -53290,7 +53238,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0402_1005Metric"
 			(at 208.026 104.394 90)
 			(effects
 				(font
@@ -53358,7 +53306,7 @@
 				)
 			)
 		)
-		(property "Footprint" "ProLib_pcs_2026-01-31:VQFN-20_L3.5-W3.5-P0.50-BL-EP2.0"
+		(property "Footprint" "lib:QFN50P350X350X100-21N"
 			(at 186.69 59.69 0)
 			(effects
 				(font
@@ -53528,7 +53476,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_SMD:C_0402_1005Metric"
 			(at 160.3248 125.73 0)
 			(effects
 				(font
@@ -53728,7 +53676,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0402_1005Metric"
 			(at 187.706 99.314 90)
 			(effects
 				(font
@@ -53861,7 +53809,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_SMD:C_0402_1005Metric"
 			(at 67.6148 115.57 0)
 			(effects
 				(font
@@ -54034,73 +53982,6 @@
 		)
 	)
 	(symbol
-		(lib_id "fab:Conn_PinHeader_1x01_P2.54mm_Horizontal_SMD")
-		(at 21.59 71.12 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "79b750a9-6696-4384-850d-970e045a6cd4")
-		(property "Reference" "J16"
-			(at 21.59 66.04 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value" "Conn_PinHeader_1x01_P2.54mm_Horizontal_SMD"
-			(at 21.59 68.58 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Footprint" "fab:PinHeader_1x01_P2.54mm_Horizontal_SMD"
-			(at 21.59 71.12 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "~"
-			(at 21.59 71.12 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Connector pin header 2.54mm pitch horizontal SMD"
-			(at 21.59 71.12 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "579d2ecb-70b3-4a44-8f03-da188feb02e8")
-		)
-		(instances
-			(project "stratolink"
-				(path "/4d146a28-be53-49f1-b1c6-484192820e45"
-					(reference "J16")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "power:GND")
 		(at 54.61 50.8 0)
 		(unit 1)
@@ -54193,7 +54074,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0402_1005Metric"
 			(at 71.374 106.934 90)
 			(effects
 				(font
@@ -54265,7 +54146,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "lib:4269"
 			(at 129.54 118.11 0)
 			(effects
 				(font
@@ -54274,7 +54155,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "~"
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C89334.html?s_z=n_Johanson%25201575AT43A40"
 			(at 129.54 118.11 0)
 			(effects
 				(font
@@ -54283,7 +54164,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Antenna"
+		(property "Description" "2450AT18A100E"
 			(at 129.54 118.11 0)
 			(effects
 				(font
@@ -54331,7 +54212,7 @@
 				)
 			)
 		)
-		(property "Footprint" "pressure:SENSORS-SMD_MS5611-01BA03"
+		(property "Footprint" "lib:SON125P500X300X100-8N"
 			(at 182.88 129.54 0)
 			(effects
 				(font
@@ -54464,7 +54345,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0402_1005Metric"
 			(at 71.374 131.064 90)
 			(effects
 				(font
@@ -54534,7 +54415,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0402_1005Metric"
 			(at 194.056 89.154 90)
 			(effects
 				(font
@@ -54577,7 +54458,7 @@
 		)
 	)
 	(symbol
-		(lib_id "mic:MMICT390200012")
+		(lib_id "T3902:T3902")
 		(at 81.28 160.02 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -54585,9 +54466,9 @@
 		(on_board yes)
 		(dnp no)
 		(fields_autoplaced yes)
-		(uuid "8d955f5e-b65d-4ca0-b657-0d6b4990e758")
-		(property "Reference" "MIC1"
-			(at 81.28 148.59 0)
+		(uuid "8b369f4d-170f-4917-a7ad-9d64a1009f83")
+		(property "Reference" "MK1"
+			(at 81.28 144.78 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -54595,15 +54476,26 @@
 				(hide yes)
 			)
 		)
-		(property "Value" "~"
-			(at 81.28 151.13 0)
+		(property "Value" "T3902"
+			(at 81.28 147.32 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
+				(hide yes)
 			)
 		)
-		(property "Footprint" "mic:MIC-SMD_5P-L3.5-W2.7-TL_MMICT390200012"
+		(property "Footprint" "lib:MIC_T3902"
+			(at 81.28 160.02 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
 			(at 81.28 160.02 0)
 			(effects
 				(font
@@ -54612,7 +54504,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "https://item.szlcsc.com/datasheet/MMICT390200012/3733689.html"
+		(property "Description" ""
 			(at 81.28 160.02 0)
 			(effects
 				(font
@@ -54621,79 +54513,158 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Direction:Omnidirectional Voltage - Supply:1.65V~3.63V Voltage - Supply:1.65V~3.63V Current Consumption:650uA Current Consumption:650uA S/N Ratio:64dB Sensitivity:-32dB Sensitivity:-32dB Impedance:- Length:3.5mm Width:2.65mm Height:0.98mm Operating Temper"
+		(property "MF" "TDK InvenSense"
 			(at 81.28 160.02 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
+				(justify bottom)
 				(hide yes)
 			)
 		)
-		(property "Manufacturer Part" "MMICT390200012"
+		(property "MAXIMUM_PACKAGE_HEIGHT" "0.98mm"
 			(at 81.28 160.02 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
+				(justify bottom)
 				(hide yes)
 			)
 		)
-		(property "Manufacturer" "TDK InvenSense(应美盛)"
+		(property "Package" "None"
 			(at 81.28 160.02 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
+				(justify bottom)
 				(hide yes)
 			)
 		)
-		(property "Supplier Part" "C3171752"
+		(property "Price" "None"
 			(at 81.28 160.02 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
+				(justify bottom)
 				(hide yes)
 			)
 		)
-		(property "Supplier" "LCSC"
+		(property "Check_prices" "https://www.snapeda.com/parts/T3902/TDK+InvenSense/view-part/?ref=eda"
 			(at 81.28 160.02 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
+				(justify bottom)
 				(hide yes)
 			)
 		)
-		(property "LCSC Part Name" "1.65V~3.63V32dB"
+		(property "STANDARD" "Manufacturer Recommendations"
 			(at 81.28 160.02 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "PARTREV" "1.0"
+			(at 81.28 160.02 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "SnapEDA_Link" "https://www.snapeda.com/parts/T3902/TDK+InvenSense/view-part/?ref=snap"
+			(at 81.28 160.02 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "MP" "T3902"
+			(at 81.28 160.02 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "Purchase-URL" "https://www.snapeda.com/api/url_track_click_mouser/?unipart_id=11605520&manufacturer=TDK InvenSense&part_name=T3902&search_term=mmict390200012"
+			(at 81.28 160.02 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "Description_1" "\n                        \n                            EVAL BOARD FOR MMICT390200012\n                        \n"
+			(at 81.28 160.02 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "Availability" "In Stock"
+			(at 81.28 160.02 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
+				(hide yes)
+			)
+		)
+		(property "MANUFACTURER" "TDK InvenSense"
+			(at 81.28 160.02 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify bottom)
 				(hide yes)
 			)
 		)
 		(pin "1"
-			(uuid "47318ce5-1b86-4ef6-b796-1c23972b807e")
+			(uuid "3bf703e2-659c-4070-9c05-84897f1404f3")
 		)
-		(pin "2"
-			(uuid "bbd8d9bb-ba4e-4cc1-bbd2-dc9a6fade5e3")
-		)
-		(pin "3"
-			(uuid "78ce1a32-838f-4b26-bf11-a8c84583cc4e")
+		(pin "3_1"
+			(uuid "5adfeabc-47eb-43c0-b585-86a702569474")
 		)
 		(pin "4"
-			(uuid "3a7871d6-b5f9-486a-824a-0088d56bac2a")
+			(uuid "38aa147b-b253-46f1-87d6-9d98600fd890")
+		)
+		(pin "2"
+			(uuid "71f066a2-2d27-4355-8c1f-0ab676810b2c")
+		)
+		(pin "3_2"
+			(uuid "ce3f34c3-d358-4c0b-8405-d32cc25602d3")
 		)
 		(pin "5"
-			(uuid "96915e80-85f6-4f0a-be1b-7c8f21c9f08c")
+			(uuid "0e09da7f-d792-4c1b-bfa5-2414a2421acb")
 		)
 		(instances
 			(project ""
 				(path "/4d146a28-be53-49f1-b1c6-484192820e45"
-					(reference "MIC1")
+					(reference "MK1")
 					(unit 1)
 				)
 			)
@@ -54727,7 +54698,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0402_1005Metric"
 			(at 122.174 106.934 90)
 			(effects
 				(font
@@ -54797,7 +54768,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0402_1005Metric"
 			(at 139.446 42.164 90)
 			(effects
 				(font
@@ -54865,7 +54836,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
 			(at 75.2348 24.13 0)
 			(effects
 				(font
@@ -55082,7 +55053,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_SMD:C_0402_1005Metric"
 			(at 84.1248 24.13 0)
 			(effects
 				(font
@@ -55282,7 +55253,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0402_1005Metric"
 			(at 65.024 109.474 90)
 			(effects
 				(font
@@ -55415,7 +55386,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_SMD:C_0402_1005Metric"
 			(at 53.6448 41.91 0)
 			(effects
 				(font
@@ -55486,7 +55457,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "RAK3172:RAK3172"
+		(property "Footprint" "lib:RAK3172"
 			(at 74.93 77.47 0)
 			(effects
 				(font
@@ -55787,7 +55758,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0402_1005Metric"
 			(at 128.524 109.474 90)
 			(effects
 				(font
@@ -55985,7 +55956,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_SMD:C_0805_2012Metric"
 			(at 207.3148 41.91 0)
 			(effects
 				(font
@@ -56022,6 +55993,91 @@
 			(project "stratolink"
 				(path "/4d146a28-be53-49f1-b1c6-484192820e45"
 					(reference "C6")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "fab:Conn_PinHeader_1x07_P2.54mm_Vertical_THT_D1mm")
+		(at 19.05 72.39 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "bbd819f9-cd82-40ce-a0bf-669a0c4936fa")
+		(property "Reference" "J3"
+			(at 19.05 59.69 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "Conn_PinHeader_1x07_P2.54mm_Vertical_THT_D1mm"
+			(at 19.05 62.23 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Footprint" "Connector_PinHeader_1.00mm:PinHeader_1x07_P1.00mm_Vertical"
+			(at 19.05 72.39 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 19.05 72.39 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Connector Header Through Hole 7 positions 0.100\" (2.54mm)"
+			(at 19.05 72.39 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "41414985-cd44-4c4e-b070-649553c05de5")
+		)
+		(pin "7"
+			(uuid "cab11cf1-621d-4094-af4a-7ce118e55642")
+		)
+		(pin "6"
+			(uuid "2f9905ff-9b6e-4b12-8260-391041d5ff52")
+		)
+		(pin "3"
+			(uuid "93dccf7f-4fa7-44b0-af7c-276eb336db01")
+		)
+		(pin "4"
+			(uuid "c1057213-374d-45b2-b1e2-351270ba3bf8")
+		)
+		(pin "5"
+			(uuid "45cecfbb-8284-4b38-8cce-7b6d4bed5079")
+		)
+		(pin "2"
+			(uuid "6fc13c9f-f617-46fe-9226-a868da60ce49")
+		)
+		(instances
+			(project ""
+				(path "/4d146a28-be53-49f1-b1c6-484192820e45"
+					(reference "J3")
 					(unit 1)
 				)
 			)
@@ -56120,7 +56176,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
 			(at 160.9852 52.07 0)
 			(effects
 				(font
@@ -56190,7 +56246,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0402_1005Metric"
 			(at 200.406 89.154 90)
 			(effects
 				(font
@@ -56258,7 +56314,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_SMD:C_0402_1005Metric"
 			(at 191.77 23.1648 0)
 			(effects
 				(font
@@ -56295,6 +56351,74 @@
 			(project "stratolink"
 				(path "/4d146a28-be53-49f1-b1c6-484192820e45"
 					(reference "C4")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:C")
+		(at 104.14 156.21 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "cf50553f-9416-49a3-b1aa-bf4c047278f5")
+		(property "Reference" "C13"
+			(at 111.76 156.21 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "100nF"
+			(at 105.664 160.274 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Capacitor_SMD:C_0402_1005Metric"
+			(at 105.1052 160.02 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 104.14 156.21 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Unpolarized capacitor"
+			(at 104.14 156.21 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "17ba2c65-1646-476f-b5e0-389c7538305e")
+		)
+		(pin "2"
+			(uuid "0f4561e3-448a-45a0-b2e4-07138013c76b")
+		)
+		(instances
+			(project "stratolink"
+				(path "/4d146a28-be53-49f1-b1c6-484192820e45"
+					(reference "C13")
 					(unit 1)
 				)
 			)
@@ -56366,16 +56490,16 @@
 		)
 	)
 	(symbol
-		(lib_id "Device:C")
-		(at 100.33 161.29 0)
+		(lib_id "power:GND")
+		(at 22.86 121.92 90)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "d35a3361-3c97-4bd2-bd7e-75e71605f12f")
-		(property "Reference" "C12"
-			(at 107.95 161.29 90)
+		(uuid "d1216247-f0ce-4001-8663-0fc0b875d231")
+		(property "Reference" "#PWR025"
+			(at 29.21 121.92 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -56383,8 +56507,8 @@
 				(hide yes)
 			)
 		)
-		(property "Value" "100nF"
-			(at 103.886 161.544 90)
+		(property "Value" "GND"
+			(at 28.194 121.92 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -56392,7 +56516,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 101.2952 165.1 0)
+			(at 22.86 121.92 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -56400,8 +56524,8 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "~"
-			(at 100.33 161.29 0)
+		(property "Datasheet" ""
+			(at 22.86 121.92 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -56409,8 +56533,8 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Unpolarized capacitor"
-			(at 100.33 161.29 0)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 22.86 121.92 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -56419,15 +56543,82 @@
 			)
 		)
 		(pin "1"
-			(uuid "bb4fb64f-92cd-4158-b5b7-c40e9e6a8ae7")
-		)
-		(pin "2"
-			(uuid "a5bdfa82-4a4c-44a4-a07e-b271099565d8")
+			(uuid "8d794aa8-305e-40bf-9419-5b6262fa301c")
 		)
 		(instances
 			(project "stratolink"
 				(path "/4d146a28-be53-49f1-b1c6-484192820e45"
-					(reference "C12")
+					(reference "#PWR025")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:R_US")
+		(at 62.23 153.67 180)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "d7c69187-ac8c-47f9-b816-6b40a5c216c6")
+		(property "Reference" "R20"
+			(at 59.69 154.9401 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+		(property "Value" "33Ω"
+			(at 60.706 156.464 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Resistor_SMD:R_0402_1005Metric"
+			(at 61.214 153.416 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 62.23 153.67 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Resistor, US symbol"
+			(at 62.23 153.67 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "2"
+			(uuid "407e4fa1-3983-4f3a-b7be-cd0e699a0ab7")
+		)
+		(pin "1"
+			(uuid "d3c8d496-2d74-4140-99af-5f7d87a15dfc")
+		)
+		(instances
+			(project "stratolink"
+				(path "/4d146a28-be53-49f1-b1c6-484192820e45"
+					(reference "R20")
 					(unit 1)
 				)
 			)
@@ -56461,7 +56652,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0402_1005Metric"
 			(at 200.406 100.584 90)
 			(effects
 				(font
@@ -56533,7 +56724,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "Diode_SMD:D_SOD-923"
+		(property "Footprint" "Diode_SMD:D_SOD-523"
 			(at 129.54 128.27 0)
 			(effects
 				(font
@@ -56542,7 +56733,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "https://www.onsemi.com/pub/Collateral/ESD9B-D.PDF"
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C85377.html?s_z=n_ESD%2520protection%2520diode"
 			(at 129.54 128.27 0)
 			(effects
 				(font
@@ -56551,7 +56742,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "ESD protection diode, 3.3Vrwm, SOD-923"
+		(property "Description" "PESD3V3S1UB,115"
 			(at 129.54 128.27 0)
 			(effects
 				(font
@@ -56603,7 +56794,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0402_1005Metric"
 			(at 55.626 32.004 90)
 			(effects
 				(font
@@ -56646,73 +56837,6 @@
 		)
 	)
 	(symbol
-		(lib_id "fab:Conn_PinHeader_1x01_P2.54mm_Horizontal_SMD")
-		(at 21.59 67.31 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "e45ef707-c7b7-4f14-aa6e-38f220c4a8fc")
-		(property "Reference" "J15"
-			(at 21.59 62.23 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value" "Conn_PinHeader_1x01_P2.54mm_Horizontal_SMD"
-			(at 21.59 64.77 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Footprint" "fab:PinHeader_1x01_P2.54mm_Horizontal_SMD"
-			(at 21.59 67.31 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "~"
-			(at 21.59 67.31 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Connector pin header 2.54mm pitch horizontal SMD"
-			(at 21.59 67.31 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "70885726-dfb2-4550-82b0-c875823ba55f")
-		)
-		(instances
-			(project "stratolink"
-				(path "/4d146a28-be53-49f1-b1c6-484192820e45"
-					(reference "J15")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "Device:R_US")
 		(at 96.52 88.9 90)
 		(unit 1)
@@ -56740,7 +56864,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0402_1005Metric"
 			(at 96.774 87.884 90)
 			(effects
 				(font
@@ -56875,7 +56999,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0402_1005Metric"
 			(at 187.706 89.154 90)
 			(effects
 				(font
@@ -56945,7 +57069,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0402_1005Metric"
 			(at 194.056 96.774 90)
 			(effects
 				(font
@@ -57015,7 +57139,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "fab:Header_JST_PH_1x02_P2mm_Vertical_SMD"
+		(property "Footprint" "Connector_PinHeader_1.00mm:PinHeader_1x02_P1.00mm_Vertical"
 			(at 20.32 24.13 0)
 			(effects
 				(font
@@ -57085,7 +57209,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_SMD:C_0402_1005Metric"
 			(at 160.9852 62.23 0)
 			(effects
 				(font
@@ -57153,7 +57277,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
 			(at 191.77 16.8148 0)
 			(effects
 				(font
@@ -57262,6 +57386,71 @@
 	)
 	(symbol
 		(lib_id "power:GND")
+		(at 29.21 36.83 90)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "f616eefe-a2a1-4fd2-be69-55ab3e5742f8")
+		(property "Reference" "#PWR031"
+			(at 35.56 36.83 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 34.544 36.83 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 29.21 36.83 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 29.21 36.83 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 29.21 36.83 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "92873d41-7c47-4153-882c-4c2db2ef5915")
+		)
+		(instances
+			(project "stratolink"
+				(path "/4d146a28-be53-49f1-b1c6-484192820e45"
+					(reference "#PWR031")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
 		(at 29.21 26.67 90)
 		(unit 1)
 		(exclude_from_sim no)
@@ -57353,7 +57542,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0402_1005Metric"
 			(at 128.016 39.624 90)
 			(effects
 				(font
@@ -57390,138 +57579,6 @@
 			(project "stratolink"
 				(path "/4d146a28-be53-49f1-b1c6-484192820e45"
 					(reference "R11")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "fab:Conn_PinHeader_1x01_P2.54mm_Horizontal_SMD")
-		(at 21.59 59.69 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "fd63908d-5bf7-48bb-a5e0-8427faad8dd9")
-		(property "Reference" "J13"
-			(at 21.59 54.61 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value" "Conn_PinHeader_1x01_P2.54mm_Horizontal_SMD"
-			(at 21.59 57.15 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Footprint" "fab:PinHeader_1x01_P2.54mm_Horizontal_SMD"
-			(at 21.59 59.69 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "~"
-			(at 21.59 59.69 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Connector pin header 2.54mm pitch horizontal SMD"
-			(at 21.59 59.69 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "e2d58433-4b68-4bb6-8766-0968c1eee9f5")
-		)
-		(instances
-			(project "stratolink"
-				(path "/4d146a28-be53-49f1-b1c6-484192820e45"
-					(reference "J13")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "power:GND")
-		(at 81.28 170.18 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "ff11885c-0d51-49b0-b65b-25ddc002143f")
-		(property "Reference" "#PWR026"
-			(at 81.28 176.53 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value" "GND"
-			(at 81.026 173.99 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 81.28 170.18 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 81.28 170.18 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 81.28 170.18 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "cdc4bc0f-91c8-4f4c-8f03-2a3ace30f73f")
-		)
-		(instances
-			(project "stratolink"
-				(path "/4d146a28-be53-49f1-b1c6-484192820e45"
-					(reference "#PWR026")
 					(unit 1)
 				)
 			)

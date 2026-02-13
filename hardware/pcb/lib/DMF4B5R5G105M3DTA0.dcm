@@ -1,0 +1,9 @@
+EESchema-DOCLIB  Version 2.0
+#
+$CMP DMF4B5R5G105M3DTA0
+D EDLC SuperCapacitor 1F 5.5V Murata 1000uF +/-20% 40m 5.5 V Electric Double Layer Capacitor DMF
+K
+F https://www.murata.com/en-eu/products/productdata/8796857237534/MFCDSF2E.pdf?1496719831000
+$ENDCMP
+#
+#End Doc Library

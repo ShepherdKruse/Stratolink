@@ -1,0 +1,9 @@
+EESchema-DOCLIB  Version 2.0
+#
+$CMP HS230F
+D CAP-XX 1.2F Supercapacitor EDLC +/-20% Tolerance Supercap H Series 5.5V dc
+K
+F 
+$ENDCMP
+#
+#End Doc Library
