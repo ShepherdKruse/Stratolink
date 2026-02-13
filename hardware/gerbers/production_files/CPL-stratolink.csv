@@ -16,8 +16,8 @@ C9,100nF,C_0402_1005Metric,62.938002,-62.698999,180.0,top
 D3,ESD9B3.3ST5G,D_SOD-523,60.284,-41.1215,90.0,top
 J1,Conn_Header_JST_PH_1x02_P2mm_Vertical_SMD,PinHeader_1x02_P1.00mm_Vertical,74.583,-58.528,0.0,bottom
 J2,Conn_Header_JST_PH_1x02_P2mm_Vertical_SMD,PinHeader_1x02_P1.00mm_Vertical,54.781,-58.532,0.0,bottom
-J3,Conn_PinHeader_1x07_P2.54mm_Vertical_THT_D1mm,PinHeader_1x07_P1.00mm_Vertical,53.312001,-72.194,0.0,top
-J4,Conn_PinHeader_1x07_P2.54mm_Vertical_THT_D1mm,PinHeader_1x07_P1.00mm_Vertical,76.639,-72.174,0.0,top
+J3,Conn_PinHeader_1x07_P2.54mm_Vertical_THT_D1mm,PinHeader_1x07_P1.00mm_Vertical,54.444999,-72.173998,0.0,top
+J4,Conn_PinHeader_1x07_P2.54mm_Vertical_THT_D1mm,PinHeader_1x07_P1.00mm_Vertical,75.531,-72.158,0.0,top
 L1,22µH,IND_LPS4018-223MRC,60.103,-38.1865,90.0,bottom
 L2,10µH,INDC1608X90N,70.172,-41.22,180.0,bottom
 MK1,T3902,MIC_T3902,56.0985,-54.884,0.0,top
