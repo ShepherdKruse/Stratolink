@@ -29,6 +29,11 @@ PCB layouts, circuit diagrams, and mechanical designs for Stratolink pico-balloo
 5. Pressure Sensor
     - TE [MS5611](https://www.lcsc.com/product-detail/C15639.html?s_z=n_MS5611)
         - seems like only viable option above 40k feet. 10-1200 mbar
+6. Tempature Sensor
+    - [TMP117](https://www.lcsc.com/product-detail/C2871893.html?s_z=n_TMP117)
+7. Spectral Sensor
+    - [AS7341](https://www.lcsc.com/product-detail/C2655145.html?s_z=n_AS7341)
+        - Aerosol optical depth (multi-wavelength sun photometry), Chappuis-band ozone estimation (4 channels span the absorption band), cloud/clear-sky detection (visible-to-NIR ratio), total solar irradiance proxy, column water vapor estimate (NIR absorption), day/night detection, surface albedo and vegetation mapping during ascent, Rayleigh scattering characterization (altitude cross-check against GPS/baro), sky brightness profiling
           
 ### Weight Budget
 Estimated weight budget may be found [here](https://docs.google.com/spreadsheets/d/1s64bTjT7GJ9_eSN0aLWiRmVTLvOQ8GIDuoYdtb-1NMI/edit?usp=sharing).
