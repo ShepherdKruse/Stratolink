@@ -33,6 +33,10 @@ PCB layouts, circuit diagrams, and mechanical designs for Stratolink pico-balloo
     - [TMP117](https://www.lcsc.com/product-detail/C2871893.html?s_z=n_TMP117)
 7. Spectral Sensor
     - [LTR-390UV-01](https://www.lcsc.com/product-detail/C492374.html?s_z=n_LTR-390UV-01)
+          - specfically intrested in UV, potentially to calcuate ozone saturation
+8. Accelerometer
+    - [LIS2DH12TR](https://www.lcsc.com/product-detail/C110926.html?s_z=n_LIS2DH12TR%2520)
+          - burst/free-fall detection. can trigger rapid beacon mode during fall.
           
 ### Weight Budget
 Estimated weight budget may be found [here](https://docs.google.com/spreadsheets/d/1s64bTjT7GJ9_eSN0aLWiRmVTLvOQ8GIDuoYdtb-1NMI/edit?usp=sharing).
