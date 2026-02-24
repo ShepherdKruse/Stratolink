@@ -1,4 +1,4 @@
-23670458657893994
+23677544977588525
 Audio_Module
 Reverb_BTDR-1H
 Digital Reverberation Unit, http://www.belton.co.kr/inc/downfile.php?seq=17&file=pdf (footprint from http://www.uk-electronic.de/PDF/BTDR-1.pdf)
@@ -96586,6 +96586,13 @@ Varistor VF
 2
 2
 lib
+21-0147E
+
+
+0
+6
+6
+lib
 4269
 4269-2
 Antenna
@@ -96599,6 +96606,13 @@ ANTC3216X140N
 0
 2
 2
+lib
+BGA6N40P3X2_148X95X53
+
+
+0
+6
+6
 lib
 CAPC1608X97N
 
@@ -96656,6 +96670,13 @@ MIC_T3902
 6
 6
 lib
+PQFN50P200X200100-12N
+
+
+0
+12
+12
+lib
 QFN50P350X350X100-21N
 
 
@@ -96704,3 +96725,10 @@ XCVR_RAK3172-8-SM-NI
 0
 32
 32
+lib
+XDCR_AS7341-DLGM
+
+
+0
+8
+8
