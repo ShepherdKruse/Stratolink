@@ -1,0 +1,2165 @@
+{
+    "$schema": "https://schemas.kicad.org/drc.v1.json",
+    "coordinate_units": "mm",
+    "date": "2026-02-25T21:07:24-0800",
+    "kicad_version": "8.0.3",
+    "schematic_parity": [],
+    "source": "stratolink.kicad_pcb",
+    "unconnected_items": [
+        {
+            "description": "Missing connection between items",
+            "items": [
+                {
+                    "description": "Track [GND] on F.Cu, length 0.7750 mm",
+                    "pos": {
+                        "x": 67.190998,
+                        "y": 38.589999
+                    },
+                    "uuid": "2b2b6ea7-6d72-4c6e-aa81-cbbfab86ab34"
+                },
+                {
+                    "description": "Pad 21 [GND] of U1 on B.Cu",
+                    "pos": {
+                        "x": 67.190998,
+                        "y": 37.814999
+                    },
+                    "uuid": "0869a173-d5f3-4d81-a535-69fb24f940ab"
+                }
+            ],
+            "severity": "error",
+            "type": "unconnected_items"
+        },
+        {
+            "description": "Missing connection between items",
+            "items": [
+                {
+                    "description": "Track [VSTOR] on F.Cu, length 2.4220 mm",
+                    "pos": {
+                        "x": 73.532,
+                        "y": 63.172
+                    },
+                    "uuid": "295fe44a-8b03-4112-af76-90257bfc02fc"
+                },
+                {
+                    "description": "Pad 1 [VSTOR] of R22 on F.Cu",
+                    "pos": {
+                        "x": 54.573,
+                        "y": 65.67899800000001
+                    },
+                    "uuid": "d2907680-26c0-450a-bf74-ae966dd65242"
+                }
+            ],
+            "severity": "error",
+            "type": "unconnected_items"
+        }
+    ],
+    "violations": [
+        {
+            "description": "Items not allowed (keepout area)",
+            "items": [
+                {
+                    "description": "Track [+3.3V] on F.Cu, length 2.5343 mm",
+                    "pos": {
+                        "x": 69.319,
+                        "y": 60.683
+                    },
+                    "uuid": "e675c927-c3f3-4875-9c51-2c7364b1b65b"
+                }
+            ],
+            "severity": "error",
+            "type": "items_not_allowed"
+        },
+        {
+            "description": "Via is not connected or connected on only one layer",
+            "items": [
+                {
+                    "description": "Via [GND] on F.Cu - B.Cu",
+                    "pos": {
+                        "x": 68.504,
+                        "y": 66.253
+                    },
+                    "uuid": "69292477-abb2-4156-bc25-2b14c3612991"
+                }
+            ],
+            "severity": "warning",
+            "type": "via_dangling"
+        },
+        {
+            "description": "Via is not connected or connected on only one layer",
+            "items": [
+                {
+                    "description": "Via [GND] on F.Cu - B.Cu",
+                    "pos": {
+                        "x": 72.927,
+                        "y": 78.219
+                    },
+                    "uuid": "75d88b15-861c-4e5d-a6d8-44f7663ff4b2"
+                }
+            ],
+            "severity": "warning",
+            "type": "via_dangling"
+        },
+        {
+            "description": "Via is not connected or connected on only one layer",
+            "items": [
+                {
+                    "description": "Via [GND] on F.Cu - B.Cu",
+                    "pos": {
+                        "x": 61.837,
+                        "y": 63.387
+                    },
+                    "uuid": "a234cdbc-3965-43be-a80a-339455ff236b"
+                }
+            ],
+            "severity": "warning",
+            "type": "via_dangling"
+        },
+        {
+            "description": "Track has unconnected end",
+            "items": [
+                {
+                    "description": "Track [+3.3V] on B.Cu, length 0.5920 mm",
+                    "pos": {
+                        "x": 69.441,
+                        "y": 75.269
+                    },
+                    "uuid": "39c95a27-75a2-4beb-ac8d-0b812e239af3"
+                }
+            ],
+            "severity": "warning",
+            "type": "track_dangling"
+        },
+        {
+            "description": "Track has unconnected end",
+            "items": [
+                {
+                    "description": "Track [+3.3V] on B.Cu, length 0.0198 mm",
+                    "pos": {
+                        "x": 68.553,
+                        "y": 44.006631
+                    },
+                    "uuid": "c7c72408-722a-4fb0-a645-908c8133b926"
+                }
+            ],
+            "severity": "warning",
+            "type": "track_dangling"
+        },
+        {
+            "description": "Track has unconnected end",
+            "items": [
+                {
+                    "description": "Track [VSTOR] on F.Cu, length 0.0113 mm",
+                    "pos": {
+                        "x": 75.187,
+                        "y": 67.249
+                    },
+                    "uuid": "fa277942-2f97-4c70-a150-464479c3b65e"
+                }
+            ],
+            "severity": "warning",
+            "type": "track_dangling"
+        },
+        {
+            "description": "Track has unconnected end",
+            "items": [
+                {
+                    "description": "Track [SDA] on F.Cu, length 0.0368 mm",
+                    "pos": {
+                        "x": 71.297999,
+                        "y": 39.987999
+                    },
+                    "uuid": "de51e7f2-b6ce-497d-8644-b0ba058297d1"
+                }
+            ],
+            "severity": "warning",
+            "type": "track_dangling"
+        },
+        {
+            "description": "Hole clearance violation (board setup constraints hole clearance 0.2500 mm; actual 0.0000 mm)",
+            "items": [
+                {
+                    "description": "Track [GND] on F.Cu, length 0.8930 mm",
+                    "pos": {
+                        "x": 66.415998,
+                        "y": 37.814999
+                    },
+                    "uuid": "a4bf7566-faa1-4fec-b23d-c924839365c7"
+                },
+                {
+                    "description": "PTH pad 23 [<no net>] of U1",
+                    "pos": {
+                        "x": 66.415998,
+                        "y": 37.814999
+                    },
+                    "uuid": "67b09878-6cd8-4d5e-a5ef-dcc0e9b29c30"
+                }
+            ],
+            "severity": "error",
+            "type": "hole_clearance"
+        },
+        {
+            "description": "Hole clearance violation (board setup constraints hole clearance 0.2500 mm; actual 0.0000 mm)",
+            "items": [
+                {
+                    "description": "Track [GND] on B.Cu, length 1.4142 mm",
+                    "pos": {
+                        "x": 68.190996,
+                        "y": 38.814997
+                    },
+                    "uuid": "a932803a-9c8b-4e61-b719-144f758a2690"
+                },
+                {
+                    "description": "PTH pad 24 [<no net>] of U1",
+                    "pos": {
+                        "x": 67.190998,
+                        "y": 37.814999
+                    },
+                    "uuid": "719471d0-f962-4593-b47e-b2f632eefa5d"
+                }
+            ],
+            "severity": "error",
+            "type": "hole_clearance"
+        },
+        {
+            "description": "Hole clearance violation (board setup constraints hole clearance 0.2500 mm; actual 0.0000 mm)",
+            "items": [
+                {
+                    "description": "Track [GND] on B.Cu, length 1.4142 mm",
+                    "pos": {
+                        "x": 66.191,
+                        "y": 36.815001
+                    },
+                    "uuid": "b6f37637-2ba3-4049-9f75-d6b6c33de444"
+                },
+                {
+                    "description": "PTH pad 24 [<no net>] of U1",
+                    "pos": {
+                        "x": 67.190998,
+                        "y": 37.814999
+                    },
+                    "uuid": "719471d0-f962-4593-b47e-b2f632eefa5d"
+                }
+            ],
+            "severity": "error",
+            "type": "hole_clearance"
+        },
+        {
+            "description": "Hole clearance violation (board setup constraints hole clearance 0.2500 mm; actual 0.0000 mm)",
+            "items": [
+                {
+                    "description": "Track [GND] on F.Cu, length 0.7750 mm",
+                    "pos": {
+                        "x": 67.190998,
+                        "y": 37.814999
+                    },
+                    "uuid": "110cfeef-8303-4a17-b8b3-d38250af7b51"
+                },
+                {
+                    "description": "PTH pad 24 [<no net>] of U1",
+                    "pos": {
+                        "x": 67.190998,
+                        "y": 37.814999
+                    },
+                    "uuid": "719471d0-f962-4593-b47e-b2f632eefa5d"
+                }
+            ],
+            "severity": "error",
+            "type": "hole_clearance"
+        },
+        {
+            "description": "Hole clearance violation (board setup constraints hole clearance 0.2500 mm; actual 0.0000 mm)",
+            "items": [
+                {
+                    "description": "Track [GND] on F.Cu, length 0.7750 mm",
+                    "pos": {
+                        "x": 66.415998,
+                        "y": 37.814999
+                    },
+                    "uuid": "115ba825-b827-46a2-9c99-bdaac4cf6dae"
+                },
+                {
+                    "description": "PTH pad 23 [<no net>] of U1",
+                    "pos": {
+                        "x": 66.415998,
+                        "y": 37.814999
+                    },
+                    "uuid": "67b09878-6cd8-4d5e-a5ef-dcc0e9b29c30"
+                }
+            ],
+            "severity": "error",
+            "type": "hole_clearance"
+        },
+        {
+            "description": "Hole clearance violation (board setup constraints hole clearance 0.2500 mm; actual 0.0000 mm)",
+            "items": [
+                {
+                    "description": "Track [GND] on F.Cu, length 1.0960 mm",
+                    "pos": {
+                        "x": 67.190998,
+                        "y": 38.589999
+                    },
+                    "uuid": "6bcaee7b-ffd4-4d13-9f42-29b5659a05da"
+                },
+                {
+                    "description": "PTH pad 22 [<no net>] of U1",
+                    "pos": {
+                        "x": 67.190998,
+                        "y": 38.589999
+                    },
+                    "uuid": "55059a9c-4e0c-4a90-9a82-421cc61a6ab1"
+                }
+            ],
+            "severity": "error",
+            "type": "hole_clearance"
+        },
+        {
+            "description": "Hole clearance violation (board setup constraints hole clearance 0.2500 mm; actual 0.0000 mm)",
+            "items": [
+                {
+                    "description": "Track [GND] on F.Cu, length 1.0960 mm",
+                    "pos": {
+                        "x": 67.965998,
+                        "y": 37.814999
+                    },
+                    "uuid": "25f07fdd-c063-46b0-a17f-1eb93e634734"
+                },
+                {
+                    "description": "PTH pad 26 [<no net>] of U1",
+                    "pos": {
+                        "x": 67.190998,
+                        "y": 37.039999
+                    },
+                    "uuid": "9f072398-92c6-41bb-97ec-02f8f95d342a"
+                }
+            ],
+            "severity": "error",
+            "type": "hole_clearance"
+        },
+        {
+            "description": "Hole clearance violation (board setup constraints hole clearance 0.2500 mm; actual 0.0000 mm)",
+            "items": [
+                {
+                    "description": "Track [GND] on F.Cu, length 0.7750 mm",
+                    "pos": {
+                        "x": 67.190998,
+                        "y": 38.589999
+                    },
+                    "uuid": "2b2b6ea7-6d72-4c6e-aa81-cbbfab86ab34"
+                },
+                {
+                    "description": "PTH pad 22 [<no net>] of U1",
+                    "pos": {
+                        "x": 67.190998,
+                        "y": 38.589999
+                    },
+                    "uuid": "55059a9c-4e0c-4a90-9a82-421cc61a6ab1"
+                }
+            ],
+            "severity": "error",
+            "type": "hole_clearance"
+        },
+        {
+            "description": "Hole clearance violation (board setup constraints hole clearance 0.2500 mm; actual 0.0960 mm)",
+            "items": [
+                {
+                    "description": "Track [GND] on F.Cu, length 0.5077 mm",
+                    "pos": {
+                        "x": 67.190998,
+                        "y": 36.719002
+                    },
+                    "uuid": "465bf177-1b1f-477f-810c-ba01c8ad7b7e"
+                },
+                {
+                    "description": "PTH pad 26 [<no net>] of U1",
+                    "pos": {
+                        "x": 67.190998,
+                        "y": 37.039999
+                    },
+                    "uuid": "9f072398-92c6-41bb-97ec-02f8f95d342a"
+                }
+            ],
+            "severity": "error",
+            "type": "hole_clearance"
+        },
+        {
+            "description": "Hole clearance violation (board setup constraints hole clearance 0.2500 mm; actual 0.0000 mm)",
+            "items": [
+                {
+                    "description": "Track [GND] on F.Cu, length 0.3210 mm",
+                    "pos": {
+                        "x": 67.190998,
+                        "y": 37.039999
+                    },
+                    "uuid": "4921d51a-d208-43c5-b7f3-21626a920ed5"
+                },
+                {
+                    "description": "PTH pad 26 [<no net>] of U1",
+                    "pos": {
+                        "x": 67.190998,
+                        "y": 37.039999
+                    },
+                    "uuid": "9f072398-92c6-41bb-97ec-02f8f95d342a"
+                }
+            ],
+            "severity": "error",
+            "type": "hole_clearance"
+        },
+        {
+            "description": "Hole clearance violation (board setup constraints hole clearance 0.2500 mm; actual 0.0000 mm)",
+            "items": [
+                {
+                    "description": "Track [GND] on B.Cu, length 1.4142 mm",
+                    "pos": {
+                        "x": 66.190999,
+                        "y": 38.814998
+                    },
+                    "uuid": "0d6b419e-8967-42c9-85f3-5e38a3de63d2"
+                },
+                {
+                    "description": "PTH pad 24 [<no net>] of U1",
+                    "pos": {
+                        "x": 67.190998,
+                        "y": 37.814999
+                    },
+                    "uuid": "719471d0-f962-4593-b47e-b2f632eefa5d"
+                }
+            ],
+            "severity": "error",
+            "type": "hole_clearance"
+        },
+        {
+            "description": "Hole clearance violation (board setup constraints hole clearance 0.2500 mm; actual 0.0000 mm)",
+            "items": [
+                {
+                    "description": "Track [GND] on F.Cu, length 1.0960 mm",
+                    "pos": {
+                        "x": 66.415998,
+                        "y": 37.814999
+                    },
+                    "uuid": "a45d59f2-e144-49df-928b-17faf874f38a"
+                },
+                {
+                    "description": "PTH pad 23 [<no net>] of U1",
+                    "pos": {
+                        "x": 66.415998,
+                        "y": 37.814999
+                    },
+                    "uuid": "67b09878-6cd8-4d5e-a5ef-dcc0e9b29c30"
+                }
+            ],
+            "severity": "error",
+            "type": "hole_clearance"
+        },
+        {
+            "description": "Hole clearance violation (board setup constraints hole clearance 0.2500 mm; actual 0.0000 mm)",
+            "items": [
+                {
+                    "description": "Track [GND] on F.Cu, length 0.7750 mm",
+                    "pos": {
+                        "x": 67.190998,
+                        "y": 37.814999
+                    },
+                    "uuid": "b34d3cd0-252b-4587-900e-f3c12c76711f"
+                },
+                {
+                    "description": "PTH pad 24 [<no net>] of U1",
+                    "pos": {
+                        "x": 67.190998,
+                        "y": 37.814999
+                    },
+                    "uuid": "719471d0-f962-4593-b47e-b2f632eefa5d"
+                }
+            ],
+            "severity": "error",
+            "type": "hole_clearance"
+        },
+        {
+            "description": "Hole clearance violation (board setup constraints hole clearance 0.2500 mm; actual 0.0000 mm)",
+            "items": [
+                {
+                    "description": "Track [GND] on F.Cu, length 0.6720 mm",
+                    "pos": {
+                        "x": 67.965998,
+                        "y": 37.814999
+                    },
+                    "uuid": "c7e34a0c-5c93-4d17-b6ff-ee256796b32d"
+                },
+                {
+                    "description": "PTH pad 25 [<no net>] of U1",
+                    "pos": {
+                        "x": 67.965998,
+                        "y": 37.814999
+                    },
+                    "uuid": "857bfa7b-03e5-4c18-9929-7b458507fe22"
+                }
+            ],
+            "severity": "error",
+            "type": "hole_clearance"
+        },
+        {
+            "description": "Hole clearance violation (board setup constraints hole clearance 0.2500 mm; actual 0.0000 mm)",
+            "items": [
+                {
+                    "description": "Track [GND] on F.Cu, length 1.0960 mm",
+                    "pos": {
+                        "x": 66.415998,
+                        "y": 37.814999
+                    },
+                    "uuid": "c9297ecb-a95f-4e96-a092-997a498b42a7"
+                },
+                {
+                    "description": "PTH pad 22 [<no net>] of U1",
+                    "pos": {
+                        "x": 67.190998,
+                        "y": 38.589999
+                    },
+                    "uuid": "55059a9c-4e0c-4a90-9a82-421cc61a6ab1"
+                }
+            ],
+            "severity": "error",
+            "type": "hole_clearance"
+        },
+        {
+            "description": "Hole clearance violation (board setup constraints hole clearance 0.2500 mm; actual 0.0000 mm)",
+            "items": [
+                {
+                    "description": "Track [GND] on F.Cu, length 1.2950 mm",
+                    "pos": {
+                        "x": 67.965998,
+                        "y": 37.814999
+                    },
+                    "uuid": "d4265e20-55e7-4858-80e8-f0b9ffd7fbd9"
+                },
+                {
+                    "description": "PTH pad 25 [<no net>] of U1",
+                    "pos": {
+                        "x": 67.965998,
+                        "y": 37.814999
+                    },
+                    "uuid": "857bfa7b-03e5-4c18-9929-7b458507fe22"
+                }
+            ],
+            "severity": "error",
+            "type": "hole_clearance"
+        },
+        {
+            "description": "Hole clearance violation (board setup constraints hole clearance 0.2500 mm; actual 0.0000 mm)",
+            "items": [
+                {
+                    "description": "Pad 21 [GND] of U1 on B.Cu",
+                    "pos": {
+                        "x": 67.190998,
+                        "y": 37.814999
+                    },
+                    "uuid": "0869a173-d5f3-4d81-a535-69fb24f940ab"
+                },
+                {
+                    "description": "PTH pad 22 [<no net>] of U1",
+                    "pos": {
+                        "x": 67.190998,
+                        "y": 38.589999
+                    },
+                    "uuid": "55059a9c-4e0c-4a90-9a82-421cc61a6ab1"
+                }
+            ],
+            "severity": "error",
+            "type": "hole_clearance"
+        },
+        {
+            "description": "Hole clearance violation (board setup constraints hole clearance 0.2500 mm; actual 0.0000 mm)",
+            "items": [
+                {
+                    "description": "Pad 21 [GND] of U1 on B.Cu",
+                    "pos": {
+                        "x": 67.190998,
+                        "y": 37.814999
+                    },
+                    "uuid": "0869a173-d5f3-4d81-a535-69fb24f940ab"
+                },
+                {
+                    "description": "PTH pad 24 [<no net>] of U1",
+                    "pos": {
+                        "x": 67.190998,
+                        "y": 37.814999
+                    },
+                    "uuid": "719471d0-f962-4593-b47e-b2f632eefa5d"
+                }
+            ],
+            "severity": "error",
+            "type": "hole_clearance"
+        },
+        {
+            "description": "Hole clearance violation (board setup constraints hole clearance 0.2500 mm; actual 0.0000 mm)",
+            "items": [
+                {
+                    "description": "Pad 21 [GND] of U1 on B.Cu",
+                    "pos": {
+                        "x": 67.190998,
+                        "y": 37.814999
+                    },
+                    "uuid": "0869a173-d5f3-4d81-a535-69fb24f940ab"
+                },
+                {
+                    "description": "PTH pad 25 [<no net>] of U1",
+                    "pos": {
+                        "x": 67.965998,
+                        "y": 37.814999
+                    },
+                    "uuid": "857bfa7b-03e5-4c18-9929-7b458507fe22"
+                }
+            ],
+            "severity": "error",
+            "type": "hole_clearance"
+        },
+        {
+            "description": "Hole clearance violation (board setup constraints hole clearance 0.2500 mm; actual 0.0000 mm)",
+            "items": [
+                {
+                    "description": "Pad 21 [GND] of U1 on B.Cu",
+                    "pos": {
+                        "x": 67.190998,
+                        "y": 37.814999
+                    },
+                    "uuid": "0869a173-d5f3-4d81-a535-69fb24f940ab"
+                },
+                {
+                    "description": "PTH pad 23 [<no net>] of U1",
+                    "pos": {
+                        "x": 66.415998,
+                        "y": 37.814999
+                    },
+                    "uuid": "67b09878-6cd8-4d5e-a5ef-dcc0e9b29c30"
+                }
+            ],
+            "severity": "error",
+            "type": "hole_clearance"
+        },
+        {
+            "description": "Hole clearance violation (board setup constraints hole clearance 0.2500 mm; actual 0.0000 mm)",
+            "items": [
+                {
+                    "description": "Pad 21 [GND] of U1 on B.Cu",
+                    "pos": {
+                        "x": 67.190998,
+                        "y": 37.814999
+                    },
+                    "uuid": "0869a173-d5f3-4d81-a535-69fb24f940ab"
+                },
+                {
+                    "description": "PTH pad 26 [<no net>] of U1",
+                    "pos": {
+                        "x": 67.190998,
+                        "y": 37.039999
+                    },
+                    "uuid": "9f072398-92c6-41bb-97ec-02f8f95d342a"
+                }
+            ],
+            "severity": "error",
+            "type": "hole_clearance"
+        },
+        {
+            "description": "Courtyards overlap",
+            "items": [
+                {
+                    "description": "Footprint D1",
+                    "pos": {
+                        "x": 71.058,
+                        "y": 82.813
+                    },
+                    "uuid": "ac1294a3-a7f7-4b6f-861f-9caf238595b7"
+                },
+                {
+                    "description": "Footprint AE1",
+                    "pos": {
+                        "x": 68.396,
+                        "y": 82.703
+                    },
+                    "uuid": "cb6e427a-5658-48c0-b3e5-886229735fee"
+                }
+            ],
+            "severity": "error",
+            "type": "courtyards_overlap"
+        },
+        {
+            "description": "Hole size out of range (board setup constraints min width 0.3000 mm; actual 0.2000 mm)",
+            "items": [
+                {
+                    "description": "PTH pad 22 [<no net>] of U1",
+                    "pos": {
+                        "x": 67.190998,
+                        "y": 38.589999
+                    },
+                    "uuid": "55059a9c-4e0c-4a90-9a82-421cc61a6ab1"
+                }
+            ],
+            "severity": "error",
+            "type": "drill_out_of_range"
+        },
+        {
+            "description": "Hole size out of range (board setup constraints min width 0.3000 mm; actual 0.2000 mm)",
+            "items": [
+                {
+                    "description": "PTH pad 23 [<no net>] of U1",
+                    "pos": {
+                        "x": 66.415998,
+                        "y": 37.814999
+                    },
+                    "uuid": "67b09878-6cd8-4d5e-a5ef-dcc0e9b29c30"
+                }
+            ],
+            "severity": "error",
+            "type": "drill_out_of_range"
+        },
+        {
+            "description": "Hole size out of range (board setup constraints min width 0.3000 mm; actual 0.2000 mm)",
+            "items": [
+                {
+                    "description": "PTH pad 24 [<no net>] of U1",
+                    "pos": {
+                        "x": 67.190998,
+                        "y": 37.814999
+                    },
+                    "uuid": "719471d0-f962-4593-b47e-b2f632eefa5d"
+                }
+            ],
+            "severity": "error",
+            "type": "drill_out_of_range"
+        },
+        {
+            "description": "Hole size out of range (board setup constraints min width 0.3000 mm; actual 0.2000 mm)",
+            "items": [
+                {
+                    "description": "PTH pad 25 [<no net>] of U1",
+                    "pos": {
+                        "x": 67.965998,
+                        "y": 37.814999
+                    },
+                    "uuid": "857bfa7b-03e5-4c18-9929-7b458507fe22"
+                }
+            ],
+            "severity": "error",
+            "type": "drill_out_of_range"
+        },
+        {
+            "description": "Hole size out of range (board setup constraints min width 0.3000 mm; actual 0.2000 mm)",
+            "items": [
+                {
+                    "description": "PTH pad 26 [<no net>] of U1",
+                    "pos": {
+                        "x": 67.190998,
+                        "y": 37.039999
+                    },
+                    "uuid": "9f072398-92c6-41bb-97ec-02f8f95d342a"
+                }
+            ],
+            "severity": "error",
+            "type": "drill_out_of_range"
+        },
+        {
+            "description": "Footprint 'C_0402_1005Metric' does not match copy in library 'Capacitor_SMD'.",
+            "items": [
+                {
+                    "description": "Footprint C19",
+                    "pos": {
+                        "x": 70.227001,
+                        "y": 35.953
+                    },
+                    "uuid": "00db17ec-ba8e-4ba2-9173-3950c0cb8f99"
+                }
+            ],
+            "severity": "warning",
+            "type": "lib_footprint_mismatch"
+        },
+        {
+            "description": "Footprint 'C_0402_1005Metric' does not match copy in library 'Capacitor_SMD'.",
+            "items": [
+                {
+                    "description": "Footprint C10",
+                    "pos": {
+                        "x": 58.306,
+                        "y": 47.267
+                    },
+                    "uuid": "08814ff2-06cc-4fad-9f97-853ac067d37a"
+                }
+            ],
+            "severity": "warning",
+            "type": "lib_footprint_mismatch"
+        },
+        {
+            "description": "Footprint 'C_0402_1005Metric' does not match copy in library 'Capacitor_SMD'.",
+            "items": [
+                {
+                    "description": "Footprint C14",
+                    "pos": {
+                        "x": 67.313,
+                        "y": 40.211
+                    },
+                    "uuid": "0afde14a-8f2b-4230-aeab-180fb8776fa1"
+                }
+            ],
+            "severity": "warning",
+            "type": "lib_footprint_mismatch"
+        },
+        {
+            "description": "Footprint '4269' does not match copy in library 'lib'.",
+            "items": [
+                {
+                    "description": "Footprint AE2",
+                    "pos": {
+                        "x": 62.882,
+                        "y": 33.218
+                    },
+                    "uuid": "13246e82-bda3-4c58-a5aa-eaafc07e970a"
+                }
+            ],
+            "severity": "warning",
+            "type": "lib_footprint_mismatch"
+        },
+        {
+            "description": "Footprint 'SON125P500X300X100-8N' does not match copy in library 'lib'.",
+            "items": [
+                {
+                    "description": "Footprint U4",
+                    "pos": {
+                        "x": 71.023,
+                        "y": 58.808
+                    },
+                    "uuid": "17d4c2f3-e18f-411c-822e-f7046a17ec3c"
+                }
+            ],
+            "severity": "warning",
+            "type": "lib_footprint_mismatch"
+        },
+        {
+            "description": "Footprint 'R_0402_1005Metric' does not match copy in library 'Resistor_SMD'.",
+            "items": [
+                {
+                    "description": "Footprint R19",
+                    "pos": {
+                        "x": 55.618,
+                        "y": 83.313
+                    },
+                    "uuid": "26c0c6da-6012-4fd7-a206-9cfeeef921b1"
+                }
+            ],
+            "severity": "warning",
+            "type": "lib_footprint_mismatch"
+        },
+        {
+            "description": "Footprint 'R_0402_1005Metric' does not match copy in library 'Resistor_SMD'.",
+            "items": [
+                {
+                    "description": "Footprint R14",
+                    "pos": {
+                        "x": 67.550999,
+                        "y": 54.408
+                    },
+                    "uuid": "26f10a77-3a73-4f1c-b580-51d4a1379156"
+                }
+            ],
+            "severity": "warning",
+            "type": "lib_footprint_mismatch"
+        },
+        {
+            "description": "Footprint 'R_0402_1005Metric' does not match copy in library 'Resistor_SMD'.",
+            "items": [
+                {
+                    "description": "Footprint R12",
+                    "pos": {
+                        "x": 74.642,
+                        "y": 77.899
+                    },
+                    "uuid": "2d19c0db-5386-4aa3-aed6-b85a44813ccb"
+                }
+            ],
+            "severity": "warning",
+            "type": "lib_footprint_mismatch"
+        },
+        {
+            "description": "Footprint 'PQFN50P200X200100-12N' does not match copy in library 'lib'.",
+            "items": [
+                {
+                    "description": "Footprint U7",
+                    "pos": {
+                        "x": 70.548,
+                        "y": 37.807
+                    },
+                    "uuid": "30c6d1e8-0ffa-4633-8a7f-49ed926e42c2"
+                }
+            ],
+            "severity": "warning",
+            "type": "lib_footprint_mismatch"
+        },
+        {
+            "description": "Footprint 'PinHeader_1x07_P1.00mm_Vertical' does not match copy in library 'Connector_PinHeader_1.00mm'.",
+            "items": [
+                {
+                    "description": "Footprint J4",
+                    "pos": {
+                        "x": 75.531,
+                        "y": 69.158
+                    },
+                    "uuid": "3240801f-f64a-4643-9616-2075f77afb4c"
+                }
+            ],
+            "severity": "warning",
+            "type": "lib_footprint_mismatch"
+        },
+        {
+            "description": "Footprint 'R_0402_1005Metric' does not match copy in library 'Resistor_SMD'.",
+            "items": [
+                {
+                    "description": "Footprint R21",
+                    "pos": {
+                        "x": 55.637,
+                        "y": 82.209999
+                    },
+                    "uuid": "33889128-f5a0-496b-9431-9436ab1bf09e"
+                }
+            ],
+            "severity": "warning",
+            "type": "lib_footprint_mismatch"
+        },
+        {
+            "description": "Footprint 'C_0402_1005Metric' does not match copy in library 'Capacitor_SMD'.",
+            "items": [
+                {
+                    "description": "Footprint C15",
+                    "pos": {
+                        "x": 55.647999,
+                        "y": 81.063998
+                    },
+                    "uuid": "339f52de-f0d5-4b73-b6ef-d8e36ccaad54"
+                }
+            ],
+            "severity": "warning",
+            "type": "lib_footprint_mismatch"
+        },
+        {
+            "description": "Footprint 'RAK3172' does not match copy in library 'lib'.",
+            "items": [
+                {
+                    "description": "Footprint U2",
+                    "pos": {
+                        "x": 72.715,
+                        "y": 64.66
+                    },
+                    "uuid": "3f6a6ca0-2957-4e8e-8d31-bfa99758daed"
+                }
+            ],
+            "severity": "warning",
+            "type": "lib_footprint_mismatch"
+        },
+        {
+            "description": "Footprint 'C_0402_1005Metric' does not match copy in library 'Capacitor_SMD'.",
+            "items": [
+                {
+                    "description": "Footprint C13",
+                    "pos": {
+                        "x": 58.3055,
+                        "y": 53.914
+                    },
+                    "uuid": "40a49839-1088-4785-ac44-6cfe7a524303"
+                }
+            ],
+            "severity": "warning",
+            "type": "lib_footprint_mismatch"
+        },
+        {
+            "description": "Footprint 'R_0402_1005Metric' does not match copy in library 'Resistor_SMD'.",
+            "items": [
+                {
+                    "description": "Footprint R20",
+                    "pos": {
+                        "x": 58.2925,
+                        "y": 55.92
+                    },
+                    "uuid": "45541c13-be6e-470d-9ad0-be4baf8bd255"
+                }
+            ],
+            "severity": "warning",
+            "type": "lib_footprint_mismatch"
+        },
+        {
+            "description": "Footprint 'C_0603_1608Metric' does not match copy in library 'Capacitor_SMD'.",
+            "items": [
+                {
+                    "description": "Footprint C8",
+                    "pos": {
+                        "x": 58.467002,
+                        "y": 61.430999
+                    },
+                    "uuid": "49e1bc9b-7f35-4897-98ff-90d034b0211d"
+                }
+            ],
+            "severity": "warning",
+            "type": "lib_footprint_mismatch"
+        },
+        {
+            "description": "Footprint 'XCVR_MAX-M10S-00B' does not match copy in library 'lib'.",
+            "items": [
+                {
+                    "description": "Footprint U3",
+                    "pos": {
+                        "x": 65.537,
+                        "y": 48.414
+                    },
+                    "uuid": "54ed5535-86bf-4890-b5f2-fdce001a1253"
+                }
+            ],
+            "severity": "warning",
+            "type": "lib_footprint_mismatch"
+        },
+        {
+            "description": "Footprint 'C_0402_1005Metric' does not match copy in library 'Capacitor_SMD'.",
+            "items": [
+                {
+                    "description": "Footprint C9",
+                    "pos": {
+                        "x": 62.938002,
+                        "y": 62.698999
+                    },
+                    "uuid": "55bc4a98-3976-42bc-b83e-351ea12913eb"
+                }
+            ],
+            "severity": "warning",
+            "type": "lib_footprint_mismatch"
+        },
+        {
+            "description": "Footprint 'C_0402_1005Metric' does not match copy in library 'Capacitor_SMD'.",
+            "items": [
+                {
+                    "description": "Footprint C20",
+                    "pos": {
+                        "x": 68.703,
+                        "y": 37.4
+                    },
+                    "uuid": "61281819-8f9a-4a4a-990b-c820f37fa978"
+                }
+            ],
+            "severity": "warning",
+            "type": "lib_footprint_mismatch"
+        },
+        {
+            "description": "Footprint 'R_0402_1005Metric' does not match copy in library 'Resistor_SMD'.",
+            "items": [
+                {
+                    "description": "Footprint R10",
+                    "pos": {
+                        "x": 61.198,
+                        "y": 62.074001
+                    },
+                    "uuid": "62ced778-7d28-4a52-9618-1572983b72ae"
+                }
+            ],
+            "severity": "warning",
+            "type": "lib_footprint_mismatch"
+        },
+        {
+            "description": "Footprint 'R_0402_1005Metric' does not match copy in library 'Resistor_SMD'.",
+            "items": [
+                {
+                    "description": "Footprint R9",
+                    "pos": {
+                        "x": 64.666999,
+                        "y": 62.062001
+                    },
+                    "uuid": "6396e604-fbb8-4b90-a275-1838124fcdd9"
+                }
+            ],
+            "severity": "warning",
+            "type": "lib_footprint_mismatch"
+        },
+        {
+            "description": "Footprint 'BGA6N40P3X2_148X95X53' does not match copy in library 'lib'.",
+            "items": [
+                {
+                    "description": "Footprint U5",
+                    "pos": {
+                        "x": 73.148,
+                        "y": 40.864
+                    },
+                    "uuid": "688942c1-866f-4bb9-beb9-61d6431288d8"
+                }
+            ],
+            "severity": "warning",
+            "type": "lib_footprint_mismatch"
+        },
+        {
+            "description": "Footprint 'R_0402_1005Metric' does not match copy in library 'Resistor_SMD'.",
+            "items": [
+                {
+                    "description": "Footprint R11",
+                    "pos": {
+                        "x": 74.648001,
+                        "y": 79.004996
+                    },
+                    "uuid": "78459de1-0922-4bfb-a43c-48caf25102d4"
+                }
+            ],
+            "severity": "warning",
+            "type": "lib_footprint_mismatch"
+        },
+        {
+            "description": "Footprint 'Tag-Connect_TC2030-IDC-NL_2x03_P1.27mm_Vertical' does not match copy in library 'Connector'.",
+            "items": [
+                {
+                    "description": "Footprint J20",
+                    "pos": {
+                        "x": 60.304,
+                        "y": 83.688
+                    },
+                    "uuid": "78b07ac9-90b1-4ea7-a18f-5d5aacc2fda9"
+                }
+            ],
+            "severity": "warning",
+            "type": "lib_footprint_mismatch"
+        },
+        {
+            "description": "Footprint 'R_0402_1005Metric' does not match copy in library 'Resistor_SMD'.",
+            "items": [
+                {
+                    "description": "Footprint R13",
+                    "pos": {
+                        "x": 67.552,
+                        "y": 55.547
+                    },
+                    "uuid": "7ae44e3b-c9db-44a1-b75b-3fdf97e820bc"
+                }
+            ],
+            "severity": "warning",
+            "type": "lib_footprint_mismatch"
+        },
+        {
+            "description": "Footprint 'R_0402_1005Metric' does not match copy in library 'Resistor_SMD'.",
+            "items": [
+                {
+                    "description": "Footprint R15",
+                    "pos": {
+                        "x": 73.578,
+                        "y": 51.71
+                    },
+                    "uuid": "9cc904dd-6ab6-437b-92b3-938e7d45bb42"
+                }
+            ],
+            "severity": "warning",
+            "type": "lib_footprint_mismatch"
+        },
+        {
+            "description": "Footprint 'R_0402_1005Metric' does not match copy in library 'Resistor_SMD'.",
+            "items": [
+                {
+                    "description": "Footprint R18",
+                    "pos": {
+                        "x": 73.583,
+                        "y": 44.545
+                    },
+                    "uuid": "a0c211e0-15c7-490b-8e54-407e8b811e05"
+                }
+            ],
+            "severity": "warning",
+            "type": "lib_footprint_mismatch"
+        },
+        {
+            "description": "Footprint 'MIC_T3902' does not match copy in library 'lib'.",
+            "items": [
+                {
+                    "description": "Footprint MK1",
+                    "pos": {
+                        "x": 56.0985,
+                        "y": 54.933
+                    },
+                    "uuid": "a200ef55-36d6-4844-bc4d-465bfee3424f"
+                }
+            ],
+            "severity": "warning",
+            "type": "lib_footprint_mismatch"
+        },
+        {
+            "description": "Footprint 'C_0402_1005Metric' does not match copy in library 'Capacitor_SMD'.",
+            "items": [
+                {
+                    "description": "Footprint C12",
+                    "pos": {
+                        "x": 71.049,
+                        "y": 41.627
+                    },
+                    "uuid": "a5586957-43a9-4886-9645-7750b66a9a43"
+                }
+            ],
+            "severity": "warning",
+            "type": "lib_footprint_mismatch"
+        },
+        {
+            "description": "Footprint 'D_SOD-523' does not match copy in library 'Diode_SMD'.",
+            "items": [
+                {
+                    "description": "Footprint D1",
+                    "pos": {
+                        "x": 71.058,
+                        "y": 82.813
+                    },
+                    "uuid": "ac1294a3-a7f7-4b6f-861f-9caf238595b7"
+                }
+            ],
+            "severity": "warning",
+            "type": "lib_footprint_mismatch"
+        },
+        {
+            "description": "Footprint 'C_0603_1608Metric' does not match copy in library 'Capacitor_SMD'.",
+            "items": [
+                {
+                    "description": "Footprint C21",
+                    "pos": {
+                        "x": 70.262,
+                        "y": 34.647
+                    },
+                    "uuid": "ad45fa26-f230-4cb0-ac65-7c89fc73000e"
+                }
+            ],
+            "severity": "warning",
+            "type": "lib_footprint_mismatch"
+        },
+        {
+            "description": "Footprint 'R_0402_1005Metric' does not match copy in library 'Resistor_SMD'.",
+            "items": [
+                {
+                    "description": "Footprint R23",
+                    "pos": {
+                        "x": 55.692,
+                        "y": 66.193999
+                    },
+                    "uuid": "affa6759-ec29-4cea-8851-2f3dd6e9fa1b"
+                }
+            ],
+            "severity": "warning",
+            "type": "lib_footprint_mismatch"
+        },
+        {
+            "description": "Footprint 'C_0402_1005Metric' does not match copy in library 'Capacitor_SMD'.",
+            "items": [
+                {
+                    "description": "Footprint C7",
+                    "pos": {
+                        "x": 58.477,
+                        "y": 62.720001
+                    },
+                    "uuid": "b88b96b5-c4e7-4e39-9111-79dcfd69cfb7"
+                }
+            ],
+            "severity": "warning",
+            "type": "lib_footprint_mismatch"
+        },
+        {
+            "description": "Footprint 'PinHeader_1x07_P1.00mm_Vertical' does not match copy in library 'Connector_PinHeader_1.00mm'.",
+            "items": [
+                {
+                    "description": "Footprint J3",
+                    "pos": {
+                        "x": 54.444998,
+                        "y": 69.173998
+                    },
+                    "uuid": "bf680257-8d20-43fa-8238-9a189f9c2bf5"
+                }
+            ],
+            "severity": "warning",
+            "type": "lib_footprint_mismatch"
+        },
+        {
+            "description": "Footprint 'C_0402_1005Metric' does not match copy in library 'Capacitor_SMD'.",
+            "items": [
+                {
+                    "description": "Footprint C17",
+                    "pos": {
+                        "x": 55.113,
+                        "y": 67.702999
+                    },
+                    "uuid": "c46ca3ca-5f8d-4eb9-a79e-deb05fec18a0"
+                }
+            ],
+            "severity": "warning",
+            "type": "lib_footprint_mismatch"
+        },
+        {
+            "description": "Footprint '4269' does not match copy in library 'lib'.",
+            "items": [
+                {
+                    "description": "Footprint AE1",
+                    "pos": {
+                        "x": 68.396,
+                        "y": 82.703
+                    },
+                    "uuid": "cb6e427a-5658-48c0-b3e5-886229735fee"
+                }
+            ],
+            "severity": "warning",
+            "type": "lib_footprint_mismatch"
+        },
+        {
+            "description": "Footprint 'R_0402_1005Metric' does not match copy in library 'Resistor_SMD'.",
+            "items": [
+                {
+                    "description": "Footprint R16",
+                    "pos": {
+                        "x": 73.566,
+                        "y": 50.575
+                    },
+                    "uuid": "d1d520c2-d00f-42b9-b858-28cd20e74723"
+                }
+            ],
+            "severity": "warning",
+            "type": "lib_footprint_mismatch"
+        },
+        {
+            "description": "Footprint 'R_0402_1005Metric' does not match copy in library 'Resistor_SMD'.",
+            "items": [
+                {
+                    "description": "Footprint R22",
+                    "pos": {
+                        "x": 54.573,
+                        "y": 66.188999
+                    },
+                    "uuid": "d2136cf2-e29c-428c-9d83-4de41f88878d"
+                }
+            ],
+            "severity": "warning",
+            "type": "lib_footprint_mismatch"
+        },
+        {
+            "description": "Footprint 'C_0402_1005Metric' does not match copy in library 'Capacitor_SMD'.",
+            "items": [
+                {
+                    "description": "Footprint C11",
+                    "pos": {
+                        "x": 68.212,
+                        "y": 58.003
+                    },
+                    "uuid": "d6b181ea-a4dc-47a7-9d8a-6d2acb280fed"
+                }
+            ],
+            "severity": "warning",
+            "type": "lib_footprint_mismatch"
+        },
+        {
+            "description": "Footprint 'D_SOD-523' does not match copy in library 'Diode_SMD'.",
+            "items": [
+                {
+                    "description": "Footprint D3",
+                    "pos": {
+                        "x": 60.284,
+                        "y": 41.1215
+                    },
+                    "uuid": "eb4bfd0b-fd5d-47c4-832a-a071475f8a36"
+                }
+            ],
+            "severity": "warning",
+            "type": "lib_footprint_mismatch"
+        },
+        {
+            "description": "Footprint 'C_0402_1005Metric' does not match copy in library 'Capacitor_SMD'.",
+            "items": [
+                {
+                    "description": "Footprint FB1",
+                    "pos": {
+                        "x": 56.414,
+                        "y": 50.858
+                    },
+                    "uuid": "ee5203cb-87f5-4001-a05d-d1d569d2d1bb"
+                }
+            ],
+            "severity": "warning",
+            "type": "lib_footprint_mismatch"
+        },
+        {
+            "description": "Footprint 'C_0603_1608Metric' does not match copy in library 'Capacitor_SMD'.",
+            "items": [
+                {
+                    "description": "Footprint C16",
+                    "pos": {
+                        "x": 66.057,
+                        "y": 40.324
+                    },
+                    "uuid": "f0673ac8-693e-4fae-8f7b-7bfa9ba9636f"
+                }
+            ],
+            "severity": "warning",
+            "type": "lib_footprint_mismatch"
+        },
+        {
+            "description": "Footprint 'R_0402_1005Metric' does not match copy in library 'Resistor_SMD'.",
+            "items": [
+                {
+                    "description": "Footprint R7",
+                    "pos": {
+                        "x": 71.67,
+                        "y": 34.175
+                    },
+                    "uuid": "067e98c8-3271-4479-80ed-f47810de478a"
+                }
+            ],
+            "severity": "warning",
+            "type": "lib_footprint_mismatch"
+        },
+        {
+            "description": "Footprint 'DMF4B5R5G105M3DTA0' does not match copy in library 'lib'.",
+            "items": [
+                {
+                    "description": "Footprint C5",
+                    "pos": {
+                        "x": 64.875,
+                        "y": 64.707
+                    },
+                    "uuid": "1625c2a2-112b-4328-9591-9b9be88f549e"
+                }
+            ],
+            "severity": "warning",
+            "type": "lib_footprint_mismatch"
+        },
+        {
+            "description": "Footprint 'R_0402_1005Metric' does not match copy in library 'Resistor_SMD'.",
+            "items": [
+                {
+                    "description": "Footprint R1",
+                    "pos": {
+                        "x": 65.934,
+                        "y": 34.206
+                    },
+                    "uuid": "2be94085-58f7-4e79-8f24-607d013eda4a"
+                }
+            ],
+            "severity": "warning",
+            "type": "lib_footprint_mismatch"
+        },
+        {
+            "description": "Footprint 'PinHeader_1x02_P1.00mm_Vertical' does not match copy in library 'Connector_PinHeader_1.00mm'.",
+            "items": [
+                {
+                    "description": "Footprint J2",
+                    "pos": {
+                        "x": 54.781,
+                        "y": 58.032
+                    },
+                    "uuid": "3868a2a2-0ea5-4d8d-a7fe-89036ea349aa"
+                }
+            ],
+            "severity": "warning",
+            "type": "lib_footprint_mismatch"
+        },
+        {
+            "description": "Footprint 'R_0402_1005Metric' does not match copy in library 'Resistor_SMD'.",
+            "items": [
+                {
+                    "description": "Footprint R8",
+                    "pos": {
+                        "x": 70.97,
+                        "y": 36.276
+                    },
+                    "uuid": "4658e064-469c-4246-a546-353b53fa35dd"
+                }
+            ],
+            "severity": "warning",
+            "type": "lib_footprint_mismatch"
+        },
+        {
+            "description": "Footprint 'C_0603_1608Metric' does not match copy in library 'Capacitor_SMD'.",
+            "items": [
+                {
+                    "description": "Footprint C2",
+                    "pos": {
+                        "x": 63.873,
+                        "y": 39.142
+                    },
+                    "uuid": "5dda6dc8-641b-4e0e-977c-4b723f060497"
+                }
+            ],
+            "severity": "warning",
+            "type": "lib_footprint_mismatch"
+        },
+        {
+            "description": "Footprint 'R_0402_1005Metric' does not match copy in library 'Resistor_SMD'.",
+            "items": [
+                {
+                    "description": "Footprint R5",
+                    "pos": {
+                        "x": 69.447,
+                        "y": 34.198
+                    },
+                    "uuid": "6ca18b88-df8f-43a5-b795-a121f7b91880"
+                }
+            ],
+            "severity": "warning",
+            "type": "lib_footprint_mismatch"
+        },
+        {
+            "description": "Footprint 'PinHeader_1x02_P1.00mm_Vertical' does not match copy in library 'Connector_PinHeader_1.00mm'.",
+            "items": [
+                {
+                    "description": "Footprint J1",
+                    "pos": {
+                        "x": 74.583,
+                        "y": 58.028
+                    },
+                    "uuid": "6f289ee6-54f0-4c32-bec0-2d009c8b40bc"
+                }
+            ],
+            "severity": "warning",
+            "type": "lib_footprint_mismatch"
+        },
+        {
+            "description": "Footprint 'C_0402_1005Metric' does not match copy in library 'Capacitor_SMD'.",
+            "items": [
+                {
+                    "description": "Footprint C4",
+                    "pos": {
+                        "x": 65.975,
+                        "y": 40.709998
+                    },
+                    "uuid": "7d9f8c28-547c-426f-8b50-4b38e2c6001e"
+                }
+            ],
+            "severity": "warning",
+            "type": "lib_footprint_mismatch"
+        },
+        {
+            "description": "Footprint 'QFN50P350X350X100-21N' does not match copy in library 'lib'.",
+            "items": [
+                {
+                    "description": "Footprint U1",
+                    "pos": {
+                        "x": 67.190998,
+                        "y": 37.814999
+                    },
+                    "uuid": "833d8cae-525b-4e22-9682-ad6c29a6b84b"
+                }
+            ],
+            "severity": "warning",
+            "type": "lib_footprint_mismatch"
+        },
+        {
+            "description": "Footprint 'C_0402_1005Metric' does not match copy in library 'Capacitor_SMD'.",
+            "items": [
+                {
+                    "description": "Footprint C1",
+                    "pos": {
+                        "x": 64.422,
+                        "y": 36.521
+                    },
+                    "uuid": "8d426cfe-7cd8-4ced-b2ad-50a275d070d1"
+                }
+            ],
+            "severity": "warning",
+            "type": "lib_footprint_mismatch"
+        },
+        {
+            "description": "Footprint 'R_0402_1005Metric' does not match copy in library 'Resistor_SMD'.",
+            "items": [
+                {
+                    "description": "Footprint R6",
+                    "pos": {
+                        "x": 70.557,
+                        "y": 34.194
+                    },
+                    "uuid": "934fd5f5-032d-47ee-9c22-0ecc7803f457"
+                }
+            ],
+            "severity": "warning",
+            "type": "lib_footprint_mismatch"
+        },
+        {
+            "description": "Footprint 'C_0805_2012Metric' does not match copy in library 'Capacitor_SMD'.",
+            "items": [
+                {
+                    "description": "Footprint C6",
+                    "pos": {
+                        "x": 70.956,
+                        "y": 38.591
+                    },
+                    "uuid": "99d1fec1-ab44-48b3-864f-c71abe9dcf5f"
+                }
+            ],
+            "severity": "warning",
+            "type": "lib_footprint_mismatch"
+        },
+        {
+            "description": "Footprint 'R_0402_1005Metric' does not match copy in library 'Resistor_SMD'.",
+            "items": [
+                {
+                    "description": "Footprint R2",
+                    "pos": {
+                        "x": 64.847,
+                        "y": 34.212001
+                    },
+                    "uuid": "a3f40b42-77ca-42cc-a023-f170de049a74"
+                }
+            ],
+            "severity": "warning",
+            "type": "lib_footprint_mismatch"
+        },
+        {
+            "description": "Footprint 'C_0603_1608Metric' does not match copy in library 'Capacitor_SMD'.",
+            "items": [
+                {
+                    "description": "Footprint C3",
+                    "pos": {
+                        "x": 65.880998,
+                        "y": 42.066998
+                    },
+                    "uuid": "aa3355ed-1b2f-485e-8f8d-7fc5573a45a1"
+                }
+            ],
+            "severity": "warning",
+            "type": "lib_footprint_mismatch"
+        },
+        {
+            "description": "Footprint 'R_0402_1005Metric' does not match copy in library 'Resistor_SMD'.",
+            "items": [
+                {
+                    "description": "Footprint R3",
+                    "pos": {
+                        "x": 68.354,
+                        "y": 34.198
+                    },
+                    "uuid": "b0e1eb3d-fd60-4d68-80b3-a8f484a8fb2a"
+                }
+            ],
+            "severity": "warning",
+            "type": "lib_footprint_mismatch"
+        },
+        {
+            "description": "Footprint 'IND_LPS4018-223MRC' does not match copy in library 'lib'.",
+            "items": [
+                {
+                    "description": "Footprint L1",
+                    "pos": {
+                        "x": 60.103,
+                        "y": 38.1865
+                    },
+                    "uuid": "b5472ac7-650f-4a10-a9db-3c082eee2c2c"
+                }
+            ],
+            "severity": "warning",
+            "type": "lib_footprint_mismatch"
+        },
+        {
+            "description": "Footprint 'R_0402_1005Metric' does not match copy in library 'Resistor_SMD'.",
+            "items": [
+                {
+                    "description": "Footprint R4",
+                    "pos": {
+                        "x": 67.023,
+                        "y": 34.213001
+                    },
+                    "uuid": "d4fb8185-3206-4f54-976f-3b8166358418"
+                }
+            ],
+            "severity": "warning",
+            "type": "lib_footprint_mismatch"
+        },
+        {
+            "description": "Thermal relief connection to zone incomplete (layer F.Cu; zone min spoke count 2; actual 1)",
+            "items": [
+                {
+                    "description": "Zone [GND] on F.Cu and B.Cu",
+                    "pos": {
+                        "x": 53.011,
+                        "y": 29.026164
+                    },
+                    "uuid": "795c4093-4930-4bcb-9c07-8e31d04084fe"
+                },
+                {
+                    "description": "Pad 5 [GND] of U7 on F.Cu",
+                    "pos": {
+                        "x": 71.313,
+                        "y": 38.072
+                    },
+                    "uuid": "885f4db5-7a9b-4845-9096-ed56c7826b71"
+                }
+            ],
+            "severity": "error",
+            "type": "starved_thermal"
+        },
+        {
+            "description": "Thermal relief connection to zone incomplete (layer B.Cu; zone min spoke count 2; actual 1)",
+            "items": [
+                {
+                    "description": "Zone [GND] on B.Cu",
+                    "pos": {
+                        "x": 52.941,
+                        "y": 29.045069
+                    },
+                    "uuid": "e9b71a22-0a8a-41f9-b5c4-115945b7ef58"
+                },
+                {
+                    "description": "PTH pad 2 [GND] of J3",
+                    "pos": {
+                        "x": 54.444998,
+                        "y": 70.173999
+                    },
+                    "uuid": "ee2785a4-1245-43e1-83e8-fa4973870f0b"
+                }
+            ],
+            "severity": "error",
+            "type": "starved_thermal"
+        },
+        {
+            "description": "Thermal relief connection to zone incomplete (layer B.Cu; zone min spoke count 2; actual 1)",
+            "items": [
+                {
+                    "description": "Zone [GND] on F.Cu and B.Cu",
+                    "pos": {
+                        "x": 53.011,
+                        "y": 29.026164
+                    },
+                    "uuid": "795c4093-4930-4bcb-9c07-8e31d04084fe"
+                },
+                {
+                    "description": "PTH pad 2 [GND] of J3",
+                    "pos": {
+                        "x": 54.444998,
+                        "y": 70.173999
+                    },
+                    "uuid": "ee2785a4-1245-43e1-83e8-fa4973870f0b"
+                }
+            ],
+            "severity": "error",
+            "type": "starved_thermal"
+        },
+        {
+            "description": "Thermal relief connection to zone incomplete (layer F.Cu; zone min spoke count 2; actual 1)",
+            "items": [
+                {
+                    "description": "Zone [GND] on F.Cu and B.Cu",
+                    "pos": {
+                        "x": 53.011,
+                        "y": 29.026164
+                    },
+                    "uuid": "795c4093-4930-4bcb-9c07-8e31d04084fe"
+                },
+                {
+                    "description": "Pad 1 [GND] of U3 on F.Cu",
+                    "pos": {
+                        "x": 70.286999,
+                        "y": 52.813999
+                    },
+                    "uuid": "b9c00183-af64-4976-a43c-08f4bf2ea4af"
+                }
+            ],
+            "severity": "error",
+            "type": "starved_thermal"
+        },
+        {
+            "description": "Thermal relief connection to zone incomplete (layer B.Cu; zone min spoke count 2; actual 1)",
+            "items": [
+                {
+                    "description": "Zone [GND] on B.Cu",
+                    "pos": {
+                        "x": 52.941,
+                        "y": 29.045069
+                    },
+                    "uuid": "e9b71a22-0a8a-41f9-b5c4-115945b7ef58"
+                },
+                {
+                    "description": "Pad 2 [GND] of C3 on B.Cu",
+                    "pos": {
+                        "x": 65.105998,
+                        "y": 42.066998
+                    },
+                    "uuid": "b4fae5f4-200e-4155-b01b-f96e0c44c6cb"
+                }
+            ],
+            "severity": "error",
+            "type": "starved_thermal"
+        },
+        {
+            "description": "Thermal relief connection to zone incomplete (layer F.Cu; zone min spoke count 2; actual 1)",
+            "items": [
+                {
+                    "description": "Zone [GND] on F.Cu and B.Cu",
+                    "pos": {
+                        "x": 53.011,
+                        "y": 29.026164
+                    },
+                    "uuid": "795c4093-4930-4bcb-9c07-8e31d04084fe"
+                },
+                {
+                    "description": "PTH pad 2 [GND] of J2",
+                    "pos": {
+                        "x": 54.781,
+                        "y": 59.032
+                    },
+                    "uuid": "442e900e-be28-4d32-91c0-e56a333e20bd"
+                }
+            ],
+            "severity": "error",
+            "type": "starved_thermal"
+        },
+        {
+            "description": "Thermal relief connection to zone incomplete (layer F.Cu; zone min spoke count 2; actual 1)",
+            "items": [
+                {
+                    "description": "Zone [GND] on F.Cu and B.Cu",
+                    "pos": {
+                        "x": 53.011,
+                        "y": 29.026164
+                    },
+                    "uuid": "795c4093-4930-4bcb-9c07-8e31d04084fe"
+                },
+                {
+                    "description": "PTH pad 2 [GND] of J1",
+                    "pos": {
+                        "x": 74.583,
+                        "y": 59.028
+                    },
+                    "uuid": "d4c85218-dd11-4157-851c-3c5a79edc97f"
+                }
+            ],
+            "severity": "error",
+            "type": "starved_thermal"
+        },
+        {
+            "description": "Thermal relief connection to zone incomplete (layer B.Cu; zone min spoke count 2; actual 1)",
+            "items": [
+                {
+                    "description": "Zone [GND] on F.Cu and B.Cu",
+                    "pos": {
+                        "x": 53.011,
+                        "y": 29.026164
+                    },
+                    "uuid": "795c4093-4930-4bcb-9c07-8e31d04084fe"
+                },
+                {
+                    "description": "Pad 2 [GND] of C3 on B.Cu",
+                    "pos": {
+                        "x": 65.105998,
+                        "y": 42.066998
+                    },
+                    "uuid": "b4fae5f4-200e-4155-b01b-f96e0c44c6cb"
+                }
+            ],
+            "severity": "error",
+            "type": "starved_thermal"
+        },
+        {
+            "description": "Front solder mask aperture bridges items with different nets",
+            "items": [
+                {
+                    "description": "Pad 1 [SCL] of U7 on F.Cu",
+                    "pos": {
+                        "x": 69.798,
+                        "y": 38.571999
+                    },
+                    "uuid": "c15edda3-911a-44fe-9d0e-b38bf0e5970f"
+                },
+                {
+                    "description": "Pad 12 [PA8] of U7 on F.Cu",
+                    "pos": {
+                        "x": 69.783,
+                        "y": 38.057
+                    },
+                    "uuid": "10c617de-60db-4459-85dc-c4e27f639bb8"
+                }
+            ],
+            "severity": "error",
+            "type": "solder_mask_bridge"
+        },
+        {
+            "description": "Front solder mask aperture bridges items with different nets",
+            "items": [
+                {
+                    "description": "Pad 1 [SCL] of U7 on F.Cu",
+                    "pos": {
+                        "x": 69.798,
+                        "y": 38.571999
+                    },
+                    "uuid": "c15edda3-911a-44fe-9d0e-b38bf0e5970f"
+                },
+                {
+                    "description": "Pad 2 [+3.3V] of U7 on F.Cu",
+                    "pos": {
+                        "x": 70.298,
+                        "y": 38.572
+                    },
+                    "uuid": "9ba169d3-5736-49df-b848-9088befd6a05"
+                }
+            ],
+            "severity": "error",
+            "type": "solder_mask_bridge"
+        },
+        {
+            "description": "Front solder mask aperture bridges items with different nets",
+            "items": [
+                {
+                    "description": "Pad 2 [+3.3V] of U7 on F.Cu",
+                    "pos": {
+                        "x": 70.298,
+                        "y": 38.572
+                    },
+                    "uuid": "9ba169d3-5736-49df-b848-9088befd6a05"
+                },
+                {
+                    "description": "Pad 3 [GND] of U7 on F.Cu",
+                    "pos": {
+                        "x": 70.798,
+                        "y": 38.572
+                    },
+                    "uuid": "a93cbc1e-4e77-4486-a48b-8187656ae968"
+                }
+            ],
+            "severity": "error",
+            "type": "solder_mask_bridge"
+        },
+        {
+            "description": "Front solder mask aperture bridges items with different nets",
+            "items": [
+                {
+                    "description": "Pad 3 [GND] of U7 on F.Cu",
+                    "pos": {
+                        "x": 70.798,
+                        "y": 38.572
+                    },
+                    "uuid": "a93cbc1e-4e77-4486-a48b-8187656ae968"
+                },
+                {
+                    "description": "Pad 4 [SDA] of U7 on F.Cu",
+                    "pos": {
+                        "x": 71.297999,
+                        "y": 38.572
+                    },
+                    "uuid": "97e63275-6524-4b0c-aa59-358be4aa2e66"
+                }
+            ],
+            "severity": "error",
+            "type": "solder_mask_bridge"
+        },
+        {
+            "description": "Front solder mask aperture bridges items with different nets",
+            "items": [
+                {
+                    "description": "Pad 4 [SDA] of U7 on F.Cu",
+                    "pos": {
+                        "x": 71.297999,
+                        "y": 38.572
+                    },
+                    "uuid": "97e63275-6524-4b0c-aa59-358be4aa2e66"
+                },
+                {
+                    "description": "Pad 5 [GND] of U7 on F.Cu",
+                    "pos": {
+                        "x": 71.313,
+                        "y": 38.072
+                    },
+                    "uuid": "885f4db5-7a9b-4845-9096-ed56c7826b71"
+                }
+            ],
+            "severity": "error",
+            "type": "solder_mask_bridge"
+        },
+        {
+            "description": "Front solder mask aperture bridges items with different nets",
+            "items": [
+                {
+                    "description": "Pad 8 [GND] of U7 on F.Cu",
+                    "pos": {
+                        "x": 70.798,
+                        "y": 37.042
+                    },
+                    "uuid": "77d55d14-93f0-45c2-9c41-d0881e10a934"
+                },
+                {
+                    "description": "Pad 9 [+3.3V] of U7 on F.Cu",
+                    "pos": {
+                        "x": 70.298,
+                        "y": 37.042
+                    },
+                    "uuid": "840ac94f-0c85-4cce-bee7-7a770472d316"
+                }
+            ],
+            "severity": "error",
+            "type": "solder_mask_bridge"
+        },
+        {
+            "description": "Front solder mask aperture bridges items with different nets",
+            "items": [
+                {
+                    "description": "Pad 10 [+3.3V] of U7 on F.Cu",
+                    "pos": {
+                        "x": 69.798001,
+                        "y": 37.042
+                    },
+                    "uuid": "8354534f-c9fa-4833-8f1c-d92a8d313fe9"
+                },
+                {
+                    "description": "Pad 11 [unconnected-(U7-INT2-Pad11)] of U7 on F.Cu",
+                    "pos": {
+                        "x": 69.783,
+                        "y": 37.557
+                    },
+                    "uuid": "5059cf4f-a448-4344-a737-e6ab6c06719b"
+                }
+            ],
+            "severity": "error",
+            "type": "solder_mask_bridge"
+        },
+        {
+            "description": "Front solder mask aperture bridges items with different nets",
+            "items": [
+                {
+                    "description": "Pad 11 [unconnected-(U7-INT2-Pad11)] of U7 on F.Cu",
+                    "pos": {
+                        "x": 69.783,
+                        "y": 37.557
+                    },
+                    "uuid": "5059cf4f-a448-4344-a737-e6ab6c06719b"
+                },
+                {
+                    "description": "Pad 12 [PA8] of U7 on F.Cu",
+                    "pos": {
+                        "x": 69.783,
+                        "y": 38.057
+                    },
+                    "uuid": "10c617de-60db-4459-85dc-c4e27f639bb8"
+                }
+            ],
+            "severity": "error",
+            "type": "solder_mask_bridge"
+        },
+        {
+            "description": "Front solder mask aperture bridges items with different nets",
+            "items": [
+                {
+                    "description": "Circle on F.Mask",
+                    "pos": {
+                        "x": 56.0985,
+                        "y": 55.643
+                    },
+                    "uuid": "b23feb49-8f0f-4574-9e2e-318902ace596"
+                },
+                {
+                    "description": "Track [GND] on F.Cu, length 0.9299 mm",
+                    "pos": {
+                        "x": 56.0985,
+                        "y": 54.968
+                    },
+                    "uuid": "29a1de5e-c2c8-4e27-bbc7-a8acaa3e6468"
+                }
+            ],
+            "severity": "error",
+            "type": "solder_mask_bridge"
+        },
+        {
+            "description": "Rear solder mask aperture bridges items with different nets",
+            "items": [
+                {
+                    "description": "Polygon on B.Mask",
+                    "pos": {
+                        "x": 66.095998,
+                        "y": 38.909999
+                    },
+                    "uuid": "2a1fbf5b-0d6d-400b-b705-eb9c33ad3397"
+                },
+                {
+                    "description": "Track [GND] on B.Cu, length 1.4142 mm",
+                    "pos": {
+                        "x": 66.190999,
+                        "y": 38.814998
+                    },
+                    "uuid": "0d6b419e-8967-42c9-85f3-5e38a3de63d2"
+                }
+            ],
+            "severity": "error",
+            "type": "solder_mask_bridge"
+        },
+        {
+            "description": "Rear solder mask aperture bridges items with different nets",
+            "items": [
+                {
+                    "description": "Polygon on B.Mask",
+                    "pos": {
+                        "x": 66.095998,
+                        "y": 38.909999
+                    },
+                    "uuid": "2a1fbf5b-0d6d-400b-b705-eb9c33ad3397"
+                },
+                {
+                    "description": "Track [GND] on B.Cu, length 1.4142 mm",
+                    "pos": {
+                        "x": 66.190999,
+                        "y": 38.814998
+                    },
+                    "uuid": "0d6b419e-8967-42c9-85f3-5e38a3de63d2"
+                }
+            ],
+            "severity": "error",
+            "type": "solder_mask_bridge"
+        },
+        {
+            "description": "Rear solder mask aperture bridges items with different nets",
+            "items": [
+                {
+                    "description": "Polygon on B.Mask",
+                    "pos": {
+                        "x": 66.095998,
+                        "y": 38.909999
+                    },
+                    "uuid": "2a1fbf5b-0d6d-400b-b705-eb9c33ad3397"
+                },
+                {
+                    "description": "Track [GND] on B.Cu, length 1.4142 mm",
+                    "pos": {
+                        "x": 66.190999,
+                        "y": 38.814998
+                    },
+                    "uuid": "0d6b419e-8967-42c9-85f3-5e38a3de63d2"
+                }
+            ],
+            "severity": "error",
+            "type": "solder_mask_bridge"
+        },
+        {
+            "description": "Rear solder mask aperture bridges items with different nets",
+            "items": [
+                {
+                    "description": "Polygon on B.Mask",
+                    "pos": {
+                        "x": 66.095998,
+                        "y": 38.909999
+                    },
+                    "uuid": "2a1fbf5b-0d6d-400b-b705-eb9c33ad3397"
+                },
+                {
+                    "description": "Track [GND] on B.Cu, length 1.4142 mm",
+                    "pos": {
+                        "x": 66.190999,
+                        "y": 38.814998
+                    },
+                    "uuid": "0d6b419e-8967-42c9-85f3-5e38a3de63d2"
+                }
+            ],
+            "severity": "error",
+            "type": "solder_mask_bridge"
+        },
+        {
+            "description": "Rear solder mask aperture bridges items with different nets",
+            "items": [
+                {
+                    "description": "Polygon on B.Mask",
+                    "pos": {
+                        "x": 66.095998,
+                        "y": 38.909999
+                    },
+                    "uuid": "2a1fbf5b-0d6d-400b-b705-eb9c33ad3397"
+                },
+                {
+                    "description": "Track [GND] on B.Cu, length 1.4142 mm",
+                    "pos": {
+                        "x": 66.190999,
+                        "y": 38.814998
+                    },
+                    "uuid": "0d6b419e-8967-42c9-85f3-5e38a3de63d2"
+                }
+            ],
+            "severity": "error",
+            "type": "solder_mask_bridge"
+        }
+    ]
+}

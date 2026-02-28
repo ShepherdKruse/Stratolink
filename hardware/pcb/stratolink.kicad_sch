@@ -4865,6 +4865,12 @@
 		)
 	)
 	(junction
+		(at 111.76 120.65)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "0310b9f5-00d9-4b7e-affa-1480c19020ff")
+	)
+	(junction
 		(at 76.2 22.86)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -5205,6 +5211,12 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "d2f60048-e4cd-4459-88f2-8a2ed7cd8f4d")
+	)
+	(junction
+		(at 157.48 24.13)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "d973c194-d0dd-4ef9-82e1-b033a21037bf")
 	)
 	(junction
 		(at 243.84 53.34)
@@ -5662,6 +5674,16 @@
 	)
 	(wire
 		(pts
+			(xy 210.82 36.83) (xy 214.63 36.83)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "2bb04902-763f-41d3-a822-f1ea3299c245")
+	)
+	(wire
+		(pts
 			(xy 187.96 21.59) (xy 187.96 17.78)
 		)
 		(stroke
@@ -5782,7 +5804,7 @@
 	)
 	(wire
 		(pts
-			(xy 157.48 36.83) (xy 157.48 39.37)
+			(xy 157.48 24.13) (xy 157.48 39.37)
 		)
 		(stroke
 			(width 0)
@@ -6602,6 +6624,16 @@
 	)
 	(wire
 		(pts
+			(xy 231.14 27.94) (xy 227.33 27.94)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "8d333515-c1b3-4e5c-a608-4816eaa4ba2d")
+	)
+	(wire
+		(pts
 			(xy 78.74 162.56) (xy 78.74 161.29)
 		)
 		(stroke
@@ -6759,6 +6791,16 @@
 			(type default)
 		)
 		(uuid "96a9009c-64e0-4da5-8389-af6e539d890a")
+	)
+	(wire
+		(pts
+			(xy 227.33 35.56) (xy 227.33 27.94)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "98c3535e-1cda-42b7-b510-c8a439e56041")
 	)
 	(wire
 		(pts
@@ -7012,7 +7054,7 @@
 	)
 	(wire
 		(pts
-			(xy 227.33 27.94) (xy 227.33 30.48)
+			(xy 231.14 27.94) (xy 231.14 30.48)
 		)
 		(stroke
 			(width 0)
@@ -7202,6 +7244,16 @@
 	)
 	(wire
 		(pts
+			(xy 214.63 36.83) (xy 214.63 39.37)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "c821a1cb-3c4d-4226-9220-010cf789366a")
+	)
+	(wire
+		(pts
 			(xy 243.84 62.23) (xy 241.3 62.23)
 		)
 		(stroke
@@ -7369,6 +7421,16 @@
 			(type default)
 		)
 		(uuid "d09c229b-d765-408d-9238-f7d76c97505d")
+	)
+	(wire
+		(pts
+			(xy 224.79 39.37) (xy 224.79 35.56)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "d260ac94-21bd-4d00-bdf4-5eb6d7483e34")
 	)
 	(wire
 		(pts
@@ -7549,6 +7611,16 @@
 			(type default)
 		)
 		(uuid "dde6a659-ae46-4bcb-b164-575f5293c093")
+	)
+	(wire
+		(pts
+			(xy 224.79 35.56) (xy 227.33 35.56)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "dead26a7-878b-4f27-95a1-633e9f3d0146")
 	)
 	(wire
 		(pts
@@ -7752,6 +7824,16 @@
 	)
 	(wire
 		(pts
+			(xy 111.76 118.11) (xy 111.76 120.65)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "ef5d907f-6ed8-4100-b73f-b0bcaeec3e30")
+	)
+	(wire
+		(pts
 			(xy 201.93 128.27) (xy 201.93 125.73)
 		)
 		(stroke
@@ -7799,6 +7881,16 @@
 			(type default)
 		)
 		(uuid "f4a06be3-4d19-48aa-8b3c-49b8df52b8b3")
+	)
+	(wire
+		(pts
+			(xy 153.67 24.13) (xy 157.48 24.13)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "f4f80239-8b00-461a-bae4-16efab12cba5")
 	)
 	(wire
 		(pts
@@ -52358,28 +52450,6 @@
 			)
 		)
 	)
-	(global_label "RSTN"
-		(shape input)
-		(at 57.15 66.04 0)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left)
-		)
-		(uuid "00697083-f2c1-44bf-ac5a-61d0ab2029ac")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 64.9128 66.04 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-	)
 	(global_label "RST"
 		(shape input)
 		(at 119.38 157.48 90)
@@ -52794,28 +52864,6 @@
 					(size 1.27 1.27)
 				)
 				(justify right)
-				(hide yes)
-			)
-		)
-	)
-	(global_label "PB5"
-		(shape input)
-		(at 33.02 73.66 0)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left)
-		)
-		(uuid "6751373a-c11c-4eaf-b1ba-f2249d539d61")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 39.7547 73.66 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
 				(hide yes)
 			)
 		)
@@ -53459,6 +53507,71 @@
 		)
 	)
 	(symbol
+		(lib_id "power:GND")
+		(at 33.02 73.66 90)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "015f26c4-8b04-4e28-b2ae-9517b425da4d")
+		(property "Reference" "#PWR?"
+			(at 39.37 73.66 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 38.354 73.66 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 33.02 73.66 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 33.02 73.66 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 33.02 73.66 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "25f055a8-69bd-4d57-af79-1e9189f9ba2e")
+		)
+		(instances
+			(project "stratolink"
+				(path "/4d146a28-be53-49f1-b1c6-484192820e45"
+					(reference "#PWR?")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Device:R_US")
 		(at 71.12 165.1 0)
 		(unit 1)
@@ -53530,7 +53643,7 @@
 	)
 	(symbol
 		(lib_id "Device:Antenna")
-		(at 157.48 31.75 0)
+		(at 157.48 19.05 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -53539,7 +53652,7 @@
 		(fields_autoplaced yes)
 		(uuid "01f3e0e6-3706-428a-92f1-d68046eb4cb5")
 		(property "Reference" "AE1"
-			(at 160.02 31.1149 0)
+			(at 160.02 18.4149 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -53549,7 +53662,7 @@
 			)
 		)
 		(property "Value" "Antenna"
-			(at 160.02 33.6549 0)
+			(at 160.02 20.9549 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -53559,7 +53672,7 @@
 			)
 		)
 		(property "Footprint" "lib:4269"
-			(at 157.48 31.75 0)
+			(at 157.48 19.05 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -53568,7 +53681,7 @@
 			)
 		)
 		(property "Datasheet" "https://www.digikey.com/en/products/detail/adafruit-industries-llc/4269/10313908"
-			(at 157.48 31.75 0)
+			(at 157.48 19.05 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -53577,7 +53690,7 @@
 			)
 		)
 		(property "Description" "1528-4269-ND"
-			(at 157.48 31.75 0)
+			(at 157.48 19.05 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -53598,6 +53711,71 @@
 		)
 	)
 	(symbol
+		(lib_id "power:GND")
+		(at 210.82 36.83 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "0266f08e-31cb-4bb9-8aa3-9f731e6df3f2")
+		(property "Reference" "#PWR045"
+			(at 210.82 43.18 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 208.28 39.878 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 210.82 36.83 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 210.82 36.83 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 210.82 36.83 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "1897114c-d442-4c53-a173-90d2744e45b2")
+		)
+		(instances
+			(project "stratolink"
+				(path "/4d146a28-be53-49f1-b1c6-484192820e45"
+					(reference "#PWR045")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Device:FerriteBead_Small")
 		(at 90.17 121.92 270)
 		(unit 1)
@@ -53606,7 +53784,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "0305c98a-0cfa-4b89-afc9-fa962cd41060")
-		(property "Reference" "R17"
+		(property "Reference" "FB1"
 			(at 91.4401 124.46 0)
 			(effects
 				(font
@@ -53662,7 +53840,7 @@
 		(instances
 			(project "stratolink"
 				(path "/4d146a28-be53-49f1-b1c6-484192820e45"
-					(reference "R17")
+					(reference "FB1")
 					(unit 1)
 				)
 			)
@@ -54393,7 +54571,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "https://www.lcsc.com/product-detail/C194437.html?s_z=n_10uH%2520inductor"
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C436784.html?s_z=n_C436784%2520"
 			(at 238.76 36.83 0)
 			(effects
 				(font
@@ -54402,7 +54580,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "MLZ1608N100LT000"
+		(property "Description" "PROD Tech PWCWAQ1608F-100KTT"
 			(at 238.76 36.83 0)
 			(effects
 				(font
@@ -54706,6 +54884,143 @@
 			(project "stratolink"
 				(path "/4d146a28-be53-49f1-b1c6-484192820e45"
 					(reference "R5")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 224.79 80.01 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "30de8ad2-31c6-442f-8447-6e61948773f2")
+		(property "Reference" "#PWR046"
+			(at 224.79 86.36 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 224.536 83.82 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 224.79 80.01 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 224.79 80.01 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 224.79 80.01 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "f526d273-d4b0-4597-8785-6d178fc87663")
+		)
+		(instances
+			(project "stratolink"
+				(path "/4d146a28-be53-49f1-b1c6-484192820e45"
+					(reference "#PWR046")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Diode:ESD9B3.3ST5G")
+		(at 153.67 27.94 90)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "35614f0c-0752-4f9f-961d-aa0e8618167f")
+		(property "Reference" "D1"
+			(at 156.21 26.6699 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+				(hide yes)
+			)
+		)
+		(property "Value" "ESD9B3.3ST5G"
+			(at 156.21 29.2099 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+				(hide yes)
+			)
+		)
+		(property "Footprint" "Diode_SMD:D_SOD-523"
+			(at 153.67 27.94 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C5272735.html?s_z=n_C5272735%2520"
+			(at 153.67 27.94 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "UNI-ROYAL 0402WGF3654TCE"
+			(at 153.67 27.94 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "2"
+			(uuid "8d200ef1-dfe0-4e24-be70-2403c6f59cd3")
+		)
+		(pin "1"
+			(uuid "542c7d20-d031-4361-a384-1ec33e085254")
+		)
+		(instances
+			(project "stratolink"
+				(path "/4d146a28-be53-49f1-b1c6-484192820e45"
+					(reference "D1")
 					(unit 1)
 				)
 			)
@@ -55034,6 +55349,71 @@
 			(project "stratolink"
 				(path "/4d146a28-be53-49f1-b1c6-484192820e45"
 					(reference "C5")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 153.67 31.75 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "512ef408-a1cf-4207-b0cd-61d34b64b298")
+		(property "Reference" "#PWR047"
+			(at 153.67 38.1 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 150.876 34.798 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 153.67 31.75 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 153.67 31.75 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 153.67 31.75 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "71106a68-6b95-4767-9ef6-70d08454d765")
+		)
+		(instances
+			(project "stratolink"
+				(path "/4d146a28-be53-49f1-b1c6-484192820e45"
+					(reference "#PWR047")
 					(unit 1)
 				)
 			)
@@ -55870,6 +56250,71 @@
 			(project ""
 				(path "/4d146a28-be53-49f1-b1c6-484192820e45"
 					(reference "#PWR02")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 57.15 66.04 90)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "6c78f9f1-bc52-408d-9b8f-e6b219947f4e")
+		(property "Reference" "#PWR048"
+			(at 63.5 66.04 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 62.484 66.04 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 57.15 66.04 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 57.15 66.04 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
+			(at 57.15 66.04 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "25f055a8-69bd-4d57-af79-1e9189f9ba2e")
+		)
+		(instances
+			(project "stratolink"
+				(path "/4d146a28-be53-49f1-b1c6-484192820e45"
+					(reference "#PWR048")
 					(unit 1)
 				)
 			)
@@ -57117,7 +57562,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "~"
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C2766827.html?s_z=n_C2766827%2520"
 			(at 228.6 88.9 0)
 			(effects
 				(font
@@ -60158,7 +60603,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "https://www.lcsc.com/product-detail/C85377.html?s_z=n_ESD%2520protection%2520diode"
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C5272735.html?s_z=n_C5272735%2520"
 			(at 165.1 128.27 0)
 			(effects
 				(font
@@ -60167,7 +60612,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "PESD3V3S1UB,115"
+		(property "Description" "UNI-ROYAL 0402WGF3654TCE"
 			(at 165.1 128.27 0)
 			(effects
 				(font
@@ -61077,7 +61522,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "~"
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C3855387.html?s_z=n_C3855387%2520"
 			(at 195.58 58.42 0)
 			(effects
 				(font
@@ -61248,7 +61693,7 @@
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 227.33 30.48 0)
+		(at 231.14 30.48 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -61256,7 +61701,7 @@
 		(dnp no)
 		(uuid "f51485ac-0091-487f-885e-9b6863bf1cd3")
 		(property "Reference" "#PWR04"
-			(at 227.33 36.83 0)
+			(at 231.14 36.83 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -61265,7 +61710,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 229.108 34.544 0)
+			(at 232.918 34.544 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -61273,7 +61718,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 227.33 30.48 0)
+			(at 231.14 30.48 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -61282,7 +61727,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 227.33 30.48 0)
+			(at 231.14 30.48 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -61291,7 +61736,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 227.33 30.48 0)
+			(at 231.14 30.48 0)
 			(effects
 				(font
 					(size 1.27 1.27)
