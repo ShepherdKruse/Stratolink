@@ -22,6 +22,13 @@
 // Power Management
 #define POWER_SAVE_MODE true
 #define TRANSMIT_INTERVAL_SEC 60
+#define SLEEP_INTERVAL_FULL_SEC      60
+#define SLEEP_INTERVAL_REDUCED_SEC  120
+#define SLEEP_INTERVAL_NO_GPS_SEC   300
+#define SLEEP_INTERVAL_EMERGENCY_SEC 120
+
+#define BURST_GPS_TIMEOUT_MS  10000
+#define BURST_SLEEP_SEC       10
 
 // Debug Configuration
 #define DEBUG_ENABLE true

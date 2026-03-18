@@ -28,6 +28,8 @@ export interface TelemetryData {
     mems_gyro_x?: number | null;
     mems_gyro_y?: number | null;
     mems_gyro_z?: number | null;
+    /** 0 = no event, non-zero = spectral change detected (mic FFT vs baseline) */
+    acoustic_event?: number | null;
 }
 
 export interface TTNWebhookPayload {
@@ -106,6 +108,7 @@ function parseJSONPayload(
         mems_gyro_x: decoded.mems_gyro_x !== undefined ? parseFloat(decoded.mems_gyro_x) : null,
         mems_gyro_y: decoded.mems_gyro_y !== undefined ? parseFloat(decoded.mems_gyro_y) : null,
         mems_gyro_z: decoded.mems_gyro_z !== undefined ? parseFloat(decoded.mems_gyro_z) : null,
+        acoustic_event: decoded.acoustic_event !== undefined ? parseInt(String(decoded.acoustic_event), 10) : null,
     };
 }
 
@@ -168,6 +171,7 @@ function parseBinaryPayload(
         const mems_gyro_x = buffer.length >= 33 ? buffer.readInt16BE(31) / 100 : null;
         const mems_gyro_y = buffer.length >= 35 ? buffer.readInt16BE(33) / 100 : null;
         const mems_gyro_z = buffer.length >= 37 ? buffer.readInt16BE(35) / 100 : null;
+        const acoustic_event = buffer.length >= 38 ? buffer.readUInt8(37) : null;
 
         // Calculate velocity from GPS if available
         let velocity_x = null;
@@ -201,6 +205,7 @@ function parseBinaryPayload(
             mems_gyro_x,
             mems_gyro_y,
             mems_gyro_z,
+            acoustic_event,
         };
     } catch (error) {
         console.error('Error parsing binary payload:', error);

@@ -67,6 +67,7 @@ export async function POST(request: NextRequest) {
                 mems_gyro_x: telemetry.mems_gyro_x,
                 mems_gyro_y: telemetry.mems_gyro_y,
                 mems_gyro_z: telemetry.mems_gyro_z,
+                acoustic_event: telemetry.acoustic_event,
             });
         
         if (error) {
