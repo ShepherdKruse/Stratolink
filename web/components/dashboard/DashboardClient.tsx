@@ -39,7 +39,7 @@ export default function DashboardClient({ initialBalloonId = null, initialMode =
     }, [initialBalloonId, initialMode]);
     const [playbackTime, setPlaybackTime] = useState<Date | null>(null);
     const [flightPathData, setFlightPathData] = useState<Array<{ lat: number; lon: number; time: Date }>>([]);
-    const [lastUpdate, setLastUpdate] = useState<Date>(new Date());
+    const [lastUpdate, setLastUpdate] = useState<Date | null>(null);
     const [connectionStatus, setConnectionStatus] = useState<'connected' | 'disconnected' | 'error'>('disconnected');
 
     // Fetch balloon counts from Supabase
@@ -378,7 +378,7 @@ export default function DashboardClient({ initialBalloonId = null, initialMode =
                             </div>
                             <div className="flex justify-between">
                                 <span className="text-[#999]">Last Update</span>
-                                <span className="text-[#e5e5e5]">{lastUpdate.toISOString().substring(11, 19)}</span>
+                                <span className="text-[#e5e5e5]">{lastUpdate ? lastUpdate.toISOString().substring(11, 19) : '--:--:--'}</span>
                             </div>
                             <div className="flex justify-between">
                                 <span className="text-[#999]">Refresh</span>

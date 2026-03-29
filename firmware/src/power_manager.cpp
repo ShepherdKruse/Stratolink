@@ -1,6 +1,6 @@
 #include "power_manager.h"
 #include "config.h"
-#include "board.h"
+#include "stratolink_pins.h"
 #include "power_adc.h"
 #include <Arduino.h>
 

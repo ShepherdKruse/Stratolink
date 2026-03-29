@@ -1,5 +1,5 @@
 #include "power_adc.h"
-#include "board.h"
+#include "stratolink_pins.h"
 #include "config.h"
 #include <Arduino.h>
 
@@ -50,11 +50,11 @@ bool power_adc_can_use_gps(void) {
 }
 
 bool power_adc_can_tx(void) {
-    return power_adc_get_tier() <= POWER_TIER_EMERGENCY;
+    return true; /* Always allow TX — even CRITICAL tier sends distress beacons */
 }
 
 bool power_adc_should_read_sensors(void) {
-    return power_adc_get_tier() <= POWER_TIER_NO_GPS;
+    return true; /* TEMP: bench PSU on 3.3V, no supercap — revert when supercaps arrive */
 }
 
 uint32_t power_adc_get_sleep_interval_sec(power_tier_t tier) {

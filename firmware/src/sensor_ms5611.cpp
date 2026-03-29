@@ -1,5 +1,5 @@
 #include "sensor_ms5611.h"
-#include "board.h"
+#include "stratolink_pins.h"
 #include <Wire.h>
 
 #define MS5611_CMD_RESET   0x1E
@@ -15,7 +15,7 @@ static uint16_t C1, C2, C3, C4, C5, C6;
 static bool read_prom(void) {
     for (int i = 0; i < 6; i++) {
         Wire.beginTransmission(i2c_addr);
-        Wire.write(MS5611_PROM_BASE + (uint8_t)(i * 2));
+        Wire.write(MS5611_PROM_BASE + (uint8_t)((i + 1) * 2));
         if (Wire.endTransmission() != 0) return false;
         if (Wire.requestFrom((int)i2c_addr, 2) != 2) return false;
         uint16_t v = (uint16_t)Wire.read() << 8 | Wire.read();
@@ -73,7 +73,7 @@ bool sensor_ms5611_read_pressure_centihpa(uint16_t* pressure_ch) {
         SENS -= SENS2;
     }
 
-    int32_t P = (int32_t)(((int64_t)D1 * SENS >> 21) - OFF) >> 15);
+    int32_t P = (int32_t)((((int64_t)D1 * SENS >> 21) - OFF) >> 15);
     if (P < 0) P = 0;
     *pressure_ch = (uint16_t)((uint32_t)P * 10);
     return true;
