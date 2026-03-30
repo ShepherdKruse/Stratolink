@@ -1,7 +1,7 @@
 /**
  * LoRaWAN driver — from first principles.
  * Manual OTAA join + ABP-style uplinks using RadioLib for radio only.
- * RAK3172 (STM32WLE5), US915 FSB2 for TTN.
+ * RAK3172 (STM32WLE5). Region selected via TTN_REGION_* in config.h.
  */
 #include "lorawan.h"
 #include "config.h"
@@ -33,9 +33,54 @@ static uint8_t devEUI[8];
 static uint8_t joinEUI[8];
 static uint8_t appKey[16];
 
-/* US915 FSB2 */
-static const float FSB2_FREQS[] = {903.9,904.1,904.3,904.5,904.7,904.9,905.1,905.3};
-static const float RX2_FREQ = 923.3;
+/* ========== Region Configuration ========== */
+typedef struct {
+    const float *tx_freqs;  uint8_t tx_ch_count;
+    float rx2_freq;
+    float rx1_base;  float rx1_step;  uint8_t rx1_mod; /* 0 = RX1 matches TX freq */
+    uint8_t join_sf;  float join_bw;
+    uint8_t rx1_sf;   float rx1_bw;
+    uint8_t rx2_sf;   float rx2_bw;
+    float init_freq;
+    uint8_t tx_sf;    float tx_bw;
+} lora_region_t;
+
+static const float US915_FREQS[] = {903.9,904.1,904.3,904.5,904.7,904.9,905.1,905.3};
+static const lora_region_t LORA_US915 = {
+    US915_FREQS, 8, 923.3,  923.3, 0.6, 8,
+    10, 125.0,  10, 500.0,  12, 500.0,  904.1,  10, 125.0
+};
+
+static const float EU868_FREQS[] = {868.1, 868.3, 868.5};
+static const lora_region_t LORA_EU868 = {
+    EU868_FREQS, 3, 869.525,  0, 0, 0, /* RX1 = TX freq */
+    7, 125.0,  7, 125.0,  9, 125.0,  868.1,  7, 125.0
+};
+
+static const float AU915_FREQS[] = {916.8,917.0,917.2,917.4,917.6,917.8,918.0,918.2};
+static const lora_region_t LORA_AU915 = {
+    AU915_FREQS, 8, 923.3,  923.3, 0.6, 8,
+    10, 125.0,  10, 500.0,  12, 500.0,  917.0,  10, 125.0
+};
+
+static const float AS923_FREQS[] = {923.2, 923.4};
+static const lora_region_t LORA_AS923 = {
+    AS923_FREQS, 2, 923.2,  0, 0, 0, /* RX1 = TX freq */
+    10, 125.0,  10, 125.0,  10, 125.0,  923.2,  10, 125.0
+};
+
+#if defined(TTN_REGION_US915)
+static const lora_region_t& REGION = LORA_US915;
+#elif defined(TTN_REGION_EU868)
+static const lora_region_t& REGION = LORA_EU868;
+#elif defined(TTN_REGION_AU915)
+static const lora_region_t& REGION = LORA_AU915;
+#elif defined(TTN_REGION_AS923)
+static const lora_region_t& REGION = LORA_AS923;
+#else
+#error "No TTN_REGION_* defined in config.h"
+#endif
+
 static uint8_t chIdx = 0;
 
 /* RF switch */
@@ -155,11 +200,11 @@ static bool otaa_join(void) {
     /* MIC over MHDR|JoinEUI|DevEUI|DevNonce using AppKey */
     aes_cmac(appKey, pkt, 19, &pkt[19]);
 
-    /* TX on random FSB2 channel at SF10BW125 (DR0) */
-    uint8_t ch = chIdx % 8; chIdx++;
-    radio->setFrequency(FSB2_FREQS[ch]);
-    radio->setSpreadingFactor(10);
-    radio->setBandwidth(125.0);
+    /* TX on random channel */
+    uint8_t ch = chIdx % REGION.tx_ch_count; chIdx++;
+    radio->setFrequency(REGION.tx_freqs[ch]);
+    radio->setSpreadingFactor(REGION.join_sf);
+    radio->setBandwidth(REGION.join_bw);
     radio->setCRC(true);
 
     int16_t state = radio->transmit(pkt, 23);
@@ -178,13 +223,15 @@ static bool otaa_join(void) {
     size_t rxLen = 0;
     bool received = false;
 
-    /* RX1: 5s after TX, 923.3+(ch%8)*0.6 MHz, SF10BW500 (DR10) */
-    float rx1Freq = 923.3 + (ch % 8) * 0.6;
+    /* RX1: 5s after TX */
+    float rx1Freq = REGION.rx1_mod
+        ? (REGION.rx1_base + (ch % REGION.rx1_mod) * REGION.rx1_step)
+        : REGION.tx_freqs[ch];
     while (millis() - txEnd < 4500) delay(1);
 
     radio->setFrequency(rx1Freq);
-    radio->setSpreadingFactor(10);
-    radio->setBandwidth(500.0);
+    radio->setSpreadingFactor(REGION.rx1_sf);
+    radio->setBandwidth(REGION.rx1_bw);
     radio->setCodingRate(5);
     radio->setSyncWord(RADIOLIB_SX126X_SYNC_WORD_PUBLIC);
     radio->setPreambleLength(8);
@@ -198,10 +245,11 @@ static bool otaa_join(void) {
         LOG("[OTAA] Received in RX1!");
     }
 
-    /* RX2: 6s after TX, 923.3 MHz, SF12BW500 (DR8) */
+    /* RX2: 6s after TX */
     if (!received && (millis() - txEnd < 7000)) {
-        radio->setFrequency(RX2_FREQ);
-        radio->setSpreadingFactor(12);
+        radio->setFrequency(REGION.rx2_freq);
+        radio->setSpreadingFactor(REGION.rx2_sf);
+        radio->setBandwidth(REGION.rx2_bw);
 
         state = radio->receive(rxBuf, 33);
         if (state == RADIOLIB_ERR_NONE) {
@@ -293,14 +341,14 @@ bool lorawan_init(void) {
     radio = new STM32WLx(new STM32WLx_Module());
     radio->setRfSwitchTable(rfswitch_pins, rfswitch_table);
 
-    int16_t state = radio->begin(904.1, 125.0, 9, 7,
+    int16_t state = radio->begin(REGION.init_freq, REGION.tx_bw, 9, 7,
                                  RADIOLIB_SX126X_SYNC_WORD_PUBLIC,
                                  14, 8, 1.7, false);
     LOGV("[LoRaWAN] radio.begin: ", state);
     if (state != RADIOLIB_ERR_NONE) return false;
 
-    radio->setSpreadingFactor(10);
-    radio->setBandwidth(125.0);
+    radio->setSpreadingFactor(REGION.tx_sf);
+    radio->setBandwidth(REGION.tx_bw);
     radio->setCodingRate(5);
     radio->setPreambleLength(8);
     radio->setCRC(true);
@@ -345,7 +393,7 @@ bool lorawan_send_uplink(const uint8_t* payload, uint8_t payload_len) {
     uint8_t mic[4]; compute_mic(pkt, idx, mic);
     memcpy(&pkt[idx], mic, 4); idx += 4;
 
-    float freq = FSB2_FREQS[chIdx % 8]; chIdx++;
+    float freq = REGION.tx_freqs[chIdx % REGION.tx_ch_count]; chIdx++;
     radio->setFrequency(freq);
     int16_t state = radio->transmit(pkt, idx);
     LOGV("[LoRaWAN] uplink: ", state);
