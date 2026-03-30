@@ -134,7 +134,7 @@ Tier thresholds (voltage) are in `stratolink_pins.h` (e.g. `POWER_TIER_FULL_V`, 
 
 ## 7. Extending the Firmware
 
-- **Multi-region LoRaWAN.** Currently hardcoded to US915 sub-band 2. For global flight, add region selection (EU868, AU915, AS923) via `config.h` with matching channel plans and RX window parameters.
+- **Multi-region LoRaWAN.** Region selected via `TTN_REGION_*` in `config.h` (US915, EU868, AU915, AS923). Duty cycle enforcement for EU868/AS923 is handled server-side by TTN; firmware-side enforcement is not yet implemented.
 - **Session persistence.** Store OTAA session keys in backup SRAM so the board doesn't re-join after every power cycle (night survival).
 - **Acoustic classifier.** Current mic driver uses simple RMS energy detection (event flag only — no audio is captured or transmitted). Future: replace with CNN-based spectrogram classifier for aircraft/rocket/drone identification. CMSIS-DSP FFT + TinyML inference on Cortex-M4.
 - **Downlink commands.** The current cycle is uplink-only. The LoRaWAN layer supports downlink reception (used for OTAA join-accept); add application-layer downlink handling for remote configuration or commands from the ground station.
