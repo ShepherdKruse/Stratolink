@@ -1,8 +1,9 @@
 #include "sensors.h"
-#include "board.h"
+#include "stratolink_pins.h"
 #include "sensor_tmp117.h"
 #include "sensor_ms5611.h"
 #include "sensor_lis2dh12.h"
+#include "sensor_ltr390.h"
 #include <Wire.h>
 
 bool sensors_init(void) {
@@ -12,8 +13,14 @@ bool sensors_init(void) {
 #endif
     Wire.begin();
 
-    if (!sensor_tmp117_init()) return false;
-    if (!sensor_ms5611_init()) return false;
-    if (!sensor_lis2dh12_init()) return false;
-    return true;
+    // TMP117 may be absent (DSBGA-6 soldering issues). Do not block
+    // MS5611 or LIS2DH12 if it fails — sensor_tmp117 will fall back
+    // to the MS5611 internal temperature sensor automatically.
+    (void)sensor_tmp117_init();
+
+    bool ok = true;
+    if (!sensor_ms5611_init()) ok = false;
+    if (!sensor_lis2dh12_init()) ok = false;
+    if (!sensor_ltr390_init()) ok = false;
+    return ok;
 }

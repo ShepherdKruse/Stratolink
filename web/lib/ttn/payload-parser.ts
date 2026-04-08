@@ -25,10 +25,11 @@ export interface TelemetryData {
     mems_accel_x?: number | null;
     mems_accel_y?: number | null;
     mems_accel_z?: number | null;
-    mems_gyro_x?: number | null;
-    mems_gyro_y?: number | null;
-    mems_gyro_z?: number | null;
-    /** 0 = no event, non-zero = spectral change detected (mic FFT vs baseline) */
+    /** LTR-390UV-01: integer UV index (0-15+) */
+    uv_index?: number | null;
+    /** LTR-390UV-01: ambient light in lux */
+    ambient_lux?: number | null;
+    /** 0 = quiet, 1 = acoustic event detected (mic RMS > 4x noise floor) */
     acoustic_event?: number | null;
 }
 
@@ -105,9 +106,8 @@ function parseJSONPayload(
         mems_accel_x: decoded.mems_accel_x !== undefined ? parseFloat(decoded.mems_accel_x) : null,
         mems_accel_y: decoded.mems_accel_y !== undefined ? parseFloat(decoded.mems_accel_y) : null,
         mems_accel_z: decoded.mems_accel_z !== undefined ? parseFloat(decoded.mems_accel_z) : null,
-        mems_gyro_x: decoded.mems_gyro_x !== undefined ? parseFloat(decoded.mems_gyro_x) : null,
-        mems_gyro_y: decoded.mems_gyro_y !== undefined ? parseFloat(decoded.mems_gyro_y) : null,
-        mems_gyro_z: decoded.mems_gyro_z !== undefined ? parseFloat(decoded.mems_gyro_z) : null,
+        uv_index: decoded.uv_index !== undefined ? parseInt(String(decoded.uv_index)) : null,
+        ambient_lux: decoded.ambient_lux !== undefined ? parseFloat(decoded.ambient_lux) : null,
         acoustic_event: decoded.acoustic_event !== undefined ? parseInt(String(decoded.acoustic_event), 10) : null,
     };
 }
@@ -115,25 +115,23 @@ function parseJSONPayload(
 /**
  * Parse binary payload (if firmware sends raw bytes)
  * 
- * Expected format (can be adjusted based on firmware implementation):
- * Byte 0-3:   Latitude (int32, scaled by 1e7)
- * Byte 4-7:   Longitude (int32, scaled by 1e7)
+ * 35-byte big-endian payload (matches firmware telemetry_pack):
+ * Byte 0-3:   Latitude (int32, degrees * 1e7)
+ * Byte 4-7:   Longitude (int32, degrees * 1e7)
  * Byte 8-11:  Altitude in meters (int32)
- * Byte 12-13: Temperature in 0.1°C (int16)
+ * Byte 12-13: Temperature in 0.1 C (int16)
  * Byte 14-15: Pressure in 0.1 hPa (uint16)
  * Byte 16-17: Solar voltage in mV (uint16)
  * Byte 18-19: Battery voltage in mV (uint16)
  * Byte 20-21: GPS speed in 0.01 m/s (uint16)
- * Byte 22-23: GPS heading in 0.01° (uint16)
+ * Byte 22-23: GPS heading in 0.01 deg (uint16)
  * Byte 24:    GPS satellites (uint8)
- * Byte 25-26: MEMS accel X in 0.01 m/s² (int16)
- * Byte 27-28: MEMS accel Y in 0.01 m/s² (int16)
- * Byte 29-30: MEMS accel Z in 0.01 m/s² (int16)
- * Byte 31-32: MEMS gyro X in 0.01°/s (int16)
- * Byte 33-34: MEMS gyro Y in 0.01°/s (int16)
- * Byte 35-36: MEMS gyro Z in 0.01°/s (int16)
- * 
- * Note: This is a placeholder format. Adjust based on actual firmware implementation.
+ * Byte 25-26: Accel X in 0.01 m/s2 (int16)
+ * Byte 27-28: Accel Y in 0.01 m/s2 (int16)
+ * Byte 29-30: Accel Z in 0.01 m/s2 (int16)
+ * Byte 31:    UV index (uint8, 0-15+)
+ * Byte 32-33: Ambient lux (uint16)
+ * Byte 34:    Acoustic event (uint8, 0=quiet, 1=event)
  */
 function parseBinaryPayload(
     deviceId: string,
@@ -168,10 +166,9 @@ function parseBinaryPayload(
         const mems_accel_x = buffer.length >= 27 ? buffer.readInt16BE(25) / 100 : null;
         const mems_accel_y = buffer.length >= 29 ? buffer.readInt16BE(27) / 100 : null;
         const mems_accel_z = buffer.length >= 31 ? buffer.readInt16BE(29) / 100 : null;
-        const mems_gyro_x = buffer.length >= 33 ? buffer.readInt16BE(31) / 100 : null;
-        const mems_gyro_y = buffer.length >= 35 ? buffer.readInt16BE(33) / 100 : null;
-        const mems_gyro_z = buffer.length >= 37 ? buffer.readInt16BE(35) / 100 : null;
-        const acoustic_event = buffer.length >= 38 ? buffer.readUInt8(37) : null;
+        const uv_index = buffer.length >= 32 ? buffer.readUInt8(31) : null;
+        const ambient_lux = buffer.length >= 34 ? buffer.readUInt16BE(32) : null;
+        const acoustic_event = buffer.length >= 35 ? buffer.readUInt8(34) : null;
 
         // Calculate velocity from GPS if available
         let velocity_x = null;
@@ -202,9 +199,8 @@ function parseBinaryPayload(
             mems_accel_x,
             mems_accel_y,
             mems_accel_z,
-            mems_gyro_x,
-            mems_gyro_y,
-            mems_gyro_z,
+            uv_index,
+            ambient_lux,
             acoustic_event,
         };
     } catch (error) {

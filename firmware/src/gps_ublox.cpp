@@ -1,5 +1,5 @@
 #include "gps_ublox.h"
-#include "board.h"
+#include "stratolink_pins.h"
 #include "config.h"
 #include <Arduino.h>
 
@@ -29,7 +29,7 @@ bool gps_ublox_set_airborne_4g(void) {
 #if defined(DYN_MODEL_AIRBORNE_4G)
     return gnss.setDynamicModel(DYN_MODEL_AIRBORNE_4G);
 #else
-    return gnss.setDynamicModel((uint8_t)GPS_DYNMODEL_AIRBORNE_4G);
+    return gnss.setDynamicModel((dynModel)GPS_DYNMODEL_AIRBORNE_4G);
 #endif
 }
 

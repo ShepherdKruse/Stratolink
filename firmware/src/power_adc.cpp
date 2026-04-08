@@ -1,5 +1,5 @@
 #include "power_adc.h"
-#include "board.h"
+#include "stratolink_pins.h"
 #include "config.h"
 #include <Arduino.h>
 

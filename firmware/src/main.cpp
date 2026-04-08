@@ -11,7 +11,7 @@
 #define LORAWAN_APP_EUI ""
 #define LORAWAN_APP_KEY ""
 #endif
-#include "board.h"
+#include "stratolink_pins.h"
 #include "telemetry.h"
 #include "power_adc.h"
 #include "gps_ublox.h"
@@ -21,6 +21,8 @@
 #include "sensor_tmp117.h"
 #include "sensor_ms5611.h"
 #include "sensor_lis2dh12.h"
+#include "sensor_ltr390.h"
+#include "mic_acoustic.h"
 
 #ifndef BURST_GPS_TIMEOUT_MS
 #define BURST_GPS_TIMEOUT_MS 10000
@@ -62,6 +64,7 @@ void setup() {
         LOG("Sensors init failed");
     }
 
+    (void)mic_acoustic_init();
     (void)sensor_lis2dh12_enable_freefall_int1();
     power_manager_init();
     power_manager_attach_freefall_wakeup();
@@ -107,9 +110,10 @@ void loop() {
         (void)sensor_tmp117_read_centidegrees(&ti.temperature_cd);
         (void)sensor_ms5611_read_pressure_centihpa(&ti.pressure_ch);
         (void)sensor_lis2dh12_read_accel_cm_s2(&ti.accel_x_cm_s2, &ti.accel_y_cm_s2, &ti.accel_z_cm_s2);
+        (void)sensor_ltr390_read_uv_index(&ti.uv_index);
+        (void)sensor_ltr390_read_ambient_lux(&ti.ambient_lux);
+        (void)mic_acoustic_detect(&ti.acoustic_event);
     }
-    ti.gyro_x_cd_s   = ti.gyro_y_cd_s = ti.gyro_z_cd_s = 0;
-    ti.acoustic_event = 0;
 
     telemetry_pack(&ti, tx_payload);
 

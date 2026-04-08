@@ -4,7 +4,7 @@
 #include <stdint.h>
 
 /** Payload size in bytes (matches webhook parser). */
-#define TELEMETRY_PAYLOAD_SIZE 38
+#define TELEMETRY_PAYLOAD_SIZE 35
 
 /**
  * All inputs for one telemetry packet.
@@ -27,13 +27,14 @@ typedef struct {
     uint16_t solar_mv;
     uint16_t battery_mv;      /* VSTOR */
 
-    /* MEMS (LIS2DH12 accel only on this board; gyro reserved 0) */
+    /* MEMS (LIS2DH12 accel only — no gyroscope on this board) */
     int16_t accel_x_cm_s2;    /* 0.01 m/s² */
     int16_t accel_y_cm_s2;
     int16_t accel_z_cm_s2;
-    int16_t gyro_x_cd_s;      /* 0.01 °/s, reserved 0 */
-    int16_t gyro_y_cd_s;
-    int16_t gyro_z_cd_s;
+
+    /* UV / Ambient Light (LTR-390UV-01) */
+    uint8_t uv_index;         /* integer UV index (0–15+) */
+    uint16_t ambient_lux;     /* lux (0–65535) */
 
     /* Acoustic (mic FFT change detection) */
     uint8_t acoustic_event;   /* 0 = no event, non-zero = spectral change */

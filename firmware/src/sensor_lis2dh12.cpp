@@ -1,5 +1,5 @@
 #include "sensor_lis2dh12.h"
-#include "board.h"
+#include "stratolink_pins.h"
 #include <Wire.h>
 
 #define LIS2DH12_REG_CTRL1    0x20
