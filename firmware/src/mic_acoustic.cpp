@@ -62,6 +62,16 @@ bool mic_acoustic_init(void) {
 }
 
 /* ------------------------------------------------------------------ */
+/* Bounded SPI RXNE wait. Returns false on timeout so a missing/dead mic
+ * (or PB3/PB4 routing issue) can't deadlock the main telemetry loop. */
+static inline bool spi_wait_rxne(uint32_t timeout_ms) {
+    uint32_t deadline = millis() + timeout_ms;
+    while (!(SPI1->SR & SPI_SR_RXNE)) {
+        if ((int32_t)(millis() - deadline) >= 0) return false;
+    }
+    return true;
+}
+
 bool mic_acoustic_detect(uint8_t* acoustic_event) {
     if (!acoustic_event) return false;
     *acoustic_event = 0;
@@ -72,16 +82,16 @@ bool mic_acoustic_detect(uint8_t* acoustic_event) {
     /* --- start clock, wake mic --- */
     SPI1->CR1 |= SPI_CR1_SPE;
 
-    /* wake-up: 50 ms of continuous clock */
+    /* wake-up: 50 ms of continuous clock — bail if mic never responds */
     for (uint32_t i = 0; i < WAKEUP_BYTES; i++) {
-        while (!(SPI1->SR & SPI_SR_RXNE));
+        if (!spi_wait_rxne(5)) { SPI1->CR1 &= ~SPI_CR1_SPE; return false; }
         (void)*dr;
     }
 
     /* skip sigma-delta transient */
     for (uint16_t s = 0; s < SKIP_SAMPLES; s++) {
         for (uint8_t b = 0; b < BYTES_PER_SAMPLE; b++) {
-            while (!(SPI1->SR & SPI_SR_RXNE));
+            if (!spi_wait_rxne(5)) { SPI1->CR1 &= ~SPI_CR1_SPE; return false; }
             (void)*dr;
         }
     }
@@ -91,7 +101,7 @@ bool mic_acoustic_detect(uint8_t* acoustic_event) {
     for (uint16_t s = 0; s < CAPTURE_SAMPLES; s++) {
         uint16_t ones = 0;
         for (uint8_t b = 0; b < BYTES_PER_SAMPLE; b++) {
-            while (!(SPI1->SR & SPI_SR_RXNE));
+            if (!spi_wait_rxne(5)) { SPI1->CR1 &= ~SPI_CR1_SPE; return false; }
             ones += popcount8(*dr);
         }
         int16_t pcm = (int16_t)ones - PDM_CENTER;

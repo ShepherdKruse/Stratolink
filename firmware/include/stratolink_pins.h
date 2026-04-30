@@ -192,10 +192,17 @@
 
 // --- Programmed voltage thresholds (from resistor dividers R1-R8) ---
 // These are hardware-set by resistors and cannot be changed in firmware.
+//
+// VBAT_OK_RISE/FALL: as-built. Saleae captures on board #3 (2026-04-29) showed
+// the buck enabling at VSTOR ~2.0V, not the originally-spec'd 3.51V. The
+// OK_PROG/OK_HYST resistor stuff (R5/R6/R7) was populated for ~2V, so MCU
+// can wake at lower VSTOR but operates in buck dropout (VOUT ≈ VSTOR - 0.2V)
+// until VSTOR > ~3.5V, at which point VOUT regulates to the 3.3V setpoint.
 #define BQ25570_VOUT_NOMINAL_MV     3312  // Buck output (VOUT_SET divider)
 #define BQ25570_VBAT_OV_MV          5363  // Overvoltage lockout (supercap max)
-#define BQ25570_VBAT_OK_RISE_MV     3510  // VBAT_OK asserts (rising)
-#define BQ25570_VBAT_OK_FALL_MV     1692  // VBAT_OK deasserts (falling)
+#define BQ25570_VBAT_OK_RISE_MV     2000  // observed; was 3510 in original spec
+#define BQ25570_VBAT_OK_FALL_MV     1620  // computed from R5/R6/R7; verify on bench
+#define BQ25570_BUCK_REGULATION_V   3.5f  // VSTOR above which buck holds 3.3V
 
 // --- VOUT_EN: buck converter enable (directly connected to VSTOR) ---
 //
