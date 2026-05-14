@@ -4,9 +4,14 @@
 
 1. Open Supabase Dashboard → SQL Editor
 2. Copy and paste the SQL from each migration file
-3. Run the SQL in order (001, then 003)
+3. Run the SQL in order: **001** → **003** → **004** / **005** (telemetry columns) → **006** (launch QR tokens)
 
 ## Migration Files
+
+### 006_launch_token.sql
+Adds `launch_token_hash` and `launch_token_expires_at` on `devices` for QR launch links (`?k=` on `/activate/[deviceId]`).
+
+**Run after** `devices` exists. Required for seamless launch QR flow.
 
 ### 001_launchpad_devices.sql
 Creates the `devices` table and adds launchpad functionality columns.
@@ -36,7 +41,9 @@ This allows you to test the activation flow without pre-creating devices in the 
 - Users must use the correct PIN that matches the device's `claim_code`
 - This prevents unauthorized device creation
 
-To manually create devices in production, use the Supabase dashboard or create an admin interface that uses the `createDeviceAdmin` server action with proper authentication.
+To manually create devices in production, use the Supabase dashboard, **`/admin/register-payload`** (TTN + DB + launch link), or `createDeviceAdmin` with `ADMIN_ACTIVATION_KEY`.
+
+**Activation** (`/activate/...`) uses the **service role** on the server: set `SUPABASE_SERVICE_ROLE_KEY` in production or activation will fail.
 
 ## Test Data
 
