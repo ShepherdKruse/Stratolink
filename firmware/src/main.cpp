@@ -40,8 +40,16 @@
 static uint8_t tx_payload[TELEMETRY_PAYLOAD_SIZE];
 static gps_fix_t last_gps_fix;
 static bool burst_mode = false;
+static uint8_t tx_fail_streak = 0;  /* consecutive TX failures; 5 → reset */
+
+/* Reset-cause snapshot. RAM-only diagnostic; read via J-Link.
+ * Captured before RMVF clear so each new boot writes the precise cause. */
+volatile uint32_t boot_reset_cause = 0;
 
 void setup() {
+    boot_reset_cause = RCC->CSR;
+    RCC->CSR |= RCC_CSR_RMVF;     /* clear flags so the next reset is unambiguous */
+
 #if defined(DEBUG_ENABLE) && DEBUG_ENABLE
     Serial.begin(DEBUG_SERIAL_BAUD);
     LOG("Stratolink Firmware Starting");
@@ -74,6 +82,10 @@ void setup() {
 }
 
 void loop() {
+    /* IWDG runs from LSI in run mode (frozen in STOP).  Refresh at the
+     * top of every loop so any hang lasting > 33 s reboots the chip. */
+    power_manager_kick_watchdog();
+
     if (power_manager_did_wake_from_freefall()) {
         burst_mode = true;
     }
@@ -106,6 +118,11 @@ void loop() {
         }
     }
 
+    /* IWDG max timeout is 32.7 s.  GPS fix can block up to 30 s, TX +
+     * RX1/RX2 windows ~5 s, sensor + mic reads ~1 s — kick the dog
+     * between phases so the watchdog only catches genuine hangs. */
+    power_manager_kick_watchdog();
+
     if (power_adc_should_read_sensors()) {
         (void)sensor_tmp117_read_centidegrees(&ti.temperature_cd);
         (void)sensor_ms5611_read_pressure_centihpa(&ti.pressure_ch);
@@ -116,10 +133,33 @@ void loop() {
     }
 
     telemetry_pack(&ti, tx_payload);
+    power_manager_kick_watchdog();
+
+    /* If a previous join attempt failed (cold boot when the gateway was
+     * briefly out of range, post-brown-out recovery, etc.) try again
+     * before TX.  Short timeout — if it doesn't take here it'll retry on
+     * the next wake.  IWDG (32.7 s) bounds this. */
+    if (!lorawan_joined() && power_adc_can_tx()) {
+        (void)lorawan_join(15000);
+        power_manager_kick_watchdog();
+    }
 
     if (power_adc_can_tx() && lorawan_joined()) {
         if (lorawan_send_uplink(tx_payload, TELEMETRY_PAYLOAD_SIZE)) {
+            tx_fail_streak = 0;
             LOG("TX OK");
+        } else {
+            /* TX failed but we believed we were joined.  Most likely the
+             * SX1262 latched into a fault state — we observed this once
+             * after the cap hit VBAT_OV (5.36 V) at peak sun and the
+             * radio went silent for hours despite IWDG kicking and the
+             * MCU running.  After N consecutive TX failures, force a
+             * full system reset so lorawan_init() can re-init the radio
+             * from scratch (radio->begin() runs a full SX1262 reset). */
+            tx_fail_streak++;
+            if (tx_fail_streak >= 5) {
+                NVIC_SystemReset();
+            }
         }
     }
 
@@ -128,5 +168,14 @@ void loop() {
     }
 
     uint32_t sleep_sec = burst_mode ? (uint32_t)BURST_SLEEP_SEC : power_adc_get_sleep_interval_sec(tier);
+
+    /* Quiesce the heavy peripherals before entering MCU STOP1.
+     * Without these calls:
+     *   - SX1262 sits in STDBY_RC (~600 µA) — drains cap + hard-resets MCU on STOP2.
+     *   - u-blox MAX-M10S keeps tracking (~25 mA) — drains 1F cap in ~2 min.
+     * Both must sleep alongside the MCU for night/no-solar survival. */
+    lorawan_sleep();
+    gps_ublox_sleep();
+
     power_manager_sleep_ms(sleep_sec * 1000);
 }

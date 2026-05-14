@@ -29,4 +29,15 @@ bool lorawan_send_uplink(const uint8_t* payload, uint8_t payload_len);
  */
 bool lorawan_joined(void);
 
+/**
+ * Put the SX1262 SubGHz radio into SLEEP retention mode (~3 µA, config kept).
+ * MUST be called before MCU STOP2 entry — otherwise the radio sits in
+ * STDBY_RC drawing ~600 µA, which both wrecks the night-survival energy
+ * budget and (on the RAK3172 module) appears to leave pending interrupts
+ * that hard-reset the chip when STOP2 attempts to enter or exit.
+ *
+ * Subsequent transmit() calls wake the radio implicitly via SetStandby.
+ */
+void lorawan_sleep(void);
+
 #endif /* LORAWAN_H */

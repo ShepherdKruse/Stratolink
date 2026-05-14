@@ -5,6 +5,7 @@
  */
 #include "lorawan.h"
 #include "config.h"
+#include "power_adc.h"
 #include <RadioLib.h>
 
 #if __has_include("secrets.h")
@@ -365,6 +366,26 @@ bool lorawan_init(void) {
 bool lorawan_join(uint32_t timeout_ms) {
     if (!radio) return false;
 
+    /* Skip the join if VSTOR is too low to reliably support +14 dBm TX
+     * peaks (~50 mA bursts).  Below ~3.0 V the buck is in dropout and
+     * Vdd droops hard during TX — failed joins burn the supercap fast
+     * (the IWDG-reset-then-rejoin spiral observed empirically drains
+     * 1.7 V in 4-5 minutes).  Returning false here lets loop() proceed
+     * to a normal cycle which then sleeps; setup() retries join on the
+     * next cold boot, by which point either solar has recharged the cap
+     * or the chip browns out gracefully and waits. */
+    if (power_adc_read_vSTOR_mv() < 3000) {
+        LOG("[LoRaWAN] vstor too low to join");
+        return false;
+    }
+
+    /* Wake the SX1262 from SLEEP retention (set by lorawan_sleep() on
+     * the previous cycle) before any join-request TX.  Without this
+     * the setFrequency()/transmit() calls in otaa_join() run against a
+     * sleeping radio and the join silently fails forever — matches
+     * lorawan_send_uplink()'s explicit standby() pattern. */
+    radio->standby();
+
     unsigned long start = millis();
     while (millis() - start < timeout_ms) {
         if (otaa_join()) {
@@ -380,6 +401,13 @@ bool lorawan_join(uint32_t timeout_ms) {
 
 bool lorawan_send_uplink(const uint8_t* payload, uint8_t payload_len) {
     if (!radio || !_joined || !payload || payload_len > LORAWAN_PAYLOAD_MAX) return false;
+
+    /* Bring the SX1262 into STDBY_RC before any per-packet reconfig.  After
+     * lorawan_sleep() the radio is in SLEEP retention; setFrequency() and
+     * other config writes are not guaranteed to apply in SLEEP mode, so an
+     * explicit standby() is required for channel hopping to work across
+     * STOP2 cycles. */
+    radio->standby();
 
     uint8_t pkt[80]; uint8_t idx = 0;
     pkt[idx++] = 0x40;
@@ -402,3 +430,11 @@ bool lorawan_send_uplink(const uint8_t* payload, uint8_t payload_len) {
 }
 
 bool lorawan_joined(void) { return _joined; }
+
+void lorawan_sleep(void) {
+    /* SX1262 SLEEP w/ retention. ~3 µA. Next transmit() implicitly wakes it
+     * (RadioLib calls setStandby before configuring TX). Without this, the
+     * radio stays in STDBY_RC across STOP2 — both kills the energy budget
+     * and seems to trigger a hard reset on the RAK3172 module on STOP2 entry. */
+    if (radio) (void)radio->sleep(true);
+}

@@ -166,10 +166,16 @@
 // GPIO to analog mode, wait, then read. Do NOT rely on default sampling
 // time — it's far too short for this impedance.
 
-#define PIN_VSTOR_ADC               PA_10  // ADC channel 4 (ADC_IN4)
-#define VSTOR_DIVIDER_RATIO         2.0f  // Multiply ADC voltage by this
-#define VSTOR_DIVIDER_R_TOP         1000000  // R22, 1MΩ
-#define VSTOR_DIVIDER_R_BOT         1000000  // R23, 1MΩ
+#define PIN_VSTOR_ADC               PA_10  // STM32WLE5 ADC1_IN6 (not IN4 as old comment said)
+/* BOM-confirmed 1MΩ / 1MΩ divider — straight 2.0× recovery multiplier.
+ * NOTE: an earlier bench run saw 3.38 V reported while the multimeter
+ * read 4.7 V, leading to a temporary 2.78× empirical correction.  After
+ * re-flashing with the VREFINT path enabled in ADC init the reading
+ * matched the multimeter at 2.0×.  Likely the original under-read was
+ * an ADC bias/path-enable side effect.  Verify per-board before flight. */
+#define VSTOR_DIVIDER_RATIO         2.0f
+#define VSTOR_DIVIDER_R_TOP         1000000  // R22, 1MΩ (BOM)
+#define VSTOR_DIVIDER_R_BOT         1000000  // R23, 1MΩ (BOM)
 #define VSTOR_ADC_SETTLE_MS         50    // Minimum settling time
 
 // --- Solar ADC: solar cell voltage monitoring ---
@@ -184,10 +190,10 @@
 //
 // Same high source impedance as VSTOR — same 50 ms settling requirement.
 
-#define PIN_SOLAR_ADC               PA_15  // ADC channel 5 (ADC_IN5)
-#define SOLAR_DIVIDER_RATIO         2.0f  // Multiply ADC voltage by this
-#define SOLAR_DIVIDER_R_TOP         1000000  // R19, 1MΩ
-#define SOLAR_DIVIDER_R_BOT         1000000  // R21, 1MΩ
+#define PIN_SOLAR_ADC               PA_15  // STM32WLE5 ADC1_IN11 (not IN5 as old comment said)
+#define SOLAR_DIVIDER_RATIO         2.0f
+#define SOLAR_DIVIDER_R_TOP         1000000  // R19, 1MΩ (BOM)
+#define SOLAR_DIVIDER_R_BOT         1000000  // R21, 1MΩ (BOM)
 #define SOLAR_ADC_SETTLE_MS         50    // Minimum settling time
 
 // --- Programmed voltage thresholds (from resistor dividers R1-R8) ---

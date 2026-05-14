@@ -1,6 +1,6 @@
 # Stratolink Firmware
 
-Phase 1–4 firmware for the Stratolink balloon PCB: periodic telemetry cycle with power-tier logic, GPS, I2C sensors (TMP117, MS5611, LIS2DH12, LTR-390UV), PDM microphone acoustic event detection, 35-byte payload, LoRaWAN uplink via RadioLib + manual protocol (US915 sub-band 2 / TTN, OTAA), tier-based sleep, STOP2 + RTC wake, and burst mode on LIS2DH12 freefall (INT1/PA8) with rapid beacon until freefall clears.
+Phase 1–4 firmware for the Stratolink balloon PCB: periodic telemetry cycle with power-tier logic, GPS, I2C sensors (TMP117, MS5611, LIS2DH12, LTR-390UV), PDM microphone acoustic event detection, 35-byte payload, LoRaWAN uplink via RadioLib + manual protocol (US915 sub-band 2 / TTN, OTAA), tier-based sleep, STOP1 + RTC wake, and burst mode on LIS2DH12 freefall (INT1/PA8) with rapid beacon until freefall clears.
 
 **Full description, approach, and usage:** see [DOCUMENTATION.md](DOCUMENTATION.md).
 
@@ -19,8 +19,8 @@ Phase 1–4 firmware for the Stratolink balloon PCB: periodic telemetry cycle wi
   - `sensor_lis2dh12.cpp` — LIS2DH12 accelerometer X/Y/Z (0.01 m/s²), 1 Hz low-power.
   - `sensor_ltr390.cpp` — LTR-390UV-01: UV index and ambient lux.
   - `mic_acoustic.cpp` — T3902 PDM mic via SPI1 RXONLY; RMS energy acoustic event detection.
-  - **Phase 3:** `power_manager.cpp` — STOP2 sleep with RTC wake when `POWER_SAVE_MODE` is true; tier-based sleep intervals. At EMERGENCY/CRITICAL, I2C sensors are skipped.
-  - **Phase 4:** LIS2DH12 freefall on INT1 (PA8) wakes MCU from STOP2; `power_manager_attach_freefall_wakeup()` and `power_manager_did_wake_from_freefall()`. Burst mode: short GPS timeout and 10 s sleep until `sensor_lis2dh12_is_freefall_cleared()`. Config: `BURST_GPS_TIMEOUT_MS`, `BURST_SLEEP_SEC`.
+  - **Phase 3:** `power_manager.cpp` — STOP1 sleep with RTC wake when `POWER_SAVE_MODE` is true; tier-based sleep intervals. At EMERGENCY/CRITICAL, I2C sensors are skipped.
+  - **Phase 4:** LIS2DH12 freefall on INT1 (PA8) wakes MCU from STOP1; `power_manager_attach_freefall_wakeup()` and `power_manager_did_wake_from_freefall()`. Burst mode: short GPS timeout and 10 s sleep until `sensor_lis2dh12_is_freefall_cleared()`. Config: `BURST_GPS_TIMEOUT_MS`, `BURST_SLEEP_SEC`.
 
 ## Build
 
@@ -29,7 +29,7 @@ cd firmware
 platformio run
 ```
 
-Copy `include/secrets.h.example` to `include/secrets.h` and set your LoRaWAN keys for real deployment. In `config.h`, `POWER_SAVE_MODE` enables STOP2 sleep with RTC wake; `SLEEP_INTERVAL_*_SEC` define tier-based intervals.
+Copy `include/secrets.h.example` to `include/secrets.h` and set your LoRaWAN keys for real deployment. In `config.h`, `POWER_SAVE_MODE` enables STOP1 sleep with RTC wake; `SLEEP_INTERVAL_*_SEC` define tier-based intervals.
 
 ## Upload
 

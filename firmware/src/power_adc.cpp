@@ -4,9 +4,17 @@
 #include <Arduino.h>
 #include "stm32wlxx_hal.h"
 
-#ifndef ADC_VREF_MV
-#define ADC_VREF_MV 3300
+#ifndef ADC_VREF_MV_NOMINAL
+#define ADC_VREF_MV_NOMINAL 3300
 #endif
+
+/* STM32WL VREFINT factory-calibrated raw value, measured at VDDA = 3.0 V.
+ * VREFINT_CAL_ADDR comes from stm32wlxx_ll_adc.h (0x1FFF75AA).
+ * Using it lets us compute the actual runtime VDDA:
+ *   VDDA_mv = 3000 * VREFINT_CAL / VREFINT_raw
+ * Without this we'd assume VDDA = 3.3 V — wrong by however much the
+ * buck output actually differs, including when VSTOR is in dropout. */
+#define VREFINT_CAL_VREF_MV 3000
 
 /* Direct HAL ADC: bypasses STM32duino analogRead defaults that don't tolerate
  * the 1 MΩ + 1 MΩ dividers on VSTOR (R22/R23) and +SOLAR (R19/R21).
@@ -21,6 +29,21 @@
 
 static bool adc_initialized = false;
 static ADC_HandleTypeDef s_hadc;
+
+/* Read VREFINT once after init and infer the runtime VDDA in millivolts.
+ * Cached because VDDA only changes when the buck regulator's input
+ * (VSTOR) crosses the dropout point — slowly enough that we don't need
+ * to refresh every cycle.  Returns 0 if VREFINT couldn't be read, which
+ * the caller treats as "use the nominal 3300 mV fallback". */
+static uint16_t s_vdda_mv = 0;
+static uint16_t adc_read_raw(uint32_t channel);
+static void refresh_vdda_mv(void) {
+    uint16_t cal = *VREFINT_CAL_ADDR;
+    if (cal == 0 || cal == 0xFFFF) { s_vdda_mv = 0; return; }
+    uint32_t raw = adc_read_raw(ADC_CHANNEL_VREFINT);
+    if (raw == 0) { s_vdda_mv = 0; return; }
+    s_vdda_mv = (uint16_t)(((uint32_t)VREFINT_CAL_VREF_MV * cal) / raw);
+}
 
 void power_adc_init(void) {
     pinMode(PIN_VSTOR_ADC, INPUT_ANALOG);
@@ -51,7 +74,16 @@ void power_adc_init(void) {
     if (HAL_ADC_Init(&s_hadc) != HAL_OK) return;
     HAL_ADCEx_Calibration_Start(&s_hadc);
 
+    /* Enable the VREFINT internal-channel path so reading
+     * ADC_CHANNEL_VREFINT actually returns the reference voltage.
+     * On STM32WL ADC_CCR lives on the common-config struct ADC1_COMMON. */
+    SET_BIT(ADC_COMMON->CCR, ADC_CCR_VREFEN);
+
     adc_initialized = true;
+
+    /* One-shot VREFINT read to learn actual VDDA — must happen after the
+     * calibration above and before any user channel reads. */
+    refresh_vdda_mv();
 }
 
 static uint16_t adc_read_raw(uint32_t channel) {
@@ -73,7 +105,15 @@ static uint16_t adc_read_raw(uint32_t channel) {
 
 static uint16_t read_mv(uint32_t channel, float divider_ratio) {
     uint32_t raw = adc_read_raw(channel);
-    uint32_t mv  = (raw * (uint32_t)ADC_VREF_MV) / 4096u;
+    /* Bench check (2026-05) showed the VREFINT-derived VDDA over-corrected:
+     * applying it shifted vstor from 3380 mV → 5935 mV when the multimeter
+     * read 4700 mV.  Mechanism is likely the same ADC scaling error that
+     * makes the divider read low; VREFINT reads low too and the math turns
+     * that into a falsely-high VDDA, double-correcting.  Keeping the read
+     * for future debug telemetry (see s_vdda_mv) but using the nominal
+     * 3300 mV for the actual conversion. */
+    (void)s_vdda_mv;
+    uint32_t mv = (raw * (uint32_t)ADC_VREF_MV_NOMINAL) / 4096u;
     return (uint16_t)((float)mv * divider_ratio);
 }
 

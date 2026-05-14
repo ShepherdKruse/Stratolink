@@ -14,4 +14,8 @@ void power_manager_attach_freefall_wakeup(void);
 /** Returns true if last wake was from freefall (INT1). Clears the flag. */
 bool power_manager_did_wake_from_freefall(void);
 
+/** Refresh the independent watchdog. Must be called at least every ~33 s
+ *  while in run mode or the chip will reboot. IWDG is frozen in STOP. */
+void power_manager_kick_watchdog(void);
+
 #endif

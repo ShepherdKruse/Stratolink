@@ -17,6 +17,14 @@
 #define LIS2DH12_CTRL1_YEN    (1 << 1)
 #define LIS2DH12_CTRL1_ZEN    (1 << 2)
 #define LIS2DH12_CTRL3_I1_IA1 (1 << 6)
+/* INT1_CFG bits. AOI (bit 7) MUST be set for true freefall: it means
+ * "AND of the per-axis low-events" — INT1 fires only when |X|<T AND
+ * |Y|<T AND |Z|<T (i.e. the device is genuinely weightless on all
+ * three axes).  Leaving AOI=0 yields OR logic, which fires whenever
+ * ANY axis is below threshold — i.e. continuously while the board
+ * sits flat (|X|≈0, |Y|≈0) or hangs upright (one horizontal axis ≈0).
+ * That bug burst-modes the chip constantly during rest. */
+#define LIS2DH12_INT1_CFG_AOI  (1 << 7)
 #define LIS2DH12_INT1_CFG_XLIE (1 << 0)
 #define LIS2DH12_INT1_CFG_YLIE (1 << 2)
 #define LIS2DH12_INT1_CFG_ZLIE (1 << 4)
@@ -74,7 +82,10 @@ bool sensor_lis2dh12_enable_freefall_int1(void) {
 
     Wire.beginTransmission(i2c_addr);
     Wire.write(LIS2DH12_REG_INT1_CFG);
-    Wire.write(LIS2DH12_INT1_CFG_XLIE | LIS2DH12_INT1_CFG_YLIE | LIS2DH12_INT1_CFG_ZLIE);
+    Wire.write(LIS2DH12_INT1_CFG_AOI
+             | LIS2DH12_INT1_CFG_XLIE
+             | LIS2DH12_INT1_CFG_YLIE
+             | LIS2DH12_INT1_CFG_ZLIE);
     return Wire.endTransmission() == 0;
 }
 

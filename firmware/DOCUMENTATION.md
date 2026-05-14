@@ -10,9 +10,11 @@ The firmware is designed for a supercap-powered PCB that runs a periodic telemet
 
 2. **Power tiers.** VSTOR voltage selects a tier (FULL, REDUCED, NO_GPS, EMERGENCY, CRITICAL). Lower tiers reduce load: no GPS below NO_GPS, no I2C sensors in EMERGENCY/CRITICAL (LoRa beacon only), and longer sleep intervals to preserve energy.
 
-3. **STOP2 sleep.** When `POWER_SAVE_MODE` is enabled, the MCU enters STOP2 (deep sleep) and wakes on an RTC alarm. Sleep duration is tier-based. This minimizes current between cycles.
+3. **STOP1 sleep.** When `POWER_SAVE_MODE` is enabled, the MCU enters STOP1 (LP regulator on) and wakes on an RTC alarm via the internal wake-up line (`PWR.CR3.EIWUL`).  Sleep duration is tier-based.  Quiescent ~3–5 µA.  STOP1 (~1.5 µA) was dropped on this RAK3172 module: empirically it triggered a `PINRSTF` reset every cycle, almost certainly from the 1.2 V Vcore droop during the regulator-off transition; the chip's reset detector reads the dip as a pin reset.
 
-4. **Burst mode.** The LIS2DH12 accelerometer drives INT1 (PA8) when a freefall condition is detected. PA8 is used as an EXTI wake source so the MCU can wake from STOP2 on burst. After a freefall wake, the firmware runs a rapid-beacon loop (shorter GPS timeout, 10 s sleep) until the acceleration returns above a threshold (~0.5g), then reverts to normal tier-based behavior.
+4. **Burst mode.** The LIS2DH12 accelerometer drives INT1 (PA8) when a freefall condition is detected. PA8 is used as an EXTI wake source so the MCU can wake from STOP1 on burst. After a freefall wake, the firmware runs a rapid-beacon loop (shorter GPS timeout, 10 s sleep) until the acceleration returns above a threshold (~0.5g), then reverts to normal tier-based behavior.
+
+5. **Independent watchdog (IWDG).**  32.7 s timeout from LSI, refreshed at the top of `loop()` and between major operations (after GPS, after sensor reads, after TX-pack, on every wake).  Frozen in STOP1 by the default `FZ_STOP1.IWGEN_STOP=1` option byte, so it doesn't false-fire during multi-minute sleep cycles.  Recovers from any run-mode hang within ~33 s.
 
 5. **Payload contract.** One 35-byte big-endian uplink per cycle, aligned with the ground-station webhook and TTN payload formatter. No raw audio or high-rate streams; acoustic-event byte triggers on stratospheric sound detection (mic RMS energy above adaptive noise floor).
 
@@ -29,7 +31,7 @@ The firmware is designed for a supercap-powered PCB that runs a periodic telemet
 7. If tier allows TX, send one unconfirmed uplink.
 8. If in burst mode, check whether freefall is cleared (accel magnitude &gt; ~0.5g); if so, clear burst mode.
 9. Choose sleep duration: burst mode 10 s, else tier-based (e.g. FULL 60 s, REDUCED 120 s, NO_GPS 300 s, EMERGENCY 120 s).
-10. Enter sleep (STOP2 with RTC wake, or delay if power save disabled). INT1 (PA8) remains an alternate wake source.
+10. Enter sleep (STOP1 with RTC wake, or delay if power save disabled). INT1 (PA8) remains an alternate wake source.
 
 ### 2.2 Burst mode (Phase 4)
 
@@ -60,7 +62,7 @@ The firmware is designed for a supercap-powered PCB that runs a periodic telemet
 1. Copy `include/secrets.h.example` to `include/secrets.h`. Do not commit `secrets.h`.
 2. In `secrets.h`, set LoRaWAN keys (DEV_EUI, APP_EUI, APP_KEY) for your TTN application.
 3. In `include/config.h` you can adjust:
-   - `POWER_SAVE_MODE` — enable STOP2 + RTC (and EXTI) wake.
+   - `POWER_SAVE_MODE` — enable STOP1 + RTC (and EXTI) wake.
    - `TRANSMIT_INTERVAL_SEC` — default interval when not using tier-based sleep.
    - `SLEEP_INTERVAL_*_SEC` — per-tier sleep intervals (FULL, REDUCED, NO_GPS, EMERGENCY).
    - `BURST_GPS_TIMEOUT_MS`, `BURST_SLEEP_SEC` — burst-mode GPS timeout and sleep.
@@ -122,7 +124,7 @@ The ground station and TTN Payload Formatter should use this layout for decoding
 
 | Symbol | Default | Meaning |
 |--------|---------|---------|
-| `POWER_SAVE_MODE` | true | Use STOP2 + RTC (and EXTI) wake instead of delay. |
+| `POWER_SAVE_MODE` | true | Use STOP1 + RTC (and EXTI) wake instead of delay. |
 | `SLEEP_INTERVAL_FULL_SEC` | 60 | Sleep when VSTOR ≥ FULL threshold. |
 | `SLEEP_INTERVAL_REDUCED_SEC` | 120 | Sleep when in REDUCED tier. |
 | `SLEEP_INTERVAL_NO_GPS_SEC` | 300 | Sleep when GPS is skipped (NO_GPS tier). |
