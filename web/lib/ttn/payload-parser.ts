@@ -8,9 +8,12 @@
 export interface TelemetryData {
     device_id: string;
     time: string;
-    lat: number;
-    lon: number;
-    altitude_m: number;
+    /** Latitude in degrees. null when firmware reports no GPS fix (NOGPS power tier). */
+    lat: number | null;
+    /** Longitude in degrees. null when firmware reports no GPS fix (NOGPS power tier). */
+    lon: number | null;
+    /** Altitude in meters. null when firmware reports no GPS fix. */
+    altitude_m: number | null;
     velocity_x?: number | null;
     velocity_y?: number | null;
     temperature?: number | null;
@@ -86,12 +89,17 @@ function parseJSONPayload(
     // Extract receiver characteristics from rx_metadata (first gateway)
     const rxData = rxMetadata && rxMetadata.length > 0 ? rxMetadata[0] : null;
 
+    const rawLat = parseFloat(decoded.latitude) || parseFloat(decoded.lat) || 0;
+    const rawLon = parseFloat(decoded.longitude) || parseFloat(decoded.lon) || 0;
+    const rawAlt = parseFloat(decoded.altitude) || parseFloat(decoded.altitude_m) || 0;
+    const hasGpsFix = rawLat !== 0 && rawLon !== 0;
+
     return {
         device_id: deviceId,
         time: receivedAt,
-        lat: parseFloat(decoded.latitude) || parseFloat(decoded.lat) || 0,
-        lon: parseFloat(decoded.longitude) || parseFloat(decoded.lon) || 0,
-        altitude_m: parseFloat(decoded.altitude) || parseFloat(decoded.altitude_m) || 0,
+        lat: hasGpsFix ? rawLat : null,
+        lon: hasGpsFix ? rawLon : null,
+        altitude_m: hasGpsFix ? rawAlt : null,
         velocity_x: decoded.velocity_x !== undefined ? parseFloat(decoded.velocity_x) : null,
         velocity_y: decoded.velocity_y !== undefined ? parseFloat(decoded.velocity_y) : null,
         temperature: decoded.temperature !== undefined ? parseFloat(decoded.temperature) : null,
@@ -148,9 +156,16 @@ function parseBinaryPayload(
             return null;
         }
 
-        const lat = buffer.readInt32BE(0) / 1e7;
-        const lon = buffer.readInt32BE(4) / 1e7;
-        const altitude_m = buffer.readInt32BE(8);
+        const rawLat = buffer.readInt32BE(0) / 1e7;
+        const rawLon = buffer.readInt32BE(4) / 1e7;
+        const rawAlt = buffer.readInt32BE(8);
+
+        /* NOGPS power tier sentinel: firmware writes 0/0/0 when there's no fix.
+         * Treat that as "no GPS data" rather than coordinates at Null Island. */
+        const hasGpsFix = rawLat !== 0 && rawLon !== 0;
+        const lat = hasGpsFix ? rawLat : null;
+        const lon = hasGpsFix ? rawLon : null;
+        const altitude_m = hasGpsFix ? rawAlt : null;
 
         // Extract receiver characteristics
         const rxData = rxMetadata && rxMetadata.length > 0 ? rxMetadata[0] : null;

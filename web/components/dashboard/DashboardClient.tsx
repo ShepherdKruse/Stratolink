@@ -118,12 +118,14 @@ export default function DashboardClient({ initialBalloonId = null, initialMode =
                         }
                     }
 
-                    // Fetch balloon positions for the map (only activated devices)
+                    // Fetch balloon positions for the map (only activated devices, only rows with a GPS fix)
                     const { data: balloons, error: balloonsError } = await supabase
                         .from('telemetry')
                         .select('device_id, lat, lon, altitude_m, time, velocity_x, velocity_y')
                         .in('device_id', activatedDeviceIds)
                         .gte('time', oneDayAgo)
+                        .not('lat', 'is', null)
+                        .not('lon', 'is', null)
                         .order('time', { ascending: false });
 
                     if (!balloonsError && balloons) {

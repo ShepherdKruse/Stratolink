@@ -17,14 +17,18 @@ export async function POST(request: NextRequest) {
             );
         }
 
-        // Validate required fields
-        if (!telemetry.device_id || telemetry.lat === 0 || telemetry.lon === 0) {
-            console.error('Invalid telemetry data:', telemetry);
+        /* device_id is the only hard requirement. lat/lon may be null when the
+         * firmware is in NOGPS power tier — we still want the sensor data row.
+         * The dashboard map query filters null positions out so this is safe. */
+        if (!telemetry.device_id) {
+            console.error('Invalid telemetry data: missing device_id', telemetry);
             return NextResponse.json(
-                { error: 'Invalid payload: missing required fields (device_id, lat, lon)' },
+                { error: 'Invalid payload: missing required field device_id' },
                 { status: 400 }
             );
         }
+
+        const hasGpsFix = telemetry.lat !== null && telemetry.lon !== null;
 
         // Check if device exists and is activated (optional validation)
         const supabase = createServiceRoleClient();
@@ -77,11 +81,16 @@ export async function POST(request: NextRequest) {
             );
         }
 
-        console.log(`Telemetry inserted for device ${telemetry.device_id} at ${telemetry.lat}, ${telemetry.lon}`);
-        
-        return NextResponse.json({ 
+        if (hasGpsFix) {
+            console.log(`Telemetry inserted for ${telemetry.device_id} at ${telemetry.lat}, ${telemetry.lon}`);
+        } else {
+            console.log(`Telemetry inserted for ${telemetry.device_id} (no GPS fix; sensor-only row)`);
+        }
+
+        return NextResponse.json({
             success: true,
-            device_id: telemetry.device_id 
+            device_id: telemetry.device_id,
+            gps_fix: hasGpsFix,
         }, { status: 200 });
         
     } catch (error) {
