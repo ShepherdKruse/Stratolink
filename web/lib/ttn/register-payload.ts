@@ -216,15 +216,19 @@ export async function registerNewPayload(input: RegisterNewPayloadInput): Promis
     }
 
     const supabase = createServiceRoleClient();
-    const { error: insertError } = await supabase.from('devices').insert({
-        device_id: deviceId,
-        claim_code: claimCode,
-        status: 'storage',
-        launch_token_hash: launchHash,
-        launch_token_expires_at: launchExpires,
-    });
 
-    if (insertError) {
+    /* Look for existing claim row (status='storage'). If it's already 'flying'/'landed'/'retired'
+     * we refuse to re-register — rotate keys in TTN console instead. Otherwise update the
+     * existing row (preserves launcher_name from the public claim form) or insert a new one. */
+    const { data: existing } = await supabase
+        .from('devices')
+        .select('device_id, status')
+        .eq('device_id', deviceId)
+        .maybeSingle();
+
+    let dbError: { message: string } | null = null;
+
+    if (existing && existing.status && existing.status !== 'storage') {
         try {
             await ttsDeleteDevice(apiBase, applicationId, deviceId, apiKey);
         } catch {
@@ -232,8 +236,43 @@ export async function registerNewPayload(input: RegisterNewPayloadInput): Promis
         }
         return {
             ok: false,
-            error: 'Supabase insert failed after TTN registration',
-            details: insertError.message,
+            error: 'Device cannot be re-registered',
+            details: `Device ${deviceId} is in status '${existing.status}'. Rotate keys in the TTN console instead, or pick a new device_id.`,
+        };
+    }
+
+    if (existing) {
+        const { error } = await supabase
+            .from('devices')
+            .update({
+                claim_code: claimCode,
+                status: 'storage',
+                launch_token_hash: launchHash,
+                launch_token_expires_at: launchExpires,
+            })
+            .eq('device_id', deviceId);
+        dbError = error ? { message: error.message } : null;
+    } else {
+        const { error } = await supabase.from('devices').insert({
+            device_id: deviceId,
+            claim_code: claimCode,
+            status: 'storage',
+            launch_token_hash: launchHash,
+            launch_token_expires_at: launchExpires,
+        });
+        dbError = error ? { message: error.message } : null;
+    }
+
+    if (dbError) {
+        try {
+            await ttsDeleteDevice(apiBase, applicationId, deviceId, apiKey);
+        } catch {
+            /* best-effort rollback */
+        }
+        return {
+            ok: false,
+            error: 'Supabase write failed after TTN registration',
+            details: dbError.message,
         };
     }
 

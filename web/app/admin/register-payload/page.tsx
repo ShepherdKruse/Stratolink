@@ -1,8 +1,9 @@
 'use client';
 
-import { useState, useTransition } from 'react';
+import { useEffect, useState, useTransition } from 'react';
 import Link from 'next/link';
 import { registerPayloadAction } from '@/lib/actions/register-payload';
+import { listClaims, type ClaimedRow } from '@/lib/actions/claim';
 
 export default function RegisterPayloadAdminPage() {
     const [adminKey, setAdminKey] = useState('');
@@ -12,6 +13,15 @@ export default function RegisterPayloadAdminPage() {
     const [out, setOut] = useState<string | null>(null);
     const [err, setErr] = useState<string | null>(null);
     const [pending, startTransition] = useTransition();
+    const [claims, setClaims] = useState<ClaimedRow[]>([]);
+
+    const refreshClaims = () => {
+        listClaims().then((r) => {
+            if (r.ok) setClaims(r.rows);
+        });
+    };
+
+    useEffect(refreshClaims, []);
 
     function run() {
         setErr(null);
@@ -38,23 +48,54 @@ export default function RegisterPayloadAdminPage() {
                     r.firmwareSnippet,
                 ].join('\n')
             );
+            refreshClaims();
         });
     }
 
+    const pendingClaims = claims.filter((c) => !c.has_keys && c.status === 'storage');
+
     return (
-        <div className="mx-auto max-w-2xl px-4 py-10 text-foreground">
+        <div className="mx-auto max-w-3xl px-4 py-10 text-foreground">
             <h1 className="text-2xl font-semibold tracking-tight">Register payload</h1>
             <p className="mt-2 text-sm text-muted-foreground">
-                Creates an OTAA device in TTN and a <code className="rounded bg-muted px-1 py-0.5 text-xs">devices</code> row
-                with a launch link for QR labels. Teddy flashes the <code className="text-xs">secrets.h</code> block.
+                Creates the OTAA device in TTN and updates the matching <code className="rounded bg-muted px-1 py-0.5 text-xs">devices</code> row with a one-time
+                launch link. Output includes a <code className="text-xs">secrets.h</code> block to send Teddy.
             </p>
             <p className="mt-2 text-sm text-muted-foreground">
-                After registration, use{' '}
+                Re-issue QR labels later via{' '}
                 <Link href="/admin/launch-kit" className="underline">
                     Launch kit
-                </Link>{' '}
-                to re-issue QR links if needed.
+                </Link>
+                . Claim form for participants:{' '}
+                <Link href="/claim" className="underline">
+                    /claim
+                </Link>
+                .
             </p>
+
+            {pendingClaims.length > 0 && (
+                <div className="mt-8 rounded-md border border-yellow-700/40 bg-yellow-500/5 p-4">
+                    <h2 className="text-sm font-semibold text-yellow-200">Awaiting keys</h2>
+                    <p className="mt-1 text-xs text-yellow-200/70">Click a row to load it into the form, then paste the DevEUI Teddy sent.</p>
+                    <ul className="mt-3 divide-y divide-yellow-700/30">
+                        {pendingClaims.map((c) => (
+                            <li key={c.device_id} className="flex items-center justify-between py-2 text-sm">
+                                <div>
+                                    <div className="font-mono">{c.device_id}</div>
+                                    <div className="text-[11px] text-yellow-200/70">{c.launcher_name || 'No commander name'}</div>
+                                </div>
+                                <button
+                                    type="button"
+                                    onClick={() => setDeviceId(c.device_id)}
+                                    className="rounded border border-yellow-700/40 bg-yellow-500/10 px-3 py-1.5 text-xs font-medium text-yellow-100 hover:bg-yellow-500/20"
+                                >
+                                    Load
+                                </button>
+                            </li>
+                        ))}
+                    </ul>
+                </div>
+            )}
 
             <div className="mt-8 space-y-4">
                 <label className="block text-sm font-medium">
@@ -69,12 +110,12 @@ export default function RegisterPayloadAdminPage() {
                     />
                 </label>
                 <label className="block text-sm font-medium">
-                    Device ID (optional)
+                    Device ID (callsign)
                     <input
-                        className="mt-1 w-full rounded-md border border-input bg-background px-3 py-2 text-sm"
+                        className="mt-1 w-full rounded-md border border-input bg-background px-3 py-2 font-mono text-sm"
                         value={deviceId}
                         onChange={(e) => setDeviceId(e.target.value)}
-                        placeholder="e.g. stratolink-001 (lowercase; auto if empty)"
+                        placeholder="e.g. stratolink-orion (matches /claim)"
                     />
                 </label>
                 <label className="block text-sm font-medium">
@@ -87,12 +128,12 @@ export default function RegisterPayloadAdminPage() {
                     />
                 </label>
                 <label className="block text-sm font-medium">
-                    DevEUI (optional)
+                    DevEUI (from Teddy / factory)
                     <input
                         className="mt-1 w-full rounded-md border border-input bg-background px-3 py-2 font-mono text-xs"
                         value={devEui}
                         onChange={(e) => setDevEui(e.target.value)}
-                        placeholder="16 hex from Teddy; random if empty"
+                        placeholder="16 hex; random if empty"
                     />
                 </label>
                 <button
