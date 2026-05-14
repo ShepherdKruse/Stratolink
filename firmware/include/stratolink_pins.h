@@ -1,5 +1,5 @@
-#ifndef BOARD_H
-#define BOARD_H
+#ifndef STRATOLINK_PINS_H
+#define STRATOLINK_PINS_H
 
 #include <Arduino.h>
 
@@ -28,7 +28,7 @@
 #define GPS_I2C_ADDR                0x42
 
 // GPS control pins
-#define PIN_GPS_RESET_N             PA0   // Active-low reset, 10kΩ pullup (R18) to GPS VCC.
+#define PIN_GPS_RESET_N             PA_0   // Active-low reset, 10kΩ pullup (R18) to GPS VCC.
 
 // GPS configuration constants
 #define GPS_DYNMODEL_AIRBORNE_4G    8     // UBX-CFG-NAVSPG-DYNMODEL value
@@ -43,15 +43,15 @@
 //    I2C BUS — Shared, single pair of 4.7kΩ pull-ups (R11, R12)
 // =============================================================================
 
-#define PIN_I2C_SDA                 PA11  // Directly on RAK3172 Pin 10
-#define PIN_I2C_SCL                 PA12  // Directly on RAK3172 Pin 9
+#define PIN_I2C_SDA                 PA_11  // Directly on RAK3172 Pin 10
+#define PIN_I2C_SCL                 PA_12  // Directly on RAK3172 Pin 9
 
 // I2C Device Addresses (active on the bus)
 #define I2C_ADDR_GPS                0x42  // u-blox MAX-M10S (U3) — fixed
 #define I2C_ADDR_ACCEL              0x18  // LIS2DH12TR (U7) — SDO/SA0 tied to GND
 #define I2C_ADDR_TEMP               0x48  // TMP117NAIYBGR (U5) — ADD0 tied to GND
 #define I2C_ADDR_UV                 0x53  // LTR-390UV-01 (U6) — fixed address
-#define I2C_ADDR_BARO               0x77  // MS5611-01BA03 (U4) — CSB tied to +3.3V
+#define I2C_ADDR_BARO               0x76  // MS5611-01BA03 (U4) — CSB reads LOW on this board
 
 // =============================================================================
 //    ACCELEROMETER — LIS2DH12TR (U7)
@@ -70,7 +70,7 @@
 // dominates at ~1-3s period; gravity waves are 5-30 min period, so they're
 // easily separable with a low-pass filter.
 
-#define PIN_ACCEL_INT1              PA8   // LIS2DH12 INT1 output.
+#define PIN_ACCEL_INT1              PA_8   // LIS2DH12 INT1 output.
                                           // Configure as EXTI wakeup source for
                                           // freefall → burst detection.
                                           // Rising edge = interrupt active.
@@ -127,16 +127,18 @@
 //   - Off:    remove VDD via power gating = 0 µA
 // Wake-up from sleep: 32,768 SCK clock cycles (~13.6 ms at 2.4 MHz).
 
-#define PIN_MIC_PDM_CLK             PB3   // SPI1_SCK (AF5). Clock output to T3902.
+#define PIN_MIC_PDM_CLK             PB_3   // SPI1_SCK (AF5). Clock output to T3902.
                                           // 33Ω series resistor between MCU and mic.
 
-#define PIN_MIC_PDM_DATA            PB4   // SPI1_MISO (AF5). PDM data input from T3902.
+#define PIN_MIC_PDM_DATA            PB_4   // SPI1_MISO (AF5). PDM data input from T3902.
                                           // Direct connection, no series resistor.
 
 #define MIC_PDM_CLOCK_HZ            2400000  // ~2.4 MHz nominal
 #define MIC_WAKEUP_CLOCKS           32768    // SCK cycles to wake from sleep
 
-// T3902 SELECT pin is tied to GND → L channel selected.
+// T3902 SELECT pin is tied to GND → RIGHT channel (DATA1).
+// Per TDK datasheet DS-000357: SELECT=GND → data valid after FALLING CLK edge.
+// Sleep entry: 1ms after clock stops. Wake-up: 20ms of continuous clock.
 
 // =============================================================================
 //    POWER MANAGEMENT — BQ25570 (U1)
@@ -145,7 +147,7 @@
 // Solar cells → VIN_DC → boost charger → VSTOR (supercap) → buck → VOUT (3.3V)
 
 // --- VBAT_OK: power-good flag from BQ25570 ---
-#define PIN_VBAT_OK                 PB5   // Digital input. Active high.
+#define PIN_VBAT_OK                 PB_5   // Digital input. Active high.
                                           // Connected through R8 (100kΩ series) to
                                           // BQ25570 VBAT_OK output (U1 pin 13).
                                           // HIGH = supercap above ~3.51V (rising)
@@ -164,10 +166,16 @@
 // GPIO to analog mode, wait, then read. Do NOT rely on default sampling
 // time — it's far too short for this impedance.
 
-#define PIN_VSTOR_ADC               PA10  // ADC channel 4 (ADC_IN4)
-#define VSTOR_DIVIDER_RATIO         2.0f  // Multiply ADC voltage by this
-#define VSTOR_DIVIDER_R_TOP         1000000  // R22, 1MΩ
-#define VSTOR_DIVIDER_R_BOT         1000000  // R23, 1MΩ
+#define PIN_VSTOR_ADC               PA_10  // STM32WLE5 ADC1_IN6 (not IN4 as old comment said)
+/* BOM-confirmed 1MΩ / 1MΩ divider — straight 2.0× recovery multiplier.
+ * NOTE: an earlier bench run saw 3.38 V reported while the multimeter
+ * read 4.7 V, leading to a temporary 2.78× empirical correction.  After
+ * re-flashing with the VREFINT path enabled in ADC init the reading
+ * matched the multimeter at 2.0×.  Likely the original under-read was
+ * an ADC bias/path-enable side effect.  Verify per-board before flight. */
+#define VSTOR_DIVIDER_RATIO         2.0f
+#define VSTOR_DIVIDER_R_TOP         1000000  // R22, 1MΩ (BOM)
+#define VSTOR_DIVIDER_R_BOT         1000000  // R23, 1MΩ (BOM)
 #define VSTOR_ADC_SETTLE_MS         50    // Minimum settling time
 
 // --- Solar ADC: solar cell voltage monitoring ---
@@ -182,18 +190,25 @@
 //
 // Same high source impedance as VSTOR — same 50 ms settling requirement.
 
-#define PIN_SOLAR_ADC               PA15  // ADC channel 5 (ADC_IN5)
-#define SOLAR_DIVIDER_RATIO         2.0f  // Multiply ADC voltage by this
-#define SOLAR_DIVIDER_R_TOP         1000000  // R19, 1MΩ
-#define SOLAR_DIVIDER_R_BOT         1000000  // R21, 1MΩ
+#define PIN_SOLAR_ADC               PA_15  // STM32WLE5 ADC1_IN11 (not IN5 as old comment said)
+#define SOLAR_DIVIDER_RATIO         2.0f
+#define SOLAR_DIVIDER_R_TOP         1000000  // R19, 1MΩ (BOM)
+#define SOLAR_DIVIDER_R_BOT         1000000  // R21, 1MΩ (BOM)
 #define SOLAR_ADC_SETTLE_MS         50    // Minimum settling time
 
 // --- Programmed voltage thresholds (from resistor dividers R1-R8) ---
 // These are hardware-set by resistors and cannot be changed in firmware.
+//
+// VBAT_OK_RISE/FALL: as-built. Saleae captures on board #3 (2026-04-29) showed
+// the buck enabling at VSTOR ~2.0V, not the originally-spec'd 3.51V. The
+// OK_PROG/OK_HYST resistor stuff (R5/R6/R7) was populated for ~2V, so MCU
+// can wake at lower VSTOR but operates in buck dropout (VOUT ≈ VSTOR - 0.2V)
+// until VSTOR > ~3.5V, at which point VOUT regulates to the 3.3V setpoint.
 #define BQ25570_VOUT_NOMINAL_MV     3312  // Buck output (VOUT_SET divider)
 #define BQ25570_VBAT_OV_MV          5363  // Overvoltage lockout (supercap max)
-#define BQ25570_VBAT_OK_RISE_MV     3510  // VBAT_OK asserts (rising)
-#define BQ25570_VBAT_OK_FALL_MV     1692  // VBAT_OK deasserts (falling)
+#define BQ25570_VBAT_OK_RISE_MV     2000  // observed; was 3510 in original spec
+#define BQ25570_VBAT_OK_FALL_MV     1620  // computed from R5/R6/R7; verify on bench
+#define BQ25570_BUCK_REGULATION_V   3.5f  // VSTOR above which buck holds 3.3V
 
 // --- VOUT_EN: buck converter enable (directly connected to VSTOR) ---
 //
@@ -255,21 +270,22 @@
 // 10. SPARE GPIOs — Available on J3 header
 // =============================================================================
 
-#define PIN_SPARE_PA1               PA1   // Spare GPIO
-#define PIN_SPARE_PA9               PA9   // Spare GPIO
-#define PIN_SPARE_PB2               PB2   // Spare GPIO
+#define PIN_SPARE_PA1               PA_1  // Spare GPIO
+#define PIN_SPARE_PA9               PA_9  // Spare GPIO
+#define PIN_SPARE_PB2               PB_2  // Spare GPIO
 
 // =============================================================================
 // 11. SWD DEBUG INTERFACE
 // =============================================================================
 
-#define PIN_SWDIO                   PA13  // SWD data — directly on RAK3172 Pin 7
-#define PIN_SWCLK                   PA14  // SWD clock — directly on RAK3172 Pin 8
+#define PIN_SWDIO                   PA_13 // SWD data — directly on RAK3172 Pin 7
+#define PIN_SWCLK                   PA_14 // SWD clock — directly on RAK3172 Pin 8
 
 // =============================================================================
 // 12. BOARD METADATA
 // =============================================================================
 
+#undef BOARD_NAME
 #define BOARD_NAME                  "Stratolink PICO Mainboard"
 #define BOARD_REVISION              "2026-02-27"
 #define BOARD_AUTHORS               "Teddy Warner, Shepherd Kruse, Caleb Kruse"
@@ -277,4 +293,4 @@
 #define BOARD_LAYERS                2
 #define BOARD_WEIGHT_TARGET_G       15    // Total system weight limit
 
-#endif // BOARD_H
+#endif // STRATOLINK_PINS_H

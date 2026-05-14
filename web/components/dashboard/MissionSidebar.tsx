@@ -17,6 +17,13 @@ interface MissionSidebarProps {
         temperature?: number;
         pressure?: number;
         rssi?: number;
+        uv_index?: number;
+        ambient_lux?: number;
+        acoustic_event?: number;
+        solar_voltage?: number;
+        mems_accel_x?: number;
+        mems_accel_y?: number;
+        mems_accel_z?: number;
     }>;
     timelineProps?: {
         startTime: Date;
@@ -37,9 +44,9 @@ export default function MissionSidebar({ isOpen, onClose, balloonId, launcherNam
         });
     };
 
-    const latestTelemetry = telemetryData.length > 0 
+    const latestTelemetry = telemetryData.length > 0
         ? telemetryData[telemetryData.length - 1]
-        : { battery_voltage: 3.72, temperature: -45.2, pressure: 120.5, rssi: -112 };
+        : { battery_voltage: 3.72, temperature: -45.2, pressure: 120.5, rssi: -112, uv_index: 0, ambient_lux: 0, acoustic_event: 0, solar_voltage: 0, mems_accel_x: 0, mems_accel_y: 0, mems_accel_z: 0 };
 
     const batteryData = telemetryData.length > 0
         ? telemetryData.map(t => ({ time: t.time, value: t.battery_voltage ?? 3.7 }))
@@ -250,25 +257,39 @@ export default function MissionSidebar({ isOpen, onClose, balloonId, launcherNam
                                 </div>
                             </div>
 
-                            {/* Navigation Data */}
+                            {/* Sensors */}
                             <div className="p-3 border-b border-[#333]">
-                                <div className="text-[10px] font-semibold text-[#666] uppercase tracking-wider mb-2">Navigation</div>
+                                <div className="text-[10px] font-semibold text-[#666] uppercase tracking-wider mb-2">Sensors</div>
                                 <div className="font-mono text-[10px] space-y-1 text-[#999]">
                                     <div className="flex justify-between">
-                                        <span>ground_speed</span>
-                                        <span className="text-[#e5e5e5]">45.2 m/s</span>
+                                        <span>uv_index</span>
+                                        <span className="text-[#e5e5e5]">{latestTelemetry.uv_index ?? 0}</span>
                                     </div>
                                     <div className="flex justify-between">
-                                        <span>track_deg</span>
-                                        <span className="text-[#e5e5e5]">087.4°</span>
+                                        <span>ambient_lux</span>
+                                        <span className="text-[#e5e5e5]">{latestTelemetry.ambient_lux ?? 0} lux</span>
                                     </div>
                                     <div className="flex justify-between">
-                                        <span>climb_rate</span>
-                                        <span className="text-[#e5e5e5]">+2.1 m/s</span>
+                                        <span>acoustic</span>
+                                        <span className={latestTelemetry.acoustic_event ? 'text-[#c44]' : 'text-[#4a9]'}>
+                                            {latestTelemetry.acoustic_event ? 'EVENT' : 'quiet'}
+                                        </span>
                                     </div>
                                     <div className="flex justify-between">
-                                        <span>dist_traveled</span>
-                                        <span className="text-[#e5e5e5]">847.3 km</span>
+                                        <span>accel_x</span>
+                                        <span className="text-[#e5e5e5]">{(latestTelemetry.mems_accel_x ?? 0).toFixed(2)} m/s2</span>
+                                    </div>
+                                    <div className="flex justify-between">
+                                        <span>accel_y</span>
+                                        <span className="text-[#e5e5e5]">{(latestTelemetry.mems_accel_y ?? 0).toFixed(2)} m/s2</span>
+                                    </div>
+                                    <div className="flex justify-between">
+                                        <span>accel_z</span>
+                                        <span className="text-[#e5e5e5]">{(latestTelemetry.mems_accel_z ?? 0).toFixed(2)} m/s2</span>
+                                    </div>
+                                    <div className="flex justify-between">
+                                        <span>solar_mv</span>
+                                        <span className="text-[#e5e5e5]">{((latestTelemetry.solar_voltage ?? 0) * 1000).toFixed(0)} mV</span>
                                     </div>
                                 </div>
                             </div>

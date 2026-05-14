@@ -7,9 +7,15 @@
 // secrets.h is gitignored
 
 // LoRaWAN Configuration
+#ifndef LORAWAN_DEV_EUI
 #define LORAWAN_DEV_EUI ""
+#endif
+#ifndef LORAWAN_APP_EUI
 #define LORAWAN_APP_EUI ""
+#endif
+#ifndef LORAWAN_APP_KEY
 #define LORAWAN_APP_KEY ""
+#endif
 
 // TTN Configuration
 #define TTN_REGION_US915

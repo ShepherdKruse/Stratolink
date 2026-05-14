@@ -28,8 +28,7 @@ void telemetry_pack(const telemetry_input_t* in, uint8_t* out) {
     write_be16(out + 25, (uint16_t)in->accel_x_cm_s2);
     write_be16(out + 27, (uint16_t)in->accel_y_cm_s2);
     write_be16(out + 29, (uint16_t)in->accel_z_cm_s2);
-    write_be16(out + 31, (uint16_t)in->gyro_x_cd_s);
-    write_be16(out + 33, (uint16_t)in->gyro_y_cd_s);
-    write_be16(out + 35, (uint16_t)in->gyro_z_cd_s);
-    out[37] = in->acoustic_event;
+    out[31] = in->uv_index;
+    write_be16(out + 32, in->ambient_lux);
+    out[34] = in->acoustic_event;
 }

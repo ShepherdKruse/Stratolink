@@ -38,4 +38,19 @@ bool gps_ublox_get_fix(gps_fix_t* fix, uint32_t timeout_ms);
  */
 void gps_ublox_get_last_fix(gps_fix_t* fix);
 
+/**
+ * Put the u-blox MAX-M10S into SOFTWARE BACKUP mode (UBX-RXM-PMREQ).
+ * Drops module current from ~25 mA continuous tracking → ~15 µA.
+ * MUST be called before MCU STOP1 entry — without it the GPS keeps
+ * tracking through sleep and drains the supercap at 25 mA, brown-
+ * outing the chip in ~2 minutes of cap-only operation.
+ *
+ * V_BCKP is tied to VCC on this board, so RTC + almanac/ephemeris
+ * are retained — next get_fix() can hot-start (~5 s TTFF).
+ *
+ * Wake source: UART RX activity from the MCU.  The next get_fix()
+ * call sends UBX queries which wake the module implicitly.
+ */
+void gps_ublox_sleep(void);
+
 #endif /* GPS_UBLOX_H */
