@@ -101,6 +101,39 @@ export default function GettingStartedPage() {
                             <li>Save the webhook configuration</li>
                         </ol>
 
+                        <h2>Step 5b: Register each payload (TTN + Supabase)</h2>
+                        <p>
+                            Instead of creating the same device twice by hand in TTN and Supabase, use the admin
+                            registration flow once your server has the TTN API variables set (see{' '}
+                            <code className="text-sm">.env.local.example</code>):
+                        </p>
+                        <ol>
+                            <li>
+                                Add <code className="text-sm">TTN_STACK_HOST</code>,{' '}
+                                <code className="text-sm">TTN_APPLICATION_ID</code>,{' '}
+                                <code className="text-sm">TTN_API_KEY</code>,{' '}
+                                <code className="text-sm">TTN_JOIN_EUI</code> (16 hex, matches firmware{' '}
+                                <code className="text-sm">LORAWAN_APP_EUI</code>), plus{' '}
+                                <code className="text-sm">ADMIN_ACTIVATION_KEY</code> and{' '}
+                                <code className="text-sm">SUPABASE_SERVICE_ROLE_KEY</code>.
+                            </li>
+                            <li>
+                                Open <Link href="/admin/register-payload">/admin/register-payload</Link>, enter the admin
+                                key, and submit. You get a TTN device, a Supabase <code className="text-sm">devices</code>{' '}
+                                row with a launch PIN, and a paste-ready <code className="text-sm">secrets.h</code> snippet.
+                            </li>
+                            <li>
+                                Alternatively, call{' '}
+                                <code className="text-sm">POST /api/admin/register-payload</code> with{' '}
+                                <code className="text-sm">Authorization: Bearer …</code> (same admin key).
+                            </li>
+                        </ol>
+                        <p>
+                            Uplink data path: TTN receives packets from any gateway in range, then{' '}
+                            <strong>pushes</strong> each uplink to your webhook. The site stores rows in Supabase and the
+                            map reads that data (RSSI/SNR come from the gateway TTN attaches to each message).
+                        </p>
+
                         <h2>Step 6: Deploy to Vercel</h2>
                         <ol>
                             <li>Push your code to GitHub</li>
