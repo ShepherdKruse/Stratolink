@@ -1,10 +1,10 @@
 import { Suspense } from 'react';
-import MissionControlScreen from '@/components/dashboard-v2/MissionControl';
+import DeviceTrackerScreen from '@/components/dashboard-v2/DeviceTracker';
 
-export default function DashboardV2Page() {
+export default function DeviceTrackerPage() {
     return (
         <Suspense fallback={<div style={{ padding: 24, color: 'var(--sl-text-dim2)' }}>Loading…</div>}>
-            <MissionControlScreen />
+            <DeviceTrackerScreen />
         </Suspense>
     );
 }

@@ -1,10 +1,10 @@
 import { Suspense } from 'react';
-import MissionControlScreen from '@/components/dashboard-v2/MissionControl';
+import TelemetryLabScreen from '@/components/dashboard-v2/TelemetryLab';
 
-export default function DashboardV2Page() {
+export default function TelemetryLabPage() {
     return (
         <Suspense fallback={<div style={{ padding: 24, color: 'var(--sl-text-dim2)' }}>Loading…</div>}>
-            <MissionControlScreen />
+            <TelemetryLabScreen />
         </Suspense>
     );
 }

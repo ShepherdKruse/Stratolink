@@ -1,61 +1,66 @@
 /**
  * Stratolink dashboard v2 — Mission Control screen.
  *
- * The compositional layout for the redesigned dashboard. This is the only
- * screen wired up so far; build the others (Pre-Launch, Mission Planner,
- * Device Tracker, Telemetry Lab) in the same vocabulary by reusing the atoms
- * in ./atoms.tsx and the data hook in ./useTelemetry.ts.
+ * Fleet overview with a 6-up KPI strip, fleet roster, map, and a right-rail
+ * subsystem panel for the selected device.
  *
- * Design rules (carried over from the source mockup):
- *   - Two-color palette only: --sl-ok and --sl-alert.
- *   - Mono font for numbers, sans for labels.
- *   - Flat fills, single-pixel low-opacity borders, no glow.
- *   - Every value is real or '—'. No Math.random, no hardcoded firmware.
+ * Data discipline: every number is a real Supabase value or '—'. No
+ * Math.random, no hardcoded firmware version, no synthetic packet count.
  */
 'use client';
 
-import { useEffect, useMemo, useState } from 'react';
+import { useMemo } from 'react';
+import { useRouter, useSearchParams } from 'next/navigation';
 import {
-    Age, CadenceStrip, Chart, Chrome, FreshnessBar, KPI, KV,
+    Age, CadenceStrip, Chrome, FreshnessBar, KPI, KV,
     MapView, Panel, Sparkline, fmt, staleness,
+    DASHBOARD_V2_TABS,
     type TelemetryRow,
 } from './atoms';
-import { useTelemetry, type DeviceSummary } from './useTelemetry';
-
-/* Kick the "now" tick once a second so age labels keep counting up. */
-function useTickingNow(intervalMs = 1000): number {
-    const [now, setNow] = useState<number>(() => Date.now());
-    useEffect(() => {
-        const id = setInterval(() => setNow(Date.now()), intervalMs);
-        return () => clearInterval(id);
-    }, [intervalMs]);
-    return now;
-}
-
-const TABS = ['Pre-Launch', 'Planner', 'Mission Control', 'Devices', 'Lab'];
+import { useTelemetry, type DeviceSummary, type FleetMetrics, type FleetAlert, type SubsystemFreshness } from './useTelemetry';
+import { useTickingNow, useElementSize, ConnectionPill, V1Link, fmtPressure } from './shared';
 
 export default function MissionControlScreen() {
+    const router = useRouter();
+    const searchParams = useSearchParams();
+    const initialSelectedId = searchParams.get('device');
     const now = useTickingNow();
-    const { devices, selectedId, setSelectedId, rows, deviceInfo, status, lastFetchedAt } = useTelemetry();
 
-    /* All derived state below is recomputed any time `rows` or `now` updates,
-     * so freshness labels never go stale relative to the rendered values. */
+    const {
+        devices, selectedId, setSelectedId,
+        rows, deviceInfo, freshness, fleet, alerts,
+        status, lastFetchedAt,
+    } = useTelemetry({ initialSelectedId });
+
     const latest = rows.length ? rows[rows.length - 1] : null;
     const lastFixRow = useMemo(
         () => [...rows].reverse().find(r => r.lat !== null && r.lon !== null) ?? null,
         [rows],
     );
-
     const selectedDevice: DeviceSummary | null =
         selectedId ? devices.find(d => d.id === selectedId) ?? null : null;
 
+    /* Carry the selected device through tab navigation as ?device=... */
+    function handleNavigate(path: string) {
+        const url = selectedId ? `${path}?device=${encodeURIComponent(selectedId)}` : path;
+        router.push(url);
+    }
+
+    function handleSelect(id: string) {
+        setSelectedId(id);
+        const params = new URLSearchParams(searchParams.toString());
+        params.set('device', id);
+        router.replace(`/dashboard-v2?${params.toString()}`);
+    }
+
     return (
-        <div className="sl-app" style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
+        <div className="sl-app" style={{ display: 'flex', flexDirection: 'column', height: '100vh' }}>
             <Chrome
-                tabs={TABS}
-                active="Mission Control"
+                tabs={DASHBOARD_V2_TABS}
+                activePath="/dashboard-v2"
+                onNavigate={handleNavigate}
                 version={deviceInfo?.firmware ?? undefined}
-                lastUplinkT={latest?.t ?? null}
+                lastUplinkT={fleet.lastUplinkT ?? latest?.t ?? null}
                 lastFixT={lastFixRow?.t ?? null}
                 now={now}
                 right={
@@ -64,76 +69,76 @@ export default function MissionControlScreen() {
                         <span style={{ fontSize: 11, color: 'var(--sl-text-dim2)' }}>
                             UTC <span style={{ color: 'var(--sl-text)' }}>{fmt.datetime(now)}</span>
                         </span>
-                        <a
-                            href="/dashboard"
-                            style={{
-                                fontSize: 10,
-                                letterSpacing: '0.10em',
-                                textTransform: 'uppercase',
-                                color: 'var(--sl-text-dim2)',
-                                textDecoration: 'none',
-                                border: '1px solid var(--sl-border-hi)',
-                                padding: '4px 8px',
-                            }}
-                        >
-                            ← v1
-                        </a>
+                        <V1Link />
                     </>
                 }
             />
+
+            {/* 6-KPI strip */}
+            <KpiStrip fleet={fleet} now={now} alerts={alerts} />
 
             <main
                 style={{
                     flex: 1,
                     display: 'grid',
-                    gridTemplateColumns: '280px 1fr 360px',
-                    gap: 1,
-                    background: 'var(--sl-border)',
+                    gridTemplateColumns: '300px 1fr 340px',
                     minHeight: 0,
+                    background: 'var(--sl-border)',
+                    gap: 1,
                 }}
             >
-                {/* Left rail: fleet roster */}
-                <aside style={{ background: 'var(--sl-bg)', overflow: 'auto' }}>
+                {/* Left rail */}
+                <aside style={{ background: 'var(--sl-bg)', overflow: 'auto', padding: 24, display: 'flex', flexDirection: 'column', gap: 32 }}>
                     <FleetRoster
                         devices={devices}
                         selectedId={selectedId}
-                        onSelect={setSelectedId}
+                        rowsForSelected={rows}
+                        latest={latest}
+                        onSelect={handleSelect}
                         now={now}
+                    />
+                    <SystemStatus
+                        status={status}
+                        latest={latest}
+                        fleet={fleet}
+                        lastFetchedAt={lastFetchedAt}
                     />
                 </aside>
 
-                {/* Center: KPIs, map, chart strip */}
-                <section
-                    style={{
-                        background: 'var(--sl-bg)',
-                        display: 'grid',
-                        gridTemplateRows: 'auto auto 1fr auto',
-                        gap: 1,
-                        minWidth: 0,
-                    }}
-                >
-                    <KpiBar latest={latest} rows={rows} lastFixT={lastFixRow?.t ?? null} now={now} />
-                    <MapPanel
+                {/* Center: map */}
+                <section style={{ background: 'var(--sl-bg)', position: 'relative', minHeight: 0 }}>
+                    <CenterMap
+                        devices={devices}
                         rows={rows}
-                        selectedDevice={selectedDevice}
                         latest={latest}
                         lastFixRow={lastFixRow}
+                        selectedDevice={selectedDevice}
                         now={now}
                     />
-                    <ChartGrid rows={rows} />
-                    <CadencePanel rows={rows} now={now} />
                 </section>
 
-                {/* Right rail: subsystem detail */}
-                <aside style={{ background: 'var(--sl-bg)', overflow: 'auto' }}>
-                    <SubsystemRail
-                        device={selectedDevice}
-                        deviceInfo={deviceInfo}
-                        latest={latest}
-                        lastFixRow={lastFixRow}
-                        rows={rows}
-                        now={now}
-                    />
+                {/* Right rail */}
+                <aside style={{ background: 'var(--sl-bg)', overflow: 'auto', padding: 24, display: 'flex', flexDirection: 'column', gap: 28 }}>
+                    {selectedDevice ? (
+                        <>
+                            <SelectedDevicePanel
+                                device={selectedDevice}
+                                deviceInfo={deviceInfo}
+                                latest={latest}
+                                lastFixRow={lastFixRow}
+                                rowCount={rows.length}
+                                now={now}
+                            />
+                            <DataFreshnessPanel freshness={freshness} now={now} />
+                            <LiveMetricsPanel rows={rows} latest={latest} />
+                            <AlertsPanel alerts={alerts} now={now} />
+                            <CadencePanel rows={rows} now={now} />
+                        </>
+                    ) : (
+                        <div style={{ fontSize: 11, color: 'var(--sl-text-dim2)' }}>
+                            No device selected. Pick one from the fleet list.
+                        </div>
+                    )}
                 </aside>
             </main>
         </div>
@@ -141,159 +146,77 @@ export default function MissionControlScreen() {
 }
 
 /* ──────────────────────────────────────────────────────────────
- * Connection pill (chrome right side)
+ * KPI strip — fleet-wide metrics from Supabase
  * ────────────────────────────────────────────────────────────── */
-function ConnectionPill({ status, lastFetchedAt, now }: {
-    status: 'connecting' | 'connected' | 'disconnected' | 'error';
-    lastFetchedAt: number | null;
-    now: number;
-}) {
-    if (status === 'disconnected') {
-        return <span className="sl-pill amber">SUPABASE NOT CONFIGURED</span>;
-    }
-    if (status === 'error') {
-        return <span className="sl-pill amber">DATABASE ERROR</span>;
-    }
-    if (status === 'connecting' || lastFetchedAt === null) {
-        return <span className="sl-pill dim">CONNECTING…</span>;
-    }
-    const ageS = Math.floor((now - lastFetchedAt) / 1000);
+function KpiStrip({ fleet, now, alerts }: { fleet: FleetMetrics; now: number; alerts: FleetAlert[] }) {
+    const missionTimeMs = fleet.firstFixT ? now - fleet.firstFixT : null;
+    const missionTime = missionTimeMs !== null
+        ? `${Math.floor(missionTimeMs / 3_600_000).toString().padStart(2, '0')}:${Math.floor((missionTimeMs % 3_600_000) / 60_000).toString().padStart(2, '0')}`
+        : '—';
+    const lockRate = fleet.gpsLockRatePct !== null ? Math.round(fleet.gpsLockRatePct).toString() : '—';
+    const lockAccent = fleet.gpsLockRatePct !== null && fleet.gpsLockRatePct < 50 ? 'alert' : undefined;
+    const warnCount = alerts.filter(a => a.severity === 'warn').length;
+    const infoCount = alerts.filter(a => a.severity === 'info').length;
     return (
-        <span className="sl-pill teal">
-            LIVE · POLL {ageS}s
-        </span>
-    );
-}
-
-/* ──────────────────────────────────────────────────────────────
- * Fleet roster (left rail)
- * ────────────────────────────────────────────────────────────── */
-function FleetRoster({ devices, selectedId, onSelect, now }: {
-    devices: DeviceSummary[];
-    selectedId: string | null;
-    onSelect: (id: string) => void;
-    now: number;
-}) {
-    return (
-        <Panel
-            title="Fleet"
-            right={<span>{devices.length}</span>}
-            bodyStyle={{ padding: 0 }}
-        >
-            {devices.length === 0 ? (
-                <div style={{ padding: 16, fontSize: 11, color: 'var(--sl-text-dim2)' }}>
-                    No devices registered. Visit /claim to register your first balloon.
-                </div>
-            ) : (
-                <div style={{ display: 'flex', flexDirection: 'column', gap: 1, padding: 1 }}>
-                    {devices.map(d => {
-                        const fresh = staleness(d.lastContactT, now);
-                        const sub = d.callsign ?? d.id;
-                        return (
-                            <button
-                                key={d.id}
-                                type="button"
-                                className={'sl-dev-card' + (d.id === selectedId ? ' selected' : '')}
-                                onClick={() => onSelect(d.id)}
-                            >
-                                <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 6 }}>
-                                    <span className="sl-status-dot" style={{ background: fresh.color }} />
-                                    <span style={{
-                                        fontFamily: 'var(--sl-mono)',
-                                        fontSize: 13,
-                                        fontWeight: 500,
-                                        color: 'var(--sl-text-hi)',
-                                    }}>
-                                        {sub}
-                                    </span>
-                                    <span style={{ marginLeft: 'auto', fontSize: 9, color: 'var(--sl-text-dim2)', textTransform: 'uppercase', letterSpacing: '0.10em' }}>
-                                        {d.status}
-                                    </span>
-                                </div>
-                                <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 10, color: 'var(--sl-text-dim2)' }}>
-                                    <span>{d.callsign ? d.id : '—'}</span>
-                                    <Age t={d.lastContactT} now={now} compact dot={false} />
-                                </div>
-                            </button>
-                        );
-                    })}
-                </div>
-            )}
-        </Panel>
-    );
-}
-
-/* ──────────────────────────────────────────────────────────────
- * KPI bar (top of center column)
- * ────────────────────────────────────────────────────────────── */
-function KpiBar({ latest, rows, lastFixT, now }: {
-    latest: TelemetryRow | null;
-    rows: TelemetryRow[];
-    lastFixT: number | null;
-    now: number;
-}) {
-    const altRange = rows
-        .map(r => r.alt)
-        .filter((v): v is number => v !== null && Number.isFinite(v));
-    const altPeak = altRange.length ? Math.max(...altRange) : null;
-    const battRange = rows
-        .map(r => r.batt)
-        .filter((v): v is number => v !== null && Number.isFinite(v));
-    const battTrend = battRange.length >= 2 ? battRange[battRange.length - 1] - battRange[0] : null;
-    return (
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(5, 1fr)', gap: 1, background: 'var(--sl-border)' }}>
+        <div style={{
+            display: 'grid', gridTemplateColumns: 'repeat(6, 1fr)',
+            borderBottom: '1px solid var(--sl-border)',
+            background: 'var(--sl-bg-1)',
+            flexShrink: 0,
+        }}>
             <KpiCell>
                 <KPI
-                    label="Altitude"
-                    value={fmt.num(latest?.alt, 0)}
-                    unit={latest?.alt !== null && latest?.alt !== undefined ? 'm' : undefined}
-                    sub={altPeak !== null ? `peak ${altPeak.toFixed(0)} m` : 'awaiting GPS fix'}
+                    label="ACTIVE"
+                    value={fleet.activeCount.toString()}
+                    sub={fleet.totalDevices > 0 ? `/ ${fleet.totalDevices} fleet` : 'no devices'}
                 />
             </KpiCell>
             <KpiCell>
                 <KPI
-                    label="Battery"
-                    value={fmt.num(latest?.batt, 2)}
-                    unit={latest?.batt !== null && latest?.batt !== undefined ? 'V' : undefined}
-                    sub={battTrend !== null ? `${fmt.sign(battTrend, 2)} V over window` : 'no history'}
-                    subKind={battTrend !== null && battTrend >= 0 ? 'up' : battTrend !== null ? 'down' : undefined}
+                    label="UPLINKS / 24h"
+                    value={fleet.uplinks24h.toLocaleString()}
+                    sub={fleet.uplinksLastHour > 0 ? `+${fleet.uplinksLastHour} last hr` : 'idle'}
+                    subKind={fleet.uplinksLastHour > 0 ? 'up' : undefined}
                 />
             </KpiCell>
             <KpiCell>
                 <KPI
-                    label="Solar"
-                    value={fmt.num(latest?.sol, 2)}
-                    unit={latest?.sol !== null && latest?.sol !== undefined ? 'V' : undefined}
+                    label="GPS LOCK RATE"
+                    value={lockRate}
+                    unit={fleet.gpsLockRatePct !== null ? '%' : undefined}
+                    sub={fleet.noFixCount > 0 ? `${fleet.noFixCount} no-fix packets` : 'all fixes valid'}
+                    subKind={fleet.noFixCount > 0 ? 'down' : undefined}
+                    accent={lockAccent}
+                />
+            </KpiCell>
+            <KpiCell>
+                <KPI
+                    label="MEDIAN RSSI"
+                    value={fleet.medianRssi !== null ? Math.round(fleet.medianRssi).toString() : '—'}
+                    unit={fleet.medianRssi !== null ? 'dBm' : undefined}
                     sub={
-                        latest?.lux !== null && latest?.lux !== undefined
-                            ? `${fmt.num(latest.lux, 0)} lux`
-                            : '—'
+                        fleet.medianRssi === null ? 'no rssi data'
+                        : fleet.medianRssi > -90 ? 'signal nominal'
+                        : fleet.medianRssi > -110 ? 'signal weak'
+                        : 'signal critical'
                     }
+                    accent={fleet.medianRssi !== null && fleet.medianRssi < -110 ? 'alert' : undefined}
                 />
             </KpiCell>
             <KpiCell>
                 <KPI
-                    label="GPS"
-                    value={
-                        latest?.sats !== null && latest?.sats !== undefined
-                            ? fmt.num(latest.sats, 0)
-                            : '0'
-                    }
-                    unit={latest?.sats !== null && latest?.sats !== undefined ? 'sats' : undefined}
-                    sub={<Age t={lastFixT} now={now} prefix="fix" dot />}
-                    accent={lastFixT === null ? 'alert' : undefined}
+                    label="MISSION TIME"
+                    value={missionTime}
+                    unit={missionTimeMs !== null ? 'h:m' : undefined}
+                    sub={fleet.firstFixT ? 'since first fix' : 'awaiting first fix'}
                 />
             </KpiCell>
             <KpiCell>
                 <KPI
-                    label="RSSI"
-                    value={fmt.num(latest?.rssi, 0)}
-                    unit={latest?.rssi !== null && latest?.rssi !== undefined ? 'dBm' : undefined}
-                    sub={
-                        latest?.snr !== null && latest?.snr !== undefined
-                            ? `SNR ${fmt.num(latest.snr, 1)} dB`
-                            : '—'
-                    }
+                    label="ALERTS"
+                    value={alerts.length.toString()}
+                    sub={alerts.length === 0 ? 'all green' : `${warnCount} warn / ${infoCount} info`}
+                    accent={warnCount > 0 ? 'alert' : undefined}
                 />
             </KpiCell>
         </div>
@@ -301,355 +224,361 @@ function KpiBar({ latest, rows, lastFixT, now }: {
 }
 
 function KpiCell({ children }: { children: React.ReactNode }) {
-    return <div style={{ background: 'var(--sl-bg)' }}>{children}</div>;
+    return <div style={{ background: 'var(--sl-bg-1)', borderRight: '1px solid var(--sl-border)' }}>{children}</div>;
 }
 
 /* ──────────────────────────────────────────────────────────────
- * Map panel
+ * Fleet roster (left rail)
  * ────────────────────────────────────────────────────────────── */
-function MapPanel({ rows, selectedDevice, latest, lastFixRow, now }: {
-    rows: TelemetryRow[];
-    selectedDevice: DeviceSummary | null;
+function FleetRoster({ devices, selectedId, rowsForSelected, latest, onSelect, now }: {
+    devices: DeviceSummary[];
+    selectedId: string | null;
+    rowsForSelected: TelemetryRow[];
     latest: TelemetryRow | null;
-    lastFixRow: TelemetryRow | null;
+    onSelect: (id: string) => void;
     now: number;
 }) {
-    const [width, setWidth] = useState(800);
-    const [height, setHeight] = useState(380);
-    useEffect(() => {
-        function update() {
-            const el = document.getElementById('sl-map-host');
-            if (el) {
-                setWidth(el.clientWidth);
-                setHeight(el.clientHeight);
-            }
-        }
-        update();
-        window.addEventListener('resize', update);
-        return () => window.removeEventListener('resize', update);
-    }, []);
+    return (
+        <div>
+            <div className="sl-label-xs" style={{ marginBottom: 10 }}>FLEET</div>
+            {devices.length === 0 ? (
+                <div style={{ fontSize: 11, color: 'var(--sl-text-dim2)' }}>
+                    No devices registered. Visit /claim to register your first balloon.
+                </div>
+            ) : (
+                <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+                    {devices.map(d => {
+                        const isSelected = d.id === selectedId;
+                        const fresh = staleness(d.lastContactT, now);
+                        const status = d.lastContactT === null ? 'OFFLINE'
+                            : d.latestFix !== null ? 'TRACKING'
+                            : 'NO GPS';
+                        const battSource = isSelected ? latest?.batt : null;
+                        const altSource  = isSelected ? latest?.alt  : (d.latestFix?.alt ?? null);
+                        return (
+                            <button
+                                key={d.id}
+                                type="button"
+                                className={'sl-dev-card' + (isSelected ? ' selected' : '')}
+                                onClick={() => onSelect(d.id)}
+                            >
+                                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 6 }}>
+                                    <span style={{ fontWeight: 500, fontFamily: 'var(--sl-mono)' }}>
+                                        {d.callsign ?? d.id}
+                                    </span>
+                                    <span className={
+                                        'sl-pill ' + (status === 'TRACKING' ? 'teal' : status === 'NO GPS' ? 'amber' : 'dim')
+                                    }>
+                                        {status}
+                                    </span>
+                                </div>
+                                <KV k="alt"  v={altSource !== null && altSource !== undefined ? `${altSource.toFixed(0)}` : '—'}
+                                    u={altSource !== null && altSource !== undefined ? 'm' : undefined} />
+                                <KV k="batt" v={battSource !== null && battSource !== undefined ? battSource.toFixed(2) : '—'}
+                                    u={battSource !== null && battSource !== undefined ? 'V' : undefined}
+                                    accent={battSource !== null && battSource !== undefined && battSource < 3.5 ? 'amber' : 'teal'} />
+                                <KV k="last" v={
+                                    d.lastContactT === null
+                                        ? '—'
+                                        : <Age t={d.lastContactT} now={now} dot={false} />
+                                } />
+                                {isSelected && rowsForSelected.length > 0 && (
+                                    <div style={{ marginTop: 6, paddingTop: 6, borderTop: '1px dashed var(--sl-border)', display: 'flex', alignItems: 'center', gap: 6 }}>
+                                        <span style={{ fontSize: 10, color: 'var(--sl-text-dim2)' }}>{rowsForSelected.length} pkts · </span>
+                                        <span className="sl-status-dot" style={{ background: fresh.color }} />
+                                        <span style={{ fontSize: 9, color: 'var(--sl-text-dim2)', letterSpacing: '0.10em' }}>{fresh.name}</span>
+                                    </div>
+                                )}
+                            </button>
+                        );
+                    })}
+                </div>
+            )}
+        </div>
+    );
+}
 
-    /* Auto-zoom around the actual track, padding to a sensible minimum. */
-    const { lats, lons } = useMemo(() => {
-        const lats: number[] = [];
-        const lons: number[] = [];
-        rows.forEach(r => {
-            if (r.lat !== null && r.lon !== null) {
-                lats.push(r.lat);
-                lons.push(r.lon);
-            }
-        });
-        if (selectedDevice?.launchLat && selectedDevice?.launchLon) {
-            lats.push(selectedDevice.launchLat);
-            lons.push(selectedDevice.launchLon);
-        }
-        return { lats, lons };
-    }, [rows, selectedDevice]);
+function SystemStatus({ status, latest, fleet, lastFetchedAt }: {
+    status: 'connecting' | 'connected' | 'disconnected' | 'error';
+    latest: TelemetryRow | null;
+    fleet: FleetMetrics;
+    lastFetchedAt: number | null;
+}) {
+    const dbState =
+        status === 'connected' ? { label: 'CONNECTED', accent: 'teal' as const }
+        : status === 'connecting' ? { label: 'CONNECTING', accent: 'dim' as const }
+        : status === 'disconnected' ? { label: 'NOT CONFIGURED', accent: 'amber' as const }
+        : { label: 'ERROR', accent: 'amber' as const };
+    /* Packet rate: uplinks per minute over the last hour. */
+    const rate = fleet.uplinksLastHour > 0 ? (fleet.uplinksLastHour / 60).toFixed(2) : null;
+    return (
+        <div>
+            <div className="sl-label-xs" style={{ marginBottom: 10 }}>SYSTEM STATUS</div>
+            <KV k="database" v={dbState.label} accent={dbState.accent} />
+            <KV k="last update" v={fmt.time(latest?.t ?? null)} />
+            <KV k="poll cycle" v={lastFetchedAt ? `${Math.max(0, Math.floor((Date.now() - lastFetchedAt) / 1000))}s` : '—'} />
+            <KV k="packet rate" v={rate ?? '—'} u={rate ? '/min' : undefined} />
+            <KV k="uplinks 24h" v={fleet.uplinks24h.toLocaleString()} />
+        </div>
+    );
+}
 
-    const haveAnyPoints = lats.length > 0;
-    const minLat = haveAnyPoints ? Math.min(...lats) : 25;
-    const maxLat = haveAnyPoints ? Math.max(...lats) : 55;
-    const minLon = haveAnyPoints ? Math.min(...lons) : -130;
-    const maxLon = haveAnyPoints ? Math.max(...lons) : -65;
-    const padLat = Math.max(0.01, (maxLat - minLat) * 0.4);
-    const padLon = Math.max(0.01, (maxLon - minLon) * 0.4);
+/* ──────────────────────────────────────────────────────────────
+ * Center map
+ * ────────────────────────────────────────────────────────────── */
+function CenterMap({ devices, rows, latest, lastFixRow, selectedDevice, now }: {
+    devices: DeviceSummary[];
+    rows: TelemetryRow[];
+    latest: TelemetryRow | null;
+    lastFixRow: TelemetryRow | null;
+    selectedDevice: DeviceSummary | null;
+    now: number;
+}) {
+    const { ref, width, height } = useElementSize(800, 540);
+
+    const fleetMarkers = devices
+        .filter(d => d.latestFix !== null)
+        .map(d => ({
+            lat: d.latestFix!.lat,
+            lon: d.latestFix!.lon,
+            color: d.id === selectedDevice?.id ? 'var(--sl-ok)' : 'var(--sl-text-dim)',
+            label: d.callsign ?? d.id,
+        }));
+
+    const lats = fleetMarkers.map(m => m.lat);
+    const lons = fleetMarkers.map(m => m.lon);
+    if (lats.length === 0) {
+        lats.push(37, 39); lons.push(-122, -120);
+    } else if (lats.length === 1) {
+        lats.push(lats[0] + 0.5); lons.push(lons[0] + 0.5);
+    }
+    const minLat = Math.min(...lats), maxLat = Math.max(...lats);
+    const minLon = Math.min(...lons), maxLon = Math.max(...lons);
+    const padLat = Math.max(0.5, (maxLat - minLat) * 0.4);
+    const padLon = Math.max(0.5, (maxLon - minLon) * 0.4);
 
     const track: Array<[number, number] | [null, null]> = rows.map(r =>
         r.lat !== null && r.lon !== null ? [r.lat, r.lon] : [null, null],
     );
 
     return (
-        <Panel
-            title="Mission Map"
-            right={
-                <>
-                    <span style={{ color: 'var(--sl-text-dim2)' }}>{rows.filter(r => r.lat !== null).length} fixes</span>
-                    <Age t={lastFixRow?.t ?? null} now={now} prefix="fix" />
-                </>
-            }
-            bodyStyle={{ padding: 0 }}
-        >
-            <div id="sl-map-host" style={{ width: '100%', height: 360, position: 'relative' }}>
-                {!haveAnyPoints && (
-                    <div style={{
-                        position: 'absolute', inset: 0, display: 'flex', alignItems: 'center', justifyContent: 'center',
-                        zIndex: 2, pointerEvents: 'none',
-                    }}>
-                        <div style={{
-                            padding: '8px 14px',
-                            border: '1px solid var(--sl-border-hi)',
-                            background: 'var(--sl-bg-2)',
-                            color: 'var(--sl-text-dim)',
-                            fontSize: 11,
-                            letterSpacing: '0.10em',
-                            textTransform: 'uppercase',
-                        }}>
-                            Awaiting first GPS fix
-                        </div>
-                    </div>
+        <div ref={ref} style={{ position: 'absolute', inset: 0 }}>
+            <MapView
+                width={width}
+                height={height}
+                track={track}
+                marker={fleetMarkers}
+                focus={lastFixRow ? { lat: lastFixRow.lat as number, lon: lastFixRow.lon as number } : undefined}
+                label={selectedDevice?.callsign ?? selectedDevice?.id ?? undefined}
+                viewBoxLat={[minLat - padLat, maxLat + padLat]}
+                viewBoxLon={[minLon - padLon, maxLon + padLon]}
+                showStates={false}
+            />
+            <div style={{ position: 'absolute', top: 14, left: 14, display: 'flex', gap: 6 }}>
+                <span className="sl-pill dim">CARTO / DARK</span>
+                {lastFixRow && (
+                    <span className="sl-pill dim">
+                        {(lastFixRow.lat as number).toFixed(2)}° N · {Math.abs(lastFixRow.lon as number).toFixed(2)}° W
+                    </span>
                 )}
-                <MapView
-                    width={width}
-                    height={height}
-                    track={track}
-                    focus={lastFixRow ? { lat: lastFixRow.lat as number, lon: lastFixRow.lon as number } : undefined}
-                    label={selectedDevice?.callsign ?? selectedDevice?.id ?? undefined}
-                    viewBoxLat={[minLat - padLat, maxLat + padLat]}
-                    viewBoxLon={[minLon - padLon, maxLon + padLon]}
-                />
-                {/* "Live" badge floating in the upper-left of the map */}
-                <div style={{ position: 'absolute', top: 10, left: 12 }}>
-                    <Age t={latest?.t ?? null} now={now} dot prefix="uplink" />
-                </div>
+                {latest?.sats !== null && latest?.sats !== undefined && latest.sats > 0 && (
+                    <span className="sl-pill teal">FIX VALID · {latest.sats} SAT</span>
+                )}
+                {(latest?.sats === null || latest?.sats === undefined || latest.sats === 0) && (
+                    <span className="sl-pill amber">NO GPS FIX</span>
+                )}
             </div>
-        </Panel>
-    );
-}
-
-/* ──────────────────────────────────────────────────────────────
- * Chart grid — altitude / pressure / temp / battery
- * ────────────────────────────────────────────────────────────── */
-function ChartGrid({ rows }: { rows: TelemetryRow[] }) {
-    return (
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 1, background: 'var(--sl-border)' }}>
-            <ChartCell title="Altitude" unit="m" rows={rows} getY={r => r.alt} color="var(--sl-ok)" />
-            <ChartCell title="Battery" unit="V" rows={rows} getY={r => r.batt} color="var(--sl-ok-mute)" />
-            <ChartCell title="Pressure" unit="mbar" rows={rows} getY={r => r.pres} color="var(--sl-neutral)" />
-            <ChartCell title="Temperature" unit="°C" rows={rows} getY={r => r.temp} color="var(--sl-alert)" />
-        </div>
-    );
-}
-
-function ChartCell({ title, unit, rows, getY, color }: {
-    title: string;
-    unit: string;
-    rows: TelemetryRow[];
-    getY: (r: TelemetryRow) => number | null;
-    color: string;
-}) {
-    const [width, setWidth] = useState(360);
-    const id = `chart-${title.toLowerCase()}`;
-    useEffect(() => {
-        function update() {
-            const el = document.getElementById(id);
-            if (el) setWidth(el.clientWidth);
-        }
-        update();
-        window.addEventListener('resize', update);
-        return () => window.removeEventListener('resize', update);
-    }, [id]);
-
-    const valid = rows.map(getY).filter((v): v is number => v !== null && Number.isFinite(v));
-    const latest = valid.length ? valid[valid.length - 1] : null;
-
-    return (
-        <div style={{ background: 'var(--sl-bg)' }}>
-            <Panel
-                title={title}
-                right={
-                    <span style={{ color: 'var(--sl-text-hi)' }}>
-                        {latest !== null ? `${valid.length >= 2 && Math.abs(latest) < 10 ? latest.toFixed(2) : latest.toFixed(0)} ${unit}` : '—'}
-                    </span>
-                }
-                bodyStyle={{ padding: 0 }}
-            >
-                <div id={id} style={{ width: '100%', height: 130 }}>
-                    {rows.length >= 2 ? (
-                        <Chart
-                            data={rows}
-                            getY={getY}
-                            width={width}
-                            height={130}
-                            color={color}
-                            unit={unit}
-                        />
-                    ) : (
-                        <EmptyChartPlaceholder label={`${title} — awaiting samples`} />
-                    )}
-                </div>
-            </Panel>
-        </div>
-    );
-}
-
-function EmptyChartPlaceholder({ label }: { label: string }) {
-    return (
-        <div style={{
-            height: 130, display: 'flex', alignItems: 'center', justifyContent: 'center',
-            color: 'var(--sl-text-dim2)', fontSize: 11, letterSpacing: '0.10em', textTransform: 'uppercase',
-        }}>
-            {label}
-        </div>
-    );
-}
-
-/* ──────────────────────────────────────────────────────────────
- * Cadence panel — heartbeat strip across the bottom
- * ────────────────────────────────────────────────────────────── */
-function CadencePanel({ rows, now }: { rows: TelemetryRow[]; now: number }) {
-    const [width, setWidth] = useState(800);
-    useEffect(() => {
-        function update() {
-            const el = document.getElementById('sl-cadence-host');
-            if (el) setWidth(el.clientWidth);
-        }
-        update();
-        window.addEventListener('resize', update);
-        return () => window.removeEventListener('resize', update);
-    }, []);
-    const t0 = rows.length ? rows[0].t : now - 60 * 60 * 1000;
-    const t1 = rows.length ? rows[rows.length - 1].t : now;
-    return (
-        <Panel
-            title="Packet Cadence"
-            right={
-                <>
-                    <span>{rows.length} pkts</span>
-                    <span style={{ color: 'var(--sl-text-dim2)' }}>
-                        {fmt.time(t0)} → {fmt.time(t1)}
-                    </span>
-                </>
-            }
-            bodyStyle={{ padding: 12 }}
-        >
-            <div id="sl-cadence-host" style={{ width: '100%' }}>
-                <CadenceStrip data={rows} t0={t0} t1={t1} width={width} />
+            <div style={{
+                position: 'absolute', bottom: 14, left: 14,
+                fontSize: 10, color: 'var(--sl-text-dim3)', letterSpacing: '0.08em',
+            }}>
+                STRATOLINK · UPDATED {fmt.time(latest?.t ?? null)}
             </div>
-        </Panel>
+            <div style={{ position: 'absolute', top: 14, right: 14 }}>
+                <Age t={latest?.t ?? null} now={now} dot prefix="uplink" />
+            </div>
+        </div>
     );
 }
 
 /* ──────────────────────────────────────────────────────────────
- * Subsystem rail (right column)
+ * Right rail panels
  * ────────────────────────────────────────────────────────────── */
-function SubsystemRail({ device, deviceInfo, latest, lastFixRow, rows, now }: {
-    device: DeviceSummary | null;
-    deviceInfo: ReturnType<typeof useTelemetry>['deviceInfo'];
+function SelectedDevicePanel({ device, deviceInfo, latest, lastFixRow, rowCount, now }: {
+    device: DeviceSummary;
+    deviceInfo: { firmware: string | null } | null;
     latest: TelemetryRow | null;
     lastFixRow: TelemetryRow | null;
-    rows: TelemetryRow[];
+    rowCount: number;
     now: number;
 }) {
-    const rowCount = rows.length;
-    if (!device) {
-        return (
-            <Panel title="Selection">
-                <div style={{ fontSize: 11, color: 'var(--sl-text-dim2)' }}>
-                    Pick a device from the fleet roster.
+    const altFt = latest?.alt !== null && latest?.alt !== undefined ? Math.round(latest.alt * 3.281) : null;
+    return (
+        <div>
+            <div className="sl-label-xs" style={{ marginBottom: 10 }}>SELECTED DEVICE</div>
+            <div style={{ fontSize: 16, fontWeight: 500, color: 'var(--sl-ok)', marginBottom: 4, fontFamily: 'var(--sl-mono)' }}>
+                {device.callsign ?? device.id}
+            </div>
+            <div className="sl-label-sm" style={{ marginBottom: 12 }}>
+                {device.callsign ? device.id : '—'} ·
+                {' '}{deviceInfo?.firmware ?? '— firmware'} ·
+                {' '}{device.launchedAt ? `launched ${fmt.datetime(device.launchedAt)}` : 'not launched'}
+            </div>
+            <KV k="position" v={
+                <span style={{ display: 'inline-flex', alignItems: 'center', gap: 8 }}>
+                    <Age t={lastFixRow?.t ?? null} now={now} dot />
+                    <span>{fmt.lat(lastFixRow?.lat)} {fmt.lon(lastFixRow?.lon)}</span>
+                </span>
+            } />
+            <KV k="altitude" v={
+                latest?.alt !== null && latest?.alt !== undefined
+                    ? <span>{latest.alt.toFixed(0)} m {altFt !== null && <span style={{ color: 'var(--sl-text-dim3)', fontSize: 10 }}>/ {altFt} ft</span>}</span>
+                    : '—'
+            } accent={latest?.alt !== null && latest?.alt !== undefined ? 'teal' : 'dim'} />
+            <KV k="heading"    v={fmt.num(latest?.hdg, 1)} u={latest?.hdg !== null && latest?.hdg !== undefined ? '°' : undefined} />
+            <KV k="ground spd" v={fmt.num(latest?.spd, 2)} u={latest?.spd !== null && latest?.spd !== undefined ? 'm/s' : undefined} />
+            <KV k="uptime"     v={latest?.uptime_s !== null && latest?.uptime_s !== undefined ? fmt.duration(latest.uptime_s * 1000) : '—'} />
+            <KV k="tx count"   v={latest?.tx_count !== null && latest?.tx_count !== undefined ? latest.tx_count.toLocaleString() : '—'} />
+            <KV k="window" v={`${rowCount} pkts`} u="last 24h" />
+        </div>
+    );
+}
+
+function DataFreshnessPanel({ freshness, now }: { freshness: SubsystemFreshness; now: number }) {
+    const items: Array<[string, number | null]> = [
+        ['last uplink', freshness.packet],
+        ['position',    freshness.position],
+        ['altitude',    freshness.altitude],
+        ['velocity',    freshness.velocity],
+        ['battery',     freshness.battery],
+        ['solar',       freshness.solar],
+        ['temperature', freshness.temperature],
+        ['pressure',    freshness.pressure],
+        ['lux / uv',    freshness.lux],
+        ['rssi / snr',  freshness.rssi],
+        ['imu',         freshness.imu],
+    ];
+    return (
+        <div>
+            <div className="sl-label-xs" style={{ marginBottom: 10 }}>DATA FRESHNESS</div>
+            <div style={{ fontSize: 11, color: 'var(--sl-text-dim2)', marginBottom: 10, lineHeight: 1.4 }}>
+                Time since each subsystem last reported a real value. GPS only refreshes when a fix is held.
+            </div>
+            {items.map(([label, t]) => (
+                <div key={label} style={{ display: 'grid', gridTemplateColumns: '90px 1fr auto', alignItems: 'center', gap: 8, padding: '4px 0' }}>
+                    <span style={{ color: 'var(--sl-text-dim)', fontSize: 11 }}>{label}</span>
+                    <FreshnessBar t={t} now={now} width={120} />
+                    <span style={{ minWidth: 70, textAlign: 'right' }}>
+                        <Age t={t} now={now} compact dot={false} />
+                    </span>
                 </div>
-            </Panel>
+            ))}
+        </div>
+    );
+}
+
+function LiveMetricsPanel({ rows, latest }: { rows: TelemetryRow[]; latest: TelemetryRow | null }) {
+    const last = (n: number, getY: (r: TelemetryRow) => number | null) =>
+        rows.slice(-n).map(getY);
+    return (
+        <div>
+            <div className="sl-label-xs" style={{ marginBottom: 10 }}>LIVE METRICS</div>
+            <MetricRow name="battery" series={last(20, r => r.batt)}
+                value={latest?.batt !== null && latest?.batt !== undefined ? `${latest.batt.toFixed(2)}V` : '—'} />
+            <MetricRow name="solar" series={last(20, r => r.sol)}
+                value={latest?.sol !== null && latest?.sol !== undefined ? `${latest.sol.toFixed(2)}V` : '—'} />
+            <MetricRow name="temp" series={last(20, r => r.temp)}
+                value={latest?.temp !== null && latest?.temp !== undefined ? `${latest.temp.toFixed(1)}°C` : '—'} />
+            <MetricRow name="lux" series={last(30, r => r.lux)} color="var(--sl-neutral)"
+                value={latest?.lux !== null && latest?.lux !== undefined ? `${latest.lux.toLocaleString()}` : '—'} />
+            <MetricRow name="rssi" series={last(20, r => r.rssi)}
+                value={latest?.rssi !== null && latest?.rssi !== undefined ? `${latest.rssi}dBm` : '—'} />
+            <MetricRow name="snr" series={last(20, r => r.snr)}
+                value={latest?.snr !== null && latest?.snr !== undefined ? `${latest.snr.toFixed(1)}dB` : '—'} />
+            <MetricRow name="pres_raw" series={last(20, r => r.pres)} color="var(--sl-neutral)"
+                value={fmtPressure(latest?.pres ?? null)} />
+        </div>
+    );
+}
+
+function MetricRow({ name, series, value, color = 'var(--sl-ok-mute)' }: {
+    name: string;
+    series: Array<number | null>;
+    value: string;
+    color?: string;
+}) {
+    return (
+        <div className="sl-metric-row">
+            <span className="name">{name}</span>
+            <Sparkline data={series} width={140} height={20} color={color} />
+            <span className="val">{value}</span>
+        </div>
+    );
+}
+
+function AlertsPanel({ alerts, now }: { alerts: FleetAlert[]; now: number }) {
+    if (alerts.length === 0) {
+        return (
+            <div>
+                <div className="sl-label-xs" style={{ marginBottom: 8 }}>ALERTS · 0</div>
+                <div style={{ padding: 12, border: '1px solid var(--sl-border)', fontSize: 11, color: 'var(--sl-text-dim2)' }}>
+                    All systems nominal.
+                </div>
+            </div>
         );
     }
     return (
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: 1, background: 'var(--sl-border)' }}>
-            <Panel title="Device" right={<Age t={latest?.t ?? null} now={now} />}>
-                <KV k="Callsign" v={device.callsign ?? '—'} />
-                <KV k="Device ID" v={device.id} />
-                <KV k="Status" v={device.status.toUpperCase()} accent={device.status === 'flying' ? 'teal' : 'dim'} />
-                <KV k="Firmware" v={deviceInfo?.firmware ?? '—'} />
-                <KV k="Launched" v={device.launchedAt ? fmt.datetime(device.launchedAt) : '—'} />
-                <KV k="Window" v={`${rowCount} pkts`} u="last 24h" />
-                <FreshnessRow label="uplink" t={latest?.t ?? null} now={now} />
-                <FreshnessRow label="gps fix" t={lastFixRow?.t ?? null} now={now} />
-            </Panel>
-
-            <Panel title="Position">
-                <KV k="Latitude"  v={fmt.lat(lastFixRow?.lat)} />
-                <KV k="Longitude" v={fmt.lon(lastFixRow?.lon)} />
-                <KV k="Altitude"  v={fmt.num(latest?.alt, 1)} u={latest?.alt !== null && latest?.alt !== undefined ? 'm' : undefined} />
-                <KV k="Heading"   v={fmt.num(latest?.hdg, 1)} u={latest?.hdg !== null && latest?.hdg !== undefined ? '°' : undefined} />
-                <KV k="Speed"     v={fmt.num(latest?.spd, 2)} u={latest?.spd !== null && latest?.spd !== undefined ? 'm/s' : undefined} />
-                <KV k="HDOP"      v={fmt.num(latest?.hdop, 2)} />
-                <KV k="Sats"      v={fmt.num(latest?.sats, 0)} />
-            </Panel>
-
-            <Panel title="Power">
-                <KV k="Battery"  v={fmt.num(latest?.batt, 3)} u={latest?.batt !== null && latest?.batt !== undefined ? 'V' : undefined}
-                    accent={latest?.batt !== null && latest?.batt !== undefined && latest.batt < 3.5 ? 'amber' : 'teal'} />
-                <KV k="Solar"    v={fmt.num(latest?.sol, 3)} u={latest?.sol !== null && latest?.sol !== undefined ? 'V' : undefined} />
-                <KV k="Power Mode" v={latest?.power_mode ?? '—'} />
-                <KV k="Sleep" v={fmt.num(latest?.sleep_ms, 0)} u={latest?.sleep_ms !== null && latest?.sleep_ms !== undefined ? 'ms' : undefined} />
-                <KV k="Uptime" v={latest?.uptime_s !== null && latest?.uptime_s !== undefined ? fmt.duration(latest.uptime_s * 1000) : '—'} />
-            </Panel>
-
-            <Panel title="Environment">
-                <KV k="Temp" v={fmt.num(latest?.temp, 1)} u={latest?.temp !== null && latest?.temp !== undefined ? '°C' : undefined} />
-                <KV k="Pressure" v={fmt.num(latest?.pres, 0)} u={latest?.pres !== null && latest?.pres !== undefined ? 'mbar' : undefined} />
-                <KV k="Lux" v={fmt.num(latest?.lux, 0)} />
-                <KV k="UV Index" v={fmt.num(latest?.uv, 1)} />
-            </Panel>
-
-            <Panel title="IMU">
-                <KV k="Accel X" v={fmt.num(latest?.ax, 2)} u={latest?.ax !== null && latest?.ax !== undefined ? 'm/s²' : undefined} />
-                <KV k="Accel Y" v={fmt.num(latest?.ay, 2)} u={latest?.ay !== null && latest?.ay !== undefined ? 'm/s²' : undefined} />
-                <KV k="Accel Z" v={fmt.num(latest?.az, 2)} u={latest?.az !== null && latest?.az !== undefined ? 'm/s²' : undefined} />
-                <KV k="Vel X"   v={fmt.num(latest?.vx, 3)} u={latest?.vx !== null && latest?.vx !== undefined ? 'm/s' : undefined} />
-                <KV k="Vel Y"   v={fmt.num(latest?.vy, 3)} u={latest?.vy !== null && latest?.vy !== undefined ? 'm/s' : undefined} />
-            </Panel>
-
-            <Panel title="Radio">
-                <KV k="RSSI" v={fmt.num(latest?.rssi, 0)} u={latest?.rssi !== null && latest?.rssi !== undefined ? 'dBm' : undefined} />
-                <KV k="SNR"  v={fmt.num(latest?.snr, 2)} u={latest?.snr !== null && latest?.snr !== undefined ? 'dB' : undefined} />
-                <KV k="Frequency" v={
-                    latest?.frequency_hz !== null && latest?.frequency_hz !== undefined
-                        ? (latest.frequency_hz / 1_000_000).toFixed(1)
-                        : '—'
-                } u={latest?.frequency_hz !== null && latest?.frequency_hz !== undefined ? 'MHz' : undefined} />
-                <KV k="Spreading" v={
-                    latest?.lora_sf !== null && latest?.lora_sf !== undefined
-                        ? `SF${latest.lora_sf}`
-                        : '—'
-                } />
-                <KV k="Bandwidth" v={
-                    latest?.lora_bw !== null && latest?.lora_bw !== undefined
-                        ? `${(latest.lora_bw / 1000).toFixed(0)}`
-                        : '—'
-                } u={latest?.lora_bw !== null && latest?.lora_bw !== undefined ? 'kHz' : undefined} />
-                <KV k="TX Count" v={fmt.num(latest?.tx_count, 0)} />
-            </Panel>
-
-            <Panel
-                title="Recent Trends"
-                bodyStyle={{ padding: 12 }}
-            >
-                <TrendRow label="Altitude" rows={rows} getY={r => r.alt} unit="m" />
-                <TrendRow label="Battery"  rows={rows} getY={r => r.batt} unit="V" />
-                <TrendRow label="Solar"    rows={rows} getY={r => r.sol} unit="V" />
-                <TrendRow label="Temp"     rows={rows} getY={r => r.temp} unit="°C" />
-                <TrendRow label="RSSI"     rows={rows} getY={r => r.rssi} unit="dBm" />
-            </Panel>
+        <div>
+            <div className="sl-label-xs" style={{ marginBottom: 8 }}>ALERTS · {alerts.length}</div>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
+                {alerts.map(a => (
+                    <div
+                        key={a.id}
+                        style={{
+                            padding: 12,
+                            border: '1px solid var(--sl-border)',
+                            background: a.severity === 'warn' ? 'var(--sl-alert-soft)' : undefined,
+                            fontSize: 11,
+                        }}
+                    >
+                        <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 4 }}>
+                            <span style={{
+                                color: a.severity === 'warn' ? 'var(--sl-alert)' : 'var(--sl-ok)',
+                                letterSpacing: '0.10em',
+                                textTransform: 'uppercase',
+                                fontSize: 10,
+                                fontWeight: 500,
+                            }}>
+                                {a.severity === 'warn' ? 'WARN' : 'INFO'} · {a.title}
+                            </span>
+                            <span style={{ color: 'var(--sl-text-dim3)', fontFamily: 'var(--sl-mono)' }}>
+                                {fmt.time(a.t)}
+                            </span>
+                        </div>
+                        <div style={{ color: 'var(--sl-text-dim)' }}>{a.detail}</div>
+                        <div style={{ marginTop: 6 }}>
+                            <Age t={a.t} now={now} compact dot={false} />
+                        </div>
+                    </div>
+                ))}
+            </div>
         </div>
     );
 }
 
-function TrendRow({ label, rows, getY, unit }: {
-    label: string;
-    rows: TelemetryRow[];
-    getY: (r: TelemetryRow) => number | null;
-    unit?: string;
-}) {
-    const valid = rows.map(getY).filter((v): v is number => v !== null && Number.isFinite(v));
-    const value = valid.length ? valid[valid.length - 1] : null;
+function CadencePanel({ rows, now }: { rows: TelemetryRow[]; now: number }) {
+    const { ref, width } = useElementSize(280, 28);
+    const tEnd = rows.length ? rows[rows.length - 1].t : now;
+    const tStart = tEnd - 2 * 3600 * 1000;
     return (
-        <div className="sl-metric-row">
-            <span className="name">{label}</span>
-            <Sparkline data={rows.map(getY)} width={140} height={20} />
-            <span className="val">
-                {value !== null ? value.toFixed(Math.abs(value) < 10 ? 2 : 0) : '—'}
-                {value !== null && unit ? <span style={{ color: 'var(--sl-text-dim3)', marginLeft: 4, fontSize: 10 }}>{unit}</span> : null}
-            </span>
-        </div>
-    );
-}
-
-function FreshnessRow({ label, t, now }: { label: string; t: number | null; now: number }) {
-    return (
-        <div className="sl-kv-row">
-            <span className="k">{label}</span>
-            <span className="v" style={{ display: 'inline-flex', alignItems: 'center', gap: 8, justifyContent: 'flex-end' }}>
-                <FreshnessBar t={t} now={now} />
-                <Age t={t} now={now} compact dot={false} />
-            </span>
+        <div>
+            <div className="sl-label-xs" style={{ marginBottom: 8 }}>PACKET CADENCE · 2h</div>
+            <div ref={ref} style={{ width: '100%' }}>
+                <CadenceStrip data={rows} t0={tStart} t1={tEnd} width={width} />
+            </div>
+            <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 9, color: 'var(--sl-text-dim3)', marginTop: 4 }}>
+                <span>-2h</span><span>-1h</span><span>now</span>
+            </div>
         </div>
     );
 }

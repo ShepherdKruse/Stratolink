@@ -550,14 +550,22 @@ export function MapView({
 
 /* ──────────────────────────────────────────────────────────────
  * Chrome — top app bar with brand, tabs, freshness heartbeats.
+ * Tabs each have a `path` for client-side navigation, plus an optional
+ * `disabled` flag for the screens we haven't built yet.
  * ────────────────────────────────────────────────────────────── */
+export interface ChromeTab {
+    label: string;
+    path: string;
+    disabled?: boolean;
+}
+
 export function Chrome({
-    tabs, active, onTabChange, version,
+    tabs, activePath, onNavigate, version,
     lastUplinkT, lastFixT, now, right,
 }: {
-    tabs: string[];
-    active: string;
-    onTabChange?: (tab: string) => void;
+    tabs: ChromeTab[];
+    activePath: string;
+    onNavigate: (path: string) => void;
     version?: string;
     lastUplinkT: number | null;
     lastFixT: number | null;
@@ -572,16 +580,30 @@ export function Chrome({
                 {version && <span className="ver">{version}</span>}
             </div>
             <div className="sl-tabs">
-                {tabs.map(t => (
-                    <button
-                        key={t}
-                        type="button"
-                        className={'tab' + (t === active ? ' active' : '')}
-                        onClick={() => onTabChange?.(t)}
-                    >
-                        {t}
-                    </button>
-                ))}
+                {tabs.map(t => {
+                    const isActive = t.path === activePath;
+                    return (
+                        <button
+                            key={t.path}
+                            type="button"
+                            className={'tab' + (isActive ? ' active' : '')}
+                            onClick={() => !t.disabled && onNavigate(t.path)}
+                            disabled={t.disabled}
+                            style={t.disabled ? { color: 'var(--sl-text-dim3)', cursor: 'not-allowed' } : undefined}
+                            title={t.disabled ? 'Coming soon' : undefined}
+                        >
+                            {t.label}
+                            {t.disabled && (
+                                <span style={{
+                                    marginLeft: 6, fontSize: 8, color: 'var(--sl-text-dim3)',
+                                    letterSpacing: 0, textTransform: 'none',
+                                }}>
+                                    soon
+                                </span>
+                            )}
+                        </button>
+                    );
+                })}
             </div>
             <div style={{
                 marginLeft: 24, display: 'flex', alignItems: 'center', gap: 14,
@@ -600,3 +622,14 @@ export function Chrome({
         </div>
     );
 }
+
+/* The five tabs from the design. Pre-Launch and Mission Planner are gated
+ * (prediction work, deferred). Mission Control / Device Tracker / Telemetry
+ * Lab are live. */
+export const DASHBOARD_V2_TABS: ChromeTab[] = [
+    { label: 'PRE-LAUNCH',      path: '/dashboard-v2/prelaunch', disabled: true },
+    { label: 'MISSION PLANNER', path: '/dashboard-v2/planner',   disabled: true },
+    { label: 'MISSION CONTROL', path: '/dashboard-v2' },
+    { label: 'DEVICE TRACKER',  path: '/dashboard-v2/device' },
+    { label: 'TELEMETRY LAB',   path: '/dashboard-v2/lab' },
+];

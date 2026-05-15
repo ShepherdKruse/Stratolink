@@ -8,7 +8,7 @@
  */
 'use client';
 
-import { useEffect, useState, useCallback } from 'react';
+import { useEffect, useMemo, useState, useCallback } from 'react';
 import { createClient } from '@/lib/supabase';
 import type { TelemetryRow, DeviceInfo } from './atoms';
 
@@ -68,6 +68,48 @@ function rawToTelemetry(raw: Record<string, any>): TelemetryRow {
     };
 }
 
+/* Per-subsystem freshness — when did this field last update with a real value?
+ * Mirrors the FRESHNESS object in the design's components.jsx. */
+export interface SubsystemFreshness {
+    packet: number | null;
+    position: number | null;
+    altitude: number | null;
+    velocity: number | null;
+    battery: number | null;
+    solar: number | null;
+    temperature: number | null;
+    pressure: number | null;
+    lux: number | null;
+    rssi: number | null;
+    imu: number | null;
+    snr: number | null;
+}
+
+/* Fleet-wide aggregates for the Mission Control top bar. */
+export interface FleetMetrics {
+    totalDevices: number;
+    activeCount: number;
+    uplinks24h: number;
+    uplinksLastHour: number;
+    gpsLockRatePct: number | null;
+    noFixCount: number;
+    medianRssi: number | null;
+    /** Epoch-ms of the very first GPS fix in the last 24h across the fleet. */
+    firstFixT: number | null;
+    /** Epoch-ms of the very last uplink across the fleet. */
+    lastUplinkT: number | null;
+}
+
+/* Heuristic alert — derived from real rows, not stored anywhere. */
+export interface FleetAlert {
+    id: string;
+    severity: 'warn' | 'info';
+    title: string;
+    detail: string;
+    deviceId: string | null;
+    t: number;
+}
+
 export interface UseTelemetryResult {
     /** All registered devices with status + latest contact + latest fix. */
     devices: DeviceSummary[];
@@ -78,6 +120,12 @@ export interface UseTelemetryResult {
     rows: TelemetryRow[];
     /** Static device metadata (callsign, launch info, packet count). */
     deviceInfo: DeviceInfo | null;
+    /** Per-subsystem last-good-value timestamps for the selected device. */
+    freshness: SubsystemFreshness;
+    /** Fleet-wide aggregates over the last 24h. */
+    fleet: FleetMetrics;
+    /** Heuristic alerts derived from the selected-device window. */
+    alerts: FleetAlert[];
     /** True until the first fetch completes. */
     loading: boolean;
     /** Last successful fetch wall-clock time (ms epoch). */
@@ -88,11 +136,130 @@ export interface UseTelemetryResult {
     refetch: () => void;
 }
 
+const EMPTY_FLEET: FleetMetrics = {
+    totalDevices: 0,
+    activeCount: 0,
+    uplinks24h: 0,
+    uplinksLastHour: 0,
+    gpsLockRatePct: null,
+    noFixCount: 0,
+    medianRssi: null,
+    firstFixT: null,
+    lastUplinkT: null,
+};
+
+const EMPTY_FRESHNESS: SubsystemFreshness = {
+    packet: null, position: null, altitude: null, velocity: null,
+    battery: null, solar: null, temperature: null, pressure: null,
+    lux: null, rssi: null, imu: null, snr: null,
+};
+
+function computeFreshness(rows: TelemetryRow[]): SubsystemFreshness {
+    const f: SubsystemFreshness = { ...EMPTY_FRESHNESS };
+    /* Walk newest → oldest and capture the first packet that has a real value
+     * for each subsystem. Cheap O(n) since we early-out per field. */
+    for (let i = rows.length - 1; i >= 0; i--) {
+        const r = rows[i];
+        if (f.packet === null) f.packet = r.t;
+        if (f.position === null && r.lat !== null && r.lon !== null) f.position = r.t;
+        if (f.altitude === null && r.alt !== null) f.altitude = r.t;
+        if (f.velocity === null && (r.vx !== null || r.vy !== null || r.spd !== null)) f.velocity = r.t;
+        if (f.battery === null && r.batt !== null) f.battery = r.t;
+        if (f.solar === null && r.sol !== null) f.solar = r.t;
+        if (f.temperature === null && r.temp !== null) f.temperature = r.t;
+        if (f.pressure === null && r.pres !== null) f.pressure = r.t;
+        if (f.lux === null && (r.lux !== null || r.uv !== null)) f.lux = r.t;
+        if (f.rssi === null && r.rssi !== null) f.rssi = r.t;
+        if (f.snr === null && r.snr !== null) f.snr = r.t;
+        if (f.imu === null && (r.ax !== null || r.ay !== null || r.az !== null)) f.imu = r.t;
+    }
+    return f;
+}
+
+function median(values: number[]): number | null {
+    if (!values.length) return null;
+    const sorted = [...values].sort((a, b) => a - b);
+    const m = Math.floor(sorted.length / 2);
+    return sorted.length % 2 ? sorted[m] : (sorted[m - 1] + sorted[m]) / 2;
+}
+
+function deriveAlerts(rows: TelemetryRow[], deviceId: string | null): FleetAlert[] {
+    if (!rows.length) return [];
+    const out: FleetAlert[] = [];
+
+    /* GPS dropout — N consecutive rows without a fix. */
+    let dropStart: number | null = null;
+    let dropCount = 0;
+    rows.forEach((r) => {
+        if (r.lat === null || r.lon === null) {
+            if (dropStart === null) dropStart = r.t;
+            dropCount += 1;
+        } else {
+            if (dropStart !== null && dropCount >= 5) {
+                out.push({
+                    id: `gps-${dropStart}`,
+                    severity: 'warn',
+                    title: 'GPS DROPOUT',
+                    detail: `${dropCount} consecutive packets without GPS fix`,
+                    deviceId,
+                    t: dropStart,
+                });
+            }
+            dropStart = null;
+            dropCount = 0;
+        }
+    });
+    if (dropStart !== null && dropCount >= 5) {
+        out.push({
+            id: `gps-${dropStart}`,
+            severity: 'warn',
+            title: 'GPS DROPOUT (ONGOING)',
+            detail: `${dropCount} consecutive packets without GPS fix`,
+            deviceId,
+            t: dropStart,
+        });
+    }
+
+    /* Battery low — latest reading below 3.5V. */
+    const latestBatt = [...rows].reverse().find(r => r.batt !== null);
+    if (latestBatt && latestBatt.batt !== null && latestBatt.batt < 3.5) {
+        out.push({
+            id: `batt-low-${latestBatt.t}`,
+            severity: 'warn',
+            title: 'BATTERY LOW',
+            detail: `${latestBatt.batt.toFixed(2)}V — below 3.5V threshold`,
+            deviceId,
+            t: latestBatt.t,
+        });
+    }
+
+    /* Battery recovery — solar crossed back above 4.5V after being below. */
+    for (let i = 1; i < rows.length; i++) {
+        const prev = rows[i - 1].sol;
+        const cur = rows[i].sol;
+        if (prev !== null && cur !== null && prev < 4.5 && cur >= 4.5) {
+            out.push({
+                id: `solar-rec-${rows[i].t}`,
+                severity: 'info',
+                title: 'BATTERY RECOVERY',
+                detail: 'Solar voltage crossed 4.5V threshold',
+                deviceId,
+                t: rows[i].t,
+            });
+            break;
+        }
+    }
+
+    /* Most recent first, cap at 5 to keep the panel from exploding. */
+    return out.sort((a, b) => b.t - a.t).slice(0, 5);
+}
+
 export function useTelemetry({ initialSelectedId = null }: { initialSelectedId?: string | null } = {}): UseTelemetryResult {
     const [devices, setDevices] = useState<DeviceSummary[]>([]);
     const [selectedId, setSelectedId] = useState<string | null>(initialSelectedId);
     const [rows, setRows] = useState<TelemetryRow[]>([]);
     const [deviceInfo, setDeviceInfo] = useState<DeviceInfo | null>(null);
+    const [fleet, setFleet] = useState<FleetMetrics>(EMPTY_FLEET);
     const [loading, setLoading] = useState(true);
     const [lastFetchedAt, setLastFetchedAt] = useState<number | null>(null);
     const [status, setStatus] = useState<'connecting' | 'connected' | 'disconnected' | 'error'>('connecting');
@@ -187,6 +354,49 @@ export function useTelemetry({ initialSelectedId = null }: { initialSelectedId?:
                     const recent = summaries.find(s => s.lastContactT !== null);
                     setSelectedId((flying ?? recent ?? summaries[0]).id);
                 }
+
+                /* Fleet-wide aggregates: count uplinks, GPS lock rate, median RSSI.
+                 * One small extra query — pull the lightweight columns only. */
+                if (ids.length) {
+                    const oneHourAgo = new Date(Date.now() - 60 * 60 * 1000).toISOString();
+                    const { data: aggRows } = await supabase
+                        .from('telemetry')
+                        .select('device_id, time, lat, lon, rssi')
+                        .in('device_id', ids)
+                        .gte('time', oneDayAgo);
+
+                    const safe: Array<{ device_id: string; time: string; lat: number | null; lon: number | null; rssi: number | null }> =
+                        (aggRows ?? []) as any;
+                    const total = safe.length;
+                    const withFix = safe.filter(r => r.lat !== null && r.lon !== null).length;
+                    const noFix = total - withFix;
+                    const lastHour = safe.filter(r => r.time >= oneHourAgo).length;
+                    const rssiVals = safe
+                        .map(r => r.rssi)
+                        .filter((v): v is number => v !== null && Number.isFinite(v));
+                    const med = median(rssiVals);
+                    const fixTimes = safe
+                        .filter(r => r.lat !== null && r.lon !== null)
+                        .map(r => new Date(r.time).getTime());
+                    const allTimes = safe.map(r => new Date(r.time).getTime());
+                    const activeDeviceIds = new Set(safe.map(r => r.device_id));
+
+                    if (!cancelled) {
+                        setFleet({
+                            totalDevices: summaries.length,
+                            activeCount: activeDeviceIds.size,
+                            uplinks24h: total,
+                            uplinksLastHour: lastHour,
+                            gpsLockRatePct: total > 0 ? (withFix / total) * 100 : null,
+                            noFixCount: noFix,
+                            medianRssi: med,
+                            firstFixT: fixTimes.length ? Math.min(...fixTimes) : null,
+                            lastUplinkT: allTimes.length ? Math.max(...allTimes) : null,
+                        });
+                    }
+                } else if (!cancelled) {
+                    setFleet({ ...EMPTY_FLEET, totalDevices: summaries.length });
+                }
             } catch (e) {
                 console.debug('useTelemetry devices error', e);
                 if (!cancelled) {
@@ -250,7 +460,14 @@ export function useTelemetry({ initialSelectedId = null }: { initialSelectedId?:
         return () => { cancelled = true; clearInterval(interval); };
     }, [selectedId, devices, tick]);
 
-    return { devices, selectedId, setSelectedId, rows, deviceInfo, loading, lastFetchedAt, status, refetch };
+    const freshness = useMemo(() => computeFreshness(rows), [rows]);
+    const alerts = useMemo(() => deriveAlerts(rows, selectedId), [rows, selectedId]);
+
+    return {
+        devices, selectedId, setSelectedId,
+        rows, deviceInfo, freshness, fleet, alerts,
+        loading, lastFetchedAt, status, refetch,
+    };
 }
 
 export type { DeviceSummary };
