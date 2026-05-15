@@ -22,6 +22,7 @@ export async function GET() {
             SUPABASE_SERVICE_ROLE_KEY: present(process.env.SUPABASE_SERVICE_ROLE_KEY),
             ADMIN_ACTIVATION_KEY: present(process.env.ADMIN_ACTIVATION_KEY),
             NEXT_PUBLIC_APP_URL: present(process.env.NEXT_PUBLIC_APP_URL),
+            NEXT_PUBLIC_MAPBOX_TOKEN: present(process.env.NEXT_PUBLIC_MAPBOX_TOKEN),
             TTN_STACK_HOST: present(process.env.TTN_STACK_HOST),
             TTN_APPLICATION_ID: present(process.env.TTN_APPLICATION_ID),
             TTN_API_KEY: present(process.env.TTN_API_KEY),
