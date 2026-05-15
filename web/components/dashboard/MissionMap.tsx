@@ -50,7 +50,23 @@ export default function MissionMap({
         bearing: 0,
     });
 
-    // Track mobile state for responsive behavior
+    /* Track when the Mapbox style is fully loaded. Sources/Layers must not
+     * mount before the style is ready or mapbox-gl throws
+     * "Style is not done loading" and the ErrorBoundary kicks in, blanking
+     * the whole map. */
+    const [styleLoaded, setStyleLoaded] = useState(false);
+
+    const handleStyleLoad = useCallback(() => {
+        setStyleLoaded(true);
+    }, []);
+
+    /* If the underlying style changes (projection toggle remounts the Map
+     * via `key={projection}`), reset the flag so we don't render layers
+     * against a stale style instance. */
+    useEffect(() => {
+        setStyleLoaded(false);
+    }, [projection]);
+
     const [isMobile, setIsMobile] = useState(false);
     
     useEffect(() => {
@@ -230,8 +246,12 @@ export default function MissionMap({
                 } : undefined}
                 interactiveLayerIds={['balloon-markers-active', 'balloon-markers-landed']}
                 onClick={handleMarkerClick}
+                onLoad={handleStyleLoad}
+                onStyleData={handleStyleLoad}
                 cursor="pointer"
             >
+                {styleLoaded && (
+                    <>
                 {/* Balloon markers - functional colors from palette */}
                 <Source id="balloons" type="geojson" data={balloonGeoJSON}>
                     {/* Active balloons - accent blue */}
@@ -322,6 +342,8 @@ export default function MissionMap({
                             }}
                         />
                     </Source>
+                )}
+                    </>
                 )}
             </Map>
         </div>
