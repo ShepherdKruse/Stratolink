@@ -15,6 +15,21 @@ interface BalloonData {
     velocity_heading?: number;
     battery_voltage?: number;
     launcher_name?: string;
+    /** ISO timestamp of the most recent telemetry packet (any altitude, any position). */
+    last_contact?: string;
+    /** True when the latest telemetry has no GPS fix — marker is at launch coords, not real position. */
+    awaiting_gps?: boolean;
+}
+
+function formatRelativeTime(d: Date): string {
+    const seconds = Math.max(0, Math.round((Date.now() - d.getTime()) / 1000));
+    if (seconds < 60) return `${seconds}s ago`;
+    const minutes = Math.round(seconds / 60);
+    if (minutes < 60) return `${minutes}m ago`;
+    const hours = Math.round(minutes / 60);
+    if (hours < 24) return `${hours}h ago`;
+    const days = Math.round(hours / 24);
+    return `${days}d ago`;
 }
 
 interface DashboardClientProps {
@@ -83,17 +98,24 @@ export default function DashboardClient({ initialBalloonId = null, initialMode =
                 if (activatedDeviceIds.length > 0) {
                     const twoHoursAgo = new Date(Date.now() - 2 * 60 * 60 * 1000).toISOString();
                     const oneDayAgo = new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString();
-                    
-                    // Get active balloons (recent telemetry within last 2 hours, only for activated devices)
+
+                    /* "Active" = any telemetry packet in the last 2h, irrespective of GPS fix.
+                     * The old definition required altitude_m > 100, which excluded NOGPS power
+                     * tier packets entirely — useless for ground-test verification. */
                     const { data: active, error: activeError } = await supabase
                         .from('telemetry')
-                        .select('device_id')
+                        .select('device_id, time')
                         .in('device_id', activatedDeviceIds)
-                        .gte('time', twoHoursAgo)
-                        .gt('altitude_m', 100);
-                    
+                        .gte('time', twoHoursAgo);
+
+                    const lastContactMap = new Map<string, string>();
                     if (!activeError && active) {
-                        const distinctDevices = new Set(active.map((row: any) => row.device_id));
+                        const distinctDevices = new Set<string>();
+                        active.forEach((row: any) => {
+                            distinctDevices.add(row.device_id);
+                            const prev = lastContactMap.get(row.device_id);
+                            if (!prev || row.time > prev) lastContactMap.set(row.device_id, row.time);
+                        });
                         setActiveCount(distinctDevices.size);
                     } else {
                         setActiveCount(0);
@@ -138,7 +160,7 @@ export default function DashboardClient({ initialBalloonId = null, initialMode =
                                     const headingRad = Math.atan2(row.velocity_x, row.velocity_y);
                                     velocity_heading = (headingRad * 180 / Math.PI + 360) % 360;
                                 }
-                                
+
                                 latestByDevice.set(row.device_id, {
                                     id: row.device_id,
                                     lat: row.lat,
@@ -147,11 +169,16 @@ export default function DashboardClient({ initialBalloonId = null, initialMode =
                                     velocity_heading: velocity_heading,
                                     battery_voltage: 3.7,
                                     launcher_name: launcherMap.get(row.device_id),
+                                    last_contact: lastContactMap.get(row.device_id),
+                                    awaiting_gps: false,
                                 });
                             }
                         });
-                        
-                        // Add devices that are activated but don't have telemetry yet (use launch location)
+
+                        /* Devices that haven't had a GPS-fixed packet yet: fall back to their
+                         * launch location so they still appear on the map. We mark them
+                         * `awaiting_gps` and surface their last_contact so the operator can
+                         * tell they're alive and transmitting sensor data. */
                         activatedDeviceIds.forEach((deviceId: string) => {
                             if (!latestByDevice.has(deviceId)) {
                                 const launchLoc = launchLocationMap.get(deviceId);
@@ -160,15 +187,17 @@ export default function DashboardClient({ initialBalloonId = null, initialMode =
                                         id: deviceId,
                                         lat: launchLoc.lat,
                                         lon: launchLoc.lon,
-                                        altitude_m: 0, // Ground level until first telemetry
+                                        altitude_m: 0,
                                         velocity_heading: 90,
                                         battery_voltage: 3.7,
                                         launcher_name: launcherMap.get(deviceId),
+                                        last_contact: lastContactMap.get(deviceId),
+                                        awaiting_gps: true,
                                     });
                                 }
                             }
                         });
-                        
+
                         setBalloonData(Array.from(latestByDevice.values()));
                     } else if (balloonsError) {
                         console.error('Error fetching balloons:', balloonsError);
@@ -395,7 +424,7 @@ export default function DashboardClient({ initialBalloonId = null, initialMode =
                         <table className="w-full font-mono text-[11px]">
                             <tbody>
                                 <tr>
-                                    <td className="text-[#999] py-1">Active (alt &gt;100m)</td>
+                                    <td className="text-[#999] py-1">Active (last 2h)</td>
                                     <td className="text-right text-[#4a90d9] font-semibold">{activeCount}</td>
                                 </tr>
                                 <tr>
@@ -424,29 +453,44 @@ export default function DashboardClient({ initialBalloonId = null, initialMode =
                                 </div>
                             ) : (
                                 <div className="space-y-1">
-                                    {balloonData.map((balloon) => (
-                                        <button
-                                            key={balloon.id}
-                                            onClick={() => setActiveBalloonId(balloon.id)}
-                                            className="w-full text-left p-2 border border-[#333] hover:border-[#4a90d9] hover:bg-[#242424] transition-colors"
-                                        >
-                                            <div className="flex items-baseline justify-between mb-1">
-                                                <span className="font-mono text-[11px] text-[#e5e5e5] font-semibold">
-                                                    {balloon.id}
-                                                </span>
-                                                <span className={`text-[10px] ${balloon.altitude_m > 100 ? 'text-[#4a9]' : 'text-[#666]'}`}>
-                                                    {balloon.altitude_m > 100 ? 'ACTIVE' : 'LANDED'}
-                                                </span>
-                                            </div>
-                                            <div className="font-mono text-[10px] text-[#999] space-y-0.5">
-                                                <div>{balloon.lat.toFixed(4)}°, {balloon.lon.toFixed(4)}°</div>
-                                                <div>Alt: {balloon.altitude_m.toLocaleString()}m ({(balloon.altitude_m * 3.28084).toLocaleString(undefined, { maximumFractionDigits: 0 })}ft)</div>
-                                                {balloon.launcher_name && (
-                                                    <div className="text-[#666]">Launched by: {balloon.launcher_name}</div>
-                                                )}
-                                            </div>
-                                        </button>
-                                    ))}
+                                    {balloonData.map((balloon) => {
+                                        const status = balloon.awaiting_gps
+                                            ? 'NO GPS'
+                                            : balloon.altitude_m > 100
+                                                ? 'ACTIVE'
+                                                : 'LANDED';
+                                        const statusColor = balloon.awaiting_gps
+                                            ? 'text-yellow-400'
+                                            : balloon.altitude_m > 100
+                                                ? 'text-[#4a9]'
+                                                : 'text-[#666]';
+                                        const lastSeenLabel = balloon.last_contact
+                                            ? formatRelativeTime(new Date(balloon.last_contact))
+                                            : 'never';
+
+                                        return (
+                                            <button
+                                                key={balloon.id}
+                                                onClick={() => setActiveBalloonId(balloon.id)}
+                                                className="w-full text-left p-2 border border-[#333] hover:border-[#4a90d9] hover:bg-[#242424] transition-colors"
+                                            >
+                                                <div className="flex items-baseline justify-between mb-1">
+                                                    <span className="font-mono text-[11px] text-[#e5e5e5] font-semibold">
+                                                        {balloon.id}
+                                                    </span>
+                                                    <span className={`text-[10px] ${statusColor}`}>{status}</span>
+                                                </div>
+                                                <div className="font-mono text-[10px] text-[#999] space-y-0.5">
+                                                    <div>{balloon.lat.toFixed(4)}°, {balloon.lon.toFixed(4)}°{balloon.awaiting_gps && ' (launch loc)'}</div>
+                                                    <div>Alt: {balloon.altitude_m.toLocaleString()}m ({(balloon.altitude_m * 3.28084).toLocaleString(undefined, { maximumFractionDigits: 0 })}ft)</div>
+                                                    <div className="text-[#666]">Last contact: {lastSeenLabel}</div>
+                                                    {balloon.launcher_name && (
+                                                        <div className="text-[#666]">Launched by: {balloon.launcher_name}</div>
+                                                    )}
+                                                </div>
+                                            </button>
+                                        );
+                                    })}
                                 </div>
                             )}
                         </div>
