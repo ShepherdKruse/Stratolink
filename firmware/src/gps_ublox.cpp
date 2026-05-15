@@ -94,8 +94,19 @@ void gps_ublox_sleep(void) {
     /* UBX-RXM-PMREQ with duration=0 + UART-RX wake source = indefinite
      * software-backup until the MCU sends UART activity.  ~15 µA in
      * backup vs ~25 mA in continuous mode — the difference between
-     * "supercap dies in 2 min" and "lasts hours". */
-    (void)gnss.powerOffWithInterrupt(0, VAL_RXM_PMREQ_WAKEUPSOURCE_UARTRX, false, 0);
+     * "supercap dies in 2 min" and "lasts hours".
+     *
+     * maxWait=300 ms: wait for the GPS to ACK the command.  Without
+     * this (maxWait=0) the library returns immediately after queuing
+     * the UART write; entering STOP1 ~µs later cuts the UART clock
+     * mid-frame and the PMREQ never reaches the module — GPS stays in
+     * continuous tracking and drains the cap in ~60 s.  Empirically
+     * verified post-flash on 2026-05-15. */
+    (void)gnss.powerOffWithInterrupt(0,
+                                     VAL_RXM_PMREQ_WAKEUPSOURCE_UARTRX,
+                                     false,
+                                     300);
+    GPS_SERIAL.flush();  /* belt + suspenders: ensure UART drains */
 }
 
 #else
