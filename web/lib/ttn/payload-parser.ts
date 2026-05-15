@@ -143,7 +143,13 @@ function parseJSONPayload(
     const rawLat = parseFloat(decoded.latitude) || parseFloat(decoded.lat) || 0;
     const rawLon = parseFloat(decoded.longitude) || parseFloat(decoded.lon) || 0;
     const rawAlt = parseFloat(decoded.altitude) || parseFloat(decoded.altitude_m) || 0;
-    const hasGpsFix = rawLat !== 0 && rawLon !== 0;
+    /* Reject physically impossible coordinates rather than persisting garbage. */
+    const validLat = Number.isFinite(rawLat) && rawLat >= -90 && rawLat <= 90;
+    const validLon = Number.isFinite(rawLon) && rawLon >= -180 && rawLon <= 180;
+    const hasGpsFix = rawLat !== 0 && rawLon !== 0 && validLat && validLon;
+    if ((rawLat !== 0 || rawLon !== 0) && (!validLat || !validLon)) {
+        console.warn(`Dropping out-of-range GPS coords from ${deviceId}: lat=${rawLat} lon=${rawLon}`);
+    }
 
     /* Number / string coercion helpers that preserve null for missing keys
      * but accept either canonical name or a few common aliases the firmware
@@ -253,8 +259,15 @@ function parseBinaryPayload(
         const rawAlt = buffer.readInt32BE(8);
 
         /* NOGPS power tier sentinel: firmware writes 0/0/0 when there's no fix.
-         * Treat that as "no GPS data" rather than coordinates at Null Island. */
-        const hasGpsFix = rawLat !== 0 && rawLon !== 0;
+         * Treat that as "no GPS data" rather than coordinates at Null Island.
+         * Also reject physically impossible coordinates from a bit-flipped or
+         * misaligned packet — observed e.g. lat=-208 in production. */
+        const validLat = Number.isFinite(rawLat) && rawLat >= -90 && rawLat <= 90;
+        const validLon = Number.isFinite(rawLon) && rawLon >= -180 && rawLon <= 180;
+        const hasGpsFix = rawLat !== 0 && rawLon !== 0 && validLat && validLon;
+        if ((rawLat !== 0 || rawLon !== 0) && (!validLat || !validLon)) {
+            console.warn(`Dropping out-of-range GPS coords from ${deviceId}: lat=${rawLat} lon=${rawLon}`);
+        }
         const lat = hasGpsFix ? rawLat : null;
         const lon = hasGpsFix ? rawLon : null;
         const altitude_m = hasGpsFix ? rawAlt : null;
