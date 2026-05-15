@@ -5,6 +5,17 @@ import Map, { Source, Layer } from 'react-map-gl/mapbox';
 import type { MapRef } from 'react-map-gl/mapbox';
 import 'mapbox-gl/dist/mapbox-gl.css';
 
+function isWebGLAvailable(): boolean {
+    if (typeof window === 'undefined') return false;
+    try {
+        const canvas = document.createElement('canvas');
+        const gl = canvas.getContext('webgl2') || canvas.getContext('webgl');
+        return !!gl;
+    } catch {
+        return false;
+    }
+}
+
 interface BalloonData {
     id: string;
     lat: number;
@@ -68,7 +79,12 @@ export default function MissionMap({
     }, [projection]);
 
     const [isMobile, setIsMobile] = useState(false);
-    
+    const [webglOk, setWebglOk] = useState<boolean | null>(null);
+
+    useEffect(() => {
+        setWebglOk(isWebGLAvailable());
+    }, []);
+
     useEffect(() => {
         const checkMobile = () => {
             setIsMobile(window.innerWidth < 768);
@@ -224,6 +240,33 @@ export default function MissionMap({
         }
         return undefined;
     }, [isMobile, isSidebarOpen, activeBalloonId]);
+
+    /* If the browser cannot create a WebGL context (hardware acceleration
+     * disabled, GPU blocklisted, locked-down sandbox) Mapbox would throw on
+     * mount and the ErrorBoundary above would blank the whole dashboard.
+     * Render a graceful placeholder with self-help guidance instead. */
+    if (webglOk === false) {
+        return (
+            <div className="w-full h-full relative flex items-center justify-center bg-[#0a0a0a]">
+                <div className="max-w-md text-center px-6 font-mono text-xs text-[#bbb]">
+                    <div className="text-[#ff6b6b] text-sm mb-3 uppercase tracking-wider">Map unavailable</div>
+                    <div className="text-[#aaa] mb-4">
+                        Your browser can&apos;t create a WebGL context, so Mapbox can&apos;t render the globe.
+                    </div>
+                    <div className="text-[#888] text-[11px] leading-relaxed text-left bg-[#141414] border border-[#333] p-3 rounded">
+                        <div className="text-[#ccc] mb-2">Try one of these:</div>
+                        <div>1. Chrome/Edge: <code className="text-[#9ecbff]">chrome://settings/system</code> &rarr; enable &ldquo;Use graphics acceleration when available&rdquo; &rarr; restart browser.</div>
+                        <div className="mt-2">2. Check <code className="text-[#9ecbff]">chrome://gpu</code> &mdash; WebGL should say &ldquo;Hardware accelerated&rdquo;.</div>
+                        <div className="mt-2">3. Test at <a href="https://get.webgl.org" target="_blank" rel="noreferrer" className="text-[#9ecbff] underline">get.webgl.org</a> to confirm the browser config.</div>
+                    </div>
+                </div>
+            </div>
+        );
+    }
+
+    if (webglOk === null) {
+        return <div className="w-full h-full bg-[#0a0a0a]" />;
+    }
 
     return (
         <div className="w-full h-full relative">
