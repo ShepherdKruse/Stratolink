@@ -6,6 +6,7 @@
 #include "lorawan.h"
 #include "config.h"
 #include "power_adc.h"
+#include "power_manager.h"   /* for power_manager_kick_watchdog */
 #include <RadioLib.h>
 
 #if __has_include("secrets.h")
@@ -227,7 +228,12 @@ static bool otaa_join(void) {
     size_t rxLen = 0;
     bool received = false;
 
-    /* RX1: 5s after TX */
+    /* RX1: 5s after TX.  Kick the IWDG before the busy-wait: a single
+     * TX-then-RX1-then-RX2 round can take ~7 s, plus the outer retry
+     * delay (~3-7 s) — multiple iterations under the 15 s lorawan_join
+     * timeout from main loop() leave only a thin margin to the 32.7 s
+     * watchdog.  Refresh here so the dog only catches genuine hangs. */
+    power_manager_kick_watchdog();
     float rx1Freq = REGION.rx1_mod
         ? (REGION.rx1_base + (ch % REGION.rx1_mod) * REGION.rx1_step)
         : REGION.tx_freqs[ch];
