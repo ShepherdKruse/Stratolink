@@ -1,30 +1,49 @@
 'use client';
 
+import type { ReactNode } from 'react';
 import { useEffect } from 'react';
 import Payload3DViewer from './Payload3DViewer';
 import MetricSparkline from './MetricSparkline';
 
 import MissionTimeline from './MissionTimeline';
 
+interface MissionSidebarTelemetry {
+    time: Date | string;
+    battery_voltage?: number;
+    solar_voltage?: number;
+    temperature?: number;
+    pressure?: number;
+    rssi?: number;
+    snr?: number;
+    lat?: number;
+    lon?: number;
+    altitude_m?: number;
+    gps_speed?: number;
+    gps_heading?: number;
+    gps_satellites?: number;
+    uv_index?: number;
+    ambient_lux?: number;
+    acoustic_event?: number;
+    mems_accel_x?: number;
+    mems_accel_y?: number;
+    mems_accel_z?: number;
+    firmware_version?: string;
+    uptime_s?: number;
+    tx_count?: number;
+    hdop?: number;
+    power_mode?: string;
+    sleep_ms?: number;
+    lora_sf?: number;
+    lora_bw?: number;
+    frequency_hz?: number;
+}
+
 interface MissionSidebarProps {
     isOpen: boolean;
     onClose: () => void;
     balloonId: string;
     launcherName?: string;
-    telemetryData?: Array<{
-        time: Date | string;
-        battery_voltage?: number;
-        temperature?: number;
-        pressure?: number;
-        rssi?: number;
-        uv_index?: number;
-        ambient_lux?: number;
-        acoustic_event?: number;
-        solar_voltage?: number;
-        mems_accel_x?: number;
-        mems_accel_y?: number;
-        mems_accel_z?: number;
-    }>;
+    telemetryData?: MissionSidebarTelemetry[];
     timelineProps?: {
         startTime: Date;
         endTime: Date;
@@ -33,36 +52,54 @@ interface MissionSidebarProps {
     } | null;
 }
 
+/** Render a value or an em-dash when undefined/null. */
+function v(x: unknown, suffix: string = '', dashColor = 'text-[#555]'): ReactNode {
+    if (x === undefined || x === null || (typeof x === 'number' && !Number.isFinite(x))) {
+        return <span className={dashColor}>—</span>;
+    }
+    return <>{x}{suffix}</>;
+}
+
+/** Format uptime seconds as a human-friendly Hh Mm Ss string. */
+function formatUptime(secs: number | undefined): string {
+    if (secs === undefined || secs === null || !Number.isFinite(secs)) return '—';
+    const s = Math.trunc(secs);
+    const days = Math.floor(s / 86400);
+    const hours = Math.floor((s % 86400) / 3600);
+    const minutes = Math.floor((s % 3600) / 60);
+    const seconds = s % 60;
+    if (days > 0) return `${days}d ${hours}h ${minutes}m`;
+    if (hours > 0) return `${hours}h ${minutes}m ${seconds}s`;
+    if (minutes > 0) return `${minutes}m ${seconds}s`;
+    return `${seconds}s`;
+}
+
+/** "SF7BW125" style LoRa descriptor from SF + bandwidth (Hz). */
+function formatLoraConfig(sf: number | undefined, bw: number | undefined): string | undefined {
+    if (sf === undefined && bw === undefined) return undefined;
+    const sfPart = sf !== undefined ? `SF${sf}` : 'SF?';
+    const bwPart = bw !== undefined ? `BW${Math.round(bw / 1000)}` : '';
+    return `${sfPart}${bwPart}`;
+}
+
 export default function MissionSidebar({ isOpen, onClose, balloonId, launcherName, telemetryData = [], timelineProps }: MissionSidebarProps) {
-    // Generate mock data if no telemetry data provided
-    const generateMockData = (baseValue: number, variance: number, count: number = 24) => {
-        const now = new Date();
-        return Array.from({ length: count }, (_, i) => {
-            const time = new Date(now.getTime() - (count - i) * 60 * 60 * 1000);
-            const value = baseValue + (Math.random() - 0.5) * variance;
-            return { time, value: Math.max(0, value) };
-        });
-    };
-
-    const latestTelemetry = telemetryData.length > 0
+    /* Latest row is the source of truth for every "current value" readout.
+     * Sparkline series filter out null/undefined samples so a single bad row
+     * doesn't render a gap as zero. */
+    const latestTelemetry: Partial<MissionSidebarTelemetry> = telemetryData.length > 0
         ? telemetryData[telemetryData.length - 1]
-        : { battery_voltage: 3.72, temperature: -45.2, pressure: 120.5, rssi: -112, uv_index: 0, ambient_lux: 0, acoustic_event: 0, solar_voltage: 0, mems_accel_x: 0, mems_accel_y: 0, mems_accel_z: 0 };
+        : {};
 
-    const batteryData = telemetryData.length > 0
-        ? telemetryData.map(t => ({ time: t.time, value: t.battery_voltage ?? 3.7 }))
-        : generateMockData(3.7, 0.3, 24);
+    const seriesFor = (selector: (t: MissionSidebarTelemetry) => number | undefined) =>
+        telemetryData
+            .map(t => ({ time: t.time, raw: selector(t) }))
+            .filter(p => typeof p.raw === 'number' && Number.isFinite(p.raw))
+            .map(p => ({ time: p.time, value: p.raw as number }));
 
-    const temperatureData = telemetryData.length > 0
-        ? telemetryData.map(t => ({ time: t.time, value: t.temperature ?? -45 }))
-        : generateMockData(-45, 5, 24);
-
-    const pressureData = telemetryData.length > 0
-        ? telemetryData.map(t => ({ time: t.time, value: t.pressure ?? 120 }))
-        : generateMockData(120, 10, 24);
-
-    const rssiData = telemetryData.length > 0
-        ? telemetryData.map(t => ({ time: t.time, value: t.rssi ?? -112 }))
-        : generateMockData(-112, 5, 24);
+    const batteryData = seriesFor(t => t.battery_voltage);
+    const temperatureData = seriesFor(t => t.temperature);
+    const pressureData = seriesFor(t => t.pressure);
+    const rssiData = seriesFor(t => t.rssi);
 
     useEffect(() => {
         if (isOpen) {
@@ -75,19 +112,44 @@ export default function MissionSidebar({ isOpen, onClose, balloonId, launcherNam
         };
     }, [isOpen]);
 
-    // System log entries - exposed inner workings
-    const systemLogs = [
-        { time: '02:48:12.847', level: 'info', msg: 'Telemetry packet TX complete, seq=1847' },
-        { time: '02:48:00.123', level: 'info', msg: 'GPS fix acquired: 12 sats, HDOP=1.2' },
-        { time: '02:47:45.892', level: 'warn', msg: 'Battery voltage below 3.8V threshold' },
-        { time: '02:47:30.456', level: 'info', msg: 'LoRaWAN uplink SF7BW125, freq=903.9MHz' },
-        { time: '02:47:15.234', level: 'info', msg: 'Sensor read: T=-45.2°C, P=120.5mbar' },
-        { time: '02:47:00.001', level: 'info', msg: 'Sleep cycle exit, runtime 847ms' },
-        { time: '02:46:45.789', level: 'info', msg: 'ADC calibration complete' },
-        { time: '02:46:30.567', level: 'info', msg: 'Power mode: ACTIVE, V_bat=3.72V' },
-        { time: '02:46:15.345', level: 'info', msg: 'Entering TX window slot 3' },
-        { time: '02:46:00.123', level: 'info', msg: 'GNSS cold start, searching...' },
-    ];
+    /* Synthesise a short, real system log from recent telemetry rows. We
+     * surface the most recent few packets with key derived facts so the
+     * panel still has the "exposed inner workings" feel — but everything
+     * is grounded in real data. */
+    const systemLogs = telemetryData
+        .slice(-10)
+        .reverse()
+        .map((t, idx) => {
+            const ts = (t.time instanceof Date ? t.time : new Date(t.time)).toISOString().substring(11, 23);
+            const parts: string[] = [];
+            if (t.tx_count !== undefined) parts.push(`seq=${t.tx_count}`);
+            if (t.gps_satellites !== undefined) parts.push(`sats=${t.gps_satellites}`);
+            if (t.hdop !== undefined) parts.push(`hdop=${t.hdop.toFixed(1)}`);
+            if (t.battery_voltage !== undefined) parts.push(`vbat=${t.battery_voltage.toFixed(2)}V`);
+            if (t.rssi !== undefined) parts.push(`rssi=${t.rssi}dBm`);
+            if (t.power_mode) parts.push(`mode=${t.power_mode}`);
+            const level = (t.battery_voltage !== undefined && t.battery_voltage < 3.5) ? 'warn'
+                : (t.acoustic_event && t.acoustic_event > 0) ? 'warn'
+                : 'info';
+            const msg = parts.length > 0
+                ? `Telemetry RX ${parts.join(', ')}`
+                : `Telemetry RX (packet ${idx + 1})`;
+            return { time: ts, level, msg };
+        });
+    if (systemLogs.length === 0) {
+        systemLogs.push({ time: '--:--:--', level: 'info', msg: 'No telemetry received yet' });
+    }
+
+    const lora = formatLoraConfig(latestTelemetry.lora_sf, latestTelemetry.lora_bw);
+    const freqMhz = latestTelemetry.frequency_hz !== undefined
+        ? (latestTelemetry.frequency_hz / 1e6).toFixed(3)
+        : undefined;
+    const lastPacketTs = telemetryData.length > 0
+        ? (telemetryData[telemetryData.length - 1].time instanceof Date
+            ? (telemetryData[telemetryData.length - 1].time as Date)
+            : new Date(telemetryData[telemetryData.length - 1].time as string))
+        : null;
+    const lastPacketLabel = lastPacketTs ? lastPacketTs.toISOString().replace('T', ' ').substring(0, 19) + ' UTC' : '—';
 
     return (
         <>
@@ -162,15 +224,17 @@ export default function MissionSidebar({ isOpen, onClose, balloonId, launcherNam
                                 </div>
                             </div>
 
-                            {/* Power Telemetry */}
+                            {/* Power System — real V_bat over the last 24h.
+                              * Sparkline renders empty when the firmware hasn't
+                              * sent any battery reading yet. */}
                             <div className="p-3 border-b border-[#333]">
                                 <div className="text-[10px] font-semibold text-[#666] uppercase tracking-wider mb-2">Power System</div>
                                 <MetricSparkline
                                     data={batteryData}
                                     dataKey="V_bat"
                                     color="#4a90d9"
-                                    currentValue={latestTelemetry.battery_voltage ?? 3.72}
-                                    unit="V"
+                                    currentValue={latestTelemetry.battery_voltage ?? 0}
+                                    unit={latestTelemetry.battery_voltage !== undefined ? 'V' : ' —'}
                                 />
                             </div>
 
@@ -182,114 +246,178 @@ export default function MissionSidebar({ isOpen, onClose, balloonId, launcherNam
                                         data={temperatureData}
                                         dataKey="temp"
                                         color="#c44"
-                                        currentValue={latestTelemetry.temperature ?? -45.2}
-                                        unit="°C"
+                                        currentValue={latestTelemetry.temperature ?? 0}
+                                        unit={latestTelemetry.temperature !== undefined ? '°C' : ' —'}
                                     />
                                     <MetricSparkline
                                         data={pressureData}
                                         dataKey="pres"
                                         color="#4a9"
-                                        currentValue={latestTelemetry.pressure ?? 120.5}
-                                        unit="mbar"
+                                        currentValue={latestTelemetry.pressure ?? 0}
+                                        unit={latestTelemetry.pressure !== undefined ? 'mbar' : ' —'}
                                     />
                                 </div>
                             </div>
 
-                            {/* RF */}
+                            {/* RF signal trend */}
                             <div className="p-3">
-                                <div className="text-[10px] font-semibold text-[#666] uppercase tracking-wider mb-2">RF Link</div>
+                                <div className="text-[10px] font-semibold text-[#666] uppercase tracking-wider mb-2">RF Signal</div>
                                 <MetricSparkline
                                     data={rssiData}
                                     dataKey="rssi"
                                     color="#b84"
-                                    currentValue={latestTelemetry.rssi ?? -112}
-                                    unit="dBm"
+                                    currentValue={latestTelemetry.rssi ?? 0}
+                                    unit={latestTelemetry.rssi !== undefined ? 'dBm' : ' —'}
                                 />
                             </div>
                         </div>
 
                         {/* Right Column: System State + Logs */}
                         <div className="bg-[#1a1a1a]">
-                            {/* Raw State Dump */}
+                            {/* Real System State — pulled from the latest telemetry row.
+                              * Fields the firmware doesn't yet emit render as "—" so the
+                              * gap is obvious without breaking the layout. */}
                             <div className="p-3 border-b border-[#333]">
-                                <div className="text-[10px] font-semibold text-[#666] uppercase tracking-wider mb-2">System State</div>
+                                <div className="flex items-center justify-between mb-2">
+                                    <div className="text-[10px] font-semibold text-[#666] uppercase tracking-wider">System State</div>
+                                    <div className="text-[9px] font-mono text-[#555]">{telemetryData.length} pkts</div>
+                                </div>
                                 <div className="font-mono text-[10px] space-y-1 text-[#999]">
                                     <div className="flex justify-between">
                                         <span>device_id</span>
                                         <span className="text-[#e5e5e5]">{balloonId}</span>
                                     </div>
                                     <div className="flex justify-between">
-                                        <span>firmware</span>
-                                        <span className="text-[#e5e5e5]">v2.1.4</span>
+                                        <span>last_packet</span>
+                                        <span className="text-[#e5e5e5]">{lastPacketLabel}</span>
                                     </div>
                                     <div className="flex justify-between">
-                                        <span>uptime_s</span>
-                                        <span className="text-[#e5e5e5]">847293</span>
+                                        <span>firmware</span>
+                                        <span className="text-[#e5e5e5]">{v(latestTelemetry.firmware_version)}</span>
+                                    </div>
+                                    <div className="flex justify-between">
+                                        <span>uptime</span>
+                                        <span className="text-[#e5e5e5]">{formatUptime(latestTelemetry.uptime_s)}</span>
                                     </div>
                                     <div className="flex justify-between">
                                         <span>tx_count</span>
-                                        <span className="text-[#e5e5e5]">1847</span>
-                                    </div>
-                                    <div className="flex justify-between">
-                                        <span>gps_sats</span>
-                                        <span className="text-[#e5e5e5]">12</span>
-                                    </div>
-                                    <div className="flex justify-between">
-                                        <span>hdop</span>
-                                        <span className="text-[#e5e5e5]">1.2</span>
-                                    </div>
-                                    <div className="flex justify-between">
-                                        <span>sf</span>
-                                        <span className="text-[#e5e5e5]">SF7BW125</span>
-                                    </div>
-                                    <div className="flex justify-between">
-                                        <span>freq_mhz</span>
-                                        <span className="text-[#e5e5e5]">903.9</span>
+                                        <span className="text-[#e5e5e5]">{v(latestTelemetry.tx_count)}</span>
                                     </div>
                                     <div className="flex justify-between">
                                         <span>power_mode</span>
-                                        <span className="text-[#4a9]">ACTIVE</span>
+                                        <span className={latestTelemetry.power_mode === 'ACTIVE' ? 'text-[#4a9]' : 'text-[#e5e5e5]'}>
+                                            {v(latestTelemetry.power_mode)}
+                                        </span>
                                     </div>
                                     <div className="flex justify-between">
                                         <span>sleep_ms</span>
-                                        <span className="text-[#e5e5e5]">60000</span>
+                                        <span className="text-[#e5e5e5]">{v(latestTelemetry.sleep_ms)}</span>
                                     </div>
                                 </div>
                             </div>
 
-                            {/* Sensors */}
+                            {/* GPS — fully real. lat/lon may be null when the firmware is in
+                              * NOGPS power tier, so render an inline status badge in that case. */}
+                            <div className="p-3 border-b border-[#333]">
+                                <div className="flex items-center justify-between mb-2">
+                                    <div className="text-[10px] font-semibold text-[#666] uppercase tracking-wider">GPS</div>
+                                    {latestTelemetry.lat === undefined && (
+                                        <span className="text-[9px] font-mono text-yellow-400">NO FIX</span>
+                                    )}
+                                </div>
+                                <div className="font-mono text-[10px] space-y-1 text-[#999]">
+                                    <div className="flex justify-between">
+                                        <span>lat</span>
+                                        <span className="text-[#e5e5e5]">{latestTelemetry.lat !== undefined ? latestTelemetry.lat.toFixed(6) + '°' : v(undefined)}</span>
+                                    </div>
+                                    <div className="flex justify-between">
+                                        <span>lon</span>
+                                        <span className="text-[#e5e5e5]">{latestTelemetry.lon !== undefined ? latestTelemetry.lon.toFixed(6) + '°' : v(undefined)}</span>
+                                    </div>
+                                    <div className="flex justify-between">
+                                        <span>alt</span>
+                                        <span className="text-[#e5e5e5]">{latestTelemetry.altitude_m !== undefined ? latestTelemetry.altitude_m.toLocaleString() + ' m' : v(undefined)}</span>
+                                    </div>
+                                    <div className="flex justify-between">
+                                        <span>sats</span>
+                                        <span className="text-[#e5e5e5]">{v(latestTelemetry.gps_satellites)}</span>
+                                    </div>
+                                    <div className="flex justify-between">
+                                        <span>hdop</span>
+                                        <span className="text-[#e5e5e5]">{latestTelemetry.hdop !== undefined ? latestTelemetry.hdop.toFixed(1) : v(undefined)}</span>
+                                    </div>
+                                    <div className="flex justify-between">
+                                        <span>ground_spd</span>
+                                        <span className="text-[#e5e5e5]">{latestTelemetry.gps_speed !== undefined ? latestTelemetry.gps_speed.toFixed(2) + ' m/s' : v(undefined)}</span>
+                                    </div>
+                                    <div className="flex justify-between">
+                                        <span>heading</span>
+                                        <span className="text-[#e5e5e5]">{latestTelemetry.gps_heading !== undefined ? latestTelemetry.gps_heading.toFixed(1) + '°' : v(undefined)}</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            {/* LoRa link — sourced from TTN settings so always real when
+                              * a packet has been received in the current session. */}
+                            <div className="p-3 border-b border-[#333]">
+                                <div className="text-[10px] font-semibold text-[#666] uppercase tracking-wider mb-2">LoRa Link</div>
+                                <div className="font-mono text-[10px] space-y-1 text-[#999]">
+                                    <div className="flex justify-between">
+                                        <span>data_rate</span>
+                                        <span className="text-[#e5e5e5]">{v(lora)}</span>
+                                    </div>
+                                    <div className="flex justify-between">
+                                        <span>freq_mhz</span>
+                                        <span className="text-[#e5e5e5]">{v(freqMhz)}</span>
+                                    </div>
+                                    <div className="flex justify-between">
+                                        <span>rssi</span>
+                                        <span className="text-[#e5e5e5]">{latestTelemetry.rssi !== undefined ? latestTelemetry.rssi + ' dBm' : v(undefined)}</span>
+                                    </div>
+                                    <div className="flex justify-between">
+                                        <span>snr</span>
+                                        <span className="text-[#e5e5e5]">{latestTelemetry.snr !== undefined ? latestTelemetry.snr.toFixed(1) + ' dB' : v(undefined)}</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            {/* Sensors — all real, from the latest payload row. */}
                             <div className="p-3 border-b border-[#333]">
                                 <div className="text-[10px] font-semibold text-[#666] uppercase tracking-wider mb-2">Sensors</div>
                                 <div className="font-mono text-[10px] space-y-1 text-[#999]">
                                     <div className="flex justify-between">
                                         <span>uv_index</span>
-                                        <span className="text-[#e5e5e5]">{latestTelemetry.uv_index ?? 0}</span>
+                                        <span className="text-[#e5e5e5]">{v(latestTelemetry.uv_index)}</span>
                                     </div>
                                     <div className="flex justify-between">
                                         <span>ambient_lux</span>
-                                        <span className="text-[#e5e5e5]">{latestTelemetry.ambient_lux ?? 0} lux</span>
+                                        <span className="text-[#e5e5e5]">{latestTelemetry.ambient_lux !== undefined ? `${latestTelemetry.ambient_lux} lux` : v(undefined)}</span>
                                     </div>
                                     <div className="flex justify-between">
                                         <span>acoustic</span>
-                                        <span className={latestTelemetry.acoustic_event ? 'text-[#c44]' : 'text-[#4a9]'}>
-                                            {latestTelemetry.acoustic_event ? 'EVENT' : 'quiet'}
-                                        </span>
+                                        {latestTelemetry.acoustic_event === undefined ? (
+                                            <span className="text-[#555]">—</span>
+                                        ) : (
+                                            <span className={latestTelemetry.acoustic_event ? 'text-[#c44]' : 'text-[#4a9]'}>
+                                                {latestTelemetry.acoustic_event ? 'EVENT' : 'quiet'}
+                                            </span>
+                                        )}
                                     </div>
                                     <div className="flex justify-between">
                                         <span>accel_x</span>
-                                        <span className="text-[#e5e5e5]">{(latestTelemetry.mems_accel_x ?? 0).toFixed(2)} m/s2</span>
+                                        <span className="text-[#e5e5e5]">{latestTelemetry.mems_accel_x !== undefined ? latestTelemetry.mems_accel_x.toFixed(2) + ' m/s²' : v(undefined)}</span>
                                     </div>
                                     <div className="flex justify-between">
                                         <span>accel_y</span>
-                                        <span className="text-[#e5e5e5]">{(latestTelemetry.mems_accel_y ?? 0).toFixed(2)} m/s2</span>
+                                        <span className="text-[#e5e5e5]">{latestTelemetry.mems_accel_y !== undefined ? latestTelemetry.mems_accel_y.toFixed(2) + ' m/s²' : v(undefined)}</span>
                                     </div>
                                     <div className="flex justify-between">
                                         <span>accel_z</span>
-                                        <span className="text-[#e5e5e5]">{(latestTelemetry.mems_accel_z ?? 0).toFixed(2)} m/s2</span>
+                                        <span className="text-[#e5e5e5]">{latestTelemetry.mems_accel_z !== undefined ? latestTelemetry.mems_accel_z.toFixed(2) + ' m/s²' : v(undefined)}</span>
                                     </div>
                                     <div className="flex justify-between">
                                         <span>solar_mv</span>
-                                        <span className="text-[#e5e5e5]">{((latestTelemetry.solar_voltage ?? 0) * 1000).toFixed(0)} mV</span>
+                                        <span className="text-[#e5e5e5]">{latestTelemetry.solar_voltage !== undefined ? `${Math.round(latestTelemetry.solar_voltage * 1000)} mV` : v(undefined)}</span>
                                     </div>
                                 </div>
                             </div>

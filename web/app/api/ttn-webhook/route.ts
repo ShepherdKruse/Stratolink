@@ -45,7 +45,6 @@ export async function POST(request: NextRequest) {
             console.warn(`Telemetry received from device not in 'flying' status: ${telemetry.device_id} (status: ${device.status})`);
         }
 
-        // Insert telemetry into Supabase
         const { error } = await supabase
             .from('telemetry')
             .insert({
@@ -71,6 +70,15 @@ export async function POST(request: NextRequest) {
                 uv_index: telemetry.uv_index,
                 ambient_lux: telemetry.ambient_lux,
                 acoustic_event: telemetry.acoustic_event,
+                firmware_version: telemetry.firmware_version,
+                uptime_s: telemetry.uptime_s,
+                tx_count: telemetry.tx_count,
+                hdop: telemetry.hdop,
+                power_mode: telemetry.power_mode,
+                sleep_ms: telemetry.sleep_ms,
+                lora_sf: telemetry.lora_sf,
+                lora_bw: telemetry.lora_bw,
+                frequency_hz: telemetry.frequency_hz,
             });
         
         if (error) {

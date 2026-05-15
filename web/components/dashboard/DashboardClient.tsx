@@ -21,6 +21,40 @@ interface BalloonData {
     awaiting_gps?: boolean;
 }
 
+/** Shape of the telemetry rows we pull for the active balloon's detail panel.
+ * Mirrors all queryable columns; null fallbacks let us render "—" when the
+ * firmware doesn't yet emit a field. */
+export interface TelemetryRow {
+    time: string;
+    lat: number | null;
+    lon: number | null;
+    altitude_m: number | null;
+    battery_voltage: number | null;
+    solar_voltage: number | null;
+    temperature: number | null;
+    pressure: number | null;
+    rssi: number | null;
+    snr: number | null;
+    gps_speed: number | null;
+    gps_heading: number | null;
+    gps_satellites: number | null;
+    mems_accel_x: number | null;
+    mems_accel_y: number | null;
+    mems_accel_z: number | null;
+    uv_index: number | null;
+    ambient_lux: number | null;
+    acoustic_event: number | null;
+    firmware_version: string | null;
+    uptime_s: number | null;
+    tx_count: number | null;
+    hdop: number | null;
+    power_mode: string | null;
+    sleep_ms: number | null;
+    lora_sf: number | null;
+    lora_bw: number | null;
+    frequency_hz: number | null;
+}
+
 function formatRelativeTime(d: Date): string {
     const seconds = Math.max(0, Math.round((Date.now() - d.getTime()) / 1000));
     if (seconds < 60) return `${seconds}s ago`;
@@ -54,6 +88,7 @@ export default function DashboardClient({ initialBalloonId = null, initialMode =
     }, [initialBalloonId, initialMode]);
     const [playbackTime, setPlaybackTime] = useState<Date | null>(null);
     const [flightPathData, setFlightPathData] = useState<Array<{ lat: number; lon: number; time: Date }>>([]);
+    const [sidebarTelemetry, setSidebarTelemetry] = useState<TelemetryRow[]>([]);
     const [lastUpdate, setLastUpdate] = useState<Date | null>(null);
     const [connectionStatus, setConnectionStatus] = useState<'connected' | 'disconnected' | 'error'>('disconnected');
 
@@ -245,11 +280,14 @@ export default function DashboardClient({ initialBalloonId = null, initialMode =
         ? balloonData.find(b => b.id === activeBalloonId) || null
         : null;
 
-    // Fetch flight path data when active balloon changes
+    // Fetch flight path AND full telemetry rows when active balloon changes.
+    // Pulls the last 24h of rows with all sensor / system-state columns so the
+    // sidebar can render real data instead of placeholders.
     useEffect(() => {
         async function fetchFlightPath() {
             if (!activeBalloonId) {
                 setFlightPathData([]);
+                setSidebarTelemetry([]);
                 setPlaybackTime(null);
                 return;
             }
@@ -257,26 +295,44 @@ export default function DashboardClient({ initialBalloonId = null, initialMode =
             try {
                 const supabase = createClient();
                 const oneDayAgo = new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString();
-                
+
+                const fullColumns =
+                    'time, lat, lon, altitude_m, battery_voltage, solar_voltage, temperature, pressure, ' +
+                    'rssi, snr, gps_speed, gps_heading, gps_satellites, mems_accel_x, mems_accel_y, mems_accel_z, ' +
+                    'uv_index, ambient_lux, acoustic_event, firmware_version, uptime_s, tx_count, hdop, ' +
+                    'power_mode, sleep_ms, lora_sf, lora_bw, frequency_hz';
+
                 const { data: pathData, error } = await supabase
                     .from('telemetry')
-                    .select('lat, lon, time, altitude_m')
+                    .select(fullColumns)
                     .eq('device_id', activeBalloonId)
                     .gte('time', oneDayAgo)
                     .order('time', { ascending: true });
 
                 if (!error && pathData && pathData.length > 0) {
-                    const path = pathData.map((row: any) => ({
-                        lat: row.lat,
-                        lon: row.lon,
-                        time: new Date(row.time) as Date,
-                    }));
+                    const rows = pathData as unknown as TelemetryRow[];
+                    setSidebarTelemetry(rows);
+
+                    /* Only rows with a real GPS fix go into the flight path
+                     * (the map polyline). NOGPS rows still flow through
+                     * sidebarTelemetry above so sensors keep updating. */
+                    const path = rows
+                        .filter(r => r.lat !== null && r.lon !== null)
+                        .map(r => ({
+                            lat: r.lat as number,
+                            lon: r.lon as number,
+                            time: new Date(r.time),
+                        }));
                     setFlightPathData(path);
-                    
-                    const lastTime = path[path.length - 1].time;
-                    setPlaybackTime(lastTime instanceof Date ? lastTime : new Date(lastTime));
+
+                    if (path.length > 0) {
+                        setPlaybackTime(path[path.length - 1].time);
+                    } else {
+                        setPlaybackTime(new Date(rows[rows.length - 1].time));
+                    }
                 } else {
                     setFlightPathData([]);
+                    setSidebarTelemetry([]);
                     setPlaybackTime(null);
                 }
             } catch (error) {
@@ -285,6 +341,10 @@ export default function DashboardClient({ initialBalloonId = null, initialMode =
         }
 
         fetchFlightPath();
+        /* Re-poll while the sidebar is open so live ground-test data flows
+         * into the panel without requiring a click out and back in. */
+        const interval = activeBalloonId ? setInterval(fetchFlightPath, 15000) : null;
+        return () => { if (interval) clearInterval(interval); };
     }, [activeBalloonId]);
 
     // Get time range for timeline
@@ -351,19 +411,44 @@ export default function DashboardClient({ initialBalloonId = null, initialMode =
                 isSidebarOpen={isSidebarOpen}
             />
 
-            {/* Mission Sidebar - Systems Panel */}
+            {/* Mission Sidebar - Systems Panel.
+              * telemetryData is the full set of real rows (last 24h) so the
+              * sidebar can render sparklines + show the latest values. */}
             {activeBalloonId && (
                 <MissionSidebar
                     isOpen={isSidebarOpen}
                     onClose={() => setIsSidebarOpen(false)}
                     balloonId={activeBalloonId}
                     launcherName={activeBalloon?.launcher_name}
-                    telemetryData={flightPathData.map(point => ({
-                        time: point.time,
-                        battery_voltage: 3.7 + Math.random() * 0.5,
-                        temperature: -45 + Math.random() * 10,
-                        pressure: 120 + Math.random() * 20,
-                        rssi: -112 + Math.random() * 10,
+                    telemetryData={sidebarTelemetry.map(row => ({
+                        time: row.time,
+                        battery_voltage: row.battery_voltage ?? undefined,
+                        solar_voltage: row.solar_voltage ?? undefined,
+                        temperature: row.temperature ?? undefined,
+                        pressure: row.pressure ?? undefined,
+                        rssi: row.rssi ?? undefined,
+                        snr: row.snr ?? undefined,
+                        lat: row.lat ?? undefined,
+                        lon: row.lon ?? undefined,
+                        altitude_m: row.altitude_m ?? undefined,
+                        gps_speed: row.gps_speed ?? undefined,
+                        gps_heading: row.gps_heading ?? undefined,
+                        gps_satellites: row.gps_satellites ?? undefined,
+                        uv_index: row.uv_index ?? undefined,
+                        ambient_lux: row.ambient_lux ?? undefined,
+                        acoustic_event: row.acoustic_event ?? undefined,
+                        mems_accel_x: row.mems_accel_x ?? undefined,
+                        mems_accel_y: row.mems_accel_y ?? undefined,
+                        mems_accel_z: row.mems_accel_z ?? undefined,
+                        firmware_version: row.firmware_version ?? undefined,
+                        uptime_s: row.uptime_s ?? undefined,
+                        tx_count: row.tx_count ?? undefined,
+                        hdop: row.hdop ?? undefined,
+                        power_mode: row.power_mode ?? undefined,
+                        sleep_ms: row.sleep_ms ?? undefined,
+                        lora_sf: row.lora_sf ?? undefined,
+                        lora_bw: row.lora_bw ?? undefined,
+                        frequency_hz: row.frequency_hz ?? undefined,
                     }))}
                     timelineProps={flightPathData.length > 0 ? {
                         startTime: timelineStart,

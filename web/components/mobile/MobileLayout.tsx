@@ -218,19 +218,21 @@ export default function MobileLayout({ initialBalloonId = null }: MobileLayoutPr
         ? balloonData.find(b => b.id === selectedBalloonId) || null
         : null;
 
-    // Fetch flight path for selected balloon
+    // Flight path (map polyline) AND full per-row telemetry (sensor sheet).
     const [flightPathData, setFlightPathData] = useState<Array<{ lat: number; lon: number; time: Date }>>([]);
-    
+    const [sheetTelemetry, setSheetTelemetry] = useState<Array<Record<string, any>>>([]);
+
     useEffect(() => {
         async function fetchFlightPath() {
             if (!selectedBalloonId) {
                 setFlightPathData([]);
+                setSheetTelemetry([]);
                 return;
             }
 
-            // Skip if in iframe preview mode
             if (typeof window !== 'undefined' && window.self !== window.top) {
                 setFlightPathData([]);
+                setSheetTelemetry([]);
                 return;
             }
 
@@ -242,24 +244,29 @@ export default function MobileLayout({ initialBalloonId = null }: MobileLayoutPr
             try {
                 const supabase = createClient();
                 const oneDayAgo = new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString();
-                
-                // Fetch flight path data
+
+                const cols =
+                    'time, lat, lon, altitude_m, battery_voltage, solar_voltage, temperature, pressure, ' +
+                    'rssi, snr, gps_speed, gps_heading, gps_satellites, mems_accel_x, mems_accel_y, mems_accel_z, ' +
+                    'uv_index, ambient_lux, acoustic_event, firmware_version, uptime_s, tx_count, hdop, ' +
+                    'power_mode, sleep_ms, lora_sf, lora_bw, frequency_hz';
+
                 const { data: pathData, error } = await supabase
                     .from('telemetry')
-                    .select('lat, lon, time')
+                    .select(cols)
                     .eq('device_id', selectedBalloonId)
                     .gte('time', oneDayAgo)
                     .order('time', { ascending: true });
 
                 if (!error && pathData && pathData.length > 0) {
-                    const path = pathData.map((row: any) => ({
-                        lat: row.lat,
-                        lon: row.lon,
-                        time: new Date(row.time) as Date,
-                    }));
+                    setSheetTelemetry(pathData as Array<Record<string, any>>);
+                    const path = (pathData as any[])
+                        .filter(r => r.lat !== null && r.lon !== null)
+                        .map(r => ({ lat: r.lat as number, lon: r.lon as number, time: new Date(r.time) }));
                     setFlightPathData(path);
                 } else {
                     setFlightPathData([]);
+                    setSheetTelemetry([]);
                 }
             } catch (error) {
                 console.debug('Error fetching flight path:', error);
@@ -267,6 +274,8 @@ export default function MobileLayout({ initialBalloonId = null }: MobileLayoutPr
         }
 
         fetchFlightPath();
+        const interval = selectedBalloonId ? setInterval(fetchFlightPath, 15000) : null;
+        return () => { if (interval) clearInterval(interval); };
     }, [selectedBalloonId]);
 
     const handleBalloonClick = (balloonId: string) => {
@@ -332,13 +341,36 @@ export default function MobileLayout({ initialBalloonId = null }: MobileLayoutPr
                         velocity_heading: selectedBalloon.velocity_heading,
                         launcher_name: selectedBalloon.launcher_name,
                     }}
-                    telemetryData={flightPathData.length > 0 ? flightPathData.map(point => ({
-                        time: point.time,
-                        battery_voltage: 3.7 + Math.random() * 0.5,
-                        temperature: -45 + Math.random() * 10,
-                        pressure: 120 + Math.random() * 20,
-                        rssi: -112 + Math.random() * 10,
-                    })) : []}
+                    telemetryData={sheetTelemetry.map((row: any) => ({
+                        time: row.time,
+                        battery_voltage: row.battery_voltage ?? undefined,
+                        solar_voltage: row.solar_voltage ?? undefined,
+                        temperature: row.temperature ?? undefined,
+                        pressure: row.pressure ?? undefined,
+                        rssi: row.rssi ?? undefined,
+                        snr: row.snr ?? undefined,
+                        lat: row.lat ?? undefined,
+                        lon: row.lon ?? undefined,
+                        altitude_m: row.altitude_m ?? undefined,
+                        gps_speed: row.gps_speed ?? undefined,
+                        gps_heading: row.gps_heading ?? undefined,
+                        gps_satellites: row.gps_satellites ?? undefined,
+                        uv_index: row.uv_index ?? undefined,
+                        ambient_lux: row.ambient_lux ?? undefined,
+                        acoustic_event: row.acoustic_event ?? undefined,
+                        mems_accel_x: row.mems_accel_x ?? undefined,
+                        mems_accel_y: row.mems_accel_y ?? undefined,
+                        mems_accel_z: row.mems_accel_z ?? undefined,
+                        firmware_version: row.firmware_version ?? undefined,
+                        uptime_s: row.uptime_s ?? undefined,
+                        tx_count: row.tx_count ?? undefined,
+                        hdop: row.hdop ?? undefined,
+                        power_mode: row.power_mode ?? undefined,
+                        sleep_ms: row.sleep_ms ?? undefined,
+                        lora_sf: row.lora_sf ?? undefined,
+                        lora_bw: row.lora_bw ?? undefined,
+                        frequency_hz: row.frequency_hz ?? undefined,
+                    }))}
                 />
             )}
 

@@ -20,9 +20,32 @@ interface BottomSheetProps {
     telemetryData?: Array<{
         time: Date | string;
         battery_voltage?: number;
+        solar_voltage?: number;
         temperature?: number;
         pressure?: number;
         rssi?: number;
+        snr?: number;
+        lat?: number;
+        lon?: number;
+        altitude_m?: number;
+        gps_speed?: number;
+        gps_heading?: number;
+        gps_satellites?: number;
+        uv_index?: number;
+        ambient_lux?: number;
+        acoustic_event?: number;
+        mems_accel_x?: number;
+        mems_accel_y?: number;
+        mems_accel_z?: number;
+        firmware_version?: string;
+        uptime_s?: number;
+        tx_count?: number;
+        hdop?: number;
+        power_mode?: string;
+        sleep_ms?: number;
+        lora_sf?: number;
+        lora_bw?: number;
+        frequency_hz?: number;
     }>;
 }
 
@@ -52,35 +75,19 @@ export default function BottomSheet({
     const PEEK_HEIGHT = sheetHeight * 0.25; // 25% peek
     const EXPANDED_HEIGHT = sheetHeight * 0.9; // 90% expanded
 
-    // Generate mock data if no telemetry data provided
-    const generateMockData = (baseValue: number, variance: number, count: number = 24) => {
-        const now = new Date();
-        return Array.from({ length: count }, (_, i) => {
-            const time = new Date(now.getTime() - (count - i) * 60 * 60 * 1000);
-            const value = baseValue + (Math.random() - 0.5) * variance;
-            return { time, value: Math.max(0, value) };
-        });
-    };
+    const latestTelemetry: Partial<NonNullable<BottomSheetProps['telemetryData']>[number]> =
+        telemetryData.length > 0 ? telemetryData[telemetryData.length - 1] : {};
 
-    const latestTelemetry = telemetryData.length > 0 
-        ? telemetryData[telemetryData.length - 1]
-        : { battery_voltage: 3.72, temperature: -45.2, pressure: 120.5, rssi: -112 };
+    const seriesFor = (sel: (t: NonNullable<BottomSheetProps['telemetryData']>[number]) => number | undefined) =>
+        telemetryData
+            .map(t => ({ time: t.time, raw: sel(t) }))
+            .filter(p => typeof p.raw === 'number' && Number.isFinite(p.raw))
+            .map(p => ({ time: p.time, value: p.raw as number }));
 
-    const batteryData = telemetryData.length > 0
-        ? telemetryData.map(t => ({ time: t.time, value: t.battery_voltage ?? 3.7 }))
-        : generateMockData(3.7, 0.3, 24);
-
-    const temperatureData = telemetryData.length > 0
-        ? telemetryData.map(t => ({ time: t.time, value: t.temperature ?? -45 }))
-        : generateMockData(-45, 5, 24);
-
-    const pressureData = telemetryData.length > 0
-        ? telemetryData.map(t => ({ time: t.time, value: t.pressure ?? 120 }))
-        : generateMockData(120, 10, 24);
-
-    const rssiData = telemetryData.length > 0
-        ? telemetryData.map(t => ({ time: t.time, value: t.rssi ?? -112 }))
-        : generateMockData(-112, 5, 24);
+    const batteryData = seriesFor(t => t.battery_voltage);
+    const temperatureData = seriesFor(t => t.temperature);
+    const pressureData = seriesFor(t => t.pressure);
+    const rssiData = seriesFor(t => t.rssi);
 
     // Reset state when sheet opens/closes
     useEffect(() => {
@@ -202,8 +209,8 @@ export default function BottomSheet({
                                     data={batteryData}
                                     dataKey="V_bat"
                                     color="#4a90d9"
-                                    currentValue={latestTelemetry.battery_voltage ?? 3.72}
-                                    unit="V"
+                                    currentValue={latestTelemetry.battery_voltage ?? 0}
+                                    unit={latestTelemetry.battery_voltage !== undefined ? 'V' : ' —'}
                                 />
                             </div>
 
@@ -213,8 +220,8 @@ export default function BottomSheet({
                                     data={temperatureData}
                                     dataKey="temp"
                                     color="#c44"
-                                    currentValue={latestTelemetry.temperature ?? -45.2}
-                                    unit="°C"
+                                    currentValue={latestTelemetry.temperature ?? 0}
+                                    unit={latestTelemetry.temperature !== undefined ? '°C' : ' —'}
                                 />
                             </div>
 
@@ -224,8 +231,8 @@ export default function BottomSheet({
                                     data={pressureData}
                                     dataKey="pres"
                                     color="#4a9"
-                                    currentValue={latestTelemetry.pressure ?? 120.5}
-                                    unit="mbar"
+                                    currentValue={latestTelemetry.pressure ?? 0}
+                                    unit={latestTelemetry.pressure !== undefined ? 'mbar' : ' —'}
                                 />
                             </div>
 
@@ -235,44 +242,68 @@ export default function BottomSheet({
                                     data={rssiData}
                                     dataKey="rssi"
                                     color="#b84"
-                                    currentValue={latestTelemetry.rssi ?? -112}
-                                    unit="dBm"
+                                    currentValue={latestTelemetry.rssi ?? 0}
+                                    unit={latestTelemetry.rssi !== undefined ? 'dBm' : ' —'}
                                 />
                             </div>
                         </div>
 
-                        {/* Health Grid - Large Tiles */}
+                        {/* Health Grid — values pulled from the latest telemetry row.
+                          * Each tile shows "—" when the firmware hasn't reported that field. */}
                         <div className="grid grid-cols-2 gap-3">
                             <div className="bg-[#141414] border border-[#333] p-4 rounded">
                                 <div className="text-[10px] font-semibold text-[#666] uppercase tracking-wider mb-2">Battery</div>
                                 <div className="font-mono text-[18px] text-[#e5e5e5] font-bold">
-                                    {latestTelemetry.battery_voltage?.toFixed(2) ?? '3.72'}V
+                                    {latestTelemetry.battery_voltage !== undefined ? `${latestTelemetry.battery_voltage.toFixed(2)}V` : '—'}
                                 </div>
                                 <div className="text-[10px] text-[#666] mt-1">
-                                    {Math.min(100, Math.max(0, (((latestTelemetry.battery_voltage ?? 3.72) - 3.0) / (4.2 - 3.0)) * 100)).toFixed(0)}% capacity
+                                    {latestTelemetry.battery_voltage !== undefined
+                                        ? `${Math.min(100, Math.max(0, ((latestTelemetry.battery_voltage - 3.0) / (4.2 - 3.0)) * 100)).toFixed(0)}% capacity`
+                                        : 'no data'}
                                 </div>
                             </div>
 
                             <div className="bg-[#141414] border border-[#333] p-4 rounded">
                                 <div className="text-[10px] font-semibold text-[#666] uppercase tracking-wider mb-2">Solar</div>
-                                <div className="font-mono text-[18px] text-[#e5e5e5] font-bold">Active</div>
-                                <div className="text-[10px] text-[#666] mt-1">Day cycle</div>
+                                <div className="font-mono text-[18px] text-[#e5e5e5] font-bold">
+                                    {latestTelemetry.solar_voltage !== undefined ? `${Math.round(latestTelemetry.solar_voltage * 1000)} mV` : '—'}
+                                </div>
+                                <div className="text-[10px] text-[#666] mt-1">
+                                    {latestTelemetry.solar_voltage !== undefined && latestTelemetry.solar_voltage > 0.5 ? 'charging' : 'idle'}
+                                </div>
                             </div>
 
                             <div className="bg-[#141414] border border-[#333] p-4 rounded">
                                 <div className="text-[10px] font-semibold text-[#666] uppercase tracking-wider mb-2">Temp</div>
                                 <div className="font-mono text-[18px] text-[#e5e5e5] font-bold">
-                                    {latestTelemetry.temperature?.toFixed(1) ?? '-45.2'}°C
+                                    {latestTelemetry.temperature !== undefined ? `${latestTelemetry.temperature.toFixed(1)}°C` : '—'}
                                 </div>
-                                <div className="text-[10px] text-[#666] mt-1">Stratosphere</div>
+                                <div className="text-[10px] text-[#666] mt-1">{latestTelemetry.pressure !== undefined ? `${latestTelemetry.pressure.toFixed(1)} mbar` : 'pressure: —'}</div>
                             </div>
 
                             <div className="bg-[#141414] border border-[#333] p-4 rounded">
                                 <div className="text-[10px] font-semibold text-[#666] uppercase tracking-wider mb-2">Signal</div>
                                 <div className="font-mono text-[18px] text-[#e5e5e5] font-bold">
-                                    {Math.round(latestTelemetry.rssi ?? -112)} dBm
+                                    {latestTelemetry.rssi !== undefined ? `${Math.round(latestTelemetry.rssi)} dBm` : '—'}
                                 </div>
-                                <div className="text-[10px] text-[#666] mt-1">LoRaWAN</div>
+                                <div className="text-[10px] text-[#666] mt-1">
+                                    {latestTelemetry.snr !== undefined ? `SNR ${latestTelemetry.snr.toFixed(1)} dB` : 'snr: —'}
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* Sensors */}
+                        <div className="bg-[#141414] border border-[#333] p-4 rounded">
+                            <div className="text-[10px] font-semibold text-[#666] uppercase tracking-wider mb-2">Sensors</div>
+                            <div className="grid grid-cols-2 gap-x-4 gap-y-1 font-mono text-[11px] text-[#999]">
+                                <div className="flex justify-between"><span>uv_index</span><span className="text-[#e5e5e5]">{latestTelemetry.uv_index ?? '—'}</span></div>
+                                <div className="flex justify-between"><span>lux</span><span className="text-[#e5e5e5]">{latestTelemetry.ambient_lux ?? '—'}</span></div>
+                                <div className="flex justify-between"><span>acoustic</span><span className={latestTelemetry.acoustic_event ? 'text-[#c44]' : 'text-[#e5e5e5]'}>{latestTelemetry.acoustic_event === undefined ? '—' : latestTelemetry.acoustic_event ? 'event' : 'quiet'}</span></div>
+                                <div className="flex justify-between"><span>sats</span><span className="text-[#e5e5e5]">{latestTelemetry.gps_satellites ?? '—'}</span></div>
+                                <div className="flex justify-between"><span>accel_x</span><span className="text-[#e5e5e5]">{latestTelemetry.mems_accel_x !== undefined ? latestTelemetry.mems_accel_x.toFixed(2) : '—'}</span></div>
+                                <div className="flex justify-between"><span>accel_y</span><span className="text-[#e5e5e5]">{latestTelemetry.mems_accel_y !== undefined ? latestTelemetry.mems_accel_y.toFixed(2) : '—'}</span></div>
+                                <div className="flex justify-between"><span>accel_z</span><span className="text-[#e5e5e5]">{latestTelemetry.mems_accel_z !== undefined ? latestTelemetry.mems_accel_z.toFixed(2) : '—'}</span></div>
+                                <div className="flex justify-between"><span>fw</span><span className="text-[#e5e5e5]">{latestTelemetry.firmware_version ?? '—'}</span></div>
                             </div>
                         </div>
 

@@ -34,6 +34,22 @@ export interface TelemetryData {
     ambient_lux?: number | null;
     /** 0 = quiet, 1 = acoustic event detected (mic RMS > 4x noise floor) */
     acoustic_event?: number | null;
+
+    /* Firmware-reported system state. Only populated when the device sends a
+     * JSON payload via the TTN Payload Formatter that includes these keys.
+     * The current 35-byte binary format does not carry them. */
+    firmware_version?: string | null;
+    uptime_s?: number | null;
+    tx_count?: number | null;
+    hdop?: number | null;
+    power_mode?: string | null;
+    sleep_ms?: number | null;
+
+    /* LoRa link characteristics, sourced from TTN rx settings rather than
+     * the device payload. These are always known per-uplink. */
+    lora_sf?: number | null;
+    lora_bw?: number | null;
+    frequency_hz?: number | null;
 }
 
 export interface TTNWebhookPayload {
@@ -48,6 +64,37 @@ export interface TTNWebhookPayload {
             rssi?: number;
             snr?: number;
         }>;
+        /* TTN's per-uplink radio settings. Shape per LoRaWAN stack v3:
+         * settings.data_rate.lora.{spreading_factor,bandwidth,coding_rate}
+         * settings.frequency = carrier frequency in Hz (string). */
+        settings?: {
+            data_rate?: {
+                lora?: {
+                    spreading_factor?: number;
+                    bandwidth?: number;
+                };
+            };
+            frequency?: string | number;
+        };
+    };
+}
+
+/** Pull LoRa SF / bandwidth / carrier frequency out of a TTN uplink. */
+function extractLoraSettings(uplink: TTNWebhookPayload['uplink_message']): {
+    lora_sf: number | null;
+    lora_bw: number | null;
+    frequency_hz: number | null;
+} {
+    const settings = uplink?.settings;
+    const lora = settings?.data_rate?.lora;
+    const freqRaw = settings?.frequency;
+    const freq = freqRaw === undefined ? null
+        : typeof freqRaw === 'string' ? parseInt(freqRaw, 10)
+        : freqRaw;
+    return {
+        lora_sf: typeof lora?.spreading_factor === 'number' ? lora.spreading_factor : null,
+        lora_bw: typeof lora?.bandwidth === 'number' ? lora.bandwidth : null,
+        frequency_hz: typeof freq === 'number' && Number.isFinite(freq) ? freq : null,
     };
 }
 
@@ -64,14 +111,18 @@ export function parseTTNPayload(payload: TTNWebhookPayload): TelemetryData | nul
         return null;
     }
 
+    const loraSettings = extractLoraSettings(uplinkMessage);
+
     // Try JSON format first (TTN Payload Formatter)
     if (uplinkMessage.decoded_payload) {
-        return parseJSONPayload(deviceId, receivedAt, uplinkMessage.decoded_payload, uplinkMessage.rx_metadata);
+        const parsed = parseJSONPayload(deviceId, receivedAt, uplinkMessage.decoded_payload, uplinkMessage.rx_metadata);
+        return { ...parsed, ...loraSettings };
     }
 
     // Fall back to binary format
     if (uplinkMessage.frm_payload) {
-        return parseBinaryPayload(deviceId, receivedAt, uplinkMessage.frm_payload, uplinkMessage.rx_metadata);
+        const parsed = parseBinaryPayload(deviceId, receivedAt, uplinkMessage.frm_payload, uplinkMessage.rx_metadata);
+        return parsed ? { ...parsed, ...loraSettings } : null;
     }
 
     return null;
@@ -94,29 +145,70 @@ function parseJSONPayload(
     const rawAlt = parseFloat(decoded.altitude) || parseFloat(decoded.altitude_m) || 0;
     const hasGpsFix = rawLat !== 0 && rawLon !== 0;
 
+    /* Number / string coercion helpers that preserve null for missing keys
+     * but accept either canonical name or a few common aliases the firmware
+     * payload formatter may use. */
+    const numOr = (...keys: string[]): number | null => {
+        for (const k of keys) {
+            if (decoded[k] !== undefined && decoded[k] !== null && decoded[k] !== '') {
+                const n = parseFloat(String(decoded[k]));
+                if (Number.isFinite(n)) return n;
+            }
+        }
+        return null;
+    };
+    const intOr = (...keys: string[]): number | null => {
+        const n = numOr(...keys);
+        return n === null ? null : Math.trunc(n);
+    };
+    const strOr = (...keys: string[]): string | null => {
+        for (const k of keys) {
+            if (decoded[k] !== undefined && decoded[k] !== null && decoded[k] !== '') {
+                return String(decoded[k]);
+            }
+        }
+        return null;
+    };
+
     return {
         device_id: deviceId,
         time: receivedAt,
         lat: hasGpsFix ? rawLat : null,
         lon: hasGpsFix ? rawLon : null,
         altitude_m: hasGpsFix ? rawAlt : null,
-        velocity_x: decoded.velocity_x !== undefined ? parseFloat(decoded.velocity_x) : null,
-        velocity_y: decoded.velocity_y !== undefined ? parseFloat(decoded.velocity_y) : null,
-        temperature: decoded.temperature !== undefined ? parseFloat(decoded.temperature) : null,
-        pressure: decoded.pressure !== undefined ? parseFloat(decoded.pressure) : null,
-        solar_voltage: decoded.solar_voltage !== undefined ? parseFloat(decoded.solar_voltage) : null,
-        battery_voltage: decoded.battery_voltage !== undefined ? parseFloat(decoded.battery_voltage) : null,
-        rssi: rxData?.rssi !== undefined ? parseFloat(String(rxData.rssi)) : decoded.rssi !== undefined ? parseFloat(decoded.rssi) : null,
-        snr: rxData?.snr !== undefined ? parseFloat(String(rxData.snr)) : decoded.snr !== undefined ? parseFloat(decoded.snr) : null,
-        gps_speed: decoded.gps_speed !== undefined ? parseFloat(decoded.gps_speed) : null,
-        gps_heading: decoded.gps_heading !== undefined ? parseFloat(decoded.gps_heading) : null,
-        gps_satellites: decoded.gps_satellites !== undefined ? parseInt(String(decoded.gps_satellites)) : null,
-        mems_accel_x: decoded.mems_accel_x !== undefined ? parseFloat(decoded.mems_accel_x) : null,
-        mems_accel_y: decoded.mems_accel_y !== undefined ? parseFloat(decoded.mems_accel_y) : null,
-        mems_accel_z: decoded.mems_accel_z !== undefined ? parseFloat(decoded.mems_accel_z) : null,
-        uv_index: decoded.uv_index !== undefined ? parseInt(String(decoded.uv_index)) : null,
-        ambient_lux: decoded.ambient_lux !== undefined ? parseFloat(decoded.ambient_lux) : null,
-        acoustic_event: decoded.acoustic_event !== undefined ? parseInt(String(decoded.acoustic_event), 10) : null,
+        velocity_x: numOr('velocity_x'),
+        velocity_y: numOr('velocity_y'),
+        temperature: numOr('temperature', 'temp_c'),
+        pressure: numOr('pressure', 'pressure_hpa', 'pressure_mbar'),
+        solar_voltage: (() => {
+            const v = numOr('solar_voltage', 'solar_v');
+            if (v !== null) return v;
+            const mv = numOr('solar_mv');
+            return mv === null ? null : mv / 1000;
+        })(),
+        battery_voltage: (() => {
+            const v = numOr('battery_voltage', 'battery_v', 'vbat');
+            if (v !== null) return v;
+            const mv = numOr('battery_mv', 'vbat_mv');
+            return mv === null ? null : mv / 1000;
+        })(),
+        rssi: rxData?.rssi !== undefined ? parseFloat(String(rxData.rssi)) : numOr('rssi'),
+        snr: rxData?.snr !== undefined ? parseFloat(String(rxData.snr)) : numOr('snr'),
+        gps_speed: numOr('gps_speed', 'ground_spd', 'speed'),
+        gps_heading: numOr('gps_heading', 'heading'),
+        gps_satellites: intOr('gps_satellites', 'gps_sats', 'sats'),
+        mems_accel_x: numOr('mems_accel_x', 'accel_x'),
+        mems_accel_y: numOr('mems_accel_y', 'accel_y'),
+        mems_accel_z: numOr('mems_accel_z', 'accel_z'),
+        uv_index: intOr('uv_index'),
+        ambient_lux: numOr('ambient_lux', 'lux'),
+        acoustic_event: intOr('acoustic_event', 'acoustic'),
+        firmware_version: strOr('firmware_version', 'firmware', 'fw'),
+        uptime_s: intOr('uptime_s', 'uptime'),
+        tx_count: intOr('tx_count', 'tx'),
+        hdop: numOr('hdop'),
+        power_mode: strOr('power_mode', 'power'),
+        sleep_ms: intOr('sleep_ms', 'sleep'),
     };
 }
 
