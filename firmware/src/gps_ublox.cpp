@@ -63,6 +63,16 @@ bool gps_ublox_get_fix(gps_fix_t* fix, uint32_t timeout_ms) {
     GPS_SERIAL.flush();
     delay(10);
 
+    /* Re-apply AIRBORNE_4G dynamic model on every wake.  Cosmic-ray
+     * SEU rate at 20 km altitude is ~100x sea level; over a 14-day
+     * flight there's a non-trivial chance one of the upsets lands on
+     * the u-blox CFG-NAV5 register and reverts DYNMODEL to "Portable"
+     * (12 km altitude ceiling) — we'd silently stop getting fixes at
+     * cruise altitude.  UBX-CFG-NAV5 is idempotent and adds ~60 ms /
+     * cycle of GPS-active time, ~1.4 J/day — invisible against the
+     * 12 J/cycle baseline. */
+    (void)gps_ublox_set_airborne_4g();
+
     uint32_t deadline = millis() + timeout_ms;
     uint32_t last_kick = millis();
     while (millis() < deadline) {
