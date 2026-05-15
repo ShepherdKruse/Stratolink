@@ -228,7 +228,6 @@ export default function MissionMap({
                     'space-color': 'rgb(5, 5, 5)',
                     'star-intensity': 0.4,
                 } : undefined}
-                terrain={projection === 'globe' ? { source: 'mapbox-dem', exaggeration: 1.5 } : undefined}
                 interactiveLayerIds={['balloon-markers-active', 'balloon-markers-landed']}
                 onClick={handleMarkerClick}
                 cursor="pointer"
