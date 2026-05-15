@@ -33,6 +33,16 @@ export interface V2FlightPoint {
     t: number;
 }
 
+/** Strict WGS84 — anything else crashes Mapbox (fitBounds, layers). */
+export function isValidLngLat(lat: number, lon: number): boolean {
+    return Number.isFinite(lat)
+        && Number.isFinite(lon)
+        && lat >= -90
+        && lat <= 90
+        && lon >= -180
+        && lon <= 180;
+}
+
 interface V2MissionMapProps {
     /** All balloons to render as markers. */
     balloons: V2Balloon[];
@@ -72,6 +82,17 @@ export default function V2MissionMap({
     const [styleLoaded, setStyleLoaded] = useState(false);
     const [webglOk, setWebglOk] = useState<boolean | null>(null);
 
+    /* Telemetry can contain legacy / corrupt rows (e.g. lng stored in lat).
+     * Never pass those to Mapbox — they hard-throw inside fitBounds. */
+    const validBalloons = useMemo(
+        () => balloons.filter(b => isValidLngLat(b.lat, b.lon)),
+        [balloons],
+    );
+    const validFlightPath = useMemo(
+        () => flightPath.filter(p => isValidLngLat(p.lat, p.lon)),
+        [flightPath],
+    );
+
     useEffect(() => {
         setWebglOk(isWebGLAvailable());
     }, []);
@@ -81,7 +102,7 @@ export default function V2MissionMap({
 
     /* Initial view — center on first balloon if any, else continental US. */
     const initialView = useMemo(() => {
-        const focus = balloons.find(b => b.id === activeId) ?? balloons[0];
+        const focus = validBalloons.find(b => b.id === activeId) ?? validBalloons[0];
         if (focus) {
             return { longitude: focus.lon, latitude: focus.lat, zoom: 6 };
         }
@@ -97,46 +118,56 @@ export default function V2MissionMap({
         const map = mapRef.current;
         if (!map || !styleLoaded) return;
 
-        const active = balloons.find(b => b.id === activeId);
-        const lats: number[] = [];
-        const lons: number[] = [];
-        if (active) { lats.push(active.lat); lons.push(active.lon); }
-        flightPath.forEach(p => {
-            if (playbackT !== null && p.t > playbackT) return;
-            lats.push(p.lat);
-            lons.push(p.lon);
-        });
-        /* If we have no active selection, fit to the whole fleet. */
-        if (lats.length === 0) {
-            balloons.forEach(b => { lats.push(b.lat); lons.push(b.lon); });
-        }
-        if (lats.length === 0) return;
-
-        const minLat = Math.min(...lats);
-        const maxLat = Math.max(...lats);
-        const minLon = Math.min(...lons);
-        const maxLon = Math.max(...lons);
-
-        if (lats.length === 1) {
-            map.flyTo({
-                center: [lons[0], lats[0]],
-                zoom: 8,
-                duration: 1200,
+        /* Keep camera updates out of uncaught rejects from mapbox-gl. */
+        try {
+            const active = validBalloons.find(b => b.id === activeId);
+            const lats: number[] = [];
+            const lons: number[] = [];
+            if (active) {
+                lats.push(active.lat);
+                lons.push(active.lon);
+            }
+            validFlightPath.forEach(p => {
+                if (playbackT !== null && p.t > playbackT) return;
+                lats.push(p.lat);
+                lons.push(p.lon);
             });
-            return;
-        }
+            /* If we have no active selection, fit to the whole fleet. */
+            if (lats.length === 0) {
+                validBalloons.forEach(b => { lats.push(b.lat); lons.push(b.lon); });
+            }
+            if (lats.length === 0) return;
 
-        const bounds: LngLatBoundsLike = [[minLon, minLat], [maxLon, maxLat]];
-        map.fitBounds(bounds, {
-            padding: { top: 60, bottom: 60, left: 60, right: 60 },
-            duration: 1200,
-            maxZoom: 11,
-        });
-    }, [autoFit, styleLoaded, activeId, balloons, flightPath, playbackT]);
+            const minLat = Math.min(...lats);
+            const maxLat = Math.max(...lats);
+            const minLon = Math.min(...lons);
+            const maxLon = Math.max(...lons);
+
+            if (minLat < -90 || maxLat > 90 || minLon < -180 || maxLon > 180) return;
+
+            if (lats.length === 1) {
+                map.flyTo({
+                    center: [lons[0], lats[0]],
+                    zoom: 8,
+                    duration: 1200,
+                });
+                return;
+            }
+
+            const bounds: LngLatBoundsLike = [[minLon, minLat], [maxLon, maxLat]];
+            map.fitBounds(bounds, {
+                padding: { top: 60, bottom: 60, left: 60, right: 60 },
+                duration: 1200,
+                maxZoom: 11,
+            });
+        } catch (e) {
+            console.warn('V2MissionMap camera update skipped', e);
+        }
+    }, [autoFit, styleLoaded, activeId, validBalloons, validFlightPath, playbackT]);
 
     const balloonGeoJSON = useMemo(() => ({
         type: 'FeatureCollection' as const,
-        features: balloons.map(b => ({
+        features: validBalloons.map(b => ({
             type: 'Feature' as const,
             id: b.id,
             geometry: { type: 'Point' as const, coordinates: [b.lon, b.lat] },
@@ -146,13 +177,13 @@ export default function V2MissionMap({
                 isActive: b.id === activeId ? 1 : 0,
             },
         })),
-    }), [balloons, activeId]);
+    }), [validBalloons, activeId]);
 
     /* Trail: filter to playback time, then to LineString. */
     const flightPathGeoJSON = useMemo(() => {
         const pts = (playbackT === null
-            ? flightPath
-            : flightPath.filter(p => p.t <= playbackT)
+            ? validFlightPath
+            : validFlightPath.filter(p => p.t <= playbackT)
         );
         if (pts.length < 2) return null;
         return {
@@ -166,7 +197,7 @@ export default function V2MissionMap({
                 properties: {},
             }],
         };
-    }, [flightPath, playbackT]);
+    }, [validFlightPath, playbackT]);
 
     if (webglOk === false) {
         return (
