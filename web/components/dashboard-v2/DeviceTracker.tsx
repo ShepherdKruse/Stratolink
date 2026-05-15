@@ -11,13 +11,14 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import {
-    Age, Chart, Chrome, KV, MapView,
+    Age, Chart, Chrome, KV,
     fmt,
     DASHBOARD_V2_TABS,
     type TelemetryRow,
 } from './atoms';
 import { useTelemetry, type DeviceSummary, type SubsystemFreshness } from './useTelemetry';
 import { useTickingNow, useElementSize, ConnectionPill, V1Link, fmtPressure } from './shared';
+import V2MissionMap, { type V2Balloon, type V2FlightPoint } from './V2MissionMap';
 
 type RangeKey = '1h' | '6h' | '24h' | 'all';
 const RANGE_MS: Record<RangeKey, number | null> = {
@@ -126,7 +127,13 @@ export default function DeviceTrackerScreen() {
                 now={now}
             />
 
-            <main style={{ flex: 1, display: 'grid', gridTemplateColumns: '1fr 1fr', minHeight: 0 }}>
+            <main style={{
+                flex: 1,
+                display: 'grid',
+                gridTemplateColumns: 'minmax(0, 1fr) minmax(0, 1fr)',
+                minHeight: 0,
+                minWidth: 0,
+            }}>
                 <MapColumn
                     visibleRows={visibleRows}
                     scrubRow={scrubRow}
@@ -171,6 +178,11 @@ function DeviceHeaderStrip({ device, devices, onSelect, scrubRow, lastFixRow, fr
             gap: 24,
             alignItems: 'center',
             flexShrink: 0,
+            /* The seven metrics + selector can be wider than a small viewport.
+             * Allow the strip itself to scroll instead of pushing the page. */
+            minWidth: 0,
+            overflowX: 'auto',
+            scrollbarWidth: 'thin',
         }}>
             <div>
                 <div className="sl-label-xs">DEVICE</div>
@@ -270,31 +282,41 @@ function MapColumn({ visibleRows, scrubRow, selectedDevice, now }: {
     selectedDevice: DeviceSummary | null;
     now: number;
 }) {
-    const { ref, width, height } = useElementSize(720, 500);
-
-    const trackPoints = visibleRows
+    const trackPoints: V2FlightPoint[] = useMemo(() => visibleRows
         .filter(r => r.lat !== null && r.lon !== null)
-        .map(r => ({ lat: r.lat as number, lon: r.lon as number, alt: r.alt }));
+        .map(r => ({ lat: r.lat as number, lon: r.lon as number, t: r.t })),
+        [visibleRows]);
 
-    const lats = trackPoints.map(p => p.lat);
-    const lons = trackPoints.map(p => p.lon);
-    if (selectedDevice?.launchLat && selectedDevice?.launchLon) {
-        lats.push(selectedDevice.launchLat);
-        lons.push(selectedDevice.launchLon);
-    }
-    const minLat = lats.length ? Math.min(...lats) : 36;
-    const maxLat = lats.length ? Math.max(...lats) : 39.5;
-    const minLon = lons.length ? Math.min(...lons) : -124;
-    const maxLon = lons.length ? Math.max(...lons) : -120.5;
-    const padLat = Math.max(0.05, (maxLat - minLat) * 0.4);
-    const padLon = Math.max(0.05, (maxLon - minLon) * 0.4);
+    /* Single balloon at the scrub time (or last fix if scrub has no fix). */
+    const balloon: V2Balloon | null = useMemo(() => {
+        if (!selectedDevice) return null;
+        if (scrubRow && scrubRow.lat !== null && scrubRow.lon !== null) {
+            return {
+                id: selectedDevice.id,
+                lat: scrubRow.lat,
+                lon: scrubRow.lon,
+                altitude_m: scrubRow.alt,
+            };
+        }
+        const lastFix = trackPoints[trackPoints.length - 1];
+        if (lastFix) {
+            return {
+                id: selectedDevice.id,
+                lat: lastFix.lat,
+                lon: lastFix.lon,
+                altitude_m: scrubRow?.alt ?? null,
+            };
+        }
+        return null;
+    }, [selectedDevice, scrubRow, trackPoints]);
 
     const distanceKm = useMemo(() => {
         let total = 0;
         for (let i = 1; i < trackPoints.length; i++) {
-            const a = trackPoints[i - 1];
-            const b = trackPoints[i];
-            total += haversineKm(a.lat, a.lon, b.lat, b.lon);
+            total += haversineKm(
+                trackPoints[i - 1].lat, trackPoints[i - 1].lon,
+                trackPoints[i].lat, trackPoints[i].lon,
+            );
         }
         return total;
     }, [trackPoints]);
@@ -303,23 +325,24 @@ function MapColumn({ visibleRows, scrubRow, selectedDevice, now }: {
     const validTemps = visibleRows.map(r => r.temp).filter((v): v is number => v !== null && Number.isFinite(v));
 
     return (
-        <div ref={ref} style={{ position: 'relative', borderRight: '1px solid var(--sl-border)', minHeight: 0 }}>
-            <MapView
-                width={width}
-                height={height}
-                track={visibleRows.map(r => r.lat !== null && r.lon !== null ? [r.lat, r.lon] as [number, number] : [null, null] as [null, null])}
-                focus={scrubRow?.lat !== null && scrubRow?.lat !== undefined && scrubRow?.lon !== null && scrubRow?.lon !== undefined
-                    ? { lat: scrubRow.lat, lon: scrubRow.lon }
-                    : undefined}
-                label={selectedDevice?.callsign ?? selectedDevice?.id ?? undefined}
-                viewBoxLat={[minLat - padLat, maxLat + padLat]}
-                viewBoxLon={[minLon - padLon, maxLon + padLon]}
-                showStates={false}
+        <div style={{
+            position: 'relative',
+            borderRight: '1px solid var(--sl-border)',
+            minHeight: 0,
+            minWidth: 0,
+            overflow: 'hidden',
+        }}>
+            <V2MissionMap
+                balloons={balloon ? [balloon] : []}
+                activeId={selectedDevice?.id ?? null}
+                flightPath={trackPoints}
+                playbackT={scrubRow?.t ?? null}
+                projection="mercator"
             />
 
             {/* Top-left badges */}
-            <div style={{ position: 'absolute', top: 14, left: 14, display: 'flex', gap: 6 }}>
-                <span className="sl-pill dim">REGIONAL</span>
+            <div style={{ position: 'absolute', top: 14, left: 14, display: 'flex', gap: 6, zIndex: 1 }}>
+                <span className="sl-pill dim">MAPBOX · DARK</span>
                 {scrubRow?.lat !== null && scrubRow?.lat !== undefined && (
                     <span className="sl-pill dim">
                         {scrubRow.lat.toFixed(2)}° N · {Math.abs(scrubRow.lon as number).toFixed(2)}° W
@@ -331,7 +354,16 @@ function MapColumn({ visibleRows, scrubRow, selectedDevice, now }: {
             </div>
 
             {/* Track stats */}
-            <div className="sl-panel" style={{ position: 'absolute', bottom: 14, right: 14, width: 200, fontSize: 11 }}>
+            <div
+                className="sl-panel"
+                style={{
+                    position: 'absolute', bottom: 14, right: 14,
+                    width: 200, fontSize: 11,
+                    background: 'rgba(11, 14, 19, 0.85)',
+                    backdropFilter: 'blur(6px)',
+                    zIndex: 1,
+                }}
+            >
                 <div className="sl-panel-h">TRACK</div>
                 <div style={{ padding: 10 }}>
                     <KV k="distance" v={`${distanceKm.toFixed(2)} km`} />
@@ -378,7 +410,7 @@ function ChartColumn({ visibleRows, rows, scrubT, onScrub, onResetScrub, range, 
         : '—';
 
     return (
-        <div style={{ display: 'flex', flexDirection: 'column', minHeight: 0 }}>
+        <div style={{ display: 'flex', flexDirection: 'column', minHeight: 0, minWidth: 0 }}>
             {/* Toolbar */}
             <div style={{
                 padding: '12px 16px 8px',
@@ -454,16 +486,17 @@ function ChartRow({ title, unit, color, rows, getY, scrubT, value, min, max }: {
     return (
         <div style={{
             display: 'grid',
-            gridTemplateColumns: '110px 1fr 110px',
+            gridTemplateColumns: '110px minmax(0, 1fr) 110px',
             alignItems: 'center',
             padding: '4px 0',
             borderBottom: '1px solid var(--sl-border)',
+            minWidth: 0,
         }}>
             <div>
                 <div className="sl-label-xs" style={{ color, opacity: 0.9, fontSize: 9 }}>{title}</div>
                 <div style={{ fontSize: 10, color: 'var(--sl-text-dim3)' }}>{unit}</div>
             </div>
-            <div ref={ref}>
+            <div ref={ref} style={{ minWidth: 0, overflow: 'hidden' }}>
                 <Chart
                     data={rows}
                     getY={getY}

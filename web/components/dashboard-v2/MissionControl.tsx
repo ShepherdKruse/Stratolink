@@ -13,12 +13,13 @@ import { useMemo } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import {
     Age, CadenceStrip, Chrome, FreshnessBar, KPI, KV,
-    MapView, Panel, Sparkline, fmt, staleness,
+    Sparkline, fmt, staleness,
     DASHBOARD_V2_TABS,
     type TelemetryRow,
 } from './atoms';
 import { useTelemetry, type DeviceSummary, type FleetMetrics, type FleetAlert, type SubsystemFreshness } from './useTelemetry';
 import { useTickingNow, useElementSize, ConnectionPill, V1Link, fmtPressure } from './shared';
+import V2MissionMap, { type V2Balloon, type V2FlightPoint } from './V2MissionMap';
 
 export default function MissionControlScreen() {
     const router = useRouter();
@@ -81,8 +82,9 @@ export default function MissionControlScreen() {
                 style={{
                     flex: 1,
                     display: 'grid',
-                    gridTemplateColumns: '300px 1fr 340px',
+                    gridTemplateColumns: '300px minmax(0, 1fr) 340px',
                     minHeight: 0,
+                    minWidth: 0,
                     background: 'var(--sl-border)',
                     gap: 1,
                 }}
@@ -334,48 +336,33 @@ function CenterMap({ devices, rows, latest, lastFixRow, selectedDevice, now }: {
     selectedDevice: DeviceSummary | null;
     now: number;
 }) {
-    const { ref, width, height } = useElementSize(800, 540);
-
-    const fleetMarkers = devices
+    const balloons: V2Balloon[] = useMemo(() => devices
         .filter(d => d.latestFix !== null)
         .map(d => ({
+            id: d.id,
             lat: d.latestFix!.lat,
             lon: d.latestFix!.lon,
-            color: d.id === selectedDevice?.id ? 'var(--sl-ok)' : 'var(--sl-text-dim)',
-            label: d.callsign ?? d.id,
-        }));
+            altitude_m: d.latestFix!.alt,
+        })),
+        [devices]);
 
-    const lats = fleetMarkers.map(m => m.lat);
-    const lons = fleetMarkers.map(m => m.lon);
-    if (lats.length === 0) {
-        lats.push(37, 39); lons.push(-122, -120);
-    } else if (lats.length === 1) {
-        lats.push(lats[0] + 0.5); lons.push(lons[0] + 0.5);
-    }
-    const minLat = Math.min(...lats), maxLat = Math.max(...lats);
-    const minLon = Math.min(...lons), maxLon = Math.max(...lons);
-    const padLat = Math.max(0.5, (maxLat - minLat) * 0.4);
-    const padLon = Math.max(0.5, (maxLon - minLon) * 0.4);
-
-    const track: Array<[number, number] | [null, null]> = rows.map(r =>
-        r.lat !== null && r.lon !== null ? [r.lat, r.lon] : [null, null],
-    );
+    /* Selected device's full track for the trail layer. */
+    const flightPath: V2FlightPoint[] = useMemo(() => rows
+        .filter(r => r.lat !== null && r.lon !== null)
+        .map(r => ({ lat: r.lat as number, lon: r.lon as number, t: r.t })),
+        [rows]);
 
     return (
-        <div ref={ref} style={{ position: 'absolute', inset: 0 }}>
-            <MapView
-                width={width}
-                height={height}
-                track={track}
-                marker={fleetMarkers}
-                focus={lastFixRow ? { lat: lastFixRow.lat as number, lon: lastFixRow.lon as number } : undefined}
-                label={selectedDevice?.callsign ?? selectedDevice?.id ?? undefined}
-                viewBoxLat={[minLat - padLat, maxLat + padLat]}
-                viewBoxLon={[minLon - padLon, maxLon + padLon]}
-                showStates={false}
+        <div style={{ position: 'absolute', inset: 0, minWidth: 0 }}>
+            <V2MissionMap
+                balloons={balloons}
+                activeId={selectedDevice?.id ?? null}
+                flightPath={flightPath}
+                playbackT={null}
+                projection="mercator"
             />
-            <div style={{ position: 'absolute', top: 14, left: 14, display: 'flex', gap: 6 }}>
-                <span className="sl-pill dim">CARTO / DARK</span>
+            <div style={{ position: 'absolute', top: 14, left: 14, display: 'flex', gap: 6, zIndex: 1 }}>
+                <span className="sl-pill dim">MAPBOX · DARK</span>
                 {lastFixRow && (
                     <span className="sl-pill dim">
                         {(lastFixRow.lat as number).toFixed(2)}° N · {Math.abs(lastFixRow.lon as number).toFixed(2)}° W
@@ -391,10 +378,11 @@ function CenterMap({ devices, rows, latest, lastFixRow, selectedDevice, now }: {
             <div style={{
                 position: 'absolute', bottom: 14, left: 14,
                 fontSize: 10, color: 'var(--sl-text-dim3)', letterSpacing: '0.08em',
+                zIndex: 1,
             }}>
                 STRATOLINK · UPDATED {fmt.time(latest?.t ?? null)}
             </div>
-            <div style={{ position: 'absolute', top: 14, right: 14 }}>
+            <div style={{ position: 'absolute', top: 14, right: 14, zIndex: 1 }}>
                 <Age t={latest?.t ?? null} now={now} dot prefix="uplink" />
             </div>
         </div>

@@ -46,8 +46,22 @@
     font-size: 13px;
     line-height: 1.45;
     min-height: 100vh;
+    /* Hard-cap the app to the viewport. Without this, any child whose
+       intrinsic content width exceeds 100vw (an SVG with a px width, the
+       header strip with many metrics, etc.) can push the body wider, the
+       ResizeObserver in useElementSize then measures the new width, the
+       SVG re-renders even larger, and the page "creeps" right forever. */
+    width: 100%;
+    max-width: 100vw;
+    overflow: hidden;
     -webkit-font-smoothing: antialiased;
 }
+
+/* Every flex/grid child of .sl-app needs a real lower bound or
+   `1fr` falls back to `minmax(auto, 1fr)` and the column grows to
+   content. This rule is a safety net; screens also use minmax(0, 1fr)
+   directly in their grid templates. */
+.sl-app > main, .sl-app > section, .sl-app > aside { min-width: 0; min-height: 0; }
 
 /* ── top chrome bar ────────────────────────────────────────── */
 .sl-chrome {
