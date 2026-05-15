@@ -18,20 +18,24 @@
 #endif
 
 // TTN Configuration
-#define TTN_REGION_US915
-// Alternative regions: EU868, AS923, AU915, IN865, KR920
+// Region is selected at runtime from GPS lat/lon — see region_manager.cpp
+// and lorawan_set_region().  Cold-boot default is US915 (see lorawan.cpp);
+// overridden on the first valid GPS fix.
 
 // GNSS Configuration
 #define GNSS_ENABLE true
 #define GNSS_UPDATE_INTERVAL_MS 30000
 
-// Power Management
+// Power Management — FULL=300s keeps daily airtime at SF7/35-byte to
+// ~28 s/day across every region, inside the TTN 30 s Fair-Use Policy.
+// Lower tiers extend further; both NO_GPS and EMERGENCY already cover
+// the cold/dark cycle.
 #define POWER_SAVE_MODE true
-#define TRANSMIT_INTERVAL_SEC 60
-#define SLEEP_INTERVAL_FULL_SEC      60
-#define SLEEP_INTERVAL_REDUCED_SEC  120
-#define SLEEP_INTERVAL_NO_GPS_SEC   300
-#define SLEEP_INTERVAL_EMERGENCY_SEC 120
+#define TRANSMIT_INTERVAL_SEC 300
+#define SLEEP_INTERVAL_FULL_SEC      300
+#define SLEEP_INTERVAL_REDUCED_SEC   600
+#define SLEEP_INTERVAL_NO_GPS_SEC    900
+#define SLEEP_INTERVAL_EMERGENCY_SEC 600
 
 #define BURST_GPS_TIMEOUT_MS  10000
 #define BURST_SLEEP_SEC       10

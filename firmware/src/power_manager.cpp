@@ -151,3 +151,68 @@ void power_manager_sleep_ms(uint32_t durationMs) {
 bool power_manager_is_low_battery(void) {
     return power_adc_get_tier() == POWER_TIER_CRITICAL;
 }
+
+/* ========== LoRaWAN session persistence (TAMP backup registers) ==========
+ *
+ * STM32WL has 32× 32-bit TAMP_BKPxR (BKP0R..BKP31R) — 128 bytes that
+ * persist across reset, STOP, and standby while VDD is present.  We use
+ * the first 15 of them: magic + version + session payload (13 words).
+ *
+ * The "BREN" retention bit that some larger STM32 families need to keep
+ * BKPSRAM alive across standby does NOT exist on STM32WL — these regs
+ * are retained automatically.  Access is via direct register reads;
+ * the RTC clock domain must be enabled (done by power_manager_init()
+ * via STM32RTC::begin()) for TAMP writes to succeed. */
+
+#define STRATO_SESSION_MAGIC   0x53545241u   /* "STRA" big-endian */
+#define STRATO_SESSION_VER     1u
+#define SESSION_WORD_COUNT     (sizeof(lorawan_session_t) / sizeof(uint32_t))
+
+#if defined(ARDUINO_ARCH_STM32)
+static volatile uint32_t* tamp_bkp_word(int idx) {
+    return &(&TAMP->BKP0R)[idx];
+}
+
+/* DBP=1 lets the CPU touch RTC/TAMP backup regs.  Idempotent — safe
+ * to call before STM32RTC::begin() (handles cold-boot session load
+ * that runs before power_manager_init()) or after.  PWR is always
+ * clocked on STM32WL (no APB1ENR1_PWREN bit), so just unlock the
+ * backup domain directly. */
+static void enable_backup_access(void) {
+    SET_BIT(PWR->CR1, PWR_CR1_DBP);
+}
+#endif
+
+bool power_manager_load_session(lorawan_session_t* s) {
+    if (!s) return false;
+#if defined(ARDUINO_ARCH_STM32)
+    enable_backup_access();
+    uint32_t* dst = (uint32_t*)s;
+    for (size_t i = 0; i < SESSION_WORD_COUNT; i++) dst[i] = *tamp_bkp_word(i);
+    return s->magic == STRATO_SESSION_MAGIC && s->version == STRATO_SESSION_VER;
+#else
+    (void)s; return false;
+#endif
+}
+
+void power_manager_save_session(const lorawan_session_t* s_in) {
+    if (!s_in) return;
+#if defined(ARDUINO_ARCH_STM32)
+    enable_backup_access();
+    /* Copy + stamp magic/version so the caller doesn't have to. */
+    lorawan_session_t s = *s_in;
+    s.magic   = STRATO_SESSION_MAGIC;
+    s.version = STRATO_SESSION_VER;
+    const uint32_t* src = (const uint32_t*)&s;
+    for (size_t i = 0; i < SESSION_WORD_COUNT; i++) *tamp_bkp_word(i) = src[i];
+#else
+    (void)s_in;
+#endif
+}
+
+void power_manager_clear_session(void) {
+#if defined(ARDUINO_ARCH_STM32)
+    enable_backup_access();
+    *tamp_bkp_word(0) = 0;  /* zero the magic — load_session returns false */
+#endif
+}

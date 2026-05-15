@@ -23,6 +23,7 @@
 #include "sensor_lis2dh12.h"
 #include "sensor_ltr390.h"
 #include "mic_acoustic.h"
+#include "region_manager.h"
 
 #ifndef BURST_GPS_TIMEOUT_MS
 #define BURST_GPS_TIMEOUT_MS 10000
@@ -64,8 +65,24 @@ void setup() {
     if (!lorawan_init()) {
         LOG("LoRaWAN init failed");
     }
-    if (!lorawan_join(60000)) {
-        LOG("LoRaWAN join failed");
+    /* Try to restore the previous OTAA session from TAMP backup regs
+     * before attempting a fresh join.  A successful restore preserves
+     * region + DevAddr + FCntUp across reset (TX-fail auto-reset,
+     * brown-out, freefall-wake, etc.), avoiding a join airtime hit and
+     * an FCnt-anti-replay collision on the next uplink.  TAMP survives
+     * STOP/standby but not full power loss, so a deep brown-out
+     * (VSTOR < 1.8 V cold-start) still triggers a fresh join — which
+     * is what we want for a real cold boot. */
+    {
+        lorawan_session_t s;
+        if (power_manager_load_session(&s) && lorawan_import_session(&s)) {
+            LOG("LoRaWAN session restored from TAMP");
+        } else if (!lorawan_join(60000)) {
+            LOG("LoRaWAN join failed");
+        } else {
+            lorawan_session_t out; lorawan_export_session(&out);
+            power_manager_save_session(&out);
+        }
     }
 
     if (!sensors_init()) {
@@ -118,6 +135,16 @@ void loop() {
         }
     }
 
+    /* GPS-driven region switch.  If the balloon crossed a regulatory
+     * boundary (Atlantic mid-ocean, Persian Gulf, Wallace Line) since
+     * the last cycle, lorawan_set_region() invalidates the current
+     * session and the re-join logic below picks it up before the next
+     * TX.  No-op if region unchanged. */
+    if (last_gps_fix.valid) {
+        lorawan_set_region(region_for_latlon(last_gps_fix.lat_e7,
+                                             last_gps_fix.lon_e7));
+    }
+
     /* IWDG max timeout is 32.7 s.  GPS fix can block up to 30 s, TX +
      * RX1/RX2 windows ~5 s, sensor + mic reads ~1 s — kick the dog
      * between phases so the watchdog only catches genuine hangs. */
@@ -140,13 +167,23 @@ void loop() {
      * before TX.  Short timeout — if it doesn't take here it'll retry on
      * the next wake.  IWDG (32.7 s) bounds this. */
     if (!lorawan_joined() && power_adc_can_tx()) {
-        (void)lorawan_join(15000);
+        if (lorawan_join(15000)) {
+            /* New region → new session.  Persist it so a reset (TX
+             * fail, brown-out, freefall) doesn't force another join. */
+            lorawan_session_t out; lorawan_export_session(&out);
+            power_manager_save_session(&out);
+        }
         power_manager_kick_watchdog();
     }
 
     if (power_adc_can_tx() && lorawan_joined()) {
         if (lorawan_send_uplink(tx_payload, TELEMETRY_PAYLOAD_SIZE)) {
             tx_fail_streak = 0;
+            /* Persist FCntUp so a post-reset boot doesn't replay an
+             * already-used counter (LoRaWAN servers reject repeats).
+             * TAMP write is ~10 cycles, free in the energy budget. */
+            lorawan_session_t out; lorawan_export_session(&out);
+            power_manager_save_session(&out);
             LOG("TX OK");
         } else {
             /* TX failed but we believed we were joined.  Most likely the

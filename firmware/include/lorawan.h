@@ -8,7 +8,51 @@
 #define LORAWAN_PAYLOAD_MAX 64
 
 /**
- * Initialize LoRaWAN stack (region from config, keys from secrets).
+ * LoRaWAN regional frequency plan.  Selected at runtime by
+ * lorawan_set_region() — see region_manager.h for GPS-driven dispatch.
+ * Ordering is stable across firmware versions so it can be persisted
+ * to TAMP backup registers.
+ */
+typedef enum {
+    LORA_REGION_US915  = 0,
+    LORA_REGION_EU868  = 1,
+    LORA_REGION_AS923  = 2,
+    LORA_REGION_AU915  = 3,
+    LORA_REGION_SILENT = 4,   /* CN470, polar, etc — no TX, no join */
+    LORA_REGION_COUNT          /* sentinel, not a selectable value */
+} lora_region_id_t;
+
+/**
+ * Switch active region.  Invalidates any current OTAA session — a new
+ * join is required on the next TX attempt (handled by main.cpp).
+ * No-op if id matches the current region.
+ *
+ * For LORA_REGION_SILENT the radio is left configured for whatever the
+ * previous region was, but join/send_uplink return false until a real
+ * region is set again.
+ */
+void lorawan_set_region(lora_region_id_t id);
+lora_region_id_t lorawan_current_region(void);
+
+/**
+ * Session export/import for persistence across reset (see
+ * power_manager_save_session / _load_session).  Caller owns storage.
+ */
+typedef struct {
+    uint32_t magic;         /* set by save layer */
+    uint32_t version;       /* set by save layer */
+    uint32_t region_id;     /* lora_region_id_t cast to u32 */
+    uint32_t devAddr;
+    uint32_t nwkSKey[4];    /* 16 bytes */
+    uint32_t appSKey[4];    /* 16 bytes */
+    uint32_t fCntUp;
+} lorawan_session_t;        /* total 13 words = 52 bytes */
+
+void lorawan_export_session(lorawan_session_t* out);
+bool lorawan_import_session(const lorawan_session_t* in);
+
+/**
+ * Initialize LoRaWAN stack (default region US915, keys from secrets).
  * Call once from setup(). Returns true on success.
  */
 bool lorawan_init(void);
