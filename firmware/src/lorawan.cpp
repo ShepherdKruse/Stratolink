@@ -348,6 +348,85 @@ static void compute_mic(const uint8_t *msg, size_t msgLen, uint8_t *mic) {
 }
 
 /* ========== Public API ========== */
+/* ========== Per-region OTAA credentials ==========
+ *
+ * TTN community network enforces globally-unique DevEUIs across all
+ * clusters (nam1, eu1).  To get telemetry in multiple LoRaWAN regions
+ * during a circumnavigation, each frequency plan needs its own
+ * (DevEUI, AppKey) pair registered on the appropriate cluster.  The
+ * flight firmware switches credentials when lorawan_set_region fires
+ * a transition, so the next OTAA join uses the right identity for
+ * the gateway listening below.
+ *
+ * Empty string = no creds for that region → lorawan_join returns
+ * false immediately (firmware still respects geofence spectrum rules
+ * via the SILENT/region-table channels, just won't transmit OTAA
+ * traffic without valid credentials).
+ *
+ * JoinEUI is shared (TTN convention 00...00) and loaded once in
+ * lorawan_init from LORAWAN_APP_EUI.
+ *
+ * Backward compatibility: older secrets files (secrets_board1.h,
+ * secrets_board2.h) only define the legacy LORAWAN_DEV_EUI /
+ * LORAWAN_APP_KEY pair.  The #ifndef guards below let those builds
+ * succeed by mapping the legacy pair into the US915 slot and leaving
+ * EU/AS/AU empty — single-region behaviour, same as before. */
+#ifndef LORAWAN_DEV_EUI_US
+#define LORAWAN_DEV_EUI_US LORAWAN_DEV_EUI
+#endif
+#ifndef LORAWAN_APP_KEY_US
+#define LORAWAN_APP_KEY_US LORAWAN_APP_KEY
+#endif
+#ifndef LORAWAN_DEV_EUI_EU
+#define LORAWAN_DEV_EUI_EU ""
+#endif
+#ifndef LORAWAN_APP_KEY_EU
+#define LORAWAN_APP_KEY_EU ""
+#endif
+#ifndef LORAWAN_DEV_EUI_AS
+#define LORAWAN_DEV_EUI_AS ""
+#endif
+#ifndef LORAWAN_APP_KEY_AS
+#define LORAWAN_APP_KEY_AS ""
+#endif
+#ifndef LORAWAN_DEV_EUI_AU
+#define LORAWAN_DEV_EUI_AU ""
+#endif
+#ifndef LORAWAN_APP_KEY_AU
+#define LORAWAN_APP_KEY_AU ""
+#endif
+
+typedef struct {
+    const char* dev_eui_hex;
+    const char* app_key_hex;
+} region_creds_t;
+
+static const region_creds_t REGION_CREDS[LORA_REGION_COUNT] = {
+    /* Indexed by lora_region_id_t.  Order must match the enum in
+     * lorawan.h: US915=0, EU868=1, AS923=2, AU915=3, SILENT=4. */
+    { LORAWAN_DEV_EUI_US, LORAWAN_APP_KEY_US },
+    { LORAWAN_DEV_EUI_EU, LORAWAN_APP_KEY_EU },
+    { LORAWAN_DEV_EUI_AS, LORAWAN_APP_KEY_AS },
+    { LORAWAN_DEV_EUI_AU, LORAWAN_APP_KEY_AU },
+    { "",                  ""                  },  /* SILENT */
+};
+
+static bool creds_loaded = false;
+
+static void load_creds_for_current_region(void) {
+    creds_loaded = false;
+    if (REGION_ID >= LORA_REGION_SILENT) return;
+    const region_creds_t* c = &REGION_CREDS[REGION_ID];
+    if (!c->dev_eui_hex || c->dev_eui_hex[0] == '\0' ||
+        !c->app_key_hex || c->app_key_hex[0] == '\0') return;
+    hexToBytes(c->dev_eui_hex, devEUI, 8);
+    hexToBytes(c->app_key_hex, appKey, 16);
+    creds_loaded = true;
+}
+
+bool lorawan_creds_loaded(void) { return creds_loaded; }
+void lorawan_get_dev_eui(uint8_t* out) { if (out) memcpy(out, devEUI, 8); }
+
 bool lorawan_init(void) {
     HAL_ResumeTick();
     radio = new STM32WLx(new STM32WLx_Module());
@@ -365,10 +444,11 @@ bool lorawan_init(void) {
     radio->setPreambleLength(8);
     radio->setCRC(true);
 
-    /* Parse credentials from secrets.h */
-    hexToBytes(LORAWAN_DEV_EUI, devEUI, 8);
+    /* JoinEUI is shared across regions; DevEUI + AppKey are loaded
+     * per-region by load_creds_for_current_region (called below and
+     * also from lorawan_set_region on every transition). */
     hexToBytes(LORAWAN_APP_EUI, joinEUI, 8);
-    hexToBytes(LORAWAN_APP_KEY, appKey, 16);
+    load_creds_for_current_region();
 
     LOG("[LoRaWAN] init OK");
     return true;
@@ -377,6 +457,10 @@ bool lorawan_init(void) {
 bool lorawan_join(uint32_t timeout_ms) {
     if (!radio) return false;
     if (REGION_ID == LORA_REGION_SILENT) return false;  /* off-plan zone */
+    if (!creds_loaded) {
+        LOG("[LoRaWAN] no OTAA creds for current region — skipping join");
+        return false;
+    }
 
     /* Skip the join if VSTOR is too low to reliably support +14 dBm TX
      * peaks (~50 mA bursts).  Below ~3.0 V the buck is in dropout and
@@ -476,10 +560,12 @@ void lorawan_set_region(lora_region_id_t id) {
         case LORA_REGION_SILENT:
         default:
             REGION_ID = LORA_REGION_SILENT;
+            creds_loaded = false;
             return;  /* skip radio reconfig — SILENT keeps prev band */
     }
 
     REGION_ID = id;
+    load_creds_for_current_region();  /* swap DevEUI/AppKey for new band */
 
     /* Reconfigure the radio for the new region's TX defaults so any
      * subsequent join attempt fires on the right band. */
@@ -526,6 +612,14 @@ bool lorawan_import_session(const lorawan_session_t* in) {
     memcpy(nwkSKey, in->nwkSKey, 16);
     memcpy(appSKey, in->appSKey, 16);
     _joined = true;
+
+    /* Also refresh DevEUI/AppKey for the restored region.  Uplinks
+     * use session keys (NwkSKey/AppSKey), but if the session ever
+     * gets invalidated (region switch, replay collision, etc.) we
+     * need creds available for the rejoin.  No-op if the region has
+     * no creds in secrets — uplinks still work with the restored
+     * session keys, just any future rejoin will fail. */
+    load_creds_for_current_region();
 
     if (radio) {
         radio->standby();

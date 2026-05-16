@@ -35,6 +35,18 @@ void lorawan_set_region(lora_region_id_t id);
 lora_region_id_t lorawan_current_region(void);
 
 /**
+ * Per-region OTAA credentials status.  True when the active region
+ * has a non-empty (DevEUI, AppKey) pair flashed in secrets.h.  False
+ * means lorawan_join in this region will fail-fast.
+ */
+bool lorawan_creds_loaded(void);
+
+/**
+ * Copy the active 8-byte DevEUI into out.  For test introspection.
+ */
+void lorawan_get_dev_eui(uint8_t* out);
+
+/**
  * Session export/import for persistence across reset (see
  * power_manager_save_session / _load_session).  Caller owns storage.
  */

@@ -30,6 +30,23 @@
 #include "region_manager.h"
 #include "power_manager.h"
 #include "stm32wlxx_hal.h"   /* for TAMP / PWR / RCC direct access */
+#if __has_include("secrets.h")
+#include "secrets.h"          /* per-region LORAWAN_DEV_EUI_* for test 12 */
+#endif
+/* Same backward-compat shim as lorawan.cpp: older single-EUI secrets
+ * fall back to the legacy LORAWAN_DEV_EUI for US, empty for others. */
+#ifndef LORAWAN_DEV_EUI_US
+#define LORAWAN_DEV_EUI_US LORAWAN_DEV_EUI
+#endif
+#ifndef LORAWAN_DEV_EUI_EU
+#define LORAWAN_DEV_EUI_EU ""
+#endif
+#ifndef LORAWAN_DEV_EUI_AS
+#define LORAWAN_DEV_EUI_AS ""
+#endif
+#ifndef LORAWAN_DEV_EUI_AU
+#define LORAWAN_DEV_EUI_AU ""
+#endif
 
 #define PRINT       Serial1
 #define BAUD        115200
@@ -610,6 +627,87 @@ static void test_persist_phase1_and_reset(void) {
     while (1) { }
 }
 
+/* ========== Per-region credentials switching ==========
+ *
+ * After lorawan_set_region(X), the firmware must have loaded the
+ * (DevEUI, AppKey) pair flashed in secrets.h for region X.  If the
+ * region's secret is empty, lorawan_creds_loaded() returns false and
+ * lorawan_join short-circuits — i.e., we silently skip OTAA in that
+ * region rather than transmitting bogus identities. */
+static int hex_nibble(char c) {
+    if (c >= '0' && c <= '9') return c - '0';
+    if (c >= 'A' && c <= 'F') return c - 'A' + 10;
+    if (c >= 'a' && c <= 'f') return c - 'a' + 10;
+    return -1;
+}
+static void test_hex_to_bytes(const char* hex, uint8_t* out, size_t n) {
+    for (size_t i = 0; i < n; i++) {
+        int h = hex_nibble(hex[2*i]);
+        int l = hex_nibble(hex[2*i + 1]);
+        out[i] = (uint8_t)(((h < 0 ? 0 : h) << 4) | (l < 0 ? 0 : l));
+    }
+}
+
+static void test_creds_switch(void) {
+    PRINT.println("\n=== 12. Per-region credentials switching ===");
+
+    struct { lora_region_id_t r; const char* eui_hex; const char* tag; } cases[] = {
+        { LORA_REGION_US915, LORAWAN_DEV_EUI_US, "US915" },
+        { LORA_REGION_EU868, LORAWAN_DEV_EUI_EU, "EU868" },
+        { LORA_REGION_AS923, LORAWAN_DEV_EUI_AS, "AS923" },
+        { LORA_REGION_AU915, LORAWAN_DEV_EUI_AU, "AU915" },
+    };
+
+    char buf[120];
+    for (size_t i = 0; i < sizeof(cases)/sizeof(cases[0]); i++) {
+        bool secret_present = (cases[i].eui_hex && cases[i].eui_hex[0] != '\0');
+        lorawan_set_region(cases[i].r);
+        bool creds_now = lorawan_creds_loaded();
+
+        if (secret_present != creds_now) {
+            snprintf(buf, sizeof(buf), "%s creds_loaded=%d but secret_present=%d",
+                     cases[i].tag, creds_now, secret_present);
+            LOG_FAIL(buf);
+            continue;
+        }
+
+        if (!secret_present) {
+            snprintf(buf, sizeof(buf), "%s no secret + no creds (consistent)", cases[i].tag);
+            LOG_OK(buf);
+            continue;
+        }
+
+        /* Both secret present AND creds loaded — verify DevEUI matches. */
+        uint8_t got[8], want[8];
+        lorawan_get_dev_eui(got);
+        test_hex_to_bytes(cases[i].eui_hex, want, 8);
+        if (memcmp(got, want, 8) == 0) {
+            snprintf(buf, sizeof(buf), "%s DevEUI matches secret (%02X%02X..%02X%02X)",
+                     cases[i].tag, got[0], got[1], got[6], got[7]);
+            LOG_OK(buf);
+        } else {
+            snprintf(buf, sizeof(buf), "%s DevEUI mismatch got=%02X%02X..%02X%02X",
+                     cases[i].tag, got[0], got[1], got[6], got[7]);
+            LOG_FAIL(buf);
+        }
+    }
+
+    /* SILENT must always have creds_loaded == false. */
+    lorawan_set_region(LORA_REGION_SILENT);
+    if (!lorawan_creds_loaded()) LOG_OK("SILENT: no creds (as required)");
+    else                          LOG_FAIL("SILENT: creds_loaded reports true (must be false)");
+
+    /* lorawan_join with empty-creds region must short-circuit. */
+    lorawan_set_region(LORA_REGION_AU915);
+    if (!lorawan_creds_loaded()) {
+        bool joined = lorawan_join(500);
+        if (!joined) LOG_OK("join short-circuits when creds empty");
+        else         LOG_FAIL("join attempted with empty creds");
+    } else {
+        LOG_OK("AU915 has creds, skipping empty-creds short-circuit check");
+    }
+}
+
 static void run_all_tests(void) {
     pass_count = fail_count = 0;
     test_scratch.magic = 0;       /* clear "done" until tests finish */
@@ -634,6 +732,7 @@ static void run_all_tests(void) {
     test_boundary_thrash();
     test_random_walk();
     test_multi_save_load();
+    test_creds_switch();
 
     PRINT.print("\n=== ");
     PRINT.print(pass_count);
@@ -658,6 +757,14 @@ static void run_all_tests(void) {
 }
 
 void setup() {
+    /* Two UARTs in play here: Serial1 = USART1 on PB6/PB7 (the J4
+     * test header), Serial = LPUART1 on PA2/PA3 (no header, just a
+     * BSS sink).  lorawan.cpp's LOG/LOGV writes to Serial; if it
+     * isn't begin()'d, the HW UART is idle, the TX IRQ never fires,
+     * and HardwareSerial::write busy-waits forever in
+     * availableForWrite() once the 64-byte ring buffer fills.  Boot
+     * both so neither path can hang on an uninitialised UART. */
+    Serial.begin(BAUD);
     Serial1.begin(BAUD);
     delay(500);
 
