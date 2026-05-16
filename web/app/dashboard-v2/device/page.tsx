@@ -1,10 +1,28 @@
+'use client';
+
 import { Suspense } from 'react';
+import { useSearchParams } from 'next/navigation';
+import { useIsMobile } from '@/hooks/use-mobile';
 import DeviceTrackerScreen from '@/components/dashboard-v2/DeviceTracker';
+import MobileLayout from '@/components/mobile/MobileLayout';
+
+function DeviceTrackerSwitch() {
+    const isMobile = useIsMobile();
+    const searchParams = useSearchParams();
+    const isPreview = searchParams.get('preview') === 'mobile';
+    const balloonId = searchParams.get('device') ?? searchParams.get('balloon');
+
+    if (isMobile || isPreview) {
+        return <MobileLayout initialBalloonId={balloonId || null} />;
+    }
+
+    return <DeviceTrackerScreen />;
+}
 
 export default function DeviceTrackerPage() {
     return (
         <Suspense fallback={<div style={{ padding: 24, color: 'var(--sl-text-dim2)' }}>Loading…</div>}>
-            <DeviceTrackerScreen />
+            <DeviceTrackerSwitch />
         </Suspense>
     );
 }

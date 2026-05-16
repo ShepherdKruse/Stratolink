@@ -66,7 +66,7 @@ export function DashboardShowcase() {
                                 : 'border-border text-muted-foreground hover:border-foreground/10'
                         }`}
                     >
-                        Mission Control
+                        Desktop view
                     </button>
                     <button
                         onClick={() => setActiveView('mobile')}
@@ -76,7 +76,7 @@ export function DashboardShowcase() {
                                 : 'border-border text-muted-foreground hover:border-foreground/10'
                         }`}
                     >
-                        Device Tracker
+                        Mobile view
                     </button>
                 </div>
                 )}
@@ -119,7 +119,7 @@ export function DashboardShowcase() {
                                             src="/dashboard-v2"
                                             className="w-full h-full border-0 pointer-events-none"
                                             style={{ transform: 'scale(0.5)', transformOrigin: 'top left', width: '200%', height: '200%' }}
-                                            title="Mission Control Preview"
+                                            title="Mission Control desktop preview"
                                         />
                                         {/* Overlay gradient for polish */}
                                         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-background/20 pointer-events-none" />
@@ -154,10 +154,9 @@ export function DashboardShowcase() {
                                         {/* Screen */}
                                         <div className="relative bg-[#1a1a1a] rounded-[1.5rem] overflow-hidden aspect-[9/19.5]">
                                             <iframe
-                                                src="/dashboard-v2/device"
+                                                src="/dashboard-v2?preview=mobile"
                                                 className="w-full h-full border-0 pointer-events-none"
-                                                style={{ transform: 'scale(0.35)', transformOrigin: 'top left', width: '285.7%', height: '285.7%' }}
-                                                title="Device Tracker Preview"
+                                                title="Mission Control mobile preview"
                                                 sandbox="allow-same-origin allow-scripts"
                                             />
                                             {/* Overlay gradient */}
@@ -171,9 +170,9 @@ export function DashboardShowcase() {
 
                                 {/* Label */}
                                 <div className="mt-6 text-center">
-                                    <p className="text-sm font-medium text-foreground">Focused · Device Tracker</p>
+                                    <p className="text-sm font-medium text-foreground">Mobile · Mission Control</p>
                                     <p className="text-xs text-muted-foreground mt-1">
-                                        Scrubber-driven charts aligned to the map · ideal narrow viewports
+                                        Same fleet, optimized for phones · Fleet, Map, Telemetry, Alerts
                                     </p>
                                 </div>
                             </div>
