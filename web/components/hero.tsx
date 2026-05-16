@@ -134,41 +134,47 @@ export function Hero() {
 
           <form
             onSubmit={handleSubmit}
-            className="mx-auto mt-10 flex w-full max-w-md flex-col gap-2 sm:flex-row"
+            className="mx-auto mt-10 w-full max-w-md text-left"
             aria-label="Get launch updates by email"
           >
-            <label htmlFor="hero-launch-email" className="sr-only">
-              Email address
-            </label>
-            <Input
-              id="hero-launch-email"
-              type="email"
-              name="email"
-              autoComplete="email"
-              required
-              placeholder="you@example.com"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              className="h-11 flex-1"
-            />
-            <Button
-              type="submit"
-              disabled={isSubmitting}
-              className="h-11 shrink-0 rounded-sm border border-primary/20 bg-primary px-6 font-normal text-primary-foreground shadow-sm transition-all hover:bg-primary/90 hover:shadow-md disabled:opacity-50"
-            >
-              {isSubmitting ? "Sending…" : "Get launch updates"}
-            </Button>
-          </form>
-          {status && (
-            <p
-              role="status"
-              className={`mt-3 text-sm ${
-                status.type === "success" ? "text-emerald-700" : "text-destructive"
-              }`}
-            >
-              {status.message}
+            <p className="mb-2 text-center text-xs font-light uppercase tracking-wider text-slate-500">
+              Get launch updates
             </p>
-          )}
+            <div className="flex w-full flex-col gap-2 sm:flex-row sm:gap-3">
+              <label htmlFor="hero-launch-email" className="sr-only">
+                Email address
+              </label>
+              <Input
+                id="hero-launch-email"
+                type="email"
+                name="email"
+                inputMode="email"
+                autoComplete="email"
+                required
+                placeholder="you@example.com"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className="h-12 flex-1 rounded-md border-slate-300 bg-white px-4 text-base shadow-sm placeholder:text-slate-400 focus-visible:border-primary md:text-base"
+              />
+              <Button
+                type="submit"
+                disabled={isSubmitting}
+                className="h-12 w-full shrink-0 rounded-md bg-primary px-6 text-sm font-medium text-primary-foreground shadow-sm transition-all hover:bg-primary/90 hover:shadow-md disabled:opacity-50 sm:w-auto"
+              >
+                {isSubmitting ? "Sending…" : "Notify me"}
+              </Button>
+            </div>
+            {status && (
+              <p
+                role="status"
+                className={`mt-3 text-center text-sm sm:text-left ${
+                  status.type === "success" ? "text-emerald-700" : "text-destructive"
+                }`}
+              >
+                {status.message}
+              </p>
+            )}
+          </form>
 
           <div className="mt-12 flex flex-wrap items-center justify-center gap-4">
             <Button
