@@ -32,8 +32,46 @@
 
 #define PRINT       Serial1
 #define BAUD        115200
-#define LOG_OK(s)   do { PRINT.print("[PASS] "); PRINT.println(s); pass_count++; } while(0)
-#define LOG_FAIL(s) do { PRINT.print("[FAIL] "); PRINT.println(s); fail_count++; } while(0)
+
+/* ========== SRAM scratchpad for J-Link-only readout ==========
+ *
+ * Mirrors the Serial1 PASS/FAIL stream into a known global so that
+ * J-Link can halt the MCU and dump results without needing a UART
+ * adapter wired up.  Layout is fixed (magic + counts + log) so the
+ * host-side parser doesn't depend on the .elf symbol table — the
+ * J-Link script reads the address looked up via arm-none-eabi-nm at
+ * build time. */
+#define SCRATCH_MAGIC_DONE    0xC0FFEEAAu
+
+typedef struct {
+    uint32_t magic;        /* set to SCRATCH_MAGIC_DONE after all tests run */
+    uint32_t total;
+    uint32_t passed;
+    uint32_t failed;
+    uint32_t log_len;
+    char     log[3072];
+} __attribute__((aligned(4))) test_scratch_t;
+
+/* `used` keeps the linker from GC'ing it; volatile keeps writes
+ * observable to J-Link reads. */
+volatile test_scratch_t test_scratch __attribute__((used));
+
+static void scratch_append(const char* s) {
+    while (*s && test_scratch.log_len < sizeof(test_scratch.log) - 1) {
+        test_scratch.log[test_scratch.log_len++] = *s++;
+    }
+}
+
+#define LOG_OK(s)   do { \
+    PRINT.print("[PASS] "); PRINT.println(s); \
+    scratch_append("[PASS] "); scratch_append(s); scratch_append("\n"); \
+    pass_count++; \
+} while(0)
+#define LOG_FAIL(s) do { \
+    PRINT.print("[FAIL] "); PRINT.println(s); \
+    scratch_append("[FAIL] "); scratch_append(s); scratch_append("\n"); \
+    fail_count++; \
+} while(0)
 
 #define E7(d) ((int32_t)((d) * 10000000))
 
@@ -214,6 +252,12 @@ static void test_export_import_session(void) {
 
 static void run_all_tests(void) {
     pass_count = fail_count = 0;
+    test_scratch.magic = 0;       /* clear "done" until tests finish */
+    test_scratch.log_len = 0;
+    test_scratch.passed = 0;
+    test_scratch.failed = 0;
+    test_scratch.total = 0;
+
     test_geofence();
     test_set_region_transitions();
     test_set_region_idempotent();
@@ -226,6 +270,14 @@ static void run_all_tests(void) {
     PRINT.print(" passed, ");
     PRINT.print(fail_count);
     PRINT.println(" failed ===");
+
+    /* Publish results to the scratchpad so J-Link can read them
+     * without a UART adapter.  Magic-last ordering means the host can
+     * poll for the magic value and know all other fields are stable. */
+    test_scratch.passed = pass_count;
+    test_scratch.failed = fail_count;
+    test_scratch.total  = pass_count + fail_count;
+    test_scratch.magic  = SCRATCH_MAGIC_DONE;
 }
 
 void setup() {

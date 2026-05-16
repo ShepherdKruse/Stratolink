@@ -173,12 +173,27 @@ static volatile uint32_t* tamp_bkp_word(int idx) {
     return &(&TAMP->BKP0R)[idx];
 }
 
-/* DBP=1 lets the CPU touch RTC/TAMP backup regs.  Idempotent — safe
- * to call before STM32RTC::begin() (handles cold-boot session load
- * that runs before power_manager_init()) or after.  PWR is always
- * clocked on STM32WL (no APB1ENR1_PWREN bit), so just unlock the
- * backup domain directly. */
+/* Unlock the backup domain so the CPU can touch RTC/TAMP backup
+ * registers.  Idempotent — safe to call before STM32RTC::begin()
+ * (handles cold-boot session load that runs before
+ * power_manager_init()) or after.
+ *
+ * Two bits matter on STM32WL:
+ *   RCC_APB1ENR1.RTCAPBEN — gates the APB clock to the RTC + TAMP
+ *     register interface.  Without it, BKPxR reads return garbage
+ *     and writes silently drop.  Hardware-verified bug: prior to
+ *     adding this, session save/load was returning false on the
+ *     bench because TAMP was un-clocked when power_manager_init
+ *     hadn't yet run.  PWR is always clocked on STM32WL (no
+ *     APB1ENR1_PWREN bit) so PWR access works even without this.
+ *   PWR_CR1.DBP — disables backup-domain write protection.
+ *
+ * The readback after the RCC write forces the bus to retire the
+ * clock-enable before we touch any TAMP register (ARM Cortex-M
+ * peripheral clock-enable barrier). */
 static void enable_backup_access(void) {
+    SET_BIT(RCC->APB1ENR1, RCC_APB1ENR1_RTCAPBEN);
+    (void)READ_BIT(RCC->APB1ENR1, RCC_APB1ENR1_RTCAPBEN);
     SET_BIT(PWR->CR1, PWR_CR1_DBP);
 }
 #endif
