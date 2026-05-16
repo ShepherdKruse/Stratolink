@@ -26,26 +26,36 @@ export async function POST(request: NextRequest) {
             );
         }
 
+        // Normalize per-region TTN device IDs to a single canonical
+        // identifier.  The firmware uses 4 distinct (DevEUI, AppKey)
+        // pairs — one per LoRaWAN region — registered on TTN with IDs
+        // like `stratolink-3`, `stratolink-3-eu`, `stratolink-3-as`,
+        // `stratolink-3-au`.  Strip the region suffix here so all
+        // three streams land in Supabase under the same device row
+        // and the dashboard shows one continuous timeline across the
+        // circumnavigation.
+        const canonical_device_id = telemetry.device_id.replace(/-(eu|as|au)$/, '');
+
         // Check if device exists and is activated (optional validation)
         const supabase = createServiceRoleClient();
         const { data: device } = await supabase
             .from('devices')
             .select('device_id, status')
-            .eq('device_id', telemetry.device_id)
+            .eq('device_id', canonical_device_id)
             .single();
 
         // Log warning for unknown devices but don't block (allows testing)
         if (!device) {
-            console.warn(`Telemetry received from unknown device: ${telemetry.device_id}`);
+            console.warn(`Telemetry received from unknown device: ${canonical_device_id} (TTN ID: ${telemetry.device_id})`);
         } else if (device.status !== 'flying') {
-            console.warn(`Telemetry received from device not in 'flying' status: ${telemetry.device_id} (status: ${device.status})`);
+            console.warn(`Telemetry received from device not in 'flying' status: ${canonical_device_id} (status: ${device.status})`);
         }
 
         // Insert telemetry into Supabase
         const { error } = await supabase
             .from('telemetry')
             .insert({
-                device_id: telemetry.device_id,
+                device_id: canonical_device_id,
                 time: telemetry.time,
                 lat: telemetry.lat,
                 lon: telemetry.lon,
@@ -77,11 +87,12 @@ export async function POST(request: NextRequest) {
             );
         }
 
-        console.log(`Telemetry inserted for device ${telemetry.device_id} at ${telemetry.lat}, ${telemetry.lon}`);
-        
-        return NextResponse.json({ 
+        console.log(`Telemetry inserted for device ${canonical_device_id} (TTN ID: ${telemetry.device_id}) at ${telemetry.lat}, ${telemetry.lon}`);
+
+        return NextResponse.json({
             success: true,
-            device_id: telemetry.device_id 
+            device_id: canonical_device_id,
+            ttn_device_id: telemetry.device_id,
         }, { status: 200 });
         
     } catch (error) {
