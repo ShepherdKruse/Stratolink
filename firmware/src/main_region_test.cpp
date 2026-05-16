@@ -29,6 +29,7 @@
 #include "lorawan.h"
 #include "region_manager.h"
 #include "power_manager.h"
+#include "stm32wlxx_hal.h"   /* for TAMP / PWR / RCC direct access */
 
 #define PRINT       Serial1
 #define BAUD        115200
@@ -395,6 +396,220 @@ static void test_trajectory(void) {
     }
 }
 
+/* ========== Boundary thrash ==========
+ *
+ * Stresses the radio reconfiguration path inside lorawan_set_region by
+ * doing many rapid alternations between two regions.  If anything in
+ * the SX1262 reconfiguration accumulates bad state (stuck SPI, missed
+ * standby, frequency commit failure), 50+ iterations will surface it
+ * where a single switch wouldn't. */
+static void test_boundary_thrash(void) {
+    PRINT.println("\n=== 8. Boundary thrash: rapid alternations ===");
+
+    /* Strategy: at each iteration pick the OPPOSITE of the current
+     * region.  Guarantees every set_region call is a real transition
+     * (not a same-region idempotent no-op), so invalidation is
+     * observable on every iteration. */
+
+    /* (a) US915 <-> EU868 across the Atlantic mid-ocean boundary */
+    int bad = 0;
+    lorawan_set_region(LORA_REGION_EU868);  /* known start, opposite of first switch */
+    for (int i = 0; i < 50; i++) {
+        lora_region_id_t before = lorawan_current_region();
+        prime_joined_state(before, (uint32_t)(i + 1) * 10);
+        /* Force a real transition: target whichever region we're NOT in. */
+        lora_region_id_t want = (before == LORA_REGION_US915)
+                                 ? LORA_REGION_EU868 : LORA_REGION_US915;
+        int32_t lon = (want == LORA_REGION_EU868) ? E7(-29.0) : E7(-31.0);
+        lora_region_id_t geo = region_for_latlon(E7(40.0), lon);
+        lorawan_set_region(geo);
+        if (geo != want)                       bad |= 1;
+        if (lorawan_current_region() != want)  bad |= 2;
+        if (lorawan_joined())                  bad |= 4;  /* must be cleared */
+        lorawan_session_t post; lorawan_export_session(&post);
+        if (post.fCntUp != 0)                  bad |= 8;
+    }
+    char buf[120];
+    if (bad == 0) {
+        LOG_OK("50x US<->EU forced-transition crossings: state clean");
+    } else {
+        snprintf(buf, sizeof(buf), "50x US<->EU thrash failure bitmap=0x%X", bad);
+        LOG_FAIL(buf);
+    }
+
+    /* (b) AS923 <-> SILENT across the China bbox west edge (lon 73).
+     * SILENT branch in set_region uses a different early-return path. */
+    bad = 0;
+    lorawan_set_region(LORA_REGION_AS923);  /* known start */
+    for (int i = 0; i < 50; i++) {
+        lora_region_id_t before = lorawan_current_region();
+        if (before != LORA_REGION_SILENT) prime_joined_state(before, (uint32_t)(i + 1) * 10);
+        lora_region_id_t want = (before == LORA_REGION_AS923)
+                                 ? LORA_REGION_SILENT : LORA_REGION_AS923;
+        int32_t lon = (want == LORA_REGION_SILENT) ? E7(75.0) : E7(70.0);
+        lora_region_id_t geo = region_for_latlon(E7(40.0), lon);
+        lorawan_set_region(geo);
+        if (geo != want)                       bad |= 1;
+        if (lorawan_current_region() != want)  bad |= 2;
+        lorawan_session_t post; lorawan_export_session(&post);
+        if (post.fCntUp != 0)                  bad |= 4;
+    }
+    if (bad == 0) {
+        LOG_OK("50x AS<->SILENT forced-transition crossings: state clean");
+    } else {
+        snprintf(buf, sizeof(buf), "50x AS<->SILENT thrash failure bitmap=0x%X", bad);
+        LOG_FAIL(buf);
+    }
+}
+
+/* ========== Random walk ==========
+ *
+ * Visit each region in a deterministic pseudo-random order and verify
+ * lorawan_current_region tracks the requested region every step.
+ * Different stress profile than thrash — exercises every possible
+ * transition (X→Y for every X,Y pair) rather than just one pair. */
+static void test_random_walk(void) {
+    PRINT.println("\n=== 9. Random walk through all regions ===");
+    /* xorshift32 with seed 1 — fully reproducible. */
+    uint32_t s = 1u;
+    int bad = 0;
+    for (int i = 0; i < 100; i++) {
+        s ^= s << 13; s ^= s >> 17; s ^= s << 5;
+        lora_region_id_t target = (lora_region_id_t)(s % 5);  /* 0..4 incl SILENT */
+        lorawan_set_region(target);
+        if (lorawan_current_region() != target) bad++;
+    }
+    char buf[80];
+    if (bad == 0) {
+        LOG_OK("100x pseudo-random region transitions: all tracked");
+    } else {
+        snprintf(buf, sizeof(buf), "random walk: %d/100 mismatched", bad);
+        LOG_FAIL(buf);
+    }
+}
+
+/* ========== Multi-session save/load ==========
+ *
+ * Save three different sessions in sequence; after each save, the load
+ * must return that session, not a stale one.  Catches any case where
+ * TAMP isn't fully overwritten by the save path (partial writes,
+ * caching, stale-residue bugs). */
+static void test_multi_save_load(void) {
+    PRINT.println("\n=== 10. Multi-cycle save/load (write-A, write-B, write-C) ===");
+    struct { lora_region_id_t r; uint32_t addr; uint32_t fcnt; uint32_t key0; const char* tag; } cases[] = {
+        { LORA_REGION_US915, 0x11111111u, 0x00000001u, 0xA1111111u, "A US915 fcnt=1" },
+        { LORA_REGION_EU868, 0x22222222u, 0x00000002u, 0xA2222222u, "B EU868 fcnt=2" },
+        { LORA_REGION_AS923, 0x33333333u, 0xDEADBEEFu, 0xA3333333u, "C AS923 fcnt=DEADBEEF" },
+    };
+    for (size_t i = 0; i < sizeof(cases)/sizeof(cases[0]); i++) {
+        lorawan_session_t w = {0};
+        w.region_id = cases[i].r;
+        w.devAddr   = cases[i].addr;
+        w.fCntUp    = cases[i].fcnt;
+        for (int j = 0; j < 4; j++) { w.nwkSKey[j] = cases[i].key0 + j; w.appSKey[j] = cases[i].key0 + 0x10 + j; }
+        power_manager_save_session(&w);
+        lorawan_session_t r = {0};
+        bool ok = power_manager_load_session(&r);
+        char buf[100];
+        if (!ok) {
+            snprintf(buf, sizeof(buf), "%-30s load returned false", cases[i].tag);
+            LOG_FAIL(buf);
+            continue;
+        }
+        bool match = (r.region_id == w.region_id && r.devAddr == w.devAddr &&
+                      r.fCntUp == w.fCntUp && r.nwkSKey[0] == w.nwkSKey[0]);
+        if (match) {
+            snprintf(buf, sizeof(buf), "%-30s save/load round-trip", cases[i].tag);
+            LOG_OK(buf);
+        } else {
+            snprintf(buf, sizeof(buf), "%-30s stale data: got fcnt=0x%08lX addr=0x%08lX",
+                     cases[i].tag, (unsigned long)r.fCntUp, (unsigned long)r.devAddr);
+            LOG_FAIL(buf);
+        }
+    }
+    power_manager_clear_session();  /* clean up */
+}
+
+/* ========== Session persistence across NVIC_SystemReset ==========
+ *
+ * The flight firmware's TX-fail auto-reset path calls NVIC_SystemReset
+ * after 5 consecutive failures (main.cpp tx_fail_streak >= 5).  After
+ * that reset, setup() runs power_manager_load_session and is supposed
+ * to find the saved session in TAMP, skip the join, and continue from
+ * the last fCntUp.  Bench-proving this end-to-end requires actually
+ * triggering NVIC_SystemReset mid-test.
+ *
+ * Two-phase strategy:
+ *   Phase 1 (first boot): stamp a known session, mark BKP14R, reset.
+ *   Phase 2 (post-reset): detect marker, load session, compare every
+ *                          field, clear marker, then continue normal
+ *                          tests.
+ *
+ * Inter-phase signal uses TAMP_BKP14R (well past the 13-word session
+ * struct at BKP0R..BKP12R).  test_scratch is zeroed across reset
+ * (it's in BSS), so phase-2 results are what J-Link sees in the dump. */
+#define RESET_TEST_MARKER       0xDEADBEEFu
+
+static void backup_access_unlock(void) {
+    SET_BIT(RCC->APB1ENR1, RCC_APB1ENR1_RTCAPBEN);
+    (void)READ_BIT(RCC->APB1ENR1, RCC_APB1ENR1_RTCAPBEN);
+    SET_BIT(PWR->CR1, PWR_CR1_DBP);
+}
+static uint32_t test_marker_read(void) {
+    backup_access_unlock();
+    return (&TAMP->BKP0R)[14];
+}
+static void test_marker_write(uint32_t v) {
+    backup_access_unlock();
+    (&TAMP->BKP0R)[14] = v;
+}
+
+static void test_persist_phase2(void) {
+    PRINT.println("\n=== 11. Persist across NVIC_SystemReset (PHASE 2 post-reset) ===");
+    scratch_append("[INFO] phase 2: post-NVIC_SystemReset boot\n");
+
+    lorawan_session_t s = {0};
+    bool ok = power_manager_load_session(&s);
+    if (!ok)                                  { LOG_FAIL("phase2: load_session returned false"); return; }
+    if (s.region_id != LORA_REGION_EU868)     { LOG_FAIL("phase2: region_id mismatch"); return; }
+    if (s.devAddr   != 0xAABBCCDDu)           { LOG_FAIL("phase2: devAddr mismatch"); return; }
+    if (s.fCntUp    != 0x12345678u)           { LOG_FAIL("phase2: fCntUp mismatch"); return; }
+    for (int i = 0; i < 4; i++) {
+        if (s.nwkSKey[i] != 0xCAFE0000u + i)  { LOG_FAIL("phase2: nwkSKey mismatch"); return; }
+        if (s.appSKey[i] != 0xF00D0000u + i)  { LOG_FAIL("phase2: appSKey mismatch"); return; }
+    }
+    LOG_OK("session preserved across NVIC_SystemReset (all 13 words match)");
+
+    /* Clean up: clear marker + session so subsequent boots don't loop. */
+    test_marker_write(0);
+    power_manager_clear_session();
+}
+
+static void test_persist_phase1_and_reset(void) {
+    PRINT.println("\n=== 11. Persist across NVIC_SystemReset (PHASE 1) ===");
+    scratch_append("[INFO] phase 1: stamping session + marker, calling NVIC_SystemReset\n");
+
+    lorawan_session_t s = {0};
+    s.region_id = LORA_REGION_EU868;
+    s.devAddr   = 0xAABBCCDDu;
+    s.fCntUp    = 0x12345678u;
+    for (int i = 0; i < 4; i++) { s.nwkSKey[i] = 0xCAFE0000u + i; s.appSKey[i] = 0xF00D0000u + i; }
+    power_manager_save_session(&s);
+    test_marker_write(RESET_TEST_MARKER);
+
+    /* Finalize scratchpad with phase-1 results in case the reset
+     * doesn't fire — J-Link dump will at least show how far we got. */
+    test_scratch.passed = pass_count;
+    test_scratch.failed = fail_count;
+    test_scratch.total  = pass_count + fail_count;
+    test_scratch.magic  = SCRATCH_MAGIC_DONE;
+
+    delay(50);    /* let any pending UART drain */
+    NVIC_SystemReset();
+    /* unreachable */
+    while (1) { }
+}
+
 static void run_all_tests(void) {
     pass_count = fail_count = 0;
     test_scratch.magic = 0;       /* clear "done" until tests finish */
@@ -403,6 +618,12 @@ static void run_all_tests(void) {
     test_scratch.failed = 0;
     test_scratch.total = 0;
 
+    /* Phase 2 detection: if the marker is set in TAMP, we just came
+     * back from NVIC_SystemReset and must verify the session before
+     * any other test mucks with TAMP.  Always run this first. */
+    bool is_phase2 = (test_marker_read() == RESET_TEST_MARKER);
+    if (is_phase2) test_persist_phase2();
+
     test_geofence();
     test_set_region_transitions();
     test_set_region_idempotent();
@@ -410,6 +631,9 @@ static void run_all_tests(void) {
     test_session_tamp_roundtrip();
     test_export_import_session();
     test_trajectory();
+    test_boundary_thrash();
+    test_random_walk();
+    test_multi_save_load();
 
     PRINT.print("\n=== ");
     PRINT.print(pass_count);
@@ -424,6 +648,13 @@ static void run_all_tests(void) {
     test_scratch.failed = fail_count;
     test_scratch.total  = pass_count + fail_count;
     test_scratch.magic  = SCRATCH_MAGIC_DONE;
+
+    /* If this was phase 1 (cold boot, no marker set), now stamp the
+     * session + marker and trigger NVIC_SystemReset.  After reset,
+     * setup() runs again, test_persist_phase2 runs first, then all
+     * the other tests re-run.  Final J-Link dump shows phase-2
+     * scratchpad. */
+    if (!is_phase2) test_persist_phase1_and_reset();
 }
 
 void setup() {
