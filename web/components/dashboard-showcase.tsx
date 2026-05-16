@@ -87,19 +87,17 @@ export function DashboardShowcase() {
                         isVisible ? 'translate-y-0 opacity-100' : 'translate-y-8 opacity-0'
                     }`}
                 >
-                    <div className={`grid gap-8 ${isMobile ? 'grid-cols-1' : 'lg:grid-cols-2'} items-start`}>
-                        {/* Desktop Frame */}
-                        <div
-                            className={`transition-all duration-500 ${
-                                activeView === 'desktop' || isMobile
-                                    ? 'opacity-100 scale-100'
-                                    : 'opacity-40 scale-95'
-                            }`}
-                        >
-                            <div className="relative">
-                                {/* Browser Frame */}
+                    <div className={`grid gap-12 ${isMobile ? 'grid-cols-1' : 'lg:grid-cols-2'} items-start`}>
+                        {/* Desktop Frame — hidden on mobile, where it's unreadable anyway */}
+                        {!isMobile && (
+                            <div
+                                className={`transition-all duration-500 ${
+                                    activeView === 'desktop'
+                                        ? 'opacity-100 scale-100'
+                                        : 'opacity-40 scale-95'
+                                }`}
+                            >
                                 <div className="rounded-lg border border-border bg-card shadow-2xl overflow-hidden">
-                                    {/* Browser Chrome */}
                                     <div className="bg-muted/50 border-b border-border px-4 py-3 flex items-center gap-2">
                                         <div className="flex gap-1.5">
                                             <div className="w-3 h-3 rounded-full bg-red-500/20" />
@@ -112,8 +110,6 @@ export function DashboardShowcase() {
                                             </div>
                                         </div>
                                     </div>
-
-                                    {/* Dashboard Preview */}
                                     <div className="relative bg-[#1a1a1a] aspect-video overflow-hidden">
                                         <iframe
                                             src="/dashboard-v2"
@@ -121,12 +117,10 @@ export function DashboardShowcase() {
                                             style={{ transform: 'scale(0.5)', transformOrigin: 'top left', width: '200%', height: '200%' }}
                                             title="Mission Control desktop preview"
                                         />
-                                        {/* Overlay gradient for polish */}
                                         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-background/20 pointer-events-none" />
                                     </div>
                                 </div>
 
-                                {/* Label */}
                                 <div className="mt-4 text-center">
                                     <p className="text-sm font-medium text-foreground">Desktop · Mission Control</p>
                                     <p className="text-xs text-muted-foreground mt-1">
@@ -134,47 +128,37 @@ export function DashboardShowcase() {
                                     </p>
                                 </div>
                             </div>
-                        </div>
+                        )}
 
-                        {/* Mobile Frame */}
+                        {/* Mobile Phone Frame — always shown */}
                         <div
-                            className={`transition-all duration-500 ${
+                            className={`flex flex-col items-center transition-all duration-500 ${
                                 activeView === 'mobile' || isMobile
                                     ? 'opacity-100 scale-100'
                                     : 'opacity-40 scale-95'
                             }`}
                         >
-                            <div className="relative flex justify-center">
-                                {/* Phone Frame */}
-                                <div className="w-[280px] mx-auto">
-                                    <div className="relative rounded-[2.5rem] border-8 border-foreground/10 bg-foreground/5 p-2 shadow-2xl">
-                                        {/* Notch */}
-                                        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-32 h-6 bg-foreground/10 rounded-b-2xl z-10" />
-                                        
-                                        {/* Screen */}
-                                        <div className="relative bg-[#1a1a1a] rounded-[1.5rem] overflow-hidden aspect-[9/19.5]">
-                                            <iframe
-                                                src="/dashboard-v2?preview=mobile"
-                                                className="w-full h-full border-0 pointer-events-none"
-                                                title="Mission Control mobile preview"
-                                                sandbox="allow-same-origin allow-scripts"
-                                            />
-                                            {/* Overlay gradient */}
-                                            <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-background/20 pointer-events-none" />
-                                        </div>
-
-                                        {/* Home Indicator */}
-                                        <div className="absolute bottom-2 left-1/2 -translate-x-1/2 w-32 h-1 bg-foreground/20 rounded-full" />
+                            <div className={isMobile ? 'w-[260px]' : 'w-[280px]'}>
+                                <div className="relative rounded-[2.5rem] border-8 border-foreground/10 bg-foreground/5 p-2 shadow-2xl">
+                                    <div className="absolute top-0 left-1/2 -translate-x-1/2 w-32 h-6 bg-foreground/10 rounded-b-2xl z-10" />
+                                    <div className="relative bg-[#1a1a1a] rounded-[1.5rem] overflow-hidden aspect-[9/19.5]">
+                                        <iframe
+                                            src="/dashboard-v2?preview=mobile"
+                                            className="w-full h-full border-0 pointer-events-none"
+                                            title="Mission Control mobile preview"
+                                            sandbox="allow-same-origin allow-scripts"
+                                        />
+                                        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-background/20 pointer-events-none" />
                                     </div>
+                                    <div className="absolute bottom-2 left-1/2 -translate-x-1/2 w-32 h-1 bg-foreground/20 rounded-full" />
                                 </div>
+                            </div>
 
-                                {/* Label */}
-                                <div className="mt-6 text-center">
-                                    <p className="text-sm font-medium text-foreground">Mobile · Mission Control</p>
-                                    <p className="text-xs text-muted-foreground mt-1">
-                                        Same fleet, optimized for phones · Fleet, Map, Telemetry, Alerts
-                                    </p>
-                                </div>
+                            <div className="mt-6 text-center">
+                                <p className="text-sm font-medium text-foreground">Mobile · Mission Control</p>
+                                <p className="text-xs text-muted-foreground mt-1">
+                                    Same fleet, optimized for phones · Fleet, Map, Telemetry, Alerts
+                                </p>
                             </div>
                         </div>
                     </div>

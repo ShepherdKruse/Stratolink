@@ -91,33 +91,53 @@ export function Navigation() {
           id="mobile-nav-menu"
           className="border-t bg-background/95 backdrop-blur-sm md:hidden"
         >
-          <div className="mx-auto max-w-7xl px-6 py-4 sm:px-8">
-            <ul className="flex flex-col gap-1">
+          <div className="mx-auto max-w-7xl px-6 py-3 sm:px-8">
+            <p className="px-3 pb-2 pt-1 text-[10px] font-medium uppercase tracking-wider text-muted-foreground/70">
+              Jump to
+            </p>
+            <ul className="flex flex-col gap-0.5">
+              {[
+                { href: "#mission", label: "Mission" },
+                { href: "#how-it-works", label: "How it works" },
+                { href: "#dashboard", label: "Dashboard preview" },
+                { href: "#applications", label: "Applications" },
+                { href: "#roadmap", label: "Roadmap" },
+                { href: "#contact", label: "Contact" },
+              ].map((item) => (
+                <li key={item.href}>
+                  <Link
+                    href={item.href}
+                    onClick={close}
+                    className="block rounded-sm px-3 py-2.5 text-base font-light text-muted-foreground transition-colors hover:bg-accent/50 hover:text-foreground"
+                  >
+                    {item.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+
+            <div className="my-3 h-px bg-border" />
+
+            <p className="px-3 pb-2 pt-1 text-[10px] font-medium uppercase tracking-wider text-muted-foreground/70">
+              Tools
+            </p>
+            <ul className="flex flex-col gap-0.5">
               <li>
                 <Link
                   href="/activate"
                   onClick={close}
-                  className="block rounded-sm px-3 py-3 text-base font-light text-muted-foreground transition-colors hover:bg-accent/50 hover:text-foreground"
+                  className="block rounded-sm px-3 py-2.5 text-base font-light text-muted-foreground transition-colors hover:bg-accent/50 hover:text-foreground"
                 >
-                  Activate Device
+                  Activate device
                 </Link>
               </li>
               <li>
                 <Link
                   href="/docs"
                   onClick={close}
-                  className="block rounded-sm px-3 py-3 text-base font-light text-muted-foreground transition-colors hover:bg-accent/50 hover:text-foreground"
+                  className="block rounded-sm px-3 py-2.5 text-base font-light text-muted-foreground transition-colors hover:bg-accent/50 hover:text-foreground"
                 >
                   Docs
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="#contact"
-                  onClick={close}
-                  className="block rounded-sm px-3 py-3 text-base font-light text-muted-foreground transition-colors hover:bg-accent/50 hover:text-foreground"
-                >
-                  Contact
                 </Link>
               </li>
             </ul>
