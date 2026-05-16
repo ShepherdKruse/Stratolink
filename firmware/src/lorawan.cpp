@@ -457,6 +457,17 @@ void lorawan_sleep(void) {
 void lorawan_set_region(lora_region_id_t id) {
     if (id == REGION_ID) return;  /* no-op: same plan */
 
+    /* Any region change invalidates the LoRaWAN session — TTN clusters
+     * (nam1, eu1) are independent, DevAddr / NwkSKey / AppSKey from the
+     * old region won't authenticate against the new gateway, and
+     * fCntUp must reset to 0 (per-session replay protection).  Done
+     * up-front so the SILENT branch below gets the same invalidation
+     * as a "normal" region switch — caught by the hardware trajectory
+     * test which flagged "fCntUp not reset on AS923->SILENT". */
+    _joined = false;
+    fCntUp  = 0;
+    chIdx   = 0;
+
     switch (id) {
         case LORA_REGION_US915: REGION = LORA_US915; break;
         case LORA_REGION_EU868: REGION = LORA_EU868; break;
@@ -465,20 +476,10 @@ void lorawan_set_region(lora_region_id_t id) {
         case LORA_REGION_SILENT:
         default:
             REGION_ID = LORA_REGION_SILENT;
-            _joined = false;
-            return;
+            return;  /* skip radio reconfig — SILENT keeps prev band */
     }
 
-    /* New region invalidates the session: TTN clusters (nam1, eu1)
-     * are independent — DevAddr / NwkSKey / AppSKey from the old
-     * region won't authenticate against the new gateway, and fCntUp
-     * must reset to 0 (LoRaWAN replay protection is per-session, and
-     * the new session begins at FCnt 0).  The re-join loop in
-     * main.cpp picks up !lorawan_joined() and rejoins on the next TX. */
     REGION_ID = id;
-    _joined   = false;
-    fCntUp    = 0;
-    chIdx     = 0;
 
     /* Reconfigure the radio for the new region's TX defaults so any
      * subsequent join attempt fires on the right band. */

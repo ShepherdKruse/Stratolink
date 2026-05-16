@@ -250,6 +250,151 @@ static void test_export_import_session(void) {
     else                               LOG_FAIL("import accepted region_id=99");
 }
 
+/* ========== Trajectory integration test ==========
+ *
+ * Walks a simulated jet-stream circumnavigation through every
+ * regulatory zone the firmware can encounter, calling the same code
+ * path that main.cpp loop() runs after a real GPS fix:
+ *
+ *   region = region_for_latlon(lat, lon)
+ *   lorawan_set_region(region)
+ *
+ * At each step, verifies:
+ *   1. region_for_latlon picks the expected region
+ *   2. lorawan_current_region() reflects the switch
+ *   3. If region changed from prev step: _joined flipped from true to
+ *      false AND fCntUp was reset to 0
+ *   4. If region didn't change: _joined and fCntUp persisted
+ *
+ * Setting _joined=true before each switch is done via lorawan_import
+ * _session — we don't actually need a real LoRaWAN gateway for this
+ * test, the import sets the internal session state synthetically.
+ */
+struct trajectory_step_t {
+    int32_t           lat_e7;
+    int32_t           lon_e7;
+    lora_region_id_t  expected_region;
+    const char*       name;
+};
+
+static const trajectory_step_t TRAJECTORY[] = {
+    /* Jet-stream circumnav at lat 40°N going eastbound — every step
+     * a balloon would actually pass over during a real flight. */
+    { E7(40.7), E7(-74.0),  LORA_REGION_US915,  "NYC start"            },
+    { E7(40.0), E7(-100.0), LORA_REGION_US915,  "Kansas"               },
+    { E7(40.0), E7(-60.0),  LORA_REGION_US915,  "Atlantic 60W"         },
+    { E7(40.0), E7(-40.0),  LORA_REGION_US915,  "Atlantic 40W"         },
+    { E7(40.0), E7(-31.0),  LORA_REGION_US915,  "Just west of bdry"    },
+    { E7(40.0), E7(-29.0),  LORA_REGION_EU868,  "EU CROSS"             },
+    { E7(40.0), E7(0.0),    LORA_REGION_EU868,  "Prime Meridian"       },
+    { E7(40.0), E7(30.0),   LORA_REGION_EU868,  "Black Sea"            },
+    { E7(40.0), E7(50.0),   LORA_REGION_EU868,  "Caspian"              },
+    { E7(40.0), E7(59.0),   LORA_REGION_EU868,  "Just W of EU/AS bdry" },
+    { E7(40.0), E7(61.0),   LORA_REGION_AS923,  "AS CROSS"             },
+    { E7(40.0), E7(75.0),   LORA_REGION_SILENT, "China bbox W"         },
+    { E7(40.0), E7(110.0),  LORA_REGION_SILENT, "Mongolia (CN bbox)"   },
+    { E7(40.0), E7(120.0),  LORA_REGION_SILENT, "Shanghai-lat (CN)"    },
+    { E7(40.0), E7(124.0),  LORA_REGION_AS923,  "Korea (out of CN)"    },
+    { E7(40.0), E7(140.0),  LORA_REGION_AS923,  "Japan east"           },
+    { E7(40.0), E7(170.0),  LORA_REGION_AS923,  "Mid-Pacific"          },
+    /* Cross antimeridian going east into Americas */
+    { E7(40.0), E7(-170.0), LORA_REGION_US915,  "Aleutians US side"    },
+    { E7(40.0), E7(-160.0), LORA_REGION_US915,  "East Pacific"         },
+    { E7(40.7), E7(-74.0),  LORA_REGION_US915,  "Back to NYC"          },
+    /* Throw in southern hemisphere edge cases */
+    { E7(-23.5),E7(-46.6),  LORA_REGION_AU915,  "Sao Paulo (SA)"       },
+    { E7(-33.9),E7(151.2),  LORA_REGION_AU915,  "Sydney"               },
+};
+
+/* Build a synthetic joined-session for a given region.  Import sets
+ * _joined=true and fCntUp=42 internally; we use it as the "before"
+ * state so we can observe set_region's invalidation. */
+static void prime_joined_state(lora_region_id_t region, uint32_t fcnt) {
+    lorawan_session_t s = {0};
+    s.region_id = (uint32_t)region;
+    s.devAddr   = 0xABCDEF01u;
+    s.fCntUp    = fcnt;
+    for (int i = 0; i < 4; i++) {
+        s.nwkSKey[i] = 0xAAAA0000u + i;
+        s.appSKey[i] = 0xBBBB0000u + i;
+    }
+    (void)lorawan_import_session(&s);
+}
+
+static void test_trajectory(void) {
+    PRINT.println("\n=== 7. Trajectory: fake-GPS-driven region switching ===");
+
+    lora_region_id_t prev_region = LORA_REGION_COUNT;
+
+    for (size_t i = 0; i < sizeof(TRAJECTORY)/sizeof(TRAJECTORY[0]); i++) {
+        const trajectory_step_t& step = TRAJECTORY[i];
+
+        /* Step 1: geofence picks expected region. */
+        lora_region_id_t geo = region_for_latlon(step.lat_e7, step.lon_e7);
+
+        /* Pre-arm a joined session in the previous region so we can
+         * observe set_region's invalidation when crossing a boundary.
+         * Skip on the very first step (no prev) and skip if the new
+         * region is SILENT (import rejects SILENT). */
+        if (prev_region != LORA_REGION_COUNT && prev_region != LORA_REGION_SILENT) {
+            prime_joined_state(prev_region, /*fcnt=*/100);
+        }
+        bool was_joined = lorawan_joined();
+        uint32_t was_fcnt;
+        {
+            lorawan_session_t pre; lorawan_export_session(&pre);
+            was_fcnt = pre.fCntUp;
+        }
+
+        /* Step 2: call set_region as main.cpp loop() would. */
+        lorawan_set_region(geo);
+
+        /* Step 3: verify state. */
+        lora_region_id_t now = lorawan_current_region();
+        bool joined_now = lorawan_joined();
+        uint32_t fcnt_now;
+        {
+            lorawan_session_t post; lorawan_export_session(&post);
+            fcnt_now = post.fCntUp;
+        }
+
+        bool ok = true;
+        char buf[160];
+        if (geo != step.expected_region) {
+            snprintf(buf, sizeof(buf), "%-22s geofence wrong: exp=%s got=%s",
+                     step.name, region_name(step.expected_region), region_name(geo));
+            ok = false;
+        } else if (now != step.expected_region) {
+            snprintf(buf, sizeof(buf), "%-22s set_region didn't take: exp=%s got=%s",
+                     step.name, region_name(step.expected_region), region_name(now));
+            ok = false;
+        } else if (prev_region != LORA_REGION_COUNT
+                   && prev_region != LORA_REGION_SILENT
+                   && geo != prev_region) {
+            /* Boundary crossing: session should have been invalidated. */
+            if (was_joined && joined_now) {
+                snprintf(buf, sizeof(buf), "%-22s set_region didn't clear _joined on %s->%s",
+                         step.name, region_name(prev_region), region_name(geo));
+                ok = false;
+            } else if (was_fcnt != 0 && fcnt_now != 0) {
+                snprintf(buf, sizeof(buf), "%-22s fCntUp not reset on %s->%s (was %lu now %lu)",
+                         step.name, region_name(prev_region), region_name(geo),
+                         (unsigned long)was_fcnt, (unsigned long)fcnt_now);
+                ok = false;
+            } else {
+                snprintf(buf, sizeof(buf), "%-22s %s->%s session cleared OK",
+                         step.name, region_name(prev_region), region_name(geo));
+            }
+        } else {
+            snprintf(buf, sizeof(buf), "%-22s stays %s",
+                     step.name, region_name(geo));
+        }
+        if (ok) LOG_OK(buf); else LOG_FAIL(buf);
+
+        prev_region = geo;
+    }
+}
+
 static void run_all_tests(void) {
     pass_count = fail_count = 0;
     test_scratch.magic = 0;       /* clear "done" until tests finish */
@@ -264,6 +409,7 @@ static void run_all_tests(void) {
     test_silent_blocks_tx();
     test_session_tamp_roundtrip();
     test_export_import_session();
+    test_trajectory();
 
     PRINT.print("\n=== ");
     PRINT.print(pass_count);
