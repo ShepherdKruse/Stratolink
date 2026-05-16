@@ -10,8 +10,12 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-    title: 'Stratolink — Mission Control v2',
-    description: 'Redesigned dashboard reading live telemetry from Supabase.',
+    title: 'Mission Control',
+    description: 'Fleet overview and live telemetry from Supabase (dashboard v2).',
+    openGraph: {
+        title: 'Mission Control · Stratolink',
+        description: 'Fleet overview and live telemetry — dashboard v2.',
+    },
 };
 
 export default function DashboardV2Layout({ children }: { children: React.ReactNode }) {
