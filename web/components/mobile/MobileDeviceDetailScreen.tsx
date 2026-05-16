@@ -8,7 +8,7 @@ import {
     pillClass,
     type MobileFleetDeviceRow,
 } from './mobileStratolinkUtils';
-import SlMapMini from './SlMapMini';
+import MobilePositionPreviewMap from './MobilePositionPreviewMap';
 
 type TelemetryPoint = Record<string, unknown>;
 
@@ -40,11 +40,18 @@ function coerceNum(v: unknown): number | null {
 interface MobileDeviceDetailScreenProps {
     device: MobileFleetDeviceRow;
     telemetryRows: TelemetryPoint[];
+    flightPathData?: Array<{ lat: number; lon: number; time: Date }>;
     onBack: () => void;
     onOpenFullMap: () => void;
 }
 
-export default function MobileDeviceDetailScreen({ device, telemetryRows, onBack, onOpenFullMap }: MobileDeviceDetailScreenProps) {
+export default function MobileDeviceDetailScreen({
+    device,
+    telemetryRows,
+    flightPathData = [],
+    onBack,
+    onOpenFullMap,
+}: MobileDeviceDetailScreenProps) {
     const charts = chartRows(telemetryRows);
     const last = charts.length > 0 ? charts[charts.length - 1] : null;
     const batt = coerceNum(last?.batt) ?? coerceNum(device.battery_voltage);
@@ -135,10 +142,10 @@ export default function MobileDeviceDetailScreen({ device, telemetryRows, onBack
                     Position
                 </SectionLabel>
 
-                <div className="relative border-b border-t overflow-hidden" style={{ borderColor: 'var(--border)' }}>
-                    <SlMapMini />
+                <div className="relative overflow-hidden border-b border-t bg-[var(--bg)]" style={{ borderColor: 'var(--border)' }}>
+                    <MobilePositionPreviewMap lat={device.lat} lon={device.lon} flightPathData={flightPathData} />
                     <div
-                        className="absolute bottom-3 left-4 font-mono text-[11px] text-[var(--text-hi)]"
+                        className="pointer-events-none absolute bottom-3 left-4 font-mono text-[11px] text-[var(--text-hi)]"
                         style={{ textShadow: '0 0 4px rgba(0,0,0,0.8)', fontVariantNumeric: 'tabular-nums' }}>
                         {fmtCoords(device.lat, device.lon)}
                     </div>

@@ -5,7 +5,7 @@ import Map, { Source, Layer } from 'react-map-gl/mapbox';
 import type { MapRef } from 'react-map-gl/mapbox';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import { Compass } from 'lucide-react';
-import { isValidWgs84Point, isWebGLAvailable } from '@/lib/mapGeo';
+import { isUsableGpsCoordinate, isValidWgs84Point, isWebGLAvailable } from '@/lib/mapGeo';
 import mapboxgl from 'mapbox-gl';
 import type { MapMouseEvent } from 'mapbox-gl';
 
@@ -65,7 +65,7 @@ export default function MobileRadar({
     }, []);
 
     const mapBalloons = useMemo(
-        () => balloonData.filter((b) => isValidWgs84Point(b.lat, b.lon)),
+        () => balloonData.filter((b) => isUsableGpsCoordinate(b.lat, b.lon)),
         [balloonData],
     );
 
@@ -121,7 +121,7 @@ export default function MobileRadar({
 
     const flightLineGeoJSON = useMemo(() => {
         const pathCoords = flightPathData
-            .filter((p) => isValidWgs84Point(p.lat, p.lon))
+            .filter((p) => isUsableGpsCoordinate(p.lat, p.lon))
             .map((p) => [p.lon, p.lat] as [number, number]);
         if (!selectedBalloonId || pathCoords.length < 2) {
             return { type: 'FeatureCollection' as const, features: [] as GeoJSON.Feature[] };
@@ -198,7 +198,7 @@ export default function MobileRadar({
             }
         }
 
-        if (lngLatsFromBalloons.length === 1 && isValidWgs84Point(mapBalloons[0].lat, mapBalloons[0].lon)) {
+        if (lngLatsFromBalloons.length === 1 && isUsableGpsCoordinate(mapBalloons[0].lat, mapBalloons[0].lon)) {
             map.flyTo({
                 center: [mapBalloons[0].lon, mapBalloons[0].lat],
                 zoom: 8,

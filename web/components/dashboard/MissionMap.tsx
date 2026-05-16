@@ -5,6 +5,8 @@ import Map, { Source, Layer } from 'react-map-gl/mapbox';
 import type { MapRef } from 'react-map-gl/mapbox';
 import 'mapbox-gl/dist/mapbox-gl.css';
 
+import { isUsableGpsCoordinate } from '@/lib/mapGeo';
+
 function isWebGLAvailable(): boolean {
     if (typeof window === 'undefined') return false;
     try {
@@ -208,12 +210,14 @@ export default function MissionMap({
             return null;
         }
         
-        const coordinates = pathPoints.map(point => {
-            if (typeof point.lat !== 'number' || typeof point.lon !== 'number') {
-                return null;
-            }
-            return [point.lon, point.lat] as [number, number];
-        }).filter((coord): coord is [number, number] => coord !== null);
+        const coordinates = pathPoints
+            .map((point) => {
+                if (!isUsableGpsCoordinate(point.lat, point.lon)) {
+                    return null;
+                }
+                return [point.lon, point.lat] as [number, number];
+            })
+            .filter((coord): coord is [number, number] => coord !== null);
         
         if (coordinates.length < 2) {
             return null;

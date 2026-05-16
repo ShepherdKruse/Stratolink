@@ -4,7 +4,7 @@ import { useEffect, useMemo, useState } from 'react';
 import '@/styles/mobile-stratolink.css';
 
 import { createClient } from '@/lib/supabase';
-import { isValidWgs84Point } from '@/lib/mapGeo';
+import { isUsableGpsCoordinate, isValidWgs84Point } from '@/lib/mapGeo';
 
 import MobileAlertsTab from './MobileAlertsTab';
 import MobileDeviceDetailScreen from './MobileDeviceDetailScreen';
@@ -186,7 +186,10 @@ export default function MobileLayout({ initialBalloonId = null }: MobileLayoutPr
                         latestAny.set(row.device_id, row);
                     }
 
-                    const hasGpsFix = isValidWgs84Point(Number(row.lat), Number(row.lon));
+                    const hasGpsFix =
+                        row.lat != null &&
+                        row.lon != null &&
+                        isUsableGpsCoordinate(Number(row.lat), Number(row.lon));
                     if (hasGpsFix && !latestGps.has(row.device_id)) {
                         latestGps.set(row.device_id, row);
                     }
@@ -207,7 +210,7 @@ export default function MobileLayout({ initialBalloonId = null }: MobileLayoutPr
                         gpsRow &&
                         gpsRow.lat != null &&
                         gpsRow.lon != null &&
-                        isValidWgs84Point(Number(gpsRow.lat), Number(gpsRow.lon))
+                        isUsableGpsCoordinate(Number(gpsRow.lat), Number(gpsRow.lon))
                     ) {
                         lat = Number(gpsRow.lat);
                         lon = Number(gpsRow.lon);
@@ -294,7 +297,12 @@ export default function MobileLayout({ initialBalloonId = null }: MobileLayoutPr
                         time: string;
                     }>;
                     const validPath = rows
-                        .filter((row) => isValidWgs84Point(Number(row.lat), Number(row.lon)))
+                        .filter(
+                            (row) =>
+                                row.lat != null &&
+                                row.lon != null &&
+                                isUsableGpsCoordinate(Number(row.lat), Number(row.lon)),
+                        )
                         .map((row) => ({
                             lat: Number(row.lat),
                             lon: Number(row.lon),
@@ -376,6 +384,7 @@ export default function MobileLayout({ initialBalloonId = null }: MobileLayoutPr
                 <MobileDeviceDetailScreen
                     device={selectedBalloon}
                     telemetryRows={sheetTelemetry}
+                    flightPathData={flightPathData}
                     onBack={() => setFleetMode('list')}
                     onOpenFullMap={() => {
                         setMainTab('map');

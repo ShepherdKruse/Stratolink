@@ -6,6 +6,7 @@ import PilotHUD from '@/components/dashboard/PilotHUD';
 import MissionSidebar from '@/components/dashboard/MissionSidebar';
 import MissionTimeline from '@/components/dashboard/MissionTimeline';
 import { createClient } from '@/lib/supabase';
+import { isUsableGpsCoordinate } from '@/lib/mapGeo';
 
 interface BalloonData {
     id: string;
@@ -317,8 +318,13 @@ export default function DashboardClient({ initialBalloonId = null, initialMode =
                      * (the map polyline). NOGPS rows still flow through
                      * sidebarTelemetry above so sensors keep updating. */
                     const path = rows
-                        .filter(r => r.lat !== null && r.lon !== null)
-                        .map(r => ({
+                        .filter(
+                            (r) =>
+                                r.lat !== null &&
+                                r.lon !== null &&
+                                isUsableGpsCoordinate(r.lat as number, r.lon as number),
+                        )
+                        .map((r) => ({
                             lat: r.lat as number,
                             lon: r.lon as number,
                             time: new Date(r.time),
