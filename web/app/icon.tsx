@@ -1,8 +1,14 @@
 import { ImageResponse } from 'next/og';
 
-/** Small raster favicon (64×64) — transmission mark only. Avoids stale / favicon.jpg. */
+/**
+ * Apex mark at favicon density (Logo Exploration Logo 01), scale vb 32→64.
+ * Light field #f1f3f6, ink #0b0e13 — matches `.ctx.light` in exploration.
+ */
 export const size = { width: 64, height: 64 };
 export const contentType = 'image/png';
+
+const ink = '#0b0e13';
+const field = '#f1f3f6';
 
 export default function Icon() {
     return new ImageResponse(
@@ -14,15 +20,21 @@ export default function Icon() {
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
-                    background: '#eaeaeb',
+                    background: field,
                 }}
             >
-                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 7 }}>
-                    <div style={{ width: 17, height: 17, background: '#0a0a0a', borderRadius: 2 }} />
-                    <div style={{ width: 24, height: 6, background: '#0a0a0a', borderRadius: 1 }} />
-                    <div style={{ width: 32, height: 6, background: '#0a0a0a', borderRadius: 1 }} />
-                    <div style={{ width: 40, height: 6, background: '#0a0a0a', borderRadius: 1 }} />
-                    <div style={{ width: 50, height: 7, background: '#0a0a0a', borderRadius: 1 }} />
+                <div
+                    style={{
+                        display: 'flex',
+                        flexDirection: 'column',
+                        alignItems: 'center',
+                        gap: 10,
+                    }}
+                >
+                    <div style={{ width: 8, height: 8, background: ink }} />
+                    <div style={{ width: 16, height: 3, background: ink }} />
+                    <div style={{ width: 28, height: 3, background: ink }} />
+                    <div style={{ width: 40, height: 3, background: ink }} />
                 </div>
             </div>
         ),

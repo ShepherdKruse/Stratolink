@@ -575,7 +575,15 @@ export function Chrome({
     return (
         <div className="sl-chrome">
             <div className="sl-brand">
-                <span className="mark"></span>
+                <span className="sl-brand-logo" aria-hidden>
+                    {/* Logo 01 · Apex — Stratolink Logo Exploration */}
+                    <svg width={22} height={22} viewBox="0 0 32 32" fill="none">
+                        <rect x={14} y={4} width={4} height={4} fill="currentColor" />
+                        <rect x={12} y={14} width={8} height={2} fill="currentColor" />
+                        <rect x={9} y={19} width={14} height={2} fill="currentColor" />
+                        <rect x={6} y={24} width={20} height={2} fill="currentColor" />
+                    </svg>
+                </span>
                 STRATOLINK
                 {version && <span className="ver">{version}</span>}
             </div>

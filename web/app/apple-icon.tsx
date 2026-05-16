@@ -1,10 +1,17 @@
 import { ImageResponse } from 'next/og';
 
-/** iOS home screen / rich link thumbnails often prefer PNG apple icons. */
+/** Apex mark · Logo 01 scaled vb 32→180 (rounded). */
 export const size = { width: 180, height: 180 };
 export const contentType = 'image/png';
 
+const ink = '#0b0e13';
+const field = '#f1f3f6';
+const scale = 180 / 32;
+
 export default function AppleIcon() {
+    const dot = Math.round(4 * scale);
+    const hBar = Math.max(4, Math.round(1.5 * scale));
+    const gap = Math.round(4.5); /* tightened stack for circular crop */
     return new ImageResponse(
         (
             <div
@@ -14,15 +21,21 @@ export default function AppleIcon() {
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
-                    background: '#eaeaeb',
+                    background: field,
                 }}
             >
-                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 18 }}>
-                    <div style={{ width: 48, height: 48, background: '#0a0a0a', borderRadius: 4 }} />
-                    <div style={{ width: 68, height: 14, background: '#0a0a0a', borderRadius: 2 }} />
-                    <div style={{ width: 90, height: 14, background: '#0a0a0a', borderRadius: 2 }} />
-                    <div style={{ width: 118, height: 14, background: '#0a0a0a', borderRadius: 2 }} />
-                    <div style={{ width: 144, height: 18, background: '#0a0a0a', borderRadius: 2 }} />
+                <div
+                    style={{
+                        display: 'flex',
+                        flexDirection: 'column',
+                        alignItems: 'center',
+                        gap,
+                    }}
+                >
+                    <div style={{ width: dot, height: dot, background: ink }} />
+                    <div style={{ width: Math.round(8 * scale), height: hBar, background: ink }} />
+                    <div style={{ width: Math.round(14 * scale), height: hBar, background: ink }} />
+                    <div style={{ width: Math.round(20 * scale), height: hBar, background: ink }} />
                 </div>
             </div>
         ),

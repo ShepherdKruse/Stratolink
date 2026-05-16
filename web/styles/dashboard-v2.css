@@ -78,17 +78,19 @@
     font-family: var(--sl-sans);
     font-weight: 500;
     font-size: 12px;
-    letter-spacing: 0.16em;
+    letter-spacing: 0.20em;
     text-transform: uppercase;
     color: var(--sl-text-hi);
     display: flex;
     align-items: center;
     gap: 12px;
 }
-.sl-brand .mark {
-    width: 10px; height: 10px;
-    background: var(--sl-ok);
+.sl-brand-logo {
     flex-shrink: 0;
+    color: var(--sl-ok);
+    display: inline-flex;
+    align-items: center;
+    line-height: 0;
 }
 .sl-brand .ver {
     font-family: var(--sl-mono);
