@@ -62,7 +62,7 @@ export function ConnectionPill({ status, lastFetchedAt, now }: {
     return <span className="sl-pill teal">LIVE · POLL {ageS}s</span>;
 }
 
-/* Floating "← v1" link to jump back to the production dashboard. */
+/* Classic globe + mobile-shell dashboard (bookmark / debug). Primary UX is this v2 app. */
 export function V1Link() {
     return (
         <a
@@ -77,7 +77,7 @@ export function V1Link() {
                 padding: '4px 8px',
             }}
         >
-            ← v1
+            ← classic
         </a>
     );
 }

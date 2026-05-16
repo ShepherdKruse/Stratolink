@@ -36,7 +36,7 @@ export function Navigation() {
               Contact
             </Link>
             <Link
-              href="/dashboard"
+              href="/dashboard-v2"
               className="rounded-sm bg-foreground px-4 py-2 text-sm font-medium text-background transition-colors hover:bg-foreground/90"
             >
               Mission Control

@@ -123,7 +123,7 @@ export default function DocsPage() {
                                 GitHub Repository
                             </Link>
                             <Link
-                                href="/dashboard"
+                                href="/dashboard-v2"
                                 className="flex items-center gap-3 text-sm text-muted-foreground hover:text-foreground transition-colors"
                             >
                                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">

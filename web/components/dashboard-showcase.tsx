@@ -66,7 +66,7 @@ export function DashboardShowcase() {
                                 : 'border-border text-muted-foreground hover:border-foreground/10'
                         }`}
                     >
-                        Desktop View
+                        Mission Control
                     </button>
                     <button
                         onClick={() => setActiveView('mobile')}
@@ -76,7 +76,7 @@ export function DashboardShowcase() {
                                 : 'border-border text-muted-foreground hover:border-foreground/10'
                         }`}
                     >
-                        Mobile View
+                        Device Tracker
                     </button>
                 </div>
                 )}
@@ -108,7 +108,7 @@ export function DashboardShowcase() {
                                         </div>
                                         <div className="flex-1 mx-4">
                                             <div className="bg-background border border-border rounded px-3 py-1.5 text-xs text-muted-foreground text-center">
-                                                stratolink.org/dashboard
+                                                stratolink.org/dashboard-v2
                                             </div>
                                         </div>
                                     </div>
@@ -116,10 +116,10 @@ export function DashboardShowcase() {
                                     {/* Dashboard Preview */}
                                     <div className="relative bg-[#1a1a1a] aspect-video overflow-hidden">
                                         <iframe
-                                            src="/dashboard"
+                                            src="/dashboard-v2"
                                             className="w-full h-full border-0 pointer-events-none"
                                             style={{ transform: 'scale(0.5)', transformOrigin: 'top left', width: '200%', height: '200%' }}
-                                            title="Desktop Dashboard Preview"
+                                            title="Mission Control Preview"
                                         />
                                         {/* Overlay gradient for polish */}
                                         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-background/20 pointer-events-none" />
@@ -128,9 +128,9 @@ export function DashboardShowcase() {
 
                                 {/* Label */}
                                 <div className="mt-4 text-center">
-                                    <p className="text-sm font-medium text-foreground">Desktop Experience</p>
+                                    <p className="text-sm font-medium text-foreground">Desktop · Mission Control</p>
                                     <p className="text-xs text-muted-foreground mt-1">
-                                        3D globe view, detailed telemetry, timeline scrubbing
+                                        Fleet roster, Mapbox track, KPIs · live Supabase telemetry
                                     </p>
                                 </div>
                             </div>
@@ -154,10 +154,10 @@ export function DashboardShowcase() {
                                         {/* Screen */}
                                         <div className="relative bg-[#1a1a1a] rounded-[1.5rem] overflow-hidden aspect-[9/19.5]">
                                             <iframe
-                                                src="/dashboard?preview=mobile"
+                                                src="/dashboard-v2/device"
                                                 className="w-full h-full border-0 pointer-events-none"
                                                 style={{ transform: 'scale(0.35)', transformOrigin: 'top left', width: '285.7%', height: '285.7%' }}
-                                                title="Mobile Dashboard Preview"
+                                                title="Device Tracker Preview"
                                                 sandbox="allow-same-origin allow-scripts"
                                             />
                                             {/* Overlay gradient */}
@@ -171,9 +171,9 @@ export function DashboardShowcase() {
 
                                 {/* Label */}
                                 <div className="mt-6 text-center">
-                                    <p className="text-sm font-medium text-foreground">Mobile Experience</p>
+                                    <p className="text-sm font-medium text-foreground">Focused · Device Tracker</p>
                                     <p className="text-xs text-muted-foreground mt-1">
-                                        Bottom navigation, swipe gestures, optimized for touch
+                                        Scrubber-driven charts aligned to the map · ideal narrow viewports
                                     </p>
                                 </div>
                             </div>
@@ -190,15 +190,18 @@ export function DashboardShowcase() {
                     {[
                         {
                             title: 'Real-Time Tracking',
-                            description: 'Live position updates with 3D globe visualization and flight path history.',
+                            description:
+                                'Mapbox-backed fleet map, per-device trails, GPS validity, and instant selection from Supabase-backed telemetry.',
                         },
                         {
                             title: 'Telemetry Analysis',
-                            description: 'Detailed sensor data with sparkline graphs, health monitoring, and system diagnostics.',
+                            description:
+                                'Device Tracker scrub sync, Telemetry Lab dual-axis stacks, anomalies, packet inspector.',
                         },
                         {
                             title: 'Cross-Platform',
-                            description: 'Responsive design that adapts seamlessly from desktop workstations to mobile devices.',
+                            description:
+                                'Responsive dashboards with dedicated Mission Control, Device Tracker, and Lab routes.',
                         },
                     ].map((feature, index) => (
                         <div
@@ -221,7 +224,7 @@ export function DashboardShowcase() {
                     }`}
                 >
                     <Link
-                        href="/dashboard"
+                        href="/dashboard-v2"
                         className="inline-flex items-center gap-2 rounded-sm border border-foreground/20 bg-foreground px-6 py-3 text-sm font-medium text-background transition-all hover:bg-foreground/90 hover:border-foreground/30"
                     >
                         Open Dashboard

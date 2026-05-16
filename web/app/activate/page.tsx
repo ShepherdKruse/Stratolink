@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 import { QrCode, Rocket } from 'lucide-react';
 
 export default function ActivateLandingPage() {
@@ -39,7 +40,13 @@ export default function ActivateLandingPage() {
                         </div>
                         <h1 className="text-3xl font-semibold text-[#e5e5e5] mb-3">Device Activation</h1>
                         <p className="text-[#666] text-sm">
-                            Register your Stratolink device to begin tracking on the dashboard
+                            Register your Stratolink device to begin tracking in Mission Control
+                        </p>
+                        <p className="mt-4 text-[#555] text-xs">
+                            Already activated?{' '}
+                            <Link href="/dashboard-v2" className="text-[#4a90d9] hover:underline">
+                                Open Mission Control
+                            </Link>
                         </p>
                     </div>
 

@@ -163,7 +163,7 @@ export default function ActivateDeviceInner({ params }: PageProps) {
 
         if (result.success) {
             setTimeout(() => {
-                router.push(`/dashboard?mode=ride_along&balloon=${deviceId}`);
+                router.push(`/dashboard-v2?device=${encodeURIComponent(deviceId)}`);
             }, 1000);
         } else {
             const errorMessage = result.error || 'Launch failed';
