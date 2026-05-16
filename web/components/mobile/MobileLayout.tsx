@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { createClient } from '@/lib/supabase';
+import { isValidWgs84Point } from '@/lib/mapGeo';
 import BottomNav from './BottomNav';
 import BottomSheet from './BottomSheet';
 import MobileRadar from './MobileRadar';
@@ -16,9 +17,22 @@ interface BalloonData {
     lon: number;
     altitude_m: number;
     velocity_heading?: number;
-    battery_voltage?: number;
+    battery_voltage?: number | null;
     launcher_name?: string;
+    awaiting_gps?: boolean;
+    last_contact?: string;
 }
+
+type TelemetryRow = {
+    device_id: string;
+    lat?: number | null;
+    lon?: number | null;
+    altitude_m?: number | null;
+    time?: string | null;
+    velocity_x?: number | null;
+    velocity_y?: number | null;
+    battery_voltage?: number | null;
+};
 
 interface MobileLayoutProps {
     initialBalloonId?: string | null;
@@ -30,7 +44,10 @@ export default function MobileLayout({ initialBalloonId = null }: MobileLayoutPr
     const [selectedBalloonId, setSelectedBalloonId] = useState<string | null>(initialBalloonId);
     const [activeCount, setActiveCount] = useState(0);
     const [landedCount, setLandedCount] = useState(0);
+    const [fleetRegisteredCount, setFleetRegisteredCount] = useState(0);
     const [userLocation, setUserLocation] = useState<{ lat: number; lon: number } | null>(null);
+    const [connectionStatus, setConnectionStatus] = useState<'connected' | 'disconnected' | 'error'>('disconnected');
+    const [lastUpdate, setLastUpdate] = useState<Date | undefined>();
 
     // Auto-select balloon if initialBalloonId is provided
     useEffect(() => {
@@ -57,154 +74,166 @@ export default function MobileLayout({ initialBalloonId = null }: MobileLayoutPr
         }
     }, []);
 
-    // Fetch balloon data
+    // Fetch balloon data — same telemetry semantics as dashboard (flying fleet, GPS + launch fallback, real sensors).
     useEffect(() => {
         async function fetchFleetStatus() {
-            // Skip if in iframe preview mode (no Supabase access needed)
-            if (typeof window !== 'undefined' && window.self !== window.top) {
-                return;
-            }
-            
             const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
             if (!supabaseUrl || supabaseUrl.includes('your_supabase') || supabaseUrl === '') {
+                setConnectionStatus('disconnected');
                 return;
             }
 
             try {
                 const supabase = createClient();
-                
-                // Fetch activated devices (only 'flying' status for display)
-                const { data: activatedDevices } = await supabase
+                setConnectionStatus('connected');
+
+                const { data: activatedDevices, error: devicesError } = await supabase
                     .from('devices')
-                    .select('device_id, launcher_name, status, launch_lat, launch_lon')
+                    .select('device_id, launcher_name, status, launch_lat, launch_lon, launched_at')
                     .eq('status', 'flying');
 
-                const activatedDeviceIds = activatedDevices ? activatedDevices.map((d: any) => d.device_id) : [];
+                if (devicesError) {
+                    console.error('Error fetching activated devices:', devicesError);
+                    setConnectionStatus('error');
+                }
+
+                const activatedDeviceIds = activatedDevices ? activatedDevices.map((d: { device_id: string }) => d.device_id) : [];
+                setFleetRegisteredCount(activatedDeviceIds.length);
                 const launcherMap = new Map<string, string>();
                 const launchLocationMap = new Map<string, { lat: number; lon: number }>();
-                
-                // Create launcher name and launch location maps
+
                 if (activatedDevices) {
-                    activatedDevices.forEach((d: any) => {
+                    activatedDevices.forEach((d: { device_id: string; launcher_name?: string | null; launch_lat?: number | null; launch_lon?: number | null }) => {
                         launcherMap.set(d.device_id, d.launcher_name || 'Unknown');
-                        if (d.launch_lat && d.launch_lon) {
+                        if (
+                            typeof d.launch_lat === 'number' &&
+                            typeof d.launch_lon === 'number' &&
+                            isValidWgs84Point(d.launch_lat, d.launch_lon)
+                        ) {
                             launchLocationMap.set(d.device_id, { lat: d.launch_lat, lon: d.launch_lon });
                         }
                     });
                 }
 
-                if (activatedDeviceIds.length > 0) {
-                    const twoHoursAgo = new Date(Date.now() - 2 * 60 * 60 * 1000).toISOString();
-                    const oneDayAgo = new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString();
-                    
-                    // Get active count (only for activated devices)
-                    const { data: active, error: activeError } = await supabase
-                        .from('telemetry')
-                        .select('device_id')
-                        .in('device_id', activatedDeviceIds)
-                        .gte('time', twoHoursAgo)
-                        .gt('altitude_m', 100);
-                    
-                    if (!activeError && active) {
-                        const distinctDevices = new Set(active.map((row: any) => row.device_id));
-                        setActiveCount(distinctDevices.size);
-                    }
+                if (activatedDeviceIds.length === 0) {
+                    setActiveCount(0);
+                    setLandedCount(0);
+                    setBalloonData([]);
+                    setLastUpdate(new Date());
+                    return;
+                }
 
-                    // Get landed count (only for activated devices)
-                    const { data: landed, error: landedError } = await supabase
-                        .from('telemetry')
-                        .select('device_id')
-                        .in('device_id', activatedDeviceIds)
-                        .gte('time', oneDayAgo)
-                        .lt('altitude_m', 100);
-                    
-                    if (!landedError && landed) {
-                        const distinctLanded = new Set(landed.map((row: any) => row.device_id));
-                        setLandedCount(distinctLanded.size);
-                    }
+                const twoHoursAgo = new Date(Date.now() - 2 * 60 * 60 * 1000).toISOString();
+                const oneDayAgo = new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString();
+
+                const lastContactMap = new Map<string, string>();
+
+                const { data: active, error: activeError } = await supabase
+                    .from('telemetry')
+                    .select('device_id, time')
+                    .in('device_id', activatedDeviceIds)
+                    .gte('time', twoHoursAgo);
+
+                if (!activeError && active) {
+                    const distinctDevices = new Set<string>();
+                    active.forEach((row: { device_id: string; time: string }) => {
+                        distinctDevices.add(row.device_id);
+                        const prev = lastContactMap.get(row.device_id);
+                        if (!prev || row.time > prev) lastContactMap.set(row.device_id, row.time);
+                    });
+                    setActiveCount(distinctDevices.size);
                 } else {
                     setActiveCount(0);
+                }
+
+                const { data: landed, error: landedError } = await supabase
+                    .from('telemetry')
+                    .select('device_id')
+                    .in('device_id', activatedDeviceIds)
+                    .gte('time', oneDayAgo)
+                    .lt('altitude_m', 100);
+
+                if (landedError) {
+                    console.error('Error fetching landed balloons:', landedError);
+                } else if (landed && landed.length > 0) {
+                    setLandedCount(new Set(landed.map((row: { device_id: string }) => row.device_id)).size);
+                } else {
                     setLandedCount(0);
                 }
 
-                // Fetch balloon positions (only for activated devices)
-                if (activatedDeviceIds.length > 0) {
-                    const oneDayAgo = new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString();
-                    
-                    const { data: balloons, error: balloonsError } = await supabase
-                        .from('telemetry')
-                        .select('device_id, lat, lon, altitude_m, time, velocity_x, velocity_y')
-                        .in('device_id', activatedDeviceIds)
-                        .gte('time', oneDayAgo)
-                        .order('time', { ascending: false });
+                const { data: telemetryRows, error: telemetryError } = await supabase
+                    .from('telemetry')
+                    .select('device_id, lat, lon, altitude_m, time, velocity_x, velocity_y, battery_voltage')
+                    .in('device_id', activatedDeviceIds)
+                    .gte('time', oneDayAgo)
+                    .order('time', { ascending: false });
 
-                    if (!balloonsError && balloons) {
-                        const latestByDevice = new Map<string, BalloonData>();
-
-                        balloons.forEach((row: any) => {
-                            if (!latestByDevice.has(row.device_id)) {
-                                let velocity_heading = 90;
-                                if (row.velocity_x !== null && row.velocity_y !== null) {
-                                    const headingRad = Math.atan2(row.velocity_x, row.velocity_y);
-                                    velocity_heading = (headingRad * 180 / Math.PI + 360) % 360;
-                                }
-                                
-                                latestByDevice.set(row.device_id, {
-                                    id: row.device_id,
-                                    lat: row.lat,
-                                    lon: row.lon,
-                                    altitude_m: row.altitude_m,
-                                    velocity_heading: velocity_heading,
-                                    battery_voltage: 3.7,
-                                    launcher_name: launcherMap.get(row.device_id),
-                                });
-                            }
-                        });
-                        
-                        // Add devices that are activated but don't have telemetry yet (use launch location)
-                        activatedDeviceIds.forEach((deviceId: string) => {
-                            if (!latestByDevice.has(deviceId)) {
-                                const launchLoc = launchLocationMap.get(deviceId);
-                                if (launchLoc) {
-                                    latestByDevice.set(deviceId, {
-                                        id: deviceId,
-                                        lat: launchLoc.lat,
-                                        lon: launchLoc.lon,
-                                        altitude_m: 0, // Ground level until first telemetry
-                                        velocity_heading: 90,
-                                        battery_voltage: 3.7,
-                                        launcher_name: launcherMap.get(deviceId),
-                                    });
-                                }
-                            }
-                        });
-                        
-                        setBalloonData(Array.from(latestByDevice.values()));
-                    } else {
-                        // No telemetry data, but we have activated devices - use launch locations
-                        const launchLocationBalloons: BalloonData[] = [];
-                        activatedDeviceIds.forEach((deviceId: string) => {
-                            const launchLoc = launchLocationMap.get(deviceId);
-                            if (launchLoc) {
-                                launchLocationBalloons.push({
-                                    id: deviceId,
-                                    lat: launchLoc.lat,
-                                    lon: launchLoc.lon,
-                                    altitude_m: 0,
-                                    velocity_heading: 90,
-                                    battery_voltage: 3.7,
-                                    launcher_name: launcherMap.get(deviceId),
-                                });
-                            }
-                        });
-                        setBalloonData(launchLocationBalloons);
-                    }
-                } else {
-                    // No activated devices
+                if (telemetryError) {
+                    console.error('Error fetching telemetry for map:', telemetryError);
+                    setConnectionStatus('error');
                     setBalloonData([]);
+                    setLastUpdate(new Date());
+                    return;
                 }
+
+                const latestAny = new Map<string, TelemetryRow>();
+                const latestGps = new Map<string, TelemetryRow>();
+                for (const row of (telemetryRows || []) as TelemetryRow[]) {
+                    if (!row.device_id) continue;
+                    if (!latestAny.has(row.device_id)) latestAny.set(row.device_id, row);
+                    if (isValidWgs84Point(row.lat ?? NaN, row.lon ?? NaN) && !latestGps.has(row.device_id)) {
+                        latestGps.set(row.device_id, row);
+                    }
+                }
+
+                const built: BalloonData[] = [];
+                for (const deviceId of activatedDeviceIds) {
+                    const gps = latestGps.get(deviceId);
+                    const anyRow = latestAny.get(deviceId);
+                    const launchLoc = launchLocationMap.get(deviceId);
+
+                    let lat: number;
+                    let lon: number;
+                    let awaiting_gps = false;
+
+                    if (gps && isValidWgs84Point(gps.lat as number, gps.lon as number)) {
+                        lat = gps.lat as number;
+                        lon = gps.lon as number;
+                    } else if (launchLoc) {
+                        lat = launchLoc.lat;
+                        lon = launchLoc.lon;
+                        awaiting_gps = true;
+                    } else {
+                        continue;
+                    }
+
+                    let velocity_heading = 90;
+                    const velRow = gps ?? anyRow;
+                    if (velRow?.velocity_x != null && velRow?.velocity_y != null) {
+                        const headingRad = Math.atan2(velRow.velocity_x, velRow.velocity_y);
+                        velocity_heading = ((headingRad * 180) / Math.PI + 360) % 360;
+                    }
+
+                    const altitude_m = (gps?.altitude_m ?? anyRow?.altitude_m ?? 0) as number;
+
+                    built.push({
+                        id: deviceId,
+                        lat,
+                        lon,
+                        altitude_m,
+                        velocity_heading,
+                        battery_voltage: anyRow?.battery_voltage ?? null,
+                        launcher_name: launcherMap.get(deviceId),
+                        awaiting_gps,
+                        last_contact: lastContactMap.get(deviceId) ?? anyRow?.time ?? undefined,
+                    });
+                }
+
+                setBalloonData(built);
+                setLastUpdate(new Date());
             } catch (error) {
                 console.debug('Supabase not configured or error:', error);
+                setConnectionStatus('error');
             }
         }
 
@@ -225,12 +254,6 @@ export default function MobileLayout({ initialBalloonId = null }: MobileLayoutPr
     useEffect(() => {
         async function fetchFlightPath() {
             if (!selectedBalloonId) {
-                setFlightPathData([]);
-                setSheetTelemetry([]);
-                return;
-            }
-
-            if (typeof window !== 'undefined' && window.self !== window.top) {
                 setFlightPathData([]);
                 setSheetTelemetry([]);
                 return;
@@ -259,10 +282,11 @@ export default function MobileLayout({ initialBalloonId = null }: MobileLayoutPr
                     .order('time', { ascending: true });
 
                 if (!error && pathData && pathData.length > 0) {
-                    setSheetTelemetry(pathData as Array<Record<string, any>>);
-                    const path = (pathData as any[])
-                        .filter(r => r.lat !== null && r.lon !== null)
-                        .map(r => ({ lat: r.lat as number, lon: r.lon as number, time: new Date(r.time) }));
+                    setSheetTelemetry(pathData as unknown as Array<Record<string, any>>);
+                    const rows = pathData as unknown as Array<{ lat?: number | null; lon?: number | null; time: string }>;
+                    const path = rows
+                        .filter((r) => isValidWgs84Point(Number(r.lat), Number(r.lon)))
+                        .map((r) => ({ lat: Number(r.lat), lon: Number(r.lon), time: new Date(r.time) }));
                     setFlightPathData(path);
                 } else {
                     setFlightPathData([]);
@@ -293,9 +317,6 @@ export default function MobileLayout({ initialBalloonId = null }: MobileLayoutPr
         setSelectedBalloonId(null);
     };
 
-    // Check if we're in an iframe (for showcase preview)
-    const isInIframe = typeof window !== 'undefined' && window.self !== window.top;
-
     return (
         <div className="w-screen h-screen relative overflow-hidden bg-[#1a1a1a]">
             {/* Tab Content - Full height with bottom padding for nav */}
@@ -303,6 +324,7 @@ export default function MobileLayout({ initialBalloonId = null }: MobileLayoutPr
                 {activeTab === 'radar' && (
                     <MobileRadar
                         balloonData={balloonData}
+                        flightPathData={flightPathData}
                         onBalloonClick={handleBalloonClick}
                         userLocation={userLocation}
                         selectedBalloonId={selectedBalloonId}
@@ -321,7 +343,9 @@ export default function MobileLayout({ initialBalloonId = null }: MobileLayoutPr
                     <MobileIntel
                         activeCount={activeCount}
                         landedCount={landedCount}
-                        totalTracked={balloonData.length}
+                        totalTracked={fleetRegisteredCount}
+                        connectionStatus={connectionStatus}
+                        lastUpdate={lastUpdate}
                         balloonData={balloonData}
                     />
                 )}
@@ -337,7 +361,7 @@ export default function MobileLayout({ initialBalloonId = null }: MobileLayoutPr
                         altitude_m: selectedBalloon.altitude_m,
                         lat: selectedBalloon.lat,
                         lon: selectedBalloon.lon,
-                        battery_voltage: selectedBalloon.battery_voltage,
+                        battery_voltage: selectedBalloon.battery_voltage ?? undefined,
                         velocity_heading: selectedBalloon.velocity_heading,
                         launcher_name: selectedBalloon.launcher_name,
                     }}

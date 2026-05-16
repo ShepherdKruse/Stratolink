@@ -13,10 +13,41 @@ interface MobileIntelProps {
         lat: number;
         lon: number;
         altitude_m: number;
+        launcher_name?: string;
+        battery_voltage?: number | null;
+        awaiting_gps?: boolean;
     }>;
 }
 
-export default function MobileIntel({ activeCount, landedCount, totalTracked, connectionStatus = 'disconnected', lastUpdate, balloonData = [] }: MobileIntelProps) {
+function formatAltitudeFt(meters: number): string {
+    if (!Number.isFinite(meters)) return '—';
+    const ft = meters * 3.28084;
+    return ft >= 1000 ? `${(ft / 1000).toFixed(1)}k ft` : `${Math.round(ft)} ft`;
+}
+
+function formatBattery(volts: number | null | undefined): string {
+    if (volts == null || Number.isNaN(volts)) return '—';
+    return `${volts.toFixed(2)} V`;
+}
+
+export default function MobileIntel({
+    activeCount,
+    landedCount,
+    totalTracked,
+    connectionStatus = 'disconnected',
+    lastUpdate,
+    balloonData = [],
+}: MobileIntelProps) {
+    const sortedByAltitude = [...balloonData].sort((a, b) => (b.altitude_m ?? 0) - (a.altitude_m ?? 0)).slice(0, 8);
+
+    const airborne = balloonData.filter((b) => !b.awaiting_gps && b.altitude_m > 100);
+
+    let avgAltitudeM: number | null = null;
+    if (airborne.length > 0) {
+        const sum = airborne.reduce((s, b) => s + Math.max(0, b.altitude_m), 0);
+        avgAltitudeM = Math.round(sum / airborne.length);
+    }
+
     return (
         <div className="h-full bg-[#1a1a1a] overflow-y-auto pb-20">
             {/* Header */}
@@ -35,44 +66,55 @@ export default function MobileIntel({ activeCount, landedCount, totalTracked, co
                     <div className="grid grid-cols-3 gap-4">
                         <div>
                             <div className="text-[24px] font-mono text-[#4a90d9] font-bold">{activeCount}</div>
-                            <div className="text-[10px] text-[#666] mt-1">Active</div>
+                            <div className="text-[10px] text-[#666] mt-1">Transmitting</div>
+                            <div className="text-[9px] text-[#555] font-mono mt-0.5">last 2h</div>
                         </div>
                         <div>
                             <div className="text-[24px] font-mono text-[#e5e5e5] font-bold">{landedCount}</div>
-                            <div className="text-[10px] text-[#666] mt-1">Landed</div>
+                            <div className="text-[10px] text-[#666] mt-1">Near ground</div>
+                            <div className="text-[9px] text-[#555] font-mono mt-0.5">&lt;100m • 24h</div>
                         </div>
                         <div>
                             <div className="text-[24px] font-mono text-[#e5e5e5] font-bold">{totalTracked}</div>
-                            <div className="text-[10px] text-[#666] mt-1">Total</div>
+                            <div className="text-[10px] text-[#666] mt-1">Registered</div>
+                            <div className="text-[9px] text-[#555] font-mono mt-0.5">status flying</div>
                         </div>
                     </div>
                 </div>
 
-                {/* Leaderboard */}
+                {/* Highest altitude — from live telemetry */}
                 <div className="bg-[#141414] border border-[#333] rounded-lg p-4">
                     <div className="flex items-center gap-3 mb-3">
                         <TrendingUp size={20} className="text-[#4a90d9]" />
-                        <div className="text-[12px] font-semibold text-[#666] uppercase tracking-wider">Top Performers</div>
+                        <div className="text-[12px] font-semibold text-[#666] uppercase tracking-wider">Fleet by altitude</div>
                     </div>
                     <div className="space-y-2">
-                        {[
-                            { id: 'Balloon-042', distance: '12,847 km', altitude: '32.4k ft' },
-                            { id: 'Balloon-019', distance: '9,234 km', altitude: '28.1k ft' },
-                            { id: 'Balloon-033', distance: '7,891 km', altitude: '30.2k ft' },
-                        ].map((entry, i) => (
-                            <div key={i} className="flex items-center justify-between p-3 bg-[#1a1a1a] border border-[#333] rounded">
-                                <div className="flex items-center gap-3">
-                                    <div className="w-6 h-6 rounded-full bg-[#4a90d9] flex items-center justify-center text-[10px] font-mono text-white font-bold">
-                                        {i + 1}
+                        {sortedByAltitude.length > 0 ? (
+                            sortedByAltitude.map((entry, i) => (
+                                <div
+                                    key={entry.id}
+                                    className="flex items-center justify-between p-3 bg-[#1a1a1a] border border-[#333] rounded">
+                                    <div className="flex items-center gap-3 min-w-0">
+                                        <div className="w-6 h-6 shrink-0 rounded-full bg-[#4a90d9] flex items-center justify-center text-[10px] font-mono text-white font-bold">
+                                            {i + 1}
+                                        </div>
+                                        <div className="min-w-0">
+                                            <div className="font-mono text-[12px] text-[#e5e5e5] font-semibold truncate">{entry.id}</div>
+                                            <div className="font-mono text-[10px] text-[#666] truncate">
+                                                {entry.launcher_name || '—'}
+                                                {entry.awaiting_gps ? ' · awaiting GPS' : ''}
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div>
-                                        <div className="font-mono text-[12px] text-[#e5e5e5] font-semibold">{entry.id}</div>
-                                        <div className="font-mono text-[10px] text-[#666]">{entry.distance}</div>
+                                    <div className="text-right shrink-0">
+                                        <div className="text-[11px] text-[#4a90d9] font-mono font-semibold">{formatAltitudeFt(entry.altitude_m)}</div>
+                                        <div className="text-[10px] text-[#666] font-mono">{formatBattery(entry.battery_voltage)}</div>
                                     </div>
                                 </div>
-                                <div className="text-[10px] text-[#666] font-mono">{entry.altitude}</div>
-                            </div>
-                        ))}
+                            ))
+                        ) : (
+                            <div className="text-[11px] text-[#666] font-mono py-2">No devices on the map yet</div>
+                        )}
                     </div>
                 </div>
 
@@ -80,63 +122,61 @@ export default function MobileIntel({ activeCount, landedCount, totalTracked, co
                 <div className="bg-[#141414] border border-[#333] rounded-lg p-4">
                     <div className="flex items-center gap-3 mb-3">
                         <Cloud size={20} className="text-[#4a90d9]" />
-                        <div className="text-[12px] font-semibold text-[#666] uppercase tracking-wider">Fleet Conditions</div>
+                        <div className="text-[12px] font-semibold text-[#666] uppercase tracking-wider">Fleet conditions</div>
                     </div>
                     {balloonData.length > 0 ? (
                         <div className="space-y-3">
                             <div>
                                 <div className="flex justify-between items-center mb-1">
-                                    <span className="text-[11px] text-[#999] font-mono">Avg Altitude</span>
+                                    <span className="text-[11px] text-[#999] font-mono">Avg altitude (in flight)</span>
                                     <span className="text-[12px] text-[#4a90d9] font-mono font-semibold">
-                                        {Math.round(balloonData.reduce((sum, b) => sum + b.altitude_m, 0) / balloonData.length)}m
+                                        {avgAltitudeM != null ? `${avgAltitudeM}m` : '—'}
                                     </span>
                                 </div>
                                 <div className="h-1 bg-[#333] rounded-full overflow-hidden">
-                                    <div 
-                                        className="h-full bg-[#4a90d9]" 
-                                        style={{ 
-                                            width: `${Math.min(100, (balloonData.reduce((sum, b) => sum + b.altitude_m, 0) / balloonData.length) / 40000 * 100)}%` 
-                                        }} 
+                                    <div
+                                        className="h-full bg-[#4a90d9]"
+                                        style={{
+                                            width: `${avgAltitudeM != null ? Math.min(100, (avgAltitudeM / 40000) * 100) : 0}%`,
+                                        }}
                                     />
                                 </div>
                             </div>
                             <div>
                                 <div className="flex justify-between items-center mb-1">
-                                    <span className="text-[11px] text-[#999] font-mono">Active Balloons</span>
+                                    <span className="text-[11px] text-[#999] font-mono">In flight (&gt;100m)</span>
                                     <span className="text-[12px] text-[#4a90d9] font-mono font-semibold">
-                                        {balloonData.filter(b => b.altitude_m > 100).length} / {balloonData.length}
+                                        {airborne.length} / {balloonData.length}
                                     </span>
                                 </div>
                                 <div className="h-1 bg-[#333] rounded-full overflow-hidden">
-                                    <div 
-                                        className="h-full bg-[#4a90d9]" 
-                                        style={{ 
-                                            width: `${balloonData.length > 0 ? (balloonData.filter(b => b.altitude_m > 100).length / balloonData.length) * 100 : 0}%` 
-                                        }} 
+                                    <div
+                                        className="h-full bg-[#4a90d9]"
+                                        style={{
+                                            width: `${balloonData.length > 0 ? (airborne.length / balloonData.length) * 100 : 0}%`,
+                                        }}
                                     />
                                 </div>
                             </div>
                             <div>
                                 <div className="flex justify-between items-center mb-1">
-                                    <span className="text-[11px] text-[#999] font-mono">Coverage</span>
+                                    <span className="text-[11px] text-[#999] font-mono">Awaiting GPS fix</span>
                                     <span className="text-[12px] text-[#4a90d9] font-mono font-semibold">
-                                        {balloonData.length} locations
+                                        {balloonData.filter((b) => b.awaiting_gps).length}
                                     </span>
                                 </div>
                                 <div className="h-1 bg-[#333] rounded-full overflow-hidden">
-                                    <div 
-                                        className="h-full bg-[#4a90d9]" 
-                                        style={{ 
-                                            width: `${Math.min(100, (balloonData.length / 10) * 100)}%` 
-                                        }} 
+                                    <div
+                                        className="h-full bg-[#4a90d9]"
+                                        style={{
+                                            width: `${balloonData.length > 0 ? (balloonData.filter((b) => b.awaiting_gps).length / balloonData.length) * 100 : 0}%`,
+                                        }}
                                     />
                                 </div>
                             </div>
                         </div>
                     ) : (
-                        <div className="text-[11px] text-[#666] font-mono py-2">
-                            No active balloons to report conditions
-                        </div>
+                        <div className="text-[11px] text-[#666] font-mono py-2">No fleet data to summarize</div>
                     )}
                 </div>
 
@@ -146,22 +186,25 @@ export default function MobileIntel({ activeCount, landedCount, totalTracked, co
                     <div className="space-y-2 font-mono text-[11px]">
                         <div className="flex justify-between">
                             <span className="text-[#999]">Database</span>
-                            <span className={
-                                connectionStatus === 'connected' ? 'text-[#4a9]' : 
-                                connectionStatus === 'error' ? 'text-[#c44]' : 
-                                'text-[#b84]'
-                            }>
+                            <span
+                                className={
+                                    connectionStatus === 'connected'
+                                        ? 'text-[#4a9]'
+                                        : connectionStatus === 'error'
+                                          ? 'text-[#c44]'
+                                          : 'text-[#b84]'
+                                }>
                                 {connectionStatus.toUpperCase()}
                             </span>
                         </div>
                         <div className="flex justify-between">
-                            <span className="text-[#999]">Last Update</span>
+                            <span className="text-[#999]">Last fleet refresh</span>
                             <span className="text-[#e5e5e5]">
                                 {lastUpdate ? lastUpdate.toISOString().substring(11, 19) : '—'}
                             </span>
                         </div>
                         <div className="flex justify-between">
-                            <span className="text-[#999]">Refresh Rate</span>
+                            <span className="text-[#999]">Refresh rate</span>
                             <span className="text-[#e5e5e5]">30s</span>
                         </div>
                     </div>
