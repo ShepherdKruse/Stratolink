@@ -1,12 +1,35 @@
 "use client"
 
+import type React from "react"
 import Link from "next/link"
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
-import { useEffect, useRef } from "react"
+import { Input } from "@/components/ui/input"
+import { useEffect, useRef, useState } from "react"
+import { subscribeLaunchUpdates } from "@/app/actions/launch-updates"
 
 export function Hero() {
   const canvasRef = useRef<HTMLCanvasElement>(null)
+  const [email, setEmail] = useState("")
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [status, setStatus] = useState<{ type: "success" | "error"; message: string } | null>(null)
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    setIsSubmitting(true)
+    setStatus(null)
+
+    const result = await subscribeLaunchUpdates(email)
+
+    if (result.success) {
+      setStatus({ type: "success", message: "Thanks — we'll keep you posted on launches." })
+      setEmail("")
+    } else {
+      setStatus({ type: "error", message: result.error || "Something went wrong." })
+    }
+
+    setIsSubmitting(false)
+  }
 
   useEffect(() => {
     const canvas = canvasRef.current
@@ -109,7 +132,45 @@ export function Hero() {
             High-altitude atmospheric data collected via distributed balloon platforms
           </p>
 
-          <div className="mt-14 flex flex-wrap items-center justify-center gap-4">
+          <form
+            onSubmit={handleSubmit}
+            className="mx-auto mt-10 flex w-full max-w-md flex-col gap-2 sm:flex-row"
+            aria-label="Get launch updates by email"
+          >
+            <label htmlFor="hero-launch-email" className="sr-only">
+              Email address
+            </label>
+            <Input
+              id="hero-launch-email"
+              type="email"
+              name="email"
+              autoComplete="email"
+              required
+              placeholder="you@example.com"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              className="h-11 flex-1"
+            />
+            <Button
+              type="submit"
+              disabled={isSubmitting}
+              className="h-11 shrink-0 rounded-sm border border-primary/20 bg-primary px-6 font-normal text-primary-foreground shadow-sm transition-all hover:bg-primary/90 hover:shadow-md disabled:opacity-50"
+            >
+              {isSubmitting ? "Sending…" : "Get launch updates"}
+            </Button>
+          </form>
+          {status && (
+            <p
+              role="status"
+              className={`mt-3 text-sm ${
+                status.type === "success" ? "text-emerald-700" : "text-destructive"
+              }`}
+            >
+              {status.message}
+            </p>
+          )}
+
+          <div className="mt-12 flex flex-wrap items-center justify-center gap-4">
             <Button
               asChild
               size="lg"
