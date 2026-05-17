@@ -112,7 +112,11 @@ export default function GettingStartedPage() {
 
                         <h2>Next Steps</h2>
                         <ul>
-                            <li>Learn how to use the dashboard in the <Link href="/docs/dashboard">Dashboard Guide</Link></li>
+                            <li>
+                                <Link href="/dashboard-v2">Open Mission Control</Link>{' '}
+                                (fleet map, Device Tracker, Telemetry Lab — live telemetry)
+                            </li>
+                            <li>Learn more in the <Link href="/docs/dashboard">dashboard guide</Link> (includes classic layout notes)</li>
                             <li>Explore the <Link href="/docs/api">API Reference</Link> for integration options</li>
                             <li>Check <Link href="/docs/troubleshooting">Troubleshooting</Link> if you encounter issues</li>
                         </ul>

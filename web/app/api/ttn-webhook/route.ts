@@ -5,10 +5,10 @@ import { parseTTNPayload, type TTNWebhookPayload } from '@/lib/ttn/payload-parse
 export async function POST(request: NextRequest) {
     try {
         const payload: TTNWebhookPayload = await request.json();
-        
+
         // Parse telemetry data from TTN webhook payload
         const telemetry = parseTTNPayload(payload);
-        
+
         if (!telemetry) {
             console.error('Failed to parse TTN payload:', JSON.stringify(payload, null, 2));
             return NextResponse.json(
@@ -17,23 +17,28 @@ export async function POST(request: NextRequest) {
             );
         }
 
-        // Validate required fields
-        if (!telemetry.device_id || telemetry.lat === 0 || telemetry.lon === 0) {
-            console.error('Invalid telemetry data:', telemetry);
+        /* device_id is the only hard requirement. lat/lon may be null when the
+         * firmware is in NOGPS power tier — we still want the sensor data row.
+         * The dashboard map query filters null positions out so this is safe. */
+        if (!telemetry.device_id) {
+            console.error('Invalid telemetry data: missing device_id', telemetry);
             return NextResponse.json(
-                { error: 'Invalid payload: missing required fields (device_id, lat, lon)' },
+                { error: 'Invalid payload: missing required field device_id' },
                 { status: 400 }
             );
         }
 
-        // Normalize per-region TTN device IDs to a single canonical
-        // identifier.  The firmware uses 4 distinct (DevEUI, AppKey)
-        // pairs — one per LoRaWAN region — registered on TTN with IDs
-        // like `stratolink-3`, `stratolink-3-eu`, `stratolink-3-as`,
-        // `stratolink-3-au`.  Strip the region suffix here so all
-        // three streams land in Supabase under the same device row
-        // and the dashboard shows one continuous timeline across the
-        // circumnavigation.
+        const hasGpsFix = telemetry.lat !== null && telemetry.lon !== null;
+
+        /* Normalize per-region TTN device IDs to a single canonical
+         * identifier.  The firmware uses up to 4 distinct (DevEUI, AppKey)
+         * pairs — one per LoRaWAN region — registered on TTN with IDs
+         * like `stratolink-3`, `stratolink-3-eu`, `stratolink-3-as`,
+         * `stratolink-3-au`.  Strip the trailing region suffix so all
+         * streams land in Supabase under one device row and the
+         * dashboard shows a single continuous timeline across regional
+         * handovers.  The raw TTN device_id is preserved in log lines
+         * and the success response for debugging. */
         const canonical_device_id = telemetry.device_id.replace(/-(eu|as|au)$/, '');
 
         // Check if device exists and is activated (optional validation)
@@ -51,7 +56,6 @@ export async function POST(request: NextRequest) {
             console.warn(`Telemetry received from device not in 'flying' status: ${canonical_device_id} (status: ${device.status})`);
         }
 
-        // Insert telemetry into Supabase
         const { error } = await supabase
             .from('telemetry')
             .insert({
@@ -77,8 +81,17 @@ export async function POST(request: NextRequest) {
                 uv_index: telemetry.uv_index,
                 ambient_lux: telemetry.ambient_lux,
                 acoustic_event: telemetry.acoustic_event,
+                firmware_version: telemetry.firmware_version,
+                uptime_s: telemetry.uptime_s,
+                tx_count: telemetry.tx_count,
+                hdop: telemetry.hdop,
+                power_mode: telemetry.power_mode,
+                sleep_ms: telemetry.sleep_ms,
+                lora_sf: telemetry.lora_sf,
+                lora_bw: telemetry.lora_bw,
+                frequency_hz: telemetry.frequency_hz,
             });
-        
+
         if (error) {
             console.error('Supabase insert error:', error);
             return NextResponse.json(
@@ -87,14 +100,19 @@ export async function POST(request: NextRequest) {
             );
         }
 
-        console.log(`Telemetry inserted for device ${canonical_device_id} (TTN ID: ${telemetry.device_id}) at ${telemetry.lat}, ${telemetry.lon}`);
+        if (hasGpsFix) {
+            console.log(`Telemetry inserted for ${canonical_device_id} (TTN: ${telemetry.device_id}) at ${telemetry.lat}, ${telemetry.lon}`);
+        } else {
+            console.log(`Telemetry inserted for ${canonical_device_id} (TTN: ${telemetry.device_id}; no GPS fix, sensor-only row)`);
+        }
 
         return NextResponse.json({
             success: true,
             device_id: canonical_device_id,
             ttn_device_id: telemetry.device_id,
+            gps_fix: hasGpsFix,
         }, { status: 200 });
-        
+
     } catch (error) {
         console.error('Webhook processing error:', error);
         return NextResponse.json(

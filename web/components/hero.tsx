@@ -1,12 +1,36 @@
 "use client"
 
+import type React from "react"
 import Link from "next/link"
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
-import { useEffect, useRef } from "react"
+import { Input } from "@/components/ui/input"
+import { useEffect, useRef, useState } from "react"
+import { ArrowRight, Mail } from "lucide-react"
+import { subscribeLaunchUpdates } from "@/app/actions/launch-updates"
 
 export function Hero() {
   const canvasRef = useRef<HTMLCanvasElement>(null)
+  const [email, setEmail] = useState("")
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [status, setStatus] = useState<{ type: "success" | "error"; message: string } | null>(null)
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    setIsSubmitting(true)
+    setStatus(null)
+
+    const result = await subscribeLaunchUpdates(email)
+
+    if (result.success) {
+      setStatus({ type: "success", message: "Thanks — we'll keep you posted on launches." })
+      setEmail("")
+    } else {
+      setStatus({ type: "error", message: result.error || "Something went wrong." })
+    }
+
+    setIsSubmitting(false)
+  }
 
   useEffect(() => {
     const canvas = canvasRef.current
@@ -109,7 +133,73 @@ export function Hero() {
             High-altitude atmospheric data collected via distributed balloon platforms
           </p>
 
-          <div className="mt-14 flex flex-wrap items-center justify-center gap-4">
+          <div className="mx-auto mt-10 w-full max-w-md">
+            <div className="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-xl ring-1 ring-slate-100">
+              <div className="h-1 w-full bg-gradient-to-r from-primary/70 via-primary to-primary/70" />
+              <form
+                onSubmit={handleSubmit}
+                className="px-5 py-5 text-left sm:px-6 sm:py-6"
+                aria-label="Get launch updates by email"
+              >
+                <div className="flex items-center justify-center gap-2 text-center">
+                  <Mail className="h-4 w-4 text-primary" aria-hidden />
+                  <p className="text-xs font-semibold uppercase tracking-[0.14em] text-primary">
+                    Get launch updates
+                  </p>
+                </div>
+                <p className="mt-2 text-center text-sm leading-relaxed text-slate-600">
+                  Be first to hear when we fly. One email, no spam.
+                </p>
+
+                <div className="mt-5 flex w-full flex-col gap-2 sm:flex-row sm:gap-2.5">
+                  <label htmlFor="hero-launch-email" className="sr-only">
+                    Email address
+                  </label>
+                  <div className="relative flex-1">
+                    <Mail className="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400" aria-hidden />
+                    <Input
+                      id="hero-launch-email"
+                      type="email"
+                      name="email"
+                      inputMode="email"
+                      autoComplete="email"
+                      required
+                      placeholder="you@example.com"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      className="h-12 w-full rounded-md border-slate-300 bg-white pl-10 pr-4 text-base shadow-sm placeholder:text-slate-400 focus-visible:border-primary md:text-base"
+                    />
+                  </div>
+                  <Button
+                    type="submit"
+                    disabled={isSubmitting}
+                    className="group h-12 w-full shrink-0 rounded-md bg-primary px-5 text-sm font-semibold text-primary-foreground shadow-md transition-all hover:bg-primary/90 hover:shadow-lg disabled:opacity-60 sm:w-auto"
+                  >
+                    <span>{isSubmitting ? "Sending…" : "Notify me"}</span>
+                    {!isSubmitting && (
+                      <ArrowRight
+                        className="ml-1 h-4 w-4 transition-transform group-hover:translate-x-0.5"
+                        aria-hidden
+                      />
+                    )}
+                  </Button>
+                </div>
+
+                {status && (
+                  <p
+                    role="status"
+                    className={`mt-4 text-center text-sm ${
+                      status.type === "success" ? "text-emerald-700" : "text-destructive"
+                    }`}
+                  >
+                    {status.message}
+                  </p>
+                )}
+              </form>
+            </div>
+          </div>
+
+          <div className="mt-12 flex flex-wrap items-center justify-center gap-4">
             <Button
               asChild
               size="lg"

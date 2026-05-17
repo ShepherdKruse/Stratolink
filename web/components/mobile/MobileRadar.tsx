@@ -1,10 +1,13 @@
 'use client';
 
-import { useState, useEffect, useRef, useCallback } from 'react';
+import { useState, useEffect, useRef, useCallback, useMemo } from 'react';
 import Map, { Source, Layer } from 'react-map-gl/mapbox';
 import type { MapRef } from 'react-map-gl/mapbox';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import { Compass } from 'lucide-react';
+import { isUsableGpsCoordinate, isValidWgs84Point, isWebGLAvailable } from '@/lib/mapGeo';
+import mapboxgl from 'mapbox-gl';
+import type { MapMouseEvent } from 'mapbox-gl';
 
 interface BalloonData {
     id: string;
@@ -13,33 +16,75 @@ interface BalloonData {
     altitude_m: number;
 }
 
+interface FlightPathPoint {
+    lat: number;
+    lon: number;
+    time?: Date;
+}
+
 interface MobileRadarProps {
     balloonData: BalloonData[];
     onBalloonClick: (balloonId: string) => void;
     userLocation?: { lat: number; lon: number } | null;
     selectedBalloonId?: string | null;
+    flightPathData?: FlightPathPoint[];
 }
 
-export default function MobileRadar({ balloonData, onBalloonClick, userLocation, selectedBalloonId }: MobileRadarProps) {
+const MAP_STYLE_DARK = 'mapbox://styles/mapbox/dark-v11';
+
+function buildLngLatBounds(coords: ReadonlyArray<readonly [number, number]>): mapboxgl.LngLatBounds | null {
+    if (!coords.length) return null;
+    const first = coords[0] as mapboxgl.LngLatLike;
+    const b = new mapboxgl.LngLatBounds(first, first);
+    for (let i = 1; i < coords.length; i++) {
+        b.extend(coords[i] as mapboxgl.LngLatLike);
+    }
+    return b;
+}
+
+export default function MobileRadar({
+    balloonData,
+    onBalloonClick,
+    userLocation,
+    selectedBalloonId,
+    flightPathData = [],
+}: MobileRadarProps) {
     const mapRef = useRef<MapRef>(null);
     const [mapBearing, setMapBearing] = useState(0);
     const [compassEnabled, setCompassEnabled] = useState(false);
+    const [styleLoaded, setStyleLoaded] = useState(false);
+    const [webglOk, setWebglOk] = useState<boolean | null>(null);
+    const mapboxToken = process.env.NEXT_PUBLIC_MAPBOX_TOKEN;
 
-    // Find nearest balloon
-    const nearestBalloon = useCallback(() => {
-        if (!userLocation || balloonData.length === 0) return null;
+    useEffect(() => {
+        setWebglOk(isWebGLAvailable());
+    }, []);
+
+    const handleStyleLoad = useCallback(() => {
+        setStyleLoaded(true);
+    }, []);
+
+    const mapBalloons = useMemo(
+        () => balloonData.filter((b) => isUsableGpsCoordinate(b.lat, b.lon)),
+        [balloonData],
+    );
+
+    const nearestBalloon = useCallback((): { balloon: BalloonData; distance: number } | null => {
+        if (!userLocation || mapBalloons.length === 0) return null;
 
         let nearest: BalloonData | null = null;
         let minDistance = Infinity;
 
-        balloonData.forEach(balloon => {
-            const R = 6371; // Earth radius in km
-            const dLat = (balloon.lat - userLocation.lat) * Math.PI / 180;
-            const dLon = (balloon.lon - userLocation.lon) * Math.PI / 180;
-            const a = 
+        mapBalloons.forEach((balloon) => {
+            const R = 6371;
+            const dLat = ((balloon.lat - userLocation.lat) * Math.PI) / 180;
+            const dLon = ((balloon.lon - userLocation.lon) * Math.PI) / 180;
+            const a =
                 Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-                Math.cos(userLocation.lat * Math.PI / 180) * Math.cos(balloon.lat * Math.PI / 180) *
-                Math.sin(dLon / 2) * Math.sin(dLon / 2);
+                Math.cos((userLocation.lat * Math.PI) / 180) *
+                    Math.cos((balloon.lat * Math.PI) / 180) *
+                    Math.sin(dLon / 2) *
+                    Math.sin(dLon / 2);
             const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
             const distance = R * c;
 
@@ -49,40 +94,146 @@ export default function MobileRadar({ balloonData, onBalloonClick, userLocation,
             }
         });
 
-        return nearest ? { balloon: nearest, distance: minDistance * 0.621371 } : null; // Convert to miles
-    }, [balloonData, userLocation]);
+        return nearest ? { balloon: nearest, distance: minDistance * 0.621371 } : null;
+    }, [mapBalloons, userLocation]);
 
     const nearest = nearestBalloon();
 
-    // Compass orientation using device orientation API
+    const balloonGeoJSON = useMemo(
+        () =>
+            ({
+                type: 'FeatureCollection' as const,
+                features: mapBalloons.map((balloon) => ({
+                    type: 'Feature' as const,
+                    id: balloon.id,
+                    geometry: {
+                        type: 'Point' as const,
+                        coordinates: [balloon.lon, balloon.lat],
+                    },
+                    properties: {
+                        altitude: balloon.altitude_m,
+                        deviceId: balloon.id,
+                    },
+                })),
+            }) as GeoJSON.FeatureCollection,
+        [mapBalloons],
+    );
+
+    const flightLineGeoJSON = useMemo(() => {
+        const pathCoords = flightPathData
+            .filter((p) => isUsableGpsCoordinate(p.lat, p.lon))
+            .map((p) => [p.lon, p.lat] as [number, number]);
+        if (!selectedBalloonId || pathCoords.length < 2) {
+            return { type: 'FeatureCollection' as const, features: [] as GeoJSON.Feature[] };
+        }
+        return {
+            type: 'FeatureCollection' as const,
+            features: [
+                {
+                    type: 'Feature' as const,
+                    geometry: {
+                        type: 'LineString' as const,
+                        coordinates: pathCoords,
+                    },
+                    properties: {},
+                },
+            ],
+        } satisfies GeoJSON.FeatureCollection;
+    }, [flightPathData, selectedBalloonId]);
+
+    const lastSelectionRef = useRef<string | null>(null);
+    const lastFleetFitAtRef = useRef(0);
+    const flightPathFitKeyRef = useRef('');
+
+    useEffect(() => {
+        if (!styleLoaded || !mapRef.current || !webglOk) return;
+        const map = mapRef.current.getMap();
+        if (!map?.loaded?.()) return;
+
+        const pathFitKey = `${selectedBalloonId ?? ''}:${flightLineGeoJSON.features.length}`;
+        if (flightPathFitKeyRef.current !== pathFitKey) {
+            flightPathFitKeyRef.current = pathFitKey;
+            lastFleetFitAtRef.current = 0;
+        }
+
+        const lngLatsFromBalloons = mapBalloons.map((b): [number, number] => [b.lon, b.lat]);
+
+        let bounds: mapboxgl.LngLatBounds | null = null;
+
+        const pathCoords =
+            selectedBalloonId && flightLineGeoJSON.features[0]?.geometry?.type === 'LineString'
+                ? (flightLineGeoJSON.features[0].geometry as GeoJSON.LineString).coordinates.map(
+                      (c): [number, number] => [Number(c[0]), Number(c[1])],
+                  )
+                : [];
+        bounds = pathCoords.length >= 2 ? buildLngLatBounds(pathCoords) : null;
+
+        if (!bounds || bounds.isEmpty()) {
+            bounds = lngLatsFromBalloons.length > 0 ? buildLngLatBounds(lngLatsFromBalloons) : null;
+        }
+
+        const selectionChanged = (selectedBalloonId ?? null) !== lastSelectionRef.current;
+        lastSelectionRef.current = selectedBalloonId ?? null;
+
+        const now = Date.now();
+        const throttleMs = 8000;
+        const allowFleetRefit =
+            selectionChanged ||
+            lngLatsFromBalloons.length === 0 ||
+            now - lastFleetFitAtRef.current > throttleMs;
+
+        if (!allowFleetRefit) return;
+
+        if (bounds && !bounds.isEmpty()) {
+            try {
+                map.fitBounds(bounds, {
+                    padding: { top: 80, bottom: 120, left: 24, right: 24 },
+                    maxZoom: 12,
+                    duration: selectionChanged ? 900 : 1200,
+                });
+                lastFleetFitAtRef.current = now;
+                return;
+            } catch {
+                /* ignore invalid bounds edge cases */
+            }
+        }
+
+        if (lngLatsFromBalloons.length === 1 && isUsableGpsCoordinate(mapBalloons[0].lat, mapBalloons[0].lon)) {
+            map.flyTo({
+                center: [mapBalloons[0].lon, mapBalloons[0].lat],
+                zoom: 8,
+                duration: selectionChanged ? 900 : 1200,
+            });
+            lastFleetFitAtRef.current = now;
+        }
+    }, [mapBalloons, styleLoaded, flightLineGeoJSON, selectedBalloonId, webglOk]);
+
     useEffect(() => {
         if (!compassEnabled) return;
 
         const handleOrientation = (event: DeviceOrientationEvent) => {
             if (event.alpha !== null && mapRef.current) {
-                // alpha is compass heading (0-360)
-                const bearing = -event.alpha; // Negative for map rotation
+                const bearing = -event.alpha;
                 setMapBearing(bearing);
                 mapRef.current.setBearing(bearing);
             }
         };
 
-        // Skip device orientation in iframe context
         if (typeof window === 'undefined' || window.self !== window.top) {
             return;
         }
 
-        if (typeof DeviceOrientationEvent !== 'undefined' && typeof (DeviceOrientationEvent as any).requestPermission === 'function') {
-            // iOS 13+ requires permission
-            (DeviceOrientationEvent as any).requestPermission()
+        if (
+            typeof DeviceOrientationEvent !== 'undefined' &&
+            typeof (DeviceOrientationEvent as typeof DeviceOrientationEvent & { requestPermission?: () => Promise<string> }).requestPermission === 'function'
+        ) {
+            (DeviceOrientationEvent as typeof DeviceOrientationEvent & { requestPermission: () => Promise<string> }).requestPermission()
                 .then((response: string) => {
                     if (response === 'granted' && typeof window !== 'undefined') {
                         window.addEventListener('deviceorientation', handleOrientation);
                     }
                 })
-                .catch(() => {
-                    console.log('Compass permission denied');
-                });
+                .catch(() => {});
         } else if (typeof window !== 'undefined') {
             window.addEventListener('deviceorientation', handleOrientation);
         }
@@ -94,133 +245,131 @@ export default function MobileRadar({ balloonData, onBalloonClick, userLocation,
         };
     }, [compassEnabled]);
 
-    // Get user location
-    useEffect(() => {
-        // Skip geolocation in iframe context
-        if (typeof window === 'undefined' || window.self !== window.top) {
-            return;
-        }
-        
-        if (typeof navigator !== 'undefined' && navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(
-                (position) => {
-                    // Store in state or context if needed
-                },
-                () => {
-                    console.log('Geolocation denied');
-                }
-            );
-        }
-    }, []);
+    const handleMarkerClick = useCallback(
+        (e: MapMouseEvent) => {
+            const feature = e.features?.[0];
+            const props = feature?.properties as Record<string, unknown> | null | undefined;
+            const raw = props?.deviceId;
+            const balloonId =
+                typeof raw === 'string'
+                    ? raw
+                    : raw != null
+                      ? String(raw)
+                      : feature?.id != null
+                        ? String(feature.id)
+                        : null;
+            if (balloonId) onBalloonClick(balloonId);
+        },
+        [onBalloonClick],
+    );
 
-    const balloonGeoJSON = {
-        type: 'FeatureCollection' as const,
-        features: balloonData.map((balloon) => ({
-            type: 'Feature' as const,
-            id: balloon.id,
-            geometry: {
-                type: 'Point' as const,
-                coordinates: [balloon.lon, balloon.lat],
-            },
-            properties: {
-                altitude: balloon.altitude_m,
-                deviceId: balloon.id,
-            },
-        })),
-    };
+    if (!mapboxToken) {
+        return (
+            <div className="flex h-full w-full items-center justify-center bg-[#1a1a1a] p-6 text-center">
+                <p className="font-mono text-[12px] text-[#999]">
+                    Map is unavailable—set NEXT_PUBLIC_MAPBOX_TOKEN to show the radar.
+                </p>
+            </div>
+        );
+    }
 
-    const handleMarkerClick = useCallback((e: any) => {
-        const feature = e.features?.[0];
-        if (!feature) return;
-        const balloonId = feature.properties?.deviceId;
-        if (balloonId) {
-            onBalloonClick(balloonId);
-        }
-    }, [onBalloonClick]);
+    if (webglOk === false) {
+        return (
+            <div className="flex h-full w-full items-center justify-center bg-[#1a1a1a] p-6 text-center">
+                <p className="font-mono text-[12px] text-[#999]">WebGL is required for Mapbox maps. Enable WebGL or try another browser.</p>
+            </div>
+        );
+    }
 
     return (
-        <div className="relative w-full h-full">
-            {/* Map - 2D Default for Mobile */}
+        <div className="relative h-full w-full">
             <Map
                 ref={mapRef}
-                mapboxAccessToken={process.env.NEXT_PUBLIC_MAPBOX_TOKEN}
+                mapboxAccessToken={mapboxToken}
                 initialViewState={{
-                    longitude: userLocation?.lon ?? -75,
-                    latitude: userLocation?.lat ?? 40,
+                    longitude: userLocation && isValidWgs84Point(userLocation.lat, userLocation.lon) ? userLocation.lon : -75,
+                    latitude: userLocation && isValidWgs84Point(userLocation.lat, userLocation.lon) ? userLocation.lat : 40,
                     zoom: 3,
                     pitch: 0,
                     bearing: mapBearing,
                 }}
                 style={{ width: '100%', height: '100%' }}
-                mapStyle="mapbox://styles/mapbox/standard"
+                mapStyle={MAP_STYLE_DARK}
                 projection="mercator"
                 interactiveLayerIds={['balloon-markers']}
                 onClick={handleMarkerClick}
-                cursor="pointer"
-            >
-                {/* Balloon Markers */}
-                <Source id="balloons" type="geojson" data={balloonGeoJSON}>
-                    <Layer
-                        id="balloon-markers"
-                        type="circle"
-                        paint={{
-                            'circle-color': [
-                                'case',
-                                ['==', ['get', 'deviceId'], selectedBalloonId || ''],
-                                '#4a9',
-                                ['>', ['get', 'altitude'], 100],
-                                '#4a90d9',
-                                '#666'
-                            ],
-                            'circle-radius': [
-                                'case',
-                                ['==', ['get', 'deviceId'], selectedBalloonId || ''],
-                                12,
-                                8
-                            ],
-                            'circle-opacity': 0.9,
-                            'circle-stroke-width': [
-                                'case',
-                                ['==', ['get', 'deviceId'], selectedBalloonId || ''],
-                                3,
-                                2
-                            ],
-                            'circle-stroke-color': [
-                                'case',
-                                ['==', ['get', 'deviceId'], selectedBalloonId || ''],
-                                '#4a9',
-                                '#fff'
-                            ],
-                            'circle-stroke-opacity': 0.8,
-                        }}
-                    />
-                </Source>
+                onLoad={handleStyleLoad}
+                onStyleData={(e: { dataType?: string }) => {
+                    if (e?.dataType === 'style') handleStyleLoad();
+                }}
+                cursor="pointer">
+                {styleLoaded && flightLineGeoJSON.features.length > 0 && (
+                    <Source id="flight-path-mobile" type="geojson" data={flightLineGeoJSON}>
+                        <Layer
+                            id="flight-path-line-mobile"
+                            type="line"
+                            paint={{
+                                'line-color': '#4a90d9',
+                                'line-width': 4,
+                                'line-opacity': 0.85,
+                            }}
+                            layout={{
+                                'line-cap': 'round',
+                                'line-join': 'round',
+                            }}
+                        />
+                    </Source>
+                )}
+                {styleLoaded && (
+                    <Source id="balloons" type="geojson" data={balloonGeoJSON}>
+                        <Layer
+                            id="balloon-markers"
+                            type="circle"
+                            paint={{
+                                'circle-color': [
+                                    'case',
+                                    ['==', ['get', 'deviceId'], selectedBalloonId || ''],
+                                    '#44aa99',
+                                    ['>', ['get', 'altitude'], 100],
+                                    '#4a90d9',
+                                    '#888',
+                                ],
+                                'circle-radius': ['case', ['==', ['get', 'deviceId'], selectedBalloonId || ''], 12, 8],
+                                'circle-opacity': 0.9,
+                                'circle-stroke-width': ['case', ['==', ['get', 'deviceId'], selectedBalloonId || ''], 3, 2],
+                                'circle-stroke-color': [
+                                    'case',
+                                    ['==', ['get', 'deviceId'], selectedBalloonId || ''],
+                                    '#66ccbb',
+                                    '#fff',
+                                ],
+                                'circle-stroke-opacity': 0.85,
+                            }}
+                        />
+                    </Source>
+                )}
             </Map>
 
-            {/* Nearby Pill - Top Center */}
             {nearest && (
-                <div className="absolute top-4 left-1/2 transform -translate-x-1/2 z-20">
-                    <div className="bg-[#1a1a1a]/95 backdrop-blur-md border border-[#333] px-4 py-2 rounded-full">
+                <div className="absolute left-1/2 top-4 z-20 -translate-x-1/2 transform">
+                    <div className="rounded-full border border-[#333] bg-[#1a1a1a]/95 px-4 py-2 backdrop-blur-md">
                         <div className="flex items-center gap-2">
-                            <span className="text-[10px] text-[#666] font-mono">Nearest:</span>
-                            <span className="text-[12px] text-[#4a90d9] font-mono font-semibold">{nearest.balloon.id}</span>
-                            <span className="text-[10px] text-[#e5e5e5] font-mono">
-                                ({nearest.distance.toFixed(0)} mi ↑)
-                            </span>
+                            <span className="font-mono text-[10px] text-[#666]">Nearest:</span>
+                            <span className="font-mono text-[12px] font-semibold text-[#4a90d9]">{nearest.balloon.id}</span>
+                            <span className="font-mono text-[10px] text-[#e5e5e5]">({nearest.distance.toFixed(0)} mi ↑)</span>
                         </div>
                     </div>
                 </div>
             )}
 
-            {/* Compass Button - Bottom Right */}
             <button
+                type="button"
                 onClick={() => setCompassEnabled(!compassEnabled)}
-                className={`absolute bottom-20 right-4 z-20 w-14 h-14 rounded-full flex items-center justify-center border transition-all min-h-[44px] min-w-[44px] ${
+                className={`absolute bottom-20 right-4 z-20 flex h-14 w-14 min-h-[44px] min-w-[44px] items-center justify-center rounded-full border transition-all ${
                     compassEnabled
-                        ? 'bg-[#4a90d9] border-[#4a90d9] text-white'
-                        : 'bg-[#1a1a1a]/95 backdrop-blur-md border-[#333] text-[#666]'
-                }`}
-            >
+                        ? 'border-[#4a90d9] bg-[#4a90d9] text-white'
+                        : 'border-[#333] bg-[#1a1a1a]/95 text-[#666] backdrop-blur-md'
+                }`}>
                 <Compass size={24} />
             </button>
         </div>

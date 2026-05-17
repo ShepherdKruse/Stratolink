@@ -1,0 +1,73 @@
+/* Scoped design tokens aligned with Downloads/mobile prototype (styles.css parity). */
+
+.sl-mobile {
+    --sans: ui-sans-serif, system-ui, -apple-system, "SF Pro Text", sans-serif;
+    --mono: ui-monospace, "SF Mono", Menlo, monospace;
+    --bg: #0b0e13;
+    --bg-1: #0f131a;
+    --text: #d6dde8;
+    --text-hi: #f3f6fa;
+    --text-dim: #8f9aad;
+    --text-dim2: #697996;
+    --text-dim3: #526079;
+    --border: rgba(138, 160, 194, 0.18);
+    --border-hi: rgba(138, 160, 194, 0.28);
+    --divider: rgba(138, 160, 194, 0.12);
+    --grid: rgba(138, 160, 194, 0.08);
+    --ok: #4ce0b0;
+    --ok-mute: rgba(76, 224, 176, 0.55);
+    --ok-soft: rgba(76, 224, 176, 0.08);
+    --alert: #f0a848;
+    --neutral: rgba(138, 160, 194, 0.45);
+}
+
+.sl-mobile .sl-pill-teal {
+    display: inline-flex;
+    align-items: center;
+    padding: 2px 8px;
+    border-radius: 999px;
+    font-family: var(--sans);
+    font-weight: 500;
+    font-size: 9px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    border: 1px solid rgba(76, 224, 176, 0.45);
+    color: var(--ok);
+    background: var(--ok-soft);
+}
+
+.sl-mobile .sl-pill-amber {
+    border-color: rgba(240, 168, 72, 0.45);
+    color: var(--alert);
+    background: rgba(240, 168, 72, 0.1);
+}
+
+.sl-mobile .sl-pill-dim {
+    border-color: var(--border);
+    color: var(--text-dim2);
+    background: transparent;
+}
+
+.sl-mobile .sl-kv-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 0;
+    border-bottom: 1px solid var(--divider);
+    font-family: var(--sans);
+    font-size: 12px;
+}
+
+.sl-mobile .sl-kv-row .k {
+    color: var(--text-dim);
+}
+
+.sl-mobile .sl-kv-row .v {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--text);
+}
+
+.sl-mobile .sl-kv-row .v.teal {
+    color: var(--ok);
+}

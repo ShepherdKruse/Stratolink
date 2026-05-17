@@ -5,6 +5,19 @@ import Map, { Source, Layer } from 'react-map-gl/mapbox';
 import type { MapRef } from 'react-map-gl/mapbox';
 import 'mapbox-gl/dist/mapbox-gl.css';
 
+import { isUsableGpsCoordinate } from '@/lib/mapGeo';
+
+function isWebGLAvailable(): boolean {
+    if (typeof window === 'undefined') return false;
+    try {
+        const canvas = document.createElement('canvas');
+        const gl = canvas.getContext('webgl2') || canvas.getContext('webgl');
+        return !!gl;
+    } catch {
+        return false;
+    }
+}
+
 interface BalloonData {
     id: string;
     lat: number;
@@ -50,9 +63,30 @@ export default function MissionMap({
         bearing: 0,
     });
 
-    // Track mobile state for responsive behavior
+    /* Track when the Mapbox style is fully loaded. Sources/Layers must not
+     * mount before the style is ready or mapbox-gl throws
+     * "Style is not done loading" and the ErrorBoundary kicks in, blanking
+     * the whole map. */
+    const [styleLoaded, setStyleLoaded] = useState(false);
+
+    const handleStyleLoad = useCallback(() => {
+        setStyleLoaded(true);
+    }, []);
+
+    /* If the underlying style changes (projection toggle remounts the Map
+     * via `key={projection}`), reset the flag so we don't render layers
+     * against a stale style instance. */
+    useEffect(() => {
+        setStyleLoaded(false);
+    }, [projection]);
+
     const [isMobile, setIsMobile] = useState(false);
-    
+    const [webglOk, setWebglOk] = useState<boolean | null>(null);
+
+    useEffect(() => {
+        setWebglOk(isWebGLAvailable());
+    }, []);
+
     useEffect(() => {
         const checkMobile = () => {
             setIsMobile(window.innerWidth < 768);
@@ -176,12 +210,14 @@ export default function MissionMap({
             return null;
         }
         
-        const coordinates = pathPoints.map(point => {
-            if (typeof point.lat !== 'number' || typeof point.lon !== 'number') {
-                return null;
-            }
-            return [point.lon, point.lat] as [number, number];
-        }).filter((coord): coord is [number, number] => coord !== null);
+        const coordinates = pathPoints
+            .map((point) => {
+                if (!isUsableGpsCoordinate(point.lat, point.lon)) {
+                    return null;
+                }
+                return [point.lon, point.lat] as [number, number];
+            })
+            .filter((coord): coord is [number, number] => coord !== null);
         
         if (coordinates.length < 2) {
             return null;
@@ -209,6 +245,33 @@ export default function MissionMap({
         return undefined;
     }, [isMobile, isSidebarOpen, activeBalloonId]);
 
+    /* If the browser cannot create a WebGL context (hardware acceleration
+     * disabled, GPU blocklisted, locked-down sandbox) Mapbox would throw on
+     * mount and the ErrorBoundary above would blank the whole dashboard.
+     * Render a graceful placeholder with self-help guidance instead. */
+    if (webglOk === false) {
+        return (
+            <div className="w-full h-full relative flex items-center justify-center bg-[#0a0a0a]">
+                <div className="max-w-md text-center px-6 font-mono text-xs text-[#bbb]">
+                    <div className="text-[#ff6b6b] text-sm mb-3 uppercase tracking-wider">Map unavailable</div>
+                    <div className="text-[#aaa] mb-4">
+                        Your browser can&apos;t create a WebGL context, so Mapbox can&apos;t render the globe.
+                    </div>
+                    <div className="text-[#888] text-[11px] leading-relaxed text-left bg-[#141414] border border-[#333] p-3 rounded">
+                        <div className="text-[#ccc] mb-2">Try one of these:</div>
+                        <div>1. Chrome/Edge: <code className="text-[#9ecbff]">chrome://settings/system</code> &rarr; enable &ldquo;Use graphics acceleration when available&rdquo; &rarr; restart browser.</div>
+                        <div className="mt-2">2. Check <code className="text-[#9ecbff]">chrome://gpu</code> &mdash; WebGL should say &ldquo;Hardware accelerated&rdquo;.</div>
+                        <div className="mt-2">3. Test at <a href="https://get.webgl.org" target="_blank" rel="noreferrer" className="text-[#9ecbff] underline">get.webgl.org</a> to confirm the browser config.</div>
+                    </div>
+                </div>
+            </div>
+        );
+    }
+
+    if (webglOk === null) {
+        return <div className="w-full h-full bg-[#0a0a0a]" />;
+    }
+
     return (
         <div className="w-full h-full relative">
             <Map
@@ -228,11 +291,14 @@ export default function MissionMap({
                     'space-color': 'rgb(5, 5, 5)',
                     'star-intensity': 0.4,
                 } : undefined}
-                terrain={projection === 'globe' ? { source: 'mapbox-dem', exaggeration: 1.5 } : undefined}
                 interactiveLayerIds={['balloon-markers-active', 'balloon-markers-landed']}
                 onClick={handleMarkerClick}
+                onLoad={handleStyleLoad}
+                onStyleData={handleStyleLoad}
                 cursor="pointer"
             >
+                {styleLoaded && (
+                    <>
                 {/* Balloon markers - functional colors from palette */}
                 <Source id="balloons" type="geojson" data={balloonGeoJSON}>
                     {/* Active balloons - accent blue */}
@@ -323,6 +389,8 @@ export default function MissionMap({
                             }}
                         />
                     </Source>
+                )}
+                    </>
                 )}
             </Map>
         </div>

@@ -41,7 +41,7 @@ typedef struct {
 } telemetry_input_t;
 
 /**
- * Pack telemetry into a 38-byte big-endian payload for LoRaWAN uplink.
+ * Pack telemetry into a 35-byte big-endian payload for LoRaWAN uplink.
  * out must point to at least TELEMETRY_PAYLOAD_SIZE bytes.
  */
 void telemetry_pack(const telemetry_input_t* in, uint8_t* out);

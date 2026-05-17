@@ -5,8 +5,30 @@ import { Canvas, useFrame } from '@react-three/fiber';
 import { OrbitControls, PerspectiveCamera, useGLTF } from '@react-three/drei';
 import * as THREE from 'three';
 
-// Preload the model for better performance
-useGLTF.preload('/models/payload_v1.glb');
+if (typeof window !== 'undefined') {
+    /* Preload only when the browser can actually create a WebGL context.
+     * On systems with disabled hardware acceleration or strict sandboxes
+     * useGLTF.preload would otherwise fault during module init. */
+    try {
+        const canvas = document.createElement('canvas');
+        if (canvas.getContext('webgl2') || canvas.getContext('webgl')) {
+            useGLTF.preload('/models/payload_v1.glb');
+        }
+    } catch {
+        /* no-op: feature-detect failure is itself the answer */
+    }
+}
+
+function isWebGLAvailable(): boolean {
+    if (typeof window === 'undefined') return false;
+    try {
+        const canvas = document.createElement('canvas');
+        const gl = canvas.getContext('webgl2') || canvas.getContext('webgl');
+        return !!gl;
+    } catch {
+        return false;
+    }
+}
 
 // Load external PCB model if available
 function ExternalPCBModel({ modelPath }: { modelPath: string }) {
@@ -194,12 +216,15 @@ function SimplePCBModel() {
 }
 
 export default function Payload3DViewer() {
-    // Try to load external model, fallback to simple model if not found
     const modelPath = '/models/payload_v1.glb';
     const [useExternalModel, setUseExternalModel] = useState(false);
-    
+    const [webglOk, setWebglOk] = useState<boolean | null>(null);
+
     useEffect(() => {
-        // Check if model file exists
+        setWebglOk(isWebGLAvailable());
+    }, []);
+
+    useEffect(() => {
         fetch(modelPath, { method: 'HEAD' })
             .then(res => {
                 if (res.ok) {
@@ -207,11 +232,28 @@ export default function Payload3DViewer() {
                 }
             })
             .catch(() => {
-                // Model not found, use simple model
                 setUseExternalModel(false);
             });
     }, [modelPath]);
-    
+
+    /* If hardware acceleration / WebGL is unavailable, return a static
+     * placeholder instead of attempting to create a renderer (which would
+     * throw an uncaught error and the React tree would unmount). */
+    if (webglOk === false) {
+        return (
+            <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-gray-900 to-black text-center px-4">
+                <div className="font-mono text-[10px] text-[#666] leading-tight">
+                    <div className="text-[#999] mb-1">3D model unavailable</div>
+                    <div>WebGL disabled in this browser. Enable hardware acceleration to view the payload model.</div>
+                </div>
+            </div>
+        );
+    }
+
+    if (webglOk === null) {
+        return <div className="w-full h-full bg-gradient-to-br from-gray-900 to-black" />;
+    }
+
     return (
         <div className="w-full h-full bg-gradient-to-br from-gray-900 to-black">
             <Canvas>

@@ -1,6 +1,5 @@
 'use client';
 
-import { useState } from 'react';
 import { Plus, Rocket } from 'lucide-react';
 
 interface BalloonData {
@@ -8,6 +7,8 @@ interface BalloonData {
     lat: number;
     lon: number;
     altitude_m: number;
+    launcher_name?: string;
+    awaiting_gps?: boolean;
 }
 
 interface MobileMissionsProps {
@@ -17,8 +18,9 @@ interface MobileMissionsProps {
 }
 
 export default function MobileMissions({ balloonData, onBalloonClick, onLaunch }: MobileMissionsProps) {
-    const activeBalloons = balloonData.filter(b => b.altitude_m > 100);
-    const landedBalloons = balloonData.filter(b => b.altitude_m <= 100);
+    const inFlightBalloons = balloonData.filter((b) => !b.awaiting_gps && b.altitude_m > 100);
+    const awaitingGpsBalloons = balloonData.filter((b) => !!b.awaiting_gps);
+    const onGroundBalloons = balloonData.filter((b) => !b.awaiting_gps && b.altitude_m <= 100);
 
     return (
         <div className="h-full bg-[#1a1a1a] overflow-y-auto pb-20">
@@ -26,7 +28,7 @@ export default function MobileMissions({ balloonData, onBalloonClick, onLaunch }
             <div className="sticky top-0 bg-[#1a1a1a] border-b border-[#333] z-10 p-4">
                 <h1 className="text-[18px] font-semibold text-[#e5e5e5] mb-1">My Missions</h1>
                 <p className="text-[12px] text-[#666] font-mono">
-                    {activeBalloons.length} active, {landedBalloons.length} landed
+                    {inFlightBalloons.length} in flight · {awaitingGpsBalloons.length} awaiting GPS · {onGroundBalloons.length} on ground
                 </p>
             </div>
 
@@ -41,12 +43,12 @@ export default function MobileMissions({ balloonData, onBalloonClick, onLaunch }
                 </button>
             </div>
 
-            {/* Active Balloons */}
-            {activeBalloons.length > 0 && (
+            {/* In flight */}
+            {inFlightBalloons.length > 0 && (
                 <div className="p-4">
-                    <div className="text-[10px] font-semibold text-[#666] uppercase tracking-wider mb-3">Active</div>
+                    <div className="text-[10px] font-semibold text-[#666] uppercase tracking-wider mb-3">In flight</div>
                     <div className="space-y-2">
-                        {activeBalloons.map((balloon) => (
+                        {inFlightBalloons.map((balloon) => (
                             <button
                                 key={balloon.id}
                                 onClick={() => onBalloonClick(balloon.id)}
@@ -72,12 +74,46 @@ export default function MobileMissions({ balloonData, onBalloonClick, onLaunch }
                 </div>
             )}
 
-            {/* Landed Balloons */}
-            {landedBalloons.length > 0 && (
-                <div className="p-4 border-t border-[#333]">
-                    <div className="text-[10px] font-semibold text-[#666] uppercase tracking-wider mb-3">Landed</div>
+            {/* Awaiting GPS (launch site) */}
+            {awaitingGpsBalloons.length > 0 && (
+                <div className="border-t border-[#333] p-4">
+                    <div className="mb-3 text-[10px] font-semibold uppercase tracking-wider text-[#b84]">
+                        Awaiting GPS
+                    </div>
                     <div className="space-y-2">
-                        {landedBalloons.map((balloon) => (
+                        {awaitingGpsBalloons.map((balloon) => (
+                            <button
+                                key={balloon.id}
+                                onClick={() => onBalloonClick(balloon.id)}
+                                className="min-h-[64px] w-full rounded-lg border border-[#333] bg-[#141414] p-4 text-left transition-colors hover:border-[#b84]">
+                                <div className="mb-2 flex items-center justify-between">
+                                    <div className="flex items-center gap-2">
+                                        <div className="h-2 w-2 shrink-0 rounded-full bg-[#b84] animate-pulse" />
+                                        <span className="font-mono text-[14px] font-semibold text-[#e5e5e5]">{balloon.id}</span>
+                                    </div>
+                                    <Rocket size={16} className="text-[#666]" />
+                                </div>
+                                <div className="space-y-0.5 font-mono text-[11px] text-[#999]">
+                                    <div>Last known: launch site</div>
+                                    <div>
+                                        {balloon.lat.toFixed(4)}°, {balloon.lon.toFixed(4)}°
+                                    </div>
+                                    {balloon.launcher_name && (
+                                        <div className="text-[10px] text-[#666]">Launched by: {balloon.launcher_name}</div>
+                                    )}
+                                </div>
+                            </button>
+                        ))}
+                    </div>
+                </div>
+            )}
+
+            {/* On ground / landed */}
+            {onGroundBalloons.length > 0 && (
+                <div className="border-t border-[#333] p-4">
+                    <div className="text-[10px] font-semibold text-[#666] uppercase tracking-wider mb-3">On ground</div>
+                    <div className="space-y-2">
+                        {onGroundBalloons.map((balloon) => (
                             <button
                                 key={balloon.id}
                                 onClick={() => onBalloonClick(balloon.id)}
