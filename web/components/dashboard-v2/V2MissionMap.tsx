@@ -279,12 +279,13 @@ export default function V2MissionMap({
                                             14, 3.5,
                                         ],
                                         'line-opacity': 0.85,
-                                        /* fade older sections of the trail toward transparent
-                                         * so the leading edge always reads as "now". */
+                                        /* Fade older sections of the trail toward dim — but
+                                         * keep the launch point visible. The leading edge
+                                         * still reads as "now" because it's fully bright. */
                                         'line-gradient': [
                                             'interpolate', ['linear'], ['line-progress'],
-                                            0,   'rgba(94, 234, 212, 0.0)',
-                                            0.6, 'rgba(94, 234, 212, 0.55)',
+                                            0,   'rgba(94, 234, 212, 0.45)',
+                                            0.6, 'rgba(94, 234, 212, 0.7)',
                                             1,   'rgba(94, 234, 212, 1.0)',
                                         ],
                                     }}
