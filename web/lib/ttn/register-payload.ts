@@ -95,7 +95,7 @@ async function ttsPutDevice(
     deviceId: string,
     apiKey: string,
     body: Record<string, unknown>
-): Promise<{ ok: true } | { ok: false; status: number; text: string }> {
+): Promise<{ ok: true } | { ok: false; status: number; text: string; url: string }> {
     const url = `${apiBase}/applications/${encodeURIComponent(applicationId)}/devices/${encodeURIComponent(deviceId)}`;
     const res = await fetch(url, {
         method: 'PUT',
@@ -107,7 +107,26 @@ async function ttsPutDevice(
     });
     if (!res.ok) {
         const text = await res.text();
-        return { ok: false, status: res.status, text };
+        return { ok: false, status: res.status, text, url };
+    }
+    return { ok: true };
+}
+
+/** Verify the TTN application exists before we attempt to create a device under it.
+ *  Catches the very common case of a typo'd TTN_APPLICATION_ID or wrong cluster. */
+async function ttsCheckApplication(
+    apiBase: string,
+    applicationId: string,
+    apiKey: string
+): Promise<{ ok: true } | { ok: false; status: number; text: string; url: string }> {
+    const url = `${apiBase}/applications/${encodeURIComponent(applicationId)}`;
+    const res = await fetch(url, {
+        method: 'GET',
+        headers: { Authorization: `Bearer ${apiKey}` },
+    });
+    if (!res.ok) {
+        const text = await res.text();
+        return { ok: false, status: res.status, text, url };
     }
     return { ok: true };
 }
@@ -206,12 +225,32 @@ export async function registerNewPayload(input: RegisterNewPayloadInput): Promis
         },
     };
 
+    /* Preflight: confirm the application exists before we try to register a device under it.
+     * Surfaces a clean "application not found" instead of a generic IS 404. */
+    const preflight = await ttsCheckApplication(apiBase, applicationId, apiKey);
+    if (!preflight.ok) {
+        const hint =
+            preflight.status === 404
+                ? `Application '${applicationId}' not found at ${stackHost}. ` +
+                  `Verify TTN_APPLICATION_ID exactly matches the id shown in the TTN console URL ` +
+                  `(https://${stackHost}/console/applications/<this-part>).`
+                : preflight.status === 401 || preflight.status === 403
+                ? `TTN_API_KEY does not have permission to read application '${applicationId}'. ` +
+                  `Re-issue the key with rights: APPLICATION_INFO + DEVICES_READ + DEVICES_WRITE + DEVICES_WRITE_KEYS.`
+                : `Unexpected ${preflight.status} from ${preflight.url}`;
+        return {
+            ok: false,
+            error: `TTN preflight failed (HTTP ${preflight.status})`,
+            details: `${hint}\n\nAttempted: GET ${preflight.url}\n\n${preflight.text.slice(0, 1500)}`,
+        };
+    }
+
     const put = await ttsPutDevice(apiBase, applicationId, deviceId, apiKey, endDeviceBody);
     if (!put.ok) {
         return {
             ok: false,
             error: `TTN rejected device registration (HTTP ${put.status})`,
-            details: put.text.slice(0, 2000),
+            details: `Attempted: PUT ${put.url}\n\n${put.text.slice(0, 1800)}`,
         };
     }
 

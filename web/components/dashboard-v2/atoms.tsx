@@ -45,6 +45,20 @@ export interface TelemetryRow {
     lora_sf: number | null;
     lora_bw: number | null;
     frequency_hz: number | null;
+    /* Per-uplink gateway list from TTN's rx_metadata. Empty array (not null)
+     * when the parser succeeded but rx_metadata was absent — easier to query
+     * than a NULL-vs-[] split. */
+    gateways: GatewayReception[] | null;
+}
+
+/** One gateway's reception of a single uplink — mirrors the parser's shape. */
+export interface GatewayReception {
+    gateway_id: string;
+    rssi: number | null;
+    snr: number | null;
+    lat: number | null;
+    lon: number | null;
+    alt: number | null;
 }
 
 export interface DeviceInfo {
