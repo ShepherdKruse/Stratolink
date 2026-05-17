@@ -133,6 +133,7 @@ export default function MissionControlScreen() {
                             />
                             <DataFreshnessPanel freshness={freshness} now={now} />
                             <LiveMetricsPanel rows={rows} latest={latest} />
+                            <GatewaysPanel latest={latest} />
                             <AlertsPanel alerts={alerts} now={now} />
                             <CadencePanel rows={rows} now={now} />
                         </>
@@ -500,6 +501,79 @@ function MetricRow({ name, series, value, color = 'var(--sl-ok-mute)' }: {
             <span className="name">{name}</span>
             <Sparkline data={series} width={140} height={20} color={color} />
             <span className="val">{value}</span>
+        </div>
+    );
+}
+
+/* GatewaysPanel — list of TTN gateways that received the most recent uplink,
+ * sorted strongest-first by RSSI. Multi-gateway reception is the lifeblood of
+ * a pico-balloon mission: at altitude a single packet typically lands on
+ * 5–30 gateways, and the spread is what enables triangulation when GPS is
+ * stale. We deliberately render the count big so a glance answers "is the
+ * balloon still being heard widely?" before any RSSI numbers. */
+function GatewaysPanel({ latest }: { latest: TelemetryRow | null }) {
+    const gateways = latest?.gateways ?? null;
+    const count = gateways?.length ?? 0;
+
+    if (!gateways || count === 0) {
+        return (
+            <div>
+                <div className="sl-label-xs" style={{ marginBottom: 10 }}>GATEWAYS</div>
+                <div style={{ padding: 12, border: '1px solid var(--sl-border)', fontSize: 11, color: 'var(--sl-text-dim2)' }}>
+                    Awaiting first uplink with rx_metadata.
+                </div>
+            </div>
+        );
+    }
+
+    /* Cap at 8 — the number of gateways above 8 is rarely actionable on a
+     * dashboard and the panel needs to leave room for alerts below. The full
+     * list always lives in `latest.gateways` for tooling/queries. */
+    const top = gateways.slice(0, 8);
+    const overflow = count - top.length;
+
+    return (
+        <div>
+            <div className="sl-label-xs" style={{ marginBottom: 10, display: 'flex', justifyContent: 'space-between', alignItems: 'baseline' }}>
+                <span>GATEWAYS · {count}</span>
+                {gateways[0]?.rssi !== null && gateways[0]?.rssi !== undefined && (
+                    <span style={{ color: 'var(--sl-text-dim2)', fontWeight: 400 }}>
+                        BEST {Math.round(gateways[0].rssi)}dBm
+                    </span>
+                )}
+            </div>
+            <div style={{ border: '1px solid var(--sl-border)' }}>
+                {top.map((g, i) => {
+                    /* gateway_id strings can get long (e.g., "eui-323456abcdef0123").
+                     * Show the most useful tail end so multiple co-located gateways
+                     * are still distinguishable. */
+                    const display = g.gateway_id.length > 22
+                        ? `…${g.gateway_id.slice(-18)}`
+                        : g.gateway_id;
+                    return (
+                        <div key={`${g.gateway_id}-${i}`} className="sl-metric-row" style={{ borderBottom: i === top.length - 1 && overflow === 0 ? 'none' : '1px solid var(--sl-border)' }}>
+                            <span className="name" style={{ fontFamily: 'var(--sl-mono, monospace)', fontSize: 10 }}>
+                                {display}
+                            </span>
+                            <span style={{ color: 'var(--sl-text-dim2)', fontSize: 10, fontVariantNumeric: 'tabular-nums' }}>
+                                {g.snr !== null ? `${g.snr.toFixed(1)}dB` : ''}
+                            </span>
+                            <span className="val" style={{ fontVariantNumeric: 'tabular-nums' }}>
+                                {g.rssi !== null ? `${Math.round(g.rssi)}dBm` : '—'}
+                            </span>
+                        </div>
+                    );
+                })}
+                {overflow > 0 && (
+                    <div className="sl-metric-row" style={{ borderTop: '1px solid var(--sl-border)' }}>
+                        <span className="name" style={{ color: 'var(--sl-text-dim2)' }}>
+                            +{overflow} more
+                        </span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                )}
+            </div>
         </div>
     );
 }
