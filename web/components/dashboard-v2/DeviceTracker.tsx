@@ -18,7 +18,7 @@ import {
 } from './atoms';
 import { useTelemetry, type DeviceSummary, type SubsystemFreshness } from './useTelemetry';
 import { useTickingNow, useElementSize, ConnectionPill, V1Link, fmtPressure } from './shared';
-import V2MissionMap, { type V2Balloon, type V2FlightPoint } from './V2MissionMap';
+import V2MissionMap, { type V2Balloon, type V2FlightPoint, type V2Gateway } from './V2MissionMap';
 
 type RangeKey = '1h' | '6h' | '24h' | 'all';
 const RANGE_MS: Record<RangeKey, number | null> = {
@@ -321,6 +321,23 @@ function MapColumn({ visibleRows, scrubRow, selectedDevice, now }: {
         return total;
     }, [trackPoints]);
 
+    /* Gateways tied to the *scrubbed* packet — so dragging the timeline
+     * animates "who heard this packet at this moment". Falls back to the
+     * latest packet's gateways when no scrub has happened. */
+    const mapGateways: V2Gateway[] = useMemo(() => {
+        const list = scrubRow?.gateways ?? null;
+        if (!list) return [];
+        return list
+            .filter(g => g.lat !== null && g.lon !== null)
+            .map(g => ({
+                gateway_id: g.gateway_id,
+                lat: g.lat as number,
+                lon: g.lon as number,
+                rssi: g.rssi,
+                snr: g.snr,
+            }));
+    }, [scrubRow]);
+
     const validAlts = visibleRows.map(r => r.alt).filter((v): v is number => v !== null && Number.isFinite(v));
     const validTemps = visibleRows.map(r => r.temp).filter((v): v is number => v !== null && Number.isFinite(v));
 
@@ -338,6 +355,7 @@ function MapColumn({ visibleRows, scrubRow, selectedDevice, now }: {
                 flightPath={trackPoints}
                 playbackT={scrubRow?.t ?? null}
                 projection="mercator"
+                gateways={mapGateways}
             />
 
             {/* Top-left badges */}

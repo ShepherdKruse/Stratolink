@@ -33,6 +33,17 @@ export interface V2FlightPoint {
     t: number;
 }
 
+/** A gateway's location + reception strength for the most recent uplink.
+ *  Many community TTN gateways don't publish their location; those are
+ *  silently omitted (we only render pins for gateways with real lat/lon). */
+export interface V2Gateway {
+    gateway_id: string;
+    lat: number;
+    lon: number;
+    rssi: number | null;
+    snr: number | null;
+}
+
 /** Strict WGS84 — anything else crashes Mapbox (fitBounds, layers). */
 export function isValidLngLat(lat: number, lon: number): boolean {
     return Number.isFinite(lat)
@@ -57,6 +68,10 @@ interface V2MissionMapProps {
     /** Optional projection — globe is nice for a world-scale view, mercator
      *  is better when zoomed in on a single mission. */
     projection?: 'globe' | 'mercator';
+    /** TTN gateways that received the most recent uplink (with locations).
+     *  Rendered as pins behind a user-controlled toggle so the map stays
+     *  readable when the device isn't selected. */
+    gateways?: V2Gateway[];
 }
 
 function isWebGLAvailable(): boolean {
@@ -77,10 +92,16 @@ export default function V2MissionMap({
     playbackT = null,
     autoFit = true,
     projection = 'mercator',
+    gateways = [],
 }: V2MissionMapProps) {
     const mapRef = useRef<MapRef>(null);
     const [styleLoaded, setStyleLoaded] = useState(false);
     const [webglOk, setWebglOk] = useState<boolean | null>(null);
+    /* Default OFF — gateway pins are powerful but visually busy when there
+     * are 10+ of them. User opts in via the toolbar toggle in the upper
+     * right of the map. Persistence across renders is fine; we don't try
+     * to remember it across page reloads (next session starts clean). */
+    const [showGateways, setShowGateways] = useState(false);
 
     /* Telemetry can contain legacy / corrupt rows (e.g. lng stored in lat).
      * Never pass those to Mapbox — they hard-throw inside fitBounds. */
@@ -91,6 +112,12 @@ export default function V2MissionMap({
     const validFlightPath = useMemo(
         () => flightPath.filter(p => isValidLngLat(p.lat, p.lon)),
         [flightPath],
+    );
+    /* Gateways without published location are omitted from the map but still
+     * appear in the GatewaysPanel's list. */
+    const validGateways = useMemo(
+        () => gateways.filter(g => isValidLngLat(g.lat, g.lon)),
+        [gateways],
     );
 
     useEffect(() => {
@@ -199,6 +226,46 @@ export default function V2MissionMap({
         };
     }, [validFlightPath, playbackT]);
 
+    /* Gateway pins — coloured by signal strength so the strongest gateways
+     * (closest, best-LOS) read as accent green and the weakest (long-range,
+     * just-barely-receiving) as muted amber. Reception lines are deliberately
+     * thin so the balloon's flight path stays the visual primary. */
+    const gatewaysGeoJSON = useMemo(() => ({
+        type: 'FeatureCollection' as const,
+        features: validGateways.map(g => ({
+            type: 'Feature' as const,
+            id: g.gateway_id,
+            geometry: { type: 'Point' as const, coordinates: [g.lon, g.lat] },
+            properties: {
+                gateway_id: g.gateway_id,
+                rssi: g.rssi ?? -130,    /* worst-case fallback for the colour ramp */
+                snr: g.snr ?? -10,
+            },
+        })),
+    }), [validGateways]);
+
+    /* Reception lines from the active balloon to each gateway that heard it
+     * — provides immediate visual confirmation of "who is listening to me
+     * right now". Only drawn when an active balloon has a position. */
+    const receptionLinesGeoJSON = useMemo(() => {
+        const active = validBalloons.find(b => b.id === activeId);
+        if (!active || validGateways.length === 0) return null;
+        return {
+            type: 'FeatureCollection' as const,
+            features: validGateways.map(g => ({
+                type: 'Feature' as const,
+                geometry: {
+                    type: 'LineString' as const,
+                    coordinates: [
+                        [active.lon, active.lat],
+                        [g.lon, g.lat],
+                    ] as [number, number][],
+                },
+                properties: { rssi: g.rssi ?? -130 },
+            })),
+        };
+    }, [validBalloons, activeId, validGateways]);
+
     if (webglOk === false) {
         return (
             <div style={{
@@ -288,6 +355,53 @@ export default function V2MissionMap({
                             </Source>
                         )}
 
+                        {/* Reception lines render BEHIND the balloon/gateway pins so
+                          * the pins always sit on top. */}
+                        {showGateways && receptionLinesGeoJSON && (
+                            <Source id="v2-reception-lines" type="geojson" data={receptionLinesGeoJSON}>
+                                <Layer
+                                    id="v2-reception-line"
+                                    type="line"
+                                    paint={{
+                                        'line-color': [
+                                            'interpolate', ['linear'], ['get', 'rssi'],
+                                            -130, 'rgba(245, 158, 11, 0.18)',  /* faint amber, weakest */
+                                            -110, 'rgba(245, 158, 11, 0.45)',
+                                            -100, 'rgba(94, 234, 212, 0.55)',
+                                             -85, 'rgba(94, 234, 212, 0.85)',  /* bright teal, strongest */
+                                        ],
+                                        'line-width': [
+                                            'interpolate', ['linear'], ['get', 'rssi'],
+                                            -130, 0.8,
+                                             -85, 2.0,
+                                        ],
+                                    }}
+                                />
+                            </Source>
+                        )}
+
+                        {showGateways && validGateways.length > 0 && (
+                            <Source id="v2-gateways" type="geojson" data={gatewaysGeoJSON}>
+                                <Layer
+                                    id="v2-gateway-pin"
+                                    type="circle"
+                                    paint={{
+                                        'circle-color': [
+                                            'interpolate', ['linear'], ['get', 'rssi'],
+                                            -130, '#f59e0b',   /* amber: marginal reception */
+                                            -100, '#fbbf24',
+                                             -90, '#a3e635',
+                                             -80, '#5eead4',   /* teal: strong reception */
+                                        ],
+                                        'circle-radius': 5,
+                                        'circle-stroke-width': 1,
+                                        'circle-stroke-color': '#0b1220',
+                                        'circle-stroke-opacity': 0.9,
+                                    }}
+                                />
+                            </Source>
+                        )}
+
                         <Source id="v2-balloons" type="geojson" data={balloonGeoJSON}>
                             <Layer
                                 id="v2-balloon-halo"
@@ -326,6 +440,35 @@ export default function V2MissionMap({
                     </>
                 )}
             </Map>
+
+            {/* Toggle overlay — top-right of the map. Counts the gateways that
+              * have a published location (the only ones that can render as
+              * pins); the gateway list panel always shows the full count. */}
+            {validGateways.length > 0 && (
+                <button
+                    type="button"
+                    onClick={() => setShowGateways(s => !s)}
+                    style={{
+                        position: 'absolute',
+                        top: 12,
+                        right: 12,
+                        padding: '6px 10px',
+                        fontFamily: 'var(--sl-mono, monospace)',
+                        fontSize: 10,
+                        letterSpacing: '0.10em',
+                        textTransform: 'uppercase',
+                        color: showGateways ? '#0b1220' : '#cbd5e1',
+                        background: showGateways ? '#5eead4' : 'rgba(11, 18, 32, 0.85)',
+                        border: '1px solid ' + (showGateways ? '#5eead4' : '#334155'),
+                        cursor: 'pointer',
+                        backdropFilter: 'blur(4px)',
+                        WebkitBackdropFilter: 'blur(4px)',
+                    }}
+                    aria-pressed={showGateways}
+                >
+                    {showGateways ? '◉' : '○'} GATEWAYS · {validGateways.length}
+                </button>
+            )}
         </div>
     );
 }

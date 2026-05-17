@@ -19,7 +19,7 @@ import {
 } from './atoms';
 import { useTelemetry, type DeviceSummary, type FleetMetrics, type FleetAlert, type SubsystemFreshness } from './useTelemetry';
 import { useTickingNow, useElementSize, ConnectionPill, V1Link, fmtPressure } from './shared';
-import V2MissionMap, { type V2Balloon, type V2FlightPoint } from './V2MissionMap';
+import V2MissionMap, { type V2Balloon, type V2FlightPoint, type V2Gateway } from './V2MissionMap';
 
 export default function MissionControlScreen() {
     const router = useRouter();
@@ -353,6 +353,22 @@ function CenterMap({ devices, rows, latest, lastFixRow, selectedDevice, now }: {
         .map(r => ({ lat: r.lat as number, lon: r.lon as number, t: r.t })),
         [rows]);
 
+    /* Gateways that received the most recent uplink. Only those with
+     * published locations make it onto the map; the rest still render
+     * in the GatewaysPanel. */
+    const mapGateways: V2Gateway[] = useMemo(() => {
+        const list = latest?.gateways ?? [];
+        return list
+            .filter(g => g.lat !== null && g.lon !== null)
+            .map(g => ({
+                gateway_id: g.gateway_id,
+                lat: g.lat as number,
+                lon: g.lon as number,
+                rssi: g.rssi,
+                snr: g.snr,
+            }));
+    }, [latest]);
+
     return (
         <div style={{ position: 'absolute', inset: 0, minWidth: 0 }}>
             <V2MissionMap
@@ -361,6 +377,7 @@ function CenterMap({ devices, rows, latest, lastFixRow, selectedDevice, now }: {
                 flightPath={flightPath}
                 playbackT={null}
                 projection="mercator"
+                gateways={mapGateways}
             />
             <div style={{ position: 'absolute', top: 14, left: 14, display: 'flex', gap: 6, zIndex: 1 }}>
                 <span className="sl-pill dim">MAPBOX · DARK</span>
