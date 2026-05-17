@@ -56,8 +56,16 @@ typedef struct {
  * only ever succeeded via the RX2 fallback). */
 static const float US915_FREQS[] = {903.9,904.1,904.3,904.5,904.7,904.9,905.1,905.3};
 static const lora_region_t LORA_US915 = {
+    /* US915 sub-band 2.  Join at DR0 (SF10/125), RX1 at DR10 (SF10/500)
+     * per RP002 RX1 data-rate offset 0 — this is the only join SF that
+     * matches our rx1_sf without computing the DR2→DR8/DR3→DR8 cross-DR
+     * mapping at runtime.  Yesterday's flight firmware ran this config
+     * and joined cleanly through onethreenine gateway at -45 dBm.
+     * Uplinks tx_sf=7 (DR3) for TTN FUP compliance — uplinks don't
+     * open RX windows in our minimal LoRaWAN code, so the rx1_sf
+     * mismatch for DR3 uplinks is irrelevant in practice. */
     US915_FREQS, 8, 923.3,  923.3, 0.6, 8,
-    8, 125.0,  8, 500.0,  12, 500.0,  904.1,  7, 125.0
+    10, 125.0,  10, 500.0,  12, 500.0,  904.1,  7, 125.0
 };
 
 static const float EU868_FREQS[] = {868.1, 868.3, 868.5};
@@ -68,8 +76,11 @@ static const lora_region_t LORA_EU868 = {
 
 static const float AU915_FREQS[] = {916.8,917.0,917.2,917.4,917.6,917.8,918.0,918.2};
 static const lora_region_t LORA_AU915 = {
+    /* AU915 same RP002 RX1 rule as US915 — join at DR0/SF10 to match
+     * RX1 DR10/SF10/500 without cross-DR offset math.  See US915
+     * block above for the rationale. */
     AU915_FREQS, 8, 923.3,  923.3, 0.6, 8,
-    8, 125.0,  8, 500.0,  12, 500.0,  917.0,  7, 125.0
+    10, 125.0,  10, 500.0,  12, 500.0,  917.0,  7, 125.0
 };
 
 static const float AS923_FREQS[] = {923.2, 923.4};
