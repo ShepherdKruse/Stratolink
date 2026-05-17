@@ -50,6 +50,23 @@ export interface TelemetryData {
     lora_sf?: number | null;
     lora_bw?: number | null;
     frequency_hz?: number | null;
+
+    /* Full per-uplink gateway list — one entry per gateway that heard this
+     * packet. Captured from TTN's rx_metadata (which arrives in every webhook
+     * payload but was previously thrown away after reading rx_metadata[0]). */
+    gateways?: GatewayReception[] | null;
+}
+
+/** One gateway's reception of a single uplink. lat/lon/alt are only set when
+ *  the gateway publishes its location to TTN — community gateways often do,
+ *  some don't. */
+export interface GatewayReception {
+    gateway_id: string;
+    rssi: number | null;
+    snr: number | null;
+    lat: number | null;
+    lon: number | null;
+    alt: number | null;
 }
 
 export interface TTNWebhookPayload {
@@ -60,9 +77,24 @@ export interface TTNWebhookPayload {
     uplink_message?: {
         frm_payload?: string; // Base64 encoded binary
         decoded_payload?: Record<string, any>; // JSON if using TTN formatter
+        /* TTN sends one entry per gateway that received this uplink. Each
+         * gateway publishes its own RSSI/SNR; some gateways also publish
+         * their location, others don't. We keep the full type permissive
+         * because TTN occasionally adds fields we don't care about. */
         rx_metadata?: Array<{
+            gateway_ids?: {
+                gateway_id?: string;
+                eui?: string;
+            };
             rssi?: number;
+            channel_rssi?: number;
             snr?: number;
+            location?: {
+                latitude?: number;
+                longitude?: number;
+                altitude?: number;
+                source?: string;
+            };
         }>;
         /* TTN's per-uplink radio settings. Shape per LoRaWAN stack v3:
          * settings.data_rate.lora.{spreading_factor,bandwidth,coding_rate}
@@ -77,6 +109,36 @@ export interface TTNWebhookPayload {
             frequency?: string | number;
         };
     };
+}
+
+/** Extract the full gateway list from rx_metadata. Each entry is normalised so
+ *  downstream code (Supabase row, dashboard, predictor) doesn't have to know
+ *  about TTN's nested shape. Returns [] (not null) for "no gateway info" so
+ *  the JSONB column stores an empty array instead of NULL when the parse
+ *  succeeded but rx_metadata was absent — easier to query. */
+function extractGateways(
+    rxMetadata: NonNullable<TTNWebhookPayload['uplink_message']>['rx_metadata']
+): GatewayReception[] {
+    if (!rxMetadata || !Array.isArray(rxMetadata)) return [];
+    const gateways: GatewayReception[] = [];
+    for (const m of rxMetadata) {
+        const id = m.gateway_ids?.gateway_id ?? m.gateway_ids?.eui;
+        if (!id) continue;
+        /* Prefer rssi over channel_rssi when both are present — rssi is the
+         * post-channel-correction value most users expect. */
+        const rssi = typeof m.rssi === 'number' ? m.rssi
+            : typeof m.channel_rssi === 'number' ? m.channel_rssi
+            : null;
+        const snr = typeof m.snr === 'number' ? m.snr : null;
+        const loc = m.location;
+        const lat = typeof loc?.latitude === 'number' ? loc.latitude : null;
+        const lon = typeof loc?.longitude === 'number' ? loc.longitude : null;
+        const alt = typeof loc?.altitude === 'number' ? loc.altitude : null;
+        gateways.push({ gateway_id: id, rssi, snr, lat, lon, alt });
+    }
+    /* Sort strongest-first so dashboard "top N" queries are O(1). */
+    gateways.sort((a, b) => (b.rssi ?? -Infinity) - (a.rssi ?? -Infinity));
+    return gateways;
 }
 
 /** Pull LoRa SF / bandwidth / carrier frequency out of a TTN uplink. */
@@ -112,17 +174,18 @@ export function parseTTNPayload(payload: TTNWebhookPayload): TelemetryData | nul
     }
 
     const loraSettings = extractLoraSettings(uplinkMessage);
+    const gateways = extractGateways(uplinkMessage.rx_metadata);
 
     // Try JSON format first (TTN Payload Formatter)
     if (uplinkMessage.decoded_payload) {
         const parsed = parseJSONPayload(deviceId, receivedAt, uplinkMessage.decoded_payload, uplinkMessage.rx_metadata);
-        return { ...parsed, ...loraSettings };
+        return { ...parsed, ...loraSettings, gateways };
     }
 
     // Fall back to binary format
     if (uplinkMessage.frm_payload) {
         const parsed = parseBinaryPayload(deviceId, receivedAt, uplinkMessage.frm_payload, uplinkMessage.rx_metadata);
-        return parsed ? { ...parsed, ...loraSettings } : null;
+        return parsed ? { ...parsed, ...loraSettings, gateways } : null;
     }
 
     return null;

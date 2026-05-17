@@ -32,7 +32,7 @@ const FULL_TELEMETRY_COLUMNS =
     'rssi, snr, gps_speed, gps_heading, gps_satellites, mems_accel_x, mems_accel_y, mems_accel_z, ' +
     'velocity_x, velocity_y, ' +
     'uv_index, ambient_lux, acoustic_event, firmware_version, uptime_s, tx_count, hdop, ' +
-    'power_mode, sleep_ms, lora_sf, lora_bw, frequency_hz';
+    'power_mode, sleep_ms, lora_sf, lora_bw, frequency_hz, gateways';
 
 function rawToTelemetry(raw: Record<string, any>): TelemetryRow {
     return {
@@ -65,6 +65,7 @@ function rawToTelemetry(raw: Record<string, any>): TelemetryRow {
         lora_sf: raw.lora_sf ?? null,
         lora_bw: raw.lora_bw ?? null,
         frequency_hz: raw.frequency_hz ?? null,
+        gateways: Array.isArray(raw.gateways) ? raw.gateways : null,
     };
 }
 
@@ -349,10 +350,24 @@ export function useTelemetry({ initialSelectedId = null }: { initialSelectedId?:
                 setLastFetchedAt(Date.now());
 
                 if (selectedId === null && summaries.length > 0) {
-                    /* Prefer flying devices, then anything with recent contact, else first. */
-                    const flying = summaries.find(s => s.status === 'flying');
-                    const recent = summaries.find(s => s.lastContactT !== null);
-                    setSelectedId((flying ?? recent ?? summaries[0]).id);
+                    /* Pick the flying device that's actually transmitting. Sort by most-recent-
+                     * contact desc so a stale 'flying' row from an old test launch never wins
+                     * over the device that's currently in the air. Falls back through:
+                     *   1. flying + has recent contact (the right answer 99% of the time)
+                     *   2. any device with recent contact (a still-talking device that wasn't
+                     *      tagged 'flying' yet — better than picking something silent)
+                     *   3. any flying device (no contact at all — at least it's the "intended" one)
+                     *   4. the first device in the list (nothing to go on, anything is fine) */
+                    const byRecency = (a: DeviceSummary, b: DeviceSummary) =>
+                        (b.lastContactT ?? 0) - (a.lastContactT ?? 0);
+                    const flyingActive = [...summaries]
+                        .filter(s => s.status === 'flying' && s.lastContactT !== null)
+                        .sort(byRecency)[0];
+                    const anyActive = [...summaries]
+                        .filter(s => s.lastContactT !== null)
+                        .sort(byRecency)[0];
+                    const anyFlying = summaries.find(s => s.status === 'flying');
+                    setSelectedId((flyingActive ?? anyActive ?? anyFlying ?? summaries[0]).id);
                 }
 
                 /* Fleet-wide aggregates: count uplinks, GPS lock rate, median RSSI.

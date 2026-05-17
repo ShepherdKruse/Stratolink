@@ -79,6 +79,7 @@ export async function POST(request: NextRequest) {
                 lora_sf: telemetry.lora_sf,
                 lora_bw: telemetry.lora_bw,
                 frequency_hz: telemetry.frequency_hz,
+                gateways: telemetry.gateways,
             });
         
         if (error) {
