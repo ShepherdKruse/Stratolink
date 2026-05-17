@@ -284,8 +284,8 @@ export default function V2MissionMap({
                                          * still reads as "now" because it's fully bright. */
                                         'line-gradient': [
                                             'interpolate', ['linear'], ['line-progress'],
-                                            0,   'rgba(94, 234, 212, 0.45)',
-                                            0.6, 'rgba(94, 234, 212, 0.7)',
+                                            0,   'rgba(94, 234, 212, 0.3)',
+                                            0.6, 'rgba(94, 234, 212, 0.55)',
                                             1,   'rgba(94, 234, 212, 1.0)',
                                         ],
                                     }}
