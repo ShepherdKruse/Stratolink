@@ -446,17 +446,24 @@ export default function V2MissionMap({
                 )}
             </Map>
 
-            {/* Toggle overlay — top-right of the map. Counts the gateways that
-              * have a published location (the only ones that can render as
-              * pins); the gateway list panel always shows the full count. */}
+            {/* Toggle overlay — top-right of the map, positioned BELOW the
+              * "uplink · Xm ago" Age pill that the parent screens render at
+              * top:14 right:14 (z-index:1). top:50 leaves a comfortable 12px
+              * gap; z-index 2 ensures clicks land on the toggle even where
+              * the two layers' bounding boxes brush against each other.
+              *
+              * Counts the gateways that have a published location (the only
+              * ones that can render as pins); the gateway list panel always
+              * shows the full count. */}
             {validGateways.length > 0 && (
                 <button
                     type="button"
                     onClick={() => setShowGateways(s => !s)}
                     style={{
                         position: 'absolute',
-                        top: 12,
-                        right: 12,
+                        top: 50,
+                        right: 14,
+                        zIndex: 2,
                         padding: '6px 10px',
                         fontFamily: 'var(--sl-mono, monospace)',
                         fontSize: 10,
