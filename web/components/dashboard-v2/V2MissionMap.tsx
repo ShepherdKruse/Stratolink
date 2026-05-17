@@ -110,13 +110,15 @@ export default function V2MissionMap({
         /* eslint-disable-next-line react-hooks/exhaustive-deps */
     }, []); /* only used at mount */
 
-    /* Auto-fit: when balloons / active change, fit bounds to the active
-     * balloon + its visible flight-path points so the user always sees the
-     * data they care about. */
+    /* Auto-fit policy: fit once per activeId selection, then leave the camera
+     * alone so live data updates and scrubbing don't yank the view back. The
+     * user can pan / zoom freely; switching devices re-fits. */
+    const fittedActiveRef = useRef<string | null | undefined>(undefined);
     useEffect(() => {
         if (!autoFit) return;
         const map = mapRef.current;
         if (!map || !styleLoaded) return;
+        if (fittedActiveRef.current === (activeId ?? null)) return;
 
         /* Keep camera updates out of uncaught rejects from mapbox-gl. */
         try {
@@ -136,6 +138,8 @@ export default function V2MissionMap({
             if (lats.length === 0) {
                 validBalloons.forEach(b => { lats.push(b.lat); lons.push(b.lon); });
             }
+            /* No data yet — keep `fittedActiveRef` unset so we try again once
+             * data arrives for this same activeId. */
             if (lats.length === 0) return;
 
             const minLat = Math.min(...lats);
@@ -151,15 +155,15 @@ export default function V2MissionMap({
                     zoom: 8,
                     duration: 1200,
                 });
-                return;
+            } else {
+                const bounds: LngLatBoundsLike = [[minLon, minLat], [maxLon, maxLat]];
+                map.fitBounds(bounds, {
+                    padding: { top: 60, bottom: 60, left: 60, right: 60 },
+                    duration: 1200,
+                    maxZoom: 11,
+                });
             }
-
-            const bounds: LngLatBoundsLike = [[minLon, minLat], [maxLon, maxLat]];
-            map.fitBounds(bounds, {
-                padding: { top: 60, bottom: 60, left: 60, right: 60 },
-                duration: 1200,
-                maxZoom: 11,
-            });
+            fittedActiveRef.current = activeId ?? null;
         } catch (e) {
             console.warn('V2MissionMap camera update skipped', e);
         }

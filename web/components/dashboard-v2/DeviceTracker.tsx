@@ -11,7 +11,7 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import {
-    Age, Chart, Chrome, KV,
+    Age, Chart, Chrome,
     fmt,
     DASHBOARD_V2_TABS,
     type TelemetryRow,
@@ -21,6 +21,14 @@ import { useTickingNow, useElementSize, ConnectionPill, V1Link, fmtPressure } fr
 import V2MissionMap, { type V2Balloon, type V2FlightPoint } from './V2MissionMap';
 
 type RangeKey = '1h' | '6h' | '24h' | 'all';
+interface TrackStats {
+    distanceKm: number;
+    maxAlt: number | null;
+    minAlt: number | null;
+    avgTemp: number | null;
+    fixCount: number;
+    rowCount: number;
+}
 const RANGE_MS: Record<RangeKey, number | null> = {
     '1h':  60 * 60 * 1000,
     '6h':  6  * 60 * 60 * 1000,
@@ -82,6 +90,24 @@ export default function DeviceTrackerScreen() {
     );
     const selectedDevice: DeviceSummary | null =
         selectedId ? devices.find(d => d.id === selectedId) ?? null : null;
+
+    const trackStats: TrackStats = useMemo(() => {
+        const fixes = visibleRows.filter(r => r.lat !== null && r.lon !== null) as Array<TelemetryRow & { lat: number; lon: number }>;
+        let distanceKm = 0;
+        for (let i = 1; i < fixes.length; i++) {
+            distanceKm += haversineKm(fixes[i - 1].lat, fixes[i - 1].lon, fixes[i].lat, fixes[i].lon);
+        }
+        const alts = visibleRows.map(r => r.alt).filter((v): v is number => v !== null && Number.isFinite(v));
+        const temps = visibleRows.map(r => r.temp).filter((v): v is number => v !== null && Number.isFinite(v));
+        return {
+            distanceKm,
+            maxAlt: alts.length ? Math.max(...alts) : null,
+            minAlt: alts.length ? Math.min(...alts) : null,
+            avgTemp: temps.length ? temps.reduce((a, b) => a + b, 0) / temps.length : null,
+            fixCount: fixes.length,
+            rowCount: visibleRows.length,
+        };
+    }, [visibleRows]);
 
     function handleNavigate(path: string) {
         const url = selectedId ? `${path}?device=${encodeURIComponent(selectedId)}` : path;
@@ -150,6 +176,7 @@ export default function DeviceTrackerScreen() {
                     onRangeChange={setRange}
                     scrubRow={scrubRow}
                     followLive={followLive}
+                    trackStats={trackStats}
                 />
             </main>
         </div>
@@ -310,20 +337,6 @@ function MapColumn({ visibleRows, scrubRow, selectedDevice, now }: {
         return null;
     }, [selectedDevice, scrubRow, trackPoints]);
 
-    const distanceKm = useMemo(() => {
-        let total = 0;
-        for (let i = 1; i < trackPoints.length; i++) {
-            total += haversineKm(
-                trackPoints[i - 1].lat, trackPoints[i - 1].lon,
-                trackPoints[i].lat, trackPoints[i].lon,
-            );
-        }
-        return total;
-    }, [trackPoints]);
-
-    const validAlts = visibleRows.map(r => r.alt).filter((v): v is number => v !== null && Number.isFinite(v));
-    const validTemps = visibleRows.map(r => r.temp).filter((v): v is number => v !== null && Number.isFinite(v));
-
     return (
         <div style={{
             position: 'relative',
@@ -352,27 +365,6 @@ function MapColumn({ visibleRows, scrubRow, selectedDevice, now }: {
                     <Age t={scrubRow?.t ?? null} now={now} compact dot prefix="scrub" />
                 </span>
             </div>
-
-            {/* Track stats */}
-            <div
-                className="sl-panel"
-                style={{
-                    position: 'absolute', bottom: 14, right: 14,
-                    width: 200, fontSize: 11,
-                    background: 'rgba(11, 14, 19, 0.85)',
-                    backdropFilter: 'blur(6px)',
-                    zIndex: 1,
-                }}
-            >
-                <div className="sl-panel-h">TRACK</div>
-                <div style={{ padding: 10 }}>
-                    <KV k="distance" v={`${distanceKm.toFixed(2)} km`} />
-                    <KV k="max alt" v={validAlts.length ? `${Math.max(...validAlts).toFixed(0)} m` : '—'} />
-                    <KV k="min alt" v={validAlts.length ? `${Math.min(...validAlts).toFixed(0)} m` : '—'} />
-                    <KV k="avg temp" v={validTemps.length ? `${(validTemps.reduce((a, b) => a + b, 0) / validTemps.length).toFixed(1)}°C` : '—'} />
-                    <KV k="points" v={`${trackPoints.length} / ${visibleRows.length}`} />
-                </div>
-            </div>
         </div>
     );
 }
@@ -391,7 +383,7 @@ function haversineKm(lat1: number, lon1: number, lat2: number, lon2: number): nu
 /* ──────────────────────────────────────────────────────────────
  * Chart column — synchronized stack
  * ────────────────────────────────────────────────────────────── */
-function ChartColumn({ visibleRows, rows, scrubT, onScrub, onResetScrub, range, onRangeChange, scrubRow, followLive }: {
+function ChartColumn({ visibleRows, rows, scrubT, onScrub, onResetScrub, range, onRangeChange, scrubRow, followLive, trackStats }: {
     visibleRows: TelemetryRow[];
     rows: TelemetryRow[];
     scrubT: number | null;
@@ -401,6 +393,7 @@ function ChartColumn({ visibleRows, rows, scrubT, onScrub, onResetScrub, range, 
     onRangeChange: (r: RangeKey) => void;
     scrubRow: TelemetryRow | null;
     followLive: boolean;
+    trackStats: TrackStats;
 }) {
     const tStart = visibleRows.length ? visibleRows[0].t : Date.now() - 24 * 3600 * 1000;
     const tEnd   = visibleRows.length ? visibleRows[visibleRows.length - 1].t : Date.now();
@@ -428,6 +421,25 @@ function ChartColumn({ visibleRows, rows, scrubT, onScrub, onResetScrub, range, 
                     {visibleRows.length} packets
                 </span>
                 <span className="sl-pill dim">{spanLabel}</span>
+            </div>
+
+            {/* Track stats — lifted out of the map overlay so the flight path stays unobstructed */}
+            <div style={{
+                padding: '8px 16px',
+                borderBottom: '1px solid var(--sl-border)',
+                display: 'flex',
+                alignItems: 'baseline',
+                gap: 18,
+                flexShrink: 0,
+                overflowX: 'auto',
+                scrollbarWidth: 'thin',
+            }}>
+                <span className="sl-label-xs">TRACK</span>
+                <TrackStat label="distance" value={`${trackStats.distanceKm.toFixed(2)} km`} />
+                <TrackStat label="max alt"  value={trackStats.maxAlt !== null ? `${trackStats.maxAlt.toFixed(0)} m` : '—'} />
+                <TrackStat label="min alt"  value={trackStats.minAlt !== null ? `${trackStats.minAlt.toFixed(0)} m` : '—'} />
+                <TrackStat label="avg temp" value={trackStats.avgTemp !== null ? `${trackStats.avgTemp.toFixed(1)}°C` : '—'} />
+                <TrackStat label="points"   value={`${trackStats.fixCount} / ${trackStats.rowCount}`} />
             </div>
 
             {/* Chart stack */}
@@ -467,6 +479,20 @@ function ChartColumn({ visibleRows, rows, scrubT, onScrub, onResetScrub, range, 
                 onRangeChange={onRangeChange}
                 followLive={followLive}
             />
+        </div>
+    );
+}
+
+function TrackStat({ label, value }: { label: string; value: string }) {
+    return (
+        <div style={{ display: 'flex', alignItems: 'baseline', gap: 6, whiteSpace: 'nowrap' }}>
+            <span style={{ fontSize: 10, color: 'var(--sl-text-dim3)', letterSpacing: '0.06em', textTransform: 'uppercase' }}>{label}</span>
+            <span style={{
+                fontSize: 12,
+                color: 'var(--sl-text)',
+                fontFamily: 'var(--sl-mono)',
+                fontVariantNumeric: 'tabular-nums',
+            }}>{value}</span>
         </div>
     );
 }
