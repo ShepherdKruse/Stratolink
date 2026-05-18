@@ -17,7 +17,12 @@ interface ContactFormData {
 export async function submitContactForm(formData: ContactFormData) {
     const { name, organization, email, message } = formData
 
+    console.log('[v0] Contact form submitted:', { name, organization, email })
+    console.log('[v0] SMTP_USER configured:', !!process.env.SMTP_USER)
+    console.log('[v0] SMTP_PASS configured:', !!process.env.SMTP_PASS)
+
     if (!isEmailConfigured()) {
+        console.log('[v0] Email not configured - SMTP credentials missing')
         return {
             success: false,
             error: `Email service not configured. Please contact us directly at ${STRATOLINK_EMAILS.contact}`,
