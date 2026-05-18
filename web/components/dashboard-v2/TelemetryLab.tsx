@@ -321,10 +321,10 @@ function ChartsColumn({ rows, selectedPacketT, onSelectPacket }: {
                 onSelectPacket={onSelectPacket}
                 height={180}
             />
-            <ChartBlock title="THERMAL" subtitle="core temperature, raw barometer counts"
+            <ChartBlock title="THERMAL" subtitle="core temperature, barometric pressure"
                 legend={[
                     { color: 'var(--sl-alert)',   label: 'TEMP (°C)' },
-                    { color: 'var(--sl-neutral)', label: 'PRES_RAW (dn)' },
+                    { color: 'var(--sl-neutral)', label: 'PRES (hPa)' },
                 ]}
                 rows={rows}
                 seriesA={{ getY: r => r.temp, color: 'var(--sl-alert)', label: 'TEMP' }}
@@ -698,8 +698,9 @@ function PacketDetail({ packet, deviceInfo }: {
                 <KV k="uptime"     v={packet.uptime_s !== null ? fmt.duration(packet.uptime_s * 1000) : '—'} />
             </Section>
             <Section title="ENVIRONMENT">
-                <KV k="temp"       v={fmt.num(packet.temp, 2)} u={packet.temp !== null ? '°C' : undefined} />
-                <KV k="pres_raw"   v={fmtPressure(packet.pres)} />
+                <KV k="temp"        v={fmt.num(packet.temp, 2)} u={packet.temp !== null ? '°C' : undefined} />
+                <KV k="pressure"    v={fmtPressure(packet.pres)} />
+                <KV k="alt (pres)"  v={packet.presAlt !== null ? fmt.num(packet.presAlt, 0) : '—'} u={packet.presAlt !== null ? 'm' : undefined} />
                 <KV k="ambient_lux" v={fmt.num(packet.lux, 0)} u={packet.lux !== null ? 'lx' : undefined} />
                 <KV k="uv_index"    v={fmt.num(packet.uv, 1)} />
             </Section>

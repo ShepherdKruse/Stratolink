@@ -9,6 +9,7 @@ import {
     type MobileFleetDeviceRow,
 } from './mobileStratolinkUtils';
 import MobilePositionPreviewMap from './MobilePositionPreviewMap';
+import { altitudeFromPressureHpa } from '@/lib/atmosphere/isa';
 
 type TelemetryPoint = Record<string, unknown>;
 
@@ -17,12 +18,18 @@ function chartRows(rows: TelemetryPoint[]): Array<Record<string, number | null |
     for (const r of rows) {
         const t = new Date(String(r.time)).getTime();
         if (Number.isNaN(t)) continue;
+        const pres = coerceNum(r.pressure);
         out.push({
             t,
             alt: coerceNum(r.altitude_m),
             batt: coerceNum(r.battery_voltage),
             sol: coerceNum(r.solar_voltage),
             temp: coerceNum(r.temperature),
+            pres,
+            /* Pressure-altitude derived once per row using USSA-1976 ISA. The
+             * mobile chart and the prominent header tile both read from this,
+             * so they always agree. */
+            presAlt: altitudeFromPressureHpa(pres),
             lux: coerceNum(r.ambient_lux),
             rssi: coerceNum(r.rssi),
             sats: coerceNum(r.gps_satellites),
@@ -58,6 +65,8 @@ export default function MobileDeviceDetailScreen({
     const alt = coerceNum(last?.alt) ?? (device.awaiting_gps ? null : device.altitude_m);
     const temp = coerceNum(last?.temp);
     const solar = coerceNum(last?.sol);
+    const pressure = coerceNum(last?.pres);
+    const presAlt = coerceNum(last?.presAlt);
     const rssiRecent = coerceNum(last?.rssi) ?? coerceNum(device.rssi);
     const sats = coerceNum(last?.sats) ?? coerceNum(device.gps_satellites);
     const status = deviceUiStatus(device);
@@ -74,12 +83,20 @@ export default function MobileDeviceDetailScreen({
             />
 
             <div className="min-h-0 flex-1 overflow-y-auto">
+                {/* Header tile grid: 2 columns wide × 3 rows tall.
+                  *
+                  * Row 1 stacks GPS-altitude and pressure-altitude side-by-side
+                  * because they're peers — the pressure value is what keeps
+                  * working when the MAX-M10S loses lock (we saw this on the
+                  * stratolink-3 launch where GPS got stuck on a stale fix at
+                  * 6924 m for an hour while the balloon was actually drifting
+                  * up through 10 km — pressure tracked the real altitude). */}
                 <div
                     className="grid shrink-0 grid-cols-2"
                     style={{ borderBottom: '1px solid var(--border)', fontFamily: 'var(--sans)' }}>
                     <div style={{ padding: '20px 18px', borderRight: '1px solid var(--border)', borderBottom: '1px solid var(--border)' }}>
                         <div style={{ fontSize: 9, letterSpacing: '0.14em', color: 'var(--text-dim2)', textTransform: 'uppercase', fontWeight: 500, marginBottom: 8 }}>
-                            Altitude
+                            Alt · GPS
                         </div>
                         <div style={{ fontFamily: 'var(--mono)', fontSize: 26, fontWeight: 500, color: 'var(--text-hi)', lineHeight: 1 }}>
                             {device.awaiting_gps ? '—' : Number.isFinite(alt) ? Math.round(Number(alt)) : '—'}
@@ -91,6 +108,18 @@ export default function MobileDeviceDetailScreen({
                     </div>
                     <div style={{ padding: '20px 18px', borderBottom: '1px solid var(--border)' }}>
                         <div style={{ fontSize: 9, letterSpacing: '0.14em', color: 'var(--text-dim2)', textTransform: 'uppercase', fontWeight: 500, marginBottom: 8 }}>
+                            Alt · Pressure
+                        </div>
+                        <div style={{ fontFamily: 'var(--mono)', fontSize: 26, fontWeight: 500, color: 'var(--text-hi)', lineHeight: 1 }}>
+                            {presAlt != null ? Math.round(presAlt) : '—'}
+                            <span style={{ fontSize: 12, color: 'var(--text-dim3)', marginLeft: 4 }}>m</span>
+                        </div>
+                        <div className="mt-2 font-mono text-[10px]" style={{ color: 'var(--text-dim2)' }}>
+                            {pressure != null ? `${pressure.toFixed(1)} hPa · ISA` : 'no pressure'}
+                        </div>
+                    </div>
+                    <div style={{ padding: '20px 18px', borderRight: '1px solid var(--border)', borderBottom: '1px solid var(--border)' }}>
+                        <div style={{ fontSize: 9, letterSpacing: '0.14em', color: 'var(--text-dim2)', textTransform: 'uppercase', fontWeight: 500, marginBottom: 8 }}>
                             Battery
                         </div>
                         <div style={{ fontFamily: 'var(--mono)', fontSize: 26, fontWeight: 500, color: 'var(--text-hi)', lineHeight: 1 }}>
@@ -101,7 +130,7 @@ export default function MobileDeviceDetailScreen({
                             from last row
                         </div>
                     </div>
-                    <div style={{ padding: '20px 18px', borderRight: '1px solid var(--border)' }}>
+                    <div style={{ padding: '20px 18px', borderBottom: '1px solid var(--border)' }}>
                         <div style={{ fontSize: 9, letterSpacing: '0.14em', color: 'var(--text-dim2)', textTransform: 'uppercase', fontWeight: 500, marginBottom: 8 }}>
                             Signal
                         </div>
@@ -111,6 +140,18 @@ export default function MobileDeviceDetailScreen({
                         </div>
                         <div className="mt-2 font-mono text-[10px]" style={{ color: 'var(--text-dim2)' }}>
                             uplink cadence varies
+                        </div>
+                    </div>
+                    <div style={{ padding: '20px 18px', borderRight: '1px solid var(--border)' }}>
+                        <div style={{ fontSize: 9, letterSpacing: '0.14em', color: 'var(--text-dim2)', textTransform: 'uppercase', fontWeight: 500, marginBottom: 8 }}>
+                            Pressure
+                        </div>
+                        <div style={{ fontFamily: 'var(--mono)', fontSize: 26, fontWeight: 500, color: 'var(--text-hi)', lineHeight: 1 }}>
+                            {pressure != null ? pressure.toFixed(1) : '—'}
+                            <span style={{ fontSize: 12, color: 'var(--text-dim3)', marginLeft: 4 }}>hPa</span>
+                        </div>
+                        <div className="mt-2 font-mono text-[10px]" style={{ color: 'var(--text-dim2)' }}>
+                            barometer · MS5611
                         </div>
                     </div>
                     <div style={{ padding: '20px 18px' }}>
@@ -165,11 +206,25 @@ export default function MobileDeviceDetailScreen({
                     max={5.6}
                 />
                 <StackedLineChart
-                    title="Altitude"
+                    title="Altitude · GPS"
                     valueDisplay={alt != null && Number.isFinite(alt) ? Math.round(alt) : '—'}
                     unitSuffix=" m"
                     data={charts}
                     getY={(r) => coerceNum(r.alt)}
+                />
+                <StackedLineChart
+                    title="Altitude · Pressure"
+                    valueDisplay={presAlt != null ? Math.round(presAlt) : '—'}
+                    unitSuffix=" m"
+                    data={charts}
+                    getY={(r) => coerceNum(r.presAlt)}
+                />
+                <StackedLineChart
+                    title="Pressure"
+                    valueDisplay={pressure != null ? pressure.toFixed(1) : '—'}
+                    unitSuffix=" hPa"
+                    data={charts}
+                    getY={(r) => coerceNum(r.pres)}
                 />
                 <StackedLineChart
                     title="Solar"

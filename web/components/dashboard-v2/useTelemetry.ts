@@ -10,6 +10,7 @@
 
 import { useEffect, useMemo, useState, useCallback } from 'react';
 import { createClient } from '@/lib/supabase';
+import { altitudeFromPressureHpa } from '@/lib/atmosphere/isa';
 import type { TelemetryRow, DeviceInfo } from './atoms';
 
 interface DeviceSummary {
@@ -35,13 +36,19 @@ const FULL_TELEMETRY_COLUMNS =
     'power_mode, sleep_ms, lora_sf, lora_bw, frequency_hz, gateways';
 
 function rawToTelemetry(raw: Record<string, any>): TelemetryRow {
+    /* Pressure altitude is derived once at the boundary so every screen
+     * (Mission Control, Device Tracker, Mobile, Telemetry Lab) sees the
+     * same number. ISA conversion is cheap (constant-time analytical) so
+     * doing it per row instead of per render is fine. */
+    const presHpa = (raw.pressure ?? null) as number | null;
     return {
         t: new Date(raw.time).getTime(),
         lat: raw.lat ?? null,
         lon: raw.lon ?? null,
         alt: raw.altitude_m ?? null,
         temp: raw.temperature ?? null,
-        pres: raw.pressure ?? null,
+        pres: presHpa,
+        presAlt: altitudeFromPressureHpa(presHpa),
         batt: raw.battery_voltage ?? null,
         sol: raw.solar_voltage ?? null,
         rssi: raw.rssi ?? null,

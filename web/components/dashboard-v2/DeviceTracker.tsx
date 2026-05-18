@@ -17,7 +17,7 @@ import {
     type TelemetryRow,
 } from './atoms';
 import { useTelemetry, type DeviceSummary, type SubsystemFreshness } from './useTelemetry';
-import { useTickingNow, useElementSize, ConnectionPill, V1Link, fmtPressure } from './shared';
+import { useTickingNow, useElementSize, ConnectionPill, V1Link, fmtPressure, fmtAltitudeM } from './shared';
 import V2MissionMap, { type V2Balloon, type V2FlightPoint, type V2Gateway } from './V2MissionMap';
 
 type RangeKey = '1h' | '6h' | '24h' | 'all';
@@ -471,11 +471,12 @@ function ChartColumn({ visibleRows, rows, scrubT, onScrub, onResetScrub, range, 
                     </div>
                 ) : (
                     <>
-                        <ChartRow title="ALTITUDE"      unit="m"   color="var(--sl-ok)"        rows={visibleRows} getY={r => r.alt}  scrubT={scrubT} value={scrubRow?.alt   !== null && scrubRow?.alt   !== undefined ? `${scrubRow!.alt!.toFixed(0)} m` : '—'} />
+                        <ChartRow title="ALT (GPS)"     unit="m"   color="var(--sl-ok)"        rows={visibleRows} getY={r => r.alt}  scrubT={scrubT} value={scrubRow?.alt   !== null && scrubRow?.alt   !== undefined ? `${scrubRow!.alt!.toFixed(0)} m` : '—'} />
+                        <ChartRow title="ALT (PRES)"    unit="m"   color="var(--sl-ok)"        rows={visibleRows} getY={r => r.presAlt} scrubT={scrubT} value={fmtAltitudeM(scrubRow?.presAlt ?? null)} />
                         <ChartRow title="BATTERY"       unit="V"   color="var(--sl-ok-mute)"   rows={visibleRows} getY={r => r.batt} scrubT={scrubT} value={scrubRow?.batt  !== null && scrubRow?.batt  !== undefined ? `${scrubRow!.batt!.toFixed(2)} V`   : '—'} min={3.0} max={5.5} />
                         <ChartRow title="SOLAR"         unit="V"   color="var(--sl-ok-mute)"   rows={visibleRows} getY={r => r.sol}  scrubT={scrubT} value={scrubRow?.sol   !== null && scrubRow?.sol   !== undefined ? `${scrubRow!.sol!.toFixed(2)} V`    : '—'} min={0} max={6} />
                         <ChartRow title="TEMPERATURE"   unit="°C"  color="var(--sl-alert)"     rows={visibleRows} getY={r => r.temp} scrubT={scrubT} value={scrubRow?.temp  !== null && scrubRow?.temp  !== undefined ? `${scrubRow!.temp!.toFixed(1)} °C`   : '—'} />
-                        <ChartRow title="PRES_RAW"      unit="dn"  color="var(--sl-neutral)"   rows={visibleRows} getY={r => r.pres} scrubT={scrubT} value={fmtPressure(scrubRow?.pres ?? null)} />
+                        <ChartRow title="PRESSURE"      unit="hPa" color="var(--sl-neutral)"   rows={visibleRows} getY={r => r.pres} scrubT={scrubT} value={fmtPressure(scrubRow?.pres ?? null)} />
                         <ChartRow title="AMBIENT LUX"   unit="lx"  color="var(--sl-neutral)"   rows={visibleRows} getY={r => r.lux}  scrubT={scrubT} value={scrubRow?.lux   !== null && scrubRow?.lux   !== undefined ? `${scrubRow!.lux!.toLocaleString()} lx` : '—'} />
                         <ChartRow title="RSSI"          unit="dBm" color="var(--sl-ok-mute)"   rows={visibleRows} getY={r => r.rssi} scrubT={scrubT} value={scrubRow?.rssi  !== null && scrubRow?.rssi  !== undefined ? `${scrubRow!.rssi!.toFixed(0)} dBm`  : '—'} />
                         <ChartRow title="SNR"           unit="dB"  color="var(--sl-ok-mute)"   rows={visibleRows} getY={r => r.snr}  scrubT={scrubT} value={scrubRow?.snr   !== null && scrubRow?.snr   !== undefined ? `${scrubRow!.snr!.toFixed(2)} dB`    : '—'} />

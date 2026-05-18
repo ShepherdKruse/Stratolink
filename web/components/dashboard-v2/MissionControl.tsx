@@ -18,7 +18,7 @@ import {
     type TelemetryRow,
 } from './atoms';
 import { useTelemetry, type DeviceSummary, type FleetMetrics, type FleetAlert, type SubsystemFreshness } from './useTelemetry';
-import { useTickingNow, useElementSize, ConnectionPill, V1Link, fmtPressure } from './shared';
+import { useTickingNow, useElementSize, ConnectionPill, V1Link, fmtPressure, fmtAltitudeM } from './shared';
 import V2MissionMap, { type V2Balloon, type V2FlightPoint, type V2Gateway } from './V2MissionMap';
 
 export default function MissionControlScreen() {
@@ -436,11 +436,18 @@ function SelectedDevicePanel({ device, deviceInfo, latest, lastFixRow, rowCount,
                     <span>{fmt.lat(lastFixRow?.lat)} {fmt.lon(lastFixRow?.lon)}</span>
                 </span>
             } />
-            <KV k="altitude" v={
+            <KV k="alt (gps)" v={
                 latest?.alt !== null && latest?.alt !== undefined
                     ? <span>{latest.alt.toFixed(0)} m {altFt !== null && <span style={{ color: 'var(--sl-text-dim3)', fontSize: 10 }}>/ {altFt} ft</span>}</span>
                     : '—'
             } accent={latest?.alt !== null && latest?.alt !== undefined ? 'teal' : 'dim'} />
+            {/* Pressure-derived altitude (USSA-1976 ISA) sits directly under
+              * the GPS altitude so the operator can compare them at a glance.
+              * When GPS is stuck on a stale cached fix the two will diverge —
+              * trust the pressure-derived value in that case (the MS5611 is
+              * read fresh every uplink). */}
+            <KV k="alt (pres)" v={fmtAltitudeM(latest?.presAlt ?? null)}
+                accent={latest?.presAlt !== null && latest?.presAlt !== undefined ? 'teal' : 'dim'} />
             <KV k="heading"    v={fmt.num(latest?.hdg, 1)} u={latest?.hdg !== null && latest?.hdg !== undefined ? '°' : undefined} />
             <KV k="ground spd" v={fmt.num(latest?.spd, 2)} u={latest?.spd !== null && latest?.spd !== undefined ? 'm/s' : undefined} />
             <KV k="uptime"     v={latest?.uptime_s !== null && latest?.uptime_s !== undefined ? fmt.duration(latest.uptime_s * 1000) : '—'} />
@@ -501,8 +508,13 @@ function LiveMetricsPanel({ rows, latest }: { rows: TelemetryRow[]; latest: Tele
                 value={latest?.rssi !== null && latest?.rssi !== undefined ? `${latest.rssi}dBm` : '—'} />
             <MetricRow name="snr" series={last(20, r => r.snr)}
                 value={latest?.snr !== null && latest?.snr !== undefined ? `${latest.snr.toFixed(1)}dB` : '—'} />
-            <MetricRow name="pres_raw" series={last(20, r => r.pres)} color="var(--sl-neutral)"
+            <MetricRow name="pressure" series={last(20, r => r.pres)} color="var(--sl-neutral)"
                 value={fmtPressure(latest?.pres ?? null)} />
+            {/* Pressure-derived altitude lives next to its source. The barometer
+              * stays accurate when GPS drops out (see firmware NOGPS sentinel),
+              * so this is the more reliable altitude reading in flight. */}
+            <MetricRow name="pres alt" series={last(20, r => r.presAlt)} color="var(--sl-ok)"
+                value={fmtAltitudeM(latest?.presAlt ?? null)} />
         </div>
     );
 }

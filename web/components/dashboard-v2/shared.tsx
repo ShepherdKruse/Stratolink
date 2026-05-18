@@ -82,11 +82,17 @@ export function V1Link() {
     );
 }
 
-/* The firmware reports raw barometer counts that aren't scaled to mbar yet
- * (we saw ~3300 counts in production CSVs vs ~1013 mbar at sea level). Until
- * the firmware ships proper scaling, render the value as `dn` (digital
- * number) so the unit doesn't lie. */
+/* Pressure is stored in hPa (the parser divides the firmware's 0.1-hPa
+ * uint16 by 10 before insert). Sanity-checked against in-flight data:
+ * stratolink-3 at 7 km read ~425 hPa, near sea level read ~1013 hPa. */
 export function fmtPressure(v: number | null): string {
     if (v === null || !Number.isFinite(v)) return '—';
-    return `${v.toFixed(0)}dn`;
+    return `${v.toFixed(1)} hPa`;
+}
+
+/* Pretty-print an altitude (m) compactly. Used for both GPS and pressure-
+ * derived altitudes so they read identically and can be visually compared. */
+export function fmtAltitudeM(v: number | null): string {
+    if (v === null || !Number.isFinite(v)) return '—';
+    return `${Math.round(v).toLocaleString()} m`;
 }

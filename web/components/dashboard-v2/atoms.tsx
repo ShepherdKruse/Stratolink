@@ -18,9 +18,16 @@ export interface TelemetryRow {
     t: number;
     lat: number | null;
     lon: number | null;
+    /** GPS-reported altitude (m). Null when the firmware had no fix. */
     alt: number | null;
     temp: number | null;
+    /** Barometric pressure in hPa (parser already divides firmware's 0.1-hPa
+     *  uint16 by 10 on insert). */
     pres: number | null;
+    /** Pressure-derived altitude (m above MSL) using USSA-1976 ISA. Computed
+     *  in `useTelemetry.rawToTelemetry` so every consumer sees the same value
+     *  without re-deriving. Null whenever `pres` is null or out of range. */
+    presAlt: number | null;
     batt: number | null;
     sol: number | null;
     rssi: number | null;
