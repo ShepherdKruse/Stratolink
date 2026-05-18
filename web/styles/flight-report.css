@@ -255,7 +255,7 @@
 }
 
 .flight-report .flight-report-map {
-  height: 400px;
+  height: 440px;
   background: var(--fr-bg);
 }
 
@@ -302,51 +302,44 @@
   border-top-style: dashed;
 }
 
-.flight-report .flight-map-callout {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+/* Chart-style annotations: pill in open water, leader drawn as map line layer */
+.flight-report .flight-map-annotation {
   pointer-events: none;
 }
 
-.flight-report .flight-map-callout-label {
-  background: rgba(255, 255, 255, 0.98);
-  border: 1px solid rgba(61, 77, 106, 0.35);
-  border-radius: 5px;
-  padding: 5px 10px;
+.flight-report .flight-map-annotation-pill {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 1px;
+  background: rgba(255, 255, 255, 0.97);
+  border: 1px solid rgba(27, 36, 56, 0.12);
+  border-radius: 4px;
+  padding: 6px 10px;
+  box-shadow: 0 1px 4px rgba(27, 36, 56, 0.08);
+  font-family: var(--fr-ff);
+  line-height: 1.35;
+  text-align: right;
+}
+
+.flight-report .flight-map-annotation-time {
+  font-family: var(--fr-ff-mo);
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--fr-indigo);
+  letter-spacing: 0.02em;
+}
+
+.flight-report .flight-map-annotation-alt {
   font-family: var(--fr-ff-mo);
   font-size: 10px;
   color: var(--fr-navy);
-  white-space: nowrap;
-  box-shadow: 0 2px 8px rgba(27, 36, 56, 0.12);
-  line-height: 1.55;
-  text-align: center;
 }
 
-.flight-report .flight-map-callout-label strong {
-  font-weight: 600;
-  color: var(--fr-indigo);
-}
-
-.flight-report .flight-map-callout-note {
-  color: var(--fr-muted);
+.flight-report .flight-map-annotation-note {
   font-size: 9px;
-}
-
-.flight-report .flight-map-callout-stem {
-  width: 2px;
-  height: 8px;
-  background: var(--fr-slate);
-  opacity: 0.5;
-}
-
-.flight-report .flight-map-callout-dot {
-  width: 9px;
-  height: 9px;
-  border-radius: 50%;
-  background: var(--fr-indigo);
-  border: 2px solid white;
-  box-shadow: 0 1px 4px rgba(27, 36, 56, 0.28);
+  color: var(--fr-muted);
+  font-style: italic;
 }
 
 .flight-report .flight-report-map .mapboxgl-canvas {

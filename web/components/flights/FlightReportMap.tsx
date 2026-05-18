@@ -5,6 +5,12 @@ import mapboxgl from 'mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import type { FlightSample } from '@/lib/flights/types';
 import { FLIGHT_REPORT_MAP_STYLE } from '@/lib/flights/flightReportMapStyle';
+import type { FlightMapAnnotation } from '@/lib/flights/flightMapAnnotations';
+import {
+    BAJA_RUN_FREEZE_ANNOTATION,
+    BAJA_RUN_GPS_ANNOTATIONS,
+    BAJA_RUN_LAUNCH_ANNOTATION,
+} from '@/lib/flights/flightMapAnnotations';
 
 type FlightReportMapProps = {
     flight: FlightSample[];
@@ -21,6 +27,8 @@ function addRouteLine(
         width: number;
         opacity: number;
         dash?: number[];
+        glowColor?: string;
+        glowWidth?: number;
         haloColor?: string;
         haloWidth?: number;
     },
@@ -34,6 +42,22 @@ function addRouteLine(
         },
     });
 
+    if (opts.glowColor) {
+        map.addLayer({
+            id: `${sourceId}-glow`,
+            type: 'line',
+            source: sourceId,
+            paint: {
+                'line-color': opts.glowColor,
+                'line-width': opts.glowWidth ?? 14,
+                'line-opacity': 0.38,
+                'line-blur': 2,
+                'line-cap': 'round',
+                'line-join': 'round',
+            },
+        });
+    }
+
     const haloWidth = opts.haloWidth ?? opts.width + 5;
     map.addLayer({
         id: `${sourceId}-halo`,
@@ -42,7 +66,7 @@ function addRouteLine(
         paint: {
             'line-color': opts.haloColor ?? '#ffffff',
             'line-width': haloWidth,
-            'line-opacity': 0.92,
+            'line-opacity': 0.95,
             'line-cap': 'round',
             'line-join': 'round',
         },
@@ -63,25 +87,81 @@ function addRouteLine(
     });
 }
 
-function createCalloutMarker(utc: string, alt: string, note: string | null) {
+function createAnnotationLabel(a: FlightMapAnnotation) {
     const el = document.createElement('div');
-    el.className = 'flight-map-callout';
-    const label = document.createElement('div');
-    label.className = 'flight-map-callout-label';
-    label.innerHTML = `<strong>${utc}</strong><br>${alt}`;
-    if (note) {
-        const noteEl = document.createElement('span');
-        noteEl.className = 'flight-map-callout-note';
-        noteEl.textContent = note;
-        label.appendChild(document.createElement('br'));
-        label.appendChild(noteEl);
-    }
-    const stem = document.createElement('div');
-    stem.className = 'flight-map-callout-stem';
-    const dot = document.createElement('div');
-    dot.className = 'flight-map-callout-dot';
-    el.append(label, stem, dot);
+    el.className = 'flight-map-annotation';
+    const pill = document.createElement('div');
+    pill.className = 'flight-map-annotation-pill';
+    pill.innerHTML =
+        `<span class="flight-map-annotation-time">${a.utc}</span>` +
+        `<span class="flight-map-annotation-alt">${a.alt}</span>` +
+        (a.note ? `<span class="flight-map-annotation-note">${a.note}</span>` : '');
+    el.appendChild(pill);
     return el;
+}
+
+function addMapAnnotations(map: mapboxgl.Map, annotations: FlightMapAnnotation[]) {
+    const leaderFeatures = annotations.map((a) => ({
+        type: 'Feature' as const,
+        geometry: {
+            type: 'LineString' as const,
+            coordinates: [a.label, a.point],
+        },
+        properties: {},
+    }));
+
+    const pointFeatures = annotations.map((a) => ({
+        type: 'Feature' as const,
+        geometry: { type: 'Point' as const, coordinates: a.point },
+        properties: { color: a.dotColor ?? '#5065b8' },
+    }));
+
+    map.addSource('annotation-leaders', {
+        type: 'geojson',
+        data: { type: 'FeatureCollection', features: leaderFeatures },
+    });
+    map.addLayer({
+        id: 'annotation-leaders',
+        type: 'line',
+        source: 'annotation-leaders',
+        paint: {
+            'line-color': '#b4bccc',
+            'line-width': 1,
+            'line-opacity': 0.9,
+        },
+    });
+
+    map.addSource('annotation-points', {
+        type: 'geojson',
+        data: { type: 'FeatureCollection', features: pointFeatures },
+    });
+    map.addLayer({
+        id: 'annotation-points-outer',
+        type: 'circle',
+        source: 'annotation-points',
+        paint: {
+            'circle-radius': 7,
+            'circle-color': '#ffffff',
+            'circle-opacity': 1,
+        },
+    });
+    map.addLayer({
+        id: 'annotation-points',
+        type: 'circle',
+        source: 'annotation-points',
+        paint: {
+            'circle-radius': 4.5,
+            'circle-color': ['get', 'color'],
+            'circle-stroke-width': 2,
+            'circle-stroke-color': '#ffffff',
+        },
+    });
+
+    for (const a of annotations) {
+        new mapboxgl.Marker({ element: createAnnotationLabel(a), anchor: 'center' })
+            .setLngLat(a.label)
+            .addTo(map);
+    }
 }
 
 export default function FlightReportMap({ flight, freezeMin, resumeMin }: FlightReportMapProps) {
@@ -95,9 +175,12 @@ export default function FlightReportMap({ flight, freezeMin, resumeMin }: Flight
 
         if (!token) {
             container.innerHTML =
-                '<div style="display:flex;align-items:center;justify-content:center;height:100%;background:#f7f8f9;color:#7a8599;font-size:13px;flex-direction:column;gap:8px">' +
+                '<div style="display:flex;align-items:center;justify-content:center;height:100%;background:#eef0f2;color:#7a8599;font-size:13px;flex-direction:column;gap:8px">' +
                 '<div style="font-weight:600;color:#3d4d6a">Map unavailable</div>' +
-                '<div>Set NEXT_PUBLIC_MAPBOX_TOKEN</div></div>';
+                '<div>Set NEXT_PUBLIC_MAPBOX_TOKEN</div></div>'.replaceAll(
+                    'motion.',
+                    '',
+                );
             return;
         }
 
@@ -129,15 +212,15 @@ export default function FlightReportMap({ flight, freezeMin, resumeMin }: Flight
         const lons = allUniqueCoords.map((c) => c[0]);
         const lats = allUniqueCoords.map((c) => c[1]);
         const bounds: mapboxgl.LngLatBoundsLike = [
-            [Math.min(...lons) - 0.5, Math.min(...lats) - 0.4],
-            [Math.max(...lons) + 0.5, Math.max(...lats) + 0.4],
+            [Math.min(...lons) - 0.85, Math.min(...lats) - 0.45],
+            [Math.max(...lons) + 0.35, Math.max(...lats) + 0.4],
         ];
 
         const map = new mapboxgl.Map({
             container,
             style: FLIGHT_REPORT_MAP_STYLE,
             bounds,
-            fitBoundsOptions: { padding: 48 },
+            fitBoundsOptions: { padding: { top: 36, bottom: 36, left: 24, right: 56 } },
             attributionControl: false,
             projection: 'mercator',
         });
@@ -149,17 +232,19 @@ export default function FlightReportMap({ flight, freezeMin, resumeMin }: Flight
         map.on('load', () => {
             addRouteLine(map, 'drift', driftCoords, {
                 color: '#3d4d6a',
-                width: 3.5,
-                opacity: 0.92,
+                width: 2.5,
+                opacity: 0.88,
                 dash: [2, 1.5],
                 haloColor: '#eef0f2',
-                haloWidth: 9,
+                haloWidth: 7,
             });
 
             addRouteLine(map, 'ascent', ascentCoords, {
                 color: '#c9521f',
                 width: 3.5,
-                opacity: 0.95,
+                opacity: 0.96,
+                glowColor: 'rgba(201, 82, 31, 0.45)',
+                glowWidth: 16,
                 haloColor: '#ffffff',
                 haloWidth: 8,
             });
@@ -167,69 +252,22 @@ export default function FlightReportMap({ flight, freezeMin, resumeMin }: Flight
             if (resumeCoords.length > 1) {
                 addRouteLine(map, 'resume', resumeCoords, {
                     color: '#a8481a',
-                    width: 3,
+                    width: 2.8,
                     opacity: 0.9,
                     dash: [1.5, 1.2],
+                    glowColor: 'rgba(201, 82, 31, 0.28)',
+                    glowWidth: 12,
                     haloColor: '#ffffff',
-                    haloWidth: 7,
+                    haloWidth: 6,
                 });
-
-                const gpsUpdates = [
-                    { lng: -119.002, lat: 33.544, utc: '22:56 UTC', alt: '9,744 m', note: 'GPS resumed' },
-                    { lng: -118.391, lat: 32.872, utc: '00:29 UTC', alt: '9,621 m', note: null },
-                    { lng: -117.859, lat: 32.219, utc: '01:46 UTC', alt: '9,648 m', note: null },
-                    { lng: -117.722, lat: 32.013, utc: '02:03 UTC', alt: '9,682 m', note: 'last fix' },
-                ];
-
-                for (const { lng, lat, utc, alt, note } of gpsUpdates) {
-                    new mapboxgl.Marker({
-                        element: createCalloutMarker(utc, alt, note),
-                        anchor: 'bottom',
-                    })
-                        .setLngLat([lng, lat])
-                        .addTo(map);
-                }
             }
 
-            const mkMarker = (
-                lngLat: [number, number],
-                color: string,
-                size: number,
-                html: string,
-            ) => {
-                const el = document.createElement('div');
-                el.style.cssText = [
-                    'width:' + size + 'px',
-                    'height:' + size + 'px',
-                    'border-radius:50%',
-                    'background:' + color,
-                    'border:2.5px solid white',
-                    'box-shadow:0 2px 6px rgba(27,36,56,.35)',
-                    'cursor:pointer',
-                ].join(';');
-                new mapboxgl.Marker({ element: el })
-                    .setLngLat(lngLat)
-                    .setPopup(
-                        new mapboxgl.Popup({ offset: 12, closeButton: false }).setHTML(html),
-                    )
-                    .addTo(map);
-            };
-
-            mkMarker(
-                [-122.426, 37.728],
-                '#2d8c55',
-                14,
-                '<div class="popup-title">Launch Site</div>' +
-                    '<div class="popup-detail">37.728°N, 122.426°W<br>T+0 · 734 m · 15:55 UTC</div>',
-            );
-
-            mkMarker(
-                [-121.572, 36.616],
-                '#c9521f',
-                12,
-                '<div class="popup-title">GPS Freeze Point</div>' +
-                    '<div class="popup-detail">36.616°N, 121.572°W<br>T+145 min · GPS locked at 6,924 m<br>Pressure: 409 hPa → ~7,022 m actual</div>',
-            );
+            const mapAnnotations: FlightMapAnnotation[] = [
+                BAJA_RUN_LAUNCH_ANNOTATION,
+                BAJA_RUN_FREEZE_ANNOTATION,
+                ...(resumeCoords.length > 1 ? BAJA_RUN_GPS_ANNOTATIONS : []),
+            ];
+            addMapAnnotations(map, mapAnnotations);
         });
 
         return () => {

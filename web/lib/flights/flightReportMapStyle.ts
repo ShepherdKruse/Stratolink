@@ -1,6 +1,23 @@
-import type { StyleSpecification } from 'mapbox-gl';
+import type { FilterSpecification, StyleSpecification } from 'mapbox-gl';
 
-/** Muted cartography aligned with flight-report.css (--fr-* tokens). */
+/** Anchor cities only — coastal flight context, no interior clutter. */
+export const FLIGHT_MAP_ANCHOR_CITIES = [
+    'San Francisco',
+    'Los Angeles',
+    'San Diego',
+    'Tijuana',
+    'Ensenada',
+] as const;
+
+const anchorCityFilter = [
+    'match',
+    ['coalesce', ['get', 'name_en'], ['get', 'name']],
+    ['literal', [...FLIGHT_MAP_ANCHOR_CITIES]],
+    true,
+    false,
+] as const;
+
+/** Duo-tone basemap: muted land/water, no roads, minimal labels. */
 export const FLIGHT_REPORT_MAP_STYLE: StyleSpecification = {
     version: 8,
     name: 'Stratolink Flight Report',
@@ -18,31 +35,11 @@ export const FLIGHT_REPORT_MAP_STYLE: StyleSpecification = {
             paint: { 'background-color': '#eef0f2' },
         },
         {
-            id: 'landcover',
-            type: 'fill',
-            source: 'mapbox-streets',
-            'source-layer': 'landcover',
-            paint: {
-                'fill-color': '#e4e7ec',
-                'fill-opacity': 0.55,
-            },
-        },
-        {
-            id: 'landuse',
-            type: 'fill',
-            source: 'mapbox-streets',
-            'source-layer': 'landuse',
-            paint: {
-                'fill-color': '#e0e4e9',
-                'fill-opacity': 0.35,
-            },
-        },
-        {
             id: 'water',
             type: 'fill',
             source: 'mapbox-streets',
             'source-layer': 'water',
-            paint: { 'fill-color': '#b6c9e2' },
+            paint: { 'fill-color': '#dce4ec' },
         },
         {
             id: 'waterway',
@@ -50,72 +47,34 @@ export const FLIGHT_REPORT_MAP_STYLE: StyleSpecification = {
             source: 'mapbox-streets',
             'source-layer': 'waterway',
             paint: {
-                'line-color': '#a3b8d4',
-                'line-width': 0.8,
-                'line-opacity': 0.85,
-            },
-        },
-        {
-            id: 'road-major',
-            type: 'line',
-            source: 'mapbox-streets',
-            'source-layer': 'road',
-            filter: [
-                'in',
-                ['get', 'class'],
-                ['literal', ['motorway', 'trunk', 'primary']],
-            ],
-            paint: {
-                'line-color': '#cdd2da',
-                'line-width': [
-                    'interpolate',
-                    ['linear'],
-                    ['zoom'],
-                    4,
-                    0.3,
-                    8,
-                    1.2,
-                    12,
-                    2.5,
-                ],
+                'line-color': '#d0dae6',
+                'line-width': 0.6,
                 'line-opacity': 0.7,
             },
         },
         {
-            id: 'road-minor',
-            type: 'line',
-            source: 'mapbox-streets',
-            'source-layer': 'road',
-            filter: [
-                'in',
-                ['get', 'class'],
-                ['literal', ['secondary', 'tertiary', 'street', 'street_limited']],
-            ],
-            paint: {
-                'line-color': '#d8dde4',
-                'line-width': [
-                    'interpolate',
-                    ['linear'],
-                    ['zoom'],
-                    8,
-                    0.2,
-                    14,
-                    1,
-                ],
-                'line-opacity': 0.45,
-            },
-        },
-        {
-            id: 'admin',
+            id: 'admin-country',
             type: 'line',
             source: 'mapbox-streets',
             'source-layer': 'admin',
-            filter: ['==', ['get', 'maritime'], 0],
+            filter: ['all', ['==', ['get', 'maritime'], 0], ['==', ['get', 'admin_level'], 0]],
             paint: {
-                'line-color': '#b4bccc',
-                'line-width': 0.8,
-                'line-opacity': 0.55,
-                'line-dasharray': [3, 2],
+                'line-color': '#c5cad3',
+                'line-width': 1.2,
+                'line-opacity': 0.65,
+            },
+        },
+        {
+            id: 'admin-state',
+            type: 'line',
+            source: 'mapbox-streets',
+            'source-layer': 'admin',
+            filter: ['all', ['==', ['get', 'maritime'], 0], ['==', ['get', 'admin_level'], 1]],
+            paint: {
+                'line-color': '#d2d6de',
+                'line-width': 0.7,
+                'line-opacity': 0.5,
+                'line-dasharray': [4, 3],
             },
         },
         {
@@ -123,28 +82,19 @@ export const FLIGHT_REPORT_MAP_STYLE: StyleSpecification = {
             type: 'symbol',
             source: 'mapbox-streets',
             'source-layer': 'place_label',
-            filter: ['<=', ['get', 'symbolrank'], 14],
+            filter: anchorCityFilter as unknown as FilterSpecification,
             layout: {
                 'text-field': ['coalesce', ['get', 'name_en'], ['get', 'name']],
                 'text-font': ['DIN Pro Medium', 'Arial Unicode MS Regular'],
-                'text-size': [
-                    'interpolate',
-                    ['linear'],
-                    ['zoom'],
-                    4,
-                    9,
-                    8,
-                    11,
-                    12,
-                    12,
-                ],
-                'text-letter-spacing': 0.02,
+                'text-size': 11,
+                'text-letter-spacing': 0.04,
+                'text-transform': 'uppercase',
             },
             paint: {
-                'text-color': '#3d4d6a',
+                'text-color': '#7a8599',
                 'text-halo-color': '#eef0f2',
-                'text-halo-width': 1.4,
-                'text-opacity': 0.88,
+                'text-halo-width': 1.6,
+                'text-opacity': 0.85,
             },
         },
     ],
