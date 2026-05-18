@@ -8,6 +8,9 @@ import { Compass } from 'lucide-react';
 import { isUsableGpsCoordinate, isValidWgs84Point, isWebGLAvailable } from '@/lib/mapGeo';
 import mapboxgl from 'mapbox-gl';
 import type { MapMouseEvent } from 'mapbox-gl';
+import type { GatewayReception } from '../dashboard-v2/atoms';
+import MobileGatewayMapLayers from './MobileGatewayMapLayers';
+import { gatewaysWithLocation } from './mobileGatewayGeo';
 
 interface BalloonData {
     id: string;
@@ -28,6 +31,7 @@ interface MobileRadarProps {
     userLocation?: { lat: number; lon: number } | null;
     selectedBalloonId?: string | null;
     flightPathData?: FlightPathPoint[];
+    gateways?: GatewayReception[] | null;
 }
 
 const MAP_STYLE_DARK = 'mapbox://styles/mapbox/dark-v11';
@@ -48,6 +52,7 @@ export default function MobileRadar({
     userLocation,
     selectedBalloonId,
     flightPathData = [],
+    gateways = null,
 }: MobileRadarProps) {
     const mapRef = useRef<MapRef>(null);
     const [mapBearing, setMapBearing] = useState(0);
@@ -98,6 +103,13 @@ export default function MobileRadar({
     }, [mapBalloons, userLocation]);
 
     const nearest = nearestBalloon();
+
+    const selectedBalloon = selectedBalloonId
+        ? mapBalloons.find((b) => b.id === selectedBalloonId)
+        : undefined;
+    const gatewayBalloonLat = selectedBalloon?.lat ?? null;
+    const gatewayBalloonLon = selectedBalloon?.lon ?? null;
+    const locatedGatewayCount = gatewaysWithLocation(gateways).length;
 
     const balloonGeoJSON = useMemo(
         () =>
@@ -168,6 +180,20 @@ export default function MobileRadar({
                 : [];
         bounds = pathCoords.length >= 2 ? buildLngLatBounds(pathCoords) : null;
 
+        const gatewayPts = gatewaysWithLocation(gateways).map(
+            (g): [number, number] => [g.lon!, g.lat!],
+        );
+        if (gatewayPts.length) {
+            const gwBounds = buildLngLatBounds(gatewayPts);
+            if (gwBounds && !gwBounds.isEmpty()) {
+                if (bounds && !bounds.isEmpty()) {
+                    for (const pt of gatewayPts) bounds.extend(pt);
+                } else {
+                    bounds = gwBounds;
+                }
+            }
+        }
+
         if (!bounds || bounds.isEmpty()) {
             bounds = lngLatsFromBalloons.length > 0 ? buildLngLatBounds(lngLatsFromBalloons) : null;
         }
@@ -206,7 +232,7 @@ export default function MobileRadar({
             });
             lastFleetFitAtRef.current = now;
         }
-    }, [mapBalloons, styleLoaded, flightLineGeoJSON, selectedBalloonId, webglOk]);
+    }, [mapBalloons, styleLoaded, flightLineGeoJSON, selectedBalloonId, webglOk, gateways]);
 
     useEffect(() => {
         if (!compassEnabled) return;
@@ -303,6 +329,13 @@ export default function MobileRadar({
                     if (e?.dataType === 'style') handleStyleLoad();
                 }}
                 cursor="pointer">
+                <MobileGatewayMapLayers
+                    idPrefix="radar"
+                    gateways={selectedBalloonId ? gateways : null}
+                    balloonLat={gatewayBalloonLat}
+                    balloonLon={gatewayBalloonLon}
+                    styleLoaded={styleLoaded}
+                />
                 {styleLoaded && flightLineGeoJSON.features.length > 0 && (
                     <Source id="flight-path-mobile" type="geojson" data={flightLineGeoJSON}>
                         <Layer
@@ -349,6 +382,21 @@ export default function MobileRadar({
                     </Source>
                 )}
             </Map>
+
+            {selectedBalloonId && locatedGatewayCount > 0 ? (
+                <div
+                    className="absolute right-4 z-20 font-mono text-[10px] uppercase tracking-[0.08em]"
+                    style={{
+                        top: 'max(56px, calc(env(safe-area-inset-top) + 12px))',
+                        padding: '4px 8px',
+                        background: 'rgba(11, 14, 19, 0.82)',
+                        border: '1px solid rgba(245, 158, 11, 0.45)',
+                        color: '#fbbf24',
+                        backdropFilter: 'blur(12px)',
+                    }}>
+                    {locatedGatewayCount} GW
+                </div>
+            ) : null}
 
             {nearest && (
                 <div className="absolute left-1/2 top-4 z-20 -translate-x-1/2 transform">

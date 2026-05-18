@@ -3,6 +3,7 @@
 import MobileRadar from './MobileRadar';
 import type { MobileFleetDeviceRow } from './mobileStratolinkUtils';
 import { fmtCoords, formatAge } from './mobileStratolinkUtils';
+import { parseGateways } from './mobileGatewayGeo';
 
 interface MobileMapLiveTabProps {
     balloonData: MobileFleetDeviceRow[];
@@ -29,6 +30,7 @@ export default function MobileMapLiveTab({
     latestRow,
 }: MobileMapLiveTabProps) {
     const sel = balloonData.find((b) => b.id === selectedBalloonId);
+    const mapGateways = parseGateways(latestRow?.gateways);
     const rssi =
         typeof latestRow?.rssi === 'number'
             ? latestRow.rssi
@@ -57,6 +59,7 @@ export default function MobileMapLiveTab({
                     onBalloonClick={(id) => onSelectDevice(id)}
                     userLocation={userLocation}
                     selectedBalloonId={selectedBalloonId}
+                    gateways={mapGateways}
                 />
             </div>
 

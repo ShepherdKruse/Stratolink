@@ -9,9 +9,9 @@ import {
     type MobileFleetDeviceRow,
 } from './mobileStratolinkUtils';
 import MobilePositionPreviewMap from './MobilePositionPreviewMap';
-import MobileGatewayConstellation from './MobileGatewayConstellation';
+import MobileGatewayPanel from './MobileGatewayPanel';
 import { altitudeFromPressureHpa } from '@/lib/atmosphere/isa';
-import type { GatewayReception } from '../dashboard-v2/atoms';
+import { parseGateways } from './mobileGatewayGeo';
 
 type TelemetryPoint = Record<string, unknown>;
 
@@ -44,38 +44,6 @@ function coerceNum(v: unknown): number | null {
     if (v === null || v === undefined) return null;
     const n = typeof v === 'number' ? v : Number(v);
     return Number.isFinite(n) ? n : null;
-}
-
-/* Defensive parse: JSONB usually arrives as an array, but if the postgres
- * client (or a future cache) hands us a JSON string we still want the
- * constellation to render rather than fall back to "no data". Anything that
- * doesn't look like an array of {gateway_id} objects gets dropped. */
-function parseGateways(raw: unknown): GatewayReception[] | null {
-    if (!raw) return null;
-    let arr: unknown = raw;
-    if (typeof raw === 'string') {
-        try {
-            arr = JSON.parse(raw);
-        } catch {
-            return null;
-        }
-    }
-    if (!Array.isArray(arr)) return null;
-    const out: GatewayReception[] = [];
-    for (const item of arr) {
-        if (!item || typeof item !== 'object') continue;
-        const o = item as Record<string, unknown>;
-        if (typeof o.gateway_id !== 'string') continue;
-        out.push({
-            gateway_id: o.gateway_id,
-            rssi: coerceNum(o.rssi),
-            snr: coerceNum(o.snr),
-            lat: coerceNum(o.lat),
-            lon: coerceNum(o.lon),
-            alt: coerceNum(o.alt),
-        });
-    }
-    return out;
 }
 
 interface MobileDeviceDetailScreenProps {
@@ -227,7 +195,12 @@ export default function MobileDeviceDetailScreen({
                 </SectionLabel>
 
                 <div className="relative overflow-hidden border-b border-t bg-[var(--bg)]" style={{ borderColor: 'var(--border)' }}>
-                    <MobilePositionPreviewMap lat={device.lat} lon={device.lon} flightPathData={flightPathData} />
+                    <MobilePositionPreviewMap
+                        lat={device.lat}
+                        lon={device.lon}
+                        flightPathData={flightPathData}
+                        gateways={latestGateways}
+                    />
                     <div
                         className="pointer-events-none absolute bottom-3 left-4 font-mono text-[11px] text-[var(--text-hi)]"
                         style={{ textShadow: '0 0 4px rgba(0,0,0,0.8)', fontVariantNumeric: 'tabular-nums' }}>
@@ -235,14 +208,7 @@ export default function MobileDeviceDetailScreen({
                     </div>
                 </div>
 
-                {/* Mobile gateway visualisation. We slot it between the position
-                  * map and the telemetry charts because, conceptually, "who heard
-                  * us, and how strongly" is a position-adjacent question — it
-                  * tells you about coverage geometry at the current point on the
-                  * map. Charts (the long scroll below) are reserved for time
-                  * series. The constellation handles its own empty state, so
-                  * rendering it unconditionally is fine. */}
-                <MobileGatewayConstellation
+                <MobileGatewayPanel
                     gateways={latestGateways}
                     balloonLat={device.awaiting_gps ? null : device.lat}
                     balloonLon={device.awaiting_gps ? null : device.lon}

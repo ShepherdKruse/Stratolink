@@ -7,7 +7,10 @@ import 'mapbox-gl/dist/mapbox-gl.css';
 import mapboxgl from 'mapbox-gl';
 
 import { isUsableGpsCoordinate, isWebGLAvailable } from '@/lib/mapGeo';
+import type { GatewayReception } from '../dashboard-v2/atoms';
 import SlMapMini from './SlMapMini';
+import MobileGatewayMapLayers from './MobileGatewayMapLayers';
+import { gatewaysWithLocation } from './mobileGatewayGeo';
 
 const MAP_STYLE_DARK = 'mapbox://styles/mapbox/dark-v11';
 
@@ -20,6 +23,8 @@ interface MobilePositionPreviewMapProps {
     lat: number;
     lon: number;
     flightPathData?: FlightPathPoint[];
+    /** TTN rx_metadata gateways for the latest uplink — rendered as orange pins. */
+    gateways?: GatewayReception[] | null;
 }
 
 function buildLngLatBounds(coords: ReadonlyArray<readonly [number, number]>): mapboxgl.LngLatBounds | null {
@@ -36,6 +41,7 @@ export default function MobilePositionPreviewMap({
     lat,
     lon,
     flightPathData = [],
+    gateways = null,
 }: MobilePositionPreviewMapProps) {
     const mapRef = useRef<MapRef>(null);
     const mapboxToken = process.env.NEXT_PUBLIC_MAPBOX_TOKEN;
@@ -57,6 +63,8 @@ export default function MobilePositionPreviewMap({
     );
 
     const markerOk = isUsableGpsCoordinate(lat, lon);
+    const locatedGateways = useMemo(() => gatewaysWithLocation(gateways), [gateways]);
+    const gatewayCount = locatedGateways.length;
 
     const markerGeoJSON = useMemo(() => {
         if (!markerOk)
@@ -96,6 +104,9 @@ export default function MobilePositionPreviewMap({
 
         const allPts: [number, number][] = [...pathCoords];
         if (markerOk) allPts.push([lon, lat]);
+        for (const g of locatedGateways) {
+            if (g.lat != null && g.lon != null) allPts.push([g.lon, g.lat]);
+        }
 
         const bounds = allPts.length ? buildLngLatBounds(allPts) : null;
 
@@ -110,7 +121,7 @@ export default function MobilePositionPreviewMap({
         } catch {
             /* ignore */
         }
-    }, [styleLoaded, webglOk, lat, lon, markerOk, pathCoords]);
+    }, [styleLoaded, webglOk, lat, lon, markerOk, pathCoords, locatedGateways]);
 
     if (!mapboxToken) {
         return (
@@ -149,6 +160,13 @@ export default function MobilePositionPreviewMap({
                 mapStyle={MAP_STYLE_DARK}
                 projection="mercator"
                 onLoad={handleStyleLoad}>
+                <MobileGatewayMapLayers
+                    idPrefix="pos"
+                    gateways={gateways}
+                    balloonLat={markerOk ? lat : null}
+                    balloonLon={markerOk ? lon : null}
+                    styleLoaded={styleLoaded}
+                />
                 {styleLoaded && lineGeoJSON.features.length > 0 ? (
                     <Source id="position-preview-path" type="geojson" data={lineGeoJSON}>
                         <Layer
@@ -180,6 +198,19 @@ export default function MobilePositionPreviewMap({
                     </Source>
                 ) : null}
             </Map>
+            {gatewayCount > 0 ? (
+                <div
+                    className="absolute right-3 top-3 font-mono text-[10px] uppercase tracking-[0.08em]"
+                    style={{
+                        padding: '4px 8px',
+                        background: 'rgba(11, 14, 19, 0.82)',
+                        border: '1px solid rgba(245, 158, 11, 0.45)',
+                        color: '#fbbf24',
+                        backdropFilter: 'blur(12px)',
+                    }}>
+                    {gatewayCount} GW
+                </div>
+            ) : null}
         </div>
     );
 }
