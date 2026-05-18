@@ -9,12 +9,11 @@ export const FLIGHT_MAP_ANCHOR_CITIES = [
     'Ensenada',
 ] as const;
 
+/** Mapbox `match` requires scalar branch labels; use `in` with a literal array instead. */
 const anchorCityFilter = [
-    'match',
+    'in',
     ['coalesce', ['get', 'name_en'], ['get', 'name']],
     ['literal', [...FLIGHT_MAP_ANCHOR_CITIES]],
-    true,
-    false,
 ] as const;
 
 /** Duo-tone basemap: muted land/water, no roads, minimal labels. */
