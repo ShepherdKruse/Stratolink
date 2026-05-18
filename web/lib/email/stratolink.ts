@@ -1,16 +1,15 @@
 /**
- * Stratolink public email addresses and Resend defaults.
+ * Stratolink public email addresses and email configuration.
  *
- * Google Workspace handles human inboxes (contact@, info@, help@).
- * Resend sends website form notifications — verify stratolink.org in Resend
- * and add their SPF/DKIM alongside Google's (see .env.local.example).
+ * Google Workspace handles all email via SMTP.
+ * Set SMTP_USER and SMTP_PASS environment variables for sending.
  */
 
 export const STRATOLINK_EMAILS = {
     contact: 'contact@stratolink.org',
     info: 'info@stratolink.org',
     help: 'help@stratolink.org',
-    /** Transactional "from" for contact form / launch signup (Resend-verified domain). */
+    /** Transactional "from" for contact form / launch signup. */
     notifications: 'notifications@stratolink.org',
 } as const
 
@@ -37,9 +36,9 @@ export function getLaunchSignupNotifyRecipients(): string[] {
         .filter(Boolean)
 }
 
-export function getResendFromAddress(): string {
+export function getFromAddress(): string {
     return (
-        process.env.RESEND_FROM_EMAIL ??
+        process.env.SMTP_FROM_EMAIL ??
         `Stratolink <${STRATOLINK_EMAILS.notifications}>`
     )
 }

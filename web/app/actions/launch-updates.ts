@@ -1,9 +1,9 @@
 'use server'
 
-import { Resend } from 'resend'
+import { sendEmail, isEmailConfigured } from '@/lib/email/transport'
 import {
     getLaunchSignupNotifyRecipients,
-    getResendFromAddress,
+    getFromAddress,
     STRATOLINK_EMAILS,
 } from '@/lib/email/stratolink'
 
@@ -20,28 +20,24 @@ export async function subscribeLaunchUpdates(email: string) {
         return { success: false as const, error: 'Please enter a valid email address.' }
     }
 
-    const apiKey = process.env.RESEND_API_KEY
-
-    if (!apiKey) {
+    if (!isEmailConfigured()) {
         return {
             success: false as const,
             error: `Signup is temporarily unavailable. Reach us at ${STRATOLINK_EMAILS.contact} for launch news.`,
         }
     }
 
-    const resend = new Resend(apiKey)
-
     try {
-        const { error } = await resend.emails.send({
-            from: getResendFromAddress(),
+        const result = await sendEmail({
+            from: getFromAddress(),
             to: getLaunchSignupNotifyRecipients(),
             replyTo: trimmed,
             subject: `Stratolink launch updates signup: ${trimmed}`,
             text: `Someone signed up for launch updates on stratolink.org.\n\nEmail: ${trimmed}\n`,
         })
 
-        if (error) {
-            console.error('[Stratolink] Launch signup email error:', error)
+        if (!result.success) {
+            console.error('[Stratolink] Launch signup email error:', result.error)
             return { success: false as const, error: 'Something went wrong. Please try again in a moment.' }
         }
 
