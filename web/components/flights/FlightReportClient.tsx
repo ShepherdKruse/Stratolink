@@ -165,8 +165,8 @@ export default function FlightReportClient({ report, telemetry }: FlightReportCl
                         <div className="fr-card-pad" style={{ paddingBottom: 0 }}>
                             <div className="fr-card-title">Flight Path</div>
                             <div className="fr-card-sub" style={{ marginBottom: 10 }}>
-                                Real GPS track — solid line: confirmed unique fixes · dashed: deduplicated
-                                stale-position segment · gray dashes: GPS-frozen implied drift
+                                Confirmed GPS fixes, implied drift during GPS freeze, and post-resume
+                                position updates. See the map legend for line styles.
                             </div>
                         </div>
                         <FlightReportMap
