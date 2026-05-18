@@ -37,12 +37,6 @@ export function Navigation() {
           {/* Desktop nav */}
           <div className="hidden items-center gap-6 md:flex">
             <Link
-              href="/mission"
-              className="text-sm font-light text-muted-foreground transition-colors hover:text-foreground"
-            >
-              Mission
-            </Link>
-            <Link
               href="/activate"
               className="text-sm font-light text-muted-foreground transition-colors hover:text-foreground"
             >
@@ -103,7 +97,7 @@ export function Navigation() {
             </p>
             <ul className="flex flex-col gap-0.5">
               {[
-                { href: "/mission", label: "Mission" },
+                { href: "#mission", label: "Mission" },
                 { href: "#how-it-works", label: "How it works" },
                 { href: "#dashboard", label: "Dashboard preview" },
                 { href: "#applications", label: "Applications" },
@@ -128,15 +122,6 @@ export function Navigation() {
               Tools
             </p>
             <ul className="flex flex-col gap-0.5">
-              <li>
-                <Link
-                  href="/mission"
-                  onClick={close}
-                  className="block rounded-sm px-3 py-2.5 text-base font-light text-muted-foreground transition-colors hover:bg-accent/50 hover:text-foreground"
-                >
-                  Mission program
-                </Link>
-              </li>
               <li>
                 <Link
                   href="/activate"

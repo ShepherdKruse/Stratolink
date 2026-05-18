@@ -7,6 +7,8 @@ export const metadata: Metadata = {
     title: 'Mission · USSF/JROTC outreach',
     description:
         'A functional mock satellite mission platform for Space Force outreach, JROTC programs, and SFA chapters — payload architecture, live ops dashboard, and program formats.',
+    /* Unlisted outreach page — share via direct link only; not linked from the public site. */
+    robots: { index: false, follow: false },
     openGraph: {
         title: 'Stratolink Mission · USSF/JROTC outreach',
         description:
