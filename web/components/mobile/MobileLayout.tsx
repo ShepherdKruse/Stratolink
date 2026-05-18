@@ -5,6 +5,7 @@ import '@/styles/mobile-stratolink.css';
 
 import { createClient } from '@/lib/supabase';
 import { isUsableGpsCoordinate, isValidWgs84Point } from '@/lib/mapGeo';
+import { fleetTelemetrySinceIso, telemetrySinceIso } from '@/lib/telemetry/missionWindow';
 
 import MobileAlertsTab from './MobileAlertsTab';
 import MobileDeviceDetailScreen from './MobileDeviceDetailScreen';
@@ -105,6 +106,10 @@ export default function MobileLayout({ initialBalloonId = null }: MobileLayoutPr
 
                 const launcherMap = new Map<string, string>();
                 const launchLocationMap = new Map<string, { lat: number; lon: number }>();
+                const deviceMetaMap = new Map<
+                    string,
+                    { status: string; launched_at: string | null }
+                >();
 
                 if (activatedDevices) {
                     activatedDevices.forEach(
@@ -113,8 +118,14 @@ export default function MobileLayout({ initialBalloonId = null }: MobileLayoutPr
                             launcher_name?: string | null;
                             launch_lat?: number | null;
                             launch_lon?: number | null;
+                            status?: string;
+                            launched_at?: string | null;
                         }) => {
                             launcherMap.set(d.device_id, d.launcher_name || 'Unknown');
+                            deviceMetaMap.set(d.device_id, {
+                                status: d.status ?? 'flying',
+                                launched_at: d.launched_at ?? null,
+                            });
                             if (
                                 typeof d.launch_lat === 'number' &&
                                 typeof d.launch_lon === 'number' &&
@@ -137,7 +148,12 @@ export default function MobileLayout({ initialBalloonId = null }: MobileLayoutPr
                 }
 
                 const twoHoursAgo = new Date(Date.now() - 2 * 60 * 60 * 1000).toISOString();
-                const oneDayAgo = new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString();
+                const fleetSince = fleetTelemetrySinceIso(
+                    (activatedDevices ?? []).map((d: { status?: string; launched_at?: string | null }) => ({
+                        status: d.status,
+                        launchedAt: d.launched_at ? new Date(d.launched_at).getTime() : null,
+                    })),
+                );
 
                 const lastContactMap = new Map<string, string>();
 
@@ -165,7 +181,7 @@ export default function MobileLayout({ initialBalloonId = null }: MobileLayoutPr
                         'device_id, lat, lon, altitude_m, time, velocity_x, velocity_y, battery_voltage, rssi, gps_satellites',
                     )
                     .in('device_id', activatedDeviceIds)
-                    .gte('time', oneDayAgo)
+                    .gte('time', fleetSince)
                     .order('time', { ascending: false });
 
                 if (telemetryError) {
@@ -231,6 +247,7 @@ export default function MobileLayout({ initialBalloonId = null }: MobileLayoutPr
 
                     const altitude_m = (gpsRow?.altitude_m ?? anyRow?.altitude_m ?? 0) as number;
 
+                    const meta = deviceMetaMap.get(deviceId);
                     built.push({
                         id: deviceId,
                         lat,
@@ -243,6 +260,8 @@ export default function MobileLayout({ initialBalloonId = null }: MobileLayoutPr
                         launcher_name: launcherMap.get(deviceId),
                         awaiting_gps,
                         last_contact: lastContactMap.get(deviceId) ?? anyRow?.time ?? undefined,
+                        status: meta?.status,
+                        launched_at: meta?.launched_at ?? null,
                     });
                 }
 
@@ -273,7 +292,11 @@ export default function MobileLayout({ initialBalloonId = null }: MobileLayoutPr
 
             try {
                 const supabase = createClient();
-                const oneDayAgo = new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString();
+                const sel = balloonData.find((b) => b.id === selectedBalloonId);
+                const since = telemetrySinceIso({
+                    status: sel?.status ?? 'flying',
+                    launchedAt: sel?.launched_at ? new Date(sel.launched_at).getTime() : null,
+                });
 
                 const cols =
                     'time, lat, lon, altitude_m, battery_voltage, solar_voltage, temperature, pressure, ' +
@@ -285,7 +308,7 @@ export default function MobileLayout({ initialBalloonId = null }: MobileLayoutPr
                     .from('telemetry')
                     .select(cols)
                     .eq('device_id', selectedBalloonId)
-                    .gte('time', oneDayAgo)
+                    .gte('time', since)
                     .order('time', { ascending: true });
 
                 if (!error && pathData && pathData.length > 0) {
@@ -326,7 +349,7 @@ export default function MobileLayout({ initialBalloonId = null }: MobileLayoutPr
         return () => {
             if (interval) clearInterval(interval);
         };
-    }, [selectedBalloonId]);
+    }, [selectedBalloonId, balloonData]);
 
     useEffect(() => {
         if (mainTab !== 'map') return;

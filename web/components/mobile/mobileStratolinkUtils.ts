@@ -13,6 +13,10 @@ export interface MobileFleetDeviceRow {
     awaiting_gps?: boolean;
     last_contact?: string;
     velocity_heading?: number;
+    /** Supabase devices.status — used for mission-scoped telemetry windows. */
+    status?: string;
+    /** ISO timestamp when this flight was activated; dashboard loads telemetry from here. */
+    launched_at?: string | null;
 }
 
 export function deviceUiStatus(d: Pick<MobileFleetDeviceRow, 'awaiting_gps' | 'altitude_m'>): DeviceUiStatus {

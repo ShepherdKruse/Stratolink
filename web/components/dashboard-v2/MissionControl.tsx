@@ -76,7 +76,12 @@ export default function MissionControlScreen() {
             />
 
             {/* 6-KPI strip */}
-            <KpiStrip fleet={fleet} now={now} alerts={alerts} />
+            <KpiStrip
+                fleet={fleet}
+                now={now}
+                alerts={alerts}
+                missionStartedAt={selectedDevice?.launchedAt ?? null}
+            />
 
             <main
                 style={{
@@ -151,8 +156,20 @@ export default function MissionControlScreen() {
 /* ──────────────────────────────────────────────────────────────
  * KPI strip — fleet-wide metrics from Supabase
  * ────────────────────────────────────────────────────────────── */
-function KpiStrip({ fleet, now, alerts }: { fleet: FleetMetrics; now: number; alerts: FleetAlert[] }) {
-    const missionTimeMs = fleet.firstFixT ? now - fleet.firstFixT : null;
+function KpiStrip({
+    fleet,
+    now,
+    alerts,
+    missionStartedAt,
+}: {
+    fleet: FleetMetrics;
+    now: number;
+    alerts: FleetAlert[];
+    /** Selected device's launch time — mission clock follows activation, not rolling 24h. */
+    missionStartedAt: number | null;
+}) {
+    const missionTimeMs =
+        missionStartedAt != null ? now - missionStartedAt : fleet.firstFixT ? now - fleet.firstFixT : null;
     const missionTime = missionTimeMs !== null
         ? `${Math.floor(missionTimeMs / 3_600_000).toString().padStart(2, '0')}:${Math.floor((missionTimeMs % 3_600_000) / 60_000).toString().padStart(2, '0')}`
         : '—';

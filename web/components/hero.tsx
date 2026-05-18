@@ -213,7 +213,7 @@ export function Hero() {
               size="lg"
               className="rounded-sm px-8 py-6 text-base font-normal text-foreground transition-all hover:bg-accent/50"
             >
-              <Link href="#mission">Learn More</Link>
+              <Link href="/mission">Learn More</Link>
             </Button>
           </div>
         </div>

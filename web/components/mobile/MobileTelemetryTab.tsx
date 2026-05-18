@@ -165,7 +165,7 @@ export default function MobileTelemetryTab({ deviceId, telemetryRows }: MobileTe
 
                 <SectionLabel>Session</SectionLabel>
                 <div style={{ padding: '12px 20px 96px', fontFamily: 'var(--sans)', fontSize: 11, color: 'var(--text-dim2)' }}>
-                    {telemetryRows.length} packets sampled for charts (server: last 24h).
+                    {telemetryRows.length} packets since launch (full mission while flying).
                 </div>
             </div>
         </div>

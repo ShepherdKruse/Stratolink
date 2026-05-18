@@ -1,0 +1,658 @@
+<!-- ════════════ NAV ════════════ -->
+<nav class="nav">
+  <div class="nav-in">
+    <a class="brand" href="/">
+      <span class="mark"></span>
+      STRATOLINK
+    </a>
+    <span class="nav-divider">│</span>
+    <span class="nav-tag">Mission · USSF / JROTC outreach</span>
+    <div class="nav-right">
+      <a class="btn btn-ghost" href="#formats">Programs</a>
+      <a class="btn btn-pri" href="#cta">Request Mission Brief</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ════════════════════════════════════════════════════════════
+     01 · MISSION HEADER
+     ════════════════════════════════════════════════════════════ -->
+<section class="hero" id="top">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="wrap hero-content">
+    <div class="hero-class reveal">PARTNERSHIP PROGRAM · MISSION BRIEF</div>
+    <h1 class="reveal delay-1">
+      A Satellite Mission.<br>
+      <span class="line2">In Every Classroom.</span>
+    </h1>
+    <p class="lede reveal delay-2">Stratolink puts a functioning atmospheric payload in students' hands — complete with sensor suite, telemetry uplink, and a mission operations dashboard they control. The same cognitive task as a Space Force operator monitoring a spacecraft. Real data. Real mission. Real platform.</p>
+    <div class="hero-cta reveal delay-3">
+      <a href="#cta" class="btn btn-pri">Request a Mission Brief →</a>
+      <a href="#arch" class="btn btn-ghost">Review Architecture</a>
+    </div>
+
+    <div class="hero-meta reveal delay-4">
+      <div><div class="k">Platform</div><div class="v">Atmospheric Payload</div></div>
+      <div><div class="k">Mission profile</div><div class="v">Stratospheric float, 9.5 km</div></div>
+      <div><div class="k">TT&amp;C link</div><div class="v">LoRaWAN gateway uplink</div></div>
+      <div><div class="k">Operator surface</div><div class="v">Mission ops dashboard</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════
+     02 · PAYLOAD ARCHITECTURE
+     ════════════════════════════════════════════════════════════ -->
+<section id="arch">
+  <div class="wrap">
+    <div class="sec-id reveal">02 / ARCHITECTURE <span class="meta">· PAYLOAD SYSTEM DIAGRAM</span></div>
+    <h2 class="reveal">Functional Spacecraft Architecture.</h2>
+    <p class="lede reveal delay-1" style="margin-top: 24px;">The Stratolink payload runs the same end-to-end TT&amp;C stack as an orbital cubesat: integrated sensor suite, narrow-band RF uplink to a ground gateway, packet forwarding over the public internet to the mission operations server, and a live operator surface. The lift vehicle — a high-altitude balloon — is functionally a launch stage. The payload is the mission.</p>
+
+    <div class="arch-stage reveal delay-2">
+      <svg viewBox="0 0 1180 460" preserveAspectRatio="xMidYMid meet">
+        <!-- altitude bands -->
+        <g font-family="Space Mono" font-size="10" fill="#5a6172" letter-spacing="0.10em">
+          <line x1="40" y1="120" x2="1140" y2="120" stroke="rgba(58,93,150,0.18)" stroke-dasharray="2 4" />
+          <text x="40" y="112">FLOAT · 9.5 KM</text>
+          <line x1="40" y1="260" x2="1140" y2="260" stroke="rgba(58,93,150,0.18)" stroke-dasharray="2 4" />
+          <text x="40" y="252">LINE-OF-SIGHT RF · ~400 KM RADIUS</text>
+          <line x1="40" y1="380" x2="1140" y2="380" stroke="rgba(58,93,150,0.36)" />
+          <text x="40" y="372">GROUND · MISSION OPS NETWORK</text>
+        </g>
+
+        <!-- 1. PAYLOAD at float altitude (left) -->
+        <g transform="translate(220, 120)">
+          <!-- balloon faint above payload -->
+          <ellipse cx="0" cy="-32" rx="22" ry="26" fill="rgba(58,93,150,0.10)" stroke="rgba(58,93,150,0.36)" stroke-width="0.6" />
+          <text x="-30" y="-58" font-family="Space Mono" font-size="8" fill="#5a6172" letter-spacing="0.10em">LIFT VEHICLE</text>
+          <!-- payload box -->
+          <rect x="-22" y="0" width="44" height="28" fill="#11162a" stroke="var(--delta-bright)" stroke-width="1" />
+          <line x1="-22" y1="0" x2="-22" y2="28" stroke="var(--delta-bright)" stroke-width="2.5" />
+          <text x="-16" y="11" font-family="Space Mono" font-size="6" fill="var(--delta-bright)" letter-spacing="0.05em">STRATOLINK</text>
+          <text x="-16" y="20" font-family="Space Mono" font-size="6" fill="#8a93a6">PAYLOAD R2</text>
+          <!-- antenna -->
+          <line x1="0" y1="0" x2="0" y2="-8" stroke="var(--delta-bright)" stroke-width="0.8" />
+          <!-- label -->
+          <text x="0" y="50" text-anchor="middle" font-family="Saira Condensed" font-size="13" font-weight="600" fill="#f0f3f7" letter-spacing="0.06em">PAYLOAD</text>
+          <text x="0" y="64" text-anchor="middle" font-family="Space Mono" font-size="9" fill="#8a93a6">SENSOR SUITE · MCU · TX</text>
+        </g>
+
+        <!-- 2. Ground LoRaWAN GATEWAY (right of midline, on the ground) -->
+        <g transform="translate(720, 380)">
+          <!-- antenna mast with truss work -->
+          <line x1="0" y1="0" x2="0" y2="-90" stroke="var(--delta-bright)" stroke-width="1.2" />
+          <line x1="-6" y1="-16" x2="6" y2="-28" stroke="var(--delta-bright)" stroke-width="0.5" />
+          <line x1="6" y1="-16" x2="-6" y2="-28" stroke="var(--delta-bright)" stroke-width="0.5" />
+          <line x1="-6" y1="-32" x2="6" y2="-44" stroke="var(--delta-bright)" stroke-width="0.5" />
+          <line x1="6" y1="-32" x2="-6" y2="-44" stroke="var(--delta-bright)" stroke-width="0.5" />
+          <line x1="-6" y1="-48" x2="6" y2="-60" stroke="var(--delta-bright)" stroke-width="0.5" />
+          <line x1="6" y1="-48" x2="-6" y2="-60" stroke="var(--delta-bright)" stroke-width="0.5" />
+          <line x1="-6" y1="-16" x2="-6" y2="-60" stroke="var(--delta-bright)" stroke-width="0.5" />
+          <line x1="6" y1="-16" x2="6" y2="-60" stroke="var(--delta-bright)" stroke-width="0.5" />
+          <!-- whip antenna -->
+          <line x1="-4" y1="-90" x2="4" y2="-90" stroke="var(--delta-bright)" stroke-width="1" />
+          <line x1="0" y1="-90" x2="0" y2="-104" stroke="var(--delta-bright)" stroke-width="0.8" />
+          <!-- enclosure / base -->
+          <rect x="-16" y="-10" width="32" height="10" fill="#11162a" stroke="var(--delta-bright)" stroke-width="0.8" />
+          <rect x="-2" y="-4" width="4" height="2" fill="var(--amber)" />
+          <!-- label -->
+          <text x="0" y="20" text-anchor="middle" font-family="Saira Condensed" font-size="13" font-weight="600" fill="#f0f3f7" letter-spacing="0.06em">GATEWAY</text>
+          <text x="0" y="34" text-anchor="middle" font-family="Space Mono" font-size="9" fill="#8a93a6">LoRaWAN RX · IP FORWARDER</text>
+        </g>
+
+        <!-- 3. Mission operations server (far right, on the ground) -->
+        <g transform="translate(990, 380)">
+          <!-- server rack -->
+          <rect x="-22" y="-36" width="44" height="8" fill="#11162a" stroke="var(--delta-bright)" stroke-width="0.7" />
+          <rect x="-22" y="-26" width="44" height="8" fill="#11162a" stroke="var(--delta-bright)" stroke-width="0.7" />
+          <rect x="-22" y="-16" width="44" height="8" fill="#11162a" stroke="var(--delta-bright)" stroke-width="0.7" />
+          <circle cx="-14" cy="-32" r="1.2" fill="var(--amber)" />
+          <circle cx="-14" cy="-22" r="1.2" fill="var(--amber)" />
+          <circle cx="-14" cy="-12" r="1.2" fill="var(--delta-bright)" />
+          <text x="0" y="20" text-anchor="middle" font-family="Saira Condensed" font-size="13" font-weight="600" fill="#f0f3f7" letter-spacing="0.06em">OPS SERVER</text>
+          <text x="0" y="34" text-anchor="middle" font-family="Space Mono" font-size="9" fill="#8a93a6">INGEST · QC · BROADCAST</text>
+        </g>
+
+        <!-- 4. Operator dashboard (far right) -->
+        <g transform="translate(1100, 380)">
+          <rect x="-20" y="-30" width="40" height="26" fill="#11162a" stroke="var(--delta-bright)" stroke-width="0.8" />
+          <rect x="-16" y="-26" width="32" height="3" fill="var(--delta-bright)" opacity="0.6" />
+          <rect x="-16" y="-20" width="20" height="2" fill="var(--ink-dim)" opacity="0.6" />
+          <rect x="-16" y="-16" width="28" height="2" fill="var(--ink-dim)" opacity="0.6" />
+          <rect x="-16" y="-12" width="14" height="2" fill="var(--amber)" />
+          <rect x="-6" y="-4" width="12" height="3" fill="#0a0d18" stroke="var(--delta-bright)" stroke-width="0.5" />
+          <text x="0" y="20" text-anchor="middle" font-family="Saira Condensed" font-size="13" font-weight="600" fill="#f0f3f7" letter-spacing="0.06em">OPERATOR</text>
+          <text x="0" y="34" text-anchor="middle" font-family="Space Mono" font-size="9" fill="#8a93a6">DASHBOARD</text>
+        </g>
+
+        <!-- arcs -->
+        <!-- Payload → Gateway (long line-of-sight diagonal) -->
+        <path id="archP1" d="M 222 156 Q 460 220, 720 350"
+              stroke="var(--delta-bright)" stroke-width="1.4" fill="none"
+              stroke-dasharray="4 6">
+          <animate attributeName="stroke-dashoffset" from="0" to="-20" dur="1.4s" repeatCount="indefinite" />
+        </path>
+        <!-- Gateway → Ops Server (ground IP hop) -->
+        <path id="archP2" d="M 738 374 L 968 374"
+              stroke="var(--delta-bright)" stroke-width="1.4" fill="none"
+              stroke-dasharray="4 6">
+          <animate attributeName="stroke-dashoffset" from="0" to="-20" dur="1.4s" repeatCount="indefinite" />
+        </path>
+        <!-- Ops Server → Dashboard -->
+        <path id="archP3" d="M 1012 374 L 1080 374"
+              stroke="var(--delta-bright)" stroke-width="1.4" fill="none"
+              stroke-dasharray="4 6">
+          <animate attributeName="stroke-dashoffset" from="0" to="-20" dur="1.4s" repeatCount="indefinite" />
+        </path>
+
+        <!-- relay numbers -->
+        <g font-family="Space Mono" font-size="10" fill="var(--delta-bright)" letter-spacing="0.10em">
+          <circle cx="470" cy="240" r="12" fill="var(--void)" stroke="var(--delta-bright)" stroke-width="1" />
+          <text x="470" y="244" text-anchor="middle">UL</text>
+          <text x="470" y="266" text-anchor="middle" fill="#8a93a6" font-size="9">RF UPLINK · 903.9 MHz</text>
+
+          <circle cx="853" cy="374" r="12" fill="var(--void)" stroke="var(--delta-bright)" stroke-width="1" />
+          <text x="853" y="378" text-anchor="middle">IP</text>
+          <text x="853" y="400" text-anchor="middle" fill="#8a93a6" font-size="9">INTERNET FORWARD</text>
+
+          <circle cx="1046" cy="374" r="12" fill="var(--void)" stroke="var(--delta-bright)" stroke-width="1" />
+          <text x="1046" y="378" text-anchor="middle">UI</text>
+        </g>
+
+        <!-- data packets riding the line -->
+        <g>
+          <rect x="-6" y="-4" width="12" height="8" fill="var(--amber)" opacity="0.9">
+            <animateMotion dur="4s" repeatCount="indefinite" rotate="auto">
+              <mpath href="#archP1" />
+            </animateMotion>
+          </rect>
+          <rect x="-6" y="-4" width="12" height="8" fill="var(--amber)" opacity="0.9">
+            <animateMotion dur="4s" repeatCount="indefinite" rotate="auto" begin="0.8s">
+              <mpath href="#archP2" />
+            </animateMotion>
+          </rect>
+        </g>
+
+        <!-- footer -->
+        <text x="590" y="445" text-anchor="middle" font-family="Space Mono" font-size="9" fill="#5a6172" letter-spacing="0.18em">FIG. 02-A · TT&amp;C PATH · PAYLOAD → GATEWAY → INTERNET → OPS</text>
+      </svg>
+    </div>
+
+    <div class="arch-callout">
+      <div class="callout reveal delay-1">
+        <div class="label">SPECTRUM / LICENSING</div>
+        <h4>No amateur radio license required.</h4>
+        <p>The payload transmits over <strong>LoRaWAN</strong> — a long-range RF protocol operating in the unlicensed 902–928 MHz ISM band. The gateway forwards each packet over standard internet to the mission operations server. No HAM exam, no call sign, no instructor certification.</p>
+      </div>
+      <div class="callout reveal delay-2">
+        <div class="label">OPERATIONAL EQUIVALENCE</div>
+        <h4>Same cognitive task as a USSF Mission Operator.</h4>
+        <p>Cadets read telemetry, interpret sensor fusion data, recognize anomalies, and apply contingency procedures. The platform compresses the satellite-operations skill stack into a multi-hour observable mission.</p>
+      </div>
+    </div>
+
+    <!-- ── PAYLOAD HARDWARE ── -->
+    <div style="margin-top: 96px;">
+      <div class="sec-id reveal">02-B / PAYLOAD HARDWARE <span class="meta">· ANNOTATED SUBSYSTEMS</span></div>
+      <h3 class="reveal" style="font-size: clamp(28px, 3.5vw, 44px); margin-bottom: 16px;">Six integrated subsystems. One spacecraft.</h3>
+      <p class="reveal delay-1" style="max-width: 720px; margin-bottom: 8px;">Every Stratolink payload is the same flight-qualified hardware. The annotated view below identifies each subsystem and its operational role.</p>
+
+      <div class="payload-stage reveal delay-2">
+        <div class="payload-photo">
+          <!-- ╔══════════════════════════════════════════════════
+               PAYLOAD PHOTO SLOT
+               Drop your payload image into the chat and I'll
+               place it here. Recommended:
+                 • Top-down photo, even lighting, dark backdrop
+                 • PNG or JPG, 1600px+ wide
+                 • Components clearly visible (no labels added)
+               Pin positions below will be tuned to your photo.
+               ╚══════════════════════════════════════════════════ -->
+          <div class="placeholder">
+            <div class="ic">
+              <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
+                <rect x="3" y="5" width="16" height="12" stroke="currentColor" stroke-width="1.5" />
+                <circle cx="11" cy="11" r="3" stroke="currentColor" stroke-width="1.5" />
+                <rect x="8" y="3" width="6" height="2" fill="currentColor" />
+              </svg>
+            </div>
+            <div class="h">Payload photo placeholder</div>
+            <div class="p">Drop your payload image into the chat and I'll swap it in here. Numbered callout pins below will be re-positioned to land on the real components.</div>
+            <div class="spec">RECOMMENDED · 1600 PX · TOP-DOWN · DARK BACKDROP</div>
+          </div>
+
+          <!-- Numbered callout pins — positions are placeholders, tunable per photo -->
+          <div class="pin" style="left: 32%; top: 38%;">1</div>
+          <div class="pin" style="left: 56%; top: 30%;">2</div>
+          <div class="pin" style="left: 70%; top: 48%;">3</div>
+          <div class="pin" style="left: 42%; top: 62%;">4</div>
+          <div class="pin" style="left: 22%; top: 70%;">5</div>
+          <div class="pin" style="left: 80%; top: 70%;">6</div>
+        </div>
+
+        <div class="payload-specs">
+          <div class="head">SUBSYSTEM INDEX</div>
+          <div class="spec-row">
+            <span class="n">01</span>
+            <div>
+              <div class="name">Compute</div>
+              <div class="role">Flight computer · mission state machine · sensor scheduler</div>
+            </div>
+            <span class="stat">RP2040 · DUAL-M0+</span>
+          </div>
+          <div class="spec-row">
+            <span class="n">02</span>
+            <div>
+              <div class="name">Positioning</div>
+              <div class="role">GNSS receiver · multi-constellation · sub-3 m accuracy</div>
+            </div>
+            <span class="stat">u-blox MAX-M10S</span>
+          </div>
+          <div class="spec-row">
+            <span class="n">03</span>
+            <div>
+              <div class="name">RF Uplink</div>
+              <div class="role">LoRaWAN transceiver · 903.9 MHz · +20 dBm TX</div>
+            </div>
+            <span class="stat">Semtech SX1276</span>
+          </div>
+          <div class="spec-row">
+            <span class="n">04</span>
+            <div>
+              <div class="name">Atmosphere</div>
+              <div class="role">Temperature · pressure · relative humidity · calibrated</div>
+            </div>
+            <span class="stat">Bosch BME280</span>
+          </div>
+          <div class="spec-row">
+            <span class="n">05</span>
+            <div>
+              <div class="name">Power</div>
+              <div class="role">LiPo + solar harvesting · battery management · boost</div>
+            </div>
+            <span class="stat">TPS61023 / BQ25180</span>
+          </div>
+          <div class="spec-row">
+            <span class="n">06</span>
+            <div>
+              <div class="name">Antenna</div>
+              <div class="role">Quarter-wave whip · 50 Ω matched · 2.1 dBi gain</div>
+            </div>
+            <span class="stat">82 mm · 903 MHz</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════
+     03 · WHAT STUDENTS ACTUALLY DO
+     ════════════════════════════════════════════════════════════ -->
+<section>
+  <div class="wrap">
+    <div class="sec-id reveal">03 / MISSION PHASES <span class="meta">· OPERATIONAL FLOW</span></div>
+    <h2 class="reveal">Three Phases. Real Data. Real Decisions.</h2>
+    <p class="lede reveal delay-1" style="margin-top: 24px;">Drawn directly from <strong>Test Flight 003</strong>, recorded over 6h 42m of stratospheric float. Each phase is graded against the actual telemetry on the operator's screen.</p>
+
+    <div class="phases">
+      <div class="phase reveal delay-1">
+        <div class="phase-id">PHASE 01 · T-72:00 → T-00:00</div>
+        <div class="phase-title">Pre-Mission</div>
+        <ul>
+          <li>Atmospheric layer structure (troposphere → stratosphere)</li>
+          <li>Gas laws — Boyle, Charles, ideal gas</li>
+          <li>Free-lift calculation &amp; float-altitude trim</li>
+          <li>Trajectory prediction from GFS wind sounding</li>
+          <li>Comms link budget &amp; uplink window planning</li>
+        </ul>
+        <div class="phase-data">
+          <div class="k">REFERENCE FIGURE</div>
+          <div class="v">9,480 – 9,500 m</div>
+          <div class="sub">Predicted float altitude · TF-003 · matched flight result within 1.2%</div>
+        </div>
+      </div>
+
+      <div class="phase reveal delay-2">
+        <div class="phase-id">PHASE 02 · T+00:00 → T+06:42</div>
+        <div class="phase-title">Launch &amp; Operations</div>
+        <ul>
+          <li>Live telemetry monitoring — altitude, pressure, temperature, RSSI</li>
+          <li>Mission cadence — uplink intervals, packet sequence integrity</li>
+          <li>Sensor-fusion contingency — GPS freeze recognition</li>
+          <li>Pressure-based altitude fallback (barometric solve)</li>
+          <li>Drift vector estimation against forecast</li>
+        </ul>
+        <div class="phase-data">
+          <div class="k">CONTINGENCY EVENT</div>
+          <div class="v">GPS freeze @ 6,924 m</div>
+          <div class="sub">Pressure fallback engaged · mission continuous · no lost telemetry</div>
+        </div>
+      </div>
+
+      <div class="phase reveal delay-3">
+        <div class="phase-id">PHASE 03 · T+06:42 → DEBRIEF</div>
+        <div class="phase-title">Post-Mission</div>
+        <ul>
+          <li>Ascent rate &amp; descent profile reconstruction</li>
+          <li>Wind vector solve from position deltas</li>
+          <li>Sensor calibration cross-check vs reference</li>
+          <li>Mission report — anomalies, decisions, outcomes</li>
+          <li>Data archive published to mission library</li>
+        </ul>
+        <div class="phase-data">
+          <div class="k">ASCENT RATE (AVG)</div>
+          <div class="v">0.70 m/s</div>
+          <div class="sub">3.6 hr to float · TF-003 · within nominal envelope</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════
+     04 · MISSION OPERATIONS DASHBOARD
+     ════════════════════════════════════════════════════════════ -->
+<section>
+  <div class="wrap">
+    <div class="sec-id reveal">04 / OPERATIONS SURFACE <span class="meta">· MISSION DASHBOARD</span></div>
+    <h2 class="reveal">Their Mission. Their Name. Their Designation.</h2>
+    <p class="lede reveal delay-1" style="margin-top: 24px;">The dashboard is fully customizable. Unit name, mission ID, cadet Mission Commander. Shareable link to parents, administrators, and community leadership. <strong>Every launch is a recruitment event.</strong></p>
+
+    <div class="dash reveal delay-2">
+      <div class="dash-head">
+        <div class="id">
+          <span class="delta-mark"></span>
+          <strong>USSF CADET MISSION 001</strong>
+          <span>·</span>
+          <span id="unit-name">JROTC UNIT TX-441</span>
+        </div>
+        <div class="status">
+          <span class="live-tag">TELEMETRY LIVE</span>
+          <span id="utc-time">21:51:42 UTC</span>
+          <span>STATE · FLOAT</span>
+        </div>
+      </div>
+      <div class="dash-body">
+        <div class="dash-map">
+          <svg viewBox="0 0 640 480" preserveAspectRatio="xMidYMid slice" width="100%" height="100%">
+            <rect width="640" height="480" fill="#050810" />
+            <!-- grid -->
+            <g stroke="rgba(58,93,150,0.10)">
+              <line x1="0" y1="80" x2="640" y2="80" />
+              <line x1="0" y1="160" x2="640" y2="160" />
+              <line x1="0" y1="240" x2="640" y2="240" />
+              <line x1="0" y1="320" x2="640" y2="320" />
+              <line x1="0" y1="400" x2="640" y2="400" />
+              <line x1="80" y1="0" x2="80" y2="480" />
+              <line x1="160" y1="0" x2="160" y2="480" />
+              <line x1="240" y1="0" x2="240" y2="480" />
+              <line x1="320" y1="0" x2="320" y2="480" />
+              <line x1="400" y1="0" x2="400" y2="480" />
+              <line x1="480" y1="0" x2="480" y2="480" />
+              <line x1="560" y1="0" x2="560" y2="480" />
+            </g>
+            <!-- abstract continent outlines -->
+            <g stroke="rgba(58,93,150,0.30)" fill="none" stroke-width="0.8">
+              <path d="M 30 140 Q 100 100, 180 130 L 220 200 Q 260 220, 280 280 L 240 340 Q 180 320, 140 280 L 80 240 Z" />
+              <path d="M 320 160 L 380 140 L 420 200 L 410 320 L 360 380 L 320 340 Z" />
+              <path d="M 220 360 L 280 360 L 290 440 L 250 470 L 220 440 Z" />
+              <path d="M 440 120 L 580 110 L 600 200 L 540 240 L 460 200 Z" />
+            </g>
+            <!-- flight path -->
+            <path d="M 100 320 Q 180 280, 240 260 Q 320 240, 380 230 Q 440 222, 480 220"
+                  stroke="var(--delta-bright)" stroke-width="1.4" fill="none" stroke-dasharray="3 3" opacity="0.7" />
+            <!-- payload marker -->
+            <g transform="translate(380, 230)">
+              <circle r="18" fill="var(--amber)" opacity="0.12" />
+              <circle r="10" fill="var(--amber)" opacity="0.22" />
+              <rect x="-3" y="-3" width="6" height="6" fill="var(--amber)" />
+              <line x1="-18" y1="0" x2="-7" y2="0" stroke="var(--amber)" stroke-width="0.8" />
+              <line x1="7" y1="0" x2="18" y2="0" stroke="var(--amber)" stroke-width="0.8" />
+              <line x1="0" y1="-18" x2="0" y2="-7" stroke="var(--amber)" stroke-width="0.8" />
+              <line x1="0" y1="7" x2="0" y2="18" stroke="var(--amber)" stroke-width="0.8" />
+            </g>
+            <text x="402" y="228" font-family="Space Mono" font-size="10" fill="var(--amber)" letter-spacing="0.05em">USSF-CDT-001</text>
+            <text x="402" y="240" font-family="Space Mono" font-size="9" fill="rgba(240,243,247,0.55)" id="coord-text">37.78° N · -122.40° W</text>
+            <!-- compass + scale -->
+            <g transform="translate(580, 50)">
+              <circle r="14" fill="none" stroke="rgba(58,93,150,0.36)" />
+              <text x="0" y="-18" text-anchor="middle" font-family="Space Mono" font-size="9" fill="var(--delta-bright)">N</text>
+              <line x1="0" y1="-10" x2="0" y2="-6" stroke="var(--delta-bright)" stroke-width="1.2" />
+            </g>
+            <g transform="translate(40, 440)">
+              <line x1="0" y1="0" x2="80" y2="0" stroke="rgba(58,93,150,0.36)" />
+              <line x1="0" y1="-3" x2="0" y2="3" stroke="rgba(58,93,150,0.36)" />
+              <line x1="80" y1="-3" x2="80" y2="3" stroke="rgba(58,93,150,0.36)" />
+              <text x="40" y="14" text-anchor="middle" font-family="Space Mono" font-size="9" fill="#5a6172">1000 KM</text>
+            </g>
+          </svg>
+        </div>
+        <div class="dash-reads">
+          <div class="read">
+            <div>
+              <div class="k">Altitude</div>
+              <div class="v"><span id="r-alt">9,487</span><span class="u">m</span></div>
+            </div>
+            <div class="t" id="r-alt-t">↑ stable · float band</div>
+          </div>
+          <div class="read">
+            <div>
+              <div class="k">Temperature</div>
+              <div class="v"><span id="r-temp">-48.6</span><span class="u">°C</span></div>
+            </div>
+            <div class="t">stratosphere · nominal</div>
+          </div>
+          <div class="read">
+            <div>
+              <div class="k">Pressure</div>
+              <div class="v"><span id="r-pres">282.4</span><span class="u">hPa</span></div>
+            </div>
+            <div class="t">barometric · cross-validated</div>
+          </div>
+          <div class="read">
+            <div>
+              <div class="k">Ground Speed</div>
+              <div class="v"><span id="r-spd">38.2</span><span class="u">m/s</span></div>
+            </div>
+            <div class="t">jet stream · hdg 067°</div>
+          </div>
+          <div class="read">
+            <div>
+              <div class="k">Mission Elapsed</div>
+              <div class="v"><span id="r-met">04:42:13</span></div>
+            </div>
+            <div class="t">since release</div>
+          </div>
+          <div class="read">
+            <div>
+              <div class="k">Telemetry RSSI</div>
+              <div class="v"><span id="r-rssi">-94</span><span class="u">dBm</span></div>
+            </div>
+            <div class="t">link nominal · 12 sats</div>
+          </div>
+        </div>
+      </div>
+      <div class="dash-foot">
+        <span>UPLINK <span id="ul-age">23s</span> · NEXT PING <span id="np">04:42</span></span>
+        <span>USSF VISUAL IDENTITY · UNIT-CUSTOMIZABLE · SHAREABLE</span>
+      </div>
+    </div>
+
+    <p class="dash-msg reveal delay-3">The dashboard skin shown here is one of several available unit configurations. Add your unit insignia, your mission designation, your cadet's name in the commander field. The shareable URL goes to families, school leadership, base commands, and elected officials.</p>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════
+     05 · RECRUITMENT PIPELINE
+     ════════════════════════════════════════════════════════════ -->
+<section>
+  <div class="wrap">
+    <div class="sec-id reveal">05 / STRATEGIC RATIONALE <span class="meta">· FOR DECISION MAKERS</span></div>
+
+    <div class="recruit-pitch reveal delay-1">
+      <h2>The cadet who tracks a satellite mission at <em>thirteen</em><br>applies to Space Force at <em>eighteen</em>.</h2>
+    </div>
+
+    <div class="recruit-args">
+      <div class="recruit-arg reveal delay-1">
+        <div class="num">ARG-01</div>
+        <h4>Space Force is the most technical branch.</h4>
+        <p>Operators need fluency in satellite communications, telemetry interpretation, sensor fusion, mission planning, and contingency response — all of it on day one. Stratolink delivers experiential reps in every one of those domains before the recruit ever sees a recruiter.</p>
+      </div>
+      <div class="recruit-arg reveal delay-2">
+        <div class="num">ARG-02</div>
+        <h4>Hands-on at the right age.</h4>
+        <p>The cognitive and emotional foundation for mission-operations thinking is built between ages 11 and 16. Watching your own satellite cross an ocean is the same emotional pattern as monitoring a real spacecraft in a real ops center. We are scaffolding the operator's intuition early.</p>
+      </div>
+      <div class="recruit-arg reveal delay-3">
+        <div class="num">ARG-03</div>
+        <h4>No equivalent platform exists.</h4>
+        <p>No other classroom tool teaches end-to-end satellite communications experientially at this scale or price point. Robotics kits don't transmit. Model rockets don't have payloads. Stratolink is the only K-12-accessible platform that runs a real spacecraft mission stack.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════
+     06 · PROGRAM FORMATS
+     ════════════════════════════════════════════════════════════ -->
+<section id="formats">
+  <div class="wrap">
+    <div class="sec-id reveal">06 / DEPLOYMENT OPTIONS <span class="meta">· PROGRAM FORMATS</span></div>
+    <h2 class="reveal">Three Mission Packages.</h2>
+    <p class="lede reveal delay-1" style="margin-top: 24px;">Each format is configured around a different operational tempo, from single-event recruiting demos through semester-long unit programs to public outreach.</p>
+
+    <div class="formats">
+      <div class="format reveal delay-1">
+        <div class="ic">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="3" y="3" width="14" height="14" stroke="currentColor" stroke-width="1.5" /><rect x="8" y="8" width="4" height="4" fill="currentColor" /></svg>
+        </div>
+        <h3>Single Launch Event</h3>
+        <p>One payload, one mission. A standalone demonstration sized for an open-house, recruitment day, or commemorative launch.</p>
+        <dl>
+          <dt>Duration</dt><dd>4–8 hours, single day</dd>
+          <dt>Personnel</dt><dd>1 instructor, up to 30 cadets</dd>
+          <dt>Output</dt><dd>Live dashboard + flight report</dd>
+          <dt>Use case</dt><dd>Recruitment event, open house</dd>
+        </dl>
+        <div class="target">FOR · RECRUITERS · SFA CHAPTERS</div>
+      </div>
+
+      <div class="format reveal delay-2">
+        <div class="ic">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="3" y="3" width="4" height="4" stroke="currentColor" stroke-width="1.2" /><rect x="13" y="3" width="4" height="4" stroke="currentColor" stroke-width="1.2" /><rect x="3" y="13" width="4" height="4" stroke="currentColor" stroke-width="1.2" /><rect x="13" y="13" width="4" height="4" stroke="currentColor" stroke-width="1.2" /><line x1="7" y1="5" x2="13" y2="5" stroke="currentColor" stroke-width="1.2" /><line x1="5" y1="7" x2="5" y2="13" stroke="currentColor" stroke-width="1.2" /><line x1="15" y1="7" x2="15" y2="13" stroke="currentColor" stroke-width="1.2" /><line x1="7" y1="15" x2="13" y2="15" stroke="currentColor" stroke-width="1.2" /></svg>
+        </div>
+        <h3>JROTC Unit Program</h3>
+        <p>Multiple launches over a semester. Each cadet cohort runs a named mission and rotates through the Mission Commander role. Curriculum-integrated.</p>
+        <dl>
+          <dt>Duration</dt><dd>1 semester (12–16 wk)</dd>
+          <dt>Personnel</dt><dd>1 instructor, 4–6 cohorts</dd>
+          <dt>Output</dt><dd>Mission library, comparative debrief</dd>
+          <dt>Use case</dt><dd>Cadet program, classroom</dd>
+        </dl>
+        <div class="target">FOR · JROTC INSTRUCTORS</div>
+      </div>
+
+      <div class="format reveal delay-3">
+        <div class="ic">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="7" stroke="currentColor" stroke-width="1.2" fill="none" /><circle cx="10" cy="10" r="3" fill="currentColor" /><line x1="10" y1="1" x2="10" y2="3" stroke="currentColor" stroke-width="1.2" /><line x1="10" y1="17" x2="10" y2="19" stroke="currentColor" stroke-width="1.2" /><line x1="1" y1="10" x2="3" y2="10" stroke="currentColor" stroke-width="1.2" /><line x1="17" y1="10" x2="19" y2="10" stroke="currentColor" stroke-width="1.2" /></svg>
+        </div>
+        <h3>Community Outreach Event</h3>
+        <p>Public launch with the mission dashboard mirrored to a large display. Designed for air shows, base open days, SFA chapter events, and recruitment drives.</p>
+        <dl>
+          <dt>Duration</dt><dd>Single-day event, 6+ hr</dd>
+          <dt>Audience</dt><dd>100–2,000+ public</dd>
+          <dt>Output</dt><dd>Live shared dashboard, archive</dd>
+          <dt>Use case</dt><dd>Air shows, public events</dd>
+        </dl>
+        <div class="target">FOR · SFA CHAPTERS · OUTREACH</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════
+     07 · ALIGNMENT
+     ════════════════════════════════════════════════════════════ -->
+<section>
+  <div class="wrap">
+    <div class="sec-id reveal">07 / CURRICULUM ALIGNMENT <span class="meta">· MISSION DOMAIN MAPPING</span></div>
+    <h2 class="reveal">Mission Domains → Space Force Career Fields.</h2>
+    <p class="lede reveal delay-1" style="margin-top: 24px;">Every mission domain Stratolink trains maps to a defined Space Force operational specialty.</p>
+
+    <div class="align-grid">
+      <div class="align reveal delay-1">
+        <div class="align-row1">
+          <h4>Satellite Communications Architecture</h4>
+          <div class="afsc">AFSC · 1C6X1</div>
+        </div>
+        <p>End-to-end uplink/downlink path, antenna gain, link budget, frequency planning, packet structure. Students set up and validate the comms link before launch.</p>
+      </div>
+      <div class="align reveal delay-2">
+        <div class="align-row1">
+          <h4>Telemetry Interpretation &amp; Sensor Fusion</h4>
+          <div class="afsc">AFSC · 1C5X1</div>
+        </div>
+        <p>Reading multi-channel telemetry under noise, recognizing anomalies, cross-validating one sensor against another (TF-003 GPS freeze · pressure fallback).</p>
+      </div>
+      <div class="align reveal delay-3">
+        <div class="align-row1">
+          <h4>Atmospheric &amp; Orbital Science</h4>
+          <div class="afsc">AFSC · 15WX</div>
+        </div>
+        <p>Standard atmosphere, gas laws, buoyancy and equilibrium, jet stream behavior. Foundation for orbital mechanics, re-entry, and high-altitude science.</p>
+      </div>
+      <div class="align reveal delay-4">
+        <div class="align-row1">
+          <h4>Mission Planning &amp; Contingency Operations</h4>
+          <div class="afsc">AFSC · 13S</div>
+        </div>
+        <p>Pre-flight prediction, in-flight monitoring, contingency procedure execution, post-mission debrief. The standard ops-officer skill stack at K-12 scale.</p>
+      </div>
+      <div class="align reveal delay-1">
+        <div class="align-row1">
+          <h4>Data Analysis &amp; Mission Debrief</h4>
+          <div class="afsc">AFSC · 1N0X1</div>
+        </div>
+        <p>Reconstruction from archived telemetry, anomaly root-cause, performance against prediction. Builds the analytical fluency intelligence operators rely on.</p>
+      </div>
+      <div class="align reveal delay-2">
+        <div class="align-row1">
+          <h4>Spacecraft &amp; Payload Systems</h4>
+          <div class="afsc">AFSC · 14NX</div>
+        </div>
+        <p>Sensor suite design, power budgeting, thermal envelope, payload mass, fault-tolerant operation. The same trade space as a real cubesat program — at student scale.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════
+     08 · PARTNERSHIP CTA
+     ════════════════════════════════════════════════════════════ -->
+<section class="cta" id="cta">
+  <div class="wrap">
+    <div class="marker reveal">PARTNERSHIP INQUIRY · MISSION BRIEF</div>
+    <h2 class="reveal delay-1">This isn't a science fair kit.<br><em>It's a mission platform.</em></h2>
+    <p class="lede reveal delay-2" style="margin: 0 auto 48px; text-align: center;">Briefings are available to USSF outreach offices, JROTC unit commanders, and SFA chapter coordinators. Each briefing includes technical architecture, mission profile, deployment options, and a live walkthrough of the operator dashboard.</p>
+    <div class="cta-actions reveal delay-3">
+      <a href="mailto:contact@stratolink.org" class="btn btn-pri">Request a Mission Brief →</a>
+      <a href="#" class="btn btn-ghost">Download Program Overview (PDF)</a>
+    </div>
+    <div class="cta-contact reveal delay-4">
+      Direct line · <a href="mailto:contact@stratolink.org">contact@stratolink.org</a> · STRATOLINK MISSION PARTNERSHIPS
+    </div>
+  </div>
+</section>
+
+<footer class="foot">
+  <div class="foot-in">
+    <span>© 2026 STRATOLINK · MISSION PARTNERSHIPS</span>
+    <span>
+      <a href="/">HOME</a> · <a href="/docs">DOCS</a> · <a href="mailto:contact@stratolink.org">CONTACT</a>
+    </span>
+  </div>
+</footer>

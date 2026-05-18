@@ -11,6 +11,11 @@
 import { useEffect, useMemo, useState, useCallback } from 'react';
 import { createClient } from '@/lib/supabase';
 import { altitudeFromPressureHpa } from '@/lib/atmosphere/isa';
+import {
+    fleetTelemetrySinceIso,
+    telemetrySinceIso,
+    type MissionWindowDevice,
+} from '@/lib/telemetry/missionWindow';
 import type { TelemetryRow, DeviceInfo } from './atoms';
 
 interface DeviceSummary {
@@ -297,7 +302,11 @@ export function useTelemetry({ initialSelectedId = null }: { initialSelectedId?:
                 if (devErr) throw devErr;
 
                 const ids = (rawDevices ?? []).map((d: any) => d.device_id);
-                const oneDayAgo = new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString();
+                const missionDevices: MissionWindowDevice[] = (rawDevices ?? []).map((d: any) => ({
+                    status: d.status,
+                    launchedAt: d.launched_at ? new Date(d.launched_at).getTime() : null,
+                }));
+                const fleetSince = fleetTelemetrySinceIso(missionDevices);
 
                 /* Latest contact per device — even sensor-only NOGPS rows count. */
                 const { data: contacts } = ids.length
@@ -305,7 +314,7 @@ export function useTelemetry({ initialSelectedId = null }: { initialSelectedId?:
                           .from('telemetry')
                           .select('device_id, time')
                           .in('device_id', ids)
-                          .gte('time', oneDayAgo)
+                          .gte('time', fleetSince)
                           .order('time', { ascending: false })
                     : { data: [] as Array<{ device_id: string; time: string }> };
 
@@ -322,7 +331,7 @@ export function useTelemetry({ initialSelectedId = null }: { initialSelectedId?:
                           .from('telemetry')
                           .select('device_id, lat, lon, altitude_m, time')
                           .in('device_id', ids)
-                          .gte('time', oneDayAgo)
+                          .gte('time', fleetSince)
                           .not('lat', 'is', null)
                           .not('lon', 'is', null)
                           .order('time', { ascending: false })
@@ -385,7 +394,7 @@ export function useTelemetry({ initialSelectedId = null }: { initialSelectedId?:
                         .from('telemetry')
                         .select('device_id, time, lat, lon, rssi')
                         .in('device_id', ids)
-                        .gte('time', oneDayAgo);
+                        .gte('time', fleetSince);
 
                     const safe: Array<{ device_id: string; time: string; lat: number | null; lon: number | null; rssi: number | null }> =
                         (aggRows ?? []) as any;
@@ -432,7 +441,8 @@ export function useTelemetry({ initialSelectedId = null }: { initialSelectedId?:
         return () => { cancelled = true; clearInterval(interval); };
     }, [tick, selectedId]);
 
-    /* Fetch the full last-24h row set for the selected device. Polls every 15s. */
+    /* Full mission row set for the selected device (since launch when flying).
+     * Polls every 15s. */
     useEffect(() => {
         if (!selectedId) {
             setRows([]);
@@ -443,19 +453,22 @@ export function useTelemetry({ initialSelectedId = null }: { initialSelectedId?:
         async function load() {
             try {
                 const supabase = createClient();
-                const oneDayAgo = new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString();
+                const summary = devices.find(d => d.id === selectedId);
+                const since = telemetrySinceIso({
+                    status: summary?.status,
+                    launchedAt: summary?.launchedAt ?? null,
+                });
                 const { data, error } = await supabase
                     .from('telemetry')
                     .select(FULL_TELEMETRY_COLUMNS)
                     .eq('device_id', selectedId)
-                    .gte('time', oneDayAgo)
+                    .gte('time', since)
                     .order('time', { ascending: true });
                 if (error) throw error;
                 if (cancelled) return;
                 const next = (data ?? []).map(rawToTelemetry);
                 setRows(next);
 
-                const summary = devices.find(d => d.id === selectedId);
                 /* Pull the most recent firmware_version that was actually
                  * reported. If the firmware never sends it, this stays null
                  * and the UI displays '—' — never a placeholder. */
