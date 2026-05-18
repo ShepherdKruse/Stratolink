@@ -9,12 +9,22 @@ export const FLIGHT_MAP_ANCHOR_CITIES = [
     'Ensenada',
 ] as const;
 
-/** Mapbox `match` requires scalar branch labels; use `in` with a literal array instead. */
-const anchorCityFilter = [
-    'in',
+/** Each city must be its own branch label — arrays are not valid in `match` / `in`. */
+const anchorCityFilter: FilterSpecification = [
+    'match',
     ['coalesce', ['get', 'name_en'], ['get', 'name']],
-    ['literal', [...FLIGHT_MAP_ANCHOR_CITIES]],
-] as const;
+    'San Francisco',
+    true,
+    'Los Angeles',
+    true,
+    'San Diego',
+    true,
+    'Tijuana',
+    true,
+    'Ensenada',
+    true,
+    false,
+];
 
 /** Duo-tone basemap: muted land/water, no roads, minimal labels. */
 export const FLIGHT_REPORT_MAP_STYLE: StyleSpecification = {
@@ -81,7 +91,7 @@ export const FLIGHT_REPORT_MAP_STYLE: StyleSpecification = {
             type: 'symbol',
             source: 'mapbox-streets',
             'source-layer': 'place_label',
-            filter: anchorCityFilter as unknown as FilterSpecification,
+            filter: anchorCityFilter,
             layout: {
                 'text-field': ['coalesce', ['get', 'name_en'], ['get', 'name']],
                 'text-font': ['DIN Pro Medium', 'Arial Unicode MS Regular'],
