@@ -2,6 +2,7 @@
 
 import { useMemo, useState } from 'react';
 import { SectionLabel, SlHeader, StackedLineChart } from './mobileStratolinkUi';
+import { altitudeFromPressureHpa } from '@/lib/atmosphere/isa';
 
 type TelemetryPoint = Record<string, unknown>;
 
@@ -11,14 +12,21 @@ function coerceNum(v: unknown): number | null {
     return Number.isFinite(n) ? n : null;
 }
 
-function toChart(rows: TelemetryPoint[]): Array<{ t: number; alt?: number | null; batt?: number | null; sol?: number | null; temp?: number | null; lux?: number | null; rssi?: number | null; sats?: number | null }> {
+function toChart(rows: TelemetryPoint[]): Array<{ t: number; alt?: number | null; presAlt?: number | null; pres?: number | null; batt?: number | null; sol?: number | null; temp?: number | null; lux?: number | null; rssi?: number | null; sats?: number | null }> {
     const out: Array<{ t: number } & Record<string, number | null | undefined>> = [];
     for (const r of rows) {
         const t = new Date(String(r.time)).getTime();
         if (Number.isNaN(t)) continue;
+        const pres = coerceNum(r.pressure);
         out.push({
             t,
             alt: coerceNum(r.altitude_m),
+            pres,
+            /* USSA-1976 pressure altitude is computed at the boundary so the
+             * chart and any per-row tooltip read the same value. The barometer
+             * keeps producing fresh readings even when the MAX-M10S has lost
+             * GPS lock — see web/lib/atmosphere/isa.ts header for context. */
+            presAlt: altitudeFromPressureHpa(pres),
             batt: coerceNum(r.battery_voltage),
             sol: coerceNum(r.solar_voltage),
             temp: coerceNum(r.temperature),
@@ -56,6 +64,8 @@ export default function MobileTelemetryTab({ deviceId, telemetryRows }: MobileTe
     const last = slice.at(-1);
     const lastBatt = coerceNum(last?.batt ?? null);
     const lastAlt = coerceNum(last?.alt ?? null);
+    const lastPresAlt = coerceNum(last?.presAlt ?? null);
+    const lastPres = coerceNum(last?.pres ?? null);
     const lastTemp = coerceNum(last?.temp ?? null);
     const lastSol = coerceNum(last?.sol ?? null);
     const lastLux = coerceNum(last?.lux ?? null);
@@ -108,7 +118,13 @@ export default function MobileTelemetryTab({ deviceId, telemetryRows }: MobileTe
             </div>
 
             <div className="min-h-0 flex-1 overflow-y-auto">
-                <StackedLineChart title="Altitude" valueDisplay={lastAlt != null ? Math.round(lastAlt) : '—'} unitSuffix=" m" data={slice} getY={(row) => row.alt ?? null} color="var(--ok)" />
+                {/* GPS altitude and pressure-derived altitude charted as
+                  * adjacent rows so the operator can spot divergence at a
+                  * glance. The pressure altitude is the more reliable of the
+                  * two when GPS is intermittent — see web/lib/atmosphere. */}
+                <StackedLineChart title="Altitude · GPS" valueDisplay={lastAlt != null ? Math.round(lastAlt) : '—'} unitSuffix=" m" data={slice} getY={(row) => row.alt ?? null} color="var(--ok)" />
+                <StackedLineChart title="Altitude · Pressure" valueDisplay={lastPresAlt != null ? Math.round(lastPresAlt) : '—'} unitSuffix=" m" data={slice} getY={(row) => row.presAlt ?? null} color="var(--ok)" />
+                <StackedLineChart title="Pressure" valueDisplay={lastPres != null ? lastPres.toFixed(1) : '—'} unitSuffix=" hPa" data={slice} getY={(row) => row.pres ?? null} color="var(--neutral)" />
                 <StackedLineChart
                     title="Battery"
                     valueDisplay={lastBatt != null ? lastBatt.toFixed(2) : '—'}
