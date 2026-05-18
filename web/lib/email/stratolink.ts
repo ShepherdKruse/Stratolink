@@ -37,9 +37,12 @@ export function getLaunchSignupNotifyRecipients(): string[] {
 }
 
 export function getFromAddress(): string {
+    // Google Workspace requires the from address to match the authenticated user
+    // or be a configured alias
+    const smtpUser = process.env.SMTP_USER
     return (
         process.env.SMTP_FROM_EMAIL ??
-        `Stratolink <${STRATOLINK_EMAILS.notifications}>`
+        (smtpUser ? `Stratolink <${smtpUser}>` : `Stratolink <${STRATOLINK_EMAILS.contact}>`)
     )
 }
 
