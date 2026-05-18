@@ -45,11 +45,14 @@ ${message}
             `.trim(),
         })
 
+        console.log('[v0] Email result:', result)
+        
         if (!result.success) {
-            console.error('[Stratolink] Contact form email error:', result.error)
+            console.error('[v0] Contact form email error:', result.error)
             return { success: false, error: 'Failed to send message. Please try again.' }
         }
 
+        console.log('[v0] Contact form email sent successfully')
         return { success: true }
     } catch (error) {
         console.error('[Stratolink] Contact form error:', error)

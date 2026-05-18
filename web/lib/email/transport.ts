@@ -46,18 +46,22 @@ export async function sendEmail(options: EmailOptions): Promise<{ success: boole
     try {
         const transport = getTransporter()
         
-        await transport.sendMail({
+        const toAddress = Array.isArray(options.to) ? options.to.join(', ') : options.to
+        console.log('[v0] Sending email:', { from: options.from, to: toAddress, subject: options.subject })
+        
+        const result = await transport.sendMail({
             from: options.from,
-            to: Array.isArray(options.to) ? options.to.join(', ') : options.to,
+            to: toAddress,
             replyTo: options.replyTo,
             subject: options.subject,
             text: options.text,
             html: options.html,
         })
 
+        console.log('[v0] Email sent successfully:', { messageId: result.messageId, response: result.response })
         return { success: true }
     } catch (error) {
-        console.error('[Stratolink] Email send error:', error)
+        console.error('[v0] Email send error:', error)
         return { 
             success: false, 
             error: error instanceof Error ? error.message : 'Failed to send email' 
