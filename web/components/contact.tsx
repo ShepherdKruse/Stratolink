@@ -7,6 +7,7 @@ import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Label } from "@/components/ui/label"
 import { submitContactForm } from "@/app/actions/contact"
+import { STRATOLINK_EMAILS } from "@/lib/email/stratolink"
 
 export function Contact() {
   const [formData, setFormData] = useState({
@@ -122,12 +123,21 @@ export function Contact() {
           </form>
 
           <div className="mt-8 border-t pt-8 text-center">
-            <p className="text-sm text-muted-foreground">
-              Or reach us directly at{" "}
-              <a href="mailto:contact@stratolink.org" className="font-normal text-foreground underline">
-                contact@stratolink.org
-              </a>
-            </p>
+            <p className="text-sm text-muted-foreground">Or reach us directly:</p>
+            <ul className="mt-3 space-y-1 text-sm">
+              {[
+                { label: 'General', addr: STRATOLINK_EMAILS.contact },
+                { label: 'Info', addr: STRATOLINK_EMAILS.info },
+                { label: 'Help', addr: STRATOLINK_EMAILS.help },
+              ].map(({ label, addr }) => (
+                <li key={addr}>
+                  <span className="text-muted-foreground">{label}: </span>
+                  <a href={`mailto:${addr}`} className="font-normal text-foreground underline">
+                    {addr}
+                  </a>
+                </li>
+              ))}
+            </ul>
           </div>
         </div>
       </div>
