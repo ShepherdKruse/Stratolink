@@ -1,9 +1,9 @@
 'use server'
 
-import { Resend } from 'resend'
+import { sendEmail, isEmailConfigured } from '@/lib/email/transport'
 import {
     getContactFormRecipients,
-    getResendFromAddress,
+    getFromAddress,
     STRATOLINK_EMAILS,
 } from '@/lib/email/stratolink'
 
@@ -17,20 +17,16 @@ interface ContactFormData {
 export async function submitContactForm(formData: ContactFormData) {
     const { name, organization, email, message } = formData
 
-    const apiKey = process.env.RESEND_API_KEY
-
-    if (!apiKey) {
+    if (!isEmailConfigured()) {
         return {
             success: false,
             error: `Email service not configured. Please contact us directly at ${STRATOLINK_EMAILS.contact}`,
         }
     }
 
-    const resend = new Resend(apiKey)
-
     try {
-        const { error } = await resend.emails.send({
-            from: getResendFromAddress(),
+        const result = await sendEmail({
+            from: getFromAddress(),
             to: getContactFormRecipients(),
             replyTo: email,
             subject: `Stratolink Contact: ${name}${organization ? ` (${organization})` : ""}`,
@@ -44,8 +40,8 @@ ${message}
             `.trim(),
         })
 
-        if (error) {
-            console.error('[Stratolink] Contact form email error:', error)
+        if (!result.success) {
+            console.error('[Stratolink] Contact form email error:', result.error)
             return { success: false, error: 'Failed to send message. Please try again.' }
         }
 
