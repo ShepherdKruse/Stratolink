@@ -53,6 +53,13 @@ export function DashboardShowcase() {
                         Real-time tracking, telemetry visualization, and fleet management in a unified interface.
                         Access your balloon network from any device with responsive design optimized for desktop and mobile.
                     </p>
+                    <p className="mt-4 text-sm text-muted-foreground">
+                        After a mission ends, read the full post-flight report in{' '}
+                        <Link href="/flights" className="underline underline-offset-2 hover:text-foreground">
+                            Prior flights
+                        </Link>
+                        .
+                    </p>
                 </div>
 
                 {/* View Toggle - Desktop Only */}
