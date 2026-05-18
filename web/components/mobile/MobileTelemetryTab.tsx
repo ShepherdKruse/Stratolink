@@ -12,7 +12,23 @@ function coerceNum(v: unknown): number | null {
     return Number.isFinite(n) ? n : null;
 }
 
-function toChart(rows: TelemetryPoint[]): Array<{ t: number; alt?: number | null; presAlt?: number | null; pres?: number | null; batt?: number | null; sol?: number | null; temp?: number | null; lux?: number | null; rssi?: number | null; sats?: number | null }> {
+/* Gateway count is derived per-row by reading rx_metadata.length from the
+ * `gateways` JSONB column. We tolerate either a parsed array (the normal
+ * Supabase path) or a JSON string in case an upstream cache stringifies it. */
+function gatewayCount(raw: unknown): number | null {
+    if (!raw) return null;
+    let arr: unknown = raw;
+    if (typeof raw === 'string') {
+        try {
+            arr = JSON.parse(raw);
+        } catch {
+            return null;
+        }
+    }
+    return Array.isArray(arr) ? arr.length : null;
+}
+
+function toChart(rows: TelemetryPoint[]): Array<{ t: number; alt?: number | null; presAlt?: number | null; pres?: number | null; batt?: number | null; sol?: number | null; temp?: number | null; lux?: number | null; rssi?: number | null; sats?: number | null; gws?: number | null }> {
     const out: Array<{ t: number } & Record<string, number | null | undefined>> = [];
     for (const r of rows) {
         const t = new Date(String(r.time)).getTime();
@@ -33,6 +49,7 @@ function toChart(rows: TelemetryPoint[]): Array<{ t: number; alt?: number | null
             lux: coerceNum(r.ambient_lux),
             rssi: coerceNum(r.rssi),
             sats: coerceNum(r.gps_satellites),
+            gws: gatewayCount(r.gateways),
         });
     }
     return out.sort((a, b) => a.t - b.t);
@@ -71,6 +88,7 @@ export default function MobileTelemetryTab({ deviceId, telemetryRows }: MobileTe
     const lastLux = coerceNum(last?.lux ?? null);
     const lastRssi = coerceNum(last?.rssi ?? null);
     const lastSats = coerceNum(last?.sats ?? null);
+    const lastGws = coerceNum(last?.gws ?? null);
 
     const label = rangeHr == null ? 'ALL' : RANGES.find((r) => r.hrs === rangeHr)?.label ?? 'ALL';
 
@@ -138,6 +156,11 @@ export default function MobileTelemetryTab({ deviceId, telemetryRows }: MobileTe
                 <StackedLineChart title="Temperature" valueDisplay={lastTemp != null ? lastTemp.toFixed(1) : '—'} unitSuffix=" °C" data={slice} getY={(row) => row.temp ?? null} />
                 <StackedLineChart title="Ambient lux" valueDisplay={lastLux != null ? String(Math.round(lastLux)) : '—'} unitSuffix=" lx" data={slice} getY={(row) => row.lux ?? null} color="var(--neutral)" />
                 <StackedLineChart title="RSSI" valueDisplay={lastRssi != null ? String(Math.round(lastRssi)) : '—'} unitSuffix=" dBm" data={slice} getY={(row) => row.rssi ?? null} />
+                {/* Gateway count traces link diversity — at altitude a healthy
+                  * pico-balloon hits 5–30 gateways per packet, and a sudden
+                  * collapse to 1 typically precedes loss of contact, so this
+                  * row is the most useful early-warning signal we have. */}
+                <StackedLineChart title="Gateways heard" valueDisplay={lastGws != null ? String(Math.round(lastGws)) : '—'} data={slice} getY={(row) => row.gws ?? null} min={0} color="var(--ok)" />
                 <StackedLineChart title="GPS satellites" valueDisplay={lastSats != null ? String(Math.round(lastSats)) : '—'} data={slice} getY={(row) => row.sats ?? null} min={0} max={28} />
 
                 <SectionLabel>Session</SectionLabel>

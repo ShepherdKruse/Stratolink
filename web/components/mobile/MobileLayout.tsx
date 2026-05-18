@@ -279,7 +279,7 @@ export default function MobileLayout({ initialBalloonId = null }: MobileLayoutPr
                     'time, lat, lon, altitude_m, battery_voltage, solar_voltage, temperature, pressure, ' +
                     'rssi, snr, gps_speed, gps_heading, gps_satellites, mems_accel_x, mems_accel_y, mems_accel_z, ' +
                     'uv_index, ambient_lux, acoustic_event, firmware_version, uptime_s, tx_count, hdop, ' +
-                    'power_mode, sleep_ms, lora_sf, lora_bw, frequency_hz';
+                    'power_mode, sleep_ms, lora_sf, lora_bw, frequency_hz, gateways';
 
                 const { data: pathData, error } = await supabase
                     .from('telemetry')

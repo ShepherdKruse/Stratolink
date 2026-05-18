@@ -9,7 +9,9 @@ import {
     type MobileFleetDeviceRow,
 } from './mobileStratolinkUtils';
 import MobilePositionPreviewMap from './MobilePositionPreviewMap';
+import MobileGatewayConstellation from './MobileGatewayConstellation';
 import { altitudeFromPressureHpa } from '@/lib/atmosphere/isa';
+import type { GatewayReception } from '../dashboard-v2/atoms';
 
 type TelemetryPoint = Record<string, unknown>;
 
@@ -44,6 +46,38 @@ function coerceNum(v: unknown): number | null {
     return Number.isFinite(n) ? n : null;
 }
 
+/* Defensive parse: JSONB usually arrives as an array, but if the postgres
+ * client (or a future cache) hands us a JSON string we still want the
+ * constellation to render rather than fall back to "no data". Anything that
+ * doesn't look like an array of {gateway_id} objects gets dropped. */
+function parseGateways(raw: unknown): GatewayReception[] | null {
+    if (!raw) return null;
+    let arr: unknown = raw;
+    if (typeof raw === 'string') {
+        try {
+            arr = JSON.parse(raw);
+        } catch {
+            return null;
+        }
+    }
+    if (!Array.isArray(arr)) return null;
+    const out: GatewayReception[] = [];
+    for (const item of arr) {
+        if (!item || typeof item !== 'object') continue;
+        const o = item as Record<string, unknown>;
+        if (typeof o.gateway_id !== 'string') continue;
+        out.push({
+            gateway_id: o.gateway_id,
+            rssi: coerceNum(o.rssi),
+            snr: coerceNum(o.snr),
+            lat: coerceNum(o.lat),
+            lon: coerceNum(o.lon),
+            alt: coerceNum(o.alt),
+        });
+    }
+    return out;
+}
+
 interface MobileDeviceDetailScreenProps {
     device: MobileFleetDeviceRow;
     telemetryRows: TelemetryPoint[];
@@ -61,6 +95,15 @@ export default function MobileDeviceDetailScreen({
 }: MobileDeviceDetailScreenProps) {
     const charts = chartRows(telemetryRows);
     const last = charts.length > 0 ? charts[charts.length - 1] : null;
+
+    /* The constellation reads from the latest packet's gateways list.
+     * Supabase JSONB comes back already-parsed in normal cases, but we tolerate
+     * the string-shaped path so a stale serialiser anywhere upstream doesn't
+     * blank the panel. */
+    const lastRawRow = telemetryRows[telemetryRows.length - 1] as
+        | Record<string, unknown>
+        | undefined;
+    const latestGateways = parseGateways(lastRawRow?.gateways);
     const batt = coerceNum(last?.batt) ?? coerceNum(device.battery_voltage);
     const alt = coerceNum(last?.alt) ?? (device.awaiting_gps ? null : device.altitude_m);
     const temp = coerceNum(last?.temp);
@@ -191,6 +234,19 @@ export default function MobileDeviceDetailScreen({
                         {fmtCoords(device.lat, device.lon)}
                     </div>
                 </div>
+
+                {/* Mobile gateway visualisation. We slot it between the position
+                  * map and the telemetry charts because, conceptually, "who heard
+                  * us, and how strongly" is a position-adjacent question — it
+                  * tells you about coverage geometry at the current point on the
+                  * map. Charts (the long scroll below) are reserved for time
+                  * series. The constellation handles its own empty state, so
+                  * rendering it unconditionally is fine. */}
+                <MobileGatewayConstellation
+                    gateways={latestGateways}
+                    balloonLat={device.awaiting_gps ? null : device.lat}
+                    balloonLon={device.awaiting_gps ? null : device.lon}
+                />
 
                 <SectionLabel right={<span style={{ fontFamily: 'var(--mono)', fontSize: 9, color: 'var(--text-dim2)' }}>{charts.length ? `${charts.length} pts` : '—'}</span>}>
                     Telemetry
