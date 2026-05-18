@@ -1,9 +1,18 @@
 import {
     Chart,
+    Filler,
+    LineController,
+    LineElement,
+    LinearScale,
+    PointElement,
+    Tooltip,
     type ChartConfiguration,
     type Plugin,
 } from 'chart.js';
 import type { FlightSample } from './types';
+
+/** Chart.js v4 tree-shaking — register scales/elements used by flight reports. */
+Chart.register(LineController, LineElement, PointElement, LinearScale, Tooltip, Filler);
 
 function rrect(
     ctx: CanvasRenderingContext2D,
