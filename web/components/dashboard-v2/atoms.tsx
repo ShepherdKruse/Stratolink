@@ -660,5 +660,6 @@ export const DASHBOARD_V2_TABS: ChromeTab[] = [
     { label: 'MISSION PLANNER', path: '/dashboard-v2/planner',   disabled: true },
     { label: 'MISSION CONTROL', path: '/dashboard-v2' },
     { label: 'DEVICE TRACKER',  path: '/dashboard-v2/device' },
+    { label: 'WIND OUTLOOK',    path: '/dashboard-v2/wind' },
     { label: 'TELEMETRY LAB',   path: '/dashboard-v2/lab' },
 ];

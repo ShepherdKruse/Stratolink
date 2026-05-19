@@ -74,6 +74,14 @@
     flex-shrink: 0;
     background: var(--sl-bg);
 }
+.sl-wind-credit a {
+    color: var(--sl-ok-mute);
+    text-decoration: none;
+}
+.sl-wind-credit a:hover {
+    text-decoration: underline;
+}
+
 .sl-brand {
     font-family: var(--sl-sans);
     font-weight: 500;
