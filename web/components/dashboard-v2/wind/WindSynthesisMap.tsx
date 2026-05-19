@@ -73,13 +73,6 @@ function obsTimeUtc(t: number): string {
     return new Date(t).toISOString();
 }
 
-function hasHourlyGapForecast(forecast: StratolinkForecast): boolean {
-    return (
-        forecast.metadata?.gap_wind_mode === 'hourly_series' ||
-        forecast.stale_gps?.wind_mode === 'hourly_series'
-    );
-}
-
 function shouldUseCachedForecast(
     forecast: StratolinkForecast,
     needsHourlyGap: boolean,
@@ -87,9 +80,10 @@ function shouldUseCachedForecast(
 ): boolean {
     const cachedHours = forecast.forecast_horizon_h ?? 24;
     if (cachedHours < forecastHours) return false;
-    // Stale GPS must use hourly back-drift; old cron blobs used a single "now" wind snapshot.
-    if (needsHourlyGap) return hasHourlyGapForecast(forecast);
-    return true;
+    // Stale GPS: gap grows every minute; cron blobs go stale quickly. Always recompute live.
+    if (needsHourlyGap) return false;
+    const cacheAgeMs = Date.now() - new Date(forecast.generated_at).getTime();
+    return cacheAgeMs <= 45 * 60_000;
 }
 
 function applyForecast(
@@ -125,8 +119,6 @@ export default function WindSynthesisMap({
     const didFitRef = useRef(false);
     const forecastOriginRef = useRef({ lat: startLat, lon: startLon });
     const levelHpa = snapPressureHpa(pressureHpa);
-    /** Avoid replacing a good live stale-gap forecast with an old cron blob after telemetry poll. */
-    const hasHourlyGapLiveRef = useRef(false);
     const skipNextStaleAutoRef = useRef(true);
     const propsRef = useRef({
         observedTrack,
@@ -171,7 +163,7 @@ export default function WindSynthesisMap({
         ? `${Math.floor(liveGapH)}h-${Math.floor(nowMs / STALE_GAP_REFRESH_MS)}`
         : 'fresh';
 
-    const loadForecast = useCallback(async (opts?: { staleAuto?: boolean }) => {
+    const loadForecast = useCallback(async (opts?: { staleAuto?: boolean; forceLive?: boolean }) => {
         const p = propsRef.current;
         if (p.observedTrack.length < 1 || !isValidLngLat(p.startLat, p.startLon)) return;
         forecastOriginRef.current = { lat: p.startLat, lon: p.startLon };
@@ -192,7 +184,7 @@ export default function WindSynthesisMap({
             const gpsGapH = lastObs ? (Date.now() - lastObs.t) / 3_600_000 : 0;
             const needsHourlyGap = gpsGapH >= 1;
 
-            if (!(needsHourlyGap && hasHourlyGapLiveRef.current && !opts?.staleAuto)) {
+            if (!opts?.forceLive && !opts?.staleAuto) {
                 const cached = await fetch(
                     `/api/forecast?device=${encodeURIComponent(p.deviceId)}&hours=${p.forecastHours}`,
                 );
@@ -200,7 +192,6 @@ export default function WindSynthesisMap({
                     const forecast = (await cached.json()) as StratolinkForecast;
                     if (shouldUseCachedForecast(forecast, needsHourlyGap, p.forecastHours)) {
                         applyForecast(forecast, p.showWind, setMc, setWindField);
-                        hasHourlyGapLiveRef.current = needsHourlyGap && hasHourlyGapForecast(forecast);
                         return;
                     }
                 }
@@ -228,19 +219,16 @@ export default function WindSynthesisMap({
             if (!res.ok) throw new Error(data.error ?? 'Forecast failed');
             const forecast = data as StratolinkForecast;
             applyForecast(forecast, p.showWind, setMc, setWindField);
-            hasHourlyGapLiveRef.current = needsHourlyGap && hasHourlyGapForecast(forecast);
         } catch (e) {
             setError(e instanceof Error ? e.message : 'Forecast failed');
             setMc(null);
             setWindField(null);
-            hasHourlyGapLiveRef.current = false;
         } finally {
             setLoading(false);
         }
     }, []);
 
     useEffect(() => {
-        hasHourlyGapLiveRef.current = false;
         skipNextStaleAutoRef.current = true;
         loadForecast();
         didFitRef.current = false;
@@ -256,7 +244,6 @@ export default function WindSynthesisMap({
             skipNextStaleAutoRef.current = false;
             return;
         }
-        hasHourlyGapLiveRef.current = false;
         loadForecast({ staleAuto: true });
     }, [staleRefreshKey, isStaleGps, loadForecast]);
 
@@ -517,7 +504,7 @@ export default function WindSynthesisMap({
                     disabled={loading}
                     onClick={() => {
                         didFitRef.current = false;
-                        loadForecast();
+                        loadForecast({ forceLive: true });
                     }}
                 >
                     {loading ? '…' : 'Refresh'}
