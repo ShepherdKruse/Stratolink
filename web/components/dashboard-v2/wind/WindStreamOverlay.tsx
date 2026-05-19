@@ -148,6 +148,9 @@ export default function WindStreamOverlay({
             });
         };
 
+        const ro = new ResizeObserver(() => resize());
+        if (canvas.parentElement) ro.observe(canvas.parentElement);
+
         resize();
         seed(map);
         rafRef.current = requestAnimationFrame(frame);
@@ -159,6 +162,7 @@ export default function WindStreamOverlay({
         return () => {
             running = false;
             cancelAnimationFrame(rafRef.current);
+            ro.disconnect();
             map.off('move', onMove);
             map.off('resize', resize);
             window.removeEventListener('resize', resize);

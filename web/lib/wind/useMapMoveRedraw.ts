@@ -31,7 +31,7 @@ export function useMapMoveRedraw(
         map.on('move', scheduleDraw);
         map.on('resize', onResize);
         window.addEventListener('resize', onResize);
-        scheduleDraw();
+        onResize();
 
         return () => {
             cancelAnimationFrame(raf);

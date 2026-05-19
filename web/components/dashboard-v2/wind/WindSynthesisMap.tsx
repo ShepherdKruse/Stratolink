@@ -11,7 +11,6 @@ import { boundsFromPoints, snapPressureHpa } from '@/lib/wind/fetchWindGrid';
 import type { EnsembleMember } from '@/lib/wind/driftEnsemble';
 import { splitTrackSegments } from '@/lib/wind/trackSegments';
 import type { WindField } from '@/lib/wind/types';
-import FlightTrackOverlay, { type TrackStroke } from './FlightTrackOverlay';
 import WindStreamOverlay from './WindStreamOverlay';
 import WindVectorOverlay from '../WindVectorOverlay';
 
@@ -51,6 +50,15 @@ function fmtDuration(ms: number): string {
     const h = Math.floor(ms / 3_600_000);
     const m = Math.floor((ms % 3_600_000) / 60_000);
     return `${h}h ${String(m).padStart(2, '0')}m`;
+}
+
+function lineGeoJson(coords: Array<[number, number]>) {
+    if (coords.length < 2) return null;
+    return {
+        type: 'Feature' as const,
+        geometry: { type: 'LineString' as const, coordinates: coords },
+        properties: {},
+    };
 }
 
 function haversineKm(lat1: number, lon1: number, lat2: number, lon2: number): number {
@@ -150,13 +158,19 @@ export default function WindSynthesisMap({
         };
     }, [ensembleCone]);
 
-    const ensembleStrokes = useMemo((): TrackStroke[] => {
-        return ensemble.map((m) => ({
-            coords: m.points.map((p) => [p.lon, p.lat] as [number, number]),
-            color: 'rgba(230, 208, 136, 0.35)',
-            width: 1.5,
-            dashed: true,
-        }));
+    const ensembleLinesGeoJson = useMemo(() => {
+        const features = ensemble
+            .map((m) => {
+                const coords = m.points.map((p) => [p.lon, p.lat] as [number, number]);
+                if (coords.length < 2) return null;
+                return {
+                    type: 'Feature' as const,
+                    geometry: { type: 'LineString' as const, coordinates: coords },
+                    properties: {},
+                };
+            })
+            .filter((f): f is NonNullable<typeof f> => f !== null);
+        return features.length ? { type: 'FeatureCollection' as const, features } : null;
     }, [ensemble]);
 
     const hourLabels = useMemo(() => {
@@ -201,9 +215,10 @@ export default function WindSynthesisMap({
     }, [observedTrack, forecast, ensemble, levelHpa, showWind]);
 
     useEffect(() => {
-        const t = window.setTimeout(loadWindGrid, 800);
+        if (!mapReady) return;
+        const t = window.setTimeout(loadWindGrid, 300);
         return () => window.clearTimeout(t);
-    }, [loadWindGrid]);
+    }, [loadWindGrid, mapReady]);
 
     const firstObs = observedTrack[0];
     const lastObs = observedTrack.length ? observedTrack[observedTrack.length - 1] : null;
@@ -263,53 +278,10 @@ export default function WindSynthesisMap({
     const obsCoords = segments.observed.map((p) => [p.lon, p.lat] as [number, number]);
     const resumedCoords = segments.resumed.map((p) => [p.lon, p.lat] as [number, number]);
 
-    const trackStrokes = useMemo((): TrackStroke[] => {
-        const strokes: TrackStroke[] = [];
-        if (segments.freezeDrift.length >= 2) {
-            strokes.push({
-                coords: segments.freezeDrift,
-                color: 'rgba(160, 175, 195, 0.9)',
-                width: 2.5,
-                dashed: true,
-                halo: true,
-                haloColor: 'rgba(0,0,0,0.5)',
-                haloWidth: 6,
-            });
-        }
-        if (obsCoords.length >= 2) {
-            strokes.push({
-                coords: obsCoords,
-                color: '#e86a2a',
-                width: 4,
-                halo: true,
-                haloColor: 'rgba(0,0,0,0.65)',
-                haloWidth: 10,
-            });
-        }
-        if (resumedCoords.length >= 2) {
-            strokes.push({
-                coords: resumedCoords,
-                color: '#e86a2a',
-                width: 3,
-                dashed: true,
-                halo: true,
-                haloColor: 'rgba(0,0,0,0.5)',
-                haloWidth: 8,
-            });
-        }
-        if (predCoords.length >= 2) {
-            strokes.push({
-                coords: predCoords,
-                color: '#f5e6a8',
-                width: 4,
-                dashed: true,
-                halo: true,
-                haloColor: 'rgba(0,0,0,0.7)',
-                haloWidth: 14,
-            });
-        }
-        return [...strokes, ...ensembleStrokes];
-    }, [segments.freezeDrift, obsCoords, resumedCoords, predCoords, ensembleStrokes]);
+    const freezeLine = useMemo(() => lineGeoJson(segments.freezeDrift), [segments.freezeDrift]);
+    const observedLine = useMemo(() => lineGeoJson(obsCoords), [obsCoords]);
+    const resumedLine = useMemo(() => lineGeoJson(resumedCoords), [resumedCoords]);
+    const predictedLine = useMemo(() => lineGeoJson(predCoords), [predCoords]);
 
     const token = process.env.NEXT_PUBLIC_MAPBOX_TOKEN;
     if (!token) {
@@ -429,6 +401,98 @@ export default function WindSynthesisMap({
                         </Source>
                     )}
 
+                    {ensembleLinesGeoJson && (
+                        <Source id="ws-ensemble" type="geojson" data={ensembleLinesGeoJson}>
+                            <Layer
+                                id="ws-ensemble-lines"
+                                type="line"
+                                paint={{
+                                    'line-color': 'rgba(230, 208, 136, 0.45)',
+                                    'line-width': 1.5,
+                                    'line-opacity': 0.7,
+                                    'line-dasharray': [2, 3],
+                                }}
+                            />
+                        </Source>
+                    )}
+
+                    {freezeLine && (
+                        <Source id="ws-freeze" type="geojson" data={freezeLine}>
+                            <Layer
+                                id="ws-freeze-line"
+                                type="line"
+                                paint={{
+                                    'line-color': 'rgba(160, 175, 195, 0.9)',
+                                    'line-width': 2.5,
+                                    'line-dasharray': [4, 4],
+                                    'line-opacity': 0.85,
+                                }}
+                            />
+                        </Source>
+                    )}
+
+                    {observedLine && (
+                        <Source id="ws-observed" type="geojson" data={observedLine}>
+                            <Layer
+                                id="ws-observed-halo"
+                                type="line"
+                                paint={{
+                                    'line-color': '#000000',
+                                    'line-width': 10,
+                                    'line-opacity': 0.45,
+                                }}
+                            />
+                            <Layer
+                                id="ws-observed-line"
+                                type="line"
+                                paint={{
+                                    'line-color': '#e86a2a',
+                                    'line-width': 4,
+                                    'line-opacity': 0.95,
+                                }}
+                            />
+                        </Source>
+                    )}
+
+                    {resumedLine && (
+                        <Source id="ws-resumed" type="geojson" data={resumedLine}>
+                            <Layer
+                                id="ws-resumed-line"
+                                type="line"
+                                paint={{
+                                    'line-color': '#e86a2a',
+                                    'line-width': 3,
+                                    'line-opacity': 0.9,
+                                    'line-dasharray': [5, 4],
+                                }}
+                            />
+                        </Source>
+                    )}
+
+                    {predictedLine && (
+                        <Source id="ws-predicted" type="geojson" data={predictedLine}>
+                            <Layer
+                                id="ws-predicted-halo"
+                                type="line"
+                                paint={{
+                                    'line-color': '#000000',
+                                    'line-width': 14,
+                                    'line-opacity': 0.5,
+                                }}
+                            />
+                            <Layer
+                                id="ws-predicted-line"
+                                type="line"
+                                paint={{
+                                    'line-color': '#f5e6a8',
+                                    'line-width': 4,
+                                    'line-opacity': 0.95,
+                                    'line-dasharray': [6, 5],
+                                }}
+                            />
+                        </Source>
+                    )}
+
                     {hourLabels.features.length > 0 && (
                         <Source id="ws-hours" type="geojson" data={hourLabels}>
                             <Layer
@@ -513,7 +577,6 @@ export default function WindSynthesisMap({
                     />
                 )}
 
-                <FlightTrackOverlay mapRef={mapRef} mapReady={mapReady} tracks={trackStrokes} />
             </div>
 
             <div className="wind-synthesis-info">
