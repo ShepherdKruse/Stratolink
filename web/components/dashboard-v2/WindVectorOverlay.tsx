@@ -1,9 +1,10 @@
 'use client';
 
 import { useEffect, useRef } from 'react';
+import type { Map as MapboxMap } from 'mapbox-gl';
 import type { MapRef } from 'react-map-gl/mapbox';
-import type { WindField } from '@/lib/wind/types';
-import { windSpeed } from '@/lib/wind/utils';
+import type { WindField, WindVector } from '@/lib/wind/types';
+import { buildWindLookup, interpolateWind, windSpeed } from '@/lib/wind/utils';
 
 export type WindVizMode = 'vectors' | 'flow';
 
@@ -14,42 +15,75 @@ type WindVectorOverlayProps = {
     active?: boolean;
 };
 
+/** Arrow color — bright enough for dark Mapbox basemap, still below track contrast. */
+const ARROW_RGB = '186, 218, 236';
+
 function arrowOpacity(speed: number): number {
-    return Math.min(0.55, 0.28 + (speed / 45) * 0.27);
+    return Math.min(0.92, 0.62 + (speed / 40) * 0.3);
 }
 
 function arrowLength(speed: number): number {
-    return Math.min(42, Math.max(12, speed * 1.15));
+    return Math.min(52, Math.max(16, speed * 1.45));
 }
 
 function drawArrow(ctx: CanvasRenderingContext2D, x: number, y: number, u: number, v: number, speed: number) {
-    if (speed < 0.8) return;
+    if (speed < 0.5) return;
 
     const len = arrowLength(speed);
     const dx = (u / speed) * len;
     const dy = (-v / speed) * len;
     const x2 = x + dx;
     const y2 = y + dy;
-
     const alpha = arrowOpacity(speed);
-    ctx.strokeStyle = `rgba(148, 188, 208, ${alpha})`;
-    ctx.fillStyle = `rgba(148, 188, 208, ${alpha})`;
-    ctx.lineWidth = 1.25;
-    ctx.lineCap = 'round';
+    const angle = Math.atan2(dy, dx);
+    const head = 7;
 
+    // Dark under-stroke for contrast on land/water
+    ctx.strokeStyle = `rgba(8, 12, 18, ${alpha * 0.85})`;
+    ctx.lineWidth = 3;
+    ctx.lineCap = 'round';
     ctx.beginPath();
     ctx.moveTo(x, y);
     ctx.lineTo(x2, y2);
     ctx.stroke();
 
-    const head = 5;
-    const angle = Math.atan2(dy, dx);
+    ctx.strokeStyle = `rgba(${ARROW_RGB}, ${alpha})`;
+    ctx.fillStyle = `rgba(${ARROW_RGB}, ${alpha})`;
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    ctx.moveTo(x, y);
+    ctx.lineTo(x2, y2);
+    ctx.stroke();
+
     ctx.beginPath();
     ctx.moveTo(x2, y2);
-    ctx.lineTo(x2 - head * Math.cos(angle - 0.45), y2 - head * Math.sin(angle - 0.45));
-    ctx.lineTo(x2 - head * Math.cos(angle + 0.45), y2 - head * Math.sin(angle + 0.45));
+    ctx.lineTo(x2 - head * Math.cos(angle - 0.42), y2 - head * Math.sin(angle - 0.42));
+    ctx.lineTo(x2 - head * Math.cos(angle + 0.42), y2 - head * Math.sin(angle + 0.42));
     ctx.closePath();
     ctx.fill();
+}
+
+/** Screen-space fill between GFS grid points so vectors stay visible when zoomed out. */
+function drawInterpolatedGrid(
+    ctx: CanvasRenderingContext2D,
+    map: MapboxMap,
+    field: WindField,
+    lookup: Map<string, WindVector>,
+    cssW: number,
+    cssH: number,
+) {
+    const zoom = map.getZoom();
+    const spacing = zoom < 5 ? 72 : zoom < 6 ? 60 : zoom < 7 ? 48 : 40;
+    const { bounds, gridResolution } = field;
+
+    const pad = spacing / 2;
+    for (let y = pad; y < cssH; y += spacing) {
+        for (let x = pad; x < cssW; x += spacing) {
+            const lngLat = map.unproject([x, y]);
+            const wind = interpolateWind(lngLat.lat, lngLat.lng, lookup, bounds, gridResolution);
+            drawArrow(ctx, x, y, wind.u, wind.v, windSpeed(wind));
+        }
+    }
 }
 
 export default function WindVectorOverlay({
@@ -63,6 +97,7 @@ export default function WindVectorOverlay({
     const activeRef = useRef(active);
     const layoutRef = useRef({ dpr: 1, cssW: 0, cssH: 0 });
     const drawRef = useRef<() => void>(() => {});
+    const rafMoveRef = useRef(0);
 
     windFieldRef.current = windField;
     activeRef.current = active;
@@ -102,18 +137,16 @@ export default function WindVectorOverlay({
             const east = mapBounds.getEast();
             const south = mapBounds.getSouth();
             const north = mapBounds.getNorth();
+            const lookup = buildWindLookup(field);
 
             ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 
-            const margin = 40;
+            const margin = 48;
             for (const pt of field.grid) {
                 if (pt.lat < south || pt.lat > north) continue;
                 if (west <= east) {
                     if (pt.lon < west || pt.lon > east) continue;
-                } else {
-                    // Antimeridian wrap
-                    if (pt.lon < west && pt.lon > east) continue;
-                }
+                } else if (pt.lon < west && pt.lon > east) continue;
 
                 const screen = map.project([pt.lon, pt.lat]);
                 if (
@@ -127,17 +160,17 @@ export default function WindVectorOverlay({
 
                 drawArrow(ctx, screen.x, screen.y, pt.wind.u, pt.wind.v, windSpeed(pt.wind));
             }
+
+            drawInterpolatedGrid(ctx, map, field, lookup, cssW, cssH);
         };
 
         drawRef.current = draw;
 
-        const clear = () => {
-            ctx.setTransform(1, 0, 0, 1, 0, 0);
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
+        const onMove = () => {
+            cancelAnimationFrame(rafMoveRef.current);
+            rafMoveRef.current = requestAnimationFrame(draw);
         };
 
-        const onMoveStart = () => clear();
-        const onMoveEnd = () => draw();
         const onResize = () => {
             resize();
             draw();
@@ -146,8 +179,7 @@ export default function WindVectorOverlay({
         const attach = () => {
             resize();
             draw();
-            map.on('movestart', onMoveStart);
-            map.on('moveend', onMoveEnd);
+            map.on('move', onMove);
             map.on('resize', onResize);
             window.addEventListener('resize', onResize);
         };
@@ -156,10 +188,10 @@ export default function WindVectorOverlay({
         else map.once('load', attach);
 
         return () => {
-            map.off('movestart', onMoveStart);
-            map.off('moveend', onMoveEnd);
+            map.off('move', onMove);
             map.off('resize', onResize);
             window.removeEventListener('resize', onResize);
+            cancelAnimationFrame(rafMoveRef.current);
         };
     }, [mapRef, mapReady]);
 

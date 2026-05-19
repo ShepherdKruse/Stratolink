@@ -317,8 +317,8 @@ export default function WindDriftPanel({
                     {showWind && windVizMode === 'vectors' && (
                         <div style={{ marginBottom: 6, display: 'flex', alignItems: 'center', gap: 6 }}>
                             <svg width="28" height="10" aria-hidden>
-                                <line x1="2" y1="5" x2="22" y2="5" stroke="rgba(130,168,186,0.55)" strokeWidth="1.5" />
-                                <polygon points="22,5 18,3 18,7" fill="rgba(130,168,186,0.55)" />
+                                <line x1="2" y1="5" x2="22" y2="5" stroke="rgba(186,218,236,0.9)" strokeWidth="2" />
+                                <polygon points="22,5 18,2.5 18,7.5" fill="rgba(186,218,236,0.9)" />
                             </svg>
                             <span>wind — length ∝ speed</span>
                         </div>
