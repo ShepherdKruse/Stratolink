@@ -1,7 +1,12 @@
 import { integrateBalloonPath } from './balloonIntegrate';
 import { boundsForForecast, fetchWindGrid, snapPressureHpa } from './fetchWindGrid';
 import type { ForecastEllipse, ForecastGpsFix, MonteCarloForecastInput, StratolinkForecast } from './forecastTypes';
-import { gpsGapHours, resolveForecastStart, STALE_GPS_THRESHOLD_H } from './staleGpsExtrapolation';
+import {
+    GAP_WIND_MODE,
+    gpsGapHours,
+    resolveForecastStart,
+    STALE_GPS_THRESHOLD_H,
+} from './staleGpsExtrapolation';
 import { gfsGridToWindField, windAt, windFieldToGfsGrid, type GfsGrid } from './gfsGrid';
 
 const CFG = {
@@ -293,6 +298,7 @@ export async function computeMonteCarloForecast(input: MonteCarloForecastInput):
             dir_sigma_deg: CFG.DIR_SIGMA_DEG,
             alt_sigma_hpa: CFG.ALT_SIGMA_HPA,
             compute_ms: Date.now() - t0,
+            ...(forecastStart.stale_gps ? { gap_wind_mode: GAP_WIND_MODE } : {}),
         },
     };
 }

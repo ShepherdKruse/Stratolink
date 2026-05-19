@@ -26,12 +26,25 @@ function openMeteoLevelKey(hPa: number): string {
     return id;
 }
 
+export type HourlyWindFetchOpts = {
+    forecastDays?: number;
+    /** Include past hours (required for stale-GPS back-drift). Max 92 on Open-Meteo. */
+    pastDays?: number;
+};
+
 export async function fetchHourlyWindAtPoint(
     lat: number,
     lon: number,
     pressureHpa: number,
-    forecastDays = 3,
+    forecastDaysOrOpts: number | HourlyWindFetchOpts = 3,
 ): Promise<HourlyWind[]> {
+    const opts =
+        typeof forecastDaysOrOpts === 'number'
+            ? { forecastDays: forecastDaysOrOpts }
+            : forecastDaysOrOpts;
+    const forecastDays = opts.forecastDays ?? 3;
+    const pastDays = opts.pastDays ?? 0;
+
     const level = openMeteoLevelKey(pressureHpa);
     const speedKey = `wind_speed_${level}hPa`;
     const dirKey = `wind_direction_${level}hPa`;
@@ -41,6 +54,7 @@ export async function fetchHourlyWindAtPoint(
     url.searchParams.set('longitude', String(lon));
     url.searchParams.set('hourly', `${speedKey},${dirKey}`);
     url.searchParams.set('forecast_days', String(forecastDays));
+    if (pastDays > 0) url.searchParams.set('past_days', String(Math.min(92, pastDays)));
     url.searchParams.set('wind_speed_unit', 'ms');
     url.searchParams.set('timezone', 'UTC');
 
@@ -79,4 +93,20 @@ export function windAtTime(series: HourlyWind[], when: Date): HourlyWind | null 
         }
     }
     return best;
+}
+
+/** Latest hourly sample at or before `when` (for back-integration through a GPS gap). */
+export function windAtOrBefore(series: HourlyWind[], when: Date): HourlyWind | null {
+    if (!series.length) return null;
+    const t = when.getTime();
+    let best: HourlyWind | null = null;
+    let bestT = -Infinity;
+    for (const row of series) {
+        const rt = new Date(row.time).getTime();
+        if (rt <= t && rt > bestT) {
+            bestT = rt;
+            best = row;
+        }
+    }
+    return best ?? windAtTime(series, when);
 }

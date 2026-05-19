@@ -38,6 +38,7 @@ export type StratolinkForecast = {
         gap_hours: number;
         last_fix_time_utc: string;
         wind_field_time_utc: string;
+        wind_mode?: string;
     };
     nominal_path: Array<[number, number]>;
     ensemble: Array<Array<[number, number]>>;
@@ -80,6 +81,8 @@ export type StratolinkForecast = {
         dir_sigma_deg: number;
         alt_sigma_hpa: number;
         compute_ms: number;
+        /** `hourly_series` when stale-GPS gap used time-varying past+hourly winds. */
+        gap_wind_mode?: string;
     };
 };
 

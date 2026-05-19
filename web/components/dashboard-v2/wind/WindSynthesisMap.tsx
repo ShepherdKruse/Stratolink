@@ -119,14 +119,22 @@ export default function WindSynthesisMap({
             const driftSegment =
                 segs.freezeDrift.length >= 2 ? segs.freezeDrift : undefined;
 
+            const lastObs = observedTrack[observedTrack.length - 1];
+            const gpsGapH = lastObs
+                ? (Date.now() - lastObs.t) / 3_600_000
+                : 0;
+            const needsHourlyGap = gpsGapH >= 1;
+
             const cached = await fetch(
                 `/api/forecast?device=${encodeURIComponent(deviceId)}&hours=${forecastHours}`,
             );
             if (cached.ok) {
                 const forecast = (await cached.json()) as StratolinkForecast;
                 const cachedHours = forecast.forecast_horizon_h ?? 24;
-                // Blob cache ignores ?hours= — skip short caches when UI asks for a longer horizon.
-                if (cachedHours >= forecastHours) {
+                const cacheGapOk =
+                    !needsHourlyGap || forecast.metadata?.gap_wind_mode === 'hourly_series';
+                // Blob cache ignores ?hours= — skip short or legacy stale-gap caches.
+                if (cachedHours >= forecastHours && cacheGapOk) {
                     applyForecast(forecast, showWind, setMc, setWindField);
                     return;
                 }
@@ -433,8 +441,8 @@ export default function WindSynthesisMap({
                             minute: '2-digit',
                             timeZone: 'UTC',
                         })}{' '}
-                        UTC · <b>{mc.stale_gps.gap_hours}h</b> integrated with GFS at fix time · forward
-                        forecast from implied position
+                        UTC · <b>{mc.stale_gps.gap_hours}h</b> back-drift with hourly GFS (past +
+                        in-gap) · forward forecast uses current winds
                     </div>
                 </div>
             )}
