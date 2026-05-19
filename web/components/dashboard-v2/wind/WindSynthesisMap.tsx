@@ -11,6 +11,7 @@ import { boundsFromPoints, snapPressureHpa } from '@/lib/wind/fetchWindGrid';
 import { buildPredictionCone } from '@/lib/wind/predictionCone';
 import { splitTrackSegments } from '@/lib/wind/trackSegments';
 import type { WindField } from '@/lib/wind/types';
+import FlightTrackOverlay, { type TrackStroke } from './FlightTrackOverlay';
 import WindStreamOverlay from './WindStreamOverlay';
 import WindVectorOverlay from '../WindVectorOverlay';
 
@@ -62,15 +63,6 @@ function haversineKm(lat1: number, lon1: number, lat2: number, lon2: number): nu
     return r * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
 }
 
-function lineFeature(coords: Array<[number, number]>) {
-    if (coords.length < 2) return null;
-    return {
-        type: 'Feature' as const,
-        geometry: { type: 'LineString' as const, coordinates: coords },
-        properties: {},
-    };
-}
-
 export default function WindSynthesisMap({
     callsign,
     observedTrack,
@@ -89,7 +81,7 @@ export default function WindSynthesisMap({
     const didFitRef = useRef(false);
     const forecastOriginRef = useRef({ lat: startLat, lon: startLon });
     const [mapReady, setMapReady] = useState(false);
-    const [mode, setMode] = useState<WindDisplayMode>('stream');
+    const [mode, setMode] = useState<WindDisplayMode>('vector');
     const [forecast, setForecast] = useState<DriftPoint[]>([]);
     const [windField, setWindField] = useState<WindField | null>(null);
     const [loading, setLoading] = useState(false);
@@ -252,13 +244,61 @@ export default function WindSynthesisMap({
         return haversineKm(lastObs.lat, lastObs.lon, endPoint.lat, endPoint.lon);
     }, [lastObs, endPoint]);
 
+    const obsCoords = segments.observed.map((p) => [p.lon, p.lat] as [number, number]);
+    const resumedCoords = segments.resumed.map((p) => [p.lon, p.lat] as [number, number]);
+
+    const trackStrokes = useMemo((): TrackStroke[] => {
+        const strokes: TrackStroke[] = [];
+        if (segments.freezeDrift.length >= 2) {
+            strokes.push({
+                coords: segments.freezeDrift,
+                color: 'rgba(160, 175, 195, 0.9)',
+                width: 2.5,
+                dashed: true,
+                halo: true,
+                haloColor: 'rgba(0,0,0,0.5)',
+                haloWidth: 6,
+            });
+        }
+        if (obsCoords.length >= 2) {
+            strokes.push({
+                coords: obsCoords,
+                color: '#e86a2a',
+                width: 4,
+                halo: true,
+                haloColor: 'rgba(0,0,0,0.65)',
+                haloWidth: 10,
+            });
+        }
+        if (resumedCoords.length >= 2) {
+            strokes.push({
+                coords: resumedCoords,
+                color: '#e86a2a',
+                width: 3,
+                dashed: true,
+                halo: true,
+                haloColor: 'rgba(0,0,0,0.5)',
+                haloWidth: 8,
+            });
+        }
+        if (predCoords.length >= 2) {
+            strokes.push({
+                coords: predCoords,
+                color: '#f0d878',
+                width: 3.5,
+                dashed: true,
+                halo: true,
+                haloColor: 'rgba(0,0,0,0.55)',
+                haloWidth: 12,
+            });
+        }
+        return strokes;
+    }, [segments.freezeDrift, obsCoords, resumedCoords, predCoords]);
+
     const token = process.env.NEXT_PUBLIC_MAPBOX_TOKEN;
     if (!token) {
         return <div style={{ padding: 24, color: 'var(--sl-text-dim)' }}>Mapbox token required</div>;
     }
-
-    const obsCoords = segments.observed.map((p) => [p.lon, p.lat] as [number, number]);
-    const resumedCoords = segments.resumed.map((p) => [p.lon, p.lat] as [number, number]);
 
     return (
         <div className="wind-synthesis-root">
@@ -349,7 +389,7 @@ export default function WindSynthesisMap({
                     mapboxAccessToken={token}
                     initialViewState={{ longitude: -106, latitude: 37.5, zoom: 4.05 }}
                     style={{ width: '100%', height: '100%' }}
-                    mapStyle="mapbox://styles/mapbox/dark-v11"
+                    mapStyle="mapbox://styles/mapbox/navigation-night-v1"
                     attributionControl={false}
                     onLoad={() => setMapReady(true)}
                 >
@@ -368,83 +408,6 @@ export default function WindSynthesisMap({
                                     'line-width': 1,
                                     'line-opacity': 0.18,
                                     'line-dasharray': [3, 5],
-                                }}
-                            />
-                        </Source>
-                    )}
-
-                    {segments.freezeDrift.length >= 2 && (
-                        <Source id="ws-drift" type="geojson" data={lineFeature(segments.freezeDrift)!}>
-                            <Layer
-                                id="ws-drift-line"
-                                type="line"
-                                paint={{
-                                    'line-color': '#8898b0',
-                                    'line-width': 1.8,
-                                    'line-opacity': 0.65,
-                                    'line-dasharray': [4, 6],
-                                }}
-                            />
-                        </Source>
-                    )}
-
-                    {obsCoords.length >= 2 && (
-                        <Source id="ws-obs" type="geojson" data={lineFeature(obsCoords)!}>
-                            <Layer
-                                id="ws-obs-halo"
-                                type="line"
-                                paint={{
-                                    'line-color': '#c9521f',
-                                    'line-width': 8,
-                                    'line-opacity': 0.1,
-                                }}
-                            />
-                            <Layer
-                                id="ws-obs-line"
-                                type="line"
-                                paint={{
-                                    'line-color': '#c9521f',
-                                    'line-width': 2.8,
-                                    'line-opacity': 0.9,
-                                }}
-                            />
-                        </Source>
-                    )}
-
-                    {resumedCoords.length >= 2 && (
-                        <Source id="ws-resumed" type="geojson" data={lineFeature(resumedCoords)!}>
-                            <Layer
-                                id="ws-resumed-line"
-                                type="line"
-                                paint={{
-                                    'line-color': '#c9521f',
-                                    'line-width': 2.2,
-                                    'line-opacity': 0.65,
-                                    'line-dasharray': [2, 2.5],
-                                }}
-                            />
-                        </Source>
-                    )}
-
-                    {predCoords.length >= 2 && (
-                        <Source id="ws-pred" type="geojson" data={lineFeature(predCoords)!}>
-                            <Layer
-                                id="ws-pred-halo"
-                                type="line"
-                                paint={{
-                                    'line-color': '#e6d088',
-                                    'line-width': 10,
-                                    'line-opacity': 0.07,
-                                }}
-                            />
-                            <Layer
-                                id="ws-pred-line"
-                                type="line"
-                                paint={{
-                                    'line-color': '#e6d088',
-                                    'line-width': 2.2,
-                                    'line-opacity': 0.85,
-                                    'line-dasharray': [5, 4.5],
                                 }}
                             />
                         </Source>
@@ -533,6 +496,8 @@ export default function WindSynthesisMap({
                         active={!!windField}
                     />
                 )}
+
+                <FlightTrackOverlay mapRef={mapRef} mapReady={mapReady} tracks={trackStrokes} />
             </div>
 
             <div className="wind-synthesis-info">

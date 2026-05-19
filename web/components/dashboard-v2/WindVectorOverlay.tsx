@@ -97,10 +97,11 @@ export default function WindVectorOverlay({
     const activeRef = useRef(active);
     const layoutRef = useRef({ dpr: 1, cssW: 0, cssH: 0 });
     const drawRef = useRef<() => void>(() => {});
-    const rafMoveRef = useRef(0);
+    const lookupRef = useRef<Map<string, WindVector> | null>(null);
 
     windFieldRef.current = windField;
     activeRef.current = active;
+    if (windField) lookupRef.current = buildWindLookup(windField);
 
     useEffect(() => {
         const map = mapRef.current?.getMap();
@@ -137,7 +138,8 @@ export default function WindVectorOverlay({
             const east = mapBounds.getEast();
             const south = mapBounds.getSouth();
             const north = mapBounds.getNorth();
-            const lookup = buildWindLookup(field);
+            const lookup = lookupRef.current;
+            if (!lookup) return;
 
             ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 
@@ -166,10 +168,13 @@ export default function WindVectorOverlay({
 
         drawRef.current = draw;
 
-        const onMove = () => {
-            cancelAnimationFrame(rafMoveRef.current);
-            rafMoveRef.current = requestAnimationFrame(draw);
+        const clear = () => {
+            ctx.setTransform(1, 0, 0, 1, 0, 0);
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
         };
+
+        const onMoveStart = () => clear();
+        const onMoveEnd = () => draw();
 
         const onResize = () => {
             resize();
@@ -179,7 +184,8 @@ export default function WindVectorOverlay({
         const attach = () => {
             resize();
             draw();
-            map.on('move', onMove);
+            map.on('movestart', onMoveStart);
+            map.on('moveend', onMoveEnd);
             map.on('resize', onResize);
             window.addEventListener('resize', onResize);
         };
@@ -188,10 +194,10 @@ export default function WindVectorOverlay({
         else map.once('load', attach);
 
         return () => {
-            map.off('move', onMove);
+            map.off('movestart', onMoveStart);
+            map.off('moveend', onMoveEnd);
             map.off('resize', onResize);
             window.removeEventListener('resize', onResize);
-            cancelAnimationFrame(rafMoveRef.current);
         };
     }, [mapRef, mapReady]);
 
@@ -209,6 +215,7 @@ export default function WindVectorOverlay({
                 height: '100%',
                 pointerEvents: 'none',
                 zIndex: 2,
+                opacity: 0.9,
             }}
         />
     );
