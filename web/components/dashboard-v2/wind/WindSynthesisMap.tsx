@@ -61,6 +61,29 @@ function haversineKm(lat1: number, lon1: number, lat2: number, lon2: number): nu
     return r * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
 }
 
+function obsTimeUtc(t: number): string {
+    return new Date(t).toISOString();
+}
+
+function hasHourlyGapForecast(forecast: StratolinkForecast): boolean {
+    return (
+        forecast.metadata?.gap_wind_mode === 'hourly_series' ||
+        forecast.stale_gps?.wind_mode === 'hourly_series'
+    );
+}
+
+function shouldUseCachedForecast(
+    forecast: StratolinkForecast,
+    needsHourlyGap: boolean,
+    forecastHours: number,
+): boolean {
+    const cachedHours = forecast.forecast_horizon_h ?? 24;
+    if (cachedHours < forecastHours) return false;
+    // Stale GPS must use hourly back-drift; old cron blobs used a single "now" wind snapshot.
+    if (needsHourlyGap) return hasHourlyGapForecast(forecast);
+    return true;
+}
+
 function applyForecast(
     forecast: StratolinkForecast,
     showWind: boolean,
@@ -93,82 +116,9 @@ export default function WindSynthesisMap({
     const mapRef = useRef<MapRef>(null);
     const didFitRef = useRef(false);
     const forecastOriginRef = useRef({ lat: startLat, lon: startLon });
-    const [mapReady, setMapReady] = useState(false);
-    const [mc, setMc] = useState<StratolinkForecast | null>(null);
-    const [windField, setWindField] = useState<WindField | null>(null);
-    const [loading, setLoading] = useState(false);
-    const [error, setError] = useState<string | null>(null);
-    const [showEnsemble, setShowEnsemble] = useState(true);
-    const [showEllipses, setShowEllipses] = useState(true);
-
-    const levelHpa = snapPressureHpa(pressureHpa);
-
-    const loadForecast = useCallback(async () => {
-        if (observedTrack.length < 1 || !isValidLngLat(startLat, startLon)) return;
-        forecastOriginRef.current = { lat: startLat, lon: startLon };
-        setLoading(true);
-        setError(null);
-        try {
-            const first = observedTrack[0];
-            const launch =
-                launchLat != null && launchLon != null
-                    ? { lat: launchLat, lon: launchLon, time_utc: first.t }
-                    : { lat: first.lat, lon: first.lon, time_utc: first.t };
-
-            const segs = splitTrackSegments(observedTrack);
-            const driftSegment =
-                segs.freezeDrift.length >= 2 ? segs.freezeDrift : undefined;
-
-            const lastObs = observedTrack[observedTrack.length - 1];
-            const gpsGapH = lastObs
-                ? (Date.now() - lastObs.t) / 3_600_000
-                : 0;
-            const needsHourlyGap = gpsGapH >= 1;
-
-            const cached = await fetch(
-                `/api/forecast?device=${encodeURIComponent(deviceId)}&hours=${forecastHours}`,
-            );
-            if (cached.ok) {
-                const forecast = (await cached.json()) as StratolinkForecast;
-                const cachedHours = forecast.forecast_horizon_h ?? 24;
-                const cacheGapOk =
-                    !needsHourlyGap || forecast.metadata?.gap_wind_mode === 'hourly_series';
-                // Blob cache ignores ?hours= — skip short or legacy stale-gap caches.
-                if (cachedHours >= forecastHours && cacheGapOk) {
-                    applyForecast(forecast, showWind, setMc, setWindField);
-                    return;
-                }
-            }
-
-            const res = await fetch('/api/wind-forecast', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    deviceId,
-                    mission: callsign,
-                    launch,
-                    observedTrack: observedTrack.map((p) => ({
-                        lat: p.lat,
-                        lon: p.lon,
-                        t: p.t,
-                        alt_m: lastAltM,
-                    })),
-                    driftSegment,
-                    pressureHpa: levelHpa,
-                    forecastHours,
-                }),
-            });
-            const data = await res.json();
-            if (!res.ok) throw new Error(data.error ?? 'Forecast failed');
-            applyForecast(data as StratolinkForecast, showWind, setMc, setWindField);
-        } catch (e) {
-            setError(e instanceof Error ? e.message : 'Forecast failed');
-            setMc(null);
-            setWindField(null);
-        } finally {
-            setLoading(false);
-        }
-    }, [
+    /** Avoid replacing a good live stale-gap forecast with an old cron blob after telemetry poll. */
+    const hasHourlyGapLiveRef = useRef(false);
+    const propsRef = useRef({
         observedTrack,
         startLat,
         startLon,
@@ -180,13 +130,102 @@ export default function WindSynthesisMap({
         callsign,
         lastAltM,
         showWind,
-    ]);
+    });
+    propsRef.current = {
+        observedTrack,
+        startLat,
+        startLon,
+        launchLat,
+        launchLon,
+        levelHpa,
+        forecastHours,
+        deviceId,
+        callsign,
+        lastAltM,
+        showWind,
+    };
+    const [mapReady, setMapReady] = useState(false);
+    const [mc, setMc] = useState<StratolinkForecast | null>(null);
+    const [windField, setWindField] = useState<WindField | null>(null);
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState<string | null>(null);
+    const [showEnsemble, setShowEnsemble] = useState(true);
+    const [showEllipses, setShowEllipses] = useState(true);
+
+    const levelHpa = snapPressureHpa(pressureHpa);
+
+    const loadForecast = useCallback(async () => {
+        const p = propsRef.current;
+        if (p.observedTrack.length < 1 || !isValidLngLat(p.startLat, p.startLon)) return;
+        forecastOriginRef.current = { lat: p.startLat, lon: p.startLon };
+        setLoading(true);
+        setError(null);
+        try {
+            const first = p.observedTrack[0];
+            const launch =
+                p.launchLat != null && p.launchLon != null
+                    ? { lat: p.launchLat, lon: p.launchLon, time_utc: obsTimeUtc(first.t) }
+                    : { lat: first.lat, lon: first.lon, time_utc: obsTimeUtc(first.t) };
+
+            const segs = splitTrackSegments(p.observedTrack);
+            const driftSegment =
+                segs.freezeDrift.length >= 2 ? segs.freezeDrift : undefined;
+
+            const lastObs = p.observedTrack[p.observedTrack.length - 1];
+            const gpsGapH = lastObs ? (Date.now() - lastObs.t) / 3_600_000 : 0;
+            const needsHourlyGap = gpsGapH >= 1;
+
+            if (!(needsHourlyGap && hasHourlyGapLiveRef.current)) {
+                const cached = await fetch(
+                    `/api/forecast?device=${encodeURIComponent(p.deviceId)}&hours=${p.forecastHours}`,
+                );
+                if (cached.ok) {
+                    const forecast = (await cached.json()) as StratolinkForecast;
+                    if (shouldUseCachedForecast(forecast, needsHourlyGap, p.forecastHours)) {
+                        applyForecast(forecast, p.showWind, setMc, setWindField);
+                        hasHourlyGapLiveRef.current = needsHourlyGap && hasHourlyGapForecast(forecast);
+                        return;
+                    }
+                }
+            }
+
+            const res = await fetch('/api/wind-forecast', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    deviceId: p.deviceId,
+                    mission: p.callsign,
+                    launch,
+                    observedTrack: p.observedTrack.map((pt) => ({
+                        lat: pt.lat,
+                        lon: pt.lon,
+                        t: obsTimeUtc(pt.t),
+                        alt_m: p.lastAltM,
+                    })),
+                    driftSegment,
+                    pressureHpa: p.levelHpa,
+                    forecastHours: p.forecastHours,
+                }),
+            });
+            const data = await res.json();
+            if (!res.ok) throw new Error(data.error ?? 'Forecast failed');
+            const forecast = data as StratolinkForecast;
+            applyForecast(forecast, p.showWind, setMc, setWindField);
+            hasHourlyGapLiveRef.current = needsHourlyGap && hasHourlyGapForecast(forecast);
+        } catch (e) {
+            setError(e instanceof Error ? e.message : 'Forecast failed');
+            setMc(null);
+            setWindField(null);
+            hasHourlyGapLiveRef.current = false;
+        } finally {
+            setLoading(false);
+        }
+    }, []);
 
     useEffect(() => {
-        if (!isValidLngLat(startLat, startLon) || observedTrack.length < 1) return;
+        hasHourlyGapLiveRef.current = false;
         loadForecast();
         didFitRef.current = false;
-        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [anchorKey, loadForecast]);
 
     useEffect(() => {

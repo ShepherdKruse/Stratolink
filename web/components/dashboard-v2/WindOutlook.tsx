@@ -174,7 +174,7 @@ export default function WindOutlookScreen() {
                     pressureHpa={pressureHpa}
                     forecastHours={forecastHours}
                     showWind={showWind}
-                    anchorKey={`${selectedId ?? ''}-${level}-${forecastHours}`}
+                    anchorKey={`${selectedId ?? ''}-${level}-${forecastHours}-${lastFixRow?.t ?? 0}`}
                     nullschoolUrl={mapUrl}
                     lastAltM={lastFixRow?.alt ?? null}
                 />
