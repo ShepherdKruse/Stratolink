@@ -164,6 +164,7 @@ export default function WindOutlookScreen() {
 
             <div style={{ flex: 1, minHeight: 0 }}>
                 <WindSynthesisMap
+                    deviceId={selectedId ?? callsign}
                     callsign={callsign}
                     observedTrack={observedTrack}
                     startLat={center.lat}

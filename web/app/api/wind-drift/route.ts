@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import { computeDriftEnsemble } from '@/lib/wind/driftEnsemble';
 
+/** @deprecated Prefer POST /api/wind-forecast (Monte Carlo + bias correction + ellipses). */
 export const dynamic = 'force-dynamic';
 
 export async function GET(req: Request) {
