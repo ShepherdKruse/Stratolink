@@ -9,6 +9,9 @@ import {
     type HourlyWind,
 } from './openMeteoForecast';
 
+/** How often to re-fetch full stale-gap + forecast from the server while GPS is stale. */
+export const STALE_GAP_REFRESH_MS = 15 * 60_000;
+
 /** If last GPS fix is older than this, dead-reckon to "now" before forecasting forward. */
 export const STALE_GPS_THRESHOLD_H = 1;
 
@@ -22,6 +25,51 @@ const round4 = (x: number) => Math.round(x * 1e4) / 1e4;
 export function gpsGapHours(lastFix: ForecastGpsFix, now = new Date()): number {
     const ms = now.getTime() - new Date(lastFix.time_utc).getTime();
     return ms > 0 ? ms / 3_600_000 : 0;
+}
+
+export function gpsGapHoursFromMs(lastFixMs: number, nowMs = Date.now()): number {
+    return lastFixMs > 0 ? Math.max(0, (nowMs - lastFixMs) / 3_600_000) : 0;
+}
+
+export function formatGapAge(gapH: number): string {
+    if (gapH < 1 / 60) return '<1m';
+    if (gapH < 1) return `${Math.round(gapH * 60)}m`;
+    const h = Math.floor(gapH);
+    const m = Math.round((gapH - h) * 60);
+    return m > 0 ? `${h}h ${m}m` : `${h}h`;
+}
+
+/**
+ * Lightweight client extension between server recomputes — holds last drift point
+ * and steps forward with endpoint wind so the dashed line grows with clock time.
+ */
+export function extrapolateDriftTail(
+    path: Array<[number, number]>,
+    computedGapH: number,
+    liveGapH: number,
+    wind?: { speed_mps: number; dir_deg: number },
+): Array<[number, number]> {
+    const extraH = liveGapH - computedGapH;
+    if (extraH <= 1 / 120 || path.length < 1 || !wind || wind.speed_mps <= 0) return path;
+
+    let lat = path[path.length - 1][1];
+    let lon = path[path.length - 1][0];
+    const out = [...path];
+    const stepMinutes = BALLOON_STEP_HOURS * 60;
+    const steps = Math.round((extraH * 60) / stepMinutes);
+    const stepsPerHour = Math.round(1 / BALLOON_STEP_HOURS);
+    let { u, v } = meteoWindToUV(wind.speed_mps, wind.dir_deg);
+
+    for (let s = 1; s <= steps; s++) {
+        const stepSec = stepMinutes * 60;
+        const cosLat = Math.max(Math.cos((lat * Math.PI) / 180), 0.05);
+        lat += (v * stepSec) / 111_320;
+        lon += (u * stepSec) / (111_320 * cosLat);
+        if (s % stepsPerHour === 0) {
+            out.push([round4(lon), round4(lat)]);
+        }
+    }
+    return out;
 }
 
 function applyBiasToWind(u: number, v: number, bias: BiasLike): { u: number; v: number } {

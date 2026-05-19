@@ -13,6 +13,14 @@ import type { StratolinkForecast } from '@/lib/wind/forecastTypes';
 import { splitTrackSegments } from '@/lib/wind/trackSegments';
 import type { WindField } from '@/lib/wind/types';
 import WindStreamOverlay from './WindStreamOverlay';
+import { useTickingNow } from '../shared';
+import {
+    extrapolateDriftTail,
+    formatGapAge,
+    gpsGapHoursFromMs,
+    STALE_GAP_REFRESH_MS,
+    STALE_GPS_THRESHOLD_H,
+} from '@/lib/wind/staleGpsExtrapolation';
 
 export type WindSynthesisMapProps = {
     deviceId: string;
@@ -119,6 +127,7 @@ export default function WindSynthesisMap({
     const levelHpa = snapPressureHpa(pressureHpa);
     /** Avoid replacing a good live stale-gap forecast with an old cron blob after telemetry poll. */
     const hasHourlyGapLiveRef = useRef(false);
+    const skipNextStaleAutoRef = useRef(true);
     const propsRef = useRef({
         observedTrack,
         startLat,
@@ -153,11 +162,20 @@ export default function WindSynthesisMap({
     const [showEnsemble, setShowEnsemble] = useState(true);
     const [showEllipses, setShowEllipses] = useState(true);
 
-    const loadForecast = useCallback(async () => {
+    const nowMs = useTickingNow(30_000);
+
+    const lastGpsMs = observedTrack.length ? observedTrack[observedTrack.length - 1].t : 0;
+    const liveGapH = gpsGapHoursFromMs(lastGpsMs, nowMs);
+    const isStaleGps = liveGapH >= STALE_GPS_THRESHOLD_H;
+    const staleRefreshKey = isStaleGps
+        ? `${Math.floor(liveGapH)}h-${Math.floor(nowMs / STALE_GAP_REFRESH_MS)}`
+        : 'fresh';
+
+    const loadForecast = useCallback(async (opts?: { staleAuto?: boolean }) => {
         const p = propsRef.current;
         if (p.observedTrack.length < 1 || !isValidLngLat(p.startLat, p.startLon)) return;
         forecastOriginRef.current = { lat: p.startLat, lon: p.startLon };
-        setLoading(true);
+        if (!opts?.staleAuto) setLoading(true);
         setError(null);
         try {
             const first = p.observedTrack[0];
@@ -174,7 +192,7 @@ export default function WindSynthesisMap({
             const gpsGapH = lastObs ? (Date.now() - lastObs.t) / 3_600_000 : 0;
             const needsHourlyGap = gpsGapH >= 1;
 
-            if (!(needsHourlyGap && hasHourlyGapLiveRef.current)) {
+            if (!(needsHourlyGap && hasHourlyGapLiveRef.current && !opts?.staleAuto)) {
                 const cached = await fetch(
                     `/api/forecast?device=${encodeURIComponent(p.deviceId)}&hours=${p.forecastHours}`,
                 );
@@ -223,9 +241,24 @@ export default function WindSynthesisMap({
 
     useEffect(() => {
         hasHourlyGapLiveRef.current = false;
+        skipNextStaleAutoRef.current = true;
         loadForecast();
         didFitRef.current = false;
     }, [anchorKey, loadForecast]);
+
+    /** Recompute stale back-drift + forward forecast as the GPS gap grows (hourly + every 15 min). */
+    useEffect(() => {
+        if (!isStaleGps) {
+            skipNextStaleAutoRef.current = true;
+            return;
+        }
+        if (skipNextStaleAutoRef.current) {
+            skipNextStaleAutoRef.current = false;
+            return;
+        }
+        hasHourlyGapLiveRef.current = false;
+        loadForecast({ staleAuto: true });
+    }, [staleRefreshKey, isStaleGps, loadForecast]);
 
     useEffect(() => {
         if (!mc) return;
@@ -237,7 +270,6 @@ export default function WindSynthesisMap({
     const segments = useMemo(() => splitTrackSegments(observedTrack), [observedTrack]);
 
     const nominalPath = mc?.nominal_path ?? [];
-    const predCoords = nominalPath;
     /** Hours actually in the loaded forecast (path is one point per hour from origin). */
     const effectiveHorizonH =
         mc?.forecast_horizon_h ??
@@ -342,9 +374,34 @@ export default function WindSynthesisMap({
     const resumedCoords = segments.resumed.map((p) => [p.lon, p.lat] as [number, number]);
 
     const driftCoords = useMemo(() => {
-        if (mc?.observed.drift_segment?.length) return mc.observed.drift_segment;
-        return segments.freezeDrift;
-    }, [mc, segments.freezeDrift]);
+        let base: Array<[number, number]> = [];
+        if (mc?.observed.drift_segment?.length) base = mc.observed.drift_segment;
+        else if (segments.freezeDrift.length) base = segments.freezeDrift;
+        if (mc?.stale_gps && base.length >= 1 && liveGapH > mc.stale_gps.gap_hours) {
+            return extrapolateDriftTail(
+                base,
+                mc.stale_gps.gap_hours,
+                liveGapH,
+                mc.endpoint?.wind,
+            );
+        }
+        return base;
+    }, [mc, segments.freezeDrift, liveGapH]);
+
+    const impliedNowCoord = useMemo((): [number, number] | null => {
+        if (driftCoords.length < 1) return null;
+        return driftCoords[driftCoords.length - 1];
+    }, [driftCoords]);
+
+    const predCoords = useMemo(() => {
+        if (!nominalPath.length) return [];
+        if (!impliedNowCoord) return nominalPath;
+        const [dlon, dlat] = impliedNowCoord;
+        const [plon, plat] = nominalPath[0];
+        const gapKm = haversineKm(dlat, dlon, plat, plon);
+        if (gapKm < 8) return nominalPath;
+        return [impliedNowCoord, ...nominalPath];
+    }, [nominalPath, impliedNowCoord]);
 
     const freezeLine = useMemo(() => lineGeoJson(driftCoords), [driftCoords]);
     const observedLine = useMemo(() => lineGeoJson(obsCoords), [obsCoords]);
@@ -418,7 +475,7 @@ export default function WindSynthesisMap({
                             <b>Forecast</b>{' '}
                             {mc?.stale_gps ? (
                                 <>
-                                    +{effectiveHorizonH}h from implied now ({mc.stale_gps.gap_hours}h since
+                                    +{effectiveHorizonH}h from implied now ({formatGapAge(liveGapH)} since
                                     last GPS) · endpoint{' '}
                                 </>
                             ) : (
@@ -479,8 +536,8 @@ export default function WindSynthesisMap({
                             minute: '2-digit',
                             timeZone: 'UTC',
                         })}{' '}
-                        UTC · <b>{mc.stale_gps.gap_hours}h</b> back-drift with hourly GFS (past +
-                        in-gap) · forward forecast uses current winds
+                        UTC · <b>{formatGapAge(liveGapH)}</b> back-drift (hourly GFS, auto-updates
+                        every 15m) · forward forecast uses current winds
                     </div>
                 </div>
             )}
@@ -681,10 +738,10 @@ export default function WindSynthesisMap({
                         </Marker>
                     )}
 
-                    {mc?.stale_gps && mc.forecast_origin && (
+                    {mc?.stale_gps && impliedNowCoord && (
                         <Marker
-                            longitude={mc.forecast_origin.lon}
-                            latitude={mc.forecast_origin.lat}
+                            longitude={impliedNowCoord[0]}
+                            latitude={impliedNowCoord[1]}
                             anchor="center"
                         >
                             <div
