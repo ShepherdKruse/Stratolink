@@ -14,12 +14,8 @@ type WindParticleOverlayProps = {
 const PARTICLE_COUNT = 450;
 const MAX_AGE = 60;
 
-function speedColor(speed: number): string {
-    const t = Math.min(1, speed / 35);
-    const hue = 160 - t * 120;
-    const sat = 55 + t * 25;
-    const light = 48 + t * 12;
-    return `hsla(${hue}, ${sat}%, ${light}%,`;
+function speedAlpha(speed: number): number {
+    return Math.min(0.42, 0.12 + (speed / 45) * 0.3);
 }
 
 export default function WindParticleOverlay({ mapRef, windField, active = true }: WindParticleOverlayProps) {
@@ -102,8 +98,8 @@ export default function WindParticleOverlay({ mapRef, windField, active = true }
                     p.y = Math.random();
                     p.age = 0;
                 } else {
-                    const alpha = Math.max(0, 1 - p.age / p.maxAge) * 0.5;
-                    ctx.strokeStyle = `${speedColor(speed)}${alpha})`;
+                    const alpha = Math.max(0, 1 - p.age / p.maxAge) * speedAlpha(speed);
+                    ctx.strokeStyle = `rgba(130, 168, 186, ${alpha})`;
                     ctx.lineWidth = 1;
                     ctx.beginPath();
                     ctx.moveTo(px, py);

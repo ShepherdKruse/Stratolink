@@ -7,6 +7,7 @@ import 'mapbox-gl/dist/mapbox-gl.css';
 import type { V2FlightPoint } from './V2MissionMap';
 import { isValidLngLat } from './V2MissionMap';
 import WindParticleOverlay from './WindParticleOverlay';
+import WindVectorOverlay, { type WindVizMode } from './WindVectorOverlay';
 import { boundsFromPoints } from '@/lib/wind/fetchWindGrid';
 import type { WindField } from '@/lib/wind/types';
 
@@ -26,9 +27,12 @@ type WindDriftPanelProps = {
     observedTrack?: V2FlightPoint[];
     forecastHours?: number;
     showWind?: boolean;
+    windVizMode?: WindVizMode;
     /** When this changes (e.g. device switch), forecast re-anchors to startLat/startLon. */
     anchorKey?: string;
 };
+
+export type { WindVizMode };
 
 export default function WindDriftPanel({
     startLat,
@@ -37,6 +41,7 @@ export default function WindDriftPanel({
     observedTrack = [],
     forecastHours = 24,
     showWind = true,
+    windVizMode = 'vectors',
     anchorKey = 'default',
 }: WindDriftPanelProps) {
     const mapRef = useRef<MapRef>(null);
@@ -190,7 +195,11 @@ export default function WindDriftPanel({
                     </div>
                     <div style={{ fontSize: 10, color: 'var(--sl-text-dim2)', marginTop: 2 }}>
                         Layer wind field with balloon advection · {forecastHours}h · {pressureHpa} hPa
-                        {gridLoading ? ' · loading wind grid…' : windField ? ' · wind overlay on' : ''}
+                        {gridLoading
+                            ? ' · loading wind…'
+                            : windField
+                              ? ` · ${windVizMode === 'vectors' ? 'vectors' : 'flow'}`
+                              : ''}
                     </div>
                 </div>
                 <button
@@ -270,7 +279,10 @@ export default function WindDriftPanel({
                     )}
                 </Map>
 
-                {showWind && (
+                {showWind && windVizMode === 'vectors' && (
+                    <WindVectorOverlay mapRef={mapRef} windField={windField} active={!!windField} />
+                )}
+                {showWind && windVizMode === 'flow' && (
                     <WindParticleOverlay mapRef={mapRef} windField={windField} active={!!windField} />
                 )}
 
@@ -290,9 +302,18 @@ export default function WindDriftPanel({
                         zIndex: 3,
                     }}
                 >
-                    {showWind && (
+                    {showWind && windVizMode === 'vectors' && (
+                        <div style={{ marginBottom: 6, display: 'flex', alignItems: 'center', gap: 6 }}>
+                            <svg width="28" height="10" aria-hidden>
+                                <line x1="2" y1="5" x2="22" y2="5" stroke="rgba(130,168,186,0.55)" strokeWidth="1.5" />
+                                <polygon points="22,5 18,3 18,7" fill="rgba(130,168,186,0.55)" />
+                            </svg>
+                            <span>wind — length ∝ speed</span>
+                        </div>
+                    )}
+                    {showWind && windVizMode === 'flow' && (
                         <div style={{ marginBottom: 6 }}>
-                            <span style={{ color: 'hsl(140,70%,55%)' }}>—</span> wind speed (GFS layer)
+                            <span style={{ color: 'rgba(130,168,186,0.7)' }}>—</span> wind flow (GFS)
                         </div>
                     )}
                     <div>

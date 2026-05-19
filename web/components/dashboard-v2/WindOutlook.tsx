@@ -48,6 +48,7 @@ export default function WindOutlookScreen() {
     const [forecastHours, setForecastHours] = useState(24);
     const [useLive, setUseLive] = useState(true);
     const [showWind, setShowWind] = useState(true);
+    const [windVizMode, setWindVizMode] = useState<'vectors' | 'flow'>('vectors');
     const [showNullschool, setShowNullschool] = useState(false);
     const [iframeBlocked, setIframeBlocked] = useState(false);
 
@@ -162,8 +163,22 @@ export default function WindOutlookScreen() {
 
                 <label style={{ ...labelStyle, display: 'flex', alignItems: 'center', gap: 6, cursor: 'pointer' }}>
                     <input type="checkbox" checked={showWind} onChange={(e) => setShowWind(e.target.checked)} />
-                    Wind particles
+                    Wind overlay
                 </label>
+
+                {showWind && (
+                    <label style={labelStyle}>
+                        Style{' '}
+                        <select
+                            value={windVizMode}
+                            onChange={(e) => setWindVizMode(e.target.value as 'vectors' | 'flow')}
+                            style={selectStyle}
+                        >
+                            <option value="vectors">Vectors</option>
+                            <option value="flow">Flow</option>
+                        </select>
+                    </label>
+                )}
 
                 <label style={{ ...labelStyle, display: 'flex', alignItems: 'center', gap: 6, cursor: 'pointer' }}>
                     <input
@@ -210,6 +225,7 @@ export default function WindOutlookScreen() {
                         observedTrack={observedTrack}
                         forecastHours={forecastHours}
                         showWind={showWind}
+                        windVizMode={windVizMode}
                         anchorKey={`${selectedId ?? ''}-${level}-${forecastHours}`}
                     />
                 </div>
