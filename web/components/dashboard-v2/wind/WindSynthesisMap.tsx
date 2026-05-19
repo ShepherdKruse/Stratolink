@@ -116,6 +116,7 @@ export default function WindSynthesisMap({
     const mapRef = useRef<MapRef>(null);
     const didFitRef = useRef(false);
     const forecastOriginRef = useRef({ lat: startLat, lon: startLon });
+    const levelHpa = snapPressureHpa(pressureHpa);
     /** Avoid replacing a good live stale-gap forecast with an old cron blob after telemetry poll. */
     const hasHourlyGapLiveRef = useRef(false);
     const propsRef = useRef({
@@ -151,8 +152,6 @@ export default function WindSynthesisMap({
     const [error, setError] = useState<string | null>(null);
     const [showEnsemble, setShowEnsemble] = useState(true);
     const [showEllipses, setShowEllipses] = useState(true);
-
-    const levelHpa = snapPressureHpa(pressureHpa);
 
     const loadForecast = useCallback(async () => {
         const p = propsRef.current;
