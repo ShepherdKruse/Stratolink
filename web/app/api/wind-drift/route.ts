@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { computeDriftForecast } from '@/lib/wind/driftForecast';
+import { computeDriftEnsemble } from '@/lib/wind/driftEnsemble';
 
 export const dynamic = 'force-dynamic';
 
@@ -15,7 +15,7 @@ export async function GET(req: Request) {
     }
 
     try {
-        const points = await computeDriftForecast({
+        const result = await computeDriftEnsemble({
             startLat: lat,
             startLon: lon,
             pressureHpa,
@@ -25,13 +25,16 @@ export async function GET(req: Request) {
         });
 
         return NextResponse.json({
-            points,
+            points: result.points,
+            ensemble: result.ensemble,
+            cone: result.cone,
             meta: {
                 model: 'Open-Meteo GFS',
                 pressureHpa,
                 durationHours: hours,
+                ...result.meta,
                 disclaimer:
-                    'Rough drift estimate — balloon moves with layer wind. Not terrain-aware; for planning only.',
+                    'Ensemble drift: central path uses point-fetched GFS; spread uses ±10% speed, ±15° direction, and four grid-cell wind samples. Planning only.',
             },
         });
     } catch (e) {

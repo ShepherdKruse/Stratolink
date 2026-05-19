@@ -34,7 +34,6 @@ export default function WindStreamOverlay({
     const activeRef = useRef(active);
     const particlesRef = useRef<Particle[]>([]);
     const rafRef = useRef(0);
-    const movingRef = useRef(false);
 
     windFieldRef.current = windField;
     activeRef.current = active;
@@ -43,15 +42,14 @@ export default function WindStreamOverlay({
     useEffect(() => {
         const map = mapRef.current?.getMap();
         const canvas = canvasRef.current;
-        if (!map || !canvas || !mapReady) return;
+        if (!map || !canvas || !mapReady || !active) return;
 
         const ctx = canvas.getContext('2d');
         if (!ctx) return;
 
-        const N = 650;
+        const N = 900;
         const MAX = 55;
         const DT = 1.4e-4;
-        let frameSkip = 0;
 
         const resize = () => {
             const parent = canvas.parentElement;
@@ -82,16 +80,11 @@ export default function WindStreamOverlay({
             particlesRef.current = Array.from({ length: N }, () => spawnOne(m));
         };
 
-        let running = false;
+        let running = true;
 
         const frame = () => {
             if (!running) return;
             rafRef.current = requestAnimationFrame(frame);
-
-            if (movingRef.current) return;
-
-            frameSkip++;
-            if (frameSkip % 2 !== 0) return;
 
             const field = windFieldRef.current;
             const lookup = lookupRef.current;
@@ -102,8 +95,10 @@ export default function WindStreamOverlay({
             const W = canvas.width;
             const H = canvas.height;
 
-            ctx.fillStyle = 'rgba(8,13,23,0.14)';
+            ctx.globalCompositeOperation = 'destination-out';
+            ctx.fillStyle = 'rgba(0,0,0,0.12)';
             ctx.fillRect(0, 0, W, H);
+            ctx.globalCompositeOperation = 'source-over';
 
             for (const p of particlesRef.current) {
                 const wind = interpolateWind(p.lat, p.lon, lookup, bounds, gridResolution);
@@ -125,7 +120,7 @@ export default function WindStreamOverlay({
                 if (p.px !== null && p.py !== null) {
                     const life = Math.sin((p.age / p.max) * Math.PI);
                     const sn = Math.min(spd / 42, 1);
-                    const alpha = Math.min(0.22, life * (0.06 + sn * 0.16));
+                    const alpha = Math.min(0.5, life * (0.14 + sn * 0.32));
                     const r = Math.round(120 + sn * 90);
                     const g = Math.round(170 + sn * 50);
 
@@ -133,7 +128,7 @@ export default function WindStreamOverlay({
                     ctx.moveTo(p.px, p.py);
                     ctx.lineTo(x, y);
                     ctx.strokeStyle = `rgba(${r},${g},248,${alpha.toFixed(2)})`;
-                    ctx.lineWidth = 0.4 + sn * 0.7;
+                    ctx.lineWidth = 0.5 + sn * 0.9;
                     ctx.stroke();
                 }
 
@@ -146,54 +141,32 @@ export default function WindStreamOverlay({
             }
         };
 
-        const clear = () => {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-        };
-
-        const start = () => {
-            if (running) return;
-            running = true;
-            rafRef.current = requestAnimationFrame(frame);
-        };
-
-        const stop = () => {
-            running = false;
-            cancelAnimationFrame(rafRef.current);
-            clear();
-        };
-
-        const onMoveStart = () => {
-            movingRef.current = true;
-            clear();
-        };
-
-        const onMoveEnd = () => {
-            movingRef.current = false;
+        const onMove = () => {
             particlesRef.current.forEach((p) => {
                 p.px = null;
                 p.py = null;
             });
         };
 
-        const attach = () => {
-            resize();
-            seed(map);
-            if (activeRef.current && windFieldRef.current) start();
-            map.on('movestart', onMoveStart);
-            map.on('moveend', onMoveEnd);
-            window.addEventListener('resize', resize);
-        };
+        resize();
+        seed(map);
+        rafRef.current = requestAnimationFrame(frame);
 
-        if (map.isStyleLoaded()) attach();
-        else map.once('load', attach);
+        map.on('move', onMove);
+        map.on('resize', resize);
+        window.addEventListener('resize', resize);
 
         return () => {
-            stop();
-            map.off('movestart', onMoveStart);
-            map.off('moveend', onMoveEnd);
+            running = false;
+            cancelAnimationFrame(rafRef.current);
+            map.off('move', onMove);
+            map.off('resize', resize);
             window.removeEventListener('resize', resize);
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
         };
-    }, [mapRef, mapReady, windField, active]);
+    }, [mapRef, mapReady, active, windField]);
+
+    if (!active) return null;
 
     return (
         <canvas
@@ -205,8 +178,7 @@ export default function WindStreamOverlay({
                 width: '100%',
                 height: '100%',
                 pointerEvents: 'none',
-                zIndex: 2,
-                opacity: 0.85,
+                zIndex: 3,
             }}
         />
     );

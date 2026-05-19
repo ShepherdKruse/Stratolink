@@ -22,7 +22,11 @@
 }
 
 .wind-synthesis-wind-canvas {
-    mix-blend-mode: screen;
+    z-index: 3;
+}
+
+.wind-synthesis-track-canvas {
+    z-index: 6;
 }
 
 .wind-synthesis-topbar {

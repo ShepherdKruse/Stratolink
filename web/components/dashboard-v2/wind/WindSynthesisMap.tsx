@@ -8,7 +8,7 @@ import '@/styles/wind-synthesis.css';
 import type { V2FlightPoint } from '../V2MissionMap';
 import { isValidLngLat } from '../V2MissionMap';
 import { boundsFromPoints, snapPressureHpa } from '@/lib/wind/fetchWindGrid';
-import { buildPredictionCone } from '@/lib/wind/predictionCone';
+import type { EnsembleMember } from '@/lib/wind/driftEnsemble';
 import { splitTrackSegments } from '@/lib/wind/trackSegments';
 import type { WindField } from '@/lib/wind/types';
 import FlightTrackOverlay, { type TrackStroke } from './FlightTrackOverlay';
@@ -83,6 +83,8 @@ export default function WindSynthesisMap({
     const [mapReady, setMapReady] = useState(false);
     const [mode, setMode] = useState<WindDisplayMode>('vector');
     const [forecast, setForecast] = useState<DriftPoint[]>([]);
+    const [ensemble, setEnsemble] = useState<EnsembleMember[]>([]);
+    const [ensembleCone, setEnsembleCone] = useState<Array<[number, number]>>([]);
     const [windField, setWindField] = useState<WindField | null>(null);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
@@ -108,9 +110,13 @@ export default function WindSynthesisMap({
                 const data = await res.json();
                 if (!res.ok) throw new Error(data.error ?? 'Forecast failed');
                 setForecast(data.points ?? []);
+                setEnsemble(data.ensemble ?? []);
+                setEnsembleCone(data.cone ?? []);
             } catch (e) {
                 setError(e instanceof Error ? e.message : 'Forecast failed');
                 setForecast([]);
+                setEnsemble([]);
+                setEnsembleCone([]);
             } finally {
                 setLoading(false);
             }
@@ -135,14 +141,23 @@ export default function WindSynthesisMap({
     }, [forecast]);
 
     const conePolygon = useMemo(() => {
-        const ring = buildPredictionCone(predCoords);
+        const ring = ensembleCone.length >= 4 ? ensembleCone : [];
         if (ring.length < 4) return null;
         return {
             type: 'Feature' as const,
             geometry: { type: 'Polygon' as const, coordinates: [ring] },
             properties: {},
         };
-    }, [predCoords]);
+    }, [ensembleCone]);
+
+    const ensembleStrokes = useMemo((): TrackStroke[] => {
+        return ensemble.map((m) => ({
+            coords: m.points.map((p) => [p.lon, p.lat] as [number, number]),
+            color: 'rgba(230, 208, 136, 0.35)',
+            width: 1.5,
+            dashed: true,
+        }));
+    }, [ensemble]);
 
     const hourLabels = useMemo(() => {
         const step = 4;
@@ -165,6 +180,7 @@ export default function WindSynthesisMap({
         const pts = [
             ...observedTrack.map((p) => ({ lat: p.lat, lon: p.lon })),
             ...forecast.map((p) => ({ lat: p.lat, lon: p.lon })),
+            ...ensemble.flatMap((m) => m.points.map((p) => ({ lat: p.lat, lon: p.lon }))),
         ];
         if (pts.length === 0) return;
         try {
@@ -182,7 +198,7 @@ export default function WindSynthesisMap({
         } catch {
             setWindField(null);
         }
-    }, [observedTrack, forecast, levelHpa, showWind]);
+    }, [observedTrack, forecast, ensemble, levelHpa, showWind]);
 
     useEffect(() => {
         const t = window.setTimeout(loadWindGrid, 800);
@@ -284,16 +300,16 @@ export default function WindSynthesisMap({
         if (predCoords.length >= 2) {
             strokes.push({
                 coords: predCoords,
-                color: '#f0d878',
-                width: 3.5,
+                color: '#f5e6a8',
+                width: 4,
                 dashed: true,
                 halo: true,
-                haloColor: 'rgba(0,0,0,0.55)',
-                haloWidth: 12,
+                haloColor: 'rgba(0,0,0,0.7)',
+                haloWidth: 14,
             });
         }
-        return strokes;
-    }, [segments.freezeDrift, obsCoords, resumedCoords, predCoords]);
+        return [...strokes, ...ensembleStrokes];
+    }, [segments.freezeDrift, obsCoords, resumedCoords, predCoords, ensembleStrokes]);
 
     const token = process.env.NEXT_PUBLIC_MAPBOX_TOKEN;
     if (!token) {
@@ -398,16 +414,16 @@ export default function WindSynthesisMap({
                             <Layer
                                 id="ws-cone-fill"
                                 type="fill"
-                                paint={{ 'fill-color': '#c9521f', 'fill-opacity': 0.06 }}
+                                paint={{ 'fill-color': '#e85d2a', 'fill-opacity': 0.2 }}
                             />
                             <Layer
                                 id="ws-cone-stroke"
                                 type="line"
                                 paint={{
-                                    'line-color': '#c9521f',
-                                    'line-width': 1,
-                                    'line-opacity': 0.18,
-                                    'line-dasharray': [3, 5],
+                                    'line-color': '#ff9a5c',
+                                    'line-width': 1.5,
+                                    'line-opacity': 0.55,
+                                    'line-dasharray': [4, 4],
                                 }}
                             />
                         </Source>
@@ -580,11 +596,13 @@ export default function WindSynthesisMap({
                             width: 26,
                             height: 10,
                             borderRadius: 2,
-                            background: 'rgba(201,82,31,.12)',
-                            border: '1px dashed rgba(201,82,31,.3)',
+                            background: 'rgba(232,93,42,.28)',
+                            border: '1px dashed rgba(255,154,92,.55)',
                         }}
                     />
-                    <span style={{ fontSize: 11.5, color: 'rgba(200,212,232,.58)' }}>Prediction uncertainty</span>
+                    <span style={{ fontSize: 11.5, color: 'rgba(200,212,232,.58)' }}>
+                        Ensemble spread (±10% speed, ±15° dir, grid)
+                    </span>
                 </div>
                 {gpsMarkers.length > 0 && (
                     <div

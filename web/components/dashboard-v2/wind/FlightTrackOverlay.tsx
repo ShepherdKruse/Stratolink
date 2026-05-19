@@ -1,8 +1,9 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useCallback, useEffect, useRef } from 'react';
 import type { Map as MapboxMap } from 'mapbox-gl';
 import type { MapRef } from 'react-map-gl/mapbox';
+import { useMapMoveRedraw } from '@/lib/wind/useMapMoveRedraw';
 
 export type TrackStroke = {
     coords: Array<[number, number]>;
@@ -43,7 +44,7 @@ function drawLine(
     if (halo) {
         ctx.strokeStyle = haloColor;
         ctx.lineWidth = haloWidth;
-        ctx.globalAlpha = 0.35;
+        ctx.globalAlpha = 0.45;
         ctx.beginPath();
         pts.forEach((p, i) => (i === 0 ? ctx.moveTo(p.x, p.y) : ctx.lineTo(p.x, p.y)));
         ctx.stroke();
@@ -63,76 +64,45 @@ export default function FlightTrackOverlay({ mapRef, mapReady = false, tracks }:
     const tracksRef = useRef(tracks);
     tracksRef.current = tracks;
 
-    useEffect(() => {
+    const layoutRef = useRef({ dpr: 1, cssW: 0, cssH: 0 });
+
+    const resize = useCallback(() => {
+        const canvas = canvasRef.current;
+        const parent = canvas?.parentElement;
+        if (!canvas || !parent) return;
+        const rect = parent.getBoundingClientRect();
+        const dpr = Math.min(window.devicePixelRatio || 1, 2);
+        layoutRef.current = { dpr, cssW: rect.width, cssH: rect.height };
+        canvas.width = Math.floor(rect.width * dpr);
+        canvas.height = Math.floor(rect.height * dpr);
+        canvas.style.width = `${rect.width}px`;
+        canvas.style.height = `${rect.height}px`;
+    }, []);
+
+    const draw = useCallback(() => {
         const map = mapRef.current?.getMap();
         const canvas = canvasRef.current;
-        if (!map || !canvas || !mapReady) return;
-
+        if (!map || !canvas) return;
         const ctx = canvas.getContext('2d');
         if (!ctx) return;
 
-        let dpr = 1;
+        const { dpr, cssW, cssH } = layoutRef.current;
+        ctx.setTransform(1, 0, 0, 1, 0, 0);
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        if (cssW === 0) return;
 
-        const resize = () => {
-            const parent = canvas.parentElement;
-            if (!parent) return;
-            const rect = parent.getBoundingClientRect();
-            dpr = Math.min(window.devicePixelRatio || 1, 2);
-            canvas.width = Math.floor(rect.width * dpr);
-            canvas.height = Math.floor(rect.height * dpr);
-            canvas.style.width = `${rect.width}px`;
-            canvas.style.height = `${rect.height}px`;
-        };
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 
-        const draw = () => {
-            ctx.setTransform(1, 0, 0, 1, 0, 0);
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        for (const t of tracksRef.current) {
+            drawLine(ctx, map, t.coords, t.color, t.width, t.dashed, t.halo, t.haloColor, t.haloWidth);
+        }
+    }, [mapRef]);
 
-            for (const t of tracksRef.current) {
-                drawLine(
-                    ctx,
-                    map,
-                    t.coords,
-                    t.color,
-                    t.width,
-                    t.dashed,
-                    t.halo,
-                    t.haloColor,
-                    t.haloWidth,
-                );
-            }
-        };
-
-        drawRef.current = draw;
-        resize();
-        draw();
-
-        const onMoveEnd = () => draw();
-        const onResize = () => {
-            resize();
-            draw();
-        };
-
-        map.on('moveend', onMoveEnd);
-        map.on('resize', onResize);
-        window.addEventListener('resize', onResize);
-
-        return () => {
-            map.off('moveend', onMoveEnd);
-            map.off('resize', onResize);
-            window.removeEventListener('resize', onResize);
-        };
-    }, [mapRef, mapReady]);
-
-    const drawRef = useRef<() => void>(() => {});
+    useMapMoveRedraw(mapRef, mapReady, draw, resize);
 
     useEffect(() => {
-        const map = mapRef.current?.getMap();
-        const canvas = canvasRef.current;
-        if (!map || !canvas || !mapReady) return;
-        drawRef.current();
-    }, [tracks, mapReady, mapRef]);
+        draw();
+    }, [tracks, draw]);
 
     return (
         <canvas
@@ -144,7 +114,7 @@ export default function FlightTrackOverlay({ mapRef, mapReady = false, tracks }:
                 width: '100%',
                 height: '100%',
                 pointerEvents: 'none',
-                zIndex: 5,
+                zIndex: 6,
             }}
         />
     );
