@@ -1,5 +1,5 @@
 import type { WindField, BalloonTrajectory, TrajectoryPoint } from "./types"
-import { interpolateWind } from "./utils"
+import { buildWindLookup, interpolateWind } from "./utils"
 
 export function integrateBalloonTrajectory(
   windField: WindField,
@@ -14,6 +14,7 @@ export function integrateBalloonTrajectory(
 
   const startTime = new Date()
   const steps = Math.floor((durationHours * 60) / timeStepMinutes)
+  const lookup = buildWindLookup(windField)
 
   // Conversion factor: degrees per meter at equator (approximately)
   const metersPerDegreeLat = 111000
@@ -40,7 +41,7 @@ export function integrateBalloonTrajectory(
     }
 
     // Integrate position using wind field
-    const wind = interpolateWind(lat, lon, windField.grid, windField.bounds, windField.gridResolution)
+    const wind = interpolateWind(lat, lon, lookup, windField.bounds, windField.gridResolution)
 
     // Convert wind (m/s) to position change (degrees)
     const dt = timeStepMinutes * 60 // seconds

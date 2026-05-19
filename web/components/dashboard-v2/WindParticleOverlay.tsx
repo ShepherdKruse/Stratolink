@@ -3,11 +3,12 @@
 import { useEffect, useRef } from 'react';
 import type { MapRef } from 'react-map-gl/mapbox';
 import type { WindField } from '@/lib/wind/types';
-import { interpolateWind, windSpeed } from '@/lib/wind/utils';
+import { buildWindLookup, interpolateWind, windSpeed } from '@/lib/wind/utils';
 
 type WindParticleOverlayProps = {
     mapRef: React.RefObject<MapRef | null>;
     windField: WindField | null;
+    mapReady?: boolean;
     active?: boolean;
 };
 
@@ -18,7 +19,12 @@ function speedAlpha(speed: number): number {
     return Math.min(0.42, 0.12 + (speed / 45) * 0.3);
 }
 
-export default function WindParticleOverlay({ mapRef, windField, active = true }: WindParticleOverlayProps) {
+export default function WindParticleOverlay({
+    mapRef,
+    windField,
+    mapReady = false,
+    active = true,
+}: WindParticleOverlayProps) {
     const canvasRef = useRef<HTMLCanvasElement>(null);
     const particlesRef = useRef(
         Array.from({ length: PARTICLE_COUNT }, () => ({
@@ -39,7 +45,7 @@ export default function WindParticleOverlay({ mapRef, windField, active = true }
     useEffect(() => {
         const map = mapRef.current?.getMap();
         const canvas = canvasRef.current;
-        if (!map || !canvas) return;
+        if (!map || !canvas || !mapReady) return;
 
         const ctx = canvas.getContext('2d');
         if (!ctx) return;
@@ -73,13 +79,14 @@ export default function WindParticleOverlay({ mapRef, windField, active = true }
                 return;
             }
 
-            const { bounds, grid, gridResolution } = field;
+            const { bounds, gridResolution } = field;
+            const lookup = buildWindLookup(field);
             ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
             ctx.clearRect(0, 0, cssW, cssH);
 
             const sampleWind = (x: number, y: number) => {
                 const lngLat = map.unproject([x, y]);
-                return interpolateWind(lngLat.lat, lngLat.lng, grid, bounds, gridResolution);
+                return interpolateWind(lngLat.lat, lngLat.lng, lookup, bounds, gridResolution);
             };
 
             particlesRef.current.forEach((p) => {
@@ -146,7 +153,7 @@ export default function WindParticleOverlay({ mapRef, windField, active = true }
             window.removeEventListener('resize', resize);
             cancelAnimationFrame(rafRef.current);
         };
-    }, [mapRef]);
+    }, [mapRef, mapReady]);
 
     return (
         <canvas

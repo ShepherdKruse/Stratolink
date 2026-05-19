@@ -4,7 +4,7 @@ import type React from "react"
 
 import { useEffect, useRef, useCallback } from "react"
 import type { WindField, BalloonTrajectory, Particle } from "@/lib/wind/types"
-import { latLonToCanvas, windSpeed, interpolateWind } from "@/lib/wind/utils"
+import { buildWindLookup, latLonToCanvas, windSpeed, interpolateWind } from "@/lib/wind/utils"
 
 interface WindCanvasProps {
   windField: WindField
@@ -46,6 +46,8 @@ export function WindCanvas({
     }))
   }, [width, height])
 
+  const windLookup = buildWindLookup(windField)
+
   const draw = useCallback(() => {
     const canvas = canvasRef.current
     if (!canvas) return
@@ -79,7 +81,7 @@ export function WindCanvas({
     if (showParticles && isPlaying) {
       particlesRef.current.forEach((particle) => {
         const { lat, lon } = canvasToLatLon(particle.x, particle.y)
-        const wind = interpolateWind(lat, lon, windField.grid, windField.bounds, windField.gridResolution)
+        const wind = interpolateWind(lat, lon, windLookup, windField.bounds, windField.gridResolution)
 
         const speed = windSpeed(wind)
         particle.speed = speed

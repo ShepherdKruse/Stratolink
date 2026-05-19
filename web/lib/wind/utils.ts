@@ -1,31 +1,37 @@
-import type { WindVector, GridPoint, WindField } from "./types"
+import type { WindVector, WindField } from "./types"
+
+/** Index grid points by snapped lat/lon cell (API coords may differ slightly from request). */
+export function buildWindLookup(field: WindField): Map<string, WindVector> {
+  const lookup = new Map<string, WindVector>()
+  const { bounds, gridResolution, grid } = field
+  for (const p of grid) {
+    const li = Math.round((p.lat - bounds.latMin) / gridResolution)
+    const lj = Math.round((p.lon - bounds.lonMin) / gridResolution)
+    lookup.set(`${li},${lj}`, p.wind)
+  }
+  return lookup
+}
 
 export function interpolateWind(
   lat: number,
   lon: number,
-  grid: GridPoint[],
+  lookup: Map<string, WindVector>,
   bounds: WindField["bounds"],
   gridResolution: number,
 ): WindVector {
-  // Find the four surrounding grid points
   const latIdx = (lat - bounds.latMin) / gridResolution
   const lonIdx = (lon - bounds.lonMin) / gridResolution
 
   const lat0 = Math.floor(latIdx)
-  const lat1 = Math.ceil(latIdx)
+  const lat1 = lat0 + 1
   const lon0 = Math.floor(lonIdx)
-  const lon1 = Math.ceil(lonIdx)
+  const lon1 = lon0 + 1
 
   const latFrac = latIdx - lat0
   const lonFrac = lonIdx - lon0
 
-  // Get grid dimensions
-  const lonCount = Math.ceil((bounds.lonMax - bounds.lonMin) / gridResolution) + 1
-
-  const getPoint = (latI: number, lonI: number): WindVector => {
-    const idx = latI * lonCount + lonI
-    return grid[idx]?.wind || { u: 0, v: 0 }
-  }
+  const getPoint = (latI: number, lonI: number): WindVector =>
+    lookup.get(`${latI},${lonI}`) ?? { u: 0, v: 0 }
 
   // Bilinear interpolation
   const w00 = getPoint(lat0, lon0)

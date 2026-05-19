@@ -3,34 +3,27 @@
 import { useEffect, useRef } from 'react';
 import type { MapRef } from 'react-map-gl/mapbox';
 import type { WindField } from '@/lib/wind/types';
-import { interpolateWind, windSpeed } from '@/lib/wind/utils';
+import { windSpeed } from '@/lib/wind/utils';
 
 export type WindVizMode = 'vectors' | 'flow';
 
 type WindVectorOverlayProps = {
     mapRef: React.RefObject<MapRef | null>;
     windField: WindField | null;
+    mapReady?: boolean;
     active?: boolean;
 };
 
-function gridSpacing(zoom: number): number {
-    if (zoom < 4) return 0;
-    if (zoom < 5) return 140;
-    if (zoom < 6) return 110;
-    if (zoom < 7) return 90;
-    return 72;
-}
-
 function arrowOpacity(speed: number): number {
-    return Math.min(0.48, 0.2 + (speed / 45) * 0.28);
+    return Math.min(0.55, 0.28 + (speed / 45) * 0.27);
 }
 
 function arrowLength(speed: number): number {
-    return Math.min(38, Math.max(10, speed * 1.1));
+    return Math.min(42, Math.max(12, speed * 1.15));
 }
 
 function drawArrow(ctx: CanvasRenderingContext2D, x: number, y: number, u: number, v: number, speed: number) {
-    if (speed < 1.5) return;
+    if (speed < 0.8) return;
 
     const len = arrowLength(speed);
     const dx = (u / speed) * len;
@@ -39,9 +32,9 @@ function drawArrow(ctx: CanvasRenderingContext2D, x: number, y: number, u: numbe
     const y2 = y + dy;
 
     const alpha = arrowOpacity(speed);
-    ctx.strokeStyle = `rgba(130, 168, 186, ${alpha})`;
-    ctx.fillStyle = `rgba(130, 168, 186, ${alpha})`;
-    ctx.lineWidth = 1.15;
+    ctx.strokeStyle = `rgba(148, 188, 208, ${alpha})`;
+    ctx.fillStyle = `rgba(148, 188, 208, ${alpha})`;
+    ctx.lineWidth = 1.25;
     ctx.lineCap = 'round';
 
     ctx.beginPath();
@@ -49,7 +42,7 @@ function drawArrow(ctx: CanvasRenderingContext2D, x: number, y: number, u: numbe
     ctx.lineTo(x2, y2);
     ctx.stroke();
 
-    const head = 4;
+    const head = 5;
     const angle = Math.atan2(dy, dx);
     ctx.beginPath();
     ctx.moveTo(x2, y2);
@@ -59,7 +52,12 @@ function drawArrow(ctx: CanvasRenderingContext2D, x: number, y: number, u: numbe
     ctx.fill();
 }
 
-export default function WindVectorOverlay({ mapRef, windField, active = true }: WindVectorOverlayProps) {
+export default function WindVectorOverlay({
+    mapRef,
+    windField,
+    mapReady = false,
+    active = true,
+}: WindVectorOverlayProps) {
     const canvasRef = useRef<HTMLCanvasElement>(null);
     const windFieldRef = useRef(windField);
     const activeRef = useRef(active);
@@ -72,7 +70,7 @@ export default function WindVectorOverlay({ mapRef, windField, active = true }: 
     useEffect(() => {
         const map = mapRef.current?.getMap();
         const canvas = canvasRef.current;
-        if (!map || !canvas) return;
+        if (!map || !canvas || !mapReady) return;
 
         const ctx = canvas.getContext('2d');
         if (!ctx) return;
@@ -95,27 +93,43 @@ export default function WindVectorOverlay({ mapRef, windField, active = true }: 
             ctx.clearRect(0, 0, canvas.width, canvas.height);
 
             const field = windFieldRef.current;
-            if (!field || !activeRef.current || cssW === 0) return;
+            if (!field || !activeRef.current || cssW === 0 || field.grid.length === 0) return;
 
-            const spacing = gridSpacing(map.getZoom());
-            if (spacing === 0) return;
+            const mapBounds = map.getBounds();
+            if (!mapBounds) return;
 
-            const { bounds, grid, gridResolution } = field;
+            const west = mapBounds.getWest();
+            const east = mapBounds.getEast();
+            const south = mapBounds.getSouth();
+            const north = mapBounds.getNorth();
+
             ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 
-            const pad = spacing / 2;
-            for (let y = pad; y < cssH; y += spacing) {
-                for (let x = pad; x < cssW; x += spacing) {
-                    const lngLat = map.unproject([x, y]);
-                    const wind = interpolateWind(lngLat.lat, lngLat.lng, grid, bounds, gridResolution);
-                    drawArrow(ctx, x, y, wind.u, wind.v, windSpeed(wind));
+            const margin = 40;
+            for (const pt of field.grid) {
+                if (pt.lat < south || pt.lat > north) continue;
+                if (west <= east) {
+                    if (pt.lon < west || pt.lon > east) continue;
+                } else {
+                    // Antimeridian wrap
+                    if (pt.lon < west && pt.lon > east) continue;
                 }
+
+                const screen = map.project([pt.lon, pt.lat]);
+                if (
+                    screen.x < -margin ||
+                    screen.x > cssW + margin ||
+                    screen.y < -margin ||
+                    screen.y > cssH + margin
+                ) {
+                    continue;
+                }
+
+                drawArrow(ctx, screen.x, screen.y, pt.wind.u, pt.wind.v, windSpeed(pt.wind));
             }
         };
 
         drawRef.current = draw;
-        resize();
-        draw();
 
         const clear = () => {
             ctx.setTransform(1, 0, 0, 1, 0, 0);
@@ -129,10 +143,17 @@ export default function WindVectorOverlay({ mapRef, windField, active = true }: 
             draw();
         };
 
-        map.on('movestart', onMoveStart);
-        map.on('moveend', onMoveEnd);
-        map.on('resize', onResize);
-        window.addEventListener('resize', onResize);
+        const attach = () => {
+            resize();
+            draw();
+            map.on('movestart', onMoveStart);
+            map.on('moveend', onMoveEnd);
+            map.on('resize', onResize);
+            window.addEventListener('resize', onResize);
+        };
+
+        if (map.isStyleLoaded()) attach();
+        else map.once('load', attach);
 
         return () => {
             map.off('movestart', onMoveStart);
@@ -140,11 +161,11 @@ export default function WindVectorOverlay({ mapRef, windField, active = true }: 
             map.off('resize', onResize);
             window.removeEventListener('resize', onResize);
         };
-    }, [mapRef]);
+    }, [mapRef, mapReady]);
 
     useEffect(() => {
         drawRef.current();
-    }, [windField, active]);
+    }, [windField, active, mapReady]);
 
     return (
         <canvas

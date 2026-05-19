@@ -52,6 +52,7 @@ export default function WindDriftPanel({
     const [loading, setLoading] = useState(false);
     const [gridLoading, setGridLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
+    const [mapReady, setMapReady] = useState(false);
 
     const loadForecast = useCallback(
         async (origin?: { lat: number; lon: number }) => {
@@ -240,6 +241,7 @@ export default function WindDriftPanel({
                     style={{ width: '100%', height: '100%' }}
                     mapStyle="mapbox://styles/mapbox/dark-v11"
                     projection="mercator"
+                    onLoad={() => setMapReady(true)}
                 >
                     {observedLine && (
                         <Source id="wind-observed" type="geojson" data={observedLine}>
@@ -280,10 +282,20 @@ export default function WindDriftPanel({
                 </Map>
 
                 {showWind && windVizMode === 'vectors' && (
-                    <WindVectorOverlay mapRef={mapRef} windField={windField} active={!!windField} />
+                    <WindVectorOverlay
+                        mapRef={mapRef}
+                        windField={windField}
+                        mapReady={mapReady}
+                        active={!!windField}
+                    />
                 )}
                 {showWind && windVizMode === 'flow' && (
-                    <WindParticleOverlay mapRef={mapRef} windField={windField} active={!!windField} />
+                    <WindParticleOverlay
+                        mapRef={mapRef}
+                        windField={windField}
+                        mapReady={mapReady}
+                        active={!!windField}
+                    />
                 )}
 
                 <div
