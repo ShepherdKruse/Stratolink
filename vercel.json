@@ -3,11 +3,5 @@
   "rootDirectory": "web",
   "buildCommand": "npm run build",
   "installCommand": "npm install --legacy-peer-deps",
-  "framework": "nextjs",
-  "crons": [
-    {
-      "path": "/api/compute-forecast",
-      "schedule": "*/30 * * * *"
-    }
-  ]
+  "framework": "nextjs"
 }
