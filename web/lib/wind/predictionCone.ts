@@ -63,6 +63,7 @@ function bufferHull(hull: Array<[number, number]>, bufferDeg: number): Array<[nu
 
 /**
  * Uncertainty region from ensemble drift paths (convex hull of all member points).
+ * @deprecated Prefer buildPathCorridorEnvelope — hull often leaves the central path on an edge.
  */
 export function buildEnsembleEnvelope(
     paths: Array<Array<[number, number]>>,
@@ -78,4 +79,52 @@ export function buildEnsembleEnvelope(
     if (hull.length < 3) return hull;
     const closed = bufferHull(hull, bufferDeg);
     return [...closed, closed[0]];
+}
+
+/**
+ * Symmetric corridor around the central forecast path from cross-track ensemble spread
+ * at each forecast step (central path stays inside the band, not on a hull edge).
+ */
+export function buildPathCorridorEnvelope(
+    centralPath: Array<[number, number]>,
+    memberPaths: Array<Array<[number, number]>>,
+    minHalfWidthDeg = 0.06,
+): Array<[number, number]> {
+    const n = centralPath.length;
+    if (n < 2) return [];
+
+    const aligned = memberPaths.filter((p) => p.length === n);
+    const allAtStep = [centralPath, ...aligned];
+
+    const left: Array<[number, number]> = [];
+    const right: Array<[number, number]> = [];
+
+    for (let i = 0; i < n; i++) {
+        const [cLon, cLat] = centralPath[i];
+        const prev = centralPath[Math.max(0, i - 1)];
+        const next = centralPath[Math.min(n - 1, i + 1)];
+        const cosLat = Math.cos((cLat * Math.PI) / 180);
+
+        const tLon = (next[0] - prev[0]) * cosLat;
+        const tLat = next[1] - prev[1];
+        const tLen = Math.hypot(tLon, tLat) || 1e-9;
+        const nLon = -tLat / tLen;
+        const nLat = tLon / tLen;
+
+        const tFrac = i / Math.max(1, n - 1);
+        let halfWidth = minHalfWidthDeg + tFrac * 0.12;
+
+        for (const path of allAtStep) {
+            const [lon, lat] = path[i];
+            const dLon = (lon - cLon) * cosLat;
+            const dLat = lat - cLat;
+            const perp = Math.abs(dLon * nLon + dLat * nLat);
+            halfWidth = Math.max(halfWidth, perp + minHalfWidthDeg * 0.35);
+        }
+
+        left.push([cLon + (nLon * halfWidth) / cosLat, cLat + nLat * halfWidth]);
+        right.push([cLon - (nLon * halfWidth) / cosLat, cLat - nLat * halfWidth]);
+    }
+
+    return [...left, ...right.reverse(), left[0]!];
 }

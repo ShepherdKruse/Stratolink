@@ -12,9 +12,6 @@ import type { EnsembleMember } from '@/lib/wind/driftEnsemble';
 import { splitTrackSegments } from '@/lib/wind/trackSegments';
 import type { WindField } from '@/lib/wind/types';
 import WindStreamOverlay from './WindStreamOverlay';
-import WindVectorOverlay from '../WindVectorOverlay';
-
-export type WindDisplayMode = 'stream' | 'vector';
 
 type DriftPoint = {
     lat: number;
@@ -89,7 +86,6 @@ export default function WindSynthesisMap({
     const didFitRef = useRef(false);
     const forecastOriginRef = useRef({ lat: startLat, lon: startLon });
     const [mapReady, setMapReady] = useState(false);
-    const [mode, setMode] = useState<WindDisplayMode>('vector');
     const [forecast, setForecast] = useState<DriftPoint[]>([]);
     const [ensemble, setEnsemble] = useState<EnsembleMember[]>([]);
     const [ensembleCone, setEnsembleCone] = useState<Array<[number, number]>>([]);
@@ -157,21 +153,6 @@ export default function WindSynthesisMap({
             properties: {},
         };
     }, [ensembleCone]);
-
-    const ensembleLinesGeoJson = useMemo(() => {
-        const features = ensemble
-            .map((m) => {
-                const coords = m.points.map((p) => [p.lon, p.lat] as [number, number]);
-                if (coords.length < 2) return null;
-                return {
-                    type: 'Feature' as const,
-                    geometry: { type: 'LineString' as const, coordinates: coords },
-                    properties: {},
-                };
-            })
-            .filter((f): f is NonNullable<typeof f> => f !== null);
-        return features.length ? { type: 'FeatureCollection' as const, features } : null;
-    }, [ensemble]);
 
     const hourLabels = useMemo(() => {
         const step = 4;
@@ -326,22 +307,6 @@ export default function WindSynthesisMap({
                     )}
                 </div>
                 <div className="wind-synthesis-spacer" />
-                <div className="wind-synthesis-mode-toggle">
-                    <button
-                        type="button"
-                        className={`wind-synthesis-mode-btn${mode === 'stream' ? ' active' : ''}`}
-                        onClick={() => setMode('stream')}
-                    >
-                        Stream
-                    </button>
-                    <button
-                        type="button"
-                        className={`wind-synthesis-mode-btn${mode === 'vector' ? ' active' : ''}`}
-                        onClick={() => setMode('vector')}
-                    >
-                        Vectors
-                    </button>
-                </div>
                 <a
                     href={nullschoolUrl}
                     target="_blank"
@@ -386,31 +351,15 @@ export default function WindSynthesisMap({
                             <Layer
                                 id="ws-cone-fill"
                                 type="fill"
-                                paint={{ 'fill-color': '#e85d2a', 'fill-opacity': 0.2 }}
+                                paint={{ 'fill-color': '#c45a28', 'fill-opacity': 0.14 }}
                             />
                             <Layer
                                 id="ws-cone-stroke"
                                 type="line"
                                 paint={{
-                                    'line-color': '#ff9a5c',
-                                    'line-width': 1.5,
-                                    'line-opacity': 0.55,
-                                    'line-dasharray': [4, 4],
-                                }}
-                            />
-                        </Source>
-                    )}
-
-                    {ensembleLinesGeoJson && (
-                        <Source id="ws-ensemble" type="geojson" data={ensembleLinesGeoJson}>
-                            <Layer
-                                id="ws-ensemble-lines"
-                                type="line"
-                                paint={{
-                                    'line-color': 'rgba(230, 208, 136, 0.45)',
-                                    'line-width': 1.5,
-                                    'line-opacity': 0.7,
-                                    'line-dasharray': [2, 3],
+                                    'line-color': 'rgba(232, 140, 80, 0.45)',
+                                    'line-width': 1,
+                                    'line-opacity': 0.5,
                                 }}
                             />
                         </Source>
@@ -434,21 +383,13 @@ export default function WindSynthesisMap({
                     {observedLine && (
                         <Source id="ws-observed" type="geojson" data={observedLine}>
                             <Layer
-                                id="ws-observed-halo"
-                                type="line"
-                                paint={{
-                                    'line-color': '#000000',
-                                    'line-width': 10,
-                                    'line-opacity': 0.45,
-                                }}
-                            />
-                            <Layer
                                 id="ws-observed-line"
                                 type="line"
+                                layout={{ 'line-cap': 'round', 'line-join': 'round' }}
                                 paint={{
-                                    'line-color': '#e86a2a',
-                                    'line-width': 4,
-                                    'line-opacity': 0.95,
+                                    'line-color': '#d4622a',
+                                    'line-width': 2.5,
+                                    'line-opacity': 0.92,
                                 }}
                             />
                         </Source>
@@ -459,11 +400,12 @@ export default function WindSynthesisMap({
                             <Layer
                                 id="ws-resumed-line"
                                 type="line"
+                                layout={{ 'line-cap': 'round', 'line-join': 'round' }}
                                 paint={{
-                                    'line-color': '#e86a2a',
-                                    'line-width': 3,
-                                    'line-opacity': 0.9,
-                                    'line-dasharray': [5, 4],
+                                    'line-color': '#d4622a',
+                                    'line-width': 2,
+                                    'line-opacity': 0.75,
+                                    'line-dasharray': [4, 3],
                                 }}
                             />
                         </Source>
@@ -472,22 +414,14 @@ export default function WindSynthesisMap({
                     {predictedLine && (
                         <Source id="ws-predicted" type="geojson" data={predictedLine}>
                             <Layer
-                                id="ws-predicted-halo"
-                                type="line"
-                                paint={{
-                                    'line-color': '#000000',
-                                    'line-width': 14,
-                                    'line-opacity': 0.5,
-                                }}
-                            />
-                            <Layer
                                 id="ws-predicted-line"
                                 type="line"
+                                layout={{ 'line-cap': 'round', 'line-join': 'round' }}
                                 paint={{
-                                    'line-color': '#f5e6a8',
-                                    'line-width': 4,
-                                    'line-opacity': 0.95,
-                                    'line-dasharray': [6, 5],
+                                    'line-color': '#c9b86a',
+                                    'line-width': 2,
+                                    'line-opacity': 0.88,
+                                    'line-dasharray': [5, 4],
                                 }}
                             />
                         </Source>
@@ -560,16 +494,8 @@ export default function WindSynthesisMap({
                     ))}
                 </Map>
 
-                {showWind && mode === 'stream' && (
+                {showWind && (
                     <WindStreamOverlay
-                        mapRef={mapRef}
-                        windField={windField}
-                        mapReady={mapReady}
-                        active={!!windField}
-                    />
-                )}
-                {showWind && mode === 'vector' && (
-                    <WindVectorOverlay
                         mapRef={mapRef}
                         windField={windField}
                         mapReady={mapReady}
@@ -664,7 +590,7 @@ export default function WindSynthesisMap({
                         }}
                     />
                     <span style={{ fontSize: 11.5, color: 'rgba(200,212,232,.58)' }}>
-                        Ensemble spread (±10% speed, ±15° dir, grid)
+                        Forecast uncertainty (±10% speed, ±15° dir)
                     </span>
                 </div>
                 {gpsMarkers.length > 0 && (

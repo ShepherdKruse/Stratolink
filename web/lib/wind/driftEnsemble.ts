@@ -1,7 +1,7 @@
 import { boundsFromPoints, fetchWindGrid } from './fetchWindGrid';
 import { computeDriftForecast } from './driftForecast';
 import { integrateDriftPath, rotateWind, scaleWind, type DriftPoint, type WindModifier } from './driftIntegrate';
-import { buildEnsembleEnvelope } from './predictionCone';
+import { buildPathCorridorEnvelope } from './predictionCone';
 import { buildWindLookup, interpolateWind } from './utils';
 import type { WindField, WindVector } from './types';
 export type EnsembleMember = {
@@ -186,12 +186,10 @@ export async function computeDriftEnsemble(opts: {
         },
     ];
 
-    const allPaths: Array<Array<[number, number]>> = [
-        points.map((p) => [p.lon, p.lat] as [number, number]),
-        ...ensemble.map((m) => m.points.map((p) => [p.lon, p.lat] as [number, number])),
-    ];
+    const centralPath = points.map((p) => [p.lon, p.lat] as [number, number]);
+    const memberPaths = ensemble.map((m) => m.points.map((p) => [p.lon, p.lat] as [number, number]));
 
-    const cone = buildEnsembleEnvelope(allPaths, 0.12);
+    const cone = buildPathCorridorEnvelope(centralPath, memberPaths, 0.08);
 
     return {
         points,
@@ -201,7 +199,7 @@ export async function computeDriftEnsemble(opts: {
             memberCount: ensemble.length + 1,
             speedSpreadPct: SPEED_SPREAD * 100,
             directionSpreadDeg: DIR_SPREAD_DEG,
-            method: 'GFS grid + speed/direction perturbations',
+            method: 'GFS grid + speed/direction perturbations (corridor envelope)',
         },
     };
 }
