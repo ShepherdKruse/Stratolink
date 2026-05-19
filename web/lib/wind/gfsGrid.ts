@@ -14,11 +14,14 @@ export type GfsGrid = {
 
 export function windAt(gfs: GfsGrid, lat: number, lon: number): { u: number; v: number } {
     const { lat0, dLat, nLat, lon0, dLon, nLon, U, V } = gfs;
-    if (lat < lat0 || lat > lat0 + (nLat - 1) * dLat) return { u: 0, v: 0 };
-    if (lon < lon0 || lon > lon0 + (nLon - 1) * dLon) return { u: 0, v: 0 };
+    const latMax = lat0 + (nLat - 1) * dLat;
+    const lonMax = lon0 + (nLon - 1) * dLon;
+    // Clamp to grid edge — returning zero wind outside made trajectories freeze mid-forecast.
+    const latC = Math.max(lat0, Math.min(latMax, lat));
+    const lonC = Math.max(lon0, Math.min(lonMax, lon));
 
-    const gi = (lat - lat0) / dLat;
-    const gj = (lon - lon0) / dLon;
+    const gi = (latC - lat0) / dLat;
+    const gj = (lonC - lon0) / dLon;
     const i0 = Math.min(Math.floor(gi), nLat - 2);
     const j0 = Math.min(Math.floor(gj), nLon - 2);
     const fi = gi - i0;

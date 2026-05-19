@@ -1,4 +1,4 @@
-import { boundsFromPoints, fetchWindGrid, snapPressureHpa } from './fetchWindGrid';
+import { boundsForForecast, fetchWindGrid, snapPressureHpa } from './fetchWindGrid';
 import type { ForecastEllipse, ForecastGpsFix, MonteCarloForecastInput, StratolinkForecast } from './forecastTypes';
 import { gfsGridToWindField, windAt, windFieldToGfsGrid, type GfsGrid } from './gfsGrid';
 
@@ -213,9 +213,14 @@ export async function computeMonteCarloForecast(input: MonteCarloForecastInput):
         ...input.gpsFixes.map((p) => ({ lat: p.lat, lon: p.lon })),
         ...input.observedTrackLonLat.map(([lon, lat]) => ({ lat, lon })),
     ];
-    const gridBounds = boundsFromPoints(marginPts, 4);
-    const field = await fetchWindGrid(gridBounds, levelHpa, 2.5);
-    const gfs = windFieldToGfsGrid(field, 2.5);
+    const gridBounds = boundsForForecast(marginPts, input.gpsFixes, totalHours);
+    const spanDeg = Math.max(
+        gridBounds.latMax - gridBounds.latMin,
+        gridBounds.lonMax - gridBounds.lonMin,
+    );
+    const gridStep = spanDeg > 22 ? 3.5 : 2.5;
+    const field = await fetchWindGrid(gridBounds, levelHpa, gridStep);
+    const gfs = windFieldToGfsGrid(field, gridStep);
 
     const bias = computeBias(input.gpsFixes, gfs);
 
@@ -239,9 +244,10 @@ export async function computeMonteCarloForecast(input: MonteCarloForecastInput):
         totalHours,
     );
 
-    const ellipseTimes = CFG.ELLIPSE_TIMES_H.filter((h) => h <= totalHours);
+    const pathHours = nominal.length - 1;
+    const ellipseTimes = CFG.ELLIPSE_TIMES_H.filter((h) => h <= totalHours && h <= pathHours);
     const ellipses = ellipseTimes.map((h) => {
-        const positions = ensemble.map((traj) => traj[h] ?? traj[traj.length - 1]);
+        const positions = ensemble.map((traj) => traj[Math.min(h, traj.length - 1)]);
         return {
             t_hours: h,
             e50: computeEllipse(positions, 0.5),

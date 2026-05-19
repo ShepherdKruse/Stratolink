@@ -109,3 +109,43 @@ export function boundsFromPoints(
         lonMax: Math.max(...lons) + marginDeg,
     };
 }
+
+/**
+ * Wind grid large enough for forward integration — pads downwind from recent GPS motion.
+ * A track-only bbox (~4°) is too small; the balloon exits the grid after ~12h and stops moving.
+ */
+export function boundsForForecast(
+    points: Array<{ lat: number; lon: number }>,
+    gpsFixes: Array<{ lat: number; lon: number; time_utc: string }>,
+    forecastHours: number,
+): WindGridBounds {
+    const base = boundsFromPoints(points, 4);
+
+    let dLatPerH = 0.35;
+    let dLonPerH = 0.45;
+    if (gpsFixes.length >= 2) {
+        const b = gpsFixes[gpsFixes.length - 1];
+        const a = gpsFixes[gpsFixes.length - 2];
+        const dtH =
+            (new Date(b.time_utc).getTime() - new Date(a.time_utc).getTime()) / 3_600_000;
+        if (dtH > 0.15) {
+            dLatPerH = (b.lat - a.lat) / dtH;
+            dLonPerH = (b.lon - a.lon) / dtH;
+        }
+    }
+
+    const padH = forecastHours * 1.35;
+    const padLat = Math.abs(dLatPerH * padH) + 6;
+    const padLon = Math.abs(dLonPerH * padH) + 6;
+    const up = dLatPerH >= 0 ? padLat : 6;
+    const down = dLatPerH <= 0 ? padLat : 6;
+    const east = dLonPerH >= 0 ? padLon : 6;
+    const west = dLonPerH <= 0 ? padLon : 6;
+
+    return {
+        latMin: base.latMin - down,
+        latMax: base.latMax + up,
+        lonMin: base.lonMin - west,
+        lonMax: base.lonMax + east,
+    };
+}
