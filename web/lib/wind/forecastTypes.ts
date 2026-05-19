@@ -33,6 +33,12 @@ export type StratolinkForecast = {
         alt_m?: number;
         time_utc: string;
     };
+    /** Present when last GPS fix was stale and we dead-reckoned to an implied "now". */
+    stale_gps?: {
+        gap_hours: number;
+        last_fix_time_utc: string;
+        wind_field_time_utc: string;
+    };
     nominal_path: Array<[number, number]>;
     ensemble: Array<Array<[number, number]>>;
     ellipses: ForecastEllipseSlice[];

@@ -369,7 +369,15 @@ export default function WindSynthesisMap({
                     )}
                     {endPoint && (
                         <div>
-                            <b>Forecast</b> +{effectiveHorizonH}h from last fix · endpoint{' '}
+                            <b>Forecast</b>{' '}
+                            {mc?.stale_gps ? (
+                                <>
+                                    +{effectiveHorizonH}h from implied now ({mc.stale_gps.gap_hours}h since
+                                    last GPS) · endpoint{' '}
+                                </>
+                            ) : (
+                                <>+{effectiveHorizonH}h from last fix · endpoint </>
+                            )}
                             {endPoint.lat.toFixed(2)}°N {Math.abs(endPoint.lon).toFixed(2)}°W
                         </div>
                     )}
@@ -412,6 +420,24 @@ export default function WindSynthesisMap({
                     {loading ? '…' : 'Refresh'}
                 </button>
             </div>
+
+            {mc?.stale_gps && (
+                <div className="wind-synthesis-bias-banner wind-synthesis-stale-banner">
+                    <div className="wind-synthesis-bias-label">Stale GPS · implied drift to now</div>
+                    <div className="wind-synthesis-bias-body">
+                        Last fix{' '}
+                        {new Date(mc.stale_gps.last_fix_time_utc).toLocaleString('en-US', {
+                            month: 'short',
+                            day: 'numeric',
+                            hour: '2-digit',
+                            minute: '2-digit',
+                            timeZone: 'UTC',
+                        })}{' '}
+                        UTC · <b>{mc.stale_gps.gap_hours}h</b> integrated with GFS at fix time · forward
+                        forecast from implied position
+                    </div>
+                </div>
+            )}
 
             {mc && mc.bias_correction.n_samples > 0 && (
                 <div className="wind-synthesis-bias-banner">
@@ -604,7 +630,26 @@ export default function WindSynthesisMap({
                             <div
                                 className="wind-synthesis-waypoint"
                                 style={{ width: 11, height: 11, background: '#c9521f' }}
-                                title="Last fix · prediction start"
+                                title={mc?.stale_gps ? 'Last GPS fix (stale)' : 'Last fix'}
+                            />
+                        </Marker>
+                    )}
+
+                    {mc?.stale_gps && mc.forecast_origin && (
+                        <Marker
+                            longitude={mc.forecast_origin.lon}
+                            latitude={mc.forecast_origin.lat}
+                            anchor="center"
+                        >
+                            <div
+                                className="wind-synthesis-waypoint"
+                                style={{
+                                    width: 13,
+                                    height: 13,
+                                    background: '#e6d088',
+                                    boxShadow: '0 0 0 2px rgba(8,13,23,.85)',
+                                }}
+                                title="Implied position now · forecast start"
                             />
                         </Marker>
                     )}

@@ -1,5 +1,7 @@
+import { integrateBalloonPath } from './balloonIntegrate';
 import { boundsForForecast, fetchWindGrid, snapPressureHpa } from './fetchWindGrid';
 import type { ForecastEllipse, ForecastGpsFix, MonteCarloForecastInput, StratolinkForecast } from './forecastTypes';
+import { gpsGapHours, resolveForecastStart, STALE_GPS_THRESHOLD_H } from './staleGpsExtrapolation';
 import { gfsGridToWindField, windAt, windFieldToGfsGrid, type GfsGrid } from './gfsGrid';
 
 const CFG = {
@@ -93,49 +95,6 @@ export function computeBias(gpsFixes: ForecastGpsFix[], gfs: GfsGrid): BiasCorre
     };
 }
 
-function integrate(
-    startLat: number,
-    startLon: number,
-    gfs: GfsGrid,
-    bias: BiasCorrection,
-    pert: { speedM: number; dirOffDeg: number; altPertHPa: number },
-    totalHours: number,
-): Array<[number, number]> {
-    const { speedMult, dirOffsetDeg } = bias;
-    const { speedM, dirOffDeg, altPertHPa } = pert;
-
-    const totalSteps = Math.round(totalHours / CFG.STEP_HOURS);
-    const stepSec = CFG.STEP_HOURS * 3600;
-    const dirRad = ((dirOffsetDeg + dirOffDeg) * Math.PI) / 180;
-    const cosD = Math.cos(dirRad);
-    const sinD = Math.sin(dirRad);
-    const altScale = 1 + altPertHPa * CFG.ALT_TO_WIND_FACTOR;
-
-    let lat = startLat;
-    let lon = startLon;
-    const path: Array<[number, number]> = [[round4(lon), round4(lat)]];
-    const stepsPerHour = Math.round(1 / CFG.STEP_HOURS);
-
-    for (let s = 1; s <= totalSteps; s++) {
-        const { u, v } = windAt(gfs, lat, lon);
-        const k = speedMult * speedM * altScale;
-        const uK = u * k;
-        const vK = v * k;
-        const uR = uK * cosD - vK * sinD;
-        const vR = uK * sinD + vK * cosD;
-
-        const cosLat = Math.max(Math.cos((lat * Math.PI) / 180), 0.05);
-        lat += (vR * stepSec) / 111_320;
-        lon += (uR * stepSec) / (111_320 * cosLat);
-
-        if (s % stepsPerHour === 0) {
-            path.push([round4(lon), round4(lat)]);
-        }
-    }
-
-    return path;
-}
-
 function computeEllipse(positions: Array<[number, number]>, confidence: 0.5 | 0.9): ForecastEllipse {
     const meanLat = positions.reduce((s, [, lat]) => s + lat, 0) / positions.length;
     const meanLon = positions.reduce((s, [lon]) => s + lon, 0) / positions.length;
@@ -213,7 +172,10 @@ export async function computeMonteCarloForecast(input: MonteCarloForecastInput):
         ...input.gpsFixes.map((p) => ({ lat: p.lat, lon: p.lon })),
         ...input.observedTrackLonLat.map(([lon, lat]) => ({ lat, lon })),
     ];
-    const gridBounds = boundsForForecast(marginPts, input.gpsFixes, totalHours);
+    const gapH = gpsGapHours(lastFix);
+    const boundHours =
+        totalHours + (gapH >= STALE_GPS_THRESHOLD_H ? Math.min(gapH, 72) : 0);
+    const gridBounds = boundsForForecast(marginPts, input.gpsFixes, boundHours);
     const spanDeg = Math.max(
         gridBounds.latMax - gridBounds.latMin,
         gridBounds.lonMax - gridBounds.lonMin,
@@ -224,10 +186,24 @@ export async function computeMonteCarloForecast(input: MonteCarloForecastInput):
 
     const bias = computeBias(input.gpsFixes, gfs);
 
+    const forecastStart = await resolveForecastStart({
+        lastFix,
+        gpsFixes: input.gpsFixes,
+        observedTrackLonLat: input.observedTrackLonLat,
+        pressureHpa: levelHpa,
+        bias,
+        existingDriftLonLat: input.driftSegmentLonLat,
+    });
+
+    const driftSegment =
+        forecastStart.implied_drift_lonlat.length >= 2
+            ? forecastStart.implied_drift_lonlat
+            : (input.driftSegmentLonLat ?? []);
+
     const ensemble: Array<Array<[number, number]>> = [];
     for (let i = 0; i < nEnsemble; i++) {
         ensemble.push(
-            integrate(lastFix.lat, lastFix.lon, gfs, bias, {
+            integrateBalloonPath(forecastStart.lat, forecastStart.lon, gfs, bias, {
                 speedM: 1 + CFG.SPEED_SIGMA * gauss(),
                 dirOffDeg: CFG.DIR_SIGMA_DEG * gauss(),
                 altPertHPa: CFG.ALT_SIGMA_HPA * gauss(),
@@ -235,9 +211,9 @@ export async function computeMonteCarloForecast(input: MonteCarloForecastInput):
         );
     }
 
-    const nominal = integrate(
-        lastFix.lat,
-        lastFix.lon,
+    const nominal = integrateBalloonPath(
+        forecastStart.lat,
+        forecastStart.lon,
         gfs,
         bias,
         { speedM: 1, dirOffDeg: 0, altPertHPa: 0 },
@@ -267,11 +243,12 @@ export async function computeMonteCarloForecast(input: MonteCarloForecastInput):
         forecast_horizon_h: totalHours,
         level_hpa: levelHpa,
         forecast_origin: {
-            lat: lastFix.lat,
-            lon: lastFix.lon,
-            alt_m: lastFix.alt_m,
-            time_utc: lastFix.time_utc,
+            lat: forecastStart.lat,
+            lon: forecastStart.lon,
+            alt_m: forecastStart.alt_m,
+            time_utc: forecastStart.time_utc,
         },
+        stale_gps: forecastStart.stale_gps,
         nominal_path: nominal,
         ensemble,
         ellipses,
@@ -297,7 +274,7 @@ export async function computeMonteCarloForecast(input: MonteCarloForecastInput):
             launch: input.launch,
             gps_fixes: input.gpsFixes,
             track: downsampleTrack(input.observedTrackLonLat, 120),
-            drift_segment: input.driftSegmentLonLat ?? [],
+            drift_segment: driftSegment,
         },
         wind_field: {
             lat0: gfs.lat0,
