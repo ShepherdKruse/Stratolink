@@ -124,8 +124,12 @@ export default function WindSynthesisMap({
             );
             if (cached.ok) {
                 const forecast = (await cached.json()) as StratolinkForecast;
-                applyForecast(forecast, showWind, setMc, setWindField);
-                return;
+                const cachedHours = forecast.forecast_horizon_h ?? 24;
+                // Blob cache ignores ?hours= — skip short caches when UI asks for a longer horizon.
+                if (cachedHours >= forecastHours) {
+                    applyForecast(forecast, showWind, setMc, setWindField);
+                    return;
+                }
             }
 
             const res = await fetch('/api/wind-forecast', {
@@ -188,6 +192,10 @@ export default function WindSynthesisMap({
 
     const nominalPath = mc?.nominal_path ?? [];
     const predCoords = nominalPath;
+    /** Hours actually in the loaded forecast (path is one point per hour from origin). */
+    const effectiveHorizonH =
+        mc?.forecast_horizon_h ??
+        (nominalPath.length > 1 ? nominalPath.length - 1 : forecastHours);
 
     const ellipses90GeoJson = useMemo(() => {
         if (!mc || !showEllipses) return null;
@@ -227,7 +235,10 @@ export default function WindSynthesisMap({
 
     const hourLabels = useMemo(() => {
         if (!nominalPath.length) return { type: 'FeatureCollection' as const, features: [] };
-        const labelHours = new Set([6, 12, 18, 24].filter((h) => h <= forecastHours));
+        const pathHours = nominalPath.length - 1;
+        const labelHours = new Set(
+            [6, 12, 18, 24].filter((h) => h <= effectiveHorizonH && h <= pathHours),
+        );
         const features = nominalPath.slice(1).map((p, i) => {
             const hour = i + 1;
             return {
@@ -237,12 +248,14 @@ export default function WindSynthesisMap({
             };
         });
         return { type: 'FeatureCollection' as const, features };
-    }, [nominalPath, forecastHours]);
+    }, [nominalPath, effectiveHorizonH]);
 
     const firstObs = observedTrack[0];
     const lastObs = observedTrack.length ? observedTrack[observedTrack.length - 1] : null;
     const endPoint = mc?.endpoint ?? null;
-    const e90_24 = mc?.ellipses.find((e) => e.t_hours === 24)?.e90 ?? mc?.ellipses[mc.ellipses.length - 1]?.e90;
+    const e90_at_horizon =
+        mc?.ellipses.find((e) => e.t_hours === effectiveHorizonH)?.e90 ??
+        mc?.ellipses[mc.ellipses.length - 1]?.e90;
 
     const launch = useMemo(() => {
         if (launchLat != null && launchLon != null) return { lat: launchLat, lon: launchLon };
@@ -356,7 +369,7 @@ export default function WindSynthesisMap({
                     )}
                     {endPoint && (
                         <div>
-                            <b>Forecast</b> +{forecastHours}h from last fix · endpoint{' '}
+                            <b>Forecast</b> +{effectiveHorizonH}h from last fix · endpoint{' '}
                             {endPoint.lat.toFixed(2)}°N {Math.abs(endPoint.lon).toFixed(2)}°W
                         </div>
                     )}
@@ -654,7 +667,7 @@ export default function WindSynthesisMap({
                     )}
                 </div>
                 <div className="wind-synthesis-ip-section">
-                    <div className="wind-synthesis-ip-header">GFS +{forecastHours}h prediction</div>
+                    <div className="wind-synthesis-ip-header">GFS +{effectiveHorizonH}h prediction</div>
                     {endPoint && (
                         <>
                             <div className="wind-synthesis-ip-row">
@@ -671,11 +684,11 @@ export default function WindSynthesisMap({
                                     </span>
                                 </div>
                             )}
-                            {e90_24 && (
+                            {e90_at_horizon && (
                                 <div className="wind-synthesis-ip-row">
-                                    <span className="wind-synthesis-ip-key">90% spread (+24h)</span>
+                                    <span className="wind-synthesis-ip-key">90% spread (+{effectiveHorizonH}h)</span>
                                     <span className="wind-synthesis-ip-val">
-                                        ±{Math.round(e90_24.semi_a_km)} × {Math.round(e90_24.semi_b_km)} km
+                                        ±{Math.round(e90_at_horizon.semi_a_km)} × {Math.round(e90_at_horizon.semi_b_km)} km
                                     </span>
                                 </div>
                             )}
