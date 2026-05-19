@@ -47,6 +47,8 @@ export default function WindOutlookScreen() {
     const [nsZoom, setNsZoom] = useState<number>(NULLSCHOOL_ZOOM.regional);
     const [forecastHours, setForecastHours] = useState(24);
     const [useLive, setUseLive] = useState(true);
+    const [showWind, setShowWind] = useState(true);
+    const [showNullschool, setShowNullschool] = useState(false);
     const [iframeBlocked, setIframeBlocked] = useState(false);
 
     useEffect(() => {
@@ -159,9 +161,25 @@ export default function WindOutlookScreen() {
                 </label>
 
                 <label style={{ ...labelStyle, display: 'flex', alignItems: 'center', gap: 6, cursor: 'pointer' }}>
-                    <input type="checkbox" checked={useLive} onChange={(e) => setUseLive(e.target.checked)} />
-                    Live winds (nullschool)
+                    <input type="checkbox" checked={showWind} onChange={(e) => setShowWind(e.target.checked)} />
+                    Wind particles
                 </label>
+
+                <label style={{ ...labelStyle, display: 'flex', alignItems: 'center', gap: 6, cursor: 'pointer' }}>
+                    <input
+                        type="checkbox"
+                        checked={showNullschool}
+                        onChange={(e) => setShowNullschool(e.target.checked)}
+                    />
+                    nullschool reference
+                </label>
+
+                {showNullschool && (
+                    <label style={{ ...labelStyle, display: 'flex', alignItems: 'center', gap: 6, cursor: 'pointer' }}>
+                        <input type="checkbox" checked={useLive} onChange={(e) => setUseLive(e.target.checked)} />
+                        Live (nullschool)
+                    </label>
+                )}
 
                 <div style={{ marginLeft: 'auto', display: 'flex', gap: 8, alignItems: 'center', flexWrap: 'wrap' }}>
                     <span style={{ fontSize: 11, color: 'var(--sl-text-dim2)', fontFamily: 'var(--sl-mono)' }}>
@@ -179,34 +197,26 @@ export default function WindOutlookScreen() {
                 style={{
                     flex: 1,
                     minHeight: 0,
-                    display: 'grid',
-                    gridTemplateColumns: '1fr 1fr',
+                    display: 'flex',
+                    flexDirection: 'column',
                     gap: 0,
                 }}
             >
-                {/* Primary: our interactive drift forecast */}
-                <div style={{ minWidth: 0, minHeight: 0, borderRight: '1px solid var(--sl-border)' }}>
+                <div style={{ flex: 1, minHeight: 0, minWidth: 0 }}>
                     <WindDriftPanel
                         startLat={center.lat}
                         startLon={center.lon}
                         pressureHpa={pressureHpa}
                         observedTrack={observedTrack}
                         forecastHours={forecastHours}
+                        showWind={showWind}
                     />
                 </div>
 
-                {/* Secondary: nullschool reference (pan/zoom in new tab recommended) */}
-                <div style={{ minWidth: 0, minHeight: 0, display: 'flex', flexDirection: 'column' }}>
-                    <div
-                        style={{
-                            padding: '8px 12px',
-                            borderBottom: '1px solid var(--sl-border)',
-                            display: 'flex',
-                            flexWrap: 'wrap',
-                            gap: 8,
-                            alignItems: 'center',
-                        }}
-                    >
+                {showNullschool && (
+                <div className="sl-wind-reference">
+                <div style={{ flexShrink: 0, display: 'flex', flexDirection: 'column' }}>
+                    <div className="sl-wind-reference-bar">
                         <span style={{ fontSize: 11, color: 'var(--sl-text-dim)' }}>nullschool reference</span>
                         <button type="button" style={zoomBtnStyle} onClick={() => setNsZoom(NULLSCHOOL_ZOOM.continental)}>
                             Wide
@@ -217,11 +227,11 @@ export default function WindOutlookScreen() {
                         <button type="button" style={zoomBtnStyle} onClick={() => setNsZoom(NULLSCHOOL_ZOOM.local)}>
                             Local
                         </button>
-                        <span style={{ fontSize: 10, color: 'var(--sl-text-dim3)' }}>
-                            Embed is read-only — use Open nullschool for full pan/zoom
+                        <span style={{ fontSize: 10, color: 'var(--sl-text-dim3)', marginLeft: 'auto' }}>
+                            Read-only embed — open in new tab for full interaction
                         </span>
                     </div>
-                    <div style={{ flex: 1, minHeight: 0, position: 'relative', background: '#000' }}>
+                    <div style={{ height: 220, position: 'relative', background: '#000' }}>
                         {iframeBlocked ? (
                             <div style={iframeFallbackStyle}>
                                 <p style={{ color: 'var(--sl-text)', maxWidth: 360, lineHeight: 1.55 }}>
@@ -236,6 +246,7 @@ export default function WindOutlookScreen() {
                                 key={mapUrl}
                                 title="earth.nullschool.net wind reference"
                                 src={mapUrl}
+                                onError={onIframeError}
                                 style={{ border: 0, width: '100%', height: '100%' }}
                             />
                         )}
@@ -247,6 +258,8 @@ export default function WindOutlookScreen() {
                         </div>
                     </div>
                 </div>
+                </div>
+                )}
             </div>
         </div>
     );

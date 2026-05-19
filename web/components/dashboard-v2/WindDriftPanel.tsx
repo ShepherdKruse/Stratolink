@@ -1,11 +1,14 @@
 'use client';
 
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import Map, { Layer, Source } from 'react-map-gl/mapbox';
+import Map from 'react-map-gl/mapbox';
 import type { MapRef } from 'react-map-gl/mapbox';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import type { V2FlightPoint } from './V2MissionMap';
 import { isValidLngLat } from './V2MissionMap';
+import WindParticleOverlay from './WindParticleOverlay';
+import { boundsFromPoints } from '@/lib/wind/fetchWindGrid';
+import type { WindField } from '@/lib/wind/types';
 
 type DriftPoint = {
     lat: number;
@@ -22,6 +25,7 @@ type WindDriftPanelProps = {
     pressureHpa: number;
     observedTrack?: V2FlightPoint[];
     forecastHours?: number;
+    showWind?: boolean;
 };
 
 export default function WindDriftPanel({
@@ -30,10 +34,13 @@ export default function WindDriftPanel({
     pressureHpa,
     observedTrack = [],
     forecastHours = 24,
+    showWind = true,
 }: WindDriftPanelProps) {
     const mapRef = useRef<MapRef>(null);
     const [forecast, setForecast] = useState<DriftPoint[]>([]);
+    const [windField, setWindField] = useState<WindField | null>(null);
     const [loading, setLoading] = useState(false);
+    const [gridLoading, setGridLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
 
     const loadForecast = useCallback(async () => {
@@ -63,51 +70,88 @@ export default function WindDriftPanel({
         loadForecast();
     }, [loadForecast]);
 
-    const predictedLine = useMemo(() => {
-        const coords = forecast
-            .filter((p) => p.source === 'predicted' || p.source === 'start')
-            .map((p) => [p.lon, p.lat] as [number, number]);
-        if (coords.length < 2) return null;
-        return {
-            type: 'Feature' as const,
-            geometry: { type: 'LineString' as const, coordinates: coords },
-            properties: {},
-        };
-    }, [forecast]);
+    const allPoints = useMemo(() => {
+        const pts: Array<{ lat: number; lon: number }> = [
+            { lat: startLat, lon: startLon },
+            ...observedTrack.map((p) => ({ lat: p.lat, lon: p.lon })),
+            ...forecast.map((p) => ({ lat: p.lat, lon: p.lon })),
+        ];
+        return pts.filter((p) => isValidLngLat(p.lat, p.lon));
+    }, [startLat, startLon, observedTrack, forecast]);
 
-    const observedLine = useMemo(() => {
-        const coords = observedTrack.map((p) => [p.lon, p.lat] as [number, number]);
-        if (coords.length < 2) return null;
-        return {
-            type: 'Feature' as const,
-            geometry: { type: 'LineString' as const, coordinates: coords },
-            properties: {},
-        };
-    }, [observedTrack]);
+    const loadWindGrid = useCallback(async () => {
+        if (!showWind || allPoints.length === 0) {
+            setWindField(null);
+            return;
+        }
+        setGridLoading(true);
+        try {
+            const b = boundsFromPoints(allPoints, 2.5);
+            const q = new URLSearchParams({
+                minLat: String(b.latMin),
+                maxLat: String(b.latMax),
+                minLon: String(b.lonMin),
+                maxLon: String(b.lonMax),
+                pressureHpa: String(pressureHpa),
+            });
+            const res = await fetch(`/api/wind-grid?${q}`);
+            const data = await res.json();
+            if (!res.ok) throw new Error(data.error ?? 'Wind grid failed');
+            setWindField(data as WindField);
+        } catch {
+            setWindField(null);
+        } finally {
+            setGridLoading(false);
+        }
+    }, [allPoints, pressureHpa, showWind]);
+
+    useEffect(() => {
+        loadWindGrid();
+    }, [loadWindGrid]);
+
+    const tracks = useMemo(() => {
+        const lines = [];
+        if (observedTrack.length >= 2) {
+            lines.push({
+                coords: observedTrack.map((p) => ({ lat: p.lat, lon: p.lon })),
+                color: '#e86a2a',
+                width: 3,
+            });
+        }
+        const predicted = forecast
+            .filter((p) => p.source === 'predicted' || p.source === 'start')
+            .map((p) => ({ lat: p.lat, lon: p.lon }));
+        if (predicted.length >= 2) {
+            lines.push({
+                coords: predicted,
+                color: '#5eead4',
+                dashed: true,
+                width: 2.5,
+            });
+        }
+        return lines;
+    }, [observedTrack, forecast]);
 
     const endPoint = forecast.length ? forecast[forecast.length - 1] : null;
 
     useEffect(() => {
         const map = mapRef.current?.getMap();
-        if (!map || !isValidLngLat(startLat, startLon)) return;
-        const lons = [startLon, ...forecast.map((p) => p.lon)];
-        const lats = [startLat, ...forecast.map((p) => p.lat)];
-        if (lons.length < 1) return;
+        if (!map || allPoints.length === 0) return;
+        const lons = allPoints.map((p) => p.lon);
+        const lats = allPoints.map((p) => p.lat);
         map.fitBounds(
             [
-                [Math.min(...lons) - 0.8, Math.min(...lats) - 0.6],
-                [Math.max(...lons) + 0.8, Math.max(...lats) + 0.6],
+                [Math.min(...lons) - 0.6, Math.min(...lats) - 0.5],
+                [Math.max(...lons) + 0.6, Math.max(...lats) + 0.5],
             ],
-            { padding: 48, duration: 800 },
+            { padding: 56, duration: 800 },
         );
-    }, [startLat, startLon, forecast]);
+    }, [allPoints]);
 
     const token = process.env.NEXT_PUBLIC_MAPBOX_TOKEN;
 
     if (!token) {
-        return (
-            <div style={{ padding: 24, color: 'var(--sl-text-dim)' }}>Mapbox token required</div>
-        );
+        return <div style={{ padding: 24, color: 'var(--sl-text-dim)' }}>Mapbox token required</div>;
     }
 
     return (
@@ -125,15 +169,19 @@ export default function WindDriftPanel({
             >
                 <div>
                     <div style={{ fontSize: 12, color: 'var(--sl-text-hi)', fontWeight: 500 }}>
-                        Drift forecast (GFS)
+                        Wind + drift synthesis (GFS)
                     </div>
                     <div style={{ fontSize: 10, color: 'var(--sl-text-dim2)', marginTop: 2 }}>
-                        Balloon advected with layer wind · {forecastHours}h · {pressureHpa} hPa · 30 min steps
+                        Layer wind field with balloon advection · {forecastHours}h · {pressureHpa} hPa
+                        {gridLoading ? ' · loading wind grid…' : windField ? ' · wind overlay on' : ''}
                     </div>
                 </div>
                 <button
                     type="button"
-                    onClick={loadForecast}
+                    onClick={() => {
+                        loadForecast();
+                        loadWindGrid();
+                    }}
                     disabled={loading}
                     style={{
                         fontSize: 11,
@@ -165,62 +213,38 @@ export default function WindDriftPanel({
                     style={{ width: '100%', height: '100%' }}
                     mapStyle="mapbox://styles/mapbox/dark-v11"
                     projection="mercator"
-                >
-                    {observedLine && (
-                        <Source id="observed-track" type="geojson" data={observedLine}>
-                            <Layer
-                                id="observed-line"
-                                type="line"
-                                paint={{
-                                    'line-color': '#c9521f',
-                                    'line-width': 2.5,
-                                    'line-opacity': 0.85,
-                                }}
-                            />
-                        </Source>
-                    )}
-                    {predictedLine && (
-                        <Source id="predicted-track" type="geojson" data={predictedLine}>
-                            <Layer
-                                id="predicted-halo"
-                                type="line"
-                                paint={{
-                                    'line-color': '#5eead4',
-                                    'line-width': 8,
-                                    'line-opacity': 0.15,
-                                }}
-                            />
-                            <Layer
-                                id="predicted-line"
-                                type="line"
-                                paint={{
-                                    'line-color': '#5eead4',
-                                    'line-width': 2.5,
-                                    'line-dasharray': [2, 1.5],
-                                    'line-opacity': 0.9,
-                                }}
-                            />
-                        </Source>
-                    )}
-                </Map>
+                />
+
+                <WindParticleOverlay
+                    mapRef={mapRef}
+                    windField={showWind ? windField : null}
+                    tracks={tracks}
+                    active={tracks.length > 0 || !!windField}
+                />
 
                 <div
                     style={{
                         position: 'absolute',
                         bottom: 10,
                         left: 10,
-                        background: 'rgba(11,14,19,.9)',
+                        background: 'rgba(11,14,19,.92)',
                         border: '1px solid var(--sl-border)',
                         borderRadius: 6,
                         padding: '8px 10px',
                         fontSize: 10,
                         color: 'var(--sl-text-dim)',
                         lineHeight: 1.5,
-                        maxWidth: 280,
+                        maxWidth: 300,
+                        zIndex: 3,
                     }}
                 >
+                    {showWind && (
+                        <div style={{ marginBottom: 6 }}>
+                            <span style={{ color: 'hsl(140,70%,55%)' }}>—</span> wind speed (GFS layer)
+                        </div>
+                    )}
                     <div>
-                        <span style={{ color: '#c9521f' }}>—</span> observed track
+                        <span style={{ color: '#e86a2a' }}>—</span> observed track
                     </div>
                     <div>
                         <span style={{ color: '#5eead4' }}>- -</span> predicted drift

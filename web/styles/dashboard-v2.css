@@ -82,6 +82,20 @@
     text-decoration: underline;
 }
 
+.sl-wind-reference {
+    border-top: 1px solid var(--sl-border);
+    background: var(--sl-bg);
+}
+
+.sl-wind-reference-bar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 12px;
+    border-bottom: 1px solid var(--sl-border);
+}
+
 .sl-brand {
     font-family: var(--sl-sans);
     font-weight: 500;
