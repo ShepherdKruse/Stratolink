@@ -210,6 +210,7 @@ export default function WindOutlookScreen() {
                         observedTrack={observedTrack}
                         forecastHours={forecastHours}
                         showWind={showWind}
+                        anchorKey={`${selectedId ?? ''}-${level}-${forecastHours}`}
                     />
                 </div>
 

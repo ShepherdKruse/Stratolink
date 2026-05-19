@@ -1,7 +1,7 @@
 'use client';
 
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import Map from 'react-map-gl/mapbox';
+import Map, { Layer, Source } from 'react-map-gl/mapbox';
 import type { MapRef } from 'react-map-gl/mapbox';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import type { V2FlightPoint } from './V2MissionMap';
@@ -26,6 +26,8 @@ type WindDriftPanelProps = {
     observedTrack?: V2FlightPoint[];
     forecastHours?: number;
     showWind?: boolean;
+    /** When this changes (e.g. device switch), forecast re-anchors to startLat/startLon. */
+    anchorKey?: string;
 };
 
 export default function WindDriftPanel({
@@ -35,40 +37,54 @@ export default function WindDriftPanel({
     observedTrack = [],
     forecastHours = 24,
     showWind = true,
+    anchorKey = 'default',
 }: WindDriftPanelProps) {
     const mapRef = useRef<MapRef>(null);
+    const didFitRef = useRef(false);
+    const forecastOriginRef = useRef({ lat: startLat, lon: startLon });
     const [forecast, setForecast] = useState<DriftPoint[]>([]);
     const [windField, setWindField] = useState<WindField | null>(null);
     const [loading, setLoading] = useState(false);
     const [gridLoading, setGridLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
 
-    const loadForecast = useCallback(async () => {
-        if (!isValidLngLat(startLat, startLon)) return;
-        setLoading(true);
-        setError(null);
-        try {
-            const q = new URLSearchParams({
-                lat: String(startLat),
-                lon: String(startLon),
-                pressureHpa: String(pressureHpa),
-                hours: String(forecastHours),
-            });
-            const res = await fetch(`/api/wind-drift?${q}`);
-            const data = await res.json();
-            if (!res.ok) throw new Error(data.error ?? 'Forecast failed');
-            setForecast(data.points ?? []);
-        } catch (e) {
-            setError(e instanceof Error ? e.message : 'Forecast failed');
-            setForecast([]);
-        } finally {
-            setLoading(false);
-        }
-    }, [startLat, startLon, pressureHpa, forecastHours]);
+    const loadForecast = useCallback(
+        async (origin?: { lat: number; lon: number }) => {
+            const lat = origin?.lat ?? forecastOriginRef.current.lat;
+            const lon = origin?.lon ?? forecastOriginRef.current.lon;
+            if (!isValidLngLat(lat, lon)) return;
+            forecastOriginRef.current = { lat, lon };
+            setLoading(true);
+            setError(null);
+            try {
+                const q = new URLSearchParams({
+                    lat: String(lat),
+                    lon: String(lon),
+                    pressureHpa: String(pressureHpa),
+                    hours: String(forecastHours),
+                });
+                const res = await fetch(`/api/wind-drift?${q}`);
+                const data = await res.json();
+                if (!res.ok) throw new Error(data.error ?? 'Forecast failed');
+                setForecast(data.points ?? []);
+            } catch (e) {
+                setError(e instanceof Error ? e.message : 'Forecast failed');
+                setForecast([]);
+            } finally {
+                setLoading(false);
+            }
+        },
+        [pressureHpa, forecastHours],
+    );
 
+    // Re-anchor forecast only on device/setting change — not on every live GPS tick
     useEffect(() => {
-        loadForecast();
-    }, [loadForecast]);
+        if (!isValidLngLat(startLat, startLon)) return;
+        forecastOriginRef.current = { lat: startLat, lon: startLon };
+        loadForecast({ lat: startLat, lon: startLon });
+        didFitRef.current = false;
+        // eslint-disable-next-line react-hooks/exhaustive-deps -- anchorKey gates re-fetch; startLat/startLon read at trigger time only
+    }, [anchorKey, loadForecast]);
 
     const allPoints = useMemo(() => {
         const pts: Array<{ lat: number; lon: number }> = [
@@ -106,37 +122,37 @@ export default function WindDriftPanel({
     }, [allPoints, pressureHpa, showWind]);
 
     useEffect(() => {
-        loadWindGrid();
+        const t = window.setTimeout(loadWindGrid, 1500);
+        return () => window.clearTimeout(t);
     }, [loadWindGrid]);
 
-    const tracks = useMemo(() => {
-        const lines = [];
-        if (observedTrack.length >= 2) {
-            lines.push({
-                coords: observedTrack.map((p) => ({ lat: p.lat, lon: p.lon })),
-                color: '#e86a2a',
-                width: 3,
-            });
-        }
-        const predicted = forecast
+    const observedLine = useMemo(() => {
+        const coords = observedTrack.map((p) => [p.lon, p.lat] as [number, number]);
+        if (coords.length < 2) return null;
+        return {
+            type: 'Feature' as const,
+            geometry: { type: 'LineString' as const, coordinates: coords },
+            properties: {},
+        };
+    }, [observedTrack]);
+
+    const predictedLine = useMemo(() => {
+        const coords = forecast
             .filter((p) => p.source === 'predicted' || p.source === 'start')
-            .map((p) => ({ lat: p.lat, lon: p.lon }));
-        if (predicted.length >= 2) {
-            lines.push({
-                coords: predicted,
-                color: '#5eead4',
-                dashed: true,
-                width: 2.5,
-            });
-        }
-        return lines;
-    }, [observedTrack, forecast]);
+            .map((p) => [p.lon, p.lat] as [number, number]);
+        if (coords.length < 2) return null;
+        return {
+            type: 'Feature' as const,
+            geometry: { type: 'LineString' as const, coordinates: coords },
+            properties: {},
+        };
+    }, [forecast]);
 
     const endPoint = forecast.length ? forecast[forecast.length - 1] : null;
 
     useEffect(() => {
         const map = mapRef.current?.getMap();
-        if (!map || allPoints.length === 0) return;
+        if (!map || allPoints.length === 0 || didFitRef.current) return;
         const lons = allPoints.map((p) => p.lon);
         const lats = allPoints.map((p) => p.lat);
         map.fitBounds(
@@ -146,6 +162,7 @@ export default function WindDriftPanel({
             ],
             { padding: 56, duration: 800 },
         );
+        didFitRef.current = true;
     }, [allPoints]);
 
     const token = process.env.NEXT_PUBLIC_MAPBOX_TOKEN;
@@ -179,7 +196,8 @@ export default function WindDriftPanel({
                 <button
                     type="button"
                     onClick={() => {
-                        loadForecast();
+                        didFitRef.current = false;
+                        loadForecast(isValidLngLat(startLat, startLon) ? { lat: startLat, lon: startLon } : undefined);
                         loadWindGrid();
                     }}
                     disabled={loading}
@@ -213,14 +231,48 @@ export default function WindDriftPanel({
                     style={{ width: '100%', height: '100%' }}
                     mapStyle="mapbox://styles/mapbox/dark-v11"
                     projection="mercator"
-                />
+                >
+                    {observedLine && (
+                        <Source id="wind-observed" type="geojson" data={observedLine}>
+                            <Layer
+                                id="wind-observed-line"
+                                type="line"
+                                paint={{
+                                    'line-color': '#e86a2a',
+                                    'line-width': 3,
+                                    'line-opacity': 0.9,
+                                }}
+                            />
+                        </Source>
+                    )}
+                    {predictedLine && (
+                        <Source id="wind-predicted" type="geojson" data={predictedLine}>
+                            <Layer
+                                id="wind-predicted-halo"
+                                type="line"
+                                paint={{
+                                    'line-color': '#5eead4',
+                                    'line-width': 7,
+                                    'line-opacity': 0.12,
+                                }}
+                            />
+                            <Layer
+                                id="wind-predicted-line"
+                                type="line"
+                                paint={{
+                                    'line-color': '#5eead4',
+                                    'line-width': 2.5,
+                                    'line-dasharray': [2, 1.5],
+                                    'line-opacity': 0.95,
+                                }}
+                            />
+                        </Source>
+                    )}
+                </Map>
 
-                <WindParticleOverlay
-                    mapRef={mapRef}
-                    windField={showWind ? windField : null}
-                    tracks={tracks}
-                    active={tracks.length > 0 || !!windField}
-                />
+                {showWind && (
+                    <WindParticleOverlay mapRef={mapRef} windField={windField} active={!!windField} />
+                )}
 
                 <div
                     style={{
