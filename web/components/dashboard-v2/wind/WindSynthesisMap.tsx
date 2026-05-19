@@ -524,6 +524,7 @@ export default function WindSynthesisMap({
                 </button>
             </div>
 
+            <div className="wind-synthesis-alerts">
             {mc?.stale_gps && (
                 <div className="wind-synthesis-bias-banner wind-synthesis-stale-banner">
                     <div className="wind-synthesis-bias-label">Stale GPS · implied drift to now</div>
@@ -543,7 +544,7 @@ export default function WindSynthesisMap({
             )}
 
             {mc && mc.bias_correction.n_samples > 0 && (
-                <div className="wind-synthesis-bias-banner">
+                <div className="wind-synthesis-bias-banner wind-synthesis-calibration-banner">
                     <div className="wind-synthesis-bias-label">Forecast calibrated with in-flight data</div>
                     <div className="wind-synthesis-bias-body">
                         Speed ×<b>{mc.bias_correction.speed_factor}</b> · direction{' '}
@@ -556,11 +557,8 @@ export default function WindSynthesisMap({
                 </div>
             )}
 
-            {error && (
-                <div style={{ position: 'absolute', top: 58, left: 20, zIndex: 25, fontSize: 11, color: '#f87171' }}>
-                    {error}
-                </div>
-            )}
+            {error && <div className="wind-synthesis-alert-error">{error}</div>}
+            </div>
 
             <div className="wind-synthesis-map">
                 <Map
