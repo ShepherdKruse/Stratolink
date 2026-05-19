@@ -33,6 +33,8 @@ export type WindSynthesisMapProps = {
     pressureHpa: number;
     forecastHours?: number;
     anchorKey?: string;
+    /** Wait until telemetry has loaded so we do not race an empty track vs full mission. */
+    telemetryReady?: boolean;
     nullschoolUrl: string;
     showWind?: boolean;
     lastAltM?: number | null;
@@ -73,19 +75,6 @@ function obsTimeUtc(t: number): string {
     return new Date(t).toISOString();
 }
 
-function shouldUseCachedForecast(
-    forecast: StratolinkForecast,
-    needsHourlyGap: boolean,
-    forecastHours: number,
-): boolean {
-    const cachedHours = forecast.forecast_horizon_h ?? 24;
-    if (cachedHours < forecastHours) return false;
-    // Stale GPS: gap grows every minute; cron blobs go stale quickly. Always recompute live.
-    if (needsHourlyGap) return false;
-    const cacheAgeMs = Date.now() - new Date(forecast.generated_at).getTime();
-    return cacheAgeMs <= 45 * 60_000;
-}
-
 function applyForecast(
     forecast: StratolinkForecast,
     showWind: boolean,
@@ -111,6 +100,7 @@ export default function WindSynthesisMap({
     pressureHpa,
     forecastHours = 24,
     anchorKey = 'default',
+    telemetryReady = true,
     nullschoolUrl,
     showWind = true,
     lastAltM = null,
@@ -120,6 +110,8 @@ export default function WindSynthesisMap({
     const forecastOriginRef = useRef({ lat: startLat, lon: startLon });
     const levelHpa = snapPressureHpa(pressureHpa);
     const skipNextStaleAutoRef = useRef(true);
+    /** Ignore out-of-order responses when anchorKey/effects fire overlapping loads. */
+    const forecastReqRef = useRef(0);
     const propsRef = useRef({
         observedTrack,
         startLat,
@@ -163,12 +155,20 @@ export default function WindSynthesisMap({
         ? `${Math.floor(liveGapH)}h-${Math.floor(nowMs / STALE_GAP_REFRESH_MS)}`
         : 'fresh';
 
-    const loadForecast = useCallback(async (opts?: { staleAuto?: boolean; forceLive?: boolean }) => {
+    const loadForecast = useCallback(async (opts?: { staleAuto?: boolean }) => {
         const p = propsRef.current;
         if (p.observedTrack.length < 1 || !isValidLngLat(p.startLat, p.startLon)) return;
+
+        const reqId = ++forecastReqRef.current;
         forecastOriginRef.current = { lat: p.startLat, lon: p.startLon };
         if (!opts?.staleAuto) setLoading(true);
         setError(null);
+
+        const applyIfCurrent = (forecast: StratolinkForecast) => {
+            if (reqId !== forecastReqRef.current) return;
+            applyForecast(forecast, p.showWind, setMc, setWindField);
+        };
+
         try {
             const first = p.observedTrack[0];
             const launch =
@@ -180,26 +180,10 @@ export default function WindSynthesisMap({
             const driftSegment =
                 segs.freezeDrift.length >= 2 ? segs.freezeDrift : undefined;
 
-            const lastObs = p.observedTrack[p.observedTrack.length - 1];
-            const gpsGapH = lastObs ? (Date.now() - lastObs.t) / 3_600_000 : 0;
-            const needsHourlyGap = gpsGapH >= 1;
-
-            if (!opts?.forceLive && !opts?.staleAuto) {
-                const cached = await fetch(
-                    `/api/forecast?device=${encodeURIComponent(p.deviceId)}&hours=${p.forecastHours}`,
-                );
-                if (cached.ok) {
-                    const forecast = (await cached.json()) as StratolinkForecast;
-                    if (shouldUseCachedForecast(forecast, needsHourlyGap, p.forecastHours)) {
-                        applyForecast(forecast, p.showWind, setMc, setWindField);
-                        return;
-                    }
-                }
-            }
-
             const res = await fetch('/api/wind-forecast', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
+                cache: 'no-store',
                 body: JSON.stringify({
                     deviceId: p.deviceId,
                     mission: p.callsign,
@@ -216,23 +200,25 @@ export default function WindSynthesisMap({
                 }),
             });
             const data = await res.json();
+            if (reqId !== forecastReqRef.current) return;
             if (!res.ok) throw new Error(data.error ?? 'Forecast failed');
-            const forecast = data as StratolinkForecast;
-            applyForecast(forecast, p.showWind, setMc, setWindField);
+            applyIfCurrent(data as StratolinkForecast);
         } catch (e) {
+            if (reqId !== forecastReqRef.current) return;
             setError(e instanceof Error ? e.message : 'Forecast failed');
             setMc(null);
             setWindField(null);
         } finally {
-            setLoading(false);
+            if (reqId === forecastReqRef.current) setLoading(false);
         }
     }, []);
 
     useEffect(() => {
+        if (!telemetryReady) return;
         skipNextStaleAutoRef.current = true;
         loadForecast();
         didFitRef.current = false;
-    }, [anchorKey, loadForecast]);
+    }, [anchorKey, telemetryReady, loadForecast]);
 
     /** Recompute stale back-drift + forward forecast as the GPS gap grows (hourly + every 15 min). */
     useEffect(() => {
@@ -504,7 +490,7 @@ export default function WindSynthesisMap({
                     disabled={loading}
                     onClick={() => {
                         didFitRef.current = false;
-                        loadForecast({ forceLive: true });
+                        loadForecast();
                     }}
                 >
                     {loading ? '…' : 'Refresh'}

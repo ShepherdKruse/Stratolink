@@ -11,6 +11,7 @@ import {
     pressureHpaToNullschoolLevel,
     type NullschoolPressureId,
 } from '@/lib/wind/nullschool';
+import { snapPressureHpa } from '@/lib/wind/fetchWindGrid';
 import WindSynthesisMap from './wind/WindSynthesisMap';
 import type { V2FlightPoint } from './V2MissionMap';
 
@@ -28,6 +29,7 @@ export default function WindOutlookScreen() {
         deviceInfo,
         status,
         lastFetchedAt,
+        loading,
     } = useTelemetry({ initialSelectedId });
 
     const selectedDevice = useMemo(
@@ -74,6 +76,12 @@ export default function WindOutlookScreen() {
                 .map((r) => ({ lat: r.lat!, lon: r.lon!, t: r.t })),
         [rows],
     );
+
+    const forecastAnchorKey = useMemo(() => {
+        const fixT = lastFixRow?.t ?? 0;
+        const hpa = snapPressureHpa(latest?.pres ?? 250);
+        return `${selectedId ?? ''}-${forecastHours}-${fixT}-${hpa}`;
+    }, [selectedId, forecastHours, lastFixRow?.t, latest?.pres]);
 
     const mapUrl = useMemo(
         () =>
@@ -174,7 +182,8 @@ export default function WindOutlookScreen() {
                     pressureHpa={pressureHpa}
                     forecastHours={forecastHours}
                     showWind={showWind}
-                    anchorKey={`${selectedId ?? ''}-${level}-${forecastHours}-${lastFixRow?.t ?? 0}`}
+                    anchorKey={forecastAnchorKey}
+                    telemetryReady={!loading && observedTrack.length > 0}
                     nullschoolUrl={mapUrl}
                     lastAltM={lastFixRow?.alt ?? null}
                 />
