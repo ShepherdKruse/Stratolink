@@ -310,11 +310,11 @@ export default function WindSynthesisMap({
             ...observedTrack,
             ...nominalPath.map(([lon, lat]) => ({ lat, lon, t: '' })),
         ];
-        if (e90_24?.polygon) {
-            for (const [lon, lat] of e90_24.polygon) pts.push({ lat, lon, t: '' });
+        if (e90_at_horizon?.polygon) {
+            for (const [lon, lat] of e90_at_horizon.polygon) pts.push({ lat, lon, t: '' });
         }
         return pts.filter((p) => isValidLngLat(p.lat, p.lon));
-    }, [observedTrack, nominalPath, e90_24]);
+    }, [observedTrack, nominalPath, e90_at_horizon]);
 
     useEffect(() => {
         const map = mapRef.current?.getMap();
