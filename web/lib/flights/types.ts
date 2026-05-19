@@ -20,6 +20,8 @@ export type FlightPhase = {
 export type FlightReport = {
     slug: string;
     deviceId: string;
+    /** Operator callsign — shown as the primary flight name when set. */
+    callsign?: string;
     title: string;
     subtitle: string;
     launchedAtUtc: string;

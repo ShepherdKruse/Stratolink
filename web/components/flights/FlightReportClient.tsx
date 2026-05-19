@@ -52,13 +52,13 @@ export default function FlightReportClient({ report, telemetry }: FlightReportCl
                 <nav className="fr-breadcrumb" aria-label="Breadcrumb">
                     <Link href="/flights">Flights</Link>
                     <span> / </span>
-                    <span>{report.title}</span>
+                    <span>{report.callsign ?? report.title}</span>
                 </nav>
 
                 <header className="fr-header">
                     <div className="fr-kicker">Stratolink · Pico Balloon Flight Report</div>
                     <h1 className="fr-page-title">
-                        {report.title} — <em>{report.subtitle}</em>
+                        {report.callsign ?? report.title} — <em>{report.subtitle}</em>
                     </h1>
                     <div className="fr-meta">
                         <span>Device: {report.deviceId}</span>

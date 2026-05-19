@@ -1,19 +1,17 @@
 'use client';
 
-import { useCallback, useEffect, useMemo, useState, type CSSProperties } from 'react';
+import { useEffect, useMemo, useState, type CSSProperties } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
-import { Chrome, DASHBOARD_V2_TABS, fmt } from './atoms';
+import { Chrome, DASHBOARD_V2_TABS } from './atoms';
 import { useTelemetry } from './useTelemetry';
-import { ConnectionPill, useTickingNow, V1Link, fmtAltitudeM, fmtPressure } from './shared';
+import { ConnectionPill, useTickingNow, V1Link } from './shared';
 import {
     buildNullschoolWindUrl,
-    NULLSCHOOL_HOME,
     NULLSCHOOL_PRESSURE_LEVELS,
-    NULLSCHOOL_ZOOM,
     pressureHpaToNullschoolLevel,
     type NullschoolPressureId,
 } from '@/lib/wind/nullschool';
-import WindDriftPanel from './WindDriftPanel';
+import WindSynthesisMap from './wind/WindSynthesisMap';
 import type { V2FlightPoint } from './V2MissionMap';
 
 export default function WindOutlookScreen() {
@@ -32,6 +30,11 @@ export default function WindOutlookScreen() {
         lastFetchedAt,
     } = useTelemetry({ initialSelectedId });
 
+    const selectedDevice = useMemo(
+        () => devices.find((d) => d.id === selectedId) ?? null,
+        [devices, selectedId],
+    );
+
     const lastFixRow = useMemo(
         () => [...rows].reverse().find((r) => r.lat !== null && r.lon !== null) ?? null,
         [rows],
@@ -44,13 +47,8 @@ export default function WindOutlookScreen() {
     );
 
     const [level, setLevel] = useState<NullschoolPressureId>('250hPa');
-    const [nsZoom, setNsZoom] = useState<number>(NULLSCHOOL_ZOOM.regional);
     const [forecastHours, setForecastHours] = useState(24);
-    const [useLive, setUseLive] = useState(true);
     const [showWind, setShowWind] = useState(true);
-    const [windVizMode, setWindVizMode] = useState<'vectors' | 'flow'>('vectors');
-    const [showNullschool, setShowNullschool] = useState(false);
-    const [iframeBlocked, setIframeBlocked] = useState(false);
 
     useEffect(() => {
         if (latest?.pres != null) setLevel(suggestedLevel);
@@ -60,14 +58,14 @@ export default function WindOutlookScreen() {
         if (lastFixRow?.lat != null && lastFixRow?.lon != null) {
             return { lat: lastFixRow.lat, lon: lastFixRow.lon };
         }
-        const d = devices.find((x) => x.id === selectedId);
-        if (d?.launchLat != null && d?.launchLon != null) {
-            return { lat: d.launchLat, lon: d.launchLon };
+        if (selectedDevice?.launchLat != null && selectedDevice?.launchLon != null) {
+            return { lat: selectedDevice.launchLat, lon: selectedDevice.launchLon };
         }
         return { lat: 37.73, lon: -122.43 };
-    }, [lastFixRow, devices, selectedId]);
+    }, [lastFixRow, selectedDevice]);
 
     const pressureHpa = latest?.pres ?? 250;
+    const callsign = selectedDevice?.callsign ?? selectedDevice?.id ?? 'Balloon';
 
     const observedTrack: V2FlightPoint[] = useMemo(
         () =>
@@ -83,10 +81,9 @@ export default function WindOutlookScreen() {
                 lat: center.lat,
                 lon: center.lon,
                 level,
-                zoom: nsZoom,
-                at: useLive ? null : lastFixRow?.t ? new Date(lastFixRow.t) : null,
+                at: null,
             }),
-        [center, level, nsZoom, useLive, lastFixRow?.t],
+        [center, level],
     );
 
     function handleNavigate(path: string) {
@@ -100,8 +97,6 @@ export default function WindOutlookScreen() {
         params.set('device', id);
         router.replace(`/dashboard-v2/wind?${params.toString()}`);
     }
-
-    const onIframeError = useCallback(() => setIframeBlocked(true), []);
 
     return (
         <div className="sl-app" style={{ display: 'flex', flexDirection: 'column', height: '100vh' }}>
@@ -165,118 +160,23 @@ export default function WindOutlookScreen() {
                     <input type="checkbox" checked={showWind} onChange={(e) => setShowWind(e.target.checked)} />
                     Wind overlay
                 </label>
-
-                {showWind && (
-                    <label style={labelStyle}>
-                        Style{' '}
-                        <select
-                            value={windVizMode}
-                            onChange={(e) => setWindVizMode(e.target.value as 'vectors' | 'flow')}
-                            style={selectStyle}
-                        >
-                            <option value="vectors">Vectors</option>
-                            <option value="flow">Flow</option>
-                        </select>
-                    </label>
-                )}
-
-                <label style={{ ...labelStyle, display: 'flex', alignItems: 'center', gap: 6, cursor: 'pointer' }}>
-                    <input
-                        type="checkbox"
-                        checked={showNullschool}
-                        onChange={(e) => setShowNullschool(e.target.checked)}
-                    />
-                    nullschool reference
-                </label>
-
-                {showNullschool && (
-                    <label style={{ ...labelStyle, display: 'flex', alignItems: 'center', gap: 6, cursor: 'pointer' }}>
-                        <input type="checkbox" checked={useLive} onChange={(e) => setUseLive(e.target.checked)} />
-                        Live (nullschool)
-                    </label>
-                )}
-
-                <div style={{ marginLeft: 'auto', display: 'flex', gap: 8, alignItems: 'center', flexWrap: 'wrap' }}>
-                    <span style={{ fontSize: 11, color: 'var(--sl-text-dim2)', fontFamily: 'var(--sl-mono)' }}>
-                        {lastFixRow
-                            ? `${lastFixRow.lat!.toFixed(2)}°, ${lastFixRow.lon!.toFixed(2)}° · ${fmtAltitudeM(lastFixRow.alt)} · ${fmtPressure(latest?.pres)}`
-                            : 'No GPS fix'}
-                    </span>
-                    <a href={mapUrl} target="_blank" rel="noopener noreferrer" style={openBtnStyle}>
-                        Open nullschool ↗
-                    </a>
-                </div>
             </div>
 
-            <div
-                style={{
-                    flex: 1,
-                    minHeight: 0,
-                    display: 'flex',
-                    flexDirection: 'column',
-                    gap: 0,
-                }}
-            >
-                <div style={{ flex: 1, minHeight: 0, minWidth: 0 }}>
-                    <WindDriftPanel
-                        startLat={center.lat}
-                        startLon={center.lon}
-                        pressureHpa={pressureHpa}
-                        observedTrack={observedTrack}
-                        forecastHours={forecastHours}
-                        showWind={showWind}
-                        windVizMode={windVizMode}
-                        anchorKey={`${selectedId ?? ''}-${level}-${forecastHours}`}
-                    />
-                </div>
-
-                {showNullschool && (
-                <div className="sl-wind-reference">
-                <div style={{ flexShrink: 0, display: 'flex', flexDirection: 'column' }}>
-                    <div className="sl-wind-reference-bar">
-                        <span style={{ fontSize: 11, color: 'var(--sl-text-dim)' }}>nullschool reference</span>
-                        <button type="button" style={zoomBtnStyle} onClick={() => setNsZoom(NULLSCHOOL_ZOOM.continental)}>
-                            Wide
-                        </button>
-                        <button type="button" style={zoomBtnStyle} onClick={() => setNsZoom(NULLSCHOOL_ZOOM.regional)}>
-                            Regional
-                        </button>
-                        <button type="button" style={zoomBtnStyle} onClick={() => setNsZoom(NULLSCHOOL_ZOOM.local)}>
-                            Local
-                        </button>
-                        <span style={{ fontSize: 10, color: 'var(--sl-text-dim3)', marginLeft: 'auto' }}>
-                            Read-only embed — open in new tab for full interaction
-                        </span>
-                    </div>
-                    <div style={{ height: 220, position: 'relative', background: '#000' }}>
-                        {iframeBlocked ? (
-                            <div style={iframeFallbackStyle}>
-                                <p style={{ color: 'var(--sl-text)', maxWidth: 360, lineHeight: 1.55 }}>
-                                    Open nullschool for interactive wind exploration at this pressure level.
-                                </p>
-                                <a href={mapUrl} target="_blank" rel="noopener noreferrer" style={openBtnStyle}>
-                                    Open earth.nullschool.net ↗
-                                </a>
-                            </div>
-                        ) : (
-                            <iframe
-                                key={mapUrl}
-                                title="earth.nullschool.net wind reference"
-                                src={mapUrl}
-                                onError={onIframeError}
-                                style={{ border: 0, width: '100%', height: '100%' }}
-                            />
-                        )}
-                        <div className="sl-wind-credit" style={creditStyle}>
-                            <a href={NULLSCHOOL_HOME} target="_blank" rel="noopener noreferrer">
-                                earth.nullschool.net
-                            </a>
-                            {useLive ? ' · live GFS' : lastFixRow ? ` · ${fmt.datetime(lastFixRow.t)}` : ''}
-                        </div>
-                    </div>
-                </div>
-                </div>
-                )}
+            <div style={{ flex: 1, minHeight: 0 }}>
+                <WindSynthesisMap
+                    callsign={callsign}
+                    observedTrack={observedTrack}
+                    startLat={center.lat}
+                    startLon={center.lon}
+                    launchLat={selectedDevice?.launchLat}
+                    launchLon={selectedDevice?.launchLon}
+                    pressureHpa={pressureHpa}
+                    forecastHours={forecastHours}
+                    showWind={showWind}
+                    anchorKey={`${selectedId ?? ''}-${level}-${forecastHours}`}
+                    nullschoolUrl={mapUrl}
+                    lastAltM={lastFixRow?.alt ?? null}
+                />
             </div>
         </div>
     );
@@ -287,7 +187,7 @@ const toolbarStyle: CSSProperties = {
     flexWrap: 'wrap',
     alignItems: 'center',
     gap: 12,
-    padding: '10px 20px',
+    padding: '8px 20px',
     borderBottom: '1px solid var(--sl-border)',
     flexShrink: 0,
 };
@@ -303,48 +203,4 @@ const selectStyle: CSSProperties = {
     padding: '4px 8px',
     fontSize: 12,
     fontFamily: 'var(--sl-mono)',
-};
-
-const openBtnStyle: CSSProperties = {
-    display: 'inline-block',
-    padding: '6px 12px',
-    fontSize: 11,
-    fontWeight: 500,
-    color: 'var(--sl-bg)',
-    background: 'var(--sl-ok)',
-    borderRadius: 4,
-    textDecoration: 'none',
-    whiteSpace: 'nowrap',
-};
-
-const zoomBtnStyle: CSSProperties = {
-    fontSize: 10,
-    padding: '4px 8px',
-    background: 'var(--sl-bg-2)',
-    border: '1px solid var(--sl-border)',
-    color: 'var(--sl-text-dim)',
-    borderRadius: 4,
-    cursor: 'pointer',
-};
-
-const creditStyle: CSSProperties = {
-    position: 'absolute',
-    bottom: 8,
-    left: 8,
-    fontSize: 10,
-    color: 'var(--sl-text-dim3)',
-    background: 'rgba(11, 14, 19, 0.85)',
-    padding: '4px 8px',
-    borderRadius: 4,
-};
-
-const iframeFallbackStyle: CSSProperties = {
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    justifyContent: 'center',
-    height: '100%',
-    gap: 16,
-    padding: 24,
-    textAlign: 'center',
 };

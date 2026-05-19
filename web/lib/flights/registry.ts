@@ -4,6 +4,7 @@ export const FLIGHT_REPORTS: FlightReport[] = [
     {
         slug: 'baja-run',
         deviceId: 'stratolink-3',
+        callsign: 'stratolink-3',
         title: 'The Baja Run',
         subtitle: 'San Francisco Bay to Baja California',
         launchedAtUtc: '17 May 2026, 15:55 UTC',

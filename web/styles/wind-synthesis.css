@@ -1,0 +1,277 @@
+/* Wind synthesis map — ported from stratolink_wind_prediction.html */
+
+.wind-synthesis-root {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    min-height: 0;
+    background: #080d17;
+}
+
+.wind-synthesis-map {
+    position: absolute;
+    inset: 0;
+}
+
+.wind-synthesis-topbar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 54px;
+    background: rgba(8, 13, 23, 0.9);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    backdrop-filter: blur(10px);
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
+    gap: 20px;
+    z-index: 20;
+}
+
+.wind-synthesis-brand {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+}
+
+.wind-synthesis-eyebrow {
+    font-size: 9.5px;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: rgba(200, 212, 232, 0.35);
+}
+
+.wind-synthesis-title {
+    font-size: 15px;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.9);
+    letter-spacing: -0.01em;
+}
+
+.wind-synthesis-divider {
+    width: 1px;
+    height: 26px;
+    background: rgba(255, 255, 255, 0.08);
+    flex-shrink: 0;
+}
+
+.wind-synthesis-meta {
+    font-family: var(--sl-mono);
+    font-size: 10px;
+    color: rgba(200, 212, 232, 0.42);
+    line-height: 1.6;
+}
+
+.wind-synthesis-meta b {
+    color: rgba(200, 212, 232, 0.65);
+    font-weight: 500;
+}
+
+.wind-synthesis-spacer {
+    flex: 1;
+}
+
+.wind-synthesis-mode-toggle {
+    display: flex;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 6px;
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+.wind-synthesis-mode-btn {
+    padding: 6px 16px;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(200, 212, 232, 0.45);
+    cursor: pointer;
+    background: transparent;
+    border: none;
+    font-family: var(--sl-sans);
+    transition: background 0.14s, color 0.14s;
+}
+
+.wind-synthesis-mode-btn.active {
+    background: rgba(255, 255, 255, 0.1);
+    color: rgba(255, 255, 255, 0.92);
+}
+
+.wind-synthesis-mode-btn:hover:not(.active) {
+    background: rgba(255, 255, 255, 0.05);
+    color: rgba(255, 255, 255, 0.65);
+}
+
+.wind-synthesis-info {
+    position: absolute;
+    bottom: 26px;
+    left: 20px;
+    background: rgba(8, 13, 23, 0.88);
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    border-radius: 10px;
+    padding: 16px 18px;
+    backdrop-filter: blur(10px);
+    z-index: 20;
+    width: 248px;
+}
+
+.wind-synthesis-ip-section {
+    margin-bottom: 13px;
+}
+
+.wind-synthesis-ip-section:last-child {
+    margin-bottom: 0;
+}
+
+.wind-synthesis-ip-header {
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: rgba(200, 212, 232, 0.35);
+    margin-bottom: 7px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.wind-synthesis-ip-header::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: rgba(255, 255, 255, 0.06);
+}
+
+.wind-synthesis-ip-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 8px;
+    margin-bottom: 4px;
+    line-height: 1.2;
+}
+
+.wind-synthesis-ip-row:last-child {
+    margin-bottom: 0;
+}
+
+.wind-synthesis-ip-key {
+    font-size: 11.5px;
+    color: rgba(200, 212, 232, 0.5);
+    white-space: nowrap;
+}
+
+.wind-synthesis-ip-val {
+    font-family: var(--sl-mono);
+    font-size: 10.5px;
+    color: rgba(255, 255, 255, 0.8);
+    text-align: right;
+}
+
+.wind-synthesis-ip-accent {
+    color: #e08a5a;
+}
+
+.wind-synthesis-legend {
+    position: absolute;
+    bottom: 26px;
+    right: 20px;
+    background: rgba(8, 13, 23, 0.88);
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    border-radius: 10px;
+    padding: 14px 16px;
+    backdrop-filter: blur(10px);
+    z-index: 20;
+}
+
+.wind-synthesis-lg-title {
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: rgba(200, 212, 232, 0.35);
+    margin-bottom: 10px;
+}
+
+.wind-synthesis-lg-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 7px;
+}
+
+.wind-synthesis-lg-row:last-child {
+    margin-bottom: 0;
+}
+
+.wind-synthesis-speed-scale {
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(8, 13, 23, 0.88);
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    border-radius: 10px;
+    padding: 12px 14px;
+    backdrop-filter: blur(10px);
+    z-index: 20;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+}
+
+.wind-synthesis-ss-bar {
+    width: 10px;
+    height: 120px;
+    border-radius: 5px;
+    background: linear-gradient(
+        to bottom,
+        rgba(220, 240, 255, 0.85) 0%,
+        rgba(160, 210, 255, 0.6) 40%,
+        rgba(100, 170, 240, 0.35) 70%,
+        rgba(70, 130, 220, 0.15) 100%
+    );
+}
+
+.wind-synthesis-ns-link {
+    font-size: 10px;
+    font-weight: 500;
+    color: var(--sl-ok-mute);
+    text-decoration: none;
+    padding: 6px 12px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 6px;
+}
+
+.wind-synthesis-ns-link:hover {
+    background: rgba(255, 255, 255, 0.06);
+    color: var(--sl-ok);
+}
+
+.wind-synthesis-gps-marker {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: #5065b8;
+    border: 2px solid rgba(255, 255, 255, 0.75);
+    box-shadow: 0 1px 6px rgba(0, 0, 0, 0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--sl-mono);
+    font-size: 10px;
+    font-weight: 600;
+    color: white;
+    cursor: pointer;
+}
+
+.wind-synthesis-waypoint {
+    border-radius: 50%;
+    border: 2.5px solid rgba(255, 255, 255, 0.8);
+    box-shadow: 0 1px 6px rgba(0, 0, 0, 0.4);
+    cursor: pointer;
+}
