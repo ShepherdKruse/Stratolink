@@ -34,10 +34,17 @@ export function pressureHpaToNullschoolLevel(hPa: number | null | undefined): Nu
     return best;
 }
 
+/** nullschool orthographic scale — NOT 1–10; ~600 continental, ~2000 regional, ~3500 local. */
+export const NULLSCHOOL_ZOOM = {
+    continental: 600,
+    regional: 1800,
+    local: 3200,
+} as const;
+
 export type NullschoolViewOptions = {
     lon: number;
     lat: number;
-    /** orthographic zoom — higher = closer (nullschool convention ~2–6 for regional). */
+    /** orthographic scale (see NULLSCHOOL_ZOOM). */
     zoom?: number;
     level?: NullschoolPressureId;
     /** ISO time for historical view; omit for live model. */
@@ -50,7 +57,7 @@ export type NullschoolViewOptions = {
  */
 export function buildNullschoolWindUrl(opts: NullschoolViewOptions): string {
     const level = opts.level ?? '250hPa';
-    const zoom = opts.zoom ?? 4;
+    const zoom = opts.zoom ?? NULLSCHOOL_ZOOM.regional;
     const lon = opts.lon.toFixed(2);
     const lat = opts.lat.toFixed(2);
 
