@@ -25,7 +25,11 @@ export async function readStoredForecast(deviceId: string): Promise<StratolinkFo
     if (!isBlobStorageConfigured()) return null;
     try {
         const meta = await head(blobPath(deviceId));
-        const res = await fetch(meta.url, { next: { revalidate: 60 } });
+        const url = meta.downloadUrl ?? meta.url;
+        const headers: HeadersInit = {};
+        const token = process.env.BLOB_READ_WRITE_TOKEN;
+        if (token) headers.Authorization = `Bearer ${token}`;
+        const res = await fetch(url, { headers, cache: 'no-store' });
         if (!res.ok) return null;
         return (await res.json()) as StratolinkForecast;
     } catch {

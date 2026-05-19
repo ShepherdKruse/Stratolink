@@ -213,9 +213,9 @@ export async function computeMonteCarloForecast(input: MonteCarloForecastInput):
         ...input.gpsFixes.map((p) => ({ lat: p.lat, lon: p.lon })),
         ...input.observedTrackLonLat.map(([lon, lat]) => ({ lat, lon })),
     ];
-    const gridBounds = boundsFromPoints(marginPts, 5);
-    const field = await fetchWindGrid(gridBounds, levelHpa, 2);
-    const gfs = windFieldToGfsGrid(field, 2);
+    const gridBounds = boundsFromPoints(marginPts, 4);
+    const field = await fetchWindGrid(gridBounds, levelHpa, 2.5);
+    const gfs = windFieldToGfsGrid(field, 2.5);
 
     const bias = computeBias(input.gpsFixes, gfs);
 

@@ -1,4 +1,5 @@
 import { meteoWindToUV, windAtTime, type HourlyWind } from './openMeteoForecast';
+import { openMeteoFetch } from './openMeteoFetch';
 import type { GridPoint, WindField } from './types';
 
 export type WindGridBounds = {
@@ -61,7 +62,7 @@ export async function fetchWindGrid(
         url.searchParams.set('timezone', 'UTC');
         url.searchParams.set('forecast_days', '2');
 
-        const res = await fetch(url.toString(), { next: { revalidate: 900 } });
+        const res = await openMeteoFetch(url.toString());
         if (!res.ok) throw new Error(`Open-Meteo grid error ${res.status}`);
 
         const payloads = (await res.json()) as Array<{

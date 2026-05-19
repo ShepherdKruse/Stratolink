@@ -32,7 +32,7 @@ openssl rand -hex 32
 
 | Field | Value |
 |--------|--------|
-| **Address (URL)** | `https://YOUR-DOMAIN.vercel.app/api/compute-forecast` |
+| **Address (URL)** | `https://stratolink.org/api/compute-forecast?device=stratolink-3` |
 | **Schedule** | Every **30** minutes (or use custom: `*/30 * * * *`) |
 | **Request method** | `GET` |
 

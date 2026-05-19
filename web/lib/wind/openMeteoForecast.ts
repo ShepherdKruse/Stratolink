@@ -4,6 +4,7 @@
  */
 
 import { pressureHpaToNullschoolLevel } from './nullschool';
+import { openMeteoFetch } from './openMeteoFetch';
 
 export type HourlyWind = {
     time: string;
@@ -43,7 +44,7 @@ export async function fetchHourlyWindAtPoint(
     url.searchParams.set('wind_speed_unit', 'ms');
     url.searchParams.set('timezone', 'UTC');
 
-    const res = await fetch(url.toString(), { next: { revalidate: 1800 } });
+    const res = await openMeteoFetch(url.toString());
     if (!res.ok) {
         throw new Error(`Open-Meteo error ${res.status}`);
     }
