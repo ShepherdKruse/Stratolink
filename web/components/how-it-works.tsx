@@ -171,18 +171,24 @@ export function HowItWorks() {
           ))}
         </div>
 
-        <p
-          className={`mt-16 text-center transition-all duration-1000 delay-700 ${
+        <div
+          className={`mt-16 flex flex-col items-center gap-3 text-center transition-all duration-1000 delay-700 sm:flex-row sm:justify-center sm:gap-8 ${
             isVisible ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"
           }`}
         >
           <Link
+            href="/learn"
+            className="text-sm text-muted-foreground underline-offset-4 transition-colors hover:text-foreground hover:underline"
+          >
+            Full guide: what is a pico balloon?
+          </Link>
+          <Link
             href="/docs/flight-path-engine"
             className="text-sm text-muted-foreground underline-offset-4 transition-colors hover:text-foreground hover:underline"
           >
-            Read the Flight Path Engine technical note
+            Flight Path Engine technical note
           </Link>
-        </p>
+        </div>
       </div>
     </section>
   )

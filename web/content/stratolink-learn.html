@@ -1,0 +1,892 @@
+<!-- ════════════ ATMOSPHERE SIDEBAR ════════════ -->
+<div class="atmo-rail" id="atmo">
+  <div class="axis"></div>
+  <div class="atmo-here-ind" id="here-ind" style="top: 70%;"></div>
+  <div class="atmo-layer" data-band="space">
+    Edge of space
+    <span class="alt">~30 km</span>
+  </div>
+  <div class="atmo-layer here" data-band="float">
+    Your balloon
+    <span class="alt">~12 km</span>
+  </div>
+  <div class="atmo-layer" data-band="cruise">
+    Cruising altitude
+    <span class="alt">~10 km</span>
+  </div>
+  <div class="atmo-layer" data-band="clouds">
+    Clouds
+    <span class="alt">~5 km</span>
+  </div>
+  <div class="atmo-layer" data-band="sea">
+    Sea level
+    <span class="alt">0 km</span>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════════════════════
+     01 · HERO
+     ════════════════════════════════════════════════════════════ -->
+<section class="hero" id="top" data-section="01" data-band="float">
+  <div class="grain"></div>
+  <div class="hero-stars" id="hero-stars"></div>
+  <div class="wrap hero-content">
+    <div class="reveal">
+      <div class="hero-tag">SCIENCE · MADE TANGIBLE</div>
+      <h1>Space within <em>reach</em>.</h1>
+      <p class="lede">Stratolink sends a real scientific payload into the upper atmosphere — tracked live through a global gateway network, visible on a dashboard with your name on it. Here's how it all works.</p>
+      <div class="hero-cta">
+        <a href="#sec-02" class="btn btn-pri">Start Reading →</a>
+        <a href="/activate" class="btn btn-ghost">Launch My Mission</a>
+      </div>
+    </div>
+    <div class="balloon-stage reveal d2">
+      <div class="balloon-floater">
+        <svg viewBox="0 0 280 380" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <!-- Silver mylar gradient — pillow shape, reflective -->
+            <linearGradient id="mylar" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stop-color="#f4f6fa" />
+              <stop offset="22%" stop-color="#d2dae6" />
+              <stop offset="55%" stop-color="#a8b3c5" />
+              <stop offset="100%" stop-color="#6e7a8e" />
+            </linearGradient>
+            <linearGradient id="mylar-shine" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stop-color="#ffffff" stop-opacity="0.7" />
+              <stop offset="60%" stop-color="#ffffff" stop-opacity="0" />
+            </linearGradient>
+          </defs>
+          <!-- pillow / square-ish mylar balloon — 200x200 ish with rounded corners -->
+          <g transform="translate(40, 24)">
+            <path d="M 40 4
+                     Q 0 4, 0 60
+                     L 0 140
+                     Q 0 196, 60 196
+                     L 140 196
+                     Q 200 196, 200 140
+                     L 200 60
+                     Q 200 4, 160 4
+                     Z"
+                  fill="url(#mylar)" stroke="#4a5568" stroke-width="1.2" />
+            <!-- subtle vertical seam -->
+            <line x1="100" y1="14" x2="100" y2="188" stroke="rgba(255,255,255,0.18)" stroke-width="1" />
+            <!-- corner crinkles -->
+            <path d="M 10 30 Q 26 50, 22 80" stroke="rgba(255,255,255,0.20)" stroke-width="0.8" fill="none" />
+            <path d="M 190 30 Q 174 50, 178 80" stroke="rgba(0,0,0,0.18)" stroke-width="0.8" fill="none" />
+            <path d="M 10 170 Q 26 150, 22 120" stroke="rgba(0,0,0,0.16)" stroke-width="0.6" fill="none" />
+            <!-- reflection sweep — shimmer -->
+            <path class="mylar-shimmer"
+                  d="M 30 22 Q 70 36, 90 70 Q 88 100, 50 130 Q 30 110, 20 70 Q 22 40, 30 22 Z"
+                  fill="url(#mylar-shine)" />
+            <!-- top fill valve nub -->
+            <rect x="92" y="-2" width="16" height="8" fill="#7a8595" stroke="#4a5568" stroke-width="0.8" />
+          </g>
+          <!-- tether down to payload -->
+          <line x1="140" y1="220" x2="140" y2="284" stroke="#4a5568" stroke-width="1" stroke-dasharray="2 3" />
+          <!-- payload enclosure -->
+          <g transform="translate(110, 284)">
+            <!-- outer box -->
+            <rect x="0" y="0" width="60" height="42" fill="#11172a" stroke="#4dd0f7" stroke-width="1.4" />
+            <!-- accent strip -->
+            <rect x="0" y="0" width="3" height="42" fill="#4dd0f7" />
+            <!-- label -->
+            <text x="10" y="14" font-family="JetBrains Mono" font-size="7" fill="#4dd0f7" letter-spacing="0.06em">STRATOLINK</text>
+            <text x="10" y="24" font-family="JetBrains Mono" font-size="6" fill="rgba(244,246,250,0.55)">R2 PAYLOAD</text>
+            <text x="10" y="34" font-family="JetBrains Mono" font-size="6" fill="rgba(244,246,250,0.40)">10 g · v2.1</text>
+            <!-- status LED -->
+            <circle cx="52" cy="34" r="1.6" fill="#f5b842">
+              <animate attributeName="opacity" values="1;0.2;1" dur="1.6s" repeatCount="indefinite" />
+            </circle>
+            <!-- antenna -->
+            <line x1="50" y1="0" x2="50" y2="-18" stroke="#4dd0f7" stroke-width="1.2" />
+            <circle cx="50" cy="-19" r="1.4" fill="#4dd0f7" />
+          </g>
+          <!-- ground line -->
+          <line x1="0" y1="372" x2="280" y2="372" stroke="#313a4e" stroke-width="0.8" />
+          <!-- tiny mountain silhouette -->
+          <path d="M 0 372 L 60 350 L 110 370 L 170 340 L 230 365 L 280 358 L 280 372 Z" fill="#11172a" stroke="#313a4e" stroke-width="0.6" />
+        </svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════
+     02 · WHAT IS A PICO BALLOON
+     ════════════════════════════════════════════════════════════ -->
+<section id="sec-02" data-section="02" data-band="float">
+  <div class="wrap">
+    <div class="sec-tag reveal">02 / WHAT IS A PICO BALLOON <span class="meta">· COMPARED</span></div>
+    <h2 class="reveal" style="max-width: 880px;">Not the kind of balloon you're picturing.</h2>
+    <p class="lede reveal d1" style="margin-top: 24px;">If you've seen a meteorologist release a big white balloon, you have the wrong mental model. <em>Pico balloons are different.</em> They don't burst. They don't fall back down. They fly.</p>
+
+    <div class="vs-grid">
+      <!-- WEATHER BALLOON -->
+      <div class="vs-card reveal d1">
+        <div class="vs-label">YOU MAY HAVE SEEN THIS</div>
+        <div class="vs-title">Weather balloon</div>
+        <div class="vs-sub">Latex · 2 m wide at launch</div>
+        <div class="vs-illus">
+          <svg width="240" height="240" viewBox="0 0 240 240">
+            <!-- POP graphic — radiating triangles -->
+            <g transform="translate(120, 70)" opacity="0.92">
+              <path d="M 0 -34 L 6 -16 L -6 -16 Z" fill="#f5b842" />
+              <path d="M 30 -16 L 16 -6 L 24 -22 Z" fill="#f5b842" />
+              <path d="M -30 -16 L -16 -6 L -24 -22 Z" fill="#f5b842" />
+              <path d="M 26 14 L 14 6 L 28 0 Z" fill="#f5b842" />
+              <path d="M -26 14 L -14 6 L -28 0 Z" fill="#f5b842" />
+              <path d="M 0 26 L 6 12 L -6 12 Z" fill="#f5b842" />
+              <text x="0" y="2" text-anchor="middle" font-family="Instrument Serif" font-style="italic" font-size="22" fill="#0a0e1c" font-weight="500">POP!</text>
+            </g>
+            <!-- balloon (deflating remnants) -->
+            <ellipse cx="120" cy="150" rx="56" ry="64" fill="#5e6b80" opacity="0.5" stroke="#98a3b8" stroke-width="1.4" />
+            <ellipse cx="105" cy="128" rx="12" ry="6" fill="rgba(255,255,255,0.18)" />
+            <!-- neck -->
+            <path d="M 120 214 L 114 226 L 126 226 Z" fill="#5e6b80" opacity="0.6" />
+            <!-- falling lines below -->
+            <line x1="120" y1="226" x2="120" y2="240" stroke="#5e6b80" stroke-width="0.8" stroke-dasharray="2 2" opacity="0.4" />
+          </svg>
+        </div>
+        <div class="vs-stat"><em>Bursts. Falls. Done.</em></div>
+      </div>
+
+      <!-- PICO BALLOON -->
+      <div class="vs-card pico reveal d2">
+        <div class="vs-label">↓ STRATOLINK FLIES THIS</div>
+        <div class="vs-title">Pico balloon</div>
+        <div class="vs-sub">Mylar · 90 cm wide at float</div>
+        <div class="vs-illus">
+          <svg width="280" height="240" viewBox="0 0 280 240">
+            <defs>
+              <linearGradient id="pico-mylar" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stop-color="#f4f6fa" />
+                <stop offset="50%" stop-color="#b8c2d0" />
+                <stop offset="100%" stop-color="#6e7a8e" />
+              </linearGradient>
+            </defs>
+            <!-- horizon line — abstract earth curve -->
+            <path d="M 0 200 Q 140 188, 280 200" stroke="rgba(77,208,247,0.30)" stroke-width="1" fill="none" />
+            <!-- dotted flight arc — over ocean -->
+            <path d="M 60 174 Q 140 80, 240 134" stroke="#4dd0f7" stroke-width="1.4" fill="none" stroke-dasharray="2 4" />
+            <!-- tiny pico balloon at peak of arc -->
+            <g transform="translate(140, 80)">
+              <!-- pillow shape -->
+              <path d="M 16 -34
+                       Q 0 -34, 0 -16
+                       L 0 16
+                       Q 0 34, 16 34
+                       L 56 34
+                       Q 72 34, 72 16
+                       L 72 -16
+                       Q 72 -34, 56 -34
+                       Z"
+                    transform="translate(-36, 0)"
+                    fill="url(#pico-mylar)" stroke="#4a5568" stroke-width="0.8" />
+              <line x1="0" y1="-22" x2="0" y2="22" stroke="rgba(255,255,255,0.18)" stroke-width="0.6" />
+              <!-- tether + payload -->
+              <line x1="0" y1="34" x2="0" y2="48" stroke="#4a5568" stroke-width="0.6" stroke-dasharray="1 2" />
+              <rect x="-7" y="48" width="14" height="10" fill="#11172a" stroke="#4dd0f7" stroke-width="0.8" />
+            </g>
+            <!-- end marker — over the horizon -->
+            <g transform="translate(240, 134)">
+              <circle r="6" fill="none" stroke="#4dd0f7" stroke-width="0.8" stroke-dasharray="2 2" />
+              <circle r="2" fill="#4dd0f7" />
+            </g>
+            <!-- start marker -->
+            <g transform="translate(60, 174)">
+              <circle r="3" fill="#4dd0f7" />
+            </g>
+            <!-- arrow tip suggesting motion -->
+            <path d="M 232 130 L 240 134 L 234 140" stroke="#4dd0f7" stroke-width="1" fill="none" />
+          </svg>
+        </div>
+        <div class="vs-stat"><em>Floats. Travels. Keeps going.</em></div>
+      </div>
+    </div>
+
+    <div class="vs-callout reveal d3">
+      <h3>Ours doesn't pop. <em>It travels.</em></h3>
+      <p>A pico balloon is sealed with just enough hydrogen to balance its weight at altitude. It rises until the air outside is thin enough to match its density — and then it floats, riding the jet stream. Some missions cross oceans. Some circle the Northern Hemisphere. The data keeps coming as long as the payload stays powered.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════
+     03 · HOW IT GETS UP
+     ════════════════════════════════════════════════════════════ -->
+<section id="sec-03" data-section="03" data-band="sea">
+  <div class="wrap">
+    <div class="sec-tag reveal">03 / GETTING TO ALTITUDE <span class="meta">· THREE STEPS</span></div>
+    <h2 class="reveal">Three steps. Fifteen minutes. <em>In your backyard.</em></h2>
+    <p class="lede reveal d1" style="margin-top: 24px;">No pressurized tanks. No truck rentals. No regulators. The whole setup fits on a folding table.</p>
+
+    <div class="comic">
+      <!-- PANEL 1 · React -->
+      <div class="panel reveal d1">
+        <div class="panel-img">
+          <span class="panel-num">PANEL 01</span>
+          <svg width="200" height="180" viewBox="0 0 200 180">
+            <!-- hand silhouette holding a pellet -->
+            <g transform="translate(50, 36)">
+              <!-- forearm -->
+              <path d="M 14 70 Q 12 56, 20 50 L 30 50 L 30 36 Q 32 30, 38 30 L 42 30 L 42 22 Q 44 16, 50 16 Q 56 16, 56 22 L 56 38 L 62 38 L 62 46 L 56 46 L 56 56 L 30 56 L 30 70 Z"
+                    fill="rgba(244,246,250,0.10)" stroke="#98a3b8" stroke-width="1.2" />
+              <!-- pellet between fingers -->
+              <circle cx="48" cy="14" r="3" fill="#4dd0f7" />
+              <line x1="48" y1="8" x2="48" y2="2" stroke="#4dd0f7" stroke-width="1" stroke-dasharray="1 2" />
+            </g>
+            <!-- reactor jar receiving the pellet -->
+            <g transform="translate(110, 30)">
+              <!-- balloon mouth on top -->
+              <ellipse cx="30" cy="0" rx="20" ry="14" fill="url(#pico-mylar)" stroke="#4a5568" stroke-width="0.8" />
+              <ellipse cx="22" cy="-4" rx="6" ry="3" fill="rgba(255,255,255,0.30)" />
+              <!-- neck -->
+              <path d="M 22 14 L 38 14 L 36 22 L 24 22 Z" fill="#7a8595" />
+              <!-- jar -->
+              <rect x="20" y="22" width="20" height="3" fill="none" stroke="#4dd0f7" stroke-width="0.8" />
+              <path d="M 18 26 L 18 60 Q 18 64, 22 64 L 38 64 Q 42 64, 42 60 L 42 26 Z" fill="rgba(77,208,247,0.06)" stroke="#4dd0f7" stroke-width="1" />
+              <!-- water + bubbles -->
+              <path d="M 19 44 Q 24 42, 29 44 T 39 44 T 41 44 L 41 60 Q 41 63, 38 63 L 22 63 Q 19 63, 19 60 Z"
+                    fill="rgba(77,208,247,0.20)" />
+              <path d="M 19 44 Q 24 42, 29 44 T 39 44 T 41 44" stroke="#4dd0f7" stroke-width="0.5" fill="none" opacity="0.7" />
+              <circle cx="26" cy="52" r="1" fill="#4dd0f7" opacity="0.7" />
+              <circle cx="33" cy="56" r="1.2" fill="#4dd0f7" opacity="0.6" />
+              <circle cx="28" cy="60" r="0.8" fill="#4dd0f7" opacity="0.5" />
+            </g>
+            <!-- H2 bubble label -->
+            <text x="160" y="46" font-family="JetBrains Mono" font-size="9" fill="#4dd0f7" letter-spacing="0.06em">H₂ ↑</text>
+            <!-- arrow showing pellet drop -->
+            <path d="M 98 50 L 130 50" stroke="#4dd0f7" stroke-width="1" stroke-dasharray="2 3" />
+            <path d="M 128 47 L 132 50 L 128 53" stroke="#4dd0f7" stroke-width="1" fill="none" />
+          </svg>
+        </div>
+        <div class="panel-body">
+          <div class="panel-h">React</div>
+          <div class="panel-cap">Fit the balloon mouth over a small reactor jar of water. Drop in a hydrogen pellet. The reaction generates exactly the volume of gas you need — directly into the envelope. <em>No tanks. No deliveries.</em></div>
+        </div>
+      </div>
+
+      <!-- PANEL 2 · Seal -->
+      <div class="panel reveal d2">
+        <div class="panel-img">
+          <span class="panel-num">PANEL 02</span>
+          <svg width="200" height="180" viewBox="0 0 200 180">
+            <!-- inflated pico balloon -->
+            <g transform="translate(60, 24)">
+              <path d="M 20 0 Q 4 0, 4 16 L 4 56 Q 4 76, 24 76 L 56 76 Q 76 76, 76 56 L 76 16 Q 76 0, 60 0 Z"
+                    fill="url(#pico-mylar)" stroke="#4a5568" stroke-width="1" />
+              <line x1="40" y1="6" x2="40" y2="70" stroke="rgba(255,255,255,0.18)" stroke-width="0.6" />
+              <ellipse cx="22" cy="14" rx="8" ry="4" fill="rgba(255,255,255,0.30)" />
+              <!-- neck being twisted -->
+              <rect x="34" y="76" width="12" height="6" fill="#7a8595" />
+              <!-- twist seal lines -->
+              <path d="M 30 86 L 26 96 M 36 86 L 32 96 M 44 86 L 40 96 M 50 86 L 46 96"
+                    stroke="#4dd0f7" stroke-width="1.2" fill="none" />
+            </g>
+            <!-- gloved hand from below twisting -->
+            <g transform="translate(82, 112)" opacity="0.85">
+              <path d="M 0 36 L 0 24 Q 0 14, 10 14 L 14 14 L 14 6 Q 14 0, 20 0 Q 26 0, 26 6 L 26 18 L 30 18 L 30 30 L 26 30 L 26 36 Z"
+                    fill="rgba(244,246,250,0.10)" stroke="#98a3b8" stroke-width="1.2" />
+            </g>
+            <!-- payload attached -->
+            <g transform="translate(86, 152)">
+              <rect width="28" height="14" fill="#11172a" stroke="#4dd0f7" stroke-width="0.8" />
+              <rect width="2" height="14" fill="#4dd0f7" />
+              <circle cx="22" cy="9" r="1" fill="#f5b842" />
+            </g>
+          </svg>
+        </div>
+        <div class="panel-body">
+          <div class="panel-h">Seal</div>
+          <div class="panel-cap">Twist the neck closed. Attach the 10-gram Stratolink payload. The whole flight system now weighs less than two AA batteries.</div>
+        </div>
+      </div>
+
+      <!-- PANEL 3 · Release -->
+      <div class="panel reveal d3">
+        <div class="panel-img">
+          <span class="panel-num">PANEL 03</span>
+          <svg width="200" height="180" viewBox="0 0 200 180">
+            <!-- balloon rising up and to the right -->
+            <g transform="translate(120, 30)">
+              <path d="M 14 0 Q 2 0, 2 12 L 2 38 Q 2 52, 16 52 L 38 52 Q 52 52, 52 38 L 52 12 Q 52 0, 40 0 Z"
+                    fill="url(#pico-mylar)" stroke="#4a5568" stroke-width="0.8" />
+              <line x1="27" y1="4" x2="27" y2="48" stroke="rgba(255,255,255,0.18)" stroke-width="0.5" />
+              <ellipse cx="14" cy="10" rx="6" ry="3" fill="rgba(255,255,255,0.30)" />
+              <!-- tether + payload -->
+              <line x1="27" y1="52" x2="27" y2="64" stroke="#4a5568" stroke-width="0.5" />
+              <rect x="20" y="64" width="14" height="8" fill="#11172a" stroke="#4dd0f7" stroke-width="0.6" />
+            </g>
+            <!-- arrow up -->
+            <path d="M 168 50 L 168 20 M 162 26 L 168 20 L 174 26" stroke="#4dd0f7" stroke-width="1.4" fill="none" />
+            <!-- open hand at bottom-left -->
+            <g transform="translate(30, 90)">
+              <path d="M 20 60 Q 18 50, 26 48 L 32 48 L 32 30 Q 34 24, 40 24 L 42 24 L 42 12 Q 44 6, 50 6 Q 56 6, 56 12 L 56 28 L 62 28 L 62 38 L 56 38 L 56 60 Z"
+                    fill="rgba(244,246,250,0.10)" stroke="#98a3b8" stroke-width="1.2" />
+            </g>
+            <!-- trail/swoosh -->
+            <path d="M 76 110 Q 110 80, 140 60" stroke="#4dd0f7" stroke-width="0.8" stroke-dasharray="3 4" fill="none" opacity="0.5" />
+            <!-- ground -->
+            <line x1="0" y1="170" x2="200" y2="170" stroke="#313a4e" stroke-width="0.8" />
+          </svg>
+        </div>
+        <div class="panel-body">
+          <div class="panel-h">Release</div>
+          <div class="panel-cap">Open your hand. Watch it climb. In four hours your balloon is at 12 km. By tomorrow it might be over the ocean. <em>The dashboard is already updating.</em></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════
+     04 · EQUILIBRIUM
+     ════════════════════════════════════════════════════════════ -->
+<section id="sec-04" data-section="04" data-band="float">
+  <div class="wrap">
+    <div class="sec-tag reveal">04 / WHY IT DOESN'T POP <span class="meta">· SUPERPRESSURE EQUILIBRIUM</span></div>
+    <h2 class="reveal" style="max-width: 880px;">It finds its altitude — and just floats there.</h2>
+
+    <div class="eq">
+      <div class="eq-prose reveal d1">
+        <p>A weather balloon stretches as it climbs. The air outside thins out; the gas inside pushes the latex outward until it pops. That's by design — it's a one-shot vertical probe.</p>
+        <p>A pico balloon is made of <strong>mylar</strong>. It doesn't stretch. Instead, it rises until the air outside matches its own density — and then it stops climbing. Sealed, taut, totally content. This is called <strong>superpressure equilibrium</strong>.</p>
+        <p>At 12 km the atmosphere is about 80% thinner than at sea level. Your balloon weighs the same. With the right amount of gas, it finds the altitude where those two numbers balance — and that's where it flies, day after day. <em>The wind takes it from there.</em></p>
+      </div>
+
+      <div class="eq-stage reveal d2">
+        <svg viewBox="0 0 480 460" preserveAspectRatio="xMidYMid meet" width="100%" height="100%">
+          <defs>
+            <linearGradient id="atm-grad" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#0a0e1c" />
+              <stop offset="100%" stop-color="#1a2342" />
+            </linearGradient>
+            <radialGradient id="dens-grad" cx="50%" cy="100%" r="100%">
+              <stop offset="0%" stop-color="rgba(77,208,247,0.45)" />
+              <stop offset="100%" stop-color="rgba(77,208,247,0.04)" />
+            </radialGradient>
+          </defs>
+          <rect width="480" height="460" fill="url(#atm-grad)" />
+
+          <!-- atmosphere bands -->
+          <rect x="0" y="0" width="480" height="80" fill="rgba(15,18,40,0.5)" />
+          <rect x="0" y="80" width="480" height="80" fill="rgba(40,60,100,0.18)" />
+          <rect x="0" y="200" width="480" height="80" fill="rgba(80,140,200,0.12)" />
+          <rect x="0" y="340" width="480" height="120" fill="rgba(120,180,220,0.10)" />
+
+          <!-- altitude labels -->
+          <g font-family="JetBrains Mono" font-size="9" fill="#5e6b80" letter-spacing="0.06em">
+            <line x1="50" y1="60" x2="430" y2="60" stroke="rgba(77,208,247,0.18)" stroke-dasharray="2 4" />
+            <text x="20" y="64">20 km</text>
+            <line x1="50" y1="170" x2="430" y2="170" stroke="rgba(77,208,247,0.55)" />
+            <text x="20" y="174" fill="#4dd0f7" font-size="10">12 km</text>
+            <text x="384" y="164" fill="#4dd0f7" font-size="9">FLOAT BAND ↓</text>
+            <line x1="50" y1="290" x2="430" y2="290" stroke="rgba(77,208,247,0.18)" stroke-dasharray="2 4" />
+            <text x="20" y="294">8 km</text>
+            <line x1="50" y1="400" x2="430" y2="400" stroke="rgba(77,208,247,0.18)" stroke-dasharray="2 4" />
+            <text x="20" y="404">0 km</text>
+          </g>
+
+          <!-- climb path -->
+          <path d="M 200 400 Q 180 340, 220 280 Q 250 220, 230 180 Q 220 174, 240 170"
+                stroke="rgba(77,208,247,0.45)" stroke-width="1.4" fill="none"
+                stroke-dasharray="3 3" />
+
+          <!-- balloon at float -->
+          <g transform="translate(240, 170)">
+            <path d="M -22 -24 Q -32 -24, -32 -14 L -32 14 Q -32 24, -22 24 L 22 24 Q 32 24, 32 14 L 32 -14 Q 32 -24, 22 -24 Z"
+                  fill="url(#pico-mylar)" stroke="#4a5568" stroke-width="0.8" />
+            <line x1="0" y1="-20" x2="0" y2="20" stroke="rgba(255,255,255,0.20)" stroke-width="0.5" />
+            <ellipse cx="-12" cy="-12" rx="5" ry="2.5" fill="rgba(255,255,255,0.30)" />
+            <!-- tether -->
+            <line x1="0" y1="24" x2="0" y2="32" stroke="#4a5568" stroke-width="0.6" />
+            <rect x="-6" y="32" width="12" height="8" fill="#11172a" stroke="#4dd0f7" stroke-width="0.6" />
+          </g>
+
+          <!-- pulsing pressure arrows around balloon -->
+          <g transform="translate(240, 170)" class="pulse-arrow">
+            <!-- left (from outside in) -->
+            <line x1="-58" y1="0" x2="-40" y2="0" stroke="#4dd0f7" stroke-width="1.2" />
+            <path d="M -44 -3 L -40 0 L -44 3" stroke="#4dd0f7" stroke-width="1.2" fill="none" />
+            <text x="-92" y="3" font-family="JetBrains Mono" font-size="8" fill="#4dd0f7" letter-spacing="0.06em">P_OUT</text>
+            <!-- right (inside pushing out) -->
+            <line x1="40" y1="0" x2="58" y2="0" stroke="#4dd0f7" stroke-width="1.2" />
+            <path d="M 54 -3 L 58 0 L 54 3" stroke="#4dd0f7" stroke-width="1.2" fill="none" />
+            <text x="64" y="3" font-family="JetBrains Mono" font-size="8" fill="#4dd0f7" letter-spacing="0.06em">P_IN</text>
+          </g>
+
+          <!-- balance label -->
+          <text x="240" y="240" text-anchor="middle" font-family="Instrument Serif" font-style="italic" font-size="16" fill="#f4f6fa">balanced.</text>
+
+          <!-- footer -->
+          <text x="240" y="442" text-anchor="middle" font-family="JetBrains Mono" font-size="9" fill="#5e6b80" letter-spacing="0.14em">FIG. 04 · DENSITY EQUILIBRIUM · SEALED MYLAR</text>
+        </svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════
+     05 · TRACKING RELAY
+     ════════════════════════════════════════════════════════════ -->
+<section id="sec-05" data-section="05" data-band="float">
+  <div class="wrap">
+    <div class="sec-tag reveal">05 / LIVE TRACKING <span class="meta">· LoRaWAN GATEWAY RELAY</span></div>
+    <h2 class="reveal" style="max-width: 920px;">A ping from a balloon, to a gateway, to your phone.</h2>
+    <p class="lede reveal d1" style="margin-top: 20px;">No ham radio license. No portable receiver. From 12 km up, your balloon has line-of-sight to <em>LoRaWAN gateways</em> hundreds of kilometers away. It pings the closest one. The gateway forwards over the internet. The cloud updates your dashboard.</p>
+
+    <div class="relay-stage reveal d2">
+      <svg viewBox="0 0 1080 360" preserveAspectRatio="xMidYMid meet" width="100%" height="100%">
+        <!-- bands -->
+        <g font-family="JetBrains Mono" font-size="9" fill="#5e6b80" letter-spacing="0.10em">
+          <line x1="40" y1="100" x2="1040" y2="100" stroke="rgba(77,208,247,0.18)" stroke-dasharray="2 4" />
+          <text x="40" y="92">FLOAT · 12 KM</text>
+          <line x1="40" y1="220" x2="1040" y2="220" stroke="rgba(77,208,247,0.18)" stroke-dasharray="2 4" />
+          <text x="40" y="212">LINE-OF-SIGHT RF · ~400 KM</text>
+          <line x1="40" y1="300" x2="1040" y2="300" stroke="rgba(77,208,247,0.36)" />
+          <text x="40" y="292">GROUND</text>
+        </g>
+
+        <!-- 1. BALLOON at altitude (left) -->
+        <g transform="translate(200, 100)">
+          <g>
+            <path d="M -20 -22 Q -28 -22, -28 -14 L -28 14 Q -28 22, -20 22 L 20 22 Q 28 22, 28 14 L 28 -14 Q 28 -22, 20 -22 Z"
+                  fill="url(#pico-mylar)" stroke="#4a5568" stroke-width="0.8" />
+            <line x1="0" y1="-18" x2="0" y2="18" stroke="rgba(255,255,255,0.20)" stroke-width="0.4" />
+            <ellipse cx="-10" cy="-10" rx="5" ry="2" fill="rgba(255,255,255,0.30)" />
+            <!-- payload -->
+            <line x1="0" y1="22" x2="0" y2="30" stroke="#4a5568" stroke-width="0.6" />
+            <rect x="-6" y="30" width="12" height="8" fill="#11172a" stroke="#4dd0f7" stroke-width="0.6" />
+          </g>
+          <text x="0" y="-34" text-anchor="middle" font-family="JetBrains Mono" font-size="9" fill="#4dd0f7" letter-spacing="0.10em">PICO BALLOON</text>
+          <text x="0" y="58" text-anchor="middle" font-family="JetBrains Mono" font-size="8" fill="#5e6b80">37.78° N · −122.40° W</text>
+        </g>
+
+        <!-- 2. LoRaWAN GATEWAY on the ground -->
+        <g transform="translate(820, 300)">
+          <!-- mast -->
+          <line x1="0" y1="0" x2="0" y2="-72" stroke="#4dd0f7" stroke-width="1.4" />
+          <!-- truss -->
+          <line x1="-6" y1="-14" x2="6" y2="-24" stroke="#4dd0f7" stroke-width="0.5" />
+          <line x1="6" y1="-14" x2="-6" y2="-24" stroke="#4dd0f7" stroke-width="0.5" />
+          <line x1="-6" y1="-28" x2="6" y2="-38" stroke="#4dd0f7" stroke-width="0.5" />
+          <line x1="6" y1="-28" x2="-6" y2="-38" stroke="#4dd0f7" stroke-width="0.5" />
+          <line x1="-6" y1="-42" x2="6" y2="-52" stroke="#4dd0f7" stroke-width="0.5" />
+          <line x1="6" y1="-42" x2="-6" y2="-52" stroke="#4dd0f7" stroke-width="0.5" />
+          <line x1="-6" y1="-14" x2="-6" y2="-52" stroke="#4dd0f7" stroke-width="0.5" />
+          <line x1="6" y1="-14" x2="6" y2="-52" stroke="#4dd0f7" stroke-width="0.5" />
+          <!-- whip -->
+          <line x1="-4" y1="-72" x2="4" y2="-72" stroke="#4dd0f7" stroke-width="1" />
+          <line x1="0" y1="-72" x2="0" y2="-88" stroke="#4dd0f7" stroke-width="0.8" />
+          <!-- enclosure -->
+          <rect x="-18" y="-10" width="36" height="10" fill="#11172a" stroke="#4dd0f7" stroke-width="0.8" />
+          <circle cx="0" cy="-5" r="1" fill="#f5b842" />
+          <!-- emanating waves -->
+          <path d="M -10 -82 Q 0 -94, 10 -82" stroke="#4dd0f7" stroke-width="0.6" fill="none" opacity="0.6" />
+          <path d="M -16 -88 Q 0 -106, 16 -88" stroke="#4dd0f7" stroke-width="0.4" fill="none" opacity="0.4" />
+          <!-- label -->
+          <text x="0" y="22" text-anchor="middle" font-family="JetBrains Mono" font-size="9" fill="#4dd0f7" letter-spacing="0.10em">GATEWAY</text>
+          <text x="0" y="34" text-anchor="middle" font-family="JetBrains Mono" font-size="8" fill="#5e6b80">community-hosted</text>
+        </g>
+
+        <!-- 3. Laptop with dashboard -->
+        <g transform="translate(990, 300)">
+          <rect x="-22" y="-30" width="44" height="26" fill="#11172a" stroke="#4dd0f7" stroke-width="0.8" />
+          <rect x="-18" y="-26" width="36" height="3" fill="#4dd0f7" opacity="0.6" />
+          <rect x="-18" y="-20" width="22" height="2" fill="#98a3b8" opacity="0.6" />
+          <rect x="-18" y="-15" width="30" height="2" fill="#98a3b8" opacity="0.6" />
+          <rect x="-18" y="-10" width="14" height="2" fill="#f5b842" />
+          <!-- laptop base -->
+          <rect x="-26" y="-4" width="52" height="4" fill="#11172a" stroke="#4dd0f7" stroke-width="0.8" />
+          <text x="0" y="20" text-anchor="middle" font-family="JetBrains Mono" font-size="9" fill="#4dd0f7" letter-spacing="0.10em">DASHBOARD</text>
+          <text x="0" y="32" text-anchor="middle" font-family="JetBrains Mono" font-size="8" fill="#5e6b80">your browser</text>
+        </g>
+
+        <!-- 1. balloon → gateway -->
+        <path id="r1" d="M 200 122 Q 460 160, 820 226"
+              stroke="#4dd0f7" stroke-width="1.4" fill="none"
+              stroke-dasharray="3 6" opacity="0.85">
+          <animate attributeName="stroke-dashoffset" from="0" to="-18" dur="1.2s" repeatCount="indefinite" />
+        </path>
+        <!-- 2. gateway → laptop -->
+        <path id="r2" d="M 832 296 Q 900 290, 968 282"
+              stroke="#4dd0f7" stroke-width="1.4" fill="none"
+              stroke-dasharray="3 6" opacity="0.85">
+          <animate attributeName="stroke-dashoffset" from="0" to="-18" dur="1.2s" repeatCount="indefinite" />
+        </path>
+
+        <!-- step labels -->
+        <g font-family="JetBrains Mono" font-size="10" fill="#4dd0f7" letter-spacing="0.10em">
+          <circle cx="500" cy="158" r="11" fill="#060814" stroke="#4dd0f7" stroke-width="1" />
+          <text x="500" y="162" text-anchor="middle">01</text>
+          <text x="500" y="184" text-anchor="middle" fill="#98a3b8" font-size="9">LoRaWAN UPLINK</text>
+          <text x="500" y="198" text-anchor="middle" fill="#5e6b80" font-size="8">903.9 MHz · SF7</text>
+
+          <circle cx="900" cy="288" r="11" fill="#060814" stroke="#4dd0f7" stroke-width="1" />
+          <text x="900" y="292" text-anchor="middle">02</text>
+          <text x="900" y="314" text-anchor="middle" fill="#98a3b8" font-size="9">INTERNET</text>
+        </g>
+
+        <!-- packets riding the line -->
+        <g>
+          <rect x="-6" y="-4" width="12" height="8" fill="#f5b842" opacity="0.9">
+            <animateMotion dur="3.5s" repeatCount="indefinite" rotate="auto">
+              <mpath href="#r1" />
+            </animateMotion>
+          </rect>
+          <rect x="-6" y="-4" width="12" height="8" fill="#f5b842" opacity="0.9">
+            <animateMotion dur="3.5s" repeatCount="indefinite" rotate="auto" begin="0.7s">
+              <mpath href="#r2" />
+            </animateMotion>
+          </rect>
+        </g>
+
+        <text x="540" y="345" text-anchor="middle" font-family="JetBrains Mono" font-size="9" fill="#5e6b80" letter-spacing="0.14em">FIG. 05 · LoRaWAN GATEWAY RELAY · NO LICENSE REQUIRED</text>
+      </svg>
+    </div>
+
+    <div class="relay-callout reveal d2">
+      <em>Works wherever there's a gateway in range</em> — and the network is everywhere.
+    </div>
+
+    <div class="relay-facts">
+      <div class="relay-fact reveal d1">
+        <div class="lbl">Range</div>
+        <div class="val">~400 km line-of-sight</div>
+        <div class="sub">From 12 km altitude, the balloon sees gateways across an entire region. Drift a hundred km, you've still got a dozen options.</div>
+      </div>
+      <div class="relay-fact reveal d2">
+        <div class="lbl">Network</div>
+        <div class="val">Global, community-run</div>
+        <div class="sub">The Things Network and other open LoRaWAN networks publish tens of thousands of gateways worldwide.</div>
+      </div>
+      <div class="relay-fact reveal d3">
+        <div class="lbl">License needed</div>
+        <div class="val">None</div>
+        <div class="sub">LoRaWAN operates in unlicensed ISM bands. No exams. No call signs. You buy the kit. You fly the mission.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════
+     06 · MISSION COMMANDER DASHBOARD
+     ════════════════════════════════════════════════════════════ -->
+<section id="sec-06" data-section="06" data-band="float">
+  <div class="wrap">
+    <div class="sec-tag reveal">06 / OPERATIONS SURFACE <span class="meta">· LIVE DASHBOARD</span></div>
+    <h2 class="reveal" style="max-width: 880px;">This is your page. <em>Your name on it.</em></h2>
+    <p class="lede reveal d1" style="margin-top: 24px;">A mission operations screen in your browser, updating live, all flight long. Position. Altitude. Temperature. Signal. Your friends and family watch from their couches.</p>
+
+    <div class="dash reveal d2" id="dash">
+      <div class="dash-head">
+        <div class="mission">
+          <span class="lbl">Mission Commander</span>
+          <span class="name" id="cmdr-name">Your Name Here</span>
+        </div>
+        <div class="status">
+          <span class="live">LIVE</span>
+          <span id="utc-time">21:51:42 UTC</span>
+          <span>STRATOLINK-DEMO</span>
+        </div>
+      </div>
+      <div class="dash-body">
+        <div class="dash-map">
+          <svg viewBox="0 0 640 460" preserveAspectRatio="xMidYMid slice" width="100%" height="100%">
+            <rect width="640" height="460" fill="#060814" />
+            <!-- grid -->
+            <g stroke="rgba(77,208,247,0.06)">
+              <line x1="0" y1="80" x2="640" y2="80" /><line x1="0" y1="160" x2="640" y2="160" />
+              <line x1="0" y1="240" x2="640" y2="240" /><line x1="0" y1="320" x2="640" y2="320" />
+              <line x1="0" y1="400" x2="640" y2="400" />
+              <line x1="80" y1="0" x2="80" y2="460" /><line x1="160" y1="0" x2="160" y2="460" />
+              <line x1="240" y1="0" x2="240" y2="460" /><line x1="320" y1="0" x2="320" y2="460" />
+              <line x1="400" y1="0" x2="400" y2="460" /><line x1="480" y1="0" x2="480" y2="460" />
+              <line x1="560" y1="0" x2="560" y2="460" />
+            </g>
+            <!-- continent silhouettes -->
+            <g stroke="rgba(77,208,247,0.30)" fill="none" stroke-width="0.8">
+              <path d="M 30 140 Q 100 100, 180 130 L 220 200 Q 260 220, 280 280 L 240 340 Q 180 320, 140 280 L 80 240 Z" />
+              <path d="M 320 160 L 380 140 L 420 200 L 410 320 L 360 380 L 320 340 Z" />
+              <path d="M 220 360 L 280 360 L 290 440 L 250 460 L 220 440 Z" />
+              <path d="M 440 120 L 580 110 L 600 200 L 540 240 L 460 200 Z" />
+            </g>
+            <!-- flight path -->
+            <path d="M 100 280 Q 180 250, 240 240 Q 320 230, 380 220 Q 440 215, 480 210"
+                  stroke="#4dd0f7" stroke-width="1.4" fill="none" stroke-dasharray="3 3" opacity="0.7" />
+            <!-- balloon marker -->
+            <g transform="translate(380, 220)">
+              <circle r="18" fill="#f5b842" opacity="0.12" />
+              <circle r="10" fill="#f5b842" opacity="0.25" />
+              <rect x="-3" y="-3" width="6" height="6" fill="#f5b842" />
+              <line x1="-18" y1="0" x2="-7" y2="0" stroke="#f5b842" stroke-width="0.8" />
+              <line x1="7" y1="0" x2="18" y2="0" stroke="#f5b842" stroke-width="0.8" />
+              <line x1="0" y1="-18" x2="0" y2="-7" stroke="#f5b842" stroke-width="0.8" />
+              <line x1="0" y1="7" x2="0" y2="18" stroke="#f5b842" stroke-width="0.8" />
+            </g>
+            <text x="402" y="218" font-family="JetBrains Mono" font-size="10" fill="#f5b842" letter-spacing="0.05em">STRATOLINK-DEMO</text>
+            <text x="402" y="230" font-family="JetBrains Mono" font-size="9" fill="rgba(244,246,250,0.55)" id="coord-text">37.78° N · -122.40° W</text>
+          </svg>
+        </div>
+        <div class="dash-reads">
+          <div class="read">
+            <div><div class="k">Altitude</div><div class="v"><span id="r-alt">9,487</span><span class="u">m</span></div></div>
+            <div class="t" id="r-alt-t">↑ stable · float band</div>
+          </div>
+          <div class="read">
+            <div><div class="k">Temperature</div><div class="v"><span id="r-temp">-54.0</span><span class="u">°C</span></div></div>
+            <div class="t">stratosphere · nominal</div>
+          </div>
+          <div class="read">
+            <div><div class="k">Ground Speed</div><div class="v"><span id="r-spd">112</span><span class="u">km/h</span></div></div>
+            <div class="t">jet stream · hdg 067°</div>
+          </div>
+          <div class="read">
+            <div><div class="k">Pressure</div><div class="v"><span id="r-pres">285.7</span><span class="u">hPa</span></div></div>
+            <div class="t">barometric · validated</div>
+          </div>
+          <div class="read">
+            <div><div class="k">Mission Time</div><div class="v"><span id="r-met">04:42:13</span></div></div>
+            <div class="t">since release</div>
+          </div>
+          <div class="read">
+            <div><div class="k">Distance Flown</div><div class="v"><span id="r-dist">684</span><span class="u">km</span></div></div>
+            <div class="t">+0.7 km/min</div>
+          </div>
+        </div>
+      </div>
+      <div class="dash-foot">
+        <span>UPLINK <span id="ul-age">23s ago</span> · NEXT PING <span id="np">04:42</span></span>
+        <span>SHAREABLE · BRANDED · YOURS</span>
+      </div>
+    </div>
+    <p class="dash-msg reveal d3">The dashboard is yours from release until the balloon goes silent. Share the link. Embed it in a class. Watch the temperature drop as your balloon enters the stratosphere. <em>Watch the longitude wind around the planet.</em></p>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════
+     07 · REAL FLIGHT DATA
+     ════════════════════════════════════════════════════════════ -->
+<section id="sec-07" data-section="07" data-band="cruise">
+  <div class="wrap">
+    <div class="sec-tag reveal">07 / REAL FLIGHT DATA <span class="meta">· TEST FLIGHT 003</span></div>
+    <h2 class="reveal" style="max-width: 920px;">Not a simulation. <em>A flown mission.</em></h2>
+    <p class="lede reveal d1" style="margin-top: 24px;">Here's the telemetry from Test Flight 003 — a six-hour stratospheric float, every reading captured live, every anomaly logged. The platform has flown. The data is real.</p>
+
+    <div class="report reveal d2">
+      <div class="report-head">
+        <span class="id">MISSION REPORT · TF-003</span>
+        <span class="ts">RECORDED · 2026-04-22 14:08 UTC</span>
+      </div>
+      <div class="report-body">
+        <div class="report-chart">
+          <div class="head">
+            <h4>Ascent rate</h4>
+            <span class="unit">m/s · per 30 min</span>
+          </div>
+          <svg viewBox="0 0 480 240" preserveAspectRatio="xMidYMid meet" width="100%">
+            <!-- grid -->
+            <g stroke="rgba(77,208,247,0.08)">
+              <line x1="40" y1="40" x2="460" y2="40" />
+              <line x1="40" y1="90" x2="460" y2="90" />
+              <line x1="40" y1="140" x2="460" y2="140" />
+              <line x1="40" y1="190" x2="460" y2="190" />
+            </g>
+            <!-- y-axis labels -->
+            <g font-family="JetBrains Mono" font-size="9" fill="#5e6b80" text-anchor="end">
+              <text x="34" y="44">1.0</text>
+              <text x="34" y="94">0.75</text>
+              <text x="34" y="144">0.50</text>
+              <text x="34" y="194">0.25</text>
+            </g>
+            <!-- x-axis labels (5 data points) -->
+            <g font-family="JetBrains Mono" font-size="9" fill="#5e6b80" text-anchor="middle">
+              <text x="80" y="218">T+30</text>
+              <text x="170" y="218">T+60</text>
+              <text x="260" y="218">T+90</text>
+              <text x="350" y="218">T+120</text>
+              <text x="440" y="218">T+150</text>
+            </g>
+            <!-- data: 0.91 → 0.88 → 0.54 → 0.60 → 0.72 m/s -->
+            <!-- map to y: 1.0=40, 0=190 (range 150 over 1.0) → y = 190 - val*150 -->
+            <!-- 0.91→53.5, 0.88→58, 0.54→109, 0.60→100, 0.72→82 -->
+            <path d="M 80 54 L 170 58 L 260 109 L 350 100 L 440 82"
+                  stroke="#4dd0f7" stroke-width="1.6" fill="none" />
+            <!-- fill under line -->
+            <path d="M 80 54 L 170 58 L 260 109 L 350 100 L 440 82 L 440 190 L 80 190 Z"
+                  fill="#4dd0f7" opacity="0.08" />
+            <!-- data points + labels -->
+            <g font-family="JetBrains Mono" font-size="10" fill="#f4f6fa">
+              <g transform="translate(80, 54)">
+                <rect x="-3" y="-3" width="6" height="6" fill="#f5b842" />
+                <text x="0" y="-10" text-anchor="middle" fill="#f5b842">0.91</text>
+              </g>
+              <g transform="translate(170, 58)">
+                <rect x="-3" y="-3" width="6" height="6" fill="#4dd0f7" />
+                <text x="0" y="-10" text-anchor="middle" fill="#4dd0f7">0.88</text>
+              </g>
+              <g transform="translate(260, 109)">
+                <rect x="-3" y="-3" width="6" height="6" fill="#4dd0f7" />
+                <text x="0" y="-10" text-anchor="middle" fill="#4dd0f7">0.54</text>
+              </g>
+              <g transform="translate(350, 100)">
+                <rect x="-3" y="-3" width="6" height="6" fill="#4dd0f7" />
+                <text x="0" y="-10" text-anchor="middle" fill="#4dd0f7">0.60</text>
+              </g>
+              <g transform="translate(440, 100)">
+                <rect x="-3" y="-3" width="6" height="6" fill="#4dd0f7" />
+                <text x="0" y="-10" text-anchor="middle" fill="#4dd0f7">0.72</text>
+              </g>
+            </g>
+            <!-- footer -->
+            <text x="250" y="234" text-anchor="middle" font-family="JetBrains Mono" font-size="8" fill="#5e6b80" letter-spacing="0.10em">TIME FROM RELEASE · MINUTES</text>
+          </svg>
+          <p style="margin-top: 18px; font-size: 13px; color: var(--ink-dim);">
+            Average ascent rate: <strong style="color: var(--white); font-family: var(--mono);">0.73 m/s</strong> · within nominal envelope · matched pre-flight prediction within 4%.
+          </p>
+        </div>
+        <div class="report-side">
+          <div class="anomaly">
+            <div class="lbl">CONTINGENCY · LOGGED</div>
+            <h4>GPS froze at 6,924 m.</h4>
+            <p>So we switched to barometric pressure fallback. The balloon kept going. <strong style="color: var(--amber); font-family: var(--mono); font-size: 0.92em;">SO DID THE DATA.</strong></p>
+          </div>
+          <div class="last-fix">
+            <div class="lbl">LAST CONFIRMED POSITION</div>
+            <div class="loc">San Joaquin Valley<br/>California</div>
+            <div class="ca-map">
+              <svg viewBox="0 0 200 110" width="100%">
+                <!-- stylized California outline -->
+                <path d="M 60 8 L 80 6 L 95 14 L 100 28 L 108 42 L 116 56 L 130 70 L 140 92 L 130 104 L 110 102 L 96 92 L 84 82 L 70 72 L 56 56 L 50 38 L 56 22 Z"
+                      fill="rgba(77,208,247,0.06)" stroke="#4dd0f7" stroke-width="1" />
+                <!-- marker over central valley -->
+                <g transform="translate(108, 64)">
+                  <circle r="10" fill="#f5b842" opacity="0.16" />
+                  <circle r="5" fill="#f5b842" opacity="0.30" />
+                  <rect x="-2.5" y="-2.5" width="5" height="5" fill="#f5b842" />
+                  <line x1="-10" y1="0" x2="-5" y2="0" stroke="#f5b842" stroke-width="0.8" />
+                  <line x1="5" y1="0" x2="10" y2="0" stroke="#f5b842" stroke-width="0.8" />
+                </g>
+              </svg>
+            </div>
+            <div class="coords">36.78° N · −119.42° W · alt 6,924 m</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════
+     08 · FAQ + CTA
+     ════════════════════════════════════════════════════════════ -->
+<section id="faq" data-section="08" data-band="sea">
+  <div class="wrap">
+    <div class="sec-tag reveal">08 / QUESTIONS <span class="meta">· REAL ANSWERS</span></div>
+    <h2 class="reveal">Curious. <em>Reasonable.</em> Frequently asked.</h2>
+
+    <div class="faq reveal d1">
+      <!-- 1 -->
+      <div class="faq-item">
+        <button class="faq-q">
+          <span class="icon">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="2" y="4" width="12" height="8" stroke="currentColor" stroke-width="1.4" /><rect x="6" y="6" width="4" height="4" fill="currentColor" /></svg>
+          </span>
+          <span class="q-text">Do I need a license to fly one?</span>
+          <span class="toggle">+</span>
+        </button>
+        <div class="faq-a"><div class="faq-a-inner">
+          <strong>No.</strong> Stratolink uses <em>LoRaWAN</em>, not amateur radio. LoRaWAN operates in unlicensed ISM bands — the same regulatory category as your garage door opener and your wireless thermometer — and is legal to use without any personal certification. The whole point is that anyone can fly a mission.
+        </div></div>
+      </div>
+      <!-- 2 -->
+      <div class="faq-item">
+        <button class="faq-q">
+          <span class="icon">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M 8 2 L 14 13 L 2 13 Z" stroke="currentColor" stroke-width="1.4" fill="none" /><rect x="7" y="6" width="2" height="4" fill="currentColor" /><rect x="7" y="11" width="2" height="1" fill="currentColor" /></svg>
+          </span>
+          <span class="q-text">Is hydrogen dangerous?</span>
+          <span class="toggle">+</span>
+        </button>
+        <div class="faq-a"><div class="faq-a-inner">
+          Honest answer: hydrogen is flammable. But Stratolink never asks you to handle bulk H₂. The gas is <em>generated on demand</em>, in your reactor jar, in exactly the amount needed — and captured directly into the balloon as it forms. There's no tank, no pressurized cylinder, no delivery. The pellet itself is shelf-stable and safe to handle dry. The reaction releases the H₂ in a controlled, sub-atmospheric flow. <strong style="color: var(--amber); font-family: var(--mono); font-size: 0.92em;">INDOORS, NO. NEAR FLAME, NO.</strong> Outdoors on a still morning, with the printed safety card, it's about as risky as lighting a barbecue.
+        </div></div>
+      </div>
+      <!-- 3 -->
+      <div class="faq-item">
+        <button class="faq-q">
+          <span class="icon">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6" stroke="currentColor" stroke-width="1.4" /><line x1="8" y1="8" x2="8" y2="4" stroke="currentColor" stroke-width="1.4" /><line x1="8" y1="8" x2="11" y2="10" stroke="currentColor" stroke-width="1.4" /></svg>
+          </span>
+          <span class="q-text">How long does it fly?</span>
+          <span class="toggle">+</span>
+        </button>
+        <div class="faq-a"><div class="faq-a-inner">
+          A typical mission flies between <strong style="color: var(--white); font-family: var(--mono);">3 and 14 days</strong>. The exact duration depends on jet-stream conditions, sun exposure (the payload is solar-charged), and how perfect your float-altitude trim was on launch day. Some Stratolink missions have circled the Northern Hemisphere multiple times. Some have landed at sunset on day one. <em>That uncertainty is part of the fun.</em>
+        </div></div>
+      </div>
+      <!-- 4 -->
+      <div class="faq-item">
+        <button class="faq-q">
+          <span class="icon">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M 3 4 L 8 12 L 13 4" stroke="currentColor" stroke-width="1.4" fill="none" /></svg>
+          </span>
+          <span class="q-text">Can I get it back?</span>
+          <span class="toggle">+</span>
+        </button>
+        <div class="faq-a"><div class="faq-a-inner">
+          <strong>No</strong> — and that's by design. A pico balloon flight is a one-way mission. It ends in the ocean, or in a remote field, and at that point it's a few grams of mylar plus the small payload. We follow <em>leave no flying trace</em>: every component is selected to minimize environmental impact. What you keep is the data, the photos, the dashboard, and the story.
+        </div></div>
+      </div>
+      <!-- 5 -->
+      <div class="faq-item">
+        <button class="faq-q">
+          <span class="icon">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><line x1="8" y1="3" x2="8" y2="13" stroke="currentColor" stroke-width="1.4" /><path d="M 5 6 L 8 3 L 11 6" stroke="currentColor" stroke-width="1.4" fill="none" /></svg>
+          </span>
+          <span class="q-text">How high does it actually go?</span>
+          <span class="toggle">+</span>
+        </button>
+        <div class="faq-a"><div class="faq-a-inner">
+          Stratolink balloons float between <strong style="color: var(--white); font-family: var(--mono);">9,000 and 14,000 m</strong> — roughly <strong style="color: var(--white); font-family: var(--mono);">30,000 to 45,000 ft</strong>. Higher than commercial airline cruise altitude. In the lower stratosphere, above 99% of weather. Visibility is unlimited. The horizon shows a clear arc. <em>You are above the troposphere.</em>
+        </div></div>
+      </div>
+      <!-- 6 -->
+      <div class="faq-item">
+        <button class="faq-q">
+          <span class="icon">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="3" stroke="currentColor" stroke-width="1.4" /><circle cx="8" cy="8" r="6" stroke="currentColor" stroke-width="1.4" stroke-dasharray="2 2" /></svg>
+          </span>
+          <span class="q-text">What happens to it eventually?</span>
+          <span class="toggle">+</span>
+        </button>
+        <div class="faq-a"><div class="faq-a-inner">
+          One of three things, in order of likelihood. <strong style="color: var(--white); font-family: var(--mono);">(1)</strong> UV at altitude slowly degrades the mylar; the envelope loses gas, altitude drops, eventual landing. <strong style="color: var(--white); font-family: var(--mono);">(2)</strong> A particularly cold pocket of air freezes residual moisture into ice on the envelope, weight goes up, altitude drops, splashdown. <strong style="color: var(--white); font-family: var(--mono);">(3)</strong> Battery depletes faster than solar can recharge — the dashboard goes quiet but the balloon may fly on in silence for days. Roughly 70% of missions end with ocean splashdown.
+        </div></div>
+      </div>
+      <!-- 7 -->
+      <div class="faq-item">
+        <button class="faq-q">
+          <span class="icon">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="2" y="3" width="12" height="10" stroke="currentColor" stroke-width="1.4" /><line x1="2" y1="6" x2="14" y2="6" stroke="currentColor" stroke-width="1.4" /></svg>
+          </span>
+          <span class="q-text">Can a school do this?</span>
+          <span class="toggle">+</span>
+        </button>
+        <div class="faq-a"><div class="faq-a-inner">
+          <strong>Yes.</strong> There's a Stratolink School Program with a teacher's guide, a classroom dashboard the whole class can watch, and curriculum links to atmospheric science, geography, and physics. It is hands-down the most exciting thing a 6th grader can do on a Tuesday.
+        </div></div>
+      </div>
+    </div>
+
+    <!-- CTA -->
+    <div class="cta" id="cta">
+      <h2 class="reveal">Ready to be <em>Mission Commander?</em></h2>
+      <p class="reveal d1">Pick a launch day. Pick a name for your mission. We handle everything else.</p>
+      <div class="cta-actions reveal d2">
+        <a href="/activate" class="btn btn-pri">Launch My Mission →</a>
+        <a href="/#contact" class="btn btn-ghost">School Programs →</a>
+      </div>
+    </div>
+  </div>
+</section>

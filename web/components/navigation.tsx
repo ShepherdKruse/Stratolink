@@ -49,6 +49,12 @@ export function Navigation() {
               Flights
             </Link>
             <Link
+              href="/learn"
+              className="text-sm font-light text-muted-foreground transition-colors hover:text-foreground"
+            >
+              Learn
+            </Link>
+            <Link
               href="/docs"
               className="text-sm font-light text-muted-foreground transition-colors hover:text-foreground"
             >
@@ -144,6 +150,15 @@ export function Navigation() {
                   className="block rounded-sm px-3 py-2.5 text-base font-light text-muted-foreground transition-colors hover:bg-accent/50 hover:text-foreground"
                 >
                   Prior flights
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/learn"
+                  onClick={close}
+                  className="block rounded-sm px-3 py-2.5 text-base font-light text-muted-foreground transition-colors hover:bg-accent/50 hover:text-foreground"
+                >
+                  Learn
                 </Link>
               </li>
               <li>
