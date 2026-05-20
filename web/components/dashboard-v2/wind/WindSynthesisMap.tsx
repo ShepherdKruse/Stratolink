@@ -210,10 +210,6 @@ export default function WindSynthesisMap({
                     ? { lat: p.launchLat, lon: p.launchLon, time_utc: obsTimeUtc(first.t) }
                     : { lat: first.lat, lon: first.lon, time_utc: obsTimeUtc(first.t) };
 
-            const segs = splitTrackSegments(p.observedTrack);
-            const driftSegment =
-                segs.freezeDrift.length >= 2 ? segs.freezeDrift : undefined;
-
             const res = await fetch('/api/wind-forecast', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
@@ -228,7 +224,6 @@ export default function WindSynthesisMap({
                         t: obsTimeUtc(pt.t),
                         alt_m: p.lastAltM,
                     })),
-                    driftSegment,
                     pressureHpa: p.levelHpa,
                     forecastHours: p.forecastHours,
                 }),
@@ -374,12 +369,13 @@ export default function WindSynthesisMap({
 
     const resumedCoords = segments.resumed.map((p) => [p.lon, p.lat] as [number, number]);
 
+    const impliedGapPaths = forecastReady ? (mc?.observed.implied_gap_paths ?? []) : [];
+
     const driftCoords = useMemo(() => {
         if (!forecastReady) return [];
-        if (mc?.observed.drift_segment?.length) return mc.observed.drift_segment;
-        if (segments.freezeDrift.length) return segments.freezeDrift;
+        if (mc?.stale_gps && mc.observed.drift_segment?.length) return mc.observed.drift_segment;
         return [];
-    }, [forecastReady, mc, segments.freezeDrift]);
+    }, [forecastReady, mc?.stale_gps, mc?.observed.drift_segment]);
 
     const impliedNowCoord = useMemo((): [number, number] | null => {
         if (!forecastReady || !mc?.stale_gps) return null;
@@ -525,6 +521,18 @@ export default function WindSynthesisMap({
         [hindcast?.path],
     );
 
+    const impliedGapGeoJson = useMemo(() => {
+        if (!impliedGapPaths.length) return null;
+        return {
+            type: 'FeatureCollection' as const,
+            features: impliedGapPaths.map((path, i) => ({
+                type: 'Feature' as const,
+                properties: { gap: i },
+                geometry: { type: 'LineString' as const, coordinates: path },
+            })),
+        };
+    }, [impliedGapPaths]);
+
     const freezeLine = useMemo(() => lineGeoJson(driftCoords), [driftCoords]);
     const observedLine = useMemo(() => lineGeoJson(obsCoords), [obsCoords]);
     const resumedLine = useMemo(() => lineGeoJson(resumedCoords), [resumedCoords]);
@@ -535,11 +543,14 @@ export default function WindSynthesisMap({
             ...observedTrack,
             ...nominalPath.map(([lon, lat]) => ({ lat, lon, t: '' })),
         ];
+        for (const path of impliedGapPaths) {
+            for (const [lon, lat] of path) pts.push({ lat, lon, t: '' });
+        }
         if (e90_at_horizon?.polygon) {
             for (const [lon, lat] of e90_at_horizon.polygon) pts.push({ lat, lon, t: '' });
         }
         return pts.filter((p) => isValidLngLat(p.lat, p.lon));
-    }, [observedTrack, nominalPath, e90_at_horizon]);
+    }, [observedTrack, nominalPath, impliedGapPaths, e90_at_horizon]);
 
     useEffect(() => {
         const map = mapRef.current?.getMap();
@@ -615,6 +626,12 @@ export default function WindSynthesisMap({
                     {showUpdating && (
                         <div style={{ color: 'rgba(200,212,232,.45)' }}>
                             <b>Forecast</b> updating…
+                        </div>
+                    )}
+                    {forecastReady && impliedGapPaths.length > 0 && (
+                        <div style={{ color: 'rgba(94,196,232,.85)' }}>
+                            <b>Inferred gaps</b> {impliedGapPaths.length} segment
+                            {impliedGapPaths.length === 1 ? '' : 's'} filled (hourly GFS + bias)
                         </div>
                     )}
                     {endPoint && forecastReady && !showUpdating && (
@@ -770,6 +787,22 @@ export default function WindSynthesisMap({
                                     'line-color': '#e6d088',
                                     'line-width': 1,
                                     'line-opacity': 0.07,
+                                }}
+                            />
+                        </Source>
+                    )}
+
+                    {impliedGapGeoJson && (
+                        <Source id="ws-implied-gaps" type="geojson" data={impliedGapGeoJson}>
+                            <Layer
+                                id="ws-implied-gaps-line"
+                                type="line"
+                                layout={{ 'line-cap': 'round', 'line-join': 'round' }}
+                                paint={{
+                                    'line-color': '#5ec4e8',
+                                    'line-width': 2.5,
+                                    'line-dasharray': [3, 3],
+                                    'line-opacity': 0.92,
                                 }}
                             />
                         </Source>
@@ -1036,10 +1069,12 @@ export default function WindSynthesisMap({
                     <div style={{ width: 26, height: 2.5, borderRadius: 2, background: '#c9521f' }} />
                     <span style={{ fontSize: 11.5, color: 'rgba(200,212,232,.58)' }}>Observed GPS track</span>
                 </div>
-                {segments.freezeDrift.length >= 2 && (
+                {impliedGapPaths.length > 0 && (
                     <div className="wind-synthesis-lg-row">
-                        <div style={{ width: 26, borderTop: '2px dashed rgba(148,162,180,.6)' }} />
-                        <span style={{ fontSize: 11.5, color: 'rgba(200,212,232,.58)' }}>GPS-frozen drift (implied)</span>
+                        <div style={{ width: 26, borderTop: '2px dashed rgba(94,196,232,.95)' }} />
+                        <span style={{ fontSize: 11.5, color: 'rgba(200,212,232,.58)' }}>
+                            Inferred path through GPS gaps (auto)
+                        </span>
                     </div>
                 )}
                 <div className="wind-synthesis-lg-row">

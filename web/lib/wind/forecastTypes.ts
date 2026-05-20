@@ -63,6 +63,8 @@ export type StratolinkForecast = {
         gps_fixes: ForecastGpsFix[];
         track: Array<[number, number]>;
         drift_segment: Array<[number, number]>;
+        /** Model paths through historical GPS gaps (freeze + long intervals). */
+        implied_gap_paths?: Array<Array<[number, number]>>;
     };
     wind_field: {
         lat0: number;
