@@ -7,7 +7,7 @@ import { boundsFromPoints, fetchWindGrid, snapPressureHpa } from './fetchWindGri
 import type { ForecastGpsFix } from './forecastTypes';
 import { windAt, windFieldToGfsGrid, type GfsGrid } from './gfsGrid';
 import { BALLOON_STEP_HOURS } from './balloonIntegrate';
-import { reconstructLongGap } from './pathReconstructionLongGap';
+import { reconstructLongGap, type OccupancyFootprint } from './pathReconstructionLongGap';
 
 const CFG = {
     N_PARTICLES: 200,
@@ -46,7 +46,7 @@ export type ReconstructionGap = {
     n_eff?: number;
     directness?: number;
     net_speed_ms?: number;
-    reach_hull?: Array<[number, number]> | null;
+    occupancy?: OccupancyFootprint | null;
     ellipses?: Array<{
         frac: number;
         t_hours: number;
@@ -66,7 +66,6 @@ export type PathReconstructionResult = {
     /** Same geometry as reconstructed_path with UTC timestamp per point (for timeline scrub). */
     reconstructed_track: ReconstructedTrackPoint[];
     gap_bridges: Array<Array<[number, number]>>;
-    gap_reach_hulls: Array<Array<[number, number]>>;
     gaps: ReconstructionGap[];
     compute_ms: number;
 };
@@ -406,7 +405,6 @@ export async function computePathReconstruction(opts: {
                 time_utc: f.time_utc,
             })),
             gap_bridges: [],
-            gap_reach_hulls: [],
             gaps: [],
             compute_ms: Date.now() - t0,
         };
@@ -430,7 +428,6 @@ export async function computePathReconstruction(opts: {
     const allBaro = opts.baroSamples ?? [];
     const gaps: ReconstructionGap[] = [];
     const gapBridges: Array<Array<[number, number]>> = [];
-    const gapReachHulls: Array<Array<[number, number]>> = [];
     const fullPath: Array<[number, number]> = [];
     const reconstructedTrack: ReconstructedTrackPoint[] = [];
 
@@ -460,7 +457,7 @@ export async function computePathReconstruction(opts: {
                 n_eff: lg.n_eff,
                 directness: lg.directness,
                 net_speed_ms: lg.net_speed_ms,
-                reach_hull: lg.reach_hull,
+                occupancy: lg.occupancy,
                 ellipses: lg.ellipses,
             });
             appendTimedSegment(reconstructedTrack, lg.meanPath, tA, tB, i > 0);
@@ -469,9 +466,6 @@ export async function computePathReconstruction(opts: {
             fullPath.push(...seg);
             if (!lg.short && lg.meanPath.length >= 2) {
                 gapBridges.push(lg.meanPath);
-            }
-            if (lg.reach_hull && lg.reach_hull.length >= 3) {
-                gapReachHulls.push(lg.reach_hull);
             }
             continue;
         }
@@ -503,7 +497,6 @@ export async function computePathReconstruction(opts: {
         reconstructed_path: fullPath,
         reconstructed_track: reconstructedTrack,
         gap_bridges: gapBridges,
-        gap_reach_hulls: gapReachHulls,
         gaps,
         compute_ms: Date.now() - t0,
     };

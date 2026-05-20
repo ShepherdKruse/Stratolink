@@ -93,8 +93,8 @@ export default function WindForecastScrubber({
                             {reconstructionGap && reconstructionGap.mode === 'corridor' && (
                                 <>
                                     {' '}
-                                    This gap is under-determined — position is the corridor centerline, not
-                                    exact.
+                                    This gap is under-determined — scrub position follows the central
+                                    estimate only; the amber footprint shows where paths could have been.
                                 </>
                             )}
                         </span>
@@ -106,12 +106,12 @@ export default function WindForecastScrubber({
                                 <>
                                     {reconstructionGap.mode === 'corridor' ? (
                                         <>
-                                            <strong>Amber region</strong> = reachability corridor for this{' '}
+                                            <strong>Amber footprint</strong> = occupancy region for this{' '}
                                             {reconstructionGap.dt_hours}h GPS gap (under-determined, n_eff≈
-                                            {reconstructionGap.n_eff ?? '—'}). Net speed{' '}
+                                            {reconstructionGap.n_eff ?? '—'}). Shaded by where surviving
+                                            trajectories actually passed — not a convex hull. Net speed{' '}
                                             {reconstructionGap.net_speed_ms ?? '—'} m/s, directness{' '}
-                                            {reconstructionGap.directness ?? '—'} — low directness suggests the
-                                            path may have stalled or looped. Mid-gap uncertainty ±
+                                            {reconstructionGap.directness ?? '—'}. Mid-gap uncertainty ±
                                             {reconstructionGap.mid_gap_90_km} km.
                                         </>
                                     ) : (

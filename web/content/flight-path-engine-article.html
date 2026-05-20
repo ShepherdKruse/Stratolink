@@ -1,0 +1,281 @@
+  <div class="paper">
+    <div class="masthead">
+      <div class="breadcrumb"><a href="/docs">Docs</a> / Flight Path Engine</div>
+      <div class="eyebrow">Stratolink &middot; Technical Note</div>
+      <h1 class="title">The Stratolink Flight Path Engine</h1>
+      <div class="subtitle">Predicting and reconstructing a balloon's trajectory from sparse position fixes</div>
+      <div class="authorline">
+        <span>Shepherd Kruse</span>
+        <span class="sep">&middot;</span>
+        <span class="mono">Revised May 2026</span>
+        <span class="sep">&middot;</span>
+        <span class="mono">Working note</span>
+      </div>
+    </div>
+
+    <div class="abstract-wrap">
+      <div class="abstract">
+        <span class="ab-label">Abstract.</span>
+        <p>This note describes the two engines behind the Stratolink flight path system: a forward forecast that predicts where a balloon is going, and a reconstruction that infers where it has been between sparse position fixes. I document the full method, including the wind advection model, the in-flight bias correction, the Monte Carlo ensemble and its confidence ellipses, the particle smoother used for reconstruction, the role of altitude, and the handling of long gaps where the tracker falls silent. Throughout, the goal is to draw a firm path only when the data supports one, and to report an honest region when it does not.</p>
+      </div>
+    </div>
+
+    <section id="two-questions">
+      <h2><span class="sn">1</span>Two questions</h2>
+      <p>There are two things I want to know about a balloon in flight. Where is it going, and where has it been. These sound like the same question pointed in opposite directions, but they are genuinely different problems, and I solve them with two different engines.</p>
+      <p>Predicting the future is a <strong>forecasting</strong> problem. I stand at the last known position and reason forward, and my uncertainty grows the further out I look, because I am extrapolating into weather I have not seen yet. Reconstructing the past is a <strong>smoothing</strong> problem. I have a confirmed position before a gap and another after it, so the truth is pinned at both ends and I am filling in the middle. The math rewards me for that: a reconstruction between two known points is far tighter than a forecast over the same span.</p>
+      <p>Both engines rest on one idea, so I will start there.</p>
+    </section>
+
+    <section id="wind">
+      <h2><span class="sn">2</span>The wind is the engine</h2>
+      <p>A pico balloon floating in the stratosphere has no propulsion and no steering. It is a leaf on a river of air. So if I know the wind at the balloon's position, I know how it moves. Everything in this system is built on that.</p>
+      <p>I represent the wind as a grid of vectors. At each grid point I store two numbers: <span class="var">u</span>, the eastward wind speed, and <span class="var">v</span>, the northward wind speed, both in metres per second. The balloon is almost never sitting exactly on a grid point, so to get the wind where it actually is I blend the four surrounding points using bilinear interpolation, weighting each by how close it is. That gives a smooth wind value anywhere inside the grid.</p>
+      <p>Once I have the local wind, moving the balloon one time step is just arithmetic. Latitude and longitude change in proportion to the wind, scaled by how many metres there are in a degree:</p>
+      <div class="math-block"><div class="mb-eq">
+        $$\phi_{n+1} = \phi_n + \frac{v\,\Delta t}{111{,}320}, \qquad \lambda_{n+1} = \lambda_n + \frac{u\,\Delta t}{111{,}320 \,\cos\phi_n}$$
+        </div><div class="mb-cap">latitude φ and longitude λ advanced one step of Δt seconds</div>
+      </div>
+      <p>The <span class="var">cos φ</span> term in the longitude line matters. Lines of longitude crowd together as you move away from the equator, so the same eastward wind moves you through more degrees of longitude at high latitude than at low latitude. I take a step every ten minutes, which is fine and smooth for the timescales a balloon flies on. Repeat this thousands of times and the balloon traces a path. That loop is the heart of both engines.</p>
+      <div class="callout">
+        <div class="co-label">The core idea</div>
+        <p>If I trust the wind, I can move the balloon. Everything else in this system is about getting the wind right, being honest about how wrong it might be, and using the balloon's own reports to correct it.</p>
+      </div>
+    </section>
+
+    <div class="kicker">Part I &middot; Forecasting</div>
+
+    <section id="forecast">
+      <h2><span class="sn">3</span>Forecasting forward</h2>
+      <p>The forecast is the simpler of the two engines, so I will explain it first. I take the balloon's last confirmed position and I integrate forward through the forecast wind field, one ten minute step at a time, out to twenty four hours. That produces a single predicted path, ending at a single predicted point.</p>
+      <p>If the wind forecast were perfect, that would be the end of it. It is not perfect, and pretending otherwise would make the whole thing useless. So the rest of the forecast engine is about two things: correcting the wind using what the balloon has already told me, and being honest about the uncertainty that remains.</p>
+    </section>
+
+    <section id="bias">
+      <h2><span class="sn">4</span>Letting the balloon correct me</h2>
+      <p>The balloon is the best wind sensor I have, because it is physically riding the wind I am trying to model. Every time it reports two positions in a row, I can work out the wind it actually experienced between them. I just divide the distance it moved by the time it took:</p>
+      <div class="math-block"><div class="mb-eq">
+        $$u_{\text{obs}} = \frac{(\lambda_2 - \lambda_1)\,111{,}320\,\cos\phi}{\Delta t}, \qquad v_{\text{obs}} = \frac{(\phi_2 - \phi_1)\,111{,}320}{\Delta t}$$
+        </div><div class="mb-cap">the wind the balloon truly felt, from two consecutive fixes</div>
+      </div>
+      <p>Then I compare that to what the forecast claimed the wind was at the same place and time. The difference is a bias, and it has two parts. The forecast might have the wind speed wrong, and it might have the direction wrong. I measure both across every pair of fixes I have, and average them into a single speed multiplier <span class="var">k</span> and a single direction rotation <span class="var">θ</span>:</p>
+      <div class="math-block"><div class="mb-eq">
+        $$k = \operatorname{mean}\!\left(\frac{\lVert \mathbf{w}_{\text{obs}}\rVert}{\lVert \mathbf{w}_{\text{gfs}}\rVert}\right), \qquad \theta = \operatorname{mean}\big(\angle\mathbf{w}_{\text{obs}} - \angle\mathbf{w}_{\text{gfs}}\big)$$
+        </div><div class="mb-cap">a multiplicative speed bias and an additive direction bias</div>
+      </div>
+      <p>To apply the correction I scale every forecast wind vector by <span class="var">k</span> and rotate it by <span class="var">θ</span> before I step the balloon:</p>
+      <div class="math-block"><div class="mb-eq">
+        $$\begin{pmatrix} u' \\ v' \end{pmatrix} = k \begin{pmatrix} \cos\theta & -\sin\theta \\ \sin\theta & \cos\theta \end{pmatrix} \begin{pmatrix} u \\ v \end{pmatrix}$$
+        </div><div class="mb-cap">the bias-corrected wind used for the forward forecast</div>
+      </div>
+      <p>This is the same idea professional trajectory models use, and it is the single biggest accuracy gain in the forecast. I do put guard rails on it. I clamp the speed multiplier to between 0.75 and 1.25 and the rotation to plus or minus 25 degrees. If the raw numbers come out larger than that, it usually means the balloon briefly hit a small local feature that will not persist into the rest of the forecast, so I cap the correction and record both the raw and the capped value for inspection.</p>
+    </section>
+
+    <section id="ensemble">
+      <h2><span class="sn">5</span>The Monte Carlo ensemble</h2>
+      <p>Even after the bias correction, I do not know the future wind exactly. So instead of pretending I have one answer, I run two hundred. This is the Monte Carlo ensemble.</p>
+      <p>Each of the two hundred members is a complete forecast run, but with the wind nudged a little differently. For each member I draw a random speed multiplier, a random direction offset, and a random altitude offset from normal distributions whose widths match how wrong forecasts of this kind typically are:</p>
+      <div class="math-block"><div class="mb-eq">
+        $$k_i \sim \mathcal{N}(1,\ 0.10^2), \qquad \theta_i \sim \mathcal{N}(0,\ 12^{\circ 2}), \qquad \Delta a_i \sim \mathcal{N}(0,\ 5\ \text{hPa})$$
+        </div><div class="mb-cap">the perturbations defining one ensemble member</div>
+      </div>
+      <p>The altitude offset matters because a balloon at a slightly different pressure level rides slightly different winds. I integrate all two hundred members forward. Where they bunch together, I am confident. Where they fan apart, I am not. The spread of the two hundred endpoints is not a guess at the uncertainty; it <em>is</em> the uncertainty, measured directly from the physics. This is exactly how hurricane forecasters and weather centres produce their cones.</p>
+    </section>
+
+    <section id="ellipse">
+      <h2><span class="sn">6</span>Why the uncertainty is an ellipse</h2>
+      <p>Here is a detail I care about, because getting it wrong makes the whole forecast either dishonest or useless. Balloon trajectory uncertainty is not a circle. It is an ellipse, and the ellipse points along the direction of travel (Figure 1).</p>
+      <p>The reason is that the two kinds of wind error push in two different directions. An error in wind <em>speed</em> makes the balloon arrive too early or too late, which spreads the possibilities <em>along</em> the track. An error in wind <em>direction</em> pushes the balloon to one side, which spreads them <em>across</em> the track. These two spreads are almost never equal, so the honest shape is a stretched ellipse, not a round blob.</p>
+
+      <figure>
+        <div class="fig-frame">
+          <svg viewBox="0 0 640 220" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="A circle overstates cross-track uncertainty while an ellipse aligned to the track is honest">
+            <defs><marker id="arr" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="#97a0ac"/></marker></defs>
+            <line x1="60" y1="160" x2="580" y2="70" stroke="#97a0ac" stroke-width="1.4" stroke-dasharray="5 4" marker-end="url(#arr)"/>
+            <text x="60" y="185" font-family="IBM Plex Mono, monospace" font-size="11" fill="#97a0ac">direction of travel</text>
+            <circle cx="220" cy="135" r="46" fill="rgba(192,83,31,.08)" stroke="#c0531f" stroke-width="1.3" stroke-dasharray="4 4"/>
+            <text x="220" y="139" font-family="IBM Plex Sans, sans-serif" font-size="11" fill="#c0531f" text-anchor="middle">circle</text>
+            <text x="220" y="205" font-family="IBM Plex Mono, monospace" font-size="10.5" fill="#97a0ac" text-anchor="middle">overstates one axis</text>
+            <g transform="translate(450,93) rotate(-9.8)">
+              <ellipse cx="0" cy="0" rx="74" ry="30" fill="rgba(15,118,110,.10)" stroke="#0f766e" stroke-width="1.5"/>
+              <line x1="-74" y1="0" x2="74" y2="0" stroke="#0f766e" stroke-width=".8" stroke-dasharray="3 3" opacity=".6"/>
+              <line x1="0" y1="-30" x2="0" y2="30" stroke="#0f766e" stroke-width=".8" stroke-dasharray="3 3" opacity=".6"/>
+            </g>
+            <text x="450" y="48" font-family="IBM Plex Sans, sans-serif" font-size="11" fill="#0f766e" text-anchor="middle">ellipse along track</text>
+            <text x="528" y="96" font-family="IBM Plex Mono, monospace" font-size="9.5" fill="#6b7480">speed error</text>
+            <text x="428" y="140" font-family="IBM Plex Mono, monospace" font-size="9.5" fill="#6b7480">direction error</text>
+          </svg>
+        </div>
+        <figcaption>Speed error stretches the region along the track; direction error stretches it across. The honest shape is an ellipse oriented to the direction of travel, not a circle.</figcaption>
+      </figure>
+
+      <p>To find that ellipse I take the cloud of ensemble positions at a given time, project them into local kilometres, and compute their covariance matrix. The covariance captures how the points spread and how the two directions are correlated:</p>
+      <div class="math-block"><div class="mb-eq">
+        $$\Sigma = \begin{pmatrix} \sigma_{xx} & \sigma_{xy} \\ \sigma_{xy} & \sigma_{yy} \end{pmatrix}$$
+        </div><div class="mb-cap">the position covariance of the ensemble cloud</div>
+      </div>
+      <p>The eigenvectors of this matrix give the directions of the ellipse's two axes, and the eigenvalues give their lengths. To turn that into a confidence region I scale the axes by a value from the chi squared distribution with two degrees of freedom, which is the number that says how far out I need to draw the boundary to enclose a given fraction of the cloud:</p>
+      <div class="math-block"><div class="mb-eq">
+        $$a = \sqrt{\lambda_1\,\chi^2_p}, \qquad b = \sqrt{\lambda_2\,\chi^2_p}, \qquad \alpha = \tfrac{1}{2}\arctan\!\frac{2\sigma_{xy}}{\sigma_{xx}-\sigma_{yy}}$$
+        </div><div class="mb-cap">semi-axes a and b, and the tilt α, of the confidence ellipse</div>
+      </div>
+      <p>For the fiftieth percentile the chi squared value is 1.386, and for the ninetieth it is 4.605. So I draw two ellipses: a tight inner one that the balloon is in half the time, and a looser outer one that holds it ninety percent of the time. That pair is what you see on the map.</p>
+    </section>
+
+    <div class="kicker">Part II &middot; Reconstruction</div>
+
+    <section id="reconstruct">
+      <h2><span class="sn">7</span>Reconstructing the past</h2>
+      <p>Now the second engine, which I find more interesting. Sometimes the tracker goes quiet. It drifts out of range, or it browns out at night when the solar panel loses the sun. When it comes back, I have a confirmed position before the silence and another after it, with hours of unknown path in between. I want to reconstruct where it went.</p>
+      <p>The key insight is that this is not the same as forecasting. A forecast only knows the past, so it fans outward. A reconstruction is anchored at <em>both</em> ends, so the unknown path is a bridge, not a cone (Figure 2). The uncertainty is zero at each confirmed fix and bulges in the middle, like a rope held at both ends and sagging between them. Mathematically this is the difference between a filter, which uses only past information, and a smoother, which uses information from both sides of the gap.</p>
+
+      <figure>
+        <div class="fig-frame">
+          <svg viewBox="0 0 640 230" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="A forecast fans into a cone while a reconstruction pinches at both fixes into a bridge">
+            <text x="160" y="28" font-family="IBM Plex Sans, sans-serif" font-size="12" fill="#9a6a16" text-anchor="middle">Forecast: a cone</text>
+            <circle cx="60" cy="95" r="5" fill="#c0531f"/>
+            <text x="60" y="120" font-family="IBM Plex Mono, monospace" font-size="9.5" fill="#97a0ac" text-anchor="middle">last fix</text>
+            <path d="M60,95 L280,55 L280,135 Z" fill="rgba(154,106,22,.10)" stroke="none"/>
+            <path d="M60,95 L280,55" stroke="#9a6a16" stroke-width="1" stroke-dasharray="4 3" opacity=".5"/>
+            <path d="M60,95 L280,135" stroke="#9a6a16" stroke-width="1" stroke-dasharray="4 3" opacity=".5"/>
+            <path d="M60,95 L280,95" stroke="#9a6a16" stroke-width="1.6"/>
+            <text x="480" y="28" font-family="IBM Plex Sans, sans-serif" font-size="12" fill="#0f766e" text-anchor="middle">Reconstruction: a bridge</text>
+            <circle cx="360" cy="150" r="5" fill="#2456c4"/>
+            <circle cx="600" cy="80" r="5" fill="#2456c4"/>
+            <text x="360" y="172" font-family="IBM Plex Mono, monospace" font-size="9.5" fill="#97a0ac" text-anchor="middle">fix A</text>
+            <text x="600" y="102" font-family="IBM Plex Mono, monospace" font-size="9.5" fill="#97a0ac" text-anchor="middle">fix B</text>
+            <path d="M360,150 Q470,40 600,80 Q470,180 360,150 Z" fill="rgba(15,118,110,.10)" stroke="none"/>
+            <path d="M360,150 Q480,95 600,80" stroke="#0f766e" stroke-width="1.6" fill="none"/>
+          </svg>
+        </div>
+        <figcaption>A forecast spreads outward from one known point. A reconstruction is pinned at both, so its uncertainty closes to zero at each fix and is widest halfway between.</figcaption>
+      </figure>
+
+      <p>That bridge shape is not something I impose by hand. It falls out of the math. If you model the unknown path as a process anchored at both endpoints, the variance in the middle follows a simple curve that is zero at both ends and peaks at the midpoint:</p>
+      <div class="math-block"><div class="mb-eq">
+        $$\operatorname{Var}(t) \;\propto\; \frac{t\,(T - t)}{T}$$
+        </div><div class="mb-cap">uncertainty over a gap of length T, zero at both fixes, maximal at the middle</div>
+      </div>
+      <p>One more important choice. For reconstruction I do not use the forecast winds. I use <strong>reanalysis</strong> winds, which are the best reconstruction of what the atmosphere actually did, assembled after the fact from all available observations. For predicting the future I have to use a forecast, but for reconstructing the past the real analysed winds are available and far more accurate. Using them is most of why reconstruction can be so much tighter than forecasting.</p>
+    </section>
+
+    <section id="particle">
+      <h2><span class="sn">8</span>The particle smoother</h2>
+      <p>To build the bridge I use a particle smoother. The procedure has three moves.</p>
+      <h3>Move one: aim the shot</h3>
+      <p>First I solve a simple targeting problem. I want to find the wind bias that, when I integrate from fix A, lands me exactly on fix B. I integrate, see where I land, measure how far off I am, nudge the speed and heading toward the target, and repeat. I damp each nudge so it converges smoothly instead of overshooting back and forth. After a handful of iterations the path connects the two fixes. This gives me the centre of my search.</p>
+      <h3>Move two: spread the particles</h3>
+      <p>Then I launch many particles from fix A, each with the connecting bias plus a small random perturbation, and integrate them all to the far side of the gap. Most land near fix B, some land off to the side. I score each one by how close it landed, using a smooth weight that falls off with the square of the miss distance:</p>
+      <div class="math-block"><div class="mb-eq">
+        $$w_i = \exp\!\left(-\frac{d_i^{\,2}}{2\,\sigma_e^{\,2}}\right)$$
+        </div><div class="mb-cap">a particle's weight, from its miss distance d to the closing fix</div>
+      </div>
+      <h3>Move three: keep the good ones</h3>
+      <p>I then resample the particles in proportion to their weights, so trajectories that threaded both fixes survive and multiply, while ones that wandered off are dropped. The survivors, taken together, are the bridge. Their average is the reconstructed path, and their spread at each moment gives the confidence ellipses, which now pinch to nothing at both fixes exactly as the bridge picture promised.</p>
+      <p>I keep one number to tell me whether the result can be trusted: the effective sample size. If almost all the weight piles onto a few lucky particles, the answer rests on too little, and this number catches it:</p>
+      <div class="math-block"><div class="mb-eq">
+        $$n_{\text{eff}} = \frac{\left(\sum_i w_i\right)^2}{\sum_i w_i^{\,2}}$$
+        </div><div class="mb-cap">how many particles are effectively contributing to the estimate</div>
+      </div>
+      <p>A healthy bridge has hundreds of effective particles. A handful means the data cannot really support a precise path, and as I will explain later, that is exactly when I stop drawing a line.</p>
+    </section>
+
+    <section id="altitude">
+      <h2><span class="sn">9</span>Altitude as a constraint</h2>
+      <p>A balloon's float altitude is one of the most useful things I can know, because the wind is different at different heights. If I know the balloon's altitude during a gap, I know which layer of wind to push it through, and the reconstruction tightens dramatically.</p>
+      <p>Often I do know it, even when GPS is gone, because the pressure sensor keeps reporting. Pressure converts directly to altitude through the barometric formula:</p>
+      <div class="math-block"><div class="mb-eq">
+        $$h = 44{,}330 \left(1 - \left(\frac{P}{P_0}\right)^{0.1903}\right)$$
+        </div><div class="mb-cap">altitude h in metres from pressure P, with sea-level reference P₀</div>
+      </div>
+      <p>On one of our flights the GPS froze for several hours, but the pressure sensor kept transmitting the whole time. Because I knew the altitude throughout, I knew the wind layer, and the reconstruction of that stretch came out far tighter than the length of the gap would suggest. When there is no pressure during a gap, I treat altitude as an unknown to be solved for, and the surviving particles reveal which altitude best connects the two fixes. So even in the dark, the path tells me roughly how high the balloon was.</p>
+      <div class="callout">
+        <div class="co-label">The lesson</div>
+        <p>Any scrap of telemetry during a gap helps, not just position. Pressure pins the altitude, which pins the wind layer, which pins the path. I feed the reconstruction everything the balloon managed to send, not only its GPS fixes.</p>
+      </div>
+    </section>
+
+    <div class="kicker">Part III &middot; Long Gaps and Honesty</div>
+
+    <section id="longgap">
+      <h2><span class="sn">10</span>The hardest case: long gaps</h2>
+      <p>Short gaps are easy. The real challenge is a gap of many hours, where the tracker went silent overnight and the balloon crossed into a different weather pattern while I was not watching. One of our flights had a gap of about thirty six hours. The balloon sent four readings in the first thirty five minutes and then nothing at all for a day and a half.</p>
+      <div class="dataline">
+        gap start &middot; <span class="o">32.01&deg;N 117.72&deg;W</span> &middot; 02:23 UTC<br/>
+        last telemetry &middot; pressure ~286 hPa &middot; light fading &middot; 02:58 UTC<br/>
+        <span style="color:#97a0ac">[ 35 hours of silence ]</span><br/>
+        gap end &middot; <span class="b">31.00&deg;N 111.71&deg;W</span> &middot; next day, 13:58 UTC
+      </div>
+      <p>A gap this long breaks the simple approach in three ways, and I had to harden the engine for each.</p>
+      <h3>The wind is no longer one thing</h3>
+      <p>Over thirty six hours the weather itself moves. A single snapshot of the wind is just wrong. So I pull the reanalysis wind for every hour of the gap and interpolate between those hourly fields as the balloon flies, so each leg of the journey sees the wind that was actually present at that hour.</p>
+      <h3>The balloon breathes with the sun</h3>
+      <p>Pico balloons rise during the day as the sun warms the gas, and sink at night as it cools. Over a multi day gap that cycle is large and it changes which wind layer the balloon rides. I model it as a daily rhythm in the float altitude, anchored to the recorded sunlight and temperature where I have them, swinging between a daytime and a nighttime height:</p>
+      <div class="math-block"><div class="mb-eq">
+        $$a(t) = \bar{a} + \frac{\Delta a}{2}\,\cos\!\left(\frac{2\pi\,(t_{\text{local}} - 14)}{24}\right)$$
+        </div><div class="mb-cap">a daily altitude cycle peaking in mid-afternoon</div>
+      </div>
+      <h3>The particles get lost</h3>
+      <p>Over so many hours, a particle launched from fix A almost never happens to land near fix B on its own, so nearly all of them get thrown away and the estimate collapses onto too few survivors. To fix this I give each particle a gentle pull toward the target that strengthens as it nears the end of the gap, like a guide rope. Because that pull is my own invention and not real physics, I keep a running penalty on how hard I had to pull, and use it to weight the particle down, so steering a particle into place does not let it pretend to be more likely than it really is.</p>
+    </section>
+
+    <section id="looping">
+      <h2><span class="sn">11</span>Letting the path loop</h2>
+      <p>There is a subtle trap in long gaps that I only caught by looking carefully at the data. On that thirty six hour leg, the balloon ended up only about 580 kilometres from where it started. At its float altitude the winds were strong enough to carry it several times that distance. The only way to cover so little net ground in so much time is for the path to have curled back on itself. The balloon almost certainly looped or stalled around a slow weather system before moving on.</p>
+      <p>My first version could not represent that, because each particle held a single fixed heading error for the whole gap, which only ever produces smooth, mostly straight arcs. A particle could not curl back. So I changed the model. Now each particle's heading drifts over the gap as a slow random walk, picking up a fresh nudge every few hours, the way real winds veer over days:</p>
+      <div class="math-block"><div class="mb-eq">
+        $$\theta_{j+1} = \theta_j + s\,\eta_j, \qquad \eta_j \sim \mathcal{N}(0,1)$$
+        </div><div class="mb-cap">a particle's heading wandering from one segment to the next</div>
+      </div>
+      <p>But I did not want to make every long gap loopy, because some long legs really were fast and straight. So I let the data decide how much wandering to allow. I measure how directly the balloon got from A to B by comparing its net ground speed to a typical wind speed at that altitude. I call this the directness:</p>
+      <div class="math-block"><div class="mb-eq">
+        $$D = \min\!\left(1,\ \frac{\bar{v}_{\text{net}}}{v_{\text{wind}}}\right), \qquad s = 55^{\circ}\,(1 - D)$$
+        </div><div class="mb-cap">directness D, and the wandering strength s it produces</div>
+      </div>
+
+      <figure>
+        <div class="fig-frame">
+          <svg viewBox="0 0 640 210" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="A direct leg is a straight line while a low-directness leg is allowed to loop">
+            <circle cx="70" cy="120" r="5" fill="#2456c4"/><circle cx="270" cy="70" r="5" fill="#2456c4"/>
+            <path d="M70,120 Q170,88 270,70" stroke="#0f766e" stroke-width="2" fill="none"/>
+            <text x="170" y="160" font-family="IBM Plex Sans, sans-serif" font-size="11.5" fill="#0f766e" text-anchor="middle">high directness</text>
+            <text x="170" y="178" font-family="IBM Plex Mono, monospace" font-size="10" fill="#97a0ac" text-anchor="middle">fast, straight, tight line</text>
+            <circle cx="390" cy="120" r="5" fill="#2456c4"/><circle cx="600" cy="95" r="5" fill="#2456c4"/>
+            <path d="M390,120 C430,40 520,40 520,95 C520,150 440,150 470,100 C495,60 560,70 600,95" stroke="#c0531f" stroke-width="2" fill="none"/>
+            <text x="495" y="178" font-family="IBM Plex Sans, sans-serif" font-size="11.5" fill="#c0531f" text-anchor="middle">low directness</text>
+            <text x="495" y="196" font-family="IBM Plex Mono, monospace" font-size="10" fill="#97a0ac" text-anchor="middle">slow net travel, path may loop</text>
+          </svg>
+        </div>
+        <figcaption>The same pair of fixes. If the balloon covered the ground quickly, the leg stays a straight line. If its net speed was far below the wind, the engine lets the path wander and loop, because something must have made it cancel out.</figcaption>
+      </figure>
+
+      <p>When the directness is high, the wandering switches off and the leg stays a tight line. When it is low, the wandering turns on fully and the cloud of particles explores looping paths, so the uncertainty region honestly includes the possibility that the balloon circled for a while. On that thirty six hour gap the engine correctly opens up into a wide region; on a fast eight hour leg the same day it stays a clean line.</p>
+      <p>I want to be honest that this is a stand in. The wandering is random because I have not yet wired in the real hour by hour winds for that gap. Once I do, a genuine loop will come out of the actual swirling wind field rather than from injected randomness, which I trust far more. The directness measure stays useful either way, as a simple check on how much the path could have meandered.</p>
+    </section>
+
+    <section id="honesty">
+      <h2><span class="sn">12</span>Knowing when to stop</h2>
+      <p>The most important feature of the whole system is that it knows when not to draw a line. A confident looking path that is actually a guess is worse than useless, because someone will believe it.</p>
+      <p>After reconstructing each gap I check two numbers. If the effective sample size falls too low, or the uncertainty in the middle of the gap grows past a sensible threshold, I flag the gap as under determined. When that happens I stop pretending I have a path. Instead I output a region: the hull of everywhere the surviving particles could plausibly be. The map then shows a shaded area rather than a line, with a note explaining why, so the picture matches what I actually know.</p>
+      <div class="callout note">
+        <div class="co-label">The principle</div>
+        <p>When the data can support a path, I draw a path with an honest band around it. When it cannot, I draw a region and say so. The engine never upgrades a guess into a line.</p>
+      </div>
+      <p>This is also why the thirty six hour gap stays a region for now. The synthetic winds I am using as a placeholder cannot resolve a day and a half of real overnight drift, and the engine says so out loud rather than inventing a route. When the real hourly winds go in, that gap should sharpen into a path if the physics allows, and if it does not, the region is the correct and honest answer.</p>
+    </section>
+
+    <div class="kicker">Part IV &middot; System</div>
+
+    <section id="serving">
+      <h2><span class="sn">13</span>Computation and serving</h2>
+      <p>None of this math runs while you are looking at the map, and that is on purpose. Heavy computation on every page load would be slow and wasteful. Instead I compute everything ahead of time on a schedule, and serve the result as a small file.</p>
+      <p>A scheduled job runs the forecast every half hour and the reconstruction every hour. Each job pulls the latest winds and telemetry, runs the ensemble or the smoother, and writes a compact file of around a hundred kilobytes containing the paths, the bundles of sample trajectories, the confidence ellipses, and the wind grid for the animation. That file sits on a fast content network at the edge, close to wherever you are. When you open the page, it fetches that one small file and draws it, which takes a few tens of milliseconds anywhere in the world. The expensive thinking happens once, in the background, and everyone who visits simply reads the result.</p>
+    </section>
+
+    <section id="limits">
+      <h2><span class="sn">14</span>Limitations</h2>
+      <p>I would rather be clear about the edges than oversell the middle. The forecast is only as good as the wind forecast it rests on, and its honest uncertainty grows the further ahead it looks. The reconstruction is far stronger, but it has a hard floor: if the balloon goes completely silent for a very long time and crosses changing weather, there may simply not be enough information to recover the exact path, no matter how clever the method. In those cases the right answer is a region, not a line, and the engine is built to say that rather than guess.</p>
+      <p>The biggest single improvement ahead is feeding in real hourly reanalysis winds for the long gaps, in place of the synthetic stand in I use today. With the actual winds, the loops and stalls that I currently approximate with randomness will emerge from the real moving air, and the longest gaps should tighten on their own. Everything in the system is built to accept that upgrade without changing how any of it is presented to you.</p>
+      <p class="soft">That is the whole engine. A balloon rides the wind, I model the wind as carefully and as honestly as I can, I let the balloon correct me with its own measurements, and I am careful to draw a firm line only when the data has earned it.</p>
+    </section>
+  </div>

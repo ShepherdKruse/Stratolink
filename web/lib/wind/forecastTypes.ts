@@ -69,8 +69,6 @@ export type StratolinkForecast = {
         reconstructed_track?: Array<{ lon: number; lat: number; time_utc: string }>;
         /** Per-gap bridge segments (non-trivial gaps only). */
         gap_bridges?: Array<Array<[number, number]>>;
-        /** Reachability hulls for under-determined long gaps (corridor mode). */
-        gap_reach_hulls?: Array<Array<[number, number]>>;
         reconstruction_gaps?: Array<{
             from_idx: number;
             to_idx: number;
@@ -84,7 +82,15 @@ export type StratolinkForecast = {
             n_eff?: number;
             directness?: number;
             net_speed_ms?: number;
-            reach_hull?: Array<[number, number]> | null;
+            occupancy?: {
+                lat0: number;
+                lon0: number;
+                dLat: number;
+                dLon: number;
+                nLat: number;
+                nLon: number;
+                cells: Array<{ i: number; j: number; d: number }>;
+            } | null;
             ellipses?: Array<{
                 frac: number;
                 t_hours: number;

@@ -1,7 +1,7 @@
 /**
  * Long-gap path reconstruction (multi-hour GPS-dark segments).
- * Ported from reconstruct_longgap.js (files v4) — hourly winds, diurnal altitude,
- * bridge proposal, heading walk + directness, automatic corridor mode.
+ * Ported from reconstruct_longgap.js (files v5) — hourly winds, diurnal altitude,
+ * bridge proposal, heading walk + directness, occupancy footprint for corridor mode.
  */
 
 import { boundsFromPoints, fetchWindGridHourlySeries, snapPressureHpa } from './fetchWindGrid';
@@ -47,9 +47,22 @@ export type ReconstructionGapEllipse = {
     e90: { semi_a_km: number; polygon: Array<[number, number]> };
 };
 
+export type OccupancyCell = { i: number; j: number; d: number };
+
+/** Sparse grid of P(path passed through cell) for under-determined gaps. */
+export type OccupancyFootprint = {
+    lat0: number;
+    lon0: number;
+    dLat: number;
+    dLon: number;
+    nLat: number;
+    nLon: number;
+    cells: OccupancyCell[];
+};
+
 export type LongGapBridgeResult = {
     meanPath: Array<[number, number]>;
-    reach_hull: Array<[number, number]> | null;
+    occupancy: OccupancyFootprint | null;
     ellipses: ReconstructionGapEllipse[];
     dt_hours: number;
     measured_altitude: boolean;
@@ -121,25 +134,68 @@ function computeEllipse(
     return { semi_a_km: R1(a), polygon: poly };
 }
 
-function convexHull(pts: Array<[number, number]>): Array<[number, number]> {
-    const p = pts.slice().sort((a, b) => a[0] - b[0] || a[1] - b[1]);
-    if (p.length < 3) return p;
-    const cross = (o: [number, number], a: [number, number], b: [number, number]) =>
-        (a[0] - o[0]) * (b[1] - o[1]) - (a[1] - o[1]) * (b[0] - o[0]);
-    const lo: Array<[number, number]> = [];
-    for (const pt of p) {
-        while (lo.length >= 2 && cross(lo[lo.length - 2], lo[lo.length - 1], pt) <= 0) lo.pop();
-        lo.push(pt);
+/** Occupancy footprint from full trajectories (replaces convex hull). */
+function computeOccupancy(trajs: PathPoint[][], weights: number[]): OccupancyFootprint | null {
+    let minLat = Infinity;
+    let maxLat = -Infinity;
+    let minLon = Infinity;
+    let maxLon = -Infinity;
+    for (const t of trajs) {
+        for (const p of t) {
+            if (p.lat < minLat) minLat = p.lat;
+            if (p.lat > maxLat) maxLat = p.lat;
+            if (p.lon < minLon) minLon = p.lon;
+            if (p.lon > maxLon) maxLon = p.lon;
+        }
     }
-    const up: Array<[number, number]> = [];
-    for (let i = p.length - 1; i >= 0; i--) {
-        const pt = p[i];
-        while (up.length >= 2 && cross(up[up.length - 2], up[up.length - 1], pt) <= 0) up.pop();
-        up.push(pt);
+    if (!Number.isFinite(minLat)) return null;
+
+    const padLat = (maxLat - minLat) * 0.04 + 0.1;
+    const padLon = (maxLon - minLon) * 0.04 + 0.1;
+    minLat -= padLat;
+    maxLat += padLat;
+    minLon -= padLon;
+    maxLon += padLon;
+    const spanLat = maxLat - minLat;
+    const spanLon = maxLon - minLon;
+
+    let cell = Math.max(spanLat, spanLon) / 44;
+    cell = Math.min(0.8, Math.max(0.25, cell));
+    const nLat = Math.max(1, Math.ceil(spanLat / cell));
+    const nLon = Math.max(1, Math.ceil(spanLon / cell));
+
+    const mass = new Float64Array(nLat * nLon);
+    const wsum = weights.reduce((s, w) => s + w, 0) || 1;
+    for (let i = 0; i < trajs.length; i++) {
+        const w = weights[i] / wsum;
+        if (w < 1e-6) continue;
+        const seen = new Set<number>();
+        for (const p of trajs[i]) {
+            const gi = Math.floor((p.lat - minLat) / cell);
+            const gj = Math.floor((p.lon - minLon) / cell);
+            if (gi < 0 || gi >= nLat || gj < 0 || gj >= nLon) continue;
+            const idx = gi * nLon + gj;
+            if (!seen.has(idx)) {
+                seen.add(idx);
+                mass[idx] += w;
+            }
+        }
     }
-    lo.pop();
-    up.pop();
-    return lo.concat(up);
+
+    let mx = 0;
+    for (const m of mass) {
+        if (m > mx) mx = m;
+    }
+    if (mx <= 0) return null;
+
+    const cells: OccupancyCell[] = [];
+    for (let gi = 0; gi < nLat; gi++) {
+        for (let gj = 0; gj < nLon; gj++) {
+            const d = mass[gi * nLon + gj] / mx;
+            if (d >= 0.03) cells.push({ i: gi, j: gj, d: Math.round(d * 100) / 100 });
+        }
+    }
+    return { lat0: R4(minLat), lon0: R4(minLon), dLat: R4(cell), dLon: R4(cell), nLat, nLon, cells };
 }
 
 function windAtHour(grids: GfsGrid[], hourFloat: number, lat: number, lon: number): { u: number; v: number } {
@@ -291,7 +347,7 @@ export async function reconstructLongGap(
         }
         return {
             meanPath: p,
-            reach_hull: null,
+            occupancy: null,
             ellipses: [],
             dt_hours: R1(gapHours),
             measured_altitude: baroSamples.length > 0,
@@ -385,18 +441,7 @@ export async function reconstructLongGap(
           ? 'high'
           : 'medium';
 
-    let reachHull: Array<[number, number]> | null = null;
-    if (underDetermined) {
-        const cloud: Array<[number, number]> = [];
-        for (const frac of [0.3, 0.5, 0.7]) {
-            const idx = Math.round(frac * nSteps);
-            for (let i = 0; i < trajs.length; i += 3) {
-                cloud.push([trajs[i][idx].lon, trajs[i][idx].lat]);
-            }
-        }
-        reachHull = convexHull(cloud).map((p) => [R4(p[0]), R4(p[1])]);
-        if (reachHull.length) reachHull.push(reachHull[0]);
-    }
+    const occupancy = underDetermined ? computeOccupancy(trajs, wn) : null;
 
     const endMiss = distanceKm(
         B.lat,
@@ -407,7 +452,7 @@ export async function reconstructLongGap(
 
     return {
         meanPath,
-        reach_hull: reachHull,
+        occupancy,
         ellipses,
         dt_hours: R1(gapHours),
         measured_altitude: baroSamples.length > 0,

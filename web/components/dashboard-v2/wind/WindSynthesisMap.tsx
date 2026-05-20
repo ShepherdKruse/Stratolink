@@ -404,8 +404,10 @@ export default function WindSynthesisMap({
     ]);
 
     const gapBridges = forecastReady ? (mc?.observed.gap_bridges ?? []) : [];
-    const gapReachHulls = forecastReady ? (mc?.observed.gap_reach_hulls ?? []) : [];
     const reconstructionGaps = forecastReady ? (mc?.observed.reconstruction_gaps ?? []) : [];
+    const corridorOccupancyGaps = reconstructionGaps.filter(
+        (g) => g.mode === 'corridor' && g.occupancy && g.occupancy.cells.length > 0,
+    );
     const nontrivialGaps = reconstructionGaps.filter((g) => !g.short);
     const corridorGaps = nontrivialGaps.filter((g) => g.mode === 'corridor');
     const nonShortGaps = nontrivialGaps;
@@ -528,17 +530,41 @@ export default function WindSynthesisMap({
         };
     }, [gapBridges, nonShortGaps]);
 
-    const gapReachHullsGeoJson = useMemo(() => {
-        if (!gapReachHulls.length) return null;
-        return {
-            type: 'FeatureCollection' as const,
-            features: gapReachHulls.map((ring, i) => ({
-                type: 'Feature' as const,
-                properties: { gap: i },
-                geometry: { type: 'Polygon' as const, coordinates: [ring] },
-            })),
-        };
-    }, [gapReachHulls]);
+    const gapOccupancyGeoJson = useMemo(() => {
+        const features: Array<{
+            type: 'Feature';
+            properties: { gap: number; d: number };
+            geometry: { type: 'Polygon'; coordinates: Array<Array<[number, number]>> };
+        }> = [];
+        reconstructionGaps.forEach((g, gi) => {
+            if (g.mode !== 'corridor' || !g.occupancy?.cells.length) return;
+            const o = g.occupancy;
+            for (const c of o.cells) {
+                const lon0 = o.lon0 + c.j * o.dLon;
+                const lat0 = o.lat0 + c.i * o.dLat;
+                const lon1 = lon0 + o.dLon;
+                const lat1 = lat0 + o.dLat;
+                features.push({
+                    type: 'Feature',
+                    properties: { gap: gi, d: c.d },
+                    geometry: {
+                        type: 'Polygon',
+                        coordinates: [
+                            [
+                                [lon0, lat0],
+                                [lon1, lat0],
+                                [lon1, lat1],
+                                [lon0, lat1],
+                                [lon0, lat0],
+                            ],
+                        ],
+                    },
+                });
+            }
+        });
+        if (!features.length) return null;
+        return { type: 'FeatureCollection' as const, features };
+    }, [reconstructionGaps]);
 
     const reconGapEllipses90GeoJson = useMemo(() => {
         const features: Array<{
@@ -661,7 +687,7 @@ export default function WindSynthesisMap({
                             <b>Reconstructed</b> {nontrivialGaps.length} GPS gap
                             {nontrivialGaps.length === 1 ? '' : 's'}
                             {corridorGaps.length > 0
-                                ? ` · ${corridorGaps.length} long-gap corridor${corridorGaps.length === 1 ? '' : 's'}`
+                                ? ` · ${corridorGaps.length} under-determined (occupancy footprint)`
                                 : ''}{' '}
                             (hourly GFS + particle smoother)
                         </div>
@@ -878,24 +904,25 @@ export default function WindSynthesisMap({
                         </Source>
                     )}
 
-                    {gapReachHullsGeoJson && (
-                        <Source id="ws-reach-hulls" type="geojson" data={gapReachHullsGeoJson}>
+                    {gapOccupancyGeoJson && (
+                        <Source id="ws-occupancy" type="geojson" data={gapOccupancyGeoJson}>
                             <Layer
-                                id="ws-reach-hulls-fill"
+                                id="ws-occupancy-fill"
                                 type="fill"
                                 paint={{
                                     'fill-color': '#e08a5a',
-                                    'fill-opacity': 0.12,
-                                }}
-                            />
-                            <Layer
-                                id="ws-reach-hulls-outline"
-                                type="line"
-                                paint={{
-                                    'line-color': '#e08a5a',
-                                    'line-width': 2,
-                                    'line-dasharray': [4, 3],
-                                    'line-opacity': 0.75,
+                                    'fill-antialias': false,
+                                    'fill-opacity': [
+                                        'interpolate',
+                                        ['linear'],
+                                        ['get', 'd'],
+                                        0,
+                                        0.05,
+                                        0.5,
+                                        0.28,
+                                        1,
+                                        0.52,
+                                    ],
                                 }}
                             />
                         </Source>
@@ -1190,19 +1217,19 @@ export default function WindSynthesisMap({
                         </span>
                     </div>
                 )}
-                {gapReachHulls.length > 0 && (
+                {corridorOccupancyGaps.length > 0 && (
                     <div className="wind-synthesis-lg-row">
                         <div
                             style={{
                                 width: 26,
                                 height: 10,
                                 borderRadius: 2,
-                                background: 'rgba(224,138,90,.2)',
-                                border: '1px dashed rgba(224,138,90,.65)',
+                                background:
+                                    'linear-gradient(90deg, rgba(224,138,90,.12), rgba(224,138,90,.55))',
                             }}
                         />
                         <span style={{ fontSize: 11.5, color: 'rgba(200,212,232,.58)' }}>
-                            Long-gap reachability corridor
+                            Occupancy footprint (under-determined gap)
                         </span>
                     </div>
                 )}
