@@ -18,6 +18,7 @@ import { useTickingNow } from '../shared';
 import {
     buildForecastTimeline,
     positionAtTimelineMs,
+    trackCoordsUpToMs,
 } from '@/lib/wind/forecastTimeline';
 import {
     formatGapAge,
@@ -369,6 +370,39 @@ export default function WindSynthesisMap({
 
     const resumedCoords = segments.resumed.map((p) => [p.lon, p.lat] as [number, number]);
 
+    const reconstructedPath = forecastReady ? (mc?.observed.reconstructed_path ?? []) : [];
+    const gpsFixes = forecastReady ? (mc?.observed.gps_fixes ?? []) : [];
+    const reconstructedTrack = useMemo(() => {
+        const raw = forecastReady ? mc?.observed.reconstructed_track : undefined;
+        if (raw?.length) {
+            return raw.map((p) => ({
+                lat: p.lat,
+                lon: p.lon,
+                t: new Date(p.time_utc).getTime(),
+            }));
+        }
+        if (
+            reconstructedPath.length >= 2 &&
+            gpsFixes.length >= 2 &&
+            forecastReady
+        ) {
+            const t0 = new Date(gpsFixes[0].time_utc).getTime();
+            const t1 = new Date(gpsFixes[gpsFixes.length - 1].time_utc).getTime();
+            const span = t1 - t0 || 1;
+            return reconstructedPath.map(([lon, lat], i) => ({
+                lon,
+                lat,
+                t: t0 + (i / (reconstructedPath.length - 1)) * span,
+            }));
+        }
+        return [];
+    }, [
+        forecastReady,
+        mc?.observed.reconstructed_track,
+        reconstructedPath,
+        gpsFixes,
+    ]);
+
     const gapBridges = forecastReady ? (mc?.observed.gap_bridges ?? []) : [];
     const gapReachHulls = forecastReady ? (mc?.observed.gap_reach_hulls ?? []) : [];
     const reconstructionGaps = forecastReady ? (mc?.observed.reconstruction_gaps ?? []) : [];
@@ -437,18 +471,31 @@ export default function WindSynthesisMap({
             driftCoords,
             nominalPath,
             timeline,
+            reconstructedTrack.length >= 2 ? reconstructedTrack : undefined,
         );
-    }, [timeline, forecastReady, effectiveScrubMs, observedTrack, driftCoords, nominalPath]);
+    }, [
+        timeline,
+        forecastReady,
+        effectiveScrubMs,
+        observedTrack,
+        driftCoords,
+        nominalPath,
+        reconstructedTrack,
+    ]);
 
     const scrubAtNow = timeline != null && Math.abs(effectiveScrubMs - timeline.tNow) < 60_000;
 
     const scrubGapInfo = useMemo(() => {
-        if (!forecastReady || scrubPosition?.segment !== 'observed' || !reconstructionGaps.length) {
+        if (
+            !forecastReady ||
+            !reconstructionGaps.length ||
+            (scrubPosition?.segment !== 'reconstructed' && scrubPosition?.segment !== 'observed')
+        ) {
             return null;
         }
-        for (let i = 0; i < observedTrack.length - 1; i++) {
-            const t0 = observedTrack[i].t;
-            const t1 = observedTrack[i + 1].t;
+        for (let i = 0; i < gpsFixes.length - 1; i++) {
+            const t0 = new Date(gpsFixes[i].time_utc).getTime();
+            const t1 = new Date(gpsFixes[i + 1].time_utc).getTime();
             if (effectiveScrubMs >= t0 && effectiveScrubMs <= t1) {
                 const g = reconstructionGaps.find((x) => x.from_idx === i && x.to_idx === i + 1);
                 if (!g || g.short) return null;
@@ -456,7 +503,18 @@ export default function WindSynthesisMap({
             }
         }
         return null;
-    }, [forecastReady, scrubPosition, reconstructionGaps, observedTrack, effectiveScrubMs]);
+    }, [forecastReady, scrubPosition, reconstructionGaps, gpsFixes, effectiveScrubMs]);
+
+    const reconstructedFullLine = useMemo(
+        () => lineGeoJson(reconstructedPath.length >= 2 ? reconstructedPath : []),
+        [reconstructedPath],
+    );
+
+    const reconstructedScrubbedLine = useMemo(() => {
+        if (reconstructedTrack.length < 2 || !timeline) return null;
+        const tEnd = Math.min(effectiveScrubMs, timeline.tLastFix);
+        return lineGeoJson(trackCoordsUpToMs(reconstructedTrack, tEnd));
+    }, [reconstructedTrack, effectiveScrubMs, timeline]);
 
     const gapBridgesGeoJson = useMemo(() => {
         if (!gapBridges.length) return null;
@@ -492,6 +550,7 @@ export default function WindSynthesisMap({
             ...observedTrack,
             ...nominalPath.map(([lon, lat]) => ({ lat, lon, t: '' })),
         ];
+        for (const [lon, lat] of reconstructedPath) pts.push({ lat, lon, t: '' });
         for (const path of gapBridges) {
             for (const [lon, lat] of path) pts.push({ lat, lon, t: '' });
         }
@@ -499,7 +558,7 @@ export default function WindSynthesisMap({
             for (const [lon, lat] of e90_at_horizon.polygon) pts.push({ lat, lon, t: '' });
         }
         return pts.filter((p) => isValidLngLat(p.lat, p.lon));
-    }, [observedTrack, nominalPath, gapBridges, e90_at_horizon]);
+    }, [observedTrack, nominalPath, reconstructedPath, gapBridges, e90_at_horizon]);
 
     useEffect(() => {
         const map = mapRef.current?.getMap();
@@ -740,6 +799,37 @@ export default function WindSynthesisMap({
                                     'line-color': '#e6d088',
                                     'line-width': 1,
                                     'line-opacity': 0.07,
+                                }}
+                            />
+                        </Source>
+                    )}
+
+                    {reconstructedFullLine && (
+                        <Source id="ws-reconstructed-full" type="geojson" data={reconstructedFullLine}>
+                            <Layer
+                                id="ws-reconstructed-full-line"
+                                type="line"
+                                layout={{ 'line-cap': 'round', 'line-join': 'round' }}
+                                paint={{
+                                    'line-color': '#5ec4e8',
+                                    'line-width': 2,
+                                    'line-dasharray': [2, 2],
+                                    'line-opacity': 0.45,
+                                }}
+                            />
+                        </Source>
+                    )}
+
+                    {reconstructedScrubbedLine && (
+                        <Source id="ws-reconstructed-scrub" type="geojson" data={reconstructedScrubbedLine}>
+                            <Layer
+                                id="ws-reconstructed-scrub-line"
+                                type="line"
+                                layout={{ 'line-cap': 'round', 'line-join': 'round' }}
+                                paint={{
+                                    'line-color': '#5ec4e8',
+                                    'line-width': 3,
+                                    'line-opacity': 0.95,
                                 }}
                             />
                         </Source>
@@ -1041,11 +1131,19 @@ export default function WindSynthesisMap({
                     <div style={{ width: 26, height: 2.5, borderRadius: 2, background: '#c9521f' }} />
                     <span style={{ fontSize: 11.5, color: 'rgba(200,212,232,.58)' }}>Observed GPS track</span>
                 </div>
-                {gapBridges.length > 0 && (
+                {reconstructedPath.length > 1 && (
                     <div className="wind-synthesis-lg-row">
-                        <div style={{ width: 26, borderTop: '2px dashed rgba(94,196,232,.95)' }} />
+                        <div style={{ width: 26, borderTop: '2px dashed rgba(94,196,232,.55)' }} />
                         <span style={{ fontSize: 11.5, color: 'rgba(200,212,232,.58)' }}>
-                            Reconstructed path (short gaps)
+                            Full reconstructed path (faint)
+                        </span>
+                    </div>
+                )}
+                {reconstructedTrack.length > 1 && (
+                    <div className="wind-synthesis-lg-row">
+                        <div style={{ width: 26, height: 2.5, borderRadius: 2, background: '#5ec4e8' }} />
+                        <span style={{ fontSize: 11.5, color: 'rgba(200,212,232,.58)' }}>
+                            Reconstructed path to scrub time (bright)
                         </span>
                     </div>
                 )}

@@ -605,6 +605,10 @@
     background: #c9521f;
 }
 
+.wind-synthesis-scrub-marker--reconstructed {
+    background: #5ec4e8;
+}
+
 .wind-synthesis-scrub-marker--gap {
     background: #94a2b4;
 }

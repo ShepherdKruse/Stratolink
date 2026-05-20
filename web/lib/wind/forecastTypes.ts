@@ -65,6 +65,8 @@ export type StratolinkForecast = {
         drift_segment: Array<[number, number]>;
         /** Particle-smoother path through GPS-dark segments (stitched). */
         reconstructed_path?: Array<[number, number]>;
+        /** Reconstructed path with UTC time at each point (timeline scrub). */
+        reconstructed_track?: Array<{ lon: number; lat: number; time_utc: string }>;
         /** Per-gap bridge segments (non-trivial gaps only). */
         gap_bridges?: Array<Array<[number, number]>>;
         /** Reachability hulls for under-determined long gaps (corridor mode). */

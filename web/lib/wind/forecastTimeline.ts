@@ -1,6 +1,6 @@
 /** Time scrubber along observed → stale gap → forward forecast paths. */
 
-export type TimelineSegment = 'observed' | 'gap' | 'forecast';
+export type TimelineSegment = 'observed' | 'reconstructed' | 'gap' | 'forecast';
 
 export type ForecastTimeline = {
     tMin: number;
@@ -61,7 +61,7 @@ export function coordAlongPath(path: Array<[number, number]>, fraction: number):
     return path[path.length - 1];
 }
 
-function positionOnTrack(
+export function positionOnTrack(
     track: Array<{ lat: number; lon: number; t: number }>,
     tMs: number,
 ): [number, number] | null {
@@ -81,6 +81,25 @@ function positionOnTrack(
     }
     const last = track[track.length - 1];
     return [last.lon, last.lat];
+}
+
+/** Polyline [lon,lat] from track start through time `tMs` (inclusive interpolated endpoint). */
+export function trackCoordsUpToMs(
+    track: Array<{ lat: number; lon: number; t: number }>,
+    tMs: number,
+): Array<[number, number]> {
+    if (track.length === 0) return [];
+    const out: Array<[number, number]> = [];
+    for (const p of track) {
+        if (p.t > tMs) break;
+        out.push([p.lon, p.lat]);
+    }
+    const at = positionOnTrack(track, tMs);
+    if (at) {
+        const last = out[out.length - 1];
+        if (!last || last[0] !== at[0] || last[1] !== at[1]) out.push(at);
+    }
+    return out.length >= 2 ? out : out.length === 1 ? [out[0], out[0]] : [];
 }
 
 export function buildForecastTimeline(
@@ -106,11 +125,18 @@ export function positionAtTimelineMs(
     driftPath: Array<[number, number]>,
     nominalPath: Array<[number, number]>,
     timeline: ForecastTimeline,
+    reconstructedTrack?: Array<{ lat: number; lon: number; t: number }>,
 ): TimelinePosition | null {
     const { tLastFix, tNow, hasGap } = timeline;
     const relHours = (tMs - tNow) / 3_600_000;
 
     if (tMs <= tLastFix) {
+        if (reconstructedTrack && reconstructedTrack.length >= 2) {
+            const c = positionOnTrack(reconstructedTrack, tMs);
+            if (c) {
+                return { lon: c[0], lat: c[1], segment: 'reconstructed', relHours };
+            }
+        }
         const c = positionOnTrack(observedTrack, tMs);
         if (!c) return null;
         return { lon: c[0], lat: c[1], segment: 'observed', relHours };
@@ -176,6 +202,7 @@ export function formatTimelineUtc(tMs: number): string {
 
 export function formatTimelineRelLabel(relHours: number, segment: TimelineSegment): string {
     if (segment === 'observed') return 'Observed GPS';
+    if (segment === 'reconstructed') return 'Reconstructed path';
     if (segment === 'gap') {
         const m = Math.round(Math.abs(relHours) * 60);
         if (m < 60) return `Implied drift · ${m}m before now`;

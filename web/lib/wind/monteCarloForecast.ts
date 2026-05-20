@@ -288,6 +288,7 @@ export async function computeMonteCarloForecast(input: MonteCarloForecastInput):
             track: downsampleTrack(input.observedTrackLonLat, 120),
             drift_segment: driftSegment,
             reconstructed_path: reconstruction.reconstructed_path,
+            reconstructed_track: reconstruction.reconstructed_track,
             gap_bridges: reconstruction.gap_bridges,
             gap_reach_hulls: reconstruction.gap_reach_hulls,
             reconstruction_gaps: reconstruction.gaps,

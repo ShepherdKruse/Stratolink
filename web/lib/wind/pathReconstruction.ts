@@ -47,13 +47,41 @@ export type ReconstructionGap = {
     reach_hull?: Array<[number, number]> | null;
 };
 
+export type ReconstructedTrackPoint = {
+    lon: number;
+    lat: number;
+    time_utc: string;
+};
+
 export type PathReconstructionResult = {
     reconstructed_path: Array<[number, number]>;
+    /** Same geometry as reconstructed_path with UTC timestamp per point (for timeline scrub). */
+    reconstructed_track: ReconstructedTrackPoint[];
     gap_bridges: Array<Array<[number, number]>>;
     gap_reach_hulls: Array<Array<[number, number]>>;
     gaps: ReconstructionGap[];
     compute_ms: number;
 };
+
+function appendTimedSegment(
+    track: ReconstructedTrackPoint[],
+    meanPath: Array<[number, number]>,
+    tA_ms: number,
+    tB_ms: number,
+    skipFirst: boolean,
+): void {
+    if (meanPath.length === 0) return;
+    const nSteps = Math.max(1, meanPath.length - 1);
+    const startIdx = skipFirst ? 1 : 0;
+    for (let s = startIdx; s < meanPath.length; s++) {
+        const frac = s / nSteps;
+        track.push({
+            lon: meanPath[s][0],
+            lat: meanPath[s][1],
+            time_utc: new Date(tA_ms + frac * (tB_ms - tA_ms)).toISOString(),
+        });
+    }
+}
 
 type Fix = ForecastGpsFix & { alt_m: number };
 
@@ -361,8 +389,14 @@ export async function computePathReconstruction(opts: {
     const t0 = Date.now();
     const fixes = normalizeFixes(opts.fixes);
     if (fixes.length < 2) {
+        const single = fixes.map((f) => [R4(f.lon), R4(f.lat)] as [number, number]);
         return {
-            reconstructed_path: fixes.map((f) => [R4(f.lon), R4(f.lat)] as [number, number]),
+            reconstructed_path: single,
+            reconstructed_track: fixes.map((f) => ({
+                lon: R4(f.lon),
+                lat: R4(f.lat),
+                time_utc: f.time_utc,
+            })),
             gap_bridges: [],
             gap_reach_hulls: [],
             gaps: [],
@@ -390,6 +424,7 @@ export async function computePathReconstruction(opts: {
     const gapBridges: Array<Array<[number, number]>> = [];
     const gapReachHulls: Array<Array<[number, number]>> = [];
     const fullPath: Array<[number, number]> = [];
+    const reconstructedTrack: ReconstructedTrackPoint[] = [];
 
     for (let i = 0; i < fixes.length - 1; i++) {
         const A = fixes[i];
@@ -417,6 +452,7 @@ export async function computePathReconstruction(opts: {
                 n_eff: lg.n_eff,
                 reach_hull: lg.reach_hull,
             });
+            appendTimedSegment(reconstructedTrack, lg.meanPath, tA, tB, i > 0);
             const seg = [...lg.meanPath];
             if (i > 0) seg.shift();
             fullPath.push(...seg);
@@ -443,6 +479,7 @@ export async function computePathReconstruction(opts: {
             mode: 'line',
         });
 
+        appendTimedSegment(reconstructedTrack, br.meanPath, tA, tB, i > 0);
         const seg = [...br.meanPath];
         if (i > 0) seg.shift();
         fullPath.push(...seg);
@@ -453,6 +490,7 @@ export async function computePathReconstruction(opts: {
 
     return {
         reconstructed_path: fullPath,
+        reconstructed_track: reconstructedTrack,
         gap_bridges: gapBridges,
         gap_reach_hulls: gapReachHulls,
         gaps,

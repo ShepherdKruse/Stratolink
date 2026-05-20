@@ -85,6 +85,18 @@ export default function WindForecastScrubber({
                     </span>
                     <span className="wind-synthesis-scrubber-time">{formatTimelineUtc(scrubMs)} UTC</span>
                     <span className="wind-synthesis-scrubber-coord">{fmtCoord(position.lat, position.lon)}</span>
+                    {position.segment === 'reconstructed' && (
+                        <span className="wind-synthesis-scrubber-hint">
+                            Estimated position along the particle-smoother path (wind-driven reconstruction).
+                            {reconstructionGap && reconstructionGap.mode === 'corridor' && (
+                                <>
+                                    {' '}
+                                    This gap is under-determined — position is the corridor centerline, not
+                                    exact.
+                                </>
+                            )}
+                        </span>
+                    )}
                     {position.segment === 'observed' && (
                         <span className="wind-synthesis-scrubber-hint">
                             Recorded GPS (ground truth).{' '}
