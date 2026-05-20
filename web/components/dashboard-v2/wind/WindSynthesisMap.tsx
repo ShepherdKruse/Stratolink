@@ -51,6 +51,16 @@ function fmtDuration(ms: number): string {
     return `${h}h ${String(m).padStart(2, '0')}m`;
 }
 
+/** Bias correction factors — avoid float artifacts like 1.0759999999999998 in UI. */
+function fmtBiasSpeed(factor: number): string {
+    return (Math.round(factor * 100) / 100).toFixed(2);
+}
+
+function fmtBiasDir(deg: number): string {
+    const d = Math.round(deg);
+    return d > 0 ? `+${d}` : `${d}`;
+}
+
 function lineGeoJson(coords: Array<[number, number]>) {
     if (coords.length < 2) return null;
     return {
@@ -328,17 +338,6 @@ export default function WindSynthesisMap({
         return null;
     }, [launchLat, launchLon, firstObs]);
 
-    const gpsMarkers = useMemo(() => {
-        const pts = segments.resumed.length > 1 ? segments.resumed : [];
-        if (pts.length === 0) return [];
-        const max = 6;
-        const step = Math.max(1, Math.floor(pts.length / max));
-        return pts
-            .filter((_, i) => i % step === 0 || i === pts.length - 1)
-            .slice(0, max)
-            .map((p, idx) => ({ ...p, n: idx + 1 }));
-    }, [segments.resumed]);
-
     const observedRange = useMemo(() => {
         if (!firstObs || !lastObs) return null;
         return {
@@ -545,12 +544,9 @@ export default function WindSynthesisMap({
                 <div className="wind-synthesis-bias-banner wind-synthesis-calibration-banner">
                     <div className="wind-synthesis-bias-label">Forecast calibrated with in-flight data</div>
                     <div className="wind-synthesis-bias-body">
-                        Speed ×<b>{mc.bias_correction.speed_factor}</b> · direction{' '}
-                        <b>
-                            {mc.bias_correction.direction_offset_deg > 0 ? '+' : ''}
-                            {mc.bias_correction.direction_offset_deg}°
-                        </b>
-                        {mc.bias_correction.capped ? ' (capped)' : ''}
+                        Observed drift vs GFS: speed ×<b>{fmtBiasSpeed(mc.bias_correction.speed_factor)}</b>, direction{' '}
+                        <b>{fmtBiasDir(mc.bias_correction.direction_offset_deg)}°</b>
+                        {mc.bias_correction.capped ? ' (capped)' : ''}. Applied to the forward path.
                     </div>
                 </div>
             )}
@@ -770,11 +766,6 @@ export default function WindSynthesisMap({
                         </Marker>
                     )}
 
-                    {gpsMarkers.map((g) => (
-                        <Marker key={`${g.lon}-${g.lat}-${g.n}`} longitude={g.lon} latitude={g.lat} anchor="center">
-                            <div className="wind-synthesis-gps-marker">{g.n}</div>
-                        </Marker>
-                    ))}
                 </Map>
 
                 {showWind && (
@@ -906,25 +897,6 @@ export default function WindSynthesisMap({
                         {mc?.metadata.n_ensemble ?? 200} ensemble members
                     </span>
                 </div>
-                {gpsMarkers.length > 0 && (
-                    <div
-                        className="wind-synthesis-lg-row"
-                        style={{ marginTop: 8, paddingTop: 8, borderTop: '1px solid rgba(255,255,255,.06)' }}
-                    >
-                        <div
-                            style={{
-                                width: 9,
-                                height: 9,
-                                borderRadius: '50%',
-                                background: '#5065b8',
-                                border: '1.5px solid rgba(255,255,255,.7)',
-                            }}
-                        />
-                        <span style={{ fontSize: 11.5, color: 'rgba(200,212,232,.58)' }}>
-                            GPS position updates (×{gpsMarkers.length})
-                        </span>
-                    </div>
-                )}
             </div>
 
             {showWind && (
