@@ -9,7 +9,7 @@ import '@/styles/flight-path-engine.css';
 export const metadata: Metadata = {
     title: 'Flight Path Engine',
     description:
-        'Technical note on how Stratolink forecasts balloon trajectories and reconstructs paths between sparse GPS fixes.',
+        'Technical note on Stratolink forecasting, particle reconstruction, and occupancy footprints for under-determined gaps.',
 };
 
 function loadArticleHtml(): string {

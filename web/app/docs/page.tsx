@@ -55,7 +55,7 @@ const docsSections = [
     },
     {
         title: 'Flight Path Engine',
-        description: 'How forecasting and path reconstruction work under the hood',
+        description: 'Forecasting, particle reconstruction, and occupancy footprints for long GPS gaps',
         href: '/docs/flight-path-engine',
         icon: (
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
