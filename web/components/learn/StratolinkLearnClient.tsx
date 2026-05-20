@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 
 type Props = {
     contentHtml: string;
@@ -29,7 +29,7 @@ function animateCount(
 
 export function StratolinkLearnClient({ contentHtml }: Props) {
     const rootRef = useRef<HTMLDivElement>(null);
-    const [sectionCur, setSectionCur] = useState('01');
+    const navCurRef = useRef<HTMLSpanElement>(null);
 
     useEffect(() => {
         const root = rootRef.current;
@@ -91,7 +91,7 @@ export function StratolinkLearnClient({ contentHtml }: Props) {
         const activate = (band: string, sectionNum: string) => {
             layers.forEach((l) => l.classList.toggle('here', l.dataset.band === band));
             if (ind && bandTops[band]) ind.style.top = bandTops[band];
-            setSectionCur(sectionNum.padStart(2, '0'));
+            if (navCurRef.current) navCurRef.current.textContent = sectionNum.padStart(2, '0');
             atmoRail?.classList.add('in');
         };
 
@@ -254,7 +254,10 @@ export function StratolinkLearnClient({ contentHtml }: Props) {
                         Stratolink
                     </Link>
                     <span className="learn-subnav-progress">
-                        <span id="nav-cur">{sectionCur}</span> / 08
+                        <span id="nav-cur" ref={navCurRef}>
+                            01
+                        </span>{' '}
+                        / 08
                     </span>
                     <div className="learn-subnav-right">
                         <a href="#faq" className="btn btn-ghost">
