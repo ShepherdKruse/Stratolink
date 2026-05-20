@@ -417,13 +417,29 @@ export default function WindSynthesisMap({
 
     const scrubAtNow = timeline != null && Math.abs(effectiveScrubMs - timeline.tNow) < 60_000;
 
-    const canHindcast = useMemo(() => {
-        if (!forecastReady || !timeline || !lastObs || scrubPosition?.segment !== 'observed') return false;
-        const aheadH = (lastObs.t - effectiveScrubMs) / 3_600_000;
-        if (aheadH < 6) return false;
+    const hindcastEligibility = useMemo(() => {
+        if (!forecastReady || !timeline || !lastObs || scrubPosition?.segment !== 'observed') {
+            return { ok: false as const, reason: null };
+        }
         const fixesBefore = observedTrack.filter((p) => p.t <= effectiveScrubMs).length;
-        return fixesBefore >= 2;
+        if (fixesBefore < 2) {
+            return { ok: false as const, reason: 'Need at least 2 GPS fixes before this time for bias correction.' };
+        }
+        const pointsAfter = observedTrack.filter((p) => p.t > effectiveScrubMs + 30_000);
+        if (pointsAfter.length < 2) {
+            return {
+                ok: false as const,
+                reason: 'Scrub earlier — need more observed GPS ahead of this point to score the replay.',
+            };
+        }
+        const spanH = (pointsAfter[pointsAfter.length - 1].t - effectiveScrubMs) / 3_600_000;
+        if (spanH < 0.5) {
+            return { ok: false as const, reason: 'Not enough GPS track after this moment to validate.' };
+        }
+        return { ok: true as const, reason: null };
     }, [forecastReady, timeline, lastObs, scrubPosition, effectiveScrubMs, observedTrack]);
+
+    const canHindcast = hindcastEligibility.ok;
 
     useEffect(() => {
         if (!canHindcast) {
@@ -789,9 +805,9 @@ export default function WindSynthesisMap({
                                 layout={{ 'line-cap': 'round', 'line-join': 'round' }}
                                 paint={{
                                     'line-color': '#5ec4e8',
-                                    'line-width': 2.5,
-                                    'line-opacity': 0.92,
-                                    'line-dasharray': [2, 3],
+                                    'line-width': 3.5,
+                                    'line-opacity': 1,
+                                    'line-dasharray': [2, 2],
                                 }}
                             />
                         </Source>
@@ -1036,6 +1052,12 @@ export default function WindSynthesisMap({
                         {mc?.metadata.n_ensemble ?? 200} ensemble members
                     </span>
                 </div>
+                <div className="wind-synthesis-lg-row">
+                    <div style={{ width: 26, borderTop: '2px dashed rgba(94,196,232,.95)' }} />
+                    <span style={{ fontSize: 11.5, color: 'rgba(200,212,232,.58)' }}>
+                        Walk-forward replay (scrub observed track)
+                    </span>
+                </div>
             </div>
 
             {showWind && (
@@ -1081,7 +1103,13 @@ export default function WindSynthesisMap({
                     position={scrubPosition}
                     observedTrack={observedTrack}
                     forecastHorizonH={effectiveHorizonH}
-                    hindcast={canHindcast ? hindcast?.info : null}
+                    hindcast={
+                        scrubPosition?.segment === 'observed'
+                            ? canHindcast
+                                ? hindcast?.info
+                                : { loading: false, error: hindcastEligibility.reason ?? undefined }
+                            : null
+                    }
                 />
             )}
         </div>

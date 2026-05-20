@@ -83,16 +83,25 @@ export default function WindForecastScrubber({
                     {position.segment === 'observed' && (
                         <span className="wind-synthesis-scrubber-hint">
                             Recorded GPS (ground truth).{' '}
-                            {hindcast?.loading && 'Running walk-forward replay…'}
-                            {hindcast?.errors?.length
-                                ? `Model from here: ${hindcast.errors.map((e) => `+${e.lead_h}h off by ${e.km} km`).join(' · ')}.`
-                                : null}
-                            {hindcast?.error && !hindcast.loading ? hindcast.error : null}
+                            {hindcast?.loading && (
+                                <strong>Running walk-forward replay…</strong>
+                            )}
+                            {!hindcast?.loading && hindcast?.error && (
+                                <strong>{hindcast.error}</strong>
+                            )}
                             {!hindcast?.loading &&
-                                !hindcast?.errors?.length &&
                                 !hindcast?.error &&
-                                hindcast?.nFixesUsed != null &&
-                                'Cyan dashed line = what the model would have predicted from this fix (historical GFS).'}
+                                hindcast?.nFixesUsed != null && (
+                                    <>
+                                        <strong>Cyan dashed line</strong> = model replay from this fix
+                                        (historical GFS, {hindcast.nFixesUsed} fixes used for bias).{' '}
+                                        {hindcast.errors?.length
+                                            ? hindcast.errors
+                                                  .map((e) => `+${e.lead_h}h off by ${e.km} km`)
+                                                  .join(' · ')
+                                            : 'Drag earlier along the orange track for longer validation.'}
+                                    </>
+                                )}
                         </span>
                     )}
                     {gapHint && <span className="wind-synthesis-scrubber-hint">{gapHint}</span>}
