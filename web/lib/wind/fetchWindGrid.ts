@@ -61,6 +61,10 @@ export async function fetchWindGrid(
         url.searchParams.set('wind_speed_unit', 'ms');
         url.searchParams.set('timezone', 'UTC');
         url.searchParams.set('forecast_days', '2');
+        const ageH = (Date.now() - at.getTime()) / 3_600_000;
+        if (ageH > 6) {
+            url.searchParams.set('past_days', String(Math.min(92, Math.ceil(ageH / 24) + 3)));
+        }
 
         const res = await openMeteoFetch(url.toString());
         if (!res.ok) throw new Error(`Open-Meteo grid error ${res.status}`);

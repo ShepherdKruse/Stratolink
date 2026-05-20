@@ -9,6 +9,13 @@ import {
     type TimelinePosition,
 } from '@/lib/wind/forecastTimeline';
 
+export type HindcastScrubInfo = {
+    loading: boolean;
+    nFixesUsed?: number;
+    errors?: Array<{ lead_h: number; km: number }>;
+    error?: string;
+};
+
 type WindForecastScrubberProps = {
     timeline: ForecastTimeline;
     scrubMs: number;
@@ -16,6 +23,7 @@ type WindForecastScrubberProps = {
     position: TimelinePosition | null;
     observedTrack: Array<{ lat: number; lon: number; t: number }>;
     forecastHorizonH: number;
+    hindcast?: HindcastScrubInfo | null;
 };
 
 function fmtCoord(lat: number, lon: number): string {
@@ -31,6 +39,7 @@ export default function WindForecastScrubber({
     position,
     observedTrack,
     forecastHorizonH,
+    hindcast,
 }: WindForecastScrubberProps) {
     const { tMin, tMax, tLastFix, tNow } = timeline;
 
@@ -72,7 +81,19 @@ export default function WindForecastScrubber({
                     <span className="wind-synthesis-scrubber-time">{formatTimelineUtc(scrubMs)} UTC</span>
                     <span className="wind-synthesis-scrubber-coord">{fmtCoord(position.lat, position.lon)}</span>
                     {position.segment === 'observed' && (
-                        <span className="wind-synthesis-scrubber-hint">Recorded GPS position (ground truth).</span>
+                        <span className="wind-synthesis-scrubber-hint">
+                            Recorded GPS (ground truth).{' '}
+                            {hindcast?.loading && 'Running walk-forward replay…'}
+                            {hindcast?.errors?.length
+                                ? `Model from here: ${hindcast.errors.map((e) => `+${e.lead_h}h off by ${e.km} km`).join(' · ')}.`
+                                : null}
+                            {hindcast?.error && !hindcast.loading ? hindcast.error : null}
+                            {!hindcast?.loading &&
+                                !hindcast?.errors?.length &&
+                                !hindcast?.error &&
+                                hindcast?.nFixesUsed != null &&
+                                'Cyan dashed line = what the model would have predicted from this fix (historical GFS).'}
+                        </span>
                     )}
                     {gapHint && <span className="wind-synthesis-scrubber-hint">{gapHint}</span>}
                     {position.segment === 'forecast' && position.relHours > 0 && (

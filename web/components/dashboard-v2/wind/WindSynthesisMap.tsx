@@ -13,7 +13,7 @@ import type { StratolinkForecast } from '@/lib/wind/forecastTypes';
 import { splitTrackSegments } from '@/lib/wind/trackSegments';
 import type { WindField } from '@/lib/wind/types';
 import WindStreamOverlay from './WindStreamOverlay';
-import WindForecastScrubber from './WindForecastScrubber';
+import WindForecastScrubber, { type HindcastScrubInfo } from './WindForecastScrubber';
 import { useTickingNow } from '../shared';
 import {
     buildForecastTimeline,
@@ -164,6 +164,10 @@ export default function WindSynthesisMap({
     const [showEnsemble, setShowEnsemble] = useState(true);
     const [showEllipses, setShowEllipses] = useState(true);
     const [scrubMs, setScrubMs] = useState<number | null>(null);
+    const [hindcast, setHindcast] = useState<{
+        path: Array<[number, number]>;
+        info: HindcastScrubInfo;
+    } | null>(null);
 
     const nowMs = useTickingNow(30_000);
 
@@ -412,6 +416,74 @@ export default function WindSynthesisMap({
     }, [timeline, forecastReady, effectiveScrubMs, observedTrack, driftCoords, nominalPath]);
 
     const scrubAtNow = timeline != null && Math.abs(effectiveScrubMs - timeline.tNow) < 60_000;
+
+    const canHindcast = useMemo(() => {
+        if (!forecastReady || !timeline || !lastObs || scrubPosition?.segment !== 'observed') return false;
+        const aheadH = (lastObs.t - effectiveScrubMs) / 3_600_000;
+        if (aheadH < 6) return false;
+        const fixesBefore = observedTrack.filter((p) => p.t <= effectiveScrubMs).length;
+        return fixesBefore >= 2;
+    }, [forecastReady, timeline, lastObs, scrubPosition, effectiveScrubMs, observedTrack]);
+
+    useEffect(() => {
+        if (!canHindcast) {
+            setHindcast(null);
+            return;
+        }
+        let cancelled = false;
+        setHindcast((prev) => ({
+            path: prev?.path ?? [],
+            info: { loading: true, nFixesUsed: prev?.info.nFixesUsed },
+        }));
+        const timer = setTimeout(async () => {
+            try {
+                const res = await fetch('/api/wind-hindcast', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    cache: 'no-store',
+                    body: JSON.stringify({
+                        observedTrack: observedTrack.map((p) => ({
+                            lat: p.lat,
+                            lon: p.lon,
+                            t: p.t,
+                        })),
+                        anchorMs: effectiveScrubMs,
+                        pressureHpa: levelHpa,
+                        forecastHours: effectiveHorizonH,
+                    }),
+                });
+                const data = await res.json();
+                if (cancelled) return;
+                if (!res.ok) throw new Error(data.error ?? 'Hindcast failed');
+                setHindcast({
+                    path: data.predicted_path as Array<[number, number]>,
+                    info: {
+                        loading: false,
+                        nFixesUsed: data.n_fixes_used,
+                        errors: data.errors,
+                    },
+                });
+            } catch (e) {
+                if (cancelled) return;
+                setHindcast({
+                    path: [],
+                    info: {
+                        loading: false,
+                        error: e instanceof Error ? e.message : 'Hindcast failed',
+                    },
+                });
+            }
+        }, 450);
+        return () => {
+            cancelled = true;
+            clearTimeout(timer);
+        };
+    }, [canHindcast, effectiveScrubMs, observedTrack, levelHpa, effectiveHorizonH]);
+
+    const hindcastLine = useMemo(
+        () => (hindcast?.path.length ? lineGeoJson(hindcast.path) : null),
+        [hindcast?.path],
+    );
 
     const freezeLine = useMemo(() => lineGeoJson(driftCoords), [driftCoords]);
     const observedLine = useMemo(() => lineGeoJson(obsCoords), [obsCoords]);
@@ -709,6 +781,22 @@ export default function WindSynthesisMap({
                         </Source>
                     )}
 
+                    {hindcastLine && (
+                        <Source id="ws-hindcast" type="geojson" data={hindcastLine}>
+                            <Layer
+                                id="ws-hindcast-line"
+                                type="line"
+                                layout={{ 'line-cap': 'round', 'line-join': 'round' }}
+                                paint={{
+                                    'line-color': '#5ec4e8',
+                                    'line-width': 2.5,
+                                    'line-opacity': 0.92,
+                                    'line-dasharray': [2, 3],
+                                }}
+                            />
+                        </Source>
+                    )}
+
                     {predictedLine && (
                         <Source id="ws-predicted" type="geojson" data={predictedLine}>
                             <Layer
@@ -993,6 +1081,7 @@ export default function WindSynthesisMap({
                     position={scrubPosition}
                     observedTrack={observedTrack}
                     forecastHorizonH={effectiveHorizonH}
+                    hindcast={canHindcast ? hindcast?.info : null}
                 />
             )}
         </div>

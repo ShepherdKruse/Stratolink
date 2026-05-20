@@ -530,6 +530,10 @@
     background: #e6d088;
 }
 
+.wind-synthesis-scrubber-hint strong {
+    color: rgba(94, 196, 232, 0.95);
+}
+
 .wind-synthesis-waypoint {
     border-radius: 50%;
     border: 2.5px solid rgba(255, 255, 255, 0.8);

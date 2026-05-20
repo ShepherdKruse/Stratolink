@@ -87,7 +87,8 @@ function applyBiasToWind(u: number, v: number, bias: BiasLike): { u: number; v: 
  * Integrate stale-GPS gap using hourly GFS at each step (with past_days), not a single
  * snapshot — avoids Open-Meteo falling back to "now" when the fix is hours old.
  */
-async function integrateGapHourly(
+/** Hourly GFS integration forward from a fix (used for stale gap and hindcast replay). */
+export async function integrateHourlyDriftForward(
     lastFix: ForecastGpsFix,
     pressureHpa: number,
     gapH: number,
@@ -98,7 +99,9 @@ async function integrateGapHourly(
     const stepMinutes = BALLOON_STEP_HOURS * 60;
     const steps = Math.round((gapH * 60) / stepMinutes);
     const stepsPerHour = Math.round(1 / BALLOON_STEP_HOURS);
-    const pastDays = Math.min(92, Math.ceil(gapH / 24) + 1);
+    const anchorMs = startTime.getTime();
+    const hoursAgo = (Date.now() - anchorMs) / 3_600_000;
+    const pastDays = Math.min(92, Math.ceil((Math.max(0, hoursAgo) + gapH) / 24) + 2);
 
     let lat = lastFix.lat;
     let lon = lastFix.lon;
@@ -173,7 +176,7 @@ export async function resolveForecastStart(opts: {
         };
     }
 
-    const gapPath = await integrateGapHourly(opts.lastFix, opts.pressureHpa, gapH, opts.bias);
+    const gapPath = await integrateHourlyDriftForward(opts.lastFix, opts.pressureHpa, gapH, opts.bias);
     const end = gapPath[gapPath.length - 1] ?? [opts.lastFix.lon, opts.lastFix.lat];
 
     return {
