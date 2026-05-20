@@ -44,7 +44,15 @@ export type ReconstructionGap = {
     /** `corridor` when the gap is under-determined (reach region, not a precise line). */
     mode?: 'line' | 'corridor';
     n_eff?: number;
+    directness?: number;
+    net_speed_ms?: number;
     reach_hull?: Array<[number, number]> | null;
+    ellipses?: Array<{
+        frac: number;
+        t_hours: number;
+        e50: { semi_a_km: number; polygon: Array<[number, number]> };
+        e90: { semi_a_km: number; polygon: Array<[number, number]> };
+    }>;
 };
 
 export type ReconstructedTrackPoint = {
@@ -450,7 +458,10 @@ export async function computePathReconstruction(opts: {
                 short: lg.short,
                 mode: lg.mode,
                 n_eff: lg.n_eff,
+                directness: lg.directness,
+                net_speed_ms: lg.net_speed_ms,
                 reach_hull: lg.reach_hull,
+                ellipses: lg.ellipses,
             });
             appendTimedSegment(reconstructedTrack, lg.meanPath, tA, tB, i > 0);
             const seg = [...lg.meanPath];

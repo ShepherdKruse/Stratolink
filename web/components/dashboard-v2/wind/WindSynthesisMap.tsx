@@ -540,6 +540,26 @@ export default function WindSynthesisMap({
         };
     }, [gapReachHulls]);
 
+    const reconGapEllipses90GeoJson = useMemo(() => {
+        const features: Array<{
+            type: 'Feature';
+            properties: { gap: number; frac: number };
+            geometry: { type: 'Polygon'; coordinates: Array<Array<[number, number]>> };
+        }> = [];
+        reconstructionGaps.forEach((g, gi) => {
+            if (g.mode === 'corridor' || !g.ellipses?.length) return;
+            for (const e of g.ellipses) {
+                features.push({
+                    type: 'Feature',
+                    properties: { gap: gi, frac: e.frac },
+                    geometry: { type: 'Polygon', coordinates: [e.e90.polygon] },
+                });
+            }
+        });
+        if (!features.length) return null;
+        return { type: 'FeatureCollection' as const, features };
+    }, [reconstructionGaps]);
+
     const freezeLine = useMemo(() => lineGeoJson(driftCoords), [driftCoords]);
     const observedLine = useMemo(() => lineGeoJson(obsCoords), [obsCoords]);
     const resumedLine = useMemo(() => lineGeoJson(resumedCoords), [resumedCoords]);
@@ -830,6 +850,29 @@ export default function WindSynthesisMap({
                                     'line-color': '#5ec4e8',
                                     'line-width': 3,
                                     'line-opacity': 0.95,
+                                }}
+                            />
+                        </Source>
+                    )}
+
+                    {reconGapEllipses90GeoJson && (
+                        <Source id="ws-recon-gap-e90" type="geojson" data={reconGapEllipses90GeoJson}>
+                            <Layer
+                                id="ws-recon-gap-e90-fill"
+                                type="fill"
+                                paint={{
+                                    'fill-color': '#c9521f',
+                                    'fill-opacity': 0.06,
+                                }}
+                            />
+                            <Layer
+                                id="ws-recon-gap-e90-stroke"
+                                type="line"
+                                paint={{
+                                    'line-color': '#c9521f',
+                                    'line-width': 1,
+                                    'line-opacity': 0.28,
+                                    'line-dasharray': [3, 4],
                                 }}
                             />
                         </Source>

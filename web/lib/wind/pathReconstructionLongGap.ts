@@ -1,7 +1,7 @@
 /**
  * Long-gap path reconstruction (multi-hour GPS-dark segments).
- * Ported from reconstruct_longgap.js — hourly winds, diurnal altitude,
- * bridge proposal, automatic corridor mode when under-determined.
+ * Ported from reconstruct_longgap.js (files v4) — hourly winds, diurnal altitude,
+ * bridge proposal, heading walk + directness, automatic corridor mode.
  */
 
 import { boundsFromPoints, fetchWindGridHourlySeries, snapPressureHpa } from './fetchWindGrid';
@@ -10,19 +10,25 @@ import { windAt, type GfsGrid } from './gfsGrid';
 import type { BaroSample } from './pathReconstruction';
 
 const CFG = {
-    N_PARTICLES: 500,
+    N_PARTICLES: 600,
     STEP_MIN: 20,
     ENDPOINT_SIGMA_KM: 45,
     SPEED_SIGMA: 0.12,
     DIR_SIGMA_DEG: 14,
+    HEADING_WALK: true,
+    WALK_SEGMENT_HR: 4,
+    WALK_STEP_DEG: 55,
     BRIDGE_PULL: 0.55,
     ALT_DAY_M: 9750,
     ALT_NIGHT_M: 9450,
     ALT_SIGMA_M: 250,
     SHORT_GAP_MIN: 30,
+    LONG_GAP_HR: 6,
     CORRIDOR_NEFF: 40,
     CORRIDOR_MID90_KM: 120,
     FLOAT_ALT_M: 9500,
+    TYPICAL_WIND_MS: 20,
+    ELLIPSE_FRACS: [0.15, 0.3, 0.5, 0.7, 0.85] as const,
 };
 
 const R4 = (x: number) => Math.round(x * 1e4) / 1e4;
@@ -32,9 +38,19 @@ const toRad = (d: number) => (d * Math.PI) / 180;
 type Fix = ForecastGpsFix & { alt_m: number };
 type PathPoint = { lat: number; lon: number; alt: number };
 
+type HeadingKnot = { atHour: number; offsetDeg: number };
+
+export type ReconstructionGapEllipse = {
+    frac: number;
+    t_hours: number;
+    e50: { semi_a_km: number; polygon: Array<[number, number]> };
+    e90: { semi_a_km: number; polygon: Array<[number, number]> };
+};
+
 export type LongGapBridgeResult = {
     meanPath: Array<[number, number]>;
     reach_hull: Array<[number, number]> | null;
+    ellipses: ReconstructionGapEllipse[];
     dt_hours: number;
     measured_altitude: boolean;
     endpoint_miss_km: number;
@@ -42,6 +58,8 @@ export type LongGapBridgeResult = {
     confidence: 'high' | 'medium' | 'low';
     mode: 'line' | 'corridor';
     n_eff: number;
+    directness: number;
+    net_speed_ms: number;
     short: boolean;
 };
 
@@ -62,7 +80,10 @@ function gauss(): number {
     return Math.sqrt(-2 * Math.log(u1)) * Math.cos(2 * Math.PI * u2);
 }
 
-function computeEllipseSemiA(positions: Array<[number, number]>, confidence: 0.5 | 0.9): number {
+function computeEllipse(
+    positions: Array<[number, number]>,
+    confidence: 0.5 | 0.9,
+): { semi_a_km: number; polygon: Array<[number, number]> } {
     const n = positions.length;
     const mLat = positions.reduce((s, [, la]) => s + la, 0) / n;
     const mLon = positions.reduce((s, [lo]) => s + lo, 0) / n;
@@ -84,7 +105,20 @@ function computeEllipseSemiA(positions: Array<[number, number]>, confidence: 0.5
     const tr = sxx + syy;
     const det = sxx * syy - sxy * sxy;
     const disc = Math.max(0, tr * tr / 4 - det);
-    return Math.sqrt(Math.max(0, tr / 2 + Math.sqrt(disc)) * chi2);
+    const a = Math.sqrt(Math.max(0, tr / 2 + Math.sqrt(disc)) * chi2);
+    const b = Math.sqrt(Math.max(0, tr / 2 - Math.sqrt(disc)) * chi2);
+    const th = 0.5 * Math.atan2(2 * sxy, sxx - syy);
+    const poly: Array<[number, number]> = [];
+    for (let k = 0; k <= 48; k++) {
+        const t = (k / 48) * 2 * Math.PI;
+        const xE = a * Math.cos(t);
+        const yE = b * Math.sin(t);
+        poly.push([
+            R4(mLon + (xE * Math.cos(th) - yE * Math.sin(th)) / (111.32 * cosLat)),
+            R4(mLat + (xE * Math.sin(th) + yE * Math.cos(th)) / 111.32),
+        ]);
+    }
+    return { semi_a_km: R1(a), polygon: poly };
 }
 
 function convexHull(pts: Array<[number, number]>): Array<[number, number]> {
@@ -135,6 +169,22 @@ function buildAltitudeModel(tA_ms: number, tB_ms: number, baroSamples: BaroSampl
     };
 }
 
+/** Per-particle heading walk — scaled by directness (low net speed → loopier paths). */
+function makeHeadingWalk(gapHours: number, directness: number): HeadingKnot[] | null {
+    if (!CFG.HEADING_WALK || gapHours < CFG.LONG_GAP_HR) return null;
+    const walkScale = Math.max(0, 1 - directness);
+    if (walkScale < 0.1) return null;
+    const stepDeg = CFG.WALK_STEP_DEG * walkScale;
+    const knots: HeadingKnot[] = [];
+    const nKnots = Math.max(2, Math.round(gapHours / CFG.WALK_SEGMENT_HR) + 1);
+    let offset = CFG.DIR_SIGMA_DEG * gauss();
+    for (let i = 0; i < nKnots; i++) {
+        knots.push({ atHour: (i / (nKnots - 1)) * gapHours, offsetDeg: offset });
+        offset += stepDeg * gauss();
+    }
+    return knots;
+}
+
 function integrateBridge(
     A: Fix,
     B: Fix,
@@ -142,12 +192,38 @@ function integrateBridge(
     nSteps: number,
     gapHours: number,
     altModel: (frac: number) => number,
-    pert: { speedMult: number; dirOffsetDeg: number; altOffset: number },
+    pert: {
+        speedMult: number;
+        dirOffsetDeg: number;
+        altOffset: number;
+        headingWalk: HeadingKnot[] | null;
+    },
 ): { path: PathPoint[]; logW: number } {
     const stepSec = (gapHours * 3600) / nSteps;
-    const dr = toRad(pert.dirOffsetDeg);
-    const cosD = Math.cos(dr);
-    const sinD = Math.sin(dr);
+
+    let headingOffsets: number[];
+    if (pert.headingWalk && pert.headingWalk.length) {
+        const knots = pert.headingWalk;
+        headingOffsets = new Array(nSteps + 1);
+        for (let s = 0; s <= nSteps; s++) {
+            const hour = (s / nSteps) * gapHours;
+            let k0 = knots[0];
+            let k1 = knots[knots.length - 1];
+            for (let i = 0; i < knots.length - 1; i++) {
+                if (hour >= knots[i].atHour && hour <= knots[i + 1].atHour) {
+                    k0 = knots[i];
+                    k1 = knots[i + 1];
+                    break;
+                }
+            }
+            const span = k1.atHour - k0.atHour || 1;
+            const f = Math.max(0, Math.min(1, (hour - k0.atHour) / span));
+            headingOffsets[s] = toRad(k0.offsetDeg + f * (k1.offsetDeg - k0.offsetDeg));
+        }
+    } else {
+        const dr = toRad(pert.dirOffsetDeg);
+        headingOffsets = new Array(nSteps + 1).fill(dr);
+    }
 
     let lat = A.lat;
     let lon = A.lon;
@@ -162,8 +238,11 @@ function integrateBridge(
 
         const { u, v } = windAtHour(grids, hourFloat, lat, lon);
         const k = pert.speedMult * altScale;
-        let uK = u * k;
-        let vK = v * k;
+        const uK = u * k;
+        const vK = v * k;
+        const dr = headingOffsets[s];
+        const cosD = Math.cos(dr);
+        const sinD = Math.sin(dr);
         let uR = uK * cosD - vK * sinD;
         let vR = uK * sinD + vK * cosD;
 
@@ -172,7 +251,9 @@ function integrateBridge(
             const cosLat = Math.max(Math.cos(toRad(lat)), 0.05);
             const needLat = ((B.lat - lat) * 111_320) / (remFrac * gapHours * 3600);
             const needLon = ((B.lon - lon) * 111_320 * cosLat) / (remFrac * gapHours * 3600);
-            const pull = CFG.BRIDGE_PULL * frac;
+            const pull = pert.headingWalk
+                ? CFG.BRIDGE_PULL * frac ** 2.2
+                : CFG.BRIDGE_PULL * frac;
             const nuLat = vR + pull * (needLat - vR);
             const nuLon = uR + pull * (needLon - uR);
             const dv = Math.hypot(nuLon - uR, nuLat - vR);
@@ -211,6 +292,7 @@ export async function reconstructLongGap(
         return {
             meanPath: p,
             reach_hull: null,
+            ellipses: [],
             dt_hours: R1(gapHours),
             measured_altitude: baroSamples.length > 0,
             endpoint_miss_km: 0,
@@ -218,9 +300,15 @@ export async function reconstructLongGap(
             confidence: 'high',
             mode: 'line',
             n_eff: CFG.N_PARTICLES,
+            directness: 1,
+            net_speed_ms: 0,
             short: true,
         };
     }
+
+    const netKm = distanceKm(A.lat, A.lon, B.lat, B.lon);
+    const netSpeed = (netKm * 1000) / (gapHours * 3600);
+    const directness = Math.max(0, Math.min(1, netSpeed / CFG.TYPICAL_WIND_MS));
 
     const gridBounds = boundsFromPoints(
         [
@@ -250,6 +338,7 @@ export async function reconstructLongGap(
             speedMult: 1 + CFG.SPEED_SIGMA * gauss(),
             dirOffsetDeg: CFG.DIR_SIGMA_DEG * gauss(),
             altOffset: CFG.ALT_SIGMA_M * gauss(),
+            headingWalk: makeHeadingWalk(gapHours, directness),
         };
         const { path, logW } = integrateBridge(A, B, grids, nSteps, gapHours, altModel, pert);
         const end = path[path.length - 1];
@@ -276,9 +365,18 @@ export async function reconstructLongGap(
         meanPath.push([R4(mlon), R4(mlat)]);
     }
 
-    const midIdx = Math.round(0.5 * nSteps);
-    const midPos = trajs.map((t) => [t[midIdx].lon, t[midIdx].lat] as [number, number]);
-    const midE90 = computeEllipseSemiA(midPos, 0.9);
+    const ellipses: ReconstructionGapEllipse[] = CFG.ELLIPSE_FRACS.map((frac) => {
+        const idx = Math.round(frac * nSteps);
+        const pos = trajs.map((t) => [t[idx].lon, t[idx].lat] as [number, number]);
+        return {
+            frac,
+            t_hours: R1(frac * gapHours),
+            e50: computeEllipse(pos, 0.5),
+            e90: computeEllipse(pos, 0.9),
+        };
+    });
+
+    const midE90 = ellipses[Math.floor(ellipses.length / 2)].e90.semi_a_km;
 
     const underDetermined = nEff < CFG.CORRIDOR_NEFF || midE90 > CFG.CORRIDOR_MID90_KM;
     const confidence: 'high' | 'medium' | 'low' = underDetermined
@@ -310,6 +408,7 @@ export async function reconstructLongGap(
     return {
         meanPath,
         reach_hull: reachHull,
+        ellipses,
         dt_hours: R1(gapHours),
         measured_altitude: baroSamples.length > 0,
         endpoint_miss_km: R1(endMiss),
@@ -317,6 +416,8 @@ export async function reconstructLongGap(
         confidence,
         mode: underDetermined ? 'corridor' : 'line',
         n_eff: Math.round(nEff),
+        directness: R1(directness * 100) / 100,
+        net_speed_ms: R1(netSpeed),
         short: false,
     };
 }

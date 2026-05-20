@@ -17,6 +17,8 @@ export type ReconstructionGapInfo = {
     confidence: string;
     mode?: 'line' | 'corridor';
     n_eff?: number;
+    directness?: number;
+    net_speed_ms?: number;
 };
 
 type WindForecastScrubberProps = {
@@ -106,7 +108,10 @@ export default function WindForecastScrubber({
                                         <>
                                             <strong>Amber region</strong> = reachability corridor for this{' '}
                                             {reconstructionGap.dt_hours}h GPS gap (under-determined, n_eff≈
-                                            {reconstructionGap.n_eff ?? '—'}). Mid-gap uncertainty ±
+                                            {reconstructionGap.n_eff ?? '—'}). Net speed{' '}
+                                            {reconstructionGap.net_speed_ms ?? '—'} m/s, directness{' '}
+                                            {reconstructionGap.directness ?? '—'} — low directness suggests the
+                                            path may have stalled or looped. Mid-gap uncertainty ±
                                             {reconstructionGap.mid_gap_90_km} km.
                                         </>
                                     ) : (

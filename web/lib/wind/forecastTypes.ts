@@ -82,7 +82,15 @@ export type StratolinkForecast = {
             short: boolean;
             mode?: 'line' | 'corridor';
             n_eff?: number;
+            directness?: number;
+            net_speed_ms?: number;
             reach_hull?: Array<[number, number]> | null;
+            ellipses?: Array<{
+                frac: number;
+                t_hours: number;
+                e50: { semi_a_km: number; polygon: Array<[number, number]> };
+                e90: { semi_a_km: number; polygon: Array<[number, number]> };
+            }>;
         }>;
     };
     wind_field: {
