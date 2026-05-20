@@ -19,6 +19,7 @@ import {
     buildForecastTimeline,
     positionAtTimelineMs,
 } from '@/lib/wind/forecastTimeline';
+import { HINDCAST_REPLAY_HOURS } from '@/lib/wind/hindcastReplay';
 import {
     formatGapAge,
     gpsGapHoursFromMs,
@@ -488,7 +489,7 @@ export default function WindSynthesisMap({
                         })),
                         anchorMs: effectiveScrubMs,
                         pressureHpa: levelHpa,
-                        forecastHours: effectiveHorizonH,
+                        forecastHours: HINDCAST_REPLAY_HOURS,
                     }),
                 });
                 const data = await res.json();
@@ -517,7 +518,7 @@ export default function WindSynthesisMap({
             cancelled = true;
             clearTimeout(timer);
         };
-    }, [canHindcast, effectiveScrubMs, observedTrack, levelHpa, effectiveHorizonH]);
+    }, [canHindcast, effectiveScrubMs, observedTrack, levelHpa]);
 
     const hindcastLine = useMemo(
         () => (hindcast?.path.length ? lineGeoJson(hindcast.path) : null),

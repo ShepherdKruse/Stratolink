@@ -95,7 +95,7 @@ export default function WindForecastScrubber({
                                 !hindcast?.error &&
                                 hindcast?.nFixesUsed != null && (
                                     <>
-                                        <strong>Cyan dashed line</strong> = model replay from this fix
+                                        <strong>Cyan dashed line</strong> = 24h model replay from this fix
                                         (historical GFS, {hindcast.nFixesUsed} fixes used for bias).{' '}
                                         {hindcast.errors?.length
                                             ? hindcast.errors

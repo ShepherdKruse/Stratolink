@@ -102,13 +102,16 @@ export async function integrateHourlyDriftForward(
     const anchorMs = startTime.getTime();
     const hoursAgo = (Date.now() - anchorMs) / 3_600_000;
     const pastDays = Math.min(92, Math.ceil((Math.max(0, hoursAgo) + gapH) / 24) + 2);
+    /** Hours the integration end lies past "now" (0 when the full path is in the past). */
+    const hoursBeyondNow = Math.max(0, gapH - hoursAgo);
+    const forecastDays = Math.min(16, Math.max(2, Math.ceil(hoursBeyondNow / 24) + 2));
 
     let lat = lastFix.lat;
     let lon = lastFix.lon;
     const path: Array<[number, number]> = [[round4(lon), round4(lat)]];
     let series: HourlyWind[] = await fetchHourlyWindAtPoint(lastFix.lat, lastFix.lon, levelHpa, {
         pastDays,
-        forecastDays: 2,
+        forecastDays,
     });
     let hoursSinceRefetch = 0;
 
@@ -116,7 +119,7 @@ export async function integrateHourlyDriftForward(
         const when = new Date(startTime.getTime() + s * stepMinutes * 60_000);
 
         if (hoursSinceRefetch >= REFETCH_EVERY_H) {
-            series = await fetchHourlyWindAtPoint(lat, lon, levelHpa, { pastDays, forecastDays: 2 });
+            series = await fetchHourlyWindAtPoint(lat, lon, levelHpa, { pastDays, forecastDays });
             hoursSinceRefetch = 0;
         }
         hoursSinceRefetch += BALLOON_STEP_HOURS;

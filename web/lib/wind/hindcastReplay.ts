@@ -5,6 +5,9 @@ import { windFieldToGfsGrid } from './gfsGrid';
 import { integrateHourlyDriftForward } from './staleGpsExtrapolation';
 import { coordAlongPath, haversineKm } from './forecastTimeline';
 
+/** Walk-forward replay horizon (independent of the live forecast hours selector). */
+export const HINDCAST_REPLAY_HOURS = 24;
+
 export type HindcastReplayResult = {
     anchor_time_utc: string;
     anchor: { lat: number; lon: number };
@@ -111,7 +114,7 @@ export async function hindcastReplayAtAnchor(opts: {
     pressureHpa: number;
     forecastHours?: number;
 }): Promise<HindcastReplayResult> {
-    const horizonH = opts.forecastHours ?? 24;
+    const horizonH = opts.forecastHours ?? HINDCAST_REPLAY_HOURS;
     const track = opts.observedTrack;
     if (track.length < 2) throw new Error('Need at least 2 GPS points for hindcast');
 

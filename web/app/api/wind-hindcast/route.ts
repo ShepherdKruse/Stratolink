@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { hindcastReplayAtAnchor } from '@/lib/wind/hindcastReplay';
+import { HINDCAST_REPLAY_HOURS, hindcastReplayAtAnchor } from '@/lib/wind/hindcastReplay';
 
 export const dynamic = 'force-dynamic';
 export const maxDuration = 60;
@@ -32,7 +32,7 @@ export async function POST(req: Request) {
             observedTrack: track,
             anchorMs: anchorMs as number,
             pressureHpa: body.pressureHpa ?? 285,
-            forecastHours: body.forecastHours ?? 24,
+            forecastHours: body.forecastHours ?? HINDCAST_REPLAY_HOURS,
         });
 
         return NextResponse.json(result, { headers: { 'Cache-Control': 'no-store' } });
