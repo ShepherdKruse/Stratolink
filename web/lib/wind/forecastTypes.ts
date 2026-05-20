@@ -63,8 +63,20 @@ export type StratolinkForecast = {
         gps_fixes: ForecastGpsFix[];
         track: Array<[number, number]>;
         drift_segment: Array<[number, number]>;
-        /** Model paths through historical GPS gaps (freeze + long intervals). */
-        implied_gap_paths?: Array<Array<[number, number]>>;
+        /** Particle-smoother path through GPS-dark segments (stitched). */
+        reconstructed_path?: Array<[number, number]>;
+        /** Per-gap bridge segments (non-trivial gaps only). */
+        gap_bridges?: Array<Array<[number, number]>>;
+        reconstruction_gaps?: Array<{
+            from_idx: number;
+            to_idx: number;
+            dt_hours: number;
+            measured_altitude: boolean;
+            endpoint_miss_km: number;
+            mid_gap_90_km: number;
+            confidence: string;
+            short: boolean;
+        }>;
     };
     wind_field: {
         lat0: number;
@@ -83,6 +95,7 @@ export type StratolinkForecast = {
         dir_sigma_deg: number;
         alt_sigma_hpa: number;
         compute_ms: number;
+        reconstruction_ms?: number;
         /** `hourly_series` when stale-GPS gap used time-varying past+hourly winds. */
         gap_wind_mode?: string;
     };
@@ -95,6 +108,8 @@ export type MonteCarloForecastInput = {
     gpsFixes: ForecastGpsFix[];
     observedTrackLonLat: Array<[number, number]>;
     driftSegmentLonLat?: Array<[number, number]>;
+    /** Pressure/altitude samples during GPS gaps (baro continued). */
+    baroSamples?: Array<{ time_utc: string; alt_m: number }>;
     pressureHpa: number;
     forecastHours?: number;
     nEnsemble?: number;

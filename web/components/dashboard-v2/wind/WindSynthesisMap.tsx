@@ -13,13 +13,12 @@ import type { StratolinkForecast } from '@/lib/wind/forecastTypes';
 import { splitTrackSegments } from '@/lib/wind/trackSegments';
 import type { WindField } from '@/lib/wind/types';
 import WindStreamOverlay from './WindStreamOverlay';
-import WindForecastScrubber, { type HindcastScrubInfo } from './WindForecastScrubber';
+import WindForecastScrubber from './WindForecastScrubber';
 import { useTickingNow } from '../shared';
 import {
     buildForecastTimeline,
     positionAtTimelineMs,
 } from '@/lib/wind/forecastTimeline';
-import { HINDCAST_REPLAY_HOURS } from '@/lib/wind/hindcastReplay';
 import {
     formatGapAge,
     gpsGapHoursFromMs,
@@ -31,6 +30,8 @@ export type WindSynthesisMapProps = {
     deviceId: string;
     callsign: string;
     observedTrack: V2FlightPoint[];
+    /** Barometric altitude samples (incl. rows without GPS) for gap reconstruction. */
+    baroSamples?: Array<{ time_utc: string; alt_m: number }>;
     startLat: number;
     startLon: number;
     launchLat?: number | null;
@@ -108,6 +109,7 @@ export default function WindSynthesisMap({
     deviceId,
     callsign,
     observedTrack,
+    baroSamples,
     startLat,
     startLon,
     launchLat,
@@ -142,10 +144,12 @@ export default function WindSynthesisMap({
         deviceId,
         callsign,
         lastAltM,
+        baroSamples,
         showWind,
     });
     propsRef.current = {
         observedTrack,
+        baroSamples,
         startLat,
         startLon,
         launchLat,
@@ -167,11 +171,6 @@ export default function WindSynthesisMap({
     const [scrubMs, setScrubMs] = useState<number | null>(null);
     /** User moved the slider — do not snap back to "now" when forecast/timeline refreshes. */
     const userPinnedScrubRef = useRef(false);
-    const [hindcast, setHindcast] = useState<{
-        path: Array<[number, number]>;
-        info: HindcastScrubInfo;
-    } | null>(null);
-
     const nowMs = useTickingNow(30_000);
 
     const lastGpsMs = observedTrack.length ? observedTrack[observedTrack.length - 1].t : 0;
@@ -224,6 +223,7 @@ export default function WindSynthesisMap({
                         t: obsTimeUtc(pt.t),
                         alt_m: p.lastAltM,
                     })),
+                    baroSamples: p.baroSamples,
                     pressureHpa: p.levelHpa,
                     forecastHours: p.forecastHours,
                 }),
@@ -369,7 +369,9 @@ export default function WindSynthesisMap({
 
     const resumedCoords = segments.resumed.map((p) => [p.lon, p.lat] as [number, number]);
 
-    const impliedGapPaths = forecastReady ? (mc?.observed.implied_gap_paths ?? []) : [];
+    const gapBridges = forecastReady ? (mc?.observed.gap_bridges ?? []) : [];
+    const reconstructionGaps = forecastReady ? (mc?.observed.reconstruction_gaps ?? []) : [];
+    const nontrivialGaps = reconstructionGaps.filter((g) => !g.short);
 
     const driftCoords = useMemo(() => {
         if (!forecastReady) return [];
@@ -437,101 +439,33 @@ export default function WindSynthesisMap({
 
     const scrubAtNow = timeline != null && Math.abs(effectiveScrubMs - timeline.tNow) < 60_000;
 
-    const hindcastEligibility = useMemo(() => {
-        if (!forecastReady || !timeline || !lastObs || scrubPosition?.segment !== 'observed') {
-            return { ok: false as const, reason: null };
+    const scrubGapInfo = useMemo(() => {
+        if (!forecastReady || scrubPosition?.segment !== 'observed' || !reconstructionGaps.length) {
+            return null;
         }
-        const fixesBefore = observedTrack.filter((p) => p.t <= effectiveScrubMs).length;
-        if (fixesBefore < 2) {
-            return { ok: false as const, reason: 'Need at least 2 GPS fixes before this time for bias correction.' };
-        }
-        const pointsAfter = observedTrack.filter((p) => p.t > effectiveScrubMs + 30_000);
-        if (pointsAfter.length < 2) {
-            return {
-                ok: false as const,
-                reason: 'Scrub earlier — need more observed GPS ahead of this point to score the replay.',
-            };
-        }
-        const spanH = (pointsAfter[pointsAfter.length - 1].t - effectiveScrubMs) / 3_600_000;
-        if (spanH < 0.5) {
-            return { ok: false as const, reason: 'Not enough GPS track after this moment to validate.' };
-        }
-        return { ok: true as const, reason: null };
-    }, [forecastReady, timeline, lastObs, scrubPosition, effectiveScrubMs, observedTrack]);
-
-    const canHindcast = hindcastEligibility.ok;
-
-    useEffect(() => {
-        if (!canHindcast) {
-            setHindcast(null);
-            return;
-        }
-        let cancelled = false;
-        setHindcast((prev) => ({
-            path: prev?.path ?? [],
-            info: { loading: true, nFixesUsed: prev?.info.nFixesUsed },
-        }));
-        const timer = setTimeout(async () => {
-            try {
-                const res = await fetch('/api/wind-hindcast', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    cache: 'no-store',
-                    body: JSON.stringify({
-                        observedTrack: observedTrack.map((p) => ({
-                            lat: p.lat,
-                            lon: p.lon,
-                            t: p.t,
-                        })),
-                        anchorMs: effectiveScrubMs,
-                        pressureHpa: levelHpa,
-                        forecastHours: HINDCAST_REPLAY_HOURS,
-                    }),
-                });
-                const data = await res.json();
-                if (cancelled) return;
-                if (!res.ok) throw new Error(data.error ?? 'Hindcast failed');
-                setHindcast({
-                    path: data.predicted_path as Array<[number, number]>,
-                    info: {
-                        loading: false,
-                        nFixesUsed: data.n_fixes_used,
-                        errors: data.errors,
-                    },
-                });
-            } catch (e) {
-                if (cancelled) return;
-                setHindcast({
-                    path: [],
-                    info: {
-                        loading: false,
-                        error: e instanceof Error ? e.message : 'Hindcast failed',
-                    },
-                });
+        for (let i = 0; i < observedTrack.length - 1; i++) {
+            const t0 = observedTrack[i].t;
+            const t1 = observedTrack[i + 1].t;
+            if (effectiveScrubMs >= t0 && effectiveScrubMs <= t1) {
+                const g = reconstructionGaps.find((x) => x.from_idx === i && x.to_idx === i + 1);
+                if (!g || g.short) return null;
+                return g;
             }
-        }, 450);
-        return () => {
-            cancelled = true;
-            clearTimeout(timer);
-        };
-    }, [canHindcast, effectiveScrubMs, observedTrack, levelHpa]);
+        }
+        return null;
+    }, [forecastReady, scrubPosition, reconstructionGaps, observedTrack, effectiveScrubMs]);
 
-    const hindcastLine = useMemo(
-        () => (hindcast?.path.length ? lineGeoJson(hindcast.path) : null),
-        [hindcast?.path],
-    );
-
-    const impliedGapGeoJson = useMemo(() => {
-        if (!impliedGapPaths.length) return null;
+    const gapBridgesGeoJson = useMemo(() => {
+        if (!gapBridges.length) return null;
         return {
             type: 'FeatureCollection' as const,
-            features: impliedGapPaths.map((path, i) => ({
+            features: gapBridges.map((path, i) => ({
                 type: 'Feature' as const,
                 properties: { gap: i },
                 geometry: { type: 'LineString' as const, coordinates: path },
             })),
         };
-    }, [impliedGapPaths]);
+    }, [gapBridges]);
 
     const freezeLine = useMemo(() => lineGeoJson(driftCoords), [driftCoords]);
     const observedLine = useMemo(() => lineGeoJson(obsCoords), [obsCoords]);
@@ -543,14 +477,14 @@ export default function WindSynthesisMap({
             ...observedTrack,
             ...nominalPath.map(([lon, lat]) => ({ lat, lon, t: '' })),
         ];
-        for (const path of impliedGapPaths) {
+        for (const path of gapBridges) {
             for (const [lon, lat] of path) pts.push({ lat, lon, t: '' });
         }
         if (e90_at_horizon?.polygon) {
             for (const [lon, lat] of e90_at_horizon.polygon) pts.push({ lat, lon, t: '' });
         }
         return pts.filter((p) => isValidLngLat(p.lat, p.lon));
-    }, [observedTrack, nominalPath, impliedGapPaths, e90_at_horizon]);
+    }, [observedTrack, nominalPath, gapBridges, e90_at_horizon]);
 
     useEffect(() => {
         const map = mapRef.current?.getMap();
@@ -628,10 +562,10 @@ export default function WindSynthesisMap({
                             <b>Forecast</b> updating…
                         </div>
                     )}
-                    {forecastReady && impliedGapPaths.length > 0 && (
+                    {forecastReady && nontrivialGaps.length > 0 && (
                         <div style={{ color: 'rgba(94,196,232,.85)' }}>
-                            <b>Inferred gaps</b> {impliedGapPaths.length} segment
-                            {impliedGapPaths.length === 1 ? '' : 's'} filled (hourly GFS + bias)
+                            <b>Reconstructed</b> {nontrivialGaps.length} GPS gap
+                            {nontrivialGaps.length === 1 ? '' : 's'} (particle smoother, historical GFS)
                         </div>
                     )}
                     {endPoint && forecastReady && !showUpdating && (
@@ -792,10 +726,10 @@ export default function WindSynthesisMap({
                         </Source>
                     )}
 
-                    {impliedGapGeoJson && (
-                        <Source id="ws-implied-gaps" type="geojson" data={impliedGapGeoJson}>
+                    {gapBridgesGeoJson && (
+                        <Source id="ws-reconstructed" type="geojson" data={gapBridgesGeoJson}>
                             <Layer
-                                id="ws-implied-gaps-line"
+                                id="ws-reconstructed-line"
                                 type="line"
                                 layout={{ 'line-cap': 'round', 'line-join': 'round' }}
                                 paint={{
@@ -849,22 +783,6 @@ export default function WindSynthesisMap({
                                     'line-width': 2,
                                     'line-opacity': 0.75,
                                     'line-dasharray': [4, 3],
-                                }}
-                            />
-                        </Source>
-                    )}
-
-                    {hindcastLine && (
-                        <Source id="ws-hindcast" type="geojson" data={hindcastLine}>
-                            <Layer
-                                id="ws-hindcast-line"
-                                type="line"
-                                layout={{ 'line-cap': 'round', 'line-join': 'round' }}
-                                paint={{
-                                    'line-color': '#5ec4e8',
-                                    'line-width': 3.5,
-                                    'line-opacity': 1,
-                                    'line-dasharray': [2, 2],
                                 }}
                             />
                         </Source>
@@ -1069,11 +987,11 @@ export default function WindSynthesisMap({
                     <div style={{ width: 26, height: 2.5, borderRadius: 2, background: '#c9521f' }} />
                     <span style={{ fontSize: 11.5, color: 'rgba(200,212,232,.58)' }}>Observed GPS track</span>
                 </div>
-                {impliedGapPaths.length > 0 && (
+                {gapBridges.length > 0 && (
                     <div className="wind-synthesis-lg-row">
                         <div style={{ width: 26, borderTop: '2px dashed rgba(94,196,232,.95)' }} />
                         <span style={{ fontSize: 11.5, color: 'rgba(200,212,232,.58)' }}>
-                            Inferred path through GPS gaps (auto)
+                            Reconstructed path (particle smoother)
                         </span>
                     </div>
                 )}
@@ -1109,12 +1027,6 @@ export default function WindSynthesisMap({
                     <div style={{ width: 26, borderTop: '1px solid rgba(230,208,136,.25)' }} />
                     <span style={{ fontSize: 11.5, color: 'rgba(200,212,232,.58)' }}>
                         {mc?.metadata.n_ensemble ?? 200} ensemble members
-                    </span>
-                </div>
-                <div className="wind-synthesis-lg-row">
-                    <div style={{ width: 26, borderTop: '2px dashed rgba(94,196,232,.95)' }} />
-                    <span style={{ fontSize: 11.5, color: 'rgba(200,212,232,.58)' }}>
-                        Walk-forward replay (scrub observed track)
                     </span>
                 </div>
             </div>
@@ -1162,13 +1074,7 @@ export default function WindSynthesisMap({
                     position={scrubPosition}
                     observedTrack={observedTrack}
                     forecastHorizonH={effectiveHorizonH}
-                    hindcast={
-                        scrubPosition?.segment === 'observed'
-                            ? canHindcast
-                                ? hindcast?.info
-                                : { loading: false, error: hindcastEligibility.reason ?? undefined }
-                            : null
-                    }
+                    reconstructionGap={scrubGapInfo}
                 />
             )}
         </div>

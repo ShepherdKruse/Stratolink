@@ -55,6 +55,16 @@ export async function buildForecastInputForDevice(
 
     if (observedTrack.length < 1) return null;
 
+    const baroSamples = rows
+        .filter((r) => {
+            const alt = r.altitude_m as number | null;
+            return alt != null && Number.isFinite(alt) && alt > 0;
+        })
+        .map((r) => ({
+            time_utc: r.time as string,
+            alt_m: r.altitude_m as number,
+        }));
+
     const first = observedTrack[0];
     const last = observedTrack[observedTrack.length - 1];
     const launch =
@@ -86,6 +96,7 @@ export async function buildForecastInputForDevice(
         })),
         observedTrackLonLat: observedTrack.map((p) => [p.lon, p.lat] as [number, number]),
         driftSegmentLonLat: driftSegment,
+        baroSamples: baroSamples.length > 0 ? baroSamples : undefined,
         pressureHpa,
         forecastHours,
     };

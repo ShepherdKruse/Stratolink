@@ -4,11 +4,10 @@ import type { ForecastEllipse, ForecastGpsFix, MonteCarloForecastInput, Stratoli
 import {
     GAP_WIND_MODE,
     gpsGapHours,
-    integrateHourlyDriftForward,
     resolveForecastStart,
     STALE_GPS_THRESHOLD_H,
 } from './staleGpsExtrapolation';
-import { detectInferredGaps, fixesBeforeAnchor } from './gapInference';
+import { computePathReconstruction } from './pathReconstruction';
 import { gfsGridToWindField, windAt, windFieldToGfsGrid, type GfsGrid } from './gfsGrid';
 
 const CFG = {
@@ -193,25 +192,11 @@ export async function computeMonteCarloForecast(input: MonteCarloForecastInput):
 
     const bias = computeBias(input.gpsFixes, gfs);
 
-    const trackForGaps = input.gpsFixes.map((f) => ({
-        lat: f.lat,
-        lon: f.lon,
-        t: new Date(f.time_utc).getTime(),
-        alt_m: f.alt_m,
-    }));
-    const inferredGaps = detectInferredGaps(trackForGaps);
-    const impliedGapPaths: Array<Array<[number, number]>> = [];
-    for (const gap of inferredGaps) {
-        const history = fixesBeforeAnchor(input.gpsFixes, gap.startFix.time_utc);
-        const gapBias = computeBias(history, gfs);
-        const path = await integrateHourlyDriftForward(
-            gap.startFix,
-            levelHpa,
-            gap.gapHours,
-            gapBias,
-        );
-        if (path.length >= 2) impliedGapPaths.push(path);
-    }
+    const reconstruction = await computePathReconstruction({
+        fixes: input.gpsFixes,
+        pressureHpa: levelHpa,
+        baroSamples: input.baroSamples,
+    });
 
     const forecastStart = await resolveForecastStart({
         lastFix,
@@ -302,7 +287,9 @@ export async function computeMonteCarloForecast(input: MonteCarloForecastInput):
             gps_fixes: input.gpsFixes,
             track: downsampleTrack(input.observedTrackLonLat, 120),
             drift_segment: driftSegment,
-            ...(impliedGapPaths.length > 0 ? { implied_gap_paths: impliedGapPaths } : {}),
+            reconstructed_path: reconstruction.reconstructed_path,
+            gap_bridges: reconstruction.gap_bridges,
+            reconstruction_gaps: reconstruction.gaps,
         },
         wind_field: {
             lat0: gfs.lat0,
@@ -321,6 +308,7 @@ export async function computeMonteCarloForecast(input: MonteCarloForecastInput):
             dir_sigma_deg: CFG.DIR_SIGMA_DEG,
             alt_sigma_hpa: CFG.ALT_SIGMA_HPA,
             compute_ms: Date.now() - t0,
+            reconstruction_ms: reconstruction.compute_ms,
             ...(forecastStart.stale_gps ? { gap_wind_mode: GAP_WIND_MODE } : {}),
         },
     };

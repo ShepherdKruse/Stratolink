@@ -77,6 +77,14 @@ export default function WindOutlookScreen() {
         [rows],
     );
 
+    const baroSamples = useMemo(
+        () =>
+            rows
+                .filter((r) => r.alt != null && Number.isFinite(r.alt) && r.alt > 0)
+                .map((r) => ({ time_utc: new Date(r.t).toISOString(), alt_m: r.alt as number })),
+        [rows],
+    );
+
     const forecastAnchorKey = useMemo(() => {
         const fixT = lastFixRow?.t ?? 0;
         const hpa = snapPressureHpa(latest?.pres ?? 250);
@@ -175,6 +183,7 @@ export default function WindOutlookScreen() {
                     deviceId={selectedId ?? callsign}
                     callsign={callsign}
                     observedTrack={observedTrack}
+                    baroSamples={baroSamples}
                     startLat={center.lat}
                     startLon={center.lon}
                     launchLat={selectedDevice?.launchLat}

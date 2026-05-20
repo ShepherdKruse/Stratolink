@@ -13,6 +13,7 @@ type Body = {
     gpsFixes?: ForecastGpsFix[];
     observedTrack?: Array<{ lat: number; lon: number; t: string; alt_m?: number | null }>;
     driftSegment?: Array<[number, number]>;
+    baroSamples?: Array<{ time_utc: string; alt_m: number }>;
     pressureHpa?: number;
     forecastHours?: number;
     nEnsemble?: number;
@@ -46,6 +47,7 @@ function buildInput(body: Body): MonteCarloForecastInput {
         gpsFixes,
         observedTrackLonLat: track.map((p) => [p.lon, p.lat] as [number, number]),
         driftSegmentLonLat: body.driftSegment,
+        baroSamples: body.baroSamples,
         pressureHpa: body.pressureHpa ?? 285,
         forecastHours: body.forecastHours ?? 24,
         nEnsemble: body.nEnsemble,

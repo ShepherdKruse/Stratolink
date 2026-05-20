@@ -9,11 +9,12 @@ import {
     type TimelinePosition,
 } from '@/lib/wind/forecastTimeline';
 
-export type HindcastScrubInfo = {
-    loading: boolean;
-    nFixesUsed?: number;
-    errors?: Array<{ lead_h: number; km: number }>;
-    error?: string;
+export type ReconstructionGapInfo = {
+    dt_hours: number;
+    measured_altitude: boolean;
+    endpoint_miss_km: number;
+    mid_gap_90_km: number;
+    confidence: string;
 };
 
 type WindForecastScrubberProps = {
@@ -23,7 +24,7 @@ type WindForecastScrubberProps = {
     position: TimelinePosition | null;
     observedTrack: Array<{ lat: number; lon: number; t: number }>;
     forecastHorizonH: number;
-    hindcast?: HindcastScrubInfo | null;
+    reconstructionGap?: ReconstructionGapInfo | null;
 };
 
 function fmtCoord(lat: number, lon: number): string {
@@ -39,7 +40,7 @@ export default function WindForecastScrubber({
     position,
     observedTrack,
     forecastHorizonH,
-    hindcast,
+    reconstructionGap,
 }: WindForecastScrubberProps) {
     const { tMin, tMax, tLastFix, tNow } = timeline;
     const scrubPct =
@@ -85,25 +86,15 @@ export default function WindForecastScrubber({
                     {position.segment === 'observed' && (
                         <span className="wind-synthesis-scrubber-hint">
                             Recorded GPS (ground truth).{' '}
-                            {hindcast?.loading && (
-                                <strong>Running walk-forward replay…</strong>
+                            {reconstructionGap && (
+                                <>
+                                    <strong>Cyan dashed line</strong> = reconstructed path through this{' '}
+                                    {reconstructionGap.dt_hours}h GPS gap ({reconstructionGap.confidence}{' '}
+                                    confidence, ±{reconstructionGap.mid_gap_90_km} km mid-gap
+                                    {reconstructionGap.measured_altitude ? ', baro altitude' : ''}). Endpoint
+                                    miss {reconstructionGap.endpoint_miss_km} km.
+                                </>
                             )}
-                            {!hindcast?.loading && hindcast?.error && (
-                                <strong>{hindcast.error}</strong>
-                            )}
-                            {!hindcast?.loading &&
-                                !hindcast?.error &&
-                                hindcast?.nFixesUsed != null && (
-                                    <>
-                                        <strong>Cyan dashed line</strong> = 24h model replay from this fix
-                                        (historical GFS, {hindcast.nFixesUsed} fixes used for bias).{' '}
-                                        {hindcast.errors?.length
-                                            ? hindcast.errors
-                                                  .map((e) => `+${e.lead_h}h off by ${e.km} km`)
-                                                  .join(' · ')
-                                            : 'Drag earlier along the orange track for longer validation.'}
-                                    </>
-                                )}
                         </span>
                     )}
                     {gapHint && <span className="wind-synthesis-scrubber-hint">{gapHint}</span>}
