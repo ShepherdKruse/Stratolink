@@ -8,11 +8,8 @@ import '@/styles/wind-synthesis.css';
 import type { V2FlightPoint } from '../V2MissionMap';
 import { isValidLngLat } from '../V2MissionMap';
 import { snapPressureHpa } from '@/lib/wind/fetchWindGrid';
-import { forecastWindBlobToField } from '@/lib/wind/gfsGrid';
 import type { StratolinkForecast } from '@/lib/wind/forecastTypes';
 import { splitTrackSegments } from '@/lib/wind/trackSegments';
-import type { WindField } from '@/lib/wind/types';
-import WindStreamOverlay from './WindStreamOverlay';
 import WindForecastScrubber from './WindForecastScrubber';
 import { useTickingNow } from '../shared';
 import {
@@ -43,9 +40,19 @@ export type WindSynthesisMapProps = {
     /** Wait until telemetry has loaded so we do not race an empty track vs full mission. */
     telemetryReady?: boolean;
     nullschoolUrl: string;
-    showWind?: boolean;
     lastAltM?: number | null;
 };
+
+/** One hue per semantic role — see renderer-legibility-fixes.md */
+const COL = {
+    observed: '#c9521f',
+    reconstruction: '#3fb8a0',
+    forecast: '#8e86e0',
+    footprint: '#c08a4a',
+    footprintEdge: '#d6a25c',
+} as const;
+
+type UncertaintyMode = 'ellipses' | 'spaghetti';
 
 function fmtCoord(lat: number, lon: number): string {
     const ns = lat >= 0 ? 'N' : 'S';
@@ -92,18 +99,8 @@ function obsTimeUtc(t: number): string {
     return new Date(t).toISOString();
 }
 
-function applyForecast(
-    forecast: StratolinkForecast,
-    showWind: boolean,
-    setMc: (v: StratolinkForecast | null) => void,
-    setWindField: (v: WindField | null) => void,
-) {
+function applyForecast(forecast: StratolinkForecast, setMc: (v: StratolinkForecast | null) => void) {
     setMc(forecast);
-    setWindField(
-        showWind
-            ? forecastWindBlobToField(forecast.wind_field, forecast.generated_at, forecast.level_hpa)
-            : null,
-    );
 }
 
 export default function WindSynthesisMap({
@@ -120,7 +117,6 @@ export default function WindSynthesisMap({
     anchorKey = 'default',
     telemetryReady = true,
     nullschoolUrl,
-    showWind = true,
     lastAltM = null,
 }: WindSynthesisMapProps) {
     const mapRef = useRef<MapRef>(null);
@@ -146,7 +142,6 @@ export default function WindSynthesisMap({
         callsign,
         lastAltM,
         baroSamples,
-        showWind,
     });
     propsRef.current = {
         observedTrack,
@@ -160,15 +155,12 @@ export default function WindSynthesisMap({
         deviceId,
         callsign,
         lastAltM,
-        showWind,
     };
     const [mapReady, setMapReady] = useState(false);
     const [mc, setMc] = useState<StratolinkForecast | null>(null);
-    const [windField, setWindField] = useState<WindField | null>(null);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
-    const [showEnsemble, setShowEnsemble] = useState(true);
-    const [showEllipses, setShowEllipses] = useState(true);
+    const [uncertaintyMode, setUncertaintyMode] = useState<UncertaintyMode>('ellipses');
     const [scrubMs, setScrubMs] = useState<number | null>(null);
     /** User moved the slider — do not snap back to "now" when forecast/timeline refreshes. */
     const userPinnedScrubRef = useRef(false);
@@ -191,7 +183,6 @@ export default function WindSynthesisMap({
         if (!opts?.staleAuto) {
             setLoading(true);
             setMc(null);
-            setWindField(null);
             setLoadedAnchorKey(null);
         }
         setError(null);
@@ -199,7 +190,7 @@ export default function WindSynthesisMap({
         const applyIfCurrent = (forecast: StratolinkForecast) => {
             if (reqId !== forecastReqRef.current) return;
             if (anchorAtStart !== anchorKeyRef.current) return;
-            applyForecast(forecast, p.showWind, setMc, setWindField);
+            applyForecast(forecast, setMc);
             setLoadedAnchorKey(anchorAtStart);
         };
 
@@ -237,7 +228,6 @@ export default function WindSynthesisMap({
             if (reqId !== forecastReqRef.current) return;
             setError(e instanceof Error ? e.message : 'Forecast failed');
             setMc(null);
-            setWindField(null);
         } finally {
             if (reqId === forecastReqRef.current) setLoading(false);
         }
@@ -265,14 +255,9 @@ export default function WindSynthesisMap({
         loadForecast({ staleAuto: true });
     }, [staleRefreshKey, isStaleGps, loadForecast]);
 
-    useEffect(() => {
-        if (!mc) return;
-        setWindField(
-            showWind ? forecastWindBlobToField(mc.wind_field, mc.generated_at, mc.level_hpa) : null,
-        );
-    }, [showWind, mc]);
-
     const segments = useMemo(() => splitTrackSegments(observedTrack), [observedTrack]);
+    const showEllipses = uncertaintyMode === 'ellipses';
+    const ensembleOpacity = uncertaintyMode === 'ellipses' ? 0.04 : 0.1;
 
     const forecastReady = loadedAnchorKey === anchorKey && mc != null;
     const showUpdating = loading && forecastReady;
@@ -308,7 +293,7 @@ export default function WindSynthesisMap({
     }, [forecastReady, mc, showEllipses]);
 
     const ensembleGeoJson = useMemo(() => {
-        if (!forecastReady || !mc || !showEnsemble) return null;
+        if (!forecastReady || !mc) return null;
         return {
             type: 'FeatureCollection' as const,
             features: mc.ensemble.map((traj) => ({
@@ -317,7 +302,7 @@ export default function WindSynthesisMap({
                 geometry: { type: 'LineString' as const, coordinates: traj },
             })),
         };
-    }, [forecastReady, mc, showEnsemble]);
+    }, [forecastReady, mc]);
 
     const hourLabels = useMemo(() => {
         if (!forecastReady || !nominalPath.length) return { type: 'FeatureCollection' as const, features: [] };
@@ -566,24 +551,33 @@ export default function WindSynthesisMap({
         return { type: 'FeatureCollection' as const, features };
     }, [reconstructionGaps]);
 
-    const reconGapEllipses90GeoJson = useMemo(() => {
-        const features: Array<{
+    const reconGapEllipsesGeoJson = useMemo(() => {
+        const e90: Array<{
             type: 'Feature';
             properties: { gap: number; frac: number };
             geometry: { type: 'Polygon'; coordinates: Array<Array<[number, number]>> };
         }> = [];
+        const e50: typeof e90 = [];
         reconstructionGaps.forEach((g, gi) => {
             if (g.mode === 'corridor' || !g.ellipses?.length) return;
             for (const e of g.ellipses) {
-                features.push({
+                e90.push({
                     type: 'Feature',
                     properties: { gap: gi, frac: e.frac },
                     geometry: { type: 'Polygon', coordinates: [e.e90.polygon] },
                 });
+                e50.push({
+                    type: 'Feature',
+                    properties: { gap: gi, frac: e.frac },
+                    geometry: { type: 'Polygon', coordinates: [e.e50.polygon] },
+                });
             }
         });
-        if (!features.length) return null;
-        return { type: 'FeatureCollection' as const, features };
+        if (!e90.length) return null;
+        return {
+            e90: { type: 'FeatureCollection' as const, features: e90 },
+            e50: { type: 'FeatureCollection' as const, features: e50 },
+        };
     }, [reconstructionGaps]);
 
     const freezeLine = useMemo(() => lineGeoJson(driftCoords), [driftCoords]);
@@ -683,7 +677,7 @@ export default function WindSynthesisMap({
                         </div>
                     )}
                     {forecastReady && nontrivialGaps.length > 0 && (
-                        <div style={{ color: 'rgba(94,196,232,.85)' }}>
+                        <div style={{ color: 'rgba(63,184,160,.9)' }}>
                             <b>Reconstructed</b> {nontrivialGaps.length} GPS gap
                             {nontrivialGaps.length === 1 ? '' : 's'}
                             {corridorGaps.length > 0
@@ -711,17 +705,17 @@ export default function WindSynthesisMap({
                 <div className="wind-synthesis-mode-toggle">
                     <button
                         type="button"
-                        className={`wind-synthesis-mode-btn${showEnsemble ? ' active' : ''}`}
-                        onClick={() => setShowEnsemble((v) => !v)}
+                        className={`wind-synthesis-mode-btn${uncertaintyMode === 'ellipses' ? ' active' : ''}`}
+                        onClick={() => setUncertaintyMode('ellipses')}
                     >
-                        Spaghetti
+                        Ellipses
                     </button>
                     <button
                         type="button"
-                        className={`wind-synthesis-mode-btn${showEllipses ? ' active' : ''}`}
-                        onClick={() => setShowEllipses((v) => !v)}
+                        className={`wind-synthesis-mode-btn${uncertaintyMode === 'spaghetti' ? ' active' : ''}`}
+                        onClick={() => setUncertaintyMode('spaghetti')}
                     >
-                        Ellipses
+                        Spaghetti
                     </button>
                 </div>
                 <a
@@ -792,44 +786,39 @@ export default function WindSynthesisMap({
                     mapboxAccessToken={token}
                     initialViewState={{ longitude: -106, latitude: 37.5, zoom: 4.05 }}
                     style={{ width: '100%', height: '100%' }}
-                    mapStyle="mapbox://styles/mapbox/navigation-night-v1"
+                    mapStyle="mapbox://styles/mapbox/dark-v11"
                     attributionControl={false}
                     onLoad={() => setMapReady(true)}
                 >
-                    {ellipses90GeoJson && (
+                    {ellipses90GeoJson && showEllipses && (
                         <Source id="ws-e90" type="geojson" data={ellipses90GeoJson}>
-                            <Layer
-                                id="ws-e90-fill"
-                                type="fill"
-                                paint={{ 'fill-color': '#c9521f', 'fill-opacity': 0.05 }}
-                            />
                             <Layer
                                 id="ws-e90-stroke"
                                 type="line"
                                 paint={{
-                                    'line-color': '#c9521f',
+                                    'line-color': COL.forecast,
                                     'line-width': 1,
-                                    'line-opacity': 0.3,
+                                    'line-opacity': 0.45,
                                     'line-dasharray': [3, 4],
                                 }}
                             />
                         </Source>
                     )}
 
-                    {ellipses50GeoJson && (
+                    {ellipses50GeoJson && showEllipses && (
                         <Source id="ws-e50" type="geojson" data={ellipses50GeoJson}>
                             <Layer
                                 id="ws-e50-fill"
                                 type="fill"
-                                paint={{ 'fill-color': '#c9521f', 'fill-opacity': 0.09 }}
+                                paint={{ 'fill-color': COL.forecast, 'fill-opacity': 0.12 }}
                             />
                             <Layer
                                 id="ws-e50-stroke"
                                 type="line"
                                 paint={{
-                                    'line-color': '#c9521f',
-                                    'line-width': 1.2,
-                                    'line-opacity': 0.45,
+                                    'line-color': COL.forecast,
+                                    'line-width': 1.1,
+                                    'line-opacity': 0.55,
                                 }}
                             />
                         </Source>
@@ -842,9 +831,9 @@ export default function WindSynthesisMap({
                                 type="line"
                                 layout={{ 'line-cap': 'round', 'line-join': 'round' }}
                                 paint={{
-                                    'line-color': '#e6d088',
+                                    'line-color': COL.forecast,
                                     'line-width': 1,
-                                    'line-opacity': 0.07,
+                                    'line-opacity': ensembleOpacity,
                                 }}
                             />
                         </Source>
@@ -857,7 +846,7 @@ export default function WindSynthesisMap({
                                 type="line"
                                 layout={{ 'line-cap': 'round', 'line-join': 'round' }}
                                 paint={{
-                                    'line-color': '#5ec4e8',
+                                    'line-color': COL.reconstruction,
                                     'line-width': 2,
                                     'line-dasharray': [2, 2],
                                     'line-opacity': 0.45,
@@ -873,7 +862,7 @@ export default function WindSynthesisMap({
                                 type="line"
                                 layout={{ 'line-cap': 'round', 'line-join': 'round' }}
                                 paint={{
-                                    'line-color': '#5ec4e8',
+                                    'line-color': COL.reconstruction,
                                     'line-width': 3,
                                     'line-opacity': 0.95,
                                 }}
@@ -881,27 +870,40 @@ export default function WindSynthesisMap({
                         </Source>
                     )}
 
-                    {reconGapEllipses90GeoJson && (
-                        <Source id="ws-recon-gap-e90" type="geojson" data={reconGapEllipses90GeoJson}>
-                            <Layer
-                                id="ws-recon-gap-e90-fill"
-                                type="fill"
-                                paint={{
-                                    'fill-color': '#c9521f',
-                                    'fill-opacity': 0.06,
-                                }}
-                            />
-                            <Layer
-                                id="ws-recon-gap-e90-stroke"
-                                type="line"
-                                paint={{
-                                    'line-color': '#c9521f',
-                                    'line-width': 1,
-                                    'line-opacity': 0.28,
-                                    'line-dasharray': [3, 4],
-                                }}
-                            />
-                        </Source>
+                    {reconGapEllipsesGeoJson && showEllipses && (
+                        <>
+                            <Source id="ws-recon-gap-e90" type="geojson" data={reconGapEllipsesGeoJson.e90}>
+                                <Layer
+                                    id="ws-recon-gap-e90-stroke"
+                                    type="line"
+                                    paint={{
+                                        'line-color': COL.reconstruction,
+                                        'line-width': 1,
+                                        'line-opacity': 0.45,
+                                        'line-dasharray': [3, 4],
+                                    }}
+                                />
+                            </Source>
+                            <Source id="ws-recon-gap-e50" type="geojson" data={reconGapEllipsesGeoJson.e50}>
+                                <Layer
+                                    id="ws-recon-gap-e50-fill"
+                                    type="fill"
+                                    paint={{
+                                        'fill-color': COL.reconstruction,
+                                        'fill-opacity': 0.12,
+                                    }}
+                                />
+                                <Layer
+                                    id="ws-recon-gap-e50-stroke"
+                                    type="line"
+                                    paint={{
+                                        'line-color': COL.reconstruction,
+                                        'line-width': 1.1,
+                                        'line-opacity': 0.55,
+                                    }}
+                                />
+                            </Source>
+                        </>
                     )}
 
                     {gapOccupancyGeoJson && (
@@ -910,19 +912,28 @@ export default function WindSynthesisMap({
                                 id="ws-occupancy-fill"
                                 type="fill"
                                 paint={{
-                                    'fill-color': '#e08a5a',
+                                    'fill-color': COL.footprint,
                                     'fill-antialias': false,
                                     'fill-opacity': [
                                         'interpolate',
                                         ['linear'],
                                         ['get', 'd'],
                                         0,
-                                        0.05,
+                                        0.14,
                                         0.5,
-                                        0.28,
+                                        0.36,
                                         1,
-                                        0.52,
+                                        0.6,
                                     ],
+                                }}
+                            />
+                            <Layer
+                                id="ws-occupancy-edge"
+                                type="line"
+                                paint={{
+                                    'line-color': COL.footprintEdge,
+                                    'line-width': 0.5,
+                                    'line-opacity': 0.28,
                                 }}
                             />
                         </Source>
@@ -939,8 +950,8 @@ export default function WindSynthesisMap({
                                         'match',
                                         ['get', 'mode'],
                                         'corridor',
-                                        '#e08a5a',
-                                        '#5ec4e8',
+                                        COL.footprint,
+                                        COL.reconstruction,
                                     ],
                                     'line-width': 2.5,
                                     'line-dasharray': [3, 3],
@@ -978,7 +989,7 @@ export default function WindSynthesisMap({
                                 type="line"
                                 layout={{ 'line-cap': 'round', 'line-join': 'round' }}
                                 paint={{
-                                    'line-color': '#d4622a',
+                                    'line-color': COL.observed,
                                     'line-width': 2.5,
                                     'line-opacity': 0.92,
                                 }}
@@ -993,7 +1004,7 @@ export default function WindSynthesisMap({
                                 type="line"
                                 layout={{ 'line-cap': 'round', 'line-join': 'round' }}
                                 paint={{
-                                    'line-color': '#d4622a',
+                                    'line-color': COL.observed,
                                     'line-width': 2,
                                     'line-opacity': 0.75,
                                     'line-dasharray': [4, 3],
@@ -1009,9 +1020,9 @@ export default function WindSynthesisMap({
                                 type="line"
                                 layout={{ 'line-cap': 'round', 'line-join': 'round' }}
                                 paint={{
-                                    'line-color': '#c9b86a',
-                                    'line-width': 2,
-                                    'line-opacity': 0.88,
+                                    'line-color': COL.forecast,
+                                    'line-width': 2.2,
+                                    'line-opacity': 0.92,
                                     'line-dasharray': [5, 4],
                                 }}
                             />
@@ -1025,7 +1036,7 @@ export default function WindSynthesisMap({
                                 type="circle"
                                 paint={{
                                     'circle-radius': 3.2,
-                                    'circle-color': '#e6d088',
+                                    'circle-color': COL.forecast,
                                     'circle-stroke-color': 'rgba(8,13,23,.75)',
                                     'circle-stroke-width': 1.5,
                                 }}
@@ -1040,7 +1051,7 @@ export default function WindSynthesisMap({
                                     'text-anchor': 'bottom',
                                 }}
                                 paint={{
-                                    'text-color': 'rgba(230,208,120,.75)',
+                                    'text-color': 'rgba(180,170,230,.85)',
                                     'text-halo-color': 'rgba(8,13,23,.6)',
                                     'text-halo-width': 1.2,
                                 }}
@@ -1062,7 +1073,7 @@ export default function WindSynthesisMap({
                         <Marker longitude={lastObs.lon} latitude={lastObs.lat} anchor="center">
                             <div
                                 className="wind-synthesis-waypoint"
-                                style={{ width: 11, height: 11, background: '#c9521f' }}
+                                style={{ width: 11, height: 11, background: COL.observed }}
                                 title={mc?.stale_gps ? 'Last GPS fix (stale)' : 'Last fix'}
                             />
                         </Marker>
@@ -1079,7 +1090,7 @@ export default function WindSynthesisMap({
                                 style={{
                                     width: 13,
                                     height: 13,
-                                    background: '#e6d088',
+                                    background: COL.forecast,
                                     boxShadow: '0 0 0 2px rgba(8,13,23,.85)',
                                 }}
                                 title="Implied position now · forecast start"
@@ -1087,12 +1098,22 @@ export default function WindSynthesisMap({
                         </Marker>
                     )}
 
-                    {scrubAtNow && forecastReady && endPoint && (
+                    {forecastReady && endPoint && (
                         <Marker longitude={endPoint.lon} latitude={endPoint.lat} anchor="center">
                             <div
                                 className="wind-synthesis-waypoint"
-                                style={{ width: 12, height: 12, background: '#e6d088' }}
-                                title="GFS endpoint"
+                                style={{
+                                    width: 14,
+                                    height: 14,
+                                    background: COL.forecast,
+                                    border: '2.5px solid rgba(255,255,255,.85)',
+                                    boxShadow: '0 1px 7px rgba(0,0,0,.5)',
+                                }}
+                                title={
+                                    e90_at_horizon
+                                        ? `+${effectiveHorizonH}h forecast · ${fmtCoord(endPoint.lat, endPoint.lon)} · 90% ±${Math.round(e90_at_horizon.semi_a_km)}×${Math.round(e90_at_horizon.semi_b_km)} km`
+                                        : `+${effectiveHorizonH}h forecast · ${fmtCoord(endPoint.lat, endPoint.lon)}`
+                                }
                             />
                         </Marker>
                     )}
@@ -1111,15 +1132,6 @@ export default function WindSynthesisMap({
                     )}
 
                 </Map>
-
-                {showWind && (
-                    <WindStreamOverlay
-                        mapRef={mapRef}
-                        windField={windField}
-                        mapReady={mapReady}
-                        active={!!windField}
-                    />
-                )}
 
             </div>
 
@@ -1197,24 +1209,24 @@ export default function WindSynthesisMap({
 
             <div className="wind-synthesis-legend">
                 <div className="wind-synthesis-lg-title">Map Key</div>
+
+                <div className="wind-synthesis-lg-group">Observed</div>
                 <div className="wind-synthesis-lg-row">
-                    <div style={{ width: 26, height: 2.5, borderRadius: 2, background: '#c9521f' }} />
-                    <span style={{ fontSize: 11.5, color: 'rgba(200,212,232,.58)' }}>Observed GPS track</span>
+                    <div style={{ width: 26, height: 2.5, borderRadius: 2, background: COL.observed }} />
+                    <span style={{ fontSize: 11.5, color: 'rgba(200,212,232,.58)' }}>GPS track</span>
                 </div>
+
+                <div className="wind-synthesis-lg-group">Reconstructed</div>
                 {reconstructedPath.length > 1 && (
                     <div className="wind-synthesis-lg-row">
-                        <div style={{ width: 26, borderTop: '2px dashed rgba(94,196,232,.55)' }} />
-                        <span style={{ fontSize: 11.5, color: 'rgba(200,212,232,.58)' }}>
-                            Full reconstructed path (faint)
-                        </span>
+                        <div style={{ width: 26, borderTop: `2px dashed ${COL.reconstruction}88` }} />
+                        <span style={{ fontSize: 11.5, color: 'rgba(200,212,232,.58)' }}>Full path (faint)</span>
                     </div>
                 )}
                 {reconstructedTrack.length > 1 && (
                     <div className="wind-synthesis-lg-row">
-                        <div style={{ width: 26, height: 2.5, borderRadius: 2, background: '#5ec4e8' }} />
-                        <span style={{ fontSize: 11.5, color: 'rgba(200,212,232,.58)' }}>
-                            Reconstructed path to scrub time (bright)
-                        </span>
+                        <div style={{ width: 26, height: 2.5, borderRadius: 2, background: COL.reconstruction }} />
+                        <span style={{ fontSize: 11.5, color: 'rgba(200,212,232,.58)' }}>Path to scrub time</span>
                     </div>
                 )}
                 {corridorOccupancyGaps.length > 0 && (
@@ -1224,18 +1236,17 @@ export default function WindSynthesisMap({
                                 width: 26,
                                 height: 10,
                                 borderRadius: 2,
-                                background:
-                                    'linear-gradient(90deg, rgba(224,138,90,.12), rgba(224,138,90,.55))',
+                                background: `linear-gradient(90deg, ${COL.footprint}22, ${COL.footprint}99)`,
                             }}
                         />
-                        <span style={{ fontSize: 11.5, color: 'rgba(200,212,232,.58)' }}>
-                            Occupancy footprint (under-determined gap)
-                        </span>
+                        <span style={{ fontSize: 11.5, color: 'rgba(200,212,232,.58)' }}>Occupancy footprint</span>
                     </div>
                 )}
+
+                <div className="wind-synthesis-lg-group">Forecast</div>
                 <div className="wind-synthesis-lg-row">
-                    <div style={{ width: 26, borderTop: '2px dashed rgba(230,210,140,.8)' }} />
-                    <span style={{ fontSize: 11.5, color: 'rgba(200,212,232,.58)' }}>Nominal forecast path</span>
+                    <div style={{ width: 26, borderTop: `2px dashed ${COL.forecast}cc` }} />
+                    <span style={{ fontSize: 11.5, color: 'rgba(200,212,232,.58)' }}>Nominal path</span>
                 </div>
                 <div className="wind-synthesis-lg-row">
                     <div
@@ -1243,66 +1254,20 @@ export default function WindSynthesisMap({
                             width: 26,
                             height: 10,
                             borderRadius: 2,
-                            background: 'rgba(232,93,42,.28)',
-                            border: '1px dashed rgba(255,154,92,.55)',
+                            background: `${COL.forecast}33`,
+                            border: `1px solid ${COL.forecast}99`,
                         }}
                     />
-                    <span style={{ fontSize: 11.5, color: 'rgba(200,212,232,.58)' }}>50% confidence ellipse</span>
+                    <span style={{ fontSize: 11.5, color: 'rgba(200,212,232,.58)' }}>50% / 90% ellipses</span>
                 </div>
                 <div className="wind-synthesis-lg-row">
-                    <div
-                        style={{
-                            width: 26,
-                            height: 10,
-                            borderRadius: 2,
-                            background: 'rgba(201,82,31,.06)',
-                            border: '1px dashed rgba(201,82,31,.28)',
-                        }}
-                    />
-                    <span style={{ fontSize: 11.5, color: 'rgba(200,212,232,.58)' }}>90% confidence ellipse</span>
-                </div>
-                <div className="wind-synthesis-lg-row">
-                    <div style={{ width: 26, borderTop: '1px solid rgba(230,208,136,.25)' }} />
+                    <div style={{ width: 26, borderTop: `1px solid ${COL.forecast}55` }} />
                     <span style={{ fontSize: 11.5, color: 'rgba(200,212,232,.58)' }}>
                         {mc?.metadata.n_ensemble ?? 200} ensemble members
                     </span>
                 </div>
             </div>
 
-            {showWind && (
-                <div className="wind-synthesis-speed-scale">
-                    <div
-                        style={{
-                            fontSize: 9,
-                            fontWeight: 600,
-                            letterSpacing: '.14em',
-                            textTransform: 'uppercase',
-                            color: 'rgba(200,212,232,.35)',
-                        }}
-                    >
-                        m/s
-                    </div>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
-                        <div className="wind-synthesis-ss-bar" />
-                        <div
-                            style={{
-                                display: 'flex',
-                                flexDirection: 'column',
-                                justifyContent: 'space-between',
-                                height: 120,
-                                fontFamily: 'var(--sl-mono)',
-                                fontSize: 9,
-                                color: 'rgba(200,212,232,.4)',
-                            }}
-                        >
-                            <span>45</span>
-                            <span>30</span>
-                            <span>15</span>
-                            <span>0</span>
-                        </div>
-                    </div>
-                </div>
-            )}
 
             {forecastReady && timeline && scrubPosition && (
                 <WindForecastScrubber

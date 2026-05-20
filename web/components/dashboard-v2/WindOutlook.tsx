@@ -50,7 +50,6 @@ export default function WindOutlookScreen() {
 
     const [level, setLevel] = useState<NullschoolPressureId>('250hPa');
     const [forecastHours, setForecastHours] = useState(24);
-    const [showWind, setShowWind] = useState(true);
 
     useEffect(() => {
         if (latest?.pres != null) setLevel(suggestedLevel);
@@ -172,10 +171,6 @@ export default function WindOutlookScreen() {
                     </select>
                 </label>
 
-                <label style={{ ...labelStyle, display: 'flex', alignItems: 'center', gap: 6, cursor: 'pointer' }}>
-                    <input type="checkbox" checked={showWind} onChange={(e) => setShowWind(e.target.checked)} />
-                    Wind overlay
-                </label>
             </div>
 
             <div style={{ flex: 1, minHeight: 0 }}>
@@ -190,7 +185,6 @@ export default function WindOutlookScreen() {
                     launchLon={selectedDevice?.launchLon}
                     pressureHpa={pressureHpa}
                     forecastHours={forecastHours}
-                    showWind={showWind}
                     anchorKey={forecastAnchorKey}
                     telemetryReady={!loading && observedTrack.length > 0}
                     nullschoolUrl={mapUrl}
