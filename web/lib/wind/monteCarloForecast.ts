@@ -289,6 +289,7 @@ export async function computeMonteCarloForecast(input: MonteCarloForecastInput):
             drift_segment: driftSegment,
             reconstructed_path: reconstruction.reconstructed_path,
             gap_bridges: reconstruction.gap_bridges,
+            gap_reach_hulls: reconstruction.gap_reach_hulls,
             reconstruction_gaps: reconstruction.gaps,
         },
         wind_field: {

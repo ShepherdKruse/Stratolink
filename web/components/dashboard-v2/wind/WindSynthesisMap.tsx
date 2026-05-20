@@ -370,8 +370,11 @@ export default function WindSynthesisMap({
     const resumedCoords = segments.resumed.map((p) => [p.lon, p.lat] as [number, number]);
 
     const gapBridges = forecastReady ? (mc?.observed.gap_bridges ?? []) : [];
+    const gapReachHulls = forecastReady ? (mc?.observed.gap_reach_hulls ?? []) : [];
     const reconstructionGaps = forecastReady ? (mc?.observed.reconstruction_gaps ?? []) : [];
     const nontrivialGaps = reconstructionGaps.filter((g) => !g.short);
+    const corridorGaps = nontrivialGaps.filter((g) => g.mode === 'corridor');
+    const nonShortGaps = nontrivialGaps;
 
     const driftCoords = useMemo(() => {
         if (!forecastReady) return [];
@@ -461,11 +464,23 @@ export default function WindSynthesisMap({
             type: 'FeatureCollection' as const,
             features: gapBridges.map((path, i) => ({
                 type: 'Feature' as const,
-                properties: { gap: i },
+                properties: { gap: i, mode: nonShortGaps[i]?.mode ?? 'line' },
                 geometry: { type: 'LineString' as const, coordinates: path },
             })),
         };
-    }, [gapBridges]);
+    }, [gapBridges, nonShortGaps]);
+
+    const gapReachHullsGeoJson = useMemo(() => {
+        if (!gapReachHulls.length) return null;
+        return {
+            type: 'FeatureCollection' as const,
+            features: gapReachHulls.map((ring, i) => ({
+                type: 'Feature' as const,
+                properties: { gap: i },
+                geometry: { type: 'Polygon' as const, coordinates: [ring] },
+            })),
+        };
+    }, [gapReachHulls]);
 
     const freezeLine = useMemo(() => lineGeoJson(driftCoords), [driftCoords]);
     const observedLine = useMemo(() => lineGeoJson(obsCoords), [obsCoords]);
@@ -565,7 +580,11 @@ export default function WindSynthesisMap({
                     {forecastReady && nontrivialGaps.length > 0 && (
                         <div style={{ color: 'rgba(94,196,232,.85)' }}>
                             <b>Reconstructed</b> {nontrivialGaps.length} GPS gap
-                            {nontrivialGaps.length === 1 ? '' : 's'} (particle smoother, historical GFS)
+                            {nontrivialGaps.length === 1 ? '' : 's'}
+                            {corridorGaps.length > 0
+                                ? ` · ${corridorGaps.length} long-gap corridor${corridorGaps.length === 1 ? '' : 's'}`
+                                : ''}{' '}
+                            (hourly GFS + particle smoother)
                         </div>
                     )}
                     {endPoint && forecastReady && !showUpdating && (
@@ -726,6 +745,29 @@ export default function WindSynthesisMap({
                         </Source>
                     )}
 
+                    {gapReachHullsGeoJson && (
+                        <Source id="ws-reach-hulls" type="geojson" data={gapReachHullsGeoJson}>
+                            <Layer
+                                id="ws-reach-hulls-fill"
+                                type="fill"
+                                paint={{
+                                    'fill-color': '#e08a5a',
+                                    'fill-opacity': 0.12,
+                                }}
+                            />
+                            <Layer
+                                id="ws-reach-hulls-outline"
+                                type="line"
+                                paint={{
+                                    'line-color': '#e08a5a',
+                                    'line-width': 2,
+                                    'line-dasharray': [4, 3],
+                                    'line-opacity': 0.75,
+                                }}
+                            />
+                        </Source>
+                    )}
+
                     {gapBridgesGeoJson && (
                         <Source id="ws-reconstructed" type="geojson" data={gapBridgesGeoJson}>
                             <Layer
@@ -733,10 +775,22 @@ export default function WindSynthesisMap({
                                 type="line"
                                 layout={{ 'line-cap': 'round', 'line-join': 'round' }}
                                 paint={{
-                                    'line-color': '#5ec4e8',
+                                    'line-color': [
+                                        'match',
+                                        ['get', 'mode'],
+                                        'corridor',
+                                        '#e08a5a',
+                                        '#5ec4e8',
+                                    ],
                                     'line-width': 2.5,
                                     'line-dasharray': [3, 3],
-                                    'line-opacity': 0.92,
+                                    'line-opacity': [
+                                        'match',
+                                        ['get', 'mode'],
+                                        'corridor',
+                                        0.45,
+                                        0.92,
+                                    ],
                                 }}
                             />
                         </Source>
@@ -991,7 +1045,23 @@ export default function WindSynthesisMap({
                     <div className="wind-synthesis-lg-row">
                         <div style={{ width: 26, borderTop: '2px dashed rgba(94,196,232,.95)' }} />
                         <span style={{ fontSize: 11.5, color: 'rgba(200,212,232,.58)' }}>
-                            Reconstructed path (particle smoother)
+                            Reconstructed path (short gaps)
+                        </span>
+                    </div>
+                )}
+                {gapReachHulls.length > 0 && (
+                    <div className="wind-synthesis-lg-row">
+                        <div
+                            style={{
+                                width: 26,
+                                height: 10,
+                                borderRadius: 2,
+                                background: 'rgba(224,138,90,.2)',
+                                border: '1px dashed rgba(224,138,90,.65)',
+                            }}
+                        />
+                        <span style={{ fontSize: 11.5, color: 'rgba(200,212,232,.58)' }}>
+                            Long-gap reachability corridor
                         </span>
                     </div>
                 )}

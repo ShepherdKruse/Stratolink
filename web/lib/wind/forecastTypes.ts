@@ -67,6 +67,8 @@ export type StratolinkForecast = {
         reconstructed_path?: Array<[number, number]>;
         /** Per-gap bridge segments (non-trivial gaps only). */
         gap_bridges?: Array<Array<[number, number]>>;
+        /** Reachability hulls for under-determined long gaps (corridor mode). */
+        gap_reach_hulls?: Array<Array<[number, number]>>;
         reconstruction_gaps?: Array<{
             from_idx: number;
             to_idx: number;
@@ -76,6 +78,9 @@ export type StratolinkForecast = {
             mid_gap_90_km: number;
             confidence: string;
             short: boolean;
+            mode?: 'line' | 'corridor';
+            n_eff?: number;
+            reach_hull?: Array<[number, number]> | null;
         }>;
     };
     wind_field: {

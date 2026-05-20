@@ -3,10 +3,11 @@
  * Ported from reconstruct.js — bridges each inter-fix segment (pinned at both ends).
  */
 
-import { boundsForForecast, fetchWindGrid, snapPressureHpa } from './fetchWindGrid';
+import { boundsFromPoints, fetchWindGrid, snapPressureHpa } from './fetchWindGrid';
 import type { ForecastGpsFix } from './forecastTypes';
 import { windAt, windFieldToGfsGrid, type GfsGrid } from './gfsGrid';
 import { BALLOON_STEP_HOURS } from './balloonIntegrate';
+import { reconstructLongGap } from './pathReconstructionLongGap';
 
 const CFG = {
     N_PARTICLES: 200,
@@ -21,6 +22,8 @@ const CFG = {
     ELLIPSE_FRACS: [0.25, 0.5, 0.75] as const,
     SHORT_GAP_MIN: 20,
     SHOOT_ITERS: 12,
+    /** Gaps longer than this use hourly winds + bridge proposal (reconstruct_longgap.js). */
+    LONG_GAP_HR: 6,
 };
 
 const R4 = (x: number) => Math.round(x * 1e4) / 1e4;
@@ -38,11 +41,16 @@ export type ReconstructionGap = {
     mid_gap_90_km: number;
     confidence: 'high' | 'medium' | 'low';
     short: boolean;
+    /** `corridor` when the gap is under-determined (reach region, not a precise line). */
+    mode?: 'line' | 'corridor';
+    n_eff?: number;
+    reach_hull?: Array<[number, number]> | null;
 };
 
 export type PathReconstructionResult = {
     reconstructed_path: Array<[number, number]>;
     gap_bridges: Array<Array<[number, number]>>;
+    gap_reach_hulls: Array<Array<[number, number]>>;
     gaps: ReconstructionGap[];
     compute_ms: number;
 };
@@ -356,6 +364,7 @@ export async function computePathReconstruction(opts: {
         return {
             reconstructed_path: fixes.map((f) => [R4(f.lon), R4(f.lat)] as [number, number]),
             gap_bridges: [],
+            gap_reach_hulls: [],
             gaps: [],
             compute_ms: Date.now() - t0,
         };
@@ -365,8 +374,9 @@ export async function computePathReconstruction(opts: {
     const marginPts = fixes.map((p) => ({ lat: p.lat, lon: p.lon }));
     const t0ms = new Date(fixes[0].time_utc).getTime();
     const t1ms = new Date(fixes[fixes.length - 1].time_utc).getTime();
-    const spanH = Math.max(1, (t1ms - t0ms) / 3_600_000);
-    const gridBounds = boundsForForecast(marginPts, fixes, spanH);
+    // Track bbox only — gaps are bridged between fixes; do not pad for full mission drift
+    // (boundsForForecast with mission span creates 1000+ grid points and Open-Meteo 400s).
+    const gridBounds = boundsFromPoints(marginPts, 5);
     const gridStep =
         Math.max(gridBounds.latMax - gridBounds.latMin, gridBounds.lonMax - gridBounds.lonMin) > 22
             ? 3.5
@@ -378,6 +388,7 @@ export async function computePathReconstruction(opts: {
     const allBaro = opts.baroSamples ?? [];
     const gaps: ReconstructionGap[] = [];
     const gapBridges: Array<Array<[number, number]>> = [];
+    const gapReachHulls: Array<Array<[number, number]>> = [];
     const fullPath: Array<[number, number]> = [];
 
     for (let i = 0; i < fixes.length - 1; i++) {
@@ -385,10 +396,38 @@ export async function computePathReconstruction(opts: {
         const B = fixes[i + 1];
         const tA = new Date(A.time_utc).getTime();
         const tB = new Date(B.time_utc).getTime();
+        const gapHours = (tB - tA) / 3_600_000;
         const baro = allBaro.filter((s) => {
             const t = new Date(s.time_utc).getTime();
             return t > tA && t < tB;
         });
+
+        if (gapHours >= CFG.LONG_GAP_HR) {
+            const lg = await reconstructLongGap(A, B, baro, levelHpa);
+            gaps.push({
+                from_idx: i,
+                to_idx: i + 1,
+                dt_hours: lg.dt_hours,
+                measured_altitude: lg.measured_altitude,
+                endpoint_miss_km: lg.endpoint_miss_km,
+                mid_gap_90_km: lg.mid_gap_90_km,
+                confidence: lg.confidence,
+                short: lg.short,
+                mode: lg.mode,
+                n_eff: lg.n_eff,
+                reach_hull: lg.reach_hull,
+            });
+            const seg = [...lg.meanPath];
+            if (i > 0) seg.shift();
+            fullPath.push(...seg);
+            if (!lg.short && lg.meanPath.length >= 2) {
+                gapBridges.push(lg.meanPath);
+            }
+            if (lg.reach_hull && lg.reach_hull.length >= 3) {
+                gapReachHulls.push(lg.reach_hull);
+            }
+            continue;
+        }
 
         const br = bridgeGap(A, B, gfs, baro.length ? baro : null);
 
@@ -401,6 +440,7 @@ export async function computePathReconstruction(opts: {
             mid_gap_90_km: br.mid_gap_90_km,
             confidence: br.confidence,
             short: br.short,
+            mode: 'line',
         });
 
         const seg = [...br.meanPath];
@@ -414,6 +454,7 @@ export async function computePathReconstruction(opts: {
     return {
         reconstructed_path: fullPath,
         gap_bridges: gapBridges,
+        gap_reach_hulls: gapReachHulls,
         gaps,
         compute_ms: Date.now() - t0,
     };

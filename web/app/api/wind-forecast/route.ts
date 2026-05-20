@@ -3,7 +3,7 @@ import { computeMonteCarloForecast } from '@/lib/wind/monteCarloForecast';
 import type { ForecastGpsFix, MonteCarloForecastInput } from '@/lib/wind/forecastTypes';
 
 export const dynamic = 'force-dynamic';
-export const maxDuration = 60;
+export const maxDuration = 120;
 export const runtime = 'nodejs';
 
 type Body = {

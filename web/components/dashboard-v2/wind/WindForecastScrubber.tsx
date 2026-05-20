@@ -15,6 +15,8 @@ export type ReconstructionGapInfo = {
     endpoint_miss_km: number;
     mid_gap_90_km: number;
     confidence: string;
+    mode?: 'line' | 'corridor';
+    n_eff?: number;
 };
 
 type WindForecastScrubberProps = {
@@ -88,11 +90,22 @@ export default function WindForecastScrubber({
                             Recorded GPS (ground truth).{' '}
                             {reconstructionGap && (
                                 <>
-                                    <strong>Cyan dashed line</strong> = reconstructed path through this{' '}
-                                    {reconstructionGap.dt_hours}h GPS gap ({reconstructionGap.confidence}{' '}
-                                    confidence, ±{reconstructionGap.mid_gap_90_km} km mid-gap
-                                    {reconstructionGap.measured_altitude ? ', baro altitude' : ''}). Endpoint
-                                    miss {reconstructionGap.endpoint_miss_km} km.
+                                    {reconstructionGap.mode === 'corridor' ? (
+                                        <>
+                                            <strong>Amber region</strong> = reachability corridor for this{' '}
+                                            {reconstructionGap.dt_hours}h GPS gap (under-determined, n_eff≈
+                                            {reconstructionGap.n_eff ?? '—'}). Mid-gap uncertainty ±
+                                            {reconstructionGap.mid_gap_90_km} km.
+                                        </>
+                                    ) : (
+                                        <>
+                                            <strong>Cyan dashed line</strong> = reconstructed path through this{' '}
+                                            {reconstructionGap.dt_hours}h GPS gap ({reconstructionGap.confidence}{' '}
+                                            confidence, ±{reconstructionGap.mid_gap_90_km} km mid-gap
+                                            {reconstructionGap.measured_altitude ? ', baro altitude' : ''}).
+                                            Endpoint miss {reconstructionGap.endpoint_miss_km} km.
+                                        </>
+                                    )}
                                 </>
                             )}
                         </span>
