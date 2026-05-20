@@ -15,7 +15,6 @@ import type { WindField } from '@/lib/wind/types';
 import WindStreamOverlay from './WindStreamOverlay';
 import { useTickingNow } from '../shared';
 import {
-    extrapolateDriftTail,
     formatGapAge,
     gpsGapHoursFromMs,
     STALE_GAP_REFRESH_MS,
@@ -112,6 +111,10 @@ export default function WindSynthesisMap({
     const skipNextStaleAutoRef = useRef(true);
     /** Ignore out-of-order responses when anchorKey/effects fire overlapping loads. */
     const forecastReqRef = useRef(0);
+    const anchorKeyRef = useRef(anchorKey);
+    anchorKeyRef.current = anchorKey;
+    /** Forecast displayed only when this matches anchorKey (avoids stale/wrong path flash). */
+    const [loadedAnchorKey, setLoadedAnchorKey] = useState<string | null>(null);
     const propsRef = useRef({
         observedTrack,
         startLat,
@@ -160,13 +163,21 @@ export default function WindSynthesisMap({
         if (p.observedTrack.length < 1 || !isValidLngLat(p.startLat, p.startLon)) return;
 
         const reqId = ++forecastReqRef.current;
+        const anchorAtStart = anchorKeyRef.current;
         forecastOriginRef.current = { lat: p.startLat, lon: p.startLon };
-        if (!opts?.staleAuto) setLoading(true);
+        if (!opts?.staleAuto) {
+            setLoading(true);
+            setMc(null);
+            setWindField(null);
+            setLoadedAnchorKey(null);
+        }
         setError(null);
 
         const applyIfCurrent = (forecast: StratolinkForecast) => {
             if (reqId !== forecastReqRef.current) return;
+            if (anchorAtStart !== anchorKeyRef.current) return;
             applyForecast(forecast, p.showWind, setMc, setWindField);
+            setLoadedAnchorKey(anchorAtStart);
         };
 
         try {
@@ -242,14 +253,17 @@ export default function WindSynthesisMap({
 
     const segments = useMemo(() => splitTrackSegments(observedTrack), [observedTrack]);
 
-    const nominalPath = mc?.nominal_path ?? [];
+    const forecastReady = loadedAnchorKey === anchorKey && mc != null;
+    const showUpdating = loading && forecastReady;
+
+    const nominalPath = forecastReady ? (mc?.nominal_path ?? []) : [];
     /** Hours actually in the loaded forecast (path is one point per hour from origin). */
     const effectiveHorizonH =
         mc?.forecast_horizon_h ??
         (nominalPath.length > 1 ? nominalPath.length - 1 : forecastHours);
 
     const ellipses90GeoJson = useMemo(() => {
-        if (!mc || !showEllipses) return null;
+        if (!forecastReady || !mc || !showEllipses) return null;
         return {
             type: 'FeatureCollection' as const,
             features: mc.ellipses.map((e) => ({
@@ -258,10 +272,10 @@ export default function WindSynthesisMap({
                 geometry: { type: 'Polygon' as const, coordinates: [e.e90.polygon] },
             })),
         };
-    }, [mc, showEllipses]);
+    }, [forecastReady, mc, showEllipses]);
 
     const ellipses50GeoJson = useMemo(() => {
-        if (!mc || !showEllipses) return null;
+        if (!forecastReady || !mc || !showEllipses) return null;
         return {
             type: 'FeatureCollection' as const,
             features: mc.ellipses.map((e) => ({
@@ -270,10 +284,10 @@ export default function WindSynthesisMap({
                 geometry: { type: 'Polygon' as const, coordinates: [e.e50.polygon] },
             })),
         };
-    }, [mc, showEllipses]);
+    }, [forecastReady, mc, showEllipses]);
 
     const ensembleGeoJson = useMemo(() => {
-        if (!mc || !showEnsemble) return null;
+        if (!forecastReady || !mc || !showEnsemble) return null;
         return {
             type: 'FeatureCollection' as const,
             features: mc.ensemble.map((traj) => ({
@@ -282,10 +296,10 @@ export default function WindSynthesisMap({
                 geometry: { type: 'LineString' as const, coordinates: traj },
             })),
         };
-    }, [mc, showEnsemble]);
+    }, [forecastReady, mc, showEnsemble]);
 
     const hourLabels = useMemo(() => {
-        if (!nominalPath.length) return { type: 'FeatureCollection' as const, features: [] };
+        if (!forecastReady || !nominalPath.length) return { type: 'FeatureCollection' as const, features: [] };
         const pathHours = nominalPath.length - 1;
         const labelHours = new Set(
             [6, 12, 18, 24].filter((h) => h <= effectiveHorizonH && h <= pathHours),
@@ -303,7 +317,7 @@ export default function WindSynthesisMap({
 
     const firstObs = observedTrack[0];
     const lastObs = observedTrack.length ? observedTrack[observedTrack.length - 1] : null;
-    const endPoint = mc?.endpoint ?? null;
+    const endPoint = forecastReady ? (mc?.endpoint ?? null) : null;
     const e90_at_horizon =
         mc?.ellipses.find((e) => e.t_hours === effectiveHorizonH)?.e90 ??
         mc?.ellipses[mc.ellipses.length - 1]?.e90;
@@ -339,42 +353,28 @@ export default function WindSynthesisMap({
         return haversineKm(lastObs.lat, lastObs.lon, endPoint.lat, endPoint.lon);
     }, [lastObs, endPoint]);
 
-    const obsCoords = useMemo(() => {
-        if (mc?.observed.track?.length) return mc.observed.track;
-        return segments.observed.map((p) => [p.lon, p.lat] as [number, number]);
-    }, [mc, segments.observed]);
+    const obsCoords = useMemo(
+        () => segments.observed.map((p) => [p.lon, p.lat] as [number, number]),
+        [segments.observed],
+    );
 
     const resumedCoords = segments.resumed.map((p) => [p.lon, p.lat] as [number, number]);
 
     const driftCoords = useMemo(() => {
-        let base: Array<[number, number]> = [];
-        if (mc?.observed.drift_segment?.length) base = mc.observed.drift_segment;
-        else if (segments.freezeDrift.length) base = segments.freezeDrift;
-        if (mc?.stale_gps && base.length >= 1 && liveGapH > mc.stale_gps.gap_hours) {
-            return extrapolateDriftTail(
-                base,
-                mc.stale_gps.gap_hours,
-                liveGapH,
-                mc.endpoint?.wind,
-            );
-        }
-        return base;
-    }, [mc, segments.freezeDrift, liveGapH]);
+        if (!forecastReady) return [];
+        if (mc?.observed.drift_segment?.length) return mc.observed.drift_segment;
+        if (segments.freezeDrift.length) return segments.freezeDrift;
+        return [];
+    }, [forecastReady, mc, segments.freezeDrift]);
 
     const impliedNowCoord = useMemo((): [number, number] | null => {
-        if (driftCoords.length < 1) return null;
-        return driftCoords[driftCoords.length - 1];
-    }, [driftCoords]);
+        if (!forecastReady || !mc?.stale_gps) return null;
+        if (nominalPath.length > 0) return nominalPath[0];
+        if (driftCoords.length > 0) return driftCoords[driftCoords.length - 1];
+        return null;
+    }, [forecastReady, mc?.stale_gps, nominalPath, driftCoords]);
 
-    const predCoords = useMemo(() => {
-        if (!nominalPath.length) return [];
-        if (!impliedNowCoord) return nominalPath;
-        const [dlon, dlat] = impliedNowCoord;
-        const [plon, plat] = nominalPath[0];
-        const gapKm = haversineKm(dlat, dlon, plat, plon);
-        if (gapKm < 8) return nominalPath;
-        return [impliedNowCoord, ...nominalPath];
-    }, [nominalPath, impliedNowCoord]);
+    const predCoords = nominalPath;
 
     const freezeLine = useMemo(() => lineGeoJson(driftCoords), [driftCoords]);
     const observedLine = useMemo(() => lineGeoJson(obsCoords), [obsCoords]);
@@ -394,7 +394,22 @@ export default function WindSynthesisMap({
 
     useEffect(() => {
         const map = mapRef.current?.getMap();
-        if (!map || allPoints.length === 0 || didFitRef.current) return;
+        if (!map || didFitRef.current) return;
+        if (!forecastReady) {
+            const obsOnly = observedTrack.filter((p) => isValidLngLat(p.lat, p.lon));
+            if (obsOnly.length === 0) return;
+            const lons = obsOnly.map((p) => p.lon);
+            const lats = obsOnly.map((p) => p.lat);
+            map.fitBounds(
+                [
+                    [Math.min(...lons) - 0.8, Math.min(...lats) - 0.6],
+                    [Math.max(...lons) + 0.8, Math.max(...lats) + 0.5],
+                ],
+                { padding: { top: 70, bottom: 40, left: 280, right: 120 }, duration: 0 },
+            );
+            return;
+        }
+        if (allPoints.length === 0) return;
         const lons = allPoints.map((p) => p.lon);
         const lats = allPoints.map((p) => p.lat);
         map.fitBounds(
@@ -402,10 +417,10 @@ export default function WindSynthesisMap({
                 [Math.min(...lons) - 0.8, Math.min(...lats) - 0.6],
                 [Math.max(...lons) + 0.8, Math.max(...lats) + 0.5],
             ],
-            { padding: { top: 70, bottom: 40, left: 280, right: 120 }, duration: 900 },
+            { padding: { top: 70, bottom: 40, left: 280, right: 120 }, duration: didFitRef.current ? 900 : 0 },
         );
         didFitRef.current = true;
-    }, [allPoints]);
+    }, [allPoints, forecastReady, observedTrack]);
 
     const token = process.env.NEXT_PUBLIC_MAPBOX_TOKEN;
     if (!token) {
@@ -443,7 +458,17 @@ export default function WindSynthesisMap({
                             UTC
                         </div>
                     )}
-                    {endPoint && (
+                    {loading && !forecastReady && (
+                        <div style={{ color: 'rgba(230,208,136,.75)' }}>
+                            <b>Forecast</b> computing…
+                        </div>
+                    )}
+                    {showUpdating && (
+                        <div style={{ color: 'rgba(200,212,232,.45)' }}>
+                            <b>Forecast</b> updating…
+                        </div>
+                    )}
+                    {endPoint && forecastReady && !showUpdating && (
                         <div>
                             <b>Forecast</b>{' '}
                             {mc?.stale_gps ? (
@@ -498,7 +523,7 @@ export default function WindSynthesisMap({
             </div>
 
             <div className="wind-synthesis-alerts">
-            {mc?.stale_gps && (
+            {forecastReady && mc?.stale_gps && (
                 <div className="wind-synthesis-bias-banner wind-synthesis-stale-banner">
                     <div className="wind-synthesis-bias-label">Stale GPS · implied drift to now</div>
                     <div className="wind-synthesis-bias-body">
@@ -516,7 +541,7 @@ export default function WindSynthesisMap({
                 </div>
             )}
 
-            {mc && mc.bias_correction.n_samples > 0 && (
+            {forecastReady && mc && mc.bias_correction.n_samples > 0 && (
                 <div className="wind-synthesis-bias-banner wind-synthesis-calibration-banner">
                     <div className="wind-synthesis-bias-label">Forecast calibrated with in-flight data</div>
                     <div className="wind-synthesis-bias-body">
@@ -534,6 +559,13 @@ export default function WindSynthesisMap({
             </div>
 
             <div className="wind-synthesis-map">
+                {!error && !forecastReady && (
+                    <div className="wind-synthesis-forecast-loading" aria-live="polite">
+                        {!telemetryReady
+                            ? 'Loading flight data…'
+                            : 'Computing Monte Carlo forecast…'}
+                    </div>
+                )}
                 <Map
                     ref={mapRef}
                     mapboxAccessToken={token}
@@ -728,7 +760,7 @@ export default function WindSynthesisMap({
                         </Marker>
                     )}
 
-                    {endPoint && (
+                    {forecastReady && endPoint && (
                         <Marker longitude={endPoint.lon} latitude={endPoint.lat} anchor="center">
                             <div
                                 className="wind-synthesis-waypoint"
@@ -787,7 +819,13 @@ export default function WindSynthesisMap({
                 </div>
                 <div className="wind-synthesis-ip-section">
                     <div className="wind-synthesis-ip-header">GFS +{effectiveHorizonH}h prediction</div>
-                    {endPoint && (
+                    {loading && !forecastReady && (
+                        <div className="wind-synthesis-ip-row">
+                            <span className="wind-synthesis-ip-key">Status</span>
+                            <span className="wind-synthesis-ip-val">Computing…</span>
+                        </div>
+                    )}
+                    {forecastReady && endPoint && (
                         <>
                             <div className="wind-synthesis-ip-row">
                                 <span className="wind-synthesis-ip-key">Predicted position</span>
