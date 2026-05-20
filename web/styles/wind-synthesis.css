@@ -361,6 +361,175 @@
     cursor: pointer;
 }
 
+.wind-synthesis-scrubber {
+    position: absolute;
+    left: 50%;
+    bottom: 18px;
+    transform: translateX(-50%);
+    z-index: 22;
+    width: min(720px, calc(100% - 48px));
+    padding: 12px 14px 10px;
+    border-radius: 10px;
+    background: rgba(8, 13, 23, 0.92);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(10px);
+    pointer-events: auto;
+}
+
+.wind-synthesis-scrubber-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 8px;
+}
+
+.wind-synthesis-scrubber-title {
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: rgba(200, 212, 232, 0.45);
+}
+
+.wind-synthesis-scrubber-now {
+    font-size: 10px;
+    color: var(--sl-ok-mute);
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 5px;
+    padding: 4px 10px;
+    cursor: pointer;
+}
+
+.wind-synthesis-scrubber-now:hover {
+    background: rgba(255, 255, 255, 0.06);
+    color: var(--sl-ok);
+}
+
+.wind-synthesis-scrubber-meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 8px 14px;
+    margin-bottom: 10px;
+    font-size: 11px;
+    line-height: 1.4;
+}
+
+.wind-synthesis-scrubber-seg {
+    font-weight: 600;
+    color: rgba(230, 208, 136, 0.9);
+}
+
+.wind-synthesis-scrubber-time {
+    font-family: var(--sl-mono);
+    color: rgba(200, 212, 232, 0.55);
+}
+
+.wind-synthesis-scrubber-coord {
+    font-family: var(--sl-mono);
+    color: rgba(255, 255, 255, 0.85);
+}
+
+.wind-synthesis-scrubber-hint {
+    flex: 1 1 100%;
+    font-size: 10.5px;
+    color: rgba(200, 212, 232, 0.42);
+}
+
+.wind-synthesis-scrubber-track-wrap {
+    position: relative;
+    height: 36px;
+}
+
+.wind-synthesis-scrubber-zones {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 14px;
+    height: 6px;
+    border-radius: 3px;
+    overflow: hidden;
+    background: rgba(255, 255, 255, 0.06);
+}
+
+.wind-synthesis-scrubber-zone {
+    position: absolute;
+    top: 0;
+    height: 100%;
+}
+
+.wind-synthesis-scrubber-zone.observed {
+    background: rgba(201, 82, 31, 0.45);
+}
+
+.wind-synthesis-scrubber-zone.gap {
+    background: rgba(148, 162, 180, 0.35);
+}
+
+.wind-synthesis-scrubber-zone.forecast {
+    background: rgba(230, 208, 136, 0.35);
+}
+
+.wind-synthesis-scrubber-range {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 8px;
+    width: 100%;
+    margin: 0;
+    height: 20px;
+    opacity: 0;
+    cursor: pointer;
+    z-index: 2;
+}
+
+.wind-synthesis-scrubber-ticks {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 28px;
+    height: 14px;
+}
+
+.wind-synthesis-scrubber-tick {
+    position: absolute;
+    transform: translateX(-50%);
+    font-size: 9px;
+    color: rgba(200, 212, 232, 0.45);
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+.wind-synthesis-scrubber-tick:hover {
+    color: rgba(230, 208, 136, 0.85);
+}
+
+.wind-synthesis-scrub-marker {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    border: 3px solid #fff;
+    box-shadow: 0 0 0 2px rgba(8, 13, 23, 0.9), 0 2px 12px rgba(0, 0, 0, 0.45);
+    background: #e6d088;
+}
+
+.wind-synthesis-scrub-marker--observed {
+    background: #c9521f;
+}
+
+.wind-synthesis-scrub-marker--gap {
+    background: #94a2b4;
+}
+
+.wind-synthesis-scrub-marker--forecast {
+    background: #e6d088;
+}
+
 .wind-synthesis-waypoint {
     border-radius: 50%;
     border: 2.5px solid rgba(255, 255, 255, 0.8);

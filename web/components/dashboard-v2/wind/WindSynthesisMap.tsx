@@ -13,7 +13,12 @@ import type { StratolinkForecast } from '@/lib/wind/forecastTypes';
 import { splitTrackSegments } from '@/lib/wind/trackSegments';
 import type { WindField } from '@/lib/wind/types';
 import WindStreamOverlay from './WindStreamOverlay';
+import WindForecastScrubber from './WindForecastScrubber';
 import { useTickingNow } from '../shared';
+import {
+    buildForecastTimeline,
+    positionAtTimelineMs,
+} from '@/lib/wind/forecastTimeline';
 import {
     formatGapAge,
     gpsGapHoursFromMs,
@@ -158,6 +163,7 @@ export default function WindSynthesisMap({
     const [error, setError] = useState<string | null>(null);
     const [showEnsemble, setShowEnsemble] = useState(true);
     const [showEllipses, setShowEllipses] = useState(true);
+    const [scrubMs, setScrubMs] = useState<number | null>(null);
 
     const nowMs = useTickingNow(30_000);
 
@@ -237,6 +243,7 @@ export default function WindSynthesisMap({
     useEffect(() => {
         if (!telemetryReady) return;
         skipNextStaleAutoRef.current = true;
+        setScrubMs(null);
         loadForecast();
         didFitRef.current = false;
     }, [anchorKey, telemetryReady, loadForecast]);
@@ -374,6 +381,37 @@ export default function WindSynthesisMap({
     }, [forecastReady, mc?.stale_gps, nominalPath, driftCoords]);
 
     const predCoords = nominalPath;
+
+    const timeline = useMemo(() => {
+        if (!forecastReady || !mc || !lastObs) return null;
+        const tNow = new Date(mc.forecast_origin.time_utc).getTime();
+        return buildForecastTimeline(
+            observedTrack,
+            tNow,
+            effectiveHorizonH,
+            lastObs.t,
+            Boolean(mc.stale_gps),
+        );
+    }, [forecastReady, mc, lastObs, observedTrack, effectiveHorizonH]);
+
+    useEffect(() => {
+        if (timeline) setScrubMs(timeline.tNow);
+    }, [timeline]);
+
+    const effectiveScrubMs = scrubMs ?? timeline?.tNow ?? 0;
+
+    const scrubPosition = useMemo(() => {
+        if (!timeline || !forecastReady) return null;
+        return positionAtTimelineMs(
+            effectiveScrubMs,
+            observedTrack,
+            driftCoords,
+            nominalPath,
+            timeline,
+        );
+    }, [timeline, forecastReady, effectiveScrubMs, observedTrack, driftCoords, nominalPath]);
+
+    const scrubAtNow = timeline != null && Math.abs(effectiveScrubMs - timeline.tNow) < 60_000;
 
     const freezeLine = useMemo(() => lineGeoJson(driftCoords), [driftCoords]);
     const observedLine = useMemo(() => lineGeoJson(obsCoords), [obsCoords]);
@@ -737,7 +775,7 @@ export default function WindSynthesisMap({
                         </Marker>
                     )}
 
-                    {mc?.stale_gps && impliedNowCoord && (
+                    {scrubAtNow && mc?.stale_gps && impliedNowCoord && (
                         <Marker
                             longitude={impliedNowCoord[0]}
                             latitude={impliedNowCoord[1]}
@@ -756,12 +794,25 @@ export default function WindSynthesisMap({
                         </Marker>
                     )}
 
-                    {forecastReady && endPoint && (
+                    {scrubAtNow && forecastReady && endPoint && (
                         <Marker longitude={endPoint.lon} latitude={endPoint.lat} anchor="center">
                             <div
                                 className="wind-synthesis-waypoint"
                                 style={{ width: 12, height: 12, background: '#e6d088' }}
                                 title="GFS endpoint"
+                            />
+                        </Marker>
+                    )}
+
+                    {scrubPosition && (
+                        <Marker
+                            longitude={scrubPosition.lon}
+                            latitude={scrubPosition.lat}
+                            anchor="center"
+                        >
+                            <div
+                                className={`wind-synthesis-scrub-marker wind-synthesis-scrub-marker--${scrubPosition.segment}`}
+                                title="Scrubbed position"
                             />
                         </Marker>
                     )}
@@ -932,6 +983,17 @@ export default function WindSynthesisMap({
                         </div>
                     </div>
                 </div>
+            )}
+
+            {forecastReady && timeline && scrubPosition && (
+                <WindForecastScrubber
+                    timeline={timeline}
+                    scrubMs={effectiveScrubMs}
+                    onScrubMs={setScrubMs}
+                    position={scrubPosition}
+                    observedTrack={observedTrack}
+                    forecastHorizonH={effectiveHorizonH}
+                />
             )}
         </div>
     );
