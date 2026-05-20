@@ -164,6 +164,8 @@ export default function WindSynthesisMap({
     const [showEnsemble, setShowEnsemble] = useState(true);
     const [showEllipses, setShowEllipses] = useState(true);
     const [scrubMs, setScrubMs] = useState<number | null>(null);
+    /** User moved the slider — do not snap back to "now" when forecast/timeline refreshes. */
+    const userPinnedScrubRef = useRef(false);
     const [hindcast, setHindcast] = useState<{
         path: Array<[number, number]>;
         info: HindcastScrubInfo;
@@ -247,6 +249,7 @@ export default function WindSynthesisMap({
     useEffect(() => {
         if (!telemetryReady) return;
         skipNextStaleAutoRef.current = true;
+        userPinnedScrubRef.current = false;
         setScrubMs(null);
         loadForecast();
         didFitRef.current = false;
@@ -398,9 +401,29 @@ export default function WindSynthesisMap({
         );
     }, [forecastReady, mc, lastObs, observedTrack, effectiveHorizonH]);
 
+    const hadTimelineRef = useRef(false);
     useEffect(() => {
-        if (timeline) setScrubMs(timeline.tNow);
+        if (!timeline) {
+            hadTimelineRef.current = false;
+            return;
+        }
+        if (!hadTimelineRef.current) {
+            hadTimelineRef.current = true;
+            if (!userPinnedScrubRef.current) {
+                setScrubMs(timeline.tNow);
+            }
+        }
     }, [timeline]);
+
+    const handleScrubMs = useCallback(
+        (t: number) => {
+            const tNow = timeline?.tNow;
+            userPinnedScrubRef.current =
+                tNow == null || Math.abs(t - tNow) >= 60_000;
+            setScrubMs(t);
+        },
+        [timeline?.tNow],
+    );
 
     const effectiveScrubMs = scrubMs ?? timeline?.tNow ?? 0;
 
@@ -1099,7 +1122,7 @@ export default function WindSynthesisMap({
                 <WindForecastScrubber
                     timeline={timeline}
                     scrubMs={effectiveScrubMs}
-                    onScrubMs={setScrubMs}
+                    onScrubMs={handleScrubMs}
                     position={scrubPosition}
                     observedTrack={observedTrack}
                     forecastHorizonH={effectiveHorizonH}

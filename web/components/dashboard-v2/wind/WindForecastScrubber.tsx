@@ -1,6 +1,6 @@
 'use client';
 
-import { useMemo } from 'react';
+import { useMemo, type CSSProperties } from 'react';
 import {
     formatTimelineRelLabel,
     formatTimelineUtc,
@@ -42,6 +42,8 @@ export default function WindForecastScrubber({
     hindcast,
 }: WindForecastScrubberProps) {
     const { tMin, tMax, tLastFix, tNow } = timeline;
+    const scrubPct =
+        tMax > tMin ? Math.max(0, Math.min(100, ((scrubMs - tMin) / (tMax - tMin)) * 100)) : 0;
 
     const ticks = useMemo(() => {
         const items: Array<{ t: number; label: string }> = [
@@ -113,7 +115,11 @@ export default function WindForecastScrubber({
                 </div>
             )}
 
-            <div className="wind-synthesis-scrubber-track-wrap">
+            <p className="wind-synthesis-scrubber-drag-hint">Drag the handle along the timeline</p>
+            <div
+                className="wind-synthesis-scrubber-track-wrap"
+                style={{ '--scrub-pct': `${scrubPct}%` } as CSSProperties}
+            >
                 <div className="wind-synthesis-scrubber-zones">
                     <div
                         className="wind-synthesis-scrubber-zone observed"
@@ -142,6 +148,7 @@ export default function WindForecastScrubber({
                         title="Forward forecast"
                     />
                 </div>
+                <div className="wind-synthesis-scrubber-playhead" aria-hidden />
                 <input
                     type="range"
                     className="wind-synthesis-scrubber-range"
@@ -150,7 +157,8 @@ export default function WindForecastScrubber({
                     step={60_000}
                     value={scrubMs}
                     onChange={(e) => onScrubMs(Number(e.target.value))}
-                    aria-label="Scrub time along flight and forecast"
+                    aria-label="Drag to move balloon along observed track and forecast"
+                    aria-valuetext={`${formatTimelineUtc(scrubMs)} UTC`}
                 />
                 <div className="wind-synthesis-scrubber-ticks">
                     {ticks.map((tick) => (
