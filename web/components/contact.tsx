@@ -1,6 +1,7 @@
 "use client"
 
 import type React from "react"
+import Link from "next/link"
 import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -43,6 +44,11 @@ export function Contact() {
           <h2 className="text-3xl font-light tracking-tight text-foreground sm:text-4xl">Contact</h2>
           <p className="mt-6 text-base leading-relaxed text-muted-foreground">
             Interested in collaborating, deploying sensors, or accessing atmospheric data? Get in touch with our team.
+            Educators can also read our{' '}
+            <Link href="/classrooms" className="text-foreground underline underline-offset-4 hover:text-foreground/80">
+              classroom STEM proposal
+            </Link>{' '}
+            before reaching out.
           </p>
         </div>
 

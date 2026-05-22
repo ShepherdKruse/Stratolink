@@ -55,6 +55,12 @@ export function Navigation() {
               Learn
             </Link>
             <Link
+              href="/classrooms"
+              className="text-sm font-light text-muted-foreground transition-colors hover:text-foreground"
+            >
+              For teachers
+            </Link>
+            <Link
               href="/docs"
               className="text-sm font-light text-muted-foreground transition-colors hover:text-foreground"
             >
@@ -159,6 +165,15 @@ export function Navigation() {
                   className="block rounded-sm px-3 py-2.5 text-base font-light text-muted-foreground transition-colors hover:bg-accent/50 hover:text-foreground"
                 >
                   Learn
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/classrooms"
+                  onClick={close}
+                  className="block rounded-sm px-3 py-2.5 text-base font-light text-muted-foreground transition-colors hover:bg-accent/50 hover:text-foreground"
+                >
+                  For teachers
                 </Link>
               </li>
               <li>

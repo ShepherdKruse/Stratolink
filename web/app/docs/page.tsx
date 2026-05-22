@@ -10,7 +10,7 @@ type DocCard = {
     icon: ReactNode;
 };
 
-const featured: DocCard = {
+const featuredLearn: DocCard = {
     title: 'Pico Balloons',
     description:
         'Illustrated guide — what a pico balloon is, how it flies, and how Stratolink tracks it live.',
@@ -26,6 +26,53 @@ const featured: DocCard = {
         </svg>
     ),
 };
+
+const featuredClassrooms: DocCard = {
+    title: 'For the Classroom',
+    description:
+        'STEM proposal for teachers — what students do, curriculum ties, safety, and the classroom mission kit.',
+    href: '/classrooms',
+    icon: (
+        <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden>
+            <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M12 14l9-5-9-5-9 5 9 5zm0 0v6m-6-3l6 3 6-3"
+            />
+        </svg>
+    ),
+};
+
+function FeaturedDocCard({ card, label }: { card: DocCard; label: string }) {
+    return (
+        <Link
+            href={card.href}
+            className="group flex min-w-0 flex-col gap-6 rounded-sm border border-border bg-card p-6 shadow-sm transition-all duration-300 hover:border-foreground/20 hover:shadow-md sm:flex-row sm:items-center sm:gap-10 sm:p-8"
+        >
+            <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-sm bg-accent text-foreground">
+                {card.icon}
+            </div>
+            <div className="min-w-0 flex-1">
+                <p className="text-xs font-medium uppercase tracking-wider text-muted-foreground">{label}</p>
+                <p className="mt-2 text-2xl font-light tracking-tight text-foreground sm:text-3xl">{card.title}</p>
+                <p className="mt-2 text-sm leading-relaxed text-muted-foreground sm:text-base">{card.description}</p>
+            </div>
+            <span className="inline-flex shrink-0 items-center text-sm font-medium text-foreground/60 group-hover:text-foreground">
+                Read more
+                <svg
+                    className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    aria-hidden
+                >
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                </svg>
+            </span>
+        </Link>
+    );
+}
 
 const guideCards: DocCard[] = [
     {
@@ -165,37 +212,10 @@ export default function DocsPage() {
                 </div>
 
                 <div className="mx-auto max-w-6xl space-y-14 px-6 py-14 sm:px-8 sm:py-20">
-                    <Link
-                        href={featured.href}
-                        className="group flex min-w-0 flex-col gap-6 rounded-sm border border-border bg-card p-6 shadow-sm transition-all duration-300 hover:border-foreground/20 hover:shadow-md sm:flex-row sm:items-center sm:gap-10 sm:p-8"
-                    >
-                        <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-sm bg-accent text-foreground">
-                            {featured.icon}
-                        </div>
-                        <div className="min-w-0 flex-1">
-                            <p className="text-xs font-medium uppercase tracking-wider text-muted-foreground">
-                                Start here
-                            </p>
-                            <p className="mt-2 text-2xl font-light tracking-tight text-foreground sm:text-3xl">
-                                {featured.title}
-                            </p>
-                            <p className="mt-2 max-w-2xl text-sm leading-relaxed text-muted-foreground sm:text-base">
-                                {featured.description}
-                            </p>
-                        </div>
-                        <span className="inline-flex shrink-0 items-center text-sm font-medium text-foreground/60 group-hover:text-foreground">
-                            Read the guide
-                            <svg
-                                className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1"
-                                fill="none"
-                                stroke="currentColor"
-                                viewBox="0 0 24 24"
-                                aria-hidden
-                            >
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                            </svg>
-                        </span>
-                    </Link>
+                    <div className="grid gap-5 lg:grid-cols-2">
+                        <FeaturedDocCard card={featuredLearn} label="Start here" />
+                        <FeaturedDocCard card={featuredClassrooms} label="For educators" />
+                    </div>
 
                     <DocSection title="Guides">
                         {guideCards.map((card) => (
