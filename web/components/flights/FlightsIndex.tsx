@@ -48,7 +48,8 @@ export default function FlightsIndex({ flights }: FlightsIndexProps) {
                                     <p className="mt-3 text-sm text-muted-foreground">
                                         Launched {flight.launchedAtUtc} · Peak{' '}
                                         {flight.kpis.peakAltitudeM.toLocaleString()} m · ~
-                                        {flight.kpis.groundCoverageKm} km track
+                                        {flight.kpis.groundCoverageKm.toLocaleString()} km ·{' '}
+                                        {flight.kpis.floatDuration} hrs tracked
                                     </p>
                                 </div>
                                 <span className="inline-flex items-center gap-1 text-sm font-medium text-[#c9521f] shrink-0">

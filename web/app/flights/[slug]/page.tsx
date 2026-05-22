@@ -1,8 +1,7 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { getFlightReport, getFlightReportSlugs } from '@/lib/flights/registry';
-import { getFlightTelemetry } from '@/lib/flights/getFlightData';
-import FlightReportClient from '@/components/flights/FlightReportClient';
+import { FlightReportDocument } from '@/components/flights/FlightReportDocument';
 
 type PageProps = {
     params: Promise<{ slug: string }>;
@@ -31,11 +30,10 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 export default async function FlightReportPage({ params }: PageProps) {
     const { slug } = await params;
     const report = getFlightReport(slug);
-    const telemetry = getFlightTelemetry(slug);
 
-    if (!report || !telemetry) {
+    if (!report) {
         notFound();
     }
 
-    return <FlightReportClient report={report} telemetry={telemetry} />;
+    return <FlightReportDocument report={report} />;
 }

@@ -1,0 +1,167 @@
+    <div class="masthead">
+      <div class="eyebrow">Stratolink &middot; Pico Balloon Flight Report</div>
+      <h1 class="title">The Baja Run</h1>
+      <div class="subtitle">San Francisco Bay to Baja, dark for a day and a half, then back north to New Mexico</div>
+      <div class="metaline">
+        <span>Device stratolink-3</span><span class="sep">&middot;</span>
+        <span>Launched 17 May 2026, 15:55 UTC</span><span class="sep">&middot;</span>
+        <span>37.728&deg;N, 122.426&deg;W</span><span class="sep">&middot;</span>
+        <span>Satellite IoT over LoRa</span><span class="sep">&middot;</span>
+        <span>103 GPS fixes</span>
+      </div>
+    </div>
+
+    <div class="stats">
+      <div class="stat"><div class="stat-num">9,814<span class="u">m</span></div><div class="stat-label">Peak altitude</div><div class="stat-sub">32,198 ft, GPS confirmed</div></div>
+      <div class="stat"><div class="stat-num">&minus;38.2<span class="u">&deg;C</span></div><div class="stat-label">Min temperature</div><div class="stat-sub">During the overnight blackout</div></div>
+      <div class="stat"><div class="stat-num">~2,000<span class="u">km</span></div><div class="stat-label">Distance flown</div><div class="stat-sub">Across the confirmed track</div></div>
+      <div class="stat"><div class="stat-num">54.6<span class="u">hrs</span></div><div class="stat-label">Tracked aloft</div><div class="stat-sub">Launch to final fix</div></div>
+    </div>
+
+    <section>
+      <p style="font-size:18px">This was the longest and strangest flight stratolink-3 has flown. It launched from the San Francisco Bay, floated south down the coast and across into Baja, then went completely silent for about thirty six hours. It came back the next afternoon deep inside Sonora, Mexico, kept flying, and put down its last fix near Albuquerque, New Mexico, more than two days after launch. This report walks through what happened, what the data shows about why the tracker went quiet, and what I am changing for the next launch.</p>
+    </section>
+
+    <div class="kicker">Part I &middot; The Journey</div>
+
+    <section>
+      <h2>The flight, start to finish</h2>
+      <p>The balloon climbed cleanly to its float altitude of around 9,500 m and settled into a steady drift. The early track ran south along the California coast, past Los Angeles, and down to the border near Tijuana. Then the trail went cold.</p>
+      <div class="dataline">
+        <span class="o">15:55 UTC, May 17</span> &middot; launch &middot; 37.73&deg;N 122.43&deg;W &middot; 734 m<br/>
+        <span class="o">18:20 UTC, May 17</span> &middot; GPS freeze begins &middot; 6,924 m<br/>
+        <span class="o">02:23 UTC, May 18</span> &middot; last fix before blackout &middot; near Tijuana, 32.01&deg;N 117.72&deg;W<br/>
+        <span class="g">[ about 35 hours of silence ]</span><br/>
+        <span class="o">13:58 UTC, May 19</span> &middot; reappears &middot; deep in Sonora, 31.00&deg;N 111.71&deg;W<br/>
+        <span class="o">22:28 UTC, May 19</span> &middot; final fix &middot; near Albuquerque, 34.78&deg;N 106.13&deg;W &middot; 9,814 m
+      </div>
+
+      <figure>
+        <div class="fig-frame"><svg viewBox="0 0 760 340" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Altitude profile of the flight with atmospheric gradient">
+<defs>
+  <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0%" stop-color="#c2d6ea"/><stop offset="0%" stop-color="#c2d6ea"/>
+    <stop offset="45%" stop-color="#dce7f2"/><stop offset="100%" stop-color="#fbf4ec"/>
+  </linearGradient>
+  <linearGradient id="altfill" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0%" stop-color="#c0531f" stop-opacity="0.18"/>
+    <stop offset="100%" stop-color="#c0531f" stop-opacity="0.02"/>
+  </linearGradient>
+</defs>
+<rect x="52" y="16" width="692" height="290" fill="url(#sky)"/>
+<line x1="52" y1="306.0" x2="744" y2="306.0" stroke="#dfe2e7" stroke-width="1"/><text x="44" y="309.0" text-anchor="end" font-family="IBM Plex Mono,monospace" font-size="9" fill="#97a0ac">0 km</text><line x1="52" y1="226.9" x2="744" y2="226.9" stroke="#dfe2e7" stroke-width="1"/><text x="44" y="229.9" text-anchor="end" font-family="IBM Plex Mono,monospace" font-size="9" fill="#97a0ac">3 km</text><line x1="52" y1="147.8" x2="744" y2="147.8" stroke="#dfe2e7" stroke-width="1"/><text x="44" y="150.8" text-anchor="end" font-family="IBM Plex Mono,monospace" font-size="9" fill="#97a0ac">6 km</text><line x1="52" y1="68.7" x2="744" y2="68.7" stroke="#dfe2e7" stroke-width="1"/><text x="44" y="71.7" text-anchor="end" font-family="IBM Plex Mono,monospace" font-size="9" fill="#97a0ac">9 km</text><line x1="52.0" y1="16" x2="52.0" y2="306" stroke="#eef0f3" stroke-width="1"/><text x="52.0" y="322" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="9" fill="#97a0ac">T+0h</text><line x1="201.2" y1="16" x2="201.2" y2="306" stroke="#eef0f3" stroke-width="1"/><text x="201.2" y="322" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="9" fill="#97a0ac">T+12h</text><line x1="350.3" y1="16" x2="350.3" y2="306" stroke="#eef0f3" stroke-width="1"/><text x="350.3" y="322" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="9" fill="#97a0ac">T+24h</text><line x1="499.5" y1="16" x2="499.5" y2="306" stroke="#eef0f3" stroke-width="1"/><text x="499.5" y="322" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="9" fill="#97a0ac">T+36h</text><line x1="648.7" y1="16" x2="648.7" y2="306" stroke="#eef0f3" stroke-width="1"/><text x="648.7" y="322" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="9" fill="#97a0ac">T+48h</text>
+<rect x="82.0" y="16" width="55.2" height="290" fill="#c0531f" opacity="0.06"/>
+<rect x="182.1" y="16" width="442.3" height="290" fill="#2b3440" opacity="0.07"/>
+<text x="403.3" y="161.0" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="11" fill="#6b7480">35 h dark</text>
+<path d="M52.0,286.3 L53.1,267.2 L53.8,274.2 L54.9,269.6 L58.0,255.3 L62.2,232.9 L63.2,212.7 L64.3,221.7 L65.3,216.0 L66.4,208.9 L67.4,203.7 L68.5,198.4 L69.5,193.0 L69.8,191.5 L70.8,185.2 L71.9,178.8 L72.9,171.7 L74.0,164.4 L75.0,156.2 L76.1,149.5 L76.6,144.8 L77.6,143.5 L78.7,137.1 L79.8,133.3 L80.9,128.0 L82.0,120.9 L83.0,114.9 L84.1,109.4 L85.1,102.6 L86.2,93.6 L87.3,86.4 L88.3,78.6 L89.4,71.7 L90.5,66.1 L91.5,63.4 L92.6,61.5 L93.7,59.7 L94.7,56.1 L95.8,55.8 L96.9,55.9 L97.9,55.7 L99.0,55.5 L100.0,54.3 L101.1,55.1 L102.2,55.9 L103.3,55.5 L104.3,55.8 L105.4,55.7 L106.4,55.9 L107.5,55.6 L108.6,55.4 L109.6,55.2 L110.7,55.2 L111.8,55.6 L112.9,55.4 L113.9,55.8 L115.0,56.2 L116.0,55.5 L117.1,56.7 L118.2,56.5 L119.2,56.3 L120.3,56.3 L121.4,55.7 L122.4,55.4 L123.1,57.1 L124.2,59.3 L125.3,56.9 L125.7,55.2 L126.6,57.4 L127.6,58.7 L128.7,57.0 L129.8,57.0 L130.8,57.2 L131.9,57.7 L132.9,56.3 L134.0,56.5 L135.1,56.8 L136.1,34.5 L137.2,57.1 L139.3,56.2 L144.6,56.3 L147.8,56.9 L154.2,56.9 L158.4,59.5 L159.5,58.3 L161.6,59.0 L162.7,59.4 L164.8,57.5 L165.9,58.3 L166.9,59.0 L168.0,59.7 L169.1,59.6 L170.2,58.5 L171.2,58.9 L172.3,58.1 L173.4,36.5 L174.6,57.4 L175.7,59.1 L176.9,47.0 L177.9,58.1 L179.0,58.3 L180.0,55.9 L181.1,58.8 L182.2,59.3 L183.2,55.0 L186.3,57.0 L189.4,56.4 L624.4,58.5 L626.5,59.3 L652.8,56.7 L730.2,56.6 L732.4,67.7 L733.5,56.5 L734.7,57.4 L735.8,51.4 L737.0,35.1 L738.1,55.7 L739.3,55.9 L740.4,53.4 L740.6,53.1 L741.8,58.7 L742.9,60.7 L742.9,306.0 L52.0,306.0 Z" fill="url(#altfill)" stroke="none"/>
+<path d="M52.0,286.3 L53.1,267.2 L53.8,274.2 L54.9,269.6 L58.0,255.3 L62.2,232.9 L63.2,212.7 L64.3,221.7 L65.3,216.0 L66.4,208.9 L67.4,203.7 L68.5,198.4 L69.5,193.0 L69.8,191.5 L70.8,185.2 L71.9,178.8 L72.9,171.7 L74.0,164.4 L75.0,156.2 L76.1,149.5 L76.6,144.8 L77.6,143.5 L78.7,137.1 L79.8,133.3 L80.9,128.0 L82.0,120.9 L83.0,114.9 L84.1,109.4 L85.1,102.6 L86.2,93.6 L87.3,86.4 L88.3,78.6 L89.4,71.7 L90.5,66.1 L91.5,63.4 L92.6,61.5 L93.7,59.7 L94.7,56.1 L95.8,55.8 L96.9,55.9 L97.9,55.7 L99.0,55.5 L100.0,54.3 L101.1,55.1 L102.2,55.9 L103.3,55.5 L104.3,55.8 L105.4,55.7 L106.4,55.9 L107.5,55.6 L108.6,55.4 L109.6,55.2 L110.7,55.2 L111.8,55.6 L112.9,55.4 L113.9,55.8 L115.0,56.2 L116.0,55.5 L117.1,56.7 L118.2,56.5 L119.2,56.3 L120.3,56.3 L121.4,55.7 L122.4,55.4 L123.1,57.1 L124.2,59.3 L125.3,56.9 L125.7,55.2 L126.6,57.4 L127.6,58.7 L128.7,57.0 L129.8,57.0 L130.8,57.2 L131.9,57.7 L132.9,56.3 L134.0,56.5 L135.1,56.8 L136.1,34.5 L137.2,57.1 L139.3,56.2 L144.6,56.3 L147.8,56.9 L154.2,56.9 L158.4,59.5 L159.5,58.3 L161.6,59.0 L162.7,59.4 L164.8,57.5 L165.9,58.3 L166.9,59.0 L168.0,59.7 L169.1,59.6 L170.2,58.5 L171.2,58.9 L172.3,58.1 L173.4,36.5 L174.6,57.4 L175.7,59.1 L176.9,47.0 L177.9,58.1 L179.0,58.3 L180.0,55.9 L181.1,58.8 L182.2,59.3 L183.2,55.0 L186.3,57.0 L189.4,56.4 L624.4,58.5 L626.5,59.3 L652.8,56.7 L730.2,56.6 L732.4,67.7 L733.5,56.5 L734.7,57.4 L735.8,51.4 L737.0,35.1 L738.1,55.7 L739.3,55.9 L740.4,53.4 L740.6,53.1 L741.8,58.7 L742.9,60.7" fill="none" stroke="#c0531f" stroke-width="1.4" stroke-dasharray="4 3" opacity="0.85"/>
+<path d="M52.0,286.6 L53.1,279.3 L53.8,274.3 L54.9,270.0 L58.0,255.5 L62.2,232.5 L63.2,227.5 L64.3,221.1 L65.3,214.9 L66.4,208.0 L67.4,202.3 L68.5,196.6 L69.5,191.3 L69.8,189.4 L70.8,182.9 L71.9,176.2 L72.9,168.9 L74.0,161.5 L75.0,152.9 L76.1,147.6 L76.6,145.3 L77.6,139.5 L78.7,133.3 L80.9,129.4 L139.3,49.1 L144.6,49.1 L147.8,49.1 L154.2,49.1 L158.4,52.4 L159.5,52.4 L161.6,52.4 L162.7,52.4 L164.8,52.4 L165.9,52.4 L166.9,52.4 L168.0,52.4 L169.1,52.4 L170.2,52.4 L171.2,52.4 L172.3,52.4 L174.6,51.6 L177.9,50.7 L179.0,50.7 L180.0,50.7 L181.1,50.7 L182.2,50.7 L624.4,49.3 L626.5,49.3 L730.2,47.3" fill="none" stroke="#c0531f" stroke-width="2.4"/>
+<line x1="82.0" y1="16" x2="82.0" y2="306" stroke="#9a6a16" stroke-width="1" stroke-dasharray="3 3" opacity="0.55"/><text x="86.0" y="27" font-family="IBM Plex Sans,sans-serif" font-size="9.5" fill="#9a6a16">GPS freeze</text>
+<line x1="182.1" y1="16" x2="182.1" y2="306" stroke="#2b3440" stroke-width="1" stroke-dasharray="3 3" opacity="0.55"/><text x="186.1" y="40" font-family="IBM Plex Sans,sans-serif" font-size="9.5" fill="#2b3440">goes dark</text>
+<line x1="624.5" y1="16" x2="624.5" y2="306" stroke="#0f766e" stroke-width="1" stroke-dasharray="3 3" opacity="0.55"/><text x="628.5" y="27" font-family="IBM Plex Sans,sans-serif" font-size="9.5" fill="#0f766e">reappears</text>
+<line x1="730.1" y1="16" x2="730.1" y2="306" stroke="#2456c4" stroke-width="1" stroke-dasharray="3 3" opacity="0.55"/><text x="734.1" y="40" font-family="IBM Plex Sans,sans-serif" font-size="9.5" fill="#2456c4">final fix</text>
+</svg></div>
+        <figcaption>Altitude through the flight. The solid line is GPS-confirmed altitude; the dashed line is altitude derived from the onboard pressure sensor, which kept reporting through the GPS freeze. The shaded band marks the 35 hour blackout, spanned here by interpolation. Vertical axis is altitude, horizontal axis is hours since launch.</figcaption>
+      </figure>
+      <p>When it came back, it had moved about 580 km east in net terms across that silent stretch, then turned and ran fast to the northeast over the following hours. The full confirmed track covers roughly 2,000 km, even though the straight line from launch to last fix is only about 1,500 km, which tells you the path was anything but straight.</p>
+    </section>
+
+      <figure>
+        <div class="fig-frame"><svg viewBox="0 0 760 250" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Temperature over the flight">
+<defs><linearGradient id="tg" x1="0" y1="0" x2="0" y2="1">
+<stop offset="0%" stop-color="#c0531f" stop-opacity="0.5"/><stop offset="55%" stop-color="#9aa7bd" stop-opacity="0.4"/>
+<stop offset="100%" stop-color="#2456c4" stop-opacity="0.55"/></linearGradient></defs>
+<line x1="52" y1="16.0" x2="744" y2="16.0" stroke="#eef0f3" stroke-width="1"/><text x="44" y="19.0" text-anchor="end" font-family="IBM Plex Mono,monospace" font-size="9" fill="#97a0ac">30&#176;</text><line x1="52" y1="56.0" x2="744" y2="56.0" stroke="#eef0f3" stroke-width="1"/><text x="44" y="59.0" text-anchor="end" font-family="IBM Plex Mono,monospace" font-size="9" fill="#97a0ac">15&#176;</text><line x1="52" y1="96.0" x2="744" y2="96.0" stroke="#cbd2db" stroke-width="1"/><text x="44" y="99.0" text-anchor="end" font-family="IBM Plex Mono,monospace" font-size="9" fill="#97a0ac">0&#176;</text><line x1="52" y1="136.0" x2="744" y2="136.0" stroke="#eef0f3" stroke-width="1"/><text x="44" y="139.0" text-anchor="end" font-family="IBM Plex Mono,monospace" font-size="9" fill="#97a0ac">-15&#176;</text><line x1="52" y1="176.0" x2="744" y2="176.0" stroke="#eef0f3" stroke-width="1"/><text x="44" y="179.0" text-anchor="end" font-family="IBM Plex Mono,monospace" font-size="9" fill="#97a0ac">-30&#176;</text><line x1="52" y1="216.0" x2="744" y2="216.0" stroke="#eef0f3" stroke-width="1"/><text x="44" y="219.0" text-anchor="end" font-family="IBM Plex Mono,monospace" font-size="9" fill="#97a0ac">-45&#176;</text><line x1="52.0" y1="16" x2="52.0" y2="216" stroke="#eef0f3" stroke-width="1"/><text x="52.0" y="232" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="9" fill="#97a0ac">T+0h</text><line x1="201.2" y1="16" x2="201.2" y2="216" stroke="#eef0f3" stroke-width="1"/><text x="201.2" y="232" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="9" fill="#97a0ac">T+12h</text><line x1="350.3" y1="16" x2="350.3" y2="216" stroke="#eef0f3" stroke-width="1"/><text x="350.3" y="232" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="9" fill="#97a0ac">T+24h</text><line x1="499.5" y1="16" x2="499.5" y2="216" stroke="#eef0f3" stroke-width="1"/><text x="499.5" y="232" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="9" fill="#97a0ac">T+36h</text><line x1="648.7" y1="16" x2="648.7" y2="216" stroke="#eef0f3" stroke-width="1"/><text x="648.7" y="232" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="9" fill="#97a0ac">T+48h</text>
+<rect x="182.1" y="16" width="442.3" height="200" fill="#2b3440" opacity="0.06"/>
+<path d="M52.0,34.4 L53.1,44.8 L53.8,34.4 L54.9,37.6 L58.0,48.8 L62.2,46.4 L63.2,56.8 L64.3,58.1 L65.3,57.9 L66.4,61.6 L67.4,61.3 L68.5,65.1 L69.5,67.5 L69.8,68.8 L70.8,73.6 L71.9,74.7 L72.9,76.8 L74.0,80.8 L75.0,89.1 L76.1,89.3 L76.6,92.3 L77.6,92.0 L78.7,97.3 L79.8,96.5 L80.9,98.7 L82.0,104.5 L83.0,109.3 L84.1,109.6 L85.1,126.7 L86.2,132.5 L87.3,138.4 L88.3,143.7 L89.4,153.1 L90.5,151.2 L91.5,124.3 L92.6,148.3 L93.7,138.1 L94.7,154.9 L95.8,149.9 L96.9,147.2 L97.9,141.9 L99.0,146.7 L100.0,158.4 L101.1,159.2 L102.2,145.1 L103.3,146.4 L104.3,144.0 L105.4,146.4 L106.4,147.5 L107.5,149.6 L108.6,161.1 L109.6,155.2 L110.7,157.1 L111.8,146.1 L112.9,146.1 L113.9,145.6 L115.0,131.2 L116.0,123.5 L117.1,112.0 L118.2,115.7 L119.2,125.1 L120.3,122.1 L121.4,141.3 L122.4,118.9 L123.1,105.6 L124.2,111.2 L125.3,134.4 L125.7,124.3 L126.6,97.6 L127.6,103.5 L128.7,101.6 L129.8,130.7 L130.8,127.2 L131.9,114.4 L132.9,123.5 L134.0,95.5 L135.1,89.1 L136.1,120.8 L137.2,118.9 L139.3,118.7 L144.6,128.5 L147.8,121.9 L154.2,79.2 L158.4,106.9 L159.5,101.6 L161.6,66.4 L162.7,64.0 L164.8,87.2 L165.9,101.9 L166.9,65.6 L168.0,118.4 L169.1,116.5 L170.2,73.6 L171.2,55.2 L172.3,89.3 L173.4,95.5 L174.6,92.5 L175.7,106.1 L176.9,128.5 L177.9,93.9 L179.0,150.4 L180.0,126.4 L181.1,110.4 L182.2,126.7 L183.2,165.1 L186.3,180.8 L189.4,197.9 L624.4,126.9 L626.5,96.0 L652.8,112.3 L730.2,90.7 L732.4,134.4 L733.5,131.5 L734.7,104.3 L735.8,119.2 L737.0,123.2 L738.1,133.1 L739.3,111.5 L740.4,133.1 L740.6,119.5 L741.8,98.1 L742.9,136.3" fill="none" stroke="url(#tg)" stroke-width="2.2"/>
+<circle cx="189.4" cy="197.9" r="3.5" fill="#2456c4"/>
+<text x="196.4" y="200.9" font-family="IBM Plex Mono,monospace" font-size="10" fill="#2456c4">-38.2&#176;C</text>
+</svg></div>
+        <figcaption>Temperature through the flight, warm at launch and falling to &minus;38.2&deg;C as the balloon reached altitude and the sun set. The supercapacitor handled this cold without trouble; a battery would not have. The shaded band is the blackout, spanned by interpolation.</figcaption>
+      </figure>
+
+    <div class="kicker">Part II &middot; What Went Wrong, and Why</div>
+
+    <section>
+      <h2>Two different failures, often confused</h2>
+      <p>It is tempting to lump the quiet stretches together as the tracker not working. The data shows they were two distinct problems with two different causes, and separating them is the whole key to fixing them.</p>
+
+      <h3>Problem one: the frozen GPS fix</h3>
+      <p>Early in the climb, around 18:20 UTC, the reported satellite count jumped to <span class="mono">32</span> and the altitude locked at exactly <span class="mono">6,924 m</span>. It then reported that same altitude across fifty four consecutive readings without changing by a single metre.</p>
+      <p>A real GPS receiver does not see thirty two satellites from one constellation, and a balloon climbing through the atmosphere does not hold the exact same altitude for an hour. Both are signatures of a <strong>stale fix</strong>, where the receiver lost its lock but kept reporting the last good position instead of reporting that it had no fix. The value <span class="mono">32</span> was almost certainly a sentinel or overflow, not a true count. The receiver was not lost in the sense of having no data. It was lying quietly, repeating an old answer.</p>
+      <div class="callout find">
+        <div class="co-label">What the data showed</div>
+        <p>Fifty four readings, one altitude, an impossible satellite count. The position was frozen, not missing. The fix is to make the tracker say "I do not know" instead of repeating its last guess, which I cover in the next section.</p>
+      </div>
+
+      <h3>Problem two: the overnight blackout</h3>
+      <p>The long silence had nothing to do with GPS. It was power. There is no battery on board, because a battery would not survive the cold at altitude. Instead the tracker runs on a supercapacitor charged by the solar panel, and the voltage the data labels as battery is really that supercapacitor. A supercapacitor handles the cold beautifully, where a battery would fail outright, but it holds far less energy, so it leans heavily on the sun. In the five minutes after the last fix near Tijuana, as night fell, that stored charge drained away.</p>
+      <div class="dataline">
+        02:23 UTC &middot; cap <b>5.38 V</b> &middot; solar 4.68 V &middot; <span class="g">temp &minus;12&deg;C</span> &middot; lux 8,738<br/>
+        02:28 UTC &middot; cap <span class="o">3.37 V</span> &middot; solar 3.29 V &middot; <span class="g">temp &minus;26&deg;C</span> &middot; lux 8,738<br/>
+        02:43 UTC &middot; cap <span class="o">3.33 V</span> &middot; solar 3.03 V &middot; <span class="g">temp &minus;32&deg;C</span> &middot; lux 1,388<br/>
+        02:58 UTC &middot; cap <span class="o">3.32 V</span> &middot; solar 2.17 V &middot; <span class="g">temp &minus;38&deg;C</span> &middot; lux 79
+      </div>
+      <p>As the sun set, the solar panel stopped delivering current and the supercapacitor drained from a healthy 5.38 V down to 3.32 V within minutes, tracking the falling light almost exactly. With nothing left to draw on, the tracker went quiet. It stayed dark through the night and the next morning, then woke the following afternoon once the sun was high enough to recharge the capacitor. When it did, it picked up right where physics had carried it, hundreds of kilometres to the east.</p>
+      <div class="callout find">
+        <div class="co-label">What the data showed</div>
+        <p>The blackout tracked the sun almost perfectly. The supercapacitor fell from 5.38 V to 3.32 V in minutes as the light faded, and recovery came the next afternoon when the sun returned to recharge it. This was a stored-energy limit at night, not a radio or GPS failure.</p>
+      </div>
+
+      <figure>
+        <div class="fig-frame"><svg viewBox="0 0 760 240" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Supercapacitor and solar voltage over the flight">
+<line x1="52" y1="47.7" x2="744" y2="47.7" stroke="#eef0f3" stroke-width="1"/><text x="44" y="50.7" text-anchor="end" font-family="IBM Plex Mono,monospace" font-size="9" fill="#97a0ac">5V</text><line x1="52" y1="100.4" x2="744" y2="100.4" stroke="#eef0f3" stroke-width="1"/><text x="44" y="103.4" text-anchor="end" font-family="IBM Plex Mono,monospace" font-size="9" fill="#97a0ac">4V</text><line x1="52" y1="153.2" x2="744" y2="153.2" stroke="#eef0f3" stroke-width="1"/><text x="44" y="156.2" text-anchor="end" font-family="IBM Plex Mono,monospace" font-size="9" fill="#97a0ac">3V</text><line x1="52.0" y1="16" x2="52.0" y2="206" stroke="#eef0f3" stroke-width="1"/><text x="52.0" y="222" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="9" fill="#97a0ac">T+0h</text><line x1="201.2" y1="16" x2="201.2" y2="206" stroke="#eef0f3" stroke-width="1"/><text x="201.2" y="222" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="9" fill="#97a0ac">T+12h</text><line x1="350.3" y1="16" x2="350.3" y2="206" stroke="#eef0f3" stroke-width="1"/><text x="350.3" y="222" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="9" fill="#97a0ac">T+24h</text><line x1="499.5" y1="16" x2="499.5" y2="206" stroke="#eef0f3" stroke-width="1"/><text x="499.5" y="222" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="9" fill="#97a0ac">T+36h</text><line x1="648.7" y1="16" x2="648.7" y2="206" stroke="#eef0f3" stroke-width="1"/><text x="648.7" y="222" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="9" fill="#97a0ac">T+48h</text>
+<rect x="182.1" y="16" width="442.3" height="190.0" fill="#2b3440" opacity="0.06"/>
+<text x="403.3" y="198.0" text-anchor="middle" font-family="IBM Plex Sans,sans-serif" font-size="10" fill="#6b7480">solar gone, capacitor drained</text>
+<path d="M52.0,39.7 L53.1,39.7 L53.8,49.8 L54.9,96.7 L58.0,46.1 L62.2,45.6 L63.2,42.9 L64.3,49.2 L65.3,39.2 L66.4,40.8 L67.4,42.4 L68.5,48.2 L69.5,43.4 L69.8,92.0 L70.8,46.6 L71.9,81.4 L72.9,39.2 L74.0,45.0 L75.0,43.4 L76.1,44.0 L76.6,52.4 L77.6,43.4 L78.7,44.0 L79.8,43.4 L80.9,48.2 L82.0,45.0 L83.0,45.0 L84.1,45.6 L85.1,49.8 L86.2,49.2 L87.3,47.7 L88.3,50.8 L89.4,49.2 L90.5,50.3 L91.5,45.0 L92.6,49.8 L93.7,48.2 L94.7,50.3 L95.8,49.2 L96.9,53.5 L97.9,48.2 L99.0,50.3 L100.0,56.1 L101.1,49.8 L102.2,46.6 L103.3,48.7 L104.3,50.3 L105.4,49.8 L106.4,49.8 L107.5,52.4 L108.6,52.9 L109.6,48.2 L110.7,50.3 L111.8,46.1 L112.9,46.1 L113.9,52.9 L115.0,47.7 L116.0,42.4 L117.1,47.1 L118.2,43.4 L119.2,48.7 L120.3,47.1 L121.4,48.2 L122.4,40.8 L123.1,45.6 L124.2,43.4 L125.3,46.1 L125.7,45.0 L126.6,43.4 L127.6,39.7 L128.7,39.7 L129.8,49.2 L130.8,56.6 L131.9,45.6 L132.9,55.6 L134.0,40.3 L135.1,39.7 L136.1,44.5 L137.2,45.6 L139.3,47.7 L144.6,72.5 L147.8,89.9 L154.2,39.2 L158.4,62.4 L159.5,89.9 L161.6,41.3 L162.7,44.5 L164.8,45.6 L165.9,47.1 L166.9,41.9 L168.0,23.4 L169.1,48.2 L170.2,42.9 L171.2,42.4 L172.3,45.0 L173.4,42.4 L174.6,43.4 L175.7,45.6 L176.9,44.5 L177.9,45.0 L179.0,96.2 L180.0,49.8 L181.1,46.6 L182.2,64.6 L183.2,137.9 L186.3,151.6 L189.4,197.0 L624.4,88.8 L626.5,42.4 L652.8,50.8 L730.2,43.4 L732.4,195.4 L733.5,47.7 L734.7,45.0 L735.8,42.9 L737.0,45.0 L738.1,83.6 L739.3,42.4 L740.4,44.0 L740.6,51.9 L741.8,47.1 L742.9,102.0" fill="none" stroke="#9a6a16" stroke-width="1.4" opacity="0.7"/>
+<path d="M52.0,28.1 L53.1,28.1 L53.8,27.1 L54.9,27.1 L58.0,27.6 L62.2,28.7 L63.2,28.7 L64.3,27.1 L65.3,27.1 L66.4,28.7 L67.4,27.6 L68.5,28.1 L69.5,28.7 L69.8,28.7 L70.8,27.6 L71.9,28.1 L72.9,28.1 L74.0,27.6 L75.0,28.1 L76.1,28.1 L76.6,27.1 L77.6,28.7 L78.7,28.1 L79.8,28.1 L80.9,28.7 L82.0,28.7 L83.0,28.7 L84.1,28.1 L85.1,27.6 L86.2,28.1 L87.3,28.1 L88.3,28.1 L89.4,27.6 L90.5,27.6 L91.5,28.1 L92.6,28.7 L93.7,27.6 L94.7,28.7 L95.8,28.1 L96.9,27.1 L97.9,28.1 L99.0,28.1 L100.0,27.6 L101.1,28.7 L102.2,28.7 L103.3,28.1 L104.3,28.7 L105.4,27.6 L106.4,28.7 L107.5,27.1 L108.6,28.1 L109.6,28.7 L110.7,28.1 L111.8,28.7 L112.9,28.1 L113.9,28.7 L115.0,28.7 L116.0,28.7 L117.1,28.1 L118.2,28.1 L119.2,28.7 L120.3,28.1 L121.4,28.7 L122.4,28.7 L123.1,28.1 L124.2,28.1 L125.3,28.1 L125.7,27.1 L126.6,28.1 L127.6,27.6 L128.7,27.1 L129.8,28.1 L130.8,28.1 L131.9,28.1 L132.9,27.6 L134.0,28.1 L135.1,28.1 L136.1,27.6 L137.2,27.6 L139.3,28.7 L144.6,28.1 L147.8,31.8 L154.2,28.7 L158.4,28.1 L159.5,32.9 L161.6,28.1 L162.7,28.7 L164.8,28.1 L165.9,28.7 L166.9,28.7 L168.0,28.1 L169.1,28.1 L170.2,27.6 L171.2,27.6 L172.3,28.7 L173.4,27.6 L174.6,28.7 L175.7,28.7 L176.9,28.1 L177.9,28.1 L179.0,27.6 L180.0,28.1 L181.1,28.1 L182.2,27.6 L183.2,133.7 L186.3,135.8 L189.4,136.3 L624.4,31.3 L626.5,26.0 L652.8,27.6 L730.2,28.7 L732.4,36.6 L733.5,28.1 L734.7,28.7 L735.8,28.7 L737.0,27.6 L738.1,30.2 L739.3,27.6 L740.4,28.1 L740.6,28.1 L741.8,28.1 L742.9,50.3" fill="none" stroke="#c0531f" stroke-width="2.2"/>
+</svg></div>
+        <figcaption>Supercapacitor voltage (solid) and solar input (lighter line) through the flight. Both stay healthy near 5 V in daylight. At the blackout the supercapacitor drops sharply as the sun fades, then climbs back the next afternoon once the panel can recharge it. The flat span is the silent stretch with no readings.</figcaption>
+      </figure>
+      <h3>Why it could even come back</h3>
+      <p>The tracker reports through LoRa to a network of ground gateways, and the received signal was already faint at the edges, with strength readings down around <span class="mono">&minus;110 to &minus;120</span>. Over remote stretches of Baja and the Gulf there were simply no gateways in range to hear it. Once the balloon drifted back over more populated terrain, and once it had power again, its packets reached a gateway and the mission came back to life on the map.</p>
+    </section>
+
+    <div class="kicker">Part III &middot; Fixes for the Next Launch</div>
+
+    <section>
+      <h2>What I am changing</h2>
+      <p>Each of the failures above points to a concrete, inexpensive change. None of these require new hardware beyond what is already in the design.</p>
+      <ol class="checks">
+        <li>
+          <h3>Make the tracker admit when it is lost</h3>
+          <p>The firmware should report a real fix-quality flag and never repeat a stale position. If the receiver loses lock, it should send a clear "no fix" rather than the last known altitude. Logging the true satellite count and the HDOP value, both of which were missing from this flight, would have flagged the frozen fix immediately.</p>
+        </li>
+        <li>
+          <h3>Carry more charge into the night</h3>
+          <p>The supercapacitor was the right call for the cold, where a battery would have failed outright, but it holds far less energy and so depends on the sun. Adding capacitor capacity, trimming nighttime power draw, and squeezing more from the solar panel during the day would all extend how far past sunset the tracker can keep talking.</p>
+        </li>
+        <li>
+          <h3>Sip power at night, do not gulp</h3>
+          <p>A low-power night mode that wakes briefly, sends one position, and sleeps again would let the tracker ride out the dark hours on a nearly empty supercapacitor instead of going fully silent. The hardware already exposes a sleep setting; the firmware needs to use it aggressively after sunset.</p>
+        </li>
+        <li>
+          <h3>Buffer positions while out of range</h3>
+          <p>When no gateway is in range, the tracker should store its fixes and send the backlog once it reconnects. That would have filled in part of the silent stretch retroactively rather than leaving a clean 35 hour hole.</p>
+        </li>
+        <li>
+          <h3>Record the diagnostics that were blank</h3>
+          <p>This flight logged no HDOP, no power mode, and no firmware version. Those fields cost nothing to send and would have turned guesswork into certainty. Every future packet should carry them.</p>
+        </li>
+        <li>
+          <h3>Plan for the dark stretches</h3>
+          <p>The flight path crossed long spans with no ground coverage. Knowing that in advance, I can lean harder on the satellite path for position rather than the ground network, and set expectations that some legs will simply be quiet until the balloon drifts back into range.</p>
+        </li>
+      </ol>
+    </section>
+
+    <section>
+      <h2>The reconstruction angle</h2>
+      <p>The thirty six hour gap is exactly the kind of silence the reconstruction engine is built for. Because there is a confirmed fix on both sides of it, the path between is a bridge anchored at both ends rather than a guess that fans out forever. The honest result for this particular gap is wide, because the balloon's small net movement over a day and a half means it almost certainly looped or stalled around a slow weather system before drifting east, and the system correctly shows that stretch as a region of where it could have been rather than a confident line. The full method is written up separately in the engine technical note.</p>
+    </section>
+
+    <div class="callout">
+      <div class="co-label">The takeaway</div>
+      <p>The balloon never failed. It flew for more than two days and crossed two thousand kilometres. What failed was the tracker's ability to keep talking through a cold night and out of radio range, and its honesty about a frozen fix. Both are firmware and packaging problems, both are cheap to fix, and the next launch will carry every change above.</p>
+    </div>
+

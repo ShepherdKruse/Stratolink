@@ -1,0 +1,542 @@
+/* The Baja Run flight report — scoped to .baja-report-page */
+
+html:has(.baja-report-page) {
+  scroll-behavior: smooth;
+}
+
+.baja-report-page {
+  --page: #ecedef;
+  --paper: #ffffff;
+  --ink: #2b3440;
+  --ink-body: #424b58;
+  --ink-soft: #6b7480;
+  --ink-faint: #97a0ac;
+  --rule: #dfe2e7;
+  --rule-strong: #2b3440;
+  --orange: #c0531f;
+  --blue: #2456c4;
+  --blue-bar: linear-gradient(90deg, #1e3a8a, #2456c4 55%, #3b82f6);
+  --teal: #0f766e;
+  --ochre: #9a6a16;
+  --ff-serif: 'Source Serif 4', Georgia, serif;
+  --ff-sans: 'IBM Plex Sans', system-ui, sans-serif;
+  --ff-mono: 'IBM Plex Mono', monospace;
+
+  background: var(--page);
+  color: var(--ink-body);
+  font-family: var(--ff-sans);
+  font-size: 17px;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+
+.baja-report-page,
+.baja-report-page * {
+  box-sizing: border-box;
+}
+
+.baja-report-page .accentbar {
+  height: 4px;
+  background: var(--blue-bar);
+}
+
+.baja-report-page .wrap {
+  max-width: 880px;
+  margin: 0 auto;
+  padding: 0 32px 48px;
+}
+
+.baja-report-page .report-breadcrumb {
+  margin: 28px 0 0;
+  font-size: 14px;
+  color: var(--ink-soft);
+}
+
+.baja-report-page .report-breadcrumb a {
+  color: var(--blue);
+  text-decoration: none;
+}
+
+.baja-report-page .report-breadcrumb a:hover {
+  color: var(--orange);
+}
+
+.baja-report-page .paper {
+  background: var(--paper);
+  border: 1px solid var(--rule);
+  border-radius: 6px;
+  box-shadow: 0 1px 2px rgba(20, 30, 50, 0.04), 0 8px 30px rgba(20, 30, 50, 0.05);
+  margin: 24px 0;
+  padding: 62px 72px 76px;
+  counter-reset: fig;
+}
+
+.baja-report-page .masthead {
+  border-bottom: 1px solid var(--rule-strong);
+  padding-bottom: 28px;
+}
+
+.baja-report-page .eyebrow {
+  font-family: var(--ff-sans);
+  font-size: 12.5px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--orange);
+  margin-bottom: 16px;
+}
+
+.baja-report-page h1.title {
+  font-family: var(--ff-serif);
+  font-weight: 600;
+  font-size: clamp(30px, 4.6vw, 44px);
+  line-height: 1.08;
+  letter-spacing: -0.015em;
+  color: var(--ink);
+  margin: 0;
+}
+
+.baja-report-page .subtitle {
+  font-family: var(--ff-serif);
+  font-style: italic;
+  font-weight: 400;
+  color: var(--ink-soft);
+  font-size: clamp(18px, 2.5vw, 23px);
+  margin-top: 6px;
+}
+
+.baja-report-page .metaline {
+  margin-top: 22px;
+  font-family: var(--ff-mono);
+  font-size: 12px;
+  color: var(--ink-soft);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 14px;
+}
+
+.baja-report-page .metaline .sep {
+  color: var(--ink-faint);
+}
+
+.baja-report-page .stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+  margin: 34px 0 8px;
+}
+
+.baja-report-page .stat {
+  border: 1px solid var(--rule);
+  border-top: 3px solid var(--orange);
+  border-radius: 8px;
+  padding: 15px 15px 13px;
+  background: #fff;
+}
+
+.baja-report-page .stat-num {
+  font-family: var(--ff-serif);
+  font-weight: 600;
+  font-size: 25px;
+  color: var(--ink);
+  line-height: 1;
+  letter-spacing: -0.01em;
+}
+
+.baja-report-page .stat-num .u {
+  font-family: var(--ff-sans);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--ink-soft);
+  margin-left: 3px;
+}
+
+.baja-report-page .stat-label {
+  font-family: var(--ff-sans);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  margin-top: 11px;
+}
+
+.baja-report-page .stat-sub {
+  font-size: 12.5px;
+  color: var(--ink-soft);
+  margin-top: 4px;
+  line-height: 1.4;
+}
+
+.baja-report-page .kicker {
+  font-family: var(--ff-sans);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-top: 54px;
+}
+
+.baja-report-page .kicker::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--rule);
+}
+
+.baja-report-page section {
+  margin-top: 30px;
+}
+
+.baja-report-page h2 {
+  font-family: var(--ff-serif);
+  font-weight: 600;
+  font-size: 25px;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+  line-height: 1.2;
+  margin: 0 0 4px;
+}
+
+.baja-report-page h3 {
+  font-family: var(--ff-sans);
+  font-weight: 600;
+  font-size: 15.5px;
+  color: var(--ink);
+  margin: 26px 0 2px;
+}
+
+.baja-report-page p {
+  margin-top: 15px;
+}
+
+.baja-report-page strong {
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.baja-report-page em {
+  font-style: italic;
+  color: var(--ink);
+}
+
+.baja-report-page .mono {
+  font-family: var(--ff-mono);
+  font-size: 0.9em;
+  color: var(--blue);
+}
+
+.baja-report-page .callout {
+  margin: 24px 0;
+  padding: 18px 22px;
+  background: #f6f7f9;
+  border: 1px solid var(--rule);
+  border-left: 3px solid var(--orange);
+  border-radius: 7px;
+}
+
+.baja-report-page .callout .co-label {
+  font-family: var(--ff-mono);
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--orange);
+  margin-bottom: 7px;
+}
+
+.baja-report-page .callout p {
+  margin-top: 0;
+  font-size: 16px;
+}
+
+.baja-report-page .callout p + p {
+  margin-top: 10px;
+}
+
+.baja-report-page .callout.find {
+  border-left-color: var(--teal);
+}
+
+.baja-report-page .callout.find .co-label {
+  color: var(--teal);
+}
+
+.baja-report-page .dataline {
+  font-family: var(--ff-mono);
+  font-size: 12.5px;
+  color: var(--ink-soft);
+  background: #fafbfc;
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  padding: 14px 18px;
+  margin: 20px 0;
+  line-height: 1.95;
+}
+
+.baja-report-page .dataline b {
+  color: var(--blue);
+  font-weight: 500;
+}
+
+.baja-report-page .dataline .o {
+  color: var(--orange);
+}
+
+.baja-report-page .dataline .g {
+  color: var(--ink-faint);
+}
+
+.baja-report-page table.t {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.baja-report-page table.t th {
+  text-align: left;
+  font-family: var(--ff-sans);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  padding: 0 14px 9px 0;
+  border-bottom: 1px solid var(--rule-strong);
+}
+
+.baja-report-page table.t td {
+  padding: 11px 14px 11px 0;
+  border-bottom: 1px solid var(--rule);
+  font-size: 14.5px;
+  color: var(--ink-body);
+  vertical-align: top;
+}
+
+.baja-report-page table.t td.k {
+  font-weight: 600;
+  color: var(--ink);
+  white-space: nowrap;
+}
+
+.baja-report-page table.t .mono {
+  font-family: var(--ff-mono);
+  font-size: 13px;
+}
+
+.baja-report-page ol.checks {
+  margin: 18px 0 0;
+  padding: 0;
+  counter-reset: c;
+  list-style: none;
+}
+
+.baja-report-page ol.checks li {
+  position: relative;
+  padding: 0 0 16px 42px;
+}
+
+.baja-report-page ol.checks li::before {
+  counter-increment: c;
+  content: counter(c);
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: #fff4ec;
+  border: 1.5px solid #e8c4a8;
+  color: var(--orange);
+  font-family: var(--ff-mono);
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.baja-report-page ol.checks li h3 {
+  margin: 3px 0 0;
+}
+
+.baja-report-page ol.checks li p {
+  margin-top: 3px;
+  font-size: 15px;
+}
+
+.baja-report-page figure {
+  counter-increment: fig;
+  margin: 28px 0;
+}
+
+.baja-report-page figure .fig-frame {
+  background: #fafbfc;
+  border: 1px solid var(--rule);
+  border-radius: 10px;
+  padding: 22px 20px;
+}
+
+.baja-report-page figure svg {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.baja-report-page figcaption {
+  font-family: var(--ff-sans);
+  font-size: 13px;
+  color: var(--ink-soft);
+  margin-top: 12px;
+  line-height: 1.5;
+}
+
+.baja-report-page figcaption::before {
+  content: 'Figure ' counter(fig) '. ';
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.baja-report-page .report-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 20px;
+  margin: 0 0 56px;
+  padding-top: 8px;
+}
+
+.baja-report-page .report-links a {
+  font-family: var(--ff-sans);
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--blue);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(36, 86, 196, 0.35);
+}
+
+.baja-report-page .report-links a:hover {
+  color: var(--orange);
+  border-bottom-color: rgba(192, 83, 31, 0.45);
+}
+
+@media (max-width: 720px) {
+  .baja-report-page .paper {
+    padding: 40px 26px 52px;
+  }
+
+  .baja-report-page .wrap {
+    padding: 0 18px 32px;
+  }
+
+  .baja-report-page .stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .baja-report-page table.t td.k {
+    white-space: normal;
+  }
+}
+
+@media print {
+  .baja-report-page {
+    background: #fff;
+    font-size: 11pt;
+    line-height: 1.48;
+  }
+
+  .baja-report-page .accentbar,
+  .baja-report-page .report-breadcrumb,
+  .baja-report-page .report-links {
+    display: none;
+  }
+
+  .baja-report-page .paper {
+    box-shadow: none;
+    border: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .baja-report-page .wrap {
+    padding: 0;
+    max-width: none;
+  }
+
+  .baja-report-page .stat,
+  .baja-report-page .callout,
+  .baja-report-page .dataline,
+  .baja-report-page .stat-num,
+  .baja-report-page ol.checks li::before,
+  .baja-report-page figure .fig-frame {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .baja-report-page .callout,
+  .baja-report-page table.t,
+  .baja-report-page figure,
+  .baja-report-page ol.checks li {
+    break-inside: avoid;
+  }
+
+  .baja-report-page .stats {
+    gap: 9px;
+    margin: 22px 0 4px;
+  }
+
+  .baja-report-page .stat {
+    padding: 10px 11px;
+  }
+
+  .baja-report-page .stat-num {
+    font-size: 18pt;
+  }
+
+  .baja-report-page h1.title {
+    font-size: 26pt;
+  }
+
+  .baja-report-page h2 {
+    font-size: 16pt;
+  }
+
+  .baja-report-page .masthead {
+    padding-bottom: 18px;
+  }
+
+  .baja-report-page .kicker {
+    margin-top: 30px;
+  }
+
+  .baja-report-page section {
+    margin-top: 20px;
+  }
+
+  .baja-report-page p {
+    margin-top: 11px;
+  }
+
+  .baja-report-page h3 {
+    margin-top: 18px;
+  }
+
+  .baja-report-page .callout {
+    margin: 16px 0;
+    padding: 13px 18px;
+  }
+
+  .baja-report-page .callout p {
+    font-size: 11pt;
+  }
+
+  .baja-report-page .dataline {
+    margin: 14px 0;
+    padding: 12px 16px;
+  }
+
+  .baja-report-page ol.checks li {
+    padding-bottom: 12px;
+  }
+}
