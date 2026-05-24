@@ -11,6 +11,8 @@ import { snapPressureHpa } from '@/lib/wind/fetchWindGrid';
 import type { StratolinkForecast } from '@/lib/wind/forecastTypes';
 import { splitTrackSegments } from '@/lib/wind/trackSegments';
 import WindForecastScrubber from './WindForecastScrubber';
+import GatewayLayer from '@/components/maps/GatewayLayer';
+import { quietBasemapLabels } from '@/components/maps/quietBasemapLabels';
 import { useTickingNow } from '../shared';
 import {
     buildForecastTimeline,
@@ -787,9 +789,22 @@ export default function WindSynthesisMap({
                     initialViewState={{ longitude: -106, latitude: 37.5, zoom: 4.05 }}
                     style={{ width: '100%', height: '100%' }}
                     mapStyle="mapbox://styles/mapbox/dark-v11"
+                    projection="globe"
                     attributionControl={false}
-                    onLoad={() => setMapReady(true)}
+                    onLoad={() => {
+                        setMapReady(true);
+                        const m = mapRef.current?.getMap();
+                        if (m) quietBasemapLabels(m);
+                    }}
+                    onStyleData={() => {
+                        const m = mapRef.current?.getMap();
+                        if (m) quietBasemapLabels(m);
+                    }}
                 >
+                    {/* Static TTN ground-station coverage — first so it
+                      * sits at the bottom of the layer stack. */}
+                    <GatewayLayer />
+
                     {ellipses90GeoJson && showEllipses && (
                         <Source id="ws-e90" type="geojson" data={ellipses90GeoJson}>
                             <Layer

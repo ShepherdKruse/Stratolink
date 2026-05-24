@@ -4,6 +4,8 @@ import { useState, useMemo, useCallback, useEffect, useRef } from 'react';
 import Map, { Source, Layer } from 'react-map-gl/mapbox';
 import type { MapRef } from 'react-map-gl/mapbox';
 import 'mapbox-gl/dist/mapbox-gl.css';
+import GatewayLayer from '@/components/maps/GatewayLayer';
+import { quietBasemapLabels } from '@/components/maps/quietBasemapLabels';
 
 import { isUsableGpsCoordinate } from '@/lib/mapGeo';
 
@@ -199,6 +201,8 @@ export default function MissionMap({
                 style={{ width: '100%', height: '100%' }}
                 mapStyle="mapbox://styles/mapbox/dark-v11"
                 projection={projection === 'globe' ? 'globe' : 'mercator'}
+                onLoad={() => { const m = mapRef.current?.getMap(); if (m) quietBasemapLabels(m); }}
+                onStyleData={() => { const m = mapRef.current?.getMap(); if (m) quietBasemapLabels(m); }}
                 fog={projection === 'globe' ? {
                     color: 'rgb(20, 20, 20)',
                     'high-color': 'rgb(10, 10, 10)',
@@ -211,6 +215,10 @@ export default function MissionMap({
                 onClick={handleMarkerClick}
                 cursor="pointer"
             >
+                {/* Static TTN gateway coverage — at the bottom so it
+                  * sits under the balloon markers and tracks. */}
+                <GatewayLayer />
+
                 {/* Balloon markers - functional colors from palette */}
                 <Source id="balloons" type="geojson" data={balloonGeoJSON}>
                     {/* Active balloons - accent blue */}

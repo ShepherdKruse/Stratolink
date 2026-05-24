@@ -393,7 +393,7 @@ function CenterMap({ devices, rows, latest, lastFixRow, selectedDevice, now }: {
                 activeId={selectedDevice?.id ?? null}
                 flightPath={flightPath}
                 playbackT={null}
-                projection="mercator"
+                projection="globe"
                 gateways={mapGateways}
             />
             <div style={{ position: 'absolute', top: 14, left: 14, display: 'flex', gap: 6, zIndex: 1 }}>

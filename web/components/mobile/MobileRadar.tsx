@@ -11,6 +11,8 @@ import type { MapMouseEvent } from 'mapbox-gl';
 import type { GatewayReception } from '../dashboard-v2/atoms';
 import MobileGatewayMapLayers from './MobileGatewayMapLayers';
 import { gatewaysWithLocation } from './mobileGatewayGeo';
+import GatewayLayer from '@/components/maps/GatewayLayer';
+import { quietBasemapLabels } from '@/components/maps/quietBasemapLabels';
 
 interface BalloonData {
     id: string;
@@ -67,6 +69,8 @@ export default function MobileRadar({
 
     const handleStyleLoad = useCallback(() => {
         setStyleLoaded(true);
+        const map = mapRef.current?.getMap();
+        if (map) quietBasemapLabels(map);
     }, []);
 
     const mapBalloons = useMemo(
@@ -321,7 +325,7 @@ export default function MobileRadar({
                 }}
                 style={{ width: '100%', height: '100%' }}
                 mapStyle={MAP_STYLE_DARK}
-                projection="mercator"
+                projection="globe"
                 interactiveLayerIds={['balloon-markers']}
                 onClick={handleMarkerClick}
                 onLoad={handleStyleLoad}
@@ -329,6 +333,9 @@ export default function MobileRadar({
                     if (e?.dataType === 'style') handleStyleLoad();
                 }}
                 cursor="pointer">
+                {/* Static TTN ground-station coverage — under the
+                  * uplink-heard gateways + flight path. */}
+                {styleLoaded && <GatewayLayer />}
                 <MobileGatewayMapLayers
                     idPrefix="radar"
                     gateways={selectedBalloonId ? gateways : null}

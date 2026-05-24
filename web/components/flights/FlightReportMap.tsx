@@ -3,6 +3,8 @@
 import { useEffect, useRef } from 'react';
 import mapboxgl from 'mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
+import { addGatewayLayersToMap } from '@/components/maps/addGatewayLayersToMap';
+import { quietBasemapLabels } from '@/components/maps/quietBasemapLabels';
 import type { FlightSample } from '@/lib/flights/types';
 import { FLIGHT_REPORT_MAP_STYLE } from '@/lib/flights/flightReportMapStyle';
 import type { FlightMapAnnotation } from '@/lib/flights/flightMapAnnotations';
@@ -222,7 +224,7 @@ export default function FlightReportMap({ flight, freezeMin, resumeMin }: Flight
             bounds,
             fitBoundsOptions: { padding: { top: 36, bottom: 36, left: 24, right: 56 } },
             attributionControl: false,
-            projection: 'mercator',
+            projection: 'globe',
         });
         mapRef.current = map;
 
@@ -230,6 +232,11 @@ export default function FlightReportMap({ flight, freezeMin, resumeMin }: Flight
         map.addControl(new mapboxgl.NavigationControl({ showCompass: false }), 'bottom-right');
 
         map.on('load', () => {
+            quietBasemapLabels(map);
+            /* Static TTN ground-station coverage — added first so the
+             * route lines + markers render on top. */
+            void addGatewayLayersToMap(map);
+
             addRouteLine(map, 'drift', driftCoords, {
                 color: '#3d4d6a',
                 width: 2.5,

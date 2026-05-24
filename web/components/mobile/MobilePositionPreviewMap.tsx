@@ -158,7 +158,7 @@ export default function MobilePositionPreviewMap({
                 touchZoomRotate={false}
                 style={{ width: '100%', height: '100%' }}
                 mapStyle={MAP_STYLE_DARK}
-                projection="mercator"
+                projection="globe"
                 onLoad={handleStyleLoad}>
                 <MobileGatewayMapLayers
                     idPrefix="pos"

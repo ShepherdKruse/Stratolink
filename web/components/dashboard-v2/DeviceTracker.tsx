@@ -367,7 +367,7 @@ function MapColumn({ visibleRows, scrubRow, selectedDevice, now }: {
                 activeId={selectedDevice?.id ?? null}
                 flightPath={trackPoints}
                 playbackT={scrubRow?.t ?? null}
-                projection="mercator"
+                projection="globe"
                 gateways={mapGateways}
             />
 

@@ -4,6 +4,8 @@ import { useState, useMemo, useCallback, useEffect, useRef } from 'react';
 import Map, { Source, Layer } from 'react-map-gl/mapbox';
 import type { MapRef } from 'react-map-gl/mapbox';
 import 'mapbox-gl/dist/mapbox-gl.css';
+import GatewayLayer from '@/components/maps/GatewayLayer';
+import { quietBasemapLabels } from '@/components/maps/quietBasemapLabels';
 
 import { isUsableGpsCoordinate } from '@/lib/mapGeo';
 
@@ -71,6 +73,8 @@ export default function MissionMap({
 
     const handleStyleLoad = useCallback(() => {
         setStyleLoaded(true);
+        const map = mapRef.current?.getMap();
+        if (map) quietBasemapLabels(map);
     }, []);
 
     /* If the underlying style changes (projection toggle remounts the Map
@@ -299,6 +303,10 @@ export default function MissionMap({
             >
                 {styleLoaded && (
                     <>
+                {/* Static TTN gateway coverage — at the bottom so it
+                  * sits under the balloon markers and tracks. */}
+                <GatewayLayer />
+
                 {/* Balloon markers - functional colors from palette */}
                 <Source id="balloons" type="geojson" data={balloonGeoJSON}>
                     {/* Active balloons - accent blue */}

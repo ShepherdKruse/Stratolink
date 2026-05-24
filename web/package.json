@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "gateways:refresh": "node scripts/refresh-ttnmapper-gateways.mjs"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.10.0",
@@ -86,6 +87,7 @@
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4.1.9",
+    "@turf/turf": "^7.3.5",
     "@types/node": "^22",
     "@types/nodemailer": "^8.0.0",
     "@types/qrcode": "^1.5.6",

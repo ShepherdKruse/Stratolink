@@ -19,6 +19,8 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import Map, { Source, Layer } from 'react-map-gl/mapbox';
 import type { MapRef, LngLatBoundsLike } from 'react-map-gl/mapbox';
 import 'mapbox-gl/dist/mapbox-gl.css';
+import GatewayLayer from '@/components/maps/GatewayLayer';
+import { quietBasemapLabels } from '@/components/maps/quietBasemapLabels';
 
 export interface V2Balloon {
     id: string;
@@ -91,7 +93,7 @@ export default function V2MissionMap({
     flightPath = [],
     playbackT = null,
     autoFit = true,
-    projection = 'mercator',
+    projection = 'globe',
     gateways = [],
 }: V2MissionMapProps) {
     const mapRef = useRef<MapRef>(null);
@@ -321,8 +323,16 @@ export default function V2MissionMap({
                 style={{ width: '100%', height: '100%' }}
                 mapStyle="mapbox://styles/mapbox/dark-v11"
                 projection={projection === 'globe' ? 'globe' : 'mercator'}
-                onLoad={() => setStyleLoaded(true)}
-                onStyleData={() => setStyleLoaded(true)}
+                onLoad={() => {
+                    setStyleLoaded(true);
+                    const m = mapRef.current?.getMap();
+                    if (m) quietBasemapLabels(m);
+                }}
+                onStyleData={() => {
+                    setStyleLoaded(true);
+                    const m = mapRef.current?.getMap();
+                    if (m) quietBasemapLabels(m);
+                }}
                 fog={projection === 'globe' ? {
                     color: 'rgb(20, 20, 20)',
                     'high-color': 'rgb(10, 10, 10)',
@@ -333,6 +343,10 @@ export default function V2MissionMap({
             >
                 {styleLoaded && (
                     <>
+                        {/* Static TTN ground-station coverage — sits at
+                          * the bottom of the layer stack so flight paths
+                          * and balloon pins render on top. */}
+                        <GatewayLayer />
                         {flightPathGeoJSON && (
                             <Source id="v2-flight-path" type="geojson" data={flightPathGeoJSON} lineMetrics={true}>
                                 <Layer
