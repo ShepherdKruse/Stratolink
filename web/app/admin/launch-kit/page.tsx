@@ -47,6 +47,10 @@ export default function LaunchKitPage() {
             <p className="mt-2 text-sm text-muted-foreground">
                 <Link href="/admin/register-payload" className="underline">
                     Register new payload
+                </Link>{' '}
+                ·{' '}
+                <Link href="/admin/flights" className="underline">
+                    Flight status
                 </Link>
             </p>
 

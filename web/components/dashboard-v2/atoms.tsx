@@ -662,4 +662,5 @@ export const DASHBOARD_V2_TABS: ChromeTab[] = [
     { label: 'DEVICE TRACKER',  path: '/dashboard-v2/device' },
     { label: 'WIND OUTLOOK',    path: '/dashboard-v2/wind' },
     { label: 'TELEMETRY LAB',   path: '/dashboard-v2/lab' },
+    { label: 'MISSION ARCHIVE', path: '/dashboard-v2/archive' },
 ];
