@@ -20,7 +20,9 @@ import Map, { Source, Layer } from 'react-map-gl/mapbox';
 import type { MapRef, LngLatBoundsLike } from 'react-map-gl/mapbox';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import GatewayLayer from '@/components/maps/GatewayLayer';
+import GatewayRangeRings from '@/components/maps/GatewayRangeRings';
 import { quietBasemapLabels } from '@/components/maps/quietBasemapLabels';
+import { ringKm } from '@/lib/gateways/range';
 
 export interface V2Balloon {
     id: string;
@@ -74,6 +76,10 @@ interface V2MissionMapProps {
      *  Rendered as pins behind a user-controlled toggle so the map stays
      *  readable when the device isn't selected. */
     gateways?: V2Gateway[];
+    /** When set, switches to the balloon-centered range view: the ambient
+     *  coverage field is replaced by spreading-factor rings around this
+     *  point, and the camera fits to the SF12 ring instead of the track. */
+    rangeCenter?: { lat: number; lon: number; altM: number | null } | null;
 }
 
 function isWebGLAvailable(): boolean {
@@ -95,6 +101,7 @@ export default function V2MissionMap({
     autoFit = true,
     projection = 'globe',
     gateways = [],
+    rangeCenter = null,
 }: V2MissionMapProps) {
     const mapRef = useRef<MapRef>(null);
     const [styleLoaded, setStyleLoaded] = useState(false);
@@ -145,6 +152,12 @@ export default function V2MissionMap({
     const fittedActiveRef = useRef<string | null | undefined>(undefined);
     useEffect(() => {
         if (!autoFit) return;
+        /* Range mode owns the camera — skip the track fit so the two don't
+         * fight. Reset the ref so exiting range mode re-fits to the track. */
+        if (rangeCenter) {
+            fittedActiveRef.current = undefined;
+            return;
+        }
         const map = mapRef.current;
         if (!map || !styleLoaded) return;
         if (fittedActiveRef.current === (activeId ?? null)) return;
@@ -196,7 +209,41 @@ export default function V2MissionMap({
         } catch (e) {
             console.warn('V2MissionMap camera update skipped', e);
         }
-    }, [autoFit, styleLoaded, activeId, validBalloons, validFlightPath, playbackT]);
+    }, [autoFit, styleLoaded, activeId, validBalloons, validFlightPath, playbackT, rangeCenter]);
+
+    /* Range-mode camera: fit to the SF12 ring around the balloon. Keyed on
+     * activeId so it fits once on entering range mode (and on device change),
+     * not on every scrub tick — the user can then pan / zoom freely. */
+    const rangeFittedRef = useRef<string | null>(null);
+    useEffect(() => {
+        if (!rangeCenter) {
+            rangeFittedRef.current = null;
+            return;
+        }
+        const map = mapRef.current;
+        if (!map || !styleLoaded) return;
+        const key = activeId ?? 'range';
+        if (rangeFittedRef.current === key) return;
+        try {
+            const maxKm = ringKm('sf12', rangeCenter.altM);
+            const r = Number.isFinite(maxKm) ? maxKm : 600;
+            const latPad = r / 111;
+            const lonPad = r / (111 * Math.max(0.2, Math.cos((rangeCenter.lat * Math.PI) / 180)));
+            const minLon = rangeCenter.lon - lonPad;
+            const maxLon = rangeCenter.lon + lonPad;
+            const minLat = rangeCenter.lat - latPad;
+            const maxLat = rangeCenter.lat + latPad;
+            if (minLat < -90 || maxLat > 90 || minLon < -180 || maxLon > 180) return;
+            map.fitBounds([[minLon, minLat], [maxLon, maxLat]] as LngLatBoundsLike, {
+                padding: 50,
+                duration: 800,
+                maxZoom: 11,
+            });
+            rangeFittedRef.current = key;
+        } catch (e) {
+            console.warn('V2MissionMap range fit skipped', e);
+        }
+    }, [rangeCenter, styleLoaded, activeId]);
 
     const balloonGeoJSON = useMemo(() => ({
         type: 'FeatureCollection' as const,
@@ -345,8 +392,18 @@ export default function V2MissionMap({
                     <>
                         {/* Static TTN ground-station coverage — sits at
                           * the bottom of the layer stack so flight paths
-                          * and balloon pins render on top. */}
-                        <GatewayLayer />
+                          * and balloon pins render on top. In range mode the
+                          * ambient field is replaced by balloon-centered SF
+                          * rings + nearby gateways. */}
+                        {rangeCenter ? (
+                            <GatewayRangeRings
+                                lat={rangeCenter.lat}
+                                lon={rangeCenter.lon}
+                                altM={rangeCenter.altM}
+                            />
+                        ) : (
+                            <GatewayLayer />
+                        )}
                         {flightPathGeoJSON && (
                             <Source id="v2-flight-path" type="geojson" data={flightPathGeoJSON} lineMetrics={true}>
                                 <Layer

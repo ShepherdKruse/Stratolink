@@ -19,6 +19,7 @@ import {
 import { useTelemetry, type DeviceSummary, type SubsystemFreshness } from './useTelemetry';
 import { useTickingNow, useElementSize, ConnectionPill, V1Link, fmtPressure, fmtAltitudeM } from './shared';
 import V2MissionMap, { type V2Balloon, type V2FlightPoint, type V2Gateway } from './V2MissionMap';
+import GatewayRangeControls from './GatewayRangeControls';
 
 type RangeKey = '1h' | '6h' | '24h' | 'all';
 interface TrackStats {
@@ -354,6 +355,10 @@ function MapColumn({ visibleRows, scrubRow, selectedDevice, now }: {
             }));
     }, [scrubRow]);
 
+    /* Balloon-centered gateway range view (rings + nearest-gateway readout). */
+    const [rangeMode, setRangeMode] = useState(false);
+    const rangeCenter = balloon ? { lat: balloon.lat, lon: balloon.lon, altM: balloon.altitude_m } : null;
+
     return (
         <div style={{
             position: 'relative',
@@ -368,7 +373,8 @@ function MapColumn({ visibleRows, scrubRow, selectedDevice, now }: {
                 flightPath={trackPoints}
                 playbackT={scrubRow?.t ?? null}
                 projection="globe"
-                gateways={mapGateways}
+                gateways={rangeMode ? [] : mapGateways}
+                rangeCenter={rangeMode ? rangeCenter : null}
             />
 
             {/* Top-left badges */}
@@ -383,6 +389,16 @@ function MapColumn({ visibleRows, scrubRow, selectedDevice, now }: {
                     <Age t={scrubRow?.t ?? null} now={now} compact dot prefix="scrub" />
                 </span>
             </div>
+
+            {rangeCenter && (
+                <GatewayRangeControls
+                    lat={rangeCenter.lat}
+                    lon={rangeCenter.lon}
+                    altM={rangeCenter.altM}
+                    rangeMode={rangeMode}
+                    onToggle={() => setRangeMode((v) => !v)}
+                />
+            )}
         </div>
     );
 }

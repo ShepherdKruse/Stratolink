@@ -22,6 +22,7 @@ import {
 } from './atoms';
 import { useTickingNow, useElementSize, V1Link, fmtPressure, fmtAltitudeM } from './shared';
 import V2MissionMap, { type V2Balloon, type V2FlightPoint } from './V2MissionMap';
+import GatewayRangeControls from './GatewayRangeControls';
 import {
     useFlightReplay,
     haversineKm,
@@ -432,6 +433,11 @@ function MapColumn({
         return last ? { id: deviceId, lat: last.lat, lon: last.lon, altitude_m: scrubRow?.alt ?? null } : null;
     }, [scrubRow, trackPoints, deviceId]);
 
+    /* Balloon-centered gateway range view — scrub along the flight to explain
+     * past silences ("nearest gateway was 600 km away, expect silence"). */
+    const [rangeMode, setRangeMode] = useState(false);
+    const rangeCenter = balloon ? { lat: balloon.lat, lon: balloon.lon, altM: balloon.altitude_m } : null;
+
     return (
         <div style={{ position: 'relative', background: 'var(--sl-bg)', minHeight: 0, minWidth: 0, overflow: 'hidden' }}>
             <V2MissionMap
@@ -440,6 +446,7 @@ function MapColumn({
                 flightPath={trackPoints}
                 playbackT={scrubRow?.t ?? null}
                 projection="globe"
+                rangeCenter={rangeMode ? rangeCenter : null}
             />
             <div style={{ position: 'absolute', top: 14, left: 14, display: 'flex', gap: 6, zIndex: 1, flexWrap: 'wrap' }}>
                 <span className="sl-pill dim">MAPBOX · DARK</span>
@@ -452,6 +459,16 @@ function MapColumn({
                     <Age t={scrubRow?.t ?? null} now={now} compact dot prefix="scrub" />
                 </span>
             </div>
+
+            {rangeCenter && (
+                <GatewayRangeControls
+                    lat={rangeCenter.lat}
+                    lon={rangeCenter.lon}
+                    altM={rangeCenter.altM}
+                    rangeMode={rangeMode}
+                    onToggle={() => setRangeMode((v) => !v)}
+                />
+            )}
         </div>
     );
 }
