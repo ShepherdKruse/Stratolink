@@ -1,7 +1,8 @@
 /**
  * Imperative twin of <GatewayLayer />. For maps built on raw mapbox-gl
  * (rather than react-map-gl), call this once inside `map.on('load', …)`
- * to add the same coverage-union polygon + firefly stack of layers.
+ * to add the same additive heat field + crisp points + edgeless coverage
+ * underlay.
  *
  * Fetches `/ttnmapper-gateways.json` and `/ttnmapper-coverage.json` once
  * each, sharing the parsed data with <GatewayLayer />'s module-level
@@ -70,30 +71,35 @@ export async function addGatewayLayersToMap(
         return;
     }
 
-    /* Coverage union — added FIRST so the firefly points draw on top. */
+    /* Insert the wash + heat field beneath the basemap's first symbol
+     * (label) layer so city / country names stay readable on top. */
+    let beforeId: string | undefined;
+    try {
+        beforeId = map.getStyle()?.layers?.find(l => l.type === 'symbol')?.id;
+    } catch {
+        beforeId = undefined;
+    }
+
+    /* Coverage union — edgeless, very-low-opacity true-km reach beneath the
+     * heat field. No outline (the hard edge is what quilted the view). */
     if (coverage && !map.getSource('tm-coverage')) {
         map.addSource('tm-coverage', {
             type: 'geojson',
             data: { type: 'Feature', geometry: coverage, properties: {} },
         });
-        map.addLayer({
-            id: 'tm-coverage-fill',
-            source: 'tm-coverage',
-            type: 'fill',
-            paint: {
-                'fill-color': '#5eead4',
-                'fill-opacity': 0.05,
+        map.addLayer(
+            {
+                id: 'tm-coverage-fill',
+                source: 'tm-coverage',
+                type: 'fill',
+                paint: {
+                    'fill-color': '#3fb8a0',
+                    'fill-opacity': 0.06,
+                    'fill-antialias': false,
+                },
             },
-        });
-        map.addLayer({
-            id: 'tm-coverage-outline',
-            source: 'tm-coverage',
-            type: 'line',
-            paint: {
-                'line-color': 'rgba(94, 234, 212, 0.28)',
-                'line-width': 0.6,
-            },
-        });
+            beforeId,
+        );
     }
 
     if (!points || points.length === 0) return;
@@ -109,47 +115,54 @@ export async function addGatewayLayersToMap(
     };
     map.addSource('tm-gateways', { type: 'geojson', data: geojson });
 
-    map.addLayer({
-        id: 'tm-gateways-halo',
-        source: 'tm-gateways',
-        type: 'circle',
-        paint: {
-            'circle-radius': [
-                'interpolate', ['linear'], ['zoom'],
-                3, 3, 6, 4.5, 10, 8, 14, 13,
-            ],
-            'circle-color': ['match', ['get', 'net'], 'v3', '#5eead4', 'v2', '#94a3b8', '#94a3b8'],
-            'circle-opacity': 0.08,
-            'circle-blur': 0.9,
+    /* Additive heat field — overlapping gateways sum into a brighter teal
+     * glow; isolated ones stay faint. Beneath labels. */
+    map.addLayer(
+        {
+            id: 'tm-gateway-coverage',
+            source: 'tm-gateways',
+            type: 'heatmap',
+            paint: {
+                'heatmap-weight': 1,
+                'heatmap-intensity': [
+                    'interpolate', ['linear'], ['zoom'],
+                    2, 0.6, 6, 1.1, 10, 1.6,
+                ],
+                'heatmap-color': [
+                    'interpolate', ['linear'], ['heatmap-density'],
+                    0, 'rgba(63,184,160,0)',
+                    0.15, 'rgba(63,184,160,0.10)',
+                    0.4, 'rgba(63,184,160,0.22)',
+                    0.7, 'rgba(80,200,180,0.34)',
+                    1, 'rgba(110,220,200,0.46)',
+                ],
+                'heatmap-radius': [
+                    'interpolate', ['linear'], ['zoom'],
+                    2, 18, 5, 42, 10, 90,
+                ],
+                'heatmap-opacity': 0.9,
+            },
         },
-    });
+        beforeId,
+    );
 
+    /* Crisp bright-teal points on top — gateway locations as data. */
     map.addLayer({
-        id: 'tm-gateways-glow',
+        id: 'tm-gateway-points',
         source: 'tm-gateways',
         type: 'circle',
         paint: {
             'circle-radius': [
                 'interpolate', ['linear'], ['zoom'],
-                3, 1.4, 6, 2.2, 10, 3.6, 14, 6,
+                3, 2.2, 8, 4.5,
             ],
-            'circle-color': ['match', ['get', 'net'], 'v3', '#5eead4', 'v2', '#94a3b8', '#94a3b8'],
-            'circle-opacity': 0.18,
-            'circle-blur': 0.4,
-        },
-    });
-
-    map.addLayer({
-        id: 'tm-gateways-core',
-        source: 'tm-gateways',
-        type: 'circle',
-        paint: {
-            'circle-radius': [
+            'circle-color': '#5fd4bc',
+            'circle-stroke-color': 'rgba(95,212,188,0.5)',
+            'circle-stroke-width': 1,
+            'circle-opacity': [
                 'interpolate', ['linear'], ['zoom'],
-                3, 0.5, 6, 0.8, 10, 1.4, 14, 2.4,
+                2, 0.4, 5, 0.95,
             ],
-            'circle-color': ['match', ['get', 'net'], 'v3', '#ccfbf1', 'v2', '#cbd5e1', '#cbd5e1'],
-            'circle-opacity': 0.5,
         },
     });
 }

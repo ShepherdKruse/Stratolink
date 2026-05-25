@@ -1,19 +1,24 @@
 /**
  * TTN gateway coverage layer.
  *
- * Renders two static snapshots from ttnmapper.org:
+ * Renders two static snapshots from ttnmapper.org as an additive heat field
+ * with crisp points on top (see docs/gateway design spec):
  *
- *   1. `public/ttnmapper-gateways.json` — ~14k gateway points. Each is
- *      drawn as a 3-layer firefly (outer halo, mid glow, crisp core) so
- *      the dot reads as soft ambient texture against the busy forecast /
- *      track layers, not a hard pin.
+ *   1. `public/ttnmapper-gateways.json` — ~14k gateway points. These drive
+ *      a Mapbox `heatmap` layer (additive by nature: overlapping gateways
+ *      sum into a brighter teal glow, isolated ones stay faint, no hard
+ *      edges) plus a single crisp bright-teal point layer on top so the
+ *      gateway *locations* read as data distinct from the coverage wash.
  *
  *   2. `public/ttnmapper-coverage.json` — the **union** of 250 km buffers
- *      around every gateway, pre-computed offline as one MultiPolygon. We
- *      render this as a single soft fill + outline. Overlapping rings in
- *      dense regions no longer compound into a wash of color; instead the
- *      regions of coverage read as one connected blob and the *gaps*
- *      (where reception isn't possible) stand out.
+ *      around every gateway, one MultiPolygon. Rendered as an edgeless,
+ *      very-low-opacity fill underneath the heatmap so true geographic
+ *      reach still shows (the heatmap radius is screen-pixels, not km)
+ *      without the hard outline that used to quilt the view.
+ *
+ * The heat field + coverage underlay are inserted beneath the basemap's
+ * label layers (so city / country names stay readable); the points sit on
+ * top of everything.
  *
  * Both refreshed by `npm run gateways:refresh`. Loads lazily on first
  * mount via module-level memos shared across instances.
@@ -23,7 +28,7 @@
 'use client';
 
 import { useEffect, useMemo, useState } from 'react';
-import { Layer, Source } from 'react-map-gl/mapbox';
+import { Layer, Source, useMap } from 'react-map-gl/mapbox';
 import type { Feature, MultiPolygon, Polygon } from 'geojson';
 
 interface RawGateway {
@@ -89,6 +94,30 @@ export interface GatewayLayerProps {
 export default function GatewayLayer({ visible = true }: GatewayLayerProps) {
     const [points, setPoints] = useState<RawGateway[]>([]);
     const [coverage, setCoverage] = useState<CoverageGeometry | null>(null);
+    const { current: mapRef } = useMap();
+    /* Id of the basemap's first symbol (label) layer. The coverage wash +
+     * heatmap are inserted before it so labels stay readable on top of the
+     * glow; undefined falls back to "append on top" (still a valid stack). */
+    const [beforeId, setBeforeId] = useState<string | undefined>(undefined);
+
+    useEffect(() => {
+        const map = mapRef?.getMap?.();
+        if (!map) return;
+        const findFirstSymbol = () => {
+            try {
+                const layers = map.getStyle()?.layers ?? [];
+                const sym = layers.find((l) => l.type === 'symbol');
+                setBeforeId(sym?.id);
+            } catch {
+                /* style not ready yet — a later styledata event will retry */
+            }
+        };
+        findFirstSymbol();
+        map.on('styledata', findFirstSymbol);
+        return () => {
+            map.off('styledata', findFirstSymbol);
+        };
+    }, [mapRef]);
 
     useEffect(() => {
         /* No `firedRef` gate here: React 19's Strict-Mode double-mount in
@@ -136,24 +165,19 @@ export default function GatewayLayer({ visible = true }: GatewayLayerProps) {
 
     return (
         <>
-            {/* Coverage union — single fill + outline. Renders first so
-              * the firefly dots sit on top. */}
+            {/* Coverage union — edgeless, very-low-opacity true-km reach.
+              * Sits beneath the heatmap (and basemap labels). No outline:
+              * the hard edge is what used to quilt the view. */}
             {coverageGeoJSON && (
                 <Source id="tm-coverage" type="geojson" data={coverageGeoJSON}>
                     <Layer
                         id="tm-coverage-fill"
                         type="fill"
+                        beforeId={beforeId}
                         paint={{
-                            'fill-color': '#5eead4',
-                            'fill-opacity': 0.05,
-                        }}
-                    />
-                    <Layer
-                        id="tm-coverage-outline"
-                        type="line"
-                        paint={{
-                            'line-color': 'rgba(94, 234, 212, 0.28)',
-                            'line-width': 0.6,
+                            'fill-color': '#3fb8a0',
+                            'fill-opacity': 0.06,
+                            'fill-antialias': false,
                         }}
                     />
                 </Source>
@@ -161,69 +185,58 @@ export default function GatewayLayer({ visible = true }: GatewayLayerProps) {
 
             {pointsGeoJSON && (
                 <Source id="tm-gateways" type="geojson" data={pointsGeoJSON}>
-                    {/* Firefly outer halo. */}
+                    {/* Additive heat field — overlapping gateways sum into a
+                      * brighter teal glow; isolated ones stay faint. Inserted
+                      * beneath the labels. */}
                     <Layer
-                        id="tm-gateways-halo"
-                        type="circle"
+                        id="tm-gateway-coverage"
+                        type="heatmap"
+                        beforeId={beforeId}
                         paint={{
-                            'circle-radius': [
+                            'heatmap-weight': 1,
+                            'heatmap-intensity': [
                                 'interpolate', ['linear'], ['zoom'],
-                                3, 3,
-                                6, 4.5,
-                                10, 8,
-                                14, 13,
+                                2, 0.6,
+                                6, 1.1,
+                                10, 1.6,
                             ],
-                            'circle-color': [
-                                'match', ['get', 'net'],
-                                'v3', '#5eead4',
-                                'v2', '#94a3b8',
-                                '#94a3b8',
+                            'heatmap-color': [
+                                'interpolate', ['linear'], ['heatmap-density'],
+                                0, 'rgba(63,184,160,0)',
+                                0.15, 'rgba(63,184,160,0.10)',
+                                0.4, 'rgba(63,184,160,0.22)',
+                                0.7, 'rgba(80,200,180,0.34)',
+                                1, 'rgba(110,220,200,0.46)',
                             ],
-                            'circle-opacity': 0.08,
-                            'circle-blur': 0.9,
+                            'heatmap-radius': [
+                                'interpolate', ['linear'], ['zoom'],
+                                2, 18,
+                                5, 42,
+                                10, 90,
+                            ],
+                            'heatmap-opacity': 0.9,
                         }}
                     />
-                    {/* Firefly mid glow. */}
+                    {/* Crisp bright-teal point on top — gateway locations as
+                      * data, distinct from the wash. Fades out at very low
+                      * zoom so the continental view reads as soft field. */}
                     <Layer
-                        id="tm-gateways-glow"
+                        id="tm-gateway-points"
                         type="circle"
                         paint={{
                             'circle-radius': [
                                 'interpolate', ['linear'], ['zoom'],
-                                3, 1.4,
-                                6, 2.2,
-                                10, 3.6,
-                                14, 6,
+                                3, 2.2,
+                                8, 4.5,
                             ],
-                            'circle-color': [
-                                'match', ['get', 'net'],
-                                'v3', '#5eead4',
-                                'v2', '#94a3b8',
-                                '#94a3b8',
-                            ],
-                            'circle-opacity': 0.18,
-                            'circle-blur': 0.4,
-                        }}
-                    />
-                    {/* Crisp core — pale teal v3 / pale gray v2. */}
-                    <Layer
-                        id="tm-gateways-core"
-                        type="circle"
-                        paint={{
-                            'circle-radius': [
+                            'circle-color': '#5fd4bc',
+                            'circle-stroke-color': 'rgba(95,212,188,0.5)',
+                            'circle-stroke-width': 1,
+                            'circle-opacity': [
                                 'interpolate', ['linear'], ['zoom'],
-                                3, 0.5,
-                                6, 0.8,
-                                10, 1.4,
-                                14, 2.4,
+                                2, 0.4,
+                                5, 0.95,
                             ],
-                            'circle-color': [
-                                'match', ['get', 'net'],
-                                'v3', '#ccfbf1',
-                                'v2', '#cbd5e1',
-                                '#cbd5e1',
-                            ],
-                            'circle-opacity': 0.5,
                         }}
                     />
                 </Source>

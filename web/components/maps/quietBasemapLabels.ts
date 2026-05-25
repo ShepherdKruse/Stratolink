@@ -18,6 +18,17 @@ const HIDE_LABEL_PATTERNS = [
     /admin.*label.*1/i,    /* admin-1 label is the typical state/province pattern */
 ];
 
+/* Secondary labels that compete with the coverage / track layers but carry
+ * little orientation value at these zooms. Hidden outright so the data
+ * carries the visual weight (major-city + country labels are kept, just
+ * shrunk by SHRINK_PATTERNS below). */
+const HIDE_CLUTTER_PATTERNS = [
+    /poi-label/i,
+    /water-point-label/i,
+    /settlement-minor-label/i,
+    /settlement-subdivision-label/i,
+];
+
 const HIDE_LINE_PATTERNS = [
     /road/i,
     /motorway/i,
@@ -54,6 +65,13 @@ export function quietBasemapLabels(map: Map): void {
         if (layer.type !== 'symbol') continue;
 
         if (HIDE_LABEL_PATTERNS.some(re => re.test(id))) {
+            try { map.setLayoutProperty(id, 'visibility', 'none'); } catch { /* ignore */ }
+            continue;
+        }
+
+        /* Minor settlements / POIs / water points — declutter so the
+         * coverage field reads clearly. */
+        if (HIDE_CLUTTER_PATTERNS.some(re => re.test(id))) {
             try { map.setLayoutProperty(id, 'visibility', 'none'); } catch { /* ignore */ }
             continue;
         }
