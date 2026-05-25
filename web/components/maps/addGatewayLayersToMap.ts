@@ -124,29 +124,36 @@ export async function addGatewayLayersToMap(
             type: 'heatmap',
             paint: {
                 'heatmap-weight': 1,
+                /* Low intensity so ultra-dense regions (Europe) don't clamp the
+                 * whole continent to the top of the ramp. */
                 'heatmap-intensity': [
                     'interpolate', ['linear'], ['zoom'],
-                    2, 0.6, 6, 1.1, 10, 1.6,
+                    2, 0.25, 5, 0.5, 10, 0.9,
                 ],
+                /* Gentle ramp, soft top alpha → glow not paint. */
                 'heatmap-color': [
                     'interpolate', ['linear'], ['heatmap-density'],
                     0, 'rgba(63,184,160,0)',
-                    0.15, 'rgba(63,184,160,0.10)',
-                    0.4, 'rgba(63,184,160,0.22)',
-                    0.7, 'rgba(80,200,180,0.34)',
-                    1, 'rgba(110,220,200,0.46)',
+                    0.2, 'rgba(63,184,160,0.08)',
+                    0.45, 'rgba(63,184,160,0.16)',
+                    0.7, 'rgba(80,200,180,0.24)',
+                    1, 'rgba(120,225,205,0.32)',
                 ],
                 'heatmap-radius': [
                     'interpolate', ['linear'], ['zoom'],
-                    2, 18, 5, 42, 10, 90,
+                    2, 10, 5, 26, 10, 60,
                 ],
-                'heatmap-opacity': 0.9,
+                'heatmap-opacity': [
+                    'interpolate', ['linear'], ['zoom'],
+                    2, 0.6, 6, 0.85,
+                ],
             },
         },
         beforeId,
     );
 
-    /* Crisp bright-teal points on top — gateway locations as data. */
+    /* Crisp bright-teal points on top — gateway locations as data. Hidden on
+     * the world / globe view, fading in as you zoom to continental / local. */
     map.addLayer({
         id: 'tm-gateway-points',
         source: 'tm-gateways',
@@ -154,14 +161,14 @@ export async function addGatewayLayersToMap(
         paint: {
             'circle-radius': [
                 'interpolate', ['linear'], ['zoom'],
-                3, 2.2, 8, 4.5,
+                4, 1.6, 8, 4,
             ],
             'circle-color': '#5fd4bc',
             'circle-stroke-color': 'rgba(95,212,188,0.5)',
             'circle-stroke-width': 1,
             'circle-opacity': [
                 'interpolate', ['linear'], ['zoom'],
-                2, 0.4, 5, 0.95,
+                4, 0, 6, 0.85,
             ],
         },
     });
