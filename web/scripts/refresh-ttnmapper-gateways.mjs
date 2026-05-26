@@ -23,7 +23,7 @@
 import { writeFile, mkdir } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { buffer, union, featureCollection, point } from '@turf/turf';
+import { buffer, union, featureCollection, point, simplify } from '@turf/turf';
 
 const NETWORKS = [
     { id: 'NS_TTS_V3://ttn@000013', tag: 'v3' },
@@ -45,6 +45,14 @@ const BUFFER_STEPS = 16;
  * more buckets, each cheaper to union, but more boundary buckets need
  * to be merged in the second pass. 5° works well for our ~14k inputs. */
 const BUCKET_DEG = 5;
+/* Douglas–Peucker tolerance, in degrees, applied to the unioned coverage
+ * polygons before they're written. 0.05° ≈ 5.5 km at the equator —
+ * invisible at the country-scale zooms where coverage is read, and cuts
+ * vertex count (and therefore JSON size and client-side tessellation
+ * cost) by ~4×. Without this the unioned MultiPolygon ships ~20k vertices
+ * and ~770 KB per file, which made tab switches feel sluggish in
+ * dashboards that mount multiple maps. */
+const SIMPLIFY_TOLERANCE_DEG = 0.05;
 
 const here = dirname(fileURLToPath(import.meta.url));
 const outPath = resolve(here, '..', 'public', 'ttnmapper-gateways.json');
@@ -193,10 +201,16 @@ async function main() {
         }
         const isPrimary = radiusKm === COVERAGE_KM_PRIMARY;
         const path = isPrimary ? coveragePath : coverageOuterPath;
+        const simplified = simplify(merged, {
+            tolerance: SIMPLIFY_TOLERANCE_DEG,
+            highQuality: false,
+            mutate: true,
+        });
         const payload = {
-            coverage: merged.geometry,
+            coverage: simplified.geometry,
             radiusKm,
             bufferSteps: BUFFER_STEPS,
+            simplifyTolerance: SIMPLIFY_TOLERANCE_DEG,
             fetchedAt,
         };
         await writeFile(path, JSON.stringify(payload));
