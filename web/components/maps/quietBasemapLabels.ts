@@ -12,6 +12,21 @@
  */
 import type { Map, LayerSpecification } from 'mapbox-gl';
 
+/* Per-map record of which layers we've already shrunk. The shrink path
+ * READS the current `text-size`, MULTIPLIES by SHRINK_SCALE, and WRITES
+ * it back — which is only safe to do once per layer per map. If we let
+ * it run again (and `onStyleData` does fire many times — every Source/
+ * Layer added by react-map-gl triggers it), each pass wraps the
+ * expression in another `['*', expr, k]` layer. After enough passes the
+ * expression tree is deep enough that Mapbox's worker stack-overflows
+ * trying to parse it ("Maximum call stack size exceeded" in
+ * `Ii.parse` / `an.parse`), which freezes the map and starves the main
+ * thread — clicks on tabs stop registering.
+ *
+ * WeakMap keys on the Map instance so the cache is garbage-collected
+ * when the component unmounts. */
+const SHRUNK: WeakMap<Map, Set<string>> = new WeakMap();
+
 const HIDE_LABEL_PATTERNS = [
     /state-label/i,
     /province-label/i,
@@ -41,11 +56,17 @@ export function quietBasemapLabels(map: Map): void {
     } catch {
         return;
     }
+    let shrunk = SHRUNK.get(map);
+    if (!shrunk) {
+        shrunk = new Set();
+        SHRUNK.set(map, shrunk);
+    }
     for (const layer of layers) {
         const id = layer.id;
 
         /* Hide non-symbol layers that match the road family — covers
-         * the line/fill geometry, not just labels. */
+         * the line/fill geometry, not just labels. setLayoutProperty
+         * with 'visibility' is idempotent so we don't need to gate. */
         if (layer.type !== 'symbol' && HIDE_LINE_PATTERNS.some(re => re.test(id))) {
             try { map.setLayoutProperty(id, 'visibility', 'none'); } catch { /* ignore */ }
             continue;
@@ -65,6 +86,7 @@ export function quietBasemapLabels(map: Map): void {
         }
 
         if (SHRINK_PATTERNS.some(re => re.test(id))) {
+            if (shrunk.has(id)) continue;
             try {
                 const current = map.getLayoutProperty(id, 'text-size') as unknown;
                 const scaled = scaleExpression(current, SHRINK_SCALE);
@@ -72,6 +94,7 @@ export function quietBasemapLabels(map: Map): void {
                  * expression shapes; our return value is structurally
                  * equivalent but typed as `unknown` to allow any input. */
                 map.setLayoutProperty(id, 'text-size', scaled as never);
+                shrunk.add(id);
             } catch { /* ignore */ }
         }
     }
