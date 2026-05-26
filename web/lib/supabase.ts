@@ -1,18 +1,37 @@
-import { createClient as createSupabaseClient } from '@supabase/supabase-js';
+import { createClient as createSupabaseClient, type SupabaseClient } from '@supabase/supabase-js';
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || '';
 const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || '';
+
+/* Browser-side singleton. Without this, every poll cycle in
+ * `useTelemetry` (and other client callers) creates a fresh client,
+ * which spawns a fresh GoTrueClient that registers a `storage` event
+ * listener on `window` — pinning the instance in memory forever. After
+ * a few minutes on the page, dozens of auth clients are all firing on
+ * every localStorage change, eventually starving the main thread of
+ * event-handling cycles (which manifests as unresponsive tab clicks).
+ *
+ * Server-side callers (route handlers, server actions) keep getting a
+ * fresh client per call — they have no `window`, no leak, and
+ * different requests can carry different auth contexts. */
+let browserAnonClient: SupabaseClient | null = null;
 
 export function createClient() {
     if (!supabaseUrl || !supabaseAnonKey || supabaseUrl.includes('your_supabase') || supabaseUrl === '') {
         throw new Error('Supabase not configured. Please set NEXT_PUBLIC_SUPABASE_URL and NEXT_PUBLIC_SUPABASE_ANON_KEY in .env.local');
     }
-    
+
     // Validate URL format
     if (!supabaseUrl.startsWith('http://') && !supabaseUrl.startsWith('https://')) {
         throw new Error(`Invalid Supabase URL format: ${supabaseUrl}`);
     }
-    
+
+    if (typeof window !== 'undefined') {
+        if (browserAnonClient) return browserAnonClient;
+        browserAnonClient = createSupabaseClient(supabaseUrl, supabaseAnonKey);
+        return browserAnonClient;
+    }
+
     return createSupabaseClient(supabaseUrl, supabaseAnonKey);
 }
 
