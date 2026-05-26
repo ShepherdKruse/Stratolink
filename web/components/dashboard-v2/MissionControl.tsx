@@ -20,7 +20,7 @@ import {
 import { useTelemetry, type DeviceSummary, type FleetMetrics, type FleetAlert, type SubsystemFreshness } from './useTelemetry';
 import { useTickingNow, useElementSize, ConnectionPill, V1Link, fmtPressure, fmtAltitudeM } from './shared';
 import V2MissionMap, { type V2Balloon, type V2FlightPoint, type V2Gateway } from './V2MissionMap';
-import GatewayCoverageLegend from './GatewayCoverageLegend';
+import GatewayLegend from '@/components/maps/GatewayLegend';
 
 export default function MissionControlScreen() {
     const router = useRouter();
@@ -421,7 +421,7 @@ function CenterMap({ devices, rows, latest, lastFixRow, selectedDevice, now }: {
             <div style={{ position: 'absolute', top: 14, right: 14, zIndex: 1 }}>
                 <Age t={latest?.t ?? null} now={now} dot prefix="uplink" />
             </div>
-            <GatewayCoverageLegend />
+            <GatewayLegend />
         </div>
     );
 }

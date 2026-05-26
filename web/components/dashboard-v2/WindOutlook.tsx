@@ -14,6 +14,7 @@ import {
 import { snapPressureHpa } from '@/lib/wind/fetchWindGrid';
 import WindSynthesisMap from './wind/WindSynthesisMap';
 import type { V2FlightPoint } from './V2MissionMap';
+import GatewayLegend from '@/components/maps/GatewayLegend';
 
 export default function WindOutlookScreen() {
     const router = useRouter();
@@ -173,7 +174,7 @@ export default function WindOutlookScreen() {
 
             </div>
 
-            <div style={{ flex: 1, minHeight: 0 }}>
+            <div style={{ flex: 1, minHeight: 0, position: 'relative' }}>
                 <WindSynthesisMap
                     deviceId={selectedId ?? callsign}
                     callsign={callsign}
@@ -190,6 +191,7 @@ export default function WindOutlookScreen() {
                     nullschoolUrl={mapUrl}
                     lastAltM={lastFixRow?.alt ?? null}
                 />
+                <GatewayLegend placement="bottom-left" />
             </div>
         </div>
     );

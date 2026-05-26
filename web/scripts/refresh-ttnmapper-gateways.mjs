@@ -31,8 +31,13 @@ const NETWORKS = [
 ];
 /* Drop gateways silent longer than this. Keeps the snapshot pruned. */
 const RECENT_DAYS = 30;
-/* Coverage radius around each gateway, km. */
-const COVERAGE_KM = 150;
+/* Coverage radii around each gateway, km.
+ * - 150 km: tight, conservative "definite reception" range.
+ * - 250 km: looser, optimistic "best-case line-of-sight" range.
+ * Both get a union polygon; the UI renders the inner filled and the
+ * outer as an outline-only overlay so the operator sees both. */
+const COVERAGE_KM_PRIMARY = 150;
+const COVERAGE_KM_OUTER = 250;
 /* Buffer resolution. 16 segments gives a smooth-enough circle for
  * dashboard rendering at any zoom and unions ~4× faster than 64. */
 const BUFFER_STEPS = 16;
@@ -44,6 +49,7 @@ const BUCKET_DEG = 5;
 const here = dirname(fileURLToPath(import.meta.url));
 const outPath = resolve(here, '..', 'public', 'ttnmapper-gateways.json');
 const coveragePath = resolve(here, '..', 'public', 'ttnmapper-coverage.json');
+const coverageOuterPath = resolve(here, '..', 'public', 'ttnmapper-coverage-outer.json');
 
 async function fetchNetwork(id, tag, cutoff) {
     const url = `https://api.ttnmapper.org/network/${encodeURIComponent(id)}/gateways`;
@@ -86,7 +92,7 @@ async function fetchNetwork(id, tag, cutoff) {
  * Step 2 is `O(n_cell)` per cell and runs in parallel across cells.
  * Step 3 is `O(n_buckets)` — usually <100 cells.
  */
-function computeCoverageUnion(gateways) {
+function computeCoverageUnion(gateways, coverageKm) {
     /* Pass 1 — bucket the points. */
     const cells = new Map(); /* key "lat_lon" → array of points */
     for (const g of gateways) {
@@ -104,7 +110,7 @@ function computeCoverageUnion(gateways) {
         const fc = featureCollection(pts.map(p => point([p.lon, p.lat])));
         let buffered;
         try {
-            buffered = buffer(fc, COVERAGE_KM, { units: 'kilometers', steps: BUFFER_STEPS });
+            buffered = buffer(fc, coverageKm, { units: 'kilometers', steps: BUFFER_STEPS });
         } catch (e) {
             console.warn(`buffer failed for cell ${key}:`, e?.message ?? e);
             continue;
@@ -173,23 +179,30 @@ async function main() {
     console.log(`Wrote ${gateways.length} gateways → ${outPath}`);
     console.log('  by network:', byNet);
 
-    /* Coverage union. */
-    console.log(`\nComputing ${COVERAGE_KM} km coverage union…`);
-    const t0 = Date.now();
-    const merged = computeCoverageUnion(gateways);
-    if (!merged) {
-        console.warn('coverage union failed — skipping coverage output');
-        return;
+    /* Coverage unions — primary (definite reception) + outer (best-case
+     * line-of-sight). Run sequentially: the buffer compute is CPU-bound
+     * and doesn't parallelise on a single Node thread. */
+    const fs = await import('node:fs/promises');
+    for (const radiusKm of [COVERAGE_KM_PRIMARY, COVERAGE_KM_OUTER]) {
+        console.log(`\nComputing ${radiusKm} km coverage union…`);
+        const t0 = Date.now();
+        const merged = computeCoverageUnion(gateways, radiusKm);
+        if (!merged) {
+            console.warn(`  ${radiusKm} km coverage union failed — skipping`);
+            continue;
+        }
+        const isPrimary = radiusKm === COVERAGE_KM_PRIMARY;
+        const path = isPrimary ? coveragePath : coverageOuterPath;
+        const payload = {
+            coverage: merged.geometry,
+            radiusKm,
+            bufferSteps: BUFFER_STEPS,
+            fetchedAt,
+        };
+        await writeFile(path, JSON.stringify(payload));
+        const stat = await fs.stat(path);
+        console.log(`  Wrote ${radiusKm} km → ${path} (${(stat.size / 1024).toFixed(1)} KB, ${((Date.now() - t0) / 1000).toFixed(1)} s)`);
     }
-    const coveragePayload = {
-        coverage: merged.geometry,
-        radiusKm: COVERAGE_KM,
-        bufferSteps: BUFFER_STEPS,
-        fetchedAt,
-    };
-    await writeFile(coveragePath, JSON.stringify(coveragePayload));
-    const stat = await import('node:fs/promises').then(m => m.stat(coveragePath));
-    console.log(`Wrote coverage polygon → ${coveragePath} (${(stat.size / 1024).toFixed(1)} KB, ${((Date.now() - t0) / 1000).toFixed(1)} s)`);
 }
 
 main().catch((err) => {

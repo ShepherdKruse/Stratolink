@@ -222,3 +222,42 @@
 .docs-content hr {
   @apply my-8 border-t border-border;
 }
+
+/* ============================================================
+ * Mapbox attribution — blend with the dark basemap so it reads
+ * as ambient credit rather than a bright white pill in the
+ * corner. The control sits above any GatewayLegend, which we
+ * already lift via `bottom: 30px` to clear it.
+ * ============================================================ */
+.mapboxgl-ctrl-bottom-right .mapboxgl-ctrl-attrib,
+.mapboxgl-ctrl-bottom-left .mapboxgl-ctrl-attrib {
+    background: rgba(8, 13, 23, 0.55) !important;
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    border-top-left-radius: 3px;
+    box-shadow: none;
+    padding: 0 6px;
+}
+
+.mapboxgl-ctrl-attrib,
+.mapboxgl-ctrl-attrib.mapboxgl-compact {
+    color: rgba(200, 212, 232, 0.4) !important;
+    font-size: 9.5px;
+    line-height: 1.5;
+}
+
+.mapboxgl-ctrl-attrib a {
+    color: rgba(200, 212, 232, 0.55) !important;
+    text-decoration: none;
+}
+
+.mapboxgl-ctrl-attrib a:hover {
+    color: rgba(200, 212, 232, 0.85) !important;
+    text-decoration: underline;
+}
+
+/* The "info" button on compact attribution gets a teal tinted icon
+ * so it doesn't read as bright white. */
+.mapboxgl-ctrl-attrib-button {
+    background-color: rgba(94, 234, 212, 0.2) !important;
+}

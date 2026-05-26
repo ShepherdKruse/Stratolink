@@ -18,17 +18,6 @@ const HIDE_LABEL_PATTERNS = [
     /admin.*label.*1/i,    /* admin-1 label is the typical state/province pattern */
 ];
 
-/* Secondary labels that compete with the coverage / track layers but carry
- * little orientation value at these zooms. Hidden outright so the data
- * carries the visual weight (major-city + country labels are kept, just
- * shrunk by SHRINK_PATTERNS below). */
-const HIDE_CLUTTER_PATTERNS = [
-    /poi-label/i,
-    /water-point-label/i,
-    /settlement-minor-label/i,
-    /settlement-subdivision-label/i,
-];
-
 const HIDE_LINE_PATTERNS = [
     /road/i,
     /motorway/i,
@@ -69,13 +58,6 @@ export function quietBasemapLabels(map: Map): void {
             continue;
         }
 
-        /* Minor settlements / POIs / water points — declutter so the
-         * coverage field reads clearly. */
-        if (HIDE_CLUTTER_PATTERNS.some(re => re.test(id))) {
-            try { map.setLayoutProperty(id, 'visibility', 'none'); } catch { /* ignore */ }
-            continue;
-        }
-
         /* Road shields / route numbers / highway names — hide too. */
         if (HIDE_LINE_PATTERNS.some(re => re.test(id))) {
             try { map.setLayoutProperty(id, 'visibility', 'none'); } catch { /* ignore */ }
@@ -83,16 +65,68 @@ export function quietBasemapLabels(map: Map): void {
         }
 
         if (SHRINK_PATTERNS.some(re => re.test(id))) {
-            /* Scale text-size by SHRINK_SCALE. The size can be a number,
-             * a `['interpolate', …]` expression, or a `['step', …]`
-             * expression depending on the style. Wrap whatever's there
-             * in a multiplication. */
             try {
-                const current = map.getLayoutProperty(id, 'text-size');
-                if (current !== undefined && current !== null) {
-                    map.setLayoutProperty(id, 'text-size', ['*', current, SHRINK_SCALE]);
-                }
+                const current = map.getLayoutProperty(id, 'text-size') as unknown;
+                const scaled = scaleExpression(current, SHRINK_SCALE);
+                /* The Mapbox typings narrow `text-size` to a few specific
+                 * expression shapes; our return value is structurally
+                 * equivalent but typed as `unknown` to allow any input. */
+                map.setLayoutProperty(id, 'text-size', scaled as never);
             } catch { /* ignore */ }
         }
     }
+}
+
+/**
+ * Multiply a Mapbox `text-size` (or any numeric layout value) by a scalar
+ * while preserving the expression's top-level shape.
+ *
+ * Mapbox forbids `['zoom']` anywhere except at the top of `step` /
+ * `interpolate` / a few other allowed roots — so we can't just wrap the
+ * whole expression in `['*', expr, k]` when expr already contains a
+ * zoom-driven interpolation. Instead we push the multiplier INTO each
+ * leaf output value:
+ *
+ *   ['interpolate', ['linear'], ['zoom'], 5, 12, 10, 16]
+ *     → ['interpolate', ['linear'], ['zoom'], 5, ['*', 12, k], 10, ['*', 16, k]]
+ *
+ *   ['step', ['zoom'], 10, 5, 12, 10, 14]
+ *     → ['step', ['zoom'], ['*', 10, k], 5, ['*', 12, k], 10, ['*', 14, k]]
+ *
+ * Plain numbers and constant arrays are multiplied directly.
+ */
+type Expr = unknown;
+function scaleExpression(current: Expr, k: number): Expr {
+    if (typeof current === 'number') return current * k;
+    if (current === undefined || current === null) return current;
+    if (!Array.isArray(current)) {
+        /* Some other expression form we don't know how to scale safely —
+         * leave it alone. */
+        return current;
+    }
+    const op = current[0];
+
+    if (op === 'interpolate' || op === 'interpolate-hcl' || op === 'interpolate-lab') {
+        /* Shape: [op, interpType, input, stop_in_1, stop_out_1, stop_in_2, stop_out_2, …] */
+        const out: Expr[] = [op, current[1], current[2]];
+        for (let i = 3; i < current.length; i += 2) {
+            out.push(current[i]);                                    /* stop input */
+            out.push(scaleExpression(current[i + 1] as Expr, k));    /* stop output */
+        }
+        return out;
+    }
+
+    if (op === 'step') {
+        /* Shape: [op, input, default_out, stop_in_1, stop_out_1, stop_in_2, stop_out_2, …] */
+        const out: Expr[] = [op, current[1], scaleExpression(current[2] as Expr, k)];
+        for (let i = 3; i < current.length; i += 2) {
+            out.push(current[i]);
+            out.push(scaleExpression(current[i + 1] as Expr, k));
+        }
+        return out;
+    }
+
+    /* Last-resort fallback — wrap and let Mapbox tell us if it's bad.
+     * Works for purely-data expressions (e.g. `['get', 'size']`). */
+    return ['*', current, k];
 }

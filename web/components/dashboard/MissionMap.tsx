@@ -5,6 +5,7 @@ import Map, { Source, Layer } from 'react-map-gl/mapbox';
 import type { MapRef } from 'react-map-gl/mapbox';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import GatewayLayer from '@/components/maps/GatewayLayer';
+import GatewayLegend from '@/components/maps/GatewayLegend';
 import { quietBasemapLabels } from '@/components/maps/quietBasemapLabels';
 
 import { isUsableGpsCoordinate } from '@/lib/mapGeo';
@@ -401,6 +402,7 @@ export default function MissionMap({
                     </>
                 )}
             </Map>
+            <GatewayLegend />
         </div>
     );
 }

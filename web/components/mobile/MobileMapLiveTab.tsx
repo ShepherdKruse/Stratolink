@@ -46,7 +46,13 @@ export default function MobileMapLiveTab({
             ? coerceNum(latestRow?.altitude_m) ?? sel.altitude_m
             : coerceNum(latestRow?.altitude_m);
 
-    const tabBarReserve = `calc(5.85rem + max(34px, env(safe-area-inset-bottom)))`;
+    /* Floats the Live vitals strip directly on top of the tab bar.
+     * Tab bar total height = paddingTop(8) + content(~46) +
+     * paddingBottom(max 34, safe-area). The `3.25rem` ≈ 52 px matches
+     * the content + paddingTop and the safe-area term tracks the
+     * device's bottom padding. (Was 5.85rem + safe area, which left
+     * ~35 px of floating dead space above the tab bar.) */
+    const tabBarReserve = `calc(3.25rem + max(34px, env(safe-area-inset-bottom)))`;
 
     return (
         <div className="relative h-full w-full">
