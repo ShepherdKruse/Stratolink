@@ -106,6 +106,7 @@
     display: flex;
     align-items: center;
     gap: 12px;
+    flex-shrink: 0;
 }
 .sl-brand-logo {
     flex-shrink: 0;
@@ -123,11 +124,13 @@
     margin-left: 4px;
     text-transform: none;
 }
-.sl-tabs { display: flex; gap: 0; margin-left: 16px; align-items: center; height: 100%; }
+.sl-tabs { display: flex; gap: 0; margin-left: 16px; align-items: center; height: 100%; flex-shrink: 0; }
 .sl-tabs .tab {
     height: 100%;
     display: flex;
     align-items: center;
+    flex-shrink: 0;
+    white-space: nowrap;
     padding: 0 16px;
     font-family: var(--sl-sans);
     font-size: 11px;
