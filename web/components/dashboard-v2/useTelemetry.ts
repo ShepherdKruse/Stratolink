@@ -167,6 +167,19 @@ const EMPTY_FRESHNESS: SubsystemFreshness = {
     lux: null, rssi: null, imu: null, snr: null,
 };
 
+/* ──────────────────────────────────────────────────────────────
+ * Cross-mount cache. Each dashboard tab is its own route, so switching
+ * tabs unmounts this hook and remounts it on the next screen. Without a
+ * cache every switch starts from an empty "loading" state and re-queries
+ * Supabase before anything renders — which is what made tab changes feel
+ * slow. We keep the last good result at module scope so a remount renders
+ * instantly, then the effects below still re-fetch to revalidate.
+ * ────────────────────────────────────────────────────────────── */
+let cachedDevices: DeviceSummary[] | null = null;
+let cachedFleet: FleetMetrics | null = null;
+const cachedRowsByDevice = new Map<string, TelemetryRow[]>();
+const cachedInfoByDevice = new Map<string, DeviceInfo>();
+
 function computeFreshness(rows: TelemetryRow[]): SubsystemFreshness {
     const f: SubsystemFreshness = { ...EMPTY_FRESHNESS };
     /* Walk newest → oldest and capture the first packet that has a real value
@@ -268,14 +281,20 @@ function deriveAlerts(rows: TelemetryRow[], deviceId: string | null): FleetAlert
 }
 
 export function useTelemetry({ initialSelectedId = null }: { initialSelectedId?: string | null } = {}): UseTelemetryResult {
-    const [devices, setDevices] = useState<DeviceSummary[]>([]);
+    const [devices, setDevices] = useState<DeviceSummary[]>(() => cachedDevices ?? []);
     const [selectedId, setSelectedId] = useState<string | null>(initialSelectedId);
-    const [rows, setRows] = useState<TelemetryRow[]>([]);
-    const [deviceInfo, setDeviceInfo] = useState<DeviceInfo | null>(null);
-    const [fleet, setFleet] = useState<FleetMetrics>(EMPTY_FLEET);
-    const [loading, setLoading] = useState(true);
+    const [rows, setRows] = useState<TelemetryRow[]>(
+        () => (initialSelectedId ? cachedRowsByDevice.get(initialSelectedId) : undefined) ?? [],
+    );
+    const [deviceInfo, setDeviceInfo] = useState<DeviceInfo | null>(
+        () => (initialSelectedId ? cachedInfoByDevice.get(initialSelectedId) : undefined) ?? null,
+    );
+    const [fleet, setFleet] = useState<FleetMetrics>(() => cachedFleet ?? EMPTY_FLEET);
+    const [loading, setLoading] = useState(cachedDevices === null);
     const [lastFetchedAt, setLastFetchedAt] = useState<number | null>(null);
-    const [status, setStatus] = useState<'connecting' | 'connected' | 'disconnected' | 'error'>('connecting');
+    const [status, setStatus] = useState<'connecting' | 'connected' | 'disconnected' | 'error'>(
+        cachedDevices !== null ? 'connected' : 'connecting',
+    );
     const [tick, setTick] = useState(0);
 
     const refetch = useCallback(() => setTick(t => t + 1), []);
@@ -360,6 +379,7 @@ export function useTelemetry({ initialSelectedId = null }: { initialSelectedId?:
                 }));
 
                 if (cancelled) return;
+                cachedDevices = summaries;
                 setDevices(summaries);
                 setStatus('connected');
                 setLoading(false);
@@ -413,7 +433,7 @@ export function useTelemetry({ initialSelectedId = null }: { initialSelectedId?:
                     const activeDeviceIds = new Set(safe.map(r => r.device_id));
 
                     if (!cancelled) {
-                        setFleet({
+                        const fm: FleetMetrics = {
                             totalDevices: summaries.length,
                             activeCount: activeDeviceIds.size,
                             uplinks24h: total,
@@ -423,10 +443,14 @@ export function useTelemetry({ initialSelectedId = null }: { initialSelectedId?:
                             medianRssi: med,
                             firstFixT: fixTimes.length ? Math.min(...fixTimes) : null,
                             lastUplinkT: allTimes.length ? Math.max(...allTimes) : null,
-                        });
+                        };
+                        cachedFleet = fm;
+                        setFleet(fm);
                     }
                 } else if (!cancelled) {
-                    setFleet({ ...EMPTY_FLEET, totalDevices: summaries.length });
+                    const fm: FleetMetrics = { ...EMPTY_FLEET, totalDevices: summaries.length };
+                    cachedFleet = fm;
+                    setFleet(fm);
                 }
             } catch (e) {
                 console.debug('useTelemetry devices error', e);
@@ -467,6 +491,7 @@ export function useTelemetry({ initialSelectedId = null }: { initialSelectedId?:
                 if (error) throw error;
                 if (cancelled) return;
                 const next = (data ?? []).map(rawToTelemetry);
+                cachedRowsByDevice.set(selectedId!, next);
                 setRows(next);
 
                 /* Pull the most recent firmware_version that was actually
@@ -474,7 +499,7 @@ export function useTelemetry({ initialSelectedId = null }: { initialSelectedId?:
                  * and the UI displays '—' — never a placeholder. */
                 const latestWithFw = [...next].reverse().find(r => r.firmware_version);
                 const latestRow = next[next.length - 1];
-                setDeviceInfo({
+                const info: DeviceInfo = {
                     id: selectedId!,
                     firmware: latestWithFw?.firmware_version ?? null,
                     launched_by: summary?.callsign ?? null,
@@ -484,7 +509,9 @@ export function useTelemetry({ initialSelectedId = null }: { initialSelectedId?:
                         ? `SF${latestRow.lora_sf}BW${Math.round(latestRow.lora_bw / 1000)}`
                         : null,
                     packet_count: next.length,
-                });
+                };
+                cachedInfoByDevice.set(selectedId!, info);
+                setDeviceInfo(info);
                 setLastFetchedAt(Date.now());
             } catch (e) {
                 console.debug('useTelemetry rows error', e);

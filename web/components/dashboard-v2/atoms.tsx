@@ -7,7 +7,8 @@
  */
 'use client';
 
-import type { ReactNode } from 'react';
+import { useEffect, type ReactNode } from 'react';
+import { useRouter } from 'next/navigation';
 
 /* ──────────────────────────────────────────────────────────────
  * Telemetry shape used across v2 — mirrors the design system's data
@@ -593,6 +594,16 @@ export function Chrome({
     now: number;
     right?: ReactNode;
 }) {
+    /* Prefetch the sibling tab routes on mount so clicking a tab swaps in
+     * near-instantly (bundle + RSC payload already warmed) instead of
+     * fetching/compiling that route on demand at click time. */
+    const router = useRouter();
+    useEffect(() => {
+        tabs.forEach((t) => {
+            if (!t.disabled) router.prefetch(t.path);
+        });
+    }, [tabs, router]);
+
     return (
         <div className="sl-chrome">
             <div className="sl-brand">
