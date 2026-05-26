@@ -10,7 +10,6 @@ interface MobileMapLiveTabProps {
     flightPathData: Array<{ lat: number; lon: number; time: Date }>;
     selectedBalloonId: string | null;
     onSelectDevice: (id: string | null) => void;
-    userLocation: { lat: number; lon: number } | null;
     latestRow: Record<string, unknown> | undefined;
 }
 
@@ -26,7 +25,6 @@ export default function MobileMapLiveTab({
     flightPathData,
     selectedBalloonId,
     onSelectDevice,
-    userLocation,
     latestRow,
 }: MobileMapLiveTabProps) {
     const sel = balloonData.find((b) => b.id === selectedBalloonId);
@@ -57,7 +55,6 @@ export default function MobileMapLiveTab({
                     balloonData={balloonData}
                     flightPathData={selectedBalloonId ? flightPathData : []}
                     onBalloonClick={(id) => onSelectDevice(id)}
-                    userLocation={userLocation}
                     selectedBalloonId={selectedBalloonId}
                     gateways={mapGateways}
                 />

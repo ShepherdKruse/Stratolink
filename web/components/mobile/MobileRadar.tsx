@@ -5,7 +5,7 @@ import Map, { Source, Layer } from 'react-map-gl/mapbox';
 import type { MapRef } from 'react-map-gl/mapbox';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import { Compass } from 'lucide-react';
-import { isUsableGpsCoordinate, isValidWgs84Point, isWebGLAvailable } from '@/lib/mapGeo';
+import { isUsableGpsCoordinate, isWebGLAvailable } from '@/lib/mapGeo';
 import mapboxgl from 'mapbox-gl';
 import type { MapMouseEvent } from 'mapbox-gl';
 import type { GatewayReception } from '../dashboard-v2/atoms';
@@ -30,7 +30,6 @@ interface FlightPathPoint {
 interface MobileRadarProps {
     balloonData: BalloonData[];
     onBalloonClick: (balloonId: string) => void;
-    userLocation?: { lat: number; lon: number } | null;
     selectedBalloonId?: string | null;
     flightPathData?: FlightPathPoint[];
     gateways?: GatewayReception[] | null;
@@ -51,7 +50,6 @@ function buildLngLatBounds(coords: ReadonlyArray<readonly [number, number]>): ma
 export default function MobileRadar({
     balloonData,
     onBalloonClick,
-    userLocation,
     selectedBalloonId,
     flightPathData = [],
     gateways = null,
@@ -77,36 +75,6 @@ export default function MobileRadar({
         () => balloonData.filter((b) => isUsableGpsCoordinate(b.lat, b.lon)),
         [balloonData],
     );
-
-    const nearestBalloon = useCallback((): { balloon: BalloonData; distance: number } | null => {
-        if (!userLocation || mapBalloons.length === 0) return null;
-
-        let nearest: BalloonData | null = null;
-        let minDistance = Infinity;
-
-        mapBalloons.forEach((balloon) => {
-            const R = 6371;
-            const dLat = ((balloon.lat - userLocation.lat) * Math.PI) / 180;
-            const dLon = ((balloon.lon - userLocation.lon) * Math.PI) / 180;
-            const a =
-                Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-                Math.cos((userLocation.lat * Math.PI) / 180) *
-                    Math.cos((balloon.lat * Math.PI) / 180) *
-                    Math.sin(dLon / 2) *
-                    Math.sin(dLon / 2);
-            const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-            const distance = R * c;
-
-            if (distance < minDistance) {
-                minDistance = distance;
-                nearest = balloon;
-            }
-        });
-
-        return nearest ? { balloon: nearest, distance: minDistance * 0.621371 } : null;
-    }, [mapBalloons, userLocation]);
-
-    const nearest = nearestBalloon();
 
     const selectedBalloon = selectedBalloonId
         ? mapBalloons.find((b) => b.id === selectedBalloonId)
@@ -317,8 +285,8 @@ export default function MobileRadar({
                 ref={mapRef}
                 mapboxAccessToken={mapboxToken}
                 initialViewState={{
-                    longitude: userLocation && isValidWgs84Point(userLocation.lat, userLocation.lon) ? userLocation.lon : -75,
-                    latitude: userLocation && isValidWgs84Point(userLocation.lat, userLocation.lon) ? userLocation.lat : 40,
+                    longitude: -75,
+                    latitude: 40,
                     zoom: 3,
                     pitch: 0,
                     bearing: mapBearing,
@@ -404,18 +372,6 @@ export default function MobileRadar({
                     {locatedGatewayCount} GW
                 </div>
             ) : null}
-
-            {nearest && (
-                <div className="absolute left-1/2 top-4 z-20 -translate-x-1/2 transform">
-                    <div className="rounded-full border border-[#333] bg-[#1a1a1a]/95 px-4 py-2 backdrop-blur-md">
-                        <div className="flex items-center gap-2">
-                            <span className="font-mono text-[10px] text-[#666]">Nearest:</span>
-                            <span className="font-mono text-[12px] font-semibold text-[#4a90d9]">{nearest.balloon.id}</span>
-                            <span className="font-mono text-[10px] text-[#e5e5e5]">({nearest.distance.toFixed(0)} mi ↑)</span>
-                        </div>
-                    </div>
-                </div>
-            )}
 
             <button
                 type="button"

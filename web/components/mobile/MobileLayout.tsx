@@ -45,7 +45,6 @@ export default function MobileLayout({ initialBalloonId = null }: MobileLayoutPr
 
     const [activeCount, setActiveCount] = useState(0);
     const [fleetRegisteredCount, setFleetRegisteredCount] = useState(0);
-    const [userLocation, setUserLocation] = useState<{ lat: number; lon: number } | null>(null);
     const [connectionStatus, setConnectionStatus] = useState<'connected' | 'disconnected' | 'error'>('disconnected');
     const [lastUpdate, setLastUpdate] = useState<Date | undefined>();
 
@@ -59,18 +58,6 @@ export default function MobileLayout({ initialBalloonId = null }: MobileLayoutPr
             setFleetMode('detail');
         }
     }, [initialBalloonId]);
-
-    useEffect(() => {
-        if (typeof window === 'undefined' || !navigator?.geolocation) return;
-        navigator.geolocation.getCurrentPosition(
-            (position) =>
-                setUserLocation({
-                    lat: position.coords.latitude,
-                    lon: position.coords.longitude,
-                }),
-            () => {},
-        );
-    }, []);
 
     useEffect(() => {
         if (mainTab === 'telemetry' && !selectedBalloonId && balloonData[0]?.id) {
@@ -422,7 +409,6 @@ export default function MobileLayout({ initialBalloonId = null }: MobileLayoutPr
                     flightPathData={flightPathData}
                     selectedBalloonId={selectedBalloonId}
                     onSelectDevice={(id: string | null) => setSelectedBalloonId(id)}
-                    userLocation={userLocation}
                     latestRow={latestTelemetryRow}
                 />
             ) : null}
