@@ -19,6 +19,7 @@ import {
 import { useTelemetry, type DeviceSummary, type SubsystemFreshness } from './useTelemetry';
 import { useTickingNow, useElementSize, ConnectionPill, V1Link, fmtPressure, fmtAltitudeM } from './shared';
 import V2MissionMap, { type V2Balloon, type V2FlightPoint, type V2Gateway } from './V2MissionMap';
+import GatewayLegend from '@/components/maps/GatewayLegend';
 import GatewayRangeControls from './GatewayRangeControls';
 
 type RangeKey = '1h' | '6h' | '24h' | 'all';
@@ -376,6 +377,8 @@ function MapColumn({ visibleRows, scrubRow, selectedDevice, now }: {
                 gateways={rangeMode ? [] : mapGateways}
                 rangeCenter={rangeMode ? rangeCenter : null}
             />
+
+            <GatewayLegend />
 
             {/* Top-left badges */}
             <div style={{ position: 'absolute', top: 14, left: 14, display: 'flex', gap: 6, zIndex: 1 }}>
