@@ -9,8 +9,8 @@ import {
     canonicalDeviceId,
     expandFleetDeviceIdsForTelemetry,
     isHiddenAliasDevice,
-    telemetryDeviceIds,
 } from '@/lib/devices/aliases';
+import { fetchTelemetryMerged } from '@/lib/telemetry/fetchMergedTelemetry';
 import { createClient } from '@/lib/supabase';
 import { isUsableGpsCoordinate } from '@/lib/mapGeo';
 
@@ -316,31 +316,34 @@ export default function DashboardClient({ initialBalloonId = null, initialMode =
                     'uv_index, ambient_lux, acoustic_event, firmware_version, uptime_s, tx_count, hdop, ' +
                     'power_mode, sleep_ms, lora_sf, lora_bw, frequency_hz';
 
-                const { data: pathData, error } = await supabase
-                    .from('telemetry')
-                    .select(fullColumns)
-                    .in('device_id', telemetryDeviceIds(activeBalloonId))
-                    .gte('time', oneDayAgo)
-                    .order('time', { ascending: true });
+                let pathData: Awaited<ReturnType<typeof fetchTelemetryMerged>> = [];
+                try {
+                    pathData = await fetchTelemetryMerged(supabase, {
+                        deviceId: activeBalloonId,
+                        since: oneDayAgo,
+                        columns: fullColumns,
+                    });
+                } catch {
+                    pathData = [];
+                }
 
-                if (!error && pathData && pathData.length > 0) {
-                    const rows = pathData as unknown as TelemetryRow[];
-                    setSidebarTelemetry(rows);
+                if (pathData.length > 0) {
+                    setSidebarTelemetry(pathData as unknown as TelemetryRow[]);
 
                     /* Only rows with a real GPS fix go into the flight path
                      * (the map polyline). NOGPS rows still flow through
                      * sidebarTelemetry above so sensors keep updating. */
-                    const path = rows
+                    const path = pathData
                         .filter(
                             (r) =>
-                                r.lat !== null &&
-                                r.lon !== null &&
+                                r.lat != null &&
+                                r.lon != null &&
                                 isUsableGpsCoordinate(r.lat as number, r.lon as number),
                         )
                         .map((r) => ({
                             lat: r.lat as number,
                             lon: r.lon as number,
-                            time: new Date(r.time),
+                            time: new Date(r.time as string),
                         }));
                     setFlightPathData(path);
 

@@ -2,9 +2,9 @@ import {
     canonicalDeviceId,
     expandFleetDeviceIdsForTelemetry,
     isHiddenAliasDevice,
-    telemetryDeviceIds,
 } from '@/lib/devices/aliases';
 import { createServiceRoleClient } from '@/lib/supabase';
+import { fetchTelemetryMerged } from '@/lib/telemetry/fetchMergedTelemetry';
 import { telemetrySinceIso, type MissionWindowDevice } from '@/lib/telemetry/missionWindow';
 import { splitTrackSegments } from '@/lib/wind/trackSegments';
 import type { MonteCarloForecastInput } from '@/lib/wind/forecastTypes';
@@ -41,14 +41,18 @@ export async function buildForecastInputForDevice(
     };
     const since = telemetrySinceIso(mission);
 
-    const { data: rows, error: telErr } = await supabase
-        .from('telemetry')
-        .select(TELEMETRY_COLUMNS)
-        .in('device_id', telemetryDeviceIds(deviceId))
-        .gte('time', since)
-        .order('time', { ascending: true });
+    let rows: Awaited<ReturnType<typeof fetchTelemetryMerged>>;
+    try {
+        rows = await fetchTelemetryMerged(supabase, {
+            deviceId,
+            since,
+            columns: TELEMETRY_COLUMNS,
+        });
+    } catch {
+        return null;
+    }
 
-    if (telErr || !rows?.length) return null;
+    if (!rows.length) return null;
 
     const observedTrack = rows
         .filter((r) => r.lat != null && r.lon != null)

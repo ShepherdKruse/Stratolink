@@ -12,8 +12,9 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { telemetryDeviceIds } from '@/lib/devices/aliases';
 import { createClient } from '@/lib/supabase';
+import { fetchTelemetryMerged } from '@/lib/telemetry/fetchMergedTelemetry';
+import { rawToTelemetry } from '@/lib/telemetry/mapTelemetryRow';
 import { altitudeFromPressureHpa } from '@/lib/atmosphere/isa';
 import { FLIGHT_REPORTS } from './registry';
 import { BAJA_RUN_FLIGHT } from './baja-run-data';
@@ -376,43 +377,6 @@ export function usePastFlights(): UsePastFlightsResult {
  * Curated flights resolve synchronously; DB flights fetch the entire
  * mission window (launch → last contact, capped), not the rolling 24h.
  * ────────────────────────────────────────────────────────────── */
-function rawToTelemetry(raw: Record<string, any>): TelemetryRow {
-    const presHpa = (raw.pressure ?? null) as number | null;
-    return {
-        t: new Date(raw.time).getTime(),
-        lat: raw.lat ?? null,
-        lon: raw.lon ?? null,
-        alt: raw.altitude_m ?? null,
-        temp: raw.temperature ?? null,
-        pres: presHpa,
-        presAlt: altitudeFromPressureHpa(presHpa),
-        batt: raw.battery_voltage ?? null,
-        sol: raw.solar_voltage ?? null,
-        rssi: raw.rssi ?? null,
-        snr: raw.snr ?? null,
-        sats: raw.gps_satellites ?? null,
-        lux: raw.ambient_lux ?? null,
-        uv: raw.uv_index ?? null,
-        spd: raw.gps_speed ?? null,
-        hdg: raw.gps_heading ?? null,
-        ax: raw.mems_accel_x ?? null,
-        ay: raw.mems_accel_y ?? null,
-        az: raw.mems_accel_z ?? null,
-        vx: raw.velocity_x ?? null,
-        vy: raw.velocity_y ?? null,
-        firmware_version: raw.firmware_version ?? null,
-        uptime_s: raw.uptime_s ?? null,
-        tx_count: raw.tx_count ?? null,
-        hdop: raw.hdop ?? null,
-        power_mode: raw.power_mode ?? null,
-        sleep_ms: raw.sleep_ms ?? null,
-        lora_sf: raw.lora_sf ?? null,
-        lora_bw: raw.lora_bw ?? null,
-        frequency_hz: raw.frequency_hz ?? null,
-        gateways: Array.isArray(raw.gateways) ? raw.gateways : null,
-    };
-}
-
 export interface UseFlightReplayResult {
     rows: TelemetryRow[];
     meta: FlightReplayMeta | null;
@@ -495,17 +459,15 @@ export function useFlightReplay(flightId: string | null): UseFlightReplayResult 
                         : Date.now() - MAX_MISSION_MS;
                 const since = new Date(sinceMs).toISOString();
 
-                const { data, error } = await supabase
-                    .from('telemetry')
-                    .select(FULL_TELEMETRY_COLUMNS)
-                    .in('device_id', telemetryDeviceIds(flightId))
-                    .gte('time', since)
-                    .order('time', { ascending: true })
-                    .limit(FLIGHT_ROW_LIMIT);
-                if (error) throw error;
+                const raw = await fetchTelemetryMerged(supabase, {
+                    deviceId: flightId,
+                    since,
+                    columns: FULL_TELEMETRY_COLUMNS,
+                    maxRows: FLIGHT_ROW_LIMIT,
+                });
                 if (cancelled) return;
 
-                const next = (data ?? []).map(rawToTelemetry);
+                const next = raw.map(rawToTelemetry);
                 const latestWithFw = [...next].reverse().find((r) => r.firmware_version);
                 setRows(next);
                 setMeta({

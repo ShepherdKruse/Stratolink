@@ -9,14 +9,16 @@
 'use client';
 
 import { useEffect, useMemo, useState, useCallback } from 'react';
+import { expandFleetDeviceIdsForTelemetry, isHiddenAliasDevice } from '@/lib/devices/aliases';
+import { createClient } from '@/lib/supabase';
 import {
     canonicalDeviceId,
-    expandFleetDeviceIdsForTelemetry,
-    isHiddenAliasDevice,
-    telemetryDeviceIds,
-} from '@/lib/devices/aliases';
-import { createClient } from '@/lib/supabase';
-import { altitudeFromPressureHpa } from '@/lib/atmosphere/isa';
+    fetchFleetTelemetryLight,
+    fetchLatestContactMs,
+    fetchLatestGpsFix,
+    fetchTelemetryMerged,
+} from '@/lib/telemetry/fetchMergedTelemetry';
+import { rawToTelemetry } from '@/lib/telemetry/mapTelemetryRow';
 import {
     fleetTelemetrySinceIso,
     telemetrySinceIso,
@@ -45,47 +47,6 @@ const FULL_TELEMETRY_COLUMNS =
     'velocity_x, velocity_y, ' +
     'uv_index, ambient_lux, acoustic_event, firmware_version, uptime_s, tx_count, hdop, ' +
     'power_mode, sleep_ms, lora_sf, lora_bw, frequency_hz, gateways';
-
-function rawToTelemetry(raw: Record<string, any>): TelemetryRow {
-    /* Pressure altitude is derived once at the boundary so every screen
-     * (Mission Control, Device Tracker, Mobile, Telemetry Lab) sees the
-     * same number. ISA conversion is cheap (constant-time analytical) so
-     * doing it per row instead of per render is fine. */
-    const presHpa = (raw.pressure ?? null) as number | null;
-    return {
-        t: new Date(raw.time).getTime(),
-        lat: raw.lat ?? null,
-        lon: raw.lon ?? null,
-        alt: raw.altitude_m ?? null,
-        temp: raw.temperature ?? null,
-        pres: presHpa,
-        presAlt: altitudeFromPressureHpa(presHpa),
-        batt: raw.battery_voltage ?? null,
-        sol: raw.solar_voltage ?? null,
-        rssi: raw.rssi ?? null,
-        snr: raw.snr ?? null,
-        sats: raw.gps_satellites ?? null,
-        lux: raw.ambient_lux ?? null,
-        uv: raw.uv_index ?? null,
-        spd: raw.gps_speed ?? null,
-        hdg: raw.gps_heading ?? null,
-        ax: raw.mems_accel_x ?? null,
-        ay: raw.mems_accel_y ?? null,
-        az: raw.mems_accel_z ?? null,
-        vx: raw.velocity_x ?? null,
-        vy: raw.velocity_y ?? null,
-        firmware_version: raw.firmware_version ?? null,
-        uptime_s: raw.uptime_s ?? null,
-        tx_count: raw.tx_count ?? null,
-        hdop: raw.hdop ?? null,
-        power_mode: raw.power_mode ?? null,
-        sleep_ms: raw.sleep_ms ?? null,
-        lora_sf: raw.lora_sf ?? null,
-        lora_bw: raw.lora_bw ?? null,
-        frequency_hz: raw.frequency_hz ?? null,
-        gateways: Array.isArray(raw.gateways) ? raw.gateways : null,
-    };
-}
 
 /* Per-subsystem freshness — when did this field last update with a real value?
  * Mirrors the FRESHNESS object in the design's components.jsx. */
@@ -337,61 +298,30 @@ export function useTelemetry({ initialSelectedId = null }: { initialSelectedId?:
                 }));
                 const fleetSince = fleetTelemetrySinceIso(missionDevices);
 
-                /* Latest contact per device — even sensor-only NOGPS rows count. */
-                const { data: contacts } = telemetryIds.length
-                    ? await supabase
-                          .from('telemetry')
-                          .select('device_id, time')
-                          .in('device_id', telemetryIds)
-                          .gte('time', fleetSince)
-                          .order('time', { ascending: false })
-                    : { data: [] as Array<{ device_id: string; time: string }> };
-
-                const latestContactByDevice = new Map<string, number>();
-                (contacts ?? []).forEach((row: any) => {
-                    const canon = canonicalDeviceId(row.device_id);
-                    const t = new Date(row.time).getTime();
-                    const prev = latestContactByDevice.get(canon);
-                    if (!prev || t > prev) latestContactByDevice.set(canon, t);
-                });
-
-                /* Latest GPS-fixed position per device. */
-                const { data: fixes } = telemetryIds.length
-                    ? await supabase
-                          .from('telemetry')
-                          .select('device_id, lat, lon, altitude_m, time')
-                          .in('device_id', telemetryIds)
-                          .gte('time', fleetSince)
-                          .not('lat', 'is', null)
-                          .not('lon', 'is', null)
-                          .order('time', { ascending: false })
-                    : { data: [] as any[] };
-
-                const latestFixByDevice = new Map<string, DeviceSummary['latestFix']>();
-                (fixes ?? []).forEach((row: any) => {
-                    const canon = canonicalDeviceId(row.device_id);
-                    const t = new Date(row.time).getTime();
-                    const prev = latestFixByDevice.get(canon);
-                    if (!prev || t > prev.t) {
-                        latestFixByDevice.set(canon, {
-                            lat: row.lat,
-                            lon: row.lon,
-                            alt: row.altitude_m,
-                            t,
+                /* Per-device latest contact + fix (canonical + alias ids merged). */
+                const summaries: DeviceSummary[] = await Promise.all(
+                    fleetDevices.map(async (d: any) => {
+                        const launchedAt = d.launched_at ? new Date(d.launched_at).getTime() : null;
+                        const since = telemetrySinceIso({
+                            status: d.status,
+                            launchedAt,
                         });
-                    }
-                });
-
-                const summaries: DeviceSummary[] = fleetDevices.map((d: any) => ({
-                    id: d.device_id,
-                    callsign: d.launcher_name ?? null,
-                    status: d.status,
-                    launchedAt: d.launched_at ? new Date(d.launched_at).getTime() : null,
-                    launchLat: d.launch_lat ?? null,
-                    launchLon: d.launch_lon ?? null,
-                    lastContactT: latestContactByDevice.get(d.device_id) ?? null,
-                    latestFix: latestFixByDevice.get(d.device_id) ?? null,
-                }));
+                        const [lastContactT, latestFix] = await Promise.all([
+                            fetchLatestContactMs(supabase, d.device_id, since),
+                            fetchLatestGpsFix(supabase, d.device_id, since),
+                        ]);
+                        return {
+                            id: d.device_id,
+                            callsign: d.launcher_name ?? null,
+                            status: d.status,
+                            launchedAt,
+                            launchLat: d.launch_lat ?? null,
+                            launchLon: d.launch_lon ?? null,
+                            lastContactT,
+                            latestFix,
+                        };
+                    }),
+                );
 
                 if (cancelled) return;
                 cachedDevices = summaries;
@@ -425,14 +355,7 @@ export function useTelemetry({ initialSelectedId = null }: { initialSelectedId?:
                  * One small extra query — pull the lightweight columns only. */
                 if (telemetryIds.length) {
                     const oneHourAgo = new Date(Date.now() - 60 * 60 * 1000).toISOString();
-                    const { data: aggRows } = await supabase
-                        .from('telemetry')
-                        .select('device_id, time, lat, lon, rssi')
-                        .in('device_id', telemetryIds)
-                        .gte('time', fleetSince);
-
-                    const safe: Array<{ device_id: string; time: string; lat: number | null; lon: number | null; rssi: number | null }> =
-                        (aggRows ?? []) as any;
+                    const safe = await fetchFleetTelemetryLight(supabase, telemetryIds, fleetSince);
                     const total = safe.length;
                     const withFix = safe.filter(r => r.lat !== null && r.lon !== null).length;
                     const noFix = total - withFix;
@@ -499,16 +422,13 @@ export function useTelemetry({ initialSelectedId = null }: { initialSelectedId?:
                     status: summary?.status,
                     launchedAt: summary?.launchedAt ?? null,
                 });
-                const queryIds = telemetryDeviceIds(selectedId);
-                const { data, error } = await supabase
-                    .from('telemetry')
-                    .select(FULL_TELEMETRY_COLUMNS)
-                    .in('device_id', queryIds)
-                    .gte('time', since)
-                    .order('time', { ascending: true });
-                if (error) throw error;
+                const raw = await fetchTelemetryMerged(supabase, {
+                    deviceId: selectedId,
+                    since,
+                    columns: FULL_TELEMETRY_COLUMNS,
+                });
                 if (cancelled) return;
-                const next = (data ?? []).map(rawToTelemetry);
+                const next = raw.map(rawToTelemetry);
                 cachedRowsByDevice.set(selectedId!, next);
                 setRows(next);
 

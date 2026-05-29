@@ -7,9 +7,14 @@ import {
     canonicalDeviceId,
     expandFleetDeviceIdsForTelemetry,
     isHiddenAliasDevice,
-    telemetryDeviceIds,
 } from '@/lib/devices/aliases';
 import { createClient } from '@/lib/supabase';
+import {
+    fetchLatestContactMs,
+    fetchLatestGpsFix,
+    fetchTelemetryMerged,
+} from '@/lib/telemetry/fetchMergedTelemetry';
+import { rawToTelemetry } from '@/lib/telemetry/mapTelemetryRow';
 import { isUsableGpsCoordinate, isValidWgs84Point } from '@/lib/mapGeo';
 import { fleetTelemetrySinceIso, telemetrySinceIso } from '@/lib/telemetry/missionWindow';
 
@@ -308,14 +313,18 @@ export default function MobileLayout({ initialBalloonId = null }: MobileLayoutPr
                     'uv_index, ambient_lux, acoustic_event, firmware_version, uptime_s, tx_count, hdop, ' +
                     'power_mode, sleep_ms, lora_sf, lora_bw, frequency_hz, gateways';
 
-                const { data: pathData, error } = await supabase
-                    .from('telemetry')
-                    .select(cols)
-                    .in('device_id', telemetryDeviceIds(selectedBalloonId))
-                    .gte('time', since)
-                    .order('time', { ascending: true });
+                let pathData: Awaited<ReturnType<typeof fetchTelemetryMerged>> = [];
+                try {
+                    pathData = await fetchTelemetryMerged(supabase, {
+                        deviceId: selectedBalloonId,
+                        since,
+                        columns: cols,
+                    });
+                } catch {
+                    pathData = [];
+                }
 
-                if (!error && pathData && pathData.length > 0) {
+                if (pathData.length > 0) {
                     setSheetTelemetry(pathData as unknown as Array<Record<string, unknown>>);
 
                     const rows = pathData as unknown as Array<{
