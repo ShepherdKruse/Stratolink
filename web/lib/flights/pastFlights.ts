@@ -12,6 +12,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { telemetryDeviceIds } from '@/lib/devices/aliases';
 import { createClient } from '@/lib/supabase';
 import { altitudeFromPressureHpa } from '@/lib/atmosphere/isa';
 import { FLIGHT_REPORTS } from './registry';
@@ -497,7 +498,7 @@ export function useFlightReplay(flightId: string | null): UseFlightReplayResult 
                 const { data, error } = await supabase
                     .from('telemetry')
                     .select(FULL_TELEMETRY_COLUMNS)
-                    .eq('device_id', flightId)
+                    .in('device_id', telemetryDeviceIds(flightId))
                     .gte('time', since)
                     .order('time', { ascending: true })
                     .limit(FLIGHT_ROW_LIMIT);

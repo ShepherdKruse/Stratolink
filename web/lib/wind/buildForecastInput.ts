@@ -1,3 +1,9 @@
+import {
+    canonicalDeviceId,
+    expandFleetDeviceIdsForTelemetry,
+    isHiddenAliasDevice,
+    telemetryDeviceIds,
+} from '@/lib/devices/aliases';
 import { createServiceRoleClient } from '@/lib/supabase';
 import { telemetrySinceIso, type MissionWindowDevice } from '@/lib/telemetry/missionWindow';
 import { splitTrackSegments } from '@/lib/wind/trackSegments';
@@ -38,7 +44,7 @@ export async function buildForecastInputForDevice(
     const { data: rows, error: telErr } = await supabase
         .from('telemetry')
         .select(TELEMETRY_COLUMNS)
-        .eq('device_id', deviceId)
+        .in('device_id', telemetryDeviceIds(deviceId))
         .gte('time', since)
         .order('time', { ascending: true });
 
@@ -114,17 +120,19 @@ export async function listForecastDeviceIds(): Promise<string[]> {
 
     if (error || !devices?.length) return [];
 
-    const ids = devices.map((d) => d.device_id);
+    const fleetDevices = devices.filter((d) => !isHiddenAliasDevice(d.device_id));
+    const ids = fleetDevices.map((d) => d.device_id);
+    const telemetryIds = expandFleetDeviceIdsForTelemetry(ids);
     const { data: fixes } = await supabase
         .from('telemetry')
         .select('device_id')
-        .in('device_id', ids)
+        .in('device_id', telemetryIds)
         .gte('time', since)
         .not('lat', 'is', null)
         .not('lon', 'is', null);
 
-    const withFix = new Set((fixes ?? []).map((r) => r.device_id));
-    return devices
+    const withFix = new Set((fixes ?? []).map((r) => canonicalDeviceId(r.device_id)));
+    return fleetDevices
         .filter((d) => d.status === 'flying' || withFix.has(d.device_id))
         .map((d) => d.device_id);
 }

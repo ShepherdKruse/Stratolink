@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { canonicalDeviceId } from '@/lib/devices/aliases';
 import { createServiceRoleClient } from '@/lib/supabase';
 import { parseTTNPayload, type TTNWebhookPayload } from '@/lib/ttn/payload-parser';
 
@@ -26,6 +27,12 @@ export async function POST(request: NextRequest) {
                 { error: 'Invalid payload: missing required field device_id' },
                 { status: 400 }
             );
+        }
+
+        const rawDeviceId = telemetry.device_id;
+        telemetry.device_id = canonicalDeviceId(rawDeviceId);
+        if (rawDeviceId !== telemetry.device_id) {
+            console.log(`Telemetry alias ${rawDeviceId} → ${telemetry.device_id}`);
         }
 
         const hasGpsFix = telemetry.lat !== null && telemetry.lon !== null;

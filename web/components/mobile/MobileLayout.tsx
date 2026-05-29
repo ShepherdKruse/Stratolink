@@ -3,6 +3,12 @@
 import { useEffect, useMemo, useState } from 'react';
 import '@/styles/mobile-stratolink.css';
 
+import {
+    canonicalDeviceId,
+    expandFleetDeviceIdsForTelemetry,
+    isHiddenAliasDevice,
+    telemetryDeviceIds,
+} from '@/lib/devices/aliases';
 import { createClient } from '@/lib/supabase';
 import { isUsableGpsCoordinate, isValidWgs84Point } from '@/lib/mapGeo';
 import { fleetTelemetrySinceIso, telemetrySinceIso } from '@/lib/telemetry/missionWindow';
@@ -87,8 +93,11 @@ export default function MobileLayout({ initialBalloonId = null }: MobileLayoutPr
                     setConnectionStatus('error');
                 }
 
-                const activatedDeviceIds =
-                    activatedDevices ? activatedDevices.map((d: { device_id: string }) => d.device_id) : [];
+                const fleetDevices = (activatedDevices ?? []).filter(
+                    (d: { device_id: string }) => !isHiddenAliasDevice(d.device_id),
+                );
+                const activatedDeviceIds = fleetDevices.map((d: { device_id: string }) => d.device_id);
+                const telemetryQueryIds = expandFleetDeviceIdsForTelemetry(activatedDeviceIds);
                 setFleetRegisteredCount(activatedDeviceIds.length);
 
                 const launcherMap = new Map<string, string>();
@@ -98,8 +107,8 @@ export default function MobileLayout({ initialBalloonId = null }: MobileLayoutPr
                     { status: string; launched_at: string | null }
                 >();
 
-                if (activatedDevices) {
-                    activatedDevices.forEach(
+                if (fleetDevices.length) {
+                    fleetDevices.forEach(
                         (d: {
                             device_id: string;
                             launcher_name?: string | null;
@@ -136,7 +145,7 @@ export default function MobileLayout({ initialBalloonId = null }: MobileLayoutPr
 
                 const twoHoursAgo = new Date(Date.now() - 2 * 60 * 60 * 1000).toISOString();
                 const fleetSince = fleetTelemetrySinceIso(
-                    (activatedDevices ?? []).map((d: { status?: string; launched_at?: string | null }) => ({
+                    fleetDevices.map((d: { status?: string; launched_at?: string | null }) => ({
                         status: d.status,
                         launchedAt: d.launched_at ? new Date(d.launched_at).getTime() : null,
                     })),
@@ -147,15 +156,17 @@ export default function MobileLayout({ initialBalloonId = null }: MobileLayoutPr
                 const { data: active, error: activeError } = await supabase
                     .from('telemetry')
                     .select('device_id, time')
-                    .in('device_id', activatedDeviceIds)
+                    .in('device_id', telemetryQueryIds)
                     .gte('time', twoHoursAgo);
 
                 if (!activeError && active) {
                     const distinctDevices = new Set<string>();
                     active.forEach((row: { device_id: string; time: string }) => {
-                        distinctDevices.add(row.device_id);
-                        const prev = lastContactMap.get(row.device_id);
-                        if (!prev || row.time > prev) lastContactMap.set(row.device_id, row.time);
+                        const canon = canonicalDeviceId(row.device_id);
+                        if (!activatedDeviceIds.includes(canon)) return;
+                        distinctDevices.add(canon);
+                        const prev = lastContactMap.get(canon);
+                        if (!prev || row.time > prev) lastContactMap.set(canon, row.time);
                     });
                     setActiveCount(distinctDevices.size);
                 } else {
@@ -167,7 +178,7 @@ export default function MobileLayout({ initialBalloonId = null }: MobileLayoutPr
                     .select(
                         'device_id, lat, lon, altitude_m, time, velocity_x, velocity_y, battery_voltage, rssi, gps_satellites',
                     )
-                    .in('device_id', activatedDeviceIds)
+                    .in('device_id', telemetryQueryIds)
                     .gte('time', fleetSince)
                     .order('time', { ascending: false });
 
@@ -184,17 +195,23 @@ export default function MobileLayout({ initialBalloonId = null }: MobileLayoutPr
 
                 for (const row of (telemetryRows || []) as TelemetryRow[]) {
                     if (!row.device_id) continue;
+                    const canon = canonicalDeviceId(row.device_id);
+                    if (!activatedDeviceIds.includes(canon)) continue;
 
-                    if (!latestAny.has(row.device_id)) {
-                        latestAny.set(row.device_id, row);
+                    const prevAny = latestAny.get(canon);
+                    if (!prevAny || (row.time && prevAny.time && row.time > prevAny.time)) {
+                        latestAny.set(canon, row);
                     }
 
                     const hasGpsFix =
                         row.lat != null &&
                         row.lon != null &&
                         isUsableGpsCoordinate(Number(row.lat), Number(row.lon));
-                    if (hasGpsFix && !latestGps.has(row.device_id)) {
-                        latestGps.set(row.device_id, row);
+                    if (hasGpsFix) {
+                        const prevGps = latestGps.get(canon);
+                        if (!prevGps || (row.time && prevGps.time && row.time > prevGps.time)) {
+                            latestGps.set(canon, row);
+                        }
                     }
                 }
 
@@ -294,7 +311,7 @@ export default function MobileLayout({ initialBalloonId = null }: MobileLayoutPr
                 const { data: pathData, error } = await supabase
                     .from('telemetry')
                     .select(cols)
-                    .eq('device_id', selectedBalloonId)
+                    .in('device_id', telemetryDeviceIds(selectedBalloonId))
                     .gte('time', since)
                     .order('time', { ascending: true });
 

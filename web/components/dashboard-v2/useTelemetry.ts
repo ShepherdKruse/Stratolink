@@ -9,6 +9,12 @@
 'use client';
 
 import { useEffect, useMemo, useState, useCallback } from 'react';
+import {
+    canonicalDeviceId,
+    expandFleetDeviceIdsForTelemetry,
+    isHiddenAliasDevice,
+    telemetryDeviceIds,
+} from '@/lib/devices/aliases';
 import { createClient } from '@/lib/supabase';
 import { altitudeFromPressureHpa } from '@/lib/atmosphere/isa';
 import {
@@ -320,36 +326,41 @@ export function useTelemetry({ initialSelectedId = null }: { initialSelectedId?:
                     .order('device_id', { ascending: true });
                 if (devErr) throw devErr;
 
-                const ids = (rawDevices ?? []).map((d: any) => d.device_id);
-                const missionDevices: MissionWindowDevice[] = (rawDevices ?? []).map((d: any) => ({
+                const fleetDevices = (rawDevices ?? []).filter(
+                    (d: { device_id: string }) => !isHiddenAliasDevice(d.device_id),
+                );
+                const ids = fleetDevices.map((d: { device_id: string }) => d.device_id);
+                const telemetryIds = expandFleetDeviceIdsForTelemetry(ids);
+                const missionDevices: MissionWindowDevice[] = fleetDevices.map((d: any) => ({
                     status: d.status,
                     launchedAt: d.launched_at ? new Date(d.launched_at).getTime() : null,
                 }));
                 const fleetSince = fleetTelemetrySinceIso(missionDevices);
 
                 /* Latest contact per device — even sensor-only NOGPS rows count. */
-                const { data: contacts } = ids.length
+                const { data: contacts } = telemetryIds.length
                     ? await supabase
                           .from('telemetry')
                           .select('device_id, time')
-                          .in('device_id', ids)
+                          .in('device_id', telemetryIds)
                           .gte('time', fleetSince)
                           .order('time', { ascending: false })
                     : { data: [] as Array<{ device_id: string; time: string }> };
 
                 const latestContactByDevice = new Map<string, number>();
                 (contacts ?? []).forEach((row: any) => {
+                    const canon = canonicalDeviceId(row.device_id);
                     const t = new Date(row.time).getTime();
-                    const prev = latestContactByDevice.get(row.device_id);
-                    if (!prev || t > prev) latestContactByDevice.set(row.device_id, t);
+                    const prev = latestContactByDevice.get(canon);
+                    if (!prev || t > prev) latestContactByDevice.set(canon, t);
                 });
 
                 /* Latest GPS-fixed position per device. */
-                const { data: fixes } = ids.length
+                const { data: fixes } = telemetryIds.length
                     ? await supabase
                           .from('telemetry')
                           .select('device_id, lat, lon, altitude_m, time')
-                          .in('device_id', ids)
+                          .in('device_id', telemetryIds)
                           .gte('time', fleetSince)
                           .not('lat', 'is', null)
                           .not('lon', 'is', null)
@@ -358,16 +369,20 @@ export function useTelemetry({ initialSelectedId = null }: { initialSelectedId?:
 
                 const latestFixByDevice = new Map<string, DeviceSummary['latestFix']>();
                 (fixes ?? []).forEach((row: any) => {
-                    if (latestFixByDevice.has(row.device_id)) return;
-                    latestFixByDevice.set(row.device_id, {
-                        lat: row.lat,
-                        lon: row.lon,
-                        alt: row.altitude_m,
-                        t: new Date(row.time).getTime(),
-                    });
+                    const canon = canonicalDeviceId(row.device_id);
+                    const t = new Date(row.time).getTime();
+                    const prev = latestFixByDevice.get(canon);
+                    if (!prev || t > prev.t) {
+                        latestFixByDevice.set(canon, {
+                            lat: row.lat,
+                            lon: row.lon,
+                            alt: row.altitude_m,
+                            t,
+                        });
+                    }
                 });
 
-                const summaries: DeviceSummary[] = (rawDevices ?? []).map((d: any) => ({
+                const summaries: DeviceSummary[] = fleetDevices.map((d: any) => ({
                     id: d.device_id,
                     callsign: d.launcher_name ?? null,
                     status: d.status,
@@ -408,12 +423,12 @@ export function useTelemetry({ initialSelectedId = null }: { initialSelectedId?:
 
                 /* Fleet-wide aggregates: count uplinks, GPS lock rate, median RSSI.
                  * One small extra query — pull the lightweight columns only. */
-                if (ids.length) {
+                if (telemetryIds.length) {
                     const oneHourAgo = new Date(Date.now() - 60 * 60 * 1000).toISOString();
                     const { data: aggRows } = await supabase
                         .from('telemetry')
                         .select('device_id, time, lat, lon, rssi')
-                        .in('device_id', ids)
+                        .in('device_id', telemetryIds)
                         .gte('time', fleetSince);
 
                     const safe: Array<{ device_id: string; time: string; lat: number | null; lon: number | null; rssi: number | null }> =
@@ -430,7 +445,9 @@ export function useTelemetry({ initialSelectedId = null }: { initialSelectedId?:
                         .filter(r => r.lat !== null && r.lon !== null)
                         .map(r => new Date(r.time).getTime());
                     const allTimes = safe.map(r => new Date(r.time).getTime());
-                    const activeDeviceIds = new Set(safe.map(r => r.device_id));
+                    const activeDeviceIds = new Set(
+                        safe.map(r => canonicalDeviceId(r.device_id)).filter(id => ids.includes(id)),
+                    );
 
                     if (!cancelled) {
                         const fm: FleetMetrics = {
@@ -482,10 +499,11 @@ export function useTelemetry({ initialSelectedId = null }: { initialSelectedId?:
                     status: summary?.status,
                     launchedAt: summary?.launchedAt ?? null,
                 });
+                const queryIds = telemetryDeviceIds(selectedId);
                 const { data, error } = await supabase
                     .from('telemetry')
                     .select(FULL_TELEMETRY_COLUMNS)
-                    .eq('device_id', selectedId)
+                    .in('device_id', queryIds)
                     .gte('time', since)
                     .order('time', { ascending: true });
                 if (error) throw error;
