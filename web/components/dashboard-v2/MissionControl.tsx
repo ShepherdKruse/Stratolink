@@ -23,6 +23,7 @@ import { Chart, fmt, type TelemetryRow } from './atoms';
 import { useTelemetry, type DeviceSummary } from './useTelemetry';
 import { useForecastPath, type UseForecastPathResult } from './useForecastPath';
 import { useElementSize, fmtPressure, fmtAltitudeM } from './shared';
+import { useIsMobile } from '@/hooks/use-mobile';
 import V2MissionMap, { type V2Balloon, type V2FlightPoint, type V2Gateway } from './V2MissionMap';
 
 interface FlightSummary {
@@ -45,11 +46,16 @@ export default function MissionControlScreen() {
     /* Null scrub = follow the latest packet so the page behaves "live". */
     const followLive = scrubT === null;
 
+    /* Mobile only: charts live in a pull-up drawer, hidden by default. */
+    const [chartsOpen, setChartsOpen] = useState(false);
+
     /* The whole flight is always in view (no range zoom). */
     const visibleRows = rows;
 
     /* Forecast (nominal + ensemble + ellipses + future-scrub timing). */
     const forecast = useForecastPath(selectedId);
+
+    const isMobile = useIsMobile();
 
     /* scrubT may sit in the future (along the forecast); only clamp it back if
      * it falls before the first packet (e.g. on a stale carry-over). */
@@ -95,6 +101,51 @@ export default function MissionControlScreen() {
         const params = new URLSearchParams(searchParams.toString());
         params.set('device', id);
         router.replace(`/dashboard-v2?${params.toString()}`);
+    }
+
+    /* Mobile: one vertical stack — brand, balloon card, the map (filling the
+     * screen) + timeline. The charts live in a pull-up drawer so the map gets
+     * the room by default. Same components as desktop, just stacked. */
+    if (isMobile) {
+        return (
+            <div className="sl-app" style={{ position: 'relative', display: 'flex', flexDirection: 'column', height: '100dvh', minHeight: 0, overflow: 'hidden' }}>
+                <BrandStrip />
+                <BalloonCard
+                    device={selectedDevice}
+                    devices={devices}
+                    onSelect={handleSelectDevice}
+                    scrubRow={scrubRow}
+                    summary={flightSummary}
+                />
+                <div style={{ position: 'relative', display: 'flex', flex: 1, minHeight: 0 }}>
+                    <MapColumn
+                        visibleRows={visibleRows}
+                        scrubRow={scrubRow}
+                        selectedDevice={selectedDevice}
+                        forecast={forecast}
+                        scrubT={effectiveScrubT}
+                        isFuture={isFuture}
+                    />
+                </div>
+                <Timeline
+                    visibleRows={visibleRows}
+                    scrubT={scrubT}
+                    onScrub={setScrubT}
+                    futureEndT={forecast.endT}
+                />
+                {/* Reserve the collapsed drawer handle's footprint so it never
+                  * covers the timeline. */}
+                <div style={{ height: DRAWER_HANDLE_H, flexShrink: 0 }} />
+                <ChartsDrawer open={chartsOpen} onToggle={() => setChartsOpen((v) => !v)}>
+                    <ChartStack
+                        visibleRows={visibleRows}
+                        rows={rows}
+                        scrubT={effectiveScrubT}
+                        scrubRow={scrubRow}
+                    />
+                </ChartsDrawer>
+            </div>
+        );
     }
 
     return (
@@ -165,27 +216,7 @@ function LeftColumn({
             borderRight: '1px solid var(--sl-border)',
             background: 'var(--sl-bg)',
         }}>
-            <div style={{
-                display: 'flex', alignItems: 'center',
-                padding: '9px 18px', flexShrink: 0,
-                borderBottom: '1px solid var(--sl-border)', background: 'var(--sl-bg-1)',
-            }}>
-                <a href="/" style={{
-                    display: 'flex', alignItems: 'center', gap: 8,
-                    fontFamily: 'var(--sl-mono)', fontSize: 12, letterSpacing: '0.14em', color: 'var(--sl-text)',
-                    textDecoration: 'none', cursor: 'pointer',
-                }}>
-                    <span aria-hidden style={{ color: 'var(--sl-ok)', display: 'inline-flex' }}>
-                        <svg width={18} height={18} viewBox="0 0 32 32" fill="none">
-                            <rect x={14} y={4} width={4} height={4} fill="currentColor" />
-                            <rect x={12} y={14} width={8} height={2} fill="currentColor" />
-                            <rect x={9} y={19} width={14} height={2} fill="currentColor" />
-                            <rect x={6} y={24} width={20} height={2} fill="currentColor" />
-                        </svg>
-                    </span>
-                    STRATOLINK
-                </a>
-            </div>
+            <BrandStrip />
             <BalloonCard
                 device={device}
                 devices={devices}
@@ -199,6 +230,84 @@ function LeftColumn({
                 scrubT={scrubT}
                 scrubRow={scrubRow}
             />
+        </div>
+    );
+}
+
+/* Brand strip — STRATOLINK mark linking home. */
+function BrandStrip() {
+    return (
+        <div style={{
+            display: 'flex', alignItems: 'center',
+            padding: '9px 18px', flexShrink: 0,
+            borderBottom: '1px solid var(--sl-border)', background: 'var(--sl-bg-1)',
+        }}>
+            <a href="/" style={{
+                display: 'flex', alignItems: 'center', gap: 8,
+                fontFamily: 'var(--sl-mono)', fontSize: 12, letterSpacing: '0.14em', color: 'var(--sl-text)',
+                textDecoration: 'none', cursor: 'pointer',
+            }}>
+                <span aria-hidden style={{ color: 'var(--sl-ok)', display: 'inline-flex' }}>
+                    <svg width={18} height={18} viewBox="0 0 32 32" fill="none">
+                        <rect x={14} y={4} width={4} height={4} fill="currentColor" />
+                        <rect x={12} y={14} width={8} height={2} fill="currentColor" />
+                        <rect x={9} y={19} width={14} height={2} fill="currentColor" />
+                        <rect x={6} y={24} width={20} height={2} fill="currentColor" />
+                    </svg>
+                </span>
+                STRATOLINK
+            </a>
+        </div>
+    );
+}
+
+/* ──────────────────────────────────────────────────────────────
+ * Charts drawer (mobile) — slides up from the bottom over the map.
+ * Collapsed, only the grab handle peeks above the bottom edge.
+ * ────────────────────────────────────────────────────────────── */
+const DRAWER_HANDLE_H = 46;
+const DRAWER_HEIGHT = '74vh';
+
+function ChartsDrawer({ open, onToggle, children }: {
+    open: boolean;
+    onToggle: () => void;
+    children: React.ReactNode;
+}) {
+    return (
+        <div
+            style={{
+                position: 'absolute', left: 0, right: 0, bottom: 0,
+                height: DRAWER_HEIGHT, zIndex: 30,
+                display: 'flex', flexDirection: 'column',
+                background: 'var(--sl-bg-1)',
+                borderTop: '1px solid var(--sl-border)',
+                boxShadow: '0 -10px 28px rgba(0, 0, 0, 0.45)',
+                transform: open ? 'translateY(0)' : `translateY(calc(${DRAWER_HEIGHT} - ${DRAWER_HANDLE_H}px))`,
+                transition: 'transform 0.32s cubic-bezier(0.4, 0, 0.2, 1)',
+            }}
+        >
+            <button
+                type="button"
+                onClick={onToggle}
+                aria-expanded={open}
+                style={{
+                    flexShrink: 0, height: DRAWER_HANDLE_H,
+                    display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 4,
+                    background: 'transparent', border: 'none', cursor: 'pointer', width: '100%',
+                    padding: 0,
+                }}
+            >
+                <span style={{ width: 36, height: 4, borderRadius: 2, background: 'var(--sl-text-dim3)' }} />
+                <span style={{
+                    fontSize: 9, letterSpacing: '0.14em', textTransform: 'uppercase',
+                    color: 'var(--sl-text-dim2)', fontFamily: 'var(--sl-sans)',
+                }}>
+                    {open ? 'Hide charts ▾' : 'Charts ▴'}
+                </span>
+            </button>
+            <div style={{ flex: 1, minHeight: 0, display: 'flex', flexDirection: 'column' }}>
+                {children}
+            </div>
         </div>
     );
 }
@@ -529,19 +638,43 @@ function MapColumn({ visibleRows, scrubRow, selectedDevice, forecast, scrubT, is
 }
 
 /* Single consolidated map legend — flight-path states + gateway coverage in
- * one card (top-right). Rows appear only when their layer is on screen. */
+ * one card (top-right). Collapsible; defaults collapsed on mobile where space
+ * is tight. Rows appear only when their layer is on screen. */
 function MapLegend({ hasForecast, hasHindcast }: { hasForecast: boolean; hasHindcast: boolean }) {
+    const isMobile = useIsMobile();
+    /* null = follow the per-device default (collapsed on mobile); once the
+     * user toggles, their explicit choice sticks. */
+    const [open, setOpen] = useState<boolean | null>(null);
+    const expanded = open === null ? !isMobile : open;
+
     return (
         <div style={{
             position: 'absolute', top: 14, right: 14, zIndex: 5,
-            pointerEvents: 'none',
             background: 'rgba(8, 13, 23, 0.78)',
             backdropFilter: 'blur(6px)', WebkitBackdropFilter: 'blur(6px)',
             border: '1px solid rgba(94, 234, 212, 0.12)', borderRadius: 4,
-            padding: '8px 10px',
+            padding: expanded ? '8px 10px' : '6px 9px',
             fontFamily: 'var(--sl-sans, system-ui, sans-serif)', fontSize: 10.5,
-            color: 'rgba(200, 212, 232, 0.78)', lineHeight: 1.3, minWidth: 140,
+            color: 'rgba(200, 212, 232, 0.78)', lineHeight: 1.3, minWidth: expanded ? 140 : 0,
         }}>
+            <button
+                type="button"
+                onClick={() => setOpen(!expanded)}
+                aria-expanded={expanded}
+                style={{
+                    display: 'flex', alignItems: 'center', gap: 6, width: '100%',
+                    background: 'transparent', border: 'none', cursor: 'pointer', padding: 0,
+                    fontSize: 9, letterSpacing: '0.10em', textTransform: 'uppercase',
+                    color: 'rgba(200, 212, 232, 0.55)', fontFamily: 'inherit',
+                    marginBottom: expanded ? 6 : 0,
+                }}
+            >
+                <span>Legend</span>
+                <span style={{ marginLeft: 'auto' }}>{expanded ? '▾' : '▸'}</span>
+            </button>
+
+            {!expanded ? null : (
+            <>
             <LegendHeading>Flight path</LegendHeading>
             <LegendRow>
                 <span style={{ display: 'inline-block', width: 10, height: 10, borderRadius: '50%', background: '#0b1220', border: '1.6px solid #5eead4' }} />
@@ -579,6 +712,8 @@ function MapLegend({ hasForecast, hasHindcast }: { hasForecast: boolean; hasHind
                 <span style={{ display: 'inline-block', width: 16, height: 0, borderTop: '1.5px dashed rgba(94, 234, 212, 0.6)' }} />
                 250 km · line-of-sight
             </LegendRow>
+            </>
+            )}
         </div>
     );
 }

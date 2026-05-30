@@ -433,6 +433,7 @@ export default function MobileLayout({ initialBalloonId = null }: MobileLayoutPr
                 <MobileMapLiveTab
                     balloonData={balloonData}
                     flightPathData={flightPathData}
+                    telemetryRows={sheetTelemetry}
                     selectedBalloonId={selectedBalloonId}
                     onSelectDevice={(id: string | null) => setSelectedBalloonId(id)}
                     latestRow={latestTelemetryRow}
