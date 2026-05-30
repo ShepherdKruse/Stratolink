@@ -1,0 +1,13 @@
+{
+  "settings": {
+    "createdAt": 1766113083885,
+    "framework": "nextjs",
+    "devCommand": null,
+    "installCommand": "bun install",
+    "buildCommand": "bun run build",
+    "outputDirectory": null,
+    "rootDirectory": "web",
+    "directoryListing": false,
+    "nodeVersion": "24.x"
+  }
+}
