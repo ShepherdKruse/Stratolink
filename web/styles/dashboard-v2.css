@@ -418,3 +418,31 @@
     background-size: 80px 80px;
     pointer-events: none;
 }
+
+/* ──────────────────────────────────────────────────────────────
+ * Minimal scrollbars — scoped to the dashboard shell so the chart
+ * stack, header strips and lists scroll without the chunky default
+ * OS scrollbar. Track is invisible; the thumb is a thin, dim bar
+ * that brightens slightly on hover.
+ * ────────────────────────────────────────────────────────────── */
+.sl-app * {
+    scrollbar-width: thin;                 /* Firefox */
+    scrollbar-color: var(--sl-border-hi) transparent;
+}
+.sl-app *::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+.sl-app *::-webkit-scrollbar-track {
+    background: transparent;
+}
+.sl-app *::-webkit-scrollbar-thumb {
+    background: var(--sl-border-hi);
+    border-radius: 3px;
+}
+.sl-app *::-webkit-scrollbar-thumb:hover {
+    background: var(--sl-text-dim3);
+}
+.sl-app *::-webkit-scrollbar-corner {
+    background: transparent;
+}

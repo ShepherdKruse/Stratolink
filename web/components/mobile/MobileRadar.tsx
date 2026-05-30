@@ -33,9 +33,35 @@ interface MobileRadarProps {
     selectedBalloonId?: string | null;
     flightPathData?: FlightPathPoint[];
     gateways?: GatewayReception[] | null;
+    /** Only draw flight-path points with time <= playbackT (scrub). */
+    playbackT?: number | null;
+    /** Override the selected balloon's marker position (scrub interpolation). */
+    balloonOverride?: { lat: number; lon: number } | null;
+    /** Draw each transmitted GPS fix as a dot. */
+    showTransmitPoints?: boolean;
+    /** Forecast layers (mirror the desktop map). */
+    forecastPath?: Array<[number, number]>;
+    forecastEnsemble?: Array<Array<[number, number]>>;
+    forecastEllipses?: Array<{ e50: Array<[number, number]>; e90: Array<[number, number]> }>;
+    hindcastPath?: Array<[number, number]>;
+    staleLine?: Array<[number, number]> | null;
 }
 
 const MAP_STYLE_DARK = 'mapbox://styles/mapbox/dark-v11';
+
+/** Strict WGS84 guard — out-of-range coords hard-throw inside Mapbox. */
+function validLonLat(lon: number, lat: number): boolean {
+    return Number.isFinite(lon) && Number.isFinite(lat) && Math.abs(lon) <= 180 && Math.abs(lat) <= 90;
+}
+
+function lineFC(coords: Array<[number, number]>): GeoJSON.FeatureCollection {
+    return {
+        type: 'FeatureCollection',
+        features: coords.length >= 2
+            ? [{ type: 'Feature', geometry: { type: 'LineString', coordinates: coords }, properties: {} }]
+            : [],
+    };
+}
 
 function buildLngLatBounds(coords: ReadonlyArray<readonly [number, number]>): mapboxgl.LngLatBounds | null {
     if (!coords.length) return null;
@@ -53,6 +79,14 @@ export default function MobileRadar({
     selectedBalloonId,
     flightPathData = [],
     gateways = null,
+    playbackT = null,
+    balloonOverride = null,
+    showTransmitPoints = false,
+    forecastPath = [],
+    forecastEnsemble = [],
+    forecastEllipses = [],
+    hindcastPath = [],
+    staleLine = null,
 }: MobileRadarProps) {
     const mapRef = useRef<MapRef>(null);
     const [mapBearing, setMapBearing] = useState(0);
@@ -87,43 +121,76 @@ export default function MobileRadar({
         () =>
             ({
                 type: 'FeatureCollection' as const,
-                features: mapBalloons.map((balloon) => ({
-                    type: 'Feature' as const,
-                    id: balloon.id,
-                    geometry: {
-                        type: 'Point' as const,
-                        coordinates: [balloon.lon, balloon.lat],
-                    },
-                    properties: {
-                        altitude: balloon.altitude_m,
-                        deviceId: balloon.id,
-                    },
-                })),
+                features: mapBalloons.map((balloon) => {
+                    /* While scrubbing, slide the selected balloon to its
+                     * interpolated position along the path / forecast. */
+                    const useOverride =
+                        balloonOverride && balloon.id === selectedBalloonId &&
+                        validLonLat(balloonOverride.lon, balloonOverride.lat);
+                    const lon = useOverride ? balloonOverride!.lon : balloon.lon;
+                    const lat = useOverride ? balloonOverride!.lat : balloon.lat;
+                    return {
+                        type: 'Feature' as const,
+                        id: balloon.id,
+                        geometry: { type: 'Point' as const, coordinates: [lon, lat] },
+                        properties: { altitude: balloon.altitude_m, deviceId: balloon.id },
+                    };
+                }),
             }) as GeoJSON.FeatureCollection,
-        [mapBalloons],
+        [mapBalloons, balloonOverride, selectedBalloonId],
     );
 
-    const flightLineGeoJSON = useMemo(() => {
-        const pathCoords = flightPathData
-            .filter((p) => isUsableGpsCoordinate(p.lat, p.lon))
-            .map((p) => [p.lon, p.lat] as [number, number]);
-        if (!selectedBalloonId || pathCoords.length < 2) {
-            return { type: 'FeatureCollection' as const, features: [] as GeoJSON.Feature[] };
-        }
-        return {
-            type: 'FeatureCollection' as const,
-            features: [
-                {
-                    type: 'Feature' as const,
-                    geometry: {
-                        type: 'LineString' as const,
-                        coordinates: pathCoords,
-                    },
-                    properties: {},
-                },
-            ],
-        } satisfies GeoJSON.FeatureCollection;
-    }, [flightPathData, selectedBalloonId]);
+    /* Flight-path points, truncated to the scrub time. */
+    const pathCoords = useMemo(
+        () => flightPathData
+            .filter((p) => isUsableGpsCoordinate(p.lat, p.lon)
+                && (playbackT == null || !p.time || p.time.getTime() <= playbackT))
+            .map((p) => [p.lon, p.lat] as [number, number]),
+        [flightPathData, playbackT],
+    );
+
+    const flightLineGeoJSON = useMemo(
+        () => (!selectedBalloonId ? lineFC([]) : lineFC(pathCoords)),
+        [pathCoords, selectedBalloonId],
+    );
+
+    const transmitPointsGeoJSON = useMemo<GeoJSON.FeatureCollection>(() => ({
+        type: 'FeatureCollection',
+        features: (showTransmitPoints && selectedBalloonId)
+            ? pathCoords.map((c) => ({ type: 'Feature', geometry: { type: 'Point', coordinates: c }, properties: {} }))
+            : [],
+    }), [pathCoords, showTransmitPoints, selectedBalloonId]);
+
+    /* Forecast geometry — nominal / ensemble / ellipses / hindcast / stale. */
+    const forecastLineGeoJSON = useMemo(
+        () => lineFC(forecastPath.filter(([lon, lat]) => validLonLat(lon, lat))),
+        [forecastPath],
+    );
+    const hindcastLineGeoJSON = useMemo(
+        () => lineFC(hindcastPath.filter(([lon, lat]) => validLonLat(lon, lat))),
+        [hindcastPath],
+    );
+    const staleLineGeoJSON = useMemo(
+        () => lineFC((staleLine ?? []).filter(([lon, lat]) => validLonLat(lon, lat))),
+        [staleLine],
+    );
+    const ensembleGeoJSON = useMemo<GeoJSON.FeatureCollection>(() => ({
+        type: 'FeatureCollection',
+        features: forecastEnsemble
+            .map((t) => t.filter(([lon, lat]) => validLonLat(lon, lat)))
+            .filter((t) => t.length >= 2)
+            .map((t) => ({ type: 'Feature', geometry: { type: 'LineString', coordinates: t }, properties: {} })),
+    }), [forecastEnsemble]);
+    const ellipseGeoJSON = useMemo(() => {
+        const toFC = (key: 'e50' | 'e90'): GeoJSON.FeatureCollection => ({
+            type: 'FeatureCollection',
+            features: forecastEllipses
+                .map((e) => e[key].filter(([lon, lat]) => validLonLat(lon, lat)))
+                .filter((ring) => ring.length >= 3)
+                .map((ring) => ({ type: 'Feature' as const, geometry: { type: 'Polygon' as const, coordinates: [ring] }, properties: {} })),
+        });
+        return { e50: toFC('e50'), e90: toFC('e90') };
+    }, [forecastEllipses]);
 
     const lastSelectionRef = useRef<string | null>(null);
     const lastFleetFitAtRef = useRef(0);
@@ -326,6 +393,63 @@ export default function MobileRadar({
                                 'line-join': 'round',
                             }}
                         />
+                    </Source>
+                )}
+                {/* Hindcast — wind-reconstructed likely prior path (green dashed). */}
+                {styleLoaded && hindcastLineGeoJSON.features.length > 0 && (
+                    <Source id="mobile-hindcast" type="geojson" data={hindcastLineGeoJSON}>
+                        <Layer id="mobile-hindcast-line" type="line"
+                            layout={{ 'line-cap': 'round', 'line-join': 'round' }}
+                            paint={{ 'line-color': '#3fb8a0', 'line-width': 2, 'line-dasharray': [2, 2], 'line-opacity': 0.55 }} />
+                    </Source>
+                )}
+                {/* Stale-GPS connector — last fix → assumed-now (gray dashed). */}
+                {styleLoaded && staleLineGeoJSON.features.length > 0 && (
+                    <Source id="mobile-stale" type="geojson" data={staleLineGeoJSON}>
+                        <Layer id="mobile-stale-line" type="line"
+                            layout={{ 'line-cap': 'round', 'line-join': 'round' }}
+                            paint={{ 'line-color': 'rgba(160, 175, 195, 0.9)', 'line-width': 2, 'line-dasharray': [3, 3], 'line-opacity': 0.8 }} />
+                    </Source>
+                )}
+                {/* Confidence cone — 90% (dashed outline) then 50% (filled). */}
+                {styleLoaded && ellipseGeoJSON.e90.features.length > 0 && (
+                    <Source id="mobile-e90" type="geojson" data={ellipseGeoJSON.e90}>
+                        <Layer id="mobile-e90-stroke" type="line"
+                            paint={{ 'line-color': '#f59e0b', 'line-width': 1, 'line-opacity': 0.4, 'line-dasharray': [3, 4] }} />
+                    </Source>
+                )}
+                {styleLoaded && ellipseGeoJSON.e50.features.length > 0 && (
+                    <Source id="mobile-e50" type="geojson" data={ellipseGeoJSON.e50}>
+                        <Layer id="mobile-e50-fill" type="fill" paint={{ 'fill-color': '#f59e0b', 'fill-opacity': 0.1 }} />
+                        <Layer id="mobile-e50-stroke" type="line" paint={{ 'line-color': '#f59e0b', 'line-width': 1, 'line-opacity': 0.5 }} />
+                    </Source>
+                )}
+                {/* Ensemble spaghetti. */}
+                {styleLoaded && ensembleGeoJSON.features.length > 0 && (
+                    <Source id="mobile-ensemble" type="geojson" data={ensembleGeoJSON}>
+                        <Layer id="mobile-ensemble-lines" type="line"
+                            layout={{ 'line-cap': 'round', 'line-join': 'round' }}
+                            paint={{ 'line-color': '#f59e0b', 'line-width': 1, 'line-opacity': 0.08 }} />
+                    </Source>
+                )}
+                {/* Nominal forecast path (amber dashed). */}
+                {styleLoaded && forecastLineGeoJSON.features.length > 0 && (
+                    <Source id="mobile-forecast" type="geojson" data={forecastLineGeoJSON}>
+                        <Layer id="mobile-forecast-line" type="line"
+                            layout={{ 'line-cap': 'round', 'line-join': 'round' }}
+                            paint={{ 'line-color': '#f59e0b', 'line-width': 2, 'line-dasharray': [2, 2], 'line-opacity': 0.85 }} />
+                    </Source>
+                )}
+                {/* Transmitted-position dots. */}
+                {styleLoaded && transmitPointsGeoJSON.features.length > 0 && (
+                    <Source id="mobile-transmit" type="geojson" data={transmitPointsGeoJSON}>
+                        <Layer id="mobile-transmit-point" type="circle"
+                            paint={{
+                                'circle-color': '#0b0e13',
+                                'circle-radius': ['interpolate', ['linear'], ['zoom'], 3, 2.2, 8, 3.2, 14, 4.4],
+                                'circle-stroke-width': 1.5,
+                                'circle-stroke-color': '#4a90d9',
+                            }} />
                     </Source>
                 )}
                 {styleLoaded && (

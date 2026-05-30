@@ -9,10 +9,22 @@
 const ROLLING_MS = 24 * 60 * 60 * 1000;
 /** Safety cap so a forgotten `flying` row never pulls unbounded history. */
 const MAX_MISSION_MS = 14 * 24 * 60 * 60 * 1000;
+/** Cap for full-history (replay) queries — long enough for any past flight,
+ *  bounded so a misconfigured launch date can't pull years of rows. */
+const MAX_HISTORY_MS = 90 * 24 * 60 * 60 * 1000;
 
 export interface MissionWindowDevice {
     status?: string | null;
     launchedAt?: number | null;
+}
+
+/** Options for the single-device window. */
+export interface TelemetrySinceOpts {
+    /** When true, load the device's entire flight since launch regardless of
+     *  status (capped at MAX_HISTORY_MS). Used when the operator selects a
+     *  landed/retired balloon to replay its full mission. Falls back to the
+     *  rolling window when the device has no launch time. */
+    fullHistory?: boolean;
 }
 
 function parseLaunchMs(launchedAt: number | string | null | undefined): number | null {
@@ -22,19 +34,33 @@ function parseLaunchMs(launchedAt: number | string | null | undefined): number |
 }
 
 /** Earliest timestamp to include for a single device's telemetry query. */
-export function telemetrySinceMs(device: MissionWindowDevice, now = Date.now()): number {
+export function telemetrySinceMs(
+    device: MissionWindowDevice,
+    now = Date.now(),
+    opts: TelemetrySinceOpts = {},
+): number {
+    const launchMs = parseLaunchMs(device.launchedAt ?? null);
+
+    /* Replay mode: anchor to launch (capped) for any status. */
+    if (opts.fullHistory && launchMs != null) {
+        const capped = Math.max(launchMs, now - MAX_HISTORY_MS);
+        return Math.min(capped, now);
+    }
+
     const rolling = now - ROLLING_MS;
     if (device.status !== 'flying') return rolling;
-
-    const launchMs = parseLaunchMs(device.launchedAt ?? null);
     if (launchMs == null) return rolling;
 
     const capped = Math.max(launchMs, now - MAX_MISSION_MS);
     return Math.min(capped, now);
 }
 
-export function telemetrySinceIso(device: MissionWindowDevice, now = Date.now()): string {
-    return new Date(telemetrySinceMs(device, now)).toISOString();
+export function telemetrySinceIso(
+    device: MissionWindowDevice,
+    now = Date.now(),
+    opts: TelemetrySinceOpts = {},
+): string {
+    return new Date(telemetrySinceMs(device, now, opts)).toISOString();
 }
 
 /** Fleet-wide lower bound: must include every flying device's full mission. */

@@ -418,12 +418,16 @@ export function useTelemetry({ initialSelectedId = null }: { initialSelectedId?:
             try {
                 const supabase = createClient();
                 const summary = devices.find(d => d.id === selectedId);
+                /* fullHistory: the operator selected this device to inspect it,
+                 * so load its entire flight since launch — including landed /
+                 * retired balloons, which otherwise only get a rolling 24h
+                 * window and would show no track for an older mission. */
                 const since = telemetrySinceIso({
                     status: summary?.status,
                     launchedAt: summary?.launchedAt ?? null,
-                });
+                }, Date.now(), { fullHistory: true });
                 const raw = await fetchTelemetryMerged(supabase, {
-                    deviceId: selectedId,
+                    deviceId: selectedId!,
                     since,
                     columns: FULL_TELEMETRY_COLUMNS,
                 });
