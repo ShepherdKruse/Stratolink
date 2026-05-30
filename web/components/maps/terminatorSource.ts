@@ -22,8 +22,8 @@ const MAX_EXTENT = 20037508.342789244;  /* Web-Mercator half-circumference (m) *
  * raster layer's `raster-opacity`. */
 const NIGHT_RGB: [number, number, number] = [0.06, 0.085, 0.16];
 
-/* Twilight band in degrees of solar altitude: 0 = horizon, the shader fades to
- * full night by 2× the lower bound (matching Reusser's gentle smootherstep). */
+/* Twilight band in degrees of solar altitude: darkening runs from the horizon
+ * (0°) to full night at astronomical twilight (−18°) — the real-world band. */
 const FADE_RANGE: [number, number] = [0, -18];
 
 function toDays(date: Date): number {
@@ -80,7 +80,7 @@ void main () {
     vec2 uv = gl_FragCoord.xy / resolution;
     vec2 m = aabb.xw + (aabb.zy - aabb.xw) * uv;       /* north at uv.y=0 (fb bottom) */
     float altDeg = sunAltitude(toWgs84Rad(m)) * ${180.0 / Math.PI};
-    float a = smootherstep(fadeRange.x * 2.0, fadeRange.y * 2.0, altDeg);
+    float a = smootherstep(fadeRange.x, fadeRange.y, altDeg);
     gl_FragColor = vec4(nightColor, a);
 }`;
 
