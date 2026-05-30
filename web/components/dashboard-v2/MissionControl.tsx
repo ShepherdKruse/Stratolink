@@ -126,15 +126,20 @@ export default function MissionControlScreen() {
                         scrubT={effectiveScrubT}
                         isFuture={isFuture}
                     />
+                    {/* Scrubber floats over the map bottom, clear of the
+                      * attribution/logo row beneath it. */}
+                    <div style={{ position: 'absolute', left: 12, right: 12, bottom: 40, zIndex: 6 }}>
+                        <Timeline
+                            visibleRows={visibleRows}
+                            scrubT={scrubT}
+                            onScrub={setScrubT}
+                            futureEndT={forecast.endT}
+                            floating
+                        />
+                    </div>
                 </div>
-                <Timeline
-                    visibleRows={visibleRows}
-                    scrubT={scrubT}
-                    onScrub={setScrubT}
-                    futureEndT={forecast.endT}
-                />
                 {/* Reserve the collapsed drawer handle's footprint so it never
-                  * covers the timeline. */}
+                  * covers the charts drawer. */}
                 <div style={{ height: DRAWER_HANDLE_H, flexShrink: 0 }} />
                 <ChartsDrawer open={chartsOpen} onToggle={() => setChartsOpen((v) => !v)}>
                     <ChartStack
@@ -167,10 +172,9 @@ export default function MissionControlScreen() {
                     rows={rows}
                     scrubT={effectiveScrubT}
                 />
-                {/* Right side: map fills the height, timeline pinned beneath
-                  * it — so the scrubber spans only the map, not the left
-                  * column (which stays full-height). */}
-                <div style={{ display: 'flex', flexDirection: 'column', minHeight: 0, minWidth: 0 }}>
+                {/* Right side: the map fills the full height; the scrubber
+                  * floats over its bottom edge as a self-contained bar. */}
+                <div style={{ position: 'relative', display: 'flex', flexDirection: 'column', minHeight: 0, minWidth: 0 }}>
                     <MapColumn
                         visibleRows={visibleRows}
                         scrubRow={scrubRow}
@@ -179,12 +183,17 @@ export default function MissionControlScreen() {
                         scrubT={effectiveScrubT}
                         isFuture={isFuture}
                     />
-                    <Timeline
-                        visibleRows={visibleRows}
-                        scrubT={scrubT}
-                        onScrub={setScrubT}
-                        futureEndT={forecast.endT}
-                    />
+                    {/* Centered with side clearance so the Mapbox logo
+                      * (bottom-left) and attribution (bottom-right) stay clear. */}
+                    <div style={{ position: 'absolute', left: 104, right: 104, bottom: 44, zIndex: 6 }}>
+                        <Timeline
+                            visibleRows={visibleRows}
+                            scrubT={scrubT}
+                            onScrub={setScrubT}
+                            futureEndT={forecast.endT}
+                            floating
+                        />
+                    </div>
                 </div>
             </main>
         </div>
@@ -214,7 +223,7 @@ function LeftColumn({
             minHeight: 0,
             minWidth: 0,
             borderRight: '1px solid var(--sl-border)',
-            background: 'var(--sl-bg)',
+            background: 'var(--sl-bg-1)',
         }}>
             <BrandStrip />
             <BalloonCard
@@ -243,9 +252,10 @@ function BrandStrip() {
             borderBottom: '1px solid var(--sl-border)', background: 'var(--sl-bg-1)',
         }}>
             <a href="/" style={{
-                display: 'flex', alignItems: 'center', gap: 8,
-                fontFamily: 'var(--sl-mono)', fontSize: 12, letterSpacing: '0.14em', color: 'var(--sl-text)',
-                textDecoration: 'none', cursor: 'pointer',
+                display: 'flex', alignItems: 'center', gap: 9,
+                fontFamily: 'var(--sl-mono)', fontSize: 13, fontWeight: 600, letterSpacing: '0.06em',
+                textTransform: 'uppercase',
+                color: 'var(--sl-text-hi)', textDecoration: 'none', cursor: 'pointer',
             }}>
                 <span aria-hidden style={{ color: 'var(--sl-ok)', display: 'inline-flex' }}>
                     <svg width={18} height={18} viewBox="0 0 32 32" fill="none">
@@ -281,7 +291,7 @@ function ChartsDrawer({ open, onToggle, children }: {
                 display: 'flex', flexDirection: 'column',
                 background: 'var(--sl-bg-1)',
                 borderTop: '1px solid var(--sl-border)',
-                boxShadow: '0 -10px 28px rgba(0, 0, 0, 0.45)',
+                boxShadow: '0 -2px 12px rgba(26, 28, 27, 0.08)',
                 transform: open ? 'translateY(0)' : `translateY(calc(${DRAWER_HEIGHT} - ${DRAWER_HANDLE_H}px))`,
                 transition: 'transform 0.32s cubic-bezier(0.4, 0, 0.2, 1)',
             }}
@@ -337,17 +347,18 @@ function BalloonCard({ device, devices, onSelect, scrubRow, summary }: {
                         value={device?.id ?? ''}
                         onChange={(e) => onSelect(e.target.value)}
                         style={{
-                            marginTop: 2,
+                            marginTop: 1,
                             background: 'transparent',
                             border: 'none',
-                            color: 'var(--sl-ok)',
+                            color: 'var(--sl-text-hi)',
                             fontFamily: 'var(--sl-mono)',
-                            fontSize: 20,
-                            fontWeight: 500,
+                            fontSize: 21,
+                            fontWeight: 600,
+                            letterSpacing: '-0.02em',
                             cursor: 'pointer',
                             padding: 0,
                             outline: 'none',
-                            maxWidth: 220,
+                            maxWidth: 250,
                         }}
                     >
                         {devices.length === 0 && <option value="">no devices</option>}
@@ -380,9 +391,9 @@ function BalloonCard({ device, devices, onSelect, scrubRow, summary }: {
             }}>
                 <Vital label="ALT (PRES)" accent
                     value={fmtAltitudeM(scrubRow?.presAlt ?? null)} />
-                <Vital label="TOTAL TIME"
+                <Vital label="TOTAL TIME" accent
                     value={summary.durationMs != null ? fmt.duration(summary.durationMs) : '—'} />
-                <Vital label="TOTAL DIST"
+                <Vital label="TOTAL DIST" accent
                     value={`${Math.round(summary.distanceKm)} km`} />
             </div>
         </div>
@@ -398,11 +409,13 @@ function Vital({ label, value, accent }: {
         <div>
             <div className="sl-label-xs">{label}</div>
             <div style={{
-                fontSize: 15,
+                fontSize: 18,
                 marginTop: 4,
                 fontVariantNumeric: 'tabular-nums',
                 fontFamily: 'var(--sl-mono)',
-                color: accent ? 'var(--sl-ok)' : 'var(--sl-text)',
+                fontWeight: 500,
+                letterSpacing: '-0.02em',
+                color: accent ? 'var(--sl-ok)' : 'var(--sl-text-hi)',
             }}>
                 {value}
             </div>
@@ -434,23 +447,23 @@ function ChartStack({ visibleRows, rows, scrubT, scrubRow }: {
                     </div>
                 ) : (
                     <>
-                        <ChartRow title="ALT (GPS)" unit="m" color="var(--sl-ok)" rows={visibleRows} getY={r => r.alt} scrubT={scrubT}
+                        <ChartRow title="ALT (GPS)" unit="m" color="var(--sl-c-alt)" rows={visibleRows} getY={r => r.alt} scrubT={scrubT}
                             value={scrubRow?.alt != null ? `${scrubRow.alt.toFixed(0)} m` : '—'} />
-                        <ChartRow title="ALT (PRES)" unit="m" color="var(--sl-ok)" rows={visibleRows} getY={r => r.presAlt} scrubT={scrubT}
+                        <ChartRow title="ALT (PRES)" unit="m" color="var(--sl-c-alt)" rows={visibleRows} getY={r => r.presAlt} scrubT={scrubT}
                             value={fmtAltitudeM(scrubRow?.presAlt ?? null)} />
-                        <ChartRow title="BATTERY" unit="V" color="var(--sl-ok-mute)" rows={visibleRows} getY={r => r.batt} scrubT={scrubT}
+                        <ChartRow title="BATTERY" unit="V" color="var(--sl-c-batt)" rows={visibleRows} getY={r => r.batt} scrubT={scrubT}
                             value={scrubRow?.batt != null ? `${scrubRow.batt.toFixed(2)} V` : '—'} min={3.0} max={5.5} />
-                        <ChartRow title="SOLAR" unit="V" color="var(--sl-ok-mute)" rows={visibleRows} getY={r => r.sol} scrubT={scrubT}
+                        <ChartRow title="SOLAR" unit="V" color="var(--sl-c-solar)" rows={visibleRows} getY={r => r.sol} scrubT={scrubT}
                             value={scrubRow?.sol != null ? `${scrubRow.sol.toFixed(2)} V` : '—'} min={0} max={6} />
-                        <ChartRow title="TEMPERATURE" unit="°C" color="var(--sl-alert)" rows={visibleRows} getY={r => r.temp} scrubT={scrubT}
+                        <ChartRow title="TEMPERATURE" unit="°C" color="var(--sl-c-temp)" rows={visibleRows} getY={r => r.temp} scrubT={scrubT}
                             value={scrubRow?.temp != null ? `${scrubRow.temp.toFixed(1)} °C` : '—'} />
-                        <ChartRow title="PRESSURE" unit="hPa" color="var(--sl-neutral)" rows={visibleRows} getY={r => r.pres} scrubT={scrubT}
+                        <ChartRow title="PRESSURE" unit="hPa" color="var(--sl-c-pres)" rows={visibleRows} getY={r => r.pres} scrubT={scrubT}
                             value={fmtPressure(scrubRow?.pres ?? null)} />
-                        <ChartRow title="RSSI" unit="dBm" color="var(--sl-ok-mute)" rows={visibleRows} getY={r => r.rssi} scrubT={scrubT}
+                        <ChartRow title="RSSI" unit="dBm" color="var(--sl-c-rf)" rows={visibleRows} getY={r => r.rssi} scrubT={scrubT}
                             value={scrubRow?.rssi != null ? `${scrubRow.rssi.toFixed(0)} dBm` : '—'} />
-                        <ChartRow title="SNR" unit="dB" color="var(--sl-ok-mute)" rows={visibleRows} getY={r => r.snr} scrubT={scrubT}
+                        <ChartRow title="SNR" unit="dB" color="var(--sl-c-rf)" rows={visibleRows} getY={r => r.snr} scrubT={scrubT}
                             value={scrubRow?.snr != null ? `${scrubRow.snr.toFixed(1)} dB` : '—'} />
-                        <ChartRow title="GPS SATELLITES" unit="" color="var(--sl-ok-mute)" rows={visibleRows} getY={r => r.sats} scrubT={scrubT}
+                        <ChartRow title="GPS SATELLITES" unit="" color="var(--sl-c-sats)" rows={visibleRows} getY={r => r.sats} scrubT={scrubT}
                             value={scrubRow?.sats != null ? `${scrubRow.sats}` : '—'} min={0} max={28} />
                     </>
                 )}
@@ -458,13 +471,16 @@ function ChartStack({ visibleRows, rows, scrubT, scrubRow }: {
 
             {tStart !== null && tEnd !== null && (
                 <div style={{
-                    padding: '6px 16px', borderTop: '1px solid var(--sl-border)', flexShrink: 0,
-                    fontSize: 10, color: 'var(--sl-text-dim3)', letterSpacing: '0.04em',
-                    display: 'flex', justifyContent: 'space-between',
+                    padding: '7px 16px 9px 40px', borderTop: '1px solid var(--sl-border)', flexShrink: 0,
+                    fontSize: 10, color: 'var(--sl-text-dim2)',
+                    fontFamily: 'var(--sl-mono)', fontVariantNumeric: 'tabular-nums',
+                    display: 'flex', justifyContent: 'space-between', alignItems: 'baseline',
                 }}>
-                    <span>{fmt.datetime(tStart)}</span>
-                    <span>{visibleRows.length} packets</span>
-                    <span>{fmt.datetime(tEnd)}</span>
+                    <span>{fmtClock(tStart)}</span>
+                    <span style={{ fontFamily: 'var(--sl-sans)', letterSpacing: '0.1em', textTransform: 'uppercase', fontSize: 9, color: 'var(--sl-text-dim3)' }}>
+                        {visibleRows.length} fixes over time →
+                    </span>
+                    <span>{fmtClock(tEnd)}</span>
                 </div>
             )}
         </div>
@@ -497,7 +513,7 @@ function ChartRow({ title, unit, color, rows, getY, scrubT, value, min, max }: {
             minHeight: 56,
         }}>
             <div style={{ minWidth: 0, display: 'flex', flexDirection: 'column' }}>
-                <div className="sl-label-xs" style={{ color, opacity: 0.9, fontSize: 9, marginBottom: 2, flexShrink: 0 }}>
+                <div className="sl-label-xs" style={{ color: 'var(--sl-text-hi)', fontSize: 9, marginBottom: 2, flexShrink: 0 }}>
                     {title}{unit && <span style={{ color: 'var(--sl-text-dim3)', marginLeft: 4 }}>{unit}</span>}
                 </div>
                 <div ref={ref} style={{ flex: 1, minWidth: 0, minHeight: 0, overflow: 'hidden' }}>
@@ -507,20 +523,22 @@ function ChartRow({ title, unit, color, rows, getY, scrubT, value, min, max }: {
                         width={width}
                         height={height}
                         color={color}
-                        padL={32}
+                        padL={40}
                         padR={6}
-                        padT={6}
-                        padB={14}
-                        yTicks={2}
+                        padT={8}
+                        padB={8}
+                        yTicks={1}
+                        strokeWidth={1}
+                        hideXAxis
+                        tufte
                         scrubT={scrubT ?? undefined}
                         min={min}
                         max={max}
-                        fill
                     />
                 </div>
             </div>
             <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'flex-end', paddingRight: 4 }}>
-                <div style={{ fontSize: 15, color, fontVariantNumeric: 'tabular-nums', fontFamily: 'var(--sl-mono)', fontWeight: 500 }}>
+                <div style={{ fontSize: 14, color: 'var(--sl-text-hi)', fontVariantNumeric: 'tabular-nums', fontFamily: 'var(--sl-mono)', fontWeight: 500 }}>
                     {value}
                 </div>
             </div>
@@ -592,6 +610,13 @@ function MapColumn({ visibleRows, scrubRow, selectedDevice, forecast, scrubT, is
             .map(g => ({ gateway_id: g.gateway_id, lat: g.lat as number, lon: g.lon as number, rssi: g.rssi, snr: g.snr }));
     }, [scrubRow, isFuture]);
 
+    /* Whether this flight ever reported a receiver — constant across scrubbing,
+     * so the legend stays stable even where no receiver is currently drawn. */
+    const flightHasGateways = useMemo(
+        () => visibleRows.some(r => (r.gateways?.length ?? 0) > 0),
+        [visibleRows],
+    );
+
     /* Gray connector from the last real fix to the dead-reckoned "now". */
     const staleLine = useMemo<Array<[number, number]> | null>(() => {
         if (!forecast.staleGps || forecast.path.length === 0 || trackPoints.length === 0) return null;
@@ -622,8 +647,9 @@ function MapColumn({ visibleRows, scrubRow, selectedDevice, forecast, scrubT, is
             />
 
             <MapLegend
-                hasForecast={showForecast && forecast.path.length >= 2}
+                hasForecast={forecast.path.length >= 2}
                 hasHindcast={forecast.hindcastPath.length >= 2}
+                hasGateways={flightHasGateways}
             />
 
             {scrubRow?.lat != null && (
@@ -639,80 +665,74 @@ function MapColumn({ visibleRows, scrubRow, selectedDevice, forecast, scrubT, is
 
 /* Single consolidated map legend — flight-path states + gateway coverage in
  * one card (top-right). Collapsible; defaults collapsed on mobile where space
- * is tight. Rows appear only when their layer is on screen. */
-function MapLegend({ hasForecast, hasHindcast }: { hasForecast: boolean; hasHindcast: boolean }) {
+ * is tight. Rows are keyed to whether a layer EXISTS for this flight (constant
+ * across scrubbing), not to its current on-screen visibility — so the legend
+ * stays stable as you scrub. */
+function MapLegend({ hasForecast, hasHindcast, hasGateways }: { hasForecast: boolean; hasHindcast: boolean; hasGateways: boolean }) {
     const isMobile = useIsMobile();
     /* null = follow the per-device default (collapsed on mobile); once the
      * user toggles, their explicit choice sticks. */
     const [open, setOpen] = useState<boolean | null>(null);
     const expanded = open === null ? !isMobile : open;
 
+    /* Swatch primitives — kept visually consistent so labels align. */
+    const lineSwatch = (color: string, dashed = false, w = 18) => (
+        <span style={{ display: 'inline-block', width: w, height: 0, borderTop: `${dashed ? '1.5px dashed' : '2px solid'} ${color}` }} />
+    );
+    const boxSwatch = (fill: string, stroke: string) => (
+        <span style={{ display: 'inline-block', width: 15, height: 9, background: fill, border: `1px solid ${stroke}` }} />
+    );
+
     return (
         <div style={{
             position: 'absolute', top: 14, right: 14, zIndex: 5,
-            background: 'rgba(8, 13, 23, 0.78)',
+            background: 'rgba(252, 252, 251, 0.96)',
             backdropFilter: 'blur(6px)', WebkitBackdropFilter: 'blur(6px)',
-            border: '1px solid rgba(94, 234, 212, 0.12)', borderRadius: 4,
-            padding: expanded ? '8px 10px' : '6px 9px',
-            fontFamily: 'var(--sl-sans, system-ui, sans-serif)', fontSize: 10.5,
-            color: 'rgba(200, 212, 232, 0.78)', lineHeight: 1.3, minWidth: expanded ? 140 : 0,
+            border: '1px solid var(--sl-border)',
+            boxShadow: 'var(--sl-shadow)',
+            fontFamily: 'var(--sl-mono)', fontSize: 10.5,
+            color: 'var(--sl-text)', lineHeight: 1.2, minWidth: expanded ? 168 : 0,
+            overflow: 'hidden',
         }}>
+            {/* title bar */}
             <button
                 type="button"
                 onClick={() => setOpen(!expanded)}
                 aria-expanded={expanded}
                 style={{
                     display: 'flex', alignItems: 'center', gap: 6, width: '100%',
-                    background: 'transparent', border: 'none', cursor: 'pointer', padding: 0,
-                    fontSize: 9, letterSpacing: '0.10em', textTransform: 'uppercase',
-                    color: 'rgba(200, 212, 232, 0.55)', fontFamily: 'inherit',
-                    marginBottom: expanded ? 6 : 0,
+                    background: 'transparent', cursor: 'pointer',
+                    padding: expanded ? '7px 11px' : '6px 10px',
+                    borderTop: 'none', borderLeft: 'none', borderRight: 'none',
+                    borderBottom: expanded ? '1px solid var(--sl-border)' : 'none',
+                    fontSize: 9.5, letterSpacing: '0.16em', textTransform: 'uppercase',
+                    color: 'var(--sl-text-dim)', fontFamily: 'inherit', fontWeight: 600,
                 }}
             >
-                <span>Legend</span>
-                <span style={{ marginLeft: 'auto' }}>{expanded ? '▾' : '▸'}</span>
+                <span>Key</span>
+                <span style={{ marginLeft: 'auto', color: 'var(--sl-text-dim3)', fontSize: 8 }}>{expanded ? '▾' : '▸'}</span>
             </button>
 
-            {!expanded ? null : (
-            <>
-            <LegendHeading>Flight path</LegendHeading>
-            <LegendRow>
-                <span style={{ display: 'inline-block', width: 10, height: 10, borderRadius: '50%', background: '#0b1220', border: '1.6px solid #5eead4' }} />
-                transmitted
-            </LegendRow>
-            <LegendRow>
-                <span style={{ display: 'inline-block', width: 18, height: 0, borderTop: '2px solid #5eead4' }} />
-                flown path
-            </LegendRow>
-            {hasHindcast && (
-                <LegendRow>
-                    <span style={{ display: 'inline-block', width: 18, height: 0, borderTop: '2px dashed #3fb8a0' }} />
-                    likely path
-                </LegendRow>
-            )}
-            {hasForecast && (
-                <>
-                    <LegendRow>
-                        <span style={{ display: 'inline-block', width: 18, height: 0, borderTop: '2px dashed #f59e0b' }} />
-                        forecast
-                    </LegendRow>
-                    <LegendRow>
-                        <span style={{ display: 'inline-block', width: 16, height: 9, background: 'rgba(245, 158, 11, 0.12)', border: '1px solid rgba(245, 158, 11, 0.5)', borderRadius: 1 }} />
-                        50 / 90% range
-                    </LegendRow>
-                </>
-            )}
+            {expanded && (
+                <div style={{ padding: '8px 11px 9px' }}>
+                    <LegendHeading>Flight path</LegendHeading>
+                    <LegendRow
+                        swatch={<span style={{ display: 'inline-block', width: 9, height: 9, borderRadius: '50%', background: '#fcfcfb', border: '1.5px solid #a11515' }} />}
+                        label="transmitted"
+                    />
+                    {hasHindcast && <LegendRow swatch={lineSwatch('#a11515')} label="likely path" />}
+                    {hasForecast && <LegendRow swatch={lineSwatch('#08327d', true)} label="forecast" />}
 
-            <LegendHeading style={{ marginTop: 8 }}>Gateways</LegendHeading>
-            <LegendRow>
-                <span style={{ display: 'inline-block', width: 16, height: 9, background: 'rgba(94, 234, 212, 0.10)', border: '1px solid rgba(94, 234, 212, 0.55)', borderRadius: 1 }} />
-                150 km · in range
-            </LegendRow>
-            <LegendRow>
-                <span style={{ display: 'inline-block', width: 16, height: 0, borderTop: '1.5px dashed rgba(94, 234, 212, 0.6)' }} />
-                250 km · line-of-sight
-            </LegendRow>
-            </>
+                    <LegendHeading style={{ marginTop: 10 }}>Gateways</LegendHeading>
+                    {hasGateways && (
+                        <LegendRow
+                            swatch={<span style={{ display: 'inline-block', width: 8, height: 8, borderRadius: '50%', background: '#7a9b76', border: '1px solid #fcfcfb' }} />}
+                            label="receiver"
+                        />
+                    )}
+                    <LegendRow swatch={boxSwatch('rgba(90,92,98,0.10)', 'rgba(90,92,98,0.55)')} label="150 km · in range" />
+                    <LegendRow swatch={lineSwatch('rgba(90,92,98,0.6)', true, 15)} label="250 km · sightline" />
+                </div>
             )}
         </div>
     );
@@ -720,16 +740,21 @@ function MapLegend({ hasForecast, hasHindcast }: { hasForecast: boolean; hasHind
 
 function LegendHeading({ children, style }: { children: React.ReactNode; style?: React.CSSProperties }) {
     return (
-        <div style={{ fontSize: 9, letterSpacing: '0.10em', textTransform: 'uppercase', color: 'rgba(200, 212, 232, 0.45)', marginBottom: 6, ...style }}>
+        <div style={{
+            fontSize: 8.5, letterSpacing: '0.16em', textTransform: 'uppercase',
+            color: 'var(--sl-text-dim3)', fontWeight: 600, marginBottom: 6, ...style,
+        }}>
             {children}
         </div>
     );
 }
 
-function LegendRow({ children }: { children: React.ReactNode }) {
+/* Typeset key row — fixed swatch column so all labels align. */
+function LegendRow({ swatch, label }: { swatch: React.ReactNode; label: string }) {
     return (
-        <div style={{ display: 'flex', alignItems: 'center', gap: 7, marginBottom: 4 }}>
-            {children}
+        <div style={{ display: 'grid', gridTemplateColumns: '20px 1fr', alignItems: 'center', columnGap: 9, height: 18 }}>
+            <span style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>{swatch}</span>
+            <span style={{ color: 'var(--sl-text-dim)', letterSpacing: '0.01em' }}>{label}</span>
         </div>
     );
 }
@@ -737,7 +762,7 @@ function LegendRow({ children }: { children: React.ReactNode }) {
 /* ──────────────────────────────────────────────────────────────
  * Timeline — full-width scrubber. Drives the charts AND the map.
  * ────────────────────────────────────────────────────────────── */
-function Timeline({ visibleRows, scrubT, onScrub, futureEndT }: {
+function Timeline({ visibleRows, scrubT, onScrub, futureEndT, floating = false }: {
     visibleRows: TelemetryRow[];
     scrubT: number | null;
     /* null re-arms "follow live" — the page tracks each new packet. */
@@ -745,18 +770,43 @@ function Timeline({ visibleRows, scrubT, onScrub, futureEndT }: {
     /* Forecast horizon end; the bar extends here so the cursor can ride the
      * predicted path into the future. Null = no forecast, bar ends at "now". */
     futureEndT: number | null;
+    /* When true, render as a self-contained floating card (overlaid on the
+     * map) instead of a full-width bottom row. */
+    floating?: boolean;
 }) {
     const trackRef = useRef<HTMLDivElement | null>(null);
-    const tStart = visibleRows.length ? visibleRows[0].t : Date.now() - 24 * 3600 * 1000;
-    /* "Now" = latest real packet. */
-    const packetEndT = visibleRows.length ? visibleRows[visibleRows.length - 1].t : Date.now();
-    const tEnd = futureEndT !== null && futureEndT > packetEndT ? futureEndT : packetEndT;
+    /* When there are no rows yet we need a "now" for the empty rail. Reading
+     * Date.now() during render is non-deterministic across SSR/hydration (the
+     * two clocks differ by a few hundred ms), which mismatches the slider's
+     * aria-value* timestamps. So fall back to 0 until mounted, then fill in the
+     * real clock client-side. Once telemetry arrives this path is never taken. */
+    /* A ticking real-time clock. null on the server + first client render (so
+     * hydration matches), then the live time once mounted; refreshed so the
+     * "live" marker creeps along the forecast as real time passes. */
+    const [clientNow, setClientNow] = useState<number | null>(null);
+    useEffect(() => {
+        setClientNow(Date.now());
+        const id = setInterval(() => setClientNow(Date.now()), 30_000);
+        return () => clearInterval(id);
+    }, []);
+    const nowBase = clientNow ?? 0;
+    const tStart = visibleRows.length ? visibleRows[0].t : nowBase - 24 * 3600 * 1000;
+    /* Last real packet — the default load point and the boundary between
+     * observed track (red) and forecast (blue). NOT "live". */
+    const packetEndT = visibleRows.length ? visibleRows[visibleRows.length - 1].t : nowBase;
+    /* "Live" = the actual current time — the balloon's projected position right
+     * now. Falls back to the last packet until the clock mounts. */
+    const liveT = clientNow ?? packetEndT;
+    const forecastEndT = futureEndT !== null && futureEndT > packetEndT ? futureEndT : packetEndT;
+    /* Rail spans far enough to include both the forecast horizon and "now". */
+    const tEnd = Math.max(forecastEndT, liveT, packetEndT);
     const span = tEnd - tStart || 1;
-    const hasFuture = tEnd > packetEndT;
+    const hasFuture = forecastEndT > packetEndT;
 
     const pct = (t: number) => Math.max(0, Math.min(100, ((t - tStart) / span) * 100));
     const nowFrac = pct(packetEndT);
-    const cursorT = scrubT ?? packetEndT;        // live parks the cursor at "now"
+    const liveFrac = pct(liveT);
+    const cursorT = scrubT ?? packetEndT;        // default parks the cursor at the last packet
     const fraction = pct(cursorT);
     const elapsedW = Math.min(fraction, nowFrac);
 
@@ -766,28 +816,123 @@ function Timeline({ visibleRows, scrubT, onScrub, futureEndT }: {
         const rect = el.getBoundingClientRect();
         const f = Math.max(0, Math.min(1, (clientX - rect.left) / rect.width));
         const t = tStart + span * f;
-        /* Snap to "now" (re-arm follow-live) within 1% of the live boundary. */
+        /* Snap to the last packet (re-arm follow) within 1% of that boundary. */
         if (Math.abs(t - packetEndT) <= span * 0.01) { onScrub(null); return; }
         onScrub(t);
     }
 
+    const cursorInFuture = cursorT > packetEndT;
+    /* Future leg = the forecast, which is drawn blue on the map. */
+    const handleColor = cursorInFuture ? '#08327d' : 'var(--sl-ok)';
+    const labelLeft = Math.max(7, Math.min(93, fraction));
+
+    /* Offset of the cursor from the real "now" (live), e.g. "+18hr" / "−5hr".
+     * The default load point (last packet) reads as how stale it is, e.g.
+     * "−2hr". Within a couple minutes of now it just says "live". */
+    const relMs = cursorT - liveT;
+    const relHr = relMs / 3_600_000;
+    const relLabel = Math.abs(relMs) < 120_000
+        ? 'live'
+        : Math.abs(relHr) < 1
+            ? `${relHr >= 0 ? '+' : '−'}${Math.max(1, Math.round(Math.abs(relHr) * 60))}m`
+            : `${relHr >= 0 ? '+' : '−'}${Math.round(Math.abs(relHr))}hr`;
+    const cursorIsLive = Math.abs(relMs) < 120_000;
+
+    const onMouseDown = (e: React.MouseEvent) => {
+        pickFromEvent(e.clientX);
+        function move(ev: MouseEvent) { pickFromEvent(ev.clientX); }
+        function up() {
+            window.removeEventListener('mousemove', move);
+            window.removeEventListener('mouseup', up);
+        }
+        window.addEventListener('mousemove', move);
+        window.addEventListener('mouseup', up);
+    };
+    const onTouchMove = (e: React.TouchEvent) => pickFromEvent(e.touches[0].clientX);
+
+    /* ── Floating: one slim row — state dot + clock (key info) + the track. ── */
+    if (floating) {
+        const PAPER = '#fcfcfb';
+        return (
+            <div style={{
+                display: 'flex', alignItems: 'center', gap: 13,
+                height: 32, padding: '0 15px',
+                background: 'rgba(252, 252, 251, 0.82)',
+                backdropFilter: 'blur(10px)', WebkitBackdropFilter: 'blur(10px)',
+                border: '1px solid var(--sl-border)',
+                borderRadius: 999,
+                boxShadow: '0 1px 5px rgba(26, 28, 27, 0.10)',
+            }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 7, flexShrink: 0 }}>
+                    <span style={{ width: 6, height: 6, borderRadius: '50%', background: handleColor, flexShrink: 0 }} />
+                    <span style={{
+                        fontFamily: 'var(--sl-mono)', fontVariantNumeric: 'tabular-nums', fontSize: 11, fontWeight: 500,
+                        color: cursorInFuture ? '#08327d' : 'var(--sl-text-hi)', whiteSpace: 'nowrap',
+                    }}>
+                        {fmtClock(cursorT)}
+                        <span style={{ color: cursorIsLive ? 'var(--sl-ok)' : cursorInFuture ? '#08327d' : 'var(--sl-text-dim2)', marginLeft: 5 }}>
+                            {relLabel}
+                        </span>
+                    </span>
+                </div>
+                <div
+                    ref={trackRef}
+                    className="sl-scrub-track"
+                    role="slider"
+                    tabIndex={0}
+                    aria-valuemin={tStart}
+                    aria-valuemax={tEnd}
+                    aria-valuenow={cursorT}
+                    onMouseDown={onMouseDown}
+                    onTouchMove={onTouchMove}
+                    style={{ position: 'relative', flex: 1, alignSelf: 'stretch', userSelect: 'none' }}
+                >
+                    {/* recessed rail groove — reads as a slider track */}
+                    <div style={{ position: 'absolute', top: 'calc(50% - 2px)', left: 0, right: 0, height: 4, borderRadius: 2, background: 'var(--sl-bg-2)', border: '1px solid var(--sl-border)' }} />
+                    {/* forecast horizon — dashed extension on the rail */}
+                    {hasFuture && (
+                        <div style={{ position: 'absolute', top: 'calc(50% - 0.5px)', left: `${nowFrac}%`, width: `${100 - nowFrac}%`, height: 0, borderTop: '1.5px dashed rgba(8, 50, 125, 0.55)' }} />
+                    )}
+                    {/* elapsed fill */}
+                    <div style={{ position: 'absolute', top: 'calc(50% - 2px)', left: 0, width: `${elapsedW}%`, height: 4, borderRadius: 2, background: 'var(--sl-ok)' }} />
+                    {fraction > nowFrac && (
+                        <div style={{ position: 'absolute', top: 'calc(50% - 2px)', left: `${nowFrac}%`, width: `${fraction - nowFrac}%`, height: 4, borderRadius: 2, background: '#08327d' }} />
+                    )}
+                    {/* last-transmission notch — boundary between observed track
+                      * and forecast. */}
+                    {hasFuture && (
+                        <div style={{ position: 'absolute', top: 'calc(50% - 3px)', left: `calc(${nowFrac}% - 3px)`, width: 6, height: 6, borderRadius: '50%', background: PAPER, border: '1px solid var(--sl-text-dim2)' }} />
+                    )}
+                    {/* live marker — the real current time on the rail */}
+                    {liveFrac > nowFrac + 0.2 && (
+                        <>
+                            <div style={{ position: 'absolute', top: 'calc(50% - 8px)', left: `calc(${liveFrac}% - 0.75px)`, width: 1.5, height: 16, background: 'var(--sl-ok)', borderRadius: 1 }} />
+                            <div style={{ position: 'absolute', top: 'calc(50% - 11px)', left: `calc(${liveFrac}% - 2px)`, width: 4, height: 4, borderRadius: '50%', background: 'var(--sl-ok)' }} />
+                        </>
+                    )}
+                    {/* draggable thumb — a clear capsule grip */}
+                    <div
+                        className="sl-scrub-thumb"
+                        style={{
+                            position: 'absolute', top: 'calc(50% - 9px)', left: `calc(${fraction}% - 4px)`,
+                            width: 8, height: 18, borderRadius: 4,
+                            background: handleColor, border: `2px solid ${PAPER}`,
+                            boxShadow: '0 1px 3px rgba(26, 28, 27, 0.25)',
+                        }}
+                    />
+                </div>
+            </div>
+        );
+    }
+
+    /* ── Inline (mobile): stacked track + start/end stamps. ── */
     return (
         <div style={{
             borderTop: '1px solid var(--sl-border)',
-            padding: '10px 20px 14px',
+            padding: '8px 20px 9px',
             background: 'var(--sl-bg-1)',
             flexShrink: 0,
         }}>
-            <div style={{
-                display: 'flex', justifyContent: 'space-between',
-                fontSize: 11, color: 'var(--sl-text-dim3)', marginBottom: 6, letterSpacing: '0.04em',
-            }}>
-                <span>{fmtClock(tStart)}</span>
-                <span style={{ color: scrubT !== null && cursorT > packetEndT ? '#f59e0b' : 'var(--sl-ok)' }}>
-                    {fmtClock(cursorT)}
-                </span>
-                <span>{fmtClock(tEnd)}</span>
-            </div>
             <div
                 ref={trackRef}
                 role="slider"
@@ -795,43 +940,49 @@ function Timeline({ visibleRows, scrubT, onScrub, futureEndT }: {
                 aria-valuemin={tStart}
                 aria-valuemax={tEnd}
                 aria-valuenow={cursorT}
-                onMouseDown={(e) => {
-                    pickFromEvent(e.clientX);
-                    function move(ev: MouseEvent) { pickFromEvent(ev.clientX); }
-                    function up() {
-                        window.removeEventListener('mousemove', move);
-                        window.removeEventListener('mouseup', up);
-                    }
-                    window.addEventListener('mousemove', move);
-                    window.addEventListener('mouseup', up);
-                }}
-                onTouchMove={(e) => pickFromEvent(e.touches[0].clientX)}
-                style={{ position: 'relative', height: 24, cursor: 'pointer', userSelect: 'none' }}
+                onMouseDown={onMouseDown}
+                onTouchMove={onTouchMove}
+                style={{ position: 'relative', height: 30, cursor: 'pointer', userSelect: 'none' }}
             >
-                {/* base track */}
-                <div style={{ position: 'absolute', top: 11, left: 0, right: 0, height: 2, background: 'var(--sl-border-hi)' }} />
-                {/* future region (forecast horizon) — faint amber band */}
+                <div style={{
+                    position: 'absolute', top: -1, left: `${labelLeft}%`, transform: 'translateX(-50%)',
+                    fontFamily: 'var(--sl-mono)', fontVariantNumeric: 'tabular-nums', fontSize: 10.5, fontWeight: 500,
+                    color: cursorIsLive ? 'var(--sl-ok)' : cursorInFuture ? '#08327d' : 'var(--sl-text-hi)', whiteSpace: 'nowrap', pointerEvents: 'none',
+                }}>
+                    {fmtClock(cursorT)} · {relLabel}
+                </div>
+                <div style={{ position: 'absolute', top: 22, left: 0, right: 0, height: 1, background: 'var(--sl-border-hi)' }} />
                 {hasFuture && (
-                    <div style={{ position: 'absolute', top: 11, left: `${nowFrac}%`, width: `${100 - nowFrac}%`, height: 2, background: 'rgba(245, 158, 11, 0.25)' }} />
+                    <div style={{ position: 'absolute', top: 21.5, left: `${nowFrac}%`, width: `${100 - nowFrac}%`, height: 0, borderTop: '1px dashed rgba(8, 50, 125, 0.5)' }} />
                 )}
-                {/* elapsed (real telemetry) — teal */}
-                <div style={{ position: 'absolute', top: 11, left: 0, width: `${elapsedW}%`, height: 2, background: 'var(--sl-ok)' }} />
-                {/* future progress (cursor in the forecast) — amber */}
+                <div style={{ position: 'absolute', top: 21, left: 0, width: `${elapsedW}%`, height: 2, background: 'var(--sl-ok)' }} />
                 {fraction > nowFrac && (
-                    <div style={{ position: 'absolute', top: 11, left: `${nowFrac}%`, width: `${fraction - nowFrac}%`, height: 2, background: '#f59e0b' }} />
+                    <div style={{ position: 'absolute', top: 21, left: `${nowFrac}%`, width: `${fraction - nowFrac}%`, height: 2, background: '#08327d' }} />
                 )}
-                {/* "now" divider */}
-                {hasFuture && (
-                    <div style={{ position: 'absolute', top: 5, left: `calc(${nowFrac}% - 0.5px)`, width: 1, height: 14, background: 'var(--sl-text-dim2)' }} />
-                )}
-                {/* handle */}
-                <div style={{ position: 'absolute', top: 6, left: `calc(${fraction}% - 5px)`, width: 10, height: 12, background: cursorT > packetEndT ? '#f59e0b' : 'var(--sl-ok)' }} />
-                {/* packet ticks (past only) */}
-                <svg width="100%" height="24" style={{ position: 'absolute', top: 0, left: 0, pointerEvents: 'none' }}>
+                <svg width="100%" height="30" style={{ position: 'absolute', top: 0, left: 0, pointerEvents: 'none' }}>
                     {visibleRows.map((r, i) => (
-                        <line key={i} x1={`${pct(r.t)}%`} y1="2" x2={`${pct(r.t)}%`} y2="6" stroke="var(--sl-text-dim3)" />
+                        <line key={i} x1={`${pct(r.t)}%`} y1="25" x2={`${pct(r.t)}%`} y2="28" stroke="var(--sl-text-dim3)" strokeOpacity="0.55" />
                     ))}
                 </svg>
+                {hasFuture && (
+                    <div style={{ position: 'absolute', top: 19.5, left: `calc(${nowFrac}% - 2.5px)`, width: 5, height: 5, borderRadius: '50%', background: 'var(--sl-bg-1)', border: '1px solid var(--sl-text-dim2)' }} />
+                )}
+                {/* live marker — the real current time on the rail */}
+                {liveFrac > nowFrac + 0.2 && (
+                    <div style={{ position: 'absolute', top: 16, left: `calc(${liveFrac}% - 0.75px)`, width: 1.5, height: 9, background: 'var(--sl-ok)', borderRadius: 1 }} />
+                )}
+                <div style={{ position: 'absolute', top: 13, left: `calc(${fraction}% - 0.5px)`, width: 1, height: 16, background: handleColor }} />
+                <div style={{ position: 'absolute', top: 18.5, left: `calc(${fraction}% - 3.5px)`, width: 7, height: 7, borderRadius: '50%', background: handleColor, border: '1.5px solid var(--sl-bg-1)' }} />
+            </div>
+            <div style={{
+                display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginTop: 3,
+                fontFamily: 'var(--sl-mono)', fontVariantNumeric: 'tabular-nums', fontSize: 10, color: 'var(--sl-text-dim3)',
+            }}>
+                <span>{fmtClock(tStart)}</span>
+                <span style={{ fontFamily: 'var(--sl-sans)', letterSpacing: '0.14em', textTransform: 'uppercase', fontSize: 8.5, color: 'var(--sl-text-dim2)' }}>
+                    drag to replay{hasFuture ? ' · → forecast' : ''}
+                </span>
+                <span>{fmtClock(tEnd)}</span>
             </div>
         </div>
     );

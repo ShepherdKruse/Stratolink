@@ -109,6 +109,8 @@ export const fmt = {
         const h = Math.floor(s / 3600);
         const m = Math.floor((s % 3600) / 60);
         const ss = s % 60;
+        /* Past a day, hours-and-minutes is noise — show days and hours. */
+        if (h >= 24) { const d = Math.floor(h / 24); return `${d}d ${h % 24}h`; }
         if (h > 0) return `${h}h ${m}m`;
         if (m > 0) return `${m}m ${ss}s`;
         return `${ss}s`;
@@ -319,6 +321,10 @@ export function Chart<T extends { t: number }>({
     scrubT,
     markers,
     hideAxis = false,
+    hideXAxis = false,
+    strokeWidth = 1.4,
+    areaOpacity = 0.06,
+    tufte = false,
 }: {
     data: T[];
     getY: (row: T) => number | null | undefined;
@@ -339,6 +345,13 @@ export function Chart<T extends { t: number }>({
     scrubT?: number;
     markers?: Array<{ t: number; color?: string }>;
     hideAxis?: boolean;
+    /** Suppress just the bottom time labels (e.g. when a shared axis is drawn once). */
+    hideXAxis?: boolean;
+    strokeWidth?: number;
+    areaOpacity?: number;
+    /** Tufte mode: no gridlines/fill/range-frame — line + a dot at the latest
+     *  point + min/max value labels only. Maximises data-ink. */
+    tufte?: boolean;
 }) {
     const innerW = width - padL - padR;
     const innerH = height - padT - padB;
@@ -346,6 +359,7 @@ export function Chart<T extends { t: number }>({
         .map(d => getY(d))
         .filter((v): v is number => v !== null && v !== undefined && Number.isFinite(v));
     if (!valid.length) return <svg width={width} height={height} />;
+
     const lo = min !== undefined ? min : Math.min(...valid);
     const hi = max !== undefined ? max : Math.max(...valid);
     const range = hi - lo || 1;
@@ -353,19 +367,69 @@ export function Chart<T extends { t: number }>({
     const t1 = data[data.length - 1].t;
     const tspan = t1 - t0 || 1;
     const xOf = (t: number) => padL + ((t - t0) / tspan) * innerW;
-    const yOf = (v: number) => padT + innerH - ((v - lo) / range) * innerH;
+    const clampY = (y: number) => Math.max(padT, Math.min(padT + innerH, y));
+    const yOf = (v: number) => clampY(padT + innerH - ((v - lo) / range) * innerH);
 
+    /* Break the line across big transmission gaps: a dt far larger than the
+     * usual cadence is an outage, not a straight-line flight. */
+    let medianDt = 0;
+    {
+        const dts: number[] = [];
+        for (let i = 1; i < data.length; i++) dts.push(data[i].t - data[i - 1].t);
+        if (dts.length) { dts.sort((a, b) => a - b); medianDt = dts[Math.floor(dts.length / 2)]; }
+    }
+    const gapThreshold = medianDt > 0 ? medianDt * 6 : Infinity;
+
+    /* Two paths over the same points:
+     *  - `d`     the solid trace, broken across big gaps (real data only)
+     *  - `connD` a continuous line through every valid point, drawn faintly
+     *            underneath so outages read as a light bridge rather than a
+     *            blank — keeping the chart legible without implying data. */
     let d = '';
+    let connD = '';
     let started = false;
+    let connStarted = false;
+    let prevT: number | null = null;
+    let lastX: number | null = null;
+    let lastY: number | null = null;
     data.forEach((row) => {
         const v = getY(row);
         if (v === null || v === undefined || !Number.isFinite(v)) { started = false; return; }
-        const x = xOf(row.t).toFixed(1);
-        const y = yOf(v).toFixed(1);
-        d += (started ? ' L' : 'M') + x + ' ' + y;
+        const px = xOf(row.t);
+        const py = yOf(v);
+        connD += (connStarted ? ' L' : 'M') + px.toFixed(1) + ' ' + py.toFixed(1);
+        connStarted = true;
+        /* A big gap since the last drawn point breaks the solid line. */
+        if (started && prevT !== null && row.t - prevT > gapThreshold) started = false;
+        d += (started ? ' L' : 'M') + px.toFixed(1) + ' ' + py.toFixed(1);
         started = true;
+        prevT = row.t;
+        lastX = px;
+        lastY = py;
     });
-    const fillD = (fill && area && d) ? d + ` L${(padL + innerW).toFixed(1)} ${(padT + innerH).toFixed(1)} L${padL} ${(padT + innerH).toFixed(1)} Z` : null;
+    const fillD = (fill && area && d && !tufte) ? d + ` L${(padL + innerW).toFixed(1)} ${(padT + innerH).toFixed(1)} L${padL} ${(padT + innerH).toFixed(1)} Z` : null;
+
+    /* The end-dot tracks the scrubber: interpolate the value at scrubT along
+     * the valid points so the dot rides the line as you scrub. Falls back to
+     * the latest point when there's no scrub position. */
+    let dotX = lastX;
+    let dotY = lastY;
+    if (scrubT !== undefined && scrubT >= t0 && scrubT <= t1) {
+        const pts = data
+            .map(r => ({ t: r.t, v: getY(r) }))
+            .filter((p): p is { t: number; v: number } => p.v !== null && p.v !== undefined && Number.isFinite(p.v));
+        if (pts.length) {
+            let i = 0;
+            while (i < pts.length - 1 && pts[i + 1].t <= scrubT) i++;
+            const a = pts[i];
+            const b = pts[Math.min(i + 1, pts.length - 1)];
+            const span = b.t - a.t;
+            const f = span > 0 ? Math.max(0, Math.min(1, (scrubT - a.t) / span)) : 0;
+            const v = a.v + (b.v - a.v) * f;
+            dotX = xOf(scrubT);
+            dotY = yOf(v);
+        }
+    }
 
     const yTickArr = Array.from({ length: yTicks + 1 }, (_, i) => lo + (range * i) / yTicks);
 
@@ -375,12 +439,14 @@ export function Chart<T extends { t: number }>({
                 const y = yOf(v);
                 return (
                     <g key={i}>
-                        <line
-                            x1={padL} y1={y} x2={padL + innerW} y2={y}
-                            stroke="var(--sl-grid)"
-                            strokeDasharray={i === 0 || i === yTicks ? '' : '2 3'}
-                        />
-                        <text x={padL - 6} y={y + 3} textAnchor="end" className="sl-tick">
+                        {!tufte && (
+                            <line
+                                x1={padL} y1={y} x2={padL + innerW} y2={y}
+                                stroke="var(--sl-grid)"
+                                strokeDasharray={i === 0 || i === yTicks ? '' : '2 3'}
+                            />
+                        )}
+                        <text x={padL - 6} y={i === 0 ? y - 4 : y + (i === yTicks ? 7 : 3)} textAnchor="end" className="sl-tick">
                             {v >= 1000 ? (v / 1000).toFixed(1) + 'k' : (Math.abs(v) < 10 ? v.toFixed(2) : v.toFixed(0))}
                         </text>
                     </g>
@@ -391,9 +457,13 @@ export function Chart<T extends { t: number }>({
                     {label}{unit && <tspan dx="6" fill="var(--sl-text-dim3)">{unit}</tspan>}
                 </text>
             )}
-            {fillD && <path d={fillD} fill={color} opacity={0.06} />}
-            <path d={d} fill="none" stroke={color} strokeWidth="1.4" />
-            {!hideAxis && [0, 0.5, 1].map((f, i) => {
+            {fillD && <path d={fillD} fill={color} opacity={areaOpacity} />}
+            {connD && <path d={connD} fill="none" stroke={color} strokeWidth={strokeWidth} strokeLinejoin="round" strokeLinecap="round" opacity={0.16} />}
+            <path d={d} fill="none" stroke={color} strokeWidth={strokeWidth} strokeLinejoin="round" strokeLinecap="round" />
+            {tufte && dotX !== null && dotY !== null && (
+                <circle cx={dotX} cy={dotY} r={2.2} fill="var(--sl-ok)" />
+            )}
+            {!hideAxis && !hideXAxis && [0, 0.5, 1].map((f, i) => {
                 const t = t0 + tspan * f;
                 const x = padL + innerW * f;
                 return (

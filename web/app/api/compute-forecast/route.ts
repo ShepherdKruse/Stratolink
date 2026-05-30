@@ -63,11 +63,9 @@ export async function GET(req: Request) {
                 compute_ms: forecast.metadata.compute_ms,
             });
         } catch (e) {
-            results.push({
-                deviceId,
-                ok: false,
-                error: e instanceof Error ? e.message : 'compute failed',
-            });
+            const message = e instanceof Error ? e.message : 'compute failed';
+            console.error(`[compute-forecast] ${deviceId} failed: ${message}`);
+            results.push({ deviceId, ok: false, error: message });
         }
     }
 

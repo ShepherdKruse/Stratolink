@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { isBlobStorageConfigured, readStoredForecast, storeForecast } from '@/lib/wind/forecastStorage';
+import { readStoredForecast, storeForecast } from '@/lib/wind/forecastStorage';
 import { buildForecastInputForDevice } from '@/lib/wind/buildForecastInput';
 import { computeMonteCarloForecast } from '@/lib/wind/monteCarloForecast';
 
@@ -50,15 +50,26 @@ export async function GET(req: Request) {
         }
         const forecast = await computeMonteCarloForecast(input);
 
-        /* Best-effort cache so the next reader (and the cron) skip recompute. */
-        if (isBlobStorageConfigured()) {
-            try { await storeForecast(deviceId, forecast); } catch { /* non-fatal */ }
+        /* Best-effort cache so the next reader (and the cron) skip recompute.
+         * Uses Vercel Blob in prod, a local disk cache in dev — either way the
+         * next load is served instantly without re-hitting the wind API.
+         * Non-fatal, but never silent: a failed store (e.g. a private-access
+         * Blob store rejecting public writes) is exactly the kind of bug that
+         * hides here, so log it and flag it on the response. */
+        let stored = true;
+        try {
+            await storeForecast(deviceId, forecast);
+        } catch (storeErr) {
+            stored = false;
+            const m = storeErr instanceof Error ? storeErr.message : String(storeErr);
+            console.error(`[forecast] failed to cache ${deviceId}: ${m}`);
         }
 
         return NextResponse.json(forecast, {
             headers: {
                 'Cache-Control': 'public, max-age=60, s-maxage=120',
                 'X-Forecast-Source': 'on-demand',
+                'X-Forecast-Cached': stored ? '1' : '0',
             },
         });
     } catch (e) {

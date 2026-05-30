@@ -134,22 +134,23 @@ export default function GatewayLayer({ visible = true }: GatewayLayerProps) {
                         id="tm-coverage-outer-outline"
                         type="line"
                         paint={{
-                            'line-color': 'rgba(94, 234, 212, 0.35)',
-                            'line-width': 0.8,
-                            'line-dasharray': [3, 2],
+                            'line-color': 'rgba(90, 92, 98, 0.30)',
+                            'line-width': 0.75,
+                            'line-dasharray': [2, 2.5],
                         }}
                     />
                 </Source>
             )}
 
-            {/* Inner (150 km) coverage union — fill + outline. */}
+            {/* Inner (150 km) coverage union — faint slate fill + hairline. Reads
+              * as a quiet "where reception lives" wash, not a glowing layer. */}
             {coverageGeoJSON && (
                 <Source id="tm-coverage" type="geojson" data={coverageGeoJSON}>
                     <Layer
                         id="tm-coverage-fill"
                         type="fill"
                         paint={{
-                            'fill-color': '#5eead4',
+                            'fill-color': '#5a5c62',
                             'fill-opacity': 0.05,
                         }}
                     />
@@ -157,7 +158,7 @@ export default function GatewayLayer({ visible = true }: GatewayLayerProps) {
                         id="tm-coverage-outline"
                         type="line"
                         paint={{
-                            'line-color': 'rgba(94, 234, 212, 0.28)',
+                            'line-color': 'rgba(90, 92, 98, 0.26)',
                             'line-width': 0.6,
                         }}
                     />

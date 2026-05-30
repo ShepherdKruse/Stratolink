@@ -1,46 +1,68 @@
 /* ──────────────────────────────────────────────────────────────
-   Stratolink · Ground-station UI v2
-   Two-color palette (--ok healthy, --alert warning), mono for data.
-   Ported from the design system at /designs/* into the Next.js app.
+   Stratolink · Mission Control
+   Editorial-cartography system. Clean cool-neutral surfaces, near-black
+   ink, a single editorial vermilion accent (the balloon's track) + amber
+   for warnings. JetBrains Mono drives the whole interface. One token
+   layer; every screen reflows from these vars.
    ────────────────────────────────────────────────────────────── */
 
 :root {
-    /* surfaces */
-    --sl-bg:      #0b0e13;
-    --sl-bg-1:    #0e131a;
-    --sl-bg-2:    #121821;
-    --sl-border:  rgba(255, 255, 255, 0.06);
-    --sl-border-hi: rgba(255, 255, 255, 0.10);
-    --sl-divider: rgba(255, 255, 255, 0.04);
+    /* surfaces — soft near-white panels on cool light gray */
+    --sl-bg:      #ecedef;
+    --sl-bg-1:    #fbfbfb;
+    --sl-bg-2:    #f4f5f7;
+    --sl-border:  rgba(15, 17, 22, 0.13);
+    --sl-border-hi: rgba(15, 17, 22, 0.24);
+    --sl-divider: rgba(15, 17, 22, 0.07);
 
-    /* text */
-    --sl-text:      #d8dde4;
-    --sl-text-hi:   #f1f3f6;
-    --sl-text-dim:  #98a2b3;
-    --sl-text-dim2: #6b7785;
-    --sl-text-dim3: #4a525e;
+    /* ink — soft graphite, not a hard pure black */
+    --sl-text:      #2a2f36;
+    --sl-text-hi:   #1b1f25;
+    --sl-text-dim:  #5b5e66;
+    --sl-text-dim2: #8b8e96;
+    --sl-text-dim3: #b6b9c0;
 
-    /* the only two accents */
-    --sl-ok:        #5eead4;
-    --sl-ok-mute:   #4dbfac;
-    --sl-ok-soft:   rgba(94, 234, 212, 0.10);
-    --sl-alert:     #f5b942;
-    --sl-alert-mute:#c79433;
-    --sl-alert-soft:rgba(245, 185, 66, 0.10);
+    /* accent — deep red, the subject + attention */
+    --sl-ok:        #a11515;
+    --sl-ok-mute:   #d08a8a;
+    --sl-ok-soft:   rgba(161, 21, 21, 0.08);
 
-    --sl-neutral:        #98a2b3;
-    --sl-neutral-mute:   #6b7785;
+    /* warnings share the red */
+    --sl-alert:     #a11515;
+    --sl-alert-mute:#d08a8a;
+    --sl-alert-soft:rgba(161, 21, 21, 0.10);
 
-    --sl-grid:    rgba(255, 255, 255, 0.05);
-    --sl-grid-hi: rgba(255, 255, 255, 0.08);
+    /* secondary accents — muted teal (reception) + deep blue (reconstruction) */
+    --sl-teal:    #558a86;
+    --sl-blue:    #08327d;
+
+    --sl-neutral:        #6a6c72;
+    --sl-neutral-mute:   #9a9ca2;
+
+    /* chart stack — gray traces (the red "now" dot carries the accent) */
+    --sl-c-alt:   #74777e;
+    --sl-c-batt:  #74777e;
+    --sl-c-solar: #74777e;
+    --sl-c-temp:  #74777e;
+    --sl-c-pres:  #74777e;
+    --sl-c-rf:    #74777e;
+    --sl-c-sats:  #74777e;
+
+    --sl-grid:    rgba(15, 17, 22, 0.05);
+    --sl-grid-hi: rgba(15, 17, 22, 0.09);
 
     --sl-mono: var(--font-jetbrains-mono, "JetBrains Mono"), ui-monospace, "SF Mono", Menlo, Consolas, monospace;
-    --sl-sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+    /* The entire interface runs on the mono — sans + serif vars resolve to it. */
+    --sl-sans: var(--sl-mono);
+    --sl-serif: var(--sl-mono);
+
+    /* soft elevation for white panels */
+    --sl-shadow: 0 1px 2px rgba(26, 28, 27, 0.05), 0 1px 1px rgba(26, 28, 27, 0.03);
 }
 
 /* ── shell ─────────────────────────────────────────────────── */
 .sl-app {
-    background: var(--sl-bg);
+    background-color: var(--sl-bg);
     color: var(--sl-text);
     font-family: var(--sl-sans);
     font-size: 13px;
@@ -100,7 +122,7 @@
     font-family: var(--sl-sans);
     font-weight: 500;
     font-size: 12px;
-    letter-spacing: 0.20em;
+    letter-spacing: 0.12em;
     text-transform: uppercase;
     color: var(--sl-text-hi);
     display: flex;
@@ -177,7 +199,7 @@
 .sl-label-xs {
     font-family: var(--sl-sans);
     font-size: 10px;
-    letter-spacing: 0.14em;
+    letter-spacing: 0.08em;
     text-transform: uppercase;
     color: var(--sl-text-dim2);
     font-weight: 500;
@@ -216,14 +238,15 @@
     border: 1px solid;
     line-height: 1;
 }
-.sl-pill.teal  { color: var(--sl-ok);    border-color: rgba(94,234,212,0.4);  background: var(--sl-ok-soft); }
-.sl-pill.amber { color: var(--sl-alert); border-color: rgba(245,185,66,0.4); background: var(--sl-alert-soft); }
-.sl-pill.dim   { color: var(--sl-text-dim); border-color: var(--sl-border-hi); background: transparent; }
+.sl-pill.teal  { color: var(--sl-text); border-color: var(--sl-border-hi); background: var(--sl-bg-1); }
+.sl-pill.amber { color: var(--sl-ok); border-color: rgba(161,21,21,0.32); background: var(--sl-ok-soft); }
+.sl-pill.dim   { color: var(--sl-text-dim); border-color: var(--sl-border-hi); background: var(--sl-bg-1); }
 
 /* ── panel ─────────────────────────────────────────────────── */
 .sl-panel {
-    background: transparent;
+    background: var(--sl-bg-1);
     border: 1px solid var(--sl-border);
+    box-shadow: var(--sl-shadow);
 }
 .sl-panel-h {
     height: 36px;
@@ -234,7 +257,7 @@
     border-bottom: 1px solid var(--sl-border);
     font-family: var(--sl-sans);
     font-size: 10px;
-    letter-spacing: 0.14em;
+    letter-spacing: 0.08em;
     text-transform: uppercase;
     color: var(--sl-text-dim2);
     font-weight: 500;
@@ -293,7 +316,7 @@
 .sl-kpi .lbl {
     font-family: var(--sl-sans);
     font-size: 10px;
-    letter-spacing: 0.14em;
+    letter-spacing: 0.08em;
     text-transform: uppercase;
     color: var(--sl-text-dim2);
     margin-bottom: 10px;
@@ -330,13 +353,13 @@
 .sl-tick {
     font-family: var(--sl-mono);
     font-size: 9px;
-    fill: var(--sl-text-dim2);
+    fill: var(--sl-text-hi);
 }
 .sl-axis-label {
     font-family: var(--sl-sans);
     font-size: 9px;
     fill: var(--sl-text-dim2);
-    letter-spacing: 0.14em;
+    letter-spacing: 0.08em;
     text-transform: uppercase;
     font-weight: 500;
 }
@@ -445,4 +468,30 @@
 }
 .sl-app *::-webkit-scrollbar-corner {
     background: transparent;
+}
+
+/* ──────────────────────────────────────────────────────────────
+ * Mapbox corner controls — lift the wordmark clear of the edge and
+ * dim it so it sits quietly. (Text attribution is rendered by us as a
+ * styled overlay; see V2MissionMap.) The default attribution control
+ * is disabled on the map.
+ * ────────────────────────────────────────────────────────────── */
+.sl-app .mapboxgl-ctrl-bottom-left { bottom: 9px; left: 12px; }
+.sl-app .mapboxgl-ctrl-logo {
+    opacity: 0.3;
+    transform: scale(0.78);
+    transform-origin: left bottom;
+    transition: opacity 0.15s ease;
+}
+.sl-app .mapboxgl-ctrl-logo:hover { opacity: 0.65; }
+
+/* ──────────────────────────────────────────────────────────────
+ * Scrubber affordances — make the slim timeline read as draggable:
+ * ew-resize cursor on the rail, and the thumb grows on hover.
+ * ────────────────────────────────────────────────────────────── */
+.sl-app .sl-scrub-track { cursor: ew-resize; }
+.sl-app .sl-scrub-thumb { transition: transform 0.12s ease, box-shadow 0.12s ease; }
+.sl-app .sl-scrub-track:hover .sl-scrub-thumb {
+    transform: scale(1.2);
+    box-shadow: 0 1px 6px rgba(26, 28, 27, 0.32);
 }

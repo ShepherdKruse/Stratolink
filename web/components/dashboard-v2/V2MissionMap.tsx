@@ -22,6 +22,7 @@ import 'mapbox-gl/dist/mapbox-gl.css';
 import GatewayLayer from '@/components/maps/GatewayLayer';
 import GatewayRangeRings from '@/components/maps/GatewayRangeRings';
 import { quietBasemapLabels } from '@/components/maps/quietBasemapLabels';
+import { editorialBasemap } from '@/components/maps/editorialBasemap';
 import { ringKm } from '@/lib/gateways/range';
 
 export interface V2Balloon {
@@ -277,29 +278,10 @@ export default function V2MissionMap({
         })),
     }), [validBalloons, activeId]);
 
-    /* Trail: filter to playback time, then to LineString. */
-    const flightPathGeoJSON = useMemo(() => {
-        const pts = (playbackT === null
-            ? validFlightPath
-            : validFlightPath.filter(p => p.t <= playbackT)
-        );
-        if (pts.length < 2) return null;
-        return {
-            type: 'FeatureCollection' as const,
-            features: [{
-                type: 'Feature' as const,
-                geometry: {
-                    type: 'LineString' as const,
-                    coordinates: pts.map(p => [p.lon, p.lat] as [number, number]),
-                },
-                properties: {},
-            }],
-        };
-    }, [validFlightPath, playbackT]);
-
     /* Transmitted-position dots — one per GPS fix (respecting playback time).
-     * These are the raw points the balloon actually reported; the flown-path
-     * line above interpolates between them. */
+     * These are the raw points the balloon actually reported. No line connects
+     * them: the route flown between sparse fixes is unknown, so the hindcast is
+     * the honest estimate of the path between them. */
     const transmitPointsGeoJSON = useMemo(() => {
         const pts = (playbackT === null
             ? validFlightPath
@@ -478,25 +460,27 @@ export default function V2MissionMap({
                 mapboxAccessToken={token}
                 initialViewState={initialView}
                 style={{ width: '100%', height: '100%' }}
-                mapStyle="mapbox://styles/mapbox/dark-v11"
+                mapStyle="mapbox://styles/mapbox/light-v11"
                 projection={projection === 'globe' ? 'globe' : 'mercator'}
                 onLoad={() => {
                     setStyleLoaded(true);
                     const m = mapRef.current?.getMap();
-                    if (m) quietBasemapLabels(m);
+                    if (m) { quietBasemapLabels(m); editorialBasemap(m); }
                 }}
                 onStyleData={() => {
                     setStyleLoaded(true);
                     const m = mapRef.current?.getMap();
-                    if (m) quietBasemapLabels(m);
+                    if (m) { quietBasemapLabels(m); editorialBasemap(m); }
                 }}
                 fog={projection === 'globe' ? {
-                    color: 'rgb(20, 20, 20)',
-                    'high-color': 'rgb(10, 10, 10)',
-                    'horizon-blend': 0.02,
-                    'space-color': 'rgb(5, 5, 5)',
-                    'star-intensity': 0.4,
+                    color: 'rgb(235, 235, 236)',
+                    'high-color': 'rgb(216, 217, 219)',
+                    'horizon-blend': 0.025,
+                    'space-color': 'rgb(235, 235, 236)',
+                    'star-intensity': 0,
                 } : undefined}
+                attributionControl={false}
+                logoPosition="bottom-left"
             >
                 {styleLoaded && (
                     <>
@@ -514,36 +498,16 @@ export default function V2MissionMap({
                         ) : (
                             <GatewayLayer />
                         )}
-                        {flightPathGeoJSON && (
-                            <Source id="v2-flight-path" type="geojson" data={flightPathGeoJSON} lineMetrics={true}>
-                                <Layer
-                                    id="v2-flight-path-line"
-                                    type="line"
-                                    paint={{
-                                        'line-width': [
-                                            'interpolate', ['linear'], ['zoom'],
-                                            3, 1.4,
-                                            8, 2.2,
-                                            14, 3.5,
-                                        ],
-                                        'line-opacity': 0.85,
-                                        /* Fade older sections of the trail toward dim — but
-                                         * keep the launch point visible. The leading edge
-                                         * still reads as "now" because it's fully bright. */
-                                        'line-gradient': [
-                                            'interpolate', ['linear'], ['line-progress'],
-                                            0,   'rgba(94, 234, 212, 0.3)',
-                                            0.6, 'rgba(94, 234, 212, 0.55)',
-                                            1,   'rgba(94, 234, 212, 1.0)',
-                                        ],
-                                    }}
-                                />
-                            </Source>
-                        )}
+                        {/* No straight line is drawn between transmitted fixes:
+                          * we don't actually know the route flown between sparse
+                          * reports, so connecting them would imply precision we
+                          * don't have. The transmitted dots show where the balloon
+                          * actually reported; the hindcast below is the honest
+                          * wind-reconstructed estimate of the path between them. */}
 
                         {/* Hindcast — wind-reconstructed likely prior path
-                          * (greenish, dashed). Sits over the raw flown line so
-                          * it reads as the better estimate through GPS gaps. */}
+                          * (deep blue, dashed): the best estimate of the route
+                          * between transmitted fixes. */}
                         {hindcastGeoJSON && (
                             <Source id="v2-hindcast" type="geojson" data={hindcastGeoJSON}>
                                 <Layer
@@ -551,10 +515,9 @@ export default function V2MissionMap({
                                     type="line"
                                     layout={{ 'line-cap': 'round', 'line-join': 'round' }}
                                     paint={{
-                                        'line-color': '#3fb8a0',
+                                        'line-color': '#a11515',
                                         'line-width': 2,
-                                        'line-dasharray': [2, 2],
-                                        'line-opacity': 0.55,
+                                        'line-opacity': 0.85,
                                     }}
                                 />
                             </Source>
@@ -569,7 +532,7 @@ export default function V2MissionMap({
                                     type="line"
                                     layout={{ 'line-cap': 'round', 'line-join': 'round' }}
                                     paint={{
-                                        'line-color': 'rgba(160, 175, 195, 0.9)',
+                                        'line-color': 'rgba(90, 110, 135, 0.85)',
                                         'line-width': 2,
                                         'line-dasharray': [3, 3],
                                         'line-opacity': 0.8,
@@ -587,7 +550,7 @@ export default function V2MissionMap({
                                     id="v2-forecast-e90-stroke"
                                     type="line"
                                     paint={{
-                                        'line-color': '#f59e0b',
+                                        'line-color': '#08327d',
                                         'line-width': 1,
                                         'line-opacity': 0.4,
                                         'line-dasharray': [3, 4],
@@ -600,12 +563,12 @@ export default function V2MissionMap({
                                 <Layer
                                     id="v2-forecast-e50-fill"
                                     type="fill"
-                                    paint={{ 'fill-color': '#f59e0b', 'fill-opacity': 0.1 }}
+                                    paint={{ 'fill-color': '#08327d', 'fill-opacity': 0.1 }}
                                 />
                                 <Layer
                                     id="v2-forecast-e50-stroke"
                                     type="line"
-                                    paint={{ 'line-color': '#f59e0b', 'line-width': 1, 'line-opacity': 0.5 }}
+                                    paint={{ 'line-color': '#08327d', 'line-width': 1, 'line-opacity': 0.5 }}
                                 />
                             </Source>
                         )}
@@ -617,7 +580,7 @@ export default function V2MissionMap({
                                     id="v2-forecast-ensemble-lines"
                                     type="line"
                                     layout={{ 'line-cap': 'round', 'line-join': 'round' }}
-                                    paint={{ 'line-color': '#f59e0b', 'line-width': 1, 'line-opacity': 0.08 }}
+                                    paint={{ 'line-color': '#08327d', 'line-width': 1, 'line-opacity': 0.1 }}
                                 />
                             </Source>
                         )}
@@ -632,8 +595,8 @@ export default function V2MissionMap({
                                     id="v2-forecast-line"
                                     type="line"
                                     paint={{
-                                        'line-color': '#f59e0b',
-                                        'line-opacity': 0.7,
+                                        'line-color': '#08327d',
+                                        'line-opacity': 0.8,
                                         'line-dasharray': [2, 2],
                                         'line-width': [
                                             'interpolate', ['linear'], ['zoom'],
@@ -655,20 +618,20 @@ export default function V2MissionMap({
                                     id="v2-transmit-point"
                                     type="circle"
                                     paint={{
-                                        /* Hollow ringed nodes — a dark core with a
-                                          * bright teal ring reads as a distinct
-                                          * "reported here" marker against the solid
-                                          * teal flown-path line. */
-                                        'circle-color': '#0b1220',
+                                        /* Hollow ringed nodes — a white core with a
+                                          * blueprint-azure ring reads as a surveyed
+                                          * "reported here" point against the solid
+                                          * azure flown-path line. */
+                                        'circle-color': '#ffffff',
                                         'circle-radius': [
                                             'interpolate', ['linear'], ['zoom'],
-                                            3, 2.4,
-                                            8, 3.4,
-                                            14, 4.6,
+                                            3, 1.5,
+                                            8, 2.1,
+                                            14, 3.0,
                                         ],
                                         'circle-opacity': 1,
-                                        'circle-stroke-width': 1.6,
-                                        'circle-stroke-color': '#5eead4',
+                                        'circle-stroke-width': 1.1,
+                                        'circle-stroke-color': '#a11515',
                                     }}
                                 />
                             </Source>
@@ -682,17 +645,18 @@ export default function V2MissionMap({
                                     id="v2-reception-line"
                                     type="line"
                                     paint={{
+                                        /* Reception threads stay quiet neutral so the
+                                          * red track is the only saturated line. */
                                         'line-color': [
                                             'interpolate', ['linear'], ['get', 'rssi'],
-                                            -130, 'rgba(245, 158, 11, 0.18)',  /* faint amber, weakest */
-                                            -110, 'rgba(245, 158, 11, 0.45)',
-                                            -100, 'rgba(94, 234, 212, 0.55)',
-                                             -85, 'rgba(94, 234, 212, 0.85)',  /* bright teal, strongest */
+                                            -130, 'rgba(122, 155, 118, 0.18)',
+                                            -100, 'rgba(122, 155, 118, 0.40)',
+                                             -85, 'rgba(122, 155, 118, 0.62)',
                                         ],
                                         'line-width': [
                                             'interpolate', ['linear'], ['get', 'rssi'],
-                                            -130, 0.8,
-                                             -85, 2.0,
+                                            -130, 0.6,
+                                             -85, 1.4,
                                         ],
                                     }}
                                 />
@@ -705,17 +669,18 @@ export default function V2MissionMap({
                                     id="v2-gateway-pin"
                                     type="circle"
                                     paint={{
+                                        /* Gateways as quiet slate survey dots — strength
+                                          * shown by going from pale to deep slate. */
                                         'circle-color': [
                                             'interpolate', ['linear'], ['get', 'rssi'],
-                                            -130, '#f59e0b',   /* amber: marginal reception */
-                                            -100, '#fbbf24',
-                                             -90, '#a3e635',
-                                             -80, '#5eead4',   /* teal: strong reception */
+                                            -130, '#b9cbb6',   /* marginal */
+                                            -100, '#9bb398',
+                                             -80, '#7a9b76',   /* strong */
                                         ],
-                                        'circle-radius': 5,
+                                        'circle-radius': 4.5,
                                         'circle-stroke-width': 1,
-                                        'circle-stroke-color': '#0b1220',
-                                        'circle-stroke-opacity': 0.9,
+                                        'circle-stroke-color': 'rgba(255, 255, 255, 0.95)',
+                                        'circle-stroke-opacity': 0.95,
                                     }}
                                 />
                             </Source>
@@ -727,9 +692,9 @@ export default function V2MissionMap({
                                 type="circle"
                                 filter={['==', ['get', 'isActive'], 1]}
                                 paint={{
-                                    'circle-color': 'rgba(94, 234, 212, 0.18)',
-                                    'circle-radius': 18,
-                                    'circle-blur': 0.6,
+                                    'circle-color': 'rgba(161, 21, 21, 0.14)',
+                                    'circle-radius': 11,
+                                    'circle-blur': 0.5,
                                 }}
                             />
                             <Layer
@@ -738,27 +703,41 @@ export default function V2MissionMap({
                                 paint={{
                                     'circle-color': [
                                         'case', ['==', ['get', 'isActive'], 1],
-                                        '#5eead4',
-                                        '#6b7785',
+                                        '#a11515',
+                                        '#8a8f88',
                                     ],
                                     'circle-radius': [
                                         'case', ['==', ['get', 'isActive'], 1],
-                                        7,
-                                        4.5,
+                                        5,
+                                        3.5,
                                     ],
-                                    'circle-stroke-width': 1,
-                                    'circle-stroke-color': [
-                                        'case', ['==', ['get', 'isActive'], 1],
-                                        '#5eead4',
-                                        '#98a2b3',
-                                    ],
-                                    'circle-stroke-opacity': 0.7,
+                                    /* Crisp white keyline so the dot reads as a precise
+                                     * survey marker, not a soft glow. */
+                                    'circle-stroke-width': 1.5,
+                                    'circle-stroke-color': '#ffffff',
+                                    'circle-stroke-opacity': 1,
                                 }}
                             />
                         </Source>
                     </>
                 )}
             </Map>
+
+            {/* Editorial attribution — Mapbox's control styling is finicky and
+              * clips at the viewport edge, so we render our own (the Mapbox
+              * wordmark stays via logoPosition, satisfying terms alongside
+              * these source credits). */}
+            <div style={{
+                position: 'absolute', bottom: 12, right: 13, zIndex: 1,
+                fontFamily: 'var(--sl-mono)', fontSize: 8, letterSpacing: '0.03em',
+                color: 'var(--sl-text-dim3)', opacity: 0.7, pointerEvents: 'auto',
+            }}>
+                <a href="https://www.mapbox.com/about/maps/" target="_blank" rel="noreferrer noopener"
+                   style={{ color: 'inherit', textDecoration: 'none' }}>Mapbox</a>
+                <span style={{ opacity: 0.5 }}> · </span>
+                <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noreferrer noopener"
+                   style={{ color: 'inherit', textDecoration: 'none' }}>OpenStreetMap</a>
+            </div>
         </div>
     );
 }
