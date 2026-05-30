@@ -22,7 +22,9 @@ import 'mapbox-gl/dist/mapbox-gl.css';
 import GatewayLayer from '@/components/maps/GatewayLayer';
 import GatewayRangeRings from '@/components/maps/GatewayRangeRings';
 import { quietBasemapLabels } from '@/components/maps/quietBasemapLabels';
-import { editorialBasemap } from '@/components/maps/editorialBasemap';
+import DayNightTerminator from '@/components/maps/DayNightTerminator';
+import { applyBaseStyle } from '@/components/maps/baseStyle';
+import { bathymetryAllZooms } from '@/components/maps/bathymetry';
 import { ringKm } from '@/lib/gateways/range';
 
 export interface V2Balloon {
@@ -465,25 +467,22 @@ export default function V2MissionMap({
                 onLoad={() => {
                     setStyleLoaded(true);
                     const m = mapRef.current?.getMap();
-                    if (m) { quietBasemapLabels(m); editorialBasemap(m); }
+                    if (m) { m.setFog(null); quietBasemapLabels(m); applyBaseStyle(m); bathymetryAllZooms(m); }
                 }}
                 onStyleData={() => {
                     setStyleLoaded(true);
                     const m = mapRef.current?.getMap();
-                    if (m) { quietBasemapLabels(m); editorialBasemap(m); }
+                    if (m) { m.setFog(null); quietBasemapLabels(m); applyBaseStyle(m); bathymetryAllZooms(m); }
                 }}
-                fog={projection === 'globe' ? {
-                    color: 'rgb(235, 235, 236)',
-                    'high-color': 'rgb(216, 217, 219)',
-                    'horizon-blend': 0.025,
-                    'space-color': 'rgb(235, 235, 236)',
-                    'star-intensity': 0,
-                } : undefined}
                 attributionControl={false}
                 logoPosition="bottom-left"
             >
                 {styleLoaded && (
                     <>
+                        {/* Day/night terminator — rendered first so it dims only
+                          * the basemap; coverage, paths and pins sit on top. */}
+                        <DayNightTerminator />
+
                         {/* Static TTN ground-station coverage — sits at
                           * the bottom of the layer stack so flight paths
                           * and balloon pins render on top. In range mode the
