@@ -80,6 +80,23 @@ interface V2MissionMapProps {
      *  coverage field is replaced by spreading-factor rings around this
      *  point, and the camera fits to the SF12 ring instead of the track. */
     rangeCenter?: { lat: number; lon: number; altM: number | null } | null;
+    /** When true, render each transmitted GPS fix as a small dot in addition
+     *  to the connecting flown-path line — distinguishing "where the balloon
+     *  reported its position" from "where we think it flew between". */
+    showTransmitPoints?: boolean;
+    /** Predicted next track as [lon, lat] pairs (nominal forecast). Drawn as a
+     *  dashed line ahead of the last fix. Empty / omitted = nothing drawn. */
+    forecastPath?: Array<[number, number]>;
+    /** Monte-Carlo ensemble members, each a [lon, lat] track — drawn as faint
+     *  "spaghetti" behind the nominal line. */
+    forecastEnsemble?: Array<Array<[number, number]>>;
+    /** Per-slice 50/90% confidence ellipse polygons — drawn as the cone. */
+    forecastEllipses?: Array<{ e50: Array<[number, number]>; e90: Array<[number, number]> }>;
+    /** Wind-reconstructed likely prior path ([lon, lat]) — the hindcast. */
+    hindcastPath?: Array<[number, number]>;
+    /** Two-point gray connector from the last fix to the assumed-now position
+     *  while GPS is stale. Null / omitted = nothing drawn. */
+    staleLine?: Array<[number, number]> | null;
 }
 
 function isWebGLAvailable(): boolean {
@@ -102,15 +119,16 @@ export default function V2MissionMap({
     projection = 'globe',
     gateways = [],
     rangeCenter = null,
+    showTransmitPoints = false,
+    forecastPath = [],
+    forecastEnsemble = [],
+    forecastEllipses = [],
+    hindcastPath = [],
+    staleLine = null,
 }: V2MissionMapProps) {
     const mapRef = useRef<MapRef>(null);
     const [styleLoaded, setStyleLoaded] = useState(false);
     const [webglOk, setWebglOk] = useState<boolean | null>(null);
-    /* Default OFF — gateway pins are powerful but visually busy when there
-     * are 10+ of them. User opts in via the toolbar toggle in the upper
-     * right of the map. Persistence across renders is fine; we don't try
-     * to remember it across page reloads (next session starts clean). */
-    const [showGateways, setShowGateways] = useState(false);
 
     /* Telemetry can contain legacy / corrupt rows (e.g. lng stored in lat).
      * Never pass those to Mapbox — they hard-throw inside fitBounds. */
@@ -279,6 +297,98 @@ export default function V2MissionMap({
         };
     }, [validFlightPath, playbackT]);
 
+    /* Transmitted-position dots — one per GPS fix (respecting playback time).
+     * These are the raw points the balloon actually reported; the flown-path
+     * line above interpolates between them. */
+    const transmitPointsGeoJSON = useMemo(() => {
+        const pts = (playbackT === null
+            ? validFlightPath
+            : validFlightPath.filter(p => p.t <= playbackT)
+        );
+        if (pts.length === 0) return null;
+        return {
+            type: 'FeatureCollection' as const,
+            features: pts.map(p => ({
+                type: 'Feature' as const,
+                geometry: { type: 'Point' as const, coordinates: [p.lon, p.lat] as [number, number] },
+                properties: {},
+            })),
+        };
+    }, [validFlightPath, playbackT]);
+
+    /* Forecast line — predicted nominal track ahead of the last fix. Filtered
+     * to valid WGS84 so a bad endpoint can't crash Mapbox. */
+    const forecastGeoJSON = useMemo(() => {
+        const pts = forecastPath.filter(([lon, lat]) => isValidLngLat(lat, lon));
+        if (pts.length < 2) return null;
+        return {
+            type: 'FeatureCollection' as const,
+            features: [{
+                type: 'Feature' as const,
+                geometry: { type: 'LineString' as const, coordinates: pts },
+                properties: {},
+            }],
+        };
+    }, [forecastPath]);
+
+    /* Hindcast — the wind-reconstructed likely path through GPS gaps. */
+    const hindcastGeoJSON = useMemo(() => {
+        const pts = hindcastPath.filter(([lon, lat]) => isValidLngLat(lat, lon));
+        if (pts.length < 2) return null;
+        return {
+            type: 'FeatureCollection' as const,
+            features: [{ type: 'Feature' as const, geometry: { type: 'LineString' as const, coordinates: pts }, properties: {} }],
+        };
+    }, [hindcastPath]);
+
+    /* Stale-GPS connector — last real fix → dead-reckoned "assumed now". */
+    const staleLineGeoJSON = useMemo(() => {
+        const pts = (staleLine ?? []).filter(([lon, lat]) => isValidLngLat(lat, lon));
+        if (pts.length < 2) return null;
+        return {
+            type: 'FeatureCollection' as const,
+            features: [{ type: 'Feature' as const, geometry: { type: 'LineString' as const, coordinates: pts }, properties: {} }],
+        };
+    }, [staleLine]);
+
+    /* Ensemble "spaghetti" — every Monte-Carlo member as a faint line. */
+    const ensembleGeoJSON = useMemo(() => {
+        const tracks = forecastEnsemble
+            .map(t => t.filter(([lon, lat]) => isValidLngLat(lat, lon)))
+            .filter(t => t.length >= 2);
+        if (tracks.length === 0) return null;
+        return {
+            type: 'FeatureCollection' as const,
+            features: tracks.map(t => ({
+                type: 'Feature' as const,
+                geometry: { type: 'LineString' as const, coordinates: t },
+                properties: {},
+            })),
+        };
+    }, [forecastEnsemble]);
+
+    /* Confidence cones — 50% and 90% ellipse polygons per forecast slice.
+     * A polygon needs ≥3 points and a closed ring; Mapbox closes it for us. */
+    const ellipsePolys = useMemo(() => {
+        const e50: Array<[number, number][]> = [];
+        const e90: Array<[number, number][]> = [];
+        for (const slice of forecastEllipses) {
+            const p50 = slice.e50.filter(([lon, lat]) => isValidLngLat(lat, lon));
+            const p90 = slice.e90.filter(([lon, lat]) => isValidLngLat(lat, lon));
+            if (p50.length >= 3) e50.push(p50);
+            if (p90.length >= 3) e90.push(p90);
+        }
+        const toFC = (rings: Array<[number, number][]>) => rings.length === 0 ? null : ({
+            type: 'FeatureCollection' as const,
+            features: rings.map(ring => ({
+                type: 'Feature' as const,
+                geometry: { type: 'Polygon' as const, coordinates: [ring] },
+                properties: {},
+            })),
+        });
+        return { e50: toFC(e50), e90: toFC(e90) };
+    }, [forecastEllipses]);
+
     /* Gateway pins — coloured by signal strength so the strongest gateways
      * (closest, best-LOS) read as accent green and the weakest (long-range,
      * just-barely-receiving) as muted amber. Reception lines are deliberately
@@ -431,9 +541,142 @@ export default function V2MissionMap({
                             </Source>
                         )}
 
+                        {/* Hindcast — wind-reconstructed likely prior path
+                          * (greenish, dashed). Sits over the raw flown line so
+                          * it reads as the better estimate through GPS gaps. */}
+                        {hindcastGeoJSON && (
+                            <Source id="v2-hindcast" type="geojson" data={hindcastGeoJSON}>
+                                <Layer
+                                    id="v2-hindcast-line"
+                                    type="line"
+                                    layout={{ 'line-cap': 'round', 'line-join': 'round' }}
+                                    paint={{
+                                        'line-color': '#3fb8a0',
+                                        'line-width': 2,
+                                        'line-dasharray': [2, 2],
+                                        'line-opacity': 0.55,
+                                    }}
+                                />
+                            </Source>
+                        )}
+
+                        {/* Stale-GPS connector — last real fix → dead-reckoned
+                          * "assumed now", drawn gray so it reads as inferred. */}
+                        {staleLineGeoJSON && (
+                            <Source id="v2-stale-line" type="geojson" data={staleLineGeoJSON}>
+                                <Layer
+                                    id="v2-stale-line-stroke"
+                                    type="line"
+                                    layout={{ 'line-cap': 'round', 'line-join': 'round' }}
+                                    paint={{
+                                        'line-color': 'rgba(160, 175, 195, 0.9)',
+                                        'line-width': 2,
+                                        'line-dasharray': [3, 3],
+                                        'line-opacity': 0.8,
+                                    }}
+                                />
+                            </Source>
+                        )}
+
+                        {/* Confidence cone — 90% ellipses (dashed outline) then
+                          * 50% ellipses (filled), so the spread reads from wide
+                          * to tight. Drawn first so everything else sits on top. */}
+                        {ellipsePolys.e90 && (
+                            <Source id="v2-forecast-e90" type="geojson" data={ellipsePolys.e90}>
+                                <Layer
+                                    id="v2-forecast-e90-stroke"
+                                    type="line"
+                                    paint={{
+                                        'line-color': '#f59e0b',
+                                        'line-width': 1,
+                                        'line-opacity': 0.4,
+                                        'line-dasharray': [3, 4],
+                                    }}
+                                />
+                            </Source>
+                        )}
+                        {ellipsePolys.e50 && (
+                            <Source id="v2-forecast-e50" type="geojson" data={ellipsePolys.e50}>
+                                <Layer
+                                    id="v2-forecast-e50-fill"
+                                    type="fill"
+                                    paint={{ 'fill-color': '#f59e0b', 'fill-opacity': 0.1 }}
+                                />
+                                <Layer
+                                    id="v2-forecast-e50-stroke"
+                                    type="line"
+                                    paint={{ 'line-color': '#f59e0b', 'line-width': 1, 'line-opacity': 0.5 }}
+                                />
+                            </Source>
+                        )}
+
+                        {/* Ensemble spaghetti — faint individual Monte-Carlo runs. */}
+                        {ensembleGeoJSON && (
+                            <Source id="v2-forecast-ensemble" type="geojson" data={ensembleGeoJSON}>
+                                <Layer
+                                    id="v2-forecast-ensemble-lines"
+                                    type="line"
+                                    layout={{ 'line-cap': 'round', 'line-join': 'round' }}
+                                    paint={{ 'line-color': '#f59e0b', 'line-width': 1, 'line-opacity': 0.08 }}
+                                />
+                            </Source>
+                        )}
+
+                        {/* Forecast — predicted nominal track, dashed + amber so
+                          * it reads clearly as "future / uncertain" against the
+                          * solid teal flown path. Sits under the transmit dots
+                          * and balloon pins. */}
+                        {forecastGeoJSON && (
+                            <Source id="v2-forecast-path" type="geojson" data={forecastGeoJSON}>
+                                <Layer
+                                    id="v2-forecast-line"
+                                    type="line"
+                                    paint={{
+                                        'line-color': '#f59e0b',
+                                        'line-opacity': 0.7,
+                                        'line-dasharray': [2, 2],
+                                        'line-width': [
+                                            'interpolate', ['linear'], ['zoom'],
+                                            3, 1.2,
+                                            8, 1.8,
+                                            14, 2.6,
+                                        ],
+                                    }}
+                                />
+                            </Source>
+                        )}
+
+                        {/* Transmitted-position dots — the raw points the balloon
+                          * reported. Drawn on top of the flown-path line so each
+                          * uplink reads as a distinct fix. */}
+                        {showTransmitPoints && transmitPointsGeoJSON && (
+                            <Source id="v2-transmit-points" type="geojson" data={transmitPointsGeoJSON}>
+                                <Layer
+                                    id="v2-transmit-point"
+                                    type="circle"
+                                    paint={{
+                                        /* Hollow ringed nodes — a dark core with a
+                                          * bright teal ring reads as a distinct
+                                          * "reported here" marker against the solid
+                                          * teal flown-path line. */
+                                        'circle-color': '#0b1220',
+                                        'circle-radius': [
+                                            'interpolate', ['linear'], ['zoom'],
+                                            3, 2.4,
+                                            8, 3.4,
+                                            14, 4.6,
+                                        ],
+                                        'circle-opacity': 1,
+                                        'circle-stroke-width': 1.6,
+                                        'circle-stroke-color': '#5eead4',
+                                    }}
+                                />
+                            </Source>
+                        )}
+
                         {/* Reception lines render BEHIND the balloon/gateway pins so
                           * the pins always sit on top. */}
-                        {showGateways && receptionLinesGeoJSON && (
+                        {receptionLinesGeoJSON && (
                             <Source id="v2-reception-lines" type="geojson" data={receptionLinesGeoJSON}>
                                 <Layer
                                     id="v2-reception-line"
@@ -456,7 +699,7 @@ export default function V2MissionMap({
                             </Source>
                         )}
 
-                        {showGateways && validGateways.length > 0 && (
+                        {validGateways.length > 0 && (
                             <Source id="v2-gateways" type="geojson" data={gatewaysGeoJSON}>
                                 <Layer
                                     id="v2-gateway-pin"
@@ -516,42 +759,6 @@ export default function V2MissionMap({
                     </>
                 )}
             </Map>
-
-            {/* Toggle overlay — top-right of the map, positioned BELOW the
-              * "uplink · Xm ago" Age pill that the parent screens render at
-              * top:14 right:14 (z-index:1). top:50 leaves a comfortable 12px
-              * gap; z-index 2 ensures clicks land on the toggle even where
-              * the two layers' bounding boxes brush against each other.
-              *
-              * Counts the gateways that have a published location (the only
-              * ones that can render as pins); the gateway list panel always
-              * shows the full count. */}
-            {validGateways.length > 0 && (
-                <button
-                    type="button"
-                    onClick={() => setShowGateways(s => !s)}
-                    style={{
-                        position: 'absolute',
-                        top: 50,
-                        right: 14,
-                        zIndex: 2,
-                        padding: '6px 10px',
-                        fontFamily: 'var(--sl-mono, monospace)',
-                        fontSize: 10,
-                        letterSpacing: '0.10em',
-                        textTransform: 'uppercase',
-                        color: showGateways ? '#0b1220' : '#cbd5e1',
-                        background: showGateways ? '#5eead4' : 'rgba(11, 18, 32, 0.85)',
-                        border: '1px solid ' + (showGateways ? '#5eead4' : '#334155'),
-                        cursor: 'pointer',
-                        backdropFilter: 'blur(4px)',
-                        WebkitBackdropFilter: 'blur(4px)',
-                    }}
-                    aria-pressed={showGateways}
-                >
-                    {showGateways ? '◉' : '○'} GATEWAYS · {validGateways.length}
-                </button>
-            )}
         </div>
     );
 }

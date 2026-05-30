@@ -663,15 +663,3 @@ export function Chrome({
     );
 }
 
-/* The five tabs from the design. Pre-Launch and Mission Planner are gated
- * (prediction work, deferred). Mission Control / Device Tracker / Telemetry
- * Lab are live. */
-export const DASHBOARD_V2_TABS: ChromeTab[] = [
-    { label: 'PRE-LAUNCH',      path: '/dashboard-v2/prelaunch', disabled: true },
-    { label: 'MISSION PLANNER', path: '/dashboard-v2/planner',   disabled: true },
-    { label: 'MISSION CONTROL', path: '/dashboard-v2' },
-    { label: 'DEVICE TRACKER',  path: '/dashboard-v2/device' },
-    { label: 'WIND OUTLOOK',    path: '/dashboard-v2/wind' },
-    { label: 'TELEMETRY LAB',   path: '/dashboard-v2/lab' },
-    { label: 'MISSION ARCHIVE', path: '/dashboard-v2/archive' },
-];

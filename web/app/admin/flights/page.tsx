@@ -59,12 +59,12 @@ export default function FlightStatusPage() {
             <h1 className="text-2xl font-semibold tracking-tight">Flight status</h1>
             <p className="mt-2 text-sm text-muted-foreground">
                 Move launched devices through their lifecycle. <code className="text-xs">flying</code> devices appear
-                in Mission Control; <code className="text-xs">landed</code> / <code className="text-xs">retired</code>{' '}
-                devices appear in the{' '}
-                <Link href="/dashboard-v2/archive" className="underline">
-                    Mission Archive
+                in Mission Control. <code className="text-xs">landed</code> / <code className="text-xs">retired</code>{' '}
+                devices stay browsable in{' '}
+                <Link href="/dashboard-v2" className="underline">
+                    Mission Control
                 </Link>
-                . Mark a flight <strong>landed</strong> when its mission ends so it moves into the archive.
+                {' '}— select the balloon to replay its full flight. Mark a flight <strong>landed</strong> when its mission ends.
             </p>
             <p className="mt-2 text-sm text-muted-foreground">
                 <Link href="/admin/launch-kit" className="underline">
@@ -162,7 +162,7 @@ export default function FlightStatusPage() {
                                 )}
                                 {(d.status === 'landed' || d.status === 'retired') && (
                                     <Link
-                                        href={`/dashboard-v2/archive/${encodeURIComponent(d.device_id)}`}
+                                        href={`/dashboard-v2?device=${encodeURIComponent(d.device_id)}`}
                                         className="rounded-md border border-input bg-background px-3 py-1.5 text-xs font-medium hover:bg-muted/60"
                                     >
                                         View replay →
