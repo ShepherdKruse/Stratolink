@@ -122,6 +122,16 @@ function DaylightIcon({ lux }: { lux: number }) {
     );
 }
 
+/** Small solar-panel glyph — amber when the array is generating. */
+function SolarIcon({ color }: { color: string }) {
+    return (
+        <svg width="15" height="13" viewBox="0 0 24 20" fill="none" stroke={color} strokeLinejoin="round" style={{ flexShrink: 0 }}>
+            <path d="M3.5 15 L7 4 H21 L19 15 Z" strokeWidth="1.4" />
+            <path d="M5.3 11.4 H19.4 M8.3 4 L7 15 M13 4 L12.2 15 M17.7 4 L17 15" strokeWidth="0.9" />
+        </svg>
+    );
+}
+
 /** Tiny payload-tilt indicator: a mast leaning from vertical by `deg`. */
 function TiltIcon({ deg, color }: { deg: number; color: string }) {
     const d = Math.max(-80, Math.min(80, deg));
@@ -339,11 +349,18 @@ export default function TelemetryV3Panel({ device, devices, onSelect, scrubRow, 
                 title="Power & sun"
                 gkey="power"
             >
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '0 12px', padding: '14px 0 4px' }}>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '0 12px', padding: '14px 0' }}>
                     <Metric
                         label="Battery"
-                        value={soc != null ? `${soc}%` : '—'}
+                        value={batt != null ? tlmFmt.d2(batt) : '—'}
+                        unit={batt != null ? 'V' : undefined}
                         icon={soc != null ? <BatteryIcon soc={soc} color={battCol} /> : undefined}
+                    />
+                    <Metric
+                        label="Solar"
+                        value={solar != null ? tlmFmt.d2(solar) : '—'}
+                        unit={solar != null ? 'V' : undefined}
+                        icon={solar != null ? <SolarIcon color={solar >= 1 ? '#C9922E' : 'var(--t-text-3)'} /> : undefined}
                     />
                     <Metric
                         label="Ambient light"
@@ -356,32 +373,6 @@ export default function TelemetryV3Panel({ device, devices, onSelect, scrubRow, 
                         value={tilt != null ? `${Math.round(tilt)}°` : '—'}
                         icon={tilt != null ? <TiltIcon deg={tilt} color={tiltCol} /> : undefined}
                     />
-                </div>
-                <Divider />
-                <div style={{ padding: '13px 0' }}>
-                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 8 }}>
-                        <span className="eyebrow" style={{ color: 'var(--t-text-2)' }}>
-                            Battery
-                        </span>
-                        <span className="disp mono" style={{ fontSize: 22, fontWeight: 600 }}>
-                            {batt != null ? tlmFmt.d2(batt) : '—'}
-                            {batt != null && <span className="mono" style={{ fontSize: 11, fontWeight: 500, color: 'var(--t-text-3)', marginLeft: 3 }}>V</span>}
-                        </span>
-                    </div>
-                    <LineTrend series={flight.batt} times={flight.times} status="nominal" fmtFn={(v) => tlmFmt.d2(v)} unit="V" height={44} scrubT={scrubRow?.t ?? null} />
-                </div>
-                <Divider />
-                <div style={{ padding: '13px 0' }}>
-                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 8 }}>
-                        <span className="eyebrow" style={{ color: 'var(--t-text-2)' }}>
-                            Solar
-                        </span>
-                        <span className="disp mono" style={{ fontSize: 22, fontWeight: 600 }}>
-                            {solar != null ? tlmFmt.d2(solar) : '—'}
-                            {solar != null && <span className="mono" style={{ fontSize: 11, fontWeight: 500, color: 'var(--t-text-3)', marginLeft: 3 }}>V</span>}
-                        </span>
-                    </div>
-                    <LineTrend series={flight.solar} times={flight.times} status="nominal" fmtFn={(v) => tlmFmt.d2(v)} unit="V" height={44} scrubT={scrubRow?.t ?? null} />
                 </div>
             </Group>
 
