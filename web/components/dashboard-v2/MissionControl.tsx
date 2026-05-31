@@ -944,6 +944,9 @@ function Timeline({ visibleRows, scrubT, onScrub, futureEndT, floating = false }
     floating?: boolean;
 }) {
     const trackRef = useRef<HTMLDivElement | null>(null);
+    /* On mobile the date/time is floated above the thumb instead of taking a
+     * column beside the track, so the scrub track spans the full width. */
+    const isMobile = useIsMobile();
     /* When there are no rows yet we need a "now" for the empty rail. Reading
      * Date.now() during render is non-deterministic across SSR/hydration (the
      * two clocks differ by a few hundred ms), which mismatches the slider's
@@ -1030,18 +1033,23 @@ function Timeline({ visibleRows, scrubT, onScrub, futureEndT, floating = false }
                 borderRadius: 999,
                 boxShadow: '0 1px 5px rgba(26, 28, 27, 0.10)',
             }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: 7, flexShrink: 0 }}>
-                    <span style={{ width: 6, height: 6, borderRadius: '50%', background: handleColor, flexShrink: 0 }} />
-                    <span style={{
-                        fontFamily: 'var(--sl-mono)', fontVariantNumeric: 'tabular-nums', fontSize: 11, fontWeight: 500,
-                        color: cursorInFuture ? 'var(--sl-forecast)' : 'var(--sl-text-hi)', whiteSpace: 'nowrap',
-                    }}>
-                        {fmtClock(cursorT)}
-                        <span style={{ color: cursorIsLive ? 'var(--sl-ok)' : cursorInFuture ? 'var(--sl-forecast)' : 'var(--sl-text-dim2)', marginLeft: 5 }}>
-                            {relLabel}
+                {/* Desktop: clock sits in a column beside the track. On mobile
+                  * it's floated above the thumb (below) so the track gets the
+                  * full width for finer control. */}
+                {!isMobile && (
+                    <div style={{ display: 'flex', alignItems: 'center', gap: 7, flexShrink: 0 }}>
+                        <span style={{ width: 6, height: 6, borderRadius: '50%', background: handleColor, flexShrink: 0 }} />
+                        <span style={{
+                            fontFamily: 'var(--sl-mono)', fontVariantNumeric: 'tabular-nums', fontSize: 11, fontWeight: 500,
+                            color: cursorInFuture ? 'var(--sl-forecast)' : 'var(--sl-text-hi)', whiteSpace: 'nowrap',
+                        }}>
+                            {fmtClock(cursorT)}
+                            <span style={{ color: cursorIsLive ? 'var(--sl-ok)' : cursorInFuture ? 'var(--sl-forecast)' : 'var(--sl-text-dim2)', marginLeft: 5 }}>
+                                {relLabel}
+                            </span>
                         </span>
-                    </span>
-                </div>
+                    </div>
+                )}
                 <div
                     ref={trackRef}
                     className="sl-scrub-track"
@@ -1054,6 +1062,23 @@ function Timeline({ visibleRows, scrubT, onScrub, futureEndT, floating = false }
                     onTouchMove={onTouchMove}
                     style={{ position: 'relative', flex: 1, alignSelf: 'stretch', userSelect: 'none' }}
                 >
+                    {/* Mobile: clock floats above the thumb so it doesn't steal
+                      * track width. */}
+                    {isMobile && (
+                        <div style={{
+                            position: 'absolute', bottom: 'calc(100% + 7px)', left: `${labelLeft}%`,
+                            transform: 'translateX(-50%)', pointerEvents: 'none',
+                            fontFamily: 'var(--sl-mono)', fontVariantNumeric: 'tabular-nums',
+                            fontSize: 11, fontWeight: 500, whiteSpace: 'nowrap',
+                            color: cursorInFuture ? 'var(--sl-forecast)' : 'var(--sl-text-hi)',
+                            textShadow: '0 1px 3px var(--sl-overlay-bg)',
+                        }}>
+                            {fmtClock(cursorT)}
+                            <span style={{ color: cursorIsLive ? 'var(--sl-ok)' : cursorInFuture ? 'var(--sl-forecast)' : 'var(--sl-text-dim2)', marginLeft: 5 }}>
+                                {relLabel}
+                            </span>
+                        </div>
+                    )}
                     {/* recessed rail groove — reads as a slider track */}
                     <div style={{ position: 'absolute', top: 'calc(50% - 2px)', left: 0, right: 0, height: 4, borderRadius: 2, background: 'var(--sl-bg-2)', border: '1px solid var(--sl-border)' }} />
                     {/* forecast horizon — dashed extension on the rail */}
