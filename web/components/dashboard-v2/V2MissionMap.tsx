@@ -513,7 +513,12 @@ export default function V2MissionMap({
         >
             <Map
                 ref={mapRef}
-                key={`${projection}-${colorScheme}`}
+                /* Keyed on projection only — a projection switch needs a clean
+                 * remount, but a theme switch must NOT (it would reset the
+                 * camera). The basemap swaps in place via the `mapStyle` prop,
+                 * which preserves center/zoom; custom layers re-apply on
+                 * styledata. */
+                key={projection}
                 mapboxAccessToken={token}
                 initialViewState={initialView}
                 style={{ width: '100%', height: '100%' }}
@@ -556,7 +561,7 @@ export default function V2MissionMap({
                                 altM={rangeCenter.altM}
                             />
                         ) : (
-                            <GatewayLayer />
+                            <GatewayLayer colorScheme={colorScheme} />
                         )}
                         {/* No straight line is drawn between transmitted fixes:
                           * we don't actually know the route flown between sparse

@@ -21,8 +21,14 @@ const NIGHT_OPACITY_LIGHT = 0.45;
 /* Tuned for the deep-gray dark basemap — the old 0.72 was set against a
  * near-black map and now crushes the night side to pure black. */
 const NIGHT_OPACITY_DARK = 0.42;
+/* With black-marble night lights, the night side is real imagery (dark earth +
+ * city lights) rather than a flat tint, so it carries a higher opacity — but
+ * kept below full so basemap features + the flight track read through. */
+const NIGHT_OPACITY_DARK_BM = 0.68;
 const REFRESH_MS = 120_000;          /* terminator moves ~0.5°/2min */
 const OVERLAY_RE = /^(tm-coverage|v2-)/;  /* data layers that must stay above */
+
+const MAPBOX_TOKEN = process.env.NEXT_PUBLIC_MAPBOX_TOKEN;
 
 type DayNightTerminatorProps = {
     /** Match map basemap — dark mode uses stronger day/night contrast. */
@@ -31,7 +37,19 @@ type DayNightTerminatorProps = {
 
 export default function DayNightTerminator({ colorScheme = 'light' }: DayNightTerminatorProps) {
     const { current: mapRef } = useMap();
-    const rasterOpacity = colorScheme === 'dark' ? NIGHT_OPACITY_DARK : NIGHT_OPACITY_LIGHT;
+    /* Black-marble night lights only on the dark basemap (and only if we have a
+     * token to fetch the tiles). */
+    const blackMarble = colorScheme === 'dark' && Boolean(MAPBOX_TOKEN);
+    const rasterOpacity = colorScheme === 'dark'
+        ? (blackMarble ? NIGHT_OPACITY_DARK_BM : NIGHT_OPACITY_DARK)
+        : NIGHT_OPACITY_LIGHT;
+    /* Hold full strength while zoomed out (globe / fleet view), then fade the
+     * terminator out as you zoom into a mission so it stops dimming the map. */
+    const opacityByZoom = [
+        'interpolate', ['linear'], ['zoom'],
+        5.5, rasterOpacity,
+        6.5, 0,
+    ] as unknown;
 
     useEffect(() => {
         const map = mapRef?.getMap();
@@ -51,7 +69,11 @@ export default function DayNightTerminator({ colorScheme = 'light' }: DayNightTe
             try {
                 const existing = map.getSource(SRC_ID) as unknown as TerminatorSource | undefined;
                 if (!existing) {
-                    map.addSource(SRC_ID, new TerminatorSource({ basemap: colorScheme }) as never);
+                    map.addSource(SRC_ID, new TerminatorSource({
+                        basemap: colorScheme,
+                        token: MAPBOX_TOKEN,
+                        blackMarble,
+                    }) as never);
                 } else {
                     existing.setBasemap?.(colorScheme);
                 }
@@ -60,10 +82,10 @@ export default function DayNightTerminator({ colorScheme = 'light' }: DayNightTe
                         id: LAYER_ID,
                         type: 'raster',
                         source: SRC_ID,
-                        paint: { 'raster-opacity': rasterOpacity, 'raster-fade-duration': 0 },
+                        paint: { 'raster-opacity': opacityByZoom as never, 'raster-fade-duration': 0 },
                     });
                 } else {
-                    map.setPaintProperty(LAYER_ID, 'raster-opacity', rasterOpacity);
+                    map.setPaintProperty(LAYER_ID, 'raster-opacity', opacityByZoom as never);
                 }
                 position();
             } catch { /* style mid-load; retry on next styledata */ }

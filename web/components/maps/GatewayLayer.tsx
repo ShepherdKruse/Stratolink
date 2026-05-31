@@ -78,9 +78,30 @@ async function loadCoverageOuter(): Promise<CoverageGeometry | null> {
 export interface GatewayLayerProps {
     /** Stops rendering when false (e.g. tied to a user toggle). */
     visible?: boolean;
+    /** Basemap — coverage washes are brightened on the dark map, where the
+     *  quiet slate tones used on the light map all but vanish. */
+    colorScheme?: 'light' | 'dark';
 }
 
-export default function GatewayLayer({ visible = true }: GatewayLayerProps) {
+/* Coverage wash tones per basemap. Dark mode uses a brighter teal at higher
+ * opacity so the "where reception lives" field reads against the dark map. */
+const COVERAGE_STYLE = {
+    light: {
+        fill: '#5a5c62',
+        fillOpacity: 0.05,
+        innerLine: 'rgba(90, 92, 98, 0.26)',
+        outerLine: 'rgba(90, 92, 98, 0.30)',
+    },
+    dark: {
+        fill: '#4a8c96',
+        fillOpacity: 0.07,
+        innerLine: 'rgba(110, 180, 190, 0.34)',
+        outerLine: 'rgba(110, 180, 190, 0.24)',
+    },
+} as const;
+
+export default function GatewayLayer({ visible = true, colorScheme = 'light' }: GatewayLayerProps) {
+    const cov = COVERAGE_STYLE[colorScheme];
     const [coverage, setCoverage] = useState<CoverageGeometry | null>(null);
     const [coverageOuter, setCoverageOuter] = useState<CoverageGeometry | null>(null);
 
@@ -134,7 +155,7 @@ export default function GatewayLayer({ visible = true }: GatewayLayerProps) {
                         id="tm-coverage-outer-outline"
                         type="line"
                         paint={{
-                            'line-color': 'rgba(90, 92, 98, 0.30)',
+                            'line-color': cov.outerLine,
                             'line-width': 0.75,
                             'line-dasharray': [2, 2.5],
                         }}
@@ -150,15 +171,15 @@ export default function GatewayLayer({ visible = true }: GatewayLayerProps) {
                         id="tm-coverage-fill"
                         type="fill"
                         paint={{
-                            'fill-color': '#5a5c62',
-                            'fill-opacity': 0.05,
+                            'fill-color': cov.fill,
+                            'fill-opacity': cov.fillOpacity,
                         }}
                     />
                     <Layer
                         id="tm-coverage-outline"
                         type="line"
                         paint={{
-                            'line-color': 'rgba(90, 92, 98, 0.26)',
+                            'line-color': cov.innerLine,
                             'line-width': 0.6,
                         }}
                     />

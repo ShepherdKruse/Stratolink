@@ -9,6 +9,13 @@
  * terminator is a perfectly smooth, per-pixel gradient at any zoom — no polygon
  * banding, no in-shader unprojection.
  *
+ * On dark basemaps it can also composite NASA Black Marble night-lights
+ * (`rreusser.black-marble`) into the night side: the same shader samples the
+ * black-marble raster tile and uses the computed night amount as its alpha, so
+ * the city lights appear exactly where it's dark and fade out across the
+ * twilight band — no day-side bleed. Tiles failing to load fall back to a flat
+ * night tint per-tile.
+ *
  * Solar position math is SunCalc (Vladimir Agafonkin, BSD), pared to the sun.
  */
 import type { CustomSourceInterface } from 'mapbox-gl';
@@ -31,6 +38,14 @@ const DAY_RGB_DARK: [number, number, number] = [0.52, 0.56, 0.62];
  * (0°) to full night at astronomical twilight (−18°) — the real-world band. */
 const FADE_RANGE_LIGHT: [number, number] = [0, -18];
 const FADE_RANGE_DARK: [number, number] = [2, -14];
+
+/* NASA Black Marble night-lights, hosted by rreusser (public). Clamp requests
+ * to this zoom and overzoom above it by sampling the ancestor tile — keeps the
+ * globe view sharp while avoiding 404s when zoomed into a mission. */
+/* Public NASA Black Marble tileset (xyz, webp, z0–8). Served opaque, so we
+ * request .jpg and clamp/overzoom at its maxzoom. */
+const BLACK_MARBLE_TILESET = 'rreusser.black-marble';
+const BM_MAXZOOM = 8;
 
 function toDays(date: Date): number {
     return date.valueOf() / 86_400_000 - 0.5 + 2440588 - 2451545;
@@ -74,6 +89,10 @@ uniform vec3 dayColor;
 uniform float basemapMode;       /* 0 = light basemap, 1 = dark basemap */
 uniform float nightStrength;
 uniform float dayStrength;
+uniform sampler2D blackMarble;   /* night-lights texture for this tile */
+uniform float useBlackMarble;    /* 1 = sample blackMarble for the night color */
+uniform vec2 bmUvScale;          /* overzoom: sub-rect scale within the texture */
+uniform vec2 bmUvOffset;         /* overzoom: sub-rect offset within the texture */
 
 vec2 toWgs84Rad (vec2 m) {
     return vec2(m.x, ${Math.PI / 2.0} - 2.0 * atan(exp(-m.y)));
@@ -93,6 +112,20 @@ void main () {
     float nightAmt = smootherstep(fadeRange.x, fadeRange.y, altDeg);
     if (basemapMode < 0.5) {
         gl_FragColor = vec4(nightColor, nightAmt * nightStrength);
+    } else if (useBlackMarble > 0.5) {
+        /* Black-marble imagery covers the WHOLE globe — both hemispheres. The
+         * day side carries it at reduced coverage so the day/night terminator
+         * still reads as a smooth brightness gradient; the night side is
+         * near-full so the city lights pop. Single smooth ramp, no max() kink.
+         * uv.y=0 is north (fb bottom); the texture's first row (t=0) is the
+         * tile's north edge, so the v coord maps straight across. */
+        vec2 tc = bmUvOffset + uv * bmUvScale;
+        vec3 bm = texture2D(blackMarble, tc).rgb;
+        /* Darken the unlit night earth so the shadow side reads clearly darker
+         * than the daylit side; bright city lights stay visible. */
+        bm *= mix(1.0, 0.55, nightAmt);
+        float cover = mix(0.6, nightStrength, nightAmt);
+        gl_FragColor = vec4(bm, cover);
     } else {
         float dayAmt = 1.0 - nightAmt;
         vec3 rgb = mix(dayColor, nightColor, nightAmt);
@@ -128,11 +161,27 @@ export class TerminatorSource implements CustomSourceInterface<ImageData> {
     private uniforms: Record<string, WebGLUniformLocation | null>;
     private pixels: Uint8ClampedArray;
 
-    constructor(opts: { tileSize?: number; date?: Date; basemap?: TerminatorBasemap } = {}) {
+    /* Black-marble compositing (dark basemap only). */
+    private token?: string;
+    private blackMarbleEnabled: boolean;
+    private bmTexture: WebGLTexture | null = null;
+    private bmCache = new Map<string, Promise<ImageBitmap | null>>();
+
+    constructor(opts: {
+        tileSize?: number;
+        date?: Date;
+        basemap?: TerminatorBasemap;
+        /** Mapbox token — required to fetch black-marble night-lights tiles. */
+        token?: string;
+        /** Composite black-marble night lights into the night side (dark only). */
+        blackMarble?: boolean;
+    } = {}) {
         this.tileSize = opts.tileSize ?? 256;
         this.size = this.tileSize;
         this.date = opts.date ?? new Date();
         this.basemap = opts.basemap ?? 'light';
+        this.token = opts.token;
+        this.blackMarbleEnabled = Boolean(opts.blackMarble) && Boolean(opts.token);
         this.pixels = new Uint8ClampedArray(this.size * this.size * 4);
 
         const canvas = document.createElement('canvas');
@@ -164,8 +213,19 @@ export class TerminatorSource implements CustomSourceInterface<ImageData> {
             [
                 'resolution', 'sunCoords', 'aabb', 'siderealTimeOffset', 'fadeRange',
                 'nightColor', 'dayColor', 'basemapMode', 'nightStrength', 'dayStrength',
+                'blackMarble', 'useBlackMarble', 'bmUvScale', 'bmUvOffset',
             ].map(n => [n, gl.getUniformLocation(prog, n)]),
         );
+
+        /* Night-lights texture bound to unit 0. */
+        this.bmTexture = gl.createTexture();
+        gl.activeTexture(gl.TEXTURE0);
+        gl.bindTexture(gl.TEXTURE_2D, this.bmTexture);
+        gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
+        gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+        gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
+        gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
+        gl.uniform1i(this.uniforms.blackMarble, 0);
 
         gl.viewport(0, 0, this.size, this.size);
         gl.disable(gl.BLEND);
@@ -199,12 +259,60 @@ export class TerminatorSource implements CustomSourceInterface<ImageData> {
         this.update?.();
     }
 
+    /** Fetch (and cache) the black-marble tile covering this tile, clamped to
+     *  BM_MAXZOOM with the overzoom sub-rect. Null on any failure. */
+    private blackMarbleTile(
+        z: number, x: number, y: number,
+    ): { promise: Promise<ImageBitmap | null>; scale: number; offX: number; offY: number } {
+        const zz = Math.min(z, BM_MAXZOOM);
+        const dz = z - zz;
+        const ax = x >> dz;
+        const ay = y >> dz;
+        const scale = 1 / 2 ** dz;
+        const offX = (x - (ax << dz)) * scale;
+        const offY = (y - (ay << dz)) * scale;   /* y grows south; t=0 is north — aligned */
+        const key = `${zz}/${ax}/${ay}`;
+        let promise = this.bmCache.get(key);
+        if (!promise) {
+            const url = `https://api.mapbox.com/v4/${BLACK_MARBLE_TILESET}/${zz}/${ax}/${ay}.jpg?access_token=${this.token}`;
+            promise = fetch(url)
+                .then(r => (r.ok ? r.blob() : null))
+                .then(b => (b ? createImageBitmap(b) : null))
+                .catch(() => null);
+            this.bmCache.set(key, promise);
+        }
+        return { promise, scale, offX, offY };
+    }
+
     async loadTile(tile: { z: number; x: number; y: number }): Promise<ImageData> {
         const gl = this.gl;
+
+        /* Resolve the night-lights tile first (async), THEN set every uniform
+         * and draw in one synchronous block so concurrent loadTile calls can't
+         * interleave their uniform state. */
+        let bitmap: ImageBitmap | null = null;
+        let bmScale = 1, bmOffX = 0, bmOffY = 0;
+        if (this.blackMarbleEnabled && this.basemap === 'dark') {
+            const t = this.blackMarbleTile(tile.z, tile.x, tile.y);
+            bmScale = t.scale; bmOffX = t.offX; bmOffY = t.offY;
+            bitmap = await t.promise;
+        }
+
         const days = toDays(this.date);
         const { sinDec, cosDec, ra } = sunCoords(days);
         const siderealTimeOffset = (RAD * (280.16 + 360.9856235 * days)) % (2 * Math.PI);
         const aabb = tileBounds3857(tile.x, tile.y, tile.z).map(v => v / EARTH_RADIUS);
+
+        if (bitmap) {
+            gl.activeTexture(gl.TEXTURE0);
+            gl.bindTexture(gl.TEXTURE_2D, this.bmTexture);
+            gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, bitmap);
+            gl.uniform1f(this.uniforms.useBlackMarble, 1);
+            gl.uniform2f(this.uniforms.bmUvScale, bmScale, bmScale);
+            gl.uniform2f(this.uniforms.bmUvOffset, bmOffX, bmOffY);
+        } else {
+            gl.uniform1f(this.uniforms.useBlackMarble, 0);
+        }
 
         gl.uniform3f(this.uniforms.sunCoords, sinDec, cosDec, ra);
         gl.uniform1f(this.uniforms.siderealTimeOffset, siderealTimeOffset);
