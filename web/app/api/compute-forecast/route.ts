@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import { buildForecastInputForDevice, listForecastDeviceIds } from '@/lib/wind/buildForecastInput';
 import { computeMonteCarloForecast } from '@/lib/wind/monteCarloForecast';
-import { isBlobStorageConfigured, storeForecast } from '@/lib/wind/forecastStorage';
+import { acquireForecastLock, isBlobStorageConfigured, releaseForecastLock, storeForecast } from '@/lib/wind/forecastStorage';
 
 export const dynamic = 'force-dynamic';
 export const maxDuration = 60;
@@ -48,6 +48,12 @@ export async function GET(req: Request) {
     const results: Result[] = [];
 
     for (const deviceId of deviceIds) {
+        /* Skip if another compute for this device is already in flight (e.g. a
+         * read-path self-heal trigger) so we don't double-compute. */
+        if (!(await acquireForecastLock(deviceId))) {
+            results.push({ deviceId, ok: false, error: 'in-flight' });
+            continue;
+        }
         try {
             const input = await buildForecastInputForDevice(deviceId, forecastHours);
             if (!input) {
@@ -66,6 +72,8 @@ export async function GET(req: Request) {
             const message = e instanceof Error ? e.message : 'compute failed';
             console.error(`[compute-forecast] ${deviceId} failed: ${message}`);
             results.push({ deviceId, ok: false, error: message });
+        } finally {
+            await releaseForecastLock(deviceId);
         }
     }
 
