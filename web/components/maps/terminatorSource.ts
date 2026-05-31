@@ -30,9 +30,8 @@ export type TerminatorBasemap = 'light' | 'dark';
 /* Night tint (dark navy) on light basemaps — layer `raster-opacity` scales it. */
 const NIGHT_RGB_LIGHT: [number, number, number] = [0.06, 0.085, 0.16];
 
-/* Dark basemap: deepen night + lift day so the terminator reads on mapbox dark-v11. */
+/* Dark basemap: a near-black night tint. */
 const NIGHT_RGB_DARK: [number, number, number] = [0.01, 0.015, 0.03];
-const DAY_RGB_DARK: [number, number, number] = [0.52, 0.56, 0.62];
 
 /* Twilight band in degrees of solar altitude: darkening runs from the horizon
  * (0°) to full night at astronomical twilight (−18°) — the real-world band. */
@@ -46,6 +45,8 @@ const FADE_RANGE_DARK: [number, number] = [2, -14];
  * request .jpg and clamp/overzoom at its maxzoom. */
 const BLACK_MARBLE_TILESET = 'rreusser.black-marble';
 const BM_MAXZOOM = 8;
+
+export type TerminatorKind = 'shade' | 'lights';
 
 function toDays(date: Date): number {
     return date.valueOf() / 86_400_000 - 0.5 + 2440588 - 2451545;
@@ -84,13 +85,10 @@ uniform vec3 sunCoords;          /* sinDec, cosDec, ra */
 uniform vec4 aabb;               /* xmin, ymin, xmax, ymax  (Mercator / earthRadius) */
 uniform float siderealTimeOffset;
 uniform vec2 fadeRange;          /* horizon, full-night altitude (deg) */
-uniform vec3 nightColor;
-uniform vec3 dayColor;
-uniform float basemapMode;       /* 0 = light basemap, 1 = dark basemap */
-uniform float nightStrength;
-uniform float dayStrength;
+uniform vec3 nightColor;         /* night-shade tint (per theme) */
+uniform float outputLights;      /* 1 = render city lights, 0 = render night shade */
 uniform sampler2D blackMarble;   /* night-lights texture for this tile */
-uniform float useBlackMarble;    /* 1 = sample blackMarble for the night color */
+uniform float useBlackMarble;    /* 1 = the blackMarble texture is bound */
 uniform vec2 bmUvScale;          /* overzoom: sub-rect scale within the texture */
 uniform vec2 bmUvOffset;         /* overzoom: sub-rect offset within the texture */
 
@@ -110,30 +108,25 @@ void main () {
     vec2 m = aabb.xw + (aabb.zy - aabb.xw) * uv;       /* north at uv.y=0 (fb bottom) */
     float altDeg = sunAltitude(toWgs84Rad(m)) * ${180.0 / Math.PI};
     float nightAmt = smootherstep(fadeRange.x, fadeRange.y, altDeg);
-    if (useBlackMarble > 0.5) {
-        /* Lights + a gentle night shade. The city lights paint over the basemap
-         * via a brightness-driven alpha (dark/unlit areas stay transparent), and
-         * a low-opacity dark tint dims the night side so it reads as night —
-         * kept subtle so the vector basemap + UI stay visible. The lights are
-         * composited OVER the shade so they still glow.
+    if (outputLights > 0.5) {
+        /* LIGHTS layer — only the bright city-light pixels paint (alpha from
+         * black-marble brightness), so dark/unlit areas stay transparent and the
+         * basemap shows through. Lights appear on the night side (nightAmt). The
+         * layer's raster-opacity (with its zoom fade) scales the intensity.
          * uv.y=0 is north (fb bottom); the texture's first row (t=0) is the
          * tile's north edge, so the v coord maps straight across. */
-        vec2 tc = bmUvOffset + uv * bmUvScale;
-        vec3 bm = texture2D(blackMarble, tc).rgb;
-        float lum = dot(bm, vec3(0.299, 0.587, 0.114));
-        float shadeA = nightAmt * 0.4;                                 /* night dimming */
-        float lightA = clamp(lum * 1.6, 0.0, 1.0) * nightAmt * nightStrength;
-        /* lights (src) over shade (dst), both over the basemap. */
-        float outA = lightA + shadeA * (1.0 - lightA);
-        vec3 outCol = (bm * lightA + nightColor * shadeA * (1.0 - lightA)) / max(outA, 1e-4);
-        gl_FragColor = vec4(outCol, outA);
-    } else if (basemapMode < 0.5) {
-        gl_FragColor = vec4(nightColor, nightAmt * nightStrength);
+        if (useBlackMarble > 0.5) {
+            vec2 tc = bmUvOffset + uv * bmUvScale;
+            vec3 bm = texture2D(blackMarble, tc).rgb;
+            float lum = dot(bm, vec3(0.299, 0.587, 0.114));
+            gl_FragColor = vec4(bm, clamp(lum * 1.6, 0.0, 1.0) * nightAmt);
+        } else {
+            gl_FragColor = vec4(0.0);
+        }
     } else {
-        float dayAmt = 1.0 - nightAmt;
-        vec3 rgb = mix(dayColor, nightColor, nightAmt);
-        float alpha = max(nightAmt * nightStrength, dayAmt * dayStrength);
-        gl_FragColor = vec4(rgb, alpha);
+        /* SHADE layer — a gentle dark tint on the night side. Strength comes
+         * from the layer's (constant) raster-opacity. */
+        gl_FragColor = vec4(nightColor, nightAmt);
     }
 }`;
 
@@ -148,15 +141,21 @@ function compile(gl: WebGLRenderingContext, type: number, src: string): WebGLSha
 }
 
 export class TerminatorSource implements CustomSourceInterface<ImageData> {
-    id = 'sl-terminator';
+    id: string;
     type = 'custom' as const;
     dataType = 'raster' as const;
     tileSize: number;
+    /* Cap tile requests; Mapbox overzooms beyond this. The terminator is a
+     * smooth, low-frequency field, so a capped tile set looks identical when
+     * overzoomed — and avoids the tile churn (and boundary flicker) of loading
+     * ever-finer tiles as you zoom. */
+    maxzoom?: number;
 
     /* Bound by Mapbox once the source is added — used to refresh tiles. */
     update?: () => void;
     clearTiles?: () => void;
 
+    private kind: TerminatorKind;
     private size: number;
     private date: Date;
     private basemap: TerminatorBasemap;
@@ -164,28 +163,38 @@ export class TerminatorSource implements CustomSourceInterface<ImageData> {
     private uniforms: Record<string, WebGLUniformLocation | null>;
     private pixels: Uint8ClampedArray;
 
-    /* Black-marble compositing (dark basemap only). */
+    /* Black-marble compositing — only the 'lights' source fetches tiles. */
     private token?: string;
     private blackMarbleEnabled: boolean;
     private bmTexture: WebGLTexture | null = null;
     private bmCache = new Map<string, Promise<ImageBitmap | null>>();
 
     constructor(opts: {
+        /** Mapbox source id (must match the id passed to map.addSource). */
+        id?: string;
+        /** Which component this source renders: the night 'shade' or the city
+         *  'lights'. They live in separate layers so the lights can fade by zoom
+         *  while the shade stays constant. */
+        kind?: TerminatorKind;
         tileSize?: number;
         date?: Date;
         basemap?: TerminatorBasemap;
         /** Mapbox token — required to fetch black-marble night-lights tiles. */
         token?: string;
-        /** Composite black-marble night lights. Dark basemap: across the whole
-         *  globe; light basemap: masked to the night side. */
+        /** Composite black-marble night lights (only meaningful for 'lights'). */
         blackMarble?: boolean;
+        /** Cap tile zoom (Mapbox overzooms beyond it). */
+        maxzoom?: number;
     } = {}) {
+        this.id = opts.id ?? 'sl-terminator';
+        this.kind = opts.kind ?? 'shade';
+        this.maxzoom = opts.maxzoom;
         this.tileSize = opts.tileSize ?? 256;
         this.size = this.tileSize;
         this.date = opts.date ?? new Date();
         this.basemap = opts.basemap ?? 'light';
         this.token = opts.token;
-        this.blackMarbleEnabled = Boolean(opts.blackMarble) && Boolean(opts.token);
+        this.blackMarbleEnabled = this.kind === 'lights' && Boolean(opts.blackMarble) && Boolean(opts.token);
         this.pixels = new Uint8ClampedArray(this.size * this.size * 4);
 
         const canvas = document.createElement('canvas');
@@ -216,10 +225,12 @@ export class TerminatorSource implements CustomSourceInterface<ImageData> {
         this.uniforms = Object.fromEntries(
             [
                 'resolution', 'sunCoords', 'aabb', 'siderealTimeOffset', 'fadeRange',
-                'nightColor', 'dayColor', 'basemapMode', 'nightStrength', 'dayStrength',
+                'nightColor', 'outputLights',
                 'blackMarble', 'useBlackMarble', 'bmUvScale', 'bmUvOffset',
             ].map(n => [n, gl.getUniformLocation(prog, n)]),
         );
+
+        gl.uniform1f(this.uniforms.outputLights, this.kind === 'lights' ? 1 : 0);
 
         /* Night-lights texture bound to unit 0. */
         this.bmTexture = gl.createTexture();
@@ -243,10 +254,6 @@ export class TerminatorSource implements CustomSourceInterface<ImageData> {
         const fade = dark ? FADE_RANGE_DARK : FADE_RANGE_LIGHT;
         gl.uniform2f(this.uniforms.fadeRange, fade[0], fade[1]);
         gl.uniform3f(this.uniforms.nightColor, ...(dark ? NIGHT_RGB_DARK : NIGHT_RGB_LIGHT));
-        gl.uniform3f(this.uniforms.dayColor, ...DAY_RGB_DARK);
-        gl.uniform1f(this.uniforms.basemapMode, dark ? 1 : 0);
-        gl.uniform1f(this.uniforms.nightStrength, dark ? 0.92 : 1);
-        gl.uniform1f(this.uniforms.dayStrength, dark ? 0.42 : 0);
     }
 
     setBasemap(basemap: TerminatorBasemap): void {

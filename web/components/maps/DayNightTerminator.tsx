@@ -1,13 +1,21 @@
 /**
  * Day/night terminator overlay.
  *
- * Adds a custom WebGL raster source (see `terminatorSource.ts`) that shades the
+ * Adds custom WebGL raster sources (see `terminatorSource.ts`) that shade the
  * night hemisphere with a smooth, per-pixel twilight gradient computed from the
- * sun's current position, and refreshes it as the terminator drifts.
+ * sun's current position, and refreshes them as the terminator drifts.
  *
- * Drop `<DayNightTerminator />` inside a react-map-gl `<Map>`. It manages its
- * own source/layer imperatively (custom sources aren't expressible as JSX), and
- * keeps the layer just beneath the data overlays so it dims only the basemap.
+ * Two separate layers so they can fade independently with zoom:
+ *   - SHADE: a gentle dark tint on the night side — constant at all zooms, so
+ *     the dark side stays dark however far you zoom in.
+ *   - LIGHTS: NASA Black Marble city lights, composited lights-only (only the
+ *     bright pixels paint, so the basemap shows through). These fade out by
+ *     ~zoom 5.5 because the tileset is low-res and looks bad overzoomed.
+ *
+ * The fade lives on the LIGHTS layer's `raster-opacity` as a live map-zoom
+ * expression — re-evaluated every frame across all tiles — so it applies
+ * globally and reverses when you zoom back out (baking it into tile pixels did
+ * neither). Drop `<DayNightTerminator />` inside a react-map-gl `<Map>`.
  */
 'use client';
 
@@ -15,16 +23,24 @@ import { useEffect } from 'react';
 import { useMap } from 'react-map-gl/mapbox';
 import { TerminatorSource, type TerminatorBasemap } from './terminatorSource';
 
-const SRC_ID = 'sl-terminator';
-const LAYER_ID = 'sl-terminator';
-const NIGHT_OPACITY_LIGHT = 0.45;
-/* Tuned for the deep-gray dark basemap — the old 0.72 was set against a
- * near-black map and now crushes the night side to pure black. */
-const NIGHT_OPACITY_DARK = 0.42;
-/* Black-marble is composited lights-only (brightness-driven alpha), so the
- * basemap stays visible and these just scale the glow of the city lights. */
-const NIGHT_OPACITY_DARK_BM = 0.85;
-const NIGHT_OPACITY_LIGHT_BM = 0.9;
+const SHADE_ID = 'sl-terminator-shade';
+const LIGHTS_ID = 'sl-terminator-lights';
+
+/* Night-shade strength (the layer scales the per-pixel tint). Dark mode dims a
+ * touch more; both kept subtle so the basemap + UI read through. */
+const SHADE_OPACITY_LIGHT = 0.3;
+const SHADE_OPACITY_DARK = 0.42;
+/* Peak city-light intensity (scaled by the zoom fade below). */
+const LIGHTS_OPACITY = 0.9;
+
+/* Live map-zoom fade for the lights: full strength while zoomed out, gone by
+ * ~zoom 6.5 (the low-res lights look bad overzoomed). */
+const lightsOpacityByZoom = [
+    'interpolate', ['linear'], ['zoom'],
+    5.5, LIGHTS_OPACITY,
+    6.5, 0,
+] as unknown;
+
 const REFRESH_MS = 120_000;          /* terminator moves ~0.5°/2min */
 const OVERLAY_RE = /^(tm-coverage|v2-)/;  /* data layers that must stay above */
 
@@ -37,57 +53,67 @@ type DayNightTerminatorProps = {
 
 export default function DayNightTerminator({ colorScheme = 'light' }: DayNightTerminatorProps) {
     const { current: mapRef } = useMap();
-    /* Black-marble night lights in both themes (needs a token to fetch tiles).
-     * Dark mode draws them across the whole globe; light mode masks them to the
-     * night side only — see the terminator shader. */
-    const blackMarble = Boolean(MAPBOX_TOKEN);
-    const rasterOpacity = colorScheme === 'dark'
-        ? (blackMarble ? NIGHT_OPACITY_DARK_BM : NIGHT_OPACITY_DARK)
-        : (blackMarble ? NIGHT_OPACITY_LIGHT_BM : NIGHT_OPACITY_LIGHT);
-    /* Hold full strength while zoomed out (globe / fleet view), then fade the
-     * terminator out as you zoom into a mission so it stops dimming the map. */
-    const opacityByZoom = [
-        'interpolate', ['linear'], ['zoom'],
-        5.5, rasterOpacity,
-        6.5, 0,
-    ] as unknown;
+    /* Black-marble city lights need a token to fetch tiles. */
+    const showLights = Boolean(MAPBOX_TOKEN);
+    const shadeOpacity = colorScheme === 'dark' ? SHADE_OPACITY_DARK : SHADE_OPACITY_LIGHT;
 
     useEffect(() => {
         const map = mapRef?.getMap();
         if (!map) return;
 
-        /* Keep the terminator just below the lowest data overlay so it dims the
-         * basemap but never the flight path / gateways. */
+        /* Keep the terminator layers below the basemap labels (symbol layers) and
+         * data overlays, so they shade only the basemap fills/relief — country
+         * labels, the flight path, and gateways all stay readable on top. Shade
+         * first (lowest), then lights above it. */
         const position = () => {
             try {
-                if (!map.getLayer(LAYER_ID)) return;
-                const first = (map.getStyle()?.layers ?? []).find(l => OVERLAY_RE.test(l.id))?.id;
-                if (first) map.moveLayer(LAYER_ID, first);
+                const layers = map.getStyle()?.layers ?? [];
+                const anchor = layers.find(l => l.type === 'symbol' || OVERLAY_RE.test(l.id))?.id;
+                if (!anchor) return;
+                if (map.getLayer(SHADE_ID)) map.moveLayer(SHADE_ID, anchor);
+                if (map.getLayer(LIGHTS_ID)) map.moveLayer(LIGHTS_ID, anchor);
             } catch { /* ignore */ }
         };
 
         const ensure = () => {
             try {
-                const existing = map.getSource(SRC_ID) as unknown as TerminatorSource | undefined;
-                if (!existing) {
-                    map.addSource(SRC_ID, new TerminatorSource({
-                        basemap: colorScheme,
-                        token: MAPBOX_TOKEN,
-                        blackMarble,
+                /* SHADE — constant opacity at all zooms. */
+                const shadeSrc = map.getSource(SHADE_ID) as unknown as TerminatorSource | undefined;
+                if (!shadeSrc) {
+                    map.addSource(SHADE_ID, new TerminatorSource({
+                        id: SHADE_ID, kind: 'shade', basemap: colorScheme, maxzoom: 5,
                     }) as never);
                 } else {
-                    existing.setBasemap?.(colorScheme);
+                    shadeSrc.setBasemap?.(colorScheme);
                 }
-                if (!map.getLayer(LAYER_ID)) {
+                if (!map.getLayer(SHADE_ID)) {
                     map.addLayer({
-                        id: LAYER_ID,
-                        type: 'raster',
-                        source: SRC_ID,
-                        paint: { 'raster-opacity': opacityByZoom as never, 'raster-fade-duration': 0 },
+                        id: SHADE_ID, type: 'raster', source: SHADE_ID,
+                        paint: { 'raster-opacity': shadeOpacity, 'raster-fade-duration': 0 },
                     });
                 } else {
-                    map.setPaintProperty(LAYER_ID, 'raster-opacity', opacityByZoom as never);
+                    map.setPaintProperty(SHADE_ID, 'raster-opacity', shadeOpacity);
                 }
+
+                /* LIGHTS — Black Marble, faded out by zoom. */
+                if (showLights) {
+                    const lightsSrc = map.getSource(LIGHTS_ID) as unknown as TerminatorSource | undefined;
+                    if (!lightsSrc) {
+                        map.addSource(LIGHTS_ID, new TerminatorSource({
+                            id: LIGHTS_ID, kind: 'lights', basemap: colorScheme,
+                            token: MAPBOX_TOKEN, blackMarble: true, maxzoom: 6,
+                        }) as never);
+                    } else {
+                        lightsSrc.setBasemap?.(colorScheme);
+                    }
+                    if (!map.getLayer(LIGHTS_ID)) {
+                        map.addLayer({
+                            id: LIGHTS_ID, type: 'raster', source: LIGHTS_ID,
+                            paint: { 'raster-opacity': lightsOpacityByZoom as never, 'raster-fade-duration': 0 },
+                        });
+                    }
+                }
+
                 position();
             } catch { /* style mid-load; retry on next styledata */ }
         };
@@ -96,17 +122,20 @@ export default function DayNightTerminator({ colorScheme = 'light' }: DayNightTe
         map.on('styledata', ensure);
 
         const interval = setInterval(() => {
-            const src = map.getSource(SRC_ID) as unknown as TerminatorSource | undefined;
-            src?.setDate?.(new Date());
+            const now = new Date();
+            (map.getSource(SHADE_ID) as unknown as TerminatorSource | undefined)?.setDate?.(now);
+            (map.getSource(LIGHTS_ID) as unknown as TerminatorSource | undefined)?.setDate?.(now);
         }, REFRESH_MS);
 
         return () => {
             clearInterval(interval);
             map.off('styledata', ensure);
-            try { if (map.getLayer(LAYER_ID)) map.removeLayer(LAYER_ID); } catch { /* ignore */ }
-            try { if (map.getSource(SRC_ID)) map.removeSource(SRC_ID); } catch { /* ignore */ }
+            for (const id of [LIGHTS_ID, SHADE_ID]) {
+                try { if (map.getLayer(id)) map.removeLayer(id); } catch { /* ignore */ }
+                try { if (map.getSource(id)) map.removeSource(id); } catch { /* ignore */ }
+            }
         };
-    }, [mapRef, colorScheme, rasterOpacity]);
+    }, [mapRef, colorScheme, shadeOpacity, showLights]);
 
     return null;
 }
