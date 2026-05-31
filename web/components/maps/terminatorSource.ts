@@ -110,22 +110,25 @@ void main () {
     vec2 m = aabb.xw + (aabb.zy - aabb.xw) * uv;       /* north at uv.y=0 (fb bottom) */
     float altDeg = sunAltitude(toWgs84Rad(m)) * ${180.0 / Math.PI};
     float nightAmt = smootherstep(fadeRange.x, fadeRange.y, altDeg);
-    if (basemapMode < 0.5) {
-        gl_FragColor = vec4(nightColor, nightAmt * nightStrength);
-    } else if (useBlackMarble > 0.5) {
-        /* Black-marble imagery covers the WHOLE globe — both hemispheres. The
-         * day side carries it at reduced coverage so the day/night terminator
-         * still reads as a smooth brightness gradient; the night side is
-         * near-full so the city lights pop. Single smooth ramp, no max() kink.
+    if (useBlackMarble > 0.5) {
+        /* Lights + a gentle night shade. The city lights paint over the basemap
+         * via a brightness-driven alpha (dark/unlit areas stay transparent), and
+         * a low-opacity dark tint dims the night side so it reads as night —
+         * kept subtle so the vector basemap + UI stay visible. The lights are
+         * composited OVER the shade so they still glow.
          * uv.y=0 is north (fb bottom); the texture's first row (t=0) is the
          * tile's north edge, so the v coord maps straight across. */
         vec2 tc = bmUvOffset + uv * bmUvScale;
         vec3 bm = texture2D(blackMarble, tc).rgb;
-        /* Darken the unlit night earth so the shadow side reads clearly darker
-         * than the daylit side; bright city lights stay visible. */
-        bm *= mix(1.0, 0.55, nightAmt);
-        float cover = mix(0.6, nightStrength, nightAmt);
-        gl_FragColor = vec4(bm, cover);
+        float lum = dot(bm, vec3(0.299, 0.587, 0.114));
+        float shadeA = nightAmt * 0.4;                                 /* night dimming */
+        float lightA = clamp(lum * 1.6, 0.0, 1.0) * nightAmt * nightStrength;
+        /* lights (src) over shade (dst), both over the basemap. */
+        float outA = lightA + shadeA * (1.0 - lightA);
+        vec3 outCol = (bm * lightA + nightColor * shadeA * (1.0 - lightA)) / max(outA, 1e-4);
+        gl_FragColor = vec4(outCol, outA);
+    } else if (basemapMode < 0.5) {
+        gl_FragColor = vec4(nightColor, nightAmt * nightStrength);
     } else {
         float dayAmt = 1.0 - nightAmt;
         vec3 rgb = mix(dayColor, nightColor, nightAmt);
@@ -173,7 +176,8 @@ export class TerminatorSource implements CustomSourceInterface<ImageData> {
         basemap?: TerminatorBasemap;
         /** Mapbox token — required to fetch black-marble night-lights tiles. */
         token?: string;
-        /** Composite black-marble night lights into the night side (dark only). */
+        /** Composite black-marble night lights. Dark basemap: across the whole
+         *  globe; light basemap: masked to the night side. */
         blackMarble?: boolean;
     } = {}) {
         this.tileSize = opts.tileSize ?? 256;
@@ -292,7 +296,7 @@ export class TerminatorSource implements CustomSourceInterface<ImageData> {
          * interleave their uniform state. */
         let bitmap: ImageBitmap | null = null;
         let bmScale = 1, bmOffX = 0, bmOffY = 0;
-        if (this.blackMarbleEnabled && this.basemap === 'dark') {
+        if (this.blackMarbleEnabled) {
             const t = this.blackMarbleTile(tile.z, tile.x, tile.y);
             bmScale = t.scale; bmOffX = t.offX; bmOffY = t.offY;
             bitmap = await t.promise;

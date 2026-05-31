@@ -21,10 +21,10 @@ const NIGHT_OPACITY_LIGHT = 0.45;
 /* Tuned for the deep-gray dark basemap — the old 0.72 was set against a
  * near-black map and now crushes the night side to pure black. */
 const NIGHT_OPACITY_DARK = 0.42;
-/* With black-marble night lights, the night side is real imagery (dark earth +
- * city lights) rather than a flat tint, so it carries a higher opacity — but
- * kept below full so basemap features + the flight track read through. */
-const NIGHT_OPACITY_DARK_BM = 0.68;
+/* Black-marble is composited lights-only (brightness-driven alpha), so the
+ * basemap stays visible and these just scale the glow of the city lights. */
+const NIGHT_OPACITY_DARK_BM = 0.85;
+const NIGHT_OPACITY_LIGHT_BM = 0.9;
 const REFRESH_MS = 120_000;          /* terminator moves ~0.5°/2min */
 const OVERLAY_RE = /^(tm-coverage|v2-)/;  /* data layers that must stay above */
 
@@ -37,12 +37,13 @@ type DayNightTerminatorProps = {
 
 export default function DayNightTerminator({ colorScheme = 'light' }: DayNightTerminatorProps) {
     const { current: mapRef } = useMap();
-    /* Black-marble night lights only on the dark basemap (and only if we have a
-     * token to fetch the tiles). */
-    const blackMarble = colorScheme === 'dark' && Boolean(MAPBOX_TOKEN);
+    /* Black-marble night lights in both themes (needs a token to fetch tiles).
+     * Dark mode draws them across the whole globe; light mode masks them to the
+     * night side only — see the terminator shader. */
+    const blackMarble = Boolean(MAPBOX_TOKEN);
     const rasterOpacity = colorScheme === 'dark'
         ? (blackMarble ? NIGHT_OPACITY_DARK_BM : NIGHT_OPACITY_DARK)
-        : NIGHT_OPACITY_LIGHT;
+        : (blackMarble ? NIGHT_OPACITY_LIGHT_BM : NIGHT_OPACITY_LIGHT);
     /* Hold full strength while zoomed out (globe / fleet view), then fade the
      * terminator out as you zoom into a mission so it stops dimming the map. */
     const opacityByZoom = [
