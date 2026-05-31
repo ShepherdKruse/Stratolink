@@ -1068,8 +1068,13 @@ function Timeline({ visibleRows, scrubT, onScrub, futureEndT, floating = false }
                       * track width. */}
                     {isMobile && (
                         <div style={{
-                            position: 'absolute', bottom: 'calc(100% + 7px)', left: `${labelLeft}%`,
-                            transform: 'translateX(-50%)', pointerEvents: 'none',
+                            position: 'absolute', bottom: 'calc(100% + 7px)',
+                            /* Anchor the label to the track edges near the ends so
+                             * it can't overflow off-screen (e.g. the "hr" getting
+                             * clipped); centered on the thumb in the middle. */
+                            left: fraction <= 18 ? '0%' : fraction >= 82 ? '100%' : `${labelLeft}%`,
+                            transform: fraction <= 18 ? 'translateX(0)' : fraction >= 82 ? 'translateX(-100%)' : 'translateX(-50%)',
+                            pointerEvents: 'none',
                             fontFamily: 'var(--sl-mono)', fontVariantNumeric: 'tabular-nums',
                             fontSize: 11, fontWeight: 500, whiteSpace: 'nowrap',
                             color: cursorInFuture ? 'var(--sl-forecast)' : 'var(--sl-text-hi)',

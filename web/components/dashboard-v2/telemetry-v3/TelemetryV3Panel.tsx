@@ -349,7 +349,9 @@ export default function TelemetryV3Panel({ device, devices, onSelect, scrubRow, 
                 title="Power & sun"
                 gkey="power"
             >
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '0 12px', padding: '14px 0' }}>
+                {/* 2×2 so the longer labels (Ambient light, Orientation) have
+                  * room and don't squish — battery + solar stay on one line. */}
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '16px 16px', padding: '14px 0' }}>
                     <Metric
                         label="Battery"
                         value={batt != null ? tlmFmt.d2(batt) : '—'}
