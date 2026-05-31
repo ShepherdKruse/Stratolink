@@ -259,6 +259,26 @@ export function nearestTimeOnPath(
     return bestD <= maxDistKm ? bestT : null;
 }
 
+/** Time of the nearest transmission fix to a map click, or null if none is
+ *  within `maxDistKm`. Unlike `nearestTimeOnPath` (which projects onto the path
+ *  and returns an interpolated between-fixes time), this snaps to an actual
+ *  reported point — so clicking the track jumps to the transmission you meant,
+ *  and clicking far from any fix does nothing. */
+export function nearestFixTime(
+    fixes: PickablePathPoint[],
+    lng: number,
+    lat: number,
+    maxDistKm = 75,
+): number | null {
+    let bestT: number | null = null;
+    let bestD = Infinity;
+    for (const p of fixes) {
+        const d = haversineKm(p.lat, p.lon, lat, lng);
+        if (d < bestD) { bestD = d; bestT = p.t; }
+    }
+    return bestD <= maxDistKm ? bestT : null;
+}
+
 function haversineKm(lat1: number, lon1: number, lat2: number, lon2: number): number {
     const R = 6371;
     const dLat = ((lat2 - lat1) * Math.PI) / 180;

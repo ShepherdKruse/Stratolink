@@ -26,7 +26,7 @@ import DayNightTerminator from '@/components/maps/DayNightTerminator';
 import { applyBaseStyle } from '@/components/maps/baseStyle';
 import { bathymetryAllZooms } from '@/components/maps/bathymetry';
 import { ringKm } from '@/lib/gateways/range';
-import { nearestTimeOnPath, type PickablePathPoint } from '@/lib/telemetry/flightNarrative';
+import { nearestFixTime, type PickablePathPoint } from '@/lib/telemetry/flightNarrative';
 
 export interface V2Balloon {
     id: string;
@@ -553,7 +553,10 @@ export default function V2MissionMap({
                 projection={projection === 'globe' ? 'globe' : 'mercator'}
                 onClick={(e) => {
                     if (!pathPickEnabled || !onPickTime) return;
-                    const t = nearestTimeOnPath(pickPath, e.lngLat.lng, e.lngLat.lat, PATH_PICK_MAX_KM);
+                    /* Snap to the nearest transmitted fix (the dots), not an
+                     * interpolated point along the path — and do nothing when the
+                     * click lands far from any transmission. */
+                    const t = nearestFixTime(validFlightPath, e.lngLat.lng, e.lngLat.lat, PATH_PICK_MAX_KM);
                     if (t == null) return;
                     onPickTime(t);
                 }}
