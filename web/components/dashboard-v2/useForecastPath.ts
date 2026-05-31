@@ -22,6 +22,16 @@ export interface ForecastEllipse {
     e90: Array<[number, number]>;
 }
 
+/** A reconstructed hindcast point carrying its real (wind-interpolated) time.
+ *  Same geometry as `hindcastPath`, but timestamps are anchored to the actual
+ *  GPS-fix times rather than spaced evenly by index. */
+export interface HindcastTrackPoint {
+    lon: number;
+    lat: number;
+    /** Epoch ms. */
+    t: number;
+}
+
 export interface UseForecastPathResult {
     /** Nominal predicted path ([lon, lat]). Empty until a forecast loads. */
     path: ForecastPath;
@@ -31,6 +41,10 @@ export interface UseForecastPathResult {
     ellipses: ForecastEllipse[];
     /** Wind-reconstructed likely prior path through GPS gaps ([lon, lat]). */
     hindcastPath: ForecastPath;
+    /** Same path as `hindcastPath`, but with a real timestamp per point — used
+     *  to position the scrubbed balloon marker in sync with the transmit dots.
+     *  Empty for forecasts computed before this field existed. */
+    hindcastTrack: HindcastTrackPoint[];
     /** True when the last GPS fix is stale and the origin is dead-reckoned. */
     staleGps: boolean;
     /** Epoch ms of the forecast origin (path[0]'s time). Null if unknown. */
@@ -47,8 +61,8 @@ export interface UseForecastPathResult {
 const POLL_MS = 5 * 60 * 1000;
 
 const EMPTY: Omit<UseForecastPathResult, 'loading'> = {
-    path: [], ensemble: [], ellipses: [], hindcastPath: [], staleGps: false,
-    originT: null, endT: null, generatedAt: null,
+    path: [], ensemble: [], ellipses: [], hindcastPath: [], hindcastTrack: [],
+    staleGps: false, originT: null, endT: null, generatedAt: null,
 };
 
 /** Keep only well-formed [lon, lat] pairs in WGS84 range. */
@@ -60,6 +74,26 @@ function cleanPath(raw: unknown): ForecastPath {
             Number.isFinite(p[0]) && Number.isFinite(p[1]) &&
             Math.abs(p[0]) <= 180 && Math.abs(p[1]) <= 90,
     );
+}
+
+/** Parse the timed reconstructed track ({ lon, lat, time_utc }) into points
+ *  with epoch-ms timestamps, dropping anything malformed. */
+function cleanTrack(raw: unknown): HindcastTrackPoint[] {
+    if (!Array.isArray(raw)) return [];
+    const out: HindcastTrackPoint[] = [];
+    for (const p of raw as Array<{ lon?: unknown; lat?: unknown; time_utc?: unknown }>) {
+        if (!p || typeof p !== 'object') continue;
+        const { lon, lat } = p;
+        const t = typeof p.time_utc === 'string' ? Date.parse(p.time_utc) : NaN;
+        if (
+            typeof lon === 'number' && typeof lat === 'number' &&
+            Number.isFinite(lon) && Number.isFinite(lat) &&
+            Math.abs(lon) <= 180 && Math.abs(lat) <= 90 && Number.isFinite(t)
+        ) {
+            out.push({ lon, lat, t });
+        }
+    }
+    return out;
 }
 
 export function useForecastPath(deviceId: string | null): UseForecastPathResult {
@@ -112,6 +146,7 @@ export function useForecastPath(deviceId: string | null): UseForecastPathResult 
                     ensemble,
                     ellipses,
                     hindcastPath: cleanPath(data?.observed?.reconstructed_path),
+                    hindcastTrack: cleanTrack(data?.observed?.reconstructed_track),
                     staleGps: Boolean(data?.stale_gps),
                     originT,
                     endT,

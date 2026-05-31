@@ -651,17 +651,22 @@ function MapColumn({
         return [a[0] + (b[0] - a[0]) * frac, a[1] + (b[1] - a[1]) * frac];
     }, [isFuture, scrubT, forecast]);
 
-    /* The likely (reconstructed) path with even time spacing across the
-     * observed window — so scrubbing the past glides the balloon along the
-     * smooth hindcast instead of the jagged raw GPS fixes. */
+    /* The likely (reconstructed) path used to glide the balloon as you scrub.
+     * Prefer the backend's per-point timestamps, which are anchored to the
+     * actual GPS-fix times — so the marker stays in lockstep with the transmit
+     * dots. (The old even-by-index spacing drifted: dense early segments got
+     * stretched in time, pushing dots ahead of the marker.) Fall back to even
+     * spacing only for forecasts computed before the timed track existed. */
     const hindcastTrack: V2FlightPoint[] = useMemo(() => {
+        const timed = forecast.hindcastTrack;
+        if (timed.length >= 2) return timed.map(p => ({ lon: p.lon, lat: p.lat, t: p.t }));
         const pts = forecast.hindcastPath;
         if (pts.length < 2 || trackPoints.length === 0) return [];
         const t0 = trackPoints[0].t;
         const t1 = trackPoints[trackPoints.length - 1].t;
         const span = t1 - t0 || 1;
         return pts.map(([lon, lat], i) => ({ lon, lat, t: t0 + (i / (pts.length - 1)) * span }));
-    }, [forecast.hindcastPath, trackPoints]);
+    }, [forecast.hindcastTrack, forecast.hindcastPath, trackPoints]);
 
     /* Balloon glides smoothly: along the predicted path in the future, and
      * along the likely (reconstructed) path in the past / at the live edge. */
