@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { fmt, type TelemetryRow } from '@/components/dashboard-v2/atoms';
 import { fmtAltitudeM } from '@/components/dashboard-v2/shared';
@@ -26,7 +27,7 @@ import {
     TrendDelta,
 } from './extras';
 import ThemeToggle from '@/components/dashboard-v2/ThemeToggle';
-import { BalloonMark, Divider, Group, StatTile, StatusChip } from './primitives';
+import { Divider, Group, StatTile, StatusChip } from './primitives';
 
 type FlightSummary = { durationMs: number | null; distanceKm: number };
 
@@ -196,13 +197,17 @@ export default function TelemetryV3Panel({ device, devices, onSelect, scrubRow, 
     return (
         <>
             <div style={{ borderBottom: '1px solid var(--t-border)', flexShrink: 0 }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: 9, padding: '15px 18px 0' }}>
-                    <a href="/" style={{ color: 'var(--t-path)', display: 'flex', textDecoration: 'none' }}>
-                        <BalloonMark />
+                <div style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '15px 18px 0' }}>
+                    <a href="/" className="tlm-brand-link" style={{ display: 'flex', flexShrink: 0, textDecoration: 'none' }}>
+                        <Image
+                            src="/stratolink-header-logo.png"
+                            alt="Stratolink"
+                            width={200}
+                            height={40}
+                            className="tlm-brand-logo"
+                            priority
+                        />
                     </a>
-                    <span className="disp" style={{ fontSize: 14, fontWeight: 700, letterSpacing: '0.2em', color: 'var(--t-text)' }}>
-                        STRATOLINK
-                    </span>
                     <span style={{ marginLeft: 'auto' }}>
                         <ThemeToggle />
                     </span>

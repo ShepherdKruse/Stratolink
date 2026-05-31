@@ -181,20 +181,14 @@ export function Group({
     );
 }
 
-export function BalloonMark() {
+/** Stratolink apex mark (Logo 01) — theme-aware via currentColor. */
+export function StratolinkMark({ size = 22 }: { size?: number }) {
     return (
-        <svg
-            width="17"
-            height="17"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="1.6"
-            strokeLinejoin="round"
-        >
-            <path d="M12 2c3.6 0 6.2 2.9 6.2 6.8 0 4.2-3.4 7.8-6.2 9.4C9.2 16.6 5.8 13 5.8 8.8 5.8 4.9 8.4 2 12 2Z" />
-            <path d="M10.6 18.2h2.8l-.5 2.2h-1.8z" fill="currentColor" stroke="none" />
-            <line x1="12" y1="20.4" x2="12" y2="22.4" />
+        <svg width={size} height={size} viewBox="0 0 32 32" fill="none" aria-hidden>
+            <rect x="14" y="4" width="4" height="4" fill="currentColor" />
+            <rect x="12" y="14" width="8" height="1.5" fill="currentColor" />
+            <rect x="9" y="19" width="14" height="1.5" fill="currentColor" />
+            <rect x="6" y="24" width="20" height="1.5" fill="currentColor" />
         </svg>
     );
 }

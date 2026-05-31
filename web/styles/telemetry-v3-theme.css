@@ -116,6 +116,19 @@
   font-feature-settings: 'ss01', 'cv11', 'tnum';
 }
 
+/* Same wordmark as stratolink.org nav */
+.tlm-brand-logo {
+  display: block;
+  height: 26px;
+  width: auto;
+  max-width: min(200px, 52vw);
+}
+
+[data-theme="dark"] .tlm-brand-logo {
+  filter: brightness(0) invert(1);
+  opacity: 0.94;
+}
+
 /* eyebrow / mono label */
 .eyebrow {
   font-family: var(--font-mono);

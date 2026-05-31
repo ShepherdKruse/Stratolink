@@ -488,7 +488,7 @@ export default function V2MissionMap({
                     <>
                         {/* Day/night terminator — rendered first so it dims only
                           * the basemap; coverage, paths and pins sit on top. */}
-                        <DayNightTerminator />
+                        <DayNightTerminator colorScheme={colorScheme} />
 
                         {/* Static TTN ground-station coverage — sits at
                           * the bottom of the layer stack so flight paths

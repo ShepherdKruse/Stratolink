@@ -13,16 +13,23 @@
 
 import { useEffect } from 'react';
 import { useMap } from 'react-map-gl/mapbox';
-import { TerminatorSource } from './terminatorSource';
+import { TerminatorSource, type TerminatorBasemap } from './terminatorSource';
 
 const SRC_ID = 'sl-terminator';
 const LAYER_ID = 'sl-terminator';
-const NIGHT_OPACITY = 0.45;          /* overall darkness of full night */
+const NIGHT_OPACITY_LIGHT = 0.45;
+const NIGHT_OPACITY_DARK = 0.72;
 const REFRESH_MS = 120_000;          /* terminator moves ~0.5°/2min */
 const OVERLAY_RE = /^(tm-coverage|v2-)/;  /* data layers that must stay above */
 
-export default function DayNightTerminator() {
+type DayNightTerminatorProps = {
+    /** Match map basemap — dark mode uses stronger day/night contrast. */
+    colorScheme?: TerminatorBasemap;
+};
+
+export default function DayNightTerminator({ colorScheme = 'light' }: DayNightTerminatorProps) {
     const { current: mapRef } = useMap();
+    const rasterOpacity = colorScheme === 'dark' ? NIGHT_OPACITY_DARK : NIGHT_OPACITY_LIGHT;
 
     useEffect(() => {
         const map = mapRef?.getMap();
@@ -40,16 +47,21 @@ export default function DayNightTerminator() {
 
         const ensure = () => {
             try {
-                if (!map.getSource(SRC_ID)) {
-                    map.addSource(SRC_ID, new TerminatorSource() as never);
+                const existing = map.getSource(SRC_ID) as unknown as TerminatorSource | undefined;
+                if (!existing) {
+                    map.addSource(SRC_ID, new TerminatorSource({ basemap: colorScheme }) as never);
+                } else {
+                    existing.setBasemap?.(colorScheme);
                 }
                 if (!map.getLayer(LAYER_ID)) {
                     map.addLayer({
                         id: LAYER_ID,
                         type: 'raster',
                         source: SRC_ID,
-                        paint: { 'raster-opacity': NIGHT_OPACITY, 'raster-fade-duration': 0 },
+                        paint: { 'raster-opacity': rasterOpacity, 'raster-fade-duration': 0 },
                     });
+                } else {
+                    map.setPaintProperty(LAYER_ID, 'raster-opacity', rasterOpacity);
                 }
                 position();
             } catch { /* style mid-load; retry on next styledata */ }
@@ -69,7 +81,7 @@ export default function DayNightTerminator() {
             try { if (map.getLayer(LAYER_ID)) map.removeLayer(LAYER_ID); } catch { /* ignore */ }
             try { if (map.getSource(SRC_ID)) map.removeSource(SRC_ID); } catch { /* ignore */ }
         };
-    }, [mapRef]);
+    }, [mapRef, colorScheme, rasterOpacity]);
 
     return null;
 }
