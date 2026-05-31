@@ -544,7 +544,12 @@
  * Scrubber affordances — make the slim timeline read as draggable:
  * ew-resize cursor on the rail, and the thumb grows on hover.
  * ────────────────────────────────────────────────────────────── */
-.sl-app .sl-scrub-track { cursor: ew-resize; }
+.sl-app .sl-scrub-track {
+    cursor: ew-resize;
+    /* A touch starting on the track drives the scrubber, not the page — so
+     * dragging it on mobile never scrolls/bounces the page up and down. */
+    touch-action: none;
+}
 .sl-app .sl-scrub-thumb { transition: transform 0.12s ease, box-shadow 0.12s ease; }
 .sl-event-rail {
     touch-action: none;
