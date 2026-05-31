@@ -628,6 +628,9 @@ function MapColumn({
     colorScheme: 'light' | 'dark';
     onPickTime: (t: number) => void;
 }) {
+    /* On mobile the timeline floats over the map's bottom edge; bias the camera
+     * up so the globe/track reads as centered in the visible area. */
+    const isMobile = useIsMobile();
     const trackPoints: V2FlightPoint[] = useMemo(() => visibleRows
         .filter(r => r.lat !== null && r.lon !== null)
         .map(r => ({ lat: r.lat as number, lon: r.lon as number, t: r.t })),
@@ -741,6 +744,7 @@ function MapColumn({
                 forecastEnsemble={showForecast ? forecast.ensemble : []}
                 forecastEllipses={showForecast ? forecast.ellipses : []}
                 colorScheme={colorScheme}
+                viewPadding={isMobile ? { bottom: 200 } : undefined}
                 pickPath={pickPath}
                 onPickTime={onPickTime}
             />

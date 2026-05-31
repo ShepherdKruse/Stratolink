@@ -18,7 +18,9 @@ import { TerminatorSource, type TerminatorBasemap } from './terminatorSource';
 const SRC_ID = 'sl-terminator';
 const LAYER_ID = 'sl-terminator';
 const NIGHT_OPACITY_LIGHT = 0.45;
-const NIGHT_OPACITY_DARK = 0.72;
+/* Tuned for the deep-gray dark basemap — the old 0.72 was set against a
+ * near-black map and now crushes the night side to pure black. */
+const NIGHT_OPACITY_DARK = 0.42;
 const REFRESH_MS = 120_000;          /* terminator moves ~0.5°/2min */
 const OVERLAY_RE = /^(tm-coverage|v2-)/;  /* data layers that must stay above */
 

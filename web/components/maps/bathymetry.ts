@@ -33,9 +33,13 @@ function buildPolarCap(): GeoJSON.Feature {
     return { type: 'Feature', properties: {}, geometry: { type: 'Polygon', coordinates: [ring] } };
 }
 
+type Scheme = 'light' | 'dark';
+
 /* Light continental shelf → deep navy trench. Mirrors the style's original
- * hsl(200, …) bathymetry palette, keyed to mapbox-bathymetry-v2's min_depth. */
-const DEPTH_COLOR = [
+ * hsl(200, …) bathymetry palette, keyed to mapbox-bathymetry-v2's min_depth.
+ * Dark mode: a deep blue-gray that darkens with depth, sitting just below the
+ * dark land so the ocean still reads as ocean (not a black void). */
+const DEPTH_COLOR_LIGHT = [
     'interpolate', ['linear'], ['get', 'min_depth'],
     0, 'hsl(200, 28%, 95%)',
     200, 'hsl(200, 28%, 93%)',
@@ -51,7 +55,30 @@ const DEPTH_COLOR = [
     10000, 'hsl(200, 25%, 54%)',
 ] as unknown;
 
-export function bathymetryAllZooms(map: Map): void {
+const DEPTH_COLOR_DARK = [
+    'interpolate', ['linear'], ['get', 'min_depth'],
+    0, 'hsl(210, 26%, 18%)',
+    200, 'hsl(210, 28%, 17%)',
+    1000, 'hsl(211, 30%, 15.5%)',
+    2000, 'hsl(212, 32%, 14%)',
+    3000, 'hsl(213, 33%, 13%)',
+    4000, 'hsl(214, 34%, 12%)',
+    5000, 'hsl(214, 35%, 11%)',
+    6000, 'hsl(215, 36%, 10%)',
+    7000, 'hsl(215, 37%, 9.5%)',
+    8000, 'hsl(216, 38%, 9%)',
+    9000, 'hsl(216, 39%, 8.5%)',
+    10000, 'hsl(217, 40%, 8%)',
+] as unknown;
+
+/* Polar-cap tone matching each scheme's shallow ocean. */
+const CAP_COLOR: Record<Scheme, string> = {
+    light: 'hsl(200, 40%, 90%)',
+    dark: 'hsl(210, 28%, 17%)',
+};
+
+export function bathymetryAllZooms(map: Map, scheme: Scheme = 'light'): void {
+    const DEPTH_COLOR = scheme === 'dark' ? DEPTH_COLOR_DARK : DEPTH_COLOR_LIGHT;
     let layers: LayerSpecification[] = [];
     try { layers = (map.getStyle()?.layers ?? []) as LayerSpecification[]; } catch { return; }
 
@@ -128,9 +155,9 @@ export function bathymetryAllZooms(map: Map): void {
                 type: 'fill',
                 source: CAP_SRC_ID,
                 paint: {
-                    /* Light ocean tone matching the base `water` fill so the cap
+                    /* Ocean tone matching the base `water` fill so the cap
                      * reads as ocean continuing to the pole, not a dark disc. */
-                    'fill-color': 'hsl(200, 40%, 90%)',
+                    'fill-color': CAP_COLOR[scheme],
                     'fill-antialias': false,
                 },
             }, capBeforeId);

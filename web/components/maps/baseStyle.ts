@@ -16,20 +16,38 @@
 import type { Map, LayerSpecification } from 'mapbox-gl';
 
 const TERRAIN_SRC = 'sl-terrain';
-const HIGHLIGHT = 'hsl(0, 0%, 100%)';
-const SHADOW = 'hsl(210, 12%, 30%)';   /* cool neutral, not the Studio yellow-olive */
+
+type Scheme = 'light' | 'dark';
+
+/* Relief tones + base water per basemap. Light: white highlights / cool-gray
+ * shadows over near-white land. Dark: cool-gray highlights / near-black shadows
+ * over the dark basemap, and a deep blue-gray ocean instead of the light blue. */
+const RELIEF: Record<Scheme, { highlight: string; shadow: string; water: string; waterway: string }> = {
+    light: {
+        highlight: 'hsl(0, 0%, 100%)',
+        shadow: 'hsl(210, 12%, 30%)',
+        water: 'hsl(200, 42%, 95%)',
+        waterway: 'hsl(200, 25%, 82%)',
+    },
+    dark: {
+        highlight: 'hsl(210, 14%, 52%)',
+        shadow: 'hsl(214, 30%, 5%)',
+        water: 'hsl(212, 30%, 15%)',
+        waterway: 'hsl(210, 18%, 30%)',
+    },
+};
 
 /* terrain-v2 `hillshade` bands, mirroring the Studio relief. Shadows nudged a
  * touch stronger than Studio (0.07/0.08) since light-v11's land is near-white,
  * where the white highlights barely register. */
-type Band = { id: string; level: number; color: string; opacity: number; fade: number };
+type Band = { id: string; level: number; kind: 'highlight' | 'shadow'; opacity: number; fade: number };
 const BANDS: Band[] = [
-    { id: 'sl-hs-hi-bright', level: 94, color: HIGHLIGHT, opacity: 0.15, fade: 18 },
-    { id: 'sl-hs-hi-med', level: 90, color: HIGHLIGHT, opacity: 0.15, fade: 18 },
-    { id: 'sl-hs-sh-faint', level: 89, color: SHADOW, opacity: 0.10, fade: 17 },
-    { id: 'sl-hs-sh-med', level: 78, color: SHADOW, opacity: 0.11, fade: 17 },
-    { id: 'sl-hs-sh-dark', level: 67, color: SHADOW, opacity: 0.13, fade: 17 },
-    { id: 'sl-hs-sh-extreme', level: 56, color: SHADOW, opacity: 0.13, fade: 17 },
+    { id: 'sl-hs-hi-bright', level: 94, kind: 'highlight', opacity: 0.15, fade: 18 },
+    { id: 'sl-hs-hi-med', level: 90, kind: 'highlight', opacity: 0.15, fade: 18 },
+    { id: 'sl-hs-sh-faint', level: 89, kind: 'shadow', opacity: 0.10, fade: 17 },
+    { id: 'sl-hs-sh-med', level: 78, kind: 'shadow', opacity: 0.11, fade: 17 },
+    { id: 'sl-hs-sh-dark', level: 67, kind: 'shadow', opacity: 0.13, fade: 17 },
+    { id: 'sl-hs-sh-extreme', level: 56, kind: 'shadow', opacity: 0.13, fade: 17 },
 ];
 
 function set(map: Map, id: string, prop: string, value: unknown): void {
@@ -39,14 +57,16 @@ function set(map: Map, id: string, prop: string, value: unknown): void {
     try { map.setPaintProperty(id, prop as never, value as never); } catch { /* ignore */ }
 }
 
-export function applyBaseStyle(map: Map): void {
+export function applyBaseStyle(map: Map, scheme: Scheme = 'light'): void {
+    const relief = RELIEF[scheme];
     let layers: LayerSpecification[] = [];
     try { layers = (map.getStyle()?.layers ?? []) as LayerSpecification[]; } catch { return; }
 
-    /* Ocean / rivers → light blue (light-v11 ships them gray). Bathymetry draws
-     * over the open ocean; this base blue covers lakes, rivers, shelf. */
-    set(map, 'water', 'fill-color', 'hsl(200, 42%, 95%)');
-    set(map, 'waterway', 'line-color', 'hsl(200, 25%, 82%)');
+    /* Ocean / rivers recolored per theme (the stock styles ship them gray /
+     * near-black). Bathymetry draws over the open ocean; this base tone covers
+     * lakes, rivers, shelf. */
+    set(map, 'water', 'fill-color', relief.water);
+    set(map, 'waterway', 'line-color', relief.waterway);
 
     /* Terrain hillshade from the public terrain-v2 tileset. */
     try {
@@ -67,7 +87,7 @@ export function applyBaseStyle(map: Map): void {
                 'source-layer': 'hillshade',
                 filter: ['==', ['get', 'level'], b.level],
                 paint: {
-                    'fill-color': b.color,
+                    'fill-color': b.kind === 'highlight' ? relief.highlight : relief.shadow,
                     'fill-antialias': false,
                     'fill-opacity': ['interpolate', ['linear'], ['zoom'], 15, b.opacity, b.fade, 0] as never,
                 },

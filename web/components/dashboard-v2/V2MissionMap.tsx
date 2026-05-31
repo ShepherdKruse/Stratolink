@@ -103,6 +103,10 @@ interface V2MissionMapProps {
     staleLine?: Array<[number, number]> | null;
     /** Basemap style — dark pairs with dashboard dark mode. */
     colorScheme?: 'light' | 'dark';
+    /** Camera padding (px) — insets the focal region so fits/centers avoid
+     *  overlapping chrome. On mobile a bottom inset lifts the globe clear of
+     *  the floating timeline so it reads as centered. */
+    viewPadding?: { top?: number; bottom?: number; left?: number; right?: number };
     /** GPS/hindcast path with timestamps — click map to scrub to nearest point. */
     pickPath?: PickablePathPoint[];
     onPickTime?: (t: number) => void;
@@ -140,10 +144,17 @@ export default function V2MissionMap({
     hindcastPath = [],
     staleLine = null,
     colorScheme = 'light',
+    viewPadding,
     pickPath = [],
     onPickTime,
 }: V2MissionMapProps) {
     const mapStyle = colorScheme === 'dark' ? MAP_STYLE_DARK : MAP_STYLE_LIGHT;
+    /* Track / forecast / receiver colors must shift with the basemap — the deep
+     * navy forecast and brick-red track read fine on the light map but vanish on
+     * the dark one, so dark mode swaps in brighter, higher-contrast hues. */
+    const C = colorScheme === 'dark'
+        ? { path: '#ff5b1f', forecast: '#5ba8ff', halo: 'rgba(255, 91, 31, 0.22)', recv: '74, 217, 155' }
+        : { path: '#a11515', forecast: '#08327d', halo: 'rgba(161, 21, 21, 0.14)', recv: '122, 155, 118' };
     const pathPickEnabled = pickPath.length >= 2 && Boolean(onPickTime);
     const mapRef = useRef<MapRef>(null);
     const [styleLoaded, setStyleLoaded] = useState(false);
@@ -172,6 +183,27 @@ export default function V2MissionMap({
 
     /* Style flag must reset when the projection forces a remount. */
     useEffect(() => { setStyleLoaded(false); }, [projection]);
+
+    /* Camera padding (focal-region inset). Folded into every fit/fly below so
+     * the bottom inset isn't clobbered when fitBounds rewrites map padding. */
+    const padTop = viewPadding?.top ?? 0;
+    const padBottom = viewPadding?.bottom ?? 0;
+    const padLeft = viewPadding?.left ?? 0;
+    const padRight = viewPadding?.right ?? 0;
+    const pad = (extra: number) => ({
+        top: padTop + extra,
+        bottom: padBottom + extra,
+        left: padLeft + extra,
+        right: padRight + extra,
+    });
+
+    /* Apply padding directly for the no-fit case (e.g. no data yet) so the
+     * globe still sits in the visible region rather than behind the chrome. */
+    useEffect(() => {
+        const map = mapRef.current;
+        if (!map || !styleLoaded) return;
+        try { map.setPadding({ top: padTop, bottom: padBottom, left: padLeft, right: padRight }); } catch { /* ignore */ }
+    }, [styleLoaded, padTop, padBottom, padLeft, padRight]);
 
     /* Initial view — center on first balloon if any, else continental US. */
     const initialView = useMemo(() => {
@@ -233,11 +265,12 @@ export default function V2MissionMap({
                     center: [lons[0], lats[0]],
                     zoom: 8,
                     duration: 1200,
+                    padding: pad(0),
                 });
             } else {
                 const bounds: LngLatBoundsLike = [[minLon, minLat], [maxLon, maxLat]];
                 map.fitBounds(bounds, {
-                    padding: { top: 60, bottom: 60, left: 60, right: 60 },
+                    padding: pad(60),
                     duration: 1200,
                     maxZoom: 11,
                 });
@@ -272,7 +305,7 @@ export default function V2MissionMap({
             const maxLat = rangeCenter.lat + latPad;
             if (minLat < -90 || maxLat > 90 || minLon < -180 || maxLon > 180) return;
             map.fitBounds([[minLon, minLat], [maxLon, maxLat]] as LngLatBoundsLike, {
-                padding: 50,
+                padding: pad(50),
                 duration: 800,
                 maxZoom: 11,
             });
@@ -495,12 +528,12 @@ export default function V2MissionMap({
                 onLoad={() => {
                     setStyleLoaded(true);
                     const m = mapRef.current?.getMap();
-                    if (m) { m.setFog(null); quietBasemapLabels(m); applyBaseStyle(m); bathymetryAllZooms(m); }
+                    if (m) { m.setFog(null); quietBasemapLabels(m); applyBaseStyle(m, colorScheme); bathymetryAllZooms(m, colorScheme); }
                 }}
                 onStyleData={() => {
                     setStyleLoaded(true);
                     const m = mapRef.current?.getMap();
-                    if (m) { m.setFog(null); quietBasemapLabels(m); applyBaseStyle(m); bathymetryAllZooms(m); }
+                    if (m) { m.setFog(null); quietBasemapLabels(m); applyBaseStyle(m, colorScheme); bathymetryAllZooms(m, colorScheme); }
                 }}
                 attributionControl={false}
                 logoPosition="bottom-left"
@@ -542,7 +575,7 @@ export default function V2MissionMap({
                                     type="line"
                                     layout={{ 'line-cap': 'round', 'line-join': 'round' }}
                                     paint={{
-                                        'line-color': '#a11515',
+                                        'line-color': C.path,
                                         'line-width': 2,
                                         'line-opacity': 0.85,
                                     }}
@@ -553,7 +586,7 @@ export default function V2MissionMap({
                                         type="line"
                                         layout={{ 'line-cap': 'round', 'line-join': 'round' }}
                                         paint={{
-                                            'line-color': '#a11515',
+                                            'line-color': C.path,
                                             'line-width': 14,
                                             'line-opacity': 0.01,
                                         }}
@@ -589,7 +622,7 @@ export default function V2MissionMap({
                                     id="v2-forecast-e90-stroke"
                                     type="line"
                                     paint={{
-                                        'line-color': '#08327d',
+                                        'line-color': C.forecast,
                                         'line-width': 1,
                                         'line-opacity': 0.4,
                                         'line-dasharray': [3, 4],
@@ -602,12 +635,12 @@ export default function V2MissionMap({
                                 <Layer
                                     id="v2-forecast-e50-fill"
                                     type="fill"
-                                    paint={{ 'fill-color': '#08327d', 'fill-opacity': 0.1 }}
+                                    paint={{ 'fill-color': C.forecast, 'fill-opacity': 0.1 }}
                                 />
                                 <Layer
                                     id="v2-forecast-e50-stroke"
                                     type="line"
-                                    paint={{ 'line-color': '#08327d', 'line-width': 1, 'line-opacity': 0.5 }}
+                                    paint={{ 'line-color': C.forecast, 'line-width': 1, 'line-opacity': 0.5 }}
                                 />
                             </Source>
                         )}
@@ -619,7 +652,7 @@ export default function V2MissionMap({
                                     id="v2-forecast-ensemble-lines"
                                     type="line"
                                     layout={{ 'line-cap': 'round', 'line-join': 'round' }}
-                                    paint={{ 'line-color': '#08327d', 'line-width': 1, 'line-opacity': 0.1 }}
+                                    paint={{ 'line-color': C.forecast, 'line-width': 1, 'line-opacity': 0.1 }}
                                 />
                             </Source>
                         )}
@@ -634,7 +667,7 @@ export default function V2MissionMap({
                                     id="v2-forecast-line"
                                     type="line"
                                     paint={{
-                                        'line-color': '#08327d',
+                                        'line-color': C.forecast,
                                         'line-opacity': 0.8,
                                         'line-dasharray': [2, 2],
                                         'line-width': [
@@ -670,7 +703,7 @@ export default function V2MissionMap({
                                         ],
                                         'circle-opacity': 1,
                                         'circle-stroke-width': 1.1,
-                                        'circle-stroke-color': '#a11515',
+                                        'circle-stroke-color': C.path,
                                     }}
                                 />
                             </Source>
@@ -688,9 +721,9 @@ export default function V2MissionMap({
                                           * red track is the only saturated line. */
                                         'line-color': [
                                             'interpolate', ['linear'], ['get', 'rssi'],
-                                            -130, 'rgba(122, 155, 118, 0.18)',
-                                            -100, 'rgba(122, 155, 118, 0.40)',
-                                             -85, 'rgba(122, 155, 118, 0.62)',
+                                            -130, `rgba(${C.recv}, 0.18)`,
+                                            -100, `rgba(${C.recv}, 0.40)`,
+                                             -85, `rgba(${C.recv}, 0.62)`,
                                         ],
                                         'line-width': [
                                             'interpolate', ['linear'], ['get', 'rssi'],
@@ -731,7 +764,7 @@ export default function V2MissionMap({
                                 type="circle"
                                 filter={['==', ['get', 'isActive'], 1]}
                                 paint={{
-                                    'circle-color': 'rgba(161, 21, 21, 0.14)',
+                                    'circle-color': C.halo,
                                     'circle-radius': 11,
                                     'circle-blur': 0.5,
                                 }}
@@ -742,7 +775,7 @@ export default function V2MissionMap({
                                 paint={{
                                     'circle-color': [
                                         'case', ['==', ['get', 'isActive'], 1],
-                                        '#a11515',
+                                        C.path,
                                         '#8a8f88',
                                     ],
                                     'circle-radius': [

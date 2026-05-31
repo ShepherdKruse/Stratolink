@@ -68,12 +68,12 @@
 
 /* Dark mission control — pairs with telemetry-v3 [data-theme="dark"] */
 .sl-app[data-theme="dark"] {
-    --sl-bg:      #05070a;
-    --sl-bg-1:    #0b0e13;
-    --sl-bg-2:    #14181f;
-    --sl-border:  rgba(255, 255, 255, 0.10);
-    --sl-border-hi: rgba(255, 255, 255, 0.18);
-    --sl-divider: rgba(255, 255, 255, 0.06);
+    --sl-bg:      #16191e;
+    --sl-bg-1:    #1c2027;
+    --sl-bg-2:    #262b33;
+    --sl-border:  rgba(255, 255, 255, 0.11);
+    --sl-border-hi: rgba(255, 255, 255, 0.19);
+    --sl-divider: rgba(255, 255, 255, 0.07);
 
     --sl-text:      #e6e8ec;
     --sl-text-hi:   #f3f4f6;
@@ -108,9 +108,9 @@
 
     --sl-shadow: 0 4px 12px rgba(0, 0, 0, 0.45);
 
-    --sl-chrome-paper: #0b0e13;
-    --sl-overlay-bg: rgba(11, 14, 19, 0.94);
-    --sl-overlay-bg-blur: rgba(11, 14, 19, 0.88);
+    --sl-chrome-paper: #1c2027;
+    --sl-overlay-bg: rgba(28, 32, 39, 0.94);
+    --sl-overlay-bg-blur: rgba(28, 32, 39, 0.88);
     --sl-forecast: #4da3ff;
     --sl-forecast-dashed: rgba(77, 163, 255, 0.45);
 }

@@ -59,20 +59,20 @@
 
 /* ---------- DARK (Shepherd mission control) ---------- */
 [data-theme="dark"] {
-  --t-stage:    #05070A;
-  --t-bg:       #05070A;
-  --t-panel:    #0B0E13;
-  --t-panel-2:  #14181F;
-  --t-raised:   #14181F;
+  --t-stage:    #14171C;   /* deep neutral gray, not stark black */
+  --t-bg:       #16191E;
+  --t-panel:    #1C2027;   /* panel surface — a lifted slate */
+  --t-panel-2:  #262B33;   /* recessed wells, chart tracks */
+  --t-raised:   #262B33;
 
-  --t-text:     #E6E8EC;
-  --t-text-2:   #B8BEC7;
-  --t-text-3:   #7C8491;
-  --t-text-4:   #4A525E;
+  --t-text:     #E8EAEE;
+  --t-text-2:   #BBC1CA;
+  --t-text-3:   #828A97;
+  --t-text-4:   #565E6B;
 
-  --t-border:   #2A313B;
-  --t-border-2: #353D49;
-  --t-hairline: rgba(255,255,255,0.07);
+  --t-border:   #343B45;
+  --t-border-2: #424A56;
+  --t-hairline: rgba(255,255,255,0.08);
 
   --t-accent:   #4DA3FF;
   --t-accent-soft: rgba(77,163,255,0.14);
@@ -83,14 +83,14 @@
   --t-critical: #FF4D4D;
   --t-critical-soft: rgba(255,77,77,0.14);
 
-  --t-muted:    #3C434E;
-  --t-track:    #0E1218;
-  --t-band:     rgba(77,163,255,0.09);
+  --t-muted:    #454D58;
+  --t-track:    #232830;
+  --t-band:     rgba(77,163,255,0.10);
   --t-grid:     rgba(255,255,255,0.05);
   --t-night:    rgba(255,255,255,0.045);
 
-  --t-map-sky:  #0B1016;
-  --t-map-land: #11161D;
+  --t-map-sky:  #16191E;
+  --t-map-land: #1C2027;
   --t-map-line: rgba(255,255,255,0.06);
   --t-path:     #FF5B1F;
   --t-receiver: #4AD99B;
