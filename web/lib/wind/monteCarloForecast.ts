@@ -4,6 +4,7 @@ import type { ForecastEllipse, ForecastGpsFix, MonteCarloForecastInput, Stratoli
 import {
     GAP_WIND_MODE,
     gpsGapHours,
+    monteCarloDriftToNow,
     resolveForecastStart,
     STALE_GPS_THRESHOLD_H,
 } from './staleGpsExtrapolation';
@@ -268,10 +269,30 @@ export async function computeMonteCarloForecast(input: MonteCarloForecastInput):
               }
             : undefined;
 
+    /* When GPS is stale, the forecast origin is dead-reckoned and therefore
+     * uncertain. Monte-Carlo that fix→now drift to get a CLOUD of plausible
+     * "now" positions, and seed each ensemble member from its own sample — so
+     * the origin uncertainty compounds with the wind uncertainty and the
+     * forward ellipses widen correctly. Fresh GPS keeps a single point origin. */
+    const originCloud = forecastStart.stale_gps
+        ? await monteCarloDriftToNow({
+              lastFix,
+              pressureHpa: levelHpa,
+              gapH: Math.min(gapH, 72),
+              bias,
+              samples: nEnsemble,
+              perturb: () => ({
+                  speedM: 1 + CFG.SPEED_SIGMA * gauss(),
+                  dirOffDeg: CFG.DIR_SIGMA_DEG * gauss(),
+              }),
+          })
+        : [];
+
     const ensemble: Array<Array<[number, number]>> = [];
     for (let i = 0; i < nEnsemble; i++) {
+        const origin = originCloud[i] ?? [forecastStart.lon, forecastStart.lat];
         ensemble.push(
-            integrateBalloonPath(forecastStart.lat, forecastStart.lon, gfs, bias, {
+            integrateBalloonPath(origin[1], origin[0], gfs, bias, {
                 speedM: 1 + CFG.SPEED_SIGMA * gauss(),
                 dirOffDeg: CFG.DIR_SIGMA_DEG * gauss(),
                 altPertHPa: CFG.ALT_SIGMA_HPA * gauss(),
