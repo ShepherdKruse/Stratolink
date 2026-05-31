@@ -69,7 +69,9 @@ interface V2MissionMapProps {
     activeId?: string | null;
     /** Trail for the active balloon, in chronological order. */
     flightPath?: V2FlightPoint[];
-    /** When set, only flight-path points with `t <= playbackT` are drawn. */
+    /** When set, the auto-fit camera only considers flight-path points with
+     *  `t <= playbackT` (so the view frames the flown-so-far track). Transmit
+     *  dots are always drawn regardless. */
     playbackT?: number | null;
     /** When true, the map auto-fits to the active balloon + path on changes. */
     autoFit?: boolean;
@@ -334,20 +336,18 @@ export default function V2MissionMap({
      * them: the route flown between sparse fixes is unknown, so the hindcast is
      * the honest estimate of the path between them. */
     const transmitPointsGeoJSON = useMemo(() => {
-        const pts = (playbackT === null
-            ? validFlightPath
-            : validFlightPath.filter(p => p.t <= playbackT)
-        );
-        if (pts.length === 0) return null;
+        /* Every transmitted fix is always shown — the dots mark where the
+         * balloon actually reported in, independent of the scrub position. */
+        if (validFlightPath.length === 0) return null;
         return {
             type: 'FeatureCollection' as const,
-            features: pts.map(p => ({
+            features: validFlightPath.map(p => ({
                 type: 'Feature' as const,
                 geometry: { type: 'Point' as const, coordinates: [p.lon, p.lat] as [number, number] },
                 properties: {},
             })),
         };
-    }, [validFlightPath, playbackT]);
+    }, [validFlightPath]);
 
     /* Forecast line — predicted nominal track ahead of the last fix. Filtered
      * to valid WGS84 so a bad endpoint can't crash Mapbox. */
