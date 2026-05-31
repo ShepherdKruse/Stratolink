@@ -26,6 +26,7 @@ import { useElementSize, fmtPressure, fmtAltitudeM } from './shared';
 import { useIsMobile } from '@/hooks/use-mobile';
 import V2MissionMap, { type V2Balloon, type V2FlightPoint, type V2Gateway } from './V2MissionMap';
 import { useDashboardTheme } from './dashboard-theme';
+import EventTimeline from './EventTimeline';
 import TelemetryV3Panel from './telemetry-v3/TelemetryV3Panel';
 
 interface FlightSummary {
@@ -133,15 +134,16 @@ export default function MissionControlScreen() {
                         scrubT={effectiveScrubT}
                         isFuture={isFuture}
                         colorScheme={theme}
+                        onPickTime={(t) => setScrubT(t)}
                     />
                     {/* Scrubber floats over the map bottom, clear of the
                       * attribution/logo row beneath it. */}
                     <div style={{ position: 'absolute', left: 12, right: 12, bottom: 40, zIndex: 6 }}>
-                        <Timeline
-                            visibleRows={visibleRows}
+                        <EventTimeline
+                            rows={visibleRows}
                             scrubT={scrubT}
                             onScrub={setScrubT}
-                            futureEndT={forecast.endT}
+                            launchedAt={selectedDevice?.launchedAt ?? null}
                             floating
                         />
                     </div>
@@ -195,15 +197,16 @@ export default function MissionControlScreen() {
                         scrubT={effectiveScrubT}
                         isFuture={isFuture}
                         colorScheme={theme}
+                        onPickTime={(t) => setScrubT(t)}
                     />
                     {/* Centered with side clearance so the Mapbox logo
                       * (bottom-left) and attribution (bottom-right) stay clear. */}
-                    <div style={{ position: 'absolute', left: 104, right: 104, bottom: 44, zIndex: 6 }}>
-                        <Timeline
-                            visibleRows={visibleRows}
+                    <div style={{ position: 'absolute', left: 12, right: 12, bottom: 44, zIndex: 6, maxWidth: 720, margin: '0 auto' }}>
+                        <EventTimeline
+                            rows={visibleRows}
                             scrubT={scrubT}
                             onScrub={setScrubT}
-                            futureEndT={forecast.endT}
+                            launchedAt={selectedDevice?.launchedAt ?? null}
                             floating
                         />
                     </div>
@@ -561,7 +564,16 @@ function ChartRow({ title, unit, color, rows, getY, scrubT, value, min, max }: {
 /* ──────────────────────────────────────────────────────────────
  * Map column — coverage + 3-state flight path + forecast.
  * ────────────────────────────────────────────────────────────── */
-function MapColumn({ visibleRows, scrubRow, selectedDevice, forecast, scrubT, isFuture, colorScheme }: {
+function MapColumn({
+    visibleRows,
+    scrubRow,
+    selectedDevice,
+    forecast,
+    scrubT,
+    isFuture,
+    colorScheme,
+    onPickTime,
+}: {
     visibleRows: TelemetryRow[];
     scrubRow: TelemetryRow | null;
     selectedDevice: DeviceSummary | null;
@@ -569,6 +581,7 @@ function MapColumn({ visibleRows, scrubRow, selectedDevice, forecast, scrubT, is
     scrubT: number | null;
     isFuture: boolean;
     colorScheme: 'light' | 'dark';
+    onPickTime: (t: number) => void;
 }) {
     const trackPoints: V2FlightPoint[] = useMemo(() => visibleRows
         .filter(r => r.lat !== null && r.lon !== null)
@@ -642,8 +655,33 @@ function MapColumn({ visibleRows, scrubRow, selectedDevice, forecast, scrubT, is
     const lastPacketT = trackPoints.length ? trackPoints[trackPoints.length - 1].t : null;
     const showForecast = scrubT !== null && lastPacketT !== null && scrubT >= lastPacketT;
 
+    const pickPath: V2FlightPoint[] = trackPoints.length >= 2 ? trackPoints : hindcastTrack;
+
     return (
         <div style={{ flex: 1, position: 'relative', minHeight: 0, minWidth: 0, overflow: 'hidden' }}>
+            {pickPath.length >= 2 && (
+                <div
+                    className="mono"
+                    style={{
+                        position: 'absolute',
+                        top: 14,
+                        left: '50%',
+                        transform: 'translateX(-50%)',
+                        zIndex: 5,
+                        fontSize: 9,
+                        letterSpacing: '0.1em',
+                        textTransform: 'uppercase',
+                        color: 'var(--sl-text-dim2)',
+                        background: 'var(--sl-overlay-bg-blur)',
+                        border: '1px solid var(--sl-border)',
+                        borderRadius: 4,
+                        padding: '4px 10px',
+                        pointerEvents: 'none',
+                    }}
+                >
+                    Click flight path to jump in time
+                </div>
+            )}
             <V2MissionMap
                 balloons={balloon ? [balloon] : []}
                 activeId={selectedDevice?.id ?? null}
@@ -658,6 +696,8 @@ function MapColumn({ visibleRows, scrubRow, selectedDevice, forecast, scrubT, is
                 forecastEnsemble={showForecast ? forecast.ensemble : []}
                 forecastEllipses={showForecast ? forecast.ellipses : []}
                 colorScheme={colorScheme}
+                pickPath={pickPath}
+                onPickTime={onPickTime}
             />
 
             <MapLegend

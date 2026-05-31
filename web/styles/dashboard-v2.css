@@ -546,6 +546,10 @@
  * ────────────────────────────────────────────────────────────── */
 .sl-app .sl-scrub-track { cursor: ew-resize; }
 .sl-app .sl-scrub-thumb { transition: transform 0.12s ease, box-shadow 0.12s ease; }
+.sl-event-rail {
+    touch-action: none;
+}
+
 .sl-app .sl-scrub-track:hover .sl-scrub-thumb {
     transform: scale(1.2);
     box-shadow: 0 1px 6px rgba(26, 28, 27, 0.32);
