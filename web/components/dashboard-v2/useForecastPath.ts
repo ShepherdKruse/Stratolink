@@ -45,6 +45,10 @@ export interface UseForecastPathResult {
      *  to position the scrubbed balloon marker in sync with the transmit dots.
      *  Empty for forecasts computed before this field existed. */
     hindcastTrack: HindcastTrackPoint[];
+    /** Wind-integrated "predicted hindcast" curve (last fix → now). Empty unless
+     *  GPS is stale (and the forecast carries the field). Drawn instead of a
+     *  straight last-fix→now connector. */
+    predictedHindcast: ForecastPath;
     /** True when the last GPS fix is stale and the origin is dead-reckoned. */
     staleGps: boolean;
     /** Epoch ms of the forecast origin (path[0]'s time). Null if unknown. */
@@ -59,10 +63,15 @@ export interface UseForecastPathResult {
 /* Re-poll occasionally so a freshly-computed forecast appears without a reload.
  * The stored forecast only changes on the cron cadence, so this is gentle. */
 const POLL_MS = 5 * 60 * 1000;
+/* While the server reports a forecast is still computing (HTTP 202), poll fast
+ * so it appears promptly — but cap the fast window so a device that can't be
+ * forecast (e.g. no telemetry) doesn't hammer the endpoint. */
+const FAST_POLL_MS = 8 * 1000;
+const MAX_FAST_POLLS = 15; /* ~2 min, then settle to POLL_MS */
 
 const EMPTY: Omit<UseForecastPathResult, 'loading'> = {
     path: [], ensemble: [], ellipses: [], hindcastPath: [], hindcastTrack: [],
-    staleGps: false, originT: null, endT: null, generatedAt: null,
+    predictedHindcast: [], staleGps: false, originT: null, endT: null, generatedAt: null,
 };
 
 /** Keep only well-formed [lon, lat] pairs in WGS84 range. */
@@ -106,13 +115,24 @@ export function useForecastPath(deviceId: string | null): UseForecastPathResult 
             return;
         }
         let cancelled = false;
+        let timer: ReturnType<typeof setTimeout> | null = null;
+        let fastPolls = 0;
         setLoading(true);
 
         async function load() {
+            let nextDelay = POLL_MS;
+            let pending = false;
             try {
                 const res = await fetch(`/api/forecast?device=${encodeURIComponent(deviceId!)}`);
+                if (res.status === 202) {
+                    /* Server is computing in the background — poll fast for a
+                     * short window, then settle to the slow cadence. The client
+                     * never computes; it only reads. */
+                    pending = true;
+                    nextDelay = fastPolls++ < MAX_FAST_POLLS ? FAST_POLL_MS : POLL_MS;
+                    return;
+                }
                 if (!res.ok) {
-                    /* 404 = no forecast available. Treat as "nothing to draw". */
                     if (!cancelled) setState(EMPTY);
                     return;
                 }
@@ -147,21 +167,25 @@ export function useForecastPath(deviceId: string | null): UseForecastPathResult 
                     ellipses,
                     hindcastPath: cleanPath(data?.observed?.reconstructed_path),
                     hindcastTrack: cleanTrack(data?.observed?.reconstructed_track),
+                    predictedHindcast: cleanPath(data?.predicted_hindcast?.path),
                     staleGps: Boolean(data?.stale_gps),
                     originT,
                     endT,
                     generatedAt: typeof data?.generated_at === 'string' ? data.generated_at : null,
                 });
+                fastPolls = 0;
             } catch {
                 if (!cancelled) setState(EMPTY);
             } finally {
-                if (!cancelled) setLoading(false);
+                if (!cancelled) {
+                    setLoading(pending);
+                    timer = setTimeout(load, nextDelay);
+                }
             }
         }
 
         load();
-        const interval = setInterval(load, POLL_MS);
-        return () => { cancelled = true; clearInterval(interval); };
+        return () => { cancelled = true; if (timer) clearTimeout(timer); };
     }, [deviceId]);
 
     return { ...state, loading };

@@ -143,6 +143,77 @@ export async function integrateHourlyDriftForward(
     return path;
 }
 
+/** Persistent per-replay wind perturbation (matches the forward ensemble's). */
+export type DriftPerturbation = { speedM: number; dirOffDeg: number };
+
+/**
+ * Monte-Carlo the fix→now dead-reckon: replay the gap integration `samples`
+ * times, each with a persistent (per-replay, not per-step) wind perturbation,
+ * sharing ONE fetched hourly series anchored at the fix. Returns the cloud of
+ * "now" endpoints — the origin distribution used to seed the forward forecast,
+ * so the dead-reckon uncertainty propagates into the forward ellipses.
+ *
+ * Persistent (not per-step) perturbation because the dominant dead-reckon error
+ * is a correlated speed/direction bias sustained over the whole gap — matching
+ * how the forward ensemble perturbs each member.
+ */
+export async function monteCarloDriftToNow(opts: {
+    lastFix: ForecastGpsFix;
+    pressureHpa: number;
+    gapH: number;
+    bias: BiasLike;
+    samples: number;
+    perturb: () => DriftPerturbation;
+    now?: Date;
+}): Promise<Array<[number, number]>> {
+    const { lastFix, gapH, bias, samples } = opts;
+    const levelHpa = snapPressureHpa(opts.pressureHpa);
+    const startTime = new Date(lastFix.time_utc);
+    const stepMinutes = BALLOON_STEP_HOURS * 60;
+    const steps = Math.round((gapH * 60) / stepMinutes);
+    if (steps < 1 || samples < 1) return [];
+
+    const anchorMs = startTime.getTime();
+    const hoursAgo = ((opts.now?.getTime() ?? Date.now()) - anchorMs) / 3_600_000;
+    const pastDays = Math.min(92, Math.ceil((Math.max(0, hoursAgo) + gapH) / 24) + 2);
+    const hoursBeyondNow = Math.max(0, gapH - hoursAgo);
+    const forecastDays = Math.min(16, Math.max(2, Math.ceil(hoursBeyondNow / 24) + 2));
+
+    /* One fetch at the fix, reused across all replays — an acceptable
+     * simplification for an uncertainty cloud (vs. the mean drift's along-path
+     * refetch). */
+    const series = await fetchHourlyWindAtPoint(lastFix.lat, lastFix.lon, levelHpa, {
+        pastDays,
+        forecastDays,
+    });
+    if (!series.length) return [];
+
+    const stepSec = stepMinutes * 60;
+    const ends: Array<[number, number]> = [];
+    for (let m = 0; m < samples; m++) {
+        const pert = opts.perturb();
+        const replayBias: BiasLike = {
+            ...bias,
+            speedMult: bias.speedMult * pert.speedM,
+            dirOffsetDeg: bias.dirOffsetDeg + pert.dirOffDeg,
+        };
+        let lat = lastFix.lat;
+        let lon = lastFix.lon;
+        for (let s = 1; s <= steps; s++) {
+            const when = new Date(anchorMs + s * stepMinutes * 60_000);
+            const sample = windAtOrBefore(series, when);
+            if (!sample) break;
+            let { u, v } = meteoWindToUV(sample.speedMs, sample.directionDeg);
+            ({ u, v } = applyBiasToWind(u, v, replayBias));
+            const cosLat = Math.max(Math.cos((lat * Math.PI) / 180), 0.05);
+            lat += (v * stepSec) / 111_320;
+            lon += (u * stepSec) / (111_320 * cosLat);
+        }
+        ends.push([round4(lon), round4(lat)]);
+    }
+    return ends;
+}
+
 export type ResolvedForecastStart = {
     lat: number;
     lon: number;
