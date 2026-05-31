@@ -152,7 +152,7 @@ export default function MissionControlScreen() {
     if (isMobile) {
         return (
             <div className="sl-app" data-theme={theme} style={{ position: 'relative', display: 'flex', flexDirection: 'column', height: '100dvh', minHeight: 0, overflow: 'hidden' }}>
-                <div className="tlm-panel" style={{ flexShrink: 0, maxHeight: '42vh', overflow: 'hidden', display: 'flex', flexDirection: 'column', borderBottom: '1px solid var(--sl-border)' }}>
+                <div className="tlm-panel" style={{ flexShrink: 0, height: 'auto', maxHeight: '42vh', overflow: 'hidden', display: 'flex', flexDirection: 'column', borderBottom: '1px solid var(--sl-border)' }}>
                     <div className="tlm-scroll" style={{ overflowY: 'auto', minHeight: 0 }}>
                         <TelemetryV3Panel
                             device={selectedDevice}
@@ -162,6 +162,7 @@ export default function MissionControlScreen() {
                             summary={flightSummary}
                             rows={rows}
                             isFuture={noReading}
+                            variant="summary"
                         />
                     </div>
                 </div>
@@ -201,6 +202,7 @@ export default function MissionControlScreen() {
                             summary={flightSummary}
                             rows={rows}
                             isFuture={noReading}
+                            variant="charts"
                         />
                     </div>
                 </ChartsDrawer>
@@ -366,12 +368,11 @@ function ChartsDrawer({ open, onToggle, children }: {
                     padding: 0,
                 }}
             >
-                <span style={{ width: 36, height: 4, borderRadius: 2, background: 'var(--sl-text-dim3)' }} />
                 <span style={{
-                    fontSize: 9, letterSpacing: '0.14em', textTransform: 'uppercase',
+                    fontSize: 10, letterSpacing: '0.14em', textTransform: 'uppercase',
                     color: 'var(--sl-text-dim2)', fontFamily: 'var(--sl-sans)',
                 }}>
-                    {open ? 'Hide charts ▾' : 'Charts ▴'}
+                    {open ? 'Hide charts ▾' : 'View Charts ▴'}
                 </span>
             </button>
             <div style={{ flex: 1, minHeight: 0, display: 'flex', flexDirection: 'column' }}>

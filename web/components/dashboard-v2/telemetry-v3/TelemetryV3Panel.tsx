@@ -37,6 +37,12 @@ export type TelemetryV3PanelProps = {
     /** True when there's no live reading at the cursor — out in the forecast,
      *  or sitting in a transmission gap. Point-in-time readings are blanked. */
     isFuture?: boolean;
+    /** Controls which slices of the panel render. 'full' (default, desktop)
+     *  shows everything. On mobile the panel is split: 'summary' is the
+     *  always-visible top block (brand, device, top-level metrics, link
+     *  status) and 'charts' is the pull-up drawer (chart sections + footer,
+     *  no header). */
+    variant?: 'full' | 'summary' | 'charts';
 };
 
 /** Live-updating "time since last contact", value only (for a key metric). */
@@ -130,7 +136,12 @@ function TiltIcon({ deg, color }: { deg: number; color: string }) {
     );
 }
 
-export default function TelemetryV3Panel({ device, devices, onSelect, scrubRow, summary, rows, isFuture = false }: TelemetryV3PanelProps) {
+export default function TelemetryV3Panel({ device, devices, onSelect, scrubRow, summary, rows, isFuture = false, variant = 'full' }: TelemetryV3PanelProps) {
+    const showHeader = variant !== 'charts';
+    const showBody = variant !== 'summary';
+    /* The mobile summary header is tightened vertically — it's the only thing
+     * visible above the map, so it earns its space. */
+    const compact = variant === 'summary';
     const flight = useMemo(() => buildFlightSeries(rows), [rows]);
 
     /* Point-in-time readings: blanked when scrubbed past the last transmission
@@ -180,8 +191,9 @@ export default function TelemetryV3Panel({ device, devices, onSelect, scrubRow, 
 
     return (
         <>
+            {showHeader && (
             <div style={{ borderBottom: '1px solid var(--t-border)', flexShrink: 0 }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: 10, padding: '15px 18px 0' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 10, padding: compact ? '11px 18px 0' : '15px 18px 0' }}>
                     <a href="/" className="tlm-brand-link" style={{ display: 'flex', flexShrink: 0, textDecoration: 'none' }}>
                         <Image
                             src="/stratolink-header-logo.png"
@@ -196,9 +208,9 @@ export default function TelemetryV3Panel({ device, devices, onSelect, scrubRow, 
                         <ThemeToggle />
                     </span>
                 </div>
-                <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', padding: '14px 18px 0' }}>
+                <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', padding: compact ? '9px 18px 0' : '14px 18px 0' }}>
                     <div style={{ minWidth: 0, flex: 1 }}>
-                        <div className="eyebrow" style={{ color: 'var(--t-text-3)', marginBottom: 6 }}>
+                        <div className="eyebrow" style={{ color: 'var(--t-text-3)', marginBottom: compact ? 3 : 6 }}>
                             Monitoring
                         </div>
                         {/* Custom trigger (big name + caret) with a transparent
@@ -206,7 +218,7 @@ export default function TelemetryV3Panel({ device, devices, onSelect, scrubRow, 
                           * look across browsers while keeping the native dropdown
                           * (and its normal-sized option list). */}
                         <div style={{ position: 'relative', display: 'inline-flex', alignItems: 'center', gap: 7, maxWidth: '100%' }}>
-                            <span className="disp" style={{ fontSize: 24, fontWeight: 600, color: 'var(--t-text)', lineHeight: 1.1, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                            <span className="disp" style={{ fontSize: compact ? 20 : 24, fontWeight: 600, color: 'var(--t-text)', lineHeight: 1.1, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
                                 {device?.callsign ?? device?.id ?? '—'}
                             </span>
                             <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="var(--t-text-3)" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0 }} aria-hidden>
@@ -243,7 +255,7 @@ export default function TelemetryV3Panel({ device, devices, onSelect, scrubRow, 
                         )}
                     </div>
                 </div>
-                <div style={{ padding: '12px 18px 0', display: 'flex', alignItems: 'center', gap: 8, flexWrap: 'wrap' }}>
+                <div style={{ padding: compact ? '8px 18px 0' : '12px 18px 0', display: 'flex', alignItems: 'center', gap: 8, flexWrap: 'wrap' }}>
                     {device?.status && (
                         <>
                             <HeaderStatus status="nominal" label={String(device.status)} />
@@ -258,24 +270,27 @@ export default function TelemetryV3Panel({ device, devices, onSelect, scrubRow, 
                     style={{
                         display: 'grid',
                         gridTemplateColumns: 'repeat(auto-fit, minmax(72px, 1fr))',
-                        gap: '16px 18px',
-                        padding: '16px 18px 18px',
+                        gap: compact ? '10px 18px' : '16px 18px',
+                        padding: compact ? '11px 18px 10px' : '16px 18px 12px',
                     }}
                 >
-                    <Metric label="Total time" value={summary.durationMs != null ? fmt.duration(summary.durationMs) : '—'} />
+                    <Metric label="Flight time" value={summary.durationMs != null ? fmt.duration(summary.durationMs) : '—'} />
                     <Metric label="Total dist" value={Math.round(summary.distanceKm).toLocaleString('en-US')} unit="km" />
                     <Metric label="Last contact" value={<LastContactValue lastContactT={device?.lastContactT ?? null} />} />
                 </div>
+                <div style={{ padding: compact ? '0 18px 12px' : '0 18px 16px' }}>
+                    <ConnectionStatus connected={!isFuture} />
+                </div>
             </div>
+            )}
 
+            {showBody && (
+            <>
             <Group
                 index="01"
                 title="Flight path"
                 gkey="flight"
             >
-                <div style={{ padding: '4px 0 2px' }}>
-                    <ConnectionStatus connected={!isFuture} />
-                </div>
                 <div style={{ padding: '13px 0' }}>
                     <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 8 }}>
                         <span className="eyebrow" style={{ color: 'var(--t-text-2)' }}>
@@ -396,6 +411,8 @@ export default function TelemetryV3Panel({ device, devices, onSelect, scrubRow, 
                         {stamp(flight.times[flight.times.length - 1])}
                     </span>
                 </div>
+            )}
+            </>
             )}
         </>
     );
