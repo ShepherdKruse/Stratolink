@@ -1,0 +1,179 @@
+/* ============================================================
+   STRATOLINK · Telemetry panel theming
+   Light (default — sits beside the muted map) + Dark (Shepherd
+   mission-control) variants, both grounded in the
+   Shepherd Space Systems design system.
+   ============================================================ */
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+
+:root {
+  --font-display: 'Space Grotesk', ui-sans-serif, -apple-system, sans-serif;
+  --font-body:    'Inter', ui-sans-serif, -apple-system, sans-serif;
+  --font-mono:    'JetBrains Mono', ui-monospace, Menlo, monospace;
+
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* ---------- LIGHT (default) ---------- */
+[data-theme="light"] {
+  --t-stage:    #E4E8EC;   /* outer letterbox / map basemap base */
+  --t-bg:       #EDEFF2;   /* app background */
+  --t-panel:    #FFFFFF;   /* panel surface */
+  --t-panel-2:  #F6F7F9;   /* recessed wells, chart tracks */
+  --t-raised:   #FCFCFD;
+
+  --t-text:     #181D24;   /* primary */
+  --t-text-2:   #5C6470;   /* secondary */
+  --t-text-3:   #969DA8;   /* tertiary / units */
+  --t-text-4:   #B7BDC6;   /* faint */
+
+  --t-border:   #E4E8ED;
+  --t-border-2: #D4D9E0;
+  --t-hairline: rgba(24,29,36,0.07);
+
+  --t-accent:   #1E6FD9;   /* signal — data, current value, links */
+  --t-accent-soft: rgba(30,111,217,0.10);
+  --t-nominal:  #1C8A5A;
+  --t-nominal-soft: rgba(28,138,90,0.12);
+  --t-warn:     #B0741A;
+  --t-warn-soft: rgba(176,116,26,0.13);
+  --t-critical: #B23527;   /* muted brick red — matches map path */
+  --t-critical-soft: rgba(178,53,39,0.10);
+
+  --t-muted:    #C6CCD4;   /* historical trend bars */
+  --t-track:    #F0F2F4;   /* chart plot background */
+  --t-band:     rgba(30,111,217,0.07);  /* target zone */
+  --t-grid:     rgba(24,29,36,0.05);
+  --t-night:    rgba(24,29,36,0.055);   /* night shading on power chart */
+
+  --t-map-sky:  #DCE3E9;
+  --t-map-land: #F3F5F7;
+  --t-map-line: rgba(24,29,36,0.10);
+  --t-path:     #A23A2D;
+  --t-receiver: #4F7A4B;
+
+  --t-shadow:   0 1px 2px rgba(24,29,36,0.05), 0 8px 24px rgba(24,29,36,0.06);
+  --t-tooltip-bg: #181D24;
+  --t-tooltip-fg: #F5F6F8;
+}
+
+/* ---------- DARK (Shepherd mission control) ---------- */
+[data-theme="dark"] {
+  --t-stage:    #05070A;
+  --t-bg:       #05070A;
+  --t-panel:    #0B0E13;
+  --t-panel-2:  #14181F;
+  --t-raised:   #14181F;
+
+  --t-text:     #E6E8EC;
+  --t-text-2:   #B8BEC7;
+  --t-text-3:   #7C8491;
+  --t-text-4:   #4A525E;
+
+  --t-border:   #2A313B;
+  --t-border-2: #353D49;
+  --t-hairline: rgba(255,255,255,0.07);
+
+  --t-accent:   #4DA3FF;
+  --t-accent-soft: rgba(77,163,255,0.14);
+  --t-nominal:  #4AD99B;
+  --t-nominal-soft: rgba(74,217,155,0.14);
+  --t-warn:     #F5B544;
+  --t-warn-soft: rgba(245,181,68,0.15);
+  --t-critical: #FF4D4D;
+  --t-critical-soft: rgba(255,77,77,0.14);
+
+  --t-muted:    #3C434E;
+  --t-track:    #0E1218;
+  --t-band:     rgba(77,163,255,0.09);
+  --t-grid:     rgba(255,255,255,0.05);
+  --t-night:    rgba(255,255,255,0.045);
+
+  --t-map-sky:  #0B1016;
+  --t-map-land: #11161D;
+  --t-map-line: rgba(255,255,255,0.06);
+  --t-path:     #FF5B1F;
+  --t-receiver: #4AD99B;
+
+  --t-shadow:   0 4px 12px rgba(0,0,0,0.5), 0 1px 0 rgba(255,255,255,0.02) inset;
+  --t-tooltip-bg: #1E242D;
+  --t-tooltip-fg: #E6E8EC;
+}
+
+* { box-sizing: border-box; }
+
+/* Scoped to the v3 left panel — does not override the global dashboard shell. */
+.tlm-panel {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  min-height: 0;
+  background: var(--t-panel);
+  color: var(--t-text);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-feature-settings: 'ss01', 'cv11', 'tnum';
+}
+
+/* eyebrow / mono label */
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.mono { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+.disp { font-family: var(--font-display); }
+
+::selection { background: var(--t-accent-soft); }
+
+/* slim scrollbar for the panel */
+.tlm-scroll::-webkit-scrollbar { width: 9px; }
+.tlm-scroll::-webkit-scrollbar-track { background: transparent; }
+.tlm-scroll::-webkit-scrollbar-thumb {
+  background: var(--t-border-2);
+  border-radius: 99px;
+  border: 2px solid var(--t-panel);
+}
+.tlm-scroll::-webkit-scrollbar-thumb:hover { background: var(--t-text-4); }
+
+@keyframes tlm-pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%      { opacity: 0.35; transform: scale(0.82); }
+}
+.live-dot { animation: tlm-pulse 1.8s var(--ease) infinite; }
+
+@keyframes tlm-fade-in {
+  from { opacity: 0; transform: translateY(-3px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes tlm-sway {
+  0%, 100% { transform: rotate(-7deg); }
+  50%      { transform: rotate(7deg); }
+}
+.att-sway { animation: tlm-sway 3.4s var(--ease) infinite; }
+
+@keyframes tlm-flow {
+  0%   { left: 4%;  opacity: 0; }
+  18%  { opacity: 1; }
+  82%  { opacity: 1; }
+  100% { left: 96%; opacity: 0; }
+}
+.flow-dot {
+  position: absolute;
+  top: 50%;
+  width: 5px; height: 5px;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  animation: tlm-flow 1.6s linear infinite;
+}
+
+@keyframes tlm-halo {
+  0%, 100% { opacity: 0.5; transform: translate(-50%, -50%) scale(0.9); }
+  50%      { opacity: 0.9; transform: translate(-50%, -50%) scale(1.12); }
+}
+.day-halo { animation: tlm-halo 2.6s var(--ease) infinite; }

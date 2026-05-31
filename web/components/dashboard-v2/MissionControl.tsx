@@ -25,6 +25,7 @@ import { useForecastPath, type UseForecastPathResult } from './useForecastPath';
 import { useElementSize, fmtPressure, fmtAltitudeM } from './shared';
 import { useIsMobile } from '@/hooks/use-mobile';
 import V2MissionMap, { type V2Balloon, type V2FlightPoint, type V2Gateway } from './V2MissionMap';
+import TelemetryV3Panel from './telemetry-v3/TelemetryV3Panel';
 
 interface FlightSummary {
     /** Span from first to last loaded packet, ms. Null when no data. */
@@ -109,14 +110,18 @@ export default function MissionControlScreen() {
     if (isMobile) {
         return (
             <div className="sl-app" style={{ position: 'relative', display: 'flex', flexDirection: 'column', height: '100dvh', minHeight: 0, overflow: 'hidden' }}>
-                <BrandStrip />
-                <BalloonCard
-                    device={selectedDevice}
-                    devices={devices}
-                    onSelect={handleSelectDevice}
-                    scrubRow={scrubRow}
-                    summary={flightSummary}
-                />
+                <div className="tlm-panel" data-theme="light" style={{ flexShrink: 0, maxHeight: '42vh', overflow: 'hidden', display: 'flex', flexDirection: 'column', borderBottom: '1px solid var(--sl-border)' }}>
+                    <div className="tlm-scroll" style={{ overflowY: 'auto', minHeight: 0 }}>
+                        <TelemetryV3Panel
+                            device={selectedDevice}
+                            devices={devices}
+                            onSelect={handleSelectDevice}
+                            scrubRow={scrubRow}
+                            summary={flightSummary}
+                            rows={rows}
+                        />
+                    </div>
+                </div>
                 <div style={{ position: 'relative', display: 'flex', flex: 1, minHeight: 0 }}>
                     <MapColumn
                         visibleRows={visibleRows}
@@ -142,12 +147,16 @@ export default function MissionControlScreen() {
                   * covers the charts drawer. */}
                 <div style={{ height: DRAWER_HANDLE_H, flexShrink: 0 }} />
                 <ChartsDrawer open={chartsOpen} onToggle={() => setChartsOpen((v) => !v)}>
-                    <ChartStack
-                        visibleRows={visibleRows}
-                        rows={rows}
-                        scrubT={effectiveScrubT}
-                        scrubRow={scrubRow}
-                    />
+                    <div className="tlm-panel tlm-scroll" data-theme="light" style={{ flex: 1, minHeight: 0, overflowY: 'auto' }}>
+                        <TelemetryV3Panel
+                            device={selectedDevice}
+                            devices={devices}
+                            onSelect={handleSelectDevice}
+                            scrubRow={scrubRow}
+                            summary={flightSummary}
+                            rows={rows}
+                        />
+                    </div>
                 </ChartsDrawer>
             </div>
         );
@@ -217,28 +226,28 @@ function LeftColumn({
     scrubT: number | null;
 }) {
     return (
-        <div style={{
-            display: 'flex',
-            flexDirection: 'column',
-            minHeight: 0,
-            minWidth: 0,
-            borderRight: '1px solid var(--sl-border)',
-            background: 'var(--sl-bg-1)',
-        }}>
-            <BrandStrip />
-            <BalloonCard
-                device={device}
-                devices={devices}
-                onSelect={onSelect}
-                scrubRow={scrubRow}
-                summary={summary}
-            />
-            <ChartStack
-                visibleRows={visibleRows}
-                rows={rows}
-                scrubT={scrubT}
-                scrubRow={scrubRow}
-            />
+        <div
+            className="tlm-panel"
+            data-theme="light"
+            style={{
+                display: 'flex',
+                flexDirection: 'column',
+                minHeight: 0,
+                minWidth: 0,
+                borderRight: '1px solid var(--t-border)',
+                background: 'var(--t-panel)',
+            }}
+        >
+            <div className="tlm-scroll" style={{ flex: 1, minHeight: 0, overflowY: 'auto', overflowX: 'hidden' }}>
+                <TelemetryV3Panel
+                    device={device}
+                    devices={devices}
+                    onSelect={onSelect}
+                    scrubRow={scrubRow}
+                    summary={summary}
+                    rows={rows}
+                />
+            </div>
         </div>
     );
 }

@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { JetBrains_Mono } from 'next/font/google';
 import '@/styles/dashboard-v2.css';
+import '@/styles/telemetry-v3-theme.css';
 
 /* Monospace drives the entire interface — labels, headings, data — for a
  * precise technical-instrument character. */
