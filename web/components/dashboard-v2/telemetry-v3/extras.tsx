@@ -385,8 +385,8 @@ export function AttitudeBubble({ attitude }: { attitude: PayloadAttitude | null 
     const animate = status !== 'nominal';
 
     const detail = attitude.reliable
-        ? `${Math.round(attitude.tiltDeg)}° from vertical · ${attitude.horizontalMs2.toFixed(1)} m/s² horizontal`
-        : `${attitude.horizontalMs2.toFixed(1)} m/s² horizontal · ${Math.abs(attitude.totalMs2 - 9.8).toFixed(1)} m/s² off 1g`;
+        ? `${Math.round(attitude.tiltDeg)}° from vertical · ${attitude.horizontalMs2.toFixed(1)} m/s² in X/Z`
+        : `${attitude.horizontalMs2.toFixed(1)} m/s² in X/Z · ${Math.abs(attitude.totalMs2 - 9.8).toFixed(1)} m/s² off 1g`;
 
     return (
         <div style={{ display: 'flex', alignItems: 'center', gap: 14 }}>
@@ -412,7 +412,7 @@ export function AttitudeBubble({ attitude }: { attitude: PayloadAttitude | null 
                 </div>
                 {!attitude.reliable && (
                     <div className="eyebrow" style={{ color: 'var(--t-text-4)', fontSize: 8.5, marginTop: 5, maxWidth: 200, lineHeight: 1.35 }}>
-                        Not near 1g — tilt angle not trusted (shock, spin, or freefall)
+                        Not near 1g or Y not dominant — tilt not trusted (shock, spin, or freefall)
                     </div>
                 )}
             </div>

@@ -66,23 +66,30 @@ export function buildFlightSeries(rows: TelemetryRow[]): FlightSeries {
 export type PayloadAttitude = {
     /** Degrees from vertical (0 = upright). Meaningful when `reliable`. */
     tiltDeg: number;
+    /** Combined X/Z acceleration (m/s²) — swing plane, Y is down. */
     horizontalMs2: number;
     totalMs2: number;
     /** True when |a| ≈ 1g — quasi-static, so tilt from gravity is meaningful. */
     reliable: boolean;
 };
 
-/** Tilt from gravity vector; null when accel axes are missing. */
+/**
+ * Tilt from gravity vector; null when accel axes are missing.
+ *
+ * Board mount: +Y points down (gravity sits on Y). Pendulum motion shows up
+ * in X and Z — do not use X–Y or Z as the vertical reference.
+ */
 export function computePayloadAttitude(
     ax: number | null,
     ay: number | null,
     az: number | null,
 ): PayloadAttitude | null {
     if (ax == null || ay == null || az == null) return null;
-    const horizontal = Math.hypot(ax, ay);
-    const total = Math.hypot(horizontal, az);
-    const tiltDeg = (Math.atan2(horizontal, Math.abs(az)) * 180) / Math.PI;
-    const reliable = total >= 7 && total <= 12.5;
+    const horizontal = Math.hypot(ax, az);
+    const total = Math.hypot(ax, ay, az);
+    const tiltDeg = (Math.atan2(horizontal, Math.abs(ay)) * 180) / Math.PI;
+    const ayShare = total > 0 ? Math.abs(ay) / total : 0;
+    const reliable = total >= 7 && total <= 12.5 && ayShare >= 0.55;
     return { tiltDeg, horizontalMs2: horizontal, totalMs2: total, reliable };
 }
 
