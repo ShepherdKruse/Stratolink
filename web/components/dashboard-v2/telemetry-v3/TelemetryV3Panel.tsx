@@ -6,8 +6,9 @@ import { fmtAltitudeM } from '@/components/dashboard-v2/shared';
 import type { DeviceSummary } from '@/components/dashboard-v2/useTelemetry';
 import {
     altDelta30m,
-    ascentRateMps,
+    ascentRateMpsAtScrub,
     buildFlightSeries,
+    computePayloadAttitude,
     last,
     maxGatewaysSeen,
     noFixDurationMs,
@@ -120,6 +121,14 @@ export default function TelemetryV3Panel({ device, devices, onSelect, scrubRow, 
     const snr = scrubRow?.snr;
     const gwNow = scrubRow?.gateways?.length ?? last(flight.gw) ?? 0;
 
+    const payloadAttitude = useMemo(
+        () =>
+            scrubRow
+                ? computePayloadAttitude(scrubRow.ax, scrubRow.ay, scrubRow.az)
+                : null,
+        [scrubRow],
+    );
+
     const jumpTo = useCallback((key: string) => {
         const k = key as keyof typeof open;
         setOpen((o) => ({ ...o, [k]: true }));
@@ -164,7 +173,7 @@ export default function TelemetryV3Panel({ device, devices, onSelect, scrubRow, 
     }, [flight, gpsStatus, batt, rssi, gwNow, gwTotal]);
 
     const altDelta = altDelta30m(flight);
-    const rate = ascentRateMps(flight);
+    const rate = useMemo(() => ascentRateMpsAtScrub(rows, scrubRow), [rows, scrubRow]);
     const lastFixIdx = [...flight.sats].reverse().findIndex((s) => s != null && s > 0);
     const lastFixT =
         lastFixIdx >= 0 && flight.times.length
@@ -385,7 +394,7 @@ export default function TelemetryV3Panel({ device, devices, onSelect, scrubRow, 
                         Payload motion
                     </span>
                     <div style={{ marginTop: 10 }}>
-                        <AttitudeBubble tilt={last(flight.tilt) ?? null} sway={last(flight.sway) ?? null} />
+                        <AttitudeBubble attitude={payloadAttitude} />
                     </div>
                 </div>
                 <Divider />

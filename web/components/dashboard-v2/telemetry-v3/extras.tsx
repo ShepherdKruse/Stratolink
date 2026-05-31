@@ -1,5 +1,6 @@
 'use client';
 
+import type { PayloadAttitude } from '@/lib/telemetry/flightSeries';
 import type { StatusLevel } from '@/lib/telemetry/telemetryV3Format';
 
 function TrendArrow({ dir, color }: { dir: 'flat' | 'up' | 'down'; color: string }) {
@@ -138,13 +139,34 @@ export function HeadingCompass({ heading, speed }: { heading: number | null; spe
 }
 
 export function AscentRate({ rate }: { rate: number | null }) {
-    const r = rate ?? 0;
     const lo = -1;
     const hi = 1;
     const pct = (v: number) => ((Math.max(lo, Math.min(hi, v)) - lo) / (hi - lo)) * 100;
+    if (rate == null || !Number.isFinite(rate)) {
+        return (
+            <div style={{ padding: '13px 0' }}>
+                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 9, gap: 8 }}>
+                    <div style={{ display: 'flex', alignItems: 'baseline', gap: 6, whiteSpace: 'nowrap' }}>
+                        <span className="eyebrow" style={{ color: 'var(--t-text-2)' }}>
+                            Ascent rate
+                        </span>
+                        <span className="eyebrow" style={{ color: 'var(--t-text-4)', fontSize: 9 }}>
+                            m/s · pres alt
+                        </span>
+                    </div>
+                    <span className="mono" style={{ fontSize: 11, color: 'var(--t-text-4)' }}>
+                        Need 2 packets with pressure
+                    </span>
+                </div>
+            </div>
+        );
+    }
+
+    const r = rate;
     const inBand = Math.abs(r) <= 0.5;
     const col = inBand ? 'var(--t-nominal)' : 'var(--t-warn)';
     const word = r < -0.05 ? 'Float descent' : r > 0.05 ? 'Float climb' : 'Holding';
+    const display = Math.abs(r) < 0.05 ? r.toFixed(2) : r.toFixed(1);
     return (
         <div style={{ padding: '13px 0' }}>
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 9, gap: 8 }}>
@@ -153,12 +175,12 @@ export function AscentRate({ rate }: { rate: number | null }) {
                         Ascent rate
                     </span>
                     <span className="eyebrow" style={{ color: 'var(--t-text-4)', fontSize: 9 }}>
-                        m/s
+                        m/s · pres alt
                     </span>
                 </div>
                 <div style={{ display: 'flex', alignItems: 'center', gap: 9 }}>
                     <span className="disp mono" style={{ fontSize: 18, fontWeight: 600, lineHeight: 1, letterSpacing: '-0.01em', color: 'var(--t-text)' }}>
-                        {r.toFixed(1)}
+                        {display}
                     </span>
                     <span
                         className="eyebrow"
@@ -331,44 +353,93 @@ export function PowerFlow({ solarV, battV }: { solarV: number | null; battV: num
     );
 }
 
-export function AttitudeBubble({ tilt, sway }: { tilt: number | null; sway: number | null }) {
-    const t = tilt ?? 0;
-    const s = sway ?? 0;
+function attitudeLabel(att: PayloadAttitude): { word: string; status: StatusLevel } {
+    if (!att.reliable) {
+        const h = att.horizontalMs2;
+        if (h >= 4) return { word: 'High dynamics', status: 'critical' };
+        if (h >= 2) return { word: 'Moving', status: 'warn' };
+        return { word: 'Uncertain', status: 'warn' };
+    }
+    const t = att.tiltDeg;
+    if (t < 15) return { word: 'Steady', status: 'nominal' };
+    if (t < 35) return { word: 'Swinging', status: 'warn' };
+    return { word: 'High tilt', status: 'critical' };
+}
+
+export function AttitudeBubble({ attitude }: { attitude: PayloadAttitude | null }) {
+    if (!attitude) {
+        return (
+            <div className="mono" style={{ fontSize: 11, color: 'var(--t-text-4)' }}>
+                No accelerometer data at this time
+            </div>
+        );
+    }
+
+    const { word, status } = attitudeLabel(attitude);
+    const col =
+        status === 'nominal' ? 'var(--t-nominal)' : status === 'warn' ? 'var(--t-warn)' : 'var(--t-critical)';
     const cx = 38;
     const cy = 38;
     const R = 33;
-    const status: StatusLevel = t < 12 ? 'nominal' : t < 22 ? 'warn' : 'critical';
-    const col = status === 'nominal' ? 'var(--t-nominal)' : status === 'warn' ? 'var(--t-warn)' : 'var(--t-critical)';
-    const word = t < 12 ? 'Steady' : t < 22 ? 'Swinging' : 'Tumbling';
-    const off = Math.min(1, t / 30) * (R - 9);
+    const off = attitude.reliable ? Math.min(1, attitude.tiltDeg / 55) * (R - 9) : Math.min(1, attitude.horizontalMs2 / 5) * (R - 9);
+    const animate = status !== 'nominal';
+
+    const detail = attitude.reliable
+        ? `${Math.round(attitude.tiltDeg)}° from vertical · ${attitude.horizontalMs2.toFixed(1)} m/s² horizontal`
+        : `${attitude.horizontalMs2.toFixed(1)} m/s² horizontal · ${Math.abs(attitude.totalMs2 - 9.8).toFixed(1)} m/s² off 1g`;
+
     return (
         <div style={{ display: 'flex', alignItems: 'center', gap: 14 }}>
             <svg width="76" height="76" viewBox="0 0 76 76" style={{ flexShrink: 0 }}>
                 <circle cx={cx} cy={cy} r={R} fill="var(--t-panel-2)" stroke="var(--t-border)" strokeWidth="1" />
-                <g className="att-sway" style={{ transformOrigin: '38px 38px' }}>
+                <line x1={cx} y1={cy} x2={cx} y2={cy - R + 4} stroke="var(--t-border)" strokeWidth="1" strokeDasharray="3 3" />
+                <g
+                    className={animate ? 'att-sway' : undefined}
+                    style={{ transformOrigin: '38px 38px' }}
+                >
                     <circle cx={cx} cy={cy - off} r="6" fill={col} opacity="0.9" />
                 </g>
             </svg>
             <div>
                 <div className="eyebrow" style={{ color: 'var(--t-text-3)', fontSize: 9, marginBottom: 5 }}>
-                    Attitude
+                    Attitude {attitude.reliable ? '' : '(approx.)'}
                 </div>
                 <div className="disp" style={{ fontSize: 18, fontWeight: 600, color: col, letterSpacing: '-0.01em' }}>
                     {word}
                 </div>
-                <div className="mono" style={{ fontSize: 10.5, color: 'var(--t-text-3)', marginTop: 3 }}>
-                    {Math.round(t)}° tilt · {Math.round(s)}° sway
+                <div className="mono" style={{ fontSize: 10.5, color: 'var(--t-text-3)', marginTop: 3, lineHeight: 1.35 }}>
+                    {detail}
                 </div>
+                {!attitude.reliable && (
+                    <div className="eyebrow" style={{ color: 'var(--t-text-4)', fontSize: 8.5, marginTop: 5, maxWidth: 200, lineHeight: 1.35 }}>
+                        Not near 1g — tilt angle not trusted (shock, spin, or freefall)
+                    </div>
+                )}
             </div>
         </div>
     );
 }
 
+/** LTR-390UV-style range: dark ← → bright (marker moves right as lux increases). */
+const LUX_SCALE_MAX = 120_000;
+
+function daylightPhase(lux: number): { label: string; markerBorder: string } {
+    if (lux < 10) return { label: 'Night', markerBorder: '#2A3544' };
+    if (lux < 200) return { label: 'Twilight', markerBorder: '#5C6B7A' };
+    if (lux < 5_000) return { label: 'Daylight', markerBorder: '#9A7B3C' };
+    if (lux < 25_000) return { label: 'Sunny', markerBorder: '#C9922E' };
+    return { label: 'Full sun', markerBorder: '#E8B020' };
+}
+
+function luxToBarPercent(lux: number): number {
+    if (lux <= 0) return 0;
+    return Math.min(100, (Math.log10(lux + 1) / Math.log10(LUX_SCALE_MAX + 1)) * 100);
+}
+
 export function DaylightMeter({ lux }: { lux: number | null }) {
     const L = lux ?? 0;
-    const part = L < 50 ? 'Night' : L < 2000 ? 'Dusk' : L < 20000 ? 'Low sun' : 'Full sun';
-    const phase = Math.min(1, L / 96000);
-    const pct = (phase * 100).toFixed(1);
+    const { label, markerBorder } = daylightPhase(L);
+    const pct = luxToBarPercent(L);
     return (
         <div>
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 8 }}>
@@ -376,7 +447,7 @@ export function DaylightMeter({ lux }: { lux: number | null }) {
                     Ambient light
                 </span>
                 <span className="mono" style={{ fontSize: 11, color: 'var(--t-text-2)', whiteSpace: 'nowrap' }}>
-                    {part} · {L.toLocaleString()} lux
+                    {label} · {L.toLocaleString()} lux
                 </span>
             </div>
             <div
@@ -386,9 +457,20 @@ export function DaylightMeter({ lux }: { lux: number | null }) {
                     borderRadius: 99,
                     overflow: 'hidden',
                     border: '1px solid var(--t-border)',
-                    background: 'linear-gradient(90deg, #1B2330 0%, #46505E 14%, #C9A24B 27%, #F0DCA0 50%, #C9A24B 73%, #46505E 86%, #1B2330 100%)',
+                    background: 'linear-gradient(90deg, #141C26 0%, #2E3A4A 18%, #6B7A8C 38%, #D4C48A 62%, #F5E6A8 82%, #FFF4C8 100%)',
                 }}
             >
+                <div
+                    style={{
+                        position: 'absolute',
+                        left: 0,
+                        top: 0,
+                        bottom: 0,
+                        width: `${pct}%`,
+                        background: 'linear-gradient(90deg, rgba(255,244,200,0.15) 0%, rgba(255,236,160,0.55) 100%)',
+                        pointerEvents: 'none',
+                    }}
+                />
                 <div
                     style={{
                         position: 'absolute',
@@ -397,11 +479,25 @@ export function DaylightMeter({ lux }: { lux: number | null }) {
                         width: 12,
                         height: 12,
                         borderRadius: '50%',
-                        background: '#FFF',
-                        border: '2px solid #11161D',
+                        background: pct > 45 ? '#FFF9E8' : '#E8EDF2',
+                        border: `2px solid ${markerBorder}`,
+                        boxShadow: pct > 45 ? '0 0 6px rgba(255,220,120,0.7)' : 'none',
                         transform: 'translate(-50%,-50%)',
                     }}
                 />
+            </div>
+            <div
+                className="eyebrow"
+                style={{
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    marginTop: 5,
+                    fontSize: 8,
+                    color: 'var(--t-text-4)',
+                }}
+            >
+                <span>Night</span>
+                <span>Day</span>
             </div>
         </div>
     );

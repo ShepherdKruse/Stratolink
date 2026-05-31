@@ -16,8 +16,6 @@ export type FlightSeries = {
     lux: (number | null)[];
     heading: (number | null)[];
     speed: (number | null)[];
-    tilt: (number | null)[];
-    sway: (number | null)[];
     gw: (number | null)[];
     hdop: (number | null)[];
 };
@@ -44,12 +42,6 @@ export function buildFlightSeries(rows: TelemetryRow[]): FlightSeries {
         return Math.min(1, Math.max(0, v / 6.2));
     });
 
-    const tilt = rows.map((r) => {
-        if (r.ax == null || r.ay == null) return null;
-        return Math.sqrt(r.ax * r.ax + r.ay * r.ay);
-    });
-    const sway = rows.map((r) => (r.az != null ? Math.abs(r.az) : null));
-
     return {
         times,
         altGps,
@@ -65,11 +57,33 @@ export function buildFlightSeries(rows: TelemetryRow[]): FlightSeries {
         lux,
         heading,
         speed,
-        tilt,
-        sway,
         gw,
         hdop,
     };
+}
+
+/** Attitude derived from MEMS accel at one telemetry instant (scrubber-aligned). */
+export type PayloadAttitude = {
+    /** Degrees from vertical (0 = upright). Meaningful when `reliable`. */
+    tiltDeg: number;
+    horizontalMs2: number;
+    totalMs2: number;
+    /** True when |a| ≈ 1g — quasi-static, so tilt from gravity is meaningful. */
+    reliable: boolean;
+};
+
+/** Tilt from gravity vector; null when accel axes are missing. */
+export function computePayloadAttitude(
+    ax: number | null,
+    ay: number | null,
+    az: number | null,
+): PayloadAttitude | null {
+    if (ax == null || ay == null || az == null) return null;
+    const horizontal = Math.hypot(ax, ay);
+    const total = Math.hypot(horizontal, az);
+    const tiltDeg = (Math.atan2(horizontal, Math.abs(az)) * 180) / Math.PI;
+    const reliable = total >= 7 && total <= 12.5;
+    return { tiltDeg, horizontalMs2: horizontal, totalMs2: total, reliable };
 }
 
 export function last<T>(arr: T[]): T | undefined {
@@ -104,19 +118,38 @@ export function altDelta30m(series: FlightSeries): number | null {
     return Math.round(b - a);
 }
 
-/** Ascent rate m/s from last two pressure-altitude samples. */
-export function ascentRateMps(series: FlightSeries): number | null {
-    const pts = series.altPres;
-    const times = series.times;
-    if (pts.length < 2) return null;
-    const i = pts.length - 1;
-    const j = i - 1;
-    const a = pts[j];
-    const b = pts[i];
-    if (a == null || b == null) return null;
-    const dt = (times[i] - times[j]) / 1000;
-    if (dt <= 0) return null;
-    return (b - a) / dt;
+/** Index of the last row with `t <= atMs`. */
+export function rowIndexAtOrBefore(rows: TelemetryRow[], atMs: number): number {
+    let idx = -1;
+    for (let i = 0; i < rows.length; i++) {
+        if (rows[i].t <= atMs) idx = i;
+        else break;
+    }
+    return idx;
+}
+
+/**
+ * Vertical speed (m/s) from pressure altitude: Δalt / Δt between the scrubbed
+ * packet and the nearest earlier packet that also has presAlt.
+ */
+export function ascentRateMpsAtScrub(rows: TelemetryRow[], scrubRow: TelemetryRow | null): number | null {
+    if (!scrubRow || rows.length < 2) return null;
+
+    const endIdx = rowIndexAtOrBefore(rows, scrubRow.t);
+    if (endIdx <= 0) return null;
+
+    const endAlt = rows[endIdx].presAlt;
+    const endT = rows[endIdx].t;
+    if (endAlt == null || !Number.isFinite(endAlt)) return null;
+
+    for (let j = endIdx - 1; j >= 0; j--) {
+        const prevAlt = rows[j].presAlt;
+        if (prevAlt == null || !Number.isFinite(prevAlt)) continue;
+        const dtSec = (endT - rows[j].t) / 1000;
+        if (dtSec <= 0) continue;
+        return (endAlt - prevAlt) / dtSec;
+    }
+    return null;
 }
 
 /** Duration since last GPS lock (ms), or null if always locked in window. */
