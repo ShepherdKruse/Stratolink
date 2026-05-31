@@ -40,6 +40,19 @@ export type StratolinkForecast = {
         wind_field_time_utc: string;
         wind_mode?: string;
     };
+    /** Wind-integrated "predicted hindcast" — the curved path from the last GPS
+     *  fix to "now" (analysis winds). Present only when the last fix was stale;
+     *  the forward forecast begins at its final point. Drawn instead of a
+     *  straight last-fix→now connector. */
+    predicted_hindcast?: {
+        path: Array<[number, number]>;
+        last_fix_lonlat: [number, number];
+        now_lonlat: [number, number];
+        /** Index in `path` where analysis winds hand off to forecast winds
+         *  (= the final point for a fix→now hindcast). */
+        analysis_boundary_idx: number;
+        analysis_boundary_time_utc: string;
+    };
     nominal_path: Array<[number, number]>;
     ensemble: Array<Array<[number, number]>>;
     ellipses: ForecastEllipseSlice[];

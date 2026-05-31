@@ -256,7 +256,11 @@ function staleLineFor(
     forecast: ReturnType<typeof useForecastPath>,
     trackPoints: TimedPoint[],
 ): Array<[number, number]> | null {
-    if (!forecast.staleGps || forecast.path.length === 0 || trackPoints.length === 0) return null;
+    if (!forecast.staleGps) return null;
+    /* Prefer the wind-integrated predicted-hindcast curve; fall back to a
+     * straight last-fix→now connector for older forecasts. */
+    if (forecast.predictedHindcast.length >= 2) return forecast.predictedHindcast;
+    if (forecast.path.length === 0 || trackPoints.length === 0) return null;
     const last = trackPoints[trackPoints.length - 1];
     return [[last.lon, last.lat], forecast.path[0]];
 }

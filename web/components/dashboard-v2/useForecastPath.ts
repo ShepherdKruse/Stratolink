@@ -45,6 +45,10 @@ export interface UseForecastPathResult {
      *  to position the scrubbed balloon marker in sync with the transmit dots.
      *  Empty for forecasts computed before this field existed. */
     hindcastTrack: HindcastTrackPoint[];
+    /** Wind-integrated "predicted hindcast" curve (last fix → now). Empty unless
+     *  GPS is stale (and the forecast carries the field). Drawn instead of a
+     *  straight last-fix→now connector. */
+    predictedHindcast: ForecastPath;
     /** True when the last GPS fix is stale and the origin is dead-reckoned. */
     staleGps: boolean;
     /** Epoch ms of the forecast origin (path[0]'s time). Null if unknown. */
@@ -67,7 +71,7 @@ const MAX_FAST_POLLS = 15; /* ~2 min, then settle to POLL_MS */
 
 const EMPTY: Omit<UseForecastPathResult, 'loading'> = {
     path: [], ensemble: [], ellipses: [], hindcastPath: [], hindcastTrack: [],
-    staleGps: false, originT: null, endT: null, generatedAt: null,
+    predictedHindcast: [], staleGps: false, originT: null, endT: null, generatedAt: null,
 };
 
 /** Keep only well-formed [lon, lat] pairs in WGS84 range. */
@@ -163,6 +167,7 @@ export function useForecastPath(deviceId: string | null): UseForecastPathResult 
                     ellipses,
                     hindcastPath: cleanPath(data?.observed?.reconstructed_path),
                     hindcastTrack: cleanTrack(data?.observed?.reconstructed_track),
+                    predictedHindcast: cleanPath(data?.predicted_hindcast?.path),
                     staleGps: Boolean(data?.stale_gps),
                     originT,
                     endT,

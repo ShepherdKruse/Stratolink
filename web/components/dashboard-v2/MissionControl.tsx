@@ -744,12 +744,16 @@ function MapColumn({
         [visibleRows],
     );
 
-    /* Gray connector from the last real fix to the dead-reckoned "now". */
+    /* Connector from the last real fix to the dead-reckoned "now". Prefer the
+     * wind-integrated predicted-hindcast curve; fall back to a straight line for
+     * forecasts that predate that field. */
     const staleLine = useMemo<Array<[number, number]> | null>(() => {
-        if (!forecast.staleGps || forecast.path.length === 0 || trackPoints.length === 0) return null;
+        if (!forecast.staleGps) return null;
+        if (forecast.predictedHindcast.length >= 2) return forecast.predictedHindcast;
+        if (forecast.path.length === 0 || trackPoints.length === 0) return null;
         const last = trackPoints[trackPoints.length - 1];
         return [[last.lon, last.lat], forecast.path[0]];
-    }, [forecast.staleGps, forecast.path, trackPoints]);
+    }, [forecast.staleGps, forecast.predictedHindcast, forecast.path, trackPoints]);
 
 
     const pickPath: V2FlightPoint[] = trackPoints.length >= 2 ? trackPoints : hindcastTrack;

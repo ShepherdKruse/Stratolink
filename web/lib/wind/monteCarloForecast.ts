@@ -253,6 +253,21 @@ export async function computeMonteCarloForecast(input: MonteCarloForecastInput):
             ? forecastStart.implied_drift_lonlat
             : (input.driftSegmentLonLat ?? []);
 
+    /* The predicted-hindcast curve (last fix → "now", analysis winds). It's the
+     * dead-reckon drift, surfaced as a dedicated field the client draws instead
+     * of a straight connector. The forward forecast begins at its final point,
+     * so the analysis→forecast boundary is the last point. */
+    const predictedHindcast =
+        forecastStart.stale_gps && forecastStart.implied_drift_lonlat.length >= 2
+            ? {
+                  path: forecastStart.implied_drift_lonlat,
+                  last_fix_lonlat: [lastFix.lon, lastFix.lat] as [number, number],
+                  now_lonlat: [forecastStart.lon, forecastStart.lat] as [number, number],
+                  analysis_boundary_idx: forecastStart.implied_drift_lonlat.length - 1,
+                  analysis_boundary_time_utc: forecastStart.time_utc,
+              }
+            : undefined;
+
     const ensemble: Array<Array<[number, number]>> = [];
     for (let i = 0; i < nEnsemble; i++) {
         ensemble.push(
@@ -302,6 +317,7 @@ export async function computeMonteCarloForecast(input: MonteCarloForecastInput):
             time_utc: forecastStart.time_utc,
         },
         stale_gps: forecastStart.stale_gps,
+        predicted_hindcast: predictedHindcast,
         nominal_path: nominal,
         ensemble,
         ellipses,
