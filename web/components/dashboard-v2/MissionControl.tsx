@@ -287,7 +287,7 @@ function LeftColumn({
                 background: 'var(--t-panel)',
             }}
         >
-            <div className="tlm-scroll" style={{ flex: 1, minHeight: 0, overflowY: 'auto', overflowX: 'hidden' }}>
+            <div className="tlm-scroll tlm-scroll-left" style={{ flex: 1, minHeight: 0, overflowY: 'auto', overflowX: 'hidden' }}>
                 <TelemetryV3Panel
                     device={device}
                     devices={devices}

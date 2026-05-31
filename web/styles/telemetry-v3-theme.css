@@ -143,25 +143,27 @@
 
 ::selection { background: var(--t-accent-soft); }
 
-/* Minimal, elegant scrollbar — a thin hairline thumb that fades in on
- * hover and stays out of the way otherwise. */
+/* Minimal, elegant scrollbar — a thin hairline thumb that's always visible
+ * (so the gutter never reads as empty) and brightens when grabbed. */
 .tlm-scroll {
   scrollbar-width: thin;                         /* Firefox */
-  scrollbar-color: transparent transparent;
-  transition: scrollbar-color 0.25s var(--ease);
+  scrollbar-color: var(--t-border-2) transparent;
 }
-.tlm-scroll:hover { scrollbar-color: var(--t-border-2) transparent; }
 
 .tlm-scroll::-webkit-scrollbar { width: 6px; height: 6px; }
 .tlm-scroll::-webkit-scrollbar-track { background: transparent; }
 .tlm-scroll::-webkit-scrollbar-thumb {
-  background: transparent;
+  background: var(--t-border-2);
   border-radius: 99px;
   transition: background 0.25s var(--ease);
 }
-.tlm-scroll:hover::-webkit-scrollbar-thumb { background: var(--t-border-2); }
 .tlm-scroll::-webkit-scrollbar-thumb:hover { background: var(--t-text-4); }
 .tlm-scroll::-webkit-scrollbar-corner { background: transparent; }
+
+/* Move the scrollbar to the left edge of the column without flipping the
+ * content: flip the scroll container to RTL, flip the content back to LTR. */
+.tlm-scroll-left { direction: rtl; }
+.tlm-scroll-left > * { direction: ltr; }
 
 /* Animations intentionally removed — the telemetry panels are static (no
  * pulsing/swaying/flowing motion). The `.live-dot` / `.att-sway` class names may

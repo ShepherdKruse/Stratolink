@@ -209,11 +209,9 @@ export default function TelemetryV3Panel({ device, devices, onSelect, scrubRow, 
                             <span className="disp" style={{ fontSize: 24, fontWeight: 600, color: 'var(--t-text)', lineHeight: 1.1, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
                                 {device?.callsign ?? device?.id ?? '—'}
                             </span>
-                            {devices.length > 1 && (
-                                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="var(--t-text-3)" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0 }} aria-hidden>
-                                    <polyline points="6 9 12 15 18 9" />
-                                </svg>
-                            )}
+                            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="var(--t-text-3)" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0 }} aria-hidden>
+                                <polyline points="6 9 12 15 18 9" />
+                            </svg>
                             <select
                                 value={device?.id ?? ''}
                                 onChange={(e) => onSelect(e.target.value)}
@@ -244,11 +242,14 @@ export default function TelemetryV3Panel({ device, devices, onSelect, scrubRow, 
                             </div>
                         )}
                     </div>
-                    <div style={{ display: 'flex', flexDirection: 'column', gap: 8, alignItems: 'flex-end' }}>
-                        <HeaderStatus status="nominal" label={device?.status ? String(device.status) : '—'} />
-                    </div>
                 </div>
-                <div style={{ padding: '12px 18px 0' }}>
+                <div style={{ padding: '12px 18px 0', display: 'flex', alignItems: 'center', gap: 8, flexWrap: 'wrap' }}>
+                    {device?.status && (
+                        <>
+                            <HeaderStatus status="nominal" label={String(device.status)} />
+                            <span style={{ color: 'var(--t-text-4)', fontSize: 10 }}>•</span>
+                        </>
+                    )}
                     <span className="mono" style={{ fontSize: 10.5, color: 'var(--t-text-3)' }}>
                         {device?.launchedAt ? `Launched ${fmtLaunch(device.launchedAt)}` : 'Not launched'}
                     </span>
