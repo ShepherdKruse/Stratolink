@@ -26,7 +26,6 @@ import { useElementSize, fmtPressure, fmtAltitudeM } from './shared';
 import { useIsMobile } from '@/hooks/use-mobile';
 import V2MissionMap, { type V2Balloon, type V2FlightPoint, type V2Gateway } from './V2MissionMap';
 import { useDashboardTheme } from './dashboard-theme';
-import EventTimeline from './EventTimeline';
 import TelemetryV3Panel from './telemetry-v3/TelemetryV3Panel';
 
 interface FlightSummary {
@@ -139,11 +138,11 @@ export default function MissionControlScreen() {
                     {/* Scrubber floats over the map bottom, clear of the
                       * attribution/logo row beneath it. */}
                     <div style={{ position: 'absolute', left: 12, right: 12, bottom: 40, zIndex: 6 }}>
-                        <EventTimeline
-                            rows={visibleRows}
+                        <Timeline
+                            visibleRows={visibleRows}
                             scrubT={scrubT}
                             onScrub={setScrubT}
-                            launchedAt={selectedDevice?.launchedAt ?? null}
+                            futureEndT={forecast.endT}
                             floating
                         />
                     </div>
@@ -201,12 +200,12 @@ export default function MissionControlScreen() {
                     />
                     {/* Centered with side clearance so the Mapbox logo
                       * (bottom-left) and attribution (bottom-right) stay clear. */}
-                    <div style={{ position: 'absolute', left: 12, right: 12, bottom: 44, zIndex: 6, maxWidth: 720, margin: '0 auto' }}>
-                        <EventTimeline
-                            rows={visibleRows}
+                    <div style={{ position: 'absolute', left: 104, right: 104, bottom: 44, zIndex: 6 }}>
+                        <Timeline
+                            visibleRows={visibleRows}
                             scrubT={scrubT}
                             onScrub={setScrubT}
-                            launchedAt={selectedDevice?.launchedAt ?? null}
+                            futureEndT={forecast.endT}
                             floating
                         />
                     </div>
