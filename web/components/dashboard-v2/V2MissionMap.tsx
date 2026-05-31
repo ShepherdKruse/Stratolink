@@ -100,6 +100,12 @@ interface V2MissionMapProps {
     forecastEllipses?: Array<{ e50: Array<[number, number]>; e90: Array<[number, number]> }>;
     /** Wind-reconstructed likely prior path ([lon, lat]) — the hindcast. */
     hindcastPath?: Array<[number, number]>;
+    /** The hindcast split into runs by certainty. Segments bridging a long gap
+     *  since the last transmission are `estimated` and drawn tightly-dashed;
+     *  the rest are drawn solid. When provided (and non-empty) it supersedes the
+     *  plain `hindcastPath` line; `hindcastPath` remains the click-to-scrub
+     *  target geometry. */
+    hindcastSegments?: Array<{ coords: Array<[number, number]>; estimated: boolean }>;
     /** Two-point gray connector from the last fix to the assumed-now position
      *  while GPS is stale. Null / omitted = nothing drawn. */
     staleLine?: Array<[number, number]> | null;
@@ -147,6 +153,7 @@ export default function V2MissionMap({
     staleLine = null,
     colorScheme = 'light',
     viewPadding,
+    hindcastSegments = [],
     pickPath = [],
     onPickTime,
 }: V2MissionMapProps) {
@@ -364,7 +371,9 @@ export default function V2MissionMap({
         };
     }, [forecastPath]);
 
-    /* Hindcast — the wind-reconstructed likely path through GPS gaps. */
+    /* Hindcast — the wind-reconstructed likely path through GPS gaps. Used for
+     * the click-to-scrub target line; the visible line is drawn from the
+     * certainty-split segments below when those are available. */
     const hindcastGeoJSON = useMemo(() => {
         const pts = hindcastPath.filter(([lon, lat]) => isValidLngLat(lat, lon));
         if (pts.length < 2) return null;
@@ -373,6 +382,24 @@ export default function V2MissionMap({
             features: [{ type: 'Feature' as const, geometry: { type: 'LineString' as const, coordinates: pts }, properties: {} }],
         };
     }, [hindcastPath]);
+
+    /* Certainty-split hindcast: solid for confident segments, tightly-dashed
+     * "estimated" for those bridging a long transmission gap. */
+    const hasHindcastSegments = hindcastSegments.length > 0;
+    const hindcastRuns = (estimated: boolean) => {
+        const runs = hindcastSegments
+            .filter(s => s.estimated === estimated && s.coords.length >= 2)
+            .map(s => s.coords);
+        if (!runs.length) return null;
+        return {
+            type: 'FeatureCollection' as const,
+            features: [{ type: 'Feature' as const, geometry: { type: 'MultiLineString' as const, coordinates: runs }, properties: {} }],
+        };
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    const hindcastCertainGeoJSON = useMemo(() => hindcastRuns(false), [hindcastSegments]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    const hindcastEstimatedGeoJSON = useMemo(() => hindcastRuns(true), [hindcastSegments]);
 
     /* Stale-GPS connector — last real fix → dead-reckoned "assumed now". */
     const staleLineGeoJSON = useMemo(() => {
@@ -575,16 +602,21 @@ export default function V2MissionMap({
                           * between transmitted fixes. */}
                         {hindcastGeoJSON && (
                             <Source id="v2-hindcast" type="geojson" data={hindcastGeoJSON}>
-                                <Layer
-                                    id="v2-hindcast-line"
-                                    type="line"
-                                    layout={{ 'line-cap': 'round', 'line-join': 'round' }}
-                                    paint={{
-                                        'line-color': C.path,
-                                        'line-width': 2,
-                                        'line-opacity': 0.85,
-                                    }}
-                                />
+                                {/* Plain solid line — only when we don't have the
+                                  * certainty-split segments (else the split lines
+                                  * below render the visible path). */}
+                                {!hasHindcastSegments && (
+                                    <Layer
+                                        id="v2-hindcast-line"
+                                        type="line"
+                                        layout={{ 'line-cap': 'round', 'line-join': 'round' }}
+                                        paint={{
+                                            'line-color': C.path,
+                                            'line-width': 2,
+                                            'line-opacity': 0.85,
+                                        }}
+                                    />
+                                )}
                                 {pathPickEnabled && (
                                     <Layer
                                         id="v2-hindcast-pick"
@@ -597,6 +629,41 @@ export default function V2MissionMap({
                                         }}
                                     />
                                 )}
+                            </Source>
+                        )}
+
+                        {/* Confident hindcast segments — solid. */}
+                        {hindcastCertainGeoJSON && (
+                            <Source id="v2-hindcast-certain" type="geojson" data={hindcastCertainGeoJSON}>
+                                <Layer
+                                    id="v2-hindcast-certain-line"
+                                    type="line"
+                                    layout={{ 'line-cap': 'round', 'line-join': 'round' }}
+                                    paint={{
+                                        'line-color': C.path,
+                                        'line-width': 2,
+                                        'line-opacity': 0.85,
+                                    }}
+                                />
+                            </Source>
+                        )}
+
+                        {/* Estimated hindcast segments (long gap since last
+                          * transmission) — tightly-dashed + slightly dimmer to
+                          * read as less certain. */}
+                        {hindcastEstimatedGeoJSON && (
+                            <Source id="v2-hindcast-estimated" type="geojson" data={hindcastEstimatedGeoJSON}>
+                                <Layer
+                                    id="v2-hindcast-estimated-line"
+                                    type="line"
+                                    layout={{ 'line-cap': 'butt', 'line-join': 'round' }}
+                                    paint={{
+                                        'line-color': C.path,
+                                        'line-width': 2,
+                                        'line-opacity': 0.7,
+                                        'line-dasharray': [1.5, 1.5],
+                                    }}
+                                />
                             </Source>
                         )}
 

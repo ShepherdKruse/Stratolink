@@ -675,6 +675,44 @@ function MapColumn({
         return pts.map(([lon, lat], i) => ({ lon, lat, t: t0 + (i / (pts.length - 1)) * span }));
     }, [forecast.hindcastTrack, forecast.hindcastPath, trackPoints]);
 
+    /* Split the hindcast into runs by certainty: a segment that bridges a long
+     * gap since the last transmission (> LONG_GAP_HR) is "estimated" and drawn
+     * tightly-dashed; the rest stay solid. Uses the real per-point timestamps
+     * and the actual GPS-fix times — needs the timed track, so older forecasts
+     * (no timestamps) just render as one solid line. */
+    const hindcastSegments = useMemo<Array<{ coords: Array<[number, number]>; estimated: boolean }>>(() => {
+        const track = forecast.hindcastTrack;
+        if (track.length < 2) return [];
+        const fixT = trackPoints.map(p => p.t).filter(t => Number.isFinite(t)).sort((a, b) => a - b);
+        if (fixT.length < 2) return [];
+        const LONG_GAP_MS = 6 * 3_600_000;   /* mirrors reconstruction CFG.LONG_GAP_HR */
+        /* Is the time `t` inside a fix-to-fix interval longer than the long-gap
+         * threshold? (linear scan; the track is short). */
+        const estimatedAt = (t: number): boolean => {
+            let i = 0;
+            while (i < fixT.length - 1 && fixT[i + 1] < t) i++;
+            const a = fixT[i];
+            const b = fixT[Math.min(i + 1, fixT.length - 1)];
+            return b - a >= LONG_GAP_MS;
+        };
+        const segs: Array<{ coords: Array<[number, number]>; estimated: boolean }> = [];
+        let run: Array<[number, number]> = [[track[0].lon, track[0].lat]];
+        let runEst: boolean | null = null;
+        for (let k = 1; k < track.length; k++) {
+            const est = estimatedAt((track[k - 1].t + track[k].t) / 2);
+            if (runEst === null) runEst = est;
+            if (est !== runEst) {
+                segs.push({ coords: run, estimated: runEst });
+                /* New run starts at the shared boundary vertex so the lines join. */
+                run = [[track[k - 1].lon, track[k - 1].lat]];
+                runEst = est;
+            }
+            run.push([track[k].lon, track[k].lat]);
+        }
+        if (runEst !== null) segs.push({ coords: run, estimated: runEst });
+        return segs;
+    }, [forecast.hindcastTrack, trackPoints]);
+
     /* Balloon glides smoothly: along the predicted path in the future, and
      * along the likely (reconstructed) path in the past / at the live edge. */
     const balloon: V2Balloon | null = useMemo(() => {
@@ -713,10 +751,6 @@ function MapColumn({
         return [[last.lon, last.lat], forecast.path[0]];
     }, [forecast.staleGps, forecast.path, trackPoints]);
 
-    /* Show the forecast at the live edge and throughout the future leg; hide it
-     * when scrubbed into the past, where a forward forecast is meaningless. */
-    const lastPacketT = trackPoints.length ? trackPoints[trackPoints.length - 1].t : null;
-    const showForecast = scrubT !== null && lastPacketT !== null && scrubT >= lastPacketT;
 
     const pickPath: V2FlightPoint[] = trackPoints.length >= 2 ? trackPoints : hindcastTrack;
 
@@ -754,10 +788,11 @@ function MapColumn({
                 gateways={mapGateways}
                 showTransmitPoints
                 hindcastPath={forecast.hindcastPath}
+                hindcastSegments={hindcastSegments}
                 staleLine={staleLine}
-                forecastPath={showForecast ? forecast.path : []}
-                forecastEnsemble={showForecast ? forecast.ensemble : []}
-                forecastEllipses={showForecast ? forecast.ellipses : []}
+                forecastPath={forecast.path}
+                forecastEnsemble={forecast.ensemble}
+                forecastEllipses={forecast.ellipses}
                 colorScheme={colorScheme}
                 viewPadding={isMobile ? { bottom: 200 } : undefined}
                 pickPath={pickPath}
@@ -767,6 +802,7 @@ function MapColumn({
             <MapLegend
                 hasForecast={forecast.path.length >= 2}
                 hasHindcast={forecast.hindcastPath.length >= 2}
+                hasEstimated={hindcastSegments.some(s => s.estimated)}
                 hasGateways={flightHasGateways}
                 colorScheme={colorScheme}
             />
@@ -787,7 +823,7 @@ function MapColumn({
  * is tight. Rows are keyed to whether a layer EXISTS for this flight (constant
  * across scrubbing), not to its current on-screen visibility — so the legend
  * stays stable as you scrub. */
-function MapLegend({ hasForecast, hasHindcast, hasGateways, colorScheme }: { hasForecast: boolean; hasHindcast: boolean; hasGateways: boolean; colorScheme: 'light' | 'dark' }) {
+function MapLegend({ hasForecast, hasHindcast, hasEstimated, hasGateways, colorScheme }: { hasForecast: boolean; hasHindcast: boolean; hasEstimated: boolean; hasGateways: boolean; colorScheme: 'light' | 'dark' }) {
     const isMobile = useIsMobile();
     /* Swatch colors mirror the actual map layers, which shift with the basemap
      * (see V2MissionMap `C` + GatewayLayer COVERAGE_STYLE). */
@@ -852,7 +888,8 @@ function MapLegend({ hasForecast, hasHindcast, hasGateways, colorScheme }: { has
                         swatch={<span style={{ display: 'inline-block', width: 9, height: 9, borderRadius: '50%', background: L.dotCore, border: `1.5px solid ${L.path}` }} />}
                         label="transmitted"
                     />
-                    {hasHindcast && <LegendRow swatch={lineSwatch(L.path)} label="likely path" />}
+                    {hasHindcast && <LegendRow swatch={lineSwatch(L.path)} label="path" />}
+                    {hasEstimated && <LegendRow swatch={lineSwatch(L.path, true)} label="estimated" />}
                     {hasForecast && <LegendRow swatch={lineSwatch(L.forecast, true)} label="forecast" />}
 
                     <LegendHeading style={{ marginTop: 10 }}>Gateways</LegendHeading>
