@@ -349,9 +349,7 @@ export default function TelemetryV3Panel({ device, devices, onSelect, scrubRow, 
                 title="Power & sun"
                 gkey="power"
             >
-                {/* 2×2 so the longer labels (Ambient light, Orientation) have
-                  * room and don't squish — battery + solar stay on one line. */}
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '16px 16px', padding: '14px 0' }}>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '0 10px', padding: '14px 0' }}>
                     <Metric
                         label="Battery"
                         value={batt != null ? tlmFmt.d2(batt) : '—'}
@@ -365,7 +363,7 @@ export default function TelemetryV3Panel({ device, devices, onSelect, scrubRow, 
                         icon={solar != null ? <SolarIcon color={solar >= 1 ? '#C9922E' : 'var(--t-text-3)'} /> : undefined}
                     />
                     <Metric
-                        label="Ambient light"
+                        label="Ambient"
                         value={lux != null ? Math.round(lux).toLocaleString('en-US') : '—'}
                         unit={lux != null ? 'lux' : undefined}
                         icon={lux != null ? <DaylightIcon lux={lux} /> : undefined}

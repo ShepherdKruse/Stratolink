@@ -214,13 +214,13 @@ export default function V2MissionMap({
         try { map.setPadding({ top: padTop, bottom: padBottom, left: padLeft, right: padRight }); } catch { /* ignore */ }
     }, [styleLoaded, padTop, padBottom, padLeft, padRight]);
 
-    /* Initial view — center on first balloon if any, else continental US. */
+    /* Initial view — center on the balloon at a wide zoom (2.5), else US. */
     const initialView = useMemo(() => {
         const focus = validBalloons.find(b => b.id === activeId) ?? validBalloons[0];
         if (focus) {
-            return { longitude: focus.lon, latitude: focus.lat, zoom: 6 };
+            return { longitude: focus.lon, latitude: focus.lat, zoom: 2.5 };
         }
-        return { longitude: -98, latitude: 39, zoom: 3.2 };
+        return { longitude: -98, latitude: 39, zoom: 2.5 };
         /* eslint-disable-next-line react-hooks/exhaustive-deps */
     }, []); /* only used at mount */
 
@@ -243,45 +243,34 @@ export default function V2MissionMap({
         /* Keep camera updates out of uncaught rejects from mapbox-gl. */
         try {
             const active = validBalloons.find(b => b.id === activeId);
+            if (active) {
+                /* On load, center on the selected balloon at a fixed wide zoom
+                 * (2.5) rather than zooming in to fit the whole track — the
+                 * user zooms in from there. */
+                map.flyTo({ center: [active.lon, active.lat], zoom: 2.5, duration: 1200, padding: pad(0) });
+                fittedActiveRef.current = activeId ?? null;
+                return;
+            }
+
+            /* No active selection — frame the whole fleet. */
             const lats: number[] = [];
             const lons: number[] = [];
-            if (active) {
-                lats.push(active.lat);
-                lons.push(active.lon);
-            }
-            validFlightPath.forEach(p => {
-                if (playbackT !== null && p.t > playbackT) return;
-                lats.push(p.lat);
-                lons.push(p.lon);
-            });
-            /* If we have no active selection, fit to the whole fleet. */
-            if (lats.length === 0) {
-                validBalloons.forEach(b => { lats.push(b.lat); lons.push(b.lon); });
-            }
-            /* No data yet — keep `fittedActiveRef` unset so we try again once
-             * data arrives for this same activeId. */
+            validBalloons.forEach(b => { lats.push(b.lat); lons.push(b.lon); });
             if (lats.length === 0) return;
 
             const minLat = Math.min(...lats);
             const maxLat = Math.max(...lats);
             const minLon = Math.min(...lons);
             const maxLon = Math.max(...lons);
-
             if (minLat < -90 || maxLat > 90 || minLon < -180 || maxLon > 180) return;
 
             if (lats.length === 1) {
-                map.flyTo({
-                    center: [lons[0], lats[0]],
-                    zoom: 8,
-                    duration: 1200,
-                    padding: pad(0),
-                });
+                map.flyTo({ center: [lons[0], lats[0]], zoom: 2.5, duration: 1200, padding: pad(0) });
             } else {
-                const bounds: LngLatBoundsLike = [[minLon, minLat], [maxLon, maxLat]];
-                map.fitBounds(bounds, {
+                map.fitBounds([[minLon, minLat], [maxLon, maxLat]] as LngLatBoundsLike, {
                     padding: pad(60),
                     duration: 1200,
-                    maxZoom: 11,
+                    maxZoom: 5,
                 });
             }
             fittedActiveRef.current = activeId ?? null;
