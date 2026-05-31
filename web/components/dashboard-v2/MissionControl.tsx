@@ -768,6 +768,7 @@ function MapColumn({
                 hasForecast={forecast.path.length >= 2}
                 hasHindcast={forecast.hindcastPath.length >= 2}
                 hasGateways={flightHasGateways}
+                colorScheme={colorScheme}
             />
 
             {scrubRow?.lat != null && (
@@ -786,8 +787,21 @@ function MapColumn({
  * is tight. Rows are keyed to whether a layer EXISTS for this flight (constant
  * across scrubbing), not to its current on-screen visibility — so the legend
  * stays stable as you scrub. */
-function MapLegend({ hasForecast, hasHindcast, hasGateways }: { hasForecast: boolean; hasHindcast: boolean; hasGateways: boolean }) {
+function MapLegend({ hasForecast, hasHindcast, hasGateways, colorScheme }: { hasForecast: boolean; hasHindcast: boolean; hasGateways: boolean; colorScheme: 'light' | 'dark' }) {
     const isMobile = useIsMobile();
+    /* Swatch colors mirror the actual map layers, which shift with the basemap
+     * (see V2MissionMap `C` + GatewayLayer COVERAGE_STYLE). */
+    const dark = colorScheme === 'dark';
+    const L = {
+        path: dark ? '#ff5b1f' : '#a11515',
+        forecast: dark ? '#5ba8ff' : '#08327d',
+        dotCore: dark ? '#e8eaee' : '#fcfcfb',
+        receiver: '#7a9b76',
+        receiverRing: dark ? 'rgba(255,255,255,0.85)' : '#fcfcfb',
+        covFill: dark ? 'rgba(74,140,150,0.20)' : 'rgba(90,92,98,0.10)',
+        covStroke: dark ? 'rgba(110,180,190,0.55)' : 'rgba(90,92,98,0.55)',
+        sightLine: dark ? 'rgba(110,180,190,0.5)' : 'rgba(90,92,98,0.6)',
+    };
     /* null = follow the per-device default (collapsed on mobile); once the
      * user toggles, their explicit choice sticks. */
     const [open, setOpen] = useState<boolean | null>(null);
@@ -835,21 +849,21 @@ function MapLegend({ hasForecast, hasHindcast, hasGateways }: { hasForecast: boo
                 <div style={{ padding: '8px 11px 9px' }}>
                     <LegendHeading>Flight path</LegendHeading>
                     <LegendRow
-                        swatch={<span style={{ display: 'inline-block', width: 9, height: 9, borderRadius: '50%', background: '#fcfcfb', border: '1.5px solid #a11515' }} />}
+                        swatch={<span style={{ display: 'inline-block', width: 9, height: 9, borderRadius: '50%', background: L.dotCore, border: `1.5px solid ${L.path}` }} />}
                         label="transmitted"
                     />
-                    {hasHindcast && <LegendRow swatch={lineSwatch('#a11515')} label="likely path" />}
-                    {hasForecast && <LegendRow swatch={lineSwatch('#08327d', true)} label="forecast" />}
+                    {hasHindcast && <LegendRow swatch={lineSwatch(L.path)} label="likely path" />}
+                    {hasForecast && <LegendRow swatch={lineSwatch(L.forecast, true)} label="forecast" />}
 
                     <LegendHeading style={{ marginTop: 10 }}>Gateways</LegendHeading>
                     {hasGateways && (
                         <LegendRow
-                            swatch={<span style={{ display: 'inline-block', width: 8, height: 8, borderRadius: '50%', background: '#7a9b76', border: '1px solid #fcfcfb' }} />}
+                            swatch={<span style={{ display: 'inline-block', width: 8, height: 8, borderRadius: '50%', background: L.receiver, border: `1px solid ${L.receiverRing}` }} />}
                             label="receiver"
                         />
                     )}
-                    <LegendRow swatch={boxSwatch('rgba(90,92,98,0.10)', 'rgba(90,92,98,0.55)')} label="150 km · in range" />
-                    <LegendRow swatch={lineSwatch('rgba(90,92,98,0.6)', true, 15)} label="250 km · sightline" />
+                    <LegendRow swatch={boxSwatch(L.covFill, L.covStroke)} label="150 km · in range" />
+                    <LegendRow swatch={lineSwatch(L.sightLine, true, 15)} label="250 km · sightline" />
                 </div>
             )}
         </div>

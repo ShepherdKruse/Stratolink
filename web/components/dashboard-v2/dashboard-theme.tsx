@@ -5,10 +5,15 @@ import { createContext, useCallback, useContext, useEffect, useState, type React
 export type DashboardTheme = 'light' | 'dark';
 
 const STORAGE_KEY = 'stratolink-dashboard-v2-theme';
+const SYSTEM_DARK = '(prefers-color-scheme: dark)';
 
-function readStoredTheme(): DashboardTheme {
+/** Initial theme: an explicit saved choice wins; otherwise follow the OS
+ *  setting (so dark-mode users land in dark mode by default). */
+function readInitialTheme(): DashboardTheme {
     if (typeof window === 'undefined') return 'light';
-    return localStorage.getItem(STORAGE_KEY) === 'dark' ? 'dark' : 'light';
+    const stored = localStorage.getItem(STORAGE_KEY);
+    if (stored === 'dark' || stored === 'light') return stored;
+    return window.matchMedia?.(SYSTEM_DARK).matches ? 'dark' : 'light';
 }
 
 type DashboardThemeContextValue = {
@@ -23,7 +28,18 @@ export function DashboardThemeProvider({ children }: { children: ReactNode }) {
     const [theme, setThemeState] = useState<DashboardTheme>('light');
 
     useEffect(() => {
-        setThemeState(readStoredTheme());
+        setThemeState(readInitialTheme());
+
+        /* Follow live OS changes — but only until the user picks a theme
+         * themselves (a stored value means they've chosen, so stop following). */
+        const mq = window.matchMedia?.(SYSTEM_DARK);
+        if (!mq) return;
+        const onChange = (e: MediaQueryListEvent) => {
+            if (localStorage.getItem(STORAGE_KEY)) return;
+            setThemeState(e.matches ? 'dark' : 'light');
+        };
+        mq.addEventListener('change', onChange);
+        return () => mq.removeEventListener('change', onChange);
     }, []);
 
     const setTheme = useCallback((next: DashboardTheme) => {
