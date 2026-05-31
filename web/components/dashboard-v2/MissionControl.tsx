@@ -174,6 +174,7 @@ export default function MissionControlScreen() {
                         forecast={forecast}
                         scrubT={effectiveScrubT}
                         isFuture={isFuture}
+                        noReading={noReading}
                         colorScheme={theme}
                         onPickTime={(t) => setScrubT(t)}
                     />
@@ -240,6 +241,7 @@ export default function MissionControlScreen() {
                         forecast={forecast}
                         scrubT={effectiveScrubT}
                         isFuture={isFuture}
+                        noReading={noReading}
                         colorScheme={theme}
                         onPickTime={(t) => setScrubT(t)}
                     />
@@ -616,6 +618,7 @@ function MapColumn({
     forecast,
     scrubT,
     isFuture,
+    noReading,
     colorScheme,
     onPickTime,
 }: {
@@ -625,6 +628,10 @@ function MapColumn({
     forecast: UseForecastPathResult;
     scrubT: number | null;
     isFuture: boolean;
+    /** No live reading at the cursor — out in the forecast OR sitting in a
+     *  transmission gap. The balloon isn't connected, so its links to the last
+     *  gateway shouldn't be drawn. */
+    noReading: boolean;
     colorScheme: 'light' | 'dark';
     onPickTime: (t: number) => void;
 }) {
@@ -680,14 +687,17 @@ function MapColumn({
         return { id: selectedDevice.id, lat: pos[1], lon: pos[0], altitude_m: futurePos ? null : (scrubRow?.alt ?? null) };
     }, [selectedDevice, scrubRow, trackPoints, hindcastTrack, futurePos, scrubT]);
 
-    /* Gateways belong to a real past packet — hide them on the forecast leg. */
+    /* Gateways + reception links belong to a real transmission. Hide them
+     * whenever the balloon isn't connected at the cursor — out in the forecast
+     * OR inside a transmission gap — so we don't draw links to the last gateway
+     * during a "No Connection" stretch. */
     const mapGateways: V2Gateway[] = useMemo(() => {
-        const list = isFuture ? null : (scrubRow?.gateways ?? null);
+        const list = noReading ? null : (scrubRow?.gateways ?? null);
         if (!list) return [];
         return list
             .filter(g => g.lat !== null && g.lon !== null)
             .map(g => ({ gateway_id: g.gateway_id, lat: g.lat as number, lon: g.lon as number, rssi: g.rssi, snr: g.snr }));
-    }, [scrubRow, isFuture]);
+    }, [scrubRow, noReading]);
 
     /* Whether this flight ever reported a receiver — constant across scrubbing,
      * so the legend stays stable even where no receiver is currently drawn. */
