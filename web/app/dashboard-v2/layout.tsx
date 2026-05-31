@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { JetBrains_Mono } from 'next/font/google';
+import { DashboardThemeProvider } from '@/components/dashboard-v2/dashboard-theme';
 import '@/styles/dashboard-v2.css';
 import '@/styles/telemetry-v3-theme.css';
 
@@ -22,5 +23,9 @@ export const metadata: Metadata = {
 };
 
 export default function DashboardV2Layout({ children }: { children: React.ReactNode }) {
-    return <div className={jetbrainsMono.variable}>{children}</div>;
+    return (
+        <div className={jetbrainsMono.variable}>
+            <DashboardThemeProvider>{children}</DashboardThemeProvider>
+        </div>
+    );
 }

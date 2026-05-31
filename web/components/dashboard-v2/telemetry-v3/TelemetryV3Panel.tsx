@@ -25,6 +25,7 @@ import {
     SignalQuality,
     TrendDelta,
 } from './extras';
+import ThemeToggle from '@/components/dashboard-v2/ThemeToggle';
 import { BalloonMark, Divider, Group, StatTile, StatusChip } from './primitives';
 
 type FlightSummary = { durationMs: number | null; distanceKm: number };
@@ -202,6 +203,9 @@ export default function TelemetryV3Panel({ device, devices, onSelect, scrubRow, 
                     <span className="disp" style={{ fontSize: 14, fontWeight: 700, letterSpacing: '0.2em', color: 'var(--t-text)' }}>
                         STRATOLINK
                     </span>
+                    <span style={{ marginLeft: 'auto' }}>
+                        <ThemeToggle />
+                    </span>
                 </div>
                 <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', padding: '14px 18px 0' }}>
                     <div style={{ minWidth: 0, flex: 1 }}>
@@ -216,7 +220,7 @@ export default function TelemetryV3Panel({ device, devices, onSelect, scrubRow, 
                                 fontSize: 24,
                                 fontWeight: 600,
                                 color: 'var(--t-text)',
-                                background: 'transparent',
+                                background: 'var(--t-panel)',
                                 border: 'none',
                                 cursor: 'pointer',
                                 padding: 0,

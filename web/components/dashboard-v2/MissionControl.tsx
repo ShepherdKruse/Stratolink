@@ -25,6 +25,7 @@ import { useForecastPath, type UseForecastPathResult } from './useForecastPath';
 import { useElementSize, fmtPressure, fmtAltitudeM } from './shared';
 import { useIsMobile } from '@/hooks/use-mobile';
 import V2MissionMap, { type V2Balloon, type V2FlightPoint, type V2Gateway } from './V2MissionMap';
+import { useDashboardTheme } from './dashboard-theme';
 import TelemetryV3Panel from './telemetry-v3/TelemetryV3Panel';
 
 interface FlightSummary {
@@ -57,6 +58,7 @@ export default function MissionControlScreen() {
     const forecast = useForecastPath(selectedId);
 
     const isMobile = useIsMobile();
+    const { theme } = useDashboardTheme();
 
     /* scrubT may sit in the future (along the forecast); only clamp it back if
      * it falls before the first packet (e.g. on a stale carry-over). */
@@ -109,8 +111,8 @@ export default function MissionControlScreen() {
      * the room by default. Same components as desktop, just stacked. */
     if (isMobile) {
         return (
-            <div className="sl-app" style={{ position: 'relative', display: 'flex', flexDirection: 'column', height: '100dvh', minHeight: 0, overflow: 'hidden' }}>
-                <div className="tlm-panel" data-theme="light" style={{ flexShrink: 0, maxHeight: '42vh', overflow: 'hidden', display: 'flex', flexDirection: 'column', borderBottom: '1px solid var(--sl-border)' }}>
+            <div className="sl-app" data-theme={theme} style={{ position: 'relative', display: 'flex', flexDirection: 'column', height: '100dvh', minHeight: 0, overflow: 'hidden' }}>
+                <div className="tlm-panel" style={{ flexShrink: 0, maxHeight: '42vh', overflow: 'hidden', display: 'flex', flexDirection: 'column', borderBottom: '1px solid var(--sl-border)' }}>
                     <div className="tlm-scroll" style={{ overflowY: 'auto', minHeight: 0 }}>
                         <TelemetryV3Panel
                             device={selectedDevice}
@@ -130,6 +132,7 @@ export default function MissionControlScreen() {
                         forecast={forecast}
                         scrubT={effectiveScrubT}
                         isFuture={isFuture}
+                        colorScheme={theme}
                     />
                     {/* Scrubber floats over the map bottom, clear of the
                       * attribution/logo row beneath it. */}
@@ -147,7 +150,7 @@ export default function MissionControlScreen() {
                   * covers the charts drawer. */}
                 <div style={{ height: DRAWER_HANDLE_H, flexShrink: 0 }} />
                 <ChartsDrawer open={chartsOpen} onToggle={() => setChartsOpen((v) => !v)}>
-                    <div className="tlm-panel tlm-scroll" data-theme="light" style={{ flex: 1, minHeight: 0, overflowY: 'auto' }}>
+                    <div className="tlm-panel tlm-scroll" style={{ flex: 1, minHeight: 0, overflowY: 'auto' }}>
                         <TelemetryV3Panel
                             device={selectedDevice}
                             devices={devices}
@@ -163,7 +166,7 @@ export default function MissionControlScreen() {
     }
 
     return (
-        <div className="sl-app" style={{ display: 'flex', flexDirection: 'column', height: '100vh' }}>
+        <div className="sl-app" data-theme={theme} style={{ display: 'flex', flexDirection: 'column', height: '100vh' }}>
             <main style={{
                 flex: 1,
                 display: 'grid',
@@ -191,6 +194,7 @@ export default function MissionControlScreen() {
                         forecast={forecast}
                         scrubT={effectiveScrubT}
                         isFuture={isFuture}
+                        colorScheme={theme}
                     />
                     {/* Centered with side clearance so the Mapbox logo
                       * (bottom-left) and attribution (bottom-right) stay clear. */}
@@ -228,7 +232,6 @@ function LeftColumn({
     return (
         <div
             className="tlm-panel"
-            data-theme="light"
             style={{
                 display: 'flex',
                 flexDirection: 'column',
@@ -558,13 +561,14 @@ function ChartRow({ title, unit, color, rows, getY, scrubT, value, min, max }: {
 /* ──────────────────────────────────────────────────────────────
  * Map column — coverage + 3-state flight path + forecast.
  * ────────────────────────────────────────────────────────────── */
-function MapColumn({ visibleRows, scrubRow, selectedDevice, forecast, scrubT, isFuture }: {
+function MapColumn({ visibleRows, scrubRow, selectedDevice, forecast, scrubT, isFuture, colorScheme }: {
     visibleRows: TelemetryRow[];
     scrubRow: TelemetryRow | null;
     selectedDevice: DeviceSummary | null;
     forecast: UseForecastPathResult;
     scrubT: number | null;
     isFuture: boolean;
+    colorScheme: 'light' | 'dark';
 }) {
     const trackPoints: V2FlightPoint[] = useMemo(() => visibleRows
         .filter(r => r.lat !== null && r.lon !== null)
@@ -653,6 +657,7 @@ function MapColumn({ visibleRows, scrubRow, selectedDevice, forecast, scrubT, is
                 forecastPath={showForecast ? forecast.path : []}
                 forecastEnsemble={showForecast ? forecast.ensemble : []}
                 forecastEllipses={showForecast ? forecast.ellipses : []}
+                colorScheme={colorScheme}
             />
 
             <MapLegend
@@ -695,7 +700,7 @@ function MapLegend({ hasForecast, hasHindcast, hasGateways }: { hasForecast: boo
     return (
         <div style={{
             position: 'absolute', top: 14, right: 14, zIndex: 5,
-            background: 'rgba(252, 252, 251, 0.96)',
+            background: 'var(--sl-overlay-bg)',
             backdropFilter: 'blur(6px)', WebkitBackdropFilter: 'blur(6px)',
             border: '1px solid var(--sl-border)',
             boxShadow: 'var(--sl-shadow)',
@@ -832,7 +837,7 @@ function Timeline({ visibleRows, scrubT, onScrub, futureEndT, floating = false }
 
     const cursorInFuture = cursorT > packetEndT;
     /* Future leg = the forecast, which is drawn blue on the map. */
-    const handleColor = cursorInFuture ? '#08327d' : 'var(--sl-ok)';
+    const handleColor = cursorInFuture ? 'var(--sl-forecast)' : 'var(--sl-ok)';
     const labelLeft = Math.max(7, Math.min(93, fraction));
 
     /* Offset of the cursor from the real "now" (live), e.g. "+18hr" / "−5hr".
@@ -861,12 +866,12 @@ function Timeline({ visibleRows, scrubT, onScrub, futureEndT, floating = false }
 
     /* ── Floating: one slim row — state dot + clock (key info) + the track. ── */
     if (floating) {
-        const PAPER = '#fcfcfb';
+        const PAPER = 'var(--sl-chrome-paper)';
         return (
             <div style={{
                 display: 'flex', alignItems: 'center', gap: 13,
                 height: 32, padding: '0 15px',
-                background: 'rgba(252, 252, 251, 0.82)',
+                background: 'var(--sl-overlay-bg-blur)',
                 backdropFilter: 'blur(10px)', WebkitBackdropFilter: 'blur(10px)',
                 border: '1px solid var(--sl-border)',
                 borderRadius: 999,
@@ -876,10 +881,10 @@ function Timeline({ visibleRows, scrubT, onScrub, futureEndT, floating = false }
                     <span style={{ width: 6, height: 6, borderRadius: '50%', background: handleColor, flexShrink: 0 }} />
                     <span style={{
                         fontFamily: 'var(--sl-mono)', fontVariantNumeric: 'tabular-nums', fontSize: 11, fontWeight: 500,
-                        color: cursorInFuture ? '#08327d' : 'var(--sl-text-hi)', whiteSpace: 'nowrap',
+                        color: cursorInFuture ? 'var(--sl-forecast)' : 'var(--sl-text-hi)', whiteSpace: 'nowrap',
                     }}>
                         {fmtClock(cursorT)}
-                        <span style={{ color: cursorIsLive ? 'var(--sl-ok)' : cursorInFuture ? '#08327d' : 'var(--sl-text-dim2)', marginLeft: 5 }}>
+                        <span style={{ color: cursorIsLive ? 'var(--sl-ok)' : cursorInFuture ? 'var(--sl-forecast)' : 'var(--sl-text-dim2)', marginLeft: 5 }}>
                             {relLabel}
                         </span>
                     </span>
@@ -900,12 +905,12 @@ function Timeline({ visibleRows, scrubT, onScrub, futureEndT, floating = false }
                     <div style={{ position: 'absolute', top: 'calc(50% - 2px)', left: 0, right: 0, height: 4, borderRadius: 2, background: 'var(--sl-bg-2)', border: '1px solid var(--sl-border)' }} />
                     {/* forecast horizon — dashed extension on the rail */}
                     {hasFuture && (
-                        <div style={{ position: 'absolute', top: 'calc(50% - 0.5px)', left: `${nowFrac}%`, width: `${100 - nowFrac}%`, height: 0, borderTop: '1.5px dashed rgba(8, 50, 125, 0.55)' }} />
+                        <div style={{ position: 'absolute', top: 'calc(50% - 0.5px)', left: `${nowFrac}%`, width: `${100 - nowFrac}%`, height: 0, borderTop: '1.5px dashed var(--sl-forecast-dashed)' }} />
                     )}
                     {/* elapsed fill */}
                     <div style={{ position: 'absolute', top: 'calc(50% - 2px)', left: 0, width: `${elapsedW}%`, height: 4, borderRadius: 2, background: 'var(--sl-ok)' }} />
                     {fraction > nowFrac && (
-                        <div style={{ position: 'absolute', top: 'calc(50% - 2px)', left: `${nowFrac}%`, width: `${fraction - nowFrac}%`, height: 4, borderRadius: 2, background: '#08327d' }} />
+                        <div style={{ position: 'absolute', top: 'calc(50% - 2px)', left: `${nowFrac}%`, width: `${fraction - nowFrac}%`, height: 4, borderRadius: 2, background: 'var(--sl-forecast)' }} />
                     )}
                     {/* last-transmission notch — boundary between observed track
                       * and forecast. */}
@@ -956,17 +961,17 @@ function Timeline({ visibleRows, scrubT, onScrub, futureEndT, floating = false }
                 <div style={{
                     position: 'absolute', top: -1, left: `${labelLeft}%`, transform: 'translateX(-50%)',
                     fontFamily: 'var(--sl-mono)', fontVariantNumeric: 'tabular-nums', fontSize: 10.5, fontWeight: 500,
-                    color: cursorIsLive ? 'var(--sl-ok)' : cursorInFuture ? '#08327d' : 'var(--sl-text-hi)', whiteSpace: 'nowrap', pointerEvents: 'none',
+                    color: cursorIsLive ? 'var(--sl-ok)' : cursorInFuture ? 'var(--sl-forecast)' : 'var(--sl-text-hi)', whiteSpace: 'nowrap', pointerEvents: 'none',
                 }}>
                     {fmtClock(cursorT)} · {relLabel}
                 </div>
                 <div style={{ position: 'absolute', top: 22, left: 0, right: 0, height: 1, background: 'var(--sl-border-hi)' }} />
                 {hasFuture && (
-                    <div style={{ position: 'absolute', top: 21.5, left: `${nowFrac}%`, width: `${100 - nowFrac}%`, height: 0, borderTop: '1px dashed rgba(8, 50, 125, 0.5)' }} />
+                    <div style={{ position: 'absolute', top: 21.5, left: `${nowFrac}%`, width: `${100 - nowFrac}%`, height: 0, borderTop: '1px dashed var(--sl-forecast-dashed)' }} />
                 )}
                 <div style={{ position: 'absolute', top: 21, left: 0, width: `${elapsedW}%`, height: 2, background: 'var(--sl-ok)' }} />
                 {fraction > nowFrac && (
-                    <div style={{ position: 'absolute', top: 21, left: `${nowFrac}%`, width: `${fraction - nowFrac}%`, height: 2, background: '#08327d' }} />
+                    <div style={{ position: 'absolute', top: 21, left: `${nowFrac}%`, width: `${fraction - nowFrac}%`, height: 2, background: 'var(--sl-forecast)' }} />
                 )}
                 <svg width="100%" height="30" style={{ position: 'absolute', top: 0, left: 0, pointerEvents: 'none' }}>
                     {visibleRows.map((r, i) => (

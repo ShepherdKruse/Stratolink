@@ -100,7 +100,12 @@ interface V2MissionMapProps {
     /** Two-point gray connector from the last fix to the assumed-now position
      *  while GPS is stale. Null / omitted = nothing drawn. */
     staleLine?: Array<[number, number]> | null;
+    /** Basemap style — dark pairs with dashboard dark mode. */
+    colorScheme?: 'light' | 'dark';
 }
+
+const MAP_STYLE_LIGHT = 'mapbox://styles/mapbox/light-v11';
+const MAP_STYLE_DARK = 'mapbox://styles/mapbox/dark-v11';
 
 function isWebGLAvailable(): boolean {
     if (typeof window === 'undefined') return false;
@@ -128,7 +133,9 @@ export default function V2MissionMap({
     forecastEllipses = [],
     hindcastPath = [],
     staleLine = null,
+    colorScheme = 'light',
 }: V2MissionMapProps) {
+    const mapStyle = colorScheme === 'dark' ? MAP_STYLE_DARK : MAP_STYLE_LIGHT;
     const mapRef = useRef<MapRef>(null);
     const [styleLoaded, setStyleLoaded] = useState(false);
     const [webglOk, setWebglOk] = useState<boolean | null>(null);
@@ -458,11 +465,11 @@ export default function V2MissionMap({
         <div style={{ position: 'absolute', inset: 0 }}>
             <Map
                 ref={mapRef}
-                key={projection}
+                key={`${projection}-${colorScheme}`}
                 mapboxAccessToken={token}
                 initialViewState={initialView}
                 style={{ width: '100%', height: '100%' }}
-                mapStyle="mapbox://styles/mapbox/light-v11"
+                mapStyle={mapStyle}
                 projection={projection === 'globe' ? 'globe' : 'mercator'}
                 onLoad={() => {
                     setStyleLoaded(true);
