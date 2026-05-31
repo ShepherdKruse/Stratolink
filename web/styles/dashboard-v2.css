@@ -58,6 +58,61 @@
 
     /* soft elevation for white panels */
     --sl-shadow: 0 1px 2px rgba(26, 28, 27, 0.05), 0 1px 1px rgba(26, 28, 27, 0.03);
+
+    --sl-chrome-paper: #fcfcfb;
+    --sl-overlay-bg: rgba(252, 252, 251, 0.96);
+    --sl-overlay-bg-blur: rgba(252, 252, 251, 0.82);
+    --sl-forecast: #08327d;
+    --sl-forecast-dashed: rgba(8, 50, 125, 0.55);
+}
+
+/* Dark mission control — pairs with telemetry-v3 [data-theme="dark"] */
+.sl-app[data-theme="dark"] {
+    --sl-bg:      #05070a;
+    --sl-bg-1:    #0b0e13;
+    --sl-bg-2:    #14181f;
+    --sl-border:  rgba(255, 255, 255, 0.10);
+    --sl-border-hi: rgba(255, 255, 255, 0.18);
+    --sl-divider: rgba(255, 255, 255, 0.06);
+
+    --sl-text:      #e6e8ec;
+    --sl-text-hi:   #f3f4f6;
+    --sl-text-dim:  #b8bec7;
+    --sl-text-dim2: #7c8491;
+    --sl-text-dim3: #4a525e;
+
+    --sl-ok:        #ff5b1f;
+    --sl-ok-mute:   #c97a5a;
+    --sl-ok-soft:   rgba(255, 91, 31, 0.12);
+
+    --sl-alert:     #ff4d4d;
+    --sl-alert-mute:#c97a7a;
+    --sl-alert-soft:rgba(255, 77, 77, 0.12);
+
+    --sl-teal:    #4ad99b;
+    --sl-blue:    #4da3ff;
+
+    --sl-neutral:        #7c8491;
+    --sl-neutral-mute:   #4a525e;
+
+    --sl-c-alt:   #969da8;
+    --sl-c-batt:  #969da8;
+    --sl-c-solar: #969da8;
+    --sl-c-temp:  #969da8;
+    --sl-c-pres:  #969da8;
+    --sl-c-rf:    #969da8;
+    --sl-c-sats:  #969da8;
+
+    --sl-grid:    rgba(255, 255, 255, 0.05);
+    --sl-grid-hi: rgba(255, 255, 255, 0.09);
+
+    --sl-shadow: 0 4px 12px rgba(0, 0, 0, 0.45);
+
+    --sl-chrome-paper: #0b0e13;
+    --sl-overlay-bg: rgba(11, 14, 19, 0.94);
+    --sl-overlay-bg-blur: rgba(11, 14, 19, 0.88);
+    --sl-forecast: #4da3ff;
+    --sl-forecast-dashed: rgba(77, 163, 255, 0.45);
 }
 
 /* ── shell ─────────────────────────────────────────────────── */
@@ -491,6 +546,10 @@
  * ────────────────────────────────────────────────────────────── */
 .sl-app .sl-scrub-track { cursor: ew-resize; }
 .sl-app .sl-scrub-thumb { transition: transform 0.12s ease, box-shadow 0.12s ease; }
+.sl-event-rail {
+    touch-action: none;
+}
+
 .sl-app .sl-scrub-track:hover .sl-scrub-thumb {
     transform: scale(1.2);
     box-shadow: 0 1px 6px rgba(26, 28, 27, 0.32);

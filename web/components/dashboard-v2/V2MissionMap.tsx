@@ -26,6 +26,7 @@ import DayNightTerminator from '@/components/maps/DayNightTerminator';
 import { applyBaseStyle } from '@/components/maps/baseStyle';
 import { bathymetryAllZooms } from '@/components/maps/bathymetry';
 import { ringKm } from '@/lib/gateways/range';
+import { nearestTimeOnPath, type PickablePathPoint } from '@/lib/telemetry/flightNarrative';
 
 export interface V2Balloon {
     id: string;
@@ -100,7 +101,17 @@ interface V2MissionMapProps {
     /** Two-point gray connector from the last fix to the assumed-now position
      *  while GPS is stale. Null / omitted = nothing drawn. */
     staleLine?: Array<[number, number]> | null;
+    /** Basemap style — dark pairs with dashboard dark mode. */
+    colorScheme?: 'light' | 'dark';
+    /** GPS/hindcast path with timestamps — click map to scrub to nearest point. */
+    pickPath?: PickablePathPoint[];
+    onPickTime?: (t: number) => void;
 }
+
+const PATH_PICK_MAX_KM = 120;
+
+const MAP_STYLE_LIGHT = 'mapbox://styles/mapbox/light-v11';
+const MAP_STYLE_DARK = 'mapbox://styles/mapbox/dark-v11';
 
 function isWebGLAvailable(): boolean {
     if (typeof window === 'undefined') return false;
@@ -128,7 +139,12 @@ export default function V2MissionMap({
     forecastEllipses = [],
     hindcastPath = [],
     staleLine = null,
+    colorScheme = 'light',
+    pickPath = [],
+    onPickTime,
 }: V2MissionMapProps) {
+    const mapStyle = colorScheme === 'dark' ? MAP_STYLE_DARK : MAP_STYLE_LIGHT;
+    const pathPickEnabled = pickPath.length >= 2 && Boolean(onPickTime);
     const mapRef = useRef<MapRef>(null);
     const [styleLoaded, setStyleLoaded] = useState(false);
     const [webglOk, setWebglOk] = useState<boolean | null>(null);
@@ -455,15 +471,27 @@ export default function V2MissionMap({
     }
 
     return (
-        <div style={{ position: 'absolute', inset: 0 }}>
+        <div
+            style={{
+                position: 'absolute',
+                inset: 0,
+                cursor: pathPickEnabled ? 'crosshair' : undefined,
+            }}
+        >
             <Map
                 ref={mapRef}
-                key={projection}
+                key={`${projection}-${colorScheme}`}
                 mapboxAccessToken={token}
                 initialViewState={initialView}
                 style={{ width: '100%', height: '100%' }}
-                mapStyle="mapbox://styles/mapbox/light-v11"
+                mapStyle={mapStyle}
                 projection={projection === 'globe' ? 'globe' : 'mercator'}
+                onClick={(e) => {
+                    if (!pathPickEnabled || !onPickTime) return;
+                    const t = nearestTimeOnPath(pickPath, e.lngLat.lng, e.lngLat.lat, PATH_PICK_MAX_KM);
+                    if (t == null) return;
+                    onPickTime(t);
+                }}
                 onLoad={() => {
                     setStyleLoaded(true);
                     const m = mapRef.current?.getMap();
@@ -481,7 +509,7 @@ export default function V2MissionMap({
                     <>
                         {/* Day/night terminator — rendered first so it dims only
                           * the basemap; coverage, paths and pins sit on top. */}
-                        <DayNightTerminator />
+                        <DayNightTerminator colorScheme={colorScheme} />
 
                         {/* Static TTN ground-station coverage — sits at
                           * the bottom of the layer stack so flight paths
@@ -519,6 +547,18 @@ export default function V2MissionMap({
                                         'line-opacity': 0.85,
                                     }}
                                 />
+                                {pathPickEnabled && (
+                                    <Layer
+                                        id="v2-hindcast-pick"
+                                        type="line"
+                                        layout={{ 'line-cap': 'round', 'line-join': 'round' }}
+                                        paint={{
+                                            'line-color': '#a11515',
+                                            'line-width': 14,
+                                            'line-opacity': 0.01,
+                                        }}
+                                    />
+                                )}
                             </Source>
                         )}
 

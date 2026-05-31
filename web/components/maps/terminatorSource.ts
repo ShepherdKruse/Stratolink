@@ -18,13 +18,19 @@ const OBLIQUITY = RAD * 23.4397;
 const EARTH_RADIUS = 6378137.0;
 const MAX_EXTENT = 20037508.342789244;  /* Web-Mercator half-circumference (m) */
 
-/* Night tint (dark navy), straight RGBA 0..1 — overall darkness is set by the
- * raster layer's `raster-opacity`. */
-const NIGHT_RGB: [number, number, number] = [0.06, 0.085, 0.16];
+export type TerminatorBasemap = 'light' | 'dark';
+
+/* Night tint (dark navy) on light basemaps — layer `raster-opacity` scales it. */
+const NIGHT_RGB_LIGHT: [number, number, number] = [0.06, 0.085, 0.16];
+
+/* Dark basemap: deepen night + lift day so the terminator reads on mapbox dark-v11. */
+const NIGHT_RGB_DARK: [number, number, number] = [0.01, 0.015, 0.03];
+const DAY_RGB_DARK: [number, number, number] = [0.52, 0.56, 0.62];
 
 /* Twilight band in degrees of solar altitude: darkening runs from the horizon
  * (0°) to full night at astronomical twilight (−18°) — the real-world band. */
-const FADE_RANGE: [number, number] = [0, -18];
+const FADE_RANGE_LIGHT: [number, number] = [0, -18];
+const FADE_RANGE_DARK: [number, number] = [2, -14];
 
 function toDays(date: Date): number {
     return date.valueOf() / 86_400_000 - 0.5 + 2440588 - 2451545;
@@ -64,6 +70,10 @@ uniform vec4 aabb;               /* xmin, ymin, xmax, ymax  (Mercator / earthRad
 uniform float siderealTimeOffset;
 uniform vec2 fadeRange;          /* horizon, full-night altitude (deg) */
 uniform vec3 nightColor;
+uniform vec3 dayColor;
+uniform float basemapMode;       /* 0 = light basemap, 1 = dark basemap */
+uniform float nightStrength;
+uniform float dayStrength;
 
 vec2 toWgs84Rad (vec2 m) {
     return vec2(m.x, ${Math.PI / 2.0} - 2.0 * atan(exp(-m.y)));
@@ -80,8 +90,15 @@ void main () {
     vec2 uv = gl_FragCoord.xy / resolution;
     vec2 m = aabb.xw + (aabb.zy - aabb.xw) * uv;       /* north at uv.y=0 (fb bottom) */
     float altDeg = sunAltitude(toWgs84Rad(m)) * ${180.0 / Math.PI};
-    float a = smootherstep(fadeRange.x, fadeRange.y, altDeg);
-    gl_FragColor = vec4(nightColor, a);
+    float nightAmt = smootherstep(fadeRange.x, fadeRange.y, altDeg);
+    if (basemapMode < 0.5) {
+        gl_FragColor = vec4(nightColor, nightAmt * nightStrength);
+    } else {
+        float dayAmt = 1.0 - nightAmt;
+        vec3 rgb = mix(dayColor, nightColor, nightAmt);
+        float alpha = max(nightAmt * nightStrength, dayAmt * dayStrength);
+        gl_FragColor = vec4(rgb, alpha);
+    }
 }`;
 
 function compile(gl: WebGLRenderingContext, type: number, src: string): WebGLShader {
@@ -106,14 +123,16 @@ export class TerminatorSource implements CustomSourceInterface<ImageData> {
 
     private size: number;
     private date: Date;
+    private basemap: TerminatorBasemap;
     private gl: WebGLRenderingContext;
     private uniforms: Record<string, WebGLUniformLocation | null>;
     private pixels: Uint8ClampedArray;
 
-    constructor(opts: { tileSize?: number; date?: Date } = {}) {
+    constructor(opts: { tileSize?: number; date?: Date; basemap?: TerminatorBasemap } = {}) {
         this.tileSize = opts.tileSize ?? 256;
         this.size = this.tileSize;
         this.date = opts.date ?? new Date();
+        this.basemap = opts.basemap ?? 'light';
         this.pixels = new Uint8ClampedArray(this.size * this.size * 4);
 
         const canvas = document.createElement('canvas');
@@ -142,15 +161,36 @@ export class TerminatorSource implements CustomSourceInterface<ImageData> {
         gl.vertexAttribPointer(xy, 2, gl.FLOAT, false, 0, 0);
 
         this.uniforms = Object.fromEntries(
-            ['resolution', 'sunCoords', 'aabb', 'siderealTimeOffset', 'fadeRange', 'nightColor']
-                .map(n => [n, gl.getUniformLocation(prog, n)]),
+            [
+                'resolution', 'sunCoords', 'aabb', 'siderealTimeOffset', 'fadeRange',
+                'nightColor', 'dayColor', 'basemapMode', 'nightStrength', 'dayStrength',
+            ].map(n => [n, gl.getUniformLocation(prog, n)]),
         );
 
         gl.viewport(0, 0, this.size, this.size);
         gl.disable(gl.BLEND);
         gl.uniform2f(this.uniforms.resolution, this.size, this.size);
-        gl.uniform2f(this.uniforms.fadeRange, FADE_RANGE[0], FADE_RANGE[1]);
-        gl.uniform3f(this.uniforms.nightColor, ...NIGHT_RGB);
+        this.applyBasemapUniforms();
+    }
+
+    private applyBasemapUniforms(): void {
+        const gl = this.gl;
+        const dark = this.basemap === 'dark';
+        const fade = dark ? FADE_RANGE_DARK : FADE_RANGE_LIGHT;
+        gl.uniform2f(this.uniforms.fadeRange, fade[0], fade[1]);
+        gl.uniform3f(this.uniforms.nightColor, ...(dark ? NIGHT_RGB_DARK : NIGHT_RGB_LIGHT));
+        gl.uniform3f(this.uniforms.dayColor, ...DAY_RGB_DARK);
+        gl.uniform1f(this.uniforms.basemapMode, dark ? 1 : 0);
+        gl.uniform1f(this.uniforms.nightStrength, dark ? 0.92 : 1);
+        gl.uniform1f(this.uniforms.dayStrength, dark ? 0.42 : 0);
+    }
+
+    setBasemap(basemap: TerminatorBasemap): void {
+        if (this.basemap === basemap) return;
+        this.basemap = basemap;
+        this.applyBasemapUniforms();
+        this.clearTiles?.();
+        this.update?.();
     }
 
     setDate(date: Date): void {
