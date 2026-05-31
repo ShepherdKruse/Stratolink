@@ -69,6 +69,9 @@ export type StratolinkForecast = {
         reconstructed_track?: Array<{ lon: number; lat: number; time_utc: string }>;
         /** Per-gap bridge segments (non-trivial gaps only). */
         gap_bridges?: Array<Array<[number, number]>>;
+        /** Hash of the reconstruction inputs (fixes + level) — lets the cache
+         *  reuse an unchanged hindcast instead of recomputing it. */
+        reconstruction_input_hash?: string;
         reconstruction_gaps?: Array<{
             from_idx: number;
             to_idx: number;

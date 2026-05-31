@@ -7,7 +7,8 @@ import {
     resolveForecastStart,
     STALE_GPS_THRESHOLD_H,
 } from './staleGpsExtrapolation';
-import { computePathReconstruction } from './pathReconstruction';
+import { computePathReconstruction, type PathReconstructionResult } from './pathReconstruction';
+import { hindcastInputHash, readStoredHindcast, storeHindcast } from './hindcastStorage';
 import { gfsGridToWindField, windAt, windFieldToGfsGrid, type GfsGrid } from './gfsGrid';
 
 const CFG = {
@@ -164,6 +165,47 @@ function downsampleTrack(track: Array<[number, number]>, maxPts: number): Array<
     return out;
 }
 
+/* Hindcast cache freshness: the trailing gap's analysis winds can still settle
+ * for a few hours, so allow a bounded in-place refresh while the last fix is
+ * young; once it's older the cached reconstruction is final and reused forever
+ * (until a new fix changes the input hash). */
+const HINDCAST_REFRESH_WINDOW_H = 6;
+const HINDCAST_MIN_REFRESH_INTERVAL_H = 3;
+
+/**
+ * The static hindcast, cached by a hash of the GPS fixes. Unchanged fixes ⇒
+ * reuse the cached reconstruction (no wind fetch, no re-jitter); a new fix ⇒
+ * fresh compute. Returns the reconstruction plus its input hash.
+ */
+async function resolveReconstruction(
+    input: MonteCarloForecastInput,
+    levelHpa: number,
+): Promise<{ result: PathReconstructionResult; hash: string }> {
+    const hash = hindcastInputHash(input.gpsFixes, levelHpa);
+    const lastFix = input.gpsFixes[input.gpsFixes.length - 1];
+
+    const cached = await readStoredHindcast(input.deviceId, hash);
+    if (cached) {
+        const lastFixAgeH = lastFix
+            ? (Date.now() - new Date(lastFix.time_utc).getTime()) / 3_600_000
+            : Infinity;
+        const cacheAgeH = (Date.now() - new Date(cached.computed_at).getTime()) / 3_600_000;
+        const settling =
+            lastFixAgeH < HINDCAST_REFRESH_WINDOW_H && cacheAgeH > HINDCAST_MIN_REFRESH_INTERVAL_H;
+        if (!settling) {
+            return { result: cached, hash };
+        }
+    }
+
+    const result = await computePathReconstruction({
+        fixes: input.gpsFixes,
+        pressureHpa: levelHpa,
+        baroSamples: input.baroSamples,
+    });
+    await storeHindcast(input.deviceId, hash, { ...result, computed_at: new Date().toISOString() });
+    return { result, hash };
+}
+
 /** Full Monte Carlo pipeline: GFS fetch → bias correction → ensemble → ellipses. */
 export async function computeMonteCarloForecast(input: MonteCarloForecastInput): Promise<StratolinkForecast> {
     const t0 = Date.now();
@@ -192,11 +234,10 @@ export async function computeMonteCarloForecast(input: MonteCarloForecastInput):
 
     const bias = computeBias(input.gpsFixes, gfs);
 
-    const reconstruction = await computePathReconstruction({
-        fixes: input.gpsFixes,
-        pressureHpa: levelHpa,
-        baroSamples: input.baroSamples,
-    });
+    const { result: reconstruction, hash: reconstructionHash } = await resolveReconstruction(
+        input,
+        levelHpa,
+    );
 
     const forecastStart = await resolveForecastStart({
         lastFix,
@@ -291,6 +332,7 @@ export async function computeMonteCarloForecast(input: MonteCarloForecastInput):
             reconstructed_track: reconstruction.reconstructed_track,
             gap_bridges: reconstruction.gap_bridges,
             reconstruction_gaps: reconstruction.gaps,
+            reconstruction_input_hash: reconstructionHash,
         },
         wind_field: {
             lat0: gfs.lat0,
