@@ -1032,6 +1032,8 @@ function Timeline({ visibleRows, scrubT, onScrub, futureEndT, floating = false }
                 border: '1px solid var(--sl-border)',
                 borderRadius: 999,
                 boxShadow: '0 1px 5px rgba(26, 28, 27, 0.10)',
+                /* No accidental text-selection of the clock while dragging. */
+                userSelect: 'none', WebkitUserSelect: 'none',
             }}>
                 {/* Desktop: clock sits in a column beside the track. On mobile
                   * it's floated above the thumb (below) so the track gets the

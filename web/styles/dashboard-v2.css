@@ -549,6 +549,11 @@
     /* A touch starting on the track drives the scrubber, not the page — so
      * dragging it on mobile never scrolls/bounces the page up and down. */
     touch-action: none;
+    /* ...and a drag must never start a text selection (which would otherwise
+     * highlight the clock/labels on mobile). */
+    -webkit-user-select: none;
+    user-select: none;
+    -webkit-touch-callout: none;
 }
 .sl-app .sl-scrub-thumb { transition: transform 0.12s ease, box-shadow 0.12s ease; }
 .sl-event-rail {
