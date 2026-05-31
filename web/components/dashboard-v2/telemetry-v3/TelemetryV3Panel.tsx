@@ -315,7 +315,7 @@ export default function TelemetryV3Panel({ device, devices, onSelect, scrubRow, 
                             {row?.temp != null && <span className="mono" style={{ fontSize: 11, fontWeight: 500, color: 'var(--t-text-3)', marginLeft: 3 }}>°C</span>}
                         </span>
                     </div>
-                    <LineTrend series={flight.temp} times={flight.times} band={[-60, 20]} status="nominal" fmtFn={(v) => tlmFmt.d1(v)} unit="°C" height={44} scrubT={scrubRow?.t ?? null} />
+                    <LineTrend series={flight.temp} times={flight.times} status="nominal" fmtFn={(v) => tlmFmt.d1(v)} unit="°C" height={44} scrubT={scrubRow?.t ?? null} />
                 </div>
             </Group>
 
