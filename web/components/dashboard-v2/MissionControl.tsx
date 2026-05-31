@@ -84,19 +84,59 @@ export default function MissionControlScreen() {
         return row;
     }, [visibleRows, effectiveScrubT]);
 
+    /* Median packet cadence — used to tell "fresh reading" from a gap. */
+    const medianDt = useMemo(() => {
+        if (visibleRows.length < 2) return 0;
+        const dts: number[] = [];
+        for (let i = 1; i < visibleRows.length; i++) dts.push(visibleRows[i].t - visibleRows[i - 1].t);
+        dts.sort((a, b) => a - b);
+        return dts[Math.floor(dts.length / 2)] || 0;
+    }, [visibleRows]);
+
+    /* No live reading at the cursor: out in the forecast, OR sitting in a
+     * transmission gap (the shown packet is much older than the cursor). The
+     * sidebar blanks its point-in-time values in either case. */
+    const scrubInGap = effectiveScrubT !== null && scrubRow !== null && medianDt > 0
+        && effectiveScrubT - scrubRow.t > medianDt * 3;
+    const noReading = isFuture || scrubInGap;
+
     const selectedDevice: DeviceSummary | null =
         selectedId ? devices.find(d => d.id === selectedId) ?? null : null;
 
-    /* Whole-flight totals (independent of the timeline range zoom). */
+    /* Ticking wall-clock for "time to present". null on server + first client
+     * render (SSR-safe), then live; refreshed each minute. */
+    const [nowMs, setNowMs] = useState<number | null>(null);
+    useEffect(() => {
+        setNowMs(Date.now());
+        const id = setInterval(() => setNowMs(Date.now()), 60_000);
+        return () => clearInterval(id);
+    }, []);
+
+    /* Whole-flight totals (independent of the timeline range zoom).
+     * Duration runs from the first packet to the present (not the last ping),
+     * so it keeps counting while the balloon is aloft. Distance is the length
+     * of the hindcast line — the wind-reconstructed path through GPS gaps —
+     * which is more realistic than straight-line hops between sparse fixes.
+     * Falls back to the GPS-fix sum if no hindcast. */
     const flightSummary: FlightSummary = useMemo(() => {
         if (rows.length === 0) return { durationMs: null, distanceKm: 0 };
-        const fixes = rows.filter(r => r.lat !== null && r.lon !== null) as Array<TelemetryRow & { lat: number; lon: number }>;
+        /* Until the clock mounts, fall back to the last packet (deterministic). */
+        const endT = nowMs ?? rows[rows.length - 1].t;
+        const durationMs = endT - rows[0].t;
         let distanceKm = 0;
-        for (let i = 1; i < fixes.length; i++) {
-            distanceKm += haversineKm(fixes[i - 1].lat, fixes[i - 1].lon, fixes[i].lat, fixes[i].lon);
+        const hindcast = forecast.hindcastPath;
+        if (hindcast && hindcast.length >= 2) {
+            for (let i = 1; i < hindcast.length; i++) {
+                distanceKm += haversineKm(hindcast[i - 1][1], hindcast[i - 1][0], hindcast[i][1], hindcast[i][0]);
+            }
+        } else {
+            const fixes = rows.filter(r => r.lat !== null && r.lon !== null) as Array<TelemetryRow & { lat: number; lon: number }>;
+            for (let i = 1; i < fixes.length; i++) {
+                distanceKm += haversineKm(fixes[i - 1].lat, fixes[i - 1].lon, fixes[i].lat, fixes[i].lon);
+            }
         }
-        return { durationMs: rows[rows.length - 1].t - rows[0].t, distanceKm };
-    }, [rows]);
+        return { durationMs, distanceKm };
+    }, [rows, forecast.hindcastPath, nowMs]);
 
     function handleSelectDevice(id: string) {
         setSelectedId(id);
@@ -121,6 +161,7 @@ export default function MissionControlScreen() {
                             scrubRow={scrubRow}
                             summary={flightSummary}
                             rows={rows}
+                            isFuture={noReading}
                         />
                     </div>
                 </div>
@@ -159,6 +200,7 @@ export default function MissionControlScreen() {
                             scrubRow={scrubRow}
                             summary={flightSummary}
                             rows={rows}
+                            isFuture={noReading}
                         />
                     </div>
                 </ChartsDrawer>
@@ -184,6 +226,7 @@ export default function MissionControlScreen() {
                     visibleRows={visibleRows}
                     rows={rows}
                     scrubT={effectiveScrubT}
+                    isFuture={noReading}
                 />
                 {/* Right side: the map fills the full height; the scrubber
                   * floats over its bottom edge as a self-contained bar. */}
@@ -220,7 +263,7 @@ export default function MissionControlScreen() {
  * ────────────────────────────────────────────────────────────── */
 function LeftColumn({
     device, devices, onSelect, scrubRow, summary,
-    visibleRows, rows, scrubT,
+    visibleRows, rows, scrubT, isFuture,
 }: {
     device: DeviceSummary | null;
     devices: DeviceSummary[];
@@ -230,6 +273,7 @@ function LeftColumn({
     visibleRows: TelemetryRow[];
     rows: TelemetryRow[];
     scrubT: number | null;
+    isFuture: boolean;
 }) {
     return (
         <div
@@ -251,6 +295,7 @@ function LeftColumn({
                     scrubRow={scrubRow}
                     summary={summary}
                     rows={rows}
+                    isFuture={isFuture}
                 />
             </div>
         </div>
@@ -869,8 +914,6 @@ function Timeline({ visibleRows, scrubT, onScrub, futureEndT, floating = false }
         const rect = el.getBoundingClientRect();
         const f = Math.max(0, Math.min(1, (clientX - rect.left) / rect.width));
         const t = tStart + span * f;
-        /* Snap to the last packet (re-arm follow) within 1% of that boundary. */
-        if (Math.abs(t - packetEndT) <= span * 0.01) { onScrub(null); return; }
         onScrub(t);
     }
 

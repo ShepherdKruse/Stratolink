@@ -143,50 +143,26 @@
 
 ::selection { background: var(--t-accent-soft); }
 
-/* slim scrollbar for the panel */
-.tlm-scroll::-webkit-scrollbar { width: 9px; }
+/* Minimal, elegant scrollbar — a thin hairline thumb that fades in on
+ * hover and stays out of the way otherwise. */
+.tlm-scroll {
+  scrollbar-width: thin;                         /* Firefox */
+  scrollbar-color: transparent transparent;
+  transition: scrollbar-color 0.25s var(--ease);
+}
+.tlm-scroll:hover { scrollbar-color: var(--t-border-2) transparent; }
+
+.tlm-scroll::-webkit-scrollbar { width: 6px; height: 6px; }
 .tlm-scroll::-webkit-scrollbar-track { background: transparent; }
 .tlm-scroll::-webkit-scrollbar-thumb {
-  background: var(--t-border-2);
+  background: transparent;
   border-radius: 99px;
-  border: 2px solid var(--t-panel);
+  transition: background 0.25s var(--ease);
 }
+.tlm-scroll:hover::-webkit-scrollbar-thumb { background: var(--t-border-2); }
 .tlm-scroll::-webkit-scrollbar-thumb:hover { background: var(--t-text-4); }
+.tlm-scroll::-webkit-scrollbar-corner { background: transparent; }
 
-@keyframes tlm-pulse {
-  0%, 100% { opacity: 1; transform: scale(1); }
-  50%      { opacity: 0.35; transform: scale(0.82); }
-}
-.live-dot { animation: tlm-pulse 1.8s var(--ease) infinite; }
-
-@keyframes tlm-fade-in {
-  from { opacity: 0; transform: translateY(-3px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes tlm-sway {
-  0%, 100% { transform: rotate(-7deg); }
-  50%      { transform: rotate(7deg); }
-}
-.att-sway { animation: tlm-sway 3.4s var(--ease) infinite; }
-
-@keyframes tlm-flow {
-  0%   { left: 4%;  opacity: 0; }
-  18%  { opacity: 1; }
-  82%  { opacity: 1; }
-  100% { left: 96%; opacity: 0; }
-}
-.flow-dot {
-  position: absolute;
-  top: 50%;
-  width: 5px; height: 5px;
-  border-radius: 50%;
-  transform: translate(-50%, -50%);
-  animation: tlm-flow 1.6s linear infinite;
-}
-
-@keyframes tlm-halo {
-  0%, 100% { opacity: 0.5; transform: translate(-50%, -50%) scale(0.9); }
-  50%      { opacity: 0.9; transform: translate(-50%, -50%) scale(1.12); }
-}
-.day-halo { animation: tlm-halo 2.6s var(--ease) infinite; }
+/* Animations intentionally removed — the telemetry panels are static (no
+ * pulsing/swaying/flowing motion). The `.live-dot` / `.att-sway` class names may
+ * still appear in markup but are now inert. */

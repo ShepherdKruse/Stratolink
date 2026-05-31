@@ -1,34 +1,13 @@
 'use client';
 
 import type { ReactNode } from 'react';
-import { STATUS_LABEL, type StatusLevel, worst } from '@/lib/telemetry/telemetryV3Format';
+import { STATUS_LABEL, type StatusLevel } from '@/lib/telemetry/telemetryV3Format';
 
 export const DOT: Record<StatusLevel, string> = {
     nominal: 'var(--t-nominal)',
     warn: 'var(--t-warn)',
     critical: 'var(--t-critical)',
 };
-
-export function Chevron({ open }: { open: boolean }) {
-    return (
-        <svg
-            width="11"
-            height="11"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2.4"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            style={{
-                transform: open ? 'rotate(90deg)' : 'rotate(0deg)',
-                transition: 'transform 0.22s var(--ease)',
-            }}
-        >
-            <polyline points="9 6 15 12 9 18" />
-        </svg>
-    );
-}
 
 export function StatusChip({ status, label }: { status: StatusLevel; label?: string }) {
     const c = DOT[status];
@@ -88,95 +67,21 @@ export function Divider() {
 }
 
 export function Group({
-    index,
-    title,
-    statuses,
-    summary,
     children,
-    open,
-    onToggle,
     gkey,
 }: {
-    index: string;
-    title: string;
-    statuses: StatusLevel[];
-    summary?: string;
+    /** Kept for call-site compatibility; no longer rendered (no section header). */
+    index?: string;
+    title?: string;
     children: ReactNode;
-    open: boolean;
-    onToggle: () => void;
     gkey?: string;
 }) {
-    const w = worst(statuses);
     return (
         <section
             id={gkey ? `grp-${gkey}` : undefined}
-            style={{ borderBottom: '1px solid var(--t-border)', scrollMarginTop: 8 }}
+            style={{ borderBottom: '1px solid var(--t-border)' }}
         >
-            <button
-                type="button"
-                onClick={onToggle}
-                style={{
-                    width: '100%',
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: 10,
-                    padding: '13px 18px',
-                    background: 'transparent',
-                    border: 0,
-                    cursor: 'pointer',
-                    textAlign: 'left',
-                    color: 'var(--t-text-2)',
-                }}
-            >
-                <Chevron open={open} />
-                <span className="eyebrow" style={{ color: 'var(--t-text-4)', fontSize: 9 }}>
-                    {index}
-                </span>
-                <span
-                    className="disp"
-                    style={{
-                        fontSize: 13,
-                        fontWeight: 600,
-                        color: 'var(--t-text)',
-                        letterSpacing: '0.01em',
-                        flex: 1,
-                        minWidth: 0,
-                        whiteSpace: 'nowrap',
-                        overflow: 'hidden',
-                        textOverflow: 'ellipsis',
-                    }}
-                >
-                    {title}
-                </span>
-                {!open && summary && (
-                    <span
-                        className="mono"
-                        style={{
-                            fontSize: 10.5,
-                            color: 'var(--t-text-3)',
-                            marginRight: 8,
-                            whiteSpace: 'nowrap',
-                            flexShrink: 0,
-                        }}
-                    >
-                        {summary}
-                    </span>
-                )}
-                <span
-                    title={STATUS_LABEL[w]}
-                    style={{
-                        width: 7,
-                        height: 7,
-                        borderRadius: '50%',
-                        background: DOT[w],
-                        boxShadow:
-                            w !== 'nominal'
-                                ? `0 0 0 3px ${w === 'critical' ? 'var(--t-critical-soft)' : 'var(--t-warn-soft)'}`
-                                : 'none',
-                    }}
-                />
-            </button>
-            {open && <div style={{ padding: '0 18px 14px' }}>{children}</div>}
+            <div style={{ padding: '6px 18px 14px' }}>{children}</div>
         </section>
     );
 }

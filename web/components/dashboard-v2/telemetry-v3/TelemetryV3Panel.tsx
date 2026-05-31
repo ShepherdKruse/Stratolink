@@ -1,33 +1,29 @@
 'use client';
 
 import Image from 'next/image';
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { fmt, type TelemetryRow } from '@/components/dashboard-v2/atoms';
-import { fmtAltitudeM } from '@/components/dashboard-v2/shared';
 import type { DeviceSummary } from '@/components/dashboard-v2/useTelemetry';
 import {
-    altDelta30m,
-    ascentRateMpsAtScrub,
     buildFlightSeries,
     computePayloadAttitude,
     last,
-    maxGatewaysSeen,
-    noFixDurationMs,
 } from '@/lib/telemetry/flightSeries';
-import { evalStatus, relTime, stamp, tlmFmt, type StatusLevel } from '@/lib/telemetry/telemetryV3Format';
-import { LineTrend, PowerOverlay, SignalTrendRow, StateStrip } from './charts';
-import {
-    AscentRate,
-    AttitudeBubble,
-    DaylightMeter,
-    GpsKvRow,
-    HeadingCompass,
-    PowerFlow,
-    SignalQuality,
-    TrendDelta,
-} from './extras';
+import { relTime, stamp, tlmFmt, type StatusLevel } from '@/lib/telemetry/telemetryV3Format';
+import { useGatewayPoints } from '@/lib/gateways/data';
+import { haversineKm } from '@/lib/gateways/range';
+import { LineTrend } from './charts';
 import ThemeToggle from '@/components/dashboard-v2/ThemeToggle';
-import { Divider, Group, StatTile, StatusChip } from './primitives';
+import { Divider, DOT, Group } from './primitives';
+
+const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
+/** "May 17, 2026 · 15:55 UTC" — no seconds, friendlier than the raw stamp. */
+function fmtLaunch(ms: number): string {
+    const d = new Date(ms);
+    const p = (n: number) => String(n).padStart(2, '0');
+    return `${MONTHS[d.getUTCMonth()]} ${d.getUTCDate()}, ${d.getUTCFullYear()} · ${p(d.getUTCHours())}:${p(d.getUTCMinutes())} UTC`;
+}
 
 type FlightSummary = { durationMs: number | null; distanceKm: number };
 
@@ -38,151 +34,139 @@ export type TelemetryV3PanelProps = {
     scrubRow: TelemetryRow | null;
     summary: FlightSummary;
     rows: TelemetryRow[];
+    /** True when there's no live reading at the cursor — out in the forecast,
+     *  or sitting in a transmission gap. Point-in-time readings are blanked. */
+    isFuture?: boolean;
 };
 
-function LiveContact({ lastContactT }: { lastContactT: number | null }) {
+/** Live-updating "time since last contact", value only (for a key metric). */
+function LastContactValue({ lastContactT }: { lastContactT: number | null }) {
     const [now, setNow] = useState(() => Date.now());
     useEffect(() => {
         const id = setInterval(() => setNow(Date.now()), 3000);
         return () => clearInterval(id);
     }, []);
-    if (lastContactT == null) return <span className="mono" style={{ fontSize: 10.5, color: 'var(--t-text-3)' }}>—</span>;
+    if (lastContactT == null) return <>—</>;
+    return <>{relTime(Math.max(0, now - lastContactT))}</>;
+}
+
+/** Header status — a quiet dot + label, not a button/chip. */
+function HeaderStatus({ status, label }: { status: StatusLevel; label: string }) {
     return (
-        <span className="mono" style={{ fontSize: 10.5, color: 'var(--t-text-2)', fontWeight: 600 }}>
-            +{relTime(Math.max(0, now - lastContactT))}
+        <span style={{ display: 'inline-flex', alignItems: 'center', gap: 6 }}>
+            <span style={{ width: 6, height: 6, borderRadius: '50%', background: DOT[status], flexShrink: 0 }} />
+            <span className="eyebrow" style={{ color: 'var(--t-text-2)', fontSize: 9.5 }}>{label}</span>
         </span>
     );
 }
 
-function TriageBanner({ alerts, onJump }: { alerts: { sev: StatusLevel; key: string; title: string; detail: string }[]; onJump: (k: string) => void }) {
-    const [expanded, setExpanded] = useState(false);
-    if (alerts.length === 0) return null;
-    const lead = alerts[0];
-    const rest = alerts.slice(1);
-    const leadCol = lead.sev === 'critical' ? 'var(--t-critical)' : lead.sev === 'warn' ? 'var(--t-warn)' : 'var(--t-nominal)';
+/** Link status tied to the chart: green "Transmitting" when the cursor sits on
+ *  real telemetry, red "No Connection" in a gap or out past the last packet. */
+function ConnectionStatus({ connected }: { connected: boolean }) {
+    return <HeaderStatus status={connected ? 'nominal' : 'critical'} label={connected ? 'Transmitting' : 'No Connection'} />;
+}
 
+/** A single key metric, shown plainly (no box): small label over a big value,
+ * optionally preceded by a small icon. */
+function Metric({ label, value, unit, icon }: { label: string; value: React.ReactNode; unit?: string; icon?: React.ReactNode }) {
     return (
-        <div style={{ margin: '14px 18px 0', borderRadius: 4, border: '1px solid var(--t-border)', overflow: 'hidden', background: 'var(--t-panel-2)' }}>
-            <button
-                type="button"
-                onClick={() => onJump(lead.key)}
-                style={{ width: '100%', display: 'flex', alignItems: 'stretch', gap: 0, background: 'transparent', border: 0, padding: 0, cursor: 'pointer', textAlign: 'left' }}
-            >
-                <div style={{ width: 4, flexShrink: 0, background: leadCol }} />
-                <div style={{ padding: '12px 14px', minWidth: 0, flex: 1 }}>
-                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 7 }}>
-                        <span className="eyebrow" style={{ color: 'var(--t-text-3)', fontSize: 9 }}>Needs attention</span>
-                        <span className="eyebrow" style={{ color: leadCol, fontSize: 9 }}>{lead.sev === 'critical' ? 'Critical' : 'Warning'}</span>
-                    </div>
-                    <div className="disp" style={{ fontSize: 14, fontWeight: 700, color: 'var(--t-text)' }}>{lead.title}</div>
-                    <div className="mono" style={{ fontSize: 10.5, color: 'var(--t-text-2)', marginTop: 2, lineHeight: 1.35 }}>{lead.detail}</div>
+        <div style={{ minWidth: 0 }}>
+            <div className="eyebrow" style={{ color: 'var(--t-text-3)', marginBottom: 5, fontSize: 9, whiteSpace: 'nowrap' }}>
+                {label}
+            </div>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+                {icon}
+                <div style={{ display: 'flex', alignItems: 'baseline', gap: 4 }}>
+                    <span className="disp mono" style={{ fontSize: 19, fontWeight: 600, color: 'var(--t-text)', letterSpacing: '-0.01em', lineHeight: 1, whiteSpace: 'nowrap' }}>
+                        {value}
+                    </span>
+                    {unit && <span className="mono" style={{ fontSize: 11, color: 'var(--t-text-3)' }}>{unit}</span>}
                 </div>
-            </button>
-            {rest.length > 0 && (
-                <div style={{ borderTop: '1px solid var(--t-border)' }}>
-                    <button
-                        type="button"
-                        onClick={() => setExpanded((v) => !v)}
-                        style={{ width: '100%', padding: '8px 14px', background: 'transparent', border: 0, cursor: 'pointer', color: 'var(--t-text-2)' }}
-                    >
-                        <span className="eyebrow" style={{ fontSize: 9 }}>{rest.length} more</span>
-                    </button>
-                    {expanded &&
-                        rest.map((a) => (
-                            <button
-                                key={a.key}
-                                type="button"
-                                onClick={() => onJump(a.key)}
-                                style={{ width: '100%', padding: '8px 14px', background: 'transparent', border: 0, borderTop: '1px solid var(--t-hairline)', cursor: 'pointer', textAlign: 'left' }}
-                            >
-                                <div className="disp" style={{ fontSize: 12, fontWeight: 600 }}>{a.title}</div>
-                                <div className="mono" style={{ fontSize: 10, color: 'var(--t-text-3)' }}>{a.detail}</div>
-                            </button>
-                        ))}
-                </div>
-            )}
+            </div>
         </div>
     );
 }
 
-export default function TelemetryV3Panel({ device, devices, onSelect, scrubRow, summary, rows }: TelemetryV3PanelProps) {
-    const [open, setOpen] = useState({ flight: true, power: true, link: true, att: true });
-    const toggle = (k: keyof typeof open) => setOpen((o) => ({ ...o, [k]: !o[k] }));
+/** Small battery glyph whose fill reflects state of charge. */
+function BatteryIcon({ soc, color }: { soc: number; color: string }) {
+    return (
+        <svg width="23" height="12" viewBox="0 0 24 12" style={{ flexShrink: 0 }}>
+            <rect x="0.6" y="1.2" width="20" height="9.6" rx="1.8" fill="none" stroke="var(--t-border-2)" strokeWidth="1.1" />
+            <rect x="21.2" y="4" width="2.2" height="4" rx="0.7" fill="var(--t-border-2)" />
+            <rect x="2" y="2.6" width={Math.max(1.5, 17 * (Math.max(0, Math.min(100, soc)) / 100))} height="6.8" rx="1" fill={color} />
+        </svg>
+    );
+}
 
+/** Sun (warming with brightness) by day, moon at night — relates lux to phase. */
+function DaylightIcon({ lux }: { lux: number }) {
+    if (lux < 10) {
+        return (
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--t-text-3)" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0 }}>
+                <path d="M21 12.8A9 9 0 1 1 11.2 3 7 7 0 0 0 21 12.8z" />
+            </svg>
+        );
+    }
+    const col = lux < 200 ? '#5C6B7A' : lux < 5000 ? '#9A7B3C' : lux < 25000 ? '#C9922E' : '#E8B020';
+    return (
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke={col} strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0 }}>
+            <circle cx="12" cy="12" r="4" />
+            <path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M19.1 4.9l-1.4 1.4M6.3 17.7l-1.4 1.4" />
+        </svg>
+    );
+}
+
+/** Tiny payload-tilt indicator: a mast leaning from vertical by `deg`. */
+function TiltIcon({ deg, color }: { deg: number; color: string }) {
+    const d = Math.max(-80, Math.min(80, deg));
+    return (
+        <svg width="14" height="14" viewBox="0 0 24 24" style={{ flexShrink: 0 }}>
+            <line x1="12" y1="3" x2="12" y2="21" stroke="var(--t-text-4)" strokeWidth="1" strokeDasharray="2 2" />
+            <g transform={`rotate(${d} 12 21)`}>
+                <line x1="12" y1="21" x2="12" y2="5" stroke={color} strokeWidth="2.2" strokeLinecap="round" />
+                <circle cx="12" cy="5" r="2.8" fill={color} />
+            </g>
+        </svg>
+    );
+}
+
+export default function TelemetryV3Panel({ device, devices, onSelect, scrubRow, summary, rows, isFuture = false }: TelemetryV3PanelProps) {
     const flight = useMemo(() => buildFlightSeries(rows), [rows]);
-    const gwTotal = useMemo(() => maxGatewaysSeen(flight), [flight]);
 
-    const hasFix = scrubRow?.lat != null && scrubRow.lon != null;
-    const sats = scrubRow?.sats ?? 0;
-    const gpsStatus: StatusLevel = !hasFix || sats <= 0 ? 'critical' : sats < 4 ? 'warn' : 'nominal';
+    /* Point-in-time readings: blanked when scrubbed past the last transmission
+     * (there's no telemetry out in the forecast). */
+    const row = isFuture ? null : scrubRow;
+    const altVal = row?.presAlt;
+    const batt = row?.batt;
+    const solar = row?.sol;
+    const lux = row ? (row.lux ?? last(flight.lux) ?? null) : null;
+    const soc = batt != null ? Math.round(Math.min(100, Math.max(0, ((batt - 3.0) / (4.2 - 3.0)) * 100))) : null;
+    const battCol = soc == null ? 'var(--t-text-3)' : soc < 12 ? 'var(--t-critical)' : soc < 35 ? 'var(--t-warn)' : 'var(--t-nominal)';
+    const rssi = row?.rssi;
+    const snr = row?.snr;
+    const gwNow = row ? (row.gateways?.length ?? last(flight.gw) ?? 0) : null;
 
-    const altVal = scrubRow?.presAlt;
-    const batt = scrubRow?.batt;
-    const solar = scrubRow?.sol;
-    const rssi = scrubRow?.rssi;
-    const snr = scrubRow?.snr;
-    const gwNow = scrubRow?.gateways?.length ?? last(flight.gw) ?? 0;
+    /* How many known gateways are within a fixed 150 km radius of the balloon's
+     * current position (matches the 150 km coverage rings on the map). */
+    const gatewayPoints = useGatewayPoints();
+    const gwVisible = useMemo(() => {
+        const la = row?.lat ?? null;
+        const lo = row?.lon ?? null;
+        if (la == null || lo == null || !gatewayPoints.length) return null;
+        let n = 0;
+        for (const g of gatewayPoints) if (haversineKm(la, lo, g.lat, g.lon) <= 150) n++;
+        return n;
+    }, [row, gatewayPoints]);
 
     const payloadAttitude = useMemo(
-        () =>
-            scrubRow
-                ? computePayloadAttitude(scrubRow.ax, scrubRow.ay, scrubRow.az)
-                : null,
-        [scrubRow],
+        () => (row ? computePayloadAttitude(row.ax, row.ay, row.az) : null),
+        [row],
     );
+    const tilt = payloadAttitude?.tiltDeg ?? null;
+    const tiltReliable = payloadAttitude?.reliable ?? false;
+    const tiltCol = tilt == null || !tiltReliable ? 'var(--t-text-3)' : tilt < 15 ? 'var(--t-nominal)' : tilt < 35 ? 'var(--t-warn)' : 'var(--t-critical)';
 
-    const jumpTo = useCallback((key: string) => {
-        const k = key as keyof typeof open;
-        setOpen((o) => ({ ...o, [k]: true }));
-        requestAnimationFrame(() => {
-            const el = document.getElementById(`grp-${key}`);
-            const sc = document.querySelector('.tlm-scroll');
-            if (el && sc) {
-                const top = el.getBoundingClientRect().top - sc.getBoundingClientRect().top + sc.scrollTop - 8;
-                sc.scrollTo({ top, behavior: 'smooth' });
-            }
-        });
-    }, []);
 
-    const alerts = useMemo(() => {
-        const list: { sev: StatusLevel; key: string; title: string; detail: string }[] = [];
-        const noFix = noFixDurationMs(flight);
-        if (gpsStatus === 'critical') {
-            list.push({
-                sev: 'critical',
-                key: 'flight',
-                title: 'GPS — no fix',
-                detail: noFix != null ? `No lock for ${relTime(noFix)} · using barometric altitude` : 'No satellite lock on latest packet',
-            });
-        }
-        if (batt != null && batt < 3.45) {
-            list.push({
-                sev: batt < 3.2 ? 'critical' : 'warn',
-                key: 'power',
-                title: 'Battery low',
-                detail: `${tlmFmt.d2(batt)} V on last packet`,
-            });
-        }
-        if (rssi != null && rssi < -110) {
-            list.push({
-                sev: rssi < -118 ? 'critical' : 'warn',
-                key: 'link',
-                title: 'Signal marginal',
-                detail: `${tlmFmt.int(rssi)} dBm · ${gwNow} of ${gwTotal} gateways on last uplink`,
-            });
-        }
-        return list.sort((a, b) => (a.sev === 'critical' ? -1 : b.sev === 'critical' ? 1 : 0));
-    }, [flight, gpsStatus, batt, rssi, gwNow, gwTotal]);
-
-    const altDelta = altDelta30m(flight);
-    const rate = useMemo(() => ascentRateMpsAtScrub(rows, scrubRow), [rows, scrubRow]);
-    const lastFixIdx = [...flight.sats].reverse().findIndex((s) => s != null && s > 0);
-    const lastFixT =
-        lastFixIdx >= 0 && flight.times.length
-            ? stamp(flight.times[flight.times.length - 1 - lastFixIdx])
-            : '—';
-
-    const presAltStr = fmtAltitudeM(altVal ?? null).replace(' m', '');
     const altStatus: StatusLevel =
         altVal == null ? 'critical' : altVal >= 8500 && altVal <= 12000 ? 'nominal' : 'warn';
 
@@ -217,74 +201,69 @@ export default function TelemetryV3Panel({ device, devices, onSelect, scrubRow, 
                         <div className="eyebrow" style={{ color: 'var(--t-text-3)', marginBottom: 6 }}>
                             Monitoring
                         </div>
-                        <select
-                            value={device?.id ?? ''}
-                            onChange={(e) => onSelect(e.target.value)}
-                            className="disp"
-                            style={{
-                                fontSize: 24,
-                                fontWeight: 600,
-                                color: 'var(--t-text)',
-                                background: 'var(--t-panel)',
-                                border: 'none',
-                                cursor: 'pointer',
-                                padding: 0,
-                                maxWidth: '100%',
-                            }}
-                        >
-                            {devices.map((d) => (
-                                <option key={d.id} value={d.id}>
-                                    {d.callsign ?? d.id}
-                                </option>
-                            ))}
-                        </select>
+                        {/* Custom trigger (big name + caret) with a transparent
+                          * native <select> overlaid — gives a clean, consistent
+                          * look across browsers while keeping the native dropdown
+                          * (and its normal-sized option list). */}
+                        <div style={{ position: 'relative', display: 'inline-flex', alignItems: 'center', gap: 7, maxWidth: '100%' }}>
+                            <span className="disp" style={{ fontSize: 24, fontWeight: 600, color: 'var(--t-text)', lineHeight: 1.1, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                                {device?.callsign ?? device?.id ?? '—'}
+                            </span>
+                            {devices.length > 1 && (
+                                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="var(--t-text-3)" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0 }} aria-hidden>
+                                    <polyline points="6 9 12 15 18 9" />
+                                </svg>
+                            )}
+                            <select
+                                value={device?.id ?? ''}
+                                onChange={(e) => onSelect(e.target.value)}
+                                aria-label="Select balloon"
+                                style={{
+                                    position: 'absolute',
+                                    inset: 0,
+                                    width: '100%',
+                                    height: '100%',
+                                    opacity: 0,
+                                    cursor: 'pointer',
+                                    fontSize: 14,
+                                    border: 'none',
+                                    appearance: 'none',
+                                    WebkitAppearance: 'none',
+                                }}
+                            >
+                                {devices.map((d) => (
+                                    <option key={d.id} value={d.id}>
+                                        {d.callsign ?? d.id}
+                                    </option>
+                                ))}
+                            </select>
+                        </div>
                         {device?.callsign && (
                             <div className="mono" style={{ fontSize: 10, color: 'var(--t-text-3)', marginTop: 2 }}>
                                 {device.id}
                             </div>
                         )}
                     </div>
-                    <div style={{ display: 'flex', flexDirection: 'column', gap: 6, alignItems: 'flex-end' }}>
-                        <StatusChip status={gpsStatus} label={hasFix ? 'Fix' : 'No fix'} />
-                        <StatusChip status="nominal" label={device?.status ? String(device.status) : '—'} />
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: 8, alignItems: 'flex-end' }}>
+                        <HeaderStatus status="nominal" label={device?.status ? String(device.status) : '—'} />
                     </div>
                 </div>
-                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '12px 18px 14px' }}>
+                <div style={{ padding: '12px 18px 0' }}>
                     <span className="mono" style={{ fontSize: 10.5, color: 'var(--t-text-3)' }}>
-                        {device?.launchedAt ? `Launched ${fmt.datetime(device.launchedAt)}` : 'Not launched'}
-                    </span>
-                    <span style={{ display: 'inline-flex', alignItems: 'center', gap: 6 }}>
-                        <span className="live-dot" style={{ width: 6, height: 6, borderRadius: '50%', background: 'var(--t-nominal)' }} />
-                        <span className="eyebrow" style={{ color: 'var(--t-text-3)', fontSize: 9 }}>
-                            Last contact
-                        </span>
-                        <LiveContact lastContactT={device?.lastContactT ?? null} />
+                        {device?.launchedAt ? `Launched ${fmtLaunch(device.launchedAt)}` : 'Not launched'}
                     </span>
                 </div>
-                <TriageBanner alerts={alerts} onJump={jumpTo} />
-                <div style={{ display: 'flex', gap: 6, padding: '14px 18px 16px' }}>
-                    <div style={{ flex: 1.4, minWidth: 0, padding: '11px 12px', background: 'var(--t-panel-2)', borderRadius: 3, border: '1px solid var(--t-border)' }}>
-                        <div className="eyebrow" style={{ color: 'var(--t-text-3)', marginBottom: 5, fontSize: 9 }}>
-                            Alt · pressure
-                        </div>
-                        <div style={{ display: 'flex', alignItems: 'baseline', gap: 3 }}>
-                            <span className="disp mono" style={{ fontSize: 21, fontWeight: 600, color: 'var(--t-text)', lineHeight: 1 }}>
-                                {presAltStr === '—' ? '—' : presAltStr}
-                            </span>
-                            {presAltStr !== '—' && <span className="mono" style={{ fontSize: 11, color: 'var(--t-text-3)' }}>m</span>}
-                        </div>
-                        {altDelta != null && (
-                            <div style={{ marginTop: 6 }}>
-                                <TrendDelta delta={altDelta} unit="m" window="30 min" />
-                            </div>
-                        )}
-                    </div>
-                    <div style={{ flex: 1, minWidth: 0, padding: '11px 12px', background: 'var(--t-panel-2)', borderRadius: 3, border: '1px solid var(--t-border)' }}>
-                        <StatTile label="Total time" value={summary.durationMs != null ? fmt.duration(summary.durationMs) : '—'} />
-                    </div>
-                    <div style={{ flex: 1.1, minWidth: 0, padding: '11px 12px', background: 'var(--t-panel-2)', borderRadius: 3, border: '1px solid var(--t-border)' }}>
-                        <StatTile label="Total dist" value={`${Math.round(summary.distanceKm)}`} unit="km" />
-                    </div>
+                <div
+                    style={{
+                        display: 'grid',
+                        gridTemplateColumns: 'repeat(auto-fit, minmax(72px, 1fr))',
+                        gap: '16px 18px',
+                        padding: '16px 18px 18px',
+                    }}
+                >
+                    <Metric label="Total time" value={summary.durationMs != null ? fmt.duration(summary.durationMs) : '—'} />
+                    <Metric label="Total dist" value={Math.round(summary.distanceKm).toLocaleString('en-US')} unit="km" />
+                    <Metric label="Last contact" value={<LastContactValue lastContactT={device?.lastContactT ?? null} />} />
                 </div>
             </div>
 
@@ -292,18 +271,25 @@ export default function TelemetryV3Panel({ device, devices, onSelect, scrubRow, 
                 index="01"
                 title="Flight path"
                 gkey="flight"
-                statuses={[altStatus, gpsStatus]}
-                summary={altVal != null ? `${tlmFmt.int(altVal)} m` : '—'}
-                open={open.flight}
-                onToggle={() => toggle('flight')}
             >
+                <div style={{ padding: '4px 0 2px' }}>
+                    <ConnectionStatus connected={!isFuture} />
+                </div>
                 <div style={{ padding: '13px 0' }}>
-                    <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 8 }}>
+                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 8 }}>
                         <span className="eyebrow" style={{ color: 'var(--t-text-2)' }}>
-                            Altitude <span style={{ color: 'var(--t-text-4)', fontSize: 9 }}>m · pres</span>
+                            Altitude <span style={{ color: 'var(--t-text-4)', fontSize: 9 }}>pres</span>
                         </span>
-                        <span className="disp mono" style={{ fontSize: 22, fontWeight: 600 }}>
-                            {altVal != null ? tlmFmt.int(altVal) : '—'}
+                        <span style={{ display: 'flex', alignItems: 'baseline', gap: 9 }}>
+                            {row?.pres != null && (
+                                <span className="mono" style={{ fontSize: 11, color: 'var(--t-text-3)', fontVariantNumeric: 'tabular-nums' }}>
+                                    {tlmFmt.d1(row.pres)} hPa
+                                </span>
+                            )}
+                            <span className="disp mono" style={{ fontSize: 22, fontWeight: 600 }}>
+                                {altVal != null ? tlmFmt.int(altVal) : '—'}
+                                {altVal != null && <span className="mono" style={{ fontSize: 11, fontWeight: 500, color: 'var(--t-text-3)', marginLeft: 3 }}>m</span>}
+                            </span>
                         </span>
                     </div>
                     <LineTrend
@@ -314,24 +300,21 @@ export default function TelemetryV3Panel({ device, devices, onSelect, scrubRow, 
                         fmtFn={(v) => tlmFmt.int(v)}
                         unit="m"
                         height={58}
+                        scrubT={scrubRow?.t ?? null}
                     />
                 </div>
                 <Divider />
-                <div style={{ padding: '15px 0' }}>
-                    <HeadingCompass heading={scrubRow?.hdg ?? last(flight.heading) ?? null} speed={scrubRow?.spd != null ? scrubRow.spd * 3.6 : last(flight.speed) ?? null} />
-                </div>
-                <Divider />
-                <AscentRate rate={rate} />
-                <Divider />
-                <div style={{ padding: '13px 0 0' }}>
-                    <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 8 }}>
+                <div style={{ padding: '13px 0' }}>
+                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 8 }}>
                         <span className="eyebrow" style={{ color: 'var(--t-text-2)' }}>
-                            GPS satellites
+                            Temperature
                         </span>
-                        <StatusChip status={gpsStatus} label={sats > 0 ? `${sats} sats` : 'No fix'} />
+                        <span className="disp mono" style={{ fontSize: 22, fontWeight: 600 }}>
+                            {row?.temp != null ? tlmFmt.d1(row.temp) : '—'}
+                            {row?.temp != null && <span className="mono" style={{ fontSize: 11, fontWeight: 500, color: 'var(--t-text-3)', marginLeft: 3 }}>°C</span>}
+                        </span>
                     </div>
-                    <StateStrip sats={flight.sats} times={flight.times} />
-                    <GpsKvRow noFixMs={noFixDurationMs(flight)} lastFixStamp={lastFixT} />
+                    <LineTrend series={flight.temp} times={flight.times} band={[-60, 20]} status="nominal" fmtFn={(v) => tlmFmt.d1(v)} unit="°C" height={44} scrubT={scrubRow?.t ?? null} />
                 </div>
             </Group>
 
@@ -339,21 +322,50 @@ export default function TelemetryV3Panel({ device, devices, onSelect, scrubRow, 
                 index="02"
                 title="Power & sun"
                 gkey="power"
-                statuses={[evalStatus(batt, { warn: 3.45, crit: 3.2, dir: 'high' }), 'nominal']}
-                summary={batt != null ? `${tlmFmt.d2(batt)} V` : '—'}
-                open={open.power}
-                onToggle={() => toggle('power')}
             >
-                <div style={{ padding: '14px 0 4px' }}>
-                    <PowerFlow solarV={solar} battV={batt} />
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '0 12px', padding: '14px 0 4px' }}>
+                    <Metric
+                        label="Battery"
+                        value={soc != null ? `${soc}%` : '—'}
+                        icon={soc != null ? <BatteryIcon soc={soc} color={battCol} /> : undefined}
+                    />
+                    <Metric
+                        label="Ambient light"
+                        value={lux != null ? Math.round(lux).toLocaleString('en-US') : '—'}
+                        unit={lux != null ? 'lux' : undefined}
+                        icon={lux != null ? <DaylightIcon lux={lux} /> : undefined}
+                    />
+                    <Metric
+                        label="Orientation"
+                        value={tilt != null ? `${Math.round(tilt)}°` : '—'}
+                        icon={tilt != null ? <TiltIcon deg={tilt} color={tiltCol} /> : undefined}
+                    />
                 </div>
                 <Divider />
-                <div style={{ paddingTop: 6 }}>
-                    <PowerOverlay flight={flight} height={104} />
+                <div style={{ padding: '13px 0' }}>
+                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 8 }}>
+                        <span className="eyebrow" style={{ color: 'var(--t-text-2)' }}>
+                            Battery
+                        </span>
+                        <span className="disp mono" style={{ fontSize: 22, fontWeight: 600 }}>
+                            {batt != null ? tlmFmt.d2(batt) : '—'}
+                            {batt != null && <span className="mono" style={{ fontSize: 11, fontWeight: 500, color: 'var(--t-text-3)', marginLeft: 3 }}>V</span>}
+                        </span>
+                    </div>
+                    <LineTrend series={flight.batt} times={flight.times} status="nominal" fmtFn={(v) => tlmFmt.d2(v)} unit="V" height={44} scrubT={scrubRow?.t ?? null} />
                 </div>
                 <Divider />
-                <div style={{ paddingTop: 14 }}>
-                    <DaylightMeter lux={scrubRow?.lux ?? last(flight.lux) ?? null} />
+                <div style={{ padding: '13px 0' }}>
+                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 8 }}>
+                        <span className="eyebrow" style={{ color: 'var(--t-text-2)' }}>
+                            Solar
+                        </span>
+                        <span className="disp mono" style={{ fontSize: 22, fontWeight: 600 }}>
+                            {solar != null ? tlmFmt.d2(solar) : '—'}
+                            {solar != null && <span className="mono" style={{ fontSize: 11, fontWeight: 500, color: 'var(--t-text-3)', marginLeft: 3 }}>V</span>}
+                        </span>
+                    </div>
+                    <LineTrend series={flight.solar} times={flight.times} status="nominal" fmtFn={(v) => tlmFmt.d2(v)} unit="V" height={44} scrubT={scrubRow?.t ?? null} />
                 </div>
             </Group>
 
@@ -361,76 +373,15 @@ export default function TelemetryV3Panel({ device, devices, onSelect, scrubRow, 
                 index="03"
                 title="Link"
                 gkey="link"
-                statuses={[evalStatus(rssi, { warn: -110, crit: -118, dir: 'high' }), evalStatus(snr, { warn: 5, crit: 0, dir: 'high' })]}
-                summary={rssi != null ? `${tlmFmt.int(rssi)} dBm` : '—'}
-                open={open.link}
-                onToggle={() => toggle('link')}
             >
-                <SignalQuality rssi={rssi} snr={snr} gateways={gwNow} gwTotal={gwTotal} />
-                <Divider />
-                <SignalTrendRow
-                    label="Signal strength"
-                    unit="RSSI · dBm"
-                    value={rssi != null ? tlmFmt.int(rssi) : '—'}
-                    series={flight.rssi}
-                    target={-110}
-                    dir="high"
-                    fmtFn={(v) => tlmFmt.int(v)}
-                />
-                <Divider />
-                <SignalTrendRow
-                    label="Signal clarity"
-                    unit="SNR · dB"
-                    value={snr != null ? tlmFmt.d1(snr) : '—'}
-                    series={flight.snr}
-                    target={5}
-                    dir="high"
-                    fmtFn={(v) => tlmFmt.d1(v)}
-                />
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '0 12px', padding: '14px 0' }}>
+                    <Metric label="Gateways" value={gwNow != null ? `${gwNow}` : '—'} unit={gwVisible != null ? `/ ${gwVisible}` : undefined} />
+                    <Metric label="GPS sats" value={row?.sats != null ? `${row.sats}` : '—'} />
+                    <Metric label="Tx Strength" value={rssi != null ? tlmFmt.int(rssi) : '—'} unit={rssi != null ? 'dBm' : undefined} />
+                    <Metric label="Tx Clarity" value={snr != null ? tlmFmt.d1(snr) : '—'} unit={snr != null ? 'dB' : undefined} />
+                </div>
             </Group>
 
-            <Group
-                index="04"
-                title="Attitude & environment"
-                gkey="att"
-                statuses={['nominal', 'nominal']}
-                summary={scrubRow?.temp != null ? `${tlmFmt.d1(scrubRow.temp)} °C` : '—'}
-                open={open.att}
-                onToggle={() => toggle('att')}
-            >
-                <div style={{ padding: '13px 0' }}>
-                    <span className="eyebrow" style={{ color: 'var(--t-text-2)' }}>
-                        Payload motion
-                    </span>
-                    <div style={{ marginTop: 10 }}>
-                        <AttitudeBubble attitude={payloadAttitude} />
-                    </div>
-                </div>
-                <Divider />
-                <div style={{ padding: '13px 0' }}>
-                    <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 8 }}>
-                        <span className="eyebrow" style={{ color: 'var(--t-text-2)' }}>
-                            External temp
-                        </span>
-                        <span className="disp mono" style={{ fontSize: 22, fontWeight: 600 }}>
-                            {scrubRow?.temp != null ? tlmFmt.d1(scrubRow.temp) : '—'}
-                        </span>
-                    </div>
-                    <LineTrend series={flight.temp} times={flight.times} band={[-60, 20]} status="nominal" fmtFn={(v) => tlmFmt.d1(v)} unit="°C" emphasis="low" height={44} />
-                </div>
-                <Divider />
-                <div style={{ padding: '13px 0' }}>
-                    <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 8 }}>
-                        <span className="eyebrow" style={{ color: 'var(--t-text-2)' }}>
-                            Pressure
-                        </span>
-                        <span className="disp mono" style={{ fontSize: 22, fontWeight: 600 }}>
-                            {scrubRow?.pres != null ? tlmFmt.d1(scrubRow.pres) : '—'}
-                        </span>
-                    </div>
-                    <LineTrend series={flight.press} times={flight.times} band={[200, 320]} status="nominal" fmtFn={(v) => tlmFmt.d1(v)} unit="hPa" emphasis="low" height={44} />
-                </div>
-            </Group>
 
             {flight.times.length > 0 && (
                 <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '14px 18px 20px', flexShrink: 0 }}>

@@ -41,103 +41,6 @@ export function TrendDelta({ delta, unit, window }: { delta: number; unit: strin
     );
 }
 
-const CARD = ['N', 'NNE', 'NE', 'ENE', 'E', 'ESE', 'SE', 'SSE', 'S', 'SSW', 'SW', 'WSW', 'W', 'WNW', 'NW', 'NNW'];
-function cardinal(deg: number) {
-    return CARD[Math.round(deg / 22.5) % 16];
-}
-
-export function HeadingCompass({ heading, speed }: { heading: number | null; speed: number | null }) {
-    if (heading == null) {
-        return <div className="mono" style={{ fontSize: 11, color: 'var(--t-text-3)' }}>No heading data</div>;
-    }
-    const h = heading;
-    const sp = speed ?? 0;
-    const S = 104;
-    const cx = 52;
-    const cy = 52;
-    const r = 46;
-    const ticks: [string, number][] = [
-        ['N', 0],
-        ['E', 90],
-        ['S', 180],
-        ['W', 270],
-    ];
-    const a = (h * Math.PI) / 180;
-    const tipX = cx + Math.sin(a) * (r - 7);
-    const tipY = cy - Math.cos(a) * (r - 7);
-    return (
-        <div style={{ display: 'flex', alignItems: 'center', gap: 18 }}>
-            <svg width={S} height={S} viewBox={`0 0 ${S} ${S}`} style={{ flexShrink: 0 }}>
-                <circle cx={cx} cy={cy} r={r} fill="var(--t-panel-2)" stroke="var(--t-border)" strokeWidth="1" />
-                <circle cx={cx} cy={cy} r={r - 8} fill="none" stroke="var(--t-hairline)" strokeWidth="1" />
-                {[...Array(24)].map((_, i) => {
-                    const t = ((i * 15) * Math.PI) / 180;
-                    const major = i % 6 === 0;
-                    return (
-                        <line
-                            key={i}
-                            x1={cx + Math.sin(t) * (r - 2)}
-                            y1={cy - Math.cos(t) * (r - 2)}
-                            x2={cx + Math.sin(t) * (r - (major ? 7 : 4))}
-                            y2={cy - Math.cos(t) * (r - (major ? 7 : 4))}
-                            stroke="var(--t-text-4)"
-                            strokeWidth={major ? 1.3 : 0.8}
-                        />
-                    );
-                })}
-                {ticks.map(([lbl, deg]) => {
-                    const t = (deg * Math.PI) / 180;
-                    return (
-                        <text
-                            key={lbl}
-                            x={cx + Math.sin(t) * (r - 15)}
-                            y={cy - Math.cos(t) * (r - 15) + 3.5}
-                            textAnchor="middle"
-                            fontSize="9.5"
-                            fontFamily="var(--font-mono)"
-                            fill={lbl === 'N' ? 'var(--t-text-2)' : 'var(--t-text-3)'}
-                            fontWeight={lbl === 'N' ? 700 : 500}
-                        >
-                            {lbl}
-                        </text>
-                    );
-                })}
-                <g transform={`rotate(${h} ${cx} ${cy})`}>
-                    <path
-                        d={`M${cx} ${cy - (r - 7)} L${cx - 6} ${cy - 14} L${cx} ${cy - 18} L${cx + 6} ${cy - 14} Z`}
-                        fill="var(--t-accent)"
-                    />
-                    <line x1={cx} y1={cy} x2={cx} y2={cy - 14} stroke="var(--t-accent)" strokeWidth="2" opacity="0.45" />
-                    <path d={`M${cx} ${cy + 12} L${cx - 4} ${cy} L${cx + 4} ${cy} Z`} fill="var(--t-text-4)" opacity="0.6" />
-                </g>
-                <circle className="live-dot" cx={tipX} cy={tipY} r="3.5" fill="var(--t-accent)" />
-                <circle cx={cx} cy={cy} r="3" fill="var(--t-text-2)" />
-            </svg>
-            <div style={{ minWidth: 0 }}>
-                <div className="eyebrow" style={{ color: 'var(--t-text-3)', fontSize: 9, marginBottom: 6 }}>
-                    Ground track
-                </div>
-                <div style={{ display: 'flex', alignItems: 'baseline', gap: 7 }}>
-                    <span className="disp" style={{ fontSize: 30, fontWeight: 600, color: 'var(--t-text)', letterSpacing: '-0.02em', lineHeight: 0.9 }}>
-                        {cardinal(h)}
-                    </span>
-                    <span className="mono" style={{ fontSize: 13, color: 'var(--t-text-3)' }}>
-                        {Math.round(h)}°
-                    </span>
-                </div>
-                <div style={{ display: 'flex', alignItems: 'baseline', gap: 4, marginTop: 8 }}>
-                    <span className="disp mono" style={{ fontSize: 20, fontWeight: 600, color: 'var(--t-accent)', letterSpacing: '-0.01em', lineHeight: 1 }}>
-                        {Math.round(sp)}
-                    </span>
-                    <span className="mono" style={{ fontSize: 11, color: 'var(--t-text-3)' }}>
-                        km/h
-                    </span>
-                </div>
-            </div>
-        </div>
-    );
-}
-
 export function AscentRate({ rate }: { rate: number | null }) {
     const lo = -1;
     const hi = 1;
@@ -301,9 +204,7 @@ export function PowerFlow({ solarV, battV }: { solarV: number | null; battV: num
                     <span className="mono" style={{ fontSize: 10, color: 'var(--t-text-2)' }}>{solar.toFixed(2)} V</span>
                 </div>
                 <div style={{ flex: 1, minWidth: 22, position: 'relative', height: 24, alignSelf: 'flex-start', marginTop: 12 }}>
-                    {charging && [0, 1, 2].map((i) => (
-                        <span key={i} className="flow-dot" style={{ background: 'var(--t-nominal)', animationDelay: `${i * 0.53}s` }} />
-                    ))}
+                    <div style={{ position: 'absolute', top: '50%', left: 0, right: 0, height: 0, borderTop: `1.5px dotted ${charging ? 'var(--t-nominal)' : 'var(--t-border-2)'}`, opacity: charging ? 1 : 0.5 }} />
                 </div>
                 <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 4, width: 96, flexShrink: 0 }}>
                     <svg width="46" height="24" viewBox="0 0 46 24">
@@ -321,7 +222,7 @@ export function PowerFlow({ solarV, battV }: { solarV: number | null; battV: num
                     </div>
                 </div>
                 <div style={{ flex: 1, minWidth: 22, position: 'relative', height: 24, alignSelf: 'flex-start', marginTop: 12 }}>
-                    <span className="flow-dot" style={{ background: charging ? 'var(--t-nominal)' : 'var(--t-warn)' }} />
+                    <div style={{ position: 'absolute', top: '50%', left: 0, right: 0, height: 0, borderTop: `1.5px dotted ${charging ? 'var(--t-nominal)' : 'var(--t-warn)'}` }} />
                 </div>
                 <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 4, width: 50, flexShrink: 0 }}>
                     <div style={{ width: 32, height: 32, borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'var(--t-panel-2)', border: '1px solid var(--t-border)', color: 'var(--t-text-2)' }}>{chip}</div>
