@@ -1,16 +1,11 @@
-import { integrateBalloonPath } from './balloonIntegrate';
-import { boundsForForecast, fetchWindGrid, snapPressureHpa } from './fetchWindGrid';
+import { integrateBalloonPathT } from './balloonIntegrate';
+import { boundsForForecast, snapPressureHpa } from './fetchWindGrid';
 import type { ForecastEllipse, ForecastGpsFix, MonteCarloForecastInput, StratolinkForecast } from './forecastTypes';
-import {
-    GAP_WIND_MODE,
-    gpsGapHours,
-    monteCarloDriftToNow,
-    resolveForecastStart,
-    STALE_GPS_THRESHOLD_H,
-} from './staleGpsExtrapolation';
+import { GAP_WIND_MODE, gpsGapHours, STALE_GPS_THRESHOLD_H } from './staleGpsExtrapolation';
 import { computePathReconstruction, type PathReconstructionResult } from './pathReconstruction';
 import { hindcastInputHash, readStoredHindcast, storeHindcast } from './hindcastStorage';
-import { gfsGridToWindField, windAt, windFieldToGfsGrid, type GfsGrid } from './gfsGrid';
+import { windAt, type GfsGrid } from './gfsGrid';
+import { chooseGridStep, fetchWindCube, sampleWind, type WindCube } from './windCube';
 
 const CFG = {
     N_ENSEMBLE: 200,
@@ -100,6 +95,90 @@ export function computeBias(gpsFixes: ForecastGpsFix[], gfs: GfsGrid): BiasCorre
         rawSpeedMult: speedMult,
         rawDirOffsetDeg: dirOffsetDeg,
         capped: speedClamped !== speedMult || dirClamped !== dirOffsetDeg,
+    };
+}
+
+/** Bias + data-driven uncertainty from the cube. Same residual math as
+ *  `computeBias`, but each fix pair is compared to the wind at THAT past time and
+ *  place (`sampleWind`), not a single snapshot — and we also return the residual
+ *  scatter (std-dev), so the ensemble spread reflects how tightly THIS balloon
+ *  has been tracking the winds rather than a fixed guess. */
+export type CubeBias = BiasCorrection & { speedSigma: number; dirSigma: number };
+
+function computeBiasFromCube(gpsFixes: ForecastGpsFix[], cube: WindCube): CubeBias {
+    const samples: Array<{ speedMult: number; dirOffset: number }> = [];
+
+    for (let i = 0; i < gpsFixes.length - 1; i++) {
+        const a = gpsFixes[i];
+        const b = gpsFixes[i + 1];
+        const t0 = new Date(a.time_utc).getTime();
+        const t1 = new Date(b.time_utc).getTime();
+        const dt = (t1 - t0) / 1000;
+        if (dt < 300) continue; /* skip <5min pairs — noisy velocity estimate */
+
+        const midLat = (a.lat + b.lat) / 2;
+        const midLon = (a.lon + b.lon) / 2;
+        const cosLat = Math.cos((midLat * Math.PI) / 180);
+
+        const uObs = ((b.lon - a.lon) * 111_320 * cosLat) / dt;
+        const vObs = ((b.lat - a.lat) * 111_320) / dt;
+        const { u: uGfs, v: vGfs } = sampleWind(cube, midLat, midLon, (t0 + t1) / 2);
+
+        const sObs = Math.hypot(uObs, vObs);
+        const sGfs = Math.hypot(uGfs, vGfs);
+        if (sGfs < 1) continue; /* skip near-calm winds — unstable ratio */
+
+        const dirObs = (Math.atan2(vObs, uObs) * 180) / Math.PI;
+        const dirGfs = (Math.atan2(vGfs, uGfs) * 180) / Math.PI;
+        let dirDiff = dirObs - dirGfs;
+        while (dirDiff > 180) dirDiff -= 360;
+        while (dirDiff < -180) dirDiff += 360;
+
+        samples.push({ speedMult: sObs / sGfs, dirOffset: dirDiff });
+    }
+
+    const fallback: CubeBias = {
+        speedMult: 1,
+        dirOffsetDeg: 0,
+        nSamples: samples.length,
+        rawSpeedMult: 1,
+        rawDirOffsetDeg: 0,
+        capped: false,
+        speedSigma: CFG.SPEED_SIGMA,
+        dirSigma: CFG.DIR_SIGMA_DEG,
+    };
+    if (samples.length === 0) return fallback;
+
+    const mean = (xs: number[]) => xs.reduce((s, x) => s + x, 0) / xs.length;
+    const std = (xs: number[], m: number) =>
+        Math.sqrt(xs.reduce((s, x) => s + (x - m) * (x - m), 0) / xs.length);
+    const clamp = (x: number, lo: number, hi: number) => Math.max(lo, Math.min(hi, x));
+
+    const speedMult = mean(samples.map((x) => x.speedMult));
+    const dirOffsetDeg = mean(samples.map((x) => x.dirOffset));
+    const speedClamped = clamp(speedMult, CFG.SPEED_CAP[0], CFG.SPEED_CAP[1]);
+    const dirClamped = clamp(dirOffsetDeg, -CFG.DIR_CAP_DEG, CFG.DIR_CAP_DEG);
+
+    /* Data-driven spread, floored (never zero) and capped (one noisy pair can't
+     * blow it up). Falls back to the fixed sigmas when <2 usable pairs. */
+    const speedSigma =
+        samples.length >= 2
+            ? clamp(std(samples.map((x) => x.speedMult), speedMult), 0.05, 0.25)
+            : CFG.SPEED_SIGMA;
+    const dirSigma =
+        samples.length >= 2
+            ? clamp(std(samples.map((x) => x.dirOffset), dirOffsetDeg), 6, 30)
+            : CFG.DIR_SIGMA_DEG;
+
+    return {
+        speedMult: speedClamped,
+        dirOffsetDeg: dirClamped,
+        nSamples: samples.length,
+        rawSpeedMult: speedMult,
+        rawDirOffsetDeg: dirOffsetDeg,
+        capped: speedClamped !== speedMult || dirClamped !== dirOffsetDeg,
+        speedSigma,
+        dirSigma,
     };
 }
 
@@ -231,164 +310,114 @@ export async function computeMonteCarloForecast(input: MonteCarloForecastInput):
     const lastFix = input.gpsFixes[input.gpsFixes.length - 1];
     if (!lastFix) throw new Error('At least one GPS fix required');
 
+    const nowMs = Date.now();
+    const fixTimeMs = new Date(lastFix.time_utc).getTime();
+    const gapH = gpsGapHours(lastFix);
+    const stale = gapH >= STALE_GPS_THRESHOLD_H;
+
+    /* The bounding box must contain everywhere the balloon goes: the observed
+     * track + (when stale) the dead-reckon out to "now" + the forward horizon.
+     * Keep it large enough to contain a long dead-reckon — a member that exits
+     * the grid gets edge-clamped (wrong) winds, which is worse than coarse
+     * resolution — and let chooseGridStep pick a coarser step so the single
+     * fetch stays within ~1-2 requests regardless of box size. */
     const marginPts = [
         ...input.gpsFixes.map((p) => ({ lat: p.lat, lon: p.lon })),
         ...input.observedTrackLonLat.map(([lon, lat]) => ({ lat, lon })),
     ];
-    const gapH = gpsGapHours(lastFix);
-    const boundHours =
-        totalHours + (gapH >= STALE_GPS_THRESHOLD_H ? Math.min(gapH, 72) : 0);
+    const boundHours = totalHours + (stale ? Math.min(gapH, 72) : 0);
     const gridBounds = boundsForForecast(marginPts, input.gpsFixes, boundHours);
-    const spanDeg = Math.max(
-        gridBounds.latMax - gridBounds.latMin,
-        gridBounds.lonMax - gridBounds.lonMin,
-    );
-    const gridStep = spanDeg > 22 ? 3.5 : 2.5;
-    const field = await fetchWindGrid(gridBounds, levelHpa, gridStep);
-    const gfs = windFieldToGfsGrid(field, gridStep);
+    const gridStep = chooseGridStep(gridBounds);
 
-    const bias = computeBias(input.gpsFixes, gfs);
+    /* ONE space-time wind field for the whole compute (replaces the snapshot grid
+     * + per-point dead-reckon fetches). startMs = the last fix when dead-reckoning,
+     * else "now"; endMs = the forecast horizon end. */
+    const startMs = stale ? fixTimeMs : nowMs;
+    const endMs = nowMs + totalHours * 3_600_000;
+    const cube = await fetchWindCube({ bounds: gridBounds, levelHpa, startMs, endMs, gridStep });
+
+    const bias = computeBiasFromCube(input.gpsFixes, cube);
 
     const { result: reconstruction, hash: reconstructionHash } = await resolveReconstruction(
         input,
         levelHpa,
     );
 
-    const forecastStart = await resolveForecastStart({
-        lastFix,
-        gpsFixes: input.gpsFixes,
-        observedTrackLonLat: input.observedTrackLonLat,
-        pressureHpa: levelHpa,
+    /* Every member is ONE continuous integration from the last fix (at its real
+     * time) through "now" to the horizon — so the predicted-hindcast and forecast
+     * legs share one evolving wind field, join with no seam, and the spread grows
+     * continuously from ~0 at the fix. Fresh GPS starts at "now" (gap ≈ 0). The
+     * per-member perturbation is persistent and uses the DATA-DRIVEN sigma. */
+    const startLat = lastFix.lat;
+    const startLon = lastFix.lon;
+    const spanHours = (stale ? gapH : 0) + totalHours;
+
+    const ensemble: Array<Array<[number, number]>> = [];
+    for (let i = 0; i < nEnsemble; i++) {
+        ensemble.push(
+            integrateBalloonPathT(
+                startLat,
+                startLon,
+                cube,
+                bias,
+                {
+                    speedM: 1 + bias.speedSigma * gauss(),
+                    dirOffDeg: bias.dirSigma * gauss(),
+                    altPertHPa: CFG.ALT_SIGMA_HPA * gauss(),
+                },
+                startMs,
+                spanHours,
+            ),
+        );
+    }
+
+    const nominal = integrateBalloonPathT(
+        startLat,
+        startLon,
+        cube,
         bias,
-        existingDriftLonLat: input.driftSegmentLonLat,
-    });
+        { speedM: 1, dirOffDeg: 0, altPertHPa: 0 },
+        startMs,
+        spanHours,
+    );
 
-    const driftSegment =
-        forecastStart.implied_drift_lonlat.length >= 2
-            ? forecastStart.implied_drift_lonlat
-            : (input.driftSegmentLonLat ?? []);
+    /** Hourly index of "now" within each trajectory (= elapsed gap hours); 0 when
+     *  GPS is fresh (integration starts at "now"). */
+    const nowIdx = stale ? Math.min(Math.round(gapH), nominal.length - 1) : 0;
+    const originPt = nominal[nowIdx] ?? [startLon, startLat];
+    const nowISO = new Date(nowMs).toISOString();
 
-    /* The predicted-hindcast curve (last fix → "now", analysis winds). It's the
-     * dead-reckon drift, surfaced as a dedicated field the client draws instead
-     * of a straight connector. The forward forecast begins at its final point,
-     * so the analysis→forecast boundary is the last point. */
+    /* Predicted-hindcast curve = the fix→now portion of the (single, continuous)
+     * nominal path. Drawn instead of a straight last-fix→now connector. The
+     * forecast leg continues seamlessly from its final point. */
     const predictedHindcast =
-        forecastStart.stale_gps && forecastStart.implied_drift_lonlat.length >= 2
+        stale && nowIdx >= 1
             ? {
-                  path: forecastStart.implied_drift_lonlat,
+                  path: nominal.slice(0, nowIdx + 1),
                   last_fix_lonlat: [lastFix.lon, lastFix.lat] as [number, number],
-                  now_lonlat: [forecastStart.lon, forecastStart.lat] as [number, number],
-                  analysis_boundary_idx: forecastStart.implied_drift_lonlat.length - 1,
-                  analysis_boundary_time_utc: forecastStart.time_utc,
+                  now_lonlat: [originPt[0], originPt[1]] as [number, number],
+                  analysis_boundary_idx: nowIdx,
+                  analysis_boundary_time_utc: nowISO,
               }
             : undefined;
 
-    /* When GPS is stale, the forecast origin is dead-reckoned and therefore
-     * uncertain. Monte-Carlo the fix→now drift to get a CLOUD of plausible
-     * drift trajectories (each starting AT the fix), then seed each forward
-     * member from its own drift endpoint. The two legs are concatenated below
-     * into one trajectory per member, so the uncertainty grows continuously
-     * from the last fix → "now" → the forecast horizon. Fresh GPS skips the
-     * drift leg (single point origin at the fix). */
-    const driftCloud: Array<Array<[number, number]>> = forecastStart.stale_gps
-        ? await monteCarloDriftToNow({
-              lastFix,
-              pressureHpa: levelHpa,
-              gapH: Math.min(gapH, 72),
-              bias,
-              samples: nEnsemble,
-              perturb: () => ({
-                  speedM: 1 + CFG.SPEED_SIGMA * gauss(),
-                  dirOffDeg: CFG.DIR_SIGMA_DEG * gauss(),
-              }),
-          })
-        : [];
+    const driftSegment = predictedHindcast?.path ?? input.driftSegmentLonLat ?? [];
 
-    /* Robust fallback. monteCarloDriftToNow needs its own live wind fetch, which
-     * can be rate-limited away (Open-Meteo 429) after the mean-drift's along-path
-     * fetches — leaving an empty cloud and collapsing the hindcast-leg
-     * uncertainty. When that happens (but we DO have the mean drift path),
-     * synthesize the cloud geometrically: apply the SAME persistent per-member
-     * speed/heading bias model to the mean drift's displacement from the fix.
-     * Mean-zero perturbation ⇒ the cloud stays centered on the mean drift, grows
-     * from ~0 at the fix to the full dead-reckon spread at "now", and needs no
-     * network call. */
-    const meanDrift = forecastStart.implied_drift_lonlat;
-    let cloud = driftCloud;
-    if (!cloud.length && forecastStart.stale_gps && meanDrift.length >= 2) {
-        const fix = meanDrift[0];
-        const cosLat = Math.max(Math.cos((fix[1] * Math.PI) / 180), 0.05);
-        cloud = Array.from({ length: nEnsemble }, () => {
-            const s = 1 + CFG.SPEED_SIGMA * gauss();
-            const th = (CFG.DIR_SIGMA_DEG * gauss() * Math.PI) / 180;
-            const cosT = Math.cos(th);
-            const sinT = Math.sin(th);
-            return meanDrift.map(([lon, lat]) => {
-                const dx = (lon - fix[0]) * cosLat;
-                const dy = lat - fix[1];
-                const rx = (cosT * dx - sinT * dy) * s;
-                const ry = (sinT * dx + cosT * dy) * s;
-                return [round4(fix[0] + rx / cosLat), round4(fix[1] + ry)] as [number, number];
-            });
-        });
-    }
-
-    /** Hourly index of "now" within each full member trajectory (= drift length
-     *  − 1); 0 when GPS is fresh (no drift leg). Derived from the mean drift so
-     *  the span is right even if only the synthetic cloud is available. */
-    const nowIdx = cloud.length
-        ? Math.max(0, (cloud[0]?.length ?? 1) - 1)
-        : forecastStart.stale_gps && meanDrift.length >= 2
-          ? meanDrift.length - 1
-          : 0;
-
-    /* One trajectory per member spanning the WHOLE path: drift (fix → now) +
-     * forecast (now → horizon). The forecast leg starts at the member's own
-     * drift endpoint. */
-    const ensemble: Array<Array<[number, number]>> = [];
-    for (let i = 0; i < nEnsemble; i++) {
-        const drift = cloud[i];
-        const origin = drift && drift.length ? drift[drift.length - 1] : [forecastStart.lon, forecastStart.lat];
-        const forwardLeg = integrateBalloonPath(origin[1], origin[0], gfs, bias, {
-            speedM: 1 + CFG.SPEED_SIGMA * gauss(),
-            dirOffDeg: CFG.DIR_SIGMA_DEG * gauss(),
-            altPertHPa: CFG.ALT_SIGMA_HPA * gauss(),
-        }, totalHours);
-        /* Concatenate (drop the forecast's first point — it equals the drift
-         * endpoint) so the line emanates from the fix. */
-        ensemble.push(drift && drift.length ? [...drift, ...forwardLeg.slice(1)] : forwardLeg);
-    }
-
-    const nominal = integrateBalloonPath(
-        forecastStart.lat,
-        forecastStart.lon,
-        gfs,
-        bias,
-        { speedM: 1, dirOffDeg: 0, altPertHPa: 0 },
-        totalHours,
-    );
-
-    /* The deterministic "most likely" line the ellipses pin to, end to end:
-     * predicted hindcast (fix → now) + nominal forecast (now → horizon). */
-    const meanPath: Array<[number, number]> =
-        forecastStart.stale_gps && forecastStart.implied_drift_lonlat.length >= 2
-            ? [...forecastStart.implied_drift_lonlat, ...nominal.slice(1)]
-            : nominal;
-
-    /* Uncertainty ellipses sliced across the WHOLE trajectory (fix → horizon),
-     * each CENTERED ON THE PATH (not the ensemble mean), so the cone grows from
-     * ~0 at the last fix, through the predicted hindcast, into the forecast, and
-     * stays visually attached to the drawn line. t_hours is relative to "now"
-     * (negative over the hindcast leg). */
-    const fullSpan = nowIdx + totalHours; /* hours, fix → horizon */
+    /* Uncertainty ellipses sliced across the WHOLE trajectory (fix → horizon).
+     * recenterEllipse pins each to the nominal path point — now near-identity
+     * since one continuous integration keeps the ensemble mean ≈ nominal.
+     * t_hours is relative to "now" (negative over the predicted-hindcast leg). */
+    const fullSpan = nominal.length - 1;
     const sliceIdxs = Array.from(
-        new Set([0.15, 0.3, 0.45, 0.6, 0.75, 0.9, 1].map(
-            (f) => Math.min(fullSpan, Math.max(1, Math.round(f * fullSpan))),
-        )),
+        new Set(
+            [0.15, 0.3, 0.45, 0.6, 0.75, 0.9, 1].map((f) =>
+                Math.min(fullSpan, Math.max(1, Math.round(f * fullSpan))),
+            ),
+        ),
     ).sort((a, b) => a - b);
     const ellipses = sliceIdxs.map((idx) => {
         const positions = ensemble.map((traj) => traj[Math.min(idx, traj.length - 1)]);
-        const center = meanPath[Math.min(idx, meanPath.length - 1)];
+        const center = nominal[Math.min(idx, nominal.length - 1)];
         return {
             t_hours: idx - nowIdx,
             e50: recenterEllipse(computeEllipse(positions, 0.5), center),
@@ -398,19 +427,47 @@ export async function computeMonteCarloForecast(input: MonteCarloForecastInput):
     });
 
     const endpoint = nominal[nominal.length - 1];
-    const { u: uEnd, v: vEnd } = windAt(gfs, endpoint[1], endpoint[0]);
+    const { u: uEnd, v: vEnd } = sampleWind(cube, endpoint[1], endpoint[0], endMs);
+
+    /* Soft observability check: if many ensemble endpoints sit within one cell of
+     * the box edge, the bounds were undersized and trajectories ran on
+     * edge-clamped wind. Log it (don't fail). */
+    const nearEdge = ensemble.filter((traj) => {
+        const [lon, lat] = traj[traj.length - 1];
+        return (
+            lon <= cube.bounds.lonMin + cube.gridStep ||
+            lon >= cube.bounds.lonMax - cube.gridStep ||
+            lat <= cube.bounds.latMin + cube.gridStep ||
+            lat >= cube.bounds.latMax - cube.gridStep
+        );
+    }).length;
+    if (nearEdge / Math.max(1, ensemble.length) > 0.2) {
+        console.warn(
+            `[forecast] ${input.deviceId}: ${nearEdge}/${ensemble.length} ensemble endpoints near grid edge — bounds may be undersized`,
+        );
+    }
+
+    /* wind_field debug artifact = the "now" slice of the cube (not a frozen grid). */
+    const nowGrid = cube.grids[Math.min(nowIdx, cube.grids.length - 1)];
 
     return {
-        generated_at: new Date().toISOString(),
+        generated_at: nowISO,
         forecast_horizon_h: totalHours,
         level_hpa: levelHpa,
         forecast_origin: {
-            lat: forecastStart.lat,
-            lon: forecastStart.lon,
-            alt_m: forecastStart.alt_m,
-            time_utc: forecastStart.time_utc,
+            lat: originPt[1],
+            lon: originPt[0],
+            alt_m: lastFix.alt_m,
+            time_utc: nowISO,
         },
-        stale_gps: forecastStart.stale_gps,
+        stale_gps: stale
+            ? {
+                  gap_hours: round1(gapH),
+                  last_fix_time_utc: lastFix.time_utc,
+                  wind_field_time_utc: nowISO,
+                  wind_mode: GAP_WIND_MODE,
+              }
+            : undefined,
         predicted_hindcast: predictedHindcast,
         nominal_path: nominal,
         ensemble,
@@ -445,24 +502,25 @@ export async function computeMonteCarloForecast(input: MonteCarloForecastInput):
             reconstruction_input_hash: reconstructionHash,
         },
         wind_field: {
-            lat0: gfs.lat0,
-            dLat: gfs.dLat,
-            nLat: gfs.nLat,
-            lon0: gfs.lon0,
-            dLon: gfs.dLon,
-            nLon: gfs.nLon,
-            U: Array.from(gfs.U).map(round1),
-            V: Array.from(gfs.V).map(round1),
+            lat0: nowGrid.lat0,
+            dLat: nowGrid.dLat,
+            nLat: nowGrid.nLat,
+            lon0: nowGrid.lon0,
+            dLon: nowGrid.dLon,
+            nLon: nowGrid.nLon,
+            U: Array.from(nowGrid.U).map(round1),
+            V: Array.from(nowGrid.V).map(round1),
         },
         metadata: {
             n_ensemble: nEnsemble,
             step_hours: CFG.STEP_HOURS,
-            speed_sigma: CFG.SPEED_SIGMA,
-            dir_sigma_deg: CFG.DIR_SIGMA_DEG,
+            speed_sigma: Math.round(bias.speedSigma * 1000) / 1000,
+            dir_sigma_deg: round1(bias.dirSigma),
             alt_sigma_hpa: CFG.ALT_SIGMA_HPA,
+            grid_step_deg: gridStep,
             compute_ms: Date.now() - t0,
             reconstruction_ms: reconstruction.compute_ms,
-            ...(forecastStart.stale_gps ? { gap_wind_mode: GAP_WIND_MODE } : {}),
+            ...(stale ? { gap_wind_mode: GAP_WIND_MODE } : {}),
         },
     };
 }
