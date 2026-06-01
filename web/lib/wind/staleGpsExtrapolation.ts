@@ -149,9 +149,11 @@ export type DriftPerturbation = { speedM: number; dirOffDeg: number };
 /**
  * Monte-Carlo the fix→now dead-reckon: replay the gap integration `samples`
  * times, each with a persistent (per-replay, not per-step) wind perturbation,
- * sharing ONE fetched hourly series anchored at the fix. Returns the cloud of
- * "now" endpoints — the origin distribution used to seed the forward forecast,
- * so the dead-reckon uncertainty propagates into the forward ellipses.
+ * sharing ONE fetched hourly series anchored at the fix. Returns one full hourly
+ * trajectory per replay (all starting at the fix) — the uncertainty CLOUD of the
+ * predicted hindcast. The forward forecast seeds from each trajectory's endpoint,
+ * so the uncertainty propagates continuously from the fix through "now" and on
+ * into the forecast.
  *
  * Persistent (not per-step) perturbation because the dominant dead-reckon error
  * is a correlated speed/direction bias sustained over the whole gap — matching
@@ -165,12 +167,13 @@ export async function monteCarloDriftToNow(opts: {
     samples: number;
     perturb: () => DriftPerturbation;
     now?: Date;
-}): Promise<Array<[number, number]>> {
+}): Promise<Array<Array<[number, number]>>> {
     const { lastFix, gapH, bias, samples } = opts;
     const levelHpa = snapPressureHpa(opts.pressureHpa);
     const startTime = new Date(lastFix.time_utc);
     const stepMinutes = BALLOON_STEP_HOURS * 60;
     const steps = Math.round((gapH * 60) / stepMinutes);
+    const stepsPerHour = Math.round(1 / BALLOON_STEP_HOURS);
     if (steps < 1 || samples < 1) return [];
 
     const anchorMs = startTime.getTime();
@@ -189,7 +192,7 @@ export async function monteCarloDriftToNow(opts: {
     if (!series.length) return [];
 
     const stepSec = stepMinutes * 60;
-    const ends: Array<[number, number]> = [];
+    const trajectories: Array<Array<[number, number]>> = [];
     for (let m = 0; m < samples; m++) {
         const pert = opts.perturb();
         const replayBias: BiasLike = {
@@ -199,6 +202,7 @@ export async function monteCarloDriftToNow(opts: {
         };
         let lat = lastFix.lat;
         let lon = lastFix.lon;
+        const path: Array<[number, number]> = [[round4(lon), round4(lat)]];
         for (let s = 1; s <= steps; s++) {
             const when = new Date(anchorMs + s * stepMinutes * 60_000);
             const sample = windAtOrBefore(series, when);
@@ -208,10 +212,11 @@ export async function monteCarloDriftToNow(opts: {
             const cosLat = Math.max(Math.cos((lat * Math.PI) / 180), 0.05);
             lat += (v * stepSec) / 111_320;
             lon += (u * stepSec) / (111_320 * cosLat);
+            if (s % stepsPerHour === 0) path.push([round4(lon), round4(lat)]);
         }
-        ends.push([round4(lon), round4(lat)]);
+        trajectories.push(path);
     }
-    return ends;
+    return trajectories;
 }
 
 export type ResolvedForecastStart = {

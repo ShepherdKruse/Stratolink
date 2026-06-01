@@ -157,6 +157,20 @@ function computeEllipse(positions: Array<[number, number]>, confidence: 0.5 | 0.
     };
 }
 
+/** Slide an ellipse so it's centered on `center` (the drawn path point) instead
+ *  of the ensemble mean — keeps the size/shape (the spread) but pins it to the
+ *  path so it reads as "uncertainty around THIS line" rather than floating off
+ *  where the wide dead-reckon cloud's centroid happens to land. */
+function recenterEllipse(e: ForecastEllipse, center: [number, number]): ForecastEllipse {
+    const dLon = center[0] - e.center[0];
+    const dLat = center[1] - e.center[1];
+    return {
+        ...e,
+        center: [round4(center[0]), round4(center[1])],
+        polygon: e.polygon.map(([x, y]) => [round4(x + dLon), round4(y + dLat)] as [number, number]),
+    };
+}
+
 function downsampleTrack(track: Array<[number, number]>, maxPts: number): Array<[number, number]> {
     if (track.length <= maxPts) return track;
     const step = Math.ceil(track.length / maxPts);
@@ -270,11 +284,13 @@ export async function computeMonteCarloForecast(input: MonteCarloForecastInput):
             : undefined;
 
     /* When GPS is stale, the forecast origin is dead-reckoned and therefore
-     * uncertain. Monte-Carlo that fix→now drift to get a CLOUD of plausible
-     * "now" positions, and seed each ensemble member from its own sample — so
-     * the origin uncertainty compounds with the wind uncertainty and the
-     * forward ellipses widen correctly. Fresh GPS keeps a single point origin. */
-    const originCloud = forecastStart.stale_gps
+     * uncertain. Monte-Carlo the fix→now drift to get a CLOUD of plausible
+     * drift trajectories (each starting AT the fix), then seed each forward
+     * member from its own drift endpoint. The two legs are concatenated below
+     * into one trajectory per member, so the uncertainty grows continuously
+     * from the last fix → "now" → the forecast horizon. Fresh GPS skips the
+     * drift leg (single point origin at the fix). */
+    const driftCloud: Array<Array<[number, number]>> = forecastStart.stale_gps
         ? await monteCarloDriftToNow({
               lastFix,
               pressureHpa: levelHpa,
@@ -287,17 +303,25 @@ export async function computeMonteCarloForecast(input: MonteCarloForecastInput):
               }),
           })
         : [];
+    /** Hourly index of "now" within each full member trajectory (= drift length
+     *  − 1); 0 when GPS is fresh (no drift leg). */
+    const nowIdx = driftCloud.length ? Math.max(0, (driftCloud[0]?.length ?? 1) - 1) : 0;
 
+    /* One trajectory per member spanning the WHOLE path: drift (fix → now) +
+     * forecast (now → horizon). The forecast leg starts at the member's own
+     * drift endpoint. */
     const ensemble: Array<Array<[number, number]>> = [];
     for (let i = 0; i < nEnsemble; i++) {
-        const origin = originCloud[i] ?? [forecastStart.lon, forecastStart.lat];
-        ensemble.push(
-            integrateBalloonPath(origin[1], origin[0], gfs, bias, {
-                speedM: 1 + CFG.SPEED_SIGMA * gauss(),
-                dirOffDeg: CFG.DIR_SIGMA_DEG * gauss(),
-                altPertHPa: CFG.ALT_SIGMA_HPA * gauss(),
-            }, totalHours),
-        );
+        const drift = driftCloud[i];
+        const origin = drift && drift.length ? drift[drift.length - 1] : [forecastStart.lon, forecastStart.lat];
+        const forwardLeg = integrateBalloonPath(origin[1], origin[0], gfs, bias, {
+            speedM: 1 + CFG.SPEED_SIGMA * gauss(),
+            dirOffDeg: CFG.DIR_SIGMA_DEG * gauss(),
+            altPertHPa: CFG.ALT_SIGMA_HPA * gauss(),
+        }, totalHours);
+        /* Concatenate (drop the forecast's first point — it equals the drift
+         * endpoint) so the line emanates from the fix. */
+        ensemble.push(drift && drift.length ? [...drift, ...forwardLeg.slice(1)] : forwardLeg);
     }
 
     const nominal = integrateBalloonPath(
@@ -309,18 +333,32 @@ export async function computeMonteCarloForecast(input: MonteCarloForecastInput):
         totalHours,
     );
 
-    const pathHours = nominal.length - 1;
-    const ellipseTimes = CFG.ELLIPSE_TIMES_H.filter((h) => h <= totalHours && h <= pathHours);
-    const ellipses = ellipseTimes.map((h) => {
-        const positions = ensemble.map((traj) => traj[Math.min(h, traj.length - 1)]);
+    /* The deterministic "most likely" line the ellipses pin to, end to end:
+     * predicted hindcast (fix → now) + nominal forecast (now → horizon). */
+    const meanPath: Array<[number, number]> =
+        forecastStart.stale_gps && forecastStart.implied_drift_lonlat.length >= 2
+            ? [...forecastStart.implied_drift_lonlat, ...nominal.slice(1)]
+            : nominal;
+
+    /* Uncertainty ellipses sliced across the WHOLE trajectory (fix → horizon),
+     * each CENTERED ON THE PATH (not the ensemble mean), so the cone grows from
+     * ~0 at the last fix, through the predicted hindcast, into the forecast, and
+     * stays visually attached to the drawn line. t_hours is relative to "now"
+     * (negative over the hindcast leg). */
+    const fullSpan = nowIdx + totalHours; /* hours, fix → horizon */
+    const sliceIdxs = Array.from(
+        new Set([0.15, 0.3, 0.45, 0.6, 0.75, 0.9, 1].map(
+            (f) => Math.min(fullSpan, Math.max(1, Math.round(f * fullSpan))),
+        )),
+    ).sort((a, b) => a - b);
+    const ellipses = sliceIdxs.map((idx) => {
+        const positions = ensemble.map((traj) => traj[Math.min(idx, traj.length - 1)]);
+        const center = meanPath[Math.min(idx, meanPath.length - 1)];
         return {
-            t_hours: h,
-            e50: computeEllipse(positions, 0.5),
-            e90: computeEllipse(positions, 0.9),
-            mean: [
-                round4(positions.reduce((s, [lon]) => s + lon, 0) / positions.length),
-                round4(positions.reduce((s, [, lat]) => s + lat, 0) / positions.length),
-            ] as [number, number],
+            t_hours: idx - nowIdx,
+            e50: recenterEllipse(computeEllipse(positions, 0.5), center),
+            e90: recenterEllipse(computeEllipse(positions, 0.9), center),
+            mean: [round4(center[0]), round4(center[1])] as [number, number],
         };
     });
 
