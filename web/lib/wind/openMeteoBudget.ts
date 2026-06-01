@@ -144,6 +144,17 @@ export function markExhausted(scope: 'minute' | 'hour' | 'day', now = Date.now()
     mem[scope].calls = CAPS[scope];
 }
 
+/** Pre-flight check for a known total cost (e.g. a whole grid fetch): throw
+ *  before spending anything if it won't fit, so we don't waste partial calls on
+ *  a tick that can't finish. No-op when not primed. */
+export function assertCanAfford(cost: number, now = Date.now()): void {
+    if (!mem) return;
+    const rem = budgetRemaining(now);
+    if (cost > rem.day) throw new BudgetExceededError('day', cost, rem.day);
+    if (cost > rem.hour) throw new BudgetExceededError('hour', cost, rem.hour);
+    if (cost > rem.minute) throw new BudgetExceededError('minute', cost, rem.minute);
+}
+
 /** Round-robin cursor (persisted with the budget) so the cron sweeps devices
  *  across ticks instead of all at once. */
 export function getCursor(): number {

@@ -1,5 +1,6 @@
 import { fetchWindGridHourlySeries, snapPressureHpa, type WindGridBounds } from './fetchWindGrid';
 import { windAt, type GfsGrid } from './gfsGrid';
+import { assertCanAfford } from './openMeteoBudget';
 
 /**
  * A shared space-time wind field for one forecast compute: a stack of hourly GFS
@@ -76,6 +77,22 @@ export async function fetchWindCube(opts: {
     const gridStep = opts.gridStep ?? chooseGridStep(opts.bounds);
     const t0Ms = Math.floor(opts.startMs / HOUR_MS) * HOUR_MS;
     const spanHours = Math.max(1, (opts.endMs - t0Ms) / HOUR_MS);
+
+    /* Pre-flight call-budget check: the cube needs its WHOLE grid (a partial one
+     * has zero-wind holes), so estimate the full cost — ~1 call per grid point,
+     * ×(days/14) — and bail before fetching any chunk if it won't fit. Otherwise a
+     * tick with little budget left would spend on a few chunks and then abort,
+     * wasting them. Mirrors fetchGridHourlySeries' past/forecast-day math so the
+     * estimate matches what the per-request meter will actually count. */
+    const { latMin, latMax, lonMin, lonMax } = opts.bounds;
+    const gridPoints =
+        (Math.round((latMax - latMin) / gridStep) + 1) * (Math.round((lonMax - lonMin) / gridStep) + 1);
+    const ageH = (Date.now() - t0Ms) / HOUR_MS;
+    const forecastDays = Math.min(16, Math.ceil(spanHours / 24) + 2);
+    const pastDays = ageH > 6 ? Math.min(92, Math.ceil(ageH / 24) + Math.ceil(spanHours / 24) + 3) : 0;
+    const days = Math.max(1, forecastDays + pastDays);
+    assertCanAfford(Math.ceil(gridPoints * Math.max(1, days / 14)));
+
     /* fetchWindGridHourlySeries returns one GfsGrid per hour from t0Ms (caps at
      * 96h, which covers our max fix→horizon span of 72+24). It already computes
      * past_days/forecast_days from the window and batches 80 pts/request. */
