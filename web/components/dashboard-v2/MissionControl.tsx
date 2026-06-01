@@ -643,21 +643,6 @@ function MapColumn({
         .map(r => ({ lat: r.lat as number, lon: r.lon as number, t: r.t })),
         [visibleRows]);
 
-    /* Position along the predicted nominal path at a future time, by
-     * interpolating between the evenly-time-spaced path points. */
-    const futurePos = useMemo<[number, number] | null>(() => {
-        if (!isFuture || scrubT === null) return null;
-        const { path, originT, endT } = forecast;
-        if (path.length < 2 || originT === null || endT === null || endT <= originT) return null;
-        const f = Math.max(0, Math.min(1, (scrubT - originT) / (endT - originT)));
-        const idx = f * (path.length - 1);
-        const i = Math.floor(idx);
-        const frac = idx - i;
-        const a = path[i];
-        const b = path[Math.min(i + 1, path.length - 1)];
-        return [a[0] + (b[0] - a[0]) * frac, a[1] + (b[1] - a[1]) * frac];
-    }, [isFuture, scrubT, forecast]);
-
     /* The likely (reconstructed) path used to glide the balloon as you scrub.
      * Prefer the backend's per-point timestamps, which are anchored to the
      * actual GPS-fix times — so the marker stays in lockstep with the transmit
@@ -713,17 +698,49 @@ function MapColumn({
         return segs;
     }, [forecast.hindcastTrack, trackPoints]);
 
-    /* Balloon glides smoothly: along the predicted path in the future, and
-     * along the likely (reconstructed) path in the past / at the live edge. */
+    /* One continuous timed track the balloon glides along, end to end:
+     *   hindcast (reconstructed between fixes) → predicted-hindcast (last fix →
+     *   "now", the dead-reckon drift) → forecast (now → horizon).
+     * So scrubbing moves the balloon along the WHOLE drawn line, not just the
+     * forecast leg — no jump at the last fix. */
+    const fullTrack: V2FlightPoint[] = useMemo(() => {
+        const out: V2FlightPoint[] = [...(hindcastTrack.length >= 2 ? hindcastTrack : trackPoints)];
+        const lastT = out.length ? out[out.length - 1].t : null;
+        const originT = forecast.originT;
+
+        /* predicted-hindcast: last fix → now (only present when GPS is stale) */
+        const ph = forecast.predictedHindcast;
+        if (ph.length >= 2 && lastT !== null && originT !== null && originT > lastT) {
+            const span = originT - lastT;
+            for (let i = 1; i < ph.length; i++) {
+                out.push({ lon: ph[i][0], lat: ph[i][1], t: lastT + (i / (ph.length - 1)) * span });
+            }
+        }
+
+        /* forecast: origin ("now") → horizon end */
+        const fp = forecast.path;
+        const startT = originT ?? lastT;
+        const endT = forecast.endT;
+        if (fp.length >= 2 && startT !== null && endT !== null && endT > startT) {
+            const span = endT - startT;
+            for (let i = 1; i < fp.length; i++) {
+                out.push({ lon: fp[i][0], lat: fp[i][1], t: startT + (i / (fp.length - 1)) * span });
+            }
+        }
+        return out;
+    }, [hindcastTrack, trackPoints, forecast.predictedHindcast, forecast.path, forecast.originT, forecast.endT]);
+
+    /* Balloon position: interpolate along the full track at the cursor time.
+     * Altitude is real telemetry only in the observed past; null once we're past
+     * the last packet (predicted-hindcast / forecast legs have no readings). */
     const balloon: V2Balloon | null = useMemo(() => {
         if (!selectedDevice) return null;
-        const pastTrack = hindcastTrack.length >= 2 ? hindcastTrack : trackPoints;
-        const pos = futurePos
-            ?? (scrubT !== null ? lerpAlongTrack(pastTrack, scrubT) : null)
-            ?? (pastTrack.length ? [pastTrack[pastTrack.length - 1].lon, pastTrack[pastTrack.length - 1].lat] as [number, number] : null);
+        const pos = scrubT !== null && fullTrack.length >= 2
+            ? lerpAlongTrack(fullTrack, scrubT)
+            : (fullTrack.length ? [fullTrack[fullTrack.length - 1].lon, fullTrack[fullTrack.length - 1].lat] as [number, number] : null);
         if (!pos) return null;
-        return { id: selectedDevice.id, lat: pos[1], lon: pos[0], altitude_m: futurePos ? null : (scrubRow?.alt ?? null) };
-    }, [selectedDevice, scrubRow, trackPoints, hindcastTrack, futurePos, scrubT]);
+        return { id: selectedDevice.id, lat: pos[1], lon: pos[0], altitude_m: isFuture ? null : (scrubRow?.alt ?? null) };
+    }, [selectedDevice, scrubRow, fullTrack, scrubT, isFuture]);
 
     /* Gateways + reception links belong to a real transmission. Hide them
      * whenever the balloon isn't connected at the cursor — out in the forecast
