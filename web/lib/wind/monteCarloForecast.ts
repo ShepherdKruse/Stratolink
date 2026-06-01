@@ -50,6 +50,10 @@ export function computeBias(gpsFixes: ForecastGpsFix[], gfs: GfsGrid): BiasCorre
         const t1 = new Date(b.time_utc).getTime() / 1000;
         const dt = t1 - t0;
         if (dt < 60) continue;
+        /* Frozen GPS: a stuck receiver re-sends the identical fix at later
+         * timestamps. Zero displacement over nonzero dt ⇒ a bogus 0 m/s speed and
+         * an undefined (0°) heading that would pollute the residuals — skip it. */
+        if (b.lat === a.lat && b.lon === a.lon) continue;
 
         const midLat = (a.lat + b.lat) / 2;
         const midLon = (a.lon + b.lon) / 2;
@@ -115,6 +119,10 @@ function computeBiasFromCube(gpsFixes: ForecastGpsFix[], cube: WindCube): CubeBi
         const t1 = new Date(b.time_utc).getTime();
         const dt = (t1 - t0) / 1000;
         if (dt < 300) continue; /* skip <5min pairs — noisy velocity estimate */
+        /* Frozen GPS: this balloon sometimes re-sends the identical fix at later
+         * timestamps. Zero displacement over nonzero dt ⇒ a bogus 0 m/s speed and
+         * an undefined (0°) heading that would inflate both sigmas — skip it. */
+        if (b.lat === a.lat && b.lon === a.lon) continue;
 
         const midLat = (a.lat + b.lat) / 2;
         const midLon = (a.lon + b.lon) / 2;
