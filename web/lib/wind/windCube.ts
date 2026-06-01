@@ -1,4 +1,7 @@
+import { get } from '@vercel/blob';
+import { readFile } from 'node:fs/promises';
 import { fetchWindGridHourlySeries, snapPressureHpa, type WindGridBounds } from './fetchWindGrid';
+import { isBlobStorageConfigured } from './forecastStorage';
 import { windAt, type GfsGrid } from './gfsGrid';
 import { assertCanAfford } from './openMeteoBudget';
 
@@ -19,9 +22,55 @@ export type WindCube = {
     bounds: WindGridBounds;
     gridStep: number;
     levelHpa: number;
+    /** Where the field came from: 'gfs' (pre-ingested) or 'open-meteo' (live fallback). */
+    source?: string;
+    /** ISO time the cube was built (GFS ingest run), for staleness reporting. */
+    generatedAt?: string;
+};
+
+/** JSON shape of a pre-ingested cube (local file or Blob). */
+type RawCube = {
+    t0Ms: number;
+    stepMs: number;
+    gridStep: number;
+    levelHpa: number;
+    bounds: WindGridBounds;
+    grids: Array<{ lat0: number; dLat: number; nLat: number; lon0: number; dLon: number; nLon: number; U: number[]; V: number[] }>;
+    source?: string;
+    generated_at?: string;
 };
 
 const HOUR_MS = 3_600_000;
+
+/** Reconstitute a WindCube from its JSON form (Float32Array U/V). */
+function cubeFromRaw(raw: RawCube): WindCube {
+    return {
+        t0Ms: raw.t0Ms,
+        stepMs: raw.stepMs,
+        gridStep: raw.gridStep,
+        levelHpa: raw.levelHpa,
+        bounds: raw.bounds,
+        source: raw.source ?? 'gfs',
+        generatedAt: raw.generated_at,
+        grids: raw.grids.map((g) => ({
+            lat0: g.lat0, dLat: g.dLat, nLat: g.nLat, lon0: g.lon0, dLon: g.dLon, nLon: g.nLon,
+            U: new Float32Array(g.U), V: new Float32Array(g.V),
+        })),
+    };
+}
+
+/** Read a device's pre-ingested cube from Blob (`cubes/{deviceId}.json`), or null
+ *  if none exists yet. Mirrors forecastStorage's private read. Never throws. */
+async function readCubeFromBlob(deviceId: string): Promise<WindCube | null> {
+    if (!isBlobStorageConfigured()) return null;
+    try {
+        const r = await get(`cubes/${encodeURIComponent(deviceId)}.json`, { access: 'private', useCache: false });
+        if (!r || r.statusCode !== 200) return null;
+        return cubeFromRaw((await new Response(r.stream).json()) as RawCube);
+    } catch {
+        return null;
+    }
+}
 
 /**
  * Wind at an arbitrary position and instant: bilinear in space (`windAt`) and
@@ -72,7 +121,24 @@ export async function fetchWindCube(opts: {
     startMs: number;
     endMs: number;
     gridStep?: number;
+    /** Device whose pre-ingested cube to serve from Blob. */
+    deviceId?: string;
 }): Promise<WindCube> {
+    /* Source precedence:
+     *   1. WIND_CUBE_FILE  — a local file (dev / spike).
+     *   2. Blob cube for the device — the pre-ingested GFS cube (scripts/gfs_ingest.py,
+     *      refreshed 6-hourly), the production path: no live wind API, no rate limit.
+     *   3. Open-Meteo — live fallback for devices with no cube yet (migration safety;
+     *      the call budget protects it). */
+    const localFile = process.env.WIND_CUBE_FILE;
+    if (localFile) {
+        return cubeFromRaw(JSON.parse(await readFile(localFile, 'utf8')) as RawCube);
+    }
+    if (opts.deviceId) {
+        const cube = await readCubeFromBlob(opts.deviceId);
+        if (cube) return cube;
+    }
+
     const levelHpa = snapPressureHpa(opts.levelHpa);
     const gridStep = opts.gridStep ?? chooseGridStep(opts.bounds);
     const t0Ms = Math.floor(opts.startMs / HOUR_MS) * HOUR_MS;
@@ -103,5 +169,8 @@ export async function fetchWindCube(opts: {
         new Date(t0Ms),
         spanHours,
     );
-    return { t0Ms, stepMs: HOUR_MS, grids, bounds: opts.bounds, gridStep, levelHpa };
+    return {
+        t0Ms, stepMs: HOUR_MS, grids, bounds: opts.bounds, gridStep, levelHpa,
+        source: 'open-meteo', generatedAt: new Date().toISOString(),
+    };
 }

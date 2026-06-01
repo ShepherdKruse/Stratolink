@@ -375,7 +375,7 @@ export async function computeMonteCarloForecast(input: MonteCarloForecastInput):
      * else "now"; endMs = the forecast horizon end. */
     const startMs = stale ? fixTimeMs : nowMs;
     const endMs = nowMs + totalHours * 3_600_000;
-    const cube = await fetchWindCube({ bounds: gridBounds, levelHpa, startMs, endMs, gridStep });
+    const cube = await fetchWindCube({ bounds: gridBounds, levelHpa, startMs, endMs, gridStep, deviceId: input.deviceId });
 
     const bias = computeBiasFromCube(recentFixes, cube);
 
@@ -550,7 +550,9 @@ export async function computeMonteCarloForecast(input: MonteCarloForecastInput):
             speed_sigma: Math.round(bias.speedSigma * 1000) / 1000,
             dir_sigma_deg: round1(bias.dirSigma),
             alt_sigma_hpa: CFG.ALT_SIGMA_HPA,
-            grid_step_deg: gridStep,
+            grid_step_deg: cube.gridStep,
+            wind_source: cube.source,
+            ...(cube.generatedAt ? { wind_cube_generated_at: cube.generatedAt } : {}),
             compute_ms: Date.now() - t0,
             reconstruction_ms: reconstruction.compute_ms,
             ...(reconstruction.partial ? { reconstruction_partial: true } : {}),

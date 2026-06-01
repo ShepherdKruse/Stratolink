@@ -1,3 +1,6 @@
 
 # Local forecast cache (dev, no Blob token)
 .forecast-cache/
+
+# GFS wind cubes built by scripts/gfs_ingest.py (uploaded to Blob, not committed)
+.windcube/
