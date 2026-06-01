@@ -137,6 +137,10 @@ export type StratolinkForecast = {
         gap_wind_mode?: string;
         /** Resolution (deg) of the shared space-time wind field for this compute. */
         grid_step_deg?: number;
+        /** Where the winds came from: 'gfs' (pre-ingested cube) or 'open-meteo' (live). */
+        wind_source?: string;
+        /** ISO time the GFS wind cube was ingested (staleness indicator). */
+        wind_cube_generated_at?: string;
         /** True when the reconstruction ran out of call budget and left some gaps
          *  as straight-line placeholders — recompute soon to fill them in. */
         reconstruction_partial?: boolean;

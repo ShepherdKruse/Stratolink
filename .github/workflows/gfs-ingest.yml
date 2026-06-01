@@ -1,0 +1,63 @@
+name: GFS wind ingest
+
+# Builds per-balloon GFS wind cubes from NOAA's free NODD S3 and uploads them to
+# Vercel Blob, so the forecast compute reads pre-ingested winds instead of calling
+# Open-Meteo (no rate limits). GFS publishes 00/06/12/18 UTC ~4-5h later, so we run
+# shortly after each cycle. Public repo => Actions minutes are free.
+on:
+  schedule:
+    - cron: '0 5,11,17,23 * * *'   # ~5h after each GFS cycle (UTC)
+  workflow_dispatch:               # manual run
+
+concurrency:
+  group: gfs-ingest
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  ingest:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    defaults:
+      run:
+        working-directory: web
+    steps:
+      - uses: actions/checkout@v4
+
+      # pygrib + eccodes from conda-forge (precompiled — no build, reliable).
+      - uses: mamba-org/setup-micromamba@v2
+        with:
+          environment-name: gfs
+          create-args: >-
+            python=3.11
+            pygrib
+            numpy
+          cache-environment: true
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+          cache-dependency-path: web/package-lock.json
+      - run: npm ci
+
+      - name: Ingest GFS → cubes
+        env:
+          NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+        run: micromamba run -n gfs python scripts/gfs_ingest.py
+
+      - name: Upload cubes → Vercel Blob
+        env:
+          BLOB_READ_WRITE_TOKEN: ${{ secrets.BLOB_READ_WRITE_TOKEN }}
+        run: node scripts/upload_cubes.mjs
+
+      # Optional: set a HEALTHCHECK_URL secret (healthchecks.io / Slack) to catch
+      # silent ingest failures — stale cubes ⇒ stale forecasts otherwise.
+      - name: Healthcheck ping
+        if: success()
+        env:
+          HEALTHCHECK_URL: ${{ secrets.HEALTHCHECK_URL }}
+        run: '[ -n "$HEALTHCHECK_URL" ] && curl -fsS --max-time 10 "$HEALTHCHECK_URL" || echo "no HEALTHCHECK_URL set"'
