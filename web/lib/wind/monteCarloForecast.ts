@@ -18,6 +18,10 @@ const CFG = {
     ALT_TO_WIND_FACTOR: 0.015,
     SPEED_CAP: [0.75, 1.25] as const,
     DIR_CAP_DEG: 25,
+    /* Min real (non-frozen) fix pairs before we trust a data-driven sigma; below
+     * this we fall back to the fixed defaults rather than let a handful of noisy
+     * segments peg the cone to its caps. See TODO in computeBiasFromCube. */
+    MIN_SIGMA_SAMPLES: 12,
 };
 
 const round4 = (x: number) => Math.round(x * 1e4) / 1e4;
@@ -168,15 +172,26 @@ function computeBiasFromCube(gpsFixes: ForecastGpsFix[], cube: WindCube): CubeBi
     const dirClamped = clamp(dirOffsetDeg, -CFG.DIR_CAP_DEG, CFG.DIR_CAP_DEG);
 
     /* Data-driven spread, floored (never zero) and capped (one noisy pair can't
-     * blow it up). Falls back to the fixed sigmas when <2 usable pairs. */
-    const speedSigma =
-        samples.length >= 2
-            ? clamp(std(samples.map((x) => x.speedMult), speedMult), 0.05, 0.25)
-            : CFG.SPEED_SIGMA;
-    const dirSigma =
-        samples.length >= 2
-            ? clamp(std(samples.map((x) => x.dirOffset), dirOffsetDeg), 6, 30)
-            : CFG.DIR_SIGMA_DEG;
+     * blow it up). Requires enough real samples to be trustworthy — below the
+     * threshold we fall back to the fixed defaults, because a few noisy segments
+     * (e.g. a balloon whose GPS is frozen most of the time) otherwise peg the
+     * cone to its caps.
+     *
+     * TODO(forecast-uncertainty): this min-sample gate is a stopgap. Revisit:
+     *   - coarse grid on long-stale balloons inflates the residuals (4° smooths
+     *     the jet → observed looks fast/off → sigma + speed factor hit caps);
+     *   - frozen→real transition pairs (real displacement but stretched dt) may
+     *     still skew the few surviving samples — consider weighting by segment
+     *     length / dropping pairs that span a frozen run;
+     *   - the MEAN bias (speed factor / dir offset) has the same thin-sample
+     *     problem as the sigma, not just the spread. */
+    const enough = samples.length >= CFG.MIN_SIGMA_SAMPLES;
+    const speedSigma = enough
+        ? clamp(std(samples.map((x) => x.speedMult), speedMult), 0.05, 0.25)
+        : CFG.SPEED_SIGMA;
+    const dirSigma = enough
+        ? clamp(std(samples.map((x) => x.dirOffset), dirOffsetDeg), 6, 30)
+        : CFG.DIR_SIGMA_DEG;
 
     return {
         speedMult: speedClamped,
