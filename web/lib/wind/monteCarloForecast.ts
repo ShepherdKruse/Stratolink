@@ -434,28 +434,22 @@ export async function computeMonteCarloForecast(input: MonteCarloForecastInput):
 
     const driftSegment = predictedHindcast?.path ?? input.driftSegmentLonLat ?? [];
 
-    /* Uncertainty ellipses sliced across the WHOLE trajectory (fix → horizon).
-     * recenterEllipse pins each to the nominal path point — now near-identity
-     * since one continuous integration keeps the ensemble mean ≈ nominal.
-     * t_hours is relative to "now" (negative over the predicted-hindcast leg). */
-    const fullSpan = nominal.length - 1;
-    const sliceIdxs = Array.from(
-        new Set(
-            [0.15, 0.3, 0.45, 0.6, 0.75, 0.9, 1].map((f) =>
-                Math.min(fullSpan, Math.max(1, Math.round(f * fullSpan))),
-            ),
-        ),
-    ).sort((a, b) => a - b);
-    const ellipses = sliceIdxs.map((idx) => {
-        const positions = ensemble.map((traj) => traj[Math.min(idx, traj.length - 1)]);
-        const center = nominal[Math.min(idx, nominal.length - 1)];
-        return {
+    /* A single uncertainty ellipse at the forecast HORIZON (the cone's mouth).
+     * The intermediate slices added clutter without much value, so we emit only
+     * the final one. recenterEllipse pins it to the nominal endpoint (near-identity
+     * since one continuous integration keeps the ensemble mean ≈ nominal).
+     * t_hours is relative to "now". */
+    const idx = nominal.length - 1;
+    const endPositions = ensemble.map((traj) => traj[Math.min(idx, traj.length - 1)]);
+    const endCenter = nominal[Math.min(idx, nominal.length - 1)];
+    const ellipses = [
+        {
             t_hours: idx - nowIdx,
-            e50: recenterEllipse(computeEllipse(positions, 0.5), center),
-            e90: recenterEllipse(computeEllipse(positions, 0.9), center),
-            mean: [round4(center[0]), round4(center[1])] as [number, number],
-        };
-    });
+            e50: recenterEllipse(computeEllipse(endPositions, 0.5), endCenter),
+            e90: recenterEllipse(computeEllipse(endPositions, 0.9), endCenter),
+            mean: [round4(endCenter[0]), round4(endCenter[1])] as [number, number],
+        },
+    ];
 
     const endpoint = nominal[nominal.length - 1];
     const { u: uEnd, v: vEnd } = sampleWind(cube, endpoint[1], endpoint[0], endMs);
