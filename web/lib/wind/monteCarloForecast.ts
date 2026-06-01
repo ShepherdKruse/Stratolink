@@ -2,8 +2,8 @@ import { integrateBalloonPathT } from './balloonIntegrate';
 import { boundsForForecast, snapPressureHpa } from './fetchWindGrid';
 import type { ForecastEllipse, ForecastGpsFix, MonteCarloForecastInput, StratolinkForecast } from './forecastTypes';
 import { GAP_WIND_MODE, gpsGapHours, STALE_GPS_THRESHOLD_H } from './staleGpsExtrapolation';
-import { computePathReconstruction, type PathReconstructionResult } from './pathReconstruction';
-import { hindcastInputHash, readStoredHindcast, storeHindcast } from './hindcastStorage';
+import { computePathReconstruction, type GapCacheEntry, type PathReconstructionResult } from './pathReconstruction';
+import { hindcastInputHash, readGapCache, readStoredHindcast, storeHindcast, writeGapCache } from './hindcastStorage';
 import { windAt, type GfsGrid } from './gfsGrid';
 import { chooseGridStep, fetchWindCube, sampleWind, type WindCube } from './windCube';
 
@@ -311,12 +311,20 @@ async function resolveReconstruction(
         }
     }
 
+    /* Cache miss (new/changed fixes). Reuse the per-gap cache so only the recent /
+     * trailing gap re-bridges instead of re-running (and re-fetching winds for)
+     * the whole flight — appending a fix shouldn't recompute immutable old gaps. */
+    const gapRaw = await readGapCache(input.deviceId);
+    const gapCache = new Map(Object.entries(gapRaw)) as Map<string, GapCacheEntry>;
     const result = await computePathReconstruction({
         fixes: input.gpsFixes,
         pressureHpa: levelHpa,
         baroSamples: input.baroSamples,
+        gapCache,
+        now: Date.now(),
     });
     await storeHindcast(input.deviceId, hash, { ...result, computed_at: new Date().toISOString() });
+    await writeGapCache(input.deviceId, Object.fromEntries(gapCache));
     return { result, hash };
 }
 

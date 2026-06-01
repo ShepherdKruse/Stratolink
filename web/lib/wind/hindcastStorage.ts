@@ -90,3 +90,54 @@ export async function readStoredHindcast(deviceId: string, hash: string): Promis
         return null;
     }
 }
+
+/* ----------------------------------------------------------------------------
+ * Per-gap incremental cache (one blob per device).
+ *
+ * A single map of gapHash → cached bridge, so a recompute reuses every immutable
+ * older gap and only re-bridges the recent/trailing one. Opaque JSON here; the
+ * entry shape (GapCacheEntry) is owned by pathReconstruction. One read + one
+ * write per compute regardless of gap count.
+ * ------------------------------------------------------------------------- */
+function gapCacheBlobPath(deviceId: string): string {
+    return `hindcasts/${encodeURIComponent(deviceId)}.gapcache.json`;
+}
+function gapCacheLocalPath(deviceId: string): string {
+    const safe = deviceId.replace(/[^a-zA-Z0-9._-]/g, '_');
+    return join(LOCAL_CACHE_DIR, `${safe}.gapcache.json`);
+}
+
+/** Read the device's gap cache. Returns {} when none exists; never throws. */
+export async function readGapCache(deviceId: string): Promise<Record<string, unknown>> {
+    try {
+        if (!isBlobStorageConfigured()) {
+            return JSON.parse(await readFile(gapCacheLocalPath(deviceId), 'utf8')) as Record<string, unknown>;
+        }
+        const r = await get(gapCacheBlobPath(deviceId), { access: 'private', useCache: false });
+        if (!r || r.statusCode !== 200) return {};
+        return (await new Response(r.stream).json()) as Record<string, unknown>;
+    } catch {
+        return {};
+    }
+}
+
+/** Persist the device's gap cache. Non-fatal on failure (logged, never thrown). */
+export async function writeGapCache(deviceId: string, map: Record<string, unknown>): Promise<void> {
+    try {
+        const body = JSON.stringify(map);
+        if (!isBlobStorageConfigured()) {
+            await mkdir(LOCAL_CACHE_DIR, { recursive: true });
+            await writeFile(gapCacheLocalPath(deviceId), body, 'utf8');
+            return;
+        }
+        await put(gapCacheBlobPath(deviceId), body, {
+            access: 'private',
+            addRandomSuffix: false,
+            contentType: 'application/json',
+            allowOverwrite: true,
+        });
+    } catch (err) {
+        const m = err instanceof Error ? err.message : String(err);
+        console.error(`[hindcast] failed to write gap cache ${deviceId}: ${m}`);
+    }
+}

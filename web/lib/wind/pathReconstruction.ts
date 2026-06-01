@@ -3,6 +3,7 @@
  * Ported from reconstruct.js — bridges each inter-fix segment (pinned at both ends).
  */
 
+import { createHash } from 'node:crypto';
 import { boundsFromPoints, fetchWindGrid, snapPressureHpa } from './fetchWindGrid';
 import type { ForecastGpsFix } from './forecastTypes';
 import { windAt, windFieldToGfsGrid, type GfsGrid } from './gfsGrid';
@@ -69,6 +70,39 @@ export type PathReconstructionResult = {
     gaps: ReconstructionGap[];
     compute_ms: number;
 };
+
+/* ----------------------------------------------------------------------------
+ * Per-gap incremental cache.
+ *
+ * The bridge between two GPS fixes is a deterministic function of those (now
+ * immutable) fixes + the historical winds for that interval — so once a gap is
+ * more than the analysis-settling window old, its reconstruction never changes.
+ * We key each bridge by a hash of its two endpoints and reuse it across recomputes,
+ * so appending a new fix only re-bridges the trailing gap instead of re-running
+ * (and re-fetching winds for) the entire flight. The caller persists the map.
+ * ------------------------------------------------------------------------- */
+const GAP_ALGO_VERSION = 'g1';
+/** A bridge whose end is older than this is final — safe to reuse verbatim. */
+const GAP_SETTLE_MS = 6 * 3_600_000;
+
+export type GapCacheEntry = {
+    meanPath: Array<[number, number]>;
+    gap: Omit<ReconstructionGap, 'from_idx' | 'to_idx'>;
+    isBridge: boolean;
+    computed_at: string;
+};
+
+/** Stable 16-char hash of a single gap: its two endpoint fixes + level + algo. */
+function gapHash(a: Fix, b: Fix, levelHpa: number): string {
+    const canon = [a, b].map((f) => [
+        Math.round(f.lat * 1e5),
+        Math.round(f.lon * 1e5),
+        new Date(f.time_utc).getTime(),
+        Number.isFinite(f.alt_m) ? Math.round(f.alt_m) : null,
+    ]);
+    const payload = JSON.stringify({ v: GAP_ALGO_VERSION, level: Math.round(levelHpa), gap: canon });
+    return createHash('sha256').update(payload).digest('hex').slice(0, 16);
+}
 
 function appendTimedSegment(
     track: ReconstructedTrackPoint[],
@@ -222,7 +256,7 @@ function solveShooting(
 function bridgeGap(
     A: Fix,
     B: Fix,
-    gfs: GfsGrid,
+    gfs: GfsGrid | null,
     baroSamples: BaroSample[] | null,
 ): {
     meanPath: Array<[number, number]>;
@@ -282,9 +316,11 @@ function bridgeGap(
         };
     }
 
+    if (!gfs) throw new Error('bridgeGap: wind grid required for a non-short gap');
+    const grid = gfs; /* const so narrowing to GfsGrid survives into the closure */
     const start: PathPoint = { lat: A.lat, lon: A.lon, alt: altA };
     const end: PathPoint = { lat: B.lat, lon: B.lon, alt: altB };
-    const bias = solveShooting(start, end, gfs, nSteps, altProfile);
+    const bias = solveShooting(start, end, grid, nSteps, altProfile);
 
     function runCloud(
         from: PathPoint,
@@ -304,7 +340,7 @@ function bridgeGap(
                       const off = CFG.ALT_SIGMA_M * gauss();
                       return (f: number) => altProfile(f) + off;
                   })();
-            const p = integrate(from, gfs, nSteps, dirSign, params, aProf);
+            const p = integrate(from, grid, nSteps, dirSign, params, aProf);
             const e = p[p.length - 1];
             const miss = distanceKm(target.lat, target.lon, e.lat, e.lon);
             const w = Math.exp(-(miss * miss) / (2 * CFG.ENDPOINT_SIGMA_KM ** 2));
@@ -387,11 +423,15 @@ function normalizeFixes(fixes: ForecastGpsFix[]): Fix[] {
     }));
 }
 
-/** Reconstruct full observed track with particle bridges between every GPS fix pair. */
+/** Reconstruct full observed track with particle bridges between every GPS fix pair.
+ *  Pass `gapCache` (a per-device map the caller persists) to reuse the immutable
+ *  bridges of older gaps and only (re)compute the recent/trailing ones. */
 export async function computePathReconstruction(opts: {
     fixes: ForecastGpsFix[];
     pressureHpa: number;
     baroSamples?: BaroSample[];
+    gapCache?: Map<string, GapCacheEntry>;
+    now?: number;
 }): Promise<PathReconstructionResult> {
     const t0 = Date.now();
     const fixes = normalizeFixes(opts.fixes);
@@ -411,26 +451,19 @@ export async function computePathReconstruction(opts: {
     }
 
     const levelHpa = snapPressureHpa(opts.pressureHpa);
-    const marginPts = fixes.map((p) => ({ lat: p.lat, lon: p.lon }));
-    const t0ms = new Date(fixes[0].time_utc).getTime();
-    const t1ms = new Date(fixes[fixes.length - 1].time_utc).getTime();
-    // Track bbox only — gaps are bridged between fixes; do not pad for full mission drift
-    // (boundsForForecast with mission span creates 1000+ grid points and Open-Meteo 400s).
-    const gridBounds = boundsFromPoints(marginPts, 5);
-    const gridStep =
-        Math.max(gridBounds.latMax - gridBounds.latMin, gridBounds.lonMax - gridBounds.lonMin) > 22
-            ? 3.5
-            : 2.5;
-    const gridAt = new Date((t0ms + t1ms) / 2);
-    const field = await fetchWindGrid(gridBounds, levelHpa, gridStep, gridAt);
-    const gfs = windFieldToGfsGrid(field, gridStep);
-
+    const now = opts.now ?? Date.now();
+    const cache = opts.gapCache;
     const allBaro = opts.baroSamples ?? [];
-    const gaps: ReconstructionGap[] = [];
-    const gapBridges: Array<Array<[number, number]>> = [];
-    const fullPath: Array<[number, number]> = [];
-    const reconstructedTrack: ReconstructedTrackPoint[] = [];
 
+    /* Classify every gap. Reuse a cached bridge only when it's FINAL (its end is
+     * older than the settling window) — recent gaps and the open trailing gap
+     * recompute so they pick up settled analysis winds. */
+    type Plan = {
+        i: number; A: Fix; B: Fix; tA: number; tB: number; gapHours: number;
+        baro: BaroSample[]; hash: string; isLong: boolean; isShort: boolean;
+        cached: GapCacheEntry | null;
+    };
+    const plans: Plan[] = [];
     for (let i = 0; i < fixes.length - 1; i++) {
         const A = fixes[i];
         const B = fixes[i + 1];
@@ -441,12 +474,59 @@ export async function computePathReconstruction(opts: {
             const t = new Date(s.time_utc).getTime();
             return t > tA && t < tB;
         });
+        const hash = gapHash(A, B, levelHpa);
+        const hit = cache?.get(hash) ?? null;
+        const final = tB <= now - GAP_SETTLE_MS;
+        plans.push({
+            i, A, B, tA, tB, gapHours, baro, hash,
+            isLong: gapHours >= CFG.LONG_GAP_HR,
+            isShort: (tB - tA) / 60_000 < CFG.SHORT_GAP_MIN,
+            cached: hit && final ? hit : null,
+        });
+    }
 
-        if (gapHours >= CFG.LONG_GAP_HR) {
+    /* One shared snapshot grid for the MEDIUM gaps that must (re)compute, sized to
+     * just those gaps' fixes — on a warm cache that's only the recent (small) area,
+     * not the whole-mission bbox. Skipped entirely when nothing medium needs it. */
+    const mediumCompute = plans.filter((p) => !p.cached && !p.isLong && !p.isShort);
+    let gfs: GfsGrid | null = null;
+    if (mediumCompute.length > 0) {
+        const pts = mediumCompute.flatMap((p) => [
+            { lat: p.A.lat, lon: p.A.lon },
+            { lat: p.B.lat, lon: p.B.lon },
+        ]);
+        const gridBounds = boundsFromPoints(pts, 5);
+        const gridStep =
+            Math.max(gridBounds.latMax - gridBounds.latMin, gridBounds.lonMax - gridBounds.lonMin) > 22
+                ? 3.5
+                : 2.5;
+        const gridAt = new Date(
+            (mediumCompute[0].tA + mediumCompute[mediumCompute.length - 1].tB) / 2,
+        );
+        const field = await fetchWindGrid(gridBounds, levelHpa, gridStep, gridAt);
+        gfs = windFieldToGfsGrid(field, gridStep);
+    }
+
+    const nowIso = new Date(now).toISOString();
+    const gaps: ReconstructionGap[] = [];
+    const gapBridges: Array<Array<[number, number]>> = [];
+    const fullPath: Array<[number, number]> = [];
+    const reconstructedTrack: ReconstructedTrackPoint[] = [];
+
+    for (const plan of plans) {
+        const { i, A, B, tA, tB, baro } = plan;
+        let meanPath: Array<[number, number]>;
+        let meta: Omit<ReconstructionGap, 'from_idx' | 'to_idx'>;
+        let isBridge: boolean;
+
+        if (plan.cached) {
+            meanPath = plan.cached.meanPath;
+            meta = plan.cached.gap;
+            isBridge = plan.cached.isBridge;
+        } else if (plan.isLong) {
             const lg = await reconstructLongGap(A, B, baro, levelHpa);
-            gaps.push({
-                from_idx: i,
-                to_idx: i + 1,
+            meanPath = lg.meanPath;
+            meta = {
                 dt_hours: lg.dt_hours,
                 measured_altitude: lg.measured_altitude,
                 endpoint_miss_km: lg.endpoint_miss_km,
@@ -459,38 +539,38 @@ export async function computePathReconstruction(opts: {
                 net_speed_ms: lg.net_speed_ms,
                 occupancy: lg.occupancy,
                 ellipses: lg.ellipses,
-            });
-            appendTimedSegment(reconstructedTrack, lg.meanPath, tA, tB, i > 0);
-            const seg = [...lg.meanPath];
-            if (i > 0) seg.shift();
-            fullPath.push(...seg);
-            if (!lg.short && lg.meanPath.length >= 2) {
-                gapBridges.push(lg.meanPath);
-            }
-            continue;
+            };
+            isBridge = !lg.short && lg.meanPath.length >= 2;
+            cache?.set(plan.hash, { meanPath, gap: meta, isBridge, computed_at: nowIso });
+        } else {
+            const br = bridgeGap(A, B, gfs, baro.length ? baro : null);
+            meanPath = br.meanPath;
+            meta = {
+                dt_hours: br.dt_hours,
+                measured_altitude: br.measured_altitude,
+                endpoint_miss_km: br.endpoint_miss_km,
+                mid_gap_90_km: br.mid_gap_90_km,
+                confidence: br.confidence,
+                short: br.short,
+                mode: 'line',
+            };
+            isBridge = !br.short && br.meanPath.length >= 2;
+            cache?.set(plan.hash, { meanPath, gap: meta, isBridge, computed_at: nowIso });
         }
 
-        const br = bridgeGap(A, B, gfs, baro.length ? baro : null);
-
-        gaps.push({
-            from_idx: i,
-            to_idx: i + 1,
-            dt_hours: br.dt_hours,
-            measured_altitude: br.measured_altitude,
-            endpoint_miss_km: br.endpoint_miss_km,
-            mid_gap_90_km: br.mid_gap_90_km,
-            confidence: br.confidence,
-            short: br.short,
-            mode: 'line',
-        });
-
-        appendTimedSegment(reconstructedTrack, br.meanPath, tA, tB, i > 0);
-        const seg = [...br.meanPath];
+        gaps.push({ from_idx: i, to_idx: i + 1, ...meta });
+        appendTimedSegment(reconstructedTrack, meanPath, tA, tB, i > 0);
+        const seg = [...meanPath];
         if (i > 0) seg.shift();
         fullPath.push(...seg);
-        if (!br.short && br.meanPath.length >= 2) {
-            gapBridges.push(br.meanPath);
-        }
+        if (isBridge) gapBridges.push(meanPath);
+    }
+
+    /* Prune the cache to the current gaps so the persisted map can't grow without
+     * bound as old fixes age out of the forecast window. */
+    if (cache) {
+        const keep = new Set(plans.map((p) => p.hash));
+        for (const k of Array.from(cache.keys())) if (!keep.has(k)) cache.delete(k);
     }
 
     return {
