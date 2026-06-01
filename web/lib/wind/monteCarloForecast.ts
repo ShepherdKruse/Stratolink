@@ -338,18 +338,26 @@ export async function computeMonteCarloForecast(input: MonteCarloForecastInput):
     const gapH = gpsGapHours(lastFix);
     const stale = gapH >= STALE_GPS_THRESHOLD_H;
 
-    /* The bounding box must contain everywhere the balloon goes: the observed
-     * track + (when stale) the dead-reckon out to "now" + the forward horizon.
-     * Keep it large enough to contain a long dead-reckon — a member that exits
-     * the grid gets edge-clamped (wrong) winds, which is worse than coarse
-     * resolution — and let chooseGridStep pick a coarser step so the single
-     * fetch stays within ~1-2 requests regardless of box size. */
-    const marginPts = [
-        ...input.gpsFixes.map((p) => ({ lat: p.lat, lon: p.lon })),
-        ...input.observedTrackLonLat.map(([lon, lat]) => ({ lat, lon })),
-    ];
+    /* The reconstruction runs over the FULL flight (input.gpsFixes) so the drawn
+     * route covers the whole mission. But the forecast cube + bias should reflect
+     * only RECENT motion: a continent-spanning full-history bbox would force a
+     * coarse grid, and weeks-old fix pairs are stale, time-mismatched bias signal.
+     * Use the last RECENT_DAYS of fixes for the cube/bias; fall back to the last
+     * handful when the balloon has been quiet longer than that. */
+    const RECENT_DAYS = 14;
+    const recentCutoffMs = nowMs - RECENT_DAYS * 86_400_000;
+    let recentFixes = input.gpsFixes.filter((f) => new Date(f.time_utc).getTime() >= recentCutoffMs);
+    if (recentFixes.length < 5) recentFixes = input.gpsFixes.slice(-Math.min(50, input.gpsFixes.length));
+
+    /* The bounding box must contain everywhere the balloon goes: the recent track
+     * + (when stale) the dead-reckon out to "now" + the forward horizon. Keep it
+     * large enough to contain a long dead-reckon — a member that exits the grid
+     * gets edge-clamped (wrong) winds, worse than coarse resolution — and let
+     * chooseGridStep pick a coarser step so the single fetch stays within ~1-2
+     * requests regardless of box size. */
+    const marginPts = recentFixes.map((p) => ({ lat: p.lat, lon: p.lon }));
     const boundHours = totalHours + (stale ? Math.min(gapH, 72) : 0);
-    const gridBounds = boundsForForecast(marginPts, input.gpsFixes, boundHours);
+    const gridBounds = boundsForForecast(marginPts, recentFixes, boundHours);
     const gridStep = chooseGridStep(gridBounds);
 
     /* ONE space-time wind field for the whole compute (replaces the snapshot grid
@@ -359,7 +367,7 @@ export async function computeMonteCarloForecast(input: MonteCarloForecastInput):
     const endMs = nowMs + totalHours * 3_600_000;
     const cube = await fetchWindCube({ bounds: gridBounds, levelHpa, startMs, endMs, gridStep });
 
-    const bias = computeBiasFromCube(input.gpsFixes, cube);
+    const bias = computeBiasFromCube(recentFixes, cube);
 
     const { result: reconstruction, hash: reconstructionHash } = await resolveReconstruction(
         input,

@@ -39,7 +39,15 @@ export async function buildForecastInputForDevice(
         status: device.status,
         launchedAt: device.launched_at ? new Date(device.launched_at).getTime() : null,
     };
-    const since = telemetrySinceIso(mission);
+    /* Full flight since launch (capped at MAX_HISTORY_MS), matching the dashboard's
+     * selected-device window — so the reconstructed route line covers the WHOLE
+     * mission, not just the rolling forecast window. Without this the hindcast
+     * rolls older segments off the map as the 14-day window advances.
+     * NB: this makes the reconstruction span every gap in the flight; it's cached
+     * by a hash of the fixes, but see TODO(forecast-uncertainty) — the
+     * reconstruction's per-gap wind fetches should eventually move onto the shared
+     * WindCube to bound their cost for long, gappy missions. */
+    const since = telemetrySinceIso(mission, Date.now(), { fullHistory: true });
 
     let rows: Awaited<ReturnType<typeof fetchTelemetryMerged>>;
     try {
