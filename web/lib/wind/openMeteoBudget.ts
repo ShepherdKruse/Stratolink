@@ -23,7 +23,10 @@ const MINUTE_CAP = 540;
 const HOUR_CAP = 4500;
 const DAY_CAP = 9000;
 
-type Window = { start: number; calls: number };
+/* `period` = floor(now / windowMs): the UTC calendar minute/hour/day index. Since
+ * the epoch is UTC-midnight-aligned, these reset at UTC boundaries — matching how
+ * Open-Meteo resets its limits, so our breaker clears exactly when theirs does. */
+type Window = { period: number; calls: number };
 type Usage = { minute: Window; hour: Window; day: Window; cursor: number };
 
 const LOCAL_DIR = join(process.cwd(), '.forecast-cache');
@@ -33,11 +36,12 @@ const localPath = () => join(LOCAL_DIR, 'open-meteo-usage.json');
 let mem: Usage | null = null;
 
 function freshUsage(): Usage {
-    return { minute: { start: 0, calls: 0 }, hour: { start: 0, calls: 0 }, day: { start: 0, calls: 0 }, cursor: 0 };
+    return { minute: { period: 0, calls: 0 }, hour: { period: 0, calls: 0 }, day: { period: 0, calls: 0 }, cursor: 0 };
 }
 
 function rollWindow(w: Window, windowMs: number, now: number): Window {
-    return now - w.start >= windowMs ? { start: now, calls: 0 } : w;
+    const period = Math.floor(now / windowMs);
+    return w.period === period ? w : { period, calls: 0 };
 }
 function rollAll(u: Usage, now: number): Usage {
     return {
