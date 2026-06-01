@@ -1067,7 +1067,14 @@ function Timeline({ visibleRows, scrubT, onScrub, futureEndT, floating = false }
                             color: cursorInFuture ? 'var(--sl-forecast)' : 'var(--sl-text-hi)', whiteSpace: 'nowrap',
                         }}>
                             {fmtClock(cursorT)}
-                            <span style={{ color: cursorIsLive ? 'var(--sl-ok)' : cursorInFuture ? 'var(--sl-forecast)' : 'var(--sl-text-dim2)', marginLeft: 5 }}>
+                            {/* Fixed-width slot so the relative label (live / +18hr /
+                              * −336hr) can't change the clock column's width and
+                              * resize the track as you scrub. Widest is ~"−2160hr"
+                              * (full-history start) ≈ 7 monospace chars. */}
+                            <span style={{
+                                color: cursorIsLive ? 'var(--sl-ok)' : cursorInFuture ? 'var(--sl-forecast)' : 'var(--sl-text-dim2)',
+                                marginLeft: 5, display: 'inline-block', minWidth: '7ch', textAlign: 'left',
+                            }}>
                                 {relLabel}
                             </span>
                         </span>
