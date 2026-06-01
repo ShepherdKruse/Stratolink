@@ -135,6 +135,8 @@ export type StratolinkForecast = {
         reconstruction_ms?: number;
         /** `hourly_series` when stale-GPS gap used time-varying past+hourly winds. */
         gap_wind_mode?: string;
+        /** Resolution (deg) of the shared space-time wind field for this compute. */
+        grid_step_deg?: number;
     };
 };
 
