@@ -7,6 +7,7 @@ import {
 } from '@/lib/wind/forecastStorage';
 import { buildForecastInputForDevice } from '@/lib/wind/buildForecastInput';
 import { computeMonteCarloForecast } from '@/lib/wind/monteCarloForecast';
+import { BudgetExceededError, flushBudget, primeBudget } from '@/lib/wind/openMeteoBudget';
 import type { StratolinkForecast } from '@/lib/wind/forecastTypes';
 
 export const dynamic = 'force-dynamic';
@@ -17,11 +18,18 @@ export const maxDuration = 60;
 
 const STALE_MS = 45 * 60 * 1000;
 
-/** Compute a forecast for a device (no caching). Null = insufficient telemetry. */
+/** Compute a forecast for a device (no caching). Null = insufficient telemetry.
+ *  Budget-gated via prime/flush so the inline safety net can't blow the free-tier
+ *  call limit; throws BudgetExceededError when it can't afford the winds. */
 async function computeForecast(deviceId: string): Promise<StratolinkForecast | null> {
     const input = await buildForecastInputForDevice(deviceId);
     if (!input) return null;
-    return computeMonteCarloForecast(input);
+    await primeBudget();
+    try {
+        return await computeMonteCarloForecast(input);
+    } finally {
+        await flushBudget();
+    }
 }
 
 /** Compute + cache in the background (via after()), lock-guarded so concurrent
@@ -32,6 +40,7 @@ async function computeAndStore(deviceId: string): Promise<void> {
         const forecast = await computeForecast(deviceId);
         if (forecast) await storeForecast(deviceId, forecast);
     } catch (e) {
+        if (e instanceof BudgetExceededError) return; /* defer; cron/next read will retry */
         console.error(`[forecast] background refresh failed for ${deviceId}: ${e instanceof Error ? e.message : e}`);
     } finally {
         await releaseForecastLock(deviceId);
@@ -106,6 +115,14 @@ export async function GET(req: Request) {
             },
         });
     } catch (e) {
+        if (e instanceof BudgetExceededError) {
+            /* Out of Open-Meteo budget — ask the client to poll; the cron/next
+             * read fills the cache once the budget window refreshes. */
+            return NextResponse.json(
+                { status: 'pending', device: deviceId },
+                { status: 202, headers: { 'Cache-Control': 'no-store', 'X-Forecast-Source': 'budget-deferred' } },
+            );
+        }
         const message = e instanceof Error ? e.message : 'forecast compute failed';
         return NextResponse.json({ error: message }, { status: 502 });
     } finally {

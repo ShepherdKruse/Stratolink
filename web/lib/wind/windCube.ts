@@ -49,7 +49,7 @@ export function sampleWind(
  * batched fetch (≤80 pts/request ⇒ 1-2 requests) covers the box. Accuracy-first:
  * small boxes get 1.25-2.5°; only very large stale-gap boxes fall back to 3-4°.
  */
-export function chooseGridStep(bounds: WindGridBounds, maxPts = 150): number {
+export function chooseGridStep(bounds: WindGridBounds, maxPts = 120): number {
     const spanLat = bounds.latMax - bounds.latMin;
     const spanLon = bounds.lonMax - bounds.lonMin;
     const steps = [1.25, 1.5, 2.0, 2.5, 3.0, 3.5, 4.0];

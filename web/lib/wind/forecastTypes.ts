@@ -137,6 +137,9 @@ export type StratolinkForecast = {
         gap_wind_mode?: string;
         /** Resolution (deg) of the shared space-time wind field for this compute. */
         grid_step_deg?: number;
+        /** True when the reconstruction ran out of call budget and left some gaps
+         *  as straight-line placeholders — recompute soon to fill them in. */
+        reconstruction_partial?: boolean;
     };
 };
 

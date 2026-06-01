@@ -323,8 +323,13 @@ async function resolveReconstruction(
         gapCache,
         now: Date.now(),
     });
-    await storeHindcast(input.deviceId, hash, { ...result, computed_at: new Date().toISOString() });
+    /* Always persist gap-cache progress. Only store the whole reconstruction as
+     * final when it's complete — a partial (budget-truncated) one must recompute
+     * next tick to fill its placeholder gaps. */
     await writeGapCache(input.deviceId, Object.fromEntries(gapCache));
+    if (!result.partial) {
+        await storeHindcast(input.deviceId, hash, { ...result, computed_at: new Date().toISOString() });
+    }
     return { result, hash };
 }
 
@@ -548,6 +553,7 @@ export async function computeMonteCarloForecast(input: MonteCarloForecastInput):
             grid_step_deg: gridStep,
             compute_ms: Date.now() - t0,
             reconstruction_ms: reconstruction.compute_ms,
+            ...(reconstruction.partial ? { reconstruction_partial: true } : {}),
             ...(stale ? { gap_wind_mode: GAP_WIND_MODE } : {}),
         },
     };

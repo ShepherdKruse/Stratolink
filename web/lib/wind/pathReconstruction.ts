@@ -9,6 +9,7 @@ import type { ForecastGpsFix } from './forecastTypes';
 import { windAt, windFieldToGfsGrid, type GfsGrid } from './gfsGrid';
 import { BALLOON_STEP_HOURS } from './balloonIntegrate';
 import { reconstructLongGap, type OccupancyFootprint } from './pathReconstructionLongGap';
+import { BudgetExceededError } from './openMeteoBudget';
 
 const CFG = {
     N_PARTICLES: 200,
@@ -69,6 +70,10 @@ export type PathReconstructionResult = {
     gap_bridges: Array<Array<[number, number]>>;
     gaps: ReconstructionGap[];
     compute_ms: number;
+    /** True when the call budget ran out mid-reconstruction and some gaps were
+     *  left as cheap straight-line placeholders — the caller should NOT persist
+     *  this as the final hindcast so the next tick resumes and fills them in. */
+    partial?: boolean;
 };
 
 /* ----------------------------------------------------------------------------
@@ -423,6 +428,36 @@ function normalizeFixes(fixes: ForecastGpsFix[]): Fix[] {
     }));
 }
 
+/** Cheap straight-line bridge (no wind, no fetch). Placeholder for a gap we
+ *  couldn't compute this tick because the call budget ran out — flagged low
+ *  confidence and NOT cached, so it's recomputed (for real) on a later tick. */
+function straightBridge(A: Fix, B: Fix): {
+    meanPath: Array<[number, number]>;
+    meta: Omit<ReconstructionGap, 'from_idx' | 'to_idx'>;
+} {
+    const tA = new Date(A.time_utc).getTime();
+    const tB = new Date(B.time_utc).getTime();
+    const gapMin = (tB - tA) / 60_000;
+    const nSteps = Math.max(1, Math.round(gapMin / 60 / CFG.STEP_HOURS));
+    const meanPath: Array<[number, number]> = [];
+    for (let s = 0; s <= nSteps; s++) {
+        const f = s / nSteps;
+        meanPath.push([R4(A.lon + f * (B.lon - A.lon)), R4(A.lat + f * (B.lat - A.lat))]);
+    }
+    return {
+        meanPath,
+        meta: {
+            dt_hours: R1(gapMin / 60),
+            measured_altitude: false,
+            endpoint_miss_km: 0,
+            mid_gap_90_km: 0,
+            confidence: 'low',
+            short: gapMin < CFG.SHORT_GAP_MIN,
+            mode: 'line',
+        },
+    };
+}
+
 /** Reconstruct full observed track with particle bridges between every GPS fix pair.
  *  Pass `gapCache` (a per-device map the caller persists) to reuse the immutable
  *  bridges of older gaps and only (re)compute the recent/trailing ones. */
@@ -488,6 +523,13 @@ export async function computePathReconstruction(opts: {
     /* One shared snapshot grid for the MEDIUM gaps that must (re)compute, sized to
      * just those gaps' fixes — on a warm cache that's only the recent (small) area,
      * not the whole-mission bbox. Skipped entirely when nothing medium needs it. */
+    /* `budgetHit` flips true the moment a wind fetch is refused by the call
+     * budget; from then on remaining uncached gaps get straight-line placeholders
+     * (no further fetches) and the result is marked partial so it isn't persisted
+     * as final — the next tick resumes and fills them in. */
+    let budgetHit = false;
+    let partial = false;
+
     const mediumCompute = plans.filter((p) => !p.cached && !p.isLong && !p.isShort);
     let gfs: GfsGrid | null = null;
     if (mediumCompute.length > 0) {
@@ -503,8 +545,13 @@ export async function computePathReconstruction(opts: {
         const gridAt = new Date(
             (mediumCompute[0].tA + mediumCompute[mediumCompute.length - 1].tB) / 2,
         );
-        const field = await fetchWindGrid(gridBounds, levelHpa, gridStep, gridAt);
-        gfs = windFieldToGfsGrid(field, gridStep);
+        try {
+            const field = await fetchWindGrid(gridBounds, levelHpa, gridStep, gridAt);
+            gfs = windFieldToGfsGrid(field, gridStep);
+        } catch (e) {
+            if (e instanceof BudgetExceededError) budgetHit = true;
+            else throw e;
+        }
     }
 
     const nowIso = new Date(now).toISOString();
@@ -523,27 +570,9 @@ export async function computePathReconstruction(opts: {
             meanPath = plan.cached.meanPath;
             meta = plan.cached.gap;
             isBridge = plan.cached.isBridge;
-        } else if (plan.isLong) {
-            const lg = await reconstructLongGap(A, B, baro, levelHpa);
-            meanPath = lg.meanPath;
-            meta = {
-                dt_hours: lg.dt_hours,
-                measured_altitude: lg.measured_altitude,
-                endpoint_miss_km: lg.endpoint_miss_km,
-                mid_gap_90_km: lg.mid_gap_90_km,
-                confidence: lg.confidence,
-                short: lg.short,
-                mode: lg.mode,
-                n_eff: lg.n_eff,
-                directness: lg.directness,
-                net_speed_ms: lg.net_speed_ms,
-                occupancy: lg.occupancy,
-                ellipses: lg.ellipses,
-            };
-            isBridge = !lg.short && lg.meanPath.length >= 2;
-            cache?.set(plan.hash, { meanPath, gap: meta, isBridge, computed_at: nowIso });
-        } else {
-            const br = bridgeGap(A, B, gfs, baro.length ? baro : null);
+        } else if (plan.isShort) {
+            /* Short gaps are a straight line — no wind/fetch — so always compute. */
+            const br = bridgeGap(A, B, null, baro.length ? baro : null);
             meanPath = br.meanPath;
             meta = {
                 dt_hours: br.dt_hours,
@@ -556,6 +585,63 @@ export async function computePathReconstruction(opts: {
             };
             isBridge = !br.short && br.meanPath.length >= 2;
             cache?.set(plan.hash, { meanPath, gap: meta, isBridge, computed_at: nowIso });
+        } else {
+            let computed: { meanPath: Array<[number, number]>; meta: Omit<ReconstructionGap, 'from_idx' | 'to_idx'>; isBridge: boolean } | null = null;
+            if (!budgetHit && (plan.isLong || gfs)) {
+                try {
+                    if (plan.isLong) {
+                        const lg = await reconstructLongGap(A, B, baro, levelHpa);
+                        computed = {
+                            meanPath: lg.meanPath,
+                            meta: {
+                                dt_hours: lg.dt_hours,
+                                measured_altitude: lg.measured_altitude,
+                                endpoint_miss_km: lg.endpoint_miss_km,
+                                mid_gap_90_km: lg.mid_gap_90_km,
+                                confidence: lg.confidence,
+                                short: lg.short,
+                                mode: lg.mode,
+                                n_eff: lg.n_eff,
+                                directness: lg.directness,
+                                net_speed_ms: lg.net_speed_ms,
+                                occupancy: lg.occupancy,
+                                ellipses: lg.ellipses,
+                            },
+                            isBridge: !lg.short && lg.meanPath.length >= 2,
+                        };
+                    } else {
+                        const br = bridgeGap(A, B, gfs, baro.length ? baro : null);
+                        computed = {
+                            meanPath: br.meanPath,
+                            meta: {
+                                dt_hours: br.dt_hours,
+                                measured_altitude: br.measured_altitude,
+                                endpoint_miss_km: br.endpoint_miss_km,
+                                mid_gap_90_km: br.mid_gap_90_km,
+                                confidence: br.confidence,
+                                short: br.short,
+                                mode: 'line',
+                            },
+                            isBridge: !br.short && br.meanPath.length >= 2,
+                        };
+                    }
+                } catch (e) {
+                    if (e instanceof BudgetExceededError) budgetHit = true;
+                    else throw e;
+                }
+            }
+
+            if (computed) {
+                ({ meanPath, meta, isBridge } = computed);
+                cache?.set(plan.hash, { meanPath, gap: meta, isBridge, computed_at: nowIso });
+            } else {
+                /* Out of budget — straight-line placeholder, not cached. */
+                const sb = straightBridge(A, B);
+                meanPath = sb.meanPath;
+                meta = sb.meta;
+                isBridge = !sb.meta.short && meanPath.length >= 2;
+                partial = true;
+            }
         }
 
         gaps.push({ from_idx: i, to_idx: i + 1, ...meta });
@@ -579,5 +665,6 @@ export async function computePathReconstruction(opts: {
         gap_bridges: gapBridges,
         gaps,
         compute_ms: Date.now() - t0,
+        partial,
     };
 }
