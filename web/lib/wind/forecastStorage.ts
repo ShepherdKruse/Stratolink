@@ -1,4 +1,4 @@
-import { head, put } from '@vercel/blob';
+import { get, put } from '@vercel/blob';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { join } from 'node:path';
 import type { StratolinkForecast } from './forecastTypes';
@@ -49,7 +49,7 @@ export async function storeForecast(deviceId: string, forecast: StratolinkForeca
     }
     const pathname = blobPath(deviceId);
     const blob = await put(pathname, JSON.stringify(forecast), {
-        access: 'public',
+        access: 'private',
         addRandomSuffix: false,
         contentType: 'application/json',
         allowOverwrite: true,
@@ -62,14 +62,11 @@ export async function readStoredForecast(deviceId: string): Promise<StratolinkFo
         return readStoredForecastLocal(deviceId);
     }
     try {
-        const meta = await head(blobPath(deviceId));
-        const url = meta.downloadUrl ?? meta.url;
-        const headers: HeadersInit = {};
-        const token = process.env.BLOB_READ_WRITE_TOKEN;
-        if (token) headers.Authorization = `Bearer ${token}`;
-        const res = await fetch(url, { headers, cache: 'no-store' });
-        if (!res.ok) return null;
-        return (await res.json()) as StratolinkForecast;
+        /* Private store: read via the authenticated `get` (token from env), not a
+         * public URL fetch. Returns null when the blob doesn't exist. */
+        const r = await get(blobPath(deviceId), { access: 'private', useCache: false });
+        if (!r || r.statusCode !== 200) return null;
+        return (await new Response(r.stream).json()) as StratolinkForecast;
     } catch {
         return null;
     }
@@ -99,14 +96,9 @@ async function readLockStartedAt(deviceId: string): Promise<number | null> {
             const raw = await readFile(lockLocalPath(deviceId), 'utf8');
             return (JSON.parse(raw) as { started_at?: number }).started_at ?? null;
         }
-        const meta = await head(lockBlobPath(deviceId));
-        const url = meta.downloadUrl ?? meta.url;
-        const headers: HeadersInit = {};
-        const token = process.env.BLOB_READ_WRITE_TOKEN;
-        if (token) headers.Authorization = `Bearer ${token}`;
-        const res = await fetch(url, { headers, cache: 'no-store' });
-        if (!res.ok) return null;
-        return ((await res.json()) as { started_at?: number }).started_at ?? null;
+        const r = await get(lockBlobPath(deviceId), { access: 'private', useCache: false });
+        if (!r || r.statusCode !== 200) return null;
+        return ((await new Response(r.stream).json()) as { started_at?: number }).started_at ?? null;
     } catch {
         return null;
     }
@@ -120,7 +112,7 @@ async function writeLock(deviceId: string, startedAt: number): Promise<void> {
         return;
     }
     await put(lockBlobPath(deviceId), body, {
-        access: 'public',
+        access: 'private',
         addRandomSuffix: false,
         contentType: 'application/json',
         allowOverwrite: true,

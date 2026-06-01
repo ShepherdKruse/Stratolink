@@ -1,4 +1,4 @@
-import { head, put } from '@vercel/blob';
+import { get, put } from '@vercel/blob';
 import { createHash } from 'node:crypto';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { join } from 'node:path';
@@ -67,7 +67,7 @@ export async function storeHindcast(deviceId: string, hash: string, data: Stored
             return;
         }
         await put(blobPath(deviceId, hash), JSON.stringify(data), {
-            access: 'public',
+            access: 'private',
             addRandomSuffix: false,
             contentType: 'application/json',
             allowOverwrite: true,
@@ -83,14 +83,9 @@ export async function readStoredHindcast(deviceId: string, hash: string): Promis
         return readLocal(deviceId, hash);
     }
     try {
-        const meta = await head(blobPath(deviceId, hash));
-        const url = meta.downloadUrl ?? meta.url;
-        const headers: HeadersInit = {};
-        const token = process.env.BLOB_READ_WRITE_TOKEN;
-        if (token) headers.Authorization = `Bearer ${token}`;
-        const res = await fetch(url, { headers, cache: 'no-store' });
-        if (!res.ok) return null;
-        return (await res.json()) as StoredHindcast;
+        const r = await get(blobPath(deviceId, hash), { access: 'private', useCache: false });
+        if (!r || r.statusCode !== 200) return null;
+        return (await new Response(r.stream).json()) as StoredHindcast;
     } catch {
         return null;
     }
