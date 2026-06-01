@@ -22,18 +22,15 @@ const CFG = {
      * this we fall back to the fixed defaults rather than let a handful of noisy
      * segments peg the cone to its caps. See TODO in computeBiasFromCube. */
     MIN_SIGMA_SAMPLES: 12,
+    /* Decorrelation timescale (h) for the AR(1) ensemble perturbation. Correlated
+     * over ~τ then mean-reverts: the forecast cone grows ~linearly within the
+     * horizon (τ ≳ horizon) while the multi-day dead-reckon spread stays diffusive
+     * rather than ballooning. Tunable; ideally fit from residual autocorrelation. */
+    PERTURB_TAU_H: 18,
 };
 
 const round4 = (x: number) => Math.round(x * 1e4) / 1e4;
 const round1 = (x: number) => Math.round(x * 10) / 10;
-
-function gauss() {
-    let u1 = 0;
-    let u2 = 0;
-    while (u1 === 0) u1 = Math.random();
-    while (u2 === 0) u2 = Math.random();
-    return Math.sqrt(-2 * Math.log(u1)) * Math.cos(2 * Math.PI * u2);
-}
 
 export type BiasCorrection = {
     speedMult: number;
@@ -383,23 +380,17 @@ export async function computeMonteCarloForecast(input: MonteCarloForecastInput):
     const startLon = lastFix.lon;
     const spanHours = (stale ? gapH : 0) + totalHours;
 
+    /* One spec shared by every member; each integrateBalloonPathT call draws its
+     * own AR(1) realization internally (correlated over PERTURB_TAU_H). */
+    const pertSpec = {
+        speedSigma: bias.speedSigma,
+        dirSigma: bias.dirSigma,
+        altSigma: CFG.ALT_SIGMA_HPA,
+        tauHours: CFG.PERTURB_TAU_H,
+    };
     const ensemble: Array<Array<[number, number]>> = [];
     for (let i = 0; i < nEnsemble; i++) {
-        ensemble.push(
-            integrateBalloonPathT(
-                startLat,
-                startLon,
-                cube,
-                bias,
-                {
-                    speedM: 1 + bias.speedSigma * gauss(),
-                    dirOffDeg: bias.dirSigma * gauss(),
-                    altPertHPa: CFG.ALT_SIGMA_HPA * gauss(),
-                },
-                startMs,
-                spanHours,
-            ),
-        );
+        ensemble.push(integrateBalloonPathT(startLat, startLon, cube, bias, pertSpec, startMs, spanHours));
     }
 
     const nominal = integrateBalloonPathT(
@@ -407,7 +398,7 @@ export async function computeMonteCarloForecast(input: MonteCarloForecastInput):
         startLon,
         cube,
         bias,
-        { speedM: 1, dirOffDeg: 0, altPertHPa: 0 },
+        { speedSigma: 0, dirSigma: 0, altSigma: 0, tauHours: CFG.PERTURB_TAU_H },
         startMs,
         spanHours,
     );
