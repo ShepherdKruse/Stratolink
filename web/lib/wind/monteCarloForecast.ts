@@ -492,7 +492,11 @@ export async function computeMonteCarloForecast(input: MonteCarloForecastInput):
               }
             : undefined,
         predicted_hindcast: predictedHindcast,
-        nominal_path: nominal,
+        /* Forecast leg only (now → horizon). The client maps nominal_path onto
+         * [origin, origin+horizon] and draws the predicted-hindcast (fix → now)
+         * as its own leg — so nominal_path must NOT include the hindcast portion
+         * (the full fix→horizon path lives in the ensemble + ellipses). */
+        nominal_path: nominal.slice(nowIdx),
         ensemble,
         ellipses,
         endpoint: {
