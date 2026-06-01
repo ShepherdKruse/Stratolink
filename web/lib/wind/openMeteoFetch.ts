@@ -62,12 +62,14 @@ export async function openMeteoFetch(url: string, init?: RequestInit): Promise<R
             return lastRes;
         }
 
-        /* Open-Meteo reports its OWN limit as 429, or 400 with a "...limit
-         * exceeded" reason. Their counter is the binding one, so don't retry into
-         * it — trip our matching window and defer (BudgetExceededError) so the
-         * caller serves cached / 202 / resumes next tick instead of hammering. */
+        /* Open-Meteo reports its OWN limit as 429 (or 400) with a reason like
+         * "Daily API request limit exceeded". Their counter is the binding one, so
+         * don't retry into it — read the reason, trip the MATCHING window (a daily
+         * limit must trip the day breaker, not just the minute, or we'd 429 every
+         * tick until midnight), and defer so the caller serves cached / 202 /
+         * resumes next tick instead of hammering. */
         if (lastRes.status === 429 || lastRes.status === 400) {
-            const body = lastRes.status === 400 ? await lastRes.clone().text().catch(() => '') : '';
+            const body = await lastRes.clone().text().catch(() => '');
             if (lastRes.status === 429 || /limit|exceed/i.test(body)) {
                 const scope = /dai|day/i.test(body) ? 'day' : /hour/i.test(body) ? 'hour' : 'minute';
                 if (isPrimed()) markExhausted(scope);
