@@ -303,16 +303,51 @@ export async function computeMonteCarloForecast(input: MonteCarloForecastInput):
               }),
           })
         : [];
+
+    /* Robust fallback. monteCarloDriftToNow needs its own live wind fetch, which
+     * can be rate-limited away (Open-Meteo 429) after the mean-drift's along-path
+     * fetches — leaving an empty cloud and collapsing the hindcast-leg
+     * uncertainty. When that happens (but we DO have the mean drift path),
+     * synthesize the cloud geometrically: apply the SAME persistent per-member
+     * speed/heading bias model to the mean drift's displacement from the fix.
+     * Mean-zero perturbation ⇒ the cloud stays centered on the mean drift, grows
+     * from ~0 at the fix to the full dead-reckon spread at "now", and needs no
+     * network call. */
+    const meanDrift = forecastStart.implied_drift_lonlat;
+    let cloud = driftCloud;
+    if (!cloud.length && forecastStart.stale_gps && meanDrift.length >= 2) {
+        const fix = meanDrift[0];
+        const cosLat = Math.max(Math.cos((fix[1] * Math.PI) / 180), 0.05);
+        cloud = Array.from({ length: nEnsemble }, () => {
+            const s = 1 + CFG.SPEED_SIGMA * gauss();
+            const th = (CFG.DIR_SIGMA_DEG * gauss() * Math.PI) / 180;
+            const cosT = Math.cos(th);
+            const sinT = Math.sin(th);
+            return meanDrift.map(([lon, lat]) => {
+                const dx = (lon - fix[0]) * cosLat;
+                const dy = lat - fix[1];
+                const rx = (cosT * dx - sinT * dy) * s;
+                const ry = (sinT * dx + cosT * dy) * s;
+                return [round4(fix[0] + rx / cosLat), round4(fix[1] + ry)] as [number, number];
+            });
+        });
+    }
+
     /** Hourly index of "now" within each full member trajectory (= drift length
-     *  − 1); 0 when GPS is fresh (no drift leg). */
-    const nowIdx = driftCloud.length ? Math.max(0, (driftCloud[0]?.length ?? 1) - 1) : 0;
+     *  − 1); 0 when GPS is fresh (no drift leg). Derived from the mean drift so
+     *  the span is right even if only the synthetic cloud is available. */
+    const nowIdx = cloud.length
+        ? Math.max(0, (cloud[0]?.length ?? 1) - 1)
+        : forecastStart.stale_gps && meanDrift.length >= 2
+          ? meanDrift.length - 1
+          : 0;
 
     /* One trajectory per member spanning the WHOLE path: drift (fix → now) +
      * forecast (now → horizon). The forecast leg starts at the member's own
      * drift endpoint. */
     const ensemble: Array<Array<[number, number]>> = [];
     for (let i = 0; i < nEnsemble; i++) {
-        const drift = driftCloud[i];
+        const drift = cloud[i];
         const origin = drift && drift.length ? drift[drift.length - 1] : [forecastStart.lon, forecastStart.lat];
         const forwardLeg = integrateBalloonPath(origin[1], origin[0], gfs, bias, {
             speedM: 1 + CFG.SPEED_SIGMA * gauss(),
