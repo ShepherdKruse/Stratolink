@@ -7,43 +7,49 @@ import {
 } from '@/lib/wind/forecastStorage';
 import { buildForecastInputForDevice } from '@/lib/wind/buildForecastInput';
 import { computeMonteCarloForecast } from '@/lib/wind/monteCarloForecast';
+import type { StratolinkForecast } from '@/lib/wind/forecastTypes';
 
 export const dynamic = 'force-dynamic';
 export const runtime = 'nodejs';
-/** The read path returns instantly; the recompute runs in `after()` after the
- *  response, so the function must stay alive long enough to finish it. */
+/** On a cold-cache miss we compute inline (the safety net), so the function may
+ *  need several seconds. */
 export const maxDuration = 60;
 
 const STALE_MS = 45 * 60 * 1000;
 
-/**
- * Compute + cache a forecast in the background. Runs via `after()` so it
- * executes reliably after the response is sent (a plain non-awaited fetch is
- * killed when a Vercel function returns). The in-flight lock dedupes concurrent
- * polls; an insufficient-telemetry device simply caches nothing.
- */
+/** Compute a forecast for a device (no caching). Null = insufficient telemetry. */
+async function computeForecast(deviceId: string): Promise<StratolinkForecast | null> {
+    const input = await buildForecastInputForDevice(deviceId);
+    if (!input) return null;
+    return computeMonteCarloForecast(input);
+}
+
+/** Compute + cache in the background (via after()), lock-guarded so concurrent
+ *  refreshes don't stack. Used to refresh a stale cache without blocking. */
 async function computeAndStore(deviceId: string): Promise<void> {
-    if (!(await acquireForecastLock(deviceId))) return; /* already in flight */
+    if (!(await acquireForecastLock(deviceId))) return;
     try {
-        const input = await buildForecastInputForDevice(deviceId);
-        if (!input) return;
-        const forecast = await computeMonteCarloForecast(input);
-        await storeForecast(deviceId, forecast);
+        const forecast = await computeForecast(deviceId);
+        if (forecast) await storeForecast(deviceId, forecast);
     } catch (e) {
-        const m = e instanceof Error ? e.message : String(e);
-        console.error(`[forecast] background compute failed for ${deviceId}: ${m}`);
+        console.error(`[forecast] background refresh failed for ${deviceId}: ${e instanceof Error ? e.message : e}`);
     } finally {
         await releaseForecastLock(deviceId);
     }
 }
 
 /**
- * Forecast for a device — READ ONLY. Serves the pre-computed forecast (kept
- * warm by the cron) instantly. The client never blocks on a compute: on a cache
- * miss we return 202 `pending` and recompute in the background (via `after()`,
- * so it runs reliably on Vercel) to self-heal new / cron-missed devices; on a
- * stale cache we serve it now and refresh in the background. The client just
- * polls until the forecast appears.
+ * Forecast for a device.
+ *
+ * - Fresh cache → served instantly.
+ * - Stale cache → served now, refreshed in the background (never blocks).
+ * - Cold miss → SAFETY NET: compute inline and return it, so the client always
+ *   gets a forecast even if the cache can't persist (e.g. Vercel Blob not
+ *   writable). Best-effort cached so warm reads are instant. A concurrent
+ *   in-flight compute returns 202 so the client polls instead of duplicating.
+ *
+ * (Once persistence is confirmed healthy in prod, the cold-miss path can go back
+ * to a pure 202 + background compute — see the forecast/hindcast work for #14.)
  */
 export async function GET(req: Request) {
     const { searchParams } = new URL(req.url);
@@ -56,7 +62,6 @@ export async function GET(req: Request) {
     if (stored) {
         const ageMs = Date.now() - new Date(stored.generated_at).getTime();
         const stale = ageMs > STALE_MS;
-        /* Refresh a stale cache in the background — never block this read. */
         if (stale) after(() => computeAndStore(deviceId));
         return NextResponse.json(stored, {
             headers: {
@@ -70,13 +75,40 @@ export async function GET(req: Request) {
         });
     }
 
-    /* No cache yet — never compute inline. Compute in the background and tell the
-     * client to keep polling. (The cron normally keeps caches warm; this
-     * self-heals new / cron-missed / on-demand devices, in prod and dev alike.) */
-    after(() => computeAndStore(deviceId));
-
-    return NextResponse.json(
-        { status: 'pending', device: deviceId },
-        { status: 202, headers: { 'Cache-Control': 'no-store', 'X-Forecast-Source': 'pending' } },
-    );
+    /* Cold miss — safety net. If another request is already computing this
+     * device, tell the client to poll rather than duplicate the work. */
+    if (!(await acquireForecastLock(deviceId))) {
+        return NextResponse.json(
+            { status: 'pending', device: deviceId },
+            { status: 202, headers: { 'Cache-Control': 'no-store', 'X-Forecast-Source': 'pending' } },
+        );
+    }
+    try {
+        const forecast = await computeForecast(deviceId);
+        if (!forecast) {
+            return NextResponse.json(
+                { error: 'insufficient telemetry to forecast', hint: 'device needs a recent GPS track' },
+                { status: 404 },
+            );
+        }
+        let cached = true;
+        try {
+            await storeForecast(deviceId, forecast);
+        } catch (e) {
+            cached = false;
+            console.error(`[forecast] failed to cache ${deviceId}: ${e instanceof Error ? e.message : e}`);
+        }
+        return NextResponse.json(forecast, {
+            headers: {
+                'Cache-Control': 'public, max-age=60, s-maxage=120',
+                'X-Forecast-Source': 'on-demand',
+                'X-Forecast-Cached': cached ? '1' : '0',
+            },
+        });
+    } catch (e) {
+        const message = e instanceof Error ? e.message : 'forecast compute failed';
+        return NextResponse.json({ error: message }, { status: 502 });
+    } finally {
+        await releaseForecastLock(deviceId);
+    }
 }
