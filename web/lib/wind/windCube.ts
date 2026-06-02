@@ -60,30 +60,44 @@ function cubeFromRaw(raw: RawCube): WindCube {
     };
 }
 
-/** Read a device's pre-ingested cube from Blob, or null if none exists yet.
- *  Prefers the gzipped `cubes/{deviceId}.json.gz` (the fine full-mission cube is
- *  several MB raw); falls back to the legacy uncompressed `cubes/{deviceId}.json`
- *  for the deploy window before the first gzipped ingest lands. Mirrors
- *  forecastStorage's private read. Never throws. */
-async function readCubeFromBlob(deviceId: string): Promise<WindCube | null> {
-    if (!isBlobStorageConfigured()) return null;
-    const id = encodeURIComponent(deviceId);
+/** Which cube to read for a device — the small hourly forecast cube or the
+ *  full-mission reconstruction cube (see scripts/gfs_ingest.py). */
+export type CubeKind = 'forecast' | 'reconstruction';
+
+/** Read+decode one Blob cube object by key (gunzips `.json.gz`, plain-reads
+ *  `.json`), or null if absent/unreadable. Never throws. */
+async function getCubeObject(key: string): Promise<WindCube | null> {
     try {
-        const gz = await get(`cubes/${id}.json.gz`, { access: 'private', useCache: false });
-        if (gz && gz.statusCode === 200) {
-            const buf = Buffer.from(await new Response(gz.stream).arrayBuffer());
+        const r = await get(key, { access: 'private', useCache: false });
+        if (!r || r.statusCode !== 200) return null;
+        if (key.endsWith('.gz')) {
+            const buf = Buffer.from(await new Response(r.stream).arrayBuffer());
             return cubeFromRaw(JSON.parse(gunzipSync(buf).toString('utf8')) as RawCube);
         }
-    } catch {
-        /* fall through to the uncompressed legacy object */
-    }
-    try {
-        const r = await get(`cubes/${id}.json`, { access: 'private', useCache: false });
-        if (!r || r.statusCode !== 200) return null;
         return cubeFromRaw((await new Response(r.stream).json()) as RawCube);
     } catch {
         return null;
     }
+}
+
+/** Read a device's pre-ingested cube from Blob, or null if none exists yet.
+ *  The `forecast` cube (`cubes/{id}-fc.json.gz`) is small + hourly; the
+ *  `reconstruction` cube (`cubes/{id}.json.gz`) is the full mission. Prefers the
+ *  gzipped object, falls back to the legacy uncompressed one (deploy window), and
+ *  the forecast read falls back to the full cube if no `-fc` cube exists yet
+ *  (so the app is safe to deploy before the two-cube ingest first runs). Never throws. */
+async function readCubeFromBlob(deviceId: string, kind: CubeKind): Promise<WindCube | null> {
+    if (!isBlobStorageConfigured()) return null;
+    const id = encodeURIComponent(deviceId);
+    const candidates =
+        kind === 'forecast'
+            ? [`cubes/${id}-fc.json.gz`, `cubes/${id}-fc.json`, `cubes/${id}.json.gz`, `cubes/${id}.json`]
+            : [`cubes/${id}.json.gz`, `cubes/${id}.json`];
+    for (const key of candidates) {
+        const cube = await getCubeObject(key);
+        if (cube) return cube;
+    }
+    return null;
 }
 
 /**
@@ -137,19 +151,27 @@ export async function fetchWindCube(opts: {
     gridStep?: number;
     /** Device whose pre-ingested cube to serve from Blob. */
     deviceId?: string;
+    /** Which pre-ingested cube to serve (default 'reconstruction'). */
+    kind?: CubeKind;
 }): Promise<WindCube> {
     /* Source precedence:
-     *   1. WIND_CUBE_FILE  — a local file (dev / spike).
+     *   1. WIND_CUBE_FILE / WIND_CUBE_FC_FILE — local files (dev / spike). The FC
+     *      file (if set) serves the forecast kind; WIND_CUBE_FILE serves either.
      *   2. Blob cube for the device — the pre-ingested GFS cube (scripts/gfs_ingest.py,
      *      refreshed 6-hourly), the production path: no live wind API, no rate limit.
      *   3. Open-Meteo — live fallback for devices with no cube yet (migration safety;
      *      the call budget protects it). */
+    const kind: CubeKind = opts.kind ?? 'reconstruction';
+    const fcFile = process.env.WIND_CUBE_FC_FILE;
     const localFile = process.env.WIND_CUBE_FILE;
+    if (kind === 'forecast' && fcFile) {
+        return cubeFromRaw(JSON.parse(await readFile(fcFile, 'utf8')) as RawCube);
+    }
     if (localFile) {
         return cubeFromRaw(JSON.parse(await readFile(localFile, 'utf8')) as RawCube);
     }
     if (opts.deviceId) {
-        const cube = await readCubeFromBlob(opts.deviceId);
+        const cube = await readCubeFromBlob(opts.deviceId, kind);
         if (cube) return cube;
     }
 

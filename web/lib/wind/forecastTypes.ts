@@ -135,8 +135,10 @@ export type StratolinkForecast = {
         reconstruction_ms?: number;
         /** `gfs_cube` — the stale-GPS gap is dead-reckoned through the shared GFS cube. */
         gap_wind_mode?: string;
-        /** Resolution (deg) of the shared space-time wind field for this compute. */
+        /** Resolution (deg) of the forecast wind cube (the forward forecast + ensemble). */
         grid_step_deg?: number;
+        /** Resolution (deg) of the full-mission reconstruction wind cube. */
+        recon_grid_step_deg?: number;
         /** Where the winds came from: 'gfs' (pre-ingested cube) or 'open-meteo' (live). */
         wind_source?: string;
         /** ISO time the GFS wind cube was ingested (staleness indicator). */
