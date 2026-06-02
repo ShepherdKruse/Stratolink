@@ -15,7 +15,10 @@ export const STALE_GAP_REFRESH_MS = 15 * 60_000;
 /** If last GPS fix is older than this, dead-reckon to "now" before forecasting forward. */
 export const STALE_GPS_THRESHOLD_H = 1;
 
-export const GAP_WIND_MODE = 'hourly_series' as const;
+/* The stale-GPS dead-reckon (last fix → now) is integrated through the shared
+ * GFS WindCube alongside the forward forecast — not the legacy per-point Open-Meteo
+ * hourly series. This label reports that in forecast metadata. */
+export const GAP_WIND_MODE = 'gfs_cube' as const;
 
 const MAX_GAP_H = 72;
 const REFETCH_EVERY_H = 3;
