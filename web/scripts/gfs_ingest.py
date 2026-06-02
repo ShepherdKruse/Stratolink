@@ -26,10 +26,13 @@ import pygrib
 
 # ── Config (mirror the app) ──────────────────────────────────────────────────
 HORIZON_H = 24
-RECENT_DAYS = 14
 MAX_GAP_H = 72
 STEP_H = 3                       # cube time step
-MAX_GRID_PTS = 120               # chooseGridStep budget
+# Cube resolution is now bounded by SIZE, not API calls (we own the GFS download).
+# A higher point budget => a much finer grid than Open-Meteo's 120-pt cap allowed.
+MAX_GRID_PTS = 8000
+HISTORY_DAYS = 90                # cap full-mission lookback (matches app MAX_HISTORY)
+PAD_CAP_DEG = 20                 # cap the downwind forecast pad so the box can't run away
 GFS_LEVELS = [1000, 975, 950, 925, 900, 850, 800, 700, 600, 500, 400, 300, 250, 200, 150, 100, 70, 50, 30]
 BUCKET = "https://noaa-gfs-bdp-pds.s3.amazonaws.com"
 OUTDIR = os.path.join(os.path.dirname(__file__), "..", ".windcube", "cubes")
@@ -59,26 +62,29 @@ def supa(path, params):
 
 # ── Supabase: fleet + recent track + level ───────────────────────────────────
 def active_devices():
-    rows = supa("devices", {"select": "device_id,status"})
-    return [r["device_id"] for r in rows if r.get("status") == "flying"]
+    rows = supa("devices", {"select": "device_id,status,launched_at"})
+    return [(r["device_id"], r.get("launched_at")) for r in rows if r.get("status") == "flying"]
 
 
-def recent_fixes(device):
-    since = (datetime.now(timezone.utc) - timedelta(days=RECENT_DAYS)).strftime("%Y-%m-%dT%H:%M:%SZ")
+def mission_since(launched_at):
+    """Earliest time to fetch fixes from: launch, but never older than HISTORY_DAYS."""
+    floor = datetime.now(timezone.utc) - timedelta(days=HISTORY_DAYS)
+    if launched_at:
+        lt = datetime.fromisoformat(launched_at).astimezone(timezone.utc)
+        if lt > floor:
+            floor = lt
+    return floor.strftime("%Y-%m-%dT%H:%M:%SZ")
+
+
+def mission_fixes(device, since_iso):
+    """All GPS fixes since launch (full mission) — for the cube's bounds + span."""
     rows = supa("telemetry", {
         "device_id": f"eq.{device}",
-        "time": f"gte.{since}",
+        "time": f"gte.{since_iso}",
         "lat": "not.is.null", "lon": "not.is.null",
-        "select": "time,lat,lon,altitude_m", "order": "time.asc",
+        "select": "time,lat,lon,altitude_m", "order": "time.asc", "limit": "50000",
     })
-    fixes = [{"lat": r["lat"], "lon": r["lon"], "t": r["time"], "alt": r.get("altitude_m")} for r in rows]
-    if len(fixes) < 5:  # quiet longer than the window — fall back to the last handful
-        rows = supa("telemetry", {
-            "device_id": f"eq.{device}", "lat": "not.is.null", "lon": "not.is.null",
-            "select": "time,lat,lon,altitude_m", "order": "time.desc", "limit": "50",
-        })
-        fixes = [{"lat": r["lat"], "lon": r["lon"], "t": r["time"], "alt": r.get("altitude_m")} for r in rows][::-1]
-    return fixes
+    return [{"lat": r["lat"], "lon": r["lon"], "t": r["time"], "alt": r.get("altitude_m")} for r in rows]
 
 
 def latest_level(device):
@@ -102,8 +108,8 @@ def bounds_for_forecast(fixes, forecast_hours):
             dLatPerH = (b["lat"] - a["lat"]) / dtH
             dLonPerH = (b["lon"] - a["lon"]) / dtH
     padH = forecast_hours * 1.35
-    padLat = abs(dLatPerH * padH) + 6
-    padLon = abs(dLonPerH * padH) + 6
+    padLat = min(PAD_CAP_DEG, abs(dLatPerH * padH)) + 6
+    padLon = min(PAD_CAP_DEG, abs(dLonPerH * padH)) + 6
     up = padLat if dLatPerH >= 0 else 6
     down = padLat if dLatPerH <= 0 else 6
     east = padLon if dLonPerH >= 0 else 6
@@ -114,11 +120,11 @@ def bounds_for_forecast(fixes, forecast_hours):
 
 def choose_grid_step(b, max_pts=MAX_GRID_PTS):
     spanLat, spanLon = b["latMax"] - b["latMin"], b["lonMax"] - b["lonMin"]
-    for step in [1.25, 1.5, 2.0, 2.5, 3.0, 3.5, 4.0]:
+    for step in [0.25, 0.5, 0.75, 1.0, 1.5, 2.0, 2.5, 3.0]:
         n = (round(spanLat / step) + 1) * (round(spanLon / step) + 1)
         if n <= max_pts:
             return step
-    return 4.0
+    return 3.0
 
 
 # ── GFS fetch (multi-cycle: past analyses + forward forecast) ────────────────
@@ -191,12 +197,15 @@ def floor3(t):
 
 
 def build_cube(device, fixes, level, latest):
+    first_fix = datetime.fromisoformat(fixes[0]["t"]).astimezone(timezone.utc)
     last_fix = datetime.fromisoformat(fixes[-1]["t"]).astimezone(timezone.utc)
     now = datetime.now(timezone.utc)
     gap_h = max(0, (now - last_fix).total_seconds() / 3600)
     bounds = bounds_for_forecast(fixes, HORIZON_H + min(gap_h, MAX_GAP_H))
     step = choose_grid_step(bounds)
-    start = floor3(last_fix) - timedelta(hours=STEP_H)
+    # Full mission: from the first fix (so reconstruction's historical gaps are
+    # covered) through now + forecast horizon.
+    start = floor3(first_fix) - timedelta(hours=STEP_H)
     end = floor3(now) + timedelta(hours=HORIZON_H + 2 * STEP_H)
 
     lats = np.arange(bounds["latMin"], bounds["latMax"] + 1e-6, step)
@@ -215,8 +224,8 @@ def build_cube(device, fixes, level, latest):
         grids.append({
             "lat0": float(lats[0]), "dLat": step, "nLat": len(lats),
             "lon0": float(lons[0]), "dLon": step, "nLon": len(lons),
-            "U": [round(float(x), 3) for x in U.ravel()],
-            "V": [round(float(x), 3) for x in V.ravel()],
+            "U": [round(float(x), 1) for x in U.ravel()],
+            "V": [round(float(x), 1) for x in V.ravel()],
         })
         t += timedelta(hours=STEP_H)
 
@@ -237,17 +246,17 @@ def build_cube(device, fixes, level, latest):
 
 def main():
     only = sys.argv[1] if len(sys.argv) > 1 else None
-    devices = [only] if only else active_devices()
+    devices = [(only, None)] if only else active_devices()
     if not devices:
         print("no active devices")
         return
     latest = latest_cycle()
-    print(f"latest GFS cycle {latest.isoformat()} | devices: {devices}")
-    for d in devices:
+    print(f"latest GFS cycle {latest.isoformat()} | devices: {[d for d, _ in devices]}")
+    for d, launched in devices:
         try:
-            fixes = recent_fixes(d)
+            fixes = mission_fixes(d, mission_since(launched))
             if len(fixes) < 1:
-                print(f"  {d}: no recent fixes, skipping")
+                print(f"  {d}: no fixes, skipping")
                 continue
             build_cube(d, fixes, latest_level(d), latest)
         except Exception as e:
