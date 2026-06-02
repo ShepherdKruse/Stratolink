@@ -18,15 +18,22 @@
 #endif
 
 // TTN Configuration
-// Region is selected at runtime from GPS lat/lon — see region_manager.cpp
+// Region is selected at runtime from GPS lat/lon, see region_manager.cpp
 // and lorawan_set_region().  Cold-boot default is US915 (see lorawan.cpp);
 // overridden on the first valid GPS fix.
 
 // GNSS Configuration
 #define GNSS_ENABLE true
 #define GNSS_UPDATE_INTERVAL_MS 30000
+// Hardware-reset the GPS via PA0 after this many consecutive cycles in which the
+// module was truly SILENT (getPVT never answered), to un-stick a wedged module.
+// Counted in GPS-POLLED cycles (only when power_adc_can_use_gps()), not wall-clock:
+// ~25 min at the 300 s FULL cadence, less in burst.  NOTE: cadence is coupled to
+// the LoRaWAN spreading factor (SF9 -> ~15 min -> 5 cycles = ~75 min); when SF/
+// cadence is finalized, make this a wall-clock budget.  See GPS_HANDOFF.md.
+#define GPS_STALE_RECOVERY_CYCLES 5
 
-// Power Management — FULL=300s keeps daily airtime at SF7/35-byte to
+// Power Management, FULL=300s keeps daily airtime at SF7/35-byte to
 // ~28 s/day across every region, inside the TTN 30 s Fair-Use Policy.
 // Lower tiers extend further; both NO_GPS and EMERGENCY already cover
 // the cold/dark cycle.
