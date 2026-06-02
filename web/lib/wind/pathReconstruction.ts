@@ -4,12 +4,11 @@
  */
 
 import { createHash } from 'node:crypto';
-import { boundsFromPoints, fetchWindGrid, snapPressureHpa } from './fetchWindGrid';
+import { snapPressureHpa } from './fetchWindGrid';
 import type { ForecastGpsFix } from './forecastTypes';
-import { windAt, windFieldToGfsGrid, type GfsGrid } from './gfsGrid';
 import { BALLOON_STEP_HOURS } from './balloonIntegrate';
 import { reconstructLongGap, type OccupancyFootprint } from './pathReconstructionLongGap';
-import { BudgetExceededError } from './openMeteoBudget';
+import { sampleWind, type WindCube } from './windCube';
 
 const CFG = {
     N_PARTICLES: 200,
@@ -189,14 +188,17 @@ function computeEllipse(
 
 function integrate(
     start: PathPoint,
-    gfs: GfsGrid,
+    cube: WindCube,
     nSteps: number,
     dirSign: 1 | -1,
     params: { speedMult: number; dirOffsetDeg: number },
     altProfile: (frac: number) => number,
+    tA: number,
+    tB: number,
 ): PathPoint[] {
     const { speedMult, dirOffsetDeg } = params;
     const stepSec = CFG.STEP_HOURS * 3600 * dirSign;
+    const span = tB - tA;
     const dr = toRad(dirOffsetDeg);
     const cosD = Math.cos(dr);
     const sinD = Math.sin(dr);
@@ -210,7 +212,10 @@ function integrate(
         const alt = altProfile(frac);
         const altScale = 1 + ((alt - CFG.FLOAT_ALT_M) / 1000) * CFG.ALT_TO_WIND_FACTOR;
 
-        const { u, v } = windAt(gfs, lat, lon);
+        /* Sample the cube at this step's wall-clock instant (forward from tA, or
+         * backward from tB for the reverse cloud). */
+        const tw = dirSign > 0 ? tA + ((s - 1) / nSteps) * span : tB - ((s - 1) / nSteps) * span;
+        const { u, v } = sampleWind(cube, lat, lon, tw);
         const k = speedMult * altScale;
         const uK = u * k;
         const vK = v * k;
@@ -228,9 +233,11 @@ function integrate(
 function solveShooting(
     A: PathPoint,
     B: PathPoint,
-    gfs: GfsGrid,
+    cube: WindCube,
     nSteps: number,
     altProfile: (frac: number) => number,
+    tA: number,
+    tB: number,
 ): { speedMult: number; dirOffsetDeg: number; miss: number } {
     let speedMult = 1;
     let dirOffsetDeg = 0;
@@ -238,7 +245,7 @@ function solveShooting(
     let best = { speedMult, dirOffsetDeg, miss: Infinity };
 
     for (let iter = 0; iter < CFG.SHOOT_ITERS; iter++) {
-        const p = integrate(A, gfs, nSteps, 1, { speedMult, dirOffsetDeg }, altProfile);
+        const p = integrate(A, cube, nSteps, 1, { speedMult, dirOffsetDeg }, altProfile, tA, tB);
         const end = p[p.length - 1];
         const miss = distanceKm(B.lat, B.lon, end.lat, end.lon);
         if (miss < best.miss) best = { speedMult, dirOffsetDeg, miss };
@@ -261,7 +268,7 @@ function solveShooting(
 function bridgeGap(
     A: Fix,
     B: Fix,
-    gfs: GfsGrid | null,
+    cube: WindCube,
     baroSamples: BaroSample[] | null,
 ): {
     meanPath: Array<[number, number]>;
@@ -321,11 +328,9 @@ function bridgeGap(
         };
     }
 
-    if (!gfs) throw new Error('bridgeGap: wind grid required for a non-short gap');
-    const grid = gfs; /* const so narrowing to GfsGrid survives into the closure */
     const start: PathPoint = { lat: A.lat, lon: A.lon, alt: altA };
     const end: PathPoint = { lat: B.lat, lon: B.lon, alt: altB };
-    const bias = solveShooting(start, end, grid, nSteps, altProfile);
+    const bias = solveShooting(start, end, cube, nSteps, altProfile, tA, tB);
 
     function runCloud(
         from: PathPoint,
@@ -345,7 +350,7 @@ function bridgeGap(
                       const off = CFG.ALT_SIGMA_M * gauss();
                       return (f: number) => altProfile(f) + off;
                   })();
-            const p = integrate(from, grid, nSteps, dirSign, params, aProf);
+            const p = integrate(from, cube, nSteps, dirSign, params, aProf, tA, tB);
             const e = p[p.length - 1];
             const miss = distanceKm(target.lat, target.lon, e.lat, e.lon);
             const w = Math.exp(-(miss * miss) / (2 * CFG.ENDPOINT_SIGMA_KM ** 2));
@@ -428,42 +433,15 @@ function normalizeFixes(fixes: ForecastGpsFix[]): Fix[] {
     }));
 }
 
-/** Cheap straight-line bridge (no wind, no fetch). Placeholder for a gap we
- *  couldn't compute this tick because the call budget ran out — flagged low
- *  confidence and NOT cached, so it's recomputed (for real) on a later tick. */
-function straightBridge(A: Fix, B: Fix): {
-    meanPath: Array<[number, number]>;
-    meta: Omit<ReconstructionGap, 'from_idx' | 'to_idx'>;
-} {
-    const tA = new Date(A.time_utc).getTime();
-    const tB = new Date(B.time_utc).getTime();
-    const gapMin = (tB - tA) / 60_000;
-    const nSteps = Math.max(1, Math.round(gapMin / 60 / CFG.STEP_HOURS));
-    const meanPath: Array<[number, number]> = [];
-    for (let s = 0; s <= nSteps; s++) {
-        const f = s / nSteps;
-        meanPath.push([R4(A.lon + f * (B.lon - A.lon)), R4(A.lat + f * (B.lat - A.lat))]);
-    }
-    return {
-        meanPath,
-        meta: {
-            dt_hours: R1(gapMin / 60),
-            measured_altitude: false,
-            endpoint_miss_km: 0,
-            mid_gap_90_km: 0,
-            confidence: 'low',
-            short: gapMin < CFG.SHORT_GAP_MIN,
-            mode: 'line',
-        },
-    };
-}
-
 /** Reconstruct full observed track with particle bridges between every GPS fix pair.
  *  Pass `gapCache` (a per-device map the caller persists) to reuse the immutable
  *  bridges of older gaps and only (re)compute the recent/trailing ones. */
 export async function computePathReconstruction(opts: {
     fixes: ForecastGpsFix[];
     pressureHpa: number;
+    /** Space-time GFS cube spanning the mission — every bridge samples it (no
+     *  Open-Meteo). Must cover the fixes' span (the full-mission ingest does). */
+    cube: WindCube;
     baroSamples?: BaroSample[];
     gapCache?: Map<string, GapCacheEntry>;
     now?: number;
@@ -520,40 +498,8 @@ export async function computePathReconstruction(opts: {
         });
     }
 
-    /* One shared snapshot grid for the MEDIUM gaps that must (re)compute, sized to
-     * just those gaps' fixes — on a warm cache that's only the recent (small) area,
-     * not the whole-mission bbox. Skipped entirely when nothing medium needs it. */
-    /* `budgetHit` flips true the moment a wind fetch is refused by the call
-     * budget; from then on remaining uncached gaps get straight-line placeholders
-     * (no further fetches) and the result is marked partial so it isn't persisted
-     * as final — the next tick resumes and fills them in. */
-    let budgetHit = false;
-    let partial = false;
-
-    const mediumCompute = plans.filter((p) => !p.cached && !p.isLong && !p.isShort);
-    let gfs: GfsGrid | null = null;
-    if (mediumCompute.length > 0) {
-        const pts = mediumCompute.flatMap((p) => [
-            { lat: p.A.lat, lon: p.A.lon },
-            { lat: p.B.lat, lon: p.B.lon },
-        ]);
-        const gridBounds = boundsFromPoints(pts, 5);
-        const gridStep =
-            Math.max(gridBounds.latMax - gridBounds.latMin, gridBounds.lonMax - gridBounds.lonMin) > 22
-                ? 3.5
-                : 2.5;
-        const gridAt = new Date(
-            (mediumCompute[0].tA + mediumCompute[mediumCompute.length - 1].tB) / 2,
-        );
-        try {
-            const field = await fetchWindGrid(gridBounds, levelHpa, gridStep, gridAt);
-            gfs = windFieldToGfsGrid(field, gridStep);
-        } catch (e) {
-            if (e instanceof BudgetExceededError) budgetHit = true;
-            else throw e;
-        }
-    }
-
+    /* Every bridge samples the shared GFS cube (no Open-Meteo, no per-gap fetch).
+     * The cube spans the whole mission, so any gap's time is covered. */
     const nowIso = new Date(now).toISOString();
     const gaps: ReconstructionGap[] = [];
     const gapBridges: Array<Array<[number, number]>> = [];
@@ -570,9 +516,28 @@ export async function computePathReconstruction(opts: {
             meanPath = plan.cached.meanPath;
             meta = plan.cached.gap;
             isBridge = plan.cached.isBridge;
-        } else if (plan.isShort) {
-            /* Short gaps are a straight line — no wind/fetch — so always compute. */
-            const br = bridgeGap(A, B, null, baro.length ? baro : null);
+        } else if (plan.isLong) {
+            const lg = await reconstructLongGap(A, B, baro, opts.cube);
+            meanPath = lg.meanPath;
+            meta = {
+                dt_hours: lg.dt_hours,
+                measured_altitude: lg.measured_altitude,
+                endpoint_miss_km: lg.endpoint_miss_km,
+                mid_gap_90_km: lg.mid_gap_90_km,
+                confidence: lg.confidence,
+                short: lg.short,
+                mode: lg.mode,
+                n_eff: lg.n_eff,
+                directness: lg.directness,
+                net_speed_ms: lg.net_speed_ms,
+                occupancy: lg.occupancy,
+                ellipses: lg.ellipses,
+            };
+            isBridge = !lg.short && lg.meanPath.length >= 2;
+            cache?.set(plan.hash, { meanPath, gap: meta, isBridge, computed_at: nowIso });
+        } else {
+            /* Short + medium gaps: bridgeGap (short = straight line, no cube use). */
+            const br = bridgeGap(A, B, opts.cube, baro.length ? baro : null);
             meanPath = br.meanPath;
             meta = {
                 dt_hours: br.dt_hours,
@@ -585,63 +550,6 @@ export async function computePathReconstruction(opts: {
             };
             isBridge = !br.short && br.meanPath.length >= 2;
             cache?.set(plan.hash, { meanPath, gap: meta, isBridge, computed_at: nowIso });
-        } else {
-            let computed: { meanPath: Array<[number, number]>; meta: Omit<ReconstructionGap, 'from_idx' | 'to_idx'>; isBridge: boolean } | null = null;
-            if (!budgetHit && (plan.isLong || gfs)) {
-                try {
-                    if (plan.isLong) {
-                        const lg = await reconstructLongGap(A, B, baro, levelHpa);
-                        computed = {
-                            meanPath: lg.meanPath,
-                            meta: {
-                                dt_hours: lg.dt_hours,
-                                measured_altitude: lg.measured_altitude,
-                                endpoint_miss_km: lg.endpoint_miss_km,
-                                mid_gap_90_km: lg.mid_gap_90_km,
-                                confidence: lg.confidence,
-                                short: lg.short,
-                                mode: lg.mode,
-                                n_eff: lg.n_eff,
-                                directness: lg.directness,
-                                net_speed_ms: lg.net_speed_ms,
-                                occupancy: lg.occupancy,
-                                ellipses: lg.ellipses,
-                            },
-                            isBridge: !lg.short && lg.meanPath.length >= 2,
-                        };
-                    } else {
-                        const br = bridgeGap(A, B, gfs, baro.length ? baro : null);
-                        computed = {
-                            meanPath: br.meanPath,
-                            meta: {
-                                dt_hours: br.dt_hours,
-                                measured_altitude: br.measured_altitude,
-                                endpoint_miss_km: br.endpoint_miss_km,
-                                mid_gap_90_km: br.mid_gap_90_km,
-                                confidence: br.confidence,
-                                short: br.short,
-                                mode: 'line',
-                            },
-                            isBridge: !br.short && br.meanPath.length >= 2,
-                        };
-                    }
-                } catch (e) {
-                    if (e instanceof BudgetExceededError) budgetHit = true;
-                    else throw e;
-                }
-            }
-
-            if (computed) {
-                ({ meanPath, meta, isBridge } = computed);
-                cache?.set(plan.hash, { meanPath, gap: meta, isBridge, computed_at: nowIso });
-            } else {
-                /* Out of budget — straight-line placeholder, not cached. */
-                const sb = straightBridge(A, B);
-                meanPath = sb.meanPath;
-                meta = sb.meta;
-                isBridge = !sb.meta.short && meanPath.length >= 2;
-                partial = true;
-            }
         }
 
         gaps.push({ from_idx: i, to_idx: i + 1, ...meta });
@@ -665,6 +573,5 @@ export async function computePathReconstruction(opts: {
         gap_bridges: gapBridges,
         gaps,
         compute_ms: Date.now() - t0,
-        partial,
     };
 }

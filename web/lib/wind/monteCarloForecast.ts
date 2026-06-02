@@ -294,6 +294,7 @@ const HINDCAST_MIN_REFRESH_INTERVAL_H = 3;
 async function resolveReconstruction(
     input: MonteCarloForecastInput,
     levelHpa: number,
+    cube: WindCube,
 ): Promise<{ result: PathReconstructionResult; hash: string }> {
     const hash = hindcastInputHash(input.gpsFixes, levelHpa);
     const lastFix = input.gpsFixes[input.gpsFixes.length - 1];
@@ -319,6 +320,7 @@ async function resolveReconstruction(
     const result = await computePathReconstruction({
         fixes: input.gpsFixes,
         pressureHpa: levelHpa,
+        cube,
         baroSamples: input.baroSamples,
         gapCache,
         now: Date.now(),
@@ -382,6 +384,7 @@ export async function computeMonteCarloForecast(input: MonteCarloForecastInput):
     const { result: reconstruction, hash: reconstructionHash } = await resolveReconstruction(
         input,
         levelHpa,
+        cube,
     );
 
     /* Every member is ONE continuous integration from the last fix (at its real

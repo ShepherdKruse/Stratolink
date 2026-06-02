@@ -1,5 +1,6 @@
 import { get } from '@vercel/blob';
 import { readFile } from 'node:fs/promises';
+import { gunzipSync } from 'node:zlib';
 import { fetchWindGridHourlySeries, snapPressureHpa, type WindGridBounds } from './fetchWindGrid';
 import { isBlobStorageConfigured } from './forecastStorage';
 import { windAt, type GfsGrid } from './gfsGrid';
@@ -59,12 +60,25 @@ function cubeFromRaw(raw: RawCube): WindCube {
     };
 }
 
-/** Read a device's pre-ingested cube from Blob (`cubes/{deviceId}.json`), or null
- *  if none exists yet. Mirrors forecastStorage's private read. Never throws. */
+/** Read a device's pre-ingested cube from Blob, or null if none exists yet.
+ *  Prefers the gzipped `cubes/{deviceId}.json.gz` (the fine full-mission cube is
+ *  several MB raw); falls back to the legacy uncompressed `cubes/{deviceId}.json`
+ *  for the deploy window before the first gzipped ingest lands. Mirrors
+ *  forecastStorage's private read. Never throws. */
 async function readCubeFromBlob(deviceId: string): Promise<WindCube | null> {
     if (!isBlobStorageConfigured()) return null;
+    const id = encodeURIComponent(deviceId);
     try {
-        const r = await get(`cubes/${encodeURIComponent(deviceId)}.json`, { access: 'private', useCache: false });
+        const gz = await get(`cubes/${id}.json.gz`, { access: 'private', useCache: false });
+        if (gz && gz.statusCode === 200) {
+            const buf = Buffer.from(await new Response(gz.stream).arrayBuffer());
+            return cubeFromRaw(JSON.parse(gunzipSync(buf).toString('utf8')) as RawCube);
+        }
+    } catch {
+        /* fall through to the uncompressed legacy object */
+    }
+    try {
+        const r = await get(`cubes/${id}.json`, { access: 'private', useCache: false });
         if (!r || r.statusCode !== 200) return null;
         return cubeFromRaw((await new Response(r.stream).json()) as RawCube);
     } catch {

@@ -4,10 +4,9 @@
  * bridge proposal, heading walk + directness, occupancy footprint for corridor mode.
  */
 
-import { boundsFromPoints, fetchWindGridHourlySeries, snapPressureHpa } from './fetchWindGrid';
 import type { ForecastGpsFix } from './forecastTypes';
-import { windAt, type GfsGrid } from './gfsGrid';
 import type { BaroSample } from './pathReconstruction';
+import { sampleWind, type WindCube } from './windCube';
 
 const CFG = {
     N_PARTICLES: 600,
@@ -198,15 +197,6 @@ function computeOccupancy(trajs: PathPoint[][], weights: number[]): OccupancyFoo
     return { lat0: R4(minLat), lon0: R4(minLon), dLat: R4(cell), dLon: R4(cell), nLat, nLon, cells };
 }
 
-function windAtHour(grids: GfsGrid[], hourFloat: number, lat: number, lon: number): { u: number; v: number } {
-    if (grids.length === 1) return windAt(grids[0], lat, lon);
-    const h0 = Math.min(Math.floor(hourFloat), grids.length - 2);
-    const f = hourFloat - h0;
-    const a = windAt(grids[h0], lat, lon);
-    const b = windAt(grids[h0 + 1], lat, lon);
-    return { u: a.u * (1 - f) + b.u * f, v: a.v * (1 - f) + b.v * f };
-}
-
 function buildAltitudeModel(tA_ms: number, tB_ms: number, baroSamples: BaroSample[]): (frac: number) => number {
     const measured = baroSamples.map((s) => ({
         t: new Date(s.time_utc).getTime(),
@@ -244,7 +234,8 @@ function makeHeadingWalk(gapHours: number, directness: number): HeadingKnot[] | 
 function integrateBridge(
     A: Fix,
     B: Fix,
-    grids: GfsGrid[],
+    cube: WindCube,
+    tA: number,
     nSteps: number,
     gapHours: number,
     altModel: (frac: number) => number,
@@ -292,7 +283,7 @@ function integrateBridge(
         const alt = altModel(frac) + pert.altOffset;
         const altScale = 1 + ((alt - CFG.FLOAT_ALT_M) / 1000) * 0.02;
 
-        const { u, v } = windAtHour(grids, hourFloat, lat, lon);
+        const { u, v } = sampleWind(cube, lat, lon, tA + hourFloat * 3_600_000);
         const k = pert.speedMult * altScale;
         const uK = u * k;
         const vK = v * k;
@@ -331,7 +322,7 @@ export async function reconstructLongGap(
     A: Fix,
     B: Fix,
     baroSamples: BaroSample[],
-    pressureHpa: number,
+    cube: WindCube,
 ): Promise<LongGapBridgeResult> {
     const tA = new Date(A.time_utc).getTime();
     const tB = new Date(B.time_utc).getTime();
@@ -366,24 +357,6 @@ export async function reconstructLongGap(
     const netSpeed = (netKm * 1000) / (gapHours * 3600);
     const directness = Math.max(0, Math.min(1, netSpeed / CFG.TYPICAL_WIND_MS));
 
-    const gridBounds = boundsFromPoints(
-        [
-            { lat: A.lat, lon: A.lon },
-            { lat: B.lat, lon: B.lon },
-        ],
-        5,
-    );
-    const spanDeg = Math.max(gridBounds.latMax - gridBounds.latMin, gridBounds.lonMax - gridBounds.lonMin);
-    const gridStep = spanDeg > 22 ? 3.5 : 2.5;
-    const levelHpa = snapPressureHpa(pressureHpa);
-    const grids = await fetchWindGridHourlySeries(
-        gridBounds,
-        levelHpa,
-        gridStep,
-        new Date(tA),
-        gapHours,
-    );
-
     const nSteps = Math.max(6, Math.round(gapMin / CFG.STEP_MIN));
     const altModel = buildAltitudeModel(tA, tB, baroSamples);
     const trajs: PathPoint[][] = [];
@@ -396,7 +369,7 @@ export async function reconstructLongGap(
             altOffset: CFG.ALT_SIGMA_M * gauss(),
             headingWalk: makeHeadingWalk(gapHours, directness),
         };
-        const { path, logW } = integrateBridge(A, B, grids, nSteps, gapHours, altModel, pert);
+        const { path, logW } = integrateBridge(A, B, cube, tA, nSteps, gapHours, altModel, pert);
         const end = path[path.length - 1];
         const miss = distanceKm(B.lat, B.lon, end.lat, end.lon);
         const logLik = -(miss * miss) / (2 * CFG.ENDPOINT_SIGMA_KM ** 2);
