@@ -6,6 +6,7 @@
 #include "lorawan.h"
 #include "config.h"
 #include "power_adc.h"
+#include "power_manager.h"   /* for power_manager_kick_watchdog */
 #include <RadioLib.h>
 
 #if __has_include("secrets.h")
@@ -46,10 +47,25 @@ typedef struct {
     uint8_t tx_sf;    float tx_bw;
 } lora_region_t;
 
+/* All region tables drop default uplink SF to 7 (DR3 in US915/AU915,
+ * DR5 in EU868/AS923) — at 35-byte payload that's ~97.5 ms ToA and
+ * ~28 s/day at the 5-min FULL-tier interval, inside the TTN 30 s FUP
+ * in every region.  RX1 spreading factor now also matches the join_sf
+ * via each region's standard RX1DROffset=0 mapping (the previous code
+ * hardcoded rx1_sf=10 for US915/AU915 regardless of join, so joins
+ * only ever succeeded via the RX2 fallback). */
 static const float US915_FREQS[] = {903.9,904.1,904.3,904.5,904.7,904.9,905.1,905.3};
 static const lora_region_t LORA_US915 = {
+    /* US915 sub-band 2.  Join at DR0 (SF10/125), RX1 at DR10 (SF10/500)
+     * per RP002 RX1 data-rate offset 0 — this is the only join SF that
+     * matches our rx1_sf without computing the DR2→DR8/DR3→DR8 cross-DR
+     * mapping at runtime.  Yesterday's flight firmware ran this config
+     * and joined cleanly through onethreenine gateway at -45 dBm.
+     * Uplinks tx_sf=7 (DR3) for TTN FUP compliance — uplinks don't
+     * open RX windows in our minimal LoRaWAN code, so the rx1_sf
+     * mismatch for DR3 uplinks is irrelevant in practice. */
     US915_FREQS, 8, 923.3,  923.3, 0.6, 8,
-    10, 125.0,  10, 500.0,  12, 500.0,  904.1,  10, 125.0
+    10, 125.0,  10, 500.0,  12, 500.0,  904.1,  7, 125.0
 };
 
 static const float EU868_FREQS[] = {868.1, 868.3, 868.5};
@@ -60,27 +76,26 @@ static const lora_region_t LORA_EU868 = {
 
 static const float AU915_FREQS[] = {916.8,917.0,917.2,917.4,917.6,917.8,918.0,918.2};
 static const lora_region_t LORA_AU915 = {
+    /* AU915 same RP002 RX1 rule as US915 — join at DR0/SF10 to match
+     * RX1 DR10/SF10/500 without cross-DR offset math.  See US915
+     * block above for the rationale. */
     AU915_FREQS, 8, 923.3,  923.3, 0.6, 8,
-    10, 125.0,  10, 500.0,  12, 500.0,  917.0,  10, 125.0
+    10, 125.0,  10, 500.0,  12, 500.0,  917.0,  7, 125.0
 };
 
 static const float AS923_FREQS[] = {923.2, 923.4};
 static const lora_region_t LORA_AS923 = {
     AS923_FREQS, 2, 923.2,  0, 0, 0, /* RX1 = TX freq */
-    10, 125.0,  10, 125.0,  10, 125.0,  923.2,  10, 125.0
+    7, 125.0,  7, 125.0,  10, 125.0,  923.2,  7, 125.0
 };
 
-#if defined(TTN_REGION_US915)
-static const lora_region_t& REGION = LORA_US915;
-#elif defined(TTN_REGION_EU868)
-static const lora_region_t& REGION = LORA_EU868;
-#elif defined(TTN_REGION_AU915)
-static const lora_region_t& REGION = LORA_AU915;
-#elif defined(TTN_REGION_AS923)
-static const lora_region_t& REGION = LORA_AS923;
-#else
-#error "No TTN_REGION_* defined in config.h"
-#endif
+/* REGION is a mutable copy of one of the const tables above, switched
+ * at runtime by lorawan_set_region() based on GPS-derived geofence
+ * (region_manager.cpp).  Default at boot = US915 — overwritten on the
+ * first region check after a valid GPS fix.  Copying the struct (vs
+ * a const reference) lets the same call sites work unchanged. */
+static lora_region_t REGION = LORA_US915;
+static lora_region_id_t REGION_ID = LORA_REGION_US915;
 
 static uint8_t chIdx = 0;
 
@@ -224,7 +239,12 @@ static bool otaa_join(void) {
     size_t rxLen = 0;
     bool received = false;
 
-    /* RX1: 5s after TX */
+    /* RX1: 5s after TX.  Kick the IWDG before the busy-wait: a single
+     * TX-then-RX1-then-RX2 round can take ~7 s, plus the outer retry
+     * delay (~3-7 s) — multiple iterations under the 15 s lorawan_join
+     * timeout from main loop() leave only a thin margin to the 32.7 s
+     * watchdog.  Refresh here so the dog only catches genuine hangs. */
+    power_manager_kick_watchdog();
     float rx1Freq = REGION.rx1_mod
         ? (REGION.rx1_base + (ch % REGION.rx1_mod) * REGION.rx1_step)
         : REGION.tx_freqs[ch];
@@ -262,9 +282,11 @@ static bool otaa_join(void) {
 
     radio->invertIQ(false); /* restore for uplinks */
 
-    /* Restore TX config */
-    radio->setSpreadingFactor(10);
-    radio->setBandwidth(125.0);
+    /* Restore TX config from active region — previously hardcoded to
+     * SF10/BW125 (US915 default) which silently corrupted uplinks in
+     * any other region. */
+    radio->setSpreadingFactor(REGION.tx_sf);
+    radio->setBandwidth(REGION.tx_bw);
     radio->setCRC(true);
 
     if (!received) {
@@ -337,6 +359,85 @@ static void compute_mic(const uint8_t *msg, size_t msgLen, uint8_t *mic) {
 }
 
 /* ========== Public API ========== */
+/* ========== Per-region OTAA credentials ==========
+ *
+ * TTN community network enforces globally-unique DevEUIs across all
+ * clusters (nam1, eu1).  To get telemetry in multiple LoRaWAN regions
+ * during a circumnavigation, each frequency plan needs its own
+ * (DevEUI, AppKey) pair registered on the appropriate cluster.  The
+ * flight firmware switches credentials when lorawan_set_region fires
+ * a transition, so the next OTAA join uses the right identity for
+ * the gateway listening below.
+ *
+ * Empty string = no creds for that region → lorawan_join returns
+ * false immediately (firmware still respects geofence spectrum rules
+ * via the SILENT/region-table channels, just won't transmit OTAA
+ * traffic without valid credentials).
+ *
+ * JoinEUI is shared (TTN convention 00...00) and loaded once in
+ * lorawan_init from LORAWAN_APP_EUI.
+ *
+ * Backward compatibility: older secrets files (secrets_board1.h,
+ * secrets_board2.h) only define the legacy LORAWAN_DEV_EUI /
+ * LORAWAN_APP_KEY pair.  The #ifndef guards below let those builds
+ * succeed by mapping the legacy pair into the US915 slot and leaving
+ * EU/AS/AU empty — single-region behaviour, same as before. */
+#ifndef LORAWAN_DEV_EUI_US
+#define LORAWAN_DEV_EUI_US LORAWAN_DEV_EUI
+#endif
+#ifndef LORAWAN_APP_KEY_US
+#define LORAWAN_APP_KEY_US LORAWAN_APP_KEY
+#endif
+#ifndef LORAWAN_DEV_EUI_EU
+#define LORAWAN_DEV_EUI_EU ""
+#endif
+#ifndef LORAWAN_APP_KEY_EU
+#define LORAWAN_APP_KEY_EU ""
+#endif
+#ifndef LORAWAN_DEV_EUI_AS
+#define LORAWAN_DEV_EUI_AS ""
+#endif
+#ifndef LORAWAN_APP_KEY_AS
+#define LORAWAN_APP_KEY_AS ""
+#endif
+#ifndef LORAWAN_DEV_EUI_AU
+#define LORAWAN_DEV_EUI_AU ""
+#endif
+#ifndef LORAWAN_APP_KEY_AU
+#define LORAWAN_APP_KEY_AU ""
+#endif
+
+typedef struct {
+    const char* dev_eui_hex;
+    const char* app_key_hex;
+} region_creds_t;
+
+static const region_creds_t REGION_CREDS[LORA_REGION_COUNT] = {
+    /* Indexed by lora_region_id_t.  Order must match the enum in
+     * lorawan.h: US915=0, EU868=1, AS923=2, AU915=3, SILENT=4. */
+    { LORAWAN_DEV_EUI_US, LORAWAN_APP_KEY_US },
+    { LORAWAN_DEV_EUI_EU, LORAWAN_APP_KEY_EU },
+    { LORAWAN_DEV_EUI_AS, LORAWAN_APP_KEY_AS },
+    { LORAWAN_DEV_EUI_AU, LORAWAN_APP_KEY_AU },
+    { "",                  ""                  },  /* SILENT */
+};
+
+static bool creds_loaded = false;
+
+static void load_creds_for_current_region(void) {
+    creds_loaded = false;
+    if (REGION_ID >= LORA_REGION_SILENT) return;
+    const region_creds_t* c = &REGION_CREDS[REGION_ID];
+    if (!c->dev_eui_hex || c->dev_eui_hex[0] == '\0' ||
+        !c->app_key_hex || c->app_key_hex[0] == '\0') return;
+    hexToBytes(c->dev_eui_hex, devEUI, 8);
+    hexToBytes(c->app_key_hex, appKey, 16);
+    creds_loaded = true;
+}
+
+bool lorawan_creds_loaded(void) { return creds_loaded; }
+void lorawan_get_dev_eui(uint8_t* out) { if (out) memcpy(out, devEUI, 8); }
+
 bool lorawan_init(void) {
     HAL_ResumeTick();
     radio = new STM32WLx(new STM32WLx_Module());
@@ -354,10 +455,11 @@ bool lorawan_init(void) {
     radio->setPreambleLength(8);
     radio->setCRC(true);
 
-    /* Parse credentials from secrets.h */
-    hexToBytes(LORAWAN_DEV_EUI, devEUI, 8);
+    /* JoinEUI is shared across regions; DevEUI + AppKey are loaded
+     * per-region by load_creds_for_current_region (called below and
+     * also from lorawan_set_region on every transition). */
     hexToBytes(LORAWAN_APP_EUI, joinEUI, 8);
-    hexToBytes(LORAWAN_APP_KEY, appKey, 16);
+    load_creds_for_current_region();
 
     LOG("[LoRaWAN] init OK");
     return true;
@@ -365,6 +467,11 @@ bool lorawan_init(void) {
 
 bool lorawan_join(uint32_t timeout_ms) {
     if (!radio) return false;
+    if (REGION_ID == LORA_REGION_SILENT) return false;  /* off-plan zone */
+    if (!creds_loaded) {
+        LOG("[LoRaWAN] no OTAA creds for current region — skipping join");
+        return false;
+    }
 
     /* Skip the join if VSTOR is too low to reliably support +14 dBm TX
      * peaks (~50 mA bursts).  Below ~3.0 V the buck is in dropout and
@@ -401,6 +508,7 @@ bool lorawan_join(uint32_t timeout_ms) {
 
 bool lorawan_send_uplink(const uint8_t* payload, uint8_t payload_len) {
     if (!radio || !_joined || !payload || payload_len > LORAWAN_PAYLOAD_MAX) return false;
+    if (REGION_ID == LORA_REGION_SILENT) return false;  /* off-plan zone */
 
     /* Bring the SX1262 into STDBY_RC before any per-packet reconfig.  After
      * lorawan_sleep() the radio is in SLEEP retention; setFrequency() and
@@ -437,4 +545,98 @@ void lorawan_sleep(void) {
      * radio stays in STDBY_RC across STOP2 — both kills the energy budget
      * and seems to trigger a hard reset on the RAK3172 module on STOP2 entry. */
     if (radio) (void)radio->sleep(true);
+}
+
+/* ========== Runtime region switching ========== */
+
+void lorawan_set_region(lora_region_id_t id) {
+    if (id == REGION_ID) return;  /* no-op: same plan */
+
+    /* Any region change invalidates the LoRaWAN session — TTN clusters
+     * (nam1, eu1) are independent, DevAddr / NwkSKey / AppSKey from the
+     * old region won't authenticate against the new gateway, and
+     * fCntUp must reset to 0 (per-session replay protection).  Done
+     * up-front so the SILENT branch below gets the same invalidation
+     * as a "normal" region switch — caught by the hardware trajectory
+     * test which flagged "fCntUp not reset on AS923->SILENT". */
+    _joined = false;
+    fCntUp  = 0;
+    chIdx   = 0;
+
+    switch (id) {
+        case LORA_REGION_US915: REGION = LORA_US915; break;
+        case LORA_REGION_EU868: REGION = LORA_EU868; break;
+        case LORA_REGION_AS923: REGION = LORA_AS923; break;
+        case LORA_REGION_AU915: REGION = LORA_AU915; break;
+        case LORA_REGION_SILENT:
+        default:
+            REGION_ID = LORA_REGION_SILENT;
+            creds_loaded = false;
+            return;  /* skip radio reconfig — SILENT keeps prev band */
+    }
+
+    REGION_ID = id;
+    load_creds_for_current_region();  /* swap DevEUI/AppKey for new band */
+
+    /* Reconfigure the radio for the new region's TX defaults so any
+     * subsequent join attempt fires on the right band. */
+    if (radio) {
+        radio->standby();
+        radio->setFrequency(REGION.init_freq);
+        radio->setBandwidth(REGION.tx_bw);
+        radio->setSpreadingFactor(REGION.tx_sf);
+    }
+}
+
+lora_region_id_t lorawan_current_region(void) { return REGION_ID; }
+
+/* ========== Session persistence ========== */
+
+void lorawan_export_session(lorawan_session_t* out) {
+    if (!out) return;
+    out->magic     = 0;  /* save layer fills magic + version */
+    out->version   = 0;
+    out->region_id = (uint32_t)REGION_ID;
+    out->devAddr   = devAddr;
+    out->fCntUp    = fCntUp;
+    memcpy(out->nwkSKey, nwkSKey, 16);
+    memcpy(out->appSKey, appSKey, 16);
+}
+
+bool lorawan_import_session(const lorawan_session_t* in) {
+    if (!in) return false;
+    if (in->region_id >= (uint32_t)LORA_REGION_SILENT) return false;
+
+    /* Apply region first so the radio is configured before the next
+     * uplink attempt.  set_region clears _joined + fCntUp, then we
+     * restore the saved session state on top. */
+    REGION_ID = (lora_region_id_t)in->region_id;
+    switch (REGION_ID) {
+        case LORA_REGION_US915: REGION = LORA_US915; break;
+        case LORA_REGION_EU868: REGION = LORA_EU868; break;
+        case LORA_REGION_AS923: REGION = LORA_AS923; break;
+        case LORA_REGION_AU915: REGION = LORA_AU915; break;
+        default: return false;
+    }
+    devAddr = in->devAddr;
+    fCntUp  = in->fCntUp;
+    memcpy(nwkSKey, in->nwkSKey, 16);
+    memcpy(appSKey, in->appSKey, 16);
+    _joined = true;
+
+    /* Also refresh DevEUI/AppKey for the restored region.  Uplinks
+     * use session keys (NwkSKey/AppSKey), but if the session ever
+     * gets invalidated (region switch, replay collision, etc.) we
+     * need creds available for the rejoin.  No-op if the region has
+     * no creds in secrets — uplinks still work with the restored
+     * session keys, just any future rejoin will fail. */
+    load_creds_for_current_region();
+
+    if (radio) {
+        radio->standby();
+        radio->setFrequency(REGION.init_freq);
+        radio->setBandwidth(REGION.tx_bw);
+        radio->setSpreadingFactor(REGION.tx_sf);
+    }
+    return true;
 }
