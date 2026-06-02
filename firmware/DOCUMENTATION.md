@@ -10,7 +10,7 @@ The firmware is designed for a supercap-powered PCB that runs a periodic telemet
 
 2. **Power tiers.** VSTOR voltage selects a tier (FULL, REDUCED, NO_GPS, EMERGENCY, CRITICAL). Lower tiers reduce load: no GPS below NO_GPS, no I2C sensors in EMERGENCY/CRITICAL (LoRa beacon only), and longer sleep intervals to preserve energy.
 
-3. **STOP1 sleep.** When `POWER_SAVE_MODE` is enabled, the MCU enters STOP1 (LP regulator on) and wakes on an RTC alarm via the internal wake-up line (`PWR.CR3.EIWUL`).  Sleep duration is tier-based.  Quiescent ~3–5 µA.  STOP1 (~1.5 µA) was dropped on this RAK3172 module: empirically it triggered a `PINRSTF` reset every cycle, almost certainly from the 1.2 V Vcore droop during the regulator-off transition; the chip's reset detector reads the dip as a pin reset.
+3. **STOP1 sleep.** When `POWER_SAVE_MODE` is enabled, the MCU enters STOP1 (LP regulator on) and wakes on an RTC alarm via the internal wake-up line (`PWR.CR3.EIWUL`).  Sleep duration is tier-based.  Quiescent ~3-5 µA.  STOP2 (~1.5 µA) was dropped on this RAK3172 module: empirically it triggered a `PINRSTF` reset every cycle, almost certainly from the 1.2 V Vcore droop during the regulator-off transition; the chip's reset detector reads the dip as a pin reset.
 
 4. **Burst mode.** The LIS2DH12 accelerometer drives INT1 (PA8) when a freefall condition is detected. PA8 is used as an EXTI wake source so the MCU can wake from STOP1 on burst. After a freefall wake, the firmware runs a rapid-beacon loop (shorter GPS timeout, 10 s sleep) until the acceleration returns above a threshold (~0.5g), then reverts to normal tier-based behavior.
 
@@ -30,7 +30,7 @@ The firmware is designed for a supercap-powered PCB that runs a periodic telemet
 6. Fill telemetry structure (GPS, power, sensors, UV, acoustic), pack 35 bytes.
 7. If tier allows TX, send one unconfirmed uplink.
 8. If in burst mode, check whether freefall is cleared (accel magnitude &gt; ~0.5g); if so, clear burst mode.
-9. Choose sleep duration: burst mode 10 s, else tier-based (e.g. FULL 60 s, REDUCED 120 s, NO_GPS 300 s, EMERGENCY 120 s).
+9. Choose sleep duration: burst mode 10 s, else tier-based (FULL 300 s, REDUCED 600 s, NO_GPS 900 s, EMERGENCY 600 s).
 10. Enter sleep (STOP1 with RTC wake, or delay if power save disabled). INT1 (PA8) remains an alternate wake source.
 
 ### 2.2 Burst mode (Phase 4)
@@ -62,12 +62,12 @@ The firmware is designed for a supercap-powered PCB that runs a periodic telemet
 1. Copy `include/secrets.h.example` to `include/secrets.h`. Do not commit `secrets.h`.
 2. In `secrets.h`, set LoRaWAN keys (DEV_EUI, APP_EUI, APP_KEY) for your TTN application.
 3. In `include/config.h` you can adjust:
-   - `POWER_SAVE_MODE` — enable STOP1 + RTC (and EXTI) wake.
-   - `TRANSMIT_INTERVAL_SEC` — default interval when not using tier-based sleep.
-   - `SLEEP_INTERVAL_*_SEC` — per-tier sleep intervals (FULL, REDUCED, NO_GPS, EMERGENCY).
-   - `BURST_GPS_TIMEOUT_MS`, `BURST_SLEEP_SEC` — burst-mode GPS timeout and sleep.
-   - `DEBUG_ENABLE`, `DEBUG_SERIAL_BAUD` — debug print over serial.
-   - `GNSS_ENABLE` — enable/disable GPS (and stub it in the driver).
+   - `POWER_SAVE_MODE`, enable STOP1 + RTC (and EXTI) wake.
+   - `TRANSMIT_INTERVAL_SEC`, default interval when not using tier-based sleep.
+   - `SLEEP_INTERVAL_*_SEC`, per-tier sleep intervals (FULL, REDUCED, NO_GPS, EMERGENCY).
+   - `BURST_GPS_TIMEOUT_MS`, `BURST_SLEEP_SEC`, burst-mode GPS timeout and sleep.
+   - `DEBUG_ENABLE`, `DEBUG_SERIAL_BAUD`, debug print over serial.
+   - `GNSS_ENABLE`, enable/disable GPS (and stub it in the driver).
 
 ### 3.3 Upload
 
@@ -85,13 +85,13 @@ The firmware is designed for a supercap-powered PCB that runs a periodic telemet
 | `main.cpp` | Setup (ADC, GPS, LoRaWAN, sensors, freefall INT1, power manager). Loop: tier, GPS, sensors, pack, TX, burst clear, sleep. |
 | `telemetry.cpp` | Single function: pack a `telemetry_input_t` into 35 big-endian bytes. |
 | `power_adc.cpp` | VSTOR/solar ADC with 50 ms settle; tier from voltage; `power_adc_get_sleep_interval_sec(tier)`, `power_adc_should_read_sensors()`, `power_adc_can_use_gps()`, `power_adc_can_tx()`. |
-| `gps_ublox.cpp` | UART1 init, DYNMODEL 8, blocking get-fix with timeout; last-fix cache. |
+| `gps_ublox.cpp` | UART1 init, DYNMODEL 8, freshness-gated get-fix (fresh PVT + advancing iTOW, fix-OK, SIV>=4); NOGPS on no fresh fix; PA0 reset to recover a wedged module. |
 | `lorawan.cpp` | LoRaWAN driver (RadioLib radio + manual protocol): OTAA join, US915 sub-band 2 for TTN, unconfirmed uplink. Software AES-128-CMAC for MIC and payload encryption. |
 | `sensors.cpp` | I2C init (board pins on STM32), then init TMP117, MS5611, LIS2DH12, LTR-390UV. TMP117 failure is non-blocking. |
 | `sensor_tmp117.cpp` | One-shot temperature read; result in centidegrees (0.1 °C). Falls back to MS5611 baro temp when TMP117 unavailable. |
 | `sensor_ms5611.cpp` | PROM read, D1/D2 conversion; pressure in 0.1 hPa; optional internal temp in centidegrees. |
 | `sensor_lis2dh12.cpp` | Accel read (0.01 m/s²); freefall INT1 enable (100 Hz, threshold/duration from board.h); INT1_SRC clear; freefall-cleared check (magnitude &gt; ~0.5g). |
-| `sensor_ltr390.cpp` | LTR-390UV-01: UV index (0–15+) and ambient light (lux). |
+| `sensor_ltr390.cpp` | LTR-390UV-01: UV index (0-15+) and ambient light (lux). |
 | `mic_acoustic.cpp` | T3902 PDM mic via SPI1 RXONLY at 3 MHz. Streaming RMS energy detection with adaptive noise floor for stratospheric acoustic event detection. |
 | `power_manager.cpp` | Init STM32LowPower; sleep via `LowPower.deepSleep(ms)` or `delay(ms)`; attach PA8 EXTI for freefall wake; `power_manager_did_wake_from_freefall()`. |
 
@@ -101,21 +101,21 @@ Headers in `include/` define the APIs and `stratolink_pins.h` holds hardware con
 
 | Bytes | Field | Type | Units / encoding |
 |-------|--------|------|-------------------|
-| 0–3 | Latitude | int32 | degrees × 1e7 |
-| 4–7 | Longitude | int32 | degrees × 1e7 |
-| 8–11 | Altitude | int32 | meters |
-| 12–13 | Temperature | int16 | 0.1 °C |
-| 14–15 | Pressure | uint16 | 0.1 hPa |
-| 16–17 | Solar voltage | uint16 | mV |
-| 18–19 | Battery (VSTOR) | uint16 | mV |
-| 20–21 | GPS speed | uint16 | 0.01 m/s |
-| 22–23 | GPS heading | uint16 | 0.01 ° |
+| 0-3 | Latitude | int32 | degrees × 1e7 |
+| 4-7 | Longitude | int32 | degrees × 1e7 |
+| 8-11 | Altitude | int32 | meters |
+| 12-13 | Temperature | int16 | 0.1 °C |
+| 14-15 | Pressure | uint16 | 0.1 hPa |
+| 16-17 | Solar voltage | uint16 | mV |
+| 18-19 | Battery (VSTOR) | uint16 | mV |
+| 20-21 | GPS speed | uint16 | 0.01 m/s |
+| 22-23 | GPS heading | uint16 | 0.01 ° |
 | 24 | GPS satellites | uint8 | count |
-| 25–26 | Accel X | int16 | 0.01 m/s² |
-| 27–28 | Accel Y | int16 | 0.01 m/s² |
-| 29–30 | Accel Z | int16 | 0.01 m/s² |
-| 31 | UV index | uint8 | integer UV index (0–15+) |
-| 32–33 | Ambient lux | uint16 | lux |
+| 25-26 | Accel X | int16 | 0.01 m/s² |
+| 27-28 | Accel Y | int16 | 0.01 m/s² |
+| 29-30 | Accel Z | int16 | 0.01 m/s² |
+| 31 | UV index | uint8 | integer UV index (0-15+) |
+| 32-33 | Ambient lux | uint16 | lux |
 | 34 | Acoustic event | uint8 | 0 = quiet; 1 = event detected (RMS > 4× noise floor) |
 
 The ground station and TTN Payload Formatter should use this layout for decoding and storage.
@@ -125,10 +125,10 @@ The ground station and TTN Payload Formatter should use this layout for decoding
 | Symbol | Default | Meaning |
 |--------|---------|---------|
 | `POWER_SAVE_MODE` | true | Use STOP1 + RTC (and EXTI) wake instead of delay. |
-| `SLEEP_INTERVAL_FULL_SEC` | 60 | Sleep when VSTOR ≥ FULL threshold. |
-| `SLEEP_INTERVAL_REDUCED_SEC` | 120 | Sleep when in REDUCED tier. |
-| `SLEEP_INTERVAL_NO_GPS_SEC` | 300 | Sleep when GPS is skipped (NO_GPS tier). |
-| `SLEEP_INTERVAL_EMERGENCY_SEC` | 120 | Sleep in EMERGENCY/CRITICAL (beacon only). |
+| `SLEEP_INTERVAL_FULL_SEC` | 300 | Sleep when VSTOR ≥ FULL threshold. |
+| `SLEEP_INTERVAL_REDUCED_SEC` | 600 | Sleep when in REDUCED tier. |
+| `SLEEP_INTERVAL_NO_GPS_SEC` | 900 | Sleep when GPS is skipped (NO_GPS tier). |
+| `SLEEP_INTERVAL_EMERGENCY_SEC` | 600 | Sleep in EMERGENCY/CRITICAL (beacon only). |
 | `BURST_GPS_TIMEOUT_MS` | 10000 | Max GPS wait in burst mode (ms). |
 | `BURST_SLEEP_SEC` | 10 | Sleep between cycles in burst mode (s). |
 
@@ -136,7 +136,7 @@ Tier thresholds (voltage) are in `stratolink_pins.h` (e.g. `POWER_TIER_FULL_V`, 
 
 ## 7. Extending the Firmware
 
-- **Multi-region LoRaWAN.** Region selected via `TTN_REGION_*` in `config.h` (US915, EU868, AU915, AS923). Duty cycle enforcement for EU868/AS923 is handled server-side by TTN; firmware-side enforcement is not yet implemented.
-- **Session persistence.** Store OTAA session keys in backup SRAM so the board doesn't re-join after every power cycle (night survival).
-- **Acoustic classifier.** Current mic driver uses simple RMS energy detection (event flag only — no audio is captured or transmitted). Future: replace with CNN-based spectrogram classifier for aircraft/rocket/drone identification. CMSIS-DSP FFT + TinyML inference on Cortex-M4.
+- **Multi-region LoRaWAN (implemented).** Region is auto-selected at runtime from the GPS fix (`region_manager.cpp`); the flight switched US915 to EU868 over the Atlantic. Duty-cycle enforcement for EU868/AS923 is left to TTN server-side; firmware-side enforcement is not implemented.
+- **Session persistence (implemented).** The OTAA session is held in TAMP backup registers, so the board doesn't re-join after a reset, brown-out, or sleep; only a full power loss forces a fresh join.
+- **Acoustic classifier.** Current mic driver uses simple RMS energy detection (event flag only, no audio is captured or transmitted). Future: replace with CNN-based spectrogram classifier for aircraft/rocket/drone identification. CMSIS-DSP FFT + TinyML inference on Cortex-M4.
 - **Downlink commands.** The current cycle is uplink-only. The LoRaWAN layer supports downlink reception (used for OTAA join-accept); add application-layer downlink handling for remote configuration or commands from the ground station.
