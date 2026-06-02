@@ -133,7 +133,7 @@ export type StratolinkForecast = {
         alt_sigma_hpa: number;
         compute_ms: number;
         reconstruction_ms?: number;
-        /** `hourly_series` when stale-GPS gap used time-varying past+hourly winds. */
+        /** `gfs_cube` — the stale-GPS gap is dead-reckoned through the shared GFS cube. */
         gap_wind_mode?: string;
         /** Resolution (deg) of the shared space-time wind field for this compute. */
         grid_step_deg?: number;
