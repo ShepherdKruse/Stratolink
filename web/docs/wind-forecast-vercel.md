@@ -1,18 +1,21 @@
-# Wind forecast on Vercel
+# Wind forecast on Vercel — deployment setup
 
-Monte Carlo drift forecasts run on Stratolink via **live compute** and optional **Vercel Blob cache** refreshed by cron.
+> **⚠️ Architecture has moved on.** Forecasts no longer compute from a live
+> weather API. They run off **self-ingested NOAA GFS** wind cubes built by a
+> GitHub Actions job. For how the system actually works today, read
+> **[`forecast-architecture.md`](./forecast-architecture.md)**. This file is kept
+> only for the still-current **Vercel setup / env-var / cron** reference below.
 
-## Architecture
+Monte Carlo drift forecasts are precomputed by a cron job and read from a **Vercel
+Blob cache**; the wind data comes from GFS cubes (see the architecture doc), not a
+live API.
+
+## Architecture (current)
 
 ```
-Vercel Cron (every 30 min, Pro plan)
-  → GET /api/compute-forecast
-  → Supabase telemetry + computeMonteCarloForecast
-  → Vercel Blob  forecasts/{deviceId}.json
-
-Browser (Wind Outlook)
-  → GET /api/forecast?device=…     (fast, cached blob)
-  → else POST /api/wind-forecast   (live compute fallback)
+GitHub Actions (6-hourly)  → scripts/gfs_ingest.py → gzip → Blob cubes/{device}.json[.gz], {device}-fc.json.gz
+cron-job.org (~25–30 min)  → GET /api/compute-forecast → reads cubes → Blob forecasts/{deviceId}.json
+Browser (dashboard)        → GET /api/forecast?device=…  (CDN-cached read)
 ```
 
 ## One-time Vercel setup
