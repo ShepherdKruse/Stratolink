@@ -377,14 +377,34 @@ export async function computeMonteCarloForecast(input: MonteCarloForecastInput):
      * else "now"; endMs = the forecast horizon end. */
     const startMs = stale ? fixTimeMs : nowMs;
     const endMs = nowMs + totalHours * 3_600_000;
-    const cube = await fetchWindCube({ bounds: gridBounds, levelHpa, startMs, endMs, gridStep, deviceId: input.deviceId });
 
-    const bias = computeBiasFromCube(recentFixes, cube);
+    /* Two decoupled fields (scripts/gfs_ingest.py builds both):
+     *   - fcCube: small, HOURLY forecast cube whose future leg uses GFS forecast
+     *     hours (so the forward forecast evolves), at the finest grid that fits.
+     *     Drives the forward forecast, the ensemble, the bias fit and the origin.
+     *   - reconCube: full-mission, 3-hourly cube driving only the historical
+     *     reconstruction. Both fall back to the full cube / Open-Meteo if absent. */
+    const fcCube = await fetchWindCube({
+        bounds: gridBounds, levelHpa, startMs, endMs, gridStep, deviceId: input.deviceId, kind: 'forecast',
+    });
+    const reconCube = await fetchWindCube({
+        bounds: gridBounds, levelHpa, startMs, endMs, gridStep, deviceId: input.deviceId, kind: 'reconstruction',
+    });
+
+    /* Bias is fit by sampling the forecast cube at recent fix positions, so only
+     * fixes inside its (smaller) box are usable — fixes outside would read
+     * edge-clamped winds and skew the residuals. Fall back to all recent fixes if
+     * the filter is too aggressive (e.g. a tiny box). */
+    const inFcBox = (f: ForecastGpsFix) =>
+        f.lon >= fcCube.bounds.lonMin && f.lon <= fcCube.bounds.lonMax &&
+        f.lat >= fcCube.bounds.latMin && f.lat <= fcCube.bounds.latMax;
+    const biasFixes = recentFixes.filter(inFcBox);
+    const bias = computeBiasFromCube(biasFixes.length >= 5 ? biasFixes : recentFixes, fcCube);
 
     const { result: reconstruction, hash: reconstructionHash } = await resolveReconstruction(
         input,
         levelHpa,
-        cube,
+        reconCube,
     );
 
     /* Every member is ONE continuous integration from the last fix (at its real
@@ -406,13 +426,13 @@ export async function computeMonteCarloForecast(input: MonteCarloForecastInput):
     };
     const ensemble: Array<Array<[number, number]>> = [];
     for (let i = 0; i < nEnsemble; i++) {
-        ensemble.push(integrateBalloonPathT(startLat, startLon, cube, bias, pertSpec, startMs, spanHours));
+        ensemble.push(integrateBalloonPathT(startLat, startLon, fcCube, bias, pertSpec, startMs, spanHours));
     }
 
     const nominal = integrateBalloonPathT(
         startLat,
         startLon,
-        cube,
+        fcCube,
         bias,
         { speedSigma: 0, dirSigma: 0, altSigma: 0, tauHours: CFG.PERTURB_TAU_H },
         startMs,
@@ -459,7 +479,7 @@ export async function computeMonteCarloForecast(input: MonteCarloForecastInput):
     ];
 
     const endpoint = nominal[nominal.length - 1];
-    const { u: uEnd, v: vEnd } = sampleWind(cube, endpoint[1], endpoint[0], endMs);
+    const { u: uEnd, v: vEnd } = sampleWind(fcCube, endpoint[1], endpoint[0], endMs);
 
     /* Soft observability check: if many ensemble endpoints sit within one cell of
      * the box edge, the bounds were undersized and trajectories ran on
@@ -467,10 +487,10 @@ export async function computeMonteCarloForecast(input: MonteCarloForecastInput):
     const nearEdge = ensemble.filter((traj) => {
         const [lon, lat] = traj[traj.length - 1];
         return (
-            lon <= cube.bounds.lonMin + cube.gridStep ||
-            lon >= cube.bounds.lonMax - cube.gridStep ||
-            lat <= cube.bounds.latMin + cube.gridStep ||
-            lat >= cube.bounds.latMax - cube.gridStep
+            lon <= fcCube.bounds.lonMin + fcCube.gridStep ||
+            lon >= fcCube.bounds.lonMax - fcCube.gridStep ||
+            lat <= fcCube.bounds.latMin + fcCube.gridStep ||
+            lat >= fcCube.bounds.latMax - fcCube.gridStep
         );
     }).length;
     if (nearEdge / Math.max(1, ensemble.length) > 0.2) {
@@ -479,8 +499,8 @@ export async function computeMonteCarloForecast(input: MonteCarloForecastInput):
         );
     }
 
-    /* wind_field debug artifact = the "now" slice of the cube (not a frozen grid). */
-    const nowGrid = cube.grids[Math.min(nowIdx, cube.grids.length - 1)];
+    /* wind_field debug artifact = the "now" slice of the forecast cube. */
+    const nowGrid = fcCube.grids[Math.min(nowIdx, fcCube.grids.length - 1)];
 
     return {
         generated_at: nowISO,
@@ -553,9 +573,10 @@ export async function computeMonteCarloForecast(input: MonteCarloForecastInput):
             speed_sigma: Math.round(bias.speedSigma * 1000) / 1000,
             dir_sigma_deg: round1(bias.dirSigma),
             alt_sigma_hpa: CFG.ALT_SIGMA_HPA,
-            grid_step_deg: cube.gridStep,
-            wind_source: cube.source,
-            ...(cube.generatedAt ? { wind_cube_generated_at: cube.generatedAt } : {}),
+            grid_step_deg: fcCube.gridStep,
+            recon_grid_step_deg: reconCube.gridStep,
+            wind_source: fcCube.source,
+            ...(fcCube.generatedAt ? { wind_cube_generated_at: fcCube.generatedAt } : {}),
             compute_ms: Date.now() - t0,
             reconstruction_ms: reconstruction.compute_ms,
             ...(reconstruction.partial ? { reconstruction_partial: true } : {}),
