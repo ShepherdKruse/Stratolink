@@ -14,7 +14,7 @@ The firmware is designed for a supercap-powered PCB that runs a periodic telemet
 
 4. **Burst mode.** The LIS2DH12 accelerometer drives INT1 (PA8) when a freefall condition is detected. PA8 is used as an EXTI wake source so the MCU can wake from STOP1 on burst. After a freefall wake, the firmware runs a rapid-beacon loop (shorter GPS timeout, 10 s sleep) until the acceleration returns above a threshold (~0.5g), then reverts to normal tier-based behavior.
 
-5. **Independent watchdog (IWDG).**  32.7 s timeout from LSI, refreshed at the top of `loop()` and between major operations (after GPS, after sensor reads, after TX-pack, on every wake).  Frozen in STOP1 by the default `FZ_STOP1.IWGEN_STOP=1` option byte, so it doesn't false-fire during multi-minute sleep cycles.  Recovers from any run-mode hang within ~33 s.
+5. **Independent watchdog (IWDG).**  32.7 s timeout from LSI, refreshed at the top of `loop()` and between major operations (after GPS, after sensor reads, after TX-pack, on every wake).  Keeps running in STOP1 (FLASH `IWDG_STOP` option bit = 1 by default), so multi-minute sleeps are chunked below the 32 s timeout with an IWDG refresh between chunks to avoid a false reset.  Recovers from any run-mode hang within ~33 s.
 
 5. **Payload contract.** One 35-byte big-endian uplink per cycle, aligned with the ground-station webhook and TTN payload formatter. No raw audio or high-rate streams; acoustic-event byte triggers on stratospheric sound detection (mic RMS energy above adaptive noise floor).
 

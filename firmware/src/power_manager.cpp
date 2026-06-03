@@ -20,9 +20,10 @@ static void freefall_wake_callback(void) {
 /* IWDG handle.  Independent watchdog runs from LSI (32 kHz typ.).
  * Max timeout = 4095 reload / (32 kHz / 256 prescaler) = 32.7 s.
  * We refresh once per loop iteration, so any run-mode hang > 32 s
- * reboots the chip and recovers.  IWDG is FROZEN in STOP modes by
- * the FZ_STOP1.IWGEN_STOP option byte (default 1 on STM32WL), so
- * it doesn't false-fire during multi-minute sleep cycles. */
+ * reboots the chip and recovers.  On STM32WL the FLASH IWDG_STOP option
+ * bit defaults to 1, so the counter keeps running in Stop mode; a multi-
+ * minute sleep would otherwise trip it, so power_manager_sleep_ms() chunks
+ * the sleep and refreshes the IWDG between chunks. */
 static IWDG_HandleTypeDef s_iwdg;
 #endif
 
@@ -77,8 +78,8 @@ void power_manager_kick_watchdog(void) {
 
 #if defined(POWER_SAVE_MODE) && POWER_SAVE_MODE && defined(ARDUINO_ARCH_STM32)
 /* Single STOP1 entry for up to ~28 s.  IWDG keeps running in STOP on this
- * chip (FZ_STOP1.IWGEN_STOP=0 by default option byte), so any single
- * sleep interval longer than ~32 s would let the watchdog fire and
+ * chip (FLASH IWDG_STOP option bit = 1 by default, counter runs in Stop),
+ * so any single sleep interval longer than ~32 s would let the watchdog fire and
  * reboot the MCU mid-sleep.  Caller wraps this with chunking +
  * HAL_IWDG_Refresh between chunks.
  *

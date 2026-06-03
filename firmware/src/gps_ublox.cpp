@@ -21,10 +21,6 @@ static uint32_t  last_pvt_itow = 0xFFFFFFFFu; /* last accepted PVT's iTOW (fresh
                                                * both register as fresh. */
 static uint8_t   consecutive_no_fresh = 0; /* no-fresh-fix cycles, drives reset recovery */
 
-#ifndef GPS_STALE_RECOVERY_CYCLES
-#define GPS_STALE_RECOVERY_CYCLES 5
-#endif
-
 bool gps_ublox_init(void) {
     GPS_SERIAL.begin(GPS_BAUD);
     bool ok = gnss.begin(GPS_SERIAL);
