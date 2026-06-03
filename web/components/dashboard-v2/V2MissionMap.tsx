@@ -15,7 +15,7 @@
  */
 'use client';
 
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import Map, { Source, Layer } from 'react-map-gl/mapbox';
 import type { MapRef, LngLatBoundsLike } from 'react-map-gl/mapbox';
 import 'mapbox-gl/dist/mapbox-gl.css';
@@ -118,6 +118,22 @@ interface V2MissionMapProps {
     /** GPS/hindcast path with timestamps — click map to scrub to nearest point. */
     pickPath?: PickablePathPoint[];
     onPickTime?: (t: number) => void;
+    /** Instant (epoch ms) the day/night terminator should depict — the timeline
+     *  scrub cursor, so day/night matches the time being viewed. Null = live (now). */
+    terminatorDate?: number | null;
+    /** True while the scrubber is being dragged — the terminator hides during the
+     *  drag and fades back in at the settled time on release. */
+    terminatorScrubbing?: boolean;
+    /** Pixels to raise the map canvas above its window (clipped by the parent's
+     *  overflow), lifting the globe clear of bottom chrome like the floating
+     *  mobile timeline. The canvas grows taller by this amount so it still fills
+     *  the window at all zooms; the globe simply centers higher. The visible
+     *  lift is ~half this value. 0 = canvas fills its window exactly. */
+    liftPx?: number;
+    /** Zoom used for the wide "world-scale" default view — initial mount and the
+     *  auto-fit onto the active balloon. Mobile passes a lower value to load a bit
+     *  more zoomed out. Defaults to 2.5. */
+    wideZoom?: number;
 }
 
 const PATH_PICK_MAX_KM = 120;
@@ -156,6 +172,10 @@ export default function V2MissionMap({
     hindcastSegments = [],
     pickPath = [],
     onPickTime,
+    terminatorDate = null,
+    terminatorScrubbing = false,
+    liftPx = 0,
+    wideZoom = 2.5,
 }: V2MissionMapProps) {
     const mapStyle = colorScheme === 'dark' ? MAP_STYLE_DARK : MAP_STYLE_LIGHT;
     /* Track / forecast / receiver colors must shift with the basemap — the deep
@@ -168,6 +188,35 @@ export default function V2MissionMap({
     const mapRef = useRef<MapRef>(null);
     const [styleLoaded, setStyleLoaded] = useState(false);
     const [webglOk, setWebglOk] = useState<boolean | null>(null);
+    /* First load renders in visible stages — blank gray canvas, then the
+     * terminator shade as a blob on the still-tileless map, then tiles, then
+     * labels — which reads as a string of flashes. Hold an opaque cover over the
+     * map until it has fully painted (Mapbox `idle` = tiles + all overlays
+     * composited), then fade it away once for a single clean reveal. */
+    const [revealed, setRevealed] = useState(false);
+
+    /* The custom basemap (fog off, quieted labels, shaded relief, bathymetry) is
+     * applied imperatively after the style loads. `styledata` fires many times on
+     * first load — every Source/Layer react-map-gl mounts triggers it — and the
+     * old code re-ran the whole restyle each time, so the map visibly repainted
+     * over and over (the "flashes"). Run it only when it's actually needed: the
+     * scheme changed, or a fresh style load wiped our layers (detected via a
+     * sentinel). The repeated styledata bursts then become a cheap no-op. */
+    const styledSchemeRef = useRef<'light' | 'dark' | null>(null);
+    const applyCustomStyle = useCallback(() => {
+        const m = mapRef.current?.getMap();
+        if (!m) return;
+        const SENTINEL = 'sl-bathymetry-v2';   /* added by bathymetryAllZooms */
+        const layerGone = (() => { try { return !m.getLayer(SENTINEL); } catch { return true; } })();
+        if (styledSchemeRef.current === colorScheme && !layerGone) return;
+        try {
+            m.setFog(null);
+            quietBasemapLabels(m);
+            applyBaseStyle(m, colorScheme);
+            bathymetryAllZooms(m, colorScheme);
+            styledSchemeRef.current = colorScheme;
+        } catch { /* style mid-load; a later styledata retries */ }
+    }, [colorScheme]);
 
     /* Telemetry can contain legacy / corrupt rows (e.g. lng stored in lat).
      * Never pass those to Mapbox — they hard-throw inside fitBounds. */
@@ -190,6 +239,14 @@ export default function V2MissionMap({
         setWebglOk(isWebGLAvailable());
     }, []);
 
+    /* Safety net: reveal anyway if `idle` is slow to fire (e.g. tiles still
+     * trickling on a poor connection) so the map can never stay hidden. */
+    useEffect(() => {
+        if (!styleLoaded || revealed) return;
+        const id = setTimeout(() => setRevealed(true), 3000);
+        return () => clearTimeout(id);
+    }, [styleLoaded, revealed]);
+
     /* Style flag must reset when the projection forces a remount. */
     useEffect(() => { setStyleLoaded(false); }, [projection]);
 
@@ -207,20 +264,22 @@ export default function V2MissionMap({
     });
 
     /* Apply padding directly for the no-fit case (e.g. no data yet) so the
-     * globe still sits in the visible region rather than behind the chrome. */
+     * focal region sits where the fits put it rather than behind the chrome.
+     * (Mobile lifts the globe via a CSS canvas offset, not camera padding —
+     * see `liftPx` — so this stays at the requested insets, usually zero.) */
     useEffect(() => {
         const map = mapRef.current;
         if (!map || !styleLoaded) return;
         try { map.setPadding({ top: padTop, bottom: padBottom, left: padLeft, right: padRight }); } catch { /* ignore */ }
     }, [styleLoaded, padTop, padBottom, padLeft, padRight]);
 
-    /* Initial view — center on the balloon at a wide zoom (2.5), else US. */
+    /* Initial view — center on the balloon at the wide default zoom, else US. */
     const initialView = useMemo(() => {
         const focus = validBalloons.find(b => b.id === activeId) ?? validBalloons[0];
         if (focus) {
-            return { longitude: focus.lon, latitude: focus.lat, zoom: 2.5 };
+            return { longitude: focus.lon, latitude: focus.lat, zoom: wideZoom };
         }
-        return { longitude: -98, latitude: 39, zoom: 2.5 };
+        return { longitude: -98, latitude: 39, zoom: wideZoom };
         /* eslint-disable-next-line react-hooks/exhaustive-deps */
     }, []); /* only used at mount */
 
@@ -240,14 +299,20 @@ export default function V2MissionMap({
         if (!map || !styleLoaded) return;
         if (fittedActiveRef.current === (activeId ?? null)) return;
 
+        /* The very first fit (e.g. after balloon data arrives post-mount) should
+         * snap instantly — animating would show the fallback view and then rotate/
+         * zoom over to the balloon. Later device switches animate. */
+        const firstFit = fittedActiveRef.current === undefined;
+        const fitDuration = firstFit ? 0 : 1200;
+
         /* Keep camera updates out of uncaught rejects from mapbox-gl. */
         try {
             const active = validBalloons.find(b => b.id === activeId);
             if (active) {
-                /* On load, center on the selected balloon at a fixed wide zoom
-                 * (2.5) rather than zooming in to fit the whole track — the
-                 * user zooms in from there. */
-                map.flyTo({ center: [active.lon, active.lat], zoom: 2.5, duration: 1200, padding: pad(0) });
+                /* On load, center on the selected balloon at the wide zoom rather
+                 * than zooming in to fit the whole track — the user zooms in from
+                 * there. */
+                map.flyTo({ center: [active.lon, active.lat], zoom: wideZoom, duration: fitDuration, padding: pad(0) });
                 fittedActiveRef.current = activeId ?? null;
                 return;
             }
@@ -265,11 +330,11 @@ export default function V2MissionMap({
             if (minLat < -90 || maxLat > 90 || minLon < -180 || maxLon > 180) return;
 
             if (lats.length === 1) {
-                map.flyTo({ center: [lons[0], lats[0]], zoom: 2.5, duration: 1200, padding: pad(0) });
+                map.flyTo({ center: [lons[0], lats[0]], zoom: wideZoom, duration: fitDuration, padding: pad(0) });
             } else {
                 map.fitBounds([[minLon, minLat], [maxLon, maxLat]] as LngLatBoundsLike, {
                     padding: pad(60),
-                    duration: 1200,
+                    duration: fitDuration,
                     maxZoom: 5,
                 });
             }
@@ -523,7 +588,13 @@ export default function V2MissionMap({
         <div
             style={{
                 position: 'absolute',
-                inset: 0,
+                /* Extend the canvas `liftPx` above its window and keep the bottom
+                 * pinned, so it stays full-width/height-plus and the globe (canvas-
+                 * centered) sits higher. The parent clips the overflow. */
+                top: -liftPx,
+                bottom: 0,
+                left: 0,
+                right: 0,
                 cursor: pathPickEnabled ? 'crosshair' : undefined,
             }}
         >
@@ -551,22 +622,32 @@ export default function V2MissionMap({
                 }}
                 onLoad={() => {
                     setStyleLoaded(true);
+                    applyCustomStyle();
+                    /* Reveal once the map has settled (tiles loaded + everything
+                     * composited), so the staged paint happens behind the cover. */
                     const m = mapRef.current?.getMap();
-                    if (m) { m.setFog(null); quietBasemapLabels(m); applyBaseStyle(m, colorScheme); bathymetryAllZooms(m, colorScheme); }
+                    if (m) m.once('idle', () => setRevealed(true));
                 }}
                 onStyleData={() => {
                     setStyleLoaded(true);
-                    const m = mapRef.current?.getMap();
-                    if (m) { m.setFog(null); quietBasemapLabels(m); applyBaseStyle(m, colorScheme); bathymetryAllZooms(m, colorScheme); }
+                    applyCustomStyle();
                 }}
                 attributionControl={false}
                 logoPosition="bottom-left"
             >
                 {styleLoaded && (
                     <>
-                        {/* Day/night terminator — rendered first so it dims only
-                          * the basemap; coverage, paths and pins sit on top. */}
-                        <DayNightTerminator colorScheme={colorScheme} />
+                        {/* Day/night terminator — deferred until after the map is
+                          * revealed. It carries the heaviest sources (the per-pixel
+                          * twilight shader + the third-party Black Marble night-
+                          * lights tileset), so keeping it off the initial critical
+                          * path lets the basemap reach `idle` (and reveal) fast.
+                          * Once mounted it fades itself in (see its first-reveal
+                          * fade). Rendered first so it dims only the basemap;
+                          * coverage, paths and pins sit on top. */}
+                        {revealed && (
+                            <DayNightTerminator colorScheme={colorScheme} date={terminatorDate} scrubbing={terminatorScrubbing} />
+                        )}
 
                         {/* Static TTN ground-station coverage — sits at
                           * the bottom of the layer stack so flight paths
@@ -858,6 +939,21 @@ export default function V2MissionMap({
                     </>
                 )}
             </Map>
+
+            {/* Load cover — opaque until the map has fully painted, then fades
+              * away once so the staged first-load render (gray canvas → shade
+              * blob → tiles → labels) is never seen. Matches the surrounding
+              * surface so it's seamless with the chrome around the map. */}
+            <div
+                aria-hidden
+                style={{
+                    position: 'absolute', inset: 0, zIndex: 3,
+                    background: 'var(--sl-bg-1)',
+                    opacity: revealed ? 0 : 1,
+                    transition: 'opacity 450ms ease',
+                    pointerEvents: 'none',
+                }}
+            />
 
             {/* Editorial attribution — Mapbox's control styling is finicky and
               * clips at the viewport edge, so we render our own (the Mapbox

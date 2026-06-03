@@ -45,6 +45,9 @@ export default function MissionControlScreen() {
     } = useTelemetry({ initialSelectedId });
 
     const [scrubT, setScrubT] = useState<number | null>(null);
+    /* True only while the user is actively dragging the scrubber — used to hide
+     * the day/night terminator during a drag (it reappears on release). */
+    const [isScrubbing, setIsScrubbing] = useState(false);
     /* Null scrub = follow the latest packet so the page behaves "live". */
     const followLive = scrubT === null;
 
@@ -68,9 +71,14 @@ export default function MissionControlScreen() {
         if (scrubT! < t0) setScrubT(t0);
     }, [visibleRows, scrubT, followLive]);
 
-    /* "Now" = the latest packet; live mode parks the cursor here. */
+    /* "Now" boundary = the latest packet (observed↔forecast divide). */
     const packetEndT = visibleRows.length ? visibleRows[visibleRows.length - 1].t : null;
-    const effectiveScrubT: number | null = followLive ? packetEndT : scrubT;
+    /* When GPS is stale, "now" is the dead-reckoned forecast origin — well past the
+     * last packet — so live should show the balloon's ESTIMATED current position
+     * there, not the last fix. When GPS is fresh the last packet IS now, so we leave
+     * the live cursor exactly where it was (no behavior change for live balloons). */
+    const liveOriginT = forecast.staleGps ? forecast.originT : null;
+    const effectiveScrubT: number | null = followLive ? (liveOriginT ?? packetEndT) : scrubT;
     /* In the future leg the charts hold the last real reading. */
     const isFuture = effectiveScrubT !== null && packetEndT !== null && effectiveScrubT > packetEndT;
 
@@ -173,6 +181,8 @@ export default function MissionControlScreen() {
                         selectedDevice={selectedDevice}
                         forecast={forecast}
                         scrubT={effectiveScrubT}
+                        terminatorDate={scrubT}
+                        scrubbing={isScrubbing}
                         isFuture={isFuture}
                         noReading={noReading}
                         colorScheme={theme}
@@ -185,7 +195,9 @@ export default function MissionControlScreen() {
                             visibleRows={visibleRows}
                             scrubT={scrubT}
                             onScrub={setScrubT}
+                            onScrubbingChange={setIsScrubbing}
                             futureEndT={forecast.endT}
+                            originT={liveOriginT}
                             floating
                         />
                     </div>
@@ -240,6 +252,8 @@ export default function MissionControlScreen() {
                         selectedDevice={selectedDevice}
                         forecast={forecast}
                         scrubT={effectiveScrubT}
+                        terminatorDate={scrubT}
+                        scrubbing={isScrubbing}
                         isFuture={isFuture}
                         noReading={noReading}
                         colorScheme={theme}
@@ -252,7 +266,9 @@ export default function MissionControlScreen() {
                             visibleRows={visibleRows}
                             scrubT={scrubT}
                             onScrub={setScrubT}
+                            onScrubbingChange={setIsScrubbing}
                             futureEndT={forecast.endT}
+                            originT={liveOriginT}
                             floating
                         />
                     </div>
@@ -617,6 +633,8 @@ function MapColumn({
     selectedDevice,
     forecast,
     scrubT,
+    terminatorDate,
+    scrubbing,
     isFuture,
     noReading,
     colorScheme,
@@ -627,6 +645,13 @@ function MapColumn({
     selectedDevice: DeviceSummary | null;
     forecast: UseForecastPathResult;
     scrubT: number | null;
+    /* True while the scrubber is being dragged — hides the day/night terminator. */
+    scrubbing: boolean;
+    /** Raw scrub cursor for the day/night terminator: the instant being viewed,
+     *  or null when following live (terminator then tracks the real current time).
+     *  Distinct from `scrubT` (= effectiveScrubT), which resolves live to the last
+     *  packet time and so can't tell "live" from "scrubbed to the latest fix". */
+    terminatorDate: number | null;
     isFuture: boolean;
     /** No live reading at the cursor — out in the forecast OR sitting in a
      *  transmission gap. The balloon isn't connected, so its links to the last
@@ -777,34 +802,13 @@ function MapColumn({
 
     return (
         <div style={{ flex: 1, position: 'relative', minHeight: 0, minWidth: 0, overflow: 'hidden' }}>
-            {pickPath.length >= 2 && (
-                <div
-                    className="mono"
-                    style={{
-                        position: 'absolute',
-                        top: 14,
-                        left: '50%',
-                        transform: 'translateX(-50%)',
-                        zIndex: 5,
-                        fontSize: 9,
-                        letterSpacing: '0.1em',
-                        textTransform: 'uppercase',
-                        color: 'var(--sl-text-dim2)',
-                        background: 'var(--sl-overlay-bg-blur)',
-                        border: '1px solid var(--sl-border)',
-                        borderRadius: 4,
-                        padding: '4px 10px',
-                        pointerEvents: 'none',
-                    }}
-                >
-                    Click flight path to jump in time
-                </div>
-            )}
             <V2MissionMap
                 balloons={balloon ? [balloon] : []}
                 activeId={selectedDevice?.id ?? null}
                 flightPath={trackPoints}
                 playbackT={scrubRow?.t ?? null}
+                terminatorDate={terminatorDate}
+                terminatorScrubbing={scrubbing}
                 projection="globe"
                 gateways={mapGateways}
                 showTransmitPoints
@@ -815,7 +819,8 @@ function MapColumn({
                 forecastEnsemble={forecast.ensemble}
                 forecastEllipses={forecast.ellipses}
                 colorScheme={colorScheme}
-                viewPadding={isMobile ? { bottom: 200 } : undefined}
+                liftPx={isMobile ? 170 : 0}
+                wideZoom={isMobile ? 1.25 : 2.5}
                 pickPath={pickPath}
                 onPickTime={onPickTime}
             />
@@ -828,10 +833,10 @@ function MapColumn({
                 colorScheme={colorScheme}
             />
 
-            {scrubRow?.lat != null && (
+            {balloon && (
                 <div style={{ position: 'absolute', top: 14, left: 14, display: 'flex', gap: 6, zIndex: 1 }}>
                     <span className="sl-pill dim">
-                        {(scrubRow.lat as number).toFixed(2)}°, {(scrubRow.lon as number).toFixed(2)}°
+                        {balloon.lat.toFixed(2)}°, {balloon.lon.toFixed(2)}°
                     </span>
                 </div>
             )}
@@ -952,11 +957,17 @@ function LegendRow({ swatch, label }: { swatch: React.ReactNode; label: string }
 /* ──────────────────────────────────────────────────────────────
  * Timeline — full-width scrubber. Drives the charts AND the map.
  * ────────────────────────────────────────────────────────────── */
-function Timeline({ visibleRows, scrubT, onScrub, futureEndT, floating = false }: {
+function Timeline({ visibleRows, scrubT, onScrub, onScrubbingChange, futureEndT, originT = null, floating = false }: {
     visibleRows: TelemetryRow[];
     scrubT: number | null;
+    /* Estimated "now" (dead-reckoned forecast origin); the live cursor parks here
+     * instead of the last packet, matching the balloon's estimated position. */
+    originT?: number | null;
     /* null re-arms "follow live" — the page tracks each new packet. */
     onScrub: (t: number | null) => void;
+    /* Fires true while the user is actively dragging the scrubber, false on
+     * release — lets the map hide the day/night terminator during a drag. */
+    onScrubbingChange?: (active: boolean) => void;
     /* Forecast horizon end; the bar extends here so the cursor can ride the
      * predicted path into the future. Null = no forecast, bar ends at "now". */
     futureEndT: number | null;
@@ -999,7 +1010,7 @@ function Timeline({ visibleRows, scrubT, onScrub, futureEndT, floating = false }
     const pct = (t: number) => Math.max(0, Math.min(100, ((t - tStart) / span) * 100));
     const nowFrac = pct(packetEndT);
     const liveFrac = pct(liveT);
-    const cursorT = scrubT ?? packetEndT;        // default parks the cursor at the last packet
+    const cursorT = scrubT ?? originT ?? packetEndT;  // live parks at the estimated "now" (else last packet)
     const fraction = pct(cursorT);
     const elapsedW = Math.min(fraction, nowFrac);
 
@@ -1030,16 +1041,23 @@ function Timeline({ visibleRows, scrubT, onScrub, futureEndT, floating = false }
     const cursorIsLive = Math.abs(relMs) < 120_000;
 
     const onMouseDown = (e: React.MouseEvent) => {
+        onScrubbingChange?.(true);
         pickFromEvent(e.clientX);
         function move(ev: MouseEvent) { pickFromEvent(ev.clientX); }
         function up() {
             window.removeEventListener('mousemove', move);
             window.removeEventListener('mouseup', up);
+            onScrubbingChange?.(false);
         }
         window.addEventListener('mousemove', move);
         window.addEventListener('mouseup', up);
     };
+    const onTouchStart = (e: React.TouchEvent) => {
+        onScrubbingChange?.(true);
+        pickFromEvent(e.touches[0].clientX);
+    };
     const onTouchMove = (e: React.TouchEvent) => pickFromEvent(e.touches[0].clientX);
+    const onTouchEnd = () => onScrubbingChange?.(false);
 
     /* ── Floating: one slim row — state dot + clock (key info) + the track. ── */
     if (floating) {
@@ -1089,7 +1107,9 @@ function Timeline({ visibleRows, scrubT, onScrub, futureEndT, floating = false }
                     aria-valuemax={tEnd}
                     aria-valuenow={cursorT}
                     onMouseDown={onMouseDown}
+                    onTouchStart={onTouchStart}
                     onTouchMove={onTouchMove}
+                    onTouchEnd={onTouchEnd}
                     style={{ position: 'relative', flex: 1, alignSelf: 'stretch', userSelect: 'none' }}
                 >
                     {/* Mobile: clock floats above the thumb so it doesn't steal
@@ -1168,7 +1188,9 @@ function Timeline({ visibleRows, scrubT, onScrub, futureEndT, floating = false }
                 aria-valuemax={tEnd}
                 aria-valuenow={cursorT}
                 onMouseDown={onMouseDown}
+                onTouchStart={onTouchStart}
                 onTouchMove={onTouchMove}
+                onTouchEnd={onTouchEnd}
                 style={{ position: 'relative', height: 30, cursor: 'pointer', userSelect: 'none' }}
             >
                 <div style={{
