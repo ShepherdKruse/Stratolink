@@ -8,7 +8,7 @@
  */
 'use client';
 
-import { useEffect, useMemo, useState, useCallback } from 'react';
+import { useEffect, useMemo, useState, useCallback, useRef } from 'react';
 import { expandFleetDeviceIdsForTelemetry, isHiddenAliasDevice } from '@/lib/devices/aliases';
 import { createClient } from '@/lib/supabase';
 import {
@@ -266,6 +266,13 @@ export function useTelemetry({ initialSelectedId = null }: { initialSelectedId?:
 
     const refetch = useCallback(() => setTick(t => t + 1), []);
 
+    /* Latest devices, readable inside the polling closures without making the
+     * mission-rows effect depend on the array identity (the fleet poll rebuilds
+     * `devices` every 30s — depending on it would re-trigger a full-history
+     * reload that often, which is most of our DB egress). */
+    const devicesRef = useRef(devices);
+    devicesRef.current = devices;
+
     /* Fetch the device list + latest fix per device. Auto-selects the first
      * flying device if nothing is selected yet. */
     useEffect(() => {
@@ -405,64 +412,101 @@ export function useTelemetry({ initialSelectedId = null }: { initialSelectedId?:
         return () => { cancelled = true; clearInterval(interval); };
     }, [tick, selectedId]);
 
-    /* Full mission row set for the selected device (since launch when flying).
-     * Polls every 15s. */
+    /* Full mission row set for the selected device. Loaded in full once (since
+     * launch), then refreshed INCREMENTALLY — each poll fetches only rows newer
+     * than the last one we hold and appends them. Re-downloading the entire
+     * flight every 15s (the old behaviour) was the bulk of our Supabase egress:
+     * a 16-day flight is multiple MB, and at 4 polls/min per open tab that runs
+     * to hundreds of MB/hour. A landed/retired flight never gains rows, so it's
+     * loaded once and not polled at all. */
+    const selSummary = useMemo(
+        () => devices.find(d => d.id === selectedId) ?? null,
+        [devices, selectedId],
+    );
+    /* Primitive deps so the effect re-runs on a real device/status/launch change,
+     * not on every fleet-poll rebuild of the `devices` array. */
+    const selStatus = selSummary?.status;
+    const selLaunchedAt = selSummary?.launchedAt ?? null;
     useEffect(() => {
         if (!selectedId) {
             setRows([]);
             setDeviceInfo(null);
             return;
         }
+        const sel = selectedId;
         let cancelled = false;
-        async function load() {
-            try {
-                const supabase = createClient();
-                const summary = devices.find(d => d.id === selectedId);
-                /* fullHistory: the operator selected this device to inspect it,
-                 * so load its entire flight since launch — including landed /
-                 * retired balloons, which otherwise only get a rolling 24h
-                 * window and would show no track for an older mission. */
-                const since = telemetrySinceIso({
-                    status: summary?.status,
-                    launchedAt: summary?.launchedAt ?? null,
-                }, Date.now(), { fullHistory: true });
-                const raw = await fetchTelemetryMerged(supabase, {
-                    deviceId: selectedId!,
-                    since,
-                    columns: FULL_TELEMETRY_COLUMNS,
-                });
-                if (cancelled) return;
-                const next = raw.map(rawToTelemetry);
-                cachedRowsByDevice.set(selectedId!, next);
-                setRows(next);
 
-                /* Pull the most recent firmware_version that was actually
-                 * reported. If the firmware never sends it, this stays null
-                 * and the UI displays '—' — never a placeholder. */
-                const latestWithFw = [...next].reverse().find(r => r.firmware_version);
-                const latestRow = next[next.length - 1];
-                const info: DeviceInfo = {
-                    id: selectedId!,
-                    firmware: latestWithFw?.firmware_version ?? null,
-                    launched_by: summary?.callsign ?? null,
-                    launched_at: summary?.launchedAt ?? null,
-                    freq_mhz: latestRow?.frequency_hz ? latestRow.frequency_hz / 1_000_000 : null,
-                    sf: latestRow?.lora_sf && latestRow?.lora_bw
-                        ? `SF${latestRow.lora_sf}BW${Math.round(latestRow.lora_bw / 1000)}`
-                        : null,
-                    packet_count: next.length,
-                };
-                cachedInfoByDevice.set(selectedId!, info);
-                setDeviceInfo(info);
-                setLastFetchedAt(Date.now());
-            } catch (e) {
-                console.debug('useTelemetry rows error', e);
-            }
+        /* Recompute device metadata from the merged set and publish rows. */
+        const commit = (next: TelemetryRow[]) => {
+            cachedRowsByDevice.set(sel, next);
+            setRows(next);
+            const summary = devicesRef.current.find(d => d.id === sel);
+            /* Most recent firmware_version actually reported; '—' if never sent. */
+            const latestWithFw = [...next].reverse().find(r => r.firmware_version);
+            const latestRow = next[next.length - 1];
+            const info: DeviceInfo = {
+                id: sel,
+                firmware: latestWithFw?.firmware_version ?? null,
+                launched_by: summary?.callsign ?? null,
+                launched_at: summary?.launchedAt ?? null,
+                freq_mhz: latestRow?.frequency_hz ? latestRow.frequency_hz / 1_000_000 : null,
+                sf: latestRow?.lora_sf && latestRow?.lora_bw
+                    ? `SF${latestRow.lora_sf}BW${Math.round(latestRow.lora_bw / 1000)}`
+                    : null,
+                packet_count: next.length,
+            };
+            cachedInfoByDevice.set(sel, info);
+            setDeviceInfo(info);
+            setLastFetchedAt(Date.now());
+        };
+
+        /* fullHistory: the operator selected this device to inspect it, so load
+         * its entire flight since launch — including landed / retired balloons,
+         * which otherwise only get a rolling 24h window and would show no track. */
+        const fullLoad = async () => {
+            const supabase = createClient();
+            const since = telemetrySinceIso(
+                { status: selStatus, launchedAt: selLaunchedAt },
+                Date.now(),
+                { fullHistory: true },
+            );
+            const raw = await fetchTelemetryMerged(supabase, {
+                deviceId: sel, since, columns: FULL_TELEMETRY_COLUMNS,
+            });
+            if (cancelled) return;
+            commit(raw.map(rawToTelemetry));
+        };
+
+        /* Fetch only rows newer than the latest we hold and append them. `gte`
+         * re-includes the boundary row, which we drop with `t > lastT`. */
+        const pollIncrement = async () => {
+            const have = cachedRowsByDevice.get(sel) ?? [];
+            if (!have.length) return fullLoad();
+            const lastT = have[have.length - 1].t;
+            const supabase = createClient();
+            const raw = await fetchTelemetryMerged(supabase, {
+                deviceId: sel,
+                since: new Date(lastT).toISOString(),
+                columns: FULL_TELEMETRY_COLUMNS,
+            });
+            if (cancelled) return;
+            const appended = raw.map(rawToTelemetry).filter(r => r.t > lastT);
+            if (!appended.length) { setLastFetchedAt(Date.now()); return; }
+            commit(have.concat(appended));
+        };
+
+        fullLoad().catch(e => console.debug('useTelemetry rows error', e));
+
+        /* Only a flying flight gains new packets — don't poll static history. */
+        if (selStatus !== 'flying') {
+            return () => { cancelled = true; };
         }
-        load();
-        const interval = setInterval(load, 15_000);
+        const interval = setInterval(
+            () => pollIncrement().catch(e => console.debug('useTelemetry poll error', e)),
+            15_000,
+        );
         return () => { cancelled = true; clearInterval(interval); };
-    }, [selectedId, devices, tick]);
+    }, [selectedId, selStatus, selLaunchedAt, tick]);
 
     const freshness = useMemo(() => computeFreshness(rows), [rows]);
     const alerts = useMemo(() => deriveAlerts(rows, selectedId), [rows, selectedId]);
