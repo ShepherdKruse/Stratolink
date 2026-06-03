@@ -110,95 +110,40 @@ export function computeBias(gpsFixes: ForecastGpsFix[], gfs: GfsGrid): BiasCorre
  *  has been tracking the winds rather than a fixed guess. */
 export type CubeBias = BiasCorrection & { speedSigma: number; dirSigma: number };
 
-function computeBiasFromCube(gpsFixes: ForecastGpsFix[], cube: WindCube): CubeBias {
-    const samples: Array<{ speedMult: number; dirOffset: number }> = [];
-
+/* The bias correction is intentionally NEUTRAL: we do NOT fit a speed factor or a
+ * direction offset from the fix pairs. For this platform the chord-derived
+ * "observed wind" is an unreliable signal — frozen GPS (sparse distinct fixes ⇒
+ * chord-vs-arc shortening and a `dt` that mismatches the displacement) and
+ * ascent-phase fixes sampled against the float-level winds produce speed ratios
+ * scattered ~0.16–60× and a heading offset that swings run-to-run on tiny cube
+ * changes (e.g. on stratolink-3 the fit jerked the predicted "now" between 52°E
+ * and 108°E). A float balloon advects with the wind, so the honest model is
+ * "trust the GFS prediction": hold speedMult = 1 and dirOffset = 0, and let the
+ * ensemble explore AROUND the predicted trajectory via fixed, sensible jitters
+ * (CFG.SPEED_SIGMA / CFG.DIR_SIGMA_DEG). We still count the clean (moved, ≥5 min)
+ * fix pairs purely for observability (`n_samples` in the metadata).
+ *
+ * (If a better-behaved observation source later warrants a learned bias, re-fit
+ * here — see the forecast-uncertainty follow-ups.) */
+function neutralBias(gpsFixes: ForecastGpsFix[]): CubeBias {
+    let nSamples = 0;
     for (let i = 0; i < gpsFixes.length - 1; i++) {
         const a = gpsFixes[i];
         const b = gpsFixes[i + 1];
-        const t0 = new Date(a.time_utc).getTime();
-        const t1 = new Date(b.time_utc).getTime();
-        const dt = (t1 - t0) / 1000;
-        if (dt < 300) continue; /* skip <5min pairs — noisy velocity estimate */
-        /* Frozen GPS: this balloon sometimes re-sends the identical fix at later
-         * timestamps. Zero displacement over nonzero dt ⇒ a bogus 0 m/s speed and
-         * an undefined (0°) heading that would inflate both sigmas — skip it. */
-        if (b.lat === a.lat && b.lon === a.lon) continue;
-
-        const midLat = (a.lat + b.lat) / 2;
-        const midLon = (a.lon + b.lon) / 2;
-        const cosLat = Math.cos((midLat * Math.PI) / 180);
-
-        const uObs = ((b.lon - a.lon) * 111_320 * cosLat) / dt;
-        const vObs = ((b.lat - a.lat) * 111_320) / dt;
-        const { u: uGfs, v: vGfs } = sampleWind(cube, midLat, midLon, (t0 + t1) / 2);
-
-        const sObs = Math.hypot(uObs, vObs);
-        const sGfs = Math.hypot(uGfs, vGfs);
-        if (sGfs < 1) continue; /* skip near-calm winds — unstable ratio */
-
-        const dirObs = (Math.atan2(vObs, uObs) * 180) / Math.PI;
-        const dirGfs = (Math.atan2(vGfs, uGfs) * 180) / Math.PI;
-        let dirDiff = dirObs - dirGfs;
-        while (dirDiff > 180) dirDiff -= 360;
-        while (dirDiff < -180) dirDiff += 360;
-
-        samples.push({ speedMult: sObs / sGfs, dirOffset: dirDiff });
+        const dt = (new Date(b.time_utc).getTime() - new Date(a.time_utc).getTime()) / 1000;
+        if (dt < 300) continue;                          /* <5 min: noisy velocity */
+        if (b.lat === a.lat && b.lon === a.lon) continue; /* frozen GPS re-send */
+        nSamples += 1;
     }
-
-    const fallback: CubeBias = {
+    return {
         speedMult: 1,
         dirOffsetDeg: 0,
-        nSamples: samples.length,
+        nSamples,
         rawSpeedMult: 1,
         rawDirOffsetDeg: 0,
         capped: false,
         speedSigma: CFG.SPEED_SIGMA,
         dirSigma: CFG.DIR_SIGMA_DEG,
-    };
-    if (samples.length === 0) return fallback;
-
-    const mean = (xs: number[]) => xs.reduce((s, x) => s + x, 0) / xs.length;
-    const std = (xs: number[], m: number) =>
-        Math.sqrt(xs.reduce((s, x) => s + (x - m) * (x - m), 0) / xs.length);
-    const clamp = (x: number, lo: number, hi: number) => Math.max(lo, Math.min(hi, x));
-
-    const speedMult = mean(samples.map((x) => x.speedMult));
-    const dirOffsetDeg = mean(samples.map((x) => x.dirOffset));
-    const speedClamped = clamp(speedMult, CFG.SPEED_CAP[0], CFG.SPEED_CAP[1]);
-    const dirClamped = clamp(dirOffsetDeg, -CFG.DIR_CAP_DEG, CFG.DIR_CAP_DEG);
-
-    /* Data-driven spread, floored (never zero) and capped (one noisy pair can't
-     * blow it up). Requires enough real samples to be trustworthy — below the
-     * threshold we fall back to the fixed defaults, because a few noisy segments
-     * (e.g. a balloon whose GPS is frozen most of the time) otherwise peg the
-     * cone to its caps.
-     *
-     * TODO(forecast-uncertainty): this min-sample gate is a stopgap. Revisit:
-     *   - coarse grid on long-stale balloons inflates the residuals (4° smooths
-     *     the jet → observed looks fast/off → sigma + speed factor hit caps);
-     *   - frozen→real transition pairs (real displacement but stretched dt) may
-     *     still skew the few surviving samples — consider weighting by segment
-     *     length / dropping pairs that span a frozen run;
-     *   - the MEAN bias (speed factor / dir offset) has the same thin-sample
-     *     problem as the sigma, not just the spread. */
-    const enough = samples.length >= CFG.MIN_SIGMA_SAMPLES;
-    const speedSigma = enough
-        ? clamp(std(samples.map((x) => x.speedMult), speedMult), 0.05, 0.25)
-        : CFG.SPEED_SIGMA;
-    const dirSigma = enough
-        ? clamp(std(samples.map((x) => x.dirOffset), dirOffsetDeg), 6, 30)
-        : CFG.DIR_SIGMA_DEG;
-
-    return {
-        speedMult: speedClamped,
-        dirOffsetDeg: dirClamped,
-        nSamples: samples.length,
-        rawSpeedMult: speedMult,
-        rawDirOffsetDeg: dirOffsetDeg,
-        capped: speedClamped !== speedMult || dirClamped !== dirOffsetDeg,
-        speedSigma,
-        dirSigma,
     };
 }
 
@@ -391,15 +336,9 @@ export async function computeMonteCarloForecast(input: MonteCarloForecastInput):
         bounds: gridBounds, levelHpa, startMs, endMs, gridStep, deviceId: input.deviceId, kind: 'reconstruction',
     });
 
-    /* Bias is fit by sampling the forecast cube at recent fix positions, so only
-     * fixes inside its (smaller) box are usable — fixes outside would read
-     * edge-clamped winds and skew the residuals. Fall back to all recent fixes if
-     * the filter is too aggressive (e.g. a tiny box). */
-    const inFcBox = (f: ForecastGpsFix) =>
-        f.lon >= fcCube.bounds.lonMin && f.lon <= fcCube.bounds.lonMax &&
-        f.lat >= fcCube.bounds.latMin && f.lat <= fcCube.bounds.latMax;
-    const biasFixes = recentFixes.filter(inFcBox);
-    const bias = computeBiasFromCube(biasFixes.length >= 5 ? biasFixes : recentFixes, fcCube);
+    /* Neutral bias: trust the GFS prediction and jitter the ensemble around it
+     * (the chord-derived bias was unreliable here — see neutralBias). */
+    const bias = neutralBias(recentFixes);
 
     const { result: reconstruction, hash: reconstructionHash } = await resolveReconstruction(
         input,

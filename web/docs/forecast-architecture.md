@@ -58,7 +58,9 @@ fetch cost: a finer grid just resamples more points locally.
 ## 2. The wind cube
 
 The core data structure (`lib/wind/windCube.ts`). A `WindCube` is a stack of
-hourly-or-3-hourly GFS wind grids over one bounding box at one pressure level:
+hourly-or-3-hourly GFS wind grids over one bounding box at one pressure level
+(the grids are vertically interpolated to the balloon's float pressure at ingest
+— see §3 step 2 — so the level can be a non-standard value like 280 hPa):
 
 ```ts
 type WindCube = {
@@ -98,7 +100,13 @@ GRIB2 complex packing needs eccodes from conda-forge). Per run:
 1. **Devices + fixes** — `active_devices()` reads flying devices from Supabase;
    `mission_fixes()` pulls the full mission since launch (capped `HISTORY_DAYS=90`).
    Corrupt coordinates are dropped (a stray `lat -222` once blew up a box).
-2. **Level** — nearest GFS pressure level to the device's latest reported pressure.
+2. **Level** — winds are **vertically interpolated to the device's actual float
+   pressure** (`float_pressure()` = the robust median of recent float-band
+   telemetry, ~280 hPa for stratolink-3). GFS only publishes standard isobars
+   (250, 300, … — no 280), so `fetch_uv_p()` fetches the two bracketing levels and
+   blends them linearly in pressure (`bracket_levels()`): for 280 hPa,
+   `0.6·U₃₀₀ + 0.4·U₂₅₀`. The cube stays single-level — `levelHpa` just records the
+   interpolated target (e.g. `280.0`) — so nothing downstream changes.
 3. **Source selection** — `pick_source(t, latest)` returns the GFS **forecast
    hour** giving the wind *valid at* `t`:
    - future (`t > latest`): `(latest_cycle, fhr = hours_ahead)` — so the forward
@@ -213,7 +221,11 @@ many byte-range GETs). NODD is free, so the only cost is wall-clock.
 
 - **Incremental history cube** for very long flights (append new 3-hourly steps
   instead of re-downloading the whole mission each run).
-- **Mixed-level handling** (single pressure level per cube today).
+- **Multi-level / altitude-aware sampling** — the cube is interpolated to one
+  representative float pressure at ingest (single level per cube). Tracking
+  diurnal altitude swings within a run would need a multi-level cube + vertical
+  interpolation at sample time (touches the cube schema, `sampleWind`, and every
+  caller). Deferred.
 - **Forecast-uncertainty improvements** (`forecast-uncertainty-followups` in
   memory): coarse-grid sigma inflation, frozen→real transition-pair skew, and the
   mean-bias thin-sample problem — the `MIN_SIGMA_SAMPLES` gate is a stopgap.

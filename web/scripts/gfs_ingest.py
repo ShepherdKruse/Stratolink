@@ -124,13 +124,19 @@ def mission_fixes(device, since_iso):
             for r in rows if -90 <= r["lat"] <= 90 and -180 <= r["lon"] <= 180]
 
 
-def latest_level(device):
+def float_pressure(device):
+    """Robust estimate of the balloon's float pressure (hPa): the median of the
+    last ~200 non-null readings, restricted to the float band (80–400 hPa) so a
+    single noisy packet — or ground/ascent/garbage rows — can't shift it. The
+    cube is then interpolated to this pressure rather than snapped to the nearest
+    standard GFS level (so ~280 hPa is sampled as 280, not 300). Fallback 285."""
     rows = supa("telemetry", {
         "device_id": f"eq.{device}", "pressure": "not.is.null",
-        "select": "pressure", "order": "time.desc", "limit": "1",
+        "select": "pressure", "order": "time.desc", "limit": "200",
     })
-    p = rows[0]["pressure"] if rows else 285.0
-    return min(GFS_LEVELS, key=lambda lv: abs(lv - p))
+    ps = sorted(r["pressure"] for r in rows
+                if isinstance(r["pressure"], (int, float)) and 80 <= r["pressure"] <= 400)
+    return ps[len(ps) // 2] if ps else 285.0
 
 
 # ── Region / grid step (faithful ports of the app) ───────────────────────────
@@ -245,14 +251,44 @@ def fetch_uv(cyc, fhr, level):
     return out
 
 
+def bracket_levels(p):
+    """The two GFS levels bracketing pressure `p`, and the blend weight toward the
+    lower-pressure (higher-altitude) bound. `hi` = nearest level at >= p (e.g. 300),
+    `lo` = nearest at <= p (e.g. 250). Linear in pressure: U(p) = U_hi*(1-w) + U_lo*w
+    with w = (hi - p)/(hi - lo). p outside the level range clamps to one level (w=0)."""
+    hi = min((lv for lv in GFS_LEVELS if lv >= p), default=max(GFS_LEVELS))
+    lo = max((lv for lv in GFS_LEVELS if lv <= p), default=min(GFS_LEVELS))
+    w = 0.0 if hi == lo else (hi - p) / (hi - lo)
+    return lo, hi, w
+
+
+_uv_p_cache = {}
+
+
+def fetch_uv_p(cyc, fhr, p):
+    """U/V interpolated to pressure `p` between the two bracketing GFS levels."""
+    lo, hi, w = bracket_levels(p)
+    if lo == hi:
+        return fetch_uv(cyc, fhr, lo)
+    key = (cyc, fhr, round(p, 1))
+    if key in _uv_p_cache:
+        return _uv_p_cache[key]
+    a = fetch_uv(cyc, fhr, hi)   # higher-pressure bound
+    b = fetch_uv(cyc, fhr, lo)   # lower-pressure bound
+    out = {"u": a["u"] * (1 - w) + b["u"] * w, "v": a["v"] * (1 - w) + b["v"] * w}
+    _uv_p_cache[key] = out
+    return out
+
+
 def floor_step(t, step_h):
     t = t.replace(minute=0, second=0, microsecond=0)
     return t.replace(hour=(t.hour // step_h) * step_h)
 
 
-def sample_grids(bounds, step, start, end, step_h, level, latest, now, tag=""):
+def sample_grids(bounds, step, start, end, step_h, target_p, latest, now, tag=""):
     """Sample the GFS field over `bounds` at `step`° resolution, every `step_h`
-    hours from `start` to `end`. Returns the cube dict (no file write)."""
+    hours from `start` to `end`, interpolated vertically to pressure `target_p`.
+    Returns the cube dict (no file write)."""
     lats = np.arange(bounds["latMin"], bounds["latMax"] + 1e-6, step)
     lons = np.arange(bounds["lonMin"], bounds["lonMax"] + 1e-6, step)
     rows_idx = np.round((90.0 - lats) / 0.25).astype(int).clip(0, 720)
@@ -264,7 +300,7 @@ def sample_grids(bounds, step, start, end, step_h, level, latest, now, tag=""):
     i = 0
     while t <= end:
         cyc, fhr = pick_source(t, latest)
-        uv = fetch_uv(cyc, fhr, level)
+        uv = fetch_uv_p(cyc, fhr, target_p)
         i += 1
         if i % 10 == 0 or i == n_steps:
             print(f"      {tag}: {i}/{n_steps} grids", flush=True)
@@ -281,7 +317,7 @@ def sample_grids(bounds, step, start, end, step_h, level, latest, now, tag=""):
 
     return {
         "source": "gfs", "generated_at": now.isoformat(), "latest_cycle_utc": latest.isoformat(),
-        "levelHpa": level, "gridStep": step,
+        "levelHpa": round(target_p, 1), "gridStep": step,
         "t0Ms": times[0], "stepMs": step_h * 3600 * 1000,
         "bounds": {"latMin": float(lats[0]), "latMax": float(lats[-1]),
                    "lonMin": float(lons[0]), "lonMax": float(lons[-1])},
@@ -297,13 +333,14 @@ def write_cube(device, suffix, cube, nlat, nlon, tag):
           f"({cube['stepMs']//3600000}h step) -> {os.path.getsize(out)//1024} KB")
 
 
-def build_cube(device, fixes, level, latest):
+def build_cube(device, fixes, target_p, latest):
     first_fix = tparse(fixes[0]["t"])
     last_fix = tparse(fixes[-1]["t"])
     now = datetime.now(timezone.utc)
     gap_h = max(0, (now - last_fix).total_seconds() / 3600)
     pad_h = HORIZON_H + min(gap_h, MAX_GAP_H)
-    print(f"  {device}: level {level}mb, gap {gap_h:.0f}h")
+    lo, hi, _ = bracket_levels(target_p)
+    print(f"  {device}: interp {target_p:.1f}mb ({lo}↔{hi}), gap {gap_h:.0f}h")
 
     # ── Reconstruction cube: full mission (first fix → now+horizon), 3-hourly. ──
     # Its box is dominated by the full-mission track; the forward leg is unused by
@@ -314,7 +351,7 @@ def build_cube(device, fixes, level, latest):
     recon_start = floor_step(first_fix, RECON_STEP_H) - timedelta(hours=RECON_STEP_H)
     recon_end = floor_step(now, RECON_STEP_H) + timedelta(hours=HORIZON_H + 2 * RECON_STEP_H)
     recon, rla, rlo = sample_grids(recon_bounds, recon_step, recon_start, recon_end,
-                                   RECON_STEP_H, level, latest, now, "recon")
+                                   RECON_STEP_H, target_p, latest, now, "recon")
     write_cube(device, "", recon, rla, rlo, "recon")
 
     # ── Forecast cube: recent track + dead-reckon + cone, HOURLY, finest grid. ──
@@ -328,7 +365,7 @@ def build_cube(device, fixes, level, latest):
     fc_start = floor_step(now - timedelta(hours=lookback_h), FC_STEP_H) - timedelta(hours=FC_STEP_H)
     fc_end = floor_step(now, FC_STEP_H) + timedelta(hours=HORIZON_H + 2 * FC_STEP_H)
     fc, fla, flo = sample_grids(fc_bounds, fc_step, fc_start, fc_end,
-                                FC_STEP_H, level, latest, now, "fcast")
+                                FC_STEP_H, target_p, latest, now, "fcast")
     write_cube(device, "-fc", fc, fla, flo, "fcast")
 
 
@@ -346,7 +383,7 @@ def main():
             if len(fixes) < 1:
                 print(f"  {d}: no fixes, skipping")
                 continue
-            build_cube(d, fixes, latest_level(d), latest)
+            build_cube(d, fixes, float_pressure(d), latest)
         except Exception as e:
             print(f"  {d}: FAILED {e}")
 
