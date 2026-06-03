@@ -20,24 +20,25 @@ typedef struct {
     uint8_t gps_satellites;
 
     /* Environmental */
-    int16_t temperature_cd;   /* 0.1 °C */
+    int16_t temperature_cd;   /* 0.1 degC */
     uint16_t pressure_ch;     /* 0.1 hPa */
 
     /* Power */
     uint16_t solar_mv;
     uint16_t battery_mv;      /* VSTOR */
 
-    /* MEMS (LIS2DH12 accel only — no gyroscope on this board) */
-    int16_t accel_x_cm_s2;    /* 0.01 m/s² */
+    /* MEMS (LIS2DH12 accel only - no gyroscope on this board) */
+    int16_t accel_x_cm_s2;    /* 0.01 m/s^2 */
     int16_t accel_y_cm_s2;
     int16_t accel_z_cm_s2;
 
     /* UV / Ambient Light (LTR-390UV-01) */
-    uint8_t uv_index;         /* integer UV index (0–15+) */
-    uint16_t ambient_lux;     /* lux (0–65535) */
+    uint8_t uv_index;         /* integer UV index (0-15+) */
+    uint16_t ambient_lux;     /* lux (0-65535) */
 
-    /* Acoustic (mic FFT change detection) */
-    uint8_t acoustic_event;   /* 0 = no event, non-zero = spectral change */
+    /* Acoustic (mic broadband-energy detector - DC-blocked variance vs adaptive
+     * noise floor; NOT an FFT. See firmware/src/mic_acoustic.cpp). */
+    uint8_t acoustic_event;   /* 0 = quiet, 1 = energy > 4x adaptive noise floor */
 } telemetry_input_t;
 
 /**
