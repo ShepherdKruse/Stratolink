@@ -47,13 +47,17 @@ typedef struct {
     uint8_t tx_sf;    float tx_bw;
 } lora_region_t;
 
-/* All region tables drop default uplink SF to 7 (DR3 in US915/AU915,
- * DR5 in EU868/AS923) — at 35-byte payload that's ~97.5 ms ToA and
- * ~28 s/day at the 5-min FULL-tier interval, inside the TTN 30 s FUP
- * in every region.  RX1 spreading factor now also matches the join_sf
- * via each region's standard RX1DROffset=0 mapping (the previous code
- * hardcoded rx1_sf=10 for US915/AU915 regardless of join, so joins
- * only ever succeeded via the RX2 fallback). */
+/* Uplink SF is 9 in every region (the last tx_sf field of each table).
+ * Rationale (analysis/antenna/05_sf_linkbudget.md): SF9 buys +5 dB sensitivity
+ * over SF7 (~2x link-budget range, past the 412 km radio horizon at 10 km), the
+ * single biggest lever on a link that ran at the SF7 floor on flight-3.  Cost is
+ * airtime: SF9 ToA ~308 ms vs SF7 ~98 ms for the 35-byte payload, so the FULL-
+ * tier cadence moves to 1200 s (config.h) to stay at ~22 s/day = 74% of the TTN
+ * 30 s/day FUP (comfortable margin for join retries / clock drift).  JOIN SF is
+ * unchanged (SF10 US/AU, SF7 EU/AS); that config is flight-proven, only uplinks
+ * move to SF9.  RX1 SF matches join_sf via each region's RX1DROffset=0 mapping
+ * (the previous code hardcoded rx1_sf=10 for US915/AU915 regardless of join, so
+ * joins only ever succeeded via the RX2 fallback). */
 static const float US915_FREQS[] = {903.9,904.1,904.3,904.5,904.7,904.9,905.1,905.3};
 static const lora_region_t LORA_US915 = {
     /* US915 sub-band 2.  Join at DR0 (SF10/125), RX1 at DR10 (SF10/500)
@@ -61,17 +65,17 @@ static const lora_region_t LORA_US915 = {
      * matches our rx1_sf without computing the DR2→DR8/DR3→DR8 cross-DR
      * mapping at runtime.  Yesterday's flight firmware ran this config
      * and joined cleanly through onethreenine gateway at -45 dBm.
-     * Uplinks tx_sf=7 (DR3) for TTN FUP compliance — uplinks don't
-     * open RX windows in our minimal LoRaWAN code, so the rx1_sf
-     * mismatch for DR3 uplinks is irrelevant in practice. */
+     * Uplinks tx_sf=9 (DR1) for range; uplinks don't open RX windows in
+     * our minimal LoRaWAN code, so the rx1_sf mismatch is irrelevant in
+     * practice. */
     US915_FREQS, 8, 923.3,  923.3, 0.6, 8,
-    10, 125.0,  10, 500.0,  12, 500.0,  904.1,  7, 125.0
+    10, 125.0,  10, 500.0,  12, 500.0,  904.1,  9, 125.0
 };
 
 static const float EU868_FREQS[] = {868.1, 868.3, 868.5};
 static const lora_region_t LORA_EU868 = {
     EU868_FREQS, 3, 869.525,  0, 0, 0, /* RX1 = TX freq */
-    7, 125.0,  7, 125.0,  9, 125.0,  868.1,  7, 125.0
+    7, 125.0,  7, 125.0,  9, 125.0,  868.1,  9, 125.0
 };
 
 static const float AU915_FREQS[] = {916.8,917.0,917.2,917.4,917.6,917.8,918.0,918.2};
@@ -80,13 +84,13 @@ static const lora_region_t LORA_AU915 = {
      * RX1 DR10/SF10/500 without cross-DR offset math.  See US915
      * block above for the rationale. */
     AU915_FREQS, 8, 923.3,  923.3, 0.6, 8,
-    10, 125.0,  10, 500.0,  12, 500.0,  917.0,  7, 125.0
+    10, 125.0,  10, 500.0,  12, 500.0,  917.0,  9, 125.0
 };
 
 static const float AS923_FREQS[] = {923.2, 923.4};
 static const lora_region_t LORA_AS923 = {
     AS923_FREQS, 2, 923.2,  0, 0, 0, /* RX1 = TX freq */
-    7, 125.0,  7, 125.0,  10, 125.0,  923.2,  7, 125.0
+    7, 125.0,  7, 125.0,  10, 125.0,  923.2,  9, 125.0
 };
 
 /* REGION is a mutable copy of one of the const tables above, switched

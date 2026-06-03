@@ -41,6 +41,8 @@
 static uint8_t tx_payload[TELEMETRY_PAYLOAD_SIZE];
 static gps_fix_t last_gps_fix;
 static bool burst_mode = false;
+static uint16_t burst_cycles = 0;    /* cycles spent in the current burst (runaway cap) */
+static uint8_t burst_cooldown = 0;   /* normal cycles to ignore freefall re-trigger after a capped burst */
 static uint8_t tx_fail_streak = 0;  /* consecutive TX failures; 5 → reset */
 
 /* Reset-cause snapshot. RAM-only diagnostic; read via J-Link.
@@ -103,8 +105,17 @@ void loop() {
      * top of every loop so any hang lasting > 33 s reboots the chip. */
     power_manager_kick_watchdog();
 
-    if (power_manager_did_wake_from_freefall()) {
+    /* Enter burst on a freefall wake, unless we're in the post-cap cooldown.
+     * The cooldown re-arms only after BURST_COOLDOWN_CYCLES *consecutive*
+     * freefall-free wakes; a freefall wake during cooldown restarts the count,
+     * so a persistently stuck/chattering INT1 never re-arms burst (one capped
+     * window total).  Always consume the wake flag so it can't accumulate. */
+    bool freefall_wake = power_manager_did_wake_from_freefall();
+    if (burst_cooldown > 0) {
+        burst_cooldown = freefall_wake ? BURST_COOLDOWN_CYCLES : (uint8_t)(burst_cooldown - 1);
+    } else if (freefall_wake && !burst_mode) {
         burst_mode = true;
+        burst_cycles = 0;
     }
 
     telemetry_input_t ti = {0};
@@ -170,7 +181,15 @@ void loop() {
         power_manager_kick_watchdog();
     }
 
-    if (power_adc_can_tx() && lorawan_joined()) {
+    /* VSTOR floor for uplink TX, mirroring lorawan_join()'s 3.0 V guard.  Below
+     * ~3.0 V the buck is in dropout and Vdd droops hard during the +14 dBm/~50 mA
+     * peak, worse at SF9 (~308 ms TX, ~3x SF7) where a long uplink can brown out
+     * mid-transmit.  Gating HERE (not inside send_uplink) keeps a low-rail cycle a
+     * clean skip: it must NOT feed tx_fail_streak, or a stable 2.8-3.0 V dusk rail
+     * would log 5 false "failures" and force the very NVIC reset (-> rejoin spiral)
+     * this guard exists to avoid. */
+    bool vstor_ok_for_tx = power_adc_read_vSTOR_mv() >= 3000;
+    if (power_adc_can_tx() && vstor_ok_for_tx && lorawan_joined()) {
         if (lorawan_send_uplink(tx_payload, TELEMETRY_PAYLOAD_SIZE)) {
             tx_fail_streak = 0;
             /* Persist FCntUp so a post-reset boot doesn't replay an
@@ -194,8 +213,18 @@ void loop() {
         }
     }
 
-    if (burst_mode && sensor_lis2dh12_is_freefall_cleared()) {
-        burst_mode = false;
+    if (burst_mode) {
+        burst_cycles++;
+        if (sensor_lis2dh12_is_freefall_cleared()) {
+            /* Normal exit: payload reached terminal velocity / landed (~1g). */
+            burst_mode = false;
+        } else if (burst_cycles >= BURST_MAX_CYCLES) {
+            /* Runaway guard: freefall never cleared (stuck/chattering INT1).
+             * Force-exit and latch the cooldown (re-arm needs consecutive
+             * freefall-free wakes, handled at the top of loop()). */
+            burst_mode = false;
+            burst_cooldown = BURST_COOLDOWN_CYCLES;
+        }
     }
 
     uint32_t sleep_sec = burst_mode ? (uint32_t)BURST_SLEEP_SEC : power_adc_get_sleep_interval_sec(tier);
