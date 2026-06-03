@@ -53,8 +53,9 @@ bool power_adc_can_tx(void);
 bool power_adc_should_read_sensors(void);
 
 /**
- * Return recommended sleep interval in seconds for the given tier (Phase 3).
- * FULL=60, REDUCED=120, NO_GPS=300, EMERGENCY=120, CRITICAL=120.
+ * Return recommended sleep interval in seconds for the given tier.
+ * Per-tier value = the matching SLEEP_INTERVAL_*_SEC macro in config.h
+ * (CRITICAL shares EMERGENCY; see power_adc.cpp for the switch).
  */
 uint32_t power_adc_get_sleep_interval_sec(power_tier_t tier);
 
