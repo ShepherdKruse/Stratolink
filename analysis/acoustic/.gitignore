@@ -1,0 +1,5 @@
+# Regenerable test stimuli (make with: mic_bench.py gen) + local junk - not committed.
+stimuli/
+__pycache__/
+*.pyc
+.DS_Store
