@@ -266,11 +266,23 @@ parametric GFS+jitter ensemble when no member cubes exist. This gives
 flow-dependent spread: for a 123 h-stale balloon the dead-reckoned "now" is a
 ~3,500 km *cloud*, not the deceptively crisp point a single GFS track implies.
 
-Cost lives entirely on the free runner: ~1–1.5 GB ingest per stale device (each
-byte-range GET pulls a whole-globe field — GRIB2 messages aren't spatially
-subsettable). Remaining optimizations: bbox subsetting (NOMADS `g2subset`) or
-fetch-once-resample-many across the fleet; and box-sizing for the very wide stale
-clouds (currently a generous capped pad, coarsened by the point budget).
+**Multi-model: AIGEFS (`scripts/aigefs_ingest.py`).** GEFS members all share the
+physics model (FV3), so they under-represent *model* error (a biased jet position
+advects a balloon consistently wrong). `aigefs_ingest.py` adds members from NOAA's
+**GraphCast AI ensemble** (`noaa-nws-graphcastgfs-pds`, 0.25°, 31 members
+`mem000–030`, 6-hourly) as `{device}-aNN.slwc`, and `listMemberCubes` pools both
+`-mNN` (physics) + `-aNN` (AI) into one ensemble — a poor-man's multi-model
+ensemble that hedges structural model error. It's invoked from `gefs_ingest.py` in
+a try/except (best-effort: a failure never touches the GFS/GEFS pipeline), and
+remaps each step to the nearest *available* cycle (AIGEFS occasionally skips one).
+
+Cost lives entirely on the free runner: ~1–1.5 GB ingest per stale device per
+source (each byte-range GET pulls a whole-globe field — GRIB2 messages aren't
+spatially subsettable). Member cubes (`-mNN`/`-aNN`) are **not** uploaded to Blob
+(`upload_cubes.mjs`) — they're runner-only — so the serverless cold-miss path
+can't pull dozens into a 60 s function. Remaining optimizations: bbox subsetting
+(NOMADS `g2subset`) or fetch-once-resample-many across the fleet; and box-sizing
+for the very wide stale clouds (currently a generous capped pad).
 
 ## 7. Deferred / known follow-ups
 
