@@ -14,7 +14,8 @@ if (!existsSync(dir)) {
     console.log('no .windcube/cubes — nothing to upload');
     process.exit(0);
 }
-const files = readdirSync(dir).filter((f) => f.endsWith('.json'));
+// `.slwc` is the packed-binary cube (current); `.json` kept for the transition.
+const files = readdirSync(dir).filter((f) => f.endsWith('.slwc') || f.endsWith('.json'));
 if (!files.length) {
     console.log('no cube files to upload');
     process.exit(0);
