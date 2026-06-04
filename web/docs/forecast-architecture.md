@@ -127,9 +127,17 @@ GRIB2 complex packing needs eccodes from conda-forge). Per run:
    > m/s change between future grids). For a long dead-reckon the evolving-vs-static
    > difference is thousands of km.
 4. **Fetch** — byte-range GETs from `noaa-gfs-bdp-pds` (`pgrb2.0p25`) using each
-   message's `.idx` offsets, for UGRD+VGRD only. Cached by `(cycle, fhr, level)`.
-   `http_get` retries with backoff; `TIMEOUT=30s` (the two-cube ingest makes
-   ~2–3× more requests, so a hung socket must fail fast, not stall 90s).
+   message's `.idx` offsets, for UGRD+VGRD only. **Persistently cached** by
+   `(cycle, fhr, level)` under `.windcube/fetchcache/` (`fetch_uv`): each raw GRIB
+   field is immutable — a past analysis or a published forecast hour never changes
+   — so a cache hit is always valid, no invalidation. This makes the historical
+   recon **incremental**: each 6-hourly run re-downloads only the new ~6h tail and
+   the new forward forecast, not the whole mission (a 90-day recon drops from
+   hundreds of fetches to ~4 at steady state). `prune_fetch_cache()` drops cycles
+   older than `HISTORY_DAYS`. On Actions the dir is restored/saved via
+   `actions/cache`; locally it just lives under `.windcube/`. `http_get` retries
+   with backoff; `TIMEOUT=30s` (the two-cube ingest makes ~2–3× more requests, so
+   a hung socket must fail fast, not stall 90s).
 5. **Box** — `bounds_for_forecast`: `bbox(fixes) ± 4°` plus a downwind pad sized
    from the most-recent **non-frozen, short-dt** fix pair's velocity × horizon,
    capped. (Non-frozen because this fleet's GPS re-sends identical fixes; the last
@@ -286,8 +294,12 @@ for the very wide stale clouds (currently a generous capped pad).
 
 ## 7. Deferred / known follow-ups
 
-- **Incremental history cube** for very long flights (append new 3-hourly steps
-  instead of re-downloading the whole mission each run).
+- ~~**Incremental history cube** for very long flights~~ — **done** (§3 step 4):
+  rather than appending cube steps, the fetch layer persistently caches the
+  immutable raw `(cycle, fhr, level)` GRIB fields, so each run re-downloads only
+  the new tail. Decoupled from box/grid changes (those just re-sample the cached
+  fields). Remaining: extend the cache to the GEFS/AIGEFS/ECMWF member ingests
+  (lower value — they're forward-forecast and re-anchor each cycle).
 - **Multi-level / altitude-aware sampling** — the cube is interpolated to one
   representative float pressure at ingest (single level per cube). Tracking
   diurnal altitude swings within a run would need a multi-level cube + vertical
