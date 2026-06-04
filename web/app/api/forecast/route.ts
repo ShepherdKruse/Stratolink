@@ -1,4 +1,4 @@
-import { NextResponse, after } from 'next/server';
+import { NextResponse } from 'next/server';
 import {
     acquireForecastLock,
     readStoredForecast,
@@ -32,20 +32,6 @@ async function computeForecast(deviceId: string): Promise<StratolinkForecast | n
     }
 }
 
-/** Compute + cache in the background (via after()), lock-guarded so concurrent
- *  refreshes don't stack. Used to refresh a stale cache without blocking. */
-async function computeAndStore(deviceId: string): Promise<void> {
-    if (!(await acquireForecastLock(deviceId))) return;
-    try {
-        const forecast = await computeForecast(deviceId);
-        if (forecast) await storeForecast(deviceId, forecast);
-    } catch (e) {
-        if (e instanceof BudgetExceededError) return; /* defer; cron/next read will retry */
-        console.error(`[forecast] background refresh failed for ${deviceId}: ${e instanceof Error ? e.message : e}`);
-    } finally {
-        await releaseForecastLock(deviceId);
-    }
-}
 
 /**
  * Forecast for a device.
@@ -71,7 +57,13 @@ export async function GET(req: Request) {
     if (stored) {
         const ageMs = Date.now() - new Date(stored.generated_at).getTime();
         const stale = ageMs > STALE_MS;
-        if (stale) after(() => computeAndStore(deviceId));
+        /* Do NOT recompute-and-overwrite on staleness: the GitHub Actions worker
+         * is the sole writer (it builds the GEFS/AIGEFS member ensemble on the
+         * runner and refreshes on its cron). A serverless recompute here can't see
+         * the member cubes (kept off Blob) and would clobber the worker's ensemble
+         * with a parametric GFS forecast. Just serve the stored copy; the worker
+         * refreshes it. (Cold miss — no stored forecast at all — still computes
+         * below as a bootstrap for a brand-new device.) */
         return NextResponse.json(stored, {
             headers: {
                 'Cache-Control': stale
