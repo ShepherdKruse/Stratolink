@@ -186,6 +186,16 @@ def main():
         except Exception as e:  # noqa: BLE001
             print(f"  {d}: FAILED {e}")
 
+    # Also build AIGEFS (GraphCast AI) member cubes — a model-independent source
+    # pooled into the same ensemble (see aigefs_ingest). Best-effort: a failure
+    # here must NOT break the physics-GEFS / GFS pipeline, so it's fully isolated.
+    try:
+        import aigefs_ingest
+        print("--- AIGEFS (AI ensemble) ---")
+        aigefs_ingest.run(only)
+    except Exception as e:  # noqa: BLE001
+        print(f"AIGEFS ingest failed (non-fatal, GEFS/GFS unaffected): {e}")
+
 
 if __name__ == "__main__":
     main()

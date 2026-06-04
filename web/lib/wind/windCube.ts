@@ -176,25 +176,27 @@ async function readCubeFromBlob(deviceId: string, kind: CubeKind): Promise<WindC
  * parametric jitter). */
 export async function listMemberCubes(deviceId: string): Promise<string[]> {
     const id = encodeURIComponent(deviceId);
-    const re = new RegExp(`^${id.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}-m(\\d+)\\.slwc(\\.gz)?$`);
+    /* `-mNN` = physics GEFS members, `-aNN` = AIGEFS (AI) members. Both are pooled
+     * into one multi-model ensemble. */
+    const re = new RegExp(`^${id.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}-([ma]\\d+)\\.slwc(\\.gz)?$`);
     const dir = process.env.WIND_CUBE_DIR;
     if (dir) {
         try {
             const labels = new Set<string>();
             for (const f of await readdir(dir)) {
                 const m = f.match(re);
-                if (m) labels.add(`m${m[1]}`);
+                if (m) labels.add(m[1]);
             }
             return [...labels].sort();
         } catch { return []; }
     }
     if (isBlobStorageConfigured()) {
         try {
-            const { blobs } = await list({ prefix: `cubes/${id}-m` });
+            const { blobs } = await list({ prefix: `cubes/${id}-` });
             const labels = new Set<string>();
             for (const b of blobs) {
                 const m = b.pathname.replace(/^cubes\//, '').match(re);
-                if (m) labels.add(`m${m[1]}`);
+                if (m) labels.add(m[1]);
             }
             return [...labels].sort();
         } catch { return []; }
