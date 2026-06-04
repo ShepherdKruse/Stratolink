@@ -15,7 +15,13 @@ if (!existsSync(dir)) {
     process.exit(0);
 }
 // `.slwc` is the packed-binary cube (current); `.json` kept for the transition.
-const files = readdirSync(dir).filter((f) => f.endsWith('.slwc') || f.endsWith('.json'));
+// EXCLUDE GEFS member cubes ({device}-mNN.slwc): those are only read by the runner
+// compute (locally, via WIND_CUBE_DIR). Keeping them out of Blob stops the
+// serverless path (/api/compute-forecast cold-miss) from ever pulling 31 members
+// into a 60s function — it falls back to the GFS recon+fc cubes (still uploaded).
+const files = readdirSync(dir).filter(
+    (f) => (f.endsWith('.slwc') || f.endsWith('.json')) && !/-m\d+\.slwc$/.test(f),
+);
 if (!files.length) {
     console.log('no cube files to upload');
     process.exit(0);
