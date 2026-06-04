@@ -1,5 +1,6 @@
 import { get } from '@vercel/blob';
 import { readFile } from 'node:fs/promises';
+import { join } from 'node:path';
 import { gunzipSync } from 'node:zlib';
 import { fetchWindGridHourlySeries, snapPressureHpa, type WindGridBounds } from './fetchWindGrid';
 import { isBlobStorageConfigured } from './forecastStorage';
@@ -86,6 +87,27 @@ async function getCubeObject(key: string): Promise<WindCube | null> {
  *  gzipped object, falls back to the legacy uncompressed one (deploy window), and
  *  the forecast read falls back to the full cube if no `-fc` cube exists yet
  *  (so the app is safe to deploy before the two-cube ingest first runs). Never throws. */
+/** Read a device's cube from a LOCAL directory (same filenames as Blob). Used by
+ *  the GitHub Actions worker compute, which builds cubes on the runner and reads
+ *  them straight off disk — no Blob round-trip — so big multi-member ensembles
+ *  never have to be pulled into the memory/time-limited serverless function. Set
+ *  `WIND_CUBE_DIR` to enable. Never throws. */
+async function readCubeFromDir(dir: string, deviceId: string, kind: CubeKind): Promise<WindCube | null> {
+    const id = encodeURIComponent(deviceId);
+    const names =
+        kind === 'forecast'
+            ? [`${id}-fc.json.gz`, `${id}-fc.json`, `${id}.json.gz`, `${id}.json`]
+            : [`${id}.json.gz`, `${id}.json`];
+    for (const name of names) {
+        try {
+            const buf = await readFile(join(dir, name));
+            const txt = name.endsWith('.gz') ? gunzipSync(buf).toString('utf8') : buf.toString('utf8');
+            return cubeFromRaw(JSON.parse(txt) as RawCube);
+        } catch { /* try next candidate */ }
+    }
+    return null;
+}
+
 async function readCubeFromBlob(deviceId: string, kind: CubeKind): Promise<WindCube | null> {
     if (!isBlobStorageConfigured()) return null;
     const id = encodeURIComponent(deviceId);
@@ -155,11 +177,12 @@ export async function fetchWindCube(opts: {
     kind?: CubeKind;
 }): Promise<WindCube> {
     /* Source precedence:
-     *   1. WIND_CUBE_FILE / WIND_CUBE_FC_FILE — local files (dev / spike). The FC
-     *      file (if set) serves the forecast kind; WIND_CUBE_FILE serves either.
-     *   2. Blob cube for the device — the pre-ingested GFS cube (scripts/gfs_ingest.py,
-     *      refreshed 6-hourly), the production path: no live wind API, no rate limit.
-     *   3. Open-Meteo — live fallback for devices with no cube yet (migration safety;
+     *   1. WIND_CUBE_FILE / WIND_CUBE_FC_FILE — single local file overrides (dev / spike).
+     *   2. WIND_CUBE_DIR — per-device cubes on local disk (the GitHub Actions worker
+     *      compute: build cubes on the runner, read them here, no Blob round-trip).
+     *   3. Blob cube for the device — the pre-ingested cube (scripts/gfs_ingest.py),
+     *      the serverless read path: no live wind API, no rate limit.
+     *   4. Open-Meteo — live fallback for devices with no cube yet (migration safety;
      *      the call budget protects it). */
     const kind: CubeKind = opts.kind ?? 'reconstruction';
     const fcFile = process.env.WIND_CUBE_FC_FILE;
@@ -169,6 +192,13 @@ export async function fetchWindCube(opts: {
     }
     if (localFile) {
         return cubeFromRaw(JSON.parse(await readFile(localFile, 'utf8')) as RawCube);
+    }
+    /* Worker compute: read the just-built cubes from the runner's disk by device,
+     * before any Blob read (this is the "compute where the data is" path). */
+    const cubeDir = process.env.WIND_CUBE_DIR;
+    if (cubeDir && opts.deviceId) {
+        const cube = await readCubeFromDir(cubeDir, opts.deviceId, kind);
+        if (cube) return cube;
     }
     if (opts.deviceId) {
         const cube = await readCubeFromBlob(opts.deviceId, kind);

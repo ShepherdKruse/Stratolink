@@ -1,13 +1,23 @@
-name: GFS wind ingest
+name: GFS wind ingest + forecast
 
-# Builds per-balloon GFS wind cubes from NOAA's free NODD S3 and uploads them to
-# Vercel Blob, so the forecast compute reads pre-ingested winds instead of calling
-# Open-Meteo (no rate limits). GFS publishes 00/06/12/18 UTC ~4-5h later, so we run
-# shortly after each cycle. Public repo => Actions minutes are free.
+# Builds per-balloon wind cubes from NOAA's free NODD S3 AND computes the drift
+# forecasts ON THE RUNNER, uploading only the small forecast JSON to Vercel Blob.
+#
+# Why compute here instead of a Vercel serverless function: the cube is large
+# (and a GEFS ensemble is ~1 GB), and a serverless function would have to pull it
+# from Blob and JSON-parse it into memory on every cron tick — which hits the
+# function's RAM/time caps and re-incurs Blob read bandwidth every ~30 min. The
+# GitHub runner has the memory/time, the cubes are already local, and the browser
+# still just fetches a few-hundred-KB forecast JSON. GFS publishes 00/06/12/18 UTC
+# ~4-5h later, so we run shortly after each cycle. Public repo => Actions free.
 on:
   schedule:
     - cron: '0 5,11,17,23 * * *'   # ~5h after each GFS cycle (UTC)
-  workflow_dispatch:               # manual run
+  workflow_dispatch:
+    inputs:
+      device:
+        description: 'Only this device (blank = all active)'
+        required: false
 
 concurrency:
   group: gfs-ingest
@@ -19,7 +29,7 @@ permissions:
 jobs:
   ingest:
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 45        # raised for GEFS ensemble headroom
     defaults:
       run:
         working-directory: web
@@ -43,19 +53,37 @@ jobs:
           cache-dependency-path: web/package-lock.json
       - run: npm ci
 
+      # 1. Build cubes from NOAA → web/.windcube/cubes/*.json (stays on the runner).
       - name: Ingest GFS → cubes
         env:
           NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
           SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
-        run: micromamba run -n gfs python scripts/gfs_ingest.py
+        run: micromamba run -n gfs python scripts/gfs_ingest.py ${{ github.event.inputs.device }}
 
-      - name: Upload cubes → Vercel Blob
+      # 2. Compute forecasts on the runner, reading the local cubes by device
+      #    (WIND_CUBE_DIR), and store only the small forecast JSON to Blob — the
+      #    same object /api/forecast serves. No serverless cube read, no Blob cube
+      #    bandwidth. (This is where the GEFS ensemble compute will live.)
+      - name: Compute + store forecasts
+        env:
+          NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+          BLOB_READ_WRITE_TOKEN: ${{ secrets.BLOB_READ_WRITE_TOKEN }}
+          WIND_CUBE_DIR: .windcube/cubes
+        run: npx --yes tsx scripts/compute_forecasts.ts ${{ github.event.inputs.device }}
+
+      # 3. (OPTIONAL / transition) Also push the cubes to Blob so the serverless
+      #    cold-miss fallback in /api/forecast can still compute for a device that
+      #    has no stored forecast yet. Drop this once the worker compute is the
+      #    sole path AND the external cron → /api/compute-forecast is disabled,
+      #    to eliminate cube Blob storage + bandwidth entirely.
+      - name: Upload cubes → Vercel Blob (fallback)
         env:
           BLOB_READ_WRITE_TOKEN: ${{ secrets.BLOB_READ_WRITE_TOKEN }}
         run: node scripts/upload_cubes.mjs
 
       # Optional: set a HEALTHCHECK_URL secret (healthchecks.io / Slack) to catch
-      # silent ingest failures — stale cubes ⇒ stale forecasts otherwise.
+      # silent failures — stale forecasts otherwise.
       - name: Healthcheck ping
         if: success()
         env:

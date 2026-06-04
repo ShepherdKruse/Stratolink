@@ -217,6 +217,38 @@ many byte-range GETs). NODD is free, so the only cost is wall-clock.
 
 ---
 
+## 6b. Worker-side compute (GEFS-ready)
+
+The default path computes in a **Vercel serverless function** reading the cube
+from Blob. That's fine for one GFS run, but it doesn't scale to a **GEFS
+ensemble**: the bottleneck is *not* the raw data transfer (1–1.5 GB is cheap and
+one-time from free NOAA), it's that a serverless function would have to pull the
+cube from Blob and `JSON.parse` it into memory **every cron tick** — hitting the
+function's RAM (~1–3 GB; JSON parse balloons 2–5×) and `maxDuration`, and
+re-incurring **Vercel Blob** read bandwidth every ~30 min (this is Blob, not
+Supabase — unrelated stores).
+
+The fix is to **compute on the GitHub Actions runner**, where the cubes are
+already local and there's no memory/time cap, and upload only the small forecast
+JSON:
+
+- `scripts/compute_forecasts.ts` (run via `tsx`) — for each device with a cube,
+  `buildForecastInputForDevice` → `computeMonteCarloForecast` → `storeForecast`.
+- `fetchWindCube` reads cubes from local disk when **`WIND_CUBE_DIR`** is set
+  (per-device, same filenames as Blob) — no Blob round-trip.
+- The workflow (`gfs-ingest.yml`) now: ingest cubes → **compute + store forecasts
+  on the runner** → (optional, transitional) upload cubes to Blob for the
+  serverless cold-miss fallback.
+
+End state: drop the cube upload and disable the external cron → `/api/compute-forecast`,
+so cubes never leave the runner and Blob holds only forecast JSON. **GEFS plugs in
+here** — the heavy 31-member integration runs in this step (verified prototype:
+end-to-end GEFS for a 123 h-stale balloon ingested ~0.76 GB at one level and
+showed the dead-reckoned "now" is a ~3,500 km *cloud*, not a point — the honest
+representation our parametric jitter / single GFS track can't give). Remaining
+GEFS work: per-member cube ingest + per-member integration in the compute, plus
+bbox subsetting or fetch-once-resample-many to cut the global-field download.
+
 ## 7. Deferred / known follow-ups
 
 - **Incremental history cube** for very long flights (append new 3-hourly steps
