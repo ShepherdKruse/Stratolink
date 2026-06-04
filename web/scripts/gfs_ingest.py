@@ -19,6 +19,7 @@ import os
 import re
 import struct
 import sys
+import tempfile
 import time
 import urllib.parse
 import urllib.request
@@ -60,6 +61,14 @@ PAD_CAP_DEG = 32                 # cap the downwind forecast pad so the box can'
 GFS_LEVELS = [1000, 975, 950, 925, 900, 850, 800, 700, 600, 500, 400, 300, 250, 200, 150, 100, 70, 50, 30]
 BUCKET = "https://noaa-gfs-bdp-pds.s3.amazonaws.com"
 OUTDIR = os.path.join(os.path.dirname(__file__), "..", ".windcube", "cubes")
+# Persistent cross-run cache of raw (cyc,fhr,level) GRIB fields. These fields are
+# IMMUTABLE — a past analysis or a published forecast hour never changes — so a hit
+# is always valid with no invalidation. This is what makes the historical recon
+# cube incremental: each run re-downloads only NEW cycles (the ~6h tail + the new
+# forward forecast), not the whole mission. On Actions, restore/save this dir with
+# actions/cache; locally it just lives under .windcube/.
+FETCH_CACHE_DIR = os.environ.get(
+    "GFS_FETCH_CACHE_DIR", os.path.join(os.path.dirname(__file__), "..", ".windcube", "fetchcache"))
 TIMEOUT = 30  # per-request; a hung S3 socket should fail fast and retry, not stall
 
 SUPA_URL = os.environ.get("NEXT_PUBLIC_SUPABASE_URL", "").rstrip("/")
@@ -219,12 +228,50 @@ def pick_source(t, latest):
 
 
 _uv_cache = {}
+_net_fetches = 0   # (cyc,fhr,level) fields actually pulled from NOAA this run (cache misses)
+_cache_hits = 0    # served from the persistent disk cache (immutable historical fields)
+
+
+def _decode_uv(raw, level):
+    """Decode a raw GRIB2 buffer (UGRD+VGRD at `level`) → {'u':arr,'v':arr}."""
+    os.makedirs(FETCH_CACHE_DIR, exist_ok=True)
+    fd, tmp = tempfile.mkstemp(suffix=".grib2", dir=FETCH_CACHE_DIR)
+    try:
+        with os.fdopen(fd, "wb") as f:
+            f.write(raw)
+        out = {}
+        g = pygrib.open(tmp)
+        for grb in g:
+            if grb.typeOfLevel == "isobaricInhPa" and int(grb.level) == level and grb.shortName in ("u", "v"):
+                out[grb.shortName] = np.asarray(grb.values, dtype=float)
+        g.close()
+    finally:
+        os.remove(tmp)
+    return out
+
+
+def _cache_path(cyc, fhr, level):
+    return os.path.join(FETCH_CACHE_DIR, f"{cyc:%Y%m%d%H}_f{fhr}_{level}.grib2")
 
 
 def fetch_uv(cyc, fhr, level):
+    global _net_fetches, _cache_hits
     key = (cyc, fhr, level)
     if key in _uv_cache:
         return _uv_cache[key]
+    # Persistent cross-run cache: (cyc,fhr,level) GRIB fields are IMMUTABLE, so a
+    # hit is always valid — this is what makes the historical recon incremental.
+    cpath = _cache_path(cyc, fhr, level)
+    if os.path.exists(cpath):
+        try:
+            out = _decode_uv(open(cpath, "rb").read(), level)
+            if "u" in out and "v" in out:
+                _cache_hits += 1
+                _uv_cache[key] = out
+                return out
+        except Exception:  # noqa: BLE001 — corrupt/partial cache file: fall through and refetch
+            pass
+    # Miss — pull the two byte-ranges from NOAA, then write-through to the cache.
     lines = http_get(gfs_url(cyc, fhr) + ".idx").decode().splitlines()
     rows = [ln.split(":") for ln in lines if ln]
     starts = [int(r[1]) for r in rows]
@@ -238,18 +285,42 @@ def fetch_uv(cyc, fhr, level):
     buf = io.BytesIO()
     for v in ("UGRD", "VGRD"):
         buf.write(http_get(gfs_url(cyc, fhr), want[v]))
-    tmp = os.path.join(OUTDIR, f".{cyc:%Y%m%d%H}f{fhr}_{level}.grib2")
-    os.makedirs(OUTDIR, exist_ok=True)
-    open(tmp, "wb").write(buf.getvalue())
-    out = {}
-    g = pygrib.open(tmp)
-    for grb in g:
-        if grb.typeOfLevel == "isobaricInhPa" and int(grb.level) == level and grb.shortName in ("u", "v"):
-            out[grb.shortName] = np.asarray(grb.values, dtype=float)
-    g.close()
-    os.remove(tmp)
+    raw = buf.getvalue()
+    _net_fetches += 1
+    out = _decode_uv(raw, level)
+    if "u" not in out or "v" not in out:
+        raise SystemExit(f"{cyc} f{fhr} @{level}mb: decode produced no u/v")
+    try:  # best-effort atomic write-through
+        os.makedirs(FETCH_CACHE_DIR, exist_ok=True)
+        tmp = f"{cpath}.tmp{os.getpid()}"
+        open(tmp, "wb").write(raw)
+        os.replace(tmp, cpath)
+    except Exception:  # noqa: BLE001 — caching is best-effort, never fail the run on it
+        pass
     _uv_cache[key] = out
     return out
+
+
+def prune_fetch_cache(before=None):
+    """Drop cached fields for cycles older than the history window — keeps the
+    persistent cache bounded (old analyses are never needed again)."""
+    if not os.path.isdir(FETCH_CACHE_DIR):
+        return
+    cutoff = before or (datetime.now(timezone.utc) - timedelta(days=HISTORY_DAYS + 2))
+    removed = 0
+    for f in os.listdir(FETCH_CACHE_DIR):
+        try:
+            cyc = datetime.strptime(f[:10], "%Y%m%d%H").replace(tzinfo=timezone.utc)
+        except ValueError:
+            continue  # tmp/other files
+        if cyc < cutoff:
+            try:
+                os.remove(os.path.join(FETCH_CACHE_DIR, f))
+                removed += 1
+            except OSError:
+                pass
+    if removed:
+        print(f"fetch-cache: pruned {removed} fields older than {cutoff:%Y-%m-%d}", flush=True)
 
 
 def bracket_levels(p):
@@ -409,6 +480,7 @@ def main():
         print("no active devices")
         return
     latest = latest_cycle()
+    prune_fetch_cache()
     print(f"latest GFS cycle {latest.isoformat()} | devices: {[d for d, _ in devices]}")
     for d, launched in devices:
         try:
@@ -419,6 +491,7 @@ def main():
             build_cube(d, fixes, float_pressure(d), latest)
         except Exception as e:
             print(f"  {d}: FAILED {e}")
+    print(f"fetch-cache: {_net_fetches} fields fetched from NOAA, {_cache_hits} reused from cache", flush=True)
 
 
 if __name__ == "__main__":
