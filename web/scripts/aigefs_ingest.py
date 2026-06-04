@@ -189,9 +189,18 @@ def build_device(device, fixes, target_p, latest):
         fhr = max(0, round((t - cyc).total_seconds() / 3600 / AIGEFS_STEP_H) * AIGEFS_STEP_H)
         schedule.append((t, cyc, fhr))
 
+    # Per-member isolation: AIGEFS publishes incomplete member sets (a cycle file
+    # mem000 has may be missing for another member), so one member's 404 must not
+    # abort the rest — skip it and keep the members that are complete.
+    built = 0
     for mem in MEMBERS:
-        cube = member_cube(mem, schedule, lats, lons, rows_idx, cols_idx, step, target_p, latest, now)
-        g.write_cube(device, f"-a{mem:02d}", cube, len(lats), len(lons), f"a{mem:02d}")
+        try:
+            cube = member_cube(mem, schedule, lats, lons, rows_idx, cols_idx, step, target_p, latest, now)
+            g.write_cube(device, f"-a{mem:02d}", cube, len(lats), len(lons), f"a{mem:02d}")
+            built += 1
+        except Exception as e:  # noqa: BLE001
+            print(f"    a{mem:02d}: skipped ({e})", flush=True)
+    print(f"  {device}: AIGEFS built {built}/{len(MEMBERS)} members", flush=True)
 
 
 def run(only=None):
