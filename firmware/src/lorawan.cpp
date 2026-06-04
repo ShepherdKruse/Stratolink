@@ -1,5 +1,5 @@
 /**
- * LoRaWAN driver — from first principles.
+ * LoRaWAN driver, from first principles.
  * Manual OTAA join + ABP-style uplinks using RadioLib for radio only.
  * RAK3172 (STM32WLE5). Region selected via TTN_REGION_* in config.h.
  */
@@ -8,6 +8,15 @@
 #include "power_adc.h"
 #include "power_manager.h"   /* for power_manager_kick_watchdog */
 #include <RadioLib.h>
+
+/* Bench-soak build (env:stratolink_soak sets RELAY_SOLAR_MIN_MV=0) needs SubGhz.cpp
+ * pulled into the link: a fresh env's LDF resolves RadioLib but not the framework's
+ * SubGhz library, so SubGhzClass::* go undefined at link.  This shim makes a project
+ * source depend on it (compiled with that env's -I) so SubGhz.cpp is built+linked.
+ * The flight build (env:stratolink, RELAY_SOLAR_MIN_MV=3000) skips it entirely. */
+#if defined(RELAY_SOLAR_MIN_MV) && (RELAY_SOLAR_MIN_MV == 0)
+#include <SubGhz.h>
+#endif
 
 #if __has_include("secrets.h")
 #include "secrets.h"
@@ -30,7 +39,7 @@ static uint8_t nwkSKey[16];
 static uint8_t appSKey[16];
 static uint32_t fCntUp = 0;
 
-/* OTAA credentials from secrets.h — parsed at init */
+/* OTAA credentials from secrets.h, parsed at init */
 static uint8_t devEUI[8];
 static uint8_t joinEUI[8];
 static uint8_t appKey[16];
@@ -61,7 +70,7 @@ typedef struct {
 static const float US915_FREQS[] = {903.9,904.1,904.3,904.5,904.7,904.9,905.1,905.3};
 static const lora_region_t LORA_US915 = {
     /* US915 sub-band 2.  Join at DR0 (SF10/125), RX1 at DR10 (SF10/500)
-     * per RP002 RX1 data-rate offset 0 — this is the only join SF that
+     * per RP002 RX1 data-rate offset 0, this is the only join SF that
      * matches our rx1_sf without computing the DR2→DR8/DR3→DR8 cross-DR
      * mapping at runtime.  Yesterday's flight firmware ran this config
      * and joined cleanly through onethreenine gateway at -45 dBm.
@@ -80,7 +89,7 @@ static const lora_region_t LORA_EU868 = {
 
 static const float AU915_FREQS[] = {916.8,917.0,917.2,917.4,917.6,917.8,918.0,918.2};
 static const lora_region_t LORA_AU915 = {
-    /* AU915 same RP002 RX1 rule as US915 — join at DR0/SF10 to match
+    /* AU915 same RP002 RX1 rule as US915, join at DR0/SF10 to match
      * RX1 DR10/SF10/500 without cross-DR offset math.  See US915
      * block above for the rationale. */
     AU915_FREQS, 8, 923.3,  923.3, 0.6, 8,
@@ -95,7 +104,7 @@ static const lora_region_t LORA_AS923 = {
 
 /* REGION is a mutable copy of one of the const tables above, switched
  * at runtime by lorawan_set_region() based on GPS-derived geofence
- * (region_manager.cpp).  Default at boot = US915 — overwritten on the
+ * (region_manager.cpp).  Default at boot = US915, overwritten on the
  * first region check after a valid GPS fix.  Copying the struct (vs
  * a const reference) lets the same call sites work unchanged. */
 static lora_region_t REGION = LORA_US915;
@@ -245,7 +254,7 @@ static bool otaa_join(void) {
 
     /* RX1: 5s after TX.  Kick the IWDG before the busy-wait: a single
      * TX-then-RX1-then-RX2 round can take ~7 s, plus the outer retry
-     * delay (~3-7 s) — multiple iterations under the 15 s lorawan_join
+     * delay (~3-7 s), multiple iterations under the 15 s lorawan_join
      * timeout from main loop() leave only a thin margin to the 32.7 s
      * watchdog.  Refresh here so the dog only catches genuine hangs. */
     power_manager_kick_watchdog();
@@ -286,7 +295,7 @@ static bool otaa_join(void) {
 
     radio->invertIQ(false); /* restore for uplinks */
 
-    /* Restore TX config from active region — previously hardcoded to
+    /* Restore TX config from active region, previously hardcoded to
      * SF10/BW125 (US915 default) which silently corrupted uplinks in
      * any other region. */
     radio->setSpreadingFactor(REGION.tx_sf);
@@ -385,7 +394,7 @@ static void compute_mic(const uint8_t *msg, size_t msgLen, uint8_t *mic) {
  * secrets_board2.h) only define the legacy LORAWAN_DEV_EUI /
  * LORAWAN_APP_KEY pair.  The #ifndef guards below let those builds
  * succeed by mapping the legacy pair into the US915 slot and leaving
- * EU/AS/AU empty — single-region behaviour, same as before. */
+ * EU/AS/AU empty, single-region behaviour, same as before. */
 #ifndef LORAWAN_DEV_EUI_US
 #define LORAWAN_DEV_EUI_US LORAWAN_DEV_EUI
 #endif
@@ -473,13 +482,13 @@ bool lorawan_join(uint32_t timeout_ms) {
     if (!radio) return false;
     if (REGION_ID == LORA_REGION_SILENT) return false;  /* off-plan zone */
     if (!creds_loaded) {
-        LOG("[LoRaWAN] no OTAA creds for current region — skipping join");
+        LOG("[LoRaWAN] no OTAA creds for current region, skipping join");
         return false;
     }
 
     /* Skip the join if VSTOR is too low to reliably support +14 dBm TX
      * peaks (~50 mA bursts).  Below ~3.0 V the buck is in dropout and
-     * Vdd droops hard during TX — failed joins burn the supercap fast
+     * Vdd droops hard during TX, failed joins burn the supercap fast
      * (the IWDG-reset-then-rejoin spiral observed empirically drains
      * 1.7 V in 4-5 minutes).  Returning false here lets loop() proceed
      * to a normal cycle which then sleeps; setup() retries join on the
@@ -493,7 +502,7 @@ bool lorawan_join(uint32_t timeout_ms) {
     /* Wake the SX1262 from SLEEP retention (set by lorawan_sleep() on
      * the previous cycle) before any join-request TX.  Without this
      * the setFrequency()/transmit() calls in otaa_join() run against a
-     * sleeping radio and the join silently fails forever — matches
+     * sleeping radio and the join silently fails forever, matches
      * lorawan_send_uplink()'s explicit standby() pattern. */
     radio->standby();
 
@@ -546,9 +555,158 @@ bool lorawan_joined(void) { return _joined; }
 void lorawan_sleep(void) {
     /* SX1262 SLEEP w/ retention. ~3 µA. Next transmit() implicitly wakes it
      * (RadioLib calls setStandby before configuring TX). Without this, the
-     * radio stays in STDBY_RC across STOP2 — both kills the energy budget
+     * radio stays in STDBY_RC across STOP2, both kills the energy budget
      * and seems to trigger a hard reset on the RAK3172 module on STOP2 entry. */
     if (radio) (void)radio->sleep(true);
+}
+
+/* ========== Meshtastic open-relay (mission-subordinate, power-gated) ==========
+ *
+ * A header-only, KEYLESS LongFast repeater that runs on the SHARED SX1262 in the
+ * idle time between TTN cycles, ONLY when the caller says power allows.  The
+ * 16-byte Meshtastic PacketHeader is plaintext, so we forward real traffic
+ * (dedup + hop-decrement + airtime cap) WITHOUT any channel PSK, "relay what we
+ * hear, register nothing."  Validated on a live mesh 2026-06-03 (RESULTS.md).
+ *
+ * SAFETY (defense in depth): the caller (main.cpp) gates entry on FULL tier +
+ * solar + !burst; this window additionally (a) self-aborts the instant
+ * VSTOR < floor_mv, (b) caps its own TX airtime, (c) yields by max_ms so the next
+ * TTN cycle is on time, and (d) on EVERY exit restores the EXACT post-init
+ * LoRaWAN TX PHY (SF9/BW125/CR5/sync-PUBLIC/preamble-8/CRC) that send_uplink()
+ * depends on.  The LoRaWAN session (DevAddr/keys/FCnt) is never touched. */
+
+/* Meshtastic LongFast default-channel centre per region.  0 => not relay-eligible
+ * (we only TX Meshtastic where the frequency is validated + practically legal). */
+static float meshtastic_longfast_freq(lora_region_id_t id) {
+    switch (id) {
+        case LORA_REGION_US915: return 906.875f;  /* US LongFast slot 19 */
+        case LORA_REGION_EU868: return 869.525f;  /* EU LongFast */
+        default:                return 0.0f;       /* AS923/AU915/SILENT: disabled */
+    }
+}
+
+/* Forwarded-frame dedup ring (managed-flood good-citizen: never re-forward the
+ * same (from,id) twice).  Persists across windows for stronger suppression. */
+#define RELAY_DEDUP_N 32
+static uint32_t s_dd_from[RELAY_DEDUP_N];
+static uint32_t s_dd_id[RELAY_DEDUP_N];
+static uint8_t  s_dd_head = 0;
+static bool relay_dd_seen(uint32_t f, uint32_t i) {
+    for (uint8_t k = 0; k < RELAY_DEDUP_N; k++)
+        if (s_dd_from[k] == f && s_dd_id[k] == i) return true;
+    return false;
+}
+static void relay_dd_mark(uint32_t f, uint32_t i) {
+    s_dd_from[s_dd_head] = f; s_dd_id[s_dd_head] = i;
+    s_dd_head = (uint8_t)((s_dd_head + 1) % RELAY_DEDUP_N);
+}
+static inline uint32_t relay_rd_u32le(const uint8_t* p) {
+    return (uint32_t)p[0] | ((uint32_t)p[1] << 8) |
+           ((uint32_t)p[2] << 16) | ((uint32_t)p[3] << 24);
+}
+
+static volatile bool s_relay_rx = false;
+static void relay_rx_isr(void) { s_relay_rx = true; }
+static lorawan_relay_stats_t s_relay = {0};
+static uint8_t s_relay_buf[256];
+
+void lorawan_relay_get_stats(lorawan_relay_stats_t* out) { if (out) *out = s_relay; }
+
+/* Restore the exact post-init LoRaWAN TX PHY that send_uplink()/join depend on.
+ * Frequency is restored too (TTN paths set it per-TX, but this honors the
+ * "post-init state" contract and removes the off-channel trap of leaving the
+ * radio tuned to the Meshtastic frequency). */
+static void relay_restore_lorawan_phy(void) {
+    radio->standby();
+    radio->setFrequency(REGION.init_freq);
+    radio->setSpreadingFactor(REGION.tx_sf);
+    radio->setBandwidth(REGION.tx_bw);
+    radio->setCodingRate(5);
+    radio->setSyncWord(RADIOLIB_SX126X_SYNC_WORD_PUBLIC);
+    radio->setPreambleLength(8);
+    radio->setCRC(true);
+    radio->invertIQ(false);
+}
+
+uint32_t lorawan_relay_window(uint32_t max_ms, uint16_t floor_mv) {
+    if (!radio) return 0;
+    float freq = meshtastic_longfast_freq(REGION_ID);
+    if (freq <= 0.0f) return 0;                    /* region not relay-eligible */
+
+    uint32_t start = millis();
+
+    /* Switch the shared radio to Meshtastic LongFast (SF11/BW250/CR4-5,
+     * sync 0x2B, 16-symbol preamble, explicit header + CRC, non-inverted IQ). */
+    radio->standby();
+    radio->setFrequency(freq);
+    radio->setSpreadingFactor(11);
+    radio->setBandwidth(250.0);
+    radio->setCodingRate(5);
+    radio->setSyncWord(0x2B);
+    radio->setPreambleLength(16);
+    radio->setCRC(true);
+    radio->invertIQ(false);
+
+    s_relay_rx = false;
+    radio->setPacketReceivedAction(relay_rx_isr);
+    if (radio->startReceive() != RADIOLIB_ERR_NONE) {
+        radio->clearPacketReceivedAction();
+        relay_restore_lorawan_phy();
+        return millis() - start;
+    }
+
+    uint32_t tx_airtime_ms = 0;
+    uint32_t last_hk = start;
+    while (millis() - start < max_ms) {
+        if (s_relay_rx) {
+            s_relay_rx = false;
+            size_t len = radio->getPacketLength();
+            if (len >= 16 && len <= sizeof(s_relay_buf) &&
+                radio->readData(s_relay_buf, len) == RADIOLIB_ERR_NONE) {
+                s_relay.rx_count++;
+                s_relay.last_rssi = (int16_t)radio->getRSSI();
+                uint8_t  flags = s_relay_buf[12];
+                uint8_t  hop   = flags & 0x07;
+                uint32_t from  = relay_rd_u32le(s_relay_buf + 4);
+                uint32_t id    = relay_rd_u32le(s_relay_buf + 8);
+                s_relay.last_from = from;
+                if (hop == 0) {
+                    s_relay.hop0++;                         /* hop-exhausted: drop */
+                } else if (relay_dd_seen(from, id)) {
+                    s_relay.dedup++;                        /* already forwarded */
+                } else {
+                    uint32_t elapsed = millis() - start;
+                    /* airtime self-cap: keep our TX <= RELAY_AIRTIME_CAP_PCT% of the window */
+                    if (tx_airtime_ms == 0 ||
+                        tx_airtime_ms * 100u < (uint32_t)RELAY_AIRTIME_CAP_PCT * elapsed) {
+                        relay_dd_mark(from, id);
+                        s_relay_buf[12] = (uint8_t)((flags & ~0x07) | (hop - 1)); /* hop-1 */
+                        s_relay_buf[15] = 0xD1;             /* relay_node marker (our forward) */
+                        uint32_t t0 = millis();
+                        if (radio->transmit(s_relay_buf, len) == RADIOLIB_ERR_NONE) {
+                            s_relay.fwd++;
+                            tx_airtime_ms += (millis() - t0);
+                        }
+                    } else {
+                        s_relay.cap_skip++;
+                    }
+                }
+            }
+            s_relay_rx = false;
+            radio->startReceive();
+        }
+        uint32_t now = millis();
+        if (now - last_hk >= 1000) {                        /* housekeeping ~1 Hz */
+            last_hk = now;
+            power_manager_kick_watchdog();
+            if (power_adc_read_vSTOR_mv() < floor_mv) break; /* floor-abort: protect mission reserve */
+        }
+        delay(2);
+    }
+
+    radio->clearPacketReceivedAction();
+    relay_restore_lorawan_phy();
+    return millis() - start;
 }
 
 /* ========== Runtime region switching ========== */
@@ -556,12 +714,12 @@ void lorawan_sleep(void) {
 void lorawan_set_region(lora_region_id_t id) {
     if (id == REGION_ID) return;  /* no-op: same plan */
 
-    /* Any region change invalidates the LoRaWAN session — TTN clusters
+    /* Any region change invalidates the LoRaWAN session, TTN clusters
      * (nam1, eu1) are independent, DevAddr / NwkSKey / AppSKey from the
      * old region won't authenticate against the new gateway, and
      * fCntUp must reset to 0 (per-session replay protection).  Done
      * up-front so the SILENT branch below gets the same invalidation
-     * as a "normal" region switch — caught by the hardware trajectory
+     * as a "normal" region switch, caught by the hardware trajectory
      * test which flagged "fCntUp not reset on AS923->SILENT". */
     _joined = false;
     fCntUp  = 0;
@@ -576,7 +734,7 @@ void lorawan_set_region(lora_region_id_t id) {
         default:
             REGION_ID = LORA_REGION_SILENT;
             creds_loaded = false;
-            return;  /* skip radio reconfig — SILENT keeps prev band */
+            return;  /* skip radio reconfig, SILENT keeps prev band */
     }
 
     REGION_ID = id;
@@ -632,7 +790,7 @@ bool lorawan_import_session(const lorawan_session_t* in) {
      * use session keys (NwkSKey/AppSKey), but if the session ever
      * gets invalidated (region switch, replay collision, etc.) we
      * need creds available for the rejoin.  No-op if the region has
-     * no creds in secrets — uplinks still work with the restored
+     * no creds in secrets, uplinks still work with the restored
      * session keys, just any future rejoin will fail. */
     load_creds_for_current_region();
 

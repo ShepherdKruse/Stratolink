@@ -228,14 +228,29 @@ void loop() {
     }
 
     uint32_t sleep_sec = burst_mode ? (uint32_t)BURST_SLEEP_SEC : power_adc_get_sleep_interval_sec(tier);
+    uint32_t sleep_ms  = sleep_sec * 1000;
 
-    /* Quiesce the heavy peripherals before entering MCU STOP1.
-     * Without these calls:
-     *   - SX1262 sits in STDBY_RC (~600 µA), drains cap + hard-resets MCU on STOP2.
-     *   - u-blox MAX-M10S keeps tracking (~25 mA), drains 1F cap in ~2 min.
-     * Both must sleep alongside the MCU for night/no-solar survival. */
-    lorawan_sleep();
+    /* GPS sleeps first, it isn't needed in the idle window and otherwise keeps
+     * tracking at ~25 mA (drains the 1F cap in ~2 min). */
     gps_ublox_sleep();
 
-    power_manager_sleep_ms(sleep_sec * 1000);
+#if defined(MESHTASTIC_RELAY_ENABLE) && MESHTASTIC_RELAY_ENABLE
+    /* Open Meshtastic relay in the idle window, ONLY on surplus power, NEVER at
+     * the expense of the telemetry mission.  Gate: FULL tier (cap full, fresh
+     * post-TX read) + solar actively charging + not in freefall-burst.  The
+     * window self-aborts below RELAY_FLOOR_MV and restores the LoRaWAN PHY on
+     * exit, so the next TTN cycle is unaffected.  Time spent relaying counts
+     * against the sleep budget, preserving the uplink cadence. */
+    if (!burst_mode && power_adc_get_tier() == POWER_TIER_FULL &&
+        ti.solar_mv >= RELAY_SOLAR_MIN_MV) {
+        uint32_t used = lorawan_relay_window(sleep_ms, RELAY_FLOOR_MV);
+        sleep_ms = (used < sleep_ms) ? (sleep_ms - used) : 0;
+    }
+#endif
+
+    /* Quiesce the radio before MCU STOP1: the SX1262 otherwise sits in STDBY_RC
+     * (~600 µA), draining the cap and hard-resetting the MCU on STOP2 entry. */
+    lorawan_sleep();
+
+    power_manager_sleep_ms(sleep_ms);
 }

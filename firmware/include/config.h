@@ -68,6 +68,22 @@
 #define BURST_MAX_CYCLES      30   /* ~5-10 min of beacons, ~9 s airtime; >> a real freefall transient */
 #define BURST_COOLDOWN_CYCLES 3    /* consecutive freefall-free wakes required to re-arm */
 
+// ===== Meshtastic open-relay (mission-subordinate, power-gated) =====
+// In the idle time between TTN cycles the flight radio relays real Meshtastic
+// LongFast traffic (header-only, KEYLESS: dedup + hop-decrement + airtime cap),
+// but ONLY on surplus power and NEVER at the expense of telemetry.  Validated on
+// a live mesh 2026-06-03.  See analysis/network/{04,05,06,07}*.md + bench/RESULTS.md.
+//   Gate (main.cpp): FULL tier (VSTOR>=4.5V) AND solar charging AND !burst.
+//   Abort (lorawan.cpp): the instant VSTOR < RELAY_FLOOR_MV.
+// The 4.5V start / 4.2V abort band IS the hysteresis; 4.2V leaves a 0.9V reserve
+// above the 3.32V brownout and 1.2V above the 3.0V TTN-TX floor.
+#define MESHTASTIC_RELAY_ENABLE   true
+#ifndef RELAY_SOLAR_MIN_MV               /* overridable for the indoor bench soak (env:stratolink_soak) */
+#define RELAY_SOLAR_MIN_MV        3000   /* only relay when solar is actively charging */
+#endif
+#define RELAY_FLOOR_MV            4200   /* abort relay below this VSTOR (>> 3.32 V brownout) */
+#define RELAY_AIRTIME_CAP_PCT     5      /* cap our own TX airtime to this % of the relay window */
+
 // Debug Configuration
 #define DEBUG_ENABLE true
 #define DEBUG_SERIAL_BAUD 115200

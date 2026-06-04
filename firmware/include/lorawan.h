@@ -9,7 +9,7 @@
 
 /**
  * LoRaWAN regional frequency plan.  Selected at runtime by
- * lorawan_set_region() — see region_manager.h for GPS-driven dispatch.
+ * lorawan_set_region(), see region_manager.h for GPS-driven dispatch.
  * Ordering is stable across firmware versions so it can be persisted
  * to TAMP backup registers.
  */
@@ -18,12 +18,12 @@ typedef enum {
     LORA_REGION_EU868  = 1,
     LORA_REGION_AS923  = 2,
     LORA_REGION_AU915  = 3,
-    LORA_REGION_SILENT = 4,   /* CN470, polar, etc — no TX, no join */
+    LORA_REGION_SILENT = 4,   /* CN470, polar, etc, no TX, no join */
     LORA_REGION_COUNT          /* sentinel, not a selectable value */
 } lora_region_id_t;
 
 /**
- * Switch active region.  Invalidates any current OTAA session — a new
+ * Switch active region.  Invalidates any current OTAA session, a new
  * join is required on the next TX attempt (handled by main.cpp).
  * No-op if id matches the current region.
  *
@@ -87,7 +87,7 @@ bool lorawan_joined(void);
 
 /**
  * Put the SX1262 SubGHz radio into SLEEP retention mode (~3 µA, config kept).
- * MUST be called before MCU STOP2 entry — otherwise the radio sits in
+ * MUST be called before MCU STOP2 entry, otherwise the radio sits in
  * STDBY_RC drawing ~600 µA, which both wrecks the night-survival energy
  * budget and (on the RAK3172 module) appears to leave pending interrupts
  * that hard-reset the chip when STOP2 attempts to enter or exit.
@@ -95,5 +95,33 @@ bool lorawan_joined(void);
  * Subsequent transmit() calls wake the radio implicitly via SetStandby.
  */
 void lorawan_sleep(void);
+
+/* ===== Meshtastic open-relay (mission-subordinate, power-gated) ===== */
+
+/** Cumulative relay diagnostics (J-Link readable; not in telemetry). */
+typedef struct {
+    uint32_t rx_count;    /* LongFast frames received */
+    uint32_t fwd;         /* frames forwarded (hop-1, opaque) */
+    uint32_t dedup;       /* duplicates suppressed */
+    uint32_t hop0;        /* hop-exhausted frames dropped */
+    uint32_t cap_skip;    /* forwards skipped by the airtime cap */
+    uint32_t last_from;   /* NodeNum of the last received frame */
+    int16_t  last_rssi;   /* RSSI of the last received frame (dBm) */
+} lorawan_relay_stats_t;
+
+/**
+ * Run a header-only, KEYLESS Meshtastic LongFast repeater on the shared SX1262
+ * for up to max_ms, then restore the exact post-init LoRaWAN TX PHY.  Forwards
+ * real traffic (dedup + hop-decrement + airtime cap) on the active region's
+ * LongFast frequency (US915/EU868 only; returns 0 otherwise).
+ *
+ * MISSION-SUBORDINATE: the CALLER gates entry on power/region/schedule; this
+ * function additionally self-aborts the instant VSTOR < floor_mv.  The LoRaWAN
+ * session (DevAddr/keys/FCnt) is never touched.  Returns ms actually spent.
+ */
+uint32_t lorawan_relay_window(uint32_t max_ms, uint16_t floor_mv);
+
+/** Copy cumulative relay diagnostics into out. */
+void lorawan_relay_get_stats(lorawan_relay_stats_t* out);
 
 #endif /* LORAWAN_H */
