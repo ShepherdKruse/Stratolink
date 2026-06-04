@@ -5,7 +5,7 @@ import { GAP_WIND_MODE, gpsGapHours, STALE_GPS_THRESHOLD_H } from './staleGpsExt
 import { computePathReconstruction, type GapCacheEntry, type PathReconstructionResult } from './pathReconstruction';
 import { hindcastInputHash, readGapCache, readStoredHindcast, storeHindcast, writeGapCache } from './hindcastStorage';
 import { windAt, type GfsGrid } from './gfsGrid';
-import { chooseGridStep, fetchWindCube, sampleWind, type WindCube } from './windCube';
+import { chooseGridStep, fetchMemberCube, fetchWindCube, listMemberCubes, sampleWind, type WindCube } from './windCube';
 
 const CFG = {
     N_ENSEMBLE: 200,
@@ -355,28 +355,50 @@ export async function computeMonteCarloForecast(input: MonteCarloForecastInput):
     const startLon = lastFix.lon;
     const spanHours = (stale ? gapH : 0) + totalHours;
 
-    /* One spec shared by every member; each integrateBalloonPathT call draws its
-     * own AR(1) realization internally (correlated over PERTURB_TAU_H). */
-    const pertSpec = {
-        speedSigma: bias.speedSigma,
-        dirSigma: bias.dirSigma,
-        altSigma: CFG.ALT_SIGMA_HPA,
-        tauHours: CFG.PERTURB_TAU_H,
-    };
+    const ZERO_PERT = { speedSigma: 0, dirSigma: 0, altSigma: 0, tauHours: CFG.PERTURB_TAU_H };
+
+    /* Two ways to build the ensemble:
+     *   - GEFS members (preferred): one REAL trajectory per member, each integrated
+     *     in its OWN wind cube — the member field IS the perturbation, so no
+     *     synthetic jitter (bias is neutral, pert = 0). Streamed one member at a
+     *     time (binary .slwc keeps that cheap). Flow-dependent, physically-grounded
+     *     spread; the nominal is the control member (m00).
+     *   - Parametric (fallback): jitter speed/heading around the single GFS field. */
+    const memberLabels = input.deviceId ? await listMemberCubes(input.deviceId) : [];
     const ensemble: Array<Array<[number, number]>> = [];
-    for (let i = 0; i < nEnsemble; i++) {
-        ensemble.push(integrateBalloonPathT(startLat, startLon, fcCube, bias, pertSpec, startMs, spanHours));
+    let nominal!: Array<[number, number]>;
+    let windSource = fcCube.source;
+
+    if (memberLabels.length >= 2) {
+        let control: Array<[number, number]> | null = null;
+        for (const label of memberLabels) {
+            const mc = await fetchMemberCube(input.deviceId!, label);
+            if (!mc) continue;
+            const path = integrateBalloonPathT(startLat, startLon, mc, bias, ZERO_PERT, startMs, spanHours);
+            ensemble.push(path);
+            if (label === 'm00') control = path;
+        }
+        if (ensemble.length) {
+            nominal = control ?? ensemble[0];
+            windSource = 'gefs-ensemble';
+        }
     }
 
-    const nominal = integrateBalloonPathT(
-        startLat,
-        startLon,
-        fcCube,
-        bias,
-        { speedSigma: 0, dirSigma: 0, altSigma: 0, tauHours: CFG.PERTURB_TAU_H },
-        startMs,
-        spanHours,
-    );
+    /* Parametric fallback — no GEFS members (or none loaded): jitter speed/heading
+     * around the single GFS field. Each integrateBalloonPathT draws its own AR(1)
+     * realization internally (correlated over PERTURB_TAU_H). */
+    if (!ensemble.length) {
+        const pertSpec = {
+            speedSigma: bias.speedSigma,
+            dirSigma: bias.dirSigma,
+            altSigma: CFG.ALT_SIGMA_HPA,
+            tauHours: CFG.PERTURB_TAU_H,
+        };
+        for (let i = 0; i < nEnsemble; i++) {
+            ensemble.push(integrateBalloonPathT(startLat, startLon, fcCube, bias, pertSpec, startMs, spanHours));
+        }
+        nominal = integrateBalloonPathT(startLat, startLon, fcCube, bias, ZERO_PERT, startMs, spanHours);
+    }
 
     /** Hourly index of "now" within each trajectory (= elapsed gap hours); 0 when
      *  GPS is fresh (integration starts at "now"). */
@@ -507,14 +529,14 @@ export async function computeMonteCarloForecast(input: MonteCarloForecastInput):
             V: Array.from(nowGrid.V).map(round1),
         },
         metadata: {
-            n_ensemble: nEnsemble,
+            n_ensemble: ensemble.length,
             step_hours: CFG.STEP_HOURS,
             speed_sigma: Math.round(bias.speedSigma * 1000) / 1000,
             dir_sigma_deg: round1(bias.dirSigma),
             alt_sigma_hpa: CFG.ALT_SIGMA_HPA,
             grid_step_deg: fcCube.gridStep,
             recon_grid_step_deg: reconCube.gridStep,
-            wind_source: fcCube.source,
+            wind_source: windSource,
             ...(fcCube.generatedAt ? { wind_cube_generated_at: fcCube.generatedAt } : {}),
             compute_ms: Date.now() - t0,
             reconstruction_ms: reconstruction.compute_ms,

@@ -1,5 +1,5 @@
-import { get } from '@vercel/blob';
-import { readFile } from 'node:fs/promises';
+import { get, list } from '@vercel/blob';
+import { readFile, readdir } from 'node:fs/promises';
 import { join } from 'node:path';
 import { gunzipSync } from 'node:zlib';
 import { fetchWindGridHourlySeries, snapPressureHpa, type WindGridBounds } from './fetchWindGrid';
@@ -166,6 +166,47 @@ async function readCubeFromBlob(deviceId: string, kind: CubeKind): Promise<WindC
         if (cube) return cube;
     }
     return null;
+}
+
+/* ── GEFS ensemble: per-member cubes ({device}-mNN.slwc) ───────────────────────
+ * The ensemble compute integrates one trajectory per member (each in its own
+ * flow). Members are listed and loaded one at a time so peak memory stays flat
+ * regardless of member count — the .slwc binary makes a single member's load
+ * cheap. Empty list ⇒ no GEFS ensemble for this device (fall back to the
+ * parametric jitter). */
+export async function listMemberCubes(deviceId: string): Promise<string[]> {
+    const id = encodeURIComponent(deviceId);
+    const re = new RegExp(`^${id.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}-m(\\d+)\\.slwc(\\.gz)?$`);
+    const dir = process.env.WIND_CUBE_DIR;
+    if (dir) {
+        try {
+            const labels = new Set<string>();
+            for (const f of await readdir(dir)) {
+                const m = f.match(re);
+                if (m) labels.add(`m${m[1]}`);
+            }
+            return [...labels].sort();
+        } catch { return []; }
+    }
+    if (isBlobStorageConfigured()) {
+        try {
+            const { blobs } = await list({ prefix: `cubes/${id}-m` });
+            const labels = new Set<string>();
+            for (const b of blobs) {
+                const m = b.pathname.replace(/^cubes\//, '').match(re);
+                if (m) labels.add(`m${m[1]}`);
+            }
+            return [...labels].sort();
+        } catch { return []; }
+    }
+    return [];
+}
+
+/** Load one member's cube ({device}-mNN), local-dir first then Blob. */
+export function fetchMemberCube(deviceId: string, member: string): Promise<WindCube | null> {
+    const dir = process.env.WIND_CUBE_DIR;
+    const id = `${deviceId}-${member}`;
+    return dir ? readCubeFromDir(dir, id, 'reconstruction') : readCubeFromBlob(id, 'reconstruction');
 }
 
 /**

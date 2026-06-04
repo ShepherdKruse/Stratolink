@@ -250,13 +250,27 @@ JSON:
   serverless cold-miss fallback.
 
 End state: drop the cube upload and disable the external cron → `/api/compute-forecast`,
-so cubes never leave the runner and Blob holds only forecast JSON. **GEFS plugs in
-here** — the heavy 31-member integration runs in this step (verified prototype:
-end-to-end GEFS for a 123 h-stale balloon ingested ~0.76 GB at one level and
-showed the dead-reckoned "now" is a ~3,500 km *cloud*, not a point — the honest
-representation our parametric jitter / single GFS track can't give). Remaining
-GEFS work: per-member cube ingest + per-member integration in the compute, plus
-bbox subsetting or fetch-once-resample-many to cut the global-field download.
+so cubes never leave the runner and Blob holds only forecast JSON.
+
+### GEFS ensemble (`scripts/gefs_ingest.py`)
+
+The runner is also where the **GEFS ensemble** runs. `gefs_ingest.py` builds one
+binary cube per member (`{device}-mNN.slwc`, 0.5°, 250↔300 interp to float
+pressure, time-correct gap sourcing, concurrent prefetch), reusing the gfs_ingest
+helpers + `.slwc` packer. In the compute, `computeMonteCarloForecast` detects
+member cubes (`listMemberCubes`) and builds the ensemble as **one real trajectory
+per member** — each integrated in its *own* cube (the member field is the
+perturbation; neutral bias, zero synthetic jitter), **streamed one member at a
+time** so peak memory stays flat. Nominal = control (`m00`); falls back to the
+parametric GFS+jitter ensemble when no member cubes exist. This gives
+flow-dependent spread: for a 123 h-stale balloon the dead-reckoned "now" is a
+~3,500 km *cloud*, not the deceptively crisp point a single GFS track implies.
+
+Cost lives entirely on the free runner: ~1–1.5 GB ingest per stale device (each
+byte-range GET pulls a whole-globe field — GRIB2 messages aren't spatially
+subsettable). Remaining optimizations: bbox subsetting (NOMADS `g2subset`) or
+fetch-once-resample-many across the fleet; and box-sizing for the very wide stale
+clouds (currently a generous capped pad, coarsened by the point budget).
 
 ## 7. Deferred / known follow-ups
 

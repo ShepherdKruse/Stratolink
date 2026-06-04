@@ -53,12 +53,21 @@ jobs:
           cache-dependency-path: web/package-lock.json
       - run: npm ci
 
-      # 1. Build cubes from NOAA → web/.windcube/cubes/*.json (stays on the runner).
+      # 1a. Build GFS cubes (reconstruction + forecast) → web/.windcube/cubes/*.slwc.
       - name: Ingest GFS → cubes
         env:
           NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
           SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
         run: micromamba run -n gfs python scripts/gfs_ingest.py ${{ github.event.inputs.device }}
+
+      # 1b. Build GEFS per-member cubes ({device}-mNN.slwc) for the ensemble. The
+      #     compute step auto-detects these and switches to a member-per-trajectory
+      #     ensemble; if it fails or is skipped, compute falls back to GFS+jitter.
+      - name: Ingest GEFS ensemble → member cubes
+        env:
+          NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+        run: micromamba run -n gfs python scripts/gefs_ingest.py ${{ github.event.inputs.device }}
 
       # 2. Compute forecasts on the runner, reading the local cubes by device
       #    (WIND_CUBE_DIR), and store only the small forecast JSON to Blob — the
