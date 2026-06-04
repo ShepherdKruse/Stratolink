@@ -1,5 +1,5 @@
-import { get } from '@vercel/blob';
-import { readFile } from 'node:fs/promises';
+import { get, list } from '@vercel/blob';
+import { readFile, readdir } from 'node:fs/promises';
 import { join } from 'node:path';
 import { gunzipSync } from 'node:zlib';
 import { fetchWindGridHourlySeries, snapPressureHpa, type WindGridBounds } from './fetchWindGrid';
@@ -61,6 +61,59 @@ function cubeFromRaw(raw: RawCube): WindCube {
     };
 }
 
+/** Header of the packed binary cube (`.slwc`). Geometry is constant across a
+ *  cube's grids, so it lives here once instead of being repeated per grid. */
+type BinHeader = {
+    v: number; scale: number;
+    t0Ms: number; stepMs: number; gridStep: number; levelHpa: number;
+    bounds: WindGridBounds; source?: string; generated_at?: string;
+    lat0: number; dLat: number; nLat: number; lon0: number; dLon: number; nLon: number;
+    nGrids: number;
+};
+
+/** Reconstitute a WindCube from the packed binary form:
+ *    [uint32 LE headerLen][header JSON utf-8, padded to 4-byte boundary]
+ *    [ per grid: int16 U[nLat*nLon] then int16 V[nLat*nLon], little-endian ]
+ *  Values are stored as int16 = round(value*scale) — lossless vs the old 0.1 m/s
+ *  JSON rounding — and decoded to Float32 (÷scale) so `windAt` and every caller
+ *  stay byte-for-byte unchanged. ~zero parse cost vs JSON.parse of millions of
+ *  numbers; this is what makes the GEFS 31× member volume tractable. */
+function cubeFromBinary(raw: Buffer): WindCube {
+    /* Copy to a fresh ArrayBuffer at offset 0 — a gunzip/Blob Buffer can sit at a
+     * non-2-aligned byteOffset in a pool, which Int16Array views forbid. */
+    const ab = raw.buffer.slice(raw.byteOffset, raw.byteOffset + raw.byteLength);
+    const dv = new DataView(ab);
+    const headerLen = dv.getUint32(0, true);
+    const h = JSON.parse(Buffer.from(ab, 4, headerLen).toString('utf8')) as BinHeader;
+    const scale = h.scale || 10;
+    const n = h.nLat * h.nLon;
+    let off = 4 + headerLen; /* 4-byte aligned by the writer's padding */
+    const grids: GfsGrid[] = [];
+    for (let g = 0; g < h.nGrids; g++) {
+        const U16 = new Int16Array(ab, off, n); off += n * 2;
+        const V16 = new Int16Array(ab, off, n); off += n * 2;
+        grids.push({
+            lat0: h.lat0, dLat: h.dLat, nLat: h.nLat, lon0: h.lon0, dLon: h.dLon, nLon: h.nLon,
+            U: Float32Array.from(U16, (x) => x / scale),
+            V: Float32Array.from(V16, (x) => x / scale),
+        });
+    }
+    return {
+        t0Ms: h.t0Ms, stepMs: h.stepMs, gridStep: h.gridStep, levelHpa: h.levelHpa,
+        bounds: h.bounds, source: h.source ?? 'gfs', generatedAt: h.generated_at, grids,
+    };
+}
+
+/** Decode a cube blob by filename: gunzip `.gz`, then binary `.slwc` or JSON. */
+function decodeCube(name: string, buf: Buffer): WindCube {
+    const gz = name.endsWith('.gz');
+    const body = gz ? gunzipSync(buf) : buf;
+    const base = gz ? name.slice(0, -3) : name;
+    return base.endsWith('.slwc')
+        ? cubeFromBinary(body)
+        : cubeFromRaw(JSON.parse(body.toString('utf8')) as RawCube);
+}
+
 /** Which cube to read for a device — the small hourly forecast cube or the
  *  full-mission reconstruction cube (see scripts/gfs_ingest.py). */
 export type CubeKind = 'forecast' | 'reconstruction';
@@ -71,11 +124,7 @@ async function getCubeObject(key: string): Promise<WindCube | null> {
     try {
         const r = await get(key, { access: 'private', useCache: false });
         if (!r || r.statusCode !== 200) return null;
-        if (key.endsWith('.gz')) {
-            const buf = Buffer.from(await new Response(r.stream).arrayBuffer());
-            return cubeFromRaw(JSON.parse(gunzipSync(buf).toString('utf8')) as RawCube);
-        }
-        return cubeFromRaw((await new Response(r.stream).json()) as RawCube);
+        return decodeCube(key, Buffer.from(await new Response(r.stream).arrayBuffer()));
     } catch {
         return null;
     }
@@ -93,33 +142,71 @@ async function getCubeObject(key: string): Promise<WindCube | null> {
  *  never have to be pulled into the memory/time-limited serverless function. Set
  *  `WIND_CUBE_DIR` to enable. Never throws. */
 async function readCubeFromDir(dir: string, deviceId: string, kind: CubeKind): Promise<WindCube | null> {
-    const id = encodeURIComponent(deviceId);
-    const names =
-        kind === 'forecast'
-            ? [`${id}-fc.json.gz`, `${id}-fc.json`, `${id}.json.gz`, `${id}.json`]
-            : [`${id}.json.gz`, `${id}.json`];
-    for (const name of names) {
+    for (const name of cubeCandidates(encodeURIComponent(deviceId), kind)) {
         try {
-            const buf = await readFile(join(dir, name));
-            const txt = name.endsWith('.gz') ? gunzipSync(buf).toString('utf8') : buf.toString('utf8');
-            return cubeFromRaw(JSON.parse(txt) as RawCube);
+            return decodeCube(name, await readFile(join(dir, name)));
         } catch { /* try next candidate */ }
     }
     return null;
 }
 
+/** Filenames to try for a device's cube, newest format first: binary `.slwc`
+ *  (gzipped then raw) before legacy JSON, so old cubes still read during the
+ *  format-migration deploy window. The `forecast` kind also falls back to the
+ *  full reconstruction cube if no `-fc` cube exists yet. */
+function cubeCandidates(id: string, kind: CubeKind): string[] {
+    const variants = (stem: string) => [`${stem}.slwc.gz`, `${stem}.slwc`, `${stem}.json.gz`, `${stem}.json`];
+    return kind === 'forecast' ? [...variants(`${id}-fc`), ...variants(id)] : variants(id);
+}
+
 async function readCubeFromBlob(deviceId: string, kind: CubeKind): Promise<WindCube | null> {
     if (!isBlobStorageConfigured()) return null;
-    const id = encodeURIComponent(deviceId);
-    const candidates =
-        kind === 'forecast'
-            ? [`cubes/${id}-fc.json.gz`, `cubes/${id}-fc.json`, `cubes/${id}.json.gz`, `cubes/${id}.json`]
-            : [`cubes/${id}.json.gz`, `cubes/${id}.json`];
-    for (const key of candidates) {
-        const cube = await getCubeObject(key);
+    for (const name of cubeCandidates(encodeURIComponent(deviceId), kind)) {
+        const cube = await getCubeObject(`cubes/${name}`);
         if (cube) return cube;
     }
     return null;
+}
+
+/* ── GEFS ensemble: per-member cubes ({device}-mNN.slwc) ───────────────────────
+ * The ensemble compute integrates one trajectory per member (each in its own
+ * flow). Members are listed and loaded one at a time so peak memory stays flat
+ * regardless of member count — the .slwc binary makes a single member's load
+ * cheap. Empty list ⇒ no GEFS ensemble for this device (fall back to the
+ * parametric jitter). */
+export async function listMemberCubes(deviceId: string): Promise<string[]> {
+    const id = encodeURIComponent(deviceId);
+    const re = new RegExp(`^${id.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}-m(\\d+)\\.slwc(\\.gz)?$`);
+    const dir = process.env.WIND_CUBE_DIR;
+    if (dir) {
+        try {
+            const labels = new Set<string>();
+            for (const f of await readdir(dir)) {
+                const m = f.match(re);
+                if (m) labels.add(`m${m[1]}`);
+            }
+            return [...labels].sort();
+        } catch { return []; }
+    }
+    if (isBlobStorageConfigured()) {
+        try {
+            const { blobs } = await list({ prefix: `cubes/${id}-m` });
+            const labels = new Set<string>();
+            for (const b of blobs) {
+                const m = b.pathname.replace(/^cubes\//, '').match(re);
+                if (m) labels.add(`m${m[1]}`);
+            }
+            return [...labels].sort();
+        } catch { return []; }
+    }
+    return [];
+}
+
+/** Load one member's cube ({device}-mNN), local-dir first then Blob. */
+export function fetchMemberCube(deviceId: string, member: string): Promise<WindCube | null> {
+    const dir = process.env.WIND_CUBE_DIR;
+    const id = `${deviceId}-${member}`;
+    return dir ? readCubeFromDir(dir, id, 'reconstruction') : readCubeFromBlob(id, 'reconstruction');
 }
 
 /**

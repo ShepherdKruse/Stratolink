@@ -17,6 +17,7 @@ import io
 import json
 import os
 import re
+import struct
 import sys
 import time
 import urllib.parse
@@ -307,11 +308,12 @@ def sample_grids(bounds, step, start, end, step_h, target_p, latest, now, tag=""
         U = uv["u"][np.ix_(rows_idx, cols_idx)]
         V = uv["v"][np.ix_(rows_idx, cols_idx)]
         times.append(int(t.timestamp() * 1000))
+        # Keep raw numpy arrays; pack_cube() int16-quantizes them at write time
+        # (no giant Python list of rounded floats — faster + less memory).
         grids.append({
             "lat0": float(lats[0]), "dLat": step, "nLat": len(lats),
             "lon0": float(lons[0]), "dLon": step, "nLon": len(lons),
-            "U": [round(float(x), 1) for x in U.ravel()],
-            "V": [round(float(x), 1) for x in V.ravel()],
+            "U": U.ravel(), "V": V.ravel(),
         })
         t += timedelta(hours=step_h)
 
@@ -325,12 +327,43 @@ def sample_grids(bounds, step, start, end, step_h, target_p, latest, now, tag=""
     }, len(lats), len(lons)
 
 
+SCALE = 10  # store winds as int16 = round(value*SCALE); lossless vs the old 0.1 rounding
+
+
+def pack_cube(cube):
+    """Pack a cube dict into the .slwc binary form (see windCube.ts cubeFromBinary):
+      [uint32 LE headerLen][header JSON utf-8, padded to a 4-byte boundary]
+      [ per grid: int16 U[nLat*nLon] then int16 V[nLat*nLon], little-endian ].
+    Geometry is constant across grids, so it lives in the header once."""
+    g0 = cube["grids"][0]
+    header = {
+        "v": 1, "scale": SCALE,
+        "source": cube.get("source", "gfs"),
+        "generated_at": cube.get("generated_at"),
+        "latest_cycle_utc": cube.get("latest_cycle_utc"),
+        "levelHpa": cube["levelHpa"], "gridStep": cube["gridStep"],
+        "t0Ms": cube["t0Ms"], "stepMs": cube["stepMs"], "bounds": cube["bounds"],
+        "lat0": g0["lat0"], "dLat": g0["dLat"], "nLat": g0["nLat"],
+        "lon0": g0["lon0"], "dLon": g0["dLon"], "nLon": g0["nLon"],
+        "nGrids": len(cube["grids"]),
+    }
+    hb = json.dumps(header, separators=(",", ":")).encode("utf-8")
+    hb += b" " * ((-(4 + len(hb))) % 4)            # pad so the payload starts 4-byte aligned
+    parts = [struct.pack("<I", len(hb)), hb]
+    for g in cube["grids"]:
+        for comp in ("U", "V"):
+            a = np.asarray(g[comp], dtype=np.float64)
+            parts.append(np.clip(np.round(a * SCALE), -32000, 32000).astype("<i2").tobytes())
+    return b"".join(parts)
+
+
 def write_cube(device, suffix, cube, nlat, nlon, tag):
     os.makedirs(OUTDIR, exist_ok=True)
-    out = os.path.join(OUTDIR, f"{device}{suffix}.json")
-    json.dump(cube, open(out, "w"))
+    out = os.path.join(OUTDIR, f"{device}{suffix}.slwc")
+    with open(out, "wb") as f:
+        f.write(pack_cube(cube))
     print(f"    {tag}: {len(cube['grids'])} grids {nlat}x{nlon} @ {cube['gridStep']}° "
-          f"({cube['stepMs']//3600000}h step) -> {os.path.getsize(out)//1024} KB")
+          f"({cube['stepMs']//3600000}h step) -> {os.path.getsize(out)//1024} KB (.slwc)")
 
 
 def build_cube(device, fixes, target_p, latest):

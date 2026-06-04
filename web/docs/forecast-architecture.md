@@ -76,6 +76,15 @@ the two bracketing grids. **Every** trajectory (dead-reckon, forecast, each
 ensemble member, every reconstruction gap bridge) samples one cube, so they share
 one continuous, evolving wind field with no seams.
 
+**On-disk format (`.slwc`, packed binary).** Cubes are stored as
+`[uint32 LE headerLen][header JSON, 4-byte aligned][per grid: int16 U then V]`,
+gzipped to `.slwc.gz` for Blob. Geometry (constant across a cube's grids) lives in
+the header once; values are `int16 = round(value×10)` — lossless vs the old 0.1 m/s
+JSON, ~3× smaller raw, and decoded to `Float32Array` via a typed-array view
+(`cubeFromBinary`) with ~zero parse cost instead of `JSON.parse`-ing millions of
+numbers. This is what keeps a GEFS 31-member ensemble tractable. Readers try
+`.slwc` before legacy `.json` (migration fallback).
+
 ### Two cubes per device (decoupled)
 
 | | **forecast** `{device}-fc` | **reconstruction** `{device}` |
@@ -127,8 +136,8 @@ GRIB2 complex packing needs eccodes from conda-forge). Per run:
    pair is often zero-displacement → a collapsed pad — see `stratolink-frozen-gps`.)
 6. **Resolution** — `choose_grid_step` picks the finest step keeping ≤ `MAX_GRID_PTS`
    (8000) points. Small box ⇒ 0.25–0.5°; continent-wide ⇒ ~1°.
-7. **Write** both cubes; `upload_cubes.mjs` gzips each (~4× smaller) to
-   `cubes/{device}.json.gz` and `cubes/{device}-fc.json.gz`.
+7. **Write** both cubes as **packed binary** (`.slwc` — see §2); `upload_cubes.mjs`
+   gzips each to `cubes/{device}.slwc.gz` and `cubes/{device}-fc.slwc.gz`.
 
 Timestamps from Supabase can have odd fractional seconds / trailing `Z`;
 `tparse()` normalizes them (`datetime.fromisoformat` is picky pre-3.11).
@@ -241,13 +250,27 @@ JSON:
   serverless cold-miss fallback.
 
 End state: drop the cube upload and disable the external cron → `/api/compute-forecast`,
-so cubes never leave the runner and Blob holds only forecast JSON. **GEFS plugs in
-here** — the heavy 31-member integration runs in this step (verified prototype:
-end-to-end GEFS for a 123 h-stale balloon ingested ~0.76 GB at one level and
-showed the dead-reckoned "now" is a ~3,500 km *cloud*, not a point — the honest
-representation our parametric jitter / single GFS track can't give). Remaining
-GEFS work: per-member cube ingest + per-member integration in the compute, plus
-bbox subsetting or fetch-once-resample-many to cut the global-field download.
+so cubes never leave the runner and Blob holds only forecast JSON.
+
+### GEFS ensemble (`scripts/gefs_ingest.py`)
+
+The runner is also where the **GEFS ensemble** runs. `gefs_ingest.py` builds one
+binary cube per member (`{device}-mNN.slwc`, 0.5°, 250↔300 interp to float
+pressure, time-correct gap sourcing, concurrent prefetch), reusing the gfs_ingest
+helpers + `.slwc` packer. In the compute, `computeMonteCarloForecast` detects
+member cubes (`listMemberCubes`) and builds the ensemble as **one real trajectory
+per member** — each integrated in its *own* cube (the member field is the
+perturbation; neutral bias, zero synthetic jitter), **streamed one member at a
+time** so peak memory stays flat. Nominal = control (`m00`); falls back to the
+parametric GFS+jitter ensemble when no member cubes exist. This gives
+flow-dependent spread: for a 123 h-stale balloon the dead-reckoned "now" is a
+~3,500 km *cloud*, not the deceptively crisp point a single GFS track implies.
+
+Cost lives entirely on the free runner: ~1–1.5 GB ingest per stale device (each
+byte-range GET pulls a whole-globe field — GRIB2 messages aren't spatially
+subsettable). Remaining optimizations: bbox subsetting (NOMADS `g2subset`) or
+fetch-once-resample-many across the fleet; and box-sizing for the very wide stale
+clouds (currently a generous capped pad, coarsened by the point budget).
 
 ## 7. Deferred / known follow-ups
 
