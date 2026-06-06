@@ -31,9 +31,21 @@ process.env.WIND_CUBE_DIR = CUBE_DIR; // ensure fetchWindCube reads local cubes 
 function devicesFromCubes(dir: string): string[] {
     let files: string[] = [];
     try { files = readdirSync(dir); } catch { return []; }
-    return files
-        .filter((f) => f.endsWith('.json') && !f.endsWith('-fc.json'))
-        .map((f) => f.slice(0, -'.json'.length));
+    /* The device reconstruction cube is `{device}.slwc` (packed binary; `.json`
+     * kept as a legacy fallback). EXCLUDE the forecast cube (`-fc`) and the
+     * ensemble member cubes (`-mNN`/`-aNN`/`-eNN`) — those aren't standalone
+     * devices. Cubes migrated JSON→.slwc, so matching only `.json` here silently
+     * found zero devices and the scheduled (no-arg) compute became a no-op. */
+    const isMember = /-[mae]\d+\.(slwc|json)$/;
+    const ids = files
+        .filter((f) =>
+            (f.endsWith('.slwc') || f.endsWith('.json')) &&
+            !f.endsWith('-fc.slwc') && !f.endsWith('-fc.json') &&
+            !isMember.test(f))
+        .map((f) => f.replace(/\.(slwc|json)$/, ''));
+    /* Dedupe — a device may have both `{id}.slwc` and a legacy `{id}.json`
+     * during the format transition; compute it once. */
+    return [...new Set(ids)];
 }
 
 async function main(): Promise<void> {
