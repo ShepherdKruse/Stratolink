@@ -1145,9 +1145,9 @@ function Timeline({ visibleRows, scrubT, onScrub, onScrubbingChange, futureEndT,
                 userSelect: 'none', WebkitUserSelect: 'none',
             }}>
                 {/* Precise-scrub speed — a small, quiet multiplier below the bar's
-                  * left edge (desktop; mobile shows it in the thumb's clock
-                  * float). Absolute, so it never resizes the track. */}
-                {!isMobile && preciseTier > 0 && (
+                  * left edge. Anchored to the bar (not the moving thumb/clock),
+                  * so it never resizes the track or overflows the screen edge. */}
+                {preciseTier > 0 && (
                     <span style={{
                         position: 'absolute', top: 'calc(100% + 5px)', left: 16,
                         fontFamily: 'var(--sl-mono)', fontSize: 11, fontWeight: 600,
@@ -1216,11 +1216,6 @@ function Timeline({ visibleRows, scrubT, onScrub, onScrubbingChange, futureEndT,
                             <span style={{ color: cursorIsLive ? 'var(--sl-ok)' : cursorInFuture ? 'var(--sl-forecast)' : 'var(--sl-text-dim2)', marginLeft: 5 }}>
                                 {relLabel}
                             </span>
-                            {preciseTier > 0 && (
-                                <span style={{ marginLeft: 7, color: 'var(--sl-ok)', fontWeight: 600, letterSpacing: '0.04em' }}>
-                                    {PRECISE_LABEL[preciseTier]}
-                                </span>
-                            )}
                         </div>
                     )}
                     {/* recessed rail groove — reads as a slider track */}
