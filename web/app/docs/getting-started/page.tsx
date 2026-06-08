@@ -113,7 +113,7 @@ export default function GettingStartedPage() {
                         <h2>Next Steps</h2>
                         <ul>
                             <li>
-                                <Link href="/dashboard-v2">Open Mission Control</Link>{' '}
+                                <Link href="/dashboard">Open Mission Control</Link>{' '}
                                 (fleet map, Device Tracker, Telemetry Lab — live telemetry)
                             </li>
                             <li>Learn more in the <Link href="/docs/dashboard">dashboard guide</Link> (includes classic layout notes)</li>

@@ -164,7 +164,7 @@ export default function MissionControlScreen() {
         setScrubT(null);
         const params = new URLSearchParams(searchParams.toString());
         params.set('device', id);
-        router.replace(`/dashboard-v2?${params.toString()}`);
+        router.replace(`/dashboard?${params.toString()}`);
     }
 
     /* Mobile: one vertical stack — brand, balloon card, the map (filling the

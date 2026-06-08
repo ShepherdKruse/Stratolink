@@ -50,7 +50,7 @@ export default function MobileMoreTab({ onLaunchMission }: MobileMoreTabProps) {
                 <div className="px-5 pb-2 pt-4 text-[10px]" style={{ color: 'var(--text-dim2)', letterSpacing: '0.16em', textTransform: 'uppercase', fontWeight: 500 }}>
                     Navigate
                 </div>
-                <Row label="Mission Control (desktop labs)" href="/dashboard-v2" right="Labs" />
+                <Row label="Mission Control (desktop labs)" href="/dashboard" right="Labs" />
                 <Row label="Documentation" href="/docs" right="Knowledge" />
                 <Row label="Launch new mission" onClick={() => onLaunchMission()} right="/activate" />
             </div>

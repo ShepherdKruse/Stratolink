@@ -15,14 +15,14 @@ const jetbrainsMono = JetBrains_Mono({
 
 export const metadata: Metadata = {
     title: 'Mission Control',
-    description: 'Fleet overview and live telemetry from Supabase (dashboard v2).',
+    description: 'Fleet overview and live telemetry from Supabase.',
     openGraph: {
         title: 'Mission Control · Stratolink',
-        description: 'Fleet overview and live telemetry — dashboard v2.',
+        description: 'Fleet overview and live telemetry.',
     },
 };
 
-export default function DashboardV2Layout({ children }: { children: React.ReactNode }) {
+export default function DashboardLayout({ children }: { children: React.ReactNode }) {
     return (
         <div className={jetbrainsMono.variable}>
             <DashboardThemeProvider>{children}</DashboardThemeProvider>

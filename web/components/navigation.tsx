@@ -73,7 +73,7 @@ export function Navigation() {
               Contact
             </Link>
             <Link
-              href="/dashboard-v2"
+              href="/dashboard"
               className="rounded-sm bg-foreground px-4 py-2 text-sm font-medium text-background transition-colors hover:bg-foreground/90"
             >
               Mission Control
@@ -83,7 +83,7 @@ export function Navigation() {
           {/* Mobile nav: prominent Mission Control + hamburger */}
           <div className="flex items-center gap-2 md:hidden">
             <Link
-              href="/dashboard-v2"
+              href="/dashboard"
               onClick={close}
               className="rounded-sm bg-foreground px-3 py-2 text-xs font-medium text-background transition-colors hover:bg-foreground/90"
             >

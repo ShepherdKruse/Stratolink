@@ -44,7 +44,7 @@ export default function ActivateLandingPage() {
                         </p>
                         <p className="mt-4 text-[#555] text-xs">
                             Already activated?{' '}
-                            <Link href="/dashboard-v2" className="text-[#4a90d9] hover:underline">
+                            <Link href="/dashboard" className="text-[#4a90d9] hover:underline">
                                 Open Mission Control
                             </Link>
                         </p>

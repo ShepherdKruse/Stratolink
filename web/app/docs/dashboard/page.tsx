@@ -24,7 +24,7 @@ export default function DashboardPage() {
                         <p className="mt-6 text-lg leading-relaxed text-muted-foreground">
                             Learn how to navigate and track your balloon fleet.
                             The current experience is{' '}
-                            <Link href="/dashboard-v2" className="text-foreground underline underline-offset-2">
+                            <Link href="/dashboard" className="text-foreground underline underline-offset-2">
                                 Mission Control (dashboard&nbsp;v2)
                             </Link>
                             {' '}— Mission Control, Device Tracker, and Telemetry Lab. The sections below mostly describe the
@@ -164,7 +164,7 @@ export default function DashboardPage() {
                         <div className="mt-12 rounded-sm border border-border bg-card p-6">
                             <h3 className="mt-0">Ready to Explore?</h3>
                             <p>
-                                <Link href="/dashboard-v2" className="font-medium text-foreground hover:underline">
+                                <Link href="/dashboard" className="font-medium text-foreground hover:underline">
                                     Open Mission Control (dashboard v2)
                                 </Link>{' '}
                                 to start tracking your fleet.
