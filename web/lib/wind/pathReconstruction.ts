@@ -31,6 +31,38 @@ const R4 = (x: number) => Math.round(x * 1e4) / 1e4;
 const R1 = (x: number) => Math.round(x * 10) / 10;
 const toRad = (d: number) => (d * Math.PI) / 180;
 
+/* Pin a gap bridge to its bounding fixes. The particle (medium) and corridor
+ * (long) smoothers return endpoints that are weighted means of the trajectory
+ * cloud, so they land a few km off the measured fixes — leaving a visible gap
+ * between the reconstructed line and the GPS dot at every gap boundary (#44).
+ * The balloon was *observed* at both A and B, so the bridge must start at A and
+ * end at B; distribute the endpoint residual linearly along the path so the
+ * interior shape is preserved without introducing a kink. Applied at stitch time
+ * (not inside each smoother) so cached bridges are corrected too — no cache
+ * clear needed. `endpoint_miss_km` is measured pre-anchor, so it still reports
+ * the raw smoother miss as a reconstruction-quality signal. */
+function anchorEndpoints(
+    path: Array<[number, number]>,
+    A: { lat: number; lon: number },
+    B: { lat: number; lon: number },
+): Array<[number, number]> {
+    const n = path.length;
+    if (n < 2) return path;
+    const dLon0 = A.lon - path[0][0];
+    const dLat0 = A.lat - path[0][1];
+    const dLon1 = B.lon - path[n - 1][0];
+    const dLat1 = B.lat - path[n - 1][1];
+    /* Already pinned (short straight-line bridges) → leave untouched. */
+    if (dLon0 === 0 && dLat0 === 0 && dLon1 === 0 && dLat1 === 0) return path;
+    return path.map(([lon, lat], i) => {
+        const f = i / (n - 1);
+        return [
+            R4(lon + (1 - f) * dLon0 + f * dLon1),
+            R4(lat + (1 - f) * dLat0 + f * dLat1),
+        ] as [number, number];
+    });
+}
+
 export type BaroSample = { time_utc: string; alt_m: number };
 
 export type ReconstructionGap = {
@@ -551,6 +583,10 @@ export async function computePathReconstruction(opts: {
             isBridge = !br.short && br.meanPath.length >= 2;
             cache?.set(plan.hash, { meanPath, gap: meta, isBridge, computed_at: nowIso });
         }
+
+        /* Snap the bridge so it starts at fix A and ends at fix B exactly — the
+         * smoothers' weighted-mean endpoints otherwise miss the GPS dots (#44). */
+        meanPath = anchorEndpoints(meanPath, A, B);
 
         gaps.push({ from_idx: i, to_idx: i + 1, ...meta });
         appendTimedSegment(reconstructedTrack, meanPath, tA, tB, i > 0);
