@@ -975,11 +975,11 @@ function LegendRow({ swatch, label }: { swatch: React.ReactNode; label: string }
 /* ──────────────────────────────────────────────────────────────
  * Timeline — full-width scrubber. Drives the charts AND the map.
  * ────────────────────────────────────────────────────────────── */
-/* Pull-down precise scrubbing (Apple Podcasts style): once dragging the mobile
- * scrubber, sliding the finger DOWN away from the track trades range for
- * precision. Each band below the track drops the gain — horizontal finger
- * travel maps to proportionally less time — so a 12-day rail stays finely
- * seekable. `PRECISE_PULL` = px below the track where each band starts;
+/* Precise scrubbing (Apple Podcasts style): once dragging the scrubber, moving
+ * the pointer AWAY from the track — up or down — trades range for precision.
+ * Each band drops the gain so horizontal travel maps to proportionally less
+ * time, keeping a 12-day rail finely seekable. Works for mouse and touch.
+ * `PRECISE_PULL` = px from the track band where each tier starts;
  * `PRECISE_GAIN[tier]` = time-per-pixel multiplier (tier 0 = 1:1 with the bar). */
 const PRECISE_PULL = [44, 100, 170] as const;
 const PRECISE_GAIN = [1, 0.5, 0.25, 0.1] as const;
@@ -1049,15 +1049,6 @@ function Timeline({ visibleRows, scrubT, onScrub, onScrubbingChange, futureEndT,
     const fraction = pct(cursorT);
     const elapsedW = Math.min(fraction, nowFrac);
 
-    function pickFromEvent(clientX: number) {
-        const el = trackRef.current;
-        if (!el) return;
-        const rect = el.getBoundingClientRect();
-        const f = Math.max(0, Math.min(1, (clientX - rect.left) / rect.width));
-        const t = tStart + span * f;
-        onScrub(t);
-    }
-
     const cursorInFuture = cursorT > packetEndT;
     /* Future leg = the forecast, which is drawn blue on the map. */
     const handleColor = cursorInFuture ? 'var(--sl-forecast)' : 'var(--sl-ok)';
@@ -1075,48 +1066,41 @@ function Timeline({ visibleRows, scrubT, onScrub, onScrubbingChange, futureEndT,
             : `${relHr >= 0 ? '+' : '−'}${Math.round(Math.abs(relHr))}hr`;
     const cursorIsLive = Math.abs(relMs) < 120_000;
 
-    const onMouseDown = (e: React.MouseEvent) => {
-        onScrubbingChange?.(true);
-        pickFromEvent(e.clientX);
-        function move(ev: MouseEvent) { pickFromEvent(ev.clientX); }
-        function up() {
-            window.removeEventListener('mousemove', move);
-            window.removeEventListener('mouseup', up);
-            onScrubbingChange?.(false);
-        }
-        window.addEventListener('mousemove', move);
-        window.addEventListener('mouseup', up);
-    };
-    /* Touch scrubbing is incremental (not absolute-to-finger) so the pull-down
-     * precision bands can scale finger travel. Touchdown still seeds to the
-     * tapped position, so a plain tap-and-drag at full gain tracks the finger
-     * 1:1 — identical to the old absolute behaviour. */
+    /* Scrubbing (mouse + touch) is incremental — it integrates pointer motion
+     * scaled by the active precision gain — rather than snapping to the pointer
+     * X. Pointer-down still seeds to the tapped position, so a plain drag at
+     * full gain tracks the pointer 1:1, identical to the old absolute behaviour;
+     * the precision only engages once the pointer moves away from the track. */
     const setTier = (tier: number) => {
         if (tier !== preciseTierRef.current) { preciseTierRef.current = tier; setPreciseTier(tier); }
     };
-    const onTouchStart = (e: React.TouchEvent) => {
+    /* Precision tier from how far the pointer is from the track band — in EITHER
+     * direction (pull up or down both work). */
+    const tierFromY = (clientY: number, rect: DOMRect): number => {
+        const dist = clientY > rect.bottom ? clientY - rect.bottom
+            : clientY < rect.top ? rect.top - clientY
+                : 0;
+        return dist < PRECISE_PULL[0] ? 0 : dist < PRECISE_PULL[1] ? 1 : dist < PRECISE_PULL[2] ? 2 : 3;
+    };
+    const beginDrag = (clientX: number) => {
         onScrubbingChange?.(true);
-        const x = e.touches[0].clientX;
         const el = trackRef.current;
         if (el) {
             const rect = el.getBoundingClientRect();
-            const f = Math.max(0, Math.min(1, (x - rect.left) / rect.width));
+            const f = Math.max(0, Math.min(1, (clientX - rect.left) / rect.width));
             scrubAccumRef.current = tStart + span * f;
             onScrub(scrubAccumRef.current);
         }
-        lastTouchXRef.current = x;
+        lastTouchXRef.current = clientX;
         setTier(0);
     };
-    const onTouchMove = (e: React.TouchEvent) => {
+    const moveDrag = (clientX: number, clientY: number) => {
         const el = trackRef.current;
         if (!el) return;
-        const touch = e.touches[0];
         const rect = el.getBoundingClientRect();
-        /* How far the finger has dropped below the track → precision tier. */
-        const pull = touch.clientY - rect.bottom;
-        const tier = pull < PRECISE_PULL[0] ? 0 : pull < PRECISE_PULL[1] ? 1 : pull < PRECISE_PULL[2] ? 2 : 3;
-        const dx = touch.clientX - lastTouchXRef.current;
-        lastTouchXRef.current = touch.clientX;
+        const tier = tierFromY(clientY, rect);
+        const dx = clientX - lastTouchXRef.current;
+        lastTouchXRef.current = clientX;
         const dt = (dx / rect.width) * span * PRECISE_GAIN[tier];
         const base = scrubAccumRef.current ?? cursorT;
         const next = Math.max(tStart, Math.min(tEnd, base + dt));
@@ -1124,10 +1108,25 @@ function Timeline({ visibleRows, scrubT, onScrub, onScrubbingChange, futureEndT,
         onScrub(next);
         setTier(tier);
     };
-    const onTouchEnd = () => {
+    const endDrag = () => {
         onScrubbingChange?.(false);
         setTier(0);
     };
+
+    const onMouseDown = (e: React.MouseEvent) => {
+        beginDrag(e.clientX);
+        function move(ev: MouseEvent) { moveDrag(ev.clientX, ev.clientY); }
+        function up() {
+            window.removeEventListener('mousemove', move);
+            window.removeEventListener('mouseup', up);
+            endDrag();
+        }
+        window.addEventListener('mousemove', move);
+        window.addEventListener('mouseup', up);
+    };
+    const onTouchStart = (e: React.TouchEvent) => beginDrag(e.touches[0].clientX);
+    const onTouchMove = (e: React.TouchEvent) => moveDrag(e.touches[0].clientX, e.touches[0].clientY);
+    const onTouchEnd = () => endDrag();
 
     /* ── Floating: one slim row — state dot + clock (key info) + the track. ── */
     if (floating) {
@@ -1165,6 +1164,11 @@ function Timeline({ visibleRows, scrubT, onScrub, onScrubbingChange, futureEndT,
                             }}>
                                 {relLabel}
                             </span>
+                            {preciseTier > 0 && (
+                                <span style={{ color: 'var(--sl-ok)', fontWeight: 600, letterSpacing: '0.04em' }}>
+                                    {PRECISE_LABEL[preciseTier]}
+                                </span>
+                            )}
                         </span>
                     </div>
                 )}
