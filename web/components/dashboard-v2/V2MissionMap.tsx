@@ -27,6 +27,7 @@ import { applyBaseStyle } from '@/components/maps/baseStyle';
 import { bathymetryAllZooms } from '@/components/maps/bathymetry';
 import { ringKm } from '@/lib/gateways/range';
 import { nearestFixTime, type PickablePathPoint } from '@/lib/telemetry/flightNarrative';
+import { fmt } from './atoms';
 
 export interface V2Balloon {
     id: string;
@@ -465,6 +466,30 @@ export default function V2MissionMap({
         };
     }, [staleLine]);
 
+    /* Light-touch on-map label: a single quiet tag at the most recent real GPS
+     * fix ("last fix · 3h ago"), so the viewer can place the freshest report
+     * without a separate legend. Small, uppercase, with a basemap-matched halo
+     * so it stays legible (incl. over the dark night side) while reading as an
+     * annotation, not chrome. Path-type tags ("reconstructed"/"forecast") were
+     * tried here but read too loud, so the line styling carries that distinction
+     * instead. Only the active balloon carries a flight path. */
+    const labelGeoJSON = useMemo(() => {
+        const lastFix = validFlightPath.length ? validFlightPath[validFlightPath.length - 1] : null;
+        if (!lastFix) return null;
+        const halo = colorScheme === 'dark' ? 'rgba(8, 12, 16, 0.85)' : 'rgba(255, 255, 255, 0.9)';
+        const color = colorScheme === 'dark' ? '#e6ebf2' : '#33373d';
+        const age = Date.now() - lastFix.t;
+        const label = Number.isFinite(age) && age >= 0 ? `last fix · ${fmt.duration(age)} ago` : 'last fix';
+        return {
+            type: 'FeatureCollection' as const,
+            features: [{
+                type: 'Feature' as const,
+                geometry: { type: 'Point' as const, coordinates: [lastFix.lon, lastFix.lat] as [number, number] },
+                properties: { label, color, halo },
+            }],
+        };
+    }, [validFlightPath, colorScheme]);
+
     /* Ensemble "spaghetti" — every Monte-Carlo member as a faint line. */
     const ensembleGeoJSON = useMemo(() => {
         const tracks = forecastEnsemble
@@ -542,6 +567,36 @@ export default function V2MissionMap({
             })),
         };
     }, [validBalloons, activeId, validGateways]);
+
+    /* Keep the active balloon marker on top of everything. react-map-gl appends
+     * each <Layer> in mount order, and layers whose data arrives after the
+     * balloon — gateway pins, reception lines, the forecast cone / ensemble /
+     * hindcast — would otherwise paint over the balloon dot.
+     *
+     * A React effect alone races: react-map-gl reconciles new layers into the
+     * style asynchronously, so on the first scrub the gateway layer lands AFTER
+     * the effect has already raised the balloon (it only sorted out on the next
+     * click). Instead, re-raise on the map's own `styledata` event, which fires
+     * whenever the layer set changes — including react-map-gl's async adds. A
+     * guard skips when the balloon is already topmost so our own moveLayer (which
+     * itself fires styledata) doesn't loop. */
+    useEffect(() => {
+        const m = mapRef.current?.getMap();
+        if (!m || !styleLoaded) return;
+        const raise = () => {
+            try {
+                const layers = m.getStyle()?.layers;
+                if (!layers || !m.getLayer('v2-balloon-core')) return;
+                if (layers[layers.length - 1]?.id === 'v2-balloon-core') return;  /* already on top */
+                for (const id of ['v2-balloon-halo', 'v2-balloon-core']) {
+                    if (m.getLayer(id)) m.moveLayer(id);   /* no beforeId → move to top */
+                }
+            } catch { /* style mid-update; the next styledata retries */ }
+        };
+        raise();
+        m.on('styledata', raise);
+        return () => { m.off('styledata', raise); };
+    }, [styleLoaded]);
 
     if (webglOk === false) {
         return (
@@ -936,6 +991,37 @@ export default function V2MissionMap({
                                 }}
                             />
                         </Source>
+
+                        {/* Light-touch orienting label — a small uppercase tag at the
+                          * last real fix ("last fix · 3h ago"). The basemap-matched
+                          * halo keeps it legible without a box. */}
+                        {labelGeoJSON && (
+                            <Source id="v2-map-labels" type="geojson" data={labelGeoJSON}>
+                                <Layer
+                                    id="v2-map-label"
+                                    type="symbol"
+                                    layout={{
+                                        'text-field': ['get', 'label'],
+                                        'text-font': ['DIN Pro Medium', 'Arial Unicode MS Regular'],
+                                        'text-size': 11,
+                                        'text-transform': 'uppercase',
+                                        'text-letter-spacing': 0.08,
+                                        'text-offset': [0, -0.9],
+                                        'text-anchor': 'bottom',
+                                        'text-padding': 6,
+                                        'text-allow-overlap': false,
+                                        'text-optional': true,
+                                    }}
+                                    paint={{
+                                        'text-color': ['get', 'color'],
+                                        'text-opacity': 0.9,
+                                        'text-halo-color': ['get', 'halo'],
+                                        'text-halo-width': 1.4,
+                                        'text-halo-blur': 0.4,
+                                    }}
+                                />
+                            </Source>
+                        )}
                     </>
                 )}
             </Map>
