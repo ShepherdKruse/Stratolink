@@ -63,6 +63,16 @@ export function isValidLngLat(lat: number, lon: number): boolean {
         && lon <= 180;
 }
 
+/* Looser validity for forecast geometry that legitimately crosses the
+ * antimeridian. A long dead-reckon cone is built with CONTINUOUS longitudes
+ * that run past ±180 (e.g. 164°→190° around a 177°E center); `isValidLngLat`
+ * would reject every vertex beyond 180 and shred the ring. Mapbox renders
+ * out-of-[-180,180] longitudes fine (world copies), so only the latitude needs
+ * guarding here — that's the value that actually crashes fitBounds/layers. */
+function isRenderablePoint(lat: number, lon: number): boolean {
+    return Number.isFinite(lat) && Number.isFinite(lon) && lat >= -90 && lat <= 90;
+}
+
 /* Unwrap a line/ring's longitudes so consecutive points never jump ~360°. A
  * geometry that straddles the antimeridian has vertices at e.g. +179 and −179;
  * Mapbox then draws the segment — or, for a polygon, the whole fill — the long
@@ -481,7 +491,7 @@ export default function V2MissionMap({
     /* Forecast line — predicted nominal track ahead of the last fix. Filtered
      * to valid WGS84 so a bad endpoint can't crash Mapbox. */
     const forecastGeoJSON = useMemo(() => {
-        const pts = forecastPath.filter(([lon, lat]) => isValidLngLat(lat, lon));
+        const pts = forecastPath.filter(([lon, lat]) => isRenderablePoint(lat, lon));
         if (pts.length < 2) return null;
         return {
             type: 'FeatureCollection' as const,
@@ -497,7 +507,7 @@ export default function V2MissionMap({
      * the click-to-scrub target line; the visible line is drawn from the
      * certainty-split segments below when those are available. */
     const hindcastGeoJSON = useMemo(() => {
-        const pts = hindcastPath.filter(([lon, lat]) => isValidLngLat(lat, lon));
+        const pts = hindcastPath.filter(([lon, lat]) => isRenderablePoint(lat, lon));
         if (pts.length < 2) return null;
         return {
             type: 'FeatureCollection' as const,
@@ -525,7 +535,7 @@ export default function V2MissionMap({
 
     /* Stale-GPS connector — last real fix → dead-reckoned "assumed now". */
     const staleLineGeoJSON = useMemo(() => {
-        const pts = (staleLine ?? []).filter(([lon, lat]) => isValidLngLat(lat, lon));
+        const pts = (staleLine ?? []).filter(([lon, lat]) => isRenderablePoint(lat, lon));
         if (pts.length < 2) return null;
         return {
             type: 'FeatureCollection' as const,
@@ -560,7 +570,7 @@ export default function V2MissionMap({
     /* Ensemble "spaghetti" — every Monte-Carlo member as a faint line. */
     const ensembleGeoJSON = useMemo(() => {
         const tracks = forecastEnsemble
-            .map(t => t.filter(([lon, lat]) => isValidLngLat(lat, lon)))
+            .map(t => t.filter(([lon, lat]) => isRenderablePoint(lat, lon)))
             .filter(t => t.length >= 2)
             .map(unwrapLngs);
         if (tracks.length === 0) return null;
@@ -580,8 +590,8 @@ export default function V2MissionMap({
         const e50: Array<[number, number][]> = [];
         const e90: Array<[number, number][]> = [];
         for (const slice of forecastEllipses) {
-            const p50 = slice.e50.filter(([lon, lat]) => isValidLngLat(lat, lon));
-            const p90 = slice.e90.filter(([lon, lat]) => isValidLngLat(lat, lon));
+            const p50 = slice.e50.filter(([lon, lat]) => isRenderablePoint(lat, lon));
+            const p90 = slice.e90.filter(([lon, lat]) => isRenderablePoint(lat, lon));
             if (p50.length >= 3) e50.push(unwrapLngs(p50));
             if (p90.length >= 3) e90.push(unwrapLngs(p90));
         }

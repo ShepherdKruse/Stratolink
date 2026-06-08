@@ -74,14 +74,18 @@ const EMPTY: Omit<UseForecastPathResult, 'loading'> = {
     predictedHindcast: [], staleGps: false, originT: null, endT: null, generatedAt: null,
 };
 
-/** Keep only well-formed [lon, lat] pairs in WGS84 range. */
+/** Keep only well-formed [lon, lat] pairs. Latitude is range-checked (out-of-
+ *  range lat crashes Mapbox); longitude is NOT bounded to ±180 — a long
+ *  dead-reckon cone/path is built with CONTINUOUS longitudes that run past the
+ *  antimeridian (e.g. 164°→190°), and clamping/dropping those shredded the
+ *  50/90% zone at 180°. Mapbox renders out-of-[-180,180] longitudes fine. */
 function cleanPath(raw: unknown): ForecastPath {
     if (!Array.isArray(raw)) return [];
     return raw.filter(
         (p: unknown): p is [number, number] =>
             Array.isArray(p) && p.length === 2 &&
             Number.isFinite(p[0]) && Number.isFinite(p[1]) &&
-            Math.abs(p[0]) <= 180 && Math.abs(p[1]) <= 90,
+            Math.abs(p[1]) <= 90,
     );
 }
 
@@ -97,7 +101,7 @@ function cleanTrack(raw: unknown): HindcastTrackPoint[] {
         if (
             typeof lon === 'number' && typeof lat === 'number' &&
             Number.isFinite(lon) && Number.isFinite(lat) &&
-            Math.abs(lon) <= 180 && Math.abs(lat) <= 90 && Number.isFinite(t)
+            Math.abs(lat) <= 90 && Number.isFinite(t)
         ) {
             out.push({ lon, lat, t });
         }
