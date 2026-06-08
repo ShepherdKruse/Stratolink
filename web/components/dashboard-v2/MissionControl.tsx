@@ -1144,34 +1144,18 @@ function Timeline({ visibleRows, scrubT, onScrub, onScrubbingChange, futureEndT,
                 /* No accidental text-selection of the clock while dragging. */
                 userSelect: 'none', WebkitUserSelect: 'none',
             }}>
-                {/* Precise-scrub speed chip — a self-contained pill floating clear
-                  * above the whole bar (desktop; mobile shows it in the thumb's
-                  * clock float), styled to match the bar so it never overlaps the
-                  * pill or resizes the track. */}
+                {/* Precise-scrub speed — a small, quiet multiplier below the bar's
+                  * left edge (desktop; mobile shows it in the thumb's clock
+                  * float). Absolute, so it never resizes the track. */}
                 {!isMobile && preciseTier > 0 && (
                     <span style={{
-                        position: 'absolute', bottom: 'calc(100% + 8px)', left: '50%', transform: 'translateX(-50%)',
-                        display: 'inline-flex', alignItems: 'center', gap: 7,
-                        padding: '3px 11px', borderRadius: 999,
-                        background: 'var(--sl-overlay-bg-blur)',
-                        backdropFilter: 'blur(10px)', WebkitBackdropFilter: 'blur(10px)',
-                        border: '1px solid var(--sl-border)',
-                        boxShadow: '0 1px 5px rgba(26, 28, 27, 0.10)',
+                        position: 'absolute', top: 'calc(100% + 5px)', left: 16,
+                        fontFamily: 'var(--sl-mono)', fontSize: 11, fontWeight: 600,
+                        fontVariantNumeric: 'tabular-nums', color: 'var(--sl-ok)',
                         whiteSpace: 'nowrap', pointerEvents: 'none',
+                        textShadow: '0 1px 3px var(--sl-overlay-bg)',
                     }}>
-                        <span style={{ width: 5, height: 5, borderRadius: '50%', background: 'var(--sl-ok)', flexShrink: 0 }} />
-                        <span style={{
-                            fontFamily: 'var(--sl-sans)', fontSize: 9.5, fontWeight: 600,
-                            letterSpacing: '0.13em', textTransform: 'uppercase', color: 'var(--sl-text-dim2)',
-                        }}>
-                            Precise
-                        </span>
-                        <span style={{
-                            fontFamily: 'var(--sl-mono)', fontSize: 11.5, fontWeight: 600,
-                            fontVariantNumeric: 'tabular-nums', color: 'var(--sl-ok)',
-                        }}>
-                            {PRECISE_LABEL[preciseTier]}
-                        </span>
+                        {PRECISE_LABEL[preciseTier]}
                     </span>
                 )}
                 {/* Desktop: clock sits in a column beside the track. On mobile
