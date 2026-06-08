@@ -63,6 +63,26 @@ export function isValidLngLat(lat: number, lon: number): boolean {
         && lon <= 180;
 }
 
+/* Unwrap a line/ring's longitudes so consecutive points never jump ~360°. A
+ * geometry that straddles the antimeridian has vertices at e.g. +179 and −179;
+ * Mapbox then draws the segment — or, for a polygon, the whole fill — the long
+ * way around the globe, so the 50/90% cone (and any crossing path) breaks at
+ * 180°. Letting longitude run past ±180 keeps the geometry continuous and
+ * Mapbox renders it across the seam. No-op when nothing crosses 180°. */
+function unwrapLngs(coords: Array<[number, number]>): Array<[number, number]> {
+    if (coords.length < 2) return coords;
+    const out: Array<[number, number]> = [coords[0]];
+    let prev = coords[0][0];
+    for (let i = 1; i < coords.length; i++) {
+        let lon = coords[i][0];
+        while (lon - prev > 180) lon -= 360;
+        while (lon - prev < -180) lon += 360;
+        out.push([lon, coords[i][1]]);
+        prev = lon;
+    }
+    return out;
+}
+
 interface V2MissionMapProps {
     /** All balloons to render as markers. */
     balloons: V2Balloon[];
@@ -467,7 +487,7 @@ export default function V2MissionMap({
             type: 'FeatureCollection' as const,
             features: [{
                 type: 'Feature' as const,
-                geometry: { type: 'LineString' as const, coordinates: pts },
+                geometry: { type: 'LineString' as const, coordinates: unwrapLngs(pts) },
                 properties: {},
             }],
         };
@@ -481,7 +501,7 @@ export default function V2MissionMap({
         if (pts.length < 2) return null;
         return {
             type: 'FeatureCollection' as const,
-            features: [{ type: 'Feature' as const, geometry: { type: 'LineString' as const, coordinates: pts }, properties: {} }],
+            features: [{ type: 'Feature' as const, geometry: { type: 'LineString' as const, coordinates: unwrapLngs(pts) }, properties: {} }],
         };
     }, [hindcastPath]);
 
@@ -491,7 +511,7 @@ export default function V2MissionMap({
     const hindcastRuns = (estimated: boolean) => {
         const runs = hindcastSegments
             .filter(s => s.estimated === estimated && s.coords.length >= 2)
-            .map(s => s.coords);
+            .map(s => unwrapLngs(s.coords));
         if (!runs.length) return null;
         return {
             type: 'FeatureCollection' as const,
@@ -509,7 +529,7 @@ export default function V2MissionMap({
         if (pts.length < 2) return null;
         return {
             type: 'FeatureCollection' as const,
-            features: [{ type: 'Feature' as const, geometry: { type: 'LineString' as const, coordinates: pts }, properties: {} }],
+            features: [{ type: 'Feature' as const, geometry: { type: 'LineString' as const, coordinates: unwrapLngs(pts) }, properties: {} }],
         };
     }, [staleLine]);
 
@@ -541,7 +561,8 @@ export default function V2MissionMap({
     const ensembleGeoJSON = useMemo(() => {
         const tracks = forecastEnsemble
             .map(t => t.filter(([lon, lat]) => isValidLngLat(lat, lon)))
-            .filter(t => t.length >= 2);
+            .filter(t => t.length >= 2)
+            .map(unwrapLngs);
         if (tracks.length === 0) return null;
         return {
             type: 'FeatureCollection' as const,
@@ -561,8 +582,8 @@ export default function V2MissionMap({
         for (const slice of forecastEllipses) {
             const p50 = slice.e50.filter(([lon, lat]) => isValidLngLat(lat, lon));
             const p90 = slice.e90.filter(([lon, lat]) => isValidLngLat(lat, lon));
-            if (p50.length >= 3) e50.push(p50);
-            if (p90.length >= 3) e90.push(p90);
+            if (p50.length >= 3) e50.push(unwrapLngs(p50));
+            if (p90.length >= 3) e90.push(unwrapLngs(p90));
         }
         const toFC = (rings: Array<[number, number][]>) => rings.length === 0 ? null : ({
             type: 'FeatureCollection' as const,
