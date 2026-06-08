@@ -184,6 +184,7 @@ export default function MissionControlScreen() {
                             rows={rows}
                             isFuture={noReading}
                             variant="summary"
+                            onPickTime={(t) => setScrubT(t)}
                         />
                     </div>
                 </div>
@@ -229,6 +230,7 @@ export default function MissionControlScreen() {
                             rows={rows}
                             isFuture={noReading}
                             variant="charts"
+                            onPickTime={(t) => setScrubT(t)}
                         />
                     </div>
                 </ChartsDrawer>
@@ -255,6 +257,7 @@ export default function MissionControlScreen() {
                     rows={rows}
                     scrubT={effectiveScrubT}
                     isFuture={noReading}
+                    onPickTime={(t) => setScrubT(t)}
                 />
                 {/* Right side: the map fills the full height; the scrubber
                   * floats over its bottom edge as a self-contained bar. */}
@@ -296,7 +299,7 @@ export default function MissionControlScreen() {
  * ────────────────────────────────────────────────────────────── */
 function LeftColumn({
     device, devices, onSelect, scrubRow, summary,
-    visibleRows, rows, scrubT, isFuture,
+    visibleRows, rows, scrubT, isFuture, onPickTime,
 }: {
     device: DeviceSummary | null;
     devices: DeviceSummary[];
@@ -307,6 +310,7 @@ function LeftColumn({
     rows: TelemetryRow[];
     scrubT: number | null;
     isFuture: boolean;
+    onPickTime?: (t: number) => void;
 }) {
     return (
         <div
@@ -329,6 +333,7 @@ function LeftColumn({
                     summary={summary}
                     rows={rows}
                     isFuture={isFuture}
+                    onPickTime={onPickTime}
                 />
             </div>
         </div>
