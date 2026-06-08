@@ -48,11 +48,11 @@ const FULL_TELEMETRY_COLUMNS =
     'uv_index, ambient_lux, acoustic_event, firmware_version, uptime_s, tx_count, hdop, ' +
     'power_mode, sleep_ms, lora_sf, lora_bw, frequency_hz, gateways';
 
-/* Poll cadences. These were 30 s / 15 s, which — across left-open background tabs —
- * generated ~14k Supabase requests/day PER tab (most of our egress). Longer intervals
- * + pausing while the tab is hidden cut that ~20–50×. A flying balloon reports every
- * few minutes anyway, so a minute of latency costs nothing. */
-const DEVICE_POLL_MS = 90_000;
+/* The device LIST is loaded once on page-load — devices/status change rarely, and the
+ * SELECTED balloon's live last-contact/fix are re-sourced from the telemetry poll below
+ * (see MissionControl), so nothing the operator watches goes stale. Telemetry polls every
+ * 60 s and PAUSES while the tab is hidden. Previously both ran on 30 s / 15 s timers and
+ * generated ~14k Supabase requests/day per open tab — most of our egress. */
 const TELEMETRY_POLL_MS = 60_000;
 
 /** setInterval that PAUSES while the tab is backgrounded (`document.hidden`) and fires
@@ -428,9 +428,8 @@ export function useTelemetry({ initialSelectedId = null }: { initialSelectedId?:
                 }
             }
         }
-        load();
-        const stop = pollWhileVisible(load, DEVICE_POLL_MS);
-        return () => { cancelled = true; stop(); };
+        load();   // page-load only: refreshes on mount, on device switch, and on manual refetch — no timer
+        return () => { cancelled = true; };
     }, [tick, selectedId]);
 
     /* Full mission row set for the selected device. Loaded in full once (since
