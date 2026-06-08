@@ -981,7 +981,7 @@ function LegendRow({ swatch, label }: { swatch: React.ReactNode; label: string }
  * time, keeping a 12-day rail finely seekable. Works for mouse and touch.
  * `PRECISE_PULL` = px from the track band where each tier starts;
  * `PRECISE_GAIN[tier]` = time-per-pixel multiplier (tier 0 = 1:1 with the bar). */
-const PRECISE_PULL = [36, 72, 108] as const;
+const PRECISE_PULL = [30, 60, 90] as const;
 const PRECISE_GAIN = [1, 0.5, 0.25, 0.1] as const;
 const PRECISE_LABEL = ['', '½×', '¼×', 'fine'] as const;
 
@@ -1133,6 +1133,7 @@ function Timeline({ visibleRows, scrubT, onScrub, onScrubbingChange, futureEndT,
         const PAPER = 'var(--sl-chrome-paper)';
         return (
             <div style={{
+                position: 'relative',
                 display: 'flex', alignItems: 'center', gap: 13,
                 height: 32, padding: '0 15px',
                 background: 'var(--sl-overlay-bg-blur)',
@@ -1143,22 +1144,24 @@ function Timeline({ visibleRows, scrubT, onScrub, onScrubbingChange, futureEndT,
                 /* No accidental text-selection of the clock while dragging. */
                 userSelect: 'none', WebkitUserSelect: 'none',
             }}>
+                {/* Precise-scrub speed badge — floats clear above the whole bar
+                  * (desktop; mobile shows it in the thumb's clock float) so it
+                  * never overlaps the pill or resizes the track. */}
+                {!isMobile && preciseTier > 0 && (
+                    <span style={{
+                        position: 'absolute', bottom: 'calc(100% + 7px)', left: 16,
+                        fontFamily: 'var(--sl-mono)', fontSize: 11.5, fontWeight: 600, letterSpacing: '0.05em',
+                        color: 'var(--sl-ok)', whiteSpace: 'nowrap', pointerEvents: 'none',
+                        textShadow: '0 1px 4px var(--sl-overlay-bg)',
+                    }}>
+                        {PRECISE_LABEL[preciseTier]} · precise
+                    </span>
+                )}
                 {/* Desktop: clock sits in a column beside the track. On mobile
                   * it's floated above the thumb (below) so the track gets the
                   * full width for finer control. */}
                 {!isMobile && (
-                    <div style={{ position: 'relative', display: 'flex', alignItems: 'center', gap: 7, flexShrink: 0 }}>
-                        {/* Absolutely positioned so the transient badge can't widen
-                          * the clock column and resize the flex:1 track mid-scrub. */}
-                        {preciseTier > 0 && (
-                            <span style={{
-                                position: 'absolute', bottom: 'calc(100% + 3px)', left: 13,
-                                fontFamily: 'var(--sl-mono)', fontSize: 9.5, fontWeight: 600, letterSpacing: '0.06em',
-                                color: 'var(--sl-ok)', whiteSpace: 'nowrap', pointerEvents: 'none',
-                            }}>
-                                {PRECISE_LABEL[preciseTier]} precise
-                            </span>
-                        )}
+                    <div style={{ display: 'flex', alignItems: 'center', gap: 7, flexShrink: 0 }}>
                         <span style={{ width: 6, height: 6, borderRadius: '50%', background: handleColor, flexShrink: 0 }} />
                         <span style={{
                             fontFamily: 'var(--sl-mono)', fontVariantNumeric: 'tabular-nums', fontSize: 11, fontWeight: 500,
