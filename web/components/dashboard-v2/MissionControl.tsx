@@ -975,6 +975,16 @@ function LegendRow({ swatch, label }: { swatch: React.ReactNode; label: string }
 /* ──────────────────────────────────────────────────────────────
  * Timeline — full-width scrubber. Drives the charts AND the map.
  * ────────────────────────────────────────────────────────────── */
+/* Pull-down precise scrubbing (Apple Podcasts style): once dragging the mobile
+ * scrubber, sliding the finger DOWN away from the track trades range for
+ * precision. Each band below the track drops the gain — horizontal finger
+ * travel maps to proportionally less time — so a 12-day rail stays finely
+ * seekable. `PRECISE_PULL` = px below the track where each band starts;
+ * `PRECISE_GAIN[tier]` = time-per-pixel multiplier (tier 0 = 1:1 with the bar). */
+const PRECISE_PULL = [44, 100, 170] as const;
+const PRECISE_GAIN = [1, 0.5, 0.25, 0.1] as const;
+const PRECISE_LABEL = ['', '½×', '¼×', 'fine'] as const;
+
 function Timeline({ visibleRows, scrubT, onScrub, onScrubbingChange, futureEndT, originT = null, floating = false }: {
     visibleRows: TelemetryRow[];
     scrubT: number | null;
@@ -994,6 +1004,13 @@ function Timeline({ visibleRows, scrubT, onScrub, onScrubbingChange, futureEndT,
     floating?: boolean;
 }) {
     const trackRef = useRef<HTMLDivElement | null>(null);
+    /* Pull-down precise-scrub state: an accumulated scrub time (so reduced-gain
+     * drags integrate finger motion rather than snap to absolute X), the last
+     * touch X, and the active precision tier (0 = full speed). */
+    const scrubAccumRef = useRef<number | null>(null);
+    const lastTouchXRef = useRef(0);
+    const preciseTierRef = useRef(0);
+    const [preciseTier, setPreciseTier] = useState(0);
     /* On mobile the date/time is floated above the thumb instead of taking a
      * column beside the track, so the scrub track spans the full width. */
     const isMobile = useIsMobile();
@@ -1070,12 +1087,47 @@ function Timeline({ visibleRows, scrubT, onScrub, onScrubbingChange, futureEndT,
         window.addEventListener('mousemove', move);
         window.addEventListener('mouseup', up);
     };
+    /* Touch scrubbing is incremental (not absolute-to-finger) so the pull-down
+     * precision bands can scale finger travel. Touchdown still seeds to the
+     * tapped position, so a plain tap-and-drag at full gain tracks the finger
+     * 1:1 — identical to the old absolute behaviour. */
+    const setTier = (tier: number) => {
+        if (tier !== preciseTierRef.current) { preciseTierRef.current = tier; setPreciseTier(tier); }
+    };
     const onTouchStart = (e: React.TouchEvent) => {
         onScrubbingChange?.(true);
-        pickFromEvent(e.touches[0].clientX);
+        const x = e.touches[0].clientX;
+        const el = trackRef.current;
+        if (el) {
+            const rect = el.getBoundingClientRect();
+            const f = Math.max(0, Math.min(1, (x - rect.left) / rect.width));
+            scrubAccumRef.current = tStart + span * f;
+            onScrub(scrubAccumRef.current);
+        }
+        lastTouchXRef.current = x;
+        setTier(0);
     };
-    const onTouchMove = (e: React.TouchEvent) => pickFromEvent(e.touches[0].clientX);
-    const onTouchEnd = () => onScrubbingChange?.(false);
+    const onTouchMove = (e: React.TouchEvent) => {
+        const el = trackRef.current;
+        if (!el) return;
+        const touch = e.touches[0];
+        const rect = el.getBoundingClientRect();
+        /* How far the finger has dropped below the track → precision tier. */
+        const pull = touch.clientY - rect.bottom;
+        const tier = pull < PRECISE_PULL[0] ? 0 : pull < PRECISE_PULL[1] ? 1 : pull < PRECISE_PULL[2] ? 2 : 3;
+        const dx = touch.clientX - lastTouchXRef.current;
+        lastTouchXRef.current = touch.clientX;
+        const dt = (dx / rect.width) * span * PRECISE_GAIN[tier];
+        const base = scrubAccumRef.current ?? cursorT;
+        const next = Math.max(tStart, Math.min(tEnd, base + dt));
+        scrubAccumRef.current = next;
+        onScrub(next);
+        setTier(tier);
+    };
+    const onTouchEnd = () => {
+        onScrubbingChange?.(false);
+        setTier(0);
+    };
 
     /* ── Floating: one slim row — state dot + clock (key info) + the track. ── */
     if (floating) {
@@ -1128,7 +1180,7 @@ function Timeline({ visibleRows, scrubT, onScrub, onScrubbingChange, futureEndT,
                     onTouchStart={onTouchStart}
                     onTouchMove={onTouchMove}
                     onTouchEnd={onTouchEnd}
-                    style={{ position: 'relative', flex: 1, alignSelf: 'stretch', userSelect: 'none' }}
+                    style={{ position: 'relative', flex: 1, alignSelf: 'stretch', userSelect: 'none', touchAction: 'none' }}
                 >
                     {/* Mobile: clock floats above the thumb so it doesn't steal
                       * track width. */}
@@ -1150,6 +1202,11 @@ function Timeline({ visibleRows, scrubT, onScrub, onScrubbingChange, futureEndT,
                             <span style={{ color: cursorIsLive ? 'var(--sl-ok)' : cursorInFuture ? 'var(--sl-forecast)' : 'var(--sl-text-dim2)', marginLeft: 5 }}>
                                 {relLabel}
                             </span>
+                            {preciseTier > 0 && (
+                                <span style={{ marginLeft: 7, color: 'var(--sl-ok)', fontWeight: 600, letterSpacing: '0.04em' }}>
+                                    {PRECISE_LABEL[preciseTier]}
+                                </span>
+                            )}
                         </div>
                     )}
                     {/* recessed rail groove — reads as a slider track */}
@@ -1209,7 +1266,7 @@ function Timeline({ visibleRows, scrubT, onScrub, onScrubbingChange, futureEndT,
                 onTouchStart={onTouchStart}
                 onTouchMove={onTouchMove}
                 onTouchEnd={onTouchEnd}
-                style={{ position: 'relative', height: 30, cursor: 'pointer', userSelect: 'none' }}
+                style={{ position: 'relative', height: 30, cursor: 'pointer', userSelect: 'none', touchAction: 'none' }}
             >
                 <div style={{
                     position: 'absolute', top: -1, left: `${labelLeft}%`, transform: 'translateX(-50%)',
