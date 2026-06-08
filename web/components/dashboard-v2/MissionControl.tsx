@@ -108,8 +108,21 @@ export default function MissionControlScreen() {
         && effectiveScrubT - scrubRow.t > medianDt * 3;
     const noReading = isFuture || scrubInGap;
 
-    const selectedDevice: DeviceSummary | null =
-        selectedId ? devices.find(d => d.id === selectedId) ?? null : null;
+    /* The device list is loaded only on page-load now, so its per-device last-contact /
+     * latest-fix go stale. Keep the SELECTED device's live by re-sourcing them from the
+     * incremental telemetry `rows` (polled every 60 s). */
+    const selectedDevice: DeviceSummary | null = useMemo(() => {
+        const base = selectedId ? devices.find(d => d.id === selectedId) ?? null : null;
+        if (!base || rows.length === 0) return base;
+        const fixRow = [...rows].reverse().find(r => r.lat != null && r.lon != null);
+        return {
+            ...base,
+            lastContactT: rows[rows.length - 1].t,
+            latestFix: fixRow
+                ? { lat: fixRow.lat as number, lon: fixRow.lon as number, alt: fixRow.alt, t: fixRow.t }
+                : base.latestFix,
+        };
+    }, [selectedId, devices, rows]);
 
     /* Ticking wall-clock for "time to present". null on server + first client
      * render (SSR-safe), then live; refreshed each minute. */

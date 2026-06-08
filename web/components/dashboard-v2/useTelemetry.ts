@@ -48,6 +48,27 @@ const FULL_TELEMETRY_COLUMNS =
     'uv_index, ambient_lux, acoustic_event, firmware_version, uptime_s, tx_count, hdop, ' +
     'power_mode, sleep_ms, lora_sf, lora_bw, frequency_hz, gateways';
 
+/* The device LIST is loaded once on page-load — devices/status change rarely, and the
+ * SELECTED balloon's live last-contact/fix are re-sourced from the telemetry poll below
+ * (see MissionControl), so nothing the operator watches goes stale. Telemetry polls every
+ * 60 s and PAUSES while the tab is hidden. Previously both ran on 30 s / 15 s timers and
+ * generated ~14k Supabase requests/day per open tab — most of our egress. */
+const TELEMETRY_POLL_MS = 60_000;
+
+/** setInterval that PAUSES while the tab is backgrounded (`document.hidden`) and fires
+ *  once immediately when it becomes visible again — so a left-open background tab stops
+ *  hammering Supabase, while a focused tab still feels live. Returns a cleanup fn. */
+function pollWhileVisible(fn: () => void, ms: number): () => void {
+    if (typeof document === 'undefined') {                 // SSR / non-browser
+        const id = setInterval(fn, ms);
+        return () => clearInterval(id);
+    }
+    const id = setInterval(() => { if (!document.hidden) fn(); }, ms);
+    const onVisible = () => { if (!document.hidden) fn(); };
+    document.addEventListener('visibilitychange', onVisible);
+    return () => { clearInterval(id); document.removeEventListener('visibilitychange', onVisible); };
+}
+
 /* Per-subsystem freshness — when did this field last update with a real value?
  * Mirrors the FRESHNESS object in the design's components.jsx. */
 export interface SubsystemFreshness {
@@ -407,9 +428,8 @@ export function useTelemetry({ initialSelectedId = null }: { initialSelectedId?:
                 }
             }
         }
-        load();
-        const interval = setInterval(load, 30_000);
-        return () => { cancelled = true; clearInterval(interval); };
+        load();   // page-load only: refreshes on mount, on device switch, and on manual refetch — no timer
+        return () => { cancelled = true; };
     }, [tick, selectedId]);
 
     /* Full mission row set for the selected device. Loaded in full once (since
@@ -501,11 +521,11 @@ export function useTelemetry({ initialSelectedId = null }: { initialSelectedId?:
         if (selStatus !== 'flying') {
             return () => { cancelled = true; };
         }
-        const interval = setInterval(
+        const stop = pollWhileVisible(
             () => pollIncrement().catch(e => console.debug('useTelemetry poll error', e)),
-            15_000,
+            TELEMETRY_POLL_MS,
         );
-        return () => { cancelled = true; clearInterval(interval); };
+        return () => { cancelled = true; stop(); };
     }, [selectedId, selStatus, selLaunchedAt, tick]);
 
     const freshness = useMemo(() => computeFreshness(rows), [rows]);
