@@ -183,6 +183,7 @@ export function LineTrend({
     height = 52,
     emphasis = 'normal',
     scrubT = null,
+    onPickTime,
 }: {
     series: (number | null)[];
     times: number[];
@@ -194,6 +195,8 @@ export function LineTrend({
     emphasis?: 'normal' | 'low';
     /** When set, a dot tracks this scrub time along the line. */
     scrubT?: number | null;
+    /** When set, clicking the chart scrubs to the sample nearest the cursor. */
+    onPickTime?: (t: number) => void;
 }) {
     const [hover, setHover] = useState<number | null>(null);
     const numeric = series.map((v) => (v == null ? NaN : v)).filter((v) => !Number.isNaN(v));
@@ -250,25 +253,35 @@ export function LineTrend({
         return best;
     }, [scrubT, pts, times]);
 
+    /* Downsampled index whose plotted x is nearest the pointer — shared by the
+     * hover cursor and click-to-scrub. */
+    const nearestIdxAt = (clientX: number, rect: DOMRect) => {
+        const targetX = ((clientX - rect.left) / rect.width) * W;
+        let best = 0;
+        let bestD = Infinity;
+        for (let i = 0; i < pts.length; i++) {
+            const d = Math.abs(X(i) - targetX);
+            if (d < bestD) { bestD = d; best = i; }
+        }
+        return best;
+    };
+
     return (
         <div style={{ position: 'relative', width: '100%' }}>
             <svg
                 viewBox={`0 0 ${W} ${H}`}
                 preserveAspectRatio="none"
-                style={{ width: '100%', height: H, display: 'block' }}
+                style={{ width: '100%', height: H, display: 'block', cursor: onPickTime ? 'crosshair' : undefined }}
                 onMouseLeave={() => setHover(null)}
                 onMouseMove={(e) => {
-                    const r = e.currentTarget.getBoundingClientRect();
                     /* Map the cursor to the time-positioned sample nearest it. */
-                    const targetX = ((e.clientX - r.left) / r.width) * W;
-                    let best = 0;
-                    let bestD = Infinity;
-                    for (let i = 0; i < pts.length; i++) {
-                        const d = Math.abs(X(i) - targetX);
-                        if (d < bestD) { bestD = d; best = i; }
-                    }
-                    setHover(best);
+                    setHover(nearestIdxAt(e.clientX, e.currentTarget.getBoundingClientRect()));
                 }}
+                onClick={onPickTime ? (e) => {
+                    const idx = nearestIdxAt(e.clientX, e.currentTarget.getBoundingClientRect());
+                    const src = pts[idx]?.src;
+                    if (src != null && Number.isFinite(times[src])) onPickTime(times[src]);
+                } : undefined}
             >
                 {band &&
                     (() => {

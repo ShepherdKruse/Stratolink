@@ -43,6 +43,8 @@ export type TelemetryV3PanelProps = {
      *  status) and 'charts' is the pull-up drawer (chart sections + footer,
      *  no header). */
     variant?: 'full' | 'summary' | 'charts';
+    /** When set, clicking a time-series chart scrubs to that time. */
+    onPickTime?: (t: number) => void;
 };
 
 /** Live-updating "time since last contact", value only (for a key metric). */
@@ -146,7 +148,7 @@ function TiltIcon({ deg, color }: { deg: number; color: string }) {
     );
 }
 
-export default function TelemetryV3Panel({ device, devices, onSelect, scrubRow, summary, rows, isFuture = false, variant = 'full' }: TelemetryV3PanelProps) {
+export default function TelemetryV3Panel({ device, devices, onSelect, scrubRow, summary, rows, isFuture = false, variant = 'full', onPickTime }: TelemetryV3PanelProps) {
     const showHeader = variant !== 'charts';
     const showBody = variant !== 'summary';
     /* The mobile summary header is tightened vertically — it's the only thing
@@ -327,6 +329,7 @@ export default function TelemetryV3Panel({ device, devices, onSelect, scrubRow, 
                         unit="m"
                         height={58}
                         scrubT={scrubRow?.t ?? null}
+                        onPickTime={onPickTime}
                     />
                 </div>
                 <Divider />
@@ -340,7 +343,7 @@ export default function TelemetryV3Panel({ device, devices, onSelect, scrubRow, 
                             {row?.temp != null && <span className="mono" style={{ fontSize: 11, fontWeight: 500, color: 'var(--t-text-3)', marginLeft: 3 }}>°C</span>}
                         </span>
                     </div>
-                    <LineTrend series={flight.temp} times={flight.times} status="nominal" fmtFn={(v) => tlmFmt.d1(v)} unit="°C" height={44} scrubT={scrubRow?.t ?? null} />
+                    <LineTrend series={flight.temp} times={flight.times} status="nominal" fmtFn={(v) => tlmFmt.d1(v)} unit="°C" height={44} scrubT={scrubRow?.t ?? null} onPickTime={onPickTime} />
                 </div>
             </Group>
 
