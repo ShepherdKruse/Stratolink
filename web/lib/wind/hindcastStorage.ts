@@ -17,7 +17,10 @@ import type { PathReconstructionResult } from './pathReconstruction';
  * Mirrors `forecastStorage.ts`: Vercel Blob in prod, a gitignored local cache
  * in dev. Bumping ALGO_VERSION invalidates every cached hindcast.
  */
-const ALGO_VERSION = 'v1';
+/* Bump on any reconstruction-algorithm change so stored hindcasts recompute
+ * instead of serving the old geometry (the cache is keyed by fixes, not code).
+ * v2: gap bridges are anchored to their bounding GPS fixes (#44). */
+const ALGO_VERSION = 'v2';
 
 export type StoredHindcast = PathReconstructionResult & { computed_at: string };
 
