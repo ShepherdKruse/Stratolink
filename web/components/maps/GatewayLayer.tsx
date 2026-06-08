@@ -84,19 +84,28 @@ export interface GatewayLayerProps {
 }
 
 /* Coverage wash tones per basemap. Dark mode uses a brighter teal at higher
- * opacity so the "where reception lives" field reads against the dark map. */
+ * opacity so the "where reception lives" field reads against the dark map.
+ *
+ * The "definite reception" (inner) outline carries a soft blurred glow casing
+ * underneath it. A thin semi-transparent line all but vanishes against the
+ * darkened night side of the globe (the terminator dims the basemap but not
+ * this layer, so the line is left stranded over near-black terrain); the glow
+ * gives it a halo that reads on the dark side while staying quiet — low
+ * opacity + heavy blur, not a hard band — over the bright day side. */
 const COVERAGE_STYLE = {
     light: {
         fill: '#5a5c62',
-        fillOpacity: 0.05,
-        innerLine: 'rgba(90, 92, 98, 0.26)',
-        outerLine: 'rgba(90, 92, 98, 0.30)',
+        fillOpacity: 0.06,
+        innerLine: 'rgba(74, 84, 92, 0.5)',
+        innerGlow: 'rgba(120, 140, 152, 0.22)',
+        outerLine: 'rgba(82, 92, 100, 0.42)',
     },
     dark: {
-        fill: '#4a8c96',
-        fillOpacity: 0.07,
-        innerLine: 'rgba(110, 180, 190, 0.34)',
-        outerLine: 'rgba(110, 180, 190, 0.24)',
+        fill: '#3d8e98',
+        fillOpacity: 0.1,
+        innerLine: 'rgba(86, 140, 150, 0.62)',
+        innerGlow: 'rgba(66, 118, 128, 0.28)',
+        outerLine: 'rgba(80, 132, 142, 0.46)',
     },
 } as const;
 
@@ -156,15 +165,17 @@ export default function GatewayLayer({ visible = true, colorScheme = 'light' }: 
                         type="line"
                         paint={{
                             'line-color': cov.outerLine,
-                            'line-width': 0.75,
+                            'line-width': 1,
                             'line-dasharray': [2, 2.5],
                         }}
                     />
                 </Source>
             )}
 
-            {/* Inner (150 km) coverage union — faint slate fill + hairline. Reads
-              * as a quiet "where reception lives" wash, not a glowing layer. */}
+            {/* Inner (150 km) coverage union — faint fill + a soft glow casing
+              * under a crisp hairline. Reads as a quiet "where reception lives"
+              * wash by day; the blurred glow keeps the envelope legible over the
+              * dark night side without turning into a loud band. */}
             {coverageGeoJSON && (
                 <Source id="tm-coverage" type="geojson" data={coverageGeoJSON}>
                     <Layer
@@ -176,11 +187,20 @@ export default function GatewayLayer({ visible = true, colorScheme = 'light' }: 
                         }}
                     />
                     <Layer
+                        id="tm-coverage-glow"
+                        type="line"
+                        paint={{
+                            'line-color': cov.innerGlow,
+                            'line-width': 3.5,
+                            'line-blur': 3,
+                        }}
+                    />
+                    <Layer
                         id="tm-coverage-outline"
                         type="line"
                         paint={{
                             'line-color': cov.innerLine,
-                            'line-width': 0.6,
+                            'line-width': 1.1,
                         }}
                     />
                 </Source>
