@@ -196,6 +196,16 @@ export default function V2MissionMap({
      * composited), then fade it away once for a single clean reveal. */
     const [revealed, setRevealed] = useState(false);
 
+    /* GPU relief while the tab is hidden (#47). The globe holds a heavyweight
+     * standing WebGL context (full-DPR canvas + the terminator's shader raster
+     * layers + Black Marble tileset) that contends with e.g. a video call's
+     * encode pipeline even when the map is idle. When the page is hidden for a
+     * few seconds we tear the map down entirely (unmounting <Map> calls
+     * map.remove(), freeing the context) and rebuild it on return, restoring the
+     * exact camera. Gated on a delay so ordinary tab-flicking doesn't churn. */
+    const [mapAlive, setMapAlive] = useState(true);
+    const lastViewRef = useRef<{ longitude: number; latitude: number; zoom: number; bearing: number; pitch: number } | null>(null);
+
     /* The custom basemap (fog off, quieted labels, shaded relief, bathymetry) is
      * applied imperatively after the style loads. `styledata` fires many times on
      * first load — every Source/Layer react-map-gl mounts triggers it — and the
@@ -283,6 +293,43 @@ export default function V2MissionMap({
         return { longitude: -98, latitude: 39, zoom: wideZoom };
         /* eslint-disable-next-line react-hooks/exhaustive-deps */
     }, []); /* only used at mount */
+
+    /* Tear the map down when the page has been hidden for a moment; rebuild on
+     * return. See `mapAlive` above. */
+    useEffect(() => {
+        const HIDE_TEARDOWN_MS = 8000;   /* don't churn on quick tab flicks */
+        let timer: ReturnType<typeof setTimeout> | null = null;
+        const onVisibility = () => {
+            if (document.hidden) {
+                if (timer) return;
+                timer = setTimeout(() => {
+                    timer = null;
+                    /* Snapshot the camera so the rebuild lands on the same view. */
+                    const m = mapRef.current?.getMap();
+                    if (m) {
+                        try {
+                            const c = m.getCenter();
+                            lastViewRef.current = {
+                                longitude: c.lng, latitude: c.lat,
+                                zoom: m.getZoom(), bearing: m.getBearing(), pitch: m.getPitch(),
+                            };
+                        } catch { /* map mid-teardown; keep the previous snapshot */ }
+                    }
+                    setRevealed(false);
+                    setStyleLoaded(false);
+                    setMapAlive(false);
+                }, HIDE_TEARDOWN_MS);
+            } else {
+                if (timer) { clearTimeout(timer); timer = null; }
+                setMapAlive(true);   /* remounts <Map> at lastViewRef if torn down */
+            }
+        };
+        document.addEventListener('visibilitychange', onVisibility);
+        return () => {
+            if (timer) clearTimeout(timer);
+            document.removeEventListener('visibilitychange', onVisibility);
+        };
+    }, []);
 
     /* Auto-fit policy: fit once per activeId selection, then leave the camera
      * alone so live data updates and scrubbing don't yank the view back. The
@@ -653,6 +700,7 @@ export default function V2MissionMap({
                 cursor: pathPickEnabled ? 'crosshair' : undefined,
             }}
         >
+            {mapAlive ? (
             <Map
                 ref={mapRef}
                 /* Keyed on projection only — a projection switch needs a clean
@@ -662,7 +710,9 @@ export default function V2MissionMap({
                  * styledata. */
                 key={projection}
                 mapboxAccessToken={token}
-                initialViewState={initialView}
+                /* Restore the pre-teardown camera on a hidden-tab rebuild (#47);
+                 * `initialViewState` is only read at mount. */
+                initialViewState={lastViewRef.current ?? initialView}
                 style={{ width: '100%', height: '100%' }}
                 mapStyle={mapStyle}
                 projection={projection === 'globe' ? 'globe' : 'mercator'}
@@ -1025,6 +1075,11 @@ export default function V2MissionMap({
                     </>
                 )}
             </Map>
+            ) : (
+                /* Torn down while hidden (#47) — a plain panel holds the layout
+                 * (and frees the WebGL context) until the tab is visible again. */
+                <div aria-hidden style={{ position: 'absolute', inset: 0, background: 'var(--sl-bg-1)' }} />
+            )}
 
             {/* Load cover — opaque until the map has fully painted, then fades
               * away once so the staged first-load render (gray canvas → shade
