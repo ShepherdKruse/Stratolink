@@ -21,7 +21,7 @@ export default function FlightsIndex({ flights }: FlightsIndexProps) {
                 <p className="mt-6 text-lg leading-relaxed text-muted-foreground">
                     Post-flight summaries with altitude profiles, telemetry traces, and mission timelines.
                     Live tracking is in{' '}
-                    <Link href="/dashboard-v2" className="underline underline-offset-2 hover:text-foreground">
+                    <Link href="/dashboard" className="underline underline-offset-2 hover:text-foreground">
                         Mission Control
                     </Link>
                     .

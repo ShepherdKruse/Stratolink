@@ -113,13 +113,13 @@ export function DashboardShowcase() {
                                         </div>
                                         <div className="flex-1 mx-4">
                                             <div className="bg-background border border-border rounded px-3 py-1.5 text-xs text-muted-foreground text-center">
-                                                stratolink.org/dashboard-v2
+                                                stratolink.org/dashboard
                                             </div>
                                         </div>
                                     </div>
                                     <div className="relative bg-[#1a1a1a] aspect-video overflow-hidden">
                                         <iframe
-                                            src="/dashboard-v2"
+                                            src="/dashboard"
                                             className="w-full h-full border-0 pointer-events-none"
                                             style={{ transform: 'scale(0.5)', transformOrigin: 'top left', width: '200%', height: '200%' }}
                                             title="Mission Control desktop preview"
@@ -150,7 +150,7 @@ export function DashboardShowcase() {
                                     <div className="absolute top-0 left-1/2 -translate-x-1/2 w-32 h-6 bg-foreground/10 rounded-b-2xl z-10" />
                                     <div className="relative bg-[#1a1a1a] rounded-[1.5rem] overflow-hidden aspect-[9/19.5]">
                                         <iframe
-                                            src="/dashboard-v2?preview=mobile"
+                                            src="/dashboard?preview=mobile"
                                             className="w-full h-full border-0 pointer-events-none"
                                             title="Mission Control mobile preview"
                                             sandbox="allow-same-origin allow-scripts"
@@ -214,7 +214,7 @@ export function DashboardShowcase() {
                     }`}
                 >
                     <Link
-                        href="/dashboard-v2"
+                        href="/dashboard"
                         className="inline-flex items-center gap-2 rounded-sm border border-foreground/20 bg-foreground px-6 py-3 text-sm font-medium text-background transition-all hover:bg-foreground/90 hover:border-foreground/30"
                     >
                         Open Dashboard

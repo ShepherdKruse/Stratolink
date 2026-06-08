@@ -29,7 +29,7 @@ export function FlightReportDocument({ report }: Props) {
                 <nav className="report-links" aria-label="Related pages">
                     <Link href="/flights">All flight reports</Link>
                     <Link href="/docs/flight-path-engine">Flight Path Engine technical note →</Link>
-                    <Link href={`/dashboard-v2?device=${encodeURIComponent(report.deviceId)}`}>
+                    <Link href={`/dashboard?device=${encodeURIComponent(report.deviceId)}`}>
                         Live dashboard for {report.deviceId} →
                     </Link>
                 </nav>

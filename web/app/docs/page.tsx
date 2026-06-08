@@ -244,7 +244,7 @@ export default function DocsPage() {
                                 <span className="[overflow-wrap:anywhere]">GitHub Repository</span>
                             </Link>
                             <Link
-                                href="/dashboard-v2"
+                                href="/dashboard"
                                 className="flex min-w-0 items-center gap-3 rounded-sm px-2 py-2 text-sm text-muted-foreground transition-colors hover:bg-accent/50 hover:text-foreground"
                             >
                                 <svg className="h-5 w-5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden>

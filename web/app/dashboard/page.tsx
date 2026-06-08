@@ -1,12 +1,12 @@
 'use client';
 
 import { Suspense } from 'react';
-import DashboardPageContent from './DashboardPageContent';
+import MissionControlScreen from '@/components/dashboard-v2/MissionControl';
 
 export default function DashboardPage() {
     return (
-        <Suspense fallback={<div className="min-h-screen bg-[#1a1a1a]" />}>
-            <DashboardPageContent />
+        <Suspense fallback={<div style={{ padding: 24, color: 'var(--sl-text-dim2)' }}>Loading…</div>}>
+            <MissionControlScreen />
         </Suspense>
     );
 }
