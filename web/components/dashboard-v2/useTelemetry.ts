@@ -48,6 +48,27 @@ const FULL_TELEMETRY_COLUMNS =
     'uv_index, ambient_lux, acoustic_event, firmware_version, uptime_s, tx_count, hdop, ' +
     'power_mode, sleep_ms, lora_sf, lora_bw, frequency_hz, gateways';
 
+/* Poll cadences. These were 30 s / 15 s, which — across left-open background tabs —
+ * generated ~14k Supabase requests/day PER tab (most of our egress). Longer intervals
+ * + pausing while the tab is hidden cut that ~20–50×. A flying balloon reports every
+ * few minutes anyway, so a minute of latency costs nothing. */
+const DEVICE_POLL_MS = 90_000;
+const TELEMETRY_POLL_MS = 60_000;
+
+/** setInterval that PAUSES while the tab is backgrounded (`document.hidden`) and fires
+ *  once immediately when it becomes visible again — so a left-open background tab stops
+ *  hammering Supabase, while a focused tab still feels live. Returns a cleanup fn. */
+function pollWhileVisible(fn: () => void, ms: number): () => void {
+    if (typeof document === 'undefined') {                 // SSR / non-browser
+        const id = setInterval(fn, ms);
+        return () => clearInterval(id);
+    }
+    const id = setInterval(() => { if (!document.hidden) fn(); }, ms);
+    const onVisible = () => { if (!document.hidden) fn(); };
+    document.addEventListener('visibilitychange', onVisible);
+    return () => { clearInterval(id); document.removeEventListener('visibilitychange', onVisible); };
+}
+
 /* Per-subsystem freshness — when did this field last update with a real value?
  * Mirrors the FRESHNESS object in the design's components.jsx. */
 export interface SubsystemFreshness {
@@ -408,8 +429,8 @@ export function useTelemetry({ initialSelectedId = null }: { initialSelectedId?:
             }
         }
         load();
-        const interval = setInterval(load, 30_000);
-        return () => { cancelled = true; clearInterval(interval); };
+        const stop = pollWhileVisible(load, DEVICE_POLL_MS);
+        return () => { cancelled = true; stop(); };
     }, [tick, selectedId]);
 
     /* Full mission row set for the selected device. Loaded in full once (since
@@ -501,11 +522,11 @@ export function useTelemetry({ initialSelectedId = null }: { initialSelectedId?:
         if (selStatus !== 'flying') {
             return () => { cancelled = true; };
         }
-        const interval = setInterval(
+        const stop = pollWhileVisible(
             () => pollIncrement().catch(e => console.debug('useTelemetry poll error', e)),
-            15_000,
+            TELEMETRY_POLL_MS,
         );
-        return () => { cancelled = true; clearInterval(interval); };
+        return () => { cancelled = true; stop(); };
     }, [selectedId, selStatus, selLaunchedAt, tick]);
 
     const freshness = useMemo(() => computeFreshness(rows), [rows]);
