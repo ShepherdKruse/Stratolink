@@ -240,6 +240,14 @@ export default function V2MissionMap({
      * exact camera. Gated on a delay so ordinary tab-flicking doesn't churn. */
     const [mapAlive, setMapAlive] = useState(true);
     const lastViewRef = useRef<{ longitude: number; latitude: number; zoom: number; bearing: number; pitch: number } | null>(null);
+    /* Experiment flag (`?labels=native`): render the path-type labels as a native
+     * Mapbox line-center symbol layer instead of the SVG overlay, to compare
+     * whether the native layer duplicates the label per tile on our runtime
+     * GeoJSON. Default (overlay) when absent. */
+    const [nativeLabels, setNativeLabels] = useState(false);
+    useEffect(() => {
+        try { setNativeLabels(new URLSearchParams(window.location.search).get('labels') === 'native'); } catch { /* SSR */ }
+    }, []);
 
     /* The custom basemap (fog off, quieted labels, shaded relief, bathymetry) is
      * applied imperatively after the style loads. `styledata` fires many times on
@@ -649,6 +657,20 @@ export default function V2MissionMap({
         if (f) out.push({ id: 'forecast', ...f, text: 'forecast', color: C.forecast });
         return out;
     }, [hindcastPath, staleLine, forecastPath, C.path, C.forecast, colorScheme]);
+
+    /* Native-label experiment: the same label slices as a GeoJSON FeatureCollection
+     * for a Mapbox line-center symbol layer (only used when `?labels=native`). */
+    const nativeLabelGeoJSON = useMemo(() => {
+        if (!nativeLabels || lineLabels.length === 0) return null;
+        return {
+            type: 'FeatureCollection' as const,
+            features: lineLabels.map((l) => ({
+                type: 'Feature' as const,
+                geometry: { type: 'LineString' as const, coordinates: l.coords },
+                properties: { text: l.text.toUpperCase(), color: l.color },
+            })),
+        };
+    }, [nativeLabels, lineLabels]);
 
     /* Ensemble "spaghetti" — every Monte-Carlo member as a faint line. */
     const ensembleGeoJSON = useMemo(() => {
@@ -1156,6 +1178,33 @@ export default function V2MissionMap({
                             />
                         </Source>
 
+                        {/* Native line-center label experiment (?labels=native) —
+                          * compare against the SVG overlay for tile duplication. */}
+                        {nativeLabelGeoJSON && (
+                            <Source id="v2-native-line-labels" type="geojson" data={nativeLabelGeoJSON} tolerance={0}>
+                                <Layer
+                                    id="v2-native-line-label"
+                                    type="symbol"
+                                    layout={{
+                                        'symbol-placement': 'line-center',
+                                        'text-field': ['get', 'text'],
+                                        'text-font': ['DIN Pro Medium', 'Arial Unicode MS Regular'],
+                                        'text-size': 11,
+                                        'text-transform': 'uppercase',
+                                        'text-letter-spacing': 0.16,
+                                        'text-max-angle': 40,
+                                        'text-offset': [0, -1],
+                                        'text-padding': 4,
+                                    }}
+                                    paint={{
+                                        'text-color': ['get', 'color'],
+                                        'text-halo-color': labelHalo,
+                                        'text-halo-width': 1.6,
+                                    }}
+                                />
+                            </Source>
+                        )}
+
                         {/* Light-touch orienting label — a small uppercase tag at the
                           * last real fix ("last fix · 3h ago"). The basemap-matched
                           * halo keeps it legible without a box. */}
@@ -1199,7 +1248,7 @@ export default function V2MissionMap({
               * per line) reprojected as the map moves, so each label is guaranteed
               * single (Mapbox line symbols duplicate per tile). Below the load
               * cover so it's hidden until the map reveals. */}
-            {mapAlive && (
+            {mapAlive && !nativeLabels && (
                 <CurvedLineLabels
                     map={mapRef.current?.getMap() ?? null}
                     labels={lineLabels}
