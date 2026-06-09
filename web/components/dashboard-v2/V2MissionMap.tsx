@@ -571,6 +571,36 @@ export default function V2MissionMap({
         };
     }, [validFlightPath, colorScheme]);
 
+    /* Path-type labels — a single, upright tag at the MIDPOINT of each line
+     * ("RECONSTRUCTED FLIGHT" on the hindcast, "PREDICTED FLIGHT" on the
+     * forecast), color-matched to the line. Anchored as a point (not placed
+     * along the line) so it stays put across zoom — line-placed labels get
+     * re-seated and duplicated per GeoJSON tile as you zoom, which read as
+     * jumping. text-anchor 'bottom' lifts it just above the line, so the line
+     * sits below the text rather than behind it. */
+    const lineLabelGeoJSON = useMemo(() => {
+        const midpoint = (pts: Array<[number, number]>): [number, number] | null => {
+            const v = pts.filter(([lon, lat]) => isRenderablePoint(lat, lon));
+            if (v.length < 2) return null;
+            const c = v[Math.floor(v.length / 2)];
+            /* A lone point needs no antimeridian continuity — fold lon back into
+             * [-180,180] so it can't land on an off-screen world copy. */
+            const lon = ((c[0] + 180) % 360 + 360) % 360 - 180;
+            return [lon, c[1]];
+        };
+        const features: Array<{
+            type: 'Feature';
+            geometry: { type: 'Point'; coordinates: [number, number] };
+            properties: { label: string; color: string };
+        }> = [];
+        const h = midpoint(hindcastPath);
+        if (h) features.push({ type: 'Feature', geometry: { type: 'Point', coordinates: h }, properties: { label: 'reconstructed flight', color: C.path } });
+        const f = midpoint(forecastPath);
+        if (f) features.push({ type: 'Feature', geometry: { type: 'Point', coordinates: f }, properties: { label: 'predicted flight', color: C.forecast } });
+        if (features.length === 0) return null;
+        return { type: 'FeatureCollection' as const, features };
+    }, [hindcastPath, forecastPath, C.path, C.forecast]);
+
     /* Ensemble "spaghetti" — every Monte-Carlo member as a faint line. */
     const ensembleGeoJSON = useMemo(() => {
         const tracks = forecastEnsemble
@@ -842,32 +872,6 @@ export default function V2MissionMap({
                                         }}
                                     />
                                 )}
-                                {/* Subdued curved label riding the line — one instance at
-                                  * its center, color-matched to the track with a basemap
-                                  * halo so it reads as a labelled gap in the line. Mapbox
-                                  * drops it automatically when the line is too short/curvy
-                                  * to seat the text cleanly. */}
-                                <Layer
-                                    id="v2-hindcast-label"
-                                    type="symbol"
-                                    layout={{
-                                        'symbol-placement': 'line-center',
-                                        'text-field': 'reconstructed flight',
-                                        'text-font': ['DIN Pro Medium', 'Arial Unicode MS Regular'],
-                                        'text-size': 10.5,
-                                        'text-letter-spacing': 0.16,
-                                        'text-transform': 'uppercase',
-                                        'text-max-angle': 38,
-                                        'text-padding': 4,
-                                    }}
-                                    paint={{
-                                        'text-color': C.path,
-                                        'text-opacity': 0.82,
-                                        'text-halo-color': labelHalo,
-                                        'text-halo-width': 1.8,
-                                        'text-halo-blur': 0.3,
-                                    }}
-                                />
                             </Source>
                         )}
 
@@ -989,30 +993,6 @@ export default function V2MissionMap({
                                         ],
                                     }}
                                 />
-                                {/* Curved label riding the forecast line — mirrors the
-                                  * reconstructed-flight label, color-matched to the
-                                  * forecast hue. */}
-                                <Layer
-                                    id="v2-forecast-label"
-                                    type="symbol"
-                                    layout={{
-                                        'symbol-placement': 'line-center',
-                                        'text-field': 'predicted flight',
-                                        'text-font': ['DIN Pro Medium', 'Arial Unicode MS Regular'],
-                                        'text-size': 10.5,
-                                        'text-letter-spacing': 0.16,
-                                        'text-transform': 'uppercase',
-                                        'text-max-angle': 38,
-                                        'text-padding': 4,
-                                    }}
-                                    paint={{
-                                        'text-color': C.forecast,
-                                        'text-opacity': 0.82,
-                                        'text-halo-color': labelHalo,
-                                        'text-halo-width': 1.8,
-                                        'text-halo-blur': 0.3,
-                                    }}
-                                />
                             </Source>
                         )}
 
@@ -1126,6 +1106,39 @@ export default function V2MissionMap({
                                 }}
                             />
                         </Source>
+
+                        {/* Path-type labels — upright "RECONSTRUCTED FLIGHT" /
+                          * "PREDICTED FLIGHT" tags at each line's midpoint, lifted
+                          * just above the line (text-anchor bottom) so the line sits
+                          * below the text, not behind it. Point-anchored so they
+                          * don't jump/duplicate as the line re-tiles on zoom. */}
+                        {lineLabelGeoJSON && (
+                            <Source id="v2-line-labels" type="geojson" data={lineLabelGeoJSON}>
+                                <Layer
+                                    id="v2-line-label"
+                                    type="symbol"
+                                    layout={{
+                                        'text-field': ['get', 'label'],
+                                        'text-font': ['DIN Pro Medium', 'Arial Unicode MS Regular'],
+                                        'text-size': 10.5,
+                                        'text-transform': 'uppercase',
+                                        'text-letter-spacing': 0.16,
+                                        'text-anchor': 'bottom',
+                                        'text-offset': [0, -0.5],
+                                        'text-padding': 6,
+                                        'text-allow-overlap': false,
+                                        'text-optional': true,
+                                    }}
+                                    paint={{
+                                        'text-color': ['get', 'color'],
+                                        'text-opacity': 0.85,
+                                        'text-halo-color': labelHalo,
+                                        'text-halo-width': 1.4,
+                                        'text-halo-blur': 0.3,
+                                    }}
+                                />
+                            </Source>
+                        )}
 
                         {/* Light-touch orienting label — a small uppercase tag at the
                           * last real fix ("last fix · 3h ago"). The basemap-matched
