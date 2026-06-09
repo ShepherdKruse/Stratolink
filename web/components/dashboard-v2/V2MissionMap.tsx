@@ -571,32 +571,33 @@ export default function V2MissionMap({
         };
     }, [validFlightPath, colorScheme]);
 
-    /* Path-type labels — a single, upright tag at the MIDPOINT of each line
-     * ("RECONSTRUCTED FLIGHT" on the hindcast, "PREDICTED FLIGHT" on the
-     * forecast), color-matched to the line. Anchored as a point (not placed
-     * along the line) so it stays put across zoom — line-placed labels get
-     * re-seated and duplicated per GeoJSON tile as you zoom, which read as
-     * jumping. text-anchor 'bottom' lifts it just above the line, so the line
-     * sits below the text rather than behind it. */
+    /* Path-type labels — a curved tag riding each line ("RECONSTRUCTED FLIGHT"
+     * on the hindcast, "PREDICTED FLIGHT" on the forecast), color-matched to the
+     * line. To keep it from jumping/duplicating on zoom, the label rides its own
+     * short CENTRAL SLICE of the path (not the full line, which clips across
+     * GeoJSON tiles and spawns a label per tile) and that source disables zoom
+     * simplification (tolerance 0) so the geometry — and the placement — is
+     * identical at every zoom. */
     const lineLabelGeoJSON = useMemo(() => {
-        const midpoint = (pts: Array<[number, number]>): [number, number] | null => {
+        const centerSlice = (pts: Array<[number, number]>): Array<[number, number]> | null => {
             const v = pts.filter(([lon, lat]) => isRenderablePoint(lat, lon));
-            if (v.length < 2) return null;
-            const c = v[Math.floor(v.length / 2)];
-            /* A lone point needs no antimeridian continuity — fold lon back into
-             * [-180,180] so it can't land on an off-screen world copy. */
-            const lon = ((c[0] + 180) % 360 + 360) % 360 - 180;
-            return [lon, c[1]];
+            if (v.length < 4) return null;
+            /* Central ~40% — long enough to seat the text, short enough to stay
+             * within a tile or two. line-center hides it when even this is too
+             * short to fit the label (e.g. at low zoom), which is the behaviour
+             * we want. */
+            const seg = unwrapLngs(v.slice(Math.floor(v.length * 0.3), Math.ceil(v.length * 0.7)));
+            return seg.length >= 2 ? seg : null;
         };
         const features: Array<{
             type: 'Feature';
-            geometry: { type: 'Point'; coordinates: [number, number] };
+            geometry: { type: 'LineString'; coordinates: Array<[number, number]> };
             properties: { label: string; color: string };
         }> = [];
-        const h = midpoint(hindcastPath);
-        if (h) features.push({ type: 'Feature', geometry: { type: 'Point', coordinates: h }, properties: { label: 'reconstructed flight', color: C.path } });
-        const f = midpoint(forecastPath);
-        if (f) features.push({ type: 'Feature', geometry: { type: 'Point', coordinates: f }, properties: { label: 'predicted flight', color: C.forecast } });
+        const h = centerSlice(hindcastPath);
+        if (h) features.push({ type: 'Feature', geometry: { type: 'LineString', coordinates: h }, properties: { label: 'reconstructed flight', color: C.path } });
+        const f = centerSlice(forecastPath);
+        if (f) features.push({ type: 'Feature', geometry: { type: 'LineString', coordinates: f }, properties: { label: 'predicted flight', color: C.forecast } });
         if (features.length === 0) return null;
         return { type: 'FeatureCollection' as const, features };
     }, [hindcastPath, forecastPath, C.path, C.forecast]);
@@ -1107,34 +1108,33 @@ export default function V2MissionMap({
                             />
                         </Source>
 
-                        {/* Path-type labels — upright "RECONSTRUCTED FLIGHT" /
-                          * "PREDICTED FLIGHT" tags at each line's midpoint, lifted
-                          * just above the line (text-anchor bottom) so the line sits
-                          * below the text, not behind it. Point-anchored so they
-                          * don't jump/duplicate as the line re-tiles on zoom. */}
+                        {/* Path-type labels — curved "RECONSTRUCTED FLIGHT" /
+                          * "PREDICTED FLIGHT" riding the center of each line. The
+                          * source disables simplification (tolerance 0) and the
+                          * geometry is a short central slice, so the placement is
+                          * stable and single across zoom. A wide basemap halo masks
+                          * the line behind the glyphs. */}
                         {lineLabelGeoJSON && (
-                            <Source id="v2-line-labels" type="geojson" data={lineLabelGeoJSON}>
+                            <Source id="v2-line-labels" type="geojson" data={lineLabelGeoJSON} tolerance={0}>
                                 <Layer
                                     id="v2-line-label"
                                     type="symbol"
                                     layout={{
+                                        'symbol-placement': 'line-center',
                                         'text-field': ['get', 'label'],
                                         'text-font': ['DIN Pro Medium', 'Arial Unicode MS Regular'],
                                         'text-size': 10.5,
                                         'text-transform': 'uppercase',
                                         'text-letter-spacing': 0.16,
-                                        'text-anchor': 'bottom',
-                                        'text-offset': [0, -0.5],
-                                        'text-padding': 6,
-                                        'text-allow-overlap': false,
-                                        'text-optional': true,
+                                        'text-max-angle': 40,
+                                        'text-padding': 4,
                                     }}
                                     paint={{
                                         'text-color': ['get', 'color'],
-                                        'text-opacity': 0.85,
+                                        'text-opacity': 0.9,
                                         'text-halo-color': labelHalo,
-                                        'text-halo-width': 1.4,
-                                        'text-halo-blur': 0.3,
+                                        'text-halo-width': 2.2,
+                                        'text-halo-blur': 0.2,
                                     }}
                                 />
                             </Source>
