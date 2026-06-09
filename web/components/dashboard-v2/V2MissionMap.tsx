@@ -215,6 +215,10 @@ export default function V2MissionMap({
     const C = colorScheme === 'dark'
         ? { path: '#ff5b1f', forecast: '#5ba8ff', halo: 'rgba(255, 91, 31, 0.22)', recv: '74, 217, 155' }
         : { path: '#a11515', forecast: '#08327d', halo: 'rgba(161, 21, 21, 0.14)', recv: '122, 155, 118' };
+    /* Basemap-matched halo so on-line labels read as a clean gap punched into the
+     * line (the halo masks the stroke around each glyph) rather than text laid
+     * over it. */
+    const labelHalo = colorScheme === 'dark' ? 'rgba(8, 12, 16, 0.9)' : 'rgba(255, 255, 255, 0.92)';
     const pathPickEnabled = pickPath.length >= 2 && Boolean(onPickTime);
     const mapRef = useRef<MapRef>(null);
     const [styleLoaded, setStyleLoaded] = useState(false);
@@ -838,6 +842,32 @@ export default function V2MissionMap({
                                         }}
                                     />
                                 )}
+                                {/* Subdued curved label riding the line — one instance at
+                                  * its center, color-matched to the track with a basemap
+                                  * halo so it reads as a labelled gap in the line. Mapbox
+                                  * drops it automatically when the line is too short/curvy
+                                  * to seat the text cleanly. */}
+                                <Layer
+                                    id="v2-hindcast-label"
+                                    type="symbol"
+                                    layout={{
+                                        'symbol-placement': 'line-center',
+                                        'text-field': 'reconstructed flight',
+                                        'text-font': ['DIN Pro Medium', 'Arial Unicode MS Regular'],
+                                        'text-size': 10.5,
+                                        'text-letter-spacing': 0.16,
+                                        'text-transform': 'uppercase',
+                                        'text-max-angle': 38,
+                                        'text-padding': 4,
+                                    }}
+                                    paint={{
+                                        'text-color': C.path,
+                                        'text-opacity': 0.82,
+                                        'text-halo-color': labelHalo,
+                                        'text-halo-width': 1.8,
+                                        'text-halo-blur': 0.3,
+                                    }}
+                                />
                             </Source>
                         )}
 
@@ -957,6 +987,30 @@ export default function V2MissionMap({
                                             8, 1.8,
                                             14, 2.6,
                                         ],
+                                    }}
+                                />
+                                {/* Curved label riding the forecast line — mirrors the
+                                  * reconstructed-flight label, color-matched to the
+                                  * forecast hue. */}
+                                <Layer
+                                    id="v2-forecast-label"
+                                    type="symbol"
+                                    layout={{
+                                        'symbol-placement': 'line-center',
+                                        'text-field': 'predicted flight',
+                                        'text-font': ['DIN Pro Medium', 'Arial Unicode MS Regular'],
+                                        'text-size': 10.5,
+                                        'text-letter-spacing': 0.16,
+                                        'text-transform': 'uppercase',
+                                        'text-max-angle': 38,
+                                        'text-padding': 4,
+                                    }}
+                                    paint={{
+                                        'text-color': C.forecast,
+                                        'text-opacity': 0.82,
+                                        'text-halo-color': labelHalo,
+                                        'text-halo-width': 1.8,
+                                        'text-halo-blur': 0.3,
                                     }}
                                 />
                             </Source>
