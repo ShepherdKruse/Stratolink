@@ -612,13 +612,28 @@ export default function V2MissionMap({
                 if (d > TURN_TOL) { closeRun(a, k - 1); a = k; }
             }
             closeRun(a, len.length - 1);
-            const coords = u.slice(bestA, bestB + 2);   /* edges a..b → vertices a..b+1 */
-            /* Anchor = vertex nearest the run's arc-length midpoint. */
-            const half = bestLen / 2;
+            let coords = u.slice(bestA, bestB + 2);   /* edges a..b → vertices a..b+1 */
+            /* Downsample so per-frame occlusion + projection work stays bounded. */
+            const MAXPTS = 48;
+            if (coords.length > MAXPTS) {
+                const ds: Array<[number, number]> = [];
+                for (let i = 0; i < MAXPTS; i++) ds.push(coords[Math.round((i / (MAXPTS - 1)) * (coords.length - 1))]);
+                coords = ds;
+            }
+            /* Anchor = vertex nearest the segment's arc-length midpoint. */
+            const segLen: number[] = [];
+            let tot = 0;
+            for (let k = 0; k < coords.length - 1; k++) {
+                const cl = Math.cos((((coords[k][1] + coords[k + 1][1]) / 2) * Math.PI) / 180);
+                const dx = (coords[k + 1][0] - coords[k][0]) * cl;
+                const dy = coords[k + 1][1] - coords[k][1];
+                segLen.push(Math.hypot(dx, dy));
+                tot += segLen[k];
+            }
             let acc = 0, anchor = 0, bestd = Infinity;
             for (let i = 0; i < coords.length; i++) {
-                if (i > 0) acc += len[bestA + i - 1];
-                const dd = Math.abs(acc - half);
+                if (i > 0) acc += segLen[i - 1];
+                const dd = Math.abs(acc - tot / 2);
                 if (dd < bestd) { bestd = dd; anchor = i; }
             }
             return { coords, anchor };
@@ -1270,33 +1285,34 @@ function CurvedLineLabels({ map, labels, halo, visible }: {
                 const textEl = textRefs.current[l.id];
                 const tpathEl = tpathRefs.current[l.id];
                 if (!pathEl || !textEl || !tpathEl) continue;
-                /* Hide when the label's anchor is on the FAR side of the globe.
-                 * project() returns a screen point even for occluded locations;
-                 * round-tripping through unproject lands on the near-side surface
-                 * at that pixel, so a large discrepancy means the point is behind
-                 * the globe. (On mercator the round-trip is exact → never hides.) */
-                const anc = l.coords[Math.min(l.anchor, l.coords.length - 1)];
-                const rt = map.unproject(map.project(anc as [number, number]));
-                let dLng = Math.abs(rt.lng - anc[0]) % 360; if (dLng > 180) dLng = 360 - dLng;
-                if (dLng > 1.5 || Math.abs(rt.lat - anc[1]) > 1.5) { textEl.style.display = 'none'; continue; }
-                let pts = l.coords.map((c) => map.project(c as [number, number]));
+                /* Per-point globe occlusion: project() returns a screen point even
+                 * for far-side locations; round-tripping through unproject lands on
+                 * the near-side surface at that pixel, so a big discrepancy means
+                 * the point is behind the globe. (On mercator it's exact.) */
+                const occluded = (c: [number, number]) => {
+                    const r = map.unproject(map.project(c));
+                    let dLng = Math.abs(r.lng - c[0]) % 360; if (dLng > 180) dLng = 360 - dLng;
+                    return dLng > 1.5 || Math.abs(r.lat - c[1]) > 1.5;
+                };
+                const a0 = Math.min(Math.max(0, l.anchor), l.coords.length - 1);
+                if (occluded(l.coords[a0])) { textEl.style.display = 'none'; continue; }
+                /* Visible contiguous run around the anchor — only the part behind
+                 * the globe is dropped (text clips at the horizon) instead of the
+                 * whole label vanishing. */
+                let lo = a0, hi = a0;
+                while (lo > 0 && !occluded(l.coords[lo - 1])) lo--;
+                while (hi < l.coords.length - 1 && !occluded(l.coords[hi + 1])) hi++;
+                const clipped = lo > 0 || hi < l.coords.length - 1;
+                let pts = l.coords.slice(lo, hi + 1).map((c) => map.project(c as [number, number]));
                 if (pts.length < 2) { textEl.style.display = 'none'; continue; }
-                let anchorIdx = Math.min(Math.max(0, l.anchor), pts.length - 1);
-                /* Keep text upright: reverse when the path runs right-to-left AT
-                 * THE ANCHOR (local direction, so it only flips when the labelled
-                 * stretch actually reverses — not on an endpoint wiggle). */
+                let anchorIdx = a0 - lo;
+                /* Keep text upright: reverse a right-to-left run at the anchor. */
                 const before = pts[Math.max(0, anchorIdx - 1)];
                 const after = pts[Math.min(pts.length - 1, anchorIdx + 1)];
                 if (after.x < before.x) { pts = pts.slice().reverse(); anchorIdx = pts.length - 1 - anchorIdx; }
-                /* Cumulative arc-length; pin the text center to the anchor VERTEX
-                 * (a fixed point on the path) rather than 50% of the screen length
-                 * — otherwise globe foreshortening drifts that point and the label
-                 * appears to slide as you rotate. */
-                /* Lift the label off the line: offset each point along the local
-                 * normal so the text rides a curve a fixed distance ABOVE the line
-                 * rather than on it. Paths are normalized left-to-right, so the
-                 * (ty,-tx) normal points to the upper (screen) side. */
-                const LIFT = 11;
+                /* Lift the text just off the line (perpendicular, upper side).
+                 * Paths are normalized left-to-right, so the (ty,-tx) normal is up. */
+                const LIFT = 6;
                 const lifted = pts.map((p, i) => {
                     const a = pts[Math.max(0, i - 1)];
                     const b = pts[Math.min(pts.length - 1, i + 1)];
@@ -1307,17 +1323,21 @@ function CurvedLineLabels({ map, labels, halo, visible }: {
                 const arc: number[] = [0];
                 for (let i = 1; i < lifted.length; i++) arc.push(arc[i - 1] + Math.hypot(lifted[i].x - lifted[i - 1].x, lifted[i].y - lifted[i - 1].y));
                 const total = arc[arc.length - 1];
-                const off = arc[anchorIdx];
-                const textW = l.text.length * (CLP_FONT * 0.62 + CLP_SPACING);
-                /* Need room each side of the anchor to seat the centered text. */
-                if (total >= textW && Math.min(off, total - off) >= textW / 2) {
-                    pathEl.setAttribute('d', lifted.map((p, i) => `${i ? 'L' : 'M'}${p.x.toFixed(1)} ${p.y.toFixed(1)}`).join(' '));
-                    tpathEl.setAttribute('startOffset', off.toFixed(1));
-                    textEl.style.display = '';
-                } else {
-                    /* Too short on screen to seat the text — hide rather than clip. */
+                /* Capped, zoom-scaled size — grows with zoom to a max, shrinks to a
+                 * floor when zoomed out so it never dwarfs the path. */
+                const fs = Math.max(7, Math.min(12, 7 + (map.getZoom() - 1) * 1.3));
+                const textW = l.text.length * fs * 0.78;
+                /* Fully visible but too short → hide cleanly. Globe-clipped → let
+                 * the text run off the horizon rather than vanish. */
+                if ((!clipped && total < textW) || (clipped && total < textW * 0.3)) {
                     textEl.style.display = 'none';
+                    continue;
                 }
+                textEl.style.fontSize = `${fs.toFixed(1)}px`;
+                textEl.style.letterSpacing = `${(fs * 0.16).toFixed(2)}px`;
+                pathEl.setAttribute('d', lifted.map((p, i) => `${i ? 'L' : 'M'}${p.x.toFixed(1)} ${p.y.toFixed(1)}`).join(' '));
+                tpathEl.setAttribute('startOffset', arc[anchorIdx].toFixed(1));
+                textEl.style.display = '';
             }
         };
         update();
