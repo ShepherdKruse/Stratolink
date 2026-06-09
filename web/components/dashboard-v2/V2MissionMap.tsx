@@ -1283,14 +1283,26 @@ function CurvedLineLabels({ map, labels, halo, visible }: {
                  * (a fixed point on the path) rather than 50% of the screen length
                  * — otherwise globe foreshortening drifts that point and the label
                  * appears to slide as you rotate. */
+                /* Lift the label off the line: offset each point along the local
+                 * normal so the text rides a curve a fixed distance ABOVE the line
+                 * rather than on it. Paths are normalized left-to-right, so the
+                 * (ty,-tx) normal points to the upper (screen) side. */
+                const LIFT = 11;
+                const lifted = pts.map((p, i) => {
+                    const a = pts[Math.max(0, i - 1)];
+                    const b = pts[Math.min(pts.length - 1, i + 1)];
+                    let tx = b.x - a.x, ty = b.y - a.y;
+                    const tl = Math.hypot(tx, ty) || 1; tx /= tl; ty /= tl;
+                    return { x: p.x + LIFT * ty, y: p.y - LIFT * tx };
+                });
                 const arc: number[] = [0];
-                for (let i = 1; i < pts.length; i++) arc.push(arc[i - 1] + Math.hypot(pts[i].x - pts[i - 1].x, pts[i].y - pts[i - 1].y));
+                for (let i = 1; i < lifted.length; i++) arc.push(arc[i - 1] + Math.hypot(lifted[i].x - lifted[i - 1].x, lifted[i].y - lifted[i - 1].y));
                 const total = arc[arc.length - 1];
                 const off = arc[anchorIdx];
                 const textW = l.text.length * (CLP_FONT * 0.62 + CLP_SPACING);
                 /* Need room each side of the anchor to seat the centered text. */
                 if (total >= textW && Math.min(off, total - off) >= textW / 2) {
-                    pathEl.setAttribute('d', pts.map((p, i) => `${i ? 'L' : 'M'}${p.x.toFixed(1)} ${p.y.toFixed(1)}`).join(' '));
+                    pathEl.setAttribute('d', lifted.map((p, i) => `${i ? 'L' : 'M'}${p.x.toFixed(1)} ${p.y.toFixed(1)}`).join(' '));
                     tpathEl.setAttribute('startOffset', off.toFixed(1));
                     textEl.style.display = '';
                 } else {
@@ -1330,7 +1342,7 @@ function CurvedLineLabels({ map, labels, halo, visible }: {
                     opacity={0.9}
                     style={{ display: 'none', fontFamily: 'var(--sl-sans, system-ui, sans-serif)', fontSize: CLP_FONT, fontWeight: 600, letterSpacing: `${CLP_SPACING}px` }}
                 >
-                    <textPath ref={(el) => { tpathRefs.current[l.id] = el; }} href={`#v2-clp-${l.id}`} startOffset="50%" textAnchor="middle" dy={-6}>{l.text.toUpperCase()}</textPath>
+                    <textPath ref={(el) => { tpathRefs.current[l.id] = el; }} href={`#v2-clp-${l.id}`} startOffset="50%" textAnchor="middle">{l.text.toUpperCase()}</textPath>
                 </text>
             ))}
         </svg>
