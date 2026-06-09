@@ -15,7 +15,7 @@
  */
 'use client';
 
-import { useCallback, useEffect, useMemo, useReducer, useRef, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import Map, { Source, Layer } from 'react-map-gl/mapbox';
 import type { MapRef, LngLatBoundsLike } from 'react-map-gl/mapbox';
 import type { Map as MapboxMap } from 'mapbox-gl';
@@ -1199,66 +1199,83 @@ export default function V2MissionMap({
  * ────────────────────────────────────────────────────────────────────────── */
 interface CurvedLabel { id: string; coords: Array<[number, number]>; text: string; color: string }
 
+const CLP_FONT = 10.5;
+const CLP_SPACING = 1.6;      /* letter-spacing px */
+
 function CurvedLineLabels({ map, labels, halo, visible }: {
     map: MapboxMap | null;
     labels: CurvedLabel[];
     halo: string;
     visible: boolean;
 }) {
-    /* Reproject on every camera change. */
-    const [, bump] = useReducer((n: number) => n + 1, 0);
+    /* The SVG skeleton (one <path>+<textPath> per line) is rendered once by
+     * React; the geometry is updated IMPERATIVELY on the map's `move` event —
+     * the same per-frame cadence a native Marker uses — so the label stays glued
+     * to the map instead of trailing a React render behind it (the jank). */
+    const svgRef = useRef<SVGSVGElement | null>(null);
+    const pathRefs = useRef<Record<string, SVGPathElement | null>>({});
+    const textRefs = useRef<Record<string, SVGTextElement | null>>({});
+
     useEffect(() => {
         if (!map) return;
-        const on = () => bump();
-        map.on('move', on);
-        map.on('zoom', on);
-        map.on('resize', on);
-        return () => { map.off('move', on); map.off('zoom', on); map.off('resize', on); };
-    }, [map]);
+        const update = () => {
+            const svg = svgRef.current;
+            if (!svg) return;
+            const el = map.getContainer();
+            svg.setAttribute('width', String(el.clientWidth));
+            svg.setAttribute('height', String(el.clientHeight));
+            for (const l of labels) {
+                const pathEl = pathRefs.current[l.id];
+                const textEl = textRefs.current[l.id];
+                if (!pathEl || !textEl) continue;
+                let pts = l.coords.map((c) => map.project(c as [number, number]));
+                /* Keep text upright: reverse a right-to-left path so glyphs read
+                 * left-to-right rather than upside down. */
+                if (pts.length >= 2 && pts[pts.length - 1].x < pts[0].x) pts = pts.slice().reverse();
+                let len = 0;
+                for (let i = 1; i < pts.length; i++) len += Math.hypot(pts[i].x - pts[i - 1].x, pts[i].y - pts[i - 1].y);
+                const textW = l.text.length * (CLP_FONT * 0.62 + CLP_SPACING);
+                if (pts.length >= 2 && len >= textW) {
+                    pathEl.setAttribute('d', pts.map((p, i) => `${i ? 'L' : 'M'}${p.x.toFixed(1)} ${p.y.toFixed(1)}`).join(' '));
+                    textEl.style.display = '';
+                } else {
+                    /* Too short on screen to seat the text — hide rather than clip. */
+                    textEl.style.display = 'none';
+                }
+            }
+        };
+        update();
+        map.on('move', update);
+        map.on('resize', update);
+        return () => { map.off('move', update); map.off('resize', update); };
+    }, [map, labels, visible]);
 
     if (!map || !visible || labels.length === 0) return null;
 
-    const FONT = 10.5;
-    const SPACING = 1.6;      /* letter-spacing px */
-    const el = map.getContainer();
-    const built = labels.map((l) => {
-        let pts = l.coords.map((c) => map.project(c as [number, number]));
-        if (pts.length < 2) return null;
-        /* Keep text upright: if the path runs right-to-left, reverse it so glyphs
-         * read left-to-right rather than upside down. */
-        if (pts[pts.length - 1].x < pts[0].x) pts = pts.slice().reverse();
-        let len = 0;
-        for (let i = 1; i < pts.length; i++) len += Math.hypot(pts[i].x - pts[i - 1].x, pts[i].y - pts[i - 1].y);
-        const textW = l.text.length * (FONT * 0.62 + SPACING);
-        if (len < textW) return null;   /* not enough room — hide rather than clip */
-        const d = pts.map((p, i) => `${i ? 'L' : 'M'}${p.x.toFixed(1)} ${p.y.toFixed(1)}`).join(' ');
-        return { id: l.id, d, text: l.text.toUpperCase(), color: l.color };
-    }).filter(Boolean) as Array<{ id: string; d: string; text: string; color: string }>;
-
-    if (built.length === 0) return null;
-
     return (
         <svg
+            ref={svgRef}
             aria-hidden
-            width={el.clientWidth}
-            height={el.clientHeight}
             style={{ position: 'absolute', inset: 0, pointerEvents: 'none', zIndex: 2, overflow: 'visible' }}
         >
             <defs>
-                {built.map((b) => <path key={b.id} id={`v2-clp-${b.id}`} d={b.d} fill="none" />)}
+                {labels.map((l) => (
+                    <path key={l.id} id={`v2-clp-${l.id}`} ref={(el) => { pathRefs.current[l.id] = el; }} fill="none" />
+                ))}
             </defs>
-            {built.map((b) => (
+            {labels.map((l) => (
                 <text
-                    key={b.id}
-                    fill={b.color}
+                    key={l.id}
+                    ref={(el) => { textRefs.current[l.id] = el; }}
+                    fill={l.color}
                     stroke={halo}
                     strokeWidth={3.4}
                     strokeLinejoin="round"
                     paintOrder="stroke"
                     opacity={0.9}
-                    style={{ fontFamily: 'var(--sl-sans, system-ui, sans-serif)', fontSize: FONT, fontWeight: 600, letterSpacing: `${SPACING}px` }}
+                    style={{ display: 'none', fontFamily: 'var(--sl-sans, system-ui, sans-serif)', fontSize: CLP_FONT, fontWeight: 600, letterSpacing: `${CLP_SPACING}px` }}
                 >
-                    <textPath href={`#v2-clp-${b.id}`} startOffset="50%" textAnchor="middle">{b.text}</textPath>
+                    <textPath href={`#v2-clp-${l.id}`} startOffset="50%" textAnchor="middle">{l.text.toUpperCase()}</textPath>
                 </text>
             ))}
         </svg>
