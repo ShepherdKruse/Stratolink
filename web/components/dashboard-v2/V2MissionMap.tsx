@@ -1320,6 +1320,10 @@ function CurvedLineLabels({ map, labels, halo, visible }: {
     const pathRefs = useRef<Record<string, SVGPathElement | null>>({});
     const textRefs = useRef<Record<string, SVGTextElement | null>>({});
     const tpathRefs = useRef<Record<string, SVGTextPathElement | null>>({});
+    /* Sticky per-label flip state — hysteresis so the upright-flip only happens
+     * when the segment clearly points the other way, not jittering near vertical
+     * (which read as the label "reorienting" instead of staying on the surface). */
+    const flipRef = useRef<Record<string, boolean>>({});
 
     useEffect(() => {
         if (!map) return;
@@ -1355,10 +1359,19 @@ function CurvedLineLabels({ map, labels, halo, visible }: {
                 let pts = l.coords.slice(lo, hi + 1).map((c) => map.project(c as [number, number]));
                 if (pts.length < 2) { textEl.style.display = 'none'; continue; }
                 let anchorIdx = a0 - lo;
-                /* Keep text upright: reverse a right-to-left run at the anchor. */
+                /* Keep text upright, but with hysteresis: only flip once the
+                 * segment clearly points left (nx < -0.25) and only flip back once
+                 * it clearly points right (nx > 0.25). The dead zone near vertical
+                 * holds the last state, so rotating the globe doesn't jitter-flip
+                 * the label — it just rotates with the surface between rare flips. */
                 const before = pts[Math.max(0, anchorIdx - 1)];
                 const after = pts[Math.min(pts.length - 1, anchorIdx + 1)];
-                if (after.x < before.x) { pts = pts.slice().reverse(); anchorIdx = pts.length - 1 - anchorIdx; }
+                const nx = (after.x - before.x) / (Math.hypot(after.x - before.x, after.y - before.y) || 1);
+                let flip = flipRef.current[l.id] ?? (nx < 0);
+                if (!flip && nx < -0.25) flip = true;
+                else if (flip && nx > 0.25) flip = false;
+                flipRef.current[l.id] = flip;
+                if (flip) { pts = pts.slice().reverse(); anchorIdx = pts.length - 1 - anchorIdx; }
                 /* Lift the text just off the line (perpendicular, upper side).
                  * Paths are normalized left-to-right, so the (ty,-tx) normal is up. */
                 const LIFT = 6;
