@@ -1330,7 +1330,7 @@ function CurvedLineLabels({ map, labels, halo, visible }: {
                     opacity={0.9}
                     style={{ display: 'none', fontFamily: 'var(--sl-sans, system-ui, sans-serif)', fontSize: CLP_FONT, fontWeight: 600, letterSpacing: `${CLP_SPACING}px` }}
                 >
-                    <textPath ref={(el) => { tpathRefs.current[l.id] = el; }} href={`#v2-clp-${l.id}`} startOffset="50%" textAnchor="middle">{l.text.toUpperCase()}</textPath>
+                    <textPath ref={(el) => { tpathRefs.current[l.id] = el; }} href={`#v2-clp-${l.id}`} startOffset="50%" textAnchor="middle" dy={-6}>{l.text.toUpperCase()}</textPath>
                 </text>
             ))}
         </svg>
