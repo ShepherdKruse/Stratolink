@@ -18,7 +18,6 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import Map, { Source, Layer } from 'react-map-gl/mapbox';
 import type { MapRef, LngLatBoundsLike } from 'react-map-gl/mapbox';
-import type { Map as MapboxMap } from 'mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import GatewayLayer from '@/components/maps/GatewayLayer';
 import GatewayRangeRings from '@/components/maps/GatewayRangeRings';
@@ -240,14 +239,6 @@ export default function V2MissionMap({
      * exact camera. Gated on a delay so ordinary tab-flicking doesn't churn. */
     const [mapAlive, setMapAlive] = useState(true);
     const lastViewRef = useRef<{ longitude: number; latitude: number; zoom: number; bearing: number; pitch: number } | null>(null);
-    /* Experiment flag (`?labels=native`): render the path-type labels as a native
-     * Mapbox line-center symbol layer instead of the SVG overlay, to compare
-     * whether the native layer duplicates the label per tile on our runtime
-     * GeoJSON. Default (overlay) when absent. */
-    const [nativeLabels, setNativeLabels] = useState(false);
-    useEffect(() => {
-        try { setNativeLabels(new URLSearchParams(window.location.search).get('labels') === 'native'); } catch { /* SSR */ }
-    }, []);
 
     /* The custom basemap (fog off, quieted labels, shaded relief, bathymetry) is
      * applied imperatively after the style loads. `styledata` fires many times on
@@ -580,97 +571,68 @@ export default function V2MissionMap({
         };
     }, [validFlightPath, colorScheme]);
 
-    /* Path-type labels — a curved tag riding each line ("RECONSTRUCTED FLIGHT"
-     * on the hindcast, "PREDICTED FLIGHT" on the forecast). Drawn as an SVG
-     * text-on-path overlay (see CurvedLineLabels), NOT a Mapbox line symbol:
-     * line-placed symbols on a GeoJSON source are tiled, so Mapbox emits one
-     * label per tile the line crosses — more as you zoom in. The overlay is a
-     * single DOM element per line, so it's exactly one, always. We feed it a
-     * central slice (~middle 60%) of each path so the text rides the smoother
-     * middle and stays clear of the busy endpoints. */
-    const lineLabels = useMemo(() => {
-        /* Place the label half-way along the path's LONGEST near-straight segment:
-         * split the path at corners (heading change > tol), take the longest run,
-         * and anchor at its arc-length midpoint. That lands the label on a calm,
-         * roomy stretch in the path interior — away from hairpins and away from
-         * the clustered recent-fix end (where the "last fix" tag lives). Returns
-         * the segment plus the anchor index within it. */
+    /* Path-type labels — a single tag printed ON the globe surface for each line
+     * ("RECONSTRUCTED FLIGHT" / "PREDICTED PATH" / "FORECAST"). Rendered as a
+     * native Mapbox POINT symbol (not a line symbol — line symbols tile and
+     * duplicate per tile; not an SVG overlay — that hovers in screen space and
+     * spills past the globe edge). A point lives in one tile (always single) and
+     * Mapbox draws it on the surface, rotates it with the map, and occludes it at
+     * the horizon. We anchor at the midpoint of the path's longest near-straight
+     * segment and rotate the text to that segment's geographic bearing so it
+     * reads along the line. */
+    const lineLabelGeoJSON = useMemo(() => {
         const TURN_TOL = (30 * Math.PI) / 180;
-        const labelSeg = (pts: Array<[number, number]>): { coords: Array<[number, number]>; anchor: number } | null => {
+        const D2R = Math.PI / 180, R2D = 180 / Math.PI;
+        /* Anchor point + along-line bearing for a path's longest straight run. */
+        const anchorOf = (pts: Array<[number, number]>): { lon: number; lat: number; rotate: number } | null => {
             const v = pts.filter(([lon, lat]) => isRenderablePoint(lat, lon));
-            if (v.length < 3) return v.length >= 2 ? { coords: unwrapLngs(v), anchor: Math.floor(v.length / 2) } : null;
+            if (v.length < 2) return null;
             const u = unwrapLngs(v);
             const len: number[] = [];
             const brg: number[] = [];
             for (let k = 0; k < u.length - 1; k++) {
                 const cosLat = Math.cos((((u[k][1] + u[k + 1][1]) / 2) * Math.PI) / 180);
-                const dx = (u[k + 1][0] - u[k][0]) * cosLat;
-                const dy = u[k + 1][1] - u[k][1];
-                len.push(Math.hypot(dx, dy));
-                brg.push(Math.atan2(dy, dx));
+                len.push(Math.hypot((u[k + 1][0] - u[k][0]) * cosLat, u[k + 1][1] - u[k][1]));
+                brg.push(Math.atan2(u[k + 1][1] - u[k][1], u[k + 1][0] - u[k][0]));
             }
-            /* Longest run of edges [a..b] with no sharp turn between them. */
-            let bestA = 0, bestB = len.length - 1, bestLen = -1, a = 0;
-            const closeRun = (s: number, e: number) => {
-                let L = 0; for (let k = s; k <= e; k++) L += len[k];
-                if (L > bestLen) { bestLen = L; bestA = s; bestB = e; }
-            };
-            for (let k = 1; k < brg.length; k++) {
-                let d = Math.abs(brg[k] - brg[k - 1]); if (d > Math.PI) d = 2 * Math.PI - d;
-                if (d > TURN_TOL) { closeRun(a, k - 1); a = k; }
-            }
-            closeRun(a, len.length - 1);
-            let coords = u.slice(bestA, bestB + 2);   /* edges a..b → vertices a..b+1 */
-            /* Downsample so per-frame occlusion + projection work stays bounded. */
-            const MAXPTS = 48;
-            if (coords.length > MAXPTS) {
-                const ds: Array<[number, number]> = [];
-                for (let i = 0; i < MAXPTS; i++) ds.push(coords[Math.round((i / (MAXPTS - 1)) * (coords.length - 1))]);
-                coords = ds;
-            }
-            /* Anchor = vertex nearest the segment's arc-length midpoint. */
-            const segLen: number[] = [];
-            let tot = 0;
-            for (let k = 0; k < coords.length - 1; k++) {
-                const cl = Math.cos((((coords[k][1] + coords[k + 1][1]) / 2) * Math.PI) / 180);
-                const dx = (coords[k + 1][0] - coords[k][0]) * cl;
-                const dy = coords[k + 1][1] - coords[k][1];
-                segLen.push(Math.hypot(dx, dy));
-                tot += segLen[k];
-            }
-            let acc = 0, anchor = 0, bestd = Infinity;
-            for (let i = 0; i < coords.length; i++) {
-                if (i > 0) acc += segLen[i - 1];
-                const dd = Math.abs(acc - tot / 2);
-                if (dd < bestd) { bestd = dd; anchor = i; }
-            }
-            return { coords, anchor };
+            let bestA = 0, bestB = Math.max(0, len.length - 1), bestLen = -1, a = 0;
+            const closeRun = (s: number, e: number) => { let L = 0; for (let k = s; k <= e; k++) L += len[k]; if (L > bestLen) { bestLen = L; bestA = s; bestB = e; } };
+            for (let k = 1; k < brg.length; k++) { let d = Math.abs(brg[k] - brg[k - 1]); if (d > Math.PI) d = 2 * Math.PI - d; if (d > TURN_TOL) { closeRun(a, k - 1); a = k; } }
+            closeRun(a, Math.max(0, len.length - 1));
+            const seg = u.slice(bestA, bestB + 2);
+            if (seg.length < 2) return null;
+            /* Anchor = vertex nearest the run's arc-length midpoint. */
+            let tot = 0; const sl: number[] = [];
+            for (let k = 0; k < seg.length - 1; k++) { const cl = Math.cos((((seg[k][1] + seg[k + 1][1]) / 2) * Math.PI) / 180); sl.push(Math.hypot((seg[k + 1][0] - seg[k][0]) * cl, seg[k + 1][1] - seg[k][1])); tot += sl[k]; }
+            let acc = 0, ai = 0, bd = Infinity;
+            for (let i = 0; i < seg.length; i++) { if (i > 0) acc += sl[i - 1]; const dd = Math.abs(acc - tot / 2); if (dd < bd) { bd = dd; ai = i; } }
+            const p0 = seg[Math.max(0, ai - 1)];
+            const p1 = seg[Math.min(seg.length - 1, ai + 1)];
+            /* Geographic bearing (clockwise from north) of the local segment. */
+            const φ1 = p0[1] * D2R, φ2 = p1[1] * D2R, Δλ = (p1[0] - p0[0]) * D2R;
+            const by = Math.sin(Δλ) * Math.cos(φ2);
+            const bx = Math.cos(φ1) * Math.sin(φ2) - Math.sin(φ1) * Math.cos(φ2) * Math.cos(Δλ);
+            const bearing = (Math.atan2(by, bx) * R2D + 360) % 360;
+            /* text-rotate (map-aligned): 0 = reads east, so subtract 90 to read
+             * along the bearing; fold into [-90,90] so it's never upside down. */
+            let rot = bearing - 90;
+            rot = ((rot + 180) % 360 + 360) % 360 - 180;
+            if (rot > 90) rot -= 180; else if (rot < -90) rot += 180;
+            const lon = ((seg[ai][0] + 180) % 360 + 360) % 360 - 180;   /* fold to [-180,180] */
+            return { lon, lat: seg[ai][1], rotate: rot };
         };
-        /* Muted slate for the dead-reckon label, matching the inferred stale line. */
         const predictedColor = colorScheme === 'dark' ? '#9fb0c6' : '#566b86';
-        const out: CurvedLabel[] = [];
-        const h = labelSeg(hindcastPath);
-        if (h) out.push({ id: 'recon', ...h, text: 'reconstructed flight', color: C.path });
-        const s = labelSeg(staleLine ?? []);
-        if (s) out.push({ id: 'predicted', ...s, text: 'predicted path', color: predictedColor });
-        const f = labelSeg(forecastPath);
-        if (f) out.push({ id: 'forecast', ...f, text: 'forecast', color: C.forecast });
-        return out;
-    }, [hindcastPath, staleLine, forecastPath, C.path, C.forecast, colorScheme]);
-
-    /* Native-label experiment: the same label slices as a GeoJSON FeatureCollection
-     * for a Mapbox line-center symbol layer (only used when `?labels=native`). */
-    const nativeLabelGeoJSON = useMemo(() => {
-        if (!nativeLabels || lineLabels.length === 0) return null;
-        return {
-            type: 'FeatureCollection' as const,
-            features: lineLabels.map((l) => ({
-                type: 'Feature' as const,
-                geometry: { type: 'LineString' as const, coordinates: l.coords },
-                properties: { text: l.text.toUpperCase(), color: l.color },
-            })),
+        const feats: Array<{ type: 'Feature'; geometry: { type: 'Point'; coordinates: [number, number] }; properties: { text: string; color: string; rotate: number } }> = [];
+        const add = (pts: Array<[number, number]>, text: string, color: string) => {
+            const a = anchorOf(pts);
+            if (a) feats.push({ type: 'Feature', geometry: { type: 'Point', coordinates: [a.lon, a.lat] }, properties: { text, color, rotate: a.rotate } });
         };
-    }, [nativeLabels, lineLabels]);
+        add(hindcastPath, 'reconstructed flight', C.path);
+        add(staleLine ?? [], 'predicted path', predictedColor);
+        add(forecastPath, 'forecast', C.forecast);
+        if (feats.length === 0) return null;
+        return { type: 'FeatureCollection' as const, features: feats };
+    }, [hindcastPath, staleLine, forecastPath, C.path, C.forecast, colorScheme]);
 
     /* Ensemble "spaghetti" — every Monte-Carlo member as a faint line. */
     const ensembleGeoJSON = useMemo(() => {
@@ -1178,28 +1140,33 @@ export default function V2MissionMap({
                             />
                         </Source>
 
-                        {/* Native line-center label experiment (?labels=native) —
-                          * compare against the SVG overlay for tile duplication. */}
-                        {nativeLabelGeoJSON && (
-                            <Source id="v2-native-line-labels" type="geojson" data={nativeLabelGeoJSON} tolerance={0}>
+                        {/* Path-type labels — native point symbols printed on the
+                          * globe surface (single per line, occluded at the horizon,
+                          * rotated to the line's bearing so they read along it). */}
+                        {lineLabelGeoJSON && (
+                            <Source id="v2-line-labels" type="geojson" data={lineLabelGeoJSON}>
                                 <Layer
-                                    id="v2-native-line-label"
+                                    id="v2-line-label"
                                     type="symbol"
                                     layout={{
-                                        'symbol-placement': 'line-center',
                                         'text-field': ['get', 'text'],
                                         'text-font': ['DIN Pro Medium', 'Arial Unicode MS Regular'],
                                         'text-size': 11,
                                         'text-transform': 'uppercase',
-                                        'text-letter-spacing': 0.16,
-                                        'text-max-angle': 40,
-                                        'text-offset': [0, -1],
-                                        'text-padding': 4,
+                                        'text-letter-spacing': 0.14,
+                                        'text-rotate': ['get', 'rotate'],
+                                        'text-rotation-alignment': 'map',
+                                        'text-pitch-alignment': 'map',
+                                        'text-offset': [0, -0.9],
+                                        'text-allow-overlap': false,
+                                        'text-optional': true,
                                     }}
                                     paint={{
                                         'text-color': ['get', 'color'],
+                                        'text-opacity': 0.9,
                                         'text-halo-color': labelHalo,
                                         'text-halo-width': 1.6,
+                                        'text-halo-blur': 0.3,
                                     }}
                                 />
                             </Source>
@@ -1244,19 +1211,6 @@ export default function V2MissionMap({
                 <div aria-hidden style={{ position: 'absolute', inset: 0, background: 'var(--sl-bg-1)' }} />
             )}
 
-            {/* Curved path-type labels — SVG text-on-path overlay (one DOM element
-              * per line) reprojected as the map moves, so each label is guaranteed
-              * single (Mapbox line symbols duplicate per tile). Below the load
-              * cover so it's hidden until the map reveals. */}
-            {mapAlive && !nativeLabels && (
-                <CurvedLineLabels
-                    map={mapRef.current?.getMap() ?? null}
-                    labels={lineLabels}
-                    halo={labelHalo}
-                    visible={revealed}
-                />
-            )}
-
             {/* Load cover — opaque until the map has fully painted, then fades
               * away once so the staged first-load render (gray canvas → shade
               * blob → tiles → labels) is never seen. Matches the surrounding
@@ -1288,154 +1242,5 @@ export default function V2MissionMap({
                    style={{ color: 'inherit', textDecoration: 'none' }}>OpenStreetMap</a>
             </div>
         </div>
-    );
-}
-
-/* ──────────────────────────────────────────────────────────────────────────
- * CurvedLineLabels — guaranteed-single curved labels riding flight-path lines.
- *
- * Mapbox line-placed symbols are tiled and duplicate (one per tile the line
- * crosses, growing as you zoom in). This draws each label exactly once as an
- * SVG <textPath>, reprojecting the path to screen on every map move. The label
- * is centered on the path (startOffset 50%), auto-hides when the on-screen path
- * is too short to seat the text, and uses a wide stroke as a basemap-matched
- * halo (paint-order: stroke) to mask the line behind the glyphs.
- * ────────────────────────────────────────────────────────────────────────── */
-interface CurvedLabel { id: string; coords: Array<[number, number]>; anchor: number; text: string; color: string }
-
-const CLP_FONT = 10.5;
-const CLP_SPACING = 1.6;      /* letter-spacing px */
-
-function CurvedLineLabels({ map, labels, halo, visible }: {
-    map: MapboxMap | null;
-    labels: CurvedLabel[];
-    halo: string;
-    visible: boolean;
-}) {
-    /* The SVG skeleton (one <path>+<textPath> per line) is rendered once by
-     * React; the geometry is updated IMPERATIVELY on the map's `move` event —
-     * the same per-frame cadence a native Marker uses — so the label stays glued
-     * to the map instead of trailing a React render behind it (the jank). */
-    const svgRef = useRef<SVGSVGElement | null>(null);
-    const pathRefs = useRef<Record<string, SVGPathElement | null>>({});
-    const textRefs = useRef<Record<string, SVGTextElement | null>>({});
-    const tpathRefs = useRef<Record<string, SVGTextPathElement | null>>({});
-    /* Sticky per-label flip state — hysteresis so the upright-flip only happens
-     * when the segment clearly points the other way, not jittering near vertical
-     * (which read as the label "reorienting" instead of staying on the surface). */
-    const flipRef = useRef<Record<string, boolean>>({});
-
-    useEffect(() => {
-        if (!map) return;
-        const update = () => {
-            const svg = svgRef.current;
-            if (!svg) return;
-            const el = map.getContainer();
-            svg.setAttribute('width', String(el.clientWidth));
-            svg.setAttribute('height', String(el.clientHeight));
-            for (const l of labels) {
-                const pathEl = pathRefs.current[l.id];
-                const textEl = textRefs.current[l.id];
-                const tpathEl = tpathRefs.current[l.id];
-                if (!pathEl || !textEl || !tpathEl) continue;
-                /* Per-point globe occlusion: project() returns a screen point even
-                 * for far-side locations; round-tripping through unproject lands on
-                 * the near-side surface at that pixel, so a big discrepancy means
-                 * the point is behind the globe. (On mercator it's exact.) */
-                const occluded = (c: [number, number]) => {
-                    const r = map.unproject(map.project(c));
-                    let dLng = Math.abs(r.lng - c[0]) % 360; if (dLng > 180) dLng = 360 - dLng;
-                    return dLng > 1.5 || Math.abs(r.lat - c[1]) > 1.5;
-                };
-                const a0 = Math.min(Math.max(0, l.anchor), l.coords.length - 1);
-                if (occluded(l.coords[a0])) { textEl.style.display = 'none'; continue; }
-                /* Visible contiguous run around the anchor — only the part behind
-                 * the globe is dropped (text clips at the horizon) instead of the
-                 * whole label vanishing. */
-                let lo = a0, hi = a0;
-                while (lo > 0 && !occluded(l.coords[lo - 1])) lo--;
-                while (hi < l.coords.length - 1 && !occluded(l.coords[hi + 1])) hi++;
-                const clipped = lo > 0 || hi < l.coords.length - 1;
-                let pts = l.coords.slice(lo, hi + 1).map((c) => map.project(c as [number, number]));
-                if (pts.length < 2) { textEl.style.display = 'none'; continue; }
-                let anchorIdx = a0 - lo;
-                /* Keep text upright, but with hysteresis: only flip once the
-                 * segment clearly points left (nx < -0.25) and only flip back once
-                 * it clearly points right (nx > 0.25). The dead zone near vertical
-                 * holds the last state, so rotating the globe doesn't jitter-flip
-                 * the label — it just rotates with the surface between rare flips. */
-                const before = pts[Math.max(0, anchorIdx - 1)];
-                const after = pts[Math.min(pts.length - 1, anchorIdx + 1)];
-                const nx = (after.x - before.x) / (Math.hypot(after.x - before.x, after.y - before.y) || 1);
-                let flip = flipRef.current[l.id] ?? (nx < 0);
-                if (!flip && nx < -0.25) flip = true;
-                else if (flip && nx > 0.25) flip = false;
-                flipRef.current[l.id] = flip;
-                if (flip) { pts = pts.slice().reverse(); anchorIdx = pts.length - 1 - anchorIdx; }
-                /* Lift the text just off the line (perpendicular, upper side).
-                 * Paths are normalized left-to-right, so the (ty,-tx) normal is up. */
-                const LIFT = 6;
-                const lifted = pts.map((p, i) => {
-                    const a = pts[Math.max(0, i - 1)];
-                    const b = pts[Math.min(pts.length - 1, i + 1)];
-                    let tx = b.x - a.x, ty = b.y - a.y;
-                    const tl = Math.hypot(tx, ty) || 1; tx /= tl; ty /= tl;
-                    return { x: p.x + LIFT * ty, y: p.y - LIFT * tx };
-                });
-                const arc: number[] = [0];
-                for (let i = 1; i < lifted.length; i++) arc.push(arc[i - 1] + Math.hypot(lifted[i].x - lifted[i - 1].x, lifted[i].y - lifted[i - 1].y));
-                const total = arc[arc.length - 1];
-                /* Capped, zoom-scaled size — grows with zoom to a max, shrinks to a
-                 * floor when zoomed out so it never dwarfs the path. */
-                const fs = Math.max(7, Math.min(12, 7 + (map.getZoom() - 1) * 1.3));
-                const textW = l.text.length * fs * 0.78;
-                /* Fully visible but too short → hide cleanly. Globe-clipped → let
-                 * the text run off the horizon rather than vanish. */
-                if ((!clipped && total < textW) || (clipped && total < textW * 0.3)) {
-                    textEl.style.display = 'none';
-                    continue;
-                }
-                textEl.style.fontSize = `${fs.toFixed(1)}px`;
-                textEl.style.letterSpacing = `${(fs * 0.16).toFixed(2)}px`;
-                pathEl.setAttribute('d', lifted.map((p, i) => `${i ? 'L' : 'M'}${p.x.toFixed(1)} ${p.y.toFixed(1)}`).join(' '));
-                tpathEl.setAttribute('startOffset', arc[anchorIdx].toFixed(1));
-                textEl.style.display = '';
-            }
-        };
-        update();
-        map.on('move', update);
-        map.on('resize', update);
-        return () => { map.off('move', update); map.off('resize', update); };
-    }, [map, labels, visible]);
-
-    if (!map || !visible || labels.length === 0) return null;
-
-    return (
-        <svg
-            ref={svgRef}
-            aria-hidden
-            style={{ position: 'absolute', inset: 0, pointerEvents: 'none', zIndex: 2, overflow: 'visible' }}
-        >
-            <defs>
-                {labels.map((l) => (
-                    <path key={l.id} id={`v2-clp-${l.id}`} ref={(el) => { pathRefs.current[l.id] = el; }} fill="none" />
-                ))}
-            </defs>
-            {labels.map((l) => (
-                <text
-                    key={l.id}
-                    ref={(el) => { textRefs.current[l.id] = el; }}
-                    fill={l.color}
-                    stroke={halo}
-                    strokeWidth={2.2}
-                    strokeLinejoin="round"
-                    paintOrder="stroke"
-                    opacity={0.9}
-                    style={{ display: 'none', fontFamily: 'var(--sl-sans, system-ui, sans-serif)', fontSize: CLP_FONT, fontWeight: 600, letterSpacing: `${CLP_SPACING}px` }}
-                >
-                    <textPath ref={(el) => { tpathRefs.current[l.id] = el; }} href={`#v2-clp-${l.id}`} startOffset="50%" textAnchor="middle">{l.text.toUpperCase()}</textPath>
-                </text>
-            ))}
-        </svg>
     );
 }
