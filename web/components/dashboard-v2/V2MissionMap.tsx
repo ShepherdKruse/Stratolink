@@ -581,42 +581,57 @@ export default function V2MissionMap({
      * central slice (~middle 60%) of each path so the text rides the smoother
      * middle and stays clear of the busy endpoints. */
     const lineLabels = useMemo(() => {
-        /* Slice centered on the STRAIGHTEST point in the path's central region,
-         * so the curved label lands on a calm stretch rather than a hairpin. */
-        const labelSlice = (pts: Array<[number, number]>): Array<[number, number]> | null => {
+        /* Place the label half-way along the path's LONGEST near-straight segment:
+         * split the path at corners (heading change > tol), take the longest run,
+         * and anchor at its arc-length midpoint. That lands the label on a calm,
+         * roomy stretch in the path interior — away from hairpins and away from
+         * the clustered recent-fix end (where the "last fix" tag lives). Returns
+         * the segment plus the anchor index within it. */
+        const TURN_TOL = (30 * Math.PI) / 180;
+        const labelSeg = (pts: Array<[number, number]>): { coords: Array<[number, number]>; anchor: number } | null => {
             const v = pts.filter(([lon, lat]) => isRenderablePoint(lat, lon));
-            if (v.length < 4) return null;
+            if (v.length < 3) return v.length >= 2 ? { coords: unwrapLngs(v), anchor: Math.floor(v.length / 2) } : null;
             const u = unwrapLngs(v);
-            if (u.length < 6) return u.slice();   /* too short to search — use as-is */
-            const bearing = (i: number) => Math.atan2(u[i][1] - u[i - 1][1], u[i][0] - u[i - 1][0]);
-            const lo = Math.floor(u.length * 0.15);
-            const hi = Math.ceil(u.length * 0.85);
-            const win = Math.max(1, Math.round(u.length * 0.07));
-            let best = Math.floor(u.length / 2);
-            let bestScore = Infinity;
-            for (let i = lo; i <= hi; i++) {
-                let sum = 0, n = 0, prev: number | null = null;
-                for (let j = Math.max(1, i - win); j <= Math.min(u.length - 1, i + win); j++) {
-                    const b = bearing(j);
-                    if (prev !== null) { let d = Math.abs(b - prev); if (d > Math.PI) d = 2 * Math.PI - d; sum += d; n++; }
-                    prev = b;
-                }
-                const score = n ? sum / n : Infinity;   /* mean heading change = curviness */
-                if (score < bestScore) { bestScore = score; best = i; }
+            const len: number[] = [];
+            const brg: number[] = [];
+            for (let k = 0; k < u.length - 1; k++) {
+                const cosLat = Math.cos((((u[k][1] + u[k + 1][1]) / 2) * Math.PI) / 180);
+                const dx = (u[k + 1][0] - u[k][0]) * cosLat;
+                const dy = u[k + 1][1] - u[k][1];
+                len.push(Math.hypot(dx, dy));
+                brg.push(Math.atan2(dy, dx));
             }
-            const half = Math.min(best, u.length - 1 - best, Math.max(3, Math.round(u.length * 0.22)));
-            const seg = u.slice(best - half, best + half + 1);   /* symmetric → center = straightest point */
-            return seg.length >= 2 ? seg : null;
+            /* Longest run of edges [a..b] with no sharp turn between them. */
+            let bestA = 0, bestB = len.length - 1, bestLen = -1, a = 0;
+            const closeRun = (s: number, e: number) => {
+                let L = 0; for (let k = s; k <= e; k++) L += len[k];
+                if (L > bestLen) { bestLen = L; bestA = s; bestB = e; }
+            };
+            for (let k = 1; k < brg.length; k++) {
+                let d = Math.abs(brg[k] - brg[k - 1]); if (d > Math.PI) d = 2 * Math.PI - d;
+                if (d > TURN_TOL) { closeRun(a, k - 1); a = k; }
+            }
+            closeRun(a, len.length - 1);
+            const coords = u.slice(bestA, bestB + 2);   /* edges a..b → vertices a..b+1 */
+            /* Anchor = vertex nearest the run's arc-length midpoint. */
+            const half = bestLen / 2;
+            let acc = 0, anchor = 0, bestd = Infinity;
+            for (let i = 0; i < coords.length; i++) {
+                if (i > 0) acc += len[bestA + i - 1];
+                const dd = Math.abs(acc - half);
+                if (dd < bestd) { bestd = dd; anchor = i; }
+            }
+            return { coords, anchor };
         };
         /* Muted slate for the dead-reckon label, matching the inferred stale line. */
         const predictedColor = colorScheme === 'dark' ? '#9fb0c6' : '#566b86';
-        const out: Array<{ id: string; coords: Array<[number, number]>; text: string; color: string }> = [];
-        const h = labelSlice(hindcastPath);
-        if (h) out.push({ id: 'recon', coords: h, text: 'reconstructed flight', color: C.path });
-        const s = labelSlice(staleLine ?? []);
-        if (s) out.push({ id: 'predicted', coords: s, text: 'predicted path', color: predictedColor });
-        const f = labelSlice(forecastPath);
-        if (f) out.push({ id: 'forecast', coords: f, text: 'forecast', color: C.forecast });
+        const out: CurvedLabel[] = [];
+        const h = labelSeg(hindcastPath);
+        if (h) out.push({ id: 'recon', ...h, text: 'reconstructed flight', color: C.path });
+        const s = labelSeg(staleLine ?? []);
+        if (s) out.push({ id: 'predicted', ...s, text: 'predicted path', color: predictedColor });
+        const f = labelSeg(forecastPath);
+        if (f) out.push({ id: 'forecast', ...f, text: 'forecast', color: C.forecast });
         return out;
     }, [hindcastPath, staleLine, forecastPath, C.path, C.forecast, colorScheme]);
 
@@ -1222,7 +1237,7 @@ export default function V2MissionMap({
  * is too short to seat the text, and uses a wide stroke as a basemap-matched
  * halo (paint-order: stroke) to mask the line behind the glyphs.
  * ────────────────────────────────────────────────────────────────────────── */
-interface CurvedLabel { id: string; coords: Array<[number, number]>; text: string; color: string }
+interface CurvedLabel { id: string; coords: Array<[number, number]>; anchor: number; text: string; color: string }
 
 const CLP_FONT = 10.5;
 const CLP_SPACING = 1.6;      /* letter-spacing px */
@@ -1257,26 +1272,26 @@ function CurvedLineLabels({ map, labels, halo, visible }: {
                 if (!pathEl || !textEl || !tpathEl) continue;
                 let pts = l.coords.map((c) => map.project(c as [number, number]));
                 if (pts.length < 2) { textEl.style.display = 'none'; continue; }
-                const mid = Math.floor(pts.length / 2);
-                /* Keep text upright: reverse when the path runs right-to-left at
-                 * its center (local direction, so it only flips when the midpoint
-                 * actually reverses — not on every endpoint wiggle). */
-                const before = pts[Math.max(0, mid - 1)];
-                const after = pts[Math.min(pts.length - 1, mid + 1)];
-                if (after.x < before.x) pts = pts.slice().reverse();
-                /* Cumulative arc-length; pin the text center to the path's true
-                 * MIDPOINT (its arc-length offset) rather than 50% of the screen
-                 * length — otherwise globe foreshortening drifts the 50% point
-                 * along the path and the label appears to slide as you rotate. */
+                let anchorIdx = Math.min(Math.max(0, l.anchor), pts.length - 1);
+                /* Keep text upright: reverse when the path runs right-to-left AT
+                 * THE ANCHOR (local direction, so it only flips when the labelled
+                 * stretch actually reverses — not on an endpoint wiggle). */
+                const before = pts[Math.max(0, anchorIdx - 1)];
+                const after = pts[Math.min(pts.length - 1, anchorIdx + 1)];
+                if (after.x < before.x) { pts = pts.slice().reverse(); anchorIdx = pts.length - 1 - anchorIdx; }
+                /* Cumulative arc-length; pin the text center to the anchor VERTEX
+                 * (a fixed point on the path) rather than 50% of the screen length
+                 * — otherwise globe foreshortening drifts that point and the label
+                 * appears to slide as you rotate. */
                 const arc: number[] = [0];
                 for (let i = 1; i < pts.length; i++) arc.push(arc[i - 1] + Math.hypot(pts[i].x - pts[i - 1].x, pts[i].y - pts[i - 1].y));
                 const total = arc[arc.length - 1];
+                const off = arc[anchorIdx];
                 const textW = l.text.length * (CLP_FONT * 0.62 + CLP_SPACING);
-                /* Need room each side of the midpoint to seat the centered text. */
-                const midOffset = arc[Math.floor(pts.length / 2)];
-                if (total >= textW && Math.min(midOffset, total - midOffset) >= textW / 2) {
+                /* Need room each side of the anchor to seat the centered text. */
+                if (total >= textW && Math.min(off, total - off) >= textW / 2) {
                     pathEl.setAttribute('d', pts.map((p, i) => `${i ? 'L' : 'M'}${p.x.toFixed(1)} ${p.y.toFixed(1)}`).join(' '));
-                    tpathEl.setAttribute('startOffset', midOffset.toFixed(1));
+                    tpathEl.setAttribute('startOffset', off.toFixed(1));
                     textEl.style.display = '';
                 } else {
                     /* Too short on screen to seat the text — hide rather than clip. */
