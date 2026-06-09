@@ -1270,6 +1270,15 @@ function CurvedLineLabels({ map, labels, halo, visible }: {
                 const textEl = textRefs.current[l.id];
                 const tpathEl = tpathRefs.current[l.id];
                 if (!pathEl || !textEl || !tpathEl) continue;
+                /* Hide when the label's anchor is on the FAR side of the globe.
+                 * project() returns a screen point even for occluded locations;
+                 * round-tripping through unproject lands on the near-side surface
+                 * at that pixel, so a large discrepancy means the point is behind
+                 * the globe. (On mercator the round-trip is exact → never hides.) */
+                const anc = l.coords[Math.min(l.anchor, l.coords.length - 1)];
+                const rt = map.unproject(map.project(anc as [number, number]));
+                let dLng = Math.abs(rt.lng - anc[0]) % 360; if (dLng > 180) dLng = 360 - dLng;
+                if (dLng > 1.5 || Math.abs(rt.lat - anc[1]) > 1.5) { textEl.style.display = 'none'; continue; }
                 let pts = l.coords.map((c) => map.project(c as [number, number]));
                 if (pts.length < 2) { textEl.style.display = 'none'; continue; }
                 let anchorIdx = Math.min(Math.max(0, l.anchor), pts.length - 1);
