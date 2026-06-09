@@ -1215,6 +1215,7 @@ function CurvedLineLabels({ map, labels, halo, visible }: {
     const svgRef = useRef<SVGSVGElement | null>(null);
     const pathRefs = useRef<Record<string, SVGPathElement | null>>({});
     const textRefs = useRef<Record<string, SVGTextElement | null>>({});
+    const tpathRefs = useRef<Record<string, SVGTextPathElement | null>>({});
 
     useEffect(() => {
         if (!map) return;
@@ -1227,16 +1228,30 @@ function CurvedLineLabels({ map, labels, halo, visible }: {
             for (const l of labels) {
                 const pathEl = pathRefs.current[l.id];
                 const textEl = textRefs.current[l.id];
-                if (!pathEl || !textEl) continue;
+                const tpathEl = tpathRefs.current[l.id];
+                if (!pathEl || !textEl || !tpathEl) continue;
                 let pts = l.coords.map((c) => map.project(c as [number, number]));
-                /* Keep text upright: reverse a right-to-left path so glyphs read
-                 * left-to-right rather than upside down. */
-                if (pts.length >= 2 && pts[pts.length - 1].x < pts[0].x) pts = pts.slice().reverse();
-                let len = 0;
-                for (let i = 1; i < pts.length; i++) len += Math.hypot(pts[i].x - pts[i - 1].x, pts[i].y - pts[i - 1].y);
+                if (pts.length < 2) { textEl.style.display = 'none'; continue; }
+                const mid = Math.floor(pts.length / 2);
+                /* Keep text upright: reverse when the path runs right-to-left at
+                 * its center (local direction, so it only flips when the midpoint
+                 * actually reverses — not on every endpoint wiggle). */
+                const before = pts[Math.max(0, mid - 1)];
+                const after = pts[Math.min(pts.length - 1, mid + 1)];
+                if (after.x < before.x) pts = pts.slice().reverse();
+                /* Cumulative arc-length; pin the text center to the path's true
+                 * MIDPOINT (its arc-length offset) rather than 50% of the screen
+                 * length — otherwise globe foreshortening drifts the 50% point
+                 * along the path and the label appears to slide as you rotate. */
+                const arc: number[] = [0];
+                for (let i = 1; i < pts.length; i++) arc.push(arc[i - 1] + Math.hypot(pts[i].x - pts[i - 1].x, pts[i].y - pts[i - 1].y));
+                const total = arc[arc.length - 1];
                 const textW = l.text.length * (CLP_FONT * 0.62 + CLP_SPACING);
-                if (pts.length >= 2 && len >= textW) {
+                /* Need room each side of the midpoint to seat the centered text. */
+                const midOffset = arc[Math.floor(pts.length / 2)];
+                if (total >= textW && Math.min(midOffset, total - midOffset) >= textW / 2) {
                     pathEl.setAttribute('d', pts.map((p, i) => `${i ? 'L' : 'M'}${p.x.toFixed(1)} ${p.y.toFixed(1)}`).join(' '));
+                    tpathEl.setAttribute('startOffset', midOffset.toFixed(1));
                     textEl.style.display = '';
                 } else {
                     /* Too short on screen to seat the text — hide rather than clip. */
@@ -1275,7 +1290,7 @@ function CurvedLineLabels({ map, labels, halo, visible }: {
                     opacity={0.9}
                     style={{ display: 'none', fontFamily: 'var(--sl-sans, system-ui, sans-serif)', fontSize: CLP_FONT, fontWeight: 600, letterSpacing: `${CLP_SPACING}px` }}
                 >
-                    <textPath href={`#v2-clp-${l.id}`} startOffset="50%" textAnchor="middle">{l.text.toUpperCase()}</textPath>
+                    <textPath ref={(el) => { tpathRefs.current[l.id] = el; }} href={`#v2-clp-${l.id}`} startOffset="50%" textAnchor="middle">{l.text.toUpperCase()}</textPath>
                 </text>
             ))}
         </svg>
