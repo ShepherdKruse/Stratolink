@@ -581,19 +581,44 @@ export default function V2MissionMap({
      * central slice (~middle 60%) of each path so the text rides the smoother
      * middle and stays clear of the busy endpoints. */
     const lineLabels = useMemo(() => {
-        const centerSlice = (pts: Array<[number, number]>): Array<[number, number]> | null => {
+        /* Slice centered on the STRAIGHTEST point in the path's central region,
+         * so the curved label lands on a calm stretch rather than a hairpin. */
+        const labelSlice = (pts: Array<[number, number]>): Array<[number, number]> | null => {
             const v = pts.filter(([lon, lat]) => isRenderablePoint(lat, lon));
             if (v.length < 4) return null;
-            const seg = unwrapLngs(v.slice(Math.floor(v.length * 0.2), Math.ceil(v.length * 0.8)));
+            const u = unwrapLngs(v);
+            if (u.length < 6) return u.slice();   /* too short to search — use as-is */
+            const bearing = (i: number) => Math.atan2(u[i][1] - u[i - 1][1], u[i][0] - u[i - 1][0]);
+            const lo = Math.floor(u.length * 0.15);
+            const hi = Math.ceil(u.length * 0.85);
+            const win = Math.max(1, Math.round(u.length * 0.07));
+            let best = Math.floor(u.length / 2);
+            let bestScore = Infinity;
+            for (let i = lo; i <= hi; i++) {
+                let sum = 0, n = 0, prev: number | null = null;
+                for (let j = Math.max(1, i - win); j <= Math.min(u.length - 1, i + win); j++) {
+                    const b = bearing(j);
+                    if (prev !== null) { let d = Math.abs(b - prev); if (d > Math.PI) d = 2 * Math.PI - d; sum += d; n++; }
+                    prev = b;
+                }
+                const score = n ? sum / n : Infinity;   /* mean heading change = curviness */
+                if (score < bestScore) { bestScore = score; best = i; }
+            }
+            const half = Math.min(best, u.length - 1 - best, Math.max(3, Math.round(u.length * 0.22)));
+            const seg = u.slice(best - half, best + half + 1);   /* symmetric → center = straightest point */
             return seg.length >= 2 ? seg : null;
         };
+        /* Muted slate for the dead-reckon label, matching the inferred stale line. */
+        const predictedColor = colorScheme === 'dark' ? '#9fb0c6' : '#566b86';
         const out: Array<{ id: string; coords: Array<[number, number]>; text: string; color: string }> = [];
-        const h = centerSlice(hindcastPath);
+        const h = labelSlice(hindcastPath);
         if (h) out.push({ id: 'recon', coords: h, text: 'reconstructed flight', color: C.path });
-        const f = centerSlice(forecastPath);
-        if (f) out.push({ id: 'forecast', coords: f, text: 'predicted flight', color: C.forecast });
+        const s = labelSlice(staleLine ?? []);
+        if (s) out.push({ id: 'predicted', coords: s, text: 'predicted path', color: predictedColor });
+        const f = labelSlice(forecastPath);
+        if (f) out.push({ id: 'forecast', coords: f, text: 'forecast', color: C.forecast });
         return out;
-    }, [hindcastPath, forecastPath, C.path, C.forecast]);
+    }, [hindcastPath, staleLine, forecastPath, C.path, C.forecast, colorScheme]);
 
     /* Ensemble "spaghetti" — every Monte-Carlo member as a faint line. */
     const ensembleGeoJSON = useMemo(() => {
@@ -1284,7 +1309,7 @@ function CurvedLineLabels({ map, labels, halo, visible }: {
                     ref={(el) => { textRefs.current[l.id] = el; }}
                     fill={l.color}
                     stroke={halo}
-                    strokeWidth={3.4}
+                    strokeWidth={2.2}
                     strokeLinejoin="round"
                     paintOrder="stroke"
                     opacity={0.9}
