@@ -15,9 +15,10 @@
  */
 'use client';
 
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { useCallback, useEffect, useMemo, useReducer, useRef, useState } from 'react';
 import Map, { Source, Layer } from 'react-map-gl/mapbox';
 import type { MapRef, LngLatBoundsLike } from 'react-map-gl/mapbox';
+import type { Map as MapboxMap } from 'mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import GatewayLayer from '@/components/maps/GatewayLayer';
 import GatewayRangeRings from '@/components/maps/GatewayRangeRings';
@@ -572,34 +573,26 @@ export default function V2MissionMap({
     }, [validFlightPath, colorScheme]);
 
     /* Path-type labels — a curved tag riding each line ("RECONSTRUCTED FLIGHT"
-     * on the hindcast, "PREDICTED FLIGHT" on the forecast), color-matched to the
-     * line. To keep it from jumping/duplicating on zoom, the label rides its own
-     * short CENTRAL SLICE of the path (not the full line, which clips across
-     * GeoJSON tiles and spawns a label per tile) and that source disables zoom
-     * simplification (tolerance 0) so the geometry — and the placement — is
-     * identical at every zoom. */
-    const lineLabelGeoJSON = useMemo(() => {
+     * on the hindcast, "PREDICTED FLIGHT" on the forecast). Drawn as an SVG
+     * text-on-path overlay (see CurvedLineLabels), NOT a Mapbox line symbol:
+     * line-placed symbols on a GeoJSON source are tiled, so Mapbox emits one
+     * label per tile the line crosses — more as you zoom in. The overlay is a
+     * single DOM element per line, so it's exactly one, always. We feed it a
+     * central slice (~middle 60%) of each path so the text rides the smoother
+     * middle and stays clear of the busy endpoints. */
+    const lineLabels = useMemo(() => {
         const centerSlice = (pts: Array<[number, number]>): Array<[number, number]> | null => {
             const v = pts.filter(([lon, lat]) => isRenderablePoint(lat, lon));
             if (v.length < 4) return null;
-            /* Central ~40% — long enough to seat the text, short enough to stay
-             * within a tile or two. line-center hides it when even this is too
-             * short to fit the label (e.g. at low zoom), which is the behaviour
-             * we want. */
-            const seg = unwrapLngs(v.slice(Math.floor(v.length * 0.3), Math.ceil(v.length * 0.7)));
+            const seg = unwrapLngs(v.slice(Math.floor(v.length * 0.2), Math.ceil(v.length * 0.8)));
             return seg.length >= 2 ? seg : null;
         };
-        const features: Array<{
-            type: 'Feature';
-            geometry: { type: 'LineString'; coordinates: Array<[number, number]> };
-            properties: { label: string; color: string };
-        }> = [];
+        const out: Array<{ id: string; coords: Array<[number, number]>; text: string; color: string }> = [];
         const h = centerSlice(hindcastPath);
-        if (h) features.push({ type: 'Feature', geometry: { type: 'LineString', coordinates: h }, properties: { label: 'reconstructed flight', color: C.path } });
+        if (h) out.push({ id: 'recon', coords: h, text: 'reconstructed flight', color: C.path });
         const f = centerSlice(forecastPath);
-        if (f) features.push({ type: 'Feature', geometry: { type: 'LineString', coordinates: f }, properties: { label: 'predicted flight', color: C.forecast } });
-        if (features.length === 0) return null;
-        return { type: 'FeatureCollection' as const, features };
+        if (f) out.push({ id: 'forecast', coords: f, text: 'predicted flight', color: C.forecast });
+        return out;
     }, [hindcastPath, forecastPath, C.path, C.forecast]);
 
     /* Ensemble "spaghetti" — every Monte-Carlo member as a faint line. */
@@ -1108,38 +1101,6 @@ export default function V2MissionMap({
                             />
                         </Source>
 
-                        {/* Path-type labels — curved "RECONSTRUCTED FLIGHT" /
-                          * "PREDICTED FLIGHT" riding the center of each line. The
-                          * source disables simplification (tolerance 0) and the
-                          * geometry is a short central slice, so the placement is
-                          * stable and single across zoom. A wide basemap halo masks
-                          * the line behind the glyphs. */}
-                        {lineLabelGeoJSON && (
-                            <Source id="v2-line-labels" type="geojson" data={lineLabelGeoJSON} tolerance={0}>
-                                <Layer
-                                    id="v2-line-label"
-                                    type="symbol"
-                                    layout={{
-                                        'symbol-placement': 'line-center',
-                                        'text-field': ['get', 'label'],
-                                        'text-font': ['DIN Pro Medium', 'Arial Unicode MS Regular'],
-                                        'text-size': 10.5,
-                                        'text-transform': 'uppercase',
-                                        'text-letter-spacing': 0.16,
-                                        'text-max-angle': 40,
-                                        'text-padding': 4,
-                                    }}
-                                    paint={{
-                                        'text-color': ['get', 'color'],
-                                        'text-opacity': 0.9,
-                                        'text-halo-color': labelHalo,
-                                        'text-halo-width': 2.2,
-                                        'text-halo-blur': 0.2,
-                                    }}
-                                />
-                            </Source>
-                        )}
-
                         {/* Light-touch orienting label — a small uppercase tag at the
                           * last real fix ("last fix · 3h ago"). The basemap-matched
                           * halo keeps it legible without a box. */}
@@ -1179,6 +1140,19 @@ export default function V2MissionMap({
                 <div aria-hidden style={{ position: 'absolute', inset: 0, background: 'var(--sl-bg-1)' }} />
             )}
 
+            {/* Curved path-type labels — SVG text-on-path overlay (one DOM element
+              * per line) reprojected as the map moves, so each label is guaranteed
+              * single (Mapbox line symbols duplicate per tile). Below the load
+              * cover so it's hidden until the map reveals. */}
+            {mapAlive && (
+                <CurvedLineLabels
+                    map={mapRef.current?.getMap() ?? null}
+                    labels={lineLabels}
+                    halo={labelHalo}
+                    visible={revealed}
+                />
+            )}
+
             {/* Load cover — opaque until the map has fully painted, then fades
               * away once so the staged first-load render (gray canvas → shade
               * blob → tiles → labels) is never seen. Matches the surrounding
@@ -1210,5 +1184,83 @@ export default function V2MissionMap({
                    style={{ color: 'inherit', textDecoration: 'none' }}>OpenStreetMap</a>
             </div>
         </div>
+    );
+}
+
+/* ──────────────────────────────────────────────────────────────────────────
+ * CurvedLineLabels — guaranteed-single curved labels riding flight-path lines.
+ *
+ * Mapbox line-placed symbols are tiled and duplicate (one per tile the line
+ * crosses, growing as you zoom in). This draws each label exactly once as an
+ * SVG <textPath>, reprojecting the path to screen on every map move. The label
+ * is centered on the path (startOffset 50%), auto-hides when the on-screen path
+ * is too short to seat the text, and uses a wide stroke as a basemap-matched
+ * halo (paint-order: stroke) to mask the line behind the glyphs.
+ * ────────────────────────────────────────────────────────────────────────── */
+interface CurvedLabel { id: string; coords: Array<[number, number]>; text: string; color: string }
+
+function CurvedLineLabels({ map, labels, halo, visible }: {
+    map: MapboxMap | null;
+    labels: CurvedLabel[];
+    halo: string;
+    visible: boolean;
+}) {
+    /* Reproject on every camera change. */
+    const [, bump] = useReducer((n: number) => n + 1, 0);
+    useEffect(() => {
+        if (!map) return;
+        const on = () => bump();
+        map.on('move', on);
+        map.on('zoom', on);
+        map.on('resize', on);
+        return () => { map.off('move', on); map.off('zoom', on); map.off('resize', on); };
+    }, [map]);
+
+    if (!map || !visible || labels.length === 0) return null;
+
+    const FONT = 10.5;
+    const SPACING = 1.6;      /* letter-spacing px */
+    const el = map.getContainer();
+    const built = labels.map((l) => {
+        let pts = l.coords.map((c) => map.project(c as [number, number]));
+        if (pts.length < 2) return null;
+        /* Keep text upright: if the path runs right-to-left, reverse it so glyphs
+         * read left-to-right rather than upside down. */
+        if (pts[pts.length - 1].x < pts[0].x) pts = pts.slice().reverse();
+        let len = 0;
+        for (let i = 1; i < pts.length; i++) len += Math.hypot(pts[i].x - pts[i - 1].x, pts[i].y - pts[i - 1].y);
+        const textW = l.text.length * (FONT * 0.62 + SPACING);
+        if (len < textW) return null;   /* not enough room — hide rather than clip */
+        const d = pts.map((p, i) => `${i ? 'L' : 'M'}${p.x.toFixed(1)} ${p.y.toFixed(1)}`).join(' ');
+        return { id: l.id, d, text: l.text.toUpperCase(), color: l.color };
+    }).filter(Boolean) as Array<{ id: string; d: string; text: string; color: string }>;
+
+    if (built.length === 0) return null;
+
+    return (
+        <svg
+            aria-hidden
+            width={el.clientWidth}
+            height={el.clientHeight}
+            style={{ position: 'absolute', inset: 0, pointerEvents: 'none', zIndex: 2, overflow: 'visible' }}
+        >
+            <defs>
+                {built.map((b) => <path key={b.id} id={`v2-clp-${b.id}`} d={b.d} fill="none" />)}
+            </defs>
+            {built.map((b) => (
+                <text
+                    key={b.id}
+                    fill={b.color}
+                    stroke={halo}
+                    strokeWidth={3.4}
+                    strokeLinejoin="round"
+                    paintOrder="stroke"
+                    opacity={0.9}
+                    style={{ fontFamily: 'var(--sl-sans, system-ui, sans-serif)', fontSize: FONT, fontWeight: 600, letterSpacing: `${SPACING}px` }}
+                >
+                    <textPath href={`#v2-clp-${b.id}`} startOffset="50%" textAnchor="middle">{b.text}</textPath>
+                </text>
+            ))}
+        </svg>
     );
 }
