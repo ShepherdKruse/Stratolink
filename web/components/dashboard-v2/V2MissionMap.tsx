@@ -582,9 +582,8 @@ export default function V2MissionMap({
      * reads along the line. */
     const lineLabelGeoJSON = useMemo(() => {
         const TURN_TOL = (30 * Math.PI) / 180;
-        const D2R = Math.PI / 180, R2D = 180 / Math.PI;
-        /* Anchor point + along-line bearing for a path's longest straight run. */
-        const anchorOf = (pts: Array<[number, number]>): { lon: number; lat: number; rotate: number } | null => {
+        /* Anchor point at the midpoint of a path's longest near-straight run. */
+        const anchorOf = (pts: Array<[number, number]>): { lon: number; lat: number } | null => {
             const v = pts.filter(([lon, lat]) => isRenderablePoint(lat, lon));
             if (v.length < 2) return null;
             const u = unwrapLngs(v);
@@ -606,26 +605,14 @@ export default function V2MissionMap({
             for (let k = 0; k < seg.length - 1; k++) { const cl = Math.cos((((seg[k][1] + seg[k + 1][1]) / 2) * Math.PI) / 180); sl.push(Math.hypot((seg[k + 1][0] - seg[k][0]) * cl, seg[k + 1][1] - seg[k][1])); tot += sl[k]; }
             let acc = 0, ai = 0, bd = Infinity;
             for (let i = 0; i < seg.length; i++) { if (i > 0) acc += sl[i - 1]; const dd = Math.abs(acc - tot / 2); if (dd < bd) { bd = dd; ai = i; } }
-            const p0 = seg[Math.max(0, ai - 1)];
-            const p1 = seg[Math.min(seg.length - 1, ai + 1)];
-            /* Geographic bearing (clockwise from north) of the local segment. */
-            const φ1 = p0[1] * D2R, φ2 = p1[1] * D2R, Δλ = (p1[0] - p0[0]) * D2R;
-            const by = Math.sin(Δλ) * Math.cos(φ2);
-            const bx = Math.cos(φ1) * Math.sin(φ2) - Math.sin(φ1) * Math.cos(φ2) * Math.cos(Δλ);
-            const bearing = (Math.atan2(by, bx) * R2D + 360) % 360;
-            /* text-rotate (map-aligned): 0 = reads east, so subtract 90 to read
-             * along the bearing; fold into [-90,90] so it's never upside down. */
-            let rot = bearing - 90;
-            rot = ((rot + 180) % 360 + 360) % 360 - 180;
-            if (rot > 90) rot -= 180; else if (rot < -90) rot += 180;
             const lon = ((seg[ai][0] + 180) % 360 + 360) % 360 - 180;   /* fold to [-180,180] */
-            return { lon, lat: seg[ai][1], rotate: rot };
+            return { lon, lat: seg[ai][1] };
         };
         const predictedColor = colorScheme === 'dark' ? '#9fb0c6' : '#566b86';
-        const feats: Array<{ type: 'Feature'; geometry: { type: 'Point'; coordinates: [number, number] }; properties: { text: string; color: string; rotate: number } }> = [];
+        const feats: Array<{ type: 'Feature'; geometry: { type: 'Point'; coordinates: [number, number] }; properties: { text: string; color: string } }> = [];
         const add = (pts: Array<[number, number]>, text: string, color: string) => {
             const a = anchorOf(pts);
-            if (a) feats.push({ type: 'Feature', geometry: { type: 'Point', coordinates: [a.lon, a.lat] }, properties: { text, color, rotate: a.rotate } });
+            if (a) feats.push({ type: 'Feature', geometry: { type: 'Point', coordinates: [a.lon, a.lat] }, properties: { text, color } });
         };
         add(hindcastPath, 'reconstructed flight', C.path);
         add(staleLine ?? [], 'predicted path', predictedColor);
@@ -1140,9 +1127,10 @@ export default function V2MissionMap({
                             />
                         </Source>
 
-                        {/* Path-type labels — native point symbols printed on the
-                          * globe surface (single per line, occluded at the horizon,
-                          * rotated to the line's bearing so they read along it). */}
+                        {/* Path-type labels — native point symbols pinned to the
+                          * midpoint of each line. Horizontal (viewport-aligned) and
+                          * upright for legibility; single per line and occluded at
+                          * the globe horizon like any surface label. */}
                         {lineLabelGeoJSON && (
                             <Source id="v2-line-labels" type="geojson" data={lineLabelGeoJSON}>
                                 <Layer
@@ -1151,13 +1139,11 @@ export default function V2MissionMap({
                                     layout={{
                                         'text-field': ['get', 'text'],
                                         'text-font': ['DIN Pro Medium', 'Arial Unicode MS Regular'],
-                                        'text-size': 11,
+                                        'text-size': 10.5,
                                         'text-transform': 'uppercase',
-                                        'text-letter-spacing': 0.14,
-                                        'text-rotate': ['get', 'rotate'],
-                                        'text-rotation-alignment': 'map',
-                                        'text-pitch-alignment': 'map',
+                                        'text-letter-spacing': 0.12,
                                         'text-offset': [0, -0.9],
+                                        'text-anchor': 'bottom',
                                         'text-allow-overlap': false,
                                         'text-optional': true,
                                     }}
