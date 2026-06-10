@@ -215,10 +215,9 @@ export default function V2MissionMap({
     const C = colorScheme === 'dark'
         ? { path: '#ff5b1f', forecast: '#5ba8ff', halo: 'rgba(255, 91, 31, 0.22)', recv: '74, 217, 155' }
         : { path: '#a11515', forecast: '#08327d', halo: 'rgba(161, 21, 21, 0.14)', recv: '122, 155, 118' };
-    /* Basemap-matched halo so on-line labels read as a clean gap punched into the
-     * line (the halo masks the stroke around each glyph) rather than text laid
-     * over it. */
-    const labelHalo = colorScheme === 'dark' ? 'rgba(8, 12, 16, 0.9)' : 'rgba(255, 255, 255, 0.92)';
+    /* Basemap-matched label halo — same value the "last fix" tag uses so all
+     * map labels share one look. */
+    const labelHalo = colorScheme === 'dark' ? 'rgba(8, 12, 16, 0.85)' : 'rgba(255, 255, 255, 0.9)';
     const pathPickEnabled = pickPath.length >= 2 && Boolean(onPickTime);
     const mapRef = useRef<MapRef>(null);
     const [styleLoaded, setStyleLoaded] = useState(false);
@@ -1139,11 +1138,12 @@ export default function V2MissionMap({
                                     layout={{
                                         'text-field': ['get', 'text'],
                                         'text-font': ['DIN Pro Medium', 'Arial Unicode MS Regular'],
-                                        'text-size': 10.5,
+                                        'text-size': 11,
                                         'text-transform': 'uppercase',
-                                        'text-letter-spacing': 0.12,
+                                        'text-letter-spacing': 0.08,
                                         'text-offset': [0, -0.9],
                                         'text-anchor': 'bottom',
+                                        'text-padding': 6,
                                         'text-allow-overlap': false,
                                         'text-optional': true,
                                     }}
@@ -1151,8 +1151,8 @@ export default function V2MissionMap({
                                         'text-color': ['get', 'color'],
                                         'text-opacity': 0.9,
                                         'text-halo-color': labelHalo,
-                                        'text-halo-width': 1.6,
-                                        'text-halo-blur': 0.3,
+                                        'text-halo-width': 1.4,
+                                        'text-halo-blur': 0.4,
                                     }}
                                 />
                             </Source>
