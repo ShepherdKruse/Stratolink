@@ -215,6 +215,9 @@ export default function V2MissionMap({
     const C = colorScheme === 'dark'
         ? { path: '#ff5b1f', forecast: '#5ba8ff', halo: 'rgba(255, 91, 31, 0.22)', recv: '74, 217, 155' }
         : { path: '#a11515', forecast: '#08327d', halo: 'rgba(161, 21, 21, 0.14)', recv: '122, 155, 118' };
+    /* Basemap-matched label halo — same value the "last fix" tag uses so all
+     * map labels share one look. */
+    const labelHalo = colorScheme === 'dark' ? 'rgba(8, 12, 16, 0.85)' : 'rgba(255, 255, 255, 0.9)';
     const pathPickEnabled = pickPath.length >= 2 && Boolean(onPickTime);
     const mapRef = useRef<MapRef>(null);
     const [styleLoaded, setStyleLoaded] = useState(false);
@@ -566,6 +569,56 @@ export default function V2MissionMap({
             }],
         };
     }, [validFlightPath, colorScheme]);
+
+    /* Path-type labels — a single tag printed ON the globe surface for each line
+     * ("RECONSTRUCTED FLIGHT" / "PREDICTED PATH" / "FORECAST"). Rendered as a
+     * native Mapbox POINT symbol (not a line symbol — line symbols tile and
+     * duplicate per tile; not an SVG overlay — that hovers in screen space and
+     * spills past the globe edge). A point lives in one tile (always single) and
+     * Mapbox draws it on the surface, rotates it with the map, and occludes it at
+     * the horizon. We anchor at the midpoint of the path's longest near-straight
+     * segment and rotate the text to that segment's geographic bearing so it
+     * reads along the line. */
+    const lineLabelGeoJSON = useMemo(() => {
+        const TURN_TOL = (30 * Math.PI) / 180;
+        /* Anchor point at the midpoint of a path's longest near-straight run. */
+        const anchorOf = (pts: Array<[number, number]>): { lon: number; lat: number } | null => {
+            const v = pts.filter(([lon, lat]) => isRenderablePoint(lat, lon));
+            if (v.length < 2) return null;
+            const u = unwrapLngs(v);
+            const len: number[] = [];
+            const brg: number[] = [];
+            for (let k = 0; k < u.length - 1; k++) {
+                const cosLat = Math.cos((((u[k][1] + u[k + 1][1]) / 2) * Math.PI) / 180);
+                len.push(Math.hypot((u[k + 1][0] - u[k][0]) * cosLat, u[k + 1][1] - u[k][1]));
+                brg.push(Math.atan2(u[k + 1][1] - u[k][1], u[k + 1][0] - u[k][0]));
+            }
+            let bestA = 0, bestB = Math.max(0, len.length - 1), bestLen = -1, a = 0;
+            const closeRun = (s: number, e: number) => { let L = 0; for (let k = s; k <= e; k++) L += len[k]; if (L > bestLen) { bestLen = L; bestA = s; bestB = e; } };
+            for (let k = 1; k < brg.length; k++) { let d = Math.abs(brg[k] - brg[k - 1]); if (d > Math.PI) d = 2 * Math.PI - d; if (d > TURN_TOL) { closeRun(a, k - 1); a = k; } }
+            closeRun(a, Math.max(0, len.length - 1));
+            const seg = u.slice(bestA, bestB + 2);
+            if (seg.length < 2) return null;
+            /* Anchor = vertex nearest the run's arc-length midpoint. */
+            let tot = 0; const sl: number[] = [];
+            for (let k = 0; k < seg.length - 1; k++) { const cl = Math.cos((((seg[k][1] + seg[k + 1][1]) / 2) * Math.PI) / 180); sl.push(Math.hypot((seg[k + 1][0] - seg[k][0]) * cl, seg[k + 1][1] - seg[k][1])); tot += sl[k]; }
+            let acc = 0, ai = 0, bd = Infinity;
+            for (let i = 0; i < seg.length; i++) { if (i > 0) acc += sl[i - 1]; const dd = Math.abs(acc - tot / 2); if (dd < bd) { bd = dd; ai = i; } }
+            const lon = ((seg[ai][0] + 180) % 360 + 360) % 360 - 180;   /* fold to [-180,180] */
+            return { lon, lat: seg[ai][1] };
+        };
+        const predictedColor = colorScheme === 'dark' ? '#9fb0c6' : '#566b86';
+        const feats: Array<{ type: 'Feature'; geometry: { type: 'Point'; coordinates: [number, number] }; properties: { text: string; color: string } }> = [];
+        const add = (pts: Array<[number, number]>, text: string, color: string) => {
+            const a = anchorOf(pts);
+            if (a) feats.push({ type: 'Feature', geometry: { type: 'Point', coordinates: [a.lon, a.lat] }, properties: { text, color } });
+        };
+        add(hindcastPath, 'reconstructed flight', C.path);
+        add(staleLine ?? [], 'predicted path', predictedColor);
+        add(forecastPath, 'forecast', C.forecast);
+        if (feats.length === 0) return null;
+        return { type: 'FeatureCollection' as const, features: feats };
+    }, [hindcastPath, staleLine, forecastPath, C.path, C.forecast, colorScheme]);
 
     /* Ensemble "spaghetti" — every Monte-Carlo member as a faint line. */
     const ensembleGeoJSON = useMemo(() => {
@@ -1072,6 +1125,38 @@ export default function V2MissionMap({
                                 }}
                             />
                         </Source>
+
+                        {/* Path-type labels — native point symbols pinned to the
+                          * midpoint of each line. Horizontal (viewport-aligned) and
+                          * upright for legibility; single per line and occluded at
+                          * the globe horizon like any surface label. */}
+                        {lineLabelGeoJSON && (
+                            <Source id="v2-line-labels" type="geojson" data={lineLabelGeoJSON}>
+                                <Layer
+                                    id="v2-line-label"
+                                    type="symbol"
+                                    layout={{
+                                        'text-field': ['get', 'text'],
+                                        'text-font': ['DIN Pro Medium', 'Arial Unicode MS Regular'],
+                                        'text-size': 11,
+                                        'text-transform': 'uppercase',
+                                        'text-letter-spacing': 0.08,
+                                        'text-offset': [0, -0.9],
+                                        'text-anchor': 'bottom',
+                                        'text-padding': 6,
+                                        'text-allow-overlap': false,
+                                        'text-optional': true,
+                                    }}
+                                    paint={{
+                                        'text-color': ['get', 'color'],
+                                        'text-opacity': 0.9,
+                                        'text-halo-color': labelHalo,
+                                        'text-halo-width': 1.4,
+                                        'text-halo-blur': 0.4,
+                                    }}
+                                />
+                            </Source>
+                        )}
 
                         {/* Light-touch orienting label — a small uppercase tag at the
                           * last real fix ("last fix · 3h ago"). The basemap-matched

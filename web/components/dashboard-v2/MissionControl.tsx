@@ -782,7 +782,12 @@ function MapColumn({
             ? lerpAlongTrack(fullTrack, scrubT)
             : (fullTrack.length ? [fullTrack[fullTrack.length - 1].lon, fullTrack[fullTrack.length - 1].lat] as [number, number] : null);
         if (!pos) return null;
-        return { id: selectedDevice.id, lat: pos[1], lon: pos[0], altitude_m: isFuture ? null : (scrubRow?.alt ?? null) };
+        /* The forecast/predicted track keeps longitudes unwrapped past ±180 (so
+         * its line stays continuous across the antimeridian); the balloon marker
+         * is a single point, so fold its lon back into [-180,180] or it exceeds
+         * WGS84 and gets dropped, making the marker vanish past 180°. */
+        const lon = ((pos[0] + 180) % 360 + 360) % 360 - 180;
+        return { id: selectedDevice.id, lat: pos[1], lon, altitude_m: isFuture ? null : (scrubRow?.alt ?? null) };
     }, [selectedDevice, scrubRow, fullTrack, scrubT, isFuture]);
 
     /* Gateways + reception links belong to a real transmission. Hide them
