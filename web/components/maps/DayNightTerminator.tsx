@@ -41,7 +41,7 @@ const lightsOpacityByZoom = [
     6.5, 0,
 ] as unknown;
 
-const REFRESH_MS = 120_000;          /* terminator moves ~0.5°/2min */
+const REFRESH_MS = 900_000;          /* re-render the terminator every 15 min */
 const OVERLAY_RE = /^(tm-coverage|v2-)/;  /* data layers that must stay above */
 
 /* Scrubbing the timeline would sweep the terminator across the map on every tick,
@@ -124,6 +124,14 @@ export default function DayNightTerminator({ colorScheme = 'light', date = null,
 
         const ensure = () => {
             try {
+                /* Track whether we actually (re)created a layer this run. We must
+                 * only reposition (moveLayer) when something changed — calling
+                 * moveLayer unconditionally on every styledata is itself a style
+                 * mutation that fires 'styledata', so it would loop forever and
+                 * keep the map repainting every frame (the terminator's runaway
+                 * CPU). Reposition only on first add / style reload. */
+                let added = false;
+
                 /* SHADE — constant opacity at all zooms. */
                 const shadeSrc = map.getSource(SHADE_ID) as unknown as TerminatorSource | undefined;
                 if (!shadeSrc) {
@@ -142,6 +150,7 @@ export default function DayNightTerminator({ colorScheme = 'light', date = null,
                         id: SHADE_ID, type: 'raster', source: SHADE_ID,
                         paint: { 'raster-opacity': 0, 'raster-fade-duration': 0 },
                     });
+                    added = true;
                 }
                 /* Do NOT re-apply raster-opacity on every styledata. The date effect
                  * owns shade opacity (it fades the shade out while scrubbing), and
@@ -169,10 +178,11 @@ export default function DayNightTerminator({ colorScheme = 'light', date = null,
                             id: LIGHTS_ID, type: 'raster', source: LIGHTS_ID,
                             paint: { 'raster-opacity': 0, 'raster-fade-duration': 0 },
                         });
+                        added = true;
                     }
                 }
 
-                position();
+                if (added) position();
             } catch { /* style mid-load; retry on next styledata */ }
         };
 
