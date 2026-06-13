@@ -25,6 +25,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { motion, useScroll, useTransform, useMotionValueEvent, useMotionTemplate, useReducedMotion } from 'framer-motion';
 import HeroGlobe from './HeroGlobe';
+import { PerfHud } from './PerfHud';
 
 /* The globe is rendered into a large SQUARE canvas so the whole sphere + its
  * atmosphere exist at the biggest size; scroll then CSS-scales it down (crisp,
@@ -34,7 +35,7 @@ import HeroGlobe from './HeroGlobe';
 const GLOBE_VH = 180;                 /* canvas square side, in vh */
 const GLOBE_FILL = 0.6;               /* sphere = this fraction of the canvas — MUST match HeroGlobe */
 const HEADER_VH = 8;                  /* sticky nav height (~80px); the docked globe sits below it */
-const BOTTOM_GAP = 18;                /* room below the sphere so its bottom + atmosphere aren't clipped */
+const BOTTOM_GAP = 32;                /* total vertical slack around the docked sphere (split evenly top/bottom once centred) — keeps its atmosphere halo off both edges. Bigger = smaller globe + more clearance; smaller = bigger globe + tighter. */
 const DOCK_DIAM = 100 - HEADER_VH - BOTTOM_GAP;   /* docked sphere diameter (vh) */
 const CAP_TOP = 80;                   /* vh of the sphere's top edge at load — only the cap below shows */
 const GLOBE_SETTLE = 0.6;             /* scroll fraction by which it's docked; the rest is a long tail */
@@ -43,7 +44,10 @@ const GLOBE_SETTLE = 0.6;             /* scroll fraction by which it's docked; t
  * sits at GLOBE_VH/2 within the unscaled square). */
 const BASE_DIAM = GLOBE_VH * GLOBE_FILL;             /* sphere diameter at scale 1 */
 const GLOBE_END_SCALE = DOCK_DIAM / BASE_DIAM;       /* scale so the sphere = DOCK_DIAM */
-const DOCK_CENTER_Y = HEADER_VH + DOCK_DIAM / 2;     /* vertical centre of the below-header region */
+/* Vertical centre of the region BELOW the menu bar — midpoint of [HEADER_VH, 100],
+ * NOT the full-screen centre — so the docked sphere sits centred between the menu
+ * bar's bottom edge and the window's bottom edge (equal slack above and below). */
+const DOCK_CENTER_Y = HEADER_VH + (100 - HEADER_VH) / 2;
 const GLOBE_END_Y = DOCK_CENTER_Y - (GLOBE_VH / 2) * GLOBE_END_SCALE;
 const GLOBE_START_Y = CAP_TOP - (GLOBE_VH * (1 - GLOBE_FILL)) / 2;
 
@@ -143,6 +147,7 @@ function HeroScrollAnimated() {
 
     return (
         <section ref={scrollRef} className="relative h-[400vh] bg-background">
+            <PerfHud />
             <div className="sticky top-0 h-screen overflow-hidden">
                 {/* Globe layer — a large square (so the whole sphere exists),
                   * scaled down + lifted on scroll. Anchored top-centre. */}
@@ -155,6 +160,10 @@ function HeroScrollAnimated() {
                         height: `${GLOBE_VH}vh`,
                         transformOrigin: '50% 0%',
                         transform: globeTransform,
+                        /* Promote to its own compositor layer so the scroll-driven
+                         * scale/translate composites in isolation — it never
+                         * repaints the wordmark/balloon/CTA stacked over it. */
+                        willChange: 'transform',
                     }}
                 >
                     <HeroGlobe docked={docked} launchNonce={launches} scroll={scrollYProgress} settle={GLOBE_SETTLE} />

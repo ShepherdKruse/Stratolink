@@ -72,9 +72,29 @@ type DayNightTerminatorProps = {
      *  for the duration of the drag (so the shadow doesn't churn across the map)
      *  and fades back in at the settled `date` on release. */
     scrubbing?: boolean;
+    /** Override the slow "first reveal" fade durations (ms) — the appearance from
+     *  nothing on (re)mount. The hero wants a gentler wash-in than the dashboard;
+     *  defaults to the built-in first-reveal timings. */
+    revealShadeMs?: number;
+    revealLightsMs?: number;
+    /** Apply the slow reveal durations to EVERY reveal, not just the first — for
+     *  scenes that repeatedly hide/show the terminator (e.g. the scroll hero) and
+     *  want a consistent gentle wash-in each time it comes back. */
+    gentleReveal?: boolean;
+    /** Fade-OUT duration (ms) when `scrubbing` turns true. Defaults to a quick
+     *  hide (suits the scrubber); the hero passes a longer, gentle fade. */
+    hideMs?: number;
 };
 
-export default function DayNightTerminator({ colorScheme = 'light', date = null, scrubbing = false }: DayNightTerminatorProps) {
+export default function DayNightTerminator({
+    colorScheme = 'light',
+    date = null,
+    scrubbing = false,
+    revealShadeMs = FIRST_REVEAL_SHADE_FADE_MS,
+    revealLightsMs = FIRST_REVEAL_FADE_MS,
+    gentleReveal = false,
+    hideMs = HIDE_MS,
+}: DayNightTerminatorProps) {
     const { current: mapRef } = useMap();
     /* Black-marble city lights need a token to fetch tiles. */
     const showLights = Boolean(MAPBOX_TOKEN);
@@ -228,9 +248,9 @@ export default function DayNightTerminator({ colorScheme = 'light', date = null,
         clearReveal();
 
         if (scrubbing) {
-            /* Hide for the whole drag — frozen tiles, no rebuilds. */
-            setOpacity(SHADE_ID, 0, HIDE_MS);
-            setOpacity(LIGHTS_ID, 0, HIDE_MS);
+            /* Hide (fade out) — frozen tiles, no rebuilds. */
+            setOpacity(SHADE_ID, 0, hideMs);
+            setOpacity(LIGHTS_ID, 0, hideMs);
             return;
         }
 
@@ -241,9 +261,12 @@ export default function DayNightTerminator({ colorScheme = 'light', date = null,
         setDate(date != null ? new Date(date) : new Date());
         const first = firstRevealRef.current;
         firstRevealRef.current = false;
+        /* `gentleReveal` keeps the slow wash-in on every reveal, not just the
+         * first (so a scroll hero that repeatedly hides/shows looks consistent). */
+        const useSlow = first || gentleReveal;
         const delayMs = first ? FIRST_REVEAL_DELAY_MS : TILE_REBUILD_MS;
-        const shadeFadeMs = first ? FIRST_REVEAL_SHADE_FADE_MS : FADE_IN_MS;
-        const lightsFadeMs = first ? FIRST_REVEAL_FADE_MS : FADE_IN_MS;
+        const shadeFadeMs = useSlow ? revealShadeMs : FADE_IN_MS;
+        const lightsFadeMs = useSlow ? revealLightsMs : FADE_IN_MS;
         revealTimerRef.current = setTimeout(() => {
             setOpacity(SHADE_ID, shadeOpacity, shadeFadeMs);
             setOpacity(LIGHTS_ID, lightsOpacityByZoom, lightsFadeMs);
@@ -252,7 +275,7 @@ export default function DayNightTerminator({ colorScheme = 'light', date = null,
         if (date != null) return clearReveal;
         const interval = setInterval(() => setDate(new Date()), REFRESH_MS);
         return () => { clearReveal(); clearInterval(interval); };
-    }, [mapRef, date, scrubbing, shadeOpacity]);
+    }, [mapRef, date, scrubbing, shadeOpacity, revealShadeMs, revealLightsMs, gentleReveal, hideMs]);
 
     return null;
 }

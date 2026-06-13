@@ -28,7 +28,7 @@
  */
 'use client';
 
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import Map, { Source, Layer } from 'react-map-gl/mapbox';
 import type { MapRef } from 'react-map-gl/mapbox';
 import 'mapbox-gl/dist/mapbox-gl.css';
@@ -123,7 +123,7 @@ const PALETTE = [
  * vanished) and reads as "fades over time". TRAIL_LEN is in path-index units
  * (15-min samples → 620 ≈ 6.5 days of flight). */
 const TRAIL_LEN = 620;
-const TRAIL_SAMPLES = 90; /* points kept before smoothing (fewer = cheaper per-frame parse) */
+const TRAIL_SAMPLES = 64; /* points kept before smoothing (fewer = cheaper per-frame parse) */
 const TRAIL_SMOOTH_ITERS = 2; /* Chaikin passes — higher = smoother but more vertices */
 
 function isWebGLAvailable(): boolean {
@@ -169,7 +169,7 @@ function pointAt(path: LngLat[], idx: number): LngLat {
 
 /** Geodesic circle (ring of [lon,lat]) of `km` radius around a centre, with
  *  longitudes kept continuous relative to the centre so it doesn't tear. */
-function circleRing(lon: number, lat: number, km: number, steps = 72): LngLat[] {
+function circleRing(lon: number, lat: number, km: number, steps = 48): LngLat[] {
     const R = 6371;
     const d = km / R;
     const latR = (lat * Math.PI) / 180;
@@ -263,6 +263,17 @@ const START_LAT = 0;
  *  DOCKED_CENTER. */
 const SPIN_DEG = 50;
 
+/** Stable empty source data — the trail/dot/coverage sources mount with this and
+ *  are then fed imperatively via setData (a stable ref means react-map-gl never
+ *  overwrites our imperative data). */
+const EMPTY_FC = { type: 'FeatureCollection' as const, features: [] as unknown[] };
+
+/** Render the globe at 1/RENDER_SCALE resolution and CSS-upscale it to the same
+ *  on-screen size — fewer pixels per repaint at the cost of a softer globe.
+ *  1 = full Retina (crisp); >1 trades sharpness for fill rate. The downscale
+ *  didn't move the needle here, so we keep it crisp at 1. */
+const RENDER_SCALE = 1;
+
 interface HeroGlobeProps {
     /** Once true, the anchor balloon auto-launches. */
     docked: boolean;
@@ -283,10 +294,19 @@ export default function HeroGlobe({ docked, launchNonce = 0, reducedMotion = fal
     const [styleLoaded, setStyleLoaded] = useState(false);
     const [webglOk, setWebglOk] = useState<boolean | null>(null);
     const [trajLoaded, setTrajLoaded] = useState(false);
-    const [frame, setFrame] = useState(0); /* bumped each rAF to re-render the GeoJSON */
+    /* The set of live flights, as {key,color}. Changes only when a balloon
+     * launches or lands — so React renders a stable set of Sources/Layers, and
+     * the per-frame motion updates them IMPERATIVELY (setData) without any
+     * per-frame React render. */
+    const [flightList, setFlightList] = useState<{ key: number; color: string }[]>([]);
     /* Hidden until the map has loaded, fit, and settled — then fade in once, so
      * the load/fit camera settling isn't seen as a jump. */
     const [revealed, setRevealed] = useState(false);
+    /* The day/night terminator is shown only while the globe is settled in place
+     * (scroll past `settle`). Unlike `docked` (which latches), this tracks scroll
+     * BOTH ways, so the terminator resolves in once the spin-in finishes and
+     * disappears again if you scroll back up into the animation. */
+    const [terminatorOn, setTerminatorOn] = useState(false);
 
     const token = process.env.NEXT_PUBLIC_MAPBOX_TOKEN;
     const styledRef = useRef(false);
@@ -374,9 +394,9 @@ export default function HeroGlobe({ docked, launchNonce = 0, reducedMotion = fal
     /* Size the sphere to fill the (square) container; re-fit on resize. */
     const applyFit = useCallback(() => {
         const m = mapRef.current?.getMap();
-        const el = rootRef.current;
-        if (!m || !el) return;
-        const z = fitZoom(el.offsetWidth, el.offsetHeight);
+        if (!m) return;
+        const c = m.getContainer(); // the (downscaled) canvas container
+        const z = fitZoom(c.offsetWidth, c.offsetHeight);
         fitZoomRef.current = z;
         try { m.setZoom(z); } catch { /* ignore */ }
     }, []);
@@ -444,6 +464,57 @@ export default function HeroGlobe({ docked, launchNonce = 0, reducedMotion = fal
         return () => { unsub(); if (raf) cancelAnimationFrame(raf); };
     }, [scroll, settle, styleLoaded]);
 
+    /* Drive terminator visibility from the live scroll position (both ways). No
+     * scroll driver (reduced-motion / static fallback) → follow `docked`. */
+    useEffect(() => {
+        if (!scroll) { setTerminatorOn(docked); return; }
+        const update = (v: number) => setTerminatorOn(v >= settle);
+        update(scroll.get());
+        const unsub = scroll.on('change', update);
+        return unsub;
+    }, [scroll, settle, docked]);
+
+    /* Imperatively push the current flight positions to Mapbox — no React render.
+     * Trails: geometry via setData; the end-fade rides cheap `line-opacity` (the
+     * tail-fade gradient stays static, so we never re-tessellate it per frame).
+     * Dots + coverage: single sources with data-driven opacity. */
+    const paintFlights = useCallback(() => {
+        const m = mapRef.current?.getMap();
+        if (!m) return;
+        const flights = flightsRef.current;
+        for (const f of flights) {
+            const fade = reducedMotion ? 1 : endFade(f.prog);
+            const src = m.getSource(`hero-trail-${f.key}`) as { setData?: (d: unknown) => void } | undefined;
+            if (src?.setData) {
+                const coords = trailCoords(f.traj.path, f.headIdx);
+                src.setData(coords.length >= 2
+                    ? { type: 'FeatureCollection', features: [{ type: 'Feature', geometry: { type: 'LineString', coordinates: coords }, properties: {} }] }
+                    : { type: 'FeatureCollection', features: [] });
+            }
+            if (m.getLayer(`hero-trail-line-${f.key}`)) {
+                try { m.setPaintProperty(`hero-trail-line-${f.key}`, 'line-opacity', fade); } catch { /* ignore */ }
+            }
+        }
+        const dots = m.getSource('hero-dots') as { setData?: (d: unknown) => void } | undefined;
+        dots?.setData?.({
+            type: 'FeatureCollection',
+            features: flights.map((f) => {
+                const [lon, lat] = pointAt(f.traj.path, f.headIdx);
+                const fade = reducedMotion ? 1 : endFade(f.prog);
+                return { type: 'Feature', geometry: { type: 'Point', coordinates: [fold(lon), lat] }, properties: { color: f.traj.color, opacity: fade, haloOpacity: 0.18 * fade } };
+            }),
+        });
+        const cov = m.getSource('hero-coverage') as { setData?: (d: unknown) => void } | undefined;
+        cov?.setData?.({
+            type: 'FeatureCollection',
+            features: flights.map((f) => {
+                const [lon, lat] = pointAt(f.traj.path, f.headIdx);
+                const fade = reducedMotion ? 1 : endFade(f.prog);
+                return { type: 'Feature', geometry: { type: 'Polygon', coordinates: [circleRing(fold(lon), lat, COVERAGE_KM)] }, properties: { color: f.traj.color, fillOpacity: 0.06 * fade, lineOpacity: 0.45 * fade } };
+            }),
+        });
+    }, [reducedMotion]);
+
     const ensureLoop = useCallback(() => {
         if (rafRef.current != null) return;
         const FRAME_MS = 1000 / 30; /* throttle the (time-based) trace to ~30fps */
@@ -467,14 +538,20 @@ export default function HeroGlobe({ docked, launchNonce = 0, reducedMotion = fal
                 f.prog = p;
                 if (p >= 1) f.done = true; /* faded out by now (see endFade) */
             }
-            /* Drop finished flights — they fade and disappear at the end. */
+            /* Drop finished flights — they fade and disappear at the end. Only
+             * touch React state when the SET changes (a flight landed), so the
+             * Source/Layer set is added/removed; per-frame motion is imperative. */
+            const before = flightsRef.current.length;
             flightsRef.current = flightsRef.current.filter((f) => !f.done);
+            if (flightsRef.current.length !== before) {
+                setFlightList(flightsRef.current.map((f) => ({ key: f.key, color: f.traj.color })));
+            }
             /* Keep the globe alive: when the last balloon lands, launch another. */
             if (flightsRef.current.length === 0 && dockedRef.current) {
                 launchRef.current();
             }
-            /* No camera motion — the globe stays put; the user pans it freely. */
-            setFrame((x) => x + 1);
+            /* Push positions imperatively — no React render this frame. */
+            paintFlights();
             if (flightsRef.current.some((f) => !f.done)) {
                 rafRef.current = requestAnimationFrame(step);
             } else {
@@ -482,19 +559,24 @@ export default function HeroGlobe({ docked, launchNonce = 0, reducedMotion = fal
             }
         };
         rafRef.current = requestAnimationFrame(step);
-    }, []);
+    }, [paintFlights]);
 
     /* Push a flight for a trajectory and start the loop (or, in reduced motion,
      * draw it complete). Shared by all launch entry points. */
     const startFlight = useCallback((traj: Traj) => {
-        if (reducedMotion) {
-            flightsRef.current.push({ key: keyRef.current++, traj, startMs: 0, headIdx: traj.path.length - 1, prog: 1, done: true });
-            setFrame((x) => x + 1);
-            return;
-        }
-        flightsRef.current.push({ key: keyRef.current++, traj, startMs: performance.now(), headIdx: 0, prog: 0, done: false });
-        ensureLoop();
+        const key = keyRef.current++;
+        flightsRef.current.push(reducedMotion
+            ? { key, traj, startMs: 0, headIdx: traj.path.length - 1, prog: 1, done: false }
+            : { key, traj, startMs: performance.now(), headIdx: 0, prog: 0, done: false });
+        setFlightList((l) => [...l, { key, color: traj.color }]); // mounts this flight's Source/Layer
+        if (!reducedMotion) ensureLoop(); // reduced-motion is painted once by the effect below
     }, [reducedMotion, ensureLoop]);
+
+    /* Reduced motion (and the first paint after a launch): draw the current
+     * positions once the flightList's Sources have mounted. */
+    useEffect(() => {
+        if (styleLoaded) paintFlights();
+    }, [flightList, styleLoaded, paintFlights]);
 
     /* Launch a pre-baked balloon. `specificId` → the anchor auto-launch; none →
      * a random unlaunched balloon (pool refills when dry). */
@@ -589,39 +671,6 @@ export default function HeroGlobe({ docked, launchNonce = 0, reducedMotion = fal
         else if (docked && trajLoaded) launchRef.current();
     }, [active, docked, trajLoaded, ensureLoop]);
 
-    /* One dot feature per flight at the interpolated head, coloured by balloon.
-     * Recomputed every frame (the `frame` counter bumps each rAF tick). The
-     * trail lines are built per-flight in the render (one gradient layer each). */
-    const dotsData = useMemo(() => ({
-        type: 'FeatureCollection' as const,
-        features: flightsRef.current.map((f) => {
-            const [lon, lat] = pointAt(f.traj.path, f.headIdx);
-            const fade = reducedMotion ? 1 : endFade(f.prog);
-            return {
-                type: 'Feature' as const,
-                geometry: { type: 'Point' as const, coordinates: [fold(lon), lat] },
-                properties: { color: f.traj.color, opacity: fade, haloOpacity: 0.18 * fade },
-            };
-        }),
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }), [frame, reducedMotion]);
-
-    /* 250 km coverage region around each balloon — faint filled disc + ring,
-     * coloured by balloon and fading out with the flight. */
-    const coverageData = useMemo(() => ({
-        type: 'FeatureCollection' as const,
-        features: flightsRef.current.map((f) => {
-            const [lon, lat] = pointAt(f.traj.path, f.headIdx);
-            const fade = reducedMotion ? 1 : endFade(f.prog);
-            return {
-                type: 'Feature' as const,
-                geometry: { type: 'Polygon' as const, coordinates: [circleRing(fold(lon), lat, COVERAGE_KM)] },
-                properties: { color: f.traj.color, fillOpacity: 0.06 * fade, lineOpacity: 0.45 * fade },
-            };
-        }),
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }), [frame, reducedMotion]);
-
     if (webglOk === false || !token) {
         return (
             <div
@@ -639,6 +688,9 @@ export default function HeroGlobe({ docked, launchNonce = 0, reducedMotion = fal
 
     return (
         <div ref={rootRef} style={{ width: '100%', height: '100%', opacity: revealed ? 1 : 0, transition: 'opacity 100ms ease' }}>
+        {/* Render at 1/RENDER_SCALE resolution, CSS-upscale to fill — fewer pixels
+          * per repaint at the same on-screen size. */}
+        <div style={{ width: `${100 / RENDER_SCALE}%`, height: `${100 / RENDER_SCALE}%`, transform: `scale(${RENDER_SCALE})`, transformOrigin: 'top left' }}>
         <Map
             ref={mapRef}
             mapboxAccessToken={token}
@@ -658,6 +710,14 @@ export default function HeroGlobe({ docked, launchNonce = 0, reducedMotion = fal
             keyboard={false}
             attributionControl={false}
             logoPosition="bottom-left"
+            /* The basemap is effectively static (one fixed instant, no live
+             * tiles streaming in steady state), so kill Mapbox's symbol/tile
+             * crossfade work — it's pure per-frame cost with nothing to fade. */
+            fadeDuration={0}
+            /* Globe view touches few tiles; a small cache avoids holding (and
+             * periodically revalidating) a big tile set we never revisit. */
+            maxTileCacheSize={64}
+            refreshExpiredTiles={false}
             /* Click anywhere (once docked) to launch a balloon from there, its
              * path integrated live through the 300 hPa wind field. */
             cursor={docked ? 'crosshair' : 'default'}
@@ -678,11 +738,25 @@ export default function HeroGlobe({ docked, launchNonce = 0, reducedMotion = fal
                     {/* Day/night terminator (city lights + night shade), matching
                       * the dashboard but pinned to a fixed instant so the boundary
                       * sits over the US. Rendered first so it dims only the
-                      * basemap; trails and dots sit on top. */}
-                    <DayNightTerminator colorScheme={SCHEME} date={TERMINATOR_AT} />
+                      * basemap; trails and dots sit on top.
+                      *
+                      * Shown only while settled: `terminatorOn` tracks the scroll
+                      * position BOTH ways, so the dusk line washes in slowly once
+                      * the globe comes to rest and fades back out as you scroll up
+                      * into the animation (driven through `scrubbing`, which fades
+                      * opacity rather than popping the layer in/out). */}
+                    <DayNightTerminator
+                        colorScheme={SCHEME}
+                        date={TERMINATOR_AT}
+                        scrubbing={!terminatorOn}
+                        gentleReveal
+                        revealShadeMs={500}
+                        revealLightsMs={500}
+                        hideMs={500}
+                    />
 
-                    {/* 250 km coverage region per balloon — under the trails/dots. */}
-                    <Source id="hero-coverage" type="geojson" data={coverageData}>
+                    {/* 250 km coverage region per balloon — fed imperatively. */}
+                    <Source id="hero-coverage" type="geojson" data={EMPTY_FC as never}>
                         <Layer
                             id="hero-coverage-fill"
                             type="fill"
@@ -695,34 +769,27 @@ export default function HeroGlobe({ docked, launchNonce = 0, reducedMotion = fal
                         />
                     </Source>
 
-                    {/* Fading comet trail — one gradient line layer per flight
-                      * (line-gradient can't be data-driven, so colour is baked
-                      * per layer). lineMetrics enables the along-line fade. */}
-                    {flightsRef.current.map((f) => {
-                        const coords = trailCoords(f.traj.path, f.headIdx);
-                        if (coords.length < 2) return null;
-                        const fade = reducedMotion ? 1 : endFade(f.prog);
-                        return (
-                            <Source
-                                key={f.key}
-                                id={`hero-trail-${f.key}`}
-                                type="geojson"
-                                lineMetrics
-                                data={{ type: 'FeatureCollection', features: [{ type: 'Feature', geometry: { type: 'LineString', coordinates: coords }, properties: {} }] }}
-                            >
-                                <Layer
-                                    id={`hero-trail-line-${f.key}`}
-                                    type="line"
-                                    layout={{ 'line-cap': 'round', 'line-join': 'round' }}
-                                    paint={{
-                                        'line-gradient': trailGradient(f.traj.color, fade) as never,
-                                        'line-width': ['interpolate', ['linear'], ['zoom'], 2, 1.8, 5, 3],
-                                    }}
-                                />
-                            </Source>
-                        );
-                    })}
-                    <Source id="hero-dots" type="geojson" data={dotsData}>
+                    {/* Fading comet trail — one gradient line layer per flight.
+                      * The tail-fade gradient is STATIC (colour baked per layer);
+                      * the end-of-flight fade rides `line-opacity` (set imperatively
+                      * so we never re-tessellate the gradient). lineMetrics enables
+                      * the along-line gradient. The flight SET only changes on
+                      * launch/land, so these mount/unmount rarely. */}
+                    {flightList.map((f) => (
+                        <Source key={f.key} id={`hero-trail-${f.key}`} type="geojson" lineMetrics data={EMPTY_FC as never}>
+                            <Layer
+                                id={`hero-trail-line-${f.key}`}
+                                type="line"
+                                layout={{ 'line-cap': 'round', 'line-join': 'round' }}
+                                paint={{
+                                    'line-gradient': trailGradient(f.color, 1) as never,
+                                    'line-opacity': 1,
+                                    'line-width': ['interpolate', ['linear'], ['zoom'], 2, 1.8, 5, 3],
+                                }}
+                            />
+                        </Source>
+                    ))}
+                    <Source id="hero-dots" type="geojson" data={EMPTY_FC as never}>
                         <Layer
                             id="hero-dot-halo"
                             type="circle"
@@ -744,6 +811,7 @@ export default function HeroGlobe({ docked, launchNonce = 0, reducedMotion = fal
                 </>
             )}
         </Map>
+        </div>
         </div>
     );
 }
