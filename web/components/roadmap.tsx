@@ -29,7 +29,7 @@ export function Roadmap() {
 
         <div className="mt-16 grid gap-12 sm:grid-cols-3">
           <div>
-            <div className="text-sm font-light text-muted-foreground">Phase 1</div>
+            <div className="font-mono text-xs font-medium uppercase tracking-[0.12em] text-muted-foreground">Phase 1</div>
             <h3 className="mt-2 text-base font-normal text-foreground">Pilot Operations</h3>
             <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
               Initial balloon deployments, sensor validation campaigns, and partnerships with atmospheric research
@@ -37,7 +37,7 @@ export function Roadmap() {
             </p>
           </div>
           <div>
-            <div className="text-sm font-light text-muted-foreground">Phase 2</div>
+            <div className="font-mono text-xs font-medium uppercase tracking-[0.12em] text-muted-foreground">Phase 2</div>
             <h3 className="mt-2 text-base font-normal text-foreground">Data Platform Launch</h3>
             <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
               Public data archive, API access for researchers, and expanded coverage across priority observation
@@ -45,7 +45,7 @@ export function Roadmap() {
             </p>
           </div>
           <div>
-            <div className="text-sm font-light text-muted-foreground">Phase 3</div>
+            <div className="font-mono text-xs font-medium uppercase tracking-[0.12em] text-muted-foreground">Phase 3</div>
             <h3 className="mt-2 text-base font-normal text-foreground">Operational Network</h3>
             <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
               Continuous observation capabilities, real-time data feeds, and collaborative tools for the atmospheric

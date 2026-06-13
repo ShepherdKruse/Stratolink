@@ -5,8 +5,8 @@
 
 /* Updated to atmospheric, scientific color palette with pale blues and soft grays */
 :root {
-  /* Off-white background with slight warmth */
-  --background: oklch(0.99 0.001 240);
+  /* Pure white background */
+  --background: #ffffff;
   --foreground: oklch(0.25 0.01 250);
 
   --card: oklch(1 0 0);
@@ -94,6 +94,7 @@
 
 @theme inline {
   --font-sans: "Inter", "Inter Fallback", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-mono: var(--font-jetbrains-mono), ui-monospace, "SF Mono", Menlo, Consolas, monospace;
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -139,6 +140,61 @@
   body {
     @apply bg-background text-foreground antialiased;
   }
+}
+
+/* ============================================================
+ * Homepage "instrument" theme — borrows the dashboard's design
+ * language (mono type, cool-gray paper, hairline borders, sharp
+ * geometry, brick-red accent) WITHOUT touching the dashboard.
+ * Scoped to the homepage root via `.home-instrument`, so it
+ * overrides the design tokens only for descendants. Values mirror
+ * the dashboard's light scheme (--sl-* in dashboard-v2.css).
+ * ============================================================ */
+.home-instrument {
+  --background: #ffffff;          /* white page — no beige/paper tint */
+  --foreground: #2a2f36;          /* --sl-text */
+  --card: #ffffff;
+  --card-foreground: #2a2f36;
+  --popover: #ffffff;
+  --popover-foreground: #2a2f36;
+  --primary: #a11515;             /* brick-red accent (--sl-ok) */
+  --primary-foreground: #ffffff;
+  --secondary: #f5f6f7;           /* faint cool gray (never warm) */
+  --secondary-foreground: #2a2f36;
+  --muted: #f3f4f6;
+  --muted-foreground: #5b5e66;    /* --sl-text-dim */
+  --accent: #eef0f3;              /* quiet cool hover/zone fill */
+  --accent-foreground: #1b1f25;   /* --sl-text-hi */
+  --destructive: #a11515;
+  --destructive-foreground: #ffffff;
+  --border: rgba(15, 17, 22, 0.13);   /* --sl-border */
+  --input: rgba(15, 17, 22, 0.13);
+  --ring: rgba(15, 17, 22, 0.30);
+  --radius: 0.125rem;             /* near-sharp, instrument corners */
+}
+
+/* Headings adopt the mono voice; body copy stays sans for readability. */
+.home-instrument h1,
+.home-instrument h2,
+.home-instrument h3 {
+  font-family: var(--font-mono);
+  letter-spacing: -0.015em;
+}
+
+/* Shared "eyebrow" / micro-label + chrome: uppercase, tracked mono, like the
+ * dashboard's .sl-label-xs and tab labels. Opt-in via these classes. */
+.home-instrument .eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;           /* 11px */
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted-foreground);
+}
+.home-instrument .mono-ui {
+  font-family: var(--font-mono);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
 }
 
 /* Documentation Styles */

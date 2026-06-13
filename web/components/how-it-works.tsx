@@ -162,7 +162,7 @@ export function HowItWorks() {
         >
           {steps.map((step, index) => (
             <div key={step.number} className="group" style={{ transitionDelay: `${500 + index * 100}ms` }}>
-              <div className="text-sm font-light text-muted-foreground/60 transition-colors group-hover:text-muted-foreground">
+              <div className="font-mono text-sm font-medium tracking-[0.1em] text-primary/70 transition-colors group-hover:text-primary">
                 {step.number}
               </div>
               <h3 className="mt-4 text-base font-normal text-foreground">{step.title}</h3>

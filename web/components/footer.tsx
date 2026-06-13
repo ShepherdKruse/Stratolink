@@ -15,8 +15,8 @@ export function Footer() {
             />
           </div>
           <p className="text-sm font-light leading-relaxed text-muted-foreground">
-            Stratolink is building high-altitude atmospheric communications infrastructure for research, education, and
-            global connectivity.
+            Stratolink operates a distributed network of pico-balloons collecting high-altitude atmospheric
+            observations for research, education, and public-interest science.
           </p>
           <div className="mt-6 text-xs text-muted-foreground">
             <p>&copy; {new Date().getFullYear()} Stratolink. All data published under open licenses.</p>

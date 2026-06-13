@@ -104,7 +104,7 @@ export function FutureApplications() {
                 <div className="text-muted-foreground transition-colors duration-300 group-hover:text-foreground">
                   {app.icon}
                 </div>
-                <span className="text-xs font-medium uppercase tracking-wider text-muted-foreground">
+                <span className="font-mono text-xs font-medium uppercase tracking-wider text-muted-foreground">
                   {app.badge}
                 </span>
               </div>

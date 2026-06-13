@@ -38,43 +38,43 @@ export function Navigation() {
           <div className="hidden items-center gap-6 md:flex">
             <Link
               href="/activate"
-              className="text-sm font-light text-muted-foreground transition-colors hover:text-foreground"
+              className="font-mono text-[11px] font-medium uppercase tracking-[0.1em] text-muted-foreground transition-colors hover:text-foreground"
             >
               Activate Device
             </Link>
             <Link
               href="/flights"
-              className="text-sm font-light text-muted-foreground transition-colors hover:text-foreground"
+              className="font-mono text-[11px] font-medium uppercase tracking-[0.1em] text-muted-foreground transition-colors hover:text-foreground"
             >
               Flights
             </Link>
             <Link
               href="/learn"
-              className="text-sm font-light text-muted-foreground transition-colors hover:text-foreground"
+              className="font-mono text-[11px] font-medium uppercase tracking-[0.1em] text-muted-foreground transition-colors hover:text-foreground"
             >
               Learn
             </Link>
             <Link
               href="/classrooms"
-              className="text-sm font-light text-muted-foreground transition-colors hover:text-foreground"
+              className="font-mono text-[11px] font-medium uppercase tracking-[0.1em] text-muted-foreground transition-colors hover:text-foreground"
             >
               For teachers
             </Link>
             <Link
               href="/docs"
-              className="text-sm font-light text-muted-foreground transition-colors hover:text-foreground"
+              className="font-mono text-[11px] font-medium uppercase tracking-[0.1em] text-muted-foreground transition-colors hover:text-foreground"
             >
               Docs
             </Link>
             <Link
               href="#contact"
-              className="text-sm font-light text-muted-foreground transition-colors hover:text-foreground"
+              className="font-mono text-[11px] font-medium uppercase tracking-[0.1em] text-muted-foreground transition-colors hover:text-foreground"
             >
               Contact
             </Link>
             <Link
               href="/dashboard"
-              className="rounded-sm bg-foreground px-4 py-2 text-sm font-medium text-background transition-colors hover:bg-foreground/90"
+              className="rounded-sm bg-foreground px-4 py-2 font-mono text-[11px] font-medium uppercase tracking-[0.1em] text-background transition-colors hover:bg-foreground/90"
             >
               Mission Control
             </Link>
@@ -85,7 +85,7 @@ export function Navigation() {
             <Link
               href="/dashboard"
               onClick={close}
-              className="rounded-sm bg-foreground px-3 py-2 text-xs font-medium text-background transition-colors hover:bg-foreground/90"
+              className="rounded-sm bg-foreground px-3 py-2 font-mono text-[11px] font-medium uppercase tracking-[0.08em] text-background transition-colors hover:bg-foreground/90"
             >
               Mission Control
             </Link>
