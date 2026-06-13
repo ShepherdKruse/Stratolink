@@ -5,6 +5,11 @@ import Link from 'next/link';
 
 export function DashboardShowcase() {
     const [isVisible, setIsVisible] = useState(false);
+    /* The previews are full live `/dashboard` iframes (each its own Mapbox globe
+     * + telemetry) — very CPU-heavy. Only mount them while the section is near
+     * the viewport, and unmount when it's far, so two dashboards aren't running
+     * while the visitor is up at the hero. */
+    const [framesLive, setFramesLive] = useState(false);
     const [activeView, setActiveView] = useState<'desktop' | 'mobile'>('desktop');
     const [isMobile, setIsMobile] = useState(false);
     const sectionRef = useRef<HTMLElement>(null);
@@ -26,11 +31,22 @@ export function DashboardShowcase() {
             { threshold: 0.2 },
         );
 
+        /* Mount/unmount the heavy iframes as the section nears/leaves the
+         * viewport (preloaded ~400px early so they're ready when scrolled to). */
+        const liveObserver = new IntersectionObserver(
+            ([entry]) => setFramesLive(entry.isIntersecting),
+            { rootMargin: '400px 0px' },
+        );
+
         if (sectionRef.current) {
             observer.observe(sectionRef.current);
+            liveObserver.observe(sectionRef.current);
         }
 
-        return () => observer.disconnect();
+        return () => {
+            observer.disconnect();
+            liveObserver.disconnect();
+        };
     }, []);
 
     return (
@@ -67,7 +83,7 @@ export function DashboardShowcase() {
                 <div className="mt-12 flex items-center justify-center gap-4">
                     <button
                         onClick={() => setActiveView('desktop')}
-                        className={`px-6 py-2 rounded-sm border transition-all ${
+                        className={`px-6 py-2 rounded-sm border font-mono text-xs uppercase tracking-[0.1em] transition-all ${
                             activeView === 'desktop'
                                 ? 'border-foreground/20 bg-accent text-foreground'
                                 : 'border-border text-muted-foreground hover:border-foreground/10'
@@ -77,7 +93,7 @@ export function DashboardShowcase() {
                     </button>
                     <button
                         onClick={() => setActiveView('mobile')}
-                        className={`px-6 py-2 rounded-sm border transition-all ${
+                        className={`px-6 py-2 rounded-sm border font-mono text-xs uppercase tracking-[0.1em] transition-all ${
                             activeView === 'mobile'
                                 ? 'border-foreground/20 bg-accent text-foreground'
                                 : 'border-border text-muted-foreground hover:border-foreground/10'
@@ -118,12 +134,14 @@ export function DashboardShowcase() {
                                         </div>
                                     </div>
                                     <div className="relative bg-[#1a1a1a] aspect-video overflow-hidden">
-                                        <iframe
-                                            src="/dashboard"
-                                            className="w-full h-full border-0 pointer-events-none"
-                                            style={{ transform: 'scale(0.5)', transformOrigin: 'top left', width: '200%', height: '200%' }}
-                                            title="Mission Control desktop preview"
-                                        />
+                                        {framesLive && (
+                                            <iframe
+                                                src="/dashboard"
+                                                className="w-full h-full border-0 pointer-events-none"
+                                                style={{ transform: 'scale(0.5)', transformOrigin: 'top left', width: '200%', height: '200%' }}
+                                                title="Mission Control desktop preview"
+                                            />
+                                        )}
                                         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-background/20 pointer-events-none" />
                                     </div>
                                 </div>
@@ -149,12 +167,14 @@ export function DashboardShowcase() {
                                 <div className="relative rounded-[2.5rem] border-8 border-foreground/10 bg-foreground/5 p-2 shadow-2xl">
                                     <div className="absolute top-0 left-1/2 -translate-x-1/2 w-32 h-6 bg-foreground/10 rounded-b-2xl z-10" />
                                     <div className="relative bg-[#1a1a1a] rounded-[1.5rem] overflow-hidden aspect-[9/19.5]">
-                                        <iframe
-                                            src="/dashboard?preview=mobile"
-                                            className="w-full h-full border-0 pointer-events-none"
-                                            title="Mission Control mobile preview"
-                                            sandbox="allow-same-origin allow-scripts"
-                                        />
+                                        {framesLive && (
+                                            <iframe
+                                                src="/dashboard?preview=mobile"
+                                                className="w-full h-full border-0 pointer-events-none"
+                                                title="Mission Control mobile preview"
+                                                sandbox="allow-same-origin allow-scripts"
+                                            />
+                                        )}
                                         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-background/20 pointer-events-none" />
                                     </div>
                                     <div className="absolute bottom-2 left-1/2 -translate-x-1/2 w-32 h-1 bg-foreground/20 rounded-full" />

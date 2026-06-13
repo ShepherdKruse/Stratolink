@@ -21,15 +21,16 @@ const CAP_SRC_ID = 'sl-polar-cap';
 const CAP_LAYER_ID = 'sl-polar-cap';
 
 /* Web Mercator tiles stop at ~85.05°, so on the globe the North Pole is a
- * data hole (no water / no bathymetry). Fill it with a deep-ocean cap — the
- * Arctic around the pole is open ocean, so a single deep tone reads right.
- * Built as a lon/lat band [85°, 89.5°] spanning all longitudes, densified so
- * its edges reproject to clean parallels on the globe. */
+ * data hole (no water / no bathymetry). Fill it with a small ocean cap right at
+ * the apex — a lon/lat band [88°, 90°] spanning all longitudes, densified so its
+ * edges reproject to clean parallels on the globe, and run to 90° so there's no
+ * pinhole at the exact pole. (A larger cap reads as a flat disc; this keeps it
+ * to the pole.) */
 function buildPolarCap(): GeoJSON.Feature {
     const ring: [number, number][] = [];
-    for (let lon = -180; lon <= 180; lon += 10) ring.push([lon, 85]);
-    for (let lon = 180; lon >= -180; lon -= 10) ring.push([lon, 89.5]);
-    ring.push([-180, 85]);
+    for (let lon = -180; lon <= 180; lon += 10) ring.push([lon, 88]);
+    for (let lon = 180; lon >= -180; lon -= 10) ring.push([lon, 90]);
+    ring.push([-180, 88]);
     return { type: 'Feature', properties: {}, geometry: { type: 'Polygon', coordinates: [ring] } };
 }
 
@@ -71,10 +72,11 @@ const DEPTH_COLOR_DARK = [
     10000, 'hsl(217, 40%, 8%)',
 ] as unknown;
 
-/* Polar-cap tone matching each scheme's shallow ocean. */
+/* Polar-cap tone — desaturated to the deep-Arctic ocean so the cap blends with
+ * the surrounding bathymetry instead of reading as a bright disc. */
 const CAP_COLOR: Record<Scheme, string> = {
-    light: 'hsl(200, 40%, 90%)',
-    dark: 'hsl(210, 28%, 17%)',
+    light: 'hsl(200, 30%, 86%)',
+    dark: 'hsl(212, 30%, 14%)',
 };
 
 export function bathymetryAllZooms(map: Map, scheme: Scheme = 'light'): void {
@@ -158,7 +160,7 @@ export function bathymetryAllZooms(map: Map, scheme: Scheme = 'light'): void {
                     /* Ocean tone matching the base `water` fill so the cap
                      * reads as ocean continuing to the pole, not a dark disc. */
                     'fill-color': CAP_COLOR[scheme],
-                    'fill-antialias': false,
+                    'fill-antialias': true,
                 },
             }, capBeforeId);
         }

@@ -1,10 +1,14 @@
 import type React from 'react';
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
+import { Inter, JetBrains_Mono } from 'next/font/google';
 import { Analytics } from '@vercel/analytics/next';
 import './globals.css';
 
 const inter = Inter({ subsets: ['latin'], weight: ['300', '400', '500', '600'] });
+/* JetBrains Mono powers the dashboard's instrument aesthetic; exposed as a CSS
+ * variable so the homepage (and any page opting in) can borrow it for headings,
+ * labels and UI without changing the default body font. */
+const jetbrainsMono = JetBrains_Mono({ subsets: ['latin'], weight: ['400', '500', '600', '700'], variable: '--font-jetbrains-mono' });
 
 const siteUrl =
     process.env.NEXT_PUBLIC_SITE_URL?.startsWith('http')
@@ -43,7 +47,7 @@ export default function RootLayout({
 }>) {
     return (
         <html lang="en" className="scroll-smooth">
-            <body className={`${inter.className} font-sans antialiased`}>
+            <body className={`${inter.className} ${jetbrainsMono.variable} font-sans antialiased`}>
                 {children}
                 <Analytics />
             </body>
