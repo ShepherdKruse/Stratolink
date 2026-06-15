@@ -29,7 +29,7 @@ permissions:
 jobs:
   ingest:
     runs-on: ubuntu-latest
-    timeout-minutes: 45        # raised for GEFS ensemble headroom
+    timeout-minutes: 50        # GFS (~8m) + GEFS step cap (28m) + compute/upload, with margin
     defaults:
       run:
         working-directory: web
@@ -63,7 +63,20 @@ jobs:
       # 1b. Build GEFS per-member cubes ({device}-mNN.slwc) for the ensemble. The
       #     compute step auto-detects these and switches to a member-per-trajectory
       #     ensemble; if it fails or is skipped, compute falls back to GFS+jitter.
+      #     GEFS is an ENHANCEMENT, not a requirement: a slow/trickling NOAA S3
+      #     fetch can hang this step, and without a bound it eats the whole 45-min
+      #     job budget — cancelling the job before Compute runs, so the forecast
+      #     freezes (the GFS cube from 1a is fine, it just never gets computed).
+      #     Bound the step and continue on timeout/failure so Compute always runs
+      #     with the GFS cube + whatever members completed (gefs_ingest writes each
+      #     member cube as it finishes, so a cutoff keeps the completed ones — and
+      #     compute uses any >=2 members as a real ensemble, not jitter).
+      #     A healthy run is ~19m; 28m leaves comfortable headroom for NOAA-speed
+      #     variance without trimming good runs, while still bounding a hang. The
+      #     job cap (50m) covers GFS + this + compute/upload even if GFS runs slow.
       - name: Ingest GEFS ensemble → member cubes
+        timeout-minutes: 28
+        continue-on-error: true
         env:
           NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
           SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
