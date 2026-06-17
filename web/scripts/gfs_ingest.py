@@ -317,6 +317,19 @@ def sample_grids(bounds, step, start, end, step_h, target_p, latest, now, tag=""
     cols_idx = (np.round((lons % 360.0) / 0.25).astype(int)) % 1440
 
     n_steps = int((end - start).total_seconds() // (step_h * 3600)) + 1
+
+    # Prefetch every needed (cycle, fhr) field IN PARALLEL before the sampling loop.
+    # The source field depends only on a step's TIME, so they can all be fetched up
+    # front; the loop then reads the warm cache. The serial per-grid fetch was the
+    # mission-length-scaling bottleneck — a long full-mission recon (hundreds of
+    # 3-hourly grids) crept past the job timeout. (Mirrors the tube's prefetch.)
+    _tt, _want = start, set()
+    while _tt <= end:
+        _want.add(pick_source(_tt, latest)); _tt += timedelta(hours=step_h)
+    print(f"      {tag}: prefetch {len(_want)} fields (parallel)…", flush=True)
+    with ThreadPoolExecutor(max_workers=8) as _ex:
+        list(_ex.map(lambda cf: fetch_uv_p(cf[0], cf[1], target_p), sorted(_want)))
+
     times, grids = [], []
     t = start
     i = 0
