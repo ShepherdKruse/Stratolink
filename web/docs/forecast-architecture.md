@@ -85,6 +85,45 @@ JSON, ~3× smaller raw, and decoded to `Float32Array` via a typed-array view
 numbers. This is what keeps a GEFS 31-member ensemble tractable. Readers try
 `.slwc` before legacy `.json` (migration fallback).
 
+**Two header versions.** `v1` (static box) stores one geometry in the header,
+shared by every grid. `v2` (**trajectory "tube"**, below) keeps the cell size +
+dims shared but gives each time-slice its own origin in `origins[[lat0,lon0],…]`,
+so the box can follow the balloon across time. The int16 payload layout is
+identical; `cubeFromBinary` reads both.
+
+### Trajectory-following "tube" cubes (forecast + members)
+
+A static box big enough to contain a multi-day dead-reckon forces a coarse grid
+**and** still degrades once the drift leaves it: longitude wasn't wrapped and the
+sampler edge/last-grid **clamps**, so a long drift was advected by a frozen edge
+wind for most of its length (it "wrapped the globe" to a fictitious spot). Two
+fixes, layered:
+
+- **Honesty (P0).** `windAt`/`sampleWind` now **wrap longitude** into the grid
+  range (dateline-safe), and `integrateBalloonPathT` **stops** when a step leaves
+  the cube's space/time coverage instead of extrapolating on clamped winds. The
+  compute reports `stale_gps.coverage_limited` + `modeled_hours` when the
+  dead-reckon runs out of coverage before "now" (the origin is then the last
+  modeled point, surfaced in the UI as "position uncertain since {date}").
+
+- **The tube (P1).** The forecast cube and **every GEFS/AIGEFS member cube** are
+  built as a stack of moderate boxes laid **along a pre-integrated nominal path** —
+  each hourly/3-hourly slice centered on where the balloon is then (the member
+  tube integrates that member's *own* flow). Consecutive boxes overlap (half-width
+  ≫ one step's drift) so `sampleWind`'s time-interpolation always has both
+  brackets. Result: the dead-reckon samples **real winds the whole way at fine
+  resolution** (0.25° GFS / 0.5° members) instead of a coarse clamped box. Shared
+  helpers live in `gfs_ingest.py` (`bilin_uv`, `cut_box`, `integrate_nominal_centers`,
+  `build_tube_grids`); `FC_TUBE` / `GEFS_TUBE` / `AIGEFS_TUBE` = `0` revert to the
+  static box. The dead-reckon is capped at `DEAD_RECKON_CAP_H` (7 d) — beyond that
+  even a perfect tube is a globe-sized cloud, so the compute truncates honestly.
+
+  *Why the member tube needs no cloud-sizing:* the compute integrates member *i*
+  through member *i*'s tube with the same neutral bias / zero perturbation the
+  tube was laid with, so each member **rides its own box center** — it can't hit
+  the tube wall. (The GRIB messages are whole-globe regardless, so the tube's win
+  is coverage-correctness + resolution, not bandwidth.)
+
 ### Two cubes per device (decoupled)
 
 | | **forecast** `{device}-fc` | **reconstruction** `{device}` |
@@ -214,15 +253,28 @@ many byte-range GETs). NODD is free, so the only cost is wall-clock.
   and box-pad velocity both skip zero-displacement pairs; even so, a balloon that's
   been GPS-dark for many hours produces a thin, cap-pinned bias — treat its forecast
   cautiously until GPS recovers.
-- **Long stale-gap edge-clip**: a >~72h gap makes the forecast a ~96h
-  dead-reckon+forecast cone whose leading edge can exit the forecast box (logged as
-  "ensemble endpoints near grid edge"). Clears when GPS recovers.
+- **Long stale-gap**: a gap beyond `DEAD_RECKON_CAP_H` (7 d) is dead-reckoned only
+  to the cap, then `coverage_limited` is set and the path truncates honestly (no
+  fictitious forward line). With the tube the modeled portion follows real winds;
+  pre-tube it edge-clipped (logged "ensemble endpoints near grid edge").
 
 ### Local testing knobs
-- `WIND_CUBE_FILE` / `WIND_CUBE_FC_FILE` — point `fetchWindCube` at local cube
-  files (skips Blob), e.g. to test a freshly-built `.windcube/cubes/*.json`.
-- `python3 -u scripts/gfs_ingest.py [device]` — build cubes locally (needs Supabase
-  + NOAA access; `-u` for live progress).
+- `WIND_CUBE_DIR` — point `fetchWindCube` / member loaders at a local cube dir
+  (e.g. `.windcube/cubes`), reading `{device}-fc.slwc`, `{device}.slwc`,
+  `{device}-mNN.slwc`, `{device}-aNN.slwc` by name. This is how the runner compute
+  and `scripts/forecast_local.ts` read cubes with no Blob round-trip.
+- `WIND_CUBE_FILE` / `WIND_CUBE_FC_FILE` — point at single local cube files.
+- `python3 scripts/_run_with_env.py scripts/gfs_ingest.py [device]` — build cubes
+  locally (loads `.env.local`; needs Supabase + NOAA access). The full pipeline
+  (pygrib decode included) runs locally.
+- `npx tsx scripts/forecast_local.ts <device> [--offline]` — run the compute on the
+  cached local cubes (no Blob writes); writes `/tmp/forecast_local.json`.
+- `npx tsx scripts/inspect_cube.ts <path.slwc>` — decode a cube and (for a v2 tube)
+  trace how its per-slice box centers walk along the path.
+- Ingest dev flags: `SKIP_RECON=1` (skip the slow full-mission recon while
+  iterating on the tube), `FC_DEAD_RECKON_CAP_H=48` (short cap for fast fetches),
+  `FC_TUBE=0` / `GEFS_TUBE=0` / `AIGEFS_TUBE=0` (legacy static box),
+  `GEFS_N_MEMBERS` / `AIGEFS_N_MEMBERS` (fewer members).
 
 ---
 

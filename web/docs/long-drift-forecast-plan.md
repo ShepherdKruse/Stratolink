@@ -1,5 +1,29 @@
 # Plan: good forecasts for long-drifting (GPS-dark) balloons
 
+> **Status (branch `forecast-long-drift`):**
+> - **P0 — done.** lon-wrap + truncate-on-exit (`gfsGrid.ts`, `balloonIntegrate.ts`),
+>   coverage cap + `coverage_limited`/`modeled_hours` honesty (`monteCarloForecast.ts`),
+>   UI "position uncertain since {date}" pill (`useForecastPath.ts`, `MissionControl.tsx`).
+> - **P1 — done.** Trajectory tube for the forecast cube **and** every GEFS/AIGEFS
+>   member cube (`gfs_ingest.py` shared helpers; `gefs_ingest.py`/`aigefs_ingest.py`
+>   member tubes; `.slwc` v2 per-slice origins in `windCube.ts`). Verified locally
+>   (stratolink-3, 452 h gap): paths follow real winds, members self-center, honest
+>   truncation, no globe-wrap.
+> - **P2 — largely obviated.** "Size the tube to the cloud" is unnecessary for member
+>   tubes: each member is integrated through its *own* tube with the same neutral
+>   bias / zero perturbation, so it rides the box center and never hits the wall.
+>   The predictability-horizon half is handled by `DEAD_RECKON_CAP_H`. (Only the
+>   *parametric-fallback* ensemble — no GEFS members — can diverge from the fc tube;
+>   P0 truncation keeps that honest.)
+> - **P3 — remaining.** (a) Altitude/level drift (multi-level cube + vertical
+>   sampling) — the backtest's biggest error lever; a separate, larger effort
+>   touching the cube schema + `sampleWind` + all three ingests. (b) Seed the
+>   dead-reckon "now"-uncertainty into the forward Monte Carlo (moot for very-stale,
+>   where "now" isn't reached). Formal scored backtest lives on branch
+>   `backtest-harness` (own correct integration — already validated the *technique*;
+>   the tube brings production in line with it).
+
+
 > Goal: make the predicted path + uncertainty for a balloon that has been GPS-dark
 > for days-to-weeks as accurate and honest as the physics allows — instead of the
 > current behavior, where the path is advected by clamped edge winds and lands in a
