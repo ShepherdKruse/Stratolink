@@ -16,9 +16,14 @@ export function windAt(gfs: GfsGrid, lat: number, lon: number): { u: number; v: 
     const { lat0, dLat, nLat, lon0, dLon, nLon, U, V } = gfs;
     const latMax = lat0 + (nLat - 1) * dLat;
     const lonMax = lon0 + (nLon - 1) * dLon;
-    // Clamp to grid edge — returning zero wind outside made trajectories freeze mid-forecast.
+    // Wrap longitude into [lon0, lon0+360) FIRST, so a globe-crossing trajectory
+    // (unwrapped lon that grows past 180) or a dateline-crossing box samples the
+    // correct meridian instead of being clamped to an edge it never reaches.
+    const lonW = lon0 + (((lon - lon0) % 360) + 360) % 360;
+    // Clamp to grid edge — returning zero wind outside made trajectories freeze
+    // mid-forecast. Callers that must not advect on edge winds check coverage first.
     const latC = Math.max(lat0, Math.min(latMax, lat));
-    const lonC = Math.max(lon0, Math.min(lonMax, lon));
+    const lonC = Math.max(lon0, Math.min(lonMax, lonW));
 
     const gi = (latC - lat0) / dLat;
     const gj = (lonC - lon0) / dLon;
