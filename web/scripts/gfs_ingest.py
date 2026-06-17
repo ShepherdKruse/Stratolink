@@ -344,19 +344,111 @@ def sample_grids(bounds, step, start, end, step_h, target_p, latest, now, tag=""
     }, len(lats), len(lons)
 
 
-# ── Trajectory-following tube ────────────────────────────────────────────────
-def sample_global(uv, lat, lon):
-    """Bilinear U/V at one point from a whole-globe 0.25° field (row 0 = 90°N,
-    col 0 = 0°E), wrapping longitude and clamping latitude at the poles."""
-    u, v = uv["u"], uv["v"]
-    r = min(max((90.0 - lat) / 0.25, 0.0), 720.0)
-    c = (lon % 360.0) / 0.25
-    r0 = min(int(np.floor(r)), 719); fr = r - r0
-    c0 = int(np.floor(c)) % 1440; c1 = (c0 + 1) % 1440; fc = c - np.floor(c)
+# ── Trajectory-following tube (shared by gfs_ingest + gefs_ingest) ────────────
+def bilin_uv(u, v, lat, lon):
+    """Bilinear U/V at one point from a whole-globe field, resolution INFERRED
+    from the array shape (721×1440 = 0.25° GFS, 361×720 = 0.5° GEFS; row 0 = 90°N,
+    col 0 = 0°E). Wraps longitude and clamps latitude at the poles."""
+    nlat, nlon = u.shape
+    dlat = 180.0 / (nlat - 1); dlon = 360.0 / nlon
+    r = min(max((90.0 - lat) / dlat, 0.0), float(nlat - 1))
+    c = (lon % 360.0) / dlon
+    r0 = min(int(np.floor(r)), nlat - 2); fr = r - r0
+    c0 = int(np.floor(c)) % nlon; c1 = (c0 + 1) % nlon; fc = c - np.floor(c)
     def bl(a):
         return (a[r0, c0] * (1 - fr) * (1 - fc) + a[r0 + 1, c0] * fr * (1 - fc)
                 + a[r0, c1] * (1 - fr) * fc + a[r0 + 1, c1] * fr * fc)
     return bl(u), bl(v)
+
+
+def cut_box(u, v, clat, clon, half_deg, step, n):
+    """Sub-sample an `n`×`n`, `step`° box centered on (clat, clon) out of a
+    whole-globe field (resolution inferred from shape). The origin is snapped to
+    the source grid so sampling is exact. Returns (lat0, lon0, U_flat, V_flat).
+    Longitude is kept UNWRAPPED on the cube axis (so origins/bounds stay
+    continuous across ±180) but wrapped when indexing the source."""
+    nlat, nlon = u.shape
+    dlat = 180.0 / (nlat - 1); dlon = 360.0 / nlon
+    lat0 = round(clat / dlat) * dlat - half_deg
+    lon0 = round(clon / dlon) * dlon - half_deg
+    lats = lat0 + np.arange(n) * step
+    lons = lon0 + np.arange(n) * step
+    rows = np.round((90.0 - lats) / dlat).astype(int).clip(0, nlat - 1)
+    cols = (np.round((lons % 360.0) / dlon).astype(int)) % nlon
+    return float(lats[0]), float(lons[0]), u[np.ix_(rows, cols)].ravel(), v[np.ix_(rows, cols)].ravel()
+
+
+def integrate_nominal_centers(slice_ms, start_ms, start_lat, start_lon, wind_fn):
+    """Pre-integrate ONE nominal trajectory (neutral bias, no perturbation) forward
+    from (start_lat, start_lon) at `start_ms`, snapshotting its position at each
+    slice time ≥ start_ms. `wind_fn(lat, lon, t_ms) -> (u, v)` supplies the field
+    (GFS or a GEFS member). Longitude is left UNWRAPPED so the tube's per-slice
+    origins + union bounds form a continuous range the integrator agrees with.
+    Slices before start_ms stay None for the caller to fill. Cheap: the global
+    fields are fetched/cached once and reused to cut the boxes."""
+    centers = [None] * len(slice_ms)
+    lat, lon = start_lat, start_lon
+    k = 0
+    while k < len(slice_ms) and slice_ms[k] < start_ms:
+        k += 1
+    first_fwd = k
+    while k < len(slice_ms) and slice_ms[k] <= start_ms:      # slice exactly at start
+        centers[k] = (lat, lon); k += 1
+    dt_s = TUBE_SUBSTEP_H * 3600
+    t_ms = start_ms
+    end_ms = slice_ms[-1]
+    while t_ms < end_ms and k < len(slice_ms):
+        u, v = wind_fn(lat, lon, t_ms)
+        coslat = max(np.cos(np.radians(lat)), 0.05)
+        lat += v * dt_s / 111_320
+        lon += u * dt_s / (111_320 * coslat)
+        t_ms += TUBE_SUBSTEP_H * 3600 * 1000
+        while k < len(slice_ms) and slice_ms[k] <= t_ms + 1:
+            centers[k] = (lat, lon); k += 1
+    for j in range(first_fwd, len(slice_ms)):                 # trailing (shouldn't happen)
+        if centers[j] is None:
+            centers[j] = (lat, lon)
+    return centers
+
+
+def sample_global(uv, lat, lon):
+    """Bilinear U/V from a {"u","v"} dict field (back-compat thin wrapper)."""
+    return bilin_uv(uv["u"], uv["v"], lat, lon)
+
+
+def nominal_centers(slice_ms, last_fix_ms, last_lat, last_lon, target_p, latest):
+    """GFS nominal centers: integrate through the GFS field interpolated to
+    `target_p`, snapshotting per slice ≥ last fix (slices before are the caller's
+    track interp)."""
+    def wind_fn(lat, lon, t_ms):
+        cyc, fhr = pick_source(datetime.fromtimestamp(t_ms / 1000, timezone.utc), latest)
+        return sample_global(fetch_uv_p(cyc, fhr, target_p), lat, lon)
+    return integrate_nominal_centers(slice_ms, last_fix_ms, last_lat, last_lon, wind_fn)
+
+
+def build_tube_grids(centers, half_deg, step, slice_ms, field_at, source, levelHpa, latest, now, tag=""):
+    """Assemble a tube cube from pre-computed `centers`: one `step`° box per slice,
+    cut from the whole-globe field returned by `field_at(k) -> (u, v)`. All slices
+    share dims (so v2 needs only per-slice origins). Returns (cube_dict, n, n)."""
+    n = int(round(2 * half_deg / step)) + 1
+    grids = []
+    uminLat = uminLon = float("inf"); umaxLat = umaxLon = float("-inf")
+    for k, (clat, clon) in enumerate(centers):
+        u, v = field_at(k)
+        lat0, lon0, U, V = cut_box(u, v, clat, clon, half_deg, step, n)
+        grids.append({"lat0": lat0, "dLat": step, "nLat": n,
+                      "lon0": lon0, "dLon": step, "nLon": n, "U": U, "V": V})
+        uminLat = min(uminLat, lat0); umaxLat = max(umaxLat, lat0 + (n - 1) * step)
+        uminLon = min(uminLon, lon0); umaxLon = max(umaxLon, lon0 + (n - 1) * step)
+        if tag and ((k + 1) % 24 == 0 or k + 1 == len(centers)):
+            print(f"      {tag}: {k + 1}/{len(centers)} slices", flush=True)
+    return {
+        "source": source, "generated_at": now.isoformat(), "latest_cycle_utc": latest.isoformat(),
+        "levelHpa": round(levelHpa, 1), "gridStep": step,
+        "t0Ms": slice_ms[0], "stepMs": int(slice_ms[1] - slice_ms[0]) if len(slice_ms) > 1 else FC_STEP_H * 3600 * 1000,
+        "bounds": {"latMin": uminLat, "latMax": umaxLat, "lonMin": uminLon, "lonMax": umaxLon},
+        "grids": grids,
+    }, n, n
 
 
 def interp_track(fixes_ms, t_ms):
@@ -413,38 +505,13 @@ def nominal_centers(slice_ms, last_fix_ms, last_lat, last_lon, target_p, latest)
 
 
 def sample_tube(centers, half_deg, step, slice_ms, target_p, latest, now, tag=""):
-    """Build a tube cube: one box per slice centered on `centers[k]`, all sharing
-    the same cell size + dims (so v2 needs only per-slice origins). Returns the
-    cube dict + (nLat, nLon)."""
-    n = int(round(2 * half_deg / step)) + 1          # constant dims across slices
-    offs = np.arange(n) * step
-    grids = []
-    uminLat = uminLon = float("inf"); umaxLat = umaxLon = float("-inf")
-    for k, (clat, clon) in enumerate(centers):
-        lat0 = round(clat / 0.25) * 0.25 - half_deg   # snap center to the source grid
-        lon0 = round(clon / 0.25) * 0.25 - half_deg
-        lats = lat0 + offs
-        lons = lon0 + offs
-        rows_idx = np.round((90.0 - lats) / 0.25).astype(int).clip(0, 720)
-        cols_idx = (np.round((lons % 360.0) / 0.25).astype(int)) % 1440
+    """GFS tube: cut a box per slice from the GFS field (interpolated to target_p)."""
+    def field_at(k):
         cyc, fhr = pick_source(datetime.fromtimestamp(slice_ms[k] / 1000, timezone.utc), latest)
         uv = fetch_uv_p(cyc, fhr, target_p)
-        U = uv["u"][np.ix_(rows_idx, cols_idx)]
-        V = uv["v"][np.ix_(rows_idx, cols_idx)]
-        grids.append({"lat0": float(lats[0]), "dLat": step, "nLat": n,
-                      "lon0": float(lons[0]), "dLon": step, "nLon": n,
-                      "U": U.ravel(), "V": V.ravel()})
-        uminLat = min(uminLat, float(lats[0])); umaxLat = max(umaxLat, float(lats[-1]))
-        uminLon = min(uminLon, float(lons[0])); umaxLon = max(umaxLon, float(lons[-1]))
-        if (k + 1) % 24 == 0 or k + 1 == len(centers):
-            print(f"      {tag}: {k + 1}/{len(centers)} slices", flush=True)
-    return {
-        "source": "gfs", "generated_at": now.isoformat(), "latest_cycle_utc": latest.isoformat(),
-        "levelHpa": round(target_p, 1), "gridStep": step,
-        "t0Ms": slice_ms[0], "stepMs": int((slice_ms[1] - slice_ms[0]) if len(slice_ms) > 1 else FC_STEP_H * 3600 * 1000),
-        "bounds": {"latMin": uminLat, "latMax": umaxLat, "lonMin": uminLon, "lonMax": umaxLon},
-        "grids": grids,
-    }, n, n
+        return uv["u"], uv["v"]
+    return build_tube_grids(centers, half_deg, step, slice_ms, field_at,
+                            "gfs", target_p, latest, now, tag)
 
 
 SCALE = 10  # store winds as int16 = round(value*SCALE); lossless vs the old 0.1 rounding
