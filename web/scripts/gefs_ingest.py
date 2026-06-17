@@ -179,10 +179,17 @@ def member_cube_tube(mem, schedule, slice_ms, start_lat, start_lon, target_p, la
         return field(*sched_field[k])
 
     def wind_fn(lat, lon, t_ms):
-        # snap to the nearest scheduled slice so sub-steps always hit a prefetched
-        # (cyc, fhr) — calling gefs_pick directly can land on an fhr we didn't fetch.
-        k = max(0, min(len(slice_ms) - 1, round((t_ms - slice_ms[0]) / step_ms)))
-        return g.bilin_uv(*field_at(k), lat, lon)
+        # LINEAR time-interpolate between the two bracketing 3-hourly slices —
+        # matching the compute's sampleWind. (Nearest-slice sampling drifts from the
+        # compute over a multi-week 3-hourly integration, walking the member out of
+        # its own ±tube and truncating it early.) Sub-steps always hit prefetched
+        # fields this way.
+        f = (t_ms - slice_ms[0]) / step_ms
+        k0 = max(0, min(len(slice_ms) - 2, int(f)))
+        frac = max(0.0, min(1.0, f - k0))
+        ua, va = g.bilin_uv(*field_at(k0), lat, lon)
+        ub, vb = g.bilin_uv(*field_at(k0 + 1), lat, lon)
+        return ua * (1 - frac) + ub * frac, va * (1 - frac) + vb * frac
 
     centers = g.integrate_nominal_centers(slice_ms, slice_ms[0], start_lat, start_lon, wind_fn)
 

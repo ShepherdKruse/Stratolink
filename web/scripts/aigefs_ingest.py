@@ -181,8 +181,14 @@ def member_cube_tube(mem, schedule, slice_ms, start_lat, start_lon, target_p, la
         return field(*sched_field[k])
 
     def wind_fn(lat, lon, t_ms):
-        k = max(0, min(len(slice_ms) - 1, round((t_ms - slice_ms[0]) / step_ms)))
-        return g.bilin_uv(*field_at(k), lat, lon)
+        # LINEAR time-interp between bracketing slices — match the compute's
+        # sampleWind so the nominal doesn't drift out of its own tube over a long gap.
+        f = (t_ms - slice_ms[0]) / step_ms
+        k0 = max(0, min(len(slice_ms) - 2, int(f)))
+        frac = max(0.0, min(1.0, f - k0))
+        ua, va = g.bilin_uv(*field_at(k0), lat, lon)
+        ub, vb = g.bilin_uv(*field_at(k0 + 1), lat, lon)
+        return ua * (1 - frac) + ub * frac, va * (1 - frac) + vb * frac
 
     centers = g.integrate_nominal_centers(slice_ms, slice_ms[0], start_lat, start_lon, wind_fn)
     cube, n, _ = g.build_tube_grids(centers, g.TUBE_HALF_DEG, TUBE_STEP, slice_ms, field_at,
