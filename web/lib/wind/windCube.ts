@@ -61,14 +61,20 @@ function cubeFromRaw(raw: RawCube): WindCube {
     };
 }
 
-/** Header of the packed binary cube (`.slwc`). Geometry is constant across a
- *  cube's grids, so it lives here once instead of being repeated per grid. */
+/** Header of the packed binary cube (`.slwc`).
+ *  v1: geometry is constant across grids, so it lives here once (`lat0`/`lon0`).
+ *  v2 ("tube"): cell size + dims are shared (`dLat`/`nLat`/`dLon`/`nLon`), but each
+ *  time-slice follows the trajectory, so its origin lives in `origins[g]` =
+ *  `[lat0, lon0]`. `bounds` is the union of every slice's box. The int16 payload
+ *  layout is identical in both versions. */
 type BinHeader = {
     v: number; scale: number;
     t0Ms: number; stepMs: number; gridStep: number; levelHpa: number;
     bounds: WindGridBounds; source?: string; generated_at?: string;
     lat0: number; dLat: number; nLat: number; lon0: number; dLon: number; nLon: number;
     nGrids: number;
+    /** v2 tube: per-slice `[lat0, lon0]`, length `nGrids` (dims/step stay shared). */
+    origins?: Array<[number, number]>;
 };
 
 /** Reconstitute a WindCube from the packed binary form:
@@ -92,8 +98,11 @@ function cubeFromBinary(raw: Buffer): WindCube {
     for (let g = 0; g < h.nGrids; g++) {
         const U16 = new Int16Array(ab, off, n); off += n * 2;
         const V16 = new Int16Array(ab, off, n); off += n * 2;
+        /* v2 tube: each slice has its own origin (it follows the path); v1: shared. */
+        const lat0 = h.origins ? h.origins[g][0] : h.lat0;
+        const lon0 = h.origins ? h.origins[g][1] : h.lon0;
         grids.push({
-            lat0: h.lat0, dLat: h.dLat, nLat: h.nLat, lon0: h.lon0, dLon: h.dLon, nLon: h.nLon,
+            lat0, dLat: h.dLat, nLat: h.nLat, lon0, dLon: h.dLon, nLon: h.nLon,
             U: Float32Array.from(U16, (x) => x / scale),
             V: Float32Array.from(V16, (x) => x / scale),
         });
