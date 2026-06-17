@@ -69,11 +69,14 @@ PAD_CAP_DEG = 32                 # cap the downwind forecast pad so the box can'
 # whole-globe regardless).
 FC_TUBE = os.environ.get("FC_TUBE", "1") != "0"     # set FC_TUBE=0 for the legacy static box
 TUBE_HALF_DEG = float(os.environ.get("FC_TUBE_HALF_DEG", "9"))   # box half-width around nominal
-# Cap the dead-reckon the tube covers. Beyond ~a week even a perfect tube is a
+# Cap the dead-reckon the tube covers. Beyond ~2 weeks even a perfect tube is a
 # globe-sized cloud (predictability is gone), so don't fetch/integrate past it;
-# the compute then truncates honestly (coverage_limited). Small value for fast
-# local iteration: FC_DEAD_RECKON_CAP_H=48.
-DEAD_RECKON_CAP_H = int(os.environ.get("FC_DEAD_RECKON_CAP_H", str(7 * 24)))
+# the compute then truncates honestly (coverage_limited). 14 days balances showing
+# a useful long-drift path against runtime — a very-long-gap full ensemble at this
+# cap can brush the workflow's GEFS-step timeout (continue-on-error → GEFS complete,
+# AIGEFS partial; bump the step timeout for guaranteed full AIGEFS). Small value
+# for fast local iteration: FC_DEAD_RECKON_CAP_H=48.
+DEAD_RECKON_CAP_H = int(os.environ.get("FC_DEAD_RECKON_CAP_H", str(14 * 24)))
 TUBE_SUBSTEP_H = 1.0 / 6.0       # nominal integration sub-step (matches BALLOON_STEP_HOURS)
 GFS_LEVELS = [1000, 975, 950, 925, 900, 850, 800, 700, 600, 500, 400, 300, 250, 200, 150, 100, 70, 50, 30]
 BUCKET = "https://noaa-gfs-bdp-pds.s3.amazonaws.com"
