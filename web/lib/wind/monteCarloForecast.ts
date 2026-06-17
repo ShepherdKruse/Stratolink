@@ -27,6 +27,13 @@ const CFG = {
      * horizon (τ ≳ horizon) while the multi-day dead-reckon spread stays diffusive
      * rather than ballooning. Tunable; ideally fit from residual autocorrelation. */
     PERTURB_TAU_H: 18,
+    /* Beyond this 90% semi-axis the ensemble is so dispersed (e.g. a multi-week
+     * dead-reckon whose members fan out across continents) that a single Gaussian
+     * ellipse is meaningless AND unrenderable — a >½-globe ring smears across the
+     * antimeridian. Past it we drop the zone and let the member spaghetti carry the
+     * uncertainty. ~continental scale; a normal cone (tens–hundreds of km) is well
+     * under it. */
+    MAX_ELLIPSE_SEMI_KM: 3000,
 };
 
 const round4 = (x: number) => Math.round(x * 1e4) / 1e4;
@@ -484,14 +491,20 @@ export async function computeMonteCarloForecast(input: MonteCarloForecastInput):
     const idx = nominal.length - 1;
     const endPositions = ensemble.map((traj) => traj[Math.min(idx, traj.length - 1)]);
     const endCenter = nominal[Math.min(idx, nominal.length - 1)];
-    const ellipses = [
-        {
-            t_hours: idx - nowIdx,
-            e50: recenterEllipse(computeEllipse(endPositions, 0.5), endCenter),
-            e90: recenterEllipse(computeEllipse(endPositions, 0.9), endCenter),
-            mean: [round4(endCenter[0]), round4(endCenter[1])] as [number, number],
-        },
-    ];
+    const e90 = recenterEllipse(computeEllipse(endPositions, 0.9), endCenter);
+    /* Drop the zone when the ensemble is too dispersed for a Gaussian ellipse to
+     * mean anything (a >½-globe ring that also smears across the antimeridian);
+     * the member spaghetti conveys the spread instead. */
+    const ellipses = e90.semi_a_km > CFG.MAX_ELLIPSE_SEMI_KM
+        ? []
+        : [
+            {
+                t_hours: idx - nowIdx,
+                e50: recenterEllipse(computeEllipse(endPositions, 0.5), endCenter),
+                e90,
+                mean: [round4(endCenter[0]), round4(endCenter[1])] as [number, number],
+            },
+        ];
 
     const endpoint = nominal[nominal.length - 1];
     const { u: uEnd, v: vEnd } = sampleWind(fcCube, endpoint[1], endpoint[0], endMs);
