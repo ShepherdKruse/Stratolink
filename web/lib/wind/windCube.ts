@@ -28,7 +28,22 @@ export type WindCube = {
     source?: string;
     /** ISO time the cube was built (GFS ingest run), for staleness reporting. */
     generatedAt?: string;
+    /** True for a v2 "tube" cube — each grid follows the trajectory, so the
+     *  box-center sequence IS the pre-integrated nominal path (see `centerTrack`). */
+    isTube?: boolean;
 };
+
+/** The pre-integrated trajectory a tube was laid along: each slice's box center
+ *  (origin + half-extent). For a member cube this is that member's full path
+ *  through its own flow — exact, so the compute reads it instead of re-integrating
+ *  through the 3-hourly boxes (which drifts/clamps for fast members over a long
+ *  gap). Longitudes stay unwrapped (continuous across ±180). */
+export function centerTrack(cube: WindCube): Array<[number, number]> {
+    return cube.grids.map((g) => [
+        g.lon0 + ((g.nLon - 1) * g.dLon) / 2,
+        g.lat0 + ((g.nLat - 1) * g.dLat) / 2,
+    ] as [number, number]);
+}
 
 /** JSON shape of a pre-ingested cube (local file or Blob). */
 type RawCube = {
@@ -110,6 +125,7 @@ function cubeFromBinary(raw: Buffer): WindCube {
     return {
         t0Ms: h.t0Ms, stepMs: h.stepMs, gridStep: h.gridStep, levelHpa: h.levelHpa,
         bounds: h.bounds, source: h.source ?? 'gfs', generatedAt: h.generated_at, grids,
+        isTube: !!h.origins,
     };
 }
 
