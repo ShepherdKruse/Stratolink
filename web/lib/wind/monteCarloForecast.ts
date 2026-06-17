@@ -406,6 +406,17 @@ export async function computeMonteCarloForecast(input: MonteCarloForecastInput):
     const originPt = nominal[nowIdx] ?? [startLon, startLat];
     const nowISO = new Date(nowMs).toISOString();
 
+    /* Coverage-limited: the dead-reckon ran out of wind-cube coverage before it
+     * reached "now" (the trajectory truncated — see integrateBalloonPathT). The
+     * balloon's current position is then genuinely unknown; the origin is the LAST
+     * MODELED point (at fix + modeledHours), not "now", and there's no confident
+     * forward forecast. Flagged so the UI can say "modeled to +Xh, then unknown"
+     * instead of implying we know where it is. */
+    const modeledHours = nominal.length - 1;
+    const coverageLimited = stale && modeledHours < Math.round(gapH) - 1;
+    const originMs = coverageLimited ? fixTimeMs + modeledHours * 3_600_000 : nowMs;
+    const originISO = new Date(originMs).toISOString();
+
     /* Predicted-hindcast curve = the fix→now portion of the (single, continuous)
      * nominal path. Drawn instead of a straight last-fix→now connector. The
      * forecast leg continues seamlessly from its final point. */
@@ -471,7 +482,7 @@ export async function computeMonteCarloForecast(input: MonteCarloForecastInput):
             lat: originPt[1],
             lon: originPt[0],
             alt_m: lastFix.alt_m,
-            time_utc: nowISO,
+            time_utc: originISO,
         },
         stale_gps: stale
             ? {
@@ -479,6 +490,8 @@ export async function computeMonteCarloForecast(input: MonteCarloForecastInput):
                   last_fix_time_utc: lastFix.time_utc,
                   wind_field_time_utc: nowISO,
                   wind_mode: GAP_WIND_MODE,
+                  coverage_limited: coverageLimited,
+                  modeled_hours: coverageLimited ? modeledHours : undefined,
               }
             : undefined,
         predicted_hindcast: predictedHindcast,

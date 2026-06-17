@@ -39,6 +39,11 @@ export type StratolinkForecast = {
         last_fix_time_utc: string;
         wind_field_time_utc: string;
         wind_mode?: string;
+        /** True when the dead-reckon ran out of wind-cube coverage before reaching
+         *  "now" — the origin is the last modeled point, position now is unknown. */
+        coverage_limited?: boolean;
+        /** Hours of dead-reckon actually modeled before coverage ran out. */
+        modeled_hours?: number;
     };
     /** Wind-integrated "predicted hindcast" — the curved path from the last GPS
      *  fix to "now" (analysis winds). Present only when the last fix was stale;
