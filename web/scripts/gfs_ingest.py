@@ -266,7 +266,11 @@ def fetch_uv(cyc, fhr, level):
     g = pygrib.open(tmp)
     for grb in g:
         if grb.typeOfLevel == "isobaricInhPa" and int(grb.level) == level and grb.shortName in ("u", "v"):
-            out[grb.shortName] = np.asarray(grb.values, dtype=float)
+            # float32, not float64: a whole-globe 0.25° field is 8.3 MB as f64; the
+            # parallel prefetch holds hundreds of them (recon + a 14-day fc tube), so
+            # f64 blew past the runner's RAM (OOM, exit 143). Lossless here — cubes
+            # quantize to int16 = round(value*10) anyway.
+            out[grb.shortName] = np.asarray(grb.values, dtype=np.float32)
     g.close()
     os.remove(tmp)
     _uv_cache[key] = out
@@ -297,9 +301,18 @@ def fetch_uv_p(cyc, fhr, p):
         return _uv_p_cache[key]
     a = fetch_uv(cyc, fhr, hi)   # higher-pressure bound
     b = fetch_uv(cyc, fhr, lo)   # lower-pressure bound
-    out = {"u": a["u"] * (1 - w) + b["u"] * w, "v": a["v"] * (1 - w) + b["v"] * w}
+    w0, w1 = np.float32(1 - w), np.float32(w)   # keep the blend in float32 (don't upcast)
+    out = {"u": a["u"] * w0 + b["u"] * w1, "v": a["v"] * w0 + b["v"] * w1}
     _uv_p_cache[key] = out
     return out
+
+
+def clear_field_cache():
+    """Free the whole-globe field caches between cube builds — they grow with every
+    fetched (cycle, fhr) and would otherwise hold the recon's hundreds of fields in
+    RAM while the fc tube prefetches hundreds more (OOM on a long mission)."""
+    _uv_cache.clear()
+    _uv_p_cache.clear()
 
 
 def floor_step(t, step_h):
@@ -574,6 +587,7 @@ def build_cube(device, fixes, target_p, latest):
     pad_h = HORIZON_H + min(gap_h, MAX_GAP_H)
     lo, hi, _ = bracket_levels(target_p)
     print(f"  {device}: interp {target_p:.1f}mb ({lo}↔{hi}), gap {gap_h:.0f}h")
+    clear_field_cache()                          # fresh per device (free the prior device's fields)
 
     # ── Reconstruction cube: full mission (first fix → now+horizon), 3-hourly. ──
     # Its box is dominated by the full-mission track; the forward leg is unused by
@@ -587,6 +601,8 @@ def build_cube(device, fixes, target_p, latest):
         recon, rla, rlo = sample_grids(recon_bounds, recon_step, recon_start, recon_end,
                                        RECON_STEP_H, target_p, latest, now, "recon")
         write_cube(device, "", recon, rla, rlo, "recon")
+        del recon
+        clear_field_cache()                      # free the recon's fields before the fc tube prefetches its own
 
     # ── Forecast cube: recent track + dead-reckon + cone, HOURLY, finest grid. ──
     if FC_TUBE:
