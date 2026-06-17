@@ -22,6 +22,7 @@ import sys
 import time
 import urllib.parse
 import urllib.request
+from concurrent.futures import ThreadPoolExecutor
 from datetime import datetime, timedelta, timezone
 
 import numpy as np
@@ -416,6 +417,28 @@ def sample_global(uv, lat, lon):
     return bilin_uv(uv["u"], uv["v"], lat, lon)
 
 
+def prefetch_fields(slice_ms, target_p, latest):
+    """Warm `fetch_uv_p`'s cache for every (cycle, fhr) the tube needs, IN PARALLEL.
+    The needed source field depends only on a slice's TIME (not the balloon's
+    position), so we fetch them all up front with threads — turning the GFS tube's
+    otherwise-serial hundreds of byte-range fetches (the long-gap bottleneck) into
+    a concurrent batch. The nominal walk + box cuts then read from the warm cache.
+    Sub-step times between hourly slices map to the same (cyc, fhr) the hourly
+    slices already cover, so this is complete."""
+    want = sorted({pick_source(datetime.fromtimestamp(ms / 1000, timezone.utc), latest)
+                   for ms in slice_ms})
+    n = len(want)
+    print(f"      prefetch: {n} GFS fields (parallel)…", flush=True)
+    done = [0]
+    def fetch(cf):
+        fetch_uv_p(cf[0], cf[1], target_p)
+        done[0] += 1
+        if done[0] % 50 == 0 or done[0] == n:
+            print(f"      prefetch: {done[0]}/{n}", flush=True)
+    with ThreadPoolExecutor(max_workers=8) as ex:
+        list(ex.map(fetch, want))
+
+
 def nominal_centers(slice_ms, last_fix_ms, last_lat, last_lon, target_p, latest):
     """GFS nominal centers: integrate through the GFS field interpolated to
     `target_p`, snapshotting per slice ≥ last fix (slices before are the caller's
@@ -469,39 +492,6 @@ def interp_track(fixes_ms, t_ms):
     (ta, la, loa), (tb, lb, lob) = fixes_ms[lo], fixes_ms[hi]
     f = 0.0 if tb == ta else (t_ms - ta) / (tb - ta)
     return la + (lb - la) * f, loa + (lob - loa) * f
-
-
-def nominal_centers(slice_ms, last_fix_ms, last_lat, last_lon, target_p, latest):
-    """Pre-integrate ONE nominal trajectory (control wind, neutral bias) forward
-    from the last fix, snapshotting its position at each slice time ≥ last_fix.
-    Longitude is left UNWRAPPED (continuous across ±180) so the tube's per-slice
-    origins and union bounds form a continuous range the integrator agrees with.
-    Cheap: the whole-globe fields are fetched/cached once and reused to cut the
-    boxes, so the nominal adds ~no extra downloads."""
-    centers = [None] * len(slice_ms)
-    lat, lon = last_lat, last_lon
-    k = 0
-    while k < len(slice_ms) and slice_ms[k] <= last_fix_ms:
-        k += 1                                    # track slices handled by the caller
-    first_fwd = k
-    dt_s = TUBE_SUBSTEP_H * 3600
-    t_ms = last_fix_ms
-    end_ms = slice_ms[-1]
-    while t_ms < end_ms and k < len(slice_ms):
-        t = datetime.fromtimestamp(t_ms / 1000, timezone.utc)
-        cyc, fhr = pick_source(t, latest)
-        u, v = sample_global(fetch_uv_p(cyc, fhr, target_p), lat, lon)
-        coslat = max(np.cos(np.radians(lat)), 0.05)
-        lat += v * dt_s / 111_320
-        lon += u * dt_s / (111_320 * coslat)
-        t_ms += TUBE_SUBSTEP_H * 3600 * 1000
-        while k < len(slice_ms) and slice_ms[k] <= t_ms + 1:
-            centers[k] = (lat, lon); k += 1
-    # Any trailing slices we couldn't reach (shouldn't happen) hold the last point.
-    for j in range(len(slice_ms)):
-        if centers[j] is None and j >= first_fwd:
-            centers[j] = (lat, lon)
-    return centers
 
 
 def sample_tube(centers, half_deg, step, slice_ms, target_p, latest, now, tag=""):
@@ -618,6 +608,7 @@ def build_tube_fc(device, fixes, last_fix, gap_h, target_p, latest, now):
     n_slices = int(round((end_ms - start_ms) / step_ms)) + 1
     slice_ms = [start_ms + k * step_ms for k in range(n_slices)]
 
+    prefetch_fields(slice_ms, target_p, latest)          # parallel cache warm-up
     fixes_ms = [(int(tparse(f["t"]).timestamp() * 1000), f["lat"], f["lon"]) for f in fixes]
     centers = nominal_centers(slice_ms, last_fix_ms, fixes[-1]["lat"], fixes[-1]["lon"],
                               target_p, latest)
