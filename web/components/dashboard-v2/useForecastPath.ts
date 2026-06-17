@@ -51,6 +51,11 @@ export interface UseForecastPathResult {
     predictedHindcast: ForecastPath;
     /** True when the last GPS fix is stale and the origin is dead-reckoned. */
     staleGps: boolean;
+    /** True when the dead-reckon ran out of wind-cube coverage before reaching
+     *  "now" — the origin is the last MODELED point (at originT), not the real
+     *  present position, which is unknown. The UI should present "position
+     *  uncertain since {originT}" rather than a confident current location. */
+    coverageLimited: boolean;
     /** Epoch ms of the forecast origin (path[0]'s time). Null if unknown. */
     originT: number | null;
     /** Epoch ms of the forecast horizon end (path's last point). */
@@ -71,7 +76,7 @@ const MAX_FAST_POLLS = 15; /* ~2 min, then settle to POLL_MS */
 
 const EMPTY: Omit<UseForecastPathResult, 'loading'> = {
     path: [], ensemble: [], ellipses: [], hindcastPath: [], hindcastTrack: [],
-    predictedHindcast: [], staleGps: false, originT: null, endT: null, generatedAt: null,
+    predictedHindcast: [], staleGps: false, coverageLimited: false, originT: null, endT: null, generatedAt: null,
 };
 
 /** Keep only well-formed [lon, lat] pairs. Latitude is range-checked (out-of-
@@ -173,6 +178,7 @@ export function useForecastPath(deviceId: string | null): UseForecastPathResult 
                     hindcastTrack: cleanTrack(data?.observed?.reconstructed_track),
                     predictedHindcast: cleanPath(data?.predicted_hindcast?.path),
                     staleGps: Boolean(data?.stale_gps),
+                    coverageLimited: Boolean(data?.stale_gps?.coverage_limited),
                     originT,
                     endT,
                     generatedAt: typeof data?.generated_at === 'string' ? data.generated_at : null,

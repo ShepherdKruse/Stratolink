@@ -35,7 +35,9 @@ N_MEMBERS = int(os.environ.get("GEFS_N_MEMBERS", "31"))
 MEMBERS = ALL_MEMBERS[:max(1, min(31, N_MEMBERS))]
 
 GEFS_STEP_H = 3            # GEFS forecast-hour cadence (and our integration step)
-PAD_CAP_DEG = 40           # generous downwind pad — the member cloud is wide for a long gap
+PAD_CAP_DEG = 40           # generous downwind pad — the member cloud is wide for a long gap (legacy static box)
+GEFS_TUBE = os.environ.get("GEFS_TUBE", "1") != "0"   # GEFS_TUBE=0 reverts to the legacy static box
+TUBE_STEP = 0.5            # GEFS native resolution — the tube box step
 
 
 # ── GEFS source ──────────────────────────────────────────────────────────────
@@ -137,32 +139,109 @@ def member_cube(mem, schedule, lats, lons, rows_idx, cols_idx, step, target_p, l
     }
 
 
+def member_prefetch(mem, schedule, target_p):
+    """Prefetch all of a member's (cyc, fhr) fields concurrently, interpolated to
+    `target_p`. Returns field(cyc, fhr) -> (u, v) reading from the warm cache, so
+    BOTH the nominal pre-integration and the per-slice box cuts hit zero network."""
+    lo, hi, w = g.bracket_levels(target_p)
+    levels = [lo] if lo == hi else [lo, hi]
+    uniq = sorted({(cyc, fhr) for _, cyc, fhr in schedule})
+
+    def fetch(task):
+        cyc, fhr, lv = task
+        return task, fetch_member_level(mem, cyc, fhr, lv)
+
+    cache = {}
+    tasks = [(cyc, fhr, lv) for (cyc, fhr) in uniq for lv in levels]
+    with ThreadPoolExecutor(max_workers=8) as ex:
+        for task, uv in ex.map(fetch, tasks):
+            cache[task] = uv
+
+    def field(cyc, fhr):
+        if lo == hi:
+            return cache[(cyc, fhr, lo)]
+        ua, va = cache[(cyc, fhr, hi)]
+        ub, vb = cache[(cyc, fhr, lo)]
+        return ua * (1 - w) + ub * w, va * (1 - w) + vb * w
+    return field
+
+
+def member_cube_tube(mem, schedule, slice_ms, start_lat, start_lon, target_p, latest, now):
+    """One member's TUBE cube: pre-integrate the nominal through THIS member's flow,
+    then cut a 0.5° box per slice centered on where the member goes then. Per-slice
+    geometry lives in the v2 .slwc header. Fine resolution + full path coverage,
+    vs the legacy single coarse box that clamped once the member left it."""
+    field = member_prefetch(mem, schedule, target_p)
+    sched_field = [(cyc, fhr) for _, cyc, fhr in schedule]
+    step_ms = GEFS_STEP_H * 3600 * 1000
+
+    def field_at(k):
+        return field(*sched_field[k])
+
+    def wind_fn(lat, lon, t_ms):
+        # LINEAR time-interpolate between the two bracketing 3-hourly slices —
+        # matching the compute's sampleWind. (Nearest-slice sampling drifts from the
+        # compute over a multi-week 3-hourly integration, walking the member out of
+        # its own ±tube and truncating it early.) Sub-steps always hit prefetched
+        # fields this way.
+        f = (t_ms - slice_ms[0]) / step_ms
+        k0 = max(0, min(len(slice_ms) - 2, int(f)))
+        frac = max(0.0, min(1.0, f - k0))
+        ua, va = g.bilin_uv(*field_at(k0), lat, lon)
+        ub, vb = g.bilin_uv(*field_at(k0 + 1), lat, lon)
+        return ua * (1 - frac) + ub * frac, va * (1 - frac) + vb * frac
+
+    centers = g.integrate_nominal_centers(slice_ms, slice_ms[0], start_lat, start_lon, wind_fn)
+
+    cube, n, _ = g.build_tube_grids(centers, g.TUBE_HALF_DEG, TUBE_STEP, slice_ms, field_at,
+                                    "gefs", target_p, latest, now)
+    cube["member"] = mem
+    return cube, n
+
+
 def build_device(device, fixes, target_p, latest):
     now = datetime.now(timezone.utc)
     last_fix = g.tparse(fixes[-1]["t"])
+    last_lat, last_lon = fixes[-1]["lat"], fixes[-1]["lon"]
     gap_h = max(0, (now - last_fix).total_seconds() / 3600)
-    span_h = min(gap_h, g.MAX_GAP_H) + g.HORIZON_H
-    # Box must contain each member's whole trajectory (last fix -> cloud -> horizon).
-    bounds = g.bounds_for_forecast(fixes, span_h, pad_cap=PAD_CAP_DEG)
-    step = g.choose_grid_step(bounds)
     lo, hi, _ = g.bracket_levels(target_p)
-    print(f"  {device}: GEFS {len(MEMBERS)} members, interp {target_p:.1f}mb ({lo}↔{hi}), "
-          f"gap {gap_h:.0f}h, box step {step}°", flush=True)
 
-    # 0.5° GEFS native grid (361 lat 90..-90, 720 lon 0..359.5)
-    lats = np.arange(bounds["latMin"], bounds["latMax"] + 1e-6, step)
-    lons = np.arange(bounds["lonMin"], bounds["lonMax"] + 1e-6, step)
-    rows_idx = np.round((90.0 - lats) / 0.5).astype(int).clip(0, 360)
-    cols_idx = (np.round((lons % 360.0) / 0.5).astype(int)) % 720
-
+    # Dead-reckon span: capped at DEAD_RECKON_CAP_H (beyond that the cloud is
+    # globe-sized — the compute truncates honestly). +HORIZON forward only if the
+    # cap reaches "now". Same cadence + cap as the GFS tube.
+    reach = min(now, last_fix + timedelta(hours=g.DEAD_RECKON_CAP_H))
+    reached_now = reach >= now - timedelta(hours=GEFS_STEP_H)
+    end = reach + timedelta(hours=g.HORIZON_H + GEFS_STEP_H if reached_now else 0)
     start = g.floor_step(last_fix, GEFS_STEP_H)
-    end = g.floor_step(now, GEFS_STEP_H) + timedelta(hours=g.HORIZON_H + GEFS_STEP_H)
     schedule, t = [], start
     while t <= end:
         cyc, fhr = gefs_pick(t, latest)
         schedule.append((t, cyc, fhr))
         t += timedelta(hours=GEFS_STEP_H)
+    slice_ms = [int(t.timestamp() * 1000) for t, _, _ in schedule]
 
+    if not GEFS_TUBE:
+        return build_device_static(device, fixes, target_p, latest, now, last_fix, schedule)
+
+    cov_h = (reach - last_fix).total_seconds() / 3600
+    print(f"  {device}: GEFS {len(MEMBERS)} members TUBE @ {TUBE_STEP}° ±{g.TUBE_HALF_DEG}°, "
+          f"interp {target_p:.1f}mb ({lo}↔{hi}), gap {gap_h:.0f}h, "
+          f"{len(schedule)} slices fix→+{cov_h:.0f}h{'' if reached_now else ' (capped)'}", flush=True)
+    for mi, mem in enumerate(MEMBERS):
+        cube, n = member_cube_tube(mem, schedule, slice_ms, last_lat, last_lon, target_p, latest, now)
+        g.write_cube(device, f"-m{mi:02d}", cube, n, n, f"m{mi:02d}")
+
+
+def build_device_static(device, fixes, target_p, latest, now, last_fix, schedule):
+    """Legacy: one coarse static box per member (GEFS_TUBE=0)."""
+    span_h = min(max(0, (now - last_fix).total_seconds() / 3600), g.MAX_GAP_H) + g.HORIZON_H
+    bounds = g.bounds_for_forecast(fixes, span_h, pad_cap=PAD_CAP_DEG)
+    step = g.choose_grid_step(bounds)
+    lats = np.arange(bounds["latMin"], bounds["latMax"] + 1e-6, step)
+    lons = np.arange(bounds["lonMin"], bounds["lonMax"] + 1e-6, step)
+    rows_idx = np.round((90.0 - lats) / 0.5).astype(int).clip(0, 360)
+    cols_idx = (np.round((lons % 360.0) / 0.5).astype(int)) % 720
+    print(f"  {device}: GEFS {len(MEMBERS)} members STATIC box step {step}°", flush=True)
     for mi, mem in enumerate(MEMBERS):
         cube = member_cube(mem, schedule, lats, lons, rows_idx, cols_idx, step, target_p, latest, now)
         g.write_cube(device, f"-m{mi:02d}", cube, len(lats), len(lons), f"m{mi:02d}")

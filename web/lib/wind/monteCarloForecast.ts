@@ -5,7 +5,7 @@ import { GAP_WIND_MODE, gpsGapHours, STALE_GPS_THRESHOLD_H } from './staleGpsExt
 import { computePathReconstruction, type GapCacheEntry, type PathReconstructionResult } from './pathReconstruction';
 import { hindcastInputHash, readGapCache, readStoredHindcast, storeHindcast, writeGapCache } from './hindcastStorage';
 import { windAt, type GfsGrid } from './gfsGrid';
-import { chooseGridStep, fetchMemberCube, fetchWindCube, listMemberCubes, sampleWind, type WindCube } from './windCube';
+import { centerTrack, chooseGridStep, fetchMemberCube, fetchWindCube, listMemberCubes, sampleWind, type WindCube } from './windCube';
 
 const CFG = {
     N_ENSEMBLE: 200,
@@ -27,6 +27,13 @@ const CFG = {
      * horizon (τ ≳ horizon) while the multi-day dead-reckon spread stays diffusive
      * rather than ballooning. Tunable; ideally fit from residual autocorrelation. */
     PERTURB_TAU_H: 18,
+    /* Beyond this 90% semi-axis the ensemble is so dispersed (e.g. a multi-week
+     * dead-reckon whose members fan out across continents) that a single Gaussian
+     * ellipse is meaningless AND unrenderable — a >½-globe ring smears across the
+     * antimeridian. Past it we drop the zone and let the member spaghetti carry the
+     * uncertainty. ~continental scale; a normal cone (tens–hundreds of km) is well
+     * under it. */
+    MAX_ELLIPSE_SEMI_KM: 3000,
 };
 
 const round4 = (x: number) => Math.round(x * 1e4) / 1e4;
@@ -224,6 +231,43 @@ function downsampleTrack(track: Array<[number, number]>, maxPts: number): Array<
     return out;
 }
 
+/**
+ * A member's trajectory read STRAIGHT from its tube cube's box centers (the
+ * pre-integrated nominal the tube was laid along), resampled to one [lon, lat]
+ * per hour from `startMs`. This is the exact member path — using it avoids
+ * RE-integrating through the cube's 3-hourly boxes, which accumulates a
+ * quadrature drift vs the ingest and, for a fast member over a multi-week gap,
+ * walks the path out of its own tube and truncates it early. The first point is
+ * pinned to the real last fix so it joins the observed track seamlessly. Stops
+ * only where the cube's time coverage genuinely ends.
+ */
+function memberPathFromTube(
+    cube: WindCube,
+    startMs: number,
+    totalHours: number,
+    startLon: number,
+    startLat: number,
+): Array<[number, number]> {
+    const centers = centerTrack(cube);
+    if (centers.length < 2) return [[round4(startLon), round4(startLat)]];
+    const { t0Ms, stepMs } = cube;
+    const tEnd = t0Ms + (centers.length - 1) * stepMs;
+    const out: Array<[number, number]> = [];
+    const steps = Math.max(1, Math.round(totalHours));
+    for (let h = 0; h <= steps; h++) {
+        if (h === 0) { out.push([round4(startLon), round4(startLat)]); continue; }
+        const whenMs = startMs + h * 3_600_000;
+        if (whenMs > tEnd + 1) break;
+        const f = (whenMs - t0Ms) / stepMs;
+        const k0 = Math.max(0, Math.min(centers.length - 2, Math.floor(f)));
+        const fr = Math.max(0, Math.min(1, f - k0));
+        const a = centers[k0];
+        const b = centers[k0 + 1];
+        out.push([round4(a[0] + (b[0] - a[0]) * fr), round4(a[1] + (b[1] - a[1]) * fr)]);
+    }
+    return out;
+}
+
 /* Hindcast cache freshness: the trailing gap's analysis winds can still settle
  * for a few hours, so allow a bounded in-place refresh while the last fix is
  * young; once it's older the cached reconstruction is final and reused forever
@@ -374,7 +418,13 @@ export async function computeMonteCarloForecast(input: MonteCarloForecastInput):
         for (const label of memberLabels) {
             const mc = await fetchMemberCube(input.deviceId!, label);
             if (!mc) continue;
-            const path = integrateBalloonPathT(startLat, startLon, mc, bias, ZERO_PERT, startMs, spanHours);
+            /* A tube member cube already holds the member's exact pre-integrated
+             * path as its box-center sequence — read it directly (full, no drift,
+             * no early truncation). Only a legacy static member box still needs
+             * re-integration. */
+            const path = mc.isTube
+                ? memberPathFromTube(mc, startMs, spanHours, startLon, startLat)
+                : integrateBalloonPathT(startLat, startLon, mc, bias, ZERO_PERT, startMs, spanHours);
             ensemble.push(path);
             if (label === 'm00') control = path;
         }
@@ -406,6 +456,17 @@ export async function computeMonteCarloForecast(input: MonteCarloForecastInput):
     const originPt = nominal[nowIdx] ?? [startLon, startLat];
     const nowISO = new Date(nowMs).toISOString();
 
+    /* Coverage-limited: the dead-reckon ran out of wind-cube coverage before it
+     * reached "now" (the trajectory truncated — see integrateBalloonPathT). The
+     * balloon's current position is then genuinely unknown; the origin is the LAST
+     * MODELED point (at fix + modeledHours), not "now", and there's no confident
+     * forward forecast. Flagged so the UI can say "modeled to +Xh, then unknown"
+     * instead of implying we know where it is. */
+    const modeledHours = nominal.length - 1;
+    const coverageLimited = stale && modeledHours < Math.round(gapH) - 1;
+    const originMs = coverageLimited ? fixTimeMs + modeledHours * 3_600_000 : nowMs;
+    const originISO = new Date(originMs).toISOString();
+
     /* Predicted-hindcast curve = the fix→now portion of the (single, continuous)
      * nominal path. Drawn instead of a straight last-fix→now connector. The
      * forecast leg continues seamlessly from its final point. */
@@ -430,14 +491,20 @@ export async function computeMonteCarloForecast(input: MonteCarloForecastInput):
     const idx = nominal.length - 1;
     const endPositions = ensemble.map((traj) => traj[Math.min(idx, traj.length - 1)]);
     const endCenter = nominal[Math.min(idx, nominal.length - 1)];
-    const ellipses = [
-        {
-            t_hours: idx - nowIdx,
-            e50: recenterEllipse(computeEllipse(endPositions, 0.5), endCenter),
-            e90: recenterEllipse(computeEllipse(endPositions, 0.9), endCenter),
-            mean: [round4(endCenter[0]), round4(endCenter[1])] as [number, number],
-        },
-    ];
+    const e90 = recenterEllipse(computeEllipse(endPositions, 0.9), endCenter);
+    /* Drop the zone when the ensemble is too dispersed for a Gaussian ellipse to
+     * mean anything (a >½-globe ring that also smears across the antimeridian);
+     * the member spaghetti conveys the spread instead. */
+    const ellipses = e90.semi_a_km > CFG.MAX_ELLIPSE_SEMI_KM
+        ? []
+        : [
+            {
+                t_hours: idx - nowIdx,
+                e50: recenterEllipse(computeEllipse(endPositions, 0.5), endCenter),
+                e90,
+                mean: [round4(endCenter[0]), round4(endCenter[1])] as [number, number],
+            },
+        ];
 
     const endpoint = nominal[nominal.length - 1];
     const { u: uEnd, v: vEnd } = sampleWind(fcCube, endpoint[1], endpoint[0], endMs);
@@ -471,7 +538,7 @@ export async function computeMonteCarloForecast(input: MonteCarloForecastInput):
             lat: originPt[1],
             lon: originPt[0],
             alt_m: lastFix.alt_m,
-            time_utc: nowISO,
+            time_utc: originISO,
         },
         stale_gps: stale
             ? {
@@ -479,6 +546,8 @@ export async function computeMonteCarloForecast(input: MonteCarloForecastInput):
                   last_fix_time_utc: lastFix.time_utc,
                   wind_field_time_utc: nowISO,
                   wind_mode: GAP_WIND_MODE,
+                  coverage_limited: coverageLimited,
+                  modeled_hours: coverageLimited ? modeledHours : undefined,
               }
             : undefined,
         predicted_hindcast: predictedHindcast,

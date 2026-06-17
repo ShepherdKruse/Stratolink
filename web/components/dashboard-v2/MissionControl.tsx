@@ -861,6 +861,17 @@ function MapColumn({
                     <span className="sl-pill dim">
                         {balloon.lat.toFixed(2)}°, {balloon.lon.toFixed(2)}°
                     </span>
+                    {/* Very stale: the dead-reckon ran out of wind coverage before
+                        "now", so the marker is the last MODELED point, not the real
+                        present position. Say so instead of implying a known location. */}
+                    {forecast.coverageLimited && forecast.originT != null && (
+                        <span
+                            className="sl-pill amber"
+                            title="GPS-dark beyond the predictable horizon — the position shown is the last modeled point; the true current location is unknown."
+                        >
+                            position uncertain since {new Date(forecast.originT).toLocaleDateString(undefined, { month: 'short', day: 'numeric' })}
+                        </span>
+                    )}
                 </div>
             )}
         </div>

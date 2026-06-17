@@ -22,6 +22,7 @@ import sys
 import time
 import urllib.parse
 import urllib.request
+from concurrent.futures import ThreadPoolExecutor
 from datetime import datetime, timedelta, timezone
 
 import numpy as np
@@ -57,6 +58,26 @@ MAX_GRID_PTS = 8000
 HISTORY_DAYS = 90                # cap full-mission lookback (matches app MAX_HISTORY)
 PAD_CAP_DEG = 32                 # cap the downwind forecast pad so the box can't run away
                                  # (large enough to contain a multi-day dead-reckon)
+# ── Trajectory-following "tube" forecast cube (P1) ───────────────────────────
+# Instead of one static box big enough to contain a multi-day dead-reckon (which
+# forces a coarse grid AND still clamps once the drift leaves it), lay a stack of
+# moderate boxes ALONG a pre-integrated nominal path — each time-slice centered on
+# where the balloon is then. Consecutive boxes overlap (half-width >> one step's
+# drift) so sampleWind's time-interpolation always has both brackets. Per-slice
+# geometry rides in the v2 .slwc header (origins[]). The win is *coverage
+# correctness + fine resolution along the path*, not bandwidth (GFS messages are
+# whole-globe regardless).
+FC_TUBE = os.environ.get("FC_TUBE", "1") != "0"     # set FC_TUBE=0 for the legacy static box
+TUBE_HALF_DEG = float(os.environ.get("FC_TUBE_HALF_DEG", "9"))   # box half-width around nominal
+# Cap the dead-reckon the tube covers. Beyond ~2 weeks even a perfect tube is a
+# globe-sized cloud (predictability is gone), so don't fetch/integrate past it;
+# the compute then truncates honestly (coverage_limited). 14 days balances showing
+# a useful long-drift path against runtime — a very-long-gap full ensemble at this
+# cap can brush the workflow's GEFS-step timeout (continue-on-error → GEFS complete,
+# AIGEFS partial; bump the step timeout for guaranteed full AIGEFS). Small value
+# for fast local iteration: FC_DEAD_RECKON_CAP_H=48.
+DEAD_RECKON_CAP_H = int(os.environ.get("FC_DEAD_RECKON_CAP_H", str(14 * 24)))
+TUBE_SUBSTEP_H = 1.0 / 6.0       # nominal integration sub-step (matches BALLOON_STEP_HOURS)
 GFS_LEVELS = [1000, 975, 950, 925, 900, 850, 800, 700, 600, 500, 400, 300, 250, 200, 150, 100, 70, 50, 30]
 BUCKET = "https://noaa-gfs-bdp-pds.s3.amazonaws.com"
 OUTDIR = os.path.join(os.path.dirname(__file__), "..", ".windcube", "cubes")
@@ -327,6 +348,165 @@ def sample_grids(bounds, step, start, end, step_h, target_p, latest, now, tag=""
     }, len(lats), len(lons)
 
 
+# ── Trajectory-following tube (shared by gfs_ingest + gefs_ingest) ────────────
+def bilin_uv(u, v, lat, lon):
+    """Bilinear U/V at one point from a whole-globe field, resolution INFERRED
+    from the array shape (721×1440 = 0.25° GFS, 361×720 = 0.5° GEFS; row 0 = 90°N,
+    col 0 = 0°E). Wraps longitude and clamps latitude at the poles."""
+    nlat, nlon = u.shape
+    dlat = 180.0 / (nlat - 1); dlon = 360.0 / nlon
+    r = min(max((90.0 - lat) / dlat, 0.0), float(nlat - 1))
+    c = (lon % 360.0) / dlon
+    r0 = min(int(np.floor(r)), nlat - 2); fr = r - r0
+    c0 = int(np.floor(c)) % nlon; c1 = (c0 + 1) % nlon; fc = c - np.floor(c)
+    def bl(a):
+        return (a[r0, c0] * (1 - fr) * (1 - fc) + a[r0 + 1, c0] * fr * (1 - fc)
+                + a[r0, c1] * (1 - fr) * fc + a[r0 + 1, c1] * fr * fc)
+    return bl(u), bl(v)
+
+
+def cut_box(u, v, clat, clon, half_deg, step, n):
+    """Sub-sample an `n`×`n`, `step`° box centered on (clat, clon) out of a
+    whole-globe field (resolution inferred from shape). The origin is snapped to
+    the source grid so sampling is exact. Returns (lat0, lon0, U_flat, V_flat).
+    Longitude is kept UNWRAPPED on the cube axis (so origins/bounds stay
+    continuous across ±180) but wrapped when indexing the source."""
+    nlat, nlon = u.shape
+    dlat = 180.0 / (nlat - 1); dlon = 360.0 / nlon
+    lat0 = round(clat / dlat) * dlat - half_deg
+    lon0 = round(clon / dlon) * dlon - half_deg
+    lats = lat0 + np.arange(n) * step
+    lons = lon0 + np.arange(n) * step
+    rows = np.round((90.0 - lats) / dlat).astype(int).clip(0, nlat - 1)
+    cols = (np.round((lons % 360.0) / dlon).astype(int)) % nlon
+    return float(lats[0]), float(lons[0]), u[np.ix_(rows, cols)].ravel(), v[np.ix_(rows, cols)].ravel()
+
+
+def integrate_nominal_centers(slice_ms, start_ms, start_lat, start_lon, wind_fn):
+    """Pre-integrate ONE nominal trajectory (neutral bias, no perturbation) forward
+    from (start_lat, start_lon) at `start_ms`, snapshotting its position at each
+    slice time ≥ start_ms. `wind_fn(lat, lon, t_ms) -> (u, v)` supplies the field
+    (GFS or a GEFS member). Longitude is left UNWRAPPED so the tube's per-slice
+    origins + union bounds form a continuous range the integrator agrees with.
+    Slices before start_ms stay None for the caller to fill. Cheap: the global
+    fields are fetched/cached once and reused to cut the boxes."""
+    centers = [None] * len(slice_ms)
+    lat, lon = start_lat, start_lon
+    k = 0
+    while k < len(slice_ms) and slice_ms[k] < start_ms:
+        k += 1
+    first_fwd = k
+    while k < len(slice_ms) and slice_ms[k] <= start_ms:      # slice exactly at start
+        centers[k] = (lat, lon); k += 1
+    dt_s = TUBE_SUBSTEP_H * 3600
+    t_ms = start_ms
+    end_ms = slice_ms[-1]
+    while t_ms < end_ms and k < len(slice_ms):
+        u, v = wind_fn(lat, lon, t_ms)
+        coslat = max(np.cos(np.radians(lat)), 0.05)
+        lat += v * dt_s / 111_320
+        lon += u * dt_s / (111_320 * coslat)
+        t_ms += TUBE_SUBSTEP_H * 3600 * 1000
+        while k < len(slice_ms) and slice_ms[k] <= t_ms + 1:
+            centers[k] = (lat, lon); k += 1
+    for j in range(first_fwd, len(slice_ms)):                 # trailing (shouldn't happen)
+        if centers[j] is None:
+            centers[j] = (lat, lon)
+    return centers
+
+
+def sample_global(uv, lat, lon):
+    """Bilinear U/V from a {"u","v"} dict field (back-compat thin wrapper)."""
+    return bilin_uv(uv["u"], uv["v"], lat, lon)
+
+
+def prefetch_fields(slice_ms, target_p, latest):
+    """Warm `fetch_uv_p`'s cache for every (cycle, fhr) the tube needs, IN PARALLEL.
+    The needed source field depends only on a slice's TIME (not the balloon's
+    position), so we fetch them all up front with threads — turning the GFS tube's
+    otherwise-serial hundreds of byte-range fetches (the long-gap bottleneck) into
+    a concurrent batch. The nominal walk + box cuts then read from the warm cache.
+    Sub-step times between hourly slices map to the same (cyc, fhr) the hourly
+    slices already cover, so this is complete."""
+    want = sorted({pick_source(datetime.fromtimestamp(ms / 1000, timezone.utc), latest)
+                   for ms in slice_ms})
+    n = len(want)
+    print(f"      prefetch: {n} GFS fields (parallel)…", flush=True)
+    done = [0]
+    def fetch(cf):
+        fetch_uv_p(cf[0], cf[1], target_p)
+        done[0] += 1
+        if done[0] % 50 == 0 or done[0] == n:
+            print(f"      prefetch: {done[0]}/{n}", flush=True)
+    with ThreadPoolExecutor(max_workers=8) as ex:
+        list(ex.map(fetch, want))
+
+
+def nominal_centers(slice_ms, last_fix_ms, last_lat, last_lon, target_p, latest):
+    """GFS nominal centers: integrate through the GFS field interpolated to
+    `target_p`, snapshotting per slice ≥ last fix (slices before are the caller's
+    track interp)."""
+    def wind_fn(lat, lon, t_ms):
+        cyc, fhr = pick_source(datetime.fromtimestamp(t_ms / 1000, timezone.utc), latest)
+        return sample_global(fetch_uv_p(cyc, fhr, target_p), lat, lon)
+    return integrate_nominal_centers(slice_ms, last_fix_ms, last_lat, last_lon, wind_fn)
+
+
+def build_tube_grids(centers, half_deg, step, slice_ms, field_at, source, levelHpa, latest, now, tag=""):
+    """Assemble a tube cube from pre-computed `centers`: one `step`° box per slice,
+    cut from the whole-globe field returned by `field_at(k) -> (u, v)`. All slices
+    share dims (so v2 needs only per-slice origins). Returns (cube_dict, n, n)."""
+    n = int(round(2 * half_deg / step)) + 1
+    grids = []
+    uminLat = uminLon = float("inf"); umaxLat = umaxLon = float("-inf")
+    for k, (clat, clon) in enumerate(centers):
+        u, v = field_at(k)
+        lat0, lon0, U, V = cut_box(u, v, clat, clon, half_deg, step, n)
+        grids.append({"lat0": lat0, "dLat": step, "nLat": n,
+                      "lon0": lon0, "dLon": step, "nLon": n, "U": U, "V": V})
+        uminLat = min(uminLat, lat0); umaxLat = max(umaxLat, lat0 + (n - 1) * step)
+        uminLon = min(uminLon, lon0); umaxLon = max(umaxLon, lon0 + (n - 1) * step)
+        if tag and ((k + 1) % 24 == 0 or k + 1 == len(centers)):
+            print(f"      {tag}: {k + 1}/{len(centers)} slices", flush=True)
+    return {
+        "source": source, "generated_at": now.isoformat(), "latest_cycle_utc": latest.isoformat(),
+        "levelHpa": round(levelHpa, 1), "gridStep": step,
+        "t0Ms": slice_ms[0], "stepMs": int(slice_ms[1] - slice_ms[0]) if len(slice_ms) > 1 else FC_STEP_H * 3600 * 1000,
+        "bounds": {"latMin": uminLat, "latMax": umaxLat, "lonMin": uminLon, "lonMax": umaxLon},
+        "grids": grids,
+    }, n, n
+
+
+def interp_track(fixes_ms, t_ms):
+    """Linear-interpolate the observed track at instant t_ms (clamped to the ends).
+    `fixes_ms` = sorted [(t_ms, lat, lon)]; used to center tube slices that fall on
+    the known recent track (before the last fix), where we don't dead-reckon."""
+    if t_ms <= fixes_ms[0][0]:
+        return fixes_ms[0][1], fixes_ms[0][2]
+    if t_ms >= fixes_ms[-1][0]:
+        return fixes_ms[-1][1], fixes_ms[-1][2]
+    lo, hi = 0, len(fixes_ms) - 1
+    while hi - lo > 1:
+        mid = (lo + hi) // 2
+        if fixes_ms[mid][0] <= t_ms:
+            lo = mid
+        else:
+            hi = mid
+    (ta, la, loa), (tb, lb, lob) = fixes_ms[lo], fixes_ms[hi]
+    f = 0.0 if tb == ta else (t_ms - ta) / (tb - ta)
+    return la + (lb - la) * f, loa + (lob - loa) * f
+
+
+def sample_tube(centers, half_deg, step, slice_ms, target_p, latest, now, tag=""):
+    """GFS tube: cut a box per slice from the GFS field (interpolated to target_p)."""
+    def field_at(k):
+        cyc, fhr = pick_source(datetime.fromtimestamp(slice_ms[k] / 1000, timezone.utc), latest)
+        uv = fetch_uv_p(cyc, fhr, target_p)
+        return uv["u"], uv["v"]
+    return build_tube_grids(centers, half_deg, step, slice_ms, field_at,
+                            "gfs", target_p, latest, now, tag)
+
+
 SCALE = 10  # store winds as int16 = round(value*SCALE); lossless vs the old 0.1 rounding
 
 
@@ -335,9 +515,14 @@ def pack_cube(cube):
       [uint32 LE headerLen][header JSON utf-8, padded to a 4-byte boundary]
       [ per grid: int16 U[nLat*nLon] then int16 V[nLat*nLon], little-endian ].
     Geometry is constant across grids, so it lives in the header once."""
-    g0 = cube["grids"][0]
+    grids = cube["grids"]
+    g0 = grids[0]
+    # A tube has a different origin per slice; a static cube shares one. Emit v2
+    # (origins[]) only when origins actually vary — old static cubes stay v1.
+    origins = [(g["lat0"], g["lon0"]) for g in grids]
+    is_tube = any(o != origins[0] for o in origins)
     header = {
-        "v": 1, "scale": SCALE,
+        "v": 2 if is_tube else 1, "scale": SCALE,
         "source": cube.get("source", "gfs"),
         "generated_at": cube.get("generated_at"),
         "latest_cycle_utc": cube.get("latest_cycle_utc"),
@@ -345,8 +530,10 @@ def pack_cube(cube):
         "t0Ms": cube["t0Ms"], "stepMs": cube["stepMs"], "bounds": cube["bounds"],
         "lat0": g0["lat0"], "dLat": g0["dLat"], "nLat": g0["nLat"],
         "lon0": g0["lon0"], "dLon": g0["dLon"], "nLon": g0["nLon"],
-        "nGrids": len(cube["grids"]),
+        "nGrids": len(grids),
     }
+    if is_tube:
+        header["origins"] = [[round(la, 4), round(lo, 4)] for la, lo in origins]
     hb = json.dumps(header, separators=(",", ":")).encode("utf-8")
     hb += b" " * ((-(4 + len(hb))) % 4)            # pad so the payload starts 4-byte aligned
     parts = [struct.pack("<I", len(hb)), hb]
@@ -379,15 +566,19 @@ def build_cube(device, fixes, target_p, latest):
     # Its box is dominated by the full-mission track; the forward leg is unused by
     # reconstruction, so use a SMALL forward pad (a big one would push the
     # continent-wide box past the point budget and coarsen the historical grid).
-    recon_bounds = bounds_for_forecast(fixes, HORIZON_H, pad_cap=8)
-    recon_step = choose_grid_step(recon_bounds)
-    recon_start = floor_step(first_fix, RECON_STEP_H) - timedelta(hours=RECON_STEP_H)
-    recon_end = floor_step(now, RECON_STEP_H) + timedelta(hours=HORIZON_H + 2 * RECON_STEP_H)
-    recon, rla, rlo = sample_grids(recon_bounds, recon_step, recon_start, recon_end,
-                                   RECON_STEP_H, target_p, latest, now, "recon")
-    write_cube(device, "", recon, rla, rlo, "recon")
+    if os.environ.get("SKIP_RECON") != "1":     # dev: skip the slow full-mission recon when iterating on the tube
+        recon_bounds = bounds_for_forecast(fixes, HORIZON_H, pad_cap=8)
+        recon_step = choose_grid_step(recon_bounds)
+        recon_start = floor_step(first_fix, RECON_STEP_H) - timedelta(hours=RECON_STEP_H)
+        recon_end = floor_step(now, RECON_STEP_H) + timedelta(hours=HORIZON_H + 2 * RECON_STEP_H)
+        recon, rla, rlo = sample_grids(recon_bounds, recon_step, recon_start, recon_end,
+                                       RECON_STEP_H, target_p, latest, now, "recon")
+        write_cube(device, "", recon, rla, rlo, "recon")
 
     # ── Forecast cube: recent track + dead-reckon + cone, HOURLY, finest grid. ──
+    if FC_TUBE:
+        build_tube_fc(device, fixes, last_fix, gap_h, target_p, latest, now)
+        return
     lookback_h = min(gap_h, MAX_GAP_H) + FC_BIAS_H
     cutoff = now - timedelta(hours=lookback_h)
     fc_fixes = [f for f in fixes if tparse(f["t"]) >= cutoff]
@@ -400,6 +591,42 @@ def build_cube(device, fixes, target_p, latest):
     fc, fla, flo = sample_grids(fc_bounds, fc_step, fc_start, fc_end,
                                 FC_STEP_H, target_p, latest, now, "fcast")
     write_cube(device, "-fc", fc, fla, flo, "fcast")
+
+
+def build_tube_fc(device, fixes, last_fix, gap_h, target_p, latest, now):
+    """Forecast cube as a trajectory-following tube (P1). Time span: from
+    FC_BIAS_H before the last fix (covers the bias-fit fixes) through the
+    dead-reckon (capped at DEAD_RECKON_CAP_H) and, if the gap is within the cap,
+    HORIZON_H of true forward forecast. Each hourly slice is a moderate box
+    centered on the pre-integrated nominal position (or the known track, before the
+    last fix)."""
+    last_fix_ms = int(last_fix.timestamp() * 1000)
+    now_ms = int(now.timestamp() * 1000)
+    step_ms = FC_STEP_H * 3600 * 1000
+    cap_ms = DEAD_RECKON_CAP_H * 3600 * 1000
+    reach_ms = min(now_ms, last_fix_ms + cap_ms)         # furthest the dead-reckon goes
+    reached_now = reach_ms >= now_ms - step_ms
+    end_ms = reach_ms + (HORIZON_H * 3600 * 1000 if reached_now else 0)
+    start_ms = (last_fix_ms // step_ms) * step_ms - FC_BIAS_H * 3600 * 1000
+    n_slices = int(round((end_ms - start_ms) / step_ms)) + 1
+    slice_ms = [start_ms + k * step_ms for k in range(n_slices)]
+
+    prefetch_fields(slice_ms, target_p, latest)          # parallel cache warm-up
+    fixes_ms = [(int(tparse(f["t"]).timestamp() * 1000), f["lat"], f["lon"]) for f in fixes]
+    centers = nominal_centers(slice_ms, last_fix_ms, fixes[-1]["lat"], fixes[-1]["lon"],
+                              target_p, latest)
+    for k, t_ms in enumerate(slice_ms):                  # fill pre-last-fix slices from the track
+        if centers[k] is None:
+            centers[k] = interp_track(fixes_ms, t_ms)
+
+    step = choose_grid_step({"latMin": 0, "latMax": 2 * TUBE_HALF_DEG,
+                             "lonMin": 0, "lonMax": 2 * TUBE_HALF_DEG})
+    cov_h = (reach_ms - last_fix_ms) / 3.6e6
+    print(f"    tube: {n_slices} slices @ {step}° ±{TUBE_HALF_DEG}°, "
+          f"covers fix→+{cov_h:.0f}h (gap {gap_h:.0f}h{'' if reached_now else ', capped'})"
+          f"{' +' + str(HORIZON_H) + 'h fwd' if reached_now else ''}", flush=True)
+    fc, fla, flo = sample_tube(centers, TUBE_HALF_DEG, step, slice_ms, target_p, latest, now, "tube")
+    write_cube(device, "-fc", fc, fla, flo, "tube")
 
 
 def main():

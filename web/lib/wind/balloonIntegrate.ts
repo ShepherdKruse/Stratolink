@@ -120,13 +120,29 @@ export function integrateBalloonPathT(
     let lon = startLon;
     const path: Array<[number, number]> = [[round4(lon), round4(lat)]];
 
+    /* Coverage of this cube — stop integrating rather than advect on clamped edge
+     * winds (space) or a frozen last grid (time). A long dead-reckon used to run
+     * right off the box and circle the globe on edge winds; now it truncates where
+     * the data ends, which is the honest extent. Longitude is wrapped so a query
+     * that has crept past ±180 is judged against the box correctly. */
+    const { latMin, latMax, lonMin, lonMax } = cube.bounds;
+    const tEndMs = cube.t0Ms + Math.max(0, cube.grids.length - 1) * cube.stepMs;
+    const covered = (la: number, lo: number): boolean => {
+        if (la < latMin || la > latMax) return false;
+        const L = lonMin + (((lo - lonMin) % 360) + 360) % 360; // into [lonMin, lonMin+360)
+        return L >= lonMin && L <= lonMax;
+    };
+
     for (let s = 1; s <= totalSteps; s++) {
+        const whenMs = startTimeMs + s * stepMs;
+        if (whenMs > tEndMs) break;                       // past the cube's time coverage
+
         /* Evolve the perturbation (no-op when ρ = 1, since innov = 0). */
         pSpeed = rho * pSpeed + innov * speedSigma * gauss();
         pDir = rho * pDir + innov * dirSigma * gauss();
         pAlt = rho * pAlt + innov * altSigma * gauss();
 
-        const { u, v } = sampleWind(cube, lat, lon, startTimeMs + s * stepMs);
+        const { u, v } = sampleWind(cube, lat, lon, whenMs);
         const dirRad = ((dirOffsetDeg + pDir) * Math.PI) / 180;
         const cosD = Math.cos(dirRad);
         const sinD = Math.sin(dirRad);
@@ -140,6 +156,10 @@ export function integrateBalloonPathT(
         lat += (vR * stepSec) / 111_320;
         lon += (uR * stepSec) / (111_320 * cosLat);
 
+        if (!covered(lat, lon)) {                         // left the box — stop, don't extrapolate
+            path.push([round4(lon), round4(lat)]);
+            break;
+        }
         if (s % stepsPerHour === 0) {
             path.push([round4(lon), round4(lat)]);
         }

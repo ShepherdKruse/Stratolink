@@ -37,7 +37,9 @@ AIGEFS_BUCKET = "https://noaa-nws-graphcastgfs-pds.s3.amazonaws.com"
 N_MEMBERS = int(os.environ.get("AIGEFS_N_MEMBERS", "31"))
 MEMBERS = list(range(min(31, max(1, N_MEMBERS))))   # mem000 .. mem030
 AIGEFS_STEP_H = 6          # AIGEFS forecast-hour cadence (and our integration step)
-PAD_CAP_DEG = 40
+PAD_CAP_DEG = 40           # legacy static box only
+AIGEFS_TUBE = os.environ.get("AIGEFS_TUBE", "1") != "0"   # AIGEFS_TUBE=0 reverts to the static box
+TUBE_STEP = 0.5            # tube box step (AIGEFS is 0.25° native; 0.5 keeps cubes small + matches GEFS)
 
 
 def aigefs_url(mem, cyc, fhr):
@@ -143,25 +145,71 @@ def member_cube(mem, schedule, lats, lons, rows_idx, cols_idx, step, target_p, l
     }
 
 
+def member_prefetch(mem, schedule, target_p):
+    """Prefetch a member's (cyc, fhr) fields concurrently, interpolated to
+    `target_p`. Returns field(cyc, fhr) -> (u, v) from the warm cache."""
+    lo, hi, w = g.bracket_levels(target_p)
+    levels = [lo] if lo == hi else [lo, hi]
+    uniq = sorted({(cyc, fhr) for _, cyc, fhr in schedule})
+
+    def fetch(task):
+        cyc, fhr, lv = task
+        return task, fetch_member_level(mem, cyc, fhr, lv)
+
+    cache = {}
+    tasks = [(cyc, fhr, lv) for (cyc, fhr) in uniq for lv in levels]
+    with ThreadPoolExecutor(max_workers=8) as ex:
+        for task, uv in ex.map(fetch, tasks):
+            cache[task] = uv
+
+    def field(cyc, fhr):
+        if lo == hi:
+            return cache[(cyc, fhr, lo)]
+        ua, va = cache[(cyc, fhr, hi)]
+        ub, vb = cache[(cyc, fhr, lo)]
+        return ua * (1 - w) + ub * w, va * (1 - w) + vb * w
+    return field
+
+
+def member_cube_tube(mem, schedule, slice_ms, start_lat, start_lon, target_p, latest, now):
+    """One AIGEFS member's TUBE cube (see gefs_ingest.member_cube_tube)."""
+    field = member_prefetch(mem, schedule, target_p)
+    sched_field = [(cyc, fhr) for _, cyc, fhr in schedule]
+    step_ms = AIGEFS_STEP_H * 3600 * 1000
+
+    def field_at(k):
+        return field(*sched_field[k])
+
+    def wind_fn(lat, lon, t_ms):
+        # LINEAR time-interp between bracketing slices — match the compute's
+        # sampleWind so the nominal doesn't drift out of its own tube over a long gap.
+        f = (t_ms - slice_ms[0]) / step_ms
+        k0 = max(0, min(len(slice_ms) - 2, int(f)))
+        frac = max(0.0, min(1.0, f - k0))
+        ua, va = g.bilin_uv(*field_at(k0), lat, lon)
+        ub, vb = g.bilin_uv(*field_at(k0 + 1), lat, lon)
+        return ua * (1 - frac) + ub * frac, va * (1 - frac) + vb * frac
+
+    centers = g.integrate_nominal_centers(slice_ms, slice_ms[0], start_lat, start_lon, wind_fn)
+    cube, n, _ = g.build_tube_grids(centers, g.TUBE_HALF_DEG, TUBE_STEP, slice_ms, field_at,
+                                    "aigefs", target_p, latest, now)
+    cube["member"] = f"ai{mem:03d}"
+    return cube, n
+
+
 def build_device(device, fixes, target_p, latest):
     now = datetime.now(timezone.utc)
     last_fix = g.tparse(fixes[-1]["t"])
+    last_lat, last_lon = fixes[-1]["lat"], fixes[-1]["lon"]
     gap_h = max(0, (now - last_fix).total_seconds() / 3600)
-    span_h = min(gap_h, g.MAX_GAP_H) + g.HORIZON_H
-    bounds = g.bounds_for_forecast(fixes, span_h, pad_cap=PAD_CAP_DEG)
-    step = g.choose_grid_step(bounds)
     lo, hi, _ = g.bracket_levels(target_p)
-    print(f"  {device}: AIGEFS {len(MEMBERS)} members, interp {target_p:.1f}mb ({lo}↔{hi}), "
-          f"gap {gap_h:.0f}h, box step {step}°", flush=True)
 
-    # AIGEFS native 0.25° grid (721 lat 90..-90, 1440 lon 0..359.75) — same as GFS
-    lats = np.arange(bounds["latMin"], bounds["latMax"] + 1e-6, step)
-    lons = np.arange(bounds["lonMin"], bounds["lonMax"] + 1e-6, step)
-    rows_idx = np.round((90.0 - lats) / 0.25).astype(int).clip(0, 720)
-    cols_idx = (np.round((lons % 360.0) / 0.25).astype(int)) % 1440
-
+    # Dead-reckon span capped at DEAD_RECKON_CAP_H; +HORIZON forward only if the cap
+    # reaches "now" (mirrors the GFS/GEFS tube).
+    reach = min(now, last_fix + timedelta(hours=g.DEAD_RECKON_CAP_H))
+    reached_now = reach >= now - timedelta(hours=AIGEFS_STEP_H)
+    end = reach + timedelta(hours=g.HORIZON_H + AIGEFS_STEP_H if reached_now else 0)
     start = g.floor_step(last_fix, AIGEFS_STEP_H)
-    end = g.floor_step(now, AIGEFS_STEP_H) + timedelta(hours=g.HORIZON_H + AIGEFS_STEP_H)
     times = []
     t = start
     while t <= end:
@@ -188,10 +236,39 @@ def build_device(device, fixes, target_p, latest):
         cyc = nearest(ideal_cycle(t, latest))
         fhr = max(0, round((t - cyc).total_seconds() / 3600 / AIGEFS_STEP_H) * AIGEFS_STEP_H)
         schedule.append((t, cyc, fhr))
+    slice_ms = [int(t.timestamp() * 1000) for t in times]
 
-    # Per-member isolation: AIGEFS publishes incomplete member sets (a cycle file
-    # mem000 has may be missing for another member), so one member's 404 must not
-    # abort the rest — skip it and keep the members that are complete.
+    cov_h = (reach - last_fix).total_seconds() / 3600
+    mode = f"TUBE @ {TUBE_STEP}° ±{g.TUBE_HALF_DEG}°" if AIGEFS_TUBE else "STATIC"
+    print(f"  {device}: AIGEFS {len(MEMBERS)} members {mode}, interp {target_p:.1f}mb ({lo}↔{hi}), "
+          f"gap {gap_h:.0f}h, {len(schedule)} slices fix→+{cov_h:.0f}h{'' if reached_now else ' (capped)'}", flush=True)
+
+    if not AIGEFS_TUBE:
+        return build_device_static(device, fixes, target_p, latest, now, schedule)
+
+    # Per-member isolation: AIGEFS publishes incomplete member sets, so one
+    # member's 404 must not abort the rest.
+    built = 0
+    for mem in MEMBERS:
+        try:
+            cube, n = member_cube_tube(mem, schedule, slice_ms, last_lat, last_lon, target_p, latest, now)
+            g.write_cube(device, f"-a{mem:02d}", cube, n, n, f"a{mem:02d}")
+            built += 1
+        except Exception as e:  # noqa: BLE001
+            print(f"    a{mem:02d}: skipped ({e})", flush=True)
+    print(f"  {device}: AIGEFS built {built}/{len(MEMBERS)} members", flush=True)
+
+
+def build_device_static(device, fixes, target_p, latest, now, schedule):
+    """Legacy: one coarse static box per member (AIGEFS_TUBE=0)."""
+    last_fix = g.tparse(fixes[-1]["t"])
+    span_h = min(max(0, (now - last_fix).total_seconds() / 3600), g.MAX_GAP_H) + g.HORIZON_H
+    bounds = g.bounds_for_forecast(fixes, span_h, pad_cap=PAD_CAP_DEG)
+    step = g.choose_grid_step(bounds)
+    lats = np.arange(bounds["latMin"], bounds["latMax"] + 1e-6, step)
+    lons = np.arange(bounds["lonMin"], bounds["lonMax"] + 1e-6, step)
+    rows_idx = np.round((90.0 - lats) / 0.25).astype(int).clip(0, 720)
+    cols_idx = (np.round((lons % 360.0) / 0.25).astype(int)) % 1440
     built = 0
     for mem in MEMBERS:
         try:
