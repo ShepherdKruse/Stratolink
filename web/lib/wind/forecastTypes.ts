@@ -45,6 +45,16 @@ export type StratolinkForecast = {
         /** Hours of dead-reckon actually modeled before coverage ran out. */
         modeled_hours?: number;
     };
+    /** Set when the forecast was terminated early because the ensemble's RMS spread
+     *  crossed the predictability threshold — the drawn path ends here and the UI
+     *  anchors a "forecast ends — paths diverge" notice at `lonlat`. */
+    divergence?: {
+        limited: true;
+        lonlat: [number, number];
+        time_utc: string;
+        spread_km: number;
+        threshold_km: number;
+    };
     /** Wind-integrated "predicted hindcast" — the curved path from the last GPS
      *  fix to "now" (analysis winds). Present only when the last fix was stale;
      *  the forward forecast begins at its final point. Drawn instead of a

@@ -129,6 +129,9 @@ interface V2MissionMapProps {
     forecastEnsemble?: Array<Array<[number, number]>>;
     /** Per-slice 50/90% confidence ellipse polygons — drawn as the cone. */
     forecastEllipses?: Array<{ e50: Array<[number, number]>; e90: Array<[number, number]> }>;
+    /** Predictability-horizon termination: the forecast was cut where the ensemble
+     *  spread crossed the threshold. Draws a dot + "forecast ends" note at `lonlat`. */
+    divergence?: { lonlat: [number, number]; spreadKm: number; thresholdKm: number } | null;
     /** Wind-reconstructed likely prior path ([lon, lat]) — the hindcast. */
     hindcastPath?: Array<[number, number]>;
     /** The hindcast split into runs by certainty. Segments bridging a long gap
@@ -195,6 +198,7 @@ export default function V2MissionMap({
     showTransmitPoints = false,
     forecastPath = [],
     forecastEnsemble = [],
+    divergence = null,
     forecastEllipses = [],
     hindcastPath = [],
     staleLine = null,
@@ -637,6 +641,24 @@ export default function V2MissionMap({
         };
     }, [forecastEnsemble]);
 
+    /* Predictability-horizon marker: a dot + label where the forecast was cut
+     * because the ensemble spread crossed the threshold. Longitude is folded to
+     * [-180,180] (a single point, unlike the unwrapped lines). */
+    const divergenceGeoJSON = useMemo(() => {
+        if (!divergence) return null;
+        const [rawLon, lat] = divergence.lonlat;
+        if (!isRenderablePoint(lat, rawLon)) return null;
+        const lon = ((rawLon + 180) % 360 + 360) % 360 - 180;
+        return {
+            type: 'FeatureCollection' as const,
+            features: [{
+                type: 'Feature' as const,
+                geometry: { type: 'Point' as const, coordinates: [lon, lat] },
+                properties: { text: 'forecast ends' },
+            }],
+        };
+    }, [divergence]);
+
     /* Confidence cones — 50% and 90% ellipse polygons per forecast slice.
      * A polygon needs ≥3 points and a closed ring; Mapbox closes it for us. */
     const ellipsePolys = useMemo(() => {
@@ -1010,6 +1032,46 @@ export default function V2MissionMap({
                                             8, 1.8,
                                             14, 2.6,
                                         ],
+                                    }}
+                                />
+                            </Source>
+                        )}
+
+                        {/* Predictability horizon — where the forecast was cut
+                          * because the ensemble diverged past the threshold. An
+                          * amber ring + label marks the end of the drawn path. */}
+                        {divergenceGeoJSON && (
+                            <Source id="v2-forecast-horizon" type="geojson" data={divergenceGeoJSON}>
+                                <Layer
+                                    id="v2-forecast-horizon-dot"
+                                    type="circle"
+                                    paint={{
+                                        'circle-color': 'rgba(0,0,0,0)',
+                                        'circle-radius': 5,
+                                        'circle-stroke-width': 2,
+                                        'circle-stroke-color': C.forecast,
+                                    }}
+                                />
+                                <Layer
+                                    id="v2-forecast-horizon-label"
+                                    type="symbol"
+                                    layout={{
+                                        'text-field': ['get', 'text'],
+                                        'text-font': ['DIN Pro Medium', 'Arial Unicode MS Regular'],
+                                        'text-size': 11,
+                                        'text-transform': 'uppercase',
+                                        'text-letter-spacing': 0.06,
+                                        'text-offset': [0, 1.1],
+                                        'text-anchor': 'top',
+                                        'text-padding': 6,
+                                        'text-allow-overlap': false,
+                                        'text-optional': true,
+                                    }}
+                                    paint={{
+                                        'text-color': C.forecast,
+                                        'text-halo-color': labelHalo,
+                                        'text-halo-width': 1.4,
+                                        'text-halo-blur': 0.4,
                                     }}
                                 />
                             </Source>
