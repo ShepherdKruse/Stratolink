@@ -841,6 +841,7 @@ function MapColumn({
                 forecastPath={forecast.path}
                 forecastEnsemble={forecast.ensemble}
                 forecastEllipses={forecast.ellipses}
+                divergence={forecast.divergence}
                 colorScheme={colorScheme}
                 liftPx={isMobile ? 170 : 0}
                 wideZoom={isMobile ? 1.25 : 2.5}
@@ -1070,16 +1071,20 @@ function Timeline({ visibleRows, scrubT, onScrub, onScrubbingChange, futureEndT,
     const handleColor = cursorInFuture ? 'var(--sl-forecast)' : 'var(--sl-ok)';
     const labelLeft = Math.max(7, Math.min(93, fraction));
 
-    /* Offset of the cursor from the real "now" (live), e.g. "+18hr" / "−5hr".
-     * The default load point (last packet) reads as how stale it is, e.g.
-     * "−2hr". Within a couple minutes of now it just says "live". */
+    /* Offset of the cursor from the real "now" (live): minutes within the hour,
+     * hours up to 3 days, then days (e.g. "−10.4d") so a long dead-reckon doesn't
+     * read as an unwieldy "−249hr". Within a couple minutes of now it says "live". */
     const relMs = cursorT - liveT;
     const relHr = relMs / 3_600_000;
+    const relSign = relHr >= 0 ? '+' : '−';
+    const relAbsHr = Math.abs(relHr);
     const relLabel = Math.abs(relMs) < 120_000
         ? 'live'
-        : Math.abs(relHr) < 1
-            ? `${relHr >= 0 ? '+' : '−'}${Math.max(1, Math.round(Math.abs(relHr) * 60))}m`
-            : `${relHr >= 0 ? '+' : '−'}${Math.round(Math.abs(relHr))}hr`;
+        : relAbsHr < 1
+            ? `${relSign}${Math.max(1, Math.round(relAbsHr * 60))}m`
+            : relAbsHr < 72
+                ? `${relSign}${Math.round(relAbsHr)}hr`
+                : `${relSign}${(relAbsHr / 24).toFixed(1)}d`;
     const cursorIsLive = Math.abs(relMs) < 120_000;
 
     /* Scrubbing (mouse + touch) is incremental — it integrates pointer motion

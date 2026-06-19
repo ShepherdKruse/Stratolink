@@ -32,8 +32,18 @@ const CFG = {
      * ellipse is meaningless AND unrenderable — a >½-globe ring smears across the
      * antimeridian. Past it we drop the zone and let the member spaghetti carry the
      * uncertainty. ~continental scale; a normal cone (tens–hundreds of km) is well
-     * under it. */
-    MAX_ELLIPSE_SEMI_KM: 3000,
+     * under it. Now that the divergence horizon truncates before the cloud goes
+     * globe-scale, this is mostly a backstop against a few outliers inflating the
+     * (non-robust) covariance — keep it above the divergence-bounded ellipse
+     * (~2× the spread cap) but below a globe-scale ring. */
+    MAX_ELLIPSE_SEMI_KM: 5000,
+    /* Dynamic predictability horizon: terminate the forecast at the first hour
+     * where the ensemble's outlier-robust spread — the 75th-percentile member
+     * distance from the median position ("75% of members within X km") — exceeds
+     * this. Robust so a couple of branching members don't collapse the horizon
+     * early. Past it the cloud is too wide to be a useful forecast, so we stop the
+     * line there and flag it. Tunable; ~10 days for a fast jet at this value. */
+    DIVERGENCE_CAP_KM: 2000,
 };
 
 const round4 = (x: number) => Math.round(x * 1e4) / 1e4;
@@ -268,6 +278,59 @@ function memberPathFromTube(
     return out;
 }
 
+const median = (xs: number[]): number => {
+    const s = [...xs].sort((a, b) => a - b);
+    const m = s.length >> 1;
+    return s.length % 2 ? s[m] : (s[m - 1] + s[m]) / 2;
+};
+
+/** Component-wise median position of an ensemble — an outlier-robust "center".
+ *  Longitudes are the members' CONTINUOUS (unwrapped) values, so this is correct
+ *  across the antimeridian. */
+function medianPosition(positions: Array<[number, number]>): [number, number] {
+    return [median(positions.map((p) => p[0])), median(positions.map((p) => p[1]))];
+}
+
+/** Each member's distance (km) from `center`, equirectangular. */
+function distancesKm(positions: Array<[number, number]>, center: [number, number]): number[] {
+    const cosLat = Math.cos((center[1] * Math.PI) / 180);
+    return positions.map(([lon, lat]) =>
+        Math.hypot((lon - center[0]) * 111.32 * cosLat, (lat - center[1]) * 111.32));
+}
+
+/** Outlier-robust ensemble spread (km): the 75th-percentile member distance from
+ *  the MEDIAN position — "75% of the ensemble is within X km of the consensus".
+ *  Unlike RMS/std-dev this ignores the worst quartile, so a couple of members
+ *  branching onto a divergent flow don't prematurely collapse the horizon. */
+function ensembleSpreadKm(positions: Array<[number, number]>): number {
+    if (positions.length < 2) return 0;
+    const d = distancesKm(positions, medianPosition(positions)).sort((a, b) => a - b);
+    return d[Math.floor(0.75 * (d.length - 1))];
+}
+
+/** The inner `frac` of members — the closest to the median position. Used to fit
+ *  the confidence ellipse robustly (so a few outliers don't inflate the cone). */
+function innerMembers(positions: Array<[number, number]>, frac: number): Array<[number, number]> {
+    if (positions.length < 4) return positions;
+    const center = medianPosition(positions);
+    const d = distancesKm(positions, center);
+    const order = positions.map((_, i) => i).sort((a, b) => d[a] - d[b]);
+    const keep = Math.max(3, Math.ceil(frac * positions.length));
+    return order.slice(0, keep).map((i) => positions[i]);
+}
+
+/** First hour at which the ensemble's (robust) spread exceeds `capKm`, or -1 if it
+ *  never does within the modeled length. The members start coincident at the last
+ *  fix and fan out; this is the predictability horizon. */
+function divergenceHorizon(ensemble: Array<Array<[number, number]>>, len: number, capKm: number): number {
+    if (ensemble.length < 2) return -1;
+    for (let t = 1; t < len; t++) {
+        const pts = ensemble.map((e) => e[Math.min(t, e.length - 1)]);
+        if (ensembleSpreadKm(pts) > capKm) return t;
+    }
+    return -1;
+}
+
 /* Hindcast cache freshness: the trailing gap's analysis winds can still settle
  * for a few hours, so allow a bounded in-place refresh while the last fix is
  * young; once it's older the cached reconstruction is final and reused forever
@@ -450,22 +513,63 @@ export async function computeMonteCarloForecast(input: MonteCarloForecastInput):
         nominal = integrateBalloonPathT(startLat, startLon, fcCube, bias, ZERO_PERT, startMs, spanHours);
     }
 
+    /* Main line = the ensemble MEDIAN trajectory (the consensus of the bulk), not
+     * the control member: the control can wander far from the bulk when the
+     * ensemble spreads (here it strayed ~2800 km / 25° of latitude). The
+     * component-wise median is itself outlier-robust, and because the ellipse is
+     * pinned to the nominal endpoint, using the median also centers the cone on the
+     * bulk instead of on a strayed line. First point stays the last fix (members
+     * are coincident there). */
+    if (ensemble.length >= 2) {
+        const len = Math.min(...ensemble.map((e) => e.length));
+        const medianPath: Array<[number, number]> = [];
+        for (let t = 0; t < len; t++) {
+            const [mLon, mLat] = medianPosition(ensemble.map((e) => e[t]));
+            medianPath.push([round4(mLon), round4(mLat)]);
+        }
+        nominal = medianPath;
+    }
+
+    /* Dynamic predictability horizon: stop the forecast at the first hour the
+     * ensemble's RMS spread exceeds the cap — past that the cloud is too wide to be
+     * a useful forecast. Truncate the nominal + every member there. Works on
+     * whatever the cubes cover, independent of the ingest time cap, so the drawn
+     * length is set by predictability, not a fixed number of days. */
+    const divIdx = divergenceHorizon(ensemble, nominal.length, CFG.DIVERGENCE_CAP_KM);
+    const divergenceLimited = divIdx > 0;
+    if (divergenceLimited) {
+        nominal = nominal.slice(0, divIdx + 1);
+        for (let i = 0; i < ensemble.length; i++) ensemble[i] = ensemble[i].slice(0, divIdx + 1);
+    }
+
     /** Hourly index of "now" within each trajectory (= elapsed gap hours); 0 when
      *  GPS is fresh (integration starts at "now"). */
-    const nowIdx = stale ? Math.min(Math.round(gapH), nominal.length - 1) : 0;
+    const modeledHours = nominal.length - 1;
+    const nowIdx = stale ? Math.min(Math.round(gapH), modeledHours) : 0;
     const originPt = nominal[nowIdx] ?? [startLon, startLat];
     const nowISO = new Date(nowMs).toISOString();
 
-    /* Coverage-limited: the dead-reckon ran out of wind-cube coverage before it
-     * reached "now" (the trajectory truncated — see integrateBalloonPathT). The
-     * balloon's current position is then genuinely unknown; the origin is the LAST
-     * MODELED point (at fix + modeledHours), not "now", and there's no confident
-     * forward forecast. Flagged so the UI can say "modeled to +Xh, then unknown"
-     * instead of implying we know where it is. */
-    const modeledHours = nominal.length - 1;
-    const coverageLimited = stale && modeledHours < Math.round(gapH) - 1;
-    const originMs = coverageLimited ? fixTimeMs + modeledHours * 3_600_000 : nowMs;
+    /* The forecast stops short of "now" when the modeled path doesn't span the gap —
+     * either the cubes ran out (coverage) or the ensemble diverged past the cap
+     * (divergence). Either way the present position is unknown; the origin is the
+     * LAST MODELED point, not "now". coverageLimited stays specific to "cubes ran
+     * out" so the UI can word each case correctly. */
+    const reachedNow = !stale || modeledHours >= Math.round(gapH) - 1;
+    const coverageLimited = stale && !reachedNow && !divergenceLimited;
+    const originMs = reachedNow ? nowMs : fixTimeMs + modeledHours * 3_600_000;
     const originISO = new Date(originMs).toISOString();
+
+    /* Where the forecast terminates because the spread blew past the cap — the UI
+     * anchors a "forecast ends — paths diverge" notice here. */
+    const divergence = divergenceLimited
+        ? {
+              limited: true as const,
+              lonlat: [round4(nominal[modeledHours][0]), round4(nominal[modeledHours][1])] as [number, number],
+              time_utc: new Date(startMs + modeledHours * 3_600_000).toISOString(),
+              spread_km: round1(ensembleSpreadKm(ensemble.map((e) => e[modeledHours]))),
+              threshold_km: CFG.DIVERGENCE_CAP_KM,
+          }
+        : undefined;
 
     /* Predicted-hindcast curve = the fix→now portion of the (single, continuous)
      * nominal path. Drawn instead of a straight last-fix→now connector. The
@@ -491,16 +595,19 @@ export async function computeMonteCarloForecast(input: MonteCarloForecastInput):
     const idx = nominal.length - 1;
     const endPositions = ensemble.map((traj) => traj[Math.min(idx, traj.length - 1)]);
     const endCenter = nominal[Math.min(idx, nominal.length - 1)];
-    const e90 = recenterEllipse(computeEllipse(endPositions, 0.9), endCenter);
-    /* Drop the zone when the ensemble is too dispersed for a Gaussian ellipse to
-     * mean anything (a >½-globe ring that also smears across the antimeridian);
-     * the member spaghetti conveys the spread instead. */
+    /* Fit the cone to the INNER 75% of members (closest to the consensus) so a few
+     * outlier branches don't inflate it — matching the robust horizon metric. */
+    const endRobust = innerMembers(endPositions, 0.75);
+    const e90 = recenterEllipse(computeEllipse(endRobust, 0.9), endCenter);
+    /* Drop the zone when even the robust core is too dispersed for a Gaussian
+     * ellipse to mean anything (a >½-globe ring that smears across the
+     * antimeridian); the member spaghetti conveys the spread instead. */
     const ellipses = e90.semi_a_km > CFG.MAX_ELLIPSE_SEMI_KM
         ? []
         : [
             {
                 t_hours: idx - nowIdx,
-                e50: recenterEllipse(computeEllipse(endPositions, 0.5), endCenter),
+                e50: recenterEllipse(computeEllipse(endRobust, 0.5), endCenter),
                 e90,
                 mean: [round4(endCenter[0]), round4(endCenter[1])] as [number, number],
             },
@@ -551,6 +658,7 @@ export async function computeMonteCarloForecast(input: MonteCarloForecastInput):
               }
             : undefined,
         predicted_hindcast: predictedHindcast,
+        divergence,
         /* Forecast leg only (now → horizon). The client maps nominal_path onto
          * [origin, origin+horizon] and draws the predicted-hindcast (fix → now)
          * as its own leg — so nominal_path must NOT include the hindcast portion

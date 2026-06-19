@@ -56,6 +56,10 @@ export interface UseForecastPathResult {
      *  present position, which is unknown. The UI should present "position
      *  uncertain since {originT}" rather than a confident current location. */
     coverageLimited: boolean;
+    /** Set when the forecast was cut short at the predictability horizon (ensemble
+     *  RMS spread crossed the threshold). The drawn path ends at `lonlat`; the map
+     *  anchors a "forecast ends — paths diverge" notice there. Null otherwise. */
+    divergence: { lonlat: [number, number]; spreadKm: number; thresholdKm: number } | null;
     /** Epoch ms of the forecast origin (path[0]'s time). Null if unknown. */
     originT: number | null;
     /** Epoch ms of the forecast horizon end (path's last point). */
@@ -76,7 +80,8 @@ const MAX_FAST_POLLS = 15; /* ~2 min, then settle to POLL_MS */
 
 const EMPTY: Omit<UseForecastPathResult, 'loading'> = {
     path: [], ensemble: [], ellipses: [], hindcastPath: [], hindcastTrack: [],
-    predictedHindcast: [], staleGps: false, coverageLimited: false, originT: null, endT: null, generatedAt: null,
+    predictedHindcast: [], staleGps: false, coverageLimited: false, divergence: null,
+    originT: null, endT: null, generatedAt: null,
 };
 
 /** Keep only well-formed [lon, lat] pairs. Latitude is range-checked (out-of-
@@ -112,6 +117,22 @@ function cleanTrack(raw: unknown): HindcastTrackPoint[] {
         }
     }
     return out;
+}
+
+/** Parse the forecast's `divergence` block (predictability-horizon termination),
+ *  or null if absent/malformed. Longitude is kept as-is (may be unwrapped). */
+function parseDivergence(raw: unknown): UseForecastPathResult['divergence'] {
+    if (!raw || typeof raw !== 'object') return null;
+    const d = raw as { lonlat?: unknown; spread_km?: unknown; threshold_km?: unknown };
+    const ll = d.lonlat;
+    if (!Array.isArray(ll) || ll.length !== 2) return null;
+    const [lon, lat] = ll;
+    if (typeof lon !== 'number' || typeof lat !== 'number' || !Number.isFinite(lon) || Math.abs(lat) > 90) return null;
+    return {
+        lonlat: [lon, lat],
+        spreadKm: typeof d.spread_km === 'number' ? d.spread_km : 0,
+        thresholdKm: typeof d.threshold_km === 'number' ? d.threshold_km : 0,
+    };
 }
 
 export function useForecastPath(deviceId: string | null): UseForecastPathResult {
@@ -179,6 +200,7 @@ export function useForecastPath(deviceId: string | null): UseForecastPathResult 
                     predictedHindcast: cleanPath(data?.predicted_hindcast?.path),
                     staleGps: Boolean(data?.stale_gps),
                     coverageLimited: Boolean(data?.stale_gps?.coverage_limited),
+                    divergence: parseDivergence(data?.divergence),
                     originT,
                     endT,
                     generatedAt: typeof data?.generated_at === 'string' ? data.generated_at : null,
