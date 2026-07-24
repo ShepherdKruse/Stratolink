@@ -11,12 +11,21 @@ static uint32_t seen_key(uint16_t src, uint8_t msg_id) {
  * msg_id that wrapped during a multi-day separation cannot collide with a
  * stale key and silently drop a fresh frame.  The unsigned subtraction is
  * wrap-safe for any now_min epoch. */
-static bool seen_has(const b2b_t* b, uint32_t key, uint16_t now_min) {
+static bool seen_has(b2b_t* b, uint32_t key, uint16_t now_min) {
     for (int i = 0; i < B2B_SEEN_N; i++) {
         if (b->seen[i] != key) continue;
         if ((uint16_t)(now_min - b->seen_min[i]) <= B2B_SEEN_TTL_MIN) return true;
+        b->seen[i] = 0;    /* stale: clear so the slot cannot resurrect as
+                            * fresh when the 16-bit minute clock wraps */
     }
     return false;
+}
+
+/* Invalidate a seen entry (used when a refunded frame must be dropped: the
+ * neighbour's re-beacon must genuinely retry, not DUP out). */
+static void seen_remove(b2b_t* b, uint32_t key) {
+    for (int i = 0; i < B2B_SEEN_N; i++)
+        if (b->seen[i] == key) b->seen[i] = 0;
 }
 
 static void seen_add(b2b_t* b, uint32_t key, uint16_t now_min) {
@@ -83,6 +92,18 @@ static bool shape_ok(const b2b_frame_t* f) {
     }
 }
 
+/* A frame already sitting in the forward queue must not be enqueued again
+ * (its seen entry can be evicted or age out while it waits on a starved
+ * budget, and its re-beacon would then double-book queue slots and airtime). */
+static bool queued_already(const b2b_t* b, uint16_t src, uint8_t msg_id) {
+    uint8_t idx = b->fwd_head;
+    for (uint8_t i = 0; i < b->fwd_count; i++) {
+        if (b->fwd[idx].src == src && b->fwd[idx].msg_id == msg_id) return true;
+        idx = (uint8_t)((idx + 1) % B2B_FWD_N);
+    }
+    return false;
+}
+
 /* Target of a COMMAND/ACK (first two payload bytes, doc 08). */
 static uint16_t frame_target(const b2b_frame_t* f) {
     return (uint16_t)((f->payload[0] << 8) | f->payload[1]);
@@ -104,7 +125,7 @@ b2b_result_t b2b_ingest(b2b_t* b, const b2b_frame_t* f, uint16_t now_min) {
     }
 
     uint32_t key = seen_key(f->src, f->msg_id);
-    if (seen_has(b, key, now_min)) {
+    if (seen_has(b, key, now_min) || queued_already(b, f->src, f->msg_id)) {
         b->stats.dup++;
         return B2B_DUP;
     }
@@ -135,12 +156,13 @@ b2b_result_t b2b_ingest(b2b_t* b, const b2b_frame_t* f, uint16_t now_min) {
      * the neighbour's re-beacons, and a consumed-on-refusal frame would be
      * DUP-dropped forever.  The airtime budget is applied later, at the radio
      * hand-off (b2b_next_forward), for the same reason.  A blocked BROADCAST
-     * still takes local effect now (a fleet-wide safe-mode must not wait for
-     * queue space); the possible repeat delivery on retry is harmless because
-     * the doc-08 command layer is seq-idempotent. */
+     * is DELIVERED now via B2B_LOCAL_BLOCKED (a fleet-wide safe-mode must not
+     * wait for queue space; the caller dispatches on any LOCAL* result), and
+     * the repeat delivery a later retry causes is absorbed by the doc-08
+     * seq-idempotent command layer. */
     if (b->fwd_count >= B2B_FWD_N) {
-        if (broadcast) b->stats.local++;
         b->stats.queue_full++;
+        if (broadcast) { b->stats.local++; return B2B_LOCAL_BLOCKED; }
         return B2B_BLOCKED;
     }
 
@@ -158,6 +180,10 @@ b2b_result_t b2b_ingest(b2b_t* b, const b2b_frame_t* f, uint16_t now_min) {
         return B2B_LOCAL_FORWARD;
     }
     return B2B_FORWARD;
+}
+
+const b2b_frame_t* b2b_peek_forward(const b2b_t* b) {
+    return b->fwd_count ? &b->fwd[b->fwd_head] : (const b2b_frame_t*)0;
 }
 
 bool b2b_next_forward(b2b_t* b, b2b_frame_t* out, uint32_t toa_ms) {
@@ -188,21 +214,31 @@ void b2b_refund(b2b_t* b, const b2b_frame_t* f, uint32_t toa_ms) {
         b->fwd[b->fwd_tail] = *f;
         b->fwd_tail = (uint8_t)((b->fwd_tail + 1) % B2B_FWD_N);
         b->fwd_count++;
+    } else {
+        /* Queue refilled between pop and refund: the frame is lost from our
+         * queue, so unmark it seen or the neighbour's re-beacons would DUP
+         * out for up to B2B_SEEN_TTL_MIN instead of repairing the loss. */
+        seen_remove(b, seen_key(f->src, f->msg_id));
     }
 }
 
-void b2b_make(b2b_t* b, b2b_type_t type, const uint8_t* payload, uint8_t len,
+bool b2b_make(b2b_t* b, b2b_type_t type, const uint8_t* payload, uint8_t len,
               b2b_frame_t* out) {
-    if (len > B2B_PAYLOAD_MAX) len = B2B_PAYLOAD_MAX;
     out->src    = b->self_id;
-    out->msg_id = b->next_msg_id++;
+    out->msg_id = b->next_msg_id;        /* burned only on success */
     out->ttl    = B2B_TTL_DEFAULT;
     out->type   = (uint8_t)type;
     out->len    = len;
+    /* A frame our own peers would reject as malformed must never reach the
+     * radio: it would cost every hearer airtime and be diagnosable only via a
+     * REMOTE balloon's malformed counter, the worst possible place. */
+    if (len > B2B_PAYLOAD_MAX || !shape_ok(out)) return false;
     if (len && payload) memcpy(out->payload, payload, len);
+    b->next_msg_id++;
     /* No seen-ring write here: echoes of our own frames are dropped by the
      * src==self guard in b2b_ingest, and seeding would only evict live
      * neighbour dedup keys from the 32-slot ring. */
+    return true;
 }
 
 void b2b_crumb_pack(const b2b_crumb_t* c, uint8_t out[6]) {

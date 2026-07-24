@@ -173,14 +173,72 @@ static void run_tests() {
           budget_mid == 400 && b5.airtime_budget_ms == 500 &&
           b5.fwd_count == 1 && b5.stats.fwd == 0);
 
-    /* 17. seen aging: after B2B_SEEN_TTL_MIN a wrapped msg_id is fresh again */
+    /* 17. seen aging: after B2B_SEEN_TTL_MIN a wrapped msg_id is fresh again
+     * (drain the forward first: a frame still queued must stay DUP, case 20) */
     b2b_t b6; b2b_reset(&b6, SELF); b2b_add_airtime(&b6, 60000);
     b2b_frame_t w = crumb_frame(0x0012, 77, 3);
     b2b_ingest(&b6, &w, now);
+    while (b2b_next_forward(&b6, &out, TOA)) {}
     b2b_result_t dup_soon = b2b_ingest(&b6, &w, now + 10);
     b2b_result_t fresh_later = b2b_ingest(&b6, &w, (uint16_t)(now + B2B_SEEN_TTL_MIN + 1));
     check("seen ages out (msg_id wrap safe)",
           dup_soon == B2B_DUP && fresh_later == B2B_FORWARD);
+
+    /* 18. broadcast against a FULL queue: delivered NOW via LOCAL_BLOCKED,
+     * unmarked, so the forward leg retries after the queue drains */
+    b2b_t b7; b2b_reset(&b7, SELF); b2b_add_airtime(&b7, 60000);
+    for (uint8_t i = 0; i < B2B_FWD_N; i++) {
+        b2b_frame_t fill = crumb_frame(0x0040, i, 3);
+        b2b_ingest(&b7, &fill, now);
+    }
+    b2b_frame_t bc2 = command_frame(0x0007, 30, B2B_ID_BROADCAST);
+    r = b2b_ingest(&b7, &bc2, now);
+    uint32_t local_after = b7.stats.local;
+    while (b2b_next_forward(&b7, &out, TOA)) {}   /* drain */
+    b2b_result_t bc_retry = b2b_ingest(&b7, &bc2, now);
+    check("blocked broadcast -> LOCAL_BLOCKED now, forwarded on retry",
+          r == B2B_LOCAL_BLOCKED && local_after == 1 &&
+          bc_retry == B2B_LOCAL_FORWARD);
+
+    /* 19. refund into a refilled queue: the dropped frame is unmarked seen,
+     * so the neighbour's re-beacon genuinely repairs the loss */
+    b2b_t b8; b2b_reset(&b8, SELF); b2b_add_airtime(&b8, 60000);
+    b2b_frame_t x = crumb_frame(0x0050, 1, 3);
+    b2b_ingest(&b8, &x, now);
+    b2b_next_forward(&b8, &out, TOA);             /* pop x for TX */
+    for (uint8_t i = 0; i < B2B_FWD_N; i++) {     /* queue refills meanwhile */
+        b2b_frame_t fill = crumb_frame(0x0051, i, 3);
+        b2b_ingest(&b8, &fill, now);
+    }
+    b2b_refund(&b8, &out, TOA);                   /* TX failed; queue full */
+    check("refund-drop unmarks seen (re-beacon repairs)",
+          b2b_ingest(&b8, &x, now) == B2B_BLOCKED);  /* not DUP: retryable */
+
+    /* 20. a frame still in the queue stays DUP even if its seen entry aged */
+    b2b_t b9; b2b_reset(&b9, SELF);               /* zero credit: queue holds */
+    b2b_frame_t q = crumb_frame(0x0060, 1, 3);
+    b2b_ingest(&b9, &q, now);
+    check("queued frame stays DUP past seen aging",
+          b2b_ingest(&b9, &q, (uint16_t)(now + B2B_SEEN_TTL_MIN + 50)) == B2B_DUP);
+
+    /* 21. b2b_make refuses shapes our own peers would reject */
+    b2b_t b10; b2b_reset(&b10, SELF);
+    b2b_frame_t bad;
+    uint8_t five[5] = {0};
+    check("b2b_make rejects malformed shapes",
+          !b2b_make(&b10, B2B_TYPE_CRUMB, five, 5, &bad) &&
+          !b2b_make(&b10, B2B_TYPE_CRUMB, 0, 0, &bad) &&
+          b10.next_msg_id == 0);
+
+    /* 22. peek matches the frame next_forward then pops */
+    b2b_t b11; b2b_reset(&b11, SELF); b2b_add_airtime(&b11, 1000);
+    b2b_frame_t pk = crumb_frame(0x0070, 3, 3);
+    b2b_ingest(&b11, &pk, now);
+    const b2b_frame_t* head = b2b_peek_forward(&b11);
+    got = b2b_next_forward(&b11, &out, TOA);
+    check("peek then pop agree",
+          head && head->src == 0x0070 && got && out.src == 0x0070 &&
+          b2b_peek_forward(&b11) == 0);
 
     Serial.print("=== b2b self-test: ");
     Serial.print(g_pass); Serial.print(" passed, ");

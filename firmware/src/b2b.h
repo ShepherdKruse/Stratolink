@@ -75,6 +75,11 @@ typedef enum {
     B2B_MALFORMED     = 5,  /* inconsistent header/len/type; dropped */
     B2B_OWN           = 6,  /* our own frame echoed back; healthy, dropped */
     B2B_BLOCKED       = 7,  /* no queue space; NOT marked seen, retryable */
+    B2B_LOCAL_BLOCKED = 8,  /* broadcast: delivered locally NOW, but not queued
+                             * (queue full) and not marked seen, so the forward
+                             * leg retries on the neighbour's next re-beacon.
+                             * The repeat local delivery that retry causes is
+                             * absorbed by the seq-idempotent command layer. */
 } b2b_result_t;
 
 /* 6-byte packed position crumb: lat/lon at 0.01 deg (~1.1 km), alt in 100 m
@@ -123,9 +128,10 @@ typedef struct {
 
 void b2b_reset(b2b_t* b, uint16_t self_id);
 
-/* Grant airtime credit for the forwarder (call once per pass with the slice
- * you are willing to spend, e.g. 5% of the window).  Banked credit is capped
- * at B2B_AIRTIME_CAP_MS. */
+/* Grant airtime credit for the forwarder, once per pass.  Intended grant is
+ * <= 3000 ms per pass (roughly ten SF9 crumb frames); banked credit is capped
+ * at B2B_AIRTIME_CAP_MS, i.e. two such grants, so a quiet leg cannot bank a
+ * TX burst.  Grants above the cap are clamped, not an error. */
 void b2b_add_airtime(b2b_t* b, uint32_t credit_ms);
 
 /* Serialize/parse the wire frame.  b2b_encode returns total bytes written
@@ -139,6 +145,11 @@ bool b2b_parse(const uint8_t* buf, int n, b2b_frame_t* out);
  * B2B_BLOCKED and are NOT marked seen, so a later re-beacon retries them. */
 b2b_result_t b2b_ingest(b2b_t* b, const b2b_frame_t* f, uint16_t now_min);
 
+/* Peek at the frame b2b_next_forward would pop, so the caller can compute its
+ * REAL time-on-air before charging (frame ToA varies ~3x with length).
+ * Returns NULL when the queue is empty. */
+const b2b_frame_t* b2b_peek_forward(const b2b_t* b);
+
 /* Pop the next frame to re-emit if the airtime budget covers toa_ms; charges
  * the budget on success.  Returns false when the queue is empty or the budget
  * refuses (stats.airtime_block; frames stay queued for a later pass). */
@@ -148,10 +159,12 @@ bool b2b_next_forward(b2b_t* b, b2b_frame_t* out, uint32_t toa_ms);
  * charge and re-queues the frame (dropped only if the queue refilled). */
 void b2b_refund(b2b_t* b, const b2b_frame_t* f, uint32_t toa_ms);
 
-/* Build one of our own frames to originate (crumbs or a command).  Loop
- * protection for echoes is the src==self guard in b2b_ingest; nothing is
- * written to the seen ring here. */
-void b2b_make(b2b_t* b, b2b_type_t type, const uint8_t* payload, uint8_t len,
+/* Build one of our own frames to originate (crumbs or a command).  Validates
+ * the payload with the same shape rules ingest applies, so a frame our own
+ * peers would reject as malformed is never handed to the radio; returns false
+ * (and burns no msg_id) on a shape violation.  Loop protection for echoes is
+ * the src==self guard in b2b_ingest; nothing is written to the seen ring. */
+bool b2b_make(b2b_t* b, b2b_type_t type, const uint8_t* payload, uint8_t len,
               b2b_frame_t* out);
 
 /* Crumb pack/unpack (6 bytes each). */
