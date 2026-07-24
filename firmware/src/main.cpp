@@ -16,6 +16,7 @@
 #include "power_adc.h"
 #include "gps_ublox.h"
 #include "lorawan.h"
+#include "command.h"
 #include "power_manager.h"
 #include "sensors.h"
 #include "sensor_tmp117.h"
@@ -44,6 +45,12 @@ static bool burst_mode = false;
 static uint16_t burst_cycles = 0;    /* cycles spent in the current burst (runaway cap) */
 static uint8_t burst_cooldown = 0;   /* normal cycles to ignore freefall re-trigger after a capped burst */
 static uint8_t tx_fail_streak = 0;  /* consecutive TX failures; 5 → reset */
+static bool region_known = false;   /* true once TAMP restore or a GPS fix has picked the
+                                     * regulatory region; until then ALL join TX is held
+                                     * (a cold-boot US915 default join would be out-of-band
+                                     * anywhere outside the Americas) */
+static uint8_t spurious_ff_streak = 0; /* consecutive INT1 wakes that read ~1g on arrival */
+static uint8_t ff_suppress_clean = 0;  /* scheduled wakes seen while the wake path is latched off */
 
 /* Reset-cause snapshot. RAM-only diagnostic; read via J-Link.
  * Captured before RMVF clear so each new boot writes the precise cause. */
@@ -78,12 +85,17 @@ void setup() {
     {
         lorawan_session_t s;
         if (power_manager_load_session(&s) && lorawan_import_session(&s)) {
+            region_known = true;
             LOG("LoRaWAN session restored from TAMP");
-        } else if (!lorawan_join(60000)) {
-            LOG("LoRaWAN join failed");
         } else {
-            lorawan_session_t out; lorawan_export_session(&out);
-            power_manager_save_session(&out);
+            /* True cold boot (TAMP lost = deep brownout or first power-on):
+             * the regulatory region is UNKNOWN and the boot default (US915)
+             * would be out-of-band anywhere outside the Americas.  Standard
+             * practice for globally-roaming trackers is GNSS-first: stay
+             * RF-quiet until the first fix picks the region, then loop()
+             * joins on the right band.  Worst case (wedged GPS) is bounded
+             * by the PA0 reset ladder, not by transmitting blind. */
+            LOG("cold boot: RF quiet until first GPS fix picks the region");
         }
     }
 
@@ -111,6 +123,33 @@ void loop() {
      * so a persistently stuck/chattering INT1 never re-arms burst (one capped
      * window total).  Always consume the wake flag so it can't accumulate. */
     bool freefall_wake = power_manager_did_wake_from_freefall();
+
+    /* Chatter guard: a REAL freefall wake still reads low-g when we get here
+     * (the INT needs 30 ms sustained < 0.35 g and wake latency is ~ms); a
+     * bump/EMI/stuck-pin wake reads ~1 g again.  Three consecutive spurious
+     * wakes latch the INT1 sleep-abort OFF (power_manager suppression), so a
+     * chattering pin can't collapse the TX cadence, it costs at most 3 early
+     * cycles per 16 clean ones (~+19% airtime worst-case, FUP-safe) instead
+     * of an unbounded every-wake collapse.  Flight-3 data: all real in-flight
+     * trips were single self-clearing events, so a healthy sensor never
+     * accumulates a streak. */
+    if (freefall_wake && sensor_lis2dh12_is_freefall_cleared()) {
+        freefall_wake = false;                        /* spurious: no burst entry */
+        if (spurious_ff_streak < 255) spurious_ff_streak++;
+        if (spurious_ff_streak >= 3) {
+            power_manager_suppress_freefall_wake(true);
+            ff_suppress_clean = 0;
+        }
+    } else if (freefall_wake) {
+        spurious_ff_streak = 0;                       /* genuine freefall */
+    } else if (spurious_ff_streak >= 3) {
+        if (++ff_suppress_clean >= 16) {              /* probation served: re-arm */
+            spurious_ff_streak = 0;
+            power_manager_suppress_freefall_wake(false);
+        }
+    } else {
+        spurious_ff_streak = 0;                       /* clean cycle clears a sub-latch streak */
+    }
     if (burst_cooldown > 0) {
         burst_cooldown = freefall_wake ? BURST_COOLDOWN_CYCLES : (uint8_t)(burst_cooldown - 1);
     } else if (freefall_wake && !burst_mode) {
@@ -146,8 +185,19 @@ void loop() {
      * session and the re-join logic below picks it up before the next
      * TX.  No-op if region unchanged. */
     if (last_gps_fix.valid) {
+        region_known = true;               /* a real fix picked the region */
+        lora_region_id_t region_before = lorawan_current_region();
         lorawan_set_region(region_for_latlon(last_gps_fix.lat_e7,
                                              last_gps_fix.lon_e7));
+        if (lorawan_current_region() != region_before) {
+            /* lorawan_set_region() invalidates the session in RAM only;
+             * the old-band session still lives in TAMP.  A reset between
+             * this transition and the next successful join would restore
+             * it and resume data TX on the OLD region's frequencies,
+             * out-of-band for wherever we now are.  Clear the persisted
+             * copy so a reset re-joins region-gated instead. */
+            power_manager_clear_session();
+        }
     }
 
     /* IWDG max timeout is 32.7 s.  GPS fix can block up to 30 s, TX +
@@ -171,7 +221,7 @@ void loop() {
      * briefly out of range, post-brown-out recovery, etc.) try again
      * before TX.  Short timeout, if it doesn't take here it'll retry on
      * the next wake.  IWDG (32.7 s) bounds this. */
-    if (!lorawan_joined() && power_adc_can_tx()) {
+    if (!lorawan_joined() && region_known && power_adc_can_tx()) {
         if (lorawan_join(15000)) {
             /* New region → new session.  Persist it so a reset (TX
              * fail, brown-out, freefall) doesn't force another join. */
@@ -198,6 +248,19 @@ void loop() {
             lorawan_session_t out; lorawan_export_session(&out);
             power_manager_save_session(&out);
             LOG("TX OK");
+#if defined(CMD_ENABLE) && CMD_ENABLE
+            /* Class-A: on a healthy rail (FULL/REDUCED only), listen the RX1/RX2 windows
+             * after this uplink and dispatch a queued command. Re-persist the session so
+             * the updated downlink counter survives a reset (replay protection). */
+            if (tier <= POWER_TIER_REDUCED) {
+                lorawan_downlink_t dl;
+                if (lorawan_receive_downlink(&dl)) {
+                    command_handle(&dl);
+                    lorawan_session_t dlo; lorawan_export_session(&dlo);
+                    power_manager_save_session(&dlo);
+                }
+            }
+#endif
         } else {
             /* TX failed but we believed we were joined.  Most likely the
              * SX1262 latched into a fault state, we observed this once
@@ -234,6 +297,19 @@ void loop() {
      * tracking at ~25 mA (drains the 1F cap in ~2 min). */
     gps_ublox_sleep();
 
+#if defined(CTT_LISTEN_ENABLE) && CTT_LISTEN_ENABLE
+    /* Bird/bat tag listening rides the same surplus gate as the relay and
+     * takes its slice first (RX-only, cheaper than relaying).  Self-aborts
+     * on floor/solar/freefall like the relay; time spent counts against the
+     * sleep budget so the uplink cadence is preserved. */
+    if (!burst_mode && power_adc_get_tier() == POWER_TIER_FULL &&
+        power_adc_read_solar_mv() >= RELAY_SOLAR_MIN_MV) {
+        uint32_t ctt_budget = sleep_ms < CTT_LISTEN_MS ? sleep_ms : CTT_LISTEN_MS;
+        uint32_t ctt_used = lorawan_ctt_window(ctt_budget, RELAY_FLOOR_MV);
+        sleep_ms = (ctt_used < sleep_ms) ? (sleep_ms - ctt_used) : 0;
+    }
+#endif
+
 #if defined(MESHTASTIC_RELAY_ENABLE) && MESHTASTIC_RELAY_ENABLE
     /* Open Meshtastic relay in the idle window, ONLY on surplus power, NEVER at
      * the expense of the telemetry mission.  Gate: FULL tier (cap full, fresh
@@ -241,8 +317,9 @@ void loop() {
      * window self-aborts below RELAY_FLOOR_MV and restores the LoRaWAN PHY on
      * exit, so the next TTN cycle is unaffected.  Time spent relaying counts
      * against the sleep budget, preserving the uplink cadence. */
-    if (!burst_mode && power_adc_get_tier() == POWER_TIER_FULL &&
-        ti.solar_mv >= RELAY_SOLAR_MIN_MV) {
+    if (!burst_mode && command_relay_enabled() && power_adc_get_tier() == POWER_TIER_FULL &&
+        power_adc_read_solar_mv() >= RELAY_SOLAR_MIN_MV) {  /* fresh read: ti.solar_mv is
+                                                             * up to ~50 s stale by now */
         uint32_t used = lorawan_relay_window(sleep_ms, RELAY_FLOOR_MV);
         sleep_ms = (used < sleep_ms) ? (sleep_ms - used) : 0;
     }

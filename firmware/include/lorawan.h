@@ -58,7 +58,8 @@ typedef struct {
     uint32_t nwkSKey[4];    /* 16 bytes */
     uint32_t appSKey[4];    /* 16 bytes */
     uint32_t fCntUp;
-} lorawan_session_t;        /* total 13 words = 52 bytes */
+    uint32_t fCntDown;      /* downlink counter, persisted so the replay guard survives reset */
+} lorawan_session_t;        /* total 14 words = 56 bytes */
 
 void lorawan_export_session(lorawan_session_t* out);
 bool lorawan_import_session(const lorawan_session_t* in);
@@ -123,5 +124,62 @@ uint32_t lorawan_relay_window(uint32_t max_ms, uint16_t floor_mv);
 
 /** Copy cumulative relay diagnostics into out. */
 void lorawan_relay_get_stats(lorawan_relay_stats_t* out);
+
+/* ===== CTT wildlife-tag listener (434 MHz FSK, mission-subordinate) ===== */
+
+/** One logged tag detection (aggregated per listen window). */
+typedef struct {
+    uint32_t id_raw;      /* raw 32-bit tag id (rtl_433 convention) */
+    uint32_t id_motus;    /* 20-bit Motus dictionary id (0 if not dictionary-valid) */
+    int16_t  rssi_best;   /* strongest reception this window (dBm) */
+    uint8_t  hits;        /* beeps heard this window (saturating) */
+    uint8_t  motus_valid; /* all 4 id bytes were dictionary members */
+    uint16_t window_idx;  /* which listen window logged it (recency ordering) */
+} ctt_detection_t;
+
+/** Cumulative listener diagnostics (J-Link readable; not yet in telemetry). */
+typedef struct {
+    uint32_t frames_rx;   /* 5-byte frames pulled from the FSK modem */
+    uint32_t crc_fail;    /* frames failing the CRC-8 */
+    uint32_t tags_seen;   /* distinct (per-window) tag detections logged */
+    uint32_t windows;     /* listen windows run */
+    uint32_t last_id;     /* raw id of the most recent good frame */
+    int16_t  last_rssi;   /* RSSI of the most recent good frame */
+} lorawan_ctt_stats_t;
+
+#define CTT_LOG_N 16      /* detection ring size */
+
+/**
+ * Listen for CTT wildlife-tag beacons (434.0 MHz, 2-FSK 25 kbps, +-25 kHz)
+ * on the shared SX1262 for up to max_ms, logging decoded tag ids, then
+ * restore the exact post-init LoRaWAN TX PHY.  RX-only, transmits nothing.
+ * Same subordination contract as the relay window: caller gates entry,
+ * self-aborts below floor_mv, on solar loss, or on a pending freefall.
+ * Returns ms actually spent.
+ */
+uint32_t lorawan_ctt_window(uint32_t max_ms, uint16_t floor_mv);
+
+/** Copy cumulative CTT diagnostics into out. */
+void lorawan_ctt_get_stats(lorawan_ctt_stats_t* out);
+
+/** Copy the detection ring into out[CTT_LOG_N]; returns entries used. */
+uint8_t lorawan_ctt_get_log(ctt_detection_t* out);
+
+/* ===== Class-A downlink (command channel) ===== */
+
+/** A received, decrypted downlink. */
+typedef struct {
+    uint8_t fport;
+    uint8_t len;
+    uint8_t data[64];     /* decrypted FRMPayload */
+} lorawan_downlink_t;
+
+/**
+ * Open the RX1 then RX2 window after the most recent uplink. If a valid downlink for
+ * our DevAddr arrives, verify its MIC + frame counter (replay guard), decrypt it, and
+ * return true with the FPort + plaintext in out. Restores the TX PHY on every exit so
+ * the next uplink is unaffected. Call right after a successful lorawan_send_uplink().
+ */
+bool lorawan_receive_downlink(lorawan_downlink_t* out);
 
 #endif /* LORAWAN_H */

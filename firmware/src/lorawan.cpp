@@ -7,6 +7,7 @@
 #include "config.h"
 #include "power_adc.h"
 #include "power_manager.h"   /* for power_manager_kick_watchdog */
+#include "ctt_decode.h"      /* CTT tag frame decode (pure logic) */
 #include <RadioLib.h>
 
 /* Bench-soak build (env:stratolink_soak sets RELAY_SOLAR_MIN_MV=0) needs SubGhz.cpp
@@ -38,6 +39,9 @@ static uint32_t devAddr = 0;
 static uint8_t nwkSKey[16];
 static uint8_t appSKey[16];
 static uint32_t fCntUp = 0;
+static uint32_t fCntDown = 0;      /* downlink frame counter (replay guard) */
+static uint32_t s_tx_end_ms = 0;   /* millis() at end of the last uplink TX (RX-window timing) */
+static uint8_t  s_tx_ch = 0;       /* channel index the last uplink used (for the RX1 downlink freq) */
 
 /* OTAA credentials from secrets.h, parsed at init */
 static uint8_t devEUI[8];
@@ -355,6 +359,7 @@ static bool otaa_join(void) {
     aes_ecb_encrypt(appKey, keyBlock, appSKey);
 
     fCntUp = 0;
+    fCntDown = 0;
     LOG("[OTAA] Session keys derived");
     return true;
 }
@@ -542,9 +547,11 @@ bool lorawan_send_uplink(const uint8_t* payload, uint8_t payload_len) {
     uint8_t mic[4]; compute_mic(pkt, idx, mic);
     memcpy(&pkt[idx], mic, 4); idx += 4;
 
-    float freq = REGION.tx_freqs[chIdx % REGION.tx_ch_count]; chIdx++;
+    s_tx_ch = (uint8_t)(chIdx % REGION.tx_ch_count);
+    float freq = REGION.tx_freqs[s_tx_ch]; chIdx++;
     radio->setFrequency(freq);
     int16_t state = radio->transmit(pkt, idx);
+    s_tx_end_ms = millis();
     LOGV("[LoRaWAN] uplink: ", state);
     if (state == RADIOLIB_ERR_NONE) { fCntUp++; return true; }
     return false;
@@ -700,6 +707,10 @@ uint32_t lorawan_relay_window(uint32_t max_ms, uint16_t floor_mv) {
             last_hk = now;
             power_manager_kick_watchdog();
             if (power_adc_read_vSTOR_mv() < floor_mv) break; /* floor-abort: protect mission reserve */
+            if (power_manager_freefall_pending()) break;    /* freefall: yield to burst NOW, not at window end */
+            if (power_adc_read_solar_mv() < RELAY_SOLAR_MIN_MV) break; /* sunset/cloud mid-window: the
+                * relay only runs on solar surplus, and a 20 min window can outlive
+                * the daylight that justified opening it */
         }
         delay(2);
     }
@@ -707,6 +718,239 @@ uint32_t lorawan_relay_window(uint32_t max_ms, uint16_t floor_mv) {
     radio->clearPacketReceivedAction();
     relay_restore_lorawan_phy();
     return millis() - start;
+}
+
+/* ===== CTT wildlife-tag listener (RX-only 434 MHz FSK window) =====
+ *
+ * Listens for CTT LifeTag/PowerTag/HybridTag beacons (the Motus network's
+ * 434 MHz tags on birds/bats) in the solar-surplus idle window and logs
+ * decoded tag ids.  RX-only: transmits nothing, registers nowhere.  PHY per
+ * the rtl_433 decoder + CTT's own RadioLib test-tag firmware: 2-FSK 25 kbps,
+ * +-25 kHz deviation, no shaping, sync D3 91, fixed 5-byte payload (4 id
+ * bytes from a 32-symbol dictionary + CRC-8), one ~3 ms beep every 2-15 s.
+ *
+ * Same subordination contract as the relay window: the caller gates entry,
+ * the 1 Hz housekeeping aborts on VSTOR floor, solar loss, or a pending
+ * freefall, and the exact LoRaWAN PHY is restored on every exit.  Note the
+ * board's front end is matched for 868/915; RX at 434 works with reduced
+ * sensitivity, bench-quantified with an SDR-generated test beep. */
+
+static volatile bool s_ctt_rx = false;
+static void ctt_rx_isr(void) { s_ctt_rx = true; }
+static lorawan_ctt_stats_t s_ctt = {0};
+static ctt_detection_t s_ctt_log[CTT_LOG_N];
+static uint8_t s_ctt_log_n = 0;
+
+void lorawan_ctt_get_stats(lorawan_ctt_stats_t* out) { if (out) *out = s_ctt; }
+uint8_t lorawan_ctt_get_log(ctt_detection_t* out) {
+    if (out) memcpy(out, s_ctt_log, sizeof(s_ctt_log));
+    return s_ctt_log_n;
+}
+
+/* Log a decoded frame, aggregating repeat beeps of the same tag within one
+ * window (a LifeTag beeps every ~5 s; a pass would otherwise flood the ring). */
+static void ctt_log_frame(uint32_t id_raw, uint32_t id_motus, uint8_t motus_valid,
+                          int16_t rssi, uint16_t window_idx) {
+    for (uint8_t i = 0; i < s_ctt_log_n; i++) {
+        if (s_ctt_log[i].id_raw == id_raw && s_ctt_log[i].window_idx == window_idx) {
+            if (s_ctt_log[i].hits < 255) s_ctt_log[i].hits++;
+            if (rssi > s_ctt_log[i].rssi_best) s_ctt_log[i].rssi_best = rssi;
+            return;
+        }
+    }
+    uint8_t slot;
+    if (s_ctt_log_n < CTT_LOG_N) {
+        slot = s_ctt_log_n++;
+    } else {
+        slot = (uint8_t)(s_ctt.tags_seen % CTT_LOG_N);  /* ring: overwrite oldest-ish */
+    }
+    s_ctt_log[slot].id_raw      = id_raw;
+    s_ctt_log[slot].id_motus    = id_motus;
+    s_ctt_log[slot].rssi_best   = rssi;
+    s_ctt_log[slot].hits        = 1;
+    s_ctt_log[slot].motus_valid = motus_valid;
+    s_ctt_log[slot].window_idx  = window_idx;
+    s_ctt.tags_seen++;
+}
+
+/* Return the shared radio from FSK to the exact post-init LoRaWAN state.
+ * beginFSK() switched the SX126x packet type, so a full LoRa begin() is
+ * required before the parameter-level restore. */
+static void ctt_restore_lorawan(void) {
+    (void)radio->begin(REGION.init_freq, REGION.tx_bw, 9, 7,
+                       RADIOLIB_SX126X_SYNC_WORD_PUBLIC, 14, 8, 1.7, false);
+    relay_restore_lorawan_phy();
+}
+
+uint32_t lorawan_ctt_window(uint32_t max_ms, uint16_t floor_mv) {
+    if (!radio) return 0;
+    uint32_t start = millis();
+
+    radio->standby();
+    int16_t st = radio->beginFSK((float)CTT_FREQ_MHZ, 25.0, 25.0, 50.0, 0, 16);
+    if (st == RADIOLIB_ERR_NONE) st = radio->setDataShaping(RADIOLIB_SHAPING_NONE);
+    uint8_t ctt_sync[2] = {0xD3, 0x91};
+    if (st == RADIOLIB_ERR_NONE) st = radio->setSyncWord(ctt_sync, 2);
+    if (st == RADIOLIB_ERR_NONE) st = radio->fixedPacketLengthMode(5);
+    if (st == RADIOLIB_ERR_NONE) st = radio->setCRC(0);  /* tag CRC-8 checked in software */
+    if (st != RADIOLIB_ERR_NONE) {
+        ctt_restore_lorawan();
+        return millis() - start;
+    }
+
+    s_ctt.windows++;
+    uint16_t widx = (uint16_t)s_ctt.windows;
+    s_ctt_rx = false;
+    radio->setPacketReceivedAction(ctt_rx_isr);
+    if (radio->startReceive() != RADIOLIB_ERR_NONE) {
+        radio->clearPacketReceivedAction();
+        ctt_restore_lorawan();
+        return millis() - start;
+    }
+
+    uint32_t last_hk = start;
+    while (millis() - start < max_ms) {
+        if (s_ctt_rx) {
+            s_ctt_rx = false;
+            uint8_t buf[5];
+            if (radio->readData(buf, 5) == RADIOLIB_ERR_NONE) {
+                s_ctt.frames_rx++;
+                ctt_frame_t f;
+                if (ctt_decode(buf, &f)) {
+                    int16_t rssi = (int16_t)radio->getRSSI();
+                    s_ctt.last_id   = f.id_raw;
+                    s_ctt.last_rssi = rssi;
+                    ctt_log_frame(f.id_raw, f.id_motus, f.motus_valid ? 1 : 0, rssi, widx);
+                } else {
+                    s_ctt.crc_fail++;
+                }
+            }
+            s_ctt_rx = false;
+            if (radio->startReceive() != RADIOLIB_ERR_NONE) break;  /* re-arm failed: bail, don't busy-loop deaf */
+        }
+        uint32_t now = millis();
+        if (now - last_hk >= 1000) {                    /* housekeeping ~1 Hz */
+            last_hk = now;
+            power_manager_kick_watchdog();
+            if (power_adc_read_vSTOR_mv() < floor_mv) break;
+            if (power_manager_freefall_pending()) break;
+            if (power_adc_read_solar_mv() < RELAY_SOLAR_MIN_MV) break;
+        }
+        delay(2);
+    }
+
+    radio->clearPacketReceivedAction();
+    ctt_restore_lorawan();
+    return millis() - start;
+}
+
+/* ========== Class-A downlink (command channel) ========== */
+
+/* Downlink MIC, identical to compute_mic but with the direction byte = 1. */
+static void compute_mic_down(const uint8_t *msg, size_t msgLen, uint32_t fc, uint8_t *mic) {
+    uint8_t blk0[16] = {0x49,0,0,0,0,0x01};
+    blk0[6]=devAddr&0xFF; blk0[7]=(devAddr>>8)&0xFF;
+    blk0[8]=(devAddr>>16)&0xFF; blk0[9]=(devAddr>>24)&0xFF;
+    blk0[10]=fc&0xFF; blk0[11]=(fc>>8)&0xFF; blk0[12]=(fc>>16)&0xFF; blk0[13]=(fc>>24)&0xFF;
+    blk0[15]=(uint8_t)msgLen;
+    uint8_t buf[96]; memcpy(buf,blk0,16); memcpy(buf+16,msg,msgLen);
+    aes_cmac(nwkSKey, buf, 16+msgLen, mic);
+}
+
+/* One bounded RX window: arm RX, poll for RxDone until deadline_ms, read it. Bounded
+ * so a slow-DR RX1 cannot block past the RX2 window. Caller sets the PHY first. */
+static volatile bool s_dl_rx = false;
+static void dl_rx_isr(void) { s_dl_rx = true; }
+static size_t rx_window(uint8_t* buf, size_t maxlen, uint32_t deadline_ms) {
+    s_dl_rx = false;
+    radio->setPacketReceivedAction(dl_rx_isr);
+    if (radio->startReceive() != RADIOLIB_ERR_NONE) {
+        radio->clearPacketReceivedAction(); radio->standby(); return 0;
+    }
+    while ((int32_t)(millis() - deadline_ms) < 0) {
+        if (s_dl_rx) break;
+        power_manager_kick_watchdog();
+        delay(2);
+    }
+    radio->clearPacketReceivedAction();
+    size_t n = 0;
+    if (s_dl_rx) {
+        n = radio->getPacketLength();
+        if (n > maxlen) n = maxlen;
+        if (radio->readData(buf, n) != RADIOLIB_ERR_NONE) n = 0;
+    }
+    radio->standby();
+    return n;
+}
+
+bool lorawan_receive_downlink(lorawan_downlink_t* out) {
+    if (!radio || !_joined || !out) return false;
+    float rx1f = REGION.rx1_mod
+        ? (REGION.rx1_base + (s_tx_ch % REGION.rx1_mod) * REGION.rx1_step)
+        : REGION.tx_freqs[s_tx_ch % REGION.tx_ch_count];
+
+    uint8_t rx[64]; size_t rxLen = 0;
+    radio->standby();
+    radio->setSyncWord(RADIOLIB_SX126X_SYNC_WORD_PUBLIC);
+    radio->setPreambleLength(8);
+    radio->setCRC(false);            /* LoRaWAN downlinks carry no PHY CRC */
+    radio->invertIQ(true);           /* downlinks use inverted IQ */
+
+    /* RX1 at RECEIVE_DELAY1 (1 s): uplink-channel downlink freq, data DR (SF = tx_sf). */
+    while ((int32_t)(millis() - s_tx_end_ms) < 960) { power_manager_kick_watchdog(); delay(2); }
+    radio->setFrequency(rx1f);
+    radio->setSpreadingFactor(REGION.tx_sf);
+    radio->setBandwidth(REGION.rx1_bw);
+    rxLen = rx_window(rx, sizeof(rx), s_tx_end_ms + 1500);
+
+    /* RX2 at RECEIVE_DELAY2 (2 s): fixed freq/DR from the region table (TTN-correct). */
+    if (rxLen == 0) {
+        while ((int32_t)(millis() - s_tx_end_ms) < 1960) { power_manager_kick_watchdog(); delay(2); }
+        radio->setFrequency(REGION.rx2_freq);
+        radio->setSpreadingFactor(REGION.rx2_sf);
+        radio->setBandwidth(REGION.rx2_bw);
+        rxLen = rx_window(rx, sizeof(rx), s_tx_end_ms + 2700);
+    }
+
+    radio->invertIQ(false);
+    relay_restore_lorawan_phy();      /* leave the radio ready for the next uplink */
+    if (rxLen < 12) return false;     /* MHDR(1) + FHDR(7) + MIC(4) minimum */
+
+    if ((rx[0] & 0xE0) != 0x60) return false;   /* unconfirmed data-down only (no ACK path for confirmed) */
+    uint32_t da = (uint32_t)rx[1] | ((uint32_t)rx[2]<<8) | ((uint32_t)rx[3]<<16) | ((uint32_t)rx[4]<<24);
+    if (da != devAddr) return false;
+    uint8_t foptsLen = rx[5] & 0x0F;
+
+    /* Reconstruct the full 32-bit FCntDown from the 16-bit on-air value (the server uses
+     * 32-bit for MIC + decrypt) and reject a backward (replayed) counter. */
+    uint16_t lo = (uint16_t)(rx[6] | (rx[7] << 8));
+    uint32_t fcnt;
+    if (fCntDown == 0) {
+        fcnt = lo;                                  /* first downlink of the session */
+    } else {
+        uint16_t diff = (uint16_t)(lo - (uint16_t)(fCntDown & 0xFFFFu));
+        if (diff >= 0x8000u) return false;          /* counter moved backward = replay */
+        fcnt = fCntDown + diff;                      /* forward, handles the 16-bit rollover */
+    }
+
+    size_t hdr = 8u + foptsLen;
+    if (rxLen < hdr + 4) return false;
+    uint8_t mic[4]; compute_mic_down(rx, rxLen - 4, fcnt, mic);
+    if (memcmp(mic, &rx[rxLen - 4], 4) != 0) return false;     /* integrity */
+
+    out->fport = 0; out->len = 0;
+    if (rxLen > hdr + 4) {            /* FPort + FRMPayload present */
+        uint8_t fport = rx[hdr];
+        uint8_t frmLen = (uint8_t)(rxLen - hdr - 1 - 4);
+        if (frmLen > sizeof(out->data)) frmLen = sizeof(out->data);
+        const uint8_t* key = (fport == 0) ? nwkSKey : appSKey;
+        aes_encrypt_payload(key, devAddr, fcnt, 1, &rx[hdr + 1], frmLen);  /* CTR decrypt, dir=1 */
+        out->fport = fport;
+        out->len = frmLen;
+        memcpy(out->data, &rx[hdr + 1], frmLen);
+    }
+    fCntDown = fcnt + 1;
+    return true;
 }
 
 /* ========== Runtime region switching ========== */
@@ -761,6 +1005,7 @@ void lorawan_export_session(lorawan_session_t* out) {
     out->region_id = (uint32_t)REGION_ID;
     out->devAddr   = devAddr;
     out->fCntUp    = fCntUp;
+    out->fCntDown  = fCntDown;
     memcpy(out->nwkSKey, nwkSKey, 16);
     memcpy(out->appSKey, appSKey, 16);
 }
@@ -782,6 +1027,7 @@ bool lorawan_import_session(const lorawan_session_t* in) {
     }
     devAddr = in->devAddr;
     fCntUp  = in->fCntUp;
+    fCntDown = in->fCntDown;
     memcpy(nwkSKey, in->nwkSKey, 16);
     memcpy(appSKey, in->appSKey, 16);
     _joined = true;

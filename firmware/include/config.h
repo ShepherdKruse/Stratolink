@@ -84,6 +84,31 @@
 #define RELAY_FLOOR_MV            4200   /* abort relay below this VSTOR (>> 3.32 V brownout) */
 #define RELAY_AIRTIME_CAP_PCT     5      /* cap our own TX airtime to this % of the relay window */
 
+// ===== CTT wildlife-tag listener (Motus 434 MHz tags: birds, bats) =====
+// RX-only window in the solar-surplus idle time (same gate as the relay, runs
+// first since listening is cheaper than relaying).  Logs decoded tag ids to a
+// J-Link-readable ring; embedding detections in the uplink payload is the
+// pending fPort work.  PHY substantiated from the rtl_433 CTT decoder + CTT's
+// RadioLib test-tag firmware; the 868/915-matched front end costs sensitivity
+// at 434, quantified on the bench with SDR-generated test beeps.
+#define CTT_LISTEN_ENABLE  true
+#define CTT_FREQ_MHZ       434.0
+#define CTT_LISTEN_MS      60000u   /* idle-window slice for tag listening */
+
+// ===== Class-A downlink command channel (analysis/network/08_command_control.md) =====
+// Listen in the RX1/RX2 windows after each uplink and dispatch a small, bounded command
+// set. No single command can lock the balloon out: safe one-shots apply immediately,
+// behaviour-changers (cadence/SF, Stage 2) use commit-confirm, every value is bounded.
+#define CMD_ENABLE        true
+#define CMD_FPORT         10             /* application fPort for our command protocol */
+#ifndef CMD_BALLOON_ID
+#define CMD_BALLOON_ID    0x0001         /* this balloon's command address (for B2B routing) */
+#endif
+#define CMD_BROADCAST     0xFFFFu
+#define CMD_OP_PING       0x00           /* no-op; acknowledged via stats / next telemetry */
+#define CMD_OP_RELAY      0x02           /* args[0] = 0 disable / 1 enable the Meshtastic relay */
+#define CMD_OP_EASTER     0x7E           /* reserved fun */
+
 // Debug Configuration
 #define DEBUG_ENABLE true
 #define DEBUG_SERIAL_BAUD 115200
