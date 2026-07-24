@@ -99,9 +99,12 @@ bool gps_ublox_get_fix(gps_fix_t* fix, uint32_t timeout_ms) {
                     last_fix.lon_e7     = gnss.getLongitude();
                     last_fix.altitude_m = gnss.getAltitude() / 1000;
                     last_fix.speed_cm_s = (uint16_t)(gnss.getGroundSpeed() / 10);
+                    /* getHeading() = NAV-PVT headMot in 1e-5 deg (full circle
+                     * = 36,000,000).  Centidegrees = /1000, not /100 (the old
+                     * divisor made heading wrap every 36 deg). */
                     int32_t head = gnss.getHeading();
-                    if (head < 0) head += 3600000;
-                    last_fix.heading_cd = (uint16_t)((head / 100) % 36000);
+                    if (head < 0) head += 36000000;
+                    last_fix.heading_cd = (uint16_t)((head / 1000) % 36000);
                     last_fix.satellites = siv;
                     last_fix.valid      = true;
                     consecutive_no_fresh = 0;
@@ -144,6 +147,21 @@ void gps_ublox_get_last_fix(gps_fix_t* fix) {
 }
 
 void gps_ublox_sleep(void) {
+    /* Nudge FIRST: if the module is ALREADY in software-backup (GPS-skipped
+     * low-power cycle, or a wedge cycle where get_fix never woke it), the
+     * PMREQ frame's own start bit would be the UART-RX wake edge and the
+     * frame would be destroyed inside the module's ~2 ms UART wake ramp.
+     * The half-woken module then free-runs in continuous acquisition
+     * (~25 mA) for the entire following sleep window, which sags the 1 F
+     * cap through brownout at night tiers.  Two dummy bytes + 10 ms make
+     * the wake state deterministic: awake module ignores them, sleeping
+     * module is fully up before the PMREQ arrives, and the command always
+     * parses, so the module is asleep on every exit path. */
+    GPS_SERIAL.write((uint8_t)0xFF);
+    GPS_SERIAL.write((uint8_t)0xFF);
+    GPS_SERIAL.flush();
+    delay(10);
+
     /* UBX-RXM-PMREQ with duration=0 + UART-RX wake source = indefinite
      * software-backup until the MCU sends UART activity.  ~15 µA in
      * backup vs ~25 mA in continuous mode, the difference between
