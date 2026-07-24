@@ -15,8 +15,21 @@ void power_manager_attach_freefall_wakeup(void);
 /** Returns true if last wake was from freefall (INT1). Clears the flag. */
 bool power_manager_did_wake_from_freefall(void);
 
+/** Non-consuming peek at the freefall wake flag, for long-running windows
+ *  (relay) that must yield promptly without eating the flag main.cpp
+ *  consumes at the top of the cycle. */
+bool power_manager_freefall_pending(void);
+
+/** Chatter latch: while on, INT1 wakes are swallowed inside sleep instead
+ *  of aborting the chunk loop, so a stuck/chattering pin cannot collapse
+ *  the TX cadence.  Driven by main.cpp's accel-confirmed spurious-wake
+ *  streak (3 spurious to latch, 16 clean scheduled wakes to re-arm). */
+void power_manager_suppress_freefall_wake(bool on);
+
 /** Refresh the independent watchdog. Must be called at least every ~33 s
- *  while in run mode or the chip will reboot. IWDG is frozen in STOP. */
+ *  or the chip will reboot. IWDG keeps running in Stop on this chip
+ *  (FLASH IWDG_STOP option bit = 1), so long sleeps are chunked with a
+ *  refresh between chunks. */
 void power_manager_kick_watchdog(void);
 
 /**

@@ -11,6 +11,7 @@
 
 static bool inited = false;
 static volatile bool s_burst_wake = false;
+static volatile bool s_ff_suppressed = false;  /* chatter latch: INT1 wakes don't abort sleep */
 
 #if defined(POWER_SAVE_MODE) && POWER_SAVE_MODE && defined(ARDUINO_ARCH_STM32)
 static void freefall_wake_callback(void) {
@@ -55,7 +56,10 @@ void power_manager_init(void) {
 void power_manager_attach_freefall_wakeup(void) {
 #if defined(POWER_SAVE_MODE) && POWER_SAVE_MODE && defined(ARDUINO_ARCH_STM32)
     if (inited) {
-        pinMode(PIN_ACCEL_INT1, INPUT_PULLUP);
+        /* No pull: the LIS2DH12 INT1 pad is push-pull and idles LOW
+         * (active-high), so a pull-up would fight the driven-low pad
+         * and leak ~80 uA continuously, 10x the whole STOP1 floor. */
+        pinMode(PIN_ACCEL_INT1, INPUT);
         LowPower.attachInterruptWakeup(PIN_ACCEL_INT1, freefall_wake_callback,
                                        RISING, DEEP_SLEEP_MODE);
     }
@@ -66,6 +70,21 @@ bool power_manager_did_wake_from_freefall(void) {
     bool v = s_burst_wake;
     s_burst_wake = false;
     return v;
+}
+
+/* Non-consuming peek for long-running windows (relay) that must yield to
+ * a freefall promptly but must NOT eat the flag, main.cpp's cycle-top
+ * consume drives burst entry/cooldown accounting. */
+bool power_manager_freefall_pending(void) {
+    return s_burst_wake && !s_ff_suppressed;
+}
+
+/* Chatter latch: while suppressed, an INT1 wake no longer aborts the sleep
+ * chunks (the EXTI still wakes the MCU for ~ms, unavoidable, but we clear
+ * the flag and go back to STOP instead of running a full TX cycle).
+ * main.cpp drives this off accel-confirmed spurious-wake streaks. */
+void power_manager_suppress_freefall_wake(bool on) {
+    s_ff_suppressed = on;
 }
 
 void power_manager_kick_watchdog(void) {
@@ -138,8 +157,23 @@ void power_manager_sleep_ms(uint32_t durationMs) {
         while (remaining > 0) {
             HAL_IWDG_Refresh(&s_iwdg);
             uint32_t chunk = remaining > MAX_CHUNK_MS ? MAX_CHUNK_MS : remaining;
-            enter_stop1_for_ms(chunk);
-            if (s_burst_wake) break;        /* freefall: bail out early */
+            if (chunk < 2000) {
+                /* The RTC alarm has 1 s resolution (alarm_at = epoch + chunk/1000,
+                 * MATCH_HHMMSS): a sub-second chunk arms the CURRENT second, whose
+                 * match boundary already passed, so STOP1 would hang until the
+                 * ~32.7 s IWDG reset.  Sub-2 s residues just busy-wait, IWDG-safe
+                 * and worth ~µA-seconds at most. */
+                delay(chunk);
+            } else {
+                enter_stop1_for_ms(chunk);
+            }
+            if (s_burst_wake) {
+                if (s_ff_suppressed) {
+                    s_burst_wake = false;   /* chatter latch: swallow the wake, keep sleeping */
+                } else {
+                    break;                  /* freefall: bail out early */
+                }
+            }
             remaining -= chunk;
         }
         HAL_IWDG_Refresh(&s_iwdg);
@@ -166,7 +200,7 @@ bool power_manager_is_low_battery(void) {
  * via STM32RTC::begin()) for TAMP writes to succeed. */
 
 #define STRATO_SESSION_MAGIC   0x53545241u   /* "STRA" big-endian */
-#define STRATO_SESSION_VER     1u
+#define STRATO_SESSION_VER     2u   /* bumped: added fCntDown to lorawan_session_t */
 #define SESSION_WORD_COUNT     (sizeof(lorawan_session_t) / sizeof(uint32_t))
 
 #if defined(ARDUINO_ARCH_STM32)
