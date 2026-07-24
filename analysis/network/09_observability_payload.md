@@ -90,6 +90,13 @@ field exists for. Encode with a strict priority decode, first match wins:
 
 Code 7 stays reserved. Mask CSR to the reset-flag field before decoding.
 
+Implementation note: the BOR-and-PIN vs BOR-alone split is a heuristic, since
+a deep in-flight brownout can present POR-like. The robust discriminator is
+one the firmware already computes: TAMP backup-register session validity at
+boot. BOR with a VALID TAMP session means the backup domain survived, an
+in-flight brownout (code 5); BOR with an INVALID session is a true cold
+power-on (code 4). Prefer that check over the flag pattern when wiring this.
+
 Appended (bytes 35-39, the free group):
 
 | off | bytes | field | units | why |
