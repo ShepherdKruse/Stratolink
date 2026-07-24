@@ -18,11 +18,15 @@
 
 /* 18-bit resolution, 100 ms integration, 100 ms rate */
 #define LTR390_MEAS_RATE_VAL     0x22
-/* Gain 18x */
+/* Gain 18x (UVS).  ALS drops to 1x per-read, see read_ambient_lux. */
 #define LTR390_GAIN_VAL          0x04
+#define LTR390_GAIN_1X           0x00
 
-/* UV sensitivity at gain=18x, res=18bit: ~2300 counts per UV index 1 */
-#define LTR390_UV_SENSITIVITY    2300
+/* UV sensitivity: the datasheet's 2300 counts/UVI is specified at gain 18x
+ * AND 20-bit/400 ms.  We run 18-bit/100 ms (counts scale with integration
+ * time, 400 -> 100 ms = /4), so the divisor is 2300/4 = 575.  The old 2300
+ * read UVI 4x low (flight UV would have pegged near 0-3 instead of 0-12). */
+#define LTR390_UV_SENSITIVITY    575
 
 static uint8_t i2c_addr = I2C_ADDR_UV;
 static bool ltr390_present = false;
@@ -89,23 +93,33 @@ bool sensor_ltr390_read_uv_index(uint8_t* uv_index) {
     /* Standby after read */
     (void)write_reg(LTR390_REG_MAIN_CTRL, 0x00);
 
-    *uv_index = (uint8_t)(raw / LTR390_UV_SENSITIVITY);
+    uint32_t uvi = raw / LTR390_UV_SENSITIVITY;
+    *uv_index = (uvi > 255) ? 255 : (uint8_t)uvi;
     return true;
 }
 
 bool sensor_ltr390_read_ambient_lux(uint16_t* lux) {
     if (!lux || !ltr390_present) return false;
 
-    if (!write_reg(LTR390_REG_MAIN_CTRL, LTR390_MODE_ALS | LTR390_ENABLE)) return false;
-    if (!wait_data_ready()) return false;
-
-    uint32_t raw;
-    if (!read_data_20bit(LTR390_REG_ALS_DATA_0, &raw)) return false;
+    /* ALS at gain 1x: at the UVS gain (18x, 18-bit) full scale is only
+     * ~8.7 klux and daylight at altitude (30-120 klux) rails the ADC,
+     * pegging ambient_lux for the whole flight day.  Gain 1x gives
+     * ~157 klux full scale.  Restore the UVS gain after the read. */
+    if (!write_reg(LTR390_REG_GAIN, LTR390_GAIN_1X)) return false;
+    if (!write_reg(LTR390_REG_MAIN_CTRL, LTR390_MODE_ALS | LTR390_ENABLE)) {
+        (void)write_reg(LTR390_REG_GAIN, LTR390_GAIN_VAL);
+        return false;
+    }
+    bool ready = wait_data_ready();
+    uint32_t raw = 0;
+    bool ok = ready && read_data_20bit(LTR390_REG_ALS_DATA_0, &raw);
 
     (void)write_reg(LTR390_REG_MAIN_CTRL, 0x00);
+    (void)write_reg(LTR390_REG_GAIN, LTR390_GAIN_VAL);   /* back to UVS gain */
+    if (!ok) return false;
 
-    /* Lux = 0.6 * raw / (gain * int_time_100ms). gain=18, int=1 (100ms) */
-    uint32_t lux_val = (raw * 6) / (18 * 10);
+    /* Lux = 0.6 * raw / (gain * int_time_100ms). gain=1, int=1 (100ms) */
+    uint32_t lux_val = (raw * 6) / 10;
     *lux = (lux_val > 65535) ? 65535 : (uint16_t)lux_val;
     return true;
 }
