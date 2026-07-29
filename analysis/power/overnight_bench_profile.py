@@ -61,7 +61,7 @@ WINDOWS = Path.home() / "stratolink_overnight" / "windows.csv"
 
 # --- flight energy-budget constants (identical to relay_power_budget.py) ------
 V_RAIL, ETA = 3.3, 0.85
-E_CAP = 8.86                       # J usable to brownout, 1 F cap
+E_CAP = 8.86  # J to conservative 3.32 V reported-plateau endpoint, nominal 1 F
 I_GPS, I_MCU, I_TX14 = 0.030, 0.005, 0.044
 T_GPS_HOT, TOA_SF9 = 2.0, 0.308
 CADENCE = 1200.0

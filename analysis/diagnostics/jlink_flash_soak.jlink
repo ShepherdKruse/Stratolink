@@ -1,0 +1,7 @@
+connect
+h
+loadfile firmware/.pio/build/stratolink_soak/firmware.bin 0x08000000
+r
+g
+sleep 2000
+exit

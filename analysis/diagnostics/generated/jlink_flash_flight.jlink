@@ -1,0 +1,8 @@
+connect
+h
+loadfile /Users/twarn/Repositories/Stratolink/firmware/.pio/build/stratolink/firmware.bin 0x08000000
+verifybin /Users/twarn/Repositories/Stratolink/firmware/.pio/build/stratolink/firmware.bin 0x08000000
+r
+g
+sleep 2000
+exit

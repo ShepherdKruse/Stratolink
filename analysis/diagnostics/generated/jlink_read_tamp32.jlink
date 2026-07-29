@@ -1,0 +1,5 @@
+connect
+h
+mem32 0x4000B100 0x14
+g
+exit

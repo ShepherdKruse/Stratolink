@@ -1,0 +1,38 @@
+{
+  "expect": {
+    "crc_fail": 1,
+    "frames_rx": 24,
+    "pending_count": 16,
+    "pending_drop": 5,
+    "reference_hits": 3,
+    "tags_seen": 21,
+    "tx_attempts": 24,
+    "tx_power_dbm": -9
+  },
+  "receiver": {
+    "elf": "/Users/twarn/Repositories/Stratolink/firmware/.pio/build/ctt_diag/firmware.elf",
+    "elf_sha256": "aac1997acaffd6642601df998b453840d4f91fd233285965afa2c76a568790dd",
+    "symbols": {
+      "s_ctt": {
+        "address": 536872928,
+        "size": 32
+      },
+      "s_ctt_queue": {
+        "address": 536872280,
+        "size": 648
+      }
+    }
+  },
+  "schema": "stratolink-ctt-two-node-hil-v1",
+  "scope": "functional 434 MHz protocol/queue test on two identical high-band RAK3172-9 assemblies; not absolute airborne sensitivity evidence",
+  "transmitter": {
+    "elf": "/Users/twarn/Repositories/Stratolink/firmware/.pio/build/ctt_tx_diag/firmware.elf",
+    "elf_sha256": "48918227f5251ef8fb0e96a0d0a2c5146ff448012bc6cc47b0e8bcd8a93c2f68",
+    "symbols": {
+      "ctt_tx_diag_state": {
+        "address": 536870980,
+        "size": 44
+      }
+    }
+  }
+}

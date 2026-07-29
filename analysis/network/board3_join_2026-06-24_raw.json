@@ -1,0 +1,55 @@
+{
+  "_provenance": {
+    "source": "TTN The Things Stack v3 Network Server (eu1.cloud.thethings.network)",
+    "endpoint": "https://eu1.cloud.thethings.network/api/v3/ns/applications/eu-stratolink/devices/stratolink-3-eu?field_mask=mac_state,pending_mac_state,session,pending_session",
+    "pulled_field": "pending_mac_state.recent_uplinks[-1]",
+    "note": "gateway is Packet-Broker anonymized: gateway_id='packetbroker', no EUI/location/RSSI-from-named-gw"
+  },
+  "device": {
+    "application_id": "eu-stratolink",
+    "device_id": "stratolink-3-eu",
+    "dev_eui": "70B3D57ED00778CA"
+  },
+  "join_request_payload": {
+    "m_hdr": {},
+    "mic": "kC+S9w==",
+    "join_request_payload": {
+      "join_eui": "0000000000000000",
+      "dev_eui": "70B3D57ED00778CA",
+      "dev_nonce": "0B59"
+    }
+  },
+  "phy_settings": {
+    "data_rate": {
+      "lora": {
+        "bandwidth": 125000,
+        "spreading_factor": 7,
+        "coding_rate": "4/5"
+      }
+    }
+  },
+  "rx_metadata": [
+    {
+      "gateway_ids": {
+        "gateway_id": "packetbroker"
+      },
+      "channel_rssi": -121,
+      "snr": -7.25,
+      "uplink_token": "CpMBCoIB5UNTLU+FJ5cvmiSqSn5h77Y/WXd1+/eCG+Z7pEXGlcGBgwOsCjIV9BWrqAgU/EMCeJ/NnrLNbVAsbG6XIb9rg+vBcvL2OeHuwiAyMrFsGeIcIVvUjM87GUw7PYpbkQH7l1kcteAZ8BkcSCvCJJVioTlcHJcF34Cn8CfCLfLPFrYDcRIMN0r2lOVgJiIaqSGTGjgKAwAAExIRY29tZXRzeXN0ZW0tY2xvdWQaHmV1MS5jbG91ZC50aGV0aGluZ3MuaW5kdXN0cmllcw==",
+      "packet_broker": {}
+    }
+  ],
+  "decoded_uplink_token": {
+    "len_bytes": 208,
+    "ascii": ".......CS-O.'./.$.J~a..?Ywu.....{.E........2........C.x.....mP,ln.!.k...r..9... 22.l...![...;.L;=.[....Y.......H+.$.b.9\\.......'.-.....q..7J...`&\"..!..8.......cometsystem-cloud..eu1.cloud.thethings.industries",
+    "forwarder_hints": [
+      "cometsystem-cloud",
+      "eu1.cloud.thethings.industries"
+    ]
+  },
+  "session": {
+    "current_dev_addr": "260B93ED",
+    "pending_dev_addr": "260B1D01"
+  },
+  "newest_uplink_seen": "2026-06-24T02:18:34.052556661Z"
+}

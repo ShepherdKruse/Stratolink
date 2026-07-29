@@ -74,9 +74,10 @@ gateway over CONUS. So on **land**, Helium would very likely have added ears.
 TTN. Best case (eastern-US route + actively transmitting), Helium shortens the
 silence by the ~1.5-2 land days; it cannot touch the ~5-6 ocean days. Two
 unknowns blunt even that: the route may have gone over **Canada** (sparse Helium),
-and we have **no `tx_count`** to confirm the device was transmitting during the
-gap (ROADMAP item 1, fix this so the next flight can tell "not heard" from "not
-sent").
+and Flight-3 had no application-visible attempt/reset/fix-age diagnostics to
+separate "not heard" from "not sent." The current telemetry-v2 design closes
+most of that observability gap: it reports reset/boot/fresh-fix age, and its
+pre-RF FCntUp reservation makes later counter gaps evidence of attempted frames.
 
 ## Why "switch entirely" loses
 
@@ -126,8 +127,9 @@ land-heavy flights; in return, sponsorship + a joint writeup.
 2. **Add Helium as a geofenced US-leg option** when convenient, small firmware
    add (extend `REGION_CREDS`), needs an LNS. High value for *future US/land-heavy*
    flights; modest value for transoceanic ones.
-3. **Add `tx_count` + `fix_age` to the payload first** (ROADMAP item 1), without
-   it we can't even tell whether Helium *would* have helped the gap.
+3. **Deploy and prove telemetry v2 first.** Its reset/boot/fresh-fix-age fields
+   and pre-RF FCntUp reservation provide the gap diagnostics this memo originally
+   requested; exact-image TTN/Supabase HIL is still required.
 4. **The ocean gap is a different project**, Meshtastic relay / balloon-to-balloon
    / satellite. That's the next thread, and it's where the real coverage win is.
 

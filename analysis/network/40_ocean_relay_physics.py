@@ -8,8 +8,9 @@ link-budget in antenna/_link.py):
   3. How many balloons would a relay CHAIN need to span an ocean, and is a
      free-drifting fleet able to hold that chain? (the hard truth)
 
-Raw LoRa P2P (NOT LoRaWAN) => no TTN 30 s/day fair-use cap; the limit is the
-EU868 1% duty cycle on land, and effectively nothing over international waters.
+Raw LoRa P2P is not charged to TTN's 30 s/day fair-access allowance, but it
+still consumes energy/shared spectrum and is subject to the applicable radio
+rules. This script is a propagation/fleet model, not a regulatory authorization.
 
 Run: analysis/.venv/bin/python analysis/network/40_ocean_relay_physics.py
 """
@@ -32,7 +33,7 @@ FIGS = HERE / "figs"
 S.use_light()
 
 ALT_M = 10000.0          # our observed float
-F_MHZ = 915.0            # common B2B channel (over ocean = no regional reg)
+F_MHZ = 915.0            # hypothetical link-budget case, not a global channel authorization
 TX_DBM = 14.0            # our fixed TX power
 G_DBI = 2.15             # each balloon, ~dipole toward horizon
 POL_FADE_DB = 2.0        # tumble/pol mismatch budget (both ends move)

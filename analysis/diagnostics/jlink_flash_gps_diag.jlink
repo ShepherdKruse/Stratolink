@@ -1,0 +1,10 @@
+connect
+h
+loadfile firmware/.pio/build/gps_diag/firmware.bin 0x08000000
+r
+g
+sleep 10000
+h
+mem32 0x20000034 11
+g
+exit

@@ -1,0 +1,326 @@
+{
+  "bin": "/Users/twarn/Repositories/Stratolink/firmware/.pio/build/stratolink/firmware.bin",
+  "bin_sha256": "920f57c139236b6097caec8936cefe681f82fa3b4c4e084f2861ad54bd1ae20d",
+  "elf": "/Users/twarn/Repositories/Stratolink/firmware/.pio/build/stratolink/firmware.elf",
+  "elf_sha256": "8fa10da859b2c542d244cb2f62bebcf388730cbeea9eb4746a94c2d50e3d91f8",
+  "symbols": {
+    "REGION_ID": {
+      "address": 536875399,
+      "kind": "b",
+      "purpose": "active LoRaWAN regulatory plan",
+      "size": 1
+    },
+    "_joined": {
+      "address": 536875512,
+      "kind": "b",
+      "purpose": "LoRaWAN session joined/restored flag",
+      "size": 1
+    },
+    "boot_count": {
+      "address": 536875520,
+      "kind": "B",
+      "purpose": "retained boot counter snapshot",
+      "size": 4
+    },
+    "boot_reset_cause": {
+      "address": 536875524,
+      "kind": "B",
+      "purpose": "RCC reset-cause snapshot",
+      "size": 4
+    },
+    "burst_cooldown": {
+      "address": 536875561,
+      "kind": "b",
+      "purpose": "post-burst cooldown cycles",
+      "size": 1
+    },
+    "burst_cycles": {
+      "address": 536875562,
+      "kind": "b",
+      "purpose": "cycles spent in the current burst",
+      "size": 2
+    },
+    "burst_mode": {
+      "address": 536875564,
+      "kind": "b",
+      "purpose": "freefall rapid-beacon mode",
+      "size": 1
+    },
+    "fCntDown": {
+      "address": 536875444,
+      "kind": "b",
+      "purpose": "next LoRaWAN downlink frame counter",
+      "size": 4
+    },
+    "fCntUp": {
+      "address": 536875448,
+      "kind": "b",
+      "purpose": "next LoRaWAN uplink frame counter",
+      "size": 4
+    },
+    "ff_suppress_clean": {
+      "address": 536875546,
+      "kind": "b",
+      "purpose": "clean scheduled wakes during chatter suppression",
+      "size": 1
+    },
+    "join_retry_skip": {
+      "address": 536875558,
+      "kind": "b",
+      "purpose": "normal cycles until the next OTAA attempt",
+      "size": 1
+    },
+    "last_gps_fix": {
+      "address": 536875568,
+      "kind": "b",
+      "purpose": "last accepted advancing GNSS fix in RAM",
+      "size": 20
+    },
+    "region_fix_age_sec": {
+      "address": 536875552,
+      "kind": "b",
+      "purpose": "retained RF-region lease age",
+      "size": 4
+    },
+    "region_known": {
+      "address": 536875556,
+      "kind": "b",
+      "purpose": "fresh or valid-retained region authorization",
+      "size": 1
+    },
+    "region_lease_trusted": {
+      "address": 536875548,
+      "kind": "b",
+      "purpose": "loaded-valid or fresh-PVT lease provenance",
+      "size": 1
+    },
+    "s_b2b_crumb_frame_ready": {
+      "address": 536873456,
+      "kind": "b",
+      "purpose": "local crumb has a reserved origin ID",
+      "size": 1
+    },
+    "s_b2b_crumb_pending": {
+      "address": 536873457,
+      "kind": "b",
+      "purpose": "fresh local crumb awaiting relay window",
+      "size": 1
+    },
+    "s_b2b_origin_id_ready": {
+      "address": 536872688,
+      "kind": "b",
+      "purpose": "B2B retained origin ID loaded/seeded",
+      "size": 1
+    },
+    "s_b2b_origin_n": {
+      "address": 536873160,
+      "kind": "b",
+      "purpose": "B2B local-origin queue depth",
+      "size": 1
+    },
+    "s_b2b_uplink_n": {
+      "address": 536872706,
+      "kind": "b",
+      "purpose": "B2B-to-TTN queue depth",
+      "size": 1
+    },
+    "s_boot_reset_code": {
+      "address": 536875545,
+      "kind": "b",
+      "purpose": "compact retained-domain-aware reset classification",
+      "size": 1
+    },
+    "s_burst_wake": {
+      "address": 536875792,
+      "kind": "b",
+      "purpose": "unconsumed freefall wake flag",
+      "size": 1
+    },
+    "s_ctt": {
+      "address": 536872656,
+      "kind": "b",
+      "purpose": "wildlife CTT listener statistics",
+      "size": 32
+    },
+    "s_dl_stats": {
+      "address": 536872616,
+      "kind": "b",
+      "purpose": "Class-A RX1/RX2 statistics",
+      "size": 36
+    },
+    "s_ff_suppressed": {
+      "address": 536875784,
+      "kind": "b",
+      "purpose": "freefall wake chatter-suppression latch",
+      "size": 1
+    },
+    "s_gps_diag": {
+      "address": 536871928,
+      "kind": "b",
+      "purpose": "GNSS model/sleep/freshness recovery statistics",
+      "size": 48
+    },
+    "s_have_fix_this_boot": {
+      "address": 536875544,
+      "kind": "b",
+      "purpose": "fresh-fix-age validity flag",
+      "size": 1
+    },
+    "s_have_seq": {
+      "address": 536871908,
+      "kind": "b",
+      "purpose": "retained command acknowledgement validity",
+      "size": 1
+    },
+    "s_last_fix_monotonic_sec": {
+      "address": 536875540,
+      "kind": "b",
+      "purpose": "RTC time of last accepted fix",
+      "size": 4
+    },
+    "s_last_seq": {
+      "address": 536871909,
+      "kind": "b",
+      "purpose": "last durably applied command sequence",
+      "size": 1
+    },
+    "s_lis2dh12_reconfig_attempts": {
+      "address": 536875840,
+      "kind": "b",
+      "purpose": "post-boot LIS2DH12 configuration repairs",
+      "size": 4
+    },
+    "s_ltr390_quiesce_failures": {
+      "address": 536875852,
+      "kind": "b",
+      "purpose": "unconfirmed LTR390 standby transactions",
+      "size": 4
+    },
+    "s_ltr390_reinit_attempts": {
+      "address": 536875856,
+      "kind": "b",
+      "purpose": "post-boot LTR390 recovery attempts",
+      "size": 4
+    },
+    "s_ltr390_soft_reset_recoveries": {
+      "address": 536875848,
+      "kind": "b",
+      "purpose": "LTR390 reset-to-standby recoveries",
+      "size": 4
+    },
+    "s_mic_diag": {
+      "address": 536875628,
+      "kind": "b",
+      "purpose": "acoustic capture, event, variance, and floor statistics",
+      "size": 24
+    },
+    "s_ms5611_reinit_attempts": {
+      "address": 536875864,
+      "kind": "b",
+      "purpose": "post-boot MS5611 PROM recovery attempts",
+      "size": 4
+    },
+    "s_optical_quiescence_fault": {
+      "address": 536875529,
+      "kind": "b",
+      "purpose": "active LTR390 quiet-recovery state",
+      "size": 1
+    },
+    "s_optical_quiet_retries": {
+      "address": 536875528,
+      "kind": "b",
+      "purpose": "bounded LTR390 fast-recovery attempts consumed",
+      "size": 1
+    },
+    "s_radio_diag": {
+      "address": 536875488,
+      "kind": "b",
+      "purpose": "checked PHY configuration/recovery statistics",
+      "size": 24
+    },
+    "s_relay": {
+      "address": 536875068,
+      "kind": "b",
+      "purpose": "Meshtastic relay statistics",
+      "size": 68
+    },
+    "s_relay_enabled": {
+      "address": 536871184,
+      "kind": "d",
+      "purpose": "retained public Meshtastic relay policy",
+      "size": 1
+    },
+    "s_reported_ctt_tags": {
+      "address": 536875532,
+      "kind": "b",
+      "purpose": "CTT-tag baseline after last primary uplink",
+      "size": 4
+    },
+    "s_reported_relay_fwd": {
+      "address": 536875536,
+      "kind": "b",
+      "purpose": "relay-forward baseline after last primary uplink",
+      "size": 4
+    },
+    "s_sensor_i2c_bus_recoveries": {
+      "address": 536875904,
+      "kind": "b",
+      "purpose": "bounded shared-I2C bus recoveries",
+      "size": 4
+    },
+    "s_stats": {
+      "address": 536871912,
+      "kind": "b",
+      "purpose": "command dispatcher statistics",
+      "size": 16
+    },
+    "s_tmp117_direct_reads": {
+      "address": 536875892,
+      "kind": "b",
+      "purpose": "successful direct TMP117 temperature samples",
+      "size": 4
+    },
+    "s_tmp117_fallback_reads": {
+      "address": 536875888,
+      "kind": "b",
+      "purpose": "successful MS5611 temperature fallbacks",
+      "size": 4
+    },
+    "s_tmp117_poweron_sentinels": {
+      "address": 536875884,
+      "kind": "b",
+      "purpose": "rejected TMP117 reset-value samples",
+      "size": 4
+    },
+    "s_tmp117_reinit_attempts": {
+      "address": 536875896,
+      "kind": "b",
+      "purpose": "post-boot TMP117 recovery attempts",
+      "size": 4
+    },
+    "spurious_ff_streak": {
+      "address": 536875547,
+      "kind": "b",
+      "purpose": "consecutive acceleration-cleared INT1 wakes",
+      "size": 1
+    },
+    "tx_fail_streak": {
+      "address": 536875560,
+      "kind": "b",
+      "purpose": "consecutive primary TX failures",
+      "size": 1
+    }
+  },
+  "tamp_bkp0_address": 1073787136,
+  "tamp_layout": {
+    "b2b_next_origin_id": 17,
+    "boot_record": 19,
+    "command_state": 16,
+    "region_lease_record": 18,
+    "session_crc": 15,
+    "session_words": [
+      0,
+      14
+    ]
+  }
+}

@@ -53,5 +53,8 @@ is installed; on the stiff PSU rail we just read the current directly.)
 - **T3 full A→relay→B bridge, T4 dedup-load, T9 airtime**, need a stock Meshtastic node
   (ordering 2× Heltec V3) and/or the 2nd board as emulator (stratolink-1 back Sunday).
 - **T7 solar / floor-abort / f**, needs the **supercap** installed (PSU rail can't show
-  harvester/cap dynamics).
+  harvester/cap dynamics), but only after the BQ25570 charge-ceiling gate is
+  closed. The exact ±1% divider has a conservative 5.544 V room-reference
+  screen and 5.592 V full-operating-temperature screen against 5.5 V absolute
+  maximums; do not begin with unrestricted sun.
 - **T10 sensitivity sweep**, needs a step attenuator; SDR + RSSI-of-received is the proxy.

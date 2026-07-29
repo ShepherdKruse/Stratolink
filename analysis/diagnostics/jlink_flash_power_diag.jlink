@@ -1,0 +1,10 @@
+connect
+h
+loadfile firmware/.pio/build/power_test/firmware.bin 0x08000000
+r
+g
+sleep 3000
+h
+mem32 0x20000044 10
+g
+exit

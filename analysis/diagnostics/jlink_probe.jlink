@@ -1,0 +1,5 @@
+connect
+h
+mem32 0xE0042000 1
+go
+exit

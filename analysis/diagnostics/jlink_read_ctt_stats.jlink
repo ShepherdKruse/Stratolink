@@ -1,0 +1,6 @@
+connect
+h
+mem32 0x2000088C 7
+mem8 0x20000685 4
+g
+exit

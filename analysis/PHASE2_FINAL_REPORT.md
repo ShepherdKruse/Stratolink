@@ -2,6 +2,16 @@
 ### Final analysis & soak report
 *2026-06-04 · stratolink-2 bench (PSU 4.8 V + solar, no supercap) · firmware: `env:stratolink` / `env:stratolink_soak`*
 
+> Superseded qualification note (2026-07-25): T7 is no longer the only flight
+> gate. The exact 8.25 MΩ / 4.22 MΩ BQ25570 divider uses ±1% parts. TI's
+> datasheet ±2% overall guarantee is conditioned on ±0.1% resistors, while
+> its EVM guide explicitly combines ±2% set-point accuracy with ±1% resistor
+> tolerance for design min/max values. That conservative screen reaches 5.544 V before resistor TCR and
+> 5.592 V across the BQ25570 operating range, against 5.5 V absolute
+> maximums. Keep the payload shaded and close the charge-ceiling margin gate
+> before fitting C5 and applying unrestricted solar input. This report remains
+> valid as historical relay-soak evidence, not a current launch verdict.
+
 ---
 
 ## 1. Executive summary
@@ -64,7 +74,7 @@ Defense in depth, four independent mechanisms:
 | Mechanism | Guarantee |
 |---|---|
 | **Entry gate** (`main.cpp`) | relay only if `tier==FULL` (≥4.5 V, fresh post-TX read) **and** solar charging **and** `!burst` → never at night/dusk/recovery |
-| **Floor-abort** (in-window) | exits the instant VSTOR < 4.2 V, 0.9 V above the 3.32 V brownout, 1.2 V above the 3.0 V TTN-TX floor |
+| **Floor-abort** (in-window) | exits the instant VSTOR < 4.2 V, 0.88 V above Flight 3's conservative 3.32 V reported-plateau accounting endpoint, 1.2 V above the 3.0 V TTN-TX floor |
 | **Schedule yield** | bounded by the inter-cycle budget → next TTN uplink stays on cadence |
 | **PHY restore** (every exit) | restores the exact post-init LoRaWAN TX PHY (SF9/BW125/sync/preamble/CRC + freq); the LoRaWAN session (DevAddr/keys/FCnt) is never touched |
 
@@ -92,8 +102,11 @@ TTN therefore occupies **0.026%** of the radio's time; the relay fills the rest 
 self-caps its own contribution at **5%** of any window.
 
 ### 4.2 Power: why the relay *must* be gated (`analysis/power/relay_power_budget.py`)
-On the 1 F supercap (8.86 J usable, 5.36 → 3.32 V), a **naive always-on** relay is
-impossible:
+On the nominal 1 F model (8.86 J to the conservative 5.36 → 3.32 V
+reported-plateau accounting endpoint), a **naive always-on**
+relay is impossible. This ratio-level conclusion is robust, but 8.86 J is not
+a minimum-energy qualification: the exact capacitor is specified at 0.8-1.2 F
+and the charge ceiling is separately blocked on tolerance margin.
 
 | Per 1200 s cycle | Energy |
 |---|---|
@@ -101,8 +114,12 @@ impossible:
 | **Continuous RX relay through the idle window** | **25.57 J = 2.9× the entire cap** |
 
 Daily average current: baseline **0.07 mA** vs **+5.56 mA** with continuous listen (a
-**76×** load). Into darkness from 4.5 V: **sleeping survives 82.5 h** (to dawn), but
-**continuous listening browns out in 3.6 minutes.** → Listening is only affordable on
+**76×** load). In the legacy 4 µA model, darkness from 4.5 V gives **82.5 h**
+to the accounting endpoint, but that is not a measured flight-endurance result;
+the 3.32 V value is an ADC-dropout plateau rather than BOR metrology, and the J-Link-
+attached board profile was 33-35 µA and the fitted capacitor is absent. In the
+same nominal model,
+**continuous listening reaches the accounting endpoint in 3.6 minutes.** → Listening is only affordable on
 **solar surplus**, which is exactly what the firmware gate enforces.
 
 ### 4.3 Relay-affordable duty & fleet benefit (`analysis/power/relay_availability.py`)
@@ -226,7 +243,10 @@ relay** over the gaps no tower reaches; a **fleet** of cheap pico-balloons becom
 rolling, decentralized, day-following Meshtastic layer over oceans and remote interior,
 with coverage that scales from a few percent at N=50 to ~68% of sunlit land at N=1000.
 
-**Next:** install the supercap → run T7 → soak `env:stratolink` → fly.
+**Superseded next step:** close the divider/charge-ceiling margin gate → fit the
+supercap → run a calibrated controlled-light T7 with a sub-5.5 V abort →
+complete the remaining readiness matrix. Do not infer a flight verdict from
+this historical phase report.
 
 ---
 

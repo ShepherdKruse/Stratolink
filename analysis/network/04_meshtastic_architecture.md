@@ -1,5 +1,14 @@
 # Meshtastic + LoRaWAN coexistence: architecture assessment
 
+> **Status: superseded design exploration.** This memo predates the implemented
+> header-compatible Meshtastic relay, Class-A fPort-10 command path, and
+> authenticated B2B wire v3. It is retained as decision history, not as the
+> launch architecture. Current truth is in `06_firmware_radio_sharing.md`,
+> `08_command_control.md`, `09_observability_payload.md`, and the flight source.
+> In particular, the flight image has no worldwide common auxiliary frequency:
+> it uses qualified US915/EU868/AU915 channels and disables auxiliary TX in
+> AS923/SILENT.
+
 Can a Stratolink balloon run Meshtastic (or a mesh relay) alongside TTN telemetry,
 and is Meshtastic the right tool for balloon-to-balloon and for uplink-to-balloon?
 Grounded in our KiCad hardware, our firmware, flight data, my own airtime/range
@@ -25,7 +34,8 @@ modeling (`80_meshtastic_coexist.py`, fig N7), and dated protocol research.
 - **For uplink/command to the balloon, LoRaWAN Class A beats Meshtastic**, a
   duty-cycled supercap node is *deaf* to Meshtastic (no scheduled-RX in the protocol;
   low-power roles can't receive). Class A RX windows (after each uplink, ~free power)
-  are the reliable command path, **not yet implemented** (ROADMAP item A).
+  are the reliable command path. They were a roadmap item when this memo was
+  written and are implemented in the current source.
 - **Recommended: keep LoRaWAN/TTN as the telemetry+command spine; add a
   power-tier-gated second mode in surplus windows, proprietary P2P for the B2B
   constellation, and/or MeshCore if we want to serve ground users.** One radio,
@@ -35,7 +45,10 @@ modeling (`80_meshtastic_coexist.py`, fig N7), and dated protocol research.
 
 KiCad (`stratolink.kicad_sch`, 62 footprints): the LoRa side is **U2 RAK3172**
 (integrated STM32WLE5 + SX1262 + RF switch) on a **single antenna AE1**. The SX1262
-tunes 150-960 MHz; our antenna already straddles 868/915. So switching the radio
+silicon tunes 150-960 MHz and the modeled antenna straddles 868/915, but neither
+fact overrides the fitted module's internal matching: exact BOM part
+`RAK3172-9-SM-NI` is specified by RAK for US915/AU915/KR920/AS923, not EU868.
+Within an exact-SKU-qualified band, switching the radio
 between LoRaWAN params and a mesh preset is a **RadioLib reconfigure** (set SF/BW/
 freq, ~ms), not new silicon. The radio is **half-duplex**, it does one thing at a
 time, so the modes are strictly time-sliced. Per 1200 s cycle the radio is busy only
@@ -103,8 +116,11 @@ windows, not the primary command path.
   is the decisive factor.
 - **Payload:** telemetry is ~tiny; Meshtastic's 16 B header + protobuf + flood is
   pure overhead for point-to-point store-and-forward.
-- **Cross-region:** we pick the common relay channel + store-and-forward across the
-  868/915 line (carried, not bridged), clean on a proprietary layer.
+- **Cross-region (superseded concept):** this memo proposed a common relay
+  channel. The implemented flight policy instead uses the selected local
+  US915/EU868/AU915 channel and carries queued records across the 868/915 line;
+  this is software behavior, not proof that the fitted `-9` SKU is EU868-qualified;
+  direct RF requires both balloons to share a compatible plan.
 - **Meshtastic's advantage is interop with ground devices**, which is irrelevant for
   balloon↔balloon (both ends are ours). So Meshtastic/MeshCore is the right tool only
   when the *other end is a ground Meshtastic user*, i.e. the community-service relay,
@@ -115,19 +131,19 @@ windows, not the primary command path.
 The clean design is **one radio, modes scheduled on RadioLib, all gated by the power
 tier** (relay/P2P only on FULL + sun surplus, floor-abort, `relay_availability.py`):
 
-1. **LoRaWAN telemetry uplink**, the spine (TTN, proven). Unchanged.
-2. **LoRaWAN Class A downlink**, implement RX windows for reliable command/uplink
-   (ROADMAP item A). Highest-value small add; near-free power.
-3. **Proprietary scheduled P2P**, the B2B store-and-forward layer for the
-   constellation / ocean gap. Power-fit because *we* schedule the wake windows.
-4. **(Optional) MeshCore repeater**, only if we want to serve the ground mesh
-   community; accept it's the MeshCore network, run it in surplus windows, or fly a
-   *dedicated* community-service balloon. Don't try to embed stock Meshtastic.
+1. **LoRaWAN telemetry uplink** remains the TTN spine.
+2. **LoRaWAN Class A downlink is implemented** for bounded fPort-10 commands and
+   reports its durable sequence/relay state in telemetry v2.
+3. **Authenticated B2B wire v3 is implemented** inside the shared LongFast
+   window with bounded queues, randomized contention, CAD, CMAC, deduplication,
+   TTL, delayed-age accounting, and TTN tunneling. It is not TDMA and still needs
+   true two-node RF HIL.
+4. **The public Meshtastic-compatible relay is implemented as a narrow
+   header-level service**, not stock Meshtastic or MeshCore firmware. It remains
+   subordinate to solar, rail, region, airtime, and primary-telemetry gates.
 
-So: **TTN stays the telemetry/command spine; "Meshtastic" belongs at the edge for
-ground-community service (via MeshCore), while the constellation backbone is our own
-scheduled P2P.** Telemetry still flows over LoRaWAN whenever a gateway hears us;
-relay only spends surplus.
+Thus TTN remains the telemetry/command spine; the current public relay and private
+B2B service share only proven surplus windows, and telemetry always wins.
 
 ## Figures
 - `N7_meshtastic_coexist.png`, airtime per packet and the range-vs-airtime plane for our LoRaWAN vs Meshtastic presets on the same SX1262.

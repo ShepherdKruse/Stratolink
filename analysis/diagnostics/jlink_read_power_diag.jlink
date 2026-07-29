@@ -1,0 +1,5 @@
+connect
+h
+mem32 0x20000044 10
+g
+exit

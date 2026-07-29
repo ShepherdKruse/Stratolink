@@ -86,5 +86,10 @@ this binary capability is the make-or-break.
 ## Other next steps
 - **Heltec V3 ×2** (ordered) → real wire-compat (node decodes our frame, T2) + the
   A→relay→B bridge (T3) + RX of real LongFast (T1).
-- **Supercap install** → T7 (solar surplus / floor-abort / duty `f`) via cap-decay.
+- **Charge-ceiling gate, then supercap install** → T7 (solar surplus /
+  floor-abort / duty `f`) via cap-decay. Do not use unrestricted sun first:
+  the exact ±1% divider's conservative screen is 5.544 V before resistor TCR
+  and 5.592 V across the BQ25570 operating range, against 5.5 V absolute
+  maximums. Lower/qualify the divider or use calibrated controlled
+  light and independent VBAT/VSTOR capture with a sub-5.5 V abort.
 - Step attenuator → T10 sensitivity sweep.

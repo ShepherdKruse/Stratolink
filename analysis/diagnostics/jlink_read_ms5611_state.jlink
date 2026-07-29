@@ -1,0 +1,6 @@
+connect
+h
+mem8 0x200011E5 1
+mem16 0x200011E6 6
+g
+exit

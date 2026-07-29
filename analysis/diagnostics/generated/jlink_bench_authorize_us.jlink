@@ -1,0 +1,13 @@
+connect
+h
+g
+sleep 5000
+h
+w4 0x20001220 0
+w1 0x20001224 1
+w1 0x2000121C 1
+g
+sleep 75000
+h
+g
+exit

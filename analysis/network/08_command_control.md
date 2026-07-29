@@ -1,12 +1,30 @@
 # Class-A downlink command channel: analysis + protocol spec
 
-A minimal, application-layer, RX2-only, FULL-tier-gated Class-A receiver plus a tiny
+A minimal, application-layer, RX1/RX2, healthy-rail-gated Class-A receiver plus a tiny
 safe command set, so we can dial in settings mid-flight without ever being able to
 brick a balloon that has no reset button at 12 km. Designed addressable from day one
 so balloon-to-balloon store-and-forward can carry commands over the ocean later.
 
 Substantiated against the LoRaWAN spec (L2 v1.0.4, RP002-1.0.3), TTN docs, other
 pico-balloon flights, and our own flight-3 data. Build single-balloon over-land first.
+
+**Implementation status (2026-07-26):** Stage 1 is implemented: Class-A
+receive/decrypt, target and monotonic sequence validation, PING, and a bounded
+public-Meshtastic relay toggle. Opcode `0x02` never disables authenticated B2B
+control/store-and-forward. The accepted LoRaWAN frame counter is durably reserved
+after MIC validation and before application dispatch. TAMP also stores the accepted
+application sequence and resulting relay state together under a CRC, so a warm reset
+cannot restore an ACK while silently reverting the behavior. Telemetry v2 carries the
+last applied sequence and actual relay state on the next successful primary. The
+Class-A receive path is precursor-hardware-proven; the v2 ACK/state/reset behavior is
+host-proven and still requires exact-candidate HIL. A source audit also found that the
+network-assigned five-second receive delay—and the equivalent fixed OTAA join
+wait—were implemented with STM32duino `delay()`, whose empty `yield()` busy-spun the
+MCU. The current source waits with WFI, services the watchdog, and lets a freefall
+recovery mission preempt both the wait and receive windows for joined Class-A and
+OTAA. Exact current remains a PPK2 gate. Stage 2 remains design-only for
+cadence, GPS reset, safe mode, rejoin, SF, data dump, dead-man revert, and
+commit-confirm behavior changes.
 
 ---
 
@@ -27,8 +45,9 @@ the network queues it, we collect it on our next uplink's RX window.
 - RX_DELAY is tunable 1 to 15 s via the Join-Accept RxDelay field. The spec explicitly
   says to size the window for "maximum potential imprecision of the device clock."
 
-Our uplink behaviour is unchanged: SF9, 1200 s cadence, ~308 ms ToA, 22 s/day = 74% of
-the uplink FUP. Receiving adds zero transmit airtime.
+The telemetry-v2 uplink is SF9, 1200 s nominal cadence, 328.704 ms ToA, and
+23.667 s/day for 72 primaries. The separately bounded auxiliary allowance keeps the
+worst-case modeled total at 27.178 s/day. Receiving adds zero transmit airtime.
 
 ---
 
@@ -43,8 +62,9 @@ FUP. Our SF, cadence, and uplink airtime are untouched.
   downlink's duration. The cap is a gateway-side fair-use limit, not a device limit.
 - **Opening RX windows is FUP-free.** The FUP counts transmitted downlinks, not opened
   RX windows. So "always listen, command rarely" costs nothing against the policy.
-- **Use unconfirmed uplinks.** A confirmed uplink forces a downlink ACK that burns one
-  of the 10/day. We acknowledge a command in the next uplink's telemetry instead.
+- **Use unconfirmed uplinks.** A confirmed uplink forces a downlink ACK that consumes
+  scarce gateway downlink airtime. The application acknowledgement is instead carried
+  in the next 40-byte primary at no additional packet cadence.
 - EU868 downlink sits in sub-band P (869.4 to 869.65, 500 mW, 10% duty), chosen to give
   gateways ~10x downlink headroom; US915 has no duty limit but a 400 ms dwell cap. Net:
   downlink is scarcer in EU than US, so prefer commanding while over CONUS if we can.
@@ -53,22 +73,34 @@ FUP. Our SF, cadence, and uplink airtime are untouched.
 
 ## 3. Substantiated against our flight data
 
-Energy reuses the 1 F supercap model in `analysis/power/relay_power_budget.py`
-(8.86 J usable, baseline 0.343 J/cycle at SF9/1200 s). Coverage from
+Coverage comes from
 `analysis/network/data/receptions.csv` (281 heard uplinks over 291.8 h).
 
-**RX-window power cost: negligible. RX-every-cycle is affordable.**
+**The old RX-window energy claim is superseded. Exact-candidate PPK2 measurement is
+required.**
 
-| Listen budget / cycle | J/cycle | % of 0.343 J baseline | % of 8.86 J cap |
+The network-assigned default `RxDelay=5 s`, the two 250 ms pre-open guards, the
+500/740 ms post-center tails, and the one-second RX1-to-RX2 spacing produce this
+source-bound empty exchange:
+
+| Phase / cycle | Duration | Engineering screen |
 |---|---|---|---|
-| 50 ms (typical, empty RX2) | 0.0011 | 0.31% | 0.012% |
-| 200 ms (realistic) | 0.0043 | 1.24% | 0.048% |
-| 1 s (worst case, full RX2) | 0.0213 | 6.22% | 0.241% |
+| TX end through empty RX2 close | 6.740 s | Absolute, watchdog-serviced deadline |
+| RAK3172 radio in RX | 1.740 s | 0.037154 J at 5.5 mA typical, 3.3 V, 85% efficiency |
+| Inter-window MCU wait | 5.000 s | WFI in current source; exact current unmeasured |
+| Former busy wait | 5.000 s | 0.097059 J at a deliberately simple 5 mA active screen |
+| Former combined path | 6.740 s | 0.134213 J/cycle; 9.663 J/day at 72 primaries |
 
-For comparison the Meshtastic relay-listen is 25.57 J/cycle (2.9x the entire cap); one
-relay cycle equals ~6,000 command-RX cycles. The difference is duty: the command
-channel listens ~0.02% of the cycle. The one guardrail: cap the RX2 timeout so a
-missed decode cannot hang the receiver and walk into the 1 s column.
+The previous table counted at most one second of receive and omitted the entire
+five-second CPU wait. The same omission applied to each OTAA attempt. It therefore
+understated even the radio-only cost
+(0.037154 J versus 0.021353 J/cycle) and missed a potentially material daily load.
+WFI removes the known busy-spin without changing RX1/RX2 availability, but the
+current total cannot be declared negligible from typical data-sheet currents.
+Post-soak HIL must capture TX end through RX2 close, the 4.75-second pre-RX1 WFI
+floor, both RX plateaus, and freefall preemption at FULL and REDUCED rails with the
+final fitted supercapacitor; it must repeat the phase capture for a controlled empty
+OTAA attempt including join-request TX.
 
 **Command coverage: only ~9 to 31% of flight-3 was commandable.**
 
@@ -89,7 +121,7 @@ RX opportunities/day). In coverage: best ~1-2 s, worst one cadence (~20 min), av
 | SF7 to SF9 | 281/281 uplinks flew SF7; EU868 RSSI min -129 dBm on the SF7 floor (-124.5); best fresh reach 252 km vs the 412 km horizon | highest single lever, +5 dB, zero hardware |
 | GPS reset | 77% of post-launch fixes STALE; 11 wedges, up to 6.9 h of frozen position; needed over the ocean | keystone, but needed where downlink cannot reach |
 | Cadence by region | 200 h ocean transmitting was wasted (0 gw); Iberia had gateways | geofence cadence + SF, not a manual toggle |
-| Night cadence | battery min 3.322 V = the 3.32 V brownout floor exactly; night median 3.338 V | drop cadence at night; tiers already partly do this |
+| Night cadence | reported battery minimum 3.322 V sits on the flown ADC's false dropout plateau; actual VSTOR/BOR was not observable | drop cadence at night; select tier/TX floors from corrected-ADC PPK2 HIL |
 | Relay enable | continuous RX is 2.9x the cap, browns out in 3.6 min into darkness | keep power + solar gated, never at night (already designed) |
 
 The cross-cutting result: the command channel reaches only 9-31% of the flight, and its
@@ -139,7 +171,12 @@ store-and-forward to carry commands in and telemetry out of the dark leg.
 - **Cadence:** compile-time `#define`s today (`TRANSMIT_INTERVAL_SEC`,
   `SLEEP_INTERVAL_*` via `power_adc_get_sleep_interval_sec`). Needs a small
   runtime-variable refactor to be commandable.
-- **No command handling exists yet**, so the dispatcher is greenfield.
+- **Stage-1 command handling exists:** fPort-10 receive/decrypt, exact-length
+  validation, target/sequence policy, PING, relay toggle, B2B carriage, durable
+  FCntDown reservation, retained sequence plus relay behavior, and next-primary ACK.
+  The broader runtime/persistent Stage-2 state machine remains to build. Delivery
+  across a reset is deliberately at-most-once: retry an unacknowledged command with a
+  newer application sequence.
 
 ---
 
@@ -150,7 +187,7 @@ store-and-forward to carry commands in and telemetry out of the dark leg.
 | opcode | command | arg | guardrail |
 |---|---|---|---|
 | 0x01 | set cadence | enum {600, 1200, 1800, 3600 s} | whitelist only; refuse anything faster than 600 s (FUP: SF9 308 ms x uplinks/day must stay < 30 s) |
-| 0x02 | relay enable / disable | bool | pure on/off |
+| 0x02 | public Meshtastic relay enable / disable | bool | never disables authenticated B2B safety/control |
 | 0x03 | force GPS reset | none | calls `gps_ublox_reset()` |
 | 0x04 | safe-mode | none | slowest cadence, GPS-light, relay off (a recoverable panic button) |
 | 0x05 | force rejoin | none | re-OTAA to recover a wedged session |
@@ -169,9 +206,13 @@ is no reset at altitude. This mirrors what the Imperial pico-tracker team did.
 - **Transport:** LoRaWAN application downlink on fPort 10. Payload
   `[target:2][opcode:1][seq:1][args:0..N]`. `target` = balloon ID (0xFFFF = broadcast)
   so commands are addressable for the B2B hop.
-- **Replay-safe:** LoRaWAN AES integrity + frame-counter already block replay; add a
-  monotonic `seq` byte and ignore any command with `seq <= last_applied_seq`, so TTN
-  queue re-sends / replaces are idempotent.
+- **Replay-safe:** LoRaWAN AES integrity plus the durably reserved frame counter block
+  the same authenticated downlink across reset. A modulo-256 monotonic application
+  `seq` byte rejects duplicates and older commands. Stage 1 reserves the accepted
+  sequence in corruption-detecting TAMP word 25 before applying an effect, restores it
+  across warm reset, and fails closed if persistence fails. A true backup-domain loss
+  still clears this application sequence, so retry policy must use a newer sequence
+  and the complete-power-loss replay case remains a fleet-hardening gate.
 - **Persistent + fail-safe:** applied state lives in the backup-register struct with a
   magic + version; a corrupt register or a cold boot reverts to safe defaults
   (slow cadence, relay off, SF9). Never resume an exotic state on an unverified boot.
@@ -182,11 +223,14 @@ is no reset at altitude. This mirrors what the Imperial pico-tracker team did.
 - **Acknowledge in the next uplink, not via confirmed-downlink.** Echo
   `last_applied_seq` + current cadence/mode in the telemetry payload. Closed-loop
   confirmation for free, no extra airtime, no spent downlink ACK.
-- **RX posture:** RX2-only, every FULL-tier uplink. Prefer RX2 (fixed freq/DR, and
-  SF12's long symbols tolerate our millis-frozen timing slop) over RX1. Consider setting
-  RX_DELAY to 5 s (Join-Accept RxDelay) for deterministic TX-to-RX reconfig time, and
-  open the RX2 window wide to swallow clock error. Gate on FULL tier + not-burst, the
-  same as the relay, so we never reconfigure a browning-out balloon.
+- **RX posture:** RX1 then RX2 after every non-burst primary uplink whose fresh
+  post-transmit rail remains FULL or REDUCED. Both windows use the network-assigned
+  RECEIVE_DELAY1 restored from the CRC-protected session; RX2 is one second later.
+  The implementation opens 250 ms early, uses CPU WFI while preserving the
+  millisecond RF deadlines, services the watchdog at one hertz, lets a pending
+  freefall mission abort optional receive immediately, and restores the LoRaWAN TX
+  PHY on every armed-window exit. Optional auxiliary traffic is scheduled only
+  after these windows.
 
 ---
 
@@ -214,8 +258,8 @@ companions:
 3. **Autonomous geofenced rules** (the ocean autonomy, since downlink cannot reach it).
 4. **B2B relay of commands + telemetry** (the constellation unlock).
 
-Steps 1 and 2 are the near-term feature and reuse most of the existing radio code.
-Steps 3 and 4 keep B2B in view the whole way, as agreed.
+Step 1 and the safe subset of step 2 are implemented. The remainder of step 2 is
+still a launch-review gap, while steps 3 and 4 keep B2B in view as agreed.
 
 ---
 

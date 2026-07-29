@@ -1,0 +1,5 @@
+connect
+h
+mem32 0x20000F60 7
+g
+exit

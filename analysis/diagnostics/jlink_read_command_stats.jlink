@@ -1,0 +1,5 @@
+connect
+h
+mem32 0x200003D8 3
+g
+exit

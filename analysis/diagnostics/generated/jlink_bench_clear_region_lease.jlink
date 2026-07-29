@@ -1,0 +1,7 @@
+connect
+h
+w4 0x4000B148 0
+r
+g
+sleep 2000
+exit

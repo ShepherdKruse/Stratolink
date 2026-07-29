@@ -1,0 +1,10 @@
+connect
+h
+loadfile firmware/.pio/build/b2b_diag/firmware.bin 0x08000000
+r
+g
+sleep 1000
+h
+mem32 0x200001EC 2
+g
+exit

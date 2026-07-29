@@ -13,8 +13,10 @@ The crux is GPS start physics:
     compute-bound -- you cannot reset your way to a fast fix.
 
 Hardware (firmware/include/stratolink_pins.h):
-  C = 1 F, VSTOR 5.36 V max, ~3.32 V brownout floor (flight-observed) -> 8.86 J
-  usable; absolute min 2.51 V -> 11.2 J. GPS allowed at tier <= REDUCED (>=3.5 V).
+  C = 1 F, VSTOR 5.36 V max, conservative 3.32 V historical reported-plateau
+  accounting endpoint -> 8.86 J; absolute min 2.51 V -> 11.2 J. The plateau is
+  not measured VSTOR/BOR because the flown fixed-VDDA ADC lost observability in
+  buck dropout. GPS is allowed at tier <= REDUCED (>=3.5 V).
 
 Run: analysis/.venv/bin/python analysis/power/gps_start_power.py
 """
@@ -42,9 +44,9 @@ except Exception:
 # ---- hardware constants (firmware/include/stratolink_pins.h) ----
 C_F        = 1.0
 V_MAX      = 5.36
-V_BROWN    = 3.32     # flight-observed brownout floor (3.3 V buck dropout)
+V_ACCOUNTING_FLOOR = 3.32  # conservative Flight-3 reported plateau, not BOR metrology
 V_MIN      = 2.51
-E_USABLE   = 0.5 * C_F * (V_MAX**2 - V_BROWN**2)   # 8.86 J to brownout
+E_USABLE   = 0.5 * C_F * (V_MAX**2 - V_ACCOUNTING_FLOOR**2)
 E_FULL     = 0.5 * C_F * (V_MAX**2 - V_MIN**2)     # 11.2 J absolute
 
 # ---- loads (datasheet typicals) ----
@@ -56,20 +58,21 @@ ETA        = 0.85     # BQ25570 buck efficiency
 P_ACQ      = (I_GPS_ACQ + I_MCU_ACT) * V_RAIL / ETA   # ~0.135 W drawn from cap
 
 T_HOT, T_COLD, T_COLD_MARG = 2.0, 30.0, 90.0          # TTFF / window seconds
-CYC_PER_DAY = 96                                       # SF9 / 15-min cadence
+CADENCE_SEC = 1200.0                                   # flight config: SF9 / 20 min
+CYC_PER_DAY = 86400.0 / CADENCE_SEC                    # 72/day
 
 def e_acq(t):  # energy pulled from the cap for one acquisition of length t
     return P_ACQ * t
 
 def main():
     hot, cold, marg = e_acq(T_HOT), e_acq(T_COLD), e_acq(T_COLD_MARG)
-    print("=== energy per acquisition vs the 8.86 J usable supercap ===")
+    print("=== energy per acquisition vs the 8.86 J conservative accounting window ===")
     for name, e, t in [("HOT (2s, BBR kept)", hot, T_HOT),
                        ("COLD (30s, reset)", cold, T_COLD),
                        ("COLD marginal (90s window)", marg, T_COLD_MARG)]:
-        print(f"  {name:28} {e:6.2f} J  = {100*e/E_USABLE:5.1f}% of usable cap   (I*t={I_GPS_ACQ*1e3:.0f}mA*{t:.0f}s)")
+        print(f"  {name:28} {e:6.2f} J  = {100*e/E_USABLE:5.1f}% of accounting window   (I*t={I_GPS_ACQ*1e3:.0f}mA*{t:.0f}s)")
 
-    print("\n=== daily GPS energy at 96 cycles/day (SF9/15-min) ===")
+    print(f"\n=== daily GPS energy at {CYC_PER_DAY:.0f} cycles/day (SF9/20-min) ===")
     backup_day = I_GPS_BKP * (V_MAX) * 86400  # ~ tiny
     strategies = {
         "HOT every cycle (retain BBR)":      CYC_PER_DAY*hot + backup_day,
@@ -97,14 +100,19 @@ def main():
     cols = [MINT, WARM, RED]
     ax[0].bar(bars, vals, color=cols, alpha=0.9)
     ax[0].axhline(E_USABLE, color=DIM, ls="--", lw=1.6)
-    ax[0].text(2.4, E_USABLE+0.2, f"usable cap = {E_USABLE:.1f} J\n(5.36→3.32 V)", color=DIM, fontsize=8.5, ha="right")
+    ax[0].text(-0.35, E_USABLE+0.2,
+               f"accounting window = {E_USABLE:.1f} J\n(5.36→3.32 V reported plateau)",
+               color=DIM, fontsize=8.5, ha="left")
     ax[0].axhline(E_FULL, color=DIM, ls=":", lw=1.2)
-    ax[0].text(2.4, E_FULL+0.2, f"full cap = {E_FULL:.1f} J", color=DIM, fontsize=8, ha="right")
+    ax[0].text(-0.35, E_FULL+0.2, f"legacy 2.51 V window = {E_FULL:.1f} J",
+               color=DIM, fontsize=8, ha="left")
     for i, v in enumerate(vals):
-        ax[0].text(i, v+0.25, f"{v:.1f} J\n{100*v/E_USABLE:.0f}% of cap", ha="center", fontsize=9, fontweight="bold")
+        ax[0].text(i, v+0.25,
+                   f"{v:.1f} J\n{100*v/E_USABLE:.0f}% of acct. window",
+                   ha="center", fontsize=9, fontweight="bold")
     ax[0].set_ylabel("energy per fix, from the cap (J)")
     ax[0].set_ylim(0, 13)
-    ax[0].set_title("A · One cold start ≈ the whole supercap\nhot start is 3% of it")
+    ax[0].set_title("A · One cold start consumes ~46% of the accounting window\nhot start is ~3%")
 
     # Panel B: daily energy, log
     names = list(strategies.keys()); dvals = list(strategies.values())
@@ -117,7 +125,16 @@ def main():
     ax[1].set_xlabel("GPS energy per day (J/day, log)")
     for i, v in enumerate(dvals):
         ax[1].text(v*1.1, i, f"{v:.0f}", va="center", fontsize=8.5)
-    ax[1].set_title("B · Reset-every-cycle costs 12-44×\nthe hot-start budget (96 fixes/day)")
+    cold_ratio = strategies["RESET EVERY CYCLE (cold)"] / strategies[
+        "HOT every cycle (retain BBR)"
+    ]
+    marginal_ratio = strategies["RESET EVERY CYCLE (90s marginal)"] / strategies[
+        "HOT every cycle (retain BBR)"
+    ]
+    ax[1].set_title(
+        f"B · Reset-every-cycle costs {cold_ratio:.0f}-{marginal_ratio:.0f}×\n"
+        f"the hot-start budget ({CYC_PER_DAY:.0f} fixes/day)"
+    )
 
     # Panel C: cap voltage during one acquisition, no solar (a spin null)
     for t_end, c, lbl in [(T_HOT, MINT, "HOT 2 s"),
@@ -126,15 +143,20 @@ def main():
         t, v = v_traj(t_end, 0.0)
         ax[2].plot(t, v, color=c, lw=2.6, label=lbl)
         ax[2].scatter([t[-1]], [v[-1]], color=c, s=40, zorder=5)
-    ax[2].axhline(V_BROWN, color=RED, ls="--", lw=1.6)
-    ax[2].text(91, V_BROWN+0.05, "brownout 3.32 V → cold restart", color=RED, fontsize=8.5, ha="right")
+    ax[2].axhline(V_ACCOUNTING_FLOOR, color=RED, ls="--", lw=1.6)
+    ax[2].text(91, V_ACCOUNTING_FLOOR+0.05, "historical reported plateau 3.32 V",
+               color=RED, fontsize=8.5, ha="right")
     ax[2].set_xlabel("time into acquisition (s)")
     ax[2].set_ylabel("supercap voltage (V)")
-    ax[2].set_title("C · Cap during ONE fix at a solar null\n(spinning payload). 90 s cold → brownout")
+    ax[2].set_title("C · Cap during ONE fix at a solar null\n(spinning payload; illustrative endpoint)")
     ax[2].legend(loc="lower left", fontsize=9)
     ax[2].set_ylim(2.4, 4.7)
 
-    _footer(fig, "Stratolink · 1F cap 5.36→3.32V=8.86J · MAX-M10S 30mA acq · cold TTFF≈30s ephemeris-bound · 96 cyc/day")
+    _footer(
+        fig,
+        "Stratolink · nominal 1F / historical 5.36→3.32V accounting window=8.86J · MAX-M10S 30mA acq · "
+        "cold TTFF≈30s ephemeris-bound · 72 cyc/day",
+    )
     fig.tight_layout()
     out = HERE / "gps_start_power.png"
     fig.savefig(out, dpi=160, bbox_inches="tight")
