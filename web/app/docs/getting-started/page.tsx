@@ -86,6 +86,8 @@ export default function GettingStartedPage() {
                                 <ul>
                                     <li><code className="text-sm">NEXT_PUBLIC_SUPABASE_URL</code> - Your Supabase project URL</li>
                                     <li><code className="text-sm">NEXT_PUBLIC_SUPABASE_ANON_KEY</code> - Your Supabase anon key</li>
+                                    <li><code className="text-sm">SUPABASE_SERVICE_ROLE_KEY</code> - Server-only webhook/activation key</li>
+                                    <li><code className="text-sm">TTN_WEBHOOK_SECRET</code> - A separate random secret of at least 32 characters</li>
                                     <li><code className="text-sm">NEXT_PUBLIC_MAPBOX_TOKEN</code> - Your Mapbox access token</li>
                                 </ul>
                             </li>
@@ -98,6 +100,10 @@ export default function GettingStartedPage() {
                             <li>Navigate to Applications → Your Application → Integrations → Webhooks</li>
                             <li>Add a new webhook with format: <strong>JSON</strong></li>
                             <li>Set webhook URL: <code className="text-sm">https://your-vercel-domain.com/api/ttn-webhook</code></li>
+                            <li>
+                                Add header:{' '}
+                                <code className="text-sm">Authorization: Bearer &lt;TTN_WEBHOOK_SECRET&gt;</code>
+                            </li>
                             <li>Save the webhook configuration</li>
                         </ol>
 

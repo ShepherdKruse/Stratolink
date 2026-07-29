@@ -6,6 +6,12 @@ export const dynamic = 'force-dynamic';
  *  Returns booleans + lengths so we can diagnose missing/blank vs. configured
  *  without ever leaking secrets. */
 export async function GET() {
+    // This endpoint is useful on a local bench but exposes deployment and
+    // configuration metadata that has no production purpose.
+    if (process.env.NODE_ENV === 'production') {
+        return NextResponse.json({ error: 'Not found' }, { status: 404 });
+    }
+
     const present = (v: string | undefined) => {
         const s = (v ?? '').trim();
         return { configured: s.length > 0, length: s.length };

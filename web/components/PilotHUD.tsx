@@ -18,6 +18,15 @@ interface PilotHUDProps {
 }
 
 export default function PilotHUD({ activeBalloonId, balloonData, onExit, onToggleSidebar, isSidebarOpen }: PilotHUDProps) {
+    const [utcTime, setUtcTime] = useState(new Date().toISOString().substring(0, 19).replace('T', ' '));
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setUtcTime(new Date().toISOString().substring(0, 19).replace('T', ' '));
+        }, 1000);
+        return () => clearInterval(interval);
+    }, []);
+
     if (!activeBalloonId || !balloonData) {
         return null;
     }
@@ -26,15 +35,6 @@ export default function PilotHUD({ activeBalloonId, balloonData, onExit, onToggl
     const batteryPercentage = Math.min(100, Math.max(0, ((batteryVoltage - 3.0) / (4.2 - 3.0)) * 100));
     const altitudeFt = balloonData.altitude_m * 3.28084;
     const altitudeKm = balloonData.altitude_m / 1000;
-
-    const [utcTime, setUtcTime] = useState(new Date().toISOString().substring(0, 19).replace('T', ' '));
-    
-    useEffect(() => {
-        const interval = setInterval(() => {
-            setUtcTime(new Date().toISOString().substring(0, 19).replace('T', ' '));
-        }, 1000);
-        return () => clearInterval(interval);
-    }, []);
 
     // Format coordinates in decimal degrees (explicit, machine-readable)
     const formatCoord = (coord: number, isLat: boolean) => {

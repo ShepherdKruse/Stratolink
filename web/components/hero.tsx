@@ -35,13 +35,14 @@ export function Hero() {
   useEffect(() => {
     const canvas = canvasRef.current
     if (!canvas) return
+    const activeCanvas = canvas
 
-    const ctx = canvas.getContext("2d")
+    const ctx = activeCanvas.getContext("2d")
     if (!ctx) return
 
     const resizeCanvas = () => {
-      canvas.width = canvas.offsetWidth
-      canvas.height = canvas.offsetHeight
+      activeCanvas.width = activeCanvas.offsetWidth
+      activeCanvas.height = activeCanvas.offsetHeight
     }
     resizeCanvas()
     window.addEventListener("resize", resizeCanvas)
@@ -55,8 +56,8 @@ export function Hero() {
       maxLife: number
 
       constructor() {
-        this.x = Math.random() * canvas.width
-        this.y = Math.random() * canvas.height
+        this.x = Math.random() * activeCanvas.width
+        this.y = Math.random() * activeCanvas.height
         this.vx = (Math.random() - 0.5) * 0.5
         this.vy = (Math.random() - 0.5) * 0.3
         this.life = 0
@@ -68,9 +69,9 @@ export function Hero() {
         this.y += this.vy
         this.life++
 
-        if (this.x < 0 || this.x > canvas.width || this.y < 0 || this.y > canvas.height || this.life > this.maxLife) {
-          this.x = Math.random() * canvas.width
-          this.y = Math.random() * canvas.height
+        if (this.x < 0 || this.x > activeCanvas.width || this.y < 0 || this.y > activeCanvas.height || this.life > this.maxLife) {
+          this.x = Math.random() * activeCanvas.width
+          this.y = Math.random() * activeCanvas.height
           this.life = 0
         }
       }
@@ -93,7 +94,7 @@ export function Hero() {
 
     let animationId: number
     const animate = () => {
-      ctx.clearRect(0, 0, canvas.width, canvas.height)
+      ctx.clearRect(0, 0, activeCanvas.width, activeCanvas.height)
       paths.forEach((path) => {
         path.update()
         path.draw(ctx)

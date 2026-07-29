@@ -48,17 +48,14 @@ export async function activateDevice(
     try {
         const supabase = createServiceRoleClient();
 
-        const hasAdminKey =
-            process.env.ADMIN_ACTIVATION_KEY &&
-            typeof deviceId === 'string' &&
-            deviceId.includes(process.env.ADMIN_ACTIVATION_KEY);
-
-        const isDevelopment =
-            process.env.NODE_ENV === 'development' ||
-            process.env.NEXT_PUBLIC_DEV_MODE === 'true' ||
-            (process.env.VERCEL_ENV !== 'production' && process.env.VERCEL_ENV !== undefined);
-
-        const allowAutoCreate = isDevelopment || hasAdminKey;
+        /* Device creation is a security boundary, not a UI mode. A previous
+         * shortcut allowed a NEXT_PUBLIC flag, any Vercel preview environment,
+         * or an admin key embedded in deviceId to enable service-role writes.
+         * The last form also put the admin secret into a URL/loggable field.
+         * Only the actual local development server may auto-create; every
+         * deployed build uses the dedicated authenticated admin flows. */
+        const isDevelopment = process.env.NODE_ENV === 'development';
+        const allowAutoCreate = isDevelopment;
 
         const { data: device, error: fetchError } = await supabase
             .from('devices')

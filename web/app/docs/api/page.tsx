@@ -49,6 +49,11 @@ export default function APIPage() {
                             <li>Navigate to Applications → Your Application → Integrations → Webhooks</li>
                             <li>Add a new webhook with format: <strong>JSON</strong></li>
                             <li>Set the webhook URL to your deployed endpoint</li>
+                            <li>
+                                Add the header{' '}
+                                <code className="text-sm">Authorization: Bearer &lt;TTN_WEBHOOK_SECRET&gt;</code>.
+                                Generate this secret independently; do not reuse a TTN API key or Supabase key.
+                            </li>
                             <li>Save the configuration</li>
                         </ol>
 
@@ -60,6 +65,7 @@ export default function APIPage() {
                             <code className="text-sm font-mono text-foreground whitespace-pre">{`{
   "end_device_ids": {
     "device_id": "balloon-001",
+    "dev_addr": "260CACD0",
     "dev_eui": "...",
     "application_ids": {
       "application_id": "..."
@@ -67,6 +73,8 @@ export default function APIPage() {
   },
   "received_at": "2024-01-01T12:00:00Z",
   "uplink_message": {
+    "session_key_id": "optional_ttn_session_identifier",
+    "f_cnt": 42,
     "frm_payload": "base64_encoded_payload",
     "decoded_payload": {
       "lat": 40.7128,
@@ -168,8 +176,12 @@ const { data, error } = await supabase
 
                         <h2>Security</h2>
                         <ul>
-                            <li>Webhook endpoints should validate incoming requests</li>
-                            <li>Use Supabase Row Level Security (RLS) policies to control data access</li>
+                            <li>The TTN webhook fails closed unless its Bearer secret is configured and valid</li>
+                            <li>
+                                Raw TTN device ID, server receive time, and FCntUp make
+                                retried webhook or Storage deliveries idempotent
+                            </li>
+                            <li>Supabase RLS and grants keep public clients read-only</li>
                             <li>Never expose service role keys in client-side code</li>
                             <li>Validate and sanitize all incoming telemetry data</li>
                         </ul>

@@ -1,15 +1,10 @@
 'use client';
 
 import { useMemo, useState } from 'react';
+import { telemetryNumber } from '@/lib/telemetry-values';
 import { SectionLabel, SlHeader, StackedLineChart } from './mobileStratolinkUi';
 
 type TelemetryPoint = Record<string, unknown>;
-
-function coerceNum(v: unknown): number | null {
-    if (v === null || v === undefined) return null;
-    const n = typeof v === 'number' ? v : Number(v);
-    return Number.isFinite(n) ? n : null;
-}
 
 function toChart(rows: TelemetryPoint[]): Array<{ t: number; alt?: number | null; batt?: number | null; sol?: number | null; temp?: number | null; lux?: number | null; rssi?: number | null; sats?: number | null }> {
     const out: Array<{ t: number } & Record<string, number | null | undefined>> = [];
@@ -18,13 +13,13 @@ function toChart(rows: TelemetryPoint[]): Array<{ t: number; alt?: number | null
         if (Number.isNaN(t)) continue;
         out.push({
             t,
-            alt: coerceNum(r.altitude_m),
-            batt: coerceNum(r.battery_voltage),
-            sol: coerceNum(r.solar_voltage),
-            temp: coerceNum(r.temperature),
-            lux: coerceNum(r.ambient_lux),
-            rssi: coerceNum(r.rssi),
-            sats: coerceNum(r.gps_satellites),
+            alt: telemetryNumber(r.altitude_m),
+            batt: telemetryNumber(r.battery_voltage),
+            sol: telemetryNumber(r.solar_voltage),
+            temp: telemetryNumber(r.temperature),
+            lux: telemetryNumber(r.ambient_lux),
+            rssi: telemetryNumber(r.rssi),
+            sats: telemetryNumber(r.gps_satellites),
         });
     }
     return out.sort((a, b) => a.t - b.t);
@@ -54,13 +49,13 @@ export default function MobileTelemetryTab({ deviceId, telemetryRows }: MobileTe
     }, [full, rangeHr]);
 
     const last = slice.at(-1);
-    const lastBatt = coerceNum(last?.batt ?? null);
-    const lastAlt = coerceNum(last?.alt ?? null);
-    const lastTemp = coerceNum(last?.temp ?? null);
-    const lastSol = coerceNum(last?.sol ?? null);
-    const lastLux = coerceNum(last?.lux ?? null);
-    const lastRssi = coerceNum(last?.rssi ?? null);
-    const lastSats = coerceNum(last?.sats ?? null);
+    const lastBatt = telemetryNumber(last?.batt ?? null);
+    const lastAlt = telemetryNumber(last?.alt ?? null);
+    const lastTemp = telemetryNumber(last?.temp ?? null);
+    const lastSol = telemetryNumber(last?.sol ?? null);
+    const lastLux = telemetryNumber(last?.lux ?? null);
+    const lastRssi = telemetryNumber(last?.rssi ?? null);
+    const lastSats = telemetryNumber(last?.sats ?? null);
 
     const label = rangeHr == null ? 'ALL' : RANGES.find((r) => r.hrs === rangeHr)?.label ?? 'ALL';
 

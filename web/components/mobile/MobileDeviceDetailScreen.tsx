@@ -1,6 +1,7 @@
 'use client';
 
 import { SectionLabel, SlHeader, StackedLineChart } from './mobileStratolinkUi';
+import { telemetryNumber } from '@/lib/telemetry-values';
 import {
     deviceUiStatus,
     fmtCoords,
@@ -19,22 +20,16 @@ function chartRows(rows: TelemetryPoint[]): Array<Record<string, number | null |
         if (Number.isNaN(t)) continue;
         out.push({
             t,
-            alt: coerceNum(r.altitude_m),
-            batt: coerceNum(r.battery_voltage),
-            sol: coerceNum(r.solar_voltage),
-            temp: coerceNum(r.temperature),
-            lux: coerceNum(r.ambient_lux),
-            rssi: coerceNum(r.rssi),
-            sats: coerceNum(r.gps_satellites),
+            alt: telemetryNumber(r.altitude_m),
+            batt: telemetryNumber(r.battery_voltage),
+            sol: telemetryNumber(r.solar_voltage),
+            temp: telemetryNumber(r.temperature),
+            lux: telemetryNumber(r.ambient_lux),
+            rssi: telemetryNumber(r.rssi),
+            sats: telemetryNumber(r.gps_satellites),
         });
     }
     return out.sort((a, b) => a.t - b.t);
-}
-
-function coerceNum(v: unknown): number | null {
-    if (v === null || v === undefined) return null;
-    const n = typeof v === 'number' ? v : Number(v);
-    return Number.isFinite(n) ? n : null;
 }
 
 interface MobileDeviceDetailScreenProps {
@@ -54,12 +49,12 @@ export default function MobileDeviceDetailScreen({
 }: MobileDeviceDetailScreenProps) {
     const charts = chartRows(telemetryRows);
     const last = charts.length > 0 ? charts[charts.length - 1] : null;
-    const batt = coerceNum(last?.batt) ?? coerceNum(device.battery_voltage);
-    const alt = coerceNum(last?.alt) ?? (device.awaiting_gps ? null : device.altitude_m);
-    const temp = coerceNum(last?.temp);
-    const solar = coerceNum(last?.sol);
-    const rssiRecent = coerceNum(last?.rssi) ?? coerceNum(device.rssi);
-    const sats = coerceNum(last?.sats) ?? coerceNum(device.gps_satellites);
+    const batt = telemetryNumber(last?.batt) ?? telemetryNumber(device.battery_voltage);
+    const alt = telemetryNumber(last?.alt) ?? (device.awaiting_gps ? null : device.altitude_m);
+    const temp = telemetryNumber(last?.temp);
+    const solar = telemetryNumber(last?.sol);
+    const rssiRecent = telemetryNumber(last?.rssi) ?? telemetryNumber(device.rssi);
+    const sats = telemetryNumber(last?.sats) ?? telemetryNumber(device.gps_satellites);
     const status = deviceUiStatus(device);
     const gpsHighlight = typeof sats === 'number' && sats > 0;
 
@@ -160,7 +155,7 @@ export default function MobileDeviceDetailScreen({
                     valueDisplay={batt != null ? batt.toFixed(2) : '—'}
                     unitSuffix=" V"
                     data={charts}
-                    getY={(r) => coerceNum(r.batt)}
+                    getY={(r) => telemetryNumber(r.batt)}
                     min={3.2}
                     max={5.6}
                 />
@@ -169,18 +164,18 @@ export default function MobileDeviceDetailScreen({
                     valueDisplay={alt != null && Number.isFinite(alt) ? Math.round(alt) : '—'}
                     unitSuffix=" m"
                     data={charts}
-                    getY={(r) => coerceNum(r.alt)}
+                    getY={(r) => telemetryNumber(r.alt)}
                 />
                 <StackedLineChart
                     title="Solar"
                     valueDisplay={solar != null ? solar.toFixed(2) : '—'}
                     unitSuffix=" V"
                     data={charts}
-                    getY={(r) => coerceNum(r.sol)}
+                    getY={(r) => telemetryNumber(r.sol)}
                     min={0}
                     max={6}
                 />
-                <StackedLineChart title="Temperature" valueDisplay={temp != null ? temp.toFixed(1) : '—'} unitSuffix=" °C" data={charts} getY={(r) => coerceNum(r.temp)} />
+                <StackedLineChart title="Temperature" valueDisplay={temp != null ? temp.toFixed(1) : '—'} unitSuffix=" °C" data={charts} getY={(r) => telemetryNumber(r.temp)} />
 
                 <SectionLabel>Data freshness</SectionLabel>
                 <div className="px-5 pb-28">

@@ -115,7 +115,7 @@ export default function ActivateDeviceInner({ params }: PageProps) {
                 setLocationError('Geolocation is not supported by your browser.');
             }
         }
-    }, [step]);
+    }, [step, location]);
 
     const handleMouseDown = () => {
         setIsHolding(true);

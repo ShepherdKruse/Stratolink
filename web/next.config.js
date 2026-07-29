@@ -2,9 +2,6 @@
 const nextConfig = {
     reactStrictMode: true,
     transpilePackages: ['recharts'],
-    typescript: {
-        ignoreBuildErrors: true,
-    },
     images: {
         unoptimized: true,
     },

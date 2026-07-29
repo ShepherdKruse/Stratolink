@@ -29,7 +29,7 @@ export function WindCanvas({
 }: WindCanvasProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const particlesRef = useRef<Particle[]>([])
-  const animationRef = useRef<number>()
+  const animationRef = useRef<number | undefined>(undefined)
 
   const PARTICLE_COUNT = 800
   const PARTICLE_LINE_WIDTH = 0.8
@@ -45,6 +45,13 @@ export function WindCanvas({
       speed: 0,
     }))
   }, [width, height])
+
+  const canvasToLatLon = useCallback((x: number, y: number) => {
+    const { bounds } = windField
+    const lon = (x / width) * (bounds.lonMax - bounds.lonMin) + bounds.lonMin
+    const lat = bounds.latMax - (y / height) * (bounds.latMax - bounds.latMin)
+    return { lat, lon }
+  }, [windField, width, height])
 
   const draw = useCallback(() => {
     const canvas = canvasRef.current
@@ -165,15 +172,7 @@ export function WindCanvas({
     if (isPlaying) {
       animationRef.current = requestAnimationFrame(draw)
     }
-  }, [windField, trajectories, width, height, isPlaying, showParticles, hoveredTrajectory])
-
-  // Helper function for particle canvas coordinates
-  function canvasToLatLon(x: number, y: number) {
-    const { bounds } = windField
-    const lon = (x / width) * (bounds.lonMax - bounds.lonMin) + bounds.lonMin
-    const lat = bounds.latMax - (y / height) * (bounds.latMax - bounds.latMin)
-    return { lat, lon }
-  }
+  }, [windField, trajectories, width, height, isPlaying, showParticles, hoveredTrajectory, canvasToLatLon])
 
   useEffect(() => {
     draw()

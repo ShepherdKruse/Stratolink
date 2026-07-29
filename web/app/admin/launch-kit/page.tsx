@@ -1,5 +1,8 @@
 'use client';
 
+/* eslint-disable @next/next/no-img-element -- Generated QR data URLs are
+ * intentionally rendered directly so operators can save the exact image. */
+
 import { useState, useTransition } from 'react';
 import Link from 'next/link';
 import { listLaunchKitDevices, rotateLaunchLink } from '@/lib/actions/launch-kit';

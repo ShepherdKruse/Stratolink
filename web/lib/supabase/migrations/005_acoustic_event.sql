@@ -1,4 +1,6 @@
--- Add acoustic_event from MEMS mic + FFT change detection (byte 37 in firmware payload)
+-- Historical intermediate migration. Apply 005_add_uv_lux_acoustic.sql next;
+-- that file replaces this intermediate view. Current firmware uses byte 34,
+-- and the mic detector is broadband DC-blocked energy rather than an FFT.
 ALTER TABLE telemetry
 ADD COLUMN IF NOT EXISTS acoustic_event SMALLINT;
 

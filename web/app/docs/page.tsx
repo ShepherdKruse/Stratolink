@@ -4,6 +4,21 @@ import { Footer } from '@/components/footer';
 
 const docsSections = [
     {
+        title: 'System Architecture',
+        description: 'Interactive tour — fleet, link layer, payload, and data path',
+        href: '/docs/architecture',
+        icon: (
+            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <circle cx="12" cy="12" r="8" strokeLinecap="round" strokeWidth={1.5} />
+                <circle cx="12" cy="12" r="4" strokeLinecap="round" strokeWidth={1.5} />
+                <circle cx="12" cy="4" r="1.3" fill="currentColor" stroke="none" />
+                <circle cx="20" cy="12" r="1.3" fill="currentColor" stroke="none" />
+                <circle cx="12" cy="20" r="1.3" fill="currentColor" stroke="none" />
+                <circle cx="4" cy="12" r="1.3" fill="currentColor" stroke="none" />
+            </svg>
+        ),
+    },
+    {
         title: 'Getting Started',
         description: 'Set up your Stratolink system from scratch',
         href: '/docs/getting-started',

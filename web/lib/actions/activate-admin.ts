@@ -1,6 +1,6 @@
 'use server';
 
-import { createClient } from '@/lib/supabase';
+import { createServiceRoleClient } from '@/lib/supabase';
 
 /**
  * Admin-only server action to manually create devices
@@ -23,7 +23,7 @@ export async function createDeviceAdmin(
             };
         }
 
-        const supabase = createClient();
+        const supabase = createServiceRoleClient();
 
         // Check if device already exists
         const { data: existing } = await supabase

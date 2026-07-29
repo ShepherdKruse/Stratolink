@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { Navigation } from '@/components/navigation';
 import { Footer } from '@/components/footer';
+import { PayloadAnatomy } from '@/components/how-it-works/PayloadAnatomy';
 
 export default function HardwarePage() {
     return (
@@ -28,6 +29,10 @@ export default function HardwarePage() {
                 </div>
 
                 <div className="mx-auto max-w-4xl px-6 py-16 sm:px-8 sm:py-24">
+                    <div className="mb-16">
+                        <PayloadAnatomy />
+                    </div>
+
                     <div className="docs-content">
                         <h2>Hardware Requirements</h2>
                         <ul>
