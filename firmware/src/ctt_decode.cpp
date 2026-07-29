@@ -38,8 +38,13 @@ bool ctt_decode(const uint8_t payload[5], ctt_frame_t* out) {
     int8_t i2 = motus_index(payload[2]);
     int8_t i3 = motus_index(payload[3]);
     out->motus_valid = (i0 >= 0 && i1 >= 0 && i2 >= 0 && i3 >= 0);
+    /* The reference CTT transmitter emits the LE 5-bit groups in on-air byte
+     * order: byte0 carries bits 0..4, byte1 bits 5..9, and so on. Reversing
+     * these shifts preserves a plausible 20-bit number but assigns the
+     * detection to the wrong Motus tag. */
     out->id_motus = out->motus_valid
-        ? (((uint32_t)i0 << 15) | ((uint32_t)i1 << 10) | ((uint32_t)i2 << 5) | (uint32_t)i3)
+        ? ((uint32_t)i0 | ((uint32_t)i1 << 5) |
+           ((uint32_t)i2 << 10) | ((uint32_t)i3 << 15))
         : 0;
 
     return out->crc_ok;

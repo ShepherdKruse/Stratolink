@@ -71,7 +71,27 @@ static const Module::RfSwitchMode_t rfswitch_table[] = {
     END_OF_MODE_TABLE,
 };
 
-static STM32WLx radio = STM32WLx(new STM32WLx_Module());
+static STM32WLx* radio = nullptr;
+
+/* Keep the bench diagnostic subject to the same allocation contract as the
+ * flight driver.  In particular, do not allocate during static construction:
+ * a failed RadioLib HAL allocation must remain observable after setup starts. */
+static bool allocate_diag_radio(void) {
+    STM32WLx_Module* module = new STM32WLx_Module();
+    if (!module || !module->hal) {
+        if (module) delete module;
+        return false;
+    }
+    STM32WLx* candidate = new STM32WLx(module);
+    if (!candidate) {
+        delete module->hal;
+        module->hal = nullptr;
+        delete module;
+        return false;
+    }
+    radio = candidate;
+    return true;
+}
 
 enum Phase : uint8_t { P_SLEEP=0, P_STANDBY, P_RX, P_TXBEACON, P_RELAY, P_MODESW, P_BW500, P_NPHASES, P_AUTO=255 };
 static const char *PNAME[P_NPHASES] = {"SLEEP","STANDBY","RX","TXBEACON","RELAY","MODESW","BW500"};
@@ -132,25 +152,25 @@ static void mark_seen(uint32_t from, uint32_t id) {
 
 /* Apply the Meshtastic LongFast PHY (used at boot and after the mode-switch test). */
 static int16_t cfg_meshtastic(float bw = MESH_BW) {
-    radio.standby();
-    int16_t s = radio.setFrequency(MESH_FREQ);
-    s |= radio.setSpreadingFactor(MESH_SF);
-    s |= radio.setBandwidth(bw);
-    s |= radio.setCodingRate(MESH_CR);
-    s |= radio.setPreambleLength(MESH_PREAMBLE);
-    s |= radio.setSyncWord(MESH_SYNC);
-    s |= radio.setCRC(true);
-    s |= radio.setOutputPower(MESH_TX_DBM);
+    radio->standby();
+    int16_t s = radio->setFrequency(MESH_FREQ);
+    s |= radio->setSpreadingFactor(MESH_SF);
+    s |= radio->setBandwidth(bw);
+    s |= radio->setCodingRate(MESH_CR);
+    s |= radio->setPreambleLength(MESH_PREAMBLE);
+    s |= radio->setSyncWord(MESH_SYNC);
+    s |= radio->setCRC(true);
+    s |= radio->setOutputPower(MESH_TX_DBM);
     return s;
 }
 /* Apply our LoRaWAN uplink PHY (for the mode-switch timing test). */
 static int16_t cfg_lorawan(void) {
-    radio.standby();
-    int16_t s = radio.setFrequency(LW_FREQ);
-    s |= radio.setSpreadingFactor(LW_SF);
-    s |= radio.setBandwidth(LW_BW);
-    s |= radio.setPreambleLength(LW_PREAMBLE);
-    s |= radio.setSyncWord(LW_SYNC);
+    radio->standby();
+    int16_t s = radio->setFrequency(LW_FREQ);
+    s |= radio->setSpreadingFactor(LW_SF);
+    s |= radio->setBandwidth(LW_BW);
+    s |= radio->setPreambleLength(LW_PREAMBLE);
+    s |= radio->setSyncWord(LW_SYNC);
     return s;
 }
 
@@ -172,16 +192,16 @@ static uint8_t build_beacon(uint8_t *p, uint32_t id) {
 }
 
 static void handle_rx(bool relay) {
-    size_t len = radio.getPacketLength();
-    int16_t st = radio.readData(rxbuf, len);
-    if (st != RADIOLIB_ERR_NONE) { mrd.rx_crc_err++; radio.startReceive(); return; }
-    if (len < 16) { radio.startReceive(); return; }
+    size_t len = radio->getPacketLength();
+    int16_t st = radio->readData(rxbuf, len);
+    if (st != RADIOLIB_ERR_NONE) { mrd.rx_crc_err++; radio->startReceive(); return; }
+    if (len < 16) { radio->startReceive(); return; }
     mrd.rx_count++;
     uint32_t to=rd_u32(rxbuf), from=rd_u32(rxbuf+4), id=rd_u32(rxbuf+8);
     uint8_t flags=rxbuf[12]; uint8_t hop=flags & 0x07;
     mrd.last_to=to; mrd.last_from=from; mrd.last_id=id; mrd.last_flags=flags;
     mrd.last_hop=hop; mrd.last_chan=rxbuf[13]; mrd.last_len=(uint8_t)len;
-    mrd.last_rssi=(int16_t)radio.getRSSI(); mrd.last_snr_cdb=(int16_t)(radio.getSNR()*100);
+    mrd.last_rssi=(int16_t)radio->getRSSI(); mrd.last_snr_cdb=(int16_t)(radio->getSNR()*100);
     LOGV("RX from=", from); LOGV("  id=", id); LOGV("  hop=", hop); LOGV("  rssi=", mrd.last_rssi);
     if (relay) {
         if (hop == 0) { mrd.relay_hop0++; }
@@ -190,12 +210,12 @@ static void handle_rx(bool relay) {
             mark_seen(from,id);
             rxbuf[12] = (flags & ~0x07) | (hop-1);   // decrement hop_limit
             rxbuf[15] = 0xD1;                          // relay_node = our last byte (marker)
-            radio.transmit(rxbuf, len);               // opaque re-TX, no decrypt/PSK
+            radio->transmit(rxbuf, len);              // opaque re-TX, no decrypt/PSK
             mrd.relay_fwd++; mrd.tx_count++;
             LOG("  -> FORWARDED (hop-1)");
         }
     }
-    radio.startReceive();
+    radio->startReceive();
 }
 
 void setup() {
@@ -204,13 +224,18 @@ void setup() {
 #endif
     power_adc_init();
     mrd.magic = 0x4D524431; mrd.cmd = P_AUTO;
-    radio.setRfSwitchTable(rfswitch_pins, rfswitch_table);
-    int16_t st = radio.begin(MESH_FREQ, MESH_BW, MESH_SF, MESH_CR, MESH_SYNC,
-                             MESH_TX_DBM, MESH_PREAMBLE, TCXO_V, false);
+    if (!allocate_diag_radio()) {
+        mrd.radio_begin_state = RADIOLIB_ERR_MEMORY_ALLOCATION_FAILED;
+        LOG("[mrd] RadioLib allocation failed");
+        return;
+    }
+    radio->setRfSwitchTable(rfswitch_pins, rfswitch_table);
+    int16_t st = radio->begin(MESH_FREQ, MESH_BW, MESH_SF, MESH_CR, MESH_SYNC,
+                              MESH_TX_DBM, MESH_PREAMBLE, TCXO_V, false);
     mrd.radio_begin_state = st;
     LOGV("[mrd] radio.begin = ", st);
-    radio.setCRC(true);
-    radio.setPacketReceivedAction(onRx);
+    radio->setCRC(true);
+    radio->setPacketReceivedAction(onRx);
     LOG("[mrd] Meshtastic LongFast diag up");
 }
 
@@ -222,10 +247,10 @@ static void enter_phase(uint8_t ph) {
     cur_phase = ph; mrd.phase = ph; phase_start = millis();
     LOGV("PHASE: ", PNAME[ph % P_NPHASES]);
     switch (ph) {
-        case P_SLEEP:   radio.sleep();   break;
-        case P_STANDBY: radio.standby(); break;
+        case P_SLEEP:   radio->sleep();   break;
+        case P_STANDBY: radio->standby(); break;
         case P_RX:
-        case P_RELAY:   cfg_meshtastic(); rxFlag=false; radio.startReceive(); break;
+        case P_RELAY:   cfg_meshtastic(); rxFlag=false; radio->startReceive(); break;
         case P_TXBEACON: cfg_meshtastic(); break;
         case P_BW500:   cfg_meshtastic(BW500); break;
         case P_MODESW:  break;
@@ -236,6 +261,10 @@ void loop() {
     mrd.uptime_s = millis()/1000;
     mrd.vstor_mv = power_adc_read_vSTOR_mv();
     mrd.solar_mv = power_adc_read_solar_mv();
+    if (!radio) {
+        delay(1000);
+        return;
+    }
 
     // RX-driven phases: service received frames
     if ((cur_phase==P_RX || cur_phase==P_RELAY) && rxFlag) { rxFlag=false; handle_rx(cur_phase==P_RELAY); }
@@ -243,7 +272,7 @@ void loop() {
     // periodic action within a phase
     if (cur_phase==P_TXBEACON && (millis()-phase_start)%4000 < 50) {
         uint8_t n = build_beacon(rxbuf, beacon_id++);
-        uint32_t t0=micros(); radio.transmit(rxbuf, n); mrd.last_toa_us=micros()-t0;
+        uint32_t t0=micros(); radio->transmit(rxbuf, n); mrd.last_toa_us=micros()-t0;
         mrd.tx_count++; LOGV("TXBEACON toa_us=", mrd.last_toa_us);
         delay(60);
     }
@@ -252,12 +281,12 @@ void loop() {
         for (int i=0;i<10;i++){ cfg_lorawan(); cfg_meshtastic(); }
         mrd.modeswitch_us = (micros()-t0)/20;     // mean of 20 reconfigs
         LOGV("MODESW mean_us=", mrd.modeswitch_us);
-        radio.startReceive();                     // leave it listening
+        radio->startReceive();                    // leave it listening
         phase_start = millis() - PHASE_MS + 3000; // short phase, move on
     }
     if (cur_phase==P_BW500 && (millis()-phase_start)%4000 < 50) {
         uint8_t n = build_beacon(rxbuf, beacon_id++);
-        uint32_t t0=micros(); radio.transmit(rxbuf, n); mrd.bw500_toa_us=micros()-t0;
+        uint32_t t0=micros(); radio->transmit(rxbuf, n); mrd.bw500_toa_us=micros()-t0;
         LOGV("BW500 toa_us=", mrd.bw500_toa_us); delay(60);
     }
 

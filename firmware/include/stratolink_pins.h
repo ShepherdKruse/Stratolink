@@ -51,7 +51,7 @@
 #define I2C_ADDR_ACCEL              0x18  // LIS2DH12TR (U7) — SDO/SA0 tied to GND
 #define I2C_ADDR_TEMP               0x48  // TMP117NAIYBGR (U5) — ADD0 tied to GND
 #define I2C_ADDR_UV                 0x53  // LTR-390UV-01 (U6) — fixed address
-#define I2C_ADDR_BARO               0x76  // MS5611-01BA03 (U4) — CSB reads LOW on this board
+#define I2C_ADDR_BARO               0x76  // MS5611-01BA03 (U4) — CSB HIGH; address LSB is complement of CSB
 
 // =============================================================================
 //    ACCELEROMETER — LIS2DH12TR (U7)
@@ -59,16 +59,13 @@
 //
 // Burst detection via hardware freefall interrupt.
 //
-// Configure freefall detection → fires INT1 → wakes MCU from STOP2 →
+// Configure freefall detection → fires INT1 → wakes MCU from STOP1 →
 // firmware switches to rapid descent beaconing (fast GPS fixes, high LoRa
 // rate). Zero polling required during normal float.
 //
-// At 1 Hz low-power mode (2 µA), the accelerometer continuously logs 3-axis
-// data. Cross-correlating with MS5611 pressure oscillations characterizes
-// atmospheric gravity waves — a measurement the atmospheric science community
-// wants from balloon-borne platforms. Pendulum motion from the payload string
-// dominates at ~1-3s period; gravity waves are 5-30 min period, so they're
-// easily separable with a low-pass filter.
+// The flight freefall configuration uses 100 Hz low-power mode so INT1 can
+// detect a bounded-duration acceleration event. ACCEL_LOWPOWER_ODR_HZ remains
+// the optional slow-logging setting; it is not the active freefall ODR.
 
 #define PIN_ACCEL_INT1              PA_8   // LIS2DH12 INT1 output.
                                           // Configure as EXTI wakeup source for
@@ -150,8 +147,9 @@
 #define PIN_VBAT_OK                 PB_5   // Digital input. Active high.
                                           // Connected through R8 (100kΩ series) to
                                           // BQ25570 VBAT_OK output (U1 pin 13).
-                                          // HIGH = supercap above ~3.51V (rising)
-                                          // LOW  = supercap below ~1.69V (falling)
+                                          // As-built HIGH threshold ~2.00 V rising;
+                                          // computed LOW threshold ~1.62 V falling.
+                                          // Both require final-board HIL.
                                           // Binary flag — no voltage granularity.
                                           // For real state-of-charge, read VSTOR ADC.
 
@@ -161,10 +159,11 @@
 // V_ADC = VSTOR × (R23 / (R22 + R23)) = VSTOR × 0.5
 // To recover VSTOR: multiply ADC reading by 2.
 //
-// CRITICAL: 500 kΩ Thévenin source impedance. The STM32 ADC needs at
-// least 50 ms settling time after GPIO wakeup before sampling. Set the
-// GPIO to analog mode, wait, then read. Do NOT rely on default sampling
-// time — it's far too short for this impedance.
+// CRITICAL: 500 kΩ Thévenin source impedance. Do not rely on STM32duino's
+// default ADC sample time: it is far too short for this divider. power_adc.cpp
+// leaves the pin in analog mode and uses a 250 kHz ADC clock with the 160.5-
+// cycle sample setting (~642 us, about 256 RC time constants), which settles
+// well beyond 12-bit accuracy without a separate millisecond-scale delay.
 
 #define PIN_VSTOR_ADC               PA_10  // STM32WLE5 ADC1_IN6 (not IN4 as old comment said)
 /* BOM-confirmed 1MΩ / 1MΩ divider — straight 2.0× recovery multiplier.
@@ -176,7 +175,7 @@
 #define VSTOR_DIVIDER_RATIO         2.0f
 #define VSTOR_DIVIDER_R_TOP         1000000  // R22, 1MΩ (BOM)
 #define VSTOR_DIVIDER_R_BOT         1000000  // R23, 1MΩ (BOM)
-#define VSTOR_ADC_SETTLE_MS         50    // Minimum settling time
+#define VSTOR_ADC_SETTLE_US         642   // Implemented HAL sample aperture
 
 // --- Solar ADC: solar cell voltage monitoring ---
 //
@@ -188,13 +187,13 @@
 // Only drains during daylight. Firmware can use this for day/night detection
 // and solar irradiance estimation.
 //
-// Same high source impedance as VSTOR — same 50 ms settling requirement.
+// Same high source impedance as VSTOR — use the same long HAL sample aperture.
 
 #define PIN_SOLAR_ADC               PA_15  // STM32WLE5 ADC1_IN11 (not IN5 as old comment said)
 #define SOLAR_DIVIDER_RATIO         2.0f
 #define SOLAR_DIVIDER_R_TOP         1000000  // R19, 1MΩ (BOM)
 #define SOLAR_DIVIDER_R_BOT         1000000  // R21, 1MΩ (BOM)
-#define SOLAR_ADC_SETTLE_MS         50    // Minimum settling time
+#define SOLAR_ADC_SETTLE_US         642   // Implemented HAL sample aperture
 
 // --- Programmed voltage thresholds (from resistor dividers R1-R8) ---
 // These are hardware-set by resistors and cannot be changed in firmware.
@@ -205,7 +204,7 @@
 // can wake at lower VSTOR but operates in buck dropout (VOUT ≈ VSTOR - 0.2V)
 // until VSTOR > ~3.5V, at which point VOUT regulates to the 3.3V setpoint.
 #define BQ25570_VOUT_NOMINAL_MV     3312  // Buck output (VOUT_SET divider)
-#define BQ25570_VBAT_OV_MV          5363  // Overvoltage lockout (supercap max)
+#define BQ25570_VBAT_OV_MV          5363  // Nominal divider result, not a tolerance-safe maximum
 #define BQ25570_VBAT_OK_RISE_MV     2000  // observed; was 3510 in original spec
 #define BQ25570_VBAT_OK_FALL_MV     1620  // computed from R5/R6/R7; verify on bench
 #define BQ25570_BUCK_REGULATION_V   3.5f  // VSTOR above which buck holds 3.3V
@@ -215,8 +214,15 @@
 
 // --- Energy budget constants ---
 //
-// Supercap: 1F, VSTOR max ~5.36V, VSTOR min ~2.51V
-// Available energy: 0.5 × 1F × (5.36² - 2.51²) ≈ 11.2 J
+// Supercap energy model only: exact part is 0.8-1.2 F, nominal VSTOR ceiling
+// ~5.36 V. Historical models used ~2.51 V as an illustrative endpoint.
+// This nominal ceiling is not a safety bound: the fitted 1% divider does not
+// meet the 0.1% resistor condition on TI's +/-2% threshold specification.
+// See analysis/diagnostics/supercap_charge_ceiling_audit.py before solar HIL.
+// Nor is Flight 3's reported ~3.32 V plateau a measured BOR/VSTOR floor: its
+// fixed-VDDA ADC lost rail observability in buck dropout. Select the real
+// energy endpoint and load gates only from exact-assembly PPK2 low-rail HIL.
+// Legacy nominal model: 0.5 × 1 F × (5.36² - 2.51²) ≈ 11.2 J.
 //
 // Sleep baseline: ~7.5 µA total system → ~1.3 J over 12 hours
 // GPS hot-start + LoRa TX: ~0.3 J per cycle (varies with fix time)
@@ -227,17 +233,17 @@
 // GPS every 2 hours at night is tight but possible.
 
 #define SUPERCAP_CAPACITANCE_F      1.0f
-#define SUPERCAP_MAX_V              5.36f  // VBAT_OV - margin
+#define SUPERCAP_MAX_V              5.36f  // Nominal energy-model ceiling only
 #define SUPERCAP_MIN_V              2.51f  // Below VBAT_OK_FALL
 #define SUPERCAP_ENERGY_J           11.2f  // 0.5 × C × (Vmax² - Vmin²)
-#define SYSTEM_SLEEP_CURRENT_UA     7.5f   // Total system in STOP2
+#define SYSTEM_SLEEP_CURRENT_UA     7.5f   // Legacy measured system target; remeasure in STOP1
 
 // --- Graduated power shedding thresholds (suggested, tune empirically) ---
 // Firmware should implement tiered load shedding based on VSTOR ADC reading.
 #define POWER_TIER_FULL_V           4.5f  // Full operations (GPS + all sensors + LoRa)
 #define POWER_TIER_REDUCED_V        3.5f  // Reduced beacon rate, fewer sensors
 #define POWER_TIER_NO_GPS_V         3.0f  // Drop GPS, baro + LoRa only
-#define POWER_TIER_EMERGENCY_V      2.8f  // Emergency — LoRa distress beacon only
+#define POWER_TIER_EMERGENCY_V      2.8f  // Load-shed tier; every RF path still enforces >=3.0 V
 
 // =============================================================================
 // 9. LoRa / LoRaWAN — RAK3172 integrated SX1262

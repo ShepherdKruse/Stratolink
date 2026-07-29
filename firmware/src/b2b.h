@@ -9,8 +9,11 @@
  * on the shared P2P/relay radio with the hop budget decremented, so telemetry
  * walks out of the dark leg and commands walk in, one hop per pass.
  *
- * Frame (LoRaMesher-style, 6-byte header + payload):
- *   [src:2][msg_id:1][ttl:1][flags:1][len:1][payload:len]
+ * Frame (versioned 9-byte header + payload):
+ *   ["SB":2][ver:1][src:2][msg_id:1][ttl:1][flags:1][len:1][payload:len]
+ *     "SB"    StratoLink B2B discriminator. Required because these frames
+ *             share the LongFast PHY with ordinary Meshtastic packets.
+ *     ver     wire version, currently 3; unknown versions fail closed
  *     src     originating balloon id (0xFFFF reserved for broadcast targets)
  *     msg_id  per-source monotonic counter; dedup key = (src<<8 | msg_id)
  *     ttl     remaining hops.  A frame arriving with ttl 0 is consumed but
@@ -20,10 +23,17 @@
  *     len     payload length in bytes (0..B2B_PAYLOAD_MAX)
  *
  * Payload by type:
- *   CRUMB    N x 6-byte b2b_crumb_t, len must be a nonzero multiple of 6
- *   COMMAND  the doc-08 command frame [target:2][opcode:1][seq:1][args],
- *            len >= 4; target 0xFFFF = broadcast (delivered AND forwarded)
- *   ACK      [target:2][seq:1] echoing an applied command's seq, len == 3
+ *   CRUMB    N x 6-byte b2b_crumb_t + auth_tag:8; body is nonempty and a
+ *            multiple of 6
+ *   COMMAND  [target:2][opcode:1][seq:1][args][auth_tag:8], len >= 12;
+ *            target 0xFFFF = broadcast (delivered AND forwarded)
+ *   ACK      [target:2][seq:1][auth_tag:8], len == 11
+ *
+ * Every frame type is authenticated by the radio integration before this pure
+ * routing layer ingests it. The tag covers immutable origin fields and the
+ * application body (TTL is excluded because each relay decrements it). A
+ * trusted fleet relay advances a queued crumb's age and renews that tag before
+ * forwarding; source, message ID, position, and original age remain bound.
  *
  * Design rules, learned from the adversarial review of the first cut:
  *   - Dedup marks a frame seen ONLY when it is actually consumed (forwarded,
@@ -45,10 +55,19 @@
 #include <stdint.h>
 #include <stdbool.h>
 
-#define B2B_HDR_LEN       6
+#define B2B_MAGIC_0       0x53
+#define B2B_MAGIC_1       0x42
+#define B2B_WIRE_VERSION  3
+#define B2B_HDR_LEN       9
 #define B2B_CRUMB_LEN     6
-#define B2B_PAYLOAD_MAX   48          /* fits 8 crumbs; keeps ToA modest at SF9 */
+#define B2B_PAYLOAD_MAX   44          /* complete frame <= US915 DR1's 53-byte
+                                       * application limit; fits 6 crumbs +
+                                       * the common 8-byte authentication tag */
+#define B2B_AUTH_TAG_LEN  8
 #define B2B_FRAME_MAX     (B2B_HDR_LEN + B2B_PAYLOAD_MAX)
+#if B2B_FRAME_MAX > 53
+#error "B2B tunnel exceeds the US915 DR1 LoRaWAN application payload ceiling"
+#endif
 #define B2B_ID_BROADCAST  0xFFFFu
 #define B2B_SEEN_N        32          /* recent dedup keys retained */
 #define B2B_SEEN_TTL_MIN  240         /* seen entries age out after 4 h; msg_id
@@ -58,6 +77,9 @@
 #define B2B_TTL_DEFAULT   3           /* origin + 3 hops of reach */
 #define B2B_AIRTIME_CAP_MS 6000       /* max banked credit, ~2 pass-grants; a
                                        * quiet leg must not bank a TX burst */
+#define B2B_RTC_CONFIGURED_LSI_HZ 32000u
+#define B2B_RTC_MIN_LSI_HZ        29500u
+#define B2B_RTC_MAX_LSI_HZ        34000u
 
 typedef enum {
     B2B_TYPE_CRUMB   = 0,
@@ -98,6 +120,10 @@ typedef struct {
     uint8_t  type;      /* b2b_type_t */
     uint8_t  len;
     uint8_t  payload[B2B_PAYLOAD_MAX];
+    /* Local queue metadata; never encoded and never included in the CMAC.
+     * A relay uses it to advance authenticated crumb ages while a frame waits
+     * for RF airtime or a TTN uplink. */
+    uint32_t queued_rtc_sec;
 } b2b_frame_t;
 
 typedef struct {
@@ -107,17 +133,24 @@ typedef struct {
     uint32_t local;         /* delivered to us (incl. broadcast deliveries) */
     uint32_t expired;       /* arrived with ttl 0 */
     uint32_t malformed;     /* header/len/type inconsistencies */
+    uint32_t auth_fail;     /* frame rejected before ingest */
     uint32_t own_echo;      /* our own frames heard back (mesh is working) */
     uint32_t queue_full;    /* ingests refused for queue space (retryable) */
     uint32_t airtime_block; /* radio hand-offs refused by the airtime budget */
     uint32_t airtime_ms;    /* cumulative airtime charged for forwards */
+    uint32_t cad_busy;      /* carrier active; frame retained for retry */
+    uint32_t cad_error;     /* CAD radio failure; frame retained for retry */
+    uint32_t tx_error;      /* clear-CAD transmit failure; retained/refunded */
+    uint32_t window_block;  /* not enough relay-window time for safe hand-off */
+    uint32_t ack_drop;      /* authenticated command ACK could not be queued */
+    uint32_t ttn_drop;      /* authenticated frame lost to a full TTN queue */
 } b2b_stats_t;
 
 /* State handle.  Zero-initialise before first use, or call b2b_reset. */
 typedef struct {
     uint16_t self_id;
     uint32_t seen[B2B_SEEN_N];     /* (key<<0 | 0x80000000 valid) */
-    uint16_t seen_min[B2B_SEEN_N]; /* coarse insert time, minutes */
+    uint32_t seen_rtc_sec[B2B_SEEN_N]; /* raw nominal RTC seconds at insert */
     uint8_t  seen_head;
     b2b_frame_t fwd[B2B_FWD_N];
     uint8_t  fwd_head, fwd_tail, fwd_count;
@@ -134,16 +167,56 @@ void b2b_reset(b2b_t* b, uint16_t self_id);
  * TX burst.  Grants above the cap are clamped, not an error. */
 void b2b_add_airtime(b2b_t* b, uint32_t credit_ms);
 
+/* The STM32WLE5 LSI is guaranteed only from 29.5 to 34 kHz while STM32RTC is
+ * configured for 32 kHz. Freshness needs an upper wall-time bound; replay
+ * retention and minimum origin spacing need a lower wall-time bound. These
+ * functions intentionally convert a raw RTC-domain DELTA in opposite
+ * directions instead of inventing one globally "corrected" clock. */
+uint32_t b2b_age_upper_minutes(uint32_t elapsed_rtc_sec);
+uint32_t b2b_elapsed_lower_minutes(uint32_t elapsed_rtc_sec);
+
+/* Wrap-safe scheduler used by the hourly local-crumb origin path. `now` and
+ * `last` are raw nominal RTC seconds; the interval cannot become due before
+ * the requested amount of real wall time at the datasheet-fastest LSI. */
+bool b2b_interval_due(bool ever_completed, uint32_t now_rtc_sec,
+                      uint32_t last_rtc_sec, uint32_t interval_min);
+
 /* Serialize/parse the wire frame.  b2b_encode returns total bytes written
- * (0 on overflow).  b2b_parse is strict: the buffer must be exactly
- * header+len long and reserved flag bits must be 0. */
+ * (0 on overflow).  b2b_parse is strict: magic/version must match, the
+ * buffer must be exactly header+len long, and reserved flag bits must be 0. */
 int  b2b_encode(const b2b_frame_t* f, uint8_t* buf, int cap);
 bool b2b_parse(const uint8_t* buf, int n, b2b_frame_t* out);
+/** True for any packet in the reserved "SB" namespace, regardless of version.
+ *  Callers must route these to b2b_parse rather than treating unknown versions
+ *  as another protocol sharing the carrier. */
+bool b2b_is_namespaced(const uint8_t* buf, int n);
 
-/* Ingest a heard frame.  now_min is a coarse monotonic clock in minutes
- * (any epoch; used only for seen-entry aging).  Queue-refused frames return
+/* Length of the authenticated application body after removing the fixed CMAC
+ * trailer. Returns 0 for malformed frames. */
+uint8_t b2b_authenticated_body_len(const b2b_frame_t* frame);
+
+/*
+ * Compute/verify the common wire-v3 AES-CMAC trailer. The tag binds magic,
+ * version, source, message ID, type, exact body length, and body. TTL is the
+ * sole excluded header field because each legitimate relay decrements it.
+ */
+bool b2b_auth_tag(const uint8_t key[16], const b2b_frame_t* frame,
+                  uint8_t out[B2B_AUTH_TAG_LEN]);
+bool b2b_auth_verify(const uint8_t key[16], const b2b_frame_t* frame);
+
+/* Ingest a heard frame. now_rtc_sec is the raw nominal RTC epoch in seconds
+ * (used only through wrap-safe deltas). Queue-refused frames return
  * B2B_BLOCKED and are NOT marked seen, so a later re-beacon retries them. */
-b2b_result_t b2b_ingest(b2b_t* b, const b2b_frame_t* f, uint16_t now_min);
+b2b_result_t b2b_ingest(
+    b2b_t* b, const b2b_frame_t* f, uint32_t now_rtc_sec);
+
+/* Verify every queued frame. For a crumb, advance every saturating sample age
+ * by the time spent in the local queue and renew the shared-fleet CMAC without
+ * changing origin, message ID, or TTL. Non-crumb frames remain byte-identical.
+ * The input is committed only on success, and queued_rtc_sec becomes the
+ * supplied raw RTC epoch. */
+bool b2b_refresh_authenticated_age(
+    const uint8_t key[16], b2b_frame_t* frame, uint32_t now_rtc_sec);
 
 /* Peek at the frame b2b_next_forward would pop, so the caller can compute its
  * REAL time-on-air before charging (frame ToA varies ~3x with length).
@@ -154,6 +227,13 @@ const b2b_frame_t* b2b_peek_forward(const b2b_t* b);
  * the budget on success.  Returns false when the queue is empty or the budget
  * refuses (stats.airtime_block; frames stay queued for a later pass). */
 bool b2b_next_forward(b2b_t* b, b2b_frame_t* out, uint32_t toa_ms);
+
+/* Production forward path: before charging airtime or popping the queue,
+ * advance authenticated crumb age to now_min and renew its CMAC. A corrupted
+ * queued crumb is dropped fail-closed without charging airtime. */
+bool b2b_next_forward_fresh(
+    b2b_t* b, b2b_frame_t* out, uint32_t toa_ms,
+    const uint8_t key[16], uint32_t now_rtc_sec);
 
 /* Return a popped frame after a failed TX or an aborted window: refunds the
  * charge and re-queues the frame (dropped only if the queue refilled). */

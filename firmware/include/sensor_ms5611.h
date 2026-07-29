@@ -29,7 +29,7 @@ bool sensor_ms5611_read_pressure_centihpa(uint16_t* pressure_ch);
  * Read MS5611 internal temperature (fallback / redundancy for TMP117).
  * Units and error semantics identical to the pressure read above.
  */
-bool sensor_ms5611_read_temp_centidegrees(int16_t* temperature_cd);
+bool sensor_ms5611_read_temp_decidegrees(int16_t* temperature_dc);
 
 /**
  * Initialize: reset and read PROM. Call after I2C begin.

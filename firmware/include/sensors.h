@@ -9,4 +9,11 @@
  */
 bool sensors_init(void);
 
+/**
+ * Reinitialize the STM32 I2C peripheral and clock a slave-stuck bus free.
+ * Use only after every I2C sensor in one scheduled read phase has failed;
+ * individual sensor drivers already perform their own bounded retries.
+ */
+void sensors_recover_i2c_bus(void);
+
 #endif /* SENSORS_H */

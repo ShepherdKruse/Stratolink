@@ -122,25 +122,26 @@ static const GeoCase GEO_CASES[] = {
     { "New York",     E7(40.71),  E7(-74.0),   LORA_REGION_US915 },
     { "Mexico City",  E7(19.43),  E7(-99.13),  LORA_REGION_US915 },
     { "Honolulu",     E7(21.31),  E7(-157.86), LORA_REGION_US915 },
-    /* AU915 (South America + Australia) */
-    { "Sao Paulo",    E7(-23.55), E7(-46.63),  LORA_REGION_AU915 },
-    { "Buenos Aires", E7(-34.61), E7(-58.38),  LORA_REGION_AU915 },
+    /* Mixed-plan South America fails closed; AU915 only in ANZ. */
+    { "Sao Paulo",    E7(-23.55), E7(-46.63),  LORA_REGION_SILENT },
+    { "Buenos Aires", E7(-34.61), E7(-58.38),  LORA_REGION_SILENT },
     { "Sydney",       E7(-33.87), E7(151.21),  LORA_REGION_AU915 },
     /* EU868 */
     { "London",       E7(51.51),  E7(-0.13),   LORA_REGION_EU868 },
     { "Cape Town",    E7(-33.92), E7(18.42),   LORA_REGION_EU868 },
-    { "Moscow",       E7(55.75),  E7(37.62),   LORA_REGION_EU868 },
+    { "Moscow",       E7(55.75),  E7(37.62),   LORA_REGION_SILENT },
     /* AS923 */
-    { "Tokyo",        E7(35.68),  E7(139.69),  LORA_REGION_AS923 },
     { "Singapore",    E7(1.35),   E7(103.82),  LORA_REGION_AS923 },
-    /* SILENT (China + polar) */
+    /* SILENT (Japan LBT, China, unsupported corridors, polar) */
+    { "Tokyo",        E7(35.68),  E7(139.69),  LORA_REGION_SILENT },
+    { "Seoul",        E7(37.57),  E7(126.98),  LORA_REGION_SILENT },
     { "Beijing",      E7(39.90),  E7(116.40),  LORA_REGION_SILENT },
     { "Shanghai",     E7(31.23),  E7(121.47),  LORA_REGION_SILENT },
     { "North Pole",   E7(85.0),   E7(0.0),     LORA_REGION_SILENT },
     /* Exact-boundary cases that previously truncated wrong */
     { "lat 70.0001",  700001000,  0,           LORA_REGION_SILENT },
     { "lon -30.0001",E7(35.0),   -300001000,  LORA_REGION_US915 },
-    { "lon -170.001",E7(40.0),   -1700001000, LORA_REGION_AS923 },
+    { "lon -170.001",E7(40.0),   -1700001000, LORA_REGION_US915 },
     { "lat 12.0001", 120001000,  E7(-60.0),   LORA_REGION_US915 },
 };
 
@@ -208,6 +209,8 @@ static void test_session_tamp_roundtrip(void) {
     s.region_id = LORA_REGION_EU868;
     s.devAddr   = 0xDEADBEEF;
     s.fCntUp    = 0x12345678;
+    s.fCntDown  = 0x87654321;
+    s.rxDelaySec = 5;
     for (int i = 0; i < 4; i++) {
         s.nwkSKey[i] = 0xA1A2A3A4u + i;
         s.appSKey[i] = 0xB1B2B3B4u + i;
@@ -220,16 +223,32 @@ static void test_session_tamp_roundtrip(void) {
     else if (r.region_id != s.region_id)  LOG_FAIL("region_id mismatch");
     else if (r.devAddr   != s.devAddr)    LOG_FAIL("devAddr mismatch");
     else if (r.fCntUp    != s.fCntUp)     LOG_FAIL("fCntUp mismatch");
+    else if (r.fCntDown  != s.fCntDown)   LOG_FAIL("fCntDown mismatch");
+    else if (r.rxDelaySec != s.rxDelaySec) LOG_FAIL("RxDelay mismatch");
     else if (memcmp(r.nwkSKey, s.nwkSKey, sizeof(s.nwkSKey))) LOG_FAIL("nwkSKey mismatch");
     else if (memcmp(r.appSKey, s.appSKey, sizeof(s.appSKey))) LOG_FAIL("appSKey mismatch");
     else                                  LOG_OK("save -> load preserves all fields");
 
+    bool lease_saved = power_manager_save_region_lease(1777u);
+    uint32_t lease_age = 0;
+    if (lease_saved && power_manager_load_region_lease(&lease_age) &&
+        lease_age == 1777u) {
+        LOG_OK("region lease save -> load preserves age");
+    } else {
+        LOG_FAIL("region lease save/load mismatch");
+    }
+
     /* Clear and re-load — must return false (magic zeroed). */
-    power_manager_clear_session();
+    bool clear_saved = power_manager_clear_session();
     lorawan_session_t z = {0};
     bool empty = power_manager_load_session(&z);
     if (!empty) LOG_OK("clear -> load returns false");
     else        LOG_FAIL("clear -> load still returned true");
+    if (clear_saved && !power_manager_load_region_lease(&lease_age)) {
+        LOG_OK("session clear also invalidates region lease");
+    } else {
+        LOG_FAIL("session clear left a stale region lease");
+    }
 }
 
 static void test_export_import_session(void) {
@@ -239,6 +258,8 @@ static void test_export_import_session(void) {
     in.region_id = LORA_REGION_AS923;
     in.devAddr   = 0xCAFEF00D;
     in.fCntUp    = 42;
+    in.fCntDown  = 17;
+    in.rxDelaySec = 7;
     for (int i = 0; i < 4; i++) {
         in.nwkSKey[i] = 0xC0FFEE00u + i;
         in.appSKey[i] = 0xFEEDFACEu + i;
@@ -257,6 +278,8 @@ static void test_export_import_session(void) {
     if (out.region_id != LORA_REGION_AS923)               LOG_FAIL("export region_id");
     else if (out.devAddr  != in.devAddr)                  LOG_FAIL("export devAddr");
     else if (out.fCntUp   != in.fCntUp)                   LOG_FAIL("export fCntUp");
+    else if (out.fCntDown != in.fCntDown)                 LOG_FAIL("export fCntDown");
+    else if (out.rxDelaySec != in.rxDelaySec)             LOG_FAIL("export RxDelay");
     else if (memcmp(out.nwkSKey, in.nwkSKey, sizeof(in.nwkSKey))) LOG_FAIL("export nwkSKey");
     else if (memcmp(out.appSKey, in.appSKey, sizeof(in.appSKey))) LOG_FAIL("export appSKey");
     else                                                  LOG_OK("import -> export round-trip");
@@ -266,6 +289,14 @@ static void test_export_import_session(void) {
     bad.region_id = 99;
     if (!lorawan_import_session(&bad)) LOG_OK("import rejects out-of-range region_id");
     else                               LOG_FAIL("import accepted region_id=99");
+
+    bad = in;
+    bad.rxDelaySec = 0;
+    if (!lorawan_import_session(&bad)) LOG_OK("import rejects RxDelay=0");
+    else                               LOG_FAIL("import accepted RxDelay=0");
+    bad.rxDelaySec = 16;
+    if (!lorawan_import_session(&bad)) LOG_OK("import rejects RxDelay=16");
+    else                               LOG_FAIL("import accepted RxDelay=16");
 }
 
 /* ========== Trajectory integration test ==========
@@ -308,19 +339,19 @@ static const trajectory_step_t TRAJECTORY[] = {
     { E7(40.0), E7(30.0),   LORA_REGION_EU868,  "Black Sea"            },
     { E7(40.0), E7(50.0),   LORA_REGION_EU868,  "Caspian"              },
     { E7(40.0), E7(59.0),   LORA_REGION_EU868,  "Just W of EU/AS bdry" },
-    { E7(40.0), E7(61.0),   LORA_REGION_AS923,  "AS CROSS"             },
+    { E7(40.0), E7(61.0),   LORA_REGION_SILENT, "Unsupported Asia"     },
     { E7(40.0), E7(75.0),   LORA_REGION_SILENT, "China bbox W"         },
     { E7(40.0), E7(110.0),  LORA_REGION_SILENT, "Mongolia (CN bbox)"   },
     { E7(40.0), E7(120.0),  LORA_REGION_SILENT, "Shanghai-lat (CN)"    },
-    { E7(40.0), E7(124.0),  LORA_REGION_AS923,  "Korea (out of CN)"    },
-    { E7(40.0), E7(140.0),  LORA_REGION_AS923,  "Japan east"           },
+    { E7(40.0), E7(124.0),  LORA_REGION_SILENT, "Korea KR920"          },
+    { E7(40.0), E7(140.0),  LORA_REGION_SILENT, "Japan LBT"            },
     { E7(40.0), E7(170.0),  LORA_REGION_AS923,  "Mid-Pacific"          },
     /* Cross antimeridian going east into Americas */
     { E7(40.0), E7(-170.0), LORA_REGION_US915,  "Aleutians US side"    },
     { E7(40.0), E7(-160.0), LORA_REGION_US915,  "East Pacific"         },
     { E7(40.7), E7(-74.0),  LORA_REGION_US915,  "Back to NYC"          },
     /* Throw in southern hemisphere edge cases */
-    { E7(-23.5),E7(-46.6),  LORA_REGION_AU915,  "Sao Paulo (SA)"       },
+    { E7(-23.5),E7(-46.6),  LORA_REGION_SILENT, "Sao Paulo (mixed SA)" },
     { E7(-33.9),E7(151.2),  LORA_REGION_AU915,  "Sydney"               },
 };
 
@@ -332,6 +363,7 @@ static void prime_joined_state(lora_region_id_t region, uint32_t fcnt) {
     s.region_id = (uint32_t)region;
     s.devAddr   = 0xABCDEF01u;
     s.fCntUp    = fcnt;
+    s.rxDelaySec = 5;
     for (int i = 0; i < 4; i++) {
         s.nwkSKey[i] = 0xAAAA0000u + i;
         s.appSKey[i] = 0xBBBB0000u + i;
@@ -523,6 +555,7 @@ static void test_multi_save_load(void) {
         w.region_id = cases[i].r;
         w.devAddr   = cases[i].addr;
         w.fCntUp    = cases[i].fcnt;
+        w.rxDelaySec = 5;
         for (int j = 0; j < 4; j++) { w.nwkSKey[j] = cases[i].key0 + j; w.appSKey[j] = cases[i].key0 + 0x10 + j; }
         power_manager_save_session(&w);
         lorawan_session_t r = {0};
@@ -544,7 +577,7 @@ static void test_multi_save_load(void) {
             LOG_FAIL(buf);
         }
     }
-    power_manager_clear_session();  /* clean up */
+    (void)power_manager_clear_session();  /* clean up */
 }
 
 /* ========== Session persistence across NVIC_SystemReset ==========
@@ -557,14 +590,18 @@ static void test_multi_save_load(void) {
  * triggering NVIC_SystemReset mid-test.
  *
  * Two-phase strategy:
- *   Phase 1 (first boot): stamp a known session, mark BKP14R, reset.
+ *   Phase 1 (first boot): stamp a known session, mark BKP16R, reset.
  *   Phase 2 (post-reset): detect marker, load session, compare every
  *                          field, clear marker, then continue normal
  *                          tests.
  *
- * Inter-phase signal uses TAMP_BKP14R (well past the 13-word session
- * struct at BKP0R..BKP12R).  test_scratch is zeroed across reset
- * (it's in BSS), so phase-2 results are what J-Link sees in the dump. */
+ * Inter-phase signal temporarily uses TAMP_BKP16R (immediately after the
+ * 15-word session struct at BKP0R..BKP14R and its production CRC32 at
+ * BKP15R). In the flight image BKP16R stores command state, BKP17R the B2B
+ * origin ID, BKP18R the packed region lease, and BKP19R the packed boot
+ * counter. This diagnostic does not dispatch commands, and clears its marker
+ * before continuing. test_scratch is zeroed across reset (it is in BSS), so
+ * phase-2 results are what J-Link sees in the dump. */
 #define RESET_TEST_MARKER       0xDEADBEEFu
 
 static void backup_access_unlock(void) {
@@ -574,11 +611,11 @@ static void backup_access_unlock(void) {
 }
 static uint32_t test_marker_read(void) {
     backup_access_unlock();
-    return (&TAMP->BKP0R)[14];
+    return (&TAMP->BKP0R)[16];
 }
 static void test_marker_write(uint32_t v) {
     backup_access_unlock();
-    (&TAMP->BKP0R)[14] = v;
+    (&TAMP->BKP0R)[16] = v;
 }
 
 static void test_persist_phase2(void) {
@@ -591,15 +628,22 @@ static void test_persist_phase2(void) {
     if (s.region_id != LORA_REGION_EU868)     { LOG_FAIL("phase2: region_id mismatch"); return; }
     if (s.devAddr   != 0xAABBCCDDu)           { LOG_FAIL("phase2: devAddr mismatch"); return; }
     if (s.fCntUp    != 0x12345678u)           { LOG_FAIL("phase2: fCntUp mismatch"); return; }
+    if (s.fCntDown  != 0x13579BDFu)           { LOG_FAIL("phase2: fCntDown mismatch"); return; }
+    if (s.rxDelaySec != 5u)                    { LOG_FAIL("phase2: RxDelay mismatch"); return; }
     for (int i = 0; i < 4; i++) {
         if (s.nwkSKey[i] != 0xCAFE0000u + i)  { LOG_FAIL("phase2: nwkSKey mismatch"); return; }
         if (s.appSKey[i] != 0xF00D0000u + i)  { LOG_FAIL("phase2: appSKey mismatch"); return; }
     }
-    LOG_OK("session preserved across NVIC_SystemReset (all 13 words match)");
+    uint32_t lease_age = 0;
+    if (!power_manager_load_region_lease(&lease_age) || lease_age != 1799u) {
+        LOG_FAIL("phase2: region lease age did not survive reset");
+        return;
+    }
+    LOG_OK("session + region lease preserved across NVIC_SystemReset");
 
     /* Clean up: clear marker + session so subsequent boots don't loop. */
     test_marker_write(0);
-    power_manager_clear_session();
+    (void)power_manager_clear_session();
 }
 
 static void test_persist_phase1_and_reset(void) {
@@ -610,8 +654,14 @@ static void test_persist_phase1_and_reset(void) {
     s.region_id = LORA_REGION_EU868;
     s.devAddr   = 0xAABBCCDDu;
     s.fCntUp    = 0x12345678u;
+    s.fCntDown  = 0x13579BDFu;
+    s.rxDelaySec = 5;
     for (int i = 0; i < 4; i++) { s.nwkSKey[i] = 0xCAFE0000u + i; s.appSKey[i] = 0xF00D0000u + i; }
     power_manager_save_session(&s);
+    if (!power_manager_save_region_lease(1799u)) {
+        LOG_FAIL("phase1: region lease write/readback failed");
+        return;
+    }
     test_marker_write(RESET_TEST_MARKER);
 
     /* Finalize scratchpad with phase-1 results in case the reset

@@ -4,13 +4,14 @@
  * SPI1 RXONLY master generates a continuous 3 MHz clock on PB3; PDM data
  * streams in on PB4.  Firmware decimates to ~9375 Hz PCM, computes the
  * DC-blocked variance of the ones-count in one streaming pass (no buffer),
- * and compares it against an adaptive noise floor.  At stratospheric
- * altitude the ambient floor is near-zero, so any aircraft / rocket / drone
- * signature stands out cleanly.
+ * and compares it against an adaptive noise floor. The feature is an onboard
+ * anomaly flag, not an aircraft/rocket/drone classifier; payload mechanical
+ * and power noise can also cross the adaptive threshold.
  *
  * Detection cycle: 50 ms wake + 213 ms skip + 55 ms capture ~ 318 ms.
  */
 #include "mic_acoustic.h"
+#include "mic_noise_ema.h"
 #include "stratolink_pins.h"
 #include <Arduino.h>
 
@@ -29,6 +30,10 @@
 
 static bool     inited = false;
 static uint32_t noise_floor_sq = 16; /* seed for the x16 DC-blocked variance scale */
+/* Exact-ELF/J-Link observability. The stable telemetry packet carries the
+ * one-bit event plus an in-band availability state; these append-only
+ * counters further distinguish capture failure from threshold drift. */
+static volatile mic_acoustic_diag_t s_mic_diag = {};
 
 static inline uint8_t popcount8(uint8_t v) {
     v = v - ((v >> 1) & 0x55);
@@ -72,10 +77,17 @@ static inline bool spi_wait_rxne(uint32_t timeout_ms) {
     return true;
 }
 
+static bool mic_capture_abort(void) {
+    SPI1->CR1 &= ~SPI_CR1_SPE;
+    s_mic_diag.capture_failures++;
+    return false;
+}
+
 bool mic_acoustic_detect(uint8_t* acoustic_event) {
     if (!acoustic_event) return false;
     *acoustic_event = 0;
     if (!inited) return false;
+    s_mic_diag.attempts++;
 
     volatile uint8_t* dr = (volatile uint8_t*)&SPI1->DR;
 
@@ -84,14 +96,14 @@ bool mic_acoustic_detect(uint8_t* acoustic_event) {
 
     /* wake-up: 50 ms of continuous clock - bail if mic never responds */
     for (uint32_t i = 0; i < WAKEUP_BYTES; i++) {
-        if (!spi_wait_rxne(5)) { SPI1->CR1 &= ~SPI_CR1_SPE; return false; }
+        if (!spi_wait_rxne(5)) return mic_capture_abort();
         (void)*dr;
     }
 
     /* skip sigma-delta transient */
     for (uint16_t s = 0; s < SKIP_SAMPLES; s++) {
         for (uint8_t b = 0; b < BYTES_PER_SAMPLE; b++) {
-            if (!spi_wait_rxne(5)) { SPI1->CR1 &= ~SPI_CR1_SPE; return false; }
+            if (!spi_wait_rxne(5)) return mic_capture_abort();
             (void)*dr;
         }
     }
@@ -103,7 +115,7 @@ bool mic_acoustic_detect(uint8_t* acoustic_event) {
     for (uint16_t s = 0; s < CAPTURE_SAMPLES; s++) {
         uint16_t ones = 0;
         for (uint8_t b = 0; b < BYTES_PER_SAMPLE; b++) {
-            if (!spi_wait_rxne(5)) { SPI1->CR1 &= ~SPI_CR1_SPE; return false; }
+            if (!spi_wait_rxne(5)) return mic_capture_abort();
             ones += popcount8(*dr);
         }
         sum_ones += ones;
@@ -130,14 +142,19 @@ bool mic_acoustic_detect(uint8_t* acoustic_event) {
     uint32_t rms_sq = (uint32_t)((num * 16u) / ((uint64_t)CAPTURE_SAMPLES * CAPTURE_SAMPLES));
 
     /* adapt noise floor only when signal looks quiet */
-    if (rms_sq < noise_floor_sq * 2) {
-        noise_floor_sq += ((int32_t)rms_sq - (int32_t)noise_floor_sq)
-                          >> NOISE_EMA_SHIFT;
-        if (noise_floor_sq < 1) noise_floor_sq = 1;
+    if ((uint64_t)rms_sq < (uint64_t)noise_floor_sq * 2u) {
+        noise_floor_sq =
+            mic_noise_ema_update(noise_floor_sq, rms_sq, NOISE_EMA_SHIFT);
     }
 
-    if (rms_sq > noise_floor_sq * THRESHOLD_MULT_SQ)
+    if ((uint64_t)rms_sq >
+        (uint64_t)noise_floor_sq * THRESHOLD_MULT_SQ) {
         *acoustic_event = 1;
+        s_mic_diag.events++;
+    }
+    s_mic_diag.captures++;
+    s_mic_diag.last_variance_x16 = rms_sq;
+    s_mic_diag.noise_floor_x16 = noise_floor_sq;
 
     return true;
 }

@@ -40,7 +40,8 @@ This is the important part — and it's why a naive re-run won't reproduce it:
 2. **Continuous PSU power = always hot-start.** V_BCKP (3 µA backup domain)
    stays powered on the desk, so ephemeris is retained and every wake is a
    ~5 s hot-start — a fresh PVT lands well inside the 30 s window. In flight,
-   brownouts (we saw VSTOR hit the 3.32 V floor) drop the backup domain →
+   low-energy episodes (Flight 3 reported a false ~3.32 V dropout plateau; the
+   actual rail/BOR was unobservable) can drop the backup domain →
    ephemeris lost → **30 s cold-start**, which is exactly the firmware's
    timeout (`GPS_COLDSTART_TIME_S = 30`, `timeout_ms = 30000`). Marginal.
 3. **Cold + motion + weak signal** at altitude (−40 °C TCXO drift, swinging
@@ -62,7 +63,8 @@ GPS to detect staleness directly** (independent of position), and (b)
 ## 2. Hardware under test
 - **Board:** stratolink-2, headers → PSU on **VSTOR** and **GND**. Set PSU to a
   representative VSTOR (e.g. 3.6–4.0 V "FULL" tier; later sweep down toward the
-  3.32 V brownout floor). Current-limit ~150 mA.
+  conservative 3.32 V reported-plateau accounting floor; sweep below it to
+  actual BOR with independent VSTOR/VOUT capture). Current-limit ~150 mA.
 - **PSU:** Siglent **SPD1000X** — SCPI-scriptable over USB/LAN (Python + pyvisa or
   raw socket): `OUTP CH1,OFF` / `OUTP CH1,ON` on a schedule, or step `CH1:VOLT`
   down to simulate sag. We use this to automate brownout/cold-start cycles (P3).

@@ -33,16 +33,19 @@ static b2b_frame_t crumb_frame(uint16_t src, uint8_t msg_id, uint8_t ttl) {
     b2b_crumb_t c = { .lat_cd = 3745, .lon_cd = -12242, .alt_hm = 180, .age_min = 3 };
     uint8_t packed[6];
     b2b_crumb_pack(&c, packed);
-    memcpy(f.payload, packed, 6); f.len = 6;
+    memcpy(f.payload, packed, 6);
+    memset(f.payload + 6, 0xA5, B2B_AUTH_TAG_LEN); /* shape-only test tag */
+    f.len = 6 + B2B_AUTH_TAG_LEN;
     return f;
 }
 
 static b2b_frame_t command_frame(uint16_t src, uint8_t msg_id, uint16_t target) {
     b2b_frame_t f;
     f.src = src; f.msg_id = msg_id; f.ttl = 3;
-    f.type = B2B_TYPE_COMMAND; f.len = 4;
+    f.type = B2B_TYPE_COMMAND; f.len = 4 + B2B_AUTH_TAG_LEN;
     f.payload[0] = (uint8_t)(target >> 8); f.payload[1] = (uint8_t)(target & 0xFF);
     f.payload[2] = 0x01; f.payload[3] = 0x00;   /* opcode set-cadence, seq 0 */
+    memset(f.payload + 4, 0xA5, B2B_AUTH_TAG_LEN); /* shape-only test tag */
     return f;
 }
 
@@ -50,7 +53,7 @@ static void run_tests() {
     g_pass = g_fail = 0;
     const uint16_t SELF = 0x0002;      /* Stratolink-2 */
     const uint32_t TOA  = 100;         /* pretend a forward costs 100 ms */
-    uint16_t now = 1000;               /* coarse clock, minutes */
+    uint32_t now = 1000;               /* raw RTC-backed mission seconds */
     b2b_frame_t out;
 
     b2b_t b; b2b_reset(&b, SELF); b2b_add_airtime(&b, 1000);
@@ -69,15 +72,23 @@ static void run_tests() {
     int n = b2b_encode(&f, wire, sizeof(wire));
     b2b_frame_t g;
     check("frame encode/parse",
-          n == B2B_HDR_LEN + 6 && b2b_parse(wire, n, &g) &&
+          n == B2B_HDR_LEN + 6 + B2B_AUTH_TAG_LEN &&
+          b2b_parse(wire, n, &g) &&
           g.src == f.src && g.msg_id == f.msg_id && g.ttl == f.ttl &&
           g.type == f.type && g.len == f.len);
 
-    /* 3. strict parse: trailing bytes and reserved flag bits are rejected */
+    /* 3. strict parse: discriminator, version, trailing bytes, and reserved
+     * flag bits are all fail-closed. */
     check("parse rejects trailing bytes", !b2b_parse(wire, n + 2, &g));
-    wire[4] |= 0x40;
+    wire[7] |= 0x40;
     check("parse rejects reserved bits", !b2b_parse(wire, n, &g));
-    wire[4] &= 0x03;
+    wire[7] &= 0x03;
+    wire[0] ^= 0x01;
+    check("parse rejects wrong magic", !b2b_parse(wire, n, &g));
+    wire[0] ^= 0x01;
+    wire[2]++;
+    check("parse rejects unknown version", !b2b_parse(wire, n, &g));
+    wire[2] = B2B_WIRE_VERSION;
 
     /* 4. fresh frame forwards, ttl decremented */
     b2b_result_t r = b2b_ingest(&b, &f, now);
@@ -129,7 +140,7 @@ static void run_tests() {
     /* 12. malformed shapes die at first hearing: short command, bad ack, type 3 */
     b2b_frame_t shortcmd = command_frame(0x0007, 23, 0x0005); shortcmd.len = 1;
     b2b_frame_t badack = command_frame(0x0007, 24, 0x0005);
-    badack.type = B2B_TYPE_ACK;                   /* len 4, ACK wants exactly 3 */
+    badack.type = B2B_TYPE_ACK;   /* command length, ACK wants 3 + auth tag */
     check("short COMMAND / bad ACK -> MALFORMED",
           b2b_ingest(&b, &shortcmd, now) == B2B_MALFORMED &&
           b2b_ingest(&b, &badack, now) == B2B_MALFORMED);
@@ -161,6 +172,9 @@ static void run_tests() {
     b2b_t b4; b2b_reset(&b4, SELF);
     for (int i = 0; i < 1000; i++) b2b_add_airtime(&b4, 60);
     check("credit capped", b4.airtime_budget_ms == B2B_AIRTIME_CAP_MS);
+    b2b_reset(&b4, SELF);
+    b2b_add_airtime(&b4, UINT32_MAX);
+    check("oversized credit cannot wrap", b4.airtime_budget_ms == B2B_AIRTIME_CAP_MS);
 
     /* 16. refund after failed TX: charge undone, frame re-queued */
     b2b_t b5; b2b_reset(&b5, SELF); b2b_add_airtime(&b5, 500);
@@ -179,10 +193,25 @@ static void run_tests() {
     b2b_frame_t w = crumb_frame(0x0012, 77, 3);
     b2b_ingest(&b6, &w, now);
     while (b2b_next_forward(&b6, &out, TOA)) {}
-    b2b_result_t dup_soon = b2b_ingest(&b6, &w, now + 10);
-    b2b_result_t fresh_later = b2b_ingest(&b6, &w, (uint16_t)(now + B2B_SEEN_TTL_MIN + 1));
+    b2b_result_t dup_soon = b2b_ingest(&b6, &w, now + 600u);
+    b2b_result_t fresh_later =
+        b2b_ingest(&b6, &w, now + 15364u);
     check("seen ages out (msg_id wrap safe)",
           dup_soon == B2B_DUP && fresh_later == B2B_FORWARD);
+
+    /* Exercise the raw 32-bit RTC-second API at its wrap boundary. Unsigned
+     * elapsed arithmetic must retain through 240 real minutes at the
+     * datasheet-fastest LSI and expire only after that boundary. */
+    b2b_t b6_wrap; b2b_reset(&b6_wrap, SELF); b2b_add_airtime(&b6_wrap, 60000);
+    const uint32_t near_wrap = UINT32_MAX - 120u;
+    b2b_frame_t ww = crumb_frame(0x0013, 78, 3);
+    b2b_ingest(&b6_wrap, &ww, near_wrap);
+    while (b2b_next_forward(&b6_wrap, &out, TOA)) {}
+    check("seen aging survives uint32 RTC-second wrap",
+          b2b_ingest(&b6_wrap, &ww,
+                     near_wrap + 15300u) == B2B_DUP &&
+          b2b_ingest(&b6_wrap, &ww,
+                     near_wrap + 15364u) == B2B_FORWARD);
 
     /* 18. broadcast against a FULL queue: delivered NOW via LOCAL_BLOCKED,
      * unmarked, so the forward leg retries after the queue drains */
@@ -219,7 +248,8 @@ static void run_tests() {
     b2b_frame_t q = crumb_frame(0x0060, 1, 3);
     b2b_ingest(&b9, &q, now);
     check("queued frame stays DUP past seen aging",
-          b2b_ingest(&b9, &q, (uint16_t)(now + B2B_SEEN_TTL_MIN + 50)) == B2B_DUP);
+          b2b_ingest(&b9, &q,
+                     now + 20000u) == B2B_DUP);
 
     /* 21. b2b_make refuses shapes our own peers would reject */
     b2b_t b10; b2b_reset(&b10, SELF);

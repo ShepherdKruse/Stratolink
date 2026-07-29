@@ -3,7 +3,7 @@
 TTN Telemetry Listener — Stratolink
 
 Connects to TTN via MQTT and prints decoded telemetry from Stratolink devices
-in real time. Decodes the 35-byte big-endian payload into human-readable fields.
+in real time. Decodes the 35-byte legacy or 40-byte observability payload.
 
 Usage:
     python ttn_listener.py --app-id stratolink --api-key "NNSXS.xxx"
@@ -29,7 +29,7 @@ except ImportError:
     print("Error: paho-mqtt not installed. Run: pip install paho-mqtt")
     sys.exit(1)
 
-# 35-byte big-endian telemetry payload format
+# 35-byte base telemetry payload format
 STRUCT_FMT = '>iiihhHHHHBhhhBHB'
 FIELDS = [
     'lat_e7', 'lon_e7', 'altitude_m',
@@ -47,11 +47,31 @@ DEFAULT_PORT = 8883
 def decode_telemetry(b64_payload):
     """Decode base64 frm_payload into a dict with human-readable values."""
     raw = base64.b64decode(b64_payload)
-    if len(raw) != 35:
+    if len(raw) not in (35, 40):
         return None
 
-    vals = struct.unpack(STRUCT_FMT, raw)
+    vals = struct.unpack(STRUCT_FMT, raw[:35])
     d = dict(zip(FIELDS, vals))
+    d['telemetry_version'] = 2 if len(raw) == 40 else 1
+    if len(raw) == 40:
+        status = raw[34]
+        power_tier = (status >> 1) & 7
+        reset_cause = (status >> 4) & 7
+        if power_tier > 4 or reset_cause > 6:
+            return None
+        activity = raw[39]
+        fix_age = int.from_bytes(raw[36:38], 'big')
+        d.update({
+            'acoustic_event': status & 1,
+            'power_tier': power_tier,
+            'reset_cause': reset_cause,
+            'boot_count': raw[35],
+            'gps_fix_age_min': None if fix_age == 0xFFFF else fix_age,
+            'command_ack_seq': raw[38] if status & 0x80 else None,
+            'relay_enabled': bool(activity & 0x80),
+            'relay_fwd_delta': (activity >> 4) & 7,
+            'ctt_tags_delta': activity & 15,
+        })
 
     # Unit conversions
     d['lat'] = d['lat_e7'] / 1e7
@@ -88,6 +108,12 @@ def print_telemetry(d):
     print(f"  Lux:         {d['ambient_lux']}")
     print(f"  Acoustic:    {'EVENT' if d['acoustic_event'] else 'quiet'}")
     print(f"  Solar:       {d['solar_mv']} mV   VSTOR: {d['battery_mv']} mV")
+    if d['telemetry_version'] == 2:
+        print(f"  System:      boot={d['boot_count']} reset={d['reset_cause']} "
+              f"tier={d['power_tier']} fix_age={d['gps_fix_age_min']}min")
+        print(f"  Control/RF:  cmd_ack={d['command_ack_seq']} "
+              f"relay={'on' if d['relay_enabled'] else 'off'} "
+              f"fwd+={d['relay_fwd_delta']} tags+={d['ctt_tags_delta']}")
 
 
 def on_connect(client, userdata, flags, rc, properties=None):

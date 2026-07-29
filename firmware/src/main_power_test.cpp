@@ -25,6 +25,24 @@
 #define PRINT  Serial1
 #define LOOP_INTERVAL_MS 1000
 
+typedef struct {
+    uint32_t magic;
+    uint32_t loops;
+    uint32_t vstor_mv;
+    uint32_t solar_mv;
+    uint32_t vbat_ok;
+    uint32_t tier;
+    uint32_t vdda_mv;
+    uint32_t vrefint_raw;
+    uint32_t vstor_raw;
+    uint32_t solar_raw;
+} power_test_diag_t;
+
+/* J-Link-readable mirror for a bench without the J4 UART attached. */
+volatile power_test_diag_t ptd = {
+    0x50575232u, 0, 0, 0, 0, 0, 0, 0, 0, 0
+}; /* "PWR2" */
+
 static const char* tier_name(power_tier_t t) {
     switch (t) {
         case POWER_TIER_FULL:      return "FULL";
@@ -73,6 +91,15 @@ void loop() {
     uint16_t so = power_adc_read_solar_mv();
     int      ok = digitalRead(PIN_VBAT_OK);
     power_tier_t tier = tier_from_mv(vs);
+    ptd.vstor_mv = vs;
+    ptd.solar_mv = so;
+    ptd.vbat_ok = (uint32_t)ok;
+    ptd.tier = (uint32_t)tier;
+    ptd.vdda_mv = power_adc_debug_vdda_mv();
+    ptd.vrefint_raw = power_adc_debug_vrefint_raw();
+    ptd.vstor_raw = power_adc_debug_vstor_raw();
+    ptd.solar_raw = power_adc_debug_solar_raw();
+    ptd.loops++;
 
     PRINT.print(t);       PRINT.print(',');
     PRINT.print(vs);      PRINT.print(',');

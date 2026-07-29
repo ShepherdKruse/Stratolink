@@ -7,5 +7,8 @@
 bool sensor_ltr390_init(void);
 bool sensor_ltr390_read_uv_index(uint8_t* uv_index);
 bool sensor_ltr390_read_ambient_lux(uint16_t* lux);
+/* Confirm MAIN_CTRL standby after any path which may have enabled the ADC.
+ * Returns true immediately when this boot never established an active state. */
+bool sensor_ltr390_quiesce(void);
 
 #endif /* SENSOR_LTR390_H */

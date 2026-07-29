@@ -17,18 +17,28 @@ bool sensor_lis2dh12_init(void);
 
 /**
  * Enable freefall detection on INT1 (PA8). Uses 100 Hz ODR and board.h threshold/duration.
- * Call after init when using STOP2 sleep so INT1 can wake the MCU.
+ * Call after init when using STOP1 sleep so INT1 can wake the MCU.
  */
 bool sensor_lis2dh12_enable_freefall_int1(void);
 
 /**
- * Read and clear INT1_SRC. Returns true if freefall (or movement) interrupt was active.
+ * Read INT1_SRC. Returns true only when its aggregate IA bit reports that the
+ * configured all-axis freefall condition is active; individual per-axis low
+ * status bits are not sufficient.
  */
 bool sensor_lis2dh12_clear_and_read_int1_src(void);
 
 /**
- * Return true if acceleration magnitude is above threshold (e.g. back to ~1g, freefall cleared).
- * Uses current accel read; ±0.5g threshold.
+ * Read acceleration and report whether magnitude is above the ±0.5 g
+ * freefall-clear threshold. Returns false on an I2C/read failure so callers
+ * can distinguish "confirmed low-g" from "sensor unavailable".
+ */
+bool sensor_lis2dh12_get_freefall_cleared(bool* cleared);
+
+/**
+ * Convenience used by the bounded burst state machine. Returns true only for
+ * a successful ~1 g measurement. A read failure is unknown, not evidence of
+ * landing; BURST_MAX_CYCLES contains a persistent sensor fault.
  */
 bool sensor_lis2dh12_is_freefall_cleared(void);
 
