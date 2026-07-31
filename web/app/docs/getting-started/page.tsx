@@ -126,7 +126,7 @@ export default function GettingStartedPage() {
                             <p>
                                 If you run into issues during setup, check our{' '}
                                 <Link href="/docs/troubleshooting">troubleshooting guide</Link> or{' '}
-                                <Link href="/#contact">contact support</Link>.
+                                <Link href="/about#contact">contact support</Link>.
                             </p>
                         </div>
                     </div>

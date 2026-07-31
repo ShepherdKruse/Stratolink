@@ -258,7 +258,7 @@ export default function DocsPage() {
                                 Mission Control Dashboard
                             </Link>
                             <Link
-                                href="/#contact"
+                                href="/about#contact"
                                 className="flex min-w-0 items-center gap-3 rounded-sm px-2 py-2 text-sm text-muted-foreground transition-colors hover:bg-accent/50 hover:text-foreground"
                             >
                                 <svg className="h-5 w-5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden>
@@ -272,7 +272,7 @@ export default function DocsPage() {
                                 Contact Support
                             </Link>
                             <Link
-                                href="/#partnerships"
+                                href="/about#partnerships"
                                 className="flex min-w-0 items-center gap-3 rounded-sm px-2 py-2 text-sm text-muted-foreground transition-colors hover:bg-accent/50 hover:text-foreground"
                             >
                                 <svg className="h-5 w-5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden>
