@@ -200,6 +200,27 @@ export function LineTrend({
 }) {
     const [hover, setHover] = useState<number | null>(null);
     const numeric = series.map((v) => (v == null ? NaN : v)).filter((v) => !Number.isNaN(v));
+    const W = 300;
+    const H = height;
+
+    /* Time-warped axis (gaps detected, compressed, broken) — shared with the
+     * other timeline charts. */
+    const { pts, segments, X, gapMarks } = useMemo(() => buildWarpedAxis(times, W, 90), [times]);
+
+    /* Downsampled index whose source time is closest to the scrub time. */
+    const scrubIdx = useMemo(() => {
+        if (scrubT == null) return null;
+        let best = 0;
+        let bestD = Infinity;
+        for (let i = 0; i < pts.length; i++) {
+            const d = Math.abs(times[pts[i].src] - scrubT);
+            if (d < bestD) { bestD = d; best = i; }
+        }
+        return best;
+    }, [scrubT, pts, times]);
+
+    /* Below all hooks: the sample count can cross 2 as telemetry streams in,
+     * and an earlier return would change the hook count between renders. */
     if (numeric.length < 2) {
         return (
             <div className="mono" style={{ fontSize: 10, color: 'var(--t-text-3)', padding: '8px 0' }}>
@@ -208,8 +229,6 @@ export function LineTrend({
         );
     }
     const filled = series.map((v, i) => (v == null ? (numeric[0] ?? 0) : v)) as number[];
-    const W = 300;
-    const H = height;
     const dataMin = Math.min(...numeric);
     const dataMax = Math.max(...numeric);
     let lo = dataMin;
@@ -223,9 +242,6 @@ export function LineTrend({
     hi += pad;
     const span = hi - lo || 1;
 
-    /* Time-warped axis (gaps detected, compressed, broken) — shared with the
-     * other timeline charts. */
-    const { pts, segments, X, gapMarks } = useMemo(() => buildWarpedAxis(times, W, 90), [times]);
     const valAt = (i: number) => filled[pts[i].src];
     const Y = (v: number) => H - ((v - lo) / span) * H;
     const line = segments
@@ -240,18 +256,6 @@ export function LineTrend({
 
     const faint = emphasis === 'low';
     const lineCol = faint ? 'var(--t-text-4)' : 'var(--t-text-3)';
-
-    /* Downsampled index whose source time is closest to the scrub time. */
-    const scrubIdx = useMemo(() => {
-        if (scrubT == null) return null;
-        let best = 0;
-        let bestD = Infinity;
-        for (let i = 0; i < pts.length; i++) {
-            const d = Math.abs(times[pts[i].src] - scrubT);
-            if (d < bestD) { bestD = d; best = i; }
-        }
-        return best;
-    }, [scrubT, pts, times]);
 
     /* Downsampled index whose plotted x is nearest the pointer — shared by the
      * hover cursor and click-to-scrub. */
