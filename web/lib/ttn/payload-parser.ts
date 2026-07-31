@@ -343,9 +343,11 @@ function parseJSONPayload(
  *        bytes 36-39 = GPS-fix age, command ACK, relay + wildlife counts.
  *        Unavailable sensors are sent as NULL-sentinels rather than zeros.
  *
- * v2 bytes 34 (packed bits) and 36-39 are stored raw / left undecoded until
- * the firmware pack layout is confirmed — the webhook persists the base64
- * frm_payload on every row, so they are backfillable, not lost.
+ * v2 bytes 35-39 are decoded (layout verified against the firmware author's
+ * reference packet + live soak packets — see inline comment). Byte 34's
+ * packed bits are stored raw-only until the firmware source confirms their
+ * layout — the webhook persists the base64 frm_payload on every row, so
+ * they are backfillable, not lost.
  *
  * v1 35-byte big-endian payload (matches firmware telemetry_pack):
  * Byte 0-3:   Latitude (int32, degrees * 1e7)
@@ -423,6 +425,23 @@ function parseBinaryPayload(
         const status_byte = isV2 ? buffer.readUInt8(34) : null;
         const boot_count = isV2 ? buffer.readUInt8(35) : null;
 
+        /* v2 bytes 36-39, layout established from the firmware author's
+         * reference packet cross-checked against live no-fix soak packets:
+         *   36-37  gps_fix_age_min  u16 BE, 0xFFFF = no fix yet (NULL)
+         *   38     command_ack_seq  u8
+         *   39     bit 7 relay_enabled | bits 6-4 relay_fwd_delta
+         *          | bits 3-0 ctt_tags_delta
+         * Byte 34's packed bits (power tier / reset cause) have two readings
+         * that both fit the observed packets, so it stays raw-only until the
+         * firmware source confirms; frm_payload is stored for the backfill. */
+        const rawFixAge = isV2 ? buffer.readUInt16BE(36) : null;
+        const gps_fix_age_min = rawFixAge === null || rawFixAge === 0xffff ? null : rawFixAge;
+        const command_ack_seq = isV2 ? buffer.readUInt8(38) : null;
+        const relayByte = isV2 ? buffer.readUInt8(39) : null;
+        const relay_enabled = relayByte === null ? null : (relayByte & 0x80) !== 0;
+        const relay_fwd_delta = relayByte === null ? null : (relayByte >> 4) & 0x07;
+        const ctt_tags_delta = relayByte === null ? null : relayByte & 0x0f;
+
         // Calculate velocity from GPS if available
         let velocity_x = null;
         let velocity_y = null;
@@ -458,6 +477,11 @@ function parseBinaryPayload(
             telemetry_version,
             status_byte,
             boot_count,
+            gps_fix_age_min,
+            command_ack_seq,
+            relay_enabled,
+            relay_fwd_delta,
+            ctt_tags_delta,
         };
     } catch (error) {
         console.error('Error parsing binary payload:', error);

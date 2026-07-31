@@ -27,6 +27,7 @@ import { useIsMobile } from '@/hooks/use-mobile';
 import V2MissionMap, { type V2Balloon, type V2FlightPoint, type V2Gateway } from './V2MissionMap';
 import { useDashboardTheme } from './dashboard-theme';
 import TelemetryV3Panel from './telemetry-v3/TelemetryV3Panel';
+import { detectLaunchT } from '@/lib/telemetry/launchDetect';
 
 interface FlightSummary {
     /** Span from first to last loaded packet, ms. Null when no data. */
@@ -133,17 +134,24 @@ export default function MissionControlScreen() {
         return () => clearInterval(id);
     }, []);
 
+    /* Launch moment derived from the telemetry itself (first decisive climb),
+     * NOT devices.launched_at — a payload can soak on the bench for days
+     * before release, and the flight clock must not count that. Null while
+     * still on the ground. */
+    const launchT = useMemo(() => detectLaunchT(rows), [rows]);
+
     /* Whole-flight totals (independent of the timeline range zoom).
-     * Duration runs from the first packet to the present (not the last ping),
-     * so it keeps counting while the balloon is aloft. Distance is the length
-     * of the hindcast line — the wind-reconstructed path through GPS gaps —
-     * which is more realistic than straight-line hops between sparse fixes.
-     * Falls back to the GPS-fix sum if no hindcast. */
+     * Duration runs from the detected launch to the present (not the last
+     * ping), so it keeps counting while the balloon is aloft — and stays '—'
+     * until the balloon actually climbs. Distance is the length of the
+     * hindcast line — the wind-reconstructed path through GPS gaps — which is
+     * more realistic than straight-line hops between sparse fixes. Falls back
+     * to the GPS-fix sum if no hindcast. */
     const flightSummary: FlightSummary = useMemo(() => {
-        if (rows.length === 0) return { durationMs: null, distanceKm: 0 };
+        if (rows.length === 0 || launchT === null) return { durationMs: null, distanceKm: 0 };
         /* Until the clock mounts, fall back to the last packet (deterministic). */
         const endT = nowMs ?? rows[rows.length - 1].t;
-        const durationMs = endT - rows[0].t;
+        const durationMs = Math.max(0, endT - launchT);
         let distanceKm = 0;
         const hindcast = forecast.hindcastPath;
         if (hindcast && hindcast.length >= 2) {
@@ -151,13 +159,21 @@ export default function MissionControlScreen() {
                 distanceKm += haversineKm(hindcast[i - 1][1], hindcast[i - 1][0], hindcast[i][1], hindcast[i][0]);
             }
         } else {
-            const fixes = rows.filter(r => r.lat !== null && r.lon !== null) as Array<TelemetryRow & { lat: number; lon: number }>;
+            const fixes = rows.filter(r => r.t >= launchT && r.lat !== null && r.lon !== null) as Array<TelemetryRow & { lat: number; lon: number }>;
             for (let i = 1; i < fixes.length; i++) {
                 distanceKm += haversineKm(fixes[i - 1].lat, fixes[i - 1].lon, fixes[i].lat, fixes[i].lon);
             }
         }
         return { durationMs, distanceKm };
-    }, [rows, forecast.hindcastPath, nowMs]);
+    }, [rows, forecast.hindcastPath, nowMs, launchT]);
+
+    /* What the panel header shows as "Launched …": the telemetry-detected
+     * moment, not the hand-set devices row. Pre-launch this is null and the
+     * panel reads "Awaiting launch". */
+    const displayDevice: DeviceSummary | null = useMemo(
+        () => (selectedDevice ? { ...selectedDevice, launchedAt: launchT } : null),
+        [selectedDevice, launchT],
+    );
 
     function handleSelectDevice(id: string) {
         setSelectedId(id);
@@ -176,7 +192,7 @@ export default function MissionControlScreen() {
                 <div className="tlm-panel" style={{ flexShrink: 0, height: 'auto', maxHeight: '42vh', overflow: 'hidden', display: 'flex', flexDirection: 'column', borderBottom: '1px solid var(--sl-border)' }}>
                     <div className="tlm-scroll" style={{ overflowY: 'auto', minHeight: 0 }}>
                         <TelemetryV3Panel
-                            device={selectedDevice}
+                            device={displayDevice}
                             devices={devices}
                             onSelect={handleSelectDevice}
                             scrubRow={scrubRow}
@@ -222,7 +238,7 @@ export default function MissionControlScreen() {
                 <ChartsDrawer open={chartsOpen} onToggle={() => setChartsOpen((v) => !v)}>
                     <div className="tlm-panel tlm-scroll" style={{ flex: 1, minHeight: 0, overflowY: 'auto' }}>
                         <TelemetryV3Panel
-                            device={selectedDevice}
+                            device={displayDevice}
                             devices={devices}
                             onSelect={handleSelectDevice}
                             scrubRow={scrubRow}
@@ -248,7 +264,7 @@ export default function MissionControlScreen() {
                 minWidth: 0,
             }}>
                 <LeftColumn
-                    device={selectedDevice}
+                    device={displayDevice}
                     devices={devices}
                     onSelect={handleSelectDevice}
                     scrubRow={scrubRow}

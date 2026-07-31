@@ -275,7 +275,7 @@ export default function TelemetryV3Panel({ device, devices, onSelect, scrubRow, 
                         </>
                     )}
                     <span className="mono" style={{ fontSize: 10.5, color: 'var(--t-text-3)' }}>
-                        {device?.launchedAt ? `Launched ${fmtLaunch(device.launchedAt)}` : 'Not launched'}
+                        {device?.launchedAt ? `Launched ${fmtLaunch(device.launchedAt)}` : 'Awaiting launch'}
                     </span>
                 </div>
                 <div
