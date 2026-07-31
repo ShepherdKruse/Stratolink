@@ -32,12 +32,38 @@ export interface TelemetryData {
     uv_index?: number | null;
     /** LTR-390UV-01: ambient light in lux */
     ambient_lux?: number | null;
-    /** 0 = quiet, 1 = acoustic event detected (mic RMS > 4x noise floor) */
+    /** 0 = quiet, 1 = acoustic event detected (mic RMS > 4x noise floor).
+     *  v1 packets only — the v2 40-byte packet repurposed byte 34, so v2
+     *  rows store null here. */
     acoustic_event?: number | null;
+
+    /* ---- Telemetry v2 (StratoLink-2 40-byte packet) ---- */
+    /** 1 = 35-byte v1 packet, 2 = 40-byte v2 packet. */
+    telemetry_version?: number | null;
+    /** LoRaWAN fPort of the uplink (1 = primary telemetry). */
+    f_port?: number | null;
+    /** Raw base64 frame payload as received — source of truth for backfills. */
+    frm_payload?: string | null;
+    /** v2 byte 34, raw. Packed: power tier / reset cause / relay state.
+     *  Stored undecoded until the firmware bit layout is confirmed. */
+    status_byte?: number | null;
+    /** v2 byte 35: boots since first power-on. */
+    boot_count?: number | null;
+    /* The remaining v2 fields are only populated from a TTN payload-formatter
+     * JSON payload (exact names, no ambiguity). Binary decode of bytes 36-39
+     * is deferred until the firmware pack layout is confirmed — the raw
+     * frm_payload column makes that a backfill, not data loss. */
+    power_tier?: number | null;
+    reset_cause?: number | null;
+    gps_fix_age_min?: number | null;
+    command_ack_seq?: number | null;
+    relay_enabled?: boolean | null;
+    relay_fwd_delta?: number | null;
+    ctt_tags_delta?: number | null;
 
     /* Firmware-reported system state. Only populated when the device sends a
      * JSON payload via the TTN Payload Formatter that includes these keys.
-     * The current 35-byte binary format does not carry them. */
+     * The binary formats do not carry them. */
     firmware_version?: string | null;
     uptime_s?: number | null;
     tx_count?: number | null;
@@ -75,6 +101,8 @@ export interface TTNWebhookPayload {
     };
     received_at?: string;
     uplink_message?: {
+        /** LoRaWAN fPort. 1 = primary telemetry, 11 = wildlife/CTT, 12 = B2B relay. */
+        f_port?: number;
         frm_payload?: string; // Base64 encoded binary
         decoded_payload?: Record<string, any>; // JSON if using TTN formatter
         /* TTN sends one entry per gateway that received this uplink. Each
@@ -116,7 +144,7 @@ export interface TTNWebhookPayload {
  *  about TTN's nested shape. Returns [] (not null) for "no gateway info" so
  *  the JSONB column stores an empty array instead of NULL when the parse
  *  succeeded but rx_metadata was absent — easier to query. */
-function extractGateways(
+export function extractGateways(
     rxMetadata: NonNullable<TTNWebhookPayload['uplink_message']>['rx_metadata']
 ): GatewayReception[] {
     if (!rxMetadata || !Array.isArray(rxMetadata)) return [];
@@ -175,17 +203,22 @@ export function parseTTNPayload(payload: TTNWebhookPayload): TelemetryData | nul
 
     const loraSettings = extractLoraSettings(uplinkMessage);
     const gateways = extractGateways(uplinkMessage.rx_metadata);
+    /* TTN identity — kept on every row so any packet can be re-decoded later. */
+    const identity = {
+        f_port: typeof uplinkMessage.f_port === 'number' ? uplinkMessage.f_port : null,
+        frm_payload: uplinkMessage.frm_payload ?? null,
+    };
 
     // Try JSON format first (TTN Payload Formatter)
     if (uplinkMessage.decoded_payload) {
         const parsed = parseJSONPayload(deviceId, receivedAt, uplinkMessage.decoded_payload, uplinkMessage.rx_metadata);
-        return { ...parsed, ...loraSettings, gateways };
+        return { ...parsed, ...loraSettings, ...identity, gateways };
     }
 
     // Fall back to binary format
     if (uplinkMessage.frm_payload) {
         const parsed = parseBinaryPayload(deviceId, receivedAt, uplinkMessage.frm_payload, uplinkMessage.rx_metadata);
-        return parsed ? { ...parsed, ...loraSettings, gateways } : null;
+        return parsed ? { ...parsed, ...loraSettings, ...identity, gateways } : null;
     }
 
     return null;
@@ -272,6 +305,25 @@ function parseJSONPayload(
         uv_index: intOr('uv_index'),
         ambient_lux: numOr('ambient_lux', 'lux'),
         acoustic_event: intOr('acoustic_event', 'acoustic'),
+        /* Telemetry v2 — names match the firmware's own decoder output, so a
+         * TTN payload formatter populates these without any bit-layout
+         * guesswork on our side. */
+        telemetry_version: intOr('telemetry_version'),
+        status_byte: intOr('status_byte'),
+        boot_count: intOr('boot_count'),
+        power_tier: intOr('power_tier'),
+        reset_cause: intOr('reset_cause'),
+        gps_fix_age_min: intOr('gps_fix_age_min', 'gps_fix_age'),
+        command_ack_seq: intOr('command_ack_seq'),
+        relay_enabled: (() => {
+            const v = decoded['relay_enabled'];
+            if (v === undefined || v === null || v === '') return null;
+            if (typeof v === 'boolean') return v;
+            const s = String(v).toLowerCase();
+            return s === 'true' || s === '1';
+        })(),
+        relay_fwd_delta: intOr('relay_fwd_delta'),
+        ctt_tags_delta: intOr('ctt_tags_delta'),
         firmware_version: strOr('firmware_version', 'firmware', 'fw'),
         uptime_s: intOr('uptime_s', 'uptime'),
         tx_count: intOr('tx_count', 'tx'),
@@ -283,8 +335,19 @@ function parseJSONPayload(
 
 /**
  * Parse binary payload (if firmware sends raw bytes)
- * 
- * 35-byte big-endian payload (matches firmware telemetry_pack):
+ *
+ * Two wire formats share the same first 34 bytes:
+ *   v1 — 35 bytes (Flight 3 firmware): byte 34 = acoustic event flag.
+ *   v2 — 40 bytes (StratoLink-2):      byte 34 = packed status byte
+ *        (power tier / reset cause / relay state), byte 35 = boot count,
+ *        bytes 36-39 = GPS-fix age, command ACK, relay + wildlife counts.
+ *        Unavailable sensors are sent as NULL-sentinels rather than zeros.
+ *
+ * v2 bytes 34 (packed bits) and 36-39 are stored raw / left undecoded until
+ * the firmware pack layout is confirmed — the webhook persists the base64
+ * frm_payload on every row, so they are backfillable, not lost.
+ *
+ * v1 35-byte big-endian payload (matches firmware telemetry_pack):
  * Byte 0-3:   Latitude (int32, degrees * 1e7)
  * Byte 4-7:   Longitude (int32, degrees * 1e7)
  * Byte 8-11:  Altitude in meters (int32)
@@ -351,7 +414,14 @@ function parseBinaryPayload(
         const mems_accel_z = buffer.length >= 31 ? buffer.readInt16BE(29) / 100 : null;
         const uv_index = buffer.length >= 32 ? buffer.readUInt8(31) : null;
         const ambient_lux = buffer.length >= 34 ? buffer.readUInt16BE(32) : null;
-        const acoustic_event = buffer.length >= 35 ? buffer.readUInt8(34) : null;
+
+        /* Byte 34 means different things per version: v1 = acoustic event
+         * flag, v2 = packed status byte. Version is inferred from length. */
+        const isV2 = buffer.length >= 40;
+        const telemetry_version = isV2 ? 2 : buffer.length >= 35 ? 1 : null;
+        const acoustic_event = !isV2 && buffer.length >= 35 ? buffer.readUInt8(34) : null;
+        const status_byte = isV2 ? buffer.readUInt8(34) : null;
+        const boot_count = isV2 ? buffer.readUInt8(35) : null;
 
         // Calculate velocity from GPS if available
         let velocity_x = null;
@@ -385,6 +455,9 @@ function parseBinaryPayload(
             uv_index,
             ambient_lux,
             acoustic_event,
+            telemetry_version,
+            status_byte,
+            boot_count,
         };
     } catch (error) {
         console.error('Error parsing binary payload:', error);
