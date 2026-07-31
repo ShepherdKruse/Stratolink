@@ -60,9 +60,22 @@ export async function buildForecastInputForDevice(
         return null;
     }
 
-    if (!rows.length) return null;
+    /* A device that has been released but not heard since (radio blackout, or
+     * transmitting without GPS lock) has a mission window with zero fixes in
+     * it — but the launch record (site + stamped time) is still real
+     * information, and the honest forecast is a simulation seeded from
+     * exactly that and nothing else. Pre-launch bench fixes never enter here:
+     * the mission window already starts at launched_at. */
+    const launchMs = device.launched_at ? new Date(device.launched_at).getTime() : null;
+    const hasLaunchRecord =
+        device.launch_lat != null &&
+        device.launch_lon != null &&
+        launchMs != null &&
+        launchMs <= Date.now();
 
-    const observedTrack = rows
+    if (!rows.length && !hasLaunchRecord) return null;
+
+    let observedTrack = rows
         .filter((r) => r.lat != null && r.lon != null)
         .map((r) => ({
             lat: r.lat as number,
@@ -71,7 +84,20 @@ export async function buildForecastInputForDevice(
             alt_m: (r.altitude_m as number | null) ?? undefined,
         }));
 
-    if (observedTrack.length < 1) return null;
+    if (observedTrack.length < 1) {
+        if (!hasLaunchRecord) return null;
+        /* Launch-only mode: the launch point is the sole "fix". With no rows,
+         * pressureHpa falls back to its float-level default below, so the
+         * drift runs at altitude winds, not the surface layer. (The first
+         * ~90 min of real ascent aren't modelled — acceptable for a
+         * blackout estimate, and superseded by the first real packet.) */
+        observedTrack = [{
+            lat: device.launch_lat as number,
+            lon: device.launch_lon as number,
+            t: new Date(launchMs as number).toISOString(),
+            alt_m: undefined,
+        }];
+    }
 
     const baroSamples = rows
         .filter((r) => {
