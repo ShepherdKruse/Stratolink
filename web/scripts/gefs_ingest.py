@@ -257,7 +257,7 @@ def main():
     print(f"latest GEFS cycle {latest.isoformat()} | members {len(MEMBERS)} | devices {[d for d, _ in devices]}")
     for d, launched in devices:
         try:
-            fixes = g.mission_fixes(d, g.mission_since(launched))
+            fixes = g.mission_track(d, launched)
             if len(fixes) < 1:
                 print(f"  {d}: no fixes, skipping")
                 continue
