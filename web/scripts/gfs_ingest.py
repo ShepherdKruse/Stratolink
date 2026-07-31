@@ -146,6 +146,29 @@ def mission_fixes(device, since_iso):
             for r in rows if -90 <= r["lat"] <= 90 and -180 <= r["lon"] <= 180]
 
 
+def mission_track(device, launched_at):
+    """Mission GPS fixes; falls back to the launch record when there are none.
+
+    A device that has been released but not heard since (radio blackout) has
+    zero fixes in its mission window, but the launch site + stamped time are
+    real information — enough to build a cube around the launch point so the
+    forecast can simulate the drift from there. Mirrors the same fallback in
+    web/lib/wind/buildForecastInput.ts."""
+    fixes = mission_fixes(device, mission_since(launched_at))
+    if fixes:
+        return fixes
+    rows = supa("devices", {
+        "device_id": f"eq.{device}",
+        "select": "launch_lat,launch_lon,launched_at",
+    })
+    r = rows[0] if rows else {}
+    lat, lon, lt = r.get("launch_lat"), r.get("launch_lon"), r.get("launched_at")
+    if lat is None or lon is None or not lt or tparse(lt) > datetime.now(timezone.utc):
+        return []
+    print(f"  {device}: no fixes — seeding from launch record ({lat}, {lon} @ {lt})")
+    return [{"lat": lat, "lon": lon, "t": lt, "alt": None}]
+
+
 def float_pressure(device):
     """Robust estimate of the balloon's float pressure (hPa): the median of the
     last ~200 non-null readings, restricted to the float band (80–400 hPa) so a
@@ -668,7 +691,7 @@ def main():
     print(f"latest GFS cycle {latest.isoformat()} | devices: {[d for d, _ in devices]}")
     for d, launched in devices:
         try:
-            fixes = mission_fixes(d, mission_since(launched))
+            fixes = mission_track(d, launched)
             if len(fixes) < 1:
                 print(f"  {d}: no fixes, skipping")
                 continue
