@@ -35,14 +35,23 @@ const CLIMB_ABOVE_BASELINE_M = 250;
  * Rules:
  *  - Baseline = altitude of the first GPS fix in the window.
  *  - If the window already starts airborne (baseline above threshold — e.g.
- *    a landed flight replay whose mission window begins at launch), the first
- *    row is the start.
+ *    a landed flight replay, or a live flight resuming from a radio
+ *    blackout), the start is `knownLaunchT` (the operator-stamped
+ *    devices.launched_at, which anchors the mission window) when it precedes
+ *    the first row — the first HEARD packet is only a lower bound on the
+ *    flight, so a stamped launch time is strictly better information here.
+ *    Falls back to the first row when no stamp exists.
  *  - Otherwise the launch is the first of two CONSECUTIVE GPS fixes above the
  *    threshold — two so a single corrupt packet can't start the clock.
  *    No-fix rows in between neither confirm nor reset (a GPS dropout
- *    mid-ascent shouldn't restart detection).
+ *    mid-ascent shouldn't restart detection). The stamp is deliberately NOT
+ *    trusted in this branch: a grounded start means the window contains
+ *    pre-launch data, which is exactly when launched_at has proven stale.
  */
-export function detectLaunchT(rows: LaunchDetectRow[]): number | null {
+export function detectLaunchT(
+    rows: LaunchDetectRow[],
+    knownLaunchT: number | null = null,
+): number | null {
     let baseline: number | null = null;
     for (const r of rows) {
         if (r.alt !== null) {
@@ -52,7 +61,9 @@ export function detectLaunchT(rows: LaunchDetectRow[]): number | null {
     }
     if (baseline === null) return null;
 
-    if (baseline >= MIN_LAUNCH_ALT_M) return rows[0].t;
+    if (baseline >= MIN_LAUNCH_ALT_M) {
+        return knownLaunchT !== null && knownLaunchT <= rows[0].t ? knownLaunchT : rows[0].t;
+    }
     const threshold = Math.max(MIN_LAUNCH_ALT_M, baseline + CLIMB_ABOVE_BASELINE_M);
 
     let firstAboveT: number | null = null;
