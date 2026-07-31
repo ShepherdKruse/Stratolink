@@ -22,14 +22,25 @@ async function main() {
     console.log(`union bounds: lat ${h.bounds.latMin.toFixed(1)}..${h.bounds.latMax.toFixed(1)}  lon ${h.bounds.lonMin.toFixed(1)}..${h.bounds.lonMax.toFixed(1)}`);
     if (h.origins) {
         const o = h.origins;
+        const c = h.centers as Array<[number, number]> | undefined;
         const half = ((h.nLat - 1) * h.dLat) / 2;
-        console.log(`tube centers (lat0+${half}°, lon0+${half}°), sampled every ~${Math.ceil(o.length / 12)} slices:`);
+        const offLattice = (v: number) => Math.abs((v / h.gridStep) % 1) > 1e-6;
+        console.log(`true centers: ${c ? `yes (${c.length})` : 'NO — old cube, box centers only'}`
+            + `  hourly track: ${h.track ? `yes (${h.track.points.length} pts @ ${h.track.stepMs / 3.6e6}h)` : 'no'}`);
+        console.log(`tube centers${c ? ' (true | box)' : ` (lat0+${half}°, lon0+${half}°)`}, sampled every ~${Math.ceil(o.length / 12)} slices:`);
         for (let i = 0; i < o.length; i += Math.max(1, Math.ceil(o.length / 12))) {
             const t = new Date(h.t0Ms + i * h.stepMs).toISOString().slice(5, 16);
-            console.log(`  [${String(i).padStart(3)}] ${t}  center lat ${(o[i][0] + half).toFixed(2)}  lon ${(o[i][1] + half).toFixed(2)}`);
+            const box = `lat ${(o[i][0] + half).toFixed(2)}  lon ${(o[i][1] + half).toFixed(2)}`;
+            console.log(c
+                ? `  [${String(i).padStart(3)}] ${t}  true lat ${c[i][0].toFixed(4)}  lon ${c[i][1].toFixed(4)}  | box ${box}`
+                : `  [${String(i).padStart(3)}] ${t}  center ${box}`);
         }
         const last = o.length - 1;
         console.log(`  [${last}] center lat ${(o[last][0] + half).toFixed(2)}  lon ${(o[last][1] + half).toFixed(2)} (final)`);
+        if (c) {
+            const off = c.filter(([la, lo]) => offLattice(la) || offLattice(lo)).length;
+            console.log(`off-lattice true centers: ${off}/${c.length} (0 would mean still quantized)`);
+        }
     } else {
         console.log('static cube (v1): single box, no per-slice origins');
     }

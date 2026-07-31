@@ -191,11 +191,15 @@ def member_cube_tube(mem, schedule, slice_ms, start_lat, start_lon, target_p, la
         ub, vb = g.bilin_uv(*field_at(k0 + 1), lat, lon)
         return ua * (1 - frac) + ub * frac, va * (1 - frac) + vb * frac
 
-    centers = g.integrate_nominal_centers(slice_ms, slice_ms[0], start_lat, start_lon, wind_fn)
+    # Hourly track: the compute emits hourly points, so sampling the walk hourly
+    # (vs interpolating the 3-hourly slice centers) removes the straight chords.
+    centers, track = g.integrate_nominal_centers(slice_ms, slice_ms[0], start_lat, start_lon,
+                                                 wind_fn, track_step_ms=3_600_000)
 
     cube, n, _ = g.build_tube_grids(centers, g.TUBE_HALF_DEG, TUBE_STEP, slice_ms, field_at,
                                     "gefs", target_p, latest, now)
     cube["member"] = mem
+    cube["track"] = {"t0Ms": slice_ms[0], "stepMs": 3_600_000, "points": track}
     return cube, n
 
 

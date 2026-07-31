@@ -258,10 +258,20 @@ function memberPathFromTube(
     startLon: number,
     startLat: number,
 ): Array<[number, number]> {
-    const centers = centerTrack(cube);
-    if (centers.length < 2) return [[round4(startLon), round4(startLat)]];
-    const { t0Ms, stepMs } = cube;
-    const tEnd = t0Ms + (centers.length - 1) * stepMs;
+    /* Prefer the hourly true track stored at ingest (header points are [lat, lon];
+     * swap to [lon, lat] here) — the walk sampled at the same hourly cadence we
+     * emit, so no chord interpolation. Fall back to the per-slice centers (true
+     * ones when stored, grid-snapped box centers on old cubes). The track spans
+     * exactly slice 0 → last slice, so tEnd/truncation timing is unchanged. */
+    const tr = cube.track;
+    const useTrack = !!tr && tr.points.length >= 2;
+    const pts: Array<[number, number]> = useTrack
+        ? tr!.points.map(([lat, lon]) => [lon, lat] as [number, number])
+        : centerTrack(cube);
+    if (pts.length < 2) return [[round4(startLon), round4(startLat)]];
+    const t0Ms = useTrack ? tr!.t0Ms : cube.t0Ms;
+    const stepMs = useTrack ? tr!.stepMs : cube.stepMs;
+    const tEnd = t0Ms + (pts.length - 1) * stepMs;
     const out: Array<[number, number]> = [];
     const steps = Math.max(1, Math.round(totalHours));
     for (let h = 0; h <= steps; h++) {
@@ -269,10 +279,10 @@ function memberPathFromTube(
         const whenMs = startMs + h * 3_600_000;
         if (whenMs > tEnd + 1) break;
         const f = (whenMs - t0Ms) / stepMs;
-        const k0 = Math.max(0, Math.min(centers.length - 2, Math.floor(f)));
+        const k0 = Math.max(0, Math.min(pts.length - 2, Math.floor(f)));
         const fr = Math.max(0, Math.min(1, f - k0));
-        const a = centers[k0];
-        const b = centers[k0 + 1];
+        const a = pts[k0];
+        const b = pts[k0 + 1];
         out.push([round4(a[0] + (b[0] - a[0]) * fr), round4(a[1] + (b[1] - a[1]) * fr)]);
     }
     return out;
