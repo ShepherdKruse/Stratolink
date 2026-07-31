@@ -7,6 +7,13 @@
       "runtimeArgs": ["run", "dev"],
       "cwd": "web",
       "port": 3000
+    },
+    {
+      "name": "web-prod",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "start"],
+      "cwd": "web",
+      "port": 3000
     }
   ]
 }
