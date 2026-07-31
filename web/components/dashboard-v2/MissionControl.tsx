@@ -356,7 +356,8 @@ function LeftColumn({
     );
 }
 
-/* Brand strip — STRATOLINK mark linking home. */
+/* Brand strip — STRATOLINK mark linking to the project story (/about);
+ * the dashboard itself is the homepage. */
 function BrandStrip() {
     return (
         <div style={{
@@ -364,7 +365,7 @@ function BrandStrip() {
             padding: '9px 18px', flexShrink: 0,
             borderBottom: '1px solid var(--sl-border)', background: 'var(--sl-bg-1)',
         }}>
-            <a href="/" style={{
+            <a href="/about" style={{
                 display: 'flex', alignItems: 'center', gap: 9,
                 fontFamily: 'var(--sl-mono)', fontSize: 13, fontWeight: 600, letterSpacing: '0.06em',
                 textTransform: 'uppercase',

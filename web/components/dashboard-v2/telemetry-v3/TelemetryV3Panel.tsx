@@ -206,7 +206,9 @@ export default function TelemetryV3Panel({ device, devices, onSelect, scrubRow, 
             {showHeader && (
             <div style={{ borderBottom: '1px solid var(--t-border)', flexShrink: 0 }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: 10, padding: compact ? '11px 18px 0' : '15px 18px 0' }}>
-                    <a href="/" className="tlm-brand-link" style={{ display: 'flex', flexShrink: 0, textDecoration: 'none' }}>
+                    {/* The dashboard is the homepage now; the mark leads to the
+                      * project story stashed at /about. */}
+                    <a href="/about" className="tlm-brand-link" style={{ display: 'flex', flexShrink: 0, textDecoration: 'none' }}>
                         <Image
                             src="/stratolink-header-logo.png"
                             alt="Stratolink"

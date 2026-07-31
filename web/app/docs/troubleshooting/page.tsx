@@ -173,7 +173,7 @@ export default function TroubleshootingPage() {
                             <h3 className="mt-0">Still Need Help?</h3>
                             <p>
                                 If you've tried these solutions and still encounter issues,{' '}
-                                <Link href="/#contact">contact our support team</Link> with:
+                                <Link href="/about#contact">contact our support team</Link> with:
                             </p>
                             <ul>
                                 <li>Description of the problem</li>

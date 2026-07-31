@@ -29,7 +29,7 @@ export default function ClassroomsPage() {
                     <article className="paper" dangerouslySetInnerHTML={{ __html: articleHtml }} />
                     <nav className="classrooms-links" aria-label="Related pages">
                         <Link href="/learn">How the balloon works →</Link>
-                        <Link href="/#contact">Contact us about school programs →</Link>
+                        <Link href="/about#contact">Contact us about school programs →</Link>
                         <Link href="/docs">Technical documentation →</Link>
                     </nav>
                 </div>

@@ -185,7 +185,7 @@ const { data, error } = await supabase
                             <p>
                                 For integration support, check the{' '}
                                 <Link href="/docs/troubleshooting">troubleshooting guide</Link> or{' '}
-                                <Link href="/#contact">contact us</Link>.
+                                <Link href="/about#contact">contact us</Link>.
                             </p>
                         </div>
                     </div>
