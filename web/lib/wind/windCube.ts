@@ -31,6 +31,15 @@ export type WindCube = {
     /** True for a v2 "tube" cube — each grid follows the trajectory, so the
      *  box-center sequence IS the pre-integrated nominal path (see `centerTrack`). */
     isTube?: boolean;
+    /** Tube cubes only: the TRUE per-slice trajectory centers, `[lat, lon]` with
+     *  lon UNWRAPPED (like `origins`). The box origins are snapped to the source
+     *  grid for exact sampling, so box centers quantize the path to 0.25-0.5°;
+     *  these carry the unsnapped positions. Absent on cubes built before this. */
+    centers?: Array<[number, number]>;
+    /** Tube cubes only: the same pre-integrated walk sampled every `stepMs`
+     *  (hourly), `points` = `[lat, lon]` unwrapped — denser than the 3-6 h slice
+     *  cadence, so hourly member paths need no chord interpolation. */
+    track?: { t0Ms: number; stepMs: number; points: Array<[number, number]> };
 };
 
 /** The pre-integrated trajectory a tube was laid along: each slice's box center
@@ -39,6 +48,13 @@ export type WindCube = {
  *  through the 3-hourly boxes (which drifts/clamps for fast members over a long
  *  gap). Longitudes stay unwrapped (continuous across ±180). */
 export function centerTrack(cube: WindCube): Array<[number, number]> {
+    /* Prefer the TRUE centers stored at ingest (header is [lat, lon]; swap to this
+     * function's [lon, lat]). The box-center fallback below is quantized to the
+     * source lattice (box origins are grid-snapped for exact sampling), which drew
+     * straight chords and right-angle staircases — kept only for old cubes. */
+    if (cube.centers && cube.centers.length === cube.grids.length) {
+        return cube.centers.map(([lat, lon]) => [lon, lat] as [number, number]);
+    }
     return cube.grids.map((g) => [
         g.lon0 + ((g.nLon - 1) * g.dLon) / 2,
         g.lat0 + ((g.nLat - 1) * g.dLat) / 2,
@@ -90,6 +106,10 @@ type BinHeader = {
     nGrids: number;
     /** v2 tube: per-slice `[lat0, lon0]`, length `nGrids` (dims/step stay shared). */
     origins?: Array<[number, number]>;
+    /** v2 tube (optional): TRUE per-slice centers `[lat, lon]`, lon unwrapped. */
+    centers?: Array<[number, number]>;
+    /** v2 tube (optional): hourly true trajectory, `points` = `[lat, lon]`. */
+    track?: { t0Ms: number; stepMs: number; points: Array<[number, number]> };
 };
 
 /** Reconstitute a WindCube from the packed binary form:
@@ -126,6 +146,7 @@ function cubeFromBinary(raw: Buffer): WindCube {
         t0Ms: h.t0Ms, stepMs: h.stepMs, gridStep: h.gridStep, levelHpa: h.levelHpa,
         bounds: h.bounds, source: h.source ?? 'gfs', generatedAt: h.generated_at, grids,
         isTube: !!h.origins,
+        centers: h.centers, track: h.track,
     };
 }
 

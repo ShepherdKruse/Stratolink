@@ -408,15 +408,28 @@ def cut_box(u, v, clat, clon, half_deg, step, n):
     return float(lats[0]), float(lons[0]), u[np.ix_(rows, cols)].ravel(), v[np.ix_(rows, cols)].ravel()
 
 
-def integrate_nominal_centers(slice_ms, start_ms, start_lat, start_lon, wind_fn):
+def integrate_nominal_centers(slice_ms, start_ms, start_lat, start_lon, wind_fn,
+                              track_step_ms=None):
     """Pre-integrate ONE nominal trajectory (neutral bias, no perturbation) forward
     from (start_lat, start_lon) at `start_ms`, snapshotting its position at each
     slice time ≥ start_ms. `wind_fn(lat, lon, t_ms) -> (u, v)` supplies the field
     (GFS or a GEFS member). Longitude is left UNWRAPPED so the tube's per-slice
     origins + union bounds form a continuous range the integrator agrees with.
     Slices before start_ms stay None for the caller to fill. Cheap: the global
-    fields are fetched/cached once and reused to cut the boxes."""
+    fields are fetched/cached once and reused to cut the boxes.
+
+    Returns (centers, track). `track` is None unless `track_step_ms` is given, in
+    which case it also snapshots every `track_step_ms` from start_ms to the last
+    slice — a denser sampling of the SAME walk, stored in the cube header so the
+    compute can read the true path instead of the grid-snapped box centers."""
     centers = [None] * len(slice_ms)
+    track_ms = []
+    if track_step_ms:
+        t = start_ms
+        while t <= slice_ms[-1]:
+            track_ms.append(t)
+            t += track_step_ms
+    track = [None] * len(track_ms)
     lat, lon = start_lat, start_lon
     k = 0
     while k < len(slice_ms) and slice_ms[k] < start_ms:
@@ -424,10 +437,13 @@ def integrate_nominal_centers(slice_ms, start_ms, start_lat, start_lon, wind_fn)
     first_fwd = k
     while k < len(slice_ms) and slice_ms[k] <= start_ms:      # slice exactly at start
         centers[k] = (lat, lon); k += 1
+    tk = 0
+    while tk < len(track_ms) and track_ms[tk] <= start_ms:
+        track[tk] = (lat, lon); tk += 1
     dt_s = TUBE_SUBSTEP_H * 3600
     t_ms = start_ms
     end_ms = slice_ms[-1]
-    while t_ms < end_ms and k < len(slice_ms):
+    while t_ms < end_ms and (k < len(slice_ms) or tk < len(track_ms)):
         u, v = wind_fn(lat, lon, t_ms)
         coslat = max(np.cos(np.radians(lat)), 0.05)
         lat += v * dt_s / 111_320
@@ -435,10 +451,15 @@ def integrate_nominal_centers(slice_ms, start_ms, start_lat, start_lon, wind_fn)
         t_ms += TUBE_SUBSTEP_H * 3600 * 1000
         while k < len(slice_ms) and slice_ms[k] <= t_ms + 1:
             centers[k] = (lat, lon); k += 1
+        while tk < len(track_ms) and track_ms[tk] <= t_ms + 1:
+            track[tk] = (lat, lon); tk += 1
     for j in range(first_fwd, len(slice_ms)):                 # trailing (shouldn't happen)
         if centers[j] is None:
             centers[j] = (lat, lon)
-    return centers
+    for j in range(len(track_ms)):
+        if track[j] is None:
+            track[j] = (lat, lon)
+    return centers, (track if track_step_ms else None)
 
 
 def sample_global(uv, lat, lon):
@@ -475,7 +496,10 @@ def nominal_centers(slice_ms, last_fix_ms, last_lat, last_lon, target_p, latest)
     def wind_fn(lat, lon, t_ms):
         cyc, fhr = pick_source(datetime.fromtimestamp(t_ms / 1000, timezone.utc), latest)
         return sample_global(fetch_uv_p(cyc, fhr, target_p), lat, lon)
-    return integrate_nominal_centers(slice_ms, last_fix_ms, last_lat, last_lon, wind_fn)
+    # No hourly track for the fc tube: its slices are already hourly, so the
+    # stored per-slice centers ARE the hourly true path.
+    centers, _ = integrate_nominal_centers(slice_ms, last_fix_ms, last_lat, last_lon, wind_fn)
+    return centers
 
 
 def build_tube_grids(centers, half_deg, step, slice_ms, field_at, source, levelHpa, latest, now, tag=""):
@@ -500,6 +524,11 @@ def build_tube_grids(centers, half_deg, step, slice_ms, field_at, source, levelH
         "t0Ms": slice_ms[0], "stepMs": int(slice_ms[1] - slice_ms[0]) if len(slice_ms) > 1 else FC_STEP_H * 3600 * 1000,
         "bounds": {"latMin": uminLat, "latMax": umaxLat, "lonMin": uminLon, "lonMax": umaxLon},
         "grids": grids,
+        # The TRUE (unsnapped) per-slice centers. cut_box snaps each box ORIGIN to
+        # the source lattice (required for exact sampling), which quantizes the box
+        # centers to 0.25-0.5° — reading those back as the trajectory drew straight
+        # chords and right-angle staircases. Keep the real path alongside.
+        "centers": centers,
     }, n, n
 
 
@@ -560,6 +589,15 @@ def pack_cube(cube):
     }
     if is_tube:
         header["origins"] = [[round(la, 4), round(lo, 4)] for la, lo in origins]
+    # True trajectory metadata (optional, tube-only; [lat, lon], lon UNWRAPPED like
+    # origins). Old readers ignore unknown header keys, so v stays 2.
+    if is_tube and cube.get("centers"):
+        assert len(cube["centers"]) == len(grids), "centers/grids length mismatch"
+        header["centers"] = [[round(la, 4), round(lo, 4)] for la, lo in cube["centers"]]
+    if is_tube and cube.get("track"):
+        tr = cube["track"]
+        header["track"] = {"t0Ms": tr["t0Ms"], "stepMs": tr["stepMs"],
+                           "points": [[round(la, 4), round(lo, 4)] for la, lo in tr["points"]]}
     hb = json.dumps(header, separators=(",", ":")).encode("utf-8")
     hb += b" " * ((-(4 + len(hb))) % 4)            # pad so the payload starts 4-byte aligned
     parts = [struct.pack("<I", len(hb)), hb]
