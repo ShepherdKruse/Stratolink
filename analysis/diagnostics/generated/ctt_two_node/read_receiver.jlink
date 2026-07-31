@@ -1,6 +1,6 @@
 connect
 h
-savebin ctt_receiver_s_ctt.bin 0x200007E0 32
-savebin ctt_receiver_s_ctt_queue.bin 0x20000558 648
+savebin ctt_receiver_s_ctt.bin 0x200007E0 0x20
+savebin ctt_receiver_s_ctt_queue.bin 0x20000558 0x288
 g
 exit

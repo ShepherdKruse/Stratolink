@@ -1,5 +1,5 @@
 connect
 h
-savebin ctt_transmitter_ctt_tx_diag_state.bin 0x20000044 44
+savebin ctt_transmitter_ctt_tx_diag_state.bin 0x20000044 0x2C
 g
 exit

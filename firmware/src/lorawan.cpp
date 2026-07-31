@@ -4,7 +4,7 @@
  * RAK3172 (STM32WLE5). Region selected via TTN_REGION_* in config.h.
  */
 #include "lorawan.h"
-#if __has_include("secrets.h")
+#if __has_include("secrets.h") && !defined(B2B_RF_DIAG_BUILD)
 #include "secrets.h"
 #endif
 #include "config.h"

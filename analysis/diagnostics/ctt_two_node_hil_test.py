@@ -87,6 +87,21 @@ def evaluate(
 
 
 def main() -> None:
+    read_script = ctt_two_node_hil.savebin_script(
+        {
+            "s_ctt": {"address": 0x200007E0, "size": 32},
+            "s_ctt_queue": {"address": 0x20000558, "size": 648},
+        },
+        "ctt_receiver",
+    )
+    assert (
+        "savebin ctt_receiver_s_ctt.bin 0x200007E0 0x20" in read_script
+    )
+    assert (
+        "savebin ctt_receiver_s_ctt_queue.bin 0x20000558 0x288"
+        in read_script
+    )
+
     stats, queue, tx = passing_blobs()
     with tempfile.TemporaryDirectory(prefix="stratolink-ctt-hil-test-") as tmp:
         root = Path(tmp)

@@ -77,7 +77,8 @@ def savebin_script(items: dict[str, dict[str, int]], prefix: str) -> str:
     lines = ["connect", "h"]
     for name, item in items.items():
         lines.append(
-            f"savebin {prefix}_{name}.bin 0x{item['address']:08X} {item['size']}"
+            f"savebin {prefix}_{name}.bin "
+            f"0x{item['address']:08X} 0x{item['size']:X}"
         )
     lines.extend(["g", "exit", ""])
     return "\n".join(lines)
