@@ -137,8 +137,14 @@ export default function MissionControlScreen() {
     /* Launch moment derived from the telemetry itself (first decisive climb),
      * NOT devices.launched_at — a payload can soak on the bench for days
      * before release, and the flight clock must not count that. Null while
-     * still on the ground. */
-    const launchT = useMemo(() => detectLaunchT(rows), [rows]);
+     * still on the ground. The stamped launched_at is passed as a fallback
+     * for windows that begin already airborne (archive replays, or a live
+     * flight first heard after a radio blackout — the first heard packet is
+     * only a lower bound on how long it's been up). */
+    const launchT = useMemo(
+        () => detectLaunchT(rows, selectedDevice?.launchedAt ?? null),
+        [rows, selectedDevice?.launchedAt],
+    );
 
     /* Whole-flight totals (independent of the timeline range zoom).
      * Duration runs from the detected launch to the present (not the last
