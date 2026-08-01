@@ -3,23 +3,21 @@
      Kurzgesagt × NASA mission poster
      ════════════════════════════════════════════════════════════ */
   .learn-page {
-    --space:        #060814;
-    --space-1:      #0a0e1c;
-    --space-2:      #11172a;
-    --space-3:      #1a2342;
+    /* Light sticker layout (matches /about narrative screenshots) */
+    --space:        #ffffff;
+    --space-1:      #f7f8fa;
+    --space-2:      #eef1f5;
+    --space-3:      #e4e9f0;
 
-    /* primary accent — electric cyan */
-    --cyan:         #4dd0f7;
-    --cyan-2:       #6fdcff;
-    --cyan-soft:    rgba(77, 208, 247, 0.12);
-    --cyan-line:    rgba(77, 208, 247, 0.32);
+    --cyan:         #1f4b63;
+    --cyan-2:       #2a5f7a;
+    --cyan-soft:    rgba(31, 75, 99, 0.08);
+    --cyan-line:    rgba(31, 75, 99, 0.22);
 
-    /* live data accent — warm amber */
-    --amber:        #f5b842;
-    --amber-soft:   rgba(245, 184, 66, 0.14);
-    --amber-line:   rgba(245, 184, 66, 0.36);
+    --amber:        #b45309;
+    --amber-soft:   rgba(180, 83, 9, 0.10);
+    --amber-line:   rgba(180, 83, 9, 0.28);
 
-    /* illustration palette */
     --silver-1:     #e8edf3;
     --silver-2:     #b8c2d0;
     --silver-3:     #8893a6;
@@ -27,15 +25,14 @@
     --teal-deep:    #2a4e54;
     --warm-grey:    #9c9388;
 
-    /* text */
-    --white:        #f4f6fa;
-    --ink:          #d4dae5;
-    --ink-dim:      #98a3b8;
-    --ink-dim2:     #5e6b80;
-    --ink-faint:    #313a4e;
+    --white:        #0f172a;
+    --ink:          #475569;
+    --ink-dim:      #64748b;
+    --ink-dim2:     #94a3b8;
+    --ink-faint:    #cbd5e1;
 
-    --rule:         rgba(77, 208, 247, 0.10);
-    --rule-hi:      rgba(77, 208, 247, 0.22);
+    --rule:         rgba(15, 23, 42, 0.08);
+    --rule-hi:      rgba(15, 23, 42, 0.16);
 
     --display: "Instrument Serif", "Fraunces", Georgia, serif;
     --sans:    "Space Grotesk", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
@@ -102,7 +99,7 @@
   /* ════════════ IN-PAGE SUBNAV (below site header) ════════════ */
   .learn-subnav {
     position: fixed; top: 80px; left: 0; right: 0; z-index: 40;
-    background: rgba(6, 8, 20, 0.82);
+    background: rgba(255, 255, 255, 0.88);
     backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
     border-bottom: 1px solid var(--rule);
   }
@@ -134,7 +131,7 @@
     text-decoration: none; border: 1px solid; cursor: pointer; white-space: nowrap;
     transition: all 0.18s;
   }
-  .btn-pri { background: var(--cyan); color: var(--space); border-color: var(--cyan); }
+  .btn-pri { background: var(--cyan); color: #ffffff; border-color: var(--cyan); }
   .btn-pri:hover { background: var(--cyan-2); border-color: var(--cyan-2); }
   .btn-ghost { background: transparent; color: var(--ink); border-color: var(--rule-hi); }
   .btn-ghost:hover { color: var(--white); border-color: var(--cyan); }
@@ -220,8 +217,56 @@
   }
   .balloon-floater {
     position: relative;
-    width: 280px; height: 380px;
+    width: min(100%, 420px);
+    height: auto;
     animation: drift 7s ease-in-out infinite;
+  }
+  .balloon-floater img {
+    width: 100%;
+    height: auto;
+    display: block;
+    filter: drop-shadow(0 24px 40px rgba(15, 23, 42, 0.18));
+  }
+
+  /* Alternating sticker + copy rows */
+  .sticker-split {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 64px;
+    align-items: center;
+    margin: 72px 0;
+  }
+  .sticker-split.reverse .sticker-visual { order: 2; }
+  .sticker-split.reverse .sticker-copy { order: 1; }
+  .sticker-visual {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 24px;
+  }
+  .sticker-visual img {
+    width: 100%;
+    max-width: 420px;
+    height: auto;
+    filter: drop-shadow(0 20px 36px rgba(15, 23, 42, 0.16));
+    animation: drift 8s ease-in-out infinite;
+  }
+  .sticker-visual img.sticker-sm { max-width: 280px; }
+  .sticker-visual img.is-photo {
+    max-width: 520px;
+    filter: none;
+    animation: none;
+    object-fit: cover;
+  }
+  .sticker-copy h3 {
+    font-size: clamp(28px, 3.5vw, 40px);
+    margin-bottom: 16px;
+  }
+  .sticker-copy p {
+    font-size: 18px;
+    line-height: 1.7;
+    max-width: 36rem;
   }
   @keyframes drift {
     0%, 100% { transform: translateY(0) rotate(0deg); }
@@ -656,7 +701,9 @@
   @media (max-width: 880px) {
     .learn-page section { padding: 80px 0; }
     .hero { padding: 110px 0 60px; }
-    .hero-content, .eq, .report-body { grid-template-columns: 1fr; gap: 48px; }
+    .hero-content, .eq, .report-body, .sticker-split { grid-template-columns: 1fr; gap: 48px; }
+    .sticker-split.reverse .sticker-visual,
+    .sticker-split.reverse .sticker-copy { order: unset; }
     .balloon-stage { height: 420px; }
     .vs-grid, .comic, .relay-facts { grid-template-columns: 1fr; }
     .dash-body { grid-template-columns: 1fr; }

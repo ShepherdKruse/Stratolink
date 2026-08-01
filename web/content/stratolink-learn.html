@@ -42,70 +42,7 @@
     </div>
     <div class="balloon-stage reveal d2">
       <div class="balloon-floater">
-        <svg viewBox="0 0 280 380" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <!-- Silver mylar gradient — pillow shape, reflective -->
-            <linearGradient id="mylar" x1="0" y1="0" x2="1" y2="1">
-              <stop offset="0%" stop-color="#f4f6fa" />
-              <stop offset="22%" stop-color="#d2dae6" />
-              <stop offset="55%" stop-color="#a8b3c5" />
-              <stop offset="100%" stop-color="#6e7a8e" />
-            </linearGradient>
-            <linearGradient id="mylar-shine" x1="0" y1="0" x2="1" y2="1">
-              <stop offset="0%" stop-color="#ffffff" stop-opacity="0.7" />
-              <stop offset="60%" stop-color="#ffffff" stop-opacity="0" />
-            </linearGradient>
-          </defs>
-          <!-- pillow / square-ish mylar balloon — 200x200 ish with rounded corners -->
-          <g transform="translate(40, 24)">
-            <path d="M 40 4
-                     Q 0 4, 0 60
-                     L 0 140
-                     Q 0 196, 60 196
-                     L 140 196
-                     Q 200 196, 200 140
-                     L 200 60
-                     Q 200 4, 160 4
-                     Z"
-                  fill="url(#mylar)" stroke="#4a5568" stroke-width="1.2" />
-            <!-- subtle vertical seam -->
-            <line x1="100" y1="14" x2="100" y2="188" stroke="rgba(255,255,255,0.18)" stroke-width="1" />
-            <!-- corner crinkles -->
-            <path d="M 10 30 Q 26 50, 22 80" stroke="rgba(255,255,255,0.20)" stroke-width="0.8" fill="none" />
-            <path d="M 190 30 Q 174 50, 178 80" stroke="rgba(0,0,0,0.18)" stroke-width="0.8" fill="none" />
-            <path d="M 10 170 Q 26 150, 22 120" stroke="rgba(0,0,0,0.16)" stroke-width="0.6" fill="none" />
-            <!-- reflection sweep — shimmer -->
-            <path class="mylar-shimmer"
-                  d="M 30 22 Q 70 36, 90 70 Q 88 100, 50 130 Q 30 110, 20 70 Q 22 40, 30 22 Z"
-                  fill="url(#mylar-shine)" />
-            <!-- top fill valve nub -->
-            <rect x="92" y="-2" width="16" height="8" fill="#7a8595" stroke="#4a5568" stroke-width="0.8" />
-          </g>
-          <!-- tether down to payload -->
-          <line x1="140" y1="220" x2="140" y2="284" stroke="#4a5568" stroke-width="1" stroke-dasharray="2 3" />
-          <!-- payload enclosure -->
-          <g transform="translate(110, 284)">
-            <!-- outer box -->
-            <rect x="0" y="0" width="60" height="42" fill="#11172a" stroke="#4dd0f7" stroke-width="1.4" />
-            <!-- accent strip -->
-            <rect x="0" y="0" width="3" height="42" fill="#4dd0f7" />
-            <!-- label -->
-            <text x="10" y="14" font-family="JetBrains Mono" font-size="7" fill="#4dd0f7" letter-spacing="0.06em">STRATOLINK</text>
-            <text x="10" y="24" font-family="JetBrains Mono" font-size="6" fill="rgba(244,246,250,0.55)">R2 PAYLOAD</text>
-            <text x="10" y="34" font-family="JetBrains Mono" font-size="6" fill="rgba(244,246,250,0.40)">10 g · v2.1</text>
-            <!-- status LED -->
-            <circle cx="52" cy="34" r="1.6" fill="#f5b842">
-              <animate attributeName="opacity" values="1;0.2;1" dur="1.6s" repeatCount="indefinite" />
-            </circle>
-            <!-- antenna -->
-            <line x1="50" y1="0" x2="50" y2="-18" stroke="#4dd0f7" stroke-width="1.2" />
-            <circle cx="50" cy="-19" r="1.4" fill="#4dd0f7" />
-          </g>
-          <!-- ground line -->
-          <line x1="0" y1="372" x2="280" y2="372" stroke="#313a4e" stroke-width="0.8" />
-          <!-- tiny mountain silhouette -->
-          <path d="M 0 372 L 60 350 L 110 370 L 170 340 L 230 365 L 280 358 L 280 372 Z" fill="#11172a" stroke="#313a4e" stroke-width="0.6" />
-        </svg>
+        <img src="/stickers/balloon-ascent.png" alt="Pico balloon carrying a Stratolink payload" width="420" height="420" />
       </div>
     </div>
   </div>
@@ -207,6 +144,16 @@
     <div class="vs-callout reveal d3">
       <h3>Ours doesn't pop. <em>It travels.</em></h3>
       <p>A pico balloon is sealed with just enough hydrogen to balance its weight at altitude. It rises until the air outside is thin enough to match its density — and then it floats, riding the jet stream. Some missions cross oceans. Some circle the Northern Hemisphere. The data keeps coming as long as the payload stays powered.</p>
+    </div>
+
+    <div class="sticker-split reveal d2">
+      <div class="sticker-visual">
+        <img src="/stickers/payload.png" alt="Stratolink payload with solar wings" width="520" height="520" />
+      </div>
+      <div class="sticker-copy">
+        <h3>Meet the tiny satellite.</h3>
+        <p>Ten grams of board, solar cells, and radio. It measures temperature, pressure, and position, then pings gateways on the ground so Mission Control can draw the path live.</p>
+      </div>
     </div>
   </div>
 </section>
@@ -423,6 +370,16 @@
         </svg>
       </div>
     </div>
+
+    <div class="sticker-split reverse reveal d2">
+      <div class="sticker-visual">
+        <img src="/photos/launch-held.jpg" alt="Holding a clear pico balloon before release" class="is-photo" width="900" height="800" />
+      </div>
+      <div class="sticker-copy">
+        <h3>It finds its altitude — and just floats there.</h3>
+        <p>No pop, no parachute. The sealed envelope stops climbing when the thin air matches its density. From there the jet stream does the navigating.</p>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -434,6 +391,16 @@
     <div class="sec-tag reveal">05 / LIVE TRACKING <span class="meta">· LoRaWAN GATEWAY RELAY</span></div>
     <h2 class="reveal" style="max-width: 920px;">A ping from a balloon, to a gateway, to your phone.</h2>
     <p class="lede reveal d1" style="margin-top: 20px;">No ham radio license. No portable receiver. From 12 km up, your balloon has line-of-sight to <em>LoRaWAN gateways</em> hundreds of kilometers away. It pings the closest one. The gateway forwards over the internet. The cloud updates your dashboard.</p>
+
+    <div class="sticker-split reveal d1">
+      <div class="sticker-visual">
+        <img src="/photos/launch-ascent.jpg" alt="Balloon rising after launch" class="is-photo" width="900" height="600" />
+      </div>
+      <div class="sticker-copy">
+        <h3>Hardware you can hold. A map you can share.</h3>
+        <p>Build it, launch it, then follow the same mission on a phone in the classroom or a laptop three states away.</p>
+      </div>
+    </div>
 
     <div class="relay-stage reveal d2">
       <svg viewBox="0 0 1080 360" preserveAspectRatio="xMidYMid meet" width="100%" height="100%">

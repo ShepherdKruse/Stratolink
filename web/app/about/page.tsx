@@ -1,9 +1,5 @@
 import { HeroScroll } from "@/components/hero-globe/HeroScroll"
-import { Mission } from "@/components/mission"
-import { HowItWorks } from "@/components/how-it-works"
-import { DashboardShowcase } from "@/components/dashboard-showcase"
-import { Applications } from "@/components/applications"
-import { FutureApplications } from "@/components/future-applications"
+import { AboutStory } from "@/components/marketing/AboutStory"
 import { Roadmap } from "@/components/roadmap"
 import { LaunchUpdates } from "@/components/launch-updates"
 import { Contact } from "@/components/contact"
@@ -16,11 +12,7 @@ export default function Page() {
       <Navigation />
       <main>
         <HeroScroll />
-        <Mission />
-        <HowItWorks />
-        <DashboardShowcase />
-        <Applications />
-        <FutureApplications />
+        <AboutStory />
         <Roadmap />
         <LaunchUpdates />
         <Contact />
