@@ -193,13 +193,11 @@ export default function TelemetryV3Panel({ device, devices, onSelect, scrubRow, 
     const altStatus: StatusLevel =
         altVal == null ? 'critical' : altVal >= 8500 && altVal <= 12000 ? 'nominal' : 'warn';
 
-    if (rows.length < 2) {
-        return (
-            <div style={{ padding: 24, color: 'var(--t-text-3)', fontSize: 12 }} className="mono">
-                Awaiting telemetry packets…
-            </div>
-        );
-    }
+    /* No usable series yet (brand-new or pre-launch device). The HEADER must
+     * still render — it holds the balloon selector, and replacing the whole
+     * panel stranded users on a data-less device with no way to switch. Only
+     * the chart body gives way to the note. */
+    const awaiting = rows.length < 2;
 
     return (
         <>
@@ -293,12 +291,18 @@ export default function TelemetryV3Panel({ device, devices, onSelect, scrubRow, 
                     <Metric label="Last contact" value={<LastContactValue lastContactT={device?.lastContactT ?? null} />} />
                 </div>
                 <div style={{ padding: compact ? '0 18px 12px' : '0 18px 16px' }}>
-                    <ConnectionStatus connected={!isFuture} />
+                    <ConnectionStatus connected={!isFuture && !awaiting} />
                 </div>
             </div>
             )}
 
-            {showBody && (
+            {awaiting && (
+                <div style={{ padding: 24, color: 'var(--t-text-3)', fontSize: 12 }} className="mono">
+                    Awaiting telemetry packets…
+                </div>
+            )}
+
+            {showBody && !awaiting && (
             <>
             <Group
                 index="01"
