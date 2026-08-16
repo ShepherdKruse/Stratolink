@@ -55,6 +55,10 @@ const FULL_TELEMETRY_COLUMNS =
  * generated ~14k Supabase requests/day per open tab — most of our egress. */
 const TELEMETRY_POLL_MS = 60_000;
 
+/** Device shown by default when no ?device= param is set, as long as it exists
+ *  in the fleet. Otherwise the heuristic fallbacks below pick one. */
+const PREFERRED_DEVICE_ID = 'stratolink-3';
+
 /** setInterval that PAUSES while the tab is backgrounded (`document.hidden`) and fires
  *  once immediately when it becomes visible again — so a left-open background tab stops
  *  hammering Supabase, while a focused tab still feels live. Returns a cleanup fn. */
@@ -359,14 +363,16 @@ export function useTelemetry({ initialSelectedId = null }: { initialSelectedId?:
                 setLastFetchedAt(Date.now());
 
                 if (selectedId === null && summaries.length > 0) {
-                    /* Pick the flying device that's actually transmitting. Sort by most-recent-
-                     * contact desc so a stale 'flying' row from an old test launch never wins
-                     * over the device that's currently in the air. Falls back through:
-                     *   1. flying + has recent contact (the right answer 99% of the time)
-                     *   2. any device with recent contact (a still-talking device that wasn't
+                    /* Pick the device to show by default. Falls back through:
+                     *   1. the explicitly preferred device, when it exists in the fleet
+                     *   2. flying + has recent contact (sorted most-recent-contact desc so a
+                     *      stale 'flying' row from an old test launch never wins over the
+                     *      device that's currently in the air)
+                     *   3. any device with recent contact (a still-talking device that wasn't
                      *      tagged 'flying' yet — better than picking something silent)
-                     *   3. any flying device (no contact at all — at least it's the "intended" one)
-                     *   4. the first device in the list (nothing to go on, anything is fine) */
+                     *   4. any flying device (no contact at all — at least it's the "intended" one)
+                     *   5. the first device in the list (nothing to go on, anything is fine) */
+                    const preferred = summaries.find(s => s.id === PREFERRED_DEVICE_ID);
                     const byRecency = (a: DeviceSummary, b: DeviceSummary) =>
                         (b.lastContactT ?? 0) - (a.lastContactT ?? 0);
                     const flyingActive = [...summaries]
@@ -376,7 +382,7 @@ export function useTelemetry({ initialSelectedId = null }: { initialSelectedId?:
                         .filter(s => s.lastContactT !== null)
                         .sort(byRecency)[0];
                     const anyFlying = summaries.find(s => s.status === 'flying');
-                    setSelectedId((flyingActive ?? anyActive ?? anyFlying ?? summaries[0]).id);
+                    setSelectedId((preferred ?? flyingActive ?? anyActive ?? anyFlying ?? summaries[0]).id);
                 }
 
                 /* Fleet-wide aggregates: count uplinks, GPS lock rate, median RSSI.
