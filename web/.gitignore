@@ -4,3 +4,7 @@
 
 # GFS wind cubes built by scripts/gfs_ingest.py (uploaded to Blob, not committed)
 .windcube/
+
+# Backtest harness: downloaded basemap cache + python bytecode
+scripts/backtest/ne_110m_coastline.geojson
+**/__pycache__/
