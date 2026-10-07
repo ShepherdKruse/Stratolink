@@ -85,6 +85,7 @@ img, svg, canvas { display: block; }
 }
 .launch[data-loading] .foreground-layer, .launch[data-loading] .balloon-layer { opacity: 0; }
 .launch[data-loading] .story { color: #fff; }
+.launch[data-title-pending] .story h1, .launch[data-story-pending] .essay-body { visibility: hidden; }
 
 .story-window {
   position: absolute;
@@ -109,7 +110,7 @@ img, svg, canvas { display: block; }
 .story p { font-size: clamp(14px, 2vw, 22px); font-weight: 400; line-height: 1.2; margin: 1em 0; }
 .essay-body { display: flow-root; }
 .essay-body > p a { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: .16em; }
-.essay-body > p, .essay-body > section { opacity: 0; transition: opacity 1400ms cubic-bezier(.165, .84, .44, 1); }
+.essay-body > p, .essay-body > section { opacity: 0; transition: opacity 420ms cubic-bezier(.165, .84, .44, 1); }
 .essay-body > .is-visible { opacity: 1; }
 .essay-body p:first-child { margin-top: 0; }
 .story-docs { margin-block: 32px 38px; }
@@ -192,6 +193,7 @@ img, svg, canvas { display: block; }
   .story-window { position: relative; z-index: 6; mask-image: none; }
   .story { position: relative; top: auto !important; transform: none !important; padding-top: 31dvh; padding-bottom: 64px; will-change: auto; }
   .essay-body > p, .essay-body > section { opacity: 1; transition: none; pointer-events: auto; }
+  .launch[data-title-pending] .story h1, .launch[data-story-pending] .essay-body { visibility: visible; }
   .story-docs a, .story-blog-card { transition: none; transform: none; }
   .foreground-layer, .balloon-layer { will-change: auto; }
   .scene-intro, .scene-warmth { display: none; }

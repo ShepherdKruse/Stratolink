@@ -1,5 +1,3 @@
-import './styles.css';
-
 const launch = document.querySelector('.launch');
 const viewport = document.querySelector('.launch-viewport');
 const foreground = document.querySelector('.foreground-layer');
@@ -68,7 +66,7 @@ function updateScene() {
     const cityDrop = height * 1.12 * city;
     const cloudEdge = geometry.cloudEdge + cityDrop;
     const viewportTop = Math.min(0, duration - distance);
-    const revealLine = Math.min(height * .82, viewportTop + Math.min(height, cloudEdge));
+    const revealLine = Math.min(height * .82, viewportTop + Math.min(height, cloudEdge)) + Math.min(80, height * .1);
     const storyTop = geometry.anchor - Math.max(0, distance - readingStart);
 
     foreground.style.transform = `translate3d(0, ${cityDrop}px, 0)`;
@@ -81,7 +79,7 @@ function updateScene() {
       geometry.storyLayout.forEach(({ item, top, height: itemHeight }) => {
         const itemTop = storyTop + top;
         if (!item.classList.contains('is-visible') && itemTop < revealLine && itemTop + itemHeight > 0) {
-          item.style.transitionDelay = `${stagger++ * 120}ms`;
+          item.style.transitionDelay = `${Math.min(stagger++ * 60, 180)}ms`;
           item.classList.add('is-visible');
         }
       });
@@ -151,6 +149,7 @@ function removeIntro() {
 }
 
 function startStoryReveals() {
+  launch.removeAttribute('data-story-pending');
   storyReady = true;
   scheduleScene();
 }
@@ -196,5 +195,6 @@ new ResizeObserver(measureScene).observe(viewport);
 new ResizeObserver(measureScene).observe(story);
 document.fonts.ready.then(measureScene);
 measureScene();
+launch.removeAttribute('data-title-pending');
 
 import "./footer-globe.js";

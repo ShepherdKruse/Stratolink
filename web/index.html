@@ -7,6 +7,7 @@
   <meta name="robots" content="noindex, nofollow">
   <meta name="description" content="Open-source, solar-powered balloon payloads for collecting and sharing data from the stratosphere. Build your own, follow our flights, and join the network.">
   <title>Stratolink</title>
+  <link rel="stylesheet" href="/src/styles.css">
   <link id="site-favicon" rel="icon" href="/assets/favicon/globe.png" type="image/png" sizes="64x64">
   <link rel="apple-touch-icon" href="/assets/favicon/apple-touch-icon.png">
   <script type="module" src="/src/favicon.js"></script>
@@ -17,6 +18,7 @@
     html .story-window { position: relative; z-index: 6; mask-image: none; }
     html .story { position: relative; top: auto !important; transform: none !important; padding-top: 31dvh; padding-bottom: 64px; }
     html .essay-body > p, html .essay-body > section { opacity: 1; pointer-events: auto; }
+    html .launch[data-title-pending] .story h1, html .launch[data-story-pending] .essay-body { visibility: visible; }
     html .launch[data-loading] .foreground-layer, html .launch[data-loading] .balloon-layer { opacity: 1; }
     html .launch[data-loading] .story { color: #29333c; }
   </style></noscript>
@@ -27,7 +29,7 @@
     <a href="/" aria-label="Stratolink home"><img src="/assets/stratolink-wordmark.svg" alt="stratolink" width="7581" height="1510"></a>
   </header>
   <main>
-    <section class="launch" data-loading aria-label="Stratolink balloon launch over San Francisco">
+    <section class="launch" data-loading data-title-pending data-story-pending aria-label="Stratolink balloon launch over San Francisco">
       <div class="launch-viewport">
         <div class="scene-layer sky-layer" aria-hidden="true">
           <img class="scene-photo" src="/assets/launch/sky.png" alt="" fetchpriority="high" width="1672" height="941">
@@ -73,8 +75,8 @@
         <h1 id="story-title"><span data-letter-reveal>Open source pico</span> <span data-letter-reveal>balloon network.</span></h1>
         <div class="essay-body">
         <p>Stratolink is a network of small, solar-powered balloons built to collect and share data from the stratosphere.</p>
-<p>We've designed a custom pico balloon payload <img class="inline-payload" src="/assets/launch/payload-cutout.png" alt="Stratolink payload with two solar panels" width="384" height="256"> weighing just under 10 g. Anyone can build and launch one by following the <a href="/docs/getting-started">docs</a>.</p>
-<p>The payload measures temperature, pressure, light, and motion, then sends the data back through <a href="https://www.thethingsnetwork.org/" target="_blank" rel="noopener noreferrer">The Things Network</a>. It can also relay long-range radio messages from the surface, help track radio-tagged animals around the world, and pass position reports between balloons when ground stations are out of reach.</p>
+<p>We've designed a custom pico balloon payload weighing just under 10 g. Anyone can build and launch one by following the <a href="/docs/getting-started">docs</a>.</p>
+<p>The payload <img class="inline-payload" src="/assets/launch/payload-cutout.png" alt="Stratolink payload with two solar panels" width="384" height="256"> measures temperature, pressure, light, and motion, then sends the data back through <a href="https://www.thethingsnetwork.org/" target="_blank" rel="noopener noreferrer">The Things Network</a>. It can also relay long-range radio messages from the surface, help track radio-tagged animals around the world, and pass position reports between balloons when ground stations are out of reach.</p>
 <p>We want to collect data where ground stations are scarce, especially over the ocean. Keeping the balloons light, cheap, and easy to launch makes it practical to send up enough of them to build global coverage.</p>
 <p>The code and board designs are on <a href="https://github.com/ShepherdKruse/Stratolink" target="_blank" rel="noopener noreferrer">GitHub</a>. Our docs cover the build, balloon preparation, radio setup, and launch.</p>
 <!-- home-docs:start -->
