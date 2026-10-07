@@ -105,7 +105,7 @@ story.addEventListener('focusin', event => {
   // Keep keyboard scrolling on the page, rather than inside the masked scene.
   document.querySelector('.story-window').scrollTop = 0;
   viewport.scrollTop = 0;
-  const item = link.closest('.essay-body > section');
+  const item = link.closest('.essay-body > p, .essay-body > section');
   if (item) {
     item.style.transitionDuration = '0ms';
     item.style.transitionDelay = '0ms';
@@ -159,10 +159,9 @@ if (reducedMotion.matches) {
   removeIntro();
   startStoryReveals();
 } else {
-  Promise.all([
-    revealLetters(document.querySelector('h1')),
-    revealLetters(document.querySelector('.date'), 110),
-  ]).then(startStoryReveals);
+  Promise.all([...document.querySelectorAll('[data-letter-reveal]')].map((element, index) =>
+    revealLetters(element, index * 110)
+  )).then(startStoryReveals);
   const assets = ['sky.png', 'city-clouds.png', 'balloon.png', 'source.jpg'];
   Promise.allSettled(assets.map((asset) => {
     const image = new Image();
