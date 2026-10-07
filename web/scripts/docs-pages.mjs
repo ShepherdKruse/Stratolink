@@ -1,5 +1,6 @@
 import { mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { sections, topicId } from '../content/docs.mjs';
+import { socialMetadata } from './social-metadata.mjs';
 
 const caret = '<img src="/assets/icons/chevron-right.svg" alt="" width="8" height="12">';
 const topicLinks = section => section.topics.map(topic => `<a href="/docs/${section.slug}#${topicId(topic.title)}">${topic.title}</a>`).join('');
@@ -24,6 +25,7 @@ export function writeDocsPages() {
   <script type="module" src="/src/favicon.js"></script>
   <meta name="theme-color" content="#f6f4ef">
   <title>${title} - Stratolink</title>
+${socialMetadata({ title: `${title} - Stratolink`, path: slug === 'index' ? '/docs' : `/docs/${slug}` })}
   <link rel="stylesheet" href="/src/docs.css">
   <script type="module" src="/src/docs.js"></script>
   ${slug === 'balloon-prep' ? '<script type="module" src="/src/float-calculator.js"></script>' : ''}

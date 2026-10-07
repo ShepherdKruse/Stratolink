@@ -1,5 +1,6 @@
 import { mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { posts, readingTime } from '../content/blog.mjs';
+import { socialMetadata } from './social-metadata.mjs';
 
 const escape = value => String(value).replace(/[&<>"']/g, char => ({'&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;'}[char]));
 const image = (post, attributes = '') => `<img data-post-image src="${escape(post.image.src)}" alt="${escape(post.image.alt)}" width="${post.image.width}" height="${post.image.height}"${post.image.position ? ` style="object-position:${escape(post.image.position)}"` : ''} ${attributes}>`;
@@ -62,6 +63,7 @@ export function writeBlogPages() {
   <meta name="theme-color" content="#f6f4ef">
   <meta name="description" content="${escape(post.excerpt)}">
   <title>${escape(post.title)} - Stratolink</title>
+${socialMetadata({ title: `${post.title} - Stratolink`, path: `/blog/${post.slug}`, description: post.excerpt, image: post.image, type: 'article' })}
   <link rel="stylesheet" href="/src/blog.css">
   <script type="module" src="/src/blog-navigation.js"></script>
 </head>
