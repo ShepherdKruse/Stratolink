@@ -27,10 +27,6 @@ The indexed lookup benchmark used 100 synthetic balloons with 10,000 packets eac
 
 Worker tests cover out-of-order tile replies, cancellation, disposal and fallback when worker WebGL is unavailable. Replay tests cover long histories, exact timestamps, duplicate timestamps, gaps, missing GPS, antimeridian crossings and cache replacement after refresh.
 
-## Remaining measurements
-
-Rerun PageSpeed on the deployed build. Check mobile initial layout shifts, real scroll/globe navigation, large-fleet fetching and rendering, and verify that the Mapbox tile failures are resolved in the deployed browser.
-
 ## Production follow-up: October 7, 16:33 PDT
 
 Deployed commit: `f49c476` (PR 80). New PageSpeed reports:
@@ -58,3 +54,22 @@ Mapbox requests now pass its origin restriction. Best Practices is 100 on both p
 - Release the temporary WebGL capability-check context.
 
 A local synthetic fixture loaded 100 balloons with 1,000 packets each through the compiled dashboard. All 100 cards rendered; search and timeline navigation worked; the request peak was four. This fixture never contacted the production telemetry API. It is a functional scaling check on the development machine, not a claim about slow-device frame rates or production network latency.
+
+## Dashboard startup follow-up
+
+Production `cfe7167` (PR 81), [repeat PageSpeed run](https://pagespeed.web.dev/analysis/https-stratolink-org-dashboard/pihu1viccg), October 7, 16:46 PDT:
+
+| Device | Performance | FCP | LCP | TBT | CLS |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| Mobile | 48 | 2.9 s | 3.3 s | 6,800 ms | 0 |
+| Desktop | 60 | 0.6 s | 0.6 s | 11,130 ms | 0 |
+
+An earlier run at 16:43 returned mobile 48 with LCP 2.4 s, TBT 3,100 ms and CLS 0.224; its desktop run timed out. These cold-load results vary considerably. Mapbox startup remains the dominant cost. The request reduction is verified functionally, but these runs do not establish a total-blocking-time improvement for PR 81.
+
+Further targeted changes:
+
+- Serve Space Grotesk locally with its license. Remove the external Google stylesheet that duplicated the local Inter and JetBrains Mono faces. Preload the two Latin fonts used by the initial fleet view.
+- Keep the empty map container hidden until the registry resolves. Hiding only its children did not prevent the painted container from shifting when cards arrived. A local 390 x 844 layout observer measured this shift as 0.1957 before the fix. Afterward, only the attribution control shifted, by 0.00028.
+- Combine six terrain fill layers into two, retaining the level filters, band ordering, per-band opacity and zoom fades. This reduces repeated tile layout/draw work without changing the terrain palette.
+
+The compiled build and 120 tests pass. Local desktop/mobile map checks report no rendering errors. Production PageSpeed follow-up is still pending for this pass.

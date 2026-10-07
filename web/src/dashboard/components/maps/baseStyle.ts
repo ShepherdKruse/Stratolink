@@ -75,21 +75,30 @@ export function applyBaseStyle(map: Map, scheme: Scheme = 'light'): void {
         }
     } catch { /* source may already exist */ }
 
-    /* Insert under `water` so the relief shades land, ocean stays clean. */
+    /* Keep the same band order and opacity, with one draw layer per color.
+     * Six separate layers repeat layout and draw work for the same tiles. */
     const beforeId = layers.find(l => l.id === 'water')?.id;
-    for (const b of BANDS) {
+    for (const kind of ['highlight', 'shadow'] as const) {
+        const bands = BANDS.filter(band => band.kind === kind);
+        const id = `sl-hs-${kind}`;
         try {
-            if (map.getLayer(b.id)) continue;
+            if (map.getLayer(id)) continue;
             map.addLayer({
-                id: b.id,
+                id,
                 type: 'fill',
                 source: TERRAIN_SRC,
                 'source-layer': 'hillshade',
-                filter: ['==', ['get', 'level'], b.level],
+                filter: ['in', ['get', 'level'], ['literal', bands.map(band => band.level)]],
+                layout: {
+                    'fill-sort-key': ['match', ['get', 'level'], ...bands.flatMap((band, index) => [band.level, index]), 0] as never,
+                },
                 paint: {
-                    'fill-color': b.kind === 'highlight' ? relief.highlight : relief.shadow,
+                    'fill-color': relief[kind],
                     'fill-antialias': false,
-                    'fill-opacity': ['interpolate', ['linear'], ['zoom'], 15, b.opacity, b.fade, 0] as never,
+                    'fill-opacity': ['interpolate', ['linear'], ['zoom'],
+                        15, ['match', ['get', 'level'], ...bands.flatMap(band => [band.level, band.opacity]), 0],
+                        bands[0].fade, 0,
+                    ] as never,
                 },
             }, beforeId);
         } catch { /* layer may already exist */ }
