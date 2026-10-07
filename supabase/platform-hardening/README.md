@@ -6,4 +6,4 @@ Request an owner-authorized change through Supabase. Do not change object owners
 
 The remaining public surface consists of `spatial_ref_sys` and the three `st_estimatedextent` overloads. No application table currently has geometry or geography columns. These extension permissions do not expose the telemetry's numeric latitude and longitude columns, but remain a platform hardening issue, including unnecessary client write grants on the reference table.
 
-The separate `../cutover/private_raw_data.sql` closes application-owned raw telemetry, receiver data, device records and the legacy coordinate RPC. It does not depend on this PostGIS change.
+The applied `../migrations/20261007225324_private_raw_data_cutover.sql` closes application-owned raw telemetry, receiver data, device records and the legacy coordinate RPC. It does not depend on this PostGIS change.

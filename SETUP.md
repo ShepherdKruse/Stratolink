@@ -32,11 +32,11 @@ ONNXRUNTIME_NODE_INSTALL=skip npm ci
 
 ## Step 4: Prepare the Database and Authentication
 
-1. Review the existing database and the additive migrations in `supabase/migrations/`. Apply only the migrations that belong to this rollout. Do not run the historical `web/lib/supabase/` chain as an automatically inferred migration history; it contains duplicate version names.
+1. Review the existing database and migration history before applying `supabase/migrations/`. The shared project already has all four application migrations, including the raw-data privacy cutover. Do not run the historical `web/lib/supabase/` chain as an automatically inferred migration history; it contains duplicate version names.
 2. Configure a GitHub OAuth application with the callback URL supplied by Supabase, then add its credentials to the project's GitHub auth provider.
 3. Add the exact site callback URL, `https://your-domain/dashboard`, to Supabase's redirect allowlist. Add each local callback explicitly, using the local server's actual origin and `/dashboard` path.
 4. Run `npm run verify` in `web`. Run `npm run test:backend` with Docker to check the schema and API against a disposable local database.
-5. Keep `supabase/cutover/private_raw_data.sql` separate from the initial migration run. Apply it after the new deployed telemetry, account and ingestion endpoints pass their checks. Applying it while the old site still depends on raw-table reads would interrupt that site.
+5. `supabase/migrations/20261007225324_private_raw_data_cutover.sql` records the completed production privacy cutover. On a new installation with the required legacy baseline, apply the current migration sequence before serving the new site. When upgrading an installation still using the old browser client, defer this final migration until the replacement server APIs are live and verified. Its original comments describe that staged upgrade; the SQL is retained unchanged to match the applied migration.
 
 The full deployment sequence is in [web/README.md](web/README.md#deployment). Running the old schema file alone is not sufficient to configure this backend.
 

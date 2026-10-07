@@ -182,7 +182,7 @@ try {
   sql(applicationTables.map(table => `ALTER TABLE public.${table} OWNER TO migration_operator;`).join('\n') + `
     ALTER FUNCTION public.get_active_balloons(integer) OWNER TO migration_operator;
     GRANT USAGE ON SCHEMA community_private TO migration_operator;`);
-  sql(`SET ROLE migration_operator; ${readFileSync(new URL('supabase/cutover/private_raw_data.sql', root), 'utf8')}`);
+  sql(`SET ROLE migration_operator; ${readFileSync(new URL('supabase/migrations/20261007225324_private_raw_data_cutover.sql', root), 'utf8')}`);
   for (const role of ['anon','authenticated']) {
     for (const table of applicationTables) {
       denied(`SET ROLE ${role}; SELECT * FROM public.${table};`);
