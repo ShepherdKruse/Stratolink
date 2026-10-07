@@ -210,7 +210,7 @@ export function useTelemetry({ initialSelectedId = null }: { initialSelectedId?:
         const window = historyWindow({ id, status: selectedStatus ?? '', launchedAt });
         const refresh = async () => {
             try {
-                const next = await missionHistory.load(window, { refresh: true });
+                const next = await missionHistory.load(window, { refresh: true, prioritize: true });
                 if (!cancelled) setRows(next);
             } catch (error) { console.debug('useTelemetry rows error', error); }
         };
