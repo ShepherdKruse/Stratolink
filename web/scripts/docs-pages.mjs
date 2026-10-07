@@ -22,7 +22,6 @@ export function writeDocsPages() {
   <link id="site-favicon" rel="icon" href="/assets/favicon/globe.png" type="image/png" sizes="64x64">
   <link rel="apple-touch-icon" href="/assets/favicon/apple-touch-icon.png">
   <script type="module" src="/src/favicon.js"></script>
-  <meta name="robots" content="noindex, nofollow">
   <meta name="theme-color" content="#f6f4ef">
   <title>${title} - Stratolink</title>
   <link rel="stylesheet" href="/src/docs.css">

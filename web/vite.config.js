@@ -5,6 +5,7 @@ import { posts } from './content/blog.mjs';
 import { writeDocsPages } from './scripts/docs-pages.mjs';
 import { sections } from './content/docs.mjs';
 import { writeHomeInserts } from './scripts/home-inserts.mjs';
+import { publicBuildDefines } from './scripts/public-config.mjs';
 import { dashboardApi } from './server/dashboardApi.js';
 import { forecastApi } from './server/forecastApi.js';
 import { ttnWebhook } from './server/ttnWebhook.ts';
@@ -65,15 +66,14 @@ function dashboardRoute(server) {
 export default defineConfig(({ mode }) => {
   writeHomeInserts();
   const env = loadEnv(mode, process.cwd(), '');
-  for (const name of ['SUPABASE_URL', 'SUPABASE_SERVER_KEY', 'SUPABASE_SERVICE_ROLE_KEY', 'NEXT_PUBLIC_SUPABASE_URL', 'TTN_WEBHOOK_SECRET', 'BLOB_READ_WRITE_TOKEN', 'SITE_URL', 'AUTH_ALLOWED_ORIGINS', 'COMMUNITY_REGISTRATION_ENABLED', 'PAYLOAD_CLAIM_COOKIE_SECRET', 'PAYLOAD_STAFF_USER_IDS']) {
+  for (const name of ['SUPABASE_URL', 'SUPABASE_SERVER_KEY', 'SUPABASE_SERVICE_ROLE_KEY', 'NEXT_PUBLIC_SUPABASE_URL', 'TTN_WEBHOOK_SECRET', 'BLOB_READ_WRITE_TOKEN', 'SITE_URL', 'NEXT_PUBLIC_APP_URL', 'AUTH_ALLOWED_ORIGINS', 'COMMUNITY_REGISTRATION_ENABLED', 'PAYLOAD_CLAIM_COOKIE_SECRET', 'PAYLOAD_STAFF_USER_IDS']) {
     if (!process.env[name] && env[name]) process.env[name] = env[name];
   }
   return {
     plugins: [{ name: 'dashboard-route', configureServer: dashboardRoute, configurePreviewServer: dashboardRoute }],
     resolve: { alias: { '@': fileURLToPath(new URL('./src/dashboard', import.meta.url)) } },
-    define: {
-      'process.env.NEXT_PUBLIC_MAPBOX_TOKEN': JSON.stringify(process.env.NEXT_PUBLIC_MAPBOX_TOKEN || env.NEXT_PUBLIC_MAPBOX_TOKEN || ''),
-    },
+    envPrefix: [],
+    define: publicBuildDefines(process.env, env),
     build: {
       rolldownOptions: {
         input: {

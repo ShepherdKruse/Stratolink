@@ -96,6 +96,7 @@ export function createCommunityApi({ createDb = createServerSupabase, verifyDevi
   return async function community(request) {
     try {
       const url = new URL(request.url);
+      const siteUrl = environment.SITE_URL || environment.NEXT_PUBLIC_APP_URL;
       const accountRoute = url.pathname === '/api/account';
       const registerRoute = url.pathname === '/api/balloons';
       const reserveRoute = url.pathname === '/api/balloons/reserve';
@@ -111,7 +112,7 @@ export function createCommunityApi({ createDb = createServerSupabase, verifyDevi
       if (!intentRoute && !bearer) return reply(401, { error: 'Sign in with GitHub to continue' });
       const origin = request.headers.get('origin');
       if (request.method !== 'GET') {
-        const allowed = [environment.SITE_URL, ...(environment.AUTH_ALLOWED_ORIGINS || '').split(',')].filter(Boolean).map(value => new URL(value.trim()).origin);
+        const allowed = [siteUrl, ...(environment.AUTH_ALLOWED_ORIGINS || '').split(',')].filter(Boolean).map(value => new URL(value.trim()).origin);
         if (!origin || !allowed.includes(origin) || request.headers.get('sec-fetch-site') === 'cross-site') return reply(403, { error: 'Request origin not allowed' });
         if (!/^application\/json(?:\s*;|$)/i.test(request.headers.get('content-type') || '')) return reply(415, { error: 'Use application/json' });
       }
@@ -184,7 +185,7 @@ export function createCommunityApi({ createDb = createServerSupabase, verifyDevi
           const devEui = normalizeEui(body.devEui);
           if (!devEui) return reply(400, { error: 'Enter a valid 16-character DevEUI' });
           if (payload.owned) return reply(409, { error: 'This payload already has an owner' });
-          const site = new URL(environment.SITE_URL);
+          const site = new URL(siteUrl);
           if (site.protocol !== 'https:' || site.username || site.password || site.pathname !== '/' || site.search || site.hash) return reply(503, { error: 'Payload URL is not configured' });
           const secret = randomBytes(32).toString('base64url');
           const result = await rpc('issue_payload_claim', { p_issuer_id: user.id, p_device_id: deviceId, p_dev_eui: devEui, p_token_hash: createHash('sha256').update(secret).digest('hex') });
@@ -221,7 +222,7 @@ export function createCommunityApi({ createDb = createServerSupabase, verifyDevi
       const deviceEui = normalizeEui(body.deviceEui);
       if (!deviceEui || typeof body.applicationId !== 'string') return reply(400, { error: 'Invalid network identity' });
       const connection = await verifyDevice({ ...body, deviceEui });
-      const site = new URL(environment.SITE_URL);
+      const site = new URL(siteUrl);
       if (site.protocol !== 'https:' || site.username || site.password || site.pathname !== '/' || site.search || site.hash) return reply(503, { error: 'Webhook URL is not configured' });
       const secret = randomBytes(32).toString('base64url');
       const tokenHash = createHash('sha256').update(secret).digest('hex');

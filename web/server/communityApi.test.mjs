@@ -94,6 +94,34 @@ test('successful connection stores only a hash and returns one-time credential a
  const call=f.calls.find(c=>c.name==='connect_community_radio'); assert.match(call.args.p_token_hash,/^[a-f0-9]{64}$/);
  assert.doesNotMatch(JSON.stringify(call),/TTN-key|private-never-stored/);assert.equal(r.headers.get('Cache-Control'),'no-store');
 });
+test('legacy site URL supports existing deployments while rejecting unlisted request origins',async()=>{
+ const f=fixture({environment:{SITE_URL:undefined,NEXT_PUBLIC_APP_URL:'https://stratolink.org'},verifyDevice:async input=>({...input,deviceId:'my-device',region:'EU_863_870_TTN'})});
+ for(const origin of ['https://evil.example','https://stratolink.org.evil.example','https://preview.example']){
+  assert.equal((await f.request(`/api/balloons/${bid}`,'PATCH',{status:'landed'},{Origin:origin,Host:'stratolink.org','X-Forwarded-Host':'stratolink.org'})).status,403);
+ }
+ assert.equal(f.databaseCalls,0);
+ assert.equal((await f.request(`/api/balloons/${bid}`,'PATCH',{status:'landed'})).status,200);
+ const response=await f.request(`/api/balloons/${bid}/connections`,'POST',{cluster:'eu1',applicationId:'my-app',deviceEui:balloon.devEui,apiKey:'TTN-key-private-never-stored'},{Host:'evil.example','X-Forwarded-Host':'evil.example'});
+ assert.equal(response.status,200);
+ assert.equal((await response.json()).webhook.url,'https://stratolink.org/api/ttn-webhook');
+});
+test('explicit site URL overrides legacy settings without enabling registration or trusting the request host',async()=>{
+ const f=fixture({environment:{NEXT_PUBLIC_APP_URL:'https://old.example',COMMUNITY_REGISTRATION_ENABLED:undefined}});
+ assert.equal((await f.request(`/api/balloons/${bid}`,'PATCH',{status:'landed'},{Origin:'https://old.example'})).status,403);
+ assert.equal((await f.request(`/api/balloons/${bid}`,'PATCH',{status:'landed'})).status,200);
+ assert.equal((await f.request('/api/balloons','POST',{callsign:'Test',devEui:balloon.devEui})).status,503);
+ const missing=fixture({environment:{SITE_URL:undefined,NEXT_PUBLIC_APP_URL:undefined,AUTH_ALLOWED_ORIGINS:''}});
+ assert.equal((await missing.request(`/api/balloons/${bid}`,'PATCH',{status:'landed'},{Host:'stratolink.org','X-Forwarded-Host':'stratolink.org'})).status,403);
+ assert.equal(missing.databaseCalls,0);
+});
+test('legacy webhook URL still requires a bare HTTPS origin',async()=>{
+ for(const site of ['http://stratolink.org','https://user:password@stratolink.org','https://stratolink.org/path','https://stratolink.org?query=1','https://stratolink.org#fragment']){
+  const f=fixture({environment:{SITE_URL:undefined,NEXT_PUBLIC_APP_URL:site},verifyDevice:async input=>({...input,deviceId:'my-device',region:'EU_863_870_TTN'})});
+  const response=await f.request(`/api/balloons/${bid}/connections`,'POST',{cluster:'eu1',applicationId:'my-app',deviceEui:balloon.devEui,apiKey:'TTN-key-private-never-stored'},{Origin:new URL(site).origin});
+  assert.equal(response.status,503);
+  assert.equal(f.calls.some(call=>call.name==='connect_community_radio'),false);
+ }
+});
 test('TTN verification confines secret to fixed hosts, validates registry EUI and reads frequency plan',async()=>{
  const requests=[];
  const fetcher=async(url,options)=>{requests.push({url,options});return Response.json(url.includes('/ns/')?{ids:{device_id:'my-device',dev_eui:balloon.devEui,application_ids:{application_id:'my-app'}},frequency_plan_id:'EU_863_870_TTN'}:{end_devices:[{ids:{device_id:'my-device',dev_eui:balloon.devEui,application_ids:{application_id:'my-app'}}}]});};

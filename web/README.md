@@ -33,9 +33,11 @@ Public build configuration:
 - `VITE_SUPABASE_URL`: the project's HTTPS URL.
 - `VITE_SUPABASE_PUBLISHABLE_KEY`: its publishable key, used only for authentication.
 
+Existing deployments can keep `NEXT_PUBLIC_SUPABASE_URL` and `NEXT_PUBLIC_SUPABASE_ANON_KEY`. They are fallbacks for the corresponding `VITE_` settings. The build exposes only these validated public settings and the public Mapbox token. Private Supabase keys are rejected. Vercel Production builds fail if any of these three settings is missing.
+
 Server configuration:
 
-- `SITE_URL`: the exact website origin used for authenticated requests.
+- `SITE_URL`: the exact website origin used for authenticated requests. The existing `NEXT_PUBLIC_APP_URL` is accepted when `SITE_URL` is unset; request headers and preview hostnames never supply this value.
 - `AUTH_ALLOWED_ORIGINS`: optional comma-separated origins for local or preview authentication. Keep this explicit; do not allow every preview domain.
 - `COMMUNITY_REGISTRATION_ENABLED`: defaults to disabled and requires exactly `true` to enable new registrations and TTN connections. Keep production disabled until strict ingress and the raw-data permission cutover are verified. Account reads and owned status changes remain available. See `DEPLOYMENT.md` for controlled preview testing.
 - `PAYLOAD_STAFF_USER_IDS`: comma-separated Supabase user UUIDs allowed to inspect organizer inventory, bind verified radios to reservations, and issue one-time payload claims. Leave unset to disable staff access.

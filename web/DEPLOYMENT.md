@@ -32,12 +32,12 @@ Supabase's remediation references cover [public tables without RLS](https://supa
 
 https://v0-strato-link-marketing-sit-git-ccbef2-shepherdkruses-projects.vercel.app
 
-Runtime and UI review are blocked by Vercel deployment protection. The signed-in `twarner491` account sees “You Need Access.” A member of `shepherdkruses-projects` must grant access before review can continue. Build success does not verify API runtime configuration or sign-in.
+Runtime and UI review are blocked by Vercel deployment protection. The signed-in `twarner491` account sees “You Need Access.” A member of `shepherdkruses-projects` can provide a Share link or Viewer access; a paid administrator seat is not required. Shepherd can apply the server settings using [VERCEL-SETUP.md](VERCEL-SETUP.md). Build success does not verify API runtime configuration or sign-in.
 
 Check these settings in the existing project's Preview environment before rebuilding:
 
-- Browser authentication needs `VITE_SUPABASE_URL` and `VITE_SUPABASE_PUBLISHABLE_KEY`. The old `NEXT_PUBLIC_SUPABASE_URL` and `NEXT_PUBLIC_SUPABASE_ANON_KEY` names do not configure the Vite auth client.
-- `SITE_URL` controls both allowed authenticated requests and generated webhook URLs. The old `NEXT_PUBLIC_APP_URL` is not read. Production uses `https://stratolink.org`. For restricted preview UI/account review, keep that production value and add only the exact preview origin to `AUTH_ALLOWED_ORIGINS`. The local review configuration similarly permits explicit localhost origins while retaining the production webhook URL.
+- Browser authentication uses `VITE_SUPABASE_URL` and `VITE_SUPABASE_PUBLISHABLE_KEY`, with explicit compatibility for the existing `NEXT_PUBLIC_SUPABASE_URL` and `NEXT_PUBLIC_SUPABASE_ANON_KEY` names. The public build configuration rejects server credentials.
+- `SITE_URL` controls both allowed authenticated requests and generated webhook URLs, with `NEXT_PUBLIC_APP_URL` as the existing-name fallback. Production uses `https://stratolink.org`. For restricted preview UI/account review, keep that production value and add only the exact preview origin to `AUTH_ALLOWED_ORIGINS`. The local review configuration similarly permits explicit localhost origins while retaining the production webhook URL.
 - The exact preview `/dashboard` callback is already in Supabase's redirect allowlist. Add another origin to `AUTH_ALLOWED_ORIGINS` only if that additional preview hostname is intentionally being tested.
 - Leave `COMMUNITY_REGISTRATION_ENABLED` unset or `false` initially. GitHub sign-in is configured; set the switch to `true` only in the protected Preview environment and redeploy for owner registration tests. The switch controls new registrations and TTN connection changes. Account reads and owner status changes do not require it.
 
@@ -82,13 +82,15 @@ Local sign-in, sign-out, selected-balloon return, registration, reservation and 
 
 ## Deployment and cutover
 
-1. Obtain access to the existing Vercel project and protected preview. The current GitHub-linked account can access only its personal Vercel team.
+1. Obtain protected-preview access through a Share link or Viewer role. Shepherd can configure the existing project using [VERCEL-SETUP.md](VERCEL-SETUP.md).
 2. Keep Root Directory `web`. Use the build configuration in `vercel.json`, Node 22, and the public/server variables documented in `README.md`. Retain the shared private forecast Blob token.
 3. Review the existing preview, redeploying after any environment changes. Confirm static pages, native API functions, semantic search, privacy filtering, stored forecasts, and the QR/reservation checks above in Vercel's runtime. Use dedicated review payloads, not the two official historical balloons.
 4. Confirm all TTN headers and scoped identity lookups still match before replacing ingress. Do not replay old packets into the live archive just to test the new handler; dry-run its insert and receipt adapters instead.
 5. Confirm `COMMUNITY_REGISTRATION_ENABLED` is unset or `false` in Production. Deploy the verified site with strict ingress when its content is ready, then apply `../supabase/cutover/private_raw_data.sql`. Verify direct raw reads are denied, public API reads still work, and scoped ingress accepts the intended identities. Registration and TTN connection changes remain disabled during this sequence.
 6. Verify the existing forecast Actions secrets and scheduled worker. Disable any external caller of the retired compute endpoint.
 7. After those checks pass, set `COMMUNITY_REGISTRATION_ENABLED=true` in Production and redeploy. Verify the owner flow before announcing public registration. Keep preview-only origins out of Production unless they are still explicitly required.
+
+The previous production deployment's immutable URL redirected to Vercel authentication during the release review. Check it again after promotion, along with any old aliases. Old server functions retain their deployment-time service credentials: the old unauthenticated webhook and unmasked forecast must not remain publicly reachable. Retire or protect any such deployment through Vercel. After the raw-data cutover, use a corrected version of the new server-backed site for rollback; restoring the old browser client would require reopening raw reads.
 
 The private database backup and TTN header rollback records are retained locally outside the repository. Coordinate header restoration with a compatible ingress version; the new handler rejects missing or revoked tokens.
 
