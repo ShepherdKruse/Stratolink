@@ -1,0 +1,141 @@
+.dashboard-panel {
+  position: relative;
+  z-index: 10;
+  border-radius: 0 24px 24px 0;
+  border-right: 1px solid var(--t-border);
+  box-shadow: 3px 0 16px rgb(24 29 36 / 6%);
+  overflow: hidden;
+}
+.dashboard-map { min-width: 0; min-height: 0; margin-left: -24px; }
+.dashboard-device-title {
+  margin: 7px 18px 0;
+  font-family: var(--font-display);
+  font-size: 25px;
+  font-weight: 600;
+  letter-spacing: -.035em;
+  line-height: 1.25;
+}
+.fleet-app { height: 100dvh; overflow: clip; }
+.fleet-layout { position: relative; display: grid; grid-template-columns: minmax(360px,420px) minmax(0,1fr); height: 100%; }
+.fleet-panel { display: flex; flex-direction: column; }
+.fleet-cards { padding: 14px var(--dashboard-gutter) 24px; overflow-y: auto; min-height: 0; }
+.dashboard-detail-content { --telemetry-gutter: 0px; flex: 1; min-height: 0; margin: 0 var(--dashboard-gutter) 14px; overflow-y: auto; background: var(--t-panel); }
+.dashboard-detail-content .dashboard-device-title { margin-inline: 0; }
+.dashboard-detail-content .detail-owner { padding-inline: 0; }
+.dashboard-footer { display: flex; flex-direction: column; gap: 10px; margin-top: auto; flex-shrink: 0; padding: 18px var(--dashboard-gutter) 24px; font: 12px/1.4 Helvetica, Arial, sans-serif; letter-spacing: .02em; color: var(--t-text-3); }
+.dashboard-footer nav { display: flex; gap: 22px; }
+.dashboard-footer a { color: var(--t-text-2); text-decoration: none; transition: opacity 160ms ease; }
+.dashboard-footer a:hover { opacity: .6; }
+.dashboard-footer a:focus-visible { outline: 1px solid currentColor; outline-offset: 4px; border-radius: 2px; }
+.balloon-card {
+  display: block;
+  width: 100%;
+  margin-bottom: 12px;
+  padding: 18px;
+  border: 1px solid var(--t-border);
+  border-radius: 22px;
+  background: var(--t-raised);
+  box-shadow: 0 1px 2px rgb(24 29 36 / 3%), 0 4px 12px rgb(24 29 36 / 3%), inset 0 1px 0 rgb(255 255 255 / 65%);
+  text-align: left;
+  font: inherit;
+  color: var(--t-text);
+  cursor: pointer;
+  transition: border-color 160ms ease, box-shadow 180ms ease, transform 140ms cubic-bezier(.23,1,.32,1);
+}
+[data-theme="dark"] .balloon-card { box-shadow: 0 2px 4px rgb(0 0 0 / 12%), inset 0 1px 0 rgb(255 255 255 / 3%); }
+.balloon-card-heading { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+.balloon-card-title { font-size: 20px; line-height: 1.2; font-weight: 550; letter-spacing: -.025em; }
+.balloon-card-chevron { width: 8px; color: var(--t-text-3); }
+.balloon-card-status { display: flex; align-items: center; gap: 6px; margin-top: 8px; font-size: 11px; color: var(--t-text-2); }
+.balloon-card-status svg { width: 5px; height: 5px; }
+.balloon-card-metrics { display: grid; grid-template-columns: 1.05fr .85fr 1.25fr 1fr; gap: 10px; margin-top: 20px; }
+.balloon-card-label { display: block; font-size: 10px; color: var(--t-text-3); margin-bottom: 5px; }
+.balloon-card-metrics strong { font-family: var(--font-mono); font-size: 18px; font-weight: 500; letter-spacing: -.06em; }
+.balloon-card-metrics small { font-family: var(--font-body); font-size: 10px; font-weight: 400; margin-left: 2px; color: var(--t-text-3); letter-spacing: 0; }
+
+.balloon-card:active { transform: scale(.99); }
+.balloon-card:focus-visible, .map-legend-toggle:focus-visible { outline: 2px solid var(--t-accent); outline-offset: 3px; }
+@media (hover: hover) and (pointer: fine) {
+  .balloon-card:hover { border-color: var(--t-border-2); box-shadow: 0 2px 3px rgb(24 29 36 / 4%), 0 8px 20px rgb(24 29 36 / 5%); transform: translateY(-1px); }
+}
+.fleet-message { color: var(--t-text-2); font-size: 12px; padding: 8px 4px; }
+.fleet-map { position: relative; display: flex; }
+.fleet-timeline { position: absolute; bottom: 44px; left: 104px; right: 80px; z-index: 6; }
+.map-coordinates {
+  position: absolute;
+  top: calc((var(--dashboard-header-height) - 38px) / 2);
+  left: calc(24px + var(--dashboard-gutter));
+  z-index: 4;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 11px 13px;
+  border: 1px solid var(--sl-border);
+  border-radius: 13px;
+  background: var(--sl-overlay-bg);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 1px 2px rgb(0 0 0 / 4%), 0 4px 12px rgb(0 0 0 / 3%);
+  color: var(--sl-text-dim);
+  font: 10.5px var(--sl-mono);
+}
+.fleet-map-caption { flex-direction: column; align-items: flex-start; gap: 5px; font-size: 11px; }
+.fleet-map-caption span { font: 10px var(--font-body); color: var(--sl-text-dim2); }
+.map-legend {
+  position: absolute;
+  top: calc((var(--dashboard-header-height) - 38px) / 2);
+  right: var(--dashboard-gutter);
+  z-index: 5;
+  width: 84px;
+  border: 1px solid var(--sl-border);
+  border-radius: 14px;
+  background: var(--sl-overlay-bg);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 1px 2px rgb(0 0 0 / 4%), 0 4px 12px rgb(0 0 0 / 3%);
+  color: var(--sl-text);
+  font: 10.5px/1.2 var(--sl-mono);
+  overflow: hidden;
+  transition: width 220ms cubic-bezier(.23,1,.32,1);
+}
+.map-legend[data-expanded="true"] { width: 188px; }
+.map-legend-toggle { display: flex; align-items: center; justify-content: space-between; gap: 8px; width: 100%; padding: 12px 13px; border: 0; background: transparent; color: var(--sl-text-dim); font: 500 9.5px var(--sl-mono); text-transform: uppercase; letter-spacing: .12em; cursor: pointer; }
+.map-legend-chevron { width: 9px; color: var(--sl-text-dim3); transform: rotate(-90deg); transition: transform 200ms cubic-bezier(.23,1,.32,1); }
+.map-legend[data-expanded="true"] .map-legend-chevron { transform: rotate(0); }
+.map-legend-reveal { display: grid; grid-template-rows: 0fr; opacity: 0; visibility: hidden; transition: grid-template-rows 220ms cubic-bezier(.23,1,.32,1), opacity 150ms ease, visibility 220ms; }
+.map-legend[data-expanded="true"] .map-legend-reveal { grid-template-rows: 1fr; opacity: 1; visibility: visible; }
+.map-legend-clip { min-height: 0; overflow: hidden; }
+.map-legend-body { width: 186px; padding: 2px 13px 13px; }
+@media (max-width: 767px) {
+  .fleet-layout { display: flex; flex-direction: column; }
+  .dashboard-panel { border-radius: 0 0 22px 22px; border-right: 0; border-bottom: 1px solid var(--t-border); box-shadow: 0 3px 12px rgb(24 29 36 / 5%); }
+  .dashboard-map { margin-left: 0; }
+  .fleet-panel { flex: 0 1 auto; max-height: 55dvh; height: auto; }
+  .fleet-cards { padding: 10px var(--dashboard-gutter) 14px; }
+  .dashboard-footer { gap: 6px; padding-block: 8px 18px; font-size: 11px; }
+  .fleet-layout[data-detail="true"] .fleet-panel { max-height: 46dvh; }
+  .balloon-card { padding: 15px 17px; border-radius: 21px; margin-bottom: 9px; }
+  .balloon-card-title { font-size: 18px; }
+  .balloon-card-status { margin-top: 5px; }
+  .balloon-card-metrics { margin-top: 13px; }
+  .balloon-card-metrics strong { font-size: 17px; }
+  .fleet-map { flex: 1; min-height: 0; margin-top: -22px; }
+  .fleet-map .map-coordinates, .fleet-map .map-legend { top: calc(22px + var(--dashboard-gutter)); }
+  .map-coordinates { left: var(--dashboard-gutter); padding: 10px 12px; }
+  .fleet-map-caption { max-width: 165px; }
+  .fleet-map:has(.map-legend[data-expanded="true"]) .map-coordinates { max-width: calc(100% - 2 * var(--dashboard-gutter) - 200px); }
+  .fleet-timeline { bottom: 54px; left: 12px; right: 12px; }
+  .dashboard-device-title { font-size: 22px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .balloon-card, .map-legend, .map-legend-chevron, .map-legend-reveal { transition: none; }
+  .balloon-card:hover, .balloon-card:active { transform: none; }
+}
+
+/* Only the selected card changes geometry. The map stays live underneath. */
+::view-transition-group(*) { animation-duration: 280ms; animation-timing-function: cubic-bezier(.23,1,.32,1); }
+::view-transition-old(root), ::view-transition-new(root) { animation: none; mix-blend-mode: normal; }
+::view-transition-old(*), ::view-transition-new(*) { animation-duration: 180ms; }
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-group(*), ::view-transition-old(*), ::view-transition-new(*) { animation: none; }
+}
+
+@media (prefers-reduced-motion: reduce) { .charts-drawer { transition: none !important; } }

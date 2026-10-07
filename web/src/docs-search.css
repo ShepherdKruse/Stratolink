@@ -1,0 +1,14 @@
+.docs-search input { width: min(330px, 100%); }
+#docs-directory[hidden], .docs-search-results[hidden] { display: none !important; }
+.docs-search-results { margin-bottom: 36px; }
+.docs-search-status { margin: 0 0 24px; color: var(--muted); font-size: 14px; line-height: 1.5; }
+.docs-search-results ol { display: grid; gap: 12px; padding: 0; margin: 0; list-style: none; }
+.docs-search-results li { min-width: 0; }
+.docs-search-results li a { display: block; padding: 24px 26px; border-radius: 14px; background: #eeece5; transition: transform 180ms ease, background-color 180ms ease; }
+.docs-result-section { color: var(--muted); font-size: 12px; }
+.docs-search-results h2 { margin: 8px 0 10px; font-size: 23px; line-height: 1.25; font-weight: 500; letter-spacing: -.025em; }
+.docs-search-results li p { max-width: 75ch; margin: 0; font-size: 15px; line-height: 1.6; color: var(--muted); }
+.docs-search-results li a:focus-visible { outline: 1px solid var(--muted); outline-offset: 4px; }
+@media (hover: hover) { .docs-search-results li a:hover { transform: scale(.988); background: #eae7df; } }
+@media (max-width: 600px) { .docs-search-results li a { padding: 22px 20px; } .docs-search-results h2 { font-size: 21px; } }
+@media (prefers-reduced-motion: reduce) { .docs-search-results li a { transition: none; } }

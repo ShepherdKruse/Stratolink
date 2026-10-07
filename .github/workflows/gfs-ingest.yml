@@ -1,22 +1,12 @@
-name: GFS wind ingest + forecast
+name: GFS wind ingest and forecast
 
-# Builds per-balloon wind cubes from NOAA's free NODD S3 AND computes the drift
-# forecasts ON THE RUNNER, uploading only the small forecast JSON to Vercel Blob.
-#
-# Why compute here instead of a Vercel serverless function: the cube is large
-# (and a GEFS ensemble is ~1 GB), and a serverless function would have to pull it
-# from Blob and JSON-parse it into memory on every cron tick — which hits the
-# function's RAM/time caps and re-incurs Blob read bandwidth every ~30 min. The
-# GitHub runner has the memory/time, the cubes are already local, and the browser
-# still just fetches a few-hundred-KB forecast JSON. GFS publishes 00/06/12/18 UTC
-# ~4-5h later, so we run shortly after each cycle. Public repo => Actions free.
 on:
   schedule:
-    - cron: '0 5,11,17,23 * * *'   # ~5h after each GFS cycle (UTC)
+    - cron: '0 5,11,17,23 * * *'
   workflow_dispatch:
     inputs:
       device:
-        description: 'Only this device (blank = all active)'
+        description: 'One device, or blank for all active devices'
         required: false
 
 concurrency:
@@ -29,15 +19,20 @@ permissions:
 jobs:
   ingest:
     runs-on: ubuntu-latest
-    timeout-minutes: 50        # GFS (~8m) + GEFS step cap (28m) + compute/upload, with margin
+    timeout-minutes: 50
     defaults:
       run:
         working-directory: web
+    env:
+      DEVICE: ${{ inputs.device }}
+      NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.SUPABASE_URL || secrets.NEXT_PUBLIC_SUPABASE_URL }}
+      SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+      BLOB_READ_WRITE_TOKEN: ${{ secrets.BLOB_READ_WRITE_TOKEN }}
+      WIND_CUBE_DIR: .windcube/cubes
+      ONNXRUNTIME_NODE_INSTALL: skip
     steps:
-      - uses: actions/checkout@v4
-
-      # pygrib + eccodes from conda-forge (precompiled — no build, reliable).
-      - uses: mamba-org/setup-micromamba@v2
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: mamba-org/setup-micromamba@add3a49764cedee8ee24e82dfde87f5bc2914462 # v2
         with:
           environment-name: gfs
           create-args: >-
@@ -45,69 +40,29 @@ jobs:
             pygrib
             numpy
           cache-environment: true
-
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
         with:
-          node-version: 20
+          node-version: 22
           cache: npm
           cache-dependency-path: web/package-lock.json
       - run: npm ci
-
-      # 1a. Build GFS cubes (reconstruction + forecast) → web/.windcube/cubes/*.slwc.
-      - name: Ingest GFS → cubes
-        env:
-          NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
-          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
-        run: micromamba run -n gfs python scripts/gfs_ingest.py ${{ github.event.inputs.device }}
-
-      # 1b. Build GEFS per-member cubes ({device}-mNN.slwc) for the ensemble. The
-      #     compute step auto-detects these and switches to a member-per-trajectory
-      #     ensemble; if it fails or is skipped, compute falls back to GFS+jitter.
-      #     GEFS is an ENHANCEMENT, not a requirement: a slow/trickling NOAA S3
-      #     fetch can hang this step, and without a bound it eats the whole 45-min
-      #     job budget — cancelling the job before Compute runs, so the forecast
-      #     freezes (the GFS cube from 1a is fine, it just never gets computed).
-      #     Bound the step and continue on timeout/failure so Compute always runs
-      #     with the GFS cube + whatever members completed (gefs_ingest writes each
-      #     member cube as it finishes, so a cutoff keeps the completed ones — and
-      #     compute uses any >=2 members as a real ensemble, not jitter).
-      #     A healthy run is ~19m; 28m leaves comfortable headroom for NOAA-speed
-      #     variance without trimming good runs, while still bounding a hang. The
-      #     job cap (50m) covers GFS + this + compute/upload even if GFS runs slow.
-      - name: Ingest GEFS ensemble → member cubes
+      - name: Check worker configuration
+        run: |
+          node -e 'const id=process.env.DEVICE;if(id&&!/^[a-zA-Z0-9_-]{1,80}$/.test(id))throw new Error("Invalid device");for(const key of ["NEXT_PUBLIC_SUPABASE_URL","SUPABASE_SERVICE_ROLE_KEY","BLOB_READ_WRITE_TOKEN"])if(!process.env[key])throw new Error(`${key} is required`);'
+      - name: Ingest GFS cubes
+        run: micromamba run -n gfs python scripts/gfs_ingest.py "$DEVICE"
+      # The GFS forecast remains available if optional GEFS ingestion times out.
+      - name: Ingest GEFS member cubes
         timeout-minutes: 28
         continue-on-error: true
-        env:
-          NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
-          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
-        run: micromamba run -n gfs python scripts/gefs_ingest.py ${{ github.event.inputs.device }}
-
-      # 2. Compute forecasts on the runner, reading the local cubes by device
-      #    (WIND_CUBE_DIR), and store only the small forecast JSON to Blob — the
-      #    same object /api/forecast serves. No serverless cube read, no Blob cube
-      #    bandwidth. (This is where the GEFS ensemble compute will live.)
-      - name: Compute + store forecasts
-        env:
-          NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
-          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
-          BLOB_READ_WRITE_TOKEN: ${{ secrets.BLOB_READ_WRITE_TOKEN }}
-          WIND_CUBE_DIR: .windcube/cubes
-        run: npx --yes tsx scripts/compute_forecasts.ts ${{ github.event.inputs.device }}
-
-      # 3. (OPTIONAL / transition) Also push the cubes to Blob so the serverless
-      #    cold-miss fallback in /api/forecast can still compute for a device that
-      #    has no stored forecast yet. Drop this once the worker compute is the
-      #    sole path AND the external cron → /api/compute-forecast is disabled,
-      #    to eliminate cube Blob storage + bandwidth entirely.
-      - name: Upload cubes → Vercel Blob (fallback)
-        env:
-          BLOB_READ_WRITE_TOKEN: ${{ secrets.BLOB_READ_WRITE_TOKEN }}
-        run: node scripts/upload_cubes.mjs
-
-      # Optional: set a HEALTHCHECK_URL secret (healthchecks.io / Slack) to catch
-      # silent failures — stale forecasts otherwise.
+        run: micromamba run -n gfs python scripts/gefs_ingest.py "$DEVICE"
+      - name: Compute and store forecasts
+        run: npm run forecast:compute -- "$DEVICE"
       - name: Healthcheck ping
         if: success()
         env:
           HEALTHCHECK_URL: ${{ secrets.HEALTHCHECK_URL }}
-        run: '[ -n "$HEALTHCHECK_URL" ] && curl -fsS --max-time 10 "$HEALTHCHECK_URL" || echo "no HEALTHCHECK_URL set"'
+        run: |
+          if [ -n "$HEALTHCHECK_URL" ]; then
+            curl -fsS --max-time 10 "$HEALTHCHECK_URL"
+          fi

@@ -1,5 +1,13 @@
--- Stratolink Mission Control Database Schema
--- Run this SQL in your Supabase SQL Editor to create the telemetry table
+-- LEGACY BOOTSTRAP ONLY — NOT A COMPLETE OR PRODUCTION-SAFE INSTALL.
+--
+-- This file preserves the original telemetry-table bootstrap for historical
+-- installations. It intentionally predates the current sensor, no-GPS,
+-- auxiliary-event, TTN identity, observability, grant, and RLS contracts.
+-- Do not run this file by itself. Apply every migration in the exact order in
+-- migrations/README.md; the final integrity migration removes the permissive
+-- development write policy below and establishes the current security model.
+--
+-- Stratolink Mission Control Database Schema (historical baseline)
 
 -- Enable PostGIS extension for geospatial queries
 CREATE EXTENSION IF NOT EXISTS postgis;

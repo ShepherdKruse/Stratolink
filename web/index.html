@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#a8bbce">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="description" content="A Stratolink balloon launch over San Francisco.">
+  <title>Stratolink</title>
+  <link id="site-favicon" rel="icon" href="/assets/favicon/globe.png" type="image/png" sizes="64x64">
+  <link rel="apple-touch-icon" href="/assets/favicon/apple-touch-icon.png">
+  <script type="module" src="/src/favicon.js"></script>
+  <noscript><style>
+    html .scene-intro { display: none; }
+    html .launch { height: auto !important; }
+    html .launch-viewport { position: relative; height: auto; min-height: 100dvh; }
+    html .story-window { position: relative; z-index: 6; mask-image: none; }
+    html .story { position: relative; top: auto !important; transform: none !important; padding-top: 31dvh; padding-bottom: 64px; }
+    html .essay-body > p, html .essay-body > section { opacity: 1; pointer-events: auto; }
+    html .launch[data-loading] .foreground-layer, html .launch[data-loading] .balloon-layer { opacity: 1; }
+    html .launch[data-loading] .story { color: #29333c; }
+  </style></noscript>
+  <script type="module" src="/src/main.js"></script>
+</head>
+<body>
+  <header class="site-header">
+    <a href="/" aria-label="Stratolink home"><img src="/assets/stratolink-wordmark.svg" alt="stratolink" width="7581" height="1510"></a>
+  </header>
+  <main>
+    <section class="launch" data-loading aria-label="Stratolink balloon launch over San Francisco">
+      <div class="launch-viewport">
+        <div class="scene-layer sky-layer" aria-hidden="true">
+          <img class="scene-photo" src="/assets/launch/sky.png" alt="" fetchpriority="high" width="1672" height="941">
+        </div>
+        <div class="scene-layer foreground-layer" aria-hidden="true">
+          <svg class="scene-photo" viewBox="0 0 2560 1440" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <filter id="cloud-edge" x="-5%" y="-5%" width="110%" height="110%">
+                <feGaussianBlur stdDeviation="10" />
+              </filter>
+              <filter id="cloud-edge-mobile" x="-5%" y="-5%" width="110%" height="110%">
+                <feComponentTransfer>
+                  <feFuncA type="linear" slope="1.45" intercept="-.45" />
+                </feComponentTransfer>
+                <feGaussianBlur stdDeviation="6" />
+              </filter>
+              <mask id="city-mask" maskUnits="userSpaceOnUse" x="0" y="0" width="2560" height="1440" style="mask-type:alpha">
+                <image class="city-cloud-mask" href="/assets/launch/city-clouds.png" width="2560" height="1440" preserveAspectRatio="none" filter="url(#cloud-edge)" />
+                <rect y="1410" width="2560" height="30" fill="white" />
+              </mask>
+            </defs>
+            <image href="/assets/launch/source.jpg" width="2560" height="1440" mask="url(#city-mask)" />
+          </svg>
+        </div>
+        <div class="scene-layer balloon-layer" aria-hidden="true">
+          <svg class="scene-photo balloon-photo" viewBox="0 0 2560 1440" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <filter id="tether-edge" x="-5%" y="-5%" width="110%" height="110%">
+                <feMorphology operator="dilate" radius="2" />
+                <feGaussianBlur stdDeviation=".5" />
+              </filter>
+              <mask id="balloon-mask" maskUnits="userSpaceOnUse" x="1228" y="432" width="205" height="403" style="mask-type:alpha">
+                <image href="/assets/launch/balloon.png" width="2560" height="1440" preserveAspectRatio="none" filter="url(#tether-edge)" />
+              </mask>
+            </defs>
+            <image href="/assets/launch/source.jpg" width="2560" height="1440" mask="url(#balloon-mask)" />
+          </svg>
+        </div>
+        <div class="scene-warmth" aria-hidden="true"></div>
+        <div class="scene-intro" aria-hidden="true"></div>
+        <div class="story-window">
+          <article class="story" aria-labelledby="story-title">
+        <h1 id="story-title" data-letter-reveal>lorem ipsum</h1>
+        <p class="date" data-letter-reveal>October 5, 2026</p>
+        <div class="essay-body">
+        <p>Lorem ipsum dolor sit amet.</p>
+<p>Consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip.</p>
+<p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+<p>Praesent commodo cursus <img class="inline-payload" src="/assets/launch/payload-cutout.png" alt="Stratolink payload with two solar panels" width="384" height="256"> magna, vel scelerisque nisl consectetur et. Donec id elit non mi porta gravida at eget metus. Aenean lacinia bibendum nulla sed consectetur.</p>
+<p>Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Cras mattis consectetur purus sit amet fermentum. Maecenas faucibus mollis interdum.</p>
+<!-- home-docs:start -->
+<section class="story-docs" aria-label="Introduction docs">
+    <a href="/docs/getting-started"><span>Getting started</span><span class="story-link-meta">7 min read<img src="/assets/icons/chevron-right.svg" alt="" width="8" height="12"></span></a>
+    <a href="/docs/architecture"><span>System architecture</span><span class="story-link-meta">8 min read<img src="/assets/icons/chevron-right.svg" alt="" width="8" height="12"></span></a>
+    <a href="/docs/dashboard"><span>Dashboard guide</span><span class="story-link-meta">7 min read<img src="/assets/icons/chevron-right.svg" alt="" width="8" height="12"></span></a>
+  </section>
+<!-- home-docs:end -->
+<p>Nullam quis risus eget urna mollis ornare vel eu leo. Vestibulum id ligula porta felis euismod semper. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.</p>
+<p>Curabitur blandit tempus porttitor. Etiam porta sem malesuada magna mollis euismod. Donec ullamcorper nulla non metus auctor fringilla. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh.</p>
+<p>Aliquam erat volutpat, sed posuere consectetur:</p>
+<p>Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Nulla vitae elit libero, a pharetra augue. Sed posuere consectetur est at lobortis. Donec sed odio dui, aenean eu leo quam.</p>
+<p>Pellentesque ornare sem lacinia quam venenatis vestibulum. Maecenas sed diam eget risus varius blandit sit amet non magna. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Aenean eu leo quam, pellentesque ornare sem.</p>
+<p>Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae. Suspendisse potenti. Nunc consequat interdum varius. Proin eget tortor risus. Nulla porttitor accumsan tincidunt, curabitur arcu erat, accumsan id imperdiet et.</p>
+<!-- home-blog:start -->
+<section class="story-blog" aria-label="Latest from the blog">
+    <div class="story-blog-grid">
+      <a class="story-blog-card story-blog-featured" href="/blog/baja-run">
+        <img class="story-blog-image" src="/assets/blog/baja-floating.jpg" alt="" width="1500" height="1000" style="object-position:68% center" loading="lazy">
+        <span class="story-blog-category">Flight logs</span>
+        <h2>The Baja Run</h2>
+        <span class="story-link-meta">4 min read<img src="/assets/icons/chevron-right.svg" alt="" width="8" height="12"></span>
+      </a>
+    </div>
+  </section>
+<!-- home-blog:end -->
+<p>Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a. Quisque velit nisi, pretium ut lacinia in, elementum id enim. Donec sollicitudin molestie malesuada. Curabitur non nulla sit amet nisl tempus convallis quis ac lectus. Sed porttitor lectus nibh, vivamus suscipit tortor eget felis porttitor volutpat.</p>
+<p>Phasellus ullamcorper ipsum rutrum nunc. Praesent ac massa at ligula laoreet iaculis. Sed aliquam ultrices mauris, integer ante arcu.<br><br>Fusce fermentum odio nec arcu. In hac habitasse platea dictumst. Morbi vestibulum volutpat enim. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.</p>
+<p>Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu.</p>
+<p class="farewell">Lorem ipsum.</p>
+        </div>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+  <footer class="site-footer">
+    <div class="footer-row">
+      <div class="footer-brand">
+        <a href="/" aria-label="Stratolink home"><img src="/assets/stratolink-wordmark.svg" alt="stratolink" width="7581" height="1510"></a>
+        <span class="copyright">© stratolink 2026</span>
+      </div>
+      <nav class="footer-nav" aria-label="Footer">
+        <a href="/dashboard">dashboard</a>
+        <a href="/docs">docs</a>
+        <a href="/blog">blog</a>
+        <a href="mailto:contact@stratolink.org">contact</a>
+      </nav>
+    </div>
+  </footer>
+</body>
+</html>

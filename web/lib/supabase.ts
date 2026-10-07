@@ -1,66 +1,8 @@
-import { createClient as createSupabaseClient, type SupabaseClient } from '@supabase/supabase-js';
+import { createClient } from '@supabase/supabase-js';
 
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || '';
-const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || '';
-
-/* Browser-side singleton. Without this, every poll cycle in
- * `useTelemetry` (and other client callers) creates a fresh client,
- * which spawns a fresh GoTrueClient that registers a `storage` event
- * listener on `window` — pinning the instance in memory forever. After
- * a few minutes on the page, dozens of auth clients are all firing on
- * every localStorage change, eventually starving the main thread of
- * event-handling cycles (which manifests as unresponsive tab clicks).
- *
- * Server-side callers (route handlers, server actions) keep getting a
- * fresh client per call — they have no `window`, no leak, and
- * different requests can carry different auth contexts. */
-let browserAnonClient: SupabaseClient | null = null;
-
-export function createClient() {
-    if (!supabaseUrl || !supabaseAnonKey || supabaseUrl.includes('your_supabase') || supabaseUrl === '') {
-        throw new Error('Supabase not configured. Please set NEXT_PUBLIC_SUPABASE_URL and NEXT_PUBLIC_SUPABASE_ANON_KEY in .env.local');
-    }
-
-    // Validate URL format
-    if (!supabaseUrl.startsWith('http://') && !supabaseUrl.startsWith('https://')) {
-        throw new Error(`Invalid Supabase URL format: ${supabaseUrl}`);
-    }
-
-    if (typeof window !== 'undefined') {
-        if (browserAnonClient) return browserAnonClient;
-        browserAnonClient = createSupabaseClient(supabaseUrl, supabaseAnonKey);
-        return browserAnonClient;
-    }
-
-    return createSupabaseClient(supabaseUrl, supabaseAnonKey);
-}
-
-/**
- * Create a Supabase client with service role key for server-side operations
- * that require elevated permissions (e.g., webhook writes).
- * 
- * WARNING: Never use this in client-side code. Service role key bypasses RLS.
- */
 export function createServiceRoleClient() {
-    const serviceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
-    
-    if (!supabaseUrl || supabaseUrl.includes('your_supabase') || supabaseUrl === '') {
-        throw new Error('Supabase URL not configured. Please set NEXT_PUBLIC_SUPABASE_URL in .env.local');
-    }
-    
-    if (!serviceRoleKey) {
-        throw new Error('SUPABASE_SERVICE_ROLE_KEY not configured. Required for webhook operations.');
-    }
-    
-    // Validate URL format
-    if (!supabaseUrl.startsWith('http://') && !supabaseUrl.startsWith('https://')) {
-        throw new Error(`Invalid Supabase URL format: ${supabaseUrl}`);
-    }
-    
-    return createSupabaseClient(supabaseUrl, serviceRoleKey, {
-        auth: {
-            autoRefreshToken: false,
-            persistSession: false
-        }
-    });
+    const url = process.env.SUPABASE_URL || process.env.NEXT_PUBLIC_SUPABASE_URL;
+    const key = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.SUPABASE_SERVER_KEY;
+    if (!url || !key) throw new Error('Forecast database is not configured');
+    return createClient(url, key, { auth: { persistSession: false, autoRefreshToken: false } });
 }

@@ -6,7 +6,7 @@
 
 **Global Pico-Connectivity**
 
-Global pico-balloon telemetry system using RAK3172 LoRaWAN module with Next.js ground station.
+Global pico-balloon telemetry system using the RAK3172 LoRaWAN module with a web dashboard.
 
 </div>
 
@@ -14,9 +14,9 @@ Global pico-balloon telemetry system using RAK3172 LoRaWAN module with Next.js g
 
 1. Flight Hardware: RAK3172 (STM32WLE5) microcontroller running Arduino Framework
 2. Telemetry Transport: The Things Network (TTN) LoRaWAN
-3. Ground Station: Next.js App Router hosted on Vercel
+3. Website and Dashboard: Vite, React and Vercel Node functions
 4. Database: Supabase PostgreSQL
-5. Data Flow: TTN HTTP Webhook -> Next.js API Route -> Supabase
+5. Data Flow: TTN HTTP Webhook -> Authenticated ingestion endpoint -> Supabase -> Public telemetry API
 
 ## Repository Structure
 
@@ -39,13 +39,16 @@ Global pico-balloon telemetry system using RAK3172 LoRaWAN module with Next.js g
 │   ├── /circuits              # Circuit schematics
 │   ├── /3d-models             # Mechanical designs
 │   └── /docs                  # Hardware documentation
-├── /web                       # Next.js Project (Ground Station)
-│   ├── /app
-│   │   ├── /api/ttn-webhook   # API Route
-│   │   └── /dashboard         # Frontend map
-│   ├── /lib
-│   │   └── supabase.ts
+├── /web                       # Website and dashboard
+│   ├── /src/dashboard         # React dashboard
+│   ├── /content               # Documentation and blog articles
+│   ├── /api                   # Vercel function entry points
+│   ├── /server                # Authentication, ingestion and public APIs
+│   ├── /lib                   # TTN decoder and forecast worker
 │   └── package.json
+├── /supabase
+│   ├── /migrations            # Reviewed additive database migrations
+│   └── /cutover               # Raw-data access restrictions for deployment
 ├── .gitignore
 └── setup_repo.sh
 ```
@@ -53,7 +56,7 @@ Global pico-balloon telemetry system using RAK3172 LoRaWAN module with Next.js g
 ## Prerequisites
 
 1. PlatformIO CLI or PlatformIO IDE
-2. Node.js 18 or higher
+2. Node.js 22 for the website
 3. Supabase account
 4. The Things Network account
 5. RAK3172 development board
@@ -74,21 +77,19 @@ Global pico-balloon telemetry system using RAK3172 LoRaWAN module with Next.js g
 ### Web Application Setup
 
 1. Navigate to web directory: `cd web`
-2. Install dependencies: `npm install`
-3. Copy `.env.local.example` to `.env.local`
-4. Configure Supabase credentials in `.env.local`:
-   - NEXT_PUBLIC_SUPABASE_URL
-   - NEXT_PUBLIC_SUPABASE_ANON_KEY
-5. Run database schema: Execute `web/lib/supabase/schema.sql` in Supabase SQL Editor
+2. Install dependencies: `ONNXRUNTIME_NODE_INSTALL=skip npm ci`
+3. Copy `.env.example` to `.env.local`
+4. Configure the public authentication values and server credentials described in [web/README.md](web/README.md#deployment). Keep the service role key server-only.
+5. Follow the reviewed database migration and cutover sequence in [web/README.md](web/README.md#deployment). The historical schema file alone does not set up the current application.
 6. Start development server: `npm run dev`
 
 ### TTN Webhook Configuration
 
-1. Log into The Things Network console
-2. Navigate to Applications > Your Application > Integrations > Webhooks
-3. Add webhook with format: JSON
-4. Set webhook URL: `https://your-vercel-domain.com/api/ttn-webhook`
-5. Save webhook configuration
+1. Sign in with GitHub on the dashboard and register your balloon.
+2. Open **Your balloons > Connect TTN**. Enter the cluster, application ID, regional DevEUI and a TTN application API key with permission to read end devices. The key is used once for verification and is not stored.
+3. In TTN, open **Applications > Your Application > Integrations > Webhooks** and add a custom JSON webhook.
+4. Use the URL and `Authorization` header returned by the dashboard. Enable uplink messages.
+5. Send a packet and confirm that the connection shows a received timestamp. Repeat for each regional device registration.
 
 ## Documentation
 
@@ -119,10 +120,13 @@ Sensitive credentials file. This file is gitignored. Contains:
 
 ### web/.env.local
 
-Environment variables for Next.js application. This file is gitignored. Contains:
-- Supabase project URL
-- Supabase anonymous key
-- Optional service role key
+Environment variables for the website and local API handlers. This file is gitignored. Contains:
+- Public Mapbox token
+- Supabase URL and publishable key for browser authentication
+- Server-only Supabase service role key
+- Site origin, explicit authentication origins and private forecast storage configuration
+
+See [web/.env.example](web/.env.example) and [web/README.md](web/README.md#deployment). Browser telemetry reads go through the public API, not directly to raw database tables.
 
 ## Development
 
@@ -157,8 +161,10 @@ Production build:
 ```bash
 cd web
 npm run build
-npm start
+npm run preview -- --port 4173
 ```
+
+Run `npm run verify` before deployment. Configure Vercel with Root Directory `web`, the Vite preset and output directory `dist`. See [web/README.md](web/README.md#deployment) for authentication, database cutover and forecast worker requirements.
 
 ## Database Schema
 
@@ -170,7 +176,7 @@ The telemetry table stores:
 - Environmental data (temperature, pressure)
 - Raw payload data
 
-See `web/lib/supabase/schema.sql` for complete schema definition.
+Historical schema and migration files remain in `web/lib/supabase/`. New migrations in `supabase/migrations/` add owned balloon registrations, verified regional identities and scoped webhook credentials. The historical chain is not a complete fresh-project installer and contains duplicate migration version names. Follow the deployment sequence in [web/README.md](web/README.md#deployment).
 
 ## Security Notes
 
@@ -179,6 +185,8 @@ See `web/lib/supabase/schema.sql` for complete schema definition.
 3. Use Supabase Row Level Security policies for data access control
 4. Validate and sanitize all webhook inputs
 5. Use HTTPS for all production endpoints
+6. Never expose a service role key through `VITE_` or `NEXT_PUBLIC_` variables
+7. Use scoped TTN webhook credentials and owner-checked APIs. Legacy activation links do not authorize changes.
 
 ## Contributors
 

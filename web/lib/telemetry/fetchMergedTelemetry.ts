@@ -56,7 +56,8 @@ export async function fetchTelemetryMerged(
             .in('device_id', queryIds)
             .gte('time', opts.since)
             .order('time', { ascending: true })
-            .range(offset, pageEnd);
+            .range(offset, pageEnd)
+            .returns<RawTelemetryRecord[]>();
 
         if (error) throw error;
         const page = (data ?? []) as RawTelemetryRecord[];
@@ -152,7 +153,8 @@ export async function fetchFleetTelemetryLight(
             .in('device_id', telemetryIds)
             .gte('time', fleetSince)
             .order('time', { ascending: true })
-            .range(offset, pageEnd);
+            .range(offset, pageEnd)
+            .returns<RawTelemetryRecord[]>();
 
         if (error) throw error;
         const page = (data ?? []) as FleetTelemetryLightRow[];

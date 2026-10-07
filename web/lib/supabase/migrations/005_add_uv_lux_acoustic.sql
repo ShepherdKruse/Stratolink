@@ -1,5 +1,6 @@
 -- Migration: Add UV, ambient light, and acoustic event columns; drop unused gyro columns
--- Matches firmware 35-byte telemetry payload (v2)
+-- Matches the historical 35-byte telemetry-v1 payload. The later exact
+-- 40-byte telemetry-v2 migration adds remote health/command observability.
 
 ALTER TABLE telemetry
 ADD COLUMN IF NOT EXISTS uv_index INTEGER,
