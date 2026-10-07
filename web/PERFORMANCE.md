@@ -72,6 +72,19 @@ Further targeted changes:
 - Keep the empty map container hidden until the registry resolves. Hiding only its children did not prevent the painted container from shifting when cards arrived. A local 390 x 844 layout observer measured this shift as 0.1957 before the fix. Afterward, only the attribution control shifted, by 0.00028.
 - Combine six terrain fill layers into two, retaining the level filters, band ordering, per-band opacity and zoom fades. This reduces repeated tile layout/draw work without changing the terrain palette.
 
-The compiled build and 120 tests pass. Local desktop/mobile map checks report no rendering errors. Production PageSpeed follow-up is still pending for this pass.
+The compiled build and 120 tests pass. Local desktop/mobile map checks report no rendering errors. Production PageSpeed follow-up appears below.
 
 Selected balloons now take the next available history slot ahead of queued background fleet loads. The fleet and detail views still share one request, and the four-request limit remains in force. A regression test verifies promotion, request sharing and resumption of the background queue.
+
+## Production startup result: October 7, 16:54 PDT
+
+Production `8f9c5bb` (PR 82), [PageSpeed report](https://pagespeed.web.dev/analysis/https-stratolink-org-dashboard/360yry4dlc):
+
+| Device | Performance | FCP | LCP | TBT | CLS |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| Mobile | 59 | 2.0 s | 2.6 s | 3,080 ms | 0 |
+| Desktop | 61 | 0.4 s | 0.5 s | 12,020 ms | 0 |
+
+Mobile main-thread work was 6.0 s, compared with 10.1 s in the prior repeat. The font and layout changes improved initial rendering; the remaining long tasks are dominated by Mapbox. Lab runs vary, so this is not a guarantee for every device or network.
+
+Desktop blocking time remains high and variable in the PageSpeed cold-load run. The live WebGL globe, its initial map tiles and day/night appearance are retained. The report does not establish a desktop TBT improvement for the terrain-layer consolidation. The measured homepage improvement and the request/cache/queue tests should not be confused with a claim that the dashboard has a green cold-start score.
