@@ -37,7 +37,7 @@ export default function DashboardHeader({ onBack }: { onBack?: (animate?: boolea
         <header className="dashboard-header">
             <div className="dashboard-header-row">
                 <a href="/" target="_top" className="dashboard-home-link" aria-label="Stratolink home">
-                    <img src="/assets/stratolink-wordmark.svg" alt="Stratolink" width={130} className="dashboard-wordmark" />
+                    <img src="/assets/stratolink-wordmark.svg" alt="Stratolink" width={130} height={26} className="dashboard-wordmark" />
                 </a>
                 <div className="dashboard-header-actions">
                     <button type="button" className={`dashboard-register${registrationOpen ? ' is-close' : ''}`}

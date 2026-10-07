@@ -30,3 +30,31 @@ Worker tests cover out-of-order tile replies, cancellation, disposal and fallbac
 ## Remaining measurements
 
 Rerun PageSpeed on the deployed build. Check mobile initial layout shifts, real scroll/globe navigation, large-fleet fetching and rendering, and verify that the Mapbox tile failures are resolved in the deployed browser.
+
+## Production follow-up: October 7, 16:33 PDT
+
+Deployed commit: `f49c476` (PR 80). New PageSpeed reports:
+
+- [Homepage](https://pagespeed.web.dev/analysis/https-stratolink-org/trgvchra3k)
+- [Dashboard](https://pagespeed.web.dev/analysis/https-stratolink-org-dashboard/d1gkjga21z)
+
+| Page | Device | Performance | FCP | LCP | TBT | CLS |
+| --- | --- | ---: | ---: | ---: | ---: | ---: |
+| Home | Mobile | 97 | 0.9 s | 1.2 s | 0 ms | 0 |
+| Home | Desktop | 100 | 0.3 s | 0.3 s | 0 ms | 0.006 |
+| Dashboard | Mobile | 23 | 5.1 s | 9.1 s | 1,860 ms | 0.202 |
+| Dashboard | Desktop | 61 | 0.6 s | 0.6 s | 8,370 ms | 0 |
+
+Mapbox requests now pass its origin restriction. Best Practices is 100 on both pages. Dashboard blocking time decreased, but its mobile load worsened in this run. The largest paint is the wordmark loaded after JavaScript. The 0.202 shift comes from map controls moving as fleet cards arrive. Most remaining desktop blocking time is within Mapbox initialization/rendering. The dashboard remains under investigation.
+
+## Fleet loading follow-up
+
+- Render the interface before loading the Mapbox module; preload the wordmark and declare its dimensions.
+- Wait for the initial registry before mounting map controls, so they do not move when cards arrive.
+- Derive contact times and positions from the same sanitized histories already used by cards and replay. Remove redundant per-device summary queries and unused fleet aggregates.
+- Preserve the registry when selecting a card. Refresh registry metadata once a minute while visible.
+- Limit simultaneous history requests to four across fleet and detail views. Share pending requests and publish completed histories in batches.
+- Stop polling completed flights. Continue checking missing balloons for new packets.
+- Release the temporary WebGL capability-check context.
+
+A local synthetic fixture loaded 100 balloons with 1,000 packets each through the compiled dashboard. All 100 cards rendered; search and timeline navigation worked; the request peak was four. This fixture never contacted the production telemetry API. It is a functional scaling check on the development machine, not a claim about slow-device frame rates or production network latency.
