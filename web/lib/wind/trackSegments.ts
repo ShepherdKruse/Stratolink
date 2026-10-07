@@ -1,4 +1,4 @@
-import type { V2FlightPoint } from '@/components/dashboard-v2/V2MissionMap';
+type V2FlightPoint = { lon: number; lat: number; t: number; alt?: number | null; alt_m?: number };
 
 const EPS = 0.0008;
 const FREEZE_MIN_MS = 18 * 60_000;

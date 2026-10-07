@@ -54,7 +54,7 @@ export async function openMeteoFetch(url: string, init?: RequestInit): Promise<R
 
         lastRes = await fetch(u.toString(), {
             ...init,
-            next: { revalidate: 1800, ...init?.next },
+            signal: init?.signal ?? AbortSignal.timeout(30_000),
         });
 
         if (lastRes.ok) {

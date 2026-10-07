@@ -1,0 +1,38 @@
+html[data-globe-portal], html[data-globe-portal] body,
+html[data-globe-portal] .sl-app { background: transparent !important; }
+html[data-globe-portal] .fleet-layout { display: block; }
+html[data-globe-portal] .fleet-map { position: absolute; inset: 0; margin: 0; }
+html[data-globe-portal] .fleet-panel { position: absolute; left: 0; top: 0; bottom: 0; width: 420px; }
+html[data-globe-portal] .fleet-timeline { left: 480px; }
+html[data-globe-portal] .map-coordinates { left: calc(420px + var(--dashboard-gutter)); }
+html[data-globe-portal] .fleet-panel,
+html[data-globe-portal] .map-coordinates,
+html[data-globe-portal] .map-legend,
+html[data-globe-portal] .fleet-timeline { transition: opacity 500ms ease, transform 700ms cubic-bezier(.22,1,.36,1); }
+html[data-globe-portal="footer"] .fleet-panel,
+html[data-globe-portal="entering"] .fleet-panel { opacity: 0; transform: translateX(-105%); pointer-events: none; visibility: hidden; }
+html[data-globe-portal="footer"] .map-coordinates,
+html[data-globe-portal="footer"] .map-legend,
+html[data-globe-portal="footer"] .fleet-timeline,
+html[data-globe-portal="entering"] .map-coordinates,
+html[data-globe-portal="entering"] .map-legend,
+html[data-globe-portal="entering"] .fleet-timeline { opacity: 0; transform: translateY(10px); pointer-events: none; visibility: hidden; }
+html[data-globe-portal="footer"] .mapboxgl-control-container,
+html[data-globe-portal="entering"] .mapboxgl-control-container { visibility: hidden; }
+html[data-globe-portal="dashboard"] .map-coordinates,
+html[data-globe-portal="dashboard"] .map-legend,
+html[data-globe-portal="dashboard"] .fleet-timeline { transition-delay: 150ms; }
+@media (max-width: 767px) {
+  html[data-globe-portal] .fleet-panel { width: 100%; max-width: none; bottom: auto; }
+  html[data-globe-portal="footer"] .fleet-panel,
+  html[data-globe-portal="entering"] .fleet-panel { transform: translateY(-105%); }
+  html[data-globe-portal] .fleet-timeline { left: 12px; right: 12px; bottom: 60px; }
+  html[data-globe-portal] .map-coordinates { left: var(--dashboard-gutter); top: calc(var(--portal-panel-height, 370px) + var(--dashboard-gutter)); }
+  html[data-globe-portal] .map-legend { top: calc(var(--portal-panel-height, 370px) + var(--dashboard-gutter)); }
+}
+@media (prefers-reduced-motion: reduce) {
+  html[data-globe-portal] .fleet-panel,
+  html[data-globe-portal] .map-coordinates,
+  html[data-globe-portal] .map-legend,
+  html[data-globe-portal] .fleet-timeline { transition: opacity 180ms ease; transition-delay: 0ms; }
+}

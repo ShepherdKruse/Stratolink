@@ -1,0 +1,12 @@
+@view-transition { navigation: auto; types: site-navigation; }
+
+:root:active-view-transition-type(site-navigation)::view-transition-old(root) {
+  animation: page-out 180ms ease-out both;
+}
+:root:active-view-transition-type(site-navigation)::view-transition-new(root) {
+  animation: page-in 260ms cubic-bezier(.22,1,.36,1) both;
+}
+@keyframes page-out { to { opacity: 0; } }
+@keyframes page-in { from { opacity: 0; } }
+
+@media (prefers-reduced-motion: reduce) { @view-transition { navigation: none; } }

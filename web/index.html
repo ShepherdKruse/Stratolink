@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#a8bbce">
+  <meta name="description" content="Open-source, solar-powered balloon payloads for collecting and sharing data from the stratosphere. Build your own, follow our flights, and join the network.">
+  <title>Stratolink</title>
+  <link rel="canonical" href="https://stratolink.org/">
+  <meta property="og:site_name" content="Stratolink">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Stratolink">
+  <meta property="og:description" content="Open-source, solar-powered balloon payloads for collecting and sharing data from the stratosphere. Build your own, follow our flights, and join the network.">
+  <meta property="og:url" content="https://stratolink.org/">
+  <meta property="og:image" content="https://stratolink.org/assets/launch/source.jpg">
+  <meta property="og:image:type" content="image/jpeg">
+  <meta property="og:image:width" content="2560">
+  <meta property="og:image:height" content="1440">
+  <meta property="og:image:alt" content="A Stratolink balloon and its payload above the San Francisco skyline and clouds.">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Stratolink">
+  <meta name="twitter:description" content="Open-source, solar-powered balloon payloads for collecting and sharing data from the stratosphere. Build your own, follow our flights, and join the network.">
+  <meta name="twitter:image" content="https://stratolink.org/assets/launch/source.jpg">
+  <meta name="twitter:image:alt" content="A Stratolink balloon and its payload above the San Francisco skyline and clouds.">
+  <link rel="stylesheet" href="/src/styles.css">
+  <link id="site-favicon" rel="icon" href="/assets/favicon/globe.png" type="image/png" sizes="64x64">
+  <link rel="apple-touch-icon" href="/assets/favicon/apple-touch-icon.png">
+  <script type="module" src="/src/favicon.js"></script>
+  <noscript><style>
+    html .scene-intro { display: none; }
+    html .launch { height: auto !important; }
+    html .launch-viewport { position: relative; height: auto; min-height: 100dvh; }
+    html .story-window { position: relative; z-index: 6; mask-image: none; }
+    html .story { position: relative; top: auto !important; transform: none !important; padding-top: 31dvh; padding-bottom: 64px; }
+    html .essay-body > p, html .essay-body > section { opacity: 1; pointer-events: auto; }
+    html .launch[data-title-pending] .story h1, html .launch[data-story-pending] .essay-body { visibility: visible; }
+    html .launch[data-loading] .foreground-layer, html .launch[data-loading] .balloon-layer { opacity: 1; }
+    html .launch[data-loading] .story { color: #29333c; }
+  </style></noscript>
+  <script type="module" src="/src/main.js"></script>
+</head>
+<body>
+  <header class="site-header">
+    <a href="/" aria-label="Stratolink home"><img src="/assets/stratolink-wordmark.svg" alt="stratolink" width="7581" height="1510"></a>
+  </header>
+  <main>
+    <section class="launch" data-loading data-title-pending data-story-pending aria-label="Stratolink balloon launch over San Francisco">
+      <div class="launch-viewport">
+        <div class="scene-layer sky-layer" aria-hidden="true">
+          <img class="scene-photo" src="/assets/launch/sky.png" alt="" fetchpriority="high" width="1672" height="941">
+        </div>
+        <div class="scene-layer foreground-layer" aria-hidden="true">
+          <svg class="scene-photo" viewBox="0 0 2560 1440" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <filter id="cloud-edge" x="-5%" y="-5%" width="110%" height="110%">
+                <feGaussianBlur stdDeviation="10" />
+              </filter>
+              <filter id="cloud-edge-mobile" x="-5%" y="-5%" width="110%" height="110%">
+                <feComponentTransfer>
+                  <feFuncA type="linear" slope="1.45" intercept="-.45" />
+                </feComponentTransfer>
+                <feGaussianBlur stdDeviation="6" />
+              </filter>
+              <mask id="city-mask" maskUnits="userSpaceOnUse" x="0" y="0" width="2560" height="1440" style="mask-type:alpha">
+                <image class="city-cloud-mask" href="/assets/launch/city-clouds.png" width="2560" height="1440" preserveAspectRatio="none" filter="url(#cloud-edge)" />
+                <rect y="1410" width="2560" height="30" fill="white" />
+              </mask>
+            </defs>
+            <image href="/assets/launch/source.jpg" width="2560" height="1440" mask="url(#city-mask)" />
+          </svg>
+        </div>
+        <div class="scene-layer balloon-layer" aria-hidden="true">
+          <svg class="scene-photo balloon-photo" viewBox="0 0 2560 1440" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <filter id="tether-edge" x="-5%" y="-5%" width="110%" height="110%">
+                <feMorphology operator="dilate" radius="2" />
+                <feGaussianBlur stdDeviation=".5" />
+              </filter>
+              <mask id="balloon-mask" maskUnits="userSpaceOnUse" x="1228" y="432" width="205" height="403" style="mask-type:alpha">
+                <image href="/assets/launch/balloon.png" width="2560" height="1440" preserveAspectRatio="none" filter="url(#tether-edge)" />
+              </mask>
+            </defs>
+            <image href="/assets/launch/source.jpg" width="2560" height="1440" mask="url(#balloon-mask)" />
+          </svg>
+        </div>
+        <div class="scene-warmth" aria-hidden="true"></div>
+        <div class="scene-intro" aria-hidden="true"></div>
+        <div class="story-window">
+          <article class="story" aria-labelledby="story-title">
+        <h1 id="story-title"><span data-letter-reveal>Open source pico</span> <span data-letter-reveal>balloon network.</span></h1>
+        <div class="essay-body">
+        <p>Stratolink is a network of small, solar-powered balloons built to collect and share data from the stratosphere.</p>
+<p>We've designed a custom pico balloon payload weighing just under 10 g. Anyone can build and launch one by following the <a href="/docs/getting-started">docs</a>.</p>
+<p>The payload <img class="inline-payload" src="/assets/launch/payload-cutout.png" alt="Stratolink payload with two solar panels" width="384" height="256"> measures temperature, pressure, light, and motion, then sends the data back through <a href="https://www.thethingsnetwork.org/" target="_blank" rel="noopener noreferrer">The Things Network</a>. It can also relay long-range radio messages from the surface, help track radio-tagged animals around the world, and pass position reports between balloons when ground stations are out of reach.</p>
+<p>We want to collect data where ground stations are scarce, especially over the ocean. Keeping the balloons light, cheap, and easy to launch makes it practical to send up enough of them to build global coverage.</p>
+<p>The code and board designs are on <a href="https://github.com/ShepherdKruse/Stratolink" target="_blank" rel="noopener noreferrer">GitHub</a>. Our docs cover the build, balloon preparation, radio setup, and launch.</p>
+<!-- home-docs:start -->
+<section class="story-docs" aria-label="Introduction docs">
+    <a href="/docs/getting-started"><span>Getting started</span><span class="story-link-meta">7 min read<img src="/assets/icons/chevron-right.svg" alt="" width="8" height="12"></span></a>
+    <a href="/docs/architecture"><span>System architecture</span><span class="story-link-meta">8 min read<img src="/assets/icons/chevron-right.svg" alt="" width="8" height="12"></span></a>
+    <a href="/docs/dashboard"><span>Dashboard guide</span><span class="story-link-meta">7 min read<img src="/assets/icons/chevron-right.svg" alt="" width="8" height="12"></span></a>
+  </section>
+<!-- home-docs:end -->
+<p>We publish our flights on the <a href="/dashboard">dashboard</a>. You can replay a launch, follow the track, and inspect the telemetry.</p>
+<p>We also publish <a href="/blog">flight logs</a>, with notes on the hardware, what worked, and what needs changing.</p>
+<!-- home-blog:start -->
+<section class="story-blog" aria-label="Latest from the blog">
+    <div class="story-blog-grid">
+      <a class="story-blog-card story-blog-featured" href="/blog/baja-run">
+        <img class="story-blog-image" src="/assets/blog/baja-floating.jpg" alt="" width="1500" height="1000" style="object-position:68% center" loading="lazy">
+        <span class="story-blog-category">Flight logs</span>
+        <h2>The Baja Run</h2>
+        <span class="story-link-meta">4 min read<img src="/assets/icons/chevron-right.svg" alt="" width="8" height="12"></span>
+      </a>
+    </div>
+  </section>
+<!-- home-blog:end -->
+<p>Anyone launching their own balloon can <a href="/dashboard">register it on our dashboard</a> and share the data with the community.</p>
+<p class="farewell">For bulk data access, research collaborations, or to support the project, get in touch at <a href="mailto:contact@stratolink.org">contact@stratolink.org</a>.</p>
+        </div>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+  <footer class="site-footer">
+    <div class="footer-row">
+      <div class="footer-brand">
+        <a href="/" aria-label="Stratolink home"><img src="/assets/stratolink-wordmark.svg" alt="stratolink" width="7581" height="1510"></a>
+        <span class="copyright">© stratolink 2026</span>
+      </div>
+      <nav class="footer-nav" aria-label="Footer">
+        <a href="/dashboard">dashboard</a>
+        <a href="/docs">docs</a>
+        <a href="/blog">blog</a>
+        <a href="mailto:contact@stratolink.org">contact</a>
+      </nav>
+    </div>
+  </footer>
+</body>
+</html>

@@ -49,10 +49,14 @@ function devicesFromCubes(dir: string): string[] {
 }
 
 async function main(): Promise<void> {
-    const args = process.argv.slice(2);
+    const args = process.argv.slice(2).filter(Boolean);
     const dry = args.includes('--dry');
-    const only = args.find((a) => !a.startsWith('--'));
-    const devices = only ? [only] : devicesFromCubes(CUBE_DIR);
+    const ids = args.filter(a => a !== '--dry');
+    if (ids.length > 1 || ids.some(id => id.startsWith('-') || !/^[a-zA-Z0-9_-]{1,80}$/.test(id))) throw new Error('Invalid forecast device argument');
+    const only = ids[0];
+    const available = devicesFromCubes(CUBE_DIR);
+    if (only && !available.includes(only)) throw new Error('No ingested cube for the requested device');
+    const devices = only ? [only] : available;
 
     if (!devices.length) {
         console.log(`no device cubes in ${CUBE_DIR} — nothing to compute`);
@@ -80,6 +84,7 @@ async function main(): Promise<void> {
         }
     }
     console.log(`done: ${ok}/${devices.length} forecast(s) computed${dry ? '' : ' + stored'}`);
+    if (ok !== devices.length) throw new Error(`${devices.length - ok} forecast(s) were not produced`);
 }
 
-main().then(() => process.exit(0)).catch((e) => { console.error(e); process.exit(1); });
+main().catch((error) => { console.error(error); process.exitCode = 1; });

@@ -31,6 +31,7 @@ export async function buildForecastInputForDevice(
         .from('devices')
         .select('device_id, launcher_name, status, launch_lat, launch_lon, launched_at')
         .eq('device_id', deviceId)
+        .eq('connection_status', 'connected')
         .maybeSingle();
 
     if (devErr || !device) return null;
@@ -121,7 +122,7 @@ export async function buildForecastInputForDevice(
             : { lat: first.lat, lon: first.lon, time_utc: first.t };
 
     const segments = splitTrackSegments(
-        observedTrack.map((p) => ({ lat: p.lat, lon: p.lon, t: p.t })),
+        observedTrack.map((p) => ({ lat: p.lat, lon: p.lon, t: new Date(p.t).getTime() })),
     );
     const driftSegment = segments.freezeDrift.length >= 2 ? segments.freezeDrift : undefined;
 

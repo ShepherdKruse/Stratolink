@@ -1,3 +1,156 @@
 {
-  "$schema": "https://openapi.vercel.sh/vercel.json"
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "framework": "vite",
+  "installCommand": "ONNXRUNTIME_NODE_INSTALL=skip npm ci",
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist",
+  "redirects": [
+    {
+      "source": "/docs/float-calculator",
+      "destination": "/docs/balloon-prep#float-calculator",
+      "permanent": true
+    },
+    {
+      "source": "/docs/float-calculator/",
+      "destination": "/docs/balloon-prep#float-calculator",
+      "permanent": true
+    },
+    {
+      "source": "/flights",
+      "destination": "/blog",
+      "permanent": true
+    },
+    {
+      "source": "/flights/",
+      "destination": "/blog",
+      "permanent": true
+    },
+    {
+      "source": "/flights/baja-run",
+      "destination": "/blog/baja-run",
+      "permanent": true
+    },
+    {
+      "source": "/flights/baja-run/",
+      "destination": "/blog/baja-run",
+      "permanent": true
+    },
+    {
+      "source": "/dashboard-v2/:path*",
+      "destination": "/dashboard",
+      "permanent": true
+    },
+    {
+      "source": "/admin/:path*",
+      "destination": "/dashboard",
+      "permanent": false
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/activate",
+      "destination": "/dashboard/index.html"
+    },
+    {
+      "source": "/activate/",
+      "destination": "/dashboard/index.html"
+    },
+    {
+      "source": "/activate/:deviceId",
+      "destination": "/dashboard/index.html"
+    },
+    {
+      "source": "/activate/:deviceId/",
+      "destination": "/dashboard/index.html"
+    },
+    {
+      "source": "/claim",
+      "destination": "/dashboard/index.html"
+    },
+    {
+      "source": "/claim/",
+      "destination": "/dashboard/index.html"
+    },
+    {
+      "source": "/docs",
+      "destination": "/docs/index.html"
+    },
+    {
+      "source": "/docs/",
+      "destination": "/docs/index.html"
+    },
+    {
+      "source": "/docs/:slug",
+      "destination": "/docs/pages/:slug.html"
+    },
+    {
+      "source": "/docs/:slug/",
+      "destination": "/docs/pages/:slug.html"
+    },
+    {
+      "source": "/blog",
+      "destination": "/blog/index.html"
+    },
+    {
+      "source": "/blog/",
+      "destination": "/blog/index.html"
+    },
+    {
+      "source": "/blog/:slug",
+      "destination": "/blog/posts/:slug.html"
+    },
+    {
+      "source": "/blog/:slug/",
+      "destination": "/blog/posts/:slug.html"
+    },
+    {
+      "source": "/dashboard",
+      "destination": "/dashboard/index.html"
+    },
+    {
+      "source": "/dashboard/",
+      "destination": "/dashboard/index.html"
+    }
+  ],
+  "functions": {
+    "api/docs-search.js": {
+      "includeFiles": "{server/search-assets/**,node_modules/onnxruntime-node/bin/napi-v6/linux/x64/**}",
+      "excludeFiles": "node_modules/onnxruntime-node/bin/napi-v6/{darwin/**,win32/**,linux/arm64/**,linux/x64/libonnxruntime_providers_*}",
+      "maxDuration": 30,
+      "memory": 1024
+    },
+    "api/forecast.js": {
+      "maxDuration": 30
+    }
+  },
+  "headers": [
+    {
+      "source": "/:path*",
+      "headers": [
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "strict-origin-when-cross-origin"
+        },
+        {
+          "key": "X-Frame-Options",
+          "value": "SAMEORIGIN"
+        },
+        {
+          "key": "Permissions-Policy",
+          "value": "camera=(), microphone=(), geolocation=()"
+        }
+      ]
+    },
+    {
+      "source": "/activate/:path*",
+      "headers": [
+        { "key": "Referrer-Policy", "value": "no-referrer" },
+        { "key": "Cache-Control", "value": "no-store" }
+      ]
+    }
+  ]
 }

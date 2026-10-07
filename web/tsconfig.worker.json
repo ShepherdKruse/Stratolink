@@ -1,0 +1,32 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "lib": [
+      "ES2022",
+      "DOM"
+    ],
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "strict": true,
+    "skipLibCheck": true,
+    "noEmit": true,
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
+    "types": [
+      "node"
+    ],
+    "paths": {
+      "@/*": [
+        "./*"
+      ]
+    }
+  },
+  "include": [
+    "lib/wind/**/*.ts",
+    "lib/devices/**/*.ts",
+    "lib/telemetry/fetchMergedTelemetry.ts",
+    "lib/telemetry/missionWindow.ts",
+    "lib/supabase.ts",
+    "scripts/compute_forecasts.ts"
+  ]
+}

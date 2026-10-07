@@ -118,7 +118,7 @@ def supa(path, params):
 
 # ── Supabase: fleet + recent track + level ───────────────────────────────────
 def active_devices():
-    rows = supa("devices", {"select": "device_id,status,launched_at"})
+    rows = supa("devices", {"select": "device_id,status,launched_at", "connection_status": "eq.connected"})
     return [(r["device_id"], r.get("launched_at")) for r in rows if r.get("status") == "flying"]
 
 
@@ -727,6 +727,7 @@ def main():
         return
     latest = latest_cycle()
     print(f"latest GFS cycle {latest.isoformat()} | devices: {[d for d, _ in devices]}")
+    failed = []
     for d, launched in devices:
         try:
             fixes = mission_track(d, launched)
@@ -736,6 +737,9 @@ def main():
             build_cube(d, fixes, float_pressure(d), latest)
         except Exception as e:
             print(f"  {d}: FAILED {e}")
+            failed.append(d)
+    if failed:
+        raise SystemExit(f"GFS ingestion failed for {len(failed)} device(s)")
 
 
 if __name__ == "__main__":

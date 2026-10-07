@@ -1,0 +1,280 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/* Updated to atmospheric, scientific color palette with pale blues and soft grays */
+:root {
+  /* Pure white background */
+  --background: #ffffff;
+  --foreground: oklch(0.25 0.01 250);
+
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.25 0.01 250);
+
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.25 0.01 250);
+
+  /* Deep charcoal primary */
+  --primary: oklch(0.28 0.015 250);
+  --primary-foreground: oklch(0.99 0.001 240);
+
+  /* Very light gray secondary */
+  --secondary: oklch(0.96 0.002 240);
+  --secondary-foreground: oklch(0.25 0.01 250);
+
+  --muted: oklch(0.94 0.003 240);
+  --muted-foreground: oklch(0.48 0.01 250);
+
+  /* Soft sky blue accent - restrained and atmospheric */
+  --accent: oklch(0.92 0.015 230);
+  --accent-foreground: oklch(0.22 0.03 230);
+
+  --destructive: oklch(0.577 0.245 27.325);
+  --destructive-foreground: oklch(0.99 0 0);
+
+  /* Subtle, thin borders */
+  --border: oklch(0.91 0.003 240);
+  --input: oklch(0.91 0.003 240);
+  --ring: oklch(0.28 0.015 250);
+
+  --chart-1: oklch(0.58 0.05 230);
+  --chart-2: oklch(0.55 0.04 210);
+  --chart-3: oklch(0.62 0.035 240);
+  --chart-4: oklch(0.6 0.04 220);
+  --chart-5: oklch(0.64 0.045 235);
+
+  /* Minimal radius for precise, technical feel */
+  --radius: 0.25rem;
+
+  --sidebar: oklch(0.99 0.001 240);
+  --sidebar-foreground: oklch(0.25 0.01 250);
+  --sidebar-primary: oklch(0.28 0.015 250);
+  --sidebar-primary-foreground: oklch(0.99 0.001 240);
+  --sidebar-accent: oklch(0.96 0.002 240);
+  --sidebar-accent-foreground: oklch(0.25 0.01 250);
+  --sidebar-border: oklch(0.91 0.003 240);
+  --sidebar-ring: oklch(0.48 0.01 250);
+}
+
+.dark {
+  --background: oklch(0.15 0.01 250);
+  --foreground: oklch(0.98 0 0);
+  --card: oklch(0.15 0.01 250);
+  --card-foreground: oklch(0.98 0 0);
+  --popover: oklch(0.15 0.01 250);
+  --popover-foreground: oklch(0.98 0 0);
+  --primary: oklch(0.98 0 0);
+  --primary-foreground: oklch(0.25 0.01 250);
+  --secondary: oklch(0.25 0.015 250);
+  --secondary-foreground: oklch(0.98 0 0);
+  --muted: oklch(0.25 0.015 250);
+  --muted-foreground: oklch(0.65 0.01 250);
+  --accent: oklch(0.3 0.02 220);
+  --accent-foreground: oklch(0.85 0.03 220);
+  --destructive: oklch(0.396 0.141 25.723);
+  --destructive-foreground: oklch(0.985 0 0);
+  --border: oklch(0.25 0.015 250);
+  --input: oklch(0.25 0.015 250);
+  --ring: oklch(0.55 0.01 250);
+  --chart-1: oklch(0.55 0.08 220);
+  --chart-2: oklch(0.6 0.06 200);
+  --chart-3: oklch(0.5 0.05 240);
+  --chart-4: oklch(0.65 0.07 210);
+  --chart-5: oklch(0.6 0.06 230);
+  --sidebar: oklch(0.2 0.01 250);
+  --sidebar-foreground: oklch(0.98 0 0);
+  --sidebar-primary: oklch(0.55 0.08 220);
+  --sidebar-primary-foreground: oklch(0.98 0 0);
+  --sidebar-accent: oklch(0.25 0.015 250);
+  --sidebar-accent-foreground: oklch(0.98 0 0);
+  --sidebar-border: oklch(0.25 0.015 250);
+  --sidebar-ring: oklch(0.55 0.01 250);
+}
+
+@theme inline {
+  --font-sans: "Inter", "Inter Fallback", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-mono: var(--font-jetbrains-mono), ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground antialiased;
+  }
+}
+
+/* ============================================================
+ * Homepage "instrument" theme — borrows the dashboard's design
+ * language (mono type, cool-gray paper, hairline borders, sharp
+ * geometry, brick-red accent) WITHOUT touching the dashboard.
+ * Scoped to the homepage root via `.home-instrument`, so it
+ * overrides the design tokens only for descendants. Values mirror
+ * the dashboard's light scheme (--sl-* in dashboard-v2.css).
+ * ============================================================ */
+.home-instrument {
+  --background: #ffffff;          /* white page — no beige/paper tint */
+  --foreground: #2a2f36;          /* --sl-text */
+  --card: #ffffff;
+  --card-foreground: #2a2f36;
+  --popover: #ffffff;
+  --popover-foreground: #2a2f36;
+  --primary: #a11515;             /* brick-red accent (--sl-ok) */
+  --primary-foreground: #ffffff;
+  --secondary: #f5f6f7;           /* faint cool gray (never warm) */
+  --secondary-foreground: #2a2f36;
+  --muted: #f3f4f6;
+  --muted-foreground: #5b5e66;    /* --sl-text-dim */
+  --accent: #eef0f3;              /* quiet cool hover/zone fill */
+  --accent-foreground: #1b1f25;   /* --sl-text-hi */
+  --destructive: #a11515;
+  --destructive-foreground: #ffffff;
+  --border: rgba(15, 17, 22, 0.13);   /* --sl-border */
+  --input: rgba(15, 17, 22, 0.13);
+  --ring: rgba(15, 17, 22, 0.30);
+  --radius: 0.125rem;             /* near-sharp, instrument corners */
+}
+
+/* Headings adopt the mono voice; body copy stays sans for readability. */
+.home-instrument h1,
+.home-instrument h2,
+.home-instrument h3 {
+  font-family: var(--font-mono);
+  letter-spacing: -0.015em;
+}
+
+/* Shared "eyebrow" / micro-label + chrome: uppercase, tracked mono, like the
+ * dashboard's .sl-label-xs and tab labels. Opt-in via these classes. */
+.home-instrument .eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;           /* 11px */
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted-foreground);
+}
+.home-instrument .mono-ui {
+  font-family: var(--font-mono);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* Documentation Styles */
+.docs-content {
+  @apply text-foreground;
+}
+
+.docs-content h2 {
+  @apply mt-12 mb-6 text-2xl font-semibold text-foreground border-b border-border pb-2;
+}
+
+.docs-content h3 {
+  @apply mt-8 mb-4 text-xl font-semibold text-foreground;
+}
+
+.docs-content h4 {
+  @apply mt-6 mb-3 text-lg font-medium text-foreground;
+}
+
+.docs-content p {
+  @apply mb-6 text-base leading-7 text-muted-foreground;
+}
+
+.docs-content ul,
+.docs-content ol {
+  @apply mb-6 ml-6 space-y-2;
+}
+
+.docs-content ul {
+  @apply list-disc;
+}
+
+.docs-content ol {
+  @apply list-decimal;
+}
+
+.docs-content li {
+  @apply text-base leading-7 text-muted-foreground;
+}
+
+.docs-content li::marker {
+  @apply text-foreground/60;
+}
+
+.docs-content code {
+  @apply px-1.5 py-0.5 text-sm font-mono bg-muted text-foreground rounded border border-border;
+}
+
+.docs-content pre {
+  @apply mb-6 p-4 bg-muted border border-border rounded-sm overflow-x-auto;
+}
+
+.docs-content pre code {
+  @apply p-0 bg-transparent border-0 text-sm;
+}
+
+.docs-content a {
+  @apply text-foreground underline underline-offset-4 hover:text-foreground/80 transition-colors;
+}
+
+.docs-content strong {
+  @apply font-semibold text-foreground;
+}
+
+.docs-content blockquote {
+  @apply pl-4 border-l-4 border-border italic text-muted-foreground;
+}
+
+.docs-content table {
+  @apply w-full mb-6 border-collapse;
+}
+
+.docs-content th {
+  @apply px-4 py-2 text-left font-semibold text-foreground border-b-2 border-border bg-muted/50;
+}
+
+.docs-content td {
+  @apply px-4 py-2 text-muted-foreground border-b border-border;
+}
+
+.docs-content hr {
+  @apply my-8 border-t border-border;
+}

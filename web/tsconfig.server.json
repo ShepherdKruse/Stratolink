@@ -1,0 +1,13 @@
+{
+  "extends": "./tsconfig.worker.json",
+  "compilerOptions": {
+    "allowJs": true,
+    "checkJs": false,
+    "allowImportingTsExtensions": true
+  },
+  "include": [
+    "server/**/*.ts",
+    "api/**/*.ts",
+    "lib/ttn/*.ts"
+  ]
+}

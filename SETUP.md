@@ -14,38 +14,42 @@ These values are obtained from The Things Network (TTN) console when you registe
 
 ## Step 2: Configure Supabase Environment Variables
 
-1. Create a Supabase project at https://supabase.com
-2. Copy `web/.env.local.example` to `web/.env.local`
-3. Fill in your Supabase credentials:
-   - `NEXT_PUBLIC_SUPABASE_URL`: Found in Project Settings > API
-   - `NEXT_PUBLIC_SUPABASE_ANON_KEY`: Found in Project Settings > API
+1. Use the intended Supabase project and copy `web/.env.example` to `web/.env.local`.
+2. Set `VITE_SUPABASE_URL` and `VITE_SUPABASE_PUBLISHABLE_KEY` for browser authentication.
+3. Set `SUPABASE_URL` and `SUPABASE_SERVICE_ROLE_KEY` for server database access. Never prefix the service role key with `VITE_` or `NEXT_PUBLIC_`.
+4. Set `NEXT_PUBLIC_MAPBOX_TOKEN`, the exact deployed `SITE_URL`, and `BLOB_READ_WRITE_TOKEN` for stored forecasts. Add explicit local or preview origins through `AUTH_ALLOWED_ORIGINS` when needed.
+
+See [web/README.md](web/README.md#deployment) for the full environment contract. The dashboard reads telemetry through the website API; the publishable key is used only for authentication.
 
 ## Step 3: Install Web Dependencies
 
-Dependencies have been installed. If you need to reinstall:
+Use Node.js 22 and install the locked dependencies:
 
 ```bash
 cd web
-npm install
+ONNXRUNTIME_NODE_INSTALL=skip npm ci
 ```
 
-## Step 4: Create Supabase Database Schema
+## Step 4: Prepare the Database and Authentication
 
-1. Open your Supabase project dashboard
-2. Navigate to SQL Editor
-3. Copy and paste the contents of `web/lib/supabase/schema.sql`
-4. Execute the SQL to create the telemetry table and indexes
+1. Review the existing database and the additive migrations in `supabase/migrations/`. Apply only the migrations that belong to this rollout. Do not run the historical `web/lib/supabase/` chain as an automatically inferred migration history; it contains duplicate version names.
+2. Configure a GitHub OAuth application with the callback URL supplied by Supabase, then add its credentials to the project's GitHub auth provider.
+3. Add the exact site callback URL, `https://your-domain/dashboard`, to Supabase's redirect allowlist. Add each local callback explicitly, using the local server's actual origin and `/dashboard` path.
+4. Run `npm run verify` in `web`. Run `npm run test:backend` with Docker to check the schema and API against a disposable local database.
+5. Keep `supabase/cutover/private_raw_data.sql` separate from the initial migration run. Apply it after the new deployed telemetry, account and ingestion endpoints pass their checks. Applying it while the old site still depends on raw-table reads would interrupt that site.
+
+The full deployment sequence is in [web/README.md](web/README.md#deployment). Running the old schema file alone is not sufficient to configure this backend.
 
 ## Additional Configuration
 
 ### TTN Webhook Setup
 
-1. In The Things Network console, navigate to your application
-2. Go to Integrations > Webhooks
-3. Add a new webhook with:
-   - Webhook ID: `stratolink-webhook`
-   - Webhook URL: `https://your-vercel-domain.com/api/ttn-webhook`
-   - Format: JSON
+1. Sign in with GitHub on the dashboard and register the balloon.
+2. In **Your balloons > Connect TTN**, enter the TTN cluster, application ID and that regional device's DevEUI. Supply an application API key with permission to read end devices. It is used for verification, then discarded.
+3. In TTN, open **Integrations > Webhooks** and add a custom JSON webhook. Copy the URL and `Authorization` header returned by the dashboard, and enable uplink messages.
+4. Send a packet and confirm a received timestamp. Add each additional regional identity to the same balloon.
+
+The webhook secret is shown once. Reconnecting replaces that network connection's secret, so update its TTN webhook before expecting new packets.
 
 ### Running the Development Server
 
@@ -54,7 +58,13 @@ cd web
 npm run dev
 ```
 
-The dashboard will be available at http://localhost:3000
+Open the local URL printed by Vite, then `/dashboard`. The default development URL is `http://127.0.0.1:5173/dashboard`. Add that exact origin to `AUTH_ALLOWED_ORIGINS` and its `/dashboard` callback to Supabase if testing sign-in there.
+
+### Deploying the Website
+
+Use Vercel Root Directory `web`, the Vite preset and output directory `dist`. Run `npm run verify` before deploying. Configure the server environment and complete the database cutover described in [web/README.md](web/README.md#deployment).
+
+The scheduled forecast worker remains in `.github/workflows/gfs-ingest.yml`. Confirm a successful worker run and a readable stored forecast before retiring any old scheduler.
 
 ### Building Firmware
 
