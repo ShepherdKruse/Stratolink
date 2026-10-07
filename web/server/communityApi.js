@@ -99,6 +99,9 @@ export function createCommunityApi({ createDb = createServerSupabase, verifyDevi
         if (!origin || !allowed.includes(origin) || request.headers.get('sec-fetch-site') === 'cross-site') return reply(403, { error: 'Request origin not allowed' });
         if (!/^application\/json(?:\s*;|$)/i.test(request.headers.get('content-type') || '')) return reply(415, { error: 'Use application/json' });
       }
+      if ((registerRoute || detail?.[2]) && environment.COMMUNITY_REGISTRATION_ENABLED !== 'true') {
+        return reply(503, { error: 'Registration unavailable' });
+      }
       const db = createDb();
       const auth = await db.auth.getUser(bearer);
       if (auth.error || !auth.data?.user) return reply(401, { error: 'Sign in with GitHub to continue' });

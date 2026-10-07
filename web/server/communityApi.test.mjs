@@ -5,13 +5,41 @@ const uid='00000000-0000-4000-8000-000000000001';
 const bid='balloon-00000000-0000-4000-8000-000000000010';
 const user={id:uid,identities:[{provider:'github',identity_data:{sub:'123456',user_name:'test-owner'}}]};
 const balloon={id:bid,ownerId:uid,callsign:'Test',status:'planned',devEui:'1234567890ABCDEF',connections:[],connectionStatus:'pending'};
-function fixture({authUser=user,owned=[balloon],verifyDevice,rate=true,rpcError=null}={}) {
+function fixture({authUser=user,owned=[balloon],verifyDevice,rate=true,rpcError=null,environment={}}={}) {
  const calls=[];
+ let databaseCalls=0;
  const db={auth:{async getUser(){return {data:{user:authUser},error:null};}},async rpc(name,args){calls.push({name,args});return {data:name==='community_account'?owned:name==='community_rate_limit'?rate:balloon,error:rpcError};}};
- const api=createCommunityApi({createDb:()=>db,environment:{SITE_URL:'https://stratolink.org',AUTH_ALLOWED_ORIGINS:'http://127.0.0.1:4173'},verifyDevice});
+ const api=createCommunityApi({createDb:()=>{databaseCalls++;return db;},environment:{SITE_URL:'https://stratolink.org',AUTH_ALLOWED_ORIGINS:'http://127.0.0.1:4173',COMMUNITY_REGISTRATION_ENABLED:'true',...environment},verifyDevice});
  const request=(path,method='GET',body,headers={})=>api(new Request(`http://localhost${path}`,{method,headers:{Authorization:'Bearer test-token-with-enough-characters',Origin:'https://stratolink.org','Content-Type':'application/json',...headers},...(body!==undefined?{body:typeof body==='string'?body:JSON.stringify(body)}:{})}));
- return {request,calls};
+ return {request,calls,get databaseCalls(){return databaseCalls;}};
 }
+test('registration and regional connection stay closed unless explicitly enabled, without database or TTN work',async()=>{
+ for(const enabled of [undefined,'','false','TRUE','1',true]){
+  let verified=false;
+  const f=fixture({environment:{COMMUNITY_REGISTRATION_ENABLED:enabled},verifyDevice:()=>{verified=true;}});
+  for(const [path,body] of [
+   ['/api/balloons',{callsign:'Test',devEui:balloon.devEui}],
+   [`/api/balloons/${bid}/connections`,{cluster:'eu1',applicationId:'my-app',deviceEui:balloon.devEui,apiKey:'TTN-key-private-never-stored'}],
+  ]){
+   const response=await f.request(path,'POST',body);
+   assert.equal(response.status,503);
+   assert.deepEqual(await response.json(),{error:'Registration unavailable'});
+   assert.equal(response.headers.get('Cache-Control'),'no-store');
+  }
+  assert.equal(f.databaseCalls,0);
+  assert.deepEqual(f.calls,[]);
+  assert.equal(verified,false);
+ }
+});
+test('disabled registration preserves account reads, owned status changes and request security checks',async()=>{
+ const f=fixture({environment:{COMMUNITY_REGISTRATION_ENABLED:undefined}});
+ assert.equal((await f.request('/api/account')).status,200);
+ assert.equal((await f.request(`/api/balloons/${bid}`,'PATCH',{status:'landed'})).status,200);
+ assert.ok(f.calls.some(call=>call.name==='update_community_balloon'));
+ assert.equal((await f.request('/api/balloons','POST',{}, {Authorization:''})).status,401);
+ assert.equal((await f.request('/api/balloons','POST',{}, {Origin:'https://evil.example'})).status,403);
+ assert.equal((await f.request('/api/balloons','GET')).status,405);
+});
 test('GitHub identity is verified identity data, never editable metadata',()=>{
  assert.equal(githubAccount({id:uid,user_metadata:{user_name:'admin',provider_id:'1'}}),null);
  assert.equal(githubAccount({...user,is_anonymous:true}),null);

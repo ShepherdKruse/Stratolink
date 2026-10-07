@@ -27,12 +27,13 @@ Check these settings in the existing project's Preview environment before rebuil
 - Browser authentication needs `VITE_SUPABASE_URL` and `VITE_SUPABASE_PUBLISHABLE_KEY`. The old `NEXT_PUBLIC_SUPABASE_URL` and `NEXT_PUBLIC_SUPABASE_ANON_KEY` names do not configure the Vite auth client.
 - `SITE_URL` controls both allowed authenticated requests and generated webhook URLs. The old `NEXT_PUBLIC_APP_URL` is not read. Production uses `https://stratolink.org`. For restricted preview UI/account review, keep that production value and add only the exact preview origin to `AUTH_ALLOWED_ORIGINS`. The local review configuration similarly permits explicit localhost origins while retaining the production webhook URL.
 - Add the exact preview `/dashboard` callback to Supabase's redirect allowlist. Add another origin to `AUTH_ALLOWED_ORIGINS` only if that additional preview hostname is intentionally being tested.
+- Leave `COMMUNITY_REGISTRATION_ENABLED` unset or `false` initially. After GitHub sign-in is configured, set it to `true` only in the protected Preview environment and redeploy for owner registration tests. The switch controls new registrations and TTN connection changes. Account reads and owner status changes do not require it.
 
 The existing Mapbox, server Supabase and Blob variable names remain compatible; confirm their Preview scopes. Changes to public build variables require a new deployment.
 
 Keep preview protection in place and grant access only to the reviewers who need it. A protected preview cannot receive ordinary TTN webhook requests. Preview UI/account checks are separate from live packet delivery: do not redirect real production hooks to a preview, reconnect official devices for testing, or overwrite their mappings. With the production `SITE_URL`, any generated webhook points to production, where the old handler remains active until cutover. Full live TTN delivery through the new handler has not been tested.
 
-Testing a separate preview webhook would require its own approved access arrangement and test identity, with `SITE_URL` set to that preview's exact HTTPS origin. It is not required for the current owner review. Keep public community registration gated until strict production ingress and the raw-data permission cutover are both verified.
+Testing a separate preview webhook would require its own approved access arrangement and test identity, with `SITE_URL` set to that preview's exact HTTPS origin. It is not required for the current owner review. Keep the Production registration switch unset or `false` until strict production ingress and the raw-data permission cutover are both verified. A successful preview test is not permission to enable the Production switch.
 
 ## Authentication
 
@@ -56,8 +57,9 @@ Verify GitHub sign-in, sign-out, selected-balloon return, registration, regional
 2. Keep Root Directory `web`. Use the build configuration in `vercel.json`, Node 22, and the public/server variables documented in `README.md`. Retain the shared private forecast Blob token.
 3. Review the existing preview, redeploying after any environment changes. Confirm static pages, native API functions, semantic search, privacy filtering, and stored forecasts in Vercel's runtime.
 4. Confirm all TTN headers and scoped identity lookups still match before replacing ingress. Do not replay old packets into the live archive just to test the new handler; dry-run its insert and receipt adapters instead.
-5. Promote the verified site when its content is ready, then apply `../supabase/cutover/private_raw_data.sql`. Verify direct raw reads are denied and public API reads still work. Run this before opening community registration publicly.
+5. Confirm `COMMUNITY_REGISTRATION_ENABLED` is unset or `false` in Production. Deploy the verified site with strict ingress when its content is ready, then apply `../supabase/cutover/private_raw_data.sql`. Verify direct raw reads are denied, public API reads still work, and scoped ingress accepts the intended identities. Registration and TTN connection changes remain disabled during this sequence.
 6. Verify the existing forecast Actions secrets and scheduled worker. Disable any external caller of the retired compute endpoint.
+7. After those checks pass, set `COMMUNITY_REGISTRATION_ENABLED=true` in Production and redeploy. Verify the owner flow before announcing public registration. Keep preview-only origins out of Production unless they are still explicitly required.
 
 The private database backup and TTN header rollback records are retained locally outside the repository. Coordinate header restoration with a compatible ingress version; the new handler rejects missing or revoked tokens.
 

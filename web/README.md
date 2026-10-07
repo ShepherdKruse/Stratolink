@@ -37,6 +37,7 @@ Server configuration:
 
 - `SITE_URL`: the exact website origin used for authenticated requests.
 - `AUTH_ALLOWED_ORIGINS`: optional comma-separated origins for local or preview authentication. Keep this explicit; do not allow every preview domain.
+- `COMMUNITY_REGISTRATION_ENABLED`: defaults to disabled and requires exactly `true` to enable new registrations and TTN connections. Keep production disabled until strict ingress and the raw-data permission cutover are verified. Account reads and owned status changes remain available. See `DEPLOYMENT.md` for controlled preview testing.
 - `SUPABASE_URL`: the database project's HTTPS URL.
 - `SUPABASE_SERVICE_ROLE_KEY`: a server-only database key. `SUPABASE_SERVER_KEY` is accepted as an alternative name.
 - `BLOB_READ_WRITE_TOKEN`: the existing private forecast store token.

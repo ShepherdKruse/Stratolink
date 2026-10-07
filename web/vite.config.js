@@ -60,7 +60,7 @@ function dashboardRoute(server) {
 export default defineConfig(({ mode }) => {
   writeHomeInserts();
   const env = loadEnv(mode, process.cwd(), '');
-  for (const name of ['SUPABASE_URL', 'SUPABASE_SERVER_KEY', 'SUPABASE_SERVICE_ROLE_KEY', 'NEXT_PUBLIC_SUPABASE_URL', 'TTN_WEBHOOK_SECRET', 'BLOB_READ_WRITE_TOKEN', 'SITE_URL', 'AUTH_ALLOWED_ORIGINS']) {
+  for (const name of ['SUPABASE_URL', 'SUPABASE_SERVER_KEY', 'SUPABASE_SERVICE_ROLE_KEY', 'NEXT_PUBLIC_SUPABASE_URL', 'TTN_WEBHOOK_SECRET', 'BLOB_READ_WRITE_TOKEN', 'SITE_URL', 'AUTH_ALLOWED_ORIGINS', 'COMMUNITY_REGISTRATION_ENABLED']) {
     if (!process.env[name] && env[name]) process.env[name] = env[name];
   }
   return {
