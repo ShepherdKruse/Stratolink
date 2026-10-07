@@ -201,6 +201,8 @@ const PATH_PICK_MAX_KM = 120;
 
 const MAP_STYLE_LIGHT = 'mapbox://styles/mapbox/light-v11';
 const MAP_STYLE_DARK = 'mapbox://styles/mapbox/dark-v11';
+// URL-restricted tokens need the site origin, never the dashboard or QR URL.
+const mapRequest = (url: string) => ({ url, referrerPolicy: 'origin' as const });
 
 function isWebGLAvailable(): boolean {
     if (typeof window === 'undefined') return false;
@@ -913,6 +915,7 @@ export default function V2MissionMap({
                  * styledata. */
                 key={projection}
                 mapboxAccessToken={token}
+                transformRequest={mapRequest}
                 /* Restore the pre-teardown camera on a hidden-tab rebuild (#47);
                  * `initialViewState` is only read at mount. */
                 initialViewState={lastViewRef.current ?? initialView}

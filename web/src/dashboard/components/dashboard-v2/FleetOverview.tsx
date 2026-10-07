@@ -4,7 +4,7 @@ import type { DeviceSummary } from './useTelemetry';
 import type { TelemetryRow } from './atoms';
 import { OfficialBadge, BalloonOwner } from './BalloonIdentity';
 import { registeredStatus } from '@/lib/telemetry/fleetFilters';
-import { balloonName, rowAtTime } from '@/lib/telemetry/fleetPlayback';
+import { altitudeAtTime, balloonName, rowAtTime } from '@/lib/telemetry/fleetPlayback';
 
 export const BALLOON_COLORS = ['#a23a2d', '#476f83', '#7a7650', '#806682'];
 export const balloonColor = (id: string) => BALLOON_COLORS[id === 'stratolink-2' ? 0 : id === 'stratolink-3' ? 1 : [...id].reduce((sum,c) => sum+c.charCodeAt(0),0) % BALLOON_COLORS.length];
@@ -29,8 +29,7 @@ export default function FleetOverview({ devices, rowsByDevice, loading, error, s
                 const awaitingFlightData = latest && device.launchedAt != null && latest.t < device.launchedAt;
                 const status = registeredStatus(device.status) ?? (waiting ? 'Loading telemetry' : beforeFlight ? 'No data yet' : !row ? 'No telemetry' : awaitingFlightData ? 'Missing' : scrubT !== null ? 'Recorded telemetry' : device.status === 'landed' || device.status === 'recovered'
                     ? 'Landed' : latest && Date.now() - latest.t < 15 * 60_000 ? 'Transmitting' : 'No recent signal');
-                const altitudeRow = row ? rows.filter(sample => sample.t <= row.t && (sample.presAlt != null || sample.alt != null)).at(-1) : null;
-                const altitude = altitudeRow?.presAlt ?? altitudeRow?.alt;
+                const altitude = row ? altitudeAtTime(rows, row.t) : null;
                 const metrics = [
                     { label: 'Altitude', value: altitude != null ? Math.round(altitude).toLocaleString('en-US') : '-', unit: altitude != null ? 'm' : '' },
                     { label: 'Storage', value: row?.batt != null ? row.batt.toFixed(2) : '-', unit: row?.batt != null ? 'V' : '' },
