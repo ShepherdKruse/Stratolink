@@ -47,8 +47,8 @@ Global pico-balloon telemetry system using the RAK3172 LoRaWAN module with a web
 │   ├── /lib                   # TTN decoder and forecast worker
 │   └── package.json
 ├── /supabase
-│   ├── /migrations            # Reviewed additive database migrations
-│   └── /cutover               # Raw-data access restrictions for deployment
+│   ├── /migrations            # Applied schema and raw-data privacy migrations
+│   └── /platform-hardening    # Separate extension-owner permission changes
 ├── .gitignore
 └── setup_repo.sh
 ```
@@ -176,7 +176,7 @@ The telemetry table stores:
 - Environmental data (temperature, pressure)
 - Raw payload data
 
-Historical schema and migration files remain in `web/lib/supabase/`. New migrations in `supabase/migrations/` add owned balloon registrations, verified regional identities and scoped webhook credentials. The historical chain is not a complete fresh-project installer and contains duplicate migration version names. Follow the deployment sequence in [web/README.md](web/README.md#deployment).
+Historical schema and migration files remain in `web/lib/supabase/`. Migrations in `supabase/migrations/` add owned balloon registrations, verified regional identities and scoped webhook credentials. The applied `20261007225324_private_raw_data_cutover.sql` migration restricts raw application data to the server. The historical chain is not a complete fresh-project installer and contains duplicate migration version names. Follow the deployment sequence in [web/README.md](web/README.md#deployment).
 
 ## Security Notes
 

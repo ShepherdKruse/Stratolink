@@ -1,6 +1,6 @@
 # Vercel settings for the site release
 
-Use the existing `shepherdkruses-projects/v0-strato-link-marketing-site` project. PR [#77](https://github.com/ShepherdKruse/Stratolink/pull/77) contains the new site. Supabase migrations and GitHub OAuth are already configured.
+Use the existing `shepherdkruses-projects/v0-strato-link-marketing-site` project. PR [#77](https://github.com/ShepherdKruse/Stratolink/pull/77) is merged and the new site is live at [stratolink.org](https://stratolink.org). Supabase migrations, the raw-data privacy cutover and production GitHub OAuth are verified. Production registration is still disabled pending the environment update and redeploy below.
 
 ## 1. Add these server variables
 
@@ -10,7 +10,7 @@ In **Settings > Environment Variables**:
 | --- | --- | --- |
 | `SITE_URL` | `https://stratolink.org` | `https://stratolink.org` |
 | `AUTH_ALLOWED_ORIGINS` | `https://v0-strato-link-marketing-sit-git-ccbef2-shepherdkruses-projects.vercel.app` | Leave unset |
-| `COMMUNITY_REGISTRATION_ENABLED` | `true` | `false` until the final cutover is verified |
+| `COMMUNITY_REGISTRATION_ENABLED` | `true` | Set `true` and redeploy; the privacy cutover is verified |
 | `PAYLOAD_STAFF_USER_IDS` | Teddy's verified Supabase user UUID | Same UUID |
 | `PAYLOAD_CLAIM_COOKIE_SECRET` | Generate a new secret | Generate a different new secret |
 
@@ -28,12 +28,12 @@ Retain the existing Supabase server credential, public Supabase configuration, M
 
 ## 2. Redeploy and share the preview
 
-Redeploy the latest commit on `alpha/site-backend` after saving the variables. From that deployment, choose **Share > Anyone with the link** and send Teddy the generated link. Keep deployment protection enabled. Use the branch URL above for review; a different hostname requires matching allowed-origin and Supabase callback settings.
+For further preview review, redeploy the review branch after saving its Preview variables. From that deployment, choose **Share > Anyone with the link** and send Teddy the generated link. Keep deployment protection enabled. Use the branch URL above for that review; a different hostname requires matching allowed-origin and Supabase callback settings.
 
 This enables website/account review. Leave real TTN webhooks pointed at production. A protected preview cannot receive normal TTN deliveries.
 
 ## 3. Production handoff
 
-After preview verification, merging PR #77 into `main` triggers production deployment. Keep Production registration disabled during that deployment and the database privacy cutover. After the new server endpoints and scoped ingress pass their checks, set `COMMUNITY_REGISTRATION_ENABLED=true` in Production and redeploy. Verify that old deployment URLs and aliases are protected or retired so they cannot continue serving the old webhook or unmasked data.
+The production site and database privacy cutover are complete. Confirm the Production variables above, set `COMMUNITY_REGISTRATION_ENABLED=true`, and redeploy the current `main` deployment. Then verify registration, reservation, owner status changes, a dedicated TTN connection and a QR claim before announcing registration. Production checks have established unsigned-webhook rejection, not a completed live TTN delivery. Verify that old deployment URLs and aliases are protected or retired so they cannot continue serving the old webhook or unmasked data.
 
 The detailed verification and cutover sequence is in [DEPLOYMENT.md](DEPLOYMENT.md).
