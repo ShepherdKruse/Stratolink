@@ -73,3 +73,5 @@ Further targeted changes:
 - Combine six terrain fill layers into two, retaining the level filters, band ordering, per-band opacity and zoom fades. This reduces repeated tile layout/draw work without changing the terrain palette.
 
 The compiled build and 120 tests pass. Local desktop/mobile map checks report no rendering errors. Production PageSpeed follow-up is still pending for this pass.
+
+Selected balloons now take the next available history slot ahead of queued background fleet loads. The fleet and detail views still share one request, and the four-request limit remains in force. A regression test verifies promotion, request sharing and resumption of the background queue.

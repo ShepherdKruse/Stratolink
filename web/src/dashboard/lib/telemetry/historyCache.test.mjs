@@ -100,3 +100,24 @@ test('large fleets cap concurrent histories and a failed request releases its sl
     assert.equal(results.filter(result => result.status === 'fulfilled').length, 99);
     assert.equal(results[3].status, 'rejected');
 });
+
+test('selecting a queued balloon gets the next slot without a duplicate request', async () => {
+    const started = [];
+    const finishes = new Map();
+    const loader = createHistoryLoader(new Map(), id => {
+        started.push(id);
+        return new Promise(resolve => finishes.set(id, () => resolve([{ t: 100 }])));
+    }, 1);
+    const requests = ['a', 'b', 'c'].map(deviceId => loader.load({ deviceId, since: 0 }));
+    const selected = loader.load({ deviceId: 'c', since: 0 }, { prioritize: true });
+    assert.equal(selected, requests[2]);
+    assert.deepEqual(started, ['a']);
+    finishes.get('a')();
+    await requests[0];
+    assert.deepEqual(started, ['a', 'c']);
+    finishes.get('c')();
+    await selected;
+    assert.deepEqual(started, ['a', 'c', 'b']);
+    finishes.get('b')();
+    await Promise.all(requests);
+});
