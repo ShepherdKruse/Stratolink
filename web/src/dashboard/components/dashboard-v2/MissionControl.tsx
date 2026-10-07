@@ -15,7 +15,7 @@
  *
  * Data discipline: every value is a real Supabase row or '-'. No placeholders.
  */
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { lazy, Suspense, useEffect, useMemo, useRef, useState } from 'react';
 import { flushSync } from 'react-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowRight, faChevronDown, faChevronUp } from '@fortawesome/free-solid-svg-icons';
@@ -24,7 +24,7 @@ import { useTelemetry, useFleetHistory, type DeviceSummary } from './useTelemetr
 import { useForecastPath, type UseForecastPathResult } from './useForecastPath';
 import { useElementSize, fmtPressure, fmtAltitudeM } from './shared';
 import { useIsMobile } from '@/hooks/use-mobile';
-import V2MissionMap, { type V2Balloon, type V2FlightPoint, type V2Gateway } from './V2MissionMap';
+import type { V2Balloon, V2FlightPoint, V2Gateway } from './V2MissionMap';
 import { useDashboardTheme } from './dashboard-theme';
 import TelemetryV3Panel from './telemetry-v3/TelemetryV3Panel';
 import { detectLaunchT } from '@/lib/telemetry/launchDetect';
@@ -41,6 +41,9 @@ import { useCommunity } from './community-account';
 import { mergeRegisteredBalloons } from '@/lib/community/types';
 import { defaultFleetFilters, filterFleet } from '@/lib/telemetry/fleetFilters';
 import { flightTrack } from '@/lib/telemetry/flightTrack';
+import { withLatestTelemetry } from '@/lib/telemetry/fleetSummary';
+
+const V2MissionMap = lazy(() => import('./V2MissionMap'));
 
 interface FlightSummary {
     /** Span from first to last loaded packet, ms. Null when no data. */
@@ -66,17 +69,19 @@ export default function MissionControlScreen() {
     const initialSelectedId = searchParams.get('device');
 
     const {
-        devices: registryDevices, selectedId, setSelectedId, rows, refetch,
-    } = useTelemetry({ initialSelectedId, autoSelect: false });
+        devices: registryDevices, selectedId, setSelectedId, rows, loading: registryLoading, refetch,
+    } = useTelemetry({ initialSelectedId });
     const community = useCommunity();
     useEffect(() => { if (community.focusDevice) setSelectedId(community.focusDevice); }, [community.focusDevice, setSelectedId]);
-    const devices = useMemo(() => mergeRegisteredBalloons(registryDevices, community.balloons), [registryDevices, community.balloons]);
+    const fleetHistory = useFleetHistory(registryDevices, selectedId === null);
+    const devices = useMemo(() => mergeRegisteredBalloons(registryDevices.map(device =>
+        withLatestTelemetry(device, device.id === selectedId ? rows : fleetHistory.rowsByDevice[device.id]),
+    ), community.balloons), [registryDevices, community.balloons, fleetHistory.rowsByDevice, selectedId, rows]);
     const [filters, setFilters] = useState(defaultFleetFilters);
     useEffect(() => { if (community.revision) refetch(); }, [community.revision, refetch]);
     useEffect(() => { if (!community.account) setFilters(current => ({...current,mine:false})); }, [community.account]);
     const filteredDevices = useMemo(() => filterFleet(devices, filters, community.user?.id ?? null, Date.now()), [devices,filters,community.user?.id]);
     const filteredIds = new Set(filteredDevices.map(device => device.id));
-    const fleetHistory = useFleetHistory(registryDevices, selectedId === null);
 
     const [fleetScrubT, setFleetScrubT] = useState<number | null>(null);
     const transitionRef = useRef<ViewTransition | null>(null);
@@ -300,13 +305,13 @@ export default function MissionControlScreen() {
 
     return (
         <div className="sl-app fleet-app" data-theme={theme}>
-            <main className="fleet-layout" data-detail={!isFleet}>
+            <main className="fleet-layout" data-detail={!isFleet} data-loading={registryLoading}>
                 <aside className="tlm-panel dashboard-panel fleet-panel">
                     <DashboardHeader onBack={isFleet ? undefined : showFleet} />
                     <CommunityPanel />
                     {isFleet ? (
                         <><FleetFilters value={filters} onChange={setFilters} signedIn={Boolean(community.account)} count={filteredDevices.length} />
-                        <FleetOverview devices={filteredDevices} {...fleetHistory} scrubT={fleetScrubT} onSelect={handleSelectDevice} /></>
+                        <FleetOverview devices={filteredDevices} {...fleetHistory} loading={registryLoading || fleetHistory.loading} scrubT={fleetScrubT} onSelect={handleSelectDevice} /></>
                     ) : (
                         <div className="dashboard-detail-content tlm-scroll" style={{ viewTransitionName: balloonTransitionName(selectedId) }}>
                             <TelemetryV3Panel {...panelProps} variant={isMobile ? 'summary' : 'full'} />
@@ -318,7 +323,7 @@ export default function MissionControlScreen() {
                     </footer>
                 </aside>
                 <div className="dashboard-map fleet-map">
-                    <MapColumn
+                    {!registryLoading && <MapColumn
                         isFleet={isFleet}
                         fleetBalloons={shownFleet}
                         fleetFitBalloons={portalPreview ? fleetFitBalloons : fleetFitBalloons.filter(balloon => filteredIds.has(balloon.id))}
@@ -338,7 +343,7 @@ export default function MissionControlScreen() {
                         noReading={noReading}
                         colorScheme={theme}
                         onPickTime={pickTime}
-                    />
+                    />}
                     <div className="fleet-timeline">
                         <Timeline
                             visibleRows={isFleet ? fleetRows : visibleRows}
@@ -869,7 +874,7 @@ function MapColumn({
 
     return (
         <div style={{ flex: 1, position: 'relative', minHeight: 0, minWidth: 0, overflow: 'hidden' }}>
-            <V2MissionMap
+            <Suspense fallback={null}><V2MissionMap
                 showGatewayCoverage={!portalPreview && showGateways}
                 showReceivingStations={showReceivingStations}
                 showDayNight={!portalPreview && showDayNight}
@@ -907,7 +912,7 @@ function MapColumn({
                 wideZoom={isMobile ? 0.8 : 1.5}
                 pickPath={pickPath}
                 onPickTime={onPickTime}
-            />
+            /></Suspense>
 
             <MapLegend
                 fleet={isFleet}

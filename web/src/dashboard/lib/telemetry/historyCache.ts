@@ -9,9 +9,24 @@ interface TimedRow { t: number }
 export function createHistoryLoader<Row extends TimedRow>(
     rowsByDevice: Map<string, Row[]>,
     fetchRows: (deviceId: string, since: number) => Promise<Row[]>,
+    concurrency = 4,
 ) {
+    if (!Number.isInteger(concurrency) || concurrency < 1) throw new Error('Invalid history concurrency');
     const windows = new Map<string, { since: number; actualSince: number }>();
     const pending = new Map<string, { since: number; token: symbol; promise: Promise<Row[]> }>();
+    let running = 0;
+    const waiting: Array<() => void> = [];
+
+    async function query(deviceId: string, since: number) {
+        if (running >= concurrency) await new Promise<void>(resolve => waiting.push(resolve));
+        else running++;
+        try { return await fetchRows(deviceId, since); }
+        finally {
+            const next = waiting.shift();
+            if (next) next();
+            else running--;
+        }
+    }
 
     const peek = ({ deviceId, since }: HistoryWindow): Row[] | undefined =>
         windows.get(deviceId)?.since === since ? rowsByDevice.get(deviceId) : undefined;
@@ -29,12 +44,12 @@ export function createHistoryLoader<Row extends TimedRow>(
         const token = Symbol();
         const request = (async () => {
             let earliest = actualSince;
-            let received = await fetchRows(deviceId, querySince);
+            let received = await query(deviceId, querySince);
             /* Some registry launch times are later than every stored packet.
              * Keep those real records available without rewriting the registry. */
             if (cached === undefined && received.length === 0 && since > 0) {
                 earliest = 0;
-                received = await fetchRows(deviceId, earliest);
+                received = await query(deviceId, earliest);
             }
 
             const byTime = new Map((cached ?? []).map(row => [row.t, row]));

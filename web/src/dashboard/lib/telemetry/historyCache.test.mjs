@@ -81,3 +81,22 @@ test('an empty fallback is cached and does not repeat the launch query on each p
     await loader.load(window, { refresh: true });
     assert.deepEqual(calls, [100, 0, 0]);
 });
+
+test('large fleets cap concurrent histories and a failed request releases its slot', async () => {
+    let running = 0;
+    let peak = 0;
+    const loader = createHistoryLoader(new Map(), async (id) => {
+        peak = Math.max(peak, ++running);
+        await new Promise(resolve => setTimeout(resolve, 1));
+        running--;
+        if (id === 'balloon-3') throw new Error('Offline');
+        return [{ t: 100 }];
+    }, 4);
+    const results = await Promise.allSettled(Array.from({ length: 100 }, (_, index) =>
+        loader.load({ deviceId: `balloon-${index}`, since: 0 }),
+    ));
+    assert.equal(peak, 4);
+    assert.equal(running, 0);
+    assert.equal(results.filter(result => result.status === 'fulfilled').length, 99);
+    assert.equal(results[3].status, 'rejected');
+});

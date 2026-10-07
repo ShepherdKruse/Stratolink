@@ -18,6 +18,8 @@
 .fleet-app { height: 100dvh; overflow: clip; }
 .fleet-layout { position: relative; display: grid; grid-template-columns: minmax(360px,420px) minmax(0,1fr); height: 100%; }
 .fleet-panel { display: flex; flex-direction: column; }
+.fleet-layout[data-loading="true"] .fleet-timeline,
+.fleet-layout[data-loading="true"] .dashboard-footer { visibility: hidden; }
 .fleet-cards { padding: 14px var(--dashboard-gutter) 24px; overflow-y: auto; min-height: 0; }
 .dashboard-detail-content { --telemetry-gutter: 0px; flex: 1; min-height: 0; margin: 0 var(--dashboard-gutter) 14px; overflow-y: auto; background: var(--t-panel); }
 .dashboard-detail-content .dashboard-device-title { margin-inline: 0; }
