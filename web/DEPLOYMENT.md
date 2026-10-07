@@ -12,11 +12,23 @@ Use `ShepherdKruse/Stratolink`, Supabase project `iazmnyyfsobucndqncgw`, and Ver
 - Stratolink 3's AS identity needs confirmation before adding that physical-device mapping.
 - The Stratolink GitHub OAuth app exists at `https://github.com/settings/applications/3910509`, with only the shared Supabase callback registered.
 
-The new website is deployed as a preview in the existing Vercel project. Production remains unchanged. The original dashboard still needs direct telemetry reads, so the final raw-data permission change is staged separately.
+The new website is deployed as a preview in the existing Vercel project. The production website remains unchanged. The original dashboard still needs direct telemetry reads, so the final raw-data permission change is staged separately.
+
+## Verified on October 7, 2026
+
+- GitHub authentication is enabled in the shared Supabase project. The approved app returned to the local dashboard through PKCE, preserved the selected Stratolink 3 view, and displayed the verified GitHub account. Sign-out and repeat sign-in passed.
+- `20261007201932_payload_claim_compatibility.sql` is applied. Its filename matches the shared migration history. All 1,515 telemetry records and both device records matched their pre-migration fingerprints; the five regional identities and three webhook integrations remained in place.
+- The private claim table has RLS enabled and no client grants. All five new RPCs use invoker privileges, deny anonymous and authenticated execution, and permit the server role.
+- With registration enabled only in the loopback review process, the UI registered a temporary payload, saved its status, and reserved a callsign through `/claim`. The resulting records belonged to the verified GitHub account and were excluded from the public fleet. Both temporary records were removed and the local registration switch was returned to its disabled default after verification. No real TTN identity or webhook was changed.
+- The full local verification suite passed on Node 25.9.0, including 101 unit/API tests, decoder and migration contracts, forecast tests, staff CLI tests, type checks and the production build. All 16 isolated PostgreSQL integration groups passed, including competing claims, token expiry/reuse, ownership and data preservation. These fixture tests are separate from a deployed QR claim test. GitHub CI independently passed on the deployment's Node 22 version.
+
+The live website has not been promoted. Vercel runtime review, a dedicated end-to-end TTN connection/QR claim check, production ingress verification, and the raw-data permission cutover remain pending. Existing PostGIS platform-owner advisories and the email-provider leaked-password warning remain; the new application functions add no privileged client RPCs.
+
+Supabase's remediation references cover [public tables without RLS](https://supabase.com/docs/guides/database/database-linter?lint=0013_rls_disabled_in_public), [extensions in the public schema](https://supabase.com/docs/guides/database/database-linter?lint=0014_extension_in_public), [anonymous privileged function access](https://supabase.com/docs/guides/database/database-linter?lint=0028_anon_security_definer_function_executable), [authenticated privileged function access](https://supabase.com/docs/guides/database/database-linter?lint=0029_authenticated_security_definer_function_executable), and [leaked-password protection](https://supabase.com/docs/guides/auth/password-security#password-strength-and-leaked-password-protection). Follow the platform-owner process below for the PostGIS objects.
 
 ## Preview review
 
-[Draft PR #77](https://github.com/ShepherdKruse/Stratolink/pull/77) passed GitHub CI at commit `40b6bd514fa7d320b3c853b1ec673905780fe457`. Its Vercel preview build succeeded:
+[Draft PR #77](https://github.com/ShepherdKruse/Stratolink/pull/77) passed GitHub CI on Node 22 at commit `c2498473cdc594d7f000801d6c04f4943e99eab5`. Its Vercel preview build succeeded at the same commit:
 
 https://v0-strato-link-marketing-sit-git-ccbef2-shepherdkruses-projects.vercel.app
 
@@ -26,8 +38,8 @@ Check these settings in the existing project's Preview environment before rebuil
 
 - Browser authentication needs `VITE_SUPABASE_URL` and `VITE_SUPABASE_PUBLISHABLE_KEY`. The old `NEXT_PUBLIC_SUPABASE_URL` and `NEXT_PUBLIC_SUPABASE_ANON_KEY` names do not configure the Vite auth client.
 - `SITE_URL` controls both allowed authenticated requests and generated webhook URLs. The old `NEXT_PUBLIC_APP_URL` is not read. Production uses `https://stratolink.org`. For restricted preview UI/account review, keep that production value and add only the exact preview origin to `AUTH_ALLOWED_ORIGINS`. The local review configuration similarly permits explicit localhost origins while retaining the production webhook URL.
-- Add the exact preview `/dashboard` callback to Supabase's redirect allowlist. Add another origin to `AUTH_ALLOWED_ORIGINS` only if that additional preview hostname is intentionally being tested.
-- Leave `COMMUNITY_REGISTRATION_ENABLED` unset or `false` initially. After GitHub sign-in is configured, set it to `true` only in the protected Preview environment and redeploy for owner registration tests. The switch controls new registrations and TTN connection changes. Account reads and owner status changes do not require it.
+- The exact preview `/dashboard` callback is already in Supabase's redirect allowlist. Add another origin to `AUTH_ALLOWED_ORIGINS` only if that additional preview hostname is intentionally being tested.
+- Leave `COMMUNITY_REGISTRATION_ENABLED` unset or `false` initially. GitHub sign-in is configured; set the switch to `true` only in the protected Preview environment and redeploy for owner registration tests. The switch controls new registrations and TTN connection changes. Account reads and owner status changes do not require it.
 
 The existing Mapbox, server Supabase and Blob variable names remain compatible; confirm their Preview scopes. Changes to public build variables require a new deployment.
 
@@ -37,14 +49,14 @@ Testing a separate preview webhook would require its own approved access arrange
 
 ## Existing QR registration
 
-QR compatibility is required before production promotion. The compatibility implementation retains `/activate`, `/activate/{deviceId}` and `/claim`, preserving device context through GitHub sign-in. The legacy database IDs, claim fields, launch-token fields, TTN mappings and telemetry remain present. The new claim migration and external owner flow still need the deployment checks below; local tests are not a production verification.
+QR compatibility is required before production promotion. The compatibility implementation retains `/activate`, `/activate/{deviceId}` and `/claim`, preserving device context through GitHub sign-in. The legacy database IDs, claim fields, launch-token fields, TTN mappings and telemetry remain present. The claim migration is applied; the external owner flow still needs the deployment checks below. Local tests are not a production verification.
 
 Shepherd's existing [provisioner](https://github.com/ShepherdKruse/Stratolink/blob/b95c4f4/web/lib/ttn/register-payload.ts) creates TTN credentials and firmware configuration. The [launch kit](https://github.com/ShepherdKruse/Stratolink/blob/b95c4f4/web/lib/actions/launch-kit.ts) generates `/activate/{deviceId}?k={token}` labels with a seven-day token and a PIN fallback. `/claim` separately reserves a callsign before provisioning. These workflows must be accounted for in the migration.
 
 Fresh ownership labels use `/activate/{deviceId}#k={token}`. The fragment is handled by the page and is not sent in the initial HTTP request. The page still recognizes old query-style links to preserve their device context, but old credentials do not grant ownership. The staff CLI rejects query credentials or ambiguous fragments in newly issued labels.
 
-- Apply the reviewed additive `20261007020947_payload_claim_compatibility.sql` migration, preserving all existing rows. Fresh ownership proof lives in the private registry and is consumed transactionally. Legacy PINs and token records are retained but never authorize account ownership.
-- Set `PAYLOAD_STAFF_USER_IDS` to the exact Supabase UUIDs of approved GitHub-authenticated organizers. The old shared `ADMIN_ACTIVATION_KEY` does not grant staff access. Reviewers still need Vercel project access and Supabase OAuth configuration.
+- The additive `20261007201932_payload_claim_compatibility.sql` migration is applied with existing records preserved. Fresh ownership proof lives in the private registry and is consumed transactionally. Legacy PINs and token records are retained but never authorize account ownership.
+- Set `PAYLOAD_STAFF_USER_IDS` to the exact Supabase UUIDs of approved GitHub-authenticated organizers. The old shared `ADMIN_ACTIVATION_KEY` does not grant staff access. Reviewers still need Vercel project access. Supabase OAuth is configured.
 - Set an independent `PAYLOAD_CLAIM_COOKIE_SECRET` in each server environment, using 32 random bytes encoded as base64url. This signs a 30-minute HttpOnly claim context, bound to the initiating origin. The credential never enters the GitHub callback or browser storage.
 - Use [organizer onboarding](ONBOARDING.md) to inspect reservations, verify manually provisioned TTN records, and issue a fresh seven-day claim label. The CLI requires an organizer session in a private file, defaults to read-only and writes the URL and printable SVG only to a new private directory outside the repository. It does not change TTN devices or rotate shared webhook credentials.
 - Confirm the relevant shared integration already exists before binding a radio. Existing integration IDs come from staff inventory. A new application or cluster requires separate administrator setup and webhook verification; the staff binding command cannot create that integration or guess its credential.
@@ -55,19 +67,18 @@ The local KiCad V1 files contain the globe and open-hardware artwork, but no QR.
 
 ## Authentication
 
-Enable the GitHub provider in the existing Supabase project using that app's client ID and secret. Keep the secret in the provider configuration, never in this repository or browser build.
+The GitHub provider is enabled in the existing Supabase project using that app's client ID and secret. Keep the secret in the provider configuration, never in this repository or browser build.
 
-Set Site URL to `https://stratolink.org`. Allow only the required exact callback destinations:
+Site URL is `https://stratolink.org`. The configured exact callback destinations are:
 
 - `https://stratolink.org/dashboard`
 - `http://127.0.0.1:4173/dashboard`
 - `http://localhost:4173/dashboard`
-- `http://127.0.0.1:4174/dashboard` while that review server is in use
-- `http://localhost:4174/dashboard` while that review server is in use
+- `https://v0-strato-link-marketing-sit-git-ccbef2-shepherdkruses-projects.vercel.app/dashboard`
 
-Add a specific preview callback only when testing that deployment. Do not add wildcard preview domains. The signed-in account currently sees read-only URL configuration controls; a project administrator must update them.
+Add a specific preview callback only when testing that deployment. Do not add wildcard preview domains. The signed-in account now has access to edit these settings.
 
-Verify GitHub sign-in, sign-out, selected-balloon return, registration, regional connection, and owner-only status changes before promoting the site.
+Local sign-in, sign-out, selected-balloon return, registration, reservation and status updates passed. Repeat the owner flow in Vercel and verify a dedicated regional connection and QR claim before promoting the site.
 
 ## Deployment and cutover
 

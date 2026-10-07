@@ -41,7 +41,7 @@ try {
   }
   assert.ok(ready, 'Disposable PostgreSQL did not start');
   sql(readFileSync(new URL('supabase/tests/baseline.sql', root), 'utf8'));
-  for (const name of ['20261007003455_community_backend.sql', '20261007003501_telemetry_ingest_contract.sql', '20261007020947_payload_claim_compatibility.sql']) {
+  for (const name of ['20261007003455_community_backend.sql', '20261007003501_telemetry_ingest_contract.sql', '20261007201932_payload_claim_compatibility.sql']) {
     sql(readFileSync(new URL(`supabase/migrations/${name}`, root), 'utf8'));
   }
   assert.equal(sql('SELECT count(*) FROM public.telemetry'), '1513');
