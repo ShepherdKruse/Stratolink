@@ -21,6 +21,7 @@ Reports: [home](https://pagespeed.web.dev/analysis/https-stratolink-org/yu4ww6hn
 - Cache GPS and altitude indices and use binary lookup while scrubbing. Reuse fleet paths until the underlying history changes.
 - Read scroll geometry before writing styles, stop the footer rotation loop when out of view, and initialize the mobile layout from the actual viewport.
 - Render the hardware antenna formula through the same installed KaTeX version as the calculator. Equations are built into HTML, with matching local CSS/fonts and accessible MathML. There is no runtime math script or math service key.
+- Send only the site origin on Mapbox requests. The dashboard keeps its page-wide no-referrer policy for QR/auth privacy, but the URL-restricted production Mapbox token needs an origin to validate map requests. The same night-lights tile returned 403 without a referrer and 200 with the site origin. No path, query or claim token is sent.
 
 The indexed lookup benchmark used 100 synthetic balloons with 10,000 packets each and 120 cursor updates. Median lookup time for the whole fleet was 0.050 ms; p95 was 0.120 ms. This measures only position, packet and card-altitude lookups, not React, networking or Mapbox rendering.
 
@@ -28,4 +29,4 @@ Worker tests cover out-of-order tile replies, cancellation, disposal and fallbac
 
 ## Remaining measurements
 
-Rerun PageSpeed on the deployed build. Check mobile initial layout shifts, real scroll/globe navigation, large-fleet fetching and rendering, and the Mapbox tile failures reported by the remote audit. Direct read-only checks of the deployed public token returned 200 for the light style, terrain, bathymetry and a night-lights tile; the remote audit's rejected requests still require investigation.
+Rerun PageSpeed on the deployed build. Check mobile initial layout shifts, real scroll/globe navigation, large-fleet fetching and rendering, and verify that the Mapbox tile failures are resolved in the deployed browser.

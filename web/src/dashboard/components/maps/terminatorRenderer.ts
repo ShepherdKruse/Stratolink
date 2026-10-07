@@ -288,7 +288,7 @@ export class TerminatorRenderer {
         let promise = this.bmCache.get(key);
         if (!promise) {
             const url = `https://api.mapbox.com/v4/${BLACK_MARBLE_TILESET}/${zz}/${ax}/${ay}.jpg?access_token=${this.token}`;
-            promise = fetch(url)
+            promise = fetch(url, { referrerPolicy: 'origin' })
                 .then(r => (r.ok ? r.blob() : null))
                 .then(b => (b ? createImageBitmap(b) : null))
                 .catch(() => null);
