@@ -41,22 +41,36 @@
       "permanent": true
     },
     {
-      "source": "/activate/:path*",
-      "destination": "/dashboard",
-      "permanent": false
-    },
-    {
-      "source": "/claim",
-      "destination": "/dashboard",
-      "permanent": false
-    },
-    {
       "source": "/admin/:path*",
       "destination": "/dashboard",
       "permanent": false
     }
   ],
   "rewrites": [
+    {
+      "source": "/activate",
+      "destination": "/dashboard/index.html"
+    },
+    {
+      "source": "/activate/",
+      "destination": "/dashboard/index.html"
+    },
+    {
+      "source": "/activate/:deviceId",
+      "destination": "/dashboard/index.html"
+    },
+    {
+      "source": "/activate/:deviceId/",
+      "destination": "/dashboard/index.html"
+    },
+    {
+      "source": "/claim",
+      "destination": "/dashboard/index.html"
+    },
+    {
+      "source": "/claim/",
+      "destination": "/dashboard/index.html"
+    },
     {
       "source": "/docs",
       "destination": "/docs/index.html"
@@ -129,6 +143,13 @@
           "key": "Permissions-Policy",
           "value": "camera=(), microphone=(), geolocation=()"
         }
+      ]
+    },
+    {
+      "source": "/activate/:path*",
+      "headers": [
+        { "key": "Referrer-Policy", "value": "no-referrer" },
+        { "key": "Cache-Control", "value": "no-store" }
       ]
     }
   ]

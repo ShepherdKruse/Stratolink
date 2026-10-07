@@ -38,6 +38,8 @@ Server configuration:
 - `SITE_URL`: the exact website origin used for authenticated requests.
 - `AUTH_ALLOWED_ORIGINS`: optional comma-separated origins for local or preview authentication. Keep this explicit; do not allow every preview domain.
 - `COMMUNITY_REGISTRATION_ENABLED`: defaults to disabled and requires exactly `true` to enable new registrations and TTN connections. Keep production disabled until strict ingress and the raw-data permission cutover are verified. Account reads and owned status changes remain available. See `DEPLOYMENT.md` for controlled preview testing.
+- `PAYLOAD_STAFF_USER_IDS`: comma-separated Supabase user UUIDs allowed to inspect organizer inventory, bind verified radios to reservations, and issue one-time payload claims. Leave unset to disable staff access.
+- `PAYLOAD_CLAIM_COOKIE_SECRET`: independent random 32-byte base64url server secret for short-lived claim cookies. Keep it out of browser variables and source control. Rotation clears pending browser claim sessions; fresh printed claim links remain valid.
 - `SUPABASE_URL`: the database project's HTTPS URL.
 - `SUPABASE_SERVICE_ROLE_KEY`: a server-only database key. `SUPABASE_SERVER_KEY` is accepted as an alternative name.
 - `BLOB_READ_WRITE_TOKEN`: the existing private forecast store token.
@@ -49,7 +51,7 @@ Apply the reviewed additive migrations before enabling the new APIs. Historical 
 
 Keep `supabase/cutover/private_raw_data.sql` out of the initial migration run. Apply it only after the new deployed telemetry, account and ingestion endpoints pass their checks. This explicit cutover closes anonymous raw-table reads and the old sensitive RPCs; running it before replacing the old site would interrupt that site. The disposable database suite verifies this sequence.
 
-Legacy activation, claim and admin pages currently redirect to the dashboard. This is not sufficient for existing printed QR labels: preserve their entry URLs and device context in a GitHub-owned claim flow before deployment. Claim the existing device rather than creating a duplicate or re-provisioning its TTN credentials. The compatibility review and remaining requirements are in `DEPLOYMENT.md`.
+Activation URLs preserve their device context through GitHub sign-in. Ownership requires a fresh one-time claim issued through the staff API; a public device ID or old PIN is not proof. Callsign reservations and existing TTN identities retain their canonical device IDs. Follow [organizer onboarding](ONBOARDING.md) to verify manually provisioned radios and print fresh QR labels using `npm run onboarding:staff`. The tool uses the organizer's session, defaults to a read-only dry run and does not modify TTN devices or webhooks.
 
 ## Forecast worker
 

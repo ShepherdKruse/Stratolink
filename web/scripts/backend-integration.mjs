@@ -5,6 +5,7 @@ import { promisify } from 'node:util';
 import { readFileSync } from 'node:fs';
 import { randomBytes, createHash } from 'node:crypto';
 import { createTTNWebhook } from '../server/ttnWebhook.ts';
+import { checkPayloadClaims } from './payload-claim-integration.mjs';
 
 const exec = promisify(execFile);
 const container = `stratolink-backend-${process.pid}-${randomBytes(4).toString('hex')}`;
@@ -40,7 +41,7 @@ try {
   }
   assert.ok(ready, 'Disposable PostgreSQL did not start');
   sql(readFileSync(new URL('supabase/tests/baseline.sql', root), 'utf8'));
-  for (const name of ['20261007003455_community_backend.sql', '20261007003501_telemetry_ingest_contract.sql']) {
+  for (const name of ['20261007003455_community_backend.sql', '20261007003501_telemetry_ingest_contract.sql', '20261007020947_payload_claim_compatibility.sql']) {
     sql(readFileSync(new URL(`supabase/migrations/${name}`, root), 'utf8'));
   }
   assert.equal(sql('SELECT count(*) FROM public.telemetry'), '1513');
@@ -164,6 +165,8 @@ try {
   assert.equal(radioRace.filter(result => result.status === 'fulfilled').length, 1);
   assert.equal(sql("SELECT count(*) FROM community_private.radio_identities WHERE application_id='race-app'"), '1');
   console.log('PASS: concurrent registration limits and network-identity claims remain atomic');
+
+  await checkPayloadClaims({ sql, service, denied, parallelSql, literal, hash });
 
   // Supabase extension objects have a different owner from its postgres role.
   // Reproduce that boundary so a warning-only REVOKE cannot pass unnoticed.

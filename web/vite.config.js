@@ -27,12 +27,17 @@ function dashboardRoute(server) {
     if (/^\/api\/telemetry(\?|$)/.test(request.url ?? "")) return void dashboardApi(request, response);
     if (/^\/api\/forecast(\?|$)/.test(request.url ?? "")) return void forecastApi(request, response);
     if (/^\/api\/ttn-webhook(\?|$)/.test(request.url ?? "")) return void ttnHandler(request, response);
-    if (/^\/api\/(account|balloons)(\/|\?|$)/.test(request.url ?? "")) return void communityHandler(request, response);
+    if (/^\/api\/(account|balloons|activation|staff)(\/|\?|$)/.test(request.url ?? "")) return void communityHandler(request, response);
     const legacyPath = new URL(request.url ?? '/', 'http://localhost').pathname;
-    if (/^\/(activate|claim|admin)(\/|$)/.test(legacyPath) || /^\/dashboard-v2(\/|$)/.test(legacyPath)) {
+    if (/^\/admin(\/|$)/.test(legacyPath) || /^\/dashboard-v2(\/|$)/.test(legacyPath)) {
       response.statusCode = legacyPath.startsWith('/dashboard-v2') ? 308 : 307;
       response.setHeader('Location', '/dashboard');
       return response.end();
+    }
+    if (/^\/(activate(?:\/[^/]+)?|claim)\/?$/.test(legacyPath)) {
+      response.setHeader('Referrer-Policy', 'no-referrer');
+      response.setHeader('Cache-Control', 'no-store');
+      request.url = '/dashboard/index.html';
     }
     const legacyFlight = request.url?.match(/^\/flights(\/baja-run)?\/?(\?.*)?$/);
     if (legacyFlight) {
@@ -60,7 +65,7 @@ function dashboardRoute(server) {
 export default defineConfig(({ mode }) => {
   writeHomeInserts();
   const env = loadEnv(mode, process.cwd(), '');
-  for (const name of ['SUPABASE_URL', 'SUPABASE_SERVER_KEY', 'SUPABASE_SERVICE_ROLE_KEY', 'NEXT_PUBLIC_SUPABASE_URL', 'TTN_WEBHOOK_SECRET', 'BLOB_READ_WRITE_TOKEN', 'SITE_URL', 'AUTH_ALLOWED_ORIGINS', 'COMMUNITY_REGISTRATION_ENABLED']) {
+  for (const name of ['SUPABASE_URL', 'SUPABASE_SERVER_KEY', 'SUPABASE_SERVICE_ROLE_KEY', 'NEXT_PUBLIC_SUPABASE_URL', 'TTN_WEBHOOK_SECRET', 'BLOB_READ_WRITE_TOKEN', 'SITE_URL', 'AUTH_ALLOWED_ORIGINS', 'COMMUNITY_REGISTRATION_ENABLED', 'PAYLOAD_CLAIM_COOKIE_SECRET', 'PAYLOAD_STAFF_USER_IDS']) {
     if (!process.env[name] && env[name]) process.env[name] = env[name];
   }
   return {

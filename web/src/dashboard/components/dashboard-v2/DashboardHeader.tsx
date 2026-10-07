@@ -44,7 +44,7 @@ export default function DashboardHeader({ onBack }: { onBack?: (animate?: boolea
                         aria-label={registrationOpen ? 'Close registration' : !community.account ? 'Sign in with GitHub' : undefined}
                         aria-expanded={community.account ? registrationOpen : undefined}
                         aria-describedby={community.error ? 'github-signin-notice' : undefined}
-                        disabled={community.loading || community.busy}
+                        disabled={community.loading || community.busy || community.activationLoading}
                         onClick={() => {
                             if (!community.account) { void community.signIn(); return; }
                             community.setPanel(registrationOpen ? null : 'register');

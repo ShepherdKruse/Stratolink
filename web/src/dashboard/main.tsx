@@ -7,6 +7,7 @@ import { DashboardControlsProvider } from './components/dashboard-v2/dashboard-c
 import { GlobePortalProvider } from './components/dashboard-v2/globe-portal';
 import { CommunityProvider } from './components/dashboard-v2/community-account';
 import { finishOAuthRedirect } from './lib/community/auth';
+import { initializeOnboarding } from './lib/community/activation';
 import './globals.css';
 import './fonts.css';
 import './styles/dashboard-v2.css';
@@ -29,4 +30,7 @@ function renderDashboard() { createRoot(document.getElementById('dashboard-root'
 ); }
 
 // Restore the selected balloon before its first render. The provider displays any auth error.
-void finishOAuthRedirect().catch(() => {}).then(renderDashboard);
+void finishOAuthRedirect().catch(() => {}).then(() => {
+    void initializeOnboarding().catch(() => {});
+    renderDashboard();
+});

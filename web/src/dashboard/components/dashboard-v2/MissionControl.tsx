@@ -63,6 +63,7 @@ export default function MissionControlScreen() {
         devices: registryDevices, selectedId, setSelectedId, rows, refetch,
     } = useTelemetry({ initialSelectedId, autoSelect: false });
     const community = useCommunity();
+    useEffect(() => { if (community.focusDevice) setSelectedId(community.focusDevice); }, [community.focusDevice, setSelectedId]);
     const devices = useMemo(() => mergeRegisteredBalloons(registryDevices, community.balloons), [registryDevices, community.balloons]);
     const [filters, setFilters] = useState(defaultFleetFilters);
     useEffect(() => { if (community.revision) refetch(); }, [community.revision, refetch]);

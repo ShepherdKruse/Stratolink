@@ -10,12 +10,13 @@ export type TTNConnection = {
     region: string;
     connectedAt: string;
     lastReceivedAt?: string | null;
+    managedBy?: 'stratolink' | 'owner';
 };
 export type RegisteredBalloon = {
     id: string;
     callsign: string;
     status: string;
-    devEui: string;
+    devEui: string | null;
     ownerId: string;
     ownerGithub: string;
     registeredAt: string;

@@ -37,17 +37,21 @@ Testing a separate preview webhook would require its own approved access arrange
 
 ## Existing QR registration
 
-QR compatibility is required before production promotion. The current redirects drop the device path, and the owner API only accepts new `balloon-UUID` identifiers. The legacy database IDs, claim fields, launch-token fields, TTN mappings and telemetry remain present.
+QR compatibility is required before production promotion. The compatibility implementation retains `/activate`, `/activate/{deviceId}` and `/claim`, preserving device context through GitHub sign-in. The legacy database IDs, claim fields, launch-token fields, TTN mappings and telemetry remain present. The new claim migration and external owner flow still need the deployment checks below; local tests are not a production verification.
 
 Shepherd's existing [provisioner](https://github.com/ShepherdKruse/Stratolink/blob/b95c4f4/web/lib/ttn/register-payload.ts) creates TTN credentials and firmware configuration. The [launch kit](https://github.com/ShepherdKruse/Stratolink/blob/b95c4f4/web/lib/actions/launch-kit.ts) generates `/activate/{deviceId}?k={token}` labels with a seven-day token and a PIN fallback. `/claim` separately reserves a callsign before provisioning. These workflows must be accounted for in the migration.
 
-- Preserve `/activate` and `/activate/{deviceId}` entry points, including device context through GitHub sign-in. Expired and device-only links should retain that context without granting ownership.
-- Claim the existing device transactionally. Retain its canonical ID, TTN identities, telemetry, official flag and launch history. Populate the private registration metadata from trusted provisioning or verified TTN identity data; setting `owner_id` alone does not make a legacy row usable in the current account API.
-- Require fresh trusted ownership proof and consume it atomically. Legacy claim codes were covered by public read policies; old public update policies also allowed credential-field changes. Do not assume an old PIN or token record proves permanent ownership. A public board identifier alone is not a credential.
-- Keep claiming separate from launching. Scanning or assigning an owner must not mark a payload flying or reset its launch time/location.
-- Adapt the organizer provisioning workflow behind verified staff access. Check existing inventory before TTN writes, preserve existing registrations on failure, and verify the regional registries. The old provisioner writes TTN before checking the database status and attempts deletion as rollback, so it must not be restored unchanged.
+Fresh ownership labels use `/activate/{deviceId}#k={token}`. The fragment is handled by the page and is not sent in the initial HTTP request. The page still recognizes old query-style links to preserve their device context, but old credentials do not grant ownership. The staff CLI rejects query credentials or ambiguous fragments in newly issued labels.
 
-The physical PCB QR destination still needs confirmation. The local KiCad V1 files contain the globe and open-hardware artwork, but no QR. The web code confirms generated labels, not what was printed on manufactured boards. Confirm only the hostname and path, keeping any credential private. Future assembled-payload onboarding should preserve this distinction between a permanent board identifier and a one-time ownership credential.
+- Apply the reviewed additive `20261007020947_payload_claim_compatibility.sql` migration, preserving all existing rows. Fresh ownership proof lives in the private registry and is consumed transactionally. Legacy PINs and token records are retained but never authorize account ownership.
+- Set `PAYLOAD_STAFF_USER_IDS` to the exact Supabase UUIDs of approved GitHub-authenticated organizers. The old shared `ADMIN_ACTIVATION_KEY` does not grant staff access. Reviewers still need Vercel project access and Supabase OAuth configuration.
+- Set an independent `PAYLOAD_CLAIM_COOKIE_SECRET` in each server environment, using 32 random bytes encoded as base64url. This signs a 30-minute HttpOnly claim context, bound to the initiating origin. The credential never enters the GitHub callback or browser storage.
+- Use [organizer onboarding](ONBOARDING.md) to inspect reservations, verify manually provisioned TTN records, and issue a fresh seven-day claim label. The CLI requires an organizer session in a private file, defaults to read-only and writes the URL and printable SVG only to a new private directory outside the repository. It does not change TTN devices or rotate shared webhook credentials.
+- Confirm the relevant shared integration already exists before binding a radio. Existing integration IDs come from staff inventory. A new application or cluster requires separate administrator setup and webhook verification; the staff binding command cannot create that integration or guess its credential.
+- Verify that a valid claim assigns the existing device without changing its canonical ID, official flag, launch state, location, time, TTN bindings or telemetry. Check expiry, replacement, second-use and competing claims, plus device-only links and return through GitHub sign-in.
+- Verify a signed-in callsign reservation can receive its manually provisioned radio without a second ownership claim. The old reservation name remains organizer context, not identity proof.
+
+The local KiCad V1 files contain the globe and open-hardware artwork, but no QR. The old web code confirms generated labels; PCB integration was planned. Use a permanent device-only address on a future board and provide its temporary ownership credential separately. If any existing manufactured board has a QR, confirm its hostname and path before rollout, keeping the credential private.
 
 ## Authentication
 
@@ -69,7 +73,7 @@ Verify GitHub sign-in, sign-out, selected-balloon return, registration, regional
 
 1. Obtain access to the existing Vercel project and protected preview. The current GitHub-linked account can access only its personal Vercel team.
 2. Keep Root Directory `web`. Use the build configuration in `vercel.json`, Node 22, and the public/server variables documented in `README.md`. Retain the shared private forecast Blob token.
-3. Review the existing preview, redeploying after any environment changes. Confirm static pages, native API functions, semantic search, privacy filtering, and stored forecasts in Vercel's runtime.
+3. Review the existing preview, redeploying after any environment changes. Confirm static pages, native API functions, semantic search, privacy filtering, stored forecasts, and the QR/reservation checks above in Vercel's runtime. Use dedicated review payloads, not the two official historical balloons.
 4. Confirm all TTN headers and scoped identity lookups still match before replacing ingress. Do not replay old packets into the live archive just to test the new handler; dry-run its insert and receipt adapters instead.
 5. Confirm `COMMUNITY_REGISTRATION_ENABLED` is unset or `false` in Production. Deploy the verified site with strict ingress when its content is ready, then apply `../supabase/cutover/private_raw_data.sql`. Verify direct raw reads are denied, public API reads still work, and scoped ingress accepts the intended identities. Registration and TTN connection changes remain disabled during this sequence.
 6. Verify the existing forecast Actions secrets and scheduled worker. Disable any external caller of the retired compute endpoint.
