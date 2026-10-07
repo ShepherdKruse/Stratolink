@@ -35,6 +35,20 @@ Keep preview protection in place and grant access only to the reviewers who need
 
 Testing a separate preview webhook would require its own approved access arrangement and test identity, with `SITE_URL` set to that preview's exact HTTPS origin. It is not required for the current owner review. Keep the Production registration switch unset or `false` until strict production ingress and the raw-data permission cutover are both verified. A successful preview test is not permission to enable the Production switch.
 
+## Existing QR registration
+
+QR compatibility is required before production promotion. The current redirects drop the device path, and the owner API only accepts new `balloon-UUID` identifiers. The legacy database IDs, claim fields, launch-token fields, TTN mappings and telemetry remain present.
+
+Shepherd's existing [provisioner](https://github.com/ShepherdKruse/Stratolink/blob/b95c4f4/web/lib/ttn/register-payload.ts) creates TTN credentials and firmware configuration. The [launch kit](https://github.com/ShepherdKruse/Stratolink/blob/b95c4f4/web/lib/actions/launch-kit.ts) generates `/activate/{deviceId}?k={token}` labels with a seven-day token and a PIN fallback. `/claim` separately reserves a callsign before provisioning. These workflows must be accounted for in the migration.
+
+- Preserve `/activate` and `/activate/{deviceId}` entry points, including device context through GitHub sign-in. Expired and device-only links should retain that context without granting ownership.
+- Claim the existing device transactionally. Retain its canonical ID, TTN identities, telemetry, official flag and launch history. Populate the private registration metadata from trusted provisioning or verified TTN identity data; setting `owner_id` alone does not make a legacy row usable in the current account API.
+- Require fresh trusted ownership proof and consume it atomically. Legacy claim codes were covered by public read policies; old public update policies also allowed credential-field changes. Do not assume an old PIN or token record proves permanent ownership. A public board identifier alone is not a credential.
+- Keep claiming separate from launching. Scanning or assigning an owner must not mark a payload flying or reset its launch time/location.
+- Adapt the organizer provisioning workflow behind verified staff access. Check existing inventory before TTN writes, preserve existing registrations on failure, and verify the regional registries. The old provisioner writes TTN before checking the database status and attempts deletion as rollback, so it must not be restored unchanged.
+
+The physical PCB QR destination still needs confirmation. The local KiCad V1 files contain the globe and open-hardware artwork, but no QR. The web code confirms generated labels, not what was printed on manufactured boards. Confirm only the hostname and path, keeping any credential private. Future assembled-payload onboarding should preserve this distinction between a permanent board identifier and a one-time ownership credential.
+
 ## Authentication
 
 Enable the GitHub provider in the existing Supabase project using that app's client ID and secret. Keep the secret in the provider configuration, never in this repository or browser build.

@@ -49,7 +49,7 @@ Apply the reviewed additive migrations before enabling the new APIs. Historical 
 
 Keep `supabase/cutover/private_raw_data.sql` out of the initial migration run. Apply it only after the new deployed telemetry, account and ingestion endpoints pass their checks. This explicit cutover closes anonymous raw-table reads and the old sensitive RPCs; running it before replacing the old site would interrupt that site. The disposable database suite verifies this sequence.
 
-Legacy activation, claim and admin pages redirect to the dashboard. They do not authorize changes or accept old launch tokens. Existing printed QR links need replacement with the owner-managed flow before deployment.
+Legacy activation, claim and admin pages currently redirect to the dashboard. This is not sufficient for existing printed QR labels: preserve their entry URLs and device context in a GitHub-owned claim flow before deployment. Claim the existing device rather than creating a duplicate or re-provisioning its TTN credentials. The compatibility review and remaining requirements are in `DEPLOYMENT.md`.
 
 ## Forecast worker
 
