@@ -35,8 +35,12 @@ export function usePortalCamera(mapRef: RefObject<MapRef | null>, stage: GlobeSt
         let observer: ResizeObserver | undefined;
         let onPreviewReady: (() => void) | undefined;
         let previewVisible = false;
+        let updateRotation = () => {};
         function receive(event: MessageEvent) {
-            if (event.origin === location.origin && event.source === window.parent && event.data?.channel === 'stratolink-globe' && typeof event.data.previewVisible === 'boolean') previewVisible = event.data.previewVisible;
+            if (event.origin === location.origin && event.source === window.parent && event.data?.channel === 'stratolink-globe' && typeof event.data.previewVisible === 'boolean') {
+                previewVisible = event.data.previewVisible;
+                updateRotation();
+            }
         }
         window.addEventListener('message', receive);
         const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -62,15 +66,24 @@ export function usePortalCamera(mapRef: RefObject<MapRef | null>, stage: GlobeSt
             if (!reduced) {
                 let previous = performance.now();
                 const drift = (now: number) => {
+                    frame = 0;
                     const elapsed = Math.min(now - previous, 64);
                     previous = now;
                     if (previewVisible && !document.hidden) {
                         center.current = [(center.current[0] + elapsed * .002) % 360, center.current[1]];
                         map.jumpTo({ center: center.current });
                     }
-                    frame = requestAnimationFrame(drift);
+                    if (previewVisible && !document.hidden) frame = requestAnimationFrame(drift);
                 };
-                frame = requestAnimationFrame(drift);
+                updateRotation = () => {
+                    if (previewVisible && !document.hidden && !frame) {
+                        previous = performance.now();
+                        frame = requestAnimationFrame(drift);
+                    } else if (!previewVisible || document.hidden) {
+                        cancelAnimationFrame(frame);
+                        frame = 0;
+                    }
+                };
             }
             // A return from a dark dashboard first restores the light style.
             // Show the footer globe only after that style has finished drawing.
@@ -101,7 +114,8 @@ export function usePortalCamera(mapRef: RefObject<MapRef | null>, stage: GlobeSt
             position();
             if (panel) { observer = new ResizeObserver(position); observer.observe(panel); }
         }
+        document.addEventListener('visibilitychange', updateRotation);
         lastStage.current = stage;
-        return () => { cancelAnimationFrame(frame); observer?.disconnect(); if (onPreviewReady) map.off('idle', onPreviewReady); window.removeEventListener('message', receive); map.stop(); };
+        return () => { cancelAnimationFrame(frame); observer?.disconnect(); if (onPreviewReady) map.off('idle', onPreviewReady); window.removeEventListener('message', receive); document.removeEventListener('visibilitychange', updateRotation); map.stop(); };
     }, [mapRef, stage, ready]);
 }

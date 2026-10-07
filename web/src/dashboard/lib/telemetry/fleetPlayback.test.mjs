@@ -103,3 +103,39 @@ test('homepage globe prioritizes active flights and falls back to recorded ballo
     assert.deepEqual(previewFleet(devices, rows, 4_000_000).map(d => d.id), ['active', 'past']);
     assert.deepEqual(previewFleet(devices, {}, 4_000_000), []);
 });
+
+test('binary replay matches packet boundaries throughout a long flight and after refresh', () => {
+    const rows = Array.from({ length: 20000 }, (_, i) => packet(i * 100, {
+        lat: i % 5 === 0 ? null : 10 + i / 10000,
+        lon: i % 5 === 0 ? null : 20 + i / 10000,
+    }));
+    for (const time of [0, 99, 100, 101, 999, 123456, 1500000, 1999999]) {
+        assert.equal(rowAtTime(rows, time), rows[Math.min(rows.length - 1, Math.floor(time / 100))]);
+        const fixes = rows.filter(row => row.lat !== null);
+        const before = fixes.filter(row => row.t <= time).at(-1);
+        const after = fixes.find(row => row.t >= time);
+        const position = positionAtTime(rows, time);
+        if (!before) assert.equal(position, null);
+        else if (!after) assert.equal(position.lat, before.lat);
+        else assert.ok(position.lat >= before.lat && position.lat <= after.lat);
+    }
+    const refreshed = [...rows, packet(2000000, { lat: 42 })];
+    assert.equal(positionAtTime(refreshed, null).lat, 42);
+    assert.notEqual(positionAtTime(rows, null).lat, 42);
+});
+
+test('duplicate timestamps keep the last packet while position interpolation retains its first matching fix', () => {
+    const rows = [packet(100), packet(200, {lat: 11}), packet(200, {lat: 12}), packet(300, {lat: 13})];
+    assert.equal(rowAtTime(rows, 200), rows[2]);
+    assert.equal(positionAtTime(rows, 200).lat, 11);
+    assert.equal(positionAtTime(rows, 250).lat, 12.5);
+});
+
+test('card altitude holds the last measured value without reading ahead across missing packets', async () => {
+    const { altitudeAtTime } = await import('./fleetPlayback.ts');
+    const rows = [packet(100, {alt: null}), packet(200, {presAlt: 500}), packet(300, {alt: null}), packet(400, {alt: 1200})];
+    assert.equal(altitudeAtTime(rows, 100), null);
+    assert.equal(altitudeAtTime(rows, 200), 500);
+    assert.equal(altitudeAtTime(rows, 350), 500);
+    assert.equal(altitudeAtTime(rows, 400), 1200);
+});

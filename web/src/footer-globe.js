@@ -29,6 +29,7 @@ function load() {
 function place() {
   if (stage !== 'footer') return;
   const bounds = footer.getBoundingClientRect();
+  const sceneTop = scene.getBoundingClientRect().top;
   const mobile = innerWidth < 768;
   const diameter = mobile ? Math.min(440, innerWidth * 1.1) * 1.035 : (Math.min(680, innerWidth * .55, innerHeight * .92) + Math.max(0, innerWidth - 1440) * .55) * 1.065;
   const x = innerWidth - diameter * (mobile ? -.02 : .18);
@@ -40,7 +41,7 @@ function place() {
   frame.style.transform = `translate3d(${x - innerWidth / 2}px, ${y + lift - innerHeight / 2}px, 0) scale(${scale}) scale(var(--globe-hover-scale))`;
   portal.style.setProperty('--globe-reveal', reveal);
   warmth.style.setProperty('--globe-x', `${x}px`);
-  warmth.style.setProperty('--globe-y', `${y - scene.getBoundingClientRect().top}px`);
+  warmth.style.setProperty('--globe-y', `${y - sceneTop}px`);
   warmth.style.setProperty('--globe-radius', `${diameter * .55}px`);
   portal.style.clipPath = `inset(${Math.max(0, Math.min(innerHeight, y - diameter * .65))}px 0 0 0)`;
   trigger.style.cssText = `width:${diameter}px;height:${diameter}px;left:${x - diameter / 2}px;top:${y - diameter / 2}px`;
@@ -125,7 +126,7 @@ window.addEventListener('popstate', () => {
 window.addEventListener('keydown', event => {
   if (event.key === 'Escape' && stage === 'entering') { history.back(); return; }
 });
-const preload = new IntersectionObserver(entries => { if (entries.some(entry => entry.isIntersecting)) { load(); preload.disconnect(); } }, {rootMargin:'2400px 0px'});
+const preload = new IntersectionObserver(entries => { if (entries.some(entry => entry.isIntersecting)) { load(); preload.disconnect(); } }, {rootMargin:'700px 0px'});
 preload.observe(footer);
 new ResizeObserver(schedule).observe(footer);
 place();

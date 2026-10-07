@@ -3,32 +3,52 @@ import type { TelemetryRow } from '../../components/dashboard-v2/atoms';
 export function rowAtTime(rows: TelemetryRow[], time: number | null): TelemetryRow | null {
     if (!rows.length) return null;
     if (time === null) return rows[rows.length - 1];
-    let selected: TelemetryRow | null = null;
-    for (const row of rows) {
-        if (row.t > time) break;
-        selected = row;
+    let low = 0, high = rows.length;
+    while (low < high) {
+        const middle = (low + high) >>> 1;
+        if (rows[middle].t <= time) low = middle + 1;
+        else high = middle;
     }
-    return selected;
+    return rows[low - 1] ?? null;
+}
+
+// History arrays are replaced on refresh, so their GPS index can be reused while scrubbing.
+const gpsIndices = new WeakMap<TelemetryRow[], Array<TelemetryRow & { lat: number; lon: number }>>();
+const altitudeIndices = new WeakMap<TelemetryRow[], TelemetryRow[]>();
+
+export function altitudeAtTime(rows: TelemetryRow[], time: number) {
+    let measured = altitudeIndices.get(rows);
+    if (!measured) {
+        measured = rows.filter(row => row.presAlt != null || row.alt != null);
+        altitudeIndices.set(rows, measured);
+    }
+    const row = rowAtTime(measured, time);
+    return row?.presAlt ?? row?.alt ?? null;
 }
 
 export function positionAtTime(rows: TelemetryRow[], time: number | null) {
-    const fixes = rows.filter((row): row is TelemetryRow & { lat: number; lon: number } => row.lat !== null && row.lon !== null);
+    let fixes = gpsIndices.get(rows);
+    if (!fixes) {
+        fixes = rows.filter((row): row is TelemetryRow & { lat: number; lon: number } => row.lat !== null && row.lon !== null);
+        gpsIndices.set(rows, fixes);
+    }
     if (!fixes.length || (time !== null && time < fixes[0].t)) return null;
     const last = fixes[fixes.length - 1];
     if (time === null || time >= last.t) return { lat: last.lat, lon: last.lon, altitude_m: last.alt };
-    for (let index = 1; index < fixes.length; index++) {
-        const next = fixes[index];
-        if (time > next.t) continue;
-        const previous = fixes[index - 1];
-        const fraction = (time - previous.t) / (next.t - previous.t || 1);
-        const longitudeDelta = ((next.lon - previous.lon + 540) % 360) - 180;
-        return {
-            lat: previous.lat + (next.lat - previous.lat) * fraction,
-            lon: ((previous.lon + longitudeDelta * fraction + 540) % 360) - 180,
-            altitude_m: time === next.t ? next.alt : previous.alt,
-        };
+    let low = 1, high = fixes.length - 1;
+    while (low < high) {
+        const middle = (low + high) >>> 1;
+        if (fixes[middle].t < time) low = middle + 1;
+        else high = middle;
     }
-    return null;
+    const next = fixes[low], previous = fixes[low - 1];
+    const fraction = (time - previous.t) / (next.t - previous.t || 1);
+    const longitudeDelta = ((next.lon - previous.lon + 540) % 360) - 180;
+    return {
+        lat: previous.lat + (next.lat - previous.lat) * fraction,
+        lon: ((previous.lon + longitudeDelta * fraction + 540) % 360) - 180,
+        altitude_m: time === next.t ? next.alt : previous.alt,
+    };
 }
 
 export function balloonName(device: { callsign: string | null; id: string }) {

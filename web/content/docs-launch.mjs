@@ -1,9 +1,8 @@
-import katex from 'katex';
+import { math } from './math.mjs';
 import { icon } from '@fortawesome/fontawesome-svg-core';
 import { faCircleInfo } from '@fortawesome/free-solid-svg-icons';
 import { defaults } from '../src/float-model.mjs';
 
-const math = tex => `<div class="docs-equation">${katex.renderToString(tex, { displayMode: true, throwOnError: true, output: 'htmlAndMathml', trust: false })}</div>`;
 const figure = (n, alt, caption) => `<figure class="docs-figure docs-illustration"><img src="/assets/docs/prep/step-${n}.webp" alt="${alt}" loading="lazy"><figcaption>${caption}</figcaption></figure>`;
 const fieldHelp = {
   payload: 'Weigh the finished electronics, solar panels, antennas and suspension cord together. Include the tape and fittings that will fly. Do not include the balloon envelope or count anything again under additional mass.',

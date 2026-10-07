@@ -48,6 +48,7 @@ function updateScene() {
   const { width, height, readingStart, readingTravel, duration, balloonRise, balloonShift, mobile } = geometry;
   const distance = Math.max(0, -launch.getBoundingClientRect().top);
   const footerTop = footer.getBoundingClientRect().top;
+  const footerHeight = footer.offsetHeight;
 
   if (reducedMotion.matches) {
     foreground.style.transform = '';
@@ -85,10 +86,10 @@ function updateScene() {
       });
     }
     warmth.style.opacity = smooth(phase(distance, height * .4, height * .9));
-    footer.style.setProperty('--reveal', smooth(clamp((innerHeight - footerTop) / Math.min(height * .5, footer.offsetHeight))));
+    footer.style.setProperty('--reveal', smooth(clamp((innerHeight - footerTop) / Math.min(height * .5, footerHeight))));
   }
 
-  const footerHeaderExit = smooth(clamp((height - footerTop) / Math.min(height * .4, footer.offsetHeight)));
+  const footerHeaderExit = smooth(clamp((height - footerTop) / Math.min(height * .4, footerHeight)));
   header.style.transform = `translateY(${-80 * footerHeaderExit}px)`;
   frame = null;
 }
@@ -161,7 +162,7 @@ if (reducedMotion.matches) {
   Promise.all([...document.querySelectorAll('[data-letter-reveal]')].map((element, index) =>
     revealLetters(element, index * 110)
   )).then(startStoryReveals);
-  const assets = ['sky.png', 'city-clouds.png', 'balloon.png', 'source.jpg'];
+  const assets = ['sky.webp', 'city-mask.png', 'balloon-mask.png', 'source.jpg'];
   Promise.allSettled(assets.map((asset) => {
     const image = new Image();
     image.src = `/assets/launch/${asset}`;

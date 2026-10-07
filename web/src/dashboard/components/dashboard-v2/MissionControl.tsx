@@ -32,7 +32,7 @@ import Timeline, { fmtClock } from './Timeline';
 import DashboardHeader from './DashboardHeader';
 import { useDashboardControls } from './dashboard-controls';
 import FleetOverview, { balloonColor, balloonTransitionName } from './FleetOverview';
-import { positionAtTime, fleetActivity, previewFleet } from '@/lib/telemetry/fleetPlayback';
+import { positionAtTime, rowAtTime, fleetActivity, previewFleet } from '@/lib/telemetry/fleetPlayback';
 import MapLegend from './MapLegend';
 import { useGlobePortal, notifyGlobeParent } from './globe-portal';
 import CommunityPanel from './CommunityPanel';
@@ -49,9 +49,15 @@ interface FlightSummary {
     distanceKm: number;
 }
 
+const positionTracks = new WeakMap<TelemetryRow[], TelemetryRow[]>();
 function mappedPosition(rows: TelemetryRow[], time: number | null) {
-    const validTimes = new Set(flightTrack(rows).map(point => point.t));
-    return positionAtTime(rows.filter(row => validTimes.has(row.t)), time);
+    let track = positionTracks.get(rows);
+    if (!track) {
+        const validTimes = new Set(flightTrack(rows).map(point => point.t));
+        track = rows.filter(row => validTimes.has(row.t));
+        positionTracks.set(rows, track);
+    }
+    return positionAtTime(track, time);
 }
 
 export default function MissionControlScreen() {
@@ -146,12 +152,7 @@ export default function MissionControlScreen() {
 
     const scrubRow: TelemetryRow | null = useMemo(() => {
         if (!visibleRows.length || effectiveScrubT === null) return null;
-        let row = visibleRows[0];
-        for (const r of visibleRows) {
-            if (r.t <= effectiveScrubT) row = r;
-            else break;
-        }
-        return row;
+        return rowAtTime(visibleRows, effectiveScrubT) ?? visibleRows[0];
     }, [visibleRows, effectiveScrubT]);
 
     /* Median packet cadence — used to tell "fresh reading" from a gap. */
@@ -860,6 +861,11 @@ function MapColumn({
 
 
     const pickPath: V2FlightPoint[] = trackPoints.length >= 2 ? trackPoints : hindcastTrack;
+    const fleetPaths = useMemo(() => fleetDevices.map(device => ({
+        deviceId: device.id,
+        color: balloonColor(device.id),
+        points: flightTrack(fleetHistory[device.id] ?? []),
+    })), [fleetDevices, fleetHistory]);
 
     return (
         <div style={{ flex: 1, position: 'relative', minHeight: 0, minWidth: 0, overflow: 'hidden' }}>
@@ -876,7 +882,7 @@ function MapColumn({
                 }).map(device => device.id) : []}
                 balloons={isFleet ? fleetBalloons : balloon ? [balloon] : []}
                 fleetFitBalloons={portalPreview ? fleetFitBalloons.filter(point => fleetBalloons.some(balloon => balloon.id === point.id)) : isFleet ? fleetFitBalloons : undefined}
-                fleetPaths={fleetDevices.map(device => ({ deviceId: device.id, color: balloonColor(device.id), points: flightTrack(fleetHistory[device.id] ?? []) }))}
+                fleetPaths={fleetPaths}
                 onSelectBalloon={isFleet ? onSelectBalloon : undefined}
                 preserveCamera
                 activeId={selectedDevice?.id ?? null}

@@ -47,7 +47,7 @@
     <section class="launch" data-loading data-title-pending data-story-pending aria-label="Stratolink balloon launch over San Francisco">
       <div class="launch-viewport">
         <div class="scene-layer sky-layer" aria-hidden="true">
-          <img class="scene-photo" src="/assets/launch/sky.png" alt="" fetchpriority="high" width="1672" height="941">
+          <img class="scene-photo" src="/assets/launch/sky.webp" alt="" fetchpriority="high" width="1672" height="941">
         </div>
         <div class="scene-layer foreground-layer" aria-hidden="true">
           <svg class="scene-photo" viewBox="0 0 2560 1440" xmlns="http://www.w3.org/2000/svg">
@@ -62,7 +62,7 @@
                 <feGaussianBlur stdDeviation="6" />
               </filter>
               <mask id="city-mask" maskUnits="userSpaceOnUse" x="0" y="0" width="2560" height="1440" style="mask-type:alpha">
-                <image class="city-cloud-mask" href="/assets/launch/city-clouds.png" width="2560" height="1440" preserveAspectRatio="none" filter="url(#cloud-edge)" />
+                <image class="city-cloud-mask" href="/assets/launch/city-mask.png" width="2560" height="1440" preserveAspectRatio="none" filter="url(#cloud-edge)" />
                 <rect y="1410" width="2560" height="30" fill="white" />
               </mask>
             </defs>
@@ -77,7 +77,7 @@
                 <feGaussianBlur stdDeviation=".5" />
               </filter>
               <mask id="balloon-mask" maskUnits="userSpaceOnUse" x="1228" y="432" width="205" height="403" style="mask-type:alpha">
-                <image href="/assets/launch/balloon.png" width="2560" height="1440" preserveAspectRatio="none" filter="url(#tether-edge)" />
+                <image href="/assets/launch/balloon-mask.png" width="2560" height="1440" preserveAspectRatio="none" filter="url(#tether-edge)" />
               </mask>
             </defs>
             <image href="/assets/launch/source.jpg" width="2560" height="1440" mask="url(#balloon-mask)" />
@@ -91,7 +91,7 @@
         <div class="essay-body">
         <p>Stratolink is a network of small, solar-powered balloons built to collect and share data from the stratosphere.</p>
 <p>We've designed a custom pico balloon payload weighing just under 10 g. Anyone can build and launch one by following the <a href="/docs/getting-started">docs</a>.</p>
-<p>The payload <img class="inline-payload" src="/assets/launch/payload-cutout.png" alt="Stratolink payload with two solar panels" width="384" height="256"> measures temperature, pressure, light, and motion, then sends the data back through <a href="https://www.thethingsnetwork.org/" target="_blank" rel="noopener noreferrer">The Things Network</a>. It can also relay long-range radio messages from the surface, help track radio-tagged animals around the world, and pass position reports between balloons when ground stations are out of reach.</p>
+<p>The payload <img class="inline-payload" src="/assets/launch/payload-inline.webp" alt="Stratolink payload with two solar panels" width="384" height="256"> measures temperature, pressure, light, and motion, then sends the data back through <a href="https://www.thethingsnetwork.org/" target="_blank" rel="noopener noreferrer">The Things Network</a>. It can also relay long-range radio messages from the surface, help track radio-tagged animals around the world, and pass position reports between balloons when ground stations are out of reach.</p>
 <p>We want to collect data where ground stations are scarce, especially over the ocean. Keeping the balloons light, cheap, and easy to launch makes it practical to send up enough of them to build global coverage.</p>
 <p>The code and board designs are on <a href="https://github.com/ShepherdKruse/Stratolink" target="_blank" rel="noopener noreferrer">GitHub</a>. Our docs cover the build, balloon preparation, radio setup, and launch.</p>
 <!-- home-docs:start -->
