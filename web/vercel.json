@@ -6,6 +6,12 @@
   "outputDirectory": "dist",
   "redirects": [
     {
+      "source": "/:path*",
+      "has": [{ "type": "host", "value": "www\\.stratolink\\.org" }],
+      "destination": "https://stratolink.org/:path*",
+      "permanent": true
+    },
+    {
       "source": "/docs/float-calculator",
       "destination": "/docs/balloon-prep#float-calculator",
       "permanent": true
