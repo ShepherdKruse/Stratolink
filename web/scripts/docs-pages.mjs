@@ -13,7 +13,7 @@ export function writeDocsPages() {
   const directory = new URL('../docs/pages/', import.meta.url);
   mkdirSync(directory, { recursive: true });
   const inputs = {};
-  const write = (slug, title, main, className) => {
+  const write = (slug, title, main, className, description) => {
     const url = new URL(slug === 'index' ? '../index.html' : `${slug}.html`, directory);
     writeFileSync(url, `<!doctype html>
 <html lang="en">
@@ -25,7 +25,7 @@ export function writeDocsPages() {
   <script type="module" src="/src/favicon.js"></script>
   <meta name="theme-color" content="#f6f4ef">
   <title>${title} - Stratolink</title>
-${socialMetadata({ title: `${title} - Stratolink`, path: slug === 'index' ? '/docs' : `/docs/${slug}` })}
+${socialMetadata({ title: `${title} - Stratolink`, path: slug === 'index' ? '/docs' : `/docs/${slug}`, description })}
   <link rel="stylesheet" href="/src/docs.css">
   <script type="module" src="/src/docs.js"></script>
   ${slug === 'balloon-prep' ? '<script type="module" src="/src/float-calculator.js"></script>' : ''}
@@ -77,7 +77,7 @@ ${socialMetadata({ title: `${title} - Stratolink`, path: slug === 'index' ? '/do
           ${next ? `<a href="/docs/${next.slug}" rel="next"><span>Next</span><strong>${next.title}${caret}</strong></a>` : ''}
         </nav>
       </article>
-    </main>`, 'docs-article-page');
+    </main>`, 'docs-article-page', section.intro);
   });
   return inputs;
 }

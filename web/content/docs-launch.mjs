@@ -3,7 +3,8 @@ import { icon } from '@fortawesome/fontawesome-svg-core';
 import { faCircleInfo } from '@fortawesome/free-solid-svg-icons';
 import { defaults } from '../src/float-model.mjs';
 
-const figure = (n, alt, caption) => `<figure class="docs-figure docs-illustration"><img src="/assets/docs/prep/step-${n}.webp" alt="${alt}" loading="lazy"><figcaption>${caption}</figcaption></figure>`;
+const figureSizes = { 1: [1244, 1264], 2: [1244, 1264], 3: [1208, 1302], 4: [1616, 973], 5: [1089, 1445] };
+const figure = (n, alt, caption) => `<figure class="docs-figure docs-illustration"><img src="/assets/docs/prep/step-${n}.webp" alt="${alt}" width="${figureSizes[n][0]}" height="${figureSizes[n][1]}" loading="lazy"><figcaption>${caption}</figcaption></figure>`;
 const fieldHelp = {
   payload: 'Weigh the finished electronics, solar panels, antennas and suspension cord together. Include the tape and fittings that will fly. Do not include the balloon envelope or count anything again under additional mass.',
   envelope: 'Weigh the empty, dry balloon envelope before filling it. Include its nozzle and any permanent repair or sealing material not already counted elsewhere.',

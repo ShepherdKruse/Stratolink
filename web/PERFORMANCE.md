@@ -244,3 +244,11 @@ Two local 1,000-balloon checks, each with 250 packets per balloon and both tails
 Only the selected card now has an individual view-transition name. The remaining cards share one list snapshot, preserving their fade and the selected card's expansion without separately capturing every offscreen card. A matching 1,000-balloon selection/return check recorded two tasks of 2,555 and 2,504 ms with the original snapshots; the candidate's longest tasks were 203 and 204 ms across two checks. Direct selectors were used in the control and final repeat to avoid attributing accessibility-name lookup work to the transition. These are local fleet measurements, not evidence that the production cold Mapbox startup is resolved.
 
 The compiled dashboard passes real-telemetry selection, replay, fleet return and keyboard checks at 1280 px and 390 px without browser errors. All 156 unit/API tests and the full verification suite pass.
+
+## Production page checks, October 7 at 20:45-20:52 PDT
+
+After PR 95 deployed, dashboard PageSpeed measured 59 mobile / 60 desktop. Mobile LCP was 3.1 s, TBT 1,700 ms and CLS 0.035. Desktop LCP was 0.4 s, TBT 11,600 ms and CLS 0. The desktop main-thread breakdown attributes 12,173 ms to Other and 1,832 ms to script evaluation. Cold rendering remains unresolved. Report: https://pagespeed.web.dev/analysis/https-stratolink-org-dashboard/9t92bre7b0
+
+The blog and balloon-preparation page both scored 100 for performance on mobile and desktop, with zero TBT and CLS. Mobile LCP was 1.1 s for the blog and 1.2 s for preparation. Both scored 100 for Best Practices. Reports: https://pagespeed.web.dev/analysis/https-stratolink-org-blog/930mirse2v and https://pagespeed.web.dev/analysis/https-stratolink-org-docs-balloon-prep/md922dy0bk
+
+The public page generators now provide regular meta descriptions alongside social metadata, using the existing article introductions. The five preparation illustrations declare their intrinsic dimensions so the browser can reserve their space before lazy loading. Their files, styling and captions are unchanged. The preparation report also flagged oversized image delivery; dimensions alone do not reduce those transferred bytes.

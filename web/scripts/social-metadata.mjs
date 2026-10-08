@@ -12,7 +12,8 @@ const absolute = path => new URL(path, 'https://stratolink.org').href;
 export function socialMetadata({ title, path, description = siteDescription, image = launchImage, type = 'website' }) {
   const imageUrl = escape(absolute(image.src));
   const imageType = image.src.endsWith('.png') ? 'image/png' : image.src.endsWith('.webp') ? 'image/webp' : 'image/jpeg';
-  return `  <link rel="canonical" href="${escape(absolute(path))}">
+  return `  <meta name="description" content="${escape(description)}">
+  <link rel="canonical" href="${escape(absolute(path))}">
   <meta property="og:site_name" content="Stratolink">
   <meta property="og:type" content="${escape(type)}">
   <meta property="og:title" content="${escape(title)}">
