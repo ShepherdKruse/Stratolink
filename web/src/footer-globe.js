@@ -29,6 +29,9 @@ function load() {
 function place() {
   if (stage !== 'footer') return;
   const bounds = footer.getBoundingClientRect();
+  // Warm the map a few screens ahead once the reader starts scrolling.
+  // Leave the initial homepage load alone, and keep rotation paused offscreen.
+  if (!loaded && (bounds.top < innerHeight || (scrollY > 120 && bounds.top < innerHeight * 4))) load();
   const sceneTop = scene.getBoundingClientRect().top;
   const mobile = innerWidth < 768;
   const diameter = mobile ? Math.min(440, innerWidth * 1.1) * 1.035 : (Math.min(680, innerWidth * .55, innerHeight * .92) + Math.max(0, innerWidth - 1440) * .55) * 1.065;
@@ -126,7 +129,5 @@ window.addEventListener('popstate', () => {
 window.addEventListener('keydown', event => {
   if (event.key === 'Escape' && stage === 'entering') { history.back(); return; }
 });
-const preload = new IntersectionObserver(entries => { if (entries.some(entry => entry.isIntersecting)) { load(); preload.disconnect(); } }, {rootMargin:'700px 0px'});
-preload.observe(footer);
 new ResizeObserver(schedule).observe(footer);
 place();

@@ -274,3 +274,11 @@ The original SVG masks are now compiled into transparent WebP layers. Mobile ret
 The three initial scene images total 188,386 bytes on mobile and 215,058 on desktop, compared with 251,765 bytes for the prior source photo, sky and two masks. The source photograph remains unchanged for social cards. Both mobile and desktop visual checks preserve the composition, feathered cloud edge and tether. At 390 × 844, the original desktop-hosted comparison already had no long tasks, so those results cannot establish a phone speedup. The affected mobile Firefox device still needs a retest. No browser-specific detection, Mapbox change or dashboard redesign is included.
 
 Validation: all 156 unit/API tests, TTN and migration contracts, forecast and staff tests, type checks and production build pass. Browser checks cover 390 × 844 and 1440 × 900, selected mobile/desktop assets, upward mask restoration, no horizontal overflow and no runtime scene filters.
+
+Follow-up: Teddy retested the production homepage in mobile Firefox and confirmed, "much better. mobile is great now."
+
+## Footer globe preparation, October 8
+
+The footer globe previously started loading only 700 px before the footer reached the viewport. It now starts within three screens of the footer once the reader has scrolled more than 120 px, or immediately if the footer is already visible. The iframe still has no source on an initial visit at the top. Offscreen rotation remains paused, and the same map instance handles the dashboard transition.
+
+In a controlled six-second scroll at 390 × 844, the request began at 433 ms instead of 2,366 ms. The new globe was ready before the footer entered the viewport; the previous run became ready just after reaching the bottom. These local timings include different cache states and do not measure a faster map download. They verify the earlier start and added loading time while reading. Checks also cover 1440 × 900, the mobile dashboard transition and console errors. Full verification passes.
