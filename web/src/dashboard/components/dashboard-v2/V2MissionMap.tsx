@@ -891,6 +891,8 @@ export default function V2MissionMap({
                 initialViewState={lastViewRef.current ?? initialView}
                 style={{ width: '100%', height: '100%' }}
                 mapStyle={mapStyle}
+                // Compile visible programs on demand instead of precompiling hidden layers.
+                precompilePrograms={false}
                 projection={projection === 'globe' ? 'globe' : 'mercator'}
                 cursor={hoveredBalloon && onSelectBalloon ? 'pointer' : pathPickEnabled ? 'crosshair' : 'grab'}
                 interactiveLayerIds={onSelectBalloon

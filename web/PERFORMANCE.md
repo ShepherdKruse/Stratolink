@@ -224,3 +224,13 @@ The remaining city-light source used a second WebGL context to sample Black Marb
 A browser comparison against the previous shader checked 16 tiles across both themes, two dates and zooms 0, 2, 5 and 9. Across 4,194,304 channel samples, the maximum difference was 1 out of 255 and the mean absolute difference was 0.0041. The tiles contained visible city lights, so this was not a comparison of empty responses. The final 12 warmed tile operations totaled 48.4 ms for the shader and 33.9 ms for the CPU version. Earlier network timings were cache-dependent and are excluded. This establishes pixel agreement and a local processing improvement, not a cold PageSpeed gain.
 
 All 156 unit/API tests and the full verification suite pass. New tests cover daylight transparency, brightness weighting, north-up filtering, overzoom, missing images, cache bounds and cancellation. No map layers, colors, opacity, layout or animation timing changed.
+
+Production `5ff6802` (PR 93), [October 7, 19:25 PDT report](https://pagespeed.web.dev/analysis/https-stratolink-org-dashboard/nw0wycwwkq): mobile 58, LCP 3.1 s, TBT 1,800 ms, CLS 0.035; desktop 60, LCP 0.5 s, TBT 16,820 ms, CLS 0. Best Practices remains 100. Mobile blocking decreased in this run, while desktop increased. Cold startup remains unresolved.
+
+## On-demand map shaders
+
+Mapbox 3.18.1 enables `precompilePrograms` by default. Its first style update schedules shader programs for every layer, including hidden layers and alternate fog/draping combinations. Disable that supported option so the renderer compiles programs when a visible layer needs them. This preserves the style and the existing rendering/reveal behavior.
+
+In the same compiled two-balloon fixture, startup compiled 28 shaders / 14 linked programs instead of 48 shaders / 24 programs. Both warmed runs had no long tasks. Frame callback totals were 654 ms versus 602 ms, so the local comparison establishes fewer shader variants, not a warmed frame-time improvement. First use of a previously unseen layer may still compile its program; zoom, theme and replay checks are required alongside production cold-load measurements.
+
+A separate interaction trace covered zooming, panning, switching light/dark themes, selecting a flight and replaying it. It compiled two additional programs, recorded no long tasks and had an 8.3 ms maximum frame callback on local hardware. Real Stratolink 3 telemetry and both themes also rendered without errors in the compiled build. All 156 unit/API tests and the full verification suite pass.
