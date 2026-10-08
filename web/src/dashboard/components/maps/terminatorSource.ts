@@ -5,7 +5,7 @@ export type { TerminatorBasemap } from './terminatorRenderer';
 type Tile = { z: number; x: number; y: number };
 type Pending = { resolve: (value: ImageData) => void; reject: (reason: Error) => void };
 
-/** Keep shader compilation and synchronous pixel readbacks off the UI thread. */
+/** Keep day/night raster processing off the UI thread. */
 export class TerminatorSource implements CustomSourceInterface<ImageData> {
     readonly id: string;
     readonly type = 'custom' as const;
@@ -86,7 +86,7 @@ export class TerminatorSource implements CustomSourceInterface<ImageData> {
                 });
             } catch (error) {
                 if (this.worker || this.disposed || signal?.aborted) throw error;
-                // Older browsers can expose OffscreenCanvas without worker WebGL.
+                // Fall back when this browser cannot process raster tiles in a worker.
             } finally {
                 signal?.removeEventListener('abort', abort);
             }
