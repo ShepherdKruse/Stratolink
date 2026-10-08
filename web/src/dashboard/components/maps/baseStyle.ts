@@ -14,6 +14,7 @@
  * Idempotent — safe to call on every `styledata` event.
  */
 import type { Map, LayerSpecification } from 'mapbox-gl';
+import { ensureVectorSource } from './vectorSource';
 
 const TERRAIN_SRC = 'sl-terrain';
 
@@ -69,11 +70,9 @@ export function applyBaseStyle(map: Map, scheme: Scheme = 'light'): void {
     set(map, 'waterway', 'line-color', relief.waterway);
 
     /* Terrain hillshade from the public terrain-v2 tileset. */
-    try {
-        if (!map.getSource(TERRAIN_SRC)) {
-            map.addSource(TERRAIN_SRC, { type: 'vector', url: 'mapbox://mapbox.mapbox-terrain-v2' });
-        }
-    } catch { /* source may already exist */ }
+    let source: string;
+    try { source = ensureVectorSource(map, TERRAIN_SRC, 'mapbox.mapbox-terrain-v2'); }
+    catch { return; }
 
     /* Keep the same band order and opacity, with one draw layer per color.
      * Six separate layers repeat layout and draw work for the same tiles. */
@@ -86,7 +85,7 @@ export function applyBaseStyle(map: Map, scheme: Scheme = 'light'): void {
             map.addLayer({
                 id,
                 type: 'fill',
-                source: TERRAIN_SRC,
+                source,
                 'source-layer': 'hillshade',
                 filter: ['in', ['get', 'level'], ['literal', bands.map(band => band.level)]],
                 layout: {

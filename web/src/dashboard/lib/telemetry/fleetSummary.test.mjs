@@ -21,3 +21,18 @@ test('finished flights stop polling but missing balloons can still report again'
     for (const status of ['landed', 'recovered', 'retired', 'planned']) assert.equal(shouldPollTelemetry(status), false);
     for (const status of ['flying', 'missing', 'lost', 'idle']) assert.equal(shouldPollTelemetry(status), true);
 });
+
+
+test('summary identity survives unrelated history batches and updates with metadata or packets', () => {
+    const device = { id: 'balloon', status: 'flying', lastContactT: null, latestFix: null };
+    const history = [{ t: 100, lat: 37, lon: -122, alt: 20 }];
+    const first = withLatestTelemetry(device, history);
+    assert.equal(withLatestTelemetry(device, history), first);
+    const next = withLatestTelemetry(device, [...history, { t: 200, lat: null, lon: null, alt: 25 }]);
+    assert.notEqual(next, first);
+    assert.equal(next.lastContactT, 200);
+    assert.deepEqual(next.latestFix, first.latestFix);
+    const landed = withLatestTelemetry({ ...device, status: 'landed' }, history);
+    assert.notEqual(landed, first);
+    assert.equal(landed.status, 'landed');
+});
