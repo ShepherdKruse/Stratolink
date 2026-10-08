@@ -65,6 +65,14 @@ function mappedPosition(rows: TelemetryRow[], time: number | null) {
 
 export default function MissionControlScreen() {
     const globeStage = useGlobePortal();
+    const [interfacePainted, setInterfacePainted] = useState(false);
+    useEffect(() => {
+        // Let the controls paint before importing and initializing the map.
+        let frame = requestAnimationFrame(() => {
+            frame = requestAnimationFrame(() => setInterfacePainted(true));
+        });
+        return () => cancelAnimationFrame(frame);
+    }, []);
     const searchParams = new URLSearchParams(window.location.search);
     const initialSelectedId = searchParams.get('device');
 
@@ -323,7 +331,7 @@ export default function MissionControlScreen() {
                     </footer>
                 </aside>
                 <div className="dashboard-map fleet-map">
-                    {!registryLoading && <MapColumn
+                    {interfacePainted && !registryLoading && <MapColumn
                         isFleet={isFleet}
                         fleetBalloons={shownFleet}
                         fleetFitBalloons={portalPreview ? fleetFitBalloons : fleetFitBalloons.filter(balloon => filteredIds.has(balloon.id))}
