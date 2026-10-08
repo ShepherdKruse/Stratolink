@@ -104,7 +104,12 @@ export function useFleetHistory(devices: DeviceSummary[], enabled: boolean): Use
             .filter(window => cachedRowsByDevice.has(window.deviceId))
             .map(window => [window.deviceId, cachedRowsByDevice.get(window.deviceId)!]));
 
-        setRowsByDevice(snapshot());
+        const publish = () => setRowsByDevice(current => {
+            const next = snapshot();
+            return Object.keys(current).length === Object.keys(next).length
+                && Object.entries(next).every(([id, rows]) => current[id] === rows) ? current : next;
+        });
+        publish();
         setLoading(windows.some(window => missionHistory.peek(window) === undefined));
         setError(null);
 
@@ -115,14 +120,14 @@ export function useFleetHistory(devices: DeviceSummary[], enabled: boolean): Use
                 await missionHistory.load(window, { refresh: initial || window.poll });
                 if (!cancelled && publishTimer === undefined) publishTimer = setTimeout(() => {
                     publishTimer = undefined;
-                    if (!cancelled) setRowsByDevice(snapshot());
+                    if (!cancelled) publish();
                 }, 50);
             }));
             running = false;
             if (cancelled) return;
             clearTimeout(publishTimer);
             publishTimer = undefined;
-            setRowsByDevice(snapshot());
+            publish();
             setLoading(false);
             const failures = results.flatMap((result, index) => {
                 if (result.status === 'fulfilled') return [];

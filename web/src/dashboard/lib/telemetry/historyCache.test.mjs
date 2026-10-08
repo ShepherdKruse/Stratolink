@@ -121,3 +121,22 @@ test('selecting a queued balloon gets the next slot without a duplicate request'
     finishes.get('b')();
     await Promise.all(requests);
 });
+
+test('unchanged overlap packets and empty refreshes retain history identity', async () => {
+    let received = [{ t: 100, gateways: [{ id: 'one', rssi: -100 }], temperature: null }];
+    const loader = createHistoryLoader(new Map(), async () => structuredClone(received));
+    const window = { deviceId: 'a', since: 0 };
+    const first = await loader.load(window);
+    assert.equal(await loader.load(window, { refresh: true }), first);
+    received = [];
+    assert.equal(await loader.load(window, { refresh: true }), first);
+    received = [{ t: 100, gateways: [{ id: 'one', rssi: -95 }], temperature: null }];
+    const updated = await loader.load(window, { refresh: true });
+    assert.notEqual(updated, first);
+    assert.equal(updated[0].gateways[0].rssi, -95);
+    assert.equal(first[0].gateways[0].rssi, -100);
+    received = [{ t: 200, gateways: [], temperature: 0 }];
+    const appended = await loader.load(window, { refresh: true });
+    assert.deepEqual(appended.map(row => row.t), [100, 200]);
+    assert.equal(appended[0], updated[0]);
+});

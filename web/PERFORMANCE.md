@@ -124,3 +124,22 @@ The local stress fixture uses 1,000 synthetic balloons and 250 packets per ballo
 After the change, the same 14 timeline actions produced no tasks over 50 ms. The 30-second startup trace fell from 17 long tasks (50-60 ms) to one (59 ms). Map frame callbacks remained similar: p95 2.5 ms and maximum 11.6 ms. This confirms a local reduction in card-update work; it does not predict PageSpeed's cold-load score or low-end mobile performance.
 
 Validation: 128 unit/API tests, TypeScript and the production build pass. Local checks cover fleet search, keyboard selection, return to the filtered list, 390-pixel card widths without overflow, and both globe themes. No frontend styles or markup structure changed.
+
+## Production result and optional flight tails
+
+Production `997dace` (PR 86), [October 7, 17:38 PDT report](https://pagespeed.web.dev/analysis/https-stratolink-org-dashboard/pbl1f20ohb):
+
+| Device | Performance | FCP | LCP | TBT | CLS |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| Mobile | 61 | 1.8 s | 2.3 s | 5,440 ms | 0.035 |
+| Desktop | 61 | 0.4 s | 0.4 s | 13,740 ms | 0 |
+
+Best Practices remains 100. Desktop's 16.8 seconds of main-thread work contains 14.1 seconds classified as Other and 2.3 seconds of script evaluation. Its long tasks are predominantly Mapbox rendering. These lab cold starts remain expensive despite responsive local interactions.
+
+The optional flight-tail layer exposed a separate scaling problem: one source and one draw layer per balloon. With 1,000 synthetic balloons, enabling it produced a 1.43-second task and a 211 ms map frame callback. Tails now share sources by the existing four-color palette, with separate LineString features and per-feature opacity. The gradient still restarts along each balloon's own line. Geometry, colors, line width and replay boundaries are preserved.
+
+The longer fixture also exposed unnecessary refresh work. Repeated overlap packets replaced history arrays even when their data was unchanged, invalidating every derived track and merged timeline. Identical packets now retain their history identity, and the fleet publishes only changed snapshots. Updates to packet values or gateway reception metadata still replace the changed row.
+
+After both changes, the local 1,000-balloon test covered enabling tails, eight keyboard timeline actions and a complete one-minute refresh. It recorded one 81 ms long task (31 ms above the long-task threshold), with a maximum map-frame callback of 26.3 ms. The earlier per-balloon source run recorded 135 long tasks including the 1.43-second toggle stall; batching alone removed that stall but left repeated refresh work. These synthetic local measurements establish the source-count and unchanged-data improvements, not a production PageSpeed score or a low-end-device guarantee.
+
+All 133 unit/API tests, TypeScript and the production build pass. Tests include 1,000 independent tails in four colors, per-flight fade values, replay clipping, dateline crossings, and packet/gateway changes invalidating the cache. The generated docs contain eight KaTeX equations and no rendering errors.

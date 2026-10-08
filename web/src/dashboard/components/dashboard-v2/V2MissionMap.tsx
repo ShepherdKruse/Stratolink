@@ -19,7 +19,7 @@ import type { MapRef, LngLatBoundsLike } from 'react-map-gl/mapbox';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import { useGlobePortal } from './globe-portal';
 import { applyPortalLabelVisibility, usePortalCamera } from './usePortalCamera';
-import { flightTail } from '@/lib/telemetry/flightTail';
+import { fleetTailSources, unwrapLngs } from '@/lib/telemetry/flightTail';
 import { useForecastPath } from './useForecastPath';
 import GatewayLayer from '@/components/maps/GatewayLayer';
 import GatewayRangeRings from '@/components/maps/GatewayRangeRings';
@@ -79,26 +79,6 @@ export function isValidLngLat(lat: number, lon: number): boolean {
  * guarding here — that's the value that actually crashes fitBounds/layers. */
 function isRenderablePoint(lat: number, lon: number): boolean {
     return Number.isFinite(lat) && Number.isFinite(lon) && lat >= -90 && lat <= 90;
-}
-
-/* Unwrap a line/ring's longitudes so consecutive points never jump ~360°. A
- * geometry that straddles the antimeridian has vertices at e.g. +179 and −179;
- * Mapbox then draws the segment — or, for a polygon, the whole fill — the long
- * way around the globe, so the 50/90% cone (and any crossing path) breaks at
- * 180°. Letting longitude run past ±180 keeps the geometry continuous and
- * Mapbox renders it across the seam. No-op when nothing crosses 180°. */
-function unwrapLngs(coords: Array<[number, number]>): Array<[number, number]> {
-    if (coords.length < 2) return coords;
-    const out: Array<[number, number]> = [coords[0]];
-    let prev = coords[0][0];
-    for (let i = 1; i < coords.length; i++) {
-        let lon = coords[i][0];
-        while (lon - prev > 180) lon -= 360;
-        while (lon - prev < -180) lon += 360;
-        out.push([lon, coords[i][1]]);
-        prev = lon;
-    }
-    return out;
 }
 
 interface V2MissionMapProps {
@@ -340,19 +320,8 @@ export default function V2MissionMap({
         type: 'Feature' as const, properties: {},
         geometry: { type: 'LineString' as const, coordinates: unwrapLngs(validFlightPath.map(point => [point.lon, point.lat])) },
     } : null, [validFlightPath]);
-    const tailSources = useMemo(() => showFlightTails ? fleetPaths.flatMap(path => {
-        const tail = flightTail(path.points, playbackT);
-        if (tail.points.length < 2 || tail.opacity <= 0) return [];
-        return [{
-            id: `v2-tail-${encodeURIComponent(path.deviceId)}`,
-            color: path.color,
-            opacity: tail.opacity,
-            data: { type: 'Feature' as const, properties: {}, geometry: {
-                type: 'LineString' as const,
-                coordinates: unwrapLngs(tail.points.map(point => [point.lon, point.lat])),
-            } },
-        }];
-    }) : [], [fleetPaths, playbackT, showFlightTails]);
+    const tailSources = useMemo(() => showFlightTails ? fleetTailSources(fleetPaths, playbackT) : [],
+        [fleetPaths, playbackT, showFlightTails]);
     const fleetColors = useMemo(
         () => new globalThis.Map(fleetPaths.map(path => [path.deviceId, path.color])),
         [fleetPaths],
@@ -989,12 +958,12 @@ export default function V2MissionMap({
                             <GatewayLayer colorScheme={colorScheme} />
                         ))}
                         {tailSources.map(source => (
-                            <Source key={source.id} id={source.id} type="geojson" data={source.data} lineMetrics>
-                                <Layer id={`${source.id}-line`} type="line"
+                            <Source key={source.color} id={`v2-tails-${encodeURIComponent(source.color)}`} type="geojson" data={source.data} lineMetrics>
+                                <Layer id={`v2-tails-${encodeURIComponent(source.color)}-line`} type="line"
                                     layout={{ 'line-cap': 'round', 'line-join': 'round' }}
                                     paint={{
                                         'line-width': 2.5,
-                                        'line-opacity': source.opacity * 0.85,
+                                        'line-opacity': ['get', 'opacity'],
                                         'line-gradient': ['interpolate', ['linear'], ['line-progress'], 0, 'rgba(0,0,0,0)', 1, source.color],
                                     }}
                                 />
