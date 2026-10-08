@@ -10,6 +10,7 @@
  * map's forecast layers simply don't render.
  */
 import { useEffect, useState } from 'react';
+import { forecastRequests } from '@/lib/telemetry/forecastRequests';
 
 /** [lon, lat] pairs, forecast origin → predicted endpoint. */
 export type ForecastPath = Array<[number, number]>;
@@ -67,15 +68,6 @@ export interface UseForecastPathResult {
     loading: boolean;
 }
 
-/* Re-poll occasionally so a freshly-computed forecast appears without a reload.
- * The stored forecast only changes on the cron cadence, so this is gentle. */
-const POLL_MS = 5 * 60 * 1000;
-/* While the server reports a forecast is still computing (HTTP 202), poll fast
- * so it appears promptly — but cap the fast window so a device that can't be
- * forecast (e.g. no telemetry) doesn't hammer the endpoint. */
-const FAST_POLL_MS = 8 * 1000;
-const MAX_FAST_POLLS = 15; /* ~2 min, then settle to POLL_MS */
-
 const EMPTY: Omit<UseForecastPathResult, 'loading'> = {
     path: [], ensemble: [], ellipses: [], hindcastPath: [], hindcastTrack: [],
     predictedHindcast: [], staleGps: false, coverageLimited: false, divergence: null,
@@ -87,7 +79,7 @@ const EMPTY: Omit<UseForecastPathResult, 'loading'> = {
  *  dead-reckon cone/path is built with CONTINUOUS longitudes that run past the
  *  antimeridian (e.g. 164°→190°), and clamping/dropping those shredded the
  *  50/90% zone at 180°. Mapbox renders out-of-[-180,180] longitudes fine. */
-function cleanPath(raw: unknown): ForecastPath {
+export function cleanPath(raw: unknown): ForecastPath {
     if (!Array.isArray(raw)) return [];
     return raw.filter(
         (p: unknown): p is [number, number] =>
@@ -140,82 +132,58 @@ export function useForecastPath(deviceId: string | null): UseForecastPathResult 
     useEffect(() => {
         if (!deviceId) {
             setState(EMPTY);
+            setLoading(false);
             return;
         }
-        let cancelled = false;
-        let timer: ReturnType<typeof setTimeout> | null = null;
-        let fastPolls = 0;
         setLoading(true);
-
-        async function load() {
-            let nextDelay = POLL_MS;
-            let pending = false;
-            try {
-                const res = await fetch(`/api/forecast?device=${encodeURIComponent(deviceId!)}`);
-                if (res.status === 202) {
-                    /* Server is computing in the background — poll fast for a
-                     * short window, then settle to the slow cadence. The client
-                     * never computes; it only reads. */
-                    pending = true;
-                    nextDelay = fastPolls++ < MAX_FAST_POLLS ? FAST_POLL_MS : POLL_MS;
-                    return;
-                }
-                if (!res.ok) {
-                    if (!cancelled) setState(EMPTY);
-                    return;
-                }
-                const data = await res.json();
-                if (cancelled) return;
-
-                const path = cleanPath(data?.nominal_path);
-                const ensemble: ForecastPath[] = Array.isArray(data?.ensemble)
-                    ? data.ensemble.map(cleanPath).filter((t: ForecastPath) => t.length >= 2)
-                    : [];
-                const ellipses: ForecastEllipse[] = Array.isArray(data?.ellipses)
-                    ? data.ellipses
-                        .map((e: { e50?: { polygon?: unknown }; e90?: { polygon?: unknown } }) => ({
-                            e50: cleanPath(e?.e50?.polygon),
-                            e90: cleanPath(e?.e90?.polygon),
-                        }))
-                        .filter((e: ForecastEllipse) => e.e50.length >= 3 || e.e90.length >= 3)
-                    : [];
-
-                /* Future-scrub window: path[0] sits at the forecast origin time,
-                 * the last point at origin + horizon hours. */
-                const originMs = Date.parse(data?.forecast_origin?.time_utc ?? '');
-                const horizonH = Number(data?.forecast_horizon_h);
-                const originT = Number.isFinite(originMs) ? originMs : null;
-                const endT = originT != null && Number.isFinite(horizonH)
-                    ? originT + horizonH * 3_600_000
-                    : null;
-
-                setState({
-                    path,
-                    ensemble,
-                    ellipses,
-                    hindcastPath: cleanPath(data?.observed?.reconstructed_path),
-                    hindcastTrack: cleanTrack(data?.observed?.reconstructed_track),
-                    predictedHindcast: cleanPath(data?.predicted_hindcast?.path),
-                    staleGps: Boolean(data?.stale_gps),
-                    coverageLimited: Boolean(data?.stale_gps?.coverage_limited),
-                    divergence: parseDivergence(data?.divergence),
-                    originT,
-                    endT,
-                    generatedAt: typeof data?.generated_at === 'string' ? data.generated_at : null,
-                });
-                fastPolls = 0;
-            } catch {
-                if (!cancelled) setState(EMPTY);
-            } finally {
-                if (!cancelled) {
-                    setLoading(pending);
-                    timer = setTimeout(load, nextDelay);
-                }
+        return forecastRequests.watch(deviceId, res => {
+            setLoading(res.status === 202);
+            if (res.status === 202) return;
+            if (res.status < 200 || res.status >= 300) {
+                setState(EMPTY);
+                return;
             }
-        }
+            const data = res.data;
 
-        load();
-        return () => { cancelled = true; if (timer) clearTimeout(timer); };
+            const path = cleanPath(data?.nominal_path);
+            const ensemble: ForecastPath[] = Array.isArray(data?.ensemble)
+                ? data.ensemble.map(cleanPath).filter((t: ForecastPath) => t.length >= 2)
+                : [];
+            const ellipses: ForecastEllipse[] = Array.isArray(data?.ellipses)
+                ? data.ellipses
+                    .map((e: { e50?: { polygon?: unknown }; e90?: { polygon?: unknown } }) => ({
+                        e50: cleanPath(e?.e50?.polygon),
+                        e90: cleanPath(e?.e90?.polygon),
+                    }))
+                    .filter((e: ForecastEllipse) => e.e50.length >= 3 || e.e90.length >= 3)
+                : [];
+
+            /* Future-scrub window: path[0] sits at the forecast origin time,
+             * the last point at origin + horizon hours. */
+            const rawOrigin = data?.forecast_origin?.time_utc;
+            const rawHorizon = data?.forecast_horizon_h;
+            const originMs = typeof rawOrigin === 'string' ? Date.parse(rawOrigin) : NaN;
+            const horizonH = typeof rawHorizon === 'number' || typeof rawHorizon === 'string' ? Number(rawHorizon) : NaN;
+            const originT = Number.isFinite(originMs) ? originMs : null;
+            const endT = originT != null && Number.isFinite(horizonH)
+                ? originT + horizonH * 3_600_000
+                : null;
+
+            setState({
+                path,
+                ensemble,
+                ellipses,
+                hindcastPath: cleanPath(data?.observed?.reconstructed_path),
+                hindcastTrack: cleanTrack(data?.observed?.reconstructed_track),
+                predictedHindcast: cleanPath(data?.predicted_hindcast?.path),
+                staleGps: Boolean(data?.stale_gps),
+                coverageLimited: Boolean(data?.stale_gps?.coverage_limited),
+                divergence: parseDivergence(data?.divergence),
+                originT,
+                endT,
+                generatedAt: typeof data?.generated_at === 'string' ? data.generated_at : null,
+            });
+        }, true);
     }, [deviceId]);
 
     return { ...state, loading };
