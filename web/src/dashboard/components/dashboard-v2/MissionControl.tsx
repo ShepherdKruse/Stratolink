@@ -15,7 +15,7 @@
  *
  * Data discipline: every value is a real Supabase row or '-'. No placeholders.
  */
-import { lazy, Suspense, useEffect, useMemo, useRef, useState } from 'react';
+import { lazy, Suspense, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { flushSync } from 'react-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowRight, faChevronDown, faChevronUp } from '@fortawesome/free-solid-svg-icons';
@@ -276,7 +276,7 @@ export default function MissionControlScreen() {
         ? `${activity.active} active ${activity.active === 1 ? 'balloon' : 'balloons'}`
         : `${activity.inactive} inactive ${activity.inactive === 1 ? 'balloon' : 'balloons'}`;
 
-    function transitionPanel(update: () => void, animate = true) {
+    const transitionPanel = useCallback((update: () => void, animate = true) => {
         transitionRef.current?.skipTransition();
         if (!animate || !document.startViewTransition || window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
             update();
@@ -284,9 +284,9 @@ export default function MissionControlScreen() {
         }
         transitionRef.current = document.startViewTransition(() => flushSync(update));
         void transitionRef.current.ready.catch(() => {}); // Interrupted transitions still apply the selection.
-    }
+    }, []);
 
-    function handleSelectDevice(id: string, animate = true) {
+    const handleSelectDevice = useCallback((id: string, animate = true) => {
         transitionPanel(() => {
             setSelectedId(id);
             setScrubT(null);
@@ -294,7 +294,7 @@ export default function MissionControlScreen() {
             window.history.replaceState(window.history.state, '', `/dashboard?device=${encodeURIComponent(id)}`);
             notifyGlobeParent('route', { path: `/dashboard?device=${encodeURIComponent(id)}` });
         }, animate);
-    }
+    }, [setSelectedId, transitionPanel]);
 
     function showFleet(animate = true) {
         transitionPanel(() => {
@@ -319,7 +319,7 @@ export default function MissionControlScreen() {
                     <CommunityPanel />
                     {isFleet ? (
                         <><FleetFilters value={filters} onChange={setFilters} signedIn={Boolean(community.account)} count={filteredDevices.length} />
-                        <FleetOverview devices={filteredDevices} {...fleetHistory} loading={registryLoading || fleetHistory.loading} scrubT={fleetScrubT} onSelect={handleSelectDevice} /></>
+                        <FleetOverview devices={filteredDevices} {...fleetHistory} loading={registryLoading || fleetHistory.loading} scrubT={fleetScrubT} now={nowMs ?? Date.now()} onSelect={handleSelectDevice} /></>
                     ) : (
                         <div className="dashboard-detail-content tlm-scroll" style={{ viewTransitionName: balloonTransitionName(selectedId) }}>
                             <TelemetryV3Panel {...panelProps} variant={isMobile ? 'summary' : 'full'} />

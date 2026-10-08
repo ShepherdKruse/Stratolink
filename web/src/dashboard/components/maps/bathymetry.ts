@@ -13,6 +13,7 @@
  * Idempotent — safe to call on every `styledata` event.
  */
 import type { Map, LayerSpecification } from 'mapbox-gl';
+import { ensureVectorSource } from './vectorSource';
 
 const SRC_ID = 'sl-bathymetry-v2';
 const LAYER_ID = 'sl-bathymetry-v2';
@@ -109,11 +110,9 @@ export function bathymetryAllZooms(map: Map, scheme: Scheme = 'light'): void {
         } catch { /* ignore */ }
     }
 
-    try {
-        if (!map.getSource(SRC_ID)) {
-            map.addSource(SRC_ID, { type: 'vector', url: 'mapbox://mapbox.mapbox-bathymetry-v2' });
-        }
-    } catch { /* source may already exist */ }
+    let source: string;
+    try { source = ensureVectorSource(map, SRC_ID, 'mapbox.mapbox-bathymetry-v2'); }
+    catch { return; }
 
     try {
         if (!map.getLayer(LAYER_ID)) {
@@ -126,7 +125,7 @@ export function bathymetryAllZooms(map: Map, scheme: Scheme = 'light'): void {
             map.addLayer({
                 id: LAYER_ID,
                 type: 'fill',
-                source: SRC_ID,
+                source,
                 'source-layer': 'depth',
                 layout: { 'fill-sort-key': ['get', 'min_depth'] as never },
                 paint: {

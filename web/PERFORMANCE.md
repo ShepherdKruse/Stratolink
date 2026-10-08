@@ -103,3 +103,24 @@ Production `39a5888` (PR 84), [October 7, 17:04 PDT report](https://pagespeed.we
 | Desktop | 61 | 0.4 s | 0.4 s | 8,250 ms | 0 |
 
 Desktop blocking time decreased in this run, but mobile first paint regressed. The mobile LCP element was still the wordmark, with a large main-thread render delay. The next change explicitly gives the interface a paint opportunity before starting the lazy map import, instead of depending on network timing to separate those tasks.
+
+## Interface paint result
+
+Production `58c8b01` (PR 85), [October 7, 17:12 PDT report](https://pagespeed.web.dev/analysis/https-stratolink-org-dashboard/c1cj1rr0vj):
+
+| Device | Performance | FCP | LCP | TBT | CLS |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| Mobile | 53 | 1.8 s | 3.1 s | 7,420 ms | 0.035 |
+| Desktop | 60 | 0.4 s | 0.5 s | 10,030 ms | 0 |
+
+Giving the interface a paint opportunity reduced mobile first-paint time in this run. It did not resolve the expensive Mapbox cold start. These results remain variable and are not a green dashboard score.
+
+## Shared map data and larger fleet
+
+Both stock basemaps already include terrain-v2 and bathymetry-v2 in their composite vector source. Custom terrain and depth layers now reuse that source, with a fallback for styles that omit either tileset. Sampled decoded depth and hillshade tile properties and geometry matched at zooms 1, 5, 8 and 12. This removes two redundant metadata requests. The local two-balloon trace did not show a material frame-time improvement.
+
+The local stress fixture uses 1,000 synthetic balloons and 250 packets per balloon. It never writes to production. Before card memoization, 14 keyboard timeline actions produced 17 long tasks of 65-72 ms, including work continuing between inputs. Unchanged headings, icons and metric values now reuse their rendered output; history summaries and selection callbacks preserve identity between unrelated updates. Signal freshness still refreshes on the existing minute clock.
+
+After the change, the same 14 timeline actions produced no tasks over 50 ms. The 30-second startup trace fell from 17 long tasks (50-60 ms) to one (59 ms). Map frame callbacks remained similar: p95 2.5 ms and maximum 11.6 ms. This confirms a local reduction in card-update work; it does not predict PageSpeed's cold-load score or low-end mobile performance.
+
+Validation: 128 unit/API tests, TypeScript and the production build pass. Local checks cover fleet search, keyboard selection, return to the filtered list, 390-pixel card widths without overflow, and both globe themes. No frontend styles or markup structure changed.
