@@ -4,6 +4,7 @@ const foreground = document.querySelector('.foreground-layer');
 const balloon = document.querySelector('.balloon-layer');
 const warmth = document.querySelector('.scene-warmth');
 const story = document.querySelector('.story');
+const storyWindow = document.querySelector('.story-window');
 const storyItems = [...document.querySelectorAll('.essay-body > p, .essay-body > section')];
 const footer = document.querySelector('.site-footer');
 const header = document.querySelector('.site-header');
@@ -73,8 +74,13 @@ function updateScene() {
     foreground.style.transform = `translate3d(0, ${cityDrop}px, 0)`;
     balloon.style.transform = `translate3d(${right}px, ${-up}px, 0)`;
     story.style.transform = `translate3d(0, ${-readingTravel * reading}px, 0)`;
-    viewport.style.setProperty('--cloud-fade-start', `${cloudEdge}px`);
-    viewport.style.setProperty('--cloud-fade-end', `${cloudEdge + geometry.cloudFeather}px`);
+    if (cloudEdge < height) {
+      storyWindow.style.maskImage = '';
+      storyWindow.style.setProperty('--cloud-fade-start', `${cloudEdge}px`);
+      storyWindow.style.setProperty('--cloud-fade-end', `${cloudEdge + geometry.cloudFeather}px`);
+    } else {
+      storyWindow.style.maskImage = 'none';
+    }
     if (storyReady) {
       let stagger = 0;
       geometry.storyLayout.forEach(({ item, top, height: itemHeight }) => {
@@ -162,12 +168,8 @@ if (reducedMotion.matches) {
   Promise.all([...document.querySelectorAll('[data-letter-reveal]')].map((element, index) =>
     revealLetters(element, index * 110)
   )).then(startStoryReveals);
-  const assets = ['sky.webp', 'city-mask.png', 'balloon-mask.png', 'source.jpg'];
-  Promise.allSettled(assets.map((asset) => {
-    const image = new Image();
-    image.src = `/assets/launch/${asset}`;
-    return image.decode();
-  })).then(() => {
+  const assets = [...viewport.querySelectorAll('img')].filter(image => !image.closest('.story'));
+  Promise.allSettled(assets.map(image => image.decode())).then(() => {
     const intro = document.querySelector('.scene-intro');
     if (!intro) return;
     const reveal = {

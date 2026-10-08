@@ -50,38 +50,15 @@
           <img class="scene-photo" src="/assets/launch/sky.webp" alt="" fetchpriority="high" width="1672" height="941">
         </div>
         <div class="scene-layer foreground-layer" aria-hidden="true">
-          <svg class="scene-photo" viewBox="0 0 2560 1440" xmlns="http://www.w3.org/2000/svg">
-            <defs>
-              <filter id="cloud-edge" x="-5%" y="-5%" width="110%" height="110%">
-                <feGaussianBlur stdDeviation="10" />
-              </filter>
-              <filter id="cloud-edge-mobile" x="-5%" y="-5%" width="110%" height="110%">
-                <feComponentTransfer>
-                  <feFuncA type="linear" slope="1.45" intercept="-.45" />
-                </feComponentTransfer>
-                <feGaussianBlur stdDeviation="6" />
-              </filter>
-              <mask id="city-mask" maskUnits="userSpaceOnUse" x="0" y="0" width="2560" height="1440" style="mask-type:alpha">
-                <image class="city-cloud-mask" href="/assets/launch/city-mask.png" width="2560" height="1440" preserveAspectRatio="none" filter="url(#cloud-edge)" />
-                <rect y="1410" width="2560" height="30" fill="white" />
-              </mask>
-            </defs>
-            <image href="/assets/launch/source.jpg" width="2560" height="1440" mask="url(#city-mask)" />
-          </svg>
+          <picture>
+            <source media="(max-width: 767px)" srcset="/assets/launch/city-mobile.webp">
+            <img class="scene-photo" src="/assets/launch/city-desktop.webp" alt="" width="2560" height="1440" fetchpriority="high">
+          </picture>
         </div>
         <div class="scene-layer balloon-layer" aria-hidden="true">
-          <svg class="scene-photo balloon-photo" viewBox="0 0 2560 1440" xmlns="http://www.w3.org/2000/svg">
-            <defs>
-              <filter id="tether-edge" x="-5%" y="-5%" width="110%" height="110%">
-                <feMorphology operator="dilate" radius="2" />
-                <feGaussianBlur stdDeviation=".5" />
-              </filter>
-              <mask id="balloon-mask" maskUnits="userSpaceOnUse" x="1228" y="432" width="205" height="403" style="mask-type:alpha">
-                <image href="/assets/launch/balloon-mask.png" width="2560" height="1440" preserveAspectRatio="none" filter="url(#tether-edge)" />
-              </mask>
-            </defs>
-            <image href="/assets/launch/source.jpg" width="2560" height="1440" mask="url(#balloon-mask)" />
-          </svg>
+          <div class="scene-photo balloon-photo">
+            <img class="balloon-cutout" src="/assets/launch/balloon-cutout.webp" alt="" width="205" height="403" fetchpriority="high">
+          </div>
         </div>
         <div class="scene-warmth" aria-hidden="true"></div>
         <div class="scene-intro" aria-hidden="true"></div>

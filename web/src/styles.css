@@ -57,7 +57,7 @@ img, svg, canvas { display: block; }
   transform: translate(-50%, -50%);
 }
 
-.balloon-photo { clip-path: inset(30% 44% 42% 48%); }
+.balloon-cutout { position: absolute; left: 47.96875%; top: 30%; width: 8.0078125%; height: 27.986111%; }
 .scene-warmth, .scene-intro { position: absolute; inset: 0; pointer-events: none; }
 .scene-warmth {
   z-index: 1;
@@ -168,7 +168,6 @@ img, svg, canvas { display: block; }
 
 @media (max-width: 767px) {
   :root { --story-left: var(--gutter); --header-height: 80px; }
-  .city-cloud-mask { filter: url(#cloud-edge-mobile); }
   .story { width: calc(100vw - 2 * var(--gutter)); }
   .story p { font-size: 16px; }
   .story h1 { font-size: clamp(20px, 6.1vw, 36px); }

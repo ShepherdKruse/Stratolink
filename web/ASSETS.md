@@ -4,15 +4,20 @@
 
 The source is Teddy Warner's launch photograph, supplied as `/Users/twarn/Downloads/IMG_3466.jpeg` (2560 × 1440). The unchanged source photo is served locally as `public/assets/launch/source.jpg`.
 
-| Runtime file | Dimensions | Use |
+| Asset | Dimensions | Use |
 | --- | --- | --- |
-| `public/assets/launch/source.jpg` | 2560 × 1440 | Original photograph, used for the visible foreground and balloon pixels |
+| `public/assets/launch/source.jpg` | 2560 × 1440 | Source photograph for the layer compiler and social card |
 | `public/assets/launch/sky.png` | 1672 × 941, RGB | Clear sky plate inpainted with the built-in image generator; fills behind the moving city, clouds and balloon |
 | `public/assets/launch/city-clouds.png` | 1672 × 941, RGBA | Generated alpha mask for the original skyline, clouds and foreground palm |
 | `public/assets/launch/balloon.png` | 1672 × 941, RGBA | Generated alpha mask for the original balloon, tether and payload |
+| `public/assets/launch/city-desktop.webp` | 2560 × 1440, RGBA | Compiled desktop foreground |
+| `public/assets/launch/city-mobile.webp` | 2560 × 1440, RGBA | Compiled mobile foreground with sky residue removed |
+| `public/assets/launch/balloon-cutout.webp` | 205 × 403, RGBA | Compiled balloon, tether and payload |
 | `public/assets/stratolink-wordmark.svg` | 7581 × 1510 viewBox | Lowercase Stratolink wordmark, Helvetica Regular converted to outlines; header and footer |
 
-The two transparent extraction files are used only as alpha masks inside inline SVG. Their generated RGB pixels are not displayed. Each SVG displays the original source photograph through its mask, preserving the photograph's original balloon, payload, skyline and cloud pixels. The cloud mask is softly feathered. Below 768px, an SVG alpha transfer removes faint sky residue before a narrower feather is applied; the desktop mask stays unchanged. The balloon mask is restricted to the assembly's bounds to discard stray alpha. All layers share the source photo's full-canvas framing. The sky plate is an inpainted approximation of the original clear-sky gradient, including the areas originally hidden by foreground objects.
+The original extraction files supply alpha only; their generated RGB pixels are not displayed. `scripts/prepare-launch-layers.mjs` compiles the original photograph through those masks using the same SVG filters. It writes `city-desktop.webp`, `city-mobile.webp` and the tightly cropped `balloon-cutout.webp`. The mobile version retains the alpha transfer that removes faint sky residue. The balloon keeps its dilated, feathered tether and restricted mask bounds. Runtime layers are transparent images, so phones do not need to rasterize the SVG filters. Regeneration requires `rsvg-convert` and `cwebp`; the compiled files are committed and deployment has no extra tool dependency.
+
+The city layers retain the photograph's 2560 × 1440 framing. The balloon is a 205 × 403 crop at (1228, 432), positioned within that same frame. Encoding uses WebP quality 90 and alpha quality 100. The sky plate remains an inpainted approximation of the original clear-sky gradient, including areas originally hidden by foreground objects.
 
 Exact built-in image generation prompts, output provenance and known extraction limits are recorded in [reference/launch-layer-prompts.md](reference/launch-layer-prompts.md). Page text uses Helvetica with Arial as a fallback.
 
