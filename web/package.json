@@ -51,7 +51,7 @@
     "@huggingface/tokenizers": "0.2.0",
     "@supabase/supabase-js": "2.91.0",
     "katex": "0.19.0",
-    "mapbox-gl": "3.18.1",
+    "mapbox-gl": "3.32.0",
     "onnxruntime-node": "1.30.0",
     "react": "19.2.3",
     "react-dom": "19.2.3",
