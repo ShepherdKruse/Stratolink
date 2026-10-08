@@ -2,6 +2,14 @@
 
 Use `ShepherdKruse/Stratolink`, Supabase project `iazmnyyfsobucndqncgw`, and Vercel project `shepherdkruses-projects/v0-strato-link-marketing-site`. Do not create replacement projects.
 
+## Official team ownership - October 8, 2026
+
+The additive `20261008194242_official_team_ownership.sql` migration is applied to the existing shared project. Stratolink 2 and 3 are managed jointly by the verified GitHub accounts Twarner491, clkruse, and ShepherdKruse. New registrations, reservations and valid payload claims from those accounts become official and shared automatically. GitHub numeric provider IDs establish membership; usernames and client-supplied fields do not. Shepherd's membership activates on his first site sign-in. This does not grant organizer inventory privileges or replace `PAYLOAD_STAFF_USER_IDS`.
+
+Existing payload rows, all 1,517 telemetry records, all five radio mappings and all three webhook integrations retained identical before/after fingerprints. The new private tables have RLS and no browser grants. The existing service-only account endpoints enforce team access. Dedicated member-owned connections can be managed by co-owners; shared organizer integrations remain protected from token replacement. Historical team balloons cannot be reassigned through QR claims.
+
+The complete local verification suite and disposable PostgreSQL integration checks passed, including all three members, outsiders, copied usernames, direct RPC denial, current-account filters, future official registration, shared-token protection and historical preservation. Production still returned `503 Registration unavailable` on October 8 while awaiting Shepherd's environment update and redeploy. That gate must be verified separately from the ownership migration; do not announce end-to-end registration, QR claims or new TTN delivery based only on these local checks.
+
 ## Current production status - October 7, 2026
 
 - [PR #77](https://github.com/ShepherdKruse/Stratolink/pull/77) is merged into `main` at `2e9c001d5632b577bb579e25ea756341d22a75b5`. The new site is live at [stratolink.org](https://stratolink.org), and production GitHub OAuth succeeds.

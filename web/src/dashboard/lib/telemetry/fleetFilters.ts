@@ -12,7 +12,7 @@ export function filterFleet<T extends DeviceSummary>(devices: T[], filters: Flee
     return devices.filter(device => {
         const active = isActiveBalloon(device, now);
         return (active ? filters.active : filters.inactive)
-            && (!filters.mine || (owner !== null && device.ownerId === owner))
+            && (!filters.mine || (owner !== null && (device.ownerId === owner || device.managedByUserId === owner)))
             && normalize(`${device.callsign ?? ''} ${device.id} ${device.ownerGithub ?? ''}`).includes(query);
     }).sort((a, b) => {
         if (filters.sort !== 'alphabetical') {

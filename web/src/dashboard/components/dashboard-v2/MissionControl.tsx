@@ -85,7 +85,7 @@ export default function MissionControlScreen() {
     const fleetHistory = useFleetHistory(registryDevices, selectedId === null);
     const devices = useMemo(() => mergeRegisteredBalloons(registryDevices.map(device =>
         withLatestTelemetry(device, device.id === selectedId ? rows : fleetHistory.rowsByDevice[device.id]),
-    ), community.balloons), [registryDevices, community.balloons, fleetHistory.rowsByDevice, selectedId, rows]);
+    ), community.balloons, community.user?.id), [registryDevices, community.balloons, community.user?.id, fleetHistory.rowsByDevice, selectedId, rows]);
     const [filters, setFilters] = useState(defaultFleetFilters);
     useEffect(() => { if (community.revision) refetch(); }, [community.revision, refetch]);
     useEffect(() => { if (!community.account) setFilters(current => ({...current,mine:false})); }, [community.account]);

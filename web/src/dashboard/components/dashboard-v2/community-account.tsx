@@ -198,7 +198,7 @@ export function CommunityProvider({ children }: { children: ReactNode }) {
             });
         },
         managePayload(deviceId) {
-            if (mutating.current || !user || !balloons.some(balloon => balloon.id === deviceId && balloon.ownerId === user.id)) return;
+            if (mutating.current || !user || !balloons.some(balloon => balloon.id === deviceId)) return;
             dismissOnboarding(); setPanel('manage'); setFocusDevice(deviceId);
             history.replaceState(history.state, '', onboardingDashboardPath(null, deviceId));
         },

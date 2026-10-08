@@ -5,6 +5,7 @@ CREATE ROLE authenticated NOLOGIN;
 CREATE ROLE service_role NOLOGIN BYPASSRLS;
 CREATE SCHEMA auth;
 CREATE TABLE auth.users (id uuid PRIMARY KEY);
+CREATE TABLE auth.identities (user_id uuid REFERENCES auth.users(id), provider text NOT NULL, provider_id text NOT NULL, UNIQUE(provider,provider_id));
 GRANT USAGE ON SCHEMA public TO anon, authenticated, service_role;
 
 CREATE TABLE public.devices (
