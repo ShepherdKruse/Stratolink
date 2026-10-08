@@ -112,7 +112,7 @@ if (figures.length) {
       if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
       event.preventDefault();
       returnFocus = trigger;
-      image.src = img.currentSrc || img.src;
+      image.src = img.src;
       image.alt = img.alt;
       caption.textContent = figure?.querySelector('figcaption')?.textContent || '';
       caption.hidden = !caption.textContent;

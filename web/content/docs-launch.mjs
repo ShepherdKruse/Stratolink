@@ -4,7 +4,11 @@ import { faCircleInfo } from '@fortawesome/free-solid-svg-icons';
 import { defaults } from '../src/float-model.mjs';
 
 const figureSizes = { 1: [1244, 1264], 2: [1244, 1264], 3: [1208, 1302], 4: [1616, 973], 5: [1089, 1445] };
-const figure = (n, alt, caption) => `<figure class="docs-figure docs-illustration"><img src="/assets/docs/prep/step-${n}.webp" alt="${alt}" width="${figureSizes[n][0]}" height="${figureSizes[n][1]}" loading="lazy"><figcaption>${caption}</figcaption></figure>`;
+const figure = (n, alt, caption) => {
+  const src = `/assets/docs/prep/step-${n}`;
+  const [width, height] = figureSizes[n];
+  return `<figure class="docs-figure docs-illustration"><img src="${src}.webp" srcset="${src}-480.webp 480w, ${src}-960.webp 960w, ${src}.webp ${width}w" sizes="auto, (max-width: 700px) calc(100vw - 64px), 700px" alt="${alt}" width="${width}" height="${height}" loading="lazy"><figcaption>${caption}</figcaption></figure>`;
+};
 const fieldHelp = {
   payload: 'Weigh the finished electronics, solar panels, antennas and suspension cord together. Include the tape and fittings that will fly. Do not include the balloon envelope or count anything again under additional mass.',
   envelope: 'Weigh the empty, dry balloon envelope before filling it. Include its nozzle and any permanent repair or sealing material not already counted elsewhere.',
