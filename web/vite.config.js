@@ -70,7 +70,15 @@ export default defineConfig(({ mode }) => {
     if (!process.env[name] && env[name]) process.env[name] = env[name];
   }
   return {
-    plugins: [{ name: 'dashboard-route', configureServer: dashboardRoute, configurePreviewServer: dashboardRoute }],
+    plugins: [
+      { name: 'dashboard-route', configureServer: dashboardRoute, configurePreviewServer: dashboardRoute },
+      { name: 'release-identity', generateBundle() {
+        this.emitFile({ type: 'asset', fileName: 'release.json', source: JSON.stringify({
+          site: 'stratolink',
+          commit: process.env.VERCEL_GIT_COMMIT_SHA || process.env.GITHUB_SHA || 'local',
+        }) });
+      } },
+    ],
     resolve: { alias: { '@': fileURLToPath(new URL('./src/dashboard', import.meta.url)) } },
     envPrefix: [],
     define: publicBuildDefines(process.env, env),

@@ -1,10 +1,12 @@
+import { payloadArticle } from './payload-dev-log.mjs';
+
 export const readingTime = post => Math.max(1, Math.ceil(post.body.replace(/<[^>]*>/g, ' ').trim().split(/\s+/).length / 220));
 
 // Source and editing decisions are recorded in reference/blog-content-audit.md.
-export const posts = [{
+export const posts = [payloadArticle, {
   slug: 'baja-run',
   title: 'The Baja Run',
-  category: 'Flight logs',
+  category: 'Flight notes',
   excerpt: 'Stratolink 3 followed the California coast, went quiet near Baja, and returned over Sonora before reaching New Mexico.',
   published: '2026-05',
   publishedLabel: 'May 2026',
@@ -140,4 +142,4 @@ export const posts = [{
 <p>So the weak signal couldn't give us a narrow distance ring. Antenna orientation, receiver noise, and the rest of the radio link mattered too. Without the receiver's location, even a perfect distance estimate would leave us with a circle around an unknown point.</p>
 <p>The circumnavigation is still a possible reconstruction. The sunrise geometry gave us something to calculate, but the receiving network and startup delay kept moving the answer around. I would very much like another packet with actual coordinates in it.</p>
 <p>The positions we did receive are in <a href="/dashboard?device=stratolink-3">Stratolink 3's flight</a>. Shepherd's <a href="/blog/baja-run">Baja Run</a> covers the earlier part of the flight.</p>`,
-}];
+}].sort((a, b) => b.published.localeCompare(a.published));

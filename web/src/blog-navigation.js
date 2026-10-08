@@ -4,9 +4,75 @@ const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
 const pages = new Map();
 let navigation = 0;
 let transition;
-let currentOrigin = history.state?.blogOrigin || 'card';
+let currentOrigin = history.state?.blogOrigin || (document.querySelector('.post-hero') ? 'featured' : 'card');
 let animateHistory = true;
+let currentPath = location.pathname;
+let articleCleanup;
+let fallbackCleanup;
 history.scrollRestoration = 'manual';
+
+async function prepareArticle(page) {
+  const styles = await Promise.all([...page.querySelectorAll('link[data-article-style]')].map(async source => {
+    let style = [...document.querySelectorAll('link[data-article-style]')].find(link => link.href === source.href);
+    if (!style) {
+      style = source.cloneNode();
+      style.media = 'not all';
+      const loaded = new Promise((resolve, reject) => { style.onload = resolve; style.onerror = reject; });
+      document.head.append(style);
+      await loaded;
+    }
+    return style;
+  }));
+  const module = page.querySelector('[data-interactive-article]')
+    ? await import('./payload-dev-log/article.js') : null;
+  return main => {
+    document.querySelectorAll('link[data-article-style]').forEach(style => { style.media = styles.includes(style) ? 'all' : 'not all'; });
+    return module?.mountArticle(main);
+  };
+}
+
+async function animatePage(update, oldSurface, kind) {
+  const oldMain = document.querySelector('main');
+  const oldImage = kind === 'featured' ? oldSurface?.querySelector('[data-post-image]') : null;
+  const from = oldImage?.getBoundingClientRect();
+  const imageStyle = oldImage && getComputedStyle(oldImage);
+  const oldStyle = imageStyle && {objectPosition:imageStyle.objectPosition, borderRadius:imageStyle.borderRadius};
+  const image = from?.width && from.bottom > 0 && from.top < innerHeight ? oldImage.cloneNode() : null;
+  let destination;
+  const animations = [];
+  const cleanup = () => {
+    animations.forEach(animation => animation.cancel());
+    image?.remove();
+    destination?.style.removeProperty('visibility');
+  };
+  fallbackCleanup = cleanup;
+  if (image) {
+    image.removeAttribute('data-post-image');
+    image.setAttribute('aria-hidden', 'true');
+    image.className = 'article-transition-image';
+    Object.assign(image.style, { left:`${from.left}px`, top:`${from.top}px`, width:`${from.width}px`, height:`${from.height}px`, objectPosition:oldStyle.objectPosition, borderRadius:oldStyle.borderRadius, opacity:'0' });
+    document.body.append(image);
+  }
+  animations.push(oldMain.animate([{opacity:1},{opacity:0}], {duration:120,fill:'forwards',easing:'ease-out'}));
+  if (image) animations.push(image.animate([{opacity:0},{opacity:1}], {duration:120,fill:'forwards',easing:'ease-out'}));
+  try {
+    await animations[0].finished;
+    const surface = update();
+    const main = document.querySelector('main');
+    destination = image && surface?.querySelector('[data-post-image]');
+    if (destination) {
+      const to = destination.getBoundingClientRect(), style = getComputedStyle(destination);
+      destination.style.visibility = 'hidden';
+      animations.push(image.animate([
+        {left:`${from.left}px`,top:`${from.top}px`,width:`${from.width}px`,height:`${from.height}px`,borderRadius:oldStyle.borderRadius,objectPosition:oldStyle.objectPosition},
+        {left:`${to.left}px`,top:`${to.top}px`,width:`${to.width}px`,height:`${to.height}px`,borderRadius:style.borderRadius,objectPosition:style.objectPosition},
+      ], {duration:300,fill:'forwards',easing:'cubic-bezier(.22,1,.36,1)'}));
+    } else image?.remove();
+    animations.push(main.animate([{opacity:0},{opacity:1}], {duration:220,fill:'both',easing:'ease-out'}));
+    await Promise.all(animations.map(animation => animation.finished));
+  } catch { /* Superseded by another navigation. */ }
+  finally { cleanup(); if (fallbackCleanup === cleanup) fallbackCleanup = undefined; }
+}
 
 function savePosition(linkId) {
   history.replaceState({ ...history.state, blogPosition: {
@@ -61,30 +127,40 @@ let railCleanup;
 
 async function navigate(url, { source, restore, pop = false, animate = true } = {}) {
   const currentNavigation = ++navigation;
-  let nextPage;
-  try { nextPage = await getPage(url); }
+  transition?.skipTransition();
+  fallbackCleanup?.();
+  let nextPage, mount;
+  try {
+    nextPage = await getPage(url);
+    mount = await prepareArticle(nextPage);
+    const hero = nextPage.querySelector('.post-hero img, .featured > img');
+    if (hero) { const image = new Image(); image.src = hero.src; await image.decode().catch(() => {}); }
+  }
   catch { if (currentNavigation === navigation) location.assign(url); return; }
   if (currentNavigation !== navigation) return;
   const nextMain = nextPage.querySelector('main');
   if (!nextMain) { location.assign(url); return; }
-  transition?.skipTransition();
   clearTransitionNames();
   const returning = !nextMain.dataset.post;
   const kind = source ? source.dataset.origin || 'card' : currentOrigin;
   const oldSurface = source || document.querySelector(kind === 'featured' ? '.post-hero' : '.post-heading');
-  const shouldAnimate = animate && !reducedMotion.matches && document.startViewTransition;
-  if (shouldAnimate) {
+  const shouldAnimate = animate && !reducedMotion.matches;
+  const nativeTransition = shouldAnimate && document.startViewTransition;
+  if (nativeTransition) {
     nameTransition(oldSurface, kind);
     if (kind === 'featured' && returning) document.querySelector('[data-post-title]')?.style.setProperty('view-transition-name', 'article-title');
   }
   if (!pop) savePosition(source?.id);
   const update = () => {
     railCleanup?.();
+    articleCleanup?.();
     document.querySelector('main').replaceWith(nextMain);
     document.querySelector('.blog-footer').replaceWith(nextPage.querySelector('.blog-footer'));
     document.body.classList.toggle('article-page', Boolean(nextMain.dataset.post));
     document.title = nextPage.title;
+    articleCleanup = mount(nextMain);
     if (!pop) history.pushState({blogOrigin:kind, blogParent:!returning}, '', url);
+    currentPath = location.pathname;
     currentOrigin = kind;
     initRail();
     const rail = document.querySelector('.article-grid');
@@ -92,17 +168,19 @@ async function navigate(url, { source, restore, pop = false, animate = true } = 
     scrollTo({top:restore?.y || 0, behavior:'instant'});
     updateHeaderFooter();
     const destination = returning
-      ? document.getElementById(restore?.linkId || '')
+      ? document.getElementById(restore?.linkId || '') || document.querySelector('.featured')
       : document.querySelector(kind === 'featured' ? '.post-hero' : '.post-heading');
-    if (shouldAnimate) {
+    if (nativeTransition) {
       nameTransition(destination, kind);
       if (kind === 'featured' && !returning) document.querySelector('[data-post-title]')?.style.setProperty('view-transition-name', 'article-title');
     }
     const focus = returning ? destination || nextMain : nextMain;
     focus.setAttribute('tabindex', focus.matches('a') ? '0' : '-1');
     focus.focus({preventScroll:true});
+    return destination;
   };
   if (!shouldAnimate) { update(); return; }
+  if (!nativeTransition) { await animatePage(update, oldSurface, kind); return; }
   transition = document.startViewTransition(update);
   try { await transition.finished; } catch { /* A newer navigation can interrupt the transition. */ }
   if (currentNavigation === navigation) clearTransitionNames();
@@ -125,8 +203,11 @@ document.addEventListener('pointerover', event => {
   if (link) getPage(link.href).catch(() => {});
 });
 window.addEventListener('popstate', event => {
+  if (location.pathname === currentPath) return;
   navigate(location.href, {pop:true, restore:event.state?.blogPosition, animate:animateHistory});
   animateHistory = true;
 });
 window.addEventListener('pagehide', () => savePosition());
 initRail();
+const initialMain = document.querySelector('main');
+prepareArticle(document).then(mount => { if (initialMain.isConnected && !articleCleanup) articleCleanup = mount(initialMain); });

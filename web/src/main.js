@@ -153,6 +153,7 @@ function removeIntro() {
     element.getAnimations().forEach((animation) => animation.cancel());
   });
   launch.removeAttribute('data-loading');
+  window.dispatchEvent(new Event('launch:ready'));
 }
 
 function startStoryReveals() {

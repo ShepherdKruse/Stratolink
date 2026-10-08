@@ -198,6 +198,18 @@ img { display: block; max-width: 100%; }
 @media (max-width:700px) { .blog-main { min-height: calc(100svh - 92px); } }
 
 .blog-lead--single { grid-template-columns: minmax(0, 1fr); }
+
+.featured-payload { min-height:clamp(540px, 44vw, 720px); }
+.featured-payload::before { background:linear-gradient(180deg, rgb(16 30 41 / .48), rgb(16 30 41 / .45) 42%, rgb(16 30 41 / 0) 68%); }
+.featured-payload h2 { max-width:75%; }
+.featured-payload .featured-excerpt { max-width:35ch; }
+.article-transition-image { position:fixed; z-index:40; display:block; max-width:none; object-fit:cover; pointer-events:none; }
+[data-post="building-towards-stratolink-v1"] .post-hero > img { aspect-ratio:1.95; }
+@media (max-width:700px) { [data-post="building-towards-stratolink-v1"] .post-hero > img { aspect-ratio:1.6; } }
+@media (max-width:700px) {
+  .featured-payload { min-height:560px; }
+  .featured-payload h2 { max-width:100%; }
+}
 .blog-lead--single .featured { min-height: clamp(430px, 46vw, 740px); }
 .featured-excerpt { max-width: 39ch; margin: 22px 0 0; font-size: clamp(16px, 1.35vw, 21px); line-height: 1.5; color: rgb(255 255 255 / .9); }
 .post-body .flight-timeline { list-style: none; padding: 0; margin: 2em 0; border-top: 1px solid var(--rule); }

@@ -341,7 +341,7 @@ export default function MissionControlScreen() {
                         fleetFitBalloons={portalPreview ? fleetFitBalloons : fleetFitBalloons.filter(balloon => filteredIds.has(balloon.id))}
                         fleetDevices={portalPreview ? devices : filteredDevices}
                         fleetHistory={fleetHistory.rowsByDevice}
-                        fleetReady={!fleetHistory.loading && fleetFitBalloons.length > 0}
+                        fleetReady={!registryLoading && !fleetHistory.loading}
                         fleetCaption={fleetCaption}
                         onSelectBalloon={handleSelectDevice}
                         visibleRows={visibleRows}

@@ -1,0 +1,32 @@
+name: Production domain verification
+
+on:
+  deployment_status:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: production-domain-verification
+  cancel-in-progress: true
+
+jobs:
+  verify:
+    if: >-
+      github.event_name == 'workflow_dispatch' ||
+      (github.event.deployment_status.state == 'success' &&
+      (github.event.deployment.environment == 'Production' || github.event.deployment.environment == 'production'))
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          ref: main
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: 22
+      - name: Verify the public domain points to this release
+        env:
+          DEPLOYED_SHA: ${{ github.event.deployment.sha || github.sha }}
+        run: node web/scripts/check-production.mjs "$DEPLOYED_SHA"
