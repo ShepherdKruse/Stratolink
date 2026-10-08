@@ -216,3 +216,11 @@ All 149 unit/API tests and the full verification suite pass. Tests compare keybo
 Additional production reload checks found intermittent errors in the modular 3.32.0 build: `refreshFeatureState` accessed an unavailable painter style, and another load failed while defining `_classRegistryKey` on a non-extensible object. A fresh temporary tab succeeded, but the native browser tab reproduced an initialization failure. The exact trigger is not established.
 
 Restore the previously deployed 3.18.1 dependency, lockfile and standard import. The upgrade did not establish a consistent PageSpeed improvement, and its reload failure outweighs the smaller main-thread module. Retain the independent history, card, map-source, forecast payload and timeline improvements. Do not describe the modular renderer experiment as the final shipped configuration.
+
+## City-light raster processing
+
+The remaining city-light source used a second WebGL context to sample Black Marble tiles and synchronously read pixels back from the GPU. It now decodes the same images through a software-backed 2D canvas and samples them in the existing worker. The solar boundary, luminance-weighted alpha, bilinear filtering and ancestor-tile overzoom are preserved. The shade and lights share the same solar calculation. Cached decoded tiles are bounded to 64 entries; disposing the fallback renderer aborts pending fetches and releases its canvas.
+
+A browser comparison against the previous shader checked 16 tiles across both themes, two dates and zooms 0, 2, 5 and 9. Across 4,194,304 channel samples, the maximum difference was 1 out of 255 and the mean absolute difference was 0.0041. The tiles contained visible city lights, so this was not a comparison of empty responses. The final 12 warmed tile operations totaled 48.4 ms for the shader and 33.9 ms for the CPU version. Earlier network timings were cache-dependent and are excluded. This establishes pixel agreement and a local processing improvement, not a cold PageSpeed gain.
+
+All 156 unit/API tests and the full verification suite pass. New tests cover daylight transparency, brightness weighting, north-up filtering, overzoom, missing images, cache bounds and cancellation. No map layers, colors, opacity, layout or animation timing changed.
