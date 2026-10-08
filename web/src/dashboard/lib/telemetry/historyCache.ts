@@ -60,8 +60,15 @@ export function createHistoryLoader<Row extends TimedRow>(
             }
 
             const byTime = new Map((cached ?? []).map(row => [row.t, row]));
-            received.forEach(row => byTime.set(row.t, row));
-            const next = [...byTime.values()].sort((a, b) => a.t - b.t);
+            let changed = cached === undefined;
+            for (const row of received) {
+                const previous = byTime.get(row.t);
+                if (previous && JSON.stringify(previous) === JSON.stringify(row)) continue;
+                byTime.set(row.t, row);
+                changed = true;
+            }
+            // Polls include the last packet again. Preserve unchanged histories and their indices.
+            const next = changed ? [...byTime.values()].sort((a, b) => a.t - b.t) : cached!;
             if (pending.get(deviceId)?.token === token) {
                 rowsByDevice.set(deviceId, next);
                 windows.set(deviceId, { since, actualSince: earliest });
