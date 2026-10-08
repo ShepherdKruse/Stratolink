@@ -234,3 +234,13 @@ Mapbox 3.18.1 enables `precompilePrograms` by default. Its first style update sc
 In the same compiled two-balloon fixture, startup compiled 28 shaders / 14 linked programs instead of 48 shaders / 24 programs. Both warmed runs had no long tasks. Frame callback totals were 654 ms versus 602 ms, so the local comparison establishes fewer shader variants, not a warmed frame-time improvement. First use of a previously unseen layer may still compile its program; zoom, theme and replay checks are required alongside production cold-load measurements.
 
 A separate interaction trace covered zooming, panning, switching light/dark themes, selecting a flight and replaying it. It compiled two additional programs, recorded no long tasks and had an 8.3 ms maximum frame callback on local hardware. Real Stratolink 3 telemetry and both themes also rendered without errors in the compiled build. All 156 unit/API tests and the full verification suite pass.
+
+## Fleet arrival batches and transition snapshots
+
+Fleet histories now publish their first successful result immediately, combine subsequent arrivals every 200 ms instead of 50 ms, and flush when the batch completes. Fetch concurrency, selected-device priority and the polling interval stay the same. This reduces repeated map updates while a large fleet loads.
+
+Two local 1,000-balloon checks, each with 250 packets per balloon and both tails and projections enabled, reduced total map-frame callback time from 6,640 / 6,903 ms to 3,291 / 3,314 ms. The 95th-percentile callback fell from 22.8 / 24.4 ms to 9.7 / 8.9 ms. Long-task counts varied between runs, so this establishes reduced rendering work rather than the elimination of all startup blocking.
+
+Only the selected card now has an individual view-transition name. The remaining cards share one list snapshot, preserving their fade and the selected card's expansion without separately capturing every offscreen card. A matching 1,000-balloon selection/return check recorded two tasks of 2,555 and 2,504 ms with the original snapshots; the candidate's longest tasks were 203 and 204 ms across two checks. Direct selectors were used in the control and final repeat to avoid attributing accessibility-name lookup work to the transition. These are local fleet measurements, not evidence that the production cold Mapbox startup is resolved.
+
+The compiled dashboard passes real-telemetry selection, replay, fleet return and keyboard checks at 1280 px and 390 px without browser errors. All 156 unit/API tests and the full verification suite pass.

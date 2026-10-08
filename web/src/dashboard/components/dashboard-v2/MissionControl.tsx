@@ -94,6 +94,7 @@ export default function MissionControlScreen() {
 
     const [fleetScrubT, setFleetScrubT] = useState<number | null>(null);
     const transitionRef = useRef<ViewTransition | null>(null);
+    const [transitionId, setTransitionId] = useState<string | null>(null);
     const [scrubT, setScrubT] = useState<number | null>(null);
     /* True only while the user is actively dragging the scrubber — used to hide
      * the day/night terminator during a drag (it reappears on release). */
@@ -277,18 +278,20 @@ export default function MissionControlScreen() {
         ? `${activity.active} active ${activity.active === 1 ? 'balloon' : 'balloons'}`
         : `${activity.inactive} inactive ${activity.inactive === 1 ? 'balloon' : 'balloons'}`;
 
-    const transitionPanel = useCallback((update: () => void, animate = true) => {
+    const transitionPanel = useCallback((id: string | null, update: () => void, animate = true) => {
         transitionRef.current?.skipTransition();
         if (!animate || !document.startViewTransition || window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
             update();
             return;
         }
+        // Capture the selected card separately; the other cards share one list snapshot.
+        flushSync(() => setTransitionId(id));
         transitionRef.current = document.startViewTransition(() => flushSync(update));
         void transitionRef.current.ready.catch(() => {}); // Interrupted transitions still apply the selection.
     }, []);
 
     const handleSelectDevice = useCallback((id: string, animate = true) => {
-        transitionPanel(() => {
+        transitionPanel(id, () => {
             setSelectedId(id);
             setScrubT(null);
             setChartsOpen(false);
@@ -298,7 +301,7 @@ export default function MissionControlScreen() {
     }, [setSelectedId, transitionPanel]);
 
     function showFleet(animate = true) {
-        transitionPanel(() => {
+        transitionPanel(selectedId, () => {
             setSelectedId(null);
             setScrubT(null);
             setChartsOpen(false);
@@ -320,7 +323,7 @@ export default function MissionControlScreen() {
                     <CommunityPanel />
                     {isFleet ? (
                         <><FleetFilters value={filters} onChange={setFilters} signedIn={Boolean(community.account)} count={filteredDevices.length} />
-                        <FleetOverview devices={filteredDevices} {...fleetHistory} loading={registryLoading || fleetHistory.loading} scrubT={fleetScrubT} now={nowMs ?? Date.now()} onSelect={handleSelectDevice} /></>
+                        <FleetOverview devices={filteredDevices} {...fleetHistory} loading={registryLoading || fleetHistory.loading} scrubT={fleetScrubT} now={nowMs ?? Date.now()} onSelect={handleSelectDevice} transitionId={transitionId} /></>
                     ) : (
                         <div className="dashboard-detail-content tlm-scroll" style={{ viewTransitionName: balloonTransitionName(selectedId) }}>
                             <TelemetryV3Panel {...panelProps} variant={isMobile ? 'summary' : 'full'} />
