@@ -210,3 +210,9 @@ The fleet timeline copied and sorted every packet after each history batch arriv
 For 1,000 histories of 250 packets each, a local 50-run median range calculation fell from 12.62 ms to 0.012 ms; finding the previous fleet packet took 0.030 ms. The same compiled 1,000-balloon startup fixture, with flight tails and projections already enabled, fell from 36 tasks over 50 ms to three (53, 66 and 52 ms), totaling 21 ms above the threshold. The maximum map callback did not improve in this pair (50.1 versus 64.9 ms); the change removes packet-array work, not graphics startup.
 
 All 149 unit/API tests and the full verification suite pass. Tests compare keyboard navigation against a merged reference across gaps and duplicate timestamps, and verify that a million-packet fixture reads endpoints and logarithmic candidates rather than scanning every packet.
+
+## Renderer rollback
+
+Additional production reload checks found intermittent errors in the modular 3.32.0 build: `refreshFeatureState` accessed an unavailable painter style, and another load failed while defining `_classRegistryKey` on a non-extensible object. A fresh temporary tab succeeded, but the native browser tab reproduced an initialization failure. The exact trigger is not established.
+
+Restore the previously deployed 3.18.1 dependency, lockfile and standard import. The upgrade did not establish a consistent PageSpeed improvement, and its reload failure outweighs the smaller main-thread module. Retain the independent history, card, map-source, forecast payload and timeline improvements. Do not describe the modular renderer experiment as the final shipped configuration.
