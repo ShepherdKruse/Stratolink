@@ -116,12 +116,18 @@ export function useFleetHistory(devices: DeviceSummary[], enabled: boolean): Use
         async function refresh(initial = false) {
             if (cancelled || running || document.hidden) return;
             running = true;
+            // Show the first history promptly, then batch arrivals before rebuilding the fleet map.
+            let firstResult = true;
             const results = await Promise.allSettled(windows.map(async window => {
                 await missionHistory.load(window, { refresh: initial || window.poll });
+                if (!cancelled && firstResult) {
+                    firstResult = false;
+                    publish();
+                }
                 if (!cancelled && publishTimer === undefined) publishTimer = setTimeout(() => {
                     publishTimer = undefined;
                     if (!cancelled) publish();
-                }, 50);
+                }, 200);
             }));
             running = false;
             if (cancelled) return;

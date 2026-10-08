@@ -11,7 +11,7 @@ export const BALLOON_COLORS = ['#a23a2d', '#476f83', '#7a7650', '#806682'];
 export const balloonColor = (id: string) => BALLOON_COLORS[id === 'stratolink-2' ? 0 : id === 'stratolink-3' ? 1 : [...id].reduce((sum,c) => sum+c.charCodeAt(0),0) % BALLOON_COLORS.length];
 export const balloonTransitionName = (id: string) => `balloon-${id.replace(/[^a-zA-Z0-9_-]/g, '-')}`;
 
-export default function FleetOverview({ devices, rowsByDevice, loading, error, scrubT, now, onSelect }: {
+export default function FleetOverview({ devices, rowsByDevice, loading, error, scrubT, now, onSelect, transitionId }: {
     devices: DeviceSummary[];
     rowsByDevice: Record<string, TelemetryRow[]>;
     loading: boolean;
@@ -19,13 +19,14 @@ export default function FleetOverview({ devices, rowsByDevice, loading, error, s
     scrubT: number | null;
     now: number;
     onSelect: (id: string, animate?: boolean) => void;
+    transitionId: string | null;
 }) {
     return (
-        <div className="fleet-cards tlm-scroll" aria-label="Balloons">
+        <div className="fleet-cards tlm-scroll" aria-label="Balloons" style={{ viewTransitionName: 'balloon-list' }}>
             {devices.map(device => <FleetCard key={device.id} device={device}
                 rows={rowsByDevice[device.id] ?? EMPTY_ROWS}
                 waiting={loading && !(device.id in rowsByDevice)}
-                scrubT={scrubT} now={now} onSelect={onSelect} />)}
+                scrubT={scrubT} now={now} onSelect={onSelect} transitioning={device.id === transitionId} />)}
             {devices.length === 0 && <p className="fleet-message">{loading ? 'Loading balloons' : 'No balloons match these filters.'}</p>}
             {error && <p className="fleet-message" role="status">Some telemetry could not be loaded. Retrying shortly.</p>}
         </div>
@@ -34,13 +35,14 @@ export default function FleetOverview({ devices, rowsByDevice, loading, error, s
 
 const EMPTY_ROWS: TelemetryRow[] = [];
 
-const FleetCard = memo(function FleetCard({ device, rows, waiting, scrubT, now, onSelect }: {
+const FleetCard = memo(function FleetCard({ device, rows, waiting, scrubT, now, onSelect, transitioning }: {
     device: DeviceSummary;
     rows: TelemetryRow[];
     waiting: boolean;
     scrubT: number | null;
     now: number;
     onSelect: (id: string, animate?: boolean) => void;
+    transitioning: boolean;
 }) {
     const row = rowAtTime(rows, scrubT);
     const latest = rows.at(-1);
@@ -57,7 +59,7 @@ const FleetCard = memo(function FleetCard({ device, rows, waiting, scrubT, now, 
     ];
     return (
         <button type="button" className="balloon-card"
-            style={{ viewTransitionName: balloonTransitionName(device.id) }}
+            style={{ viewTransitionName: transitioning ? balloonTransitionName(device.id) : undefined }}
             onClick={event => onSelect(device.id, event.detail !== 0)} aria-label={`Monitor ${balloonName(device)}`}>
             <CardHeading device={device} />
             <CardStatus id={device.id} status={status} />
