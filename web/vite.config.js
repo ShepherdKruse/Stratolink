@@ -72,6 +72,16 @@ export default defineConfig(({ mode }) => {
   return {
     plugins: [
       { name: 'dashboard-route', configureServer: dashboardRoute, configurePreviewServer: dashboardRoute },
+      { name: 'article-style-order', transformIndexHtml: {
+        order: 'post',
+        handler(html) {
+          // Keep article overrides after Vite's extracted blog stylesheet.
+          const articleStyles = html.match(/<link\b(?=[^>]*\bdata-article-style\b)[^>]*>/g);
+          if (!articleStyles) return html;
+          return html.replace(/<link\b(?=[^>]*\bdata-article-style\b)[^>]*>/g, '')
+            .replace('</head>', `${articleStyles.join('\n')}\n</head>`);
+        },
+      } },
       { name: 'release-identity', generateBundle() {
         this.emitFile({ type: 'asset', fileName: 'release.json', source: JSON.stringify({
           site: 'stratolink',
