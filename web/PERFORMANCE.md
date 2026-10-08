@@ -252,3 +252,15 @@ After PR 95 deployed, dashboard PageSpeed measured 59 mobile / 60 desktop. Mobil
 The blog and balloon-preparation page both scored 100 for performance on mobile and desktop, with zero TBT and CLS. Mobile LCP was 1.1 s for the blog and 1.2 s for preparation. Both scored 100 for Best Practices. Reports: https://pagespeed.web.dev/analysis/https-stratolink-org-blog/930mirse2v and https://pagespeed.web.dev/analysis/https-stratolink-org-docs-balloon-prep/md922dy0bk
 
 The public page generators now provide regular meta descriptions alongside social metadata, using the existing article introductions. The five preparation illustrations declare their intrinsic dimensions so the browser can reserve their space before lazy loading. Their files, styling and captions are unchanged. The preparation report also flagged oversized image delivery; dimensions alone do not reduce those transferred bytes.
+
+## Responsive preparation illustrations
+
+The five preparation illustrations now offer 480 px and 960 px WebP variants, with the originals retained for enlargement. Lazy-loaded images use their rendered width to select a source in browsers supporting automatic sizes; older browsers have explicit responsive fallbacks. This changes image delivery without changing the layout, captions, source illustrations or math.
+
+At a 390 px viewport, the first three illustrations selected files totaling 164,624 bytes instead of 475,824 bytes, a 65% reduction. The before/after illustrations remain 150 px tall with captions at the same vertical position. Desktop at 1280 px retains the same layout without horizontal overflow. Clicking a smaller inline image opens its original 1244 px or 1208 px source in the existing dialog and returns focus to the image link on closing.
+
+## Interpreting the dashboard lab result
+
+Lighthouse maintainers document that PageSpeed Insights runs WebGL without a hardware GPU, using software rendering instead. Their [globe demo comparison](https://github.com/GoogleChrome/lighthouse/issues/14301#issuecomment-1219754117) and [explanation of large Other rendering time](https://github.com/GoogleChrome/lighthouse/issues/15180#issuecomment-1601726668) describe this limitation. The corresponding [WebGL issue](https://github.com/GoogleChrome/lighthouse/issues/8557) remains open. This is relevant evidence for the large gap between dashboard PageSpeed results and local browser traces, not proof of which rendering operation dominates every current lab run.
+
+The production dashboard still scores about 59 mobile / 60 desktop. Keep reporting that result alongside real-browser checks rather than treating software-rendered globe startup as a pure JavaScript bottleneck. A local two-balloon trace on the retained 3.18.1 renderer recorded no long tasks, a 13.3 ms maximum frame callback and a 4 ms 95th percentile. Separate zoom, pan, theme and replay checks and the large-fleet measurements above establish improvements on the tested hardware. They do not establish frame rates on every mobile GPU or eliminate the need for field measurements as traffic grows. No user-agent detection or PageSpeed-specific rendering path is used.
