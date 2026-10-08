@@ -177,3 +177,26 @@ On local hardware, the old warmed renderer completed 229 frame callbacks in 618 
 All 140 unit/API tests and the full verification suite pass. Real telemetry, replay, light/dark themes, mobile layout and the mobile footer globe transition were checked locally without map errors. No frontend layout, colors, copy or animation settings changed.
 
 A further local 1,000-balloon check enabled projected paths and flight tails together, performed eight replay steps, and included a normal telemetry refresh. All 1,000 forecasts loaded, with four requests in flight, and no map errors. It recorded three long tasks (65, 56 and 99 ms), 70 ms total blocking time and a 64.8 ms maximum map callback. This combined-layer check is not directly comparable to the projection-only run above. The compiled footer transition completed at both 1280 px and a verified 390 px viewport.
+
+## Renderer production follow-up: October 7, 18:39 PDT
+
+Production `b855476` (PR 89), [PageSpeed report](https://pagespeed.web.dev/analysis/https-stratolink-org-dashboard/cfgoh1q5jd), compared with a [fresh pre-upgrade run](https://pagespeed.web.dev/analysis/https-stratolink-org-dashboard/7z2fbomlo7) two minutes earlier:
+
+| Build | Device | Performance | LCP | TBT | CLS |
+| --- | --- | ---: | ---: | ---: | ---: |
+| Before | Mobile | 59 | 2.7 s | 2,600 ms | 0.035 |
+| Before | Desktop | 61 | 0.4 s | 13,400 ms | 0 |
+| Modular 3.32 | Mobile | 54 | 3.1 s | 5,130 ms | 0.035 |
+| Modular 3.32 | Desktop | 61 | 0.5 s | 11,590 ms | 0 |
+
+Best Practices remains 100. Desktop blocking time decreased in this pair; mobile increased. These results do not establish a consistent cold-start improvement. The upgrade reduces main-thread module size and keeps the renderer current, but the dashboard still has substantial graphics startup cost in PageSpeed. Production mobile telemetry and replay render without map errors.
+
+## Fleet forecast payload
+
+Fleet projections need only the nominal path, but previously downloaded every ensemble member, confidence polygon and reconstructed track. `GET /api/forecast?device=…&view=path` now returns only the generation timestamp and sanitized nominal path. The default response retains every field used by the selected-balloon view. Both forms keep the existing connected-device check, private storage access and location privacy rules.
+
+The request queue shares its four slots across both forms, with separate cache keys so a small fleet response cannot replace a full selected-flight response. Duplicate reads of the same form still share a request. Cancellation, selected-flight priority, timeouts and polling behavior are unchanged.
+
+For the current public Stratolink 3 forecast, the JSON response shrinks from 380,100 bytes to 79 bytes (106,424 versus 97 bytes using local gzip). Its nominal path currently contains only one coordinate, so active forecasts will be larger. A local 1,000-iteration sanitation/serialization check took 1,450 ms for full responses and 1 ms for paths. This measures response preparation, not private Blob transfer, production latency or cold map rendering; the server still reads the same stored forecast.
+
+A 97-coordinate fixture with 62 ensemble members shrank from 244,340 to 2,787 bytes (103,802 to 1,173 with local gzip). The compiled 1,000-balloon fixture fetched 1,000 path responses and no full forecasts, with a peak of four requests. Opening a balloon fetched one full response, retained its 48-hour forecast timeline and returned to the filtered fleet without map errors. Initial loading with both optional layers already enabled still recorded 36 tasks of 50-66 ms; this payload change does not eliminate the cost of streaming a large fleet into the map. All 145 unit/API tests and the full verification suite pass.

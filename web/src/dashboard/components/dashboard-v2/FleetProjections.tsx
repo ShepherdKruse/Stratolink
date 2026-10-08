@@ -43,7 +43,7 @@ export function FleetProjections({ deviceIds, color }: { deviceIds: string[]; co
                     entry.feature = { type: 'Feature', properties: {}, geometry: { type: 'LineString', coordinates } };
                 }
                 publish();
-            });
+            }, false, 'path');
         }
     }, [idsKey, publish]);
     useEffect(() => () => {

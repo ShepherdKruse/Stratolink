@@ -39,7 +39,8 @@ function sanitizeGeometry(value) {
   if ('lat' in result && 'lon' in result) Object.assign(result, publicPosition(result.lat, result.lon));
   return result;
 }
-export function sanitizeForecast(raw) {
+export function sanitizeForecast(raw, view = 'full') {
+  if (view === 'path') return sanitizeGeometry({ generated_at: raw.generated_at, nominal_path: raw.nominal_path ?? [] });
   // Only return fields consumed by the dashboard, never source metadata/launch notes.
   return sanitizeGeometry({
     generated_at: raw.generated_at, forecast_horizon_h: raw.forecast_horizon_h,

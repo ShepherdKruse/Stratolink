@@ -11,9 +11,10 @@ export interface ForecastData {
     generated_at?: unknown;
 }
 export type ForecastResponse = { status: number; data: ForecastData | null };
-type FetchForecast = (id: string, signal: AbortSignal) => Promise<ForecastResponse>;
+type ForecastView = 'full' | 'path';
+type FetchForecast = (id: string, signal: AbortSignal, view: ForecastView) => Promise<ForecastResponse>;
 type Subscriber = { resolve: (result: ForecastResponse) => void; reject: (error: unknown) => void; cleanup: () => void };
-type Job = { id: string; controller: AbortController; subscribers: Set<Subscriber> };
+type Job = { id: string; key: string; view: ForecastView; controller: AbortController; subscribers: Set<Subscriber> };
 
 /** Share public forecast reads, bound their concurrency and cancel abandoned work. */
 export function createForecastRequests(fetchForecast: FetchForecast, now = Date.now) {
@@ -29,10 +30,10 @@ export function createForecastRequests(fetchForecast: FetchForecast, now = Date.
             running++;
             void (async () => {
                 try {
-                    const result = await fetchForecast(job.id, job.controller.signal);
-                    if (job.subscribers.size && pending.get(job.id) === job && ((result.status >= 200 && result.status < 300) || result.status === 404)) {
-                        cache.delete(job.id);
-                        cache.set(job.id, { result, until: now() + (result.status === 202 ? 8000 : 300_000) });
+                    const result = await fetchForecast(job.id, job.controller.signal, job.view);
+                    if (job.subscribers.size && pending.get(job.key) === job && ((result.status >= 200 && result.status < 300) || result.status === 404)) {
+                        cache.delete(job.key);
+                        cache.set(job.key, { result, until: now() + (result.status === 202 ? 8000 : 300_000) });
                         while (cache.size > 64) cache.delete(cache.keys().next().value!);
                     }
                     for (const subscriber of job.subscribers) { subscriber.cleanup(); subscriber.resolve(result); }
@@ -40,7 +41,7 @@ export function createForecastRequests(fetchForecast: FetchForecast, now = Date.
                     for (const subscriber of job.subscribers) { subscriber.cleanup(); subscriber.reject(error); }
                 } finally {
                     job.subscribers.clear();
-                    if (pending.get(job.id) === job) pending.delete(job.id);
+                    if (pending.get(job.key) === job) pending.delete(job.key);
                     running--;
                     drain();
                 }
@@ -48,15 +49,16 @@ export function createForecastRequests(fetchForecast: FetchForecast, now = Date.
         }
     }
 
-    function load(id: string, signal: AbortSignal, prioritize = false): Promise<ForecastResponse> {
+    function load(id: string, signal: AbortSignal, prioritize = false, view: ForecastView = 'full'): Promise<ForecastResponse> {
         if (signal.aborted) return Promise.reject(new DOMException('Forecast cancelled', 'AbortError'));
-        const cached = cache.get(id);
+        const key = `${view}:${id}`;
+        const cached = cache.get(key);
         if (cached && cached.until > now()) return Promise.resolve(cached.result);
-        cache.delete(id);
-        let job = pending.get(id);
+        cache.delete(key);
+        let job = pending.get(key);
         if (!job) {
-            job = { id, controller: new AbortController(), subscribers: new Set() };
-            pending.set(id, job);
+            job = { id, key, view, controller: new AbortController(), subscribers: new Set() };
+            pending.set(key, job);
             queue.push(job);
         }
         if (prioritize) {
@@ -71,7 +73,7 @@ export function createForecastRequests(fetchForecast: FetchForecast, now = Date.
                 reject(new DOMException('Forecast cancelled', 'AbortError'));
                 if (!request.subscribers.size) {
                     request.controller.abort();
-                    if (pending.get(id) === request) pending.delete(id);
+                    if (pending.get(key) === request) pending.delete(key);
                     const index = queue.indexOf(request);
                     if (index >= 0) queue.splice(index, 1);
                 }
@@ -82,13 +84,13 @@ export function createForecastRequests(fetchForecast: FetchForecast, now = Date.
             drain();
         });
     }
-    function watch(id: string, onResult: (result: ForecastResponse) => void, prioritize = false) {
+    function watch(id: string, onResult: (result: ForecastResponse) => void, prioritize = false, view: ForecastView = 'full') {
         const controller = new AbortController();
         let timer: ReturnType<typeof setTimeout> | undefined;
         let fastPolls = 0;
         async function poll() {
             let result: ForecastResponse;
-            try { result = await load(id, controller.signal, prioritize); }
+            try { result = await load(id, controller.signal, prioritize, view); }
             catch { result = { status: 0, data: null }; }
             if (controller.signal.aborted) return;
             const delay = result.status === 202 && fastPolls++ < 15 ? 8000 : 300_000;
@@ -102,8 +104,8 @@ export function createForecastRequests(fetchForecast: FetchForecast, now = Date.
     return { load, watch };
 }
 
-export const forecastRequests = createForecastRequests(async (id, signal) => {
-    const response = await fetch(`/api/forecast?device=${encodeURIComponent(id)}`, {
+export const forecastRequests = createForecastRequests(async (id, signal, view) => {
+    const response = await fetch(`/api/forecast?device=${encodeURIComponent(id)}${view === 'path' ? '&view=path' : ''}`, {
         signal: AbortSignal.any([signal, AbortSignal.timeout(20_000)]),
     });
     return { status: response.status, data: response.ok && response.status !== 202 ? await response.json() : null };
