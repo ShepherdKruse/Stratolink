@@ -74,6 +74,33 @@ function tileBounds3857(x: number, y: number, z: number): [number, number, numbe
     ];
 }
 
+/** Same solar gradient as the shader, without a GPU context or readback. */
+export function nightShadePixels(tile: { x: number; y: number; z: number }, size: number, date: Date, basemap: TerminatorBasemap): Uint8ClampedArray<ArrayBuffer> {
+    const pixels = new Uint8ClampedArray(size * size * 4);
+    const days = toDays(date);
+    const sun = sunCoords(days);
+    const sidereal = (RAD * (280.16 + 360.9856235 * days)) % (2 * Math.PI);
+    const [west, south, east, north] = tileBounds3857(tile.x, tile.y, tile.z).map(v => v / EARTH_RADIUS);
+    const [horizon, night] = basemap === 'dark' ? FADE_RANGE_DARK : FADE_RANGE_LIGHT;
+    const color = (basemap === 'dark' ? NIGHT_RGB_DARK : NIGHT_RGB_LIGHT).map(channel => Math.round(channel * 255));
+    const hourAngles = Float64Array.from({ length: size }, (_, x) => Math.cos(sidereal + west + (east - west) * (x + 0.5) / size - sun.ra));
+    for (let y = 0; y < size; y++) {
+        const latitude = Math.PI / 2 - 2 * Math.atan(Math.exp(-(north + (south - north) * (y + 0.5) / size)));
+        const a = Math.sin(latitude) * sun.sinDec;
+        const b = Math.cos(latitude) * sun.cosDec;
+        for (let x = 0; x < size; x++) {
+            const altitude = Math.asin(Math.max(-1, Math.min(1, a + b * hourAngles[x]))) / RAD;
+            const t = Math.max(0, Math.min(1, (altitude - horizon) / (night - horizon)));
+            const offset = (y * size + x) * 4;
+            pixels[offset] = color[0];
+            pixels[offset + 1] = color[1];
+            pixels[offset + 2] = color[2];
+            pixels[offset + 3] = 255 * t * t * t * (t * (t * 6 - 15) + 10);
+        }
+    }
+    return pixels;
+}
+
 const VERT = `precision highp float;
 attribute vec2 xy;
 void main () { gl_Position = vec4(xy, 0.0, 1.0); }`;
