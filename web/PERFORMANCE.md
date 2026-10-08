@@ -94,3 +94,12 @@ Desktop blocking time remains high and variable in the PageSpeed cold-load run. 
 The shade-only source now evaluates the same solar-altitude and smootherstep formula directly in its worker. It no longer creates a separate WebGL context or reads pixels back from the GPU. City lights retain their existing texture shader.
 
 A local browser comparison checked 24 tiles across equinox/solstice dates, zooms 0/2/5 and both themes against the original shader. Maximum channel difference was 1/255; the mean difference was 0.00000318 on the 0-255 scale. For those tiles, total software calculation took 12.2 ms versus 30.6 ms for shader drawing/readback on this machine, excluding renderer construction. This is a tile benchmark, not a page-load claim. Tests cover day/night reversal, polar winter, theme colors and exact alignment of adjacent tiles.
+
+Production `39a5888` (PR 84), [October 7, 17:04 PDT report](https://pagespeed.web.dev/analysis/https-stratolink-org-dashboard/y3k6kobxvw):
+
+| Device | Performance | FCP | LCP | TBT | CLS |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| Mobile | 32 | 3.1 s | 8.9 s | 5,150 ms | 0 |
+| Desktop | 61 | 0.4 s | 0.4 s | 8,250 ms | 0 |
+
+Desktop blocking time decreased in this run, but mobile first paint regressed. The mobile LCP element was still the wordmark, with a large main-thread render delay. The next change explicitly gives the interface a paint opportunity before starting the lazy map import, instead of depending on network timing to separate those tasks.
