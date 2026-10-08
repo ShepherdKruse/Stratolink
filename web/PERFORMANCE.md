@@ -88,3 +88,9 @@ Production `8f9c5bb` (PR 82), [PageSpeed report](https://pagespeed.web.dev/analy
 Mobile main-thread work was 6.0 s, compared with 10.1 s in the prior repeat. The font and layout changes improved initial rendering; the remaining long tasks are dominated by Mapbox. Lab runs vary, so this is not a guarantee for every device or network.
 
 Desktop blocking time remains high and variable in the PageSpeed cold-load run. The live WebGL globe, its initial map tiles and day/night appearance are retained. The report does not establish a desktop TBT improvement for the terrain-layer consolidation. The measured homepage improvement and the request/cache/queue tests should not be confused with a claim that the dashboard has a green cold-start score.
+
+## Day/night shade computation
+
+The shade-only source now evaluates the same solar-altitude and smootherstep formula directly in its worker. It no longer creates a separate WebGL context or reads pixels back from the GPU. City lights retain their existing texture shader.
+
+A local browser comparison checked 24 tiles across equinox/solstice dates, zooms 0/2/5 and both themes against the original shader. Maximum channel difference was 1/255; the mean difference was 0.00000318 on the 0-255 scale. For those tiles, total software calculation took 12.2 ms versus 30.6 ms for shader drawing/readback on this machine, excluding renderer construction. This is a tile benchmark, not a page-load claim. Tests cover day/night reversal, polar winter, theme colors and exact alignment of adjacent tiles.
