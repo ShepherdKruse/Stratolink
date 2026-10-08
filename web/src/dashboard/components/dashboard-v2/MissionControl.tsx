@@ -33,6 +33,7 @@ import DashboardHeader from './DashboardHeader';
 import { useDashboardControls } from './dashboard-controls';
 import FleetOverview, { balloonColor, balloonTransitionName } from './FleetOverview';
 import { positionAtTime, rowAtTime, fleetActivity, previewFleet } from '@/lib/telemetry/fleetPlayback';
+import { historyRange } from '@/lib/telemetry/timelineHistory';
 import MapLegend from './MapLegend';
 import { useGlobePortal, notifyGlobeParent } from './globe-portal';
 import CommunityPanel from './CommunityPanel';
@@ -257,8 +258,8 @@ export default function MissionControlScreen() {
     );
 
     const isFleet = selectedId === null;
-    const fleetRows = useMemo(() => Object.values(fleetHistory.rowsByDevice).flat().sort((a, b) => a.t - b.t), [fleetHistory.rowsByDevice]);
-    const fleetLastT = fleetRows.at(-1)?.t ?? null;
+    const fleetHistories = useMemo(() => Object.values(fleetHistory.rowsByDevice), [fleetHistory.rowsByDevice]);
+    const fleetLastT = useMemo(() => historyRange(fleetHistories)?.end ?? null, [fleetHistories]);
     const fleetRecorded = fleetLastT !== null && Date.now() - fleetLastT > 15 * 60_000;
     const fleetBalloons = useMemo<V2Balloon[]>(() => devices.flatMap(device => {
         const position = mappedPosition(fleetHistory.rowsByDevice[device.id] ?? [], fleetScrubT);
@@ -354,7 +355,7 @@ export default function MissionControlScreen() {
                     />}
                     <div className="fleet-timeline">
                         <Timeline
-                            visibleRows={isFleet ? fleetRows : visibleRows}
+                            histories={isFleet ? fleetHistories : [visibleRows]}
                             scrubT={isFleet ? fleetScrubT : scrubT}
                             onScrub={isFleet ? setFleetScrubT : pickTime}
                             archived={isFleet ? fleetRecorded : archived}

@@ -200,3 +200,13 @@ The request queue shares its four slots across both forms, with separate cache k
 For the current public Stratolink 3 forecast, the JSON response shrinks from 380,100 bytes to 79 bytes (106,424 versus 97 bytes using local gzip). Its nominal path currently contains only one coordinate, so active forecasts will be larger. A local 1,000-iteration sanitation/serialization check took 1,450 ms for full responses and 1 ms for paths. This measures response preparation, not private Blob transfer, production latency or cold map rendering; the server still reads the same stored forecast.
 
 A 97-coordinate fixture with 62 ensemble members shrank from 244,340 to 2,787 bytes (103,802 to 1,173 with local gzip). The compiled 1,000-balloon fixture fetched 1,000 path responses and no full forecasts, with a peak of four requests. Opening a balloon fetched one full response, retained its 48-hour forecast timeline and returned to the filtered fleet without map errors. Initial loading with both optional layers already enabled still recorded 36 tasks of 50-66 ms; this payload change does not eliminate the cost of streaming a large fleet into the map. All 145 unit/API tests and the full verification suite pass.
+
+Production `42e9c1d` (PR 90) returns matching nominal paths from both response forms. The full response retains all 62 ensemble members; the small response contains only its two documented fields. Both return 200 with `no-store`. Shared CI and isolated database checks passed.
+
+## Fleet timeline indexing
+
+The fleet timeline copied and sorted every packet after each history batch arrived. It now reads each already-sorted history's endpoints for its range and searches within those histories for keyboard replay. No merged packet array is needed. Strict previous/next navigation still skips equal timestamps across balloons, and empty histories, gaps and live/future bounds retain their behavior.
+
+For 1,000 histories of 250 packets each, a local 50-run median range calculation fell from 12.62 ms to 0.012 ms; finding the previous fleet packet took 0.030 ms. The same compiled 1,000-balloon startup fixture, with flight tails and projections already enabled, fell from 36 tasks over 50 ms to three (53, 66 and 52 ms), totaling 21 ms above the threshold. The maximum map callback did not improve in this pair (50.1 versus 64.9 ms); the change removes packet-array work, not graphics startup.
+
+All 149 unit/API tests and the full verification suite pass. Tests compare keyboard navigation against a merged reference across gaps and duplicate timestamps, and verify that a million-packet fixture reads endpoints and logarithmic candidates rather than scanning every packet.

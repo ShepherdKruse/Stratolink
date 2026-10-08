@@ -1,8 +1,8 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowRight, faClock } from '@fortawesome/free-solid-svg-icons';
 import { useIsMobile } from '@/hooks/use-mobile';
-import type { TelemetryRow } from './atoms';
+import { adjacentPacketTime, historyRange, type TimelineHistories } from '@/lib/telemetry/timelineHistory';
 
 /* ──────────────────────────────────────────────────────────────
  * Timeline — full-width scrubber. Drives the charts AND the map.
@@ -17,8 +17,8 @@ const PRECISE_PULL = [30, 60, 90] as const;
 const PRECISE_GAIN = [1, 0.5, 0.25, 0.1] as const;
 const PRECISE_LABEL = ['', '0.5×', '0.25×', '0.1×'] as const;
 
-export default function Timeline({ visibleRows, scrubT, onScrub, onScrubbingChange, futureEndT, originT = null, floating = false, archived = false }: {
-    visibleRows: TelemetryRow[];
+export default function Timeline({ histories, scrubT, onScrub, onScrubbingChange, futureEndT, originT = null, floating = false, archived = false }: {
+    histories: TimelineHistories;
     scrubT: number | null;
     /* Estimated "now" (dead-reckoned forecast origin); the live cursor parks here
      * instead of the last packet, matching the balloon's estimated position. */
@@ -62,10 +62,11 @@ export default function Timeline({ visibleRows, scrubT, onScrub, onScrubbingChan
         return () => clearInterval(id);
     }, []);
     const nowBase = clientNow ?? 0;
-    const tStart = visibleRows.length ? visibleRows[0].t : nowBase - 24 * 3600 * 1000;
+    const range = useMemo(() => historyRange(histories), [histories]);
+    const tStart = range?.start ?? nowBase - 24 * 3600 * 1000;
     /* Last real packet — the default load point and the boundary between
      * observed track (red) and forecast (blue). NOT "live". */
-    const packetEndT = visibleRows.length ? visibleRows[visibleRows.length - 1].t : nowBase;
+    const packetEndT = range?.end ?? nowBase;
     /* "Live" = the actual current time — the balloon's projected position right
      * now. Falls back to the last packet until the clock mounts. */
     const liveT = archived ? packetEndT : (clientNow ?? packetEndT);
@@ -171,11 +172,11 @@ export default function Timeline({ visibleRows, scrubT, onScrub, onScrubbingChan
         else if (event.key === 'End') next = tEnd;
         else if (event.key === 'ArrowLeft') {
             next = archived
-                ? [...visibleRows].reverse().find(row => row.t < cursorT)?.t ?? tStart
+                ? adjacentPacketTime(histories, cursorT, 'previous') ?? tStart
                 : Math.max(tStart, cursorT - span / 100);
         } else if (event.key === 'ArrowRight') {
             next = archived
-                ? visibleRows.find(row => row.t > cursorT)?.t ?? tEnd
+                ? adjacentPacketTime(histories, cursorT, 'next') ?? tEnd
                 : Math.min(tEnd, cursorT + span / 100);
         } else return;
         event.preventDefault();
@@ -353,9 +354,9 @@ export default function Timeline({ visibleRows, scrubT, onScrub, onScrubbingChan
                     <div style={{ position: 'absolute', top: 21, left: `${nowFrac}%`, width: `${fraction - nowFrac}%`, height: 2, background: 'var(--sl-forecast)' }} />
                 )}
                 <svg width="100%" height="30" style={{ position: 'absolute', top: 0, left: 0, pointerEvents: 'none' }}>
-                    {visibleRows.map((r, i) => (
-                        <line key={i} x1={`${pct(r.t)}%`} y1="25" x2={`${pct(r.t)}%`} y2="28" stroke="var(--sl-text-dim3)" strokeOpacity="0.55" />
-                    ))}
+                    {histories.map((rows, group) => rows.map((r, i) => (
+                        <line key={`${group}:${i}`} x1={`${pct(r.t)}%`} y1="25" x2={`${pct(r.t)}%`} y2="28" stroke="var(--sl-text-dim3)" strokeOpacity="0.55" />
+                    )))}
                 </svg>
                 {hasFuture && (
                     <div style={{ position: 'absolute', top: 19.5, left: `calc(${nowFrac}% - 2.5px)`, width: 5, height: 5, borderRadius: '50%', background: 'var(--sl-bg-1)', border: '1px solid var(--sl-text-dim2)' }} />
