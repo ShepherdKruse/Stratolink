@@ -71,7 +71,11 @@ export default defineConfig(({ mode }) => {
   }
   return {
     plugins: [{ name: 'dashboard-route', configureServer: dashboardRoute, configurePreviewServer: dashboardRoute }],
-    resolve: { alias: { '@': fileURLToPath(new URL('./src/dashboard', import.meta.url)) } },
+    resolve: { alias: [
+      { find: '@', replacement: fileURLToPath(new URL('./src/dashboard', import.meta.url)) },
+      // Keep unused Mapbox rendering features out of the initial module.
+      { find: /^mapbox-gl$/, replacement: 'mapbox-gl/esm' },
+    ] },
     envPrefix: [],
     define: publicBuildDefines(process.env, env),
     build: {

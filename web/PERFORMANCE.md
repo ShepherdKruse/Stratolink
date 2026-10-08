@@ -163,3 +163,17 @@ The local comparison used 1,000 simulated balloons, 250 recorded packets and 97 
 The old build submitted all forecast requests at once; the local browser limited HTTP/1.1 connections to six. The new limit is enforced by the application independently of transport. Both runs loaded all 1,000 forecasts. These are local hardware measurements with cached map assets, not PageSpeed or low-end mobile results.
 
 All 140 unit/API tests, firmware decoder/auth contracts, migration contracts, forecast-worker tests, staff tooling tests, type checks and the production build pass. Tests specifically cover concurrency, selection priority, shared cancellation, abandoned queued requests, retry behavior, cache expiration/bounds and polling shutdown. Local real-fleet and selected-flight checks pass in desktop light and mobile dark themes without map errors.
+
+## Mapbox renderer update
+
+The 3.18.1 renderer spent most of its PageSpeed CPU time outside JavaScript evaluation, consistent with synchronous graphics-driver work. That attribution alone does not prove which graphics call stalls. Inspection of the installed source showed synchronous shader setup; the current stable renderer includes parallel shader compilation and idle-time precompilation, introduced in [3.24.0](https://github.com/mapbox/mapbox-gl-js/releases/tag/v3.24.0). Later releases reduce shader size, GeoJSON memory use, redundant initial repaints and style/asset loading work.
+
+Pin Mapbox GL JS to [3.32.0](https://github.com/mapbox/mapbox-gl-js/releases/tag/v3.32.0) and use its supported ESM entry point through an exact Vite alias. The alias leaves CSS imports and the existing map styling unchanged. The modular build loads core, shared code and the lightweight terrain module for this map; unused 3D/HD/debug features remain separate. Mapbox's worker is emitted as a local asset. The dependency update removes 26 transitive packages, and the production dependency audit reports no known vulnerabilities.
+
+Compiled Mapbox main-thread code changes from a 1,644 KB monolithic chunk (447 KB gzip) to 776 KB core + 589 KB shared + 42 KB lightweight terrain (378 KB combined gzip). A separate 779 KB worker asset is also loaded, so this is a main-thread parsing reduction, not a claim of lower total network transfer.
+
+On local hardware, the old warmed renderer completed 229 frame callbacks in 618 ms, with a 14.6 ms maximum and no long tasks. The first run of the upgraded monolithic renderer incurred four shader-related long tasks, including a 234 ms frame. A subsequent modular run completed 228 callbacks in 647 ms, with a 14.8 ms maximum and no long tasks. Shader caching makes these runs unsuitable for proving a cold-start improvement. Production PageSpeed follow-up is required.
+
+All 140 unit/API tests and the full verification suite pass. Real telemetry, replay, light/dark themes, mobile layout and the mobile footer globe transition were checked locally without map errors. No frontend layout, colors, copy or animation settings changed.
+
+A further local 1,000-balloon check enabled projected paths and flight tails together, performed eight replay steps, and included a normal telemetry refresh. All 1,000 forecasts loaded, with four requests in flight, and no map errors. It recorded three long tasks (65, 56 and 99 ms), 70 ms total blocking time and a 64.8 ms maximum map callback. This combined-layer check is not directly comparable to the projection-only run above. The compiled footer transition completed at both 1280 px and a verified 390 px viewport.
