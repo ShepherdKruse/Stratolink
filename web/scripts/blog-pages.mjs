@@ -61,7 +61,6 @@ export function writeBlogPages() {
   <link rel="apple-touch-icon" href="/assets/favicon/apple-touch-icon.png">
   <script type="module" src="/src/favicon.js"></script>
   <meta name="theme-color" content="#f6f4ef">
-  <meta name="description" content="${escape(post.excerpt)}">
   <title>${escape(post.title)} - Stratolink</title>
 ${socialMetadata({ title: `${post.title} - Stratolink`, path: `/blog/${post.slug}`, description: post.excerpt, image: post.image, type: 'article' })}
   <link rel="stylesheet" href="/src/blog.css">
