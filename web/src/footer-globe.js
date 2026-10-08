@@ -29,9 +29,8 @@ function load() {
 function place() {
   if (stage !== 'footer') return;
   const bounds = footer.getBoundingClientRect();
-  // Warm the map a few screens ahead once the reader starts scrolling.
-  // Leave the initial homepage load alone, and keep rotation paused offscreen.
-  if (!loaded && (bounds.top < innerHeight || (scrollY > 120 && bounds.top < innerHeight * 4))) load();
+  // Scrolling is enough intent to prepare the map, even on a long article.
+  if (!loaded && (bounds.top < innerHeight || scrollY > 120)) load();
   const sceneTop = scene.getBoundingClientRect().top;
   const mobile = innerWidth < 768;
   const diameter = mobile ? Math.min(440, innerWidth * 1.1) * 1.035 : (Math.min(680, innerWidth * .55, innerHeight * .92) + Math.max(0, innerWidth - 1440) * .55) * 1.065;
@@ -130,4 +129,9 @@ window.addEventListener('keydown', event => {
   if (event.key === 'Escape' && stage === 'entering') { history.back(); return; }
 });
 new ResizeObserver(schedule).observe(footer);
+window.addEventListener('launch:ready', () => {
+  if (navigator.connection?.saveData || document.hidden) return;
+  if ('requestIdleCallback' in window) requestIdleCallback(load, { timeout: 1800 });
+  else setTimeout(load, 1800);
+}, { once: true });
 place();

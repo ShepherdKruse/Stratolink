@@ -3,7 +3,8 @@ import { posts, readingTime } from '../content/blog.mjs';
 import { socialMetadata } from './social-metadata.mjs';
 
 const escape = value => String(value).replace(/[&<>"']/g, char => ({'&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;'}[char]));
-const image = (post, attributes = '') => `<img data-post-image src="${escape(post.image.src)}" alt="${escape(post.image.alt)}" width="${post.image.width}" height="${post.image.height}"${post.image.position ? ` style="object-position:${escape(post.image.position)}"` : ''} ${attributes}>`;
+const image = (post, attributes = '', position = post.image.position) => `<img data-post-image src="${escape(post.image.src)}" alt="${escape(post.image.alt)}" width="${post.image.width}" height="${post.image.height}"${position ? ` style="object-position:${escape(position)}"` : ''} ${attributes}>`;
+
 const card = (post, type) => `<a class="${type}" href="/blog/${post.slug}" data-post-link id="${type}-${post.slug}">
   <span class="category">${escape(post.category)}</span>
   <h3 data-post-title>${escape(post.title)}</h3>
@@ -15,7 +16,7 @@ function indexMain() {
   return `<main id="main" class="blog-main" tabindex="-1">
     <h1 class="sr-only">Blog</h1>
     ${featured ? `<div class="blog-lead${recent.length ? '' : ' blog-lead--single'}">
-      <a class="featured" href="/blog/${featured.slug}" data-post-link data-origin="featured" id="featured-${featured.slug}" aria-labelledby="featured-title">
+      <a class="featured${featured.featuredClass ? ` ${escape(featured.featuredClass)}` : ''}" href="/blog/${featured.slug}" data-post-link data-origin="featured" id="featured-${featured.slug}" aria-labelledby="featured-title">
         ${image(featured, 'fetchpriority="high"')}
         <div class="featured-copy">
           <span class="category">${escape(featured.category)}</span>
@@ -25,7 +26,7 @@ function indexMain() {
         <span class="articles-link">Read more</span>
       </a>
       ${recent.length ? `<section class="latest" aria-labelledby="latest-title">
-        <h2 id="latest-title" class="section-label">Latest</h2>
+        <h2 id="latest-title" class="section-label">Recent</h2>
         ${recent.slice(0, 2).map(post => card(post, 'latest-entry')).join('\n')}
       </section>` : ''}
     </div>` : ''}
@@ -64,12 +65,13 @@ export function writeBlogPages() {
   <title>${escape(post.title)} - Stratolink</title>
 ${socialMetadata({ title: `${post.title} - Stratolink`, path: `/blog/${post.slug}`, description: post.excerpt, image: post.image, type: 'article' })}
   <link rel="stylesheet" href="/src/blog.css">
+  ${post.interactive ? '<link data-article-style rel="stylesheet" href="/assets/payload-dev-log/katex.min.css"><link data-article-style rel="stylesheet" href="/payload-dev-log/article.css">' : ''}
   <script type="module" src="/src/blog-navigation.js"></script>
 </head>
 <body class="article-page">
   <a class="skip-link" href="#main">Skip to content</a>
   ${header}
-  <main id="main" class="post-main" data-post="${post.slug}" tabindex="-1">
+  <main id="main" class="post-main" data-post="${post.slug}"${post.interactive ? ' data-interactive-article' : ''} tabindex="-1">
     <article>
       <header class="post-heading">
         <a class="post-back" href="/blog" data-blog-back><img src="/assets/icons/chevron-left.svg" alt="" width="9" height="12">All articles</a>
@@ -80,9 +82,10 @@ ${socialMetadata({ title: `${post.title} - Stratolink`, path: `/blog/${post.slug
           <span>${readingTime(post)} min read</span>
         </div>
       </header>
-      <figure class="post-hero">${image(post, 'fetchpriority="high"')}<figcaption>${escape(post.image.caption)}</figcaption></figure>
+      ${post.showHero === false ? '' : `<figure class="post-hero">${image(post, 'fetchpriority="high"', post.heroPosition || post.image.position)}<figcaption>${escape(post.image.caption)}</figcaption></figure>`}
       <div class="post-body">${post.body}</div>
     </article>
+${post.interactive ? '<dialog class="lightbox" aria-label="Expanded figure"><button class="lightbox-close" aria-label="Close expanded figure"><img src="/assets/icons/close.svg" width="18" height="18" alt=""></button><img class="lightbox-image" alt=""><p class="lightbox-caption"></p></dialog>' : ''}
   </main>
   ${footer}
 </body>

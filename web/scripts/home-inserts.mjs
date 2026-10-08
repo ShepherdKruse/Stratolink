@@ -12,7 +12,7 @@ export function writeHomeInserts() {
   </section>`;
   const cards = `<section class="story-blog" aria-label="Latest from the blog">
     <div class="story-blog-grid">
-      ${posts.slice(0, 1).map((post, index) => `<a class="story-blog-card${index === 0 ? ' story-blog-featured' : ''}" href="/blog/${post.slug}">
+      ${posts.slice(0, 3).map((post, index) => `<a class="story-blog-card${index === 0 ? ' story-blog-featured' : ''}" href="/blog/${post.slug}">
         ${index === 0 ? `<img class="story-blog-image" src="${post.image.src}" alt="" width="${post.image.width}" height="${post.image.height}"${post.image.position ? ` style="object-position:${post.image.position}"` : ''} loading="lazy">` : ''}
         <span class="story-blog-category">${post.category}</span>
         <h2>${post.title}</h2>
