@@ -20,7 +20,7 @@ import 'mapbox-gl/dist/mapbox-gl.css';
 import { useGlobePortal } from './globe-portal';
 import { applyPortalLabelVisibility, usePortalCamera } from './usePortalCamera';
 import { fleetTailSources, unwrapLngs } from '@/lib/telemetry/flightTail';
-import { useForecastPath } from './useForecastPath';
+import { FleetProjections } from './FleetProjections';
 import GatewayLayer from '@/components/maps/GatewayLayer';
 import GatewayRangeRings from '@/components/maps/GatewayRangeRings';
 import { quietBasemapLabels } from '@/components/maps/quietBasemapLabels';
@@ -969,9 +969,9 @@ export default function V2MissionMap({
                                 />
                             </Source>
                         ))}
-                        {showProjectedPath && fleetForecastIds.map(deviceId => (
-                            <FleetProjection key={deviceId} deviceId={deviceId} color={C.forecast} />
-                        ))}
+                        {showProjectedPath && fleetForecastIds.length > 0 && (
+                            <FleetProjections deviceIds={fleetForecastIds} color={C.forecast} />
+                        )}
                         {showFlightPaths && !hindcastGeoJSON && observedPath && (
                             <Source id="v2-observed-path" type="geojson" data={observedPath}>
                                 <Layer id="v2-observed-path-line" type="line" layout={{ 'line-cap': 'round', 'line-join': 'round' }}
@@ -1393,16 +1393,4 @@ export default function V2MissionMap({
             />
         </div>
     );
-}
-
-/** Fleet projections are requested only while the optional layer is enabled. */
-function FleetProjection({ deviceId, color }: { deviceId: string; color: string }) {
-    const forecast = useForecastPath(deviceId);
-    const coordinates = forecast.path.filter(([lon, lat]) => Number.isFinite(lon) && Number.isFinite(lat) && Math.abs(lat) <= 90);
-    if (coordinates.length < 2) return null;
-    const id = `v2-fleet-projection-${encodeURIComponent(deviceId)}`;
-    return <Source id={id} type="geojson" data={{ type: 'Feature', properties: {}, geometry: { type: 'LineString', coordinates: unwrapLngs(coordinates) } }}>
-        <Layer id={`${id}-line`} type="line" layout={{ 'line-cap': 'round', 'line-join': 'round' }}
-            paint={{ 'line-color': color, 'line-width': 2, 'line-opacity': 0.8, 'line-dasharray': [2, 3] }} />
-    </Source>;
 }

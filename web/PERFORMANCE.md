@@ -143,3 +143,23 @@ The longer fixture also exposed unnecessary refresh work. Repeated overlap packe
 After both changes, the local 1,000-balloon test covered enabling tails, eight keyboard timeline actions and a complete one-minute refresh. It recorded one 81 ms long task (31 ms above the long-task threshold), with a maximum map-frame callback of 26.3 ms. The earlier per-balloon source run recorded 135 long tasks including the 1.43-second toggle stall; batching alone removed that stall but left repeated refresh work. These synthetic local measurements establish the source-count and unchanged-data improvements, not a production PageSpeed score or a low-end-device guarantee.
 
 All 133 unit/API tests, TypeScript and the production build pass. Tests include 1,000 independent tails in four colors, per-flight fade values, replay clipping, dateline crossings, and packet/gateway changes invalidating the cache. The generated docs contain eight KaTeX equations and no rendering errors.
+
+## Fleet projection follow-up: October 7, 18:15 PDT
+
+The optional fleet projection layer now puts independent balloon tracks in one GeoJSON source and one line layer, preserving its color, dash pattern, opacity and width. Completed paths publish in 100 ms batches. Filtering adds or removes only the affected subscriptions; an unchanged result keeps the existing geometry.
+
+Forecast reads are shared between fleet and detail views, with at most four in flight. Selecting a queued balloon promotes it to the next slot. Hiding the layer or changing selection cancels abandoned reads and timers. Requests time out after 20 seconds so a stalled response cannot occupy a slot indefinitely. The bounded 64-response cache lasts five minutes; computing responses expire after eight seconds. The existing capped fast-poll behavior is retained.
+
+The local comparison used 1,000 simulated balloons, 250 recorded packets and 97 projected coordinates per balloon. It enabled the optional layer, waited for all forecasts, then performed eight keyboard timeline steps. The local API delayed each forecast by 30 ms. Both runs also included a normal telemetry refresh.
+
+| Measurement | Current main | Batched projections |
+| --- | ---: | ---: |
+| Map frame callback total | 5,221 ms | 392 ms |
+| Maximum frame callback | 58.1 ms | 5.8 ms |
+| Long tasks | 2 | 0 |
+| Blocking time above 50 ms | 25 ms | 0 ms |
+| Peak forecast requests reaching local server | 6 | 4 |
+
+The old build submitted all forecast requests at once; the local browser limited HTTP/1.1 connections to six. The new limit is enforced by the application independently of transport. Both runs loaded all 1,000 forecasts. These are local hardware measurements with cached map assets, not PageSpeed or low-end mobile results.
+
+All 140 unit/API tests, firmware decoder/auth contracts, migration contracts, forecast-worker tests, staff tooling tests, type checks and the production build pass. Tests specifically cover concurrency, selection priority, shared cancellation, abandoned queued requests, retry behavior, cache expiration/bounds and polling shutdown. Local real-fleet and selected-flight checks pass in desktop light and mobile dark themes without map errors.
