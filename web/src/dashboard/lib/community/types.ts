@@ -17,8 +17,10 @@ export type RegisteredBalloon = {
     callsign: string;
     status: string;
     devEui: string | null;
-    ownerId: string;
-    ownerGithub: string;
+    ownerId: string | null;
+    ownerGithub: string | null;
+    official?: boolean;
+    sharedWith?: string[];
     registeredAt: string;
     launchedAt: number | null;
     connections: TTNConnection[];
@@ -28,7 +30,7 @@ export type AccountResponse = { user: AccountUser; balloons: RegisteredBalloon[]
 export type ConnectionInput = { cluster: TTNCluster; applicationId: string; deviceEui: string; apiKey: string };
 export type ConnectionResponse = { balloon: RegisteredBalloon; webhook?: { url: string; secret: string } };
 
-export function mergeRegisteredBalloons(devices: DeviceSummary[], owned: RegisteredBalloon[]): DeviceSummary[] {
+export function mergeRegisteredBalloons(devices: DeviceSummary[], owned: RegisteredBalloon[], currentUserId?: string): DeviceSummary[] {
     const merged = new Map(devices.map(device => [device.id, device]));
     for (const balloon of owned) {
         const existing = merged.get(balloon.id);
@@ -37,8 +39,10 @@ export function mergeRegisteredBalloons(devices: DeviceSummary[], owned: Registe
             id: balloon.id,
             callsign: balloon.callsign,
             status: balloon.status,
-            ownerId: balloon.ownerId,
-            ownerGithub: balloon.ownerGithub,
+            ownerId: balloon.ownerId ?? undefined,
+            ownerGithub: balloon.ownerGithub ?? undefined,
+            managedByUserId: currentUserId,
+            official: balloon.official ?? existing?.official,
             connectionStatus: balloon.connectionStatus,
             launchedAt: balloon.launchedAt,
             launchLat: existing?.launchLat ?? null,

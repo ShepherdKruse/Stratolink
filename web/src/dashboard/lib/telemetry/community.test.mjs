@@ -48,3 +48,14 @@ test('OAuth returns only to a validated balloon on the fixed dashboard route', a
         assert.equal(storedReturnDevice(value, 1_000_000), null);
     }
 });
+test('shared official balloons appear in the current account filter without changing their primary owner', () => {
+    const shared = { ...record, ownerId:null, ownerGithub:null, official:true, sharedWith:['Twarner491','clkruse','ShepherdKruse'] };
+    const merged = mergeRegisteredBalloons([], [shared], user);
+    const filters = { ...defaultFleetFilters,mine:true };
+    assert.equal(merged[0].ownerId,undefined);
+    assert.equal(merged[0].official,true);
+    assert.equal(filterFleet(merged,filters,user,1000).length,1);
+    assert.equal(filterFleet(merged,filters,'another-account',1000).length,0);
+    assert.equal(filterFleet(merged,filters,null,1000).length,0);
+    assert.equal(mergeRegisteredBalloons([],[],undefined).length,0);
+});

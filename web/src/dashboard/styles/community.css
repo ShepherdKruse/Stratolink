@@ -36,6 +36,7 @@
 .managed-balloon-row { display: flex; gap: 10px; align-items: center; justify-content: space-between; }
 .managed-balloon:first-child { padding-top: 0; }
 .managed-balloon strong { display: block; font-size: 13px; font-weight: 500; overflow-wrap: anywhere; }
+.community-coowners { display: flex; flex-wrap: wrap; gap: 0 10px; margin-top: 3px; }
 .managed-balloon small { display: block; margin-top: 5px; font: 9px var(--font-mono); color: var(--t-text-3); }
 .managed-balloon select { max-width: 105px; border: 1px solid var(--t-border); border-radius: 8px; padding: 7px; background: var(--t-panel); color: var(--t-text-2); font: inherit; font-size: 11px; }
 .community-connect summary { display: flex; align-items: center; justify-content: space-between; gap: 8px; padding: 12px 0 4px; color: var(--t-text-2); font-size: 11px; list-style: none; cursor: pointer; }

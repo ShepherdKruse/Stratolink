@@ -44,7 +44,18 @@ test('GitHub identity is verified identity data, never editable metadata',()=>{
  assert.equal(githubAccount({id:uid,user_metadata:{user_name:'admin',provider_id:'1'}}),null);
  assert.equal(githubAccount({...user,is_anonymous:true}),null);
  assert.equal(githubAccount({...user,user_metadata:{user_name:'admin'}}).login,'test-owner');
+ assert.equal(githubAccount({...user,user_metadata:{provider_id:'48384497',sub:'48384497'}}).githubId,'123456');
  assert.equal(githubAccount({id:uid,identities:[{provider:'email',identity_data:{sub:'1',user_name:'admin'}}]}),null);
+});
+test('team membership uses only the GitHub ID obtained from the verified identity',async()=>{
+ const f=fixture({authUser:{...user,user_metadata:{provider_id:'48384497'},identities:[{provider:'github',identity_data:{sub:'123456',user_name:'Twarner491'}}]}});
+ assert.equal((await f.request('/api/account')).status,200);
+ assert.deepEqual(f.calls.find(c=>c.name==='sync_official_team_member').args,{p_user_id:uid,p_github_id:'123456'});
+});
+test('co-owner account records authorize updates without pretending to be the primary owner',async()=>{
+ const f=fixture({owned:[{...balloon,ownerId:null,sharedWith:['Twarner491','clkruse','ShepherdKruse']}]});
+ assert.equal((await f.request(`/api/balloons/${bid}`,'PATCH',{status:'landed'})).status,200);
+ assert.deepEqual(f.calls.find(c=>c.name==='update_community_balloon').args,{p_owner_id:uid,p_device_id:bid,p_status:'landed'});
 });
 test('EUI normalization accepts usual notation and rejects blanks/zero',()=>{
  assert.equal(normalizeEui('12:34:56:78:90:ab:cd:ef'),'1234567890ABCDEF');

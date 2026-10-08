@@ -18,7 +18,7 @@ export function githubAccount(user) {
   const id = identity?.identity_data?.sub ?? identity?.identity_data?.provider_id;
   const login = identity?.identity_data?.user_name ?? identity?.identity_data?.preferred_username;
   if (!/^\d{1,20}$/.test(String(id)) || typeof login !== 'string' || !loginPattern.test(login)) return null;
-  return { id: user.id, login, avatarUrl: `https://avatars.githubusercontent.com/u/${id}` };
+  return { id: user.id, githubId: String(id), login, avatarUrl: `https://avatars.githubusercontent.com/u/${id}` };
 }
 
 export function normalizeEui(value) {
@@ -149,6 +149,7 @@ export function createCommunityApi({ createDb = createServerSupabase, verifyDevi
         }
         return result.data;
       };
+      await rpc('sync_official_team_member', { p_user_id: user.id, p_github_id: user.githubId });
       const balloons = async () => await rpc('community_account', { p_owner_id: user.id });
       if (accountRoute) return reply(200, { user, balloons: await balloons() });
       if (staffInventory) return reply(200, await rpc('staff_payload_inventory', {}));

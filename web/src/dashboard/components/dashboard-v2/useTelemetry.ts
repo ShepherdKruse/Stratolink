@@ -11,6 +11,7 @@ import type { TelemetryRow } from './atoms';
 interface DeviceSummary {
     ownerGithub?: string;
     ownerId?: string;
+    managedByUserId?: string;
     official?: boolean;
     connectionStatus?: 'pending' | 'connected';
     /** Internal Supabase device_id (stratolink-N or DevEUI). */

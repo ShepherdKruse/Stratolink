@@ -58,7 +58,7 @@ function ManagedBalloon({ balloon }: { balloon: RegisteredBalloon }) {
 
     return <div className="managed-balloon">
         <div className="managed-balloon-row">
-            <div><strong>{balloon.callsign}</strong><BalloonOwner device={balloon} />{balloon.devEui && <small>{balloon.devEui}</small>}</div>
+            <div><strong>{balloon.callsign}</strong>{balloon.sharedWith?.length ? <div className="community-coowners" aria-label="Shared owners">{balloon.sharedWith.map(login => <BalloonOwner key={login} device={{ownerGithub:login}} />)}</div> : <BalloonOwner device={{ownerGithub:balloon.ownerGithub ?? undefined}} />}{balloon.devEui && <small>{balloon.devEui}</small>}</div>
             <select aria-label={`Status of ${balloon.callsign}`} value={balloon.status} disabled={community.busy} onChange={async event => {
                 setError('');
                 try { await community.update(balloon.id, event.target.value); }
@@ -101,7 +101,7 @@ export default function CommunityPanel() {
     const callsign = useRef<HTMLInputElement>(null);
     const claimCode = useRef<HTMLInputElement>(null);
     const [freshProof, setFreshProof] = useState(false);
-    const ownsPayload = Boolean(community.user && community.intent && community.balloons.some(balloon => balloon.id === community.intent?.deviceId && balloon.ownerId === community.user?.id));
+    const ownsPayload = Boolean(community.user && community.intent && community.balloons.some(balloon => balloon.id === community.intent?.deviceId));
     useEffect(() => { setFreshProof(false); setError(''); }, [community.intent?.deviceId]);
     useEffect(() => { setError(''); if (community.panel === 'register') callsign.current?.focus({ preventScroll: true }); }, [community.panel]);
     async function register(event: FormEvent<HTMLFormElement>) {

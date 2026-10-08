@@ -76,8 +76,8 @@ export const posts = [{
   title: 'Looking for Stratolink 3',
   category: 'Flight notes',
   excerpt: 'We heard from Stratolink 3 after almost four weeks of silence. I tried to work out where it was from a timestamp, a network name, and the position of the sun.',
-  published: '2026-10-06',
-  publishedLabel: 'October 6, 2026',
+  published: '2026-06',
+  publishedLabel: 'June 2026',
   author: { name: 'Teddy Warner', github: 'https://github.com/twarner491' },
   image: {
     src: '/assets/blog/reconstructed-flight.jpg',
