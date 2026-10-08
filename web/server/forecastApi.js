@@ -19,15 +19,18 @@ export function createForecastApi({ readForecast = readPrivateForecast, isPublic
       response.setHeader('Allow', 'GET');
       return send(405, { message: 'Use GET to read a forecast.' });
     }
-    const device = new URL(request.url, 'http://localhost').searchParams.get('device');
+    const params = new URL(request.url, 'http://localhost').searchParams;
+    const device = params.get('device');
+    const view = params.get('view') ?? 'full';
     if (!device || !/^[a-zA-Z0-9_-]{1,80}$/.test(device)) return send(400, { message: 'Invalid device' });
+    if (view !== 'full' && view !== 'path') return send(400, { message: 'Invalid forecast view' });
     try {
       if (!await isPublicDevice(device)) return send(404, { message: 'Device not found' });
       const forecast = await readForecast(device);
       if (!forecast) return send(202, { status: 'pending', device });
       response.setHeader('X-Forecast-Source', 'stored');
       response.setHeader('X-Forecast-Age-Ms', String(Math.max(0, Date.now() - Date.parse(forecast.generated_at))));
-      return send(200, sanitizeForecast(forecast));
+      return send(200, sanitizeForecast(forecast, view));
     } catch {
       console.error('Forecast read failed');
       return send(503, { message: 'Forecast unavailable' });

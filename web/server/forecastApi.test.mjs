@@ -19,6 +19,38 @@ test('forecast serves sanitized private stored data only for a connected public 
   assert.equal(res.headers['Cache-Control'], 'no-store');
 });
 
+test('fleet path responses preserve privacy and omit detail geometry and metadata', async () => {
+  const raw = { ...fixture, ensemble: [[[10, 20], [30, 40]]], ellipses: [{ e90: { polygon: [[10, 20], [30, 40], [10, 20]] } }] };
+  const handler = createForecastApi({ isPublicDevice: async () => true, readForecast: async () => raw });
+  const path = response(); await handler(request('/api/forecast?device=stratolink-3&view=path'), path);
+  const full = response(); await handler(request(), full);
+  assert.equal(path.statusCode, 200);
+  assert.equal(path.headers['Cache-Control'], 'no-store');
+  assert.deepEqual(path.body, { generated_at: raw.generated_at, nominal_path: full.body.nominal_path });
+  assert.deepEqual(path.body.nominal_path, [[-122.44, 37.76], [-120, 40]]);
+  assert.deepEqual(full.body.ensemble, raw.ensemble);
+  assert.deepEqual(full.body.ellipses, raw.ellipses);
+  assert.equal(raw.nominal_path[0][0], -122.40);
+});
+
+test('fleet path requests retain public-device gating and pending responses', async () => {
+  const url = '/api/forecast?device=stratolink-3&view=path';
+  const privateHandler = createForecastApi({ isPublicDevice: async () => false, readForecast: async () => { throw Error('must not read'); } });
+  const hidden = response(); await privateHandler(request(url), hidden); assert.equal(hidden.statusCode, 404);
+  const pendingHandler = createForecastApi({ isPublicDevice: async () => true, readForecast: async () => null });
+  const pending = response(); await pendingHandler(request(url), pending);
+  assert.equal(pending.statusCode, 202);
+  assert.deepEqual(pending.body, { status: 'pending', device: 'stratolink-3' });
+});
+
+test('unsupported forecast views fail before registry or storage access', async () => {
+  const handler = createForecastApi({ isPublicDevice: async () => { throw Error('must not read'); } });
+  for (const view of ['', 'raw', 'metadata', 'PATH']) {
+    const res = response(); await handler(request(`/api/forecast?device=stratolink-3&view=${view}`), res);
+    assert.equal(res.statusCode, 400);
+  }
+});
+
 test('unknown and unconnected devices never access forecast storage', async () => {
   const handler = createForecastApi({ isPublicDevice: async () => false, readForecast: async () => { throw new Error('must not run'); } });
   const res = response(); await handler(request(), res); assert.equal(res.statusCode, 404);

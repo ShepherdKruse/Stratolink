@@ -28,6 +28,46 @@ test('forecast requests cap concurrency at four, deduplicate and prioritize a se
     assert.equal(started.length, 10);
 });
 
+test('fleet and detail responses share the request limit but never share partial cache entries', async () => {
+    const started = [], finish = new Map();
+    const full = { status: 200, data: { ...ok.data, ensemble: [[[1, 2], [3, 4]]] } };
+    const pool = createForecastRequests((id, _signal, view) => {
+        const key = `${view}:${id}`;
+        started.push(key);
+        return new Promise(resolve => finish.set(key, () => resolve(view === 'full' ? full : ok)));
+    });
+    const fleet = Array.from({ length: 5 }, (_, i) => pool.load(String(i), signal(), false, 'path'));
+    const selected = pool.load('0', signal(), true);
+    const sharedSelected = pool.load('0', signal(), true);
+    assert.deepEqual(started, ['path:0', 'path:1', 'path:2', 'path:3']);
+    finish.get('path:0')();
+    assert.equal(await fleet[0], ok);
+    assert.deepEqual(started, ['path:0', 'path:1', 'path:2', 'path:3', 'full:0']);
+    finish.get('full:0')();
+    assert.equal(await selected, full);
+    assert.equal(await sharedSelected, full);
+    for (let i = 1; i < 5; i++) finish.get(`path:${i}`)();
+    await Promise.all(fleet);
+    assert.equal(await pool.load('0', signal(), false, 'path'), ok);
+    assert.equal(await pool.load('0', signal(), true), full);
+    assert.equal(started.length, 6);
+});
+
+test('path watchers retain their view across polling and cancellation', async t => {
+    t.mock.timers.enable({ apis: ['setTimeout'] });
+    let now = 0;
+    const views = [], results = [];
+    const pool = createForecastRequests(async (_id, _signal, view) => { views.push(view); return ok; }, () => now);
+    const stop = pool.watch('a', result => results.push(result), false, 'path');
+    await flush();
+    now += 300000; t.mock.timers.tick(300000); await flush();
+    assert.deepEqual(views, ['path', 'path']);
+    stop();
+    now += 300000; t.mock.timers.tick(300000); await flush();
+    assert.deepEqual(views, ['path', 'path']);
+    assert.equal(results.length, 2);
+});
+
 test('cancelling one consumer preserves a shared request; abandoning all consumers cancels it', async () => {
     let requestSignal, finish;
     const pool = createForecastRequests((_id, s) => {
