@@ -14,7 +14,6 @@ export const payloadArticle = {
   publishedLabel: 'October 2026',
   authors: [
     { name: 'Teddy Warner', github: 'https://github.com/twarner491' },
-    { name: 'Caleb Kruse', github: 'https://github.com/clkruse' },
   ],
   image: {
     src: '/assets/payload-dev-log/payload.jpg',
