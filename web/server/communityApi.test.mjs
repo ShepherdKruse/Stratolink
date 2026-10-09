@@ -173,3 +173,38 @@ test('device identity must match in both TTN registries before ownership is acce
  await assert.rejects(()=>verifyTTNDevice({...input,applicationId:undefined},async()=>{fetched=true;}),/Invalid network identity/);
  assert.equal(fetched,false);
 });
+
+const plannedSettings={callsign:'Test multi-region',plannedLaunchDate:'2027-02-15',regionalEuis:{northAmerica:'12:34:56:78:90:ab:cd:ef',europe:'1122334455667788',asia:'AABBCCDDEEFF0011',australia:'12:34:56:78:90:ab:cd:ef'},shareResearchData:true};
+test('registration saves all regional identifiers, optional date and explicit research choice atomically',async()=>{
+ const f=fixture();
+ assert.equal((await f.request('/api/balloons','POST',plannedSettings)).status,201);
+ assert.deepEqual(f.calls.find(c=>c.name==='register_planned_balloon').args,{p_owner_id:uid,p_github_login:'test-owner',p_callsign:plannedSettings.callsign,p_planned_launch_date:plannedSettings.plannedLaunchDate,p_regional_euis:{northAmerica:balloon.devEui,europe:'1122334455667788',asia:'AABBCCDDEEFF0011',australia:balloon.devEui},p_share_research_data:true});
+ assert.equal(f.calls.some(c=>c.name==='connect_community_radio'),false);
+ const optional=fixture();
+ assert.equal((await optional.request('/api/balloons','POST',{...plannedSettings,plannedLaunchDate:null,regionalEuis:{asia:balloon.devEui},shareResearchData:false})).status,201);
+ assert.equal(optional.calls.find(c=>c.name==='register_planned_balloon').args.p_share_research_data,false);
+});
+test('registration rejects invalid dates, regions, identifiers, consent types and status injection',async()=>{
+ for(const patch of [
+  {plannedLaunchDate:'2027-02-29'},{plannedLaunchDate:'2028-02-30'},{plannedLaunchDate:'2027-13-01'},
+  {plannedLaunchDate:'2027-02-15T00:00:00Z'},{plannedLaunchDate:''},{plannedLaunchDate:{}},{plannedLaunchDate:'2199-01-01'},
+  {regionalEuis:{}},{regionalEuis:[]},{regionalEuis:null},{regionalEuis:{nam1:balloon.devEui}},
+  {regionalEuis:{northAmerica:'0000000000000000'}},{regionalEuis:{asia:123456}},{regionalEuis:{europe:'too-short'}},
+  {shareResearchData:'true'},{shareResearchData:null},{official:true},{ownerId:uid},{status:'flying'},
+ ]) {
+  const f=fixture();
+  assert.equal((await f.request('/api/balloons','POST',{...plannedSettings,...patch})).status,400,JSON.stringify(patch));
+  assert.equal(f.calls.some(c=>c.name==='register_planned_balloon'),false);
+ }
+ assert.equal((await fixture().request('/api/balloons','POST',{...plannedSettings,plannedLaunchDate:'2028-02-29'})).status,201);
+});
+test('only owners and verified co-owners can edit planned dates and sharing, including clearing optional fields',async()=>{
+ const input={...plannedSettings,regionalEuis:{},plannedLaunchDate:null,shareResearchData:false};
+ const f=fixture({owned:[{...balloon,ownerId:null,sharedWith:['test-owner']}]});
+ assert.equal((await f.request(`/api/balloons/${bid}`,'PATCH',input)).status,200);
+ assert.deepEqual(f.calls.find(c=>c.name==='update_balloon_settings').args,{p_owner_id:uid,p_device_id:bid,p_callsign:input.callsign,p_planned_launch_date:null,p_regional_euis:{},p_share_research_data:false});
+ const outsider=fixture({owned:[]});
+ assert.equal((await outsider.request(`/api/balloons/${bid}`,'PATCH',input)).status,404);
+ assert.equal(outsider.calls.some(c=>c.name==='update_balloon_settings'),false);
+ assert.equal((await f.request(`/api/balloons/${bid}`,'PATCH',{...input,ownerId:uid})).status,400);
+});

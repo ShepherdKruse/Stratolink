@@ -173,3 +173,5 @@
 .calc-tooltip { position: fixed; z-index: 100; width: min(270px, calc(100vw - 32px)); padding: 13px 15px; border: 1px solid #d8d5cc; border-radius: 10px; background: #eeece5; color: #4f554a; box-shadow: 0 5px 22px #302e2a12; font: 13px/1.5 Helvetica, Arial, sans-serif; }
 @media (max-width: 700px) { .calc-field-heading { min-height: 36px; line-height: 1.35; } }
 .docs-code pre { max-height: 460px; }
+
+.docs-figure img[src="/assets/docs/dashboard-register.png"] { width: min(100%, 390px); margin-inline: auto; }

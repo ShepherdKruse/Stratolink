@@ -4,7 +4,7 @@ import { faChevronRight, faCircle } from '@fortawesome/free-solid-svg-icons';
 import type { DeviceSummary } from './useTelemetry';
 import type { TelemetryRow } from './atoms';
 import { OfficialBadge, BalloonOwner } from './BalloonIdentity';
-import { registeredStatus } from '@/lib/telemetry/fleetFilters';
+import { isPlannedBalloon, registeredStatus } from '@/lib/telemetry/fleetFilters';
 import { altitudeAtTime, balloonName, rowAtTime } from '@/lib/telemetry/fleetPlayback';
 
 export const BALLOON_COLORS = ['#a23a2d', '#476f83', '#7a7650', '#806682'];
@@ -63,9 +63,11 @@ const FleetCard = memo(function FleetCard({ device, rows, waiting, scrubT, now, 
             onClick={event => onSelect(device.id, event.detail !== 0)} aria-label={`Monitor ${balloonName(device)}`}>
             <CardHeading device={device} />
             <CardStatus id={device.id} status={status} />
-            <span className="balloon-card-metrics">
+            {isPlannedBalloon(device.status) ? <span className="balloon-card-plan">{device.plannedLaunchDate
+                ? `Planned launch ${new Date(`${device.plannedLaunchDate}T12:00:00`).toLocaleDateString(undefined, { month: 'short', day: 'numeric', year: 'numeric' })}`
+                : 'Launch date not set'}</span> : <span className="balloon-card-metrics">
                 {metrics.map(metric => <CardMetric key={metric.label} {...metric} />)}
-            </span>
+            </span>}
         </button>
     );
 });

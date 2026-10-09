@@ -1,14 +1,11 @@
 import { useEffect, useId, useRef, useState, type FormEvent } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCheck, faChevronRight, faCircleInfo, faCopy, faXmark } from '@fortawesome/free-solid-svg-icons';
+import { faCheck, faChevronRight, faCopy, faXmark } from '@fortawesome/free-solid-svg-icons';
 import { useCommunity } from './community-account';
 import { BalloonOwner } from './BalloonIdentity';
 import type { ConnectionResponse, RegisteredBalloon, TTNCluster, TTNConnection } from '@/lib/community/types';
+import BalloonRegistrationForm, { FieldTip, radioRegions, savedRegionalEuis } from './BalloonRegistrationForm';
 import { validClaimToken } from '@/lib/community/onboarding';
-
-function FieldTip({ label, children }: { label: string; children: string }) {
-    return <span className="field-tip" tabIndex={0} role="img" aria-label={`${label}: ${children}`}><FontAwesomeIcon icon={faCircleInfo} /><span role="tooltip">{children}</span></span>;
-}
 
 function CopyValue({ value, label, secret = false }: { value: string; label: string; secret?: boolean }) {
     const [copied, setCopied] = useState(false);
@@ -32,6 +29,9 @@ function ManagedBalloon({ balloon }: { balloon: RegisteredBalloon }) {
     const [error, setError] = useState('');
     const [webhook, setWebhook] = useState<ConnectionResponse['webhook']>();
     const [reconnecting, setReconnecting] = useState<TTNConnection | null>(null);
+    const [selectedRegion, setSelectedRegion] = useState('');
+    const regionalEuis = savedRegionalEuis(balloon);
+    const selectedRadio = radioRegions.find(region => region.value === selectedRegion);
     const details = useRef<HTMLDetailsElement>(null);
     const apiKey = useRef<HTMLInputElement>(null);
     const errorId = useId();
@@ -67,18 +67,23 @@ function ManagedBalloon({ balloon }: { balloon: RegisteredBalloon }) {
                 <option value="planned">Planned</option><option value="flying">Flying</option><option value="landed">Landed</option><option value="missing">Missing</option><option value="retired">Retired</option>
             </select>
         </div>
+        <details className="community-connect community-settings">
+            <summary><span>Launch and settings</span><FontAwesomeIcon icon={faChevronRight} /></summary>
+            <BalloonRegistrationForm balloon={balloon} busy={community.busy} onSubmit={input => community.update(balloon.id, input)} />
+        </details>
         {balloon.connections.length > 0 && <ul className="community-connections">{balloon.connections.map(connection => <li key={connection.id}><span>{connection.region || connection.cluster}<small>{connection.applicationId}</small><small className="community-connection-status">{connection.lastReceivedAt ? `Last received ${new Date(connection.lastReceivedAt).toLocaleString(undefined, { month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' })}` : 'Awaiting telemetry'}</small></span>{connection.managedBy === 'stratolink' ? <span className="community-managed-network">Managed by Stratolink</span> : <button className="community-text-button" disabled={community.busy} onClick={() => {
             setReconnecting(connection); setError(''); setWebhook(undefined);
             if (details.current) details.current.open = true;
         }}>Reconnect</button>}</li>)}</ul>}
         <details className="community-connect" ref={details} open={!balloon.connections.length || undefined}>
             <summary><span>{reconnecting ? 'Reconnect TTN' : balloon.connections.length ? 'Add a network' : 'Connect TTN'}</span><FontAwesomeIcon icon={faChevronRight} /></summary>
-            <form key={reconnecting?.id ?? 'new'} onSubmit={connect} autoComplete="off">
+            {!reconnecting && Object.keys(regionalEuis).length > 0 && <label className="community-field community-saved-region">Saved region<select value={selectedRegion} onChange={event => setSelectedRegion(event.target.value)}><option value="">Choose a region</option>{radioRegions.filter(region => regionalEuis[region.value]).map(region => <option key={region.value} value={region.value}>{region.label}</option>)}</select></label>}
+            <form key={reconnecting?.id ?? selectedRegion} onSubmit={connect} autoComplete="off">
                 <div className="community-connection-row">
-                    <label className="community-field"><span>Cluster <FieldTip label="TTN cluster">Use the cluster shown in your TTN Console URL. The radio region is read from your device settings.</FieldTip></span><select name="cluster" defaultValue={reconnecting?.cluster ?? 'nam1'}><option value="nam1">North America</option><option value="eu1">Europe</option><option value="au1">Australia</option></select></label>
+                    <label className="community-field"><span>Cluster <FieldTip label="TTN cluster">Use the cluster shown in your TTN Console URL. The radio region is read from your device settings.</FieldTip></span><select name="cluster" defaultValue={reconnecting?.cluster ?? selectedRadio?.cluster ?? 'nam1'}><option value="nam1">nam1</option><option value="eu1">eu1</option><option value="au1">au1</option></select></label>
                     <label className="community-field">Application ID<input name="applicationId" defaultValue={reconnecting?.applicationId} required maxLength={36} pattern="[a-z0-9](?:[a-z0-9-]*[a-z0-9])?" placeholder="my-balloons" spellCheck={false} autoCapitalize="none" /></label>
                 </div>
-                <label className="community-field"><span>Device EUI <FieldTip label="Regional device EUI">Use this network’s DevEUI. It can differ from the DevEUI on your other networks.</FieldTip></span><input name="deviceEui" defaultValue={reconnecting?.devEui ?? balloon.devEui ?? ''} required maxLength={32} spellCheck={false} autoCapitalize="characters" /></label>
+                <label className="community-field"><span>Device EUI <FieldTip label="Regional device EUI">Use this network’s DevEUI. It can differ from the DevEUI on your other networks.</FieldTip></span><input name="deviceEui" defaultValue={reconnecting?.devEui ?? (selectedRadio ? regionalEuis[selectedRadio.value] : balloon.devEui) ?? ''} required maxLength={32} spellCheck={false} autoCapitalize="characters" /></label>
                 <label className="community-field"><span>Application API key <FieldTip label="TTN API key">In TTN, open your application, then API keys. Allow reading end devices. The key verifies your device, then is discarded. You will add the webhook in TTN afterward.</FieldTip></span><input ref={apiKey} name="apiKey" type="password" placeholder="NNSXS…" required maxLength={512} autoComplete="off" spellCheck={false} aria-describedby={error ? errorId : undefined} /></label>
                 {reconnecting && <p>Replacing the key disconnects the old webhook until you update it in TTN.</p>}
                 <button className="community-primary" type="submit" disabled={community.busy}>{community.busy ? 'Connecting…' : reconnecting ? 'Replace webhook key' : 'Connect'}</button>
@@ -98,20 +103,11 @@ function ManagedBalloon({ balloon }: { balloon: RegisteredBalloon }) {
 export default function CommunityPanel() {
     const community = useCommunity();
     const [error, setError] = useState('');
-    const callsign = useRef<HTMLInputElement>(null);
     const claimCode = useRef<HTMLInputElement>(null);
     const [freshProof, setFreshProof] = useState(false);
     const ownsPayload = Boolean(community.user && community.intent && community.balloons.some(balloon => balloon.id === community.intent?.deviceId));
     useEffect(() => { setFreshProof(false); setError(''); }, [community.intent?.deviceId]);
-    useEffect(() => { setError(''); if (community.panel === 'register') callsign.current?.focus({ preventScroll: true }); }, [community.panel]);
-    async function register(event: FormEvent<HTMLFormElement>) {
-        event.preventDefault();
-        const form = event.currentTarget;
-        const data = new FormData(form);
-        setError('');
-        try { await community.register(String(data.get('callsign')), String(data.get('devEui'))); form.reset(); }
-        catch (error) { setError(error instanceof Error ? error.message : 'Check your device details.'); }
-    }
+    useEffect(() => { setError(''); }, [community.panel]);
     async function claim(event: FormEvent<HTMLFormElement>) {
         event.preventDefault(); setError('');
         const token = claimCode.current?.value.trim();
@@ -146,14 +142,7 @@ export default function CommunityPanel() {
                 <div className="community-device-row"><label className="community-field">Callsign<input name="callsign" required minLength={3} maxLength={36} pattern="[a-z0-9](?:-?[a-z0-9]){2,35}" autoComplete="off" autoCapitalize="none" spellCheck={false} placeholder="stratolink-orion" /></label><button type="submit" className="community-primary" disabled={community.busy}>{community.busy ? 'Reserving…' : 'Reserve'}</button></div>
                 {error && <p className="community-error" role="alert">{error}</p>}
             </form> : <p>Sign in to reserve a callsign.</p>)}
-            {community.panel === 'register' && <form onSubmit={register}>
-                <label className="community-field">Callsign<input ref={callsign} name="callsign" placeholder="Your balloon’s name" required minLength={2} maxLength={40} autoComplete="off" /></label>
-                <div className="community-device-row">
-                    <label className="community-field"><span>Device EUI <FieldTip label="Device EUI">The 16-character device identifier in TTN, under End devices, General settings. You will connect its TTN application after registration.</FieldTip></span><input name="devEui" aria-label="Device EUI" placeholder="70B3D57ED0000000" required maxLength={32} autoComplete="off" spellCheck={false} aria-describedby={error ? 'registration-error' : undefined} /></label>
-                    <button className="community-primary" type="submit" disabled={community.busy}>{community.busy ? 'Registering…' : 'Register balloon'}</button>
-                </div>
-                {error && <p className="community-error" id="registration-error" role="alert">{error}</p>}
-            </form>}
+            {community.panel === 'register' && <BalloonRegistrationForm busy={community.busy} onSubmit={community.register} />}
             {community.panel === 'manage' && <div className="community-managed">
                 <div className="community-panel-title"><h2>Your balloons</h2><button className="community-close" aria-label="Close account panel" onClick={() => community.setPanel(null)}><FontAwesomeIcon icon={faXmark} /></button></div>
                 {community.balloons.map(balloon => <ManagedBalloon key={balloon.id} balloon={balloon} />)}

@@ -12,11 +12,21 @@ export type TTNConnection = {
     lastReceivedAt?: string | null;
     managedBy?: 'stratolink' | 'owner';
 };
+export type RadioRegion = 'northAmerica' | 'europe' | 'asia' | 'australia';
+export type BalloonSettings = {
+    callsign: string;
+    plannedLaunchDate: string | null;
+    regionalEuis: Partial<Record<RadioRegion, string>>;
+    shareResearchData: boolean;
+};
 export type RegisteredBalloon = {
     id: string;
     callsign: string;
     status: string;
     devEui: string | null;
+    plannedLaunchDate?: string | null;
+    regionalEuis?: BalloonSettings['regionalEuis'];
+    shareResearchData?: boolean;
     ownerId: string | null;
     ownerGithub: string | null;
     official?: boolean;
@@ -45,6 +55,7 @@ export function mergeRegisteredBalloons(devices: DeviceSummary[], owned: Registe
             official: balloon.official ?? existing?.official,
             connectionStatus: balloon.connectionStatus,
             launchedAt: balloon.launchedAt,
+            plannedLaunchDate: balloon.plannedLaunchDate,
             launchLat: existing?.launchLat ?? null,
             launchLon: existing?.launchLon ?? null,
             lastContactT: existing?.lastContactT ?? null,

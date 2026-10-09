@@ -139,3 +139,11 @@ test('card altitude holds the last measured value without reading ahead across m
     assert.equal(altitudeAtTime(rows, 350), 500);
     assert.equal(altitudeAtTime(rows, 400), 1200);
 });
+
+test('planned launches and bench packets never appear in the homepage flight preview', async () => {
+    const { previewFleet, fleetActivity } = await import('./fleetPlayback.ts');
+    const plans = ['planned','storage','idle'].map(status => ({id:status,status}));
+    const rows = Object.fromEntries(plans.map(device => [device.id,[packet(1_999_000)]]));
+    assert.deepEqual(previewFleet(plans,rows,2_000_000),[]);
+    assert.equal(fleetActivity(plans,rows,2_000_000).active,0);
+});

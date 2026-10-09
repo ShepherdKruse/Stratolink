@@ -1,7 +1,6 @@
 import { createContext, useCallback, useContext, useEffect, useRef, useState, type ReactNode } from 'react';
-import { registrationValues } from '@/lib/telemetry/fleetFilters';
 import { accountRequest, AccountRequestError, authClient, clearOAuthReturnState, finishOAuthRedirect, isAuthConfigured, signInWithGithub } from '@/lib/community/auth';
-import type { AccountResponse, AccountUser, ConnectionInput, ConnectionResponse, RegisteredBalloon } from '@/lib/community/types';
+import type { AccountResponse, AccountUser, BalloonSettings, ConnectionInput, ConnectionResponse, RegisteredBalloon } from '@/lib/community/types';
 import { beginActivation, clearActivation, initializeOnboarding } from '@/lib/community/activation';
 import { onboardingDashboardPath, onboardingEntry, type ActivationIntent, type OnboardingMode } from '@/lib/community/onboarding';
 import { dashboardReturnDevice } from '@/lib/community/returnDevice';
@@ -18,8 +17,8 @@ type Community = {
     setPanel: (panel: Community['panel']) => void;
     signIn: () => Promise<void>;
     signOut: () => Promise<void>;
-    register: (callsign: string, devEui: string) => Promise<void>;
-    update: (id: string, status: string) => Promise<void>;
+    register: (input: BalloonSettings) => Promise<void>;
+    update: (id: string, input: string | BalloonSettings) => Promise<void>;
     connect: (id: string, input: ConnectionInput) => Promise<ConnectionResponse>;
     intent: ActivationIntent | null;
     activationLoading: boolean;
@@ -167,15 +166,14 @@ export function CommunityProvider({ children }: { children: ReactNode }) {
             } catch { setError('Unable to sign out. Please try again.'); }
             finally { setBusy(false); }
         },
-        async register(callsign, devEui) {
-            const input = registrationValues(callsign, devEui);
+        async register(input) {
             await mutate(() => accountRequest<{ balloon: RegisteredBalloon }>('/api/balloons', 'POST', input), ({ balloon }) => {
                 saveBalloon(balloon);
                 setPanel('manage');
             });
         },
-        async update(id, status) {
-            await mutate(() => accountRequest<{ balloon: RegisteredBalloon }>(`/api/balloons/${encodeURIComponent(id)}`, 'PATCH', { status }), ({ balloon }) => saveBalloon(balloon));
+        async update(id, input) {
+            await mutate(() => accountRequest<{ balloon: RegisteredBalloon }>(`/api/balloons/${encodeURIComponent(id)}`, 'PATCH', typeof input === 'string' ? { status: input } : input), ({ balloon }) => saveBalloon(balloon));
         },
         async connect(id, input) {
             return mutate(() => accountRequest<ConnectionResponse>(`/api/balloons/${encodeURIComponent(id)}/connections`, 'POST', input), result => saveBalloon(result.balloon));
