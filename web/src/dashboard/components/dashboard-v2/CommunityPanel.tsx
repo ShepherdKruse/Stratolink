@@ -122,7 +122,7 @@ export default function CommunityPanel() {
         try { await community.reserve(String(data.get('callsign'))); }
         catch (error) { setError(error instanceof Error ? error.message : 'Unable to reserve this callsign.'); }
     }
-    return <div className="community-expand" data-open={Boolean(community.panel)} inert={!community.panel}>
+    return <div className="community-expand" data-open={Boolean(community.panel)} data-panel={community.panel ?? undefined} inert={!community.panel}>
         <div className="community-expand-inner"><section className="community-panel" aria-label={community.panel === 'manage' ? 'Manage balloons' : community.panel === 'activate' ? 'Claim payload' : community.panel === 'reserve' ? 'Reserve a callsign' : 'Register a balloon'}>
             {(community.panel === 'activate' || community.panel === 'reserve') && <div className="community-panel-title"><h2>{community.panel === 'activate' ? 'Claim payload' : 'Reserve a callsign'}</h2><button type="button" className="community-close" aria-label="Cancel onboarding" disabled={community.busy} onClick={() => community.setPanel(null)}><FontAwesomeIcon icon={faXmark} /></button></div>}
             {community.panel === 'activate' && <>
