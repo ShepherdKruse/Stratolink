@@ -18,32 +18,31 @@ export async function contactFigure(host, signal) {
   if (signal.aborted) return;
   host.innerHTML = `<div class="chart-heading">Waiting for a balloon <span>14-day wind model</span></div>
     <div class="contact-settings">
-      <label>Starting positions<select data-mode><option value="world">Both hemispheres</option><option value="north">North</option><option value="south">South</option></select></label>
-      <label>Read results for<select data-region><option value="earth">Whole Earth</option><option value="north">North</option><option value="south">South</option><option value="point">Selected location</option></select></label>
+      <label>Start<select data-mode><option value="world">Both hemispheres</option><option value="north">North</option><option value="south">South</option></select></label>
+      <label>Area<select data-region><option value="earth">Whole Earth</option><option value="north">North</option><option value="south">South</option><option value="point">Selected location</option></select></label>
     </div>
     <div class="fleet-controls contact-controls">
-      <label>Balloon count <output>100</output><input data-count type="range" min="1" max="500" value="100" aria-label="Waiting-time balloon count"></label>
+      <label>Balloons <output>100</output><input data-count type="range" min="1" max="500" value="100" aria-label="Waiting-time balloon count"></label>
       <label>Radius <output>350 km</output><input data-radius type="range" min="200" max="500" step="25" value="350" aria-label="Waiting-time radius in kilometers"></label>
     </div>
     <div class="contact-results" aria-busy="true">
-      <div class="fleet-metrics contact-metrics"><span><b data-mean>…</b>mean wait, capped at 7 days</span><span><b data-day>…</b>within 1 day</span><span><b data-week>…</b>within 7 days</span></div>
+      <div class="fleet-metrics contact-metrics"><span><b data-mean>…</b>mean wait <small>(7-day cap)</small></span><span><b data-day>…</b>within 1 day</span><span><b data-week>…</b>within 7 days</span></div>
       <canvas class="fleet-map contact-map" tabindex="0" role="img" aria-label="Modeled waiting time across Earth. Select a location, or use arrow keys and Enter."></canvas>
-      <div class="contact-map-key"><span>0 hours</span><i class="spectrum-key"></i><span>7 days</span><span><i class="contact-unreached"></i>No contact in 14 days</span></div>
-      <output class="contact-location">Select a location on the map.</output>
-      <p class="contact-area"></p>
-      <div class="chart-heading contact-curve-heading">Fleet size <span>selected area or location</span></div>
-      <div class="capture-tabs contact-chart-tabs" aria-label="Coverage comparison"><button type="button" data-comparison="deadline" aria-pressed="true">Contact within a deadline</button><button type="button" data-comparison="wait" aria-pressed="false">Mean wait</button></div>
+      <div class="contact-map-key"><span>0h</span><i class="spectrum-key"></i><span>7d</span><span title="No contact in the 14-day model"><i class="contact-unreached"></i>Unreached</span></div>
+      <output class="contact-location">Select a location</output>
+      <div class="chart-heading contact-curve-heading">Fleet size</div>
+      <div class="capture-tabs contact-chart-tabs" aria-label="Coverage comparison"><button type="button" data-comparison="deadline" aria-pressed="true">Contact by deadline</button><button type="button" data-comparison="wait" aria-pressed="false">Mean wait</button></div>
       <div class="chart-legend" data-deadline-legend><span class="chart-key"><i style="background:${colors[2]}"></i>1 day</span><span class="chart-key"><i style="background:${colors[3]}"></i>3 days</span><span class="chart-key"><i style="background:${colors[6]}"></i>7 days</span></div>
       <svg class="contact-curve" role="img" tabindex="0" aria-label="Fraction of message arrivals with a contact within one, three, or seven days. Arrow keys inspect balloon counts."></svg>
       <output class="chart-readout" data-curve-readout></output>
-      <div class="contact-point" hidden><div class="chart-heading">Contact windows <span>selected location</span></div>
+      <div class="contact-point" hidden><div class="chart-heading">Contact windows</div>
         <canvas class="contact-timeline" role="img" aria-label="Hours when a balloon footprint reaches the selected location, over fourteen days"></canvas>
         <div class="waterfall-axis"><span>Day 0</span><span>Day 7</span><span>Day 14</span></div>
-        <label class="chart-control">Message ready on day <output>0.0</output><input data-arrival type="range" min="0" max="167" value="0" aria-label="Message arrival hour in the first week"></label>
+        <label class="chart-control">Message day <output>0.0</output><input data-arrival type="range" min="0" max="167" value="0" aria-label="Message arrival hour in the first week"></label>
         <output class="chart-readout" data-arrival-readout></output>
       </div>
     </div>
-    <p class="contact-method">Hourly arrivals in week 1, each with a 7-day look-ahead. Geometric range only; power and packet delivery are not modeled.</p>`;
+    <details class="contact-details"><summary>Model details</summary><p class="contact-area"></p><p class="contact-method">Hourly arrivals in week 1, with waits capped at 7 days. Geometric range only; power and packet delivery are not modeled.</p></details>`;
 
   const get = selector => host.querySelector(selector);
   const map = get('.contact-map'), ctx = map.getContext('2d'), curve = get('.contact-curve');
@@ -125,7 +124,7 @@ export async function contactFigure(host, signal) {
     const row = rows[focusCount];
     curve.append(element('line', { x1: sx(row.count), x2: sx(row.count), y1: top, y2: h - bottom, stroke: '#29292766', 'stroke-dasharray': '3 4' }));
     get('[data-curve-readout]').textContent = isWait
-      ? `${row.count} balloons / mean wait: ${duration(row.meanCapped)}, with each wait capped at 7 days`
+      ? `${row.count} balloons / ${duration(row.meanCapped)} mean wait`
       : `${row.count} balloons / 1 day: ${percent(row.day)} / 3 days: ${percent(row.threeDays)} / 7 days: ${percent(row.week)}`;
   }
 
@@ -137,7 +136,7 @@ export async function contactFigure(host, signal) {
     timeCtx.fillStyle = '#292927'; timeCtx.fillRect(x, 0, 2, 29);
     const wait = result.local.waits[arrival];
     arrivalInput.previousElementSibling.textContent = (arrival / 24).toFixed(2);
-    get('[data-arrival-readout]').textContent = wait > 168 ? 'No opportunity in the following 7 days.' : wait === 0 ? 'In range at this sampled hour.' : `Next sampled opportunity in ${duration(wait)}.`;
+    get('[data-arrival-readout]').textContent = wait > 168 ? 'No contact within 7 days' : wait === 0 ? 'In range' : `Next contact in ${duration(wait)}`;
   }
 
   function draw() {
@@ -146,7 +145,7 @@ export async function contactFigure(host, signal) {
     get('[data-mean]').textContent = duration(stats.meanCapped);
     get('[data-day]').textContent = percent(stats.day);
     get('[data-week]').textContent = percent(stats.week);
-    get('.contact-location').textContent = `${coordinate(location.lat, 'N', 'S')}, ${coordinate(location.lon, 'E', 'W')} / select a point to inspect its contact windows`;
+    get('.contact-location').textContent = local ? `${coordinate(location.lat, 'N', 'S')}, ${coordinate(location.lon, 'E', 'W')}` : 'Select a location';
     get('.contact-area').textContent = local
       ? `Median wait: ${duration(stats.median)}. 90th percentile: ${duration(stats.p90)}. ${stats.everyWeek ? 'Every sampled arrival found an opportunity within 7 days.' : 'Some sampled arrivals waited more than 7 days.'}`
       : `${percent(stats.reachedWeek)} of this area reached at least once in week 1; ${percent(stats.reachedFortnight)} in 14 days. ${percent(stats.everyWeek)} had a contact within 7 days of every sampled arrival.`;
