@@ -117,7 +117,7 @@
 .community-form-actions .community-primary:disabled { opacity: 1; color: var(--t-text-3); cursor: not-allowed; }
 .community-registration-form fieldset:disabled .community-primary { cursor: wait; }
 .community-form-actions .community-primary:focus-visible { outline: 2px solid var(--t-text-3); outline-offset: 3px; }
-.community-form-actions .community-primary:disabled:hover { opacity: 1; }
+.community-form-actions .community-primary:hover { opacity: 1; }
 @media (prefers-reduced-motion: reduce) { .community-form-actions .community-primary { transition: none; } }
 .community-form-actions > span { font-size: 11px; color: var(--t-text-3); text-align: right; }
 .community-settings .community-registration-form { margin-top: 12px; }
