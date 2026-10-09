@@ -38,6 +38,7 @@ export default function BalloonRegistrationForm({ balloon, busy, onSubmit }: {
     const [saved, setSaved] = useState(false);
     const callsign = useRef<HTMLInputElement>(null);
     const errorId = useId();
+    const sharingLabelId = useId();
     useEffect(() => { if (!balloon) callsign.current?.focus({ preventScroll: true }); }, [balloon]);
     async function submit(event: FormEvent<HTMLFormElement>) {
         event.preventDefault(); setError(''); setSaved(false);
@@ -68,8 +69,7 @@ export default function BalloonRegistrationForm({ balloon, busy, onSubmit }: {
                 const next = radioRegions.find(region => !radios.some(row => row.region === region.value))!;
                 setRadios(current => [...current, { region: next.value, eui: '' }]);
             }}><FontAwesomeIcon icon={faPlus} />Add a region</button>}
-            <label className="community-sharing"><input type="checkbox" name="shareResearchData" defaultChecked={balloon ? balloon.shareResearchData === true : true} /><span>Share data with Stratolink research collaborators <FieldTip label="Research sharing">Allow Stratolink to include this balloon’s telemetry in datasets shared with research collaborators. You can change this later.</FieldTip></span></label>
-            {!balloon && <p className="community-registration-note">Starts as Planned. Edit your launch date and settings in Your balloons.</p>}
+            <label className="community-sharing"><span><span id={sharingLabelId}>Share data with Stratolink’s research collaborators</span> <FieldTip label="Research sharing">Allow Stratolink to include this balloon’s telemetry in datasets shared with research collaborators. You can change this later.</FieldTip></span><span className="community-sharing-switch"><input type="checkbox" role="switch" name="shareResearchData" aria-labelledby={sharingLabelId} defaultChecked={balloon ? balloon.shareResearchData === true : true} /><span className="dashboard-switch-track" aria-hidden="true" /></span></label>
             <div className="community-form-actions"><button className="community-primary" type="submit">{busy ? (balloon ? 'Saving…' : 'Registering…') : balloon ? 'Save changes' : 'Register balloon'}</button>{balloon && saved && <span role="status">Saved</span>}</div>
         </fieldset>
         {error && <p className="community-error" id={errorId} role="alert">{error}</p>}

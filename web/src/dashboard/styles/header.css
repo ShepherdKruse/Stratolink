@@ -263,12 +263,14 @@
     transition: transform 160ms cubic-bezier(0.23, 1, 0.32, 1), background-color 160ms ease;
 }
 
-.dashboard-layer-option input:checked + .dashboard-switch-track {
+.dashboard-layer-option input:checked + .dashboard-switch-track,
+.community-sharing-switch input:checked + .dashboard-switch-track {
     background: var(--t-text);
     border-color: var(--t-text);
 }
 
-.dashboard-layer-option input:checked + .dashboard-switch-track::after {
+.dashboard-layer-option input:checked + .dashboard-switch-track::after,
+.community-sharing-switch input:checked + .dashboard-switch-track::after {
     transform: translateX(12px);
     background: var(--t-panel);
 }
