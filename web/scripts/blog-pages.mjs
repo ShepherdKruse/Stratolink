@@ -77,7 +77,7 @@ ${socialMetadata({ title: `${post.title} - Stratolink`, path: `/blog/${post.slug
         <a class="post-back" href="/blog" data-blog-back><img src="/assets/icons/chevron-left.svg" alt="" width="9" height="12">All articles</a>
         <h1 data-post-title>${escape(post.title)}</h1>
         <div class="post-meta">
-          <a href="${escape(post.author.github)}" target="_blank" rel="noreferrer">${escape(post.author.name)}</a>
+          <span class="post-authors">${(post.authors || [post.author]).map(author => `<a href="${escape(author.github)}" target="_blank" rel="noreferrer">${escape(author.name)}</a>`).join(' <span aria-hidden="true">and</span> ')}</span>
           <time datetime="${post.published}">${escape(post.publishedLabel)}</time>
           <span>${readingTime(post)} min read</span>
         </div>

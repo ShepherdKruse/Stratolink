@@ -9,10 +9,13 @@ export const payloadArticle = {
   slug: 'building-towards-stratolink-v1',
   title: 'Building towards Stratolink v1',
   category: 'Dev log',
-  excerpt: 'Antenna models, radio tests, sensor choices, and the power budget for the next payload.',
+  excerpt: 'Antenna models, radio tests, power measurements, and coverage as the fleet grows.',
   published: '2026-10',
   publishedLabel: 'October 2026',
-  author: { name: 'Teddy Warner', github: 'https://github.com/twarner491' },
+  authors: [
+    { name: 'Teddy Warner', github: 'https://github.com/twarner491' },
+    { name: 'Caleb Kruse', github: 'https://github.com/clkruse' },
+  ],
   image: {
     src: '/assets/payload-dev-log/payload.jpg',
     alt: 'The complete Stratolink payload and solar panels suspended above Dolores Park.',
