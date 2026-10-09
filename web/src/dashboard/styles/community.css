@@ -107,10 +107,18 @@
 .community-sharing-switch { display: flex; align-items: center; justify-content: center; position: relative; flex: none; width: 34px; height: 32px; }
 .community-sharing-switch input { position: absolute; inset: 0; width: 100%; height: 100%; margin: 0; opacity: 0; cursor: pointer; }
 .community-sharing-switch input:focus-visible + .dashboard-switch-track { outline: 2px solid var(--t-text-3); outline-offset: 3px; }
+.community-sharing-switch input:checked + .dashboard-switch-track { background: var(--t-border-2); }
+.community-sharing-switch input:checked + .dashboard-switch-track::after { transform: translateX(12px); background: var(--t-text-2); }
 .community-sharing:has(input:disabled) { opacity: .55; cursor: wait; }
 .community-sharing-switch input:disabled { cursor: wait; }
 .community-form-actions { display: flex; flex-direction: column; align-items: stretch; gap: 8px; }
-.community-form-actions .community-primary { width: 100%; min-height: 40px; color: var(--t-text-2); background: var(--t-panel-2); border-color: var(--t-border); }
+.community-form-actions .community-primary { width: 100%; min-height: 40px; color: var(--t-text-2); background: var(--t-panel-2); border-color: var(--t-border); transition: background-color 160ms ease, border-color 160ms ease, color 160ms ease; }
+.community-form-actions .community-primary:enabled { background: color-mix(in srgb, var(--t-text) 12%, var(--t-panel)); border-color: var(--t-border-2); }
+.community-form-actions .community-primary:disabled { opacity: 1; color: var(--t-text-3); cursor: not-allowed; }
+.community-registration-form fieldset:disabled .community-primary { cursor: wait; }
+.community-form-actions .community-primary:focus-visible { outline: 2px solid var(--t-text-3); outline-offset: 3px; }
+.community-form-actions .community-primary:hover { opacity: 1; }
+@media (prefers-reduced-motion: reduce) { .community-form-actions .community-primary { transition: none; } }
 .community-form-actions > span { font-size: 11px; color: var(--t-text-3); text-align: right; }
 .community-settings .community-registration-form { margin-top: 12px; }
 .community-saved-region { margin-top: 12px; }

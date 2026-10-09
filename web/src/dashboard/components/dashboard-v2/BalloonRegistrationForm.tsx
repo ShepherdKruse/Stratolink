@@ -36,12 +36,22 @@ export default function BalloonRegistrationForm({ balloon, busy, onSubmit }: {
     });
     const [error, setError] = useState('');
     const [saved, setSaved] = useState(false);
+    const [ready, setReady] = useState(false);
+    const form = useRef<HTMLFormElement>(null);
     const callsign = useRef<HTMLInputElement>(null);
     const errorId = useId();
     const sharingLabelId = useId();
     useEffect(() => { if (!balloon) callsign.current?.focus({ preventScroll: true }); }, [balloon]);
+    function updateReadiness() {
+        setReady(Boolean(form.current && !form.current.querySelector(':invalid')
+            && (callsign.current?.value.trim().length ?? 0) >= 2
+            && (balloon || form.current.querySelector('.community-radio'))));
+    }
+    useEffect(updateReadiness, [radios, balloon]);
     async function submit(event: FormEvent<HTMLFormElement>) {
-        event.preventDefault(); setError(''); setSaved(false);
+        event.preventDefault();
+        if (!ready || busy) return;
+        setError(''); setSaved(false);
         const data = new FormData(event.currentTarget);
         try {
             await onSubmit({
@@ -53,7 +63,7 @@ export default function BalloonRegistrationForm({ balloon, busy, onSubmit }: {
             setSaved(true);
         } catch (error) { setError(error instanceof Error ? error.message : 'Unable to save balloon. Please try again.'); }
     }
-    return <form className="community-registration-form" onSubmit={submit} onChange={() => setSaved(false)}>
+    return <form ref={form} className="community-registration-form" aria-busy={busy} onSubmit={submit} onInput={() => { setSaved(false); updateReadiness(); }} onChange={updateReadiness}>
         <fieldset disabled={busy} aria-describedby={error ? errorId : undefined}>
             <label className="community-field">Callsign<input ref={callsign} name="callsign" defaultValue={balloon?.callsign} placeholder="Your balloon’s name" required minLength={2} maxLength={40} pattern="[A-Za-z0-9][A-Za-z0-9 ._\-]{1,39}" autoComplete="off" /></label>
             <label className="community-field"><span>Planned launch <span className="community-optional">Optional</span> <FieldTip label="Planned launch date">An approximate date for the public planned-launch list. You can change or clear it later.</FieldTip></span><input type="date" aria-label="Planned launch date" name="plannedLaunchDate" defaultValue={balloon?.plannedLaunchDate ?? ''} min="2020-01-01" max="2100-12-31" /></label>
@@ -62,7 +72,7 @@ export default function BalloonRegistrationForm({ balloon, busy, onSubmit }: {
                 <label className="community-field"><span className="sr-only">Radio region {index + 1}</span><select value={radio.region} onChange={event => setRadios(current => current.map((row, i) => i === index ? { ...row, region: event.target.value as RadioRegion } : row))}>
                     {radioRegions.map(region => <option key={region.value} value={region.value} disabled={radios.some((row, i) => i !== index && row.region === region.value)}>{region.label}</option>)}
                 </select></label>
-                <label className="community-field"><span className="sr-only">{radioRegions.find(region => region.value === radio.region)?.label} DevEUI</span><input name={`eui-${radio.region}`} value={radio.eui} onChange={event => setRadios(current => current.map((row, i) => i === index ? { ...row, eui: event.target.value } : row))} placeholder="16-character DevEUI" required maxLength={32} autoComplete="off" autoCapitalize="characters" spellCheck={false} /></label>
+                <label className="community-field"><span className="sr-only">{radioRegions.find(region => region.value === radio.region)?.label} DevEUI</span><input name={`eui-${radio.region}`} value={radio.eui} onChange={event => setRadios(current => current.map((row, i) => i === index ? { ...row, eui: event.target.value } : row))} placeholder="16-character DevEUI" required maxLength={32} pattern="(?=.*[1-9A-Fa-f])(?:[\s:\-]*[0-9A-Fa-f]){16}[\s:\-]*" title="16 hexadecimal characters, not all zeros" autoComplete="off" autoCapitalize="characters" spellCheck={false} /></label>
                 <button className="community-remove-radio" type="button" aria-label={`Remove ${radioRegions.find(region => region.value === radio.region)?.label} region`} onClick={() => setRadios(current => current.filter((_, i) => i !== index))}><FontAwesomeIcon icon={faXmark} /></button>
             </div>)}</div>
             {radios.length < radioRegions.length && <button className="community-text-button community-add-radio" type="button" onClick={() => {
@@ -70,7 +80,7 @@ export default function BalloonRegistrationForm({ balloon, busy, onSubmit }: {
                 setRadios(current => [...current, { region: next.value, eui: '' }]);
             }}><FontAwesomeIcon icon={faPlus} />Add a region</button>}
             <label className="community-sharing"><span><span id={sharingLabelId}>Share data with Stratolink’s research collaborators</span> <FieldTip label="Research sharing">Allow Stratolink to include this balloon’s telemetry in datasets shared with research collaborators. You can change this later.</FieldTip></span><span className="community-sharing-switch"><input type="checkbox" role="switch" name="shareResearchData" aria-labelledby={sharingLabelId} defaultChecked={balloon ? balloon.shareResearchData === true : true} /><span className="dashboard-switch-track" aria-hidden="true" /></span></label>
-            <div className="community-form-actions"><button className="community-primary" type="submit">{busy ? (balloon ? 'Saving…' : 'Registering…') : balloon ? 'Save changes' : 'Register balloon'}</button>{balloon && saved && <span role="status">Saved</span>}</div>
+            <div className="community-form-actions"><button className="community-primary" type="submit" disabled={!ready || busy}>{busy ? (balloon ? 'Saving…' : 'Registering…') : balloon ? 'Save changes' : 'Register balloon'}</button>{balloon && saved && <span role="status">Saved</span>}</div>
         </fieldset>
         {error && <p className="community-error" id={errorId} role="alert">{error}</p>}
     </form>;
