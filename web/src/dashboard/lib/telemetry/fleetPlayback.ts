@@ -62,7 +62,7 @@ export function fleetActivity(
     now: number,
 ) {
     const active = devices.filter(device => {
-        if (['landed', 'recovered', 'retired', 'lost', 'idle'].includes(device.status.toLowerCase())) return false;
+        if (['landed', 'recovered', 'retired', 'lost', 'idle', 'planned', 'storage'].includes(device.status.toLowerCase())) return false;
         const latest = rowsByDevice[device.id]?.at(-1)?.t;
         return latest != null && latest <= now && now - latest < 15 * 60_000;
     }).length;
@@ -71,6 +71,7 @@ export function fleetActivity(
 
 /** The homepage prioritizes live flights, then falls back to recorded balloons. */
 export function previewFleet<T extends { id: string; status: string }>(devices: T[], rowsByDevice: Record<string, TelemetryRow[]>, now: number): T[] {
-    const active = devices.filter(device => fleetActivity([device], rowsByDevice, now).active > 0);
-    return active.length ? active : devices.filter(device => (rowsByDevice[device.id]?.length ?? 0) > 0);
+    const flown = devices.filter(device => !['planned', 'storage', 'idle'].includes(device.status.toLowerCase()));
+    const active = flown.filter(device => fleetActivity([device], rowsByDevice, now).active > 0);
+    return active.length ? active : flown.filter(device => (rowsByDevice[device.id]?.length ?? 0) > 0);
 }

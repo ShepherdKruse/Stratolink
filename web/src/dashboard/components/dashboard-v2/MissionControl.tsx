@@ -40,7 +40,7 @@ import CommunityPanel from './CommunityPanel';
 import FleetFilters from './FleetFilters';
 import { useCommunity } from './community-account';
 import { mergeRegisteredBalloons } from '@/lib/community/types';
-import { defaultFleetFilters, filterFleet } from '@/lib/telemetry/fleetFilters';
+import { defaultFleetFilters, filterFleet, isPlannedBalloon } from '@/lib/telemetry/fleetFilters';
 import { flightTrack } from '@/lib/telemetry/flightTrack';
 import { withLatestTelemetry } from '@/lib/telemetry/fleetSummary';
 
@@ -82,7 +82,7 @@ export default function MissionControlScreen() {
     } = useTelemetry({ initialSelectedId });
     const community = useCommunity();
     useEffect(() => { if (community.focusDevice) setSelectedId(community.focusDevice); }, [community.focusDevice, setSelectedId]);
-    const fleetHistory = useFleetHistory(registryDevices, selectedId === null);
+    const fleetHistory = useFleetHistory(registryDevices.filter(device => device.connectionStatus !== 'pending'), selectedId === null);
     const devices = useMemo(() => mergeRegisteredBalloons(registryDevices.map(device =>
         withLatestTelemetry(device, device.id === selectedId ? rows : fleetHistory.rowsByDevice[device.id]),
     ), community.balloons, community.user?.id), [registryDevices, community.balloons, community.user?.id, fleetHistory.rowsByDevice, selectedId, rows]);
@@ -273,10 +273,12 @@ export default function MissionControlScreen() {
     const previewIds = new Set(previewFleet(devices, fleetHistory.rowsByDevice, Date.now()).map(device => device.id));
     const portalPreview = globeStage === 'footer' || globeStage === 'entering';
     const shownFleet = portalPreview ? fleetBalloons.filter(balloon => previewIds.has(balloon.id)) : fleetBalloons.filter(balloon => filteredIds.has(balloon.id));
-    const activity = fleetActivity(filteredDevices, fleetHistory.rowsByDevice, Date.now());
-    const fleetCaption = activity.active > 0
+    const plannedCount = filteredDevices.filter(device => isPlannedBalloon(device.status)).length;
+    const activity = fleetActivity(filteredDevices.filter(device => !isPlannedBalloon(device.status)), fleetHistory.rowsByDevice, Date.now());
+    const flightCaption = activity.active > 0
         ? `${activity.active} active ${activity.active === 1 ? 'balloon' : 'balloons'}`
         : `${activity.inactive} inactive ${activity.inactive === 1 ? 'balloon' : 'balloons'}`;
+    const fleetCaption = plannedCount ? `${activity.active + activity.inactive ? `${flightCaption} / ` : ''}${plannedCount} planned ${plannedCount === 1 ? 'balloon' : 'balloons'}` : flightCaption;
 
     const transitionPanel = useCallback((id: string | null, update: () => void, animate = true) => {
         transitionRef.current?.skipTransition();

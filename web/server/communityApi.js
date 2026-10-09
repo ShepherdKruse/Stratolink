@@ -30,6 +30,28 @@ export function normalizeEui(value) {
 function exactFields(body, expected) {
   if (!body || typeof body !== 'object' || Array.isArray(body) || Object.keys(body).length !== expected.length || expected.some(key => !Object.hasOwn(body, key))) fail(400, 'Invalid fields');
 }
+function balloonSettings(body, requireRadio = false) {
+  exactFields(body, ['callsign','plannedLaunchDate','regionalEuis','shareResearchData']);
+  const callsign = typeof body.callsign === 'string' ? body.callsign.trim() : '';
+  if (!/^[A-Za-z0-9][A-Za-z0-9 ._-]{1,39}$/.test(callsign)) fail(400, 'Use a callsign of 2 to 40 letters, numbers, spaces, periods, hyphens, or underscores');
+  const date = body.plannedLaunchDate;
+  if (date !== null && (typeof date !== 'string' || !/^20[0-9]{2}-[0-9]{2}-[0-9]{2}$|^2100-[0-9]{2}-[0-9]{2}$/.test(date)
+    || date < '2020-01-01' || date > '2100-12-31' || !Number.isFinite(Date.parse(date)) || new Date(date).toISOString().slice(0,10) !== date)) fail(400, 'Enter a valid planned launch date');
+  if (typeof body.shareResearchData !== 'boolean') fail(400, 'Choose a research-sharing preference');
+  const entries = body.regionalEuis;
+  if (!entries || typeof entries !== 'object' || Array.isArray(entries)) fail(400, 'Enter regional DevEUIs');
+  const regions = ['northAmerica','europe','asia','australia'];
+  if (Object.keys(entries).some(region => !regions.includes(region))) fail(400, 'Choose a supported radio region');
+  const regionalEuis = {};
+  for (const [region, value] of Object.entries(entries)) {
+    const eui = normalizeEui(value);
+    if (!eui) fail(400, 'Each DevEUI needs 16 hexadecimal characters and cannot be all zeros');
+    regionalEuis[region] = eui;
+  }
+  if (requireRadio && !Object.keys(regionalEuis).length) fail(400, 'Add at least one regional DevEUI');
+  return { p_callsign: callsign, p_planned_launch_date: date, p_regional_euis: regionalEuis, p_share_research_data: body.shareResearchData };
+}
+
 async function boundedJson(input, maxBytes) {
   const reader = input.body?.getReader();
   if (!reader) fail(400, 'JSON body required');
@@ -202,6 +224,11 @@ export function createCommunityApi({ createDb = createServerSupabase, verifyDevi
         return balloon ? reply(200, { balloon }) : reply(409, { error: 'Unable to connect this payload' });
       }
       if (registerRoute) {
+        if (Object.hasOwn(body ?? {}, 'regionalEuis')) {
+          const settings = balloonSettings(body, true);
+          const balloon = await rpc('register_planned_balloon', { p_owner_id: user.id, p_github_login: user.login, ...settings });
+          return reply(201, { balloon });
+        }
         exactFields(body, ['callsign','devEui']);
         const callsign = typeof body.callsign === 'string' ? body.callsign.trim() : '';
         const devEui = normalizeEui(body.devEui);
@@ -214,6 +241,11 @@ export function createCommunityApi({ createDb = createServerSupabase, verifyDevi
       const owned = (await balloons()).find(balloon => balloon.id === deviceId);
       if (!owned) return reply(404, { error: 'Balloon not found' });
       if (action === 'update') {
+        if (Object.hasOwn(body ?? {}, 'regionalEuis')) {
+          const settings = balloonSettings(body);
+          const balloon = await rpc('update_balloon_settings', { p_owner_id: user.id, p_device_id: deviceId, ...settings });
+          return balloon ? reply(200, { balloon }) : reply(404, { error: 'Balloon not found' });
+        }
         exactFields(body, ['status']);
         if (!statuses.has(body.status)) return reply(400, { error: 'Invalid status' });
         const balloon = await rpc('update_community_balloon', { p_owner_id: user.id, p_device_id: deviceId, p_status: body.status });

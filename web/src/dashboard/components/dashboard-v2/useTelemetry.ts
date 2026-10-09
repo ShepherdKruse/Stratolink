@@ -20,6 +20,7 @@ interface DeviceSummary {
     callsign: string | null;
     status: 'flying' | 'idle' | 'recovered' | 'lost' | string;
     launchedAt: number | null;
+    plannedLaunchDate?: string | null;
     launchLat: number | null;
     launchLon: number | null;
     /** Epoch-ms timestamp of the most recent uplink for this device, or null. */
@@ -177,7 +178,7 @@ export function useTelemetry({ initialSelectedId = null }: { initialSelectedId?:
             try {
                 const { data, error } = await createClient()
                     .from('devices')
-                    .select('device_id, launcher_name, status, launch_lat, launch_lon, launched_at, display_name, owner_github, official, connection_status')
+                    .select('device_id, launcher_name, status, launch_lat, launch_lon, launched_at, display_name, owner_github, official, connection_status, planned_launch_date')
                     .order('device_id', { ascending: true });
                 if (error) throw error;
                 if (cancelled) return;
@@ -190,6 +191,7 @@ export function useTelemetry({ initialSelectedId = null }: { initialSelectedId?:
                         connectionStatus: device.connection_status,
                         ownerGithub: device.owner_github ?? undefined,
                         status: device.status,
+                        plannedLaunchDate: device.planned_launch_date ?? null,
                         launchedAt: device.launched_at ? new Date(device.launched_at).getTime() : null,
                         launchLat: device.launch_lat ?? null,
                         launchLon: device.launch_lon ?? null,

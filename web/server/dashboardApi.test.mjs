@@ -6,12 +6,12 @@ import { SAN_FRANCISCO } from './locationPrivacy.js';
 function responseRecorder() {
   return { statusCode: 0, headers: {}, setHeader(name, value) { this.headers[name] = value; }, end(value) { this.value = JSON.parse(value); } };
 }
-test('public queries cannot expose raw packet evidence, ownership IDs or pending registrations', () => {
-  for (const select of ['owner_id', 'claim_code', 'launch_token_hash']) assert.throws(() => buildQuery(new URLSearchParams({ resource: 'devices', select })));
+test('public queries cannot expose raw packet evidence, ownership IDs or unclaimed inventory', () => {
+  for (const select of ['owner_id', 'claim_code', 'launch_token_hash', 'regional_euis', 'share_research_data']) assert.throws(() => buildQuery(new URLSearchParams({ resource: 'devices', select })));
   for (const select of ['frm_payload', 'rx_metadata', 'session_key_id', 'integration_id']) assert.throws(() => buildQuery(new URLSearchParams({ resource: 'telemetry', select })));
   assert.throws(() => buildQuery(new URLSearchParams({ resource: 'devices', select: 'device_id', connection_status: 'eq.pending' })));
   const devices = buildQuery(new URLSearchParams({ resource: 'devices', select: 'device_id,owner_github,official' }));
-  assert.equal(devices.query.get('connection_status'), 'eq.connected');
+  assert.equal(devices.query.get('or'), '(connection_status.eq.connected,and(status.in.(planned,storage),owner_id.not.is.null))');
   const health = buildQuery(new URLSearchParams({ resource: 'telemetry', select: 'telemetry_version,power_tier,server_proof_count_mod8' }));
   assert.ok(health.query.get('select').includes('gps_fix_age_min'));
 });
@@ -36,7 +36,7 @@ test('public telemetry uses the connected-only database view and sanitizes befor
     assert.ok(!JSON.stringify(response.value).includes('private'));
     const devices = responseRecorder();
     await dashboardApi({ method: 'GET', url: '/api/telemetry?resource=devices&select=device_id' }, devices);
-    assert.equal(calls[1].url.searchParams.get('connection_status'), 'eq.connected');
+    assert.equal(calls[1].url.searchParams.get('or'), '(connection_status.eq.connected,and(status.in.(planned,storage),owner_id.not.is.null))');
   } finally {
     globalThis.fetch = savedFetch;
     if (previous.url === undefined) delete process.env.SUPABASE_URL; else process.env.SUPABASE_URL = previous.url;

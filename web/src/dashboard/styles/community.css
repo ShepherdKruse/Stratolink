@@ -29,7 +29,7 @@
 .community-primary { border: 1px solid var(--t-border-2); border-radius: 9px; padding: 10px 12px; color: var(--t-panel); background: var(--t-text); font: inherit; font-size: 12px; cursor: pointer; }
 .community-error { color: #a23a2d !important; }
 .community-text-button { border: 0; background: transparent; padding: 8px 0; color: var(--t-text-2); font: inherit; font-size: 11px; text-align: left; cursor: pointer; }
-.field-tip { display: inline-flex; position: relative; margin-left: 4px; color: var(--t-text-3); cursor: help; }
+.field-tip { border: 0; background: transparent; padding: 0; font: inherit; display: inline-flex; position: relative; margin-left: 4px; color: var(--t-text-3); cursor: help; }
 .field-tip > span { display: none; position: absolute; width: 220px; left: -42px; bottom: 19px; padding: 10px 12px; background: var(--t-text); color: var(--t-panel); border-radius: 8px; box-shadow: 0 4px 16px #0002; font-size: 11px; line-height: 1.5; z-index: 20; }
 .field-tip:hover > span, .field-tip:focus > span { display: block; }
 .managed-balloon { padding: 12px 0; border-bottom: 1px solid var(--t-border); }
@@ -92,3 +92,32 @@
 [data-theme="dark"] .dashboard-account-options .dashboard-signout { color: #e88e80; }
 .dashboard-signin-notice { position: absolute; top: calc(var(--dashboard-header-height) - 4px); right: var(--dashboard-gutter); z-index: 2; padding: 9px 12px; border: 1px solid var(--t-border); border-radius: 8px; color: var(--t-text-2); background: var(--t-panel); box-shadow: 0 4px 12px #0001; font-size: 11px; }
 @media (max-width: 767px) { .community-device-row .community-primary { height: 42px; } .community-device-row input[name="devEui"] { letter-spacing: -.045em; } }
+
+.community-registration-form > fieldset { border: 0; padding: 0; margin: 0; min-width: 0; }
+.community-optional { margin-left: 5px; color: var(--t-text-4); font-size: 10px; }
+.community-field-heading { margin: 17px 0 9px; color: var(--t-text-2); font-size: 11px; }
+.community-radio { display: grid; grid-template-columns: 112px minmax(0,1fr) 22px; align-items: center; gap: 6px; margin-bottom: 8px; }
+.community-radio .community-field { margin-bottom: 0; }
+.community-panel .community-field select { width: 100%; max-width: none; min-width: 0; padding: 10px 7px; background: var(--t-panel); border: 1px solid var(--t-border); border-radius: 9px; color: var(--t-text); font: inherit; font-size: 12px; }
+.community-radio input { font-family: var(--font-mono); font-size: 11px; padding-inline: 8px; }
+.community-remove-radio { display: flex; align-items: center; justify-content: center; width: 24px; height: 38px; border: 0; background: transparent; color: var(--t-text-3); cursor: pointer; }
+.community-add-radio { display: inline-flex; align-items: center; gap: 7px; padding-block: 6px; font-size: 11px; }
+.community-add-radio svg { width: 9px; }
+.community-sharing { display: flex; align-items: flex-start; gap: 9px; margin: 20px 0 14px; color: var(--t-text-2); font-size: 12px; line-height: 1.5; cursor: pointer; }
+.community-sharing input { flex: none; width: 14px; height: 14px; margin: 2px 0 0; accent-color: var(--t-text); }
+.community-panel .community-registration-note { font-size: 11px; color: var(--t-text-3); margin: 12px 0; }
+.community-form-actions { display: flex; align-items: center; gap: 12px; }
+.community-form-actions > span { font-size: 11px; color: var(--t-text-3); }
+.community-settings .community-registration-form { margin-top: 12px; }
+.community-saved-region { margin-top: 12px; }
+.balloon-card-plan { display: block; margin-top: 14px; color: var(--t-text-3); font-size: 11px; }
+@media (max-width: 767px) {
+    .community-radio { grid-template-columns: minmax(0,1fr) 30px; }
+    .community-radio > .community-field:first-child { grid-column: 1 / -1; }
+    .community-radio input, .community-panel .community-field select { font-size: 16px; }
+    .community-remove-radio { width: 30px; }
+}
+
+.community-expand[data-open="true"] .community-expand-inner { overflow-y: auto; overscroll-behavior: contain; }
+
+.community-sharing .field-tip > span { left: auto; right: 0; }

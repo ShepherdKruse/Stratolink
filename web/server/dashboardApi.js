@@ -1,7 +1,7 @@
 import { sanitizeTelemetry, sanitizeDevice } from './locationPrivacy.js';
 import { serverSupabaseConfig } from './supabaseServer.js';
 const columns = {
-  devices: 'device_id,launcher_name,status,launch_lat,launch_lon,launched_at,display_name,owner_github,official,connection_status',
+  devices: 'device_id,launcher_name,status,launch_lat,launch_lon,launched_at,display_name,owner_github,official,connection_status,planned_launch_date',
   telemetry: 'id,device_id,time,lat,lon,altitude_m,battery_voltage,solar_voltage,temperature,pressure,rssi,snr,gps_speed,gps_heading,gps_satellites,mems_accel_x,mems_accel_y,mems_accel_z,velocity_x,velocity_y,uv_index,ambient_lux,acoustic_event,firmware_version,uptime_s,tx_count,hdop,power_mode,sleep_ms,lora_sf,lora_bw,frequency_hz,gateways,telemetry_version,power_tier,reset_cause,boot_count,gps_fix_age_min,server_proof_count_mod8,server_qualified_miss_streak,server_recovery_parity,command_ack_seq,relay_enabled,relay_fwd_delta,ctt_tags_delta',
 };
 export function buildQuery(params) {
@@ -22,7 +22,7 @@ export function buildQuery(params) {
     else throw new Error('Unsupported query');
   }
   if (!query.has('limit')) query.set('limit', '1000');
-  if (resource === 'devices') query.set('connection_status', 'eq.connected');
+  if (resource === 'devices') query.set('or', '(connection_status.eq.connected,and(status.in.(planned,storage),owner_id.not.is.null))');
   return { resource, query, requested };
 }
 export async function dashboardApi(request, response) {

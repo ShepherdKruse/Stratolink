@@ -1,5 +1,6 @@
 // Runs only against a disposable local PostgreSQL container with synthetic data.
 import assert from 'node:assert/strict';
+import { checkRegistrationPlanning } from './registration-planning-integration.mjs';
 import { checkOfficialTeam } from './official-team-integration.mjs';
 import { execFile, execFileSync } from 'node:child_process';
 import { promisify } from 'node:util';
@@ -42,7 +43,7 @@ try {
   }
   assert.ok(ready, 'Disposable PostgreSQL did not start');
   sql(readFileSync(new URL('supabase/tests/baseline.sql', root), 'utf8'));
-  for (const name of ['20261007003455_community_backend.sql', '20261007003501_telemetry_ingest_contract.sql', '20261007201932_payload_claim_compatibility.sql', '20261008194242_official_team_ownership.sql']) {
+  for (const name of ['20261007003455_community_backend.sql', '20261007003501_telemetry_ingest_contract.sql', '20261007201932_payload_claim_compatibility.sql', '20261008194242_official_team_ownership.sql', '20261009030358_balloon_registration_planning.sql']) {
     sql(readFileSync(new URL(`supabase/migrations/${name}`, root), 'utf8'));
   }
   assert.equal(sql('SELECT count(*) FROM public.telemetry'), '1513');
@@ -168,6 +169,7 @@ try {
   console.log('PASS: concurrent registration limits and network-identity claims remain atomic');
 
   await checkPayloadClaims({ sql, service, denied, parallelSql, literal, hash });
+  checkRegistrationPlanning({ sql, service, denied, literal });
   await checkOfficialTeam({ sql, service, denied, literal, hash });
 
   // Supabase extension objects have a different owner from its postgres role.
