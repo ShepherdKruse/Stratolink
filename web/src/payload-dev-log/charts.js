@@ -53,6 +53,9 @@ export function mountCharts(root,signal) {
    }else if(key==='captured-chirps'){
     const {capturedChirps}=await import('./radio-figures.js');
     if(!signal.aborted)await capturedChirps(host,signal);
+   }else if(key==='contact-wait'){
+    const {contactFigure}=await import('./contact-figure.js');
+    if(!signal.aborted)await contactFigure(host,signal);
    }else if(key==='chirps')chirpChart(host,signal);
    else if(key==='waterfall')await waterfall(host,signal);
    else if(key==='fleet'){

@@ -1,1 +1,29 @@
-{"count": 500, "steps": 336, "start": "2024-05-17T00:00:00Z", "end": "2024-05-31T00:00:00Z", "pressure_hpa": 300, "source": "NOAA NCEP/DOE Reanalysis 2", "solver": "Caleb Kruse balloon_sim: hourly Euler; nearest spatial grid point; linear six-hour wind interpolation", "initial_distribution": "Seeded uniform northern hemisphere; all balloons present at time zero", "seed": 20261008, "dimensions": [500, 337, 2], "hashes": {"uwnd.2024.nc": "f9cf916978edbf0d867642225d7daa58d0e0bdeece467bcb3e8e74a41501814f", "vwnd.2024.nc": "76f38667df93d3723a46869e8062cbf51905499c03572b73b3c2395afca618e3"}}
+{
+  "count": 500,
+  "steps": 336,
+  "start": "2024-05-17T00:00:00Z",
+  "end": "2024-05-31T00:00:00Z",
+  "pressure_hpa": 300,
+  "source": "NOAA NCEP/DOE Reanalysis 2",
+  "solver": "Caleb Kruse balloon_sim: hourly Euler; nearest spatial grid point; linear six-hour wind interpolation",
+  "initial_distribution": "Seeded uniform northern hemisphere; all balloons present at time zero",
+  "seed": 20261008,
+  "dimensions": [
+    500,
+    337,
+    2
+  ],
+  "hashes": {
+    "uwnd.2024.nc": "f9cf916978edbf0d867642225d7daa58d0e0bdeece467bcb3e8e74a41501814f",
+    "vwnd.2024.nc": "76f38667df93d3723a46869e8062cbf51905499c03572b73b3c2395afca618e3"
+  },
+  "distributions": {
+    "north": "500 uniform-by-area northern seeds, RNG 20261008",
+    "south": "500 uniform-by-area southern seeds, RNG 20261009",
+    "world": "Alternate independent northern and southern tracks; 250 from each at count 500"
+  },
+  "track_hashes": {
+    "fleet-tracks.bin": "41b1dff1c57eb1f7c0da701029ac378cbd3ffc52d781b5ef41e594080371ef0b",
+    "fleet-south.bin": "88ad60d0faa9e819d7003e26c6bb41da6e902a51793013cff6729a41924201d3"
+  }
+}

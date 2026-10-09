@@ -8,7 +8,7 @@
     "build": "vite build",
     "preview": "vite preview --host 127.0.0.1",
     "typecheck": "tsc --noEmit && tsc --noEmit -p tsconfig.worker.json && tsc --noEmit -p tsconfig.server.json",
-    "test": "node --experimental-strip-types --test src/dashboard/lib/telemetry/*.test.mjs server/*.test.mjs src/float-model.test.mjs",
+    "test": "node --experimental-strip-types --test src/dashboard/lib/telemetry/*.test.mjs server/*.test.mjs src/float-model.test.mjs src/payload-dev-log/*.test.mjs && node scripts/verify-fleet-analysis.mjs",
     "predev": "node scripts/docs-search-index.mjs",
     "prebuild": "node scripts/docs-search-index.mjs",
     "prepreview": "node scripts/docs-search-index.mjs",
