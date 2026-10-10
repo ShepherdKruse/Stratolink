@@ -1640,9 +1640,55 @@ uint32_t lorawan_relay_window(
  * transmitter is available. */
 
 static volatile bool s_ctt_rx = false;
-static void ctt_rx_isr(void) { s_ctt_rx = true; }
+enum : uint8_t { CTT_PHASE_IDLE, CTT_PHASE_CONFIG, CTT_PHASE_RX,
+                 CTT_PHASE_READ, CTT_PHASE_RESTORE, CTT_PHASE_DONE };
+enum : uint8_t { CTT_EXIT_NONE, CTT_EXIT_DEADLINE, CTT_EXIT_NOT_READY,
+                 CTT_EXIT_CONFIG_FAIL, CTT_EXIT_INITIAL_ARM_FAIL,
+                 CTT_EXIT_REARM_FAIL, CTT_EXIT_RAIL, CTT_EXIT_FREEFALL, CTT_EXIT_SOLAR };
+enum : uint8_t { CTT_SAMPLE_RAIL = 1, CTT_SAMPLE_SOLAR = 2, CTT_SAMPLE_READ = 4 };
+/* Diagnostic-only RAM, not the cumulative stats/wire ABI. Reset per invocation
+ * before installing the CTT callback; the previous owner must have detached it.
+ * Multi-field reads are non-atomic. End precedes restore; last_arm is the most
+ * recent successful arm, not accumulated RX dwell. Values require sample_mask. */
+struct ctt_runtime_t {
+    uint32_t window_start_ms, last_arm_ms, window_end_ms;
+    uint32_t successful_arms, irq_count, read_errors;
+    int16_t last_read_status;
+    uint16_t latest_rail_mv, latest_solar_mv, floor_mv;
+    uint8_t phase, exit_reason, sample_mask, reserved;
+};
+static_assert(sizeof(ctt_runtime_t) == 36, "CTT runtime diagnostic RAM budget");
+static volatile ctt_runtime_t s_ctt_runtime = {};
+static void ctt_rx_isr(void) {
+    s_ctt_rx = true;
+    s_ctt_runtime.irq_count++;
+}
 static lorawan_ctt_stats_t s_ctt = {};
 static ctt_queue_t s_ctt_queue = {};
+
+static void ctt_runtime_reset(uint32_t start, uint16_t floor_mv) {
+    s_ctt_runtime.phase = CTT_PHASE_IDLE;
+    s_ctt_runtime.window_start_ms = start;
+    s_ctt_runtime.last_arm_ms = 0;
+    s_ctt_runtime.window_end_ms = 0;
+    s_ctt_runtime.successful_arms = 0;
+    s_ctt_runtime.irq_count = 0;
+    s_ctt_runtime.read_errors = 0;
+    s_ctt_runtime.last_read_status = 0;
+    s_ctt_runtime.latest_rail_mv = 0;
+    s_ctt_runtime.latest_solar_mv = 0;
+    s_ctt_runtime.floor_mv = floor_mv;
+    s_ctt_runtime.exit_reason = CTT_EXIT_NONE;
+    s_ctt_runtime.sample_mask = 0;
+    s_ctt_runtime.reserved = 0;
+    s_ctt_runtime.phase = CTT_PHASE_CONFIG;
+}
+
+static void ctt_runtime_armed(void) {
+    s_ctt_runtime.successful_arms++;
+    s_ctt_runtime.last_arm_ms = millis();
+    s_ctt_runtime.phase = CTT_PHASE_RX;
+}
 
 void lorawan_ctt_get_stats(lorawan_ctt_stats_t* out) { if (out) *out = s_ctt; }
 uint8_t lorawan_ctt_get_log(ctt_detection_t* out) {
@@ -1679,6 +1725,8 @@ static void ctt_log_frame(uint32_t id_raw, uint32_t id_motus, uint8_t motus_vali
  * beginFSK() switched the SX126x packet type, so a full LoRa begin() is
  * required before the parameter-level restore. */
 static void ctt_restore_lorawan(void) {
+    s_ctt_runtime.window_end_ms = millis();
+    s_ctt_runtime.phase = CTT_PHASE_RESTORE;
     /* A failed restore leaves the radio in FSK mode and silences the mission
      * with nothing able to detect it (tx_fail_streak counts LoRaWAN send
      * failures, which never happen if the modem is simply wrong).  Retry once,
@@ -1698,11 +1746,34 @@ static void ctt_restore_lorawan(void) {
     }
     radio_ready = true;
     restore_lorawan_or_reset();
+    s_ctt_runtime.phase = CTT_PHASE_DONE;
+}
+
+/* RX staging in the pinned SX126x driver resets GFSK payload length to 255.
+ * Reinstall the five-byte fixed length after staging, before entering RX,
+ * on both the initial arm and every re-arm. */
+static int16_t ctt_start_receive() {
+    RadioModeConfig_t cfg = {};
+    cfg.receive.timeout = RADIOLIB_SX126X_RX_TIMEOUT_INF;
+    cfg.receive.irqFlags = RADIOLIB_IRQ_RX_DEFAULT_FLAGS;
+    cfg.receive.irqMask = RADIOLIB_IRQ_RX_DEFAULT_MASK;
+    cfg.receive.len = 5;
+    int16_t state = radio->stageMode(RADIOLIB_RADIO_MODE_RX, &cfg);
+    if (state != RADIOLIB_ERR_NONE) return state;
+    state = radio->fixedPacketLengthMode(5);
+    if (state != RADIOLIB_ERR_NONE) return state;
+    return radio->launchMode();
 }
 
 uint32_t lorawan_ctt_window(uint32_t max_ms, uint16_t floor_mv) {
-    if (!radio_ready) return 0;
     uint32_t start = millis();
+    ctt_runtime_reset(start, floor_mv);
+    if (!radio_ready) {
+        s_ctt_runtime.exit_reason = CTT_EXIT_NOT_READY;
+        s_ctt_runtime.window_end_ms = start;
+        s_ctt_runtime.phase = CTT_PHASE_DONE;
+        return 0;
+    }
 
     radio->standby();
     /* rxBw must be one of the SX126x DSB values; 50.0 is not one of them, so
@@ -1718,6 +1789,7 @@ uint32_t lorawan_ctt_window(uint32_t max_ms, uint16_t floor_mv) {
     if (st == RADIOLIB_ERR_NONE) st = radio->fixedPacketLengthMode(5);
     if (st == RADIOLIB_ERR_NONE) st = radio->setCRC(0);  /* tag CRC-8 checked in software */
     if (st != RADIOLIB_ERR_NONE) {
+        s_ctt_runtime.exit_reason = CTT_EXIT_CONFIG_FAIL;
         ctt_restore_lorawan();
         return millis() - start;
     }
@@ -1726,21 +1798,28 @@ uint32_t lorawan_ctt_window(uint32_t max_ms, uint16_t floor_mv) {
     uint16_t widx = (uint16_t)s_ctt.windows;
     s_ctt_rx = false;
     radio->setPacketReceivedAction(ctt_rx_isr);
-    int16_t rx_state = radio->startReceive();
+    int16_t rx_state = ctt_start_receive();
     if (rx_state != RADIOLIB_ERR_NONE) {
         s_ctt.rx_arm_fail++;
         s_radio_diag.last_error = rx_state;
         radio->clearPacketReceivedAction();
+        s_ctt_runtime.exit_reason = CTT_EXIT_INITIAL_ARM_FAIL;
         ctt_restore_lorawan();
         return millis() - start;
     }
+    ctt_runtime_armed();
 
     uint32_t last_hk = start;
+    uint8_t exit_reason = CTT_EXIT_DEADLINE;
     while (millis() - start < max_ms) {
         if (s_ctt_rx) {
             s_ctt_rx = false;
             uint8_t buf[5];
-            if (radio->readData(buf, 5) == RADIOLIB_ERR_NONE) {
+            s_ctt_runtime.phase = CTT_PHASE_READ;
+            int16_t read_state = radio->readData(buf, 5);
+            s_ctt_runtime.last_read_status = read_state;
+            s_ctt_runtime.sample_mask |= CTT_SAMPLE_READ;
+            if (read_state == RADIOLIB_ERR_NONE) {
                 s_ctt.frames_rx++;
                 ctt_frame_t f;
                 if (ctt_decode(buf, &f)) {
@@ -1751,22 +1830,33 @@ uint32_t lorawan_ctt_window(uint32_t max_ms, uint16_t floor_mv) {
                 } else {
                     s_ctt.crc_fail++;
                 }
+            } else {
+                s_ctt_runtime.read_errors++;
             }
             s_ctt_rx = false;
-            rx_state = radio->startReceive();
+            s_ctt_runtime.phase = CTT_PHASE_CONFIG;
+            rx_state = ctt_start_receive();
             if (rx_state != RADIOLIB_ERR_NONE) {
                 s_ctt.rx_arm_fail++;
                 s_radio_diag.last_error = rx_state;
+                exit_reason = CTT_EXIT_REARM_FAIL;
                 break;  /* re-arm failed: bail, don't busy-loop deaf */
             }
+            ctt_runtime_armed();
         }
         uint32_t now = millis();
         if (now - last_hk >= 1000) {                    /* housekeeping ~1 Hz */
             last_hk = now;
             power_manager_kick_watchdog();
-            if (power_adc_read_vSTOR_mv() < floor_mv) break;
-            if (power_manager_freefall_pending()) break;
-            if (power_adc_read_solar_mv() < RELAY_SOLAR_MIN_MV) break;
+            uint16_t rail_mv = power_adc_read_vSTOR_mv();
+            s_ctt_runtime.latest_rail_mv = rail_mv;
+            s_ctt_runtime.sample_mask |= CTT_SAMPLE_RAIL;
+            if (rail_mv < floor_mv) { exit_reason = CTT_EXIT_RAIL; break; }
+            if (power_manager_freefall_pending()) { exit_reason = CTT_EXIT_FREEFALL; break; }
+            uint16_t solar_mv = power_adc_read_solar_mv();
+            s_ctt_runtime.latest_solar_mv = solar_mv;
+            s_ctt_runtime.sample_mask |= CTT_SAMPLE_SOLAR;
+            if (solar_mv < RELAY_SOLAR_MIN_MV) { exit_reason = CTT_EXIT_SOLAR; break; }
         }
         /* Diagnostic-only CTT listening must not busy-spin for its complete
          * window even though the StratoLink-2 flight image disables CTT. */
@@ -1774,6 +1864,7 @@ uint32_t lorawan_ctt_window(uint32_t max_ms, uint16_t floor_mv) {
     }
 
     radio->clearPacketReceivedAction();
+    s_ctt_runtime.exit_reason = exit_reason;
     ctt_restore_lorawan();
     return millis() - start;
 }
