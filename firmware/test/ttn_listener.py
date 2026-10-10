@@ -3,7 +3,7 @@
 TTN Telemetry Listener — Stratolink
 
 Connects to TTN via MQTT and prints decoded telemetry from Stratolink devices
-in real time. Decodes the 35-byte big-endian payload into human-readable fields.
+in real time. Decodes the 35-byte legacy or 40-byte v2/v3 observability payload.
 
 Usage:
     python ttn_listener.py --app-id stratolink --api-key "NNSXS.xxx"
@@ -29,7 +29,7 @@ except ImportError:
     print("Error: paho-mqtt not installed. Run: pip install paho-mqtt")
     sys.exit(1)
 
-# 35-byte big-endian telemetry payload format
+# 35-byte base telemetry payload format
 STRUCT_FMT = '>iiihhHHHHBhhhBHB'
 FIELDS = [
     'lat_e7', 'lon_e7', 'altitude_m',
@@ -42,16 +42,78 @@ FIELDS = [
 
 DEFAULT_HOST = 'nam1.cloud.thethings.network'
 DEFAULT_PORT = 8883
+TELEMETRY_V3_MARKER = 0x8000
+TELEMETRY_V3_FIX_AGE_NONE = 0x01FF
+TELEMETRY_LEGACY_FIX_AGE_NONE = 0xFFFF
+
+
+def decode_fix_liveness_word(word):
+    """Decode the backwards-compatible bytes-36/37 observability word."""
+    if word == TELEMETRY_LEGACY_FIX_AGE_NONE:
+        return {
+            'telemetry_version': 2,
+            'gps_fix_age_min': None,
+            'server_proof_count_mod8': None,
+            'server_qualified_miss_streak': None,
+            'server_recovery_parity': None,
+        }
+    if word & TELEMETRY_V3_MARKER:
+        fix_age = word & TELEMETRY_V3_FIX_AGE_NONE
+        return {
+            'telemetry_version': 3,
+            'gps_fix_age_min': (
+                None if fix_age == TELEMETRY_V3_FIX_AGE_NONE else fix_age
+            ),
+            'server_proof_count_mod8': (word >> 12) & 7,
+            'server_qualified_miss_streak': (word >> 10) & 3,
+            'server_recovery_parity': (word >> 9) & 1,
+        }
+    return {
+        'telemetry_version': 2,
+        'gps_fix_age_min': word,
+        'server_proof_count_mod8': None,
+        'server_qualified_miss_streak': None,
+        'server_recovery_parity': None,
+    }
 
 
 def decode_telemetry(b64_payload):
     """Decode base64 frm_payload into a dict with human-readable values."""
     raw = base64.b64decode(b64_payload)
-    if len(raw) != 35:
+    if len(raw) not in (35, 40):
         return None
 
-    vals = struct.unpack(STRUCT_FMT, raw)
+    vals = struct.unpack(STRUCT_FMT, raw[:35])
     d = dict(zip(FIELDS, vals))
+    d['telemetry_version'] = 1
+    if len(raw) == 40:
+        status = raw[34]
+        acoustic_power_code = status & 0x0F
+        if acoustic_power_code <= 9:
+            power_tier = acoustic_power_code >> 1
+            acoustic_event = acoustic_power_code & 1
+        elif acoustic_power_code <= 14:
+            power_tier = acoustic_power_code - 10
+            acoustic_event = None
+        else:
+            return None
+        reset_cause = (status >> 4) & 7
+        if reset_cause > 6:
+            return None
+        activity = raw[39]
+        fix_liveness = decode_fix_liveness_word(
+            int.from_bytes(raw[36:38], 'big'))
+        d.update({
+            'acoustic_event': acoustic_event,
+            'power_tier': power_tier,
+            'reset_cause': reset_cause,
+            'boot_count': raw[35],
+            'command_ack_seq': raw[38] if status & 0x80 else None,
+            'relay_enabled': bool(activity & 0x80),
+            'relay_fwd_delta': (activity >> 4) & 7,
+            'ctt_tags_delta': activity & 15,
+            **fix_liveness,
+        })
 
     # Unit conversions
     d['lat'] = d['lat_e7'] / 1e7
@@ -88,6 +150,16 @@ def print_telemetry(d):
     print(f"  Lux:         {d['ambient_lux']}")
     print(f"  Acoustic:    {'EVENT' if d['acoustic_event'] else 'quiet'}")
     print(f"  Solar:       {d['solar_mv']} mV   VSTOR: {d['battery_mv']} mV")
+    if d['telemetry_version'] >= 2:
+        print(f"  System:      boot={d['boot_count']} reset={d['reset_cause']} "
+              f"tier={d['power_tier']} fix_age={d['gps_fix_age_min']}min")
+        print(f"  Control/RF:  cmd_ack={d['command_ack_seq']} "
+              f"relay={'on' if d['relay_enabled'] else 'off'} "
+              f"fwd+={d['relay_fwd_delta']} tags+={d['ctt_tags_delta']}")
+        if d['telemetry_version'] == 3:
+            print(f"  Server:      proof_mod8={d['server_proof_count_mod8']} "
+                  f"qualified_misses={d['server_qualified_miss_streak']} "
+                  f"recovery_parity={d['server_recovery_parity']}")
 
 
 def on_connect(client, userdata, flags, rc, properties=None):
