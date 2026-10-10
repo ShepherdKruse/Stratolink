@@ -100,6 +100,8 @@ export type StratolinkForecast = {
         /** Hash of the reconstruction inputs (fixes + level) — lets the cache
          *  reuse an unchanged hindcast instead of recomputing it. */
         reconstruction_input_hash?: string;
+        /** Per-gap scalar metadata. The corridor occupancy footprint and ellipse
+         *  rings stay in the hindcast cache; they are not stored in the forecast. */
         reconstruction_gaps?: Array<{
             from_idx: number;
             to_idx: number;
@@ -113,32 +115,7 @@ export type StratolinkForecast = {
             n_eff?: number;
             directness?: number;
             net_speed_ms?: number;
-            occupancy?: {
-                lat0: number;
-                lon0: number;
-                dLat: number;
-                dLon: number;
-                nLat: number;
-                nLon: number;
-                cells: Array<{ i: number; j: number; d: number }>;
-            } | null;
-            ellipses?: Array<{
-                frac: number;
-                t_hours: number;
-                e50: { semi_a_km: number; polygon: Array<[number, number]> };
-                e90: { semi_a_km: number; polygon: Array<[number, number]> };
-            }>;
         }>;
-    };
-    wind_field: {
-        lat0: number;
-        dLat: number;
-        nLat: number;
-        lon0: number;
-        dLon: number;
-        nLon: number;
-        U: number[];
-        V: number[];
     };
     metadata: {
         n_ensemble: number;
@@ -154,7 +131,7 @@ export type StratolinkForecast = {
         grid_step_deg?: number;
         /** Resolution (deg) of the full-mission reconstruction wind cube. */
         recon_grid_step_deg?: number;
-        /** Where the winds came from: 'gfs' (pre-ingested cube) or 'open-meteo' (live). */
+        /** Where the winds came from: 'gfs' (the GFS cube) or 'gefs-ensemble' (per-member cubes). */
         wind_source?: string;
         /** ISO time the GFS wind cube was ingested (staleness indicator). */
         wind_cube_generated_at?: string;

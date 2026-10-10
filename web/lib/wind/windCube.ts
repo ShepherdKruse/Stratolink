@@ -2,19 +2,17 @@ import { get, list } from '@vercel/blob';
 import { readFile, readdir } from 'node:fs/promises';
 import { join } from 'node:path';
 import { gunzipSync } from 'node:zlib';
-import { fetchWindGridHourlySeries, snapPressureHpa, type WindGridBounds } from './fetchWindGrid';
+import type { WindGridBounds } from './fetchWindGrid';
 import { isBlobStorageConfigured } from './forecastStorage';
 import { windAt, type GfsGrid } from './gfsGrid';
-import { assertCanAfford } from './openMeteoBudget';
 
 /**
- * A shared space-time wind field for one forecast compute: a stack of hourly GFS
- * grids over a single bounding box, fetched in ONE Open-Meteo call. Every
- * trajectory — the predicted-hindcast dead-reckon (fix → now), the forward
+ * A shared space-time wind field for one forecast compute: a stack of hourly (or
+ * 3-hourly) NOAA grids built by scripts/gfs_ingest.py and read back from disk.
+ * Every trajectory — the predicted-hindcast dead-reckon (fix → now), the forward
  * forecast (now → horizon), and every ensemble member — samples this one field,
- * so they all see the same evolving winds. That makes the two regimes continuous
- * (no source switch at "now") and collapses the per-compute request count from
- * ~100 (per-point hourly refetches) to ~1-3 (batched grid series).
+ * so they all see the same evolving winds and the two regimes stay continuous
+ * (no source switch at "now").
  */
 export type WindCube = {
     /** Epoch ms of grid hour 0 (floored to the hour). grids[h] = winds at t0Ms + h*stepMs. */
@@ -24,7 +22,7 @@ export type WindCube = {
     bounds: WindGridBounds;
     gridStep: number;
     levelHpa: number;
-    /** Where the field came from: 'gfs' (pre-ingested) or 'open-meteo' (live fallback). */
+    /** Where the field came from, as written by the ingest (e.g. 'gfs', 'gefs'). */
     source?: string;
     /** ISO time the cube was built (GFS ingest run), for staleness reporting. */
     generatedAt?: string;
@@ -72,8 +70,6 @@ type RawCube = {
     source?: string;
     generated_at?: string;
 };
-
-const HOUR_MS = 3_600_000;
 
 /** Reconstitute a WindCube from its JSON form (Float32Array U/V). */
 function cubeFromRaw(raw: RawCube): WindCube {
@@ -176,12 +172,6 @@ async function getCubeObject(key: string): Promise<WindCube | null> {
     }
 }
 
-/** Read a device's pre-ingested cube from Blob, or null if none exists yet.
- *  The `forecast` cube (`cubes/{id}-fc.json.gz`) is small + hourly; the
- *  `reconstruction` cube (`cubes/{id}.json.gz`) is the full mission. Prefers the
- *  gzipped object, falls back to the legacy uncompressed one (deploy window), and
- *  the forecast read falls back to the full cube if no `-fc` cube exists yet
- *  (so the app is safe to deploy before the two-cube ingest first runs). Never throws. */
 /** Read a device's cube from a LOCAL directory (same filenames as Blob). Used by
  *  the GitHub Actions worker compute, which builds cubes on the runner and reads
  *  them straight off disk — no Blob round-trip — so big multi-member ensembles
@@ -205,6 +195,11 @@ function cubeCandidates(id: string, kind: CubeKind): string[] {
     return kind === 'forecast' ? [...variants(`${id}-fc`), ...variants(id)] : variants(id);
 }
 
+/** Read a device's cube from the Blob `cubes/` prefix, or null if none exists.
+ *  Legacy path: the retired upload step wrote these; nothing uploads cubes any
+ *  more, so in practice this only serves a hand-run scripts/upload_cubes.mjs.
+ *  Tries `.slwc.gz`, `.slwc`, `.json.gz`, `.json`; the `forecast` kind falls back
+ *  to the full cube if no `-fc` cube exists. Never throws. */
 async function readCubeFromBlob(deviceId: string, kind: CubeKind): Promise<WindCube | null> {
     if (!isBlobStorageConfigured()) return null;
     for (const name of cubeCandidates(encodeURIComponent(deviceId), kind)) {
@@ -280,98 +275,34 @@ export function sampleWind(
 }
 
 /**
- * Pick the FINEST grid step whose point count stays within `maxPts`, so a single
- * batched fetch (≤80 pts/request ⇒ 1-2 requests) covers the box. Accuracy-first:
- * small boxes get 1.25-2.5°; only very large stale-gap boxes fall back to 3-4°.
- */
-export function chooseGridStep(bounds: WindGridBounds, maxPts = 120): number {
-    const spanLat = bounds.latMax - bounds.latMin;
-    const spanLon = bounds.lonMax - bounds.lonMin;
-    const steps = [1.25, 1.5, 2.0, 2.5, 3.0, 3.5, 4.0];
-    for (const step of steps) {
-        const n = (Math.round(spanLat / step) + 1) * (Math.round(spanLon / step) + 1);
-        if (n <= maxPts) return step;
-    }
-    return steps[steps.length - 1];
-}
-
-/**
- * Fetch the one wind field for a compute, spanning `[startMs, endMs]` over
- * `bounds`. `startMs` is the earliest needed instant (the last GPS fix when
- * dead-reckoning; "now" when GPS is fresh); `endMs` is the forecast horizon end.
+ * Read a device's pre-ingested cube: the hourly `forecast` tube or the
+ * full-mission `reconstruction` cube (see scripts/gfs_ingest.py). Precedence:
+ *   1. WIND_CUBE_DIR — per-device cubes on local disk (the GitHub Actions worker
+ *      compute: build cubes on the runner, read them here, no Blob round-trip).
+ *   2. Blob `cubes/{device}…` — legacy serverless read path (nothing writes it).
+ * There is deliberately NO live weather fallback: Open-Meteo must never be on the
+ * production path, so a device without a cube fails loudly here instead.
  */
 export async function fetchWindCube(opts: {
-    bounds: WindGridBounds;
-    levelHpa: number;
-    startMs: number;
-    endMs: number;
-    gridStep?: number;
-    /** Device whose pre-ingested cube to serve from Blob. */
-    deviceId?: string;
-    /** Which pre-ingested cube to serve (default 'reconstruction'). */
+    /** Device whose pre-ingested cube to read. */
+    deviceId: string;
+    /** Which pre-ingested cube to read (default 'reconstruction'). */
     kind?: CubeKind;
 }): Promise<WindCube> {
-    /* Source precedence:
-     *   1. WIND_CUBE_FILE / WIND_CUBE_FC_FILE — single local file overrides (dev / spike).
-     *   2. WIND_CUBE_DIR — per-device cubes on local disk (the GitHub Actions worker
-     *      compute: build cubes on the runner, read them here, no Blob round-trip).
-     *   3. Blob cube for the device — the pre-ingested cube (scripts/gfs_ingest.py),
-     *      the serverless read path: no live wind API, no rate limit.
-     *   4. Open-Meteo — live fallback for devices with no cube yet (migration safety;
-     *      the call budget protects it). */
     const kind: CubeKind = opts.kind ?? 'reconstruction';
-    const fcFile = process.env.WIND_CUBE_FC_FILE;
-    const localFile = process.env.WIND_CUBE_FILE;
-    if (kind === 'forecast' && fcFile) {
-        return cubeFromRaw(JSON.parse(await readFile(fcFile, 'utf8')) as RawCube);
-    }
-    if (localFile) {
-        return cubeFromRaw(JSON.parse(await readFile(localFile, 'utf8')) as RawCube);
-    }
-    /* Worker compute: read the just-built cubes from the runner's disk by device,
-     * before any Blob read (this is the "compute where the data is" path). */
     const cubeDir = process.env.WIND_CUBE_DIR;
-    if (cubeDir && opts.deviceId) {
+    if (cubeDir) {
         const cube = await readCubeFromDir(cubeDir, opts.deviceId, kind);
         if (cube) return cube;
     }
-    if (opts.deviceId) {
-        const cube = await readCubeFromBlob(opts.deviceId, kind);
-        if (cube) return cube;
-    }
-
-    const levelHpa = snapPressureHpa(opts.levelHpa);
-    const gridStep = opts.gridStep ?? chooseGridStep(opts.bounds);
-    const t0Ms = Math.floor(opts.startMs / HOUR_MS) * HOUR_MS;
-    const spanHours = Math.max(1, (opts.endMs - t0Ms) / HOUR_MS);
-
-    /* Pre-flight call-budget check: the cube needs its WHOLE grid (a partial one
-     * has zero-wind holes), so estimate the full cost — ~1 call per grid point,
-     * ×(days/14) — and bail before fetching any chunk if it won't fit. Otherwise a
-     * tick with little budget left would spend on a few chunks and then abort,
-     * wasting them. Mirrors fetchGridHourlySeries' past/forecast-day math so the
-     * estimate matches what the per-request meter will actually count. */
-    const { latMin, latMax, lonMin, lonMax } = opts.bounds;
-    const gridPoints =
-        (Math.round((latMax - latMin) / gridStep) + 1) * (Math.round((lonMax - lonMin) / gridStep) + 1);
-    const ageH = (Date.now() - t0Ms) / HOUR_MS;
-    const forecastDays = Math.min(16, Math.ceil(spanHours / 24) + 2);
-    const pastDays = ageH > 6 ? Math.min(92, Math.ceil(ageH / 24) + Math.ceil(spanHours / 24) + 3) : 0;
-    const days = Math.max(1, forecastDays + pastDays);
-    assertCanAfford(Math.ceil(gridPoints * Math.max(1, days / 14)));
-
-    /* fetchWindGridHourlySeries returns one GfsGrid per hour from t0Ms (caps at
-     * 96h, which covers our max fix→horizon span of 72+24). It already computes
-     * past_days/forecast_days from the window and batches 80 pts/request. */
-    const grids = await fetchWindGridHourlySeries(
-        opts.bounds,
-        levelHpa,
-        gridStep,
-        new Date(t0Ms),
-        spanHours,
+    const cube = await readCubeFromBlob(opts.deviceId, kind);
+    if (cube) return cube;
+    const looked = [
+        cubeDir ? `WIND_CUBE_DIR=${cubeDir}` : 'WIND_CUBE_DIR (unset)',
+        isBlobStorageConfigured() ? 'Blob cubes/' : 'Blob (not configured)',
+    ].join(', ');
+    throw new Error(
+        `No ${kind} wind cube for device "${opts.deviceId}" (looked in ${looked}). ` +
+        'Run scripts/gfs_ingest.py to build it; there is no live weather fallback.',
     );
-    return {
-        t0Ms, stepMs: HOUR_MS, grids, bounds: opts.bounds, gridStep, levelHpa,
-        source: 'open-meteo', generatedAt: new Date().toISOString(),
-    };
 }

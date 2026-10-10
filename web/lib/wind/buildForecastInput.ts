@@ -1,8 +1,3 @@
-import {
-    canonicalDeviceId,
-    expandFleetDeviceIdsForTelemetry,
-    isHiddenAliasDevice,
-} from '@/lib/devices/aliases';
 import { createServiceRoleClient } from '@/lib/supabase';
 import { fetchTelemetryMerged } from '@/lib/telemetry/fetchMergedTelemetry';
 import { telemetrySinceIso, type MissionWindowDevice } from '@/lib/telemetry/missionWindow';
@@ -145,33 +140,4 @@ export async function buildForecastInputForDevice(
         pressureHpa,
         forecastHours,
     };
-}
-
-/** Devices worth refreshing: flying, or any with a GPS fix in the last 24h. */
-export async function listForecastDeviceIds(): Promise<string[]> {
-    const supabase = createServiceRoleClient();
-    const since = new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString();
-
-    const { data: devices, error } = await supabase
-        .from('devices')
-        .select('device_id, status')
-        .order('device_id', { ascending: true });
-
-    if (error || !devices?.length) return [];
-
-    const fleetDevices = devices.filter((d) => !isHiddenAliasDevice(d.device_id));
-    const ids = fleetDevices.map((d) => d.device_id);
-    const telemetryIds = expandFleetDeviceIdsForTelemetry(ids);
-    const { data: fixes } = await supabase
-        .from('telemetry')
-        .select('device_id')
-        .in('device_id', telemetryIds)
-        .gte('time', since)
-        .not('lat', 'is', null)
-        .not('lon', 'is', null);
-
-    const withFix = new Set((fixes ?? []).map((r) => canonicalDeviceId(r.device_id)));
-    return fleetDevices
-        .filter((d) => d.status === 'flying' || withFix.has(d.device_id))
-        .map((d) => d.device_id);
 }
