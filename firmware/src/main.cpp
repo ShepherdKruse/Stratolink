@@ -55,6 +55,28 @@ static_assert(AUX_UPLINK_INTERVAL_CYCLES > 0u &&
               AUX_UPLINK_INTERVAL_CYCLES <= (uint32_t)UINT8_MAX + 1u,
               "auxiliary interval must encode as interval-1 cooldown");
 
+/* Every normal scheduled sleep must leave one complete conservative active-
+ * cycle allowance inside the GNSS-backed region lease. At the datasheet-
+ * minimum 29.5 kHz LSI, a nominal 1200 s RTC sleep can occupy 1302 s of wall
+ * time; 1302 + 300 = 1602 remains strictly before the 1800 s RF deadline.
+ * Pin every tier independently so a future power-policy edit cannot recreate
+ * the deterministic REDUCED/NO_GPS self-expiry that silenced the next wake. */
+#define REGION_SLEEP_CHARGE_CONST_SEC(nominal_sec) \
+    ((((uint64_t)(nominal_sec) * (uint64_t)REGION_RTC_CONFIGURED_LSI_HZ) + \
+      (uint64_t)REGION_RTC_MIN_LSI_HZ - 1u) / \
+     (uint64_t)REGION_RTC_MIN_LSI_HZ)
+#define ASSERT_NORMAL_SLEEP_FITS_REGION_LEASE(interval_sec) \
+    static_assert( \
+        REGION_SLEEP_CHARGE_CONST_SEC(interval_sec) + \
+            REGION_RESET_UNACCOUNTED_CHARGE_SEC < REGION_FIX_MAX_AGE_SEC, \
+        #interval_sec " plus active margin must fit the region lease")
+ASSERT_NORMAL_SLEEP_FITS_REGION_LEASE(SLEEP_INTERVAL_FULL_SEC);
+ASSERT_NORMAL_SLEEP_FITS_REGION_LEASE(SLEEP_INTERVAL_REDUCED_SEC);
+ASSERT_NORMAL_SLEEP_FITS_REGION_LEASE(SLEEP_INTERVAL_NO_GPS_SEC);
+ASSERT_NORMAL_SLEEP_FITS_REGION_LEASE(SLEEP_INTERVAL_EMERGENCY_SEC);
+#undef ASSERT_NORMAL_SLEEP_FITS_REGION_LEASE
+#undef REGION_SLEEP_CHARGE_CONST_SEC
+
 #if defined(DEBUG_ENABLE) && DEBUG_ENABLE
 #define LOG(x) Serial.println(x)
 #else
@@ -357,19 +379,18 @@ void loop() {
     * erase the entire fair-use/energy margin. Quiesce immediately and retry
      * after one minute; genuine low-g continues into burst below. */
     if (spurious_freefall_wake) {
-        bool gps_quiesced = gps_ublox_sleep();
+        (void)gps_ublox_quiesce();
         lorawan_sleep();
-        uint32_t backoff_sec = gps_quiesced
-            ? (uint32_t)SPURIOUS_WAKE_BACKOFF_SEC
-            : ((uint32_t)GPS_BACKUP_RETRY_SLEEP_MS / 1000u);
+        uint32_t backoff_sec = (uint32_t)SPURIOUS_WAKE_BACKOFF_SEC;
 #ifndef BENCH_SEED_REGION
         /* This early-return path bypasses the normal end-of-cycle lease
-         * accounting. Charge its backoff explicitly so repeated INT1 chatter
-         * cannot freeze a stale regional authorization indefinitely. The
+         * accounting. Charge awake recovery and the slow-RTC backoff so INT1
+         * chatter cannot under-age a regional authorization. The
          * interrupted preceding sleep was already precharged, so this is
          * deliberately conservative. */
-        region_fix_age_sec = region_fix_age_advance(
-            region_fix_age_sec, backoff_sec);
+        region_fix_age_sec = region_fix_age_after_sleep(
+            region_fix_age_sec, millis() - cycle_started_ms,
+            backoff_sec * 1000u);
         persist_region_lease_if_trusted();
 #endif
         power_manager_sleep_ms(backoff_sec * 1000u);
@@ -393,14 +414,12 @@ void loop() {
         } else if (optical_fault_consume_fast_retry(
                        &s_optical_quiet_retries,
                        (uint8_t)SENSOR_QUIESCE_FAST_RETRIES)) {
-            bool gps_quiet = gps_ublox_sleep();
+            (void)gps_ublox_quiesce();
             lorawan_sleep();
-            uint32_t retry_ms = gps_quiet
-                ? (uint32_t)SENSOR_QUIESCE_RETRY_SLEEP_MS
-                : (uint32_t)GPS_BACKUP_RETRY_SLEEP_MS;
+            uint32_t retry_ms = (uint32_t)SENSOR_QUIESCE_RETRY_SLEEP_MS;
 #ifndef BENCH_SEED_REGION
-            region_fix_age_sec = region_fix_age_advance(
-                region_fix_age_sec, (retry_ms + 999u) / 1000u);
+            region_fix_age_sec = region_fix_age_after_sleep(
+                region_fix_age_sec, millis() - cycle_started_ms, retry_ms);
             persist_region_lease_if_trusted();
 #endif
             power_manager_sleep_ms(retry_ms);

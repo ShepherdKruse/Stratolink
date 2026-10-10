@@ -4,6 +4,7 @@
 #include <stdint.h>
 #include <stdbool.h>
 #include "lorawan.h"   /* for lorawan_session_t */
+#include "tamp_record.h" /* for retained region-authority metadata */
 
 void power_manager_init(void);
 void power_manager_sleep_ms(uint32_t durationMs);
@@ -57,6 +58,10 @@ bool power_manager_load_session(lorawan_session_t* s);
 /** Atomically save and read back the complete retained session. Returns false
  *  if backup-domain access or any word/CRC/commit-marker write did not stick. */
 bool power_manager_save_session(const lorawan_session_t* s);
+/** Invalidate only the retained LoRaWAN session publish marker, with bounded
+ *  readback. The exact-region authority word is deliberately preserved for a
+ *  same-region server-liveness OTAA recovery based on this cycle's fresh PVT. */
+bool power_manager_clear_lorawan_session(void);
 /** Invalidate retained session and region lease with bounded retries/readback. */
 bool power_manager_clear_session(void);
 
@@ -70,6 +75,27 @@ bool power_manager_clear_session(void);
 bool power_manager_load_region_lease(uint32_t* age_sec);
 /** Commit the packed lease record and read back/decode the complete word. */
 bool power_manager_save_region_lease(uint32_t age_sec);
+
+/**
+ * Load the retained regional authority, including age, exact plan, and
+ * whether the authority came from GNSS or an explicit launch action.
+ *
+ * A valid pre-v2 age-only record is returned with exact_region=false,
+ * source=GNSS, and an invalid region sentinel. It is not sufficient to
+ * authorize RF by itself; a migration caller must bind it to the region in a
+ * separately validated retained LoRaWAN session.
+ */
+bool power_manager_load_region_authority(tamp_region_lease_t* lease);
+
+/**
+ * Commit an exact-region v2 authority record. Only US915/EU868/AS923/AU915
+ * and GNSS/LAUNCH sources are accepted. Age saturates at the packed 2,047 s
+ * maximum, beyond the common 1,800 s lease deadline.
+ */
+bool power_manager_save_region_authority(
+    uint32_t age_sec,
+    lora_region_id_t region,
+    tamp_region_authority_source_t source);
 
 /**
  * Increment and return a packed retained boot counter in TAMP_BKP19R.

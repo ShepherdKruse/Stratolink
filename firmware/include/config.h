@@ -57,16 +57,17 @@
     ((GPS_STALE_RECOVERY_SEC + SLEEP_INTERVAL_FULL_SEC - 1u) / SLEEP_INTERVAL_FULL_SEC)
 
 // Power Management. Cadence is coupled to the uplink SF (lorawan.cpp tx_sf=9):
-// at SF9 the 40-byte v2 payload is ~329 ms ToA, so FULL=1200s keeps primary
-// airtime at ~23.67 s/day = 78.9% of the TTN 30 s/day guideline. Lower tiers
-// at 1800s extend battery further and stay well under FUP.  If SF or payload
-// change, re-check airtime: keep FULL-tier uplinks/day * ToA < 30 s.
+// at SF9 the 40-byte v2 payload is ~329 ms ToA, so a 1200 s normal cadence keeps
+// primary airtime at ~23.67 s/day = 78.9% of the TTN 30 s/day guideline. Lower
+// tiers save energy by gating GPS, sensors, Class-A RX, and optional services;
+// they must not lengthen the sleep past the GNSS-backed region lease. If SF or
+// payload change, re-check airtime: keep uplinks/day * ToA < 30 s.
 #define POWER_SAVE_MODE true
 #define TRANSMIT_INTERVAL_SEC 1200
 #define SLEEP_INTERVAL_FULL_SEC      1200
-#define SLEEP_INTERVAL_REDUCED_SEC   1800
-#define SLEEP_INTERVAL_NO_GPS_SEC    1800
-#define SLEEP_INTERVAL_EMERGENCY_SEC 1800
+#define SLEEP_INTERVAL_REDUCED_SEC   1200
+#define SLEEP_INTERVAL_NO_GPS_SEC    1200
+#define SLEEP_INTERVAL_EMERGENCY_SEC 1200
 /* If an enabled I2C sensor cannot prove standby, retry bus recovery promptly
  * without repeating the normal GPS/TX cycle at that same short cadence.
  * A permanent non-critical optical fault must not suppress tracking forever:

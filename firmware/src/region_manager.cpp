@@ -137,3 +137,16 @@ uint32_t region_sleep_age_charge_sec(uint32_t nominal_sleep_sec) {
     scaled /= (uint64_t)REGION_RTC_MIN_LSI_HZ;
     return scaled > UINT32_MAX ? UINT32_MAX : (uint32_t)scaled;
 }
+
+uint32_t region_fix_age_after_sleep(uint32_t age_sec,
+                                    uint32_t awake_elapsed_ms,
+                                    uint32_t nominal_sleep_ms) {
+    /* Division before rounding avoids overflow at UINT32_MAX milliseconds. */
+    uint32_t awake_sec = awake_elapsed_ms / 1000u +
+                        (awake_elapsed_ms % 1000u != 0u);
+    uint32_t sleep_sec = nominal_sleep_ms / 1000u +
+                        (nominal_sleep_ms % 1000u != 0u);
+    return region_fix_age_advance(
+        region_fix_age_advance(age_sec, awake_sec),
+        region_sleep_age_charge_sec(sleep_sec));
+}

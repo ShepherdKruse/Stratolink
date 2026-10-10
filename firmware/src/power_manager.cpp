@@ -379,6 +379,10 @@ static_assert(STRATO_BOOT_WORD == STRATO_TAMP_WORD_COUNT - 1,
               "retained layout exceeds STM32WLE5 BKP0R..BKP19R");
 static_assert(REGION_FIX_MAX_AGE_SEC <= TAMP_LEASE_AGE_MASK,
               "packed retained lease cannot represent the legal age limit");
+static_assert(LORA_REGION_US915 == 0 && LORA_REGION_EU868 == 1 &&
+              LORA_REGION_AS923 == 2 && LORA_REGION_AU915 == 3 &&
+              LORA_REGION_SILENT == TAMP_REGION_LEASE_REGION_COUNT,
+              "retained authority region bits must match lora_region_id_t");
 
 #if defined(ARDUINO_ARCH_STM32)
 static volatile uint32_t* tamp_bkp_word(size_t idx) {
@@ -429,6 +433,15 @@ static bool invalidate_session_and_lease_markers(void) {
             *tamp_bkp_word(STRATO_LEASE_WORD) == 0) {
             return true;
         }
+    }
+    return false;
+}
+
+static bool invalidate_session_marker(void) {
+    for (uint8_t attempt = 0; attempt < 3; ++attempt) {
+        *tamp_bkp_word(0) = 0;
+        __DSB();
+        if (*tamp_bkp_word(0) == 0) return true;
     }
     return false;
 }
@@ -516,12 +529,30 @@ bool power_manager_clear_session(void) {
 #endif
 }
 
+bool power_manager_clear_lorawan_session(void) {
+#if defined(ARDUINO_ARCH_STM32)
+    enable_backup_access();
+    return invalidate_session_marker();
+#else
+    return true;
+#endif
+}
+
 bool power_manager_load_region_lease(uint32_t* age_sec) {
     if (!age_sec) return false;
 #if defined(ARDUINO_ARCH_STM32)
     enable_backup_access();
-    return tamp_lease_record_decode(
-        *tamp_bkp_word(STRATO_LEASE_WORD), age_sec);
+    /* Age-only compatibility for the existing main loop and diagnostics.
+     * Decode both the legacy record and the exact-region v2 record; callers
+     * that authorize RF must use power_manager_load_region_authority() so
+     * they cannot discard the source/region binding. */
+    tamp_region_lease_t lease;
+    if (!tamp_region_lease_record_decode(
+            *tamp_bkp_word(STRATO_LEASE_WORD), &lease)) {
+        return false;
+    }
+    *age_sec = lease.age_sec;
+    return true;
 #else
     return false;
 #endif
@@ -543,6 +574,49 @@ bool power_manager_save_region_lease(uint32_t age_sec) {
                ? TAMP_LEASE_AGE_MASK : age_sec);
 #else
     (void)age_sec;
+    return false;
+#endif
+}
+
+bool power_manager_load_region_authority(tamp_region_lease_t* lease) {
+    if (!lease) return false;
+#if defined(ARDUINO_ARCH_STM32)
+    enable_backup_access();
+    return tamp_region_lease_record_decode(
+        *tamp_bkp_word(STRATO_LEASE_WORD), lease);
+#else
+    return false;
+#endif
+}
+
+bool power_manager_save_region_authority(
+    uint32_t age_sec,
+    lora_region_id_t region,
+    tamp_region_authority_source_t source) {
+#if defined(ARDUINO_ARCH_STM32)
+    uint32_t record = 0;
+    if (!tamp_region_lease_record_encode(
+            age_sec, (uint8_t)region, source, &record)) {
+        return false;
+    }
+
+    enable_backup_access();
+    volatile uint32_t* lease_word = tamp_bkp_word(STRATO_LEASE_WORD);
+    *lease_word = record;
+
+    tamp_region_lease_t decoded;
+    uint32_t expected_age = age_sec > TAMP_LEASE_AGE_MASK
+        ? TAMP_LEASE_AGE_MASK : age_sec;
+    return *lease_word == record &&
+           tamp_region_lease_record_decode(*lease_word, &decoded) &&
+           decoded.exact_region &&
+           decoded.age_sec == expected_age &&
+           decoded.region_id == (uint8_t)region &&
+           decoded.source == source;
+#else
+    (void)age_sec;
+    (void)region;
+    (void)source;
     return false;
 #endif
 }

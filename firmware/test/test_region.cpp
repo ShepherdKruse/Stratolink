@@ -11,6 +11,7 @@
  *
  * The geofence is intentionally conservative — see region_manager.cpp.
  */
+#include "config.h"
 #include "region_manager.h"
 #include <cstdio>
 #include <cstdint>
@@ -249,6 +250,85 @@ int main(void) {
                         (unsigned long)tc.nominal_sec, (unsigned long)got,
                         (unsigned long)tc.expected_sec);
         }
+    }
+
+    /* Short recovery sleeps must include awake work and slow-RTC allowance;
+     * neither millisecond ceiling nor the retained age may wrap. */
+    struct CycleChargeCase {
+        uint32_t age, awake_ms, sleep_ms, expected_sec;
+    };
+    static const CycleChargeCase CYCLE_CHARGE_CASES[] = {
+        { 100u, 0u, 0u, 100u },
+        { 100u, 1u, 0u, 101u },
+        { 100u, 1000u, 0u, 101u },
+        { 100u, 1001u, 0u, 102u },
+        { 100u, 0u, 1u, 102u },
+        { 100u, 3000u, 60000u, 169u },
+        { 100u, 4000u, 60000u, 170u },
+        { 0u, UINT32_MAX, 0u, 4294968u },
+        { 0u, 0u, UINT32_MAX, 4658949u },
+        { UINT32_MAX - 65u, 0u, 60000u, UINT32_MAX },
+        { UINT32_MAX - 1u, 1001u, 0u, UINT32_MAX },
+        { UINT32_MAX, UINT32_MAX, UINT32_MAX, UINT32_MAX },
+    };
+    for (const CycleChargeCase& tc : CYCLE_CHARGE_CASES) {
+        uint32_t got = region_fix_age_after_sleep(
+            tc.age, tc.awake_ms, tc.sleep_ms);
+        if (got == tc.expected_sec) {
+            pass++;
+        } else {
+            fail++;
+            std::printf("[FAIL] age=%lu awake=%lu ms sleep=%lu ms => %lu s "
+                        "(expected %lu)\n",
+                        (unsigned long)tc.age, (unsigned long)tc.awake_ms,
+                        (unsigned long)tc.sleep_ms, (unsigned long)got,
+                        (unsigned long)tc.expected_sec);
+        }
+    }
+
+    /* Production cadence/lease coupling. The longest normal sleep must leave
+     * the same complete active-cycle allowance used by reset precharge, and a
+     * representative no-fix wake must still have time to send primary health.
+     * One further no-fix sleep then expires normally; this policy prevents
+     * self-expiry without turning the GNSS-derived lease into an infinite one. */
+    static const uint32_t NORMAL_SLEEP_INTERVALS[] = {
+        SLEEP_INTERVAL_FULL_SEC,
+        SLEEP_INTERVAL_REDUCED_SEC,
+        SLEEP_INTERVAL_NO_GPS_SEC,
+        SLEEP_INTERVAL_EMERGENCY_SEC,
+    };
+    for (uint32_t interval : NORMAL_SLEEP_INTERVALS) {
+        uint32_t charged = region_sleep_age_charge_sec(interval);
+        uint32_t next_wake_age = region_fix_age_advance(
+            charged, REGION_RESET_UNACCOUNTED_CHARGE_SEC);
+        if (interval == 1200u && charged == 1302u &&
+            region_fix_age_allows_tx(next_wake_age)) {
+            pass++;
+        } else {
+            fail++;
+            std::printf("[FAIL] normal sleep=%lu charge=%lu + margin=%u "
+                        "must remain before lease=%u\n",
+                        (unsigned long)interval, (unsigned long)charged,
+                        REGION_RESET_UNACCOUNTED_CHARGE_SEC,
+                        REGION_FIX_MAX_AGE_SEC);
+        }
+    }
+    const uint32_t representative_no_fix_active_sec = 120u;
+    uint32_t first_no_fix_tx_age = region_fix_age_advance(
+        region_sleep_age_charge_sec(SLEEP_INTERVAL_REDUCED_SEC) +
+            REGION_RESET_UNACCOUNTED_CHARGE_SEC,
+        representative_no_fix_active_sec);
+    uint32_t following_no_fix_wake_age = region_fix_age_advance(
+        first_no_fix_tx_age,
+        region_sleep_age_charge_sec(SLEEP_INTERVAL_REDUCED_SEC));
+    if (region_fix_age_allows_tx(first_no_fix_tx_age) &&
+        !region_fix_age_allows_tx(following_no_fix_wake_age)) {
+        pass++;
+    } else {
+        fail++;
+        std::printf("[FAIL] no-fix sequence tx_age=%lu next_wake_age=%lu\n",
+                    (unsigned long)first_no_fix_tx_age,
+                    (unsigned long)following_no_fix_wake_age);
     }
     std::printf("=== region + freshness: %d passed, %d failed ===\n",
                 pass, fail);

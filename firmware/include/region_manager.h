@@ -74,4 +74,11 @@ uint32_t region_fix_remaining_tx_ms(uint32_t age_sec);
  */
 uint32_t region_sleep_age_charge_sec(uint32_t nominal_sleep_sec);
 
+/** Charge measured awake time and a planned RTC sleep, rounding milliseconds
+ * upward and saturating the resulting lease age. The caller supplies the
+ * unsigned millis() delta so an ordinary counter wrap preserves elapsed time. */
+uint32_t region_fix_age_after_sleep(uint32_t age_sec,
+                                    uint32_t awake_elapsed_ms,
+                                    uint32_t nominal_sleep_ms);
+
 #endif /* REGION_MANAGER_H */
