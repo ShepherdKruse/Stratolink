@@ -85,6 +85,12 @@ run_suite lorawan_frame \
   "$repo_dir/firmware/src/lorawan_counter.cpp" \
   "$repo_dir/firmware/src/lorawan_crypto.cpp" \
   "$repo_dir/firmware/src/crypto_aes128.cpp"
+run_suite lorawan_liveness \
+  "$repo_dir/firmware/test/test_lorawan_liveness.cpp" \
+  "$repo_dir/firmware/src/lorawan_liveness.cpp"
+run_suite lorawan_session_meta \
+  "$repo_dir/firmware/test/test_lorawan_session_meta.cpp" \
+  "$repo_dir/firmware/src/lorawan_liveness.cpp"
 run_suite lis2dh12_conversion \
   "$repo_dir/firmware/test/test_lis2dh12_conversion.cpp"
 run_suite ltr390_conversion \
@@ -123,4 +129,4 @@ run_suite temperature_wire \
   "$repo_dir/firmware/test/test_temperature_wire.cpp" \
   "$repo_dir/firmware/src/telemetry.cpp"
 
-printf 'All 31 strict ASan/UBSan host suites passed.\n'
+printf 'All 33 strict ASan/UBSan host suites passed.\n'

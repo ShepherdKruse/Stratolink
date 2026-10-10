@@ -18,6 +18,7 @@
 #include "crypto_aes128.h"
 #include "lorawan_crypto.h"
 #include "lorawan_frame.h"
+#include "lorawan_session_meta.h"
 #include "meshtastic_relay_mac.h"
 #include <RadioLib.h>
 
@@ -99,6 +100,12 @@ static uint32_t s_tx_end_ms = 0;   /* millis() at end of the last uplink TX (RX-
 static uint8_t  s_tx_ch = 0;       /* channel index the last uplink used (for the RX1 downlink freq) */
 static uint16_t s_last_join_devnonce = 0;
 static bool s_have_join_devnonce = false;
+static lorawan_liveness_state_t s_liveness_state = {
+    0u, 0u, false, false, false
+};
+static_assert(sizeof(lorawan_liveness_state_t) == 5u,
+              "flight-state decoder must track liveness qualification flags");
+static lorawan_liveness_diag_t s_liveness_diag = {};
 
 /* OTAA credentials from secrets.h, parsed at init */
 static uint8_t devEUI[8];
@@ -520,6 +527,10 @@ static bool otaa_join(void) {
 
     fCntUp = 0;
     fCntDown = 0;
+    /* JoinAccept authenticates the Join Server, but not successful delivery of
+     * a primary through the new data session.  The first eligible primary must
+     * therefore ask the Network Server for an authenticated Class-A proof. */
+    lorawan_liveness_begin_session(&s_liveness_state);
     LOG("[OTAA] Session keys derived");
     return true;
 }
@@ -721,8 +732,34 @@ bool lorawan_join(uint32_t timeout_ms) {
     return false;
 }
 
-bool lorawan_send_uplink_port(uint8_t fport, const uint8_t* payload, uint8_t payload_len) {
-    if (!_joined || !payload || fport == 0 ||
+static void fail_session_persistence(void) {
+    if (s_liveness_diag.persistence_failures != UINT32_MAX) {
+        s_liveness_diag.persistence_failures++;
+    }
+    /* The failed save or caller's explicit clear has already invalidated both
+     * retained authorization roots. Revoke the matching RAM session too: no
+     * later same-cycle CTT/relay/auxiliary path may use half-live keys. */
+    lorawan_invalidate_session();
+}
+
+static void retire_invalid_liveness_session(void) {
+    /* Structurally invalid liveness metadata must not leave a joined session
+     * that can send primaries forever but can never regain proof. Clear both
+     * retained authorization roots, then revoke the matching RAM session. */
+    (void)power_manager_clear_session();
+    fail_session_persistence();
+}
+
+static bool send_uplink_port_mode(uint8_t fport, const uint8_t* payload,
+                                  uint8_t payload_len, bool confirmed,
+                                  bool* counter_reserved = nullptr) {
+    if (counter_reserved) *counter_reserved = false;
+    if (!_joined) return false;
+    if (!lorawan_liveness_state_valid(&s_liveness_state)) {
+        retire_invalid_liveness_session();
+        return false;
+    }
+    if (!payload || fport == 0 ||
         payload_len > LORAWAN_PAYLOAD_MAX ||
         fCntUp == UINT32_MAX) return false;
     if (REGION_ID == LORA_REGION_SILENT) return false;  /* off-plan zone */
@@ -737,7 +774,7 @@ bool lorawan_send_uplink_port(uint8_t fport, const uint8_t* payload, uint8_t pay
     static_assert(UPLINK_FRAME_BYTES <= UINT8_MAX,
                   "uplink frame length no longer fits the packet index");
     uint8_t pkt[UPLINK_FRAME_BYTES]; uint8_t idx = 0;
-    pkt[idx++] = 0x40;
+    pkt[idx++] = lorawan_frame_uplink_mhdr(confirmed);
     pkt[idx++]=(uint8_t)(devAddr & 0xFFu);
     pkt[idx++]=(uint8_t)((devAddr >> 8) & 0xFFu);
     pkt[idx++]=(uint8_t)((devAddr >> 16) & 0xFFu);
@@ -774,8 +811,10 @@ bool lorawan_send_uplink_port(uint8_t fport, const uint8_t* payload, uint8_t pay
     lorawan_export_session(&reserved);
     if (!power_manager_save_session(&reserved)) {
         LOG("[LoRaWAN] FCntUp reservation failed");
+        fail_session_persistence();
         return false;
     }
+    if (counter_reserved) *counter_reserved = true;
 
     int16_t state = radio->transmit(pkt, idx);
     LOGV("[LoRaWAN] uplink: ", state);
@@ -786,8 +825,134 @@ bool lorawan_send_uplink_port(uint8_t fport, const uint8_t* payload, uint8_t pay
     return false;
 }
 
+bool lorawan_send_uplink_port(uint8_t fport, const uint8_t* payload,
+                              uint8_t payload_len) {
+    return send_uplink_port_mode(fport, payload, payload_len, false, nullptr);
+}
+
 bool lorawan_send_uplink(const uint8_t* payload, uint8_t payload_len) {
     return lorawan_send_uplink_port(1, payload, payload_len);
+}
+
+static bool persist_current_session(void) {
+    if (!_joined) return false;
+    if (!lorawan_liveness_state_valid(&s_liveness_state)) {
+        retire_invalid_liveness_session();
+        return false;
+    }
+    lorawan_session_t reserved;
+    lorawan_export_session(&reserved);
+    if (power_manager_save_session(&reserved)) return true;
+    fail_session_persistence();
+    return false;
+}
+
+bool lorawan_persist_session(void) {
+    return persist_current_session();
+}
+
+bool lorawan_server_probe_due(
+    const lorawan_liveness_qualification_t* qualification) {
+    return lorawan_liveness_probe_due(&s_liveness_state, qualification);
+}
+
+bool lorawan_server_note_ordinary_primary(
+    const lorawan_liveness_qualification_t* qualification,
+    bool local_tx_succeeded) {
+    if (!lorawan_liveness_note_ordinary_primary(
+            &s_liveness_state, qualification, local_tx_succeeded)) {
+        return false;
+    }
+    return persist_current_session();
+}
+
+bool lorawan_server_abandon_probe(void) {
+    if (!lorawan_liveness_abandon_probe(&s_liveness_state)) return false;
+    s_liveness_diag.abandoned_probes++;
+    return persist_current_session();
+}
+
+lorawan_liveness_event_t lorawan_server_complete_probe(
+    const lorawan_liveness_qualification_t* qualification,
+    const lorawan_liveness_probe_result_t* result,
+    bool* durable) {
+    if (durable) *durable = false;
+    if (!lorawan_liveness_state_valid(&s_liveness_state)) {
+        retire_invalid_liveness_session();
+        return LORAWAN_LIVENESS_NO_CHANGE;
+    }
+    /* Only the receive path may accept authenticated proof because it owns
+     * the atomic FCntDown + proof transaction. */
+    if (!result || result->authenticated_downlink) {
+        return LORAWAN_LIVENESS_NO_CHANGE;
+    }
+    lorawan_liveness_event_t event = lorawan_liveness_complete_probe(
+        &s_liveness_state, qualification, result);
+    if (event == LORAWAN_LIVENESS_NO_CHANGE) {
+        if (durable) *durable = true;
+        return event;
+    }
+    if (event == LORAWAN_LIVENESS_PROBE_ABANDONED) {
+        s_liveness_diag.abandoned_probes++;
+    } else if (event == LORAWAN_LIVENESS_QUALIFIED_MISS ||
+               event == LORAWAN_LIVENESS_RECOVERY_DUE) {
+        s_liveness_diag.qualified_misses++;
+    }
+    bool persisted = persist_current_session();
+    if (durable) *durable = persisted;
+    return event;
+}
+
+bool lorawan_server_recovery_due(void) {
+    return lorawan_liveness_recovery_due(&s_liveness_state);
+}
+
+bool lorawan_server_session_proven(void) {
+    return _joined && lorawan_liveness_state_valid(&s_liveness_state) &&
+        s_liveness_state.server_proven;
+}
+
+void lorawan_server_liveness_get_state(lorawan_liveness_state_t* out) {
+    if (out) *out = s_liveness_state;
+}
+
+void lorawan_server_liveness_get_diag(lorawan_liveness_diag_t* out) {
+    if (out) *out = s_liveness_diag;
+}
+
+void lorawan_server_liveness_note_recovery(bool durable_success) {
+    if (durable_success) s_liveness_diag.recoveries++;
+    else s_liveness_diag.persistence_failures++;
+}
+
+bool lorawan_send_confirmed_uplink(
+    const uint8_t* payload,
+    uint8_t payload_len,
+    const lorawan_liveness_qualification_t* qualification) {
+    lorawan_liveness_state_t state_before_arm = s_liveness_state;
+    if (!lorawan_liveness_arm_probe(&s_liveness_state, qualification)) {
+        return false;
+    }
+    bool counter_reserved = false;
+    bool sent = send_uplink_port_mode(
+        1u, payload, payload_len, true, &counter_reserved);
+    if (sent) {
+        s_liveness_diag.confirmed_probe_tx++;
+        return true;
+    }
+    if (!counter_reserved) {
+        /* No frame counter/pending transaction reached durable storage and no
+         * RF handoff was possible. Preserve due-now so a recovered radio gets
+         * the one prompt first-session probe. A failed reservation already
+         * invalidated the complete RAM session; do not resurrect its keys. */
+        if (_joined) s_liveness_state = state_before_arm;
+        return false;
+    }
+    /* Once the reservation is durable, transmit() failure is ambiguous: RF may
+     * have begun. Clear pending into the sparse interval so neither an ordinary
+     * return nor a reset can amplify that confirmed frame. */
+    (void)lorawan_server_abandon_probe();
+    return false;
 }
 
 bool lorawan_joined(void) { return _joined; }
@@ -1884,13 +2049,16 @@ void lorawan_downlink_get_stats(lorawan_downlink_stats_t* out) {
 }
 
 static size_t rx_window(uint8_t* buf, size_t maxlen, uint32_t deadline_ms,
-                        int16_t* start_state, bool* mission_aborted) {
+                        int16_t* start_state, bool* mission_aborted,
+                        bool* local_fault) {
     if (mission_aborted) *mission_aborted = false;
+    if (local_fault) *local_fault = false;
     s_dl_rx = false;
     radio->setPacketReceivedAction(dl_rx_isr);
     int16_t state = radio->startReceive();
     if (start_state) *start_state = state;
     if (state != RADIOLIB_ERR_NONE) {
+        if (local_fault) *local_fault = true;
         radio->clearPacketReceivedAction(); radio->standby(); return 0;
     }
     uint32_t last_kick = millis();
@@ -1915,17 +2083,30 @@ static size_t rx_window(uint8_t* buf, size_t maxlen, uint32_t deadline_ms,
          * oversized frame to the caller buffer would make the decoder verify
          * only a prefix and silently ignore trailing on-air bytes. Join RX
          * already fails closed at this boundary; keep data-down identical. */
-        if (n > maxlen || radio->readData(buf, n) != RADIOLIB_ERR_NONE) {
+        if (n > maxlen) {
+            n = 0;
+        } else if (radio->readData(buf, n) != RADIOLIB_ERR_NONE) {
+            if (local_fault) *local_fault = true;
             n = 0;
         }
         if (n) s_dl_stats.frame_count++;
     }
-    radio->standby();
+    if (radio->standby() != RADIOLIB_ERR_NONE && local_fault) {
+        *local_fault = true;
+    }
     return n;
 }
 
-bool lorawan_receive_downlink(lorawan_downlink_t* out) {
-    if (!radio_ready || !_joined || !out) return false;
+lorawan_class_a_result_t lorawan_receive_downlink_result(
+    lorawan_downlink_t* out,
+    lorawan_probe_completion_fn probe_completion,
+    void* probe_context,
+    bool* rx_path_healthy_out) {
+    if (rx_path_healthy_out) *rx_path_healthy_out = false;
+    if (!radio_ready || !_joined || !out) {
+        s_dl_stats.local_faults++;
+        return LORAWAN_CLASS_A_AMBIGUOUS;
+    }
     memset(out, 0, sizeof(*out));
     s_dl_stats.calls++;
     s_dl_stats.last_window = 0;
@@ -1940,6 +2121,9 @@ bool lorawan_receive_downlink(lorawan_downlink_t* out) {
     bool saw_frame = false;
     bool authenticated = false;
     bool mission_aborted = false;
+    bool rx_path_healthy = true;
+    bool rx1_completed = false;
+    bool rx2_completed = false;
     lorawan_decoded_downlink_t decoded = {};
 
     /* Windows are driven by the NETWORK-assigned RxDelay, not the spec default.
@@ -1955,26 +2139,31 @@ bool lorawan_receive_downlink(lorawan_downlink_t* out) {
     const uint32_t preopen_ms = 250u;
 
     if (!radio_wait_until(s_tx_end_ms, rx1_at - preopen_ms)) {
-        return false;
+        s_dl_stats.mission_aborts++;
+        return LORAWAN_CLASS_A_AMBIGUOUS;
     }
     if (!radio_apply_lora_phy(
             rx1f, REGION.tx_sf, REGION.rx1_bw,
             RADIOLIB_SX126X_SYNC_WORD_PUBLIC, 8, false, true)) {
         s_dl_stats.last_reject = 8;
-        restore_lorawan_or_reset();
-        return false;
+        (void)restore_lorawan_or_reset();
+        s_dl_stats.local_faults++;
+        return LORAWAN_CLASS_A_AMBIGUOUS;
     }
     s_dl_stats.last_rx1_start_offset_ms =
         (int32_t)(millis() - s_tx_end_ms);
     s_dl_stats.rx1_armed++;
     const uint32_t rx1_deadline = s_tx_end_ms + rx1_at + 500u;
     do {
+        bool window_fault = false;
         rxLen = rx_window(rx, sizeof(rx), rx1_deadline,
                           &s_dl_stats.last_rx1_start_state,
-                          &mission_aborted);
+                          &mission_aborted, &window_fault);
+        if (window_fault) rx_path_healthy = false;
         if (mission_aborted) {
-            restore_lorawan_or_reset();
-            return false;
+            (void)restore_lorawan_or_reset();
+            s_dl_stats.mission_aborts++;
+            return LORAWAN_CLASS_A_AMBIGUOUS;
         }
         if (!rxLen) {
             if (s_dl_rx) continue;    /* malformed/read-failed IRQ */
@@ -1991,33 +2180,42 @@ bool lorawan_receive_downlink(lorawan_downlink_t* out) {
          * frame. An early nuisance packet must not preempt the scheduled frame
          * later in the same window. */
     } while (!authenticated && (int32_t)(millis() - rx1_deadline) < 0);
+    if (!authenticated && rx_path_healthy &&
+        (int32_t)(millis() - rx1_deadline) >= 0) {
+        rx1_completed = true;
+    }
 
     /* A merely present RX1 frame is not ours. Wrong-address, malformed,
      * replayed, or bad-MIC traffic must leave RX2 available for the network's
      * authenticated fallback. */
     if (!authenticated) {
         if (!radio_wait_until(s_tx_end_ms, rx2_at - preopen_ms)) {
-            restore_lorawan_or_reset();
-            return false;
+            (void)restore_lorawan_or_reset();
+            s_dl_stats.mission_aborts++;
+            return LORAWAN_CLASS_A_AMBIGUOUS;
         }
         if (!radio_apply_lora_phy(
                 REGION.rx2_freq, REGION.rx2_sf, REGION.rx2_bw,
                 RADIOLIB_SX126X_SYNC_WORD_PUBLIC, 8, false, true)) {
             s_dl_stats.last_reject = 8;
-            restore_lorawan_or_reset();
-            return false;
+            (void)restore_lorawan_or_reset();
+            s_dl_stats.local_faults++;
+            return LORAWAN_CLASS_A_AMBIGUOUS;
         }
         s_dl_stats.last_rx2_start_offset_ms =
             (int32_t)(millis() - s_tx_end_ms);
         s_dl_stats.rx2_armed++;
         const uint32_t rx2_deadline = s_tx_end_ms + rx2_at + 740u;
         do {
+            bool window_fault = false;
             rxLen = rx_window(rx, sizeof(rx), rx2_deadline,
                               &s_dl_stats.last_rx2_start_state,
-                              &mission_aborted);
+                              &mission_aborted, &window_fault);
+            if (window_fault) rx_path_healthy = false;
             if (mission_aborted) {
-                restore_lorawan_or_reset();
-                return false;
+                (void)restore_lorawan_or_reset();
+                s_dl_stats.mission_aborts++;
+                return LORAWAN_CLASS_A_AMBIGUOUS;
             }
             if (!rxLen) {
                 if (s_dl_rx) continue;
@@ -2032,12 +2230,41 @@ bool lorawan_receive_downlink(lorawan_downlink_t* out) {
                 &decoded, &s_dl_stats.last_reject);
         } while (!authenticated &&
                  (int32_t)(millis() - rx2_deadline) < 0);
+        if (!authenticated && rx_path_healthy &&
+            (int32_t)(millis() - rx2_deadline) >= 0) {
+            rx2_completed = true;
+        }
     }
 
-    restore_lorawan_or_reset();       /* leave radio ready for the next uplink */
+    if (!restore_lorawan_or_reset()) rx_path_healthy = false;
     if (!authenticated) {
         if (!saw_frame) s_dl_stats.last_reject = LORAWAN_FRAME_REJECT_LENGTH;
-        return false;
+        if (rx_path_healthy && rx1_completed && rx2_completed) {
+            s_dl_stats.complete_no_evidence++;
+            if (s_liveness_state.probe_pending) {
+                /* Do not publish a conclusive empty exchange while its pending
+                 * probe is still only retained intent. The completion callback
+                 * rechecks live mission gates and persists the miss before this
+                 * function can expose COMPLETE to its caller. */
+                if (!probe_completion) {
+                    s_dl_stats.local_faults++;
+                    return LORAWAN_CLASS_A_AMBIGUOUS;
+                }
+                lorawan_liveness_probe_result_t empty = {};
+                empty.local_tx_succeeded = true;
+                empty.rx1_completed = true;
+                empty.rx2_completed = true;
+                empty.rx_path_healthy = true;
+                if (!probe_completion(&empty, probe_context)) {
+                    s_dl_stats.local_faults++;
+                    return LORAWAN_CLASS_A_PERSISTENCE_FAULT;
+                }
+            }
+            if (rx_path_healthy_out) *rx_path_healthy_out = true;
+            return LORAWAN_CLASS_A_COMPLETE_NO_EVIDENCE;
+        }
+        s_dl_stats.local_faults++;
+        return LORAWAN_CLASS_A_AMBIGUOUS;
     }
 
     /* Consume and atomically persist the authenticated counter BEFORE the
@@ -2046,19 +2273,51 @@ bool lorawan_receive_downlink(lorawan_downlink_t* out) {
      * control frame. This deliberately gives commands at-most-once delivery:
      * a reset after this commit but before dispatch can lose the command, so a
      * controller must retry with a newer application sequence number. */
+    lorawan_liveness_state_t proven_state = s_liveness_state;
+    lorawan_liveness_probe_result_t proof = {};
+    proof.authenticated_downlink = true;
+    if (lorawan_liveness_complete_probe(
+            &proven_state, nullptr, &proof) !=
+        LORAWAN_LIVENESS_SERVER_PROVEN) {
+        s_dl_stats.last_reject = 7;
+        /* A joined session with structurally invalid liveness state can never
+         * publish authenticated proof. Retire both retained and RAM copies so
+         * it cannot remain joined-but-unusable indefinitely. */
+        retire_invalid_liveness_session();
+        s_dl_stats.local_faults++;
+        return LORAWAN_CLASS_A_PERSISTENCE_FAULT;
+    }
     fCntDown = decoded.frame_counter + 1u;
+    /* Stage proof into the same CRC-protected save as the consumed FCntDown.
+     * No caller can observe the proof gate until this function returns. */
+    s_liveness_state = proven_state;
     lorawan_session_t reserved;
     lorawan_export_session(&reserved);
     if (!power_manager_save_session(&reserved)) {
         s_dl_stats.last_reject = 7;
-        return false;
+        fail_session_persistence();
+        s_dl_stats.local_faults++;
+        return LORAWAN_CLASS_A_PERSISTENCE_FAULT;
     }
 
     out->fport = decoded.fport;
     out->len = decoded.len;
+    out->ack = decoded.ack;
     memcpy(out->data, decoded.data, decoded.len);
+    s_dl_stats.authenticated_frames++;
+    s_liveness_diag.authenticated_downlinks++;
+    if (decoded.ack) {
+        s_dl_stats.ack_frames++;
+        s_liveness_diag.ack_downlinks++;
+    }
     s_dl_stats.last_reject = 0;
-    return true;
+    if (rx_path_healthy_out) *rx_path_healthy_out = rx_path_healthy;
+    return LORAWAN_CLASS_A_AUTHENTICATED;
+}
+
+bool lorawan_receive_downlink(lorawan_downlink_t* out) {
+    return lorawan_receive_downlink_result(out, nullptr, nullptr) ==
+        LORAWAN_CLASS_A_AUTHENTICATED;
 }
 
 /* ========== Runtime region switching ========== */
@@ -2077,6 +2336,7 @@ void lorawan_set_region(lora_region_id_t id) {
     fCntUp  = 0;
     fCntDown = 0;
     chIdx   = 0;
+    lorawan_liveness_begin_session(&s_liveness_state);
 
     switch (id) {
         case LORA_REGION_US915: REGION = LORA_US915; break;
@@ -2102,6 +2362,19 @@ void lorawan_set_region(lora_region_id_t id) {
 
 lora_region_id_t lorawan_current_region(void) { return REGION_ID; }
 
+void lorawan_invalidate_session(void) {
+    _joined = false;
+    devAddr = 0u;
+    fCntUp = 0u;
+    fCntDown = 0u;
+    s_tx_end_ms = 0u;
+    s_tx_ch = 0u;
+    chIdx = 0u;
+    memset(nwkSKey, 0, sizeof(nwkSKey));
+    memset(appSKey, 0, sizeof(appSKey));
+    lorawan_liveness_begin_session(&s_liveness_state);
+}
+
 /* ========== Session persistence ========== */
 
 void lorawan_export_session(lorawan_session_t* out) {
@@ -2112,15 +2385,24 @@ void lorawan_export_session(lorawan_session_t* out) {
     out->devAddr   = devAddr;
     out->fCntUp    = fCntUp;
     out->fCntDown  = fCntDown;
-    out->rxDelaySec = s_rx_delay_s;
+    uint32_t packed_meta = 0u;
+    (void)lorawan_session_meta_encode(
+        s_rx_delay_s, &s_liveness_state, &packed_meta);
+    out->rxDelaySec = packed_meta;
     memcpy(out->nwkSKey, nwkSKey, 16);
     memcpy(out->appSKey, appSKey, 16);
 }
 
 bool lorawan_import_session(const lorawan_session_t* in) {
+    /* Any rejected/corrupt import must not leave proof from a previous RAM
+     * session available to optional services. */
+    lorawan_liveness_begin_session(&s_liveness_state);
     if (!in) return false;
     if (in->region_id >= (uint32_t)LORA_REGION_SILENT) return false;
-    if (in->rxDelaySec < 1u || in->rxDelaySec > 15u) return false;
+    lorawan_session_meta_t meta = {};
+    if (!lorawan_session_meta_decode(in->rxDelaySec, &meta)) return false;
+    bool interrupted_probe = meta.liveness.probe_pending;
+    if (!lorawan_liveness_normalize_after_import(&meta.liveness)) return false;
 
     /* Apply region first so the radio is configured before the next
      * uplink attempt.  set_region clears _joined + fCntUp, then we
@@ -2136,7 +2418,9 @@ bool lorawan_import_session(const lorawan_session_t* in) {
     devAddr = in->devAddr;
     fCntUp  = in->fCntUp;
     fCntDown = in->fCntDown;
-    s_rx_delay_s = (uint8_t)in->rxDelaySec;
+    s_rx_delay_s = meta.rx_delay_sec;
+    s_liveness_state = meta.liveness;
+    if (interrupted_probe) s_liveness_diag.abandoned_probes++;
     memcpy(nwkSKey, in->nwkSKey, 16);
     memcpy(appSKey, in->appSKey, 16);
     _joined = true;

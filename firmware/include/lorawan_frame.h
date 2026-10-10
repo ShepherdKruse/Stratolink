@@ -23,8 +23,14 @@ typedef struct {
     uint32_t frame_counter;
     uint8_t fport;
     uint8_t len;
+    /* Authenticated FCtrl.ACK. False on every decode failure; callers must
+     * never infer server evidence from the raw, unauthenticated header bit. */
+    bool ack;
     uint8_t data[64];
 } lorawan_decoded_downlink_t;
+
+/** Exact LoRaWAN 1.0.x data-uplink MHDR for the selected confirmation mode. */
+uint8_t lorawan_frame_uplink_mhdr(bool confirmed);
 
 /**
  * Authenticate and decrypt an unconfirmed data-down frame. `next_counter` is

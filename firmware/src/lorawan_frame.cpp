@@ -9,6 +9,12 @@ static void set_reject(uint8_t* reject, uint8_t value) {
     if (reject) *reject = value;
 }
 
+uint8_t lorawan_frame_uplink_mhdr(bool confirmed) {
+    /* MType occupies MHDR[7:5]: UnconfirmedDataUp=010, ConfirmedDataUp=100.
+     * RFU and Major remain zero for the implemented LoRaWAN 1.0.x frames. */
+    return confirmed ? 0x80u : 0x40u;
+}
+
 bool lorawan_frame_decode_downlink(
     const uint8_t nwk_s_key[16], const uint8_t app_s_key[16],
     uint32_t dev_addr, uint32_t next_counter,
@@ -58,6 +64,7 @@ bool lorawan_frame_decode_downlink(
     }
 
     out->frame_counter = full_counter;
+    out->ack = (frame[5] & 0x20u) != 0u;
     if (frame_len > header_len + 4u) {
         out->fport = frame[header_len];
         size_t payload_len = frame_len - header_len - 1u - 4u;

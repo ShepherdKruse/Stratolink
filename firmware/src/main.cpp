@@ -102,6 +102,9 @@ static uint32_t region_fix_age_sec = 0; /* age of the GNSS-backed frequency-plan
                                         * decision; TX fails closed after the lease */
 static bool region_lease_trusted = false; /* provenance bit: set only by a valid
                                            * retained lease or fresh advancing PVT */
+static tamp_region_authority_source_t region_authority_source =
+    TAMP_REGION_AUTHORITY_GNSS;
+static lora_region_id_t region_authority_region = LORA_REGION_SILENT;
 static uint8_t spurious_ff_streak = 0; /* consecutive INT1 wakes that read ~1g on arrival */
 static uint8_t ff_suppress_clean = 0;  /* scheduled wakes seen while the wake path is latched off */
 static uint8_t s_boot_reset_code = RESET_CAUSE_UNKNOWN;
@@ -121,15 +124,82 @@ static_assert(SENSOR_QUIESCE_FAST_RETRIES > 0u &&
  * restore the stale LoRaWAN session and transmit on an unproven regional plan. */
 static void persist_region_lease_if_trusted(void) {
     if (region_lease_trusted) {
-        if (!power_manager_save_region_lease(region_fix_age_sec)) {
+        bool authority_consistent =
+            region_authority_region < LORA_REGION_SILENT &&
+            region_authority_region == lorawan_current_region();
+        if (!authority_consistent ||
+            !power_manager_save_region_authority(
+                region_fix_age_sec,
+                region_authority_region,
+                region_authority_source)) {
             /* An unverified age must never authorize RF in this boot. Best-
              * effort invalidate both retained roots so a later reset cannot
              * restore the preceding, now-under-aged authorization either. */
             region_known = false;
             region_lease_trusted = false;
+            region_authority_region = LORA_REGION_SILENT;
             (void)power_manager_clear_session();
         }
     }
+}
+
+/* Launch authorization is deliberately narrower than GNSS authorization. It
+ * exists only to get the primary join/health path on-air while the payload is
+ * still at its explicitly provisioned launch site. Optional transmissions and
+ * long radio windows remain disabled until a fresh, advancing PVT takes over. */
+static bool region_authority_is_gnss(void) {
+    return region_lease_trusted && region_known &&
+           region_authority_source == TAMP_REGION_AUTHORITY_GNSS &&
+           region_authority_region == lorawan_current_region();
+}
+
+/* A third fully qualified missing server proof retires only the OTAA session,
+ * not the freshly re-established frequency-plan authority. The recovery cycle
+ * itself must have obtained an advancing PVT; retained provenance alone is not
+ * enough to replace a network session. RAM is invalidated first so no later
+ * same-cycle path can transmit through the suspect keys. */
+static bool recover_stale_server_session(uint32_t cycle_started_ms,
+                                         bool fresh_fix_this_cycle) {
+    bool exact_fresh_authority = fresh_fix_this_cycle &&
+        region_authority_is_gnss() &&
+        region_authority_region < LORA_REGION_SILENT &&
+        region_authority_region == lorawan_current_region();
+
+    uint32_t active_sec = (millis() - cycle_started_ms + 999u) / 1000u;
+    uint32_t live_age = region_fix_age_advance(
+        region_fix_age_sec, active_sec);
+
+    /* This must precede every optional-uplink/service branch below. Even a
+     * failed TAMP write cannot leave the suspect RAM session usable. */
+    lorawan_invalidate_session();
+    bool session_clear_ok = power_manager_clear_lorawan_session();
+    bool authority_republished = session_clear_ok && exact_fresh_authority &&
+        power_manager_save_region_authority(
+            live_age, region_authority_region,
+            TAMP_REGION_AUTHORITY_GNSS);
+
+    if (!authority_republished) {
+        region_known = false;
+        region_lease_trusted = false;
+        region_authority_source = TAMP_REGION_AUTHORITY_GNSS;
+        region_authority_region = LORA_REGION_SILENT;
+        /* Best effort makes the next reset quiet too. Failure still leaves the
+         * current boot quiet because both RAM roots above are revoked. */
+        (void)power_manager_clear_session();
+        lorawan_server_liveness_note_recovery(false);
+        return false;
+    }
+
+    /* Publish the real current-cycle age, not the pre-GPS zero. End-of-cycle
+     * accounting may conservatively charge this active interval again. */
+    region_fix_age_sec = live_age;
+    region_authority_source = TAMP_REGION_AUTHORITY_GNSS;
+    region_known = true;
+    region_lease_trusted = true;
+    join_retry_skip = 0u;
+    join_backoff_exp = 0u;
+    lorawan_server_liveness_note_recovery(true);
+    return true;
 }
 
 /* `region_fix_age_sec` is the conservative age stored at this cycle's entry
@@ -158,6 +228,36 @@ static bool region_tx_allowed_now(uint32_t cycle_started_ms) {
     }
     return true;
 #endif
+}
+
+typedef struct {
+    lorawan_liveness_qualification_t* qualification;
+    uint32_t cycle_started_ms;
+    lorawan_liveness_event_t* event;
+} server_probe_completion_context_t;
+
+/* Runs inside lorawan_receive_downlink_result(), before a completed empty
+ * Class-A exchange can return to loop(). This closes the reset boundary between
+ * observing RX2 completion and durably recording miss3. */
+static bool complete_server_probe_before_rx_return(
+    const lorawan_liveness_probe_result_t* result,
+    void* opaque) {
+    server_probe_completion_context_t* context =
+        (server_probe_completion_context_t*)opaque;
+    if (!result || !context || !context->qualification || !context->event) {
+        return false;
+    }
+    lorawan_liveness_qualification_t* qualification = context->qualification;
+    qualification->gnss_region_authority = region_authority_is_gnss();
+    qualification->freefall_clear = !power_manager_freefall_pending();
+    qualification->rx_power_qualified =
+        power_adc_get_tier() <= POWER_TIER_REDUCED;
+    qualification->region_tx_legal =
+        region_tx_allowed_now(context->cycle_started_ms);
+    bool durable = false;
+    *context->event = lorawan_server_complete_probe(
+        qualification, result, &durable);
+    return durable && *context->event != LORAWAN_LIVENESS_NO_CHANGE;
 }
 
 /* Reset-cause snapshot. RAM-only diagnostic; read via J-Link.
@@ -217,11 +317,21 @@ void setup() {
      * looking marker even if best-effort invalidation also fails. The next boot
      * retries this same precharge before any RF-capable work. */
     bool boot_lease_precharge_ok = true;
-    uint32_t boot_lease_age_sec = 0;
-    if (power_manager_load_region_lease(&boot_lease_age_sec)) {
-        boot_lease_age_sec = region_fix_age_advance(
-            boot_lease_age_sec, REGION_RESET_UNACCOUNTED_CHARGE_SEC);
-        if (!power_manager_save_region_lease(boot_lease_age_sec)) {
+    tamp_region_lease_t boot_region_authority = {};
+    bool boot_region_authority_loaded =
+        power_manager_load_region_authority(&boot_region_authority);
+    if (boot_region_authority_loaded) {
+        boot_region_authority.age_sec = region_fix_age_advance(
+            boot_region_authority.age_sec,
+            REGION_RESET_UNACCOUNTED_CHARGE_SEC);
+        bool precharge_saved = boot_region_authority.exact_region
+            ? power_manager_save_region_authority(
+                boot_region_authority.age_sec,
+                (lora_region_id_t)boot_region_authority.region_id,
+                boot_region_authority.source)
+            : power_manager_save_region_lease(
+                boot_region_authority.age_sec);
+        if (!precharge_saved) {
             boot_lease_precharge_ok = false;
             (void)power_manager_clear_session();
         }
@@ -255,47 +365,87 @@ void setup() {
         bool retained_session_valid = power_manager_load_session(&s);
         s_boot_reset_code = reset_cause_decode(
             boot_reset_cause, retained_session_valid);
-        if (retained_session_valid && lorawan_import_session(&s)) {
 #ifdef BENCH_SEED_REGION
+        /* The bench bypass is explicitly US915-only. A valid retained session
+         * from any other plan is still not authority to import that plan at a
+         * US bench: leave it untouched in TAMP for forensic inspection and
+         * exercise a fresh US915 join instead. */
+        bool retained_session_is_us915 = retained_session_valid &&
+            s.region_id == (uint32_t)LORA_REGION_US915;
+        bool retained_session_imported =
+            retained_session_is_us915 && lorawan_import_session(&s);
+        if (retained_session_imported) {
             region_fix_age_sec = 0;
             region_lease_trusted = true;
             region_known = true;
-#else
-            /* A retained LoRaWAN session is not proof that its frequency-plan
-             * decision is still geographically fresh. Restore the independent
-             * lease age; a pre-lease image or stale lease fails RF-quiet until
-             * a genuinely fresh PVT selects the region again. */
-            region_lease_trusted = boot_lease_precharge_ok &&
-                power_manager_load_region_lease(&region_fix_age_sec);
-            region_known = region_lease_trusted &&
-                region_fix_age_allows_tx(region_fix_age_sec);
-#endif
+            region_authority_source = TAMP_REGION_AUTHORITY_GNSS;
+            region_authority_region = lorawan_current_region();
             LOG("LoRaWAN session restored from TAMP");
         } else {
-            /* True cold boot (TAMP lost = deep brownout or first power-on):
-             * the regulatory region is UNKNOWN and the boot default (US915)
-             * would be out-of-band anywhere outside the Americas.  Standard
-             * practice for globally-roaming trackers is GNSS-first: stay
-             * RF-quiet until the first fix picks the region, then loop()
-             * joins on the right band.  Worst case (wedged GPS) is bounded
-             * by the PA0 reset ladder, not by transmitting blind. */
-#ifdef BENCH_SEED_REGION
-            /* BENCH HARNESS ONLY, never in a flight build.  An indoor bench
-             * board has no sky view, so it never gets the fix that unlocks
-             * the radio, and a soak would sit silent forever.  Seeding the
-             * region lets the soak exercise join/uplink/relay on the boot
-             * default band (US915, correct at the bench site).  Defined only
-             * by env:stratolink_soak, alongside RELAY_SOLAR_MIN_MV=0; the
-             * flight env:stratolink defines neither, so the GNSS-first gate
-             * is fully intact where it matters.  Verified after every build
-             * by grepping the flight binary for the marker string below. */
+            /* BENCH HARNESS ONLY, never in a flight build. An indoor board has
+             * no sky view, so seed the known-local US915 plan in RAM to exercise
+             * the complete join/uplink path. This is not persisted as launch
+             * authority and the flight environment does not define the bypass. */
+            lorawan_set_region(LORA_REGION_US915);
             region_known = true;
             region_lease_trusted = true;
+            region_authority_source = TAMP_REGION_AUTHORITY_GNSS;
+            region_authority_region = LORA_REGION_US915;
             LOG("BENCH_SEED_REGION active: GNSS-first gate bypassed, NOT FLIGHT");
-#else
-            LOG("cold boot: RF quiet until first GPS fix picks the region");
-#endif
         }
+#else
+        /* A retained session is never regional authority by itself. Accept an
+         * exact v2 authority without a session (the explicit pre-launch case),
+         * or migrate a legacy GNSS age only when a separately CRC-protected
+         * retained session supplies its exact region. Any mismatch is ignored
+         * and the radio is configured from the authority record instead. */
+        bool authority_usable = boot_lease_precharge_ok &&
+            boot_region_authority_loaded &&
+            region_fix_age_allows_tx(boot_region_authority.age_sec);
+        lora_region_id_t authorized_region = LORA_REGION_SILENT;
+        if (authority_usable && boot_region_authority.exact_region) {
+            authorized_region =
+                (lora_region_id_t)boot_region_authority.region_id;
+        } else if (authority_usable && retained_session_valid &&
+                   s.region_id < (uint32_t)LORA_REGION_SILENT) {
+            authorized_region = (lora_region_id_t)s.region_id;
+        } else {
+            authority_usable = false;
+        }
+
+        bool retained_session_imported = authority_usable &&
+            retained_session_valid &&
+            s.region_id == (uint32_t)authorized_region &&
+            lorawan_import_session(&s);
+
+        if (authority_usable) {
+            if (!retained_session_imported) {
+                lorawan_set_region(authorized_region);
+            }
+            region_fix_age_sec = boot_region_authority.age_sec;
+            region_lease_trusted = true;
+            region_known = true;
+            region_authority_source = boot_region_authority.source;
+            region_authority_region = authorized_region;
+
+            /* Convert a valid legacy age/session pair to the exact-region v2
+             * record immediately. A failed migration revokes both roots. */
+            if (!boot_region_authority.exact_region) {
+                persist_region_lease_if_trusted();
+            }
+            if (retained_session_imported) {
+                LOG("LoRaWAN session restored from TAMP");
+            } else if (region_authority_source ==
+                       TAMP_REGION_AUTHORITY_LAUNCH) {
+                LOG("explicit retained launch authority active");
+            }
+        } else {
+            /* Missing, corrupt, mismatched, or expired retained authority is a
+             * true cold boot: RF stays quiet until fresh GNSS. A compile-time
+             * boot default is intentionally never treated as authorization. */
+            LOG("cold boot: RF quiet until first GPS fix picks the region");
+        }
+#endif
     }
 
     if (!sensors_init()) {
@@ -449,10 +599,10 @@ void loop() {
 
     uint32_t gps_timeout_ms = burst_mode ? (uint32_t)BURST_GPS_TIMEOUT_MS : 30000;
     bool fresh_fix_this_cycle = false;
-    bool gps_quiesced = true;
+    gps_quiescence_result_t gps_quiescence = GPS_QUIESCENCE_UNCONTAINED;
     const bool gps_attempted_this_cycle = power_adc_can_use_gps() || burst_mode;
     if (gps_attempted_this_cycle) {
-        if (gps_ublox_get_fix(&last_gps_fix, gps_timeout_ms)) {
+        if (gps_ublox_get_fix(&last_gps_fix, gps_timeout_ms, !burst_mode)) {
             fresh_fix_this_cycle = true;
             s_have_fix_this_boot = true;
             s_last_fix_monotonic_sec = power_manager_monotonic_seconds();
@@ -481,7 +631,7 @@ void loop() {
          * tens of joules a day against a 24.7 J budget and the nominal cap
          * model's 8.86 J (7.09 J at the part's 0.8 F minimum). This is the
          * single largest avoidable draw in the cycle. */
-        gps_quiesced = gps_ublox_sleep();
+        gps_quiescence = gps_ublox_quiesce();
     } else {
         gps_ublox_note_power_skip();
     }
@@ -492,15 +642,24 @@ void loop() {
      * session and the re-join logic below picks it up before the next
      * TX.  No-op if region unchanged. */
     if (fresh_fix_this_cycle) {
-        region_known = true;               /* a real fix picked the region */
         region_fix_age_sec = 0;
-        region_lease_trusted = true;
+        bool authority_was_launch =
+            region_authority_source == TAMP_REGION_AUTHORITY_LAUNCH;
         lora_region_id_t region_before = lorawan_current_region();
-        lorawan_set_region(region_for_latlon(last_gps_fix.lat_e7,
-                                             last_gps_fix.lon_e7));
+        lora_region_id_t fresh_region = region_for_latlon(
+            last_gps_fix.lat_e7, last_gps_fix.lon_e7);
+        lorawan_set_region(fresh_region);
+        region_authority_source = TAMP_REGION_AUTHORITY_GNSS;
+        region_authority_region = fresh_region;
+        region_known = fresh_region < LORA_REGION_SILENT;
+        region_lease_trusted = region_known;
         bool region_changed = lorawan_current_region() != region_before;
-        if (region_changed) {
-            join_retry_skip = 0;     /* try the newly selected plan promptly */
+        if (region_changed || authority_was_launch) {
+            /* A same-region LAUNCH -> GNSS takeover is as significant to the
+             * short authority window as a frequency-plan change. Do not let
+             * failed launch joins leave a 1/2/4-cycle skip that can consume
+             * every GNSS-authorized wake before the lease expires. */
+            join_retry_skip = 0;
             join_backoff_exp = 0;
         }
         if (!lorawan_joined()) {
@@ -545,7 +704,7 @@ void loop() {
         /* The acquisition path already quiesced GNSS immediately after its
          * poll. Cover only the power-gated path here; issuing PMREQ twice
          * would add another ~300 ms to the burst response for no benefit. */
-        if (!gps_attempted_this_cycle) gps_ublox_sleep();
+        if (!gps_attempted_this_cycle) (void)gps_ublox_quiesce();
         lorawan_sleep();
 #ifndef BENCH_SEED_REGION
         uint32_t interrupted_active_sec =
@@ -555,6 +714,28 @@ void loop() {
         persist_region_lease_if_trusted();
 #endif
         return;
+    }
+
+    /* A reset can land after the third miss was durably committed but before
+     * same-region invalidation. Recovery-due is therefore a state, not only an
+     * edge event. Hold every normal-cycle RF path until this actual cycle has
+     * a fresh advancing PVT and can complete the durable transition. Emergency
+     * burst remains mission-priority and never advances the liveness policy;
+     * the first later normal cycle performs this recovery. */
+    bool suppress_optional_after_recovery = false;
+    /* A prior authenticated proof is not permission to open a secondary radio
+     * after this cycle's primary failed before RF. Set only after the current
+     * FCnt reservation and primary transmit both succeed. */
+    bool primary_transaction_ok = false;
+    if (!burst_mode && lorawan_server_recovery_due()) {
+        suppress_optional_after_recovery = true;
+        if (fresh_fix_this_cycle && region_authority_is_gnss() &&
+            (gps_quiescence ==
+                 GPS_QUIESCENCE_CONFIRMED_SOFTWARE_STANDBY ||
+             gps_quiescence == GPS_QUIESCENCE_RESET_HELD)) {
+            (void)recover_stale_server_session(
+                cycle_started_ms, fresh_fix_this_cycle);
+        }
     }
 
     /* IWDG timeout is 30.84 s minimum / 32.768 s typical. GPS fix can run
@@ -651,16 +832,20 @@ void loop() {
      * session. OTAA inside the rapid loop burns the recovery reserve and can
      * spend several join requests before the 1/2/4-cycle backoff advances;
      * wait for the next normal cycle instead. */
-    if (!burst_mode && !lorawan_joined() &&
+    if (!suppress_optional_after_recovery && !burst_mode &&
+        !lorawan_joined() &&
         region_tx_allowed_now(cycle_started_ms) && power_adc_can_tx()) {
-        if (join_retry_skip > 0) {
+        /* Launch authority is short-lived and normally permits only the first
+         * two scheduled health cycles. Retry OTAA on each of those legal wakes
+         * instead of spending the second one merely decrementing backoff. */
+        if (join_retry_skip > 0 &&
+            region_authority_source != TAMP_REGION_AUTHORITY_LAUNCH) {
             join_retry_skip--;
         } else {
             if (lorawan_join(15000)) {
                 /* New region → new session.  Persist it so a reset (TX
                  * fail, brown-out, freefall) doesn't force another join. */
-                lorawan_session_t out; lorawan_export_session(&out);
-                power_manager_save_session(&out);
+                (void)lorawan_persist_session();
                 join_backoff_exp = 0;
             } else {
                 join_retry_skip = (uint8_t)(1u << join_backoff_exp);
@@ -683,10 +868,31 @@ void loop() {
      * lease expired. region_known gates the primary packet as well as the
      * join/relay paths, so no transmitting path can renew itself from stale
      * persisted state. */
-    if (power_adc_can_tx() && vstor_ok_for_tx &&
+    if (!suppress_optional_after_recovery &&
+        power_adc_can_tx() && vstor_ok_for_tx &&
         region_tx_allowed_now(cycle_started_ms) &&
         lorawan_joined()) {
-        if (lorawan_send_uplink(tx_payload, TELEMETRY_PAYLOAD_SIZE)) {
+        lorawan_liveness_qualification_t liveness_qualification = {};
+        liveness_qualification.fresh_advancing_pvt = fresh_fix_this_cycle;
+        liveness_qualification.gnss_region_authority =
+            region_authority_is_gnss();
+        liveness_qualification.normal_primary = !burst_mode;
+        liveness_qualification.freefall_clear =
+            !power_manager_freefall_pending();
+        liveness_qualification.rx_power_qualified =
+            power_adc_get_tier() <= POWER_TIER_REDUCED;
+        /* The enclosing gate just proved this exact live lease. Re-evaluate it
+         * after RX before a missing ACK is allowed to count. */
+        liveness_qualification.region_tx_legal = true;
+        bool confirmed_probe = lorawan_server_probe_due(
+            &liveness_qualification);
+        bool primary_sent = confirmed_probe
+            ? lorawan_send_confirmed_uplink(
+                  tx_payload, TELEMETRY_PAYLOAD_SIZE,
+                  &liveness_qualification)
+            : lorawan_send_uplink(tx_payload, TELEMETRY_PAYLOAD_SIZE);
+        if (primary_sent) {
+            primary_transaction_ok = true;
             tx_fail_streak = 0;
             s_reported_relay_fwd = cycle_relay_fwd_total;
             s_reported_ctt_tags = cycle_ctt_tags_total;
@@ -694,7 +900,6 @@ void loop() {
              * before RF, so even a TX-induced reset cannot replay this frame. */
             LOG("TX OK");
 
-#if defined(CMD_ENABLE) && CMD_ENABLE
             /* Listen against the PRIMARY uplink immediately.  TTN schedules a
              * queued Class-A downlink from the first uplink it receives; if an
              * auxiliary CTT/B2B TX happened first, it would move s_tx_end_ms
@@ -704,11 +909,40 @@ void loop() {
              * to up to ~6.7 s of Class-A RX; otherwise a cycle that started
              * FULL can keep the receiver awake after the cap has already
              * fallen into NO_GPS/EMERGENCY reserve. */
-            if (!burst_mode && !power_manager_freefall_pending() &&
-                power_adc_get_tier() <= POWER_TIER_REDUCED) {
-                lorawan_downlink_t dl;
-                if (lorawan_receive_downlink(&dl)) {
+            lorawan_class_a_result_t rx_result =
+                LORAWAN_CLASS_A_AMBIGUOUS;
+            lorawan_liveness_event_t probe_event =
+                LORAWAN_LIVENESS_NO_CHANGE;
+            server_probe_completion_context_t probe_completion = {
+                &liveness_qualification, cycle_started_ms, &probe_event
+            };
+            bool rx_attempted = false;
+            bool post_tx_rx_power_ok =
+                power_adc_get_tier() <= POWER_TIER_REDUCED;
+            bool receive_primary = confirmed_probe;
+#if defined(CMD_ENABLE) && CMD_ENABLE
+            receive_primary = true;
+#endif
+            if (receive_primary && !burst_mode &&
+                !power_manager_freefall_pending() && post_tx_rx_power_ok) {
+                lorawan_downlink_t dl = {};
+                rx_attempted = true;
+                bool primary_rx_healthy = false;
+                rx_result = lorawan_receive_downlink_result(
+                    &dl,
+                    confirmed_probe
+                        ? complete_server_probe_before_rx_return : nullptr,
+                    confirmed_probe ? &probe_completion : nullptr,
+                    &primary_rx_healthy);
+                /* Historical server proof is not proof of this exchange's
+                 * local health. A transient RX fault closes optional work for
+                 * this cycle without changing the sparse probe policy. Keep
+                 * authenticated command delivery even after a restore fault. */
+                if (!primary_rx_healthy) primary_transaction_ok = false;
+                if (rx_result == LORAWAN_CLASS_A_AUTHENTICATED && dl.len > 0u) {
+#if defined(CMD_ENABLE) && CMD_ENABLE
                     (void)command_handle(&dl);
+#endif
 #if defined(B2B_ENABLE) && B2B_ENABLE
                     /* A command addressed to another balloon (or broadcast)
                      * arrived through authenticated LoRaWAN. Wrap it in the
@@ -719,7 +953,45 @@ void loop() {
                      * FCntDown before exposing this authenticated frame. */
                 }
             }
-#endif
+
+            /* Re-qualify at completion. Freefall, rail sag, lease expiry, an
+             * incomplete window, or any local RX/PHY fault makes a confirmed
+             * exchange ambiguous and restarts the sparse interval without a
+             * miss. An authenticated frame already reset the state atomically
+             * with FCntDown inside lorawan_receive_downlink_result(). */
+            liveness_qualification.freefall_clear =
+                !power_manager_freefall_pending();
+            liveness_qualification.rx_power_qualified =
+                power_adc_get_tier() <= POWER_TIER_REDUCED;
+            liveness_qualification.region_tx_legal =
+                region_tx_allowed_now(cycle_started_ms);
+            if (confirmed_probe &&
+                rx_result != LORAWAN_CLASS_A_AUTHENTICATED) {
+                if (probe_event == LORAWAN_LIVENESS_NO_CHANGE &&
+                    rx_result == LORAWAN_CLASS_A_AMBIGUOUS) {
+                    /* Completed empty windows were resolved durably inside the
+                     * receive function, and a persistence fault already retired
+                     * the complete session. Only preemption/local ambiguity
+                     * reaches this fallback; reset already normalizes retained
+                     * pending intent to that same sparse, non-miss outcome. */
+                    lorawan_liveness_probe_result_t probe_result = {};
+                    probe_result.local_tx_succeeded = true;
+                    bool durable = false;
+                    probe_event = lorawan_server_complete_probe(
+                        &liveness_qualification, &probe_result, &durable);
+                }
+                if (probe_event == LORAWAN_LIVENESS_RECOVERY_DUE &&
+                    lorawan_server_recovery_due()) {
+                    suppress_optional_after_recovery = true;
+                    (void)recover_stale_server_session(
+                        cycle_started_ms, fresh_fix_this_cycle);
+                }
+            } else if (!confirmed_probe &&
+                       (rx_result == LORAWAN_CLASS_A_COMPLETE_NO_EVIDENCE ||
+                        (!receive_primary && !rx_attempted))) {
+                (void)lorawan_server_note_ordinary_primary(
+                    &liveness_qualification, true);
+            }
 
 #if (defined(CTT_LISTEN_ENABLE) && CTT_LISTEN_ENABLE) || \
     (defined(B2B_ENABLE) && B2B_ENABLE)
@@ -728,7 +1000,22 @@ void loop() {
              * cycle and exceed TTN's 30 s/day guideline.  At most one shorter
              * auxiliary is attempted every AUX_UPLINK_INTERVAL_CYCLES primary
              * successes; when both queues have work, alternate them. */
-            if (!gps_quiesced || s_optical_quiescence_fault) {
+            if (!primary_transaction_ok) {
+                /* An attempted but unhealthy Class-A exchange cannot be
+                 * followed by optional RF, even with prior server proof. */
+            } else if (suppress_optional_after_recovery) {
+                /* Suspect session was invalidated above. No optional TTN frame
+                 * may run before a later cycle completes fresh OTAA. */
+            } else if (!lorawan_server_session_proven()) {
+                /* JoinAccept or local TX success is not server proof for this
+                 * data session. Preserve queued events until an authenticated
+                 * Class-A data-down/ACK is committed with FCntDown. */
+            } else if (!region_authority_is_gnss()) {
+                /* Launch authority permits primary health/control only. CTT
+                 * and B2B event uplinks wait for fresh GNSS authorization. */
+            } else if (gps_quiescence !=
+                           GPS_QUIESCENCE_CONFIRMED_SOFTWARE_STANDBY ||
+                       s_optical_quiescence_fault) {
                 /* Preserve the primary tracking/control exchange, but do not
                  * amplify an unresolved peripheral-current fault with a
                  * second optional TTN transmission. Leave the pending queue
@@ -841,8 +1128,8 @@ void loop() {
 
     /* Select the recovery interval from a fresh POST-load rail. The cycle's
      * initial tier can be a full volt stale after GPS + sensors + TX on a 1 F
-     * cap; using it could schedule a 1200 s FULL-tier wake even though the
-     * payload finished in REDUCED/NO_GPS and needs the 1800 s recovery window. */
+     * cap; re-reading it preserves the tier policy even though every normal
+     * tier now uses the lease-safe 1200 s cadence. */
     power_tier_t sleep_tier = power_adc_get_tier();
     uint32_t sleep_sec = burst_mode
         ? (uint32_t)BURST_SLEEP_SEC
@@ -881,22 +1168,16 @@ void loop() {
 
     /* Belt and braces only for tiers that SKIPPED the GPS block above (NO_GPS
      * and below): the module's state is unknown after a reset or a brownout,
-     * so make one bounded software-backup attempt before the idle window.
-     * The GPS-enabled path already called gps_ublox_sleep() immediately after
+     * so make one bounded quiescence attempt before the idle window. The
+     * GPS-enabled path already called gps_ublox_quiesce() immediately after
      * acquisition. Re-entering it here after a terminal failure could spend a
      * second complete three-attempt/two-reset recovery path in the same cycle,
-     * invalidating the per-call energy bound and accelerating brownout. Keep
-     * the failure result, close optional radios, sleep at most five seconds,
-     * and retry once on the next cycle instead. */
+     * invalidating the per-call energy bound and accelerating brownout. A
+     * terminal result now leaves RESET_N physically held and keeps optional
+     * radios closed, but reset-held current remains a launch measurement gate;
+     * the primary scheduler does not collapse into a cross-cycle fast retry. */
     if (!gps_attempted_this_cycle) {
-        gps_quiesced = gps_ublox_sleep();
-    }
-    if (!gps_quiesced && sleep_ms > (uint32_t)GPS_BACKUP_RETRY_SLEEP_MS) {
-        /* Unconfirmed backup is an active fault, not a normal long idle.
-         * Retry promptly and keep every optional listen window closed so a
-         * potentially awake GNSS can never hide behind 20-30 minutes of MCU
-         * sleep or spend additional surplus energy on secondary missions. */
-        sleep_ms = (uint32_t)GPS_BACKUP_RETRY_SLEEP_MS;
+        gps_quiescence = gps_ublox_quiesce();
     }
     if (s_optical_quiescence_fault &&
         s_optical_quiet_retries < SENSOR_QUIESCE_FAST_RETRIES &&
@@ -912,7 +1193,10 @@ void loop() {
      * takes its slice first (RX-only, cheaper than relaying).  Self-aborts
      * on floor/solar/freefall like the relay; time spent counts against the
      * sleep budget so the uplink cadence is preserved. */
-    if (gps_quiesced && !s_optical_quiescence_fault &&
+    if (primary_transaction_ok && !suppress_optional_after_recovery &&
+        lorawan_server_session_proven() && region_authority_is_gnss() &&
+        gps_quiescence == GPS_QUIESCENCE_CONFIRMED_SOFTWARE_STANDBY &&
+        !s_optical_quiescence_fault &&
         !burst_mode && !power_manager_freefall_pending() &&
         region_known && power_adc_get_tier() == POWER_TIER_FULL &&
         power_adc_read_solar_mv() >= RELAY_SOLAR_MIN_MV) {
@@ -946,8 +1230,11 @@ void loop() {
 #endif
     uint32_t relay_window_budget =
         sleep_ms < relay_region_budget_ms ? sleep_ms : relay_region_budget_ms;
-    if (relay_window_budget > 0u &&
-        gps_quiesced && !s_optical_quiescence_fault &&
+    if (primary_transaction_ok && !suppress_optional_after_recovery &&
+        lorawan_server_session_proven() && relay_window_budget > 0u &&
+        region_authority_is_gnss() &&
+        gps_quiescence == GPS_QUIESCENCE_CONFIRMED_SOFTWARE_STANDBY &&
+        !s_optical_quiescence_fault &&
         !burst_mode && !power_manager_freefall_pending() &&
         region_known &&
         power_adc_get_tier() == POWER_TIER_FULL &&

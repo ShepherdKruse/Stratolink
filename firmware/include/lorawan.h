@@ -3,6 +3,7 @@
 
 #include <stdint.h>
 #include <stdbool.h>
+#include "lorawan_liveness.h"
 
 /**
  * Maximum application uplink at the selected regional data rates. US915 DR1
@@ -65,11 +66,17 @@ typedef struct {
     uint32_t fCntUp;
     uint32_t fCntDown;      /* next downlink counter; durably reserved after
                              * MIC validation and before application dispatch */
-    uint32_t rxDelaySec;     /* network-assigned RECEIVE_DELAY1, 1..15 s */
+    uint32_t rxDelaySec;     /* low nibble: RECEIVE_DELAY1 1..15 s; high
+                              * CRC-protected bits: marked liveness metadata */
 } lorawan_session_t;        /* total 15 words = 60 bytes */
 
 void lorawan_export_session(lorawan_session_t* out);
 bool lorawan_import_session(const lorawan_session_t* in);
+
+/** Drop only the in-RAM OTAA session while keeping the current regional PHY.
+ *  Used after durable same-region server-liveness invalidation; unlike
+ *  lorawan_set_region(same), this is never a no-op. */
+void lorawan_invalidate_session(void);
 
 /**
  * Initialize LoRaWAN stack (default region US915, keys from secrets).
@@ -97,6 +104,19 @@ bool lorawan_send_uplink(const uint8_t* payload, uint8_t payload_len);
  */
 bool lorawan_send_uplink_port(uint8_t fport, const uint8_t* payload, uint8_t payload_len);
 
+/** Send the due fPort-1 liveness probe as ConfirmedDataUp. The pending intent
+ *  is included in the same CRC-protected transaction that reserves FCntUp
+ *  before RF. */
+bool lorawan_send_confirmed_uplink(
+    const uint8_t* payload,
+    uint8_t payload_len,
+    const lorawan_liveness_qualification_t* qualification);
+
+/** Publish the current joined session through the same checked transaction used
+ *  by counter/liveness reservations.  A failed transaction revokes server proof
+ *  by invalidating the complete RAM session, closing every optional service. */
+bool lorawan_persist_session(void);
+
 /**
  * Return true if we are joined and can send.
  */
@@ -117,6 +137,11 @@ typedef struct {
     uint8_t  last_len;
     uint8_t  last_mhdr;
     uint8_t  last_reject;              /* 0 accepted; 1-7 frame, 8 PHY config */
+    uint32_t authenticated_frames;
+    uint32_t ack_frames;
+    uint32_t complete_no_evidence;
+    uint32_t mission_aborts;
+    uint32_t local_faults;
 } lorawan_downlink_stats_t;
 
 void lorawan_downlink_get_stats(lorawan_downlink_stats_t* out);
@@ -251,8 +276,44 @@ uint8_t lorawan_b2b_pending_uplink_count(void);
 typedef struct {
     uint8_t fport;
     uint8_t len;
+    bool ack;            /* authenticated LoRaWAN FCtrl.ACK */
     uint8_t data[64];     /* decrypted FRMPayload */
 } lorawan_downlink_t;
+
+typedef enum {
+    LORAWAN_CLASS_A_AMBIGUOUS = 0,
+    LORAWAN_CLASS_A_AUTHENTICATED,
+    LORAWAN_CLASS_A_COMPLETE_NO_EVIDENCE,
+    LORAWAN_CLASS_A_PERSISTENCE_FAULT,
+} lorawan_class_a_result_t;
+
+/**
+ * Called synchronously after both healthy Class-A windows finish empty, before
+ * lorawan_receive_downlink_result() is allowed to return.  Probe callers use
+ * this boundary to re-check live mission gates and durably commit the miss, so
+ * a reset cannot turn a conclusive third miss back into interrupted ambiguity.
+ * Return false when that durable completion fails; the receive result then
+ * fails closed as PERSISTENCE_FAULT.
+ */
+typedef bool (*lorawan_probe_completion_fn)(
+    const lorawan_liveness_probe_result_t* result,
+    void* context);
+
+/**
+ * Detailed Class-A result for server-liveness qualification. COMPLETE means
+ * both windows reached their deadlines with successful arm/read/standby/PHY
+ * handling and no freefall preemption. Ordinary local faults are AMBIGUOUS;
+ * a failed durable state transaction is the distinct PERSISTENCE_FAULT.
+ * Optional rx_path_healthy_out reports this exchange's local health separately
+ * from durable server proof. It stays false on incomplete/faulted exchanges,
+ * including an authenticated frame whose PHY restore failed. Such a frame is
+ * still committed and returned for at-most-once command delivery.
+ */
+lorawan_class_a_result_t lorawan_receive_downlink_result(
+    lorawan_downlink_t* out,
+    lorawan_probe_completion_fn probe_completion = nullptr,
+    void* probe_context = nullptr,
+    bool* rx_path_healthy_out = nullptr);
 
 /**
  * Securely originate a valid LoRaWAN command for a different balloon (or
@@ -271,5 +332,36 @@ bool lorawan_b2b_queue_command(const lorawan_downlink_t* command);
  * lorawan_send_uplink().
  */
 bool lorawan_receive_downlink(lorawan_downlink_t* out);
+
+/** Persisted server-liveness state transitions used by the primary scheduler. */
+bool lorawan_server_probe_due(
+    const lorawan_liveness_qualification_t* qualification);
+bool lorawan_server_note_ordinary_primary(
+    const lorawan_liveness_qualification_t* qualification,
+    bool local_tx_succeeded);
+/* Completes only miss/ambiguous outcomes. Authenticated results are committed
+ * by lorawan_receive_downlink() with the matching durable FCntDown advance. */
+lorawan_liveness_event_t lorawan_server_complete_probe(
+    const lorawan_liveness_qualification_t* qualification,
+    const lorawan_liveness_probe_result_t* result,
+    bool* durable = nullptr);
+bool lorawan_server_abandon_probe(void);
+bool lorawan_server_recovery_due(void);
+/** True only for a joined session carrying durably authenticated server proof. */
+bool lorawan_server_session_proven(void);
+void lorawan_server_liveness_get_state(lorawan_liveness_state_t* out);
+
+typedef struct {
+    uint32_t confirmed_probe_tx;
+    uint32_t authenticated_downlinks;
+    uint32_t ack_downlinks;
+    uint32_t qualified_misses;
+    uint32_t recoveries;
+    uint32_t abandoned_probes;
+    uint32_t persistence_failures;
+} lorawan_liveness_diag_t;
+
+void lorawan_server_liveness_get_diag(lorawan_liveness_diag_t* out);
+void lorawan_server_liveness_note_recovery(bool durable_success);
 
 #endif /* LORAWAN_H */

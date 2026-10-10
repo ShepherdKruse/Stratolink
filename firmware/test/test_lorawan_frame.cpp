@@ -39,6 +39,23 @@ static size_t make_downlink(const uint8_t nwk[16], const uint8_t app[16],
     return i + sizeof(mic);
 }
 
+static size_t make_ack_only_downlink(const uint8_t nwk[16], uint32_t addr,
+                                     uint32_t counter, uint8_t* frame) {
+    size_t i = 0;
+    frame[i++] = 0x60;                 /* UnconfirmedDataDown */
+    frame[i++] = (uint8_t)addr;
+    frame[i++] = (uint8_t)(addr >> 8);
+    frame[i++] = (uint8_t)(addr >> 16);
+    frame[i++] = (uint8_t)(addr >> 24);
+    frame[i++] = 0x20;                 /* authenticated FCtrl.ACK, no FOpts */
+    frame[i++] = (uint8_t)counter;
+    frame[i++] = (uint8_t)(counter >> 8);
+    uint8_t mic[4];
+    assert(lorawan_crypto_mic(nwk, addr, counter, 1, frame, i, mic));
+    memcpy(frame + i, mic, sizeof(mic));
+    return i + sizeof(mic);
+}
+
 int main(void) {
     uint8_t app[16], nwk[16];
     from_hex("000102030405060708090a0b0c0d0e0f", app, sizeof(app));
@@ -54,6 +71,7 @@ int main(void) {
     assert(reject == LORAWAN_FRAME_REJECT_NONE);
     assert(decoded.frame_counter == 0x00010003u);
     assert(decoded.fport == 10 && decoded.len == 5);
+    assert(!decoded.ack);
     const uint8_t expected[] = {0x12, 0x34, 0x56, 0x78, 0x9a};
     assert(memcmp(decoded.data, expected, sizeof(expected)) == 0);
 
@@ -84,6 +102,7 @@ int main(void) {
     assert(!lorawan_frame_decode_downlink(
         nwk, app, addr, 0x00010003u, frame, 11, &decoded, &reject));
     assert(reject == LORAWAN_FRAME_REJECT_LENGTH);
+    assert(!decoded.ack);
     assert(!lorawan_frame_decode_downlink(
         nullptr, app, addr, 0x00010003u, frame, frame_len,
         &decoded, &reject));
@@ -97,8 +116,33 @@ int main(void) {
             assert(!lorawan_frame_decode_downlink(
                 nwk, app, addr, 0x00010003u, changed, frame_len,
                 &decoded, &reject));
+            assert(!decoded.ack);
         }
     }
+
+    /* TTN acknowledges ConfirmedDataUp with a Class-A data-down carrying the
+     * authenticated FCtrl.ACK bit. The minimum legal ACK-only frame has no
+     * FPort/FRMPayload and is exactly MHDR + FHDR + MIC = 12 bytes. */
+    uint8_t ack_only[64] = {};
+    size_t ack_len = make_ack_only_downlink(
+        nwk, addr, 0x00010004u, ack_only);
+    assert(ack_len == 12u);
+    assert(lorawan_frame_decode_downlink(
+        nwk, app, addr, 0x00010004u, ack_only, ack_len, &decoded, &reject));
+    assert(reject == LORAWAN_FRAME_REJECT_NONE);
+    assert(decoded.frame_counter == 0x00010004u);
+    assert(decoded.ack);
+    assert(decoded.fport == 0u && decoded.len == 0u);
+
+    /* The ACK header bit is not evidence until the MIC gate passes. */
+    ack_only[5] ^= 0x20u;
+    assert(!lorawan_frame_decode_downlink(
+        nwk, app, addr, 0x00010004u, ack_only, ack_len, &decoded, &reject));
+    assert(reject == LORAWAN_FRAME_REJECT_MIC);
+    assert(!decoded.ack);
+
+    assert(lorawan_frame_uplink_mhdr(false) == 0x40u);
+    assert(lorawan_frame_uplink_mhdr(true) == 0x80u);
 
     /* Synthetic join-accept generated independently by
      * generate_lorawan_crypto_vectors.mjs with Node/OpenSSL. The clear body is
