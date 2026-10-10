@@ -27,6 +27,7 @@
     "lib/telemetry/fetchMergedTelemetry.ts",
     "lib/telemetry/missionWindow.ts",
     "lib/supabase.ts",
-    "scripts/compute_forecasts.ts"
+    "scripts/compute_forecasts.ts",
+    "scripts/plan_forecasts.ts"
   ]
 }

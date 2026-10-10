@@ -334,6 +334,21 @@ export async function fetchWindCube(opts: {
     if (cubeDir && opts.deviceId) {
         const cube = await readCubeFromDir(cubeDir, opts.deviceId, kind);
         if (cube) return cube;
+        /* Worker mode is strict: the runner's freshly built cubes are the only
+         * wind source — never fall through to a stale Blob cube or a live
+         * Open-Meteo fetch. The ingest writes no reconstruction cube for a device
+         * with a single fix; if the compute nevertheless sees two or more (its
+         * loader merges alias ids and keeps rows the ingest filters out) the
+         * reconstruction degrades to the forecast tube, loudly. A missing forecast
+         * cube is an ingest failure. */
+        if (kind === 'reconstruction') {
+            const fc = await readCubeFromDir(cubeDir, opts.deviceId, 'forecast');
+            if (fc) {
+                console.warn(`  ${opts.deviceId}: no reconstruction cube in ${cubeDir} — reconstructing through the forecast tube`);
+                return fc;
+            }
+        }
+        throw new Error(`no ${kind} cube for ${opts.deviceId} in ${cubeDir}`);
     }
     if (opts.deviceId) {
         const cube = await readCubeFromBlob(opts.deviceId, kind);

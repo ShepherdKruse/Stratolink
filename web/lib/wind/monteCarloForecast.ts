@@ -449,9 +449,14 @@ export async function computeMonteCarloForecast(input: MonteCarloForecastInput):
     const fcCube = await fetchWindCube({
         bounds: gridBounds, levelHpa, startMs, endMs, gridStep, deviceId: input.deviceId, kind: 'forecast',
     });
-    const reconCube = await fetchWindCube({
-        bounds: gridBounds, levelHpa, startMs, endMs, gridStep, deviceId: input.deviceId, kind: 'reconstruction',
-    });
+    /* A single fix (or a launch-record-only device) has no gap to bridge:
+     * computePathReconstruction returns the point without sampling any wind, so
+     * the ingest writes no reconstruction cube for it — don't go looking for one. */
+    const reconCube = input.gpsFixes.length >= 2
+        ? await fetchWindCube({
+            bounds: gridBounds, levelHpa, startMs, endMs, gridStep, deviceId: input.deviceId, kind: 'reconstruction',
+        })
+        : fcCube;
 
     /* Neutral bias: trust the GFS prediction and jitter the ensemble around it
      * (the chord-derived bias was unreliable here — see neutralBias). */

@@ -161,6 +161,12 @@ export type StratolinkForecast = {
         /** True when the reconstruction ran out of call budget and left some gaps
          *  as straight-line placeholders — recompute soon to fill them in. */
         reconstruction_partial?: boolean;
+        /** Ensemble member cubes the compute found per source (`gefs` = physics
+         *  GEFS, `aigefs` = GraphCast AI). Stamped by the worker (compute_forecasts). */
+        members?: Record<string, number>;
+        /** Members each source was configured to build (from the ingest manifest);
+         *  fewer `members` than this means the ingest step was cut short. */
+        members_expected?: Record<string, number>;
     };
 };
 

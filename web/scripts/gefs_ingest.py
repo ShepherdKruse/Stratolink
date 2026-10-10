@@ -2,7 +2,8 @@
 """
 GEFS ensemble -> per-member WindCubes.
 
-For each active balloon, build ONE cube per GEFS member ({device}-mNN.slwc) so the
+For each planned balloon (see gfs_ingest.planned_devices), build ONE cube per
+GEFS member ({device}-mNN.slwc) so the
 forecast can integrate a real trajectory per member (flow-dependent spread) instead
 of jittering a single deterministic field. Each member's cube spans the SAME box /
 time window; the compute streams them one at a time (the binary .slwc format keeps
@@ -13,14 +14,19 @@ bracket_levels), 0.5 deg GEFS (pgrb2ap5), time-correct: future from the latest
 cycle's forecast hours, the past gap from the cycle valid then. Reuses gfs_ingest
 for Supabase, bounds, grid step, and the .slwc packer.
 
-Env: NEXT_PUBLIC_SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY.
+Progress is appended to the ingest manifest after every member, and the script
+exits non-zero when any device ends with fewer members than configured, so the
+workflow step (continue-on-error) shows red and the job summary / healthcheck
+report the run as degraded instead of a silently thinner ensemble.
+
+Env: NEXT_PUBLIC_SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY, FORECAST_PLAN, FORECAST_MANIFEST.
 Run: python3 scripts/gefs_ingest.py [device]
      GEFS_N_MEMBERS=4 python3 scripts/gefs_ingest.py stratolink-3   (fast subset for testing)
 """
 import io
 import os
 import sys
-import tempfile
+import time
 from datetime import datetime, timedelta, timezone
 from concurrent.futures import ThreadPoolExecutor
 
@@ -231,9 +237,13 @@ def build_device(device, fixes, target_p, latest):
     print(f"  {device}: GEFS {len(MEMBERS)} members TUBE @ {TUBE_STEP}° ±{g.TUBE_HALF_DEG}°, "
           f"interp {target_p:.1f}mb ({lo}↔{hi}), gap {gap_h:.0f}h, "
           f"{len(schedule)} slices fix→+{cov_h:.0f}h{'' if reached_now else ' (capped)'}", flush=True)
+    built = 0
     for mi, mem in enumerate(MEMBERS):
         cube, n = member_cube_tube(mem, schedule, slice_ms, last_lat, last_lon, target_p, latest, now)
         g.write_cube(device, f"-m{mi:02d}", cube, n, n, f"m{mi:02d}")
+        built += 1
+        g.manifest_device("gefs", device, built=built, expected=len(MEMBERS))   # per member: survives a step kill
+    return built
 
 
 def build_device_static(device, fixes, target_p, latest, now, last_fix, schedule):
@@ -246,38 +256,49 @@ def build_device_static(device, fixes, target_p, latest, now, last_fix, schedule
     rows_idx = np.round((90.0 - lats) / 0.5).astype(int).clip(0, 360)
     cols_idx = (np.round((lons % 360.0) / 0.5).astype(int)) % 720
     print(f"  {device}: GEFS {len(MEMBERS)} members STATIC box step {step}°", flush=True)
+    built = 0
     for mi, mem in enumerate(MEMBERS):
         cube = member_cube(mem, schedule, lats, lons, rows_idx, cols_idx, step, target_p, latest, now)
         g.write_cube(device, f"-m{mi:02d}", cube, len(lats), len(lons), f"m{mi:02d}")
+        built += 1
+        g.manifest_device("gefs", device, built=built, expected=len(MEMBERS))
+    return built
 
 
 def main():
     only = sys.argv[1] if len(sys.argv) > 1 else None
-    devices = [(only, None)] if only else g.active_devices()
+    devices = g.planned_devices(only)
+    g.manifest_source_begin("gefs", members_expected=len(MEMBERS))
     if not devices:
-        print("no active devices")
+        print("no devices to build — no NOAA download", flush=True)
+        g.manifest_source_end("gefs")
         return
     latest = gefs_latest_cycle()
-    print(f"latest GEFS cycle {latest.isoformat()} | members {len(MEMBERS)} | devices {[d for d, _ in devices]}")
+    print(f"latest GEFS cycle {latest.isoformat()} | members {len(MEMBERS)} | devices {[d for d, _ in devices]}", flush=True)
+    incomplete = []
     for d, launched in devices:
+        t0 = time.time()
         try:
             fixes = g.mission_track(d, launched)
             if len(fixes) < 1:
-                print(f"  {d}: no fixes, skipping")
+                print(f"  {d}: no fixes, skipping", flush=True)
+                g.manifest_device("gefs", d, built=0, expected=len(MEMBERS), error="no fixes")
+                incomplete.append(d)
                 continue
-            build_device(d, fixes, g.float_pressure(d), latest)
+            built = build_device(d, fixes, g.float_pressure(d), latest)
+            g.manifest_device("gefs", d, built=built, expected=len(MEMBERS), seconds=round(time.time() - t0, 1))
+            if built < len(MEMBERS):
+                incomplete.append(d)
         except Exception as e:  # noqa: BLE001
-            print(f"  {d}: FAILED {e}")
-
-    # Also build AIGEFS (GraphCast AI) member cubes — a model-independent source
-    # pooled into the same ensemble (see aigefs_ingest). Best-effort: a failure
-    # here must NOT break the physics-GEFS / GFS pipeline, so it's fully isolated.
-    try:
-        import aigefs_ingest
-        print("--- AIGEFS (AI ensemble) ---")
-        aigefs_ingest.run(only)
-    except Exception as e:  # noqa: BLE001
-        print(f"AIGEFS ingest failed (non-fatal, GEFS/GFS unaffected): {e}")
+            print(f"  {d}: FAILED {e}", flush=True)
+            g.manifest_device("gefs", d, error=str(e), seconds=round(time.time() - t0, 1))
+            incomplete.append(d)
+    g.manifest_source_end("gefs")
+    # AIGEFS (GraphCast AI) members are built by scripts/aigefs_ingest.py in its
+    # own workflow step with its own timeout, so a slow AI ingest can no longer
+    # eat this step's budget (nor vice versa).
+    if incomplete:
+        raise SystemExit(f"GEFS ingest incomplete for {len(incomplete)} device(s): {incomplete}")
 
 
 if __name__ == "__main__":
