@@ -23,24 +23,37 @@ export function applyPortalLabelVisibility(map: MapboxMap, stage: GlobeStage) {
     }
 }
 
-/** The footer and dashboard share this Mapbox instance throughout navigation. */
-export function usePortalCamera(mapRef: RefObject<MapRef | null>, stage: GlobeStage, ready: boolean, balloons: Array<{lat: number; lon: number}>) {
+const fleetCenter = (fleet: Array<{lat: number; lon: number}>): [number, number] => {
+    const x = fleet.reduce((sum, p) => sum + Math.cos(p.lon * Math.PI / 180), 0);
+    const y = fleet.reduce((sum, p) => sum + Math.sin(p.lon * Math.PI / 180), 0);
+    return [Math.atan2(y, x) * 180 / Math.PI, Math.min(45, Math.max(-45, fleet.reduce((sum, p) => sum + p.lat, 0) / fleet.length))];
+};
+const RECENTER_MS = 1200;
+
+/** The footer and dashboard share this Mapbox instance throughout navigation.
+ *  `ready`: the basemap has drawn (the footer globe shows from here, balloons or not).
+ *  `fleetReady`: balloon positions are loaded (the globe then pans to the fleet). */
+export function usePortalCamera(mapRef: RefObject<MapRef | null>, stage: GlobeStage, ready: boolean, fleetReady: boolean, balloons: Array<{lat: number; lon: number}>) {
     const center = useRef<[number, number]>([-55, 25]);
     const configured = useRef(false);
     const lastStage = useRef(stage);
     const points = useRef(balloons);
     points.current = balloons;
+    const previewVisibleRef = useRef(false);
+    /* A pending smooth pan to the fleet, applied inside the drift loop so the two never fight. */
+    const retarget = useRef<{ delta: [number, number]; start: number; applied: number } | null>(null);
     useEffect(() => {
         const map = mapRef.current?.getMap();
         if (!map || !ready || stage === 'standalone') return;
         let frame = 0;
         let observer: ResizeObserver | undefined;
         let onPreviewReady: (() => void) | undefined;
-        let previewVisible = false;
+        let previewVisible = previewVisibleRef.current;
         let updateRotation = () => {};
         function receive(event: MessageEvent) {
             if (event.origin === location.origin && event.source === window.parent && event.data?.channel === 'stratolink-globe' && typeof event.data.previewVisible === 'boolean') {
                 previewVisible = event.data.previewVisible;
+                previewVisibleRef.current = previewVisible;
                 updateRotation();
             }
         }
@@ -53,13 +66,10 @@ export function usePortalCamera(mapRef: RefObject<MapRef | null>, stage: GlobeSt
         if (stage === 'footer') {
             map.stop();
             if (!configured.current || lastStage.current !== 'footer') {
-                const fleet = points.current;
-                if (fleet.length) {
-                    const x = fleet.reduce((sum, p) => sum + Math.cos(p.lon * Math.PI / 180), 0);
-                    const y = fleet.reduce((sum, p) => sum + Math.sin(p.lon * Math.PI / 180), 0);
-                    center.current = [Math.atan2(y, x) * 180 / Math.PI, Math.min(45, Math.max(-45, fleet.reduce((sum, p) => sum + p.lat, 0) / fleet.length))];
-                }
+                // Centre on the fleet if its positions already arrived; otherwise the fleet effect below pans there later.
+                if (fleetReady && points.current.length) center.current = fleetCenter(points.current);
                 configured.current = true;
+                retarget.current = null;
             }
             const layout = () => { map.resize(); map.jumpTo({ center: center.current, zoom: globeZoom(), bearing: 0, pitch: 0, padding: {top:0,bottom:0,left:0,right:0} }); };
             layout();
@@ -72,7 +82,18 @@ export function usePortalCamera(mapRef: RefObject<MapRef | null>, stage: GlobeSt
                     const elapsed = Math.min(now - previous, 64);
                     previous = now;
                     if (previewVisible && !document.hidden) {
-                        center.current = [(center.current[0] + elapsed * .002) % 360, center.current[1]];
+                        let [lon, lat] = center.current;
+                        lon += elapsed * .002;
+                        const pan = retarget.current;
+                        if (pan) {
+                            const t = Math.min(1, (now - pan.start) / RECENTER_MS);
+                            const eased = t * t * (3 - 2 * t);
+                            lon += pan.delta[0] * (eased - pan.applied);
+                            lat += pan.delta[1] * (eased - pan.applied);
+                            pan.applied = eased;
+                            if (t >= 1) retarget.current = null;
+                        }
+                        center.current = [lon % 360, lat];
                         map.jumpTo({ center: center.current });
                     }
                     if (previewVisible && !document.hidden) frame = requestAnimationFrame(drift);
@@ -90,7 +111,6 @@ export function usePortalCamera(mapRef: RefObject<MapRef | null>, stage: GlobeSt
             // A return from a dark dashboard first restores the light style.
             // Show the footer globe only after that style has finished drawing.
             const timing = ((window as unknown as { __mapTiming?: Record<string, number> }).__mapTiming ??= {});
-            timing.fleetReady ??= Math.round(performance.now());
             onPreviewReady = () => { timing.readySent ??= Math.round(performance.now()); notifyGlobeParent('ready'); };
             map.once('idle', onPreviewReady);
             map.triggerRepaint();
@@ -120,6 +140,27 @@ export function usePortalCamera(mapRef: RefObject<MapRef | null>, stage: GlobeSt
         }
         document.addEventListener('visibilitychange', updateRotation);
         lastStage.current = stage;
+        updateRotation();
         return () => { cancelAnimationFrame(frame); observer?.disconnect(); if (onPreviewReady) map.off('idle', onPreviewReady); window.removeEventListener('message', receive); document.removeEventListener('visibilitychange', updateRotation); map.stop(); };
     }, [mapRef, stage, ready]);
+
+    /* Balloon positions arrived after the globe was already showing: pan to the fleet instead of jumping. */
+    useEffect(() => {
+        const map = mapRef.current?.getMap();
+        if (!map || stage !== 'footer' || !ready || !fleetReady || !configured.current) return;
+        const fleet = points.current;
+        if (!fleet.length) return;
+        const timing = ((window as unknown as { __mapTiming?: Record<string, number> }).__mapTiming ??= {});
+        timing.fleetReady ??= Math.round(performance.now());
+        const target = fleetCenter(fleet);
+        const delta: [number, number] = [((target[0] - center.current[0] + 540) % 360) - 180, target[1] - center.current[1]];
+        if (Math.abs(delta[0]) < .01 && Math.abs(delta[1]) < .01) return;
+        const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+        if (previewVisibleRef.current && !reduced) {
+            retarget.current = { delta, start: performance.now(), applied: 0 };
+        } else {
+            center.current = target;
+            map.jumpTo({ center: target });
+        }
+    }, [mapRef, stage, ready, fleetReady]);
 }
