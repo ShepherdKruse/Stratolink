@@ -2,15 +2,18 @@
  * useForecastPath — the balloon's predicted next track for the map.
  *
  * Reads the pre-computed Monte-Carlo forecast for a device from
- * `/api/forecast` (Vercel Blob, refreshed by cron; computed on demand when
- * none is cached) and returns the pieces the map draws: the nominal path,
- * the ensemble spaghetti, and the 50/90% confidence ellipses.
+ * `/api/forecast` (private Vercel Blob, written by the GitHub Actions worker)
+ * and returns the pieces the map draws: the nominal path, the ensemble
+ * spaghetti, the 50/90% confidence ellipses and the reconstructed history.
+ *
+ * `view: 'history'` (balloons that are no longer flying) requests only the
+ * reconstructed track, so every forward-looking field comes back empty.
  *
  * Returns empty arrays (never throws) when no forecast exists yet, so the
  * map's forecast layers simply don't render.
  */
 import { useEffect, useState } from 'react';
-import { forecastRequests } from '@/lib/telemetry/forecastRequests';
+import { forecastRequests, type ForecastView } from '@/lib/telemetry/forecastRequests';
 
 /** [lon, lat] pairs, forecast origin → predicted endpoint. */
 export type ForecastPath = Array<[number, number]>;
@@ -125,7 +128,7 @@ function parseDivergence(raw: unknown): UseForecastPathResult['divergence'] {
     };
 }
 
-export function useForecastPath(deviceId: string | null): UseForecastPathResult {
+export function useForecastPath(deviceId: string | null, view: Exclude<ForecastView, 'path'> = 'full'): UseForecastPathResult {
     const [state, setState] = useState(EMPTY);
     const [loading, setLoading] = useState(false);
 
@@ -183,8 +186,8 @@ export function useForecastPath(deviceId: string | null): UseForecastPathResult 
                 endT,
                 generatedAt: typeof data?.generated_at === 'string' ? data.generated_at : null,
             });
-        }, true);
-    }, [deviceId]);
+        }, true, view);
+    }, [deviceId, view]);
 
     return { ...state, loading };
 }

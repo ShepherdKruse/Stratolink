@@ -1,13 +1,15 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import { createForecastApi } from './forecastApi.js';
+import { createForecastApi, forecastEtag } from './forecastApi.js';
 import { readPrivateForecast } from './forecastStorage.js';
 
 function response() {
-  return { statusCode: 0, headers: {}, setHeader(k, v) { this.headers[k] = v; }, end(body) { this.body = JSON.parse(body); } };
+  return { statusCode: 0, headers: {}, setHeader(k, v) { this.headers[k] = v; }, end(body) { this.body = body === undefined ? undefined : JSON.parse(body); } };
 }
-const request = (url = '/api/forecast?device=stratolink-3', method = 'GET') => ({ url, method });
+const request = (url = '/api/forecast?device=stratolink-3', method = 'GET', headers = {}) => ({ url, method, headers });
 const fixture = { generated_at: '2026-10-06T18:00:00Z', nominal_path: [[-122.40, 37.78], [-120, 40]], metadata: { secret: 'private' }, observed: { launch: { lat: 37.78, lon: -122.40 }, reconstructed_path: [] } };
+const CACHEABLE = 'public, s-maxage=300, stale-while-revalidate=3600';
+const generatedMs = Date.parse(fixture.generated_at);
 
 test('forecast serves sanitized private stored data only for a connected public device', async () => {
   const handler = createForecastApi({ isPublicDevice: async () => true, readForecast: async () => fixture });
@@ -16,7 +18,8 @@ test('forecast serves sanitized private stored data only for a connected public 
   assert.deepEqual(res.body.nominal_path, [[-122.44, 37.76], [-120, 40]]);
   assert.equal(res.body.metadata, undefined);
   assert.equal(res.body.observed.launch, undefined);
-  assert.equal(res.headers['Cache-Control'], 'no-store');
+  assert.equal(res.headers['Cache-Control'], CACHEABLE);
+  assert.equal(res.headers['ETag'], `W/"full-${generatedMs}"`);
 });
 
 test('fleet path responses preserve privacy and omit detail geometry and metadata', async () => {
@@ -25,12 +28,63 @@ test('fleet path responses preserve privacy and omit detail geometry and metadat
   const path = response(); await handler(request('/api/forecast?device=stratolink-3&view=path'), path);
   const full = response(); await handler(request(), full);
   assert.equal(path.statusCode, 200);
-  assert.equal(path.headers['Cache-Control'], 'no-store');
+  assert.equal(path.headers['Cache-Control'], CACHEABLE);
   assert.deepEqual(path.body, { generated_at: raw.generated_at, nominal_path: full.body.nominal_path });
   assert.deepEqual(path.body.nominal_path, [[-122.44, 37.76], [-120, 40]]);
   assert.deepEqual(full.body.ensemble, raw.ensemble);
   assert.deepEqual(full.body.ellipses, raw.ellipses);
   assert.equal(raw.nominal_path[0][0], -122.40);
+  assert.notEqual(path.headers['ETag'], full.headers['ETag']);
+});
+
+test('history responses carry only the reconstructed track, with privacy applied', async () => {
+  const raw = { ...fixture, ensemble: [[[10, 20], [30, 40]]], stale_gps: { gap_hours: 400 }, predicted_hindcast: { path: [[1, 2], [3, 4]] },
+    observed: { launch: { name: 'secret' }, reconstructed_path: [[-122.415, 37.775], [0, 45]], reconstructed_track: [{ lon: -122.415, lat: 37.775, time_utc: 'then' }, { lon: 0, lat: 45, time_utc: 'now' }] } };
+  const handler = createForecastApi({ isPublicDevice: async () => true, readForecast: async () => raw });
+  const res = response(); await handler(request('/api/forecast?device=stratolink-3&view=history'), res);
+  assert.equal(res.statusCode, 200);
+  assert.deepEqual(Object.keys(res.body).sort(), ['generated_at', 'observed']);
+  assert.deepEqual(Object.keys(res.body.observed).sort(), ['reconstructed_path', 'reconstructed_track']);
+  assert.deepEqual(res.body.observed.reconstructed_path, [[-122.44, 37.76], [0, 45]]);
+  assert.deepEqual(res.body.observed.reconstructed_track[0], { lon: -122.44, lat: 37.76, time_utc: 'then', location_approximate: true });
+  assert.ok(!JSON.stringify(res.body).includes('secret'));
+  assert.equal(res.headers['ETag'], `W/"history-${generatedMs}"`);
+});
+
+test('a matching If-None-Match answers 304 with no body and the same caching headers', async () => {
+  const handler = createForecastApi({ isPublicDevice: async () => true, readForecast: async () => fixture });
+  const etag = forecastEtag(fixture, 'full');
+  for (const header of [etag, etag.replace(/^W\//, ''), `"other", ${etag}`, '*']) {
+    const res = response(); await handler(request(undefined, 'GET', { 'if-none-match': header }), res);
+    assert.equal(res.statusCode, 304, header);
+    assert.equal(res.body, undefined);
+    assert.equal(res.headers['ETag'], etag);
+    assert.equal(res.headers['Cache-Control'], CACHEABLE);
+  }
+  for (const header of ['W/"full-1"', `W/"path-${generatedMs}"`, '']) {
+    const res = response(); await handler(request(undefined, 'GET', { 'if-none-match': header }), res);
+    assert.equal(res.statusCode, 200, header);
+    assert.deepEqual(res.body.nominal_path, [[-122.44, 37.76], [-120, 40]]);
+  }
+  const regenerated = createForecastApi({ isPublicDevice: async () => true, readForecast: async () => ({ ...fixture, generated_at: '2026-10-07T00:00:00Z' }) });
+  const res = response(); await regenerated(request(undefined, 'GET', { 'if-none-match': etag }), res);
+  assert.equal(res.statusCode, 200);
+  assert.equal(res.headers['ETag'], `W/"full-${Date.parse('2026-10-07T00:00:00Z')}"`);
+});
+
+test('pending, unknown-device and failed reads are never cacheable', async () => {
+  const cases = [
+    [createForecastApi({ isPublicDevice: async () => true, readForecast: async () => null }), 202],
+    [createForecastApi({ isPublicDevice: async () => false, readForecast: async () => fixture }), 404],
+    [createForecastApi({ isPublicDevice: async () => true, readForecast: async () => { throw new Error('outage'); } }), 503],
+    [createForecastApi({ isPublicDevice: async () => true, readForecast: async () => fixture }), 400, '/api/forecast?device=stratolink-3&view=raw'],
+  ];
+  for (const [handler, status, url] of cases) {
+    const res = response(); await handler(request(url, 'GET', { 'if-none-match': '*' }), res);
+    assert.equal(res.statusCode, status);
+    assert.equal(res.headers['Cache-Control'], 'no-store');
+    assert.equal(res.headers['ETag'], undefined);
+  }
 });
 
 test('fleet path requests retain public-device gating and pending responses', async () => {
@@ -45,7 +99,7 @@ test('fleet path requests retain public-device gating and pending responses', as
 
 test('unsupported forecast views fail before registry or storage access', async () => {
   const handler = createForecastApi({ isPublicDevice: async () => { throw Error('must not read'); } });
-  for (const view of ['', 'raw', 'metadata', 'PATH']) {
+  for (const view of ['', 'raw', 'metadata', 'PATH', 'HISTORY']) {
     const res = response(); await handler(request(`/api/forecast?device=stratolink-3&view=${view}`), res);
     assert.equal(res.statusCode, 400);
   }

@@ -1,11 +1,10 @@
 import { integrateBalloonPathT } from './balloonIntegrate';
-import { boundsForForecast, snapPressureHpa } from './fetchWindGrid';
+import { snapPressureHpa } from './fetchWindGrid';
 import type { ForecastEllipse, ForecastGpsFix, MonteCarloForecastInput, StratolinkForecast } from './forecastTypes';
 import { GAP_WIND_MODE, gpsGapHours, STALE_GPS_THRESHOLD_H } from './staleGpsExtrapolation';
 import { computePathReconstruction, type GapCacheEntry, type PathReconstructionResult } from './pathReconstruction';
 import { hindcastInputHash, readGapCache, readStoredHindcast, storeHindcast, writeGapCache } from './hindcastStorage';
-import { windAt, type GfsGrid } from './gfsGrid';
-import { centerTrack, chooseGridStep, fetchMemberCube, fetchWindCube, listMemberCubes, sampleWind, type WindCube } from './windCube';
+import { centerTrack, fetchMemberCube, fetchWindCube, listMemberCubes, sampleWind, type WindCube } from './windCube';
 
 const CFG = {
     N_ENSEMBLE: 200,
@@ -57,68 +56,6 @@ export type BiasCorrection = {
     rawDirOffsetDeg: number;
     capped: boolean;
 };
-
-export function computeBias(gpsFixes: ForecastGpsFix[], gfs: GfsGrid): BiasCorrection {
-    const samples: Array<{ speedMult: number; dirOffset: number }> = [];
-
-    for (let i = 0; i < gpsFixes.length - 1; i++) {
-        const a = gpsFixes[i];
-        const b = gpsFixes[i + 1];
-        const t0 = new Date(a.time_utc).getTime() / 1000;
-        const t1 = new Date(b.time_utc).getTime() / 1000;
-        const dt = t1 - t0;
-        if (dt < 60) continue;
-        /* Frozen GPS: a stuck receiver re-sends the identical fix at later
-         * timestamps. Zero displacement over nonzero dt ⇒ a bogus 0 m/s speed and
-         * an undefined (0°) heading that would pollute the residuals — skip it. */
-        if (b.lat === a.lat && b.lon === a.lon) continue;
-
-        const midLat = (a.lat + b.lat) / 2;
-        const midLon = (a.lon + b.lon) / 2;
-        const cosLat = Math.cos((midLat * Math.PI) / 180);
-
-        const uObs = ((b.lon - a.lon) * 111_320 * cosLat) / dt;
-        const vObs = ((b.lat - a.lat) * 111_320) / dt;
-        const { u: uGfs, v: vGfs } = windAt(gfs, midLat, midLon);
-
-        const sObs = Math.hypot(uObs, vObs);
-        const sGfs = Math.hypot(uGfs, vGfs);
-        if (sGfs < 0.5) continue;
-
-        const dirObs = (Math.atan2(vObs, uObs) * 180) / Math.PI;
-        const dirGfs = (Math.atan2(vGfs, uGfs) * 180) / Math.PI;
-        let dirDiff = dirObs - dirGfs;
-        while (dirDiff > 180) dirDiff -= 360;
-        while (dirDiff < -180) dirDiff += 360;
-
-        samples.push({ speedMult: sObs / sGfs, dirOffset: dirDiff });
-    }
-
-    if (samples.length === 0) {
-        return {
-            speedMult: 1,
-            dirOffsetDeg: 0,
-            nSamples: 0,
-            rawSpeedMult: 1,
-            rawDirOffsetDeg: 0,
-            capped: false,
-        };
-    }
-
-    const speedMult = samples.reduce((s, x) => s + x.speedMult, 0) / samples.length;
-    const dirOffsetDeg = samples.reduce((s, x) => s + x.dirOffset, 0) / samples.length;
-    const speedClamped = Math.max(CFG.SPEED_CAP[0], Math.min(CFG.SPEED_CAP[1], speedMult));
-    const dirClamped = Math.max(-CFG.DIR_CAP_DEG, Math.min(CFG.DIR_CAP_DEG, dirOffsetDeg));
-
-    return {
-        speedMult: speedClamped,
-        dirOffsetDeg: dirClamped,
-        nSamples: samples.length,
-        rawSpeedMult: speedMult,
-        rawDirOffsetDeg: dirOffsetDeg,
-        capped: speedClamped !== speedMult || dirClamped !== dirOffsetDeg,
-    };
-}
 
 /** Bias + data-driven uncertainty from the cube. Same residual math as
  *  `computeBias`, but each fix pair is compared to the wind at THAT past time and
@@ -239,6 +176,15 @@ function downsampleTrack(track: Array<[number, number]>, maxPts: number): Array<
     for (let i = 0; i < track.length; i += step) out.push(track[i]);
     if (out[out.length - 1] !== track[track.length - 1]) out.push(track[track.length - 1]);
     return out;
+}
+
+/** Per-gap scalar metadata for the stored forecast. The corridor occupancy
+ *  footprint and the per-fraction ellipse rings (~100 KB per forecast) are not
+ *  stored: nothing read them from the forecast object (`sanitizeForecast` never
+ *  forwarded `reconstruction_gaps` at all), and the hindcast cache keeps the full
+ *  reconstruction for the compute's own reuse. */
+function gapSummaries(gaps: PathReconstructionResult['gaps']): NonNullable<StratolinkForecast['observed']['reconstruction_gaps']> {
+    return gaps.map(({ occupancy: _occupancy, ellipses: _ellipses, ...gap }) => gap);
 }
 
 /**
@@ -423,17 +369,6 @@ export async function computeMonteCarloForecast(input: MonteCarloForecastInput):
     let recentFixes = input.gpsFixes.filter((f) => new Date(f.time_utc).getTime() >= recentCutoffMs);
     if (recentFixes.length < 5) recentFixes = input.gpsFixes.slice(-Math.min(50, input.gpsFixes.length));
 
-    /* The bounding box must contain everywhere the balloon goes: the recent track
-     * + (when stale) the dead-reckon out to "now" + the forward horizon. Keep it
-     * large enough to contain a long dead-reckon — a member that exits the grid
-     * gets edge-clamped (wrong) winds, worse than coarse resolution — and let
-     * chooseGridStep pick a coarser step so the single fetch stays within ~1-2
-     * requests regardless of box size. */
-    const marginPts = recentFixes.map((p) => ({ lat: p.lat, lon: p.lon }));
-    const boundHours = totalHours + (stale ? Math.min(gapH, 72) : 0);
-    const gridBounds = boundsForForecast(marginPts, recentFixes, boundHours);
-    const gridStep = chooseGridStep(gridBounds);
-
     /* ONE space-time wind field for the whole compute (replaces the snapshot grid
      * + per-point dead-reckon fetches). startMs = the last fix when dead-reckoning,
      * else "now"; endMs = the forecast horizon end. */
@@ -445,13 +380,10 @@ export async function computeMonteCarloForecast(input: MonteCarloForecastInput):
      *     hours (so the forward forecast evolves), at the finest grid that fits.
      *     Drives the forward forecast, the ensemble, the bias fit and the origin.
      *   - reconCube: full-mission, 3-hourly cube driving only the historical
-     *     reconstruction. Both fall back to the full cube / Open-Meteo if absent. */
-    const fcCube = await fetchWindCube({
-        bounds: gridBounds, levelHpa, startMs, endMs, gridStep, deviceId: input.deviceId, kind: 'forecast',
-    });
-    const reconCube = await fetchWindCube({
-        bounds: gridBounds, levelHpa, startMs, endMs, gridStep, deviceId: input.deviceId, kind: 'reconstruction',
-    });
+     *     reconstruction. Both are read from WIND_CUBE_DIR (or the legacy Blob
+     *     cubes/ prefix); a missing cube throws — there is no live fallback. */
+    const fcCube = await fetchWindCube({ deviceId: input.deviceId, kind: 'forecast' });
+    const reconCube = await fetchWindCube({ deviceId: input.deviceId, kind: 'reconstruction' });
 
     /* Neutral bias: trust the GFS prediction and jitter the ensemble around it
      * (the chord-derived bias was unreliable here — see neutralBias). */
@@ -644,9 +576,6 @@ export async function computeMonteCarloForecast(input: MonteCarloForecastInput):
         );
     }
 
-    /* wind_field debug artifact = the "now" slice of the forecast cube. */
-    const nowGrid = fcCube.grids[Math.min(nowIdx, fcCube.grids.length - 1)];
-
     return {
         generated_at: nowISO,
         forecast_horizon_h: totalHours,
@@ -702,18 +631,8 @@ export async function computeMonteCarloForecast(input: MonteCarloForecastInput):
             reconstructed_path: reconstruction.reconstructed_path,
             reconstructed_track: reconstruction.reconstructed_track,
             gap_bridges: reconstruction.gap_bridges,
-            reconstruction_gaps: reconstruction.gaps,
+            reconstruction_gaps: gapSummaries(reconstruction.gaps),
             reconstruction_input_hash: reconstructionHash,
-        },
-        wind_field: {
-            lat0: nowGrid.lat0,
-            dLat: nowGrid.dLat,
-            nLat: nowGrid.nLat,
-            lon0: nowGrid.lon0,
-            dLon: nowGrid.dLon,
-            nLon: nowGrid.nLon,
-            U: Array.from(nowGrid.U).map(round1),
-            V: Array.from(nowGrid.V).map(round1),
         },
         metadata: {
             n_ensemble: ensemble.length,
