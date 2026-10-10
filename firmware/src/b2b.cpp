@@ -126,6 +126,7 @@ bool b2b_parse(const uint8_t* buf, int n, b2b_frame_t* out) {
     out->len    = len;
     memcpy(out->payload, buf + B2B_HDR_LEN, len);
     out->queued_rtc_sec = 0;
+    out->age_rounding_credit = 0;
     return true;
 }
 
@@ -185,8 +186,18 @@ bool b2b_refresh_authenticated_age(
     b2b_frame_t updated = *frame;
     uint8_t body_len = b2b_authenticated_body_len(&updated);
     if (!body_len) return false;
-    uint32_t elapsed_min = b2b_age_upper_minutes(
-        now_rtc_sec - updated.queued_rtc_sec);
+    const uint64_t minute_units = (uint64_t)B2B_RTC_MIN_LSI_HZ * 60u;
+    uint64_t elapsed_units =
+        (uint64_t)(now_rtc_sec - updated.queued_rtc_sec) *
+        B2B_RTC_CONFIGURED_LSI_HZ;
+    uint32_t elapsed_min = elapsed_units > updated.age_rounding_credit
+        ? (uint32_t)((elapsed_units - updated.age_rounding_credit +
+                      minute_units - 1u) / minute_units)
+        : 0u;
+    /* A partial minute is charged immediately for freshness, then its unused
+     * fraction pays for subsequent retries instead of charging it again. */
+    updated.age_rounding_credit = (uint32_t)(updated.age_rounding_credit +
+        (uint64_t)elapsed_min * minute_units - elapsed_units);
     for (uint8_t i = 0; i < body_len; i += B2B_CRUMB_LEN) {
         uint8_t* age = &updated.payload[i + B2B_CRUMB_LEN - 1u];
         uint32_t remaining = 255u - *age;
@@ -316,6 +327,7 @@ b2b_result_t b2b_ingest(
     b2b_frame_t nf = *f;
     nf.ttl = (uint8_t)(f->ttl - 1);              /* ttl 1 goes out as ttl 0 */
     nf.queued_rtc_sec = now_rtc_sec;
+    nf.age_rounding_credit = 0;
     b->fwd[b->fwd_tail] = nf;
     b->fwd_tail = (uint8_t)((b->fwd_tail + 1) % B2B_FWD_N);
     b->fwd_count++;
@@ -378,8 +390,8 @@ bool b2b_next_forward_fresh(
 }
 
 void b2b_refund(b2b_t* b, const b2b_frame_t* f, uint32_t toa_ms) {
-    /* TX failed or the window aborted after the pop: undo the charge and put
-     * the frame back (tail is fine; ordering is best-effort).  If the queue
+    /* Requeue after an abort/failure; toa_ms is zero if RF may have occurred,
+     * retaining that charge (tail is fine; ordering is best-effort). If the queue
      * refilled in between the frame is dropped, which the neighbour's next
      * re-beacon will repair. */
     b2b_add_airtime(b, toa_ms);
@@ -408,6 +420,7 @@ bool b2b_make(b2b_t* b, b2b_type_t type, const uint8_t* payload, uint8_t len,
     out->type   = (uint8_t)type;
     out->len    = len;
     out->queued_rtc_sec = 0;
+    out->age_rounding_credit = 0;
     if (len) memcpy(out->payload, payload, len);
 
     /* A frame our own peers would reject as malformed must never reach the

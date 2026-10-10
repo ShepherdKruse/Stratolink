@@ -1,4 +1,5 @@
 #include <assert.h>
+#include <initializer_list>
 #include <stdio.h>
 #include <string.h>
 
@@ -76,6 +77,37 @@ int main(void) {
     memcpy(frame.payload + B2B_CRUMB_LEN, tag, sizeof(tag));
     assert(b2b_auth_verify(auth_key, &frame));
 
+    /* Repeated queue/CAD retries must charge elapsed time once, including the
+     * first partial minute and the 29.5 kHz upper-bound minute boundaries. */
+    const struct { uint32_t elapsed_sec; uint8_t age_min; } retry_ages[] = {
+        {0u, 3u}, {1u, 4u}, {2u, 4u}, {55u, 4u}, {56u, 5u},
+        {60u, 5u}, {110u, 5u}, {111u, 6u}, {3318u, 63u},
+        {3319u, 64u}, {3600u, 69u}, {20000u, 255u},
+    };
+    for (uint32_t start : {1000u, UINT32_MAX - 50u}) {
+        b2b_frame_t retried = frame;
+        retried.queued_rtc_sec = start;
+        uint32_t elapsed = 0;
+        for (const auto& checkpoint : retry_ages) {
+            for (; elapsed <= checkpoint.elapsed_sec; ++elapsed) {
+                assert(b2b_refresh_authenticated_age(
+                    auth_key, &retried, start + elapsed));
+            }
+            assert(retried.payload[5] == checkpoint.age_min);
+            assert(b2b_auth_verify(auth_key, &retried));
+            assert(retried.src == frame.src && retried.msg_id == frame.msg_id &&
+                   retried.ttl == frame.ttl &&
+                   memcmp(retried.payload, frame.payload, 5) == 0);
+            assert(retried.queued_rtc_sec == start + checkpoint.elapsed_sec);
+            b2b_frame_t once = frame;
+            once.queued_rtc_sec = start;
+            assert(b2b_refresh_authenticated_age(
+                auth_key, &once, start + checkpoint.elapsed_sec));
+            assert(once.payload[5] == checkpoint.age_min);
+            assert(memcmp(retried.payload, once.payload, once.len) == 0);
+        }
+    }
+
     /* Queue residence is part of position freshness. A relay must advance the
      * coarse age, saturate instead of wrapping, and renew the CMAC without
      * changing the origin identity. */
@@ -103,6 +135,33 @@ int main(void) {
     assert(rejected_age.payload[B2B_CRUMB_LEN - 1] == 3 &&
            rejected_age.queued_rtc_sec == 1000);
 
+    b2b_frame_t fractional = frame;
+    fractional.queued_rtc_sec = 1000;
+    assert(b2b_refresh_authenticated_age(auth_key, &fractional, 1001));
+    b2b_frame_t preserved_fractional = fractional;
+    assert(!b2b_refresh_authenticated_age(wrong_age_key, &fractional, 1002));
+    assert(memcmp(&fractional, &preserved_fractional, sizeof(fractional)) == 0);
+    assert(b2b_refresh_authenticated_age(auth_key, &fractional, 1002));
+    assert(fractional.payload[5] == 4);
+
+    /* A fresh wire admission or rebuilt origin must not inherit a recycled
+     * output object's prepaid fraction from an earlier queue residence. */
+    uint8_t fresh_wire[B2B_FRAME_MAX];
+    int fresh_wire_len = b2b_encode(&frame, fresh_wire, sizeof(fresh_wire));
+    assert(fresh_wire_len > 0);
+    b2b_frame_t reused = preserved_fractional;
+    assert(b2b_parse(fresh_wire, fresh_wire_len, &reused));
+    reused.queued_rtc_sec = 1000;
+    assert(b2b_refresh_authenticated_age(auth_key, &reused, 1001));
+    assert(reused.payload[5] == 4 && b2b_auth_verify(auth_key, &reused));
+    reused = preserved_fractional;
+    assert(b2b_make(&state, B2B_TYPE_CRUMB, frame.payload, frame.len, &reused));
+    assert(b2b_auth_tag(auth_key, &reused, tag));
+    memcpy(reused.payload + B2B_CRUMB_LEN, tag, sizeof(tag));
+    reused.queued_rtc_sec = 1000;
+    assert(b2b_refresh_authenticated_age(auth_key, &reused, 1001));
+    assert(reused.payload[5] == 4 && b2b_auth_verify(auth_key, &reused));
+
     b2b_t age_forward = {};
     b2b_reset(&age_forward, 0x0003);
     b2b_add_airtime(&age_forward, 1000);
@@ -112,6 +171,15 @@ int main(void) {
         &age_forward, &forwarded_age, 100, auth_key, 4318));
     b2b_crumb_unpack(forwarded_age.payload, &aged_crumb);
     assert(aged_crumb.age_min == 63 &&
+           b2b_auth_verify(auth_key, &forwarded_age));
+
+    b2b_t new_residence = {};
+    b2b_reset(&new_residence, 0x0003);
+    b2b_add_airtime(&new_residence, 1000);
+    assert(b2b_ingest(&new_residence, &preserved_fractional, 1000) == B2B_FORWARD);
+    assert(b2b_next_forward_fresh(
+        &new_residence, &forwarded_age, 100, auth_key, 1001));
+    assert(forwarded_age.payload[5] == 5 &&
            b2b_auth_verify(auth_key, &forwarded_age));
 
     /* The raw uint32 RTC-second epoch remains wrap-safe and a frame heard

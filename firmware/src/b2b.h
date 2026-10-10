@@ -124,6 +124,9 @@ typedef struct {
      * A relay uses it to advance authenticated crumb ages while a frame waits
      * for RF airtime or a TTN uplink. */
     uint32_t queued_rtc_sec;
+    /* Fraction of an already charged minute, in RTC-seconds * configured-LSI
+     * units. Carries rounding across local retries; never sent on the wire. */
+    uint32_t age_rounding_credit;
 } b2b_frame_t;
 
 typedef struct {
@@ -212,7 +215,9 @@ b2b_result_t b2b_ingest(
 
 /* Verify every queued frame. For a crumb, advance every saturating sample age
  * by the time spent in the local queue and renew the shared-fleet CMAC without
- * changing origin, message ID, or TTL. Non-crumb frames remain byte-identical.
+ * changing origin, message ID, or TTL. Retain the prepaid fractional minute
+ * across retries so repeated refreshes equal one refresh of the full interval.
+ * Non-crumb frames remain byte-identical.
  * The input is committed only on success, and queued_rtc_sec becomes the
  * supplied raw RTC epoch. */
 bool b2b_refresh_authenticated_age(
@@ -235,8 +240,9 @@ bool b2b_next_forward_fresh(
     b2b_t* b, b2b_frame_t* out, uint32_t toa_ms,
     const uint8_t key[16], uint32_t now_rtc_sec);
 
-/* Return a popped frame after a failed TX or an aborted window: refunds the
- * charge and re-queues the frame (dropped only if the queue refilled). */
+/* Requeue a popped frame and undo its successful-forward count. Refund toa_ms
+ * only when no RF handoff occurred; pass zero after an ambiguous TX failure
+ * to retain the airtime debit. Dropped only if the queue refilled. */
 void b2b_refund(b2b_t* b, const b2b_frame_t* f, uint32_t toa_ms);
 
 /* Build one of our own frames to originate (crumbs or a command).  Validates
