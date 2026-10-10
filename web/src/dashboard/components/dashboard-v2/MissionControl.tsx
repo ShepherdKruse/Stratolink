@@ -41,6 +41,7 @@ import FleetFilters from './FleetFilters';
 import { useCommunity } from './community-account';
 import { mergeRegisteredBalloons } from '@/lib/community/types';
 import { defaultFleetFilters, filterFleet, isPlannedBalloon } from '@/lib/telemetry/fleetFilters';
+import { forecastEligible, forecastViewFor } from '@/lib/telemetry/forecastEligibility';
 import { flightTrack } from '@/lib/telemetry/flightTrack';
 import { withLatestTelemetry } from '@/lib/telemetry/fleetSummary';
 
@@ -126,8 +127,13 @@ export default function MissionControlScreen() {
     const recordsBeforeLaunch = registeredDevice?.launchedAt != null && lastRecordedT !== null
         && lastRecordedT < registeredDevice.launchedAt;
     /* Earlier stored records belong to replay, even if the registry still says
-     * flying. A forecast for that later launch does not describe these rows. */
-    const forecast = useForecastPath(recordsBeforeLaunch || registeredDevice?.status === 'planned' ? null : selectedId);
+     * flying. A forecast for that later launch does not describe these rows.
+     * A balloon that has landed, been recovered or retired, or is lost or
+     * missing keeps a months-old dead-reckon in Blob; that is not a prediction,
+     * so only its reconstructed path (history) is requested and drawn. The
+     * request waits for the registry entry so the view is right first time. */
+    const forecastDeviceId = registeredDevice && !recordsBeforeLaunch && registeredDevice.status !== 'planned' ? selectedId : null;
+    const forecast = useForecastPath(forecastDeviceId, forecastViewFor(registeredDevice?.status));
     const archived = ['landed', 'recovered', 'retired', 'lost'].includes(
         registeredDevice?.status?.toLowerCase() ?? '',
     ) || recordsBeforeLaunch;
@@ -903,6 +909,7 @@ function MapColumn({
                 showFlightTails={!portalPreview && isFleet && showFlightTrail}
                 showProjectedPath={!portalPreview && showProjectedPath}
                 fleetForecastIds={isFleet ? fleetDevices.filter(device => {
+                    if (!forecastEligible(device.status)) return false;   /* landed / recovered / retired / lost / missing: no projection */
                     const lastT = fleetHistory[device.id]?.at(-1)?.t;
                     return lastT != null && (device.launchedAt == null || lastT >= device.launchedAt);
                 }).map(device => device.id) : []}
