@@ -1,0 +1,716 @@
+{
+  "captured_at_utc": "2026-10-05",
+  "scope": "Read-only public metadata only; no row data or credentials",
+  "user": "postgres",
+  "views": [
+    {
+      "viewname": "latest_telemetry",
+      "definition": " SELECT DISTINCT ON (device_id) id,\n    device_id,\n    \"time\",\n    lat,\n    lon,\n    altitude_m,\n    velocity_x,\n    velocity_y,\n    created_at\n   FROM telemetry\n  ORDER BY device_id, \"time\" DESC;"
+    }
+  ],
+  "columns": [
+    {
+      "udt_name": "int8",
+      "data_type": "bigint",
+      "table_name": "devices",
+      "udt_schema": "pg_catalog",
+      "column_name": "id",
+      "is_nullable": "NO",
+      "column_default": "nextval('devices_id_seq'::regclass)"
+    },
+    {
+      "udt_name": "text",
+      "data_type": "text",
+      "table_name": "devices",
+      "udt_schema": "pg_catalog",
+      "column_name": "device_id",
+      "is_nullable": "NO",
+      "column_default": null
+    },
+    {
+      "udt_name": "timestamptz",
+      "data_type": "timestamp with time zone",
+      "table_name": "devices",
+      "udt_schema": "pg_catalog",
+      "column_name": "created_at",
+      "is_nullable": "YES",
+      "column_default": "now()"
+    },
+    {
+      "udt_name": "timestamptz",
+      "data_type": "timestamp with time zone",
+      "table_name": "devices",
+      "udt_schema": "pg_catalog",
+      "column_name": "updated_at",
+      "is_nullable": "YES",
+      "column_default": "now()"
+    },
+    {
+      "udt_name": "text",
+      "data_type": "text",
+      "table_name": "devices",
+      "udt_schema": "pg_catalog",
+      "column_name": "claim_code",
+      "is_nullable": "YES",
+      "column_default": null
+    },
+    {
+      "udt_name": "text",
+      "data_type": "text",
+      "table_name": "devices",
+      "udt_schema": "pg_catalog",
+      "column_name": "status",
+      "is_nullable": "YES",
+      "column_default": "'storage'::text"
+    },
+    {
+      "udt_name": "text",
+      "data_type": "text",
+      "table_name": "devices",
+      "udt_schema": "pg_catalog",
+      "column_name": "launcher_name",
+      "is_nullable": "YES",
+      "column_default": null
+    },
+    {
+      "udt_name": "float8",
+      "data_type": "double precision",
+      "table_name": "devices",
+      "udt_schema": "pg_catalog",
+      "column_name": "launch_lat",
+      "is_nullable": "YES",
+      "column_default": null
+    },
+    {
+      "udt_name": "float8",
+      "data_type": "double precision",
+      "table_name": "devices",
+      "udt_schema": "pg_catalog",
+      "column_name": "launch_lon",
+      "is_nullable": "YES",
+      "column_default": null
+    },
+    {
+      "udt_name": "timestamptz",
+      "data_type": "timestamp with time zone",
+      "table_name": "devices",
+      "udt_schema": "pg_catalog",
+      "column_name": "launched_at",
+      "is_nullable": "YES",
+      "column_default": null
+    },
+    {
+      "udt_name": "text",
+      "data_type": "text",
+      "table_name": "devices",
+      "udt_schema": "pg_catalog",
+      "column_name": "launch_token_hash",
+      "is_nullable": "YES",
+      "column_default": null
+    },
+    {
+      "udt_name": "timestamptz",
+      "data_type": "timestamp with time zone",
+      "table_name": "devices",
+      "udt_schema": "pg_catalog",
+      "column_name": "launch_token_expires_at",
+      "is_nullable": "YES",
+      "column_default": null
+    },
+    {
+      "udt_name": "uuid",
+      "data_type": "uuid",
+      "table_name": "telemetry",
+      "udt_schema": "pg_catalog",
+      "column_name": "id",
+      "is_nullable": "NO",
+      "column_default": "gen_random_uuid()"
+    },
+    {
+      "udt_name": "text",
+      "data_type": "text",
+      "table_name": "telemetry",
+      "udt_schema": "pg_catalog",
+      "column_name": "device_id",
+      "is_nullable": "NO",
+      "column_default": null
+    },
+    {
+      "udt_name": "timestamptz",
+      "data_type": "timestamp with time zone",
+      "table_name": "telemetry",
+      "udt_schema": "pg_catalog",
+      "column_name": "time",
+      "is_nullable": "NO",
+      "column_default": "now()"
+    },
+    {
+      "udt_name": "float8",
+      "data_type": "double precision",
+      "table_name": "telemetry",
+      "udt_schema": "pg_catalog",
+      "column_name": "lat",
+      "is_nullable": "YES",
+      "column_default": null
+    },
+    {
+      "udt_name": "float8",
+      "data_type": "double precision",
+      "table_name": "telemetry",
+      "udt_schema": "pg_catalog",
+      "column_name": "lon",
+      "is_nullable": "YES",
+      "column_default": null
+    },
+    {
+      "udt_name": "float8",
+      "data_type": "double precision",
+      "table_name": "telemetry",
+      "udt_schema": "pg_catalog",
+      "column_name": "altitude_m",
+      "is_nullable": "YES",
+      "column_default": null
+    },
+    {
+      "udt_name": "float8",
+      "data_type": "double precision",
+      "table_name": "telemetry",
+      "udt_schema": "pg_catalog",
+      "column_name": "velocity_x",
+      "is_nullable": "YES",
+      "column_default": null
+    },
+    {
+      "udt_name": "float8",
+      "data_type": "double precision",
+      "table_name": "telemetry",
+      "udt_schema": "pg_catalog",
+      "column_name": "velocity_y",
+      "is_nullable": "YES",
+      "column_default": null
+    },
+    {
+      "udt_name": "timestamptz",
+      "data_type": "timestamp with time zone",
+      "table_name": "telemetry",
+      "udt_schema": "pg_catalog",
+      "column_name": "created_at",
+      "is_nullable": "YES",
+      "column_default": "now()"
+    },
+    {
+      "udt_name": "int4",
+      "data_type": "integer",
+      "table_name": "telemetry",
+      "udt_schema": "pg_catalog",
+      "column_name": "uv_index",
+      "is_nullable": "YES",
+      "column_default": null
+    },
+    {
+      "udt_name": "float8",
+      "data_type": "double precision",
+      "table_name": "telemetry",
+      "udt_schema": "pg_catalog",
+      "column_name": "ambient_lux",
+      "is_nullable": "YES",
+      "column_default": null
+    },
+    {
+      "udt_name": "int2",
+      "data_type": "smallint",
+      "table_name": "telemetry",
+      "udt_schema": "pg_catalog",
+      "column_name": "acoustic_event",
+      "is_nullable": "YES",
+      "column_default": null
+    },
+    {
+      "udt_name": "float8",
+      "data_type": "double precision",
+      "table_name": "telemetry",
+      "udt_schema": "pg_catalog",
+      "column_name": "temperature",
+      "is_nullable": "YES",
+      "column_default": null
+    },
+    {
+      "udt_name": "float8",
+      "data_type": "double precision",
+      "table_name": "telemetry",
+      "udt_schema": "pg_catalog",
+      "column_name": "pressure",
+      "is_nullable": "YES",
+      "column_default": null
+    },
+    {
+      "udt_name": "float8",
+      "data_type": "double precision",
+      "table_name": "telemetry",
+      "udt_schema": "pg_catalog",
+      "column_name": "solar_voltage",
+      "is_nullable": "YES",
+      "column_default": null
+    },
+    {
+      "udt_name": "float8",
+      "data_type": "double precision",
+      "table_name": "telemetry",
+      "udt_schema": "pg_catalog",
+      "column_name": "battery_voltage",
+      "is_nullable": "YES",
+      "column_default": null
+    },
+    {
+      "udt_name": "float8",
+      "data_type": "double precision",
+      "table_name": "telemetry",
+      "udt_schema": "pg_catalog",
+      "column_name": "rssi",
+      "is_nullable": "YES",
+      "column_default": null
+    },
+    {
+      "udt_name": "float8",
+      "data_type": "double precision",
+      "table_name": "telemetry",
+      "udt_schema": "pg_catalog",
+      "column_name": "snr",
+      "is_nullable": "YES",
+      "column_default": null
+    },
+    {
+      "udt_name": "float8",
+      "data_type": "double precision",
+      "table_name": "telemetry",
+      "udt_schema": "pg_catalog",
+      "column_name": "gps_speed",
+      "is_nullable": "YES",
+      "column_default": null
+    },
+    {
+      "udt_name": "float8",
+      "data_type": "double precision",
+      "table_name": "telemetry",
+      "udt_schema": "pg_catalog",
+      "column_name": "gps_heading",
+      "is_nullable": "YES",
+      "column_default": null
+    },
+    {
+      "udt_name": "int4",
+      "data_type": "integer",
+      "table_name": "telemetry",
+      "udt_schema": "pg_catalog",
+      "column_name": "gps_satellites",
+      "is_nullable": "YES",
+      "column_default": null
+    },
+    {
+      "udt_name": "float8",
+      "data_type": "double precision",
+      "table_name": "telemetry",
+      "udt_schema": "pg_catalog",
+      "column_name": "mems_accel_x",
+      "is_nullable": "YES",
+      "column_default": null
+    },
+    {
+      "udt_name": "float8",
+      "data_type": "double precision",
+      "table_name": "telemetry",
+      "udt_schema": "pg_catalog",
+      "column_name": "mems_accel_y",
+      "is_nullable": "YES",
+      "column_default": null
+    },
+    {
+      "udt_name": "float8",
+      "data_type": "double precision",
+      "table_name": "telemetry",
+      "udt_schema": "pg_catalog",
+      "column_name": "mems_accel_z",
+      "is_nullable": "YES",
+      "column_default": null
+    },
+    {
+      "udt_name": "text",
+      "data_type": "text",
+      "table_name": "telemetry",
+      "udt_schema": "pg_catalog",
+      "column_name": "firmware_version",
+      "is_nullable": "YES",
+      "column_default": null
+    },
+    {
+      "udt_name": "int4",
+      "data_type": "integer",
+      "table_name": "telemetry",
+      "udt_schema": "pg_catalog",
+      "column_name": "uptime_s",
+      "is_nullable": "YES",
+      "column_default": null
+    },
+    {
+      "udt_name": "int4",
+      "data_type": "integer",
+      "table_name": "telemetry",
+      "udt_schema": "pg_catalog",
+      "column_name": "tx_count",
+      "is_nullable": "YES",
+      "column_default": null
+    },
+    {
+      "udt_name": "float4",
+      "data_type": "real",
+      "table_name": "telemetry",
+      "udt_schema": "pg_catalog",
+      "column_name": "hdop",
+      "is_nullable": "YES",
+      "column_default": null
+    },
+    {
+      "udt_name": "text",
+      "data_type": "text",
+      "table_name": "telemetry",
+      "udt_schema": "pg_catalog",
+      "column_name": "power_mode",
+      "is_nullable": "YES",
+      "column_default": null
+    },
+    {
+      "udt_name": "int4",
+      "data_type": "integer",
+      "table_name": "telemetry",
+      "udt_schema": "pg_catalog",
+      "column_name": "sleep_ms",
+      "is_nullable": "YES",
+      "column_default": null
+    },
+    {
+      "udt_name": "int4",
+      "data_type": "integer",
+      "table_name": "telemetry",
+      "udt_schema": "pg_catalog",
+      "column_name": "lora_sf",
+      "is_nullable": "YES",
+      "column_default": null
+    },
+    {
+      "udt_name": "int4",
+      "data_type": "integer",
+      "table_name": "telemetry",
+      "udt_schema": "pg_catalog",
+      "column_name": "lora_bw",
+      "is_nullable": "YES",
+      "column_default": null
+    },
+    {
+      "udt_name": "int8",
+      "data_type": "bigint",
+      "table_name": "telemetry",
+      "udt_schema": "pg_catalog",
+      "column_name": "frequency_hz",
+      "is_nullable": "YES",
+      "column_default": null
+    },
+    {
+      "udt_name": "jsonb",
+      "data_type": "jsonb",
+      "table_name": "telemetry",
+      "udt_schema": "pg_catalog",
+      "column_name": "gateways",
+      "is_nullable": "YES",
+      "column_default": null
+    },
+    {
+      "udt_name": "int2",
+      "data_type": "smallint",
+      "table_name": "telemetry",
+      "udt_schema": "pg_catalog",
+      "column_name": "f_port",
+      "is_nullable": "YES",
+      "column_default": null
+    },
+    {
+      "udt_name": "text",
+      "data_type": "text",
+      "table_name": "telemetry",
+      "udt_schema": "pg_catalog",
+      "column_name": "frm_payload",
+      "is_nullable": "YES",
+      "column_default": null
+    },
+    {
+      "udt_name": "int2",
+      "data_type": "smallint",
+      "table_name": "telemetry",
+      "udt_schema": "pg_catalog",
+      "column_name": "telemetry_version",
+      "is_nullable": "YES",
+      "column_default": null
+    },
+    {
+      "udt_name": "int2",
+      "data_type": "smallint",
+      "table_name": "telemetry",
+      "udt_schema": "pg_catalog",
+      "column_name": "status_byte",
+      "is_nullable": "YES",
+      "column_default": null
+    },
+    {
+      "udt_name": "int2",
+      "data_type": "smallint",
+      "table_name": "telemetry",
+      "udt_schema": "pg_catalog",
+      "column_name": "boot_count",
+      "is_nullable": "YES",
+      "column_default": null
+    },
+    {
+      "udt_name": "int2",
+      "data_type": "smallint",
+      "table_name": "telemetry",
+      "udt_schema": "pg_catalog",
+      "column_name": "power_tier",
+      "is_nullable": "YES",
+      "column_default": null
+    },
+    {
+      "udt_name": "int2",
+      "data_type": "smallint",
+      "table_name": "telemetry",
+      "udt_schema": "pg_catalog",
+      "column_name": "reset_cause",
+      "is_nullable": "YES",
+      "column_default": null
+    },
+    {
+      "udt_name": "int4",
+      "data_type": "integer",
+      "table_name": "telemetry",
+      "udt_schema": "pg_catalog",
+      "column_name": "gps_fix_age_min",
+      "is_nullable": "YES",
+      "column_default": null
+    },
+    {
+      "udt_name": "int4",
+      "data_type": "integer",
+      "table_name": "telemetry",
+      "udt_schema": "pg_catalog",
+      "column_name": "command_ack_seq",
+      "is_nullable": "YES",
+      "column_default": null
+    },
+    {
+      "udt_name": "bool",
+      "data_type": "boolean",
+      "table_name": "telemetry",
+      "udt_schema": "pg_catalog",
+      "column_name": "relay_enabled",
+      "is_nullable": "YES",
+      "column_default": null
+    },
+    {
+      "udt_name": "int2",
+      "data_type": "smallint",
+      "table_name": "telemetry",
+      "udt_schema": "pg_catalog",
+      "column_name": "relay_fwd_delta",
+      "is_nullable": "YES",
+      "column_default": null
+    },
+    {
+      "udt_name": "int2",
+      "data_type": "smallint",
+      "table_name": "telemetry",
+      "udt_schema": "pg_catalog",
+      "column_name": "ctt_tags_delta",
+      "is_nullable": "YES",
+      "column_default": null
+    },
+    {
+      "udt_name": "uuid",
+      "data_type": "uuid",
+      "table_name": "uplink_events",
+      "udt_schema": "pg_catalog",
+      "column_name": "id",
+      "is_nullable": "NO",
+      "column_default": "gen_random_uuid()"
+    },
+    {
+      "udt_name": "text",
+      "data_type": "text",
+      "table_name": "uplink_events",
+      "udt_schema": "pg_catalog",
+      "column_name": "device_id",
+      "is_nullable": "NO",
+      "column_default": null
+    },
+    {
+      "udt_name": "timestamptz",
+      "data_type": "timestamp with time zone",
+      "table_name": "uplink_events",
+      "udt_schema": "pg_catalog",
+      "column_name": "time",
+      "is_nullable": "NO",
+      "column_default": null
+    },
+    {
+      "udt_name": "int2",
+      "data_type": "smallint",
+      "table_name": "uplink_events",
+      "udt_schema": "pg_catalog",
+      "column_name": "f_port",
+      "is_nullable": "NO",
+      "column_default": null
+    },
+    {
+      "udt_name": "text",
+      "data_type": "text",
+      "table_name": "uplink_events",
+      "udt_schema": "pg_catalog",
+      "column_name": "frm_payload",
+      "is_nullable": "YES",
+      "column_default": null
+    },
+    {
+      "udt_name": "float8",
+      "data_type": "double precision",
+      "table_name": "uplink_events",
+      "udt_schema": "pg_catalog",
+      "column_name": "rssi",
+      "is_nullable": "YES",
+      "column_default": null
+    },
+    {
+      "udt_name": "float8",
+      "data_type": "double precision",
+      "table_name": "uplink_events",
+      "udt_schema": "pg_catalog",
+      "column_name": "snr",
+      "is_nullable": "YES",
+      "column_default": null
+    },
+    {
+      "udt_name": "jsonb",
+      "data_type": "jsonb",
+      "table_name": "uplink_events",
+      "udt_schema": "pg_catalog",
+      "column_name": "gateways",
+      "is_nullable": "YES",
+      "column_default": null
+    },
+    {
+      "udt_name": "timestamptz",
+      "data_type": "timestamp with time zone",
+      "table_name": "uplink_events",
+      "udt_schema": "pg_catalog",
+      "column_name": "created_at",
+      "is_nullable": "NO",
+      "column_default": "now()"
+    }
+  ],
+  "version": "PostgreSQL 17.6 on aarch64-unknown-linux-gnu, compiled by gcc (GCC) 13.2.0, 64-bit",
+  "database": "postgres",
+  "policies": [
+    {
+      "cmd": "INSERT",
+      "qual": null,
+      "roles": [
+        "public"
+      ],
+      "tablename": "devices",
+      "policyname": "Allow insert for activation",
+      "with_check": "true"
+    },
+    {
+      "cmd": "SELECT",
+      "qual": "true",
+      "roles": [
+        "public"
+      ],
+      "tablename": "devices",
+      "policyname": "Allow public read access",
+      "with_check": null
+    },
+    {
+      "cmd": "UPDATE",
+      "qual": "true",
+      "roles": [
+        "public"
+      ],
+      "tablename": "devices",
+      "policyname": "Allow update for activation",
+      "with_check": "true"
+    },
+    {
+      "cmd": "INSERT",
+      "qual": null,
+      "roles": [
+        "public"
+      ],
+      "tablename": "telemetry",
+      "policyname": "Allow insert from service role",
+      "with_check": "true"
+    },
+    {
+      "cmd": "SELECT",
+      "qual": "true",
+      "roles": [
+        "public"
+      ],
+      "tablename": "telemetry",
+      "policyname": "Allow public read access",
+      "with_check": null
+    },
+    {
+      "cmd": "SELECT",
+      "qual": "true",
+      "roles": [
+        "public"
+      ],
+      "tablename": "telemetry",
+      "policyname": "Public read",
+      "with_check": null
+    },
+    {
+      "cmd": "SELECT",
+      "qual": "true",
+      "roles": [
+        "public"
+      ],
+      "tablename": "uplink_events",
+      "policyname": "uplink_events_public_read",
+      "with_check": null
+    }
+  ],
+  "constraints": [
+    {
+      "conname": "devices_device_id_key",
+      "definition": "UNIQUE (device_id)",
+      "table_name": "devices",
+      "convalidated": true
+    },
+    {
+      "conname": "devices_pkey",
+      "definition": "PRIMARY KEY (id)",
+      "table_name": "devices",
+      "convalidated": true
+    },
+    {
+      "conname": "devices_status_check",
+      "definition": "CHECK ((status = ANY (ARRAY['storage'::text, 'flying'::text, 'landed'::text, 'retired'::text])))",
+      "table_name": "devices",
+      "convalidated": true
+    },
+    {
+      "conname": "telemetry_pkey",
+      "definition": "PRIMARY KEY (id)",
+      "table_name": "telemetry",
+      "convalidated": true
+    }
+  ]
+}

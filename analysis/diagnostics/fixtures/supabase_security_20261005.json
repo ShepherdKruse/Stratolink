@@ -1,0 +1,821 @@
+{
+  "captured_at_utc": "2026-10-05",
+  "scope": "Public schema metadata only; no row data",
+  "sequences": [
+    {
+      "relname": "devices_id_seq",
+      "acl": "{postgres=rwU/postgres,anon=rwU/postgres,authenticated=rwU/postgres,service_role=rwU/postgres}"
+    }
+  ],
+  "identity_or_generated_columns": [],
+  "grants": [
+    {
+      "grantee": "anon",
+      "table_name": "latest_telemetry",
+      "privilege_type": "INSERT"
+    },
+    {
+      "grantee": "anon",
+      "table_name": "latest_telemetry",
+      "privilege_type": "SELECT"
+    },
+    {
+      "grantee": "anon",
+      "table_name": "latest_telemetry",
+      "privilege_type": "UPDATE"
+    },
+    {
+      "grantee": "anon",
+      "table_name": "latest_telemetry",
+      "privilege_type": "DELETE"
+    },
+    {
+      "grantee": "anon",
+      "table_name": "latest_telemetry",
+      "privilege_type": "TRUNCATE"
+    },
+    {
+      "grantee": "anon",
+      "table_name": "latest_telemetry",
+      "privilege_type": "REFERENCES"
+    },
+    {
+      "grantee": "anon",
+      "table_name": "latest_telemetry",
+      "privilege_type": "TRIGGER"
+    },
+    {
+      "grantee": "authenticated",
+      "table_name": "latest_telemetry",
+      "privilege_type": "INSERT"
+    },
+    {
+      "grantee": "authenticated",
+      "table_name": "latest_telemetry",
+      "privilege_type": "SELECT"
+    },
+    {
+      "grantee": "authenticated",
+      "table_name": "latest_telemetry",
+      "privilege_type": "UPDATE"
+    },
+    {
+      "grantee": "authenticated",
+      "table_name": "latest_telemetry",
+      "privilege_type": "DELETE"
+    },
+    {
+      "grantee": "authenticated",
+      "table_name": "latest_telemetry",
+      "privilege_type": "TRUNCATE"
+    },
+    {
+      "grantee": "authenticated",
+      "table_name": "latest_telemetry",
+      "privilege_type": "REFERENCES"
+    },
+    {
+      "grantee": "authenticated",
+      "table_name": "latest_telemetry",
+      "privilege_type": "TRIGGER"
+    },
+    {
+      "grantee": "service_role",
+      "table_name": "latest_telemetry",
+      "privilege_type": "INSERT"
+    },
+    {
+      "grantee": "service_role",
+      "table_name": "latest_telemetry",
+      "privilege_type": "SELECT"
+    },
+    {
+      "grantee": "service_role",
+      "table_name": "latest_telemetry",
+      "privilege_type": "UPDATE"
+    },
+    {
+      "grantee": "service_role",
+      "table_name": "latest_telemetry",
+      "privilege_type": "DELETE"
+    },
+    {
+      "grantee": "service_role",
+      "table_name": "latest_telemetry",
+      "privilege_type": "TRUNCATE"
+    },
+    {
+      "grantee": "service_role",
+      "table_name": "latest_telemetry",
+      "privilege_type": "REFERENCES"
+    },
+    {
+      "grantee": "service_role",
+      "table_name": "latest_telemetry",
+      "privilege_type": "TRIGGER"
+    },
+    {
+      "grantee": "anon",
+      "table_name": "devices",
+      "privilege_type": "INSERT"
+    },
+    {
+      "grantee": "anon",
+      "table_name": "devices",
+      "privilege_type": "SELECT"
+    },
+    {
+      "grantee": "anon",
+      "table_name": "devices",
+      "privilege_type": "UPDATE"
+    },
+    {
+      "grantee": "anon",
+      "table_name": "devices",
+      "privilege_type": "DELETE"
+    },
+    {
+      "grantee": "anon",
+      "table_name": "devices",
+      "privilege_type": "TRUNCATE"
+    },
+    {
+      "grantee": "anon",
+      "table_name": "devices",
+      "privilege_type": "REFERENCES"
+    },
+    {
+      "grantee": "anon",
+      "table_name": "devices",
+      "privilege_type": "TRIGGER"
+    },
+    {
+      "grantee": "authenticated",
+      "table_name": "devices",
+      "privilege_type": "INSERT"
+    },
+    {
+      "grantee": "authenticated",
+      "table_name": "devices",
+      "privilege_type": "SELECT"
+    },
+    {
+      "grantee": "authenticated",
+      "table_name": "devices",
+      "privilege_type": "UPDATE"
+    },
+    {
+      "grantee": "authenticated",
+      "table_name": "devices",
+      "privilege_type": "DELETE"
+    },
+    {
+      "grantee": "authenticated",
+      "table_name": "devices",
+      "privilege_type": "TRUNCATE"
+    },
+    {
+      "grantee": "authenticated",
+      "table_name": "devices",
+      "privilege_type": "REFERENCES"
+    },
+    {
+      "grantee": "authenticated",
+      "table_name": "devices",
+      "privilege_type": "TRIGGER"
+    },
+    {
+      "grantee": "service_role",
+      "table_name": "devices",
+      "privilege_type": "INSERT"
+    },
+    {
+      "grantee": "service_role",
+      "table_name": "devices",
+      "privilege_type": "SELECT"
+    },
+    {
+      "grantee": "service_role",
+      "table_name": "devices",
+      "privilege_type": "UPDATE"
+    },
+    {
+      "grantee": "service_role",
+      "table_name": "devices",
+      "privilege_type": "DELETE"
+    },
+    {
+      "grantee": "service_role",
+      "table_name": "devices",
+      "privilege_type": "TRUNCATE"
+    },
+    {
+      "grantee": "service_role",
+      "table_name": "devices",
+      "privilege_type": "REFERENCES"
+    },
+    {
+      "grantee": "service_role",
+      "table_name": "devices",
+      "privilege_type": "TRIGGER"
+    },
+    {
+      "grantee": "anon",
+      "table_name": "telemetry",
+      "privilege_type": "INSERT"
+    },
+    {
+      "grantee": "anon",
+      "table_name": "telemetry",
+      "privilege_type": "SELECT"
+    },
+    {
+      "grantee": "anon",
+      "table_name": "telemetry",
+      "privilege_type": "UPDATE"
+    },
+    {
+      "grantee": "anon",
+      "table_name": "telemetry",
+      "privilege_type": "DELETE"
+    },
+    {
+      "grantee": "anon",
+      "table_name": "telemetry",
+      "privilege_type": "TRUNCATE"
+    },
+    {
+      "grantee": "anon",
+      "table_name": "telemetry",
+      "privilege_type": "REFERENCES"
+    },
+    {
+      "grantee": "anon",
+      "table_name": "telemetry",
+      "privilege_type": "TRIGGER"
+    },
+    {
+      "grantee": "authenticated",
+      "table_name": "telemetry",
+      "privilege_type": "INSERT"
+    },
+    {
+      "grantee": "authenticated",
+      "table_name": "telemetry",
+      "privilege_type": "SELECT"
+    },
+    {
+      "grantee": "authenticated",
+      "table_name": "telemetry",
+      "privilege_type": "UPDATE"
+    },
+    {
+      "grantee": "authenticated",
+      "table_name": "telemetry",
+      "privilege_type": "DELETE"
+    },
+    {
+      "grantee": "authenticated",
+      "table_name": "telemetry",
+      "privilege_type": "TRUNCATE"
+    },
+    {
+      "grantee": "authenticated",
+      "table_name": "telemetry",
+      "privilege_type": "REFERENCES"
+    },
+    {
+      "grantee": "authenticated",
+      "table_name": "telemetry",
+      "privilege_type": "TRIGGER"
+    },
+    {
+      "grantee": "service_role",
+      "table_name": "telemetry",
+      "privilege_type": "INSERT"
+    },
+    {
+      "grantee": "service_role",
+      "table_name": "telemetry",
+      "privilege_type": "SELECT"
+    },
+    {
+      "grantee": "service_role",
+      "table_name": "telemetry",
+      "privilege_type": "UPDATE"
+    },
+    {
+      "grantee": "service_role",
+      "table_name": "telemetry",
+      "privilege_type": "DELETE"
+    },
+    {
+      "grantee": "service_role",
+      "table_name": "telemetry",
+      "privilege_type": "TRUNCATE"
+    },
+    {
+      "grantee": "service_role",
+      "table_name": "telemetry",
+      "privilege_type": "REFERENCES"
+    },
+    {
+      "grantee": "service_role",
+      "table_name": "telemetry",
+      "privilege_type": "TRIGGER"
+    },
+    {
+      "grantee": "anon",
+      "table_name": "uplink_events",
+      "privilege_type": "INSERT"
+    },
+    {
+      "grantee": "anon",
+      "table_name": "uplink_events",
+      "privilege_type": "SELECT"
+    },
+    {
+      "grantee": "anon",
+      "table_name": "uplink_events",
+      "privilege_type": "UPDATE"
+    },
+    {
+      "grantee": "anon",
+      "table_name": "uplink_events",
+      "privilege_type": "DELETE"
+    },
+    {
+      "grantee": "anon",
+      "table_name": "uplink_events",
+      "privilege_type": "TRUNCATE"
+    },
+    {
+      "grantee": "anon",
+      "table_name": "uplink_events",
+      "privilege_type": "REFERENCES"
+    },
+    {
+      "grantee": "anon",
+      "table_name": "uplink_events",
+      "privilege_type": "TRIGGER"
+    },
+    {
+      "grantee": "authenticated",
+      "table_name": "uplink_events",
+      "privilege_type": "INSERT"
+    },
+    {
+      "grantee": "authenticated",
+      "table_name": "uplink_events",
+      "privilege_type": "SELECT"
+    },
+    {
+      "grantee": "authenticated",
+      "table_name": "uplink_events",
+      "privilege_type": "UPDATE"
+    },
+    {
+      "grantee": "authenticated",
+      "table_name": "uplink_events",
+      "privilege_type": "DELETE"
+    },
+    {
+      "grantee": "authenticated",
+      "table_name": "uplink_events",
+      "privilege_type": "TRUNCATE"
+    },
+    {
+      "grantee": "authenticated",
+      "table_name": "uplink_events",
+      "privilege_type": "REFERENCES"
+    },
+    {
+      "grantee": "authenticated",
+      "table_name": "uplink_events",
+      "privilege_type": "TRIGGER"
+    },
+    {
+      "grantee": "service_role",
+      "table_name": "uplink_events",
+      "privilege_type": "INSERT"
+    },
+    {
+      "grantee": "service_role",
+      "table_name": "uplink_events",
+      "privilege_type": "SELECT"
+    },
+    {
+      "grantee": "service_role",
+      "table_name": "uplink_events",
+      "privilege_type": "UPDATE"
+    },
+    {
+      "grantee": "service_role",
+      "table_name": "uplink_events",
+      "privilege_type": "DELETE"
+    },
+    {
+      "grantee": "service_role",
+      "table_name": "uplink_events",
+      "privilege_type": "TRUNCATE"
+    },
+    {
+      "grantee": "service_role",
+      "table_name": "uplink_events",
+      "privilege_type": "REFERENCES"
+    },
+    {
+      "grantee": "service_role",
+      "table_name": "uplink_events",
+      "privilege_type": "TRIGGER"
+    }
+  ],
+  "indexes": [
+    {
+      "indexdef": "CREATE UNIQUE INDEX devices_pkey ON public.devices USING btree (id)",
+      "indexname": "devices_pkey",
+      "tablename": "devices"
+    },
+    {
+      "indexdef": "CREATE UNIQUE INDEX devices_device_id_key ON public.devices USING btree (device_id)",
+      "indexname": "devices_device_id_key",
+      "tablename": "devices"
+    },
+    {
+      "indexdef": "CREATE INDEX idx_devices_claim_code ON public.devices USING btree (claim_code) WHERE (claim_code IS NOT NULL)",
+      "indexname": "idx_devices_claim_code",
+      "tablename": "devices"
+    },
+    {
+      "indexdef": "CREATE INDEX idx_devices_status ON public.devices USING btree (status)",
+      "indexname": "idx_devices_status",
+      "tablename": "devices"
+    },
+    {
+      "indexdef": "CREATE INDEX idx_devices_launch_expires ON public.devices USING btree (launch_token_expires_at) WHERE (launch_token_hash IS NOT NULL)",
+      "indexname": "idx_devices_launch_expires",
+      "tablename": "devices"
+    },
+    {
+      "indexdef": "CREATE UNIQUE INDEX telemetry_pkey ON public.telemetry USING btree (id)",
+      "indexname": "telemetry_pkey",
+      "tablename": "telemetry"
+    },
+    {
+      "indexdef": "CREATE INDEX idx_telemetry_device_id ON public.telemetry USING btree (device_id)",
+      "indexname": "idx_telemetry_device_id",
+      "tablename": "telemetry"
+    },
+    {
+      "indexdef": "CREATE INDEX idx_telemetry_time ON public.telemetry USING btree (\"time\" DESC)",
+      "indexname": "idx_telemetry_time",
+      "tablename": "telemetry"
+    },
+    {
+      "indexdef": "CREATE INDEX idx_telemetry_location ON public.telemetry USING gist (st_makepoint(lon, lat))",
+      "indexname": "idx_telemetry_location",
+      "tablename": "telemetry"
+    },
+    {
+      "indexdef": "CREATE INDEX idx_telemetry_altitude ON public.telemetry USING btree (altitude_m)",
+      "indexname": "idx_telemetry_altitude",
+      "tablename": "telemetry"
+    },
+    {
+      "indexdef": "CREATE INDEX idx_telemetry_active ON public.telemetry USING btree (\"time\" DESC, device_id)",
+      "indexname": "idx_telemetry_active",
+      "tablename": "telemetry"
+    },
+    {
+      "indexdef": "CREATE UNIQUE INDEX uplink_events_pkey ON public.uplink_events USING btree (id)",
+      "indexname": "uplink_events_pkey",
+      "tablename": "uplink_events"
+    },
+    {
+      "indexdef": "CREATE INDEX uplink_events_device_time_idx ON public.uplink_events USING btree (device_id, \"time\" DESC)",
+      "indexname": "uplink_events_device_time_idx",
+      "tablename": "uplink_events"
+    }
+  ],
+  "triggers": [
+    "CREATE TRIGGER devices_updated_at_trigger BEFORE UPDATE ON public.devices FOR EACH ROW EXECUTE FUNCTION update_devices_updated_at()"
+  ],
+  "relations": [
+    {
+      "relkind": "r",
+      "relname": "devices",
+      "reloptions": null,
+      "relrowsecurity": true
+    },
+    {
+      "relkind": "v",
+      "relname": "latest_telemetry",
+      "reloptions": null,
+      "relrowsecurity": false
+    },
+    {
+      "relkind": "r",
+      "relname": "telemetry",
+      "reloptions": null,
+      "relrowsecurity": true
+    },
+    {
+      "relkind": "r",
+      "relname": "uplink_events",
+      "reloptions": null,
+      "relrowsecurity": true
+    }
+  ],
+  "column_grants": [
+    {
+      "grantee": "anon",
+      "table_name": "devices",
+      "column_name": "claim_code",
+      "privilege_type": "INSERT"
+    },
+    {
+      "grantee": "anon",
+      "table_name": "devices",
+      "column_name": "claim_code",
+      "privilege_type": "REFERENCES"
+    },
+    {
+      "grantee": "anon",
+      "table_name": "devices",
+      "column_name": "claim_code",
+      "privilege_type": "SELECT"
+    },
+    {
+      "grantee": "anon",
+      "table_name": "devices",
+      "column_name": "claim_code",
+      "privilege_type": "UPDATE"
+    },
+    {
+      "grantee": "anon",
+      "table_name": "devices",
+      "column_name": "created_at",
+      "privilege_type": "INSERT"
+    },
+    {
+      "grantee": "anon",
+      "table_name": "devices",
+      "column_name": "created_at",
+      "privilege_type": "REFERENCES"
+    },
+    {
+      "grantee": "anon",
+      "table_name": "devices",
+      "column_name": "created_at",
+      "privilege_type": "SELECT"
+    },
+    {
+      "grantee": "anon",
+      "table_name": "devices",
+      "column_name": "created_at",
+      "privilege_type": "UPDATE"
+    },
+    {
+      "grantee": "anon",
+      "table_name": "devices",
+      "column_name": "device_id",
+      "privilege_type": "INSERT"
+    },
+    {
+      "grantee": "anon",
+      "table_name": "devices",
+      "column_name": "device_id",
+      "privilege_type": "REFERENCES"
+    },
+    {
+      "grantee": "anon",
+      "table_name": "devices",
+      "column_name": "device_id",
+      "privilege_type": "SELECT"
+    },
+    {
+      "grantee": "anon",
+      "table_name": "devices",
+      "column_name": "device_id",
+      "privilege_type": "UPDATE"
+    },
+    {
+      "grantee": "anon",
+      "table_name": "devices",
+      "column_name": "id",
+      "privilege_type": "INSERT"
+    },
+    {
+      "grantee": "anon",
+      "table_name": "devices",
+      "column_name": "id",
+      "privilege_type": "REFERENCES"
+    },
+    {
+      "grantee": "anon",
+      "table_name": "devices",
+      "column_name": "id",
+      "privilege_type": "SELECT"
+    },
+    {
+      "grantee": "anon",
+      "table_name": "devices",
+      "column_name": "id",
+      "privilege_type": "UPDATE"
+    },
+    {
+      "grantee": "anon",
+      "table_name": "devices",
+      "column_name": "launch_lat",
+      "privilege_type": "INSERT"
+    },
+    {
+      "grantee": "anon",
+      "table_name": "devices",
+      "column_name": "launch_lat",
+      "privilege_type": "REFERENCES"
+    },
+    {
+      "grantee": "anon",
+      "table_name": "devices",
+      "column_name": "launch_lat",
+      "privilege_type": "SELECT"
+    },
+    {
+      "grantee": "anon",
+      "table_name": "devices",
+      "column_name": "launch_lat",
+      "privilege_type": "UPDATE"
+    },
+    {
+      "grantee": "anon",
+      "table_name": "devices",
+      "column_name": "launch_lon",
+      "privilege_type": "INSERT"
+    },
+    {
+      "grantee": "anon",
+      "table_name": "devices",
+      "column_name": "launch_lon",
+      "privilege_type": "REFERENCES"
+    },
+    {
+      "grantee": "anon",
+      "table_name": "devices",
+      "column_name": "launch_lon",
+      "privilege_type": "SELECT"
+    },
+    {
+      "grantee": "anon",
+      "table_name": "devices",
+      "column_name": "launch_lon",
+      "privilege_type": "UPDATE"
+    },
+    {
+      "grantee": "anon",
+      "table_name": "devices",
+      "column_name": "launch_token_expires_at",
+      "privilege_type": "INSERT"
+    },
+    {
+      "grantee": "anon",
+      "table_name": "devices",
+      "column_name": "launch_token_expires_at",
+      "privilege_type": "REFERENCES"
+    },
+    {
+      "grantee": "anon",
+      "table_name": "devices",
+      "column_name": "launch_token_expires_at",
+      "privilege_type": "SELECT"
+    },
+    {
+      "grantee": "anon",
+      "table_name": "devices",
+      "column_name": "launch_token_expires_at",
+      "privilege_type": "UPDATE"
+    },
+    {
+      "grantee": "anon",
+      "table_name": "devices",
+      "column_name": "launch_token_hash",
+      "privilege_type": "INSERT"
+    },
+    {
+      "grantee": "anon",
+      "table_name": "devices",
+      "column_name": "launch_token_hash",
+      "privilege_type": "REFERENCES"
+    },
+    {
+      "grantee": "anon",
+      "table_name": "devices",
+      "column_name": "launch_token_hash",
+      "privilege_type": "SELECT"
+    },
+    {
+      "grantee": "anon",
+      "table_name": "devices",
+      "column_name": "launch_token_hash",
+      "privilege_type": "UPDATE"
+    },
+    {
+      "grantee": "anon",
+      "table_name": "devices",
+      "column_name": "launched_at",
+      "privilege_type": "INSERT"
+    },
+    {
+      "grantee": "anon",
+      "table_name": "devices",
+      "column_name": "launched_at",
+      "privilege_type": "REFERENCES"
+    },
+    {
+      "grantee": "anon",
+      "table_name": "devices",
+      "column_name": "launched_at",
+      "privilege_type": "SELECT"
+    },
+    {
+      "grantee": "anon",
+      "table_name": "devices",
+      "column_name": "launched_at",
+      "privilege_type": "UPDATE"
+    },
+    {
+      "grantee": "anon",
+      "table_name": "devices",
+      "column_name": "launcher_name",
+      "privilege_type": "INSERT"
+    },
+    {
+      "grantee": "anon",
+      "table_name": "devices",
+      "column_name": "launcher_name",
+      "privilege_type": "REFERENCES"
+    },
+    {
+      "grantee": "anon",
+      "table_name": "devices",
+      "column_name": "launcher_name",
+      "privilege_type": "SELECT"
+    },
+    {
+      "grantee": "anon",
+      "table_name": "devices",
+      "column_name": "launcher_name",
+      "privilege_type": "UPDATE"
+    },
+    {
+      "grantee": "anon",
+      "table_name": "devices",
+      "column_name": "status",
+      "privilege_type": "INSERT"
+    },
+    {
+      "grantee": "anon",
+      "table_name": "devices",
+      "column_name": "status",
+      "privilege_type": "REFERENCES"
+    },
+    {
+      "grantee": "anon",
+      "table_name": "devices",
+      "column_name": "status",
+      "privilege_type": "SELECT"
+    },
+    {
+      "grantee": "anon",
+      "table_name": "devices",
+      "column_name": "status",
+      "privilege_type": "UPDATE"
+    },
+    {
+      "grantee": "anon",
+      "table_name": "devices",
+      "column_name": "updated_at",
+      "privilege_type": "INSERT"
+    },
+    {
+      "grantee": "anon",
+      "table_name": "devices",
+      "column_name": "updated_at",
+      "privilege_type": "REFERENCES"
+    },
+    {
+      "grantee": "anon",
+      "table_name": "devices",
+      "column_name": "updated_at",
+      "privilege_type": "SELECT"
+    },
+    {
+      "grantee": "anon",
+      "table_name": "devices",
+      "column_name": "updated_at",
+      "privilege_type": "UPDATE"
+    }
+  ],
+  "trigger_function": "CREATE OR REPLACE FUNCTION public.update_devices_updated_at()\n RETURNS trigger\n LANGUAGE plpgsql\nAS $function$\nBEGIN\n    NEW.updated_at = NOW();\n    RETURN NEW;\nEND;\n$function$\n",
+  "explicit_column_acls": null
+}
