@@ -1,0 +1,14 @@
+# Local inputs, captures, and generated plots.
+**/data/
+**/figs/*.png
+**/figs/*.pdf
+**/figs/*.svg
+**/stimuli/
+network/bench/T[0-9]*/
+*.png
+*.pdf
+*.npz
+*.npy
+*.parquet
+*.csv
+altitude_encounters/results.json
