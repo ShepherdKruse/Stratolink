@@ -267,9 +267,11 @@ export function fetchMemberCube(deviceId: string, member: string): Promise<WindC
     return dir ? readCubeFromDir(dir, id, 'reconstruction') : readCubeFromBlob(id, 'reconstruction');
 }
 
+/* ── Coverage: does a sample read real data or an edge-clamped wind? ─────────── */
+
 /** The two grid slices `sampleWind` blends for an instant (clamped to the
- *  cube's time range) and the weight toward the second. Shared with the coverage
- *  test below so the two can never disagree about which boxes a sample reads. */
+ *  cube's time range) and the weight toward the second. Mirrors `sampleWind`'s
+ *  bracket math (scripts/wind-cube.test.mjs asserts the two agree). */
 export function bracketSlices(cube: WindCube, whenMs: number): { h0: number; h1: number; f: number } {
     const n = cube.grids.length;
     if (n === 1) return { h0: 0, h1: 0, f: 0 };
@@ -277,25 +279,6 @@ export function bracketSlices(cube: WindCube, whenMs: number): { h0: number; h1:
     const clamped = Math.max(0, Math.min(n - 1, hourFloat));
     const h0 = Math.min(Math.floor(clamped), n - 2);
     return { h0, h1: h0 + 1, f: clamped - h0 };
-}
-
-/**
- * Wind at an arbitrary position and instant: bilinear in space (`windAt`) and
- * linear in time between the two bracketing hourly grids. Mirrors the long-gap
- * reconstruction's `windAtHour`, generalized to a wall-clock instant.
- */
-export function sampleWind(
-    cube: WindCube,
-    lat: number,
-    lon: number,
-    whenMs: number,
-): { u: number; v: number } {
-    const { grids } = cube;
-    if (grids.length === 1) return windAt(grids[0], lat, lon);
-    const { h0, h1, f } = bracketSlices(cube, whenMs);
-    const a = windAt(grids[h0], lat, lon);
-    const b = windAt(grids[h1], lat, lon);
-    return { u: a.u * (1 - f) + b.u * f, v: a.v * (1 - f) + b.v * f };
 }
 
 /** True when (lat, lon) lies inside a lat/lon box. Longitude is wrapped into
@@ -328,6 +311,28 @@ export function cubeCovers(cube: WindCube, lat: number, lon: number, whenMs: num
     if (!cube.isTube) return boxCovers(cube.bounds, lat, lon);
     const { h0, h1 } = bracketSlices(cube, whenMs);
     return boxCovers(gridBox(cube.grids[h0]), lat, lon) && boxCovers(gridBox(cube.grids[h1]), lat, lon);
+}
+
+/**
+ * Wind at an arbitrary position and instant: bilinear in space (`windAt`) and
+ * linear in time between the two bracketing hourly grids. Mirrors the long-gap
+ * reconstruction's `windAtHour`, generalized to a wall-clock instant.
+ */
+export function sampleWind(
+    cube: WindCube,
+    lat: number,
+    lon: number,
+    whenMs: number,
+): { u: number; v: number } {
+    const { grids, t0Ms, stepMs } = cube;
+    if (grids.length === 1) return windAt(grids[0], lat, lon);
+    const hourFloat = (whenMs - t0Ms) / stepMs;
+    const clamped = Math.max(0, Math.min(grids.length - 1, hourFloat));
+    const h0 = Math.min(Math.floor(clamped), grids.length - 2);
+    const f = clamped - h0;
+    const a = windAt(grids[h0], lat, lon);
+    const b = windAt(grids[h0 + 1], lat, lon);
+    return { u: a.u * (1 - f) + b.u * f, v: a.v * (1 - f) + b.v * f };
 }
 
 /**

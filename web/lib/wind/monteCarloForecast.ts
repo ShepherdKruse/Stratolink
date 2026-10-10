@@ -1,5 +1,5 @@
 import { integrateBalloonPathT } from './balloonIntegrate';
-import { boundsForForecast } from './fetchWindGrid';
+import { boundsForForecast, snapPressureHpa } from './fetchWindGrid';
 import type { ForecastEllipse, ForecastGpsFix, MonteCarloForecastInput, StratolinkForecast } from './forecastTypes';
 import { GAP_WIND_MODE, gpsGapHours, STALE_GPS_THRESHOLD_H } from './staleGpsExtrapolation';
 import { computePathReconstruction, type GapCacheEntry, type PathReconstructionResult } from './pathReconstruction';
@@ -400,6 +400,10 @@ async function resolveReconstruction(
 export async function computeMonteCarloForecast(input: MonteCarloForecastInput): Promise<StratolinkForecast> {
     const t0 = Date.now();
     const totalHours = input.forecastHours ?? CFG.TOTAL_HOURS;
+    /* Only steers the Open-Meteo fallback inside fetchWindCube. The level the
+     * forecast reports and the reconstruction is keyed by is the cube's own
+     * `levelHpa` (the float pressure the ingest interpolated the winds to). */
+    const levelHpa = snapPressureHpa(input.pressureHpa);
     const nEnsemble = input.nEnsemble ?? CFG.N_ENSEMBLE;
 
     const lastFix = input.gpsFixes[input.gpsFixes.length - 1];
@@ -443,15 +447,12 @@ export async function computeMonteCarloForecast(input: MonteCarloForecastInput):
      *     hours (so the forward forecast evolves), at the finest grid that fits.
      *     Drives the forward forecast, the ensemble, the bias fit and the origin.
      *   - reconCube: full-mission, 3-hourly cube driving only the historical
-     *     reconstruction. Both fall back to the full cube / Open-Meteo if absent.
-     * The wind LEVEL is whatever the cube was built at (`cube.levelHpa`, the
-     * balloon's float pressure the ingest interpolated to) — the telemetry
-     * pressure only steers the Open-Meteo fallback, which snaps it itself. */
+     *     reconstruction. Both fall back to the full cube / Open-Meteo if absent. */
     const fcCube = await fetchWindCube({
-        bounds: gridBounds, levelHpa: input.pressureHpa, startMs, endMs, gridStep, deviceId: input.deviceId, kind: 'forecast',
+        bounds: gridBounds, levelHpa, startMs, endMs, gridStep, deviceId: input.deviceId, kind: 'forecast',
     });
     const reconCube = await fetchWindCube({
-        bounds: gridBounds, levelHpa: input.pressureHpa, startMs, endMs, gridStep, deviceId: input.deviceId, kind: 'reconstruction',
+        bounds: gridBounds, levelHpa, startMs, endMs, gridStep, deviceId: input.deviceId, kind: 'reconstruction',
     });
 
     /* Neutral bias: trust the GFS prediction and jitter the ensemble around it

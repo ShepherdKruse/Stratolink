@@ -807,24 +807,23 @@ def build_cube(device, fixes, target_p, latest):
     print(f"  {device}: interp {target_p:.1f}mb ({lo}↔{hi}), gap {gap_h:.0f}h")
     clear_field_cache()                          # fresh per device (free the prior device's fields)
 
-    # ── Reconstruction cube: full mission, 3-hourly. ──
-    # Default: a tube along the observed track at the native 0.25° (build_tube_recon).
-    # RECON_TUBE=0 keeps the legacy single static box (first fix → now+horizon):
-    # its box is dominated by the full-mission track, so it uses a SMALL forward
-    # pad (a big one would push the continent-wide box past the point budget and
-    # coarsen the historical grid even further).
-    if os.environ.get("SKIP_RECON") != "1":     # dev: skip the slow full-mission recon when iterating on the tube
-        if RECON_TUBE:
-            build_tube_recon(device, fixes, target_p, latest, now)
-        else:
-            recon_bounds = bounds_for_forecast(fixes, HORIZON_H, pad_cap=8)
-            recon_step = choose_grid_step(recon_bounds)
-            recon_start = floor_step(first_fix, RECON_STEP_H) - timedelta(hours=RECON_STEP_H)
-            recon_end = floor_step(now, RECON_STEP_H) + timedelta(hours=HORIZON_H + 2 * RECON_STEP_H)
-            recon, rla, rlo = sample_grids(recon_bounds, recon_step, recon_start, recon_end,
-                                           RECON_STEP_H, target_p, latest, now, "recon")
-            write_cube(device, "", recon, rla, rlo, "recon")
-            del recon
+    # ── Reconstruction cube: full mission (first fix → now+horizon), 3-hourly. ──
+    # Its box is dominated by the full-mission track; the forward leg is unused by
+    # reconstruction, so use a SMALL forward pad (a big one would push the
+    # continent-wide box past the point budget and coarsen the historical grid).
+    # Default is now the trajectory tube (build_tube_recon); the static box below is the RECON_TUBE=0 legacy path.
+    if os.environ.get("SKIP_RECON") != "1" and RECON_TUBE:
+        build_tube_recon(device, fixes, target_p, latest, now)
+        clear_field_cache()                      # free the recon's fields before the fc tube prefetches its own
+    elif os.environ.get("SKIP_RECON") != "1":   # dev: skip the slow full-mission recon when iterating on the tube
+        recon_bounds = bounds_for_forecast(fixes, HORIZON_H, pad_cap=8)
+        recon_step = choose_grid_step(recon_bounds)
+        recon_start = floor_step(first_fix, RECON_STEP_H) - timedelta(hours=RECON_STEP_H)
+        recon_end = floor_step(now, RECON_STEP_H) + timedelta(hours=HORIZON_H + 2 * RECON_STEP_H)
+        recon, rla, rlo = sample_grids(recon_bounds, recon_step, recon_start, recon_end,
+                                       RECON_STEP_H, target_p, latest, now, "recon")
+        write_cube(device, "", recon, rla, rlo, "recon")
+        del recon
         clear_field_cache()                      # free the recon's fields before the fc tube prefetches its own
 
     # ── Forecast cube: recent track + dead-reckon + cone, HOURLY, finest grid. ──
