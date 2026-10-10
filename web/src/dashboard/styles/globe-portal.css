@@ -27,8 +27,6 @@ html[data-globe-portal="dashboard"] .fleet-timeline { transition-delay: 150ms; }
   html[data-globe-portal="footer"] .fleet-panel,
   html[data-globe-portal="entering"] .fleet-panel { transform: translateY(-105%); }
   html[data-globe-portal] .fleet-timeline { left: 12px; right: 12px; bottom: var(--timeline-bottom); }
-  /* The full-bleed portal map would run under the charts drawer's 46px handle (DRAWER_HANDLE_H); stop it there as the normal layout does. */
-  html[data-globe-portal] .fleet-layout[data-detail="true"] .fleet-map { bottom: 46px; }
   html[data-globe-portal] .map-coordinates { left: var(--dashboard-gutter); top: calc(var(--portal-panel-height, 370px) + var(--dashboard-gutter)); }
   html[data-globe-portal] .map-legend { top: calc(var(--portal-panel-height, 370px) + var(--dashboard-gutter)); }
 }

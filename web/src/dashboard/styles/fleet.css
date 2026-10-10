@@ -141,7 +141,9 @@
   /* The scrubber hugs the map's bottom edge; the Mapbox logo and attribution move up into
      the empty left half of the scrubber's time-label row instead of reserving a row below it. */
   .fleet-map { --timeline-bottom: max(12px, env(safe-area-inset-bottom)); }
-  .fleet-layout[data-detail="true"] .fleet-map { --timeline-bottom: 12px; }
+  /* The detail map runs under the charts drawer's 46px handle (DRAWER_HANDLE_H) so the drawer's
+     rounded corners show map, not page; the scrubber still sits 12px above the handle. */
+  .fleet-layout[data-detail="true"] .fleet-map { --timeline-bottom: 58px; margin-bottom: -46px; }
   .fleet-timeline { bottom: var(--timeline-bottom); left: 12px; right: 12px; }
   .sl-app .fleet-map .mapboxgl-ctrl-bottom-right { right: auto; left: 14px; bottom: calc(var(--timeline-bottom) + 34px); }
   /* Mapbox's own compact logo (the emblem, which GL JS itself shows on narrow maps) at its native
