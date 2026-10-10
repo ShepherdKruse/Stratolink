@@ -4,11 +4,10 @@
  */
 
 import { createHash } from 'node:crypto';
-import { snapPressureHpa } from './fetchWindGrid';
 import type { ForecastGpsFix } from './forecastTypes';
 import { BALLOON_STEP_HOURS } from './balloonIntegrate';
 import { reconstructLongGap, type OccupancyFootprint } from './pathReconstructionLongGap';
-import { sampleWind, type WindCube } from './windCube';
+import { cubeCovers, sampleWind, type WindCube } from './windCube';
 
 const CFG = {
     N_PARTICLES: 200,
@@ -79,6 +78,12 @@ export type ReconstructionGap = {
     n_eff?: number;
     directness?: number;
     net_speed_ms?: number;
+    /** Fraction of the bridge's wind samples that fell outside the cube's slice
+     *  boxes (edge-clamped winds); 0 when the whole particle cloud stayed inside. */
+    outside_cube_frac?: number;
+    /** Long gaps: the same fraction weighted by posterior particle weight — the
+     *  share of samples that shape the drawn bridge which read clamped winds. */
+    outside_cube_frac_weighted?: number;
     occupancy?: OccupancyFootprint | null;
     ellipses?: Array<{
         frac: number;
@@ -116,8 +121,12 @@ export type PathReconstructionResult = {
  * We key each bridge by a hash of its two endpoints and reuse it across recomputes,
  * so appending a new fix only re-bridges the trailing gap instead of re-running
  * (and re-fetching winds for) the entire flight. The caller persists the map.
+ * Bump GAP_ALGO_VERSION with hindcastStorage's ALGO_VERSION on any geometry
+ * change, or the cached bridges are stitched back unchanged.
+ *   g2: 0.25° tube reconstruction cube, cube-sourced level, longitude-based
+ *       local time in the long-gap altitude model (see ALGO_VERSION v3).
  * ------------------------------------------------------------------------- */
-const GAP_ALGO_VERSION = 'g1';
+const GAP_ALGO_VERSION = 'g2';
 /** A bridge whose end is older than this is final — safe to reuse verbatim. */
 const GAP_SETTLE_MS = 6 * 3_600_000;
 
@@ -163,6 +172,10 @@ function appendTimedSegment(
 type Fix = ForecastGpsFix & { alt_m: number };
 
 type PathPoint = { lat: number; lon: number; alt: number };
+
+/** Running count of wind samples taken by a bridge, and how many of them fell
+ *  outside the cube's slice boxes (edge-clamped winds). */
+type CoverageStats = { total: number; outside: number };
 
 function distanceKm(aLat: number, aLon: number, bLat: number, bLon: number): number {
     const dLat = toRad(bLat - aLat);
@@ -227,6 +240,7 @@ function integrate(
     altProfile: (frac: number) => number,
     tA: number,
     tB: number,
+    stats: CoverageStats,
 ): PathPoint[] {
     const { speedMult, dirOffsetDeg } = params;
     const stepSec = CFG.STEP_HOURS * 3600 * dirSign;
@@ -247,6 +261,8 @@ function integrate(
         /* Sample the cube at this step's wall-clock instant (forward from tA, or
          * backward from tB for the reverse cloud). */
         const tw = dirSign > 0 ? tA + ((s - 1) / nSteps) * span : tB - ((s - 1) / nSteps) * span;
+        stats.total += 1;
+        if (!cubeCovers(cube, lat, lon, tw)) stats.outside += 1;
         const { u, v } = sampleWind(cube, lat, lon, tw);
         const k = speedMult * altScale;
         const uK = u * k;
@@ -270,6 +286,7 @@ function solveShooting(
     altProfile: (frac: number) => number,
     tA: number,
     tB: number,
+    stats: CoverageStats,
 ): { speedMult: number; dirOffsetDeg: number; miss: number } {
     let speedMult = 1;
     let dirOffsetDeg = 0;
@@ -277,7 +294,7 @@ function solveShooting(
     let best = { speedMult, dirOffsetDeg, miss: Infinity };
 
     for (let iter = 0; iter < CFG.SHOOT_ITERS; iter++) {
-        const p = integrate(A, cube, nSteps, 1, { speedMult, dirOffsetDeg }, altProfile, tA, tB);
+        const p = integrate(A, cube, nSteps, 1, { speedMult, dirOffsetDeg }, altProfile, tA, tB, stats);
         const end = p[p.length - 1];
         const miss = distanceKm(B.lat, B.lon, end.lat, end.lon);
         if (miss < best.miss) best = { speedMult, dirOffsetDeg, miss };
@@ -310,11 +327,13 @@ function bridgeGap(
     mid_gap_90_km: number;
     confidence: 'high' | 'medium' | 'low';
     short: boolean;
+    outside_cube_frac: number;
 } {
     const tA = new Date(A.time_utc).getTime();
     const tB = new Date(B.time_utc).getTime();
     const gapMin = (tB - tA) / 60_000;
     const nSteps = Math.max(1, Math.round(gapMin / 60 / CFG.STEP_HOURS));
+    const stats: CoverageStats = { total: 0, outside: 0 };
 
     const altA = A.alt_m ?? CFG.FLOAT_ALT_M;
     const altB = B.alt_m ?? CFG.FLOAT_ALT_M;
@@ -357,12 +376,13 @@ function bridgeGap(
             mid_gap_90_km: 0,
             confidence: 'high',
             short: true,
+            outside_cube_frac: 0,
         };
     }
 
     const start: PathPoint = { lat: A.lat, lon: A.lon, alt: altA };
     const end: PathPoint = { lat: B.lat, lon: B.lon, alt: altB };
-    const bias = solveShooting(start, end, cube, nSteps, altProfile, tA, tB);
+    const bias = solveShooting(start, end, cube, nSteps, altProfile, tA, tB, stats);
 
     function runCloud(
         from: PathPoint,
@@ -382,7 +402,7 @@ function bridgeGap(
                       const off = CFG.ALT_SIGMA_M * gauss();
                       return (f: number) => altProfile(f) + off;
                   })();
-            const p = integrate(from, cube, nSteps, dirSign, params, aProf, tA, tB);
+            const p = integrate(from, cube, nSteps, dirSign, params, aProf, tA, tB, stats);
             const e = p[p.length - 1];
             const miss = distanceKm(target.lat, target.lon, e.lat, e.lon);
             const w = Math.exp(-(miss * miss) / (2 * CFG.ENDPOINT_SIGMA_KM ** 2));
@@ -447,6 +467,16 @@ function bridgeGap(
     );
     const confidence = midE90 < 25 ? 'high' : midE90 < 75 ? 'medium' : 'low';
 
+    /* Every sample should read real cube data; one outside its slice box got
+     * edge-clamped winds. Logged so an under-sized tube box is visible. */
+    const outsideFrac = stats.total ? stats.outside / stats.total : 0;
+    if (stats.outside > 0) {
+        console.warn(
+            `[reconstruction] gap ${A.time_utc} → ${B.time_utc} (${R1(gapMin / 60)} h): ` +
+            `${stats.outside}/${stats.total} wind samples (${R1(outsideFrac * 100)}%) outside the cube's slice boxes`,
+        );
+    }
+
     return {
         meanPath,
         dt_hours: R1(gapMin / 60),
@@ -455,6 +485,7 @@ function bridgeGap(
         mid_gap_90_km: R1(midE90),
         confidence,
         short: false,
+        outside_cube_frac: Math.round(outsideFrac * 1e4) / 1e4,
     };
 }
 
@@ -470,9 +501,9 @@ function normalizeFixes(fixes: ForecastGpsFix[]): Fix[] {
  *  bridges of older gaps and only (re)compute the recent/trailing ones. */
 export async function computePathReconstruction(opts: {
     fixes: ForecastGpsFix[];
-    pressureHpa: number;
     /** Space-time GFS cube spanning the mission — every bridge samples it (no
-     *  Open-Meteo). Must cover the fixes' span (the full-mission ingest does). */
+     *  Open-Meteo). Must cover the fixes' span (the full-mission ingest does).
+     *  Its `levelHpa` is the wind level the bridges are keyed by. */
     cube: WindCube;
     baroSamples?: BaroSample[];
     gapCache?: Map<string, GapCacheEntry>;
@@ -495,7 +526,11 @@ export async function computePathReconstruction(opts: {
         };
     }
 
-    const levelHpa = snapPressureHpa(opts.pressureHpa);
+    /* The level is the cube's own (what the ingest interpolated the winds to),
+     * not the snapped latest telemetry pressure — that read 300 for a cube built
+     * at 285, 1000 once the balloon had landed, and re-keyed every gap whenever
+     * the latest reading crossed a standard-level boundary. */
+    const levelHpa = opts.cube.levelHpa;
     const now = opts.now ?? Date.now();
     const cache = opts.gapCache;
     const allBaro = opts.baroSamples ?? [];
@@ -562,6 +597,8 @@ export async function computePathReconstruction(opts: {
                 n_eff: lg.n_eff,
                 directness: lg.directness,
                 net_speed_ms: lg.net_speed_ms,
+                outside_cube_frac: lg.outside_cube_frac,
+                outside_cube_frac_weighted: lg.outside_cube_frac_weighted,
                 occupancy: lg.occupancy,
                 ellipses: lg.ellipses,
             };
@@ -579,6 +616,7 @@ export async function computePathReconstruction(opts: {
                 confidence: br.confidence,
                 short: br.short,
                 mode: 'line',
+                outside_cube_frac: br.outside_cube_frac,
             };
             isBridge = !br.short && br.meanPath.length >= 2;
             cache?.set(plan.hash, { meanPath, gap: meta, isBridge, computed_at: nowIso });

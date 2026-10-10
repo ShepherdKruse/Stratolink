@@ -1,5 +1,5 @@
 import { windAt, type GfsGrid } from './gfsGrid';
-import { sampleWind, type WindCube } from './windCube';
+import { cubeCovers, sampleWind, type WindCube } from './windCube';
 
 export const BALLOON_STEP_HOURS = 1 / 6;
 const ALT_TO_WIND_FACTOR = 0.015;
@@ -123,15 +123,11 @@ export function integrateBalloonPathT(
     /* Coverage of this cube — stop integrating rather than advect on clamped edge
      * winds (space) or a frozen last grid (time). A long dead-reckon used to run
      * right off the box and circle the globe on edge winds; now it truncates where
-     * the data ends, which is the honest extent. Longitude is wrapped so a query
-     * that has crept past ±180 is judged against the box correctly. */
-    const { latMin, latMax, lonMin, lonMax } = cube.bounds;
+     * the data ends, which is the honest extent. For a tube cube the test is
+     * against the slice boxes bracketing the step's instant, not the tube's union
+     * bounds — a member that strays out of its own slice's box used to count as
+     * covered and ride edge-clamped winds (`cubeCovers`). */
     const tEndMs = cube.t0Ms + Math.max(0, cube.grids.length - 1) * cube.stepMs;
-    const covered = (la: number, lo: number): boolean => {
-        if (la < latMin || la > latMax) return false;
-        const L = lonMin + (((lo - lonMin) % 360) + 360) % 360; // into [lonMin, lonMin+360)
-        return L >= lonMin && L <= lonMax;
-    };
 
     for (let s = 1; s <= totalSteps; s++) {
         const whenMs = startTimeMs + s * stepMs;
@@ -156,7 +152,7 @@ export function integrateBalloonPathT(
         lat += (vR * stepSec) / 111_320;
         lon += (uR * stepSec) / (111_320 * cosLat);
 
-        if (!covered(lat, lon)) {                         // left the box — stop, don't extrapolate
+        if (!cubeCovers(cube, lat, lon, whenMs)) {        // left the box — stop, don't extrapolate
             path.push([round4(lon), round4(lat)]);
             break;
         }

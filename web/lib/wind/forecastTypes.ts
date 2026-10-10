@@ -113,6 +113,10 @@ export type StratolinkForecast = {
             n_eff?: number;
             directness?: number;
             net_speed_ms?: number;
+            /** Fraction of the bridge's wind samples outside the cube's slice boxes. */
+            outside_cube_frac?: number;
+            /** Long gaps: the same, weighted by posterior particle weight. */
+            outside_cube_frac_weighted?: number;
             occupancy?: {
                 lat0: number;
                 lon0: number;

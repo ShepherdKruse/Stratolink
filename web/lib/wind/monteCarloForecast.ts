@@ -349,16 +349,16 @@ const HINDCAST_REFRESH_WINDOW_H = 6;
 const HINDCAST_MIN_REFRESH_INTERVAL_H = 3;
 
 /**
- * The static hindcast, cached by a hash of the GPS fixes. Unchanged fixes ⇒
- * reuse the cached reconstruction (no wind fetch, no re-jitter); a new fix ⇒
- * fresh compute. Returns the reconstruction plus its input hash.
+ * The static hindcast, cached by a hash of the GPS fixes and the cube's wind
+ * level. Unchanged fixes ⇒ reuse the cached reconstruction (no wind fetch, no
+ * re-jitter); a new fix ⇒ fresh compute. Returns the reconstruction plus its
+ * input hash.
  */
 async function resolveReconstruction(
     input: MonteCarloForecastInput,
-    levelHpa: number,
     cube: WindCube,
 ): Promise<{ result: PathReconstructionResult; hash: string }> {
-    const hash = hindcastInputHash(input.gpsFixes, levelHpa);
+    const hash = hindcastInputHash(input.gpsFixes, cube.levelHpa);
     const lastFix = input.gpsFixes[input.gpsFixes.length - 1];
 
     const cached = await readStoredHindcast(input.deviceId, hash);
@@ -381,7 +381,6 @@ async function resolveReconstruction(
     const gapCache = new Map(Object.entries(gapRaw)) as Map<string, GapCacheEntry>;
     const result = await computePathReconstruction({
         fixes: input.gpsFixes,
-        pressureHpa: levelHpa,
         cube,
         baroSamples: input.baroSamples,
         gapCache,
@@ -401,6 +400,9 @@ async function resolveReconstruction(
 export async function computeMonteCarloForecast(input: MonteCarloForecastInput): Promise<StratolinkForecast> {
     const t0 = Date.now();
     const totalHours = input.forecastHours ?? CFG.TOTAL_HOURS;
+    /* Only steers the Open-Meteo fallback inside fetchWindCube. The level the
+     * forecast reports and the reconstruction is keyed by is the cube's own
+     * `levelHpa` (the float pressure the ingest interpolated the winds to). */
     const levelHpa = snapPressureHpa(input.pressureHpa);
     const nEnsemble = input.nEnsemble ?? CFG.N_ENSEMBLE;
 
@@ -457,11 +459,7 @@ export async function computeMonteCarloForecast(input: MonteCarloForecastInput):
      * (the chord-derived bias was unreliable here — see neutralBias). */
     const bias = neutralBias(recentFixes);
 
-    const { result: reconstruction, hash: reconstructionHash } = await resolveReconstruction(
-        input,
-        levelHpa,
-        reconCube,
-    );
+    const { result: reconstruction, hash: reconstructionHash } = await resolveReconstruction(input, reconCube);
 
     /* Every member is ONE continuous integration from the last fix (at its real
      * time) through "now" to the horizon — so the predicted-hindcast and forecast
@@ -650,7 +648,7 @@ export async function computeMonteCarloForecast(input: MonteCarloForecastInput):
     return {
         generated_at: nowISO,
         forecast_horizon_h: totalHours,
-        level_hpa: levelHpa,
+        level_hpa: fcCube.levelHpa,
         forecast_origin: {
             lat: originPt[1],
             lon: originPt[0],
