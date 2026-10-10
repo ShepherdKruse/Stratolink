@@ -31,3 +31,30 @@ manifest, exact fixture hash and allowed remote path. Existing remote files are
 not replaced, uncertain writes/transmissions are not retried, and repeat is
 fixed to one. The tools require the reviewed official Flipper 1.3.4 firmware and
 its existing region restrictions; the adapter does not change those restrictions.
+
+## Offline SDR decoding
+
+The analyzer accepts interleaved unsigned 8-bit I/Q and requires NumPy. It never
+opens a radio. Supply the capture's sample rate and receiver center frequency:
+
+```sh
+python3 analysis/diagnostics/flipper_ctt_iq_test_20261009.py \
+  --iq capture.u8 --sample-rate 1024000 --center-hz 434000000 \
+  --provenance captured-unverified --output decoded.json
+```
+
+Use `--provenance synthetic` for generated input. The report preserves decoded
+bad CRCs, distinguishes packet duration from the carrier tail, and marks clipped
+captures. No decoded frame means inconclusive, not verified silence. Decoded
+bytes alone do not identify a transmitter, qualify an RF profile or prove
+onboard reception. Output files are create-once.
+
+Run the hardware-free regressions from the repository root:
+
+```sh
+python3 -m unittest discover -s analysis/diagnostics -p 'flipper_ctt*20261009_test.py'
+```
+
+The tests use synthetic IQ and serial/process fakes. The independent CRC check
+also compiles `firmware/src/ctt_decode.cpp` with a C++17 compiler and address/
+undefined-behavior sanitizers, so it requires the companion firmware changes.
