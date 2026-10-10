@@ -1,0 +1,227 @@
+{
+  "description": "Synthetic addresses and placeholder digest for offline decoder tests, not a board manifest.",
+  "elf_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+  "tamp_bkp0_address": 1073787136,
+  "symbols": {
+    "REGION_ID": {
+      "address": 536870912,
+      "size": 1
+    },
+    "_joined": {
+      "address": 536870928,
+      "size": 1
+    },
+    "boot_count": {
+      "address": 536870944,
+      "size": 4
+    },
+    "boot_reset_cause": {
+      "address": 536870960,
+      "size": 4
+    },
+    "burst_cooldown": {
+      "address": 536870976,
+      "size": 1
+    },
+    "burst_cycles": {
+      "address": 536870992,
+      "size": 2
+    },
+    "burst_mode": {
+      "address": 536871008,
+      "size": 1
+    },
+    "fCntDown": {
+      "address": 536871024,
+      "size": 4
+    },
+    "fCntUp": {
+      "address": 536871040,
+      "size": 4
+    },
+    "ff_suppress_clean": {
+      "address": 536871056,
+      "size": 1
+    },
+    "join_retry_skip": {
+      "address": 536871072,
+      "size": 1
+    },
+    "last_gps_fix": {
+      "address": 536871088,
+      "size": 20
+    },
+    "region_authority_region": {
+      "address": 536871120,
+      "size": 1
+    },
+    "region_authority_source": {
+      "address": 536871136,
+      "size": 1
+    },
+    "region_fix_age_sec": {
+      "address": 536871152,
+      "size": 4
+    },
+    "region_known": {
+      "address": 536871168,
+      "size": 1
+    },
+    "region_lease_trusted": {
+      "address": 536871184,
+      "size": 1
+    },
+    "s_b2b_crumb_frame_ready": {
+      "address": 536871200,
+      "size": 1
+    },
+    "s_b2b_crumb_pending": {
+      "address": 536871216,
+      "size": 1
+    },
+    "s_b2b_origin_id_ready": {
+      "address": 536871232,
+      "size": 1
+    },
+    "s_b2b_origin_n": {
+      "address": 536871248,
+      "size": 1
+    },
+    "s_b2b_uplink_n": {
+      "address": 536871264,
+      "size": 1
+    },
+    "s_boot_reset_code": {
+      "address": 536871280,
+      "size": 1
+    },
+    "s_burst_wake": {
+      "address": 536871296,
+      "size": 1
+    },
+    "s_ctt": {
+      "address": 536871312,
+      "size": 32
+    },
+    "s_dl_stats": {
+      "address": 536871344,
+      "size": 56
+    },
+    "s_ff_suppressed": {
+      "address": 536871408,
+      "size": 1
+    },
+    "s_gps_diag": {
+      "address": 536871424,
+      "size": 76
+    },
+    "s_have_fix_this_boot": {
+      "address": 536871504,
+      "size": 1
+    },
+    "s_have_seq": {
+      "address": 536871520,
+      "size": 1
+    },
+    "s_last_fix_monotonic_sec": {
+      "address": 536871536,
+      "size": 4
+    },
+    "s_last_seq": {
+      "address": 536871552,
+      "size": 1
+    },
+    "s_lis2dh12_reconfig_attempts": {
+      "address": 536871568,
+      "size": 4
+    },
+    "s_liveness_diag": {
+      "address": 536871584,
+      "size": 28
+    },
+    "s_liveness_state": {
+      "address": 536871616,
+      "size": 3
+    },
+    "s_ltr390_quiesce_failures": {
+      "address": 536871632,
+      "size": 4
+    },
+    "s_ltr390_reinit_attempts": {
+      "address": 536871648,
+      "size": 4
+    },
+    "s_ltr390_soft_reset_recoveries": {
+      "address": 536871664,
+      "size": 4
+    },
+    "s_mic_diag": {
+      "address": 536871680,
+      "size": 24
+    },
+    "s_ms5611_reinit_attempts": {
+      "address": 536871712,
+      "size": 4
+    },
+    "s_optical_quiescence_fault": {
+      "address": 536871728,
+      "size": 1
+    },
+    "s_optical_quiet_retries": {
+      "address": 536871744,
+      "size": 1
+    },
+    "s_radio_diag": {
+      "address": 536871760,
+      "size": 24
+    },
+    "s_relay": {
+      "address": 536871792,
+      "size": 68
+    },
+    "s_relay_enabled": {
+      "address": 536871872,
+      "size": 1
+    },
+    "s_reported_ctt_tags": {
+      "address": 536871888,
+      "size": 4
+    },
+    "s_reported_relay_fwd": {
+      "address": 536871904,
+      "size": 4
+    },
+    "s_sensor_i2c_bus_recoveries": {
+      "address": 536871920,
+      "size": 4
+    },
+    "s_stats": {
+      "address": 536871936,
+      "size": 16
+    },
+    "s_tmp117_direct_reads": {
+      "address": 536871952,
+      "size": 4
+    },
+    "s_tmp117_fallback_reads": {
+      "address": 536871968,
+      "size": 4
+    },
+    "s_tmp117_poweron_sentinels": {
+      "address": 536871984,
+      "size": 4
+    },
+    "s_tmp117_reinit_attempts": {
+      "address": 536872000,
+      "size": 4
+    },
+    "spurious_ff_streak": {
+      "address": 536872016,
+      "size": 1
+    },
+    "tx_fail_streak": {
+      "address": 536872032,
+      "size": 1
+    }
+  }
+}

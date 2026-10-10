@@ -1,0 +1,10 @@
+# SYNTHETIC CTT bench fixture; not a real wildlife detection.
+# 80 logical bits / 3200 us; stock CLI carrier tail is longer.
+Filetype: Flipper SubGhz RAW File
+Version: 1
+Frequency: 434000000
+Preset: FuriHalSubGhzPresetCustom
+Custom_preset_module: CC1101
+Custom_preset_data: 02 0D 0B 06 08 32 07 04 14 00 13 02 12 04 11 F8 10 69 15 40 18 18 19 16 1D 91 1C 00 1B 07 20 FB 22 10 21 56 00 00 0E 00 00 00 00 00 00 00
+Protocol: RAW
+RAW_Data: 40 -40 40 -40 40 -40 40 -40 40 -40 40 -40 40 -40 40 -40 40 -40 40 -40 40 -40 40 -40 80 -40 40 -80 120 -80 40 -120 40 -40 160 -160 40 -40 40 -40 40 -40 40 -40 40 -80 80 -160 80 -80 80 -40 40 -40 80 -120
