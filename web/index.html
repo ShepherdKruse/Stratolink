@@ -23,19 +23,19 @@
   <meta name="twitter:image" content="https://stratolink.org/assets/launch/source.jpg">
   <meta name="twitter:image:alt" content="A Stratolink balloon and its payload above the San Francisco skyline and clouds.">
   <link rel="stylesheet" href="/src/styles.css">
+  <!-- home-placeholder:start -->
+  <style data-launch-placeholder>.scene-placeholder{background-image:url(data:image/webp;base64,UklGRpwAAABXRUJQVlA4IJAAAAAwBQCdASogABIAPt1kqU8opaOiKAqpEBuJYwCdHX+gPHq4fzUbVy0FM+hNuUhb8HjuAAD93RGu3iZUKoYk5LkWLWD+MLnuKp2u77PW9iQOTUL7hSf3ZbJnVAPdX6u6cUVyMC45fl6iPlsgZ42HvyHbjR/nQSd6pYq0znuQQJ94AO51/Fm/tmwB681DTaoTgAA=)}</style>
+  <!-- home-placeholder:end -->
   <link id="site-favicon" rel="icon" href="/assets/favicon/globe.png" type="image/png" sizes="64x64">
   <link rel="apple-touch-icon" href="/assets/favicon/apple-touch-icon.png">
   <script type="module" src="/src/favicon.js"></script>
   <noscript><style>
-    html .scene-intro { display: none; }
     html .launch { height: auto !important; }
-    html .launch-viewport { position: relative; height: auto; min-height: 100dvh; }
+    html .launch-viewport { position: relative; height: auto; min-height: 100lvh; }
     html .story-window { position: relative; z-index: 6; mask-image: none; }
-    html .story { position: relative; top: auto !important; transform: none !important; padding-top: 31dvh; padding-bottom: 64px; }
+    html .story { position: relative; top: auto !important; transform: none !important; padding-top: 31lvh; padding-bottom: 64px; }
     html .essay-body > p, html .essay-body > section { opacity: 1; pointer-events: auto; }
-    html .launch[data-title-pending] .story h1, html .launch[data-story-pending] .essay-body { visibility: visible; }
-    html .launch[data-loading] .foreground-layer, html .launch[data-loading] .balloon-layer { opacity: 1; }
-    html .launch[data-loading] .story { color: #29333c; }
+    html .launch[data-pending] .launch-viewport > * { opacity: 1; }
   </style></noscript>
   <script type="module" src="/src/main.js"></script>
 </head>
@@ -44,8 +44,9 @@
     <a href="/" aria-label="Stratolink home"><img src="/assets/stratolink-wordmark.svg" alt="stratolink" width="7581" height="1510"></a>
   </header>
   <main>
-    <section class="launch" data-loading data-title-pending data-story-pending aria-label="Stratolink balloon launch over San Francisco">
+    <section class="launch" data-pending aria-label="Stratolink balloon launch over San Francisco">
       <div class="launch-viewport">
+        <div class="scene-placeholder" aria-hidden="true"></div>
         <div class="scene-layer sky-layer" aria-hidden="true">
           <img class="scene-photo" src="/assets/launch/sky.webp" alt="" fetchpriority="high" width="1672" height="941">
         </div>
@@ -61,10 +62,9 @@
           </div>
         </div>
         <div class="scene-warmth" aria-hidden="true"></div>
-        <div class="scene-intro" aria-hidden="true"></div>
         <div class="story-window">
           <article class="story" aria-labelledby="story-title">
-        <h1 id="story-title"><span data-letter-reveal>Open source pico</span> <span data-letter-reveal>balloon network.</span></h1>
+        <h1 id="story-title"><span>Open source pico</span> <span>balloon network.</span></h1>
         <div class="essay-body">
         <p>Stratolink is a network of small, solar-powered balloons built to collect and share data from the stratosphere.</p>
 <p>We've designed a custom pico balloon payload weighing just under 10 g. Anyone can build and launch one by following the <a href="/docs/getting-started">docs</a>.</p>

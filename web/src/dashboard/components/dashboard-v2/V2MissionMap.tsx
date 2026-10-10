@@ -15,6 +15,11 @@
  */
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import Map, { Source, Layer, AttributionControl } from 'react-map-gl/mapbox';
+import mapboxgl from 'mapbox-gl';
+
+/* Boot diagnostics: map lifecycle timestamps the homepage's ?perf overlay reads from the portal iframe. */
+const mapTiming = ((window as unknown as { __mapTiming?: Record<string, number> }).__mapTiming ??= {});
+const mark = (name: string) => { mapTiming[name] ??= Math.round(performance.now()); };
 import type { MapRef, LngLatBoundsLike } from 'react-map-gl/mapbox';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import { useGlobePortal } from './globe-portal';
@@ -26,6 +31,7 @@ import GatewayRangeRings from '@/components/maps/GatewayRangeRings';
 import { quietBasemapLabels } from '@/components/maps/quietBasemapLabels';
 import DayNightTerminator from '@/components/maps/DayNightTerminator';
 import { applyBaseStyle } from '@/components/maps/baseStyle';
+import { portalBasemapStyle } from '@/components/maps/portalStyle';
 import { bathymetryAllZooms } from '@/components/maps/bathymetry';
 import { ringKm } from '@/lib/gateways/range';
 import { nearestFixTime, type PickablePathPoint } from '@/lib/telemetry/flightNarrative';
@@ -235,7 +241,10 @@ export default function V2MissionMap({
     wideZoom = 2.5,
 }: V2MissionMapProps) {
     const globeStage = useGlobePortal();
-    const mapStyle = colorScheme === 'dark' ? MAP_STYLE_DARK : MAP_STYLE_LIGHT;
+    mark('v2render');
+    /* The footer globe boots on a three-layer basemap (see portalStyle.ts); the stock style arrives with the dashboard. */
+    const portalStyle = useMemo(() => portalBasemapStyle(colorScheme), [colorScheme]);
+    const mapStyle = globeStage === 'footer' ? portalStyle : colorScheme === 'dark' ? MAP_STYLE_DARK : MAP_STYLE_LIGHT;
     /* Track / forecast / receiver colors must shift with the basemap — the deep
      * navy forecast and brick-red track read fine on the light map but vanish on
      * the dark one, so dark mode swaps in brighter, higher-contrast hues. */
@@ -290,10 +299,12 @@ export default function V2MissionMap({
         const m = mapRef.current?.getMap();
         if (!m) return;
         const SENTINEL = 'sl-bathymetry-v2';   /* added by bathymetryAllZooms */
+        /* Always: a style that finishes loading after our first pass re-applies its fog (the default globe
+         * atmosphere when the style declares none), which would paint a pale box around the footer globe. */
+        try { if (m.getFog()) m.setFog(null); } catch { /* style mid-load */ }
         const layerGone = (() => { try { return !m.getLayer(SENTINEL); } catch { return true; } })();
         if (styledSchemeRef.current === colorScheme && !layerGone) return;
         try {
-            m.setFog(null);
             quietBasemapLabels(m);
             applyBaseStyle(m, colorScheme);
             bathymetryAllZooms(m, colorScheme);
@@ -373,6 +384,9 @@ export default function V2MissionMap({
 
     /* Initial view — center on the balloon at the wide default zoom, else US. */
     const initialView = useMemo(() => {
+        /* The homepage footer globe always lands on the whole-globe camera (see usePortalCamera), so start there:
+         * the first render then already has the right tiles, and the later fleet jump only recenters. */
+        if (globeStage !== 'standalone') return { longitude: -55, latitude: 25, zoom: Math.log2(Math.min(innerWidth, innerHeight) * .82 * Math.PI / 512) };
         const focus = validBalloons.find(b => b.id === activeId) ?? validFleetFitBalloons[0];
         if (focus) {
             return { longitude: focus.lon, latitude: focus.lat, zoom: wideZoom };
@@ -885,6 +899,8 @@ export default function V2MissionMap({
                  * styledata. */
                 key={projection}
                 mapboxAccessToken={token}
+                mapLib={mapboxgl}
+                onError={(event) => { ((window as unknown as { __mapErrors?: string[] }).__mapErrors ??= []).push(String(event.error?.message ?? event.error ?? 'unknown').slice(0, 200)); }}
                 transformRequest={mapRequest}
                 /* Restore the pre-teardown camera on a hidden-tab rebuild (#47);
                  * `initialViewState` is only read at mount. */
@@ -915,14 +931,16 @@ export default function V2MissionMap({
                     onPickTime(t);
                 }}
                 onLoad={() => {
+                    mark('load');
                     setStyleLoaded(true);
                     applyCustomStyle();
                     /* Reveal once the map has settled (tiles loaded + everything
                      * composited), so the staged paint happens behind the cover. */
                     const m = mapRef.current?.getMap();
-                    if (m) m.once('idle', () => setRevealed(true));
+                    if (m) { m.once('render', () => mark('firstRender')); m.once('idle', () => { mark('firstIdle'); setRevealed(true); }); }
                 }}
                 onStyleData={() => {
+                    mark('styledata');
                     setStyleLoaded(true);
                     applyCustomStyle();
                 }}
