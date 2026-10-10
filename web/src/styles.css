@@ -252,7 +252,10 @@ img, svg, canvas { display: block; }
 .footer-globe-attribution summary::-webkit-details-marker { display: none; }
 .footer-globe-attribution > div { position: absolute; right: 0; bottom: 32px; display: flex; gap: 10px; padding: 10px 12px; border-radius: 8px; background: var(--paper); box-shadow: 0 2px 12px #0001; font-size: 11px; white-space: nowrap; }
 .footer-globe-attribution:not([open]) > div { display: none; }
-.footer-globe-portal[data-stage="entering"], .footer-globe-portal[data-stage="dashboard"] { opacity: 1; z-index: 100; background: var(--portal-bg, #eaebed); }
+/* While the globe grows to fill the screen, keep the page visible underneath and only then settle onto the dashboard
+   background: painting it at the first frame blanked most of the screen behind a still-small globe. */
+.footer-globe-portal[data-stage="entering"], .footer-globe-portal[data-stage="dashboard"] { opacity: 1; z-index: 100; background: var(--portal-bg, #eaebed); transition-delay: 0ms, 900ms; }
+.footer-globe-portal[data-stage="dashboard"] { transition-delay: 0ms, 0ms; }
 .footer-globe-portal[data-stage="entering"] iframe,
 .footer-globe-portal[data-stage="dashboard"] iframe { opacity: 1; }
 .footer-globe-portal[data-stage="entering"] .footer-globe-trigger,

@@ -1,5 +1,6 @@
 import { useEffect, useRef, type RefObject } from 'react';
 import type { MapRef } from 'react-map-gl/mapbox';
+import type { LayerSpecification } from 'mapbox-gl';
 import type { ExpressionSpecification, Map as MapboxMap } from 'mapbox-gl';
 import { notifyGlobeParent, type GlobeStage } from './globe-portal';
 
@@ -8,14 +9,17 @@ const portalLabelVisibility = new WeakMap<MapboxMap, Map<string, 'visible' | 'no
 /** A theme style load must keep the footer's basemap labels hidden too. */
 export function applyPortalLabelVisibility(map: MapboxMap, stage: GlobeStage) {
     if (stage === 'standalone') return;
-    /* The portal swaps its lean basemap for the stock style as it becomes the dashboard; reading layers mid-load throws. */
-    if (!map.isStyleLoaded()) { map.once('style.load', () => applyPortalLabelVisibility(map, stage)); return; }
+    /* The portal swaps its lean basemap for the stock style as it becomes the dashboard. Reading layers while a
+     * full reload is in flight throws; an incremental (diffed) swap never fires style.load, so retry on styledata. */
+    let layers: LayerSpecification[];
+    try { layers = (map.getStyle()?.layers ?? []) as LayerSpecification[]; }
+    catch { map.once('styledata', () => applyPortalLabelVisibility(map, stage)); return; }
     let visibility = portalLabelVisibility.get(map);
     if (!visibility) {
         visibility = new Map();
         portalLabelVisibility.set(map, visibility);
     }
-    for (const layer of map.getStyle()?.layers ?? []) {
+    for (const layer of layers) {
         if (layer.type !== 'symbol' || layer.id.startsWith('v2-')) continue;
         const current = layer.layout?.visibility ?? 'visible';
         if (!visibility.has(layer.id) || current !== 'none') visibility.set(layer.id, current);

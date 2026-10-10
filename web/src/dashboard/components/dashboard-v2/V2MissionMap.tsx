@@ -31,7 +31,7 @@ import GatewayRangeRings from '@/components/maps/GatewayRangeRings';
 import { quietBasemapLabels } from '@/components/maps/quietBasemapLabels';
 import DayNightTerminator from '@/components/maps/DayNightTerminator';
 import { applyBaseStyle } from '@/components/maps/baseStyle';
-import { portalBasemapStyle } from '@/components/maps/portalStyle';
+import { basemapStyle } from '@/components/maps/basemapStyle';
 import { bathymetryAllZooms } from '@/components/maps/bathymetry';
 import { ringKm } from '@/lib/gateways/range';
 import { nearestFixTime, type PickablePathPoint } from '@/lib/telemetry/flightNarrative';
@@ -185,8 +185,6 @@ interface V2MissionMapProps {
 
 const PATH_PICK_MAX_KM = 120;
 
-const MAP_STYLE_LIGHT = 'mapbox://styles/mapbox/light-v11';
-const MAP_STYLE_DARK = 'mapbox://styles/mapbox/dark-v11';
 // URL-restricted tokens need the site origin, never the dashboard or QR URL.
 const mapRequest = (url: string) => ({ url, referrerPolicy: 'origin' as const });
 
@@ -242,9 +240,8 @@ export default function V2MissionMap({
 }: V2MissionMapProps) {
     const globeStage = useGlobePortal();
     mark('v2render');
-    /* The footer globe boots on a three-layer basemap (see portalStyle.ts); the stock style arrives with the dashboard. */
-    const portalStyle = useMemo(() => portalBasemapStyle(colorScheme), [colorScheme]);
-    const mapStyle = globeStage === 'footer' ? portalStyle : colorScheme === 'dark' ? MAP_STYLE_DARK : MAP_STYLE_LIGHT;
+    /* One reduced basemap for the footer globe and the dashboard alike (see basemapStyle.ts): no style swap on handoff. */
+    const mapStyle = useMemo(() => basemapStyle(colorScheme), [colorScheme]);
     /* Track / forecast / receiver colors must shift with the basemap — the deep
      * navy forecast and brick-red track read fine on the light map but vanish on
      * the dark one, so dark mode swaps in brighter, higher-contrast hues. */
@@ -932,6 +929,7 @@ export default function V2MissionMap({
                 }}
                 onLoad={() => {
                     mark('load');
+                    (window as unknown as { __map?: unknown }).__map = mapRef.current?.getMap(); // diagnostics
                     setStyleLoaded(true);
                     applyCustomStyle();
                     /* Reveal once the map has settled (tiles loaded + everything
