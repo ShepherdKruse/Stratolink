@@ -132,16 +132,10 @@ export default function MissionControlScreen() {
         registeredDevice?.status?.toLowerCase() ?? '',
     ) || recordsBeforeLaunch;
 
+    /* Scrub continuously, archived flights included: between packets the marker
+     * glides along the reconstructed path, and the readings show the gap. */
     function pickTime(time: number | null) {
-        if (time === null || !archived || rows.length === 0) {
-            setScrubT(time);
-            return;
-        }
-        // Archived flights replay recorded packets, including across radio gaps.
-        const nearest = rows.reduce((best, row) =>
-            Math.abs(row.t - time) < Math.abs(best.t - time) ? row : best,
-        );
-        setScrubT(nearest.t);
+        setScrubT(time);
     }
 
     const isMobile = useIsMobile();

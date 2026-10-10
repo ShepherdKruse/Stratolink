@@ -144,6 +144,15 @@
   .fleet-layout[data-detail="true"] .fleet-map { --timeline-bottom: 12px; }
   .fleet-timeline { bottom: var(--timeline-bottom); left: 12px; right: 12px; }
   .sl-app .fleet-map .mapboxgl-ctrl-bottom-right { right: auto; left: 14px; bottom: calc(var(--timeline-bottom) + 34px); }
+  /* Mapbox's own compact logo (the emblem, which GL JS itself shows on narrow maps) at its native
+     23px, unrestyled, beside the compact attribution button that carries the required text credits. */
+  .sl-app .fleet-map .mapboxgl-ctrl-bottom-right { gap: 2px; }
+  .sl-app .fleet-map .mapboxgl-ctrl-bottom-right .mapboxgl-ctrl:has(.mapboxgl-ctrl-logo) { width: 23px; order: -1; }
+  .sl-app .fleet-map a.mapboxgl-ctrl-logo { width: 23px; height: 23px; background-size: 88px 23px; background-position: left center; }
+  /* Keep the scrubber's floating clock clear of that credit (it ends ~33px into the track). */
+  .fleet-timeline { --timeline-label-min: 42px; }
+  /* The opened credits expand across the clock's row; step the clock aside until they close. */
+  .fleet-map:has(.mapboxgl-compact-show) .sl-scrub-clock { visibility: hidden; }
   .dashboard-device-title { font-size: 22px; margin-top: 2px; }
   .dashboard-back-row { margin-top: -6px; padding-bottom: 0; }
   .dashboard-detail-content { margin-bottom: 4px; }
