@@ -6,7 +6,7 @@
 
 import type { ForecastGpsFix } from './forecastTypes';
 import type { BaroSample } from './pathReconstruction';
-import { sampleWind, type WindCube } from './windCube';
+import { cubeCovers, sampleWind, type WindCube } from './windCube';
 
 const CFG = {
     N_PARTICLES: 600,
@@ -28,6 +28,15 @@ const CFG = {
     FLOAT_ALT_M: 9500,
     TYPICAL_WIND_MS: 20,
     ELLIPSE_FRACS: [0.15, 0.3, 0.5, 0.7, 0.85] as const,
+    /** Log-weight cost per wind sample a particle takes OUTSIDE the cube's slice
+     *  boxes. Such a sample read an edge-clamped wind, so the step it drove is
+     *  fiction: a particle that left the tube must not shape the drawn bridge,
+     *  while one grazing the edge for a step or two keeps a usable weight
+     *  (e⁻² per step). Without this, an under-determined multi-day gap (effective
+     *  sample size of a few particles) could draw its bridge from clamped-wind
+     *  trajectories — on the reference flight's 201 h gap, 2/3 of the drawn
+     *  vertices were. */
+    OUTSIDE_CUBE_PENALTY: 2,
 };
 
 const R4 = (x: number) => Math.round(x * 1e4) / 1e4;
@@ -73,6 +82,14 @@ export type LongGapBridgeResult = {
     directness: number;
     net_speed_ms: number;
     short: boolean;
+    /** Fraction of the particles' wind samples that fell outside the cube's
+     *  slice boxes (edge-clamped winds). 0 when every particle stayed inside. */
+    outside_cube_frac: number;
+    /** The same fraction weighted by each particle's posterior weight — i.e. of
+     *  the samples that actually shape the drawn bridge. A wide prior cloud
+     *  (long, low-directness gap) can put many near-zero-weight particles
+     *  outside any sane box while the bridge itself stays well inside. */
+    outside_cube_frac_weighted: number;
 };
 
 function distanceKm(aLat: number, aLon: number, bLat: number, bLon: number): number {
@@ -197,17 +214,29 @@ function computeOccupancy(trajs: PathPoint[][], weights: number[]): OccupancyFoo
     return { lat0: R4(minLat), lon0: R4(minLon), dLat: R4(cell), dLon: R4(cell), nLat, nLon, cells };
 }
 
-function buildAltitudeModel(tA_ms: number, tB_ms: number, baroSamples: BaroSample[]): (frac: number) => number {
+/** Altitude through a gap: a barometer sample when one is within 45 min of the
+ *  instant, else a diurnal float model — a cosine peaking at 14:00 LOCAL solar
+ *  time (a superpressure balloon rides highest in the afternoon). Local time is
+ *  UTC + longitude/15 at the sample's longitude (`lon`, default the gap's
+ *  midpoint): a transatlantic gap spans eight time zones, and the old fixed
+ *  UTC−7 was simply the launch site's zone. */
+function buildAltitudeModel(
+    tA_ms: number,
+    tB_ms: number,
+    baroSamples: BaroSample[],
+    fallbackLon: number,
+): (frac: number, lon?: number) => number {
     const measured = baroSamples.map((s) => ({
         t: new Date(s.time_utc).getTime(),
         alt: s.alt_m,
     }));
-    return (frac) => {
+    return (frac, lon = fallbackLon) => {
         const t = tA_ms + frac * (tB_ms - tA_ms);
         for (const m of measured) {
             if (Math.abs(t - m.t) < 45 * 60_000) return m.alt;
         }
-        const localHour = ((new Date(t).getUTCHours() - 7) + 24) % 24;
+        const utcHour = (t / 3_600_000) % 24;                       // fractional hours since 00:00 UTC
+        const localHour = (((utcHour + lon / 15) % 24) + 24) % 24;
         const dayPhase = Math.cos(((localHour - 14) / 24) * 2 * Math.PI);
         const mid = (CFG.ALT_DAY_M + CFG.ALT_NIGHT_M) / 2;
         const amp = (CFG.ALT_DAY_M - CFG.ALT_NIGHT_M) / 2;
@@ -238,14 +267,14 @@ function integrateBridge(
     tA: number,
     nSteps: number,
     gapHours: number,
-    altModel: (frac: number) => number,
+    altModel: (frac: number, lon?: number) => number,
     pert: {
         speedMult: number;
         dirOffsetDeg: number;
         altOffset: number;
         headingWalk: HeadingKnot[] | null;
     },
-): { path: PathPoint[]; logW: number } {
+): { path: PathPoint[]; logW: number; outside: number } {
     const stepSec = (gapHours * 3600) / nSteps;
 
     let headingOffsets: number[];
@@ -274,16 +303,19 @@ function integrateBridge(
 
     let lat = A.lat;
     let lon = A.lon;
-    const path: PathPoint[] = [{ lat, lon, alt: altModel(0) }];
+    const path: PathPoint[] = [{ lat, lon, alt: altModel(0, lon) }];
     let logW = 0;
+    let outside = 0;                                    // wind samples outside the cube's slice boxes
 
     for (let s = 1; s <= nSteps; s++) {
         const frac = s / nSteps;
         const hourFloat = frac * gapHours;
-        const alt = altModel(frac) + pert.altOffset;
+        const alt = altModel(frac, lon) + pert.altOffset;
         const altScale = 1 + ((alt - CFG.FLOAT_ALT_M) / 1000) * 0.02;
 
-        const { u, v } = sampleWind(cube, lat, lon, tA + hourFloat * 3_600_000);
+        const whenMs = tA + hourFloat * 3_600_000;
+        if (!cubeCovers(cube, lat, lon, whenMs)) outside += 1;
+        const { u, v } = sampleWind(cube, lat, lon, whenMs);
         const k = pert.speedMult * altScale;
         const uK = u * k;
         const vK = v * k;
@@ -314,7 +346,7 @@ function integrateBridge(
         lon += (uR * stepSec) / (111_320 * cosLat);
         path.push({ lat, lon, alt });
     }
-    return { path, logW };
+    return { path, logW, outside };
 }
 
 /** Reconstruct one long GPS gap with hourly winds and corridor detection. */
@@ -350,6 +382,8 @@ export async function reconstructLongGap(
             directness: 1,
             net_speed_ms: 0,
             short: true,
+            outside_cube_frac: 0,
+            outside_cube_frac_weighted: 0,
         };
     }
 
@@ -358,9 +392,10 @@ export async function reconstructLongGap(
     const directness = Math.max(0, Math.min(1, netSpeed / CFG.TYPICAL_WIND_MS));
 
     const nSteps = Math.max(6, Math.round(gapMin / CFG.STEP_MIN));
-    const altModel = buildAltitudeModel(tA, tB, baroSamples);
+    const altModel = buildAltitudeModel(tA, tB, baroSamples, (A.lon + B.lon) / 2);
     const trajs: PathPoint[][] = [];
     const logWs: number[] = [];
+    const outsidePerParticle: number[] = [];
 
     for (let i = 0; i < CFG.N_PARTICLES; i++) {
         const pert = {
@@ -369,12 +404,13 @@ export async function reconstructLongGap(
             altOffset: CFG.ALT_SIGMA_M * gauss(),
             headingWalk: makeHeadingWalk(gapHours, directness),
         };
-        const { path, logW } = integrateBridge(A, B, cube, tA, nSteps, gapHours, altModel, pert);
+        const { path, logW, outside } = integrateBridge(A, B, cube, tA, nSteps, gapHours, altModel, pert);
         const end = path[path.length - 1];
         const miss = distanceKm(B.lat, B.lon, end.lat, end.lon);
         const logLik = -(miss * miss) / (2 * CFG.ENDPOINT_SIGMA_KM ** 2);
         trajs.push(path);
-        logWs.push(logW + logLik);
+        logWs.push(logW + logLik - outside * CFG.OUTSIDE_CUBE_PENALTY);
+        outsidePerParticle.push(outside);
     }
 
     const maxLW = Math.max(...logWs);
@@ -392,6 +428,29 @@ export async function reconstructLongGap(
             mlon += wn[i] * trajs[i][s].lon;
         }
         meanPath.push([R4(mlon), R4(mlat)]);
+    }
+
+    /* Coverage check: a wind sample outside its slice box read edge-clamped
+     * winds. Three views — the raw sample fraction (is the tube wide enough for
+     * the prior cloud?), the posterior-weighted fraction (do the particles that
+     * shape the drawn bridge stay inside? ~0 by construction given the penalty
+     * above, unless every particle left) and the mean path itself (is the drawn
+     * line inside the tube?). Logged so an under-sized box is visible. */
+    const totalSamples = CFG.N_PARTICLES * nSteps;
+    const outsideSamples = outsidePerParticle.reduce((s, x) => s + x, 0);
+    const outsideFrac = outsideSamples / totalSamples;
+    const outsideWeighted = outsidePerParticle.reduce((s, x, i) => s + (wn[i] * x) / nSteps, 0);
+    let meanOutside = 0;
+    for (let s = 0; s <= nSteps; s++) {
+        if (!cubeCovers(cube, meanPath[s][1], meanPath[s][0], tA + (s / nSteps) * gapHours * 3_600_000)) meanOutside += 1;
+    }
+    if (outsideSamples > 0 || meanOutside > 0) {
+        console.warn(
+            `[reconstruction] gap ${A.time_utc} → ${B.time_utc} (${R1(gapHours)} h): ` +
+            `${outsideSamples}/${totalSamples} particle wind samples outside the cube's slice boxes ` +
+            `(${R1(outsideFrac * 100)}% raw, ${R1(outsideWeighted * 100)}% posterior-weighted); ` +
+            `mean path vertices outside: ${meanOutside}/${nSteps + 1}`,
+        );
     }
 
     const ellipses: ReconstructionGapEllipse[] = CFG.ELLIPSE_FRACS.map((frac) => {
@@ -437,5 +496,7 @@ export async function reconstructLongGap(
         directness: R1(directness * 100) / 100,
         net_speed_ms: R1(netSpeed),
         short: false,
+        outside_cube_frac: Math.round(outsideFrac * 1e4) / 1e4,
+        outside_cube_frac_weighted: Math.round(outsideWeighted * 1e4) / 1e4,
     };
 }

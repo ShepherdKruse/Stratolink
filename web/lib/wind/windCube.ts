@@ -28,8 +28,9 @@ export type WindCube = {
     source?: string;
     /** ISO time the cube was built (GFS ingest run), for staleness reporting. */
     generatedAt?: string;
-    /** True for a v2 "tube" cube — each grid follows the trajectory, so the
-     *  box-center sequence IS the pre-integrated nominal path (see `centerTrack`). */
+    /** True for a v2/v3 "tube" cube — each grid follows the trajectory (its own
+     *  origin per slice; v3 slices may also differ in size), so the box-center
+     *  sequence IS the path the tube was laid along (see `centerTrack`). */
     isTube?: boolean;
     /** Tube cubes only: the TRUE per-slice trajectory centers, `[lat, lon]` with
      *  lon UNWRAPPED (like `origins`). The box origins are snapped to the source
@@ -97,7 +98,10 @@ function cubeFromRaw(raw: RawCube): WindCube {
  *  v2 ("tube"): cell size + dims are shared (`dLat`/`nLat`/`dLon`/`nLon`), but each
  *  time-slice follows the trajectory, so its origin lives in `origins[g]` =
  *  `[lat0, lon0]`. `bounds` is the union of every slice's box. The int16 payload
- *  layout is identical in both versions. */
+ *  layout is identical in both versions.
+ *  v3: a tube whose slices also differ in SIZE (the reconstruction tube widens
+ *  its boxes inside long GPS gaps) — `dims[g]` = `[nLat, nLon]` per slice; the
+ *  cell size stays shared and the payload is still one grid after another. */
 type BinHeader = {
     v: number; scale: number;
     t0Ms: number; stepMs: number; gridStep: number; levelHpa: number;
@@ -106,6 +110,8 @@ type BinHeader = {
     nGrids: number;
     /** v2 tube: per-slice `[lat0, lon0]`, length `nGrids` (dims/step stay shared). */
     origins?: Array<[number, number]>;
+    /** v3 tube: per-slice `[nLat, nLon]`, length `nGrids`. */
+    dims?: Array<[number, number]>;
     /** v2 tube (optional): TRUE per-slice centers `[lat, lon]`, lon unwrapped. */
     centers?: Array<[number, number]>;
     /** v2 tube (optional): hourly true trajectory, `points` = `[lat, lon]`. */
@@ -127,17 +133,21 @@ function cubeFromBinary(raw: Buffer): WindCube {
     const headerLen = dv.getUint32(0, true);
     const h = JSON.parse(Buffer.from(ab, 4, headerLen).toString('utf8')) as BinHeader;
     const scale = h.scale || 10;
-    const n = h.nLat * h.nLon;
     let off = 4 + headerLen; /* 4-byte aligned by the writer's padding */
     const grids: GfsGrid[] = [];
     for (let g = 0; g < h.nGrids; g++) {
+        /* v3 tube: slices differ in size, so each grid's point count comes from
+         * `dims`; v1/v2 share one. The payload is walked by that count. */
+        const nLat = h.dims ? h.dims[g][0] : h.nLat;
+        const nLon = h.dims ? h.dims[g][1] : h.nLon;
+        const n = nLat * nLon;
         const U16 = new Int16Array(ab, off, n); off += n * 2;
         const V16 = new Int16Array(ab, off, n); off += n * 2;
-        /* v2 tube: each slice has its own origin (it follows the path); v1: shared. */
+        /* v2/v3 tube: each slice has its own origin (it follows the path); v1: shared. */
         const lat0 = h.origins ? h.origins[g][0] : h.lat0;
         const lon0 = h.origins ? h.origins[g][1] : h.lon0;
         grids.push({
-            lat0, dLat: h.dLat, nLat: h.nLat, lon0, dLon: h.dLon, nLon: h.nLon,
+            lat0, dLat: h.dLat, nLat, lon0, dLon: h.dLon, nLon,
             U: Float32Array.from(U16, (x) => x / scale),
             V: Float32Array.from(V16, (x) => x / scale),
         });
@@ -257,6 +267,18 @@ export function fetchMemberCube(deviceId: string, member: string): Promise<WindC
     return dir ? readCubeFromDir(dir, id, 'reconstruction') : readCubeFromBlob(id, 'reconstruction');
 }
 
+/** The two grid slices `sampleWind` blends for an instant (clamped to the
+ *  cube's time range) and the weight toward the second. Shared with the coverage
+ *  test below so the two can never disagree about which boxes a sample reads. */
+export function bracketSlices(cube: WindCube, whenMs: number): { h0: number; h1: number; f: number } {
+    const n = cube.grids.length;
+    if (n === 1) return { h0: 0, h1: 0, f: 0 };
+    const hourFloat = (whenMs - cube.t0Ms) / cube.stepMs;
+    const clamped = Math.max(0, Math.min(n - 1, hourFloat));
+    const h0 = Math.min(Math.floor(clamped), n - 2);
+    return { h0, h1: h0 + 1, f: clamped - h0 };
+}
+
 /**
  * Wind at an arbitrary position and instant: bilinear in space (`windAt`) and
  * linear in time between the two bracketing hourly grids. Mirrors the long-gap
@@ -268,15 +290,44 @@ export function sampleWind(
     lon: number,
     whenMs: number,
 ): { u: number; v: number } {
-    const { grids, t0Ms, stepMs } = cube;
+    const { grids } = cube;
     if (grids.length === 1) return windAt(grids[0], lat, lon);
-    const hourFloat = (whenMs - t0Ms) / stepMs;
-    const clamped = Math.max(0, Math.min(grids.length - 1, hourFloat));
-    const h0 = Math.min(Math.floor(clamped), grids.length - 2);
-    const f = clamped - h0;
+    const { h0, h1, f } = bracketSlices(cube, whenMs);
     const a = windAt(grids[h0], lat, lon);
-    const b = windAt(grids[h0 + 1], lat, lon);
+    const b = windAt(grids[h1], lat, lon);
     return { u: a.u * (1 - f) + b.u * f, v: a.v * (1 - f) + b.v * f };
+}
+
+/** True when (lat, lon) lies inside a lat/lon box. Longitude is wrapped into
+ *  `[lonMin, lonMin + 360)` first — exactly as `windAt` wraps a query — so a
+ *  trajectory that has crept past ±180 is judged against the box correctly. */
+export function boxCovers(b: WindGridBounds, lat: number, lon: number): boolean {
+    if (lat < b.latMin || lat > b.latMax) return false;
+    const L = b.lonMin + (((lon - b.lonMin) % 360) + 360) % 360;
+    return L >= b.lonMin && L <= b.lonMax;
+}
+
+function gridBox(g: GfsGrid): WindGridBounds {
+    return {
+        latMin: g.lat0, latMax: g.lat0 + (g.nLat - 1) * g.dLat,
+        lonMin: g.lon0, lonMax: g.lon0 + (g.nLon - 1) * g.dLon,
+    };
+}
+
+/**
+ * Whether a sample at (lat, lon, whenMs) reads real data rather than the
+ * edge-clamped winds `windAt` returns outside a box. For a tube cube the point
+ * must lie inside BOTH slices `sampleWind` blends at that instant — the cube's
+ * union `bounds` would pass a point that has left its own slice's box, which is
+ * exactly the case that matters (a perturbed member or bridge particle straying
+ * off the path the tube follows). Consecutive boxes overlap by far more than
+ * one step's drift, so this only fails when a path has genuinely left the tube.
+ * A static (v1 / Open-Meteo) cube is its one box: the union bounds.
+ */
+export function cubeCovers(cube: WindCube, lat: number, lon: number, whenMs: number): boolean {
+    if (!cube.isTube) return boxCovers(cube.bounds, lat, lon);
+    const { h0, h1 } = bracketSlices(cube, whenMs);
+    return boxCovers(gridBox(cube.grids[h0]), lat, lon) && boxCovers(gridBox(cube.grids[h1]), lat, lon);
 }
 
 /**

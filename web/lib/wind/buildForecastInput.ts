@@ -48,7 +48,15 @@ export async function buildForecastInputForDevice(
      * by a hash of the fixes, but see TODO(forecast-uncertainty) — the
      * reconstruction's per-gap wind fetches should eventually move onto the shared
      * WindCube to bound their cost for long, gappy missions. */
-    const since = telemetrySinceIso(mission, Date.now(), { fullHistory: true });
+    /* FORECAST_HISTORY_DAYS lifts the 90-day full-history cap for a local replay
+     * of an older flight (the cap would otherwise drop every fix of a months-old
+     * reference mission and fall back to the launch record). Pair it with the
+     * ingest's HISTORY_DAYS so the cube spans the same fixes. */
+    const historyDays = Number(process.env.FORECAST_HISTORY_DAYS);
+    const since = telemetrySinceIso(mission, Date.now(), {
+        fullHistory: true,
+        ...(Number.isFinite(historyDays) && historyDays > 0 ? { maxHistoryMs: historyDays * 86_400_000 } : {}),
+    });
 
     let rows: Awaited<ReturnType<typeof fetchTelemetryMerged>>;
     try {
@@ -76,8 +84,15 @@ export async function buildForecastInputForDevice(
 
     if (!rows.length && !hasLaunchRecord) return null;
 
+    /* Drop corrupt coordinates (the telemetry has occasional garbage fixes, e.g.
+     * lat -222) — mirrors mission_fixes in scripts/gfs_ingest.py, so the cube and
+     * the compute see the same fix set; a garbage fix would otherwise anchor a
+     * bridge to a point no cube covers. */
+    const validCoord = (lat: unknown, lon: unknown): boolean =>
+        typeof lat === 'number' && typeof lon === 'number' &&
+        Math.abs(lat) <= 90 && Math.abs(lon) <= 180;
     let observedTrack = rows
-        .filter((r) => r.lat != null && r.lon != null)
+        .filter((r) => validCoord(r.lat, r.lon))
         .map((r) => ({
             lat: r.lat as number,
             lon: r.lon as number,

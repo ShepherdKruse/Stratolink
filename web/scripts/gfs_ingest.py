@@ -15,6 +15,7 @@ Run: python3 scripts/gfs_ingest.py            (all active devices)
 """
 import io
 import json
+import math
 import os
 import re
 import struct
@@ -44,7 +45,8 @@ MAX_GAP_H = 72
 # the continent-wide reconstruction box dragging it coarse):
 #   - forecast cube ({device}-fc): recent track + dead-reckon + forward cone,
 #     HOURLY, finest grid that fits the point cap. Drives the forward forecast.
-#   - reconstruction cube ({device}): full mission, 3-HOURLY, coarser grid. Drives
+#   - reconstruction cube ({device}): full mission, 3-HOURLY, a tube along the
+#     observed track at the native 0.25° (see "reconstruction tube" below). Drives
 #     the historical track only.
 FC_STEP_H = 1                    # forecast cube time step (hourly forecast hours)
 RECON_STEP_H = 3                 # reconstruction cube time step
@@ -55,7 +57,10 @@ HOURLY_FHR_MAX = 120             # GFS publishes hourly forecast hours through f
 # Cube resolution is now bounded by SIZE, not API calls (we own the GFS download).
 # A higher point budget => a much finer grid than Open-Meteo's 120-pt cap allowed.
 MAX_GRID_PTS = 8000
-HISTORY_DAYS = 90                # cap full-mission lookback (matches app MAX_HISTORY)
+# Cap full-mission lookback (matches the app's MAX_HISTORY). Override to replay a
+# flight older than the cap locally (HISTORY_DAYS=365; pair it with the compute's
+# FORECAST_HISTORY_DAYS so both sides see the same fixes).
+HISTORY_DAYS = int(os.environ.get("HISTORY_DAYS", "90"))
 PAD_CAP_DEG = 32                 # cap the downwind forecast pad so the box can't run away
                                  # (large enough to contain a multi-day dead-reckon)
 # ── Trajectory-following "tube" forecast cube (P1) ───────────────────────────
@@ -78,6 +83,41 @@ TUBE_HALF_DEG = float(os.environ.get("FC_TUBE_HALF_DEG", "9"))   # box half-widt
 # for fast local iteration: FC_DEAD_RECKON_CAP_H=48.
 DEAD_RECKON_CAP_H = int(os.environ.get("FC_DEAD_RECKON_CAP_H", str(14 * 24)))
 TUBE_SUBSTEP_H = 1.0 / 6.0       # nominal integration sub-step (matches BALLOON_STEP_HOURS)
+# ── Trajectory-following reconstruction tube ─────────────────────────────────
+# The reconstruction cube used to be ONE static box around the whole mission plus
+# pads, which for a continental flight forced choose_grid_step to 0.5–1° while GFS
+# is natively 0.25°. Like the forecast tube, lay one box per 3-hourly slice along
+# the OBSERVED track instead (interp_track of the fixes): every slice is small
+# enough to stay at 0.25°, and the historical bridges never stray from the
+# fix-to-fix corridor by more than the smoother's particle wander, so a box only
+# has to be wide enough for that cloud (recon_half_deg). The forward leg the
+# static box carried (last fix → now+horizon) is unused by the reconstruction —
+# the forecast tube owns that — so the tube ends two steps past the last fix.
+RECON_TUBE = os.environ.get("RECON_TUBE", "1") != "0"   # RECON_TUBE=0 → legacy static box
+# Half-width (deg) of a slice box from the length of the GPS gap the slice sits
+# in: base + per-hour growth, clamped. Calibrated to the long-gap smoother
+# (lib/wind/pathReconstructionLongGap.ts): its 600 particles carry a 14° heading
+# sigma (+12% speed), so they drift sideways from the fix-to-fix chord at about
+# sin(14°)·|wind| ≈ 0.2°/h in a 25 m/s jet, and low-directness gaps add a heading
+# random walk (55°·(1-directness) per 4 h knot) that the bridge pull
+# (0.55·frac^2.2) only reins in late — so the cloud's lateral extent grows
+# roughly linearly with the gap length. 9° covers gaps ≤ 60 h with margin for the
+# chord-vs-true-path offset; +0.05°/h adds 5° per 100 h (a 200 h gap gets 16°);
+# 20° (≈2200 km at mid-latitudes) caps the box — a particle that far from the
+# chord already carries ~zero weight (its end-miss likelihood exp(-d²/(2·45²)) has
+# vanished), so clamping its winds is harmless. Every sample is checked at compute
+# time (`cubeCovers`) and any that falls outside its slice box is logged.
+RECON_HALF_BASE_DEG = 6.0
+RECON_HALF_PER_H = 0.05
+RECON_HALF_MIN_DEG = float(os.environ.get("RECON_HALF_MIN_DEG", "9"))
+RECON_HALF_MAX_DEG = float(os.environ.get("RECON_HALF_MAX_DEG", "20"))
+# Point budget for one recon slice. Resolution is bounded by SIZE only (the GRIB
+# messages are whole-globe regardless of the box): the widest box, ±20° at 0.25°,
+# is 161² = 25,921 points = 104 KB per slice, so even a two-week mission stays
+# ≲ 12 MB. The forecast tube keeps the tighter MAX_GRID_PTS; this budget just has
+# to admit the native 0.25° at the cap — choose_grid_step still coarsens the whole
+# cube if the cap is raised past what fits.
+RECON_MAX_GRID_PTS = int(os.environ.get("RECON_MAX_GRID_PTS", "26000"))
 GFS_LEVELS = [1000, 975, 950, 925, 900, 850, 800, 700, 600, 500, 400, 300, 250, 200, 150, 100, 70, 50, 30]
 BUCKET = "https://noaa-gfs-bdp-pds.s3.amazonaws.com"
 OUTDIR = os.path.join(os.path.dirname(__file__), "..", ".windcube", "cubes")
@@ -110,16 +150,37 @@ def http_get(u, rng=None, headers=None, retries=4):
 def supa(path, params):
     if not SUPA_URL or not SUPA_KEY:
         raise SystemExit("NEXT_PUBLIC_SUPABASE_URL / SUPABASE_SERVICE_ROLE_KEY not set")
-    q = urllib.parse.urlencode(params, safe=",")  # keep commas (select/order); encode +,: in timestamps
+    q = urllib.parse.urlencode(params, safe=",()")  # keep commas/parens (select/order/in.()); encode +,: in timestamps
     u = f"{SUPA_URL}/rest/v1/{path}?{q}"
     body = http_get(u, headers={"apikey": SUPA_KEY, "Authorization": f"Bearer {SUPA_KEY}"})
     return json.loads(body)
 
 
 # ── Supabase: fleet + recent track + level ───────────────────────────────────
+# Mirror of lib/devices/aliases.ts DEVICE_ID_ALIASES. Telemetry can arrive under
+# an alias id (a second receiver / firmware id for the same balloon) and the
+# compute's fetchTelemetryMerged folds those rows into the canonical device — so
+# the cube must be built from the SAME merged fix set: the tube is centered on
+# the observed track, and a receiver's missing fixes would shift both its
+# centers and its gap widths. test_forecast_ingest.py checks this map against
+# the TS source so the two can't drift apart silently.
+DEVICE_ID_ALIASES = {"stratolink-3-eu": "stratolink-3"}
+
+
+def telemetry_device_ids(device):
+    """Every telemetry device_id to query for a canonical (or alias) device."""
+    canonical = DEVICE_ID_ALIASES.get(device, device)
+    return [canonical] + sorted(a for a, c in DEVICE_ID_ALIASES.items() if c == canonical)
+
+
+def device_id_filter(device):
+    return "in.(" + ",".join(telemetry_device_ids(device)) + ")"
+
+
 def active_devices():
     rows = supa("devices", {"select": "device_id,status,launched_at", "connection_status": "eq.connected"})
-    return [(r["device_id"], r.get("launched_at")) for r in rows if r.get("status") == "flying"]
+    return [(r["device_id"], r.get("launched_at")) for r in rows
+            if r.get("status") == "flying" and r["device_id"] not in DEVICE_ID_ALIASES]
 
 
 def mission_since(launched_at):
@@ -133,17 +194,25 @@ def mission_since(launched_at):
 
 
 def mission_fixes(device, since_iso):
-    """All GPS fixes since launch (full mission) — for the cube's bounds + span."""
+    """All GPS fixes since launch (full mission), canonical + alias ids merged by
+    time like the compute's fetchTelemetryMerged — for the cube's track + span."""
     rows = supa("telemetry", {
-        "device_id": f"eq.{device}",
+        "device_id": device_id_filter(device),
         "time": f"gte.{since_iso}",
         "lat": "not.is.null", "lon": "not.is.null",
         "select": "time,lat,lon,altitude_m", "order": "time.asc", "limit": "50000",
     })
     # Drop corrupt coordinates (the telemetry has occasional garbage fixes, e.g.
     # lat -222) — a single outlier blows up the bounding box and coarsens the grid.
-    return [{"lat": r["lat"], "lon": r["lon"], "t": r["time"], "alt": r.get("altitude_m")}
-            for r in rows if -90 <= r["lat"] <= 90 and -180 <= r["lon"] <= 180]
+    # One row per timestamp (an alias can echo the canonical row's time).
+    seen = set()
+    out = []
+    for r in rows:
+        if not (-90 <= r["lat"] <= 90 and -180 <= r["lon"] <= 180) or r["time"] in seen:
+            continue
+        seen.add(r["time"])
+        out.append({"lat": r["lat"], "lon": r["lon"], "t": r["time"], "alt": r.get("altitude_m")})
+    return out
 
 
 def mission_track(device, launched_at):
@@ -176,7 +245,7 @@ def float_pressure(device):
     cube is then interpolated to this pressure rather than snapped to the nearest
     standard GFS level (so ~280 hPa is sampled as 280, not 300). Fallback 285."""
     rows = supa("telemetry", {
-        "device_id": f"eq.{device}", "pressure": "not.is.null",
+        "device_id": device_id_filter(device), "pressure": "not.is.null",
         "select": "pressure", "order": "time.desc", "limit": "200",
     })
     ps = sorted(r["pressure"] for r in rows
@@ -424,6 +493,12 @@ def cut_box(u, v, clat, clon, half_deg, step, n):
     dlat = 180.0 / (nlat - 1); dlon = 360.0 / nlon
     lat0 = round(clat / dlat) * dlat - half_deg
     lon0 = round(clon / dlon) * dlon - half_deg
+    # The box's labeled geometry (lat0 + k·step) must land ON source rows/cols,
+    # or the rows picked below are silently up to half a cell off the labels — a
+    # systematic position error in every sample. Needs half_deg and step to be
+    # multiples of the source spacing (build_tube_grids snaps half_deg).
+    assert abs(lat0 / dlat - round(lat0 / dlat)) < 1e-6 and abs(step / dlat - round(step / dlat)) < 1e-6, \
+        f"cut_box: half {half_deg}°/step {step}° not on the {dlat}° source lattice"
     lats = lat0 + np.arange(n) * step
     lons = lon0 + np.arange(n) * step
     rows = np.round((90.0 - lats) / dlat).astype(int).clip(0, nlat - 1)
@@ -527,20 +602,28 @@ def nominal_centers(slice_ms, last_fix_ms, last_lat, last_lon, target_p, latest)
 
 def build_tube_grids(centers, half_deg, step, slice_ms, field_at, source, levelHpa, latest, now, tag=""):
     """Assemble a tube cube from pre-computed `centers`: one `step`° box per slice,
-    cut from the whole-globe field returned by `field_at(k) -> (u, v)`. All slices
-    share dims (so v2 needs only per-slice origins). Returns (cube_dict, n, n)."""
-    n = int(round(2 * half_deg / step)) + 1
+    cut from the whole-globe field returned by `field_at(k) -> (u, v)`. `half_deg`
+    is one number (every slice the same size → v2 header, per-slice origins only)
+    or a per-slice list (sizes vary → v3 header, which adds per-slice `dims`; the
+    reconstruction tube widens its boxes inside long GPS gaps). Half-widths are
+    snapped UP to a multiple of `step` so each box's origin stays on the source
+    lattice (cut_box asserts it). Returns (cube_dict, max_n, max_n)."""
+    halves = list(half_deg) if isinstance(half_deg, (list, tuple)) else [half_deg] * len(centers)
+    assert len(halves) == len(centers), "one half-width per slice"
+    halves = [math.ceil(h / step - 1e-9) * step for h in halves]
     grids = []
     uminLat = uminLon = float("inf"); umaxLat = umaxLon = float("-inf")
     for k, (clat, clon) in enumerate(centers):
+        n = int(round(2 * halves[k] / step)) + 1
         u, v = field_at(k)
-        lat0, lon0, U, V = cut_box(u, v, clat, clon, half_deg, step, n)
+        lat0, lon0, U, V = cut_box(u, v, clat, clon, halves[k], step, n)
         grids.append({"lat0": lat0, "dLat": step, "nLat": n,
                       "lon0": lon0, "dLon": step, "nLon": n, "U": U, "V": V})
         uminLat = min(uminLat, lat0); umaxLat = max(umaxLat, lat0 + (n - 1) * step)
         uminLon = min(uminLon, lon0); umaxLon = max(umaxLon, lon0 + (n - 1) * step)
         if tag and ((k + 1) % 24 == 0 or k + 1 == len(centers)):
             print(f"      {tag}: {k + 1}/{len(centers)} slices", flush=True)
+    n = max(g["nLat"] for g in grids)
     return {
         "source": source, "generated_at": now.isoformat(), "latest_cycle_utc": latest.isoformat(),
         "levelHpa": round(levelHpa, 1), "gridStep": step,
@@ -576,13 +659,80 @@ def interp_track(fixes_ms, t_ms):
 
 
 def sample_tube(centers, half_deg, step, slice_ms, target_p, latest, now, tag=""):
-    """GFS tube: cut a box per slice from the GFS field (interpolated to target_p)."""
+    """GFS tube: cut a box per slice from the GFS field (interpolated to target_p).
+    `half_deg` may be per-slice (see build_tube_grids)."""
     def field_at(k):
         cyc, fhr = pick_source(datetime.fromtimestamp(slice_ms[k] / 1000, timezone.utc), latest)
         uv = fetch_uv_p(cyc, fhr, target_p)
         return uv["u"], uv["v"]
     return build_tube_grids(centers, half_deg, step, slice_ms, field_at,
                             "gfs", target_p, latest, now, tag)
+
+
+# ── Reconstruction tube helpers ──────────────────────────────────────────────
+def unwrap_lons(lons):
+    """Longitudes made continuous across ±180 (no ±360 jump between consecutive
+    fixes), anchored so the LAST value keeps its raw longitude — the forecast
+    tube's nominal walk starts from that raw value, so the two tubes agree there.
+    A box is cut with its origin unwrapped and the compute wraps every query into
+    the box's range (windAt), so unwrapped origins sample correctly either way."""
+    out = [0.0] * len(lons)
+    if not lons:
+        return out
+    out[-1] = lons[-1]
+    for i in range(len(lons) - 2, -1, -1):
+        d = (lons[i] - lons[i + 1] + 180.0) % 360.0 - 180.0     # shortest signed step
+        out[i] = out[i + 1] + d
+    return out
+
+
+def gap_hours_at(fixes_ms, t_ms, step_ms):
+    """Length (h) of the LONGEST GPS gap whose span touches (t_ms - step_ms,
+    t_ms + step_ms) — i.e. of any bridge that will read the slice at t_ms: the
+    compute blends the two slices bracketing an instant, so a slice is read by
+    every instant within one step of it. 0 when no gap reaches the slice (the
+    lead-in slice before the first fix, the trailing ones after the last)."""
+    best = 0.0
+    for (ta, _, _), (tb, _, _) in zip(fixes_ms, fixes_ms[1:]):
+        if tb > t_ms - step_ms and ta < t_ms + step_ms:
+            best = max(best, (tb - ta) / 3.6e6)
+    return best
+
+
+def recon_half_deg(gap_h):
+    """Slice-box half-width (deg) for a slice inside a `gap_h`-hour GPS gap — see
+    the RECON_HALF_* notes for the calibration against the long-gap smoother."""
+    return min(RECON_HALF_MAX_DEG, max(RECON_HALF_MIN_DEG, RECON_HALF_BASE_DEG + RECON_HALF_PER_H * gap_h))
+
+
+def build_tube_recon(device, fixes, target_p, latest, now):
+    """Reconstruction cube as a trajectory-following tube: one RECON_STEP_H slice
+    from one step before the first fix to two past the last, each a box at the
+    native resolution centered on the observed track (interp_track of the fixes,
+    longitudes unwrapped), half-width from the local gap length (recon_half_deg).
+    Reuses the forecast tube's machinery (prefetch_fields / build_tube_grids)."""
+    first_fix = tparse(fixes[0]["t"])
+    last_fix = tparse(fixes[-1]["t"])
+    step_ms = RECON_STEP_H * 3600 * 1000
+    start = floor_step(first_fix, RECON_STEP_H) - timedelta(hours=RECON_STEP_H)
+    end = floor_step(last_fix, RECON_STEP_H) + timedelta(hours=2 * RECON_STEP_H)
+    start_ms = int(start.timestamp() * 1000)
+    n_slices = int(round((end - start).total_seconds() * 1000 / step_ms)) + 1
+    slice_ms = [start_ms + k * step_ms for k in range(n_slices)]
+
+    lons = unwrap_lons([f["lon"] for f in fixes])
+    fixes_ms = [(int(tparse(f["t"]).timestamp() * 1000), f["lat"], lo) for f, lo in zip(fixes, lons)]
+    centers = [interp_track(fixes_ms, t) for t in slice_ms]
+    halves = [recon_half_deg(gap_hours_at(fixes_ms, t, step_ms)) for t in slice_ms]
+    hmax = max(halves)
+    step = choose_grid_step({"latMin": 0, "latMax": 2 * hmax, "lonMin": 0, "lonMax": 2 * hmax},
+                            max_pts=RECON_MAX_GRID_PTS)
+    longest = max(((b[0] - a[0]) / 3.6e6 for a, b in zip(fixes_ms, fixes_ms[1:])), default=0.0)
+    print(f"    recon tube: {n_slices} slices @ {step}° half {min(halves):.0f}–{hmax:.1f}° "
+          f"(longest gap {longest:.0f}h), {start:%Y-%m-%dT%H}Z → {end:%Y-%m-%dT%H}Z", flush=True)
+    prefetch_fields(slice_ms, target_p, latest)          # parallel cache warm-up
+    recon, rla, rlo = sample_tube(centers, halves, step, slice_ms, target_p, latest, now, "recon")
+    write_cube(device, "", recon, rla, rlo, "recon")
 
 
 SCALE = 10  # store winds as int16 = round(value*SCALE); lossless vs the old 0.1 rounding
@@ -596,11 +746,16 @@ def pack_cube(cube):
     grids = cube["grids"]
     g0 = grids[0]
     # A tube has a different origin per slice; a static cube shares one. Emit v2
-    # (origins[]) only when origins actually vary — old static cubes stay v1.
+    # (origins[]) only when origins actually vary — old static cubes stay v1. A
+    # tube whose slice boxes differ in SIZE (the reconstruction tube widens inside
+    # long gaps) is v3: it also carries per-slice dims, since the reader walks the
+    # payload by each grid's point count.
     origins = [(g["lat0"], g["lon0"]) for g in grids]
-    is_tube = any(o != origins[0] for o in origins)
+    dims = [(g["nLat"], g["nLon"]) for g in grids]
+    dims_vary = any(d != dims[0] for d in dims)
+    is_tube = dims_vary or any(o != origins[0] for o in origins)
     header = {
-        "v": 2 if is_tube else 1, "scale": SCALE,
+        "v": 3 if dims_vary else (2 if is_tube else 1), "scale": SCALE,
         "source": cube.get("source", "gfs"),
         "generated_at": cube.get("generated_at"),
         "latest_cycle_utc": cube.get("latest_cycle_utc"),
@@ -612,6 +767,8 @@ def pack_cube(cube):
     }
     if is_tube:
         header["origins"] = [[round(la, 4), round(lo, 4)] for la, lo in origins]
+    if dims_vary:
+        header["dims"] = [[a, b] for a, b in dims]
     # True trajectory metadata (optional, tube-only; [lat, lon], lon UNWRAPPED like
     # origins). Old readers ignore unknown header keys, so v stays 2.
     if is_tube and cube.get("centers"):
@@ -650,19 +807,24 @@ def build_cube(device, fixes, target_p, latest):
     print(f"  {device}: interp {target_p:.1f}mb ({lo}↔{hi}), gap {gap_h:.0f}h")
     clear_field_cache()                          # fresh per device (free the prior device's fields)
 
-    # ── Reconstruction cube: full mission (first fix → now+horizon), 3-hourly. ──
-    # Its box is dominated by the full-mission track; the forward leg is unused by
-    # reconstruction, so use a SMALL forward pad (a big one would push the
-    # continent-wide box past the point budget and coarsen the historical grid).
+    # ── Reconstruction cube: full mission, 3-hourly. ──
+    # Default: a tube along the observed track at the native 0.25° (build_tube_recon).
+    # RECON_TUBE=0 keeps the legacy single static box (first fix → now+horizon):
+    # its box is dominated by the full-mission track, so it uses a SMALL forward
+    # pad (a big one would push the continent-wide box past the point budget and
+    # coarsen the historical grid even further).
     if os.environ.get("SKIP_RECON") != "1":     # dev: skip the slow full-mission recon when iterating on the tube
-        recon_bounds = bounds_for_forecast(fixes, HORIZON_H, pad_cap=8)
-        recon_step = choose_grid_step(recon_bounds)
-        recon_start = floor_step(first_fix, RECON_STEP_H) - timedelta(hours=RECON_STEP_H)
-        recon_end = floor_step(now, RECON_STEP_H) + timedelta(hours=HORIZON_H + 2 * RECON_STEP_H)
-        recon, rla, rlo = sample_grids(recon_bounds, recon_step, recon_start, recon_end,
-                                       RECON_STEP_H, target_p, latest, now, "recon")
-        write_cube(device, "", recon, rla, rlo, "recon")
-        del recon
+        if RECON_TUBE:
+            build_tube_recon(device, fixes, target_p, latest, now)
+        else:
+            recon_bounds = bounds_for_forecast(fixes, HORIZON_H, pad_cap=8)
+            recon_step = choose_grid_step(recon_bounds)
+            recon_start = floor_step(first_fix, RECON_STEP_H) - timedelta(hours=RECON_STEP_H)
+            recon_end = floor_step(now, RECON_STEP_H) + timedelta(hours=HORIZON_H + 2 * RECON_STEP_H)
+            recon, rla, rlo = sample_grids(recon_bounds, recon_step, recon_start, recon_end,
+                                           RECON_STEP_H, target_p, latest, now, "recon")
+            write_cube(device, "", recon, rla, rlo, "recon")
+            del recon
         clear_field_cache()                      # free the recon's fields before the fc tube prefetches its own
 
     # ── Forecast cube: recent track + dead-reckon + cone, HOURLY, finest grid. ──
