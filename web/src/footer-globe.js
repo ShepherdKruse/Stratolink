@@ -27,7 +27,12 @@ function load() {
   loaded = true;
   timing.loadAt = performance.now();
   frame.src = '/dashboard?portal=footer';
+  // Watchdog: if the dashboard shell never reports in (an import failed mid-boot, say), reload the iframe once.
+  setTimeout(() => {
+    if (!timing.bootedAt && !document.hidden && !watchdogReloaded && stage === 'footer') { watchdogReloaded = true; frame.src = frame.src; }
+  }, 20000);
 }
+let watchdogReloaded = false;
 // Where scroll-driven animations exist, the globe's position, reveal and clip are compiled into keyframes against
 // the document scroll (see writeGlobeProgram) and run on the compositor in lockstep with the scroll. Positioning a
 // fixed element from scroll events instead trails the page by a frame, which on a 120 Hz phone reads as rubber-banding.
@@ -84,6 +89,8 @@ function writeGlobeProgram() {
 let parked = false;
 function place() {
   if (stage !== 'footer') return;
+  // Fallback if the page booted hidden (background tab) or on a save-data connection: load once the footer is in view.
+  if (!loaded && footer.getBoundingClientRect().top < innerHeight) load();
   if (cssScroll) {
     // Motion lives in the program; per scroll frame only the visibility flags need updating.
     writeGlobeProgram();
@@ -211,5 +218,8 @@ window.addEventListener('keydown', event => {
 new ResizeObserver(() => { programKey = ''; schedule(); }).observe(footer);
 // Start the globe with the page, not after the hero: its bytes and boot overlap the hero's own image decode.
 // (The scene motion is compositor-driven, so a booting map no longer stutters the scroll.)
-if (!navigator.connection?.saveData && !document.hidden) load();
+if (!navigator.connection?.saveData) {
+  if (document.hidden) document.addEventListener('visibilitychange', () => { if (!document.hidden) load(); }, { once: true });
+  else load();
+}
 place();
