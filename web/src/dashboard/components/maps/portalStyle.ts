@@ -25,6 +25,9 @@ export function portalBasemapStyle(scheme: 'light' | 'dark'): StyleSpecification
             composite: { type: 'vector', url: 'mapbox://mapbox.mapbox-streets-v8,mapbox.mapbox-terrain-v2,mapbox.mapbox-bathymetry-v2' },
         },
         glyphs: 'mapbox://fonts/mapbox/{fontstack}/{range}.pbf', // balloon labels
+        // Same sprite as the stock style: Mapbox cannot diff a sprite change, and without it the handoff to the
+        // dashboard rebuilds the style from scratch (the globe blanks mid-animation). With it, the swap is incremental.
+        sprite: `mapbox://sprites/mapbox/${scheme}-v11`,
         projection: { name: 'globe' },
         layers: [
             { id: 'land', type: 'background', paint: { 'background-color': colors.land } },

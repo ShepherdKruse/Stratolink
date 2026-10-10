@@ -932,6 +932,7 @@ export default function V2MissionMap({
                 }}
                 onLoad={() => {
                     mark('load');
+                    (window as unknown as { __map?: unknown }).__map = mapRef.current?.getMap(); // diagnostics
                     setStyleLoaded(true);
                     applyCustomStyle();
                     /* Reveal once the map has settled (tiles loaded + everything
