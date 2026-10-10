@@ -29,6 +29,20 @@ function renderDashboard() { createRoot(document.getElementById('dashboard-root'
     </GlobePortalProvider>,
 ); }
 
+/* A chunk that fails to import (a deploy changed the hashed filenames under an open page, or a dev-server module
+ * invalidation) would take the whole React tree down silently, which in the homepage footer means no globe.
+ * Reload once: fresh HTML references the current chunks. */
+const CHUNK_RETRY_KEY = 'stratolink-chunk-reload';
+function recoverFromChunkFailure(reason: unknown) {
+    const message = String((reason as { message?: unknown })?.message ?? reason ?? '');
+    if (!/Importing a module script failed|Failed to fetch dynamically imported module|error loading dynamically imported module|Loading chunk/i.test(message)) return;
+    let retried = false;
+    try { retried = sessionStorage.getItem(CHUNK_RETRY_KEY) === location.href; sessionStorage.setItem(CHUNK_RETRY_KEY, location.href); } catch { /* storage optional */ }
+    if (!retried) location.reload();
+}
+window.addEventListener('unhandledrejection', event => recoverFromChunkFailure(event.reason));
+window.addEventListener('error', event => recoverFromChunkFailure(event.error ?? event.message));
+
 // Restore the selected balloon before its first render. The provider displays any auth error.
 void finishOAuthRedirect().catch(() => {}).then(() => {
     void initializeOnboarding().catch(() => {});
