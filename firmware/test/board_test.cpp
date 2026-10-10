@@ -128,10 +128,10 @@ void setup() {
     test.baro_read_ok = sensor_ms5611_read_pressure_centihpa(&pres) ? 1 : 0;
     test.baro_pressure_ch = pres;
     int16_t btemp = 0;
-    test.baro_temp_ok = sensor_ms5611_read_temp_centidegrees(&btemp) ? 1 : 0;
+    test.baro_temp_ok = sensor_ms5611_read_temp_decidegrees(&btemp) ? 1 : 0;
     test.baro_temp_cd = btemp;
     int16_t ttemp = 0;
-    test.tmp117_read_ok = sensor_tmp117_read_centidegrees(&ttemp) ? 1 : 0;
+    test.tmp117_read_ok = sensor_tmp117_read_decidegrees(&ttemp) ? 1 : 0;
     test.tmp117_temp_cd = ttemp;
     int16_t ax = 0, ay = 0, az = 0;
     test.accel_read_ok = sensor_lis2dh12_read_accel_cm_s2(&ax, &ay, &az) ? 1 : 0;

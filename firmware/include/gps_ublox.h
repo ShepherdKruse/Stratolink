@@ -34,13 +34,21 @@ bool gps_ublox_set_airborne_4g(void);
 bool gps_ublox_get_fix(gps_fix_t* fix, uint32_t timeout_ms);
 
 /**
+ * Record that a whole acquisition cycle was power-gated before get_fix().
+ * The next acquisition must establish a new two-PVT freshness proof rather
+ * than compare iTOW across an arbitrarily long unobserved interval.
+ */
+void gps_ublox_note_power_skip(void);
+
+/**
  * Get last known fix without blocking (e.g. after get_fix succeeded).
  */
 void gps_ublox_get_last_fix(gps_fix_t* fix);
 
 /**
- * Put the u-blox MAX-M10S into SOFTWARE BACKUP mode (UBX-RXM-PMREQ).
- * Drops module current from ~25 mA continuous tracking → ~15 µA.
+ * Put the u-blox MAX-M10S into SOFTWARE STANDBY mode (UBX-RXM-PMREQ).
+ * The current data sheet specifies about 46 µA at V_IO plus 0.12 µA at VCC
+ * in standby, versus mA-class acquisition/tracking.
  * MUST be called before MCU STOP1 entry — without it the GPS keeps
  * tracking through sleep and drains the supercap at 25 mA, brown-
  * outing the chip in ~2 minutes of cap-only operation.
@@ -50,7 +58,11 @@ void gps_ublox_get_last_fix(gps_fix_t* fix);
  *
  * Wake source: UART RX activity from the MCU.  The next get_fix()
  * call sends UBX queries which wake the module implicitly.
+ *
+ * Returns true only after a RAM-only periodic UBX marker becomes silent for
+ * more than three marker periods. Returns false after bounded reset/retries;
+ * the caller must use a short retry sleep and suppress optional loads.
  */
-void gps_ublox_sleep(void);
+bool gps_ublox_sleep(void);
 
 #endif /* GPS_UBLOX_H */
