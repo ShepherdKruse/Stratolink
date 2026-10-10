@@ -8,11 +8,11 @@ Phase 1-4 firmware for the Stratolink balloon PCB: periodic telemetry cycle with
 
 - **include/**: Board and config: `stratolink_pins.h`, `config.h`, `secrets.h` (copy from `secrets.h.example`), `telemetry.h`, `power_adc.h`, `gps_ublox.h`, `lorawan.h`, `sensors.h`, `sensor_tmp117.h`, `sensor_ms5611.h`, `sensor_lis2dh12.h`, `sensor_ltr390.h`, `mic_acoustic.h`.
 - **src/**: Implementation:
-  - `main.cpp`: Setup and loop: tier → freshness-gated GPS → sensors → primary uplink → optional Class-A command/typed auxiliary uplink → surplus-only LongFast service → STOP1. The CTT stage is compiled out for StratoLink-2's unqualified high-band RF path.
-  - `telemetry.cpp`: 40-byte big-endian telemetry-v2 pack (the webhook also accepts historical 35-byte v1).
+  - `main.cpp`: Setup and loop: tier → freshness-gated GPS → sensors → primary uplink → optional Class-A command/typed auxiliary uplink → surplus-only CTT and LongFast service → STOP1. CTT reception is enabled experimentally; sensitivity and range through the fitted high-band RF path remain unqualified.
+  - `telemetry.cpp`: 40-byte big-endian telemetry-v3 pack with server-liveness evidence (the webhook also accepts historical 35-byte v1 and 40-byte v2).
   - `power_adc.cpp`: VSTOR and solar ADC using VREFINT plus a ~642 us high-impedance HAL sample aperture; power tier from `stratolink_pins.h` thresholds.
   - `gps_ublox.cpp`: u-blox over UART1, airborne <4g, freshness-gated fix (fresh PVT + iTOW); NOGPS on no fresh fix, PA0 reset recovery.
-  - `lorawan.cpp`: LoRaWAN OTAA/session/counter persistence, runtime GNSS-authorized region, Class-A command receive, typed event uplinks, Meshtastic relay, authenticated B2B, and the disabled-by-default CTT listener/diagnostic on the shared radio.
+  - `lorawan.cpp`: LoRaWAN OTAA/session/counter persistence, sparse confirmed server-liveness probes with bounded same-region recovery, runtime GNSS-authorized region, Class-A command receive, typed event uplinks, Meshtastic relay, authenticated B2B, and experimental CTT reception on the shared radio.
   - `sensors.cpp`: I2C init (board pins) and init of TMP117, MS5611, LIS2DH12, LTR-390UV. TMP117 failure non-blocking.
   - `sensor_tmp117.cpp`: TMP117 one-shot temperature (decidegrees, matching the 0.1 °C wire field); falls back to MS5611 baro temp.
   - `sensor_ms5611.cpp`: MS5611 pressure (0.1 hPa) and optional internal temp.
@@ -41,4 +41,8 @@ Requires J-Link via SWD (`upload_protocol = jlink` in `platformio.ini`). For fli
 
 ## Payload
 
-40 bytes, big-endian. It retains the first 34 v1 data bytes and adds power/reset/GNSS age, command acknowledgement, relay state, and relay/CTT activity. Full field layout and units are in [DOCUMENTATION.md](DOCUMENTATION.md).
+40 bytes, big-endian. It retains the first 34 v1 data bytes and adds power/reset/GNSS age, server-liveness proof/miss/recovery state, command acknowledgement, relay state, and relay/CTT activity. Full field layout and units are in [DOCUMENTATION.md](DOCUMENTATION.md).
+
+## Host verification
+
+See [test/README.md](test/README.md) for sanitizer suites, firmware-generated decoder vectors, and offline decoding. These checks do not qualify the final assembly or flight image.
