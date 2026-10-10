@@ -27,7 +27,7 @@
 .dashboard-detail-content { --telemetry-gutter: 0px; flex: 1; min-height: 0; margin: 0 var(--dashboard-gutter) 14px; overflow-y: auto; background: var(--t-panel); }
 .dashboard-detail-content .dashboard-device-title { margin-inline: 0; }
 .dashboard-detail-content .detail-owner { padding-inline: 0; }
-.dashboard-footer { display: flex; flex-direction: column; gap: 10px; margin-top: auto; flex-shrink: 0; padding: 18px var(--dashboard-gutter) 24px; font: 12px/1.4 Helvetica, Arial, sans-serif; letter-spacing: .02em; color: var(--t-text-3); }
+.dashboard-footer { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; margin-top: auto; flex-shrink: 0; padding: 14px var(--dashboard-gutter) 18px; font: 12px/1.4 Helvetica, Arial, sans-serif; letter-spacing: .02em; color: var(--t-text-3); }
 .dashboard-footer nav { display: flex; gap: 22px; }
 .dashboard-footer a { color: var(--t-text-2); text-decoration: none; transition: opacity 160ms ease; }
 .dashboard-footer a:hover { opacity: .6; }

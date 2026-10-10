@@ -160,7 +160,9 @@ function OverlayDot({ x, y, size = 7, ring = true }: { x: number; y: number; siz
         <div
             style={{
                 position: 'absolute',
-                left: `${(x * 100).toFixed(2)}%`,
+                /* Clamped inside the chart: at the flight's ends a centered dot
+                 * would hang past the edge and make the panel scroll sideways. */
+                left: `clamp(${size / 2}px, ${(x * 100).toFixed(2)}%, calc(100% - ${size / 2}px))`,
                 top: `${(y * 100).toFixed(2)}%`,
                 width: size,
                 height: size,
