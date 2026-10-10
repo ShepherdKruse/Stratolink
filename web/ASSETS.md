@@ -19,6 +19,8 @@ The original extraction files supply alpha only; their generated RGB pixels are 
 
 The city layers retain the photograph's 2560 × 1440 framing. The balloon is a 205 × 403 crop at (1228, 432), positioned within that same frame. Encoding uses WebP quality 90 and alpha quality 100. The sky plate remains an inpainted approximation of the original clear-sky gradient, including areas originally hidden by foreground objects.
 
+The homepage also carries a 32 × 18 blurred placeholder of `source.jpg` inlined as a base64 WebP in `index.html` (between the `home-placeholder` markers). It paints behind the hero while the full layers download. Regenerate it with `node scripts/prepare-launch-placeholder.mjs` (requires ImageMagick `magick`) after changing the source photograph.
+
 Exact built-in image generation prompts, output provenance and known extraction limits are recorded in [reference/launch-layer-prompts.md](reference/launch-layer-prompts.md). Page text uses Helvetica with Arial as a fallback.
 
 An unused white-cloud experiment is archived at `reference/experiments/footer-cloud.png`, outside the production build. Its exact prompts and native output provenance are recorded in [reference/footer-cloud-prompt.md](reference/footer-cloud-prompt.md).

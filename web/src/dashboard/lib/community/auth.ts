@@ -1,8 +1,8 @@
-import { createClient, type SupabaseClient } from '@supabase/supabase-js';
+import type { SupabaseClient } from '@supabase/supabase-js';
 import { dashboardReturnDevice, storedReturnState } from './returnDevice';
 import { onboardingDashboardPath, type OnboardingMode } from './onboarding';
 
-let client: SupabaseClient | null = null;
+let client: Promise<SupabaseClient> | null = null;
 let callback: Promise<void> | null = null;
 const returnKey = 'stratolink-auth-return-device';
 
@@ -10,14 +10,16 @@ export function isAuthConfigured() {
     return Boolean(import.meta.env.VITE_SUPABASE_URL && import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY);
 }
 
-export function authClient() {
+/** The full Supabase client (auth included) is only loaded once something needs a session. */
+export function authClient(): Promise<SupabaseClient> {
     if (client) return client;
     const url = import.meta.env.VITE_SUPABASE_URL;
     const key = import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY;
-    if (!url || !key) throw new Error('Sign-in is unavailable. Please try again later.');
-    client = createClient(url, key, {
+    if (!url || !key) return Promise.reject(new Error('Sign-in is unavailable. Please try again later.'));
+    client = import('@supabase/supabase-js').then(({ createClient }) => createClient(url, key, {
         auth: { flowType: 'pkce', persistSession: true, autoRefreshToken: true, detectSessionInUrl: false },
-    });
+    }));
+    client.catch(() => { client = null; });
     return client;
 }
 
@@ -40,7 +42,7 @@ export function finishOAuthRedirect(): Promise<void> {
         history.replaceState(history.state, '', onboardingDashboardPath(onboarding ?? null, device));
         if (failed) throw new Error('GitHub sign-in was not completed. Please try again.');
         if (code) {
-            const { error } = await authClient().auth.exchangeCodeForSession(code);
+            const { error } = await (await authClient()).auth.exchangeCodeForSession(code);
             if (error) throw new Error('The sign-in link has expired. Please sign in again.');
         }
     })();
@@ -59,7 +61,7 @@ export async function signInWithGithub(onboarding?: OnboardingMode | null) {
     } catch {
         if (onboarding) throw new Error('Unable to save this payload link. Allow browser storage and try again.');
     }
-    const { data, error } = await authClient().auth.signInWithOAuth({
+    const { data, error } = await (await authClient()).auth.signInWithOAuth({
         provider: 'github',
         options: { redirectTo: new URL('/dashboard', location.origin).href, skipBrowserRedirect: true },
     });
@@ -73,7 +75,7 @@ export class AccountRequestError extends Error {
 }
 
 export async function accountRequest<T>(path: string, method = 'GET', body?: unknown, credentials: RequestCredentials = 'omit'): Promise<T> {
-    const { data: { session }, error } = await authClient().auth.getSession();
+    const { data: { session }, error } = await (await authClient()).auth.getSession();
     if (error || !session) throw new AccountRequestError('Sign in to continue.', 401);
     const response = await fetch(path, {
         method,

@@ -4,6 +4,7 @@ import type { AccountResponse, AccountUser, BalloonSettings, ConnectionInput, Co
 import { beginActivation, clearActivation, initializeOnboarding } from '@/lib/community/activation';
 import { onboardingDashboardPath, onboardingEntry, type ActivationIntent, type OnboardingMode } from '@/lib/community/onboarding';
 import { dashboardReturnDevice } from '@/lib/community/returnDevice';
+import { useGlobePortal } from './globe-portal';
 
 type Community = {
     user: AccountUser | null;
@@ -92,16 +93,20 @@ export function CommunityProvider({ children }: { children: ReactNode }) {
         } finally { if (request === refreshSequence.current) setLoading(false); }
     }, [clearAccount]);
 
+    const globeStage = useGlobePortal();
+    const footerPreview = globeStage === 'footer';
     useEffect(() => {
         let cancelled = false;
         let unsubscribe: (() => void) | undefined;
         let refreshTimer: ReturnType<typeof setTimeout> | undefined;
         async function initialize() {
             if (!isAuthConfigured()) { setLoading(false); return; }
+            // The footer globe preview shows no account state; defer auth until the portal becomes the dashboard.
+            if (footerPreview) return;
             try {
                 await finishOAuthRedirect();
                 if (cancelled) return;
-                const { data: { subscription } } = authClient().auth.onAuthStateChange((event, session) => {
+                const { data: { subscription } } = (await authClient()).auth.onAuthStateChange((event, session) => {
                     if (event === 'SIGNED_OUT') { principal.current = null; clearAccount(); dismissOnboarding(); setPanel(null); setLoading(false); return; }
                     const nextPrincipal = session?.user.id ?? null;
                     if (nextPrincipal !== principal.current) { principal.current = nextPrincipal; clearAccount(); }
@@ -117,7 +122,7 @@ export function CommunityProvider({ children }: { children: ReactNode }) {
         }
         void initialize();
         return () => { cancelled = true; generation.current++; clearTimeout(refreshTimer); unsubscribe?.(); };
-    }, [refresh, clearAccount, dismissOnboarding]);
+    }, [refresh, clearAccount, dismissOnboarding, footerPreview]);
 
     async function mutate<T>(action: () => Promise<T>, save: (result: T) => void): Promise<T> {
         if (mutating.current) throw new Error('Wait for the current request to finish.');
@@ -159,7 +164,7 @@ export function CommunityProvider({ children }: { children: ReactNode }) {
         async signOut() {
             setBusy(true); setError('');
             try {
-                const { error } = await authClient().auth.signOut({ scope: 'local' });
+                const { error } = await (await authClient()).auth.signOut({ scope: 'local' });
                 if (error) throw error;
                 clearAccount();
                 dismissOnboarding(); setPanel(null);

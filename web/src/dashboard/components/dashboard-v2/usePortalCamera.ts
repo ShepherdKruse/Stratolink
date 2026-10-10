@@ -8,6 +8,8 @@ const portalLabelVisibility = new WeakMap<MapboxMap, Map<string, 'visible' | 'no
 /** A theme style load must keep the footer's basemap labels hidden too. */
 export function applyPortalLabelVisibility(map: MapboxMap, stage: GlobeStage) {
     if (stage === 'standalone') return;
+    /* The portal swaps its lean basemap for the stock style as it becomes the dashboard; reading layers mid-load throws. */
+    if (!map.isStyleLoaded()) { map.once('style.load', () => applyPortalLabelVisibility(map, stage)); return; }
     let visibility = portalLabelVisibility.get(map);
     if (!visibility) {
         visibility = new Map();
@@ -87,7 +89,9 @@ export function usePortalCamera(mapRef: RefObject<MapRef | null>, stage: GlobeSt
             }
             // A return from a dark dashboard first restores the light style.
             // Show the footer globe only after that style has finished drawing.
-            onPreviewReady = () => notifyGlobeParent('ready');
+            const timing = ((window as unknown as { __mapTiming?: Record<string, number> }).__mapTiming ??= {});
+            timing.fleetReady ??= Math.round(performance.now());
+            onPreviewReady = () => { timing.readySent ??= Math.round(performance.now()); notifyGlobeParent('ready'); };
             map.once('idle', onPreviewReady);
             map.triggerRepaint();
         } else if (stage === 'entering') {

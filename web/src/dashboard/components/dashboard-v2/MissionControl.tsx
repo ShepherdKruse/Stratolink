@@ -74,6 +74,18 @@ export default function MissionControlScreen() {
         });
         return () => cancelAnimationFrame(frame);
     }, []);
+    /* As the homepage footer preview the map mounts immediately. Fetch and compile the map code right away too:
+     * react-map-gl only imports mapbox-gl when <Map> mounts, and on a phone every serial hop is visible. */
+    useEffect(() => {
+        if (globeStage !== 'footer') return;
+        ((window as unknown as { __mapTiming?: Record<string, number> }).__mapTiming ??= {}).shell ??= Math.round(performance.now());
+        notifyGlobeParent('booted');
+        void import('./V2MissionMap');
+        void import('mapbox-gl');
+    }, [globeStage]);
+    /* As the homepage footer preview only the map is visible, so only the map is rendered; the panel and timeline
+     * mount when the portal starts becoming the dashboard (they start hidden, then slide in). */
+    const footerOnly = globeStage === 'footer';
     const searchParams = new URLSearchParams(window.location.search);
     const initialSelectedId = searchParams.get('device');
 
@@ -82,7 +94,8 @@ export default function MissionControlScreen() {
     } = useTelemetry({ initialSelectedId });
     const community = useCommunity();
     useEffect(() => { if (community.focusDevice) setSelectedId(community.focusDevice); }, [community.focusDevice, setSelectedId]);
-    const fleetHistory = useFleetHistory(registryDevices.filter(device => device.connectionStatus !== 'pending'), selectedId === null);
+    const portalPreview = globeStage === 'footer' || globeStage === 'entering';
+    const fleetHistory = useFleetHistory(registryDevices.filter(device => device.connectionStatus !== 'pending'), selectedId === null, { positionsOnly: portalPreview });
     const devices = useMemo(() => mergeRegisteredBalloons(registryDevices.map(device =>
         withLatestTelemetry(device, device.id === selectedId ? rows : fleetHistory.rowsByDevice[device.id]),
     ), community.balloons, community.user?.id), [registryDevices, community.balloons, community.user?.id, fleetHistory.rowsByDevice, selectedId, rows]);
@@ -271,7 +284,6 @@ export default function MissionControlScreen() {
         return position ? [{ id: device.id, ...position }] : [];
     }), [devices, fleetHistory.rowsByDevice]);
     const previewIds = new Set(previewFleet(devices, fleetHistory.rowsByDevice, Date.now()).map(device => device.id));
-    const portalPreview = globeStage === 'footer' || globeStage === 'entering';
     const shownFleet = portalPreview ? fleetBalloons.filter(balloon => previewIds.has(balloon.id)) : fleetBalloons.filter(balloon => filteredIds.has(balloon.id));
     const plannedCount = filteredDevices.filter(device => isPlannedBalloon(device.status)).length;
     const activity = fleetActivity(filteredDevices.filter(device => !isPlannedBalloon(device.status)), fleetHistory.rowsByDevice, Date.now());
@@ -320,7 +332,7 @@ export default function MissionControlScreen() {
     return (
         <div className="sl-app fleet-app" data-theme={theme}>
             <main className="fleet-layout" data-detail={!isFleet} data-loading={registryLoading}>
-                <aside className="tlm-panel dashboard-panel fleet-panel">
+                {!footerOnly && <aside className="tlm-panel dashboard-panel fleet-panel">
                     <DashboardHeader onBack={isFleet ? undefined : showFleet} />
                     <CommunityPanel />
                     {isFleet ? (
@@ -335,9 +347,10 @@ export default function MissionControlScreen() {
                         <nav aria-label="Stratolink"><a href="/docs" target="_top">docs</a><a href="/blog" target="_top">blog</a><a href="mailto:contact@stratolink.org">contact</a></nav>
                         <span>© stratolink 2026</span>
                     </footer>
-                </aside>
+                </aside>}
                 <div className="dashboard-map fleet-map">
-                    {interfacePainted && !registryLoading && <MapColumn
+                    {/* The footer preview mounts before the registry answers so the basemap (style, tiles) loads in parallel. */}
+                    {(interfacePainted || footerOnly) && (!registryLoading || portalPreview) && <MapColumn
                         isFleet={isFleet}
                         fleetBalloons={shownFleet}
                         fleetFitBalloons={portalPreview ? fleetFitBalloons : fleetFitBalloons.filter(balloon => filteredIds.has(balloon.id))}
@@ -358,7 +371,7 @@ export default function MissionControlScreen() {
                         colorScheme={theme}
                         onPickTime={pickTime}
                     />}
-                    <div className="fleet-timeline">
+                    {!footerOnly && <div className="fleet-timeline">
                         <Timeline
                             histories={isFleet ? fleetHistories : [visibleRows]}
                             scrubT={isFleet ? fleetScrubT : scrubT}
@@ -369,7 +382,7 @@ export default function MissionControlScreen() {
                             originT={isFleet ? null : liveOriginT}
                             floating
                         />
-                    </div>
+                    </div>}
                 </div>
                 {isMobile && !isFleet && <>
                     <div style={{ height: DRAWER_HANDLE_H, flexShrink: 0 }} />

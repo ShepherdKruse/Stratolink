@@ -1,4 +1,4 @@
-import type { SupabaseClient } from '@supabase/supabase-js';
+import type { PostgrestClient } from '@supabase/postgrest-js';
 import { canonicalDeviceId, telemetryDeviceIds } from '@/lib/devices/aliases';
 
 const PAGE_SIZE = 1000;
@@ -31,11 +31,35 @@ export function mergeTelemetryByTime(rows: RawTelemetryRecord[]): RawTelemetryRe
 }
 
 /**
+ * Fetch only a device's most recent packets (plus its most recent GPS fix, which may be older), newest first from
+ * the server and returned time-ascending. One round trip, no pagination: enough for a map position and activity.
+ */
+export async function fetchTelemetryLatest(
+    supabase: PostgrestClient,
+    opts: { deviceId: string; columns: string; latest: number },
+): Promise<RawTelemetryRecord[]> {
+    const queryIds = telemetryDeviceIds(opts.deviceId);
+    const newestFirst = () => supabase
+        .from('telemetry')
+        .select(opts.columns)
+        .in('device_id', queryIds)
+        .order('time', { ascending: false })
+        .order('id', { ascending: false });
+    const [recent, lastFix] = await Promise.all([
+        newestFirst().limit(opts.latest).overrideTypes<RawTelemetryRecord[], { merge: false }>(),
+        newestFirst().not('lat', 'is', null).limit(1).overrideTypes<RawTelemetryRecord[], { merge: false }>(),
+    ]);
+    if (recent.error) throw recent.error;
+    if (lastFix.error) throw lastFix.error;
+    return mergeTelemetryByTime([...(recent.data ?? []), ...(lastFix.data ?? [])]);
+}
+
+/**
  * Fetch full mission telemetry for a device, including alias ids (e.g. stratolink-3-eu → stratolink-3).
  * Paginates past Supabase's 1000-row page limit so long flights stay complete.
  */
 export async function fetchTelemetryMerged(
-    supabase: SupabaseClient,
+    supabase: PostgrestClient,
     opts: {
         deviceId: string;
         since: string;
@@ -76,7 +100,7 @@ export async function fetchTelemetryMerged(
 
 /** Latest uplink time across canonical + alias ids. */
 export async function fetchLatestContactMs(
-    supabase: SupabaseClient,
+    supabase: PostgrestClient,
     deviceId: string,
     since: string,
 ): Promise<number | null> {
@@ -102,7 +126,7 @@ export type LatestGpsFix = {
 
 /** Latest GPS fix across canonical + alias ids. */
 export async function fetchLatestGpsFix(
-    supabase: SupabaseClient,
+    supabase: PostgrestClient,
     deviceId: string,
     since: string,
 ): Promise<LatestGpsFix | null> {
@@ -137,7 +161,7 @@ export type FleetTelemetryLightRow = {
 
 /** Paginated lightweight fleet telemetry for KPI aggregates (alias-aware). */
 export async function fetchFleetTelemetryLight(
-    supabase: SupabaseClient,
+    supabase: PostgrestClient,
     telemetryIds: string[],
     fleetSince: string,
 ): Promise<FleetTelemetryLightRow[]> {

@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState, useCallback, useRef } from 'react';
 import { isHiddenAliasDevice } from '@/lib/devices/aliases';
 import { createClient } from '@/lib/supabase';
-import { fetchTelemetryMerged } from '@/lib/telemetry/fetchMergedTelemetry';
+import { fetchTelemetryLatest, fetchTelemetryMerged } from '@/lib/telemetry/fetchMergedTelemetry';
 import { rawToTelemetry } from '@/lib/telemetry/mapTelemetryRow';
 import { createHistoryLoader, type HistoryWindow } from '@/lib/telemetry/historyCache';
 import { telemetrySinceMs } from '@/lib/telemetry/missionWindow';
@@ -51,14 +51,32 @@ function pollWhileVisible(fn: () => void, ms: number): () => void {
 }
 
 
+/** Enough for map positions and activity: the homepage footer globe needs nothing else. */
+const POSITION_TELEMETRY_COLUMNS = 'time, lat, lon, altitude_m';
+
 let cachedDevices: DeviceSummary[] | null = null;
 const cachedRowsByDevice = new Map<string, TelemetryRow[]>();
-const missionHistory = createHistoryLoader(cachedRowsByDevice, async (deviceId, since) => {
-    const raw = await fetchTelemetryMerged(createClient(), {
-        deviceId,
-        since: new Date(since).toISOString(),
-        columns: FULL_TELEMETRY_COLUMNS,
+const cachedPositionsByDevice = new Map<string, TelemetryRow[]>();
+function historyLoader(cache: Map<string, TelemetryRow[]>, columns: string) {
+    return createHistoryLoader(cache, async (deviceId, since) => {
+        const raw = await fetchTelemetryMerged(createClient(), {
+            deviceId,
+            since: new Date(since).toISOString(),
+            columns,
+        });
+        return raw.map(rawToTelemetry);
     });
+}
+const missionHistory = historyLoader(cachedRowsByDevice, FULL_TELEMETRY_COLUMNS);
+/* The footer globe only needs each balloon's latest position and contact time, so its first fetch per device is a
+ * single "latest packets" request rather than the whole mission (which pages serially, 1000 rows a time).
+ * Later polls are incremental from the last cached packet, like the full loader. */
+const PORTAL_LATEST_ROWS = 60;
+const positionHistory = createHistoryLoader(cachedPositionsByDevice, async (deviceId, since) => {
+    const client = createClient();
+    const raw = cachedPositionsByDevice.has(deviceId)
+        ? await fetchTelemetryMerged(client, { deviceId, since: new Date(since).toISOString(), columns: POSITION_TELEMETRY_COLUMNS })
+        : await fetchTelemetryLatest(client, { deviceId, columns: POSITION_TELEMETRY_COLUMNS, latest: PORTAL_LATEST_ROWS });
     return raw.map(rawToTelemetry);
 });
 
@@ -76,19 +94,24 @@ export interface UseFleetHistoryResult {
 }
 
 /** The overview loads missions independently so one failed device cannot hide the others. */
-export function useFleetHistory(devices: DeviceSummary[], enabled: boolean): UseFleetHistoryResult {
+export function useFleetHistory(devices: DeviceSummary[], enabled: boolean, { positionsOnly = false } = {}): UseFleetHistoryResult {
     const devicesRef = useRef(devices);
     devicesRef.current = devices;
+    const cache = positionsOnly ? cachedPositionsByDevice : cachedRowsByDevice;
+    const loader = positionsOnly ? positionHistory : missionHistory;
+    /* Switching from positions to full history keeps the lighter rows on screen until the full ones arrive. */
+    const fallback = positionsOnly ? null : cachedPositionsByDevice;
+    const rowsFor = (deviceId: string) => cache.get(deviceId) ?? fallback?.get(deviceId);
     const deviceKey = JSON.stringify(devices
         .filter(device => !isHiddenAliasDevice(device.id))
         .map(device => [device.id, device.launchedAt, device.status])
         .sort((a, b) => String(a[0]).localeCompare(String(b[0]))));
     const [rowsByDevice, setRowsByDevice] = useState<Record<string, TelemetryRow[]>>(() =>
         Object.fromEntries(devices
-            .filter(device => !isHiddenAliasDevice(device.id) && cachedRowsByDevice.has(device.id))
-            .map(device => [device.id, cachedRowsByDevice.get(device.id)!])),
+            .filter(device => !isHiddenAliasDevice(device.id) && rowsFor(device.id) !== undefined)
+            .map(device => [device.id, rowsFor(device.id)!])),
     );
-    const [loading, setLoading] = useState(enabled && devices.some(device => !cachedRowsByDevice.has(device.id)));
+    const [loading, setLoading] = useState(enabled && devices.some(device => !cache.has(device.id)));
     const [error, setError] = useState<string | null>(null);
 
     useEffect(() => {
@@ -103,8 +126,8 @@ export function useFleetHistory(devices: DeviceSummary[], enabled: boolean): Use
             .filter(device => !isHiddenAliasDevice(device.id))
             .map(device => ({ ...historyWindow(device), poll: shouldPollTelemetry(device.status) }));
         const snapshot = () => Object.fromEntries(windows
-            .filter(window => cachedRowsByDevice.has(window.deviceId))
-            .map(window => [window.deviceId, cachedRowsByDevice.get(window.deviceId)!]));
+            .filter(window => rowsFor(window.deviceId) !== undefined)
+            .map(window => [window.deviceId, rowsFor(window.deviceId)!]));
 
         const publish = () => setRowsByDevice(current => {
             const next = snapshot();
@@ -112,7 +135,7 @@ export function useFleetHistory(devices: DeviceSummary[], enabled: boolean): Use
                 && Object.entries(next).every(([id, rows]) => current[id] === rows) ? current : next;
         });
         publish();
-        setLoading(windows.some(window => missionHistory.peek(window) === undefined));
+        setLoading(windows.some(window => loader.peek(window) === undefined));
         setError(null);
 
         async function refresh(initial = false) {
@@ -121,7 +144,7 @@ export function useFleetHistory(devices: DeviceSummary[], enabled: boolean): Use
             // Show the first history promptly, then batch arrivals before rebuilding the fleet map.
             let firstResult = true;
             const results = await Promise.allSettled(windows.map(async window => {
-                await missionHistory.load(window, { refresh: initial || window.poll });
+                await loader.load(window, { refresh: initial || window.poll });
                 if (!cancelled && firstResult) {
                     firstResult = false;
                     publish();
@@ -151,7 +174,7 @@ export function useFleetHistory(devices: DeviceSummary[], enabled: boolean): Use
         void refresh(true);
         const stop = pollWhileVisible(() => { void refresh(); }, TELEMETRY_POLL_MS);
         return () => { cancelled = true; clearTimeout(publishTimer); stop(); };
-    }, [enabled, deviceKey]);
+    }, [enabled, deviceKey, positionsOnly]);
 
     return { rowsByDevice, loading, error };
 }
