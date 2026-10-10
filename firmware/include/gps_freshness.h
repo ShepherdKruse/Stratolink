@@ -27,6 +27,12 @@ void gps_freshness_reset(gps_freshness_t* state);
  */
 bool gps_freshness_observe(gps_freshness_t* state, uint32_t itow_ms);
 
+/* NAV-PVT time before validDate && validTime is provisional and may jump when
+ * acquisition establishes the time base. Do not retain an anchor across that
+ * interval. The first qualified epoch anchors; a second must advance. */
+bool gps_freshness_observe_qualified(gps_freshness_t* state,
+                                     uint32_t itow_ms, bool time_valid);
+
 /* Same-window hardware-reset thresholds. A healthy default 1 Hz NAV engine
  * advances comfortably inside the frozen threshold; lack of any PVT gets a
  * slightly wider UART/startup allowance. */

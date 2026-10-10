@@ -43,11 +43,10 @@
  * unguarded high-current path.  Set above the NO_GPS tier edge (3.0 V) with
  * headroom for the acquisition's own sag. */
 #define GPS_ACQ_FLOOR_MV 3600u
-/* SparkFun defaults each UBX configuration transaction to 1100 ms. A failed
- * read/set/read model attempt could therefore cost 3.3 s; three attempts plus
- * one RESET_N recovery would spend ~20 s at GNSS current before acquisition.
- * UART1 at 9600 baud completes these short frames comfortably inside 300 ms,
- * matching the independently bounded standby-configuration transactions. */
+/* Ordinary model SET/read response slice. After standby, short UART frame
+ * time does not imply command readiness: the driver permits 4 slices for the
+ * first SET and shares 6 slices across verification and retry pauses. Late
+ * success is rejected; transport/parser overhead is not a wall-time bound. */
 #define GPS_DYNMODEL_MAX_WAIT_MS 300u
 /* Pin the SparkFun v3 serial-begin wait instead of inheriting a library
  * default. This keeps the GNSS reset/recovery energy bound source-visible. */

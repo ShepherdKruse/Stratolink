@@ -101,3 +101,7 @@ gps_backup_action_t gps_backup_decide(
 bool gps_backup_reset_allowed(uint16_t vstor_mv) {
     return vstor_mv >= GPS_BACKUP_RESET_FLOOR_MV;
 }
+
+bool gps_backup_containment_release_allowed(uint16_t vstor_mv) {
+    return vstor_mv >= GPS_CONTAINMENT_RELEASE_FLOOR_MV;
+}

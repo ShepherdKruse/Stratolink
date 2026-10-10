@@ -82,6 +82,61 @@ int main(void) {
     check("null state fails closed",
           !gps_freshness_observe(nullptr, 1u));
 
+    /* Cold-start PVTs can carry provisional time before validDate/validTime.
+     * A startup anchor must not make the first real late-week epoch appear
+     * to move backward for the rest of the acquisition. */
+    gps_freshness_reset(&state);
+    check("provisional zero time cannot establish an anchor",
+          !gps_freshness_observe_qualified(&state, 0u, false) &&
+          !state.anchored);
+    check("advancing provisional time cannot establish an anchor",
+          !gps_freshness_observe_qualified(&state, 1000u, false) &&
+          !state.anchored);
+    check("first resolved late-week epoch anchors only",
+          !gps_freshness_observe_qualified(&state, 400000000u, true));
+    check("second resolved late-week epoch is fresh after provisional time",
+          gps_freshness_observe_qualified(&state, 400001000u, true));
+    check("resolved cached epoch remains stale",
+          !gps_freshness_observe_qualified(&state, 400001000u, true));
+    check("loss of time validity discards earlier anchor",
+          !gps_freshness_observe_qualified(&state, 0u, false) &&
+          !state.anchored);
+    check("requalified earlier-week epoch only anchors",
+          !gps_freshness_observe_qualified(&state, 120000u, true));
+    check("second requalified epoch advances",
+          gps_freshness_observe_qualified(&state, 121000u, true));
+    check("qualified out-of-range epoch cannot poison anchor",
+          !gps_freshness_observe_qualified(&state, 604800000u, true) &&
+          state.itow_ms == 121000u);
+    check("unqualified null state fails closed",
+          !gps_freshness_observe_qualified(nullptr, 0u, false));
+
+    gps_freshness_reset(&state);
+    bool provisional_recovery_ok = true;
+    uint8_t provisional_streak = 0u;
+    for (uint32_t cycle = 0; cycle < 4u; ++cycle) {
+        for (uint32_t elapsed = 1000u; elapsed <= 30000u; elapsed += 1000u) {
+            (void)gps_freshness_observe_qualified(&state, 0u, false);
+            if (gps_recovery_due(state.anchored, elapsed, 0u, elapsed)) {
+                provisional_recovery_ok = false;
+            }
+        }
+        /* A received, unqualified PVT is acquisition activity even though it
+         * cannot authorize a coordinate or a time-freshness claim. */
+        if (gps_stale_ladder_step(true, false, 2u, &provisional_streak)) {
+            provisional_recovery_ok = false;
+        }
+    }
+    check("responding provisional time never triggers either reset ladder",
+          provisional_recovery_ok && provisional_streak == 0u);
+    (void)gps_freshness_observe_qualified(&state, 400000000u, true);
+    check("later qualified frozen epoch still triggers inline reset",
+          !gps_freshness_observe_qualified(&state, 400000000u, true) &&
+          gps_recovery_due(state.anchored, 34000u, 31000u, 34000u));
+    gps_freshness_reset(&state);
+    check("silence after provisional PVT still triggers reset",
+          gps_recovery_due(state.anchored, 35000u, 0u, 30000u));
+
     check("no anchor below silence threshold does not reset",
           !gps_recovery_due(false, 4999u, 0u, 0u));
     check("no anchor at silence threshold resets",

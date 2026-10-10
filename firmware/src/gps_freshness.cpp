@@ -33,6 +33,15 @@ bool gps_freshness_observe(gps_freshness_t* state, uint32_t itow_ms) {
     return true;
 }
 
+bool gps_freshness_observe_qualified(gps_freshness_t* state,
+                                     uint32_t itow_ms, bool time_valid) {
+    if (!time_valid) {
+        gps_freshness_reset(state);
+        return false;
+    }
+    return gps_freshness_observe(state, itow_ms);
+}
+
 bool gps_recovery_due(bool anchor_available, uint32_t now_ms,
                       uint32_t last_epoch_progress_ms,
                       uint32_t last_pvt_ms) {

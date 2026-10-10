@@ -153,6 +153,11 @@ const char stratolink_bench_region_build_marker[] =
 #endif
 
 void setup() {
+    /* MCU reset restores PA0 to input and can wake an uncontained MAX-M10S
+     * before any retained/runtime state is available. Assert RESET_N at the
+     * first executable point; gps_ublox_init() releases it only after a fresh
+     * 4.4 V rail check and a bounded UART reinitialization. */
+    gps_ublox_assert_reset_early();
 #ifdef BENCH_SEED_REGION
     /* A zero-instruction reference: the address is an input to a compiler
      * barrier, which keeps the marker's section live without runtime cost. */

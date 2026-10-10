@@ -89,6 +89,17 @@ int main() {
     assert(gps_backup_reset_allowed(UINT16_MAX));
     checks += 4;
 
+    static_assert(GPS_CONTAINMENT_RELEASE_FLOOR_MV ==
+                  GPS_BACKUP_RESET_FLOOR_MV,
+                  "RESET_N release must retain the cold-recovery rail gate");
+    assert(!gps_backup_containment_release_allowed(0));
+    assert(!gps_backup_containment_release_allowed(
+        GPS_CONTAINMENT_RELEASE_FLOOR_MV - 1u));
+    assert(gps_backup_containment_release_allowed(
+        GPS_CONTAINMENT_RELEASE_FLOOR_MV));
+    assert(gps_backup_containment_release_allowed(UINT16_MAX));
+    checks += 4;
+
     std::printf("gps backup policy: %u checks passed\n", checks);
     return 0;
 }
