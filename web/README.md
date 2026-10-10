@@ -67,6 +67,8 @@ npm run forecast:compute -- stratolink-3 --dry
 
 This requires that device's ingested cube in `WIND_CUBE_DIR` and server database credentials. A failed ingest or incomplete compute fails the job. A fleet with no active devices exits without downloading weather.
 
+Engineering notes for the whole pipeline (cubes, tube ingest, compute, read path, data volumes and timing) live in [`docs/forecast/forecast-architecture.md`](../docs/forecast/forecast-architecture.md). Local iteration tools: `python3 scripts/_run_with_env.py scripts/gfs_ingest.py <device>` builds cubes with `.env.local` loaded, `npm run forecast:local -- <device> [--offline]` runs the compute on local cubes with Blob disabled, `npx tsx scripts/inspect_cube.ts <cube.slwc>` decodes a cube, and `node --env-file=.env.local scripts/blob_cleanup.mjs [--apply]` lists (or, with `--apply`, deletes) stale `cubes/*` and `forecasts/*.lock.json` Blob objects.
+
 Before cutover, disable any external scheduler calling the retired `/api/compute-forecast` endpoint. The GitHub worker is the sole forecast writer. Confirm a successful scheduled run and a readable stored forecast in the deployed environment.
 
 ## Content
