@@ -15,7 +15,9 @@
   letter-spacing: -.035em;
   line-height: 1.25;
 }
-.fleet-app { height: 100dvh; overflow: clip; }
+/* min-height: 0 overrides .sl-app's 100vh, which on mobile is the toolbar-hidden height and would push the
+   bottom of the dashboard (the scrubber) under the browser's bottom bar. */
+.fleet-app { height: 100dvh; min-height: 0; overflow: clip; }
 .fleet-layout { position: relative; display: grid; grid-template-columns: minmax(360px,420px) minmax(0,1fr); height: 100%; }
 .fleet-panel { display: flex; flex-direction: column; }
 .fleet-layout[data-loading="true"] .fleet-timeline,
@@ -111,22 +113,41 @@
   .fleet-layout { display: flex; flex-direction: column; }
   .dashboard-panel { border-radius: 0 0 22px 22px; border-right: 0; border-bottom: 1px solid var(--t-border); box-shadow: 0 3px 12px rgb(24 29 36 / 5%); }
   .dashboard-map { margin-left: 0; }
-  .fleet-panel { flex: 0 1 auto; max-height: 55dvh; height: auto; }
-  .fleet-cards { padding: 10px var(--dashboard-gutter) 14px; }
-  .dashboard-footer { gap: 6px; padding-block: 8px 18px; font-size: 11px; }
+  .fleet-panel { flex: 0 1 auto; max-height: 40dvh; height: auto; }
+  /* The bottom padding fades out, so a card cut off by the tray's height reads as "scroll for more". */
+  .fleet-cards { padding: 10px var(--dashboard-gutter) 14px; mask-image: linear-gradient(to bottom, #000 calc(100% - 14px), transparent); }
+  .dashboard-footer { display: none; }
   .fleet-layout[data-detail="true"] .fleet-panel { max-height: 46dvh; }
-  .balloon-card { padding: 15px 17px; border-radius: 21px; margin-bottom: 9px; }
-  .balloon-card-title { font-size: 18px; }
-  .balloon-card-status { margin-top: 5px; }
-  .balloon-card-metrics { margin-top: 13px; }
-  .balloon-card-metrics strong { font-size: 17px; }
+  /* Dense cards: name | status | chevron on one row, the four readings on a second. The units
+     identify each reading, so the labels are kept only for screen readers. */
+  .balloon-card { position: relative; display: grid; grid-template-columns: minmax(0, 1fr) auto auto; align-items: center; column-gap: 10px; padding: 10px 14px 11px; border-radius: 16px; margin-bottom: 6px; }
+  .balloon-card-heading { display: contents; }
+  .balloon-card:last-of-type { margin-bottom: 0; }
+  .balloon-card-name { grid-area: 1 / 1; gap: 7px; }
+  .balloon-card-status { grid-area: 1 / 2; margin-top: 0; }
+  .balloon-card-chevron { grid-area: 1 / 3; }
+  .balloon-card > :not(.balloon-card-heading, .balloon-card-status) { grid-column: 1 / -1; }
+  .balloon-card-title { font-size: 16px; }
+  .balloon-card .balloon-owner { margin-top: 2px; }
+  .balloon-card-metrics { margin-top: 6px; }
+  .balloon-card-label { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+  .balloon-card-metrics strong { font-size: 14px; }
+  .balloon-card .balloon-card-plan { margin-top: 6px; }
   .fleet-map { flex: 1; min-height: 0; margin-top: -22px; }
   .fleet-map .map-coordinates, .fleet-map .map-legend { top: calc(22px + var(--dashboard-gutter)); }
   .map-coordinates { left: var(--dashboard-gutter); padding: 10px 12px; }
   .fleet-map-caption { max-width: 165px; }
   .fleet-map:has(.map-legend[data-expanded="true"]) .map-coordinates { max-width: calc(100% - 2 * var(--dashboard-gutter) - 200px); }
-  .fleet-timeline { bottom: 54px; left: 12px; right: 12px; }
-  .dashboard-device-title { font-size: 22px; }
+  /* The scrubber hugs the map's bottom edge; the Mapbox logo and attribution move up into
+     the empty left half of the scrubber's time-label row instead of reserving a row below it. */
+  .fleet-map { --timeline-bottom: max(12px, env(safe-area-inset-bottom)); }
+  .fleet-layout[data-detail="true"] .fleet-map { --timeline-bottom: 12px; }
+  .fleet-timeline { bottom: var(--timeline-bottom); left: 12px; right: 12px; }
+  .sl-app .fleet-map .mapboxgl-ctrl-bottom-right { right: auto; left: 14px; bottom: calc(var(--timeline-bottom) + 34px); }
+  .dashboard-device-title { font-size: 22px; margin-top: 2px; }
+  .dashboard-back-row { margin-top: -6px; padding-bottom: 0; }
+  .dashboard-detail-content { margin-bottom: 4px; }
+  .dashboard-back { min-height: 28px; }
 }
 @media (prefers-reduced-motion: reduce) {
   .balloon-card, .map-legend, .map-legend-chevron, .map-legend-reveal { transition: none; }

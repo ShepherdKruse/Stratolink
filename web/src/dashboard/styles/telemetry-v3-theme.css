@@ -166,3 +166,9 @@
 /* Animations intentionally removed — the telemetry panels are static (no
  * pulsing/swaying/flowing motion). The `.live-dot` / `.att-sway` class names may
  * still appear in markup but are now inert. */
+
+.detail-status-line { display: flex; flex-wrap: wrap; align-items: center; max-height: 16px; overflow: hidden; line-height: 16px; }
+.detail-status-main { display: flex; align-items: center; gap: 8px; flex: 0 1 auto; min-width: 0; white-space: nowrap; }
+.detail-status-text, .detail-status-time { font-size: 10.5px; color: var(--t-text-3); }
+.detail-status-text { min-width: 0; overflow: hidden; text-overflow: ellipsis; }
+.detail-status-time { flex: none; white-space: pre; }

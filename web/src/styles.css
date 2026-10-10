@@ -256,6 +256,8 @@ img, svg, canvas { display: block; }
    background: painting it at the first frame blanked most of the screen behind a still-small globe. */
 .footer-globe-portal[data-stage="entering"], .footer-globe-portal[data-stage="dashboard"] { opacity: 1; z-index: 100; background: var(--portal-bg, #eaebed); transition-delay: 0ms, 900ms; }
 .footer-globe-portal[data-stage="dashboard"] { transition-delay: 0ms, 0ms; }
+/* Once it is the dashboard, track the visible viewport so a returning mobile toolbar never covers its scrubber. */
+.footer-globe-portal[data-stage="dashboard"] { bottom: auto; height: 100dvh; }
 .footer-globe-portal[data-stage="entering"] iframe,
 .footer-globe-portal[data-stage="dashboard"] iframe { opacity: 1; }
 .footer-globe-portal[data-stage="entering"] .footer-globe-trigger,

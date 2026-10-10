@@ -88,7 +88,7 @@
 }
 
 @media (max-width: 767px) {
-    .fleet-app { --dashboard-header-height: 80px; }
+    .fleet-app { --dashboard-header-height: 64px; }
 }
 
 .dashboard-back {
@@ -214,6 +214,24 @@
     margin: 0;
     opacity: 0;
     cursor: pointer;
+}
+
+.dashboard-menu-links {
+    display: none;
+    gap: 22px;
+    margin-top: 16px;
+    padding-top: 14px;
+    border-top: 1px solid var(--t-border);
+}
+
+.dashboard-menu-links a {
+    color: var(--t-text-2);
+    text-decoration: none;
+}
+
+/* On phones the panel footer is hidden to give the tray more room; its links live here instead. */
+@media (max-width: 767px) {
+    .dashboard-menu-links { display: flex; }
 }
 
 .dashboard-layer-options {
