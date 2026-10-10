@@ -143,10 +143,13 @@
 // SX1262 may accept the register setting, but reliable sensitivity through the
 // module matching network and installed antenna is not a supported claim. Keep
 // CTT experimental until an exact tag HIL proves it. StratoLink-2's fitted
-// high-band module has no qualified 434 MHz receive path, so the flight default
-// fails closed. The decoder/window and env:ctt_diag remain available for a
-// future real-tag test or a board fitted with a qualified low-band receiver.
-#define CTT_LISTEN_ENABLE  false
+// high-band module has no manufacturer-qualified 434 MHz receive path. The
+// explicit experimental opt-in below records the launch decision: protocol,
+// queue, and two-board RF behavior are HIL-proven, while airborne sensitivity
+// and range remain unknown. Never remove the separate opt-in or infer that an
+// enabled listener makes this module a supported 434 MHz receiver.
+#define CTT_EXPERIMENTAL_FLIGHT_ENABLE true
+#define CTT_LISTEN_ENABLE              true
 #define CTT_FREQ_MHZ       434.0
 #define CTT_LISTEN_MS      60000u   /* idle-window slice for tag listening */
 #define CTT_EVENT_FPORT    11       /* dedicated sparse event uplink */
