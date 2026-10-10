@@ -275,7 +275,7 @@ export default function V2MissionMap({
      * map until it has fully painted (Mapbox `idle` = tiles + all overlays
      * composited), then fade it away once for a single clean reveal. */
     const [revealed, setRevealed] = useState(false);
-    usePortalCamera(mapRef, globeStage, revealed && portalReady, fleetFitBalloons ?? balloons);
+    usePortalCamera(mapRef, globeStage, revealed, portalReady, fleetFitBalloons ?? balloons);
 
     /* GPU relief while the tab is hidden (#47). The globe holds a heavyweight
      * standing WebGL context (full-DPR canvas + the terminator's shader raster
