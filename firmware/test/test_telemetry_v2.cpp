@@ -32,6 +32,7 @@ int main(void) {
     assert(unavailable_wire[31] == 0xFEu);
     assert(be16(unavailable_wire + 32) == 0xFFFEu);
     assert((unavailable_wire[34] & 0x0Fu) == 10u);
+    assert(be16(unavailable_wire + 36) == TELEMETRY_V3_WORD_MARKER);
 
     telemetry_input_t in;
     telemetry_input_init(&in);
@@ -43,14 +44,17 @@ int main(void) {
     in.last_command_seq = 0xA6;
     in.relay_enabled = 1;
     in.boot_count = 0x42;
-    in.fix_age_min = 0x1234;
+    in.fix_age_min = 0x0123;
+    in.server_proof_count_mod8 = 5;
+    in.server_qualified_miss_streak = 2;
+    in.server_recovery_parity = 1;
     in.relay_fwd_delta = 6;
     in.ctt_tags_delta = 11;
     uint8_t out[TELEMETRY_PAYLOAD_SIZE] = {};
     telemetry_pack(&in, out);
     assert(out[34] == (uint8_t)(1u | (3u << 1) | (5u << 4) | 0x80u));
     assert(out[35] == 0x42);
-    assert(be16(out + 36) == 0x1234);
+    assert(be16(out + 36) == 0xDB23u);
     assert(out[38] == 0xA6);
     assert(out[39] == (uint8_t)(0x80u | (6u << 4) | 11u));
 
@@ -76,6 +80,54 @@ int main(void) {
     assert(out[34] == (uint8_t)(1u | (4u << 1)));
     assert(out[38] == 0);
     assert(out[39] == 0x7F);
-    puts("40-byte observability payload packing passed");
+
+    /* Fix age saturates without ever becoming the no-fix sentinel. Modular
+     * inputs and the miss streak are bounded at their exact wire widths. */
+    in.fix_age_min = 999u;
+    in.server_proof_count_mod8 = 15u;
+    in.server_qualified_miss_streak = 99u;
+    in.server_recovery_parity = 0u;
+    telemetry_pack(&in, out);
+    assert(be16(out + 36) == 0xFDFEu);
+
+    in.fix_age_min = TELEMETRY_FIX_AGE_INPUT_NONE;
+    in.server_proof_count_mod8 = 7u;
+    in.server_qualified_miss_streak = 3u;
+    in.server_recovery_parity = 1u;
+    telemetry_pack(&in, out);
+    assert(be16(out + 36) == 0xEFFFu); /* canonical, never legacy 0xFFFF */
+
+    in.server_qualified_miss_streak = 2u;
+    telemetry_pack(&in, out);
+    assert(be16(out + 36) == 0xFBFFu);
+
+    /* Exhaust the complete representable v3 state space. Every new frame is
+     * marked and avoids the frozen legacy sentinel; only the documented sole
+     * collision changes proof residue 7 to its canonical residue 6. */
+    for (uint8_t proof = 0; proof < 8u; ++proof) {
+        for (uint8_t misses = 0; misses < 4u; ++misses) {
+            for (uint8_t recovery = 0; recovery < 2u; ++recovery) {
+                for (uint16_t age = 0; age <= 511u; ++age) {
+                    in.server_proof_count_mod8 = proof;
+                    in.server_qualified_miss_streak = misses;
+                    in.server_recovery_parity = recovery;
+                    in.fix_age_min = age == 511u
+                        ? TELEMETRY_FIX_AGE_INPUT_NONE : age;
+                    telemetry_pack(&in, out);
+                    uint16_t word = be16(out + 36);
+                    assert((word & TELEMETRY_V3_WORD_MARKER) != 0u);
+                    assert(word != UINT16_MAX);
+                    assert(((word >> 10) & 3u) == misses);
+                    assert(((word >> 9) & 1u) == recovery);
+                    assert((word & 0x01FFu) == age);
+                    uint8_t expected_proof =
+                        proof == 7u && misses == 3u && recovery == 1u &&
+                            age == 511u ? 6u : proof;
+                    assert(((word >> 12) & 7u) == expected_proof);
+                }
+            }
+        }
+    }
+    puts("40-byte observability v3 payload packing passed");
     return 0;
 }

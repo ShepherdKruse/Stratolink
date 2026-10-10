@@ -12,6 +12,30 @@ static void write_be32(uint8_t* p, int32_t v) {
     p[3] = (uint8_t)((uint32_t)v & 0xFF);
 }
 
+static uint16_t pack_server_liveness_word(const telemetry_input_t* in) {
+    uint16_t fix_age = in->fix_age_min == TELEMETRY_FIX_AGE_INPUT_NONE
+        ? TELEMETRY_V3_FIX_AGE_NONE
+        : (in->fix_age_min > TELEMETRY_V3_FIX_AGE_MAX_MIN
+            ? TELEMETRY_V3_FIX_AGE_MAX_MIN : in->fix_age_min);
+    uint16_t proof = (uint16_t)(in->server_proof_count_mod8 & 0x07u);
+    uint16_t misses = in->server_qualified_miss_streak > 3u
+        ? 3u : (uint16_t)in->server_qualified_miss_streak;
+    uint16_t word = (uint16_t)(
+        TELEMETRY_V3_WORD_MARKER |
+        (proof << 12) |
+        (misses << 10) |
+        (in->server_recovery_parity ? 0x0200u : 0u) |
+        fix_age);
+
+    /* 0xFFFF was already frozen as legacy-v2 "no fix this boot", so current
+     * firmware must never emit it as a v3 marker word. The sole collision is
+     * proof=7, misses=3, recovery parity=1, no fix. Canonicalize only that
+     * observational proof residue to 6; the safety-relevant miss/recovery/fix
+     * facts remain exact and every decoder can keep 0xFFFF unambiguous. */
+    if (word == UINT16_MAX) word = (uint16_t)(word & ~0x1000u);
+    return word;
+}
+
 void telemetry_input_init(telemetry_input_t* out) {
     if (!out) return;
     *out = {};
@@ -57,7 +81,7 @@ void telemetry_pack(const telemetry_input_t* in, uint8_t* out) {
     out[34] = (uint8_t)(acoustic_power | (reset << 4) |
                         (in->command_ack_valid ? 0x80u : 0u));
     out[35] = in->boot_count;
-    write_be16(out + 36, in->fix_age_min);
+    write_be16(out + 36, pack_server_liveness_word(in));
     out[38] = in->command_ack_valid ? in->last_command_seq : 0u;
     uint8_t relay_delta = in->relay_fwd_delta > 7u ? 7u : in->relay_fwd_delta;
     uint8_t ctt_delta = in->ctt_tags_delta > 15u ? 15u : in->ctt_tags_delta;

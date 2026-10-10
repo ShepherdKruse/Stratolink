@@ -818,6 +818,21 @@ void loop() {
     ti.relay_fwd_delta = relay_delta > UINT8_MAX ? UINT8_MAX : (uint8_t)relay_delta;
     ti.ctt_tags_delta = ctt_delta > UINT8_MAX ? UINT8_MAX : (uint8_t)ctt_delta;
 
+    /* The fixed 40-byte primary carries bounded server-liveness evidence in
+     * the marked v3 word. It intentionally describes the state at packet
+     * construction time: an ACK/miss caused by this exchange appears in the
+     * next primary, where TTN can observe it without a J-Link connection. */
+    lorawan_liveness_state_t liveness_state = {};
+    lorawan_liveness_diag_t liveness_diag = {};
+    lorawan_server_liveness_get_state(&liveness_state);
+    lorawan_server_liveness_get_diag(&liveness_diag);
+    ti.server_proof_count_mod8 =
+        (uint8_t)(liveness_diag.authenticated_downlinks & 0x07u);
+    ti.server_qualified_miss_streak =
+        liveness_state.qualified_miss_streak;
+    ti.server_recovery_parity =
+        (uint8_t)(liveness_diag.recoveries & 0x01u);
+
     telemetry_pack(&ti, tx_payload);
     power_manager_kick_watchdog();
 

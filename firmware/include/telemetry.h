@@ -17,6 +17,15 @@
 #define TELEMETRY_UV_INVALID          ((uint8_t)0xFEu)
 #define TELEMETRY_LUX_INVALID         ((uint16_t)0xFFFEu)
 
+/* Bytes 36-37 remain one big-endian word in the fixed 40-byte primary.
+ * Current wire-v3 marks bit 15 and packs bounded server-liveness evidence
+ * beside fix age. Legacy 40-byte v2 is still distinguished by marker=0, with
+ * the historical 0xFFFF no-fix sentinel handled by downstream decoders. */
+#define TELEMETRY_V3_WORD_MARKER          ((uint16_t)0x8000u)
+#define TELEMETRY_V3_FIX_AGE_MAX_MIN      ((uint16_t)510u)
+#define TELEMETRY_V3_FIX_AGE_NONE         ((uint16_t)511u)
+#define TELEMETRY_FIX_AGE_INPUT_NONE      UINT16_MAX
+
 /**
  * All inputs for one telemetry packet.
  * Units match the payload spec (see firmware-architecture-and-payload-plan.md).
@@ -60,7 +69,10 @@ typedef struct {
     uint8_t last_command_seq; /* last durably applied fPort-10 sequence */
     uint8_t relay_enabled;    /* retained public-Meshtastic policy */
     uint8_t boot_count;       /* retained boot count, low byte */
-    uint16_t fix_age_min;     /* since last real fix; 0xFFFF = none this boot */
+    uint16_t fix_age_min;     /* since last real fix; UINT16_MAX = none */
+    uint8_t server_proof_count_mod8;      /* authenticated DL proofs modulo 8 */
+    uint8_t server_qualified_miss_streak; /* current qualified probe misses */
+    uint8_t server_recovery_parity;       /* completed recovery count modulo 2 */
     uint8_t relay_fwd_delta;  /* since last successful primary; saturates at 7 */
     uint8_t ctt_tags_delta;   /* since last successful primary; saturates at 15 */
 } telemetry_input_t;

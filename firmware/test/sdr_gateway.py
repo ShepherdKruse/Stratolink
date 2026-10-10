@@ -32,7 +32,7 @@ SPECTRAL_THRESHOLD = 15  # dB above mean to flag TX
 
 def build_payload(lat, lon, alt, temp_cd, press_ch, solar_mv, batt_mv,
                   speed_cms, heading_cd, sats, ax, ay, az, uv, lux, acoustic):
-    """Build 40-byte v2 telemetry payload matching firmware."""
+    """Build a current 40-byte v3 telemetry payload matching firmware."""
     buf = struct.pack('>iiihhHHHHBhhhBHB',
         int(lat * 1e7),
         int(lon * 1e7),
@@ -54,7 +54,7 @@ def build_payload(lat, lon, alt, temp_cd, press_ch, solar_mv, batt_mv,
     # Default simulated diagnostics: FULL, power-on, no command, relay on,
     # boot 1, fresh fix, no auxiliary activity.
     status = (int(acoustic) & 1) | (4 << 4)
-    return buf[:34] + bytes([status, 1, 0, 0, 0, 0x80])
+    return buf[:34] + bytes([status, 1, 0x80, 0, 0, 0x80])
 
 
 def make_ttn_payload(device_id, raw_bytes):
