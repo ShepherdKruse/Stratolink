@@ -74,3 +74,17 @@ does not transmit, and an RTL-SDR cannot replace a LoRa transmitter.
 Energy and antenna audits expose historical model assumptions. Supply the
 requested measurements or captures, and keep modeled budgets separate from
 measured final-assembly performance.
+
+Required model inputs are explicit:
+
+- Charge ceiling: `--flight-power CSV`.
+- Mission sizing: `--night-reserve JSON --balance JSON --airtime JSON
+  --darkness JSON --power-model relay_power_budget.py`.
+- Vendor screen: `--mission-audit JSON` from the sizing command.
+- Flight-3 darkness: `--telemetry CSV --reconstruction NPZ --night-reserve JSON`.
+- Launch darkness: `--night-reserve JSON`.
+- RF band audit: `--telemetry CSV`.
+
+The JSON arguments are outputs from the named audits. The power-model source is
+part of the separate research contribution or can be supplied by the operator.
+Synthetic test inputs are not substitutes for measured flight evidence.
