@@ -141,6 +141,7 @@ export default function DashboardHeader({ onBack }: { onBack?: (animate?: boolea
                     <button onClick={() => { menu.current?.hidePopover(); community.setPanel('manage'); }}>Your balloons</button>
                     <button className="dashboard-signout" disabled={community.busy} onClick={() => { menu.current?.hidePopover(); void community.signOut(); }}>Sign out</button>
                 </fieldset>}
+                <nav className="dashboard-menu-links" aria-label="Stratolink"><a href="/docs" target="_top">docs</a><a href="/blog" target="_top">blog</a><a href="mailto:contact@stratolink.org">contact</a></nav>
             </div>
         </header>
     );

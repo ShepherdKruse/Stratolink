@@ -26,10 +26,19 @@ import { balloonName } from '@/lib/telemetry/fleetPlayback';
 const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
 /** "May 17, 2026 · 15:55 UTC" — no seconds, friendlier than the raw stamp. */
-function fmtLaunch(ms: number): string {
+function fmtLaunchDate(ms: number): string {
+    const d = new Date(ms);
+    return `${MONTHS[d.getUTCMonth()]} ${d.getUTCDate()}, ${d.getUTCFullYear()}`;
+}
+
+function fmtLaunchTime(ms: number): string {
     const d = new Date(ms);
     const p = (n: number) => String(n).padStart(2, '0');
-    return `${MONTHS[d.getUTCMonth()]} ${d.getUTCDate()}, ${d.getUTCFullYear()} - ${p(d.getUTCHours())}:${p(d.getUTCMinutes())} UTC`;
+    return `${p(d.getUTCHours())}:${p(d.getUTCMinutes())} UTC`;
+}
+
+function fmtLaunch(ms: number): string {
+    return `${fmtLaunchDate(ms)} - ${fmtLaunchTime(ms)}`;
 }
 
 type FlightSummary = { durationMs: number | null; distanceKm: number };
@@ -194,25 +203,34 @@ export default function TelemetryV3Panel({ device, devices, onSelect, scrubRow, 
     const awaiting = rows.length < 2;
     const archived = recordedHistory || ['landed', 'recovered', 'retired', 'lost'].includes(device?.status?.toLowerCase() ?? '');
     const registryStillFlying = recordedHistory && device?.status?.toLowerCase() === 'flying';
+    const launchLine = registryStillFlying && rows.length
+        ? { text: `Records from ${fmtLaunchDate(rows[0].t)}`, time: rows[0].t }
+        : device?.launchedAt
+            ? { text: `Launched ${rows[0]?.locationApproximate ? 'from San Francisco - ' : ''}${fmtLaunchDate(device.launchedAt)}`, time: device.launchedAt }
+            : { text: 'Awaiting launch', time: null };
 
     return (
         <>
             {showHeader && (
-            <div style={{ borderBottom: '1px solid var(--t-border)', flexShrink: 0 }}>
+            <div style={{ borderBottom: compact ? undefined : '1px solid var(--t-border)', flexShrink: 0 }}>
                 <h1 className="dashboard-device-title">{device ? balloonName(device) : 'Balloon'} <OfficialBadge official={device?.official} /></h1>
                 {device?.ownerGithub && <div className="detail-owner"><BalloonOwner device={device} /></div>}
-                <div style={{ padding: compact ? '8px var(--telemetry-gutter, 18px) 0' : '12px var(--telemetry-gutter, 18px) 0', display: 'flex', alignItems: 'center', gap: 8, flexWrap: 'wrap' }}>
-                    {device?.status && (
-                        <>
-                            <HeaderStatus status="nominal" label={registryStillFlying ? 'Missing' : String(device.status)} />
-                            <span style={{ color: 'var(--t-text-4)', fontSize: 10 }}>-</span>
-                        </>
-                    )}
-                    <span className="mono" style={{ fontSize: 10.5, color: 'var(--t-text-3)' }}>
-                        {registryStillFlying && rows.length
-                            ? `Records from ${fmtLaunch(rows[0].t)}`
-                            : device?.launchedAt ? `Launched ${rows[0]?.locationApproximate ? 'from San Francisco - ' : ''}${fmtLaunch(device.launchedAt)}` : 'Awaiting launch'}
-                    </span>
+                <div style={{ padding: compact ? '8px var(--telemetry-gutter, 18px) 0' : '12px var(--telemetry-gutter, 18px) 0' }}>
+                    {/* One line: when it doesn't fit, the time wraps onto a clipped second line, then the date ellipsizes. */}
+                    <div className="detail-status-line">
+                        <span className="detail-status-main">
+                            {device?.status && (
+                                <>
+                                    <HeaderStatus status="nominal" label={registryStillFlying ? 'Missing' : String(device.status)} />
+                                    <span style={{ color: 'var(--t-text-4)', fontSize: 10 }}>-</span>
+                                </>
+                            )}
+                            <span className="mono detail-status-text">
+                                {launchLine.text}
+                            </span>
+                        </span>
+                        {launchLine.time != null && <span className="mono detail-status-time">{` - ${fmtLaunchTime(launchLine.time)}`}</span>}
+                    </div>
                 </div>
                 <div
                     style={{

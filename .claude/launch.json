@@ -6,14 +6,14 @@
       "runtimeExecutable": "npm",
       "runtimeArgs": ["run", "dev"],
       "cwd": "web",
-      "port": 3000
+      "port": 5173
     },
     {
       "name": "web-prod",
       "runtimeExecutable": "npm",
       "runtimeArgs": ["run", "start"],
       "cwd": "web",
-      "port": 3000
+      "port": 5173
     }
   ]
 }

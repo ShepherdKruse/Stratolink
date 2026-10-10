@@ -128,6 +128,7 @@
     .community-radio > .community-field:first-child { grid-column: 1 / -1; }
     .community-radio input, .community-panel .community-field select { font-size: 16px; }
     .community-remove-radio { width: 30px; }
+    .fleet-toolbar { padding-top: 2px; }
 }
 
 .community-expand[data-open="true"] .community-expand-inner { overflow-y: auto; overscroll-behavior: contain; }
