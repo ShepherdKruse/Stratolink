@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowRight, faClock } from '@fortawesome/free-solid-svg-icons';
 import { useIsMobile } from '@/hooks/use-mobile';
@@ -87,6 +87,10 @@ export default function Timeline({ histories, scrubT, onScrub, onScrubbingChange
     /* Future leg = the forecast, which is drawn blue on the map. */
     const handleColor = cursorInFuture ? 'var(--sl-forecast)' : 'var(--sl-ok)';
     const labelLeft = Math.max(7, Math.min(93, fraction));
+    /* Mobile clock width, measured so it can be centered on the thumb yet clamped
+     * inside the track (and clear of anything parked at its left, via CSS). */
+    const mobileLabelRef = useRef<HTMLDivElement | null>(null);
+    const [mobileLabelW, setMobileLabelW] = useState(0);
 
     /* Offset of the cursor from the real "now" (live): minutes within the hour,
      * hours up to 3 days, then days (e.g. "−10.4d") so a long dead-reckon doesn't
@@ -103,6 +107,12 @@ export default function Timeline({ histories, scrubT, onScrub, onScrubbingChange
                 ? `${relSign}${Math.round(relAbsHr)}hr`
                 : `${relSign}${(relAbsHr / 24).toFixed(1)}d`;
     const cursorIsLive = !archived && Math.abs(relMs) < 120_000;
+    const mobileRelLabel = preciseTier > 0 ? PRECISE_LABEL[preciseTier] : relLabel;
+    const mobileLabelText = `${fmtClock(cursorT)} ${mobileRelLabel}`;
+    useLayoutEffect(() => {
+        const width = mobileLabelRef.current?.offsetWidth ?? 0;
+        setMobileLabelW(current => current === width ? current : width);
+    }, [mobileLabelText, isMobile]);
 
     /* Scrubbing (mouse + touch) is incremental — it integrates pointer motion
      * scaled by the active precision gain — rather than snapping to the pointer
@@ -170,12 +180,13 @@ export default function Timeline({ histories, scrubT, onScrub, onScrubbingChange
         let next: number;
         if (event.key === 'Home') next = tStart;
         else if (event.key === 'End') next = tEnd;
+        /* Arrows step 1% of the rail; Shift+arrows jump packet to packet. */
         else if (event.key === 'ArrowLeft') {
-            next = archived
+            next = event.shiftKey
                 ? adjacentPacketTime(histories, cursorT, 'previous') ?? tStart
                 : Math.max(tStart, cursorT - span / 100);
         } else if (event.key === 'ArrowRight') {
-            next = archived
+            next = event.shiftKey
                 ? adjacentPacketTime(histories, cursorT, 'next') ?? tEnd
                 : Math.min(tEnd, cursorT + span / 100);
         } else return;
@@ -202,7 +213,9 @@ export default function Timeline({ histories, scrubT, onScrub, onScrubbingChange
                 {/* Precise-scrub speed — a small, quiet multiplier below the bar's
                   * left edge. Anchored to the bar (not the moving thumb/clock),
                   * so it never resizes the track or overflows the screen edge. */}
-                {preciseTier > 0 && (
+                {/* Phones show the speed in the clock above the thumb instead: the
+                  * space below the bar is under the finger and the charts drawer. */}
+                {preciseTier > 0 && !isMobile && (
                     <span style={{
                         position: 'absolute', top: 'calc(100% + 5px)', left: 16,
                         fontFamily: 'var(--sl-mono)', fontSize: 11, fontWeight: 600,
@@ -257,13 +270,12 @@ export default function Timeline({ histories, scrubT, onScrub, onScrubbingChange
                     {/* Mobile: clock floats above the thumb so it doesn't steal
                       * track width. */}
                     {isMobile && (
-                        <div style={{
+                        <div ref={mobileLabelRef} className="sl-scrub-clock" style={{
                             position: 'absolute', bottom: 'calc(100% + 7px)',
-                            /* Anchor the label to the track edges near the ends so
-                             * it can't overflow off-screen (e.g. the "hr" getting
-                             * clipped); centered on the thumb in the middle. */
-                            left: fraction <= 18 ? '0%' : fraction >= 82 ? '100%' : `${labelLeft}%`,
-                            transform: fraction <= 18 ? 'translateX(0)' : fraction >= 82 ? 'translateX(-100%)' : 'translateX(-50%)',
+                            /* Centered on the thumb, clamped so it can't overflow
+                             * the track's right end or slide over the map credit
+                             * parked at its left (--timeline-label-min). */
+                            left: `clamp(var(--timeline-label-min, 0px), calc(${fraction}% - ${mobileLabelW / 2}px), calc(100% - ${mobileLabelW}px))`,
                             pointerEvents: 'none',
                             fontFamily: 'var(--sl-mono)', fontVariantNumeric: 'tabular-nums',
                             fontSize: 11, fontWeight: 500, whiteSpace: 'nowrap',
@@ -271,8 +283,8 @@ export default function Timeline({ histories, scrubT, onScrub, onScrubbingChange
                             textShadow: '0 1px 3px var(--sl-overlay-bg)',
                         }}>
                             {fmtClock(cursorT)}
-                            <span style={{ color: cursorIsLive ? 'var(--sl-ok)' : cursorInFuture ? 'var(--sl-forecast)' : 'var(--sl-text-dim2)', marginLeft: 5 }}>
-                                {relLabel}
+                            <span style={{ color: preciseTier > 0 || cursorIsLive ? 'var(--sl-ok)' : cursorInFuture ? 'var(--sl-forecast)' : 'var(--sl-text-dim2)', fontWeight: preciseTier > 0 ? 600 : undefined, marginLeft: 5 }}>
+                                {mobileRelLabel}
                             </span>
                         </div>
                     )}
