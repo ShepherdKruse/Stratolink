@@ -1095,8 +1095,8 @@ static bool relay_restore_lorawan_phy(void) {
     return radio_apply_lorawan_tx(REGION.init_freq);
 }
 
-static void restore_lorawan_or_reset(void) {
-    if (relay_restore_lorawan_phy()) return;
+static bool restore_lorawan_or_reset(void) {
+    if (relay_restore_lorawan_phy()) return true;
     s_radio_diag.restore_attempts++;
     /* A partial restore can transmit successfully but be undecodable. Force a
      * full three-attempt begin() now; if the modem still cannot be placed in a
@@ -1104,6 +1104,7 @@ static void restore_lorawan_or_reset(void) {
     radio_ready = false;
     if (!lorawan_init()) NVIC_SystemReset();
     s_radio_diag.restore_recovered++;
+    return false;
 }
 
 static uint32_t relay_toa_ms(size_t len) {
@@ -1123,37 +1124,156 @@ static bool relay_airtime_allows(uint32_t used_ms, uint32_t start_ms,
            (uint32_t)RELAY_AIRTIME_CAP_PCT * elapsed;
 }
 
+enum relay_cad_result_t {
+    RELAY_CAD_FREE,
+    RELAY_CAD_BUSY,
+    RELAY_CAD_MISSION_ABORT,
+    RELAY_CAD_LOCAL_FAULT,
+};
+
+static volatile bool s_relay_cad_done = false;
+static void relay_cad_isr(void) { s_relay_cad_done = true; }
+
+static bool relay_cad_has_tx_room(uint32_t start_ms, uint32_t max_ms,
+                                   uint32_t toa_ms) {
+    uint32_t elapsed = millis() - start_ms;
+    if (elapsed >= max_ms) return false;
+    uint32_t remaining = max_ms - elapsed;
+    /* Pinned SX126x::transmit waits past 5 + floor(5 * ToA_us / 1000)
+     * on a missing TX_DONE. Reserve that IRQ wait plus the existing guard,
+     * not just emitted airtime. This does not bound SPI/setup/cleanup time. */
+    uint64_t required_ms = 5ull * toa_ms + 6ull + 100ull;
+    return required_ms < remaining;
+}
+
+/* Bound the CAD IRQ wait, not RadioLib's underlying SPI-command timeouts.
+ * Keep the pinned four-symbol/default-threshold CAD configuration unchanged.
+ * At LongFast SF11/BW250 the symbols occupy 32.768 ms; 100 ms bounds a lost
+ * completion IRQ well before IWDG. A timeout aborts this optional window;
+ * the caller's epilogue alone owns full LoRaWAN PHY restoration. */
+static relay_cad_result_t relay_scan_channel_bounded(
+    uint32_t start_ms, uint32_t max_ms, uint32_t toa_ms, uint16_t floor_mv) {
+    relay_cad_result_t result = RELAY_CAD_LOCAL_FAULT;
+    radio->clearPacketReceivedAction();
+    do {
+        if (power_adc_read_vSTOR_mv() < floor_mv ||
+            power_adc_read_solar_mv() < RELAY_SOLAR_MIN_MV ||
+            !relay_cad_has_tx_room(start_ms, max_ms, toa_ms) ||
+            power_manager_freefall_pending()) {
+            result = RELAY_CAD_MISSION_ABORT;
+            break;
+        }
+        int16_t state = radio->standby();
+        if (state == RADIOLIB_ERR_NONE) {
+            state = radio->clearIrqFlags(RADIOLIB_SX126X_IRQ_ALL);
+        }
+        if (state != RADIOLIB_ERR_NONE) {
+            s_radio_diag.last_error = state;
+            break;
+        }
+        if (!relay_cad_has_tx_room(start_ms, max_ms, toa_ms) ||
+            power_manager_freefall_pending()) {
+            result = RELAY_CAD_MISSION_ABORT;
+            break;
+        }
+        /* Clear before arming: an immediate IRQ inside startChannelScan()
+         * must not be erased after that call returns. CAD and RX callbacks
+         * share one STM32WL interrupt slot, so swap it explicitly. */
+        s_relay_cad_done = false;
+        radio->setChannelScanAction(relay_cad_isr);
+        uint32_t cad_started_ms = millis();
+        power_manager_kick_watchdog();
+        state = radio->startChannelScan();
+        if (state != RADIOLIB_ERR_NONE) {
+            s_radio_diag.last_error = state;
+            break;
+        }
+        for (;;) {
+            if (!relay_cad_has_tx_room(start_ms, max_ms, toa_ms) ||
+                power_manager_freefall_pending()) {
+                result = RELAY_CAD_MISSION_ABORT;
+                break;
+            }
+            if (millis() - cad_started_ms >= 100u) {
+                s_radio_diag.last_error = RADIOLIB_ERR_RX_TIMEOUT;
+                break;
+            }
+            if (s_relay_cad_done) {
+                state = radio->getChannelScanResult();
+                if (state == RADIOLIB_CHANNEL_FREE) {
+                    result = RELAY_CAD_FREE;
+                } else if (state == RADIOLIB_LORA_DETECTED ||
+                           state == RADIOLIB_PREAMBLE_DETECTED) {
+                    result = RELAY_CAD_BUSY;
+                } else {
+                    s_radio_diag.last_error = state;
+                }
+                break;
+            }
+            radio_idle_until_interrupt();
+        }
+    } while (false);
+
+    /* getChannelScanResult() does not clear IRQs. Stop CAD before clearing
+     * both radio and STM32WL pending state, with its callback detached. */
+    radio->clearChannelScanAction();
+    int16_t standby_state = radio->standby();
+    int16_t clear_state = radio->clearIrqFlags(RADIOLIB_SX126X_IRQ_ALL);
+    s_relay_cad_done = false;
+    s_relay_rx = false;
+    if (standby_state != RADIOLIB_ERR_NONE || clear_state != RADIOLIB_ERR_NONE) {
+        s_radio_diag.last_error = standby_state != RADIOLIB_ERR_NONE
+            ? standby_state : clear_state;
+        radio_ready = false;
+        result = RELAY_CAD_LOCAL_FAULT;
+    }
+    if (result == RELAY_CAD_FREE || result == RELAY_CAD_BUSY) {
+        /* ADC reads and cleanup take time too. Never turn a previously clear
+         * CAD into permission to transmit after the mission gate changed. */
+        if (power_adc_read_vSTOR_mv() < floor_mv ||
+            power_adc_read_solar_mv() < RELAY_SOLAR_MIN_MV ||
+            !relay_cad_has_tx_room(start_ms, max_ms, toa_ms) ||
+            power_manager_freefall_pending()) {
+            result = RELAY_CAD_MISSION_ABORT;
+        } else {
+            radio->setPacketReceivedAction(relay_rx_isr);
+        }
+    }
+    return result;
+}
+
 static bool relay_send_b2b_frame(
     const b2b_frame_t* frame, uint32_t start_ms, uint32_t max_ms,
-    uint32_t* used_ms) {
+    uint32_t* used_ms, uint16_t floor_mv, bool* abort_window) {
     uint8_t wire[B2B_FRAME_MAX];
     int len = b2b_encode(frame, wire, sizeof(wire));
     if (len <= 0) return false;
     uint32_t toa = relay_toa_ms((size_t)len);
     if (!relay_airtime_allows(*used_ms, start_ms, toa)) return false;
-    /* CAD plus a short guard prevents a final B2B hand-off from extending
-     * beyond the mission-owned relay window and delaying the next TTN cycle. */
-    if ((millis() - start_ms) + toa + 100u >= max_ms) {
+    /* Do not start CAD unless the subsequent TX IRQ wait can still fit. */
+    if (!relay_cad_has_tx_room(start_ms, max_ms, toa)) {
         s_b2b.stats.window_block++;
         return false;
     }
-    int16_t cad = radio->scanChannel();
-    if (cad == RADIOLIB_LORA_DETECTED ||
-        cad == RADIOLIB_PREAMBLE_DETECTED) {
+    relay_cad_result_t cad = relay_scan_channel_bounded(
+        start_ms, max_ms, toa, floor_mv);
+    if (cad == RELAY_CAD_BUSY) {
         s_b2b.stats.cad_busy++;
         return false;
     }
-    if (cad != RADIOLIB_CHANNEL_FREE) {
-        s_b2b.stats.cad_error++;
-        s_radio_diag.last_error = cad;
+    if (cad != RELAY_CAD_FREE) {
+        if (cad == RELAY_CAD_LOCAL_FAULT) s_b2b.stats.cad_error++;
+        *abort_window = true;
         return false;
     }
+    /* A timeout or finishTransmit error can follow emitted RF. Reserve the
+     * airtime before handoff and end this optional window on any TX error. */
+    *used_ms += toa;
     int16_t state = radio->transmit(wire, (size_t)len);
-    if (state == RADIOLIB_ERR_NONE) {
-        *used_ms += toa;
-    } else {
+    if (state != RADIOLIB_ERR_NONE) {
         s_b2b.stats.tx_error++;
         s_radio_diag.last_error = state;
+        *abort_window = true;
     }
     return state == RADIOLIB_ERR_NONE;
 }
@@ -1193,6 +1313,7 @@ uint32_t lorawan_relay_window(
     }
 
     uint32_t tx_airtime_ms = 0;
+    bool abort_window = false;
     uint32_t last_hk = start;
     uint32_t b2b_attempt_seq = 0;
     uint32_t next_b2b_try = start + mesh_relay_mac_delay_ms(
@@ -1333,11 +1454,9 @@ uint32_t lorawan_relay_window(
         }
 
         /*
-         * A due public relay first performs LoRa CAD. RadioLib's blocking
-         * scanChannel() implements the SX1262 two-symbol detector and leaves
-         * the modem out of continuous RX, so every outcome explicitly rearms
-         * receive. Failed/busy scans repeat the randomized late contention
-         * delay; successful TX alone commits the long-lived dedup record.
+         * A due public relay first performs bounded LoRa CAD. Busy scans
+         * repeat randomized contention; local faults/mission aborts exit to
+         * the common LoRaWAN restore. Successful TX alone commits dedup.
          */
         uint32_t now = millis();
         bool mesh_serviced = false;
@@ -1347,8 +1466,7 @@ uint32_t lorawan_relay_window(
             mesh_relay_pending_t* pending =
                 &s_relay_mac.pending[(uint8_t)due_slot];
             uint32_t toa = relay_toa_ms(pending->len);
-            uint32_t elapsed = now - start;
-            if (elapsed + toa + 100u >= max_ms) {
+            if (!relay_cad_has_tx_room(start, max_ms, toa)) {
                 s_relay.window_skip++;
                 mesh_relay_mac_remove(&s_relay_mac, (uint8_t)due_slot);
             } else if (!relay_airtime_allows(
@@ -1356,31 +1474,28 @@ uint32_t lorawan_relay_window(
                 s_relay.cap_skip++;
                 mesh_relay_mac_remove(&s_relay_mac, (uint8_t)due_slot);
             } else {
-                int16_t cad = radio->scanChannel();
-                if (cad == RADIOLIB_CHANNEL_FREE) {
+                relay_cad_result_t cad = relay_scan_channel_bounded(
+                    start, max_ms, toa, floor_mv);
+                if (cad == RELAY_CAD_FREE) {
+                    /* Failed completion does not prove no RF was emitted. */
+                    tx_airtime_ms += toa;
                     if (radio->transmit(pending->frame, pending->len) ==
                         RADIOLIB_ERR_NONE) {
                         relay_dd_mark(pending->from, pending->id);
                         s_relay.fwd++;
-                        tx_airtime_ms += toa;
                         mesh_relay_mac_remove(
                             &s_relay_mac, (uint8_t)due_slot);
                     } else {
                         s_relay.tx_error++;
-                        mesh_relay_mac_reschedule(
-                            &s_relay_mac, (uint8_t)due_slot, millis(),
-                            micros());
+                        break;
                     }
-                } else if (cad == RADIOLIB_LORA_DETECTED ||
-                           cad == RADIOLIB_PREAMBLE_DETECTED) {
+                } else if (cad == RELAY_CAD_BUSY) {
                     s_relay.cad_busy++;
                     mesh_relay_mac_reschedule(
                         &s_relay_mac, (uint8_t)due_slot, millis(), micros());
                 } else {
-                    s_relay.cad_error++;
-                    s_radio_diag.last_error = cad;
-                    mesh_relay_mac_reschedule(
-                        &s_relay_mac, (uint8_t)due_slot, millis(), micros());
+                    if (cad == RELAY_CAD_LOCAL_FAULT) s_relay.cad_error++;
+                    break;
                 }
             }
             if (!relay_arm_receive()) break;
@@ -1400,7 +1515,8 @@ uint32_t lorawan_relay_window(
                 b2b_frame_t* frame = &s_b2b_origin[s_b2b_origin_head];
                 attempted = true;
                 if (relay_send_b2b_frame(
-                        frame, start, max_ms, &tx_airtime_ms)) {
+                        frame, start, max_ms, &tx_airtime_ms,
+                        floor_mv, &abort_window)) {
                     s_b2b_origin_head =
                         (uint8_t)((s_b2b_origin_head + 1) % B2B_ORIGIN_N);
                     s_b2b_origin_n--;
@@ -1434,7 +1550,7 @@ uint32_t lorawan_relay_window(
                         s_b2b_crumb_frame_ready = false;
                     } else if (relay_send_b2b_frame(
                                    &s_b2b_crumb_frame, start, max_ms,
-                                   &tx_airtime_ms)) {
+                                   &tx_airtime_ms, floor_mv, &abort_window)) {
                     s_b2b_crumb_pending = false;
                     s_b2b_crumb_frame_ready = false;
                     s_b2b_ever_sent_crumb = true;
@@ -1454,18 +1570,23 @@ uint32_t lorawan_relay_window(
                                 &s_b2b, &frame, toa, s_b2b_fleet_key,
                                 b2b_now_rtc_sec())) {
                             attempted = true;
+                            uint32_t airtime_before = tx_airtime_ms;
                             if (!relay_send_b2b_frame(
-                                    &frame, start, max_ms, &tx_airtime_ms)) {
-                                b2b_refund(&s_b2b, &frame, toa);
+                                    &frame, start, max_ms, &tx_airtime_ms,
+                                    floor_mv, &abort_window)) {
+                                /* Requeue either failure, but refund credit
+                                 * only if CAD prevented the radio handoff. */
+                                b2b_refund(&s_b2b, &frame,
+                                    tx_airtime_ms == airtime_before ? toa : 0u);
                             }
                         }
                     }
                 }
             }
-            /*
-             * scanChannel() leaves continuous RX even when CAD is busy or
-             * errors. Rearm after every attempt, not only successful TX.
-             */
+            /* A popped forward must be requeued above before an abort leaves
+             * this window. Never rearm LongFast on an abort path. */
+            if (abort_window) break;
+            /* Busy CAD also left continuous RX. */
             if (attempted) {
                 if (!relay_arm_receive()) break;
             }
