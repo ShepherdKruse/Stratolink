@@ -57,7 +57,11 @@ export type BiasCorrection = {
     capped: boolean;
 };
 
-/** Bias plus the sigmas the parametric ensemble jitters with. */
+/** Bias + data-driven uncertainty from the cube. Same residual math as
+ *  `computeBias`, but each fix pair is compared to the wind at THAT past time and
+ *  place (`sampleWind`), not a single snapshot — and we also return the residual
+ *  scatter (std-dev), so the ensemble spread reflects how tightly THIS balloon
+ *  has been tracking the winds rather than a fixed guess. */
 export type CubeBias = BiasCorrection & { speedSigma: number; dirSigma: number };
 
 /* The bias correction is intentionally NEUTRAL: we do NOT fit a speed factor or a
@@ -172,6 +176,15 @@ function downsampleTrack(track: Array<[number, number]>, maxPts: number): Array<
     for (let i = 0; i < track.length; i += step) out.push(track[i]);
     if (out[out.length - 1] !== track[track.length - 1]) out.push(track[track.length - 1]);
     return out;
+}
+
+/** Per-gap scalar metadata for the stored forecast. The corridor occupancy
+ *  footprint and the per-fraction ellipse rings (~100 KB per forecast) are not
+ *  stored: nothing read them from the forecast object (`sanitizeForecast` never
+ *  forwarded `reconstruction_gaps` at all), and the hindcast cache keeps the full
+ *  reconstruction for the compute's own reuse. */
+function gapSummaries(gaps: PathReconstructionResult['gaps']): NonNullable<StratolinkForecast['observed']['reconstruction_gaps']> {
+    return gaps.map(({ occupancy: _occupancy, ellipses: _ellipses, ...gap }) => gap);
 }
 
 /**
@@ -330,16 +343,7 @@ async function resolveReconstruction(
     return { result, hash };
 }
 
-/** Per-gap scalar metadata for the stored forecast. The corridor occupancy
- *  footprint and the per-fraction ellipse rings (~100 KB per forecast) are not
- *  stored: nothing read them from the forecast object (`sanitizeForecast` never
- *  forwarded `reconstruction_gaps` at all), and the hindcast cache keeps the full
- *  reconstruction for the compute's own reuse. */
-function gapSummaries(gaps: PathReconstructionResult['gaps']): NonNullable<StratolinkForecast['observed']['reconstruction_gaps']> {
-    return gaps.map(({ occupancy: _occupancy, ellipses: _ellipses, ...gap }) => gap);
-}
-
-/** Full Monte Carlo pipeline: NOAA cubes → neutral bias → ensemble → horizon ellipse. */
+/** Full Monte Carlo pipeline: GFS fetch → bias correction → ensemble → ellipses. */
 export async function computeMonteCarloForecast(input: MonteCarloForecastInput): Promise<StratolinkForecast> {
     const t0 = Date.now();
     const totalHours = input.forecastHours ?? CFG.TOTAL_HOURS;
@@ -355,23 +359,26 @@ export async function computeMonteCarloForecast(input: MonteCarloForecastInput):
     const stale = gapH >= STALE_GPS_THRESHOLD_H;
 
     /* The reconstruction runs over the FULL flight (input.gpsFixes) so the drawn
-     * route covers the whole mission. The bias bookkeeping only looks at RECENT
-     * motion (weeks-old fix pairs are stale signal): the last RECENT_DAYS of
-     * fixes, or the last handful when the balloon has been quiet longer. */
+     * route covers the whole mission. But the forecast cube + bias should reflect
+     * only RECENT motion: a continent-spanning full-history bbox would force a
+     * coarse grid, and weeks-old fix pairs are stale, time-mismatched bias signal.
+     * Use the last RECENT_DAYS of fixes for the cube/bias; fall back to the last
+     * handful when the balloon has been quiet longer than that. */
     const RECENT_DAYS = 14;
     const recentCutoffMs = nowMs - RECENT_DAYS * 86_400_000;
     let recentFixes = input.gpsFixes.filter((f) => new Date(f.time_utc).getTime() >= recentCutoffMs);
     if (recentFixes.length < 5) recentFixes = input.gpsFixes.slice(-Math.min(50, input.gpsFixes.length));
 
-    /* ONE space-time wind field for the whole compute. startMs = the last fix when
-     * dead-reckoning, else "now"; endMs = the forecast horizon end. */
+    /* ONE space-time wind field for the whole compute (replaces the snapshot grid
+     * + per-point dead-reckon fetches). startMs = the last fix when dead-reckoning,
+     * else "now"; endMs = the forecast horizon end. */
     const startMs = stale ? fixTimeMs : nowMs;
     const endMs = nowMs + totalHours * 3_600_000;
 
-    /* Two decoupled fields (scripts/gfs_ingest.py builds and sizes both):
-     *   - fcCube: the HOURLY forecast tube whose future leg uses GFS forecast
-     *     hours (so the forward forecast evolves). Drives the forward forecast,
-     *     the parametric ensemble fallback and the origin.
+    /* Two decoupled fields (scripts/gfs_ingest.py builds both):
+     *   - fcCube: small, HOURLY forecast cube whose future leg uses GFS forecast
+     *     hours (so the forward forecast evolves), at the finest grid that fits.
+     *     Drives the forward forecast, the ensemble, the bias fit and the origin.
      *   - reconCube: full-mission, 3-hourly cube driving only the historical
      *     reconstruction. Both are read from WIND_CUBE_DIR (or the legacy Blob
      *     cubes/ prefix); a missing cube throws — there is no live fallback. */

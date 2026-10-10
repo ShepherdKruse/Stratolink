@@ -30,9 +30,9 @@ function gauss(): number {
 }
 
 /**
- * Integrate a balloon path through a space-time `WindCube`, sampling the wind
+ * Time-aware variant of `integrateBalloonPath`: samples a space-time `WindCube`
  * at each step's actual position AND wall-clock instant (`startTimeMs + elapsed`)
- * rather than a single frozen grid. One continuous integration from the last fix
+ * instead of a single frozen grid. One continuous integration from the last fix
  * through "now" to the horizon — so the predicted-hindcast and forecast legs
  * share one wind source and join seamlessly. One [lon, lat] point per hour.
  *
