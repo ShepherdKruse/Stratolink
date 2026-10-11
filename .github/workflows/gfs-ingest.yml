@@ -12,6 +12,10 @@ on:
         description: 'Rebuild even when the stored forecast is already final (bypasses the activity gate)'
         type: boolean
         default: false
+      history_days:
+        description: 'Days of telemetry history to replay (default 90; raise it to regenerate an older flight)'
+        type: number
+        default: 90
 
 concurrency:
   group: gfs-ingest
@@ -31,6 +35,11 @@ jobs:
     env:
       DEVICE: ${{ inputs.device }}
       FORCE: ${{ inputs.force }}
+      # Both sides of the worker cap history at 90 days (gfs_ingest.py HISTORY_DAYS,
+      # buildForecastInput FORECAST_HISTORY_DAYS); a forced rerun of a flight older
+      # than that would otherwise find no fixes and seed from the launch record.
+      HISTORY_DAYS: ${{ inputs.history_days || 90 }}
+      FORECAST_HISTORY_DAYS: ${{ inputs.history_days || 90 }}
       NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.SUPABASE_URL || secrets.NEXT_PUBLIC_SUPABASE_URL }}
       SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
       BLOB_READ_WRITE_TOKEN: ${{ secrets.BLOB_READ_WRITE_TOKEN }}
