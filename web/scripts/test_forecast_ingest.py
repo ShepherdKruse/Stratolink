@@ -353,6 +353,77 @@ class ReconTubeGeometryTests(unittest.TestCase):
         self.assertEqual(unwrap([170.0, 178.0, -178.0, -170.0]), [-190.0, -182.0, -178.0, -170.0])
 
 
+class MultiLevelWindFollowingTubeTests(unittest.TestCase):
+    """The multi-level reconstruction cube: which levels it stores, and long-gap
+    slice boxes laid along the forward/backward wind trajectories."""
+
+    @classmethod
+    def setUpClass(cls):
+        import math
+        cls.g = extract({
+            "GFS_LEVELS", "RECON_LEVEL_SET", "RECON_LEVELS_EACH_SIDE", "LONG_GAP_H", "LONG_GAP_JOIN_MARGIN_H",
+            "LONG_GAP_MAX_SPREAD_DEG", "TUBE_SUBSTEP_H", "recon_levels", "integrate_positions", "interp_track",
+            "recon_slice_covers", "cover_boxes",
+        })
+        # integrate_positions only needs cos/radians from numpy.
+        cls.g["np"] = types.SimpleNamespace(cos=math.cos, radians=math.radians)
+        cls.g["math"] = math
+
+    def test_recon_levels_bracket_the_float_plus_one_each_side(self):
+        lv = self.g["recon_levels"]
+        self.assertEqual(lv(280.8, 1), [200, 250, 300, 350])     # 350 hPa is in the 0.25° files
+        self.assertEqual(lv(300, 1), [250, 300, 350])            # on a level: that level ± one
+        self.assertEqual(lv(280.8, 2), [150, 200, 250, 300, 350, 400])
+        self.assertEqual(lv(25, 1), [30, 50])                    # clamped at the top of the set
+        self.assertEqual(lv(280.8, 0), [])                       # single-level cube
+        self.assertIn(350, self.g["RECON_LEVEL_SET"])
+        self.assertNotIn(350, self.g["GFS_LEVELS"])              # forecast/GEFS levels unchanged
+
+    def test_long_gap_boxes_follow_the_wind_not_the_chord(self):
+        import math
+        h = 3_600_000
+        # A 48 h gap under a uniform 25 m/s westerly that carries the balloon
+        # ~1.05°/h east, with B at 45° and the wind's own end point 50.6°. Early
+        # slices sit on the forward wind trajectory from A, late ones on the
+        # backward one from B (which lag/lead the chord), both around the midpoint.
+        deg_per_h = 25 * 3600 / (111_320 * math.cos(math.radians(40)))
+        fixes = [(0, 40.0, 0.0), (48 * h, 40.0, 45.0)]
+        slices = [k * 3 * h for k in range(-1, 18)]
+        wind = lambda lat, lon, t: (25.0, 0.0)
+        covers = self.g["recon_slice_covers"](fixes, slices, 3 * h, wind)
+        k9 = slices.index(9 * h)
+        self.assertEqual(len(covers[k9]), 1)                     # before midpoint − margin: forward only
+        self.assertAlmostEqual(covers[k9][0][1], 9 * deg_per_h, delta=0.1)
+        k39 = slices.index(39 * h)
+        self.assertEqual(len(covers[k39]), 1)                    # after midpoint + margin: backward only
+        self.assertAlmostEqual(covers[k39][0][1], 45 - 9 * deg_per_h, delta=0.1)
+        k24 = slices.index(24 * h)
+        self.assertEqual(len(covers[k24]), 2)                    # around the midpoint: both clouds
+        self.assertAlmostEqual(covers[k24][0][1], 24 * deg_per_h, delta=0.1)
+        self.assertAlmostEqual(covers[k24][1][1], 45 - 24 * deg_per_h, delta=0.1)
+        # The lead-in slice before A sits at A.
+        self.assertEqual(covers[0], [(40.0, 0.0)])
+
+    def test_short_gaps_and_unconnectable_long_gaps_keep_the_chord(self):
+        h = 3_600_000
+        wind = lambda lat, lon, t: (25.0, 0.0)
+        # A 4 h gap: chord.
+        covers = self.g["recon_slice_covers"]([(0, 10.0, 0.0), (4 * h, 10.0, 2.0)], [0, 3 * h], 3 * h, wind)
+        self.assertAlmostEqual(covers[1][0][1], 1.5)
+        # A 48 h gap that does not move while the wind runs 50° east (a balloon on
+        # the ground): forward and backward trajectories split > 30° → chord.
+        fixes = [(0, 40.0, 0.0), (48 * h, 40.0, 0.0)]
+        covers = self.g["recon_slice_covers"](fixes, [24 * h], 3 * h, wind)
+        self.assertEqual(covers[0], [(40.0, 0.0)])
+
+    def test_cover_boxes_pad_the_bounding_box_and_snap_to_the_step(self):
+        boxes = self.g["cover_boxes"]([[(40.0, 0.0), (42.0, 10.0)], [(10.0, 5.0)]], [9.0, 9.1], 0.25)
+        clat, clon, hl, ho = boxes[0]
+        self.assertEqual((clat, clon), (41.0, 5.0))
+        self.assertEqual((hl, ho), (10.0, 14.0))
+        self.assertEqual(boxes[1][2:], (9.25, 9.25))             # snapped UP to the 0.25° step
+
+
 class DeviceAliasMirrorTests(unittest.TestCase):
     """The ingest must query the same canonical + alias telemetry ids as the
     compute (lib/devices/aliases.ts), or the tube is built from a partial track."""

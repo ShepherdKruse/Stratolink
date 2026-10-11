@@ -31,8 +31,11 @@ import type { PathReconstructionResult } from './pathReconstruction';
  * v5: long-gap bridges are the trimmed local mean of 2,000 posterior draws
  *     around their medoid, not the posterior mean (which sat between modes).
  * v6: long-gap particles follow the wind under a bounded AR(1) heading/speed
- *     perturbation instead of an unbounded heading random walk. */
-const ALGO_VERSION = 'v6';
+ *     perturbation instead of an unbounded heading random walk.
+ * v7: long-gap tube boxes follow the wind trajectories from both fixes (not the
+ *     time-linear chord), and on multi-level cubes each particle rides its own
+ *     pressure, anchored to the fixes' barometer readings. */
+const ALGO_VERSION = 'v7';
 
 export type StoredHindcast = PathReconstructionResult & { computed_at: string };
 

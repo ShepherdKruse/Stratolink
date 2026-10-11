@@ -5,6 +5,10 @@ export type ForecastGpsFix = {
     lon: number;
     time_utc: string;
     alt_m?: number;
+    /** Barometric pressure (hPa) reported with the fix, when it is a plausible
+     *  float reading (80–400 hPa); anchors the long-gap smoother's per-particle
+     *  pressure at the gap's ends. */
+    pressure_hpa?: number;
     note?: string | null;
 };
 

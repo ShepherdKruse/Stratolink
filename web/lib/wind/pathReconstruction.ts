@@ -147,8 +147,10 @@ export type PathReconstructionResult = {
  *       posterior draws around their medoid (was the posterior mean).
  *   g5: long-gap particles follow the wind under a bounded AR(1) heading /
  *       speed perturbation (the unbounded heading random walk is gone);
- *       gaps the winds cannot connect are flagged `unexplained`. */
-const GAP_ALGO_VERSION = 'g5';
+ *       gaps the winds cannot connect are flagged `unexplained`.
+ *   g6: wind-following long-gap tube; per-particle pressure on multi-level
+ *       (.slwc v4) cubes. */
+const GAP_ALGO_VERSION = 'g6';
 /** A bridge whose end is older than this is final — safe to reuse verbatim. */
 const GAP_SETTLE_MS = 6 * 3_600_000;
 

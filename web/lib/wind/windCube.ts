@@ -39,6 +39,14 @@ export type WindCube = {
      *  (hourly), `points` = `[lat, lon]` unwrapped — denser than the 3-6 h slice
      *  cadence, so hourly member paths need no chord interpolation. */
     track?: { t0Ms: number; stepMs: number; points: Array<[number, number]> };
+    /** v4 multi-level cubes only: the stored pressure levels (hPa, ascending).
+     *  `grids` is then the float level `levelHpa` rebuilt from the two levels
+     *  bracketing it (linear in pressure, the blend the single-level ingest
+     *  applies), so every single-level consumer reads it unchanged; samplers
+     *  that give each path its own pressure use `sampleWindP`. */
+    levels?: number[];
+    /** v4 only: `levelGrids[g][k]` = slice g at `levels[k]` (same box as `grids[g]`). */
+    levelGrids?: GfsGrid[][];
 };
 
 /** The pre-integrated trajectory a tube was laid along: each slice's box center
@@ -97,7 +105,10 @@ function cubeFromRaw(raw: RawCube): WindCube {
  *  layout is identical in both versions.
  *  v3: a tube whose slices also differ in SIZE (the reconstruction tube widens
  *  its boxes inside long GPS gaps) — `dims[g]` = `[nLat, nLon]` per slice; the
- *  cell size stays shared and the payload is still one grid after another. */
+ *  cell size stays shared and the payload is still one grid after another.
+ *  v4: a multi-level v3 tube (the reconstruction cube) — `levels` = pressure
+ *  levels (hPa, ascending); per grid the payload holds U then V of each level
+ *  in turn. */
 type BinHeader = {
     v: number; scale: number;
     t0Ms: number; stepMs: number; gridStep: number; levelHpa: number;
@@ -108,6 +119,8 @@ type BinHeader = {
     origins?: Array<[number, number]>;
     /** v3 tube: per-slice `[nLat, nLon]`, length `nGrids`. */
     dims?: Array<[number, number]>;
+    /** v4: pressure levels (hPa, ascending), stored per grid in this order. */
+    levels?: number[];
     /** v2 tube (optional): TRUE per-slice centers `[lat, lon]`, lon unwrapped. */
     centers?: Array<[number, number]>;
     /** v2 tube (optional): hourly true trajectory, `points` = `[lat, lon]`. */
@@ -130,22 +143,43 @@ function cubeFromBinary(raw: Buffer): WindCube {
     const h = JSON.parse(Buffer.from(ab, 4, headerLen).toString('utf8')) as BinHeader;
     const scale = h.scale || 10;
     let off = 4 + headerLen; /* 4-byte aligned by the writer's padding */
+    const levels = h.levels && h.levels.length ? h.levels : null;
+    const nLev = levels ? levels.length : 1;
     const grids: GfsGrid[] = [];
+    const levelGrids: GfsGrid[][] = [];
     for (let g = 0; g < h.nGrids; g++) {
-        /* v3 tube: slices differ in size, so each grid's point count comes from
-         * `dims`; v1/v2 share one. The payload is walked by that count. */
+        /* v3/v4 tube: slices differ in size, so each grid's point count comes
+         * from `dims`; v1/v2 share one. The payload is walked by that count. */
         const nLat = h.dims ? h.dims[g][0] : h.nLat;
         const nLon = h.dims ? h.dims[g][1] : h.nLon;
         const n = nLat * nLon;
-        const U16 = new Int16Array(ab, off, n); off += n * 2;
-        const V16 = new Int16Array(ab, off, n); off += n * 2;
         /* v2/v3 tube: each slice has its own origin (it follows the path); v1: shared. */
         const lat0 = h.origins ? h.origins[g][0] : h.lat0;
         const lon0 = h.origins ? h.origins[g][1] : h.lon0;
+        const perLevel: GfsGrid[] = [];
+        for (let k = 0; k < nLev; k++) {
+            const U16 = new Int16Array(ab, off, n); off += n * 2;
+            const V16 = new Int16Array(ab, off, n); off += n * 2;
+            perLevel.push({
+                lat0, dLat: h.dLat, nLat, lon0, dLon: h.dLon, nLon,
+                U: Float32Array.from(U16, (x) => x / scale),
+                V: Float32Array.from(V16, (x) => x / scale),
+            });
+        }
+        if (!levels) {
+            grids.push(perLevel[0]);
+            continue;
+        }
+        levelGrids.push(perLevel);
+        /* The float level, blended from its two bracketing levels exactly as
+         * the single-level ingest blends them. */
+        const { k0, k1, w } = levelBracket(levels, h.levelHpa);
+        const a = perLevel[k0];
+        const b = perLevel[k1];
         grids.push({
             lat0, dLat: h.dLat, nLat, lon0, dLon: h.dLon, nLon,
-            U: Float32Array.from(U16, (x) => x / scale),
-            V: Float32Array.from(V16, (x) => x / scale),
+            U: Float32Array.from(a.U, (x, i) => x * (1 - w) + b.U[i] * w),
+            V: Float32Array.from(a.V, (x, i) => x * (1 - w) + b.V[i] * w),
         });
     }
     return {
@@ -153,7 +187,20 @@ function cubeFromBinary(raw: Buffer): WindCube {
         bounds: h.bounds, source: h.source ?? 'gfs', generatedAt: h.generated_at, grids,
         isTube: !!h.origins,
         centers: h.centers, track: h.track,
+        ...(levels ? { levels, levelGrids } : {}),
     };
+}
+
+/** The two stored levels bracketing pressure `p` (hPa) and the weight toward
+ *  the second: linear in pressure, clamped to the level range (a pressure
+ *  outside it reads the nearest level). `levels` ascending. */
+export function levelBracket(levels: number[], p: number): { k0: number; k1: number; w: number } {
+    const n = levels.length;
+    if (n === 1 || p <= levels[0]) return { k0: 0, k1: 0, w: 0 };
+    if (p >= levels[n - 1]) return { k0: n - 1, k1: n - 1, w: 0 };
+    let k = 0;
+    while (k < n - 2 && p > levels[k + 1]) k++;
+    return { k0: k, k1: k + 1, w: (p - levels[k]) / (levels[k + 1] - levels[k]) };
 }
 
 /** Decode a cube blob by filename: gunzip `.gz`, then binary `.slwc` or JSON. */
@@ -327,6 +374,36 @@ export function sampleWind(
     const f = clamped - h0;
     const a = windAt(grids[h0], lat, lon);
     const b = windAt(grids[h0 + 1], lat, lon);
+    return { u: a.u * (1 - f) + b.u * f, v: a.v * (1 - f) + b.v * f };
+}
+
+/**
+ * Wind at a position, instant AND pressure (hPa): bilinear in space, linear in
+ * time and linear in pressure between the cube's stored levels (clamped to
+ * their range). A single-level cube ignores `pHpa` and reads its one level, so
+ * callers need no branch; for a multi-level cube `sampleWindP(c, …, c.levelHpa)`
+ * equals `sampleWind(c, …)` up to float rounding.
+ */
+export function sampleWindP(
+    cube: WindCube,
+    lat: number,
+    lon: number,
+    whenMs: number,
+    pHpa: number,
+): { u: number; v: number } {
+    const { levels, levelGrids } = cube;
+    if (!levels || !levelGrids || levels.length < 2) return sampleWind(cube, lat, lon, whenMs);
+    const { k0, k1, w } = levelBracket(levels, pHpa);
+    const { h0, h1, f } = bracketSlices(cube, whenMs);
+    const at = (h: number) => {
+        const a = windAt(levelGrids[h][k0], lat, lon);
+        if (k1 === k0) return a;
+        const b = windAt(levelGrids[h][k1], lat, lon);
+        return { u: a.u * (1 - w) + b.u * w, v: a.v * (1 - w) + b.v * w };
+    };
+    const a = at(h0);
+    if (h1 === h0) return a;
+    const b = at(h1);
     return { u: a.u * (1 - f) + b.u * f, v: a.v * (1 - f) + b.v * f };
 }
 
