@@ -105,11 +105,15 @@ export type StratolinkForecast = {
             to_idx: number;
             dt_hours: number;
             measured_altitude: boolean;
+            /** Raw smoother closure error (long gaps: forward/backward posterior
+             *  mismatch at the meeting step; the bridge itself ends at the fix). */
             endpoint_miss_km: number;
+            /** Mid-gap 90 % ellipse semi-major axis; posterior-weighted for long gaps. */
             mid_gap_90_km: number;
             confidence: string;
             short: boolean;
             mode?: 'line' | 'corridor';
+            /** Long gaps: effective number of matched forward×backward particle pairs. */
             n_eff?: number;
             directness?: number;
             net_speed_ms?: number;

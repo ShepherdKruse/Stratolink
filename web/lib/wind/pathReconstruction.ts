@@ -69,12 +69,21 @@ export type ReconstructionGap = {
     to_idx: number;
     dt_hours: number;
     measured_altitude: boolean;
+    /** Raw smoother closure error, km. Medium gaps: how far the pooled cloud's
+     *  mean ends from fix B. Long gaps (two-filter smoother): the distance
+     *  between the forward and backward posterior means at the meeting step —
+     *  the bridge itself ends at B exactly. Measured before `anchorEndpoints`. */
     endpoint_miss_km: number;
+    /** Semi-major axis of the mid-gap 90 % ellipse, km. Long gaps: posterior-
+     *  weighted (the matched pairs), not the prior cloud's spread. */
     mid_gap_90_km: number;
     confidence: 'high' | 'medium' | 'low';
     short: boolean;
     /** `corridor` when the gap is under-determined (reach region, not a precise line). */
     mode?: 'line' | 'corridor';
+    /** Long gaps: effective number of matched forward×backward pairs behind the
+     *  posterior (the smoother pairs two clouds of N particles, so this can
+     *  exceed N; the corridor threshold is unchanged at 40). */
     n_eff?: number;
     directness?: number;
     net_speed_ms?: number;
@@ -125,8 +134,10 @@ export type PathReconstructionResult = {
  * change, or the cached bridges are stitched back unchanged.
  *   g2: 0.25° tube reconstruction cube, cube-sourced level, longitude-based
  *       local time in the long-gap altitude model (see ALGO_VERSION v3).
+ *   g3: long gaps (≥ 6 h) are bridged by the two-filter particle smoother
+ *       instead of the forward-only importance sampler (see ALGO_VERSION v4).
  * ------------------------------------------------------------------------- */
-const GAP_ALGO_VERSION = 'g2';
+const GAP_ALGO_VERSION = 'g3';
 /** A bridge whose end is older than this is final — safe to reuse verbatim. */
 const GAP_SETTLE_MS = 6 * 3_600_000;
 

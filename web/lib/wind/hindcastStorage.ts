@@ -23,8 +23,12 @@ import type { PathReconstructionResult } from './pathReconstruction';
  * v3: the reconstruction cube is a 0.25° trajectory tube (was a 0.5–1° static
  *     box), the level is the cube's own (was the snapped latest telemetry
  *     pressure), and the long-gap diurnal altitude model uses the sample's
- *     longitude for local time (was a fixed UTC−7). */
-const ALGO_VERSION = 'v3';
+ *     longitude for local time (was a fixed UTC−7).
+ * v4: long gaps (≥ 6 h) are bridged by a two-filter particle smoother (forward
+ *     and backward filters with resampling, matched at the midpoint) instead
+ *     of the forward-only importance sampler whose bridge-pull penalty
+ *     collapsed the posterior onto one particle over multi-day gaps. */
+const ALGO_VERSION = 'v4';
 
 export type StoredHindcast = PathReconstructionResult & { computed_at: string };
 
