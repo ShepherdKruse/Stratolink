@@ -114,7 +114,7 @@ RECON_TUBE = os.environ.get("RECON_TUBE", "1") != "0"   # RECON_TUBE=0 → legac
 # Half-width (deg) of a slice box from the length of the GPS gap the slice sits
 # in: base + per-hour growth, clamped. Calibrated to the long-gap smoother
 # (lib/wind/pathReconstructionLongGap.ts): its particles follow the wind under a
-# bounded AR(1) heading/speed perturbation (12°, 25 %) plus their own pressure,
+# bounded AR(1) heading/speed perturbation (12°, 15 %) plus their own pressure,
 # so a cloud spreads around the wind trajectory it is laid along roughly in
 # proportion to the gap length. 9° covers gaps ≤ 60 h; +0.05°/h adds 5° per
 # 100 h (a 200 h gap gets 16°); 20° (≈2200 km at mid-latitudes) caps the box.

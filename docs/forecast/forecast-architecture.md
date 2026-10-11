@@ -259,7 +259,7 @@ or any failed compute, fails the job.
    bridges every historical GPS gap by sampling `reconCube` (short gaps = line,
    medium = pooled particle clouds, long = two-filter smoother in
    `pathReconstructionLongGap.ts`). Long-gap particles follow the cube wind
-   under the forecast's bounded AR(1) heading/speed perturbation (12°, 25 %,
+   under the forecast's bounded AR(1) heading/speed perturbation (12°, 15 %,
    τ 18 h) and, on a multi-level cube, their own pressure (AR(1) σ 8 hPa, τ 48 h,
    anchored to the fixes' barometer readings); a gap the winds cannot connect is
    flagged `unexplained` (corridor, low confidence). Per-gap and
