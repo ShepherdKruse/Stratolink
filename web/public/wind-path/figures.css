@@ -8,6 +8,7 @@
 .interactive-chart .fleet-play { padding: 0 14px; width: auto; }
 .interactive-chart .fleet-play[disabled] { opacity: .4; cursor: default; }
 .interactive-chart select[disabled] { opacity: .5; }
+.chart-key .key-dot { width: 9px; height: 9px; border-radius: 50%; }
 .chart-key .key-ring { width: 9px; height: 9px; border-radius: 50%; background: transparent !important; border: 2px solid currentColor; color: #6161bb; }
 .chart-key .key-cross { width: 10px; height: 10px; background: transparent !important; position: relative; }
 .chart-key .key-cross::before, .chart-key .key-cross::after { content: ''; position: absolute; inset: 4px -1px; background: currentColor; transform: rotate(45deg); }

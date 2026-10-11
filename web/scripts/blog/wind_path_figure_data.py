@@ -32,9 +32,9 @@ def hav(lat1, lon1, lat2, lon2):
 def r2(x): return round(float(x), 2)
 def path2(arr): return [[r2(a), r2(b)] for a, b in arr]
 
-prod = json.load(open(f'{S}/prod_after_run.json'))
+prod = json.load(open(f'{S}/prod_after_run.json'))          # the 62-member forecast
 fixes = prod['observed']['gps_fixes']
-track = prod['observed']['reconstructed_track']
+track = json.load(open(f'{S}/prod_trimmed.json'))['observed']['reconstructed_track']   # the line the dashboard draws
 post = json.load(open(f'{S}/posterior2k_r1.json'))
 gap = max((g for g in post['gaps'] if 'samples' in g), key=lambda g: g['dt_hours'])
 tA, tB = gap['tA'], gap['tB']
@@ -65,7 +65,7 @@ for g in range(hdr['nGrids']):
     U = np.frombuffer(raw, dtype='<i2', count=n, offset=off).reshape(nLat, nLon) / hdr['scale']; off += 2 * n
     V = np.frombuffer(raw, dtype='<i2', count=n, offset=off).reshape(nLat, nLon) / hdr['scale']; off += 2 * n
     la0, lo0 = hdr['origins'][g]; step = hdr['gridStep']; t = hdr['t0Ms'] + g * hdr['stepMs']
-    st = max(1, math.ceil(max(nLat, nLon) / 12))
+    st = max(1, math.ceil(max(nLat, nLon) / 26))
     ui = U[::st, ::st]; vi = V[::st, ::st]
     pos = None
     if track_t[0] <= t <= track_t[-1]:
@@ -159,6 +159,18 @@ open(f'{OUT}/clusters.bin', 'wb').write(labels.tobytes())
 posterior = {'n': 500, 'steps': STEPS, 'hours': gap['dt_hours'], 'tA': tA, 'nTotal': K, 'keptTotal': int(len(kept)),
              'kept': subset_kept, 'mean': path2(full_mean), 'medoid': path2(med_path), 'trimmed': path2(trimmed), 'drawn': path2(drawn), 'stats': stats}
 json.dump(posterior, open(f'{OUT}/posterior.json', 'w'), separators=(',', ':'))
+
+# ── clouds.json / clouds.bin: 200 draws for each of the other long gaps ──────
+cloud_meta = []; cloud_blob = bytearray(); crng = np.random.default_rng(11)
+for g2 in sorted((g for g in post['gaps'] if 'samples' in g and g['dt_hours'] >= 6 and g is not gap), key=lambda g: g['tA']):
+    S2 = np.array(g2['samples'], dtype=np.float64); k2, m2, _ = S2.shape
+    steps2 = max(3, round(g2['dt_hours'] / 2) + 1); sel2 = np.rint(np.arange(steps2) / (steps2 - 1) * (m2 - 1)).astype(int)
+    pick = np.sort(crng.choice(k2, min(200, k2), replace=False))
+    arr = np.clip(np.rint(S2[pick][:, sel2, :] * 100), -32767, 32767).astype('<i2')
+    cloud_meta.append({'tA': g2['tA'], 'tB': g2['tB'], 'hours': g2['dt_hours'], 'n': int(len(pick)), 'steps': steps2, 'off': len(cloud_blob) // 2})
+    cloud_blob += arr.tobytes()
+open(f'{OUT}/clouds.bin', 'wb').write(bytes(cloud_blob))
+json.dump({'gaps': cloud_meta}, open(f'{OUT}/clouds.json', 'w'), separators=(',', ':'))
 
 # ── forecast.json / forecast.bin: the ensemble from the last fix ──────────────
 ens = prod['ensemble']; div = prod['divergence']; nominal = prod['predicted_hindcast']['path']
