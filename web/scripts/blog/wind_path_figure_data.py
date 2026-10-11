@@ -3,15 +3,11 @@
 
 usage: python3 wind_path_figure_data.py <runs dir> <downloads dir> <out dir> <recon cube .slwc>
 
-<runs dir> holds the stratolink-3 compute outputs the post is about (local reruns of
-scripts/compute_forecasts.ts with the Blob token unset): prod_after_run.json and
-prod_trimmed.json (two production forecast JSONs; the second supplies the drawn
-track), after1-3.json / p6000_r*.json / p20k_r*.json / p60000_r*.json (forward-sampler
-reruns by particle count), twofilter_r1-3.json (reruns of the first two-filter
-smoother, with the heading random walk and the chord tube), wind_r1-3.json (reruns of
-the current smoother: bounded perturbation, wind-following tube, per-particle
-pressure) and posterior2k_r1.json (2,000 posterior draws per long gap from the
-current smoother, dumped from reconstructLongGap with a temporary capture hook).
+<runs dir> holds the stratolink-3 inputs: prod_after_run.json (a full stored forecast,
+for the fixes and the 62-member ensemble), prod_trimmed.json (a forecast whose
+observed.reconstructed_track is the line the dashboard draws) and posterior2k_r1.json
+(2,000 posterior draws per long gap from the smoother, dumped from reconstructLongGap
+with a temporary capture hook).
 <downloads dir> holds Natural Earth's ne_50m_land.geojson. The cube is the device's
 reconstruction cube from .windcube/cubes/ (v3 single-level or v4 multi-level).
 """
@@ -95,7 +91,6 @@ for g in range(hdr['nGrids']):
 json.dump({'levelHpa': hdr['levelHpa'], 'levels': levels, 'stepH': hdr['stepMs'] / 3600000, 'slices': slices}, open(f'{OUT}/tube.json', 'w'), separators=(',', ':'))
 open(f'{OUT}/tube.bin', 'wb').write(bytes(blob))
 
-# ── bridges.json: reruns of each method through the long gap ──────────────────
 def gap_path(name):
     tr = json.load(open(f'{S}/{name}'))['observed']['reconstructed_track']
     tt = np.array([ms(p['time_utc']) for p in tr]); ll = np.array([[p['lat'], p['lon']] for p in tr])
@@ -103,29 +98,9 @@ def gap_path(name):
     idx0 = np.clip(idx - 1, 0, len(tt) - 1)
     use = np.where(np.abs(tt[idx] - gap_times) <= np.abs(tt[idx0] - gap_times), idx, idx0)
     return ll[use]
-groups = {'600': ['after1.json', 'after2.json', 'after3.json'], '6000': sorted(os.path.basename(f) for f in glob.glob(f'{S}/p6000_r*.json')),
-          '20000': sorted(os.path.basename(f) for f in glob.glob(f'{S}/p20k_r*.json')), '60000': sorted(os.path.basename(f) for f in glob.glob(f'{S}/p60000_r*.json'))}
-two = ['twofilter_r1.json', 'twofilter_r2.json', 'twofilter_r3.json']
-wind_runs = ['wind_r1.json', 'wind_r2.json', 'wind_r3.json']
-def spread(paths):
-    seps = []
-    for i in range(len(paths)):
-        for j in range(i + 1, len(paths)):
-            seps.append(np.median(hav(paths[i][:, 0], paths[i][:, 1], paths[j][:, 0], paths[j][:, 1])))
-    return round(float(np.median(seps))) if seps else None
-fwd = {k: [gap_path(f) for f in files] for k, files in groups.items()}
-twof = [gap_path(f) for f in two]
-windf = [gap_path(f) for f in wind_runs]
 drawn = gap_path('prod_trimmed.json')
-mean_path = np.array(gap['mean'])[np.rint(np.arange(STEPS) / (STEPS - 1) * (n1 - 1)).astype(int)]
-bridges = {'steps': STEPS, 'hours': gap['dt_hours'], 'tA': tA, 'tB': tB,
-           'forward': {k: {'runs': [path2(p) for p in paths], 'spreadKm': spread(paths)} for k, paths in fwd.items()},
-           'twoFilter': {'runs': [path2(p) for p in twof], 'spreadKm': spread(twof)},
-           'wind': {'runs': [path2(p) for p in windf], 'spreadKm': spread(windf)},
-           'drawn': path2(drawn), 'mean': path2(mean_path)}
-json.dump(bridges, open(f'{OUT}/bridges.json', 'w'), separators=(',', ':'))
 
-# ── posterior.bin / clusters.bin / posterior.json: the draws behind the line ───
+# ── posterior.bin / posterior.json: the draws behind the line ─────────────────
 sel = np.rint(np.arange(STEPS) / (STEPS - 1) * (n1 - 1)).astype(int)
 Asub = A[:, sel, :]                                    # (2000, 101, 2)
 # medoid over all 2000 draws, as pathReconstructionLongGap.ts does (time-matched mean distance)
@@ -139,7 +114,6 @@ for i in range(K):
 medoid = int(np.argmin(acc))
 dist_to_medoid = np.sqrt(((X - X[medoid]) ** 2).sum(-1)).mean(1)
 kept = np.argsort(dist_to_medoid)[:round(0.10 * K)]
-trimmed = Asub[kept].mean(0)
 rng = np.random.default_rng(7)
 subset = np.sort(rng.choice(K, 500, replace=False))
 kept_set = set(kept.tolist())
@@ -147,37 +121,12 @@ subset_kept = [int(i) for i, s in enumerate(subset) if s in kept_set]
 pos_bin = np.clip(np.rint(Asub[subset] * 100), -32767, 32767).astype('<i2')
 open(f'{OUT}/posterior.bin', 'wb').write(pos_bin.tobytes())
 
-def meanshift(pts, h=250.0, iters=40):
-    ref = pts.mean(0); c = math.cos(math.radians(ref[0]))
-    Xp = np.stack([(pts[:, 1] - ref[1]) * 111.32 * c, (pts[:, 0] - ref[0]) * 111.32], 1); Y = Xp.copy()
-    for _ in range(iters):
-        d2 = ((Y[:, None, :] - Xp[None, :, :]) ** 2).sum(2); W = np.exp(-d2 / (2 * h * h)); Yn = (W @ Xp) / W.sum(1, keepdims=True)
-        moved = np.hypot(*(Yn - Y).T).max(); Y = Yn
-        if moved < 0.5: break
-    labels = -np.ones(len(pts), dtype=int); centres = []
-    for i, y in enumerate(Y):
-        for k, cc in enumerate(centres):
-            if math.hypot(*(y - cc)) < h / 3: labels[i] = k; break
-        else: centres.append(y); labels[i] = len(centres) - 1
-    order = np.argsort([-np.sum(labels == k) for k in range(len(centres))]); remap = {int(o): n for n, o in enumerate(order)}
-    lab = np.array([remap[int(l)] for l in labels])
-    modes = []
-    for k in range(len(centres)):
-        m = lab == k
-        modes.append([round(float(m.mean()), 3), r2(pts[m, 0].mean()), r2(pts[m, 1].mean())])
-    return lab, modes
-labels = np.zeros((500, STEPS), dtype=np.int8); stats = []
-full_mean = Asub.mean(0); med_path = Asub[medoid]
+stats = []
 for s in range(STEPS):
-    pts = Asub[subset, s, :]
-    lab, modes = meanshift(pts); labels[:, s] = np.minimum(lab, 6)
-    allpts = Asub[:, s, :]
-    within = {name: round(float((hav(allpts[:, 0], allpts[:, 1], p[0], p[1]) <= 300).mean()), 3)
-              for name, p in (('mean', full_mean[s]), ('drawn', trimmed[s]), ('medoid', med_path[s]))}
-    stats.append({'modes': modes[:6], 'within300': within})
-open(f'{OUT}/clusters.bin', 'wb').write(labels.tobytes())
+    d = hav(Asub[:, s, 0], Asub[:, s, 1], drawn[s][0], drawn[s][1])      # every draw vs the drawn line at this hour
+    stats.append({'within300': round(float((d <= 300).mean()), 3), 'r90': int(round(float(np.percentile(d, 90)), -1))})
 posterior = {'n': 500, 'steps': STEPS, 'hours': gap['dt_hours'], 'tA': tA, 'nTotal': K, 'keptTotal': int(len(kept)),
-             'kept': subset_kept, 'mean': path2(full_mean), 'medoid': path2(med_path), 'trimmed': path2(trimmed), 'drawn': path2(drawn), 'stats': stats}
+             'kept': subset_kept, 'drawn': path2(drawn), 'stats': stats}
 json.dump(posterior, open(f'{OUT}/posterior.json', 'w'), separators=(',', ':'))
 
 # ── clouds.json / clouds.bin: 200 draws for each of the other long gaps ──────
