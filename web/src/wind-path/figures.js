@@ -342,9 +342,10 @@ async function tube(host, signal) {
     const next = slices[Math.min(last, k + 1)], f = at - k;
     if (pos && next.pos && f > 0) pos = [pos[0] + (next.pos[0] - pos[0]) * f, pos[1] + (next.pos[1] - pos[1]) * f];
     if (pos && !g) map.dot(pos[0], pos[1], 4.5, CREAM, INK, 1.8);
-    input.value = at; output.textContent = fmt(k); date.textContent = utc(t); source.textContent = `box ±${(s.w / 2).toFixed(1)}°, arrows every ${s.aStep.toFixed(2)}° inside, 2.5° outside`;
-    const hours = gapHours(t), half = s.w / 2;
-    const why = half <= 9.05 ? 'the ±9° minimum, enough for the cloud across a gap under 60 hours' : `widened to ±${half.toFixed(1)}° because this slice sits in the ${fmt(hours)}-hour gap, where the cloud spreads further`;
+    input.value = at; output.textContent = fmt(k); date.textContent = utc(t); source.textContent = `box ${fmt(s.h)}° × ${fmt(s.w)}°, arrows every ${s.aStep.toFixed(2)}° inside, 2.5° outside`;
+    const hours = gapHours(t), half = s.half ?? s.w / 2;
+    const pad = half <= 9.05 ? '±9°, the minimum' : `±${half.toFixed(1)}° for the ${fmt(hours)}-hour gap, where the cloud spreads further`;
+    const why = s.wind ? `laid along the wind’s path from both ends of the gap, ${pad}` : `centered on the track, ${pad}`;
     let near = '';
     if (pos && arrows.length) { const a = arrows.reduce((b, p) => km(p.lat, p.lon, pos[0], pos[1]) < km(b.lat, b.lon, pos[0], pos[1]) ? p : b, arrows[0]); near = ` / wind at the track ${fmt(a.speed)} m/s toward ${toward(a.u, a.v)}`; }
     read.textContent = `Slice ${k + 1} of ${slices.length} / ${why}${pos ? near : ' / before launch'}`;
@@ -369,8 +370,8 @@ async function tube(host, signal) {
 async function methods(host, signal) {
   const [b, coast, wind] = await Promise.all([load('bridges.json'), load('coast-atlantic.json'), windField()]);
   if (signal.aborted) return;
-  host.innerHTML = `${heading('Two ways to bridge the gap', `${fmt(b.hours)} hours, New Mexico to Spain`, false)}
-    <div class="capture-tabs" role="group" aria-label="Bridging method"><button type="button" data-method="forward" aria-pressed="true">Forward sampler</button><button type="button" data-method="twoFilter" aria-pressed="false">Two filters meeting in the middle</button></div>
+  host.innerHTML = `${heading('Three ways to bridge the gap', `${fmt(b.hours)} hours, New Mexico to Spain`, false)}
+    <div class="capture-tabs" role="group" aria-label="Bridging method"><button type="button" data-method="forward" aria-pressed="true">Forward sampler</button><button type="button" data-method="twoFilter" aria-pressed="false">Two filters meeting in the middle</button><button type="button" data-method="wind" aria-pressed="false">Two filters that follow the wind</button></div>
     <div class="methods-settings"><label>Particles per run<select data-particles aria-label="Particles per run">${Object.keys(b.forward).map(n => `<option value="${n}">${fmt(n)}</option>`).join('')}</select></label><span class="methods-buttons"><button type="button" class="fleet-play" data-add>Add a rerun</button><button type="button" class="fleet-play" data-reset>Start over</button></span></div>
     <div class="fleet-map-stage"></div>
     ${footer('winds at the middle of the gap, May 24')}
@@ -380,7 +381,8 @@ async function methods(host, signal) {
   host.querySelector('.fleet-map-stage').prepend(map.canvas);
   const legend = host.querySelector('.chart-legend'), read = host.querySelector('.chart-readout'), select = host.querySelector('[data-particles]'), add = host.querySelector('[data-add]'), date = host.querySelector('.fleet-date');
   let method = 'forward', particles = select.value, shown = 1;
-  const group = () => method === 'forward' ? b.forward[particles] : b.twoFilter;
+  const group = () => method === 'forward' ? b.forward[particles] : b[method];
+  const runName = () => ({ forward: `${fmt(particles)}-particle`, twoFilter: 'two-filter', wind: 'wind-following' })[method];
   const A = b.drawn[0], B = b.drawn[b.drawn.length - 1], mid = (b.tA + b.tB) / 2;
   date.textContent = `${utc(b.tA)} to ${utc(b.tB)}`;
   function draw() {
@@ -394,7 +396,7 @@ async function methods(host, signal) {
     legend.innerHTML = runs.slice(0, shown).map((_, k) => key(`Run ${k + 1}`, colors[k % 7])).join('') + windKey();
     select.disabled = method !== 'forward'; add.disabled = shown >= runs.length;
     read.textContent = shown < 2
-      ? `One of ${runs.length} stored ${method === 'forward' ? `${fmt(particles)}-particle` : 'two-filter'} runs. Add a rerun to compare.`
+      ? `One of ${runs.length} stored ${runName()} runs. Add a rerun to compare.`
       : `${shown} of ${runs.length} stored runs / the drawn line moved by a median of ${fmt(spreadKm)} km between them`;
   }
   host.querySelectorAll('[data-method]').forEach(button => button.onclick = () => {
@@ -490,13 +492,13 @@ async function line(host, signal) {
     map.dot(md[0], md[1], 5, null, INDIGO, 2);
     map.cross(m[0], m[1], 5.5, INK);
     map.dot(d[0], d[1], 4.5, RED, CREAM, 1.5);
-    const [m1, m2] = stats.modes;
+    const modes = stats.modes.filter(mode => mode[0] >= .01), [m1, m2] = modes;
     get('[data-m1]').textContent = m1 ? `${fmt(m1[0] * 100)}%` : '—';
     get('[data-m2]').textContent = m2 ? `${fmt(m2[0] * 100)}%` : 'none';
     get('[data-near-mean]').textContent = `${fmt(stats.within300.mean * 100)}%`;
     get('[data-near-line]').textContent = `${fmt(stats.within300.drawn * 100)}%`;
     input.value = hour; output.textContent = fmt(hour); date.textContent = utc(tA + hour * 3600000);
-    read.textContent = `${stats.modes.length === 1 ? 'one cluster' : `${stats.modes.length} clusters`} / mean ${place(m[0], m[1])} / drawn line ${place(d[0], d[1])}, ${fmt(km(m[0], m[1], d[0], d[1]))} km apart`;
+    read.textContent = `${modes.length === 1 ? 'one cluster' : `${modes.length} clusters`} / mean ${place(m[0], m[1])} / drawn line ${place(d[0], d[1])}, ${fmt(km(m[0], m[1], d[0], d[1]))} km apart`;
   }
   host.querySelectorAll('[data-color]').forEach(button => button.onclick = () => {
     mode = button.dataset.color;

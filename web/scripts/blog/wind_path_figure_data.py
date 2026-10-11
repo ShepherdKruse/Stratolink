@@ -5,12 +5,15 @@ usage: python3 wind_path_figure_data.py <runs dir> <downloads dir> <out dir> <re
 
 <runs dir> holds the stratolink-3 compute outputs the post is about (local reruns of
 scripts/compute_forecasts.ts with the Blob token unset): prod_after_run.json and
-prod_trimmed.json (two production forecast JSONs), after1-3.json / p6000_r*.json /
-p20k_r*.json / p60000_r*.json (forward-sampler reruns by particle count),
-twofilter_r1-3.json (two-filter reruns) and posterior2k_r1.json (2,000 posterior
-draws of the 201 h gap, dumped from reconstructLongGap with a temporary capture
-hook). <downloads dir> holds Natural Earth's ne_50m_land.geojson. The cube is the
-device's reconstruction cube from .windcube/cubes/.
+prod_trimmed.json (two production forecast JSONs; the second supplies the drawn
+track), after1-3.json / p6000_r*.json / p20k_r*.json / p60000_r*.json (forward-sampler
+reruns by particle count), twofilter_r1-3.json (reruns of the first two-filter
+smoother, with the heading random walk and the chord tube), wind_r1-3.json (reruns of
+the current smoother: bounded perturbation, wind-following tube, per-particle
+pressure) and posterior2k_r1.json (2,000 posterior draws per long gap from the
+current smoother, dumped from reconstructLongGap with a temporary capture hook).
+<downloads dir> holds Natural Earth's ne_50m_land.geojson. The cube is the device's
+reconstruction cube from .windcube/cubes/ (v3 single-level or v4 multi-level).
 """
 import glob, json, math, os, re, struct, sys
 from datetime import datetime, timezone
@@ -60,10 +63,22 @@ json.dump(flight, open(f'{OUT}/flight.json', 'w'), separators=(',', ':'))
 raw = open(CUBE, 'rb').read(); hl = struct.unpack('<I', raw[:4])[0]; hdr = json.loads(raw[4:4 + hl].decode('utf8')); off = 4 + hl
 slices = []; blob = bytearray()
 track_t = np.array([ms(p['time_utc']) for p in track]); track_ll = np.array([[p['lat'], p['lon']] for p in track])
+levels = hdr.get('levels') or []
+if levels:                                             # v4: blend the float level from its bracketing pair, as windCube.ts does
+    pf = hdr["levelHpa"]; lk1 = next(i for i, L in enumerate(levels) if L >= pf); lk0 = max(0, lk1 - 1)
+    wf = 0.0 if lk1 == lk0 else (pf - levels[lk0]) / (levels[lk1] - levels[lk0])
+fix_ms = [ms(f['time_utc']) for f in fixes]
+def gap_hours(t, step_ms):
+    # longest GPS gap a slice is read by (mirrors gap_hours_at in scripts/gfs_ingest.py)
+    return max([(b - a) / 3.6e6 for a, b in zip(fix_ms, fix_ms[1:]) if b > t - step_ms and a < t + step_ms] or [0.0])
 for g in range(hdr['nGrids']):
     nLat, nLon = hdr['dims'][g]; n = nLat * nLon
-    U = np.frombuffer(raw, dtype='<i2', count=n, offset=off).reshape(nLat, nLon) / hdr['scale']; off += 2 * n
-    V = np.frombuffer(raw, dtype='<i2', count=n, offset=off).reshape(nLat, nLon) / hdr['scale']; off += 2 * n
+    lv = []
+    for _ in range(max(1, len(levels))):
+        U = np.frombuffer(raw, dtype='<i2', count=n, offset=off).reshape(nLat, nLon) / hdr['scale']; off += 2 * n
+        V = np.frombuffer(raw, dtype='<i2', count=n, offset=off).reshape(nLat, nLon) / hdr['scale']; off += 2 * n
+        lv.append((U, V))
+    U, V = lv[0] if not levels else (lv[lk0][0] * (1 - wf) + lv[lk1][0] * wf, lv[lk0][1] * (1 - wf) + lv[lk1][1] * wf)
     la0, lo0 = hdr['origins'][g]; step = hdr['gridStep']; t = hdr['t0Ms'] + g * hdr['stepMs']
     st = max(1, math.ceil(max(nLat, nLon) / 26))
     ui = U[::st, ::st]; vi = V[::st, ::st]
@@ -72,10 +87,12 @@ for g in range(hdr['nGrids']):
         k = int(np.searchsorted(track_t, t)); k0 = max(0, k - 1); k1 = min(len(track_t) - 1, k)
         w = 0 if k1 == k0 else (t - track_t[k0]) / (track_t[k1] - track_t[k0])
         p = track_ll[k0] * (1 - w) + track_ll[k1] * w; pos = [r2(p[0]), r2(p[1])]
+    gh = gap_hours(t, hdr['stepMs'])
     slices.append({'t': t, 'lat0': la0, 'lon0': lo0, 'h': round((nLat - 1) * step, 2), 'w': round((nLon - 1) * step, 2),
+                   'half': r2(min(20, max(9, 6 + 0.05 * gh))), 'gapH': round(gh), 'wind': bool(levels) and gh >= 6,
                    'aLat': ui.shape[0], 'aLon': ui.shape[1], 'aStep': round(st * step, 2), 'off': len(blob), 'pos': pos})
     blob += np.clip(np.rint(np.stack([ui, vi], axis=-1)), -127, 127).astype(np.int8).tobytes()
-json.dump({'levelHpa': hdr['levelHpa'], 'stepH': hdr['stepMs'] / 3600000, 'slices': slices}, open(f'{OUT}/tube.json', 'w'), separators=(',', ':'))
+json.dump({'levelHpa': hdr['levelHpa'], 'levels': levels, 'stepH': hdr['stepMs'] / 3600000, 'slices': slices}, open(f'{OUT}/tube.json', 'w'), separators=(',', ':'))
 open(f'{OUT}/tube.bin', 'wb').write(bytes(blob))
 
 # ── bridges.json: reruns of each method through the long gap ──────────────────
@@ -89,6 +106,7 @@ def gap_path(name):
 groups = {'600': ['after1.json', 'after2.json', 'after3.json'], '6000': sorted(os.path.basename(f) for f in glob.glob(f'{S}/p6000_r*.json')),
           '20000': sorted(os.path.basename(f) for f in glob.glob(f'{S}/p20k_r*.json')), '60000': sorted(os.path.basename(f) for f in glob.glob(f'{S}/p60000_r*.json'))}
 two = ['twofilter_r1.json', 'twofilter_r2.json', 'twofilter_r3.json']
+wind_runs = ['wind_r1.json', 'wind_r2.json', 'wind_r3.json']
 def spread(paths):
     seps = []
     for i in range(len(paths)):
@@ -97,11 +115,13 @@ def spread(paths):
     return round(float(np.median(seps))) if seps else None
 fwd = {k: [gap_path(f) for f in files] for k, files in groups.items()}
 twof = [gap_path(f) for f in two]
+windf = [gap_path(f) for f in wind_runs]
 drawn = gap_path('prod_trimmed.json')
 mean_path = np.array(gap['mean'])[np.rint(np.arange(STEPS) / (STEPS - 1) * (n1 - 1)).astype(int)]
 bridges = {'steps': STEPS, 'hours': gap['dt_hours'], 'tA': tA, 'tB': tB,
            'forward': {k: {'runs': [path2(p) for p in paths], 'spreadKm': spread(paths)} for k, paths in fwd.items()},
            'twoFilter': {'runs': [path2(p) for p in twof], 'spreadKm': spread(twof)},
+           'wind': {'runs': [path2(p) for p in windf], 'spreadKm': spread(windf)},
            'drawn': path2(drawn), 'mean': path2(mean_path)}
 json.dump(bridges, open(f'{OUT}/bridges.json', 'w'), separators=(',', ':'))
 
