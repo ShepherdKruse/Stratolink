@@ -2,14 +2,16 @@
  * Two-filter long-gap smoother (lib/wind/pathReconstructionLongGap.ts):
  *   - systematic resampling and the filter-level resample step
  *   - the join: overlap-window blend of a forward and a backward half
+ *   - the AR(1) perturbation: stationary amplitude and exp(−lag/τ) memory
  *   - end to end on an in-memory uniform-wind cube: a straight, pinned,
- *     well-populated bridge, and the tube penalty keeping the posterior inside
+ *     well-populated bridge, the tube penalty keeping the posterior inside,
+ *     and a gap the winds cannot connect reported as unexplained
  * No NOAA, no numpy, no network.
  */
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import {
-    effectiveSampleSize, joinHalves, reconstructLongGap, resampleIfCollapsed, systematicResample, trimmedLocalMean,
+    ar1Step, effectiveSampleSize, joinHalves, reconstructLongGap, resampleIfCollapsed, systematicResample, trimmedLocalMean,
 } from '../lib/wind/pathReconstructionLongGap.ts';
 
 const HOUR = 3_600_000;
@@ -53,7 +55,7 @@ test('effectiveSampleSize: (Σw)²/Σw²', () => {
 });
 
 function particle(logW, lat = 0) {
-    return { lat, lon: 0, speedMult: 1, altOffset: 0, offA: 0, offB: 0, logW, outside: 0, path: [{ lat, lon: 0, alt: 0 }] };
+    return { lat, lon: 0, speedPert: 0, dirOff: 0, altOffset: 0, logW, outside: 0, path: [{ lat, lon: 0, alt: 0 }] };
 }
 
 test('resampleIfCollapsed: healthy weights are left alone (same array, same objects)', () => {
@@ -117,6 +119,50 @@ test('joinHalves: pinned at both fixes, untouched outside the window, a C¹ blen
     assert.ok(inWindow[0] < centre / 2, `edge increment ${inWindow[0]} vs centre ${centre}`);
     assert.ok(inWindow[inWindow.length - 1] < centre / 2);
     assert.ok(Math.abs(inWindow.reduce((a, b) => a + b, 0) - 1) < 1e-12, 'the window carries the whole 1° offset');
+});
+
+/** Deterministic standard normals (LCG + Box–Muller) so the statistics below are reproducible. */
+function normals(seed) {
+    let x = seed >>> 0;
+    const u = () => { x = (Math.imul(x, 1664525) + 1013904223) >>> 0; return (x + 0.5) / 4294967296; };
+    return () => Math.sqrt(-2 * Math.log(u())) * Math.cos(2 * Math.PI * u());
+}
+
+test('ar1Step: seeded from N(0, σ²) the process stays N(0, σ²) and forgets as exp(−lag/τ)', () => {
+    const sigma = 12;
+    const tau = 18;
+    const dt = 1 / 3;                                               // 20-min steps
+    const chains = 4000;
+    const steps = 216;                                              // 72 h
+    const g = normals(7);
+    const x0 = Float64Array.from({ length: chains }, () => sigma * g());
+    const x = Float64Array.from(x0);
+    const lagCorr = (lagSteps) => {
+        /* Pearson correlation between x at step 0 and at `lagSteps`, across chains. */
+        let sxy = 0; let sxx = 0; let syy = 0;
+        for (let c = 0; c < chains; c++) { sxy += x0[c] * x[c]; sxx += x0[c] * x0[c]; syy += x[c] * x[c]; }
+        return sxy / Math.sqrt(sxx * syy);
+    };
+    let maxAbs = 0;
+    for (let s = 1; s <= steps; s++) {
+        for (let c = 0; c < chains; c++) {
+            x[c] = ar1Step(x[c], sigma, dt, tau, g());
+            if (Math.abs(x[c]) > maxAbs) maxAbs = Math.abs(x[c]);
+        }
+        if (s === 54 || s === 216) {                                // 18 h = τ, 72 h = 4τ
+            let ss = 0;
+            for (let c = 0; c < chains; c++) ss += x[c] * x[c];
+            const sd = Math.sqrt(ss / chains);
+            assert.ok(Math.abs(sd - sigma) < 0.05 * sigma, `stationary σ at step ${s}: ${sd}`);
+            const want = Math.exp(-(s * dt) / tau);
+            assert.ok(Math.abs(lagCorr(s) - want) < 0.04, `lag ${s * dt} h: corr ${lagCorr(s)} vs ${want}`);
+        }
+    }
+    /* Bounded: no excursion beyond ~5σ in 864k draws (an unbounded walk would reach √216 × its step). */
+    assert.ok(maxAbs < 5.5 * sigma, `max |x| ${maxAbs}`);
+    /* Zero innovations decay geometrically toward zero; τ → ∞ holds the value. */
+    assert.ok(Math.abs(ar1Step(10, sigma, tau, tau, 0) - 10 / Math.E) < 1e-12);
+    assert.equal(ar1Step(10, sigma, 1, Infinity, 3), 10);
 });
 
 /** A static 1° box (lat/lon `lat0..lat0+n-1`) with uniform winds in every
@@ -204,7 +250,7 @@ test('reconstructLongGap: a uniform wind that carries A exactly to B gives a str
 test('reconstructLongGap: a tube one degree tall — lineages that leave it are penalized out of the posterior', async () => {
     /* Same kind of transit, but the cube's box only spans lat 9.5..10.5
      * (±55 km). Heading-perturbed lineages stray out in numbers (raw outside
-     * fraction well above zero) and the 12 h gap crosses a heading-walk knot,
+     * fraction well above zero) and the 12 h gap crosses resampling checks,
      * so the filters resample; the bridge must still be drawn from lineages
      * that stayed in: posterior-weighted outside fraction ≈ 0 and every
      * mean-path vertex inside the box. */
@@ -217,6 +263,26 @@ test('reconstructLongGap: a tube one degree tall — lineages that leave it are 
     for (const [, lat] of r.meanPath) assert.ok(lat >= 9.5 && lat <= 10.5, `mean path lat ${lat} outside the box`);
     assert.ok(Math.abs(r.meanPath[r.meanPath.length - 1][0] - B.lon) < 1e-3);
     assert.ok(r.n_eff >= 40, `n_eff ${r.n_eff}`);
+});
+
+test('reconstructLongGap: a fix the winds cannot reach is reported unexplained, not bridged by cross-wind loops', async () => {
+    /* A due-east 20 m/s wind for 12 h carries A 864 km east; B is that far east
+     * but 2,000 km NORTH. Following the wind with a bounded heading offset, the
+     * forward cloud stays near lat 10 and the backward cloud near lat 28, so
+     * the two never come within reach: the gap must be flagged, low-confidence
+     * corridor, with the closure reporting the miss. */
+    const u = 20;
+    const { A, B } = fixes(12, u);
+    B.lat += 2000 / 111.32;
+    const r = await reconstructLongGap(A, B, [], uniformCube(u, 0, 12));
+    assert.equal(r.unexplained, true);
+    assert.equal(r.mode, 'corridor');
+    assert.equal(r.confidence, 'low');
+    assert.ok(r.endpoint_miss_km > 1000, `closure ${r.endpoint_miss_km} km`);
+    /* The well-posed transit is not flagged. */
+    const ok = fixes(12, u);
+    const r2 = await reconstructLongGap(ok.A, ok.B, [], uniformCube(u, 0, 12));
+    assert.equal(r2.unexplained, false);
 });
 
 test('reconstructLongGap: gaps under 30 min are a straight line with no particles', async () => {

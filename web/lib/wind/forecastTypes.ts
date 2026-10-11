@@ -123,6 +123,9 @@ export type StratolinkForecast = {
             outside_cube_frac?: number;
             /** Long gaps: the same, weighted by posterior particle weight. */
             outside_cube_frac_weighted?: number;
+            /** Long gaps: the winds cannot connect the two fixes (clouds never
+             *  met, or closure > 300 km) — a low-confidence corridor. */
+            unexplained?: boolean;
             /** How the drawn bridge was formed ('trimmed-local-mean' | 'straight'). */
             line_method?: string;
         }>;

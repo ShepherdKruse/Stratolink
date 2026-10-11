@@ -93,6 +93,10 @@ export type ReconstructionGap = {
     /** Long gaps: the same fraction weighted by posterior particle weight — the
      *  share of samples that shape the drawn bridge which read clamped winds. */
     outside_cube_frac_weighted?: number;
+    /** Long gaps: the winds cannot connect the two fixes under the bounded
+     *  perturbation model (clouds never met, or closure > 300 km) — the bridge
+     *  is a low-confidence corridor, not a reconstruction. */
+    unexplained?: boolean;
     /** How the drawn bridge was formed ('trimmed-local-mean' | 'straight'). */
     line_method?: string;
     occupancy?: OccupancyFootprint | null;
@@ -140,8 +144,11 @@ export type PathReconstructionResult = {
  *       instead of the forward-only importance sampler (see ALGO_VERSION v4).
  * ------------------------------------------------------------------------- */
 /*   g4: the drawn line through a long gap is the trimmed local mean of 2,000
- *       posterior draws around their medoid (was the posterior mean). */
-const GAP_ALGO_VERSION = 'g4';
+ *       posterior draws around their medoid (was the posterior mean).
+ *   g5: long-gap particles follow the wind under a bounded AR(1) heading /
+ *       speed perturbation (the unbounded heading random walk is gone);
+ *       gaps the winds cannot connect are flagged `unexplained`. */
+const GAP_ALGO_VERSION = 'g5';
 /** A bridge whose end is older than this is final — safe to reuse verbatim. */
 const GAP_SETTLE_MS = 6 * 3_600_000;
 
@@ -614,6 +621,7 @@ export async function computePathReconstruction(opts: {
                 net_speed_ms: lg.net_speed_ms,
                 outside_cube_frac: lg.outside_cube_frac,
                 outside_cube_frac_weighted: lg.outside_cube_frac_weighted,
+                unexplained: lg.unexplained,
                 line_method: lg.line_method,
                 occupancy: lg.occupancy,
                 ellipses: lg.ellipses,
