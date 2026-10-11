@@ -17,5 +17,7 @@ export const windPathArticle = {
     height: 675,
     caption: 'Stratolink 3, May 2026. The dashed section is eight days without a packet.',
   },
+  interactive: 'wind-path',
+  styles: ['/payload-dev-log/article.css', '/wind-path/figures.css'],
   body,
 };

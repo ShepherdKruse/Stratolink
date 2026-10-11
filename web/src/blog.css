@@ -234,30 +234,3 @@ img { display: block; max-width: 100%; }
   .flight-timeline time { padding-top: 0; }
   .post-aside { padding-inline: 16px; font-size: 15px; }
 }
-
-/* Article furniture shared by posts that have no stylesheet of their own: a section
-   index, tables and full-bleed figures, matching /payload-dev-log/article.css. */
-.post-body .article-contents { display: grid; grid-template-columns: 1fr 1fr; gap: 0 26px; margin: 36px 0 56px; font-size: 14px; line-height: 1.5; }
-.post-body .article-contents a { padding: 10px 0; text-decoration: none; color: var(--muted); }
-.post-body .article-contents a::after { content: ''; display: inline-block; width: 6px; height: 9px; margin-left: 10px; background: url('/assets/icons/chevron-right.svg') center / contain no-repeat; opacity: .55; }
-.post-body h2, .post-body h3 { scroll-margin-top: 130px; }
-.post-body sup { line-height: 0; font-size: 11px; padding-left: 2px; }
-.post-body sup a { text-decoration: none; }
-.post-body .table-wrap { overflow-x: auto; margin: 32px 0; }
-.post-body table { border-collapse: collapse; width: 100%; font-size: 15px; line-height: 1.5; }
-.post-body caption { text-align: left; color: var(--muted); font-size: 12px; margin-bottom: 12px; }
-.post-body th { font-weight: 500; text-align: left; }
-.post-body td, .post-body th { padding: 13px 14px 13px 0; border-bottom: 1px solid var(--rule); vertical-align: top; }
-.post-body td:last-child, .post-body th:last-child { padding-right: 0; }
-.post-body tbody tr:last-child td { border-bottom: 0; }
-.post-body td:first-child { white-space: nowrap; }
-.post-body .post-figure.wide { width: calc(100% + 160px); margin-left: -80px; }
-.post-aside ol { padding-left: 21px; }
-.post-body .references li { font-size: 14px; line-height: 1.6; margin-bottom: 16px; scroll-margin-top: 130px; }
-@media (hover:hover) { .post-body .article-contents a:hover { color: #171614; } }
-@media (max-width:1050px) { .post-body .post-figure.wide { width: 100%; margin-left: 0; } }
-@media (max-width:700px) {
-  .post-body .article-contents { margin-bottom: 40px; gap: 0 14px; font-size: 13px; }
-  .post-body table { font-size: 13px; }
-  .post-body td, .post-body th { padding-right: 12px; }
-}

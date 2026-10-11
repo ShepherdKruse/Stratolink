@@ -65,13 +65,13 @@ export function writeBlogPages() {
   <title>${escape(post.title)} - Stratolink</title>
 ${socialMetadata({ title: `${post.title} - Stratolink`, path: `/blog/${post.slug}`, description: post.excerpt, image: post.image, type: 'article' })}
   <link rel="stylesheet" href="/src/blog.css">
-  ${post.interactive ? '<link data-article-style rel="stylesheet" href="/assets/payload-dev-log/katex.min.css"><link data-article-style rel="stylesheet" href="/payload-dev-log/article.css">' : ''}
+  ${(post.styles || []).map(href => `<link data-article-style rel="stylesheet" href="${escape(href)}">`).join('')}
   <script type="module" src="/src/blog-navigation.js"></script>
 </head>
 <body class="article-page">
   <a class="skip-link" href="#main">Skip to content</a>
   ${header}
-  <main id="main" class="post-main" data-post="${post.slug}"${post.interactive ? ' data-interactive-article' : ''} tabindex="-1">
+  <main id="main" class="post-main" data-post="${post.slug}"${post.interactive ? ` data-interactive-article="${escape(post.interactive)}"` : ''} tabindex="-1">
     <article>
       <header class="post-heading">
         <a class="post-back" href="/blog" data-blog-back><img src="/assets/icons/chevron-left.svg" alt="" width="9" height="12">All articles</a>
