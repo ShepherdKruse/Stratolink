@@ -25,6 +25,9 @@ export interface TelemetrySinceOpts {
      *  landed/retired balloon to replay its full mission. Falls back to the
      *  rolling window when the device has no launch time. */
     fullHistory?: boolean;
+    /** Override the full-history cap (default MAX_HISTORY_MS). The forecast
+     *  worker uses it to replay a flight older than the cap. */
+    maxHistoryMs?: number;
 }
 
 function parseLaunchMs(launchedAt: number | string | null | undefined): number | null {
@@ -43,7 +46,7 @@ export function telemetrySinceMs(
 
     /* Replay mode: anchor to launch (capped) for any status. */
     if (opts.fullHistory && launchMs != null) {
-        const capped = Math.max(launchMs, now - MAX_HISTORY_MS);
+        const capped = Math.max(launchMs, now - (opts.maxHistoryMs ?? MAX_HISTORY_MS));
         return Math.min(capped, now);
     }
 

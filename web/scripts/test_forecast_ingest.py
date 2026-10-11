@@ -10,11 +10,13 @@ import json
 import os
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
+import re
 import tempfile
 import types
 import unittest
 
 SRC = Path(__file__).with_name("gfs_ingest.py")
+INGEST = SRC
 TREE = ast.parse(SRC.read_text())
 
 
@@ -24,6 +26,21 @@ def lift(names, namespace):
     missing = set(names) - {n.name for n in body}
     assert not missing, f"gfs_ingest.py no longer defines {missing}"
     exec(compile(ast.Module(body=body, type_ignores=[]), str(SRC), "exec"), namespace)
+    return namespace
+
+
+def extract(names):
+    """Load just the named top-level functions / constants of gfs_ingest.py (it
+    imports pygrib + numpy at module level, which the test runner lacks)."""
+    tree = ast.parse(INGEST.read_text())
+    body = [
+        node for node in tree.body
+        if (isinstance(node, ast.FunctionDef) and node.name in names)
+        or (isinstance(node, ast.Assign)
+            and any(isinstance(t, ast.Name) and t.id in names for t in node.targets))
+    ]
+    namespace = {"os": os}
+    exec(compile(ast.Module(body=body, type_ignores=[]), str(INGEST), "exec"), namespace)
     return namespace
 
 
@@ -183,9 +200,11 @@ class MainTests(unittest.TestCase):
 class CubeSpanTests(unittest.TestCase):
     """Reconstruction span, single-fix skip, tube-before-recon field reuse."""
 
-    def build_cube_harness(self):
+    def build_cube_harness(self, recon_tube=False):
         events = []
         ns = base_namespace(
+            RECON_TUBE=recon_tube,
+            build_tube_recon=lambda device, fixes, target_p, latest, now: events.append(("recon_tube", device)),
             bracket_levels=lambda p: (250, 300, 0.5),
             clear_field_cache=lambda keep=(): events.append(("clear", sorted(keep))),
             build_tube_fc=lambda device, fixes, last_fix, gap_h, target_p, latest, now: events.append(("tube", device)),
@@ -207,7 +226,7 @@ class CubeSpanTests(unittest.TestCase):
         self.assertIn("recon: skipped (1 fix", out.getvalue())
 
     def test_tube_is_built_first_and_recon_ends_two_steps_after_the_last_fix(self):
-        build_cube, events = self.build_cube_harness()
+        build_cube, events = self.build_cube_harness(recon_tube=False)   # legacy static box
         fixes = [{"lat": 1, "lon": 2, "t": "2026-10-01T00:10:00Z"},
                  {"lat": 1.5, "lon": 2.5, "t": "2026-10-02T13:40:00Z"}]
         with contextlib.redirect_stdout(io.StringIO()):
@@ -224,6 +243,28 @@ class CubeSpanTests(unittest.TestCase):
         kept = events[2][1]
         self.assertEqual(kept, sorted({("cyc", h) for h in range(0, 24, 3)}))
         self.assertEqual(events[4], ("write", ""))
+
+    def test_recon_tube_is_the_default_and_keeps_the_forecast_tubes_fields_warm(self):
+        build_cube, events = self.build_cube_harness(recon_tube=True)
+        fixes = [{"lat": 1, "lon": 2, "t": "2026-10-01T00:10:00Z"},
+                 {"lat": 1.5, "lon": 2.5, "t": "2026-10-02T13:40:00Z"}]
+        with contextlib.redirect_stdout(io.StringIO()):
+            build_cube("pair", fixes, 280.0, None)
+        self.assertEqual([e[0] for e in events], ["clear", "tube", "clear", "recon_tube", "clear"])
+        # The clear before the tube recon keeps the recon span's own fields (floor(first) − 3 h … floor(last) + 6 h).
+        self.assertEqual(events[2][1], sorted({("cyc", h) for h in range(0, 24, 3)}))
+
+    def test_skip_recon_env_builds_only_the_forecast_tube(self):
+        build_cube, events = self.build_cube_harness(recon_tube=True)
+        fixes = [{"lat": 1, "lon": 2, "t": "2026-10-01T00:10:00Z"}, {"lat": 1.5, "lon": 2.5, "t": "2026-10-02T13:40:00Z"}]
+        os.environ["SKIP_RECON"] = "1"
+        try:
+            with contextlib.redirect_stdout(io.StringIO()) as out:
+                build_cube("pair", fixes, 280.0, None)
+        finally:
+            del os.environ["SKIP_RECON"]
+        self.assertEqual([e[0] for e in events], ["clear", "tube"])
+        self.assertIn("SKIP_RECON=1", out.getvalue())
 
     def test_cubes_written_reports_only_this_runs_files(self):
         with tempfile.TemporaryDirectory() as d:
@@ -271,6 +312,68 @@ class ManifestTests(unittest.TestCase):
             m = json.loads(Path(ns["MANIFEST_PATH"]).read_text())
             self.assertEqual(m["sources"]["gefs"]["devices"], {})
             self.assertEqual(m["sources"]["aigefs"]["members_expected"], 31)
+
+
+class ReconTubeGeometryTests(unittest.TestCase):
+    """The per-slice geometry of the reconstruction tube (pure helpers)."""
+
+    @classmethod
+    def setUpClass(cls):
+        cls.g = extract({
+            "RECON_HALF_BASE_DEG", "RECON_HALF_PER_H", "RECON_HALF_MIN_DEG", "RECON_HALF_MAX_DEG",
+            "recon_half_deg", "gap_hours_at", "unwrap_lons",
+        })
+
+    def test_half_width_grows_with_gap_length_within_clamps(self):
+        half = self.g["recon_half_deg"]
+        self.assertEqual(half(0), 9)                 # floor: short gaps
+        self.assertEqual(half(60), 9)                # 6 + 3 = the floor exactly
+        self.assertAlmostEqual(half(100), 11)
+        self.assertAlmostEqual(half(200), 16)
+        self.assertEqual(half(280), 20)              # cap
+        self.assertEqual(half(10_000), 20)
+
+    def test_gap_hours_at_uses_the_longest_gap_a_slice_can_be_read_by(self):
+        h = 3_600_000
+        fixes = [(0, 0, 0), (10 * h, 0, 0), (12 * h, 0, 0), (50 * h, 0, 0)]   # gaps 10 h, 2 h, 38 h
+        gap_at = self.g["gap_hours_at"]
+        self.assertEqual(gap_at(fixes, 5 * h, 3 * h), 10)
+        # A slice within one step of the next gap's start is read by that gap too.
+        self.assertEqual(gap_at(fixes, 11 * h, 3 * h), 38)
+        self.assertEqual(gap_at(fixes, 30 * h, 3 * h), 38)
+        self.assertEqual(gap_at(fixes, 52 * h, 3 * h), 38)   # trailing slice still touches the last gap
+        self.assertEqual(gap_at(fixes, -5 * h, 3 * h), 0)    # lead-in slice: no bridge reads it
+        self.assertEqual(gap_at(fixes, 60 * h, 3 * h), 0)
+
+    def test_unwrap_lons_is_continuous_and_anchored_at_the_last_fix(self):
+        unwrap = self.g["unwrap_lons"]
+        self.assertEqual(unwrap([]), [])
+        self.assertEqual(unwrap([-122.4, -100.0, -4.5]), [-122.4, -100.0, -4.5])
+        # Eastward across the dateline: no +360 jump, last value kept raw.
+        self.assertEqual(unwrap([170.0, 178.0, -178.0, -170.0]), [-190.0, -182.0, -178.0, -170.0])
+
+
+class DeviceAliasMirrorTests(unittest.TestCase):
+    """The ingest must query the same canonical + alias telemetry ids as the
+    compute (lib/devices/aliases.ts), or the tube is built from a partial track."""
+
+    @classmethod
+    def setUpClass(cls):
+        cls.g = extract({"DEVICE_ID_ALIASES", "telemetry_device_ids", "device_id_filter"})
+
+    def test_alias_map_matches_the_typescript_source(self):
+        ts = (INGEST.parent.parent / "lib" / "devices" / "aliases.ts").read_text()
+        block = re.search(r"DEVICE_ID_ALIASES[^{]*\{(.*?)\};", ts, re.S).group(1)
+        ts_map = dict(re.findall(r"['\"]([^'\"]+)['\"]\s*:\s*['\"]([^'\"]+)['\"]", block))
+        self.assertTrue(ts_map, "could not parse DEVICE_ID_ALIASES from aliases.ts")
+        self.assertEqual(self.g["DEVICE_ID_ALIASES"], ts_map)
+
+    def test_telemetry_ids_expand_canonical_and_alias(self):
+        ids = self.g["telemetry_device_ids"]
+        self.assertEqual(ids("stratolink-3"), ["stratolink-3", "stratolink-3-eu"])
+        self.assertEqual(ids("stratolink-3-eu"), ["stratolink-3", "stratolink-3-eu"])
+        self.assertEqual(ids("stratolink-2"), ["stratolink-2"])
+        self.assertEqual(self.g["device_id_filter"]("stratolink-3"), "in.(stratolink-3,stratolink-3-eu)")
 
 
 if __name__ == "__main__":

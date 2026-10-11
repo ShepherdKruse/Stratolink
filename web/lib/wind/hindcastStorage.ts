@@ -19,13 +19,19 @@ import type { PathReconstructionResult } from './pathReconstruction';
  */
 /* Bump on any reconstruction-algorithm change so stored hindcasts recompute
  * instead of serving the old geometry (the cache is keyed by fixes, not code).
- * v2: gap bridges are anchored to their bounding GPS fixes (#44). */
-const ALGO_VERSION = 'v2';
+ * v2: gap bridges are anchored to their bounding GPS fixes (#44).
+ * v3: the reconstruction cube is a 0.25° trajectory tube (was a 0.5–1° static
+ *     box), the level is the cube's own (was the snapped latest telemetry
+ *     pressure), and the long-gap diurnal altitude model uses the sample's
+ *     longitude for local time (was a fixed UTC−7). */
+const ALGO_VERSION = 'v3';
 
 export type StoredHindcast = PathReconstructionResult & { computed_at: string };
 
 /** Stable 16-char hash of the inputs that fully determine the reconstruction:
- *  the GPS fixes (rounded to kill float jitter) + the pressure level + algo. */
+ *  the GPS fixes (rounded to kill float jitter) + the wind level + algo. The
+ *  level is the reconstruction cube's own `levelHpa` (the float pressure the
+ *  ingest interpolated the winds to), rounded to the hPa. */
 export function hindcastInputHash(fixes: ForecastGpsFix[], levelHpa: number): string {
     const canon = fixes.map((f) => [
         Math.round(f.lat * 1e5),
