@@ -8,6 +8,14 @@ on:
       device:
         description: 'One device, or blank for all active devices'
         required: false
+      force:
+        description: 'Rebuild even when the stored forecast is already final (bypasses the activity gate)'
+        type: boolean
+        default: false
+      history_days:
+        description: 'Days of telemetry history to replay (default 90; raise it to regenerate an older flight)'
+        type: number
+        default: 90
 
 concurrency:
   group: gfs-ingest
@@ -19,16 +27,27 @@ permissions:
 jobs:
   ingest:
     runs-on: ubuntu-latest
-    timeout-minutes: 50
+    # Each ingest step below has its own budget; this is their sum plus setup.
+    timeout-minutes: 90
     defaults:
       run:
         working-directory: web
     env:
       DEVICE: ${{ inputs.device }}
+      FORCE: ${{ inputs.force }}
+      # Both sides of the worker cap history at 90 days (gfs_ingest.py HISTORY_DAYS,
+      # buildForecastInput FORECAST_HISTORY_DAYS); a forced rerun of a flight older
+      # than that would otherwise find no fixes and seed from the launch record.
+      HISTORY_DAYS: ${{ inputs.history_days || 90 }}
+      FORECAST_HISTORY_DAYS: ${{ inputs.history_days || 90 }}
       NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.SUPABASE_URL || secrets.NEXT_PUBLIC_SUPABASE_URL }}
       SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
       BLOB_READ_WRITE_TOKEN: ${{ secrets.BLOB_READ_WRITE_TOKEN }}
       WIND_CUBE_DIR: .windcube/cubes
+      FORECAST_PLAN: .windcube/plan.json
+      FORECAST_MANIFEST: .windcube/manifest.json
+      # Progress lines must reach the log before a step is killed at its timeout.
+      PYTHONUNBUFFERED: '1'
       ONNXRUNTIME_NODE_INSTALL: skip
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
@@ -48,21 +67,63 @@ jobs:
       - run: npm ci
       - name: Check worker configuration
         run: |
+          # shellcheck disable=SC2016  # ${key} is a JS template literal, not shell
           node -e 'const id=process.env.DEVICE;if(id&&!/^[a-zA-Z0-9_-]{1,80}$/.test(id))throw new Error("Invalid device");for(const key of ["NEXT_PUBLIC_SUPABASE_URL","SUPABASE_SERVICE_ROLE_KEY","BLOB_READ_WRITE_TOKEN"])if(!process.env[key])throw new Error(`${key} is required`);'
+      # Decide which balloons can still change their forecast (lib/wind/forecastPlan.ts):
+      # a flying device whose last fix is past the dead-reckon cap and whose stored
+      # forecast is already the final capped dead-reckon is skipped, as is one with
+      # nothing to start from. Every later step reads the plan; a fleet with nothing
+      # to build makes them all no-ops (no NOAA download).
+      - name: Plan forecast work
+        id: plan
+        run: npm run forecast:plan -- "$DEVICE"
       - name: Ingest GFS cubes
+        id: gfs
+        timeout-minutes: 30
         run: micromamba run -n gfs python scripts/gfs_ingest.py "$DEVICE"
-      # The GFS forecast remains available if optional GEFS ingestion times out.
+      # The two ensemble sources are optional: the GFS forecast is still computed
+      # and stored when either fails or times out. Each has its OWN budget (the old
+      # shared 28-minute step was killed on every run, silently truncating AIGEFS).
+      # A step cut short shows red here, in the job summary and as a degraded
+      # healthcheck ping — the ingest exits non-zero whenever a device ends with
+      # fewer members than configured.
       - name: Ingest GEFS member cubes
-        timeout-minutes: 28
+        id: gefs
+        timeout-minutes: 25
         continue-on-error: true
         run: micromamba run -n gfs python scripts/gefs_ingest.py "$DEVICE"
+      - name: Ingest AIGEFS member cubes
+        id: aigefs
+        timeout-minutes: 25
+        continue-on-error: true
+        run: micromamba run -n gfs python scripts/aigefs_ingest.py "$DEVICE"
       - name: Compute and store forecasts
+        id: compute
         run: npm run forecast:compute -- "$DEVICE"
+      # Member counts, step durations and skip reasons, from the plan + manifest.
+      # Also decides `degraded` for the healthcheck ping below.
+      - name: Job summary
+        id: summary
+        if: always()
+        env:
+          STEP_OUTCOMES: '{"plan":"${{ steps.plan.outcome }}","gfs":"${{ steps.gfs.outcome }}","gefs":"${{ steps.gefs.outcome }}","aigefs":"${{ steps.aigefs.outcome }}","compute":"${{ steps.compute.outcome }}"}'
+        run: npm run forecast:summary
+      # healthchecks.io semantics: a plain ping marks the run healthy; `/fail` marks
+      # the check down and keeps the posted summary as its log. Degraded means an
+      # ensemble step failed or was killed, or a source built fewer members than
+      # configured — the forecast was stored, but with a thinner ensemble. When a
+      # required step fails the ping is skipped and the monitor alerts on the
+      # missed schedule, as before.
       - name: Healthcheck ping
         if: success()
         env:
           HEALTHCHECK_URL: ${{ secrets.HEALTHCHECK_URL }}
+          DEGRADED: ${{ steps.summary.outputs.degraded }}
         run: |
           if [ -n "$HEALTHCHECK_URL" ]; then
-            curl -fsS --max-time 10 "$HEALTHCHECK_URL"
+            if [ "$DEGRADED" = "true" ]; then
+              curl -fsS --max-time 10 --data-binary @.windcube/summary.md "$HEALTHCHECK_URL/fail"
+            else
+              curl -fsS --max-time 10 "$HEALTHCHECK_URL"
+            fi
           fi

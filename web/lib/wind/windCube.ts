@@ -350,13 +350,28 @@ export async function fetchWindCube(opts: {
     if (cubeDir) {
         const cube = await readCubeFromDir(cubeDir, opts.deviceId, kind);
         if (cube) return cube;
+        /* Worker mode is strict: the runner's freshly built cubes are the only
+         * wind source — never fall through to a stale Blob cube or a live
+         * Open-Meteo fetch. The ingest writes no reconstruction cube for a device
+         * with a single fix; if the compute nevertheless sees two or more (its
+         * loader merges alias ids and keeps rows the ingest filters out) the
+         * reconstruction degrades to the forecast tube, loudly. A missing forecast
+         * cube is an ingest failure. */
+        if (kind === 'reconstruction') {
+            const fc = await readCubeFromDir(cubeDir, opts.deviceId, 'forecast');
+            if (fc) {
+                console.warn(`  ${opts.deviceId}: no reconstruction cube in ${cubeDir} — reconstructing through the forecast tube`);
+                return fc;
+            }
+        }
+    } else {
+        const cube = await readCubeFromBlob(opts.deviceId, kind);
+        if (cube) return cube;
     }
-    const cube = await readCubeFromBlob(opts.deviceId, kind);
-    if (cube) return cube;
-    const looked = [
-        cubeDir ? `WIND_CUBE_DIR=${cubeDir}` : 'WIND_CUBE_DIR (unset)',
-        isBlobStorageConfigured() ? 'Blob cubes/' : 'Blob (not configured)',
-    ].join(', ');
+    const blobNote = !isBlobStorageConfigured()
+        ? 'Blob (not configured)'
+        : cubeDir ? 'Blob (skipped: WIND_CUBE_DIR is the only source in worker mode)' : 'Blob cubes/';
+    const looked = [cubeDir ? `WIND_CUBE_DIR=${cubeDir}` : 'WIND_CUBE_DIR (unset)', blobNote].join(', ');
     throw new Error(
         `No ${kind} wind cube for device "${opts.deviceId}" (looked in ${looked}). ` +
         'Run scripts/gfs_ingest.py to build it; there is no live weather fallback.',
