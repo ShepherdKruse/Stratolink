@@ -308,14 +308,14 @@ export async function fetchWindCube(opts: {
                 return fc;
             }
         }
-        throw new Error(`no ${kind} cube for ${opts.deviceId} in ${cubeDir}`);
+    } else {
+        const cube = await readCubeFromBlob(opts.deviceId, kind);
+        if (cube) return cube;
     }
-    const cube = await readCubeFromBlob(opts.deviceId, kind);
-    if (cube) return cube;
-    const looked = [
-        cubeDir ? `WIND_CUBE_DIR=${cubeDir}` : 'WIND_CUBE_DIR (unset)',
-        isBlobStorageConfigured() ? 'Blob cubes/' : 'Blob (not configured)',
-    ].join(', ');
+    const blobNote = !isBlobStorageConfigured()
+        ? 'Blob (not configured)'
+        : cubeDir ? 'Blob (skipped: WIND_CUBE_DIR is the only source in worker mode)' : 'Blob cubes/';
+    const looked = [cubeDir ? `WIND_CUBE_DIR=${cubeDir}` : 'WIND_CUBE_DIR (unset)', blobNote].join(', ');
     throw new Error(
         `No ${kind} wind cube for device "${opts.deviceId}" (looked in ${looked}). ` +
         'Run scripts/gfs_ingest.py to build it; there is no live weather fallback.',

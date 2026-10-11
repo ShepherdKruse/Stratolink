@@ -1,16 +1,11 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import { spawnSync } from 'node:child_process';
-<<<<<<< HEAD
-import { mkdtempSync, rmSync, writeFileSync } from 'node:fs';
-import { tmpdir } from 'node:os';
-import { join } from 'node:path';
-import { tsImport } from 'tsx/esm/api';
-=======
 import { mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { tsImport } from 'tsx/esm/api';
 
 const web = new URL('../', import.meta.url);
 const webPath = (relative) => fileURLToPath(new URL(relative, web));
@@ -36,7 +31,6 @@ function packCube({ t0Ms, stepMs, nGrids, lat0 = 20, lon0 = -140, step = 1, nLat
   }
   return buf;
 }
->>>>>>> origin/main
 
 /** Spawn the worker CLI with an isolated cube dir; `plan` (object) is written as
  *  its plan file, otherwise the plan path points at a file that does not exist. */
@@ -76,7 +70,6 @@ test('requested device with no ingested cube fails instead of running an unbound
   assert.match(result.stderr, /No ingested cube/);
 });
 
-<<<<<<< HEAD
 test('worker follows the plan: skipped devices are not computed, even by name', () => {
   const plan = freshPlan([{ device_id: 'dark', action: 'skip', reason: 'frozen: final dead-reckon stored' }]);
   let result = run([], { plan });
@@ -244,7 +237,8 @@ test('without a manifest the counts are still reported and the ensemble is not c
   assert.deepEqual(m.expected, {});
   assert.equal(m.complete, false);
   assert.equal(formatMembers(m), 'gefs 2/?, aigefs 0/?');
-=======
+});
+
 test('a device with no ingested cube fails the cube read clearly instead of fetching live weather', () => {
   const dir = mkdtempSync(join(tmpdir(), 'stratolink-nocube-'));
   try {
@@ -299,5 +293,4 @@ test('the offline harness computes from local cubes and stores no wind grid or g
     }
     assert.ok(readFileSync(join(dir, '.forecast-cache', 'stratolink-9.gapcache.json'), 'utf8').length > 2, 'caches stayed local');
   } finally { rmSync(dir, { recursive: true }); }
->>>>>>> origin/main
 });
