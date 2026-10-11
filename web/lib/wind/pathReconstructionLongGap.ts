@@ -81,13 +81,16 @@ const CFG = {
      *  UNBOUNDED heading random walk of 55°·(1 − directness) per 4 h knot on top
      *  of a fixed offset: its 1σ reached 118° at mid-gap on the reference
      *  flight's 201 h gap, and 7 % of the posterior's steps ran against the
-     *  wind.) The speed σ is wider than the forecast's 10 %: it absorbs the
-     *  model's speed error over days-long gaps, which is the realistic way a
-     *  balloon "loses ground" against the winds — not by crossing them. The
-     *  heading σ is the forecast's 12°: on the reference flight it puts the
-     *  posterior's step-vs-wind angle at p90 21–27° on every long gap (15° gave
-     *  25–32°; the forecast ensemble itself measures 19°). */
-    SPEED_SIGMA: 0.25,
+     *  wind.) Calibration on the reference flight's clean GPS fix pairs
+     *  (stratolink-3, 1–4 h apart in the jet; most of its other fixes are
+     *  frozen repeats): observed heading within 0–3° of the GFS wind, speed
+     *  0.82–1.07× it. The heading σ is the forecast's 12° — generous against
+     *  those pairs, but GFS direction errors grow over a days-long gap; it puts
+     *  the posterior's step-vs-wind angle at p90 ≈ 20–27° (the forecast
+     *  ensemble measures 19°). The speed σ of 15 % covers the observed scatter
+     *  with room for weaker GFS winds over open ocean (the forecast uses 10 %;
+     *  25 % gave the same closures and angles with noisier lines). */
+    SPEED_SIGMA: 0.15,
     DIR_SIGMA_DEG: 12,
     PERTURB_TAU_H: 18,
     /** Floor on the speed multiplier (a 3σ slow draw must not stall or reverse). */
