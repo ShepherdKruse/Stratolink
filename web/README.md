@@ -70,6 +70,8 @@ The plan step (`scripts/plan_forecasts.ts`, rules in `lib/wind/forecastPlan.ts`)
 
 Each ingest appends what it built to `.windcube/manifest.json`; the compute stamps the member counts into `metadata.members` / `metadata.members_expected` of the stored forecast, and `npm run forecast:summary` renders the GitHub job summary (member counts per source, step durations, skip reasons). The compute requires the device's ingested forecast cube in `WIND_CUBE_DIR` and server database credentials; a device with a single fix has no reconstruction cube. A failed GFS ingest or incomplete compute fails the job. A fleet with nothing to build exits without downloading weather.
 
+Engineering notes for the whole pipeline (cubes, tube ingest, compute, read path, data volumes and timing) live in [`docs/forecast/forecast-architecture.md`](../docs/forecast/forecast-architecture.md). Local iteration tools: `python3 scripts/_run_with_env.py scripts/gfs_ingest.py <device>` builds cubes with `.env.local` loaded, `npm run forecast:local -- <device> [--offline]` runs the compute on local cubes with Blob disabled, `npx tsx scripts/inspect_cube.ts <cube.slwc>` decodes a cube, and `node --env-file=.env.local scripts/blob_cleanup.mjs [--apply]` lists (or, with `--apply`, deletes) stale `cubes/*` and `forecasts/*.lock.json` Blob objects.
+
 Before cutover, disable any external scheduler calling the retired `/api/compute-forecast` endpoint. The GitHub worker is the sole forecast writer. Confirm a successful scheduled run and a readable stored forecast in the deployed environment.
 
 ## Content

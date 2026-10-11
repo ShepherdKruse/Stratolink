@@ -28,6 +28,8 @@
     "lib/telemetry/missionWindow.ts",
     "lib/supabase.ts",
     "scripts/compute_forecasts.ts",
+    "scripts/forecast_local.ts",
+    "scripts/inspect_cube.ts",
     "scripts/plan_forecasts.ts"
   ]
 }
