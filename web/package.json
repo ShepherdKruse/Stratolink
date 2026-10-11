@@ -18,6 +18,7 @@
     "test:migrations": "node --experimental-strip-types lib/supabase/migrations/migration-contract.host-test.ts",
     "verify": "npm test && npm run test:ttn && npm run test:migrations && npm run test:forecast && npm run test:staff && npm run typecheck && npm run build",
     "forecast:compute": "tsx --tsconfig tsconfig.worker.json scripts/compute_forecasts.ts",
+    "forecast:local": "tsx --tsconfig tsconfig.worker.json scripts/forecast_local.ts",
     "gateways:refresh": "node scripts/refresh-ttnmapper-gateways.mjs",
     "test:forecast": "node --test scripts/forecast-worker.test.mjs && python3 scripts/test_forecast_ingest.py",
     "test:backend": "node --experimental-strip-types scripts/backend-integration.mjs",

@@ -41,6 +41,11 @@ function sanitizeGeometry(value) {
 }
 export function sanitizeForecast(raw, view = 'full') {
   if (view === 'path') return sanitizeGeometry({ generated_at: raw.generated_at, nominal_path: raw.nominal_path ?? [] });
+  // History only: the reconstructed track through past GPS gaps, for balloons that are no longer flying.
+  if (view === 'history') {
+    return sanitizeGeometry({ generated_at: raw.generated_at,
+      observed: { reconstructed_path: raw.observed?.reconstructed_path ?? [], reconstructed_track: raw.observed?.reconstructed_track ?? [] } });
+  }
   // Only return fields consumed by the dashboard, never source metadata/launch notes.
   return sanitizeGeometry({
     generated_at: raw.generated_at, forecast_horizon_h: raw.forecast_horizon_h,

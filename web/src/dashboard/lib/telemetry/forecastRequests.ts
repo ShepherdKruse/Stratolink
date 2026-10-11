@@ -11,7 +11,7 @@ export interface ForecastData {
     generated_at?: unknown;
 }
 export type ForecastResponse = { status: number; data: ForecastData | null };
-type ForecastView = 'full' | 'path';
+export type ForecastView = 'full' | 'path' | 'history';
 type FetchForecast = (id: string, signal: AbortSignal, view: ForecastView) => Promise<ForecastResponse>;
 type Subscriber = { resolve: (result: ForecastResponse) => void; reject: (error: unknown) => void; cleanup: () => void };
 type Job = { id: string; key: string; view: ForecastView; controller: AbortController; subscribers: Set<Subscriber> };
@@ -105,7 +105,7 @@ export function createForecastRequests(fetchForecast: FetchForecast, now = Date.
 }
 
 export const forecastRequests = createForecastRequests(async (id, signal, view) => {
-    const response = await fetch(`/api/forecast?device=${encodeURIComponent(id)}${view === 'path' ? '&view=path' : ''}`, {
+    const response = await fetch(`/api/forecast?device=${encodeURIComponent(id)}${view === 'full' ? '' : `&view=${view}`}`, {
         signal: AbortSignal.any([signal, AbortSignal.timeout(20_000)]),
     });
     return { status: response.status, data: response.ok && response.status !== 202 ? await response.json() : null };
