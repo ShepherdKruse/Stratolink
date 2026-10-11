@@ -12,8 +12,12 @@ are most exposed to.
 
 Writes one binary cube per member as {device}-aNN.slwc (the 'a' prefix marks AI
 members; the compute pools `-mNN` physics + `-aNN` AI cubes into one ensemble).
-Additive and best-effort: invoked from gefs_ingest after the physics members, in
-a try/except, so an AIGEFS hiccup never breaks the GFS/GEFS pipeline.
+Additive and best-effort: runs as its OWN workflow step (own timeout,
+continue-on-error) after gefs_ingest, so an AIGEFS hiccup never breaks the
+GFS/GEFS pipeline — and a slow AIGEFS can no longer starve the GEFS step. Progress
+goes to the ingest manifest after every member; the script exits non-zero when a
+device ends with fewer members than configured so the step shows red and the job
+summary / healthcheck report the run as degraded.
 
 Source: noaa-nws-graphcastgfs-pds (NODD, free), GRIB2 + .idx byte-range, 0.25°,
 pres files with 250/300 hPa U/V, 31 members (mem000-mem030), 6-hourly to 384h.
@@ -24,7 +28,7 @@ Run: python3 scripts/aigefs_ingest.py [device]
 import io
 import os
 import sys
-import tempfile
+import time
 from datetime import datetime, timedelta, timezone
 from concurrent.futures import ThreadPoolExecutor
 
@@ -258,9 +262,11 @@ def build_device(device, fixes, target_p, latest):
             cube, n = member_cube_tube(mem, schedule, slice_ms, last_lat, last_lon, target_p, latest, now)
             g.write_cube(device, f"-a{mem:02d}", cube, n, n, f"a{mem:02d}")
             built += 1
+            g.manifest_device("aigefs", device, built=built, expected=len(MEMBERS))   # per member: survives a step kill
         except Exception as e:  # noqa: BLE001
             print(f"    a{mem:02d}: skipped ({e})", flush=True)
     print(f"  {device}: AIGEFS built {built}/{len(MEMBERS)} members", flush=True)
+    return built
 
 
 def build_device_static(device, fixes, target_p, latest, now, schedule):
@@ -279,27 +285,43 @@ def build_device_static(device, fixes, target_p, latest, now, schedule):
             cube = member_cube(mem, schedule, lats, lons, rows_idx, cols_idx, step, target_p, latest, now)
             g.write_cube(device, f"-a{mem:02d}", cube, len(lats), len(lons), f"a{mem:02d}")
             built += 1
+            g.manifest_device("aigefs", device, built=built, expected=len(MEMBERS))
         except Exception as e:  # noqa: BLE001
             print(f"    a{mem:02d}: skipped ({e})", flush=True)
     print(f"  {device}: AIGEFS built {built}/{len(MEMBERS)} members", flush=True)
+    return built
 
 
 def run(only=None):
-    devices = [(only, None)] if only else g.active_devices()
+    devices = g.planned_devices(only)
+    g.manifest_source_begin("aigefs", members_expected=len(MEMBERS))
     if not devices:
-        print("no active devices")
+        print("no devices to build — no NOAA download", flush=True)
+        g.manifest_source_end("aigefs")
         return
     latest = latest_cycle()
-    print(f"latest AIGEFS cycle {latest.isoformat()} | members {len(MEMBERS)} | devices {[d for d, _ in devices]}")
+    print(f"latest AIGEFS cycle {latest.isoformat()} | members {len(MEMBERS)} | devices {[d for d, _ in devices]}", flush=True)
+    incomplete = []
     for d, launched in devices:
+        t0 = time.time()
         try:
             fixes = g.mission_track(d, launched)
             if len(fixes) < 1:
-                print(f"  {d}: no fixes, skipping")
+                print(f"  {d}: no fixes, skipping", flush=True)
+                g.manifest_device("aigefs", d, built=0, expected=len(MEMBERS), error="no fixes")
+                incomplete.append(d)
                 continue
-            build_device(d, fixes, g.float_pressure(d), latest)
+            built = build_device(d, fixes, g.float_pressure(d), latest)
+            g.manifest_device("aigefs", d, built=built, expected=len(MEMBERS), seconds=round(time.time() - t0, 1))
+            if built < len(MEMBERS):
+                incomplete.append(d)
         except Exception as e:  # noqa: BLE001
-            print(f"  {d}: AIGEFS FAILED {e}")
+            print(f"  {d}: AIGEFS FAILED {e}", flush=True)
+            g.manifest_device("aigefs", d, error=str(e), seconds=round(time.time() - t0, 1))
+            incomplete.append(d)
+    g.manifest_source_end("aigefs")
+    if incomplete:
+        raise SystemExit(f"AIGEFS ingest incomplete for {len(incomplete)} device(s): {incomplete}")
 
 
 if __name__ == "__main__":

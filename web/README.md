@@ -57,15 +57,18 @@ Activation URLs preserve their device context through GitHub sign-in. Ownership 
 
 ## Forecast worker
 
-`.github/workflows/gfs-ingest.yml` retains the four daily NOAA ingestion runs. It builds GFS cubes, attempts the optional GEFS ensemble, computes forecasts and writes private Vercel Blob objects. The website reads those stored objects after checking that the balloon has a connected registry entry. It never proxies its own domain or runs an expensive forecast in response to a public request.
+`.github/workflows/gfs-ingest.yml` retains the four daily NOAA ingestion runs. It plans the work, builds GFS cubes, attempts the optional GEFS and AIGEFS ensembles (each in its own step with its own timeout), computes forecasts and writes private Vercel Blob objects. The website reads those stored objects after checking that the balloon has a connected registry entry. It never proxies its own domain or runs an expensive forecast in response to a public request.
 
-The workflow needs `SUPABASE_URL` (or the existing `NEXT_PUBLIC_SUPABASE_URL` secret), `SUPABASE_SERVICE_ROLE_KEY`, and `BLOB_READ_WRITE_TOKEN`. `HEALTHCHECK_URL` is optional. The worker uses its own TypeScript configuration, `tsconfig.worker.json`.
+The workflow needs `SUPABASE_URL` (or the existing `NEXT_PUBLIC_SUPABASE_URL` secret), `SUPABASE_SERVICE_ROLE_KEY`, and `BLOB_READ_WRITE_TOKEN`. `HEALTHCHECK_URL` is optional and follows healthchecks.io conventions: a plain ping after a healthy run, a `/fail` ping carrying the job summary when the run was degraded (an ensemble step failed or timed out, or a source built fewer members than configured). The worker uses its own TypeScript configuration, `tsconfig.worker.json`.
 
 ```sh
+npm run forecast:plan -- stratolink-3 --dry
 npm run forecast:compute -- stratolink-3 --dry
 ```
 
-This requires that device's ingested cube in `WIND_CUBE_DIR` and server database credentials. A failed ingest or incomplete compute fails the job. A fleet with no active devices exits without downloading weather.
+The plan step (`scripts/plan_forecasts.ts`, rules in `lib/wind/forecastPlan.ts`) writes `.windcube/plan.json`, which every ingest script and the compute read: only flying, connected devices whose forecast can still change are built. A balloon whose last fix is older than the dead-reckon cap plus a day, and whose stored forecast already covers that final capped dead-reckon, is skipped with its reason logged; so is one with no fixes and no launch record. The `force` workflow input (or `--force`) overrides the gate for a requested device. Without a fresh plan the scripts fall back to the legacy fleet query.
+
+Each ingest appends what it built to `.windcube/manifest.json`; the compute stamps the member counts into `metadata.members` / `metadata.members_expected` of the stored forecast, and `npm run forecast:summary` renders the GitHub job summary (member counts per source, step durations, skip reasons). The compute requires the device's ingested forecast cube in `WIND_CUBE_DIR` and server database credentials; a device with a single fix has no reconstruction cube. A failed GFS ingest or incomplete compute fails the job. A fleet with nothing to build exits without downloading weather.
 
 Engineering notes for the whole pipeline (cubes, tube ingest, compute, read path, data volumes and timing) live in [`docs/forecast/forecast-architecture.md`](../docs/forecast/forecast-architecture.md). Local iteration tools: `python3 scripts/_run_with_env.py scripts/gfs_ingest.py <device>` builds cubes with `.env.local` loaded, `npm run forecast:local -- <device> [--offline]` runs the compute on local cubes with Blob disabled, `npx tsx scripts/inspect_cube.ts <cube.slwc>` decodes a cube, and `node --env-file=.env.local scripts/blob_cleanup.mjs [--apply]` lists (or, with `--apply`, deletes) stale `cubes/*` and `forecasts/*.lock.json` Blob objects.
 
