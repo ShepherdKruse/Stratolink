@@ -36,7 +36,7 @@
 
 import type { ForecastGpsFix } from './forecastTypes';
 import type { BaroSample } from './pathReconstruction';
-import { cubeCovers, sampleWind, type WindCube } from './windCube';
+import { cubeCovers, sampleWind, sampleWindP, type WindCube } from './windCube';
 
 const CFG = {
     /** Particles per filter (forward and backward each). Pairing makes the
@@ -95,6 +95,19 @@ const CFG = {
     PERTURB_TAU_H: 18,
     /** Floor on the speed multiplier (a 3σ slow draw must not stall or reverse). */
     SPEED_MULT_MIN: 0.2,
+    /** Vertical degree of freedom (multi-level cubes only): each particle
+     *  rides its own pressure, the gap's mean pressure (linear between the two
+     *  fixes' barometer readings, else the cube's float level) plus an AR(1)
+     *  offset that starts at zero at the particle's own fix — the pressure is
+     *  measured there — and relaxes to this stationary σ over PRESSURE_TAU_H.
+     *  Calibrated on stratolink-3's barometer: within a day the float
+     *  pressure scatters by ≈ 1 hPa (the sensor's own noise), across the nine
+     *  days of its 201 h gap it drifted 287–290 → 280–282 hPa, so a few-hPa
+     *  wander over days with ≈ 8 hPa room. The wind is read at the particle's
+     *  pressure (linear between stored levels, clamped to their range), which
+     *  replaces the single-level cube's 2 %/km altitude speed scaling. */
+    PRESSURE_SIGMA_HPA: 8,
+    PRESSURE_TAU_H: 48,
     /** Resampling schedule: a filter is checked for collapse (and resampled)
      *  every ~RESAMPLE_EVERY_HR hours of gap time. */
     RESAMPLE_EVERY_HR: 4,
@@ -102,6 +115,8 @@ const CFG = {
     ALT_NIGHT_M: 9450,
     ALT_SIGMA_M: 250,
     SHORT_GAP_MIN: 30,
+    /** Mirrored by LONG_GAP_H in scripts/gfs_ingest.py, which lays these gaps'
+     *  tube boxes along the forward/backward wind trajectories. */
     LONG_GAP_HR: 6,
     CORRIDOR_NEFF: 40,
     CORRIDOR_MID90_KM: 120,
@@ -150,7 +165,8 @@ const R1 = (x: number) => Math.round(x * 10) / 10;
 const toRad = (d: number) => (d * Math.PI) / 180;
 
 type Fix = ForecastGpsFix & { alt_m: number };
-export type PathPoint = { lat: number; lon: number; alt: number };
+/** One step of a particle path; `p` is its pressure (hPa) on multi-level cubes. */
+export type PathPoint = { lat: number; lon: number; alt: number; p?: number };
 
 export type ReconstructionGapEllipse = {
     frac: number;
@@ -385,6 +401,7 @@ export function joinHalves(
                 lat: (1 - a) * f.lat + a * b.lat,
                 lon: (1 - a) * f.lon + a * b.lon,
                 alt: (1 - a) * f.alt + a * b.alt,
+                ...(f.p != null && b.p != null ? { p: (1 - a) * f.p + a * b.p } : {}),
             };
         }
     }
@@ -565,6 +582,8 @@ export type Particle = {
     speedPert: number;
     /** AR(1) heading offset from the wind direction (degrees). */
     dirOff: number;
+    /** AR(1) pressure offset from the gap's mean pressure (hPa; multi-level cubes). */
+    pOff: number;
     altOffset: number;
     /** Log-weight accumulated since the last resample (tube penalty only). */
     logW: number;
@@ -623,7 +642,14 @@ function runFilter(
     schedule: ResampleSchedule,
     n: number,
     stats: FilterStats,
+    /** Multi-level cubes: the gap's mean pressure at a time fraction (null ⇒
+     *  single level, the wind is read at the cube's level). */
+    meanPressure: ((frac: number) => number) | null,
 ): Particle[] {
+    const pMin = cube.levels ? cube.levels[0] : 0;
+    const pMax = cube.levels ? cube.levels[cube.levels.length - 1] : 0;
+    const pressureAt = (frac: number, off: number) =>
+        Math.max(pMin, Math.min(pMax, meanPressure!(frac) + off));
     const stepSec = (gapHours * 3600) / nSteps;
     const stepMs = stepSec * 1000;
     let particles: Particle[] = [];
@@ -634,10 +660,16 @@ function runFilter(
             /* Seeded from the stationary distribution, like the forecast. */
             speedPert: CFG.SPEED_SIGMA * gauss(),
             dirOff: CFG.DIR_SIGMA_DEG * gauss(),
+            pOff: 0,
             altOffset: CFG.ALT_SIGMA_M * gauss(),
             logW: 0,
             outside: 0,
-            path: [{ lat: from.lat, lon: from.lon, alt: altModel(dir > 0 ? 0 : 1, from.lon) }],
+            path: [{
+                lat: from.lat,
+                lon: from.lon,
+                alt: altModel(dir > 0 ? 0 : 1, from.lon),
+                ...(meanPressure ? { p: pressureAt(dir > 0 ? 0 : 1, 0) } : {}),
+            }],
         });
     }
 
@@ -656,7 +688,16 @@ function runFilter(
 
         for (const p of particles) {
             const alt = altModel(frac, p.lon) + p.altOffset;
-            const altScale = 1 + ((alt - CFG.FLOAT_ALT_M) / 1000) * 0.02;
+            /* Single level: altitude only scales the wind speed (2 %/km). Multi-
+             * level: the particle reads the wind at its own pressure instead. */
+            let pres: number | undefined;
+            let altScale = 1;
+            if (meanPressure) {
+                p.pOff = ar1Step(p.pOff, CFG.PRESSURE_SIGMA_HPA, stepHours, CFG.PRESSURE_TAU_H, gauss());
+                pres = pressureAt(frac, p.pOff);
+            } else {
+                altScale = 1 + ((alt - CFG.FLOAT_ALT_M) / 1000) * 0.02;
+            }
             stats.total += 1;
             if (!cubeCovers(cube, p.lat, p.lon, whenMs)) {
                 p.outside += 1;
@@ -665,7 +706,7 @@ function runFilter(
             }
             p.speedPert = ar1Step(p.speedPert, CFG.SPEED_SIGMA, stepHours, CFG.PERTURB_TAU_H, gauss());
             p.dirOff = ar1Step(p.dirOff, CFG.DIR_SIGMA_DEG, stepHours, CFG.PERTURB_TAU_H, gauss());
-            const { u, v } = sampleWind(cube, p.lat, p.lon, whenMs);
+            const { u, v } = pres != null ? sampleWindP(cube, p.lat, p.lon, whenMs, pres) : sampleWind(cube, p.lat, p.lon, whenMs);
             const k = Math.max(CFG.SPEED_MULT_MIN, 1 + p.speedPert) * altScale;
             const dr = toRad(p.dirOff);
             const cosD = Math.cos(dr);
@@ -675,7 +716,7 @@ function runFilter(
             const cosLat = Math.max(Math.cos(toRad(p.lat)), 0.05);
             p.lat += (dir * vR * stepSec) / 111_320;
             p.lon += (dir * uR * stepSec) / (111_320 * cosLat);
-            p.path.push({ lat: p.lat, lon: p.lon, alt });
+            p.path.push(pres != null ? { lat: p.lat, lon: p.lon, alt, p: pres } : { lat: p.lat, lon: p.lon, alt });
         }
     }
     return particles;
@@ -916,6 +957,13 @@ export async function reconstructLongGap(
     const m = Math.floor(nSteps / 2);                               // meeting step (global index)
     const altModel = buildAltitudeModel(tA, tB, baroSamples, (A.lon + B.lon) / 2);
     const schedule = resampleSchedule(gapHours);
+    /* Multi-level cube: the particles' mean pressure runs linearly between the
+     * two fixes' barometer readings (the cube's float level where a fix has
+     * none). */
+    const multiLevel = !!cube.levels && cube.levels.length >= 2;
+    const pA = A.pressure_hpa ?? cube.levelHpa;
+    const pB = B.pressure_hpa ?? cube.levelHpa;
+    const meanPressure = multiLevel ? (frac: number) => pA + frac * (pB - pA) : null;
 
     const statsF: FilterStats = { total: 0, outside: 0, resamples: 0 };
     const statsB: FilterStats = { total: 0, outside: 0, resamples: 0 };
@@ -925,8 +973,8 @@ export async function reconstructLongGap(
         m - 1,
         nSteps - m - 1,
     ));
-    const fwd = runFilter(A, cube, tA, 1, m + kJoin, nSteps, gapHours, altModel, schedule, nParticles, statsF);
-    const bwd = runFilter(B, cube, tB, -1, nSteps - m + kJoin, nSteps, gapHours, altModel, schedule, nParticles, statsB);
+    const fwd = runFilter(A, cube, tA, 1, m + kJoin, nSteps, gapHours, altModel, schedule, nParticles, statsF, meanPressure);
+    const bwd = runFilter(B, cube, tB, -1, nSteps - m + kJoin, nSteps, gapHours, altModel, schedule, nParticles, statsB, meanPressure);
     const pairs = matchClouds(fwd, bwd, m, nSteps, kJoin);
     const { W, V } = pairs;
 

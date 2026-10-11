@@ -113,17 +113,15 @@ TUBE_SUBSTEP_H = 1.0 / 6.0       # nominal integration sub-step (matches BALLOON
 RECON_TUBE = os.environ.get("RECON_TUBE", "1") != "0"   # RECON_TUBE=0 → legacy static box
 # Half-width (deg) of a slice box from the length of the GPS gap the slice sits
 # in: base + per-hour growth, clamped. Calibrated to the long-gap smoother
-# (lib/wind/pathReconstructionLongGap.ts): its 600 particles carry a 14° heading
-# sigma (+12% speed), so they drift sideways from the fix-to-fix chord at about
-# sin(14°)·|wind| ≈ 0.2°/h in a 25 m/s jet, and low-directness gaps add a heading
-# random walk (55°·(1-directness) per 4 h knot) that the bridge pull
-# (0.55·frac^2.2) only reins in late — so the cloud's lateral extent grows
-# roughly linearly with the gap length. 9° covers gaps ≤ 60 h with margin for the
-# chord-vs-true-path offset; +0.05°/h adds 5° per 100 h (a 200 h gap gets 16°);
-# 20° (≈2200 km at mid-latitudes) caps the box — a particle that far from the
-# chord already carries ~zero weight (its end-miss likelihood exp(-d²/(2·45²)) has
-# vanished), so clamping its winds is harmless. Every sample is checked at compute
-# time (`cubeCovers`) and any that falls outside its slice box is logged.
+# (lib/wind/pathReconstructionLongGap.ts): its particles follow the wind under a
+# bounded AR(1) heading/speed perturbation (12°, 15 %) plus their own pressure,
+# so a cloud spreads around the wind trajectory it is laid along roughly in
+# proportion to the gap length. 9° covers gaps ≤ 60 h; +0.05°/h adds 5° per
+# 100 h (a 200 h gap gets 16°); 20° (≈2200 km at mid-latitudes) caps the box.
+# Long gaps lay their boxes along the forward/backward wind trajectories (see
+# LONG_GAP_H), shorter ones along the chord. Every sample is checked at compute
+# time (`cubeCovers`): the smoother penalises lineages that leave the tube, and
+# the raw / posterior-weighted outside fractions are logged per gap.
 RECON_HALF_BASE_DEG = 6.0
 RECON_HALF_PER_H = 0.05
 RECON_HALF_MIN_DEG = float(os.environ.get("RECON_HALF_MIN_DEG", "9"))
@@ -136,6 +134,37 @@ RECON_HALF_MAX_DEG = float(os.environ.get("RECON_HALF_MAX_DEG", "20"))
 # cube if the cap is raised past what fits.
 RECON_MAX_GRID_PTS = int(os.environ.get("RECON_MAX_GRID_PTS", "26000"))
 GFS_LEVELS = [1000, 975, 950, 925, 900, 850, 800, 700, 600, 500, 400, 300, 250, 200, 150, 100, 70, 50, 30]
+# ── Multi-level reconstruction cube (.slwc v4) ───────────────────────────────
+# The long-gap smoother gives every particle its own pressure (a balloon loses
+# ground by riding a different level's wind, not by flying across the flow), so
+# the reconstruction cube stores the two GFS levels bracketing the float
+# pressure UNBLENDED plus RECON_LEVELS_EACH_SIDE more on each side; the reader
+# rebuilds the float-level grids by the same linear-in-pressure blend the
+# single-level cube used, so every other consumer is unchanged. The 0.25°
+# pgrb2 files also carry 350 and 450 hPa (GFS_LEVELS predates that; it stays
+# as is for the forecast and GEFS cubes), so a ~280 hPa float gets
+# 200/250/300/350. RECON_LEVELS_EACH_SIDE=0 writes the legacy single-level
+# (blended) v3 cube. The inner pair is already fetched for the blend; each
+# extra level adds one more pair of byte-range GRIB fetches per slice.
+RECON_LEVEL_SET = sorted(set(GFS_LEVELS) | {350, 450})
+RECON_LEVELS_EACH_SIDE = int(os.environ.get("RECON_LEVELS_EACH_SIDE", "1"))
+# Long GPS gaps (≥ LONG_GAP_H, mirrors CFG.LONG_GAP_HR in
+# lib/wind/pathReconstructionLongGap.ts) are bridged by a two-filter smoother:
+# a forward particle cloud from fix A meets a backward one from fix B at the
+# gap's midpoint. Their slice boxes follow the clouds — the float-level wind
+# trajectory forward from A until LONG_GAP_JOIN_MARGIN_H past the midpoint,
+# backward from B from that long before it — instead of the time-linear chord:
+# a balloon crosses an ocean in two days and then loiters for four, and the
+# chord tube cut exactly that path off (stratolink-3's 201 h gap left the
+# chord's boxes from hour ~22 to ~135).
+LONG_GAP_H = 6
+LONG_GAP_JOIN_MARGIN_H = 12
+# A long gap whose forward and backward trajectories are this far apart (deg, in
+# lat or lon) at a slice falls back to the chord there: the winds cannot connect
+# its fixes (e.g. a pre-launch gap on the ground, where the float-level winds run
+# a fictitious balloon off in opposite directions), and a box spanning both
+# would coarsen the whole cube's grid for nothing.
+LONG_GAP_MAX_SPREAD_DEG = 30
 BUCKET = "https://noaa-gfs-bdp-pds.s3.amazonaws.com"
 OUTDIR = os.path.join(os.path.dirname(__file__), "..", ".windcube", "cubes")
 TIMEOUT = 30  # per-request; a hung S3 socket should fail fast and retry, not stall
@@ -501,6 +530,19 @@ def bracket_levels(p):
     return lo, hi, w
 
 
+def recon_levels(p, each_side=None):
+    """Pressure levels (hPa, ascending) stored in the multi-level reconstruction
+    cube: the RECON_LEVEL_SET levels bracketing `p` plus `each_side` more on each
+    side (clamped to the set). [] when each_side is 0 (single-level cube)."""
+    each_side = RECON_LEVELS_EACH_SIDE if each_side is None else each_side
+    if each_side <= 0:
+        return []
+    lv = RECON_LEVEL_SET
+    hi = min((x for x in lv if x >= p), default=lv[-1])
+    lo = max((x for x in lv if x <= p), default=lv[0])
+    return lv[max(0, lv.index(lo) - each_side): lv.index(hi) + each_side + 1]
+
+
 _uv_p_cache = {}
 
 
@@ -629,6 +671,47 @@ def cut_box(u, v, clat, clon, half_deg, step, n):
     rows = np.round((90.0 - lats) / dlat).astype(int).clip(0, nlat - 1)
     cols = (np.round((lons % 360.0) / dlon).astype(int)) % nlon
     return float(lats[0]), float(lons[0]), u[np.ix_(rows, cols)].ravel(), v[np.ix_(rows, cols)].ravel()
+
+
+def cut_box_rect(u, v, clat, clon, half_lat, half_lon, step, nlat_box, nlon_box):
+    """`cut_box` for a rectangular box: `nlat_box`×`nlon_box` points at `step`°
+    around (clat, clon) with separate half-extents (multiples of `step`). Same
+    lattice snapping and unwrapped-longitude conventions."""
+    nlat, nlon = u.shape
+    dlat = 180.0 / (nlat - 1); dlon = 360.0 / nlon
+    lat0 = round(clat / dlat) * dlat - half_lat
+    lon0 = round(clon / dlon) * dlon - half_lon
+    assert abs(lat0 / dlat - round(lat0 / dlat)) < 1e-6 and abs(lon0 / dlon - round(lon0 / dlon)) < 1e-6 \
+        and abs(step / dlat - round(step / dlat)) < 1e-6, \
+        f"cut_box_rect: half {half_lat}/{half_lon}°, step {step}° not on the {dlat}° source lattice"
+    lats = lat0 + np.arange(nlat_box) * step
+    lons = lon0 + np.arange(nlon_box) * step
+    rows = np.round((90.0 - lats) / dlat).astype(int).clip(0, nlat - 1)
+    cols = (np.round((lons % 360.0) / dlon).astype(int)) % nlon
+    return float(lats[0]), float(lons[0]), u[np.ix_(rows, cols)].ravel(), v[np.ix_(rows, cols)].ravel()
+
+
+def integrate_positions(times_ms, start_ms, start_lat, start_lon, wind_fn, direction=1):
+    """Unperturbed trajectory from (start_lat, start_lon) at `start_ms`, forward
+    (`direction` 1) or backward through time-reversed winds (−1), sampled at each
+    of `times_ms` on that side of the start (in any order); {t: (lat, lon)}. Same
+    TUBE_SUBSTEP_H Euler steps and unwrapped longitudes as the nominal centers."""
+    want = sorted((t for t in times_ms if (t - start_ms) * direction >= 0), key=lambda t: (t - start_ms) * direction)
+    out = {}
+    lat, lon, t_ms = start_lat, start_lon, start_ms
+    dt_ms = TUBE_SUBSTEP_H * 3600 * 1000
+    k = 0
+    while k < len(want):
+        while k < len(want) and (want[k] - t_ms) * direction <= 1:
+            out[want[k]] = (lat, lon); k += 1
+        if k >= len(want):
+            break
+        u, v = wind_fn(lat, lon, t_ms)
+        coslat = max(np.cos(np.radians(lat)), 0.05)
+        lat += direction * v * dt_ms / 1000 / 111_320
+        lon += direction * u * dt_ms / 1000 / (111_320 * coslat)
+        t_ms += direction * dt_ms
+    return out
 
 
 def integrate_nominal_centers(slice_ms, start_ms, start_lat, start_lon, wind_fn,
@@ -830,12 +913,137 @@ def recon_half_deg(gap_h):
     return min(RECON_HALF_MAX_DEG, max(RECON_HALF_MIN_DEG, RECON_HALF_BASE_DEG + RECON_HALF_PER_H * gap_h))
 
 
+def recon_slice_covers(fixes_ms, slice_ms, step_ms, wind_fn):
+    """Per reconstruction slice, the (lat, lon) points its box must cover. A
+    slice is read by every bridge whose gap touches (t − step, t + step). A gap
+    shorter than LONG_GAP_H contributes the chord (interp_track); a long gap
+    contributes where the smoother's clouds actually are: the unperturbed
+    float-level trajectory FORWARD from its first fix (slices up to
+    LONG_GAP_JOIN_MARGIN_H past the midpoint) and BACKWARD from its second fix
+    (slices from that long before the midpoint), so the boxes follow the winds
+    rather than the time-linear chord. Slices no gap touches (the lead-in and
+    trailing ones) cover the chord. `fixes_ms` = [(t_ms, lat, lon_unwrapped)];
+    `wind_fn(lat, lon, t_ms) -> (u, v)`."""
+    chord = [interp_track(fixes_ms, t) for t in slice_ms]
+    covers = [[] for _ in slice_ms]
+    margin = LONG_GAP_JOIN_MARGIN_H * 3.6e6
+    for (ta, la, loa), (tb, lb, lob) in zip(fixes_ms, fixes_ms[1:]):
+        idx = [k for k, t in enumerate(slice_ms) if tb > t - step_ms and ta < t + step_ms]
+        if not idx:
+            continue
+        if (tb - ta) / 3.6e6 < LONG_GAP_H:
+            for k in idx:
+                covers[k].append(chord[k])
+            continue
+        tm = (ta + tb) / 2
+        fwd = integrate_positions([slice_ms[k] for k in idx if slice_ms[k] <= tm + margin], ta, la, loa, wind_fn, 1)
+        bwd = integrate_positions([slice_ms[k] for k in idx if slice_ms[k] >= tm - margin], tb, lb, lob, wind_fn, -1)
+        for k in idx:
+            t = slice_ms[k]
+            pts = []
+            if t <= tm + margin:
+                pts.append(fwd.get(t, (la, loa)))                # slices before A sit at A
+            if t >= tm - margin:
+                pts.append(bwd.get(t, (lb, lob)))                # slices after B sit at B
+            if (max(p[0] for p in pts) - min(p[0] for p in pts) > LONG_GAP_MAX_SPREAD_DEG
+                    or max(p[1] for p in pts) - min(p[1] for p in pts) > LONG_GAP_MAX_SPREAD_DEG):
+                pts = [chord[k]]
+            covers[k].extend(pts)
+    for k in range(len(slice_ms)):
+        if not covers[k]:
+            covers[k].append(chord[k])
+    return covers
+
+
+def cover_boxes(covers, halves, step):
+    """Rectangular slice boxes: the bounding box of each slice's cover points
+    padded by its half-width, half-extents snapped UP to multiples of `step` so
+    origins stay on the source lattice. Returns [(clat, clon, half_lat, half_lon)]."""
+    boxes = []
+    for pts, h in zip(covers, halves):
+        lats = [p[0] for p in pts]; lons = [p[1] for p in pts]
+        hl = (max(lats) - min(lats)) / 2 + h
+        ho = (max(lons) - min(lons)) / 2 + h
+        boxes.append(((max(lats) + min(lats)) / 2, (max(lons) + min(lons)) / 2,
+                      math.ceil(hl / step - 1e-9) * step, math.ceil(ho / step - 1e-9) * step))
+    return boxes
+
+
+def _evict_fields(keys, levels):
+    """Drop the whole-globe fields of the (cycle, fhr) `keys` from both caches."""
+    for cyc, fhr in keys:
+        for L in levels:
+            _uv_cache.pop((cyc, fhr, L), None)
+        for key in [k for k in _uv_cache if k[0] == cyc and k[1] == fhr]:
+            del _uv_cache[key]
+        for key in [k for k in _uv_p_cache if k[0] == cyc and k[1] == fhr]:
+            del _uv_p_cache[key]
+
+
+def sample_tube_rect(boxes, step, slice_ms, levels, target_p, latest, now, tag=""):
+    """Cut one rectangular box per slice (see cover_boxes). With `levels` the
+    box is cut from each listed GFS level UNBLENDED (multi-level cube, v4);
+    without, from the field interpolated to `target_p` (single-level, v3).
+    Slices are cut in time-ordered chunks with parallel fetches, and each
+    chunk's whole-globe fields are evicted once no later slice needs them, so
+    the extra levels don't multiply the ingest's peak memory."""
+    keys = [pick_source(datetime.fromtimestamp(ms / 1000, timezone.utc), latest) for ms in slice_ms]
+
+    def cut(k):
+        clat, clon, hl, ho = boxes[k]
+        nla = int(round(2 * hl / step)) + 1
+        nlo = int(round(2 * ho / step)) + 1
+        cyc, fhr = keys[k]
+        g = {"dLat": step, "nLat": nla, "dLon": step, "nLon": nlo}
+        if levels:
+            g["levels"] = []
+            for L in levels:
+                f = fetch_uv(cyc, fhr, L)
+                lat0, lon0, U, V = cut_box_rect(f["u"], f["v"], clat, clon, hl, ho, step, nla, nlo)
+                g["levels"].append((U, V))
+        else:
+            f = fetch_uv_p(cyc, fhr, target_p)
+            lat0, lon0, U, V = cut_box_rect(f["u"], f["v"], clat, clon, hl, ho, step, nla, nlo)
+            g["U"], g["V"] = U, V
+        g["lat0"], g["lon0"] = lat0, lon0
+        return g
+
+    grids = [None] * len(slice_ms)
+    chunk = 24
+    for c0 in range(0, len(slice_ms), chunk):
+        ks = list(range(c0, min(len(slice_ms), c0 + chunk)))
+        with ThreadPoolExecutor(max_workers=8) as ex:
+            for k, g in zip(ks, ex.map(cut, ks)):
+                grids[k] = g
+        later = set(keys[c0 + chunk:])
+        _evict_fields({keys[k] for k in ks} - later, levels)
+        if tag:
+            print(f"      {tag}: {ks[-1] + 1}/{len(slice_ms)} slices", flush=True)
+    uminLat = min(g["lat0"] for g in grids); umaxLat = max(g["lat0"] + (g["nLat"] - 1) * step for g in grids)
+    uminLon = min(g["lon0"] for g in grids); umaxLon = max(g["lon0"] + (g["nLon"] - 1) * step for g in grids)
+    cube = {
+        "source": "gfs", "generated_at": now.isoformat(), "latest_cycle_utc": latest.isoformat(),
+        "levelHpa": round(target_p, 1), "gridStep": step,
+        "t0Ms": slice_ms[0], "stepMs": int(slice_ms[1] - slice_ms[0]) if len(slice_ms) > 1 else RECON_STEP_H * 3600 * 1000,
+        "bounds": {"latMin": uminLat, "latMax": umaxLat, "lonMin": uminLon, "lonMax": umaxLon},
+        "grids": grids,
+        "centers": [(b[0], b[1]) for b in boxes],
+    }
+    if levels:
+        cube["levels"] = list(levels)
+    return cube, max(g["nLat"] for g in grids), max(g["nLon"] for g in grids)
+
+
 def build_tube_recon(device, fixes, target_p, latest, now):
     """Reconstruction cube as a trajectory-following tube: one RECON_STEP_H slice
     from one step before the first fix to two past the last, each a box at the
-    native resolution centered on the observed track (interp_track of the fixes,
-    longitudes unwrapped), half-width from the local gap length (recon_half_deg).
-    Reuses the forecast tube's machinery (prefetch_fields / build_tube_grids)."""
+    native resolution laid along where the bridges will look — the observed
+    track's chord for short and medium gaps, the forward/backward wind
+    trajectories for long ones (recon_slice_covers) — padded by a half-width
+    from the local gap length (recon_half_deg). With RECON_LEVELS_EACH_SIDE > 0
+    every box holds several pressure levels around the float (recon_levels,
+    .slwc v4); otherwise the single blended float level (v3)."""
+    t_start = time.time()
     first_fix = tparse(fixes[0]["t"])
     last_fix = tparse(fixes[-1]["t"])
     step_ms = RECON_STEP_H * 3600 * 1000
@@ -847,17 +1055,45 @@ def build_tube_recon(device, fixes, target_p, latest, now):
 
     lons = unwrap_lons([f["lon"] for f in fixes])
     fixes_ms = [(int(tparse(f["t"]).timestamp() * 1000), f["lat"], lo) for f, lo in zip(fixes, lons)]
-    centers = [interp_track(fixes_ms, t) for t in slice_ms]
     halves = [recon_half_deg(gap_hours_at(fixes_ms, t, step_ms)) for t in slice_ms]
-    hmax = max(halves)
-    step = choose_grid_step({"latMin": 0, "latMax": 2 * hmax, "lonMin": 0, "lonMax": 2 * hmax},
+    prefetch_fields(slice_ms, target_p, latest)          # parallel cache warm-up (float level)
+    t_fetched = time.time()
+
+    def wind_fn(lat, lon, t_ms):
+        # Linear in time between the two bracketing (prefetched) slices, as the
+        # compute reads the cube — NOT pick_source at the sub-step's own instant,
+        # which would ask for hourly forecast hours the 3-hourly prefetch never
+        # fetched and download them one by one.
+        f = min(max((t_ms - slice_ms[0]) / step_ms, 0.0), len(slice_ms) - 1.0)
+        k0 = min(int(f), len(slice_ms) - 2) if len(slice_ms) > 1 else 0
+        w = f - k0
+        out = []
+        for k in ((k0, k0 + 1) if len(slice_ms) > 1 else (k0,)):
+            cyc, fhr = pick_source(datetime.fromtimestamp(slice_ms[k] / 1000, timezone.utc), latest)
+            out.append(sample_global(fetch_uv_p(cyc, fhr, target_p), lat, lon))
+        if len(out) == 1:
+            return out[0]
+        return out[0][0] * (1 - w) + out[1][0] * w, out[0][1] * (1 - w) + out[1][1] * w
+    covers = recon_slice_covers(fixes_ms, slice_ms, step_ms, wind_fn)
+    t_covered = time.time()
+    # Grid step from the largest box (unsnapped extents; resolution is bounded by size only).
+    span = max(((max(p[0] for p in c) - min(p[0] for p in c) + 2 * h) * (max(p[1] for p in c) - min(p[1] for p in c) + 2 * h), c, h)
+               for c, h in zip(covers, halves))
+    big_c, big_h = span[1], span[2]
+    step = choose_grid_step({"latMin": min(p[0] for p in big_c) - big_h, "latMax": max(p[0] for p in big_c) + big_h,
+                             "lonMin": min(p[1] for p in big_c) - big_h, "lonMax": max(p[1] for p in big_c) + big_h},
                             max_pts=RECON_MAX_GRID_PTS)
+    boxes = cover_boxes(covers, halves, step)
+    levels = recon_levels(target_p)
     longest = max(((b[0] - a[0]) / 3.6e6 for a, b in zip(fixes_ms, fixes_ms[1:])), default=0.0)
-    print(f"    recon tube: {n_slices} slices @ {step}° half {min(halves):.0f}–{hmax:.1f}° "
-          f"(longest gap {longest:.0f}h), {start:%Y-%m-%dT%H}Z → {end:%Y-%m-%dT%H}Z", flush=True)
-    prefetch_fields(slice_ms, target_p, latest)          # parallel cache warm-up
-    recon, rla, rlo = sample_tube(centers, halves, step, slice_ms, target_p, latest, now, "recon")
+    print(f"    recon tube: {n_slices} slices @ {step}° half {min(halves):.0f}–{max(halves):.1f}°, "
+          f"largest box {2 * max(b[2] for b in boxes):.0f}×{2 * max(b[3] for b in boxes):.0f}° "
+          f"(longest gap {longest:.0f}h), levels {levels or [round(target_p, 1)]} hPa, "
+          f"{start:%Y-%m-%dT%H}Z → {end:%Y-%m-%dT%H}Z", flush=True)
+    recon, rla, rlo = sample_tube_rect(boxes, step, slice_ms, levels, target_p, latest, now, "recon")
     write_cube(device, "", recon, rla, rlo, "recon")
+    print(f"    recon: built in {time.time() - t_start:.0f} s (float-level prefetch {t_fetched - t_start:.0f} s, "
+          f"wind-following covers {t_covered - t_fetched:.0f} s, boxes {time.time() - t_covered:.0f} s)", flush=True)
 
 
 SCALE = 10  # store winds as int16 = round(value*SCALE); lossless vs the old 0.1 rounding
@@ -875,12 +1111,16 @@ def pack_cube(cube):
     # tube whose slice boxes differ in SIZE (the reconstruction tube widens inside
     # long gaps) is v3: it also carries per-slice dims, since the reader walks the
     # payload by each grid's point count.
+    # A multi-level cube (grids carry "levels" = [(U, V) per level], header
+    # `levels` in hPa, ascending) is v4: v3's per-slice origins + dims, and per
+    # grid the int16 U then V of each level in turn.
     origins = [(g["lat0"], g["lon0"]) for g in grids]
     dims = [(g["nLat"], g["nLon"]) for g in grids]
-    dims_vary = any(d != dims[0] for d in dims)
+    levels = cube.get("levels") or []
+    dims_vary = bool(levels) or any(d != dims[0] for d in dims)
     is_tube = dims_vary or any(o != origins[0] for o in origins)
     header = {
-        "v": 3 if dims_vary else (2 if is_tube else 1), "scale": SCALE,
+        "v": 4 if levels else (3 if dims_vary else (2 if is_tube else 1)), "scale": SCALE,
         "source": cube.get("source", "gfs"),
         "generated_at": cube.get("generated_at"),
         "latest_cycle_utc": cube.get("latest_cycle_utc"),
@@ -894,6 +1134,8 @@ def pack_cube(cube):
         header["origins"] = [[round(la, 4), round(lo, 4)] for la, lo in origins]
     if dims_vary:
         header["dims"] = [[a, b] for a, b in dims]
+    if levels:
+        header["levels"] = [int(L) if float(L).is_integer() else L for L in levels]
     # True trajectory metadata (optional, tube-only; [lat, lon], lon UNWRAPPED like
     # origins). Old readers ignore unknown header keys, so v stays 2.
     if is_tube and cube.get("centers"):
@@ -907,9 +1149,10 @@ def pack_cube(cube):
     hb += b" " * ((-(4 + len(hb))) % 4)            # pad so the payload starts 4-byte aligned
     parts = [struct.pack("<I", len(hb)), hb]
     for g in cube["grids"]:
-        for comp in ("U", "V"):
-            a = np.asarray(g[comp], dtype=np.float64)
-            parts.append(np.clip(np.round(a * SCALE), -32000, 32000).astype("<i2").tobytes())
+        for U, V in (g["levels"] if levels else [(g["U"], g["V"])]):
+            for a in (U, V):
+                a = np.asarray(a, dtype=np.float64)
+                parts.append(np.clip(np.round(a * SCALE), -32000, 32000).astype("<i2").tobytes())
     return b"".join(parts)
 
 
@@ -918,7 +1161,8 @@ def write_cube(device, suffix, cube, nlat, nlon, tag):
     out = os.path.join(OUTDIR, f"{device}{suffix}.slwc")
     with open(out, "wb") as f:
         f.write(pack_cube(cube))
-    print(f"    {tag}: {len(cube['grids'])} grids {nlat}x{nlon} @ {cube['gridStep']}° "
+    nlev = len(cube.get("levels") or [None])
+    print(f"    {tag}: {len(cube['grids'])} grids ≤{nlat}x{nlon} × {nlev} level(s) @ {cube['gridStep']}° "
           f"({cube['stepMs']//3600000}h step) -> {os.path.getsize(out)//1024} KB (.slwc)", flush=True)
 
 

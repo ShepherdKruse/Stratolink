@@ -6,6 +6,12 @@ import type { MonteCarloForecastInput } from '@/lib/wind/forecastTypes';
 
 const TELEMETRY_COLUMNS = 'time, lat, lon, altitude_m, pressure';
 
+/** A telemetry pressure that is a plausible float reading (80–400 hPa, the band
+ *  scripts/gfs_ingest.py `float_pressure` uses), else undefined. */
+function floatPressure(p: unknown): number | undefined {
+    return typeof p === 'number' && p >= 80 && p <= 400 ? p : undefined;
+}
+
 export type DeviceRow = {
     device_id: string;
     launcher_name: string | null;
@@ -93,6 +99,7 @@ export async function buildForecastInputForDevice(
             lon: r.lon as number,
             t: r.time as string,
             alt_m: (r.altitude_m as number | null) ?? undefined,
+            pressure_hpa: floatPressure(r.pressure),
         }));
 
     if (observedTrack.length < 1) {
@@ -107,6 +114,7 @@ export async function buildForecastInputForDevice(
             lon: device.launch_lon as number,
             t: new Date(launchMs as number).toISOString(),
             alt_m: undefined,
+            pressure_hpa: undefined,
         }];
     }
 
@@ -148,6 +156,7 @@ export async function buildForecastInputForDevice(
             lon: p.lon,
             time_utc: p.t,
             alt_m: p.alt_m,
+            ...(p.pressure_hpa != null ? { pressure_hpa: p.pressure_hpa } : {}),
         })),
         observedTrackLonLat: observedTrack.map((p) => [p.lon, p.lat] as [number, number]),
         driftSegmentLonLat: driftSegment,

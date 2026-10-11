@@ -69,13 +69,17 @@ type WindCube = {
   bounds, gridStep, levelHpa;
   source, generatedAt; // 'gfs' | 'gefs' | ... + ingest run time
   isTube?, centers?, track?;   // v2 tube metadata (below)
+  levels?, levelGrids?;        // v4 multi-level reconstruction cube (below)
 };
 ```
 
 `sampleWind(cube, lat, lon, whenMs)` is bilinear in space and linear in time
 between the two bracketing grids. **Every** trajectory (dead-reckon, forecast,
 each ensemble member, every reconstruction gap bridge) samples one cube, so they
-share one continuous, evolving wind field with no seams.
+share one continuous, evolving wind field with no seams. On a multi-level cube
+`sampleWindP(cube, lat, lon, whenMs, pHpa)` also interpolates linearly in
+pressure between the stored levels (clamped to their range); on a single-level
+cube it is `sampleWind`.
 
 **On-disk format (`.slwc`, packed binary).** Cubes are stored as
 `[uint32 LE headerLen][header JSON, 4-byte aligned][per grid: int16 U then V]`.
@@ -85,13 +89,19 @@ and decoded to `Float32Array` via a typed-array view (`cubeFromBinary`) with
 ~zero parse cost. This is what keeps a 31-member ensemble tractable. Readers
 try `.slwc(.gz)` before legacy `.json(.gz)`.
 
-**Two header versions.** `v1` (static box) stores one geometry in the header,
+**Header versions.** `v1` (static box) stores one geometry in the header,
 shared by every grid. `v2` (**trajectory "tube"**) keeps the cell size + dims
 shared but gives each time-slice its own origin in `origins[[lat0,lon0],…]`, so
 the box can follow the balloon across time. Optional `centers` (true per-slice
 trajectory centers, unsnapped) and `track` (the hourly pre-integrated walk) let
 the compute read a member's exact path instead of re-integrating it. The int16
-payload layout is identical; `cubeFromBinary` reads both.
+payload layout is identical; `cubeFromBinary` reads both. `v3` adds per-slice
+`dims[[nLat,nLon],…]` (rectangular boxes whose size varies by slice — the
+reconstruction tube). `v4` (the reconstruction cube) adds `levels` (hPa,
+ascending): each grid's payload holds U then V for every level in turn, and the
+reader rebuilds `grids` at `levelHpa` from the two bracketing levels (the same
+linear-in-pressure blend the single-level ingest applies), so every
+single-level consumer reads a v4 cube unchanged. All versions still read.
 
 ### Trajectory-following "tube" cubes (forecast + members)
 
@@ -128,8 +138,9 @@ and a long drift was advected by a frozen edge wind for most of its length (it
 | | **forecast** `{device}-fc` | **reconstruction** `{device}` |
 |---|---|---|
 | Drives | forward forecast, parametric ensemble fallback, origin | historical track only |
-| Box | tube along the nominal path (recent track + dead-reckon + horizon) | full mission (launch → now), continent-wide static box |
-| Grid | 0.25° GFS native inside the tube | `choose_grid_step` under `MAX_GRID_PTS=8000` (≈1° for a long mission) |
+| Box | tube along the nominal path (recent track + dead-reckon + horizon) | tube over the full mission: the fix chord for short/medium gaps, the forward/backward float-level wind trajectories for long (≥ 6 h) gaps |
+| Grid | 0.25° GFS native inside the tube | 0.25° under `RECON_MAX_GRID_PTS` (largest box decides) |
+| Levels | float pressure (blended) | float ± bracketing GFS levels, unblended (e.g. 200/250/300/350 hPa; `RECON_LEVELS_EACH_SIDE`) |
 | Time step | **hourly** | **3-hourly** |
 
 `fetchWindCube({ deviceId, kind })` reads the right one; the `forecast` read falls
@@ -152,8 +163,11 @@ GRIB2 complex packing needs eccodes from conda-forge). Per run:
    pressure** (`float_pressure()` = robust median of recent float-band
    telemetry). NOAA only publishes standard isobars, so `fetch_uv_p()` fetches the
    two bracketing levels and blends them linearly in pressure
-   (`bracket_levels()`). The cube stays single-level; `levelHpa` records the
-   target.
+   (`bracket_levels()`). The forecast cube stays single-level; `levelHpa`
+   records the target. The reconstruction cube stores the bracketing levels
+   unblended plus one more each side (`recon_levels()`, from `RECON_LEVEL_SET` =
+   `GFS_LEVELS` ∪ {350, 450}, which the 0.25° files also carry) so the long-gap
+   smoother can give each particle its own pressure.
 3. **Cycle + source selection**: `latest_cycle()` walks back from the current
    6-hourly cycle until a cycle's `f000` index exists on S3. `pick_source(t,
    latest)` returns the forecast hour giving the wind *valid at* `t`: future
@@ -164,9 +178,18 @@ GRIB2 complex packing needs eccodes from conda-forge). Per run:
 4. **Fetch**: byte-range GETs from `noaa-gfs-bdp-pds` (`pgrb2.0p25`) using each
    message's `.idx` offsets, UGRD+VGRD only, cached by `(cycle, fhr, level)`.
    `http_get` retries with backoff; `TIMEOUT=30s`.
-5. **Box / tube**: the reconstruction cube uses `bounds_for_forecast` (bbox of
-   the fixes ± pad, capped `PAD_CAP_DEG`); the forecast cube is a tube laid along a
-   pre-integrated nominal path (§2). Pad velocity comes from the most recent
+5. **Box / tube**: the forecast cube is a tube laid along a pre-integrated
+   nominal path (§2). The reconstruction cube is a 3-hourly tube
+   (`build_tube_recon`): slices touched only by short/medium gaps are centred on
+   the fix chord; slices inside a long gap (≥ `LONG_GAP_H` = 6 h) cover the
+   unperturbed float-level wind trajectory forward from its first fix (until
+   12 h past the midpoint) and backward from its second fix (from 12 h before
+   it), where the smoother's two clouds actually are (`recon_slice_covers`).
+   A balloon can cross an ocean in two days and then loiter for four, and the
+   old chord tube cut exactly that path off (stratolink-3's 201 h gap left it
+   from hour ~22 to ~135). Where the two trajectories are > 30° apart (winds
+   that cannot connect the fixes, e.g. a pre-launch ground gap) the slice falls
+   back to the chord. Half-width `recon_half_deg` (9–20° by gap length). Pad velocity comes from the most recent
    **non-frozen, short-dt** fix pair (this fleet's GPS re-sends identical fixes,
    see the `stratolink-frozen-gps` memory note).
 6. **Write** both cubes as packed binary `.slwc` into `.windcube/cubes/`
@@ -234,7 +257,12 @@ or any failed compute, fails the job.
    before "now".
 6. **Reconstruction**: `resolveReconstruction` → `computePathReconstruction`
    bridges every historical GPS gap by sampling `reconCube` (short gaps = line,
-   medium = shooting/particle smoother, long = corridor smoother). Per-gap and
+   medium = pooled particle clouds, long = two-filter smoother in
+   `pathReconstructionLongGap.ts`). Long-gap particles follow the cube wind
+   under the forecast's bounded AR(1) heading/speed perturbation (12°, 15 %,
+   τ 18 h) and, on a multi-level cube, their own pressure (AR(1) σ 8 hPa, τ 48 h,
+   anchored to the fixes' barometer readings); a gap the winds cannot connect is
+   flagged `unexplained` (corridor, low confidence). Per-gap and
    whole-mission caches live in Blob (`hindcasts/{device}*`), keyed by the fixes
    and `ALGO_VERSION` (see §6).
 7. **Output**: `nominal_path` (forecast leg only), `ensemble`, one horizon

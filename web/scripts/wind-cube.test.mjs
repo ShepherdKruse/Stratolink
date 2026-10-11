@@ -2,6 +2,8 @@
  * Wind-cube decode + coverage semantics, against a hand-packed .slwc so the test
  * needs no NOAA, no numpy and no network:
  *   - v3 tube header (`dims`): per-slice box sizes decode and sample correctly
+ *   - v4 multi-level tube (`levels`): per-level payload, the float level
+ *     rebuilt by the linear-in-pressure blend, `sampleWindP` between levels
  *   - `cubeCovers` tests the bracketing slice boxes, not the tube's union bounds
  *   - `integrateBalloonPathT` stops where a path leaves its slice box
  */
@@ -10,7 +12,7 @@ import test from 'node:test';
 import { mkdtempSync, rmSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
-import { bracketSlices, cubeCovers, fetchWindCube, sampleWind } from '../lib/wind/windCube.ts';
+import { bracketSlices, cubeCovers, fetchWindCube, levelBracket, sampleWind, sampleWindP } from '../lib/wind/windCube.ts';
 import { integrateBalloonPathT } from '../lib/wind/balloonIntegrate.ts';
 
 const HOUR = 3_600_000;
@@ -24,10 +26,13 @@ function packCube(header, grids, scale = 10) {
     head.writeUInt32LE(hb.length + pad, 0);
     const parts = [head, hb, Buffer.alloc(pad, 0x20)];
     for (const g of grids) {
-        for (const comp of ['U', 'V']) {
-            const buf = Buffer.alloc(g[comp].length * 2);
-            g[comp].forEach((x, i) => buf.writeInt16LE(Math.round(x * scale), i * 2));
-            parts.push(buf);
+        /* v4: one U, V pair per level, in header `levels` order. */
+        for (const lv of g.levels ?? [g]) {
+            for (const comp of ['U', 'V']) {
+                const buf = Buffer.alloc(lv[comp].length * 2);
+                lv[comp].forEach((x, i) => buf.writeInt16LE(Math.round(x * scale), i * 2));
+                parts.push(buf);
+            }
         }
     }
     return Buffer.concat(parts);
@@ -79,6 +84,84 @@ test('v3 tube: per-slice dims decode and sample at the right offsets', async () 
         assert.equal(sampleWind(cube, 12, 12, HOUR / 2).u, 15);
         assert.deepEqual(bracketSlices(cube, 1.5 * HOUR), { h0: 1, h1: 2, f: 0.5 });
         assert.deepEqual(bracketSlices(cube, 9 * HOUR), { h0: 1, h1: 2, f: 1 });
+    } finally {
+        rmSync(dir, { recursive: true });
+    }
+});
+
+/* v4: the same three-slice tube with four levels (200/250/300/350 hPa). Level
+ * k of slice g carries u = 10·(g + 1) + k, v = −k, so time, level and the
+ * float-level blend are all checkable. Slice 1's box is rectangular (5×9). */
+const LEVELS = [200, 250, 300, 350];
+function levelBox(lat0, lon0, nLat, nLon, g) {
+    const n = nLat * nLon;
+    return {
+        lat0, lon0, nLat, nLon,
+        levels: LEVELS.map((_, k) => ({ U: new Array(n).fill(10 * (g + 1) + k), V: new Array(n).fill(-k) })),
+    };
+}
+const V4_GRIDS = [levelBox(10, 10, 5, 5, 0), levelBox(10, 8, 5, 9, 1), levelBox(12, 12, 5, 5, 2)];
+const V4_HEADER = {
+    ...TUBE_HEADER, v: 4, levelHpa: 280.8, levels: LEVELS,
+    origins: [[10, 10], [10, 8], [12, 12]],
+    dims: [[5, 5], [5, 9], [5, 5]],
+};
+
+test('v4 multi-level tube: levels decode in order, the float level is the bracketing blend, sampleWindP interpolates', async () => {
+    const dir = mkdtempSync(join(tmpdir(), 'stratolink-cube-'));
+    try {
+        writeCube(dir, 'dev', V4_HEADER, V4_GRIDS);
+        const cube = await loadCube(dir, 'dev');
+        assert.deepEqual(cube.levels, LEVELS);
+        assert.equal(cube.levelGrids.length, 3);
+        assert.deepEqual(cube.grids.map((g) => [g.nLat, g.nLon]), [[5, 5], [5, 9], [5, 5]]);
+        /* Every level of every slice landed at its own payload offset. */
+        for (let g = 0; g < 3; g++) {
+            for (let k = 0; k < 4; k++) {
+                assert.equal(cube.levelGrids[g][k].U[0], 10 * (g + 1) + k);
+                assert.equal(cube.levelGrids[g][k].V[3] + 0, -k + 0);
+            }
+        }
+        /* The float level (280.8 hPa) is 250↔300 blended linearly in pressure:
+         * w = (280.8 − 250)/50 = 0.616 toward 300 hPa → u = 10 + 1.616 at slice 0. */
+        const w = (280.8 - 250) / 50;
+        assert.ok(Math.abs(sampleWind(cube, 12, 12, 0).u - (11 + w)) < 1e-5);
+        assert.ok(Math.abs(sampleWind(cube, 12, 12, 0).v - -(1 + w)) < 1e-5);
+        /* sampleWindP at the float level reproduces sampleWind, in time too. */
+        for (const t of [0, HOUR / 2, 1.5 * HOUR]) {
+            const a = sampleWind(cube, 12, 12, t);
+            const b = sampleWindP(cube, 12, 12, t, 280.8);
+            assert.ok(Math.abs(a.u - b.u) < 1e-5 && Math.abs(a.v - b.v) < 1e-5, `t ${t}`);
+        }
+        /* At stored levels, between them, and clamped beyond the range. */
+        assert.equal(sampleWindP(cube, 12, 12, 0, 200).u, 10);
+        assert.equal(sampleWindP(cube, 12, 12, 0, 350).u, 13);
+        assert.ok(Math.abs(sampleWindP(cube, 12, 12, 0, 325).u - 12.5) < 1e-9);
+        assert.equal(sampleWindP(cube, 12, 12, 0, 150).u, 10);
+        assert.equal(sampleWindP(cube, 12, 12, 0, 500).u, 13);
+        /* Time and pressure together: halfway to slice 1 (u 20..23), at 275 hPa. */
+        assert.ok(Math.abs(sampleWindP(cube, 12, 12, HOUR / 2, 275).u - (0.5 * 11.5 + 0.5 * 21.5)) < 1e-9);
+        /* Coverage is unchanged: the rectangular slice 1 box spans lon 8..16, lat 10..14. */
+        assert.equal(cubeCovers(cube, 13, 15, HOUR), true);
+        assert.equal(cubeCovers(cube, 9, 12, HOUR), false);
+    } finally {
+        rmSync(dir, { recursive: true });
+    }
+});
+
+test('levelBracket: linear in pressure, clamped, and a single level ignores pressure', async () => {
+    assert.deepEqual(levelBracket([200, 250, 300, 350], 280.8), { k0: 1, k1: 2, w: (280.8 - 250) / 50 });
+    assert.deepEqual(levelBracket([200, 250, 300, 350], 250), { k0: 0, k1: 1, w: 1 });
+    assert.deepEqual(levelBracket([200, 250, 300, 350], 100), { k0: 0, k1: 0, w: 0 });
+    assert.deepEqual(levelBracket([200, 250, 300, 350], 400), { k0: 3, k1: 3, w: 0 });
+    assert.deepEqual(levelBracket([300], 280), { k0: 0, k1: 0, w: 0 });
+    /* A single-level cube reads its one level whatever the pressure. */
+    const dir = mkdtempSync(join(tmpdir(), 'stratolink-cube-'));
+    try {
+        writeCube(dir, 'dev', TUBE_HEADER, TUBE_GRIDS);
+        const cube = await loadCube(dir, 'dev');
+        assert.equal(cube.levels, undefined);
+        assert.deepEqual(sampleWindP(cube, 12, 12, HOUR, 200), sampleWind(cube, 12, 12, HOUR));
     } finally {
         rmSync(dir, { recursive: true });
     }

@@ -5,7 +5,8 @@
  *   - the AR(1) perturbation: stationary amplitude and exp(−lag/τ) memory
  *   - end to end on an in-memory uniform-wind cube: a straight, pinned,
  *     well-populated bridge, the tube penalty keeping the posterior inside,
- *     and a gap the winds cannot connect reported as unexplained
+ *     a gap the winds cannot connect reported as unexplained, and on a
+ *     two-level cube particles that ride the wind at their own pressure
  * No NOAA, no numpy, no network.
  */
 import assert from 'node:assert/strict';
@@ -55,7 +56,7 @@ test('effectiveSampleSize: (Σw)²/Σw²', () => {
 });
 
 function particle(logW, lat = 0) {
-    return { lat, lon: 0, speedPert: 0, dirOff: 0, altOffset: 0, logW, outside: 0, path: [{ lat, lon: 0, alt: 0 }] };
+    return { lat, lon: 0, speedPert: 0, dirOff: 0, pOff: 0, altOffset: 0, logW, outside: 0, path: [{ lat, lon: 0, alt: 0 }] };
 }
 
 test('resampleIfCollapsed: healthy weights are left alone (same array, same objects)', () => {
@@ -180,6 +181,20 @@ function uniformCube(u, v, hours, { lat0 = -10, lon0 = -10, n = 61, latMax = nul
     };
 }
 
+/** The same box with two pressure levels (250 / 300 hPa) of uniform eastward
+ *  wind, shaped like a decoded v4 cube: `levelGrids` per slice plus the float
+ *  level (`levelHpa`) in `grids`. */
+function twoLevelCube(u250, u300, hours, levelHpa = 280) {
+    const base = uniformCube(0, 0, hours);
+    const grid = (u) => ({ ...base.grids[0], U: new Float32Array(base.grids[0].U.length).fill(u), V: new Float32Array(base.grids[0].U.length) });
+    const w = (levelHpa - 250) / 50;
+    return {
+        ...base, levelHpa, levels: [250, 300],
+        levelGrids: base.grids.map(() => [grid(u250), grid(u300)]),
+        grids: base.grids.map(() => grid(u250 * (1 - w) + u300 * w)),
+    };
+}
+
 function fixes(hours, u, lat = 10, lon = 10) {
     const A = { lat, lon, alt_m: 9500, time_utc: new Date(0).toISOString() };
     const dLon = (u * hours * 3600) / (111_320 * Math.cos((lat * Math.PI) / 180));
@@ -283,6 +298,29 @@ test('reconstructLongGap: a fix the winds cannot reach is reported unexplained, 
     const ok = fixes(12, u);
     const r2 = await reconstructLongGap(ok.A, ok.B, [], uniformCube(u, 0, 12));
     assert.equal(r2.unexplained, false);
+});
+
+test('reconstructLongGap: on a multi-level cube particles read the wind at their own pressure, anchored at the fixes', async () => {
+    /* 250 hPa blows 20 m/s east, 300 hPa 5 m/s. Over 24 h at 250 hPa the
+     * balloon covers 1,728 km. Fixes that report 250 hPa are bridged cleanly;
+     * the same two positions reported at 300 hPa cannot be: an 8 hPa pressure
+     * wander never reaches the fast level, so the two clouds end ~1,300 km
+     * apart at the midpoint. (A single-level read of the 280 hPa blend, 11 m/s,
+     * would explain neither.) */
+    const cube = twoLevelCube(20, 5, 24);
+    const fast = fixes(24, 20);
+    fast.A.pressure_hpa = 250;
+    fast.B.pressure_hpa = 250;
+    const r = await reconstructLongGap(fast.A, fast.B, [], cube);
+    assert.equal(r.unexplained, false);
+    assert.ok(r.endpoint_miss_km < 30, `closure ${r.endpoint_miss_km} km`);
+    for (let s = 1; s < r.meanPath.length; s++) assert.ok(r.meanPath[s][0] > r.meanPath[s - 1][0]);
+    const slow = fixes(24, 20);
+    slow.A.pressure_hpa = 300;
+    slow.B.pressure_hpa = 300;
+    const r2 = await reconstructLongGap(slow.A, slow.B, [], cube);
+    assert.equal(r2.unexplained, true);
+    assert.equal(r2.mode, 'corridor');
 });
 
 test('reconstructLongGap: gaps under 30 min are a straight line with no particles', async () => {
