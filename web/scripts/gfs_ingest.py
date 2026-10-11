@@ -1,16 +1,21 @@
 #!/usr/bin/env python3
 """
-GFS -> WindCube ingest (production). For each active balloon it derives the
+GFS -> WindCube ingest (production). For each planned balloon it derives the
 forecast region / pressure level / time window from Supabase telemetry (mirroring
 the app's boundsForForecast + chooseGridStep + snapPressure so the cube matches
 what computeMonteCarloForecast asks for), then builds a multi-cycle cube from
 NOAA's free NODD S3 (byte-range U/V via the .idx: past 3-hourly *analyses* +
 forward *forecast* from the latest cycle) and writes it to .windcube/cubes/.
 
-A separate Node step (scripts/upload_cubes.mjs) uploads those to Vercel Blob.
+Which balloons: the plan written by scripts/plan_forecasts.ts (FORECAST_PLAN,
+default .windcube/plan.json) — the devices it marked `build`; without a fresh
+plan (local runs) the legacy fleet query (status=flying, connected) or the one
+requested device. What was built is appended to the ingest manifest
+(FORECAST_MANIFEST, default .windcube/manifest.json) for the compute step and
+the job summary. scripts/compute_forecasts.ts then reads the cubes from disk.
 
-Env: NEXT_PUBLIC_SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY.
-Run: python3 scripts/gfs_ingest.py            (all active devices)
+Env: NEXT_PUBLIC_SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY, FORECAST_PLAN, FORECAST_MANIFEST.
+Run: python3 scripts/gfs_ingest.py            (planned / all active devices)
      python3 scripts/gfs_ingest.py stratolink-3   (one device)
 """
 import io
@@ -27,6 +32,14 @@ from datetime import datetime, timedelta, timezone
 
 import numpy as np
 import pygrib
+
+# GitHub Actions pipes stdout, which Python then block-buffers: a step killed at
+# its timeout loses everything still in the buffer (the member lines we most want
+# to see). Line-buffer it so each progress line lands as it is printed.
+try:
+    sys.stdout.reconfigure(line_buffering=True)
+except (AttributeError, ValueError):  # not a real text stream (tests, pipes closed)
+    pass
 
 
 def tparse(s):
@@ -48,9 +61,13 @@ MAX_GAP_H = 72
 #     the historical track only.
 FC_STEP_H = 1                    # forecast cube time step (hourly forecast hours)
 RECON_STEP_H = 3                 # reconstruction cube time step
-# Hours of recent track to include in the forecast box on top of the live GPS gap
-# (covers the bias-fit fixes); keeps the FC box small => finer grid.
-FC_BIAS_H = 36
+# Hours of margin BEFORE the last fix that the forecast cube covers. The compute
+# integrates forward from the last fix (sampleWind time-interpolates between the
+# bracketing hourly slices, so one slice before it is enough); nothing earlier is
+# read since the bias became neutral (lib/wind/monteCarloForecast.ts neutralBias
+# — the chord-fit bias that once needed 36 h of pre-fix track is gone). The
+# historical track lives in the reconstruction cube.
+FC_BIAS_H = 1
 HOURLY_FHR_MAX = 120             # GFS publishes hourly forecast hours through f120
 # Cube resolution is now bounded by SIZE, not API calls (we own the GFS download).
 # A higher point budget => a much finer grid than Open-Meteo's 120-pt cap allowed.
@@ -120,6 +137,110 @@ def supa(path, params):
 def active_devices():
     rows = supa("devices", {"select": "device_id,status,launched_at", "connection_status": "eq.connected"})
     return [(r["device_id"], r.get("launched_at")) for r in rows if r.get("status") == "flying"]
+
+
+# ── Activity plan (scripts/plan_forecasts.ts) + ingest manifest ──────────────
+_WINDCUBE_DIR = os.path.join(os.path.dirname(__file__), "..", ".windcube")
+PLAN_PATH = os.environ.get("FORECAST_PLAN") or os.path.join(_WINDCUBE_DIR, "plan.json")
+MANIFEST_PATH = os.environ.get("FORECAST_MANIFEST") or os.path.join(_WINDCUBE_DIR, "manifest.json")
+PLAN_MAX_AGE_H = 12              # mirrors PLAN_MAX_AGE_H in lib/wind/forecastPlan.ts
+
+
+def load_plan(path=None):
+    """The activity plan written by scripts/plan_forecasts.ts, or None when there
+    is none (local runs) or it is stale — a leftover file must never silently
+    shrink the fleet, so an old plan is ignored (and the legacy query used)."""
+    path = path or PLAN_PATH
+    try:
+        with open(path) as f:
+            plan = json.load(f)
+    except (OSError, ValueError):
+        return None
+    try:
+        age_h = (datetime.now(timezone.utc) - tparse(plan["generated_at"])).total_seconds() / 3600
+    except (KeyError, TypeError, ValueError, AttributeError):
+        age_h = float("inf")
+    if not isinstance(plan.get("devices"), list) or not (-1 <= age_h <= PLAN_MAX_AGE_H):
+        print(f"ignoring stale or malformed plan {path} (generated {plan.get('generated_at')})", flush=True)
+        return None
+    return plan
+
+
+def planned_devices(only=None, plan=None):
+    """(device_id, launched_at) pairs to ingest this run. With a plan: the devices
+    it marked `build` (skipped ones are logged with the plan's reason, and an
+    explicitly requested device that the plan skipped stays skipped). Without
+    one: the legacy fleet query, or the one requested device."""
+    plan = plan if plan is not None else load_plan()
+    if plan is None:
+        return [(only, None)] if only else active_devices()
+    out, seen = [], False
+    for d in plan.get("devices", []):
+        if only and d.get("device_id") != only:
+            continue
+        seen = True
+        if d.get("action") == "build":
+            out.append((d["device_id"], d.get("launched_at")))
+        else:
+            print(f"  {d.get('device_id')}: skipped by plan — {d.get('reason', '')}", flush=True)
+    if only and not seen:
+        print(f"  {only}: not in the plan — nothing to build", flush=True)
+    return out
+
+
+def _manifest_read():
+    try:
+        with open(MANIFEST_PATH) as f:
+            m = json.load(f)
+        if isinstance(m, dict) and isinstance(m.get("sources"), dict):
+            return m
+    except (OSError, ValueError):
+        pass
+    return {"version": 1, "sources": {}}
+
+
+def _manifest_write(m):
+    d = os.path.dirname(MANIFEST_PATH)
+    if d:
+        os.makedirs(d, exist_ok=True)
+    tmp = MANIFEST_PATH + ".tmp"
+    with open(tmp, "w") as f:
+        json.dump(m, f, indent=1)
+    os.replace(tmp, MANIFEST_PATH)       # atomic: a reader never sees a torn file
+
+
+def _now_iso():
+    return datetime.now(timezone.utc).isoformat()
+
+
+def manifest_source_begin(source, **meta):
+    """Start (and reset) one source's record in the manifest shared with
+    lib/wind/forecastManifest.ts: {started_at, devices: {}, **meta}."""
+    m = _manifest_read()
+    m["sources"][source] = {"started_at": _now_iso(), "devices": {}, **meta}
+    _manifest_write(m)
+
+
+def manifest_device(source, device, **fields):
+    """Merge per-device facts (built/expected members, cubes, errors) into the
+    source's record. Called after EVERY member or cube write, so a step killed at
+    its timeout still leaves an accurate count behind for the compute + summary."""
+    m = _manifest_read()
+    src = m["sources"].setdefault(source, {"started_at": _now_iso(), "devices": {}})
+    src.setdefault("devices", {}).setdefault(device, {}).update(fields)
+    _manifest_write(m)
+
+
+def manifest_source_end(source):
+    """Stamp finished_at + seconds. A source without it in the summary was killed."""
+    m = _manifest_read()
+    src = m["sources"].setdefault(source, {"started_at": _now_iso(), "devices": {}})
+    src["finished_at"] = _now_iso()
+    try:
+        src["seconds"] = round((tparse(src["finished_at"]) - tparse(src["started_at"])).total_seconds(), 1)
+    except (KeyError, TypeError, ValueError, AttributeError):
+        pass
+    _manifest_write(m)
 
 
 def mission_since(launched_at):
@@ -330,12 +451,16 @@ def fetch_uv_p(cyc, fhr, p):
     return out
 
 
-def clear_field_cache():
+def clear_field_cache(keep=()):
     """Free the whole-globe field caches between cube builds — they grow with every
-    fetched (cycle, fhr) and would otherwise hold the recon's hundreds of fields in
-    RAM while the fc tube prefetches hundreds more (OOM on a long mission)."""
-    _uv_cache.clear()
-    _uv_p_cache.clear()
+    fetched (cycle, fhr) and would otherwise hold the tube's hundreds of fields in
+    RAM while the recon prefetches hundreds more (OOM on a long mission). `keep` =
+    (cycle, fhr) pairs the next build samples too; those stay warm instead of
+    being downloaded twice."""
+    keep = set(keep)
+    for cache in (_uv_cache, _uv_p_cache):
+        for key in [k for k in cache if (k[0], k[1]) not in keep]:
+            del cache[key]
 
 
 def floor_step(t, step_h):
@@ -637,7 +762,16 @@ def write_cube(device, suffix, cube, nlat, nlon, tag):
     with open(out, "wb") as f:
         f.write(pack_cube(cube))
     print(f"    {tag}: {len(cube['grids'])} grids {nlat}x{nlon} @ {cube['gridStep']}° "
-          f"({cube['stepMs']//3600000}h step) -> {os.path.getsize(out)//1024} KB (.slwc)")
+          f"({cube['stepMs']//3600000}h step) -> {os.path.getsize(out)//1024} KB (.slwc)", flush=True)
+
+
+def fields_for(start, end, step_h, latest):
+    """The (cycle, fhr) source fields a `step_h`-hourly span from start to end needs."""
+    want, t = set(), start
+    while t <= end:
+        want.add(pick_source(t, latest))
+        t += timedelta(hours=step_h)
+    return want
 
 
 def build_cube(device, fixes, target_p, latest):
@@ -645,30 +779,56 @@ def build_cube(device, fixes, target_p, latest):
     last_fix = tparse(fixes[-1]["t"])
     now = datetime.now(timezone.utc)
     gap_h = max(0, (now - last_fix).total_seconds() / 3600)
-    pad_h = HORIZON_H + min(gap_h, MAX_GAP_H)
     lo, hi, _ = bracket_levels(target_p)
-    print(f"  {device}: interp {target_p:.1f}mb ({lo}↔{hi}), gap {gap_h:.0f}h")
+    print(f"  {device}: interp {target_p:.1f}mb ({lo}↔{hi}), gap {gap_h:.0f}h, {len(fixes)} fix(es)", flush=True)
     clear_field_cache()                          # fresh per device (free the prior device's fields)
 
-    # ── Reconstruction cube: full mission (first fix → now+horizon), 3-hourly. ──
+    # ── Forecast cube FIRST: last fix + dead-reckon + cone, HOURLY, finest grid. ──
+    # Built before the recon so the few fields both sample (the recon's trailing
+    # slices bracket the last fix, where the tube starts) are fetched once.
+    if FC_TUBE:
+        build_tube_fc(device, fixes, last_fix, gap_h, target_p, latest, now)
+    else:
+        build_static_fc(device, fixes, last_fix, gap_h, target_p, latest, now)
+
+    # ── Reconstruction cube: full mission (first fix → last fix), 3-hourly. ──
     # Its box is dominated by the full-mission track; the forward leg is unused by
     # reconstruction, so use a SMALL forward pad (a big one would push the
     # continent-wide box past the point budget and coarsen the historical grid).
-    if os.environ.get("SKIP_RECON") != "1":     # dev: skip the slow full-mission recon when iterating on the tube
+    # Nothing after the last fix is ever sampled either (the bridges run fix → fix),
+    # so the span ends there, not at now + horizon — which for a long-dark balloon
+    # put ~90% of the grids on a period with no fixes. One fix (or a launch-record
+    # seed) has no gap to bridge: write nothing; compute keys devices on the fc cube.
+    if len(fixes) < 2:
+        print(f"    recon: skipped ({len(fixes)} fix — nothing to reconstruct)", flush=True)
+    elif os.environ.get("SKIP_RECON") != "1":   # dev: skip the slow full-mission recon when iterating on the tube
         recon_bounds = bounds_for_forecast(fixes, HORIZON_H, pad_cap=8)
         recon_step = choose_grid_step(recon_bounds)
         recon_start = floor_step(first_fix, RECON_STEP_H) - timedelta(hours=RECON_STEP_H)
-        recon_end = floor_step(now, RECON_STEP_H) + timedelta(hours=HORIZON_H + 2 * RECON_STEP_H)
+        recon_end = floor_step(last_fix, RECON_STEP_H) + timedelta(hours=2 * RECON_STEP_H)
+        clear_field_cache(keep=fields_for(recon_start, recon_end, RECON_STEP_H, latest))  # tube's overlap stays warm
         recon, rla, rlo = sample_grids(recon_bounds, recon_step, recon_start, recon_end,
                                        RECON_STEP_H, target_p, latest, now, "recon")
         write_cube(device, "", recon, rla, rlo, "recon")
         del recon
-        clear_field_cache()                      # free the recon's fields before the fc tube prefetches its own
+        clear_field_cache()
 
-    # ── Forecast cube: recent track + dead-reckon + cone, HOURLY, finest grid. ──
-    if FC_TUBE:
-        build_tube_fc(device, fixes, last_fix, gap_h, target_p, latest, now)
-        return
+
+def cubes_written(device, since_ts):
+    """Which of a device's two GFS cubes this run wrote, for the manifest:
+    {"fc": bool, "recon": bool}. Judged by file mtime ≥ `since_ts`, so a stale
+    local file from an earlier run doesn't count (CI starts from a clean tree)."""
+    out = {}
+    for key, suffix in (("fc", "-fc"), ("recon", "")):
+        path = os.path.join(OUTDIR, f"{device}{suffix}.slwc")
+        out[key] = os.path.exists(path) and os.path.getmtime(path) >= since_ts - 1
+    return out
+
+
+def build_static_fc(device, fixes, last_fix, gap_h, target_p, latest, now):
+    """Legacy forecast cube (FC_TUBE=0): one static box around the recent track,
+    padded downwind for the gap + horizon."""
+    pad_h = HORIZON_H + min(gap_h, MAX_GAP_H)
     lookback_h = min(gap_h, MAX_GAP_H) + FC_BIAS_H
     cutoff = now - timedelta(hours=lookback_h)
     fc_fixes = [f for f in fixes if tparse(f["t"]) >= cutoff]
@@ -685,7 +845,7 @@ def build_cube(device, fixes, target_p, latest):
 
 def build_tube_fc(device, fixes, last_fix, gap_h, target_p, latest, now):
     """Forecast cube as a trajectory-following tube (P1). Time span: from
-    FC_BIAS_H before the last fix (covers the bias-fit fixes) through the
+    FC_BIAS_H before the last fix (one bracketing slice of margin) through the
     dead-reckon (capped at DEAD_RECKON_CAP_H) and, if the gap is within the cap,
     HORIZON_H of true forward forecast. Each hourly slice is a moderate box
     centered on the pre-integrated nominal position (or the known track, before the
@@ -721,23 +881,30 @@ def build_tube_fc(device, fixes, last_fix, gap_h, target_p, latest, now):
 
 def main():
     only = sys.argv[1] if len(sys.argv) > 1 else None
-    devices = [(only, None)] if only else active_devices()
+    devices = planned_devices(only)
+    manifest_source_begin("gfs")
     if not devices:
-        print("no active devices")
+        print("no devices to build — no NOAA download", flush=True)
+        manifest_source_end("gfs")
         return
     latest = latest_cycle()
-    print(f"latest GFS cycle {latest.isoformat()} | devices: {[d for d, _ in devices]}")
+    print(f"latest GFS cycle {latest.isoformat()} | devices: {[d for d, _ in devices]}", flush=True)
     failed = []
     for d, launched in devices:
+        t0 = time.time()
         try:
             fixes = mission_track(d, launched)
             if len(fixes) < 1:
-                print(f"  {d}: no fixes, skipping")
+                print(f"  {d}: no fixes, skipping", flush=True)
+                manifest_device("gfs", d, fc=False, recon=False, n_fixes=0, error="no fixes")
                 continue
             build_cube(d, fixes, float_pressure(d), latest)
+            manifest_device("gfs", d, n_fixes=len(fixes), seconds=round(time.time() - t0, 1), **cubes_written(d, t0))
         except Exception as e:
-            print(f"  {d}: FAILED {e}")
+            print(f"  {d}: FAILED {e}", flush=True)
+            manifest_device("gfs", d, error=str(e), seconds=round(time.time() - t0, 1))
             failed.append(d)
+    manifest_source_end("gfs")
     if failed:
         raise SystemExit(f"GFS ingestion failed for {len(failed)} device(s)")
 
