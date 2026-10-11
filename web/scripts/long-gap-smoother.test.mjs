@@ -9,7 +9,7 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import {
-    effectiveSampleSize, joinHalves, reconstructLongGap, resampleIfCollapsed, systematicResample,
+    effectiveSampleSize, joinHalves, reconstructLongGap, resampleIfCollapsed, systematicResample, trimmedLocalMean,
 } from '../lib/wind/pathReconstructionLongGap.ts';
 
 const HOUR = 3_600_000;
@@ -140,6 +140,43 @@ function fixes(hours, u, lat = 10, lon = 10) {
     const B = { lat, lon: lon + dLon, alt_m: 9500, time_utc: new Date(hours * HOUR).toISOString() };
     return { A, B };
 }
+
+/* A two-route bundle: 70 % of the sample paths follow route A (lat 0), 30 %
+ * route B (lat 2°), all with small jitter. The posterior mean sits at 0.6°,
+ * a latitude no sample ever had; the trimmed local mean must follow route A. */
+function twoRoutes(seed = 1) {
+    let x = seed;
+    const rnd = () => { x = (x * 1664525 + 1013904223) % 4294967296; return x / 4294967296 - 0.5; };
+    const samples = [];
+    for (let i = 0; i < 200; i++) {
+        const base = i < 140 ? 0 : 2;
+        const off = rnd() * 0.1;
+        const path = [];
+        for (let s = 0; s <= 60; s++) path.push({ lat: base + off + rnd() * 0.02, lon: s * 0.1, alt: 9500 });
+        samples.push(path);
+    }
+    return samples;
+}
+
+test('trimmedLocalMean: a two-route bundle gives a line on the dominant route, not between the routes', () => {
+    const samples = twoRoutes();
+    const { path, medoid, kept } = trimmedLocalMean(samples, 0.1, 100, 3);
+    assert.equal(path.length, 61);
+    assert.equal(kept, 20);
+    assert.ok(medoid < 140, 'the medoid is a route-A sample');
+    for (const p of path) assert.ok(Math.abs(p.lat) < 0.1, `line latitude ${p.lat} should sit on route A`);
+    /* For contrast, the plain mean of the same samples sits in the void. */
+    const meanLat = samples.reduce((a, sm) => a + sm[30].lat, 0) / samples.length;
+    assert.ok(meanLat > 0.5 && meanLat < 0.7, `mean latitude ${meanLat} is between the routes`);
+});
+
+test('trimmedLocalMean: identical samples reproduce the path; the trim never keeps fewer than three', () => {
+    const path = Array.from({ length: 10 }, (_, s) => ({ lat: 40 + s * 0.01, lon: -120 + s * 0.2, alt: 9000 }));
+    const samples = Array.from({ length: 12 }, () => path.map((p) => ({ ...p })));
+    const out = trimmedLocalMean(samples, 0.1, 5, 2);
+    assert.equal(out.kept, 3);
+    out.path.forEach((p, s) => { assert.ok(Math.abs(p.lat - path[s].lat) < 1e-9 && Math.abs(p.lon - path[s].lon) < 1e-9); });
+});
 
 test('reconstructLongGap: a uniform wind that carries A exactly to B gives a straight, pinned, well-populated bridge', async () => {
     const u = 20;

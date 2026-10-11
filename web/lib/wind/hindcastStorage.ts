@@ -27,8 +27,10 @@ import type { PathReconstructionResult } from './pathReconstruction';
  * v4: long gaps (≥ 6 h) are bridged by a two-filter particle smoother (forward
  *     and backward filters with resampling, matched at the midpoint) instead
  *     of the forward-only importance sampler whose bridge-pull penalty
- *     collapsed the posterior onto one particle over multi-day gaps. */
-const ALGO_VERSION = 'v4';
+ *     collapsed the posterior onto one particle over multi-day gaps.
+ * v5: long-gap bridges are the trimmed local mean of 2,000 posterior draws
+ *     around their medoid, not the posterior mean (which sat between modes). */
+const ALGO_VERSION = 'v5';
 
 export type StoredHindcast = PathReconstructionResult & { computed_at: string };
 

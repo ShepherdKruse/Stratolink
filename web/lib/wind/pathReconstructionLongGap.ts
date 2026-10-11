@@ -46,6 +46,29 @@ const CFG = {
      *  65 km for 1.4 s of compute; 5000 (4 s) buys nothing more. The
      *  environment variable `RECON_LONG_GAP_PARTICLES` overrides it. */
     N_PARTICLES: 2000,
+    /** Posterior draws behind the drawn line and the occupancy footprint:
+     *  bridged trajectories drawn by pair weight from the matched clouds. 2,000
+     *  is past the point of diminishing returns — on the reference flight's
+     *  201 h gap the line and ribbon from three random 2,000-subsamples of one
+     *  10,000 draw differ by 5–13 km / 2–3 km, against 65–103 km / 56–75 km
+     *  between independent filter runs. */
+    LINE_SAMPLES: 2000,
+    /** The drawn line is the TRIMMED LOCAL MEAN of those draws: the per-step
+     *  average of the LINE_TRIM_FRAC fraction of sample paths closest (mean
+     *  time-matched distance) to the medoid path. A plain posterior mean lands
+     *  in the void between modes when the gap's posterior splits (on the 201 h
+     *  gap only 0–17 % of samples lie within 300 km of it at the split hours);
+     *  the medoid is a real path inside the dominant mode but a discrete pick
+     *  that flips between near-tied candidates (draw noise 100–170 km, rerun
+     *  worst case ~1,000 km). Averaging the medoid's nearest tenth keeps the
+     *  mode (43–45 % of samples within 300 km) at the mean's smoothness and
+     *  roughly the mean's rerun stability (67–136 km median, ≤600 km worst). */
+    LINE_TRIM_FRAC: 0.10,
+    /** Size of the strided subset the medoid is found in (the pairwise distance
+     *  matrix is O(subset²)); every draw is then ranked against that medoid. */
+    LINE_MEDOID_SUBSET: 1000,
+    /** Time-matched path distances sample every n-th step (2 h at 20-min steps). */
+    LINE_DISTANCE_STRIDE: 6,
     STEP_MIN: 20,
     SPEED_SIGMA: 0.12,
     DIR_SIGMA_DEG: 14,
@@ -87,8 +110,6 @@ const CFG = {
     JOIN_WINDOW_FRAC: 0.04,
     JOIN_WINDOW_MIN_STEPS: 3,
     JOIN_WINDOW_MAX_STEPS: 24,
-    /** Bridged trajectories drawn (by pair weight) for the occupancy footprint. */
-    OCCUPANCY_SAMPLES: 600,
 };
 
 const R4 = (x: number) => Math.round(x * 1e4) / 1e4;
@@ -148,7 +169,83 @@ export type LongGapBridgeResult = {
      *  A wide prior cloud (long, low-directness gap) can put many doomed
      *  lineages outside the tube while the bridge itself stays well inside. */
     outside_cube_frac_weighted: number;
+    /** How the drawn `meanPath` was formed: 'trimmed-local-mean' (long gaps,
+     *  see CFG.LINE_TRIM_FRAC) or 'straight' (sub-30-min gaps). */
+    line_method: 'trimmed-local-mean' | 'straight';
+    /** Posterior draws the line was taken from (0 for a straight bridge). */
+    line_samples: number;
 };
+
+/** The drawn line through a long gap: the per-step mean of the `trimFrac`
+ *  fraction of `samples` closest to their medoid, where closeness is the mean
+ *  time-matched distance over every `stride`-th step in a per-step local km
+ *  frame. The medoid is searched in an evenly strided subset of at most
+ *  `medoidSubset` samples (the distance matrix is quadratic); every sample is
+ *  then ranked against it. Returns the line, the medoid's sample index and how
+ *  many samples were averaged. Pure; exported for tests. */
+export function trimmedLocalMean(
+    samples: PathPoint[][],
+    trimFrac = CFG.LINE_TRIM_FRAC,
+    medoidSubset = CFG.LINE_MEDOID_SUBSET,
+    stride = CFG.LINE_DISTANCE_STRIDE,
+): { path: PathPoint[]; medoid: number; kept: number } {
+    const K = samples.length;
+    const n1 = samples[0].length;
+    const steps: number[] = [];
+    for (let s = 0; s < n1; s += Math.max(1, stride)) steps.push(s);
+    if (steps[steps.length - 1] !== n1 - 1) steps.push(n1 - 1);
+    /* Per-step local frame: km east/north about the samples' mean latitude. */
+    const cosRef = steps.map((s) => {
+        let lat = 0;
+        for (let i = 0; i < K; i++) lat += samples[i][s].lat;
+        return Math.cos(toRad(lat / K));
+    });
+    const kmX = (p: PathPoint, c: number) => p.lon * 111.32 * c;
+    const kmY = (p: PathPoint) => p.lat * 111.32;
+    /* Medoid within an evenly strided subset (spans the whole draw). */
+    const pick = Math.max(1, Math.floor(K / Math.max(1, medoidSubset)));
+    const sub: number[] = [];
+    for (let i = 0; i < K; i += pick) sub.push(i);
+    const M = sub.length;
+    const rowSum = new Float64Array(M);
+    const xs = new Float64Array(M);
+    const ys = new Float64Array(M);
+    for (let t = 0; t < steps.length; t++) {
+        const s = steps[t];
+        const c = cosRef[t];
+        for (let a = 0; a < M; a++) { xs[a] = kmX(samples[sub[a]][s], c); ys[a] = kmY(samples[sub[a]][s]); }
+        for (let a = 0; a < M; a++) {
+            for (let b = a + 1; b < M; b++) {
+                const d = Math.hypot(xs[a] - xs[b], ys[a] - ys[b]);
+                rowSum[a] += d;
+                rowSum[b] += d;
+            }
+        }
+    }
+    let best = 0;
+    for (let a = 1; a < M; a++) if (rowSum[a] < rowSum[best]) best = a;
+    const medoid = sub[best];
+    /* Rank every sample by its mean time-matched distance to the medoid path. */
+    const toMedoid = new Float64Array(K);
+    for (let t = 0; t < steps.length; t++) {
+        const s = steps[t];
+        const c = cosRef[t];
+        const mx = kmX(samples[medoid][s], c);
+        const my = kmY(samples[medoid][s]);
+        for (let i = 0; i < K; i++) toMedoid[i] += Math.hypot(kmX(samples[i][s], c) - mx, kmY(samples[i][s]) - my);
+    }
+    const order = Array.from({ length: K }, (_, i) => i).sort((a, b) => toMedoid[a] - toMedoid[b]);
+    const kept = Math.min(K, Math.max(3, Math.round(trimFrac * K)));
+    const path: PathPoint[] = new Array(n1);
+    for (let s = 0; s < n1; s++) {
+        let lat = 0;
+        let lon = 0;
+        let alt = 0;
+        for (let k = 0; k < kept; k++) { const q = samples[order[k]][s]; lat += q.lat; lon += q.lon; alt += q.alt; }
+        path[s] = { lat: lat / kept, lon: lon / kept, alt: alt / kept };
+    }
+    return { path, medoid, kept };
+}
 
 function particleCount(): number {
     const env = Number(process.env.RECON_LONG_GAP_PARTICLES);
@@ -767,6 +864,8 @@ export async function reconstructLongGap(
             short: true,
             outside_cube_frac: 0,
             outside_cube_frac_weighted: 0,
+            line_method: 'straight',
+            line_samples: 0,
         };
     }
 
@@ -823,7 +922,7 @@ export async function reconstructLongGap(
     const [fLat, fLon] = meanF(m);
     const [bLat, bLon] = meanB(m);
     const joinMissKm = distanceKm(fLat, fLon, bLat, bLon);
-    const meanPath: Array<[number, number]> = [];
+    const posteriorMean: Array<[number, number]> = [];
     for (let s = 0; s <= nSteps; s++) {
         const a = joinBlend(s, m, kJoin);
         const [lat, lon] = a <= 0 ? meanF(s) : a >= 1 ? meanB(s) : (() => {
@@ -831,8 +930,24 @@ export async function reconstructLongGap(
             const [bl, bo] = meanB(s);
             return [(1 - a) * fl + a * bl, (1 - a) * fo + a * bo];
         })();
-        meanPath.push([R4(lon), R4(lat)]);
+        posteriorMean.push([R4(lon), R4(lat)]);
     }
+
+    /* The drawn line. Draw LINE_SAMPLES bridged trajectories by pair weight
+     * (the same draws feed the occupancy footprint below) and take the trimmed
+     * local mean around their medoid — see CFG.LINE_TRIM_FRAC for why not the
+     * posterior mean (sits between modes) or the bare medoid (a coin flip
+     * between near-tied paths). Falls back to the posterior mean if no pair
+     * could be matched at all. */
+    const draw = pairs.w.length ? systematicResample(pairs.w, CFG.LINE_SAMPLES) : new Int32Array(0);
+    const samples: PathPoint[][] = new Array(draw.length);
+    for (let k = 0; k < draw.length; k++) {
+        samples[k] = joinHalves(fwd[pairs.i[draw[k]]].path, bwd[pairs.j[draw[k]]].path, m, nSteps, kJoin);
+    }
+    const line = samples.length ? trimmedLocalMean(samples) : null;
+    const meanPath: Array<[number, number]> = line
+        ? line.path.map((p) => [R4(p.lon), R4(p.lat)] as [number, number])
+        : posteriorMean;
 
     /* Coverage: raw over every sample either filter ever took (is the tube wide
      * enough for the prior clouds?), posterior-weighted over the bridged pairs
@@ -879,13 +994,8 @@ export async function reconstructLongGap(
     /* Occupancy from bridged trajectories drawn by pair weight (equal weights
      * after the draw), only when the gap is a corridor. */
     let occupancy: OccupancyFootprint | null = null;
-    if (underDetermined && pairs.w.length) {
-        const draw = systematicResample(pairs.w, CFG.OCCUPANCY_SAMPLES);
-        const trajs: PathPoint[][] = [];
-        for (let k = 0; k < draw.length; k++) {
-            trajs.push(joinHalves(fwd[pairs.i[draw[k]]].path, bwd[pairs.j[draw[k]]].path, m, nSteps, kJoin));
-        }
-        occupancy = computeOccupancy(trajs, new Array(trajs.length).fill(1));
+    if (underDetermined && samples.length) {
+        occupancy = computeOccupancy(samples, new Array(samples.length).fill(1));
     }
 
     const nEffF = effectiveSampleSize(W);
@@ -897,7 +1007,7 @@ export async function reconstructLongGap(
         `join σ ${R1(pairs.sigmaKm)} km, closure ${R1(joinMissKm)} km, resamples fwd ${statsF.resamples} / bwd ${statsB.resamples}; ` +
         `${outsideSamples}/${totalSamples} wind samples outside the cube's slice boxes ` +
         `(${R1(outsideFrac * 100)}% raw, ${R1(outsideWeighted * 100)}% posterior-weighted); ` +
-        `mean path vertices outside: ${meanOutside}/${nSteps + 1}; ${Date.now() - t0} ms`,
+        `line = trimmed local mean of ${line ? line.kept : 0}/${samples.length} draws around the medoid, vertices outside: ${meanOutside}/${nSteps + 1}; ${Date.now() - t0} ms`,
     );
 
     return {
@@ -916,5 +1026,7 @@ export async function reconstructLongGap(
         short: false,
         outside_cube_frac: Math.round(outsideFrac * 1e4) / 1e4,
         outside_cube_frac_weighted: Math.round(outsideWeighted * 1e4) / 1e4,
+        line_method: 'trimmed-local-mean',
+        line_samples: samples.length,
     };
 }

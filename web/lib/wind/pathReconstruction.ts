@@ -93,6 +93,8 @@ export type ReconstructionGap = {
     /** Long gaps: the same fraction weighted by posterior particle weight — the
      *  share of samples that shape the drawn bridge which read clamped winds. */
     outside_cube_frac_weighted?: number;
+    /** How the drawn bridge was formed ('trimmed-local-mean' | 'straight'). */
+    line_method?: string;
     occupancy?: OccupancyFootprint | null;
     ellipses?: Array<{
         frac: number;
@@ -137,7 +139,9 @@ export type PathReconstructionResult = {
  *   g3: long gaps (≥ 6 h) are bridged by the two-filter particle smoother
  *       instead of the forward-only importance sampler (see ALGO_VERSION v4).
  * ------------------------------------------------------------------------- */
-const GAP_ALGO_VERSION = 'g3';
+/*   g4: the drawn line through a long gap is the trimmed local mean of 2,000
+ *       posterior draws around their medoid (was the posterior mean). */
+const GAP_ALGO_VERSION = 'g4';
 /** A bridge whose end is older than this is final — safe to reuse verbatim. */
 const GAP_SETTLE_MS = 6 * 3_600_000;
 
@@ -610,6 +614,7 @@ export async function computePathReconstruction(opts: {
                 net_speed_ms: lg.net_speed_ms,
                 outside_cube_frac: lg.outside_cube_frac,
                 outside_cube_frac_weighted: lg.outside_cube_frac_weighted,
+                line_method: lg.line_method,
                 occupancy: lg.occupancy,
                 ellipses: lg.ellipses,
             };

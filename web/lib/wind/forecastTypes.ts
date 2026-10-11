@@ -123,6 +123,8 @@ export type StratolinkForecast = {
             outside_cube_frac?: number;
             /** Long gaps: the same, weighted by posterior particle weight. */
             outside_cube_frac_weighted?: number;
+            /** How the drawn bridge was formed ('trimmed-local-mean' | 'straight'). */
+            line_method?: string;
         }>;
     };
     metadata: {
