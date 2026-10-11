@@ -3,14 +3,15 @@
  * particle smoother.
  *
  * A forward particle filter runs from fix A toward B and a backward one from B
- * toward A through time-reversed winds, each with the perturbation model of
- * the original forward sampler (speed multiplier, heading offset + heading
- * random walk, altitude offset over the diurnal float model) but WITHOUT any
- * pull toward the far fix. The only weighting inside a filter is the tube
- * penalty (a wind sample read outside the cube's slice boxes is edge-clamped
- * fiction); at every heading-walk knot a filter whose effective sample size has
- * dropped below half its population is systematically resampled, so neither
- * cloud collapses onto a handful of lineages over a multi-day gap.
+ * toward A through time-reversed winds, each particle following the cube wind
+ * under a bounded AR(1) perturbation (heading offset and speed multiplier as
+ * mean-reverting processes, as in the forecast ensemble; altitude offset over
+ * the diurnal float model) and WITHOUT any pull toward the far fix. The only
+ * weighting inside a filter is the tube penalty (a wind sample read outside
+ * the cube's slice boxes is edge-clamped fiction); every few hours a filter
+ * whose effective sample size has dropped below half its population is
+ * systematically resampled, so neither cloud collapses onto a handful of
+ * lineages over a multi-day gap.
  *
  * The two clouds meet at the gap midpoint and overlap for a window of a few
  * steps either side of it: every forward particle is paired with every
@@ -70,11 +71,30 @@ const CFG = {
     /** Time-matched path distances sample every n-th step (2 h at 20-min steps). */
     LINE_DISTANCE_STRIDE: 6,
     STEP_MIN: 20,
-    SPEED_SIGMA: 0.12,
-    DIR_SIGMA_DEG: 14,
-    HEADING_WALK: true,
-    WALK_SEGMENT_HR: 4,
-    WALK_STEP_DEG: 55,
+    /** Per-particle perturbation of the cube wind, as in the forecast ensemble
+     *  (`integrateBalloonPathT`): a heading offset and a speed multiplier, each
+     *  a mean-reverting AR(1) / Ornstein–Uhlenbeck process with these
+     *  STATIONARY 1σ amplitudes and decorrelation time PERTURB_TAU_H, evolved
+     *  every step. Bounded by construction — a particle drifts at most a couple
+     *  of σ off the wind direction and comes back within ~τ — so a bridge can
+     *  no longer fly across or against the flow. (The previous model added an
+     *  UNBOUNDED heading random walk of 55°·(1 − directness) per 4 h knot on top
+     *  of a fixed offset: its 1σ reached 118° at mid-gap on the reference
+     *  flight's 201 h gap, and 7 % of the posterior's steps ran against the
+     *  wind.) The speed σ is wider than the forecast's 10 %: it absorbs the
+     *  model's speed error over days-long gaps, which is the realistic way a
+     *  balloon "loses ground" against the winds — not by crossing them. The
+     *  heading σ is the forecast's 12°: on the reference flight it puts the
+     *  posterior's step-vs-wind angle at p90 21–27° on every long gap (15° gave
+     *  25–32°; the forecast ensemble itself measures 19°). */
+    SPEED_SIGMA: 0.25,
+    DIR_SIGMA_DEG: 12,
+    PERTURB_TAU_H: 18,
+    /** Floor on the speed multiplier (a 3σ slow draw must not stall or reverse). */
+    SPEED_MULT_MIN: 0.2,
+    /** Resampling schedule: a filter is checked for collapse (and resampled)
+     *  every ~RESAMPLE_EVERY_HR hours of gap time. */
+    RESAMPLE_EVERY_HR: 4,
     ALT_DAY_M: 9750,
     ALT_NIGHT_M: 9450,
     ALT_SIGMA_M: 250,
@@ -90,9 +110,9 @@ const CFG = {
      *  fiction: a particle that left the tube must not shape the drawn bridge,
      *  while one grazing the edge for a step or two keeps a usable weight
      *  (e⁻² per step). Inside a filter this is the only weight; resampling at
-     *  the heading-walk knots turns it into "the population stays in the tube". */
+     *  the resampling checks turns it into "the population stays in the tube". */
     OUTSIDE_CUBE_PENALTY: 2,
-    /** Resample a filter at a heading-walk knot when its effective sample size
+    /** Resample a filter at a resampling check when its effective sample size
      *  has fallen below this fraction of the population. */
     RESAMPLE_NEFF_FRAC: 0.5,
     /** Join kernel: σ = this fraction of the tighter cloud's RMS radius at the
@@ -104,6 +124,16 @@ const CFG = {
     JOIN_SIGMA_MIN_KM: 10,
     JOIN_SIGMA_MAX_KM: 300,
     JOIN_MIN_NEFF: 50,
+    /** A gap is reported UNEXPLAINED by the winds when the two clouds never
+     *  come within reach of each other (no pair inside 4σ even at
+     *  JOIN_SIGMA_MAX_KM, so the nearest-neighbour fallback built the bridge) or
+     *  when the forward and backward posterior means still miss by more than
+     *  this at the meeting step. With the perturbation bounded, the smoother can
+     *  no longer invent cross-wind loops to connect A and B; an unexplained gap
+     *  is drawn from whatever pairs exist but is flagged (`unexplained`), forced
+     *  to corridor mode at low confidence, and carries its honest closure and
+     *  n_eff. */
+    UNEXPLAINED_CLOSURE_KM: 300,
     /** Overlap window: both filters run this fraction of the gap's steps past
      *  the meeting step (clamped to [MIN, MAX] steps). Pairs are matched on
      *  their RMS separation over ±window and blended across it. */
@@ -169,6 +199,10 @@ export type LongGapBridgeResult = {
      *  A wide prior cloud (long, low-directness gap) can put many doomed
      *  lineages outside the tube while the bridge itself stays well inside. */
     outside_cube_frac_weighted: number;
+    /** True when the winds cannot connect A to B under the perturbation model
+     *  (see CFG.UNEXPLAINED_CLOSURE_KM); the gap is then a low-confidence
+     *  corridor whatever its spread. */
+    unexplained: boolean;
     /** How the drawn `meanPath` was formed: 'trimmed-local-mean' (long gaps,
      *  see CFG.LINE_TRIM_FRAC) or 'straight' (sub-30-min gaps). */
     line_method: 'trimmed-local-mean' | 'straight';
@@ -502,33 +536,33 @@ function buildAltitudeModel(
 
 /* ── The two filters ───────────────────────────────────────────────────────── */
 
-type HeadingWalk = { stepDeg: number; segHours: number; nSegments: number };
+type ResampleSchedule = { segHours: number; nSegments: number };
 
-/** Per-particle heading random walk: knots every ~WALK_SEGMENT_HR across the
- *  gap, offsets interpolated linearly between them, step size scaled by
- *  (1 − directness) so a balloon that barely progressed against typical winds
- *  gets loopier paths. A direct gap (or one shorter than LONG_GAP_HR) gets no
- *  walk — one fixed heading offset per particle, `stepDeg` 0 — but keeps the
- *  knot schedule, which is also the resampling schedule. Both filters run the
- *  same schedule from their own fix. */
-function headingWalk(gapHours: number, directness: number): HeadingWalk {
-    const nKnots = Math.max(2, Math.round(gapHours / CFG.WALK_SEGMENT_HR) + 1);
-    const nSegments = nKnots - 1;
-    const walkScale = Math.max(0, 1 - directness);
-    const stepDeg = CFG.HEADING_WALK && gapHours >= CFG.LONG_GAP_HR && walkScale >= 0.1
-        ? CFG.WALK_STEP_DEG * walkScale
-        : 0;
-    return { stepDeg, segHours: gapHours / nSegments, nSegments };
+/** Resampling checks every ~RESAMPLE_EVERY_HR across the gap (at least one
+ *  segment). Both filters run the same schedule from their own fix. */
+function resampleSchedule(gapHours: number): ResampleSchedule {
+    const nSegments = Math.max(1, Math.round(gapHours / CFG.RESAMPLE_EVERY_HR));
+    return { segHours: gapHours / nSegments, nSegments };
+}
+
+/** One step of a stationary AR(1) / Ornstein–Uhlenbeck process sampled every
+ *  `stepHours`: x ← ρ·x + √(1−ρ²)·σ·ε with ρ = exp(−stepHours/τ). Seeded from
+ *  N(0, σ²) the process stays N(0, σ²) at every step (stationary), and its lag-L
+ *  autocorrelation is exp(−L·stepHours/τ). Time-reversible, so the backward
+ *  filter runs the same process. Pure given `eps`; exported for tests. */
+export function ar1Step(x: number, sigma: number, stepHours: number, tauHours: number, eps: number): number {
+    const rho = Math.exp(-stepHours / tauHours);
+    return rho * x + Math.sqrt(1 - rho * rho) * sigma * eps;
 }
 
 export type Particle = {
     lat: number;
     lon: number;
-    speedMult: number;
+    /** AR(1) speed perturbation: the wind is scaled by 1 + speedPert. */
+    speedPert: number;
+    /** AR(1) heading offset from the wind direction (degrees). */
+    dirOff: number;
     altOffset: number;
-    /** Heading-walk knot values (degrees) bracketing the current segment. */
-    offA: number;
-    offB: number;
     /** Log-weight accumulated since the last resample (tube penalty only). */
     logW: number;
     /** Wind samples this lineage took outside the cube's slice boxes. */
@@ -551,8 +585,8 @@ function residualWeights(particles: Particle[]): Float64Array {
 /** Systematic resampling of a filter when the tube penalty has collapsed its
  *  weights below RESAMPLE_NEFF_FRAC of the population: survivors are copied
  *  (own path array, weight reset) and the dead lineages dropped. The copies
- *  share speed/altitude offsets but draw their own heading-walk future at the
- *  very next knot, so they diverge immediately. */
+ *  share their perturbation state but draw their own AR(1) innovations from
+ *  the very next step, so they diverge immediately. */
 export function resampleIfCollapsed(particles: Particle[], stats: FilterStats): Particle[] {
     const n = particles.length;
     const w = residualWeights(particles);
@@ -583,7 +617,7 @@ function runFilter(
     nSteps: number,
     gapHours: number,
     altModel: (frac: number, lon?: number) => number,
-    walk: HeadingWalk,
+    schedule: ResampleSchedule,
     n: number,
     stats: FilterStats,
 ): Particle[] {
@@ -591,37 +625,31 @@ function runFilter(
     const stepMs = stepSec * 1000;
     let particles: Particle[] = [];
     for (let i = 0; i < n; i++) {
-        const off = CFG.DIR_SIGMA_DEG * gauss();
         particles.push({
             lat: from.lat,
             lon: from.lon,
-            speedMult: 1 + CFG.SPEED_SIGMA * gauss(),
+            /* Seeded from the stationary distribution, like the forecast. */
+            speedPert: CFG.SPEED_SIGMA * gauss(),
+            dirOff: CFG.DIR_SIGMA_DEG * gauss(),
             altOffset: CFG.ALT_SIGMA_M * gauss(),
-            offA: off,
-            offB: off + walk.stepDeg * gauss(),
             logW: 0,
             outside: 0,
             path: [{ lat: from.lat, lon: from.lon, alt: altModel(dir > 0 ? 0 : 1, from.lon) }],
         });
     }
 
-    let seg = 0;                                                    // current heading-walk segment
+    const stepHours = stepSec / 3600;
+    let seg = 0;                                                    // current resampling segment
     for (let s = 1; s <= nRun; s++) {
-        const hour = (s * stepSec) / 3600;                          // hours since `from`
-        /* Knot crossed: resample if the tube penalty has collapsed the weights,
-         * then advance every particle's walk segment with a fresh draw. */
-        while (seg + 1 < walk.nSegments && hour > (seg + 1) * walk.segHours + 1e-9) {
+        const hour = s * stepHours;                                 // hours since `from`
+        /* Resampling check crossed: resample if the tube penalty has collapsed the weights. */
+        while (seg + 1 < schedule.nSegments && hour > (seg + 1) * schedule.segHours + 1e-9) {
             particles = resampleIfCollapsed(particles, stats);
             seg += 1;
-            for (const p of particles) {
-                p.offA = p.offB;
-                p.offB = p.offA + walk.stepDeg * gauss();
-            }
         }
         const g = dir > 0 ? s : nSteps - s;                         // global step index after the move
         const frac = g / nSteps;
         const whenMs = tFrom + dir * s * stepMs;
-        const segFrac = Math.max(0, Math.min(1, (hour - seg * walk.segHours) / walk.segHours));
 
         for (const p of particles) {
             const alt = altModel(frac, p.lon) + p.altOffset;
@@ -632,9 +660,11 @@ function runFilter(
                 p.logW -= CFG.OUTSIDE_CUBE_PENALTY;
                 stats.outside += 1;
             }
+            p.speedPert = ar1Step(p.speedPert, CFG.SPEED_SIGMA, stepHours, CFG.PERTURB_TAU_H, gauss());
+            p.dirOff = ar1Step(p.dirOff, CFG.DIR_SIGMA_DEG, stepHours, CFG.PERTURB_TAU_H, gauss());
             const { u, v } = sampleWind(cube, p.lat, p.lon, whenMs);
-            const k = p.speedMult * altScale;
-            const dr = toRad(p.offA + segFrac * (p.offB - p.offA));
+            const k = Math.max(CFG.SPEED_MULT_MIN, 1 + p.speedPert) * altScale;
+            const dr = toRad(p.dirOff);
             const cosD = Math.cos(dr);
             const sinD = Math.sin(dr);
             const uR = (u * cosD - v * sinD) * k;
@@ -661,6 +691,9 @@ type Pairs = {
     nEff: number;
     sigmaKm: number;
     candidates: number;
+    /** True when no pair was within reach and the nearest-neighbour fallback
+     *  built the pairs (the clouds never met). */
+    fallback: boolean;
 };
 
 /** Max of an array without spreading it (Math.max(...a) overflows the call
@@ -779,7 +812,8 @@ function matchClouds(fwd: Particle[], bwd: Particle[], m: number, nSteps: number
      * connect A to B under the model): fall back to each forward particle's
      * nearest backward partner, kernel-weighted without the cutoff, so the
      * smoother still returns a bridge rather than nothing. */
-    if (!I.length) {
+    const fallback = !I.length;
+    if (fallback) {
         const inv2s2 = 1 / (2 * sigma * sigma);
         for (let i = 0; i < nf; i++) {
             if (wf[i] < 1e-12) continue;
@@ -823,6 +857,7 @@ function matchClouds(fwd: Particle[], bwd: Particle[], m: number, nSteps: number
         nEff: effectiveSampleSize(w),
         sigmaKm: sigma,
         candidates: LW.length,
+        fallback,
     };
 }
 
@@ -864,6 +899,7 @@ export async function reconstructLongGap(
             short: true,
             outside_cube_frac: 0,
             outside_cube_frac_weighted: 0,
+            unexplained: false,
             line_method: 'straight',
             line_samples: 0,
         };
@@ -876,7 +912,7 @@ export async function reconstructLongGap(
     const nSteps = Math.max(6, Math.round(gapMin / CFG.STEP_MIN));
     const m = Math.floor(nSteps / 2);                               // meeting step (global index)
     const altModel = buildAltitudeModel(tA, tB, baroSamples, (A.lon + B.lon) / 2);
-    const walk = headingWalk(gapHours, directness);
+    const schedule = resampleSchedule(gapHours);
 
     const statsF: FilterStats = { total: 0, outside: 0, resamples: 0 };
     const statsB: FilterStats = { total: 0, outside: 0, resamples: 0 };
@@ -886,8 +922,8 @@ export async function reconstructLongGap(
         m - 1,
         nSteps - m - 1,
     ));
-    const fwd = runFilter(A, cube, tA, 1, m + kJoin, nSteps, gapHours, altModel, walk, nParticles, statsF);
-    const bwd = runFilter(B, cube, tB, -1, nSteps - m + kJoin, nSteps, gapHours, altModel, walk, nParticles, statsB);
+    const fwd = runFilter(A, cube, tA, 1, m + kJoin, nSteps, gapHours, altModel, schedule, nParticles, statsF);
+    const bwd = runFilter(B, cube, tB, -1, nSteps - m + kJoin, nSteps, gapHours, altModel, schedule, nParticles, statsB);
     const pairs = matchClouds(fwd, bwd, m, nSteps, kJoin);
     const { W, V } = pairs;
 
@@ -984,7 +1020,8 @@ export async function reconstructLongGap(
     const midE90 = ellipses[Math.floor(ellipses.length / 2)].e90.semi_a_km;
 
     const nEff = pairs.nEff;
-    const underDetermined = nEff < CFG.CORRIDOR_NEFF || midE90 > CFG.CORRIDOR_MID90_KM;
+    const unexplained = pairs.fallback || joinMissKm > CFG.UNEXPLAINED_CLOSURE_KM;
+    const underDetermined = unexplained || nEff < CFG.CORRIDOR_NEFF || midE90 > CFG.CORRIDOR_MID90_KM;
     const confidence: 'high' | 'medium' | 'low' = underDetermined
         ? 'low'
         : midE90 < 40
@@ -1000,9 +1037,9 @@ export async function reconstructLongGap(
 
     const nEffF = effectiveSampleSize(W);
     const nEffB = effectiveSampleSize(V);
-    const log = meanOutside > 0 ? console.warn : console.log;
+    const log = meanOutside > 0 || unexplained ? console.warn : console.log;
     log(
-        `[reconstruction] gap ${A.time_utc} → ${B.time_utc} (${R1(gapHours)} h, ${nParticles}×2 particles): ` +
+        `[reconstruction] ${unexplained ? `UNEXPLAINED (${pairs.fallback ? 'clouds never within reach' : 'closure > ' + CFG.UNEXPLAINED_CLOSURE_KM + ' km'}) ` : ''}gap ${A.time_utc} → ${B.time_utc} (${R1(gapHours)} h, ${nParticles}×2 particles): ` +
         `${Math.round(nEff)} effective pairs of ${pairs.candidates} (marginals fwd ${Math.round(nEffF)} / bwd ${Math.round(nEffB)}), ` +
         `join σ ${R1(pairs.sigmaKm)} km, closure ${R1(joinMissKm)} km, resamples fwd ${statsF.resamples} / bwd ${statsB.resamples}; ` +
         `${outsideSamples}/${totalSamples} wind samples outside the cube's slice boxes ` +
@@ -1026,6 +1063,7 @@ export async function reconstructLongGap(
         short: false,
         outside_cube_frac: Math.round(outsideFrac * 1e4) / 1e4,
         outside_cube_frac_weighted: Math.round(outsideWeighted * 1e4) / 1e4,
+        unexplained,
         line_method: 'trimmed-local-mean',
         line_samples: samples.length,
     };
