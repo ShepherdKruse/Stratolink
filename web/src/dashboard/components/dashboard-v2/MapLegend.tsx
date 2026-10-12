@@ -11,7 +11,7 @@ import { useDashboardControls } from './dashboard-controls';
  * stays stable as you scrub. */
 export default function MapLegend({ hasForecast, hasHindcast, hasEstimated, hasGateways, colorScheme, fleet = false }: { fleet?: boolean; hasForecast: boolean; hasHindcast: boolean; hasEstimated: boolean; hasGateways: boolean; colorScheme: 'light' | 'dark' }) {
     const isMobile = useIsMobile();
-    const { showGateways, showReceivingStations, showFlightTrail, showProjectedPath } = useDashboardControls(!fleet);
+    const { showGateways, showReceivingStations, showFlightTrail, showProjectedPath } = useDashboardControls();
     const showFlightPaths = showFlightTrail && !fleet;
     /* Swatch colors mirror the actual map layers, which shift with the basemap
      * (see V2MissionMap `C` + GatewayLayer COVERAGE_STYLE). */

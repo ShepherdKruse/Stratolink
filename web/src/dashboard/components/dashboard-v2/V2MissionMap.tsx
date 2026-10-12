@@ -60,6 +60,7 @@ export interface V2FleetPath {
  *  Many community TTN gateways don't publish their location; those are
  *  silently omitted (we only render pins for gateways with real lat/lon). */
 export interface V2Gateway {
+    balloonId?: string;
     gateway_id: string;
     lat: number;
     lon: number;
@@ -768,7 +769,7 @@ export default function V2MissionMap({
         type: 'FeatureCollection' as const,
         features: validGateways.map(g => ({
             type: 'Feature' as const,
-            id: g.gateway_id,
+            id: `${g.balloonId ?? activeId}:${g.gateway_id}`,
             geometry: { type: 'Point' as const, coordinates: [g.lon, g.lat] },
             properties: {
                 gateway_id: g.gateway_id,
@@ -776,27 +777,28 @@ export default function V2MissionMap({
                 snr: g.snr ?? -10,
             },
         })),
-    }), [validGateways]);
+    }), [validGateways, activeId]);
 
-    /* Reception lines from the active balloon to each gateway that heard it
-     * — provides immediate visual confirmation of "who is listening to me
-     * right now". Only drawn when an active balloon has a position. */
+    /* Each receiver connects to the balloon whose packet it heard. */
     const receptionLinesGeoJSON = useMemo(() => {
-        const active = validBalloons.find(b => b.id === activeId);
-        if (!active || validGateways.length === 0) return null;
+        if (validGateways.length === 0) return null;
         return {
             type: 'FeatureCollection' as const,
-            features: validGateways.map(g => ({
-                type: 'Feature' as const,
-                geometry: {
-                    type: 'LineString' as const,
-                    coordinates: [
-                        [active.lon, active.lat],
-                        [g.lon, g.lat],
-                    ] as [number, number][],
-                },
-                properties: { rssi: g.rssi ?? -130 },
-            })),
+            features: validGateways.flatMap(g => {
+                const active = validBalloons.find(b => b.id === (g.balloonId ?? activeId));
+                if (!active) return [];
+                return [{
+                    type: 'Feature' as const,
+                    geometry: {
+                        type: 'LineString' as const,
+                        coordinates: unwrapLngs([
+                            [active.lon, active.lat],
+                            [g.lon, g.lat],
+                        ]),
+                    },
+                    properties: { rssi: g.rssi ?? -130 },
+                }];
+            }),
         };
     }, [validBalloons, activeId, validGateways]);
 

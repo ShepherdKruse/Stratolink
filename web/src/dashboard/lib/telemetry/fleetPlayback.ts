@@ -75,3 +75,14 @@ export function previewFleet<T extends { id: string; status: string }>(devices: 
     const active = flown.filter(device => fleetActivity([device], rowsByDevice, now).active > 0);
     return active.length ? active : flown.filter(device => (rowsByDevice[device.id]?.length ?? 0) > 0);
 }
+
+export function receivingStations(rows: TelemetryRow[], cursor: number | null) {
+    const row = rowAtTime(rows, cursor);
+    if (!row) return [];
+    if (cursor !== null && cursor < rows[rows.length - 1].t) {
+        const intervals = rows.slice(1).map((point, i) => point.t - rows[i].t).sort((a, b) => a - b);
+        const cadence = intervals[Math.floor(intervals.length / 2)];
+        if (cadence > 0 && cursor - row.t > cadence * 3) return [];
+    }
+    return (row.gateways ?? []).filter(gateway => gateway.lat !== null && gateway.lon !== null);
+}

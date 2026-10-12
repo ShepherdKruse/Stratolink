@@ -8,7 +8,7 @@ export default function FleetFilters({ value, onChange, signedIn, count }: { val
     const {theme} = useDashboardTheme();
     const [open, setOpen] = useState(false);
     const [position, setPosition] = useState({top:100,left:180});
-    const changed = value.sort !== 'alphabetical' || !value.active || !value.inactive || value.mine || value.planned;
+    const changed = value.sort !== 'alphabetical' || !value.active || !value.inactive || (signedIn && value.mine) || value.planned;
     return <div className="fleet-toolbar">
         <label className="fleet-search"><FontAwesomeIcon icon={faMagnifyingGlass} aria-hidden /><input aria-label="Search balloons" placeholder="Search balloons" value={value.query} onChange={event => onChange({...value,query:event.target.value})} /></label>
         <button ref={trigger} type="button" className="fleet-filter-trigger" popoverTarget={id} aria-expanded={open} aria-controls={id}>Filters{changed && <span className="filter-applied" aria-label="Filters applied" />}<FontAwesomeIcon icon={faChevronDown} /></button>
