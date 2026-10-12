@@ -332,27 +332,29 @@ async function tube(host, signal) {
     if (!map.width) return;
     const k = clamp(Math.floor(at), 0, last), f = k < last ? at - k : 0, a = ride[k], b = ride[Math.min(last, k + 1)];
     const t = a.t + f * stepMs, minutes = (t - flight.t0) / 60000;
-    /* The box and its winds step from slice to slice (the nearest slice to the
-     * moment shown); the track and the particles move continuously. */
-    const box = f < .5 ? a : b;
+    /* The box glides between slices; its winds cross-fade from one slice to the next. */
+    const box = { lat0: lerp(a.lat0, b.lat0, f), lon0: lerp(a.lon0, b.lon0, f), h: lerp(a.h, b.h, f), w: lerp(a.w, b.w, f) };
     map.base(coast, 10);
-    const kb = ride.indexOf(box);
-    for (let back = 4; back >= 1; back--) { const g = ride[kb - back]; if (g) map.rect(g.lat0, g.lon0, g.h, g.w, { alpha: .05 * (5 - back), width: .8 }); }
+    for (let back = 4; back >= 1; back--) { const g = ride[k - back]; if (g) map.rect(g.lat0, g.lon0, g.h, g.w, { alpha: .05 * (5 - back), width: .8 }); }
     map.rect(box.lat0, box.lon0, box.h, box.w, { alpha: .9, width: 1.5, fill: .05 });
-    shown = sliceArrows(box);
-    for (const q of shown) map.arrow(q.lat, q.lon, q.u, q.v, { alpha: .85, width: 1.1, scale: 3, max: 11 });
+    /* Hold each slice's winds, then fade to the next over the last 30 % of the step. */
+    const fade = clamp((f - .7) / .3, 0, 1);
+    const arrowsA = sliceArrows(a), arrowsB = fade > 0 ? sliceArrows(b) : [];
+    for (const q of arrowsA) if (inBox(box, q.lat, q.lon)) map.arrow(q.lat, q.lon, q.u, q.v, { alpha: .85 * (1 - fade), width: 1.1, scale: 3, max: 11 });
+    for (const q of arrowsB) if (inBox(box, q.lat, q.lon)) map.arrow(q.lat, q.lon, q.u, q.v, { alpha: .85 * fade, width: 1.1, scale: 3, max: 11 });
+    shown = fade < .5 ? arrowsA : arrowsB;
     drawTrack(map, segments, minutes);
     const g = cloud.find(t);
     if (g) drawCloud(map, g, (t - g.tA) / (g.tB - g.tA) * (g.steps - 1), { tail: false });
     let pos = a.pos;
     if (pos && b.pos && f > 0) pos = [lerp(a.pos[0], b.pos[0], f), lerp(a.pos[1], b.pos[1], f)];
     if (pos && !g) map.dot(pos[0], pos[1], 4.5, CREAM, INK, 1.8);
-    input.value = at; output.textContent = fmt(kb + 1); date.textContent = utc(t);
-    const s = box;
+    input.value = at; output.textContent = fmt(k + 1); date.textContent = utc(t);
+    const s = f < .5 ? a : b;
     source.textContent = `box ${fmt(s.h)}° × ${fmt(s.w)}°, winds stored only inside it`;
     const hours = gapHours(t), half = s.half ?? s.w / 2;
     const pad = half <= 9.05 ? 'padded ±9°, the minimum' : `padded ±${half.toFixed(1)}° for the ${fmt(hours)}-hour gap, where the cloud spreads further`;
-    read.textContent = `Slice ${kb + 1} of ${ride.length} / ${s.wind ? 'covers the wind’s path from both ends of the gap' : 'covers the track'}, ${pad}`;
+    read.textContent = `Slice ${k + 1} of ${ride.length} / ${s.wind ? 'covers the wind’s path from both ends of the gap' : 'covers the track'}, ${pad}`;
   }
   const play = player(host, signal, dt => { at += dt * .005; if (at > last + 10) at = 0; draw(); });
   bindSlider(input, play, value => { at = value; draw(); });
