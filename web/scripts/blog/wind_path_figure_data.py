@@ -89,8 +89,28 @@ for g in range(hdr['nGrids']):
                    'half': r2(min(20, max(9, 6 + 0.05 * gh))), 'gapH': round(gh), 'wind': bool(levels) and gh >= 6,
                    'aLat': ui.shape[0], 'aLon': ui.shape[1], 'aStep': round(st * step, 2), 'off': len(blob), 'pos': pos})
     blob += np.clip(np.rint(np.stack([ui, vi], axis=-1)), -127, 127).astype(np.int8).tobytes()
-json.dump({'levelHpa': hdr['levelHpa'], 'levels': levels, 'stepH': hdr['stepMs'] / 3600000, 'slices': slices}, open(f'{OUT}/tube.json', 'w'), separators=(',', ':'))
+# v5 cubes: the coarse outer field (float level) follows every fine grid; keep it
+# thinned to ~3° for the figure's pale "around the box" arrows (tube-outer.bin).
+outer = hdr.get('outer'); oblob = bytearray()
+if outer:
+    for g in range(hdr['nGrids']):
+        nLat, nLon = outer['dims'][g]; n = nLat * nLon
+        U = np.frombuffer(raw, dtype='<i2', count=n, offset=off).reshape(nLat, nLon) / hdr['scale']; off += 2 * n
+        V = np.frombuffer(raw, dtype='<i2', count=n, offset=off).reshape(nLat, nLon) / hdr['scale']; off += 2 * n
+        st = max(1, round(3.0 / outer['dLat'])); d = st * outer['dLat']
+        lat0, lon0 = outer['origins'][g]
+        # crop to what the figure's map can show (its view is the union of the ride's boxes)
+        i0 = max(0, math.ceil((5 - lat0) / d)); i1 = min((nLat - 1) // st, math.floor((75 - lat0) / d))
+        j0 = max(0, math.ceil((-135 - lon0) / d)); j1 = min((nLon - 1) // st, math.floor((25 - lon0) / d))
+        ui = U[::st, ::st][i0:i1 + 1, j0:j1 + 1]; vi = V[::st, ::st][i0:i1 + 1, j0:j1 + 1]
+        slices[g]['outer'] = {'lat0': lat0 + i0 * d, 'lon0': lon0 + j0 * d, 'aLat': ui.shape[0], 'aLon': ui.shape[1],
+                              'aStep': round(d, 2), 'off': len(oblob)}
+        oblob += np.clip(np.rint(np.stack([ui, vi], axis=-1)), -127, 127).astype(np.int8).tobytes()
+json.dump({'levelHpa': hdr['levelHpa'], 'levels': levels, 'stepH': hdr['stepMs'] / 3600000, 'slices': slices,
+           'outerStep': outer['dLat'] if outer else None}, open(f'{OUT}/tube.json', 'w'), separators=(',', ':'))
 open(f'{OUT}/tube.bin', 'wb').write(bytes(blob))
+if outer:
+    open(f'{OUT}/tube-outer.bin', 'wb').write(bytes(oblob))
 
 def gap_path(name):
     tr = json.load(open(f'{S}/{name}'))['observed']['reconstructed_track']

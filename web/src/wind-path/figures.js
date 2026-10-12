@@ -296,9 +296,9 @@ async function replay(host, signal) {
 
 /* ── 2. riding the tube ────────────────────────────────────────────────────── */
 async function tube(host, signal) {
-  const [meta, buffer, coast, flight, cloud, fmeta, fbuf] = await Promise.all([load('tube.json'), load('tube.bin'), load('coast-atlantic.json'), load('flight.json'), clouds(), load('filters.json'), load('filters.bin')]);
+  const [meta, buffer, coast, flight, cloud, fmeta, fbuf, obuf] = await Promise.all([load('tube.json'), load('tube.bin'), load('coast-atlantic.json'), load('flight.json'), clouds(), load('filters.json'), load('filters.bin'), load('tube-outer.bin')]);
   if (signal.aborted) return;
-  const fpos = new Int16Array(fbuf);
+  const fpos = new Int16Array(fbuf), coarse = new Int8Array(obuf);
   /* The filters' own clouds (every 3 h): the forward one from the fix before a
    * long gap, the backward one from the fix after it. The box is sized for them. */
   const filterAt = (t, dir) => { let best = null; for (const sn of fmeta.snaps) if (sn.dir === dir && Math.abs(sn.t - t) <= 1.6 * 3600000 && (!best || Math.abs(sn.t - t) < Math.abs(best.t - t))) best = sn; return best; };
@@ -310,7 +310,7 @@ async function tube(host, signal) {
   /* One fixed view that holds every box on the ride: nothing zooms or pans. */
   const view = ride.reduce((v, b) => ({ lat0: Math.min(v.lat0, b.lat0 - 2), lat1: Math.max(v.lat1, b.lat0 + b.h + 2), lon0: Math.min(v.lon0, b.lon0 - 2), lon1: Math.max(v.lon1, b.lon0 + b.w + 2) }), { lat0: 90, lat1: -90, lon0: 360, lon1: -360 });
   host.innerHTML = `${heading('Riding the tube', 'one box of 0.25° winds per 3-hour slice')}
-    <div class="chart-legend">${key('This slice’s box', BLUE)}${windKey()}${key('Forward particles', BLUE, 'dot')}${key('Backward particles', RED, 'dot')}${key('Bridges', INK, 'dot')}${key('Reconstructed track', INK)}</div>
+    <div class="chart-legend">${key('This slice’s box', BLUE)}${windKey()}<span class="chart-key"><i class="spectrum-key" style="opacity:.35"></i>Coarse 1.5° winds around it</span>${key('Forward particles', BLUE, 'dot')}${key('Backward particles', RED, 'dot')}${key('Bridges', INK, 'dot')}${key('Reconstructed track', INK)}</div>
     <div class="fleet-map-stage"><output class="fleet-hover" hidden></output></div>
     ${footer('')}
     ${slider('Slice', last, .05, 'Reconstruction cube time slice')}
@@ -318,16 +318,28 @@ async function tube(host, signal) {
   const map = createMap(view, 'The flight with the reconstruction’s wind box for each three-hour slice moving along it, the winds inside the box, and the possible positions during the gaps. Space plays, arrow keys step.');
   host.querySelector('.fleet-map-stage').prepend(map.canvas);
   const input = host.querySelector('input'), output = host.querySelector('.fleet-time output'), read = host.querySelector('.chart-readout'), hover = host.querySelector('.fleet-hover'), date = host.querySelector('.fleet-date'), source = host.querySelector('.fleet-source');
-  let at = 0, shown = [];
+  let at = 0, shown = [], coarseShown = [];
   const gapHours = t => { const m = (t - flight.t0) / 60000; const g = gaps.find(([a, b]) => m >= a && m <= b); return g ? (g[1] - g[0]) / 60 : 0; };
-  /* The winds of one slice, thinned to at least 1.25° and ~12 px apart so small
-   * and large boxes, and phone and desktop widths, read alike. */
+  /* The winds of one slice, thinned to at least 1.25° and ~8 px apart so small
+   * and large boxes, and phone and desktop widths, read alike (the coarse field
+   * around the box is drawn sparser and paler). */
   function sliceArrows(b) {
-    const minDeg = Math.max(1.25, 12 / (map.width / (view.lon1 - view.lon0)));
+    const minDeg = Math.max(1.25, 8 / (map.width / (view.lon1 - view.lon0)));
     const out = [], skip = Math.max(1, Math.ceil(minDeg / b.aStep - 1e-9));
     for (let i = 0; i < b.aLat; i += skip) for (let j = 0; j < b.aLon; j += skip) {
       const o = b.off + (i * b.aLon + j) * 2, u = fine[o], v = fine[o + 1];
       out.push({ lat: b.lat0 + i * b.aStep, lon: b.lon0 + j * b.aStep, u, v, speed: Math.hypot(u, v) });
+    }
+    return out;
+  }
+  /* The coarse outer field of one slice (stored thinned to ~3°). */
+  function coarseArrows(b) {
+    const o = b.outer, out = [];
+    if (!o) return out;
+    const minDeg = Math.max(3, 18 / (map.width / (view.lon1 - view.lon0))), skip = Math.max(1, Math.ceil(minDeg / o.aStep - 1e-9));
+    for (let i = 0; i < o.aLat; i += skip) for (let j = 0; j < o.aLon; j += skip) {
+      const k = o.off + (i * o.aLon + j) * 2, u = coarse[k], v = coarse[k + 1];
+      out.push({ lat: o.lat0 + i * o.aStep, lon: o.lon0 + j * o.aStep, u, v, speed: Math.hypot(u, v) });
     }
     return out;
   }
@@ -339,6 +351,13 @@ async function tube(host, signal) {
     /* The box glides between slices; its winds cross-fade from one slice to the next. */
     const box = { lat0: lerp(a.lat0, b.lat0, f), lon0: lerp(a.lon0, b.lon0, f), h: lerp(a.h, b.h, f), w: lerp(a.w, b.w, f) };
     map.base(coast, 10);
+    /* Around the box: the cube's coarse 1.5° winds, pale and sparse, cross-faded like the box's. */
+    const fadeC = clamp((f - .7) / .3, 0, 1);
+    for (const [sl, al] of [[a, 1 - fadeC], [b, fadeC]]) {
+      if (al <= 0) continue;
+      for (const q of coarseArrows(sl)) if (map.inView(q.lat, q.lon) && !inBox(box, q.lat, q.lon)) map.arrow(q.lat, q.lon, q.u, q.v, { alpha: .3 * al, width: .8, scale: 3.4, max: 10 });
+    }
+    coarseShown = coarseArrows(fadeC < .5 ? a : b);
     for (let back = 4; back >= 1; back--) { const g = ride[k - back]; if (g) map.rect(g.lat0, g.lon0, g.h, g.w, { alpha: .05 * (5 - back), width: .8 }); }
     map.rect(box.lat0, box.lon0, box.h, box.w, { alpha: .9, width: 1.5, fill: .05 });
     /* Hold each slice's winds, then fade to the next over the last 30 % of the step. */
@@ -372,7 +391,11 @@ async function tube(host, signal) {
     const [x, y] = map.pointer(event), bd = map.bounds, lat = bd.lat1 - y / map.height * (bd.lat1 - bd.lat0), lon = bd.lon0 + x / map.width * (bd.lon1 - bd.lon0);
     const s = ride[clamp(Math.round(at), 0, last)];
     hover.hidden = false;
-    if (!inBox(s, lat, lon) || !shown.length) { hover.textContent = `${place(lat, lon)} / outside the box: the reconstruction stores no wind here`; return; }
+    if (!inBox(s, lat, lon) || !shown.length) {
+      if (!coarseShown.length) { hover.textContent = `${place(lat, lon)} / outside the box`; return; }
+      const c = coarseShown.reduce((best, p) => Math.hypot(p.lat - lat, p.lon - lon) < Math.hypot(best.lat - lat, best.lon - lon) ? p : best, coarseShown[0]);
+      hover.textContent = `${place(lat, lon)} / outside the box, coarse 1.5° winds: ${fmt(c.speed)} m/s toward ${toward(c.u, c.v)}`; return;
+    }
     const q = shown.reduce((best, p) => Math.hypot(p.lat - lat, p.lon - lon) < Math.hypot(best.lat - lat, best.lon - lon) ? p : best, shown[0]);
     hover.textContent = `${place(lat, lon)} / ${fmt(q.speed)} m/s toward ${toward(q.u, q.v)}`;
   };
