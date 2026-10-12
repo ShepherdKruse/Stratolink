@@ -54,17 +54,29 @@ const CFG = {
      *  10,000 draw differ by 5–13 km / 2–3 km, against 65–103 km / 56–75 km
      *  between independent filter runs. */
     LINE_SAMPLES: 2000,
-    /** The drawn line is the TRIMMED LOCAL MEAN of those draws: the per-step
-     *  average of the LINE_TRIM_FRAC fraction of sample paths closest (mean
-     *  time-matched distance) to the medoid path. A plain posterior mean lands
-     *  in the void between modes when the gap's posterior splits (on the 201 h
-     *  gap only 0–17 % of samples lie within 300 km of it at the split hours);
-     *  the medoid is a real path inside the dominant mode but a discrete pick
-     *  that flips between near-tied candidates (draw noise 100–170 km, rerun
-     *  worst case ~1,000 km). Averaging the medoid's nearest tenth keeps the
-     *  mode (43–45 % of samples within 300 km) at the mean's smoothness and
-     *  roughly the mean's rerun stability (67–136 km median, ≤600 km worst). */
+    /** The drawn line is the per-step MEAN of those draws, unless the draws
+     *  split into separate routes, in which case it is their TRIMMED LOCAL
+     *  MEAN: the average of the LINE_TRIM_FRAC fraction of sample paths closest
+     *  (mean time-matched distance) to the medoid path (`chooseLine`). A mean
+     *  of several routes lands in the void between them; the trimmed local
+     *  mean stays inside the dominant one. The previous sampler (an unbounded
+     *  heading walk and a chord-centred tube) split the reference flight's
+     *  201 h gap so badly that 0–17 % of draws lay within 300 km of the mean at
+     *  the split hours, so the trimmed mean was always drawn. With particles
+     *  that follow the wind the draws form one bundle on every gap of that
+     *  flight; there the mean is 30–90 km from the trimmed line and far
+     *  steadier between reruns (10 km median against 50 km). */
     LINE_TRIM_FRAC: 0.10,
+    /** Split test: at every LINE_DISTANCE_STRIDE-th interior step, compare the
+     *  share of draws within LINE_SPLIT_RADIUS_KM of the mean with the share
+     *  within it of the trimmed local mean (steps where the latter is under
+     *  5 % are skipped). The draws have split when the mean's share falls
+     *  below LINE_SPLIT_RATIO of the trimmed line's at any step: the mean is
+     *  then in a gap between routes. On the reference flight the ratio is
+     *  0.87–1.00 with the current sampler and 0.00–0.04 on the old split
+     *  posterior, so 0.5 sits well clear of both. */
+    LINE_SPLIT_RADIUS_KM: 300,
+    LINE_SPLIT_RATIO: 0.5,
     /** Size of the strided subset the medoid is found in (the pairwise distance
      *  matrix is O(subset²)); every draw is then ranked against that medoid. */
     LINE_MEDOID_SUBSET: 1000,
@@ -222,9 +234,10 @@ export type LongGapBridgeResult = {
      *  (see CFG.UNEXPLAINED_CLOSURE_KM); the gap is then a low-confidence
      *  corridor whatever its spread. */
     unexplained: boolean;
-    /** How the drawn `meanPath` was formed: 'trimmed-local-mean' (long gaps,
-     *  see CFG.LINE_TRIM_FRAC) or 'straight' (sub-30-min gaps). */
-    line_method: 'trimmed-local-mean' | 'straight';
+    /** How the drawn `meanPath` was formed: 'posterior-mean' (long gaps whose
+     *  draws form one bundle), 'trimmed-local-mean' (long gaps whose draws
+     *  split, see CFG.LINE_TRIM_FRAC) or 'straight' (sub-30-min gaps). */
+    line_method: 'posterior-mean' | 'trimmed-local-mean' | 'straight';
     /** Posterior draws the line was taken from (0 for a straight bridge). */
     line_samples: number;
 };
@@ -298,6 +311,52 @@ export function trimmedLocalMean(
         path[s] = { lat: lat / kept, lon: lon / kept, alt: alt / kept };
     }
     return { path, medoid, kept };
+}
+
+/** Pick the drawn line through a long gap from its posterior `samples`: the
+ *  per-step mean of every draw, or — when the draws have split into separate
+ *  routes (see CFG.LINE_SPLIT_RATIO) — their trimmed local mean. Returns the
+ *  line, the method, how many draws it averages and the split ratio (the
+ *  minimum, over the tested steps, of the mean's share of draws within the
+ *  split radius over the trimmed line's share). Pure; exported for tests. */
+export function chooseLine(
+    samples: PathPoint[][],
+    splitRatio = CFG.LINE_SPLIT_RATIO,
+    radiusKm = CFG.LINE_SPLIT_RADIUS_KM,
+    stride = CFG.LINE_DISTANCE_STRIDE,
+): { path: PathPoint[]; method: 'posterior-mean' | 'trimmed-local-mean'; kept: number; ratio: number } {
+    const K = samples.length;
+    const n1 = samples[0].length;
+    const mean: PathPoint[] = new Array(n1);
+    for (let s = 0; s < n1; s++) {
+        let lat = 0;
+        let lon = 0;
+        let alt = 0;
+        for (let i = 0; i < K; i++) { const q = samples[i][s]; lat += q.lat; lon += q.lon; alt += q.alt; }
+        mean[s] = { lat: lat / K, lon: lon / K, alt: alt / K };
+    }
+    const trimmed = trimmedLocalMean(samples, CFG.LINE_TRIM_FRAC, CFG.LINE_MEDOID_SUBSET, stride);
+    const r2 = radiusKm * radiusKm;
+    const near = (c: PathPoint, s: number): number => {
+        const kx = 111.32 * Math.cos(toRad(c.lat));
+        let inside = 0;
+        for (let i = 0; i < K; i++) {
+            const q = samples[i][s];
+            const dx = (q.lon - c.lon) * kx;
+            const dy = (q.lat - c.lat) * 111.32;
+            if (dx * dx + dy * dy <= r2) inside += 1;
+        }
+        return inside / K;
+    };
+    let ratio = 1;
+    for (let s = Math.max(1, stride); s < n1 - 1; s += Math.max(1, stride)) {
+        const t = near(trimmed.path[s], s);
+        if (t < 0.05) continue;
+        ratio = Math.min(ratio, near(mean[s], s) / t);
+    }
+    return ratio < splitRatio
+        ? { path: trimmed.path, method: 'trimmed-local-mean', kept: trimmed.kept, ratio }
+        : { path: mean, method: 'posterior-mean', kept: K, ratio };
 }
 
 function particleCount(): number {
@@ -1021,17 +1080,16 @@ export async function reconstructLongGap(
     }
 
     /* The drawn line. Draw LINE_SAMPLES bridged trajectories by pair weight
-     * (the same draws feed the occupancy footprint below) and take the trimmed
-     * local mean around their medoid — see CFG.LINE_TRIM_FRAC for why not the
-     * posterior mean (sits between modes) or the bare medoid (a coin flip
-     * between near-tied paths). Falls back to the posterior mean if no pair
-     * could be matched at all. */
+     * (the same draws feed the occupancy footprint below) and take their mean,
+     * or their trimmed local mean if they have split into separate routes —
+     * see CFG.LINE_TRIM_FRAC / chooseLine. Falls back to the analytic
+     * posterior mean if no pair could be matched at all. */
     const draw = pairs.w.length ? systematicResample(pairs.w, CFG.LINE_SAMPLES) : new Int32Array(0);
     const samples: PathPoint[][] = new Array(draw.length);
     for (let k = 0; k < draw.length; k++) {
         samples[k] = joinHalves(fwd[pairs.i[draw[k]]].path, bwd[pairs.j[draw[k]]].path, m, nSteps, kJoin);
     }
-    const line = samples.length ? trimmedLocalMean(samples) : null;
+    const line = samples.length ? chooseLine(samples) : null;
     const meanPath: Array<[number, number]> = line
         ? line.path.map((p) => [R4(p.lon), R4(p.lat)] as [number, number])
         : posteriorMean;
@@ -1095,7 +1153,7 @@ export async function reconstructLongGap(
         `join σ ${R1(pairs.sigmaKm)} km, closure ${R1(joinMissKm)} km, resamples fwd ${statsF.resamples} / bwd ${statsB.resamples}; ` +
         `${outsideSamples}/${totalSamples} wind samples outside the cube's slice boxes ` +
         `(${R1(outsideFrac * 100)}% raw, ${R1(outsideWeighted * 100)}% posterior-weighted); ` +
-        `line = trimmed local mean of ${line ? line.kept : 0}/${samples.length} draws around the medoid, vertices outside: ${meanOutside}/${nSteps + 1}; ${Date.now() - t0} ms`,
+        `line = ${line ? `${line.method} of ${line.kept}/${samples.length} draws (split ratio ${Math.round(line.ratio * 100) / 100})` : 'analytic posterior mean'}, vertices outside: ${meanOutside}/${nSteps + 1}; ${Date.now() - t0} ms`,
     );
 
     return {
@@ -1115,7 +1173,7 @@ export async function reconstructLongGap(
         outside_cube_frac: Math.round(outsideFrac * 1e4) / 1e4,
         outside_cube_frac_weighted: Math.round(outsideWeighted * 1e4) / 1e4,
         unexplained,
-        line_method: 'trimmed-local-mean',
+        line_method: line ? line.method : 'posterior-mean',
         line_samples: samples.length,
     };
 }

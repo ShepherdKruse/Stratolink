@@ -130,7 +130,7 @@ export type StratolinkForecast = {
             /** Long gaps: the winds cannot connect the two fixes (clouds never
              *  met, or closure > 300 km) — a low-confidence corridor. */
             unexplained?: boolean;
-            /** How the drawn bridge was formed ('trimmed-local-mean' | 'straight'). */
+            /** How the drawn bridge was formed ('posterior-mean' | 'trimmed-local-mean' | 'straight'). */
             line_method?: string;
         }>;
     };
