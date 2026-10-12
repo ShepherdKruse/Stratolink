@@ -1,0 +1,344 @@
+{
+  "status": "pass",
+  "baseline": "a9d6ed59ebd9ca6a4e04108afe0bbe3a827cddde",
+  "kicad_version": "10.0.0",
+  "canonical_unchanged_by_review": true,
+  "canonical_hashes": {
+    "/Users/twarn/Repositories/Stratolink/hardware/pcb/stratolink.kicad_pcb": "268f5ef0f8d59caf0a46a0cb990fb26c1d74563e3423a15c16d361d392f9f96c",
+    "/Users/twarn/Repositories/Stratolink/hardware/pcb/stratolink.kicad_sch": "20f0d465521daaa088e171e174108644069755c4067b28239657019266088bc4",
+    "/Users/twarn/Repositories/Stratolink/hardware/pcb/stratolink.kicad_pro": "5dd65b15408657138b37fb9ee274f0798e96aadb4092f4e799c61d03bece1786",
+    "/Users/twarn/Repositories/Stratolink/hardware/pcb/lib/PQFN50P200X200100-12N.kicad_mod": "aecac84d4c0a2e9afbfdcf94d7cf3aea201074cbe07378d6f39f39622b75fdc7",
+    "/Users/twarn/Repositories/Stratolink/hardware/pcb/lib/Suspension_PTH_D2p0_OD3p2.kicad_mod": "2f71d16ba89940b2e21f46e35e96a71f7ff660adaaff82485ed805de143c9ca1"
+  },
+  "existing_footprints": 59,
+  "unchanged_footprints": 58,
+  "U7_only_twelve_mask_margins": true,
+  "added_footprints": [
+    "H1",
+    "H2"
+  ],
+  "existing_pad_connectivity_checks": 230,
+  "total_pad_connectivity_checks": 232,
+  "new_mount_ground_connectivity": {
+    "H2.1": {
+      "original_ground_nodes": 67,
+      "all_ground_nodes": 69
+    },
+    "H1.1": {
+      "original_ground_nodes": 67,
+      "all_ground_nodes": 69
+    }
+  },
+  "native_unconnected": 0,
+  "unchanged_segments": 879,
+  "unchanged_track_arcs": 3,
+  "unchanged_vias": 142,
+  "removed_edge_circles": [
+    "107f8202-1fe1-4511-99bb-472b3941de6c",
+    "d8863d69-e0c5-455b-8892-eb88fd120483"
+  ],
+  "zone_configuration_unchanged": true,
+  "schematic_project_lib_tables_unchanged": true,
+  "modified_library_files": [
+    "PQFN50P200X200100-12N.kicad_mod"
+  ],
+  "new_library_files": [
+    "Suspension_PTH_D2p0_OD3p2.kicad_mod"
+  ],
+  "drc": {
+    "project": {
+      "violations": {
+        "before": 70,
+        "after": 61,
+        "added": [],
+        "removed": [
+          {
+            "description": "Front solder mask aperture bridges items with different nets",
+            "item_uuids": [
+              "9ba169d3-5736-49df-b848-9088befd6a05",
+              "c15edda3-911a-44fe-9d0e-b38bf0e5970f"
+            ],
+            "severity": "error",
+            "type": "solder_mask_bridge"
+          },
+          {
+            "description": "Front solder mask aperture bridges items with different nets",
+            "item_uuids": [
+              "10c617de-60db-4459-85dc-c4e27f639bb8",
+              "c15edda3-911a-44fe-9d0e-b38bf0e5970f"
+            ],
+            "severity": "error",
+            "type": "solder_mask_bridge"
+          },
+          {
+            "description": "Front solder mask aperture bridges items with different nets",
+            "item_uuids": [
+              "9ba169d3-5736-49df-b848-9088befd6a05",
+              "a93cbc1e-4e77-4486-a48b-8187656ae968"
+            ],
+            "severity": "error",
+            "type": "solder_mask_bridge"
+          },
+          {
+            "description": "Front solder mask aperture bridges items with different nets",
+            "item_uuids": [
+              "97e63275-6524-4b0c-aa59-358be4aa2e66",
+              "a93cbc1e-4e77-4486-a48b-8187656ae968"
+            ],
+            "severity": "error",
+            "type": "solder_mask_bridge"
+          },
+          {
+            "description": "Front solder mask aperture bridges items with different nets",
+            "item_uuids": [
+              "885f4db5-7a9b-4845-9096-ed56c7826b71",
+              "97e63275-6524-4b0c-aa59-358be4aa2e66"
+            ],
+            "severity": "error",
+            "type": "solder_mask_bridge"
+          },
+          {
+            "description": "Front solder mask aperture bridges items with different nets",
+            "item_uuids": [
+              "77d55d14-93f0-45c2-9c41-d0881e10a934",
+              "840ac94f-0c85-4cce-bee7-7a770472d316"
+            ],
+            "severity": "error",
+            "type": "solder_mask_bridge"
+          },
+          {
+            "description": "Front solder mask aperture bridges items with different nets",
+            "item_uuids": [
+              "5059cf4f-a448-4344-a737-e6ab6c06719b",
+              "8354534f-c9fa-4833-8f1c-d92a8d313fe9"
+            ],
+            "severity": "error",
+            "type": "solder_mask_bridge"
+          },
+          {
+            "description": "Front solder mask aperture bridges items with different nets",
+            "item_uuids": [
+              "10c617de-60db-4459-85dc-c4e27f639bb8",
+              "5059cf4f-a448-4344-a737-e6ab6c06719b"
+            ],
+            "severity": "error",
+            "type": "solder_mask_bridge"
+          },
+          {
+            "description": "Footprint 'PQFN50P200X200100-12N' does not match copy in library 'lib'",
+            "item_uuids": [
+              "30c6d1e8-0ffa-4633-8a7f-49ed926e42c2"
+            ],
+            "severity": "warning",
+            "type": "lib_footprint_mismatch"
+          }
+        ]
+      },
+      "unconnected_items": {
+        "before": 0,
+        "after": 0,
+        "added": [],
+        "removed": []
+      },
+      "schematic_parity": {
+        "before": 11,
+        "after": 11,
+        "added": [],
+        "removed": []
+      }
+    },
+    "diagnostic": {
+      "violations": {
+        "before": 83,
+        "after": 74,
+        "added": [],
+        "removed": [
+          {
+            "description": "Front solder mask aperture bridges items with different nets",
+            "item_uuids": [
+              "9ba169d3-5736-49df-b848-9088befd6a05",
+              "c15edda3-911a-44fe-9d0e-b38bf0e5970f"
+            ],
+            "severity": "error",
+            "type": "solder_mask_bridge"
+          },
+          {
+            "description": "Front solder mask aperture bridges items with different nets",
+            "item_uuids": [
+              "10c617de-60db-4459-85dc-c4e27f639bb8",
+              "c15edda3-911a-44fe-9d0e-b38bf0e5970f"
+            ],
+            "severity": "error",
+            "type": "solder_mask_bridge"
+          },
+          {
+            "description": "Front solder mask aperture bridges items with different nets",
+            "item_uuids": [
+              "9ba169d3-5736-49df-b848-9088befd6a05",
+              "a93cbc1e-4e77-4486-a48b-8187656ae968"
+            ],
+            "severity": "error",
+            "type": "solder_mask_bridge"
+          },
+          {
+            "description": "Front solder mask aperture bridges items with different nets",
+            "item_uuids": [
+              "97e63275-6524-4b0c-aa59-358be4aa2e66",
+              "a93cbc1e-4e77-4486-a48b-8187656ae968"
+            ],
+            "severity": "error",
+            "type": "solder_mask_bridge"
+          },
+          {
+            "description": "Front solder mask aperture bridges items with different nets",
+            "item_uuids": [
+              "885f4db5-7a9b-4845-9096-ed56c7826b71",
+              "97e63275-6524-4b0c-aa59-358be4aa2e66"
+            ],
+            "severity": "error",
+            "type": "solder_mask_bridge"
+          },
+          {
+            "description": "Front solder mask aperture bridges items with different nets",
+            "item_uuids": [
+              "77d55d14-93f0-45c2-9c41-d0881e10a934",
+              "840ac94f-0c85-4cce-bee7-7a770472d316"
+            ],
+            "severity": "error",
+            "type": "solder_mask_bridge"
+          },
+          {
+            "description": "Front solder mask aperture bridges items with different nets",
+            "item_uuids": [
+              "5059cf4f-a448-4344-a737-e6ab6c06719b",
+              "8354534f-c9fa-4833-8f1c-d92a8d313fe9"
+            ],
+            "severity": "error",
+            "type": "solder_mask_bridge"
+          },
+          {
+            "description": "Front solder mask aperture bridges items with different nets",
+            "item_uuids": [
+              "10c617de-60db-4459-85dc-c4e27f639bb8",
+              "5059cf4f-a448-4344-a737-e6ab6c06719b"
+            ],
+            "severity": "error",
+            "type": "solder_mask_bridge"
+          },
+          {
+            "description": "Footprint 'PQFN50P200X200100-12N' does not match copy in library 'lib'",
+            "item_uuids": [
+              "30c6d1e8-0ffa-4633-8a7f-49ed926e42c2"
+            ],
+            "severity": "warning",
+            "type": "lib_footprint_mismatch"
+          }
+        ]
+      },
+      "unconnected_items": {
+        "before": 0,
+        "after": 0,
+        "added": [],
+        "removed": []
+      },
+      "schematic_parity": {
+        "before": 11,
+        "after": 11,
+        "added": [],
+        "removed": []
+      }
+    }
+  },
+  "export_comparison": {
+    "stratolink-F_Cu.gtl": "identical_except_creation_timestamp",
+    "stratolink-B_Cu.gbl": "identical_except_creation_timestamp",
+    "stratolink-F_Paste.gtp": "identical_except_creation_timestamp",
+    "stratolink-B_Paste.gbp": "identical_except_creation_timestamp",
+    "stratolink-B_Mask.gbs": "identical_except_creation_timestamp",
+    "stratolink-Edge_Cuts.gm1": "identical_except_creation_timestamp",
+    "stratolink-PTH.drl": "identical_except_creation_timestamp",
+    "stratolink-NPTH.drl": "identical_except_creation_timestamp",
+    "stratolink-F_Mask.gts": {
+      "only_changed_aperture_ids": [
+        18,
+        19
+      ],
+      "U7_flashes": [
+        {
+          "ref": "U7",
+          "aperture": 18,
+          "command": "X69798000Y-38571999D03*"
+        },
+        {
+          "ref": "U7",
+          "aperture": 18,
+          "command": "X70298000Y-38572000D03*"
+        },
+        {
+          "ref": "U7",
+          "aperture": 18,
+          "command": "X70798000Y-38572000D03*"
+        },
+        {
+          "ref": "U7",
+          "aperture": 18,
+          "command": "X71297999Y-38572000D03*"
+        },
+        {
+          "ref": "U7",
+          "aperture": 19,
+          "command": "X71313000Y-38072000D03*"
+        },
+        {
+          "ref": "U7",
+          "aperture": 19,
+          "command": "X71313000Y-37557000D03*"
+        },
+        {
+          "ref": "U7",
+          "aperture": 18,
+          "command": "X71298000Y-37042001D03*"
+        },
+        {
+          "ref": "U7",
+          "aperture": 18,
+          "command": "X70798000Y-37042000D03*"
+        },
+        {
+          "ref": "U7",
+          "aperture": 18,
+          "command": "X70298000Y-37042000D03*"
+        },
+        {
+          "ref": "U7",
+          "aperture": 18,
+          "command": "X69798001Y-37042000D03*"
+        },
+        {
+          "ref": "U7",
+          "aperture": 19,
+          "command": "X69783000Y-37557000D03*"
+        },
+        {
+          "ref": "U7",
+          "aperture": 19,
+          "command": "X69783000Y-38057000D03*"
+        }
+      ]
+    }
+  },
+  "export_sha256": {
+    "stratolink-B_Mask.gbs": "fcbc0b5dde97b852dddce7eb9a188487b7aa18e1ec7310881885fef2ce09b445",
+    "stratolink-PTH.drl": "701b6cbec29ae2e88e9a32947582665cb16e6091b7979c9b0515a497e467ef28",
+    "stratolink-B_Paste.gbp": "85a89cf61ed813100d1e1ad1e258a541ff70217019f205ef19f5288e8e5efcd6",
+    "stratolink-Edge_Cuts.gm1": "fea784e4e04514833f29a82f659b86b6138e0787c7141420ea5722c909d27c1a",
+    "stratolink-F_Mask.gts": "482ede8255b66fa13ff96ee710e2acc7ed6902046d82712b0de3399e63d4b766",
+    "stratolink-job.gbrjob": "6092ea50ff574078f3fd5b4c66898a49e84da325754d54d7bd3c8a6ee6f5a225",
+    "stratolink-F_Paste.gtp": "e2a1d5236604fed8f3847aab58db42555ddd44e18920a03d1cc479767d9da737",
+    "stratolink-B_Cu.gbl": "810efb54dadbf03bd996ed72f7b785a9546b383a61cd0e9fe66f7afd1f6ceca0",
+    "stratolink-F_Cu.gtl": "76a4157686b7f33eb887a3c481d22755fced7dac16fa2802989951b5b0c7524b",
+    "stratolink-NPTH.drl": "9e6c9d4b3417bfc26afa97e5fecb7c17effcf5cc85940ceb7b7ff35880d9950e"
+  },
+  "archive_sha256": "f8f723376c838f2180664eeae0c97b3786c22bd2b2f242d3aecd389f8ce645a8",
+  "limits": "Scope, connectivity, native DRC delta and manufacturing exports verified. JLC1:1 mask supported; ST positive mask/stencil/land-pattern review remains unresolved. Mechanical/string and RF testing remain physical checks."
+}

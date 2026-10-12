@@ -1,0 +1,115 @@
+{
+  "status": "pass",
+  "unchanged_layers": [
+    "stratolink-B_Cu.gbl",
+    "stratolink-B_Mask.gbs",
+    "stratolink-B_Paste.gbp",
+    "stratolink-F_Cu.gtl",
+    "stratolink-F_Paste.gtp"
+  ],
+  "changed_layer": "F.Mask",
+  "change": "Only two aperture macros used exclusively by the12U7padflashes. Coordinates/othermacros/plotcommands exact.",
+  "old_U7_apertures": {
+    "18": "%ADD18RoundRect,0.083100X0.193900X-0.243900X0.193900X0.243900X-0.193900X0.243900X-0.193900X-0.243900X0*%",
+    "19": "%ADD19RoundRect,0.083100X0.243900X-0.193900X0.243900X0.193900X-0.243900X0.193900X-0.243900X-0.193900X0*%"
+  },
+  "new_U7_apertures": {
+    "18": "%ADD18RoundRect,0.052500X0.122500X-0.172500X0.122500X0.172500X-0.122500X0.172500X-0.122500X-0.172500X0*%",
+    "19": "%ADD19RoundRect,0.052500X0.172500X-0.122500X0.172500X0.122500X-0.172500X0.122500X-0.172500X-0.122500X0*%"
+  },
+  "U7_flashes": [
+    {
+      "ref": "U7",
+      "aperture": 18,
+      "command": "X69798000Y-38571999D03*"
+    },
+    {
+      "ref": "U7",
+      "aperture": 18,
+      "command": "X70298000Y-38572000D03*"
+    },
+    {
+      "ref": "U7",
+      "aperture": 18,
+      "command": "X70798000Y-38572000D03*"
+    },
+    {
+      "ref": "U7",
+      "aperture": 18,
+      "command": "X71297999Y-38572000D03*"
+    },
+    {
+      "ref": "U7",
+      "aperture": 19,
+      "command": "X71313000Y-38072000D03*"
+    },
+    {
+      "ref": "U7",
+      "aperture": 19,
+      "command": "X71313000Y-37557000D03*"
+    },
+    {
+      "ref": "U7",
+      "aperture": 18,
+      "command": "X71298000Y-37042001D03*"
+    },
+    {
+      "ref": "U7",
+      "aperture": 18,
+      "command": "X70798000Y-37042000D03*"
+    },
+    {
+      "ref": "U7",
+      "aperture": 18,
+      "command": "X70298000Y-37042000D03*"
+    },
+    {
+      "ref": "U7",
+      "aperture": 18,
+      "command": "X69798001Y-37042000D03*"
+    },
+    {
+      "ref": "U7",
+      "aperture": 19,
+      "command": "X69783000Y-37557000D03*"
+    },
+    {
+      "ref": "U7",
+      "aperture": 19,
+      "command": "X69783000Y-38057000D03*"
+    }
+  ],
+  "files": {
+    "stratolink-B_Cu.gbl": {
+      "before_sha256": "2a38a4e005e703633f17ab8f199c5d00cf413fe9c5b2b58c80d4a57ff08e6ec3",
+      "after_sha256": "2a38a4e005e703633f17ab8f199c5d00cf413fe9c5b2b58c80d4a57ff08e6ec3",
+      "same_after_timestamp_removal": true
+    },
+    "stratolink-B_Mask.gbs": {
+      "before_sha256": "562f54a89bdba4cba0683cdde109345cb9ee5dad942019647b6219cdaf63df92",
+      "after_sha256": "562f54a89bdba4cba0683cdde109345cb9ee5dad942019647b6219cdaf63df92",
+      "same_after_timestamp_removal": true
+    },
+    "stratolink-B_Paste.gbp": {
+      "before_sha256": "a19d8958af92b05495cf83a323622bf682f478b162f0c662a906d056eca15574",
+      "after_sha256": "a19d8958af92b05495cf83a323622bf682f478b162f0c662a906d056eca15574",
+      "same_after_timestamp_removal": true
+    },
+    "stratolink-F_Cu.gtl": {
+      "before_sha256": "f5d5c85f0a6ff9ade32f598feb1b0c601fdcfa0a850ede9e4cac94c06b09458e",
+      "after_sha256": "f5d5c85f0a6ff9ade32f598feb1b0c601fdcfa0a850ede9e4cac94c06b09458e",
+      "same_after_timestamp_removal": true
+    },
+    "stratolink-F_Mask.gts": {
+      "before_sha256": "d89b196bc454c94566f458046e3e4ebd12647e249a462764461cadb6fceeb26a",
+      "after_sha256": "a12c58a6adaf3364111cc134b66650f55b7d275a2ab901bfa714d74a71eea718",
+      "same_after_timestamp_removal": false
+    },
+    "stratolink-F_Paste.gtp": {
+      "before_sha256": "2115633d1f75cb620d04232c2d09c506f63c1f0b6b57ab1b9ecd1c27ddd1f16d",
+      "after_sha256": "2115633d1f75cb620d04232c2d09c506f63c1f0b6b57ab1b9ecd1c27ddd1f16d",
+      "same_after_timestamp_removal": true
+    }
+  },
+  "archive_sha256": "32d1b39c1db6bcc77f22f174617fed1f2d5c6b048e45f7bf8df50f0453524fb3"
+}

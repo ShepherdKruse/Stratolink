@@ -1,0 +1,109 @@
+Skip to main content
+Product forums
+Resources
+Learning
+About
+Developer news
+Create topic
+Login
+STMicroelectronics Community
+Discussions
+Product forums
+MEMS and sensors
+MEMS (sensors)
+SMD footprint recommendation for LIS2DH12
+MFish.1
+Visitor II
+4 years ago
+QUESTION
+SMD footprint recommendation for LIS2DH12
+1 reply
+1837 views
+
+I need to understand what is the right SMD footprint recommendation for LIS2DH12.
+
+Recommendations in TN0018 SMD guideline AN , ultra librarian recommended land pattern and footprint actually used in DIL24 adapter significantly differ from each other.
+
+
+
+Attaching Allegro footprint downloaded from ST site LIS2DH CAD models and DIL24 adapter gerbers. As it can be seen part's footprint significantly differs. Need to know which one should I follow in my PCB design
+
+2 Attachments
+en-steval-mki151v1_gerber.zip
+AllegroV17_2_LIS2DH12.7z
+Accelerometers
+Like
+Reply
+Follow
+Share
+This topic has been closed for replies.
+1 reply
+Eleon BORLINI
+ST Employee
+4 years ago
+
+Hi @MFish.1​ ,
+
+sorry for the delay in our answer. I suggest you to use the STEVAL-MKI151V1 recommendation, since the steval is specific of the LIS2DH12 device and is proven to work on the field.
+
+-Eleon
+
+Like
+Reply
+
+ST Community highlights – April to June 2026
+
+2 months ago
+Related topics
+Does anyone know where to find recommended footprints for STM products?
+Power management
+C54/C58 For LDO Supply on NUCLEO-H755
+STM32 MCUs Boards and hardware tools
+Recommendation for STBC15LJ footprint
+Others: hardware and software
+STM32H750XBH6 BGA soldering
+STM32 MCUs Boards and hardware tools
+LIS2MDL (LGA-12L) Leakage current
+MEMS (sensors)
+Popular tags
+STM32H7 series
+STM32F4 series
+STM32CubeMX
+STM32CubeIDE
+TouchGFX
+STM32L4 series
+STM32F7 series
+USB
+UART-USART
+STM32Cube MCUs packages
+About STMicroelectronics
+Who we are
+Investor relations
+Sustainability
+Innovation & technology
+Careers
+Suppliers to ST
+Blog
+General terms and conditions
+Connect with us
+Contact ST offices
+Find sales offices & distributors
+Community
+Newsroom
+Events & trainings
+AI at ST
+Browse
+Shortcuts
+Sitemap
+Compliance, Ethics, Security & Privacy
+Ethics and compliance
+ST Ethics Hotline
+ST’s Code of Conduct
+Security & privacy portal
+Follow us
+
+
+All rights reserved © 2026 STMicroelectronics | Terms of use | Sales terms & conditions | Trademarks | Privacy portal | Manage cookies
+
+Topic is marked as solved
+Feedback

@@ -1,0 +1,2997 @@
+{
+  "source_sha256": "99b82f31a5d05c019d3fb6d592c06a0d6cca1eb3affc285cbdfb4bd7702550e0",
+  "alternatives": [
+    {
+      "margin_mm": 0.102,
+      "minimum_pair_gap_mm": 0.0,
+      "overlapping_pairs": [
+        {
+          "pads": [
+            "1",
+            "2"
+          ],
+          "nets": [
+            "SCL",
+            "+3.3V"
+          ],
+          "gap_mm": 0.0,
+          "overlap_area_mm2": 0.030930732225928743
+        },
+        {
+          "pads": [
+            "1",
+            "12"
+          ],
+          "nets": [
+            "SCL",
+            "PA8"
+          ],
+          "gap_mm": 0.0,
+          "overlap_area_mm2": 0.04610637223288783
+        },
+        {
+          "pads": [
+            "2",
+            "3"
+          ],
+          "nets": [
+            "+3.3V",
+            "GND"
+          ],
+          "gap_mm": 0.0,
+          "overlap_area_mm2": 0.030930732226480292
+        },
+        {
+          "pads": [
+            "2",
+            "12"
+          ],
+          "nets": [
+            "+3.3V",
+            "PA8"
+          ],
+          "gap_mm": 0.0,
+          "overlap_area_mm2": 0.00496529452800009
+        },
+        {
+          "pads": [
+            "3",
+            "4"
+          ],
+          "nets": [
+            "GND",
+            "SDA"
+          ],
+          "gap_mm": 0.0,
+          "overlap_area_mm2": 0.0309313426398576
+        },
+        {
+          "pads": [
+            "3",
+            "5"
+          ],
+          "nets": [
+            "GND",
+            "GND"
+          ],
+          "gap_mm": 0.0,
+          "overlap_area_mm2": 0.006300294527999885
+        },
+        {
+          "pads": [
+            "4",
+            "5"
+          ],
+          "nets": [
+            "SDA",
+            "GND"
+          ],
+          "gap_mm": 0.0,
+          "overlap_area_mm2": 0.05441446709607462
+        },
+        {
+          "pads": [
+            "5",
+            "6"
+          ],
+          "nets": [
+            "GND",
+            "GND"
+          ],
+          "gap_mm": 0.0,
+          "overlap_area_mm2": 0.02188546348260664
+        },
+        {
+          "pads": [
+            "6",
+            "7"
+          ],
+          "nets": [
+            "GND",
+            "GND"
+          ],
+          "gap_mm": 0.0,
+          "overlap_area_mm2": 0.04610637223288469
+        },
+        {
+          "pads": [
+            "6",
+            "8"
+          ],
+          "nets": [
+            "GND",
+            "GND"
+          ],
+          "gap_mm": 0.0,
+          "overlap_area_mm2": 0.004965294527999813
+        },
+        {
+          "pads": [
+            "7",
+            "8"
+          ],
+          "nets": [
+            "GND",
+            "GND"
+          ],
+          "gap_mm": 0.0,
+          "overlap_area_mm2": 0.030930732225928827
+        },
+        {
+          "pads": [
+            "8",
+            "9"
+          ],
+          "nets": [
+            "GND",
+            "+3.3V"
+          ],
+          "gap_mm": 0.0,
+          "overlap_area_mm2": 0.03093073222648044
+        },
+        {
+          "pads": [
+            "9",
+            "10"
+          ],
+          "nets": [
+            "+3.3V",
+            "+3.3V"
+          ],
+          "gap_mm": 0.0,
+          "overlap_area_mm2": 0.03093134263985806
+        },
+        {
+          "pads": [
+            "9",
+            "11"
+          ],
+          "nets": [
+            "+3.3V",
+            "unconnected-(U7-INT2-Pad11)"
+          ],
+          "gap_mm": 0.0,
+          "overlap_area_mm2": 0.004965294527999969
+        },
+        {
+          "pads": [
+            "10",
+            "11"
+          ],
+          "nets": [
+            "+3.3V",
+            "unconnected-(U7-INT2-Pad11)"
+          ],
+          "gap_mm": 0.0,
+          "overlap_area_mm2": 0.04610580565060978
+        },
+        {
+          "pads": [
+            "11",
+            "12"
+          ],
+          "nets": [
+            "unconnected-(U7-INT2-Pad11)",
+            "PA8"
+          ],
+          "gap_mm": 0.0,
+          "overlap_area_mm2": 0.03093073222648075
+        }
+      ],
+      "pairs_with_gap_below_0p13_mm": [
+        {
+          "pads": [
+            "1",
+            "2"
+          ],
+          "nets": [
+            "SCL",
+            "+3.3V"
+          ],
+          "gap_mm": 0.0,
+          "overlap_area_mm2": 0.030930732225928743
+        },
+        {
+          "pads": [
+            "1",
+            "12"
+          ],
+          "nets": [
+            "SCL",
+            "PA8"
+          ],
+          "gap_mm": 0.0,
+          "overlap_area_mm2": 0.04610637223288783
+        },
+        {
+          "pads": [
+            "2",
+            "3"
+          ],
+          "nets": [
+            "+3.3V",
+            "GND"
+          ],
+          "gap_mm": 0.0,
+          "overlap_area_mm2": 0.030930732226480292
+        },
+        {
+          "pads": [
+            "2",
+            "12"
+          ],
+          "nets": [
+            "+3.3V",
+            "PA8"
+          ],
+          "gap_mm": 0.0,
+          "overlap_area_mm2": 0.00496529452800009
+        },
+        {
+          "pads": [
+            "3",
+            "4"
+          ],
+          "nets": [
+            "GND",
+            "SDA"
+          ],
+          "gap_mm": 0.0,
+          "overlap_area_mm2": 0.0309313426398576
+        },
+        {
+          "pads": [
+            "3",
+            "5"
+          ],
+          "nets": [
+            "GND",
+            "GND"
+          ],
+          "gap_mm": 0.0,
+          "overlap_area_mm2": 0.006300294527999885
+        },
+        {
+          "pads": [
+            "4",
+            "5"
+          ],
+          "nets": [
+            "SDA",
+            "GND"
+          ],
+          "gap_mm": 0.0,
+          "overlap_area_mm2": 0.05441446709607462
+        },
+        {
+          "pads": [
+            "5",
+            "6"
+          ],
+          "nets": [
+            "GND",
+            "GND"
+          ],
+          "gap_mm": 0.0,
+          "overlap_area_mm2": 0.02188546348260664
+        },
+        {
+          "pads": [
+            "6",
+            "7"
+          ],
+          "nets": [
+            "GND",
+            "GND"
+          ],
+          "gap_mm": 0.0,
+          "overlap_area_mm2": 0.04610637223288469
+        },
+        {
+          "pads": [
+            "6",
+            "8"
+          ],
+          "nets": [
+            "GND",
+            "GND"
+          ],
+          "gap_mm": 0.0,
+          "overlap_area_mm2": 0.004965294527999813
+        },
+        {
+          "pads": [
+            "7",
+            "8"
+          ],
+          "nets": [
+            "GND",
+            "GND"
+          ],
+          "gap_mm": 0.0,
+          "overlap_area_mm2": 0.030930732225928827
+        },
+        {
+          "pads": [
+            "8",
+            "9"
+          ],
+          "nets": [
+            "GND",
+            "+3.3V"
+          ],
+          "gap_mm": 0.0,
+          "overlap_area_mm2": 0.03093073222648044
+        },
+        {
+          "pads": [
+            "9",
+            "10"
+          ],
+          "nets": [
+            "+3.3V",
+            "+3.3V"
+          ],
+          "gap_mm": 0.0,
+          "overlap_area_mm2": 0.03093134263985806
+        },
+        {
+          "pads": [
+            "9",
+            "11"
+          ],
+          "nets": [
+            "+3.3V",
+            "unconnected-(U7-INT2-Pad11)"
+          ],
+          "gap_mm": 0.0,
+          "overlap_area_mm2": 0.004965294527999969
+        },
+        {
+          "pads": [
+            "10",
+            "11"
+          ],
+          "nets": [
+            "+3.3V",
+            "unconnected-(U7-INT2-Pad11)"
+          ],
+          "gap_mm": 0.0,
+          "overlap_area_mm2": 0.04610580565060978
+        },
+        {
+          "pads": [
+            "11",
+            "12"
+          ],
+          "nets": [
+            "unconnected-(U7-INT2-Pad11)",
+            "PA8"
+          ],
+          "gap_mm": 0.0,
+          "overlap_area_mm2": 0.03093073222648075
+        }
+      ],
+      "nearest_foreign_copper": [
+        {
+          "pad": "1",
+          "closest_foreign_copper": [
+            {
+              "type": "track",
+              "net": "PA8",
+              "uuid": "2843986a-2c3d-422f-a7c0-a5288195c20d",
+              "gap_mm": 0.06935586152590013
+            },
+            {
+              "type": "track",
+              "net": "PA8",
+              "uuid": "ac98135a-d449-4bc5-9ed9-05fe86117c57",
+              "gap_mm": 0.11299900000000206
+            },
+            {
+              "type": "track",
+              "net": "+3.3V",
+              "uuid": "cb3f0267-bffe-4bc8-a5fc-742f300859ce",
+              "gap_mm": 0.12299999999999046
+            }
+          ]
+        },
+        {
+          "pad": "2",
+          "closest_foreign_copper": [
+            {
+              "type": "track",
+              "net": "SCL",
+              "uuid": "3777268c-2956-4adc-8055-47eb850a79b4",
+              "gap_mm": 0.1007252396596848
+            },
+            {
+              "type": "track",
+              "net": "GND",
+              "uuid": "c071d5fe-1b47-46a1-bcdd-4d46cde56e79",
+              "gap_mm": 0.12299999999999044
+            },
+            {
+              "type": "track",
+              "net": "SCL",
+              "uuid": "a2699bc6-d280-43ac-8fc2-ea5a3655931b",
+              "gap_mm": 0.1730000000000018
+            }
+          ]
+        },
+        {
+          "pad": "3",
+          "closest_foreign_copper": [
+            {
+              "type": "track",
+              "net": "SDA",
+              "uuid": "09531328-a751-451d-9335-f02886d92d81",
+              "gap_mm": 0.0979990000000015
+            },
+            {
+              "type": "track",
+              "net": "+3.3V",
+              "uuid": "a8f806ed-4e7a-4dae-9ad1-db4955088bff",
+              "gap_mm": 0.11299999999999953
+            },
+            {
+              "type": "track",
+              "net": "+3.3V",
+              "uuid": "cb3f0267-bffe-4bc8-a5fc-742f300859ce",
+              "gap_mm": 0.11299999999999953
+            }
+          ]
+        },
+        {
+          "pad": "4",
+          "closest_foreign_copper": [
+            {
+              "type": "track",
+              "net": "GND",
+              "uuid": "5dc0585a-7141-4f08-afce-4a3c96f8fc8d",
+              "gap_mm": 0.09799999999999898
+            },
+            {
+              "type": "track",
+              "net": "GND",
+              "uuid": "c071d5fe-1b47-46a1-bcdd-4d46cde56e79",
+              "gap_mm": 0.12299900000000717
+            },
+            {
+              "type": "track",
+              "net": "GND",
+              "uuid": "c542a530-7aab-438f-8d70-88a1c96fa3d6",
+              "gap_mm": 0.1945358862865887
+            }
+          ]
+        },
+        {
+          "pad": "5",
+          "closest_foreign_copper": [
+            {
+              "type": "track",
+              "net": "SDA",
+              "uuid": "0f6230f4-b7ae-4de6-a0f7-88e948a7461d",
+              "gap_mm": 0.06935515441912508
+            },
+            {
+              "type": "track",
+              "net": "SDA",
+              "uuid": "09531328-a751-451d-9335-f02886d92d81",
+              "gap_mm": 0.09800000000000608
+            },
+            {
+              "type": "track",
+              "net": "SDA",
+              "uuid": "d5f4b07c-7b6d-4573-b9c3-58bb918f0da1",
+              "gap_mm": 0.16951826954342708
+            }
+          ]
+        },
+        {
+          "pad": "6",
+          "closest_foreign_copper": [
+            {
+              "type": "track",
+              "net": "SDA",
+              "uuid": "d5f4b07c-7b6d-4573-b9c3-58bb918f0da1",
+              "gap_mm": 0.44256759120844746
+            },
+            {
+              "type": "track",
+              "net": "SDA",
+              "uuid": "0f6230f4-b7ae-4de6-a0f7-88e948a7461d",
+              "gap_mm": 0.4425681254406468
+            },
+            {
+              "type": "track",
+              "net": "+3.3V",
+              "uuid": "a8f806ed-4e7a-4dae-9ad1-db4955088bff",
+              "gap_mm": 0.578000000000003
+            }
+          ]
+        },
+        {
+          "pad": "7",
+          "closest_foreign_copper": [
+            {
+              "type": "via",
+              "net": "PB5",
+              "uuid": "73e7f9cb-7cde-4790-99d5-39f0210b1718",
+              "gap_mm": 0.3674724360705093
+            },
+            {
+              "type": "track",
+              "net": "PB5",
+              "uuid": "7c78c218-96bc-4aca-b074-6f44a85d0fb1",
+              "gap_mm": 0.5424403735757579
+            },
+            {
+              "type": "track",
+              "net": "+3.3V",
+              "uuid": "ab27861a-552f-4ee5-9079-e49380883eae",
+              "gap_mm": 0.5426952451099935
+            }
+          ]
+        },
+        {
+          "pad": "8",
+          "closest_foreign_copper": [
+            {
+              "type": "track",
+              "net": "+3.3V",
+              "uuid": "ab27861a-552f-4ee5-9079-e49380883eae",
+              "gap_mm": 0.05777282908079759
+            },
+            {
+              "type": "track",
+              "net": "+3.3V",
+              "uuid": "9c8a1f39-5793-4e61-be64-7132962dd570",
+              "gap_mm": 0.07300000000000749
+            },
+            {
+              "type": "track",
+              "net": "+3.3V",
+              "uuid": "a8f806ed-4e7a-4dae-9ad1-db4955088bff",
+              "gap_mm": 0.11299999999999953
+            }
+          ]
+        },
+        {
+          "pad": "9",
+          "closest_foreign_copper": [
+            {
+              "type": "track",
+              "net": "GND",
+              "uuid": "50467fe8-5838-443d-bd6f-469444951d63",
+              "gap_mm": 0.12299999999999042
+            },
+            {
+              "type": "track",
+              "net": "GND",
+              "uuid": "b83cdd6f-5d0d-44eb-8891-dc997365b3ff",
+              "gap_mm": 0.12299999999999044
+            },
+            {
+              "type": "track",
+              "net": "GND",
+              "uuid": "acf3109c-eb1e-4509-9789-79a4830e3dcb",
+              "gap_mm": 0.12299999999999046
+            }
+          ]
+        },
+        {
+          "pad": "10",
+          "closest_foreign_copper": [
+            {
+              "type": "track",
+              "net": "PA8",
+              "uuid": "ac98135a-d449-4bc5-9ed9-05fe86117c57",
+              "gap_mm": 0.6129999999999995
+            },
+            {
+              "type": "track",
+              "net": "PA8",
+              "uuid": "2843986a-2c3d-422f-a7c0-a5288195c20d",
+              "gap_mm": 0.6145317766210298
+            },
+            {
+              "type": "track",
+              "net": "GND",
+              "uuid": "50467fe8-5838-443d-bd6f-469444951d63",
+              "gap_mm": 0.622998999999993
+            }
+          ]
+        },
+        {
+          "pad": "11",
+          "closest_foreign_copper": [
+            {
+              "type": "track",
+              "net": "+3.3V",
+              "uuid": "3f632ad9-7f75-4230-8521-555e439a5ab2",
+              "gap_mm": 0.04800000000000181
+            },
+            {
+              "type": "track",
+              "net": "+3.3V",
+              "uuid": "a8f806ed-4e7a-4dae-9ad1-db4955088bff",
+              "gap_mm": 0.09799999999999896
+            },
+            {
+              "type": "track",
+              "net": "PA8",
+              "uuid": "2843986a-2c3d-422f-a7c0-a5288195c20d",
+              "gap_mm": 0.1479999999999961
+            }
+          ]
+        },
+        {
+          "pad": "12",
+          "closest_foreign_copper": [
+            {
+              "type": "track",
+              "net": "+3.3V",
+              "uuid": "a8f806ed-4e7a-4dae-9ad1-db4955088bff",
+              "gap_mm": 0.09799999999999896
+            },
+            {
+              "type": "track",
+              "net": "SCL",
+              "uuid": "a2699bc6-d280-43ac-8fc2-ea5a3655931b",
+              "gap_mm": 0.1879989999999978
+            },
+            {
+              "type": "track",
+              "net": "+3.3V",
+              "uuid": "cb3f0267-bffe-4bc8-a5fc-742f300859ce",
+              "gap_mm": 0.23609128064284884
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "margin_mm": 0.05,
+      "minimum_pair_gap_mm": 8.451898070660714e-07,
+      "overlapping_pairs": [],
+      "pairs_with_gap_below_0p13_mm": [
+        {
+          "pads": [
+            "1",
+            "2"
+          ],
+          "nets": [
+            "SCL",
+            "+3.3V"
+          ],
+          "gap_mm": 0.050000999999852816,
+          "overlap_area_mm2": 0.0
+        },
+        {
+          "pads": [
+            "1",
+            "12"
+          ],
+          "nets": [
+            "SCL",
+            "PA8"
+          ],
+          "gap_mm": 0.014999916643006423,
+          "overlap_area_mm2": 0.0
+        },
+        {
+          "pads": [
+            "2",
+            "3"
+          ],
+          "nets": [
+            "+3.3V",
+            "GND"
+          ],
+          "gap_mm": 0.050001000002234515,
+          "overlap_area_mm2": 0.0
+        },
+        {
+          "pads": [
+            "2",
+            "12"
+          ],
+          "nets": [
+            "+3.3V",
+            "PA8"
+          ],
+          "gap_mm": 0.07713262190539152,
+          "overlap_area_mm2": 0.0
+        },
+        {
+          "pads": [
+            "3",
+            "4"
+          ],
+          "nets": [
+            "GND",
+            "SDA"
+          ],
+          "gap_mm": 0.05000000000223703,
+          "overlap_area_mm2": 0.0
+        },
+        {
+          "pads": [
+            "3",
+            "5"
+          ],
+          "nets": [
+            "GND",
+            "GND"
+          ],
+          "gap_mm": 0.066607226424771,
+          "overlap_area_mm2": 0.0
+        },
+        {
+          "pads": [
+            "4",
+            "5"
+          ],
+          "nets": [
+            "SDA",
+            "GND"
+          ],
+          "gap_mm": 8.451898070660714e-07,
+          "overlap_area_mm2": 0.0
+        },
+        {
+          "pads": [
+            "5",
+            "6"
+          ],
+          "nets": [
+            "GND",
+            "GND"
+          ],
+          "gap_mm": 0.06500100000219963,
+          "overlap_area_mm2": 0.0
+        },
+        {
+          "pads": [
+            "6",
+            "7"
+          ],
+          "nets": [
+            "GND",
+            "GND"
+          ],
+          "gap_mm": 0.014999916643006423,
+          "overlap_area_mm2": 0.0
+        },
+        {
+          "pads": [
+            "6",
+            "8"
+          ],
+          "nets": [
+            "GND",
+            "GND"
+          ],
+          "gap_mm": 0.07713262190538651,
+          "overlap_area_mm2": 0.0
+        },
+        {
+          "pads": [
+            "7",
+            "8"
+          ],
+          "nets": [
+            "GND",
+            "GND"
+          ],
+          "gap_mm": 0.05000099999985282,
+          "overlap_area_mm2": 0.0
+        },
+        {
+          "pads": [
+            "8",
+            "9"
+          ],
+          "nets": [
+            "GND",
+            "+3.3V"
+          ],
+          "gap_mm": 0.050001000002234515,
+          "overlap_area_mm2": 0.0
+        },
+        {
+          "pads": [
+            "9",
+            "10"
+          ],
+          "nets": [
+            "+3.3V",
+            "+3.3V"
+          ],
+          "gap_mm": 0.05000000000223705,
+          "overlap_area_mm2": 0.0
+        },
+        {
+          "pads": [
+            "9",
+            "11"
+          ],
+          "nets": [
+            "+3.3V",
+            "unconnected-(U7-INT2-Pad11)"
+          ],
+          "gap_mm": 0.07713262190538651,
+          "overlap_area_mm2": 0.0
+        },
+        {
+          "pads": [
+            "10",
+            "11"
+          ],
+          "nets": [
+            "+3.3V",
+            "unconnected-(U7-INT2-Pad11)"
+          ],
+          "gap_mm": 0.01500084518976509,
+          "overlap_area_mm2": 0.0
+        },
+        {
+          "pads": [
+            "11",
+            "12"
+          ],
+          "nets": [
+            "unconnected-(U7-INT2-Pad11)",
+            "PA8"
+          ],
+          "gap_mm": 0.05000100000224161,
+          "overlap_area_mm2": 0.0
+        }
+      ],
+      "nearest_foreign_copper": [
+        {
+          "pad": "1",
+          "closest_foreign_copper": [
+            {
+              "type": "track",
+              "net": "PA8",
+              "uuid": "2843986a-2c3d-422f-a7c0-a5288195c20d",
+              "gap_mm": 0.13653312705895954
+            },
+            {
+              "type": "track",
+              "net": "PA8",
+              "uuid": "ac98135a-d449-4bc5-9ed9-05fe86117c57",
+              "gap_mm": 0.1649995353777396
+            },
+            {
+              "type": "track",
+              "net": "+3.3V",
+              "uuid": "cb3f0267-bffe-4bc8-a5fc-742f300859ce",
+              "gap_mm": 0.1750004895998273
+            }
+          ]
+        },
+        {
+          "pad": "2",
+          "closest_foreign_copper": [
+            {
+              "type": "track",
+              "net": "SCL",
+              "uuid": "3777268c-2956-4adc-8055-47eb850a79b4",
+              "gap_mm": 0.1679025051927442
+            },
+            {
+              "type": "track",
+              "net": "GND",
+              "uuid": "c071d5fe-1b47-46a1-bcdd-4d46cde56e79",
+              "gap_mm": 0.17500048960220901
+            },
+            {
+              "type": "track",
+              "net": "SCL",
+              "uuid": "a2699bc6-d280-43ac-8fc2-ea5a3655931b",
+              "gap_mm": 0.2250004933103708
+            }
+          ]
+        },
+        {
+          "pad": "3",
+          "closest_foreign_copper": [
+            {
+              "type": "track",
+              "net": "SDA",
+              "uuid": "09531328-a751-451d-9335-f02886d92d81",
+              "gap_mm": 0.14999948830426704
+            },
+            {
+              "type": "track",
+              "net": "+3.3V",
+              "uuid": "a8f806ed-4e7a-4dae-9ad1-db4955088bff",
+              "gap_mm": 0.16499999999999204
+            },
+            {
+              "type": "track",
+              "net": "+3.3V",
+              "uuid": "cb3f0267-bffe-4bc8-a5fc-742f300859ce",
+              "gap_mm": 0.16500046578528646
+            }
+          ]
+        },
+        {
+          "pad": "4",
+          "closest_foreign_copper": [
+            {
+              "type": "track",
+              "net": "GND",
+              "uuid": "5dc0585a-7141-4f08-afce-4a3c96f8fc8d",
+              "gap_mm": 0.1500004394541694
+            },
+            {
+              "type": "track",
+              "net": "GND",
+              "uuid": "c071d5fe-1b47-46a1-bcdd-4d46cde56e79",
+              "gap_mm": 0.17499899999999968
+            },
+            {
+              "type": "track",
+              "net": "GND",
+              "uuid": "c542a530-7aab-438f-8d70-88a1c96fa3d6",
+              "gap_mm": 0.2617131208978861
+            }
+          ]
+        },
+        {
+          "pad": "5",
+          "closest_foreign_copper": [
+            {
+              "type": "track",
+              "net": "SDA",
+              "uuid": "0f6230f4-b7ae-4de6-a0f7-88e948a7461d",
+              "gap_mm": 0.13653241995218446
+            },
+            {
+              "type": "track",
+              "net": "SDA",
+              "uuid": "09531328-a751-451d-9335-f02886d92d81",
+              "gap_mm": 0.15000045257645428
+            },
+            {
+              "type": "track",
+              "net": "SDA",
+              "uuid": "d5f4b07c-7b6d-4573-b9c3-58bb918f0da1",
+              "gap_mm": 0.22440969332670907
+            }
+          ]
+        },
+        {
+          "pad": "6",
+          "closest_foreign_copper": [
+            {
+              "type": "track",
+              "net": "SDA",
+              "uuid": "0f6230f4-b7ae-4de6-a0f7-88e948a7461d",
+              "gap_mm": 0.5089488016955156
+            },
+            {
+              "type": "track",
+              "net": "SDA",
+              "uuid": "d5f4b07c-7b6d-4573-b9c3-58bb918f0da1",
+              "gap_mm": 0.5089490001093908
+            },
+            {
+              "type": "track",
+              "net": "+3.3V",
+              "uuid": "a8f806ed-4e7a-4dae-9ad1-db4955088bff",
+              "gap_mm": 0.6299999999999953
+            }
+          ]
+        },
+        {
+          "pad": "7",
+          "closest_foreign_copper": [
+            {
+              "type": "via",
+              "net": "PB5",
+              "uuid": "73e7f9cb-7cde-4790-99d5-39f0210b1718",
+              "gap_mm": 0.43390090500611506
+            },
+            {
+              "type": "track",
+              "net": "+3.3V",
+              "uuid": "ab27861a-552f-4ee5-9079-e49380883eae",
+              "gap_mm": 0.6003959229150436
+            },
+            {
+              "type": "track",
+              "net": "PB5",
+              "uuid": "7c78c218-96bc-4aca-b074-6f44a85d0fb1",
+              "gap_mm": 0.6088594929357767
+            }
+          ]
+        },
+        {
+          "pad": "8",
+          "closest_foreign_copper": [
+            {
+              "type": "track",
+              "net": "+3.3V",
+              "uuid": "ab27861a-552f-4ee5-9079-e49380883eae",
+              "gap_mm": 0.12146537564259757
+            },
+            {
+              "type": "track",
+              "net": "+3.3V",
+              "uuid": "9c8a1f39-5793-4e61-be64-7132962dd570",
+              "gap_mm": 0.12499999999999999
+            },
+            {
+              "type": "track",
+              "net": "+3.3V",
+              "uuid": "66a82ae2-fcc0-482c-bf5c-4e43c7fe8847",
+              "gap_mm": 0.1650005134191919
+            }
+          ]
+        },
+        {
+          "pad": "9",
+          "closest_foreign_copper": [
+            {
+              "type": "track",
+              "net": "GND",
+              "uuid": "50467fe8-5838-443d-bd6f-469444951d63",
+              "gap_mm": 0.17499999999999716
+            },
+            {
+              "type": "track",
+              "net": "GND",
+              "uuid": "acf3109c-eb1e-4509-9789-79a4830e3dcb",
+              "gap_mm": 0.175000489602209
+            },
+            {
+              "type": "track",
+              "net": "GND",
+              "uuid": "b83cdd6f-5d0d-44eb-8891-dc997365b3ff",
+              "gap_mm": 0.175000489602209
+            }
+          ]
+        },
+        {
+          "pad": "10",
+          "closest_foreign_copper": [
+            {
+              "type": "track",
+              "net": "PA8",
+              "uuid": "ac98135a-d449-4bc5-9ed9-05fe86117c57",
+              "gap_mm": 0.664999999999999
+            },
+            {
+              "type": "track",
+              "net": "PA8",
+              "uuid": "2843986a-2c3d-422f-a7c0-a5288195c20d",
+              "gap_mm": 0.6695794708740724
+            },
+            {
+              "type": "track",
+              "net": "GND",
+              "uuid": "50467fe8-5838-443d-bd6f-469444951d63",
+              "gap_mm": 0.6749989999999997
+            }
+          ]
+        },
+        {
+          "pad": "11",
+          "closest_foreign_copper": [
+            {
+              "type": "track",
+              "net": "+3.3V",
+              "uuid": "3f632ad9-7f75-4230-8521-555e439a5ab2",
+              "gap_mm": 0.10000045059978477
+            },
+            {
+              "type": "track",
+              "net": "+3.3V",
+              "uuid": "a8f806ed-4e7a-4dae-9ad1-db4955088bff",
+              "gap_mm": 0.14999999999999147
+            },
+            {
+              "type": "track",
+              "net": "PA8",
+              "uuid": "ac98135a-d449-4bc5-9ed9-05fe86117c57",
+              "gap_mm": 0.20000000000000281
+            }
+          ]
+        },
+        {
+          "pad": "12",
+          "closest_foreign_copper": [
+            {
+              "type": "track",
+              "net": "+3.3V",
+              "uuid": "a8f806ed-4e7a-4dae-9ad1-db4955088bff",
+              "gap_mm": 0.14999999999999147
+            },
+            {
+              "type": "track",
+              "net": "SCL",
+              "uuid": "a2699bc6-d280-43ac-8fc2-ea5a3655931b",
+              "gap_mm": 0.23999952903814176
+            },
+            {
+              "type": "track",
+              "net": "+3.3V",
+              "uuid": "cb3f0267-bffe-4bc8-a5fc-742f300859ce",
+              "gap_mm": 0.3030129848389355
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "margin_mm": 0.025,
+      "minimum_pair_gap_mm": 0.050000831021631394,
+      "overlapping_pairs": [],
+      "pairs_with_gap_below_0p13_mm": [
+        {
+          "pads": [
+            "1",
+            "2"
+          ],
+          "nets": [
+            "SCL",
+            "+3.3V"
+          ],
+          "gap_mm": 0.10000099999965387,
+          "overlap_area_mm2": 0.0
+        },
+        {
+          "pads": [
+            "1",
+            "12"
+          ],
+          "nets": [
+            "SCL",
+            "PA8"
+          ],
+          "gap_mm": 0.06499990901411547,
+          "overlap_area_mm2": 0.0
+        },
+        {
+          "pads": [
+            "2",
+            "3"
+          ],
+          "nets": [
+            "+3.3V",
+            "GND"
+          ],
+          "gap_mm": 0.10000100000225354,
+          "overlap_area_mm2": 0.0
+        },
+        {
+          "pads": [
+            "3",
+            "4"
+          ],
+          "nets": [
+            "GND",
+            "SDA"
+          ],
+          "gap_mm": 0.10000000000225608,
+          "overlap_area_mm2": 0.0
+        },
+        {
+          "pads": [
+            "4",
+            "5"
+          ],
+          "nets": [
+            "SDA",
+            "GND"
+          ],
+          "gap_mm": 0.050000831021631394,
+          "overlap_area_mm2": 0.0
+        },
+        {
+          "pads": [
+            "5",
+            "6"
+          ],
+          "nets": [
+            "GND",
+            "GND"
+          ],
+          "gap_mm": 0.1150010000022105,
+          "overlap_area_mm2": 0.0
+        },
+        {
+          "pads": [
+            "6",
+            "7"
+          ],
+          "nets": [
+            "GND",
+            "GND"
+          ],
+          "gap_mm": 0.06499990901411547,
+          "overlap_area_mm2": 0.0
+        },
+        {
+          "pads": [
+            "7",
+            "8"
+          ],
+          "nets": [
+            "GND",
+            "GND"
+          ],
+          "gap_mm": 0.10000099999965387,
+          "overlap_area_mm2": 0.0
+        },
+        {
+          "pads": [
+            "8",
+            "9"
+          ],
+          "nets": [
+            "GND",
+            "+3.3V"
+          ],
+          "gap_mm": 0.10000100000225354,
+          "overlap_area_mm2": 0.0
+        },
+        {
+          "pads": [
+            "9",
+            "10"
+          ],
+          "nets": [
+            "+3.3V",
+            "+3.3V"
+          ],
+          "gap_mm": 0.10000000000225606,
+          "overlap_area_mm2": 0.0
+        },
+        {
+          "pads": [
+            "10",
+            "11"
+          ],
+          "nets": [
+            "+3.3V",
+            "unconnected-(U7-INT2-Pad11)"
+          ],
+          "gap_mm": 0.06500083102157417,
+          "overlap_area_mm2": 0.0
+        },
+        {
+          "pads": [
+            "11",
+            "12"
+          ],
+          "nets": [
+            "unconnected-(U7-INT2-Pad11)",
+            "PA8"
+          ],
+          "gap_mm": 0.10000100000226063,
+          "overlap_area_mm2": 0.0
+        }
+      ],
+      "nearest_foreign_copper": [
+        {
+          "pad": "1",
+          "closest_foreign_copper": [
+            {
+              "type": "track",
+              "net": "PA8",
+              "uuid": "2843986a-2c3d-422f-a7c0-a5288195c20d",
+              "gap_mm": 0.16867890843848335
+            },
+            {
+              "type": "track",
+              "net": "PA8",
+              "uuid": "ac98135a-d449-4bc5-9ed9-05fe86117c57",
+              "gap_mm": 0.18999953975257602
+            },
+            {
+              "type": "track",
+              "net": "+3.3V",
+              "uuid": "cb3f0267-bffe-4bc8-a5fc-742f300859ce",
+              "gap_mm": 0.20000048864788286
+            }
+          ]
+        },
+        {
+          "pad": "2",
+          "closest_foreign_copper": [
+            {
+              "type": "track",
+              "net": "GND",
+              "uuid": "c071d5fe-1b47-46a1-bcdd-4d46cde56e79",
+              "gap_mm": 0.20000048865048245
+            },
+            {
+              "type": "track",
+              "net": "SCL",
+              "uuid": "3777268c-2956-4adc-8055-47eb850a79b4",
+              "gap_mm": 0.20004828657226298
+            },
+            {
+              "type": "track",
+              "net": "SCL",
+              "uuid": "a2699bc6-d280-43ac-8fc2-ea5a3655931b",
+              "gap_mm": 0.2500004926979958
+            }
+          ]
+        },
+        {
+          "pad": "3",
+          "closest_foreign_copper": [
+            {
+              "type": "track",
+              "net": "SDA",
+              "uuid": "09531328-a751-451d-9335-f02886d92d81",
+              "gap_mm": 0.17499948723376077
+            },
+            {
+              "type": "track",
+              "net": "+3.3V",
+              "uuid": "a8f806ed-4e7a-4dae-9ad1-db4955088bff",
+              "gap_mm": 0.1899999999999977
+            },
+            {
+              "type": "track",
+              "net": "+3.3V",
+              "uuid": "cb3f0267-bffe-4bc8-a5fc-742f300859ce",
+              "gap_mm": 0.19000046265387205
+            }
+          ]
+        },
+        {
+          "pad": "4",
+          "closest_foreign_copper": [
+            {
+              "type": "track",
+              "net": "GND",
+              "uuid": "5dc0585a-7141-4f08-afce-4a3c96f8fc8d",
+              "gap_mm": 0.17500043196632367
+            },
+            {
+              "type": "track",
+              "net": "GND",
+              "uuid": "c071d5fe-1b47-46a1-bcdd-4d46cde56e79",
+              "gap_mm": 0.19999900000000534
+            },
+            {
+              "type": "track",
+              "net": "GND",
+              "uuid": "c542a530-7aab-438f-8d70-88a1c96fa3d6",
+              "gap_mm": 0.29385893319563133
+            }
+          ]
+        },
+        {
+          "pad": "5",
+          "closest_foreign_copper": [
+            {
+              "type": "track",
+              "net": "SDA",
+              "uuid": "0f6230f4-b7ae-4de6-a0f7-88e948a7461d",
+              "gap_mm": 0.16867820133170328
+            },
+            {
+              "type": "track",
+              "net": "SDA",
+              "uuid": "09531328-a751-451d-9335-f02886d92d81",
+              "gap_mm": 0.17500044823618924
+            },
+            {
+              "type": "track",
+              "net": "SDA",
+              "uuid": "d5f4b07c-7b6d-4573-b9c3-58bb918f0da1",
+              "gap_mm": 0.25176955677379337
+            }
+          ]
+        },
+        {
+          "pad": "6",
+          "closest_foreign_copper": [
+            {
+              "type": "track",
+              "net": "SDA",
+              "uuid": "0f6230f4-b7ae-4de6-a0f7-88e948a7461d",
+              "gap_mm": 0.5409387382269892
+            },
+            {
+              "type": "track",
+              "net": "SDA",
+              "uuid": "d5f4b07c-7b6d-4573-b9c3-58bb918f0da1",
+              "gap_mm": 0.5409390872243846
+            },
+            {
+              "type": "track",
+              "net": "+3.3V",
+              "uuid": "a8f806ed-4e7a-4dae-9ad1-db4955088bff",
+              "gap_mm": 0.655000000000001
+            }
+          ]
+        },
+        {
+          "pad": "7",
+          "closest_foreign_copper": [
+            {
+              "type": "via",
+              "net": "PB5",
+              "uuid": "73e7f9cb-7cde-4790-99d5-39f0210b1718",
+              "gap_mm": 0.46589975015804036
+            },
+            {
+              "type": "track",
+              "net": "+3.3V",
+              "uuid": "ab27861a-552f-4ee5-9079-e49380883eae",
+              "gap_mm": 0.6284493425090161
+            },
+            {
+              "type": "track",
+              "net": "PB5",
+              "uuid": "7c78c218-96bc-4aca-b074-6f44a85d0fb1",
+              "gap_mm": 0.6408600681537283
+            }
+          ]
+        },
+        {
+          "pad": "8",
+          "closest_foreign_copper": [
+            {
+              "type": "track",
+              "net": "+3.3V",
+              "uuid": "9c8a1f39-5793-4e61-be64-7132962dd570",
+              "gap_mm": 0.15000000000000568
+            },
+            {
+              "type": "track",
+              "net": "+3.3V",
+              "uuid": "ab27861a-552f-4ee5-9079-e49380883eae",
+              "gap_mm": 0.1523784071335341
+            },
+            {
+              "type": "track",
+              "net": "+3.3V",
+              "uuid": "66a82ae2-fcc0-482c-bf5c-4e43c7fe8847",
+              "gap_mm": 0.19000051464716478
+            }
+          ]
+        },
+        {
+          "pad": "9",
+          "closest_foreign_copper": [
+            {
+              "type": "track",
+              "net": "GND",
+              "uuid": "50467fe8-5838-443d-bd6f-469444951d63",
+              "gap_mm": 0.1999999999999886
+            },
+            {
+              "type": "track",
+              "net": "GND",
+              "uuid": "acf3109c-eb1e-4509-9789-79a4830e3dcb",
+              "gap_mm": 0.20000048865048245
+            },
+            {
+              "type": "track",
+              "net": "GND",
+              "uuid": "b83cdd6f-5d0d-44eb-8891-dc997365b3ff",
+              "gap_mm": 0.20000048865048245
+            }
+          ]
+        },
+        {
+          "pad": "10",
+          "closest_foreign_copper": [
+            {
+              "type": "track",
+              "net": "PA8",
+              "uuid": "ac98135a-d449-4bc5-9ed9-05fe86117c57",
+              "gap_mm": 0.6899999999999976
+            },
+            {
+              "type": "track",
+              "net": "PA8",
+              "uuid": "2843986a-2c3d-422f-a7c0-a5288195c20d",
+              "gap_mm": 0.6964764726571889
+            },
+            {
+              "type": "track",
+              "net": "GND",
+              "uuid": "50467fe8-5838-443d-bd6f-469444951d63",
+              "gap_mm": 0.6999989999999912
+            }
+          ]
+        },
+        {
+          "pad": "11",
+          "closest_foreign_copper": [
+            {
+              "type": "track",
+              "net": "+3.3V",
+              "uuid": "3f632ad9-7f75-4230-8521-555e439a5ab2",
+              "gap_mm": 0.12500044607863228
+            },
+            {
+              "type": "track",
+              "net": "+3.3V",
+              "uuid": "a8f806ed-4e7a-4dae-9ad1-db4955088bff",
+              "gap_mm": 0.17499999999999716
+            },
+            {
+              "type": "track",
+              "net": "PA8",
+              "uuid": "ac98135a-d449-4bc5-9ed9-05fe86117c57",
+              "gap_mm": 0.2250000000000014
+            }
+          ]
+        },
+        {
+          "pad": "12",
+          "closest_foreign_copper": [
+            {
+              "type": "track",
+              "net": "+3.3V",
+              "uuid": "a8f806ed-4e7a-4dae-9ad1-db4955088bff",
+              "gap_mm": 0.17499999999999716
+            },
+            {
+              "type": "track",
+              "net": "SCL",
+              "uuid": "a2699bc6-d280-43ac-8fc2-ea5a3655931b",
+              "gap_mm": 0.26499953169551743
+            },
+            {
+              "type": "track",
+              "net": "+3.3V",
+              "uuid": "cb3f0267-bffe-4bc8-a5fc-742f300859ce",
+              "gap_mm": 0.33529516450136293
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "margin_mm": 0.015,
+      "minimum_pair_gap_mm": 0.07000000000000028,
+      "overlapping_pairs": [],
+      "pairs_with_gap_below_0p13_mm": [
+        {
+          "pads": [
+            "1",
+            "2"
+          ],
+          "nets": [
+            "SCL",
+            "+3.3V"
+          ],
+          "gap_mm": 0.12000000000000455,
+          "overlap_area_mm2": 0.0
+        },
+        {
+          "pads": [
+            "1",
+            "12"
+          ],
+          "nets": [
+            "SCL",
+            "PA8"
+          ],
+          "gap_mm": 0.08499900000000338,
+          "overlap_area_mm2": 0.0
+        },
+        {
+          "pads": [
+            "2",
+            "3"
+          ],
+          "nets": [
+            "+3.3V",
+            "GND"
+          ],
+          "gap_mm": 0.12000000000000455,
+          "overlap_area_mm2": 0.0
+        },
+        {
+          "pads": [
+            "3",
+            "4"
+          ],
+          "nets": [
+            "GND",
+            "SDA"
+          ],
+          "gap_mm": 0.11999900000000707,
+          "overlap_area_mm2": 0.0
+        },
+        {
+          "pads": [
+            "4",
+            "5"
+          ],
+          "nets": [
+            "SDA",
+            "GND"
+          ],
+          "gap_mm": 0.07000000000000028,
+          "overlap_area_mm2": 0.0
+        },
+        {
+          "pads": [
+            "6",
+            "7"
+          ],
+          "nets": [
+            "GND",
+            "GND"
+          ],
+          "gap_mm": 0.08499899999999626,
+          "overlap_area_mm2": 0.0
+        },
+        {
+          "pads": [
+            "7",
+            "8"
+          ],
+          "nets": [
+            "GND",
+            "GND"
+          ],
+          "gap_mm": 0.12000000000000455,
+          "overlap_area_mm2": 0.0
+        },
+        {
+          "pads": [
+            "8",
+            "9"
+          ],
+          "nets": [
+            "GND",
+            "+3.3V"
+          ],
+          "gap_mm": 0.12000000000000455,
+          "overlap_area_mm2": 0.0
+        },
+        {
+          "pads": [
+            "9",
+            "10"
+          ],
+          "nets": [
+            "+3.3V",
+            "+3.3V"
+          ],
+          "gap_mm": 0.11999900000000707,
+          "overlap_area_mm2": 0.0
+        },
+        {
+          "pads": [
+            "10",
+            "11"
+          ],
+          "nets": [
+            "+3.3V",
+            "unconnected-(U7-INT2-Pad11)"
+          ],
+          "gap_mm": 0.08500000000000085,
+          "overlap_area_mm2": 0.0
+        },
+        {
+          "pads": [
+            "11",
+            "12"
+          ],
+          "nets": [
+            "unconnected-(U7-INT2-Pad11)",
+            "PA8"
+          ],
+          "gap_mm": 0.11999999999999744,
+          "overlap_area_mm2": 0.0
+        }
+      ],
+      "nearest_foreign_copper": [
+        {
+          "pad": "1",
+          "closest_foreign_copper": [
+            {
+              "type": "track",
+              "net": "PA8",
+              "uuid": "2843986a-2c3d-422f-a7c0-a5288195c20d",
+              "gap_mm": 0.18158077876801657
+            },
+            {
+              "type": "track",
+              "net": "PA8",
+              "uuid": "ac98135a-d449-4bc5-9ed9-05fe86117c57",
+              "gap_mm": 0.19999900000000534
+            },
+            {
+              "type": "track",
+              "net": "+3.3V",
+              "uuid": "cb3f0267-bffe-4bc8-a5fc-742f300859ce",
+              "gap_mm": 0.20999999999999372
+            }
+          ]
+        },
+        {
+          "pad": "2",
+          "closest_foreign_copper": [
+            {
+              "type": "track",
+              "net": "GND",
+              "uuid": "c071d5fe-1b47-46a1-bcdd-4d46cde56e79",
+              "gap_mm": 0.20999999999999372
+            },
+            {
+              "type": "track",
+              "net": "SCL",
+              "uuid": "3777268c-2956-4adc-8055-47eb850a79b4",
+              "gap_mm": 0.2129501569017962
+            },
+            {
+              "type": "track",
+              "net": "SCL",
+              "uuid": "a2699bc6-d280-43ac-8fc2-ea5a3655931b",
+              "gap_mm": 0.2600000000000051
+            }
+          ]
+        },
+        {
+          "pad": "3",
+          "closest_foreign_copper": [
+            {
+              "type": "track",
+              "net": "SDA",
+              "uuid": "09531328-a751-451d-9335-f02886d92d81",
+              "gap_mm": 0.1849990000000048
+            },
+            {
+              "type": "track",
+              "net": "+3.3V",
+              "uuid": "a8f806ed-4e7a-4dae-9ad1-db4955088bff",
+              "gap_mm": 0.20000000000000281
+            },
+            {
+              "type": "track",
+              "net": "+3.3V",
+              "uuid": "cb3f0267-bffe-4bc8-a5fc-742f300859ce",
+              "gap_mm": 0.20000000000000284
+            }
+          ]
+        },
+        {
+          "pad": "4",
+          "closest_foreign_copper": [
+            {
+              "type": "track",
+              "net": "GND",
+              "uuid": "5dc0585a-7141-4f08-afce-4a3c96f8fc8d",
+              "gap_mm": 0.18500000000000227
+            },
+            {
+              "type": "track",
+              "net": "GND",
+              "uuid": "c071d5fe-1b47-46a1-bcdd-4d46cde56e79",
+              "gap_mm": 0.20999900000001046
+            },
+            {
+              "type": "track",
+              "net": "GND",
+              "uuid": "c542a530-7aab-438f-8d70-88a1c96fa3d6",
+              "gap_mm": 0.3067608035247039
+            }
+          ]
+        },
+        {
+          "pad": "5",
+          "closest_foreign_copper": [
+            {
+              "type": "track",
+              "net": "SDA",
+              "uuid": "0f6230f4-b7ae-4de6-a0f7-88e948a7461d",
+              "gap_mm": 0.1815800716612365
+            },
+            {
+              "type": "track",
+              "net": "SDA",
+              "uuid": "09531328-a751-451d-9335-f02886d92d81",
+              "gap_mm": 0.18500000000000225
+            },
+            {
+              "type": "track",
+              "net": "SDA",
+              "uuid": "d5f4b07c-7b6d-4573-b9c3-58bb918f0da1",
+              "gap_mm": 0.2627511441910635
+            }
+          ]
+        },
+        {
+          "pad": "6",
+          "closest_foreign_copper": [
+            {
+              "type": "track",
+              "net": "SDA",
+              "uuid": "0f6230f4-b7ae-4de6-a0f7-88e948a7461d",
+              "gap_mm": 0.5537104433076943
+            },
+            {
+              "type": "track",
+              "net": "SDA",
+              "uuid": "d5f4b07c-7b6d-4573-b9c3-58bb918f0da1",
+              "gap_mm": 0.553711031265408
+            },
+            {
+              "type": "track",
+              "net": "+3.3V",
+              "uuid": "a8f806ed-4e7a-4dae-9ad1-db4955088bff",
+              "gap_mm": 0.6649999999999919
+            }
+          ]
+        },
+        {
+          "pad": "7",
+          "closest_foreign_copper": [
+            {
+              "type": "via",
+              "net": "PB5",
+              "uuid": "73e7f9cb-7cde-4790-99d5-39f0210b1718",
+              "gap_mm": 0.4786885295966489
+            },
+            {
+              "type": "track",
+              "net": "+3.3V",
+              "uuid": "ab27861a-552f-4ee5-9079-e49380883eae",
+              "gap_mm": 0.6397623532844181
+            },
+            {
+              "type": "track",
+              "net": "PB5",
+              "uuid": "7c78c218-96bc-4aca-b074-6f44a85d0fb1",
+              "gap_mm": 0.6536558022636989
+            }
+          ]
+        },
+        {
+          "pad": "8",
+          "closest_foreign_copper": [
+            {
+              "type": "track",
+              "net": "+3.3V",
+              "uuid": "9c8a1f39-5793-4e61-be64-7132962dd570",
+              "gap_mm": 0.16000000000001077
+            },
+            {
+              "type": "track",
+              "net": "+3.3V",
+              "uuid": "ab27861a-552f-4ee5-9079-e49380883eae",
+              "gap_mm": 0.16484752172125464
+            },
+            {
+              "type": "track",
+              "net": "+3.3V",
+              "uuid": "a8f806ed-4e7a-4dae-9ad1-db4955088bff",
+              "gap_mm": 0.20000000000000281
+            }
+          ]
+        },
+        {
+          "pad": "9",
+          "closest_foreign_copper": [
+            {
+              "type": "track",
+              "net": "GND",
+              "uuid": "50467fe8-5838-443d-bd6f-469444951d63",
+              "gap_mm": 0.20999999999999372
+            },
+            {
+              "type": "track",
+              "net": "GND",
+              "uuid": "acf3109c-eb1e-4509-9789-79a4830e3dcb",
+              "gap_mm": 0.20999999999999372
+            },
+            {
+              "type": "track",
+              "net": "GND",
+              "uuid": "b83cdd6f-5d0d-44eb-8891-dc997365b3ff",
+              "gap_mm": 0.20999999999999372
+            }
+          ]
+        },
+        {
+          "pad": "10",
+          "closest_foreign_copper": [
+            {
+              "type": "track",
+              "net": "PA8",
+              "uuid": "ac98135a-d449-4bc5-9ed9-05fe86117c57",
+              "gap_mm": 0.7000000000000028
+            },
+            {
+              "type": "track",
+              "net": "PA8",
+              "uuid": "2843986a-2c3d-422f-a7c0-a5288195c20d",
+              "gap_mm": 0.7073701217617777
+            },
+            {
+              "type": "track",
+              "net": "GND",
+              "uuid": "50467fe8-5838-443d-bd6f-469444951d63",
+              "gap_mm": 0.7099989999999962
+            }
+          ]
+        },
+        {
+          "pad": "11",
+          "closest_foreign_copper": [
+            {
+              "type": "track",
+              "net": "+3.3V",
+              "uuid": "3f632ad9-7f75-4230-8521-555e439a5ab2",
+              "gap_mm": 0.134999999999998
+            },
+            {
+              "type": "track",
+              "net": "+3.3V",
+              "uuid": "a8f806ed-4e7a-4dae-9ad1-db4955088bff",
+              "gap_mm": 0.18500000000000227
+            },
+            {
+              "type": "track",
+              "net": "PA8",
+              "uuid": "ac98135a-d449-4bc5-9ed9-05fe86117c57",
+              "gap_mm": 0.2349999999999994
+            }
+          ]
+        },
+        {
+          "pad": "12",
+          "closest_foreign_copper": [
+            {
+              "type": "track",
+              "net": "+3.3V",
+              "uuid": "a8f806ed-4e7a-4dae-9ad1-db4955088bff",
+              "gap_mm": 0.18500000000000227
+            },
+            {
+              "type": "track",
+              "net": "SCL",
+              "uuid": "a2699bc6-d280-43ac-8fc2-ea5a3655931b",
+              "gap_mm": 0.27499900000000105
+            },
+            {
+              "type": "track",
+              "net": "+3.3V",
+              "uuid": "cb3f0267-bffe-4bc8-a5fc-742f300859ce",
+              "gap_mm": 0.3481813410796136
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "margin_mm": 0.005,
+      "minimum_pair_gap_mm": 0.0899999999999963,
+      "overlapping_pairs": [],
+      "pairs_with_gap_below_0p13_mm": [
+        {
+          "pads": [
+            "1",
+            "12"
+          ],
+          "nets": [
+            "SCL",
+            "PA8"
+          ],
+          "gap_mm": 0.10499899999999941,
+          "overlap_area_mm2": 0.0
+        },
+        {
+          "pads": [
+            "4",
+            "5"
+          ],
+          "nets": [
+            "SDA",
+            "GND"
+          ],
+          "gap_mm": 0.0899999999999963,
+          "overlap_area_mm2": 0.0
+        },
+        {
+          "pads": [
+            "6",
+            "7"
+          ],
+          "nets": [
+            "GND",
+            "GND"
+          ],
+          "gap_mm": 0.10499899999999941,
+          "overlap_area_mm2": 0.0
+        },
+        {
+          "pads": [
+            "10",
+            "11"
+          ],
+          "nets": [
+            "+3.3V",
+            "unconnected-(U7-INT2-Pad11)"
+          ],
+          "gap_mm": 0.10500000000000398,
+          "overlap_area_mm2": 0.0
+        }
+      ],
+      "nearest_foreign_copper": [
+        {
+          "pad": "1",
+          "closest_foreign_copper": [
+            {
+              "type": "track",
+              "net": "PA8",
+              "uuid": "2843986a-2c3d-422f-a7c0-a5288195c20d",
+              "gap_mm": 0.1944812348839859
+            },
+            {
+              "type": "track",
+              "net": "PA8",
+              "uuid": "ac98135a-d449-4bc5-9ed9-05fe86117c57",
+              "gap_mm": 0.20999900000000335
+            },
+            {
+              "type": "track",
+              "net": "+3.3V",
+              "uuid": "cb3f0267-bffe-4bc8-a5fc-742f300859ce",
+              "gap_mm": 0.21999999999999884
+            }
+          ]
+        },
+        {
+          "pad": "2",
+          "closest_foreign_copper": [
+            {
+              "type": "track",
+              "net": "GND",
+              "uuid": "c071d5fe-1b47-46a1-bcdd-4d46cde56e79",
+              "gap_mm": 0.21999999999999886
+            },
+            {
+              "type": "track",
+              "net": "SCL",
+              "uuid": "3777268c-2956-4adc-8055-47eb850a79b4",
+              "gap_mm": 0.22585061301776552
+            },
+            {
+              "type": "track",
+              "net": "SCL",
+              "uuid": "a2699bc6-d280-43ac-8fc2-ea5a3655931b",
+              "gap_mm": 0.269999999999996
+            }
+          ]
+        },
+        {
+          "pad": "3",
+          "closest_foreign_copper": [
+            {
+              "type": "track",
+              "net": "SDA",
+              "uuid": "09531328-a751-451d-9335-f02886d92d81",
+              "gap_mm": 0.19499900000000991
+            },
+            {
+              "type": "track",
+              "net": "+3.3V",
+              "uuid": "a8f806ed-4e7a-4dae-9ad1-db4955088bff",
+              "gap_mm": 0.20999999999999372
+            },
+            {
+              "type": "track",
+              "net": "+3.3V",
+              "uuid": "cb3f0267-bffe-4bc8-a5fc-742f300859ce",
+              "gap_mm": 0.20999999999999377
+            }
+          ]
+        },
+        {
+          "pad": "4",
+          "closest_foreign_copper": [
+            {
+              "type": "track",
+              "net": "GND",
+              "uuid": "5dc0585a-7141-4f08-afce-4a3c96f8fc8d",
+              "gap_mm": 0.1950000000000003
+            },
+            {
+              "type": "track",
+              "net": "GND",
+              "uuid": "c071d5fe-1b47-46a1-bcdd-4d46cde56e79",
+              "gap_mm": 0.2199990000000014
+            },
+            {
+              "type": "track",
+              "net": "GND",
+              "uuid": "c542a530-7aab-438f-8d70-88a1c96fa3d6",
+              "gap_mm": 0.3196612596402128
+            }
+          ]
+        },
+        {
+          "pad": "5",
+          "closest_foreign_copper": [
+            {
+              "type": "track",
+              "net": "SDA",
+              "uuid": "0f6230f4-b7ae-4de6-a0f7-88e948a7461d",
+              "gap_mm": 0.19448052777720584
+            },
+            {
+              "type": "track",
+              "net": "SDA",
+              "uuid": "09531328-a751-451d-9335-f02886d92d81",
+              "gap_mm": 0.19500000000000028
+            },
+            {
+              "type": "track",
+              "net": "SDA",
+              "uuid": "d5f4b07c-7b6d-4573-b9c3-58bb918f0da1",
+              "gap_mm": 0.27380861662481415
+            }
+          ]
+        },
+        {
+          "pad": "6",
+          "closest_foreign_copper": [
+            {
+              "type": "track",
+              "net": "SDA",
+              "uuid": "0f6230f4-b7ae-4de6-a0f7-88e948a7461d",
+              "gap_mm": 0.5664853708587769
+            },
+            {
+              "type": "track",
+              "net": "SDA",
+              "uuid": "d5f4b07c-7b6d-4573-b9c3-58bb918f0da1",
+              "gap_mm": 0.5664859613618013
+            },
+            {
+              "type": "track",
+              "net": "+3.3V",
+              "uuid": "a8f806ed-4e7a-4dae-9ad1-db4955088bff",
+              "gap_mm": 0.6749999999999972
+            }
+          ]
+        },
+        {
+          "pad": "7",
+          "closest_foreign_copper": [
+            {
+              "type": "via",
+              "net": "PB5",
+              "uuid": "73e7f9cb-7cde-4790-99d5-39f0210b1718",
+              "gap_mm": 0.49147961714093186
+            },
+            {
+              "type": "track",
+              "net": "+3.3V",
+              "uuid": "ab27861a-552f-4ee5-9079-e49380883eae",
+              "gap_mm": 0.651135924216292
+            },
+            {
+              "type": "track",
+              "net": "PB5",
+              "uuid": "7c78c218-96bc-4aca-b074-6f44a85d0fb1",
+              "gap_mm": 0.6664552365883228
+            }
+          ]
+        },
+        {
+          "pad": "8",
+          "closest_foreign_copper": [
+            {
+              "type": "track",
+              "net": "+3.3V",
+              "uuid": "9c8a1f39-5793-4e61-be64-7132962dd570",
+              "gap_mm": 0.17000000000000168
+            },
+            {
+              "type": "track",
+              "net": "+3.3V",
+              "uuid": "ab27861a-552f-4ee5-9079-e49380883eae",
+              "gap_mm": 0.17731638000945493
+            },
+            {
+              "type": "track",
+              "net": "+3.3V",
+              "uuid": "a8f806ed-4e7a-4dae-9ad1-db4955088bff",
+              "gap_mm": 0.20999999999999372
+            }
+          ]
+        },
+        {
+          "pad": "9",
+          "closest_foreign_copper": [
+            {
+              "type": "track",
+              "net": "GND",
+              "uuid": "50467fe8-5838-443d-bd6f-469444951d63",
+              "gap_mm": 0.21999999999999884
+            },
+            {
+              "type": "track",
+              "net": "GND",
+              "uuid": "acf3109c-eb1e-4509-9789-79a4830e3dcb",
+              "gap_mm": 0.21999999999999884
+            },
+            {
+              "type": "track",
+              "net": "GND",
+              "uuid": "b83cdd6f-5d0d-44eb-8891-dc997365b3ff",
+              "gap_mm": 0.21999999999999884
+            }
+          ]
+        },
+        {
+          "pad": "10",
+          "closest_foreign_copper": [
+            {
+              "type": "track",
+              "net": "PA8",
+              "uuid": "ac98135a-d449-4bc5-9ed9-05fe86117c57",
+              "gap_mm": 0.7100000000000007
+            },
+            {
+              "type": "track",
+              "net": "PA8",
+              "uuid": "2843986a-2c3d-422f-a7c0-a5288195c20d",
+              "gap_mm": 0.718205058055846
+            },
+            {
+              "type": "track",
+              "net": "GND",
+              "uuid": "b83cdd6f-5d0d-44eb-8891-dc997365b3ff",
+              "gap_mm": 0.7199989999999871
+            }
+          ]
+        },
+        {
+          "pad": "11",
+          "closest_foreign_copper": [
+            {
+              "type": "track",
+              "net": "+3.3V",
+              "uuid": "3f632ad9-7f75-4230-8521-555e439a5ab2",
+              "gap_mm": 0.1450000000000031
+            },
+            {
+              "type": "track",
+              "net": "+3.3V",
+              "uuid": "a8f806ed-4e7a-4dae-9ad1-db4955088bff",
+              "gap_mm": 0.19499999999999318
+            },
+            {
+              "type": "track",
+              "net": "PA8",
+              "uuid": "ac98135a-d449-4bc5-9ed9-05fe86117c57",
+              "gap_mm": 0.24499999999999741
+            }
+          ]
+        },
+        {
+          "pad": "12",
+          "closest_foreign_copper": [
+            {
+              "type": "track",
+              "net": "+3.3V",
+              "uuid": "a8f806ed-4e7a-4dae-9ad1-db4955088bff",
+              "gap_mm": 0.19499999999999318
+            },
+            {
+              "type": "track",
+              "net": "SCL",
+              "uuid": "a2699bc6-d280-43ac-8fc2-ea5a3655931b",
+              "gap_mm": 0.28499899999999917
+            },
+            {
+              "type": "track",
+              "net": "+3.3V",
+              "uuid": "cb3f0267-bffe-4bc8-a5fc-742f300859ce",
+              "gap_mm": 0.3610672258569025
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "margin_mm": 0.0,
+      "minimum_pair_gap_mm": 0.10000081359774593,
+      "overlapping_pairs": [],
+      "pairs_with_gap_below_0p13_mm": [
+        {
+          "pads": [
+            "1",
+            "12"
+          ],
+          "nets": [
+            "SCL",
+            "PA8"
+          ],
+          "gap_mm": 0.11499989963216722,
+          "overlap_area_mm2": 0.0
+        },
+        {
+          "pads": [
+            "4",
+            "5"
+          ],
+          "nets": [
+            "SDA",
+            "GND"
+          ],
+          "gap_mm": 0.10000081359774593,
+          "overlap_area_mm2": 0.0
+        },
+        {
+          "pads": [
+            "6",
+            "7"
+          ],
+          "nets": [
+            "GND",
+            "GND"
+          ],
+          "gap_mm": 0.11499989963217361,
+          "overlap_area_mm2": 0.0
+        },
+        {
+          "pads": [
+            "10",
+            "11"
+          ],
+          "nets": [
+            "+3.3V",
+            "unconnected-(U7-INT2-Pad11)"
+          ],
+          "gap_mm": 0.1150008135976835,
+          "overlap_area_mm2": 0.0
+        }
+      ],
+      "nearest_foreign_copper": [
+        {
+          "pad": "1",
+          "closest_foreign_copper": [
+            {
+              "type": "track",
+              "net": "PA8",
+              "uuid": "2843986a-2c3d-422f-a7c0-a5288195c20d",
+              "gap_mm": 0.2010297507845511
+            },
+            {
+              "type": "track",
+              "net": "PA8",
+              "uuid": "ac98135a-d449-4bc5-9ed9-05fe86117c57",
+              "gap_mm": 0.21499954549923042
+            },
+            {
+              "type": "track",
+              "net": "+3.3V",
+              "uuid": "cb3f0267-bffe-4bc8-a5fc-742f300859ce",
+              "gap_mm": 0.22500048747716567
+            }
+          ]
+        },
+        {
+          "pad": "2",
+          "closest_foreign_copper": [
+            {
+              "type": "track",
+              "net": "GND",
+              "uuid": "c071d5fe-1b47-46a1-bcdd-4d46cde56e79",
+              "gap_mm": 0.2250004874800334
+            },
+            {
+              "type": "track",
+              "net": "SCL",
+              "uuid": "3777268c-2956-4adc-8055-47eb850a79b4",
+              "gap_mm": 0.23239912891833067
+            },
+            {
+              "type": "track",
+              "net": "SCL",
+              "uuid": "a2699bc6-d280-43ac-8fc2-ea5a3655931b",
+              "gap_mm": 0.27500049194488024
+            }
+          ]
+        },
+        {
+          "pad": "3",
+          "closest_foreign_copper": [
+            {
+              "type": "track",
+              "net": "SDA",
+              "uuid": "09531328-a751-451d-9335-f02886d92d81",
+              "gap_mm": 0.19999948591723948
+            },
+            {
+              "type": "track",
+              "net": "+3.3V",
+              "uuid": "a8f806ed-4e7a-4dae-9ad1-db4955088bff",
+              "gap_mm": 0.2150000000000034
+            },
+            {
+              "type": "track",
+              "net": "+3.3V",
+              "uuid": "cb3f0267-bffe-4bc8-a5fc-742f300859ce",
+              "gap_mm": 0.21500045880287716
+            }
+          ]
+        },
+        {
+          "pad": "4",
+          "closest_foreign_copper": [
+            {
+              "type": "track",
+              "net": "GND",
+              "uuid": "5dc0585a-7141-4f08-afce-4a3c96f8fc8d",
+              "gap_mm": 0.2000004221302742
+            },
+            {
+              "type": "track",
+              "net": "GND",
+              "uuid": "c071d5fe-1b47-46a1-bcdd-4d46cde56e79",
+              "gap_mm": 0.22499899999999684
+            },
+            {
+              "type": "track",
+              "net": "GND",
+              "uuid": "c542a530-7aab-438f-8d70-88a1c96fa3d6",
+              "gap_mm": 0.32620974818212173
+            }
+          ]
+        },
+        {
+          "pad": "5",
+          "closest_foreign_copper": [
+            {
+              "type": "track",
+              "net": "SDA",
+              "uuid": "09531328-a751-451d-9335-f02886d92d81",
+              "gap_mm": 0.20000044289855962
+            },
+            {
+              "type": "track",
+              "net": "SDA",
+              "uuid": "0f6230f4-b7ae-4de6-a0f7-88e948a7461d",
+              "gap_mm": 0.20102904367777105
+            },
+            {
+              "type": "track",
+              "net": "SDA",
+              "uuid": "d5f4b07c-7b6d-4573-b9c3-58bb918f0da1",
+              "gap_mm": 0.2794459841060423
+            }
+          ]
+        },
+        {
+          "pad": "6",
+          "closest_foreign_copper": [
+            {
+              "type": "track",
+              "net": "SDA",
+              "uuid": "0f6230f4-b7ae-4de6-a0f7-88e948a7461d",
+              "gap_mm": 0.5728872990615198
+            },
+            {
+              "type": "track",
+              "net": "SDA",
+              "uuid": "d5f4b07c-7b6d-4573-b9c3-58bb918f0da1",
+              "gap_mm": 0.5728878954254502
+            },
+            {
+              "type": "track",
+              "net": "+3.3V",
+              "uuid": "a8f806ed-4e7a-4dae-9ad1-db4955088bff",
+              "gap_mm": 0.6799999999999925
+            }
+          ]
+        },
+        {
+          "pad": "7",
+          "closest_foreign_copper": [
+            {
+              "type": "via",
+              "net": "PB5",
+              "uuid": "73e7f9cb-7cde-4790-99d5-39f0210b1718",
+              "gap_mm": 0.4979230496773673
+            },
+            {
+              "type": "track",
+              "net": "+3.3V",
+              "uuid": "ab27861a-552f-4ee5-9079-e49380883eae",
+              "gap_mm": 0.6567768443071108
+            },
+            {
+              "type": "track",
+              "net": "PB5",
+              "uuid": "7c78c218-96bc-4aca-b074-6f44a85d0fb1",
+              "gap_mm": 0.6729133107681962
+            }
+          ]
+        },
+        {
+          "pad": "8",
+          "closest_foreign_copper": [
+            {
+              "type": "track",
+              "net": "+3.3V",
+              "uuid": "9c8a1f39-5793-4e61-be64-7132962dd570",
+              "gap_mm": 0.17500000000001137
+            },
+            {
+              "type": "track",
+              "net": "+3.3V",
+              "uuid": "ab27861a-552f-4ee5-9079-e49380883eae",
+              "gap_mm": 0.1834434912406428
+            },
+            {
+              "type": "track",
+              "net": "+3.3V",
+              "uuid": "66a82ae2-fcc0-482c-bf5c-4e43c7fe8847",
+              "gap_mm": 0.21500051615729002
+            }
+          ]
+        },
+        {
+          "pad": "9",
+          "closest_foreign_copper": [
+            {
+              "type": "track",
+              "net": "GND",
+              "uuid": "50467fe8-5838-443d-bd6f-469444951d63",
+              "gap_mm": 0.2249999999999943
+            },
+            {
+              "type": "track",
+              "net": "GND",
+              "uuid": "acf3109c-eb1e-4509-9789-79a4830e3dcb",
+              "gap_mm": 0.2250004874800334
+            },
+            {
+              "type": "track",
+              "net": "GND",
+              "uuid": "b83cdd6f-5d0d-44eb-8891-dc997365b3ff",
+              "gap_mm": 0.2250004874800334
+            }
+          ]
+        },
+        {
+          "pad": "10",
+          "closest_foreign_copper": [
+            {
+              "type": "track",
+              "net": "PA8",
+              "uuid": "ac98135a-d449-4bc5-9ed9-05fe86117c57",
+              "gap_mm": 0.7149999999999963
+            },
+            {
+              "type": "track",
+              "net": "PA8",
+              "uuid": "2843986a-2c3d-422f-a7c0-a5288195c20d",
+              "gap_mm": 0.723649383540125
+            },
+            {
+              "type": "track",
+              "net": "GND",
+              "uuid": "50467fe8-5838-443d-bd6f-469444951d63",
+              "gap_mm": 0.7249989999999968
+            }
+          ]
+        },
+        {
+          "pad": "11",
+          "closest_foreign_copper": [
+            {
+              "type": "track",
+              "net": "+3.3V",
+              "uuid": "3f632ad9-7f75-4230-8521-555e439a5ab2",
+              "gap_mm": 0.15000044051855593
+            },
+            {
+              "type": "track",
+              "net": "+3.3V",
+              "uuid": "a8f806ed-4e7a-4dae-9ad1-db4955088bff",
+              "gap_mm": 0.20000000000000281
+            },
+            {
+              "type": "track",
+              "net": "PA8",
+              "uuid": "ac98135a-d449-4bc5-9ed9-05fe86117c57",
+              "gap_mm": 0.25
+            }
+          ]
+        },
+        {
+          "pad": "12",
+          "closest_foreign_copper": [
+            {
+              "type": "track",
+              "net": "+3.3V",
+              "uuid": "a8f806ed-4e7a-4dae-9ad1-db4955088bff",
+              "gap_mm": 0.20000000000000281
+            },
+            {
+              "type": "track",
+              "net": "SCL",
+              "uuid": "a2699bc6-d280-43ac-8fc2-ea5a3655931b",
+              "gap_mm": 0.2899995349634919
+            },
+            {
+              "type": "track",
+              "net": "+3.3V",
+              "uuid": "cb3f0267-bffe-4bc8-a5fc-742f300859ce",
+              "gap_mm": 0.36747458046101233
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "margin_mm": -0.005,
+      "minimum_pair_gap_mm": 0.10999999999999943,
+      "overlapping_pairs": [],
+      "pairs_with_gap_below_0p13_mm": [
+        {
+          "pads": [
+            "1",
+            "12"
+          ],
+          "nets": [
+            "SCL",
+            "PA8"
+          ],
+          "gap_mm": 0.12499900000000252,
+          "overlap_area_mm2": 0.0
+        },
+        {
+          "pads": [
+            "4",
+            "5"
+          ],
+          "nets": [
+            "SDA",
+            "GND"
+          ],
+          "gap_mm": 0.10999999999999943,
+          "overlap_area_mm2": 0.0
+        },
+        {
+          "pads": [
+            "6",
+            "7"
+          ],
+          "nets": [
+            "GND",
+            "GND"
+          ],
+          "gap_mm": 0.12499900000000252,
+          "overlap_area_mm2": 0.0
+        },
+        {
+          "pads": [
+            "10",
+            "11"
+          ],
+          "nets": [
+            "+3.3V",
+            "unconnected-(U7-INT2-Pad11)"
+          ],
+          "gap_mm": 0.125,
+          "overlap_area_mm2": 0.0
+        }
+      ],
+      "nearest_foreign_copper": [
+        {
+          "pad": "1",
+          "closest_foreign_copper": [
+            {
+              "type": "track",
+              "net": "PA8",
+              "uuid": "2843986a-2c3d-422f-a7c0-a5288195c20d",
+              "gap_mm": 0.20747997884253822
+            },
+            {
+              "type": "track",
+              "net": "PA8",
+              "uuid": "ac98135a-d449-4bc5-9ed9-05fe86117c57",
+              "gap_mm": 0.21999900000000136
+            },
+            {
+              "type": "track",
+              "net": "+3.3V",
+              "uuid": "cb3f0267-bffe-4bc8-a5fc-742f300859ce",
+              "gap_mm": 0.2299999999999898
+            }
+          ]
+        },
+        {
+          "pad": "2",
+          "closest_foreign_copper": [
+            {
+              "type": "track",
+              "net": "GND",
+              "uuid": "c071d5fe-1b47-46a1-bcdd-4d46cde56e79",
+              "gap_mm": 0.22999999999998974
+            },
+            {
+              "type": "track",
+              "net": "SCL",
+              "uuid": "3777268c-2956-4adc-8055-47eb850a79b4",
+              "gap_mm": 0.23884935697631782
+            },
+            {
+              "type": "track",
+              "net": "SCL",
+              "uuid": "a2699bc6-d280-43ac-8fc2-ea5a3655931b",
+              "gap_mm": 0.28000000000000114
+            }
+          ]
+        },
+        {
+          "pad": "3",
+          "closest_foreign_copper": [
+            {
+              "type": "track",
+              "net": "SDA",
+              "uuid": "09531328-a751-451d-9335-f02886d92d81",
+              "gap_mm": 0.20499900000000076
+            },
+            {
+              "type": "track",
+              "net": "+3.3V",
+              "uuid": "a8f806ed-4e7a-4dae-9ad1-db4955088bff",
+              "gap_mm": 0.21999999999999884
+            },
+            {
+              "type": "track",
+              "net": "+3.3V",
+              "uuid": "cb3f0267-bffe-4bc8-a5fc-742f300859ce",
+              "gap_mm": 0.21999999999999886
+            }
+          ]
+        },
+        {
+          "pad": "4",
+          "closest_foreign_copper": [
+            {
+              "type": "track",
+              "net": "GND",
+              "uuid": "5dc0585a-7141-4f08-afce-4a3c96f8fc8d",
+              "gap_mm": 0.2049999999999983
+            },
+            {
+              "type": "track",
+              "net": "GND",
+              "uuid": "c071d5fe-1b47-46a1-bcdd-4d46cde56e79",
+              "gap_mm": 0.22999900000000648
+            },
+            {
+              "type": "track",
+              "net": "GND",
+              "uuid": "c542a530-7aab-438f-8d70-88a1c96fa3d6",
+              "gap_mm": 0.33265997649081847
+            }
+          ]
+        },
+        {
+          "pad": "5",
+          "closest_foreign_copper": [
+            {
+              "type": "track",
+              "net": "SDA",
+              "uuid": "09531328-a751-451d-9335-f02886d92d81",
+              "gap_mm": 0.2050000000000054
+            },
+            {
+              "type": "track",
+              "net": "SDA",
+              "uuid": "0f6230f4-b7ae-4de6-a0f7-88e948a7461d",
+              "gap_mm": 0.20747927173575814
+            },
+            {
+              "type": "track",
+              "net": "SDA",
+              "uuid": "d5f4b07c-7b6d-4573-b9c3-58bb918f0da1",
+              "gap_mm": 0.2850091968761672
+            }
+          ]
+        },
+        {
+          "pad": "6",
+          "closest_foreign_copper": [
+            {
+              "type": "track",
+              "net": "SDA",
+              "uuid": "0f6230f4-b7ae-4de6-a0f7-88e948a7461d",
+              "gap_mm": 0.5792899206174762
+            },
+            {
+              "type": "track",
+              "net": "SDA",
+              "uuid": "d5f4b07c-7b6d-4573-b9c3-58bb918f0da1",
+              "gap_mm": 0.5792905181633825
+            },
+            {
+              "type": "track",
+              "net": "+3.3V",
+              "uuid": "a8f806ed-4e7a-4dae-9ad1-db4955088bff",
+              "gap_mm": 0.6850000000000022
+            }
+          ]
+        },
+        {
+          "pad": "7",
+          "closest_foreign_copper": [
+            {
+              "type": "via",
+              "net": "PB5",
+              "uuid": "73e7f9cb-7cde-4790-99d5-39f0210b1718",
+              "gap_mm": 0.5043343157162749
+            },
+            {
+              "type": "track",
+              "net": "+3.3V",
+              "uuid": "ab27861a-552f-4ee5-9079-e49380883eae",
+              "gap_mm": 0.6624717487236821
+            },
+            {
+              "type": "track",
+              "net": "PB5",
+              "uuid": "7c78c218-96bc-4aca-b074-6f44a85d0fb1",
+              "gap_mm": 0.6793263498393138
+            }
+          ]
+        },
+        {
+          "pad": "8",
+          "closest_foreign_copper": [
+            {
+              "type": "track",
+              "net": "+3.3V",
+              "uuid": "9c8a1f39-5793-4e61-be64-7132962dd570",
+              "gap_mm": 0.18000000000000682
+            },
+            {
+              "type": "track",
+              "net": "+3.3V",
+              "uuid": "ab27861a-552f-4ee5-9079-e49380883eae",
+              "gap_mm": 0.18967148677037765
+            },
+            {
+              "type": "track",
+              "net": "+3.3V",
+              "uuid": "a8f806ed-4e7a-4dae-9ad1-db4955088bff",
+              "gap_mm": 0.21999999999999884
+            }
+          ]
+        },
+        {
+          "pad": "9",
+          "closest_foreign_copper": [
+            {
+              "type": "track",
+              "net": "GND",
+              "uuid": "50467fe8-5838-443d-bd6f-469444951d63",
+              "gap_mm": 0.22999999999998974
+            },
+            {
+              "type": "track",
+              "net": "GND",
+              "uuid": "b83cdd6f-5d0d-44eb-8891-dc997365b3ff",
+              "gap_mm": 0.22999999999998977
+            },
+            {
+              "type": "track",
+              "net": "GND",
+              "uuid": "acf3109c-eb1e-4509-9789-79a4830e3dcb",
+              "gap_mm": 0.2299999999999898
+            }
+          ]
+        },
+        {
+          "pad": "10",
+          "closest_foreign_copper": [
+            {
+              "type": "track",
+              "net": "PA8",
+              "uuid": "ac98135a-d449-4bc5-9ed9-05fe86117c57",
+              "gap_mm": 0.7199999999999988
+            },
+            {
+              "type": "track",
+              "net": "PA8",
+              "uuid": "2843986a-2c3d-422f-a7c0-a5288195c20d",
+              "gap_mm": 0.7291604929458314
+            },
+            {
+              "type": "track",
+              "net": "GND",
+              "uuid": "50467fe8-5838-443d-bd6f-469444951d63",
+              "gap_mm": 0.7299989999999922
+            }
+          ]
+        },
+        {
+          "pad": "11",
+          "closest_foreign_copper": [
+            {
+              "type": "track",
+              "net": "+3.3V",
+              "uuid": "3f632ad9-7f75-4230-8521-555e439a5ab2",
+              "gap_mm": 0.15500000000000114
+            },
+            {
+              "type": "track",
+              "net": "+3.3V",
+              "uuid": "a8f806ed-4e7a-4dae-9ad1-db4955088bff",
+              "gap_mm": 0.2049999999999983
+            },
+            {
+              "type": "track",
+              "net": "PA8",
+              "uuid": "ac98135a-d449-4bc5-9ed9-05fe86117c57",
+              "gap_mm": 0.2550000000000025
+            }
+          ]
+        },
+        {
+          "pad": "12",
+          "closest_foreign_copper": [
+            {
+              "type": "track",
+              "net": "+3.3V",
+              "uuid": "a8f806ed-4e7a-4dae-9ad1-db4955088bff",
+              "gap_mm": 0.2049999999999983
+            },
+            {
+              "type": "track",
+              "net": "SCL",
+              "uuid": "a2699bc6-d280-43ac-8fc2-ea5a3655931b",
+              "gap_mm": 0.29499900000000423
+            },
+            {
+              "type": "track",
+              "net": "+3.3V",
+              "uuid": "cb3f0267-bffe-4bc8-a5fc-742f300859ce",
+              "gap_mm": 0.3739215417236609
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

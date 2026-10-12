@@ -1,0 +1,218 @@
+{
+  "status": "pass",
+  "baseline_commit": "a9d6ed59ebd9ca6a4e04108afe0bbe3a827cddde",
+  "candidate_dir": "/Users/twarn/Repositories/ai-working/scratch/stratolink-u7-mask/candidate",
+  "candidate_sha256": {
+    "stratolink.kicad_pcb": "977691fa7798a2d0d4cf255f4684244d3825a4615bde064cd77f975ec434884e",
+    "lib/PQFN50P200X200100-12N.kicad_mod": "aecac84d4c0a2e9afbfdcf94d7cf3aea201074cbe07378d6f39f39622b75fdc7"
+  },
+  "PCB_delta": "Only12U7padmaskmargins0.102to0; all other parsed objects exact",
+  "schematic_and_project_unchanged": true,
+  "physical_pad_checks": 230,
+  "native_unconnected": 0,
+  "library_pad_geometry_and_mask_match": true,
+  "drc": {
+    "project": {
+      "violations": {
+        "before": 70,
+        "after": 61,
+        "added": [],
+        "removed": [
+          {
+            "description": "Front solder mask aperture bridges items with different nets",
+            "item_uuids": [
+              "9ba169d3-5736-49df-b848-9088befd6a05",
+              "c15edda3-911a-44fe-9d0e-b38bf0e5970f"
+            ],
+            "severity": "error",
+            "type": "solder_mask_bridge"
+          },
+          {
+            "description": "Front solder mask aperture bridges items with different nets",
+            "item_uuids": [
+              "10c617de-60db-4459-85dc-c4e27f639bb8",
+              "c15edda3-911a-44fe-9d0e-b38bf0e5970f"
+            ],
+            "severity": "error",
+            "type": "solder_mask_bridge"
+          },
+          {
+            "description": "Front solder mask aperture bridges items with different nets",
+            "item_uuids": [
+              "9ba169d3-5736-49df-b848-9088befd6a05",
+              "a93cbc1e-4e77-4486-a48b-8187656ae968"
+            ],
+            "severity": "error",
+            "type": "solder_mask_bridge"
+          },
+          {
+            "description": "Front solder mask aperture bridges items with different nets",
+            "item_uuids": [
+              "97e63275-6524-4b0c-aa59-358be4aa2e66",
+              "a93cbc1e-4e77-4486-a48b-8187656ae968"
+            ],
+            "severity": "error",
+            "type": "solder_mask_bridge"
+          },
+          {
+            "description": "Front solder mask aperture bridges items with different nets",
+            "item_uuids": [
+              "885f4db5-7a9b-4845-9096-ed56c7826b71",
+              "97e63275-6524-4b0c-aa59-358be4aa2e66"
+            ],
+            "severity": "error",
+            "type": "solder_mask_bridge"
+          },
+          {
+            "description": "Front solder mask aperture bridges items with different nets",
+            "item_uuids": [
+              "77d55d14-93f0-45c2-9c41-d0881e10a934",
+              "840ac94f-0c85-4cce-bee7-7a770472d316"
+            ],
+            "severity": "error",
+            "type": "solder_mask_bridge"
+          },
+          {
+            "description": "Front solder mask aperture bridges items with different nets",
+            "item_uuids": [
+              "5059cf4f-a448-4344-a737-e6ab6c06719b",
+              "8354534f-c9fa-4833-8f1c-d92a8d313fe9"
+            ],
+            "severity": "error",
+            "type": "solder_mask_bridge"
+          },
+          {
+            "description": "Front solder mask aperture bridges items with different nets",
+            "item_uuids": [
+              "10c617de-60db-4459-85dc-c4e27f639bb8",
+              "5059cf4f-a448-4344-a737-e6ab6c06719b"
+            ],
+            "severity": "error",
+            "type": "solder_mask_bridge"
+          },
+          {
+            "description": "Footprint 'PQFN50P200X200100-12N' does not match copy in library 'lib'",
+            "item_uuids": [
+              "30c6d1e8-0ffa-4633-8a7f-49ed926e42c2"
+            ],
+            "severity": "warning",
+            "type": "lib_footprint_mismatch"
+          }
+        ]
+      },
+      "schematic_parity": {
+        "before": 11,
+        "after": 11,
+        "added": [],
+        "removed": []
+      },
+      "unconnected_items": {
+        "before": 0,
+        "after": 0,
+        "added": [],
+        "removed": []
+      }
+    },
+    "diagnostic": {
+      "violations": {
+        "before": 83,
+        "after": 74,
+        "added": [],
+        "removed": [
+          {
+            "description": "Front solder mask aperture bridges items with different nets",
+            "item_uuids": [
+              "9ba169d3-5736-49df-b848-9088befd6a05",
+              "c15edda3-911a-44fe-9d0e-b38bf0e5970f"
+            ],
+            "severity": "error",
+            "type": "solder_mask_bridge"
+          },
+          {
+            "description": "Front solder mask aperture bridges items with different nets",
+            "item_uuids": [
+              "10c617de-60db-4459-85dc-c4e27f639bb8",
+              "c15edda3-911a-44fe-9d0e-b38bf0e5970f"
+            ],
+            "severity": "error",
+            "type": "solder_mask_bridge"
+          },
+          {
+            "description": "Front solder mask aperture bridges items with different nets",
+            "item_uuids": [
+              "9ba169d3-5736-49df-b848-9088befd6a05",
+              "a93cbc1e-4e77-4486-a48b-8187656ae968"
+            ],
+            "severity": "error",
+            "type": "solder_mask_bridge"
+          },
+          {
+            "description": "Front solder mask aperture bridges items with different nets",
+            "item_uuids": [
+              "97e63275-6524-4b0c-aa59-358be4aa2e66",
+              "a93cbc1e-4e77-4486-a48b-8187656ae968"
+            ],
+            "severity": "error",
+            "type": "solder_mask_bridge"
+          },
+          {
+            "description": "Front solder mask aperture bridges items with different nets",
+            "item_uuids": [
+              "885f4db5-7a9b-4845-9096-ed56c7826b71",
+              "97e63275-6524-4b0c-aa59-358be4aa2e66"
+            ],
+            "severity": "error",
+            "type": "solder_mask_bridge"
+          },
+          {
+            "description": "Front solder mask aperture bridges items with different nets",
+            "item_uuids": [
+              "77d55d14-93f0-45c2-9c41-d0881e10a934",
+              "840ac94f-0c85-4cce-bee7-7a770472d316"
+            ],
+            "severity": "error",
+            "type": "solder_mask_bridge"
+          },
+          {
+            "description": "Front solder mask aperture bridges items with different nets",
+            "item_uuids": [
+              "5059cf4f-a448-4344-a737-e6ab6c06719b",
+              "8354534f-c9fa-4833-8f1c-d92a8d313fe9"
+            ],
+            "severity": "error",
+            "type": "solder_mask_bridge"
+          },
+          {
+            "description": "Front solder mask aperture bridges items with different nets",
+            "item_uuids": [
+              "10c617de-60db-4459-85dc-c4e27f639bb8",
+              "5059cf4f-a448-4344-a737-e6ab6c06719b"
+            ],
+            "severity": "error",
+            "type": "solder_mask_bridge"
+          },
+          {
+            "description": "Footprint 'PQFN50P200X200100-12N' does not match copy in library 'lib'",
+            "item_uuids": [
+              "30c6d1e8-0ffa-4633-8a7f-49ed926e42c2"
+            ],
+            "severity": "warning",
+            "type": "lib_footprint_mismatch"
+          }
+        ]
+      },
+      "schematic_parity": {
+        "before": 11,
+        "after": 11,
+        "added": [],
+        "removed": []
+      },
+      "unconnected_items": {
+        "before": 0,
+        "after": 0,
+        "added": [],
+        "removed": []
+      }
+    }
+  }
+}

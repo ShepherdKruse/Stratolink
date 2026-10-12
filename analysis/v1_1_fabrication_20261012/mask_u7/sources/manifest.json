@@ -1,0 +1,12 @@
+{
+  "captured": "2026-10-12",
+  "sources": {
+    "jlc-capabilities-mask.txt": "b13bae7f84cb70b14a23c75e41851296d6ce3d29d099bfbc581673eddcb68d31",
+    "st-footprint-guidance.txt": "0a0ab00aa450fb1e6b11cf9c1dfc0532d94d96aae824d3531e117cdd1317f5aa"
+  },
+  "urls": {
+    "jlc-capabilities-mask.txt": "https://jlcpcb.com/capabilities/pcb-capabilities",
+    "st-footprint-guidance.txt": "https://community.st.com/mems-sensors-48/smd-footprint-recommendation-for-lis2dh12-17984"
+  },
+  "normalization": "Trailing line whitespace removed; visible text content retained."
+}

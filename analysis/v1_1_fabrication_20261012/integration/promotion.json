@@ -1,0 +1,7 @@
+{
+  "baseline_corner_commit": "e909514",
+  "pcb_before_sha256": "82926d9dfc728dca41c9d0970c69a5144fb9079380a298337381c199698f80f4",
+  "pcb_after_sha256": "268f5ef0f8d59caf0a46a0cb990fb26c1d74563e3423a15c16d361d392f9f96c",
+  "library_sha256": "aecac84d4c0a2e9afbfdcf94d7cf3aea201074cbe07378d6f39f39622b75fdc7",
+  "changes": "Twelve U7 mask margins 0.102 to0; project-local U7 library reconciled; prior corner work preserved"
+}

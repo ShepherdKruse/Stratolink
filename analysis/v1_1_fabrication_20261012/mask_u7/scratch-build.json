@@ -1,0 +1,5 @@
+{
+  "baseline": "a9d6ed59ebd9ca6a4e04108afe0bbe3a827cddde",
+  "scratch": "/Users/twarn/Repositories/ai-working/scratch/stratolink-u7-mask/candidate",
+  "changed": "Explicit U7 pad solder_mask_margin 0.102 -> 0; twelve pads, no other PCB changes. Native reusable-library reconciliation follows."
+}

@@ -1,0 +1,398 @@
+24
+SMT
+24-hour PCB production. Fast Delivery to United States.
+ Coupons
+ Download APP
+USD
+JLCPCB
+Products
+Capabilities
+Support
+About Us
+Order Now
+Sign In
+Rigid PCB Manufacturing Capabilities
+JLCPCB offers 1-32 layer rigid PCB manufacturing and assembly services with various substrate thicknesses, surface finishes, and impedance control.
+Green
+Purple
+Red
+Yellow
+Blue
+White
+Black
+Get Instant Quote
+Rigid PCB Capabilities
+Flex PCB Capabilities
+PCBA Capabilities
+Stencil Capabilities
+PCB Layout Capabilities
+Flexible Heaters Capabilities
+PCB Specifications
+Features	Capability	Description	Patterns
+Layer count
+
+1-32 Layers
+
+The number of copper layers in the PCB
+
+
+
+Controlled Impedance
+
+4/6/8/10/12/14/16/18/20/.../32 layers
+
+User Guide to the JLCPCB Impedance Calculator
+JLCPCB Impedance Calculator
+
+
+
+Impedance Tolerance
+
+±10%
+
+
+
+
+Material
+
+FR-4
+
+Grade A laminates from suppliers including Nan Ya, KB, Shengyi and etc.
+
+
+
+HDI
+
+
+Currently support (1-step / 2-step / 3-step)
+
+① Blind Via Diameter: 0.075mm-0.15 mm (fabricated by laser drilling and copper-filled electroplating process)
+
+② Buried Via Diameter:
+
+- Standard range: 0.15 mm – 0.55 mm (fabricated by mechanical drilling with Epoxy Filled & Capped)
+
+- Extreme capability: Minimum buried via down to 0.10 mm, applicable only when the dielectric thickness penetrated by mechanical buried via ≤ 1.0 mm.
+
+③ Minimum trace width / space: 3 mil / 3 mil; Extreme capability: 2.7 mil / 2.7 mil.
+
+④ Minimum dimension: 5 × 5 mm; Maximum dimension: 576 × 469 mm.
+
+⑤ HDI base material: Nan Ya NP-175F TG170/Shengyi S1000-2M TG170.
+
+For more details, please refer to
+HDI PCB capabilities FAQ
+
+
+
+
+Aluminum-Core
+
+1-layer Aluminum-core PCBs
+
+
+
+Copper-Core
+
+1-layer copper-core PCBs with direct heatsink contacts to core (≥ 1 × 1 mm)
+
+
+
+RF PCB
+
+1 oz copper, 2-layer RF PCBs with Rogers and PTFE cores
+
+
+
+FR-4 Dielectric Constants
+
+4.5 (2-Layer PCB)
+
+
+7628 Prepreg 4.4
+
+3313 Perpreg 4.1
+
+2116 Perpreg 4.16
+
+
+
+
+Maximum Dimensions
+
+
+FR4(1-layer): 606 × 510 mm
+
+FR4(2-layer): 670 × 600 mm
+
+FR4(4-layer): 663 × 593 mm
+
+FR4(6-layer and above): 656 × 586 mm
+
+Rogers / PTFE Teflon PCB: 590 × 438 mm
+
+Aluminum PCB: 602 × 506 mm
+
+Copper PCB: 480 × 286 mm
+
+
+
+These limits apply to PCBs with thickness ≥ 0.8 mm. The thinner FR4 PCBs are 599 × 497 mm maximum.
+
+2-layer FR4 PCBs can reach a maximum size of 1020 × 600 mm.
+
+4-layer FR4 PCBs can reach a maximum size of 1016 × 596 mm.
+
+
+
+
+Minimum Dimensions
+
+
+FR4/Rogers/PTFE: 3 × 3 mm
+
+Castellated / Plated Edges: 10 × 10 mm
+
+Aluminum/Copper PCB: 5 × 5 mm
+
+
+These limits apply to PCBs with thickness ≥ 0.6 mm. Manual review required for thinner PCBs. Panelization is recommended for small-sized boards.
+
+
+
+Dimension Tolerance
+
+±0.1mm
+
+±0.1mm(Precision) and ±0.2mm(Regular) for CNC routing, and ±0.4mm for V-scoring
+
+
+
+Thickness
+
+0.4 – 4.5 mm
+
+Thickness for FR4 are: 0.4/0.6/0.8/1.0/1.2/1.6/2.0 mm (2.5 mm and above are for 12+ layer PCBs only)
+
+
+
+
+Thickness Tolerance
+
+(Thickness≥1.0mm)
+
+
+± 10%
+
+e.g. For the 1.6mm board thickness, the finished board thickness ranges from 1.44mm(T-1.6×10%) to 1.76mm(T+1.6×10%)
+
+
+
+
+Thickness Tolerance
+
+(Thickness<1.0mm)
+
+
+± 0.1mm
+
+e.g. For the 0.8mm board thickness, the finished board thickness ranges from 0.7mm(T-0.1) to 0.9mm(T+0.1).
+
+
+
+Finished Outer Layer Copper
+
+
+2-layer: 1 oz / 2 oz / 2.5 oz / 3.5 oz / 4.5oz
+
+Multi-layer: 1 oz / 2 oz
+
+
+
+
+
+Finished Inner Layer Copper
+
+0.5 oz / 1 oz / 2 oz
+
+Finished copper weight of inner layer is 0.5oz by default.
+
+
+
+Soldermask
+
+Green, Purple, Red, Yellow, Blue, White, and Black.
+
+We use LPI (Liquid Photo Imageable) solder mask. This is the most common type of mask used today. Heat-cured ink soldermask is usually found on low-cost, single-sided PCBs.
+
+
+
+Surface Finish
+
+HASL (leaded / lead-free), ENlG, OSP (Single-sided FR-4, FPC, and aluminum PCBs are currently not supported for OSP)
+
+
+Aluminum PCBs:
+
+HASL only; FR-4/HDI boards with 6 or more layers, boards with a thickness ≤ 0.4 mm, high-frequency boards, copper-based PCBs, and FPCs do not support HASL.
+
+
+Drilling
+Traces
+Soldermask
+Features	Capability	Description	Patterns
+Soldermask Expansion
+
+1:1
+
+
+LDI equipment upgraded in June 2025. Pad size:soldermask opening can be 1:1(Previous production file will be followed in Reorder).
+
+Keep at least 0.09 mm clearance between soldermask openings and neighboring traces.
+
+
+
+
+Soldermask bridge
+
+0.10mm
+
+
+1oz:
+
+Min. pad spacing: 0.10 mm (green, red, yellow, blue, purple)
+
+Min. pad spacing: 0.13 mm (black, white)
+
+2oz:
+
+Min. pad spacing: 0.20 mm (any color)
+
+
+
+
+Plugged vias
+
+Filled with soldermask
+
+
+Vias are filled with soldermask for an opaque finish.
+Click for detailed explanation
+
+① Filled vias must not have soldermask openings on either side
+
+② Filled vias should have ≥ 0.35 mm clearance from other soldermask openings (e.g. pads)
+
+③ Filled vias must be no wider than 0.5 mm diameter
+
+
+
+
+JLCPCB Via-in-Pad Process
+
+
+Epoxy Filled & Capped
+
+Copper paste Filled&Capped
+
+
+
+Vias are filled with epoxy resin or copper paste and then plated over to achieve an opaque and smooth finish.
+Click for detailed explanation
+
+① Vias are filled and plated over. Choose copper paste filling for applications requiring high thermal conductivity.
+
+② This process is the default for 6-layer and above multilayer boards.
+
+③ Compatible with via diameters from 0.15 to 0.55 mm.
+
+
+
+
+Solder mask dielectric constant
+
+3.8
+
+
+
+
+Solder mask ink thickness
+
+≥ 10μm
+
+
+Legend
+Outline
+FAQs about Rigid PCB Capabilities
+What is the maximum number of layers supported by JLCPCB for standard production?
+JLCPCB supports up to 32 layers in standard production. Layers from 1 to 6 offer the optimal balance between cost, lead time, and reliability. For designs exceeding 10 layers, we recommend submitting the stack-up diagram for engineering review prior to ordering to ensure manufacturability and controlled impedance performance.
+Does JLCPCB provide impedance control, and what tolerance can be achieved?
+What are the key differences in manufacturing capabilities between standard and advanced options?
+Which factors most significantly affect PCB board thickness and how can it be controlled?
+How does panelization affect pricing and manufacturing quality?
+Rigid PCBs to Your Specs
+
+Upload your rigid board Gerber files now to experience industry-leading production speed and certified quality control.
+
+See PCB Fab FAQs
+Get Instant Quote
+Online Chat >
+Chat with our live agent for fast reply.
+Mon-Fri: 24 hours, Sat: 9am-6pm, GMT+8
+Email Us >
+Contact us at supportjlcpcb.com
+Typically reply within hours.
+Help Center >
+Get instant answers.
+24/7 Available.
+Products
+FR-4 PCBs
+Flexible PCBs
+Metal Core PCBs
+High-Frequency PCBs
+PCBA Service
+PCB Layout
+SMT Stencil
+Flex Heater
+Support
+Help Center
+Contact Us
+Community
+Shipping & Delivery
+Payment Methods
+How to Order
+How to Track
+After-Sales Service
+Blog
+Company
+About Us
+Quality Assurance
+How We Work
+Certifications
+Security
+Environment
+JLCAPI
+News
+Cooperation
+Electronics
+EasyEDA
+JLCPCB
+JLCDFM
+LCSC
+OSHWLAB
+Mechanical
+JLC3DP
+JLCCNC
+JLCMC
+Order on JLCONE Desktop, Save $1–$20 Every Time
+Windows
+MAC
+Android
+IOS
+CONNECT WITH US
+© 2026 JLCPCB.COM All Rights Reserved.
+Privacy Policy
+Terms & Conditions
+Cookies Policy
+Do Not Sell or Share My Personal Information
+ Welcome back, may I help you? Chat Now
