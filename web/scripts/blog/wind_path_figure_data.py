@@ -68,6 +68,7 @@ fix_ms = [ms(f['time_utc']) for f in fixes]
 def gap_hours(t, step_ms):
     # longest GPS gap a slice is read by (mirrors gap_hours_at in scripts/gfs_ingest.py)
     return max([(b - a) / 3.6e6 for a, b in zip(fix_ms, fix_ms[1:]) if b > t - step_ms and a < t + step_ms] or [0.0])
+pblob = bytearray()
 for g in range(hdr['nGrids']):
     nLat, nLon = hdr['dims'][g]; n = nLat * nLon
     lv = []
@@ -88,11 +89,21 @@ for g in range(hdr['nGrids']):
         k = int(np.searchsorted(track_t, t)); k0 = max(0, k - 1); k1 = min(len(track_t) - 1, k)
         w = 0 if k1 == k0 else (t - track_t[k0]) / (track_t[k1] - track_t[k0])
         p = track_ll[k0] * (1 - w) + track_ll[k1] * w; pos = [r2(p[0]), r2(p[1])]
+    # Magnified inset: the box's full-resolution winds over a 3° × 3° patch around
+    # the balloon (kept inside the box), and where that patch sits, so the coarse
+    # field can be interpolated to the same points below.
+    patch = None
+    PN = int(round(3.0 / step)) + 1
+    if pos and nLat >= PN and nLon >= PN:
+        ci = int(round((pos[0] - la0) / step)); cj = int(round((pos[1] - lo0) / step))
+        pi0 = min(max(ci - PN // 2, 0), nLat - PN); pj0 = min(max(cj - PN // 2, 0), nLon - PN)
+        patch = {'lat0': r2(la0 + pi0 * step), 'lon0': r2(lo0 + pj0 * step), 'n': PN, 'step': step, 'off': len(pblob)}
+        pblob += np.clip(np.rint(np.stack([U[pi0:pi0 + PN, pj0:pj0 + PN], V[pi0:pi0 + PN, pj0:pj0 + PN]], axis=-1)), -127, 127).astype(np.int8).tobytes()
     gh = gap_hours(t, hdr['stepMs'])
     slices.append({'t': t, 'lat0': la0, 'lon0': lo0, 'h': round((nLat - 1) * step, 2), 'w': round((nLon - 1) * step, 2),
                    'half': r2(min(20, max(9, 6 + 0.05 * gh))), 'gapH': round(gh), 'wind': bool(levels) and gh >= 6,
                    'aLat': ui.shape[0], 'aLon': ui.shape[1], 'aStep': round(st * step, 2), 'aLat0': r2(la0 + i0 * step), 'aLon0': r2(lo0 + j0 * step),
-                   'off': len(blob), 'pos': pos})
+                   'off': len(blob), 'pos': pos, 'patch': patch})
     blob += np.clip(np.rint(np.stack([ui, vi], axis=-1)), -127, 127).astype(np.int8).tobytes()
 # v5 cubes: the coarse outer field (float level) follows every fine grid; keep it
 # thinned to ~3° for the figure's pale "around the box" arrows (tube-outer.bin).
@@ -113,12 +124,19 @@ if outer:
                          + a_ * (1 - b_) * A[np.ix_(ii + 1, jj)] + a_ * b_ * A[np.ix_(ii + 1, jj + 1)])
         ui = bil(U); vi = bil(V)
         slices[g]['outer'] = {'lat0': float(glat[0]), 'lon0': float(glon[0]), 'aLat': ui.shape[0], 'aLon': ui.shape[1], 'aStep': d, 'off': len(oblob)}
+        pt = slices[g].get('patch')
+        if pt:   # the coarse field's own grid points around the inset's square (its real 1.5° density)
+            span = (pt['n'] - 1) * pt['step']; m_ = dd / 2
+            ii = [i for i in range(nLat) if pt['lat0'] - m_ <= lat0 + i * dd <= pt['lat0'] + span + m_]
+            jj = [j for j in range(nLon) if pt['lon0'] - m_ <= lon0 + j * dd <= pt['lon0'] + span + m_]
+            pt['coarse'] = [[r2(lat0 + i * dd), r2(lon0 + j * dd), int(round(float(U[i, j]))), int(round(float(V[i, j])))] for i in ii for j in jj]
         oblob += np.clip(np.rint(np.stack([ui, vi], axis=-1)), -127, 127).astype(np.int8).tobytes()
 json.dump({'levelHpa': hdr['levelHpa'], 'levels': levels, 'stepH': hdr['stepMs'] / 3600000, 'slices': slices,
            'outerStep': outer['dLat'] if outer else None}, open(f'{OUT}/tube.json', 'w'), separators=(',', ':'))
 open(f'{OUT}/tube.bin', 'wb').write(bytes(blob))
 if outer:
     open(f'{OUT}/tube-outer.bin', 'wb').write(bytes(oblob))
+open(f'{OUT}/tube-patch.bin', 'wb').write(bytes(pblob))
 
 def gap_path(name):
     tr = json.load(open(f'{S}/{name}'))['observed']['reconstructed_track']

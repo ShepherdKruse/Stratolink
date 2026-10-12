@@ -7,3 +7,8 @@
 .spread-chart { display: block; max-width: 100%; margin-top: 14px; }
 .fleet-map-stage .fleet-map { display: block; }
 .pipeline { display: block; width: 100%; height: auto; }
+
+.tube-inset { display: flex; flex-wrap: wrap; gap: 16px; margin: 14px 0 4px; }
+.tube-inset figure { margin: 0; }
+.tube-inset canvas { display: block; border-radius: 6px; }
+.tube-inset figcaption { margin-top: 6px; max-width: 220px; font-size: 12px; color: #62675e; }
