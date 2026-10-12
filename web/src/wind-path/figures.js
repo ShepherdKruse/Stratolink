@@ -356,7 +356,7 @@ async function tube(host, signal) {
     const pad = half <= 9.05 ? 'padded ±9°, the minimum' : `padded ±${half.toFixed(1)}° for the ${fmt(hours)}-hour gap, where the cloud spreads further`;
     read.textContent = `Slice ${k + 1} of ${ride.length} / ${s.wind ? 'covers the wind’s path from both ends of the gap' : 'covers the track'}, ${pad}`;
   }
-  const play = player(host, signal, dt => { at += dt * .0009; if (at > last + 3) at = 0; draw(); });
+  const play = player(host, signal, dt => { at += dt * .004; if (at > last + 8) at = 0; draw(); });
   bindSlider(input, play, value => { at = value; draw(); });
   keys(map.canvas, play, dir => { at = clamp(Math.round(at) + dir, 0, last); draw(); });
   map.canvas.onpointermove = event => {
