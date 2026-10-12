@@ -1,13 +1,22 @@
 {
-  "purpose": "Illustrative KiCad assembly; not a fit/strength qualification or vendor model",
+  "purpose": "Photo-scaled KiCad assembly; not a physical strength qualification or vendor model",
   "dimensions_are_estimated": true,
-  "developed_panel_length_mm": 71.0,
-  "panel_width_mm": 40.0,
+  "source": "qualification/metrology relative to analysis/v1_1_solar_attachments_20261012",
+  "photo_length_uncertainty_mm": 2.0,
+  "photo_width_uncertainty_mm": 1.5,
+  "unverified_dimensions": [
+    "film thickness",
+    "prepared terminal thickness",
+    "wettable area",
+    "bend radius limit"
+  ],
+  "developed_panel_length_mm": 94.0,
+  "panel_width_mm": 75.0,
   "film_thickness_mm": 0.2,
-  "straight_root_length_mm": 3.0,
-  "bend_radius_mm": 95.0,
-  "terminal_width_mm": 3.0,
-  "wire_conductor_diameter_mm": 0.4,
+  "straight_root_length_mm": 7.0,
+  "bend_radius_mm": 140.0,
+  "terminal_width_mm": 5.0,
+  "wire_conductor_diameter_mm": 0.5,
   "wire_outer_diameter_mm": 0.7,
   "model_offset_z_mm": -0.2,
   "sides": {
@@ -18,14 +27,16 @@
         0
       ],
       "panel_tip_local_mm": [
-        -63.34163282871576,
-        21.85603785566938,
-        19.0
+        -85.1437367388143,
+        24.000611047083556,
+        0
       ],
-      "wire_centreline_length_mm": 73.49202849661475,
+      "wire_centreline_length_mm": 95.81995865900842,
       "root_face_y_mm": -0.5,
-      "root_insertion_mm": 1.0,
-      "parts": 21
+      "root_insertion_mm": 1.5,
+      "wire_hook_clears_outer_edge_mm": 1.0,
+      "wire_long_chord_mm": 87.58599958133951,
+      "parts": 33
     },
     "right": {
       "positive_pad_local_mm": [
@@ -34,14 +45,16 @@
         0
       ],
       "panel_tip_local_mm": [
-        63.34163282871576,
-        21.85603785566938,
-        19.0
+        85.1437367388143,
+        24.000611047083556,
+        0
       ],
-      "wire_centreline_length_mm": 73.48481964677498,
+      "wire_centreline_length_mm": 95.81196522804716,
       "root_face_y_mm": -0.5,
-      "root_insertion_mm": 1.0,
-      "parts": 21
+      "root_insertion_mm": 1.5,
+      "wire_hook_clears_outer_edge_mm": 1.0,
+      "wire_long_chord_mm": 87.57800615037824,
+      "parts": 33
     }
   }
 }

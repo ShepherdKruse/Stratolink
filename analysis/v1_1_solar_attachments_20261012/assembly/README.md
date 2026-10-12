@@ -1,5 +1,7 @@
 # Solar assembly in KiCad
 
+**Superseded geometry:** the [photo-calibrated mounting revision](../qualification/README.md) now uses 94 × 75 mm panels and 2 mm deep notches. This document and its checks/renderings describe the earlier revision.
+
 The canonical `hardware/pcb/stratolink.kicad_pcb` now includes two project-local solar-panel and wire models attached to J1/J2. This adds only 3D model references; every other parsed PCB object, including all routes, pads, zones and outline geometry, remains identical to commit `14d94de`. The schematic and project settings are unchanged. [Verification](model-only-verification.json).
 
 ![Illustrative assembled payload, rendered by KiCad](assembled-front.png)

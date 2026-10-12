@@ -55158,7 +55158,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "lib:Solar_Notch_Right_1p0x1p5"
+		(property "Footprint" "lib:Solar_Notch_Right_1p0x2p0"
 			(at 194.31 105.41 0)
 			(effects
 				(font
@@ -60405,7 +60405,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "lib:Solar_Notch_Left_1p0x1p5"
+		(property "Footprint" "lib:Solar_Notch_Left_1p0x2p0"
 			(at 194.31 95.25 0)
 			(effects
 				(font

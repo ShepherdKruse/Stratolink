@@ -1,0 +1,174 @@
+{
+  "status": "pass",
+  "baseline_commit": "76ee6e87463b70519769750d6795988b2c202683",
+  "promotion_source": "/Users/twarn/Repositories/ai-working/scratch/stratolink-solar-depth2/upper-only",
+  "candidate_sha256": {
+    "stratolink.kicad_pcb": "99b82f31a5d05c019d3fb6d592c06a0d6cca1eb3affc285cbdfb4bd7702550e0",
+    "stratolink.kicad_sch": "20f0d465521daaa088e171e174108644069755c4067b28239657019266088bc4",
+    "lib/Solar_Notch_Left_1p0x2p0.kicad_mod": "88d0ae34e02b1fadeed1b6f8261f9109735e027cfc9146fd165e487238bd3ebd",
+    "lib/Solar_Notch_Right_1p0x2p0.kicad_mod": "7bab33c2b68c8be61dad981c21736ac780836b76ddc8884d21ae82cc053f1de9"
+  },
+  "retained_exact_footprints": [
+    "AE1",
+    "AE2",
+    "C1",
+    "C10",
+    "C11",
+    "C12",
+    "C14",
+    "C15",
+    "C16",
+    "C17",
+    "C19",
+    "C2",
+    "C20",
+    "C21",
+    "C3",
+    "C4",
+    "C5",
+    "C6",
+    "C7",
+    "C8",
+    "C9",
+    "D1",
+    "D3",
+    "FB1",
+    "J20",
+    "J3",
+    "J4",
+    "L1",
+    "L2",
+    "R1",
+    "R10",
+    "R11",
+    "R12",
+    "R13",
+    "R14",
+    "R15",
+    "R16",
+    "R18",
+    "R19",
+    "R2",
+    "R21",
+    "R22",
+    "R23",
+    "R3",
+    "R4",
+    "R5",
+    "R6",
+    "R7",
+    "R8",
+    "R9",
+    "U1",
+    "U2",
+    "U3",
+    "U4",
+    "U5",
+    "U6",
+    "U7"
+  ],
+  "unchanged_tracks": 879,
+  "retained_exact_vias": 142,
+  "removed_ground_via_uuids": [
+    "47e426df-cf02-45bc-b357-14cb1877067f",
+    "cbbf36b4-6ca3-4109-b16f-001585681962"
+  ],
+  "changed_edge_uuids": [
+    "af9422c3-c0b8-48ff-a2a3-ecaf5686d3fd",
+    "310250ea-a370-4b73-a724-16ffe1d41f50",
+    "a65747cf-8440-48e4-ac9c-df9fb2efd27c",
+    "eca5afe7-8fce-4e44-94b7-9b13fc8c768a",
+    "75c733c1-6aee-4b2d-928b-c2e88efbebdd",
+    "11aeff3e-2b22-4f8b-91c5-bbfaa2931327"
+  ],
+  "schematic_electrical_change": false,
+  "model_references_unchanged": true,
+  "physical_pad_checks": 230,
+  "solar_pad_islands": [
+    {
+      "ref": "J1",
+      "pin": "1",
+      "uuid": "f073055f-37a6-47cc-9da3-ced10e246e1f",
+      "net": "+SOLAR",
+      "connected_logical_nodes": 6
+    },
+    {
+      "ref": "J1",
+      "pin": "2",
+      "uuid": "3d4cbd5f-f446-4895-a217-202b7c179456",
+      "net": "GND",
+      "connected_logical_nodes": 67
+    },
+    {
+      "ref": "J1",
+      "pin": "2",
+      "uuid": "52ad0009-1e4c-4a4c-b588-58e056a1ae8c",
+      "net": "GND",
+      "connected_logical_nodes": 67
+    },
+    {
+      "ref": "J2",
+      "pin": "1",
+      "uuid": "59aafa47-5be7-4efa-8b26-3fc50d65e9db",
+      "net": "+SOLAR",
+      "connected_logical_nodes": 6
+    },
+    {
+      "ref": "J2",
+      "pin": "2",
+      "uuid": "35f23819-d777-46fe-b00e-b156ca52dd02",
+      "net": "GND",
+      "connected_logical_nodes": 67
+    },
+    {
+      "ref": "J2",
+      "pin": "2",
+      "uuid": "c48e1117-e54f-4a07-889e-debb31809680",
+      "net": "GND",
+      "connected_logical_nodes": 67
+    }
+  ],
+  "drc": {
+    "project": {
+      "violations": {
+        "before": 70,
+        "after": 70,
+        "added": [],
+        "removed": []
+      },
+      "schematic_parity": {
+        "before": 11,
+        "after": 11,
+        "added": [],
+        "removed": []
+      },
+      "unconnected_items": {
+        "before": 0,
+        "after": 0,
+        "added": [],
+        "removed": []
+      }
+    },
+    "diagnostic": {
+      "violations": {
+        "before": 83,
+        "after": 83,
+        "added": [],
+        "removed": []
+      },
+      "schematic_parity": {
+        "before": 11,
+        "after": 11,
+        "added": [],
+        "removed": []
+      },
+      "unconnected_items": {
+        "before": 0,
+        "after": 0,
+        "added": [],
+        "removed": []
+      }
+    }
+  },
+  "note": "Project and diagnostic reference reports were frozen at the electrically identical 14d94de geometry; 76ee6e8 added only 3D references, independently verified by assembly/model-only-verification.json."
+}

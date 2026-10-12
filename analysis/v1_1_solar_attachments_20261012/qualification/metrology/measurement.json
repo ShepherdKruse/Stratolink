@@ -1,0 +1,719 @@
+{
+  "source": {
+    "path": "sources/zachtek-metric-photo-browser.png",
+    "sha256": "5b9faad0a61e231a8d753d6bc7bd92a68e95286597f6a25dba17d9f12d62dba3",
+    "size_pixels": [
+      1280,
+      1102
+    ],
+    "provenance": "Primary ZachTek product metric-grid photo captured in the in-app browser and supplied by the parent task; page provenance is maintained by the parent research."
+  },
+  "conventions": {
+    "pixel_origin": "top-left of the 1280x1102 capture",
+    "pixel_axes": "x right, y down",
+    "grid_origin": "printed 0 cm / 0 cm intersection",
+    "grid_axes": "x right, y up",
+    "grid_units": "mm",
+    "major_grid_spacing_mm": 10
+  },
+  "calibration": {
+    "points": [
+      {
+        "label": "T0",
+        "pixel_xy": [
+          127.37855991402472,
+          11.170520231213873
+        ],
+        "grid_mm": [
+          0,
+          100
+        ],
+        "selection_seed": [
+          127,
+          10
+        ]
+      },
+      {
+        "label": "T1",
+        "pixel_xy": [
+          177.06696428571428,
+          10.085416666666667
+        ],
+        "grid_mm": [
+          10,
+          100
+        ],
+        "selection_seed": [
+          177,
+          9
+        ]
+      },
+      {
+        "label": "T2",
+        "pixel_xy": [
+          226.3181818181818,
+          8.997942386831276
+        ],
+        "grid_mm": [
+          20,
+          100
+        ],
+        "selection_seed": [
+          226,
+          9
+        ]
+      },
+      {
+        "label": "T3",
+        "pixel_xy": [
+          275.7564432989691,
+          7.921052631578948
+        ],
+        "grid_mm": [
+          30,
+          100
+        ],
+        "selection_seed": [
+          276,
+          8
+        ]
+      },
+      {
+        "label": "T4",
+        "pixel_xy": [
+          325.5169300225734,
+          6.883720930232558
+        ],
+        "grid_mm": [
+          40,
+          100
+        ],
+        "selection_seed": [
+          326,
+          7
+        ]
+      },
+      {
+        "label": "T5",
+        "pixel_xy": [
+          375.0091324200913,
+          5.979418886198547
+        ],
+        "grid_mm": [
+          50,
+          100
+        ],
+        "selection_seed": [
+          376,
+          6
+        ]
+      },
+      {
+        "label": "T6",
+        "pixel_xy": [
+          424.72416302765646,
+          5.063245823389021
+        ],
+        "grid_mm": [
+          60,
+          100
+        ],
+        "selection_seed": [
+          426,
+          6
+        ]
+      },
+      {
+        "label": "T7",
+        "pixel_xy": [
+          474.68301886792455,
+          4.146017699115045
+        ],
+        "grid_mm": [
+          70,
+          100
+        ],
+        "selection_seed": [
+          476,
+          5
+        ]
+      },
+      {
+        "label": "T8",
+        "pixel_xy": [
+          524.6907008086254,
+          3.3234234234234235
+        ],
+        "grid_mm": [
+          80,
+          100
+        ],
+        "selection_seed": [
+          526,
+          4
+        ]
+      },
+      {
+        "label": "R9",
+        "pixel_xy": [
+          525.6739674593241,
+          52.50319488817891
+        ],
+        "grid_mm": [
+          80,
+          90
+        ],
+        "selection_seed": [
+          526,
+          53
+        ]
+      },
+      {
+        "label": "R8",
+        "pixel_xy": [
+          526.7463054187192,
+          102.20392156862745
+        ],
+        "grid_mm": [
+          80,
+          80
+        ],
+        "selection_seed": [
+          527,
+          103
+        ]
+      },
+      {
+        "label": "R4",
+        "pixel_xy": [
+          529.9413407821229,
+          302.4750201450443
+        ],
+        "grid_mm": [
+          80,
+          40
+        ],
+        "selection_seed": [
+          530,
+          303
+        ]
+      },
+      {
+        "label": "R3",
+        "pixel_xy": [
+          530.7994652406417,
+          353.33683559950555
+        ],
+        "grid_mm": [
+          80,
+          30
+        ],
+        "selection_seed": [
+          531,
+          353
+        ]
+      },
+      {
+        "label": "R2",
+        "pixel_xy": [
+          531.8027888446215,
+          403.5709677419355
+        ],
+        "grid_mm": [
+          80,
+          20
+        ],
+        "selection_seed": [
+          532,
+          404
+        ]
+      },
+      {
+        "label": "R1",
+        "pixel_xy": [
+          532.7656826568266,
+          453.8243243243243
+        ],
+        "grid_mm": [
+          80,
+          10
+        ],
+        "selection_seed": [
+          533,
+          454
+        ]
+      },
+      {
+        "label": "R0",
+        "pixel_xy": [
+          533.8002610966057,
+          504.72616822429904
+        ],
+        "grid_mm": [
+          80,
+          0
+        ],
+        "selection_seed": [
+          534,
+          505
+        ]
+      }
+    ],
+    "homography_grid_mm_to_capture_pixels": [
+      [
+        4.975058984798139,
+        -0.025445609603242342,
+        131.62646676625226
+      ],
+      [
+        -0.10147075599613088,
+        -4.9791062006126,
+        509.0703018760169
+      ],
+      [
+        -9.425578036577861e-05,
+        0.00012045744233836918,
+        1.0
+      ]
+    ],
+    "homography_capture_pixels_to_grid_mm": [
+      [
+        0.20048502068061383,
+        -0.0016427636847841536,
+        -25.552852706824186
+      ],
+      [
+        -0.002127504110904359,
+        -0.19837843725378473,
+        101.26860678762569
+      ],
+      [
+        1.9153145779664423e-05,
+        2.374131919360767e-05,
+        0.985392938564739
+      ]
+    ],
+    "coordinate_rms_residual_px": 0.14823538473204476,
+    "maximum_point_residual_px": 0.40175982328411447,
+    "pixel_residuals": [
+      [
+        0.16696511918284784,
+        -0.1436650931536363
+      ],
+      [
+        -0.19827466631059565,
+        -0.05184700636952222
+      ],
+      [
+        -0.0342829765818351,
+        0.0404881717308605
+      ],
+      [
+        0.034967295703950185,
+        0.12038000770778812
+      ],
+      [
+        -0.12544628473096964,
+        0.1588497592495992
+      ],
+      [
+        0.07524567909069901,
+        0.062420590450036784
+      ],
+      [
+        0.14619145250100019,
+        -0.02401207470546396
+      ],
+      [
+        0.06665579226398677,
+        -0.11126946532460291
+      ],
+      [
+        0.03190059261180522,
+        -0.2950457830376254
+      ],
+      [
+        -0.06775906515895258,
+        0.15607561019141514
+      ],
+      [
+        -0.2543657436480089,
+        0.20555988941485737
+      ],
+      [
+        0.11492084720964613,
+        0.13713335965115903
+      ],
+      [
+        0.1532648984385787,
+        -0.3713769331984622
+      ],
+      [
+        0.048580669674265664,
+        -0.13026962387664298
+      ],
+      [
+        -0.013495006919015395,
+        0.21399098203505673
+      ],
+      [
+        -0.14506861743234367,
+        0.03258760620855128
+      ]
+    ]
+  },
+  "panel": {
+    "corners": [
+      {
+        "label": "upper_left",
+        "pixel_xy": [
+          126.0,
+          39.5
+        ],
+        "grid_mm": [
+          -0.3606891778552046,
+          94.22519013255611
+        ]
+      },
+      {
+        "label": "upper_right",
+        "pixel_xy": [
+          498.5,
+          30.5
+        ],
+        "grid_mm": [
+          74.66249579503926,
+          94.56746382377503
+        ]
+      },
+      {
+        "label": "lower_right",
+        "pixel_xy": [
+          506.5,
+          504.5
+        ],
+        "grid_mm": [
+          74.63624559643522,
+          0.10833824674254605
+        ]
+      },
+      {
+        "label": "lower_left",
+        "pixel_xy": [
+          132.0,
+          505.5
+        ],
+        "grid_mm": [
+          0.08075924803038745,
+          0.7075311242216841
+        ]
+      }
+    ],
+    "length_left_mm": 93.51870092720401,
+    "length_right_mm": 94.45912922449857,
+    "width_upper_mm": 75.02396573600225,
+    "width_lower_mm": 74.55789412766163,
+    "mean_length_mm": 93.98891507585128,
+    "mean_width_mm": 74.79092993183194
+  },
+  "terminal_band_stations": [
+    {
+      "terminal": "upper",
+      "pixel_endpoints": [
+        [
+          150.0,
+          40.5
+        ],
+        [
+          150.0,
+          63.5
+        ]
+      ],
+      "grid_endpoints_mm": [
+        [
+          4.50186510564239,
+          93.9269891654184
+        ],
+        [
+          4.461207510373859,
+          89.2653236480101
+        ]
+      ],
+      "width_mm": 4.661842815480451
+    },
+    {
+      "terminal": "upper",
+      "pixel_endpoints": [
+        [
+          250.0,
+          40.5
+        ],
+        [
+          250.0,
+          63.5
+        ]
+      ],
+      "grid_endpoints_mm": [
+        [
+          24.72082913660445,
+          93.53083014259082
+        ],
+        [
+          24.66911696439454,
+          88.87838614578861
+        ]
+      ],
+      "width_mm": 4.652731379752709
+    },
+    {
+      "terminal": "upper",
+      "pixel_endpoints": [
+        [
+          350.0,
+          40.0
+        ],
+        [
+          350.0,
+          62.5
+        ]
+      ],
+      "grid_endpoints_mm": [
+        [
+          44.86316379536196,
+          93.23719638766255
+        ],
+        [
+          44.80184296497359,
+          88.6947150936132
+        ]
+      ],
+      "width_mm": 4.542895172797607
+    },
+    {
+      "terminal": "upper",
+      "pixel_endpoints": [
+        [
+          450.0,
+          30.5
+        ],
+        [
+          450.0,
+          60.5
+        ]
+      ],
+      "grid_endpoints_mm": [
+        [
+          64.95723952835662,
+          94.75950500919096
+        ],
+        [
+          64.86125459725808,
+          88.71313859532845
+        ]
+      ],
+      "width_mm": 6.047128237244737
+    },
+    {
+      "terminal": "upper",
+      "pixel_endpoints": [
+        [
+          490.0,
+          30.0
+        ],
+        [
+          490.0,
+          60.5
+        ]
+      ],
+      "grid_endpoints_mm": [
+        [
+          72.96457874525316,
+          94.7018612560013
+        ],
+        [
+          72.86124888179174,
+          88.55949134603702
+        ]
+      ],
+      "width_mm": 6.143238980498599
+    },
+    {
+      "terminal": "lower",
+      "pixel_endpoints": [
+        [
+          150.0,
+          480.5
+        ],
+        [
+          150.0,
+          505.5
+        ]
+      ],
+      "grid_endpoints_mm": [
+        [
+          3.731770441221063,
+          5.6304797786065945
+        ],
+        [
+          3.688497980391787,
+          0.669002417023118
+        ]
+      ],
+      "width_mm": 4.961666062460427
+    },
+    {
+      "terminal": "lower",
+      "pixel_endpoints": [
+        [
+          250.0,
+          480.0
+        ],
+        [
+          250.0,
+          504.5
+        ]
+      ],
+      "grid_endpoints_mm": [
+        [
+          23.74243269592556,
+          5.5063969694654045
+        ],
+        [
+          23.688491351446647,
+          0.6533986602546443
+        ]
+      ],
+      "width_mm": 4.853298080465148
+    },
+    {
+      "terminal": "lower",
+      "pixel_endpoints": [
+        [
+          350.0,
+          479.5
+        ],
+        [
+          350.0,
+          504.0
+        ]
+      ],
+      "grid_endpoints_mm": [
+        [
+          43.67718082317068,
+          5.382784891280966
+        ],
+        [
+          43.611793357194664,
+          0.5390582297183789
+        ]
+      ],
+      "width_mm": 4.8441679876568084
+    },
+    {
+      "terminal": "lower",
+      "pixel_endpoints": [
+        [
+          450.0,
+          479.5
+        ],
+        [
+          450.0,
+          505.0
+        ]
+      ],
+      "grid_endpoints_mm": [
+        [
+          63.53487885105877,
+          5.1609218859317725
+        ],
+        [
+          63.45500347991259,
+          0.1293429092571949
+        ]
+      ],
+      "width_mm": 5.032212939992635
+    },
+    {
+      "terminal": "lower",
+      "pixel_endpoints": [
+        [
+          490.0,
+          479.5
+        ],
+        [
+          490.0,
+          505.5
+        ]
+      ],
+      "grid_endpoints_mm": [
+        [
+          71.45678960744627,
+          5.07241319141684
+        ],
+        [
+          71.37055392233522,
+          -0.05380549935781257
+        ]
+      ],
+      "width_mm": 5.126943988287171
+    }
+  ],
+  "sensitivity": {
+    "seed": 20261012,
+    "trials": 2000,
+    "grid_coordinate_uniform_noise_px": [
+      -0.75,
+      0.75
+    ],
+    "panel_corner_uniform_noise_px": [
+      -2,
+      2
+    ],
+    "picking_only_length_2p5_97p5_mm": [
+      93.43615208315533,
+      94.57285634092568
+    ],
+    "picking_only_width_2p5_97p5_mm": [
+      74.25618932901766,
+      75.33221567213344
+    ],
+    "affine_dimensions_mm": {
+      "length_left_mm": 92.96278200743862,
+      "length_right_mm": 94.56542963261226,
+      "width_upper_mm": 74.99405588281114,
+      "width_lower_mm": 75.3795259248185,
+      "mean_length_mm": 93.76410582002543,
+      "mean_width_mm": 75.18679090381482
+    },
+    "note": "These are picking/model sensitivity calculations, not confidence intervals for the manufactured panel."
+  },
+  "engineering_assumptions": {
+    "nominal_panel_mm": [
+      94,
+      75
+    ],
+    "conservative_photo_only_length_mm": [
+      92,
+      96
+    ],
+    "conservative_photo_only_width_mm": [
+      73.5,
+      76.5
+    ],
+    "nominal_terminal_strip_mm": 5,
+    "conservative_photo_only_terminal_width_mm": [
+      4,
+      6.5
+    ],
+    "manufacturer_tolerance_established": false,
+    "terminal_thickness_measurable": false,
+    "wettable_scraped_patch_measurable": false
+  },
+  "limitations": [
+    "The grid is planar; the panel is visibly raised/curling at the upper end, so its silhouette need not lie in that calibration plane.",
+    "The upper terminal edge is partly shadowed and glared; selecting the dark outside shadow instead adds roughly 1\u20132 mm to apparent length.",
+    "The lower metal band is clearly about 5 mm; upper-band width varies in the photograph and cannot establish a uniform minimum wettable width.",
+    "Product thickness, conductor thickness, coating thickness, solderable area after scraping, bending radius, and manufacturing tolerance cannot be inferred from this image.",
+    "All dimensions are photo-derived engineering estimates and must not be attributed as manufacturer specifications."
+  ]
+}

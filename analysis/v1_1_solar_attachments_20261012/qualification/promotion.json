@@ -1,0 +1,15 @@
+{
+  "baseline": "76ee6e87463b70519769750d6795988b2c202683",
+  "candidate_sha256": {
+    "stratolink.kicad_pcb": "99b82f31a5d05c019d3fb6d592c06a0d6cca1eb3affc285cbdfb4bd7702550e0",
+    "stratolink.kicad_sch": "20f0d465521daaa088e171e174108644069755c4067b28239657019266088bc4",
+    "lib/Solar_Notch_Left_1p0x2p0.kicad_mod": "88d0ae34e02b1fadeed1b6f8261f9109735e027cfc9146fd165e487238bd3ebd",
+    "lib/Solar_Notch_Right_1p0x2p0.kicad_mod": "7bab33c2b68c8be61dad981c21736ac780836b76ddc8884d21ae82cc053f1de9"
+  },
+  "canonical_destination": "/Users/twarn/Repositories/Stratolink/hardware/pcb",
+  "deleted_superseded_libraries": [
+    "Solar_Notch_Left_1p0x1p5.kicad_mod",
+    "Solar_Notch_Right_1p0x1p5.kicad_mod"
+  ],
+  "project_unchanged": true
+}

@@ -1,5 +1,7 @@
 # Side solar attachments and board trade study
 
+**Superseded geometry:** the [photo-calibrated mounting revision](qualification/README.md) now uses 94 × 75 mm panels and 2 mm deep notches. This document and its checks/renderings describe the earlier revision.
+
 2026-10-12. Working branch: `alpha/hardware-v1.1`. Baseline: microphone-removal commit `1aed52f`.
 
 **Keep 0.4 mm FR4 and the current 23.36 × 57.30 mm outline for the v1.1 mounting revision. Develop the requested open ground notches near the middle, with separate positive wire holes lower down. A shorter 0.6 mm board belongs in a subsequent layout study.**

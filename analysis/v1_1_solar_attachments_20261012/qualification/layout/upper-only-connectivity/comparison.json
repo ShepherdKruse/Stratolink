@@ -1,0 +1,287 @@
+{
+  "status": "pass",
+  "baseline_commit": "1aed52ff7af3d27aef6ff4b0ceba710c57dc6865",
+  "kicad_version": "10.0.0",
+  "candidate_sha256": {
+    "/Users/twarn/Repositories/ai-working/scratch/stratolink-solar-depth2/upper-only/stratolink.kicad_pcb": "99b82f31a5d05c019d3fb6d592c06a0d6cca1eb3affc285cbdfb4bd7702550e0",
+    "/Users/twarn/Repositories/ai-working/scratch/stratolink-solar-depth2/upper-only/stratolink.kicad_sch": "20f0d465521daaa088e171e174108644069755c4067b28239657019266088bc4"
+  },
+  "retained_exact_footprints": [
+    "AE1",
+    "AE2",
+    "C1",
+    "C10",
+    "C11",
+    "C12",
+    "C14",
+    "C15",
+    "C16",
+    "C17",
+    "C19",
+    "C2",
+    "C20",
+    "C21",
+    "C3",
+    "C4",
+    "C5",
+    "C6",
+    "C7",
+    "C8",
+    "C9",
+    "D1",
+    "D3",
+    "FB1",
+    "J20",
+    "J3",
+    "J4",
+    "L1",
+    "L2",
+    "R1",
+    "R10",
+    "R11",
+    "R12",
+    "R13",
+    "R14",
+    "R15",
+    "R16",
+    "R18",
+    "R19",
+    "R2",
+    "R21",
+    "R22",
+    "R23",
+    "R3",
+    "R4",
+    "R5",
+    "R6",
+    "R7",
+    "R8",
+    "R9",
+    "U1",
+    "U2",
+    "U3",
+    "U4",
+    "U5",
+    "U6",
+    "U7"
+  ],
+  "footprints_count": 59,
+  "logical_pad_keys": 226,
+  "physical_pad_connectivity_checks": 230,
+  "schematic_node_nets_compared": 219,
+  "solar_physical_pad_islands": [
+    {
+      "ref": "J1",
+      "pin": "1",
+      "uuid": "f073055f-37a6-47cc-9da3-ced10e246e1f",
+      "net": "+SOLAR",
+      "connected_logical_nodes": 6
+    },
+    {
+      "ref": "J1",
+      "pin": "2",
+      "uuid": "3d4cbd5f-f446-4895-a217-202b7c179456",
+      "net": "GND",
+      "connected_logical_nodes": 67
+    },
+    {
+      "ref": "J1",
+      "pin": "2",
+      "uuid": "52ad0009-1e4c-4a4c-b588-58e056a1ae8c",
+      "net": "GND",
+      "connected_logical_nodes": 67
+    },
+    {
+      "ref": "J2",
+      "pin": "1",
+      "uuid": "59aafa47-5be7-4efa-8b26-3fc50d65e9db",
+      "net": "+SOLAR",
+      "connected_logical_nodes": 6
+    },
+    {
+      "ref": "J2",
+      "pin": "2",
+      "uuid": "35f23819-d777-46fe-b00e-b156ca52dd02",
+      "net": "GND",
+      "connected_logical_nodes": 67
+    },
+    {
+      "ref": "J2",
+      "pin": "2",
+      "uuid": "c48e1117-e54f-4a07-889e-debb31809680",
+      "net": "GND",
+      "connected_logical_nodes": 67
+    }
+  ],
+  "native_unconnected_count": 0,
+  "TMP117_exact_footprint_preserved": true,
+  "mic_unconnected_pads_preserved": true,
+  "outline_before": {
+    "valid": true,
+    "outline_count": 1,
+    "hole_count": 4,
+    "net_area_mm2": 1315.975353884435,
+    "bounds_mm": [
+      53.316,
+      29.397,
+      76.676,
+      86.695
+    ]
+  },
+  "outline_after": {
+    "valid": true,
+    "outline_count": 1,
+    "hole_count": 2,
+    "net_area_mm2": 1318.127614072201,
+    "bounds_mm": [
+      53.316,
+      29.397,
+      76.676,
+      86.695
+    ]
+  },
+  "board_text_changes_for_human_review": {
+    "removed": [],
+    "added": [
+      [
+        "gr_text",
+        "+",
+        [
+          "at",
+          "56.2",
+          "85",
+          "0"
+        ],
+        [
+          "layer",
+          "F.SilkS"
+        ],
+        [
+          "uuid",
+          "d33ff207-5537-4175-aad0-4a6a2127c38c"
+        ],
+        [
+          "effects",
+          [
+            "font",
+            [
+              "size",
+              "0.8",
+              "0.8"
+            ],
+            [
+              "thickness",
+              "0.12"
+            ]
+          ]
+        ]
+      ],
+      [
+        "gr_text",
+        "GND",
+        [
+          "at",
+          "57.2",
+          "55",
+          "0"
+        ],
+        [
+          "layer",
+          "F.SilkS"
+        ],
+        [
+          "uuid",
+          "70fd784f-4460-4c2f-b1b0-5920dc836f3e"
+        ],
+        [
+          "effects",
+          [
+            "font",
+            [
+              "size",
+              "0.8",
+              "0.8"
+            ],
+            [
+              "thickness",
+              "0.12"
+            ]
+          ]
+        ]
+      ],
+      [
+        "gr_text",
+        "GND",
+        [
+          "at",
+          "73",
+          "54.5",
+          "0"
+        ],
+        [
+          "layer",
+          "F.SilkS"
+        ],
+        [
+          "uuid",
+          "857ef018-87a1-4fd2-b5a3-b7c725b5a4a9"
+        ],
+        [
+          "effects",
+          [
+            "font",
+            [
+              "size",
+              "0.8",
+              "0.8"
+            ],
+            [
+              "thickness",
+              "0.12"
+            ]
+          ]
+        ]
+      ],
+      [
+        "gr_text",
+        "+",
+        [
+          "at",
+          "73.8",
+          "85",
+          "0"
+        ],
+        [
+          "layer",
+          "F.SilkS"
+        ],
+        [
+          "uuid",
+          "8a2d562a-cd15-40da-973d-853d9daff557"
+        ],
+        [
+          "effects",
+          [
+            "font",
+            [
+              "size",
+              "0.8",
+              "0.8"
+            ],
+            [
+              "thickness",
+              "0.12"
+            ]
+          ]
+        ]
+      ]
+    ],
+    "changed": []
+  },
+  "schematic_text_changes_for_human_review": {
+    "removed": [],
+    "added": [],
+    "changed": []
+  },
+  "mode": "candidate_review"
+}

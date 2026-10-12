@@ -1,0 +1,53 @@
+{
+  "purpose": "Demand/geometry screen; no predicted joint capacity or strength qualification",
+  "dimensions_basis": "94 \u00b12 x 75 \u00b11.5 mm photo-derived estimate from ZachTek photograph metric grid; qualification/metrology contains provenance; uncertainty is not manufacturing tolerance",
+  "nominal_panel_mass_g": 1.76,
+  "developed_span_mm": 94.0,
+  "width_mm": 75.0,
+  "assembly_shape_assumptions": {
+    "radius_mm": 140.0,
+    "straight_terminal_mm": 7.0,
+    "insertion_mm": 1.5,
+    "lower_anchor_from_upper_bank_mm": 31.0,
+    "positive_hole_inset_from_bond_center_mm": 0.63,
+    "nominal_bond_center_from_outer_edge_mm": -0.85,
+    "COM_lever_from_bond_center_mm": 45.07093091427741,
+    "terminal_width_mm": 5.0,
+    "positive_attachment_developed_s_mm": 91.5
+  },
+  "positive_attachment": {
+    "horizontal_mm": 84.96210906096067,
+    "downward_mm": 24.73607145518599,
+    "across_panel_width_mm": 0
+  },
+  "shape": {
+    "horizontal_tip_mm": 87.00761510618052,
+    "downward_tip_mm": 26.17333932815769,
+    "horizontal_COM_mm": 44.22093091427741,
+    "downward_COM_mm": 8.18014771419922,
+    "tip_angle_deg": 35.60523441170116
+  },
+  "checks_passed": 5,
+  "representative_root_moment_1g_Nmm": 0.7779109265848775,
+  "representative_root_moment_5g_Nmm": 3.8895546329243875,
+  "representative_5g_half_mm_wire": {
+    "wire_diameter_mm": 0.5,
+    "ideal_straight_length_mm": 86.6687661139903,
+    "compression_demand_N": 0.12598402450518825,
+    "pinned_Euler_load_N": 0.44342188039254793,
+    "demand_over_ideal_buckling": 0.2841177444686726,
+    "assumed_initial_midspan_bow_mm": 0,
+    "elastic_peak_stress_screen_MPa": 0.6416313680195579,
+    "two_bare_wire_mass_g": 0.3049513139897324,
+    "critical_axial_shortening_um": 1.7793326902126951
+  },
+  "no_material_strength_allowables_assumed": true,
+  "no_physical_tests_performed": true,
+  "remaining_unknowns": [
+    "Terminal layer stack and peel strength",
+    "Wire temper, diameter tolerance and straightness",
+    "Actual wetting area and solder process",
+    "Thermal mismatch and joint fatigue",
+    "Real launch/handling load envelope"
+  ]
+}

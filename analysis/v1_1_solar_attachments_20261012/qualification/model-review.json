@@ -1,0 +1,69 @@
+{
+  "purpose": "Illustrative model geometric review, not physical qualification",
+  "source_sha256": "d54881036939cdadcbc841402fa829d62c2e80e0fd08c53905b5f359cf592d76",
+  "geometry_json_sha256": "6fbebdc0d49e8a2d299d60c59133cf87ff17ec8e6b5bfadfc3c5e2111e4e8981",
+  "board_sha256": "99b82f31a5d05c019d3fb6d592c06a0d6cca1eb3affc285cbdfb4bd7702550e0",
+  "sides": {
+    "left": {
+      "metadata_reproduced_exactly": true,
+      "wire_to_panel": {
+        "positive copper lead": {
+          "polymer_clearance_mm": 0.059037642740141116,
+          "full_metal_envelope_clearance_mm": 0.031037642740138816,
+          "centreline_length_mm": 95.81995865900842,
+          "method": "2D centreline distance minus full circular radius; conservative for these panel-width-contained paths",
+          "outer_hook_metal_envelope_clearance_mm": 0.7929505784861968
+        },
+        "positive red insulation": {
+          "polymer_clearance_mm": 0.8936186736512931,
+          "full_metal_envelope_clearance_mm": 0.8936186736512931,
+          "centreline_length_mm": 88.67689114971694,
+          "method": "2D centreline distance minus full circular radius; conservative for these panel-width-contained paths"
+        }
+      }
+    },
+    "right": {
+      "metadata_reproduced_exactly": true,
+      "wire_to_panel": {
+        "positive copper lead": {
+          "polymer_clearance_mm": 0.0590376427401329,
+          "full_metal_envelope_clearance_mm": 0.0310376427401306,
+          "centreline_length_mm": 95.81196522804716,
+          "method": "2D centreline distance minus full circular radius; conservative for these panel-width-contained paths",
+          "outer_hook_metal_envelope_clearance_mm": 0.7929505784861834
+        },
+        "positive red insulation": {
+          "polymer_clearance_mm": 0.8936197081038965,
+          "full_metal_envelope_clearance_mm": 0.8936197081038965,
+          "centreline_length_mm": 88.66889771875567,
+          "method": "2D centreline distance minus full circular radius; conservative for these panel-width-contained paths"
+        }
+      }
+    }
+  },
+  "root": {
+    "notch_width_mm": 1.0,
+    "notch_depth_mm": 2.0,
+    "tip_radius_mm": 0.5,
+    "straight_bank_mm": 1.5,
+    "model_insertion_mm": 1.5,
+    "exposed_metal_y_mm": -0.5,
+    "polymer_y_span_mm": [
+      -0.472,
+      -0.27199999999999996
+    ],
+    "nominal_free_gap_to_opposite_bank_mm": 0.772,
+    "negative_strip_within_straight_section_mm": 2.0,
+    "straight_margin_with_photo_high_strip_mm": 0.5,
+    "fillet_x_length_mm": 1.2,
+    "fillet_base_land_overlap_y_mm": 0.48,
+    "fillet_nominal_land_contact_area_per_face_mm2": 0.576,
+    "warning": "Meniscus is illustrative. Area is from display triangles, not a qualified joint area or strength."
+  },
+  "positive": {
+    "nominal_radial_wire_to_hole_clearance_mm": 0.09999999999999998,
+    "radial_clearance_at_recorded_minimum_hole_mm": 0.06,
+    "outer_terminal_curvature_angle_degrees": 2.04627783975294,
+    "warning": "Outer positive strip follows the panel curve; only root negative strip is straight."
+  }
+}

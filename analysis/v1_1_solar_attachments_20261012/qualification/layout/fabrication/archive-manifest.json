@@ -1,0 +1,28 @@
+{
+  "source_sha256": {
+    "stratolink.kicad_pcb": "99b82f31a5d05c019d3fb6d592c06a0d6cca1eb3affc285cbdfb4bd7702550e0",
+    "stratolink.kicad_sch": "20f0d465521daaa088e171e174108644069755c4067b28239657019266088bc4",
+    "stratolink.kicad_pro": "5dd65b15408657138b37fb9ee274f0798e96aadb4092f4e799c61d03bece1786"
+  },
+  "archive_sha256": "2b18645ce21db7de13611abd65f3e3e9b36148188b76a83fb4e39ec4877ccc67",
+  "files": {
+    "gerbers/stratolink-B_Mask.gbs": "8f4b58edfadfbb0172cb51352f4eaa2d6543fcdd66008712e5c43bd5031d2576",
+    "gerbers/stratolink-B_Paste.gbp": "f63d8664eb8ec3d2efb4bd8695fa9a2b51ba91ba9e88031d4bba62d13415b38d",
+    "gerbers/stratolink-Edge_Cuts.gm1": "1007200789a8bef8265cee9ef8229a435bf8f7d8bce7c9a192230c71fd97684e",
+    "gerbers/stratolink-F_Mask.gts": "13b37cb19c852212e67de2b59d27d8a8e2b0381cbe476ef5640897b5911a6e25",
+    "gerbers/stratolink-job.gbrjob": "801cc69e3df45095a71c6f122c8359249110b0e23fe513b760fc61dde4c7c8f4",
+    "gerbers/stratolink-F_Paste.gtp": "16a21e18f2b25c0023a3efd43952a675b450ac1e4f89798367912323fbc23003",
+    "gerbers/stratolink-B_Cu.gbl": "05bc7cf641a8fcfb4c76a3f44bb1ad93657bd903bcd55092f30daf160507d1de",
+    "gerbers/stratolink-F_Cu.gtl": "bbe476c12ff3f35d18396735262c61feaa420e1207f68340cfc322816e512683",
+    "drills/stratolink-PTH.drl": "eb3f62d1bb0b080aeb0df1230bb5a15faaa526f4f465524b4f44dce0f6e3e436",
+    "drills/stratolink-NPTH-drl_map.svg": "5bd5a3a864abe08664770e5f5f864556ec78daf0f93ea3ff5b81729c358334eb",
+    "drills/stratolink-PTH-drl_map.svg": "2dcd5a6301f3ca356e94443fed3b822063fb62fd4ba13df875b56b7fbeccf48a",
+    "drills/stratolink-NPTH.drl": "46e96b3be52edfd5f89d579284b878530eb24d5e5500e58975d853cb9293da8a",
+    "svg/stratolink-B_Mask.svg": "d9a2b016bc60db4159c7f26b0b242ad8b0f17c1769767dddb51dbedc4f9a656d",
+    "svg/stratolink-F_Cu.svg": "25eaf80ea4e1895e6a343335fb6846d46ab525641f488720d88d4e8059a7b060",
+    "svg/stratolink-B_Cu.svg": "a491d80421a2fe1030ac01198c3fe6efa8726db50e17f605f57a3e46aeeedf5a",
+    "svg/stratolink-F_Mask.svg": "211f38f81f03e3a7bea3c0b2c17c8d070d0410222d332feacea0099b15918008",
+    "svg/stratolink-Edge_Cuts.svg": "562ecb8f8c998cc892445c8fcbbe2e861816ca9fc9370983b147b23b8e4ee420"
+  },
+  "purpose": "Diagnostic manufacturing geometry review; inherited DRC/ERC findings are not waived."
+}

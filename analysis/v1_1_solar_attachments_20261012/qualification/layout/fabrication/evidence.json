@@ -1,0 +1,352 @@
+{
+  "status": "pass",
+  "kicad_version": "10.0.0",
+  "candidate": "/Users/twarn/Repositories/ai-working/scratch/stratolink-solar-depth2/upper-only",
+  "source_sha256": {
+    "stratolink.kicad_pcb": "99b82f31a5d05c019d3fb6d592c06a0d6cca1eb3affc285cbdfb4bd7702550e0",
+    "stratolink.kicad_sch": "20f0d465521daaa088e171e174108644069755c4067b28239657019266088bc4",
+    "stratolink.kicad_pro": "5dd65b15408657138b37fb9ee274f0798e96aadb4092f4e799c61d03bece1786"
+  },
+  "candidate_unchanged_by_review": true,
+  "outline_count": 1,
+  "native_notch_inside_outside_checks": [
+    {
+      "side": "left",
+      "test": "notch_open",
+      "x": 53.8165,
+      "y": 54.5,
+      "inside_board": false
+    },
+    {
+      "side": "left",
+      "test": "upper_bank_present",
+      "x": 53.8165,
+      "y": 53.7,
+      "inside_board": true
+    },
+    {
+      "side": "left",
+      "test": "lower_bank_present",
+      "x": 53.8165,
+      "y": 55.3,
+      "inside_board": true
+    },
+    {
+      "side": "left",
+      "test": "inside_of_notch_tip",
+      "x": 55.616499999999995,
+      "y": 54.5,
+      "inside_board": true
+    },
+    {
+      "side": "right",
+      "test": "notch_open",
+      "x": 76.1755,
+      "y": 54.5,
+      "inside_board": false
+    },
+    {
+      "side": "right",
+      "test": "upper_bank_present",
+      "x": 76.1755,
+      "y": 53.7,
+      "inside_board": true
+    },
+    {
+      "side": "right",
+      "test": "lower_bank_present",
+      "x": 76.1755,
+      "y": 55.3,
+      "inside_board": true
+    },
+    {
+      "side": "right",
+      "test": "inside_of_notch_tip",
+      "x": 74.3755,
+      "y": 54.5,
+      "inside_board": true
+    }
+  ],
+  "notch_wall_plated": false,
+  "notch_nominal_width_mm": 1.0,
+  "notch_nominal_depth_mm": 2.0,
+  "notch_tip_radius_mm": 0.5,
+  "upper_bank_ground_land_size_mm": [
+    2.1,
+    0.68
+  ],
+  "notch_to_ground_copper_nominal_mm": 0.22,
+  "open_notch_file": "/Users/twarn/Repositories/ai-working/scratch/stratolink-solar-depth2/fabrication/gerbers/stratolink-Edge_Cuts.gm1",
+  "new_mount_pads": [
+    {
+      "ref": "J1",
+      "number": "1",
+      "net": "+SOLAR",
+      "at_mm": [
+        75.2,
+        85.0
+      ],
+      "drill_mm": [
+        0.7,
+        0.7
+      ],
+      "pad_kind": "round_through_hole",
+      "drilled_hole_plated": true,
+      "F_Cu": true,
+      "B_Cu": true
+    },
+    {
+      "ref": "J1",
+      "number": "2",
+      "net": "GND",
+      "at_mm": [
+        75.4255,
+        53.44
+      ],
+      "drill_mm": [
+        0.0,
+        0.0
+      ],
+      "pad_kind": "rectangular_surface_land",
+      "drilled_hole_plated": null,
+      "F_Cu": true,
+      "B_Cu": false
+    },
+    {
+      "ref": "J1",
+      "number": "2",
+      "net": "GND",
+      "at_mm": [
+        75.4255,
+        53.44
+      ],
+      "drill_mm": [
+        0.0,
+        0.0
+      ],
+      "pad_kind": "rectangular_surface_land",
+      "drilled_hole_plated": null,
+      "F_Cu": false,
+      "B_Cu": true
+    },
+    {
+      "ref": "J2",
+      "number": "1",
+      "net": "+SOLAR",
+      "at_mm": [
+        54.8,
+        85.0
+      ],
+      "drill_mm": [
+        0.7,
+        0.7
+      ],
+      "pad_kind": "round_through_hole",
+      "drilled_hole_plated": true,
+      "F_Cu": true,
+      "B_Cu": true
+    },
+    {
+      "ref": "J2",
+      "number": "2",
+      "net": "GND",
+      "at_mm": [
+        54.5665,
+        53.44
+      ],
+      "drill_mm": [
+        0.0,
+        0.0
+      ],
+      "pad_kind": "rectangular_surface_land",
+      "drilled_hole_plated": null,
+      "F_Cu": true,
+      "B_Cu": false
+    },
+    {
+      "ref": "J2",
+      "number": "2",
+      "net": "GND",
+      "at_mm": [
+        54.5665,
+        53.44
+      ],
+      "drill_mm": [
+        0.0,
+        0.0
+      ],
+      "pad_kind": "rectangular_surface_land",
+      "drilled_hole_plated": null,
+      "F_Cu": false,
+      "B_Cu": true
+    }
+  ],
+  "exact_notch_arc_commands_in_nonplated_profile": [
+    "X54816500Y-55000000I0J-500000D01*",
+    "X75175500Y-54000000I0J500000D01*"
+  ],
+  "PTH_hit_count": 165,
+  "NPTH_hit_count": 3,
+  "mount_drills_matched_to_PTH_export": 2,
+  "ground_stitching_vias_matched_to_PTH_export": [
+    {
+      "uuid": "78a62194-0471-45b8-b787-030afe7db3ea",
+      "net": "GND",
+      "x_mm": 54.1665,
+      "y_mm": 53.45,
+      "drill_mm": 0.3
+    },
+    {
+      "uuid": "b117dc76-c1aa-4383-84c4-b10c84290926",
+      "net": "GND",
+      "x_mm": 75.8255,
+      "y_mm": 53.45,
+      "drill_mm": 0.3
+    }
+  ],
+  "Excellon_coordinate_match_tolerance_mm": 0.00051,
+  "nearby_component_drawing_screen": [
+    {
+      "anchor": "J1",
+      "component": "C5",
+      "layer": "B.Fab",
+      "component_drawing_extent_mm": [
+        57.825,
+        49.657,
+        71.925,
+        79.757
+      ],
+      "min_ground_pad_bbox_gap_mm": 2.4505000000000052,
+      "interpretation": "2D pad-to-drawing bounding-box screen, includes drawn stroke; external panel/solder/wire not represented"
+    },
+    {
+      "anchor": "J2",
+      "component": "C5",
+      "layer": "B.Fab",
+      "component_drawing_extent_mm": [
+        57.825,
+        49.657,
+        71.925,
+        79.757
+      ],
+      "min_ground_pad_bbox_gap_mm": 2.208500000000001,
+      "interpretation": "2D pad-to-drawing bounding-box screen, includes drawn stroke; external panel/solder/wire not represented"
+    },
+    {
+      "anchor": "J1",
+      "component": "C5",
+      "layer": "B.Courtyard",
+      "component_drawing_extent_mm": [
+        56.825,
+        43.407,
+        72.925,
+        80.757
+      ],
+      "min_ground_pad_bbox_gap_mm": 1.4505000000000052,
+      "interpretation": "2D pad-to-drawing bounding-box screen, includes drawn stroke; external panel/solder/wire not represented"
+    },
+    {
+      "anchor": "J2",
+      "component": "C5",
+      "layer": "B.Courtyard",
+      "component_drawing_extent_mm": [
+        56.825,
+        43.407,
+        72.925,
+        80.757
+      ],
+      "min_ground_pad_bbox_gap_mm": 1.2085000000000008,
+      "interpretation": "2D pad-to-drawing bounding-box screen, includes drawn stroke; external panel/solder/wire not represented"
+    },
+    {
+      "anchor": "J1",
+      "component": "U4",
+      "layer": "F.Fab",
+      "component_drawing_extent_mm": [
+        69.0845,
+        56.1445,
+        72.5865,
+        61.3715
+      ],
+      "min_ground_pad_bbox_gap_mm": 2.9650263489554365,
+      "interpretation": "2D pad-to-drawing bounding-box screen, includes drawn stroke; external panel/solder/wire not represented"
+    },
+    {
+      "anchor": "J2",
+      "component": "U4",
+      "layer": "F.Fab",
+      "component_drawing_extent_mm": [
+        69.0845,
+        56.1445,
+        72.5865,
+        61.3715
+      ],
+      "min_ground_pad_bbox_gap_mm": 13.673985675361815,
+      "interpretation": "2D pad-to-drawing bounding-box screen, includes drawn stroke; external panel/solder/wire not represented"
+    },
+    {
+      "anchor": "J1",
+      "component": "U4",
+      "layer": "F.Courtyard",
+      "component_drawing_extent_mm": [
+        68.888,
+        56.003,
+        73.158,
+        61.613
+      ],
+      "min_ground_pad_bbox_gap_mm": 2.5345680598476736,
+      "interpretation": "2D pad-to-drawing bounding-box screen, includes drawn stroke; external panel/solder/wire not represented"
+    },
+    {
+      "anchor": "J2",
+      "component": "U4",
+      "layer": "F.Courtyard",
+      "component_drawing_extent_mm": [
+        68.888,
+        56.003,
+        73.158,
+        61.613
+      ],
+      "min_ground_pad_bbox_gap_mm": 13.456390349941552,
+      "interpretation": "2D pad-to-drawing bounding-box screen, includes drawn stroke; external panel/solder/wire not represented"
+    }
+  ],
+  "excellon_slot_commands": 0,
+  "mount_paste_apertures": 0,
+  "mount_courtyard_findings": [],
+  "explicit_new_mount_drilled_pad_courtyard_hits": [],
+  "unconnected_items": 0,
+  "native_drc_violation_types": {
+    "zones_intersect": 1,
+    "courtyards_overlap": 1,
+    "starved_thermal": 3,
+    "solder_mask_bridge": 8,
+    "track_dangling": 1,
+    "lib_footprint_mismatch": 56
+  },
+  "native_drc_severities": {
+    "error": 13,
+    "warning": 57
+  },
+  "schematic_parity_count": 11,
+  "export_sha256": {
+    "gerbers/stratolink-B_Mask.gbs": "8f4b58edfadfbb0172cb51352f4eaa2d6543fcdd66008712e5c43bd5031d2576",
+    "gerbers/stratolink-B_Paste.gbp": "f63d8664eb8ec3d2efb4bd8695fa9a2b51ba91ba9e88031d4bba62d13415b38d",
+    "gerbers/stratolink-Edge_Cuts.gm1": "1007200789a8bef8265cee9ef8229a435bf8f7d8bce7c9a192230c71fd97684e",
+    "gerbers/stratolink-F_Mask.gts": "13b37cb19c852212e67de2b59d27d8a8e2b0381cbe476ef5640897b5911a6e25",
+    "gerbers/stratolink-job.gbrjob": "801cc69e3df45095a71c6f122c8359249110b0e23fe513b760fc61dde4c7c8f4",
+    "gerbers/stratolink-F_Paste.gtp": "16a21e18f2b25c0023a3efd43952a675b450ac1e4f89798367912323fbc23003",
+    "gerbers/stratolink-B_Cu.gbl": "05bc7cf641a8fcfb4c76a3f44bb1ad93657bd903bcd55092f30daf160507d1de",
+    "gerbers/stratolink-F_Cu.gtl": "bbe476c12ff3f35d18396735262c61feaa420e1207f68340cfc322816e512683",
+    "drills/stratolink-PTH.drl": "eb3f62d1bb0b080aeb0df1230bb5a15faaa526f4f465524b4f44dce0f6e3e436",
+    "drills/stratolink-NPTH-drl_map.svg": "5bd5a3a864abe08664770e5f5f864556ec78daf0f93ea3ff5b81729c358334eb",
+    "drills/stratolink-PTH-drl_map.svg": "2dcd5a6301f3ca356e94443fed3b822063fb62fd4ba13df875b56b7fbeccf48a",
+    "drills/stratolink-NPTH.drl": "46e96b3be52edfd5f89d579284b878530eb24d5e5500e58975d853cb9293da8a",
+    "svg/stratolink-B_Mask.svg": "d9a2b016bc60db4159c7f26b0b242ad8b0f17c1769767dddb51dbedc4f9a656d",
+    "svg/stratolink-F_Cu.svg": "25eaf80ea4e1895e6a343335fb6846d46ab525641f488720d88d4e8059a7b060",
+    "svg/stratolink-B_Cu.svg": "a491d80421a2fe1030ac01198c3fe6efa8726db50e17f605f57a3e46aeeedf5a",
+    "svg/stratolink-F_Mask.svg": "211f38f81f03e3a7bea3c0b2c17c8d070d0410222d332feacea0099b15918008",
+    "svg/stratolink-Edge_Cuts.svg": "562ecb8f8c998cc892445c8fcbbe2e861816ca9fc9370983b147b23b8e4ee420"
+  },
+  "limitations": "Fit, terminal wetting, load retention and assembled clearances require the physical mockup. Existing DRC findings require separate baseline comparison; this script does not waive them."
+}

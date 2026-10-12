@@ -1,0 +1,13 @@
+{
+  "baseline": "76ee6e87463b70519769750d6795988b2c202683",
+  "output": "/Users/twarn/Repositories/ai-working/scratch/stratolink-solar-depth2/upper-only",
+  "canonical_hashes_unchanged": {
+    "/Users/twarn/Repositories/Stratolink/hardware/pcb/stratolink.kicad_pcb": "9bdb29c18687f94685df3d4d36a497b570e9eaf02be86858c1e6eda899d161ea",
+    "/Users/twarn/Repositories/Stratolink/hardware/pcb/lib/Solar_Notch_Left_1p0x1p5.kicad_mod": "74766ac183ff9522fa85eb37b705d4e435c164a543904202246840c5e4c720f7",
+    "/Users/twarn/Repositories/Stratolink/hardware/pcb/lib/Solar_Notch_Right_1p0x1p5.kicad_mod": "eb7e7a1ada758d3f4a4b8bf095e5be79d3e8b1b84803c9e5f4f6206d240afcd6"
+  },
+  "edge_objects_changed": 6,
+  "routes_changed": 0,
+  "component_placements_changed": 0,
+  "note": "Upper-only variant renames footprints and schematic coherently to 1p0x2p0; both-bank rejected trial temporarily retains old names."
+}
