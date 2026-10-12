@@ -1,0 +1,7 @@
+{
+  "hardware/pcb/stratolink.kicad_pcb": "2924cfa59d48c1446488d715834e84ea634516e622ed59915fb72521e9595190",
+  "hardware/pcb/stratolink.kicad_sch": "b78ac9e785c76901ba3efcb6a7d748db1776b998d9093f180e3897126fff2ce7",
+  "hardware/pcb/stratolink.kicad_pro": "5dd65b15408657138b37fb9ee274f0798e96aadb4092f4e799c61d03bece1786",
+  "hardware/gerbers/production_files/BOM-stratolink.csv": "44fb97eaa192e3809bd3a9f52bffe4b1cce24255501380eb06857d613cbdc211",
+  "hardware/gerbers/production_files/CPL-stratolink.csv": "194c91282f58cc6635dd2b929b2ab0f98a16ea066265052b8b957be5bb12a081"
+}

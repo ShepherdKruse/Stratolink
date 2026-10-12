@@ -1,0 +1,56 @@
+# Stratolink board roadmap: v1.1 and v2
+
+Updated 2026-10-12. This is a working decision list, not an order authorization or a claim of physical qualification. The TMP117 repair is implemented. The working project is [hardware/pcb/stratolink.kicad_pro](stratolink.kicad_pro) on `alpha/hardware-v1.1`; make subsequent hardware changes in this folder. The other items below remain proposed work to review together.
+
+The baseline keeps one LoRa radio, accurate temperature sensing, the flat rear-mounted capacitor and the working pressure/UV/IMU/GNSS architecture. Science runs during measured daytime solar surplus. Night means hibernation with no radio TX/RX or GNSS operation. Use Git history to retain v1 as the reference; start with one or two v1.1 pilots before the approximately fifteen-board batch.
+
+## Current change — TMP117 repair
+
+- [x] **Correct U5's exact DSBGA ball map and local routing.** A1=SDA, A2=SCL, B1=3.3 V, B2=GND, C1=GND for address 0x48, C2=unused ALERT grounded as TI permits. Update the reusable symbol and embedded schematic consistently; retain the sensor and its exact N-grade orderable. Completion: independent datasheet-to-symbol-to-pad comparison, correct local continuity, refilled-copper DRC with no new local violations, and inspectable schematic/PCB views. Existing unrelated warnings need named dispositions, not a blanket “DRC clean” claim.
+- [ ] **Verify the corrected pilot physically.** Check fitted part/orientation and unpowered connectivity; demonstrate ACK at 0x48, device ID and direct TMP117 readings, then compare against a reference through cold starts and the intended measurement range. A pressure-sensor fallback is not proof of TMP117 operation. Die accuracy and ambient-air accuracy remain separate.
+
+Implemented and independently checked: [v1.1 change record](../../analysis/v1_1_implementation_20261012/README.md). Physical verification remains the next checkbox.
+
+Evidence: [pin-map fault and routing audit](../../analysis/v1_1_layout_20261012/pcb_audit/README.md), [TI TMP117 datasheet](https://www.ti.com/lit/ds/symlink/tmp117.pdf).
+
+## Proposed minimum v1.1 — review in small changes
+
+- [ ] **Improve both side solar attachments.** Choose a retained plated GND wire anchor with generous annulus and a separate positive land above it; keep the present broad mounting arrangement. Reroute the nearby supply/UART/I²C paths deliberately. The studied 2.4 mm land / 1.0 mm hole is a candidate, not a released footprint. Completion: wire and finished-hole tolerances selected, edge/copper/mask clearance checked, pressure vent and capacitor kept clear, both sides inspected in 3D, and repeatable solder/handling tests on a prototype.
+- [ ] **Omit the microphone.** Define an explicit MK1 DNP/removal variant and identify only its exclusively used support parts and routing; keep unused MCU pins quiet. Completion: reviewed schematic/BOM/firmware disposition and regenerated drill/mask outputs if its acoustic opening is removed. This has not yet been implemented.
+- [ ] **Close specific fabrication findings.** Correct U7's overlapping mask apertures, resolve duplicate GND-zone overlap and persistent thermal connections, move flagged near-edge routes inward, enlarge undersized component-hole annuli where practical, remove the tiny VSTOR stub, and review D1/antenna assembly clearance. Completion: appropriate supplier rules enabled and fresh ERC/DRC/parity reports with each remaining finding explicitly accepted or fixed.
+- [ ] **Lock the actual part and library identities.** Resolve D1/D3's low-capacitance LCSC part versus misleading BOM comment; reconcile C5 center/outer terminal numbering without changing proven polarity blindly; align U6's symbol/placed-footprint metadata and verify GNSS antenna identity. Completion: sourced orderable, symbol pins, placed footprint, model and BOM agree; no uncontrolled library refresh remains necessary.
+- [ ] **Close the existing storage/harvester operating limits.** Use the on-hand flat 1 F capacitors for the pilot baseline, subject to the charge/balance review. Select the charge ceiling and individual-cell balancing strategy together; measure cold panel Voc, solar input/headroom, both cell voltages, leakage and radio-load transients. Completion: documented limits for the actual assembly, debugger-free dark endurance and reliable sunrise recovery. No replacement or balance circuit is accepted solely from a model.
+- [ ] **Find a sustainable flat-capacitor replacement.** Preserve the current rear body envelope (30 × 14 × 3.7 mm) unless a reviewed fit change earns its cost. Compare actual obtainable price, terminal geometry, mass, capacitance tolerance, cold ESR/leakage and nighttime reserve. The smaller 470 mF candidate and wider HW203F remain tradeoffs, not equivalent 1 F replacements. Completion: sourced samples, installed fit and whole-payload dark/recovery measurements.
+- [ ] **Retest the installed RF and solar assembly.** Compare v1 and the selected new mount with the same firmware/settings: orientation-dependent links, GNSS performance during local TX, harvested power, payload mass and joint durability. Completion: recorded comparison and a reason to accept the new assembly; wire length or VNA match alone is insufficient.
+
+Evidence: [PCB findings](../../analysis/v1_1_layout_20261012/pcb_audit/README.md), [side-anchor study](../../analysis/v1_1_layout_20261012/mounting/README.md), [flat storage and power](../../analysis/v1_1_layout_20261012/flat_storage/README.md).
+
+## Optional v1.1 experiments — do not hold the base repair hostage
+
+- [ ] **Expose useful GNSS measurements if layout permits.** Consider PPS/timer capture and power/RF test access. A selected replacement may require true supply isolation and GPIO back-power prevention; reset is not isolation. Completion: measured night current and startup/inrush behavior with the exact assembly.
+- [ ] **Pilot raw GNSS with MAX-M11N-00B only when obtainable.** Same nominal MAX package, full raw carrier output, but preliminary engineering-sample status and unverified stock/price. Recheck the exact orderable/firmware, DNP R13/R14 for NC pins 16/17, and provide real power-off. Completion: reliable raw logging, phase continuity/cycle-slip flags, daylight energy margin and night shutdown. Retain MAX-M10S as the default until this succeeds.
+- [ ] **Compare MAX-M10N-10B only for a demonstrated navigation/coexistence benefit.** Use identical antennas, firmware conditions, weak GNSS signals and actual local LoRa TX. Completion: measured fix availability, C/N₀, recovery and power improvement that justifies the extra cost. Known firmware failures alone do not justify changing GNSS silicon.
+- [ ] **Build a separate AS7331 UV reference prototype.** Confirm available orderable and 3.3 V support circuit/address; characterize simultaneous UVA/UVB/UVC, dark offsets, saturation, temperature and angular response against a calibrated spectral reference. Completion: useful UV measurements and quantified ozone sensitivity versus pointing/cloud/aerosol effects. A band ratio alone is not an accepted ozone product.
+- [ ] **Qualify one-radio regional and wildlife operation.** Measure the exact RAK SKU/front end and installed antenna over the intended high bands; distinguish EU868/IN865 from 915/923 MHz assembly choices. Measure actual bird-signal sensitivity and compatible Meshtastic receive/relay windows. Completion: supported frequencies, channel/preset limits, service duty cycle and RF performance documented. A dual-band wire cannot bypass the module's internal matching, and one receiver cannot listen to every channel simultaneously.
+
+Evidence: [GNSS/UV pin, power, optics and radio review](../../analysis/v1_1_layout_20261012/gnss_uv/README.md), [earlier radio study](../../analysis/redesign_20261010/radio_mechanics/README.md).
+
+## v2 — larger changes only after the experiments justify them
+
+- [ ] **Compare a new panel/load-path architecture.** Prototype ZachTek-style inner positive tabs and outer negative braces, including a top-mounted option. Compare mass, handling/cold durability, solar collection while rotating, antenna pattern and GNSS interference. Select geometry from measurements before relocating the power section.
+- [ ] **Develop an ambient-temperature measurement assembly.** Evaluate thermal isolation, radiation shielding and a remote/lightweight probe while preserving precision. Completion: quantified solar, conduction, response-time and low-pressure errors against an independent reference across the flight envelope.
+- [ ] **Design the atmospheric GNSS experiment end to end.** Choose between raw satellite observations and a separate coherent payload-to-ground instrument; define observables, logger/storage, antenna, clock/timing calibration and independent atmospheric references. Consider MAX-F11N or a verified dual-band alternative when supply and measured power are established. Completion: an uncertainty/identifiability model and a ground experiment showing recoverable information; accurate position and LoRa packet timestamps alone do not recover separate path temperature, pressure and humidity.
+- [ ] **Develop ozone optics if broad UV bands prove useful.** Compare calibrated broad bands with simultaneous narrower absorption/reference bands or a spectrometer, including angular response and out-of-band leakage. Completion: held-out validation of column above the balloon and quality flags; do not relabel it local ozone concentration.
+- [ ] **Revisit RF architecture only from measured need.** Keep one radio as the preferred design. A second receiver or separate low-band front end requires measured wildlife yield, sensitivity/service gaps and an accepted mass/power/cost budget. No second radio is committed.
+- [ ] **Rework the power/mechanical layout around selected parts.** Carry forward the qualified flat store, charge/balance strategy, solar I–V measurements and actual night budget. Integrate GNSS isolation/logger and mounting changes only after their separate prototypes close.
+
+Evidence: [overall decision package](../../analysis/v1_1_layout_20261012/README.md), [atmospheric metrology study](../../analysis/redesign_20261010/metrology/README.md), [mounting comparison](../../analysis/v1_1_layout_20261012/mounting/README.md).
+
+## Before ordering pilots, then the larger batch
+
+- [ ] Agree which proposed changes are in the pilot BOM/layout; keep optional variants explicitly separate.
+- [ ] Review final schematic, both copper layers, mask/paste, component orientation and assembled 3D clearances; select the actual stack/finish and supplier rules. U5's 0.23 mm BGA lands require the appropriate ENIG process in the current JLC capability table.
+- [ ] Export Gerbers, drills, BOM and CPL from the same reviewed revision; inspect the assembler preview and archive the accepted files/settings with hashes. Historical copper/mask/paste Gerbers are missing from this checkout, so retain the complete new package.
+- [ ] Build one or two pilots and record temperature, power/dark recovery, sensor, GNSS, RF and mounting results before approving the approximately fifteen-board run.
+
+Physical qualification and purchasing remain pending even after an individual CAD checkbox is complete.

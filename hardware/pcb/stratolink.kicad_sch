@@ -5,9 +5,9 @@
 	(uuid "4d146a28-be53-49f1-b1c6-484192820e45")
 	(paper "User" 265 190)
 	(title_block
-		(title "PICO Mainboard")
-		(date "2026-02-08")
-		(rev "2026-02-08")
+		(title "PICO Mainboard v1.1")
+		(date "2026-10-12")
+		(rev "1.1")
 		(company "            Global pico-balloon telemetry system.")
 		(comment 1 "             Stratolink")
 	)
@@ -3728,7 +3728,7 @@
 					(justify left bottom)
 				)
 			)
-			(property "Footprint" "TMP117NAIYBGR:BGA6N40P3X2_148X95X53"
+			(property "Footprint" "lib:BGA6N40P3X2_148X95X53"
 				(at 0 0 0)
 				(effects
 					(font
@@ -3747,7 +3747,7 @@
 					(hide yes)
 				)
 			)
-			(property "Description" ""
+			(property "Description" "TMP117N precision digital temperature sensor; +/-0.2 C from -40 to 100 C; YBG DSBGA-6"
 				(at 0 0 0)
 				(effects
 					(font
@@ -3908,7 +3908,7 @@
 							)
 						)
 					)
-					(number "A1"
+					(number "A2"
 						(effects
 							(font
 								(size 1.016 1.016)
@@ -3926,7 +3926,7 @@
 							)
 						)
 					)
-					(number "A2"
+					(number "B2"
 						(effects
 							(font
 								(size 1.016 1.016)
@@ -3934,7 +3934,7 @@
 						)
 					)
 				)
-				(pin output line
+				(pin open_collector line
 					(at 15.24 0 180)
 					(length 5.08)
 					(name "ALERT"
@@ -3944,7 +3944,7 @@
 							)
 						)
 					)
-					(number "B1"
+					(number "C2"
 						(effects
 							(font
 								(size 1.016 1.016)
@@ -3962,7 +3962,7 @@
 							)
 						)
 					)
-					(number "B2"
+					(number "C1"
 						(effects
 							(font
 								(size 1.016 1.016)
@@ -3980,7 +3980,7 @@
 							)
 						)
 					)
-					(number "C1"
+					(number "B1"
 						(effects
 							(font
 								(size 1.016 1.016)
@@ -3998,7 +3998,7 @@
 							)
 						)
 					)
-					(number "C2"
+					(number "A1"
 						(effects
 							(font
 								(size 1.016 1.016)
@@ -60965,7 +60965,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://www.ti.com/lit/ds/symlink/tmp117.pdf"
 			(at 38.1 160.02 0)
 			(effects
 				(font
@@ -60974,7 +60974,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" ""
+		(property "Description" "TMP117N precision digital temperature sensor; +/-0.2 C from -40 to 100 C; YBG DSBGA-6"
 			(at 38.1 160.02 0)
 			(effects
 				(font
@@ -61083,7 +61083,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description_1" "\n                        \n                            0.1°C digital temperature sensor, 48-bit EEPROM, PT100/PT1000 RTD replacement\n                        \n"
+		(property "Description_1" "TMP117N precision digital temperature sensor; +/-0.2 C from -40 to 100 C; YBG DSBGA-6"
 			(at 38.1 160.02 0)
 			(effects
 				(font
@@ -61113,22 +61113,22 @@
 				(hide yes)
 			)
 		)
-		(pin "A1"
+		(pin "A2"
 			(uuid "c84cad55-3117-4525-981c-6dbef81d6fdc")
 		)
-		(pin "B1"
+		(pin "C2"
 			(uuid "d24f236f-77e7-440c-9378-f49a6d546306")
 		)
-		(pin "A2"
+		(pin "B2"
 			(uuid "eb438ea9-d3f8-4539-a97f-67e79188c3c8")
 		)
-		(pin "B2"
+		(pin "C1"
 			(uuid "d4792685-df0c-4abb-bf99-8beffb9ebef1")
 		)
-		(pin "C2"
+		(pin "A1"
 			(uuid "65989763-97cf-4e03-a5bc-e3931bb50683")
 		)
-		(pin "C1"
+		(pin "B1"
 			(uuid "a22437b0-7622-4f4e-9231-48bf54ee2f02")
 		)
 		(instances

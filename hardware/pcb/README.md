@@ -1,0 +1,29 @@
+# Stratolink hardware — v1.1 working revision
+
+Open [stratolink.kicad_pro](stratolink.kicad_pro) in KiCad 10. This is the canonical working project. Make subsequent v1.1 hardware changes here on `alpha/hardware-v1.1`, so the project Teddy reviews in KiCad stays current. Git preserves the earlier board revisions; the separate `../v1.1/` draft is superseded.
+
+The first implemented change corrects U5's TMP117NAIYBGR DSBGA ball assignments and reroutes its local supply, ground and I²C connections. The precision sensor and existing C12 bypass stay in their original positions. The embedded schematic symbol and project-local reusable symbol are corrected together. The title block and copper revision label identify v1.1.
+
+| Ball | Function | Connection |
+| --- | --- | --- |
+| A1 | SDA | SDA |
+| A2 | SCL | SCL |
+| B1 | V+ | +3.3 V |
+| B2 | GND | GND |
+| C1 | ADD0 | GND → address `0x48` |
+| C2 | ALERT | GND; unused open-drain output, permitted by TI |
+
+The new escape traces are 0.15 mm; four new vias use 0.60 mm copper / 0.30 mm drill. SDA uses a short back-layer crossover. C12 retains a local supply and ground path. All 62 component placements and 239 pad geometries remain unchanged.
+
+![Corrected temperature routing](../../analysis/v1_1_implementation_20261012/tmp117-routing.png)
+
+The TMP117 correction's recorded verification passed independent symbol/netlist/copper checks and a refilled 0.15 mm clearance screen with no new local violations. See the linked change record for the exact checked revision and evidence. This is a working design, **not a manufacturing release**: inherited ERC/DRC findings and physical pilot validation remain open. The working project retains v1's rule settings, including disabled global clearance checks; use the recorded enabled diagnostic screen when assessing this repair.
+
+- [Prioritized v1.1 / v2 checklist](TODO.md)
+- [Promotion and fresh checks on this project](../../analysis/v1_1_implementation_20261012/promotion/README.md)
+- [Change record, checks and native review views](../../analysis/v1_1_implementation_20261012/README.md)
+- [Independent electrical review](../../analysis/v1_1_implementation_20261012/review/electrical_review.md)
+
+No BOM or fabrication package has been issued for v1.1. The existing microphone, solar terminals, capacitor, GNSS and radio are still present in CAD; their proposed changes are tracked in the checklist. Use one or two physically verified pilots before the larger batch.
+
+Keep the corrected `sym-lib-table`, `fp-lib-table` and `lib/` with the project. Custom 3D models remain local; standard models use KiCad 10's model directory. Other imported libraries still have inherited drift, so avoid a blanket update of every footprint from the library before those checklist items are reviewed.
