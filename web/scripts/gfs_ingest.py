@@ -159,6 +159,12 @@ RECON_LEVELS_EACH_SIDE = int(os.environ.get("RECON_LEVELS_EACH_SIDE", "1"))
 # chord's boxes from hour ~22 to ~135).
 LONG_GAP_H = 6
 LONG_GAP_JOIN_MARGIN_H = 12
+# The backward cloud is also covered from this long before the midpoint: the
+# final bridges' forward halves lean toward where it is (they must meet it), so
+# in the last day or so before the meeting they sit on its side of the forward
+# cloud, outside a box sized by the forward cloud alone. At most a quarter of the
+# gap (never less than LONG_GAP_JOIN_MARGIN_H), so short long-gaps stay tight.
+LONG_GAP_BACKWARD_LEAD_H = 36
 # A long gap whose forward and backward trajectories are this far apart (deg, in
 # lat or lon) at a slice falls back to the chord there: the winds cannot connect
 # its fixes (e.g. a pre-launch gap on the ground, where the float-level winds run
@@ -174,7 +180,17 @@ LONG_GAP_MAX_SPREAD_DEG = 30
 # made every box of stratolink-3's 201 h gap 33° tall, around clouds 1–9° across
 # near the fixes; mid-gap, where the forward cloud (which doesn't know the far fix
 # until the two meet) spans ~30°, the cap keeps the box as it was.
-RECON_PILOT_N = 120
+# Coarse outer field (.slwc v5): per reconstruction slice, the float-level wind at
+# RECON_OUTER_STEP° over RECON_OUTER_LAT and ±RECON_OUTER_HALF_LON° of longitude
+# around the fine box. A particle that leaves the fine box reads these real (if
+# coarser) winds instead of the box's edge-clamped value, so it is not penalised:
+# box size then only sets resolution, never which particles survive. ~32 KB a
+# slice. RECON_OUTER=0 writes no outer field (v4/v3 cube).
+RECON_OUTER = os.environ.get("RECON_OUTER", "1") != "0"
+RECON_OUTER_STEP = 1.5
+RECON_OUTER_LAT = (-10.0, 85.0)
+RECON_OUTER_HALF_LON = 90.0
+RECON_PILOT_N = 200
 RECON_PILOT_MARGIN_DEG = 3.0
 PILOT_DIR_SIGMA_DEG = 12.0
 PILOT_SPEED_SIGMA = 0.15
@@ -733,8 +749,8 @@ def pilot_envelopes(times_ms, start_ms, start_lat, start_lon, wind_fn, direction
     `start_ms`, forward (`direction` 1) or backward through time-reversed winds
     (−1), each following `wind_fn` under the smoother's bounded AR(1) heading and
     speed perturbation, and return {t: (lat_lo, lat_hi, lon_lo, lon_hi)} — the
-    1st and 99th percentile of the cloud per axis — at each of `times_ms` on that
-    side of the start. Pure Python (seeded `random`), so it runs without numpy."""
+    cloud's full extent per axis — at each of `times_ms` on that side of the
+    start. Pure Python (seeded `random`), so it runs without numpy."""
     import random
     n = n or RECON_PILOT_N
     rng = random.Random(seed)
@@ -744,7 +760,7 @@ def pilot_envelopes(times_ms, start_ms, start_lat, start_lon, wind_fn, direction
     lat = [start_lat] * n; lon = [start_lon] * n
     hd = [rng.gauss(0, PILOT_DIR_SIGMA_DEG) for _ in range(n)]
     sp = [rng.gauss(0, PILOT_SPEED_SIGMA) for _ in range(n)]
-    lo_i, hi_i = int(0.01 * (n - 1)), int(math.ceil(0.99 * (n - 1)))
+    lo_i, hi_i = 0, n - 1                                    # the cloud's full extent
     out, t_ms, k = {}, start_ms, 0
     while k < len(want):
         while k < len(want) and (want[k] - t_ms) * direction <= 1:
@@ -963,6 +979,19 @@ def recon_half_deg(gap_h):
     return min(RECON_HALF_MAX_DEG, max(RECON_HALF_MIN_DEG, RECON_HALF_BASE_DEG + RECON_HALF_PER_H * gap_h))
 
 
+def outer_box(clon, step=None):
+    """(clat, clon, half_lat, half_lon, n_lat, n_lon) of the coarse outer grid
+    around a fine box centred at longitude `clon`: RECON_OUTER_LAT in latitude,
+    ±RECON_OUTER_HALF_LON in longitude, half-extents snapped up to the step and
+    the centre to the 0.25° source lattice (cut_box_rect's requirements)."""
+    step = step or RECON_OUTER_STEP
+    clat = (RECON_OUTER_LAT[0] + RECON_OUTER_LAT[1]) / 2
+    hl = math.ceil((RECON_OUTER_LAT[1] - RECON_OUTER_LAT[0]) / 2 / step - 1e-9) * step
+    ho = math.ceil(RECON_OUTER_HALF_LON / step - 1e-9) * step
+    clat = round(clat / 0.25) * 0.25; clon = round(clon / 0.25) * 0.25
+    return clat, clon, hl, ho, int(round(2 * hl / step)) + 1, int(round(2 * ho / step)) + 1
+
+
 def recon_slice_needs(fixes_ms, slice_ms, step_ms, wind_fn):
     """Per reconstruction slice, the boxes it must cover, as (lat_lo, lat_hi,
     lon_lo, lon_hi). A slice is read by every bridge whose gap touches
@@ -974,8 +1003,12 @@ def recon_slice_needs(fixes_ms, slice_ms, step_ms, wind_fn):
     the unperturbed trajectories ± recon_half_deg; where the two trajectories are
     > LONG_GAP_MAX_SPREAD_DEG apart the winds can't connect the fixes and the slice
     needs the chord. Slices no gap touches (the lead-in and trailing ones) need
-    the chord. `fixes_ms` = [(t_ms, lat, lon_unwrapped)]; `wind_fn(lat, lon,
-    t_ms) -> (u, v)`."""
+    the chord. A sample between two slices reads BOTH of them (the compute
+    blends them in time, and `cubeCovers` asks for both boxes), so a slice's box
+    must hold the clouds over its whole read window (t − step, t + step), not
+    just at t: in a jet the cloud moves ~5° in 3 h, and boxes sized at t alone
+    clipped the leading edge of the final bridges. `fixes_ms` = [(t_ms, lat,
+    lon_unwrapped)]; `wind_fn(lat, lon, t_ms) -> (u, v)`."""
     chord = [interp_track(fixes_ms, t) for t in slice_ms]
     around = lambda p, h: (p[0] - h, p[0] + h, p[1] - h, p[1] + h)
     needs = [[] for _ in slice_ms]
@@ -992,8 +1025,10 @@ def recon_slice_needs(fixes_ms, slice_ms, step_ms, wind_fn):
                 needs[k].append(around(chord[k], h))
             continue
         tm = (ta + tb) / 2
-        f_times = [slice_ms[k] for k in idx if slice_ms[k] <= tm + margin]
-        b_times = [slice_ms[k] for k in idx if slice_ms[k] >= tm - margin]
+        lead = max(margin, min(LONG_GAP_BACKWARD_LEAD_H * 3.6e6, (tb - ta) / 4))
+        window = lambda t: (t - step_ms, t - step_ms / 2, t, t + step_ms / 2, t + step_ms)
+        f_times = sorted({w for k in idx if slice_ms[k] <= tm + margin for w in window(slice_ms[k])})
+        b_times = sorted({w for k in idx if slice_ms[k] >= tm - lead for w in window(slice_ms[k])})
         fwd = integrate_positions(f_times, ta, la, loa, wind_fn, 1)
         bwd = integrate_positions(b_times, tb, lb, lob, wind_fn, -1)
         seed = int(ta // 1000) % (2 ** 31)
@@ -1002,12 +1037,15 @@ def recon_slice_needs(fixes_ms, slice_ms, step_ms, wind_fn):
         for k in idx:
             t = slice_ms[k]
             pts, env = [], []
-            if t <= tm + margin:
-                pts.append(fwd.get(t, (la, loa)))                # slices before A sit at A
-                env.append(fenv.get(t, around((la, loa), 0)))
-            if t >= tm - margin:
-                pts.append(bwd.get(t, (lb, lob)))                # slices after B sit at B
-                env.append(benv.get(t, around((lb, lob), 0)))
+            for w in window(t):                                  # the clouds over the slice's read window
+                if w <= tm + margin and w <= tb:
+                    pts.append(fwd.get(w, (la, loa)))            # times before A sit at A
+                    env.append(fenv.get(w, around((la, loa), 0)))
+                if w >= tm - lead and w >= ta:
+                    pts.append(bwd.get(w, (lb, lob)))            # times after B sit at B
+                    env.append(benv.get(w, around((lb, lob), 0)))
+            if not pts:
+                pts, env = [(la, loa)], [around((la, loa), 0)]
             if (max(p[0] for p in pts) - min(p[0] for p in pts) > LONG_GAP_MAX_SPREAD_DEG
                     or max(p[1] for p in pts) - min(p[1] for p in pts) > LONG_GAP_MAX_SPREAD_DEG):
                 needs[k].append(around(chord[k], h))
@@ -1072,6 +1110,11 @@ def sample_tube_rect(boxes, step, slice_ms, levels, target_p, latest, now, tag="
             lat0, lon0, U, V = cut_box_rect(f["u"], f["v"], clat, clon, hl, ho, step, nla, nlo)
             g["U"], g["V"] = U, V
         g["lat0"], g["lon0"] = lat0, lon0
+        if RECON_OUTER:
+            oc = outer_box(clon)
+            f = fetch_uv_p(cyc, fhr, target_p)
+            olat0, olon0, OU, OV = cut_box_rect(f["u"], f["v"], oc[0], oc[1], oc[2], oc[3], RECON_OUTER_STEP, oc[4], oc[5])
+            g["outer"] = (olat0, olon0, oc[4], oc[5], OU, OV)
         return g
 
     grids = [None] * len(slice_ms)
@@ -1180,10 +1223,11 @@ def pack_cube(cube):
     origins = [(g["lat0"], g["lon0"]) for g in grids]
     dims = [(g["nLat"], g["nLon"]) for g in grids]
     levels = cube.get("levels") or []
-    dims_vary = bool(levels) or any(d != dims[0] for d in dims)
+    outer = all("outer" in g for g in grids)
+    dims_vary = bool(levels) or outer or any(d != dims[0] for d in dims)
     is_tube = dims_vary or any(o != origins[0] for o in origins)
     header = {
-        "v": 4 if levels else (3 if dims_vary else (2 if is_tube else 1)), "scale": SCALE,
+        "v": 5 if outer else (4 if levels else (3 if dims_vary else (2 if is_tube else 1))), "scale": SCALE,
         "source": cube.get("source", "gfs"),
         "generated_at": cube.get("generated_at"),
         "latest_cycle_utc": cube.get("latest_cycle_utc"),
@@ -1199,6 +1243,10 @@ def pack_cube(cube):
         header["dims"] = [[a, b] for a, b in dims]
     if levels:
         header["levels"] = [int(L) if float(L).is_integer() else L for L in levels]
+    if outer:
+        header["outer"] = {"dLat": RECON_OUTER_STEP, "dLon": RECON_OUTER_STEP,
+                           "origins": [[round(g["outer"][0], 4), round(g["outer"][1], 4)] for g in grids],
+                           "dims": [[g["outer"][2], g["outer"][3]] for g in grids]}
     # True trajectory metadata (optional, tube-only; [lat, lon], lon UNWRAPPED like
     # origins). Old readers ignore unknown header keys, so v stays 2.
     if is_tube and cube.get("centers"):
@@ -1216,6 +1264,10 @@ def pack_cube(cube):
             for a in (U, V):
                 a = np.asarray(a, dtype=np.float64)
                 parts.append(np.clip(np.round(a * SCALE), -32000, 32000).astype("<i2").tobytes())
+    if outer:                                    # v5: the outer grids follow every fine grid
+        for g in cube["grids"]:
+            for a in (g["outer"][4], g["outer"][5]):
+                parts.append(np.clip(np.round(np.asarray(a, dtype=np.float64) * SCALE), -32000, 32000).astype("<i2").tobytes())
     return b"".join(parts)
 
 

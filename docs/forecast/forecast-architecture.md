@@ -190,11 +190,16 @@ GRIB2 complex packing needs eccodes from conda-forge). Per run:
    from hour ~22 to ~135). Where the two trajectories are > 30° apart (winds
    that cannot connect the fixes, e.g. a pre-launch ground gap) the slice falls
    back to the chord. Box size: around short gaps the chord ± `recon_half_deg`
-   (9–20° by gap length); inside long gaps the 1–99 % extent of a pilot cloud
-   (120 particles with the smoother's own heading/speed perturbation, forward
-   from the first fix and backward from the second) ± 3°, capped at the
-   trajectories ± `recon_half_deg` — small near the fixes, wide mid-gap where
-   the forward cloud doesn't yet know the far fix. Pad velocity comes from the most recent
+   (9–20° by gap length); inside long gaps the full extent of a pilot cloud
+   (200 particles with the smoother's own heading/speed perturbation, forward
+   from the first fix and backward from the second) over the slice's whole
+   read window (t ± 3 h) ± 3°, capped at the trajectories ± `recon_half_deg` —
+   small near the fixes, wide mid-gap where the forward cloud doesn't yet know
+   the far fix. Each slice also stores a **coarse outer field** (`.slwc` v5):
+   the float-level wind at 1.5° over 10° S–85° N and ±90° of longitude around
+   the fine box. A particle that leaves the fine box reads those real winds and
+   is not penalised, so box size sets resolution, never which particles
+   survive; only a sample outside both is edge-clamped and weighted down. Pad velocity comes from the most recent
    **non-frozen, short-dt** fix pair (this fleet's GPS re-sends identical fixes,
    see the `stratolink-frozen-gps` memory note).
 6. **Write** both cubes as packed binary `.slwc` into `.windcube/cubes/`

@@ -361,11 +361,11 @@ class MultiLevelWindFollowingTubeTests(unittest.TestCase):
     def setUpClass(cls):
         import math
         cls.g = extract({
-            "GFS_LEVELS", "RECON_LEVEL_SET", "RECON_LEVELS_EACH_SIDE", "LONG_GAP_H", "LONG_GAP_JOIN_MARGIN_H",
+            "GFS_LEVELS", "RECON_LEVEL_SET", "RECON_LEVELS_EACH_SIDE", "LONG_GAP_H", "LONG_GAP_JOIN_MARGIN_H", "LONG_GAP_BACKWARD_LEAD_H",
             "LONG_GAP_MAX_SPREAD_DEG", "TUBE_SUBSTEP_H", "RECON_HALF_BASE_DEG", "RECON_HALF_PER_H", "RECON_HALF_MIN_DEG",
             "RECON_HALF_MAX_DEG", "RECON_PILOT_N", "RECON_PILOT_MARGIN_DEG", "PILOT_DIR_SIGMA_DEG", "PILOT_SPEED_SIGMA",
             "PILOT_TAU_H", "recon_levels", "integrate_positions", "interp_track", "recon_half_deg", "pilot_envelopes",
-            "recon_slice_needs", "cover_boxes",
+            "recon_slice_needs", "cover_boxes", "RECON_OUTER_STEP", "RECON_OUTER_LAT", "RECON_OUTER_HALF_LON", "outer_box",
         })
         # integrate_positions only needs cos/radians from numpy.
         cls.g["np"] = types.SimpleNamespace(cos=math.cos, radians=math.radians)
@@ -431,6 +431,14 @@ class MultiLevelWindFollowingTubeTests(unittest.TestCase):
         needs = self.g["recon_slice_needs"]([(0, 40.0, 0.0), (48 * h, 40.0, 0.0)], [24 * h], 3 * h, wind)
         H = self.g["recon_half_deg"](48)
         self.assertEqual(needs[0], [(40.0 - H, 40.0 + H, -H, H)])
+
+    def test_outer_box_spans_the_band_around_the_fine_box_on_the_lattice(self):
+        clat, clon, hl, ho, nla, nlo = self.g["outer_box"](-27.13)
+        self.assertEqual((clat, clon), (37.5, -27.25))           # centre snapped to the 0.25° lattice
+        self.assertTrue(clat - hl <= -10 and clat + hl >= 85)     # covers the latitude band
+        self.assertGreaterEqual(ho, 90)
+        self.assertEqual((nla, nlo), (int(2 * hl / 1.5) + 1, int(2 * ho / 1.5) + 1))
+        self.assertAlmostEqual((clat - hl) / 0.25, round((clat - hl) / 0.25))   # origin on the source lattice
 
     def test_cover_boxes_take_the_union_and_snap_to_the_step(self):
         boxes = self.g["cover_boxes"]([[(30.0, 50.0, -10.0, 18.0)], [(1.0, 18.9, -9.1, 9.1), (5.0, 8.0, 0.0, 4.0)]], 0.25)
