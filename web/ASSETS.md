@@ -31,7 +31,7 @@ An unused white-cloud experiment is archived at `reference/experiments/footer-cl
 
 ## Dashboard
 
-The dashboard's logo and TTN gateway files are unchanged copies from [`ShepherdKruse/Stratolink` at `b95c4f4`](https://github.com/ShepherdKruse/Stratolink/tree/b95c4f4dee684e73fbfdb2d5af2df13a3dd87949/web/public), imported October 5, 2026. Their original public paths are preserved.
+The dashboard's logo and TTN gateway files are unchanged copies from [`Stratolink-hq/Stratolink` at `b95c4f4`](https://github.com/Stratolink-hq/Stratolink/tree/b95c4f4dee684e73fbfdb2d5af2df13a3dd87949/web/public), imported October 5, 2026. Their original public paths are preserved.
 
 | Runtime file | Bytes | Use |
 | --- | ---: | --- |
