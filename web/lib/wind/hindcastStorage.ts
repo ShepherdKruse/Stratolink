@@ -34,8 +34,10 @@ import type { PathReconstructionResult } from './pathReconstruction';
  *     perturbation instead of an unbounded heading random walk.
  * v7: long-gap tube boxes follow the wind trajectories from both fixes (not the
  *     time-linear chord), and on multi-level cubes each particle rides its own
- *     pressure, anchored to the fixes' barometer readings. */
-const ALGO_VERSION = 'v7';
+ *     pressure, anchored to the fixes' barometer readings.
+ * v8: the long-gap line is the mean of the posterior draws unless they split
+ *     into separate routes (then the trimmed local mean, as before). */
+const ALGO_VERSION = 'v8';
 
 export type StoredHindcast = PathReconstructionResult & { computed_at: string };
 

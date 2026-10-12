@@ -97,7 +97,7 @@ export type ReconstructionGap = {
      *  perturbation model (clouds never met, or closure > 300 km) — the bridge
      *  is a low-confidence corridor, not a reconstruction. */
     unexplained?: boolean;
-    /** How the drawn bridge was formed ('trimmed-local-mean' | 'straight'). */
+    /** How the drawn bridge was formed ('posterior-mean' | 'trimmed-local-mean' | 'straight'). */
     line_method?: string;
     occupancy?: OccupancyFootprint | null;
     ellipses?: Array<{
@@ -149,8 +149,9 @@ export type PathReconstructionResult = {
  *       speed perturbation (the unbounded heading random walk is gone);
  *       gaps the winds cannot connect are flagged `unexplained`.
  *   g6: wind-following long-gap tube; per-particle pressure on multi-level
- *       (.slwc v4) cubes. */
-const GAP_ALGO_VERSION = 'g6';
+ *       (.slwc v4) cubes.
+ *   g7: long-gap line = mean of the draws unless they split (chooseLine). */
+const GAP_ALGO_VERSION = 'g7';
 /** A bridge whose end is older than this is final — safe to reuse verbatim. */
 const GAP_SETTLE_MS = 6 * 3_600_000;
 

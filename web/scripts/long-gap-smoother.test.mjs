@@ -12,7 +12,7 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import {
-    ar1Step, effectiveSampleSize, joinHalves, reconstructLongGap, resampleIfCollapsed, systematicResample, trimmedLocalMean,
+    ar1Step, chooseLine, effectiveSampleSize, joinHalves, reconstructLongGap, resampleIfCollapsed, systematicResample, trimmedLocalMean,
 } from '../lib/wind/pathReconstructionLongGap.ts';
 
 const HOUR = 3_600_000;
@@ -231,6 +231,25 @@ test('trimmedLocalMean: a two-route bundle gives a line on the dominant route, n
     assert.ok(meanLat > 0.5 && meanLat < 0.7, `mean latitude ${meanLat} is between the routes`);
 });
 
+test('chooseLine: a split bundle gets the trimmed local mean, a single bundle the plain mean', () => {
+    /* 70/30 two-route bundle (routes 2° = 222 km apart): the mean sits 67 km
+     * off route A, outside a 40 km radius, so the split test must pick the
+     * trimmed local mean on route A. */
+    const split = chooseLine(twoRoutes(), 0.5, 40, 3);
+    assert.equal(split.method, 'trimmed-local-mean');
+    assert.ok(split.ratio < 0.5, `split ratio ${split.ratio}`);
+    for (const p of split.path) assert.ok(Math.abs(p.lat) < 0.1, `line latitude ${p.lat} should sit on route A`);
+    /* One route with the same jitter: the mean is inside the bundle, so it is
+     * drawn, and it is exactly the per-step average of every draw. */
+    const one = twoRoutes().slice(0, 140);
+    const r = chooseLine(one, 0.5, 40, 3);
+    assert.equal(r.method, 'posterior-mean');
+    assert.equal(r.kept, 140);
+    assert.ok(r.ratio > 0.8, `ratio ${r.ratio}`);
+    const avg = one.reduce((a, sm) => a + sm[30].lat, 0) / one.length;
+    assert.ok(Math.abs(r.path[30].lat - avg) < 1e-12);
+});
+
 test('trimmedLocalMean: identical samples reproduce the path; the trim never keeps fewer than three', () => {
     const path = Array.from({ length: 10 }, (_, s) => ({ lat: 40 + s * 0.01, lon: -120 + s * 0.2, alt: 9000 }));
     const samples = Array.from({ length: 12 }, () => path.map((p) => ({ ...p })));
@@ -255,6 +274,7 @@ test('reconstructLongGap: a uniform wind that carries A exactly to B gives a str
     assert.equal(r.mode, 'line');
     assert.equal(r.outside_cube_frac, 0);
     assert.equal(r.outside_cube_frac_weighted, 0);
+    assert.equal(r.line_method, 'posterior-mean');
     assert.equal(r.occupancy, null);
     assert.deepEqual(r.ellipses.map((e) => e.frac), [0.15, 0.3, 0.5, 0.7, 0.85]);
     for (const e of r.ellipses) assert.ok(e.e50.semi_a_km <= e.e90.semi_a_km && e.e90.polygon.length === 49);
