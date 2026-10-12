@@ -1,4 +1,4 @@
-# Stratolink
+[![Stratolink - stratolink.org](assets/images/stratolink-banner.png)](https://stratolink.org)
 
 [stratolink.org](https://stratolink.org)
 
