@@ -36,8 +36,10 @@ import type { PathReconstructionResult } from './pathReconstruction';
  *     time-linear chord), and on multi-level cubes each particle rides its own
  *     pressure, anchored to the fixes' barometer readings.
  * v8: the long-gap line is the mean of the posterior draws unless they split
- *     into separate routes (then the trimmed local mean, as before). */
-const ALGO_VERSION = 'v8';
+ *     into separate routes (then the trimmed local mean, as before).
+ * v9: long-gap tube boxes are sized by a pilot particle cloud (1–99 % + 3°,
+ *     capped at the old size), so they shrink near the fixes. */
+const ALGO_VERSION = 'v9';
 
 export type StoredHindcast = PathReconstructionResult & { computed_at: string };
 

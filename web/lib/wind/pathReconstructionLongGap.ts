@@ -102,6 +102,8 @@ const CFG = {
      *  ensemble measures 19°). The speed σ of 15 % covers the observed scatter
      *  with room for weaker GFS winds over open ocean (the forecast uses 10 %;
      *  25 % gave the same closures and angles with noisier lines). */
+    /* Mirrored by PILOT_* in scripts/gfs_ingest.py, whose pilot cloud sizes the
+     * long-gap tube boxes. */
     SPEED_SIGMA: 0.15,
     DIR_SIGMA_DEG: 12,
     PERTURB_TAU_H: 18,

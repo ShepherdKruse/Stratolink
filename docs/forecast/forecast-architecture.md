@@ -189,7 +189,12 @@ GRIB2 complex packing needs eccodes from conda-forge). Per run:
    old chord tube cut exactly that path off (stratolink-3's 201 h gap left it
    from hour ~22 to ~135). Where the two trajectories are > 30° apart (winds
    that cannot connect the fixes, e.g. a pre-launch ground gap) the slice falls
-   back to the chord. Half-width `recon_half_deg` (9–20° by gap length). Pad velocity comes from the most recent
+   back to the chord. Box size: around short gaps the chord ± `recon_half_deg`
+   (9–20° by gap length); inside long gaps the 1–99 % extent of a pilot cloud
+   (120 particles with the smoother's own heading/speed perturbation, forward
+   from the first fix and backward from the second) ± 3°, capped at the
+   trajectories ± `recon_half_deg` — small near the fixes, wide mid-gap where
+   the forward cloud doesn't yet know the far fix. Pad velocity comes from the most recent
    **non-frozen, short-dt** fix pair (this fleet's GPS re-sends identical fixes,
    see the `stratolink-frozen-gps` memory note).
 6. **Write** both cubes as packed binary `.slwc` into `.windcube/cubes/`
