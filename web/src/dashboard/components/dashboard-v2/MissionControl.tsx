@@ -40,10 +40,13 @@ import CommunityPanel from './CommunityPanel';
 import FleetFilters from './FleetFilters';
 import { useCommunity } from './community-account';
 import { mergeRegisteredBalloons } from '@/lib/community/types';
-import { defaultFleetFilters, filterFleet, isPlannedBalloon } from '@/lib/telemetry/fleetFilters';
+import { defaultFleetFilters, filterFleet, isPlannedBalloon, readFleetFilters, saveFleetFilters } from '@/lib/telemetry/fleetFilters';
 import { forecastEligible, forecastViewFor } from '@/lib/telemetry/forecastEligibility';
 import { flightTrack } from '@/lib/telemetry/flightTrack';
 import { withLatestTelemetry } from '@/lib/telemetry/fleetSummary';
+import { useFleetReconstruction } from './useFleetReconstruction';
+import { reconstructedFlightTrack } from '@/lib/telemetry/reconstructedTrack';
+import { receivingStations } from '@/lib/telemetry/fleetPlayback';
 
 const V2MissionMap = lazy(() => import('./V2MissionMap'));
 
@@ -87,6 +90,7 @@ export default function MissionControlScreen() {
     /* As the homepage footer preview only the map is visible, so only the map is rendered; the panel and timeline
      * mount when the portal starts becoming the dashboard (they start hidden, then slide in). */
     const footerOnly = globeStage === 'footer';
+    const { showFlightTrail } = useDashboardControls();
     const searchParams = new URLSearchParams(window.location.search);
     const initialSelectedId = searchParams.get('device');
 
@@ -100,11 +104,23 @@ export default function MissionControlScreen() {
     const devices = useMemo(() => mergeRegisteredBalloons(registryDevices.map(device =>
         withLatestTelemetry(device, device.id === selectedId ? rows : fleetHistory.rowsByDevice[device.id]),
     ), community.balloons, community.user?.id), [registryDevices, community.balloons, community.user?.id, fleetHistory.rowsByDevice, selectedId, rows]);
-    const [filters, setFilters] = useState(defaultFleetFilters);
+    const [filters, setFilters] = useState(() => {
+        try { return readFleetFilters(localStorage); }
+        catch { return { ...defaultFleetFilters }; }
+    });
+    useEffect(() => {
+        try { saveFleetFilters(localStorage, filters); }
+        catch { /* Browser storage may be disabled. */ }
+    }, [filters]);
     useEffect(() => { if (community.revision) refetch(); }, [community.revision, refetch]);
-    useEffect(() => { if (!community.account) setFilters(current => ({...current,mine:false})); }, [community.account]);
-    const filteredDevices = useMemo(() => filterFleet(devices, filters, community.user?.id ?? null, Date.now()), [devices,filters,community.user?.id]);
+    const filteredDevices = useMemo(() => filterFleet(devices, { ...filters, mine: filters.mine && Boolean(community.user) }, community.user?.id ?? null, Date.now()), [devices,filters,community.user?.id]);
     const filteredIds = new Set(filteredDevices.map(device => device.id));
+    const fleetReconstruction = useFleetReconstruction(selectedId === null && !portalPreview && showFlightTrail
+        ? filteredDevices.filter(device => !isPlannedBalloon(device.status) && (fleetHistory.rowsByDevice[device.id]?.length ?? 0) > 1).map(device => device.id)
+        : []);
+    const fleetTracks = useMemo(() => Object.fromEntries(devices.map(device => [device.id,
+        reconstructedFlightTrack(flightTrack(fleetHistory.rowsByDevice[device.id] ?? []), fleetReconstruction[device.id] ?? []),
+    ])), [devices, fleetHistory.rowsByDevice, fleetReconstruction]);
 
     const [fleetScrubT, setFleetScrubT] = useState<number | null>(null);
     const transitionRef = useRef<ViewTransition | null>(null);
@@ -276,9 +292,12 @@ export default function MissionControlScreen() {
     const fleetLastT = useMemo(() => historyRange(fleetHistories)?.end ?? null, [fleetHistories]);
     const fleetRecorded = fleetLastT !== null && Date.now() - fleetLastT > 15 * 60_000;
     const fleetBalloons = useMemo<V2Balloon[]>(() => devices.flatMap(device => {
-        const position = mappedPosition(fleetHistory.rowsByDevice[device.id] ?? [], fleetScrubT);
+        const rows = fleetHistory.rowsByDevice[device.id] ?? [];
+        const position = mappedPosition(rows, fleetScrubT);
+        const point = fleetScrubT !== null ? lerpAlongTrack(fleetTracks[device.id] ?? [], fleetScrubT) : null;
+        if (position && point) { position.lon = ((point[0] + 180) % 360 + 360) % 360 - 180; position.lat = point[1]; }
         return position ? [{ id: device.id, ...position }] : [];
-    }), [devices, fleetHistory.rowsByDevice, fleetScrubT]);
+    }), [devices, fleetHistory.rowsByDevice, fleetTracks, fleetScrubT]);
     const fleetFitBalloons = useMemo<V2Balloon[]>(() => devices.flatMap(device => {
         const position = mappedPosition(fleetHistory.rowsByDevice[device.id] ?? [], null);
         return position ? [{ id: device.id, ...position }] : [];
@@ -356,6 +375,7 @@ export default function MissionControlScreen() {
                         fleetFitBalloons={portalPreview ? fleetFitBalloons : fleetFitBalloons.filter(balloon => filteredIds.has(balloon.id))}
                         fleetDevices={portalPreview ? devices : filteredDevices}
                         fleetHistory={fleetHistory.rowsByDevice}
+                        fleetTracks={fleetTracks}
                         fleetReady={!registryLoading && !fleetHistory.loading}
                         fleetCaption={fleetCaption}
                         onSelectBalloon={handleSelectDevice}
@@ -708,7 +728,7 @@ function ChartRow({ title, unit, color, rows, getY, scrubT, value, min, max }: {
  * Map column — coverage + 3-state flight path + forecast.
  * ────────────────────────────────────────────────────────────── */
 function MapColumn({
-    isFleet, fleetBalloons, fleetFitBalloons, fleetDevices, fleetHistory, fleetReady, fleetCaption, onSelectBalloon,
+    isFleet, fleetBalloons, fleetFitBalloons, fleetDevices, fleetHistory, fleetTracks, fleetReady, fleetCaption, onSelectBalloon,
     visibleRows,
     scrubRow,
     selectedDevice,
@@ -726,6 +746,7 @@ function MapColumn({
     fleetFitBalloons: V2Balloon[];
     fleetDevices: DeviceSummary[];
     fleetHistory: Record<string, TelemetryRow[]>;
+    fleetTracks: Record<string, V2FlightPoint[]>;
     fleetReady: boolean;
     fleetCaption: string;
     onSelectBalloon: (id: string) => void;
@@ -754,7 +775,7 @@ function MapColumn({
     const isMobile = useIsMobile();
     const globeStage = useGlobePortal();
     const portalPreview = globeStage === 'footer' || globeStage === 'entering';
-    const { showGateways, showReceivingStations, showDayNight, showFlightTrail, showProjectedPath } = useDashboardControls(!isFleet);
+    const { showGateways, showReceivingStations, showDayNight, showFlightTrail, showProjectedPath } = useDashboardControls();
     const trackPoints: V2FlightPoint[] = useMemo(() => flightTrack(visibleRows), [visibleRows]);
 
     /* The likely (reconstructed) path used to glide the balloon as you scrub.
@@ -866,18 +887,22 @@ function MapColumn({
      * OR inside a transmission gap — so we don't draw links to the last gateway
      * during a "No Connection" stretch. */
     const mapGateways: V2Gateway[] = useMemo(() => {
+        if (!showReceivingStations || portalPreview) return [];
+        if (isFleet) return fleetBalloons.flatMap(balloon => receivingStations(fleetHistory[balloon.id] ?? [], scrubT)
+            .map(g => ({ balloonId: balloon.id, gateway_id: g.gateway_id, lat: g.lat as number, lon: g.lon as number, rssi: g.rssi, snr: g.snr })));
         const list = noReading ? null : (scrubRow?.gateways ?? null);
         if (!list) return [];
         return list
             .filter(g => g.lat !== null && g.lon !== null)
             .map(g => ({ gateway_id: g.gateway_id, lat: g.lat as number, lon: g.lon as number, rssi: g.rssi, snr: g.snr }));
-    }, [scrubRow, noReading]);
+    }, [scrubRow, noReading, isFleet, fleetBalloons, fleetHistory, scrubT, showReceivingStations, portalPreview]);
 
     /* Whether this flight ever reported a receiver — constant across scrubbing,
      * so the legend stays stable even where no receiver is currently drawn. */
     const flightHasGateways = useMemo(
-        () => visibleRows.some(r => (r.gateways?.length ?? 0) > 0),
-        [visibleRows],
+        () => isFleet ? fleetDevices.some(device => (fleetHistory[device.id] ?? []).some(row => (row.gateways?.length ?? 0) > 0))
+            : visibleRows.some(r => (r.gateways?.length ?? 0) > 0),
+        [visibleRows, isFleet, fleetDevices, fleetHistory],
     );
 
     /* Connector from the last real fix to the dead-reckoned "now". Prefer the
@@ -896,8 +921,8 @@ function MapColumn({
     const fleetPaths = useMemo(() => fleetDevices.map(device => ({
         deviceId: device.id,
         color: balloonColor(device.id),
-        points: flightTrack(fleetHistory[device.id] ?? []),
-    })), [fleetDevices, fleetHistory]);
+        points: fleetTracks[device.id] ?? [],
+    })), [fleetDevices, fleetTracks]);
 
     return (
         <div style={{ flex: 1, position: 'relative', minHeight: 0, minWidth: 0, overflow: 'hidden' }}>
@@ -986,7 +1011,8 @@ function lerpAlongTrack(track: V2FlightPoint[], t: number): [number, number] | n
         const b = track[i];
         if (t <= b.t) {
             const f = (t - a.t) / ((b.t - a.t) || 1);
-            return [a.lon + (b.lon - a.lon) * f, a.lat + (b.lat - a.lat) * f];
+            const deltaLon = ((b.lon - a.lon + 180) % 360 + 360) % 360 - 180;
+            return [a.lon + deltaLon * f, a.lat + (b.lat - a.lat) * f];
         }
     }
     return [last.lon, last.lat];

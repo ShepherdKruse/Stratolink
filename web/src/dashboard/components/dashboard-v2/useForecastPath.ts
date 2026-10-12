@@ -14,6 +14,7 @@
  */
 import { useEffect, useState } from 'react';
 import { forecastRequests, type ForecastView } from '@/lib/telemetry/forecastRequests';
+import { cleanReconstructedTrack } from '@/lib/telemetry/reconstructedTrack';
 
 /** [lon, lat] pairs, forecast origin → predicted endpoint. */
 export type ForecastPath = Array<[number, number]>;
@@ -92,26 +93,6 @@ export function cleanPath(raw: unknown): ForecastPath {
     );
 }
 
-/** Parse the timed reconstructed track ({ lon, lat, time_utc }) into points
- *  with epoch-ms timestamps, dropping anything malformed. */
-function cleanTrack(raw: unknown): HindcastTrackPoint[] {
-    if (!Array.isArray(raw)) return [];
-    const out: HindcastTrackPoint[] = [];
-    for (const p of raw as Array<{ lon?: unknown; lat?: unknown; time_utc?: unknown }>) {
-        if (!p || typeof p !== 'object') continue;
-        const { lon, lat } = p;
-        const t = typeof p.time_utc === 'string' ? Date.parse(p.time_utc) : NaN;
-        if (
-            typeof lon === 'number' && typeof lat === 'number' &&
-            Number.isFinite(lon) && Number.isFinite(lat) &&
-            Math.abs(lat) <= 90 && Number.isFinite(t)
-        ) {
-            out.push({ lon, lat, t });
-        }
-    }
-    return out;
-}
-
 /** Parse the forecast's `divergence` block (predictability-horizon termination),
  *  or null if absent/malformed. Longitude is kept as-is (may be unwrapped). */
 function parseDivergence(raw: unknown): UseForecastPathResult['divergence'] {
@@ -177,7 +158,7 @@ export function useForecastPath(deviceId: string | null, view: Exclude<ForecastV
                 ensemble,
                 ellipses,
                 hindcastPath: cleanPath(data?.observed?.reconstructed_path),
-                hindcastTrack: cleanTrack(data?.observed?.reconstructed_track),
+                hindcastTrack: cleanReconstructedTrack(data?.observed?.reconstructed_track),
                 predictedHindcast: cleanPath(data?.predicted_hindcast?.path),
                 staleGps: Boolean(data?.stale_gps),
                 coverageLimited: Boolean(data?.stale_gps?.coverage_limited),

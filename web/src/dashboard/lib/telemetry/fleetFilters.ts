@@ -30,3 +30,25 @@ export function filterFleet<T extends DeviceSummary>(devices: T[], filters: Flee
 export function registeredStatus(status: string): string | null {
     return ({landed:'Landed', recovered:'Landed', missing:'Missing', lost:'Missing', retired:'Retired', storage:'Planned', idle:'Planned', planned:'Planned'} as Record<string,string>)[status.toLowerCase()] ?? null;
 }
+
+type PreferenceStorage = Pick<Storage, 'getItem' | 'setItem'>;
+const FILTER_KEY = 'stratolink-dashboard-filters';
+
+export function readFleetFilters(storage: PreferenceStorage): FleetFilters {
+    const filters = { ...defaultFleetFilters };
+    try {
+        const saved = JSON.parse(storage.getItem(FILTER_KEY) ?? 'null');
+        if (!saved || typeof saved !== 'object') return filters;
+        if (typeof saved.query === 'string') filters.query = saved.query;
+        if (['alphabetical', 'newest', 'oldest'].includes(saved.sort)) filters.sort = saved.sort;
+        for (const key of ['active', 'inactive', 'planned', 'mine'] as const) {
+            if (typeof saved[key] === 'boolean') filters[key] = saved[key];
+        }
+    } catch { /* Storage may be unavailable or contain an older value. */ }
+    return filters;
+}
+
+export function saveFleetFilters(storage: PreferenceStorage, filters: FleetFilters) {
+    try { storage.setItem(FILTER_KEY, JSON.stringify(filters)); }
+    catch { /* Keep filtering in memory when storage is unavailable. */ }
+}

@@ -9,7 +9,7 @@ import { useDashboardControls } from './dashboard-controls';
 export default function DashboardHeader({ onBack }: { onBack?: (animate?: boolean) => void }) {
     const community = useCommunity();
     const { theme, setTheme } = useDashboardTheme();
-    const controls = useDashboardControls(Boolean(onBack));
+    const controls = useDashboardControls();
     const menuId = useId();
     const themeName = useId();
     const trigger = useRef<HTMLButtonElement>(null);
@@ -116,18 +116,18 @@ export default function DashboardHeader({ onBack }: { onBack?: (animate?: boolea
                         <input type="checkbox" role="switch" checked={controls.showGateways} onChange={(event) => controls.setShowGateways(event.target.checked)} />
                         <span className="dashboard-switch-track" aria-hidden />
                     </label>
-                    {onBack && <label className="dashboard-layer-option">
+                    <label className="dashboard-layer-option">
                         Receiving ground stations
                         <input type="checkbox" role="switch" checked={controls.showReceivingStations} onChange={event => controls.setShowReceivingStations(event.target.checked)} />
                         <span className="dashboard-switch-track" aria-hidden />
-                    </label>}
+                    </label>
                     <label className="dashboard-layer-option">
                         Day and night
                         <input type="checkbox" role="switch" checked={controls.showDayNight} onChange={(event) => controls.setShowDayNight(event.target.checked)} />
                         <span className="dashboard-switch-track" aria-hidden />
                     </label>
                     <label className="dashboard-layer-option">
-                        {onBack ? 'Flight paths' : 'Flight tails'}
+                        Flight paths
                         <input type="checkbox" role="switch" checked={controls.showFlightTrail} onChange={(event) => controls.setShowFlightTrail(event.target.checked)} />
                         <span className="dashboard-switch-track" aria-hidden />
                     </label>

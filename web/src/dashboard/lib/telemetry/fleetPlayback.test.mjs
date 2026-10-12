@@ -147,3 +147,16 @@ test('planned launches and bench packets never appear in the homepage flight pre
     assert.deepEqual(previewFleet(plans,rows,2_000_000),[]);
     assert.equal(fleetActivity(plans,rows,2_000_000).active,0);
 });
+
+test('fleet reception uses each balloon packet and hides stale links during a replay gap', async () => {
+    const { receivingStations } = await import('./fleetPlayback.ts');
+    const gateway = { gateway_id: 'receiver', lat: 10, lon: 20, rssi: -100, snr: 2 };
+    const unknown = { ...gateway, gateway_id: 'unlocated', lat: null };
+    const rows = [0, 1, 2, 20].map(t => ({ t: t * 60_000, gateways: [gateway, unknown] }));
+    assert.deepEqual(receivingStations(rows, null), [gateway]);
+    assert.deepEqual(receivingStations(rows, 60_000), [gateway]);
+    assert.deepEqual(receivingStations(rows, 10 * 60_000), []);
+    assert.deepEqual(receivingStations(rows, -1), []);
+    assert.deepEqual(receivingStations(rows, 100 * 60_000), [gateway]);
+    assert.deepEqual(receivingStations([], null), []);
+});
