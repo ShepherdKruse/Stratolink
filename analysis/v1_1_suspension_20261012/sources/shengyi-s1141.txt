@@ -1,0 +1,125 @@
+EN/CN
+Home
+About SYTECH
+Products and Markets
+Quality & certification
+R&D
+Contact US
+Product
+Home > Flexible Materials > Stiffener
+S1141
+Characteristic
+
+
+
+
+●  Tg 140℃（DSC）
+
+●  UV Blocking/AOI Compatible.
+
+●  Excellent mechanicalprocessability
+
+
+
+
+Application Area
+
+Computer,instrumentation,VCR,communicationequipment,electronic game machine, and etc..
+
+Not suitable for anti-caf application.Not suitable for＞2OZ heavy copper,HDI and ≥12L high layer countapplication.
+
+Product Performance
+Product Certificate
+Data Download
+Items	Method	Condition	Unit	Typical Value
+Tg	IPC-TM-650 2.4.25	DSC	℃	140
+Td	IPC-TM-650 2.4.24.6	5% wt. loss	℃	310
+CTE（Z-axis）	IPC-TM-650 2.4.24	Before Tg	ppm/℃	65
+After Tg	ppm/℃	300
+50-260℃	%	4.5
+CTE（X/Y-axis）	IPC-TM-650 2.4.24.5	Before Tg	ppm/℃	—
+T260	IPC-TM-650 2.4.24.1	TMA	min	15
+T288	IPC-TM-650 2.4.24.1	TMA	min	2
+Thermal Stress	IPC-TM-650 2.4.24.13	288℃, solder dip	--
+
+60S  No Delamination
+
+
+Volume Resistivity	IPC-TM-650 2.5.17.1	After moisture resistance	MΩ-cm	5.2×108
+E-24/125	MΩ-cm	5.2×106
+Surface Resistivity	IPC-TM-650 2.5.17.1	After moisture resistance	MΩ	5.4×107
+E-24/125	MΩ	5.6×106
+Arc Resistance	IPC-TM-650 2.5.1	D-48/50+D-4/23	s	120
+Dielectric Breakdown	IPC-TM-650 2.5.6	D-48/50+D-4/23	kV	60
+Electrical Strength	IPC-TM-650 2.5.6.2	D-48/50+D-4/23	kV/mm	—
+Dissipation Constant (Dk)	IPC-TM-650 2.5.5.9	1MHz	--	4.6
+Dissipation Factor (Df)	IPC-TM-650 2.5.5.9	1MHz	--	0.015
+Peel Strength(1Oz HTE copper foil)	IPC-TM-650 2.4.8	A	N/mm	—
+After thermal Stress 288℃,10s	N/mm	1.8
+125℃	N/mm	1.6
+Flexural Strength	LW	IPC-TM-650 2.4.4	A	MPa	600
+CW	IPC-TM-650 2.4.4	A	MPa	500
+Water Absorption	IPC-TM-650 2.6.2.1	E-1/105+D24/23	%	0.15
+Thermal Conductivity	ASTM E1461	Z-axis	W/m·K	—
+CTI	IEC60112	A	Rating	PLC 3
+Flammability	UL94	C-48/23/50	Rating	V-0
+E-24/125	Rating	V-0
+
+
+Remarks:
+
+
+
+
+1. Specification sheet: IPC-4101/21, is for your reference only.
+
+2. All the typical value is based on the 1.6mm specimen,while the Tg is for specimen≥0.50mm.
+
+3. All the typical value listed above is for your reference only,please turn to Shengyi Technology Co., Ltd. for detailed information, and all rights from this data sheet are reserved by Shengyi Technology Co., Ltd.
+
+Explanations: C=Humidity conditioning, D=Immersion conditioning in distilled water, E=Temperature conditioning.
+
+The figures following the letter symbols indicate with the first digit the duration of the preconditioning in hours, with the second digit the preconditioning temperature in ℃ and with the third digit the relative humidity.
+
+
+
+
+About SYTECH
+Group Introduction
+SYTECH Value
+Group Main Business
+News
+SUSTAINABILITY
+Integrity and Compliance
+Products and Markets
+All
+Smart Terminal
+Rigid Materials
+RF Materials
+Automotive Materials
+Flexible Materials
+IC Substrate Materials
+IMS and HTC materials
+Special Materials
+HSD Materials
+Quality & certification
+Quality Management
+System Certification
+Safety
+R&D
+Engineering Research Center
+CNAS Lab
+CTDP Lab
+Contact US
+Production Base
+Sales Network
+Sytech Sky
+QQ
+WeChat
+Weibo
+Link
+Legal
+Site Map
+Business collaboration
+
+Copyright © 2018 SHENGYI TECHNOLOGY CO., LTD. 粤ICP备13085066-1号 Designed by Wanhu

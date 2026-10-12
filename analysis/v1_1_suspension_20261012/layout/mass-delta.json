@@ -1,0 +1,125 @@
+{
+  "baseline_sha256": "99b82f31a5d05c019d3fb6d592c06a0d6cca1eb3affc285cbdfb4bd7702550e0",
+  "candidate_sha256": "82926d9dfc728dca41c9d0970c69a5144fb9079380a298337381c199698f80f4",
+  "baseline_commit": "a9d6ed5",
+  "scope": "All nominal bare-board substrate, complete native planar copper union, actual native mask-opening geometry and assumed plated barrels. No components, solder, surface finish or string.",
+  "assumptions": {
+    "board_thickness_mm": 0.4,
+    "core_thickness_mm": 0.31,
+    "copper_each_face_mm": 0.035,
+    "mask_each_face_mm": 0.01,
+    "FR4_density_g_cm3": 1.9,
+    "copper_density_g_cm3": 8.96,
+    "mask_density_g_cm3": 1.4,
+    "barrel_radial_thickness_mm": 0.02,
+    "barrel_core_height_mm": 0.31,
+    "plating_accounting": "Finished holes expanded by assumed plating thickness for FR4 removal; barrels restore copper in that oversize annulus across core height. The face-layer annulus is already counted in planar copper, avoiding double count.",
+    "provenance": "Thicknesses are the CAD stackup; densities and barrel thickness are engineering assumptions, not delivered-board measurements."
+  },
+  "baseline_areas": {
+    "outline_area_mm2": 1318.1137337918592,
+    "finished_opening_subtracted_area_mm2": 1300.3214367419946,
+    "core_area_after_assumed_oversize_drill_mm2": 1296.689756051528,
+    "copper_mm2": {
+      "F.Cu": 626.9019937153465,
+      "B.Cu": 779.6093395425852
+    },
+    "mask_mm2": {
+      "F.Mask": 1156.6368479121704,
+      "B.Mask": 1225.7767385589254
+    },
+    "barrel_cross_section_mm2": 3.63168069049116
+  },
+  "candidate_areas": {
+    "outline_area_mm2": 1329.573437187347,
+    "finished_opening_subtracted_area_mm2": 1305.49795729446,
+    "core_area_after_assumed_oversize_drill_mm2": 1301.6124359432108,
+    "copper_mm2": {
+      "F.Cu": 642.1673270774705,
+      "B.Cu": 794.9441109166638
+    },
+    "mask_mm2": {
+      "F.Mask": 1152.077660257446,
+      "B.Mask": 1221.217550904201
+    },
+    "barrel_cross_section_mm2": 3.885521351273991
+  },
+  "baseline_mass_parts_mg": {
+    "FR4_mg": 763.75026631435,
+    "planar_copper_mg": 441.08195410968744,
+    "mask_mg": 33.35379021059534,
+    "barrel_copper_core_height_mg": 10.087356285908246
+  },
+  "candidate_mass_parts_mg": {
+    "FR4_mg": 766.6497247705511,
+    "planar_copper_mg": 450.6781469549606,
+    "mask_mg": 33.22613295626306,
+    "barrel_copper_core_height_mg": 10.792424105298638
+  },
+  "baseline_mass_mg": 1248.273366920541,
+  "candidate_mass_mg": 1261.3464287870734,
+  "delta_parts_mg": {
+    "FR4_mg": 2.899458456201046,
+    "planar_copper_mg": 9.596192845273151,
+    "mask_mg": -0.12765725433228425,
+    "barrel_copper_core_height_mg": 0.7050678193903916
+  },
+  "delta_total_mg": 13.073061866532305,
+  "added_copper_outside_3p2mm_pad_discs_mm2": {
+    "F.Cu": 5.465378879769816,
+    "B.Cu": 5.533430628937726
+  },
+  "added_copper_outside_3p2mm_pad_discs_mg": 3.4492266619306857,
+  "sensitivity": [
+    {
+      "FR4_density_g_cm3": 1.8,
+      "barrel_radial_thickness_mm": 0.015,
+      "delta_mg": 12.77855664577396
+    },
+    {
+      "FR4_density_g_cm3": 1.8,
+      "barrel_radial_thickness_mm": 0.02,
+      "delta_mg": 12.92045878989029
+    },
+    {
+      "FR4_density_g_cm3": 1.8,
+      "barrel_radial_thickness_mm": 0.025,
+      "delta_mg": 13.063058241638373
+    },
+    {
+      "FR4_density_g_cm3": 1.9,
+      "barrel_radial_thickness_mm": 0.015,
+      "delta_mg": 12.933141595937286
+    },
+    {
+      "FR4_density_g_cm3": 1.9,
+      "barrel_radial_thickness_mm": 0.02,
+      "delta_mg": 13.07306186653227
+    },
+    {
+      "FR4_density_g_cm3": 1.9,
+      "barrel_radial_thickness_mm": 0.025,
+      "delta_mg": 13.213669705826078
+    },
+    {
+      "FR4_density_g_cm3": 2.0,
+      "barrel_radial_thickness_mm": 0.015,
+      "delta_mg": 13.087726546100612
+    },
+    {
+      "FR4_density_g_cm3": 2.0,
+      "barrel_radial_thickness_mm": 0.02,
+      "delta_mg": 13.225664943174706
+    },
+    {
+      "FR4_density_g_cm3": 2.0,
+      "barrel_radial_thickness_mm": 0.025,
+      "delta_mg": 13.364281170013555
+    }
+  ],
+  "limitations": [
+    "Copper outlines are KiCad polygon approximations. Original circular routed holes were reconstituted at4096segments for accurate area difference; outside profile is identical in both.",
+    "Mask mass uses native mask-opening polygons clipped to nominal substrate, not a fixed mask coverage fraction.",
+    "No ENIG/HASL finish, ink, solder or actual production-thickness tolerance has been assigned. This is a nominal design mass estimate, not measured mass."
+  ]
+}

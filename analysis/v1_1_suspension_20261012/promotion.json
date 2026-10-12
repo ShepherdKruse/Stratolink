@@ -1,0 +1,18 @@
+{
+  "status": "pass",
+  "baseline": "a9d6ed59ebd9ca6a4e04108afe0bbe3a827cddde",
+  "branch": "alpha/hardware-v1.1",
+  "promoted_byte_exact": true,
+  "hashes": {
+    "hardware/pcb/stratolink.kicad_pcb": "82926d9dfc728dca41c9d0970c69a5144fb9079380a298337381c199698f80f4",
+    "hardware/pcb/lib/Suspension_PTH_D2p0_OD3p2.kicad_mod": "2f71d16ba89940b2e21f46e35e96a71f7ff660adaaff82485ed805de143c9ca1",
+    "hardware/pcb/stratolink.kicad_sch": "20f0d465521daaa088e171e174108644069755c4067b28239657019266088bc4",
+    "hardware/pcb/stratolink.kicad_pro": "5dd65b15408657138b37fb9ee274f0798e96aadb4092f4e799c61d03bece1786"
+  },
+  "unrelated_tracked_paths_preserved": 100,
+  "drc_counts": [
+    70,
+    0,
+    11
+  ]
+}

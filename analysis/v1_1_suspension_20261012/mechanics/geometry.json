@@ -1,0 +1,26 @@
+{
+  "commit": "a9d6ed5",
+  "board_sha256": "99b82f31a5d05c019d3fb6d592c06a0d6cca1eb3affc285cbdfb4bd7702550e0",
+  "holes": [
+    {
+      "center_mm": [
+        55.665,
+        31.745
+      ],
+      "radius_mm": 1.3505069418555404
+    },
+    {
+      "center_mm": [
+        74.327,
+        31.745
+      ],
+      "radius_mm": 1.3505069418555475
+    }
+  ],
+  "corner_radius_mm": 2.3480000000000025,
+  "top_edge_y_mm": 29.397,
+  "half_spacing_mm": 9.331,
+  "finished_thickness_mm": 0.4,
+  "FR4_core_mm": 0.31,
+  "foil_each_face_mm": 0.035
+}

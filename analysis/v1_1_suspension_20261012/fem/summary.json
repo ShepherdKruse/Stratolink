@@ -1,0 +1,96 @@
+{
+  "source_board_sha256": "99b82f31a5d05c019d3fb6d592c06a0d6cca1eb3affc285cbdfb4bd7702550e0",
+  "E_MPa": 20000.0,
+  "poisson": 0.17,
+  "core_thickness_mm": 0.31,
+  "ratios": [
+    {
+      "spacing_mm": 0.22,
+      "cut_y_mm": 42,
+      "apex_height_mm": 20,
+      "current_contact_half_angle_deg": 60.0,
+      "selected_contact_half_angle_deg": 60.0,
+      "compliance_ratio_selected_current": 0.930181857743783,
+      "band_stress_ratio_selected_current": 1.013570904124118
+    },
+    {
+      "spacing_mm": 0.15,
+      "cut_y_mm": 42,
+      "apex_height_mm": 20,
+      "current_contact_half_angle_deg": 60.0,
+      "selected_contact_half_angle_deg": 60.0,
+      "compliance_ratio_selected_current": 0.9284963612715744,
+      "band_stress_ratio_selected_current": 1.016039754735217
+    },
+    {
+      "spacing_mm": 0.1,
+      "cut_y_mm": 42,
+      "apex_height_mm": 20,
+      "current_contact_half_angle_deg": 60.0,
+      "selected_contact_half_angle_deg": 60.0,
+      "compliance_ratio_selected_current": 0.9279855606908142,
+      "band_stress_ratio_selected_current": 1.0086016299582372
+    },
+    {
+      "spacing_mm": 0.15,
+      "cut_y_mm": 40,
+      "apex_height_mm": 20,
+      "current_contact_half_angle_deg": 60.0,
+      "selected_contact_half_angle_deg": 60.0,
+      "compliance_ratio_selected_current": 0.9210039797721284,
+      "band_stress_ratio_selected_current": 1.004470818369982
+    },
+    {
+      "spacing_mm": 0.15,
+      "cut_y_mm": 46,
+      "apex_height_mm": 20,
+      "current_contact_half_angle_deg": 60.0,
+      "selected_contact_half_angle_deg": 60.0,
+      "compliance_ratio_selected_current": 0.935592265034183,
+      "band_stress_ratio_selected_current": 1.0076802178559205
+    },
+    {
+      "spacing_mm": 0.15,
+      "cut_y_mm": 42,
+      "apex_height_mm": 10,
+      "current_contact_half_angle_deg": 60.0,
+      "selected_contact_half_angle_deg": 60.0,
+      "compliance_ratio_selected_current": 0.9738403489345039,
+      "band_stress_ratio_selected_current": 1.031785503811648
+    },
+    {
+      "spacing_mm": 0.15,
+      "cut_y_mm": 42,
+      "apex_height_mm": 80,
+      "current_contact_half_angle_deg": 60.0,
+      "selected_contact_half_angle_deg": 60.0,
+      "compliance_ratio_selected_current": 0.8860421446619555,
+      "band_stress_ratio_selected_current": 0.9822646517051421
+    },
+    {
+      "spacing_mm": 0.1,
+      "cut_y_mm": 42,
+      "apex_height_mm": 20,
+      "current_contact_half_angle_deg": 20,
+      "selected_contact_half_angle_deg": 20,
+      "compliance_ratio_selected_current": 0.9609203837311036,
+      "band_stress_ratio_selected_current": 1.0894630430413672
+    },
+    {
+      "spacing_mm": 0.1,
+      "cut_y_mm": 42,
+      "apex_height_mm": 20,
+      "current_contact_half_angle_deg": 12.72761606860613,
+      "selected_contact_half_angle_deg": 16.88480732212642,
+      "compliance_ratio_selected_current": 0.9148054571439077,
+      "band_stress_ratio_selected_current": 1.08174402088345
+    }
+  ],
+  "limitations": [
+    "Isotropic plane stress membrane; no laminate anisotropy, copper, plating, wear, cold, solder, or nonlinear string contact.",
+    "Fixed lower cut is a sensitivity assumption; the assembled load distribution is unmeasured.",
+    "Smooth +/-60 degree bore contact loading; local peaks are not strength allowables.",
+    "Other drill holes in modeled region retained, copper routing omitted.",
+    "Source KiCad faceted outline and polygonized holes; comparative compliance only."
+  ]
+}

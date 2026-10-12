@@ -1,0 +1,98 @@
+{
+  "status": "pass",
+  "baseline": "a9d6ed5",
+  "candidate": "/Users/twarn/Repositories/ai-working/scratch/stratolink-suspension-pth/candidate",
+  "hashes": {
+    "/Users/twarn/Repositories/ai-working/scratch/stratolink-suspension-pth/candidate/stratolink.kicad_pcb": "82926d9dfc728dca41c9d0970c69a5144fb9079380a298337381c199698f80f4",
+    "/Users/twarn/Repositories/ai-working/scratch/stratolink-suspension-pth/candidate/stratolink.kicad_sch": "20f0d465521daaa088e171e174108644069755c4067b28239657019266088bc4",
+    "/Users/twarn/Repositories/Stratolink/hardware/pcb/stratolink.kicad_pcb": "99b82f31a5d05c019d3fb6d592c06a0d6cca1eb3affc285cbdfb4bd7702550e0"
+  },
+  "retained_exact_footprints": 59,
+  "tracks_unchanged": 879,
+  "track_arcs_unchanged": 3,
+  "vias_unchanged": 142,
+  "removed_circle_uuids": [
+    "107f8202-1fe1-4511-99bb-472b3941de6c",
+    "d8863d69-e0c5-455b-8892-eb88fd120483"
+  ],
+  "schematic_byte_identical": true,
+  "project_byte_identical": true,
+  "physical_existing_pad_connectivity_checks": 230,
+  "ground_connectivity": {
+    "H2.1": {
+      "original_GND_nodes_reached": 67,
+      "all_GND_nodes_including_H1_H2": 69
+    },
+    "H1.1": {
+      "original_GND_nodes_reached": 67,
+      "all_GND_nodes_including_H1_H2": 69
+    }
+  },
+  "native_opens": 0,
+  "outline_before": {
+    "valid": true,
+    "outline_count": 1,
+    "hole_count": 2,
+    "net_area_mm2": 1318.127614072201,
+    "bounds_mm": [
+      53.316,
+      29.397,
+      76.676,
+      86.695
+    ]
+  },
+  "outline_after": {
+    "valid": true,
+    "outline_count": 1,
+    "hole_count": 0,
+    "net_area_mm2": 1329.573437187347,
+    "bounds_mm": [
+      53.316,
+      29.397,
+      76.676,
+      86.695
+    ]
+  },
+  "drc": {
+    "project": {
+      "violations": {
+        "before": 70,
+        "after": 70,
+        "added": [],
+        "removed": []
+      },
+      "unconnected_items": {
+        "before": 0,
+        "after": 0,
+        "added": [],
+        "removed": []
+      },
+      "schematic_parity": {
+        "before": 11,
+        "after": 11,
+        "added": [],
+        "removed": []
+      }
+    },
+    "diagnostic": {
+      "violations": {
+        "before": 83,
+        "after": 83,
+        "added": [],
+        "removed": []
+      },
+      "unconnected_items": {
+        "before": 0,
+        "after": 0,
+        "added": [],
+        "removed": []
+      },
+      "schematic_parity": {
+        "before": 11,
+        "after": 11,
+        "added": [],
+        "removed": []
+      }
+    }
+  }
+}

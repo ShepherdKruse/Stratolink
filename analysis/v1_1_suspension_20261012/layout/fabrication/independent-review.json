@@ -1,0 +1,122 @@
+{
+  "status": "pass",
+  "candidate_sha256": "82926d9dfc728dca41c9d0970c69a5144fb9079380a298337381c199698f80f4",
+  "kicad": "10.0.0",
+  "candidate_unchanged": true,
+  "mounts": [
+    {
+      "ref": "H2",
+      "at_mm": [
+        74.327,
+        31.745
+      ],
+      "drill_mm": 2.0,
+      "copper_OD_mm": 3.2,
+      "nominal_annulus_mm": 0.6,
+      "front_back_mask_OD_mm": 3.2,
+      "original_ground_nodes": 67,
+      "all_ground_nodes": 69
+    },
+    {
+      "ref": "H1",
+      "at_mm": [
+        55.665,
+        31.745
+      ],
+      "drill_mm": 2.0,
+      "copper_OD_mm": 3.2,
+      "nominal_annulus_mm": 0.6,
+      "front_back_mask_OD_mm": 3.2,
+      "original_ground_nodes": 67,
+      "all_ground_nodes": 69
+    }
+  ],
+  "PTH_hit_count": 167,
+  "NPTH_hit_count": 3,
+  "remaining_NPTH_hits": [
+    {
+      "x": 57.764,
+      "y": 83.688,
+      "diameter": 0.991
+    },
+    {
+      "x": 62.844,
+      "y": 84.704,
+      "diameter": 0.991
+    },
+    {
+      "x": 62.844,
+      "y": 82.672,
+      "diameter": 0.991
+    }
+  ],
+  "plated_top_holes_present": true,
+  "old_top_routed_cutouts_absent": true,
+  "outline_count": 1,
+  "internal_routed_holes": 0,
+  "mask_copper_and_paste_flashes": {
+    "F_Cu.gtl": [
+      {
+        "ref": "H2",
+        "command": "X74327000Y-31745000D03*",
+        "diameter": 3.2
+      },
+      {
+        "ref": "H1",
+        "command": "X55665000Y-31745000D03*",
+        "diameter": 3.2
+      }
+    ],
+    "B_Cu.gbl": [
+      {
+        "ref": "H2",
+        "command": "X74327000Y-31745000D03*",
+        "diameter": 3.2
+      },
+      {
+        "ref": "H1",
+        "command": "X55665000Y-31745000D03*",
+        "diameter": 3.2
+      }
+    ],
+    "F_Mask.gts": [
+      {
+        "ref": "H2",
+        "command": "X74327000Y-31745000D03*",
+        "diameter": 3.2
+      },
+      {
+        "ref": "H1",
+        "command": "X55665000Y-31745000D03*",
+        "diameter": 3.2
+      }
+    ],
+    "B_Mask.gbs": [
+      {
+        "ref": "H2",
+        "command": "X74327000Y-31745000D03*",
+        "diameter": 3.2
+      },
+      {
+        "ref": "H1",
+        "command": "X55665000Y-31745000D03*",
+        "diameter": 3.2
+      }
+    ],
+    "F_Paste.gtp": [],
+    "B_Paste.gbp": []
+  },
+  "no_excellon_slots": true,
+  "native_opens": 0,
+  "export_sha256": {
+    "stratolink-B_Mask.gbs": "63a3c496fd3d1a24e397296b7adfc56db2754f6571d95df03fb3d0c5fddf74cd",
+    "stratolink-PTH.drl": "5893184a48ec7a49a0f5996ff3279c5ba28ef5bc7810153772637f0ae70fcfc4",
+    "stratolink-B_Paste.gbp": "710a5b586fc096b1a1a19fd497e9b16b937a5c6ddb8724ffff00c4eef0e453af",
+    "stratolink-Edge_Cuts.gm1": "96aedb9a6370947b966cfc0ba86b5c093b72de7e39e8b7689e524c94fbac2575",
+    "stratolink-F_Mask.gts": "c44fede2769b8a83d5c18cc80461925cc0cebe1e049260b4c9179d31aa2670d6",
+    "stratolink-F_Paste.gtp": "1070156891e33b2f5d2c0a1b1d7d852c5075adc00cec1ca7ae2a94f418bef33a",
+    "stratolink-B_Cu.gbl": "3882886b3dc3c5a8ab39d37482bb104886c3c14a4cf89804a51183f013b5f73c",
+    "stratolink-F_Cu.gtl": "9eaeddc39c5798012d9c458620511f3093ec24edbaaeca6828e7fa2a342a2e0c",
+    "stratolink-NPTH.drl": "ed78fc09f20a417df2aa4ccb3d1edd6b7806d725d46bc56cc8581e0118091b64"
+  }
+}

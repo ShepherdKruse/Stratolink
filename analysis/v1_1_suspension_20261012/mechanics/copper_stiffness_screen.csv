@@ -1,0 +1,4 @@
+assumed_FR4_modulus_MPa,bare_core_EI_per_unit_width_Nmm,bonded_full_two_face_Cu_EI_per_unit_width_Nmm,ideal_local_stiffness_ratio,bare_core_extensional_rigidity_N_per_mm,bonded_full_two_face_extensional_rigidity_N_per_mm,ideal_local_extensional_stiffness_ratio,scope
+15000,37.238749999999996,267.1479166666666,7.173922773097019,4650.0,12350.0,2.6559139784946235,Upper comparison only: perfectly bonded continuous full-width skins; real ring and existing copper differ
+20000,49.651666666666664,279.5608333333333,5.630442079822765,6200.0,13900.0,2.2419354838709675,Upper comparison only: perfectly bonded continuous full-width skins; real ring and existing copper differ
+25000,62.06458333333333,291.97375,4.704353663858212,7750.0,15450.0,1.9935483870967743,Upper comparison only: perfectly bonded continuous full-width skins; real ring and existing copper differ

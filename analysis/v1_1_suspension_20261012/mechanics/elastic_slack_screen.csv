@@ -1,0 +1,10 @@
+payload_mass_g,assumed_effective_spring_N_per_m,initial_slack_fall_m,ideal_peak_force_N,peak_over_static_weight,scope
+20,1,0.01,0.40202329527639225,2.0497483609407507,Linear undamped initially unextended equivalent spring; not a characterized user bridle
+20,1,0.05,0.4371339412616474,2.228762835737216,Linear undamped initially unextended equivalent spring; not a characterized user bridle
+20,1,0.1,0.4748707866185351,2.4211672009225125,Linear undamped initially unextended equivalent spring; not a characterized user bridle
+20,10,0.01,0.4748707866185351,2.4211672009225125,Linear undamped initially unextended equivalent spring; not a characterized user bridle
+20,10,0.05,0.6804894324843844,3.4695305353223804,Linear undamped initially unextended equivalent spring; not a characterized user bridle
+20,10,0.1,0.8524364006379976,4.346216091315575,Linear undamped initially unextended equivalent spring; not a characterized user bridle
+20,100,0.01,0.8524364006379976,4.346216091315575,Linear undamped initially unextended equivalent spring; not a characterized user bridle
+20,100,0.05,1.6102751971248153,8.210118629322018,Linear undamped initially unextended equivalent spring; not a characterized user bridle
+20,100,0.1,2.1863913133073454,11.147493350468027,Linear undamped initially unextended equivalent spring; not a characterized user bridle

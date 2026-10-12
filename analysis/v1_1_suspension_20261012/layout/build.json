@@ -1,0 +1,24 @@
+{
+  "baseline": "a9d6ed5",
+  "candidate": "/Users/twarn/Repositories/ai-working/scratch/stratolink-suspension-pth/candidate",
+  "removed_edge_circles": [
+    {
+      "uuid": "107f8202-1fe1-4511-99bb-472b3941de6c",
+      "center_mm": [
+        55.665,
+        31.745
+      ],
+      "radius_mm": 1.350507
+    },
+    {
+      "uuid": "d8863d69-e0c5-455b-8892-eb88fd120483",
+      "center_mm": [
+        74.327,
+        31.745
+      ],
+      "radius_mm": 1.350507
+    }
+  ],
+  "canonical_unchanged_sha256": "99b82f31a5d05c019d3fb6d592c06a0d6cca1eb3affc285cbdfb4bd7702550e0",
+  "candidate_pcb_sha256": "82926d9dfc728dca41c9d0970c69a5144fb9079380a298337381c199698f80f4"
+}

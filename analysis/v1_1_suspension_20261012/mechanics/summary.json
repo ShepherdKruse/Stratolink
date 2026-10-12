@@ -1,0 +1,89 @@
+{
+  "source": {
+    "commit": "a9d6ed5",
+    "board_sha256": "99b82f31a5d05c019d3fb6d592c06a0d6cca1eb3affc285cbdfb4bd7702550e0",
+    "holes": [
+      {
+        "center_mm": [
+          55.665,
+          31.745
+        ],
+        "radius_mm": 1.3505069418555404
+      },
+      {
+        "center_mm": [
+          74.327,
+          31.745
+        ],
+        "radius_mm": 1.3505069418555475
+      }
+    ],
+    "corner_radius_mm": 2.3480000000000025,
+    "top_edge_y_mm": 29.397,
+    "half_spacing_mm": 9.331,
+    "finished_thickness_mm": 0.4,
+    "FR4_core_mm": 0.31,
+    "foil_each_face_mm": 0.035
+  },
+  "checks_passed": 6,
+  "recommendation": "Keep centers; 2.0 mm finished PTH with 3.2 mm ground rings; compare actual-string first articles for rim abrasion",
+  "selected_geometry": {
+    "variant": "2mm_PTH_3p2pad",
+    "finished_hole_diameter_mm": 2,
+    "substrate_drill_diameter_model_mm": 2.036,
+    "diagonal_shift_each_axis_mm": 0,
+    "top_FR4_ligament_mm": 1.3300000000000025,
+    "side_FR4_ligament_mm": 1.3300000000000025,
+    "rounded_arc_FR4_ligament_mm": 1.3300000000000025,
+    "minimum_FR4_ligament_mm": 1.3300000000000025,
+    "ligament_relative_to_existing": 1.3333426124028074,
+    "full_width_two_hole_net_section_mm": 19.286000000000005,
+    "core_mass_recovered_mg": 2.914543500745493,
+    "full_face_ring_Cu_mass_mg": 6.147669566474339,
+    "average_barrel_Cu_mass_mg": 0.8106817010735388,
+    "explicit_core_full_rings_and_barrel_mass_subtotal_mg": 9.872894768293373
+  },
+  "representative_loads": [
+    {
+      "apex_height_mm": 10,
+      "leg_angle_from_vertical_deg": 43.01792019683141,
+      "topology": "continuous_triangle",
+      "segment_tension_N": 0.6706407238032887,
+      "each_hole_vertical_N": 0.4903325,
+      "each_hole_inward_N": 1.1281699795532885,
+      "each_hole_resultant_N": 1.2301192882487118
+    },
+    {
+      "apex_height_mm": 20,
+      "leg_angle_from_vertical_deg": 25.01140412973457,
+      "topology": "continuous_triangle",
+      "segment_tension_N": 0.5410722830852059,
+      "each_hole_vertical_N": 0.4903325,
+      "each_hole_inward_N": 0.7698369109602059,
+      "each_hole_resultant_N": 0.912729330104496
+    },
+    {
+      "apex_height_mm": 40,
+      "leg_angle_from_vertical_deg": 13.130852583266211,
+      "topology": "continuous_triangle",
+      "segment_tension_N": 0.5034970449743938,
+      "each_hole_vertical_N": 0.4903325,
+      "each_hole_inward_N": 0.6178793589118938,
+      "each_hole_resultant_N": 0.7887970985783498
+    },
+    {
+      "apex_height_mm": 80,
+      "leg_angle_from_vertical_deg": 6.652776354024219,
+      "topology": "continuous_triangle",
+      "segment_tension_N": 0.4936565496290657,
+      "each_hole_vertical_N": 0.4903325,
+      "each_hole_inward_N": 0.5508477065978157,
+      "each_hole_resultant_N": 0.7374680714582315
+    }
+  ],
+  "material_allowables_assigned": false,
+  "actual_line_properties_known": false,
+  "measured_hardware_tests": false,
+  "FEM_performed": false,
+  "interpretation": "Demand and ideal relative stiffness only; no absolute breaking load or safety factor"
+}
