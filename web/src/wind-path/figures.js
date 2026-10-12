@@ -8,7 +8,7 @@ import { colors, heatColor, observeChartSize } from '../payload-dev-log/charts.j
 
 const ASSETS = '/assets/wind-path';
 const INK = '#292927', PAPER = '#eeeee9', GRID = '#d7d8d1', COAST = '#959c93', FAINT = '#b8b9b3', CREAM = '#f6f4ef';
-const RED = colors[0], ORANGE = colors[1], BLUE = colors[4];
+const RED = colors[0], BLUE = colors[4], GRAY = '#6f716b';
 const rad = Math.PI / 180, R = 6371;
 const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
 const lerp = (a, b, t) => a + (b - a) * t;
@@ -36,6 +36,7 @@ function load(file) {
 /* ── map on canvas ──────────────────────────────────────────────────────────── */
 const ATLANTIC = { lon0: -128, lon1: 8, lat0: 12, lat1: 58 };
 const GAP_VIEW = { lon0: -112, lon1: 0, lat0: 14, lat1: 56 };
+const WIDE_VIEW = { lon0: -125, lon1: 35, lat0: 8, lat1: 68 };
 const WORLD = { lon0: -30, lon1: 330, lat0: -12, lat1: 78, wrap: true };
 
 function createMap(bounds, label, aspect) {
@@ -242,23 +243,23 @@ function drawTrack(map, segments, minutes) {
 
 /* ── 1. the flight, replayed ───────────────────────────────────────────────── */
 async function replay(host, signal) {
-  const [flight, coast, wind, cloud] = await Promise.all([load('flight.json'), load('coast-atlantic.json'), windField(), clouds()]);
+  const [flight, coast, wind] = await Promise.all([load('flight.json'), load('coast-atlantic.json'), windField()]);
   if (signal.aborted) return;
   const { t0, fixes, end } = flight, distinct = fixes.filter(f => f[3]), gaps = longGaps(fixes), segments = trackSegments(flight.track, gaps);
   const dark = gaps.reduce((s, [a, b]) => s + b - a, 0);
   host.innerHTML = `${heading('Stratolink 3, replayed', `GFS winds at ${fmt(wind.levelHpa)} hPa`)}
     <div class="fleet-metrics contact-metrics"><span><b>${fixes.length}</b>packets with a position</span><span><b>${distinct.length}</b>distinct positions</span><span><b>${fmt(dark / 60)} h</b>of ${fmt(end / 60)} without a packet for over six hours</span></div>
-    <div class="chart-legend">${windKey()}${key('Received position', INK, 'dot')}${key('Where the balloon could be, 500 draws', BLUE, 'dot')}${key('The drawn line', RED)}</div>
+    <div class="chart-legend">${windKey()}${key('Received position', INK, 'dot')}${key('The drawn line through the gaps', RED)}</div>
     <div class="fleet-map-stage"><output class="fleet-hover" hidden></output></div>
     ${footer('NOAA GFS, May 2026')}
     <canvas class="packet-strip" role="img" aria-label="Timeline of received positions over the flight, with gaps longer than six hours shaded"></canvas>
     <div class="waterfall-axis"><span>May 17</span><span>May 23</span><span>May 29</span></div>
     ${slider('Flight hour', end, 10, 'Minutes since launch')}
     <output class="chart-readout"></output>`;
-  const map = createMap(ATLANTIC, 'Stratolink 3 replayed over the North Atlantic: received positions, the wind field, and the cloud of possible positions during the gaps. Space plays, arrow keys step.');
+  const map = createMap(ATLANTIC, 'Stratolink 3 replayed over the North Atlantic: received positions, the wind field, and the reconstructed line through the gaps. Space plays, arrow keys step.');
   host.querySelector('.fleet-map-stage').prepend(map.canvas);
   const strip = host.querySelector('.packet-strip'), sctx = strip.getContext('2d');
-  const input = host.querySelector('input'), output = host.querySelector('output'), read = host.querySelector('.chart-readout'), hover = host.querySelector('.fleet-hover'), date = host.querySelector('.fleet-date');
+  const input = host.querySelector('input'), output = host.querySelector('.fleet-time output'), read = host.querySelector('.chart-readout'), hover = host.querySelector('.fleet-hover'), date = host.querySelector('.fleet-date');
   let cursor = 0, width = 0;
   function draw() {
     if (!width) return;
@@ -266,12 +267,10 @@ async function replay(host, signal) {
     map.base(coast);
     wind.draw(map, tMs, { alpha: .34 });
     drawTrack(map, segments, cursor);
-    const g = cloud.find(tMs);
-    if (g) drawCloud(map, g, (tMs - g.tA) / (g.tB - g.tA) * (g.steps - 1));
+    const g = gaps.find(([a, b]) => cursor > a && cursor < b);
     for (const [t, lat, lon, isDistinct] of fixes) if (t <= cursor) map.dot(lat, lon, isDistinct ? 2.2 : 1.5, isDistinct ? INK : '#a3a59e');
     const last = distinct.filter(f => f[0] <= cursor).at(-1);
-    if (last && !g) map.dot(last[1], last[2], 6, CREAM, INK, 1.6);
-    if (last && g) map.dot(last[1], last[2], 5, null, INK, 1.2);
+    if (last) map.dot(last[1], last[2], g ? 5 : 6, g ? null : CREAM, INK, g ? 1.2 : 1.6);
     sctx.clearRect(0, 0, width, 30); sctx.fillStyle = '#e3e4dd'; sctx.fillRect(0, 6, width, 16);
     sctx.fillStyle = 'rgba(50,140,179,.22)';
     for (const [a, b] of gaps) sctx.fillRect(a / end * width, 6, (b - a) / end * width, 16);
@@ -280,13 +279,17 @@ async function replay(host, signal) {
     input.value = cursor; output.textContent = fmt(cursor / 60, 1); date.textContent = utc(tMs);
     const since = last ? (cursor - last[0]) / 60 : 0;
     read.textContent = g
-      ? `${fmt(since)} h without a packet / ${g.n} possible positions drifting with the wind; the red line is the one the dashboard draws`
+      ? `${fmt(since)} h without a packet / the red line is the reconstruction the dashboard draws`
       : last ? `last packet ${ago(since)} from ${place(last[1], last[2])}` : 'before launch';
   }
   const play = player(host, signal, dt => { cursor += dt * .6; if (cursor > end + 1500) cursor = 0; draw(); });
   bindSlider(input, play, value => { cursor = value; draw(); });
   keys(map.canvas, play, dir => { cursor = clamp(Math.min(cursor, end) + dir * 360, 0, end); draw(); });
-  strip.onpointermove = event => { const b = strip.getBoundingClientRect(); play.set(false); cursor = clamp((event.clientX - b.left) / b.width * end, 0, end); draw(); };
+  /* Scrub by pressing on the timeline and dragging; hovering does nothing. */
+  const scrub = event => { const b = strip.getBoundingClientRect(); cursor = clamp((event.clientX - b.left) / b.width * end, 0, end); draw(); };
+  strip.onpointerdown = event => { strip.setPointerCapture(event.pointerId); play.set(false); scrub(event); };
+  strip.onpointermove = event => { if (strip.hasPointerCapture(event.pointerId)) scrub(event); };
+  strip.onpointerup = strip.onpointercancel = event => { if (strip.hasPointerCapture(event.pointerId)) strip.releasePointerCapture(event.pointerId); };
   map.canvas.onpointermove = event => {
     const [x, y] = map.pointer(event), tMs = t0 + Math.min(cursor, end) * 60000;
     const b = map.bounds, lat = b.lat1 - y / map.height * (b.lat1 - b.lat0), lon = b.lon0 + x / map.width * (b.lon1 - b.lon0);
@@ -308,16 +311,20 @@ async function tube(host, signal) {
     ${footer('')}
     ${slider('Slice', last, .1, 'Reconstruction cube time slice')}
     <output class="chart-readout"></output>`;
-  const map = createMap(ATLANTIC, 'A close view that follows the balloon along the wind tube: the current slice box with its fine winds, the coarser wind around it, and the particle cloud inside. Space plays, arrow keys step.', .52);
+  const ASPECT = .6;
+  const map = createMap(ATLANTIC, 'A view that follows the balloon along the wind tube: the current slice box with its fine winds, the coarser wind around it, and the particle cloud inside. Space plays, arrow keys step.', ASPECT);
+  /* One camera span for the whole ride, wide enough that the tallest and widest box
+   * fits with a margin, so the view pans along the tube instead of zooming. */
+  const SPAN = clamp(Math.max(...slices.map(b => Math.max(b.w * 1.25, b.h * 1.25 / (ASPECT * Math.cos((b.lat0 + b.h / 2) * rad))))), 40, 120);
   host.querySelector('.fleet-map-stage').prepend(map.canvas);
-  const input = host.querySelector('input'), output = host.querySelector('output'), read = host.querySelector('.chart-readout'), hover = host.querySelector('.fleet-hover'), date = host.querySelector('.fleet-date'), source = host.querySelector('.fleet-source');
+  const input = host.querySelector('input'), output = host.querySelector('.fleet-time output'), read = host.querySelector('.chart-readout'), hover = host.querySelector('.fleet-hover'), date = host.querySelector('.fleet-date'), source = host.querySelector('.fleet-source');
   let at = 0, camera, arrows = [];
   const gapHours = t => { const m = (t - flight.t0) / 60000; const g = gaps.find(([a, b]) => m >= a && m <= b); return g ? (g[1] - g[0]) / 60 : 0; };
-  function target() { const s = slices[clamp(Math.round(at), 0, last)]; return { lat: s.lat0 + s.h / 2, lon: s.lon0 + s.w / 2, span: clamp(s.w * 1.45, 34, 60) }; }
+  function target() { const s = slices[clamp(Math.round(at), 0, last)]; return { lat: s.lat0 + s.h / 2, lon: s.lon0 + s.w / 2, span: SPAN }; }
   function draw(snap = false) {
     if (!map.width) return;
     const k = clamp(Math.round(at), 0, last), s = slices[k], t = s.t, want = target();
-    camera = !camera || snap ? want : { lat: lerp(camera.lat, want.lat, .12), lon: lerp(camera.lon, want.lon, .12), span: lerp(camera.span, want.span, .12) };
+    camera = !camera || snap ? want : { lat: lerp(camera.lat, want.lat, .04), lon: lerp(camera.lon, want.lon, .04), span: SPAN };
     map.look(camera.lat, camera.lon, camera.span);
     map.base(coast, 5);
     wind.draw(map, t, { alpha: .22, scale: 2.4, max: 16 });
@@ -360,20 +367,70 @@ async function tube(host, signal) {
   observeChartSize(host, () => { map.resize(host.clientWidth - 32); draw(true); }, signal);
 }
 
+/* ── 3. forecasting versus bridging ────────────────────────────────────────── */
+async function compare(host, signal) {
+  const [cloud, fo, fbuf, coast, wind] = await Promise.all([clouds(), load('forecast-only.json'), load('forecast-only.bin'), load('coast-atlantic.json'), windField()]);
+  if (signal.aborted) return;
+  const p = cloud.posterior, { n, steps, hours, hoursPerStep, tA } = p, fpos = new Int16Array(fbuf);
+  const fat = (i, s) => {
+    const a = Math.floor(s), b = Math.min(steps - 1, a + 1), t = s - a, ia = (i * steps + a) * 2, ib = (i * steps + b) * 2;
+    return [(fpos[ia] + (fpos[ib] - fpos[ia]) * t) / 100, (fpos[ia + 1] + (fpos[ib + 1] - fpos[ia + 1]) * t) / 100];
+  };
+  host.innerHTML = `${heading('Forecasting versus bridging', `${fmt(hours)} hours, the same particles and winds`)}
+    <div class="capture-tabs" role="group" aria-label="Show"><button type="button" data-show="both" aria-pressed="true">Both</button><button type="button" data-show="forecast" aria-pressed="false">Forecast from New Mexico</button><button type="button" data-show="bridge" aria-pressed="false">Bridge between the fixes</button></div>
+    <div class="fleet-metrics contact-metrics"><span><b data-f>…</b>forecast: holds 90% of its particles</span><span><b data-b>…</b>bridge: holds 90% of its particles</span><span><b data-h>…</b>hours into the gap</span></div>
+    <div class="chart-legend">${key('Forecast, knowing only the start', GRAY, 'dot')}${key('Bridge, knowing both ends', BLUE, 'dot')}${key('The fixes', INK, 'dot')}${windKey()}</div>
+    <div class="fleet-map-stage"></div>
+    ${footer('NOAA GFS at the hour shown')}
+    ${slider('Gap hour', hours, .5, 'Hours into the gap')}
+    <output class="chart-readout"></output>`;
+  const map = createMap(WIDE_VIEW, 'Two clouds of particles over the eight-day gap: one forecast forward from New Mexico that spreads across the Atlantic, and the bridge that also knows the fix in Spain. Space plays, arrow keys step.');
+  host.querySelector('.fleet-map-stage').prepend(map.canvas);
+  const input = host.querySelector('input'), output = host.querySelector('.fleet-time output'), read = host.querySelector('.chart-readout'), date = host.querySelector('.fleet-date');
+  const A = p.drawn[0], B = p.drawn[steps - 1];
+  let h = 0, show = 'both';
+  function draw() {
+    if (!map.width) return;
+    const hour = Math.min(h, hours), s = hour / hoursPerStep, si = clamp(Math.round(s), 0, steps - 1), tMs = tA + hour * 3600000;
+    map.base(coast);
+    wind.draw(map, tMs, { alpha: .14 });
+    if (show !== 'bridge') for (let i = 0; i < fo.n; i++) { const q = fat(i, s); map.dot(q[0], q[1], 2.3, GRAY, null, 1, .85); }
+    if (show !== 'forecast') for (let i = 0; i < n; i++) { const q = p.at(i, s); map.dot(q[0], q[1], 2.3, BLUE, null, 1, .9); }
+    map.dot(A[0], A[1], 5, CREAM, INK, 1.6); map.dot(B[0], B[1], 5, CREAM, INK, 1.6);
+    map.label(A[0], A[1], 'May 19', 9, 14); map.label(B[0], B[1], 'May 28', -9, 14);
+    host.querySelector('[data-f]').textContent = `${fmt(fo.stats[si].r90)} km`;
+    host.querySelector('[data-b]').textContent = `${fmt(p.stats[si].r90)} km`;
+    host.querySelector('[data-h]').textContent = fmt(hour);
+    input.value = hour; output.textContent = fmt(hour); date.textContent = utc(tMs);
+    read.textContent = hour >= hours - .5
+      ? `at the end the forecast’s particles are a median ${fmt(fo.endToB.median)} km from where the balloon was, and ${fmt(fo.endToB.within300 * 100, 1)}% are within 300 km; every bridge ends on the fix`
+      : 'the forecast only knows where the balloon started; the bridge also knows where it was 201 hours later';
+  }
+  host.querySelectorAll('[data-show]').forEach(button => button.onclick = () => {
+    show = button.dataset.show;
+    host.querySelectorAll('[data-show]').forEach(tab => tab.setAttribute('aria-pressed', String(tab === button)));
+    draw();
+  });
+  const play = player(host, signal, dt => { h += dt * .013; if (h > hours + 55) h = 0; draw(); });
+  bindSlider(input, play, value => { h = value; draw(); });
+  keys(map.canvas, play, dir => { h = clamp(Math.min(h, hours) + dir * 6, 0, hours); draw(); });
+  observeChartSize(host, () => { map.resize(host.clientWidth - 32); draw(); }, signal);
+}
+
 /* ── 4. two clouds meeting in the middle ───────────────────────────────────── */
 async function meeting(host, signal) {
   const [cloud, coast, wind] = await Promise.all([clouds(), load('coast-atlantic.json'), windField()]);
   if (signal.aborted) return;
   const p = cloud.posterior, { n, steps, hours, hoursPerStep, tA } = p, mid = (steps - 1) / 2, half = hours / 2;
   host.innerHTML = `${heading('Two clouds meeting in the middle', `${n} of the ${fmt(p.nTotal)} bridges`)}
-    <div class="chart-legend">${key('Forward half, from New Mexico', BLUE)}${key('Backward half, from Spain', ORANGE)}${key('Joined bridge', '#9a9c95')}${key('The drawn line', RED)}${windKey()}</div>
+    <div class="chart-legend">${key('Forward, from New Mexico', BLUE)}${key('Backward, from Spain', RED)}${key('Joined bridge', '#9a9c95')}${key('The drawn line', INK)}${windKey()}</div>
     <div class="fleet-map-stage"></div>
     ${footer('NOAA GFS at the hour shown')}
     ${slider('Gap hour', hours, .5, 'Hours into the gap')}
     <output class="chart-readout"></output>`;
   const map = createMap(GAP_VIEW, 'Forward and backward particle clouds crossing the Atlantic and meeting at the midpoint of the gap, over the wind at that hour. Space plays, arrow keys step.');
   host.querySelector('.fleet-map-stage').prepend(map.canvas);
-  const input = host.querySelector('input'), output = host.querySelector('output'), read = host.querySelector('.chart-readout'), date = host.querySelector('.fleet-date');
+  const input = host.querySelector('input'), output = host.querySelector('.fleet-time output'), read = host.querySelector('.chart-readout'), date = host.querySelector('.fleet-date');
   const A = p.drawn[0], B = p.drawn[steps - 1];
   let h = 0;
   function draw() {
@@ -385,13 +442,13 @@ async function meeting(host, signal) {
     if (reveal < 1) {
       for (let i = 0; i < n; i++) {
         map.line([...p.path(i, 0, Math.floor(sF)), p.at(i, sF)], { color: BLUE, width: .8, alpha: .14 * (1 - reveal) });
-        map.line([p.at(i, sB), ...p.path(i, Math.ceil(sB), steps - 1)], { color: ORANGE, width: .8, alpha: .14 * (1 - reveal) });
+        map.line([p.at(i, sB), ...p.path(i, Math.ceil(sB), steps - 1)], { color: RED, width: .8, alpha: .14 * (1 - reveal) });
       }
-      for (let i = 0; i < n; i++) { const f = p.at(i, sF), bk = p.at(i, sB); map.dot(f[0], f[1], 1.7, BLUE, null, 1, .9 * (1 - reveal)); map.dot(bk[0], bk[1], 1.7, ORANGE, null, 1, .9 * (1 - reveal)); }
+      for (let i = 0; i < n; i++) { const f = p.at(i, sF), bk = p.at(i, sB); map.dot(f[0], f[1], 1.7, BLUE, null, 1, .9 * (1 - reveal)); map.dot(bk[0], bk[1], 1.7, RED, null, 1, .9 * (1 - reveal)); }
     }
     if (reveal > 0) {
       for (let i = 0; i < n; i++) map.line(p.path(i, 0, steps - 1), { color: '#9a9c95', width: .7, alpha: .22 * reveal });
-      map.line(p.drawn, { color: RED, width: 2.4, alpha: reveal });
+      map.line(p.drawn, { color: INK, width: 2.4, alpha: reveal });
     }
     map.dot(A[0], A[1], 5, CREAM, INK, 1.6); map.dot(B[0], B[1], 5, CREAM, INK, 1.6);
     input.value = hour; output.textContent = fmt(hour); date.textContent = utc(tMs);
@@ -422,7 +479,7 @@ async function line(host, signal) {
     <output class="chart-readout"></output>`;
   const map = createMap(GAP_VIEW, 'Where the posterior draws put the balloon at one hour of the gap, around the drawn line. Space plays, arrow keys step.');
   host.querySelector('.fleet-map-stage').prepend(map.canvas);
-  const input = host.querySelector('input'), output = host.querySelector('output'), read = host.querySelector('.chart-readout'), hover = host.querySelector('.fleet-hover'), date = host.querySelector('.fleet-date');
+  const input = host.querySelector('input'), output = host.querySelector('.fleet-time output'), read = host.querySelector('.chart-readout'), hover = host.querySelector('.fleet-hover'), date = host.querySelector('.fleet-date');
   const get = selector => host.querySelector(selector);
   let h = 0, mode = 'all', dots = [];
   function draw() {
@@ -485,7 +542,7 @@ async function forecast(host, signal) {
     <output class="chart-readout"></output>`;
   const map = createMap(WORLD, 'Sixty-two ensemble trajectories from the last fix in Spain eastward around the world. Space plays, arrow keys step.');
   host.querySelector('.fleet-map-stage').prepend(map.canvas);
-  const svg = host.querySelector('.spread-chart'), input = host.querySelector('input'), output = host.querySelector('output'), read = host.querySelector('.chart-readout'), date = host.querySelector('.fleet-date');
+  const svg = host.querySelector('.spread-chart'), input = host.querySelector('input'), output = host.querySelector('.fleet-time output'), read = host.querySelector('.chart-readout'), date = host.querySelector('.fleet-date');
   const ns = 'http://www.w3.org/2000/svg', el = (tag, attrs, text) => { const e = document.createElementNS(ns, tag); for (const [k, v] of Object.entries(attrs)) e.setAttribute(k, v); if (text !== undefined) e.textContent = text; return e; };
   let h = 0, width = 0;
   function drawChart(hour, spread) {
@@ -533,7 +590,7 @@ async function forecast(host, signal) {
   observeChartSize(host, () => { width = host.clientWidth - 32; map.resize(width); draw(); }, signal);
 }
 
-const figures = { replay, tube, meeting, line, forecast };
+const figures = { replay, tube, compare, meeting, line, forecast };
 
 export function mountFigures(root, signal) {
   const observer = new IntersectionObserver(entries => {
