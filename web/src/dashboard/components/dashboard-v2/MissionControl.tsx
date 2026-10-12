@@ -1011,7 +1011,7 @@ function lerpAlongTrack(track: V2FlightPoint[], t: number): [number, number] | n
         const b = track[i];
         if (t <= b.t) {
             const f = (t - a.t) / ((b.t - a.t) || 1);
-            const deltaLon = ((b.lon - a.lon + 540) % 360) - 180;
+            const deltaLon = ((b.lon - a.lon + 180) % 360 + 360) % 360 - 180;
             return [a.lon + deltaLon * f, a.lat + (b.lat - a.lat) * f];
         }
     }
