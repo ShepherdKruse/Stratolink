@@ -10,4 +10,10 @@
 (fp_rect (start -2.425499999999997 29.55) (end -0.5254999999999967 31.45) (stroke (width .05) (type solid)) (fill none) (layer "F.CrtYd") (uuid "6060a087-a45a-4513-a1c2-913f60d862c5"))
 (fp_rect (start -2.55 -1.65) (end 0.04999999999999999 1.65) (stroke (width .05) (type solid)) (fill none) (layer "B.CrtYd") (uuid "a5aa5642-78cf-4923-b107-39b35350d5f2"))
 (fp_rect (start -2.425499999999997 29.55) (end -0.5254999999999967 31.45) (stroke (width .05) (type solid)) (fill none) (layer "B.CrtYd") (uuid "e902e914-2a68-47b4-a900-f648ceee7a1d"))
+
+(model "${KIPRJMOD}/3d/solar/zachtek_1044_right_assembly.wrl"
+  (offset (xyz 0 0 -0.2))
+  (scale (xyz 1 1 1))
+  (rotate (xyz 0 0 0))
+)
 )

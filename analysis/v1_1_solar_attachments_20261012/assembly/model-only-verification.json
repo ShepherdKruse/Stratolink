@@ -1,0 +1,92 @@
+{
+  "baseline": "14d94de7593746ee4f088854dd06e9c8d36164bd",
+  "pcb_sha256": "9bdb29c18687f94685df3d4d36a497b570e9eaf02be86858c1e6eda899d161ea",
+  "only_changes_to_PCB": [
+    {
+      "reference": "J2",
+      "model": [
+        "model",
+        "${KIPRJMOD}/3d/solar/zachtek_1044_left_assembly.wrl",
+        [
+          "offset",
+          [
+            "xyz",
+            "0",
+            "0",
+            "-0.2"
+          ]
+        ],
+        [
+          "scale",
+          [
+            "xyz",
+            "1",
+            "1",
+            "1"
+          ]
+        ],
+        [
+          "rotate",
+          [
+            "xyz",
+            "0",
+            "0",
+            "0"
+          ]
+        ]
+      ]
+    },
+    {
+      "reference": "J1",
+      "model": [
+        "model",
+        "${KIPRJMOD}/3d/solar/zachtek_1044_right_assembly.wrl",
+        [
+          "offset",
+          [
+            "xyz",
+            "0",
+            "0",
+            "-0.2"
+          ]
+        ],
+        [
+          "scale",
+          [
+            "xyz",
+            "1",
+            "1",
+            "1"
+          ]
+        ],
+        [
+          "rotate",
+          [
+            "xyz",
+            "0",
+            "0",
+            "0"
+          ]
+        ]
+      ]
+    }
+  ],
+  "all_other_board_content_identical": true,
+  "schematic_and_project_unchanged": true,
+  "reusable_footprints_only_add_matching_model_references": true,
+  "unrelated_tracked_files_preserved": 100,
+  "native_viewer_loaded_and_orbited": true,
+  "terminal_metal_seated_at_bank_y_local_mm": -0.5,
+  "asset_sha256": {
+    "hardware/pcb/3d/solar/geometry.json": "be8ac46335c0ea29b81abf4428a49b47dd73b6fda44e727071505053b760291a",
+    "hardware/pcb/3d/solar/zachtek_1044_left_assembly.wrl": "759b5b7664358a5b303af348e1f2a257c0ea45fb1b0cdfc8b117c078370f30c4",
+    "hardware/pcb/3d/solar/generate.py": "1c79306c7656591938bd4de8e87fb650d0a01fa63028aaf885bc11a0936bf7fd",
+    "hardware/pcb/3d/solar/README.md": "a67f42397bd6c836bbfe1bf35dcac964068b41de02454a46c57394b1a1d589cf",
+    "hardware/pcb/3d/solar/zachtek_1044_right_assembly.wrl": "607b451ab1a3e6bd93bd61be8cbaaa8715a291c4dac7a00ed1582c80182ac93f"
+  },
+  "render_sha256": {
+    "assembled-front.png": "d6a9d5bb4e434b07b7b74f092ade511fa4d974c3030de0b5b338b0f786d1d80c",
+    "assembled-rear.png": "a89895d103df12e62f20a2785150384c3f2537b9f9eee6efce543b1cba6dba9c",
+    "ground-joint-detail.png": "8fac1d4f9d3ccadc701a17dabd3f155da76b1de65b9a76a2a45609843dd8dbf0"
+  }
+}

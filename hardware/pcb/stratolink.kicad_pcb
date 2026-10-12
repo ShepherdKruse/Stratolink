@@ -3734,6 +3734,12 @@
 			(uuid "c48e1117-e54f-4a07-889e-debb31809680")
 		)
 		(embedded_fonts no)
+
+		(model "${KIPRJMOD}/3d/solar/zachtek_1044_left_assembly.wrl"
+			(offset (xyz 0 0 -0.2))
+			(scale (xyz 1 1 1))
+			(rotate (xyz 0 0 0))
+		)
 	)
 	(footprint "lib:RAK3172"
 		(layer "F.Cu")
@@ -6787,6 +6793,12 @@
 			(uuid "52ad0009-1e4c-4a4c-b588-58e056a1ae8c")
 		)
 		(embedded_fonts no)
+
+		(model "${KIPRJMOD}/3d/solar/zachtek_1044_right_assembly.wrl"
+			(offset (xyz 0 0 -0.2))
+			(scale (xyz 1 1 1))
+			(rotate (xyz 0 0 0))
+		)
 	)
 	(footprint "Resistor_SMD:R_0402_1005Metric"
 		(layer "F.Cu")

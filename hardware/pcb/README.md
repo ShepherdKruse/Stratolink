@@ -32,4 +32,6 @@ The third change replaces J1/J2 with direct-solder solar contacts: open unplated
 
 The mounting change passes independent connectivity and scope checks, with no new unexplained DRC/ERC findings. Its 1.0 × 1.5 mm notch dimensions are provisional: measure and dry-fit the actual panel terminal, including tinning, before ordering. No manufacturing release has been issued for v1.1; inherited fabrication findings and physical joint/RF/thermal checks remain. Use one or two physically verified pilots before the larger batch.
 
+The solar contacts also carry [illustrative panel, wire and solder models](3d/solar/README.md) in KiCad’s 3D Viewer. See the [assembled view and visual assembly guide](../../analysis/v1_1_solar_attachments_20261012/assembly/README.md). Model dimensions and bends are estimates; this visual addition changes no electrical or fabrication geometry.
+
 Keep the corrected `sym-lib-table`, `fp-lib-table` and `lib/` with the project. Custom 3D models remain local; standard models use KiCad 10's model directory. Other imported libraries still have inherited drift, so avoid a blanket update of every footprint from the library before those checklist items are reviewed.

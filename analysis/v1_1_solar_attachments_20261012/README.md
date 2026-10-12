@@ -54,6 +54,10 @@ For an illustrative 30.5 mm run of 0.25 mm wide, 35 µm copper, room-temperature
 
 The panels and their leads are part of the RF environment. Moving the ground bond from the outer panel end to its inner end may change the antenna match and radiation pattern. Existing idealized NEC results show sensitivity but do not prove a penalty or an improvement for this assembly. Retest and retune the complete payload rather than treating its antenna wire in isolation.
 
+## Assembly visualization
+
+A subsequent model-only revision adds curved panels, both-face root solder fillets and insulated positive return leads directly to the canonical KiCad viewer. The [assembly guide and native renders](assembly/README.md) show the intended mounting sequence. Panel dimensions and curvature are illustrative; the original board-only renders and electrical-check hashes above remain the frozen mounting-design evidence.
+
 ## Before pilot manufacture
 
 1. Measure both real terminal strips, including solder preparation; dry-fit the slot in an actual 0.4 mm sample and check iron access, panel angle and clearance to the rear capacitor and pressure vent.

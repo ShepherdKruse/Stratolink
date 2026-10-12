@@ -1,0 +1,47 @@
+{
+  "purpose": "Illustrative KiCad assembly; not a fit/strength qualification or vendor model",
+  "dimensions_are_estimated": true,
+  "developed_panel_length_mm": 71.0,
+  "panel_width_mm": 40.0,
+  "film_thickness_mm": 0.2,
+  "straight_root_length_mm": 3.0,
+  "bend_radius_mm": 95.0,
+  "terminal_width_mm": 3.0,
+  "wire_conductor_diameter_mm": 0.4,
+  "wire_outer_diameter_mm": 0.7,
+  "model_offset_z_mm": -0.2,
+  "sides": {
+    "left": {
+      "positive_pad_local_mm": [
+        1.4834999999999994,
+        30.5,
+        0
+      ],
+      "panel_tip_local_mm": [
+        -63.34163282871576,
+        21.85603785566938,
+        19.0
+      ],
+      "wire_centreline_length_mm": 73.49202849661475,
+      "root_face_y_mm": -0.5,
+      "root_insertion_mm": 1.0,
+      "parts": 21
+    },
+    "right": {
+      "positive_pad_local_mm": [
+        -1.4754999999999967,
+        30.5,
+        0
+      ],
+      "panel_tip_local_mm": [
+        63.34163282871576,
+        21.85603785566938,
+        19.0
+      ],
+      "wire_centreline_length_mm": 73.48481964677498,
+      "root_face_y_mm": -0.5,
+      "root_insertion_mm": 1.0,
+      "parts": 21
+    }
+  }
+}
