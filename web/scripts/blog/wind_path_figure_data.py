@@ -6,8 +6,9 @@ usage: python3 wind_path_figure_data.py <runs dir> <downloads dir> <out dir> <re
 <runs dir> holds the stratolink-3 inputs: prod_after_run.json (a full stored forecast,
 for the fixes and the 62-member ensemble), prod_trimmed.json (a forecast whose
 observed.reconstructed_track is the line the dashboard draws) and posterior2k_r1.json
-(2,000 posterior draws per long gap from the smoother, dumped from reconstructLongGap
-with a temporary capture hook).
+(2,000 posterior draws per long gap from the smoother, plus `filters`: snapshots every
+3 h of up to 150 particles of each long gap's forward and backward filter, both dumped
+from reconstructLongGap with temporary capture hooks).
 <downloads dir> holds Natural Earth's ne_50m_land.geojson. The cube is the device's
 reconstruction cube from .windcube/cubes/ (v3 single-level or v4 multi-level).
 """
@@ -126,6 +127,15 @@ for g2 in sorted((g for g in post['gaps'] if 'samples' in g and g['dt_hours'] >=
     cloud_blob += arr.tobytes()
 open(f'{OUT}/clouds.bin', 'wb').write(bytes(cloud_blob))
 json.dump({'gaps': cloud_meta}, open(f'{OUT}/clouds.json', 'w'), separators=(',', ':'))
+
+# ── filters.json / filters.bin: the two filters' clouds, for the tube figure ──
+fl_meta = []; fl_blob = bytearray()
+for f in sorted(post.get('filters', []), key=lambda f: (f['when'], f['dir'])):
+    arr = np.clip(np.rint(np.array(f['pts'], dtype=np.float64) * 100), -32767, 32767).astype('<i2')
+    fl_meta.append({'t': f['when'], 'dir': f['dir'], 'n': len(f['pts']), 'off': len(fl_blob) // 2})
+    fl_blob += arr.tobytes()
+open(f'{OUT}/filters.bin', 'wb').write(bytes(fl_blob))
+json.dump({'snaps': fl_meta}, open(f'{OUT}/filters.json', 'w'), separators=(',', ':'))
 
 # ── forecast.json / forecast.bin: the ensemble from the last fix ──────────────
 ens = prod['ensemble']; div = prod['divergence']; nominal = prod['predicted_hindcast']['path']

@@ -296,8 +296,12 @@ async function replay(host, signal) {
 
 /* ── 2. riding the tube ────────────────────────────────────────────────────── */
 async function tube(host, signal) {
-  const [meta, buffer, coast, flight, cloud] = await Promise.all([load('tube.json'), load('tube.bin'), load('coast-atlantic.json'), load('flight.json'), clouds()]);
+  const [meta, buffer, coast, flight, cloud, fmeta, fbuf] = await Promise.all([load('tube.json'), load('tube.bin'), load('coast-atlantic.json'), load('flight.json'), clouds(), load('filters.json'), load('filters.bin')]);
   if (signal.aborted) return;
+  const fpos = new Int16Array(fbuf);
+  /* The filters' own clouds (every 3 h): the forward one from the fix before a
+   * long gap, the backward one from the fix after it. The box is sized for them. */
+  const filterAt = (t, dir) => { let best = null; for (const sn of fmeta.snaps) if (sn.dir === dir && Math.abs(sn.t - t) <= 1.6 * 3600000 && (!best || Math.abs(sn.t - t) < Math.abs(best.t - t))) best = sn; return best; };
   const fine = new Int8Array(buffer), gaps = longGaps(flight.fixes), segments = trackSegments(flight.track, gaps);
   /* Ride from launch to the last fix: the slices the reconstruction actually reads
    * (the cube also holds a lead-in slice and the pre-launch days on the ground). */
@@ -306,7 +310,7 @@ async function tube(host, signal) {
   /* One fixed view that holds every box on the ride: nothing zooms or pans. */
   const view = ride.reduce((v, b) => ({ lat0: Math.min(v.lat0, b.lat0 - 2), lat1: Math.max(v.lat1, b.lat0 + b.h + 2), lon0: Math.min(v.lon0, b.lon0 - 2), lon1: Math.max(v.lon1, b.lon0 + b.w + 2) }), { lat0: 90, lat1: -90, lon0: 360, lon1: -360 });
   host.innerHTML = `${heading('Riding the tube', 'one box of 0.25° winds per 3-hour slice')}
-    <div class="chart-legend">${key('This slice’s box', BLUE)}${windKey()}${key('Possible positions', BLUE, 'dot')}${key('Reconstructed track', INK)}</div>
+    <div class="chart-legend">${key('This slice’s box', BLUE)}${windKey()}${key('Forward particles', BLUE, 'dot')}${key('Backward particles', RED, 'dot')}${key('Bridges', INK, 'dot')}${key('Reconstructed track', INK)}</div>
     <div class="fleet-map-stage"><output class="fleet-hover" hidden></output></div>
     ${footer('')}
     ${slider('Slice', last, .05, 'Reconstruction cube time slice')}
@@ -344,17 +348,22 @@ async function tube(host, signal) {
     for (const q of arrowsB) if (inBox(box, q.lat, q.lon)) map.arrow(q.lat, q.lon, q.u, q.v, { alpha: .85 * fade, width: 1.1, scale: 3, max: 11 });
     shown = fade < .5 ? arrowsA : arrowsB;
     drawTrack(map, segments, minutes);
+    for (const [dir, color] of [[1, BLUE], [-1, RED]]) {
+      const sn = filterAt(t, dir);
+      if (sn) for (let i = 0; i < sn.n; i++) { const o = sn.off + i * 2; map.dot(fpos[o] / 100, fpos[o + 1] / 100, 2.2, color, null, 1, .6); }
+    }
     const g = cloud.find(t);
-    if (g) drawCloud(map, g, (t - g.tA) / (g.tB - g.tA) * (g.steps - 1), { tail: false });
+    if (g) drawCloud(map, g, (t - g.tA) / (g.tB - g.tA) * (g.steps - 1), { tail: false, color: INK, alpha: .45 });
     let pos = a.pos;
     if (pos && b.pos && f > 0) pos = [lerp(a.pos[0], b.pos[0], f), lerp(a.pos[1], b.pos[1], f)];
     if (pos && !g) map.dot(pos[0], pos[1], 4.5, CREAM, INK, 1.8);
     input.value = at; output.textContent = fmt(k + 1); date.textContent = utc(t);
     const s = f < .5 ? a : b;
-    source.textContent = `box ${fmt(s.h)}° × ${fmt(s.w)}°, winds stored only inside it`;
-    const hours = gapHours(t), half = s.half ?? s.w / 2;
-    const pad = half <= 9.05 ? 'padded ±9°, the minimum' : `padded ±${half.toFixed(1)}° for the ${fmt(hours)}-hour gap, where the cloud spreads further`;
-    read.textContent = `Slice ${k + 1} of ${ride.length} / ${s.wind ? 'covers the wind’s path from both ends of the gap' : 'covers the track'}, ${pad}`;
+    source.textContent = `box ${fmt(s.h)}° × ${fmt(s.w)}° at 0.25°, coarser 1.5° winds around it`;
+    const hours = gapHours(t);
+    read.textContent = `Slice ${k + 1} of ${ride.length} / ${s.wind
+      ? `inside the ${fmt(hours)}-hour gap: sized by a pilot run of both clouds over this slice’s six hours; particles that stray outside ride the coarser winds`
+      : 'covers the track, ±9°'}`;
   }
   const play = player(host, signal, dt => { at += dt * .005; if (at > last + 10) at = 0; draw(); });
   bindSlider(input, play, value => { at = value; draw(); });
