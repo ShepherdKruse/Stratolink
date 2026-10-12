@@ -11,4 +11,4 @@
 .tube-inset { display: flex; flex-wrap: wrap; gap: 16px; margin: 14px 0 4px; }
 .tube-inset figure { margin: 0; }
 .tube-inset canvas { display: block; border-radius: 6px; }
-.tube-inset figcaption { margin-top: 6px; max-width: 220px; font-size: 12px; color: #62675e; }
+.tube-inset figcaption { margin-top: 6px; font-size: 12px; color: #62675e; }

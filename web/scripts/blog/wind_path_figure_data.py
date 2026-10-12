@@ -68,7 +68,7 @@ fix_ms = [ms(f['time_utc']) for f in fixes]
 def gap_hours(t, step_ms):
     # longest GPS gap a slice is read by (mirrors gap_hours_at in scripts/gfs_ingest.py)
     return max([(b - a) / 3.6e6 for a, b in zip(fix_ms, fix_ms[1:]) if b > t - step_ms and a < t + step_ms] or [0.0])
-pblob = bytearray()
+pblob = bytearray(); fine_patch = {}
 for g in range(hdr['nGrids']):
     nLat, nLon = hdr['dims'][g]; n = nLat * nLon
     lv = []
@@ -99,6 +99,7 @@ for g in range(hdr['nGrids']):
         pi0 = min(max(ci - PN // 2, 0), nLat - PN); pj0 = min(max(cj - PN // 2, 0), nLon - PN)
         patch = {'lat0': r2(la0 + pi0 * step), 'lon0': r2(lo0 + pj0 * step), 'n': PN, 'step': step, 'off': len(pblob)}
         pblob += np.clip(np.rint(np.stack([U[pi0:pi0 + PN, pj0:pj0 + PN], V[pi0:pi0 + PN, pj0:pj0 + PN]], axis=-1)), -127, 127).astype(np.int8).tobytes()
+        fine_patch[g] = np.stack([U[pi0:pi0 + PN, pj0:pj0 + PN], V[pi0:pi0 + PN, pj0:pj0 + PN]], axis=-1)
     gh = gap_hours(t, hdr['stepMs'])
     slices.append({'t': t, 'lat0': la0, 'lon0': lo0, 'h': round((nLat - 1) * step, 2), 'w': round((nLon - 1) * step, 2),
                    'half': r2(min(20, max(9, 6 + 0.05 * gh))), 'gapH': round(gh), 'wind': bool(levels) and gh >= 6,
@@ -130,6 +131,17 @@ if outer:
             ii = [i for i in range(nLat) if pt['lat0'] - m_ <= lat0 + i * dd <= pt['lat0'] + span + m_]
             jj = [j for j in range(nLon) if pt['lon0'] - m_ <= lon0 + j * dd <= pt['lon0'] + span + m_]
             pt['coarse'] = [[r2(lat0 + i * dd), r2(lon0 + j * dd), int(round(float(U[i, j]))), int(round(float(V[i, j])))] for i in ii for j in jj]
+            # the difference panel: box winds minus the coarse field interpolated to the same 0.25°
+            # points (what a particle gains by being in the box), stored ×4 (0.25 m/s steps)
+            plat = pt['lat0'] + np.arange(pt['n']) * pt['step']; plon = pt['lon0'] + np.arange(pt['n']) * pt['step']
+            qi = np.clip((plat - lat0) / dd, 0, nLat - 1.001); qj = np.clip((plon - lon0) / dd, 0, nLon - 1.001)
+            i2 = qi.astype(int); j2 = qj.astype(int); a2 = (qi - i2)[:, None]; b2 = (qj - j2)[None, :]
+            bil2 = lambda A: ((1 - a2) * (1 - b2) * A[np.ix_(i2, j2)] + (1 - a2) * b2 * A[np.ix_(i2, j2 + 1)]
+                              + a2 * (1 - b2) * A[np.ix_(i2 + 1, j2)] + a2 * b2 * A[np.ix_(i2 + 1, j2 + 1)])
+            fine = fine_patch[g]
+            du = fine[..., 0] - bil2(U); dv = fine[..., 1] - bil2(V)
+            pt['diffOff'] = len(pblob); pt['diffRms'] = r2(np.sqrt((du ** 2 + dv ** 2).mean()))
+            pblob += np.clip(np.rint(np.stack([du, dv], axis=-1) * 4), -127, 127).astype(np.int8).tobytes()
         oblob += np.clip(np.rint(np.stack([ui, vi], axis=-1)), -127, 127).astype(np.int8).tobytes()
 json.dump({'levelHpa': hdr['levelHpa'], 'levels': levels, 'stepH': hdr['stepMs'] / 3600000, 'slices': slices,
            'outerStep': outer['dLat'] if outer else None}, open(f'{OUT}/tube.json', 'w'), separators=(',', ':'))
