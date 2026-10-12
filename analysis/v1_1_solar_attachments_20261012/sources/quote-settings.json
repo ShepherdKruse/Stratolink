@@ -1,0 +1,58 @@
+{
+  "observed": "2026-10-12",
+  "method": "Manual dimensions in JLC public quote UI via Codex in-app browser; no Gerber upload or order. Prices read after async quote settled.",
+  "url": "https://cart.jlcpcb.com/quote",
+  "width_mm": 23.36,
+  "settings": {
+    "material": "FR-4 TG135",
+    "layers": 2,
+    "product_type": "Industrial/Consumer electronics (UI default)",
+    "designs": 1,
+    "delivery": "Single PCB",
+    "mask": "green",
+    "silk": "white",
+    "finish": "ENIG 1 microinch gold",
+    "outer_copper": "1 oz",
+    "via_cover": "Tented",
+    "via_plating": "Not Specified",
+    "minimum_via_option": "0.3mm/(0.4/0.45mm)",
+    "outline": "\u00b10.2mm regular",
+    "deburr": "Yes (UI default)",
+    "castellations": false,
+    "edge_plating": false,
+    "mark": "Remove Mark",
+    "electrical_test": "Flying Probe Fully Test",
+    "assembly": false,
+    "stencil": false
+  },
+  "limitations": [
+    "Fabrication estimate only; assembly, shipping, taxes excluded.",
+    "No actual Gerbers submitted: special process, panel handling, assembly fees not evaluated.",
+    "Quote shipping weight is package estimate, NOT bare board mass.",
+    "Compact outline has not been laid out or demonstrated to fit.",
+    "Product category retained at UI default for controlled comparison; re-quote final product requirements."
+  ],
+  "captures_sha256": {
+    "quote-0p4mm-5pcs.txt": "1b58fb94c7066970279247afd7dad1787fd2aa596db514cb2f8b5ca3c5b8aecb",
+    "quote-0p6mm-5pcs.txt": "7401062825d1915d498e3f0b3b6ba08e55a42c493699bd40c4f0b138abcef7c0",
+    "quote-0p4mm-15pcs.txt": "70d8710fcf77f2df29e2d31aef64b1e7ef1f1ac2eeb10b042ed1ba3dc9ad80e8",
+    "quote-0p6mm-15pcs.txt": "df0e4d6d949fea08a21ad9fc71efad574a02695116fe3e326e01e05ec5e7bf47",
+    "quote-0p8mm-15pcs.txt": "78536ea8f7eed375aaa7ce0e54df9c641f8babe90a60121003f75dc6775c44df",
+    "quote-1p6mm-15pcs.txt": "483eae27060edade433f9f6db13a9ab19530062e8f106c3abcf2c5d30a3764c5",
+    "quote-0p6mm-15pcs-compact40p9.txt": "42a50f89a36dd94474f3aff42287e6630121dbac2f3953989e8599304421d38b",
+    "quote-aerospace-0p4mm-15pcs.txt": "903ea850f084314372008cf80b1a90e94da242883484293be5d46393020a682d",
+    "quote-aerospace-0p6mm-15pcs.txt": "0ec5fc8315b46129ce51fe6ec2f11551a26515eb02a1ebcfb0532b1be86c06ca"
+  },
+  "aerospace_category_comparison": {
+    "quantity": 15,
+    "dimensions_mm": [
+      23.36,
+      57.3
+    ],
+    "mandatory_added_option": "4-Wire Kelvin Test",
+    "added_test_USD": 16.81,
+    "0.4mm_USD": 69.21,
+    "0.6mm_USD": 40.21,
+    "interpretation": "Both cost $16.81 more than UI-default category. This comparison is not a decision about final product classification."
+  }
+}

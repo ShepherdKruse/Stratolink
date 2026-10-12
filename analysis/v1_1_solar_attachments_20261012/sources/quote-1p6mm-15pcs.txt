@@ -1,0 +1,214 @@
+24
+SMT
+0
+USD 
+Sign In
+
+Select Product
+
+Standard PCB/PCBA
+
+Advanced PCB/PCBA
+
+SMT Stencil
+
+Flex Heater
+
+Mechatronic Parts
+
+3D Printing
+
+CNC Machining
+
+PCB Layout
+
+Sheet Metal
+
+Online PCB Quote
+Instructions For Ordering>
+Upload History 
+ Add gerber file
+Only accept zip or rar, Max 100 MB, View example >
+ All uploads are secure and confidential.
+Base Material
+FR-4
+Flex
+Aluminum
+Copper Core
+Rogers
+PTFE Teflon
+HDI
+Layers
+124
+High Precision PCB
+6 
+8
+10
+12
+14
+16
+Dimensions
+ *  
+PCB Qty
+15
+Product Type
+Industrial/Consumer electronicsAerospaceMedical
+PCB Specifications
+Deburring/Edge rounding
+No Yes
+Different Design
+1 234 
+Delivery Format
+Single PCB Panel by Customer Panel by JLCPCB
+PCB Thickness
+0.4mm0.6mm0.8mm1.0mm1.2mm1.6mm2.0mm
+PCB Color
+Green
+ 
+Purple
+ 
+Red
+ 
+Yellow
+ 
+Blue
+ 
+White
+ 
+Black
+Silkscreen
+White
+Material Type
+FR4 TG135KB6164 - TG135Nan Ya NP-140FS1141 TG140S1000H TG155
+Surface Finish
+OSP
+New
+ HASL(with lead) LeadFree HASL ENIG
+Gold Thickness
+1 U"2 U"
+High-spec Options
+Outer Copper Weight
+1 oz2 oz2.5 oz3.5 oz4.5 oz
+Via Covering
+TentedUntentedPluggedEpoxy Filled & CappedCopper paste Filled & Capped
+Via Plating Method
+Not SpecifiedConductive AdhesiveHorizontal Electroless Copper Plating
+Min via hole size/diameter
+0.3mm/(0.4/0.45mm)0.25mm/(0.35/0.4mm)0.2mm/(0.3/0.35mm)0.15mm/(0.25/0.3mm)0.1mm/(0.2/0.25mm)
+Board Outline Tolerance
+±0.2mm(Regular)±0.1mm(Precision)
+Confirm Production file
+NoYes
+Mark on PCB
+Remove Mark2D barcode (Serial Number)
+Electrical Test
+Flying Probe Fully Test
+Gold Fingers
+No Yes
+Castellated Holes
+No Yes
+Edge Plating
+NoYes
+Blind Slots
+NoYes
+UL Marking
+NoYes (Any Position)Yes (Specify Position)
+Humidity Indicator Card
+NoYes
+Advanced Options
+PCB Remark 
+PCB Assembly
+ Assembly cost starting from $0 with coupon>
+Stencil
+Stencil Order Guide>
+Order together with PCB
+Charge Details
+Engineering fee
+$4.00
+Via Covering
+$0.00
+Surface Finish
+$17.10
+Deburring/Edge rounding
+$0.30
+Board
+$2.00
+PCB Build Time 
+ 3 days
+$0.00
+ 24 hours PCBA Only
+$0.00
+Calculated Price
+$23.40
+
+Additional charges may apply for special cases
+
+Order on JLCONE Desktop: Save $1–$20 Per Order
+SAVE TO CART
+Shipping Estimate
+$31.44
+DHL Express (DDP)
+2-4 business days
+Weight 
+0.19kg
+Coupons 
+Save $30.00Save $20.00 
+Online Chat >
+Chat with our live agent for fast reply.
+Mon-Fri: 24 hours, Sat: 9am-6pm, GMT+8
+Email Us >
+Contact us at supportjlcpcb.com
+Typically reply within hours.
+Help Center >
+Get instant answers.
+24/7 Available.
+PCB Service
+FR-4 PCBs
+Flexible PCBs
+Metal Core PCBs
+High-Frequency PCBs
+PCBA Service
+PCB Layout
+SMT Stencil
+Flex Heater
+Support
+Help Center
+Contact Us
+Community
+Shipping Guide
+Payment Methods
+How to Order
+How to Track
+After-Sales Service
+Blog
+Company
+About Us
+Quality Assurance
+How We Work
+Certifications
+Security
+Environment
+JLCAPI
+News
+Cooperation
+Electronics
+EasyEDA
+JLCPCB
+JLCDFM
+LCSC
+OSHWLAB
+Mechanical
+JLC3DP
+JLCCNC
+JLCMC
+Order on JLCONE Desktop, Save $1–$20 Every Time
+Windows
+MAC
+Android
+IOS
+CONNECT WITH US
+© 2026 JLCPCB.COM All Rights Reserved.
+Privacy Policy
+Terms & Conditions
+Cookies Policy
+Do Not Sell or Share My Personal Information

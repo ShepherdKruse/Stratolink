@@ -1,0 +1,12 @@
+{
+  "checks_passed": 2,
+  "measured_panel_dimensions": false,
+  "nominal_notch_width_mm": 1,
+  "assumed_width_tolerance_mm": 0.2,
+  "nominal_PCB_thickness_mm": 0.4,
+  "assumed_thickness_tolerance_mm": 0.1,
+  "copper_setback_mm": 0.22,
+  "outer_edge_copper_setback_mm": 0.2,
+  "notch_depth_mm": 1.5,
+  "note": "Assumed terminal thicknesses and tolerance stack; no fabrication, wetting, load or fit qualification"
+}

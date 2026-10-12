@@ -1,0 +1,58 @@
+{
+  "baseline": {
+    "source_sha256": "4e132fcc1e80383b270402544700d7ff1f818680a222ba0ceed45e0c125a497f",
+    "board_thickness_mm": 0.4,
+    "outside_area_mm2": 1333.3530868028954,
+    "outline_net_area_mm2": 1315.9753538844354,
+    "laminate_net_area_mm2": 1298.4508672289662,
+    "copper_area_mm2": {
+      "F.Cu": 632.920374019056,
+      "B.Cu": 799.6660908425805
+    },
+    "drill_holes_count": 166,
+    "mass_g_nominal": 1.25462782378964,
+    "mass_g_density_range": [
+      1.2144871809814202,
+      1.2947684665978598
+    ],
+    "mass_parts_g": {
+      "core": 0.764787560797861,
+      "planar_copper": 0.4492591153806093,
+      "mask": 0.03272096185416994,
+      "barrel_density_correction": 0.007860185756999642
+    }
+  },
+  "candidate": {
+    "source_sha256": "e502e2735535fe525f9699972b2be0dfbc038ae7773fc8da4003339f8e522ba0",
+    "board_thickness_mm": 0.4,
+    "outside_area_mm2": 1330.5734371873473,
+    "outline_net_area_mm2": 1319.1276140722011,
+    "laminate_net_area_mm2": 1301.194738595334,
+    "copper_area_mm2": {
+      "F.Cu": 631.7344311993221,
+      "B.Cu": 784.4418554713972
+    },
+    "drill_holes_count": 170,
+    "mass_g_nominal": 1.251342893026337,
+    "mass_g_density_range": [
+      1.2111196833406628,
+      1.2915661027120113
+    ],
+    "mass_parts_g": {
+      "core": 0.7664037010326518,
+      "planar_copper": 0.44411288349993766,
+      "mask": 0.032790107412602416,
+      "barrel_density_correction": 0.008036201081145215
+    }
+  },
+  "delta_g": -0.00328493076330294,
+  "delta_mg": -3.28493076330294,
+  "delta_parts_g": {
+    "core": 0.0016161402347907305,
+    "planar_copper": -0.005146231880671648,
+    "mask": 6.91455584324735e-05,
+    "barrel_density_correction": 0.00017601532414557308
+  },
+  "method": "Native KiCad copper/outline after hole subtraction; identical model.py material assumptions; no finish/solder/components/panel attachment added",
+  "source_geometry": "/Users/twarn/Repositories/Stratolink/analysis/v1_1_solar_attachments_20261012/review/candidate/geometry_native.json"
+}

@@ -1,0 +1,18 @@
+{
+  "time": "2026-10-12T14:36:06.969657",
+  "branch": "alpha/hardware-v1.1",
+  "baseline_commit": "1aed52ff7af3d27aef6ff4b0ceba710c57dc6865",
+  "canonical_before_sha256": {
+    "stratolink.kicad_pcb": "4e132fcc1e80383b270402544700d7ff1f818680a222ba0ceed45e0c125a497f",
+    "stratolink.kicad_sch": "f57249e54bf07e10ea75f4338c9807163fbd549f2123712b9805d14bd2a01cd1"
+  },
+  "promoted_sha256": {
+    "hardware/pcb/stratolink.kicad_pcb": "e502e2735535fe525f9699972b2be0dfbc038ae7773fc8da4003339f8e522ba0",
+    "hardware/pcb/stratolink.kicad_sch": "2833960f4a399552ddb1b599813fc13883012045a820f71018b1a4f9c8f47738",
+    "hardware/pcb/lib/Solar_Notch_Left_1p0x1p5.kicad_mod": "5a73d19cf96a64a5720729dacea9a9ef824a37e3e59224cedb2658c6427b88c9",
+    "hardware/pcb/lib/Solar_Notch_Right_1p0x1p5.kicad_mod": "5dfe0804103f0cdb3d5f8fdc91ad73affc65e920863be05ccab39c765cb6f74e"
+  },
+  "project_rules_preserved": true,
+  "pcb_editor_closed_during_update": true,
+  "status": "provisional_mount_CAD_not_manufacturing_release"
+}

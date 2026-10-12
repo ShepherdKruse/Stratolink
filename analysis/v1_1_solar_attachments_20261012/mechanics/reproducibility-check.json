@@ -1,0 +1,13 @@
+{
+  "status": "pass",
+  "optional_prior_RF_evidence_absence_simulated": true,
+  "all_mechanics_outputs_byte_identical": true,
+  "mechanics_output_sha256": {
+    "wire_properties.csv": "30d958f0bf4e0c83a67d25f910c22ea38e1f642ebb066b6ef592d91669c3ce9c",
+    "lower_brace_screen.csv": "77bcd1146560771fbf5179701be23b5ba3819d5a8e26bbd349d1dd08e2bbd06f",
+    "root_moment_screen.csv": "b4a3f8e912501daf4a663f5f763d5aff53aa7616c314d49441bdf46a1a4621a9",
+    "unknown_film_sensitivity.csv": "df31ade06d390f386ed95e5d6e6a00c287f14fc6e7cac8fa5982027a458f3c35",
+    "thermal_mismatch_sensitivity.csv": "db72569f16cb55274d28bc9aa495099351e9c09c10c8820818c50c05c2f64c87",
+    "load_path_tradeoff.png": "51261cc0ae482b690fcb805c243bad51e111f407329d2c1b8f340433a25dd3c2"
+  }
+}

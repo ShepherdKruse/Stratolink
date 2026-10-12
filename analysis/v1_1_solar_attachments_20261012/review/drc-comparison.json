@@ -1,0 +1,300 @@
+{
+  "project": {
+    "violations": {
+      "before": 73,
+      "after": 70,
+      "added": [],
+      "removed": [
+        {
+          "description": "Thermal relief connection to zone incomplete (layer F.Cu; zone min spoke count 2; actual 1)",
+          "item_uuids": [
+            "795c4093-4930-4bcb-9c07-8e31d04084fe",
+            "d4c85218-dd11-4157-851c-3c5a79edc97f"
+          ],
+          "severity": "error",
+          "type": "starved_thermal"
+        },
+        {
+          "description": "Footprint 'PinHeader_1x02_P1.00mm_Vertical' does not match copy in library 'Connector_PinHeader_1.00mm'",
+          "item_uuids": [
+            "3868a2a2-0ea5-4d8d-a7fe-89036ea349aa"
+          ],
+          "severity": "warning",
+          "type": "lib_footprint_mismatch"
+        },
+        {
+          "description": "Footprint 'PinHeader_1x02_P1.00mm_Vertical' does not match copy in library 'Connector_PinHeader_1.00mm'",
+          "item_uuids": [
+            "6f289ee6-54f0-4c32-bec0-2d009c8b40bc"
+          ],
+          "severity": "warning",
+          "type": "lib_footprint_mismatch"
+        }
+      ]
+    },
+    "schematic_parity": {
+      "before": 11,
+      "after": 11,
+      "added": [],
+      "removed": []
+    },
+    "unconnected_items": {
+      "before": 0,
+      "after": 0,
+      "added": [],
+      "removed": []
+    }
+  },
+  "diagnostic_0p15mm_clearance_0p20mm_edge": {
+    "violations": {
+      "before": 87,
+      "after": 83,
+      "added": [
+        {
+          "description": "Board edge clearance violation (board setup constraints edge clearance 0.2000 mm; actual 0.1396 mm)",
+          "item_uuids": [
+            "18c9a067-24a5-4625-8e36-1a2ab661e9bc",
+            "e365573c-c04a-42f2-870c-493799cef56f"
+          ],
+          "severity": "error",
+          "type": "copper_edge_clearance",
+          "classification": "inherited_route_against_resegmented_outer_edge",
+          "maximum_edge_endpoint_displacement_mm": 5.658308703322937e-05,
+          "reason": "Copper object is byte-equivalent as an S-expression; this same route was flagged before. The straight outer edge was split to form the separate solar notch."
+        },
+        {
+          "description": "Board edge clearance violation (board setup constraints edge clearance 0.2000 mm; actual 0.1396 mm)",
+          "item_uuids": [
+            "2727baf4-a20e-4dc4-8d56-2cae36ad27a0",
+            "e365573c-c04a-42f2-870c-493799cef56f"
+          ],
+          "severity": "error",
+          "type": "copper_edge_clearance",
+          "classification": "inherited_route_against_resegmented_outer_edge",
+          "maximum_edge_endpoint_displacement_mm": 5.658308703322937e-05,
+          "reason": "Copper object is byte-equivalent as an S-expression; this same route was flagged before. The straight outer edge was split to form the separate solar notch."
+        },
+        {
+          "description": "Board edge clearance violation (board setup constraints edge clearance 0.2000 mm; actual 0.1396 mm)",
+          "item_uuids": [
+            "a2cfd543-5b76-494b-9bcc-1e523f422c16",
+            "e365573c-c04a-42f2-870c-493799cef56f"
+          ],
+          "severity": "error",
+          "type": "copper_edge_clearance",
+          "classification": "inherited_route_against_resegmented_outer_edge",
+          "maximum_edge_endpoint_displacement_mm": 5.658308703322937e-05,
+          "reason": "Copper object is byte-equivalent as an S-expression; this same route was flagged before. The straight outer edge was split to form the separate solar notch."
+        },
+        {
+          "description": "Board edge clearance violation (board setup constraints edge clearance 0.2000 mm; actual 0.1017 mm)",
+          "item_uuids": [
+            "1af69ad7-30f3-4fc3-b566-1d187dbea766",
+            "1e1073b6-2c7c-4ad4-a31b-c180809f6da6"
+          ],
+          "severity": "error",
+          "type": "copper_edge_clearance",
+          "classification": "inherited_route_against_resegmented_outer_edge",
+          "maximum_edge_endpoint_displacement_mm": 5.6583087040334796e-05,
+          "reason": "Copper object is byte-equivalent as an S-expression; this same route was flagged before. The straight outer edge was split to form the separate solar notch."
+        },
+        {
+          "description": "Board edge clearance violation (board setup constraints edge clearance 0.2000 mm; actual 0.1017 mm)",
+          "item_uuids": [
+            "1af69ad7-30f3-4fc3-b566-1d187dbea766",
+            "bfbfa6f4-1dbe-4095-a771-3fb9a012fb75"
+          ],
+          "severity": "error",
+          "type": "copper_edge_clearance",
+          "classification": "inherited_route_against_resegmented_outer_edge",
+          "maximum_edge_endpoint_displacement_mm": 5.6583087040334796e-05,
+          "reason": "Copper object is byte-equivalent as an S-expression; this same route was flagged before. The straight outer edge was split to form the separate solar notch."
+        },
+        {
+          "description": "Board edge clearance violation (board setup constraints edge clearance 0.2000 mm; actual 0.1017 mm)",
+          "item_uuids": [
+            "1af69ad7-30f3-4fc3-b566-1d187dbea766",
+            "cd6977b0-9d88-4014-8ee0-75e9feff1d59"
+          ],
+          "severity": "error",
+          "type": "copper_edge_clearance",
+          "classification": "inherited_route_against_resegmented_outer_edge",
+          "maximum_edge_endpoint_displacement_mm": 5.6583087040334796e-05,
+          "reason": "Copper object is byte-equivalent as an S-expression; this same route was flagged before. The straight outer edge was split to form the separate solar notch."
+        },
+        {
+          "description": "Board edge clearance violation (board setup constraints edge clearance 0.2000 mm; actual 0.1288 mm)",
+          "item_uuids": [
+            "91541222-310a-48bc-b525-2eec1e0cb20f",
+            "e365573c-c04a-42f2-870c-493799cef56f"
+          ],
+          "severity": "error",
+          "type": "copper_edge_clearance",
+          "classification": "inherited_route_against_resegmented_outer_edge",
+          "maximum_edge_endpoint_displacement_mm": 5.658308703322937e-05,
+          "reason": "Copper object is byte-equivalent as an S-expression; this same route was flagged before. The straight outer edge was split to form the separate solar notch."
+        },
+        {
+          "description": "Board edge clearance violation (board setup constraints edge clearance 0.2000 mm; actual 0.1287 mm)",
+          "item_uuids": [
+            "91c5ca5e-308e-4f8b-8d63-7c761c4637bd",
+            "e365573c-c04a-42f2-870c-493799cef56f"
+          ],
+          "severity": "error",
+          "type": "copper_edge_clearance",
+          "classification": "inherited_route_against_resegmented_outer_edge",
+          "maximum_edge_endpoint_displacement_mm": 5.658308703322937e-05,
+          "reason": "Copper object is byte-equivalent as an S-expression; this same route was flagged before. The straight outer edge was split to form the separate solar notch."
+        },
+        {
+          "description": "Board edge clearance violation (board setup constraints edge clearance 0.2000 mm; actual 0.1287 mm)",
+          "item_uuids": [
+            "a379a696-fdc3-4f66-808c-ae939631c307",
+            "e365573c-c04a-42f2-870c-493799cef56f"
+          ],
+          "severity": "error",
+          "type": "copper_edge_clearance",
+          "classification": "inherited_route_against_resegmented_outer_edge",
+          "maximum_edge_endpoint_displacement_mm": 5.658308703322937e-05,
+          "reason": "Copper object is byte-equivalent as an S-expression; this same route was flagged before. The straight outer edge was split to form the separate solar notch."
+        }
+      ],
+      "removed": [
+        {
+          "description": "Clearance violation ( clearance 0.1500 mm; actual 0.1380 mm)",
+          "item_uuids": [
+            "12b947c3-042c-45cc-a6a7-d78b2d00ae84",
+            "e18602bb-76e7-4b6c-b1d7-062a2add395e"
+          ],
+          "severity": "error",
+          "type": "clearance"
+        },
+        {
+          "description": "Board edge clearance violation (board setup constraints edge clearance 0.2000 mm; actual 0.1395 mm)",
+          "item_uuids": [
+            "18c9a067-24a5-4625-8e36-1a2ab661e9bc",
+            "f0c4851e-a027-4dad-a4a9-bfbe1a9de991"
+          ],
+          "severity": "error",
+          "type": "copper_edge_clearance"
+        },
+        {
+          "description": "Board edge clearance violation (board setup constraints edge clearance 0.2000 mm; actual 0.1395 mm)",
+          "item_uuids": [
+            "2727baf4-a20e-4dc4-8d56-2cae36ad27a0",
+            "f0c4851e-a027-4dad-a4a9-bfbe1a9de991"
+          ],
+          "severity": "error",
+          "type": "copper_edge_clearance"
+        },
+        {
+          "description": "Board edge clearance violation (board setup constraints edge clearance 0.2000 mm; actual 0.1396 mm)",
+          "item_uuids": [
+            "a2cfd543-5b76-494b-9bcc-1e523f422c16",
+            "f0c4851e-a027-4dad-a4a9-bfbe1a9de991"
+          ],
+          "severity": "error",
+          "type": "copper_edge_clearance"
+        },
+        {
+          "description": "Board edge clearance violation (board setup constraints edge clearance 0.2000 mm; actual 0.1017 mm)",
+          "item_uuids": [
+            "1e1073b6-2c7c-4ad4-a31b-c180809f6da6",
+            "45e61e0e-d9b4-461b-b5e5-79b8628498c1"
+          ],
+          "severity": "error",
+          "type": "copper_edge_clearance"
+        },
+        {
+          "description": "Board edge clearance violation (board setup constraints edge clearance 0.2000 mm; actual 0.1017 mm)",
+          "item_uuids": [
+            "45e61e0e-d9b4-461b-b5e5-79b8628498c1",
+            "bfbfa6f4-1dbe-4095-a771-3fb9a012fb75"
+          ],
+          "severity": "error",
+          "type": "copper_edge_clearance"
+        },
+        {
+          "description": "Board edge clearance violation (board setup constraints edge clearance 0.2000 mm; actual 0.1017 mm)",
+          "item_uuids": [
+            "45e61e0e-d9b4-461b-b5e5-79b8628498c1",
+            "cd6977b0-9d88-4014-8ee0-75e9feff1d59"
+          ],
+          "severity": "error",
+          "type": "copper_edge_clearance"
+        },
+        {
+          "description": "Board edge clearance violation (board setup constraints edge clearance 0.2000 mm; actual 0.1287 mm)",
+          "item_uuids": [
+            "91541222-310a-48bc-b525-2eec1e0cb20f",
+            "f0c4851e-a027-4dad-a4a9-bfbe1a9de991"
+          ],
+          "severity": "error",
+          "type": "copper_edge_clearance"
+        },
+        {
+          "description": "Board edge clearance violation (board setup constraints edge clearance 0.2000 mm; actual 0.1287 mm)",
+          "item_uuids": [
+            "91c5ca5e-308e-4f8b-8d63-7c761c4637bd",
+            "f0c4851e-a027-4dad-a4a9-bfbe1a9de991"
+          ],
+          "severity": "error",
+          "type": "copper_edge_clearance"
+        },
+        {
+          "description": "Board edge clearance violation (board setup constraints edge clearance 0.2000 mm; actual 0.1287 mm)",
+          "item_uuids": [
+            "a379a696-fdc3-4f66-808c-ae939631c307",
+            "f0c4851e-a027-4dad-a4a9-bfbe1a9de991"
+          ],
+          "severity": "error",
+          "type": "copper_edge_clearance"
+        },
+        {
+          "description": "Thermal relief connection to zone incomplete (layer F.Cu; zone min spoke count 2; actual 1)",
+          "item_uuids": [
+            "795c4093-4930-4bcb-9c07-8e31d04084fe",
+            "d4c85218-dd11-4157-851c-3c5a79edc97f"
+          ],
+          "severity": "error",
+          "type": "starved_thermal"
+        },
+        {
+          "description": "Footprint 'PinHeader_1x02_P1.00mm_Vertical' does not match copy in library 'Connector_PinHeader_1.00mm'",
+          "item_uuids": [
+            "3868a2a2-0ea5-4d8d-a7fe-89036ea349aa"
+          ],
+          "severity": "warning",
+          "type": "lib_footprint_mismatch"
+        },
+        {
+          "description": "Footprint 'PinHeader_1x02_P1.00mm_Vertical' does not match copy in library 'Connector_PinHeader_1.00mm'",
+          "item_uuids": [
+            "6f289ee6-54f0-4c32-bec0-2d009c8b40bc"
+          ],
+          "severity": "warning",
+          "type": "lib_footprint_mismatch"
+        }
+      ]
+    },
+    "schematic_parity": {
+      "before": 11,
+      "after": 11,
+      "added": [],
+      "removed": []
+    },
+    "unconnected_items": {
+      "before": 0,
+      "after": 0,
+      "added": [],
+      "removed": []
+    }
+  },
+  "erc": {
+    "before": 55,
+    "after": 55,
+    "added": [],
+    "removed": []
+  },
+  "status": "pass_no_new_unexplained_findings"
+}

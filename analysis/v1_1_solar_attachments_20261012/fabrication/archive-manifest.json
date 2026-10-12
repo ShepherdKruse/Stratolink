@@ -1,0 +1,24 @@
+{
+  "source_PCB_SHA256": "e502e2735535fe525f9699972b2be0dfbc038ae7773fc8da4003339f8e522ba0",
+  "archive_sha256": "a8124e347bdbfec4c0f9ce9738f5ec8ed93af8b4d401798b212a53b3fb358566",
+  "files_sha256": {
+    "gerbers/stratolink-B_Mask.gbs": "9b5c0288d6f61793cc035162e30fa89d51eeb618f0f15f5c7e2fe87730ce1c82",
+    "gerbers/stratolink-B_Paste.gbp": "91a4198c27068670c28cef612c84516c51016a7c0272f340b31b6f9875c879d4",
+    "gerbers/stratolink-Edge_Cuts.gm1": "ed514211cfd329d1f415264b93f1d5d9154aa6f8bd0da68b098c1be0d32e9e00",
+    "gerbers/stratolink-F_Mask.gts": "132259ddb47736cafc68cc9826c9637cfaecf4a3c3b97dd4e04cce14fb9f42fd",
+    "gerbers/stratolink-job.gbrjob": "c42318e4cfa099e1725d5cad70bc7359afc9aacb38d79de146af20c7b341d676",
+    "gerbers/stratolink-F_Paste.gtp": "75d14a417682ba29933ade79313660c74ff23cd396e60c611a48c8e01875a021",
+    "gerbers/stratolink-B_Cu.gbl": "8e673434df974b515009a1d180f90c61c719a3372c5e57e3685fcae2f5d617ed",
+    "gerbers/stratolink-F_Cu.gtl": "e10a76ff776411e4ec685369240c13374b3ed4b36c3332610f0b956996755901",
+    "drills/stratolink-PTH.drl": "ea19af23b2deea30b499efc2e986aa3a2aa683baec6b1dee02160fc4ee120f10",
+    "drills/stratolink-NPTH-drl_map.svg": "c5ccb1469d306d24b8f7bb84934f23414010a911dff475006bf94215574ea509",
+    "drills/stratolink-PTH-drl_map.svg": "ea2947d7c0011d5ecd23faadfebb9ac2d4bd0a90988e5fc4d9f19d12782dba82",
+    "drills/stratolink-NPTH.drl": "cae8cabf4df1b27cbc7757162545fd8f28a84b6bd4b009f658ad1718cd2e4523",
+    "svg/stratolink-B_Mask.svg": "4014dcb93df3665503d2345db371524ca02c6eef95eec8059c4ff48393ba38cf",
+    "svg/stratolink-F_Cu.svg": "91a3b74f7020ba5da4f4c44281d5ca81903be2de6f2c28b8c7ccf20c59e33e0a",
+    "svg/stratolink-B_Cu.svg": "c274ba783dd688995d92e1b11638dec076979ca5f4574a3f3c2fe41314b57c6f",
+    "svg/stratolink-F_Mask.svg": "774df98d947841394bb4018bc9ed7a72ddff87dbcc58ea65cc4a02a4f32f117b",
+    "svg/stratolink-Edge_Cuts.svg": "a1b51c6fc97bf82b31c28be5cdd2dcd3ac1a71b938b7db0ee50392b3c3e05f3d"
+  },
+  "purpose": "Diagnostic review exports only; not an approved manufacturing release"
+}

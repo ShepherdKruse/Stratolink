@@ -1,0 +1,281 @@
+1028 WSPR-TX Pico Assembly Instructions.
+
+
+
+
+The WSPR-TX Pico (product number 1028) is a lightweight WSPR transmitter suitable for small hydrogen or
+helium balloons.
+
+
+The WSPR Pico comes built and tested but for shipping reason the solar cells are not attached. This document
+describes how to solder them to the transmitter and make the transmitter flight ready.
+
+
+
+Skills required:
+
+    1. Soldering skills.
+
+
+
+
+                                                                    Document version 1.0            Page | 1
+Tools and materials required:
+
+    1. Wire cutter.
+    2. Soldering iron and solder
+    3. Copper wire
+
+    Optional – Hobby knife (Scalpel)
+
+
+
+Estimated time for build:
+
+20 to 60 minutes
+
+
+
+Preparation.
+Preparing and setting up a work area.
+
+Make sure you have the following items at hand:
+
+    1. The WSPR-TX_Pico board and the two solar cells
+    2. The tools and materials
+    3. Workspace
+
+Get a clear table space with a soldering iron at hand. If you print this instruction have it next to you or have a
+computer next to you if you read it as you go along.
+
+
+
+
+Solar cell assembly.
+Preparing the surfaces with solder.
+
+1. Add solder to the top tabs on the Pico.
+   With a soldering iron heat and add a generous blob of solder on both sides of the tabs on the top of the
+   transmitter as shown in the picture.
+
+
+
+
+2. Add solder to the mid of the metal strips on the solar cells.
+
+
+
+
+                                                                         Document version 1.0              Page | 2
+    2.1. OPTIONAL STEP The metal strip on the solar cells is coated with plastic. One can burn thru this with a
+         soldering iron and this is the recommended method from the solar cell manufacturer but I like to
+         prepare it by using a scalpel and cut and scrape of some of the plastic first.
+         This in an optional step and can be skipped.
+         In the perfect center of the metal strips at both ends of the solar cells remove the plastic with a
+         scalpel. First gently cut a small square in to the plastic, then scrape this square area as shown in the
+         pictures, this will remove most of the plastic.
+
+
+
+
+    2.2. Take a solder iron to the exact center on both metal strips and heat until you burn thru the plastic.
+         Add some solder.
+
+
+
+
+3. Solder the solar cells to the top of the transmitter.
+   3.1. Find the positive side of the two metal strips by either using a voltmeter or by looking at the pattern
+        on the solar cells and identify what looks like small arrows. The arrows point towards the negative
+        terminal, see picture.
+
+
+
+
+                                                                        Document version 1.0             Page | 3
+   3.2. Slide the middle of the metal strip on the positive side in in the cut on top the PCB. You may need to
+        prop it up in some way or use a helping hand from someone while you solder it in place.
+
+
+
+
+        Both solar cells soldered in.
+
+
+
+
+4. Solder a wire to the negative side of the solar cells to the board.
+   4.1. Prepare two wires about 9cm long each (3.5Inch), they can be as thin as you have as they only carry
+        max 50mA each.
+        First solder them to the golden squares at the bottom part of the transmitter and then trim the wire
+        to length so the solar cells slope downward a bit when they are stretched to the solar cells
+
+
+
+
+                                                                      Document version 1.0             Page | 4
+    4.2. Solder the other ends of the wires to the bottom of the solar cells.
+
+
+
+
+The slope helps the transmitter to operate when the sun is lower in the sky. Depending on latitude and time of
+year, you might prefer more or less slope. It is not super critical and I would recommend not overdoing it and
+keep them just slightly tilted downward.
+If you happen to get one solar cell sloping a bit more than the other like in the picture below then don’t worry
+about it, the transmitter will most likely spin constantly so the solar angle will be dived between the two cells
+and at different time of the day the sun will favor one or the other.
+
+
+
+
+As the transmitter spins the cell might be in temporary shadow, the Super Capacitor will then use its stored
+energy to power the transmitter.
+When the two super caps are fully charged they alone can power the transmitter for up to 30 seconds.
+One solar cell is theoretically enough to power the transmitter- having two ensures that the power budget
+stays positive for more varying solar angles.
+10.5 hours of operation have been observed on a summer day over Australia at 11km altitude.
+
+OK you have now made it possible to power the transmitter from sunlight!
+Let us test it out before you do the harness and HF Antenna.
+
+
+
+
+                                                                       Document version 1.0             Page | 5
+Testing the operation.
+Making sure it is configured with a call sign before testing it in sunlight.
+
+1. The transmitter needs to have a call sign configured or else it will not transmit so if you have not
+   configured it before it is time to do it now.
+   Bring out the USB to serial converter and plug it in to a computer at one end and to the transmitter on the
+   other end as shown in the pictures.
+   This converter will power the Transmitter when it is connected to a computer and will enable
+   configuration with the Windows software
+
+
+
+
+    The USB to serial adapter has a jumper that sets either 5V or 3.3V output, the transmitter can operate in
+    either setting but it is recommended to have it in the 5V setting.
+
+2. Download the PC Configuration program from zachtek.com/download and start it.
+3. Pick the serial port used by the USB adapter and click the “Connect” button
+
+
+
+
+    If the correct port was used you will see Device status information that shows it is the WSPR Pico you are
+    communicating with. If not try another port until you find the correct one.
+
+
+
+
+                                                                         Document version 1.0          Page | 6
+4. Click the “WSPR Beacon” Tab to display the Beacon settings.
+
+
+
+
+    Fill in you call sign and pick what bands to transmit on. Transmitting on both the 20m and 30m bands is
+    recommended even if a simple dipole antenna will favor just one of the bands (witch one depends on the
+    length of the antenna)
+    Also, set a suitable transmission paus. 400 seconds is a good setting that allows transmission every 10
+    minutes.
+
+5. Click the save settings button.
+
+
+
+
+                                                                    Document version 1.0            Page | 7
+6. Optionally run the signal generator or the WSPR beacon to try out the transmitter.
+   Even with no HF antenna attached, it should be possible to pick up the signal on a nearby receiver.
+   The GPS with its simple quarter wave antenna can have a hard time operate indoors so it might take a very
+   long time before it get a fix and start the WSPR transmission. You can watch the GPS info in the right
+   portion of the screen but it might be better to take it outdoors to check the operation as the GPS
+   reception will be so much better outdoors.
+
+
+Testing outdoors.
+
+1. Take the transmitter outdoors on a sunny day. You should have no computer and no USB to Serial adapter
+   attached, just hold the transmitter in your hand and point the solar cells to the sun while watching the
+   White status LED.
+
+2. After about a minute, the White Status LED should start flashing.
+   The flashes has the following meaning:
+   16 Rapid flashes = Booting up
+   1 flash every second = Running WSPR Beacon – waiting for GPS fix
+   2 flashes every second = Running WSPR Beacon, fix acquired – waiting for top of even minute.
+   6 rapid flashes every 0.6 seconds = Running WSPR Beacon - actively transmitting
+   1 flash every 9 seconds =Running WSPR Beacon, having a transmission pause - Microcontroller and GPS is
+   sleeping to save power
+
+
+
+
+                                                                    Document version 1.0            Page | 8
+Frequently Asked Questions:
+
+Q: I would like to have a temporary antenna connector so I can measure the output or connect to a ground-
+based antenna, can I do that?
+A: Yes, the “HF Out” output pads is a 50ohms port so just solder in your connector to it with a couple wires.
+The solder pad closest to R5 is the hot output and the other is ground.
+See picture for an example of a SMA connector soldered in to the output.
+
+
+
+Q: I would like to use it on another band than 20m or 30m can I do that?
+A: Yes but you might have to bypass the low pass filter.
+If the band you want to operate on is lower in frequency (like for example 7MHz the 40m band) you don’t have
+to do anything with the existing low pass filter, just leave it in place and provide your own low pass filter
+externally to suppress the overtones.
+If you want to operate above 14MHz you need to remove L1,C1 and C15 to disable the low pass. You can then
+solder in your output wire to the pad of L1 or to C14
+
+
+
+
+                                                                      Document version 1.0             Page | 9
+Appendix.
+Altitude to Power table:
+
+ Power in dBm              Power in Watt   Altitude meter           Altitude feet
+ 0                         1mW             <900m
+ 3                         2mW             0.9-2.1km
+ 7                         5mW             2.1-3km
+ 10                        10mW
+ 13                        20mW
+ 17                        50mW
+ 20                        100mW
+ 23                        200mW
+ 27                        500mW
+ 30                        1W
+ 33                        2W
+ 37                        5W
+ 40                        10W
+ 43                        20W
+ 47                        50W
+ 50                        100W
+ 53                        200W
+ 57                        500W
+ 60                        1kW             >18km
+
+
+
+
+                                                     Document version 1.0           Page | 10
+Schema.
+
+
+
+
+          Document version 1.0   Page | 11
+END OF DOCUMENT
+
+
+
+
+            Document version 1.0   Page | 12
+

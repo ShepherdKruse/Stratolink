@@ -1,0 +1,8279 @@
+[
+  {
+    "label": "lower_positive",
+    "side": "left",
+    "center_mm": [
+      54.3,
+      76.4
+    ],
+    "pad_size_mm": [
+      1.3,
+      1.3
+    ],
+    "net": "+SOLAR",
+    "track_conflicts": [
+      {
+        "uuid": "13269fc8-e16e-470f-80f3-b9aff43911f5",
+        "net": "GND",
+        "layer": "B.Cu",
+        "start": [
+          54.369,
+          76.14
+        ],
+        "end": [
+          54.369,
+          83.863
+        ],
+        "width": 0.2,
+        "distance_mm": 0.0,
+        "overlap_area_mm2": 0.19631675775299687
+      },
+      {
+        "uuid": "b12ac0ab-a9d8-44ff-bbd1-4f120bdcb51b",
+        "net": "GND",
+        "layer": "B.Cu",
+        "start": [
+          54.587,
+          76.14
+        ],
+        "end": [
+          55.6,
+          75.127
+        ],
+        "width": 0.2,
+        "distance_mm": 0.0,
+        "overlap_area_mm2": 0.06764927697023357
+      },
+      {
+        "uuid": "d35c66fd-6572-43e0-a7de-e998d4ebdc84",
+        "net": "GND",
+        "layer": "B.Cu",
+        "start": [
+          54.369,
+          76.14
+        ],
+        "end": [
+          54.587,
+          76.14
+        ],
+        "width": 0.2,
+        "distance_mm": 0.0,
+        "overlap_area_mm2": 0.07496548490545765
+      }
+    ],
+    "pad_conflicts": [
+      {
+        "ref": "J3",
+        "pin": "7",
+        "net": "GND",
+        "at": [
+          54.444998,
+          75.173998
+        ],
+        "size": [
+          0.85,
+          0.85
+        ]
+      }
+    ],
+    "courtyard_nearby": [
+      {
+        "ref": "J3",
+        "layer": "F.CrtYd",
+        "bounds": [
+          53.294998,
+          68.173998,
+          55.594998,
+          76.173998
+        ],
+        "distance_mm": 0.0
+      }
+    ]
+  },
+  {
+    "label": "lower_positive",
+    "side": "right",
+    "center_mm": [
+      75.7,
+      76.4
+    ],
+    "pad_size_mm": [
+      1.3,
+      1.3
+    ],
+    "net": "+SOLAR",
+    "track_conflicts": [
+      {
+        "uuid": "b155dd56-9a9e-4c9a-b934-fbad2e0fffff",
+        "net": "GND",
+        "layer": "B.Cu",
+        "start": [
+          75.868,
+          79.924636
+        ],
+        "end": [
+          75.868,
+          76.675
+        ],
+        "width": 0.3,
+        "distance_mm": 0.0,
+        "overlap_area_mm2": 0.1390536097645111
+      },
+      {
+        "uuid": "c6221fc0-d983-44cf-91bb-57b72c13f950",
+        "net": "GND",
+        "layer": "B.Cu",
+        "start": [
+          75.868,
+          76.675
+        ],
+        "end": [
+          75.175,
+          75.982
+        ],
+        "width": 0.3,
+        "distance_mm": 0.0,
+        "overlap_area_mm2": 0.320995015754733
+      },
+      {
+        "uuid": "deac2438-480f-4f32-90e2-ccd56727ec39",
+        "net": "GND",
+        "layer": "B.Cu",
+        "start": [
+          75.175,
+          75.982
+        ],
+        "end": [
+          73.799,
+          75.982
+        ],
+        "width": 0.3,
+        "distance_mm": 0.0,
+        "overlap_area_mm2": 0.027497946700831485
+      },
+      {
+        "uuid": "6c7cdcf8-8205-4eb8-83ce-64d155e1ead7",
+        "net": "+3.3V",
+        "layer": "F.Cu",
+        "start": [
+          75.152001,
+          77.899
+        ],
+        "end": [
+          75.152001,
+          75.536999
+        ],
+        "width": 0.38,
+        "distance_mm": 0.0,
+        "overlap_area_mm2": 0.22233293323340264
+      },
+      {
+        "uuid": "bece7755-de06-49a9-9ac3-063b05b2dc4c",
+        "net": "+3.3V",
+        "layer": "F.Cu",
+        "start": [
+          75.152001,
+          75.536999
+        ],
+        "end": [
+          75.531,
+          75.158
+        ],
+        "width": 0.38,
+        "distance_mm": 0.18296025466164265,
+        "overlap_area_mm2": 0.0
+      }
+    ],
+    "pad_conflicts": [
+      {
+        "ref": "J4",
+        "pin": "7",
+        "net": "+3.3V",
+        "at": [
+          75.531,
+          75.158
+        ],
+        "size": [
+          0.85,
+          0.85
+        ]
+      }
+    ],
+    "courtyard_nearby": [
+      {
+        "ref": "J4",
+        "layer": "F.CrtYd",
+        "bounds": [
+          74.381,
+          68.158,
+          76.68100000000001,
+          76.158
+        ],
+        "distance_mm": 0.0
+      }
+    ]
+  },
+  {
+    "label": "lower_positive",
+    "side": "left",
+    "center_mm": [
+      54.3,
+      76.5
+    ],
+    "pad_size_mm": [
+      1.3,
+      1.3
+    ],
+    "net": "+SOLAR",
+    "track_conflicts": [
+      {
+        "uuid": "13269fc8-e16e-470f-80f3-b9aff43911f5",
+        "net": "GND",
+        "layer": "B.Cu",
+        "start": [
+          54.369,
+          76.14
+        ],
+        "end": [
+          54.369,
+          83.863
+        ],
+        "width": 0.2,
+        "distance_mm": 0.0,
+        "overlap_area_mm2": 0.21631675775299605
+      },
+      {
+        "uuid": "b12ac0ab-a9d8-44ff-bbd1-4f120bdcb51b",
+        "net": "GND",
+        "layer": "B.Cu",
+        "start": [
+          54.587,
+          76.14
+        ],
+        "end": [
+          55.6,
+          75.127
+        ],
+        "width": 0.2,
+        "distance_mm": 0.0,
+        "overlap_area_mm2": 0.05314618697046796
+      },
+      {
+        "uuid": "d35c66fd-6572-43e0-a7de-e998d4ebdc84",
+        "net": "GND",
+        "layer": "B.Cu",
+        "start": [
+          54.369,
+          76.14
+        ],
+        "end": [
+          54.587,
+          76.14
+        ],
+        "width": 0.2,
+        "distance_mm": 0.0,
+        "overlap_area_mm2": 0.07496548490545765
+      }
+    ],
+    "pad_conflicts": [],
+    "courtyard_nearby": [
+      {
+        "ref": "J3",
+        "layer": "F.CrtYd",
+        "bounds": [
+          53.294998,
+          68.173998,
+          55.594998,
+          76.173998
+        ],
+        "distance_mm": 0.0
+      }
+    ]
+  },
+  {
+    "label": "lower_positive",
+    "side": "right",
+    "center_mm": [
+      75.7,
+      76.5
+    ],
+    "pad_size_mm": [
+      1.3,
+      1.3
+    ],
+    "net": "+SOLAR",
+    "track_conflicts": [
+      {
+        "uuid": "b155dd56-9a9e-4c9a-b934-fbad2e0fffff",
+        "net": "GND",
+        "layer": "B.Cu",
+        "start": [
+          75.868,
+          79.924636
+        ],
+        "end": [
+          75.868,
+          76.675
+        ],
+        "width": 0.3,
+        "distance_mm": 0.0,
+        "overlap_area_mm2": 0.16905360976451048
+      },
+      {
+        "uuid": "c6221fc0-d983-44cf-91bb-57b72c13f950",
+        "net": "GND",
+        "layer": "B.Cu",
+        "start": [
+          75.868,
+          76.675
+        ],
+        "end": [
+          75.175,
+          75.982
+        ],
+        "width": 0.3,
+        "distance_mm": 0.0,
+        "overlap_area_mm2": 0.3011423386465246
+      },
+      {
+        "uuid": "deac2438-480f-4f32-90e2-ccd56727ec39",
+        "net": "GND",
+        "layer": "B.Cu",
+        "start": [
+          75.175,
+          75.982
+        ],
+        "end": [
+          73.799,
+          75.982
+        ],
+        "width": 0.3,
+        "distance_mm": 0.0,
+        "overlap_area_mm2": 0.009664349364057396
+      },
+      {
+        "uuid": "6c7cdcf8-8205-4eb8-83ce-64d155e1ead7",
+        "net": "+3.3V",
+        "layer": "F.Cu",
+        "start": [
+          75.152001,
+          77.899
+        ],
+        "end": [
+          75.152001,
+          75.536999
+        ],
+        "width": 0.38,
+        "distance_mm": 0.0,
+        "overlap_area_mm2": 0.22233293323340264
+      }
+    ],
+    "pad_conflicts": [],
+    "courtyard_nearby": [
+      {
+        "ref": "J4",
+        "layer": "F.CrtYd",
+        "bounds": [
+          74.381,
+          68.158,
+          76.68100000000001,
+          76.158
+        ],
+        "distance_mm": 0.0
+      }
+    ]
+  },
+  {
+    "label": "lower_positive",
+    "side": "left",
+    "center_mm": [
+      54.3,
+      76.6
+    ],
+    "pad_size_mm": [
+      1.3,
+      1.3
+    ],
+    "net": "+SOLAR",
+    "track_conflicts": [
+      {
+        "uuid": "13269fc8-e16e-470f-80f3-b9aff43911f5",
+        "net": "GND",
+        "layer": "B.Cu",
+        "start": [
+          54.369,
+          76.14
+        ],
+        "end": [
+          54.369,
+          83.863
+        ],
+        "width": 0.2,
+        "distance_mm": 0.0,
+        "overlap_area_mm2": 0.23631675775299518
+      },
+      {
+        "uuid": "b12ac0ab-a9d8-44ff-bbd1-4f120bdcb51b",
+        "net": "GND",
+        "layer": "B.Cu",
+        "start": [
+          54.587,
+          76.14
+        ],
+        "end": [
+          55.6,
+          75.127
+        ],
+        "width": 0.2,
+        "distance_mm": 0.0,
+        "overlap_area_mm2": 0.037064253802843526
+      },
+      {
+        "uuid": "d35c66fd-6572-43e0-a7de-e998d4ebdc84",
+        "net": "GND",
+        "layer": "B.Cu",
+        "start": [
+          54.369,
+          76.14
+        ],
+        "end": [
+          54.587,
+          76.14
+        ],
+        "width": 0.2,
+        "distance_mm": 0.0,
+        "overlap_area_mm2": 0.07496548490545765
+      }
+    ],
+    "pad_conflicts": [],
+    "courtyard_nearby": [
+      {
+        "ref": "J3",
+        "layer": "F.CrtYd",
+        "bounds": [
+          53.294998,
+          68.173998,
+          55.594998,
+          76.173998
+        ],
+        "distance_mm": 0.0
+      }
+    ]
+  },
+  {
+    "label": "lower_positive",
+    "side": "right",
+    "center_mm": [
+      75.7,
+      76.6
+    ],
+    "pad_size_mm": [
+      1.3,
+      1.3
+    ],
+    "net": "+SOLAR",
+    "track_conflicts": [
+      {
+        "uuid": "b155dd56-9a9e-4c9a-b934-fbad2e0fffff",
+        "net": "GND",
+        "layer": "B.Cu",
+        "start": [
+          75.868,
+          79.924636
+        ],
+        "end": [
+          75.868,
+          76.675
+        ],
+        "width": 0.3,
+        "distance_mm": 0.0,
+        "overlap_area_mm2": 0.19905360976450984
+      },
+      {
+        "uuid": "c6221fc0-d983-44cf-91bb-57b72c13f950",
+        "net": "GND",
+        "layer": "B.Cu",
+        "start": [
+          75.868,
+          76.675
+        ],
+        "end": [
+          75.175,
+          75.982
+        ],
+        "width": 0.3,
+        "distance_mm": 0.0,
+        "overlap_area_mm2": 0.27890526106495567
+      },
+      {
+        "uuid": "deac2438-480f-4f32-90e2-ccd56727ec39",
+        "net": "GND",
+        "layer": "B.Cu",
+        "start": [
+          75.175,
+          75.982
+        ],
+        "end": [
+          73.799,
+          75.982
+        ],
+        "width": 0.3,
+        "distance_mm": 0.011439881799908508,
+        "overlap_area_mm2": 0.0
+      },
+      {
+        "uuid": "6c7cdcf8-8205-4eb8-83ce-64d155e1ead7",
+        "net": "+3.3V",
+        "layer": "F.Cu",
+        "start": [
+          75.152001,
+          77.899
+        ],
+        "end": [
+          75.152001,
+          75.536999
+        ],
+        "width": 0.38,
+        "distance_mm": 0.0,
+        "overlap_area_mm2": 0.22233293323340264
+      }
+    ],
+    "pad_conflicts": [],
+    "courtyard_nearby": [
+      {
+        "ref": "R12",
+        "layer": "F.CrtYd",
+        "bounds": [
+          73.711998,
+          77.428999,
+          75.572002,
+          78.369001
+        ],
+        "distance_mm": 0.1895904983202792
+      },
+      {
+        "ref": "J4",
+        "layer": "F.CrtYd",
+        "bounds": [
+          74.381,
+          68.158,
+          76.68100000000001,
+          76.158
+        ],
+        "distance_mm": 0.0
+      }
+    ]
+  },
+  {
+    "label": "lower_positive",
+    "side": "left",
+    "center_mm": [
+      54.3,
+      76.7
+    ],
+    "pad_size_mm": [
+      1.3,
+      1.3
+    ],
+    "net": "+SOLAR",
+    "track_conflicts": [
+      {
+        "uuid": "13269fc8-e16e-470f-80f3-b9aff43911f5",
+        "net": "GND",
+        "layer": "B.Cu",
+        "start": [
+          54.369,
+          76.14
+        ],
+        "end": [
+          54.369,
+          83.863
+        ],
+        "width": 0.2,
+        "distance_mm": 0.0,
+        "overlap_area_mm2": 0.25520054856373037
+      },
+      {
+        "uuid": "b12ac0ab-a9d8-44ff-bbd1-4f120bdcb51b",
+        "net": "GND",
+        "layer": "B.Cu",
+        "start": [
+          54.587,
+          76.14
+        ],
+        "end": [
+          55.6,
+          75.127
+        ],
+        "width": 0.2,
+        "distance_mm": 0.0,
+        "overlap_area_mm2": 0.019340267292776644
+      },
+      {
+        "uuid": "d35c66fd-6572-43e0-a7de-e998d4ebdc84",
+        "net": "GND",
+        "layer": "B.Cu",
+        "start": [
+          54.369,
+          76.14
+        ],
+        "end": [
+          54.587,
+          76.14
+        ],
+        "width": 0.2,
+        "distance_mm": 0.0,
+        "overlap_area_mm2": 0.05776317954585966
+      }
+    ],
+    "pad_conflicts": [],
+    "courtyard_nearby": [
+      {
+        "ref": "J3",
+        "layer": "F.CrtYd",
+        "bounds": [
+          53.294998,
+          68.173998,
+          55.594998,
+          76.173998
+        ],
+        "distance_mm": 0.0
+      }
+    ]
+  },
+  {
+    "label": "lower_positive",
+    "side": "right",
+    "center_mm": [
+      75.7,
+      76.7
+    ],
+    "pad_size_mm": [
+      1.3,
+      1.3
+    ],
+    "net": "+SOLAR",
+    "track_conflicts": [
+      {
+        "uuid": "b155dd56-9a9e-4c9a-b934-fbad2e0fffff",
+        "net": "GND",
+        "layer": "B.Cu",
+        "start": [
+          75.868,
+          79.924636
+        ],
+        "end": [
+          75.868,
+          76.675
+        ],
+        "width": 0.3,
+        "distance_mm": 0.0,
+        "overlap_area_mm2": 0.22905360976451358
+      },
+      {
+        "uuid": "c6221fc0-d983-44cf-91bb-57b72c13f950",
+        "net": "GND",
+        "layer": "B.Cu",
+        "start": [
+          75.868,
+          76.675
+        ],
+        "end": [
+          75.175,
+          75.982
+        ],
+        "width": 0.3,
+        "distance_mm": 0.0,
+        "overlap_area_mm2": 0.2542421580091433
+      },
+      {
+        "uuid": "deac2438-480f-4f32-90e2-ccd56727ec39",
+        "net": "GND",
+        "layer": "B.Cu",
+        "start": [
+          75.175,
+          75.982
+        ],
+        "end": [
+          73.799,
+          75.982
+        ],
+        "width": 0.3,
+        "distance_mm": 0.09040877749749394,
+        "overlap_area_mm2": 0.0
+      },
+      {
+        "uuid": "6c7cdcf8-8205-4eb8-83ce-64d155e1ead7",
+        "net": "+3.3V",
+        "layer": "F.Cu",
+        "start": [
+          75.152001,
+          77.899
+        ],
+        "end": [
+          75.152001,
+          75.536999
+        ],
+        "width": 0.38,
+        "distance_mm": 0.0,
+        "overlap_area_mm2": 0.22233293323340264
+      }
+    ],
+    "pad_conflicts": [],
+    "courtyard_nearby": [
+      {
+        "ref": "R12",
+        "layer": "F.CrtYd",
+        "bounds": [
+          73.711998,
+          77.428999,
+          75.572002,
+          78.369001
+        ],
+        "distance_mm": 0.09067284732379079
+      },
+      {
+        "ref": "J4",
+        "layer": "F.CrtYd",
+        "bounds": [
+          74.381,
+          68.158,
+          76.68100000000001,
+          76.158
+        ],
+        "distance_mm": 0.0
+      }
+    ]
+  },
+  {
+    "label": "lower_positive",
+    "side": "left",
+    "center_mm": [
+      54.3,
+      77.0
+    ],
+    "pad_size_mm": [
+      1.3,
+      1.3
+    ],
+    "net": "+SOLAR",
+    "track_conflicts": [
+      {
+        "uuid": "13269fc8-e16e-470f-80f3-b9aff43911f5",
+        "net": "GND",
+        "layer": "B.Cu",
+        "start": [
+          54.369,
+          76.14
+        ],
+        "end": [
+          54.369,
+          83.863
+        ],
+        "width": 0.2,
+        "distance_mm": 0.0,
+        "overlap_area_mm2": 0.25726803060053094
+      },
+      {
+        "uuid": "b12ac0ab-a9d8-44ff-bbd1-4f120bdcb51b",
+        "net": "GND",
+        "layer": "B.Cu",
+        "start": [
+          54.587,
+          76.14
+        ],
+        "end": [
+          55.6,
+          75.127
+        ],
+        "width": 0.2,
+        "distance_mm": 0.15731869182708194,
+        "overlap_area_mm2": 0.0
+      },
+      {
+        "uuid": "d35c66fd-6572-43e0-a7de-e998d4ebdc84",
+        "net": "GND",
+        "layer": "B.Cu",
+        "start": [
+          54.369,
+          76.14
+        ],
+        "end": [
+          54.587,
+          76.14
+        ],
+        "width": 0.2,
+        "distance_mm": 0.11325316971116922,
+        "overlap_area_mm2": 0.0
+      },
+      {
+        "uuid": "ada427d2-8467-4a41-9363-b1025510c322",
+        "net": "PA1",
+        "layer": "F.Cu",
+        "start": [
+          55.264,
+          77.554
+        ],
+        "end": [
+          55.264,
+          76.942
+        ],
+        "width": 0.25,
+        "distance_mm": 0.18900000000000716,
+        "overlap_area_mm2": 0.0
+      },
+      {
+        "uuid": "ad2b0c5d-0977-4539-8efd-6b220e8d16c7",
+        "net": "PA1",
+        "layer": "B.Cu",
+        "start": [
+          59.225,
+          76.942
+        ],
+        "end": [
+          55.264,
+          76.942
+        ],
+        "width": 0.25,
+        "distance_mm": 0.19161826633376958,
+        "overlap_area_mm2": 0.0
+      }
+    ],
+    "pad_conflicts": [],
+    "courtyard_nearby": [
+      {
+        "ref": "J3",
+        "layer": "F.CrtYd",
+        "bounds": [
+          53.294998,
+          68.173998,
+          55.594998,
+          76.173998
+        ],
+        "distance_mm": 0.17600199999999688
+      }
+    ]
+  },
+  {
+    "label": "lower_positive",
+    "side": "right",
+    "center_mm": [
+      75.7,
+      77.0
+    ],
+    "pad_size_mm": [
+      1.3,
+      1.3
+    ],
+    "net": "+SOLAR",
+    "track_conflicts": [
+      {
+        "uuid": "b155dd56-9a9e-4c9a-b934-fbad2e0fffff",
+        "net": "GND",
+        "layer": "B.Cu",
+        "start": [
+          75.868,
+          79.924636
+        ],
+        "end": [
+          75.868,
+          76.675
+        ],
+        "width": 0.3,
+        "distance_mm": 0.0,
+        "overlap_area_mm2": 0.3190536097645162
+      },
+      {
+        "uuid": "c6221fc0-d983-44cf-91bb-57b72c13f950",
+        "net": "GND",
+        "layer": "B.Cu",
+        "start": [
+          75.868,
+          76.675
+        ],
+        "end": [
+          75.175,
+          75.982
+        ],
+        "width": 0.3,
+        "distance_mm": 0.0,
+        "overlap_area_mm2": 0.16338256461691883
+      },
+      {
+        "uuid": "6c7cdcf8-8205-4eb8-83ce-64d155e1ead7",
+        "net": "+3.3V",
+        "layer": "F.Cu",
+        "start": [
+          75.152001,
+          77.899
+        ],
+        "end": [
+          75.152001,
+          75.536999
+        ],
+        "width": 0.38,
+        "distance_mm": 0.0,
+        "overlap_area_mm2": 0.22233293323340264
+      },
+      {
+        "uuid": "36a15338-70fb-480e-abdc-b7b4f1f8065f",
+        "net": "SCL",
+        "layer": "B.Cu",
+        "start": [
+          74.806,
+          80.314884
+        ],
+        "end": [
+          74.806,
+          77.36
+        ],
+        "width": 0.25,
+        "distance_mm": 0.18895426293582515,
+        "overlap_area_mm2": 0.0
+      },
+      {
+        "uuid": "377fbb36-f705-4345-b319-e5c1247be702",
+        "net": "SCL",
+        "layer": "B.Cu",
+        "start": [
+          74.806,
+          77.36
+        ],
+        "end": [
+          74.202,
+          76.756
+        ],
+        "width": 0.25,
+        "distance_mm": 0.18895426293582515,
+        "overlap_area_mm2": 0.0
+      }
+    ],
+    "pad_conflicts": [
+      {
+        "ref": "R12",
+        "pin": "1",
+        "net": "+3.3V",
+        "at": [
+          75.152001,
+          77.899
+        ],
+        "size": [
+          0.54,
+          0.64
+        ]
+      }
+    ],
+    "courtyard_nearby": [
+      {
+        "ref": "R12",
+        "layer": "F.CrtYd",
+        "bounds": [
+          73.711998,
+          77.428999,
+          75.572002,
+          78.369001
+        ],
+        "distance_mm": 0.0
+      },
+      {
+        "ref": "J4",
+        "layer": "F.CrtYd",
+        "bounds": [
+          74.381,
+          68.158,
+          76.68100000000001,
+          76.158
+        ],
+        "distance_mm": 0.19199999999999304
+      }
+    ]
+  },
+  {
+    "label": "lower_positive",
+    "side": "left",
+    "center_mm": [
+      54.3,
+      78.5
+    ],
+    "pad_size_mm": [
+      1.3,
+      1.3
+    ],
+    "net": "+SOLAR",
+    "track_conflicts": [
+      {
+        "uuid": "13269fc8-e16e-470f-80f3-b9aff43911f5",
+        "net": "GND",
+        "layer": "B.Cu",
+        "start": [
+          54.369,
+          76.14
+        ],
+        "end": [
+          54.369,
+          83.863
+        ],
+        "width": 0.2,
+        "distance_mm": 0.0,
+        "overlap_area_mm2": 0.25726803060053094
+      }
+    ],
+    "pad_conflicts": [],
+    "courtyard_nearby": []
+  },
+  {
+    "label": "lower_positive",
+    "side": "right",
+    "center_mm": [
+      75.7,
+      78.5
+    ],
+    "pad_size_mm": [
+      1.3,
+      1.3
+    ],
+    "net": "+SOLAR",
+    "track_conflicts": [
+      {
+        "uuid": "b155dd56-9a9e-4c9a-b934-fbad2e0fffff",
+        "net": "GND",
+        "layer": "B.Cu",
+        "start": [
+          75.868,
+          79.924636
+        ],
+        "end": [
+          75.868,
+          76.675
+        ],
+        "width": 0.3,
+        "distance_mm": 0.0,
+        "overlap_area_mm2": 0.37253487849174033
+      },
+      {
+        "uuid": "6c7cdcf8-8205-4eb8-83ce-64d155e1ead7",
+        "net": "+3.3V",
+        "layer": "F.Cu",
+        "start": [
+          75.152001,
+          77.899
+        ],
+        "end": [
+          75.152001,
+          75.536999
+        ],
+        "width": 0.38,
+        "distance_mm": 0.0,
+        "overlap_area_mm2": 0.0029849273985703014
+      },
+      {
+        "uuid": "7a449c3c-64fa-457f-baf3-3900c5192bda",
+        "net": "+3.3V",
+        "layer": "F.Cu",
+        "start": [
+          75.158002,
+          81.585998
+        ],
+        "end": [
+          75.158002,
+          79.004996
+        ],
+        "width": 0.38,
+        "distance_mm": 0.0,
+        "overlap_area_mm2": 0.021243077898328133
+      },
+      {
+        "uuid": "a284154a-d001-4889-9cea-74de3fff7bc2",
+        "net": "+3.3V",
+        "layer": "F.Cu",
+        "start": [
+          75.152001,
+          77.899
+        ],
+        "end": [
+          75.152001,
+          78.998995
+        ],
+        "width": 0.38,
+        "distance_mm": 0.0,
+        "overlap_area_mm2": 0.22226176404368447
+      },
+      {
+        "uuid": "ba1a69c4-9fcf-4a38-b640-b739ec135bc3",
+        "net": "+3.3V",
+        "layer": "F.Cu",
+        "start": [
+          75.152001,
+          78.998995
+        ],
+        "end": [
+          75.158002,
+          79.004996
+        ],
+        "width": 0.35,
+        "distance_mm": 0.0,
+        "overlap_area_mm2": 0.016594910098021404
+      },
+      {
+        "uuid": "36a15338-70fb-480e-abdc-b7b4f1f8065f",
+        "net": "SCL",
+        "layer": "B.Cu",
+        "start": [
+          74.806,
+          80.314884
+        ],
+        "end": [
+          74.806,
+          77.36
+        ],
+        "width": 0.25,
+        "distance_mm": 0.11899999999999977,
+        "overlap_area_mm2": 0.0
+      }
+    ],
+    "pad_conflicts": [
+      {
+        "ref": "R12",
+        "pin": "1",
+        "net": "+3.3V",
+        "at": [
+          75.152001,
+          77.899
+        ],
+        "size": [
+          0.54,
+          0.64
+        ]
+      },
+      {
+        "ref": "R11",
+        "pin": "1",
+        "net": "+3.3V",
+        "at": [
+          75.158002,
+          79.004996
+        ],
+        "size": [
+          0.54,
+          0.64
+        ]
+      }
+    ],
+    "courtyard_nearby": [
+      {
+        "ref": "R12",
+        "layer": "F.CrtYd",
+        "bounds": [
+          73.711998,
+          77.428999,
+          75.572002,
+          78.369001
+        ],
+        "distance_mm": 0.0
+      },
+      {
+        "ref": "R11",
+        "layer": "F.CrtYd",
+        "bounds": [
+          73.71799899999999,
+          78.53499500000001,
+          75.578003,
+          79.474997
+        ],
+        "distance_mm": 0.0
+      }
+    ]
+  },
+  {
+    "label": "lower_positive",
+    "side": "left",
+    "center_mm": [
+      54.3,
+      79
+    ],
+    "pad_size_mm": [
+      1.3,
+      1.3
+    ],
+    "net": "+SOLAR",
+    "track_conflicts": [
+      {
+        "uuid": "13269fc8-e16e-470f-80f3-b9aff43911f5",
+        "net": "GND",
+        "layer": "B.Cu",
+        "start": [
+          54.369,
+          76.14
+        ],
+        "end": [
+          54.369,
+          83.863
+        ],
+        "width": 0.2,
+        "distance_mm": 0.0,
+        "overlap_area_mm2": 0.25726803060053094
+      }
+    ],
+    "pad_conflicts": [],
+    "courtyard_nearby": []
+  },
+  {
+    "label": "lower_positive",
+    "side": "right",
+    "center_mm": [
+      75.7,
+      79
+    ],
+    "pad_size_mm": [
+      1.3,
+      1.3
+    ],
+    "net": "+SOLAR",
+    "track_conflicts": [
+      {
+        "uuid": "4073bc2d-e67d-4ee9-93f5-1530d311ced2",
+        "net": "GND",
+        "layer": "B.Cu",
+        "start": [
+          74.307636,
+          81.485
+        ],
+        "end": [
+          75.868,
+          79.924636
+        ],
+        "width": 0.3,
+        "distance_mm": 0.14024256621216,
+        "overlap_area_mm2": 0.0
+      },
+      {
+        "uuid": "b155dd56-9a9e-4c9a-b934-fbad2e0fffff",
+        "net": "GND",
+        "layer": "B.Cu",
+        "start": [
+          75.868,
+          79.924636
+        ],
+        "end": [
+          75.868,
+          76.675
+        ],
+        "width": 0.3,
+        "distance_mm": 0.0,
+        "overlap_area_mm2": 0.37253487849174033
+      },
+      {
+        "uuid": "7a449c3c-64fa-457f-baf3-3900c5192bda",
+        "net": "+3.3V",
+        "layer": "F.Cu",
+        "start": [
+          75.158002,
+          81.585998
+        ],
+        "end": [
+          75.158002,
+          79.004996
+        ],
+        "width": 0.38,
+        "distance_mm": 0.0,
+        "overlap_area_mm2": 0.15948797882908777
+      },
+      {
+        "uuid": "a284154a-d001-4889-9cea-74de3fff7bc2",
+        "net": "+3.3V",
+        "layer": "F.Cu",
+        "start": [
+          75.152001,
+          77.899
+        ],
+        "end": [
+          75.152001,
+          78.998995
+        ],
+        "width": 0.38,
+        "distance_mm": 0.0,
+        "overlap_area_mm2": 0.15630044043945585
+      },
+      {
+        "uuid": "ba1a69c4-9fcf-4a38-b640-b739ec135bc3",
+        "net": "+3.3V",
+        "layer": "F.Cu",
+        "start": [
+          75.152001,
+          78.998995
+        ],
+        "end": [
+          75.158002,
+          79.004996
+        ],
+        "width": 0.35,
+        "distance_mm": 0.0,
+        "overlap_area_mm2": 0.08264140992927632
+      },
+      {
+        "uuid": "36a15338-70fb-480e-abdc-b7b4f1f8065f",
+        "net": "SCL",
+        "layer": "B.Cu",
+        "start": [
+          74.806,
+          80.314884
+        ],
+        "end": [
+          74.806,
+          77.36
+        ],
+        "width": 0.25,
+        "distance_mm": 0.11899999999999977,
+        "overlap_area_mm2": 0.0
+      }
+    ],
+    "pad_conflicts": [
+      {
+        "ref": "R12",
+        "pin": "1",
+        "net": "+3.3V",
+        "at": [
+          75.152001,
+          77.899
+        ],
+        "size": [
+          0.54,
+          0.64
+        ]
+      },
+      {
+        "ref": "R11",
+        "pin": "1",
+        "net": "+3.3V",
+        "at": [
+          75.158002,
+          79.004996
+        ],
+        "size": [
+          0.54,
+          0.64
+        ]
+      }
+    ],
+    "courtyard_nearby": [
+      {
+        "ref": "R12",
+        "layer": "F.CrtYd",
+        "bounds": [
+          73.711998,
+          77.428999,
+          75.572002,
+          78.369001
+        ],
+        "distance_mm": 0.0
+      },
+      {
+        "ref": "R11",
+        "layer": "F.CrtYd",
+        "bounds": [
+          73.71799899999999,
+          78.53499500000001,
+          75.578003,
+          79.474997
+        ],
+        "distance_mm": 0.0
+      }
+    ]
+  },
+  {
+    "label": "lower_positive",
+    "side": "left",
+    "center_mm": [
+      54.3,
+      80
+    ],
+    "pad_size_mm": [
+      1.3,
+      1.3
+    ],
+    "net": "+SOLAR",
+    "track_conflicts": [
+      {
+        "uuid": "13269fc8-e16e-470f-80f3-b9aff43911f5",
+        "net": "GND",
+        "layer": "B.Cu",
+        "start": [
+          54.369,
+          76.14
+        ],
+        "end": [
+          54.369,
+          83.863
+        ],
+        "width": 0.2,
+        "distance_mm": 0.0,
+        "overlap_area_mm2": 0.25726803060053094
+      }
+    ],
+    "pad_conflicts": [],
+    "courtyard_nearby": [
+      {
+        "ref": "C15",
+        "layer": "F.CrtYd",
+        "bounds": [
+          54.737999,
+          80.603998,
+          56.557998999999995,
+          81.52399799999999
+        ],
+        "distance_mm": 0.09683439573426662
+      }
+    ]
+  },
+  {
+    "label": "lower_positive",
+    "side": "right",
+    "center_mm": [
+      75.7,
+      80
+    ],
+    "pad_size_mm": [
+      1.3,
+      1.3
+    ],
+    "net": "+SOLAR",
+    "track_conflicts": [
+      {
+        "uuid": "4073bc2d-e67d-4ee9-93f5-1530d311ced2",
+        "net": "GND",
+        "layer": "B.Cu",
+        "start": [
+          74.307636,
+          81.485
+        ],
+        "end": [
+          75.868,
+          79.924636
+        ],
+        "width": 0.3,
+        "distance_mm": 0.0,
+        "overlap_area_mm2": 0.27899056849220083
+      },
+      {
+        "uuid": "b155dd56-9a9e-4c9a-b934-fbad2e0fffff",
+        "net": "GND",
+        "layer": "B.Cu",
+        "start": [
+          75.868,
+          79.924636
+        ],
+        "end": [
+          75.868,
+          76.675
+        ],
+        "width": 0.3,
+        "distance_mm": 0.0,
+        "overlap_area_mm2": 0.1989444097645128
+      },
+      {
+        "uuid": "7a449c3c-64fa-457f-baf3-3900c5192bda",
+        "net": "+3.3V",
+        "layer": "F.Cu",
+        "start": [
+          75.158002,
+          81.585998
+        ],
+        "end": [
+          75.158002,
+          79.004996
+        ],
+        "width": 0.38,
+        "distance_mm": 0.0,
+        "overlap_area_mm2": 0.22886351817526396
+      },
+      {
+        "uuid": "36a15338-70fb-480e-abdc-b7b4f1f8065f",
+        "net": "SCL",
+        "layer": "B.Cu",
+        "start": [
+          74.806,
+          80.314884
+        ],
+        "end": [
+          74.806,
+          77.36
+        ],
+        "width": 0.25,
+        "distance_mm": 0.11899999999999977,
+        "overlap_area_mm2": 0.0
+      },
+      {
+        "uuid": "db3580e1-8284-4ab6-991e-228f5f90e7a5",
+        "net": "SCL",
+        "layer": "B.Cu",
+        "start": [
+          74.431884,
+          80.689
+        ],
+        "end": [
+          74.806,
+          80.314884
+        ],
+        "width": 0.25,
+        "distance_mm": 0.1737551403101689,
+        "overlap_area_mm2": 0.0
+      }
+    ],
+    "pad_conflicts": [
+      {
+        "ref": "R11",
+        "pin": "1",
+        "net": "+3.3V",
+        "at": [
+          75.158002,
+          79.004996
+        ],
+        "size": [
+          0.54,
+          0.64
+        ]
+      }
+    ],
+    "courtyard_nearby": [
+      {
+        "ref": "R11",
+        "layer": "F.CrtYd",
+        "bounds": [
+          73.71799899999999,
+          78.53499500000001,
+          75.578003,
+          79.474997
+        ],
+        "distance_mm": 0.0
+      }
+    ]
+  },
+  {
+    "label": "lower_positive",
+    "side": "left",
+    "center_mm": [
+      54.3,
+      81.5
+    ],
+    "pad_size_mm": [
+      1.3,
+      1.3
+    ],
+    "net": "+SOLAR",
+    "track_conflicts": [
+      {
+        "uuid": "3e20abe3-f828-4d60-9d8c-bd8b0c382377",
+        "net": "GND",
+        "layer": "F.Cu",
+        "start": [
+          55.126999,
+          81.104998
+        ],
+        "end": [
+          55.167999,
+          81.063998
+        ],
+        "width": 0.2,
+        "distance_mm": 0.16738676628506305,
+        "overlap_area_mm2": 0.0
+      },
+      {
+        "uuid": "ff9c66f8-7fe6-4103-8cee-dff669229808",
+        "net": "GND",
+        "layer": "F.Cu",
+        "start": [
+          55.126999,
+          82.209999
+        ],
+        "end": [
+          55.126999,
+          81.104998
+        ],
+        "width": 0.2,
+        "distance_mm": 0.0769990000000007,
+        "overlap_area_mm2": 0.0
+      },
+      {
+        "uuid": "13269fc8-e16e-470f-80f3-b9aff43911f5",
+        "net": "GND",
+        "layer": "B.Cu",
+        "start": [
+          54.369,
+          76.14
+        ],
+        "end": [
+          54.369,
+          83.863
+        ],
+        "width": 0.2,
+        "distance_mm": 0.0,
+        "overlap_area_mm2": 0.25726803060053094
+      }
+    ],
+    "pad_conflicts": [
+      {
+        "ref": "R21",
+        "pin": "2",
+        "net": "GND",
+        "at": [
+          55.126999,
+          82.209999
+        ],
+        "size": [
+          0.54,
+          0.64
+        ]
+      },
+      {
+        "ref": "C15",
+        "pin": "1",
+        "net": "GND",
+        "at": [
+          55.167999,
+          81.063998
+        ],
+        "size": [
+          0.56,
+          0.62
+        ]
+      }
+    ],
+    "courtyard_nearby": [
+      {
+        "ref": "R21",
+        "layer": "F.CrtYd",
+        "bounds": [
+          54.706998,
+          81.739998,
+          56.567002,
+          82.67999999999999
+        ],
+        "distance_mm": 0.0
+      },
+      {
+        "ref": "C15",
+        "layer": "F.CrtYd",
+        "bounds": [
+          54.737999,
+          80.603998,
+          56.557998999999995,
+          81.52399799999999
+        ],
+        "distance_mm": 0.0
+      }
+    ]
+  },
+  {
+    "label": "lower_positive",
+    "side": "right",
+    "center_mm": [
+      75.7,
+      81.5
+    ],
+    "pad_size_mm": [
+      1.3,
+      1.3
+    ],
+    "net": "+SOLAR",
+    "track_conflicts": [
+      {
+        "uuid": "4073bc2d-e67d-4ee9-93f5-1530d311ced2",
+        "net": "GND",
+        "layer": "B.Cu",
+        "start": [
+          74.307636,
+          81.485
+        ],
+        "end": [
+          75.868,
+          79.924636
+        ],
+        "width": 0.3,
+        "distance_mm": 0.19515662799782663,
+        "overlap_area_mm2": 0.0
+      },
+      {
+        "uuid": "117dd327-ffdd-41a5-a550-4c16a341668b",
+        "net": "+3.3V",
+        "layer": "F.Cu",
+        "start": [
+          70.802,
+          85.942
+        ],
+        "end": [
+          75.158002,
+          81.585998
+        ],
+        "width": 0.38,
+        "distance_mm": 0.0,
+        "overlap_area_mm2": 0.09652455912051676
+      },
+      {
+        "uuid": "7a449c3c-64fa-457f-baf3-3900c5192bda",
+        "net": "+3.3V",
+        "layer": "F.Cu",
+        "start": [
+          75.158002,
+          81.585998
+        ],
+        "end": [
+          75.158002,
+          79.004996
+        ],
+        "width": 0.38,
+        "distance_mm": 0.0,
+        "overlap_area_mm2": 0.183091727613116
+      }
+    ],
+    "pad_conflicts": [],
+    "courtyard_nearby": []
+  },
+  {
+    "label": "lower_positive",
+    "side": "left",
+    "center_mm": [
+      54.3,
+      82
+    ],
+    "pad_size_mm": [
+      1.3,
+      1.3
+    ],
+    "net": "+SOLAR",
+    "track_conflicts": [
+      {
+        "uuid": "ff9c66f8-7fe6-4103-8cee-dff669229808",
+        "net": "GND",
+        "layer": "F.Cu",
+        "start": [
+          55.126999,
+          82.209999
+        ],
+        "end": [
+          55.126999,
+          81.104998
+        ],
+        "width": 0.2,
+        "distance_mm": 0.0769990000000007,
+        "overlap_area_mm2": 0.0
+      },
+      {
+        "uuid": "13269fc8-e16e-470f-80f3-b9aff43911f5",
+        "net": "GND",
+        "layer": "B.Cu",
+        "start": [
+          54.369,
+          76.14
+        ],
+        "end": [
+          54.369,
+          83.863
+        ],
+        "width": 0.2,
+        "distance_mm": 0.0,
+        "overlap_area_mm2": 0.25726803060053094
+      }
+    ],
+    "pad_conflicts": [
+      {
+        "ref": "R21",
+        "pin": "2",
+        "net": "GND",
+        "at": [
+          55.126999,
+          82.209999
+        ],
+        "size": [
+          0.54,
+          0.64
+        ]
+      }
+    ],
+    "courtyard_nearby": [
+      {
+        "ref": "R21",
+        "layer": "F.CrtYd",
+        "bounds": [
+          54.706998,
+          81.739998,
+          56.567002,
+          82.67999999999999
+        ],
+        "distance_mm": 0.0
+      },
+      {
+        "ref": "C15",
+        "layer": "F.CrtYd",
+        "bounds": [
+          54.737999,
+          80.603998,
+          56.557998999999995,
+          81.52399799999999
+        ],
+        "distance_mm": 0.0
+      }
+    ]
+  },
+  {
+    "label": "lower_positive",
+    "side": "right",
+    "center_mm": [
+      75.7,
+      82
+    ],
+    "pad_size_mm": [
+      1.3,
+      1.3
+    ],
+    "net": "+SOLAR",
+    "track_conflicts": [
+      {
+        "uuid": "117dd327-ffdd-41a5-a550-4c16a341668b",
+        "net": "+3.3V",
+        "layer": "F.Cu",
+        "start": [
+          70.802,
+          85.942
+        ],
+        "end": [
+          75.158002,
+          81.585998
+        ],
+        "width": 0.38,
+        "distance_mm": 0.0,
+        "overlap_area_mm2": 0.05654430747291058
+      },
+      {
+        "uuid": "7a449c3c-64fa-457f-baf3-3900c5192bda",
+        "net": "+3.3V",
+        "layer": "F.Cu",
+        "start": [
+          75.158002,
+          81.585998
+        ],
+        "end": [
+          75.158002,
+          79.004996
+        ],
+        "width": 0.38,
+        "distance_mm": 0.0,
+        "overlap_area_mm2": 0.04268314267296449
+      }
+    ],
+    "pad_conflicts": [],
+    "courtyard_nearby": []
+  },
+  {
+    "label": "lower_positive",
+    "side": "left",
+    "center_mm": [
+      54.3,
+      76.4
+    ],
+    "pad_size_mm": [
+      1.4,
+      1.4
+    ],
+    "net": "+SOLAR",
+    "track_conflicts": [
+      {
+        "uuid": "13269fc8-e16e-470f-80f3-b9aff43911f5",
+        "net": "GND",
+        "layer": "B.Cu",
+        "start": [
+          54.369,
+          76.14
+        ],
+        "end": [
+          54.369,
+          83.863
+        ],
+        "width": 0.2,
+        "distance_mm": 0.0,
+        "overlap_area_mm2": 0.20640393975046153
+      },
+      {
+        "uuid": "b12ac0ab-a9d8-44ff-bbd1-4f120bdcb51b",
+        "net": "GND",
+        "layer": "B.Cu",
+        "start": [
+          54.587,
+          76.14
+        ],
+        "end": [
+          55.6,
+          75.127
+        ],
+        "width": 0.2,
+        "distance_mm": 0.0,
+        "overlap_area_mm2": 0.0776821821229978
+      },
+      {
+        "uuid": "d35c66fd-6572-43e0-a7de-e998d4ebdc84",
+        "net": "GND",
+        "layer": "B.Cu",
+        "start": [
+          54.369,
+          76.14
+        ],
+        "end": [
+          54.587,
+          76.14
+        ],
+        "width": 0.2,
+        "distance_mm": 0.0,
+        "overlap_area_mm2": 0.07496548490545765
+      }
+    ],
+    "pad_conflicts": [
+      {
+        "ref": "J3",
+        "pin": "7",
+        "net": "GND",
+        "at": [
+          54.444998,
+          75.173998
+        ],
+        "size": [
+          0.85,
+          0.85
+        ]
+      }
+    ],
+    "courtyard_nearby": [
+      {
+        "ref": "J3",
+        "layer": "F.CrtYd",
+        "bounds": [
+          53.294998,
+          68.173998,
+          55.594998,
+          76.173998
+        ],
+        "distance_mm": 0.0
+      }
+    ]
+  },
+  {
+    "label": "lower_positive",
+    "side": "right",
+    "center_mm": [
+      75.7,
+      76.4
+    ],
+    "pad_size_mm": [
+      1.4,
+      1.4
+    ],
+    "net": "+SOLAR",
+    "track_conflicts": [
+      {
+        "uuid": "b155dd56-9a9e-4c9a-b934-fbad2e0fffff",
+        "net": "GND",
+        "layer": "B.Cu",
+        "start": [
+          75.868,
+          79.924636
+        ],
+        "end": [
+          75.868,
+          76.675
+        ],
+        "width": 0.3,
+        "distance_mm": 0.0,
+        "overlap_area_mm2": 0.15469184480343115
+      },
+      {
+        "uuid": "c6221fc0-d983-44cf-91bb-57b72c13f950",
+        "net": "GND",
+        "layer": "B.Cu",
+        "start": [
+          75.868,
+          76.675
+        ],
+        "end": [
+          75.175,
+          75.982
+        ],
+        "width": 0.3,
+        "distance_mm": 0.0,
+        "overlap_area_mm2": 0.3361851237758081
+      },
+      {
+        "uuid": "deac2438-480f-4f32-90e2-ccd56727ec39",
+        "net": "GND",
+        "layer": "B.Cu",
+        "start": [
+          75.175,
+          75.982
+        ],
+        "end": [
+          73.799,
+          75.982
+        ],
+        "width": 0.3,
+        "distance_mm": 0.0,
+        "overlap_area_mm2": 0.04387118523868032
+      },
+      {
+        "uuid": "6c7cdcf8-8205-4eb8-83ce-64d155e1ead7",
+        "net": "+3.3V",
+        "layer": "F.Cu",
+        "start": [
+          75.152001,
+          77.899
+        ],
+        "end": [
+          75.152001,
+          75.536999
+        ],
+        "width": 0.38,
+        "distance_mm": 0.0,
+        "overlap_area_mm2": 0.2904753645835658
+      },
+      {
+        "uuid": "bece7755-de06-49a9-9ac3-063b05b2dc4c",
+        "net": "+3.3V",
+        "layer": "F.Cu",
+        "start": [
+          75.152001,
+          75.536999
+        ],
+        "end": [
+          75.531,
+          75.158
+        ],
+        "width": 0.38,
+        "distance_mm": 0.13302048185139562,
+        "overlap_area_mm2": 0.0
+      }
+    ],
+    "pad_conflicts": [
+      {
+        "ref": "J4",
+        "pin": "7",
+        "net": "+3.3V",
+        "at": [
+          75.531,
+          75.158
+        ],
+        "size": [
+          0.85,
+          0.85
+        ]
+      }
+    ],
+    "courtyard_nearby": [
+      {
+        "ref": "J4",
+        "layer": "F.CrtYd",
+        "bounds": [
+          74.381,
+          68.158,
+          76.68100000000001,
+          76.158
+        ],
+        "distance_mm": 0.0
+      }
+    ]
+  },
+  {
+    "label": "lower_positive",
+    "side": "left",
+    "center_mm": [
+      54.3,
+      76.5
+    ],
+    "pad_size_mm": [
+      1.4,
+      1.4
+    ],
+    "net": "+SOLAR",
+    "track_conflicts": [
+      {
+        "uuid": "13269fc8-e16e-470f-80f3-b9aff43911f5",
+        "net": "GND",
+        "layer": "B.Cu",
+        "start": [
+          54.369,
+          76.14
+        ],
+        "end": [
+          54.369,
+          83.863
+        ],
+        "width": 0.2,
+        "distance_mm": 0.0,
+        "overlap_area_mm2": 0.2264039397504607
+      },
+      {
+        "uuid": "b12ac0ab-a9d8-44ff-bbd1-4f120bdcb51b",
+        "net": "GND",
+        "layer": "B.Cu",
+        "start": [
+          54.587,
+          76.14
+        ],
+        "end": [
+          55.6,
+          75.127
+        ],
+        "width": 0.2,
+        "distance_mm": 0.0,
+        "overlap_area_mm2": 0.0632075988441991
+      },
+      {
+        "uuid": "d35c66fd-6572-43e0-a7de-e998d4ebdc84",
+        "net": "GND",
+        "layer": "B.Cu",
+        "start": [
+          54.369,
+          76.14
+        ],
+        "end": [
+          54.587,
+          76.14
+        ],
+        "width": 0.2,
+        "distance_mm": 0.0,
+        "overlap_area_mm2": 0.07496548490545765
+      }
+    ],
+    "pad_conflicts": [],
+    "courtyard_nearby": [
+      {
+        "ref": "J3",
+        "layer": "F.CrtYd",
+        "bounds": [
+          53.294998,
+          68.173998,
+          55.594998,
+          76.173998
+        ],
+        "distance_mm": 0.0
+      }
+    ]
+  },
+  {
+    "label": "lower_positive",
+    "side": "right",
+    "center_mm": [
+      75.7,
+      76.5
+    ],
+    "pad_size_mm": [
+      1.4,
+      1.4
+    ],
+    "net": "+SOLAR",
+    "track_conflicts": [
+      {
+        "uuid": "b155dd56-9a9e-4c9a-b934-fbad2e0fffff",
+        "net": "GND",
+        "layer": "B.Cu",
+        "start": [
+          75.868,
+          79.924636
+        ],
+        "end": [
+          75.868,
+          76.675
+        ],
+        "width": 0.3,
+        "distance_mm": 0.0,
+        "overlap_area_mm2": 0.18469184480343057
+      },
+      {
+        "uuid": "c6221fc0-d983-44cf-91bb-57b72c13f950",
+        "net": "GND",
+        "layer": "B.Cu",
+        "start": [
+          75.868,
+          76.675
+        ],
+        "end": [
+          75.175,
+          75.982
+        ],
+        "width": 0.3,
+        "distance_mm": 0.0,
+        "overlap_area_mm2": 0.3162603622034099
+      },
+      {
+        "uuid": "deac2438-480f-4f32-90e2-ccd56727ec39",
+        "net": "GND",
+        "layer": "B.Cu",
+        "start": [
+          75.175,
+          75.982
+        ],
+        "end": [
+          73.799,
+          75.982
+        ],
+        "width": 0.3,
+        "distance_mm": 0.0,
+        "overlap_area_mm2": 0.022925864334406545
+      },
+      {
+        "uuid": "6c7cdcf8-8205-4eb8-83ce-64d155e1ead7",
+        "net": "+3.3V",
+        "layer": "F.Cu",
+        "start": [
+          75.152001,
+          77.899
+        ],
+        "end": [
+          75.152001,
+          75.536999
+        ],
+        "width": 0.38,
+        "distance_mm": 0.0,
+        "overlap_area_mm2": 0.2904753645835658
+      }
+    ],
+    "pad_conflicts": [],
+    "courtyard_nearby": [
+      {
+        "ref": "J4",
+        "layer": "F.CrtYd",
+        "bounds": [
+          74.381,
+          68.158,
+          76.68100000000001,
+          76.158
+        ],
+        "distance_mm": 0.0
+      }
+    ]
+  },
+  {
+    "label": "lower_positive",
+    "side": "left",
+    "center_mm": [
+      54.3,
+      76.6
+    ],
+    "pad_size_mm": [
+      1.4,
+      1.4
+    ],
+    "net": "+SOLAR",
+    "track_conflicts": [
+      {
+        "uuid": "13269fc8-e16e-470f-80f3-b9aff43911f5",
+        "net": "GND",
+        "layer": "B.Cu",
+        "start": [
+          54.369,
+          76.14
+        ],
+        "end": [
+          54.369,
+          83.863
+        ],
+        "width": 0.2,
+        "distance_mm": 0.0,
+        "overlap_area_mm2": 0.2464039397504598
+      },
+      {
+        "uuid": "b12ac0ab-a9d8-44ff-bbd1-4f120bdcb51b",
+        "net": "GND",
+        "layer": "B.Cu",
+        "start": [
+          54.587,
+          76.14
+        ],
+        "end": [
+          55.6,
+          75.127
+        ],
+        "width": 0.2,
+        "distance_mm": 0.0,
+        "overlap_area_mm2": 0.04727160656815978
+      },
+      {
+        "uuid": "d35c66fd-6572-43e0-a7de-e998d4ebdc84",
+        "net": "GND",
+        "layer": "B.Cu",
+        "start": [
+          54.369,
+          76.14
+        ],
+        "end": [
+          54.587,
+          76.14
+        ],
+        "width": 0.2,
+        "distance_mm": 0.0,
+        "overlap_area_mm2": 0.07496548490545765
+      },
+      {
+        "uuid": "ada427d2-8467-4a41-9363-b1025510c322",
+        "net": "PA1",
+        "layer": "F.Cu",
+        "start": [
+          55.264,
+          77.554
+        ],
+        "end": [
+          55.264,
+          76.942
+        ],
+        "width": 0.25,
+        "distance_mm": 0.19885855732730473,
+        "overlap_area_mm2": 0.0
+      },
+      {
+        "uuid": "ad2b0c5d-0977-4539-8efd-6b220e8d16c7",
+        "net": "PA1",
+        "layer": "B.Cu",
+        "start": [
+          59.225,
+          76.942
+        ],
+        "end": [
+          55.264,
+          76.942
+        ],
+        "width": 0.25,
+        "distance_mm": 0.19885855732730473,
+        "overlap_area_mm2": 0.0
+      }
+    ],
+    "pad_conflicts": [],
+    "courtyard_nearby": [
+      {
+        "ref": "J3",
+        "layer": "F.CrtYd",
+        "bounds": [
+          53.294998,
+          68.173998,
+          55.594998,
+          76.173998
+        ],
+        "distance_mm": 0.0
+      }
+    ]
+  },
+  {
+    "label": "lower_positive",
+    "side": "right",
+    "center_mm": [
+      75.7,
+      76.6
+    ],
+    "pad_size_mm": [
+      1.4,
+      1.4
+    ],
+    "net": "+SOLAR",
+    "track_conflicts": [
+      {
+        "uuid": "b155dd56-9a9e-4c9a-b934-fbad2e0fffff",
+        "net": "GND",
+        "layer": "B.Cu",
+        "start": [
+          75.868,
+          79.924636
+        ],
+        "end": [
+          75.868,
+          76.675
+        ],
+        "width": 0.3,
+        "distance_mm": 0.0,
+        "overlap_area_mm2": 0.21469184480343
+      },
+      {
+        "uuid": "c6221fc0-d983-44cf-91bb-57b72c13f950",
+        "net": "GND",
+        "layer": "B.Cu",
+        "start": [
+          75.868,
+          76.675
+        ],
+        "end": [
+          75.175,
+          75.982
+        ],
+        "width": 0.3,
+        "distance_mm": 0.0,
+        "overlap_area_mm2": 0.29410143299591235
+      },
+      {
+        "uuid": "deac2438-480f-4f32-90e2-ccd56727ec39",
+        "net": "GND",
+        "layer": "B.Cu",
+        "start": [
+          75.175,
+          75.982
+        ],
+        "end": [
+          73.799,
+          75.982
+        ],
+        "width": 0.3,
+        "distance_mm": 0.0,
+        "overlap_area_mm2": 0.004855578509267275
+      },
+      {
+        "uuid": "6c7cdcf8-8205-4eb8-83ce-64d155e1ead7",
+        "net": "+3.3V",
+        "layer": "F.Cu",
+        "start": [
+          75.152001,
+          77.899
+        ],
+        "end": [
+          75.152001,
+          75.536999
+        ],
+        "width": 0.38,
+        "distance_mm": 0.0,
+        "overlap_area_mm2": 0.2904753645835658
+      }
+    ],
+    "pad_conflicts": [],
+    "courtyard_nearby": [
+      {
+        "ref": "R12",
+        "layer": "F.CrtYd",
+        "bounds": [
+          73.711998,
+          77.428999,
+          75.572002,
+          78.369001
+        ],
+        "distance_mm": 0.13965072551002364
+      },
+      {
+        "ref": "J4",
+        "layer": "F.CrtYd",
+        "bounds": [
+          74.381,
+          68.158,
+          76.68100000000001,
+          76.158
+        ],
+        "distance_mm": 0.0
+      }
+    ]
+  },
+  {
+    "label": "lower_positive",
+    "side": "left",
+    "center_mm": [
+      54.3,
+      76.7
+    ],
+    "pad_size_mm": [
+      1.4,
+      1.4
+    ],
+    "net": "+SOLAR",
+    "track_conflicts": [
+      {
+        "uuid": "13269fc8-e16e-470f-80f3-b9aff43911f5",
+        "net": "GND",
+        "layer": "B.Cu",
+        "start": [
+          54.369,
+          76.14
+        ],
+        "end": [
+          54.369,
+          83.863
+        ],
+        "width": 0.2,
+        "distance_mm": 0.0,
+        "overlap_area_mm2": 0.26640393975046184
+      },
+      {
+        "uuid": "b12ac0ab-a9d8-44ff-bbd1-4f120bdcb51b",
+        "net": "GND",
+        "layer": "B.Cu",
+        "start": [
+          54.587,
+          76.14
+        ],
+        "end": [
+          55.6,
+          75.127
+        ],
+        "width": 0.2,
+        "distance_mm": 0.0,
+        "overlap_area_mm2": 0.0298131363279837
+      },
+      {
+        "uuid": "d35c66fd-6572-43e0-a7de-e998d4ebdc84",
+        "net": "GND",
+        "layer": "B.Cu",
+        "start": [
+          54.369,
+          76.14
+        ],
+        "end": [
+          54.587,
+          76.14
+        ],
+        "width": 0.2,
+        "distance_mm": 0.0,
+        "overlap_area_mm2": 0.07170829924996794
+      },
+      {
+        "uuid": "ada427d2-8467-4a41-9363-b1025510c322",
+        "net": "PA1",
+        "layer": "F.Cu",
+        "start": [
+          55.264,
+          77.554
+        ],
+        "end": [
+          55.264,
+          76.942
+        ],
+        "width": 0.25,
+        "distance_mm": 0.16990508024686232,
+        "overlap_area_mm2": 0.0
+      },
+      {
+        "uuid": "ad2b0c5d-0977-4539-8efd-6b220e8d16c7",
+        "net": "PA1",
+        "layer": "B.Cu",
+        "start": [
+          59.225,
+          76.942
+        ],
+        "end": [
+          55.264,
+          76.942
+        ],
+        "width": 0.25,
+        "distance_mm": 0.16990508024686232,
+        "overlap_area_mm2": 0.0
+      }
+    ],
+    "pad_conflicts": [],
+    "courtyard_nearby": [
+      {
+        "ref": "J3",
+        "layer": "F.CrtYd",
+        "bounds": [
+          53.294998,
+          68.173998,
+          55.594998,
+          76.173998
+        ],
+        "distance_mm": 0.0
+      }
+    ]
+  },
+  {
+    "label": "lower_positive",
+    "side": "right",
+    "center_mm": [
+      75.7,
+      76.7
+    ],
+    "pad_size_mm": [
+      1.4,
+      1.4
+    ],
+    "net": "+SOLAR",
+    "track_conflicts": [
+      {
+        "uuid": "b155dd56-9a9e-4c9a-b934-fbad2e0fffff",
+        "net": "GND",
+        "layer": "B.Cu",
+        "start": [
+          75.868,
+          79.924636
+        ],
+        "end": [
+          75.868,
+          76.675
+        ],
+        "width": 0.3,
+        "distance_mm": 0.0,
+        "overlap_area_mm2": 0.2446918448034337
+      },
+      {
+        "uuid": "c6221fc0-d983-44cf-91bb-57b72c13f950",
+        "net": "GND",
+        "layer": "B.Cu",
+        "start": [
+          75.868,
+          76.675
+        ],
+        "end": [
+          75.175,
+          75.982
+        ],
+        "width": 0.3,
+        "distance_mm": 0.0,
+        "overlap_area_mm2": 0.26970657208748805
+      },
+      {
+        "uuid": "deac2438-480f-4f32-90e2-ccd56727ec39",
+        "net": "GND",
+        "layer": "B.Cu",
+        "start": [
+          75.175,
+          75.982
+        ],
+        "end": [
+          73.799,
+          75.982
+        ],
+        "width": 0.3,
+        "distance_mm": 0.0404690046872416,
+        "overlap_area_mm2": 0.0
+      },
+      {
+        "uuid": "6c7cdcf8-8205-4eb8-83ce-64d155e1ead7",
+        "net": "+3.3V",
+        "layer": "F.Cu",
+        "start": [
+          75.152001,
+          77.899
+        ],
+        "end": [
+          75.152001,
+          75.536999
+        ],
+        "width": 0.38,
+        "distance_mm": 0.0,
+        "overlap_area_mm2": 0.2904753645835658
+      }
+    ],
+    "pad_conflicts": [],
+    "courtyard_nearby": [
+      {
+        "ref": "R12",
+        "layer": "F.CrtYd",
+        "bounds": [
+          73.711998,
+          77.428999,
+          75.572002,
+          78.369001
+        ],
+        "distance_mm": 0.04073307451353809
+      },
+      {
+        "ref": "J4",
+        "layer": "F.CrtYd",
+        "bounds": [
+          74.381,
+          68.158,
+          76.68100000000001,
+          76.158
+        ],
+        "distance_mm": 0.0
+      }
+    ]
+  },
+  {
+    "label": "lower_positive",
+    "side": "left",
+    "center_mm": [
+      54.3,
+      77.0
+    ],
+    "pad_size_mm": [
+      1.4,
+      1.4
+    ],
+    "net": "+SOLAR",
+    "track_conflicts": [
+      {
+        "uuid": "13269fc8-e16e-470f-80f3-b9aff43911f5",
+        "net": "GND",
+        "layer": "B.Cu",
+        "start": [
+          54.369,
+          76.14
+        ],
+        "end": [
+          54.369,
+          83.863
+        ],
+        "width": 0.2,
+        "distance_mm": 0.0,
+        "overlap_area_mm2": 0.27744239459546016
+      },
+      {
+        "uuid": "b12ac0ab-a9d8-44ff-bbd1-4f120bdcb51b",
+        "net": "GND",
+        "layer": "B.Cu",
+        "start": [
+          54.587,
+          76.14
+        ],
+        "end": [
+          55.6,
+          75.127
+        ],
+        "width": 0.2,
+        "distance_mm": 0.10737891901682754,
+        "overlap_area_mm2": 0.0
+      },
+      {
+        "uuid": "d35c66fd-6572-43e0-a7de-e998d4ebdc84",
+        "net": "GND",
+        "layer": "B.Cu",
+        "start": [
+          54.369,
+          76.14
+        ],
+        "end": [
+          54.587,
+          76.14
+        ],
+        "width": 0.2,
+        "distance_mm": 0.06331339690090734,
+        "overlap_area_mm2": 0.0
+      },
+      {
+        "uuid": "ada427d2-8467-4a41-9363-b1025510c322",
+        "net": "PA1",
+        "layer": "F.Cu",
+        "start": [
+          55.264,
+          77.554
+        ],
+        "end": [
+          55.264,
+          76.942
+        ],
+        "width": 0.25,
+        "distance_mm": 0.1390000000000029,
+        "overlap_area_mm2": 0.0
+      },
+      {
+        "uuid": "ad2b0c5d-0977-4539-8efd-6b220e8d16c7",
+        "net": "PA1",
+        "layer": "B.Cu",
+        "start": [
+          59.225,
+          76.942
+        ],
+        "end": [
+          55.264,
+          76.942
+        ],
+        "width": 0.25,
+        "distance_mm": 0.14167849352351078,
+        "overlap_area_mm2": 0.0
+      }
+    ],
+    "pad_conflicts": [],
+    "courtyard_nearby": [
+      {
+        "ref": "J3",
+        "layer": "F.CrtYd",
+        "bounds": [
+          53.294998,
+          68.173998,
+          55.594998,
+          76.173998
+        ],
+        "distance_mm": 0.12600199999999973
+      }
+    ]
+  },
+  {
+    "label": "lower_positive",
+    "side": "right",
+    "center_mm": [
+      75.7,
+      77.0
+    ],
+    "pad_size_mm": [
+      1.4,
+      1.4
+    ],
+    "net": "+SOLAR",
+    "track_conflicts": [
+      {
+        "uuid": "b155dd56-9a9e-4c9a-b934-fbad2e0fffff",
+        "net": "GND",
+        "layer": "B.Cu",
+        "start": [
+          75.868,
+          79.924636
+        ],
+        "end": [
+          75.868,
+          76.675
+        ],
+        "width": 0.3,
+        "distance_mm": 0.0,
+        "overlap_area_mm2": 0.3346918448034363
+      },
+      {
+        "uuid": "c6221fc0-d983-44cf-91bb-57b72c13f950",
+        "net": "GND",
+        "layer": "B.Cu",
+        "start": [
+          75.868,
+          76.675
+        ],
+        "end": [
+          75.175,
+          75.982
+        ],
+        "width": 0.3,
+        "distance_mm": 0.0,
+        "overlap_area_mm2": 0.181365098052825
+      },
+      {
+        "uuid": "6c7cdcf8-8205-4eb8-83ce-64d155e1ead7",
+        "net": "+3.3V",
+        "layer": "F.Cu",
+        "start": [
+          75.152001,
+          77.899
+        ],
+        "end": [
+          75.152001,
+          75.536999
+        ],
+        "width": 0.38,
+        "distance_mm": 0.0,
+        "overlap_area_mm2": 0.2904753645835658
+      },
+      {
+        "uuid": "a284154a-d001-4889-9cea-74de3fff7bc2",
+        "net": "+3.3V",
+        "layer": "F.Cu",
+        "start": [
+          75.152001,
+          77.899
+        ],
+        "end": [
+          75.152001,
+          78.998995
+        ],
+        "width": 0.38,
+        "distance_mm": 0.1638978540827843,
+        "overlap_area_mm2": 0.0
+      },
+      {
+        "uuid": "36a15338-70fb-480e-abdc-b7b4f1f8065f",
+        "net": "SCL",
+        "layer": "B.Cu",
+        "start": [
+          74.806,
+          80.314884
+        ],
+        "end": [
+          74.806,
+          77.36
+        ],
+        "width": 0.25,
+        "distance_mm": 0.13901449012555508,
+        "overlap_area_mm2": 0.0
+      },
+      {
+        "uuid": "377fbb36-f705-4345-b319-e5c1247be702",
+        "net": "SCL",
+        "layer": "B.Cu",
+        "start": [
+          74.806,
+          77.36
+        ],
+        "end": [
+          74.202,
+          76.756
+        ],
+        "width": 0.25,
+        "distance_mm": 0.13901449012555508,
+        "overlap_area_mm2": 0.0
+      }
+    ],
+    "pad_conflicts": [
+      {
+        "ref": "R12",
+        "pin": "1",
+        "net": "+3.3V",
+        "at": [
+          75.152001,
+          77.899
+        ],
+        "size": [
+          0.54,
+          0.64
+        ]
+      }
+    ],
+    "courtyard_nearby": [
+      {
+        "ref": "R12",
+        "layer": "F.CrtYd",
+        "bounds": [
+          73.711998,
+          77.428999,
+          75.572002,
+          78.369001
+        ],
+        "distance_mm": 0.0
+      },
+      {
+        "ref": "J4",
+        "layer": "F.CrtYd",
+        "bounds": [
+          74.381,
+          68.158,
+          76.68100000000001,
+          76.158
+        ],
+        "distance_mm": 0.1419999999999959
+      }
+    ]
+  },
+  {
+    "label": "lower_positive",
+    "side": "left",
+    "center_mm": [
+      54.3,
+      78.5
+    ],
+    "pad_size_mm": [
+      1.4,
+      1.4
+    ],
+    "net": "+SOLAR",
+    "track_conflicts": [
+      {
+        "uuid": "13269fc8-e16e-470f-80f3-b9aff43911f5",
+        "net": "GND",
+        "layer": "B.Cu",
+        "start": [
+          54.369,
+          76.14
+        ],
+        "end": [
+          54.369,
+          83.863
+        ],
+        "width": 0.2,
+        "distance_mm": 0.0,
+        "overlap_area_mm2": 0.27744239459546016
+      }
+    ],
+    "pad_conflicts": [],
+    "courtyard_nearby": []
+  },
+  {
+    "label": "lower_positive",
+    "side": "right",
+    "center_mm": [
+      75.7,
+      78.5
+    ],
+    "pad_size_mm": [
+      1.4,
+      1.4
+    ],
+    "net": "+SOLAR",
+    "track_conflicts": [
+      {
+        "uuid": "b155dd56-9a9e-4c9a-b934-fbad2e0fffff",
+        "net": "GND",
+        "layer": "B.Cu",
+        "start": [
+          75.868,
+          79.924636
+        ],
+        "end": [
+          75.868,
+          76.675
+        ],
+        "width": 0.3,
+        "distance_mm": 0.0,
+        "overlap_area_mm2": 0.40381134856958045
+      },
+      {
+        "uuid": "6c7cdcf8-8205-4eb8-83ce-64d155e1ead7",
+        "net": "+3.3V",
+        "layer": "F.Cu",
+        "start": [
+          75.152001,
+          77.899
+        ],
+        "end": [
+          75.152001,
+          75.536999
+        ],
+        "width": 0.38,
+        "distance_mm": 0.0,
+        "overlap_area_mm2": 0.014632620481596978
+      },
+      {
+        "uuid": "7a449c3c-64fa-457f-baf3-3900c5192bda",
+        "net": "+3.3V",
+        "layer": "F.Cu",
+        "start": [
+          75.158002,
+          81.585998
+        ],
+        "end": [
+          75.158002,
+          79.004996
+        ],
+        "width": 0.38,
+        "distance_mm": 0.0,
+        "overlap_area_mm2": 0.0388644906029498
+      },
+      {
+        "uuid": "a284154a-d001-4889-9cea-74de3fff7bc2",
+        "net": "+3.3V",
+        "layer": "F.Cu",
+        "start": [
+          75.152001,
+          77.899
+        ],
+        "end": [
+          75.152001,
+          78.998995
+        ],
+        "width": 0.38,
+        "distance_mm": 0.0,
+        "overlap_area_mm2": 0.28968947532859524
+      },
+      {
+        "uuid": "ba1a69c4-9fcf-4a38-b640-b739ec135bc3",
+        "net": "+3.3V",
+        "layer": "F.Cu",
+        "start": [
+          75.152001,
+          78.998995
+        ],
+        "end": [
+          75.158002,
+          79.004996
+        ],
+        "width": 0.35,
+        "distance_mm": 0.0,
+        "overlap_area_mm2": 0.03236736638001356
+      },
+      {
+        "uuid": "36a15338-70fb-480e-abdc-b7b4f1f8065f",
+        "net": "SCL",
+        "layer": "B.Cu",
+        "start": [
+          74.806,
+          80.314884
+        ],
+        "end": [
+          74.806,
+          77.36
+        ],
+        "width": 0.25,
+        "distance_mm": 0.06900000000000261,
+        "overlap_area_mm2": 0.0
+      }
+    ],
+    "pad_conflicts": [
+      {
+        "ref": "R12",
+        "pin": "1",
+        "net": "+3.3V",
+        "at": [
+          75.152001,
+          77.899
+        ],
+        "size": [
+          0.54,
+          0.64
+        ]
+      },
+      {
+        "ref": "R11",
+        "pin": "1",
+        "net": "+3.3V",
+        "at": [
+          75.158002,
+          79.004996
+        ],
+        "size": [
+          0.54,
+          0.64
+        ]
+      }
+    ],
+    "courtyard_nearby": [
+      {
+        "ref": "R12",
+        "layer": "F.CrtYd",
+        "bounds": [
+          73.711998,
+          77.428999,
+          75.572002,
+          78.369001
+        ],
+        "distance_mm": 0.0
+      },
+      {
+        "ref": "R11",
+        "layer": "F.CrtYd",
+        "bounds": [
+          73.71799899999999,
+          78.53499500000001,
+          75.578003,
+          79.474997
+        ],
+        "distance_mm": 0.0
+      }
+    ]
+  },
+  {
+    "label": "lower_positive",
+    "side": "left",
+    "center_mm": [
+      54.3,
+      79
+    ],
+    "pad_size_mm": [
+      1.4,
+      1.4
+    ],
+    "net": "+SOLAR",
+    "track_conflicts": [
+      {
+        "uuid": "13269fc8-e16e-470f-80f3-b9aff43911f5",
+        "net": "GND",
+        "layer": "B.Cu",
+        "start": [
+          54.369,
+          76.14
+        ],
+        "end": [
+          54.369,
+          83.863
+        ],
+        "width": 0.2,
+        "distance_mm": 0.0,
+        "overlap_area_mm2": 0.27744239459546016
+      }
+    ],
+    "pad_conflicts": [],
+    "courtyard_nearby": []
+  },
+  {
+    "label": "lower_positive",
+    "side": "right",
+    "center_mm": [
+      75.7,
+      79
+    ],
+    "pad_size_mm": [
+      1.4,
+      1.4
+    ],
+    "net": "+SOLAR",
+    "track_conflicts": [
+      {
+        "uuid": "4073bc2d-e67d-4ee9-93f5-1530d311ced2",
+        "net": "GND",
+        "layer": "B.Cu",
+        "start": [
+          74.307636,
+          81.485
+        ],
+        "end": [
+          75.868,
+          79.924636
+        ],
+        "width": 0.3,
+        "distance_mm": 0.09030279340190804,
+        "overlap_area_mm2": 0.0
+      },
+      {
+        "uuid": "b155dd56-9a9e-4c9a-b934-fbad2e0fffff",
+        "net": "GND",
+        "layer": "B.Cu",
+        "start": [
+          75.868,
+          79.924636
+        ],
+        "end": [
+          75.868,
+          76.675
+        ],
+        "width": 0.3,
+        "distance_mm": 0.0,
+        "overlap_area_mm2": 0.40381134856958045
+      },
+      {
+        "uuid": "7a449c3c-64fa-457f-baf3-3900c5192bda",
+        "net": "+3.3V",
+        "layer": "F.Cu",
+        "start": [
+          75.158002,
+          81.585998
+        ],
+        "end": [
+          75.158002,
+          79.004996
+        ],
+        "width": 0.38,
+        "distance_mm": 0.0,
+        "overlap_area_mm2": 0.20109945527733558
+      },
+      {
+        "uuid": "a284154a-d001-4889-9cea-74de3fff7bc2",
+        "net": "+3.3V",
+        "layer": "F.Cu",
+        "start": [
+          75.152001,
+          77.899
+        ],
+        "end": [
+          75.152001,
+          78.998995
+        ],
+        "width": 0.38,
+        "distance_mm": 0.0,
+        "overlap_area_mm2": 0.19809231696501062
+      },
+      {
+        "uuid": "ba1a69c4-9fcf-4a38-b640-b739ec135bc3",
+        "net": "+3.3V",
+        "layer": "F.Cu",
+        "start": [
+          75.152001,
+          78.998995
+        ],
+        "end": [
+          75.158002,
+          79.004996
+        ],
+        "width": 0.35,
+        "distance_mm": 0.0,
+        "overlap_area_mm2": 0.09587820986225305
+      },
+      {
+        "uuid": "36a15338-70fb-480e-abdc-b7b4f1f8065f",
+        "net": "SCL",
+        "layer": "B.Cu",
+        "start": [
+          74.806,
+          80.314884
+        ],
+        "end": [
+          74.806,
+          77.36
+        ],
+        "width": 0.25,
+        "distance_mm": 0.06900000000000261,
+        "overlap_area_mm2": 0.0
+      }
+    ],
+    "pad_conflicts": [
+      {
+        "ref": "R12",
+        "pin": "1",
+        "net": "+3.3V",
+        "at": [
+          75.152001,
+          77.899
+        ],
+        "size": [
+          0.54,
+          0.64
+        ]
+      },
+      {
+        "ref": "R11",
+        "pin": "1",
+        "net": "+3.3V",
+        "at": [
+          75.158002,
+          79.004996
+        ],
+        "size": [
+          0.54,
+          0.64
+        ]
+      }
+    ],
+    "courtyard_nearby": [
+      {
+        "ref": "R12",
+        "layer": "F.CrtYd",
+        "bounds": [
+          73.711998,
+          77.428999,
+          75.572002,
+          78.369001
+        ],
+        "distance_mm": 0.0
+      },
+      {
+        "ref": "R11",
+        "layer": "F.CrtYd",
+        "bounds": [
+          73.71799899999999,
+          78.53499500000001,
+          75.578003,
+          79.474997
+        ],
+        "distance_mm": 0.0
+      }
+    ]
+  },
+  {
+    "label": "lower_positive",
+    "side": "left",
+    "center_mm": [
+      54.3,
+      80
+    ],
+    "pad_size_mm": [
+      1.4,
+      1.4
+    ],
+    "net": "+SOLAR",
+    "track_conflicts": [
+      {
+        "uuid": "3120e1c2-2340-4090-b1dc-bbf7fd54685c",
+        "net": "GND",
+        "layer": "F.Cu",
+        "start": [
+          55.167999,
+          80.387001
+        ],
+        "end": [
+          55.834,
+          79.721
+        ],
+        "width": 0.2,
+        "distance_mm": 0.15108968619033397,
+        "overlap_area_mm2": 0.0
+      },
+      {
+        "uuid": "5730ee39-0888-49e0-8fcd-b29dcefadc2d",
+        "net": "GND",
+        "layer": "F.Cu",
+        "start": [
+          55.167999,
+          81.063998
+        ],
+        "end": [
+          55.167999,
+          80.387001
+        ],
+        "width": 0.2,
+        "distance_mm": 0.15108968619033397,
+        "overlap_area_mm2": 0.0
+      },
+      {
+        "uuid": "13269fc8-e16e-470f-80f3-b9aff43911f5",
+        "net": "GND",
+        "layer": "B.Cu",
+        "start": [
+          54.369,
+          76.14
+        ],
+        "end": [
+          54.369,
+          83.863
+        ],
+        "width": 0.2,
+        "distance_mm": 0.0,
+        "overlap_area_mm2": 0.27744239459546016
+      }
+    ],
+    "pad_conflicts": [],
+    "courtyard_nearby": [
+      {
+        "ref": "C15",
+        "layer": "F.CrtYd",
+        "bounds": [
+          54.737999,
+          80.603998,
+          56.557998999999995,
+          81.52399799999999
+        ],
+        "distance_mm": 0.04689462292400865
+      }
+    ]
+  },
+  {
+    "label": "lower_positive",
+    "side": "right",
+    "center_mm": [
+      75.7,
+      80
+    ],
+    "pad_size_mm": [
+      1.4,
+      1.4
+    ],
+    "net": "+SOLAR",
+    "track_conflicts": [
+      {
+        "uuid": "4073bc2d-e67d-4ee9-93f5-1530d311ced2",
+        "net": "GND",
+        "layer": "B.Cu",
+        "start": [
+          74.307636,
+          81.485
+        ],
+        "end": [
+          75.868,
+          79.924636
+        ],
+        "width": 0.3,
+        "distance_mm": 0.0,
+        "overlap_area_mm2": 0.294186083035757
+      },
+      {
+        "uuid": "b155dd56-9a9e-4c9a-b934-fbad2e0fffff",
+        "net": "GND",
+        "layer": "B.Cu",
+        "start": [
+          75.868,
+          79.924636
+        ],
+        "end": [
+          75.868,
+          76.675
+        ],
+        "width": 0.3,
+        "distance_mm": 0.0,
+        "overlap_area_mm2": 0.2145826448034328
+      },
+      {
+        "uuid": "7a449c3c-64fa-457f-baf3-3900c5192bda",
+        "net": "+3.3V",
+        "layer": "F.Cu",
+        "start": [
+          75.158002,
+          81.585998
+        ],
+        "end": [
+          75.158002,
+          79.004996
+        ],
+        "width": 0.38,
+        "distance_mm": 0.0,
+        "overlap_area_mm2": 0.2977047453289948
+      },
+      {
+        "uuid": "36a15338-70fb-480e-abdc-b7b4f1f8065f",
+        "net": "SCL",
+        "layer": "B.Cu",
+        "start": [
+          74.806,
+          80.314884
+        ],
+        "end": [
+          74.806,
+          77.36
+        ],
+        "width": 0.25,
+        "distance_mm": 0.06900000000000261,
+        "overlap_area_mm2": 0.0
+      },
+      {
+        "uuid": "db3580e1-8284-4ab6-991e-228f5f90e7a5",
+        "net": "SCL",
+        "layer": "B.Cu",
+        "start": [
+          74.431884,
+          80.689
+        ],
+        "end": [
+          74.806,
+          80.314884
+        ],
+        "width": 0.25,
+        "distance_mm": 0.12381536749990613,
+        "overlap_area_mm2": 0.0
+      }
+    ],
+    "pad_conflicts": [
+      {
+        "ref": "R11",
+        "pin": "1",
+        "net": "+3.3V",
+        "at": [
+          75.158002,
+          79.004996
+        ],
+        "size": [
+          0.54,
+          0.64
+        ]
+      }
+    ],
+    "courtyard_nearby": [
+      {
+        "ref": "R11",
+        "layer": "F.CrtYd",
+        "bounds": [
+          73.71799899999999,
+          78.53499500000001,
+          75.578003,
+          79.474997
+        ],
+        "distance_mm": 0.0
+      }
+    ]
+  },
+  {
+    "label": "lower_positive",
+    "side": "left",
+    "center_mm": [
+      54.3,
+      81.5
+    ],
+    "pad_size_mm": [
+      1.4,
+      1.4
+    ],
+    "net": "+SOLAR",
+    "track_conflicts": [
+      {
+        "uuid": "3e20abe3-f828-4d60-9d8c-bd8b0c382377",
+        "net": "GND",
+        "layer": "F.Cu",
+        "start": [
+          55.126999,
+          81.104998
+        ],
+        "end": [
+          55.167999,
+          81.063998
+        ],
+        "width": 0.2,
+        "distance_mm": 0.11744699347480453,
+        "overlap_area_mm2": 0.0
+      },
+      {
+        "uuid": "5730ee39-0888-49e0-8fcd-b29dcefadc2d",
+        "net": "GND",
+        "layer": "F.Cu",
+        "start": [
+          55.167999,
+          81.063998
+        ],
+        "end": [
+          55.167999,
+          80.387001
+        ],
+        "width": 0.2,
+        "distance_mm": 0.17204031332351352,
+        "overlap_area_mm2": 0.0
+      },
+      {
+        "uuid": "ff9c66f8-7fe6-4103-8cee-dff669229808",
+        "net": "GND",
+        "layer": "F.Cu",
+        "start": [
+          55.126999,
+          82.209999
+        ],
+        "end": [
+          55.126999,
+          81.104998
+        ],
+        "width": 0.2,
+        "distance_mm": 0.026998999999996443,
+        "overlap_area_mm2": 0.0
+      },
+      {
+        "uuid": "13269fc8-e16e-470f-80f3-b9aff43911f5",
+        "net": "GND",
+        "layer": "B.Cu",
+        "start": [
+          54.369,
+          76.14
+        ],
+        "end": [
+          54.369,
+          83.863
+        ],
+        "width": 0.2,
+        "distance_mm": 0.0,
+        "overlap_area_mm2": 0.27744239459546016
+      }
+    ],
+    "pad_conflicts": [
+      {
+        "ref": "R21",
+        "pin": "2",
+        "net": "GND",
+        "at": [
+          55.126999,
+          82.209999
+        ],
+        "size": [
+          0.54,
+          0.64
+        ]
+      },
+      {
+        "ref": "C15",
+        "pin": "1",
+        "net": "GND",
+        "at": [
+          55.167999,
+          81.063998
+        ],
+        "size": [
+          0.56,
+          0.62
+        ]
+      }
+    ],
+    "courtyard_nearby": [
+      {
+        "ref": "R21",
+        "layer": "F.CrtYd",
+        "bounds": [
+          54.706998,
+          81.739998,
+          56.567002,
+          82.67999999999999
+        ],
+        "distance_mm": 0.0
+      },
+      {
+        "ref": "C15",
+        "layer": "F.CrtYd",
+        "bounds": [
+          54.737999,
+          80.603998,
+          56.557998999999995,
+          81.52399799999999
+        ],
+        "distance_mm": 0.0
+      }
+    ]
+  },
+  {
+    "label": "lower_positive",
+    "side": "right",
+    "center_mm": [
+      75.7,
+      81.5
+    ],
+    "pad_size_mm": [
+      1.4,
+      1.4
+    ],
+    "net": "+SOLAR",
+    "track_conflicts": [
+      {
+        "uuid": "4073bc2d-e67d-4ee9-93f5-1530d311ced2",
+        "net": "GND",
+        "layer": "B.Cu",
+        "start": [
+          74.307636,
+          81.485
+        ],
+        "end": [
+          75.868,
+          79.924636
+        ],
+        "width": 0.3,
+        "distance_mm": 0.1451566279978343,
+        "overlap_area_mm2": 0.0
+      },
+      {
+        "uuid": "117dd327-ffdd-41a5-a550-4c16a341668b",
+        "net": "+3.3V",
+        "layer": "F.Cu",
+        "start": [
+          70.802,
+          85.942
+        ],
+        "end": [
+          75.158002,
+          81.585998
+        ],
+        "width": 0.38,
+        "distance_mm": 0.0,
+        "overlap_area_mm2": 0.118886784420759
+      },
+      {
+        "uuid": "7a449c3c-64fa-457f-baf3-3900c5192bda",
+        "net": "+3.3V",
+        "layer": "F.Cu",
+        "start": [
+          75.158002,
+          81.585998
+        ],
+        "end": [
+          75.158002,
+          79.004996
+        ],
+        "width": 0.38,
+        "distance_mm": 0.0,
+        "overlap_area_mm2": 0.23062931319357557
+      }
+    ],
+    "pad_conflicts": [],
+    "courtyard_nearby": []
+  },
+  {
+    "label": "lower_positive",
+    "side": "left",
+    "center_mm": [
+      54.3,
+      82
+    ],
+    "pad_size_mm": [
+      1.4,
+      1.4
+    ],
+    "net": "+SOLAR",
+    "track_conflicts": [
+      {
+        "uuid": "ff9c66f8-7fe6-4103-8cee-dff669229808",
+        "net": "GND",
+        "layer": "F.Cu",
+        "start": [
+          55.126999,
+          82.209999
+        ],
+        "end": [
+          55.126999,
+          81.104998
+        ],
+        "width": 0.2,
+        "distance_mm": 0.026998999999996443,
+        "overlap_area_mm2": 0.0
+      },
+      {
+        "uuid": "13269fc8-e16e-470f-80f3-b9aff43911f5",
+        "net": "GND",
+        "layer": "B.Cu",
+        "start": [
+          54.369,
+          76.14
+        ],
+        "end": [
+          54.369,
+          83.863
+        ],
+        "width": 0.2,
+        "distance_mm": 0.0,
+        "overlap_area_mm2": 0.27744239459546016
+      }
+    ],
+    "pad_conflicts": [
+      {
+        "ref": "R21",
+        "pin": "2",
+        "net": "GND",
+        "at": [
+          55.126999,
+          82.209999
+        ],
+        "size": [
+          0.54,
+          0.64
+        ]
+      },
+      {
+        "ref": "C15",
+        "pin": "1",
+        "net": "GND",
+        "at": [
+          55.167999,
+          81.063998
+        ],
+        "size": [
+          0.56,
+          0.62
+        ]
+      }
+    ],
+    "courtyard_nearby": [
+      {
+        "ref": "R21",
+        "layer": "F.CrtYd",
+        "bounds": [
+          54.706998,
+          81.739998,
+          56.567002,
+          82.67999999999999
+        ],
+        "distance_mm": 0.0
+      },
+      {
+        "ref": "C15",
+        "layer": "F.CrtYd",
+        "bounds": [
+          54.737999,
+          80.603998,
+          56.557998999999995,
+          81.52399799999999
+        ],
+        "distance_mm": 0.0
+      }
+    ]
+  },
+  {
+    "label": "lower_positive",
+    "side": "right",
+    "center_mm": [
+      75.7,
+      82
+    ],
+    "pad_size_mm": [
+      1.4,
+      1.4
+    ],
+    "net": "+SOLAR",
+    "track_conflicts": [
+      {
+        "uuid": "117dd327-ffdd-41a5-a550-4c16a341668b",
+        "net": "+3.3V",
+        "layer": "F.Cu",
+        "start": [
+          70.802,
+          85.942
+        ],
+        "end": [
+          75.158002,
+          81.585998
+        ],
+        "width": 0.38,
+        "distance_mm": 0.0,
+        "overlap_area_mm2": 0.08729798822924911
+      },
+      {
+        "uuid": "7a449c3c-64fa-457f-baf3-3900c5192bda",
+        "net": "+3.3V",
+        "layer": "F.Cu",
+        "start": [
+          75.158002,
+          81.585998
+        ],
+        "end": [
+          75.158002,
+          79.004996
+        ],
+        "width": 0.38,
+        "distance_mm": 0.0,
+        "overlap_area_mm2": 0.06455201589275392
+      }
+    ],
+    "pad_conflicts": [],
+    "courtyard_nearby": []
+  },
+  {
+    "label": "lower_positive",
+    "side": "left",
+    "center_mm": [
+      54.3,
+      76.4
+    ],
+    "pad_size_mm": [
+      1.5,
+      1.5
+    ],
+    "net": "+SOLAR",
+    "track_conflicts": [
+      {
+        "uuid": "13269fc8-e16e-470f-80f3-b9aff43911f5",
+        "net": "GND",
+        "layer": "B.Cu",
+        "start": [
+          54.369,
+          76.14
+        ],
+        "end": [
+          54.369,
+          83.863
+        ],
+        "width": 0.2,
+        "distance_mm": 0.0,
+        "overlap_area_mm2": 0.21647901917848164
+      },
+      {
+        "uuid": "b12ac0ab-a9d8-44ff-bbd1-4f120bdcb51b",
+        "net": "GND",
+        "layer": "B.Cu",
+        "start": [
+          54.587,
+          76.14
+        ],
+        "end": [
+          55.6,
+          75.127
+        ],
+        "width": 0.2,
+        "distance_mm": 0.0,
+        "overlap_area_mm2": 0.08771032158635209
+      },
+      {
+        "uuid": "d35c66fd-6572-43e0-a7de-e998d4ebdc84",
+        "net": "GND",
+        "layer": "B.Cu",
+        "start": [
+          54.369,
+          76.14
+        ],
+        "end": [
+          54.587,
+          76.14
+        ],
+        "width": 0.2,
+        "distance_mm": 0.0,
+        "overlap_area_mm2": 0.07496548490545765
+      }
+    ],
+    "pad_conflicts": [
+      {
+        "ref": "J3",
+        "pin": "7",
+        "net": "GND",
+        "at": [
+          54.444998,
+          75.173998
+        ],
+        "size": [
+          0.85,
+          0.85
+        ]
+      }
+    ],
+    "courtyard_nearby": [
+      {
+        "ref": "J3",
+        "layer": "F.CrtYd",
+        "bounds": [
+          53.294998,
+          68.173998,
+          55.594998,
+          76.173998
+        ],
+        "distance_mm": 0.0
+      }
+    ]
+  },
+  {
+    "label": "lower_positive",
+    "side": "right",
+    "center_mm": [
+      75.7,
+      76.4
+    ],
+    "pad_size_mm": [
+      1.5,
+      1.5
+    ],
+    "net": "+SOLAR",
+    "track_conflicts": [
+      {
+        "uuid": "b155dd56-9a9e-4c9a-b934-fbad2e0fffff",
+        "net": "GND",
+        "layer": "B.Cu",
+        "start": [
+          75.868,
+          79.924636
+        ],
+        "end": [
+          75.868,
+          76.675
+        ],
+        "width": 0.3,
+        "distance_mm": 0.0,
+        "overlap_area_mm2": 0.17024471408929187
+      },
+      {
+        "uuid": "c6221fc0-d983-44cf-91bb-57b72c13f950",
+        "net": "GND",
+        "layer": "B.Cu",
+        "start": [
+          75.868,
+          76.675
+        ],
+        "end": [
+          75.175,
+          75.982
+        ],
+        "width": 0.3,
+        "distance_mm": 0.0,
+        "overlap_area_mm2": 0.3506472448186207
+      },
+      {
+        "uuid": "deac2438-480f-4f32-90e2-ccd56727ec39",
+        "net": "GND",
+        "layer": "B.Cu",
+        "start": [
+          75.175,
+          75.982
+        ],
+        "end": [
+          73.799,
+          75.982
+        ],
+        "width": 0.3,
+        "distance_mm": 0.0,
+        "overlap_area_mm2": 0.06172535500100284
+      },
+      {
+        "uuid": "6c7cdcf8-8205-4eb8-83ce-64d155e1ead7",
+        "net": "+3.3V",
+        "layer": "F.Cu",
+        "start": [
+          75.152001,
+          77.899
+        ],
+        "end": [
+          75.152001,
+          75.536999
+        ],
+        "width": 0.38,
+        "distance_mm": 0.0,
+        "overlap_area_mm2": 0.3647799043533236
+      },
+      {
+        "uuid": "bece7755-de06-49a9-9ac3-063b05b2dc4c",
+        "net": "+3.3V",
+        "layer": "F.Cu",
+        "start": [
+          75.152001,
+          75.536999
+        ],
+        "end": [
+          75.531,
+          75.158
+        ],
+        "width": 0.38,
+        "distance_mm": 0.08308070904113649,
+        "overlap_area_mm2": 0.0
+      }
+    ],
+    "pad_conflicts": [
+      {
+        "ref": "J4",
+        "pin": "7",
+        "net": "+3.3V",
+        "at": [
+          75.531,
+          75.158
+        ],
+        "size": [
+          0.85,
+          0.85
+        ]
+      }
+    ],
+    "courtyard_nearby": [
+      {
+        "ref": "J4",
+        "layer": "F.CrtYd",
+        "bounds": [
+          74.381,
+          68.158,
+          76.68100000000001,
+          76.158
+        ],
+        "distance_mm": 0.0
+      }
+    ]
+  },
+  {
+    "label": "lower_positive",
+    "side": "left",
+    "center_mm": [
+      54.3,
+      76.5
+    ],
+    "pad_size_mm": [
+      1.5,
+      1.5
+    ],
+    "net": "+SOLAR",
+    "track_conflicts": [
+      {
+        "uuid": "13269fc8-e16e-470f-80f3-b9aff43911f5",
+        "net": "GND",
+        "layer": "B.Cu",
+        "start": [
+          54.369,
+          76.14
+        ],
+        "end": [
+          54.369,
+          83.863
+        ],
+        "width": 0.2,
+        "distance_mm": 0.0,
+        "overlap_area_mm2": 0.23647901917848077
+      },
+      {
+        "uuid": "b12ac0ab-a9d8-44ff-bbd1-4f120bdcb51b",
+        "net": "GND",
+        "layer": "B.Cu",
+        "start": [
+          54.587,
+          76.14
+        ],
+        "end": [
+          55.6,
+          75.127
+        ],
+        "width": 0.2,
+        "distance_mm": 0.0,
+        "overlap_area_mm2": 0.07325690814848348
+      },
+      {
+        "uuid": "d35c66fd-6572-43e0-a7de-e998d4ebdc84",
+        "net": "GND",
+        "layer": "B.Cu",
+        "start": [
+          54.369,
+          76.14
+        ],
+        "end": [
+          54.587,
+          76.14
+        ],
+        "width": 0.2,
+        "distance_mm": 0.0,
+        "overlap_area_mm2": 0.07496548490545765
+      },
+      {
+        "uuid": "ada427d2-8467-4a41-9363-b1025510c322",
+        "net": "PA1",
+        "layer": "F.Cu",
+        "start": [
+          55.264,
+          77.554
+        ],
+        "end": [
+          55.264,
+          76.942
+        ],
+        "width": 0.25,
+        "distance_mm": 0.18647900568765705,
+        "overlap_area_mm2": 0.0
+      },
+      {
+        "uuid": "ad2b0c5d-0977-4539-8efd-6b220e8d16c7",
+        "net": "PA1",
+        "layer": "B.Cu",
+        "start": [
+          59.225,
+          76.942
+        ],
+        "end": [
+          55.264,
+          76.942
+        ],
+        "width": 0.25,
+        "distance_mm": 0.18647900568765705,
+        "overlap_area_mm2": 0.0
+      }
+    ],
+    "pad_conflicts": [
+      {
+        "ref": "J3",
+        "pin": "7",
+        "net": "GND",
+        "at": [
+          54.444998,
+          75.173998
+        ],
+        "size": [
+          0.85,
+          0.85
+        ]
+      }
+    ],
+    "courtyard_nearby": [
+      {
+        "ref": "J3",
+        "layer": "F.CrtYd",
+        "bounds": [
+          53.294998,
+          68.173998,
+          55.594998,
+          76.173998
+        ],
+        "distance_mm": 0.0
+      }
+    ]
+  },
+  {
+    "label": "lower_positive",
+    "side": "right",
+    "center_mm": [
+      75.7,
+      76.5
+    ],
+    "pad_size_mm": [
+      1.5,
+      1.5
+    ],
+    "net": "+SOLAR",
+    "track_conflicts": [
+      {
+        "uuid": "b155dd56-9a9e-4c9a-b934-fbad2e0fffff",
+        "net": "GND",
+        "layer": "B.Cu",
+        "start": [
+          75.868,
+          79.924636
+        ],
+        "end": [
+          75.868,
+          76.675
+        ],
+        "width": 0.3,
+        "distance_mm": 0.0,
+        "overlap_area_mm2": 0.2002447140892913
+      },
+      {
+        "uuid": "c6221fc0-d983-44cf-91bb-57b72c13f950",
+        "net": "GND",
+        "layer": "B.Cu",
+        "start": [
+          75.868,
+          76.675
+        ],
+        "end": [
+          75.175,
+          75.982
+        ],
+        "width": 0.3,
+        "distance_mm": 0.0,
+        "overlap_area_mm2": 0.33135426267562146
+      },
+      {
+        "uuid": "deac2438-480f-4f32-90e2-ccd56727ec39",
+        "net": "GND",
+        "layer": "B.Cu",
+        "start": [
+          75.175,
+          75.982
+        ],
+        "end": [
+          73.799,
+          75.982
+        ],
+        "width": 0.3,
+        "distance_mm": 0.0,
+        "overlap_area_mm2": 0.03918482879261072
+      },
+      {
+        "uuid": "6c7cdcf8-8205-4eb8-83ce-64d155e1ead7",
+        "net": "+3.3V",
+        "layer": "F.Cu",
+        "start": [
+          75.152001,
+          77.899
+        ],
+        "end": [
+          75.152001,
+          75.536999
+        ],
+        "width": 0.38,
+        "distance_mm": 0.0,
+        "overlap_area_mm2": 0.3647799043533236
+      },
+      {
+        "uuid": "bece7755-de06-49a9-9ac3-063b05b2dc4c",
+        "net": "+3.3V",
+        "layer": "F.Cu",
+        "start": [
+          75.152001,
+          75.536999
+        ],
+        "end": [
+          75.531,
+          75.158
+        ],
+        "width": 0.38,
+        "distance_mm": 0.16885357004114843,
+        "overlap_area_mm2": 0.0
+      }
+    ],
+    "pad_conflicts": [
+      {
+        "ref": "J4",
+        "pin": "7",
+        "net": "+3.3V",
+        "at": [
+          75.531,
+          75.158
+        ],
+        "size": [
+          0.85,
+          0.85
+        ]
+      }
+    ],
+    "courtyard_nearby": [
+      {
+        "ref": "R12",
+        "layer": "F.CrtYd",
+        "bounds": [
+          73.711998,
+          77.428999,
+          75.572002,
+          78.369001
+        ],
+        "distance_mm": 0.18862860369623252
+      },
+      {
+        "ref": "J4",
+        "layer": "F.CrtYd",
+        "bounds": [
+          74.381,
+          68.158,
+          76.68100000000001,
+          76.158
+        ],
+        "distance_mm": 0.0
+      }
+    ]
+  },
+  {
+    "label": "lower_positive",
+    "side": "left",
+    "center_mm": [
+      54.3,
+      76.6
+    ],
+    "pad_size_mm": [
+      1.5,
+      1.5
+    ],
+    "net": "+SOLAR",
+    "track_conflicts": [
+      {
+        "uuid": "13269fc8-e16e-470f-80f3-b9aff43911f5",
+        "net": "GND",
+        "layer": "B.Cu",
+        "start": [
+          54.369,
+          76.14
+        ],
+        "end": [
+          54.369,
+          83.863
+        ],
+        "width": 0.2,
+        "distance_mm": 0.0,
+        "overlap_area_mm2": 0.25647901917847993
+      },
+      {
+        "uuid": "b12ac0ab-a9d8-44ff-bbd1-4f120bdcb51b",
+        "net": "GND",
+        "layer": "B.Cu",
+        "start": [
+          54.587,
+          76.14
+        ],
+        "end": [
+          55.6,
+          75.127
+        ],
+        "width": 0.2,
+        "distance_mm": 0.0,
+        "overlap_area_mm2": 0.0574442486735084
+      },
+      {
+        "uuid": "d35c66fd-6572-43e0-a7de-e998d4ebdc84",
+        "net": "GND",
+        "layer": "B.Cu",
+        "start": [
+          54.369,
+          76.14
+        ],
+        "end": [
+          54.587,
+          76.14
+        ],
+        "width": 0.2,
+        "distance_mm": 0.0,
+        "overlap_area_mm2": 0.07496548490545765
+      },
+      {
+        "uuid": "ada427d2-8467-4a41-9363-b1025510c322",
+        "net": "PA1",
+        "layer": "F.Cu",
+        "start": [
+          55.264,
+          77.554
+        ],
+        "end": [
+          55.264,
+          76.942
+        ],
+        "width": 0.25,
+        "distance_mm": 0.1489187845170474,
+        "overlap_area_mm2": 0.0
+      },
+      {
+        "uuid": "ad2b0c5d-0977-4539-8efd-6b220e8d16c7",
+        "net": "PA1",
+        "layer": "B.Cu",
+        "start": [
+          59.225,
+          76.942
+        ],
+        "end": [
+          55.264,
+          76.942
+        ],
+        "width": 0.25,
+        "distance_mm": 0.1489187845170474,
+        "overlap_area_mm2": 0.0
+      }
+    ],
+    "pad_conflicts": [],
+    "courtyard_nearby": [
+      {
+        "ref": "J3",
+        "layer": "F.CrtYd",
+        "bounds": [
+          53.294998,
+          68.173998,
+          55.594998,
+          76.173998
+        ],
+        "distance_mm": 0.0
+      }
+    ]
+  },
+  {
+    "label": "lower_positive",
+    "side": "right",
+    "center_mm": [
+      75.7,
+      76.6
+    ],
+    "pad_size_mm": [
+      1.5,
+      1.5
+    ],
+    "net": "+SOLAR",
+    "track_conflicts": [
+      {
+        "uuid": "b155dd56-9a9e-4c9a-b934-fbad2e0fffff",
+        "net": "GND",
+        "layer": "B.Cu",
+        "start": [
+          75.868,
+          79.924636
+        ],
+        "end": [
+          75.868,
+          76.675
+        ],
+        "width": 0.3,
+        "distance_mm": 0.0,
+        "overlap_area_mm2": 0.23024471408929073
+      },
+      {
+        "uuid": "c6221fc0-d983-44cf-91bb-57b72c13f950",
+        "net": "GND",
+        "layer": "B.Cu",
+        "start": [
+          75.868,
+          76.675
+        ],
+        "end": [
+          75.175,
+          75.982
+        ],
+        "width": 0.3,
+        "distance_mm": 0.0,
+        "overlap_area_mm2": 0.30926071600170135
+      },
+      {
+        "uuid": "deac2438-480f-4f32-90e2-ccd56727ec39",
+        "net": "GND",
+        "layer": "B.Cu",
+        "start": [
+          75.175,
+          75.982
+        ],
+        "end": [
+          73.799,
+          75.982
+        ],
+        "width": 0.3,
+        "distance_mm": 0.0,
+        "overlap_area_mm2": 0.016521261875734796
+      },
+      {
+        "uuid": "6c7cdcf8-8205-4eb8-83ce-64d155e1ead7",
+        "net": "+3.3V",
+        "layer": "F.Cu",
+        "start": [
+          75.152001,
+          77.899
+        ],
+        "end": [
+          75.152001,
+          75.536999
+        ],
+        "width": 0.38,
+        "distance_mm": 0.0,
+        "overlap_area_mm2": 0.3647799043533236
+      }
+    ],
+    "pad_conflicts": [],
+    "courtyard_nearby": [
+      {
+        "ref": "R12",
+        "layer": "F.CrtYd",
+        "bounds": [
+          73.711998,
+          77.428999,
+          75.572002,
+          78.369001
+        ],
+        "distance_mm": 0.08971095269976113
+      },
+      {
+        "ref": "J4",
+        "layer": "F.CrtYd",
+        "bounds": [
+          74.381,
+          68.158,
+          76.68100000000001,
+          76.158
+        ],
+        "distance_mm": 0.0
+      }
+    ]
+  },
+  {
+    "label": "lower_positive",
+    "side": "left",
+    "center_mm": [
+      54.3,
+      76.7
+    ],
+    "pad_size_mm": [
+      1.5,
+      1.5
+    ],
+    "net": "+SOLAR",
+    "track_conflicts": [
+      {
+        "uuid": "13269fc8-e16e-470f-80f3-b9aff43911f5",
+        "net": "GND",
+        "layer": "B.Cu",
+        "start": [
+          54.369,
+          76.14
+        ],
+        "end": [
+          54.369,
+          83.863
+        ],
+        "width": 0.2,
+        "distance_mm": 0.0,
+        "overlap_area_mm2": 0.27647901917848194
+      },
+      {
+        "uuid": "b12ac0ab-a9d8-44ff-bbd1-4f120bdcb51b",
+        "net": "GND",
+        "layer": "B.Cu",
+        "start": [
+          54.587,
+          76.14
+        ],
+        "end": [
+          55.6,
+          75.127
+        ],
+        "width": 0.2,
+        "distance_mm": 0.0,
+        "overlap_area_mm2": 0.04022443622722615
+      },
+      {
+        "uuid": "d35c66fd-6572-43e0-a7de-e998d4ebdc84",
+        "net": "GND",
+        "layer": "B.Cu",
+        "start": [
+          54.369,
+          76.14
+        ],
+        "end": [
+          54.587,
+          76.14
+        ],
+        "width": 0.2,
+        "distance_mm": 0.0,
+        "overlap_area_mm2": 0.07496548490545765
+      },
+      {
+        "uuid": "ada427d2-8467-4a41-9363-b1025510c322",
+        "net": "PA1",
+        "layer": "F.Cu",
+        "start": [
+          55.264,
+          77.554
+        ],
+        "end": [
+          55.264,
+          76.942
+        ],
+        "width": 0.25,
+        "distance_mm": 0.1199653074366066,
+        "overlap_area_mm2": 0.0
+      },
+      {
+        "uuid": "ad2b0c5d-0977-4539-8efd-6b220e8d16c7",
+        "net": "PA1",
+        "layer": "B.Cu",
+        "start": [
+          59.225,
+          76.942
+        ],
+        "end": [
+          55.264,
+          76.942
+        ],
+        "width": 0.25,
+        "distance_mm": 0.1199653074366066,
+        "overlap_area_mm2": 0.0
+      }
+    ],
+    "pad_conflicts": [],
+    "courtyard_nearby": [
+      {
+        "ref": "J3",
+        "layer": "F.CrtYd",
+        "bounds": [
+          53.294998,
+          68.173998,
+          55.594998,
+          76.173998
+        ],
+        "distance_mm": 0.0
+      }
+    ]
+  },
+  {
+    "label": "lower_positive",
+    "side": "right",
+    "center_mm": [
+      75.7,
+      76.7
+    ],
+    "pad_size_mm": [
+      1.5,
+      1.5
+    ],
+    "net": "+SOLAR",
+    "track_conflicts": [
+      {
+        "uuid": "b155dd56-9a9e-4c9a-b934-fbad2e0fffff",
+        "net": "GND",
+        "layer": "B.Cu",
+        "start": [
+          75.868,
+          79.924636
+        ],
+        "end": [
+          75.868,
+          76.675
+        ],
+        "width": 0.3,
+        "distance_mm": 0.0,
+        "overlap_area_mm2": 0.26024471408929445
+      },
+      {
+        "uuid": "c6221fc0-d983-44cf-91bb-57b72c13f950",
+        "net": "GND",
+        "layer": "B.Cu",
+        "start": [
+          75.868,
+          76.675
+        ],
+        "end": [
+          75.175,
+          75.982
+        ],
+        "width": 0.3,
+        "distance_mm": 0.0,
+        "overlap_area_mm2": 0.28509413072343526
+      },
+      {
+        "uuid": "deac2438-480f-4f32-90e2-ccd56727ec39",
+        "net": "GND",
+        "layer": "B.Cu",
+        "start": [
+          75.175,
+          75.982
+        ],
+        "end": [
+          73.799,
+          75.982
+        ],
+        "width": 0.3,
+        "distance_mm": 0.0,
+        "overlap_area_mm2": 0.0006504418103025972
+      },
+      {
+        "uuid": "6c7cdcf8-8205-4eb8-83ce-64d155e1ead7",
+        "net": "+3.3V",
+        "layer": "F.Cu",
+        "start": [
+          75.152001,
+          77.899
+        ],
+        "end": [
+          75.152001,
+          75.536999
+        ],
+        "width": 0.38,
+        "distance_mm": 0.0,
+        "overlap_area_mm2": 0.3647799043533236
+      }
+    ],
+    "pad_conflicts": [
+      {
+        "ref": "R12",
+        "pin": "1",
+        "net": "+3.3V",
+        "at": [
+          75.152001,
+          77.899
+        ],
+        "size": [
+          0.54,
+          0.64
+        ]
+      }
+    ],
+    "courtyard_nearby": [
+      {
+        "ref": "R12",
+        "layer": "F.CrtYd",
+        "bounds": [
+          73.711998,
+          77.428999,
+          75.572002,
+          78.369001
+        ],
+        "distance_mm": 0.0
+      },
+      {
+        "ref": "J4",
+        "layer": "F.CrtYd",
+        "bounds": [
+          74.381,
+          68.158,
+          76.68100000000001,
+          76.158
+        ],
+        "distance_mm": 0.0
+      }
+    ]
+  },
+  {
+    "label": "lower_positive",
+    "side": "left",
+    "center_mm": [
+      54.3,
+      77.0
+    ],
+    "pad_size_mm": [
+      1.5,
+      1.5
+    ],
+    "net": "+SOLAR",
+    "track_conflicts": [
+      {
+        "uuid": "13269fc8-e16e-470f-80f3-b9aff43911f5",
+        "net": "GND",
+        "layer": "B.Cu",
+        "start": [
+          54.369,
+          76.14
+        ],
+        "end": [
+          54.369,
+          83.863
+        ],
+        "width": 0.2,
+        "distance_mm": 0.0,
+        "overlap_area_mm2": 0.2975925534515005
+      },
+      {
+        "uuid": "b12ac0ab-a9d8-44ff-bbd1-4f120bdcb51b",
+        "net": "GND",
+        "layer": "B.Cu",
+        "start": [
+          54.587,
+          76.14
+        ],
+        "end": [
+          55.6,
+          75.127
+        ],
+        "width": 0.2,
+        "distance_mm": 0.057439146206561556,
+        "overlap_area_mm2": 0.0
+      },
+      {
+        "uuid": "d35c66fd-6572-43e0-a7de-e998d4ebdc84",
+        "net": "GND",
+        "layer": "B.Cu",
+        "start": [
+          54.369,
+          76.14
+        ],
+        "end": [
+          54.587,
+          76.14
+        ],
+        "width": 0.2,
+        "distance_mm": 0.013373624090644975,
+        "overlap_area_mm2": 0.0
+      },
+      {
+        "uuid": "ada427d2-8467-4a41-9363-b1025510c322",
+        "net": "PA1",
+        "layer": "F.Cu",
+        "start": [
+          55.264,
+          77.554
+        ],
+        "end": [
+          55.264,
+          76.942
+        ],
+        "width": 0.25,
+        "distance_mm": 0.08900000000000574,
+        "overlap_area_mm2": 0.0
+      },
+      {
+        "uuid": "ad2b0c5d-0977-4539-8efd-6b220e8d16c7",
+        "net": "PA1",
+        "layer": "B.Cu",
+        "start": [
+          59.225,
+          76.942
+        ],
+        "end": [
+          55.264,
+          76.942
+        ],
+        "width": 0.25,
+        "distance_mm": 0.09173872071325505,
+        "overlap_area_mm2": 0.0
+      }
+    ],
+    "pad_conflicts": [],
+    "courtyard_nearby": [
+      {
+        "ref": "J3",
+        "layer": "F.CrtYd",
+        "bounds": [
+          53.294998,
+          68.173998,
+          55.594998,
+          76.173998
+        ],
+        "distance_mm": 0.07600200000000257
+      }
+    ]
+  },
+  {
+    "label": "lower_positive",
+    "side": "right",
+    "center_mm": [
+      75.7,
+      77.0
+    ],
+    "pad_size_mm": [
+      1.5,
+      1.5
+    ],
+    "net": "+SOLAR",
+    "track_conflicts": [
+      {
+        "uuid": "b155dd56-9a9e-4c9a-b934-fbad2e0fffff",
+        "net": "GND",
+        "layer": "B.Cu",
+        "start": [
+          75.868,
+          79.924636
+        ],
+        "end": [
+          75.868,
+          76.675
+        ],
+        "width": 0.3,
+        "distance_mm": 0.0,
+        "overlap_area_mm2": 0.3502447140892971
+      },
+      {
+        "uuid": "c6221fc0-d983-44cf-91bb-57b72c13f950",
+        "net": "GND",
+        "layer": "B.Cu",
+        "start": [
+          75.868,
+          76.675
+        ],
+        "end": [
+          75.175,
+          75.982
+        ],
+        "width": 0.3,
+        "distance_mm": 0.0,
+        "overlap_area_mm2": 0.19879533154752568
+      },
+      {
+        "uuid": "6c7cdcf8-8205-4eb8-83ce-64d155e1ead7",
+        "net": "+3.3V",
+        "layer": "F.Cu",
+        "start": [
+          75.152001,
+          77.899
+        ],
+        "end": [
+          75.152001,
+          75.536999
+        ],
+        "width": 0.38,
+        "distance_mm": 0.0,
+        "overlap_area_mm2": 0.3647799043533236
+      },
+      {
+        "uuid": "a284154a-d001-4889-9cea-74de3fff7bc2",
+        "net": "+3.3V",
+        "layer": "F.Cu",
+        "start": [
+          75.152001,
+          77.899
+        ],
+        "end": [
+          75.152001,
+          78.998995
+        ],
+        "width": 0.38,
+        "distance_mm": 0.11395808127252371,
+        "overlap_area_mm2": 0.0
+      },
+      {
+        "uuid": "36a15338-70fb-480e-abdc-b7b4f1f8065f",
+        "net": "SCL",
+        "layer": "B.Cu",
+        "start": [
+          74.806,
+          80.314884
+        ],
+        "end": [
+          74.806,
+          77.36
+        ],
+        "width": 0.25,
+        "distance_mm": 0.08907471731530295,
+        "overlap_area_mm2": 0.0
+      },
+      {
+        "uuid": "377fbb36-f705-4345-b319-e5c1247be702",
+        "net": "SCL",
+        "layer": "B.Cu",
+        "start": [
+          74.806,
+          77.36
+        ],
+        "end": [
+          74.202,
+          76.756
+        ],
+        "width": 0.25,
+        "distance_mm": 0.08907471731530295,
+        "overlap_area_mm2": 0.0
+      }
+    ],
+    "pad_conflicts": [
+      {
+        "ref": "R12",
+        "pin": "1",
+        "net": "+3.3V",
+        "at": [
+          75.152001,
+          77.899
+        ],
+        "size": [
+          0.54,
+          0.64
+        ]
+      }
+    ],
+    "courtyard_nearby": [
+      {
+        "ref": "R12",
+        "layer": "F.CrtYd",
+        "bounds": [
+          73.711998,
+          77.428999,
+          75.572002,
+          78.369001
+        ],
+        "distance_mm": 0.0
+      },
+      {
+        "ref": "J4",
+        "layer": "F.CrtYd",
+        "bounds": [
+          74.381,
+          68.158,
+          76.68100000000001,
+          76.158
+        ],
+        "distance_mm": 0.09199999999999875
+      }
+    ]
+  },
+  {
+    "label": "lower_positive",
+    "side": "left",
+    "center_mm": [
+      54.3,
+      78.5
+    ],
+    "pad_size_mm": [
+      1.5,
+      1.5
+    ],
+    "net": "+SOLAR",
+    "track_conflicts": [
+      {
+        "uuid": "13269fc8-e16e-470f-80f3-b9aff43911f5",
+        "net": "GND",
+        "layer": "B.Cu",
+        "start": [
+          54.369,
+          76.14
+        ],
+        "end": [
+          54.369,
+          83.863
+        ],
+        "width": 0.2,
+        "distance_mm": 0.0,
+        "overlap_area_mm2": 0.2975925534515005
+      }
+    ],
+    "pad_conflicts": [],
+    "courtyard_nearby": []
+  },
+  {
+    "label": "lower_positive",
+    "side": "right",
+    "center_mm": [
+      75.7,
+      78.5
+    ],
+    "pad_size_mm": [
+      1.5,
+      1.5
+    ],
+    "net": "+SOLAR",
+    "track_conflicts": [
+      {
+        "uuid": "b155dd56-9a9e-4c9a-b934-fbad2e0fffff",
+        "net": "GND",
+        "layer": "B.Cu",
+        "start": [
+          75.868,
+          79.924636
+        ],
+        "end": [
+          75.868,
+          76.675
+        ],
+        "width": 0.3,
+        "distance_mm": 0.0,
+        "overlap_area_mm2": 0.43491708714130217
+      },
+      {
+        "uuid": "6c7cdcf8-8205-4eb8-83ce-64d155e1ead7",
+        "net": "+3.3V",
+        "layer": "F.Cu",
+        "start": [
+          75.152001,
+          77.899
+        ],
+        "end": [
+          75.152001,
+          75.536999
+        ],
+        "width": 0.38,
+        "distance_mm": 0.0,
+        "overlap_area_mm2": 0.030566271920106306
+      },
+      {
+        "uuid": "7a449c3c-64fa-457f-baf3-3900c5192bda",
+        "net": "+3.3V",
+        "layer": "F.Cu",
+        "start": [
+          75.158002,
+          81.585998
+        ],
+        "end": [
+          75.158002,
+          79.004996
+        ],
+        "width": 0.38,
+        "distance_mm": 0.0,
+        "overlap_area_mm2": 0.059547531844739814
+      },
+      {
+        "uuid": "a284154a-d001-4889-9cea-74de3fff7bc2",
+        "net": "+3.3V",
+        "layer": "F.Cu",
+        "start": [
+          75.152001,
+          77.899
+        ],
+        "end": [
+          75.152001,
+          78.998995
+        ],
+        "width": 0.38,
+        "distance_mm": 0.0,
+        "overlap_area_mm2": 0.36176707392219704
+      },
+      {
+        "uuid": "ba1a69c4-9fcf-4a38-b640-b739ec135bc3",
+        "net": "+3.3V",
+        "layer": "F.Cu",
+        "start": [
+          75.152001,
+          78.998995
+        ],
+        "end": [
+          75.158002,
+          79.004996
+        ],
+        "width": 0.35,
+        "distance_mm": 0.0,
+        "overlap_area_mm2": 0.04995953735907655
+      },
+      {
+        "uuid": "36a15338-70fb-480e-abdc-b7b4f1f8065f",
+        "net": "SCL",
+        "layer": "B.Cu",
+        "start": [
+          74.806,
+          80.314884
+        ],
+        "end": [
+          74.806,
+          77.36
+        ],
+        "width": 0.25,
+        "distance_mm": 0.019000000000005457,
+        "overlap_area_mm2": 0.0
+      }
+    ],
+    "pad_conflicts": [
+      {
+        "ref": "R12",
+        "pin": "1",
+        "net": "+3.3V",
+        "at": [
+          75.152001,
+          77.899
+        ],
+        "size": [
+          0.54,
+          0.64
+        ]
+      },
+      {
+        "ref": "R11",
+        "pin": "1",
+        "net": "+3.3V",
+        "at": [
+          75.158002,
+          79.004996
+        ],
+        "size": [
+          0.54,
+          0.64
+        ]
+      }
+    ],
+    "courtyard_nearby": [
+      {
+        "ref": "R12",
+        "layer": "F.CrtYd",
+        "bounds": [
+          73.711998,
+          77.428999,
+          75.572002,
+          78.369001
+        ],
+        "distance_mm": 0.0
+      },
+      {
+        "ref": "R11",
+        "layer": "F.CrtYd",
+        "bounds": [
+          73.71799899999999,
+          78.53499500000001,
+          75.578003,
+          79.474997
+        ],
+        "distance_mm": 0.0
+      }
+    ]
+  },
+  {
+    "label": "lower_positive",
+    "side": "left",
+    "center_mm": [
+      54.3,
+      79
+    ],
+    "pad_size_mm": [
+      1.5,
+      1.5
+    ],
+    "net": "+SOLAR",
+    "track_conflicts": [
+      {
+        "uuid": "13269fc8-e16e-470f-80f3-b9aff43911f5",
+        "net": "GND",
+        "layer": "B.Cu",
+        "start": [
+          54.369,
+          76.14
+        ],
+        "end": [
+          54.369,
+          83.863
+        ],
+        "width": 0.2,
+        "distance_mm": 0.0,
+        "overlap_area_mm2": 0.2975925534515005
+      }
+    ],
+    "pad_conflicts": [],
+    "courtyard_nearby": []
+  },
+  {
+    "label": "lower_positive",
+    "side": "right",
+    "center_mm": [
+      75.7,
+      79
+    ],
+    "pad_size_mm": [
+      1.5,
+      1.5
+    ],
+    "net": "+SOLAR",
+    "track_conflicts": [
+      {
+        "uuid": "4073bc2d-e67d-4ee9-93f5-1530d311ced2",
+        "net": "GND",
+        "layer": "B.Cu",
+        "start": [
+          74.307636,
+          81.485
+        ],
+        "end": [
+          75.868,
+          79.924636
+        ],
+        "width": 0.3,
+        "distance_mm": 0.04036302059164566,
+        "overlap_area_mm2": 0.0
+      },
+      {
+        "uuid": "b155dd56-9a9e-4c9a-b934-fbad2e0fffff",
+        "net": "GND",
+        "layer": "B.Cu",
+        "start": [
+          75.868,
+          79.924636
+        ],
+        "end": [
+          75.868,
+          76.675
+        ],
+        "width": 0.3,
+        "distance_mm": 0.0,
+        "overlap_area_mm2": 0.43491708714130217
+      },
+      {
+        "uuid": "7a449c3c-64fa-457f-baf3-3900c5192bda",
+        "net": "+3.3V",
+        "layer": "F.Cu",
+        "start": [
+          75.158002,
+          81.585998
+        ],
+        "end": [
+          75.158002,
+          79.004996
+        ],
+        "width": 0.38,
+        "distance_mm": 0.0,
+        "overlap_area_mm2": 0.24018589447891928
+      },
+      {
+        "uuid": "a284154a-d001-4889-9cea-74de3fff7bc2",
+        "net": "+3.3V",
+        "layer": "F.Cu",
+        "start": [
+          75.152001,
+          77.899
+        ],
+        "end": [
+          75.152001,
+          78.998995
+        ],
+        "width": 0.38,
+        "distance_mm": 0.0,
+        "overlap_area_mm2": 0.23862275243101494
+      },
+      {
+        "uuid": "ba1a69c4-9fcf-4a38-b640-b739ec135bc3",
+        "net": "+3.3V",
+        "layer": "F.Cu",
+        "start": [
+          75.152001,
+          78.998995
+        ],
+        "end": [
+          75.158002,
+          79.004996
+        ],
+        "width": 0.35,
+        "distance_mm": 0.0,
+        "overlap_area_mm2": 0.09902714097870195
+      },
+      {
+        "uuid": "36a15338-70fb-480e-abdc-b7b4f1f8065f",
+        "net": "SCL",
+        "layer": "B.Cu",
+        "start": [
+          74.806,
+          80.314884
+        ],
+        "end": [
+          74.806,
+          77.36
+        ],
+        "width": 0.25,
+        "distance_mm": 0.019000000000005457,
+        "overlap_area_mm2": 0.0
+      }
+    ],
+    "pad_conflicts": [
+      {
+        "ref": "R12",
+        "pin": "1",
+        "net": "+3.3V",
+        "at": [
+          75.152001,
+          77.899
+        ],
+        "size": [
+          0.54,
+          0.64
+        ]
+      },
+      {
+        "ref": "R11",
+        "pin": "1",
+        "net": "+3.3V",
+        "at": [
+          75.158002,
+          79.004996
+        ],
+        "size": [
+          0.54,
+          0.64
+        ]
+      }
+    ],
+    "courtyard_nearby": [
+      {
+        "ref": "R12",
+        "layer": "F.CrtYd",
+        "bounds": [
+          73.711998,
+          77.428999,
+          75.572002,
+          78.369001
+        ],
+        "distance_mm": 0.0
+      },
+      {
+        "ref": "R11",
+        "layer": "F.CrtYd",
+        "bounds": [
+          73.71799899999999,
+          78.53499500000001,
+          75.578003,
+          79.474997
+        ],
+        "distance_mm": 0.0
+      }
+    ]
+  },
+  {
+    "label": "lower_positive",
+    "side": "left",
+    "center_mm": [
+      54.3,
+      80
+    ],
+    "pad_size_mm": [
+      1.5,
+      1.5
+    ],
+    "net": "+SOLAR",
+    "track_conflicts": [
+      {
+        "uuid": "3120e1c2-2340-4090-b1dc-bbf7fd54685c",
+        "net": "GND",
+        "layer": "F.Cu",
+        "start": [
+          55.167999,
+          80.387001
+        ],
+        "end": [
+          55.834,
+          79.721
+        ],
+        "width": 0.2,
+        "distance_mm": 0.10114991338007559,
+        "overlap_area_mm2": 0.0
+      },
+      {
+        "uuid": "5730ee39-0888-49e0-8fcd-b29dcefadc2d",
+        "net": "GND",
+        "layer": "F.Cu",
+        "start": [
+          55.167999,
+          81.063998
+        ],
+        "end": [
+          55.167999,
+          80.387001
+        ],
+        "width": 0.2,
+        "distance_mm": 0.10114991338007559,
+        "overlap_area_mm2": 0.0
+      },
+      {
+        "uuid": "13269fc8-e16e-470f-80f3-b9aff43911f5",
+        "net": "GND",
+        "layer": "B.Cu",
+        "start": [
+          54.369,
+          76.14
+        ],
+        "end": [
+          54.369,
+          83.863
+        ],
+        "width": 0.2,
+        "distance_mm": 0.0,
+        "overlap_area_mm2": 0.2975925534515005
+      }
+    ],
+    "pad_conflicts": [],
+    "courtyard_nearby": [
+      {
+        "ref": "C15",
+        "layer": "F.CrtYd",
+        "bounds": [
+          54.737999,
+          80.603998,
+          56.557998999999995,
+          81.52399799999999
+        ],
+        "distance_mm": 0.0
+      }
+    ]
+  },
+  {
+    "label": "lower_positive",
+    "side": "right",
+    "center_mm": [
+      75.7,
+      80
+    ],
+    "pad_size_mm": [
+      1.5,
+      1.5
+    ],
+    "net": "+SOLAR",
+    "track_conflicts": [
+      {
+        "uuid": "4073bc2d-e67d-4ee9-93f5-1530d311ced2",
+        "net": "GND",
+        "layer": "B.Cu",
+        "start": [
+          74.307636,
+          81.485
+        ],
+        "end": [
+          75.868,
+          79.924636
+        ],
+        "width": 0.3,
+        "distance_mm": 0.0,
+        "overlap_area_mm2": 0.3093447661439211
+      },
+      {
+        "uuid": "b155dd56-9a9e-4c9a-b934-fbad2e0fffff",
+        "net": "GND",
+        "layer": "B.Cu",
+        "start": [
+          75.868,
+          79.924636
+        ],
+        "end": [
+          75.868,
+          76.675
+        ],
+        "width": 0.3,
+        "distance_mm": 0.0,
+        "overlap_area_mm2": 0.23013551408929364
+      },
+      {
+        "uuid": "7a449c3c-64fa-457f-baf3-3900c5192bda",
+        "net": "+3.3V",
+        "layer": "F.Cu",
+        "start": [
+          75.158002,
+          81.585998
+        ],
+        "end": [
+          75.158002,
+          79.004996
+        ],
+        "width": 0.38,
+        "distance_mm": 0.0,
+        "overlap_area_mm2": 0.3709393484491317
+      },
+      {
+        "uuid": "36a15338-70fb-480e-abdc-b7b4f1f8065f",
+        "net": "SCL",
+        "layer": "B.Cu",
+        "start": [
+          74.806,
+          80.314884
+        ],
+        "end": [
+          74.806,
+          77.36
+        ],
+        "width": 0.25,
+        "distance_mm": 0.019000000000005457,
+        "overlap_area_mm2": 0.0
+      },
+      {
+        "uuid": "db3580e1-8284-4ab6-991e-228f5f90e7a5",
+        "net": "SCL",
+        "layer": "B.Cu",
+        "start": [
+          74.431884,
+          80.689
+        ],
+        "end": [
+          74.806,
+          80.314884
+        ],
+        "width": 0.25,
+        "distance_mm": 0.07387559468964874,
+        "overlap_area_mm2": 0.0
+      }
+    ],
+    "pad_conflicts": [
+      {
+        "ref": "R11",
+        "pin": "1",
+        "net": "+3.3V",
+        "at": [
+          75.158002,
+          79.004996
+        ],
+        "size": [
+          0.54,
+          0.64
+        ]
+      }
+    ],
+    "courtyard_nearby": [
+      {
+        "ref": "R11",
+        "layer": "F.CrtYd",
+        "bounds": [
+          73.71799899999999,
+          78.53499500000001,
+          75.578003,
+          79.474997
+        ],
+        "distance_mm": 0.0
+      }
+    ]
+  },
+  {
+    "label": "lower_positive",
+    "side": "left",
+    "center_mm": [
+      54.3,
+      81.5
+    ],
+    "pad_size_mm": [
+      1.5,
+      1.5
+    ],
+    "net": "+SOLAR",
+    "track_conflicts": [
+      {
+        "uuid": "3e20abe3-f828-4d60-9d8c-bd8b0c382377",
+        "net": "GND",
+        "layer": "F.Cu",
+        "start": [
+          55.126999,
+          81.104998
+        ],
+        "end": [
+          55.167999,
+          81.063998
+        ],
+        "width": 0.2,
+        "distance_mm": 0.06750722066454584,
+        "overlap_area_mm2": 0.0
+      },
+      {
+        "uuid": "5730ee39-0888-49e0-8fcd-b29dcefadc2d",
+        "net": "GND",
+        "layer": "F.Cu",
+        "start": [
+          55.167999,
+          81.063998
+        ],
+        "end": [
+          55.167999,
+          80.387001
+        ],
+        "width": 0.2,
+        "distance_mm": 0.12210054051325422,
+        "overlap_area_mm2": 0.0
+      },
+      {
+        "uuid": "ff9c66f8-7fe6-4103-8cee-dff669229808",
+        "net": "GND",
+        "layer": "F.Cu",
+        "start": [
+          55.126999,
+          82.209999
+        ],
+        "end": [
+          55.126999,
+          81.104998
+        ],
+        "width": 0.2,
+        "distance_mm": 0.0,
+        "overlap_area_mm2": 0.00544787058540346
+      },
+      {
+        "uuid": "13269fc8-e16e-470f-80f3-b9aff43911f5",
+        "net": "GND",
+        "layer": "B.Cu",
+        "start": [
+          54.369,
+          76.14
+        ],
+        "end": [
+          54.369,
+          83.863
+        ],
+        "width": 0.2,
+        "distance_mm": 0.0,
+        "overlap_area_mm2": 0.2975925534515005
+      }
+    ],
+    "pad_conflicts": [
+      {
+        "ref": "R21",
+        "pin": "2",
+        "net": "GND",
+        "at": [
+          55.126999,
+          82.209999
+        ],
+        "size": [
+          0.54,
+          0.64
+        ]
+      },
+      {
+        "ref": "C15",
+        "pin": "1",
+        "net": "GND",
+        "at": [
+          55.167999,
+          81.063998
+        ],
+        "size": [
+          0.56,
+          0.62
+        ]
+      }
+    ],
+    "courtyard_nearby": [
+      {
+        "ref": "R21",
+        "layer": "F.CrtYd",
+        "bounds": [
+          54.706998,
+          81.739998,
+          56.567002,
+          82.67999999999999
+        ],
+        "distance_mm": 0.0
+      },
+      {
+        "ref": "C15",
+        "layer": "F.CrtYd",
+        "bounds": [
+          54.737999,
+          80.603998,
+          56.557998999999995,
+          81.52399799999999
+        ],
+        "distance_mm": 0.0
+      }
+    ]
+  },
+  {
+    "label": "lower_positive",
+    "side": "right",
+    "center_mm": [
+      75.7,
+      81.5
+    ],
+    "pad_size_mm": [
+      1.5,
+      1.5
+    ],
+    "net": "+SOLAR",
+    "track_conflicts": [
+      {
+        "uuid": "4073bc2d-e67d-4ee9-93f5-1530d311ced2",
+        "net": "GND",
+        "layer": "B.Cu",
+        "start": [
+          74.307636,
+          81.485
+        ],
+        "end": [
+          75.868,
+          79.924636
+        ],
+        "width": 0.3,
+        "distance_mm": 0.09515662799782182,
+        "overlap_area_mm2": 0.0
+      },
+      {
+        "uuid": "117dd327-ffdd-41a5-a550-4c16a341668b",
+        "net": "+3.3V",
+        "layer": "F.Cu",
+        "start": [
+          70.802,
+          85.942
+        ],
+        "end": [
+          75.158002,
+          81.585998
+        ],
+        "width": 0.38,
+        "distance_mm": 0.0,
+        "overlap_area_mm2": 0.1406756533928232
+      },
+      {
+        "uuid": "7a449c3c-64fa-457f-baf3-3900c5192bda",
+        "net": "+3.3V",
+        "layer": "F.Cu",
+        "start": [
+          75.158002,
+          81.585998
+        ],
+        "end": [
+          75.158002,
+          79.004996
+        ],
+        "width": 0.38,
+        "distance_mm": 0.0,
+        "overlap_area_mm2": 0.27476361447892234
+      }
+    ],
+    "pad_conflicts": [],
+    "courtyard_nearby": []
+  },
+  {
+    "label": "lower_positive",
+    "side": "left",
+    "center_mm": [
+      54.3,
+      82
+    ],
+    "pad_size_mm": [
+      1.5,
+      1.5
+    ],
+    "net": "+SOLAR",
+    "track_conflicts": [
+      {
+        "uuid": "ff9c66f8-7fe6-4103-8cee-dff669229808",
+        "net": "GND",
+        "layer": "F.Cu",
+        "start": [
+          55.126999,
+          82.209999
+        ],
+        "end": [
+          55.126999,
+          81.104998
+        ],
+        "width": 0.2,
+        "distance_mm": 0.0,
+        "overlap_area_mm2": 0.00544787058540346
+      },
+      {
+        "uuid": "13269fc8-e16e-470f-80f3-b9aff43911f5",
+        "net": "GND",
+        "layer": "B.Cu",
+        "start": [
+          54.369,
+          76.14
+        ],
+        "end": [
+          54.369,
+          83.863
+        ],
+        "width": 0.2,
+        "distance_mm": 0.0,
+        "overlap_area_mm2": 0.2975925534515005
+      }
+    ],
+    "pad_conflicts": [
+      {
+        "ref": "R21",
+        "pin": "2",
+        "net": "GND",
+        "at": [
+          55.126999,
+          82.209999
+        ],
+        "size": [
+          0.54,
+          0.64
+        ]
+      },
+      {
+        "ref": "C15",
+        "pin": "1",
+        "net": "GND",
+        "at": [
+          55.167999,
+          81.063998
+        ],
+        "size": [
+          0.56,
+          0.62
+        ]
+      }
+    ],
+    "courtyard_nearby": [
+      {
+        "ref": "R19",
+        "layer": "F.CrtYd",
+        "bounds": [
+          54.687998,
+          82.842999,
+          56.548002000000004,
+          83.783001
+        ],
+        "distance_mm": 0.17885599910065736
+      },
+      {
+        "ref": "R21",
+        "layer": "F.CrtYd",
+        "bounds": [
+          54.706998,
+          81.739998,
+          56.567002,
+          82.67999999999999
+        ],
+        "distance_mm": 0.0
+      },
+      {
+        "ref": "C15",
+        "layer": "F.CrtYd",
+        "bounds": [
+          54.737999,
+          80.603998,
+          56.557998999999995,
+          81.52399799999999
+        ],
+        "distance_mm": 0.0
+      }
+    ]
+  },
+  {
+    "label": "lower_positive",
+    "side": "right",
+    "center_mm": [
+      75.7,
+      82
+    ],
+    "pad_size_mm": [
+      1.5,
+      1.5
+    ],
+    "net": "+SOLAR",
+    "track_conflicts": [
+      {
+        "uuid": "117dd327-ffdd-41a5-a550-4c16a341668b",
+        "net": "+3.3V",
+        "layer": "F.Cu",
+        "start": [
+          70.802,
+          85.942
+        ],
+        "end": [
+          75.158002,
+          81.585998
+        ],
+        "width": 0.38,
+        "distance_mm": 0.0,
+        "overlap_area_mm2": 0.1222288332348689
+      },
+      {
+        "uuid": "7a449c3c-64fa-457f-baf3-3900c5192bda",
+        "net": "+3.3V",
+        "layer": "F.Cu",
+        "start": [
+          75.158002,
+          81.585998
+        ],
+        "end": [
+          75.158002,
+          79.004996
+        ],
+        "width": 0.38,
+        "distance_mm": 0.0,
+        "overlap_area_mm2": 0.08894831576504987
+      }
+    ],
+    "pad_conflicts": [],
+    "courtyard_nearby": []
+  },
+  {
+    "label": "lower_positive",
+    "side": "left",
+    "center_mm": [
+      54.3,
+      76.4
+    ],
+    "pad_size_mm": [
+      1.6,
+      1.6
+    ],
+    "net": "+SOLAR",
+    "track_conflicts": [
+      {
+        "uuid": "13269fc8-e16e-470f-80f3-b9aff43911f5",
+        "net": "GND",
+        "layer": "B.Cu",
+        "start": [
+          54.369,
+          76.14
+        ],
+        "end": [
+          54.369,
+          83.863
+        ],
+        "width": 0.2,
+        "distance_mm": 0.0,
+        "overlap_area_mm2": 0.22654199603705494
+      },
+      {
+        "uuid": "b12ac0ab-a9d8-44ff-bbd1-4f120bdcb51b",
+        "net": "GND",
+        "layer": "B.Cu",
+        "start": [
+          54.587,
+          76.14
+        ],
+        "end": [
+          55.6,
+          75.127
+        ],
+        "width": 0.2,
+        "distance_mm": 0.0,
+        "overlap_area_mm2": 0.09773369536029684
+      },
+      {
+        "uuid": "d35c66fd-6572-43e0-a7de-e998d4ebdc84",
+        "net": "GND",
+        "layer": "B.Cu",
+        "start": [
+          54.369,
+          76.14
+        ],
+        "end": [
+          54.587,
+          76.14
+        ],
+        "width": 0.2,
+        "distance_mm": 0.0,
+        "overlap_area_mm2": 0.07496548490545765
+      },
+      {
+        "uuid": "ada427d2-8467-4a41-9363-b1025510c322",
+        "net": "PA1",
+        "layer": "F.Cu",
+        "start": [
+          55.264,
+          77.554
+        ],
+        "end": [
+          55.264,
+          76.942
+        ],
+        "width": 0.25,
+        "distance_mm": 0.18160827040320335,
+        "overlap_area_mm2": 0.0
+      },
+      {
+        "uuid": "ad2b0c5d-0977-4539-8efd-6b220e8d16c7",
+        "net": "PA1",
+        "layer": "B.Cu",
+        "start": [
+          59.225,
+          76.942
+        ],
+        "end": [
+          55.264,
+          76.942
+        ],
+        "width": 0.25,
+        "distance_mm": 0.18160827040320335,
+        "overlap_area_mm2": 0.0
+      }
+    ],
+    "pad_conflicts": [
+      {
+        "ref": "J3",
+        "pin": "7",
+        "net": "GND",
+        "at": [
+          54.444998,
+          75.173998
+        ],
+        "size": [
+          0.85,
+          0.85
+        ]
+      }
+    ],
+    "courtyard_nearby": [
+      {
+        "ref": "J3",
+        "layer": "F.CrtYd",
+        "bounds": [
+          53.294998,
+          68.173998,
+          55.594998,
+          76.173998
+        ],
+        "distance_mm": 0.0
+      }
+    ]
+  },
+  {
+    "label": "lower_positive",
+    "side": "right",
+    "center_mm": [
+      75.7,
+      76.4
+    ],
+    "pad_size_mm": [
+      1.6,
+      1.6
+    ],
+    "net": "+SOLAR",
+    "track_conflicts": [
+      {
+        "uuid": "b155dd56-9a9e-4c9a-b934-fbad2e0fffff",
+        "net": "GND",
+        "layer": "B.Cu",
+        "start": [
+          75.868,
+          79.924636
+        ],
+        "end": [
+          75.868,
+          76.675
+        ],
+        "width": 0.3,
+        "distance_mm": 0.0,
+        "overlap_area_mm2": 0.18572071108246904
+      },
+      {
+        "uuid": "c6221fc0-d983-44cf-91bb-57b72c13f950",
+        "net": "GND",
+        "layer": "B.Cu",
+        "start": [
+          75.868,
+          76.675
+        ],
+        "end": [
+          75.175,
+          75.982
+        ],
+        "width": 0.3,
+        "distance_mm": 0.0,
+        "overlap_area_mm2": 0.362100735201513
+      },
+      {
+        "uuid": "deac2438-480f-4f32-90e2-ccd56727ec39",
+        "net": "GND",
+        "layer": "B.Cu",
+        "start": [
+          75.175,
+          75.982
+        ],
+        "end": [
+          73.799,
+          75.982
+        ],
+        "width": 0.3,
+        "distance_mm": 0.0,
+        "overlap_area_mm2": 0.07987212415068468
+      },
+      {
+        "uuid": "6c7cdcf8-8205-4eb8-83ce-64d155e1ead7",
+        "net": "+3.3V",
+        "layer": "F.Cu",
+        "start": [
+          75.152001,
+          77.899
+        ],
+        "end": [
+          75.152001,
+          75.536999
+        ],
+        "width": 0.38,
+        "distance_mm": 0.0,
+        "overlap_area_mm2": 0.4257920849257123
+      },
+      {
+        "uuid": "bece7755-de06-49a9-9ac3-063b05b2dc4c",
+        "net": "+3.3V",
+        "layer": "F.Cu",
+        "start": [
+          75.152001,
+          75.536999
+        ],
+        "end": [
+          75.531,
+          75.158
+        ],
+        "width": 0.38,
+        "distance_mm": 0.03314093623087809,
+        "overlap_area_mm2": 0.0
+      },
+      {
+        "uuid": "7be7571d-9b76-4981-8b29-86a7e231b6a6",
+        "net": "+3.3V",
+        "layer": "B.Cu",
+        "start": [
+          75.531,
+          75.158
+        ],
+        "end": [
+          75.42,
+          75.269
+        ],
+        "width": 0.38,
+        "distance_mm": 0.17633229609281703,
+        "overlap_area_mm2": 0.0
+      },
+      {
+        "uuid": "8ef2c9ef-b55f-4ed8-a593-cb7a1a8712fe",
+        "net": "+3.3V",
+        "layer": "B.Cu",
+        "start": [
+          75.42,
+          75.269
+        ],
+        "end": [
+          68.849,
+          75.269
+        ],
+        "width": 0.38,
+        "distance_mm": 0.17633229609281703,
+        "overlap_area_mm2": 0.0
+      }
+    ],
+    "pad_conflicts": [
+      {
+        "ref": "J4",
+        "pin": "7",
+        "net": "+3.3V",
+        "at": [
+          75.531,
+          75.158
+        ],
+        "size": [
+          0.85,
+          0.85
+        ]
+      }
+    ],
+    "courtyard_nearby": [
+      {
+        "ref": "J4",
+        "layer": "F.CrtYd",
+        "bounds": [
+          74.381,
+          68.158,
+          76.68100000000001,
+          76.158
+        ],
+        "distance_mm": 0.0
+      }
+    ]
+  },
+  {
+    "label": "lower_positive",
+    "side": "left",
+    "center_mm": [
+      54.3,
+      76.5
+    ],
+    "pad_size_mm": [
+      1.6,
+      1.6
+    ],
+    "net": "+SOLAR",
+    "track_conflicts": [
+      {
+        "uuid": "13269fc8-e16e-470f-80f3-b9aff43911f5",
+        "net": "GND",
+        "layer": "B.Cu",
+        "start": [
+          54.369,
+          76.14
+        ],
+        "end": [
+          54.369,
+          83.863
+        ],
+        "width": 0.2,
+        "distance_mm": 0.0,
+        "overlap_area_mm2": 0.24654199603705404
+      },
+      {
+        "uuid": "b12ac0ab-a9d8-44ff-bbd1-4f120bdcb51b",
+        "net": "GND",
+        "layer": "B.Cu",
+        "start": [
+          54.587,
+          76.14
+        ],
+        "end": [
+          55.6,
+          75.127
+        ],
+        "width": 0.2,
+        "distance_mm": 0.0,
+        "overlap_area_mm2": 0.08329512788024722
+      },
+      {
+        "uuid": "d35c66fd-6572-43e0-a7de-e998d4ebdc84",
+        "net": "GND",
+        "layer": "B.Cu",
+        "start": [
+          54.369,
+          76.14
+        ],
+        "end": [
+          54.587,
+          76.14
+        ],
+        "width": 0.2,
+        "distance_mm": 0.0,
+        "overlap_area_mm2": 0.07496548490545765
+      },
+      {
+        "uuid": "ada427d2-8467-4a41-9363-b1025510c322",
+        "net": "PA1",
+        "layer": "F.Cu",
+        "start": [
+          55.264,
+          77.554
+        ],
+        "end": [
+          55.264,
+          76.942
+        ],
+        "width": 0.25,
+        "distance_mm": 0.1365392328774005,
+        "overlap_area_mm2": 0.0
+      },
+      {
+        "uuid": "ad2b0c5d-0977-4539-8efd-6b220e8d16c7",
+        "net": "PA1",
+        "layer": "B.Cu",
+        "start": [
+          59.225,
+          76.942
+        ],
+        "end": [
+          55.264,
+          76.942
+        ],
+        "width": 0.25,
+        "distance_mm": 0.1365392328774005,
+        "overlap_area_mm2": 0.0
+      }
+    ],
+    "pad_conflicts": [
+      {
+        "ref": "J3",
+        "pin": "7",
+        "net": "GND",
+        "at": [
+          54.444998,
+          75.173998
+        ],
+        "size": [
+          0.85,
+          0.85
+        ]
+      }
+    ],
+    "courtyard_nearby": [
+      {
+        "ref": "J3",
+        "layer": "F.CrtYd",
+        "bounds": [
+          53.294998,
+          68.173998,
+          55.594998,
+          76.173998
+        ],
+        "distance_mm": 0.0
+      }
+    ]
+  },
+  {
+    "label": "lower_positive",
+    "side": "right",
+    "center_mm": [
+      75.7,
+      76.5
+    ],
+    "pad_size_mm": [
+      1.6,
+      1.6
+    ],
+    "net": "+SOLAR",
+    "track_conflicts": [
+      {
+        "uuid": "b155dd56-9a9e-4c9a-b934-fbad2e0fffff",
+        "net": "GND",
+        "layer": "B.Cu",
+        "start": [
+          75.868,
+          79.924636
+        ],
+        "end": [
+          75.868,
+          76.675
+        ],
+        "width": 0.3,
+        "distance_mm": 0.0,
+        "overlap_area_mm2": 0.21572071108246849
+      },
+      {
+        "uuid": "c6221fc0-d983-44cf-91bb-57b72c13f950",
+        "net": "GND",
+        "layer": "B.Cu",
+        "start": [
+          75.868,
+          76.675
+        ],
+        "end": [
+          75.175,
+          75.982
+        ],
+        "width": 0.3,
+        "distance_mm": 0.0,
+        "overlap_area_mm2": 0.34615824027531755
+      },
+      {
+        "uuid": "deac2438-480f-4f32-90e2-ccd56727ec39",
+        "net": "GND",
+        "layer": "B.Cu",
+        "start": [
+          75.175,
+          75.982
+        ],
+        "end": [
+          73.799,
+          75.982
+        ],
+        "width": 0.3,
+        "distance_mm": 0.0,
+        "overlap_area_mm2": 0.05756262411826624
+      },
+      {
+        "uuid": "6c7cdcf8-8205-4eb8-83ce-64d155e1ead7",
+        "net": "+3.3V",
+        "layer": "F.Cu",
+        "start": [
+          75.152001,
+          77.899
+        ],
+        "end": [
+          75.152001,
+          75.536999
+        ],
+        "width": 0.38,
+        "distance_mm": 0.0,
+        "overlap_area_mm2": 0.4257920849257123
+      },
+      {
+        "uuid": "bece7755-de06-49a9-9ac3-063b05b2dc4c",
+        "net": "+3.3V",
+        "layer": "F.Cu",
+        "start": [
+          75.152001,
+          75.536999
+        ],
+        "end": [
+          75.531,
+          75.158
+        ],
+        "width": 0.38,
+        "distance_mm": 0.11891379723089854,
+        "overlap_area_mm2": 0.0
+      }
+    ],
+    "pad_conflicts": [
+      {
+        "ref": "J4",
+        "pin": "7",
+        "net": "+3.3V",
+        "at": [
+          75.531,
+          75.158
+        ],
+        "size": [
+          0.85,
+          0.85
+        ]
+      }
+    ],
+    "courtyard_nearby": [
+      {
+        "ref": "R12",
+        "layer": "F.CrtYd",
+        "bounds": [
+          73.711998,
+          77.428999,
+          75.572002,
+          78.369001
+        ],
+        "distance_mm": 0.13868883088597794
+      },
+      {
+        "ref": "J4",
+        "layer": "F.CrtYd",
+        "bounds": [
+          74.381,
+          68.158,
+          76.68100000000001,
+          76.158
+        ],
+        "distance_mm": 0.0
+      }
+    ]
+  },
+  {
+    "label": "lower_positive",
+    "side": "left",
+    "center_mm": [
+      54.3,
+      76.6
+    ],
+    "pad_size_mm": [
+      1.6,
+      1.6
+    ],
+    "net": "+SOLAR",
+    "track_conflicts": [
+      {
+        "uuid": "13269fc8-e16e-470f-80f3-b9aff43911f5",
+        "net": "GND",
+        "layer": "B.Cu",
+        "start": [
+          54.369,
+          76.14
+        ],
+        "end": [
+          54.369,
+          83.863
+        ],
+        "width": 0.2,
+        "distance_mm": 0.0,
+        "overlap_area_mm2": 0.2665419960370532
+      },
+      {
+        "uuid": "b12ac0ab-a9d8-44ff-bbd1-4f120bdcb51b",
+        "net": "GND",
+        "layer": "B.Cu",
+        "start": [
+          54.587,
+          76.14
+        ],
+        "end": [
+          55.6,
+          75.127
+        ],
+        "width": 0.2,
+        "distance_mm": 0.0,
+        "overlap_area_mm2": 0.06758743743546111
+      },
+      {
+        "uuid": "d35c66fd-6572-43e0-a7de-e998d4ebdc84",
+        "net": "GND",
+        "layer": "B.Cu",
+        "start": [
+          54.369,
+          76.14
+        ],
+        "end": [
+          54.587,
+          76.14
+        ],
+        "width": 0.2,
+        "distance_mm": 0.0,
+        "overlap_area_mm2": 0.07496548490545765
+      },
+      {
+        "uuid": "ada427d2-8467-4a41-9363-b1025510c322",
+        "net": "PA1",
+        "layer": "F.Cu",
+        "start": [
+          55.264,
+          77.554
+        ],
+        "end": [
+          55.264,
+          76.942
+        ],
+        "width": 0.25,
+        "distance_mm": 0.09897901170679195,
+        "overlap_area_mm2": 0.0
+      },
+      {
+        "uuid": "ad2b0c5d-0977-4539-8efd-6b220e8d16c7",
+        "net": "PA1",
+        "layer": "B.Cu",
+        "start": [
+          59.225,
+          76.942
+        ],
+        "end": [
+          55.264,
+          76.942
+        ],
+        "width": 0.25,
+        "distance_mm": 0.09897901170679195,
+        "overlap_area_mm2": 0.0
+      }
+    ],
+    "pad_conflicts": [],
+    "courtyard_nearby": [
+      {
+        "ref": "J3",
+        "layer": "F.CrtYd",
+        "bounds": [
+          53.294998,
+          68.173998,
+          55.594998,
+          76.173998
+        ],
+        "distance_mm": 0.0
+      }
+    ]
+  },
+  {
+    "label": "lower_positive",
+    "side": "right",
+    "center_mm": [
+      75.7,
+      76.6
+    ],
+    "pad_size_mm": [
+      1.6,
+      1.6
+    ],
+    "net": "+SOLAR",
+    "track_conflicts": [
+      {
+        "uuid": "b155dd56-9a9e-4c9a-b934-fbad2e0fffff",
+        "net": "GND",
+        "layer": "B.Cu",
+        "start": [
+          75.868,
+          79.924636
+        ],
+        "end": [
+          75.868,
+          76.675
+        ],
+        "width": 0.3,
+        "distance_mm": 0.0,
+        "overlap_area_mm2": 0.2457207110824679
+      },
+      {
+        "uuid": "c6221fc0-d983-44cf-91bb-57b72c13f950",
+        "net": "GND",
+        "layer": "B.Cu",
+        "start": [
+          75.868,
+          76.675
+        ],
+        "end": [
+          75.175,
+          75.982
+        ],
+        "width": 0.3,
+        "distance_mm": 0.0,
+        "overlap_area_mm2": 0.3243970463998005
+      },
+      {
+        "uuid": "deac2438-480f-4f32-90e2-ccd56727ec39",
+        "net": "GND",
+        "layer": "B.Cu",
+        "start": [
+          75.175,
+          75.982
+        ],
+        "end": [
+          73.799,
+          75.982
+        ],
+        "width": 0.3,
+        "distance_mm": 0.0,
+        "overlap_area_mm2": 0.03199987422500634
+      },
+      {
+        "uuid": "6c7cdcf8-8205-4eb8-83ce-64d155e1ead7",
+        "net": "+3.3V",
+        "layer": "F.Cu",
+        "start": [
+          75.152001,
+          77.899
+        ],
+        "end": [
+          75.152001,
+          75.536999
+        ],
+        "width": 0.38,
+        "distance_mm": 0.0,
+        "overlap_area_mm2": 0.4257920849257123
+      }
+    ],
+    "pad_conflicts": [],
+    "courtyard_nearby": [
+      {
+        "ref": "R12",
+        "layer": "F.CrtYd",
+        "bounds": [
+          73.711998,
+          77.428999,
+          75.572002,
+          78.369001
+        ],
+        "distance_mm": 0.0397711798895036
+      },
+      {
+        "ref": "J4",
+        "layer": "F.CrtYd",
+        "bounds": [
+          74.381,
+          68.158,
+          76.68100000000001,
+          76.158
+        ],
+        "distance_mm": 0.0
+      }
+    ]
+  },
+  {
+    "label": "lower_positive",
+    "side": "left",
+    "center_mm": [
+      54.3,
+      76.7
+    ],
+    "pad_size_mm": [
+      1.6,
+      1.6
+    ],
+    "net": "+SOLAR",
+    "track_conflicts": [
+      {
+        "uuid": "13269fc8-e16e-470f-80f3-b9aff43911f5",
+        "net": "GND",
+        "layer": "B.Cu",
+        "start": [
+          54.369,
+          76.14
+        ],
+        "end": [
+          54.369,
+          83.863
+        ],
+        "width": 0.2,
+        "distance_mm": 0.0,
+        "overlap_area_mm2": 0.28654199603705516
+      },
+      {
+        "uuid": "b12ac0ab-a9d8-44ff-bbd1-4f120bdcb51b",
+        "net": "GND",
+        "layer": "B.Cu",
+        "start": [
+          54.587,
+          76.14
+        ],
+        "end": [
+          55.6,
+          75.127
+        ],
+        "width": 0.2,
+        "distance_mm": 0.0,
+        "overlap_area_mm2": 0.05057113785222006
+      },
+      {
+        "uuid": "d35c66fd-6572-43e0-a7de-e998d4ebdc84",
+        "net": "GND",
+        "layer": "B.Cu",
+        "start": [
+          54.369,
+          76.14
+        ],
+        "end": [
+          54.587,
+          76.14
+        ],
+        "width": 0.2,
+        "distance_mm": 0.0,
+        "overlap_area_mm2": 0.07496548490545765
+      },
+      {
+        "uuid": "ada427d2-8467-4a41-9363-b1025510c322",
+        "net": "PA1",
+        "layer": "F.Cu",
+        "start": [
+          55.264,
+          77.554
+        ],
+        "end": [
+          55.264,
+          76.942
+        ],
+        "width": 0.25,
+        "distance_mm": 0.07002553462635029,
+        "overlap_area_mm2": 0.0
+      },
+      {
+        "uuid": "ad2b0c5d-0977-4539-8efd-6b220e8d16c7",
+        "net": "PA1",
+        "layer": "B.Cu",
+        "start": [
+          59.225,
+          76.942
+        ],
+        "end": [
+          55.264,
+          76.942
+        ],
+        "width": 0.25,
+        "distance_mm": 0.07002553462635029,
+        "overlap_area_mm2": 0.0
+      }
+    ],
+    "pad_conflicts": [],
+    "courtyard_nearby": [
+      {
+        "ref": "J3",
+        "layer": "F.CrtYd",
+        "bounds": [
+          53.294998,
+          68.173998,
+          55.594998,
+          76.173998
+        ],
+        "distance_mm": 0.0
+      }
+    ]
+  },
+  {
+    "label": "lower_positive",
+    "side": "right",
+    "center_mm": [
+      75.7,
+      76.7
+    ],
+    "pad_size_mm": [
+      1.6,
+      1.6
+    ],
+    "net": "+SOLAR",
+    "track_conflicts": [
+      {
+        "uuid": "b155dd56-9a9e-4c9a-b934-fbad2e0fffff",
+        "net": "GND",
+        "layer": "B.Cu",
+        "start": [
+          75.868,
+          79.924636
+        ],
+        "end": [
+          75.868,
+          76.675
+        ],
+        "width": 0.3,
+        "distance_mm": 0.0,
+        "overlap_area_mm2": 0.2757207110824716
+      },
+      {
+        "uuid": "c6221fc0-d983-44cf-91bb-57b72c13f950",
+        "net": "GND",
+        "layer": "B.Cu",
+        "start": [
+          75.868,
+          76.675
+        ],
+        "end": [
+          75.175,
+          75.982
+        ],
+        "width": 0.3,
+        "distance_mm": 0.0,
+        "overlap_area_mm2": 0.3004270730357153
+      },
+      {
+        "uuid": "deac2438-480f-4f32-90e2-ccd56727ec39",
+        "net": "GND",
+        "layer": "B.Cu",
+        "start": [
+          75.175,
+          75.982
+        ],
+        "end": [
+          73.799,
+          75.982
+        ],
+        "width": 0.3,
+        "distance_mm": 0.0,
+        "overlap_area_mm2": 0.009396296489750194
+      },
+      {
+        "uuid": "6c7cdcf8-8205-4eb8-83ce-64d155e1ead7",
+        "net": "+3.3V",
+        "layer": "F.Cu",
+        "start": [
+          75.152001,
+          77.899
+        ],
+        "end": [
+          75.152001,
+          75.536999
+        ],
+        "width": 0.38,
+        "distance_mm": 0.0,
+        "overlap_area_mm2": 0.4257920849257123
+      },
+      {
+        "uuid": "36a15338-70fb-480e-abdc-b7b4f1f8065f",
+        "net": "SCL",
+        "layer": "B.Cu",
+        "start": [
+          74.806,
+          80.314884
+        ],
+        "end": [
+          74.806,
+          77.36
+        ],
+        "width": 0.25,
+        "distance_mm": 0.18734327711892554,
+        "overlap_area_mm2": 0.0
+      },
+      {
+        "uuid": "377fbb36-f705-4345-b319-e5c1247be702",
+        "net": "SCL",
+        "layer": "B.Cu",
+        "start": [
+          74.806,
+          77.36
+        ],
+        "end": [
+          74.202,
+          76.756
+        ],
+        "width": 0.25,
+        "distance_mm": 0.18734327711892554,
+        "overlap_area_mm2": 0.0
+      }
+    ],
+    "pad_conflicts": [
+      {
+        "ref": "R12",
+        "pin": "1",
+        "net": "+3.3V",
+        "at": [
+          75.152001,
+          77.899
+        ],
+        "size": [
+          0.54,
+          0.64
+        ]
+      }
+    ],
+    "courtyard_nearby": [
+      {
+        "ref": "R12",
+        "layer": "F.CrtYd",
+        "bounds": [
+          73.711998,
+          77.428999,
+          75.572002,
+          78.369001
+        ],
+        "distance_mm": 0.0
+      },
+      {
+        "ref": "J4",
+        "layer": "F.CrtYd",
+        "bounds": [
+          74.381,
+          68.158,
+          76.68100000000001,
+          76.158
+        ],
+        "distance_mm": 0.0
+      }
+    ]
+  },
+  {
+    "label": "lower_positive",
+    "side": "left",
+    "center_mm": [
+      54.3,
+      77.0
+    ],
+    "pad_size_mm": [
+      1.6,
+      1.6
+    ],
+    "net": "+SOLAR",
+    "track_conflicts": [
+      {
+        "uuid": "13269fc8-e16e-470f-80f3-b9aff43911f5",
+        "net": "GND",
+        "layer": "B.Cu",
+        "start": [
+          54.369,
+          76.14
+        ],
+        "end": [
+          54.369,
+          83.863
+        ],
+        "width": 0.2,
+        "distance_mm": 0.0,
+        "overlap_area_mm2": 0.31771850716864697
+      },
+      {
+        "uuid": "b12ac0ab-a9d8-44ff-bbd1-4f120bdcb51b",
+        "net": "GND",
+        "layer": "B.Cu",
+        "start": [
+          54.587,
+          76.14
+        ],
+        "end": [
+          55.6,
+          75.127
+        ],
+        "width": 0.2,
+        "distance_mm": 0.007499373396308956,
+        "overlap_area_mm2": 0.0
+      },
+      {
+        "uuid": "d35c66fd-6572-43e0-a7de-e998d4ebdc84",
+        "net": "GND",
+        "layer": "B.Cu",
+        "start": [
+          54.369,
+          76.14
+        ],
+        "end": [
+          54.587,
+          76.14
+        ],
+        "width": 0.2,
+        "distance_mm": 0.0,
+        "overlap_area_mm2": 0.006003954362616393
+      },
+      {
+        "uuid": "ada427d2-8467-4a41-9363-b1025510c322",
+        "net": "PA1",
+        "layer": "F.Cu",
+        "start": [
+          55.264,
+          77.554
+        ],
+        "end": [
+          55.264,
+          76.942
+        ],
+        "width": 0.25,
+        "distance_mm": 0.03900000000000859,
+        "overlap_area_mm2": 0.0
+      },
+      {
+        "uuid": "d6a1e911-816c-41ae-a682-c58d0aa6e5f2",
+        "net": "PA1",
+        "layer": "F.Cu",
+        "start": [
+          58.546,
+          80.836
+        ],
+        "end": [
+          55.264,
+          77.554
+        ],
+        "width": 0.25,
+        "distance_mm": 0.18777750333352913,
+        "overlap_area_mm2": 0.0
+      },
+      {
+        "uuid": "ad2b0c5d-0977-4539-8efd-6b220e8d16c7",
+        "net": "PA1",
+        "layer": "B.Cu",
+        "start": [
+          59.225,
+          76.942
+        ],
+        "end": [
+          55.264,
+          76.942
+        ],
+        "width": 0.25,
+        "distance_mm": 0.041798947902995355,
+        "overlap_area_mm2": 0.0
+      }
+    ],
+    "pad_conflicts": [],
+    "courtyard_nearby": [
+      {
+        "ref": "J3",
+        "layer": "F.CrtYd",
+        "bounds": [
+          53.294998,
+          68.173998,
+          55.594998,
+          76.173998
+        ],
+        "distance_mm": 0.026002000000005413
+      }
+    ]
+  },
+  {
+    "label": "lower_positive",
+    "side": "right",
+    "center_mm": [
+      75.7,
+      77.0
+    ],
+    "pad_size_mm": [
+      1.6,
+      1.6
+    ],
+    "net": "+SOLAR",
+    "track_conflicts": [
+      {
+        "uuid": "b155dd56-9a9e-4c9a-b934-fbad2e0fffff",
+        "net": "GND",
+        "layer": "B.Cu",
+        "start": [
+          75.868,
+          79.924636
+        ],
+        "end": [
+          75.868,
+          76.675
+        ],
+        "width": 0.3,
+        "distance_mm": 0.0,
+        "overlap_area_mm2": 0.36572071108247395
+      },
+      {
+        "uuid": "c6221fc0-d983-44cf-91bb-57b72c13f950",
+        "net": "GND",
+        "layer": "B.Cu",
+        "start": [
+          75.868,
+          76.675
+        ],
+        "end": [
+          75.175,
+          75.982
+        ],
+        "width": 0.3,
+        "distance_mm": 0.0,
+        "overlap_area_mm2": 0.21582031835502447
+      },
+      {
+        "uuid": "deac2438-480f-4f32-90e2-ccd56727ec39",
+        "net": "GND",
+        "layer": "B.Cu",
+        "start": [
+          75.175,
+          75.982
+        ],
+        "end": [
+          73.799,
+          75.982
+        ],
+        "width": 0.3,
+        "distance_mm": 0.1958718410556531,
+        "overlap_area_mm2": 0.0
+      },
+      {
+        "uuid": "6c7cdcf8-8205-4eb8-83ce-64d155e1ead7",
+        "net": "+3.3V",
+        "layer": "F.Cu",
+        "start": [
+          75.152001,
+          77.899
+        ],
+        "end": [
+          75.152001,
+          75.536999
+        ],
+        "width": 0.38,
+        "distance_mm": 0.0,
+        "overlap_area_mm2": 0.4257920849257123
+      },
+      {
+        "uuid": "a284154a-d001-4889-9cea-74de3fff7bc2",
+        "net": "+3.3V",
+        "layer": "F.Cu",
+        "start": [
+          75.152001,
+          77.899
+        ],
+        "end": [
+          75.152001,
+          78.998995
+        ],
+        "width": 0.38,
+        "distance_mm": 0.06401830846226836,
+        "overlap_area_mm2": 0.0
+      },
+      {
+        "uuid": "36a15338-70fb-480e-abdc-b7b4f1f8065f",
+        "net": "SCL",
+        "layer": "B.Cu",
+        "start": [
+          74.806,
+          80.314884
+        ],
+        "end": [
+          74.806,
+          77.36
+        ],
+        "width": 0.25,
+        "distance_mm": 0.03913494450504635,
+        "overlap_area_mm2": 0.0
+      },
+      {
+        "uuid": "377fbb36-f705-4345-b319-e5c1247be702",
+        "net": "SCL",
+        "layer": "B.Cu",
+        "start": [
+          74.806,
+          77.36
+        ],
+        "end": [
+          74.202,
+          76.756
+        ],
+        "width": 0.25,
+        "distance_mm": 0.03913494450504635,
+        "overlap_area_mm2": 0.0
+      }
+    ],
+    "pad_conflicts": [
+      {
+        "ref": "R12",
+        "pin": "1",
+        "net": "+3.3V",
+        "at": [
+          75.152001,
+          77.899
+        ],
+        "size": [
+          0.54,
+          0.64
+        ]
+      }
+    ],
+    "courtyard_nearby": [
+      {
+        "ref": "R12",
+        "layer": "F.CrtYd",
+        "bounds": [
+          73.711998,
+          77.428999,
+          75.572002,
+          78.369001
+        ],
+        "distance_mm": 0.0
+      },
+      {
+        "ref": "J4",
+        "layer": "F.CrtYd",
+        "bounds": [
+          74.381,
+          68.158,
+          76.68100000000001,
+          76.158
+        ],
+        "distance_mm": 0.04200000000000159
+      }
+    ]
+  },
+  {
+    "label": "lower_positive",
+    "side": "left",
+    "center_mm": [
+      54.3,
+      78.5
+    ],
+    "pad_size_mm": [
+      1.6,
+      1.6
+    ],
+    "net": "+SOLAR",
+    "track_conflicts": [
+      {
+        "uuid": "13269fc8-e16e-470f-80f3-b9aff43911f5",
+        "net": "GND",
+        "layer": "B.Cu",
+        "start": [
+          54.369,
+          76.14
+        ],
+        "end": [
+          54.369,
+          83.863
+        ],
+        "width": 0.2,
+        "distance_mm": 0.0,
+        "overlap_area_mm2": 0.31771850716864697
+      }
+    ],
+    "pad_conflicts": [],
+    "courtyard_nearby": []
+  },
+  {
+    "label": "lower_positive",
+    "side": "right",
+    "center_mm": [
+      75.7,
+      78.5
+    ],
+    "pad_size_mm": [
+      1.6,
+      1.6
+    ],
+    "net": "+SOLAR",
+    "track_conflicts": [
+      {
+        "uuid": "b155dd56-9a9e-4c9a-b934-fbad2e0fffff",
+        "net": "GND",
+        "layer": "B.Cu",
+        "start": [
+          75.868,
+          79.924636
+        ],
+        "end": [
+          75.868,
+          76.675
+        ],
+        "width": 0.3,
+        "distance_mm": 0.0,
+        "overlap_area_mm2": 0.4658690811276563
+      },
+      {
+        "uuid": "6c7cdcf8-8205-4eb8-83ce-64d155e1ead7",
+        "net": "+3.3V",
+        "layer": "F.Cu",
+        "start": [
+          75.152001,
+          77.899
+        ],
+        "end": [
+          75.152001,
+          75.536999
+        ],
+        "width": 0.38,
+        "distance_mm": 0.0,
+        "overlap_area_mm2": 0.04963334786555865
+      },
+      {
+        "uuid": "7a449c3c-64fa-457f-baf3-3900c5192bda",
+        "net": "+3.3V",
+        "layer": "F.Cu",
+        "start": [
+          75.158002,
+          81.585998
+        ],
+        "end": [
+          75.158002,
+          79.004996
+        ],
+        "width": 0.38,
+        "distance_mm": 0.0,
+        "overlap_area_mm2": 0.08257984819254983
+      },
+      {
+        "uuid": "a284154a-d001-4889-9cea-74de3fff7bc2",
+        "net": "+3.3V",
+        "layer": "F.Cu",
+        "start": [
+          75.152001,
+          77.899
+        ],
+        "end": [
+          75.152001,
+          78.998995
+        ],
+        "width": 0.38,
+        "distance_mm": 0.0,
+        "overlap_area_mm2": 0.4177394641686017
+      },
+      {
+        "uuid": "ba1a69c4-9fcf-4a38-b640-b739ec135bc3",
+        "net": "+3.3V",
+        "layer": "F.Cu",
+        "start": [
+          75.152001,
+          78.998995
+        ],
+        "end": [
+          75.158002,
+          79.004996
+        ],
+        "width": 0.35,
+        "distance_mm": 0.0,
+        "overlap_area_mm2": 0.06789814124739643
+      },
+      {
+        "uuid": "36a15338-70fb-480e-abdc-b7b4f1f8065f",
+        "net": "SCL",
+        "layer": "B.Cu",
+        "start": [
+          74.806,
+          80.314884
+        ],
+        "end": [
+          74.806,
+          77.36
+        ],
+        "width": 0.25,
+        "distance_mm": 0.0,
+        "overlap_area_mm2": 0.008856572078023766
+      }
+    ],
+    "pad_conflicts": [
+      {
+        "ref": "R12",
+        "pin": "1",
+        "net": "+3.3V",
+        "at": [
+          75.152001,
+          77.899
+        ],
+        "size": [
+          0.54,
+          0.64
+        ]
+      },
+      {
+        "ref": "R11",
+        "pin": "1",
+        "net": "+3.3V",
+        "at": [
+          75.158002,
+          79.004996
+        ],
+        "size": [
+          0.54,
+          0.64
+        ]
+      }
+    ],
+    "courtyard_nearby": [
+      {
+        "ref": "R12",
+        "layer": "F.CrtYd",
+        "bounds": [
+          73.711998,
+          77.428999,
+          75.572002,
+          78.369001
+        ],
+        "distance_mm": 0.0
+      },
+      {
+        "ref": "R11",
+        "layer": "F.CrtYd",
+        "bounds": [
+          73.71799899999999,
+          78.53499500000001,
+          75.578003,
+          79.474997
+        ],
+        "distance_mm": 0.0
+      }
+    ]
+  },
+  {
+    "label": "lower_positive",
+    "side": "left",
+    "center_mm": [
+      54.3,
+      79
+    ],
+    "pad_size_mm": [
+      1.6,
+      1.6
+    ],
+    "net": "+SOLAR",
+    "track_conflicts": [
+      {
+        "uuid": "13269fc8-e16e-470f-80f3-b9aff43911f5",
+        "net": "GND",
+        "layer": "B.Cu",
+        "start": [
+          54.369,
+          76.14
+        ],
+        "end": [
+          54.369,
+          83.863
+        ],
+        "width": 0.2,
+        "distance_mm": 0.0,
+        "overlap_area_mm2": 0.31771850716864697
+      }
+    ],
+    "pad_conflicts": [],
+    "courtyard_nearby": []
+  },
+  {
+    "label": "lower_positive",
+    "side": "right",
+    "center_mm": [
+      75.7,
+      79
+    ],
+    "pad_size_mm": [
+      1.6,
+      1.6
+    ],
+    "net": "+SOLAR",
+    "track_conflicts": [
+      {
+        "uuid": "4073bc2d-e67d-4ee9-93f5-1530d311ced2",
+        "net": "GND",
+        "layer": "B.Cu",
+        "start": [
+          74.307636,
+          81.485
+        ],
+        "end": [
+          75.868,
+          79.924636
+        ],
+        "width": 0.3,
+        "distance_mm": 0.0,
+        "overlap_area_mm2": 0.0006092332608094401
+      },
+      {
+        "uuid": "b155dd56-9a9e-4c9a-b934-fbad2e0fffff",
+        "net": "GND",
+        "layer": "B.Cu",
+        "start": [
+          75.868,
+          79.924636
+        ],
+        "end": [
+          75.868,
+          76.675
+        ],
+        "width": 0.3,
+        "distance_mm": 0.0,
+        "overlap_area_mm2": 0.4658690811276563
+      },
+      {
+        "uuid": "7a449c3c-64fa-457f-baf3-3900c5192bda",
+        "net": "+3.3V",
+        "layer": "F.Cu",
+        "start": [
+          75.158002,
+          81.585998
+        ],
+        "end": [
+          75.158002,
+          79.004996
+        ],
+        "width": 0.38,
+        "distance_mm": 0.0,
+        "overlap_area_mm2": 0.27001969685826205
+      },
+      {
+        "uuid": "a284154a-d001-4889-9cea-74de3fff7bc2",
+        "net": "+3.3V",
+        "layer": "F.Cu",
+        "start": [
+          75.152001,
+          77.899
+        ],
+        "end": [
+          75.152001,
+          78.998995
+        ],
+        "width": 0.38,
+        "distance_mm": 0.0,
+        "overlap_area_mm2": 0.26912884271720927
+      },
+      {
+        "uuid": "ba1a69c4-9fcf-4a38-b640-b739ec135bc3",
+        "net": "+3.3V",
+        "layer": "F.Cu",
+        "start": [
+          75.152001,
+          78.998995
+        ],
+        "end": [
+          75.158002,
+          79.004996
+        ],
+        "width": 0.35,
+        "distance_mm": 0.0,
+        "overlap_area_mm2": 0.09902714097870195
+      },
+      {
+        "uuid": "36a15338-70fb-480e-abdc-b7b4f1f8065f",
+        "net": "SCL",
+        "layer": "B.Cu",
+        "start": [
+          74.806,
+          80.314884
+        ],
+        "end": [
+          74.806,
+          77.36
+        ],
+        "width": 0.25,
+        "distance_mm": 0.0,
+        "overlap_area_mm2": 0.008856572078023766
+      }
+    ],
+    "pad_conflicts": [
+      {
+        "ref": "R12",
+        "pin": "1",
+        "net": "+3.3V",
+        "at": [
+          75.152001,
+          77.899
+        ],
+        "size": [
+          0.54,
+          0.64
+        ]
+      },
+      {
+        "ref": "R11",
+        "pin": "1",
+        "net": "+3.3V",
+        "at": [
+          75.158002,
+          79.004996
+        ],
+        "size": [
+          0.54,
+          0.64
+        ]
+      }
+    ],
+    "courtyard_nearby": [
+      {
+        "ref": "R12",
+        "layer": "F.CrtYd",
+        "bounds": [
+          73.711998,
+          77.428999,
+          75.572002,
+          78.369001
+        ],
+        "distance_mm": 0.0
+      },
+      {
+        "ref": "R11",
+        "layer": "F.CrtYd",
+        "bounds": [
+          73.71799899999999,
+          78.53499500000001,
+          75.578003,
+          79.474997
+        ],
+        "distance_mm": 0.0
+      }
+    ]
+  },
+  {
+    "label": "lower_positive",
+    "side": "left",
+    "center_mm": [
+      54.3,
+      80
+    ],
+    "pad_size_mm": [
+      1.6,
+      1.6
+    ],
+    "net": "+SOLAR",
+    "track_conflicts": [
+      {
+        "uuid": "3120e1c2-2340-4090-b1dc-bbf7fd54685c",
+        "net": "GND",
+        "layer": "F.Cu",
+        "start": [
+          55.167999,
+          80.387001
+        ],
+        "end": [
+          55.834,
+          79.721
+        ],
+        "width": 0.2,
+        "distance_mm": 0.05121014056981918,
+        "overlap_area_mm2": 0.0
+      },
+      {
+        "uuid": "5730ee39-0888-49e0-8fcd-b29dcefadc2d",
+        "net": "GND",
+        "layer": "F.Cu",
+        "start": [
+          55.167999,
+          81.063998
+        ],
+        "end": [
+          55.167999,
+          80.387001
+        ],
+        "width": 0.2,
+        "distance_mm": 0.05121014056981918,
+        "overlap_area_mm2": 0.0
+      },
+      {
+        "uuid": "13269fc8-e16e-470f-80f3-b9aff43911f5",
+        "net": "GND",
+        "layer": "B.Cu",
+        "start": [
+          54.369,
+          76.14
+        ],
+        "end": [
+          54.369,
+          83.863
+        ],
+        "width": 0.2,
+        "distance_mm": 0.0,
+        "overlap_area_mm2": 0.31771850716864697
+      }
+    ],
+    "pad_conflicts": [
+      {
+        "ref": "C15",
+        "pin": "1",
+        "net": "GND",
+        "at": [
+          55.167999,
+          81.063998
+        ],
+        "size": [
+          0.56,
+          0.62
+        ]
+      }
+    ],
+    "courtyard_nearby": [
+      {
+        "ref": "C15",
+        "layer": "F.CrtYd",
+        "bounds": [
+          54.737999,
+          80.603998,
+          56.557998999999995,
+          81.52399799999999
+        ],
+        "distance_mm": 0.0
+      }
+    ]
+  },
+  {
+    "label": "lower_positive",
+    "side": "right",
+    "center_mm": [
+      75.7,
+      80
+    ],
+    "pad_size_mm": [
+      1.6,
+      1.6
+    ],
+    "net": "+SOLAR",
+    "track_conflicts": [
+      {
+        "uuid": "4073bc2d-e67d-4ee9-93f5-1530d311ced2",
+        "net": "GND",
+        "layer": "B.Cu",
+        "start": [
+          74.307636,
+          81.485
+        ],
+        "end": [
+          75.868,
+          79.924636
+        ],
+        "width": 0.3,
+        "distance_mm": 0.0,
+        "overlap_area_mm2": 0.32448084007317235
+      },
+      {
+        "uuid": "b155dd56-9a9e-4c9a-b934-fbad2e0fffff",
+        "net": "GND",
+        "layer": "B.Cu",
+        "start": [
+          75.868,
+          79.924636
+        ],
+        "end": [
+          75.868,
+          76.675
+        ],
+        "width": 0.3,
+        "distance_mm": 0.0,
+        "overlap_area_mm2": 0.24561151108247073
+      },
+      {
+        "uuid": "7a449c3c-64fa-457f-baf3-3900c5192bda",
+        "net": "+3.3V",
+        "layer": "F.Cu",
+        "start": [
+          75.158002,
+          81.585998
+        ],
+        "end": [
+          75.158002,
+          79.004996
+        ],
+        "width": 0.38,
+        "distance_mm": 0.0,
+        "overlap_area_mm2": 0.43060695320781694
+      },
+      {
+        "uuid": "a284154a-d001-4889-9cea-74de3fff7bc2",
+        "net": "+3.3V",
+        "layer": "F.Cu",
+        "start": [
+          75.152001,
+          77.899
+        ],
+        "end": [
+          75.152001,
+          78.998995
+        ],
+        "width": 0.38,
+        "distance_mm": 0.15151091532534885,
+        "overlap_area_mm2": 0.0
+      },
+      {
+        "uuid": "ba1a69c4-9fcf-4a38-b640-b739ec135bc3",
+        "net": "+3.3V",
+        "layer": "F.Cu",
+        "start": [
+          75.152001,
+          78.998995
+        ],
+        "end": [
+          75.158002,
+          79.004996
+        ],
+        "width": 0.35,
+        "distance_mm": 0.15826048721191333,
+        "overlap_area_mm2": 0.0
+      },
+      {
+        "uuid": "36a15338-70fb-480e-abdc-b7b4f1f8065f",
+        "net": "SCL",
+        "layer": "B.Cu",
+        "start": [
+          74.806,
+          80.314884
+        ],
+        "end": [
+          74.806,
+          77.36
+        ],
+        "width": 0.25,
+        "distance_mm": 0.0,
+        "overlap_area_mm2": 0.008856572078023766
+      },
+      {
+        "uuid": "db3580e1-8284-4ab6-991e-228f5f90e7a5",
+        "net": "SCL",
+        "layer": "B.Cu",
+        "start": [
+          74.431884,
+          80.689
+        ],
+        "end": [
+          74.806,
+          80.314884
+        ],
+        "width": 0.25,
+        "distance_mm": 0.023935821879392992,
+        "overlap_area_mm2": 0.0
+      }
+    ],
+    "pad_conflicts": [
+      {
+        "ref": "R11",
+        "pin": "1",
+        "net": "+3.3V",
+        "at": [
+          75.158002,
+          79.004996
+        ],
+        "size": [
+          0.54,
+          0.64
+        ]
+      }
+    ],
+    "courtyard_nearby": [
+      {
+        "ref": "R11",
+        "layer": "F.CrtYd",
+        "bounds": [
+          73.71799899999999,
+          78.53499500000001,
+          75.578003,
+          79.474997
+        ],
+        "distance_mm": 0.0
+      }
+    ]
+  },
+  {
+    "label": "lower_positive",
+    "side": "left",
+    "center_mm": [
+      54.3,
+      81.5
+    ],
+    "pad_size_mm": [
+      1.6,
+      1.6
+    ],
+    "net": "+SOLAR",
+    "track_conflicts": [
+      {
+        "uuid": "3e20abe3-f828-4d60-9d8c-bd8b0c382377",
+        "net": "GND",
+        "layer": "F.Cu",
+        "start": [
+          55.126999,
+          81.104998
+        ],
+        "end": [
+          55.167999,
+          81.063998
+        ],
+        "width": 0.2,
+        "distance_mm": 0.01756744785429024,
+        "overlap_area_mm2": 0.0
+      },
+      {
+        "uuid": "5730ee39-0888-49e0-8fcd-b29dcefadc2d",
+        "net": "GND",
+        "layer": "F.Cu",
+        "start": [
+          55.167999,
+          81.063998
+        ],
+        "end": [
+          55.167999,
+          80.387001
+        ],
+        "width": 0.2,
+        "distance_mm": 0.0721607677030002,
+        "overlap_area_mm2": 0.0
+      },
+      {
+        "uuid": "ff9c66f8-7fe6-4103-8cee-dff669229808",
+        "net": "GND",
+        "layer": "F.Cu",
+        "start": [
+          55.126999,
+          82.209999
+        ],
+        "end": [
+          55.126999,
+          81.104998
+        ],
+        "width": 0.2,
+        "distance_mm": 0.0,
+        "overlap_area_mm2": 0.032371087668562885
+      },
+      {
+        "uuid": "13269fc8-e16e-470f-80f3-b9aff43911f5",
+        "net": "GND",
+        "layer": "B.Cu",
+        "start": [
+          54.369,
+          76.14
+        ],
+        "end": [
+          54.369,
+          83.863
+        ],
+        "width": 0.2,
+        "distance_mm": 0.0,
+        "overlap_area_mm2": 0.31771850716864697
+      }
+    ],
+    "pad_conflicts": [
+      {
+        "ref": "R21",
+        "pin": "2",
+        "net": "GND",
+        "at": [
+          55.126999,
+          82.209999
+        ],
+        "size": [
+          0.54,
+          0.64
+        ]
+      },
+      {
+        "ref": "C15",
+        "pin": "1",
+        "net": "GND",
+        "at": [
+          55.167999,
+          81.063998
+        ],
+        "size": [
+          0.56,
+          0.62
+        ]
+      }
+    ],
+    "courtyard_nearby": [
+      {
+        "ref": "R21",
+        "layer": "F.CrtYd",
+        "bounds": [
+          54.706998,
+          81.739998,
+          56.567002,
+          82.67999999999999
+        ],
+        "distance_mm": 0.0
+      },
+      {
+        "ref": "C15",
+        "layer": "F.CrtYd",
+        "bounds": [
+          54.737999,
+          80.603998,
+          56.557998999999995,
+          81.52399799999999
+        ],
+        "distance_mm": 0.0
+      }
+    ]
+  },
+  {
+    "label": "lower_positive",
+    "side": "right",
+    "center_mm": [
+      75.7,
+      81.5
+    ],
+    "pad_size_mm": [
+      1.6,
+      1.6
+    ],
+    "net": "+SOLAR",
+    "track_conflicts": [
+      {
+        "uuid": "4073bc2d-e67d-4ee9-93f5-1530d311ced2",
+        "net": "GND",
+        "layer": "B.Cu",
+        "start": [
+          74.307636,
+          81.485
+        ],
+        "end": [
+          75.868,
+          79.924636
+        ],
+        "width": 0.3,
+        "distance_mm": 0.045156627997829456,
+        "overlap_area_mm2": 0.0
+      },
+      {
+        "uuid": "117dd327-ffdd-41a5-a550-4c16a341668b",
+        "net": "+3.3V",
+        "layer": "F.Cu",
+        "start": [
+          70.802,
+          85.942
+        ],
+        "end": [
+          75.158002,
+          81.585998
+        ],
+        "width": 0.38,
+        "distance_mm": 0.0,
+        "overlap_area_mm2": 0.16201426834142652
+      },
+      {
+        "uuid": "7a449c3c-64fa-457f-baf3-3900c5192bda",
+        "net": "+3.3V",
+        "layer": "F.Cu",
+        "start": [
+          75.158002,
+          81.585998
+        ],
+        "end": [
+          75.158002,
+          79.004996
+        ],
+        "width": 0.38,
+        "distance_mm": 0.0,
+        "overlap_area_mm2": 0.30459741685826486
+      }
+    ],
+    "pad_conflicts": [],
+    "courtyard_nearby": []
+  },
+  {
+    "label": "lower_positive",
+    "side": "left",
+    "center_mm": [
+      54.3,
+      82
+    ],
+    "pad_size_mm": [
+      1.6,
+      1.6
+    ],
+    "net": "+SOLAR",
+    "track_conflicts": [
+      {
+        "uuid": "ff9c66f8-7fe6-4103-8cee-dff669229808",
+        "net": "GND",
+        "layer": "F.Cu",
+        "start": [
+          55.126999,
+          82.209999
+        ],
+        "end": [
+          55.126999,
+          81.104998
+        ],
+        "width": 0.2,
+        "distance_mm": 0.0,
+        "overlap_area_mm2": 0.031167986283634257
+      },
+      {
+        "uuid": "13269fc8-e16e-470f-80f3-b9aff43911f5",
+        "net": "GND",
+        "layer": "B.Cu",
+        "start": [
+          54.369,
+          76.14
+        ],
+        "end": [
+          54.369,
+          83.863
+        ],
+        "width": 0.2,
+        "distance_mm": 0.0,
+        "overlap_area_mm2": 0.31771850716864697
+      }
+    ],
+    "pad_conflicts": [
+      {
+        "ref": "R21",
+        "pin": "2",
+        "net": "GND",
+        "at": [
+          55.126999,
+          82.209999
+        ],
+        "size": [
+          0.54,
+          0.64
+        ]
+      },
+      {
+        "ref": "C15",
+        "pin": "1",
+        "net": "GND",
+        "at": [
+          55.167999,
+          81.063998
+        ],
+        "size": [
+          0.56,
+          0.62
+        ]
+      }
+    ],
+    "courtyard_nearby": [
+      {
+        "ref": "R19",
+        "layer": "F.CrtYd",
+        "bounds": [
+          54.687998,
+          82.842999,
+          56.548002000000004,
+          83.783001
+        ],
+        "distance_mm": 0.1289162262904033
+      },
+      {
+        "ref": "R21",
+        "layer": "F.CrtYd",
+        "bounds": [
+          54.706998,
+          81.739998,
+          56.567002,
+          82.67999999999999
+        ],
+        "distance_mm": 0.0
+      },
+      {
+        "ref": "C15",
+        "layer": "F.CrtYd",
+        "bounds": [
+          54.737999,
+          80.603998,
+          56.557998999999995,
+          81.52399799999999
+        ],
+        "distance_mm": 0.0
+      }
+    ]
+  },
+  {
+    "label": "lower_positive",
+    "side": "right",
+    "center_mm": [
+      75.7,
+      82
+    ],
+    "pad_size_mm": [
+      1.6,
+      1.6
+    ],
+    "net": "+SOLAR",
+    "track_conflicts": [
+      {
+        "uuid": "117dd327-ffdd-41a5-a550-4c16a341668b",
+        "net": "+3.3V",
+        "layer": "F.Cu",
+        "start": [
+          70.802,
+          85.942
+        ],
+        "end": [
+          75.158002,
+          81.585998
+        ],
+        "width": 0.38,
+        "distance_mm": 0.0,
+        "overlap_area_mm2": 0.1603992139825986
+      },
+      {
+        "uuid": "7a449c3c-64fa-457f-baf3-3900c5192bda",
+        "net": "+3.3V",
+        "layer": "F.Cu",
+        "start": [
+          75.158002,
+          81.585998
+        ],
+        "end": [
+          75.158002,
+          79.004996
+        ],
+        "width": 0.38,
+        "distance_mm": 0.0,
+        "overlap_area_mm2": 0.11503483841589901
+      }
+    ],
+    "pad_conflicts": [],
+    "courtyard_nearby": []
+  }
+]

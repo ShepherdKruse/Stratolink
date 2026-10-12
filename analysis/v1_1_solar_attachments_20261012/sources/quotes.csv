@@ -1,0 +1,8 @@
+thickness_mm,quantity,height_mm,fabrication_USD,engineering_USD,ENIG_USD,deburr_USD,board_USD,capture
+0.4,5,57.3,50.5,33,16.7,0.1,0.7,quote-0p4mm-5pcs.txt
+0.6,5,57.3,21.5,4,16.7,0.1,0.7,quote-0p6mm-5pcs.txt
+0.4,15,57.3,52.4,33,17.1,0.3,2,quote-0p4mm-15pcs.txt
+0.6,15,57.3,23.4,4,17.1,0.3,2,quote-0p6mm-15pcs.txt
+0.8,15,57.3,23.4,4,17.1,0.3,2,quote-0p8mm-15pcs.txt
+1.6,15,57.3,23.4,4,17.1,0.3,2,quote-1p6mm-15pcs.txt
+0.6,15,40.9,22.6,4,16.9,0.3,1.4,quote-0p6mm-15pcs-compact40p9.txt

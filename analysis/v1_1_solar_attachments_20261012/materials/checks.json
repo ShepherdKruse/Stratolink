@@ -1,0 +1,9 @@
+{
+  "outline_single_connected_polygon": true,
+  "copper_clipped_to_substrate": true,
+  "native_outline_area_agrees": true,
+  "density_range_brackets_nominal": true,
+  "thickness_monotonic_at_fixed_area": true,
+  "baseline_equal_mass_recovers_area": true,
+  "stiffness_doubles_thickness_eightfold": true
+}

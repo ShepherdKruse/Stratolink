@@ -1,0 +1,25 @@
+{
+  "checks_passed": 5,
+  "panel_mass_g": 1.76,
+  "measurements_performed": false,
+  "source_sha256": {
+    "analysis/v1_1_solar_attachments_20261012/sources/zachtek-panel.txt": "b068954ddf60134a5dcd40527b8d2b6269cffa4384ff52894a6f050b491d5ac3",
+    "analysis/v1_1_solar_attachments_20261012/sources/zachtek-assembly.txt": "fa8343a69455d67a99cc46ee0fcb61e6d26f09e4aec023d5bbd7781aecf131cf"
+  },
+  "optional_prior_RF_evidence": [
+    {
+      "path": "analysis/redesign_20261010/radio_mechanics/README.md",
+      "available": true,
+      "sha256": "4999ce42fffd1ccb91bcd73e793775746d7b16fb31bed8dfb23f1630103ab8f1"
+    },
+    {
+      "path": "analysis/redesign_20261010/radio_mechanics/outputs/nec_summary.json",
+      "available": true,
+      "sha256": "9a9b3af0b7a8744b717a8c30ca90a330998a02c2050750f4499581cf3534a34e"
+    }
+  ],
+  "provenance_note": "Required source captures are included in this study. Prior local RF evidence is optional background, not a computational dependency.",
+  "representative_5g_root_moment_at_70mm_span_Nmm": 3.0204482,
+  "compression_5g_5mm_spacing_90mm_brace_N": 0.7766866800000001,
+  "compression_5g_15mm_spacing_90mm_brace_N": 0.25889556
+}

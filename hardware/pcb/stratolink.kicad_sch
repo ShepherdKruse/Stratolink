@@ -55135,7 +55135,7 @@
 		(at 194.31 105.41 0)
 		(unit 1)
 		(exclude_from_sim no)
-		(in_bom yes)
+		(in_bom no)
 		(on_board yes)
 		(dnp no)
 		(fields_autoplaced yes)
@@ -55149,7 +55149,7 @@
 				(hide yes)
 			)
 		)
-		(property "Value" "Conn_Header_JST_PH_1x02_P2mm_Vertical_SMD"
+		(property "Value" "Solar panel direct solder"
 			(at 194.31 99.06 0)
 			(effects
 				(font
@@ -55158,7 +55158,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "Connector_PinHeader_1.00mm:PinHeader_1x02_P1.00mm_Vertical"
+		(property "Footprint" "lib:Solar_Notch_Right_1p0x1p5"
 			(at 194.31 105.41 0)
 			(effects
 				(font
@@ -55167,7 +55167,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "https://www.jst-mfg.com/product/pdf/eng/ePH.pdf"
+		(property "Datasheet" ""
 			(at 194.31 105.41 0)
 			(effects
 				(font
@@ -55176,7 +55176,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Male JST PH 2 pin connector"
+		(property "Description" ""
 			(at 194.31 105.41 0)
 			(effects
 				(font
@@ -60382,7 +60382,7 @@
 		(at 194.31 95.25 0)
 		(unit 1)
 		(exclude_from_sim no)
-		(in_bom yes)
+		(in_bom no)
 		(on_board yes)
 		(dnp no)
 		(fields_autoplaced yes)
@@ -60396,7 +60396,7 @@
 				(hide yes)
 			)
 		)
-		(property "Value" "Conn_Header_JST_PH_1x02_P2mm_Vertical_SMD"
+		(property "Value" "Solar panel direct solder"
 			(at 194.31 88.9 0)
 			(effects
 				(font
@@ -60405,7 +60405,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "Connector_PinHeader_1.00mm:PinHeader_1x02_P1.00mm_Vertical"
+		(property "Footprint" "lib:Solar_Notch_Left_1p0x1p5"
 			(at 194.31 95.25 0)
 			(effects
 				(font
@@ -60414,7 +60414,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "https://www.jst-mfg.com/product/pdf/eng/ePH.pdf"
+		(property "Datasheet" ""
 			(at 194.31 95.25 0)
 			(effects
 				(font
@@ -60423,7 +60423,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Male JST PH 2 pin connector"
+		(property "Description" ""
 			(at 194.31 95.25 0)
 			(effects
 				(font

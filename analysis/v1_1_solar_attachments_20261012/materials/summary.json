@@ -1,0 +1,249 @@
+{
+  "revision": "1aed52ff7af3d27aef6ff4b0ceba710c57dc6865",
+  "source_sha256": "4e132fcc1e80383b270402544700d7ff1f818680a222ba0ceed45e0c125a497f",
+  "width_mm": 23.36,
+  "height_mm": 57.297999999999995,
+  "outer_outline_area_mm2": 1333.3530868028954,
+  "edge_cutout_area_mm2": 17.37773291845997,
+  "edge_outline_net_area_mm2": 1315.9753538844354,
+  "drilled_area_mm2": 17.524486655469218,
+  "laminate_net_area_mm2": 1298.4508672289662,
+  "copper_area_mm2": {
+    "F.Cu": 632.920374019056,
+    "B.Cu": 799.6660908425805
+  },
+  "copper_coverage_of_net_laminate": {
+    "F.Cu": 0.48744268265596846,
+    "B.Cu": 0.6158616479260043
+  },
+  "plated_holes": 163,
+  "unplated_drill_holes": 3,
+  "plating_cross_section_mm2_assumed_20um": 3.591421802521997,
+  "measurement_method": "KiCad 10 polygon conversion + overlap union + shape intersection + subtraction of all finished drills; arcs polygonized by KiCad.",
+  "important_component_envelopes": {
+    "C5": {
+      "value": "1F",
+      "origin_mm": [
+        64.875,
+        64.707
+      ],
+      "bounds_excluding_text_mm": [
+        56.825,
+        43.407,
+        72.925,
+        80.757
+      ],
+      "geometry": {
+        "B.Fab": [
+          57.825,
+          49.657,
+          71.925,
+          79.757
+        ],
+        "B.CrtYd": [
+          56.825,
+          43.407,
+          72.925,
+          80.757
+        ]
+      }
+    },
+    "U2": {
+      "value": "RAK3172",
+      "origin_mm": [
+        72.715,
+        64.66
+      ],
+      "bounds_excluding_text_mm": [
+        56.649999,
+        63.904999,
+        73.250001,
+        80.505001
+      ],
+      "geometry": {}
+    },
+    "U3": {
+      "value": "~",
+      "origin_mm": [
+        65.537,
+        48.414
+      ],
+      "bounds_excluding_text_mm": [
+        59.012,
+        42.789,
+        72.487,
+        53.739
+      ],
+      "geometry": {
+        "F.Fab": [
+          60.6235,
+          43.0005,
+          72.487,
+          53.527501
+        ],
+        "F.CrtYd": [
+          59.012,
+          42.789,
+          72.062,
+          53.739
+        ]
+      }
+    },
+    "U5": {
+      "value": "TMP117NAIYBGR",
+      "origin_mm": [
+        73.148,
+        40.864
+      ],
+      "bounds_excluding_text_mm": [
+        71.648,
+        39.095,
+        74.648,
+        42.633
+      ],
+      "geometry": {
+        "F.Fab": [
+          72.168,
+          39.764,
+          73.6865,
+          41.6715
+        ],
+        "F.CrtYd": [
+          71.648,
+          39.095,
+          74.648,
+          42.633
+        ]
+      }
+    },
+    "U4": {
+      "value": "~",
+      "origin_mm": [
+        71.023,
+        58.808
+      ],
+      "bounds_excluding_text_mm": [
+        68.888,
+        56.003,
+        73.158,
+        61.613
+      ],
+      "geometry": {
+        "F.Fab": [
+          69.0845,
+          56.1445,
+          72.5865,
+          61.3715
+        ],
+        "F.CrtYd": [
+          68.888,
+          56.003,
+          73.158,
+          61.613
+        ]
+      }
+    },
+    "J20": {
+      "value": "Conn_ARM_SWD_TagConnect_TC2030-NL",
+      "origin_mm": [
+        60.304,
+        83.688
+      ],
+      "bounds_excluding_text_mm": [
+        56.779,
+        81.663,
+        63.829,
+        85.713
+      ],
+      "geometry": {
+        "F.CrtYd": [
+          56.779,
+          81.663,
+          63.829,
+          85.713
+        ]
+      }
+    },
+    "R7": {
+      "value": "4.75M\u03a9",
+      "origin_mm": [
+        71.67,
+        34.175
+      ],
+      "bounds_excluding_text_mm": [
+        71.174998,
+        33.219999,
+        72.165002,
+        35.130001
+      ],
+      "geometry": {
+        "B.Fab": [
+          71.35,
+          33.6,
+          71.99,
+          34.75
+        ],
+        "B.CrtYd": [
+          71.174998,
+          33.219999,
+          72.165002,
+          35.130001
+        ]
+      }
+    },
+    "C21": {
+      "value": "10\u03bcF",
+      "origin_mm": [
+        70.262,
+        34.647
+      ],
+      "bounds_excluding_text_mm": [
+        68.756999,
+        33.891999,
+        71.767001,
+        35.402001
+      ],
+      "geometry": {
+        "F.Fab": [
+          69.412,
+          34.196999,
+          71.112,
+          35.097001
+        ],
+        "F.CrtYd": [
+          68.756999,
+          33.891999,
+          71.767001,
+          35.402001
+        ]
+      }
+    }
+  },
+  "baseline_mass_g_nominal_density_1p9": 1.2546278237896398,
+  "baseline_mass_parts_g": {
+    "core": 0.764787560797861,
+    "planar_copper": 0.4492591153806093,
+    "mask": 0.03272096185416994,
+    "barrel_density_correction": 0.007860185756999642
+  },
+  "baseline_mass_range_g_density_only": [
+    1.2144871809814202,
+    1.2947684665978598
+  ],
+  "assumptions": {
+    "FR4_density_range_g_cm3": [
+      1.8,
+      1.9,
+      2.0
+    ],
+    "copper_density_g_cm3": 8.96,
+    "copper_each_face_mm": 0.035,
+    "mask_each_face_mm": 0.01,
+    "mask_coverage_assumed": 0.9,
+    "mask_density_assumed_g_cm3": 1.4,
+    "barrel_plating_assumed_mm": 0.02,
+    "excluded_mass": "surface finish, silkscreen, solder, components, adhesives, panel mounts",
+    "shorter_outline": "same width; original fractional geometric loss; two bounds: proportional copper and original retained copper; no layout generated",
+    "stiffness": "homogeneous same-material plate/beam ratios only; copper anisotropy, slots, thermal strain and joint details excluded"
+  }
+}
