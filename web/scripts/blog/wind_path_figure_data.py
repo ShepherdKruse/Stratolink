@@ -103,21 +103,8 @@ drawn = gap_path('prod_trimmed.json')
 # ── posterior.bin / posterior.json: the draws behind the line ─────────────────
 sel = np.rint(np.arange(STEPS) / (STEPS - 1) * (n1 - 1)).astype(int)
 Asub = A[:, sel, :]                                    # (2000, 101, 2)
-# medoid over all 2000 draws, as pathReconstructionLongGap.ts does (time-matched mean distance)
-stride_idx = sel[::3]                                  # every ~6 h
-lat_s = A[:, stride_idx, 0]; lon_s = A[:, stride_idx, 1]
-cosl = np.cos(np.radians(lat_s.mean()))
-X = np.stack([lon_s * 111.32 * cosl, lat_s * 111.32], axis=-1)   # (2000, T, 2) local km
-acc = np.zeros(K)
-for i in range(K):
-    acc[i] = np.sqrt(((X - X[i]) ** 2).sum(-1)).mean(1).sum()
-medoid = int(np.argmin(acc))
-dist_to_medoid = np.sqrt(((X - X[medoid]) ** 2).sum(-1)).mean(1)
-kept = np.argsort(dist_to_medoid)[:round(0.10 * K)]
 rng = np.random.default_rng(7)
 subset = np.sort(rng.choice(K, 500, replace=False))
-kept_set = set(kept.tolist())
-subset_kept = [int(i) for i, s in enumerate(subset) if s in kept_set]
 pos_bin = np.clip(np.rint(Asub[subset] * 100), -32767, 32767).astype('<i2')
 open(f'{OUT}/posterior.bin', 'wb').write(pos_bin.tobytes())
 
@@ -125,8 +112,7 @@ stats = []
 for s in range(STEPS):
     d = hav(Asub[:, s, 0], Asub[:, s, 1], drawn[s][0], drawn[s][1])      # every draw vs the drawn line at this hour
     stats.append({'within300': round(float((d <= 300).mean()), 3), 'r90': int(round(float(np.percentile(d, 90)), -1))})
-posterior = {'n': 500, 'steps': STEPS, 'hours': gap['dt_hours'], 'tA': tA, 'nTotal': K, 'keptTotal': int(len(kept)),
-             'kept': subset_kept, 'drawn': path2(drawn), 'stats': stats}
+posterior = {'n': 500, 'steps': STEPS, 'hours': gap['dt_hours'], 'tA': tA, 'nTotal': K, 'drawn': path2(drawn), 'stats': stats}
 json.dump(posterior, open(f'{OUT}/posterior.json', 'w'), separators=(',', ':'))
 
 # ── clouds.json / clouds.bin: 200 draws for each of the other long gaps ──────
@@ -183,5 +169,5 @@ for f in land['features']:
 json.dump(lines, open(f'{OUT}/coast-atlantic.json', 'w'), separators=(',', ':'))
 
 for f in sorted(os.listdir(OUT)): print(f'  {f:22s} {os.path.getsize(os.path.join(OUT, f)) / 1024:7.0f} KB')
-print('medoid', medoid, 'kept', len(kept), 'subset kept', len(subset_kept), '| coast points', sum(len(l) for l in lines),
+print('coast points', sum(len(l) for l in lines),
       '| tube slices', len(slices), '| forecast steps', len(hours), 'div spread', spread[-1])

@@ -7,7 +7,7 @@
 import { colors, heatColor, observeChartSize } from '../payload-dev-log/charts.js';
 
 const ASSETS = '/assets/wind-path';
-const INK = '#292927', PAPER = '#eeeee9', GRID = '#d7d8d1', COAST = '#959c93', FAINT = '#b8b9b3', CREAM = '#f6f4ef';
+const INK = '#292927', PAPER = '#eeeee9', GRID = '#d7d8d1', COAST = '#959c93', CREAM = '#f6f4ef';
 const RED = colors[0], BLUE = colors[4], GRAY = '#6f716b';
 const rad = Math.PI / 180, R = 6371;
 const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
@@ -55,12 +55,6 @@ function createMap(bounds, label, aspect) {
     const dpr = Math.min(devicePixelRatio || 1, 2);
     canvas.width = width * dpr; canvas.height = height * dpr; canvas.style.width = `${width}px`; canvas.style.height = `${height}px`;
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0); m.width = width; m.height = height;
-  };
-  /* A camera for the ride-along view: a center and a longitude span; the latitude
-   * span follows from the canvas aspect so the map never stretches. */
-  m.look = (lat, lon, lonSpan) => {
-    const latSpan = lonSpan * (m.height / m.width) * Math.cos(lat * rad);
-    m.bounds = { lon0: lon - lonSpan / 2, lon1: lon + lonSpan / 2, lat0: lat - latSpan / 2, lat1: lat + latSpan / 2 };
   };
   m.line = (pts, { color = INK, width = 1, alpha = 1, dash, latFirst = true, end } = {}) => {
     ctx.beginPath(); let px;
@@ -302,69 +296,79 @@ async function replay(host, signal) {
 
 /* ── 2. riding the tube ────────────────────────────────────────────────────── */
 async function tube(host, signal) {
-  const [meta, buffer, coast, flight, wind, cloud] = await Promise.all([load('tube.json'), load('tube.bin'), load('coast-atlantic.json'), load('flight.json'), windField(), clouds()]);
+  const [meta, buffer, coast, flight, cloud] = await Promise.all([load('tube.json'), load('tube.bin'), load('coast-atlantic.json'), load('flight.json'), clouds()]);
   if (signal.aborted) return;
-  const fine = new Int8Array(buffer), { slices } = meta, last = slices.length - 1, gaps = longGaps(flight.fixes), segments = trackSegments(flight.track, gaps);
-  host.innerHTML = `${heading('Riding the tube', `one box of 0.25° winds per 3-hour slice`)}
+  const fine = new Int8Array(buffer), gaps = longGaps(flight.fixes), segments = trackSegments(flight.track, gaps);
+  /* Ride from launch to the last fix: the slices the reconstruction actually reads
+   * (the cube also holds a lead-in slice and the pre-launch days on the ground). */
+  const first = meta.slices.findIndex(b => b.pos), lastIdx = meta.slices.findLastIndex(b => b.pos);
+  const ride = meta.slices.slice(Math.max(0, first), lastIdx + 1), last = ride.length - 1, stepMs = ride[1].t - ride[0].t;
+  /* One fixed view that holds every box on the ride: nothing zooms or pans. */
+  const view = ride.reduce((v, b) => ({ lat0: Math.min(v.lat0, b.lat0 - 2), lat1: Math.max(v.lat1, b.lat0 + b.h + 2), lon0: Math.min(v.lon0, b.lon0 - 2), lon1: Math.max(v.lon1, b.lon0 + b.w + 2) }), { lat0: 90, lat1: -90, lon0: 360, lon1: -360 });
+  host.innerHTML = `${heading('Riding the tube', 'one box of 0.25° winds per 3-hour slice')}
     <div class="chart-legend">${key('This slice’s box', BLUE)}${windKey()}${key('Possible positions', BLUE, 'dot')}${key('Reconstructed track', INK)}</div>
     <div class="fleet-map-stage"><output class="fleet-hover" hidden></output></div>
     ${footer('')}
-    ${slider('Slice', last, .1, 'Reconstruction cube time slice')}
+    ${slider('Slice', last, .05, 'Reconstruction cube time slice')}
     <output class="chart-readout"></output>`;
-  const ASPECT = .6;
-  const map = createMap(ATLANTIC, 'A view that follows the balloon along the wind tube: the current slice box with its fine winds, the coarser wind around it, and the particle cloud inside. Space plays, arrow keys step.', ASPECT);
-  /* One camera span for the whole ride, wide enough that the tallest and widest box
-   * fits with a margin, so the view pans along the tube instead of zooming. */
-  const SPAN = clamp(Math.max(...slices.map(b => Math.max(b.w * 1.25, b.h * 1.25 / (ASPECT * Math.cos((b.lat0 + b.h / 2) * rad))))), 40, 120);
+  const map = createMap(view, 'The flight with the reconstruction’s wind box for each three-hour slice moving along it, the winds inside the box, and the possible positions during the gaps. Space plays, arrow keys step.');
   host.querySelector('.fleet-map-stage').prepend(map.canvas);
   const input = host.querySelector('input'), output = host.querySelector('.fleet-time output'), read = host.querySelector('.chart-readout'), hover = host.querySelector('.fleet-hover'), date = host.querySelector('.fleet-date'), source = host.querySelector('.fleet-source');
-  let at = 0, camera, arrows = [];
+  let at = 0, shown = [];
   const gapHours = t => { const m = (t - flight.t0) / 60000; const g = gaps.find(([a, b]) => m >= a && m <= b); return g ? (g[1] - g[0]) / 60 : 0; };
-  function target() { const s = slices[clamp(Math.round(at), 0, last)]; return { lat: s.lat0 + s.h / 2, lon: s.lon0 + s.w / 2, span: SPAN }; }
-  function draw(snap = false) {
-    if (!map.width) return;
-    const k = clamp(Math.round(at), 0, last), s = slices[k], t = s.t, want = target();
-    camera = !camera || snap ? want : { lat: lerp(camera.lat, want.lat, .04), lon: lerp(camera.lon, want.lon, .04), span: SPAN };
-    map.look(camera.lat, camera.lon, camera.span);
-    map.base(coast, 5);
-    wind.draw(map, t, { alpha: .22, scale: 2.4, max: 16 });
-    for (const b of slices) if (b !== s) map.rect(b.lat0, b.lon0, b.h, b.w, { alpha: .07, width: .7 });
-    map.rect(s.lat0, s.lon0, s.h, s.w, { alpha: .9, width: 1.4, fill: .05 });
-    arrows = [];
-    for (let i = 0; i < s.aLat; i++) for (let j = 0; j < s.aLon; j++) {
-      const o = s.off + (i * s.aLon + j) * 2, u = fine[o], v = fine[o + 1], lat = s.lat0 + i * s.aStep, lon = s.lon0 + j * s.aStep;
-      if (!map.inView(lat, lon)) continue;
-      arrows.push({ lat, lon, u, v, speed: Math.hypot(u, v) }); map.arrow(lat, lon, u, v, { alpha: .75, width: 1.1, scale: 2.4, max: 16 });
+  /* The winds of one slice, thinned to at least 1.25° and ~12 px apart so small
+   * and large boxes, and phone and desktop widths, read alike. */
+  function sliceArrows(b) {
+    const minDeg = Math.max(1.25, 12 / (map.width / (view.lon1 - view.lon0)));
+    const out = [], skip = Math.max(1, Math.ceil(minDeg / b.aStep - 1e-9));
+    for (let i = 0; i < b.aLat; i += skip) for (let j = 0; j < b.aLon; j += skip) {
+      const o = b.off + (i * b.aLon + j) * 2, u = fine[o], v = fine[o + 1];
+      out.push({ lat: b.lat0 + i * b.aStep, lon: b.lon0 + j * b.aStep, u, v, speed: Math.hypot(u, v) });
     }
-    drawTrack(map, segments, (t - flight.t0) / 60000);
+    return out;
+  }
+  const inBox = (b, lat, lon) => lat >= b.lat0 && lat <= b.lat0 + b.h && lon >= b.lon0 && lon <= b.lon0 + b.w;
+  function draw() {
+    if (!map.width) return;
+    const k = clamp(Math.floor(at), 0, last), f = k < last ? at - k : 0, a = ride[k], b = ride[Math.min(last, k + 1)];
+    const t = a.t + f * stepMs, minutes = (t - flight.t0) / 60000;
+    /* The box glides between slices; its winds cross-fade from one slice to the next. */
+    const box = { lat0: lerp(a.lat0, b.lat0, f), lon0: lerp(a.lon0, b.lon0, f), h: lerp(a.h, b.h, f), w: lerp(a.w, b.w, f) };
+    map.base(coast, 10);
+    for (let back = 4; back >= 1; back--) { const g = ride[k - back]; if (g) map.rect(g.lat0, g.lon0, g.h, g.w, { alpha: .05 * (5 - back), width: .8 }); }
+    map.rect(box.lat0, box.lon0, box.h, box.w, { alpha: .9, width: 1.5, fill: .05 });
+    /* Hold each slice's winds, then fade to the next over the last 30 % of the step. */
+    const fade = clamp((f - .7) / .3, 0, 1);
+    const arrowsA = sliceArrows(a), arrowsB = fade > 0 ? sliceArrows(b) : [];
+    for (const q of arrowsA) if (inBox(box, q.lat, q.lon)) map.arrow(q.lat, q.lon, q.u, q.v, { alpha: .85 * (1 - fade), width: 1.1, scale: 3, max: 11 });
+    for (const q of arrowsB) if (inBox(box, q.lat, q.lon)) map.arrow(q.lat, q.lon, q.u, q.v, { alpha: .85 * fade, width: 1.1, scale: 3, max: 11 });
+    shown = fade < .5 ? arrowsA : arrowsB;
+    drawTrack(map, segments, minutes);
     const g = cloud.find(t);
     if (g) drawCloud(map, g, (t - g.tA) / (g.tB - g.tA) * (g.steps - 1), { tail: false });
-    let pos = s.pos;
-    const next = slices[Math.min(last, k + 1)], f = at - k;
-    if (pos && next.pos && f > 0) pos = [pos[0] + (next.pos[0] - pos[0]) * f, pos[1] + (next.pos[1] - pos[1]) * f];
+    let pos = a.pos;
+    if (pos && b.pos && f > 0) pos = [lerp(a.pos[0], b.pos[0], f), lerp(a.pos[1], b.pos[1], f)];
     if (pos && !g) map.dot(pos[0], pos[1], 4.5, CREAM, INK, 1.8);
-    input.value = at; output.textContent = fmt(k); date.textContent = utc(t); source.textContent = `box ${fmt(s.h)}° × ${fmt(s.w)}°, arrows every ${s.aStep.toFixed(2)}° inside, 2.5° outside`;
+    input.value = at; output.textContent = fmt(k + 1); date.textContent = utc(t);
+    const s = f < .5 ? a : b;
+    source.textContent = `box ${fmt(s.h)}° × ${fmt(s.w)}°, winds stored only inside it`;
     const hours = gapHours(t), half = s.half ?? s.w / 2;
-    const pad = half <= 9.05 ? '±9°, the minimum' : `±${half.toFixed(1)}° for the ${fmt(hours)}-hour gap, where the cloud spreads further`;
-    const why = s.wind ? `laid along the wind’s path from both ends of the gap, ${pad}` : `centered on the track, ${pad}`;
-    let near = '';
-    if (pos && arrows.length) { const a = arrows.reduce((b, p) => km(p.lat, p.lon, pos[0], pos[1]) < km(b.lat, b.lon, pos[0], pos[1]) ? p : b, arrows[0]); near = ` / wind at the track ${fmt(a.speed)} m/s toward ${toward(a.u, a.v)}`; }
-    read.textContent = `Slice ${k + 1} of ${slices.length} / ${why}${pos ? near : ' / before launch'}`;
+    const pad = half <= 9.05 ? 'padded ±9°, the minimum' : `padded ±${half.toFixed(1)}° for the ${fmt(hours)}-hour gap, where the cloud spreads further`;
+    read.textContent = `Slice ${k + 1} of ${ride.length} / ${s.wind ? 'covers the wind’s path from both ends of the gap' : 'covers the track'}, ${pad}`;
   }
-  const play = player(host, signal, dt => { at += dt * .002; if (at > last + 8) { at = 0; camera = undefined; } draw(); });
-  bindSlider(input, play, value => { at = value; draw(true); });
-  keys(map.canvas, play, dir => { at = clamp(Math.round(at) + dir, 0, last); draw(true); });
+  const play = player(host, signal, dt => { at += dt * .0009; if (at > last + 3) at = 0; draw(); });
+  bindSlider(input, play, value => { at = value; draw(); });
+  keys(map.canvas, play, dir => { at = clamp(Math.round(at) + dir, 0, last); draw(); });
   map.canvas.onpointermove = event => {
-    const [x, y] = map.pointer(event), b = map.bounds, lat = b.lat1 - y / map.height * (b.lat1 - b.lat0), lon = b.lon0 + x / map.width * (b.lon1 - b.lon0);
-    const s = slices[clamp(Math.round(at), 0, last)];
-    const inside = lat >= s.lat0 && lat <= s.lat0 + s.h && lon >= s.lon0 && lon <= s.lon0 + s.w;
-    let u, v;
-    if (inside && arrows.length) { const a = arrows.reduce((best, p) => Math.hypot(p.lat - lat, p.lon - lon) < Math.hypot(best.lat - lat, best.lon - lon) ? p : best, arrows[0]); [u, v] = [a.u, a.v]; }
-    else [u, v] = wind.at(s.t, lat, lon);
-    hover.hidden = false; hover.textContent = `${place(lat, lon)} / ${inside ? 'inside the box, 0.25° winds' : 'outside the box, 2.5° winds'} / ${fmt(Math.hypot(u, v))} m/s toward ${toward(u, v)}`;
+    const [x, y] = map.pointer(event), bd = map.bounds, lat = bd.lat1 - y / map.height * (bd.lat1 - bd.lat0), lon = bd.lon0 + x / map.width * (bd.lon1 - bd.lon0);
+    const s = ride[clamp(Math.round(at), 0, last)];
+    hover.hidden = false;
+    if (!inBox(s, lat, lon) || !shown.length) { hover.textContent = `${place(lat, lon)} / outside the box: the reconstruction stores no wind here`; return; }
+    const q = shown.reduce((best, p) => Math.hypot(p.lat - lat, p.lon - lon) < Math.hypot(best.lat - lat, best.lon - lon) ? p : best, shown[0]);
+    hover.textContent = `${place(lat, lon)} / ${fmt(q.speed)} m/s toward ${toward(q.u, q.v)}`;
   };
   map.canvas.onpointerleave = () => { hover.hidden = true; };
-  observeChartSize(host, () => { map.resize(host.clientWidth - 32); draw(true); }, signal);
+  observeChartSize(host, () => { map.resize(host.clientWidth - 32); draw(); }, signal);
 }
 
 /* ── 3. forecasting versus bridging ────────────────────────────────────────── */
@@ -456,7 +460,7 @@ async function meeting(host, signal) {
       ? `forward particles ${fmt(hour)} h out of New Mexico, backward particles ${fmt(hour)} h back from Spain, neither aimed at the other end`
       : reveal <= 0
         ? 'the clouds meet: every forward particle is paired with the backward particles within reach, weighted by how closely the halves track across the overlap'
-        : 'the pairs are the posterior; the drawn line is the average of the tenth of them that track the medoid most closely';
+        : 'the joined bridges are the answer, each weighted by how plausible it is; the drawn line is their average';
   }
   const play = player(host, signal, dt => { h += dt * .013; if (h > hours + 55) h = 0; draw(); });
   bindSlider(input, play, value => { h = value; draw(); });
@@ -468,10 +472,9 @@ async function meeting(host, signal) {
 async function line(host, signal) {
   const [cloud, coast] = await Promise.all([clouds(), load('coast-atlantic.json')]);
   if (signal.aborted) return;
-  const p = cloud.posterior, kept = new Set(p.kept), { n, steps, hours, hoursPerStep, tA } = p;
+  const p = cloud.posterior, { n, steps, hours, hoursPerStep, tA } = p;
   host.innerHTML = `${heading('How sure the line is', `${n} of the ${fmt(p.nTotal)} bridges at one hour`)}
-    <div class="capture-tabs" role="group" aria-label="Show"><button type="button" data-color="all" aria-pressed="true">All draws</button><button type="button" data-color="kept" aria-pressed="false">The tenth the line averages</button></div>
-    <div class="fleet-metrics contact-metrics"><span><b data-near>…</b>of draws within 300 km of the line</span><span><b data-r90>…</b>holds 90% of the draws</span><span><b data-hour>…</b>hours into the gap</span></div>
+    <div class="fleet-metrics contact-metrics"><span><b data-near>…</b>of bridges within 300 km of the line</span><span><b data-r90>…</b>holds 90% of the bridges</span><span><b data-hour>…</b>hours into the gap</span></div>
     <div class="chart-legend">${key('Possible positions', BLUE, 'dot')}${key('The drawn line', RED)}</div>
     <div class="fleet-map-stage"><output class="fleet-hover" hidden></output></div>
     ${footer('')}
@@ -481,7 +484,7 @@ async function line(host, signal) {
   host.querySelector('.fleet-map-stage').prepend(map.canvas);
   const input = host.querySelector('input'), output = host.querySelector('.fleet-time output'), read = host.querySelector('.chart-readout'), hover = host.querySelector('.fleet-hover'), date = host.querySelector('.fleet-date');
   const get = selector => host.querySelector(selector);
-  let h = 0, mode = 'all', dots = [];
+  let h = 0, dots = [];
   function draw() {
     if (!map.width) return;
     const hour = Math.min(h, hours), s = hour / hoursPerStep, si = clamp(Math.round(s), 0, steps - 1), stats = p.stats[si];
@@ -489,10 +492,9 @@ async function line(host, signal) {
     map.line(p.drawn, { color: RED, width: 2, alpha: .9 });
     dots = [];
     for (let i = 0; i < n; i++) {
-      const [lat, lon] = p.at(i, s), isKept = kept.has(i);
-      const color = mode === 'all' || isKept ? BLUE : FAINT;
-      map.dot(lat, lon, mode === 'kept' && isKept ? 2.8 : 2.1, color, null, 1, mode === 'kept' && !isKept ? .6 : .8);
-      dots.push({ lat, lon, isKept });
+      const [lat, lon] = p.at(i, s);
+      map.dot(lat, lon, 2.1, BLUE, null, 1, .8);
+      dots.push({ lat, lon });
     }
     const d = p.drawn[si];
     map.dot(d[0], d[1], 4.5, RED, CREAM, 1.5);
@@ -500,13 +502,8 @@ async function line(host, signal) {
     get('[data-r90]').textContent = `${fmt(stats.r90)} km`;
     get('[data-hour]').textContent = fmt(hour);
     input.value = hour; output.textContent = fmt(hour); date.textContent = utc(tA + hour * 3600000);
-    read.textContent = `drawn line at ${place(d[0], d[1])} / a circle of ${fmt(stats.r90)} km around it holds 90% of the draws`;
+    read.textContent = `drawn line at ${place(d[0], d[1])} / a circle of ${fmt(stats.r90)} km around it holds 90% of the bridges`;
   }
-  host.querySelectorAll('[data-color]').forEach(button => button.onclick = () => {
-    mode = button.dataset.color;
-    host.querySelectorAll('[data-color]').forEach(tab => tab.setAttribute('aria-pressed', String(tab === button)));
-    draw();
-  });
   const play = player(host, signal, dt => { h += dt * .006; if (h > hours + 40) h = 0; draw(); });
   bindSlider(input, play, value => { h = value; draw(); });
   keys(map.canvas, play, dir => { h = clamp(Math.min(h, hours) + dir * 6, 0, hours); draw(); });
@@ -514,7 +511,7 @@ async function line(host, signal) {
     const [x, y] = map.pointer(event);
     const best = dots.reduce((b, q) => { const [qx, qy] = map.point(q.lat, q.lon); const dist = Math.hypot(qx - x, qy - y); return dist < b.dist ? { dist, q } : b; }, { dist: 12 });
     hover.hidden = !best.q;
-    if (best.q) hover.textContent = `${place(best.q.lat, best.q.lon)}${best.q.isKept ? ' / in the tenth the line averages' : ''}`;
+    if (best.q) hover.textContent = place(best.q.lat, best.q.lon);
   };
   map.canvas.onpointerleave = () => { hover.hidden = true; };
   observeChartSize(host, () => { map.resize(host.clientWidth - 32); draw(); }, signal);
