@@ -355,15 +355,17 @@ class ReconTubeGeometryTests(unittest.TestCase):
 
 class MultiLevelWindFollowingTubeTests(unittest.TestCase):
     """The multi-level reconstruction cube: which levels it stores, and long-gap
-    slice boxes laid along the forward/backward wind trajectories."""
+    slice boxes sized by a pilot cloud along the forward/backward wind paths."""
 
     @classmethod
     def setUpClass(cls):
         import math
         cls.g = extract({
-            "GFS_LEVELS", "RECON_LEVEL_SET", "RECON_LEVELS_EACH_SIDE", "LONG_GAP_H", "LONG_GAP_JOIN_MARGIN_H",
-            "LONG_GAP_MAX_SPREAD_DEG", "TUBE_SUBSTEP_H", "recon_levels", "integrate_positions", "interp_track",
-            "recon_slice_covers", "cover_boxes",
+            "GFS_LEVELS", "RECON_LEVEL_SET", "RECON_LEVELS_EACH_SIDE", "LONG_GAP_H", "LONG_GAP_JOIN_MARGIN_H", "LONG_GAP_BACKWARD_LEAD_H",
+            "LONG_GAP_MAX_SPREAD_DEG", "TUBE_SUBSTEP_H", "RECON_HALF_BASE_DEG", "RECON_HALF_PER_H", "RECON_HALF_MIN_DEG",
+            "RECON_HALF_MAX_DEG", "RECON_PILOT_N", "RECON_PILOT_MARGIN_DEG", "PILOT_DIR_SIGMA_DEG", "PILOT_SPEED_SIGMA",
+            "PILOT_TAU_H", "recon_levels", "integrate_positions", "interp_track", "recon_half_deg", "pilot_envelopes",
+            "recon_slice_needs", "cover_boxes", "RECON_OUTER_STEP", "RECON_OUTER_LAT", "RECON_OUTER_HALF_LON", "outer_box",
         })
         # integrate_positions only needs cos/radians from numpy.
         cls.g["np"] = types.SimpleNamespace(cos=math.cos, radians=math.radians)
@@ -379,49 +381,69 @@ class MultiLevelWindFollowingTubeTests(unittest.TestCase):
         self.assertIn(350, self.g["RECON_LEVEL_SET"])
         self.assertNotIn(350, self.g["GFS_LEVELS"])              # forecast/GEFS levels unchanged
 
-    def test_long_gap_boxes_follow_the_wind_not_the_chord(self):
+    def test_pilot_cloud_starts_at_the_fix_and_spreads(self):
+        import math
+        wind = lambda lat, lon, t: (25.0, 0.0)
+        h = 3_600_000
+        env = self.g["pilot_envelopes"]([0, 12 * h, 48 * h], 0, 40.0, 0.0, wind, 1, n=200, seed=1)
+        self.assertEqual(env[0], (40.0, 40.0, 0.0, 0.0))        # at the fix: a point
+        w12 = env[12 * h][1] - env[12 * h][0]; w48 = env[48 * h][1] - env[48 * h][0]
+        self.assertTrue(0 < w12 < w48 < 40, (w12, w48))          # it spreads (4,300 km downwind × a 12° heading spread)
+        deg_per_h = 25 * 3600 / (111_320 * math.cos(math.radians(40)))
+        mid = (env[48 * h][2] + env[48 * h][3]) / 2
+        self.assertAlmostEqual(mid, 48 * deg_per_h, delta=6)     # downwind of the fix, around the nominal
+        back = self.g["pilot_envelopes"]([-12 * h], 0, 40.0, 0.0, wind, -1, n=200, seed=1)
+        self.assertLess(back[-12 * h][3], 0.5)                   # backward: upwind of the fix
+        # Deterministic for a seed (cubes rebuild identically).
+        self.assertEqual(env, self.g["pilot_envelopes"]([0, 12 * h, 48 * h], 0, 40.0, 0.0, wind, 1, n=200, seed=1))
+
+    def test_long_gap_boxes_follow_the_wind_and_shrink_toward_the_fixes(self):
         import math
         h = 3_600_000
         # A 48 h gap under a uniform 25 m/s westerly that carries the balloon
-        # ~1.05°/h east, with B at 45° and the wind's own end point 50.6°. Early
-        # slices sit on the forward wind trajectory from A, late ones on the
-        # backward one from B (which lag/lead the chord), both around the midpoint.
+        # ~1.05°/h east, with B at 45° (the wind's own end point is 50.6°).
         deg_per_h = 25 * 3600 / (111_320 * math.cos(math.radians(40)))
         fixes = [(0, 40.0, 0.0), (48 * h, 40.0, 45.0)]
         slices = [k * 3 * h for k in range(-1, 18)]
         wind = lambda lat, lon, t: (25.0, 0.0)
-        covers = self.g["recon_slice_covers"](fixes, slices, 3 * h, wind)
-        k9 = slices.index(9 * h)
-        self.assertEqual(len(covers[k9]), 1)                     # before midpoint − margin: forward only
-        self.assertAlmostEqual(covers[k9][0][1], 9 * deg_per_h, delta=0.1)
-        k39 = slices.index(39 * h)
-        self.assertEqual(len(covers[k39]), 1)                    # after midpoint + margin: backward only
-        self.assertAlmostEqual(covers[k39][0][1], 45 - 9 * deg_per_h, delta=0.1)
-        k24 = slices.index(24 * h)
-        self.assertEqual(len(covers[k24]), 2)                    # around the midpoint: both clouds
-        self.assertAlmostEqual(covers[k24][0][1], 24 * deg_per_h, delta=0.1)
-        self.assertAlmostEqual(covers[k24][1][1], 45 - 24 * deg_per_h, delta=0.1)
-        # The lead-in slice before A sits at A.
-        self.assertEqual(covers[0], [(40.0, 0.0)])
+        needs = self.g["recon_slice_needs"](fixes, slices, 3 * h, wind)
+        H = self.g["recon_half_deg"](48)
+        box = lambda k: (min(x[0] for x in needs[k]), max(x[1] for x in needs[k]), min(x[2] for x in needs[k]), max(x[3] for x in needs[k]))
+        k3, k24 = slices.index(3 * h), slices.index(24 * h)
+        a, b, c, d = box(k3)
+        self.assertTrue(c < 3 * deg_per_h < d and a < 40 < b)    # holds the forward wind path
+        self.assertLess(b - a, 2 * H - 4)                         # and is much shorter than the old ±H box near the fix
+        a, b, c, d = box(k24)
+        self.assertTrue(c <= 45 - 24 * deg_per_h and d >= 24 * deg_per_h)   # around the midpoint: both clouds' paths
+        self.assertLessEqual(b - a, 2 * H + 1e-9)                 # never larger than the old cap
+        k45 = slices.index(45 * h)
+        a, b, c, d = box(k45)
+        self.assertTrue(c < 45 - 3 * deg_per_h < d)              # backward path near B
 
     def test_short_gaps_and_unconnectable_long_gaps_keep_the_chord(self):
         h = 3_600_000
         wind = lambda lat, lon, t: (25.0, 0.0)
-        # A 4 h gap: chord.
-        covers = self.g["recon_slice_covers"]([(0, 10.0, 0.0), (4 * h, 10.0, 2.0)], [0, 3 * h], 3 * h, wind)
-        self.assertAlmostEqual(covers[1][0][1], 1.5)
+        needs = self.g["recon_slice_needs"]([(0, 10.0, 0.0), (4 * h, 10.0, 2.0)], [0, 3 * h], 3 * h, wind)
+        H = self.g["recon_half_deg"](4)
+        self.assertEqual(needs[1], [(10.0 - H, 10.0 + H, 1.5 - H, 1.5 + H)])
         # A 48 h gap that does not move while the wind runs 50° east (a balloon on
         # the ground): forward and backward trajectories split > 30° → chord.
-        fixes = [(0, 40.0, 0.0), (48 * h, 40.0, 0.0)]
-        covers = self.g["recon_slice_covers"](fixes, [24 * h], 3 * h, wind)
-        self.assertEqual(covers[0], [(40.0, 0.0)])
+        needs = self.g["recon_slice_needs"]([(0, 40.0, 0.0), (48 * h, 40.0, 0.0)], [24 * h], 3 * h, wind)
+        H = self.g["recon_half_deg"](48)
+        self.assertEqual(needs[0], [(40.0 - H, 40.0 + H, -H, H)])
 
-    def test_cover_boxes_pad_the_bounding_box_and_snap_to_the_step(self):
-        boxes = self.g["cover_boxes"]([[(40.0, 0.0), (42.0, 10.0)], [(10.0, 5.0)]], [9.0, 9.1], 0.25)
-        clat, clon, hl, ho = boxes[0]
-        self.assertEqual((clat, clon), (41.0, 5.0))
-        self.assertEqual((hl, ho), (10.0, 14.0))
-        self.assertEqual(boxes[1][2:], (9.25, 9.25))             # snapped UP to the 0.25° step
+    def test_outer_box_spans_the_band_around_the_fine_box_on_the_lattice(self):
+        clat, clon, hl, ho, nla, nlo = self.g["outer_box"](-27.13)
+        self.assertEqual((clat, clon), (37.5, -27.25))           # centre snapped to the 0.25° lattice
+        self.assertTrue(clat - hl <= -10 and clat + hl >= 85)     # covers the latitude band
+        self.assertGreaterEqual(ho, 90)
+        self.assertEqual((nla, nlo), (int(2 * hl / 1.5) + 1, int(2 * ho / 1.5) + 1))
+        self.assertAlmostEqual((clat - hl) / 0.25, round((clat - hl) / 0.25))   # origin on the source lattice
+
+    def test_cover_boxes_take_the_union_and_snap_to_the_step(self):
+        boxes = self.g["cover_boxes"]([[(30.0, 50.0, -10.0, 18.0)], [(1.0, 18.9, -9.1, 9.1), (5.0, 8.0, 0.0, 4.0)]], 0.25)
+        self.assertEqual(boxes[0], (40.0, 4.0, 10.0, 14.0))
+        self.assertEqual(boxes[1][2:], (9.0, 9.25))               # snapped UP to the 0.25° step
 
 
 class DeviceAliasMirrorTests(unittest.TestCase):

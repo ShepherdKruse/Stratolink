@@ -36,7 +36,7 @@
 
 import type { ForecastGpsFix } from './forecastTypes';
 import type { BaroSample } from './pathReconstruction';
-import { cubeCovers, sampleWind, sampleWindP, type WindCube } from './windCube';
+import { cubeCovers, cubeFineCovers, sampleWind, sampleWindP, type WindCube } from './windCube';
 
 const CFG = {
     /** Particles per filter (forward and backward each). Pairing makes the
@@ -47,6 +47,17 @@ const CFG = {
      *  65 km for 1.4 s of compute; 5000 (4 s) buys nothing more. The
      *  environment variable `RECON_LONG_GAP_PARTICLES` overrides it. */
     N_PARTICLES: 2000,
+    /** Particles per filter for gaps of LONG_GAP_PARTICLES_HR or more. With the
+     *  coarse outer wind field (.slwc v5) nothing pushes the forward cloud back
+     *  into the tube, so over a multi-day gap most of it spreads far from where
+     *  the backward cloud is, and fewer lineages reach the meeting: on the
+     *  reference flight's 201 h gap 2,000 particles left the drawn line moving
+     *  51 / 292 / 616 km (median / p90 / max) between reruns, 8,000 moved it
+     *  5 / 38 / 60 km, for ~25 s instead of ~5 s. Shorter gaps are stable at
+     *  N_PARTICLES. The environment variable `RECON_LONG_GAP_PARTICLES`
+     *  overrides both. */
+    N_PARTICLES_LONG: 8000,
+    LONG_GAP_PARTICLES_HR: 48,
     /** Posterior draws behind the drawn line and the occupancy footprint:
      *  bridged trajectories drawn by pair weight from the matched clouds. 2,000
      *  is past the point of diminishing returns — on the reference flight's
@@ -102,6 +113,8 @@ const CFG = {
      *  ensemble measures 19°). The speed σ of 15 % covers the observed scatter
      *  with room for weaker GFS winds over open ocean (the forecast uses 10 %;
      *  25 % gave the same closures and angles with noisier lines). */
+    /* Mirrored by PILOT_* in scripts/gfs_ingest.py, whose pilot cloud sizes the
+     * long-gap tube boxes. */
     SPEED_SIGMA: 0.15,
     DIR_SIGMA_DEG: 12,
     PERTURB_TAU_H: 18,
@@ -135,12 +148,16 @@ const CFG = {
     FLOAT_ALT_M: 9500,
     TYPICAL_WIND_MS: 20,
     ELLIPSE_FRACS: [0.15, 0.3, 0.5, 0.7, 0.85] as const,
-    /** Log-weight cost per wind sample a particle takes OUTSIDE the cube's slice
-     *  boxes. Such a sample read an edge-clamped wind, so the step it drove is
-     *  fiction: a particle that left the tube must not shape the drawn bridge,
-     *  while one grazing the edge for a step or two keeps a usable weight
-     *  (e⁻² per step). Inside a filter this is the only weight; resampling at
-     *  the resampling checks turns it into "the population stays in the tube". */
+    /** Log-weight cost per wind sample a particle takes outside every stored
+     *  wind (`cubeCovers`): such a sample read an edge-clamped wind, so the step
+     *  it drove is fiction and must not shape the drawn bridge, while a particle
+     *  grazing the edge for a step or two keeps a usable weight (e⁻² per step).
+     *  On a cube with a coarse outer field (.slwc v5) a particle that leaves the
+     *  fine box reads real, coarser winds and is NOT penalised: the fine box then
+     *  only sets resolution, never which particles survive. (Without it, the
+     *  forward cloud — which doesn't know the far fix until the clouds meet — lost
+     *  20 % of its particles to the box on average on the reference flight's
+     *  201 h gap, up to 47 %.) */
     OUTSIDE_CUBE_PENALTY: 2,
     /** Resample a filter at a resampling check when its effective sample size
      *  has fallen below this fraction of the population. */
@@ -359,9 +376,10 @@ export function chooseLine(
         : { path: mean, method: 'posterior-mean', kept: K, ratio };
 }
 
-function particleCount(): number {
+function particleCount(gapHours: number): number {
     const env = Number(process.env.RECON_LONG_GAP_PARTICLES);
-    return Number.isFinite(env) && env >= 10 ? Math.round(env) : CFG.N_PARTICLES;
+    if (Number.isFinite(env) && env >= 10) return Math.round(env);
+    return gapHours >= CFG.LONG_GAP_PARTICLES_HR ? CFG.N_PARTICLES_LONG : CFG.N_PARTICLES;
 }
 
 function distanceKm(aLat: number, aLon: number, bLat: number, bLon: number): number {
@@ -652,7 +670,10 @@ export type Particle = {
     path: PathPoint[];
 };
 
-export type FilterStats = { total: number; outside: number; resamples: number };
+/** Wind samples a filter took: in total, outside any stored winds (penalised),
+ *  and — on a cube with a coarse outer field — outside the fine slice box but
+ *  inside the outer field (real, coarser winds; not penalised). */
+export type FilterStats = { total: number; outside: number; resamples: number; coarse?: number };
 
 /** Residual importance weights of a filter's particles (max-normalized). */
 function residualWeights(particles: Particle[]): Float64Array {
@@ -762,6 +783,8 @@ function runFilter(
                 p.outside += 1;
                 p.logW -= CFG.OUTSIDE_CUBE_PENALTY;
                 stats.outside += 1;
+            } else if (cube.outerGrids && !cubeFineCovers(cube, p.lat, p.lon, whenMs)) {
+                stats.coarse = (stats.coarse ?? 0) + 1;
             }
             p.speedPert = ar1Step(p.speedPert, CFG.SPEED_SIGMA, stepHours, CFG.PERTURB_TAU_H, gauss());
             p.dirOff = ar1Step(p.dirOff, CFG.DIR_SIGMA_DEG, stepHours, CFG.PERTURB_TAU_H, gauss());
@@ -977,7 +1000,7 @@ export async function reconstructLongGap(
     const tB = new Date(B.time_utc).getTime();
     const gapHours = (tB - tA) / 3_600_000;
     const gapMin = gapHours * 60;
-    const nParticles = particleCount();
+    const nParticles = particleCount(gapHours);
 
     if (gapMin < CFG.SHORT_GAP_MIN) {
         const nSteps = Math.max(2, Math.round(gapMin / CFG.STEP_MIN));
@@ -1024,8 +1047,8 @@ export async function reconstructLongGap(
     const pB = B.pressure_hpa ?? cube.levelHpa;
     const meanPressure = multiLevel ? (frac: number) => pA + frac * (pB - pA) : null;
 
-    const statsF: FilterStats = { total: 0, outside: 0, resamples: 0 };
-    const statsB: FilterStats = { total: 0, outside: 0, resamples: 0 };
+    const statsF: FilterStats = { total: 0, outside: 0, resamples: 0, coarse: 0 };
+    const statsB: FilterStats = { total: 0, outside: 0, resamples: 0, coarse: 0 };
     /* Overlap window: both filters run `kJoin` steps past the meeting step. */
     const kJoin = Math.max(1, Math.min(
         Math.max(CFG.JOIN_WINDOW_MIN_STEPS, Math.min(CFG.JOIN_WINDOW_MAX_STEPS, Math.round(CFG.JOIN_WINDOW_FRAC * nSteps))),
@@ -1151,7 +1174,8 @@ export async function reconstructLongGap(
         `[reconstruction] ${unexplained ? `UNEXPLAINED (${pairs.fallback ? 'clouds never within reach' : 'closure > ' + CFG.UNEXPLAINED_CLOSURE_KM + ' km'}) ` : ''}gap ${A.time_utc} → ${B.time_utc} (${R1(gapHours)} h, ${nParticles}×2 particles): ` +
         `${Math.round(nEff)} effective pairs of ${pairs.candidates} (marginals fwd ${Math.round(nEffF)} / bwd ${Math.round(nEffB)}), ` +
         `join σ ${R1(pairs.sigmaKm)} km, closure ${R1(joinMissKm)} km, resamples fwd ${statsF.resamples} / bwd ${statsB.resamples}; ` +
-        `${outsideSamples}/${totalSamples} wind samples outside the cube's slice boxes ` +
+        `${R1(((statsF.coarse ?? 0) + (statsB.coarse ?? 0)) / Math.max(1, totalSamples) * 100)}% of wind samples on the coarse outer field, ` +
+        `${outsideSamples}/${totalSamples} outside any stored winds ` +
         `(${R1(outsideFrac * 100)}% raw, ${R1(outsideWeighted * 100)}% posterior-weighted); ` +
         `line = ${line ? `${line.method} of ${line.kept}/${samples.length} draws (split ratio ${Math.round(line.ratio * 100) / 100})` : 'analytic posterior mean'}, vertices outside: ${meanOutside}/${nSteps + 1}; ${Date.now() - t0} ms`,
     );

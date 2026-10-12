@@ -47,6 +47,11 @@ export type WindCube = {
     levels?: number[];
     /** v4 only: `levelGrids[g][k]` = slice g at `levels[k]` (same box as `grids[g]`). */
     levelGrids?: GfsGrid[][];
+    /** v5 only: per slice, a coarse grid of the float-level wind over a much
+     *  wider area around the fine box. A sample outside the fine box but inside
+     *  this one reads real (coarser) winds instead of the box's edge-clamped
+     *  value, so `cubeCovers` counts it as covered. */
+    outerGrids?: GfsGrid[];
 };
 
 /** The pre-integrated trajectory a tube was laid along: each slice's box center
@@ -108,7 +113,10 @@ function cubeFromRaw(raw: RawCube): WindCube {
  *  cell size stays shared and the payload is still one grid after another.
  *  v4: a multi-level v3 tube (the reconstruction cube) — `levels` = pressure
  *  levels (hPa, ascending); per grid the payload holds U then V of each level
- *  in turn. */
+ *  in turn.
+ *  v5: v3/v4 plus `outer` — per slice a coarse float-level grid around the
+ *  fine box (`outer.origins[g]`, `outer.dims[g]`, cell `outer.dLat/dLon`),
+ *  whose U, V payloads follow all the fine grids, one slice after another. */
 type BinHeader = {
     v: number; scale: number;
     t0Ms: number; stepMs: number; gridStep: number; levelHpa: number;
@@ -121,6 +129,8 @@ type BinHeader = {
     dims?: Array<[number, number]>;
     /** v4: pressure levels (hPa, ascending), stored per grid in this order. */
     levels?: number[];
+    /** v5: the coarse outer grids (see the type comment). */
+    outer?: { dLat: number; dLon: number; origins: Array<[number, number]>; dims: Array<[number, number]> };
     /** v2 tube (optional): TRUE per-slice centers `[lat, lon]`, lon unwrapped. */
     centers?: Array<[number, number]>;
     /** v2 tube (optional): hourly true trajectory, `points` = `[lat, lon]`. */
@@ -182,12 +192,28 @@ function cubeFromBinary(raw: Buffer): WindCube {
             V: Float32Array.from(a.V, (x, i) => x * (1 - w) + b.V[i] * w),
         });
     }
+    let outerGrids: GfsGrid[] | undefined;
+    if (h.outer) {
+        outerGrids = [];
+        for (let g = 0; g < h.nGrids; g++) {
+            const [nLat, nLon] = h.outer.dims[g];
+            const n = nLat * nLon;
+            const U16 = new Int16Array(ab, off, n); off += n * 2;
+            const V16 = new Int16Array(ab, off, n); off += n * 2;
+            outerGrids.push({
+                lat0: h.outer.origins[g][0], dLat: h.outer.dLat, nLat, lon0: h.outer.origins[g][1], dLon: h.outer.dLon, nLon,
+                U: Float32Array.from(U16, (x) => x / scale),
+                V: Float32Array.from(V16, (x) => x / scale),
+            });
+        }
+    }
     return {
         t0Ms: h.t0Ms, stepMs: h.stepMs, gridStep: h.gridStep, levelHpa: h.levelHpa,
         bounds: h.bounds, source: h.source ?? 'gfs', generatedAt: h.generated_at, grids,
         isTube: !!h.origins,
         centers: h.centers, track: h.track,
         ...(levels ? { levels, levelGrids } : {}),
+        ...(outerGrids ? { outerGrids } : {}),
     };
 }
 
@@ -352,7 +378,27 @@ function gridBox(g: GfsGrid): WindGridBounds {
 export function cubeCovers(cube: WindCube, lat: number, lon: number, whenMs: number): boolean {
     if (!cube.isTube) return boxCovers(cube.bounds, lat, lon);
     const { h0, h1 } = bracketSlices(cube, whenMs);
+    const covered = (h: number) => boxCovers(gridBox(cube.grids[h]), lat, lon)
+        || (!!cube.outerGrids && boxCovers(gridBox(cube.outerGrids[h]), lat, lon));
+    return covered(h0) && covered(h1);
+}
+
+/** `cubeCovers` restricted to the fine slice boxes: false for a sample that
+ *  reads the coarse outer field (or nothing). For diagnostics. */
+export function cubeFineCovers(cube: WindCube, lat: number, lon: number, whenMs: number): boolean {
+    if (!cube.isTube) return boxCovers(cube.bounds, lat, lon);
+    const { h0, h1 } = bracketSlices(cube, whenMs);
     return boxCovers(gridBox(cube.grids[h0]), lat, lon) && boxCovers(gridBox(cube.grids[h1]), lat, lon);
+}
+
+/** The float-level grid to read slice `h` from at (lat, lon): its fine box, or
+ *  the coarse outer grid when the point has left the fine box but is inside it,
+ *  else the fine box (edge-clamped). */
+function sliceGrid(cube: WindCube, h: number, lat: number, lon: number): GfsGrid {
+    const fine = cube.grids[h];
+    const outer = cube.outerGrids?.[h];
+    if (!outer || boxCovers(gridBox(fine), lat, lon)) return fine;
+    return boxCovers(gridBox(outer), lat, lon) ? outer : fine;
 }
 
 /**
@@ -372,8 +418,8 @@ export function sampleWind(
     const clamped = Math.max(0, Math.min(grids.length - 1, hourFloat));
     const h0 = Math.min(Math.floor(clamped), grids.length - 2);
     const f = clamped - h0;
-    const a = windAt(grids[h0], lat, lon);
-    const b = windAt(grids[h0 + 1], lat, lon);
+    const a = windAt(sliceGrid(cube, h0, lat, lon), lat, lon);
+    const b = windAt(sliceGrid(cube, h0 + 1, lat, lon), lat, lon);
     return { u: a.u * (1 - f) + b.u * f, v: a.v * (1 - f) + b.v * f };
 }
 
@@ -396,6 +442,9 @@ export function sampleWindP(
     const { k0, k1, w } = levelBracket(levels, pHpa);
     const { h0, h1, f } = bracketSlices(cube, whenMs);
     const at = (h: number) => {
+        /* Outside the fine box the coarse outer field (float level only) is read. */
+        const g = sliceGrid(cube, h, lat, lon);
+        if (g !== cube.grids[h]) return windAt(g, lat, lon);
         const a = windAt(levelGrids[h][k0], lat, lon);
         if (k1 === k0) return a;
         const b = windAt(levelGrids[h][k1], lat, lon);

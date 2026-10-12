@@ -4,6 +4,8 @@
  *   - v3 tube header (`dims`): per-slice box sizes decode and sample correctly
  *   - v4 multi-level tube (`levels`): per-level payload, the float level
  *     rebuilt by the linear-in-pressure blend, `sampleWindP` between levels
+ *   - v5 coarse outer field (`outer`): read outside the fine box, counted as
+ *     covered, used per bracketing slice
  *   - `cubeCovers` tests the bracketing slice boxes, not the tube's union bounds
  *   - `integrateBalloonPathT` stops where a path leaves its slice box
  */
@@ -12,14 +14,14 @@ import test from 'node:test';
 import { mkdtempSync, rmSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
-import { bracketSlices, cubeCovers, fetchWindCube, levelBracket, sampleWind, sampleWindP } from '../lib/wind/windCube.ts';
+import { bracketSlices, cubeCovers, cubeFineCovers, fetchWindCube, levelBracket, sampleWind, sampleWindP } from '../lib/wind/windCube.ts';
 import { integrateBalloonPathT } from '../lib/wind/balloonIntegrate.ts';
 
 const HOUR = 3_600_000;
 
 /** Pack grids the way scripts/gfs_ingest.py `pack_cube` does:
  *  [uint32 LE headerLen][header JSON, padded to 4 bytes][int16 U then V per grid]. */
-function packCube(header, grids, scale = 10) {
+function packCube(header, grids, scale = 10, outer = []) {
     const hb = Buffer.from(JSON.stringify({ ...header, scale }), 'utf8');
     const pad = ((-(4 + hb.length)) % 4 + 4) % 4;        // JS % keeps the sign; Python's does not
     const head = Buffer.alloc(4);
@@ -33,6 +35,14 @@ function packCube(header, grids, scale = 10) {
                 lv[comp].forEach((x, i) => buf.writeInt16LE(Math.round(x * scale), i * 2));
                 parts.push(buf);
             }
+        }
+    }
+    /* v5: the outer grids follow every fine grid. */
+    for (const g of outer) {
+        for (const comp of ['U', 'V']) {
+            const buf = Buffer.alloc(g[comp].length * 2);
+            g[comp].forEach((x, i) => buf.writeInt16LE(Math.round(x * scale), i * 2));
+            parts.push(buf);
         }
     }
     return Buffer.concat(parts);
@@ -144,6 +154,36 @@ test('v4 multi-level tube: levels decode in order, the float level is the bracke
         /* Coverage is unchanged: the rectangular slice 1 box spans lon 8..16, lat 10..14. */
         assert.equal(cubeCovers(cube, 13, 15, HOUR), true);
         assert.equal(cubeCovers(cube, 9, 12, HOUR), false);
+    } finally {
+        rmSync(dir, { recursive: true });
+    }
+});
+
+test('v5 outer field: outside the fine box the coarse winds are read and count as covered', async () => {
+    const dir = mkdtempSync(join(tmpdir(), 'stratolink-cube-'));
+    try {
+        /* The v4 three-slice cube plus, per slice, a 2° outer grid over lat 0..40,
+         * lon 0..40 with uniform u = 100 + slice, v = 7. */
+        const outer = [0, 1, 2].map((g) => ({ U: new Array(21 * 21).fill(100 + g), V: new Array(21 * 21).fill(7) }));
+        const header = { ...V4_HEADER, v: 5, outer: { dLat: 2, dLon: 2, origins: [[0, 0], [0, 0], [0, 0]], dims: [[21, 21], [21, 21], [21, 21]] } };
+        writeFileSync(join(dir, 'dev.slwc'), packCube(header, V4_GRIDS, 10, outer));
+        const cube = await loadCube(dir, 'dev');
+        assert.equal(cube.outerGrids.length, 3);
+        /* Inside the fine box nothing changes (v4 float-level blend). */
+        const w = (280.8 - 250) / 50;
+        assert.ok(Math.abs(sampleWind(cube, 12, 12, 0).u - (11 + w)) < 1e-5);
+        /* Outside the fine box but inside the outer grid: the outer winds, in time
+         * too, at any pressure, and covered (not penalised). */
+        assert.equal(sampleWind(cube, 30, 30, 0).u, 100);
+        assert.ok(Math.abs(sampleWind(cube, 30, 30, HOUR / 2).u - 100.5) < 1e-9);
+        assert.equal(sampleWindP(cube, 30, 30, 0, 200).v, 7);
+        assert.equal(cubeCovers(cube, 30, 30, 0), true);
+        assert.equal(cubeFineCovers(cube, 30, 30, 0), false);
+        /* Inside one bracketing slice's fine box but not the other's: each slice
+         * reads its own grid (slice 1's box spans lon 8..16, slice 2's 12..16). */
+        assert.ok(Math.abs(sampleWind(cube, 13, 9, 1.5 * HOUR).u - (0.5 * (21 + w) + 0.5 * 102)) < 1e-5);
+        /* Outside both: edge-clamped and not covered. */
+        assert.equal(cubeCovers(cube, 60, 60, 0), false);
     } finally {
         rmSync(dir, { recursive: true });
     }

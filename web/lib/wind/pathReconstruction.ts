@@ -150,8 +150,10 @@ export type PathReconstructionResult = {
  *       gaps the winds cannot connect are flagged `unexplained`.
  *   g6: wind-following long-gap tube; per-particle pressure on multi-level
  *       (.slwc v4) cubes.
- *   g7: long-gap line = mean of the draws unless they split (chooseLine). */
-const GAP_ALGO_VERSION = 'g7';
+ *   g7: long-gap line = mean of the draws unless they split (chooseLine).
+ *   g8: pilot-sized boxes + coarse outer wind field (.slwc v5); 8,000
+ *       particles for gaps ≥ 48 h. */
+const GAP_ALGO_VERSION = 'g8';
 /** A bridge whose end is older than this is final — safe to reuse verbatim. */
 const GAP_SETTLE_MS = 6 * 3_600_000;
 
