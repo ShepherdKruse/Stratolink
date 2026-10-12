@@ -296,9 +296,9 @@ async function replay(host, signal) {
 
 /* ── 2. riding the tube ────────────────────────────────────────────────────── */
 async function tube(host, signal) {
-  const [meta, buffer, coast, flight, cloud, fmeta, fbuf, obuf, pbuf] = await Promise.all([load('tube.json'), load('tube.bin'), load('coast-atlantic.json'), load('flight.json'), clouds(), load('filters.json'), load('filters.bin'), load('tube-outer.bin'), load('tube-patch.bin')]);
+  const [meta, buffer, coast, flight, cloud, fmeta, fbuf, obuf] = await Promise.all([load('tube.json'), load('tube.bin'), load('coast-atlantic.json'), load('flight.json'), clouds(), load('filters.json'), load('filters.bin'), load('tube-outer.bin')]);
   if (signal.aborted) return;
-  const fpos = new Int16Array(fbuf), coarse = new Int8Array(obuf), patches = new Int8Array(pbuf);
+  const fpos = new Int16Array(fbuf), coarse = new Int8Array(obuf);
   /* The filters' own clouds (every 3 h): the forward one from the fix before a
    * long gap, the backward one from the fix after it. The box is sized for them. */
   const filterAt = (t, dir) => { let best = null; for (const sn of fmeta.snaps) if (sn.dir === dir && Math.abs(sn.t - t) <= 1.6 * 3600000 && (!best || Math.abs(sn.t - t) < Math.abs(best.t - t))) best = sn; return best; };
@@ -313,46 +313,8 @@ async function tube(host, signal) {
     <div class="chart-legend">${key('This slice’s box', BLUE)}${windKey()}<span class="chart-key"><i class="spectrum-key" style="opacity:.35"></i>Coarse 1.5° winds around it</span>${key('Forward particles', BLUE, 'dot')}${key('Backward particles', RED, 'dot')}${key('Bridges', INK, 'dot')}${key('Reconstructed track', INK)}</div>
     <div class="fleet-map-stage"><output class="fleet-hover" hidden></output></div>
     ${footer('')}
-    <div class="tube-inset">
-      <figure><canvas data-inset="fine" role="img" aria-label="Every 0.25° wind vector the box stores in a 3° square around the balloon"></canvas><figcaption>In the box: 0.25° winds, 3° around the balloon</figcaption></figure>
-      <figure><canvas data-inset="coarse" role="img" aria-label="The same square read from the coarse 1.5° field"></canvas><figcaption>The same square in the coarse field: 1.5° winds</figcaption></figure>
-      <figure><canvas data-inset="diff" role="img" aria-label="The difference between the box's winds and the coarse field at the same points, exaggerated ten times"></canvas><figcaption data-diff-caption>The difference, box minus coarse, arrows ×10</figcaption></figure>
-    </div>
     ${slider('Slice', last, .05, 'Reconstruction cube time slice')}
     <output class="chart-readout"></output>`;
-  const insets = [...host.querySelectorAll('[data-inset]')].map(c => ({ canvas: c, ctx: c.getContext('2d'), kind: c.dataset.inset, size: 0 }));
-  /* One inset: a 3° square around the balloon at each field's REAL density — the
-   * box's every 0.25° vector (13 × 13), or the coarse field's own 1.5° grid points
-   * (a handful) — with one length scale; the balloon is the ring. */
-  function drawInset(inset, sl, pos) {
-    const { ctx, size, kind } = inset;
-    if (!size) return;
-    ctx.clearRect(0, 0, size, size); ctx.fillStyle = PAPER; ctx.fillRect(0, 0, size, size);
-    const pt = sl && sl.patch;
-    if (!pt || (kind === 'coarse' && !pt.coarse) || (kind === 'diff' && pt.diffOff == null)) { ctx.fillStyle = '#8a8c86'; ctx.font = '12px Helvetica, Arial, sans-serif'; ctx.textAlign = 'center'; ctx.fillText('before launch', size / 2, size / 2); return; }
-    const n = pt.n, cell = size / n, span = (n - 1) * pt.step;
-    const px = (lat, lon) => [((lon - pt.lon0) / span) * (size - cell) + cell / 2, size - (((lat - pt.lat0) / span) * (size - cell) + cell / 2)];
-    const arrow = (lat, lon, u, v) => {
-      const [x, y] = px(lat, lon), speed = Math.hypot(u, v), len = clamp(speed / 25 * cell, 2, cell * 1.15);
-      ctx.save(); ctx.translate(x, y); ctx.rotate(Math.atan2(-v, u)); ctx.strokeStyle = kind === 'diff' ? INK : `rgb(${heatColor(speed / 65).join(',')})`; ctx.lineWidth = kind === 'coarse' ? 1.8 : 1.2;
-      ctx.beginPath(); ctx.moveTo(-len / 2, 0); ctx.lineTo(len / 2, 0); ctx.lineTo(len / 2 - 2.6, -2.2); ctx.moveTo(len / 2, 0); ctx.lineTo(len / 2 - 2.6, 2.2); ctx.stroke(); ctx.restore();
-      ctx.beginPath(); ctx.arc(x, y, kind === 'coarse' ? 2 : .9, 0, Math.PI * 2); ctx.fillStyle = '#8a8c86'; ctx.fill();   // the grid point
-    };
-    if (kind === 'fine') {
-      for (let i = 0; i < n; i++) for (let j = 0; j < n; j++) { const o = pt.off + (i * n + j) * 2; arrow(pt.lat0 + i * pt.step, pt.lon0 + j * pt.step, patches[o], patches[o + 1]); }
-    } else if (kind === 'coarse') {
-      for (const [lat, lon, u, v] of pt.coarse) arrow(lat, lon, u, v);
-    } else {
-      /* stored ×4; drawn ×10 on the same length scale as the other panels */
-      for (let i = 0; i < n; i++) for (let j = 0; j < n; j++) { const o = pt.diffOff + (i * n + j) * 2; arrow(pt.lat0 + i * pt.step, pt.lon0 + j * pt.step, patches[o] / 4 * 10, patches[o + 1] / 4 * 10); }
-      const cap = inset.canvas.parentElement.querySelector('[data-diff-caption]');
-      if (cap) cap.textContent = `The difference, box minus coarse, arrows ×10: typically ${fmt(pt.diffRms, 1)} m/s here`;
-    }
-    if (pos) {
-      const [x, y] = px(pos[0], pos[1]);
-      ctx.beginPath(); ctx.arc(x, y, 5, 0, Math.PI * 2); ctx.strokeStyle = INK; ctx.lineWidth = 1.8; ctx.stroke();
-    }
-  }
   const map = createMap(view, 'The flight with the reconstruction’s wind box for each three-hour slice moving along it, the winds inside the box, and the possible positions during the gaps. Space plays, arrow keys step.');
   host.querySelector('.fleet-map-stage').prepend(map.canvas);
   const input = host.querySelector('input'), output = host.querySelector('.fleet-time output'), read = host.querySelector('.chart-readout'), hover = host.querySelector('.fleet-hover'), date = host.querySelector('.fleet-date'), source = host.querySelector('.fleet-source');
@@ -419,8 +381,6 @@ async function tube(host, signal) {
     let pos = a.pos;
     if (pos && b.pos && f > 0) pos = [lerp(a.pos[0], b.pos[0], f), lerp(a.pos[1], b.pos[1], f)];
     if (pos && !g) map.dot(pos[0], pos[1], 4.5, CREAM, INK, 1.8);
-    const ps = fadeC < .5 ? a : b;
-    for (const inset of insets) drawInset(inset, ps, ps.pos);
     input.value = at; output.textContent = fmt(k + 1); date.textContent = utc(t);
     const s = f < .5 ? a : b;
     source.textContent = `box ${fmt(s.h)}° × ${fmt(s.w)}° at 0.25°, coarser 1.5° winds around it`;
@@ -445,10 +405,66 @@ async function tube(host, signal) {
     hover.textContent = `${place(lat, lon)} / ${fmt(q.speed)} m/s toward ${toward(q.u, q.v)}`;
   };
   map.canvas.onpointerleave = () => { hover.hidden = true; };
+  observeChartSize(host, () => { map.resize(host.clientWidth - 32); draw(); }, signal);
+}
+
+/* ── 2b. what the box resolves ─────────────────────────────────────────────── */
+async function resolution(host, signal) {
+  const [meta, pbuf] = await Promise.all([load('tube.json'), load('tube-patch.bin')]);
+  if (signal.aborted) return;
+  const patches = new Int8Array(pbuf), ride = meta.slices.filter(s => s.patch && s.patch.coarse && s.patch.diffOff != null), last = ride.length - 1;
+  host.innerHTML = `${heading('What the box resolves', '3° around the balloon, one 3-hour slice at a time')}
+    <div class="tube-inset">
+      <figure><canvas data-inset="fine" role="img" aria-label="Every 0.25° wind vector the box stores in a 3° square around the balloon"></canvas><figcaption>In the box: 0.25° winds</figcaption></figure>
+      <figure><canvas data-inset="coarse" role="img" aria-label="The same square read from the coarse 1.5° field"></canvas><figcaption>The same square in the coarse field: 1.5° winds</figcaption></figure>
+      <figure><canvas data-inset="diff" role="img" aria-label="The difference between the box's winds and the coarse field at the same points, exaggerated ten times"></canvas><figcaption data-diff-caption>The difference, box minus coarse, arrows ×10</figcaption></figure>
+    </div>
+    ${footer('NOAA GFS at the balloon’s float level')}
+    ${slider('Slice', last, 1, 'Reconstruction cube time slice')}
+    <output class="chart-readout"></output>`;
+  const input = host.querySelector('input'), output = host.querySelector('.fleet-time output'), read = host.querySelector('.chart-readout'), date = host.querySelector('.fleet-date');
+  const insets = [...host.querySelectorAll('[data-inset]')].map(c => ({ canvas: c, ctx: c.getContext('2d'), kind: c.dataset.inset, size: 0 }));
+  /* One inset: a 3° square around the balloon at each field's REAL density — the
+   * box's every 0.25° vector (13 × 13), or the coarse field's own 1.5° grid points
+   * (a handful) — or their difference, with one length scale. */
+  function drawInset(inset, sl) {
+    const { ctx, size, kind } = inset;
+    if (!size) return;
+    ctx.clearRect(0, 0, size, size); ctx.fillStyle = PAPER; ctx.fillRect(0, 0, size, size);
+    const pt = sl && sl.patch;
+    if (!pt || (kind === 'coarse' && !pt.coarse) || (kind === 'diff' && pt.diffOff == null)) { ctx.fillStyle = '#8a8c86'; ctx.font = '12px Helvetica, Arial, sans-serif'; ctx.textAlign = 'center'; ctx.fillText('before launch', size / 2, size / 2); return; }
+    const n = pt.n, cell = size / n, span = (n - 1) * pt.step;
+    const px = (lat, lon) => [((lon - pt.lon0) / span) * (size - cell) + cell / 2, size - (((lat - pt.lat0) / span) * (size - cell) + cell / 2)];
+    const arrow = (lat, lon, u, v) => {
+      const [x, y] = px(lat, lon), speed = Math.hypot(u, v), len = clamp(speed / 25 * cell, 2, cell * 1.15);
+      ctx.save(); ctx.translate(x, y); ctx.rotate(Math.atan2(-v, u)); ctx.strokeStyle = kind === 'diff' ? INK : `rgb(${heatColor(speed / 65).join(',')})`; ctx.lineWidth = kind === 'coarse' ? 1.8 : 1.2;
+      ctx.beginPath(); ctx.moveTo(-len / 2, 0); ctx.lineTo(len / 2, 0); ctx.lineTo(len / 2 - 2.6, -2.2); ctx.moveTo(len / 2, 0); ctx.lineTo(len / 2 - 2.6, 2.2); ctx.stroke(); ctx.restore();
+      ctx.beginPath(); ctx.arc(x, y, kind === 'coarse' ? 2 : .9, 0, Math.PI * 2); ctx.fillStyle = '#8a8c86'; ctx.fill();   // the grid point
+    };
+    if (kind === 'fine') {
+      for (let i = 0; i < n; i++) for (let j = 0; j < n; j++) { const o = pt.off + (i * n + j) * 2; arrow(pt.lat0 + i * pt.step, pt.lon0 + j * pt.step, patches[o], patches[o + 1]); }
+    } else if (kind === 'coarse') {
+      for (const [lat, lon, u, v] of pt.coarse) arrow(lat, lon, u, v);
+    } else {
+      /* stored ×4; drawn ×10 on the same length scale as the other panels */
+      for (let i = 0; i < n; i++) for (let j = 0; j < n; j++) { const o = pt.diffOff + (i * n + j) * 2; arrow(pt.lat0 + i * pt.step, pt.lon0 + j * pt.step, patches[o] / 4 * 10, patches[o + 1] / 4 * 10); }
+      const cap = inset.canvas.parentElement.querySelector('[data-diff-caption]');
+      if (cap) cap.textContent = `The difference, box minus coarse, arrows ×10: typically ${fmt(pt.diffRms, 1)} m/s here`;
+    }
+  }
+  let at = 0;
+  function draw() {
+    const k = clamp(Math.round(at), 0, last), sl = ride[k];
+    for (const inset of insets) drawInset(inset, sl);
+    input.value = k; output.textContent = fmt(k + 1); date.textContent = utc(sl.t);
+    read.textContent = `Slice ${k + 1} of ${ride.length} / ${sl.wind ? `inside the ${fmt(sl.gapH)}-hour gap` : 'near a fix'} / winds of about ${fmt(meanSpeed(sl), 0)} m/s around the balloon`;
+  }
+  const meanSpeed = sl => { const pt = sl.patch, n = pt.n; let s = 0; for (let i = 0; i < n * n; i++) s += Math.hypot(patches[pt.off + i * 2], patches[pt.off + i * 2 + 1]); return s / (n * n); };
+  const play = player(host, signal, dt => { at += dt * .0025; if (at > last + 3) at = 0; draw(); });
+  bindSlider(input, play, value => { at = value; draw(); });
   observeChartSize(host, () => {
-    map.resize(host.clientWidth - 32);
     const avail = host.clientWidth - 32, perRow = avail >= 560 ? 3 : 2;
-    for (const inset of insets) { const w = Math.min(220, Math.floor((avail - 16 * (perRow - 1)) / perRow)); inset.size = w; sizeCanvas(inset.canvas, inset.ctx, w, w); inset.canvas.parentElement.style.width = `${w}px`; }
+    for (const inset of insets) { const w = Math.min(260, Math.floor((avail - 16 * (perRow - 1)) / perRow)); inset.size = w; sizeCanvas(inset.canvas, inset.ctx, w, w); inset.canvas.parentElement.style.width = `${w}px`; }
     draw();
   }, signal);
 }
@@ -669,7 +685,7 @@ async function forecast(host, signal) {
   observeChartSize(host, () => { width = host.clientWidth - 32; map.resize(width); draw(); }, signal);
 }
 
-const figures = { replay, tube, compare, meeting, line, forecast };
+const figures = { replay, tube, resolution, compare, meeting, line, forecast };
 
 export function mountFigures(root, signal) {
   const observer = new IntersectionObserver(entries => {
