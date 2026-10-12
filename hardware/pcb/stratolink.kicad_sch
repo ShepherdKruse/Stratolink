@@ -3398,311 +3398,6 @@
 				)
 			)
 		)
-		(symbol "T3902:T3902"
-			(pin_names
-				(offset 1.016)
-			)
-			(exclude_from_sim no)
-			(in_bom yes)
-			(on_board yes)
-			(property "Reference" "MK"
-				(at -12.7 10.922 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(justify left bottom)
-				)
-			)
-			(property "Value" "T3902"
-				(at -12.7 -12.7 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(justify left bottom)
-				)
-			)
-			(property "Footprint" "T3902:MIC_T3902"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(justify bottom)
-					(hide yes)
-				)
-			)
-			(property "Datasheet" ""
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "Description" ""
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(property "MF" "TDK InvenSense"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(justify bottom)
-					(hide yes)
-				)
-			)
-			(property "MAXIMUM_PACKAGE_HEIGHT" "0.98mm"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(justify bottom)
-					(hide yes)
-				)
-			)
-			(property "Package" "None"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(justify bottom)
-					(hide yes)
-				)
-			)
-			(property "Price" "None"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(justify bottom)
-					(hide yes)
-				)
-			)
-			(property "Check_prices" "https://www.snapeda.com/parts/T3902/TDK+InvenSense/view-part/?ref=eda"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(justify bottom)
-					(hide yes)
-				)
-			)
-			(property "STANDARD" "Manufacturer Recommendations"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(justify bottom)
-					(hide yes)
-				)
-			)
-			(property "PARTREV" "1.0"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(justify bottom)
-					(hide yes)
-				)
-			)
-			(property "SnapEDA_Link" "https://www.snapeda.com/parts/T3902/TDK+InvenSense/view-part/?ref=snap"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(justify bottom)
-					(hide yes)
-				)
-			)
-			(property "MP" "T3902"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(justify bottom)
-					(hide yes)
-				)
-			)
-			(property "Purchase-URL" "https://www.snapeda.com/api/url_track_click_mouser/?unipart_id=11605520&manufacturer=TDK InvenSense&part_name=T3902&search_term=mmict390200012"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(justify bottom)
-					(hide yes)
-				)
-			)
-			(property "Description_1" "\n                        \n                            EVAL BOARD FOR MMICT390200012\n                        \n"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(justify bottom)
-					(hide yes)
-				)
-			)
-			(property "Availability" "In Stock"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(justify bottom)
-					(hide yes)
-				)
-			)
-			(property "MANUFACTURER" "TDK InvenSense"
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(justify bottom)
-					(hide yes)
-				)
-			)
-			(symbol "T3902_0_0"
-				(rectangle
-					(start -12.7 -10.16)
-					(end 12.7 10.16)
-					(stroke
-						(width 0.254)
-						(type default)
-					)
-					(fill
-						(type background)
-					)
-				)
-				(pin output line
-					(at 17.78 2.54 180)
-					(length 5.08)
-					(name "DATA"
-						(effects
-							(font
-								(size 1.016 1.016)
-							)
-						)
-					)
-					(number "1"
-						(effects
-							(font
-								(size 1.016 1.016)
-							)
-						)
-					)
-				)
-				(pin input line
-					(at -17.78 -2.54 0)
-					(length 5.08)
-					(name "SELECT"
-						(effects
-							(font
-								(size 1.016 1.016)
-							)
-						)
-					)
-					(number "2"
-						(effects
-							(font
-								(size 1.016 1.016)
-							)
-						)
-					)
-				)
-				(pin power_in line
-					(at 17.78 -7.62 180)
-					(length 5.08)
-					(name "GND"
-						(effects
-							(font
-								(size 1.016 1.016)
-							)
-						)
-					)
-					(number "3_1"
-						(effects
-							(font
-								(size 1.016 1.016)
-							)
-						)
-					)
-				)
-				(pin power_in line
-					(at 17.78 -7.62 180)
-					(length 5.08) hide
-					(name "GND"
-						(effects
-							(font
-								(size 1.016 1.016)
-							)
-						)
-					)
-					(number "3_2"
-						(effects
-							(font
-								(size 1.016 1.016)
-							)
-						)
-					)
-				)
-				(pin input clock
-					(at -17.78 2.54 0)
-					(length 5.08)
-					(name "CLK"
-						(effects
-							(font
-								(size 1.016 1.016)
-							)
-						)
-					)
-					(number "4"
-						(effects
-							(font
-								(size 1.016 1.016)
-							)
-						)
-					)
-				)
-				(pin power_in line
-					(at 17.78 7.62 180)
-					(length 5.08)
-					(name "VDD"
-						(effects
-							(font
-								(size 1.016 1.016)
-							)
-						)
-					)
-					(number "5"
-						(effects
-							(font
-								(size 1.016 1.016)
-							)
-						)
-					)
-				)
-			)
-		)
 		(symbol "TMP117NAIYBGR:TMP117NAIYBGR"
 			(pin_names
 				(offset 1.016)
@@ -5093,12 +4788,6 @@
 		(uuid "967070ad-0288-4acf-b6a4-c7cddaf9b9db")
 	)
 	(junction
-		(at 60.96 115.57)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "96ace5a1-f35e-4e7d-b7a0-b673b1ce359a")
-	)
-	(junction
 		(at 111.76 125.73)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -5151,12 +4840,6 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "b85fd7a8-29bd-4be9-83dd-8c4c3439e2fa")
-	)
-	(junction
-		(at 66.04 96.52)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "ba27e3dc-ece0-4661-bd25-c7becfaa61b6")
 	)
 	(junction
 		(at 228.6 107.95)
@@ -5364,16 +5047,6 @@
 	)
 	(wire
 		(pts
-			(xy 66.04 115.57) (xy 60.96 115.57)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "0df345f2-21d0-4a97-96c2-01a78f8c729d")
-	)
-	(wire
-		(pts
 			(xy 233.68 133.35) (xy 231.14 133.35)
 		)
 		(stroke
@@ -5391,16 +5064,6 @@
 			(type default)
 		)
 		(uuid "0e5db6d0-3a54-4b2d-87fe-b99d2cf4a826")
-	)
-	(wire
-		(pts
-			(xy 62.23 102.87) (xy 62.23 101.6)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "0ea187e6-0d44-413c-879c-8ad922110048")
 	)
 	(wire
 		(pts
@@ -5574,16 +5237,6 @@
 	)
 	(wire
 		(pts
-			(xy 25.4 115.57) (xy 60.96 115.57)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "23e032a8-a8a4-4170-9d34-e75203bb2293")
-	)
-	(wire
-		(pts
 			(xy 57.15 78.74) (xy 63.5 78.74)
 		)
 		(stroke
@@ -5724,16 +5377,6 @@
 	)
 	(wire
 		(pts
-			(xy 104.14 52.07) (xy 105.41 52.07)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "312cb211-d69c-4969-9310-871fab8eb6a2")
-	)
-	(wire
-		(pts
 			(xy 120.65 22.86) (xy 120.65 24.13)
 		)
 		(stroke
@@ -5841,16 +5484,6 @@
 			(type default)
 		)
 		(uuid "3bc2d86b-d3fe-4647-aa5d-69498bb49431")
-	)
-	(wire
-		(pts
-			(xy 66.04 104.14) (xy 66.04 115.57)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "3bc44fb9-4170-4be6-bd6e-48dae1acb9c4")
 	)
 	(wire
 		(pts
@@ -6074,16 +5707,6 @@
 	)
 	(wire
 		(pts
-			(xy 97.79 54.61) (xy 105.41 54.61)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "5691af9a-9c2a-4cae-9f8a-2c43cb86057c")
-	)
-	(wire
-		(pts
 			(xy 93.98 132.08) (xy 93.98 123.19)
 		)
 		(stroke
@@ -6194,16 +5817,6 @@
 	)
 	(wire
 		(pts
-			(xy 60.96 96.52) (xy 66.04 96.52)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "6a1f8c79-0156-49e9-b642-0a19eaf40807")
-	)
-	(wire
-		(pts
 			(xy 232.41 100.33) (xy 228.6 100.33)
 		)
 		(stroke
@@ -6311,26 +5924,6 @@
 			(type default)
 		)
 		(uuid "76eff6cb-8ae1-4c54-8d1d-49c2b4f88d56")
-	)
-	(wire
-		(pts
-			(xy 24.13 101.6) (xy 25.4 101.6)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "77f192c1-2b1a-4c22-a86c-8f7f05fa0f95")
-	)
-	(wire
-		(pts
-			(xy 62.23 101.6) (xy 60.96 101.6)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "78093016-fe02-45e6-b5ff-daa53a2d254f")
 	)
 	(wire
 		(pts
@@ -6574,16 +6167,6 @@
 	)
 	(wire
 		(pts
-			(xy 25.4 106.68) (xy 25.4 115.57)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "87bb8ca0-fd7c-482e-a463-100b937d010d")
-	)
-	(wire
-		(pts
 			(xy 93.98 132.08) (xy 102.87 132.08)
 		)
 		(stroke
@@ -6731,16 +6314,6 @@
 			(type default)
 		)
 		(uuid "944a3b13-444d-4968-ba2c-24a45e24bd62")
-	)
-	(wire
-		(pts
-			(xy 24.13 92.71) (xy 24.13 93.98)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "9590f8d7-bbd4-4081-9c21-40af03c20606")
 	)
 	(wire
 		(pts
@@ -6991,16 +6564,6 @@
 			(type default)
 		)
 		(uuid "aacc7b96-0e3f-4829-b7f0-e4e1f3fee4c7")
-	)
-	(wire
-		(pts
-			(xy 60.96 115.57) (xy 60.96 111.76)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "ab24abbb-a860-450f-a765-2f4d8b02b6b9")
 	)
 	(wire
 		(pts
@@ -7391,16 +6954,6 @@
 			(type default)
 		)
 		(uuid "cf5d4304-77a1-4863-a455-be3c66f5cbfd")
-	)
-	(wire
-		(pts
-			(xy 27.94 92.71) (xy 24.13 92.71)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "cfc3f2be-cb3b-43d2-9937-3488b41591e1")
 	)
 	(wire
 		(pts
@@ -8039,18 +7592,6 @@
 			(type none)
 		)
 		(uuid 6eeb27dc-b3df-485b-95b3-e391c4973e3f)
-	)
-	(rectangle
-		(start 13.97 88.265)
-		(end 76.835 121.92)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(fill
-			(type none)
-		)
-		(uuid 6fe1f475-e7f6-482f-864d-f77e0ca263ef)
 	)
 	(rectangle
 		(start 13.97 13.97)
@@ -52387,16 +51928,6 @@
 		)
 		(uuid "7cec488a-186d-4472-ad5b-b2763dc21d86")
 	)
-	(text "Mic\n"
-		(exclude_from_sim no)
-		(at 73.152 91.694 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-		)
-		(uuid "857cefa3-b68e-4ef2-8e65-a7a70949e8e9")
-	)
 	(text "Spectral\n"
 		(exclude_from_sim no)
 		(at 71.12 126.492 0)
@@ -52604,28 +52135,6 @@
 			)
 		)
 	)
-	(global_label "CLK"
-		(shape input)
-		(at 104.14 52.07 180)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right)
-		)
-		(uuid "23aee5e2-00a4-4b67-b5c2-3c06aa106232")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 97.5867 52.07 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-				(hide yes)
-			)
-		)
-	)
 	(global_label "PA8"
 		(shape input)
 		(at 157.48 74.93 0)
@@ -52683,28 +52192,6 @@
 		(uuid "37a9fbaa-b446-4add-acf5-9fdb7b104e0a")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 98.6753 67.31 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-				(hide yes)
-			)
-		)
-	)
-	(global_label "PDM"
-		(shape input)
-		(at 62.23 102.87 270)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right)
-		)
-		(uuid "433bc5ca-0391-4f94-87da-760579017802")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 62.23 109.8466 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -52842,28 +52329,6 @@
 					(size 1.27 1.27)
 				)
 				(justify left)
-				(hide yes)
-			)
-		)
-	)
-	(global_label "PDM"
-		(shape input)
-		(at 97.79 54.61 180)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right)
-		)
-		(uuid "626d5fe4-74d1-4391-9c49-a6ca1c20ae20")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 90.8134 54.61 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
 				(hide yes)
 			)
 		)
@@ -53299,28 +52764,6 @@
 		(uuid "d62330b0-6ad2-48b7-ac1e-8c786332c11b")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 88.7572 59.69 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-				(hide yes)
-			)
-		)
-	)
-	(global_label "CLK"
-		(shape input)
-		(at 27.94 92.71 270)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right)
-		)
-		(uuid "dd981c71-737b-4593-aff9-1f38c9c19692")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 27.94 99.2633 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -55688,71 +55131,6 @@
 		)
 	)
 	(symbol
-		(lib_id "power:+5V")
-		(at 66.04 96.52 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "5952916e-97d3-4159-8e9e-b047e014cc01")
-		(property "Reference" "#PWR033"
-			(at 66.04 100.33 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value" "+3.3V"
-			(at 61.722 95.25 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 66.04 96.52 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 66.04 96.52 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Power symbol creates a global label with name \"+5V\""
-			(at 66.04 96.52 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "dd849119-cdb6-4e29-8e9b-e1c5833ffb93")
-		)
-		(instances
-			(project "stratolink"
-				(path "/4d146a28-be53-49f1-b1c6-484192820e45"
-					(reference "#PWR033")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "fab:Conn_Header_JST_PH_1x02_P2mm_Vertical_SMD")
 		(at 194.31 105.41 0)
 		(unit 1)
@@ -55817,71 +55195,6 @@
 			(project "stratolink"
 				(path "/4d146a28-be53-49f1-b1c6-484192820e45"
 					(reference "J1")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "power:GND")
-		(at 60.96 115.57 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "5e051c7e-db1e-4188-a2ce-aad13914d391")
-		(property "Reference" "#PWR034"
-			(at 60.96 121.92 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value" "GND"
-			(at 60.706 119.38 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" ""
-			(at 60.96 115.57 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 60.96 115.57 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 60.96 115.57 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "2881f4a3-667d-4a04-88be-60bae0392b02")
-		)
-		(instances
-			(project "stratolink"
-				(path "/4d146a28-be53-49f1-b1c6-484192820e45"
-					(reference "#PWR034")
 					(unit 1)
 				)
 			)
@@ -57590,219 +56903,6 @@
 			(project "stratolink"
 				(path "/4d146a28-be53-49f1-b1c6-484192820e45"
 					(reference "R4")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "T3902:T3902")
-		(at 43.18 104.14 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "8b369f4d-170f-4917-a7ad-9d64a1009f83")
-		(property "Reference" "MK1"
-			(at 43.18 88.9 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value" "T3902"
-			(at 43.18 91.44 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Footprint" "lib:MIC_T3902"
-			(at 43.18 104.14 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify bottom)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 43.18 104.14 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" ""
-			(at 43.18 104.14 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "MF" "TDK InvenSense"
-			(at 43.18 104.14 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify bottom)
-				(hide yes)
-			)
-		)
-		(property "MAXIMUM_PACKAGE_HEIGHT" "0.98mm"
-			(at 43.18 104.14 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify bottom)
-				(hide yes)
-			)
-		)
-		(property "Package" "None"
-			(at 43.18 104.14 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify bottom)
-				(hide yes)
-			)
-		)
-		(property "Price" "None"
-			(at 43.18 104.14 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify bottom)
-				(hide yes)
-			)
-		)
-		(property "Check_prices" "https://www.snapeda.com/parts/T3902/TDK+InvenSense/view-part/?ref=eda"
-			(at 43.18 104.14 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify bottom)
-				(hide yes)
-			)
-		)
-		(property "STANDARD" "Manufacturer Recommendations"
-			(at 43.18 104.14 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify bottom)
-				(hide yes)
-			)
-		)
-		(property "PARTREV" "1.0"
-			(at 43.18 104.14 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify bottom)
-				(hide yes)
-			)
-		)
-		(property "SnapEDA_Link" "https://www.snapeda.com/parts/T3902/TDK+InvenSense/view-part/?ref=snap"
-			(at 43.18 104.14 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify bottom)
-				(hide yes)
-			)
-		)
-		(property "MP" "T3902"
-			(at 43.18 104.14 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify bottom)
-				(hide yes)
-			)
-		)
-		(property "Purchase-URL" "https://www.snapeda.com/api/url_track_click_mouser/?unipart_id=11605520&manufacturer=TDK InvenSense&part_name=T3902&search_term=mmict390200012"
-			(at 43.18 104.14 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify bottom)
-				(hide yes)
-			)
-		)
-		(property "Description_1" "\n                        \n                            EVAL BOARD FOR MMICT390200012\n                        \n"
-			(at 43.18 104.14 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify bottom)
-				(hide yes)
-			)
-		)
-		(property "Availability" "In Stock"
-			(at 43.18 104.14 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify bottom)
-				(hide yes)
-			)
-		)
-		(property "MANUFACTURER" "TDK InvenSense"
-			(at 43.18 104.14 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify bottom)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "3bf703e2-659c-4070-9c05-84897f1404f3")
-		)
-		(pin "3_1"
-			(uuid "5adfeabc-47eb-43c0-b585-86a702569474")
-		)
-		(pin "4"
-			(uuid "38aa147b-b253-46f1-87d6-9d98600fd890")
-		)
-		(pin "2"
-			(uuid "71f066a2-2d27-4355-8c1f-0ab676810b2c")
-		)
-		(pin "3_2"
-			(uuid "ce3f34c3-d358-4c0b-8405-d32cc25602d3")
-		)
-		(pin "5"
-			(uuid "0e09da7f-d792-4c1b-bfa5-2414a2421acb")
-		)
-		(instances
-			(project ""
-				(path "/4d146a28-be53-49f1-b1c6-484192820e45"
-					(reference "MK1")
 					(unit 1)
 				)
 			)
@@ -60092,74 +59192,6 @@
 		)
 	)
 	(symbol
-		(lib_id "Device:C")
-		(at 66.04 100.33 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "cf50553f-9416-49a3-b1aa-bf4c047278f5")
-		(property "Reference" "C13"
-			(at 73.66 100.33 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value" "100nF"
-			(at 67.564 104.394 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "Capacitor_SMD:C_0402_1005Metric"
-			(at 67.0052 104.14 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "~"
-			(at 66.04 100.33 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Unpolarized capacitor"
-			(at 66.04 100.33 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "17ba2c65-1646-476f-b5e0-389c7538305e")
-		)
-		(pin "2"
-			(uuid "0f4561e3-448a-45a0-b2e4-07138013c76b")
-		)
-		(instances
-			(project "stratolink"
-				(path "/4d146a28-be53-49f1-b1c6-484192820e45"
-					(reference "C13")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "power:+5V")
 		(at 90.17 26.67 0)
 		(unit 1)
@@ -60284,76 +59316,6 @@
 			(project "stratolink"
 				(path "/4d146a28-be53-49f1-b1c6-484192820e45"
 					(reference "#PWR025")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Device:R_US")
-		(at 24.13 97.79 180)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "d7c69187-ac8c-47f9-b816-6b40a5c216c6")
-		(property "Reference" "R20"
-			(at 21.59 99.0601 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-		(property "Value" "33Ω"
-			(at 22.606 100.584 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" "Resistor_SMD:R_0402_1005Metric"
-			(at 23.114 97.536 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "~"
-			(at 24.13 97.79 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Resistor, US symbol"
-			(at 24.13 97.79 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "2"
-			(uuid "407e4fa1-3983-4f3a-b7be-cd0e699a0ab7")
-		)
-		(pin "1"
-			(uuid "d3c8d496-2d74-4140-99af-5f7d87a15dfc")
-		)
-		(instances
-			(project "stratolink"
-				(path "/4d146a28-be53-49f1-b1c6-484192820e45"
-					(reference "R20")
 					(unit 1)
 				)
 			)
@@ -62025,5 +60987,15 @@
 		(path "/"
 			(page "1")
 		)
+	)
+
+	(no_connect
+		(at 105.41 52.07)
+		(uuid "f16c1856-cd29-4ed3-8ee3-9b7564b4ebce")
+	)
+
+	(no_connect
+		(at 105.41 54.61)
+		(uuid "f73bdbe4-106d-4781-89ce-ffe15a524d8e")
 	)
 )

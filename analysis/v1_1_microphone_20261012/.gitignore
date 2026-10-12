@@ -1,0 +1,10 @@
+*.log
+__pycache__/
+/netlist.xml
+/exports/
+/review/netlist.xml
+/review/baseline/
+/review/thermal_trials/
+/review/clearance_screen/*/*.kicad_*
+/review/clearance_screen/*/*-lib-table
+/review/clearance_screen/*/lib

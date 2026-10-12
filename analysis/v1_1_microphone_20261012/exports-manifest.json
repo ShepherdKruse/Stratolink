@@ -1,0 +1,50 @@
+{
+  "source_sha256": {
+    "hardware/pcb/stratolink.kicad_pcb": "4e132fcc1e80383b270402544700d7ff1f818680a222ba0ceed45e0c125a497f",
+    "hardware/pcb/stratolink.kicad_sch": "f57249e54bf07e10ea75f4338c9807163fbd549f2123712b9805d14bd2a01cd1",
+    "hardware/pcb/stratolink.kicad_pro": "5dd65b15408657138b37fb9ee274f0798e96aadb4092f4e799c61d03bece1786",
+    "firmware/platformio.ini": "86f4188509d59c20be8debb6bd42df0d2ac9107a29af743d53a2e81b7b92959d",
+    "firmware/src/mic_acoustic.cpp": "1e51882b00ed5c07fbd6f0f42a41d2694340bf5e2848f84dcd3de3e0fdce564d"
+  },
+  "exports_sha256": {
+    "review-bom.csv": "66b6684af0c9163f936c12325e270a81d6c731f3e7d7c6bfd1c1221786a340c5",
+    "review-positions.csv": "5c751560cb09699148133aa824f8063399329938cdc9a48a97e3d4ab68cf38d9",
+    "stratolink-B_Cu.gbl": "ab033ea2701eab1e95e810e9734af95ad2a2905a63ded0bb252b3f5f5709481c",
+    "stratolink-B_Mask.gbs": "b0c0c3ad793d63bef05754e6950ae31880abd2f6fae8ec3bd8aedc9e58ed33b6",
+    "stratolink-B_Paste.gbp": "cb31a6a162015aafee0f5cf7f8633fff9668584e5301a5fb6cfef05de5de04e4",
+    "stratolink-B_Silkscreen.gbo": "b4e49ed874dc487d83eda5971fdfe22400dbffef2ee46d0479c384efa57c67da",
+    "stratolink-Edge_Cuts.gm1": "60d8cd441e8260c29f3cdd16b0f06d549b871c9d35ed5461029a29f522971401",
+    "stratolink-F_Cu.gtl": "6c92e4f4eea21222fd33d4d9e10cd193b24383feee975dfccb7f3292210fac28",
+    "stratolink-F_Mask.gts": "d46f75673b73a2c5f533798bed045df23b7d9c60821610f559121fac8664750a",
+    "stratolink-F_Paste.gtp": "8321315dd4f83abcbd9511b16cd59080a72d929cb0764b345cfe91d028f6da8e",
+    "stratolink-F_Silkscreen.gto": "e69aca5cc2186c5768344752dfd3eae09249ae790ee22bd0c3ac8f13ca9ad1a4",
+    "stratolink-NPTH-drl_map.svg": "abc4813d1a5fd7b9d00feee2ad7835ad15b3759190a24630c3ccc0c97e62e8bf",
+    "stratolink-NPTH.drl": "8fc5f14187bf11f76d8e6fbba59da2f8c3c2816a0d1e3e8fbc79799487c5f207",
+    "stratolink-PTH-drl_map.svg": "cc10feb469404a6bc07c1bcba5a868e3040e65f6488b3bea471777584821db41",
+    "stratolink-PTH.drl": "eb0c3c44e4dce70e93ddd53f4d710b638de0f9cf1c52933eaf4887c1d42505ec",
+    "stratolink-drill.rpt": "3e11d75897a6cc0faba4c1c2a29578cfcf0669a03dc0cbc0ab0534bec8693811",
+    "stratolink-job.gbrjob": "6d5275b5fada0c0245138a7892ae9d4b46bfd750d562e5d5e4d479a83012e88d"
+  },
+  "removed_references_absent": [
+    "C13",
+    "MK1",
+    "R20"
+  ],
+  "bom_rows": 58,
+  "position_rows": 58,
+  "npth_holes_remaining": [
+    [
+      "57.764",
+      "-83.688"
+    ],
+    [
+      "62.844",
+      "-84.704"
+    ],
+    [
+      "62.844",
+      "-82.672"
+    ]
+  ],
+  "status": "diagnostic exports; not a manufacturing release"
+}

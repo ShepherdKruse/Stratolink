@@ -1,0 +1,390 @@
+{
+  "baseline_git_commit": "38de8d750c476258ba217c76274216863cf0b29c",
+  "baseline_sha256": {
+    "hardware/pcb/stratolink.kicad_pcb": "21b1a63ae6017dff10468f70f4541ced1bcf28ec07f0706e49a7e35f3bf52245",
+    "hardware/pcb/stratolink.kicad_sch": "a17eb6226f941e4812f14073552066483336387a9f5e6c5140713bb75f266449"
+  },
+  "removed_references": [
+    "MK1",
+    "C13",
+    "R20"
+  ],
+  "removed_schematic": [
+    {
+      "kind": "junction",
+      "reference": null,
+      "uuid": "96ace5a1-f35e-4e7d-b7a0-b673b1ce359a"
+    },
+    {
+      "kind": "junction",
+      "reference": null,
+      "uuid": "ba27e3dc-ece0-4661-bd25-c7becfaa61b6"
+    },
+    {
+      "kind": "wire",
+      "reference": null,
+      "uuid": "0df345f2-21d0-4a97-96c2-01a78f8c729d"
+    },
+    {
+      "kind": "wire",
+      "reference": null,
+      "uuid": "0ea187e6-0d44-413c-879c-8ad922110048"
+    },
+    {
+      "kind": "wire",
+      "reference": null,
+      "uuid": "23e032a8-a8a4-4170-9d34-e75203bb2293"
+    },
+    {
+      "kind": "wire",
+      "reference": null,
+      "uuid": "312cb211-d69c-4969-9310-871fab8eb6a2"
+    },
+    {
+      "kind": "wire",
+      "reference": null,
+      "uuid": "3bc44fb9-4170-4be6-bd6e-48dae1acb9c4"
+    },
+    {
+      "kind": "wire",
+      "reference": null,
+      "uuid": "5691af9a-9c2a-4cae-9f8a-2c43cb86057c"
+    },
+    {
+      "kind": "wire",
+      "reference": null,
+      "uuid": "6a1f8c79-0156-49e9-b642-0a19eaf40807"
+    },
+    {
+      "kind": "wire",
+      "reference": null,
+      "uuid": "77f192c1-2b1a-4c22-a86c-8f7f05fa0f95"
+    },
+    {
+      "kind": "wire",
+      "reference": null,
+      "uuid": "78093016-fe02-45e6-b5ff-daa53a2d254f"
+    },
+    {
+      "kind": "wire",
+      "reference": null,
+      "uuid": "87bb8ca0-fd7c-482e-a463-100b937d010d"
+    },
+    {
+      "kind": "wire",
+      "reference": null,
+      "uuid": "9590f8d7-bbd4-4081-9c21-40af03c20606"
+    },
+    {
+      "kind": "wire",
+      "reference": null,
+      "uuid": "ab24abbb-a860-450f-a765-2f4d8b02b6b9"
+    },
+    {
+      "kind": "wire",
+      "reference": null,
+      "uuid": "cfc3f2be-cb3b-43d2-9937-3488b41591e1"
+    },
+    {
+      "kind": "rectangle",
+      "reference": null,
+      "uuid": "6fe1f475-e7f6-482f-864d-f77e0ca263ef"
+    },
+    {
+      "kind": "text",
+      "reference": null,
+      "uuid": "857cefa3-b68e-4ef2-8e65-a7a70949e8e9"
+    },
+    {
+      "kind": "global_label",
+      "reference": null,
+      "uuid": "23aee5e2-00a4-4b67-b5c2-3c06aa106232"
+    },
+    {
+      "kind": "global_label",
+      "reference": null,
+      "uuid": "433bc5ca-0391-4f94-87da-760579017802"
+    },
+    {
+      "kind": "global_label",
+      "reference": null,
+      "uuid": "626d5fe4-74d1-4391-9c49-a6ca1c20ae20"
+    },
+    {
+      "kind": "global_label",
+      "reference": null,
+      "uuid": "dd981c71-737b-4593-aff9-1f38c9c19692"
+    },
+    {
+      "kind": "symbol",
+      "reference": "#PWR033",
+      "uuid": "5952916e-97d3-4159-8e9e-b047e014cc01"
+    },
+    {
+      "kind": "symbol",
+      "reference": "#PWR034",
+      "uuid": "5e051c7e-db1e-4188-a2ce-aad13914d391"
+    },
+    {
+      "kind": "symbol",
+      "reference": "MK1",
+      "uuid": "8b369f4d-170f-4917-a7ad-9d64a1009f83"
+    },
+    {
+      "kind": "symbol",
+      "reference": "C13",
+      "uuid": "cf50553f-9416-49a3-b1aa-bf4c047278f5"
+    },
+    {
+      "kind": "symbol",
+      "reference": "R20",
+      "uuid": "d7c69187-ac8c-47f9-b816-6b40a5c216c6"
+    }
+  ],
+  "new_no_connects": [
+    {
+      "at": [
+        105.41,
+        52.07
+      ],
+      "uuid": "f16c1856-cd29-4ed3-8ee3-9b7564b4ebce"
+    },
+    {
+      "at": [
+        105.41,
+        54.61
+      ],
+      "uuid": "f73bdbe4-106d-4781-89ce-ffe15a524d8e"
+    }
+  ],
+  "u2_nc_pads": {
+    "32": {
+      "net": "unconnected-(U2-PB3{slash}ADC1-Pad32)",
+      "pintype": "bidirectional+no_connect"
+    },
+    "31": {
+      "net": "unconnected-(U2-PB4{slash}ADC2-Pad31)",
+      "pintype": "bidirectional+no_connect"
+    }
+  },
+  "removed_copper": [
+    {
+      "kind": "segment",
+      "uuid": "29a1de5e-c2c8-4e27-bbc7-a8acaa3e6468",
+      "net": "GND"
+    },
+    {
+      "kind": "segment",
+      "uuid": "330720cf-f9a5-4fe5-a155-24355288d4a1",
+      "net": "GND"
+    },
+    {
+      "kind": "segment",
+      "uuid": "499bc48f-4755-4ece-a36c-a659fa6768dd",
+      "net": "GND"
+    },
+    {
+      "kind": "segment",
+      "uuid": "96ca59cc-eba5-46b8-a864-499c24763099",
+      "net": "GND"
+    },
+    {
+      "kind": "segment",
+      "uuid": "9993a8c1-9802-464c-a406-a007566e0336",
+      "net": "GND"
+    },
+    {
+      "kind": "segment",
+      "uuid": "b507c960-ba0f-400c-8bfa-6cf66235362f",
+      "net": "GND"
+    },
+    {
+      "kind": "segment",
+      "uuid": "d7490907-4a4e-45e7-8b3c-bc10e84902de",
+      "net": "GND"
+    },
+    {
+      "kind": "segment",
+      "uuid": "d8592b89-a81b-4218-8784-e8977091f3f8",
+      "net": "GND"
+    },
+    {
+      "kind": "segment",
+      "uuid": "f21803a3-e050-485a-8528-45abbae55a88",
+      "net": "GND"
+    },
+    {
+      "kind": "via",
+      "uuid": "30dc1101-62ed-49e2-b020-b8c990c67ebf",
+      "net": "GND"
+    },
+    {
+      "kind": "segment",
+      "uuid": "c46247ae-8093-4328-a7cc-c7144054891a",
+      "net": "GND"
+    },
+    {
+      "kind": "segment",
+      "uuid": "eacfa1bb-62bb-419f-bdc9-1a48de754796",
+      "net": "GND"
+    },
+    {
+      "kind": "segment",
+      "uuid": "2c50e2d6-f903-4c21-ac0a-b67f67505d66",
+      "net": "PDM"
+    },
+    {
+      "kind": "segment",
+      "uuid": "3bf499aa-fb94-4a52-a55b-67f573c6fcf2",
+      "net": "PDM"
+    },
+    {
+      "kind": "segment",
+      "uuid": "50182161-40a2-42ab-882d-fb8269cfdf5a",
+      "net": "PDM"
+    },
+    {
+      "kind": "segment",
+      "uuid": "6b745b0f-5e83-4006-bb90-92214cb90642",
+      "net": "PDM"
+    },
+    {
+      "kind": "segment",
+      "uuid": "80242731-eecd-4925-9f2f-e0cac85835ea",
+      "net": "PDM"
+    },
+    {
+      "kind": "segment",
+      "uuid": "8962052d-f57b-4433-bbc0-0d476c9de5c9",
+      "net": "PDM"
+    },
+    {
+      "kind": "segment",
+      "uuid": "97f95aa5-d808-462a-b3cf-38a6f9b3f100",
+      "net": "PDM"
+    },
+    {
+      "kind": "segment",
+      "uuid": "9f0a7d4b-0aa5-48e6-b238-13e2b598c060",
+      "net": "PDM"
+    },
+    {
+      "kind": "segment",
+      "uuid": "a79db66f-4bec-4f28-b635-1365c6a230ec",
+      "net": "PDM"
+    },
+    {
+      "kind": "segment",
+      "uuid": "d57026a0-a3e2-4a17-b83f-de629a5f9b73",
+      "net": "PDM"
+    },
+    {
+      "kind": "segment",
+      "uuid": "0063c572-d268-4a31-bdee-db59aa4712d3",
+      "net": "CLK"
+    },
+    {
+      "kind": "segment",
+      "uuid": "256fb5ed-36bb-4d39-8e3e-a07d589b3ea3",
+      "net": "CLK"
+    },
+    {
+      "kind": "segment",
+      "uuid": "2d6bc063-e5b9-44fa-9d3c-9778b270bc89",
+      "net": "CLK"
+    },
+    {
+      "kind": "segment",
+      "uuid": "54a78fcb-6263-4af6-870f-3ed8977dd595",
+      "net": "CLK"
+    },
+    {
+      "kind": "segment",
+      "uuid": "59edfd8a-d597-4894-a62e-622ee8934d46",
+      "net": "CLK"
+    },
+    {
+      "kind": "segment",
+      "uuid": "65ddcc51-e536-44e0-a784-ae45beacf7ca",
+      "net": "CLK"
+    },
+    {
+      "kind": "segment",
+      "uuid": "d00e8c8e-75aa-46b2-83e6-0f6ff90a2e3f",
+      "net": "CLK"
+    },
+    {
+      "kind": "segment",
+      "uuid": "ac7e3077-8ea5-480f-aafb-6cac414f27ef",
+      "net": "Net-(MK1-CLK)"
+    }
+  ],
+  "shared_supply_bridge": {
+    "uuid": "8b6063f2-fae1-4be5-96b1-7ac9ba0baeb8",
+    "net": "+3.3V",
+    "start": [
+      58.1705,
+      53.569
+    ],
+    "end": [
+      58.3055,
+      53.434
+    ],
+    "width_mm": 0.25
+  },
+  "note": "Native zone refill and independent connectivity/fabrication verification must follow.",
+  "ground_fill_connections": [
+    {
+      "uuid": "655fddab-a0b8-47c7-bfa0-d418efbf820d",
+      "reason": "Removal of PDM/CLK opens a new pour beside U2 pad 28; explicitly connect it without changing the pad or thermal settings.",
+      "start": [
+        57.549999,
+        71.650001
+      ],
+      "end": [
+        59.15,
+        71.650001
+      ],
+      "width_mm": 0.25
+    },
+    {
+      "uuid": "c430523b-f1ea-4cdc-b29e-6a4d72087e4f",
+      "start": [
+        55.692,
+        65.683998
+      ],
+      "end": [
+        55.692,
+        64.95
+      ],
+      "width_mm": 0.25,
+      "reason": "Second explicit R23.2 ground connection, joined to the existing ground route; preserves pad thermal settings under both clearance screens."
+    },
+    {
+      "uuid": "068711c1-c35d-45da-ba5d-f080df83c890",
+      "start": [
+        55.692,
+        64.95
+      ],
+      "end": [
+        55.891,
+        64.95
+      ],
+      "width_mm": 0.25,
+      "reason": "Second explicit R23.2 ground connection, joined to the existing ground route; preserves pad thermal settings under both clearance screens."
+    },
+    {
+      "uuid": "b85e4048-28d2-45b7-88c1-86d3a1e2186a",
+      "start": [
+        55.891,
+        64.95
+      ],
+      "end": [
+        56.624998,
+        65.683998
+      ],
+      "width_mm": 0.25,
+      "reason": "Second explicit R23.2 ground connection, joined to the existing ground route; preserves pad thermal settings under both clearance screens."
+    }
+  ]
+}

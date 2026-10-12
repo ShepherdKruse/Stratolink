@@ -1,0 +1,198 @@
+{
+  "project_rules": {
+    "before_report": "analysis/v1_1_implementation_20261012/promotion/drc-project.json",
+    "after_report": "analysis/v1_1_microphone_20261012/drc-project.json",
+    "sections": {
+      "violations": {
+        "before_count": 78,
+        "after_count": 73,
+        "added": [],
+        "removed": [
+          {
+            "description": "Front solder mask aperture bridges items with different nets",
+            "item_uuids": [
+              "6289d3e0-be3d-49e0-8d19-a38df7e82b9b",
+              "b23feb49-8f0f-4574-9e2e-318902ace596"
+            ],
+            "severity": "error",
+            "type": "solder_mask_bridge"
+          },
+          {
+            "description": "Front solder mask aperture bridges items with different nets",
+            "item_uuids": [
+              "6289d3e0-be3d-49e0-8d19-a38df7e82b9b",
+              "b23feb49-8f0f-4574-9e2e-318902ace596"
+            ],
+            "severity": "error",
+            "type": "solder_mask_bridge"
+          },
+          {
+            "description": "Footprint 'C_0402_1005Metric' does not match copy in library 'Capacitor_SMD'",
+            "item_uuids": [
+              "40a49839-1088-4785-ac44-6cfe7a524303"
+            ],
+            "severity": "warning",
+            "type": "lib_footprint_mismatch"
+          },
+          {
+            "description": "Footprint 'R_0402_1005Metric' does not match copy in library 'Resistor_SMD'",
+            "item_uuids": [
+              "45541c13-be6e-470d-9ad0-be4baf8bd255"
+            ],
+            "severity": "warning",
+            "type": "lib_footprint_mismatch"
+          },
+          {
+            "description": "Footprint 'MIC_T3902' does not match copy in library 'lib'",
+            "item_uuids": [
+              "a200ef55-36d6-4844-bc4d-465bfee3424f"
+            ],
+            "severity": "warning",
+            "type": "lib_footprint_mismatch"
+          }
+        ]
+      },
+      "schematic_parity": {
+        "before_count": 11,
+        "after_count": 11,
+        "added": [],
+        "removed": []
+      },
+      "unconnected_items": {
+        "before_count": 0,
+        "after_count": 0,
+        "added": [],
+        "removed": []
+      }
+    }
+  },
+  "enabled_0p15mm_screen": {
+    "before_report": "analysis/v1_1_microphone_20261012/review/clearance_screen/before/drc.json",
+    "after_report": "analysis/v1_1_microphone_20261012/review/clearance_screen/after/drc.json",
+    "sections": {
+      "violations": {
+        "before_count": 92,
+        "after_count": 87,
+        "added": [
+          {
+            "description": "Clearance violation ( clearance 0.1500 mm; actual 0.1470 mm)",
+            "item_uuids": [
+              "097416f6-1af1-43ca-99e0-2cf2e58f9fb2",
+              "2c62792d-6295-4c2c-bd6f-a6d6829e607e"
+            ],
+            "severity": "error",
+            "type": "clearance",
+            "classification": "preexisting_geometry_reported_with_different_pair",
+            "reason": "Both complete copper objects are identical in baseline and final CAD."
+          }
+        ],
+        "removed": [
+          {
+            "description": "Clearance violation ( clearance 0.1500 mm; actual 0.1330 mm)",
+            "item_uuids": [
+              "2c62792d-6295-4c2c-bd6f-a6d6829e607e",
+              "f9dfae35-e1a1-4ca8-8171-3626a7dd781a"
+            ],
+            "severity": "error",
+            "type": "clearance"
+          },
+          {
+            "description": "Front solder mask aperture bridges items with different nets",
+            "item_uuids": [
+              "6289d3e0-be3d-49e0-8d19-a38df7e82b9b",
+              "b23feb49-8f0f-4574-9e2e-318902ace596"
+            ],
+            "severity": "error",
+            "type": "solder_mask_bridge"
+          },
+          {
+            "description": "Front solder mask aperture bridges items with different nets",
+            "item_uuids": [
+              "6289d3e0-be3d-49e0-8d19-a38df7e82b9b",
+              "b23feb49-8f0f-4574-9e2e-318902ace596"
+            ],
+            "severity": "error",
+            "type": "solder_mask_bridge"
+          },
+          {
+            "description": "Footprint 'C_0402_1005Metric' does not match copy in library 'Capacitor_SMD'",
+            "item_uuids": [
+              "40a49839-1088-4785-ac44-6cfe7a524303"
+            ],
+            "severity": "warning",
+            "type": "lib_footprint_mismatch"
+          },
+          {
+            "description": "Footprint 'R_0402_1005Metric' does not match copy in library 'Resistor_SMD'",
+            "item_uuids": [
+              "45541c13-be6e-470d-9ad0-be4baf8bd255"
+            ],
+            "severity": "warning",
+            "type": "lib_footprint_mismatch"
+          },
+          {
+            "description": "Footprint 'MIC_T3902' does not match copy in library 'lib'",
+            "item_uuids": [
+              "a200ef55-36d6-4844-bc4d-465bfee3424f"
+            ],
+            "severity": "warning",
+            "type": "lib_footprint_mismatch"
+          }
+        ]
+      },
+      "schematic_parity": {
+        "before_count": 11,
+        "after_count": 11,
+        "added": [],
+        "removed": []
+      },
+      "unconnected_items": {
+        "before_count": 0,
+        "after_count": 0,
+        "added": [],
+        "removed": []
+      }
+    }
+  },
+  "erc": {
+    "sections": {
+      "violations": {
+        "before_count": 56,
+        "after_count": 55,
+        "added": [
+          {
+            "description": "Pins of type Unspecified and Passive are connected",
+            "item_uuids": [
+              "09be2ffb-a532-464a-b735-3417496a13de",
+              "97fe1358-9111-4cae-ace0-69f4a04c9922"
+            ],
+            "severity": "warning",
+            "type": "pin_to_pin",
+            "classification": "preexisting_ground_net_warning_new_representative",
+            "reason": "U6.5 and C14.1 were already on GND; removed #PWR034 was the previous comparison endpoint."
+          }
+        ],
+        "removed": [
+          {
+            "description": "The current configuration does not include the symbol library 'T3902'",
+            "item_uuids": [
+              "8b369f4d-170f-4917-a7ad-9d64a1009f83"
+            ],
+            "severity": "warning",
+            "type": "lib_symbol_issues"
+          },
+          {
+            "description": "Pins of type Unspecified and Power input are connected",
+            "item_uuids": [
+              "2881f4a3-667d-4a04-88be-60bae0392b02",
+              "97fe1358-9111-4cae-ace0-69f4a04c9922"
+            ],
+            "severity": "warning",
+            "type": "pin_to_pin"
+          }
+        ]
+      }
+    }
+  },
+  "status": "pass"
+}

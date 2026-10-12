@@ -13,7 +13,7 @@ The first implemented change corrects U5's TMP117NAIYBGR DSBGA ball assignments 
 | C1 | ADD0 | GND → address `0x48` |
 | C2 | ALERT | GND; unused open-drain output, permitted by TI |
 
-The new escape traces are 0.15 mm; four new vias use 0.60 mm copper / 0.30 mm drill. SDA uses a short back-layer crossover. C12 retains a local supply and ground path. All 62 component placements and 239 pad geometries remain unchanged.
+The new escape traces are 0.15 mm; four new vias use 0.60 mm copper / 0.30 mm drill. SDA uses a short back-layer crossover. C12 retains a local supply and ground path. That first repair preserved all 62 component placements and 239 pad geometries.
 
 ![Corrected temperature routing](../../analysis/v1_1_implementation_20261012/tmp117-routing.png)
 
@@ -24,6 +24,10 @@ The TMP117 correction's recorded verification passed independent symbol/netlist/
 - [Change record, checks and native review views](../../analysis/v1_1_implementation_20261012/README.md)
 - [Independent electrical review](../../analysis/v1_1_implementation_20261012/review/electrical_review.md)
 
-No BOM or fabrication package has been issued for v1.1. The existing microphone, solar terminals, capacitor, GNSS and radio are still present in CAD; their proposed changes are tracked in the checklist. Use one or two physically verified pilots before the larger batch.
+The second change removes MK1 (T3902), its R20 clock resistor and C13 bypass capacitor, their dedicated signal routing, and the microphone's acoustic hole/mask/paste features. The remaining 59 footprints retain their placement. U2 pins 31/32 are explicitly unconnected. The shared 3.3 V supply through the former C13 location remains continuous. See the [microphone removal and verification record](../../analysis/v1_1_microphone_20261012/README.md).
+
+Build `firmware/` with `platformio run -e stratolink_v1_1` for this no-microphone hardware. It leaves PB3/PB4 quiet and reports acoustic unavailable. The existing `stratolink` environment continues to support fitted microphones on v1 boards. No firmware has been flashed as part of this CAD change.
+
+No manufacturing release has been issued for v1.1. The microphone change record contains diagnostic exports, not approved JLC order files. The solar terminals, capacitor, GNSS and radio remain in place; side solar attachments are the next proposed change. Use one or two physically verified pilots before the larger batch.
 
 Keep the corrected `sym-lib-table`, `fp-lib-table` and `lib/` with the project. Custom 3D models remain local; standard models use KiCad 10's model directory. Other imported libraries still have inherited drift, so avoid a blanket update of every footprint from the library before those checklist items are reviewed.

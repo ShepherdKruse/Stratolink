@@ -15,6 +15,28 @@
 #include "stratolink_pins.h"
 #include <Arduino.h>
 
+#ifndef STRATOLINK_MIC_PRESENT
+#define STRATOLINK_MIC_PRESENT 1
+#endif
+
+#if !STRATOLINK_MIC_PRESENT
+
+/* v1.1 removes the microphone. Do not clock or sample its unused MCU pins. */
+bool mic_acoustic_init(void) {
+    RCC->AHB2ENR |= RCC_AHB2ENR_GPIOBEN;
+    __DSB();
+    GPIOB->MODER |= (3u << 6) | (3u << 8);  /* PB3/PB4: analog */
+    GPIOB->PUPDR &= ~((3u << 6) | (3u << 8));
+    return false;
+}
+
+bool mic_acoustic_detect(uint8_t* acoustic_event) {
+    if (acoustic_event) *acoustic_event = 0;
+    return false;  /* existing telemetry encodes acoustic unavailable */
+}
+
+#else
+
 /* ---- PDM / decimation parameters ---- */
 #define SPI_PRESCALER_BR     3       /* BR[2:0] = 011 -> 48 MHz / 16 = 3 MHz   */
 #define BYTES_PER_SAMPLE     40      /* 320 PDM bits -> 9375 Hz PCM             */
@@ -158,3 +180,5 @@ bool mic_acoustic_detect(uint8_t* acoustic_event) {
 
     return true;
 }
+
+#endif /* STRATOLINK_MIC_PRESENT */

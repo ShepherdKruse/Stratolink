@@ -1,0 +1,32 @@
+{
+  "status": "pass",
+  "baseline_commit": "38de8d7",
+  "removed_references": [
+    "C13",
+    "MK1",
+    "R20"
+  ],
+  "remaining_footprints": 59,
+  "remaining_pad_connectivity_checks": 224,
+  "new_nc_mcu_pads": [
+    {
+      "ref": "U2",
+      "pin": "31",
+      "net": "unconnected-(U2-PB4{slash}ADC2-Pad31)",
+      "connected_other_items": 0
+    },
+    {
+      "ref": "U2",
+      "pin": "32",
+      "net": "unconnected-(U2-PB3{slash}ADC1-Pad32)",
+      "connected_other_items": 0
+    }
+  ],
+  "remaining_schematic_net_nodes": 217,
+  "tmp117_footprint_and_all_retained_components_unchanged": true,
+  "whole_board_unconnected_count": 0,
+  "files_sha256": {
+    "hardware/pcb/stratolink.kicad_pcb": "4e132fcc1e80383b270402544700d7ff1f818680a222ba0ceed45e0c125a497f",
+    "hardware/pcb/stratolink.kicad_sch": "f57249e54bf07e10ea75f4338c9807163fbd549f2123712b9805d14bd2a01cd1"
+  }
+}
