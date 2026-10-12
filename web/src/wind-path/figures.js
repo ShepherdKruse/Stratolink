@@ -326,9 +326,13 @@ async function tube(host, signal) {
   function sliceArrows(b) {
     const minDeg = Math.max(1.25, 8 / (map.width / (view.lon1 - view.lon0)));
     const out = [], skip = Math.max(1, Math.ceil(minDeg / b.aStep - 1e-9));
-    for (let i = 0; i < b.aLat; i += skip) for (let j = 0; j < b.aLon; j += skip) {
+    /* Start on the global lattice of multiples of the drawn spacing, so arrows
+     * stay put from frame to frame instead of shifting with each box's origin. */
+    const first = (o) => ((Math.round(-o / b.aStep) % skip) + skip) % skip;
+    const iS = first(b.aLat0 ?? b.lat0), jS = first(b.aLon0 ?? b.lon0);
+    for (let i = iS; i < b.aLat; i += skip) for (let j = jS; j < b.aLon; j += skip) {
       const o = b.off + (i * b.aLon + j) * 2, u = fine[o], v = fine[o + 1];
-      out.push({ lat: b.lat0 + i * b.aStep, lon: b.lon0 + j * b.aStep, u, v, speed: Math.hypot(u, v) });
+      out.push({ lat: (b.aLat0 ?? b.lat0) + i * b.aStep, lon: (b.aLon0 ?? b.lon0) + j * b.aStep, u, v, speed: Math.hypot(u, v) });
     }
     return out;
   }
@@ -337,7 +341,8 @@ async function tube(host, signal) {
     const o = b.outer, out = [];
     if (!o) return out;
     const minDeg = Math.max(3, 18 / (map.width / (view.lon1 - view.lon0))), skip = Math.max(1, Math.ceil(minDeg / o.aStep - 1e-9));
-    for (let i = 0; i < o.aLat; i += skip) for (let j = 0; j < o.aLon; j += skip) {
+    const first = (v) => ((Math.round(-v / o.aStep) % skip) + skip) % skip;   // stay on a fixed global lattice
+    for (let i = first(o.lat0); i < o.aLat; i += skip) for (let j = first(o.lon0); j < o.aLon; j += skip) {
       const k = o.off + (i * o.aLon + j) * 2, u = coarse[k], v = coarse[k + 1];
       out.push({ lat: o.lat0 + i * o.aStep, lon: o.lon0 + j * o.aStep, u, v, speed: Math.hypot(u, v) });
     }

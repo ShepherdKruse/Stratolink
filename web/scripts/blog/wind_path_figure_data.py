@@ -77,8 +77,12 @@ for g in range(hdr['nGrids']):
         lv.append((U, V))
     U, V = lv[0] if not levels else (lv[lk0][0] * (1 - wf) + lv[lk1][0] * wf, lv[lk0][1] * (1 - wf) + lv[lk1][1] * wf)
     la0, lo0 = hdr['origins'][g]; step = hdr['gridStep']; t = hdr['t0Ms'] + g * hdr['stepMs']
-    st = max(1, math.ceil(max(nLat, nLon) / 26))
-    ui = U[::st, ::st]; vi = V[::st, ::st]
+    # Every box thinned to the same 0.75° spacing on a common lattice (multiples of
+    # 0.75° in lat/lon), so arrows keep one density and don't jitter between frames.
+    ARROW_DEG = 0.75
+    st = max(1, round(ARROW_DEG / step))
+    i0 = int(round((-la0 / step))) % st; j0 = int(round((-lo0 / step))) % st
+    ui = U[i0::st, j0::st]; vi = V[i0::st, j0::st]
     pos = None
     if track_t[0] <= t <= track_t[-1]:
         k = int(np.searchsorted(track_t, t)); k0 = max(0, k - 1); k1 = min(len(track_t) - 1, k)
@@ -87,7 +91,8 @@ for g in range(hdr['nGrids']):
     gh = gap_hours(t, hdr['stepMs'])
     slices.append({'t': t, 'lat0': la0, 'lon0': lo0, 'h': round((nLat - 1) * step, 2), 'w': round((nLon - 1) * step, 2),
                    'half': r2(min(20, max(9, 6 + 0.05 * gh))), 'gapH': round(gh), 'wind': bool(levels) and gh >= 6,
-                   'aLat': ui.shape[0], 'aLon': ui.shape[1], 'aStep': round(st * step, 2), 'off': len(blob), 'pos': pos})
+                   'aLat': ui.shape[0], 'aLon': ui.shape[1], 'aStep': round(st * step, 2), 'aLat0': r2(la0 + i0 * step), 'aLon0': r2(lo0 + j0 * step),
+                   'off': len(blob), 'pos': pos})
     blob += np.clip(np.rint(np.stack([ui, vi], axis=-1)), -127, 127).astype(np.int8).tobytes()
 # v5 cubes: the coarse outer field (float level) follows every fine grid; keep it
 # thinned to ~3° for the figure's pale "around the box" arrows (tube-outer.bin).
@@ -97,14 +102,17 @@ if outer:
         nLat, nLon = outer['dims'][g]; n = nLat * nLon
         U = np.frombuffer(raw, dtype='<i2', count=n, offset=off).reshape(nLat, nLon) / hdr['scale']; off += 2 * n
         V = np.frombuffer(raw, dtype='<i2', count=n, offset=off).reshape(nLat, nLon) / hdr['scale']; off += 2 * n
-        st = max(1, round(3.0 / outer['dLat'])); d = st * outer['dLat']
-        lat0, lon0 = outer['origins'][g]
-        # crop to what the figure's map can show (its view is the union of the ride's boxes)
-        i0 = max(0, math.ceil((5 - lat0) / d)); i1 = min((nLat - 1) // st, math.floor((75 - lat0) / d))
-        j0 = max(0, math.ceil((-135 - lon0) / d)); j1 = min((nLon - 1) // st, math.floor((25 - lon0) / d))
-        ui = U[::st, ::st][i0:i1 + 1, j0:j1 + 1]; vi = V[::st, ::st][i0:i1 + 1, j0:j1 + 1]
-        slices[g]['outer'] = {'lat0': lat0 + i0 * d, 'lon0': lon0 + j0 * d, 'aLat': ui.shape[0], 'aLon': ui.shape[1],
-                              'aStep': round(d, 2), 'off': len(oblob)}
+        # Resample onto a fixed global 3° lattice (bilinear) cropped to the figure's
+        # map, so the pale arrows sit still while the box (and the outer grid's
+        # origin, which follows it) moves.
+        lat0, lon0 = outer['origins'][g]; dd = outer['dLat']; d = 3.0
+        glat = np.arange(6.0, 75.0 + 1e-9, d); glon = np.arange(-135.0, 24.0 + 1e-9, d)
+        fi = np.clip((glat - lat0) / dd, 0, nLat - 1.001); fj = np.clip((glon - lon0) / dd, 0, nLon - 1.001)
+        ii = fi.astype(int); jj = fj.astype(int); a_ = (fi - ii)[:, None]; b_ = (fj - jj)[None, :]
+        bil = lambda A: ((1 - a_) * (1 - b_) * A[np.ix_(ii, jj)] + (1 - a_) * b_ * A[np.ix_(ii, jj + 1)]
+                         + a_ * (1 - b_) * A[np.ix_(ii + 1, jj)] + a_ * b_ * A[np.ix_(ii + 1, jj + 1)])
+        ui = bil(U); vi = bil(V)
+        slices[g]['outer'] = {'lat0': float(glat[0]), 'lon0': float(glon[0]), 'aLat': ui.shape[0], 'aLon': ui.shape[1], 'aStep': d, 'off': len(oblob)}
         oblob += np.clip(np.rint(np.stack([ui, vi], axis=-1)), -127, 127).astype(np.int8).tobytes()
 json.dump({'levelHpa': hdr['levelHpa'], 'levels': levels, 'stepH': hdr['stepMs'] / 3600000, 'slices': slices,
            'outerStep': outer['dLat'] if outer else None}, open(f'{OUT}/tube.json', 'w'), separators=(',', ':'))
