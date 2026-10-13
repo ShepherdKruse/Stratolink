@@ -1,0 +1,71 @@
+{
+  "base": "ba3a0e8",
+  "original_hardware_base": "f0fe2a0",
+  "commits": [
+    {
+      "original": "38de8d750c476258ba217c76274216863cf0b29c",
+      "review_branch": "d84e1704b803011b171d2a7f309e38b6245b8540",
+      "subject": "hardware: start v1.1 with corrected TMP117 symbol and routing"
+    },
+    {
+      "original": "1aed52ff7af3d27aef6ff4b0ceba710c57dc6865",
+      "review_branch": "fd2590ffb9b3e17cfc8a23c6363f255fdf490d35",
+      "subject": "hardware: remove microphone from v1.1 payload"
+    },
+    {
+      "original": "14d94de7593746ee4f088854dd06e9c8d36164bd",
+      "review_branch": "784e0c8eff8fef07ef5c4c7cd2628a94c905f992",
+      "subject": "hardware: add v1.1 side solar solder mounts"
+    },
+    {
+      "original": "76ee6e87463b70519769750d6795988b2c202683",
+      "review_branch": "2ae25f270665ceb1476aa4bec1fd5ca9a7c42475",
+      "subject": "hardware: visualize solar panels and leads in KiCad"
+    },
+    {
+      "original": "a9d6ed59ebd9ca6a4e04108afe0bbe3a827cddde",
+      "review_branch": "e6d176ba9039138f2f44f9f103cc953e4ae5425e",
+      "subject": "Refine solar notches and scale assembly from ZachTek photo"
+    },
+    {
+      "original": "e9095149906a28fbc2b545700852e83dc7bcdd8e",
+      "review_branch": "35eefe070c60667de567aef1f37b9bead110e4c8",
+      "subject": "Improve suspension corners with plated holes and reviewed load models"
+    },
+    {
+      "original": "c3d70a429a95591607341d57bf16ee153972da71",
+      "review_branch": "bf2cd40f4eea22c359165e05e6243f22ab6c4227",
+      "subject": "Correct U7 mask overlap while preserving working copper geometry"
+    },
+    {
+      "original": "d70a53d2093454084c9b1ae989d0276a88395334",
+      "review_branch": "595a298a006a7184510a261f212f29859a840a0c",
+      "subject": "Refine v1.1 ground zones and local pad connections"
+    },
+    {
+      "original": "41027a4a5115713016c49e61b76ecb4f4048da79",
+      "review_branch": "8deeb14c48508041da3afa381a2b34967d782606",
+      "subject": "Refine v1.1 edge routing and header pad rings"
+    },
+    {
+      "original": "59979799c5809d636639084227d9fee75c8de1d9",
+      "review_branch": "51b4c42d2936136b70851deb0fdbf185071822d5",
+      "subject": "Use bare board finish and correct wire antenna assemblies"
+    },
+    {
+      "original": "1cac1bb0777a4aa3d1048480e9deb55688b0b118",
+      "review_branch": "fd3457db335e9122043471673773bbb0f824cb61",
+      "subject": "Prepare v1.1 pilot hardware and verified manufacturing draft"
+    },
+    {
+      "original": "60c805edb8322487f2d4266d26b37169ff260efe",
+      "review_branch": "458326c701081fff4096f8681f9cc7df37e34ee1",
+      "subject": "Resolve v1.1 pilot sourcing and document multiband UV options"
+    },
+    {
+      "original": "8ce5f5e7682ed8ec7d2be17bb5f5e7327b24eca6",
+      "review_branch": "dc677aea5b3e47fdee35480c22ecf43064ae5a03",
+      "subject": "Complete AS7331 v1.1 layout and green-mask pilot package"
+    }
+  ]
+}
