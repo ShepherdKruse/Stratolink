@@ -1,0 +1,529 @@
+- banner:
+  - link "lcsc notice":
+    - /url: https://www.lcsc.com/electronica
+    - img "lcsc notice"
+  - button "Close notification":
+  - link "Hot-Selling Page":
+    - /url: https://www.lcsc.com/flashSale?isHot=1
+    - text: Hot-Selling
+  - link "Get Coupons Here":
+    - /url: https://www.lcsc.com/coupons?source=lcsc
+    - generic: Coupons
+    - generic: $20
+  - link "Get API Here":
+    - /url: https://www.lcsc.com/agent
+    - text: API
+  - generic: Language
+  - generic: Help
+  - link "Contact Us":
+    - /url: https://www.lcsc.com/service/question
+  - link "LCSC Electronics home":
+    - /url: https://www.lcsc.com/
+    - img "LCSC Electronics logo"
+    - img "LCSC Electronics svg logo"
+  - textbox "search input":
+    - /placeholder: ROQANG
+  - button "search button":
+  - link "TI":
+    - /url: https://www.lcsc.com/brand-detail/100.html?s_z=t_b_TI
+  - link "Broadcom":
+    - /url: https://www.lcsc.com/brand-detail/738.html?s_z=t_b_Broadcom
+  - link "EVERLIGHT":
+    - /url: https://www.lcsc.com/brand-detail/138.html?s_z=t_b_EVERLIGHT
+  - link "JSCJ":
+    - /url: https://www.lcsc.com/brand-detail/64.html?s_z=t_b_JSCJ
+  - link "UMW":
+    - /url: https://www.lcsc.com/brand-detail/11853.html?s_z=t_b_UMW
+  - link "BOURNS":
+    - /url: https://www.lcsc.com/brand-detail/377.html?s_z=t_b_BOURNS
+  - link "SILICON LABS":
+    - /url: https://www.lcsc.com/brand-detail/197.html?s_z=t_b_SILICON%2520LABS
+  - link "Amphenol":
+    - /url: https://www.lcsc.com/brand-detail/815.html?s_z=t_b_Amphenol
+  - link "HRE":
+    - /url: https://www.lcsc.com/brand-detail/13390.html?s_z=t_b_HRE
+  - link "Samples Offer":
+    - /url: https://www.lcsc.com/samples
+  - generic: Upload a BOM
+  - button "twarner491":
+    - generic "twarner491"
+  - button "The current currency is USD, click to change to other currencies":
+    - generic: USD
+  - link "Cart":
+    - /url: https://www.lcsc.com/cart
+    - generic: Cart
+- navigation:
+  - link "Catalog Page":
+    - /url: https://www.lcsc.com/products
+    - generic: Catalog
+    - img "All Products icon"
+  - link "Products Page":
+    - /url: https://www.lcsc.com/products
+    - generic: Products
+  - link "Manufacturers Page":
+    - /url: https://www.lcsc.com/supplier
+    - generic: Manufacturers
+  - link "RFQ/BOM Page":
+    - /url: https://www.lcsc.com/inquiry
+    - generic: RFQ/BOM
+  - link "Deals Page":
+    - /url: https://www.lcsc.com/flashSale
+    - generic: Deals
+  - link "Custom Cables Page":
+    - /url: https://lcsccable.com
+    - generic: Custom Cables
+  - button "Solutions":
+    - generic: Solutions
+  - button "Resources":
+    - generic: Resources
+- main:
+  - navigation "Breadcrumb":
+    - list:
+      - link "Home":
+        - /url: https://www.lcsc.com/
+      - text: /
+      - link "Products":
+        - /url: https://www.lcsc.com/products
+      - text: /
+      - link "Sensors, Transducers":
+        - /url: https://www.lcsc.com/category/37.html
+      - text: /
+      - link "Optical Sensors":
+        - /url: https://www.lcsc.com/category/612.html
+      - text: /
+      - link "Ambient Light, IR, UV Sensors":
+        - /url: https://www.lcsc.com/category/1256.html
+      - text: /
+      - listitem: ams AS7331_M OLGA16 LF T&RDP
+  - button "Add to Favourites":
+    - generic: Favorites
+  - link "View AS7331_M OLGA16 LF T&RDP product images":
+    - /url: https://www.lcsc.com/product-image/C17474749.html?whichImg=sch
+    - img "ams AS7331_M OLGA16 LF T&RDP product image"
+  - generic: Images for reference only
+  - generic: EDA Models
+  - button "Open the EasyEDA Model":
+    - generic: EasyEDA
+  - button "Copy button":
+  - heading "ams AS7331_M OLGA16 LF T&RDP" [level=1]:
+    - text: ams AS7331_M OLGA16 LF T&RDP
+  - table:
+    - rowgroup:
+      - row "Manufacturer ams":
+        - cell "Manufacturer"
+        - cell "ams":
+          - link "ams":
+            - /url: https://www.lcsc.com/brand-detail/454.html
+      - row "MPN AS7331_M OLGA16 LF T&RDP":
+        - cell "MPN"
+        - cell "AS7331_M OLGA16 LF T&RDP":
+          - generic: AS7331_M OLGA16 LF T&RDP
+      - 'row "LCSC Part # C17474749"':
+        - 'cell "LCSC Part #"'
+        - cell "C17474749":
+          - generic: C17474749
+      - row "Packaging OLGA-16(2.6x3.6)":
+        - cell "Packaging"
+        - cell "OLGA-16(2.6x3.6)":
+          - generic: OLGA-16(2.6x3.6)
+      - 'row "Customer # caret-down"':
+        - 'cell "Customer #"'
+        - cell "caret-down":
+          - textbox "Customer Number"
+          - img "caret-down":
+      - row "Key Attributes I2C 2.7V~3.6V OLGA-16(2.6x3.6) Ambient Light, IR, UV Sensors RoHS":
+        - cell "Key Attributes"
+        - cell "I2C 2.7V~3.6V OLGA-16(2.6x3.6) Ambient Light, IR, UV Sensors RoHS":
+          - generic: I2C 2.7V~3.6V OLGA-16(2.6x3.6) Ambient Light, IR, UV Sensors RoHS
+      - row "Datasheet pdf icon ams AS7331_M OLGA16 LF T&RDP":
+        - cell "Datasheet"
+        - cell "pdf icon ams AS7331_M OLGA16 LF T&RDP":
+          - link "pdf icon ams AS7331_M OLGA16 LF T&RDP":
+            - /url: https://www.lcsc.com/datasheet/C17474749.pdf
+            - img "pdf icon"
+            - generic: ams AS7331_M OLGA16 LF T&RDP
+  - heading "Products Specifications" [level=2]
+  - button "All"
+  - checkbox
+  - table:
+    - rowgroup:
+      - row "Type Description":
+        - columnheader "Type"
+        - columnheader "Description"
+        - columnheader
+    - rowgroup:
+      - row "Category Sensors, Transducers/Optical Sensors/Ambient Light, IR, UV Sensors":
+        - cell "Category"
+        - cell "Sensors, Transducers/Optical Sensors/Ambient Light, IR, UV Sensors":
+          - link "Sensors, Transducers/Optical Sensors/Ambient Light, IR, UV Sensors":
+            - /url: https://www.lcsc.com/category/1256.html
+        - cell:
+          - checkbox [checked] [disabled]
+      - row "Manufacturer ams":
+        - cell "Manufacturer"
+        - cell "ams":
+          - link "ams":
+            - /url: https://www.lcsc.com/brand-detail/454.html
+        - cell:
+          - checkbox
+      - row "Packaging OLGA-16(2.6x3.6)":
+        - cell "Packaging"
+        - cell "OLGA-16(2.6x3.6)"
+        - cell:
+          - checkbox
+      - row "Length -":
+        - cell "Length"
+        - cell "-"
+        - cell:
+          - checkbox
+      - row "Width -":
+        - cell "Width"
+        - cell "-"
+        - cell:
+          - checkbox
+      - row "Height -":
+        - cell "Height"
+        - cell "-"
+        - cell:
+          - checkbox
+  - table:
+    - rowgroup:
+      - row "Type Description":
+        - columnheader "Type"
+        - columnheader "Description"
+        - columnheader
+    - rowgroup:
+      - row "Interface I2C":
+        - cell "Interface"
+        - cell "I2C"
+        - cell:
+          - checkbox
+      - row "Measurement Type Color Recognition":
+        - cell "Measurement Type"
+        - cell "Color Recognition"
+        - cell:
+          - checkbox
+      - row "Operating Temperature -40℃~+105℃":
+        - cell "Operating Temperature"
+        - cell "-40℃~+105℃"
+        - cell:
+          - checkbox
+      - row "Features Adjustable gain control;Low power/sleep mode;Built-in temperature compensation":
+        - cell "Features"
+        - cell "Adjustable gain control;Low power/sleep mode;Built-in temperature compensation"
+        - cell:
+          - checkbox
+      - row "Voltage - Supply 2.7V~3.6V":
+        - cell "Voltage - Supply"
+        - cell "2.7V~3.6V"
+        - cell:
+          - checkbox
+      - row "Photoperceptivity -":
+        - cell "Photoperceptivity"
+        - cell "-"
+        - cell:
+          - checkbox
+  - button "Help & Feedback"
+  - link "Show similar products (526) >":
+    - /url: https://www.lcsc.com/category/1256.html
+  - heading "Introduction" [level=2]
+  - generic: AI Translation
+  - paragraph: "The AS7331 is a low-power, low noise integrated UV sensor. The three separated UVA, UVB and UVC channels convert optical radiation signals via photodiodes to a digital result and realize a continuous or triggered measurement. The irradiance responsivity can be adjusted via Gain, conversion time and internal clock frequency to effect sensitivity, full scale range and LSB. The by the AS7331 detected amount of radiation in the set Gain and conversion time configuration will be provided as digital counts by the AS7331. The AS7331 offers a range of 12 Gain steps by a factor of two for each step. The conversion time is internally controlled over a wide range of 15 steps by a factor of two for each step. With the input pin (SYN), the conversion time can be externally controlled to adapt the measurement to the given environment and time base. With its irradiance responsivity factor and conversion time, the AS7331 supports an overall huge dynamic range up to 3.43E+10 (resolution multiplied by gain range). It achieves an accuracy of up to 24-bit signal resolution (internal via I²C and shifter 16-bit), with an irradiance responsivity per count down to 2.38 nW/cm² at 64 ms integration time. Via an integrated divider, the 16-bit I²C output can be adjusted to the significant bits of interest. Automatic Power Down (sleep function) between subsequent measurements offers operation with very low current consumption. Furthermore, a synchronized mode and other control modes adjustable by user programming can be used. The supported operating modes of the AS7331 are: CMD Mode – single measurement and conversion (controlled via I²C interface). CONT Mode – continuous measurement and conversion (periodically recurring measuring cycles) start and stop controlled via I2C interface. SYN[x] Modes - synchronized measurement and conversion:"
+  - list:
+    - listitem: "[SYNS Mode] synchronization of start via the control signal at pin SYN."
+    - listitem: "[SYND Mode] synchronization of start and stop of measuring cycles via control signal at pin SYN. The conversion data can be accessed by the I²C interface with programmable slave addresses via 16-bit / 400 kHz fast mode. The measurement of the current conversion time for an externally triggered measurement can be performed. The measurement modes will not affect the settings of the irradiance responsivity and conversion time. Furthermore, the converter supports functions like power down and standby, which is suitable in mobile applications. Based on the high flexibility the AS7331 is suitable as an optical converter for three different wavelength ranges. The device achieves a high dynamic range for fluorescence applications and for measurements of UV radiations. This makes the UV sensors excellently suited for photometry applications (UV exposure, UV - index), for monitoring of UVC disinfection treatments, fluorescence detection, and mobile devices for UV radiation measurements. The AS7331 contains an integrated temperature sensor for rough compensation of the thermic behavior. The device is available in a small SMD package."
+  - heading "Applications" [level=2]
+  - generic: AI Translation
+  - list:
+    - listitem: UV-Disinfection (water, air, surfaces)
+    - listitem: UV-Curing
+    - listitem: Phototherapy
+    - listitem: Analytics
+    - listitem: Home Appliances
+    - listitem: Horticulture
+  - generic: Every Order Guarantee
+  - generic: 100% Authentic · 30-Day Return or Replacement
+  - generic: Out of Stock
+  - generic: Notify Me
+  - generic: "Minimum: 1"
+  - generic: "Multiple: 1"
+  - generic: "Sales Unit: Piece"
+  - textbox: "1"
+  - generic: Packaging
+  - generic: Qty
+  - generic: Unit Price
+  - generic: Total Amount
+  - generic: Cut Tape
+  - generic: "1"
+  - generic: $ 6.9701
+  - generic: $ 6.97
+  - generic: $ 6.97
+  - button "Add to Cart":
+    - generic: Add to Cart
+  - generic: Add to BOM List
+  - table:
+    - rowgroup:
+      - row "Qty Unit Price(Reference Only) Total Amount":
+        - columnheader "Qty"
+        - columnheader "Unit Price(Reference Only)":
+          - text: Unit Price
+          - generic: (Reference Only)
+        - columnheader "Total Amount"
+    - rowgroup:
+      - row "1+ $ 6.9701 $ 6.97":
+        - button "1+"
+        - cell "$ 6.9701":
+          - generic: $ 6.9701
+        - cell "$ 6.97"
+      - row "200+ $ 2.7821 $ 556.42":
+        - button "200+"
+        - cell "$ 2.7821":
+          - generic: $ 2.7821
+        - cell "$ 556.42"
+      - row "500+ $ 2.6892 $ 1344.60":
+        - button "500+"
+        - cell "$ 2.6892":
+          - generic: $ 2.6892
+        - cell "$ 1344.60"
+      - row "1,000+ $ 2.642 $ 2642.00":
+        - button "1,000+"
+        - cell "$ 2.642":
+          - generic: $ 2.642
+        - cell "$ 2642.00"
+      - row "Standard Packaging 1000/Full Reel":
+        - cell "Standard Packaging 1000/Full Reel":
+          - generic: Standard Packaging
+          - generic: 1000/Full Reel
+  - generic: Better price for more quantity?
+  - textbox "Enter Qty"
+  - generic: $
+  - textbox "Target Price"
+  - button "Get Quote"
+  - heading "Datasheet" [level=2]
+  - link "Fullscreen":
+    - /url: https://www.lcsc.com/datasheet/C17474749.pdf
+  - img "pdf icon"
+  - text: Download
+  - iframe [id="myPdfIframe"]
+  - heading "C17474749 EasyEDA Library" [level=2]
+  - img "This image shows the pinout diagram of AS7331_M OLGA16 LF T&RDP"
+  - img "This image shows the footprint diagram of AS7331_M OLGA16 LF T&RDP"
+  - heading "Compliance & Export Codes" [level=2]
+  - table:
+    - rowgroup:
+      - row "Type Details":
+        - columnheader "Type"
+        - columnheader "Details"
+    - rowgroup:
+      - row "RoHS ROHS3 Compliant":
+        - cell "RoHS"
+        - cell "ROHS3 Compliant"
+      - row "ECCN EAR99":
+        - cell "ECCN"
+        - cell "EAR99"
+      - row "CNHTS 9031499090":
+        - cell "CNHTS"
+        - cell "9031499090"
+      - row "USHTS 9031499000":
+        - cell "USHTS"
+        - cell "9031499000"
+      - row "TARIC 9031499000":
+        - cell "TARIC"
+        - cell "9031499000"
+  - table:
+    - rowgroup:
+      - row "Type Details":
+        - columnheader "Type"
+        - columnheader "Details"
+    - rowgroup:
+      - row "CAHTS 9031499000":
+        - cell "CAHTS"
+        - cell "9031499000"
+      - row "BRHTS 90314990":
+        - cell "BRHTS"
+        - cell "90314990"
+      - row "INHTS 90314900":
+        - cell "INHTS"
+        - cell "90314900"
+      - row "MXHTS 9031.49.99":
+        - cell "MXHTS"
+        - cell "9031.49.99"
+      - row:
+        - cell
+        - cell
+  - button "Close guide":
+  - img "Guide step 1"
+  - button "Next Step"
+  - button "Skip"
+- contentinfo:
+  - generic "about Information": Information
+  - list:
+    - link "Go to About LCSC Page":
+      - /url: https://www.lcsc.com/about/company
+      - text: About LCSC
+    - link "Go to Contact Us Page":
+      - /url: https://www.lcsc.com/service/question
+      - text: Contact Us
+    - link "Go to LCSC Seller Page":
+      - /url: https://www.lcsc.com/about/supplier
+      - text: LCSC Seller
+    - link "Go to Quality Assurance Page":
+      - /url: https://assets.lcsc.com/datasheet/szlcsc/Download-ISO9001-Certification.pdf
+      - text: Quality Assurance
+    - link "Go to Terms and Conditions Page":
+      - /url: https://www.lcsc.com/help/terms-and-conditions
+      - text: Terms and Conditions
+    - link "Go to Privacy Policy Page":
+      - /url: https://www.lcsc.com/help/privacy
+      - text: Privacy Policy
+    - link "Go to Cookie Notice Page":
+      - /url: https://www.lcsc.com/help-center/lcsc-information/cookie-notice
+      - text: Cookie Notice
+    - link "Go to Blog Page":
+      - /url: https://www.lcsc.com/blog
+      - text: Blog
+  - generic "about Tools": Tools
+  - list:
+    - link "Go to BOM Tool/RFQ Page":
+      - /url: https://www.lcsc.com/bom
+      - text: BOM Tool/RFQ
+    - link "Go to API Page":
+      - /url: https://www.lcsc.com/agent
+      - text: API
+    - link "Go to LCSC Calculator Hub Page":
+      - /url: https://www.lcsc.com/tools
+      - text: LCSC Calculator Hub
+    - link "Go to Cross Reference Page":
+      - /url: https://www.lcsc.com/tools/cross-reference
+      - text: Cross Reference
+  - generic "about Customer Service": Customer Service
+  - list:
+    - link "Go to Track Order Page":
+      - /url: https://www.lcsc.com/personalCenter/order/list
+      - text: Track Order
+    - link "Go to Return Policy Page":
+      - /url: https://www.lcsc.com/help-center/return-refund
+      - text: Return Policy
+    - link "Go to How to Checkout Page":
+      - /url: https://www.lcsc.com/help-center/ordering-quotation/order-and-checkout
+      - text: How to Checkout
+    - link "Go to Orders & Payment Terms Page":
+      - /url: https://www.lcsc.com/help-center/payment-invoice/payment-methods
+      - text: Orders & Payment Terms
+    - link "Go to International Shipping Page":
+      - /url: https://www.lcsc.com/help-center/shipping-delivering
+      - text: International Shipping
+    - button "Feedback"
+    - link "Go to FAQ Page":
+      - /url: https://www.lcsc.com/help-center
+      - text: FAQ
+    - link "Go to Help Center Page":
+      - /url: https://www.lcsc.com/help-center
+      - text: Help Center
+  - generic "about Electronic Components": Electronic Components
+  - list:
+    - link "Go to EasyEDA Page":
+      - /url: https://easyeda.com
+      - text: EasyEDA
+    - link "Go to JLCPCB Page":
+      - /url: https://jlcpcb.com
+      - text: JLCPCB
+    - link "Go to LCSC Page":
+      - /url: https://www.lcsc.com/
+      - text: LCSC
+    - link "Go to CUSTOM CABLES Page":
+      - /url: https://lcsccable.com
+      - text: CUSTOM CABLES
+    - link "Go to FRONT PANELS Page":
+      - /url: https://www.lcsc.com/front-panel
+      - text: FRONT PANELS
+  - generic "about Connect With Us": Connect With Us
+  - generic: "Customer Service:"
+  - text: 0086-755-83210457
+  - generic: "Logistics Dept.:"
+  - text: 0086-755-83233027
+  - generic: "Email:"
+  - link "support@lcsc.com":
+    - /url: mailto:support@lcsc.com
+  - generic: 9:30 am - 12 am, 1:30 pm - 10 pm
+  - generic: Monday - Friday, UTC/GMT +8
+  - generic: "Current Time: Wed, Oct 14, 01:59:45 GMT+8"
+  - generic: Follow Us
+  - link "LCSC Electronics official instagram":
+    - /url: https://www.instagram.com/lcscelectronics
+  - link "LCSC Electronics official facebook":
+    - /url: https://www.facebook.com/lcsc.electronics
+  - link "LCSC Electronics official linkedIn":
+    - /url: https://www.linkedin.com/company/lcsc-electronics
+  - link "LCSC Electronics official twitter":
+    - /url: https://x.com/lcscelectronics
+  - link "LCSC Electronics official youtube":
+    - /url: https://www.youtube.com/c/LCSCElectronics
+  - link "PCI DSS certified":
+    - /url: /payment/PCI.pdf
+    - img "PCI DSS certified"
+  - link "trustlogo about lcsc.com":
+    - /url: https://www.trustlogo.com/ttb_searcher/trustlogo?v_querytype=W&v_shortname=CL1&v_search=https://www.lcsc.com&x=6&y=5
+    - img "SSL encrypted payment icon"
+  - text: Encrypted
+  - text: Payment
+  - img "paypal logo"
+  - img "visa logo"
+  - img "master logo"
+  - img "amex logo"
+  - img "jcb logo"
+  - img "Diners Club logo"
+  - img "dhl logo"
+  - img "fedex logo"
+  - img "singgapore post logo"
+  - img "ems logo"
+  - img "sf express logo"
+  - link "Go to Terms & Conditions Page":
+    - /url: https://www.lcsc.com/help/terms-and-conditions
+    - text: Terms & Conditions
+  - text: "|"
+  - link "Go to Privacy Notice Page":
+    - /url: https://www.lcsc.com/help/privacy
+    - text: Privacy Notice
+  - text: "| Cookie Settings |"
+  - link "Go to Do Not Sell or Share My Personal Information Page":
+    - /url: https://www.lcsc.com/help/do-not-sell
+    - text: Do Not Sell / Do Not Share My Personal Information
+  - generic: © 2025 LCSC.COM All Rights Reserved.
+  - link "about 粤ICP备17041818号":
+    - /url: http://beian.miit.gov.cn
+    - text: 粤ICP备17041818号
+  - link "about ISO/IEC":
+    - /url: https://static.lcsc.com/feassets/pc/file/251202/ISO-IEC%20Certificate.pdf
+    - text: ISO/IEC
+- complementary:
+  - link "Contact us":
+    - /url: https://www.lcsc.com/service/question
+- text: LCSC uses cookies and similar technology to improve site performance, enhance security, personal content and ads, and understand how you interact with our services. This information is shared with third-party service providers. Learn more in our
+- link "Cookie Policy":
+  - /url: https://www.lcsc.com/help-center/lcsc-information/cookie-notice
+- text: .
+- button "Cookie Settings":
+  - generic: Cookie Settings
+- button "Reject All":
+  - generic: Reject All
+- button "Accept All Cookies":
+  - generic: Accept All Cookies
+- button "Close cookie notice":
+- alert
+- dialog:
+  - generic: We've updated our Terms
+  - generic: We are committed to maintaining transparency and keeping your personal data safe. We have updated our Privacy Policy. Please take a moment to review the Privacy Policy for details of the changes. You may also choose whether to receive marketing communications from us. Your choice is entirely voluntary, and choosing not to consent to marketing communications will not affect your access to or use of our website or core services.
+  - checkbox "I agree to the updated Privacy Policy*"
+  - text: I agree to the updated
+  - link "Privacy Policy":
+    - /url: https://www.lcsc.com/help/privacy?hideAgreementUpdate=1
+  - text: "*"
+  - checkbox "I agree to the updated Marketing Policy"
+  - text: I agree to the updated
+  - link "Marketing Policy":
+    - /url: https://www.lcsc.com/help/marketing-consulting-agreement?hideAgreementUpdate=1
+  - button "Decline" [disabled]:
+    - generic: Decline
+  - button "Accept & Continue" [disabled]:
+    - generic: Accept & Continue

@@ -4363,7 +4363,7 @@
 				)
 			)
 		)
-		(property "Value" "RAK3172-9-SM-NI"
+		(property "Value" "RAK3172-8-SM-NI"
 			(at 0 0 0)
 			(layer "F.Fab")
 			(hide yes)
@@ -4375,7 +4375,7 @@
 				)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://docs.rakwireless.com/product-categories/wisduo/rak3172-module/datasheet/"
 			(at 0 0 0)
 			(layer "F.Fab")
 			(hide yes)
@@ -4387,7 +4387,7 @@
 				)
 			)
 		)
-		(property "Description" "RAK3172-9-SM-NI sub-GHz STM32WLE5CC radio module"
+		(property "Description" "RAK3172 STM32WLE5CC, 32-pad, high-band regional-label variant, no TCXO, no IPEX; antenna on RF pad 12"
 			(at 0 0 0)
 			(layer "F.Fab")
 			(hide yes)
@@ -4412,7 +4412,7 @@
 				)
 			)
 		)
-		(property "DESCRIPTION" "RAK3172-9-SM-NI sub-GHz STM32WLE5CC radio module"
+		(property "DESCRIPTION" "RAK3172 STM32WLE5CC, 32-pad, high-band regional-label variant, no TCXO, no IPEX; antenna on RF pad 12"
 			(at 0 0 180)
 			(unlocked yes)
 			(layer "F.Fab")
@@ -4516,7 +4516,7 @@
 				)
 			)
 		)
-		(property "MP" "RAK3172-9-SM-NI"
+		(property "MP" "RAK3172-8-SM-NI"
 			(at 0 0 180)
 			(unlocked yes)
 			(layer "F.Fab")
@@ -4529,7 +4529,7 @@
 				)
 			)
 		)
-		(property "Description_1" "RAK3172-9-SM-NI sub-GHz STM32WLE5CC radio module"
+		(property "Description_1" "RAK3172 STM32WLE5CC, 32-pad, high-band regional-label variant, no TCXO, no IPEX; antenna on RF pad 12"
 			(at 0 0 180)
 			(unlocked yes)
 			(layer "F.Fab")
@@ -4542,7 +4542,7 @@
 				)
 			)
 		)
-		(property "Availability" "Not in stock"
+		(property "Availability" ""
 			(at 0 0 180)
 			(unlocked yes)
 			(layer "F.Fab")
@@ -4555,7 +4555,7 @@
 				)
 			)
 		)
-		(property "AVAILABILITY" "Not in stock"
+		(property "AVAILABILITY" ""
 			(at 0 0 180)
 			(unlocked yes)
 			(layer "F.Fab")
@@ -4593,7 +4593,7 @@
 				)
 			)
 		)
-		(property "Manufacturer_Part_Number" "RAK3172-9-SM-NI"
+		(property "Manufacturer_Part_Number" "RAK3172-8-SM-NI"
 			(at 0 0 0)
 			(layer "F.Fab")
 			(hide yes)
@@ -4617,7 +4617,7 @@
 				)
 			)
 		)
-		(property "LCSC" "C18548052"
+		(property "LCSC" "C5452091"
 			(at 0 0 0)
 			(layer "F.Fab")
 			(hide yes)
@@ -4629,7 +4629,7 @@
 				)
 			)
 		)
-		(property "Supplier Part" "C18548052"
+		(property "Supplier Part" "C5452091"
 			(at 0 0 0)
 			(layer "F.Fab")
 			(hide yes)
@@ -18659,7 +18659,7 @@
 				(justify mirror)
 			)
 		)
-		(property "Datasheet" "https://www.lcsc.com/product-detail/C2766827.html"
+		(property "Datasheet" "https://yageogroup.com/content/datasheet/asset/file/PYU-RC_GROUP_51_ROHS_L"
 			(at 0 0 270)
 			(unlocked yes)
 			(layer "B.Fab")
@@ -18673,7 +18673,7 @@
 				(justify mirror)
 			)
 		)
-		(property "Description" "0402WGF3654TCE"
+		(property "Description" "3.65 MΩ, ±1%, ±100 ppm/°C, 0402, 62.5 mW, 50 V thick-film resistor"
 			(at 0 0 270)
 			(unlocked yes)
 			(layer "B.Fab")
@@ -18687,7 +18687,7 @@
 				(justify mirror)
 			)
 		)
-		(property "Manufacturer" "UNI-ROYAL"
+		(property "Manufacturer" "YAGEO"
 			(at 0 0 0)
 			(layer "F.Fab")
 			(hide yes)
@@ -18699,7 +18699,7 @@
 				)
 			)
 		)
-		(property "Manufacturer_Part_Number" "0402WGF3654TCE"
+		(property "Manufacturer_Part_Number" "RC0402FR-073M65L"
 			(at 0 0 0)
 			(layer "F.Fab")
 			(hide yes)
@@ -18723,7 +18723,7 @@
 				)
 			)
 		)
-		(property "LCSC" "C2766827"
+		(property "LCSC" "C477700"
 			(at 0 0 0)
 			(layer "F.Fab")
 			(hide yes)
@@ -18735,7 +18735,7 @@
 				)
 			)
 		)
-		(property "Supplier Part" "C2766827"
+		(property "Supplier Part" "C477700"
 			(at 0 0 0)
 			(layer "F.Fab")
 			(hide yes)

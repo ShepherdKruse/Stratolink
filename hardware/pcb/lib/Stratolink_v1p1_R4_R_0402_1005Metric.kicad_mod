@@ -29,7 +29,7 @@
 			)
 		)
 	)
-	(property "Datasheet" "https://www.lcsc.com/product-detail/C2766827.html"
+	(property "Datasheet" "https://yageogroup.com/content/datasheet/asset/file/PYU-RC_GROUP_51_ROHS_L"
 		(at 0 0 0)
 		(unlocked yes)
 		(layer "F.Fab")
@@ -42,7 +42,7 @@
 			)
 		)
 	)
-	(property "Description" "0402WGF3654TCE"
+	(property "Description" "3.65 MΩ, ±1%, ±100 ppm/°C, 0402, 62.5 mW, 50 V thick-film resistor"
 		(at 0 0 0)
 		(unlocked yes)
 		(layer "F.Fab")
@@ -55,7 +55,7 @@
 			)
 		)
 	)
-	(property "Manufacturer" "UNI-ROYAL"
+	(property "Manufacturer" "YAGEO"
 		(at 0 0 -90)
 		(layer "B.Fab")
 		(hide yes)
@@ -68,7 +68,7 @@
 			(justify mirror)
 		)
 	)
-	(property "Manufacturer_Part_Number" "0402WGF3654TCE"
+	(property "Manufacturer_Part_Number" "RC0402FR-073M65L"
 		(at 0 0 -90)
 		(layer "B.Fab")
 		(hide yes)
@@ -94,7 +94,7 @@
 			(justify mirror)
 		)
 	)
-	(property "LCSC" "C2766827"
+	(property "LCSC" "C477700"
 		(at 0 0 -90)
 		(layer "B.Fab")
 		(hide yes)
@@ -107,7 +107,7 @@
 			(justify mirror)
 		)
 	)
-	(property "Supplier Part" "C2766827"
+	(property "Supplier Part" "C477700"
 		(at 0 0 -90)
 		(layer "B.Fab")
 		(hide yes)

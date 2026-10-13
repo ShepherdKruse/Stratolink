@@ -1,6 +1,6 @@
 # v1.1 pilot fabrication and assembly intent
 
-**Verified source and manufacturing review package; supplier approval remains pending.** This is the intended order specification, not confirmation of an order. The pilot plan is **five PCBs, three assembled**. The final fabrication ZIP is uploaded to the authorized JLC draft with five boards/three assembled, 0.4 mm ENIG, untented vias, and manual CAM/placement confirmation configured. The final BOM/CPL imports successfully in the actual three-board assembly flow: 56 references detected, 53 confirmed and selected, three inventory shortages. The available-part preview has been reviewed; shortage resolution, missing-part placement and final CAM approval remain pending. Checkout/payment is outside the authorized draft work.
+**Verified source and manufacturing review package; supplier approval remains pending.** This is the intended order specification, not confirmation of an order. The pilot plan is **five PCBs, three assembled**, 0.4 mm ENIG, untented vias, and manual CAM/placement confirmation. The actual draft contains the earlier fabrication ZIP and the current R4/U2 BOM and corrected CPL: **56 references detected, 55 selected, one shortage at U6**. All 55 available parts are present in the reviewed preview. The UV choice, missing-part placement and final CAM approval remain pending. Add-to-cart is authorized only after files, reviews and JLC checks are complete; no cart addition has occurred and payment is not authorized.
 
 ## Board construction and finish
 
@@ -17,9 +17,11 @@ Preserve selective **F.Paste/B.Paste** data. No solder mask does not mean paste 
 
 The BOM uses explicit `Manufacturer_Part_Number` and `Supplier Part` fields, reconciled against the actual flown JLC selections and approved changes. U5 is **TMP117AIYBGR C2871893**, not the earlier N-grade label. D1/D3 are **PESD5V0U1BB C5272735**. Preserve the reviewed pin-1 orientations during final supplier CAM and check missing ICs when available. U8 is on **B.Cu at (55.65, 36.10) mm**, native rotation 0°. Its supplier CPL rotation is **90°**, established by native numbered lands, supplier preview and reimport; the bottom view has three leads at right, two at left and pin 1 at lower right.
 
+The promoted sourcing changes are **R4 YAGEO RC0402FR-073M65L C477700** and **U2 RAK3172-8-SM-NI C5452091**. R4 retains 3.65 MΩ, ±1%, ±100 ppm/°C and its 0402 lands. U2 replaces the 9-label orderable with the manufacturer's equivalent hardware; preserve its native 180° footprint placement. Its exact supplier model requires **CPL 90°**, with pin 1 lower-left and the 12-pad edge at the bottom in a north-up top view. [Sourcing promotion](../../analysis/v1_1_release_20261012/sourcing_followup/promotion.json), [U2 orientation evidence](../../analysis/v1_1_release_20261012/radio_sourcing/u2-supplier-orientation-review.md).
+
 The power selection passes **final integrated native and connectivity verification**: R1 7.50 MΩ (`FRC0402F7504TS C3013187`), U8 `TLV8801DBVT C544879`, R24/R25 `FRC0402F4754TS C2998153`, R26 `0402WGF220JTCE C25092`, and C22 `CL05B104KO5NNNC C1525`. Final BOM inclusion must follow the final approved schematic and export manifest. D3.1/J4.1 have local 0.25 mm thermal gaps/bridges; preserve their supplied copper rather than replacing the footprints during CAM.
 
-The manufacturing generator excludes hand-fitted and mechanical items from automated BOM/CPL. Its baseline convention reproduces the repository's v1 production **input** CPL and uses SMD pad bounds rather than text/model bounds. That historical input does not establish the supplier's final post-CAM rotations. Actual JLC preview and reimport checks now establish **U1 90°, U4 270°, U7 0°, U8 90°**, recorded in the [supplier rotation profile](../../analysis/v1_1_release_20261012/jlc/supplier-rotation-profile.json). U3 remains 180° and U5 remains 0°. No center, side, pad, or trace changes are needed. U4's black circle is its pressure port; use the separate pin-1 indicator and numbered package drawing. The partial preview contains all 53 available references; R4/U2/U6 remain missing. Complete placement confirmation is pending those parts and final supplier CAM.
+The manufacturing generator excludes hand-fitted and mechanical items from automated BOM/CPL. Its baseline convention reproduces the repository's v1 production **input** CPL and uses SMD pad bounds rather than text/model bounds. That historical input does not establish the supplier's final post-CAM rotations. Actual JLC preview and reimport checks now establish **U1 90°, U2 90°, U4 270°, U7 0°, U8 90°**, recorded in the [supplier rotation profile](../../analysis/v1_1_release_20261012/jlc/supplier-rotation-profile.json). U3 remains 180° and U5 remains 0°. No center, side, pad, or trace changes are needed. U4's black circle is its pressure port; use the separate pin-1 indicator and numbered package drawing. The partial preview contains all 55 available references; only U6 remains missing. Complete placement confirmation follows the UV decision and final supplier CAM.
 
 ## Manual assembly after reflow and cleaning
 
@@ -39,20 +41,20 @@ The [README release record](README.md#rules-and-release-state) pins all four ver
 
 | Package file | SHA-256 |
 |---|---|
-| [BOM-stratolink.csv](../gerbers/v1.1-pilot/BOM-stratolink.csv) | `a8316e5907e24c0a336a23464fdd46f2c4492f055caccef7d20f6f6b0d2bad38` |
-| [CPL-stratolink.csv](../gerbers/v1.1-pilot/CPL-stratolink.csv) | `eb8ef43bb3b1a6ee0b1efc3f3c1280f519686b6ba1fda44e61ace8cc6c4d1069` |
-| [fabrication-review.zip](../gerbers/v1.1-pilot/fabrication-review.zip) | `a40250993aee05254827a5090b7b569212d70bfcd8844bfa68adf0870c42a086` |
+| [BOM-stratolink.csv](../gerbers/v1.1-pilot/BOM-stratolink.csv) | `1ac1cad1786e2d40b2a6d10cb758c353929e9faeed5aa1db922c60bcbad958f1` |
+| [CPL-stratolink.csv](../gerbers/v1.1-pilot/CPL-stratolink.csv) | `2b30ba3a50a094b84f2d44d6a20fd72512fbb8cef4a92adf45084ac3c8f31efa` |
+| [fabrication-review.zip](../gerbers/v1.1-pilot/fabrication-review.zip) | `c4948f46d19586dbd8dbde3b251b6c7b25fc20bcaccae235887aa4c593a42730` |
 
 
-The actual October 13 assembly import reports three exact-part shortages:
+The BOM and CPL hashes above match the uploaded files. The local ZIP above is a fresh export and **has not been uploaded**. The draft still uses ZIP `a40250993aee05254827a5090b7b569212d70bfcd8844bfa68adf0870c42a086`; its nine Gerbers, two drills and job match the new export after excluding only creation timestamps. The [promotion audit](../../analysis/v1_1_release_20261012/sourcing_followup/promotion.json) records this comparison and preservation of the old package.
+
+The current October 13 assembly import has one remaining exact-part shortage:
 
 | Reference / part | Required including displayed allowance | Available | Shortage |
 |---|---:|---:|---:|
-| R4 / C2766827 | 20 | 0 | 20 |
-| U2 / C18548052 | 3 | 1 | 2 |
 | U6 / C492374 | 3 | 0 | 3 |
 
-R6 / C423131 is confirmed with its 20-piece feeder quantity available. The public BOM tool's earlier header/quantity defects do not appear in the actual assembly flow. Resolve the three shortages without silently substituting parts; successful import does not reserve inventory or approve placement. [Actual assembly import evidence](../../analysis/v1_1_release_20261012/jlc/assembly-bom-match.txt).
+R4 / C477700 and U2 / C5452091 are selected and available for this draft; R6 / C423131 also remains selected. Successful import does not reserve inventory or approve final assembly. [Current selection evidence](../../analysis/v1_1_release_20261012/sourcing_followup/r4-u2-selected-draft.txt). U6 remains LTR-390UV-01 in CAD while the [multiband UV and sourcing decision](../../analysis/v1_1_release_20261012/uv_followup/README.md) is pending. No U6 replacement or omission has been selected; the missing preview part is not a decided assembly omission.
 
 Before the larger batch, verify the corrected TMP117 directly, quiet omitted-microphone pins, sensor/GNSS operation, solar joint/bridle strength and RF behavior. For the new power circuit, measure charge plateau, individual cells, balancing current/stability at startup and cold conditions, and supply sag during radio/GNSS load. **Panel cold Voc/current and the harvester input-voltage/input-power limits remain unresolved physical bounds.** A clean layout check cannot qualify those operating conditions.
 

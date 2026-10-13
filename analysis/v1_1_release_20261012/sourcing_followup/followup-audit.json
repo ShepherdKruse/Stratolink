@@ -1,0 +1,21 @@
+{
+  "status": "Verified canonical sourcing update; UV and supplier release remain pending",
+  "source_inputs_verified": 160,
+  "output_hashes_verified": 28,
+  "package_manifest_sha256": "ff335c0bcade08612735f267e2ad5989abc728e21ea7bf050cd86e6628802f70",
+  "canonical_reopened_in_native_kicad": true,
+  "native_reopen_changed_protected_sources": false,
+  "uploaded_bom_matches_current_package": true,
+  "uploaded_cpl_probe_matches_current_package": true,
+  "uploaded_fabrication_zip_sha256": "a40250993aee05254827a5090b7b569212d70bfcd8844bfa68adf0870c42a086",
+  "local_fabrication_zip_sha256": "c4948f46d19586dbd8dbde3b251b6c7b25fc20bcaccae235887aa4c593a42730",
+  "physical_artwork_equivalence": "Verified by promotion.json; differences only native creation timestamps",
+  "supplier_detected_refs": 56,
+  "supplier_selected_refs": 55,
+  "unresolved_refs": [
+    "U6"
+  ],
+  "uv_population_changed": false,
+  "cart_added": false,
+  "checkout_or_payment": false
+}

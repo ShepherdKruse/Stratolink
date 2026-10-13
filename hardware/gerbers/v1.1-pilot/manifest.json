@@ -124,15 +124,15 @@
     "lib/Stratolink_v1p1_R26_R_0402_1005Metric.kicad_mod": "f79e84a0ac88e32a8bdb54ac842ecba3164ce896cd6b18bff079b827609e74f7",
     "lib/Stratolink_v1p1_R2_R_0402_1005Metric.kicad_mod": "f47099f3c54a3d49279f0a8afd814d4d773d48c9643c16191508a6d4035e52f3",
     "lib/Stratolink_v1p1_R3_R_0402_1005Metric.kicad_mod": "35657e8b8ae5221e11b11e5bed65438e9c15cb2607b4ab8a2ad7c4d9dd06c0f5",
-    "lib/Stratolink_v1p1_R4_R_0402_1005Metric.kicad_mod": "03dd28f8e07e6432e58413e1e520b5e75ce84a07b60a3034f82a41b9c947886a",
+    "lib/Stratolink_v1p1_R4_R_0402_1005Metric.kicad_mod": "126d732282e843872f7c3f514653fea792766566c6073a5146febc96f19b31ff",
     "lib/Stratolink_v1p1_R5_R_0402_1005Metric.kicad_mod": "2fbbae0d50361cfb9b54ceeb010e7a919bede380beaed1868f676fd91989354f",
     "lib/Stratolink_v1p1_R6_R_0402_1005Metric.kicad_mod": "28b3229fcfeac9c853675bbf4e553b020be2db2194129129c35ed386420a2b03",
     "lib/Stratolink_v1p1_R7_R_0402_1005Metric.kicad_mod": "a6579b02a802dff4b2914a12eb4c123d57582ad303946a80849ebeb689463e2c",
     "lib/Stratolink_v1p1_R8_R_0402_1005Metric.kicad_mod": "16d7f3378a8fded14e2a5dd861b2b723ab4dfdf66196ea20f1e613c6e078d013",
     "lib/Stratolink_v1p1_R9_R_0402_1005Metric.kicad_mod": "6ab4f46b85a99010115c62ba2f4d9c3f1e50a17f3e1b980ab231732b42701b56",
-    "lib/Stratolink_v1p1_Symbols.kicad_sym": "ef6a7bee77000aaf414f22279faeece7ebf40a3dfc489c36ba879e660f6c9b32",
+    "lib/Stratolink_v1p1_Symbols.kicad_sym": "5445aa38794607a1057befdb5a2f01ac1ea4d358a16bc90645849b96dafed883",
     "lib/Stratolink_v1p1_U1_QFN50P350X350X100-21N.kicad_mod": "bad5624dba3236adf4a0116ec84aed589bd213eb2dc880041532fa1855466b73",
-    "lib/Stratolink_v1p1_U2_RAK3172.kicad_mod": "d4d55a362e774989fa3db6e8fa9bd60d12297dae7492a7b4bd5dba09212247d3",
+    "lib/Stratolink_v1p1_U2_RAK3172.kicad_mod": "77763abe7b78381fc284ebe690a71d9275458382cc278674b979a32816b06d89",
     "lib/Stratolink_v1p1_U3_XCVR_MAX-M10S-00B.kicad_mod": "8c407e754570263d992bc8ffad75679297722f79b86e4cac14b7ac9f67b03fb1",
     "lib/Stratolink_v1p1_U4_SON125P500X300X100-8N.kicad_mod": "36c53ad8acffcda4a4f4c1f2ee81f527125bc902486fe0689423c2da41bd802a",
     "lib/Stratolink_v1p1_U5_BGA6N40P3X2_148X95X53.kicad_mod": "cbab11c54e843ae4dcd4416f4cc9246532e17dc7d9c385876703c39c1ab234f3",
@@ -158,9 +158,9 @@
     "lib/mic.elibz": "b68dcc389d65cf5b89763e94db81ee8ee41ad52d68ad39fffea02825559bad17",
     "lib/pressure.elibz": "f997158b9182f3cfcc305b2efa452300f2fe3103462d244a90f23c209db269b5",
     "stratolink.kicad_dru": "565bbdcb4ddc03de2a7bc3cdc45d57a8acd92d2e53a8eac092e0bd5a04861e0b",
-    "stratolink.kicad_pcb": "490af47db22ef076938c17319782f194623d8f8b6a3f864a2e0cc23b3d025b15",
+    "stratolink.kicad_pcb": "8e2f83797dd68195aa71b73fc252fe57e53ccd3683ef5f74739dc4d25d6ce8d5",
     "stratolink.kicad_pro": "79a2c0d01611c7ea7054cd9dbc685187b28fb4ac8792468a15d2bba821ac0ea7",
-    "stratolink.kicad_sch": "044984037a7346adc92ee9ea142e6c285ee7f6b66efc87e0a1ad195495379cc9",
+    "stratolink.kicad_sch": "5787cc81a517b45469ea6a801b1ce1232aa7ef681b7b7e208ac7de2e7b754335",
     "sym-lib-table": "b91205102beca7d31dbdfb66892bb44e6860b17f870e1605c88d8ac0a0078db3"
   },
   "native_kicad_version": "10.0.0",
@@ -228,124 +228,125 @@
   "no_missing_population_refs": true,
   "source_unchanged": true,
   "historical_pcb_commit": "9bdd19ec707455271f48f5a5d8be352fc696cf9c",
+  "supplier_rotation_profile": {
+    "baseline_provenance": "Historical equality reproduces the repository v1 production INPUT CPL. It is not evidence of verified JLC post-CAM placement or supplier-model rotation.",
+    "profile_path": "/Users/twarn/Repositories/Stratolink/analysis/v1_1_release_20261012/jlc/supplier-rotation-profile.json",
+    "profile_sha256": "fadbcae4bb6bb6776a3fd9e3c1fd35073b85bbad71c441b43b1361ddf2aa00ea",
+    "overrides": [
+      {
+        "ref": "U1",
+        "base_rotation_deg": 180.0,
+        "override_rotation_deg": 90.0,
+        "mpn": "BQ25570RGRR",
+        "lcsc": "C506250",
+        "side": "bottom",
+        "center_mm": [
+          67.190998,
+          37.814999
+        ],
+        "evidence": "analysis/v1_1_release_20261012/jlc/probe-u1-90-crop.png; analysis/v1_1_release_20261012/power/placement-u1-u3-u4-review.md",
+        "reason": "Reimported CPL90 gives lower-right pin1 in north-up bottom view, matching numbered pads and TI package drawing.",
+        "baseline_provenance": "Historical equality reproduces the repository v1 production INPUT CPL. It is not evidence of verified JLC post-CAM placement or supplier-model rotation."
+      },
+      {
+        "ref": "U2",
+        "base_rotation_deg": 180.0,
+        "override_rotation_deg": 90.0,
+        "mpn": "RAK3172-8-SM-NI",
+        "lcsc": "C5452091",
+        "side": "top",
+        "center_mm": [
+          64.95,
+          72.205
+        ],
+        "evidence": "analysis/v1_1_release_20261012/radio_sourcing/u2-supplier-orientation-review.md; analysis/v1_1_release_20261012/sourcing_followup/u2-placement-cpl90-full.png; analysis/v1_1_release_20261012/sourcing_followup/CPL-U2-90-probe.csv",
+        "reason": "Actual C5452091 RAK3172-8-SM-NI model after CPL90 reimport has pin 1 lower-left and its 12-pad edge at the bottom in the top view, matching native numbered lands and the manufacturer pinout.",
+        "baseline_provenance": "Historical equality reproduces the repository v1 production INPUT CPL. It is not evidence of verified JLC post-CAM placement or supplier-model rotation."
+      },
+      {
+        "ref": "U4",
+        "base_rotation_deg": 0.0,
+        "override_rotation_deg": 270.0,
+        "mpn": "MS561101BA03-50",
+        "lcsc": "C15639",
+        "side": "top",
+        "center_mm": [
+          71.023,
+          58.808
+        ],
+        "evidence": "analysis/v1_1_release_20261012/jlc/probe-u4-270-crop.png; analysis/v1_1_release_20261012/power/placement-u1-u3-u4-review.md",
+        "reason": "Reimported CPL270 gives upper-left external pin1 indicator and vertical 3x5mm body in top view. The black circle is the pressure-port depiction, not pin1.",
+        "baseline_provenance": "Historical equality reproduces the repository v1 production INPUT CPL. It is not evidence of verified JLC post-CAM placement or supplier-model rotation."
+      },
+      {
+        "ref": "U7",
+        "base_rotation_deg": 90.0,
+        "override_rotation_deg": 0.0,
+        "mpn": "LIS2DH12TR",
+        "lcsc": "C110926",
+        "side": "top",
+        "center_mm": [
+          70.548,
+          37.807
+        ],
+        "evidence": "analysis/v1_1_release_20261012/jlc/probe-u7-0-crop.png; analysis/v1_1_release_20261012/identities/supplier-placement-review.md",
+        "reason": "Reimported CPL0 gives lower-left body index in top view, matching native numbered lands and manufacturer package mapping.",
+        "baseline_provenance": "Historical equality reproduces the repository v1 production INPUT CPL. It is not evidence of verified JLC post-CAM placement or supplier-model rotation."
+      },
+      {
+        "ref": "U8",
+        "base_rotation_deg": 180.0,
+        "override_rotation_deg": 90.0,
+        "mpn": "TLV8801DBVT",
+        "lcsc": "C544879",
+        "side": "bottom",
+        "center_mm": [
+          55.65,
+          36.1
+        ],
+        "evidence": "analysis/v1_1_release_20261012/jlc/probe-u8-90-crop.png; analysis/v1_1_release_20261012/identities/supplier-placement-review.md",
+        "reason": "Reimported CPL90 gives three leads right, two left, pin1 lower-right in bottom view, matching native SOT-23-5 lands.",
+        "baseline_provenance": "Historical equality reproduces the repository v1 production INPUT CPL. It is not evidence of verified JLC post-CAM placement or supplier-model rotation."
+      }
+    ],
+    "only_cpl_rotation_changes": true
+  },
   "evidence_files": {
     "/Users/twarn/Repositories/Stratolink/analysis/v1_1_release_20261012/jlc/previous-selected-parts.txt": "d974e52a43add30ecbbce9ab62d6c1098eecb6147f424efb4ecc9105365e5d34",
     "/Users/twarn/Repositories/Stratolink/hardware/gerbers/production_files/CPL-stratolink.csv": "194c91282f58cc6635dd2b929b2ab0f98a16ea066265052b8b957be5bb12a081",
     "/Users/twarn/Repositories/Stratolink/hardware/gerbers/v1.1-pilot/native/historical-v1.kicad_pcb": "2924cfa59d48c1446488d715834e84ea634516e622ed59915fb72521e9595190",
     "/Users/twarn/Repositories/Stratolink/analysis/v1_1_layout_20261012/pcb_audit/source_hashes.json": "91cc28d2d77fa1137c43d39be4807a94c963acdd51625b58f23d55bd2b9cb488",
-    "/Users/twarn/Repositories/Stratolink/analysis/v1_1_release_20261012/manufacturing/generate.py": "041d61120f09f0ea2c8eb502c6d132d1dbabd5b5412283fb962566ab46ee4303"
+    "/Users/twarn/Repositories/Stratolink/analysis/v1_1_release_20261012/manufacturing/generate.py": "b52c9b93372a2c8eb8870117a9d4075b42b4d3b32f881ce903bc4bf71be3d08e",
+    "/Users/twarn/Repositories/Stratolink/analysis/v1_1_release_20261012/jlc/supplier-rotation-profile.json": "fadbcae4bb6bb6776a3fd9e3c1fd35073b85bbad71c441b43b1361ddf2aa00ea"
   },
   "output_files": {
-    "BOM-stratolink.csv": "a8316e5907e24c0a336a23464fdd46f2c4492f055caccef7d20f6f6b0d2bad38",
-    "CPL-stratolink.csv": "eb8ef43bb3b1a6ee0b1efc3f3c1280f519686b6ba1fda44e61ace8cc6c4d1069",
-    "README.md": "364d5c9f269ff136f518604b0a651f4e4397137a0071489b5ef28769d9ff7eda",
-    "assembly-audit.json": "eaf1387f19a24d3c871f815edc30030d300968b7ed14c697b20ea6138511774b",
-    "fabrication-review.zip": "a40250993aee05254827a5090b7b569212d70bfcd8844bfa68adf0870c42a086",
-    "gerbers/stratolink-B_Cu.gbl": "3e021b8eca02cd7123360121c26f160a6317308dedf845cd4b650e699b95711e",
-    "gerbers/stratolink-B_Mask.gbs": "e3feb6a305b43e68e0bd35b75ea20031b618f9c05a6259143f753fbd3d7b4587",
-    "gerbers/stratolink-B_Paste.gbp": "6176a4f0d5d8fbf5f98925edd514d76eb1a6903aa7971858c1d581fe92e9f49c",
-    "gerbers/stratolink-B_Silkscreen.gbo": "1e8d644f45bebe15b8a2560cac756572872f0075d15b8b72427a2eb430d21051",
-    "gerbers/stratolink-Edge_Cuts.gm1": "c32261fee854d76db26c5bbba38a11101034b252574288212618a77d8968123e",
-    "gerbers/stratolink-F_Cu.gtl": "73c4c2cdbbef67d48f25e2249039e9f454d73d60e7fa9f2806892a38e53a8435",
-    "gerbers/stratolink-F_Mask.gts": "6e2edf85dae0885039f8eec12337a87ceb20ec9bba8afa7ffacae3a56f77e298",
-    "gerbers/stratolink-F_Paste.gtp": "5f210a7840988cfb9ed165bf27c43b5905b6db44030dfba8c48ceeeededc62b3",
-    "gerbers/stratolink-F_Silkscreen.gto": "dce8f5015339083a638d439b7f82b5681e79e35509df9d950137064b899883b1",
-    "gerbers/stratolink-NPTH.drl": "a1b0ec32cadf18f3dffe4a51aba334b0425fe073f2a6f79f39e81e6cf3ac77d8",
-    "gerbers/stratolink-PTH.drl": "7e5068e6658b01d2c84e3f26ab1d546a06c05240afbf40c2580544f3a4443e55",
-    "gerbers/stratolink-job.gbrjob": "6e726ee03e48e278a36fc1151eddb2aa0298d0e472b353a9ef7b71cf64012176",
-    "historical-placement-proof.json": "c7eaf1d8b3f133eda28158c297c4259ad9eaf550ed52ae0fc9740b2e3240b7dc",
+    "BOM-stratolink.csv": "1ac1cad1786e2d40b2a6d10cb758c353929e9faeed5aa1db922c60bcbad958f1",
+    "CPL-stratolink.csv": "2b30ba3a50a094b84f2d44d6a20fd72512fbb8cef4a92adf45084ac3c8f31efa",
+    "README.md": "7ea4070fd4e2d2ca84c414074ee1241f400c3c86e7fcbf94e597dff7066fbf86",
+    "assembly-audit.json": "3801a9737985fea56fbd763635e117fa5fbf99aba96eb37449aeeb68be3abcda",
+    "fabrication-review.zip": "c4948f46d19586dbd8dbde3b251b6c7b25fc20bcaccae235887aa4c593a42730",
+    "gerbers/stratolink-B_Cu.gbl": "adc8b0088ca0a8a047d3a94c758947c669c7b53683d8b8d2cbf773cdefb65399",
+    "gerbers/stratolink-B_Mask.gbs": "6272ab78f70998f35acb40613b547b6a9c85b30f663b3970e5947f46c5f7f708",
+    "gerbers/stratolink-B_Paste.gbp": "e7901e5c74b4d86200a12087444f61dd3733c6539f59d976ab55a556a34ba106",
+    "gerbers/stratolink-B_Silkscreen.gbo": "0b7e82de8fbc2d86ccd76ebae192c0582032fd7ce0df3c99d3f10d2e43b35c60",
+    "gerbers/stratolink-Edge_Cuts.gm1": "d2aebcf85fa2b0c5951456517614e3a80237801719d6b795cf622171ed4444a4",
+    "gerbers/stratolink-F_Cu.gtl": "5e4373faf3a31465e46696dad806742563361205ddb70d8a780b58a3dea084d8",
+    "gerbers/stratolink-F_Mask.gts": "54444cf553afeea62ef4fbfa5582f587b52e0780d3d3696ba0e9ce2fce8bfd17",
+    "gerbers/stratolink-F_Paste.gtp": "22db238d4cbf6028922c8a3c8870b390c9b0cbc85e41d8c3aaca961ac4cd789f",
+    "gerbers/stratolink-F_Silkscreen.gto": "17804619a8df5cd3093fbf7251a2cbc3486e8c6181b9db55d63bc32c9e01e79c",
+    "gerbers/stratolink-NPTH.drl": "bcaf82e926fbbb223df36ec888a41a47a7d9c851f7228c7e75cdbdb1e3a20f3c",
+    "gerbers/stratolink-PTH.drl": "e4b2ab224537a1b858fb7870fb5f8da84a2179aaf7ee374c63cbcdfde4782ff1",
+    "gerbers/stratolink-job.gbrjob": "491c04c7c688304225a14d71b95760b68ec4eacc218046b2a0bd8d166960b9b0",
+    "historical-placement-proof.json": "7bf5ebdcf7a4e66e50c0c858fc73fd50835a258eacc692983fecfdc2e44b836c",
     "logs/drill.log": "845018d686dd7eb6ae5a74f012aab6a140455b7d33b055280e126cd545c39c3a",
     "logs/gerbers.log": "be5ee3aa787a0a21ae6d395b54468e319c187fd5f72a35425897b219901023e6",
     "logs/netlist.log": "5725e042332ee49c152fa36b8c2f658df9b14186c010b4cfabd1c3426edb7eb2",
     "logs/positions.log": "25ed03b1aa2874826b63027328234f1db721575081ac1172eacae794e845885f",
-    "native/drill-report.txt": "26f088590160182f7ea457cea797125fd2d29576813bffc2c63e6ad94082a1d1",
+    "native/drill-report.txt": "18f9a4f006501e97255b782915566ce2598e0658c42be0aabf34608765c9be3f",
     "native/historical-v1.kicad_pcb": "2924cfa59d48c1446488d715834e84ea634516e622ed59915fb72521e9595190",
-    "native/netlist.xml": "c9d57df124d5a7709e817e6d1f8e83a2d71da45edc2a13377dcf7144e90ae07d",
-    "native/positions.csv": "15c2659fb6c1009efcd37d067a288595c7d31356444cf151fa672d99b14a94b2",
+    "native/netlist.xml": "f01a6b92f9c6fd066fa09557dc07d38c7f88ffcf987e0e6e5973bc5ca9398445",
+    "native/positions.csv": "e56806e155176df6db6a1374c99f3bee693b6078794d2cfd28858d52f0bc1dc1",
     "no-mask-proof.json": "e1767e29127f05f1d003299f92d23016e8d22bc738d359a9f18320d93e4a6bcd",
-    "supplier-rotation-profile.json": "a8976ab0107919d4fd0d1aa63c263f70097ec8371fc1d183be1b6573d1912518"
-  },
-  "post_export_corrections": [
-    {
-      "operation": "post-export supplier rotation correction; no fabrication re-export",
-      "original_manifest_sha256": "cd65577425683e2d0eeb96c58cc860263a11c4b7b41b595440add98986defcb8",
-      "original_files_directory": "/Users/twarn/Repositories/Stratolink/analysis/v1_1_release_20261012/manufacturing/rotation-correction-before",
-      "report_path": "/Users/twarn/Repositories/Stratolink/analysis/v1_1_release_20261012/manufacturing/rotation-correction-before/correction-report.json",
-      "report_sha256": "eb394ed81c2f54e6052b048c66a1770583de37817def282ed187eec883d3e441",
-      "helper_path": "/Users/twarn/Repositories/Stratolink/analysis/v1_1_release_20261012/manufacturing/apply_supplier_rotations.py",
-      "helper_sha256": "0d9ba3ce44a32459281017d234c4f9c7d0ff5c38dd81ebad9db1322146680e0b",
-      "current_generator_path": "/Users/twarn/Repositories/Stratolink/analysis/v1_1_release_20261012/manufacturing/generate.py",
-      "current_generator_sha256": "b52c9b93372a2c8eb8870117a9d4075b42b4d3b32f881ce903bc4bf71be3d08e",
-      "profile_sha256": "a8976ab0107919d4fd0d1aa63c263f70097ec8371fc1d183be1b6573d1912518",
-      "probe_sha256": "eb8ef43bb3b1a6ee0b1efc3f3c1280f519686b6ba1fda44e61ace8cc6c4d1069",
-      "supplier_rotation_profile": {
-        "baseline_provenance": "Historical equality reproduces the repository v1 production INPUT CPL. It is not evidence of verified JLC post-CAM placement or supplier-model rotation.",
-        "profile_path": "/Users/twarn/Repositories/Stratolink/analysis/v1_1_release_20261012/jlc/supplier-rotation-profile.json",
-        "profile_sha256": "a8976ab0107919d4fd0d1aa63c263f70097ec8371fc1d183be1b6573d1912518",
-        "overrides": [
-          {
-            "ref": "U1",
-            "base_rotation_deg": 180.0,
-            "override_rotation_deg": 90.0,
-            "mpn": "BQ25570RGRR",
-            "lcsc": "C506250",
-            "side": "bottom",
-            "center_mm": [
-              67.190998,
-              37.814999
-            ],
-            "evidence": "analysis/v1_1_release_20261012/jlc/probe-u1-90-crop.png; analysis/v1_1_release_20261012/power/placement-u1-u3-u4-review.md",
-            "reason": "Reimported CPL90 gives lower-right pin1 in north-up bottom view, matching numbered pads and TI package drawing.",
-            "baseline_provenance": "Historical equality reproduces the repository v1 production INPUT CPL. It is not evidence of verified JLC post-CAM placement or supplier-model rotation."
-          },
-          {
-            "ref": "U4",
-            "base_rotation_deg": 0.0,
-            "override_rotation_deg": 270.0,
-            "mpn": "MS561101BA03-50",
-            "lcsc": "C15639",
-            "side": "top",
-            "center_mm": [
-              71.023,
-              58.808
-            ],
-            "evidence": "analysis/v1_1_release_20261012/jlc/probe-u4-270-crop.png; analysis/v1_1_release_20261012/power/placement-u1-u3-u4-review.md",
-            "reason": "Reimported CPL270 gives upper-left external pin1 indicator and vertical 3x5mm body in top view. The black circle is the pressure-port depiction, not pin1.",
-            "baseline_provenance": "Historical equality reproduces the repository v1 production INPUT CPL. It is not evidence of verified JLC post-CAM placement or supplier-model rotation."
-          },
-          {
-            "ref": "U7",
-            "base_rotation_deg": 90.0,
-            "override_rotation_deg": 0.0,
-            "mpn": "LIS2DH12TR",
-            "lcsc": "C110926",
-            "side": "top",
-            "center_mm": [
-              70.548,
-              37.807
-            ],
-            "evidence": "analysis/v1_1_release_20261012/jlc/probe-u7-0-crop.png; analysis/v1_1_release_20261012/identities/supplier-placement-review.md",
-            "reason": "Reimported CPL0 gives lower-left body index in top view, matching native numbered lands and manufacturer package mapping.",
-            "baseline_provenance": "Historical equality reproduces the repository v1 production INPUT CPL. It is not evidence of verified JLC post-CAM placement or supplier-model rotation."
-          },
-          {
-            "ref": "U8",
-            "base_rotation_deg": 180.0,
-            "override_rotation_deg": 90.0,
-            "mpn": "TLV8801DBVT",
-            "lcsc": "C544879",
-            "side": "bottom",
-            "center_mm": [
-              55.65,
-              36.1
-            ],
-            "evidence": "analysis/v1_1_release_20261012/jlc/probe-u8-90-crop.png; analysis/v1_1_release_20261012/identities/supplier-placement-review.md",
-            "reason": "Reimported CPL90 gives three leads right, two left, pin1 lower-right in bottom view, matching native SOT-23-5 lands.",
-            "baseline_provenance": "Historical equality reproduces the repository v1 production INPUT CPL. It is not evidence of verified JLC post-CAM placement or supplier-model rotation."
-          }
-        ],
-        "only_cpl_rotation_changes": true
-      }
-    }
-  ]
+    "supplier-rotation-profile.json": "fadbcae4bb6bb6776a3fd9e3c1fd35073b85bbad71c441b43b1361ddf2aa00ea"
+  }
 }

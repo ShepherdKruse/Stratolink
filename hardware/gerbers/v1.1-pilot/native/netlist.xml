@@ -2,7 +2,7 @@
 <export version="E">
   <design>
     <source>/Users/twarn/Repositories/Stratolink/hardware/pcb/stratolink.kicad_sch</source>
-    <date>2026-10-13T09:51:55</date>
+    <date>2026-10-13T11:06:31</date>
     <tool>Eeschema 10.0.0</tool>
     <sheet number="1" name="/" tstamps="/">
       <title_block>
@@ -1217,24 +1217,24 @@
     <comp ref="R4">
       <value>3.65MΩ</value>
       <footprint>lib:Stratolink_v1p1_R4_R_0402_1005Metric</footprint>
-      <datasheet>https://www.lcsc.com/product-detail/C2766827.html</datasheet>
-      <description>0402WGF3654TCE</description>
+      <datasheet>https://yageogroup.com/content/datasheet/asset/file/PYU-RC_GROUP_51_ROHS_L</datasheet>
+      <description>3.65 MΩ, ±1%, ±100 ppm/°C, 0402, 62.5 mW, 50 V thick-film resistor</description>
       <fields>
-        <field name="Manufacturer">UNI-ROYAL</field>
-        <field name="Manufacturer_Part_Number">0402WGF3654TCE</field>
+        <field name="Manufacturer">YAGEO</field>
+        <field name="Manufacturer_Part_Number">RC0402FR-073M65L</field>
         <field name="Supplier">LCSC</field>
-        <field name="LCSC">C2766827</field>
-        <field name="Supplier Part">C2766827</field>
+        <field name="LCSC">C477700</field>
+        <field name="Supplier Part">C477700</field>
         <field name="Footprint">lib:Stratolink_v1p1_R4_R_0402_1005Metric</field>
-        <field name="Datasheet">https://www.lcsc.com/product-detail/C2766827.html</field>
-        <field name="Description">0402WGF3654TCE</field>
+        <field name="Datasheet">https://yageogroup.com/content/datasheet/asset/file/PYU-RC_GROUP_51_ROHS_L</field>
+        <field name="Description">3.65 MΩ, ±1%, ±100 ppm/°C, 0402, 62.5 mW, 50 V thick-film resistor</field>
       </fields>
       <libsource lib="Stratolink_v1p1_Symbols" part="Device_R_US" description="Resistor, US symbol"/>
-      <property name="Manufacturer" value="UNI-ROYAL"/>
-      <property name="Manufacturer_Part_Number" value="0402WGF3654TCE"/>
+      <property name="Manufacturer" value="YAGEO"/>
+      <property name="Manufacturer_Part_Number" value="RC0402FR-073M65L"/>
       <property name="Supplier" value="LCSC"/>
-      <property name="LCSC" value="C2766827"/>
-      <property name="Supplier Part" value="C2766827"/>
+      <property name="LCSC" value="C477700"/>
+      <property name="Supplier Part" value="C477700"/>
       <property name="Sheetname" value=""/>
       <property name="Sheetfile" value="stratolink.kicad_sch"/>
       <property name="ki_keywords" value="R res resistor"/>
@@ -2015,9 +2015,10 @@
       </units>
     </comp>
     <comp ref="U2">
-      <value>RAK3172-9-SM-NI</value>
+      <value>RAK3172-8-SM-NI</value>
       <footprint>lib:Stratolink_v1p1_U2_RAK3172</footprint>
-      <description>RAK3172-9-SM-NI sub-GHz STM32WLE5CC radio module</description>
+      <datasheet>https://docs.rakwireless.com/product-categories/wisduo/rak3172-module/datasheet/</datasheet>
+      <description>RAK3172 STM32WLE5CC, 32-pad, high-band regional-label variant, no TCXO, no IPEX; antenna on RF pad 12</description>
       <fields>
         <field name="MF">Shenzhen RAKwireless Technology Co.,Ltd.</field>
         <field name="PACKAGE">Package</field>
@@ -2027,21 +2028,21 @@
         <field name="SnapEDA_Link">https://www.snapeda.com/parts/RAK3172/Shenzhen+RAKwireless+Technology+Co.%252CLtd./view-part/?ref=snap</field>
         <field name="Price">None</field>
         <field name="SNAPEDA_LINK">https://www.snapeda.com/parts/RAK3172/Shenzhen+RAKwireless+Technology+Co.%252CLtd./view-part/?ref=snap</field>
-        <field name="MP">RAK3172-9-SM-NI</field>
-        <field name="Description_1">RAK3172-9-SM-NI sub-GHz STM32WLE5CC radio module</field>
-        <field name="Availability">Not in stock</field>
-        <field name="AVAILABILITY">Not in stock</field>
+        <field name="MP">RAK3172-8-SM-NI</field>
+        <field name="Description_1">RAK3172 STM32WLE5CC, 32-pad, high-band regional-label variant, no TCXO, no IPEX; antenna on RF pad 12</field>
+        <field name="Availability"/>
+        <field name="AVAILABILITY"/>
         <field name="CHECK_PRICES">https://www.snapeda.com/parts/RAK3172/Shenzhen+RAKwireless+Technology+Co.%252CLtd./view-part/?ref=eda</field>
         <field name="Manufacturer">RAKwireless</field>
-        <field name="Manufacturer_Part_Number">RAK3172-9-SM-NI</field>
+        <field name="Manufacturer_Part_Number">RAK3172-8-SM-NI</field>
         <field name="Supplier">LCSC</field>
-        <field name="LCSC">C18548052</field>
-        <field name="Supplier Part">C18548052</field>
+        <field name="LCSC">C5452091</field>
+        <field name="Supplier Part">C5452091</field>
         <field name="Footprint">lib:Stratolink_v1p1_U2_RAK3172</field>
-        <field name="Datasheet"/>
-        <field name="Description">RAK3172-9-SM-NI sub-GHz STM32WLE5CC radio module</field>
+        <field name="Datasheet">https://docs.rakwireless.com/product-categories/wisduo/rak3172-module/datasheet/</field>
+        <field name="Description">RAK3172 STM32WLE5CC, 32-pad, high-band regional-label variant, no TCXO, no IPEX; antenna on RF pad 12</field>
       </fields>
-      <libsource lib="Stratolink_v1p1_Symbols" part="RAK3172_RAK3172" description="RAK3172-9-SM-NI sub-GHz STM32WLE5CC radio module"/>
+      <libsource lib="Stratolink_v1p1_Symbols" part="RAK3172_RAK3172" description="RAK3172 STM32WLE5CC, 32-pad, high-band regional-label variant, no TCXO, no IPEX; antenna on RF pad 12"/>
       <property name="MF" value="Shenzhen RAKwireless Technology Co.,Ltd."/>
       <property name="PACKAGE" value="Package"/>
       <property name="PRICE" value="None"/>
@@ -2050,16 +2051,16 @@
       <property name="SnapEDA_Link" value="https://www.snapeda.com/parts/RAK3172/Shenzhen+RAKwireless+Technology+Co.%252CLtd./view-part/?ref=snap"/>
       <property name="Price" value="None"/>
       <property name="SNAPEDA_LINK" value="https://www.snapeda.com/parts/RAK3172/Shenzhen+RAKwireless+Technology+Co.%252CLtd./view-part/?ref=snap"/>
-      <property name="MP" value="RAK3172-9-SM-NI"/>
-      <property name="Description_1" value="RAK3172-9-SM-NI sub-GHz STM32WLE5CC radio module"/>
-      <property name="Availability" value="Not in stock"/>
-      <property name="AVAILABILITY" value="Not in stock"/>
+      <property name="MP" value="RAK3172-8-SM-NI"/>
+      <property name="Description_1" value="RAK3172 STM32WLE5CC, 32-pad, high-band regional-label variant, no TCXO, no IPEX; antenna on RF pad 12"/>
+      <property name="Availability" value=""/>
+      <property name="AVAILABILITY" value=""/>
       <property name="CHECK_PRICES" value="https://www.snapeda.com/parts/RAK3172/Shenzhen+RAKwireless+Technology+Co.%252CLtd./view-part/?ref=eda"/>
       <property name="Manufacturer" value="RAKwireless"/>
-      <property name="Manufacturer_Part_Number" value="RAK3172-9-SM-NI"/>
+      <property name="Manufacturer_Part_Number" value="RAK3172-8-SM-NI"/>
       <property name="Supplier" value="LCSC"/>
-      <property name="LCSC" value="C18548052"/>
-      <property name="Supplier Part" value="C18548052"/>
+      <property name="LCSC" value="C5452091"/>
+      <property name="Supplier Part" value="C5452091"/>
       <property name="Sheetname" value=""/>
       <property name="Sheetfile" value="stratolink.kicad_sch"/>
       <sheetpath names="/" tstamps="/"/>
@@ -2654,13 +2655,14 @@
       </pins>
     </libpart>
     <libpart lib="Stratolink_v1p1_Symbols" part="RAK3172_RAK3172">
-      <description>RAK3172-9-SM-NI sub-GHz STM32WLE5CC radio module</description>
+      <description>RAK3172 STM32WLE5CC, 32-pad, high-band regional-label variant, no TCXO, no IPEX; antenna on RF pad 12</description>
+      <docs>https://docs.rakwireless.com/product-categories/wisduo/rak3172-module/datasheet/</docs>
       <fields>
         <field name="Reference">U</field>
         <field name="Value">RAK3172</field>
         <field name="Footprint">RAK3172:RAK3172</field>
-        <field name="Datasheet"/>
-        <field name="Description">RAK3172-9-SM-NI sub-GHz STM32WLE5CC radio module</field>
+        <field name="Datasheet">https://docs.rakwireless.com/product-categories/wisduo/rak3172-module/datasheet/</field>
+        <field name="Description">RAK3172 STM32WLE5CC, 32-pad, high-band regional-label variant, no TCXO, no IPEX; antenna on RF pad 12</field>
         <field name="MF">Shenzhen RAKwireless Technology Co.,Ltd.</field>
         <field name="PACKAGE">Package</field>
         <field name="PRICE">None</field>
@@ -2670,9 +2672,9 @@
         <field name="Price">None</field>
         <field name="SNAPEDA_LINK">https://www.snapeda.com/parts/RAK3172/Shenzhen+RAKwireless+Technology+Co.%252CLtd./view-part/?ref=snap</field>
         <field name="MP">RAK3172</field>
-        <field name="Description_1">RAK3172-9-SM-NI sub-GHz STM32WLE5CC radio module</field>
-        <field name="Availability">Not in stock</field>
-        <field name="AVAILABILITY">Not in stock</field>
+        <field name="Description_1">RAK3172 STM32WLE5CC, 32-pad, high-band regional-label variant, no TCXO, no IPEX; antenna on RF pad 12</field>
+        <field name="Availability"/>
+        <field name="AVAILABILITY"/>
         <field name="CHECK_PRICES">https://www.snapeda.com/parts/RAK3172/Shenzhen+RAKwireless+Technology+Co.%252CLtd./view-part/?ref=eda</field>
       </fields>
       <pins>

@@ -1,0 +1,340 @@
+{
+  "observed_date": "2026-10-13",
+  "scope": "Read-only current native geometry and exported release schematic nets. No replacement footprint placed or routed. Power is datasheet arithmetic, not measured board power.",
+  "source_hashes_sha256": {
+    "hardware/pcb/stratolink.kicad_pcb": "8e2f83797dd68195aa71b73fc252fe57e53ccd3683ef5f74739dc4d25d6ce8d5",
+    "hardware/gerbers/v1.1-pilot/native/netlist.xml": "f01a6b92f9c6fd066fa09557dc07d38c7f88ffcf987e0e6e5973bc5ca9398445",
+    "hardware/pcb/stratolink.kicad_sch": "5787cc81a517b45469ea6a801b1ce1232aa7ef681b7b7e208ac7de2e7b754335",
+    "firmware/src/sensor_ltr390.cpp": "ddc3b82398d0fc111947632dd053e561391ab3085ebd2bf2c4cb00df1bbfe024",
+    "firmware/src/main.cpp": "28be00778998f57ae67ad4b9f54dbb6ee93c3ce0c75d0f3bce79ee5fac7012f4",
+    "firmware/src/telemetry.cpp": "c8c2e0e6cb0e6b0288f1c9c6eb77af4e4ac4ccc2270523307e508600ebda1490",
+    "firmware/include/telemetry.h": "4befc1f6b972f815d274ad5df3cd5f463529d43b7b4dd8f66d2b6c8949c6c769",
+    "firmware/include/stratolink_pins.h": "0ef610402ffa401fcd502c6385fdc443bd9fc5c40eb50e1069ada46a82cd4820",
+    "analysis/redesign_20261010/sensors/sources/as7331.pdf": "60c13168a4012c1642277b8d8f9557e6f835c3b9efbfd7cc086be25c5a4c670a",
+    "analysis/v1_1_layout_20261012/gnss_uv/sources/VEML6075.pdf": "e7c77546dc574c0d759643dba948b01794776a68709525b7ca10c2013393738d",
+    "analysis/v1_1_layout_20261012/gnss_uv/sources/VEML6075-EOL.pdf": "d2128c7374b14488e4476463166a870bc9625f2b026905138c848b00eeb4aa97",
+    "analysis/v1_1_release_20261012/sourcing_followup/as7331-jlc-search.txt": "68b7ff9c1e14c48597e2fb187339657f0548750fe8e77c86af4dce180f010e24",
+    "analysis/v1_1_release_20261012/sourcing_followup/veml6075-jlc-search.txt": "ebd088222cf60d39533f15804eae07ded3978c0e0518acb0a80cf8ef6c01e545",
+    "analysis/v1_1_release_20261012/sourcing_followup/lcsc-as7331-search.txt": "ef501cab90d2910f29a57159c09187ace585d172197cc59081c26d56fffc7e1b",
+    "analysis/v1_1_release_20261012/sourcing_followup/lcsc-as7331-C17474749.txt": "ecbfd74ce5af4cc7f15641da050bb48a2d3dc4ba2300e51cb5fc43cd8238710b",
+    "analysis/v1_1_release_20261012/sourcing_followup/lcsc-si1133-C965911.txt": "86b364e3bb16fe2a1aef47ba6d6e9e36343840aae4201f7ff3091d7cfba7161f",
+    "analysis/v1_1_release_20261012/sourcing_followup/lcsc-si1133-C3678545.txt": "1b7fa76f9121c8a6dac1587524ebd73b6846ef25cac2285b182e7efdf3a5b671",
+    "analysis/v1_1_release_20261012/sourcing_followup/lcsc-genicom-page1.txt": "7d04c59085a9fdb3fc4fab3f76633d66b21c090b768cc4d85a59d9e0a0b77e08",
+    "analysis/v1_1_release_20261012/sourcing_followup/lcsc-genicom-page2.txt": "a0b5ead3216f6024500d443e0d8dfebe0450e06fb96cade687daffbe0f95d979",
+    "analysis/v1_1_release_20261012/sourcing_followup/lcsc-zopt2202-search.txt": "0805c1d1d0a0428eea8c79e49afc80e19b3f9c5ea8cae091c94a3e068597d8ff",
+    "analysis/v1_1_release_20261012/sourcing_followup/sparkfun-as7331-actual-ui.txt": "33170023ee0d8302253f0763a7aeca36d1b3e28c3801854c4c69911b9f16ffc7",
+    "analysis/v1_1_release_20261012/sourcing_followup/adafruit-as7331-actual-ui.txt": "8229917262e40f10265c3f935dce05d5491ea6242a536df7dbc5aab14041b5cf"
+  },
+  "lcsc_genicom_zero_stock_cells_per_page": [
+    25,
+    14
+  ],
+  "components": [
+    {
+      "reference": "U6",
+      "value": "LTR-390UV-01",
+      "footprint": "Stratolink_v1p1_U6_SMD6_LTR-390UV-01_LTO-L",
+      "position_mm": [
+        69.098,
+        40.606
+      ],
+      "side": "F.Cu",
+      "angle_degrees": 0.0,
+      "pads": [
+        {
+          "pin": "1",
+          "net": "+3.3V",
+          "position_mm": [
+            68.209,
+            39.956001
+          ],
+          "size_mm": [
+            0.635,
+            0.254
+          ]
+        },
+        {
+          "pin": "2",
+          "net": "unconnected-(U6-NC-Pad2)",
+          "position_mm": [
+            68.209,
+            40.606
+          ],
+          "size_mm": [
+            0.635,
+            0.254
+          ]
+        },
+        {
+          "pin": "3",
+          "net": "GND",
+          "position_mm": [
+            68.209,
+            41.255999
+          ],
+          "size_mm": [
+            0.635,
+            0.254
+          ]
+        },
+        {
+          "pin": "4",
+          "net": "SCL",
+          "position_mm": [
+            69.987,
+            41.255999
+          ],
+          "size_mm": [
+            0.635,
+            0.254
+          ]
+        },
+        {
+          "pin": "5",
+          "net": "GND",
+          "position_mm": [
+            69.987,
+            40.606
+          ],
+          "size_mm": [
+            0.635,
+            0.254
+          ]
+        },
+        {
+          "pin": "6",
+          "net": "SDA",
+          "position_mm": [
+            69.987,
+            39.956001
+          ],
+          "size_mm": [
+            0.635,
+            0.254
+          ]
+        }
+      ]
+    },
+    {
+      "reference": "U7",
+      "value": "LIS2DH12TR",
+      "footprint": "Stratolink_v1p1_U7_PQFN50P200X200100-12N",
+      "position_mm": [
+        70.548,
+        37.807
+      ],
+      "side": "F.Cu",
+      "angle_degrees": 90.0,
+      "pads": [
+        {
+          "pin": "1",
+          "net": "SCL",
+          "position_mm": [
+            69.798,
+            38.571999
+          ],
+          "size_mm": [
+            0.45,
+            0.35
+          ]
+        },
+        {
+          "pin": "2",
+          "net": "+3.3V",
+          "position_mm": [
+            70.298,
+            38.572
+          ],
+          "size_mm": [
+            0.45,
+            0.35
+          ]
+        },
+        {
+          "pin": "3",
+          "net": "GND",
+          "position_mm": [
+            70.798,
+            38.572
+          ],
+          "size_mm": [
+            0.45,
+            0.35
+          ]
+        },
+        {
+          "pin": "4",
+          "net": "SDA",
+          "position_mm": [
+            71.297999,
+            38.572
+          ],
+          "size_mm": [
+            0.45,
+            0.35
+          ]
+        },
+        {
+          "pin": "5",
+          "net": "GND",
+          "position_mm": [
+            71.313,
+            38.072
+          ],
+          "size_mm": [
+            0.35,
+            0.45
+          ]
+        },
+        {
+          "pin": "6",
+          "net": "GND",
+          "position_mm": [
+            71.313,
+            37.557
+          ],
+          "size_mm": [
+            0.35,
+            0.45
+          ]
+        },
+        {
+          "pin": "7",
+          "net": "GND",
+          "position_mm": [
+            71.298,
+            37.042001
+          ],
+          "size_mm": [
+            0.45,
+            0.35
+          ]
+        },
+        {
+          "pin": "8",
+          "net": "GND",
+          "position_mm": [
+            70.798,
+            37.042
+          ],
+          "size_mm": [
+            0.45,
+            0.35
+          ]
+        },
+        {
+          "pin": "9",
+          "net": "+3.3V",
+          "position_mm": [
+            70.298,
+            37.042
+          ],
+          "size_mm": [
+            0.45,
+            0.35
+          ]
+        },
+        {
+          "pin": "10",
+          "net": "+3.3V",
+          "position_mm": [
+            69.798001,
+            37.042
+          ],
+          "size_mm": [
+            0.45,
+            0.35
+          ]
+        },
+        {
+          "pin": "11",
+          "net": "unconnected-(U7-INT2-Pad11)",
+          "position_mm": [
+            69.783,
+            37.557
+          ],
+          "size_mm": [
+            0.35,
+            0.45
+          ]
+        },
+        {
+          "pin": "12",
+          "net": "PA8",
+          "position_mm": [
+            69.783,
+            38.057
+          ],
+          "size_mm": [
+            0.35,
+            0.45
+          ]
+        }
+      ]
+    },
+    {
+      "reference": "C6",
+      "value": "22\u00b5F",
+      "footprint": "Stratolink_v1p1_C6_C_0805_2012Metric",
+      "position_mm": [
+        70.956,
+        38.591
+      ],
+      "side": "B.Cu",
+      "angle_degrees": -90.0,
+      "pads": [
+        {
+          "pin": "1",
+          "net": "GND",
+          "position_mm": [
+            70.956,
+            37.641002
+          ],
+          "size_mm": [
+            1.0,
+            1.45
+          ]
+        },
+        {
+          "pin": "2",
+          "net": "+3.3V",
+          "position_mm": [
+            70.956,
+            39.540998
+          ],
+          "size_mm": [
+            1.0,
+            1.45
+          ]
+        }
+      ]
+    }
+  ],
+  "u6_schematic_export_pins": {
+    "1": "+3.3V",
+    "3": "GND",
+    "5": "GND",
+    "4": "SCL",
+    "6": "SDA",
+    "2": "unconnected-(U6-NC-Pad2)"
+  },
+  "u6_schematic_footprint": "lib:Stratolink_v1p1_U6_SMD6_LTR-390UV-01_LTO-L",
+  "as7331_proposed_address": "0x74 (A0=A1=GND); MS5611 occupies 0x76",
+  "as7331_module_only_at3p3V": {
+    "typical_active_mW": 4.686,
+    "maximum_active_mW_at_table_conditions": 6.6,
+    "one_second_maximum_measurement_mJ": 6.6,
+    "one_second_per_minute_measurement_average_uW": 110.0,
+    "maximum_standby_mW_at_table_conditions": 3.2009999999999996,
+    "maximum_powerdown_uW_at_table_conditions": 3.3,
+    "five_minute_typical_active_J": 1.4058
+  },
+  "genicom_uvb_illustrative_analog_screen": {
+    "source_typical_current_nA_per_sunlight_UVI": 1.4,
+    "assumed_feedback_Mohm_not_a_design_selection": 10,
+    "assumed_12bit_3p3V_ADC_lsb_mV": 0.8056640625,
+    "signal_mV_at_1UVI_example": 14.0,
+    "ADC_counts_at_1UVI_example": 17.3769696969697,
+    "caution": "Only illustrates small-signal analog demands. Typical source UVI correlation is not a universal solar calibration or ozone model. TIA stability, leakage, noise, offset and cold operation unqualified."
+  }
+}

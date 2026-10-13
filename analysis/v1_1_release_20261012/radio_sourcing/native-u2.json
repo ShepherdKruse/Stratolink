@@ -1,0 +1,591 @@
+{
+  "date_utc": "2026-10-13T17:49:26.673998+00:00",
+  "pcb_sha256": "490af47db22ef076938c17319782f194623d8f8b6a3f864a2e0cc23b3d025b15",
+  "footprint": "Stratolink_v1p1_U2_RAK3172",
+  "value": "RAK3172-9-SM-NI",
+  "position_mm": [
+    72.715,
+    64.66
+  ],
+  "angle_degrees": 180.0,
+  "layer": "F.Cu",
+  "pads": [
+    {
+      "number": "1",
+      "position_mm": [
+        59.215,
+        79.605
+      ],
+      "local_position_mm": [
+        13.5,
+        -14.945
+      ],
+      "size_mm": [
+        0.7,
+        1.8
+      ],
+      "net": "unconnected-(U2-UART2_RX{slash}PA3-Pad1)",
+      "uuid": "5db1d9d4-3f86-47bd-95f1-087a54df2128"
+    },
+    {
+      "number": "2",
+      "position_mm": [
+        60.215001,
+        79.605001
+      ],
+      "local_position_mm": [
+        12.499999,
+        -14.945001
+      ],
+      "size_mm": [
+        0.7,
+        1.8
+      ],
+      "net": "unconnected-(U2-UART2_TX{slash}PA2-Pad2)",
+      "uuid": "3285bc63-4a67-4833-8922-36623bd05508"
+    },
+    {
+      "number": "3",
+      "position_mm": [
+        61.215,
+        79.605
+      ],
+      "local_position_mm": [
+        11.5,
+        -14.945
+      ],
+      "size_mm": [
+        0.7,
+        1.8
+      ],
+      "net": "PA15",
+      "uuid": "cb17c86a-d296-4123-bcd7-329fdf446e85"
+    },
+    {
+      "number": "4",
+      "position_mm": [
+        62.215,
+        79.605
+      ],
+      "local_position_mm": [
+        10.5,
+        -14.945
+      ],
+      "size_mm": [
+        0.7,
+        1.8
+      ],
+      "net": "TX",
+      "uuid": "4dc2f9c5-3742-419b-a041-675366a7779b"
+    },
+    {
+      "number": "5",
+      "position_mm": [
+        63.215,
+        79.605
+      ],
+      "local_position_mm": [
+        9.5,
+        -14.945
+      ],
+      "size_mm": [
+        0.7,
+        1.8
+      ],
+      "net": "RX",
+      "uuid": "51fc3f4a-61c6-49bc-a46e-c642b690de64"
+    },
+    {
+      "number": "6",
+      "position_mm": [
+        64.215,
+        79.605
+      ],
+      "local_position_mm": [
+        8.5,
+        -14.945
+      ],
+      "size_mm": [
+        0.7,
+        1.8
+      ],
+      "net": "PA1",
+      "uuid": "ecc3f687-4bcd-4c86-baf3-e2653ece1dcc"
+    },
+    {
+      "number": "7",
+      "position_mm": [
+        65.214999,
+        79.604999
+      ],
+      "local_position_mm": [
+        7.500001,
+        -14.944999
+      ],
+      "size_mm": [
+        0.7,
+        1.8
+      ],
+      "net": "SWDIO",
+      "uuid": "61fbd83f-683a-445d-a878-73e71d2bec85"
+    },
+    {
+      "number": "8",
+      "position_mm": [
+        66.214999,
+        79.605001
+      ],
+      "local_position_mm": [
+        6.500001,
+        -14.945001
+      ],
+      "size_mm": [
+        0.7,
+        1.8
+      ],
+      "net": "SWCLK",
+      "uuid": "9a2e31df-4e43-43ee-92d4-2d246dbe83b8"
+    },
+    {
+      "number": "9",
+      "position_mm": [
+        67.215,
+        79.604999
+      ],
+      "local_position_mm": [
+        5.5,
+        -14.944999
+      ],
+      "size_mm": [
+        0.7,
+        1.8
+      ],
+      "net": "SCL",
+      "uuid": "6fc29875-1357-43d9-a534-2a4a5042c1bb"
+    },
+    {
+      "number": "10",
+      "position_mm": [
+        68.215,
+        79.605
+      ],
+      "local_position_mm": [
+        4.5,
+        -14.945
+      ],
+      "size_mm": [
+        0.7,
+        1.8
+      ],
+      "net": "SDA",
+      "uuid": "8d1b2ee4-899c-422c-b485-ab40b980e038"
+    },
+    {
+      "number": "11",
+      "position_mm": [
+        69.215002,
+        79.605001
+      ],
+      "local_position_mm": [
+        3.499998,
+        -14.945001
+      ],
+      "size_mm": [
+        0.7,
+        1.8
+      ],
+      "net": "GND",
+      "uuid": "13e458aa-bc78-49fa-9eba-95dfeeb07c95"
+    },
+    {
+      "number": "12",
+      "position_mm": [
+        70.215,
+        79.605
+      ],
+      "local_position_mm": [
+        2.5,
+        -14.945
+      ],
+      "size_mm": [
+        0.7,
+        1.8
+      ],
+      "net": "Net-(AE1-A)",
+      "uuid": "71eae4e1-2978-4e0a-bf77-c90bdf2755c0"
+    },
+    {
+      "number": "13",
+      "position_mm": [
+        72.350001,
+        71.649999
+      ],
+      "local_position_mm": [
+        0.364999,
+        -6.989999
+      ],
+      "size_mm": [
+        1.8,
+        0.7
+      ],
+      "net": "unconnected-(U2-MOSI{slash}PA7-Pad13)",
+      "uuid": "6d448f4c-7399-4c33-b8ae-7f0d13cfa259"
+    },
+    {
+      "number": "14",
+      "position_mm": [
+        72.35,
+        70.65
+      ],
+      "local_position_mm": [
+        0.365,
+        -5.99
+      ],
+      "size_mm": [
+        1.8,
+        0.7
+      ],
+      "net": "unconnected-(U2-MISO{slash}PA6-Pad14)",
+      "uuid": "7964a6f3-1775-4f1a-9903-9fd91cfae5df"
+    },
+    {
+      "number": "15",
+      "position_mm": [
+        72.349998,
+        69.65
+      ],
+      "local_position_mm": [
+        0.365002,
+        -4.99
+      ],
+      "size_mm": [
+        1.8,
+        0.7
+      ],
+      "net": "unconnected-(U2-SCK{slash}PA5-Pad15)",
+      "uuid": "e057c65f-f96c-447a-b362-d1f8e4bf54a8"
+    },
+    {
+      "number": "16",
+      "position_mm": [
+        72.35,
+        68.65
+      ],
+      "local_position_mm": [
+        0.365,
+        -3.99
+      ],
+      "size_mm": [
+        1.8,
+        0.7
+      ],
+      "net": "unconnected-(U2-SS{slash}PA4-Pad16)",
+      "uuid": "bb6e8e52-95e7-46df-83f7-265c4c74cdf5"
+    },
+    {
+      "number": "17",
+      "position_mm": [
+        70.215,
+        64.804999
+      ],
+      "local_position_mm": [
+        2.5,
+        -0.144999
+      ],
+      "size_mm": [
+        0.7,
+        1.8
+      ],
+      "net": "GND",
+      "uuid": "b1f33f4d-c83f-4064-b1a4-440a5efa3f0c"
+    },
+    {
+      "number": "18",
+      "position_mm": [
+        69.215,
+        64.805001
+      ],
+      "local_position_mm": [
+        3.5,
+        -0.145001
+      ],
+      "size_mm": [
+        0.7,
+        1.8
+      ],
+      "net": "GND",
+      "uuid": "bd53e3f5-b5fe-4adb-b734-d553c41fce0c"
+    },
+    {
+      "number": "19",
+      "position_mm": [
+        68.215,
+        64.805
+      ],
+      "local_position_mm": [
+        4.5,
+        -0.145
+      ],
+      "size_mm": [
+        0.7,
+        1.8
+      ],
+      "net": "PA8",
+      "uuid": "a6004df0-70e7-43e7-8bd1-a5260d89ac74"
+    },
+    {
+      "number": "20",
+      "position_mm": [
+        63.215,
+        64.805
+      ],
+      "local_position_mm": [
+        9.5,
+        -0.145
+      ],
+      "size_mm": [
+        0.7,
+        1.8
+      ],
+      "net": "PA9",
+      "uuid": "7dfd8fb6-8f89-4795-851c-d0794dad6906"
+    },
+    {
+      "number": "21",
+      "position_mm": [
+        62.214999,
+        64.805
+      ],
+      "local_position_mm": [
+        10.500001,
+        -0.145
+      ],
+      "size_mm": [
+        0.7,
+        1.8
+      ],
+      "net": "BOOT0",
+      "uuid": "ea60aba1-1cce-4301-b0b8-129a95a19759"
+    },
+    {
+      "number": "22",
+      "position_mm": [
+        61.215,
+        64.805
+      ],
+      "local_position_mm": [
+        11.5,
+        -0.145
+      ],
+      "size_mm": [
+        0.7,
+        1.8
+      ],
+      "net": "RST",
+      "uuid": "a80b9ec6-902f-441e-b369-13658560184c"
+    },
+    {
+      "number": "23",
+      "position_mm": [
+        60.215,
+        64.805
+      ],
+      "local_position_mm": [
+        12.5,
+        -0.145
+      ],
+      "size_mm": [
+        0.7,
+        1.8
+      ],
+      "net": "GND",
+      "uuid": "0e60dd9c-fcd9-435c-9da8-d5ecaf59ec10"
+    },
+    {
+      "number": "24",
+      "position_mm": [
+        59.215,
+        64.805
+      ],
+      "local_position_mm": [
+        13.5,
+        -0.145
+      ],
+      "size_mm": [
+        0.7,
+        1.8
+      ],
+      "net": "+3.3V",
+      "uuid": "94a3859f-ae16-4ff0-b7b9-d830670aa6eb"
+    },
+    {
+      "number": "25",
+      "position_mm": [
+        57.549999,
+        68.650001
+      ],
+      "local_position_mm": [
+        15.165001,
+        -3.990001
+      ],
+      "size_mm": [
+        1.8,
+        0.7
+      ],
+      "net": "PA10",
+      "uuid": "8763f83a-bd86-49a2-a881-6af1cc1bb4db"
+    },
+    {
+      "number": "26",
+      "position_mm": [
+        57.55,
+        69.649999
+      ],
+      "local_position_mm": [
+        15.165,
+        -4.989999
+      ],
+      "size_mm": [
+        1.8,
+        0.7
+      ],
+      "net": "PB2",
+      "uuid": "df39ddf5-1f14-4c95-8ec1-a0f5a704e259"
+    },
+    {
+      "number": "27",
+      "position_mm": [
+        57.549999,
+        70.650001
+      ],
+      "local_position_mm": [
+        15.165001,
+        -5.990001
+      ],
+      "size_mm": [
+        1.8,
+        0.7
+      ],
+      "net": "unconnected-(U2-PB12-Pad27)",
+      "uuid": "a5aa1a4a-bd4a-4d8c-8244-812fea61fed0"
+    },
+    {
+      "number": "28",
+      "position_mm": [
+        57.549999,
+        71.650001
+      ],
+      "local_position_mm": [
+        15.165001,
+        -6.990001
+      ],
+      "size_mm": [
+        1.8,
+        0.7
+      ],
+      "net": "GND",
+      "uuid": "728aca71-9654-48d3-98d7-3ef58aff0ee4"
+    },
+    {
+      "number": "29",
+      "position_mm": [
+        57.55,
+        72.650002
+      ],
+      "local_position_mm": [
+        15.165,
+        -7.990002
+      ],
+      "size_mm": [
+        1.8,
+        0.7
+      ],
+      "net": "RSTN",
+      "uuid": "87dcf9eb-67e0-447e-844a-a4a764517b19"
+    },
+    {
+      "number": "30",
+      "position_mm": [
+        57.55,
+        73.65
+      ],
+      "local_position_mm": [
+        15.165,
+        -8.99
+      ],
+      "size_mm": [
+        1.8,
+        0.7
+      ],
+      "net": "PB5",
+      "uuid": "176d7e39-5762-413f-8729-8fdd8deb66c5"
+    },
+    {
+      "number": "31",
+      "position_mm": [
+        57.55,
+        74.65
+      ],
+      "local_position_mm": [
+        15.165,
+        -9.99
+      ],
+      "size_mm": [
+        1.8,
+        0.7
+      ],
+      "net": "unconnected-(U2-PB4{slash}ADC2-Pad31)",
+      "uuid": "3896263e-bea4-455d-8706-423dae2a2da1"
+    },
+    {
+      "number": "32",
+      "position_mm": [
+        57.550001,
+        75.649999
+      ],
+      "local_position_mm": [
+        15.164999,
+        -10.989999
+      ],
+      "size_mm": [
+        1.8,
+        0.7
+      ],
+      "net": "unconnected-(U2-PB3{slash}ADC1-Pad32)",
+      "uuid": "3229d9ef-058c-4af8-aab0-b63eb96bbe9d"
+    }
+  ],
+  "rf_pad12_net": "Net-(AE1-A)",
+  "rf_connected_pads": [
+    "AE1.1",
+    "D1.2",
+    "U2.12"
+  ],
+  "rf_track_count": 6,
+  "r4_pads": [
+    {
+      "number": "1",
+      "position_mm": [
+        67.023,
+        34.723002
+      ],
+      "size_mm": [
+        0.54,
+        0.64
+      ],
+      "net": "Net-(U1-VRDIV)"
+    },
+    {
+      "number": "2",
+      "position_mm": [
+        67.023,
+        33.703
+      ],
+      "size_mm": [
+        0.54,
+        0.64
+      ],
+      "net": "Net-(U1-OK_HYST)"
+    }
+  ]
+}

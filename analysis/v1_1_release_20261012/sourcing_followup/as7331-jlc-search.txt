@@ -1,0 +1,323 @@
+
+  - text: Search Parts
+  - button "Close":
+    - generic: 
+  - table:
+    - rowgroup:
+      - row "Top Designator Bottom Designator Comment Footprint Matched Part Detail Qty Source Lib Type Total Cost":
+        - columnheader "Top Designator":
+          - generic: Top Designator
+        - columnheader "Bottom Designator":
+          - generic: Bottom Designator
+        - columnheader "Comment":
+          - generic: Comment
+        - columnheader "Footprint":
+          - generic: Footprint
+        - columnheader "Matched Part Detail":
+          - generic: Matched Part Detail
+        - columnheader "Qty":
+          - generic: Qty
+        - columnheader "Source":
+          - generic: Source
+        - columnheader "Lib Type":
+          - generic: Lib Type
+        - columnheader "Total Cost":
+          - generic: Total Cost
+  - table:
+    - rowgroup:
+      - row "U6 LTR-390UV-01 Stratolink_v1p1_U6_SMD6_LTR-390UV-01_LTO-L LTR-390UV-01 C492374 -40℃~+85℃ 1.7V~3.6V 157klx 18bit I2C Light Intensity Low power/sleep mode、Spectral correction/filtering、High dynamic range measurement、Adjustable gain control、Interrupt/event trigger、Built-in temperature compensation SMD-6P,2x2mm Ambient Light Sensors ROHS 3 Extended $10.1091":
+        - cell "U6":
+          - generic "U6"
+        - cell
+        - cell "LTR-390UV-01":
+          - generic "LTR-390UV-01"
+        - cell "Stratolink_v1p1_U6_SMD6_LTR-390UV-01_LTO-L":
+          - generic "Stratolink_v1p1_U6_SMD6_LTR-390UV-01_LTO-L"
+        - cell "LTR-390UV-01 C492374 -40℃~+85℃ 1.7V~3.6V 157klx 18bit I2C Light Intensity Low power/sleep mode、Spectral correction/filtering、High dynamic range measurement、Adjustable gain control、Interrupt/event trigger、Built-in temperature compensation SMD-6P,2x2mm Ambient Light Sensors ROHS":
+          - generic: LTR-390UV-01 C492374
+          - generic: "-40℃~+85℃ 1.7V~3.6V 157klx 18bit I2C Light Intensity Low power/sleep mode、Spectral correction/filtering、High dynamic range measurement、Adjustable gain control、Interrupt/event trigger、Built-in temperature compensation SMD-6P,2x2mm Ambient Light Sensors ROHS"
+        - cell "3":
+          - generic: "3"
+        - cell
+        - cell "Extended":
+          - generic: Extended
+        - cell "$10.1091":
+          - generic: $10.1091
+  - tablist:
+    - tab "Public inventory" [selected]
+    - tab "My Inventory"
+    - tab "My Lists"
+  - tabpanel "Public inventory":
+    - textbox "Search within results" [active]: AS7331
+    - generic: 
+    - button "":
+      - generic: 
+    - generic: Show Filters
+    - text:   
+    - table:
+      - rowgroup:
+        - 'row "MFR Part # Description JLCPCB Stock Idle Parts Stock My Inventory Price"':
+          - columnheader
+          - 'columnheader "MFR Part #"':
+            - generic: "MFR Part #"
+          - columnheader
+          - columnheader "Description":
+            - generic: Description
+          - columnheader
+          - columnheader "JLCPCB Stock":
+            - generic: JLCPCB Stock
+          - columnheader
+          - columnheader "Idle Parts Stock":
+            - text: Idle Parts Stock
+          - columnheader
+          - columnheader "My Inventory":
+            - text: My Inventory
+          - columnheader
+          - columnheader "Price":
+            - generic: Price
+          - columnheader
+          - columnheader
+          - columnheader
+    - table:
+      - rowgroup:
+        - 'row "no-image AS7331-AQFT C5793699 Extended OLGA16 New Arrivals ROHS 0 0 JLCPCB: 0 Other: 0 1+ $4.8930 100+ $4.7299 Inventory shortage"':
+          - cell:
+            - generic: 
+          - cell "no-image AS7331-AQFT C5793699 Extended":
+            - img "no-image"
+            - link "AS7331-AQFT":
+              - /url: https://jlcpcb.com/partdetail/OSRAM_OptoSemicon-AS7331AQFT/C5793699
+            - generic: C5793699
+            - generic: Extended
+          - cell
+          - cell "OLGA16 New Arrivals ROHS":
+            - generic: OLGA16 New Arrivals ROHS
+          - cell
+          - cell "0":
+            - generic: "0"
+          - cell
+          - cell "0":
+            - generic: "0"
+          - cell
+          - 'cell "JLCPCB: 0 Other: 0"':
+            - generic: "JLCPCB:"
+            - text: "0"
+            - generic: "Other:"
+            - text: "0"
+          - cell
+          - cell "1+ $4.8930 100+ $4.7299":
+            - generic: 1+
+            - generic: $4.8930
+            - generic: 100+
+            - generic: $4.7299
+          - cell
+          - cell "Inventory shortage":
+            - generic: Inventory shortage
+        - 'row "no-image AS7331-AQFM C7529330 Extended OLGA16 New Arrivals ROHS 0 0 JLCPCB: 0 Other: 0 1+ $0.0397 100+ $0.0204 Inventory shortage"':
+          - cell:
+            - generic: 
+          - cell "no-image AS7331-AQFM C7529330 Extended":
+            - img "no-image"
+            - link "AS7331-AQFM":
+              - /url: https://jlcpcb.com/partdetail/OSRAM_OptoSemicon-AS7331AQFM/C7529330
+            - generic: C7529330
+            - generic: Extended
+          - cell
+          - cell "OLGA16 New Arrivals ROHS":
+            - generic: OLGA16 New Arrivals ROHS
+          - cell
+          - cell "0":
+            - generic: "0"
+          - cell
+          - cell "0":
+            - generic: "0"
+          - cell
+          - 'cell "JLCPCB: 0 Other: 0"':
+            - generic: "JLCPCB:"
+            - text: "0"
+            - generic: "Other:"
+            - text: "0"
+          - cell
+          - cell "1+ $0.0397 100+ $0.0204":
+            - generic: 1+
+            - generic: $0.0397
+            - generic: 100+
+            - generic: $0.0204
+          - cell
+          - cell "Inventory shortage":
+            - generic: Inventory shortage
+        - 'row "no-image AS7331-AQFM C22457702 Extended Temperature compensation、Low-power mode、Integrated ADC OLGA-16(2.6x3.7) Specialized Sensors ROHS 0 0 JLCPCB: 0 Other: 0 104+ $10.7140 30+ $11.6094 Show More Inventory shortage"':
+          - cell:
+            - generic: 
+          - cell "no-image AS7331-AQFM C22457702 Extended":
+            - img "no-image"
+            - link "AS7331-AQFM":
+              - /url: https://jlcpcb.com/partdetail/AMS-AS7331AQFM/C22457702
+            - generic: C22457702
+            - generic: Extended
+          - cell
+          - cell "Temperature compensation、Low-power mode、Integrated ADC OLGA-16(2.6x3.7) Specialized Sensors ROHS":
+            - generic: Temperature compensation、Low-power mode、Integrated ADC OLGA-16(2.6x3.7) Specialized Sensors ROHS
+          - cell
+          - cell "0":
+            - generic: "0"
+          - cell
+          - cell "0":
+            - generic: "0"
+          - cell
+          - 'cell "JLCPCB: 0 Other: 0"':
+            - generic: "JLCPCB:"
+            - text: "0"
+            - generic: "Other:"
+            - text: "0"
+          - cell
+          - cell "104+ $10.7140 30+ $11.6094 Show More":
+            - generic: 104+
+            - generic: $10.7140
+            - generic: 30+
+            - generic: $11.6094
+            - generic: Show More
+          - cell
+          - cell "Inventory shortage":
+            - generic: Inventory shortage
+        - 'row "no-image AS7331_M OLGA16 LF T&RDP C19189439 Extended LGA-16_3.65X2.6mm New Arrivals ROHS 0 0 JLCPCB: 0 Other: 0 1+ $0.0397 100+ $0.0204 Inventory shortage"':
+          - cell:
+            - generic: 
+          - cell "no-image AS7331_M OLGA16 LF T&RDP C19189439 Extended":
+            - img "no-image"
+            - link "AS7331_M OLGA16 LF T&RDP":
+              - /url: https://jlcpcb.com/partdetail/AMS-AS7331_M_OLGA16_LF_TRDP/C19189439
+            - generic: C19189439
+            - generic: Extended
+          - cell
+          - cell "LGA-16_3.65X2.6mm New Arrivals ROHS":
+            - generic: LGA-16_3.65X2.6mm New Arrivals ROHS
+          - cell
+          - cell "0":
+            - generic: "0"
+          - cell
+          - cell "0":
+            - generic: "0"
+          - cell
+          - 'cell "JLCPCB: 0 Other: 0"':
+            - generic: "JLCPCB:"
+            - text: "0"
+            - generic: "Other:"
+            - text: "0"
+          - cell
+          - cell "1+ $0.0397 100+ $0.0204":
+            - generic: 1+
+            - generic: $0.0397
+            - generic: 100+
+            - generic: $0.0204
+          - cell
+          - cell "Inventory shortage":
+            - generic: Inventory shortage
+        - 'row "no-image AS7331_T OLGA16 LF T&RDP C20598550 Extended LGA-16_3.65X2.6mm New Arrivals ROHS 0 0 JLCPCB: 0 Other: 0 1+ $0.0397 100+ $0.0204 Inventory shortage"':
+          - cell:
+            - generic: 
+          - cell "no-image AS7331_T OLGA16 LF T&RDP C20598550 Extended":
+            - img "no-image"
+            - link "AS7331_T OLGA16 LF T&RDP":
+              - /url: https://jlcpcb.com/partdetail/21937947-AS7331_T_OLGA16_LF_TRDP/C20598550
+            - generic: C20598550
+            - generic: Extended
+          - cell
+          - cell "LGA-16_3.65X2.6mm New Arrivals ROHS":
+            - generic: LGA-16_3.65X2.6mm New Arrivals ROHS
+          - cell
+          - cell "0":
+            - generic: "0"
+          - cell
+          - cell "0":
+            - generic: "0"
+          - cell
+          - 'cell "JLCPCB: 0 Other: 0"':
+            - generic: "JLCPCB:"
+            - text: "0"
+            - generic: "Other:"
+            - text: "0"
+          - cell
+          - cell "1+ $0.0397 100+ $0.0204":
+            - generic: 1+
+            - generic: $0.0397
+            - generic: 100+
+            - generic: $0.0204
+          - cell
+          - cell "Inventory shortage":
+            - generic: Inventory shortage
+        - 'row "no-image AS7331-AQFM OLGA16 LF T&R C20482877 Extended -40℃~+105℃ 2.7V~3.6V 24bit Color Recognition I2C OLGA-16(3.65x2.6) Ambient Light Sensors ROHS 0 0 JLCPCB: 0 Other: 0 10+ $13.0838 100+ $10.8983 Show More Inventory shortage"':
+          - cell:
+            - generic: 
+          - cell "no-image AS7331-AQFM OLGA16 LF T&R C20482877 Extended":
+            - img "no-image"
+            - link "AS7331-AQFM OLGA16 LF T&R":
+              - /url: https://jlcpcb.com/partdetail/AMS-AS7331_AQFM_OLGA16_LF_TR/C20482877
+            - generic: C20482877
+            - generic: Extended
+          - cell
+          - cell "-40℃~+105℃ 2.7V~3.6V 24bit Color Recognition I2C OLGA-16(3.65x2.6) Ambient Light Sensors ROHS":
+            - generic: "-40℃~+105℃ 2.7V~3.6V 24bit Color Recognition I2C OLGA-16(3.65x2.6) Ambient Light Sensors ROHS"
+          - cell
+          - cell "0":
+            - generic: "0"
+          - cell
+          - cell "0":
+            - generic: "0"
+          - cell
+          - 'cell "JLCPCB: 0 Other: 0"':
+            - generic: "JLCPCB:"
+            - text: "0"
+            - generic: "Other:"
+            - text: "0"
+          - cell
+          - cell "10+ $13.0838 100+ $10.8983 Show More":
+            - generic: 10+
+            - generic: $13.0838
+            - generic: 100+
+            - generic: $10.8983
+            - generic: Show More
+          - cell
+          - cell "Inventory shortage":
+            - generic: Inventory shortage
+        - 'row "no-image AS7331-AQFT OLGA16 LF T&R C20484730 Extended 16-OLGA(3.65x2.6) Ambient Light Sensors ROHS 0 0 JLCPCB: 0 Other: 0 1000+ $6.2565 200+ $6.5859 Show More Inventory shortage"':
+          - cell:
+            - generic: 
+          - cell "no-image AS7331-AQFT OLGA16 LF T&R C20484730 Extended":
+            - img "no-image"
+            - link "AS7331-AQFT OLGA16 LF T&R":
+              - /url: https://jlcpcb.com/partdetail/21823396-AS7331_AQFT_OLGA16_LF_TR/C20484730
+            - generic: C20484730
+            - generic: Extended
+          - cell
+          - cell "16-OLGA(3.65x2.6) Ambient Light Sensors ROHS":
+            - generic: 16-OLGA(3.65x2.6) Ambient Light Sensors ROHS
+          - cell
+          - cell "0":
+            - generic: "0"
+          - cell
+          - cell "0":
+            - generic: "0"
+          - cell
+          - 'cell "JLCPCB: 0 Other: 0"':
+            - generic: "JLCPCB:"
+            - text: "0"
+            - generic: "Other:"
+            - text: "0"
+          - cell
+          - cell "1000+ $6.2565 200+ $6.5859 Show More":
+            - generic: 1000+
+            - generic: $6.2565
+            - generic: 200+
+            - generic: $6.5859
+            - generic: Show More
+          - cell
+          - cell "Inventory shortage":
+            - generic: Inventory shortage
+    - generic: 7 items in total
+    - button "" [disabled]:
+      - generic: 
+    - list:
+      - listitem: "1"
+    - button "" [disabled]:
+      - generic: 

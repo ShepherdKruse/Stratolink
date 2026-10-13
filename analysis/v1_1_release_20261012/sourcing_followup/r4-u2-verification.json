@@ -1,0 +1,116 @@
+{
+  "status": "PASS",
+  "candidate": "/Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/sourcing-followup/r4-u2-candidate",
+  "exports": "/Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/sourcing-followup/r4-u2-exports",
+  "source_inputs_verified_unchanged": 160,
+  "changed_cad_files": {
+    "lib/Stratolink_v1p1_R4_R_0402_1005Metric.kicad_mod": {
+      "before": "03dd28f8e07e6432e58413e1e520b5e75ce84a07b60a3034f82a41b9c947886a",
+      "after": "126d732282e843872f7c3f514653fea792766566c6073a5146febc96f19b31ff"
+    },
+    "lib/Stratolink_v1p1_Symbols.kicad_sym": {
+      "before": "ef6a7bee77000aaf414f22279faeece7ebf40a3dfc489c36ba879e660f6c9b32",
+      "after": "5445aa38794607a1057befdb5a2f01ac1ea4d358a16bc90645849b96dafed883"
+    },
+    "lib/Stratolink_v1p1_U2_RAK3172.kicad_mod": {
+      "before": "d4d55a362e774989fa3db6e8fa9bd60d12297dae7492a7b4bd5dba09212247d3",
+      "after": "77763abe7b78381fc284ebe690a71d9275458382cc278674b979a32816b06d89"
+    },
+    "stratolink.kicad_pcb": {
+      "before": "490af47db22ef076938c17319782f194623d8f8b6a3f864a2e0cc23b3d025b15",
+      "after": "8e2f83797dd68195aa71b73fc252fe57e53ccd3683ef5f74739dc4d25d6ce8d5"
+    },
+    "stratolink.kicad_sch": {
+      "before": "044984037a7346adc92ee9ea142e6c285ee7f6b66efc87e0a1ad195495379cc9",
+      "after": "5787cc81a517b45469ea6a801b1ce1232aa7ef681b7b7e208ac7de2e7b754335"
+    }
+  },
+  "native_drc": {
+    "unchanged_silk_warnings": 4,
+    "opens": 0,
+    "parity": 0,
+    "library_mismatches": 0
+  },
+  "filtered_erc": 0,
+  "native_netlist_names_pin_membership_and_types_identical": true,
+  "bom_changes": {
+    "R4": {
+      "before": {
+        "Comment": "0402WGF3654TCE",
+        "Designator": "R4",
+        "Footprint": "Stratolink_v1p1_R4_R_0402_1005Metric",
+        "LCSC Part #": "C2766827"
+      },
+      "after": {
+        "Comment": "RC0402FR-073M65L",
+        "Designator": "R4",
+        "Footprint": "Stratolink_v1p1_R4_R_0402_1005Metric",
+        "LCSC Part #": "C477700"
+      }
+    },
+    "U2": {
+      "before": {
+        "Comment": "RAK3172-9-SM-NI",
+        "Designator": "U2",
+        "Footprint": "Stratolink_v1p1_U2_RAK3172",
+        "LCSC Part #": "C18548052"
+      },
+      "after": {
+        "Comment": "RAK3172-8-SM-NI",
+        "Designator": "U2",
+        "Footprint": "Stratolink_v1p1_U2_RAK3172",
+        "LCSC Part #": "C5452091"
+      }
+    }
+  },
+  "assembly_refs": 56,
+  "groups": 30,
+  "exclusions": 10,
+  "cpl_byte_identical": true,
+  "cpl_sha256": "eb8ef43bb3b1a6ee0b1efc3f3c1280f519686b6ba1fda44e61ace8cc6c4d1069",
+  "native_positions_only_u2_value_changes": true,
+  "physical_artwork_comparison": {
+    "stratolink-B_Cu.gbl": "identical except native creation timestamps",
+    "stratolink-B_Mask.gbs": "identical except native creation timestamps",
+    "stratolink-B_Paste.gbp": "identical except native creation timestamps",
+    "stratolink-B_Silkscreen.gbo": "identical except native creation timestamps",
+    "stratolink-Edge_Cuts.gm1": "identical except native creation timestamps",
+    "stratolink-F_Cu.gtl": "identical except native creation timestamps",
+    "stratolink-F_Mask.gts": "identical except native creation timestamps",
+    "stratolink-F_Paste.gtp": "identical except native creation timestamps",
+    "stratolink-F_Silkscreen.gto": "identical except native creation timestamps",
+    "stratolink-NPTH.drl": "identical except native creation timestamps",
+    "stratolink-PTH.drl": "identical except native creation timestamps",
+    "stratolink-job.gbrjob": "identical except native creation timestamps"
+  },
+  "changed_export_hashes": [
+    "BOM-stratolink.csv",
+    "README.md",
+    "assembly-audit.json",
+    "fabrication-review.zip",
+    "gerbers/stratolink-B_Cu.gbl",
+    "gerbers/stratolink-B_Mask.gbs",
+    "gerbers/stratolink-B_Paste.gbp",
+    "gerbers/stratolink-B_Silkscreen.gbo",
+    "gerbers/stratolink-Edge_Cuts.gm1",
+    "gerbers/stratolink-F_Cu.gtl",
+    "gerbers/stratolink-F_Mask.gts",
+    "gerbers/stratolink-F_Paste.gtp",
+    "gerbers/stratolink-F_Silkscreen.gto",
+    "gerbers/stratolink-NPTH.drl",
+    "gerbers/stratolink-PTH.drl",
+    "gerbers/stratolink-job.gbrjob",
+    "historical-placement-proof.json",
+    "logs/drill.log",
+    "logs/gerbers.log",
+    "logs/positions.log",
+    "native/drill-report.txt",
+    "native/netlist.xml",
+    "native/positions.csv"
+  ],
+  "export_hash_note": "Fresh export timestamps, source paths and part metadata change hashes/ZIP bytes; normalized fabrication geometry is unchanged.",
+  "candidate_manifest_sha256": "b673fd7dadfbea2a1c47b50a7be1e43adf28efa16648a57eedfce143dbba4fe0",
+  "uv_unchanged": true,
+  "remaining_supplier_check": "Confirm actual replacement U2 supplier model orientation; historical/CAD identity alone does not establish it.",
+  "no_canonical_or_existing_package_changes": true
+}

@@ -1,0 +1,76 @@
+{
+  "reviewed_date": "2026-10-13",
+  "recorded_at_utc": "2026-10-13T17:52:30.594693+00:00",
+  "scope": "Read-only U2/R4 sourcing equivalence. No CAD, firmware, supplier or payment actions.",
+  "browser": "Subagent in-app browser had zero connected instances. Parent-authorized primary web fallback. Active supplier quote tab untouched.",
+  "sources": [
+    {
+      "url": "https://store.rakwireless.com/products/wisduo-lpwan-module-rak3172",
+      "sections": "Details notes 3 and 4; variant table",
+      "basis": "Manufacturer explicitly distinguishes certification labels from identical regional hardware, and MHF RF-pad disconnect."
+    },
+    {
+      "url": "https://docs.rakwireless.com/product-categories/wisduo/rak3172-module/datasheet/",
+      "sections": "Base/T pin table; H/L frequency table; environmental ratings; firmware; ordering table",
+      "basis": "Exact variant, pin, supply, temperature and firmware distinctions."
+    },
+    {
+      "url": "https://www.digikey.com/en/products/detail/rakwireless-technology-limited/RAK3172-9-SM-NI/17138034",
+      "stock": 1388,
+      "minimum": 1,
+      "price_USD_at_1": 10.27,
+      "scope": "Opened exact US listing, not JLC allocation."
+    },
+    {
+      "url": "https://www.lcsc.com/product-detail/C18548052.html",
+      "stock": 1,
+      "scope": "Opened exact part page; old search snippets ignored."
+    },
+    {
+      "url": "https://www.lcsc.com/product-detail/C5452091.html",
+      "stock": 383,
+      "price_USD_at_1": 7.8586,
+      "scope": "Opened exact part page; JLC captured count differs and controls assembly."
+    },
+    {
+      "url": "https://yageogroup.com/content/datasheet/asset/file/PYU-RC_GROUP_51_ROHS_L",
+      "document": "RC_L V14, 2025-11-14",
+      "sections": "pp.2,4,5",
+      "basis": "Part-number decode, package dimensions, electrical range."
+    },
+    {
+      "url": "https://jlcpcb.com/partdetail/YAGEO-RC0402FR073M65L/C477700",
+      "basis": "Exact R4 part identity and standard ratings."
+    }
+  ],
+  "local_sha256": {
+    "hardware/pcb/stratolink.kicad_pcb": "490af47db22ef076938c17319782f194623d8f8b6a3f864a2e0cc23b3d025b15",
+    "hardware/pcb/lib/Stratolink_v1p1_U2_RAK3172.kicad_mod": "d4d55a362e774989fa3db6e8fa9bd60d12297dae7492a7b4bd5dba09212247d3",
+    "hardware/gerbers/v1.1-pilot/CPL-stratolink.csv": "eb8ef43bb3b1a6ee0b1efc3f3c1280f519686b6ba1fda44e61ace8cc6c4d1069",
+    "firmware/platformio.ini": "0cd71e12d3db130b32effc7809637323c360fac514e094051021188c65603708",
+    "firmware/src/lorawan.cpp": "60cacaadbfd002a3780fd337669f9782235fee4b554b110028a747b3576a9294",
+    "firmware/.pio/libdeps/stratolink_v1_1/RadioLib/library.json": "5292462c6525f7bfa9d41db2d351c536677c972578d466c49671db930e732cde",
+    "firmware/.pio/libdeps/stratolink_v1_1/RadioLib/src/modules/SX126x/STM32WLx.cpp": "7d4aff225553bc473209af0d576ec84ca497f2ac9c7a7dbe63a9e195061ed100",
+    "firmware/.pio/libdeps/stratolink_v1_1/RadioLib/src/modules/SX126x/SX126x.cpp": "19f0b97c695f79226c2de19e68599ce0e6ed3345f480412e6dadb065e58f8952",
+    "analysis/v1_1_release_20261012/sourcing_followup/radio-jlc-search.txt": "c780680d1f015f65f95f7c4b81bc1f594bdb24589fed6532d88c9be8108b8b9f",
+    "analysis/v1_1_release_20261012/sourcing_followup/r4-jlc-search.txt": "570367dc12c80e644464880da097f9be03b3904e44262666011d75ba7e094b49"
+  },
+  "recommended_u2": {
+    "mpn": "RAK3172-8-SM-NI",
+    "supplier_part": "C5452091",
+    "jlc_stock_from_parent_capture": 444,
+    "jlc_idle_stock_from_parent_capture": 5,
+    "copper_change_required": false,
+    "region_certification_label_unchanged": false,
+    "cold_rf_validation_complete": false
+  },
+  "recommended_r4": {
+    "mpn": "RC0402FR-073M65L",
+    "supplier_part": "C477700",
+    "jlc_stock_from_parent_capture": 9822,
+    "electrical_value_ohm": 3650000,
+    "tolerance_percent": 1,
+    "tcr_ppm_per_C": 100,
+    "footprint_change_required": false
+  }
+}

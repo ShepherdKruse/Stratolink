@@ -1,0 +1,921 @@
+- list:
+  - region "comparison": 
+- link "Skip to Content":
+  - /url: "#contentarea"
+- complementary "Cookie Bar":
+  - region "Cookie consent banner":
+    - button "Close cookie consent banner":
+      - text: 
+      - generic: Close Cookie Bar
+    - text: We use cookies to improve our services, make personal offers, and enhance your experience. If you do not accept optional cookies below, your experience may be affected. If you want to know more, please, read the
+    - link "Cookie Policy":
+      - /url: privacy-policy-cookie-restriction-mode
+    - button "Accept All Cookies"
+    - button "Customize Settings"
+    - button "Deny All"
+- button "Professional":
+  - generic: Professional
+- text: "|"
+- button "EDU":
+  - generic: EDU
+- text: "|"
+- button "Distributor":
+  - generic: Distributor
+- button "Customer Support ":
+  - generic: Customer Support
+  - text: 
+- navigation "Useful links":
+  - button "SHOP":
+    - generic: SHOP
+  - button "DOCUMENTATION":
+    - generic: DOCUMENTATION
+  - button "NEWS":
+    - generic: NEWS
+  - button "Sale Today’s Deals":
+    - img "Sale"
+    - generic: Today’s Deals
+  - button "Community Community":
+    - img "Community"
+    - generic: Community
+  - button "Go to SparkPNT":
+    - img "Go to SparkPNT"
+- banner:
+  - text: 
+  - link "SparkFun Electronics":
+    - /url: https://www.sparkfun.com/
+    - img "SparkFun Electronics"
+  - list:
+    - link "Sign In":
+      - /url: https://www.sparkfun.com/customer/account/login/referer/aHR0cHM6Ly93d3cuc3BhcmtmdW4uY29tL3NwYXJrZnVuLXNwZWN0cmFsLXV2LXNlbnNvci1hczczMzEtcXdpaWMuaHRtbA~~/
+  - link "My Cart":
+    - /url: https://www.sparkfun.com/checkout/cart/
+    - generic: My Cart
+  - text: 
+  - text: 
+  - generic: Search
+  - generic: Search entire store. Use arrow keys to navigate autocomplete results, enter to select, escape to close.
+  - combobox " Search"
+  - button "Search":
+    - text: 
+    - generic: Search
+  - tablist "Navigation sections"
+  - tabpanel "Menu":
+    - navigation:
+      - list:
+        - link "Featured":
+          - /url: https://www.sparkfun.com/featured.html
+          - text: 
+          - generic: Featured
+        - button "Featured submenu ":
+          - generic: Featured submenu
+          - generic: 
+        - link "GPS / GNSS":
+          - /url: https://www.sparkfun.com/gnss.html
+          - text: 
+          - generic: GPS / GNSS
+        - button "GPS / GNSS submenu ":
+          - generic: GPS / GNSS submenu
+          - generic: 
+        - text:  
+        - link "Sensors":
+          - /url: https://www.sparkfun.com/sensors.html
+          - text: 
+          - generic: Sensors
+        - button "Sensors submenu ":
+          - generic: Sensors submenu
+          - generic: 
+        - text:            
+        - link "Development Boards":
+          - /url: https://www.sparkfun.com/development-boards.html
+          - text: 
+          - generic: Development Boards
+        - button "Development Boards submenu ":
+          - generic: Development Boards submenu
+          - generic: 
+        - text:                    
+        - link "IoT & Wireless":
+          - /url: https://www.sparkfun.com/iot-wireless.html
+          - text: 
+          - generic: IoT & Wireless
+        - button "IoT & Wireless submenu ":
+          - generic: IoT & Wireless submenu
+          - generic: 
+        - text:  
+        - link "Components":
+          - /url: https://www.sparkfun.com/components.html
+          - text: 
+          - generic: Components
+        - button "Components submenu ":
+          - generic: Components submenu
+          - generic: 
+        - text:            
+        - link "Kits":
+          - /url: https://www.sparkfun.com/kits.html
+          - text: 
+          - generic: Kits
+        - button "Kits submenu ":
+          - generic: Kits submenu
+          - generic: 
+        - link "All Categories":
+          - /url: https://www.sparkfun.com/all-categories
+          - generic: All Categories
+    - text: "| | "
+- main:
+  - navigation "breadcrumbs":
+    - list:
+      - link "Home":
+        - /url: https://www.sparkfun.com/
+      - text: /
+      - link "Sensors":
+        - /url: https://www.sparkfun.com/sensors.html
+      - text: /
+      - link "Imaging":
+        - /url: https://www.sparkfun.com/sensors/imaging.html
+  - region "System Messages"
+  - text: or * *
+  - link "Skip to the end of the images gallery":
+    - /url: "#gallery-next-area"
+  - region "Product image gallery":
+    - button "SparkFun Spectral UV Sensor - AS7331 (Qwiic)":
+      - img "SparkFun Spectral UV Sensor - AS7331 (Qwiic)"
+    - region "carousel":
+      - button "Previous" [disabled]
+      - group "slide 1 of 6":
+        - 'button "View image 1 of 6: SparkFun Spectral UV Sensor - AS7331 (Qwiic)"':
+          - img "SparkFun Spectral UV Sensor - AS7331 (Qwiic)"
+      - group "slide 2 of 6":
+        - 'button "View image 2 of 6: SparkFun Spectral UV Sensor - AS7331 (Qwiic)"':
+          - img "SparkFun Spectral UV Sensor - AS7331 (Qwiic)"
+      - group "slide 3 of 6":
+        - 'button "View image 3 of 6: SparkFun Spectral UV Sensor - AS7331 (Qwiic)"':
+          - img "SparkFun Spectral UV Sensor - AS7331 (Qwiic)"
+      - button:
+      - button:
+      - button:
+      - button "Next"
+      - text: • • • •
+  - link "Skip to the beginning of the images gallery":
+    - /url: "#gallery-prev-area"
+  - heading "Share:" [level=2]
+  - link "Share on facebook":
+    - /url: https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.sparkfun.com%2Fsparkfun-spectral-uv-sensor-as7331-qwiic.html&t=SparkFun+Spectral+UV+Sensor+-+AS7331+%28Qwiic%29
+  - link "Share on Twitter":
+    - /url: http://twitter.com/home/?status=https%3A%2F%2Fwww.sparkfun.com%2Fsparkfun-spectral-uv-sensor-as7331-qwiic.html(SparkFun+Spectral+UV+Sensor+-+AS7331+%28Qwiic%29)
+  - link "Share on Linkedin":
+    - /url: "https://www.linkedin.com/sharing/share-offsite/?url={https%3A%2F%2Fwww.sparkfun.com%2Fsparkfun-spectral-uv-sensor-as7331-qwiic.html}"
+  - heading "SparkFun Spectral UV Sensor - AS7331 (Qwiic)" [level=1]
+  - iframe:
+    - generic "Trustpilot reviews Rated 5 out of 5. 1 reviews on Trustpilot":
+      - img "5 out of 5 star rating on Trustpilot"
+      - generic: 1 review
+    - generic: Trustpilot reviews
+    - generic: Rated 5 out of 5. 1 reviews on Trustpilot
+    - tooltip: 1 reviews with 5 stars 0 reviews with 4 stars 0 reviews with 3 stars 0 reviews with 2 stars 0 reviews with 1 star
+  - generic: "SKU: SEN-23517"
+  - paragraph:
+    - text: Measure UVA, UVB, and UVC radiation accurately with this AS7331 sensor breakout, featuring
+    - text: four low-power operating modes and dual Qwiic connectors for easy I
+    - superscript: "2"
+    - text: C integration.
+    - superscript
+  - generic: $27.50
+  - text: "#:"
+  - generic: Qty
+  - button "Decrease quantity": "-"
+  - spinbutton "Qty": "1"
+  - button "Increase quantity": +
+  - button "Backorder":
+    - generic: Backorder
+  - generic "Availability": Backorder
+  - link "Stock/Discounts":
+    - /url: "#"
+  - link "Add to Wish List":
+    - /url: "#"
+  - link "Compare":
+    - /url: "#"
+    - generic: Compare
+  - heading "Helpful Documentation" [level=4]
+  - paragraph:
+    - link "Hookup Guide Hookup Guide":
+      - /url: https://sparkfun.github.io/SparkFun_Spectral_UV_Sensor_AS7331
+      - img "Hookup Guide"
+      - text: Hookup Guide
+  - paragraph:
+    - link "Schematic Schematic":
+      - /url: https://cdn.sparkfun.com/assets/0/8/a/c/8/SparkFun_Qwiic_UV_Sensor_AS7331.pdf
+      - img "Schematic"
+      - text: Schematic
+  - paragraph:
+    - link "Datasheet (AS7731) Datasheet (AS7731)":
+      - /url: https://cdn.sparkfun.com/assets/b/8/6/d/2/AS7331_DS001047_4-00.pdf
+      - img "Datasheet (AS7731)"
+      - text: Datasheet (AS7731)
+  - navigation "Product Information":
+    - link "Overview":
+      - /url: "#content-overview"
+    - link "Recommended Products":
+      - /url: "#content-recommended-products"
+    - link "Features & Specs":
+      - /url: "#content-features"
+    - link "Documentation":
+      - /url: "#content-documentation"
+    - link "Reviews":
+      - /url: "#content-reviews"
+  - text: 
+  - generic "Overview ":
+    - heading "Product Overview" [level=2]
+    - paragraph
+    - paragraph:
+      - text: The SparkFun Spectral UV Sensor provides high-accuracy UV radiation measurement across three distinct channels. Utilizing the AS7331 sensor from ams OSRAM
+      - superscript: ©
+      - text: ", you can independently track UVA (320-400nm), UVB (280-320nm), and UVC (200-280nm) light all from a single breakout board! Each UV channel has an individual photodiode with a built-in interference filter. This ensures maximum sensitivity and precision for your environmental data."
+    - heading "UV Sensing Operation and Integration" [level=3]
+    - paragraph:
+      - text: The Spectral UV Sensor communicates entirely over an I
+      - superscript: "2"
+      - text: C bus and is physically designed to adapt to your project. We routed the essential pins to a pair of
+      - link "Qwiic":
+        - /url: https://www.sparkfun.com/qwiic
+      - text: connectors for instant, solderless assembly. We also included standard 0.1-inch spaced through-hole pins for users who prefer a soldered connection. These also provide access to the sensor's specific Interrupt and Sync pins on the AS7331.
+    - paragraph:
+      - img "A SparkFun AS7331 Spectral UV Sensor connected to an Artemis RedBoard via Qwiic"
+    - paragraph: "To further customize its operation, you have full control over how the sensor gathers data and interacts with your system:"
+    - list:
+      - strong: "Configurable Operating Modes:"
+      - text: Choose between Single Measurement (CMD), Continuous Measurement (CONT), Synchronized Start (SYNS), or Synchronized Start and End (SYND) to dictate exactly how and when data is collected.
+      - strong: "Smart Power Management:"
+      - text: The sensor runs an automatic power-down sequence between active measurements. This keeps current consumption incredibly low across all modes, dropping to just 1µA during power-down.
+      - strong:
+        - text: Adjustable I
+        - superscript: "2"
+        - text: "C Addresses:"
+      - text: The A0 and A1 solder jumpers on the back of the board let you select from four I
+      - superscript: "2"
+      - text: C addresses. This lets you seamlessly stack multiple sensors on the same bus without hardware conflicts!
+    - paragraph:
+      - text: Best of all, our dedicated Arduino library makes the software setup incredibly simple. Just search for '
+      - code: SparkFun AS7331
+      - text: "' in the Arduino Library Manager to quickly configure the board and start reading UV data."
+    - complementary:
+      - region "carousel":
+        - paragraph: This is a carousel. Use Next and Previous buttons to navigate, or jump to a slide with the slide dots.
+        - link "SparkFun Mini Spectral UV Sensor - AS7331 (Qwiic)":
+          - /url: https://www.sparkfun.com/sparkfun-mini-spectral-uv-sensor-as7331-qwiic.html
+          - img "SparkFun Mini Spectral UV Sensor - AS7331 (Qwiic)"
+        - button "Add SparkFun Mini Spectral UV Sensor - AS7331 (Qwiic) to Cart":
+          - generic: Add to Cart
+        - link "SparkFun Mini Spectral UV Sensor - AS7331 (Qwiic)":
+          - /url: https://www.sparkfun.com/sparkfun-mini-spectral-uv-sensor-as7331-qwiic.html
+          - heading "SparkFun Mini Spectral UV Sensor - AS7331 (Qwiic)" [level=3]:
+            - generic "SparkFun Mini Spectral UV Sensor - AS7331 (Qwiic)":
+              - generic: SparkFun Mini Spectral UV Sensor - AS7331 (Qwiic)
+        - generic: $32.95
+      - separator
+      - figure:
+        - link "DataLogger IoT":
+          - /url: https://www.sparkfun.com/datalogger-iot
+          - img "DataLogger IoT"
+      - paragraph: This product can be automatically detected, configured, and logged by DataLogger all without coding or soldering.
+      - button "LEARN MORE":
+        - generic: LEARN MORE
+      - separator
+      - figure:
+        - link "Qwiic Logo":
+          - /url: https://www.sparkfun.com/qwiic
+          - img "Qwiic Logo"
+      - paragraph: This product features Qwiic Connectors.
+      - button "LEARN MORE":
+        - generic: LEARN MORE
+      - separator
+  - text: 
+  - generic "Recommended Products ":
+    - region "carousel":
+      - paragraph: This is a carousel. Use Next and Previous buttons to navigate, or jump to a slide with the slide dots.
+      - heading "Similar Items" [level=2]
+      - list:
+        - button "Previous" [disabled]: Previous
+        - group "slide 1 of 15":
+          - link "SparkFun Mini Spectral UV Sensor - AS7331 (Qwiic)":
+            - /url: //www.sparkfun.com/catalog/product/view/id/8126/s/sparkfun-mini-spectral-uv-sensor-as7331-qwiic/
+            - img "SparkFun Mini Spectral UV Sensor - AS7331 (Qwiic)"
+          - link "SparkFun Mini Spectral UV Sensor - AS7331 (Qwiic)":
+            - /url: //www.sparkfun.com/catalog/product/view/id/8126/s/sparkfun-mini-spectral-uv-sensor-as7331-qwiic/
+            - heading "SparkFun Mini Spectral UV Sensor - AS7331 (Qwiic)" [level=3]:
+              - generic: SparkFun Mini Spectral UV Sensor - AS7331 (Qwiic)
+          - generic: $32.95
+          - generic "Availability": Backorder
+          - link "Compare":
+            - /url: "#"
+            - generic: Compare
+          - link "Add to Wish List":
+            - /url: "#"
+        - group "slide 2 of 15":
+          - link "SparkFun Triad Spectroscopy Sensor - AS7265x (Qwiic)":
+            - /url: //www.sparkfun.com/sparkfun-triad-spectroscopy-sensor-as7265x-qwiic.html
+            - img "SparkFun Triad Spectroscopy Sensor - AS7265x (Qwiic)"
+          - link "SparkFun Triad Spectroscopy Sensor - AS7265x (Qwiic)":
+            - /url: //www.sparkfun.com/sparkfun-triad-spectroscopy-sensor-as7265x-qwiic.html
+            - heading "SparkFun Triad Spectroscopy Sensor - AS7265x (Qwiic)" [level=3]:
+              - generic: SparkFun Triad Spectroscopy Sensor - AS7265x (Qwiic)
+          - generic: $69.95
+          - generic "Availability": In Stock
+          - link "Compare":
+            - /url: "#"
+            - generic: Compare
+          - link "Add to Wish List":
+            - /url: "#"
+        - group "slide 3 of 15":
+          - link "SparkFun Spectral Sensor - AS7343 (Qwiic)":
+            - /url: //www.sparkfun.com/sparkfun-spectral-sensor-as7343-qwiic.html
+            - img "SparkFun Spectral Sensor - AS7343 (Qwiic)"
+          - link "SparkFun Spectral Sensor - AS7343 (Qwiic)":
+            - /url: //www.sparkfun.com/sparkfun-spectral-sensor-as7343-qwiic.html
+            - heading "SparkFun Spectral Sensor - AS7343 (Qwiic)" [level=3]:
+              - generic: SparkFun Spectral Sensor - AS7343 (Qwiic)
+          - generic: $21.95
+          - generic "Availability": In Stock
+          - link "Compare":
+            - /url: "#"
+            - generic: Compare
+          - link "Add to Wish List":
+            - /url: "#"
+        - group "slide 4 of 15":
+          - link "SparkFun Spectral Sensor Breakout - AS7263 NIR (Qwiic)":
+            - /url: //www.sparkfun.com/sparkfun-spectral-sensor-breakout-as7263-nir-qwiic.html
+            - img "SparkFun Spectral Sensor Breakout - AS7263 NIR (Qwiic)"
+          - link "SparkFun Spectral Sensor Breakout - AS7263 NIR (Qwiic)":
+            - /url: //www.sparkfun.com/sparkfun-spectral-sensor-breakout-as7263-nir-qwiic.html
+            - heading "SparkFun Spectral Sensor Breakout - AS7263 NIR (Qwiic)" [level=3]:
+              - generic: SparkFun Spectral Sensor Breakout - AS7263 NIR (Qwiic)
+          - generic: $33.95
+          - generic "Availability": In Stock
+          - link "Compare":
+            - /url: "#"
+            - generic: Compare
+          - link "Add to Wish List":
+            - /url: "#"
+        - group "slide 5 of 15":
+          - link "SparkFun Ambient Light Sensor - VEML7700 (Qwiic)":
+            - /url: //www.sparkfun.com/sparkfun-ambient-light-sensor-veml7700-qwiic.html
+            - img "SparkFun Ambient Light Sensor - VEML7700 (Qwiic)"
+          - link "SparkFun Ambient Light Sensor - VEML7700 (Qwiic)":
+            - /url: //www.sparkfun.com/sparkfun-ambient-light-sensor-veml7700-qwiic.html
+            - heading "SparkFun Ambient Light Sensor - VEML7700 (Qwiic)" [level=3]:
+              - generic: SparkFun Ambient Light Sensor - VEML7700 (Qwiic)
+          - generic: $6.95
+          - generic "Availability": In Stock
+          - link "Compare":
+            - /url: "#"
+            - generic: Compare
+          - link "Add to Wish List":
+            - /url: "#"
+        - link:
+          - /url: //www.sparkfun.com/sparkfun-human-presence-sensor-breakout-ak9753-qwiic.html
+        - link:
+          - /url: //www.sparkfun.com/sparkfun-human-presence-sensor-breakout-ak9753-qwiic.html
+          - heading [level=3]:
+            - generic: SparkFun Human Presence Sensor Breakout - AK9753 (Qwiic)
+        - generic: $22.50
+        - generic: In Stock
+        - link:
+          - /url: "#"
+          - generic: Compare
+        - link:
+          - /url: "#"
+        - link:
+          - /url: //www.sparkfun.com/sparkfun-ambient-light-sensor-veml6030-qwiic.html
+        - link:
+          - /url: //www.sparkfun.com/sparkfun-ambient-light-sensor-veml6030-qwiic.html
+          - heading [level=3]:
+            - generic: SparkFun Ambient Light Sensor - VEML6030 (Qwiic)
+        - generic: $5.95
+        - generic: In Stock
+        - link:
+          - /url: "#"
+          - generic: Compare
+        - link:
+          - /url: "#"
+        - link:
+          - /url: //www.sparkfun.com/sparkfun-proximity-sensor-breakout-20cm-vcnl4040-qwiic.html
+        - link:
+          - /url: //www.sparkfun.com/sparkfun-proximity-sensor-breakout-20cm-vcnl4040-qwiic.html
+          - heading [level=3]:
+            - generic: SparkFun Proximity Sensor Breakout - 20cm, VCNL4040 (Qwiic)
+        - generic: $4.95
+        - generic: In Stock
+        - link:
+          - /url: "#"
+          - generic: Compare
+        - link:
+          - /url: "#"
+        - link:
+          - /url: //www.sparkfun.com/sparkfun-ir-array-breakout-110-degree-fov-mlx90640-qwiic.html
+        - link:
+          - /url: //www.sparkfun.com/sparkfun-ir-array-breakout-110-degree-fov-mlx90640-qwiic.html
+          - heading [level=3]:
+            - generic: SparkFun IR Array Breakout - 110 Degree FOV, MLX90640 (Qwiic)
+        - generic: $39.95
+        - generic: In Stock
+        - link:
+          - /url: "#"
+          - generic: Compare
+        - link:
+          - /url: "#"
+        - link:
+          - /url: //www.sparkfun.com/sparkfun-mini-tristimulus-color-sensor-opt4048dtsr-qwiic.html
+        - link:
+          - /url: //www.sparkfun.com/sparkfun-mini-tristimulus-color-sensor-opt4048dtsr-qwiic.html
+          - heading [level=3]:
+            - generic: SparkFun Mini Tristimulus Color Sensor - OPT4048DTSR (Qwiic)
+        - generic: $11.50
+        - generic: In Stock
+        - link:
+          - /url: "#"
+          - generic: Compare
+        - link:
+          - /url: "#"
+        - link:
+          - /url: //www.sparkfun.com/sparkfun-tristimulus-color-sensor-opt4048dtsr-qwiic.html
+        - link:
+          - /url: //www.sparkfun.com/sparkfun-tristimulus-color-sensor-opt4048dtsr-qwiic.html
+          - heading [level=3]:
+            - generic: SparkFun Tristimulus Color Sensor - OPT4048DTSR (Qwiic)
+        - generic: $13.50
+        - generic: In Stock
+        - link:
+          - /url: "#"
+          - generic: Compare
+        - link:
+          - /url: "#"
+        - link:
+          - /url: //www.sparkfun.com/sparkfun-qwiic-pir-170ua-ekmc4607112k.html
+        - link:
+          - /url: //www.sparkfun.com/sparkfun-qwiic-pir-170ua-ekmc4607112k.html
+          - heading [level=3]:
+            - generic: SparkFun Qwiic PIR - 170uA (EKMC4607112K)
+        - generic: $22.50
+        - generic: In Stock
+        - link:
+          - /url: "#"
+          - generic: Compare
+        - link:
+          - /url: "#"
+        - link:
+          - /url: //www.sparkfun.com/sparkfun-micro-proximity-sensor-20cm-vcnl4040-qwiic.html
+        - link:
+          - /url: //www.sparkfun.com/sparkfun-micro-proximity-sensor-20cm-vcnl4040-qwiic.html
+          - heading [level=3]:
+            - generic: SparkFun Micro Proximity Sensor - 20cm, VCNL4040 (Qwiic)
+        - generic: $5.50
+        - generic: In Stock
+        - link:
+          - /url: "#"
+          - generic: Compare
+        - link:
+          - /url: "#"
+        - link:
+          - /url: //www.sparkfun.com/sparkfun-tof-range-finder-sensor-vl6180.html
+        - link:
+          - /url: //www.sparkfun.com/sparkfun-tof-range-finder-sensor-vl6180.html
+          - heading [level=3]:
+            - generic: SparkFun ToF Range Finder Sensor - VL6180
+        - generic: $22.95
+        - generic: In Stock
+        - link:
+          - /url: "#"
+          - generic: Compare
+        - link:
+          - /url: "#"
+        - link:
+          - /url: //www.sparkfun.com/sparkfun-qwiic-dtof-imager-tmf8821.html
+        - link:
+          - /url: //www.sparkfun.com/sparkfun-qwiic-dtof-imager-tmf8821.html
+          - heading [level=3]:
+            - generic: SparkFun Qwiic dToF Imager - TMF8821
+        - generic: $14.50
+        - generic: In Stock
+        - link:
+          - /url: "#"
+          - generic: Compare
+        - link:
+          - /url: "#"
+        - button "Next": Next
+        - list:
+          - button "• Go to slide 1"
+          - button "• Go to slide 2"
+          - button "• Go to slide 3"
+    - region "carousel":
+      - paragraph: This is a carousel. Use Next and Previous buttons to navigate, or jump to a slide with the slide dots.
+      - heading "Frequently bought with..." [level=2]
+      - list:
+        - button "Previous" [disabled]: Previous
+        - group "slide 1 of 15":
+          - link "SparkFun BabyBuck Regulator Breakout - 3.3V (AP63203)":
+            - /url: //www.sparkfun.com/sparkfun-babybuck-regulator-breakout-3-3v-ap63203.html
+            - img "SparkFun BabyBuck Regulator Breakout - 3.3V (AP63203)"
+          - link "SparkFun BabyBuck Regulator Breakout - 3.3V (AP63203)":
+            - /url: //www.sparkfun.com/sparkfun-babybuck-regulator-breakout-3-3v-ap63203.html
+            - heading "SparkFun BabyBuck Regulator Breakout - 3.3V (AP63203)" [level=3]:
+              - generic: SparkFun BabyBuck Regulator Breakout - 3.3V (AP63203)
+          - generic: $4.95
+          - generic "Availability": In Stock
+          - link "Compare":
+            - /url: "#"
+            - generic: Compare
+          - link "Add to Wish List":
+            - /url: "#"
+        - group "slide 2 of 15":
+          - link "Flexible Qwiic Cable - Female Jumper (4-pin)":
+            - /url: //www.sparkfun.com/flexible-qwiic-cable-female-jumper-4-pin.html
+            - img "Flexible Qwiic Cable - Female Jumper (4-pin)"
+          - link "Flexible Qwiic Cable - Female Jumper (4-pin)":
+            - /url: //www.sparkfun.com/flexible-qwiic-cable-female-jumper-4-pin.html
+            - heading "Flexible Qwiic Cable - Female Jumper (4-pin)" [level=3]:
+              - generic: Flexible Qwiic Cable - Female Jumper (4-pin)
+          - generic: $1.95
+          - generic "Availability": In Stock
+          - link "Compare":
+            - /url: "#"
+            - generic: Compare
+          - link "Add to Wish List":
+            - /url: "#"
+        - group "slide 3 of 15":
+          - link "SparkFun Capacitive Touch Breakout - AT42QT1010":
+            - /url: //www.sparkfun.com/sparkfun-capacitive-touch-breakout-at42qt1010.html
+            - img "SparkFun Capacitive Touch Breakout - AT42QT1010"
+          - link "SparkFun Capacitive Touch Breakout - AT42QT1010":
+            - /url: //www.sparkfun.com/sparkfun-capacitive-touch-breakout-at42qt1010.html
+            - heading "SparkFun Capacitive Touch Breakout - AT42QT1010" [level=3]:
+              - generic: SparkFun Capacitive Touch Breakout - AT42QT1010
+          - generic: $3.95
+          - generic "Availability": In Stock
+          - link "Compare":
+            - /url: "#"
+            - generic: Compare
+          - link "Add to Wish List":
+            - /url: "#"
+        - group "slide 4 of 15":
+          - link "SparkFun LiPo Charger Plus":
+            - /url: //www.sparkfun.com/sparkfun-lipo-charger-plus.html
+            - img "SparkFun LiPo Charger Plus"
+          - link "SparkFun LiPo Charger Plus":
+            - /url: //www.sparkfun.com/sparkfun-lipo-charger-plus.html
+            - heading "SparkFun LiPo Charger Plus" [level=3]:
+              - generic: SparkFun LiPo Charger Plus
+          - generic: $11.75
+          - generic "Availability": In Stock
+          - link "Compare":
+            - /url: "#"
+            - generic: Compare
+          - link "Add to Wish List":
+            - /url: "#"
+        - group "slide 5 of 15":
+          - link "SparkFun LiPo Charger/Booster - 5V/1A":
+            - /url: //www.sparkfun.com/sparkfun-lipo-charger-booster-5v-1a.html
+            - img "SparkFun LiPo Charger/Booster - 5V/1A"
+          - link "SparkFun LiPo Charger/Booster - 5V/1A":
+            - /url: //www.sparkfun.com/sparkfun-lipo-charger-booster-5v-1a.html
+            - heading "SparkFun LiPo Charger/Booster - 5V/1A" [level=3]:
+              - generic: SparkFun LiPo Charger/Booster - 5V/1A
+          - generic: $18.50
+          - generic "Availability": In Stock
+          - link "Compare":
+            - /url: "#"
+            - generic: Compare
+          - link "Add to Wish List":
+            - /url: "#"
+        - link:
+          - /url: //www.sparkfun.com/muscle-wire-0-012-diameter-1-foot.html
+        - link:
+          - /url: //www.sparkfun.com/muscle-wire-0-012-diameter-1-foot.html
+          - heading [level=3]:
+            - generic: Muscle Wire® - 0.012" Diameter (1 foot)
+        - generic: $2.75
+        - generic: In Stock
+        - link:
+          - /url: "#"
+          - generic: Compare
+        - link:
+          - /url: "#"
+        - link:
+          - /url: //www.sparkfun.com/arduino-and-breadboard-holder.html
+        - link:
+          - /url: //www.sparkfun.com/arduino-and-breadboard-holder.html
+          - heading [level=3]:
+            - generic: Arduino and Breadboard Holder
+        - generic: $6.50
+        - generic: In Stock
+        - link:
+          - /url: "#"
+          - generic: Compare
+        - link:
+          - /url: "#"
+        - link:
+          - /url: //www.sparkfun.com/sparkfun-6dof-imu-breakout-ism330dhcx-qwiic.html
+        - link:
+          - /url: //www.sparkfun.com/sparkfun-6dof-imu-breakout-ism330dhcx-qwiic.html
+          - heading [level=3]:
+            - generic: SparkFun 6DoF IMU Breakout - ISM330DHCX (Qwiic)
+        - generic: $25.50
+        - generic: In Stock
+        - link:
+          - /url: "#"
+          - generic: Compare
+        - link:
+          - /url: "#"
+        - link:
+          - /url: //www.sparkfun.com/sparkfun-6-degrees-of-freedom-breakout-lsm6dso-qwiic.html
+        - link:
+          - /url: //www.sparkfun.com/sparkfun-6-degrees-of-freedom-breakout-lsm6dso-qwiic.html
+          - heading [level=3]:
+            - generic: SparkFun 6 Degrees of Freedom Breakout - LSM6DSO (Qwiic)
+        - generic: $16.95
+        - generic: In Stock
+        - link:
+          - /url: "#"
+          - generic: Compare
+        - link:
+          - /url: "#"
+        - link:
+          - /url: //www.sparkfun.com/catalog/product/view/id/8135/s/sparkfun-mini-linear-3d-hall-effect-sensor-tmag5273-qwiic/
+        - link:
+          - /url: //www.sparkfun.com/catalog/product/view/id/8135/s/sparkfun-mini-linear-3d-hall-effect-sensor-tmag5273-qwiic/
+          - heading [level=3]:
+            - generic: SparkFun Mini Linear 3D Hall-Effect Sensor - TMAG5273 (Qwiic)
+        - generic: $5.50
+        - generic: Backorder
+        - link:
+          - /url: "#"
+          - generic: Compare
+        - link:
+          - /url: "#"
+        - link:
+          - /url: //www.sparkfun.com/magnetic-door-switch-set.html
+        - link:
+          - /url: //www.sparkfun.com/magnetic-door-switch-set.html
+          - heading [level=3]:
+            - generic: Magnetic Door Switch Set
+        - generic: $4.50
+        - generic: In Stock
+        - link:
+          - /url: "#"
+          - generic: Compare
+        - link:
+          - /url: "#"
+        - link:
+          - /url: //www.sparkfun.com/sparkfun-6dof-imu-breakout-lsm6dsv16x-qwiic.html
+        - link:
+          - /url: //www.sparkfun.com/sparkfun-6dof-imu-breakout-lsm6dsv16x-qwiic.html
+          - heading [level=3]:
+            - generic: SparkFun 6DoF IMU Breakout - LSM6DSV16X (Qwiic)
+        - generic: $24.54
+        - generic: Backorder
+        - link:
+          - /url: "#"
+          - generic: Compare
+        - link:
+          - /url: "#"
+        - link:
+          - /url: //www.sparkfun.com/sparkfun-haptic-motor-driver-drv2605l.html
+        - link:
+          - /url: //www.sparkfun.com/sparkfun-haptic-motor-driver-drv2605l.html
+          - heading [level=3]:
+            - generic: SparkFun Haptic Motor Driver - DRV2605L
+        - generic: $11.95
+        - generic: In Stock
+        - link:
+          - /url: "#"
+          - generic: Compare
+        - link:
+          - /url: "#"
+        - link:
+          - /url: //www.sparkfun.com/sparkfun-gnss-receiver-breakout-max-m10s-qwiic.html
+        - link:
+          - /url: //www.sparkfun.com/sparkfun-gnss-receiver-breakout-max-m10s-qwiic.html
+          - heading [level=3]:
+            - generic: SparkFun GNSS Receiver Breakout - MAX-M10S (Qwiic)
+        - generic: $45.95
+        - generic: Backorder
+        - link:
+          - /url: "#"
+          - generic: Compare
+        - link:
+          - /url: "#"
+        - link:
+          - /url: //www.sparkfun.com/sparkfun-micro-6dof-imu-breakout-bmi270-qwiic.html
+        - link:
+          - /url: //www.sparkfun.com/sparkfun-micro-6dof-imu-breakout-bmi270-qwiic.html
+          - heading [level=3]:
+            - generic: SparkFun Micro 6DoF IMU Breakout - BMI270 (Qwiic)
+        - generic: $17.58
+        - generic: Backorder
+        - link:
+          - /url: "#"
+          - generic: Compare
+        - link:
+          - /url: "#"
+        - button "Next": Next
+        - list:
+          - button "• Go to slide 1"
+          - button "• Go to slide 2"
+          - button "• Go to slide 3"
+  - text: 
+  - generic "Features & Specs ":
+    - heading "Features & Specs" [level=2]
+    - paragraph
+    - list:
+      - listitem: "Operating Voltage: 2.7V-3.6V"
+      - text: "Current Consumption:"
+      - list:
+        - listitem: "Active Measurement: 1.42mA (Typ.)"
+        - listitem: "Standby Mode: 970µA"
+        - listitem: "Power Down Mode: 1µA"
+      - text: "Three UV Channels: UVA, UVB, & UVC"
+      - list:
+        - listitem: Each with dedicated photodiode
+      - text: "Four Operating Modes:"
+      - list:
+        - listitem: Single Measurement
+        - listitem: Continuous Measurement
+        - listitem: Synchronized Start Measurement
+        - listitem: Synchronized Start/Stop Measurement
+      - listitem: "High Dynamic Range: Up to 3.43E+10 (resolution multiplied by gain range)"
+      - listitem: 2x Qwiic Connectors
+      - text: Four Adjustable I
+      - superscript: "2"
+      - text: C Addresses
+      - list:
+        - listitem: Set through A0 & A1 pins
+        - strong: "0x74"
+        - text: (Default), 0x75, 0x76, & 0x77
+    - figure
+    - paragraph
+  - text: 
+  - generic "Documentation ":
+    - heading "Documentation" [level=2]
+    - paragraph
+    - list:
+      - link "Schematic":
+        - /url: https://cdn.sparkfun.com/assets/0/8/a/c/8/SparkFun_Qwiic_UV_Sensor_AS7331.pdf
+      - link "Eagle Files":
+        - /url: https://cdn.sparkfun.com/assets/0/9/4/f/c/SparkFun_Qwiic_UV_Sensor_AS7331.zip
+      - link "Board Dimensions":
+        - /url: https://cdn.sparkfun.com/assets/5/1/f/3/d/SparkFun_Qwiic_UV_Sensor_AS7331-Dimensions.png
+      - link "Hookup Guide":
+        - /url: https://sparkfun.github.io/SparkFun_Spectral_UV_Sensor_AS7331
+      - link "Datasheet":
+        - /url: https://cdn.sparkfun.com/assets/b/8/6/d/2/AS7331_DS001047_4-00.pdf
+      - text: (AS7731)
+      - link "Qwiic Info Page":
+        - /url: https://www.sparkfun.com/qwiic
+      - link "SparkFun AS7331 Arduino Library":
+        - /url: https://github.com/sparkfun/SparkFun_AS7331_Arduino_Library
+      - link "GitHub Hardware Repo":
+        - /url: https://github.com/sparkfun/SparkFun_Spectral_UV_Sensor_AS7331
+    - paragraph
+    - paragraph
+    - text: "WARNING: This product may contain chemicals known to the State of California to cause cancer and birth defects or other reproductive harm. See link below for more information."
+    - link "www.P65Warnings.ca.gov":
+      - /url: https://www.P65Warnings.ca.gov
+  - text: 
+  - generic "Reviews ":
+    - heading "Customer Reviews" [level=2]
+    - iframe:
+      - generic "Product reviews. Rated 5.0 out of 5. Based on 1 reviews. 1 out of 1 reviews were collected via Trustpilot. 0 out of 1 reviews were collected via SparkFun Electronics":
+        - generic: "5.0"
+        - text: / 5
+        - generic: •
+        - strong: "1"
+        - text: reviews
+      - group "Total 1 reviews.":
+        - generic: Total 1 reviews.
+        - strong: Reviews
+        - text: "1"
+        - checkbox "Rated 5-star 100%."
+        - generic: 5-star
+        - generic: 100%
+        - checkbox "Rated 4-star 0%." [disabled]
+        - generic: 4-star
+        - generic: 0%
+        - checkbox "Rated 3-star 0%." [disabled]
+        - generic: 3-star
+        - generic: 0%
+        - checkbox "Rated 2-star 0%." [disabled]
+        - generic: 2-star
+        - generic: 0%
+        - checkbox "Rated 1-star 0%." [disabled]
+        - generic: 1-star
+        - generic: 0%
+      - generic: Showing our English reviews only
+      - list:
+        - generic: Review by James Poppiti,
+        - text: James Poppiti, March 13
+        - generic: Rated 5 out of 5
+        - generic: I'm using this sensor with an STM32F103C8T6 (blue pill) microcontroller. It works great. This sensor will be incorporated into a wearable UV dosimeter. I found that you don't need to run the long setup code you download from Github. If you want to change the gain and integration time you change the default value in register 6. Then all you need to do write "power_on_and_measure" (0x83) to register 0, wait about 65 ms, and then read 6 bytes starting at register 2. The 6 bytes cover the values for UV A, B, and C. There is some information in the datasheet that seems to indicate that you can convert the raw count data into uWatts/cm^2, but I couldn't figure out how to do that. An example of how to do this in the datasheet or in a forum would be helpful. I have a calibrated UV diode that allows me to make that conversion for UV B, which is what I'm most interested in. Overall, this sensor is easy to use and provides useful data once calibrated.
+        - link "Verified, collected by SparkFun Electronics. Click to learn more about review types":
+          - /url: https://help.trustpilot.com/s/article/About-Trustpilots-review-labels?language=en_US&utm_source=ProductListImportedSEO#product-review-labels
+          - generic: Verified, collected by SparkFun Electronics
+- contentinfo:
+  - text: 
+  - generic: Sign up to receive weekly product releases, special offers and more.
+  - textbox "Sign up to receive weekly product releases, special offers and more.":
+    - /placeholder: Email
+  - button "Subscribe"
+  - text: 
+  - heading "ABOUT SPARKFUN" [level=3]
+  - button "Read Our Story":
+    - generic: Read Our Story
+  - button "Press & Media":
+    - generic: Press & Media
+  - button "SparkFun Education":
+    - generic: SparkFun Education
+  - button "Job Openings":
+    - generic: Job Openings
+  - heading "PARTNER WITH US" [level=3]
+  - button "See Our Partners":
+    - generic: See Our Partners
+  - button "Become a Distributor":
+    - generic: Become a Distributor
+  - button "Receive Volume Discounts":
+    - generic: Receive Volume Discounts
+  - button "Join Our Affiliate Program":
+    - generic: Join Our Affiliate Program
+  - heading "SUPPORT" [level=3]
+  - button "Customer Support":
+    - generic: Customer Support
+  - button "Purchase Orders & Payment Terms":
+    - generic: Purchase Orders & Payment Terms
+  - button "Technical Support Forum":
+    - generic: Technical Support Forum
+  - button "Returns & Exchanges":
+    - generic: Returns & Exchanges
+  - button "FAQs":
+    - generic: FAQs
+  - button "Contact Us":
+    - generic: Contact Us
+  - heading "SITE INFORMATION" [level=3]
+  - button "Terms Of Service":
+    - generic: Terms Of Service
+  - button "Privacy Policy":
+    - generic: Privacy Policy
+  - button "Site Map":
+    - generic: Site Map
+  - heading "SUBSCRIBE" [level=3]
+  - paragraph: Sign up to receive weekly product releases, special offers and more.
+  - generic: "First Name:"
+  - textbox "First Name:":
+    - /placeholder: ""
+  - generic: Email:*
+  - textbox "Email:*":
+    - /placeholder: ""
+  - button "SUBSCRIBE"
+  - heading "VIEW OUR SOCIAL CHANNELS" [level=3]
+  - button "YouTube":
+    - generic: YouTube
+  - button "Instagram":
+    - generic: Instagram
+  - button "GitHub":
+    - generic: GitHub
+  - button "Facebook":
+    - generic: Facebook
+  - button "Twitter":
+    - generic: Twitter
+  - button "TikTok":
+    - generic: TikTok
+  - paragraph:
+    - strong: SparkFun Electronics ®
+    - text: / 6333 Dry Creek Parkway, Niwot, CO 80503
+- log
+- log
+- log
+- log
+- log
+- log
+- log
+- log
+- log
+- log
+- log
+- log
+- log
+- log
+- log
+- log
+- log
+- log
+- log
+- log
+- log
+- log
+- log
+- log
+- log
+- log
+- log
+- log
+- log
+- log
+- log
+- log
+- log
+- log

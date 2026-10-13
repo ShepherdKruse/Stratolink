@@ -1,0 +1,278 @@
+- banner:
+  - link "lcsc notice":
+    - /url: https://www.lcsc.com/electronica
+    - img "lcsc notice"
+  - button "close":
+    - generic: 󰅙
+  - link "Hot-Selling Page":
+    - /url: https://www.lcsc.com/flashSale?isHot=1
+    - text: Hot-Selling
+  - link "Get Coupons Here":
+    - /url: https://www.lcsc.com/coupons?source=lcsc
+    - generic: Coupons
+    - generic: $20
+  - link "Get API Here":
+    - /url: https://www.lcsc.com/agent
+    - text: API
+  - generic: Language
+  - generic: Help
+  - link "Contact Us":
+    - /url: https://www.lcsc.com/service/question
+  - link "LCSC Electronics home":
+    - /url: https://www.lcsc.com/
+    - img "LCSC Electronics logo"
+    - img "LCSC Electronics svg logo"
+  - button "ZOPT2202 clear icon search button":
+    - textbox "search input":
+      - /placeholder: ROQANG
+      - text: ZOPT2202
+    - button "clear icon": 󰅖
+    - button "search button":
+  - link "TI":
+    - /url: https://www.lcsc.com/brand-detail/100.html?s_z=t_b_TI
+  - link "Broadcom":
+    - /url: https://www.lcsc.com/brand-detail/738.html?s_z=t_b_Broadcom
+  - link "EVERLIGHT":
+    - /url: https://www.lcsc.com/brand-detail/138.html?s_z=t_b_EVERLIGHT
+  - link "JSCJ":
+    - /url: https://www.lcsc.com/brand-detail/64.html?s_z=t_b_JSCJ
+  - link "UMW":
+    - /url: https://www.lcsc.com/brand-detail/11853.html?s_z=t_b_UMW
+  - link "BOURNS":
+    - /url: https://www.lcsc.com/brand-detail/377.html?s_z=t_b_BOURNS
+  - link "SILICON LABS":
+    - /url: https://www.lcsc.com/brand-detail/197.html?s_z=t_b_SILICON%2520LABS
+  - link "Amphenol":
+    - /url: https://www.lcsc.com/brand-detail/815.html?s_z=t_b_Amphenol
+  - link "HRE":
+    - /url: https://www.lcsc.com/brand-detail/13390.html?s_z=t_b_HRE
+  - link "Samples Offer":
+    - /url: https://www.lcsc.com/samples
+  - generic: Upload a BOM
+  - button "twarner491":
+    - generic "twarner491"
+  - button "The current currency is USD, click to change to other currencies":
+    - generic: USD
+  - link "Cart":
+    - /url: https://www.lcsc.com/cart
+    - tooltip "Cart"
+- navigation:
+  - link "Catalog Page":
+    - /url: https://www.lcsc.com/products
+    - generic: Catalog
+    - img "Catalog icon"
+  - link "Products Page":
+    - /url: https://www.lcsc.com/products
+    - generic: Products
+  - link "Manufacturers Page":
+    - /url: https://www.lcsc.com/supplier
+    - generic: Manufacturers
+  - link "RFQ/BOM Page":
+    - /url: https://www.lcsc.com/inquiry
+    - generic: RFQ/BOM
+  - link "Deals Page":
+    - /url: https://www.lcsc.com/flashSale
+    - generic: Deals
+  - link "Custom Cables Page":
+    - /url: https://lcsccable.com
+    - generic: Custom Cables
+  - button "Solutions":
+    - generic: Solutions
+  - button "Resources":
+    - generic: Resources
+- main:
+  - generic: 0 results found for "ZOPT2202"
+  - generic: Sorry, "ZOPT2202" did not return any results.
+  - generic: Copy Link
+  - separator
+  - generic: Search tips
+  - generic: Double-check the spelling of part numbers or keywords.
+  - generic: Try broader or more general terms — you can refine results later.
+  - text: Search by
+  - link "Product Category":
+    - /url: https://www.lcsc.com/products
+  - generic: You Might Also Like
+  - link "FOJAN FOJAN, headquartered in Jinpu Electronic Industrial Park, Ma'anshan City, Anhui Province, has branches and offices in Shenzhen, Dongguan, Shanghai, Nanjing, and Hong Kong. With nearly 20 years of technical accumulation and experience, the main product lines include thick film chip resistors, thin film chip resistors, alloy chip resistors, chip network resistors, and multilayer ceramic capacitors.":
+    - /url: https://www.lcsc.com/flashSale?brandIdList=%255B%252213046%2522%255D&isHot=1&isDiscount=1&isFlashSale=1
+    - generic "FOJAN"
+    - generic "FOJAN, headquartered in Jinpu Electronic Industrial Park, Ma'anshan City, Anhui Province, has branches and offices in Shenzhen, Dongguan, Shanghai, Nanjing, and Hong Kong. With nearly 20 years of technical accumulation and experience, the main product lines include thick film chip resistors, thin film chip resistors, alloy chip resistors, chip network resistors, and multilayer ceramic capacitors."
+  - link "YXC Crystal Oscillators YXC Crystal Oscillators, founded in 2010 and headquartered in Shenzhen, China, specializes in the design and manufacturing of RF clock chips and frequency control solutions. The main product lines include programmable crystals, oscillators, and real-time clock modules.":
+    - /url: https://www.lcsc.com/flashSale?brandIdList=%255B%2522287%2522%255D&isHot=1&isDiscount=1&isFlashSale=1
+    - generic "YXC Crystal Oscillators"
+    - generic "YXC Crystal Oscillators, founded in 2010 and headquartered in Shenzhen, China, specializes in the design and manufacturing of RF clock chips and frequency control solutions. The main product lines include programmable crystals, oscillators, and real-time clock modules."
+  - link "TECH PUBLIC TECH PUBLIC, established in 2009 and headquartered in Taiwan, China, boasts an elite design team with members from renowned domestic and international companies, each core member possessing over 10 years of design experience. TECH PUBLIC specializes in the design of power devices, primarily producing ESD protection diodes, Schottky diodes, MOSFETs, LDOs, and buck-boost devices.":
+    - /url: https://www.lcsc.com/flashSale?brandIdList=%255B%252212241%2522%255D&isHot=1&isDiscount=1&isFlashSale=1
+    - generic "TECH PUBLIC"
+    - generic "TECH PUBLIC, established in 2009 and headquartered in Taiwan, China, boasts an elite design team with members from renowned domestic and international companies, each core member possessing over 10 years of design experience. TECH PUBLIC specializes in the design of power devices, primarily producing ESD protection diodes, Schottky diodes, MOSFETs, LDOs, and buck-boost devices."
+  - link "HCTL":
+    - /url: https://www.lcsc.com/flashSale?brandIdList=%255B%252212732%2522%255D&isHot=1&isDiscount=1&isFlashSale=1
+    - generic "HCTL"
+  - link "XKB Connection XKB Connection, established in 1995 and headquartered in Dongguan City, Guangdong Province, is a high-tech enterprise specializing in the research, development, production, and sales of electronic components such as connectors, switches, and wire harnesses. The company is dedicated to providing customers with high-quality, highly reliable connection solutions. It primarily produces various types of connectors, switches, wire harnesses, and related accessories.":
+    - /url: https://www.lcsc.com/flashSale?brandIdList=%255B%252211722%2522%255D&isHot=1&isDiscount=1&isFlashSale=1
+    - generic "XKB Connection"
+    - generic "XKB Connection, established in 1995 and headquartered in Dongguan City, Guangdong Province, is a high-tech enterprise specializing in the research, development, production, and sales of electronic components such as connectors, switches, and wire harnesses. The company is dedicated to providing customers with high-quality, highly reliable connection solutions. It primarily produces various types of connectors, switches, wire harnesses, and related accessories."
+  - link "GOODWORK GOODWORK, established in 2004 and headquartered in Shenzhen, China, is a national high-tech enterprise specializing in the research, development, production, and sales of semiconductor discrete devices. The main product lines include diodes, transistors, rectifier bridge stacks, TVS diodes, MOSFETs, ESD protection components, and three-terminal voltage regulators.":
+    - /url: https://www.lcsc.com/flashSale?brandIdList=%255B%252212245%2522%255D&isHot=1&isDiscount=1&isFlashSale=1
+    - generic "GOODWORK"
+    - generic "GOODWORK, established in 2004 and headquartered in Shenzhen, China, is a national high-tech enterprise specializing in the research, development, production, and sales of semiconductor discrete devices. The main product lines include diodes, transistors, rectifier bridge stacks, TVS diodes, MOSFETs, ESD protection components, and three-terminal voltage regulators."
+- contentinfo:
+  - generic "about Information": Information
+  - list:
+    - link "Go to About LCSC Page":
+      - /url: https://www.lcsc.com/about/company
+      - text: About LCSC
+    - link "Go to Contact Us Page":
+      - /url: https://www.lcsc.com/service/question
+      - text: Contact Us
+    - link "Go to LCSC Seller Page":
+      - /url: https://www.lcsc.com/about/supplier
+      - text: LCSC Seller
+    - link "Go to Quality Assurance Page":
+      - /url: https://assets.lcsc.com/datasheet/szlcsc/Download-ISO9001-Certification.pdf
+      - text: Quality Assurance
+    - link "Go to Terms and Conditions Page":
+      - /url: https://www.lcsc.com/help/terms-and-conditions
+      - text: Terms and Conditions
+    - link "Go to Privacy Policy Page":
+      - /url: https://www.lcsc.com/help/privacy
+      - text: Privacy Policy
+    - link "Go to Cookie Notice Page":
+      - /url: https://www.lcsc.com/help-center/lcsc-information/cookie-notice
+      - text: Cookie Notice
+    - link "Go to Blog Page":
+      - /url: https://www.lcsc.com/blog
+      - text: Blog
+  - generic "about Tools": Tools
+  - list:
+    - link "Go to BOM Tool/RFQ Page":
+      - /url: https://www.lcsc.com/bom
+      - text: BOM Tool/RFQ
+    - link "Go to API Page":
+      - /url: https://www.lcsc.com/agent
+      - text: API
+    - link "Go to LCSC Calculator Hub Page":
+      - /url: https://www.lcsc.com/tools
+      - text: LCSC Calculator Hub
+    - link "Go to Cross Reference Page":
+      - /url: https://www.lcsc.com/tools/cross-reference
+      - text: Cross Reference
+  - generic "about Customer Service": Customer Service
+  - list:
+    - link "Go to Track Order Page":
+      - /url: https://www.lcsc.com/personalCenter/order/list
+      - text: Track Order
+    - link "Go to Return Policy Page":
+      - /url: https://www.lcsc.com/help-center/return-refund
+      - text: Return Policy
+    - link "Go to How to Checkout Page":
+      - /url: https://www.lcsc.com/help-center/ordering-quotation/order-and-checkout
+      - text: How to Checkout
+    - link "Go to Orders & Payment Terms Page":
+      - /url: https://www.lcsc.com/help-center/payment-invoice/payment-methods
+      - text: Orders & Payment Terms
+    - link "Go to International Shipping Page":
+      - /url: https://www.lcsc.com/help-center/shipping-delivering
+      - text: International Shipping
+    - listitem: Feedback
+    - link "Go to FAQ Page":
+      - /url: https://www.lcsc.com/help-center
+      - text: FAQ
+    - link "Go to Help Center Page":
+      - /url: https://www.lcsc.com/help-center
+      - text: Help Center
+  - generic "about Electronic Components": Electronic Components
+  - list:
+    - link "Go to EasyEDA Page":
+      - /url: https://easyeda.com
+      - text: EasyEDA
+    - link "Go to JLCPCB Page":
+      - /url: https://jlcpcb.com
+      - text: JLCPCB
+    - link "Go to LCSC Page":
+      - /url: https://www.lcsc.com/
+      - text: LCSC
+    - link "Go to CUSTOM CABLES Page":
+      - /url: https://lcsccable.com
+      - text: CUSTOM CABLES
+    - link "Go to FRONT PANELS Page":
+      - /url: https://www.lcsc.com/front-panel
+      - text: FRONT PANELS
+  - generic "about Connect With Us": Connect With Us
+  - generic: "Customer Service: 0086-755-83210457"
+  - generic: "Logistics Dept.: 0086-755-83233027"
+  - text: "Email:"
+  - link "support@lcsc.com":
+    - /url: mailto:support@lcsc.com
+  - generic: 9:30 am - 12 am, 1:30 pm - 10 pm
+  - generic: Monday - Friday, UTC/GMT +8
+  - generic: "Current Time: Wed, Oct 14, 02:02:16 GMT+8"
+  - generic: Follow Us
+  - link "LCSC Electronics official instagram":
+    - /url: https://www.instagram.com/lcscelectronics
+  - link "LCSC Electronics official facebook":
+    - /url: https://www.facebook.com/lcsc.electronics
+  - link "LCSC Electronics official linkedIn":
+    - /url: https://www.linkedin.com/company/lcsc-electronics
+  - link "LCSC Electronics official twitter":
+    - /url: https://x.com/lcscelectronics
+  - link "LCSC Electronics official youtube":
+    - /url: https://www.youtube.com/c/LCSCElectronics
+  - link "PCI DSS certified":
+    - /url: /payment/PCI.pdf
+    - img "PCI DSS certified"
+  - link "trustlogo about lcsc.com":
+    - /url: https://www.trustlogo.com/ttb_searcher/trustlogo?v_querytype=W&v_shortname=CL1&v_search=https://www.lcsc.com&x=6&y=5
+  - text: Encrypted
+  - text: Payment
+  - link "Go to Terms & Conditions Page":
+    - /url: https://www.lcsc.com/help/terms-and-conditions
+    - text: Terms & Conditions
+  - text: "|"
+  - link "Go to Privacy Notice Page":
+    - /url: https://www.lcsc.com/help/privacy
+    - text: Privacy Notice
+  - text: "| Cookie Settings |"
+  - link "Go to Do Not Sell or Share My Personal Information Page":
+    - /url: https://www.lcsc.com/help/do-not-sell
+    - text: Do Not Sell / Do Not Share My Personal Information
+  - generic: © 2025 LCSC.COM All Rights Reserved.
+  - link "about 粤ICP备17041818号":
+    - /url: http://beian.miit.gov.cn
+    - text: 粤ICP备17041818号
+  - link "about ISO/IEC":
+    - /url: https://static.lcsc.com/feassets/pc/file/251202/ISO-IEC%20Certificate.pdf
+    - text: ISO/IEC
+- complementary:
+  - link "Contact us":
+    - /url: https://www.lcsc.com/service/question
+- contentinfo:
+  - text: LCSC uses cookies and similar technology to improve site performance, enhance security, personal content and ads, and understand how you interact with our services. This information is shared with third-party service providers. Learn more in our
+  - link "Cookie Policy":
+    - /url: https://www.lcsc.com/help-center/lcsc-information/cookie-notice
+  - text: .
+  - button "Cookie Settings":
+    - generic: Cookie Settings
+  - button "Reject All":
+    - generic: Reject All
+  - button "Accept All Cookies":
+    - generic: Accept All Cookies
+  - button "Close cookie notice":
+    - generic: 󰅖
+- dialog:
+  - generic: We've updated our Terms
+  - generic: We are committed to maintaining transparency and keeping your personal data safe. We have updated our Privacy Policy. Please take a moment to review the Privacy Policy for details of the changes. You may also choose whether to receive marketing communications from us. Your choice is entirely voluntary, and choosing not to consent to marketing communications will not affect your access to or use of our website or core services.
+  - generic: 󰄱
+  - checkbox "I agree to the updated Privacy Policy *"
+  - text: I agree to the updated
+  - link "Privacy Policy":
+    - /url: https://www.lcsc.com/help/privacy?hideAgreementUpdate=1
+  - generic: "*"
+  - generic: 󰄱
+  - checkbox "I agree to the updated Marketing Policy"
+  - text: I agree to the updated
+  - link "Marketing Policy":
+    - /url: https://www.lcsc.com/help/marketing-consulting-agreement?hideAgreementUpdate=1
+  - button "Decline" [disabled]:
+    - generic: Decline
+  - button "Accept & Continue" [disabled]:
+    - generic: Accept & Continue

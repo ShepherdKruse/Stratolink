@@ -2646,7 +2646,7 @@
 					(hide yes)
 				)
 			)
-			(property "Datasheet" ""
+			(property "Datasheet" "https://docs.rakwireless.com/product-categories/wisduo/rak3172-module/datasheet/"
 				(at 0 0 0)
 				(effects
 					(font
@@ -2655,7 +2655,7 @@
 					(hide yes)
 				)
 			)
-			(property "Description" "RAK3172-9-SM-NI sub-GHz STM32WLE5CC radio module"
+			(property "Description" "RAK3172 STM32WLE5CC, 32-pad, high-band regional-label variant, no TCXO, no IPEX; antenna on RF pad 12"
 				(at 0 0 0)
 				(effects
 					(font
@@ -2755,7 +2755,7 @@
 					(hide yes)
 				)
 			)
-			(property "Description_1" "RAK3172-9-SM-NI sub-GHz STM32WLE5CC radio module"
+			(property "Description_1" "RAK3172 STM32WLE5CC, 32-pad, high-band regional-label variant, no TCXO, no IPEX; antenna on RF pad 12"
 				(at 0 0 0)
 				(effects
 					(font
@@ -2765,7 +2765,7 @@
 					(hide yes)
 				)
 			)
-			(property "Availability" "Not in stock"
+			(property "Availability" ""
 				(at 0 0 0)
 				(effects
 					(font
@@ -2775,7 +2775,7 @@
 					(hide yes)
 				)
 			)
-			(property "AVAILABILITY" "Not in stock"
+			(property "AVAILABILITY" ""
 				(at 0 0 0)
 				(effects
 					(font

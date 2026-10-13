@@ -1,0 +1,156 @@
+
+  - text: Search Parts
+  - button "Close":
+    - generic: 
+  - table:
+    - rowgroup:
+      - row "Top Designator Bottom Designator Comment Footprint Matched Part Detail Qty Source Lib Type Total Cost":
+        - columnheader "Top Designator":
+          - generic: Top Designator
+        - columnheader "Bottom Designator":
+          - generic: Bottom Designator
+        - columnheader "Comment":
+          - generic: Comment
+        - columnheader "Footprint":
+          - generic: Footprint
+        - columnheader "Matched Part Detail":
+          - generic: Matched Part Detail
+        - columnheader "Qty":
+          - generic: Qty
+        - columnheader "Source":
+          - generic: Source
+        - columnheader "Lib Type":
+          - generic: Lib Type
+        - columnheader "Total Cost":
+          - generic: Total Cost
+  - table:
+    - rowgroup:
+      - row "U6 LTR-390UV-01 Stratolink_v1p1_U6_SMD6_LTR-390UV-01_LTO-L LTR-390UV-01 C492374 -40℃~+85℃ 1.7V~3.6V 157klx 18bit I2C Light Intensity Low power/sleep mode、Spectral correction/filtering、High dynamic range measurement、Adjustable gain control、Interrupt/event trigger、Built-in temperature compensation SMD-6P,2x2mm Ambient Light Sensors ROHS 3 Extended $10.1091":
+        - cell "U6":
+          - generic "U6"
+        - cell
+        - cell "LTR-390UV-01":
+          - generic "LTR-390UV-01"
+        - cell "Stratolink_v1p1_U6_SMD6_LTR-390UV-01_LTO-L":
+          - generic "Stratolink_v1p1_U6_SMD6_LTR-390UV-01_LTO-L"
+        - cell "LTR-390UV-01 C492374 -40℃~+85℃ 1.7V~3.6V 157klx 18bit I2C Light Intensity Low power/sleep mode、Spectral correction/filtering、High dynamic range measurement、Adjustable gain control、Interrupt/event trigger、Built-in temperature compensation SMD-6P,2x2mm Ambient Light Sensors ROHS":
+          - generic: LTR-390UV-01 C492374
+          - generic: "-40℃~+85℃ 1.7V~3.6V 157klx 18bit I2C Light Intensity Low power/sleep mode、Spectral correction/filtering、High dynamic range measurement、Adjustable gain control、Interrupt/event trigger、Built-in temperature compensation SMD-6P,2x2mm Ambient Light Sensors ROHS"
+        - cell "3":
+          - generic: "3"
+        - cell
+        - cell "Extended":
+          - generic: Extended
+        - cell "$10.1091":
+          - generic: $10.1091
+  - tablist:
+    - tab "Public inventory" [selected]
+    - tab "My Inventory"
+    - tab "My Lists"
+  - tabpanel "Public inventory":
+    - textbox "Search within results" [active]: VEML6075
+    - generic: 
+    - button "":
+      - generic: 
+    - generic: Show Filters
+    - text:   
+    - table:
+      - rowgroup:
+        - 'row "MFR Part # Description JLCPCB Stock Idle Parts Stock My Inventory Price"':
+          - columnheader
+          - 'columnheader "MFR Part #"':
+            - generic: "MFR Part #"
+          - columnheader
+          - columnheader "Description":
+            - generic: Description
+          - columnheader
+          - columnheader "JLCPCB Stock":
+            - generic: JLCPCB Stock
+          - columnheader
+          - columnheader "Idle Parts Stock":
+            - text: Idle Parts Stock
+          - columnheader
+          - columnheader "My Inventory":
+            - text: My Inventory
+          - columnheader
+          - columnheader "Price":
+            - generic: Price
+          - columnheader
+          - columnheader
+    - table:
+      - rowgroup:
+        - 'row "VEML6075-topview VEML6075 C75329 Extended Low power/sleep mode、Built-in temperature compensation OPLGA-4(1.3x2) Ambient Light Sensors ROHS 0 0 JLCPCB: 0 Other: 0 1+ $3.3990 10+ $3.3289 Show More Inventory shortage"':
+          - cell:
+            - generic: 
+          - cell "VEML6075-topview VEML6075 C75329 Extended":
+            - img "VEML6075-topview"
+            - link "VEML6075":
+              - /url: https://jlcpcb.com/partdetail/VishayIntertech-VEML6075/C75329
+            - generic: C75329
+            - generic: Extended
+          - cell
+          - cell "Low power/sleep mode、Built-in temperature compensation OPLGA-4(1.3x2) Ambient Light Sensors ROHS":
+            - generic: Low power/sleep mode、Built-in temperature compensation OPLGA-4(1.3x2) Ambient Light Sensors ROHS
+          - cell
+          - cell "0":
+            - generic: "0"
+          - cell
+          - cell "0":
+            - generic: "0"
+          - cell
+          - 'cell "JLCPCB: 0 Other: 0"':
+            - generic: "JLCPCB:"
+            - text: "0"
+            - generic: "Other:"
+            - text: "0"
+          - cell
+          - cell "1+ $3.3990 10+ $3.3289 Show More":
+            - generic: 1+
+            - generic: $3.3990
+            - generic: 10+
+            - generic: $3.3289
+            - generic: Show More
+          - cell
+          - cell "Inventory shortage":
+            - generic: Inventory shortage
+        - 'row "no-image VEML6075-SB C19278419 Extended -40℃~+85℃ 1.25mm 1.7V~3.6V 1mm 2mm 480uA I2C Low-power mode、Temperature compensation、Integrated ADC、Integrated signal conditioning - Sensor Modules ROHS 0 0 JLCPCB: 0 Other: 0 1000+ $14.3625 200+ $15.1176 Show More Inventory shortage"':
+          - cell:
+            - generic: 
+          - cell "no-image VEML6075-SB C19278419 Extended":
+            - img "no-image"
+            - link "VEML6075-SB":
+              - /url: https://jlcpcb.com/partdetail/VishayIntertech-VEML6075SB/C19278419
+            - generic: C19278419
+            - generic: Extended
+          - cell
+          - cell "-40℃~+85℃ 1.25mm 1.7V~3.6V 1mm 2mm 480uA I2C Low-power mode、Temperature compensation、Integrated ADC、Integrated signal conditioning - Sensor Modules ROHS":
+            - generic: "-40℃~+85℃ 1.25mm 1.7V~3.6V 1mm 2mm 480uA I2C Low-power mode、Temperature compensation、Integrated ADC、Integrated signal conditioning - Sensor Modules ROHS"
+          - cell
+          - cell "0":
+            - generic: "0"
+          - cell
+          - cell "0":
+            - generic: "0"
+          - cell
+          - 'cell "JLCPCB: 0 Other: 0"':
+            - generic: "JLCPCB:"
+            - text: "0"
+            - generic: "Other:"
+            - text: "0"
+          - cell
+          - cell "1000+ $14.3625 200+ $15.1176 Show More":
+            - generic: 1000+
+            - generic: $14.3625
+            - generic: 200+
+            - generic: $15.1176
+            - generic: Show More
+          - cell
+          - cell "Inventory shortage":
+            - generic: Inventory shortage
+    - generic: 2 items in total
+    - button "" [disabled]:
+      - generic: 
+    - list:
+      - listitem: "1"
+    - button "" [disabled]:
+      - generic: 

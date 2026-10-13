@@ -1,0 +1,954 @@
+
+  - text: Search Parts
+  - button "Close":
+    - generic: 
+  - table:
+    - rowgroup:
+      - row "Top Designator Bottom Designator Comment Footprint Matched Part Detail Qty Source Lib Type Total Cost":
+        - columnheader "Top Designator":
+          - generic: Top Designator
+        - columnheader "Bottom Designator":
+          - generic: Bottom Designator
+        - columnheader "Comment":
+          - generic: Comment
+        - columnheader "Footprint":
+          - generic: Footprint
+        - columnheader "Matched Part Detail":
+          - generic: Matched Part Detail
+        - columnheader "Qty":
+          - generic: Qty
+        - columnheader "Source":
+          - generic: Source
+        - columnheader "Lib Type":
+          - generic: Lib Type
+        - columnheader "Total Cost":
+          - generic: Total Cost
+  - table:
+    - rowgroup:
+      - row "R4 0402WGF3654TCE Stratolink_v1p1_R4_R_0402_1005Metric 0402WGF3654TCE C2766827 -55℃~+155℃ 3.65MΩ 50V 62.5mW Thick Film Resistor ±1% ±100ppm/℃ 0402 Chip Resistor - Surface Mount ROHS 20 Extended $0.0160":
+        - cell
+        - cell "R4":
+          - generic "R4"
+        - cell "0402WGF3654TCE":
+          - generic "0402WGF3654TCE"
+        - cell "Stratolink_v1p1_R4_R_0402_1005Metric":
+          - generic "Stratolink_v1p1_R4_R_0402_1005Metric"
+        - cell "0402WGF3654TCE C2766827 -55℃~+155℃ 3.65MΩ 50V 62.5mW Thick Film Resistor ±1% ±100ppm/℃ 0402 Chip Resistor - Surface Mount ROHS":
+          - generic: 0402WGF3654TCE C2766827
+          - generic: "-55℃~+155℃ 3.65MΩ 50V 62.5mW Thick Film Resistor ±1% ±100ppm/℃ 0402 Chip Resistor - Surface Mount ROHS"
+        - cell "20":
+          - generic: "20"
+        - cell
+        - cell "Extended":
+          - generic: Extended
+        - cell "$0.0160":
+          - generic: $0.0160
+  - tablist:
+    - tab "Public inventory" [selected]
+    - tab "My Inventory"
+    - tab "My Lists"
+  - tabpanel "Public inventory":
+    - textbox "Search within results" [active]: 3.65M 0402
+    - generic: 
+    - button "":
+      - generic: 
+    - generic: Show Filters
+    - text:   
+    - table:
+      - rowgroup:
+        - 'row "MFR Part # Description JLCPCB Stock Idle Parts Stock My Inventory Price"':
+          - columnheader
+          - 'columnheader "MFR Part #"':
+            - generic: "MFR Part #"
+          - columnheader
+          - columnheader "Description":
+            - generic: Description
+          - columnheader
+          - columnheader "JLCPCB Stock":
+            - generic: JLCPCB Stock
+          - columnheader
+          - columnheader "Idle Parts Stock":
+            - text: Idle Parts Stock
+          - columnheader
+          - columnheader "My Inventory":
+            - text: My Inventory
+          - columnheader
+          - columnheader "Price":
+            - generic: Price
+          - columnheader
+          - columnheader
+          - columnheader
+    - table:
+      - rowgroup:
+        - 'row "RC0402FR-073M65L-topview RC0402FR-073M65L C477700 Extended -55℃~+155℃ 3.65MΩ 50V 62.5mW Thick Film Resistor ±1% ±100ppm/℃ 0402 Chip Resistor - Surface Mount ROHS 9822 0 JLCPCB: 0 Other: 0 1+ $0.0022 10000+ $0.0016 Show More Select "':
+          - cell:
+            - generic: 
+          - cell "RC0402FR-073M65L-topview RC0402FR-073M65L C477700 Extended":
+            - img "RC0402FR-073M65L-topview"
+            - link "RC0402FR-073M65L":
+              - /url: https://jlcpcb.com/partdetail/YAGEO-RC0402FR073M65L/C477700
+            - generic: C477700
+            - generic: Extended
+          - cell
+          - cell "-55℃~+155℃ 3.65MΩ 50V 62.5mW Thick Film Resistor ±1% ±100ppm/℃ 0402 Chip Resistor - Surface Mount ROHS":
+            - generic: "-55℃~+155℃ 3.65MΩ 50V 62.5mW Thick Film Resistor ±1% ±100ppm/℃ 0402 Chip Resistor - Surface Mount ROHS"
+          - cell
+          - cell "9822":
+            - generic: "9822"
+          - cell
+          - cell "0":
+            - generic: "0"
+          - cell
+          - 'cell "JLCPCB: 0 Other: 0"':
+            - generic: "JLCPCB:"
+            - text: "0"
+            - generic: "Other:"
+            - text: "0"
+          - cell
+          - cell "1+ $0.0022 10000+ $0.0016 Show More":
+            - generic: 1+
+            - generic: $0.0022
+            - generic: 10000+
+            - generic: $0.0016
+            - generic: Show More
+          - cell
+          - cell "Select ":
+            - button "Select"
+            - generic: 
+        - 'row "no-image AA0402FR-073M65L C2097072 Extended -55℃~+155℃ 125mW 150V 3.65MΩ Thick Film Resistor ±1% ±150ppm/℃ 0402 Chip Resistor - Surface Mount ROHS 0 0 JLCPCB: 0 Other: 0 1000+ $0.0020 200+ $0.0022 Show More Inventory shortage"':
+          - cell:
+            - generic: 
+          - cell "no-image AA0402FR-073M65L C2097072 Extended":
+            - img "no-image"
+            - link "AA0402FR-073M65L":
+              - /url: https://jlcpcb.com/partdetail/YAGEO-AA0402FR073M65L/C2097072
+            - generic: C2097072
+            - generic: Extended
+          - cell
+          - cell "-55℃~+155℃ 125mW 150V 3.65MΩ Thick Film Resistor ±1% ±150ppm/℃ 0402 Chip Resistor - Surface Mount ROHS":
+            - generic: "-55℃~+155℃ 125mW 150V 3.65MΩ Thick Film Resistor ±1% ±150ppm/℃ 0402 Chip Resistor - Surface Mount ROHS"
+          - cell
+          - cell "0":
+            - generic: "0"
+          - cell
+          - cell "0":
+            - generic: "0"
+          - cell
+          - 'cell "JLCPCB: 0 Other: 0"':
+            - generic: "JLCPCB:"
+            - text: "0"
+            - generic: "Other:"
+            - text: "0"
+          - cell
+          - cell "1000+ $0.0020 200+ $0.0022 Show More":
+            - generic: 1000+
+            - generic: $0.0020
+            - generic: 200+
+            - generic: $0.0022
+            - generic: Show More
+          - cell
+          - cell "Inventory shortage":
+            - generic: Inventory shortage
+        - 'row "no-image MCS04020C3654FE000 C2115752 Extended -55℃~+155℃ 100mW 3.65MΩ 50V Thin Film Resistor ±1% ±50ppm/℃ 0402 Chip Resistor - Surface Mount ROHS 0 0 JLCPCB: 0 Other: 0 25000+ $0.0077 500+ $0.0206 Show More Inventory shortage"':
+          - cell:
+            - generic: 
+          - cell "no-image MCS04020C3654FE000 C2115752 Extended":
+            - img "no-image"
+            - link "MCS04020C3654FE000":
+              - /url: https://jlcpcb.com/partdetail/VishayIntertech-MCS04020C3654FE000/C2115752
+            - generic: C2115752
+            - generic: Extended
+          - cell
+          - cell "-55℃~+155℃ 100mW 3.65MΩ 50V Thin Film Resistor ±1% ±50ppm/℃ 0402 Chip Resistor - Surface Mount ROHS":
+            - generic: "-55℃~+155℃ 100mW 3.65MΩ 50V Thin Film Resistor ±1% ±50ppm/℃ 0402 Chip Resistor - Surface Mount ROHS"
+          - cell
+          - cell "0":
+            - generic: "0"
+          - cell
+          - cell "0":
+            - generic: "0"
+          - cell
+          - 'cell "JLCPCB: 0 Other: 0"':
+            - generic: "JLCPCB:"
+            - text: "0"
+            - generic: "Other:"
+            - text: "0"
+          - cell
+          - cell "25000+ $0.0077 500+ $0.0206 Show More":
+            - generic: 25000+
+            - generic: $0.0077
+            - generic: 500+
+            - generic: $0.0206
+            - generic: Show More
+          - cell
+          - cell "Inventory shortage":
+            - generic: Inventory shortage
+        - 'row "no-image RK73H1ETTP3654F C2574579 Extended -55℃~+155℃ 100mW 3.65MΩ Thick Film Resistor ±1% ±200ppm/℃ 0402 Chip Resistor - Surface Mount ROHS 0 0 JLCPCB: 0 Other: 0 502+ $0.0012 30+ $0.0016 Show More Inventory shortage"':
+          - cell:
+            - generic: 
+          - cell "no-image RK73H1ETTP3654F C2574579 Extended":
+            - img "no-image"
+            - link "RK73H1ETTP3654F":
+              - /url: https://jlcpcb.com/partdetail/KOA_SpeerElec-RK73H1ETTP3654F/C2574579
+            - generic: C2574579
+            - generic: Extended
+          - cell
+          - cell "-55℃~+155℃ 100mW 3.65MΩ Thick Film Resistor ±1% ±200ppm/℃ 0402 Chip Resistor - Surface Mount ROHS":
+            - generic: "-55℃~+155℃ 100mW 3.65MΩ Thick Film Resistor ±1% ±200ppm/℃ 0402 Chip Resistor - Surface Mount ROHS"
+          - cell
+          - cell "0":
+            - generic: "0"
+          - cell
+          - cell "0":
+            - generic: "0"
+          - cell
+          - 'cell "JLCPCB: 0 Other: 0"':
+            - generic: "JLCPCB:"
+            - text: "0"
+            - generic: "Other:"
+            - text: "0"
+          - cell
+          - cell "502+ $0.0012 30+ $0.0016 Show More":
+            - generic: 502+
+            - generic: $0.0012
+            - generic: 30+
+            - generic: $0.0016
+            - generic: Show More
+          - cell
+          - cell "Inventory shortage":
+            - generic: Inventory shortage
+        - 'row "no-image WR04W3654FTL C2612467 Extended -55℃~+155℃ 3.65MΩ 50V 62.5mW Thick Film Resistor ±1% ±100ppm/℃ 0402 Chip Resistor - Surface Mount ROHS 0 0 JLCPCB: 0 Other: 0 1000+ $0.0004 200+ $0.0005 Show More Inventory shortage"':
+          - cell:
+            - generic: 
+          - cell "no-image WR04W3654FTL C2612467 Extended":
+            - img "no-image"
+            - link "WR04W3654FTL":
+              - /url: https://jlcpcb.com/partdetail/Walsin_TechCorp-WR04W3654FTL/C2612467
+            - generic: C2612467
+            - generic: Extended
+          - cell
+          - cell "-55℃~+155℃ 3.65MΩ 50V 62.5mW Thick Film Resistor ±1% ±100ppm/℃ 0402 Chip Resistor - Surface Mount ROHS":
+            - generic: "-55℃~+155℃ 3.65MΩ 50V 62.5mW Thick Film Resistor ±1% ±100ppm/℃ 0402 Chip Resistor - Surface Mount ROHS"
+          - cell
+          - cell "0":
+            - generic: "0"
+          - cell
+          - cell "0":
+            - generic: "0"
+          - cell
+          - 'cell "JLCPCB: 0 Other: 0"':
+            - generic: "JLCPCB:"
+            - text: "0"
+            - generic: "Other:"
+            - text: "0"
+          - cell
+          - cell "1000+ $0.0004 200+ $0.0005 Show More":
+            - generic: 1000+
+            - generic: $0.0004
+            - generic: 200+
+            - generic: $0.0005
+            - generic: Show More
+          - cell
+          - cell "Inventory shortage":
+            - generic: Inventory shortage
+        - 'row "no-image 0402WGF3654TCE C2766827 Extended -55℃~+155℃ 3.65MΩ 50V 62.5mW Thick Film Resistor ±1% ±100ppm/℃ 0402 Chip Resistor - Surface Mount ROHS 0 0 JLCPCB: 0 Other: 0 50200+ $0.0004 50000+ $0.0004 Show More Inventory shortage"':
+          - cell:
+            - generic: 
+          - cell "no-image 0402WGF3654TCE C2766827 Extended":
+            - img "no-image"
+            - link "0402WGF3654TCE":
+              - /url: https://jlcpcb.com/partdetail/2905282-0402WGF3654TCE/C2766827
+            - generic: C2766827
+            - generic: Extended
+          - cell
+          - cell "-55℃~+155℃ 3.65MΩ 50V 62.5mW Thick Film Resistor ±1% ±100ppm/℃ 0402 Chip Resistor - Surface Mount ROHS":
+            - generic: "-55℃~+155℃ 3.65MΩ 50V 62.5mW Thick Film Resistor ±1% ±100ppm/℃ 0402 Chip Resistor - Surface Mount ROHS"
+          - cell
+          - cell "0":
+            - generic: "0"
+          - cell
+          - cell "0":
+            - generic: "0"
+          - cell
+          - 'cell "JLCPCB: 0 Other: 0"':
+            - generic: "JLCPCB:"
+            - text: "0"
+            - generic: "Other:"
+            - text: "0"
+          - cell
+          - cell "50200+ $0.0004 50000+ $0.0004 Show More":
+            - generic: 50200+
+            - generic: $0.0004
+            - generic: 50000+
+            - generic: $0.0004
+            - generic: Show More
+          - cell
+          - cell "Inventory shortage":
+            - generic: Inventory shortage
+        - 'row "no-image CRCW04023M65FKED C3923731 Extended -55℃~+155℃ 3.65MΩ 62.5mW Thick Film Resistor ±1% ±100ppm/℃ 0402 Chip Resistor - Surface Mount ROHS 0 0 JLCPCB: 0 Other: 0 1000+ $0.0019 200+ $0.0020 Show More Inventory shortage"':
+          - cell:
+            - generic: 
+          - cell "no-image CRCW04023M65FKED C3923731 Extended":
+            - img "no-image"
+            - link "CRCW04023M65FKED":
+              - /url: https://jlcpcb.com/partdetail/VishayIntertech-CRCW04023M65FKED/C3923731
+            - generic: C3923731
+            - generic: Extended
+          - cell
+          - cell "-55℃~+155℃ 3.65MΩ 62.5mW Thick Film Resistor ±1% ±100ppm/℃ 0402 Chip Resistor - Surface Mount ROHS":
+            - generic: "-55℃~+155℃ 3.65MΩ 62.5mW Thick Film Resistor ±1% ±100ppm/℃ 0402 Chip Resistor - Surface Mount ROHS"
+          - cell
+          - cell "0":
+            - generic: "0"
+          - cell
+          - cell "0":
+            - generic: "0"
+          - cell
+          - 'cell "JLCPCB: 0 Other: 0"':
+            - generic: "JLCPCB:"
+            - text: "0"
+            - generic: "Other:"
+            - text: "0"
+          - cell
+          - cell "1000+ $0.0019 200+ $0.0020 Show More":
+            - generic: 1000+
+            - generic: $0.0019
+            - generic: 200+
+            - generic: $0.0020
+            - generic: Show More
+          - cell
+          - cell "Inventory shortage":
+            - generic: Inventory shortage
+        - 'row "no-image CR203654F C3948548 Extended -55℃~+155℃ 3.65MΩ 62.5mW Thick Film Resistor ±1% ±100ppm/℃ 0402 Chip Resistor - Surface Mount ROHS 0 0 JLCPCB: 0 Other: 0 1000+ $0.0007 200+ $0.0007 Show More Inventory shortage"':
+          - cell:
+            - generic: 
+          - cell "no-image CR203654F C3948548 Extended":
+            - img "no-image"
+            - link "CR203654F":
+              - /url: https://jlcpcb.com/partdetail/Meritek-CR203654F/C3948548
+            - generic: C3948548
+            - generic: Extended
+          - cell
+          - cell "-55℃~+155℃ 3.65MΩ 62.5mW Thick Film Resistor ±1% ±100ppm/℃ 0402 Chip Resistor - Surface Mount ROHS":
+            - generic: "-55℃~+155℃ 3.65MΩ 62.5mW Thick Film Resistor ±1% ±100ppm/℃ 0402 Chip Resistor - Surface Mount ROHS"
+          - cell
+          - cell "0":
+            - generic: "0"
+          - cell
+          - cell "0":
+            - generic: "0"
+          - cell
+          - 'cell "JLCPCB: 0 Other: 0"':
+            - generic: "JLCPCB:"
+            - text: "0"
+            - generic: "Other:"
+            - text: "0"
+          - cell
+          - cell "1000+ $0.0007 200+ $0.0007 Show More":
+            - generic: 1000+
+            - generic: $0.0007
+            - generic: 200+
+            - generic: $0.0007
+            - generic: Show More
+          - cell
+          - cell "Inventory shortage":
+            - generic: Inventory shortage
+        - 'row "no-image CRCW04023M65FKEDC C3991482 Extended -55℃~+155℃ 3.65MΩ 62.5mW Thick Film Resistor ±1% ±100ppm/℃ 0402 Chip Resistor - Surface Mount ROHS 0 0 JLCPCB: 0 Other: 0 1000+ $0.0014 200+ $0.0014 Show More Inventory shortage"':
+          - cell:
+            - generic: 
+          - cell "no-image CRCW04023M65FKEDC C3991482 Extended":
+            - img "no-image"
+            - link "CRCW04023M65FKEDC":
+              - /url: https://jlcpcb.com/partdetail/VishayIntertech-CRCW04023M65FKEDC/C3991482
+            - generic: C3991482
+            - generic: Extended
+          - cell
+          - cell "-55℃~+155℃ 3.65MΩ 62.5mW Thick Film Resistor ±1% ±100ppm/℃ 0402 Chip Resistor - Surface Mount ROHS":
+            - generic: "-55℃~+155℃ 3.65MΩ 62.5mW Thick Film Resistor ±1% ±100ppm/℃ 0402 Chip Resistor - Surface Mount ROHS"
+          - cell
+          - cell "0":
+            - generic: "0"
+          - cell
+          - cell "0":
+            - generic: "0"
+          - cell
+          - 'cell "JLCPCB: 0 Other: 0"':
+            - generic: "JLCPCB:"
+            - text: "0"
+            - generic: "Other:"
+            - text: "0"
+          - cell
+          - cell "1000+ $0.0014 200+ $0.0014 Show More":
+            - generic: 1000+
+            - generic: $0.0014
+            - generic: 200+
+            - generic: $0.0014
+            - generic: Show More
+          - cell
+          - cell "Inventory shortage":
+            - generic: Inventory shortage
+        - 'row "no-image RC1005F3654CS C4192560 Extended -55℃~+155℃ 3.65MΩ 62.5mW Thick Film Resistor ±1% ±100ppm/℃ 0402 Chip Resistor - Surface Mount ROHS 0 0 JLCPCB: 0 Other: 0 1000+ $0.0024 200+ $0.0025 Show More Inventory shortage"':
+          - cell:
+            - generic: 
+          - cell "no-image RC1005F3654CS C4192560 Extended":
+            - img "no-image"
+            - link "RC1005F3654CS":
+              - /url: https://jlcpcb.com/partdetail/4762967-RC1005F3654CS/C4192560
+            - generic: C4192560
+            - generic: Extended
+          - cell
+          - cell "-55℃~+155℃ 3.65MΩ 62.5mW Thick Film Resistor ±1% ±100ppm/℃ 0402 Chip Resistor - Surface Mount ROHS":
+            - generic: "-55℃~+155℃ 3.65MΩ 62.5mW Thick Film Resistor ±1% ±100ppm/℃ 0402 Chip Resistor - Surface Mount ROHS"
+          - cell
+          - cell "0":
+            - generic: "0"
+          - cell
+          - cell "0":
+            - generic: "0"
+          - cell
+          - 'cell "JLCPCB: 0 Other: 0"':
+            - generic: "JLCPCB:"
+            - text: "0"
+            - generic: "Other:"
+            - text: "0"
+          - cell
+          - cell "1000+ $0.0024 200+ $0.0025 Show More":
+            - generic: 1000+
+            - generic: $0.0024
+            - generic: 200+
+            - generic: $0.0025
+            - generic: Show More
+          - cell
+          - cell "Inventory shortage":
+            - generic: Inventory shortage
+        - 'row "no-image RK73H1ERTTP3654F C4228145 Extended -55℃~+155℃ 100mW 3.65MΩ Thick Film Resistor ±1% ±200ppm/℃ 0402 Chip Resistor - Surface Mount ROHS 0 0 JLCPCB: 0 Other: 0 1000+ $0.0064 200+ $0.0068 Show More Inventory shortage"':
+          - cell:
+            - generic: 
+          - cell "no-image RK73H1ERTTP3654F C4228145 Extended":
+            - img "no-image"
+            - link "RK73H1ERTTP3654F":
+              - /url: https://jlcpcb.com/partdetail/KOA_SpeerElec-RK73H1ERTTP3654F/C4228145
+            - generic: C4228145
+            - generic: Extended
+          - cell
+          - cell "-55℃~+155℃ 100mW 3.65MΩ Thick Film Resistor ±1% ±200ppm/℃ 0402 Chip Resistor - Surface Mount ROHS":
+            - generic: "-55℃~+155℃ 100mW 3.65MΩ Thick Film Resistor ±1% ±200ppm/℃ 0402 Chip Resistor - Surface Mount ROHS"
+          - cell
+          - cell "0":
+            - generic: "0"
+          - cell
+          - cell "0":
+            - generic: "0"
+          - cell
+          - 'cell "JLCPCB: 0 Other: 0"':
+            - generic: "JLCPCB:"
+            - text: "0"
+            - generic: "Other:"
+            - text: "0"
+          - cell
+          - cell "1000+ $0.0064 200+ $0.0068 Show More":
+            - generic: 1000+
+            - generic: $0.0064
+            - generic: 200+
+            - generic: $0.0068
+            - generic: Show More
+          - cell
+          - cell "Inventory shortage":
+            - generic: Inventory shortage
+        - 'row "no-image CRCW04023M65FKTD C4257332 Extended -55℃~+155℃ 3.65MΩ 62.5mW Thick Film Resistor ±1% ±100ppm/℃ 0402 Chip Resistor - Surface Mount 0 0 JLCPCB: 0 Other: 0 1000+ $0.0071 200+ $0.0075 Show More Inventory shortage"':
+          - cell:
+            - generic: 
+          - cell "no-image CRCW04023M65FKTD C4257332 Extended":
+            - img "no-image"
+            - link "CRCW04023M65FKTD":
+              - /url: https://jlcpcb.com/partdetail/VishayIntertech-CRCW04023M65FKTD/C4257332
+            - generic: C4257332
+            - generic: Extended
+          - cell
+          - cell "-55℃~+155℃ 3.65MΩ 62.5mW Thick Film Resistor ±1% ±100ppm/℃ 0402 Chip Resistor - Surface Mount":
+            - generic: "-55℃~+155℃ 3.65MΩ 62.5mW Thick Film Resistor ±1% ±100ppm/℃ 0402 Chip Resistor - Surface Mount"
+          - cell
+          - cell "0":
+            - generic: "0"
+          - cell
+          - cell "0":
+            - generic: "0"
+          - cell
+          - 'cell "JLCPCB: 0 Other: 0"':
+            - generic: "JLCPCB:"
+            - text: "0"
+            - generic: "Other:"
+            - text: "0"
+          - cell
+          - cell "1000+ $0.0071 200+ $0.0075 Show More":
+            - generic: 1000+
+            - generic: $0.0071
+            - generic: 200+
+            - generic: $0.0075
+            - generic: Show More
+          - cell
+          - cell "Inventory shortage":
+            - generic: Inventory shortage
+        - 'row "no-image RMCF0402FT3M65 C4348606 Extended -55℃~+155℃ 3.65MΩ 62.5mW Thick Film Resistor ±1% ±200ppm/℃ 0402 Chip Resistor - Surface Mount ROHS 0 0 JLCPCB: 0 Other: 0 1000+ $0.0010 200+ $0.0011 Show More Inventory shortage"':
+          - cell:
+            - generic: 
+          - cell "no-image RMCF0402FT3M65 C4348606 Extended":
+            - img "no-image"
+            - link "RMCF0402FT3M65":
+              - /url: https://jlcpcb.com/partdetail/SEI_Stackpole_Elec-RMCF0402FT3M65/C4348606
+            - generic: C4348606
+            - generic: Extended
+          - cell
+          - cell "-55℃~+155℃ 3.65MΩ 62.5mW Thick Film Resistor ±1% ±200ppm/℃ 0402 Chip Resistor - Surface Mount ROHS":
+            - generic: "-55℃~+155℃ 3.65MΩ 62.5mW Thick Film Resistor ±1% ±200ppm/℃ 0402 Chip Resistor - Surface Mount ROHS"
+          - cell
+          - cell "0":
+            - generic: "0"
+          - cell
+          - cell "0":
+            - generic: "0"
+          - cell
+          - 'cell "JLCPCB: 0 Other: 0"':
+            - generic: "JLCPCB:"
+            - text: "0"
+            - generic: "Other:"
+            - text: "0"
+          - cell
+          - cell "1000+ $0.0010 200+ $0.0011 Show More":
+            - generic: 1000+
+            - generic: $0.0010
+            - generic: 200+
+            - generic: $0.0011
+            - generic: Show More
+          - cell
+          - cell "Inventory shortage":
+            - generic: Inventory shortage
+        - 'row "no-image RMCS0402FT3M65 C5882251 Extended -55℃~+155℃ 3.65MΩ 63mW Thick Film Resistor ±1% ±200ppm/℃ 0402 Chip Resistor - Surface Mount ROHS 0 0 JLCPCB: 0 Other: 0 1000+ $0.0086 200+ $0.0090 Show More Inventory shortage"':
+          - cell:
+            - generic: 
+          - cell "no-image RMCS0402FT3M65 C5882251 Extended":
+            - img "no-image"
+            - link "RMCS0402FT3M65":
+              - /url: https://jlcpcb.com/partdetail/SEI_Stackpole_Elec-RMCS0402FT3M65/C5882251
+            - generic: C5882251
+            - generic: Extended
+          - cell
+          - cell "-55℃~+155℃ 3.65MΩ 63mW Thick Film Resistor ±1% ±200ppm/℃ 0402 Chip Resistor - Surface Mount ROHS":
+            - generic: "-55℃~+155℃ 3.65MΩ 63mW Thick Film Resistor ±1% ±200ppm/℃ 0402 Chip Resistor - Surface Mount ROHS"
+          - cell
+          - cell "0":
+            - generic: "0"
+          - cell
+          - cell "0":
+            - generic: "0"
+          - cell
+          - 'cell "JLCPCB: 0 Other: 0"':
+            - generic: "JLCPCB:"
+            - text: "0"
+            - generic: "Other:"
+            - text: "0"
+          - cell
+          - cell "1000+ $0.0086 200+ $0.0090 Show More":
+            - generic: 1000+
+            - generic: $0.0086
+            - generic: 200+
+            - generic: $0.0090
+            - generic: Show More
+          - cell
+          - cell "Inventory shortage":
+            - generic: Inventory shortage
+        - 'row "no-image RMC1/16S-3654FTH C6271664 Extended -55℃~+155℃ 100mW 3.65MΩ Thick Film Resistor ±1% ±200ppm/℃ 0402 Chip Resistor - Surface Mount ROHS 0 0 JLCPCB: 0 Other: 0 1000+ $0.0022 200+ $0.0023 Show More Inventory shortage"':
+          - cell:
+            - generic: 
+          - cell "no-image RMC1/16S-3654FTH C6271664 Extended":
+            - img "no-image"
+            - link "RMC1/16S-3654FTH":
+              - /url: https://jlcpcb.com/partdetail/KAMAYA-RMC1_16S3654FTH/C6271664
+            - generic: C6271664
+            - generic: Extended
+          - cell
+          - cell "-55℃~+155℃ 100mW 3.65MΩ Thick Film Resistor ±1% ±200ppm/℃ 0402 Chip Resistor - Surface Mount ROHS":
+            - generic: "-55℃~+155℃ 100mW 3.65MΩ Thick Film Resistor ±1% ±200ppm/℃ 0402 Chip Resistor - Surface Mount ROHS"
+          - cell
+          - cell "0":
+            - generic: "0"
+          - cell
+          - cell "0":
+            - generic: "0"
+          - cell
+          - 'cell "JLCPCB: 0 Other: 0"':
+            - generic: "JLCPCB:"
+            - text: "0"
+            - generic: "Other:"
+            - text: "0"
+          - cell
+          - cell "1000+ $0.0022 200+ $0.0023 Show More":
+            - generic: 1000+
+            - generic: $0.0022
+            - generic: 200+
+            - generic: $0.0023
+            - generic: Show More
+          - cell
+          - cell "Inventory shortage":
+            - generic: Inventory shortage
+        - 'row "no-image RC0402FR-073M65P C6373780 Extended -55℃~+155℃ 3.65MΩ 63mW Thick Film Resistor ±1% ±100ppm/℃ 0402 Chip Resistor - Surface Mount ROHS 0 0 JLCPCB: 0 Other: 0 1000+ $0.0058 200+ $0.0061 Show More Inventory shortage"':
+          - cell:
+            - generic: 
+          - cell "no-image RC0402FR-073M65P C6373780 Extended":
+            - img "no-image"
+            - link "RC0402FR-073M65P":
+              - /url: https://jlcpcb.com/partdetail/YAGEO-RC0402FR073M65P/C6373780
+            - generic: C6373780
+            - generic: Extended
+          - cell
+          - cell "-55℃~+155℃ 3.65MΩ 63mW Thick Film Resistor ±1% ±100ppm/℃ 0402 Chip Resistor - Surface Mount ROHS":
+            - generic: "-55℃~+155℃ 3.65MΩ 63mW Thick Film Resistor ±1% ±100ppm/℃ 0402 Chip Resistor - Surface Mount ROHS"
+          - cell
+          - cell "0":
+            - generic: "0"
+          - cell
+          - cell "0":
+            - generic: "0"
+          - cell
+          - 'cell "JLCPCB: 0 Other: 0"':
+            - generic: "JLCPCB:"
+            - text: "0"
+            - generic: "Other:"
+            - text: "0"
+          - cell
+          - cell "1000+ $0.0058 200+ $0.0061 Show More":
+            - generic: 1000+
+            - generic: $0.0058
+            - generic: 200+
+            - generic: $0.0061
+            - generic: Show More
+          - cell
+          - cell "Inventory shortage":
+            - generic: Inventory shortage
+        - 'row "no-image RCS1005F3654CS C17448792 Extended -55℃~+155℃ 3.65MΩ 63mW Thick Film Resistor ±1% ±100ppm/℃ 0402 Chip Resistor - Surface Mount ROHS 0 0 JLCPCB: 0 Other: 0 1000+ $0.0043 200+ $0.0045 Show More Inventory shortage"':
+          - cell:
+            - generic: 
+          - cell "no-image RCS1005F3654CS C17448792 Extended":
+            - img "no-image"
+            - link "RCS1005F3654CS":
+              - /url: https://jlcpcb.com/partdetail/18577985-RCS1005F3654CS/C17448792
+            - generic: C17448792
+            - generic: Extended
+          - cell
+          - cell "-55℃~+155℃ 3.65MΩ 63mW Thick Film Resistor ±1% ±100ppm/℃ 0402 Chip Resistor - Surface Mount ROHS":
+            - generic: "-55℃~+155℃ 3.65MΩ 63mW Thick Film Resistor ±1% ±100ppm/℃ 0402 Chip Resistor - Surface Mount ROHS"
+          - cell
+          - cell "0":
+            - generic: "0"
+          - cell
+          - cell "0":
+            - generic: "0"
+          - cell
+          - 'cell "JLCPCB: 0 Other: 0"':
+            - generic: "JLCPCB:"
+            - text: "0"
+            - generic: "Other:"
+            - text: "0"
+          - cell
+          - cell "1000+ $0.0043 200+ $0.0045 Show More":
+            - generic: 1000+
+            - generic: $0.0043
+            - generic: 200+
+            - generic: $0.0045
+            - generic: Show More
+          - cell
+          - cell "Inventory shortage":
+            - generic: Inventory shortage
+        - 'row "no-image RTT063654FTP C333022 Extended -55℃~+155℃ 150V 250mW 3.65MΩ Thick Film Resistor ±1% ±100ppm/℃ 1206 Chip Resistor - Surface Mount ROHS 4950 0 JLCPCB: 0 Other: 0 1+ $0.0066 100000+ $0.0032 Show More Select "':
+          - cell:
+            - generic: 
+          - cell "no-image RTT063654FTP C333022 Extended":
+            - img "no-image"
+            - link "RTT063654FTP":
+              - /url: https://jlcpcb.com/partdetail/RALEC-RTT063654FTP/C333022
+            - generic: C333022
+            - generic: Extended
+          - cell
+          - cell "-55℃~+155℃ 150V 250mW 3.65MΩ Thick Film Resistor ±1% ±100ppm/℃ 1206 Chip Resistor - Surface Mount ROHS":
+            - generic: "-55℃~+155℃ 150V 250mW 3.65MΩ Thick Film Resistor ±1% ±100ppm/℃ 1206 Chip Resistor - Surface Mount ROHS"
+          - cell
+          - cell "4950":
+            - generic: "4950"
+          - cell
+          - cell "0":
+            - generic: "0"
+          - cell
+          - 'cell "JLCPCB: 0 Other: 0"':
+            - generic: "JLCPCB:"
+            - text: "0"
+            - generic: "Other:"
+            - text: "0"
+          - cell
+          - cell "1+ $0.0066 100000+ $0.0032 Show More":
+            - generic: 1+
+            - generic: $0.0066
+            - generic: 100000+
+            - generic: $0.0032
+            - generic: Show More
+          - cell
+          - cell "Select ":
+            - button "Select"
+            - generic: 
+        - 'row "no-image 0805W8F3654T5E C407396 Extended -55℃~+155℃ 125mW 150V 3.65MΩ Thick Film Resistor ±1% ±100ppm/℃ 0805 Chip Resistor - Surface Mount ROHS 2164 0 JLCPCB: 0 Other: 0 50000+ $0.0010 50200+ $0.0010 Show More Select "':
+          - cell:
+            - generic: 
+          - cell "no-image 0805W8F3654T5E C407396 Extended":
+            - img "no-image"
+            - link "0805W8F3654T5E":
+              - /url: https://jlcpcb.com/partdetail/395953-0805W8F3654T5E/C407396
+            - generic: C407396
+            - generic: Extended
+          - cell
+          - cell "-55℃~+155℃ 125mW 150V 3.65MΩ Thick Film Resistor ±1% ±100ppm/℃ 0805 Chip Resistor - Surface Mount ROHS":
+            - generic: "-55℃~+155℃ 125mW 150V 3.65MΩ Thick Film Resistor ±1% ±100ppm/℃ 0805 Chip Resistor - Surface Mount ROHS"
+          - cell
+          - cell "2164":
+            - generic: "2164"
+          - cell
+          - cell "0":
+            - generic: "0"
+          - cell
+          - 'cell "JLCPCB: 0 Other: 0"':
+            - generic: "JLCPCB:"
+            - text: "0"
+            - generic: "Other:"
+            - text: "0"
+          - cell
+          - cell "50000+ $0.0010 50200+ $0.0010 Show More":
+            - generic: 50000+
+            - generic: $0.0010
+            - generic: 50200+
+            - generic: $0.0010
+            - generic: Show More
+          - cell
+          - cell "Select ":
+            - button "Select"
+            - generic: 
+        - 'row "no-image 0603WAF3654T5E C407525 Extended -55℃~+155℃ 100mW 3.65MΩ 75V Thick Film Resistor ±1% ±100ppm/℃ 0603 Chip Resistor - Surface Mount ROHS 3316 0 JLCPCB: 0 Other: 0 50000+ $0.0008 50200+ $0.0008 Show More Select "':
+          - cell:
+            - generic: 
+          - cell "no-image 0603WAF3654T5E C407525 Extended":
+            - img "no-image"
+            - link "0603WAF3654T5E":
+              - /url: https://jlcpcb.com/partdetail/396082-0603WAF3654T5E/C407525
+            - generic: C407525
+            - generic: Extended
+          - cell
+          - cell "-55℃~+155℃ 100mW 3.65MΩ 75V Thick Film Resistor ±1% ±100ppm/℃ 0603 Chip Resistor - Surface Mount ROHS":
+            - generic: "-55℃~+155℃ 100mW 3.65MΩ 75V Thick Film Resistor ±1% ±100ppm/℃ 0603 Chip Resistor - Surface Mount ROHS"
+          - cell
+          - cell "3316":
+            - generic: "3316"
+          - cell
+          - cell "0":
+            - generic: "0"
+          - cell
+          - 'cell "JLCPCB: 0 Other: 0"':
+            - generic: "JLCPCB:"
+            - text: "0"
+            - generic: "Other:"
+            - text: "0"
+          - cell
+          - cell "50000+ $0.0008 50200+ $0.0008 Show More":
+            - generic: 50000+
+            - generic: $0.0008
+            - generic: 50200+
+            - generic: $0.0008
+            - generic: Show More
+          - cell
+          - cell "Select ":
+            - button "Select"
+            - generic: 
+        - 'row "no-image 0201WMF3654TEE C423556 Extended -55℃~+155℃ 25V 3.65MΩ 50mW Thick Film Resistor ±1% ±200ppm/℃ 0201 Chip Resistor - Surface Mount ROHS 18 0 JLCPCB: 0 Other: 0 45200+ $0.0008 1+ $0.0015 Show More Inventory shortage"':
+          - cell:
+            - generic: 
+          - cell "no-image 0201WMF3654TEE C423556 Extended":
+            - img "no-image"
+            - link "0201WMF3654TEE":
+              - /url: https://jlcpcb.com/partdetail/416506-0201WMF3654TEE/C423556
+            - generic: C423556
+            - generic: Extended
+          - cell
+          - cell "-55℃~+155℃ 25V 3.65MΩ 50mW Thick Film Resistor ±1% ±200ppm/℃ 0201 Chip Resistor - Surface Mount ROHS":
+            - generic: "-55℃~+155℃ 25V 3.65MΩ 50mW Thick Film Resistor ±1% ±200ppm/℃ 0201 Chip Resistor - Surface Mount ROHS"
+          - cell
+          - cell "18":
+            - generic: "18"
+          - cell
+          - cell "0":
+            - generic: "0"
+          - cell
+          - 'cell "JLCPCB: 0 Other: 0"':
+            - generic: "JLCPCB:"
+            - text: "0"
+            - generic: "Other:"
+            - text: "0"
+          - cell
+          - cell "45200+ $0.0008 1+ $0.0015 Show More":
+            - generic: 45200+
+            - generic: $0.0008
+            - generic: 1+
+            - generic: $0.0015
+            - generic: Show More
+          - cell
+          - cell "Inventory shortage":
+            - generic: Inventory shortage
+        - 'row "no-image RC0603FR-073M65L C482835 Extended -55℃~+155℃ 100mW 3.65MΩ 75V Thick Film Resistor ±1% ±100ppm/℃ 0603 Chip Resistor - Surface Mount ROHS 6496 0 JLCPCB: 0 Other: 0 10000+ $0.0023 50000+ $0.0022 Show More Select "':
+          - cell:
+            - generic: 
+          - cell "no-image RC0603FR-073M65L C482835 Extended":
+            - img "no-image"
+            - link "RC0603FR-073M65L":
+              - /url: https://jlcpcb.com/partdetail/YAGEO-RC0603FR073M65L/C482835
+            - generic: C482835
+            - generic: Extended
+          - cell
+          - cell "-55℃~+155℃ 100mW 3.65MΩ 75V Thick Film Resistor ±1% ±100ppm/℃ 0603 Chip Resistor - Surface Mount ROHS":
+            - generic: "-55℃~+155℃ 100mW 3.65MΩ 75V Thick Film Resistor ±1% ±100ppm/℃ 0603 Chip Resistor - Surface Mount ROHS"
+          - cell
+          - cell "6496":
+            - generic: "6496"
+          - cell
+          - cell "0":
+            - generic: "0"
+          - cell
+          - 'cell "JLCPCB: 0 Other: 0"':
+            - generic: "JLCPCB:"
+            - text: "0"
+            - generic: "Other:"
+            - text: "0"
+          - cell
+          - cell "10000+ $0.0023 50000+ $0.0022 Show More":
+            - generic: 10000+
+            - generic: $0.0023
+            - generic: 50000+
+            - generic: $0.0022
+            - generic: Show More
+          - cell
+          - cell "Select ":
+            - button "Select"
+            - generic: 
+        - 'row "no-image RC0805FR-073M65L C483104 Extended -55℃~+155℃ 125mW 150V 3.65MΩ Thick Film Resistor ±1% ±100ppm/℃ 0805 Chip Resistor - Surface Mount ROHS 40 0 JLCPCB: 0 Other: 0 50200+ $0.0039 50000+ $0.0039 Show More Select "':
+          - cell:
+            - generic: 
+          - cell "no-image RC0805FR-073M65L C483104 Extended":
+            - img "no-image"
+            - link "RC0805FR-073M65L":
+              - /url: https://jlcpcb.com/partdetail/YAGEO-RC0805FR073M65L/C483104
+            - generic: C483104
+            - generic: Extended
+          - cell
+          - cell "-55℃~+155℃ 125mW 150V 3.65MΩ Thick Film Resistor ±1% ±100ppm/℃ 0805 Chip Resistor - Surface Mount ROHS":
+            - generic: "-55℃~+155℃ 125mW 150V 3.65MΩ Thick Film Resistor ±1% ±100ppm/℃ 0805 Chip Resistor - Surface Mount ROHS"
+          - cell
+          - cell "40":
+            - generic: "40"
+          - cell
+          - cell "0":
+            - generic: "0"
+          - cell
+          - 'cell "JLCPCB: 0 Other: 0"':
+            - generic: "JLCPCB:"
+            - text: "0"
+            - generic: "Other:"
+            - text: "0"
+          - cell
+          - cell "50200+ $0.0039 50000+ $0.0039 Show More":
+            - generic: 50200+
+            - generic: $0.0039
+            - generic: 50000+
+            - generic: $0.0039
+            - generic: Show More
+          - cell
+          - cell "Select ":
+            - button "Select"
+            - generic: 
+        - 'row "no-image RC1206FR-073M65L C488783 Extended -55℃~+155℃ 200V 250mW 3.65MΩ Thick Film Resistor ±1% ±100ppm/℃ 1206 Chip Resistor - Surface Mount ROHS 3565 0 JLCPCB: 0 Other: 0 1+ $0.0099 1500+ $0.0064 Show More Select "':
+          - cell:
+            - generic: 
+          - cell "no-image RC1206FR-073M65L C488783 Extended":
+            - img "no-image"
+            - link "RC1206FR-073M65L":
+              - /url: https://jlcpcb.com/partdetail/YAGEO-RC1206FR073M65L/C488783
+            - generic: C488783
+            - generic: Extended
+          - cell
+          - cell "-55℃~+155℃ 200V 250mW 3.65MΩ Thick Film Resistor ±1% ±100ppm/℃ 1206 Chip Resistor - Surface Mount ROHS":
+            - generic: "-55℃~+155℃ 200V 250mW 3.65MΩ Thick Film Resistor ±1% ±100ppm/℃ 1206 Chip Resistor - Surface Mount ROHS"
+          - cell
+          - cell "3565":
+            - generic: "3565"
+          - cell
+          - cell "0":
+            - generic: "0"
+          - cell
+          - 'cell "JLCPCB: 0 Other: 0"':
+            - generic: "JLCPCB:"
+            - text: "0"
+            - generic: "Other:"
+            - text: "0"
+          - cell
+          - cell "1+ $0.0099 1500+ $0.0064 Show More":
+            - generic: 1+
+            - generic: $0.0099
+            - generic: 1500+
+            - generic: $0.0064
+            - generic: Show More
+          - cell
+          - cell "Select ":
+            - button "Select"
+            - generic: 
+        - 'row "no-image 1206W4F3654T5E C784246 Extended -55℃~+155℃ 200V 250mW 3.65MΩ Thick Film Resistor ±1% ±100ppm/℃ 1206 Chip Resistor - Surface Mount ROHS 4241 0 JLCPCB: 0 Other: 0 1000+ $0.0024 5000+ $0.0022 Show More Select "':
+          - cell:
+            - generic: 
+          - cell "no-image 1206W4F3654T5E C784246 Extended":
+            - img "no-image"
+            - link "1206W4F3654T5E":
+              - /url: https://jlcpcb.com/partdetail/839282-1206W4F3654T5E/C784246
+            - generic: C784246
+            - generic: Extended
+          - cell
+          - cell "-55℃~+155℃ 200V 250mW 3.65MΩ Thick Film Resistor ±1% ±100ppm/℃ 1206 Chip Resistor - Surface Mount ROHS":
+            - generic: "-55℃~+155℃ 200V 250mW 3.65MΩ Thick Film Resistor ±1% ±100ppm/℃ 1206 Chip Resistor - Surface Mount ROHS"
+          - cell
+          - cell "4241":
+            - generic: "4241"
+          - cell
+          - cell "0":
+            - generic: "0"
+          - cell
+          - 'cell "JLCPCB: 0 Other: 0"':
+            - generic: "JLCPCB:"
+            - text: "0"
+            - generic: "Other:"
+            - text: "0"
+          - cell
+          - cell "1000+ $0.0024 5000+ $0.0022 Show More":
+            - generic: 1000+
+            - generic: $0.0024
+            - generic: 5000+
+            - generic: $0.0022
+            - generic: Show More
+          - cell
+          - cell "Select ":
+            - button "Select"
+            - generic: 
+    - generic: 207 items in total
+    - button "" [disabled]:
+      - generic: 
+    - list:
+      - listitem: "1"
+      - listitem: "2"
+      - listitem: "3"
+      - listitem: "4"
+      - listitem: "5"
+      - listitem: "6"
+      - listitem: 
+      - listitem: "9"
+    - button "":
+      - generic: 

@@ -1,0 +1,844 @@
+- banner:
+  - link "lcsc notice":
+    - /url: https://www.lcsc.com/electronica
+    - img "lcsc notice"
+  - button "close":
+    - generic: 󰅙
+  - link "Hot-Selling Page":
+    - /url: https://www.lcsc.com/flashSale?isHot=1
+    - text: Hot-Selling
+  - link "Get Coupons Here":
+    - /url: https://www.lcsc.com/coupons?source=lcsc
+    - generic: Coupons
+    - generic: $20
+  - link "Get API Here":
+    - /url: https://www.lcsc.com/agent
+    - text: API
+  - generic: Language
+  - generic: Help
+  - link "Contact Us":
+    - /url: https://www.lcsc.com/service/question
+  - link "LCSC Electronics home":
+    - /url: https://www.lcsc.com/
+    - img "LCSC Electronics logo"
+    - img "LCSC Electronics svg logo"
+  - button "UVB clear icon search button":
+    - textbox "search input":
+      - /placeholder: ROQANG
+      - text: UVB
+    - button "clear icon": 󰅖
+    - button "search button":
+  - link "TI":
+    - /url: https://www.lcsc.com/brand-detail/100.html?s_z=t_b_TI
+  - link "Broadcom":
+    - /url: https://www.lcsc.com/brand-detail/738.html?s_z=t_b_Broadcom
+  - link "EVERLIGHT":
+    - /url: https://www.lcsc.com/brand-detail/138.html?s_z=t_b_EVERLIGHT
+  - link "JSCJ":
+    - /url: https://www.lcsc.com/brand-detail/64.html?s_z=t_b_JSCJ
+  - link "UMW":
+    - /url: https://www.lcsc.com/brand-detail/11853.html?s_z=t_b_UMW
+  - link "BOURNS":
+    - /url: https://www.lcsc.com/brand-detail/377.html?s_z=t_b_BOURNS
+  - link "SILICON LABS":
+    - /url: https://www.lcsc.com/brand-detail/197.html?s_z=t_b_SILICON%2520LABS
+  - link "Amphenol":
+    - /url: https://www.lcsc.com/brand-detail/815.html?s_z=t_b_Amphenol
+  - link "HRE":
+    - /url: https://www.lcsc.com/brand-detail/13390.html?s_z=t_b_HRE
+  - link "Samples Offer":
+    - /url: https://www.lcsc.com/samples
+  - generic: Upload a BOM
+  - button "twarner491":
+    - generic "twarner491"
+  - button "The current currency is USD, click to change to other currencies":
+    - generic: USD
+  - link "Cart":
+    - /url: https://www.lcsc.com/cart
+    - tooltip "Cart"
+- navigation:
+  - link "Catalog Page":
+    - /url: https://www.lcsc.com/products
+    - generic: Catalog
+  - link "Products Page":
+    - /url: https://www.lcsc.com/products
+    - generic: Products
+  - link "Manufacturers Page":
+    - /url: https://www.lcsc.com/supplier
+    - generic: Manufacturers
+  - link "RFQ/BOM Page":
+    - /url: https://www.lcsc.com/inquiry
+    - generic: RFQ/BOM
+  - link "Deals Page":
+    - /url: https://www.lcsc.com/flashSale
+    - generic: Deals
+  - link "Custom Cables Page":
+    - /url: https://lcsccable.com
+    - generic: Custom Cables
+  - button "Solutions":
+    - generic: Solutions
+  - button "Resources":
+    - generic: Resources
+- main:
+  - list:
+    - link "Home":
+      - /url: https://www.lcsc.com/
+    - listitem: /
+    - link "Products":
+      - /url: https://www.lcsc.com/products
+    - listitem: /
+    - link "Optoelectronics":
+      - /url: https://www.lcsc.com/category/28.html
+    - listitem: /
+    - generic: LED Emitters - Infrared, UV, Visible
+  - heading "LED Emitters - Infrared, UV, Visible" [level=1]
+  - textbox "Search Within"
+  - text: "Results:"
+  - generic: "3"
+  - text: "from search:"
+  - text: UVB
+  - button "Close": 󰅖
+  - generic: "Filter Options:"
+  - button "Stacked":
+    - generic: Stacked
+  - button "Scrolling":
+    - generic: Scrolling
+  - button "Copy Link":
+    - generic: Copy Link
+  - generic "Manufacturer"
+  - textbox "Search Filter"
+  - generic "BeyondUV"
+  - generic "Silverlight"
+  - generic "Package"
+  - textbox "Search Filter"
+  - generic "SMD"
+  - generic "SMD3535-3P"
+  - generic "Packaging"
+  - textbox "Search Filter"
+  - generic "Tape & Reel (TR)"
+  - generic "type"
+  - textbox "Search Filter"
+  - generic "UVB"
+  - generic "Peak Wavelength"
+  - textbox "Min"
+  - textbox "Max"
+  - button "mm":
+    - generic: mm
+    - generic: 󰍝
+  - generic "285nm"
+  - generic "302nm"
+  - generic "305nm~315nm"
+  - generic "Pd - Power Dissipation"
+  - textbox "Min"
+  - textbox "Max"
+  - button "W":
+    - generic: W
+    - generic: 󰍝
+  - generic "3.75W"
+  - generic "-"
+  - generic "Voltage - Forward(Vf)"
+  - textbox "Min"
+  - textbox "Max"
+  - button "V":
+    - generic: V
+    - generic: 󰍝
+  - generic "7.5V"
+  - generic "Current - DC Forward(If)"
+  - textbox "Min"
+  - textbox "Max"
+  - button "A":
+    - generic: A
+    - generic: 󰍝
+  - generic "100mA@UVB"
+  - generic "500mA@UVB"
+  - generic "Voltage - DC Reverse(Vr)"
+  - textbox "Min"
+  - textbox "Max"
+  - button "V":
+    - generic: V
+    - generic: 󰍝
+  - generic "5V"
+  - generic "-"
+  - generic "Operating Temperature"
+  - textbox "Min"
+  - textbox "Max"
+  - button "℃":
+    - generic: ℃
+    - generic: 󰍝
+  - generic "-40℃~+80℃"
+  - generic "-"
+  - generic "Antistatic Ability"
+  - textbox "Min"
+  - textbox "Max"
+  - button "V":
+    - generic: V
+    - generic: 󰍝
+  - generic "2kV"
+  - generic "-"
+  - generic "Viewing Angle"
+  - textbox "Search Filter"
+  - generic "130°"
+  - generic "60°"
+  - generic "Radiant Flux"
+  - textbox "Min"
+  - textbox "Max"
+  - button "W":
+    - generic: W
+    - generic: 󰍝
+  - generic "15mW@UVB"
+  - generic "20mW@UVB"
+  - generic "65mW"
+  - generic "Half wave width"
+  - textbox "Min"
+  - textbox "Max"
+  - button "mm":
+    - generic: mm
+    - generic: 󰍝
+  - generic "9.6nm"
+  - generic "-"
+  - generic "Reverse Leakage Current (Ir)"
+  - textbox "Min"
+  - textbox "Max"
+  - button "A":
+    - generic: A
+    - generic: 󰍝
+  - generic "-"
+  - generic: 󰄱
+  - checkbox "In Stock"
+  - generic: In Stock
+  - generic: 󰄱
+  - checkbox "Lightning Deals"
+  - generic: Lightning Deals
+  - button:
+  - separator
+  - generic: 󰄱
+  - checkbox "Asian Brands"
+  - generic: Asian Brands
+  - generic: 󰄱
+  - checkbox "Deals"
+  - generic: Deals
+  - separator
+  - generic: 󰄱
+  - checkbox "RoHS"
+  - generic: RoHS
+  - separator
+  - generic: Reset All
+  - button "Apply All" [disabled]:
+    - generic: Apply All
+  - text: "Results:"
+  - generic: "3"
+  - separator
+  - generic: Showing
+  - button "1 - 3":
+    - generic: 1 - 3
+  - generic: of 3
+  - separator
+  - 'button "Sort By: Default"':
+    - generic: "Sort By:"
+    - generic: Default
+    - textbox
+    - generic: 󰍝
+  - button "Add to Cart" [disabled]:
+    - text: Add to Cart
+  - button "Compare Selected (up to 7)" [disabled]:
+    - generic: Compare Selected (up to 7)
+  - button "Download Table":
+    - text: Download Table
+  - table:
+    - rowgroup:
+      - row "MPN Manufacturer Availability Pricing Quantity Description Package Packaging Date Code type Peak Wavelength Pd - Power Dissipation Voltage - Forward(Vf) Current - DC Forward(If) Voltage - DC Reverse(Vr) Operating Temperature Antistatic Ability Viewing Angle Radiant Flux Half wave width Reverse Leakage Current (Ir)":
+        - columnheader:
+          - generic: 󰄱
+          - checkbox
+        - columnheader "MPN":
+          - generic "MPN"
+          - generic: 󰜷
+          - generic: 󰜮
+        - columnheader "Manufacturer":
+          - generic "Manufacturer"
+          - generic: 󰜷
+          - generic: 󰜮
+        - columnheader "Availability":
+          - generic "Availability"
+          - generic: 󰜷
+          - generic: 󰜮
+        - columnheader "Pricing":
+          - generic "Pricing"
+          - generic: 󰜷
+          - generic: 󰜮
+        - columnheader "Quantity":
+          - generic "Quantity"
+        - columnheader "Description":
+          - generic "Description"
+        - columnheader "Package":
+          - generic "Package"
+          - generic: 󰜷
+          - generic: 󰜮
+        - columnheader "Packaging":
+          - generic "Packaging"
+          - generic: 󰜷
+          - generic: 󰜮
+        - columnheader "Date Code":
+          - generic "Date Code"
+        - columnheader "type":
+          - generic "type"
+          - generic: 󰜷
+          - generic: 󰜮
+        - columnheader "Peak Wavelength":
+          - generic "Peak Wavelength"
+          - generic: 󰜷
+          - generic: 󰜮
+        - columnheader "Pd - Power Dissipation":
+          - generic "Pd - Power Dissipation"
+          - generic: 󰜷
+          - generic: 󰜮
+        - columnheader "Voltage - Forward(Vf)":
+          - generic "Voltage - Forward(Vf)"
+          - generic: 󰜷
+          - generic: 󰜮
+        - columnheader "Current - DC Forward(If)":
+          - generic "Current - DC Forward(If)"
+          - generic: 󰜷
+          - generic: 󰜮
+        - columnheader "Voltage - DC Reverse(Vr)":
+          - generic "Voltage - DC Reverse(Vr)"
+          - generic: 󰜷
+          - generic: 󰜮
+        - columnheader "Operating Temperature":
+          - generic "Operating Temperature"
+          - generic: 󰜷
+          - generic: 󰜮
+        - columnheader "Antistatic Ability":
+          - generic "Antistatic Ability"
+          - generic: 󰜷
+          - generic: 󰜮
+        - columnheader "Viewing Angle":
+          - generic "Viewing Angle"
+          - generic: 󰜷
+          - generic: 󰜮
+        - columnheader "Radiant Flux":
+          - generic "Radiant Flux"
+          - generic: 󰜷
+          - generic: 󰜮
+        - columnheader "Half wave width":
+          - generic "Half wave width"
+          - generic: 󰜷
+          - generic: 󰜮
+        - columnheader "Reverse Leakage Current (Ir)":
+          - generic "Reverse Leakage Current (Ir)"
+          - generic: 󰜷
+          - generic: 󰜮
+  - table:
+    - rowgroup:
+      - row "MPN Manufacturer Availability Pricing Quantity Description Package Packaging Date Code type Peak Wavelength Pd - Power Dissipation Voltage - Forward(Vf) Current - DC Forward(If) Voltage - DC Reverse(Vr) Operating Temperature Antistatic Ability Viewing Angle Radiant Flux Half wave width Reverse Leakage Current (Ir)":
+        - columnheader:
+          - generic: 󰄱
+          - checkbox
+        - columnheader "MPN":
+          - generic "MPN"
+          - generic: 󰜷
+          - generic: 󰜮
+        - columnheader "Manufacturer":
+          - generic "Manufacturer"
+          - generic: 󰜷
+          - generic: 󰜮
+        - columnheader "Availability":
+          - generic "Availability"
+          - generic: 󰜷
+          - generic: 󰜮
+        - columnheader "Pricing":
+          - generic "Pricing"
+          - generic: 󰜷
+          - generic: 󰜮
+        - columnheader "Quantity":
+          - generic "Quantity"
+        - columnheader "Description":
+          - generic "Description"
+        - columnheader "Package":
+          - generic "Package"
+          - generic: 󰜷
+          - generic: 󰜮
+        - columnheader "Packaging":
+          - generic "Packaging"
+          - generic: 󰜷
+          - generic: 󰜮
+        - columnheader "Date Code":
+          - generic "Date Code"
+        - columnheader "type":
+          - generic "type"
+          - generic: 󰜷
+          - generic: 󰜮
+        - columnheader "Peak Wavelength":
+          - generic "Peak Wavelength"
+          - generic: 󰜷
+          - generic: 󰜮
+        - columnheader "Pd - Power Dissipation":
+          - generic "Pd - Power Dissipation"
+          - generic: 󰜷
+          - generic: 󰜮
+        - columnheader "Voltage - Forward(Vf)":
+          - generic "Voltage - Forward(Vf)"
+          - generic: 󰜷
+          - generic: 󰜮
+        - columnheader "Current - DC Forward(If)":
+          - generic "Current - DC Forward(If)"
+          - generic: 󰜷
+          - generic: 󰜮
+        - columnheader "Voltage - DC Reverse(Vr)":
+          - generic "Voltage - DC Reverse(Vr)"
+          - generic: 󰜷
+          - generic: 󰜮
+        - columnheader "Operating Temperature":
+          - generic "Operating Temperature"
+          - generic: 󰜷
+          - generic: 󰜮
+        - columnheader "Antistatic Ability":
+          - generic "Antistatic Ability"
+          - generic: 󰜷
+          - generic: 󰜮
+        - columnheader "Viewing Angle":
+          - generic "Viewing Angle"
+          - generic: 󰜷
+          - generic: 󰜮
+        - columnheader "Radiant Flux":
+          - generic "Radiant Flux"
+          - generic: 󰜷
+          - generic: 󰜮
+        - columnheader "Half wave width":
+          - generic "Half wave width"
+          - generic: 󰜷
+          - generic: 󰜮
+        - columnheader "Reverse Leakage Current (Ir)":
+          - generic "Reverse Leakage Current (Ir)"
+          - generic: 󰜷
+          - generic: 󰜮
+    - rowgroup:
+      - 'row "View Alternative Parts View larger image of product BeyondUV ZXS39E detail page BeyondUV ZXS39E detail page Asian Brands BeyondUV 367 In Stock 1+ $4.3712 10+ $3.7357 More 600+ $2.8022 1,200+ $2.7236 1 Add Ext. Price: $4.37 Full Reel: 600 285nm 3.75W 7.5V 500mA@UVB 5V 65mW UVB SMD LED Emitters - Infrared, UV, Visible SMD Tape & Reel (TR) - UVB 285nm 3.75W 7.5V 500mA@UVB 5V -40℃~+80℃ - 60° 65mW - -"':
+        - cell "View Alternative Parts":
+          - generic: 󰄱
+          - checkbox
+          - generic: View Alternative Parts
+        - cell "View larger image of product BeyondUV ZXS39E detail page BeyondUV ZXS39E detail page":
+          - link "View larger image of product":
+            - /url: https://www.lcsc.com/product-detail/C47967134.html?s_z=n_q_UVB
+          - link "BeyondUV ZXS39E Datasheet":
+            - /url: https://www.lcsc.com/datasheet/C47967134.pdf
+          - link "BeyondUV ZXS39E detail page":
+            - /url: https://www.lcsc.com/product-detail/C47967134.html?s_z=n_q_UVB
+            - text: ZXS39E
+          - link "BeyondUV ZXS39E detail page":
+            - /url: https://www.lcsc.com/product-detail/C47967134.html?s_z=n_q_UVB
+            - text: C47967134
+        - cell "Asian Brands BeyondUV":
+          - generic: Asian Brands
+          - link "BeyondUV":
+            - /url: https://www.lcsc.com/brand-detail/18459.html?s_z=n_q_UVB
+        - cell "367 In Stock":
+          - generic: "367"
+          - generic: In Stock
+          - button:
+        - cell "1+ $4.3712 10+ $3.7357 More 600+ $2.8022 1,200+ $2.7236":
+          - table:
+            - rowgroup:
+              - row "1+ $4.3712":
+                - cell "1+"
+                - cell "$4.3712"
+              - row "10+ $3.7357":
+                - cell "10+"
+                - cell "$3.7357"
+              - row "More":
+                - cell "More":
+                  - text: More
+              - row "600+ $2.8022":
+                - cell "600+"
+                - cell "$2.8022"
+              - row "1,200+ $2.7236":
+                - cell "1,200+"
+                - cell "$2.7236"
+        - 'cell "1 Add Ext. Price: $4.37 Full Reel: 600"':
+          - textbox: "1"
+          - button "Add":
+            - generic: Add
+          - generic: "Ext. Price: $4.37"
+          - generic: "Full Reel: 600"
+        - cell "285nm 3.75W 7.5V 500mA@UVB 5V 65mW UVB SMD LED Emitters - Infrared, UV, Visible":
+          - generic "UVB 5V 65mW 500mA@UVB 285nm 7.5V 3.75W SMD LED Emitters - Infrared, UV, Visible": 285nm 3.75W 7.5V 500mA@UVB 5V 65mW UVB SMD LED Emitters - Infrared, UV, Visible
+        - cell "SMD":
+          - generic: SMD
+        - cell "Tape & Reel (TR)":
+          - generic: Tape & Reel (TR)
+        - cell "-":
+          - generic: "-"
+        - cell "UVB":
+          - generic: UVB
+        - cell "285nm":
+          - generic: 285nm
+        - cell "3.75W":
+          - generic: 3.75W
+        - cell "7.5V":
+          - generic: 7.5V
+        - cell "500mA@UVB":
+          - generic: 500mA@UVB
+        - cell "5V":
+          - generic: 5V
+        - cell "-40℃~+80℃":
+          - generic: "-40℃~+80℃"
+        - cell "-":
+          - generic: "-"
+        - cell "60°":
+          - generic: 60°
+        - cell "65mW":
+          - generic: 65mW
+        - cell "-":
+          - generic: "-"
+        - cell "-":
+          - generic: "-"
+      - 'row "View Alternative Parts View larger image of product RoHS Compliance Silverlight G3535N1UVN2U12-305 detail page Silverlight G3535N1UVN2U12-305 detail page 5% off Asian Brands Silverlight 18 In Stock 1+ $1.6712 $1.7591 10+ $1.4138 $1.4882 More 500+ $1.0139 $1.0672 1,000+ $0.9814 $1.033 LCSC-Reels Available 1 Add Ext. Price: $1.67 Full Reel: 1,000 7.5V 302nm 100mA@UVB UVB 20mW@UVB SMD3535-3P LED Emitters - Infrared, UV, Visible RoHS SMD3535-3P Tape & Reel (TR) - UVB 302nm - 7.5V 100mA@UVB - - 2kV 130° 20mW@UVB 9.6nm -"':
+        - cell "View Alternative Parts":
+          - generic: 󰄱
+          - checkbox
+          - generic: View Alternative Parts
+        - cell "View larger image of product RoHS Compliance Silverlight G3535N1UVN2U12-305 detail page Silverlight G3535N1UVN2U12-305 detail page 5% off":
+          - link "View larger image of product":
+            - /url: https://www.lcsc.com/product-detail/C46641560.html?s_z=n_q_UVB
+          - link "Silverlight G3535N1UVN2U12-305 Datasheet":
+            - /url: https://www.lcsc.com/datasheet/C46641560.pdf
+          - img "RoHS Compliance":
+            - button:
+          - link "Silverlight G3535N1UVN2U12-305 detail page":
+            - /url: https://www.lcsc.com/product-detail/C46641560.html?s_z=n_q_UVB
+            - text: G3535N1UVN2U12-305
+          - link "Silverlight G3535N1UVN2U12-305 detail page":
+            - /url: https://www.lcsc.com/product-detail/C46641560.html?s_z=n_q_UVB
+            - text: C46641560
+          - generic: 5% off
+        - cell "Asian Brands Silverlight":
+          - generic: Asian Brands
+          - link "Silverlight":
+            - /url: https://www.lcsc.com/brand-detail/12705.html?s_z=n_q_UVB
+        - cell "18 In Stock":
+          - generic: "18"
+          - generic: In Stock
+          - button:
+        - cell "1+ $1.6712 $1.7591 10+ $1.4138 $1.4882 More 500+ $1.0139 $1.0672 1,000+ $0.9814 $1.033 LCSC-Reels Available":
+          - table:
+            - rowgroup:
+              - row "1+ $1.6712 $1.7591":
+                - cell "1+"
+                - cell "$1.6712"
+                - cell "$1.7591"
+              - row "10+ $1.4138 $1.4882":
+                - cell "10+"
+                - cell "$1.4138"
+                - cell "$1.4882"
+              - row "More":
+                - cell "More":
+                  - text: More
+              - row "500+ $1.0139 $1.0672":
+                - cell "500+"
+                - cell "$1.0139"
+                - cell "$1.0672"
+              - row "1,000+ $0.9814 $1.033":
+                - cell "1,000+"
+                - cell "$0.9814"
+                - cell "$1.033"
+          - generic: LCSC-Reels Available
+        - 'cell "1 Add Ext. Price: $1.67 Full Reel: 1,000"':
+          - textbox: "1"
+          - button "Add":
+            - generic: Add
+          - generic: "Ext. Price: $1.67"
+          - generic: "Full Reel: 1,000"
+        - cell "7.5V 302nm 100mA@UVB UVB 20mW@UVB SMD3535-3P LED Emitters - Infrared, UV, Visible RoHS":
+          - generic "UVB 20mW@UVB 100mA@UVB 302nm 7.5V SMD3535-3P LED Emitters - Infrared, UV, Visible RoHS": 7.5V 302nm 100mA@UVB UVB 20mW@UVB SMD3535-3P LED Emitters - Infrared, UV, Visible RoHS
+        - cell "SMD3535-3P":
+          - generic: SMD3535-3P
+        - cell "Tape & Reel (TR)":
+          - generic: Tape & Reel (TR)
+        - cell "-":
+          - generic: "-"
+        - cell "UVB":
+          - generic: UVB
+        - cell "302nm":
+          - generic: 302nm
+        - cell "-":
+          - generic: "-"
+        - cell "7.5V":
+          - generic: 7.5V
+        - cell "100mA@UVB":
+          - generic: 100mA@UVB
+        - cell "-":
+          - generic: "-"
+        - cell "-":
+          - generic: "-"
+        - cell "2kV":
+          - generic: 2kV
+        - cell "130°":
+          - generic: 130°
+        - cell "20mW@UVB":
+          - generic: 20mW@UVB
+        - cell "9.6nm":
+          - generic: 9.6nm
+        - cell "-":
+          - generic: "-"
+      - 'row "View Alternative Parts View larger image of product RoHS Compliance Silverlight G3535N1UVN2U12 310NM detail page Silverlight G3535N1UVN2U12 310NM detail page 5% off Asian Brands Silverlight 18 In Stock 1+ $1.8045 $1.8994 10+ $1.5461 $1.6274 More 500+ $1.1023 $1.1603 1,000+ $1.0697 $1.1259 LCSC-Reels Available 1 Add Ext. Price: $1.8 Full Reel: 1,000 305nm~315nm 7.5V 100mA@UVB UVB 15mW@UVB SMD3535-3P LED Emitters - Infrared, UV, Visible RoHS SMD3535-3P Tape & Reel (TR) - UVB 305nm~315nm - 7.5V 100mA@UVB - - 2kV 130° 15mW@UVB 9.6nm -"':
+        - cell "View Alternative Parts":
+          - generic: 󰄱
+          - checkbox
+          - generic: View Alternative Parts
+        - cell "View larger image of product RoHS Compliance Silverlight G3535N1UVN2U12 310NM detail page Silverlight G3535N1UVN2U12 310NM detail page 5% off":
+          - link "View larger image of product":
+            - /url: https://www.lcsc.com/product-detail/C5123527.html?s_z=n_q_UVB
+          - link "Silverlight G3535N1UVN2U12 310NM Datasheet":
+            - /url: https://www.lcsc.com/datasheet/C5123527.pdf
+          - img "RoHS Compliance":
+            - button:
+          - link "Silverlight G3535N1UVN2U12 310NM detail page":
+            - /url: https://www.lcsc.com/product-detail/C5123527.html?s_z=n_q_UVB
+            - text: G3535N1UVN2U12 310NM
+          - link "Silverlight G3535N1UVN2U12 310NM detail page":
+            - /url: https://www.lcsc.com/product-detail/C5123527.html?s_z=n_q_UVB
+            - text: C5123527
+          - generic: 5% off
+        - cell "Asian Brands Silverlight":
+          - generic: Asian Brands
+          - link "Silverlight":
+            - /url: https://www.lcsc.com/brand-detail/12705.html?s_z=n_q_UVB
+        - cell "18 In Stock":
+          - generic: "18"
+          - generic: In Stock
+          - button:
+        - cell "1+ $1.8045 $1.8994 10+ $1.5461 $1.6274 More 500+ $1.1023 $1.1603 1,000+ $1.0697 $1.1259 LCSC-Reels Available":
+          - table:
+            - rowgroup:
+              - row "1+ $1.8045 $1.8994":
+                - cell "1+"
+                - cell "$1.8045"
+                - cell "$1.8994"
+              - row "10+ $1.5461 $1.6274":
+                - cell "10+"
+                - cell "$1.5461"
+                - cell "$1.6274"
+              - row "More":
+                - cell "More":
+                  - text: More
+              - row "500+ $1.1023 $1.1603":
+                - cell "500+"
+                - cell "$1.1023"
+                - cell "$1.1603"
+              - row "1,000+ $1.0697 $1.1259":
+                - cell "1,000+"
+                - cell "$1.0697"
+                - cell "$1.1259"
+          - generic: LCSC-Reels Available
+        - 'cell "1 Add Ext. Price: $1.8 Full Reel: 1,000"':
+          - textbox: "1"
+          - button "Add":
+            - generic: Add
+          - generic: "Ext. Price: $1.8"
+          - generic: "Full Reel: 1,000"
+        - cell "305nm~315nm 7.5V 100mA@UVB UVB 15mW@UVB SMD3535-3P LED Emitters - Infrared, UV, Visible RoHS":
+          - generic "UVB 15mW@UVB 100mA@UVB 305nm~315nm 7.5V SMD3535-3P LED Emitters - Infrared, UV, Visible RoHS": 305nm~315nm 7.5V 100mA@UVB UVB 15mW@UVB SMD3535-3P LED Emitters - Infrared, UV, Visible RoHS
+        - cell "SMD3535-3P":
+          - generic: SMD3535-3P
+        - cell "Tape & Reel (TR)":
+          - generic: Tape & Reel (TR)
+        - cell "-":
+          - generic: "-"
+        - cell "UVB":
+          - generic: UVB
+        - cell "305nm~315nm":
+          - generic: 305nm~315nm
+        - cell "-":
+          - generic: "-"
+        - cell "7.5V":
+          - generic: 7.5V
+        - cell "100mA@UVB":
+          - generic: 100mA@UVB
+        - cell "-":
+          - generic: "-"
+        - cell "-":
+          - generic: "-"
+        - cell "2kV":
+          - generic: 2kV
+        - cell "130°":
+          - generic: 130°
+        - cell "15mW@UVB":
+          - generic: 15mW@UVB
+        - cell "9.6nm":
+          - generic: 9.6nm
+        - cell "-":
+          - generic: "-"
+  - generic: Showing
+  - button "1 - 3":
+    - generic: 1 - 3
+  - generic: of 3
+  - separator
+  - navigation "Pagination Navigation":
+    - list:
+      - button "Previous page" [disabled]:
+        - generic: 󰅁
+      - button "Current Page, Page 1": "1"
+      - button "Next page" [disabled]:
+        - generic: 󰅂
+- contentinfo:
+  - generic "about Information": Information
+  - list:
+    - link "Go to About LCSC Page":
+      - /url: https://www.lcsc.com/about/company
+      - text: About LCSC
+    - link "Go to Contact Us Page":
+      - /url: https://www.lcsc.com/service/question
+      - text: Contact Us
+    - link "Go to LCSC Seller Page":
+      - /url: https://www.lcsc.com/about/supplier
+      - text: LCSC Seller
+    - link "Go to Quality Assurance Page":
+      - /url: https://assets.lcsc.com/datasheet/szlcsc/Download-ISO9001-Certification.pdf
+      - text: Quality Assurance
+    - link "Go to Terms and Conditions Page":
+      - /url: https://www.lcsc.com/help/terms-and-conditions
+      - text: Terms and Conditions
+    - link "Go to Privacy Policy Page":
+      - /url: https://www.lcsc.com/help/privacy
+      - text: Privacy Policy
+    - link "Go to Cookie Notice Page":
+      - /url: https://www.lcsc.com/help-center/lcsc-information/cookie-notice
+      - text: Cookie Notice
+    - link "Go to Blog Page":
+      - /url: https://www.lcsc.com/blog
+      - text: Blog
+  - generic "about Tools": Tools
+  - list:
+    - link "Go to BOM Tool/RFQ Page":
+      - /url: https://www.lcsc.com/bom
+      - text: BOM Tool/RFQ
+    - link "Go to API Page":
+      - /url: https://www.lcsc.com/agent
+      - text: API
+    - link "Go to LCSC Calculator Hub Page":
+      - /url: https://www.lcsc.com/tools
+      - text: LCSC Calculator Hub
+    - link "Go to Cross Reference Page":
+      - /url: https://www.lcsc.com/tools/cross-reference
+      - text: Cross Reference
+  - generic "about Customer Service": Customer Service
+  - list:
+    - link "Go to Track Order Page":
+      - /url: https://www.lcsc.com/personalCenter/order/list
+      - text: Track Order
+    - link "Go to Return Policy Page":
+      - /url: https://www.lcsc.com/help-center/return-refund
+      - text: Return Policy
+    - link "Go to How to Checkout Page":
+      - /url: https://www.lcsc.com/help-center/ordering-quotation/order-and-checkout
+      - text: How to Checkout
+    - link "Go to Orders & Payment Terms Page":
+      - /url: https://www.lcsc.com/help-center/payment-invoice/payment-methods
+      - text: Orders & Payment Terms
+    - link "Go to International Shipping Page":
+      - /url: https://www.lcsc.com/help-center/shipping-delivering
+      - text: International Shipping
+    - listitem: Feedback
+    - link "Go to FAQ Page":
+      - /url: https://www.lcsc.com/help-center
+      - text: FAQ
+    - link "Go to Help Center Page":
+      - /url: https://www.lcsc.com/help-center
+      - text: Help Center
+  - generic "about Electronic Components": Electronic Components
+  - list:
+    - link "Go to EasyEDA Page":
+      - /url: https://easyeda.com
+      - text: EasyEDA
+    - link "Go to JLCPCB Page":
+      - /url: https://jlcpcb.com
+      - text: JLCPCB
+    - link "Go to LCSC Page":
+      - /url: https://www.lcsc.com/
+      - text: LCSC
+    - link "Go to CUSTOM CABLES Page":
+      - /url: https://lcsccable.com
+      - text: CUSTOM CABLES
+    - link "Go to FRONT PANELS Page":
+      - /url: https://www.lcsc.com/front-panel
+      - text: FRONT PANELS
+  - generic "about Connect With Us": Connect With Us
+  - generic: "Customer Service: 0086-755-83210457"
+  - generic: "Logistics Dept.: 0086-755-83233027"
+  - text: "Email:"
+  - link "support@lcsc.com":
+    - /url: mailto:support@lcsc.com
+  - generic: 9:30 am - 12 am, 1:30 pm - 10 pm
+  - generic: Monday - Friday, UTC/GMT +8
+  - generic: "Current Time: Wed, Oct 14, 02:03:53 GMT+8"
+  - generic: Follow Us
+  - link "LCSC Electronics official instagram":
+    - /url: https://www.instagram.com/lcscelectronics
+  - link "LCSC Electronics official facebook":
+    - /url: https://www.facebook.com/lcsc.electronics
+  - link "LCSC Electronics official linkedIn":
+    - /url: https://www.linkedin.com/company/lcsc-electronics
+  - link "LCSC Electronics official twitter":
+    - /url: https://x.com/lcscelectronics
+  - link "LCSC Electronics official youtube":
+    - /url: https://www.youtube.com/c/LCSCElectronics
+  - link "PCI DSS certified":
+    - /url: /payment/PCI.pdf
+    - img "PCI DSS certified"
+  - link "trustlogo about lcsc.com":
+    - /url: https://www.trustlogo.com/ttb_searcher/trustlogo?v_querytype=W&v_shortname=CL1&v_search=https://www.lcsc.com&x=6&y=5
+  - text: Encrypted
+  - text: Payment
+  - link "Go to Terms & Conditions Page":
+    - /url: https://www.lcsc.com/help/terms-and-conditions
+    - text: Terms & Conditions
+  - text: "|"
+  - link "Go to Privacy Notice Page":
+    - /url: https://www.lcsc.com/help/privacy
+    - text: Privacy Notice
+  - text: "| Cookie Settings |"
+  - link "Go to Do Not Sell or Share My Personal Information Page":
+    - /url: https://www.lcsc.com/help/do-not-sell
+    - text: Do Not Sell / Do Not Share My Personal Information
+  - generic: © 2025 LCSC.COM All Rights Reserved.
+  - link "about 粤ICP备17041818号":
+    - /url: http://beian.miit.gov.cn
+    - text: 粤ICP备17041818号
+  - link "about ISO/IEC":
+    - /url: https://static.lcsc.com/feassets/pc/file/251202/ISO-IEC%20Certificate.pdf
+    - text: ISO/IEC
+- complementary:
+  - link "Contact us":
+    - /url: https://www.lcsc.com/service/question
+- contentinfo:
+  - text: LCSC uses cookies and similar technology to improve site performance, enhance security, personal content and ads, and understand how you interact with our services. This information is shared with third-party service providers. Learn more in our
+  - link "Cookie Policy":
+    - /url: https://www.lcsc.com/help-center/lcsc-information/cookie-notice
+  - text: .
+  - button "Cookie Settings":
+    - generic: Cookie Settings
+  - button "Reject All":
+    - generic: Reject All
+  - button "Accept All Cookies":
+    - generic: Accept All Cookies
+  - button "Close cookie notice":
+    - generic: 󰅖
+- dialog:
+  - generic: We've updated our Terms
+  - generic: We are committed to maintaining transparency and keeping your personal data safe. We have updated our Privacy Policy. Please take a moment to review the Privacy Policy for details of the changes. You may also choose whether to receive marketing communications from us. Your choice is entirely voluntary, and choosing not to consent to marketing communications will not affect your access to or use of our website or core services.
+  - generic: 󰄱
+  - checkbox "I agree to the updated Privacy Policy *"
+  - text: I agree to the updated
+  - link "Privacy Policy":
+    - /url: https://www.lcsc.com/help/privacy?hideAgreementUpdate=1
+  - generic: "*"
+  - generic: 󰄱
+  - checkbox "I agree to the updated Marketing Policy"
+  - text: I agree to the updated
+  - link "Marketing Policy":
+    - /url: https://www.lcsc.com/help/marketing-consulting-agreement?hideAgreementUpdate=1
+  - button "Decline" [disabled]:
+    - generic: Decline
+  - button "Accept & Continue" [disabled]:
+    - generic: Accept & Continue

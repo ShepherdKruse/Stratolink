@@ -1,0 +1,937 @@
+
+  - text: Search Parts
+  - button "Close":
+    - generic: 
+  - table:
+    - rowgroup:
+      - row "Top Designator Bottom Designator Comment Footprint Matched Part Detail Qty Source Lib Type Total Cost":
+        - columnheader "Top Designator":
+          - generic: Top Designator
+        - columnheader "Bottom Designator":
+          - generic: Bottom Designator
+        - columnheader "Comment":
+          - generic: Comment
+        - columnheader "Footprint":
+          - generic: Footprint
+        - columnheader "Matched Part Detail":
+          - generic: Matched Part Detail
+        - columnheader "Qty":
+          - generic: Qty
+        - columnheader "Source":
+          - generic: Source
+        - columnheader "Lib Type":
+          - generic: Lib Type
+        - columnheader "Total Cost":
+          - generic: Total Cost
+  - table:
+    - rowgroup:
+      - row "U2 RAK3172-9-SM-NI Stratolink_v1p1_U2_RAK3172 RAK3172-9-SM-NI C18548052 -40℃~+85℃ 15km 2V~3.6V 5.22mA 87mA IPEX interface LoRa SPI、UART、I2C SMD,15.5x15mm LoRa Modules ROHS 3 1 JLCPCB Extended $23.6721":
+        - cell "U2":
+          - generic "U2"
+        - cell
+        - cell "RAK3172-9-SM-NI":
+          - generic "RAK3172-9-SM-NI"
+        - cell "Stratolink_v1p1_U2_RAK3172":
+          - generic "Stratolink_v1p1_U2_RAK3172"
+        - cell "RAK3172-9-SM-NI C18548052 -40℃~+85℃ 15km 2V~3.6V 5.22mA 87mA IPEX interface LoRa SPI、UART、I2C SMD,15.5x15mm LoRa Modules ROHS":
+          - generic: RAK3172-9-SM-NI C18548052
+          - generic: "-40℃~+85℃ 15km 2V~3.6V 5.22mA 87mA IPEX interface LoRa SPI、UART、I2C SMD,15.5x15mm LoRa Modules ROHS"
+        - cell "3":
+          - generic: "3"
+        - cell "1 JLCPCB":
+          - paragraph: 1 JLCPCB
+        - cell "Extended":
+          - generic: Extended
+        - cell "$23.6721":
+          - generic: $23.6721
+  - tablist:
+    - tab "Public inventory" [selected]
+    - tab "My Inventory"
+    - tab "My Lists"
+  - tabpanel "Public inventory":
+    - textbox "Search within results" [active]: RAK3172
+    - generic: 
+    - button "":
+      - generic: 
+    - generic: Show Filters
+    - text:   
+    - table:
+      - rowgroup:
+        - 'row "MFR Part # Description JLCPCB Stock Idle Parts Stock My Inventory Price"':
+          - columnheader
+          - 'columnheader "MFR Part #"':
+            - generic: "MFR Part #"
+          - columnheader
+          - columnheader "Description":
+            - generic: Description
+          - columnheader
+          - columnheader "JLCPCB Stock":
+            - generic: JLCPCB Stock
+          - columnheader
+          - columnheader "Idle Parts Stock":
+            - text: Idle Parts Stock
+          - columnheader
+          - columnheader "My Inventory":
+            - text: My Inventory
+          - columnheader
+          - columnheader "Price":
+            - generic: Price
+          - columnheader
+          - columnheader
+          - columnheader
+    - table:
+      - rowgroup:
+        - 'row "no-image RAK3172-N C9900025806 Extended RAK3172 New Arrivals ROHS 0 0 JLCPCB: 0 Other: 0 1+ $0.0397 100+ $0.0204 Inventory shortage"':
+          - cell:
+            - generic: 
+          - cell "no-image RAK3172-N C9900025806 Extended":
+            - img "no-image"
+            - link "RAK3172-N":
+              - /url: https://jlcpcb.com/partdetail/JLCPCBAssembly-RAK3172N/C9900025806
+            - generic: C9900025806
+            - generic: Extended
+          - cell
+          - cell "RAK3172 New Arrivals ROHS":
+            - generic: RAK3172 New Arrivals ROHS
+          - cell
+          - cell "0":
+            - generic: "0"
+          - cell
+          - cell "0":
+            - generic: "0"
+          - cell
+          - 'cell "JLCPCB: 0 Other: 0"':
+            - generic: "JLCPCB:"
+            - text: "0"
+            - generic: "Other:"
+            - text: "0"
+          - cell
+          - cell "1+ $0.0397 100+ $0.0204":
+            - generic: 1+
+            - generic: $0.0397
+            - generic: 100+
+            - generic: $0.0204
+          - cell
+          - cell "Inventory shortage":
+            - generic: Inventory shortage
+        - 'row "no-image RAK3172-SiP C7496863 Extended LGA73_12X12mm New Arrivals ROHS 0 0 JLCPCB: 0 Other: 0 1+ $5.7085 100+ $5.5454 Inventory shortage"':
+          - cell:
+            - generic: 
+          - cell "no-image RAK3172-SiP C7496863 Extended":
+            - img "no-image"
+            - link "RAK3172-SiP":
+              - /url: https://jlcpcb.com/partdetail/RAKwireless-RAK3172SiP/C7496863
+            - generic: C7496863
+            - generic: Extended
+          - cell
+          - cell "LGA73_12X12mm New Arrivals ROHS":
+            - generic: LGA73_12X12mm New Arrivals ROHS
+          - cell
+          - cell "0":
+            - generic: "0"
+          - cell
+          - cell "0":
+            - generic: "0"
+          - cell
+          - 'cell "JLCPCB: 0 Other: 0"':
+            - generic: "JLCPCB:"
+            - text: "0"
+            - generic: "Other:"
+            - text: "0"
+          - cell
+          - cell "1+ $5.7085 100+ $5.5454":
+            - generic: 1+
+            - generic: $5.7085
+            - generic: 100+
+            - generic: $5.5454
+          - cell
+          - cell "Inventory shortage":
+            - generic: Inventory shortage
+        - 'row "no-image RAK3172L-CN C9900235314 Extended SMD-32P-P1.0 SMT ROHS 0 0 JLCPCB: 0 Other: 0 1+ $0.0397 100+ $0.0204 Inventory shortage"':
+          - cell:
+            - generic: 
+          - cell "no-image RAK3172L-CN C9900235314 Extended":
+            - img "no-image"
+            - link "RAK3172L-CN":
+              - /url: https://jlcpcb.com/partdetail/JLCPCBAssembly-RAK3172LCN/C9900235314
+            - generic: C9900235314
+            - generic: Extended
+          - cell
+          - cell "SMD-32P-P1.0 SMT ROHS":
+            - generic: SMD-32P-P1.0 SMT ROHS
+          - cell
+          - cell "0":
+            - generic: "0"
+          - cell
+          - cell "0":
+            - generic: "0"
+          - cell
+          - 'cell "JLCPCB: 0 Other: 0"':
+            - generic: "JLCPCB:"
+            - text: "0"
+            - generic: "Other:"
+            - text: "0"
+          - cell
+          - cell "1+ $0.0397 100+ $0.0204":
+            - generic: 1+
+            - generic: $0.0397
+            - generic: 100+
+            - generic: $0.0204
+          - cell
+          - cell "Inventory shortage":
+            - generic: Inventory shortage
+        - 'row "RAK3172-8-SM-I-topview RAK3172-8-SM-I C19723904 Extended -20℃~+85℃ 15km 20dBm 2V~3.6V 5.22mA 87mA IPEX interface LoRa SPI、UART、I2C SMD,15.5x15mm LoRa Modules ROHS 119 2 JLCPCB: 0 Other: 0 18+ $8.1158 10+ $8.1158 Show More Select "':
+          - cell:
+            - generic: 
+          - cell "RAK3172-8-SM-I-topview RAK3172-8-SM-I C19723904 Extended":
+            - img "RAK3172-8-SM-I-topview"
+            - link "RAK3172-8-SM-I":
+              - /url: https://jlcpcb.com/partdetail/RAKwireless-RAK3172_8_SMI/C19723904
+            - generic: C19723904
+            - generic: Extended
+          - cell
+          - cell "-20℃~+85℃ 15km 20dBm 2V~3.6V 5.22mA 87mA IPEX interface LoRa SPI、UART、I2C SMD,15.5x15mm LoRa Modules ROHS":
+            - generic: "-20℃~+85℃ 15km 20dBm 2V~3.6V 5.22mA 87mA IPEX interface LoRa SPI、UART、I2C SMD,15.5x15mm LoRa Modules ROHS"
+          - cell
+          - cell "119":
+            - generic: "119"
+          - cell
+          - cell "2":
+            - generic: "2"
+          - cell
+          - 'cell "JLCPCB: 0 Other: 0"':
+            - generic: "JLCPCB:"
+            - text: "0"
+            - generic: "Other:"
+            - text: "0"
+          - cell
+          - cell "18+ $8.1158 10+ $8.1158 Show More":
+            - generic: 18+
+            - generic: $8.1158
+            - generic: 10+
+            - generic: $8.1158
+            - generic: Show More
+          - cell
+          - cell "Select ":
+            - button "Select"
+            - generic: 
+        - 'row "no-image RAK3172-9-SM-I C19723905 Extended -20℃~+85℃ 15km 20dBm 2V~3.6V 5.22mA 87mA IPEX interface LoRa SPI、UART、I2C SMD,15.5x15mm LoRa Modules ROHS 514 0 JLCPCB: 0 Other: 0 18+ $7.4748 10+ $7.4748 Show More Select "':
+          - cell:
+            - generic: 
+          - cell "no-image RAK3172-9-SM-I C19723905 Extended":
+            - img "no-image"
+            - link "RAK3172-9-SM-I":
+              - /url: https://jlcpcb.com/partdetail/RAKwireless-RAK3172_9_SMI/C19723905
+            - generic: C19723905
+            - generic: Extended
+          - cell
+          - cell "-20℃~+85℃ 15km 20dBm 2V~3.6V 5.22mA 87mA IPEX interface LoRa SPI、UART、I2C SMD,15.5x15mm LoRa Modules ROHS":
+            - generic: "-20℃~+85℃ 15km 20dBm 2V~3.6V 5.22mA 87mA IPEX interface LoRa SPI、UART、I2C SMD,15.5x15mm LoRa Modules ROHS"
+          - cell
+          - cell "514":
+            - generic: "514"
+          - cell
+          - cell "0":
+            - generic: "0"
+          - cell
+          - 'cell "JLCPCB: 0 Other: 0"':
+            - generic: "JLCPCB:"
+            - text: "0"
+            - generic: "Other:"
+            - text: "0"
+          - cell
+          - cell "18+ $7.4748 10+ $7.4748 Show More":
+            - generic: 18+
+            - generic: $7.4748
+            - generic: 10+
+            - generic: $7.4748
+            - generic: Show More
+          - cell
+          - cell "Select ":
+            - button "Select"
+            - generic: 
+        - 'row "no-image RAK3172LP-SIP C5367623 Extended - LoRa Modules ROHS 0 0 JLCPCB: 0 Other: 0 30+ $6.1048 104+ $5.5470 Show More Inventory shortage"':
+          - cell:
+            - generic: 
+          - cell "no-image RAK3172LP-SIP C5367623 Extended":
+            - img "no-image"
+            - link "RAK3172LP-SIP":
+              - /url: https://jlcpcb.com/partdetail/RAKwireless-RAK3172LPSIP/C5367623
+            - generic: C5367623
+            - generic: Extended
+          - cell
+          - cell "- LoRa Modules ROHS":
+            - generic: "- LoRa Modules ROHS"
+          - cell
+          - cell "0":
+            - generic: "0"
+          - cell
+          - cell "0":
+            - generic: "0"
+          - cell
+          - 'cell "JLCPCB: 0 Other: 0"':
+            - generic: "JLCPCB:"
+            - text: "0"
+            - generic: "Other:"
+            - text: "0"
+          - cell
+          - cell "30+ $6.1048 104+ $5.5470 Show More":
+            - generic: 30+
+            - generic: $6.1048
+            - generic: 104+
+            - generic: $5.5470
+            - generic: Show More
+          - cell
+          - cell "Inventory shortage":
+            - generic: Inventory shortage
+        - 'row "no-image RAK3172-KR920 C22375750 Extended SMD-32P New Arrivals ROHS 0 0 JLCPCB: 0 Other: 0 1+ $0.0397 100+ $0.0204 Inventory shortage"':
+          - cell:
+            - generic: 
+          - cell "no-image RAK3172-KR920 C22375750 Extended":
+            - img "no-image"
+            - link "RAK3172-KR920":
+              - /url: https://jlcpcb.com/partdetail/RAKwireless-RAK3172KR920/C22375750
+            - generic: C22375750
+            - generic: Extended
+          - cell
+          - cell "SMD-32P New Arrivals ROHS":
+            - generic: SMD-32P New Arrivals ROHS
+          - cell
+          - cell "0":
+            - generic: "0"
+          - cell
+          - cell "0":
+            - generic: "0"
+          - cell
+          - 'cell "JLCPCB: 0 Other: 0"':
+            - generic: "JLCPCB:"
+            - text: "0"
+            - generic: "Other:"
+            - text: "0"
+          - cell
+          - cell "1+ $0.0397 100+ $0.0204":
+            - generic: 1+
+            - generic: $0.0397
+            - generic: 100+
+            - generic: $0.0204
+          - cell
+          - cell "Inventory shortage":
+            - generic: Inventory shortage
+        - 'row "no-image RAK3172-CN470 C9900147445 Extended WIRELM-SMD_32P-L15.5-W15.0-P1.00 New Arrivals ROHS 0 0 JLCPCB: 0 Other: 0 1+ $0.0397 100+ $0.0204 Inventory shortage"':
+          - cell:
+            - generic: 
+          - cell "no-image RAK3172-CN470 C9900147445 Extended":
+            - img "no-image"
+            - link "RAK3172-CN470":
+              - /url: https://jlcpcb.com/partdetail/JLCPCBAssembly-RAK3172CN470/C9900147445
+            - generic: C9900147445
+            - generic: Extended
+          - cell
+          - cell "WIRELM-SMD_32P-L15.5-W15.0-P1.00 New Arrivals ROHS":
+            - generic: WIRELM-SMD_32P-L15.5-W15.0-P1.00 New Arrivals ROHS
+          - cell
+          - cell "0":
+            - generic: "0"
+          - cell
+          - cell "0":
+            - generic: "0"
+          - cell
+          - 'cell "JLCPCB: 0 Other: 0"':
+            - generic: "JLCPCB:"
+            - text: "0"
+            - generic: "Other:"
+            - text: "0"
+          - cell
+          - cell "1+ $0.0397 100+ $0.0204":
+            - generic: 1+
+            - generic: $0.0397
+            - generic: 100+
+            - generic: $0.0204
+          - cell
+          - cell "Inventory shortage":
+            - generic: Inventory shortage
+        - 'row "no-image RAK3172-8-SM-NI C5452091 Extended -40℃~+85℃ 15km 2V~3.6V 5.22mA 87mA IPEX interface LoRa SPI、UART、ADC、GPIO、I2C SMD,15.5x15mm LoRa Modules ROHS 444 5 JLCPCB: 0 Other: 0 12+ $7.7227 10+ $7.7227 Show More Select "':
+          - cell:
+            - generic: 
+          - cell "no-image RAK3172-8-SM-NI C5452091 Extended":
+            - img "no-image"
+            - link "RAK3172-8-SM-NI":
+              - /url: https://jlcpcb.com/partdetail/RAKwireless-RAK3172_8_SMNI/C5452091
+            - generic: C5452091
+            - generic: Extended
+          - cell
+          - cell "-40℃~+85℃ 15km 2V~3.6V 5.22mA 87mA IPEX interface LoRa SPI、UART、ADC、GPIO、I2C SMD,15.5x15mm LoRa Modules ROHS":
+            - generic: "-40℃~+85℃ 15km 2V~3.6V 5.22mA 87mA IPEX interface LoRa SPI、UART、ADC、GPIO、I2C SMD,15.5x15mm LoRa Modules ROHS"
+          - cell
+          - cell "444":
+            - generic: "444"
+          - cell
+          - cell "5":
+            - generic: "5"
+          - cell
+          - 'cell "JLCPCB: 0 Other: 0"':
+            - generic: "JLCPCB:"
+            - text: "0"
+            - generic: "Other:"
+            - text: "0"
+          - cell
+          - cell "12+ $7.7227 10+ $7.7227 Show More":
+            - generic: 12+
+            - generic: $7.7227
+            - generic: 10+
+            - generic: $7.7227
+            - generic: Show More
+          - cell
+          - cell "Select ":
+            - button "Select"
+            - generic: 
+        - 'row "no-image RAK3172-9-SM-NI C18548052 Extended -40℃~+85℃ 15km 2V~3.6V 5.22mA 87mA IPEX interface LoRa SPI、UART、I2C SMD,15.5x15mm LoRa Modules ROHS 1 2 JLCPCB: 0 Other: 0 12+ $7.6901 10+ $7.6901 Show More Inventory shortage"':
+          - cell:
+            - generic: 
+          - cell "no-image RAK3172-9-SM-NI C18548052 Extended":
+            - img "no-image"
+            - link "RAK3172-9-SM-NI":
+              - /url: https://jlcpcb.com/partdetail/RAKwireless-RAK3172_9_SMNI/C18548052
+            - generic: C18548052
+            - generic: Extended
+          - cell
+          - cell "-40℃~+85℃ 15km 2V~3.6V 5.22mA 87mA IPEX interface LoRa SPI、UART、I2C SMD,15.5x15mm LoRa Modules ROHS":
+            - generic: "-40℃~+85℃ 15km 2V~3.6V 5.22mA 87mA IPEX interface LoRa SPI、UART、I2C SMD,15.5x15mm LoRa Modules ROHS"
+          - cell
+          - cell "1":
+            - generic: "1"
+          - cell
+          - cell "2":
+            - generic: "2"
+          - cell
+          - 'cell "JLCPCB: 0 Other: 0"':
+            - generic: "JLCPCB:"
+            - text: "0"
+            - generic: "Other:"
+            - text: "0"
+          - cell
+          - cell "12+ $7.6901 10+ $7.6901 Show More":
+            - generic: 12+
+            - generic: $7.6901
+            - generic: 10+
+            - generic: $7.6901
+            - generic: Show More
+          - cell
+          - cell "Inventory shortage":
+            - generic: Inventory shortage
+        - 'row "no-image RAK3172-P3 RUI C5356821 Extended LCC-32_15.5X15.0mm New Arrivals ROHS 0 0 JLCPCB: 0 Other: 0 1+ $0.0397 100+ $0.0204 Inventory shortage"':
+          - cell:
+            - generic: 
+          - cell "no-image RAK3172-P3 RUI C5356821 Extended":
+            - img "no-image"
+            - link "RAK3172-P3 RUI":
+              - /url: https://jlcpcb.com/partdetail/RAKwireless-RAK3172_P3RUI/C5356821
+            - generic: C5356821
+            - generic: Extended
+          - cell
+          - cell "LCC-32_15.5X15.0mm New Arrivals ROHS":
+            - generic: LCC-32_15.5X15.0mm New Arrivals ROHS
+          - cell
+          - cell "0":
+            - generic: "0"
+          - cell
+          - cell "0":
+            - generic: "0"
+          - cell
+          - 'cell "JLCPCB: 0 Other: 0"':
+            - generic: "JLCPCB:"
+            - text: "0"
+            - generic: "Other:"
+            - text: "0"
+          - cell
+          - cell "1+ $0.0397 100+ $0.0204":
+            - generic: 1+
+            - generic: $0.0397
+            - generic: 100+
+            - generic: $0.0204
+          - cell
+          - cell "Inventory shortage":
+            - generic: Inventory shortage
+        - 'row "no-image RAK3172-306041 C7544641 Extended SMD,15x15.5mm LoRa Modules ROHS 0 0 JLCPCB: 0 Other: 0 14+ $8.4404 16+ $8.4404 Show More Inventory shortage"':
+          - cell:
+            - generic: 
+          - cell "no-image RAK3172-306041 C7544641 Extended":
+            - img "no-image"
+            - link "RAK3172-306041":
+              - /url: https://jlcpcb.com/partdetail/RAKwireless-RAK3172306041/C7544641
+            - generic: C7544641
+            - generic: Extended
+          - cell
+          - cell "SMD,15x15.5mm LoRa Modules ROHS":
+            - generic: SMD,15x15.5mm LoRa Modules ROHS
+          - cell
+          - cell "0":
+            - generic: "0"
+          - cell
+          - cell "0":
+            - generic: "0"
+          - cell
+          - 'cell "JLCPCB: 0 Other: 0"':
+            - generic: "JLCPCB:"
+            - text: "0"
+            - generic: "Other:"
+            - text: "0"
+          - cell
+          - cell "14+ $8.4404 16+ $8.4404 Show More":
+            - generic: 14+
+            - generic: $8.4404
+            - generic: 16+
+            - generic: $8.4404
+            - generic: Show More
+          - cell
+          - cell "Inventory shortage":
+            - generic: Inventory shortage
+        - 'row "no-image RAK3172-T-8-SM-I C19723908 Extended -40℃~+85℃ 15km 20dBm 2V~3.6V 5.22mA 87mA Continuous frequency coverage LoRa SPI、UART、I2C SMD,15.5x15mm LoRa Modules ROHS 694 0 JLCPCB: 0 Other: 0 18+ $9.1857 10+ $9.1857 Show More Select "':
+          - cell:
+            - generic: 
+          - cell "no-image RAK3172-T-8-SM-I C19723908 Extended":
+            - img "no-image"
+            - link "RAK3172-T-8-SM-I":
+              - /url: https://jlcpcb.com/partdetail/RAKwireless-RAK3172_T_8_SMI/C19723908
+            - generic: C19723908
+            - generic: Extended
+          - cell
+          - cell "-40℃~+85℃ 15km 20dBm 2V~3.6V 5.22mA 87mA Continuous frequency coverage LoRa SPI、UART、I2C SMD,15.5x15mm LoRa Modules ROHS":
+            - generic: "-40℃~+85℃ 15km 20dBm 2V~3.6V 5.22mA 87mA Continuous frequency coverage LoRa SPI、UART、I2C SMD,15.5x15mm LoRa Modules ROHS"
+          - cell
+          - cell "694":
+            - generic: "694"
+          - cell
+          - cell "0":
+            - generic: "0"
+          - cell
+          - 'cell "JLCPCB: 0 Other: 0"':
+            - generic: "JLCPCB:"
+            - text: "0"
+            - generic: "Other:"
+            - text: "0"
+          - cell
+          - cell "18+ $9.1857 10+ $9.1857 Show More":
+            - generic: 18+
+            - generic: $9.1857
+            - generic: 10+
+            - generic: $9.1857
+            - generic: Show More
+          - cell
+          - cell "Select ":
+            - button "Select"
+            - generic: 
+        - 'row "no-image RAK3172-T-9-SM-I C19723909 Extended -40℃~+85℃ 15km 2V~3.6V 5.22mA 87mA Continuous frequency coverage FSK、LoRa IPEX interface SPI、UART、I2C SMD,15.5x15mm LoRa Modules ROHS 77 45 JLCPCB: 0 Other: 0 18+ $7.6722 10+ $7.6722 Show More Select "':
+          - cell:
+            - generic: 
+          - cell "no-image RAK3172-T-9-SM-I C19723909 Extended":
+            - img "no-image"
+            - link "RAK3172-T-9-SM-I":
+              - /url: https://jlcpcb.com/partdetail/RAKwireless-RAK3172_T_9_SMI/C19723909
+            - generic: C19723909
+            - generic: Extended
+          - cell
+          - cell "-40℃~+85℃ 15km 2V~3.6V 5.22mA 87mA Continuous frequency coverage FSK、LoRa IPEX interface SPI、UART、I2C SMD,15.5x15mm LoRa Modules ROHS":
+            - generic: "-40℃~+85℃ 15km 2V~3.6V 5.22mA 87mA Continuous frequency coverage FSK、LoRa IPEX interface SPI、UART、I2C SMD,15.5x15mm LoRa Modules ROHS"
+          - cell
+          - cell "77":
+            - generic: "77"
+          - cell
+          - cell "45":
+            - generic: "45"
+          - cell
+          - 'cell "JLCPCB: 0 Other: 0"':
+            - generic: "JLCPCB:"
+            - text: "0"
+            - generic: "Other:"
+            - text: "0"
+          - cell
+          - cell "18+ $7.6722 10+ $7.6722 Show More":
+            - generic: 18+
+            - generic: $7.6722
+            - generic: 10+
+            - generic: $7.6722
+            - generic: Show More
+          - cell
+          - cell "Select ":
+            - button "Select"
+            - generic: 
+        - 'row "no-image rak3172-43-SM-I C9900248940 Extended WIRELM-SMD_32P-L15.5-W15.0-P1.00 SMT ROHS 0 0 JLCPCB: 0 Other: 0 1+ $0.0397 100+ $0.0204 Inventory shortage"':
+          - cell:
+            - generic: 
+          - cell "no-image rak3172-43-SM-I C9900248940 Extended":
+            - img "no-image"
+            - link "rak3172-43-SM-I":
+              - /url: https://jlcpcb.com/partdetail/JLCPCBAssembly-rak3172_43_SMI/C9900248940
+            - generic: C9900248940
+            - generic: Extended
+          - cell
+          - cell "WIRELM-SMD_32P-L15.5-W15.0-P1.00 SMT ROHS":
+            - generic: WIRELM-SMD_32P-L15.5-W15.0-P1.00 SMT ROHS
+          - cell
+          - cell "0":
+            - generic: "0"
+          - cell
+          - cell "0":
+            - generic: "0"
+          - cell
+          - 'cell "JLCPCB: 0 Other: 0"':
+            - generic: "JLCPCB:"
+            - text: "0"
+            - generic: "Other:"
+            - text: "0"
+          - cell
+          - cell "1+ $0.0397 100+ $0.0204":
+            - generic: 1+
+            - generic: $0.0397
+            - generic: 100+
+            - generic: $0.0204
+          - cell
+          - cell "Inventory shortage":
+            - generic: Inventory shortage
+        - 'row "no-image RAK3172-T-9-SM-NI C19723907 Extended -40℃~+85℃ 15km 20dBm 2V~3.6V 5.22mA 87mA Continuous frequency coverage LoRa SPI、UART、I2C SMD,15.5x15mm LoRa Modules ROHS 210 0 JLCPCB: 0 Other: 0 18+ $8.0506 10+ $8.0506 Show More Select "':
+          - cell:
+            - generic: 
+          - cell "no-image RAK3172-T-9-SM-NI C19723907 Extended":
+            - img "no-image"
+            - link "RAK3172-T-9-SM-NI":
+              - /url: https://jlcpcb.com/partdetail/RAKwireless-RAK3172_T_9_SMNI/C19723907
+            - generic: C19723907
+            - generic: Extended
+          - cell
+          - cell "-40℃~+85℃ 15km 20dBm 2V~3.6V 5.22mA 87mA Continuous frequency coverage LoRa SPI、UART、I2C SMD,15.5x15mm LoRa Modules ROHS":
+            - generic: "-40℃~+85℃ 15km 20dBm 2V~3.6V 5.22mA 87mA Continuous frequency coverage LoRa SPI、UART、I2C SMD,15.5x15mm LoRa Modules ROHS"
+          - cell
+          - cell "210":
+            - generic: "210"
+          - cell
+          - cell "0":
+            - generic: "0"
+          - cell
+          - 'cell "JLCPCB: 0 Other: 0"':
+            - generic: "JLCPCB:"
+            - text: "0"
+            - generic: "Other:"
+            - text: "0"
+          - cell
+          - cell "18+ $8.0506 10+ $8.0506 Show More":
+            - generic: 18+
+            - generic: $8.0506
+            - generic: 10+
+            - generic: $8.0506
+            - generic: Show More
+          - cell
+          - cell "Select ":
+            - button "Select"
+            - generic: 
+        - 'row "no-image RAK3172-8- SM-NI C9900091247 Extended SMD,15.5x15mm New Arrivals ROHS 0 0 JLCPCB: 0 Other: 0 1+ $0.0397 100+ $0.0204 Inventory shortage"':
+          - cell:
+            - generic: 
+          - cell "no-image RAK3172-8- SM-NI C9900091247 Extended":
+            - img "no-image"
+            - link "RAK3172-8- SM-NI":
+              - /url: https://jlcpcb.com/partdetail/JLCPCBAssembly-RAK3172_8_SMNI/C9900091247
+            - generic: C9900091247
+            - generic: Extended
+          - cell
+          - cell "SMD,15.5x15mm New Arrivals ROHS":
+            - generic: SMD,15.5x15mm New Arrivals ROHS
+          - cell
+          - cell "0":
+            - generic: "0"
+          - cell
+          - cell "0":
+            - generic: "0"
+          - cell
+          - 'cell "JLCPCB: 0 Other: 0"':
+            - generic: "JLCPCB:"
+            - text: "0"
+            - generic: "Other:"
+            - text: "0"
+          - cell
+          - cell "1+ $0.0397 100+ $0.0204":
+            - generic: 1+
+            - generic: $0.0397
+            - generic: 100+
+            - generic: $0.0204
+          - cell
+          - cell "Inventory shortage":
+            - generic: Inventory shortage
+        - 'row "no-image RAK3172-F-8-SM-I C56112793 Extended SMD,15.5x15mm SMT ROHS 0 0 JLCPCB: 0 Other: 0 1+ $0.0397 100+ $0.0204 Inventory shortage"':
+          - cell:
+            - generic: 
+          - cell "no-image RAK3172-F-8-SM-I C56112793 Extended":
+            - img "no-image"
+            - link "RAK3172-F-8-SM-I":
+              - /url: https://jlcpcb.com/partdetail/RAKwireless-RAK3172_F_8_SMI/C56112793
+            - generic: C56112793
+            - generic: Extended
+          - cell
+          - cell "SMD,15.5x15mm SMT ROHS":
+            - generic: SMD,15.5x15mm SMT ROHS
+          - cell
+          - cell "0":
+            - generic: "0"
+          - cell
+          - cell "0":
+            - generic: "0"
+          - cell
+          - 'cell "JLCPCB: 0 Other: 0"':
+            - generic: "JLCPCB:"
+            - text: "0"
+            - generic: "Other:"
+            - text: "0"
+          - cell
+          - cell "1+ $0.0397 100+ $0.0204":
+            - generic: 1+
+            - generic: $0.0397
+            - generic: 100+
+            - generic: $0.0204
+          - cell
+          - cell "Inventory shortage":
+            - generic: Inventory shortage
+        - 'row "no-image RAK3172-T-8-SM-NI C19723906 Extended -40℃~+85℃ 15km 20dBm 2V~3.6V 5.22mA 87mA Continuous frequency coverage LoRa SPI、UART、ADC、GPIO、I2C SMD,15.5x15mm LoRa Modules ROHS 0 0 JLCPCB: 0 Other: 0 18+ $8.5953 10+ $8.5953 Show More Inventory shortage"':
+          - cell:
+            - generic: 
+          - cell "no-image RAK3172-T-8-SM-NI C19723906 Extended":
+            - img "no-image"
+            - link "RAK3172-T-8-SM-NI":
+              - /url: https://jlcpcb.com/partdetail/RAKwireless-RAK3172_T_8_SMNI/C19723906
+            - generic: C19723906
+            - generic: Extended
+          - cell
+          - cell "-40℃~+85℃ 15km 20dBm 2V~3.6V 5.22mA 87mA Continuous frequency coverage LoRa SPI、UART、ADC、GPIO、I2C SMD,15.5x15mm LoRa Modules ROHS":
+            - generic: "-40℃~+85℃ 15km 20dBm 2V~3.6V 5.22mA 87mA Continuous frequency coverage LoRa SPI、UART、ADC、GPIO、I2C SMD,15.5x15mm LoRa Modules ROHS"
+          - cell
+          - cell "0":
+            - generic: "0"
+          - cell
+          - cell "0":
+            - generic: "0"
+          - cell
+          - 'cell "JLCPCB: 0 Other: 0"':
+            - generic: "JLCPCB:"
+            - text: "0"
+            - generic: "Other:"
+            - text: "0"
+          - cell
+          - cell "18+ $8.5953 10+ $8.5953 Show More":
+            - generic: 18+
+            - generic: $8.5953
+            - generic: 10+
+            - generic: $8.5953
+            - generic: Show More
+          - cell
+          - cell "Inventory shortage":
+            - generic: Inventory shortage
+        - 'row "no-image RAK3172-SIP-8-SM-NI C19818882 Extended -40℃~+85℃ 1.8V~3.6V 14dBm 15km 39.1mA 9.69mA LoRa UART SMD,12x12mm LoRa Modules ROHS 122 0 JLCPCB: 0 Other: 0 18+ $8.0652 10+ $8.0652 Show More Select "':
+          - cell:
+            - generic: 
+          - cell "no-image RAK3172-SIP-8-SM-NI C19818882 Extended":
+            - img "no-image"
+            - link "RAK3172-SIP-8-SM-NI":
+              - /url: https://jlcpcb.com/partdetail/RAKwireless-RAK3172_SIP_8_SMNI/C19818882
+            - generic: C19818882
+            - generic: Extended
+          - cell
+          - cell "-40℃~+85℃ 1.8V~3.6V 14dBm 15km 39.1mA 9.69mA LoRa UART SMD,12x12mm LoRa Modules ROHS":
+            - generic: "-40℃~+85℃ 1.8V~3.6V 14dBm 15km 39.1mA 9.69mA LoRa UART SMD,12x12mm LoRa Modules ROHS"
+          - cell
+          - cell "122":
+            - generic: "122"
+          - cell
+          - cell "0":
+            - generic: "0"
+          - cell
+          - 'cell "JLCPCB: 0 Other: 0"':
+            - generic: "JLCPCB:"
+            - text: "0"
+            - generic: "Other:"
+            - text: "0"
+          - cell
+          - cell "18+ $8.0652 10+ $8.0652 Show More":
+            - generic: 18+
+            - generic: $8.0652
+            - generic: 10+
+            - generic: $8.0652
+            - generic: Show More
+          - cell
+          - cell "Select ":
+            - button "Select"
+            - generic: 
+        - 'row "no-image RAK3172-SIP-9-SM-NI C19818883 Extended -40℃~+85℃ 1.8V~3.6V 14dBm 15km 39.1mA 9.69mA LoRa UART SMD,12x12mm LoRa Modules ROHS 120 0 JLCPCB: 0 Other: 0 18+ $8.0652 10+ $8.0652 Show More Select "':
+          - cell:
+            - generic: 
+          - cell "no-image RAK3172-SIP-9-SM-NI C19818883 Extended":
+            - img "no-image"
+            - link "RAK3172-SIP-9-SM-NI":
+              - /url: https://jlcpcb.com/partdetail/RAKwireless-RAK3172_SIP_9_SMNI/C19818883
+            - generic: C19818883
+            - generic: Extended
+          - cell
+          - cell "-40℃~+85℃ 1.8V~3.6V 14dBm 15km 39.1mA 9.69mA LoRa UART SMD,12x12mm LoRa Modules ROHS":
+            - generic: "-40℃~+85℃ 1.8V~3.6V 14dBm 15km 39.1mA 9.69mA LoRa UART SMD,12x12mm LoRa Modules ROHS"
+          - cell
+          - cell "120":
+            - generic: "120"
+          - cell
+          - cell "0":
+            - generic: "0"
+          - cell
+          - 'cell "JLCPCB: 0 Other: 0"':
+            - generic: "JLCPCB:"
+            - text: "0"
+            - generic: "Other:"
+            - text: "0"
+          - cell
+          - cell "18+ $8.0652 10+ $8.0652 Show More":
+            - generic: 18+
+            - generic: $8.0652
+            - generic: 10+
+            - generic: $8.0652
+            - generic: Show More
+          - cell
+          - cell "Select ":
+            - button "Select"
+            - generic: 
+        - 'row "no-image RAK3172-SIP-305041 C18212796 Extended LGA73_12X12mm New Arrivals ROHS 0 0 JLCPCB: 0 Other: 0 1+ $0.0397 100+ $0.0204 Inventory shortage"':
+          - cell:
+            - generic: 
+          - cell "no-image RAK3172-SIP-305041 C18212796 Extended":
+            - img "no-image"
+            - link "RAK3172-SIP-305041":
+              - /url: https://jlcpcb.com/partdetail/RAKwireless-RAK3172_SIP305041/C18212796
+            - generic: C18212796
+            - generic: Extended
+          - cell
+          - cell "LGA73_12X12mm New Arrivals ROHS":
+            - generic: LGA73_12X12mm New Arrivals ROHS
+          - cell
+          - cell "0":
+            - generic: "0"
+          - cell
+          - cell "0":
+            - generic: "0"
+          - cell
+          - 'cell "JLCPCB: 0 Other: 0"':
+            - generic: "JLCPCB:"
+            - text: "0"
+            - generic: "Other:"
+            - text: "0"
+          - cell
+          - cell "1+ $0.0397 100+ $0.0204":
+            - generic: 1+
+            - generic: $0.0397
+            - generic: 100+
+            - generic: $0.0204
+          - cell
+          - cell "Inventory shortage":
+            - generic: Inventory shortage
+        - 'row "no-image RAK3172 SKU-305045 C9900069744 Extended SMD,15.5X15mm New Arrivals ROHS 0 0 JLCPCB: 0 Other: 0 1+ $0.0397 100+ $0.0204 Inventory shortage"':
+          - cell:
+            - generic: 
+          - cell "no-image RAK3172 SKU-305045 C9900069744 Extended":
+            - img "no-image"
+            - link "RAK3172 SKU-305045":
+              - /url: https://jlcpcb.com/partdetail/20444580-RAK3172_SKU305045/C9900069744
+            - generic: C9900069744
+            - generic: Extended
+          - cell
+          - cell "SMD,15.5X15mm New Arrivals ROHS":
+            - generic: SMD,15.5X15mm New Arrivals ROHS
+          - cell
+          - cell "0":
+            - generic: "0"
+          - cell
+          - cell "0":
+            - generic: "0"
+          - cell
+          - 'cell "JLCPCB: 0 Other: 0"':
+            - generic: "JLCPCB:"
+            - text: "0"
+            - generic: "Other:"
+            - text: "0"
+          - cell
+          - cell "1+ $0.0397 100+ $0.0204":
+            - generic: 1+
+            - generic: $0.0397
+            - generic: 100+
+            - generic: $0.0204
+          - cell
+          - cell "Inventory shortage":
+            - generic: Inventory shortage
+        - 'row "no-image RAK3172 SKU: 305044 C9900060931 Extended SMD,15.5X15mm New Arrivals ROHS 0 0 JLCPCB: 0 Other: 0 1+ $0.0397 100+ $0.0204 Inventory shortage"':
+          - cell:
+            - generic: 
+          - 'cell "no-image RAK3172 SKU: 305044 C9900060931 Extended"':
+            - img "no-image"
+            - 'link "RAK3172 SKU: 305044"':
+              - /url: https://jlcpcb.com/partdetail/19403193-RAK3172_SKU_305044/C9900060931
+            - generic: C9900060931
+            - generic: Extended
+          - cell
+          - cell "SMD,15.5X15mm New Arrivals ROHS":
+            - generic: SMD,15.5X15mm New Arrivals ROHS
+          - cell
+          - cell "0":
+            - generic: "0"
+          - cell
+          - cell "0":
+            - generic: "0"
+          - cell
+          - 'cell "JLCPCB: 0 Other: 0"':
+            - generic: "JLCPCB:"
+            - text: "0"
+            - generic: "Other:"
+            - text: "0"
+          - cell
+          - cell "1+ $0.0397 100+ $0.0204":
+            - generic: 1+
+            - generic: $0.0397
+            - generic: 100+
+            - generic: $0.0204
+          - cell
+          - cell "Inventory shortage":
+            - generic: Inventory shortage
+        - 'row "no-image RAK3172-8-SM-NI-1.0.4 C51966275 Extended SMD,15.5x15mm LoRa Modules ROHS 0 0 JLCPCB: 0 Other: 0 1000+ $6.0542 200+ $6.3739 Show More Inventory shortage"':
+          - cell:
+            - generic: 
+          - cell "no-image RAK3172-8-SM-NI-1.0.4 C51966275 Extended":
+            - img "no-image"
+            - link "RAK3172-8-SM-NI-1.0.4":
+              - /url: https://jlcpcb.com/partdetail/RAKwireless-RAK3172_8_SM_NI_1_04/C51966275
+            - generic: C51966275
+            - generic: Extended
+          - cell
+          - cell "SMD,15.5x15mm LoRa Modules ROHS":
+            - generic: SMD,15.5x15mm LoRa Modules ROHS
+          - cell
+          - cell "0":
+            - generic: "0"
+          - cell
+          - cell "0":
+            - generic: "0"
+          - cell
+          - 'cell "JLCPCB: 0 Other: 0"':
+            - generic: "JLCPCB:"
+            - text: "0"
+            - generic: "Other:"
+            - text: "0"
+          - cell
+          - cell "1000+ $6.0542 200+ $6.3739 Show More":
+            - generic: 1000+
+            - generic: $6.0542
+            - generic: 200+
+            - generic: $6.3739
+            - generic: Show More
+          - cell
+          - cell "Inventory shortage":
+            - generic: Inventory shortage
+    - generic: 43 items in total
+    - button "" [disabled]:
+      - generic: 
+    - list:
+      - listitem: "1"
+      - listitem: "2"
+    - button "":
+      - generic: 

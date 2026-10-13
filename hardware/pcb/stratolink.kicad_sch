@@ -2659,7 +2659,7 @@
 					(hide yes)
 				)
 			)
-			(property "Datasheet" ""
+			(property "Datasheet" "https://docs.rakwireless.com/product-categories/wisduo/rak3172-module/datasheet/"
 				(at 0 0 0)
 				(effects
 					(font
@@ -2668,7 +2668,7 @@
 					(hide yes)
 				)
 			)
-			(property "Description" "RAK3172-9-SM-NI sub-GHz STM32WLE5CC radio module"
+			(property "Description" "RAK3172 STM32WLE5CC, 32-pad, high-band regional-label variant, no TCXO, no IPEX; antenna on RF pad 12"
 				(at 0 0 0)
 				(effects
 					(font
@@ -2768,7 +2768,7 @@
 					(hide yes)
 				)
 			)
-			(property "Description_1" "RAK3172-9-SM-NI sub-GHz STM32WLE5CC radio module"
+			(property "Description_1" "RAK3172 STM32WLE5CC, 32-pad, high-band regional-label variant, no TCXO, no IPEX; antenna on RF pad 12"
 				(at 0 0 0)
 				(effects
 					(font
@@ -2778,7 +2778,7 @@
 					(hide yes)
 				)
 			)
-			(property "Availability" "Not in stock"
+			(property "Availability" ""
 				(at 0 0 0)
 				(effects
 					(font
@@ -2788,7 +2788,7 @@
 					(hide yes)
 				)
 			)
-			(property "AVAILABILITY" "Not in stock"
+			(property "AVAILABILITY" ""
 				(at 0 0 0)
 				(effects
 					(font
@@ -57183,7 +57183,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "https://www.lcsc.com/product-detail/C2766827.html"
+		(property "Datasheet" "https://yageogroup.com/content/datasheet/asset/file/PYU-RC_GROUP_51_ROHS_L"
 			(at 228.6 88.9 0)
 			(effects
 				(font
@@ -57192,7 +57192,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "0402WGF3654TCE"
+		(property "Description" "3.65 MΩ, ±1%, ±100 ppm/°C, 0402, 62.5 mW, 50 V thick-film resistor"
 			(at 228.6 88.9 0)
 			(effects
 				(font
@@ -57216,15 +57216,15 @@
 			)
 		)
 	
- (property "Manufacturer" "UNI-ROYAL" (at 228.6 88.9 0) (effects (font (size 1.27 1.27)) (hide yes)))
+ (property "Manufacturer" "YAGEO" (at 228.6 88.9 0) (effects (font (size 1.27 1.27)) (hide yes)))
 
- (property "Manufacturer_Part_Number" "0402WGF3654TCE" (at 228.6 88.9 0) (effects (font (size 1.27 1.27)) (hide yes)))
+ (property "Manufacturer_Part_Number" "RC0402FR-073M65L" (at 228.6 88.9 0) (effects (font (size 1.27 1.27)) (hide yes)))
 
  (property "Supplier" "LCSC" (at 228.6 88.9 0) (effects (font (size 1.27 1.27)) (hide yes)))
 
- (property "LCSC" "C2766827" (at 228.6 88.9 0) (effects (font (size 1.27 1.27)) (hide yes)))
+ (property "LCSC" "C477700" (at 228.6 88.9 0) (effects (font (size 1.27 1.27)) (hide yes)))
 
- (property "Supplier Part" "C2766827" (at 228.6 88.9 0) (effects (font (size 1.27 1.27)) (hide yes)))
+ (property "Supplier Part" "C477700" (at 228.6 88.9 0) (effects (font (size 1.27 1.27)) (hide yes)))
 )
 	(symbol
 		(lib_id "Stratolink_v1p1_Symbols:Device_R_US")
@@ -58300,7 +58300,7 @@
 				(hide yes)
 			)
 		)
-		(property "Value" "RAK3172-9-SM-NI"
+		(property "Value" "RAK3172-8-SM-NI"
 			(at 132.8294 34.29 0)
 			(effects
 				(font
@@ -58319,7 +58319,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" ""
+		(property "Datasheet" "https://docs.rakwireless.com/product-categories/wisduo/rak3172-module/datasheet/"
 			(at 110.49 77.47 0)
 			(effects
 				(font
@@ -58328,7 +58328,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "RAK3172-9-SM-NI sub-GHz STM32WLE5CC radio module"
+		(property "Description" "RAK3172 STM32WLE5CC, 32-pad, high-band regional-label variant, no TCXO, no IPEX; antenna on RF pad 12"
 			(at 110.49 77.47 0)
 			(effects
 				(font
@@ -58347,7 +58347,7 @@
 				(hide yes)
 			)
 		)
-		(property "DESCRIPTION" "RAK3172-9-SM-NI sub-GHz STM32WLE5CC radio module"
+		(property "DESCRIPTION" "RAK3172 STM32WLE5CC, 32-pad, high-band regional-label variant, no TCXO, no IPEX; antenna on RF pad 12"
 			(at 110.49 77.47 0)
 			(effects
 				(font
@@ -58427,7 +58427,7 @@
 				(hide yes)
 			)
 		)
-		(property "MP" "RAK3172-9-SM-NI"
+		(property "MP" "RAK3172-8-SM-NI"
 			(at 110.49 77.47 0)
 			(effects
 				(font
@@ -58437,7 +58437,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description_1" "RAK3172-9-SM-NI sub-GHz STM32WLE5CC radio module"
+		(property "Description_1" "RAK3172 STM32WLE5CC, 32-pad, high-band regional-label variant, no TCXO, no IPEX; antenna on RF pad 12"
 			(at 110.49 77.47 0)
 			(effects
 				(font
@@ -58447,7 +58447,7 @@
 				(hide yes)
 			)
 		)
-		(property "Availability" "Not in stock"
+		(property "Availability" ""
 			(at 110.49 77.47 0)
 			(effects
 				(font
@@ -58457,7 +58457,7 @@
 				(hide yes)
 			)
 		)
-		(property "AVAILABILITY" "Not in stock"
+		(property "AVAILABILITY" ""
 			(at 110.49 77.47 0)
 			(effects
 				(font
@@ -58584,13 +58584,13 @@
 	
  (property "Manufacturer" "RAKwireless" (at 110.49 77.47 0) (effects (font (size 1.27 1.27)) (hide yes)))
 
- (property "Manufacturer_Part_Number" "RAK3172-9-SM-NI" (at 110.49 77.47 0) (effects (font (size 1.27 1.27)) (hide yes)))
+ (property "Manufacturer_Part_Number" "RAK3172-8-SM-NI" (at 110.49 77.47 0) (effects (font (size 1.27 1.27)) (hide yes)))
 
  (property "Supplier" "LCSC" (at 110.49 77.47 0) (effects (font (size 1.27 1.27)) (hide yes)))
 
- (property "LCSC" "C18548052" (at 110.49 77.47 0) (effects (font (size 1.27 1.27)) (hide yes)))
+ (property "LCSC" "C5452091" (at 110.49 77.47 0) (effects (font (size 1.27 1.27)) (hide yes)))
 
- (property "Supplier Part" "C18548052" (at 110.49 77.47 0) (effects (font (size 1.27 1.27)) (hide yes)))
+ (property "Supplier Part" "C5452091" (at 110.49 77.47 0) (effects (font (size 1.27 1.27)) (hide yes)))
 )
 	(symbol
 		(lib_id "Stratolink_v1p1_Symbols:Device_R_US")

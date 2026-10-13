@@ -1,0 +1,274 @@
+- alert:
+  - text: ⏰ The Halloween countdown has begun 🎃👻🐍 Are you ready to
+  - link "turn UP the TERROR!":
+    - /url: https://www.adafruit.com/explore/halloween-2026
+  - text: "?"
+  - button "Dismiss alert":
+    - generic: Dismiss alert
+- button "Skip Navigation"
+- banner:
+  - navigation "Adafruit sites":
+    - list:
+      - link "Shop":
+        - /url: https://www.adafruit.com/
+      - link "Learn":
+        - /url: https://learn.adafruit.com/
+      - link "Blog":
+        - /url: https://blog.adafruit.com/
+      - link "Forums":
+        - /url: https://forums.adafruit.com/
+      - link "IO":
+        - /url: https://io.adafruit.com/
+      - link "LIVE!":
+        - /url: https://www.youtube.com/adafruit/live
+      - link "AdaBox":
+        - /url: https://www.adafruit.com/adabox
+  - link "Sign In":
+    - /url: https://www.adafruit.com/login
+  - link " Shopping cart, 0 items.":
+    - /url: https://www.adafruit.com/shopping_cart
+    - generic: 
+    - generic: Shopping cart,
+    - text: "0"
+    - generic: items.
+  - text: 
+  - link "Adafruit Logo":
+    - /url: https://www.adafruit.com
+    - img "Adafruit Logo"
+  - list:
+    - button "Products"
+    - link "Gift Ideas":
+      - /url: /explore
+    - link "What's New":
+      - /url: /new
+  - search:
+    - textbox "Search "
+    - button "Search ":
+      - generic: Search
+      - generic: 
+- navigation "Breadcrumbs":
+  - link "Sensors":
+    - /url: /category/35
+  - text: /
+  - link "Light / Color / Photo":
+    - /url: /category/61
+  - text: / Adafruit AS7331 UV / UVA / UVB / UVC Sensor Breakout
+- main:
+  - region "Product Images and Video":
+    - heading "Product Images and Video" [level=2]
+    - tablist "Choose gallery item to display":
+      - tab "slide 1" [selected]:
+        - img "Angled Shot of the Adafruit AS7331 UV Sensor Breakout."
+      - tab "slide 2":
+        - img "Top Down Front Shot of the Adafruit AS7331 UV Sensor Breakout."
+      - tab "slide 3":
+        - img "Top Down Front Shot of the Adafruit AS7331 UV Sensor Breakout with Included 6pin Header."
+      - tab "slide 4":
+        - img "Side Profile Shot of the 4pin Stemma Connector on the Adafruit AS7331 UV Sensor Breakout."
+      - tab "slide 5":
+        - img "Top Down Back Shot of the Adafruit AS7331 UV Sensor Breakout next to a U.S. Quarter for Scale."
+      - tab "slide 6":
+        - img "Demo Video of a hand moving over the Adafruit AS7331 UV Sensor breakout blocking the light affecting the light reading on the display device."
+      - tab "slide 7":
+        - 'img "#NewProducts 3/4/26 Feat. #Adafruit AS7343 14-Channel Light / Color Sensor Breakout - STEMMA QT!"'
+    - text:  
+    - tabpanel "Angled Shot of the Adafruit AS7331 UV Sensor Breakout.":
+      - img "Angled Shot of the Adafruit AS7331 UV Sensor Breakout."
+    - text: "#NewProducts 3/4/26 Feat. #Adafruit AS7343 14-Channel Light / Color Sensor Breakout - STEMMA QT!"
+  - text: 
+  - region "Description":
+    - heading "Description" [level=2]
+    - paragraph:
+      - text: The
+      - strong: Adafruit AS7331 UVA / UVB / UVC Sensor Breakout
+      - text: is a perfect solution to UV sensing, no matter what 'type' you're sensing. Most UV sensors do just UVA, maybe ambient light too. But the AS7331 can read and differentiate between all the three bands. That means you can use it for human and agricultural UV alerts that tend to focus on UVA and UVB as well as agricultural, germicidal, curing, and other UVC use cases. We particularly like that the three measurements are separated not just mixed together into one number.
+    - paragraph: The AS7331 has many gain and conversion settings configurable over I2C which means you can measure up to 349 mW/cm² on UVA channel, 386 mW/cm² on UVB and 169 mW/cm² on UVC at 1x gain, and with a responsivity as low as 2.38 nW/cm² per LSB.
+    - paragraph: In addition to the basic I2C connection, there's also the ability to change the default I2C address from 0x74 using the two jumpers on the back so you can have up to four sensors on the same bus. We also break out the READY pin that will let you know when a sensor conversion is complete, and the SYNC input, which can be used to synchronize the readings with an external pulse.
+    - paragraph:
+      - text: To make it easy to use, we mounted the tiny sensor on a STEMMA QT form factor breakout board, complete with level shifting circuitry and
+      - link "SparkFun Qwiic":
+        - /url: https://www.sparkfun.com/qwiic
+      - text: compatible
+      - link "Stemma QT":
+        - /url: https://learn.adafruit.com/introducing-adafruit-stemma-qt
+      - text: connectors. This means that you can, without needing to solder, connect our AS7331 breakout into your 3.3V or 5V microcontroller of choice be it an Arduino Uno, Raspberry Pi, or one of the many
+      - link "CircuitPython-compatible boards":
+        - /url: https://circuitpython.org/downloads
+      - text: .
+    - paragraph:
+      - text: Our Arduino and CircuitPython libraries make it easy to configure the AS7331 over I2C, with many included example sketches to help get you started.
+      - link "QT Cable is not included, but we have a variety in the shop":
+        - /url: https://www.adafruit.com/?q=stemma+qt+cable&sort=BestMatch
+        - strong: QT Cable is not included
+        - text: ", but we have a variety in the shop"
+      - text: .
+    - paragraph:
+      - 'generic "#NewProducts 3/4/26 Feat. #Adafruit AS7343 14-Channel Light / Color Sensor Breakout - STEMMA QT!"':
+        - text: "#NewProducts 3/4/26 Feat. #Adafruit AS7343 14-Channel Light / Color Sensor Breakout - STEMMA QT!"
+        - 'button "Play video: #NewProducts 3/4/26 Feat. #Adafruit AS7343 14-Channel Light / Color Sensor Breakout - STEMMA QT!"':
+          - generic: "Play video: #NewProducts 3/4/26 Feat. #Adafruit AS7343 14-Channel Light / Color Sensor Breakout - STEMMA QT!"
+        - paragraph: This embedded content is from a site (www.youtube.com, flickr.com, etc) that does not comply with the Do Not Track (DNT) setting now enabled on your browser.
+        - paragraph: Clicking through to the embedded content will allow you to be tracked by the embed provider.
+  - region "Technical Details":
+    - heading "Technical Details" [level=2]
+    - img "RoHS 2 2011 65 EU Compliant"
+    - img "RoHS 2 2015 863 EU Compliant"
+  - region "Learn":
+    - heading "Learn" [level=2]
+    - link "Small rectangular AS7331 UV sensor breakout with four mounting holes, two white STEMMA QT connectors, and central sensor. Labeled pins along edge read VIN, GND, SCL, SDA, SYNC and RDY":
+      - /url: https://learn.adafruit.com/adafruit-as7331-uv-uva-uvb-uvc-sensor
+      - img "Small rectangular AS7331 UV sensor breakout with four mounting holes, two white STEMMA QT connectors, and central sensor. Labeled pins along edge read VIN, GND, SCL, SDA, SYNC and RDY"
+    - 'link "Primary Guide: Adafruit AS7331 UV / UVA / UVB / UVC Sensor"':
+      - /url: https://learn.adafruit.com/adafruit-as7331-uv-uva-uvb-uvc-sensor
+    - generic: Three types of UV, measured over I2C
+    - link "See All Guides ":
+      - /url: https://learn.adafruit.com/products/6476/guides
+      - text: See All Guides
+      - generic: 
+  - region "May We Also Suggest…":
+    - heading "May We Also Suggest…" [level=2]
+    - list:
+      - link "Adafruit AS7341 10-Channel Light / Color Sensor Breakout - STEMMA QT / Qwiic - STEMMA QT / Qwiic - Angled shot of black, rectangular light sensor breakout. Adafruit AS7341 10-Channel Light / Color Sensor Breakout - STEMMA QT / Qwiic - STEMMA QT / Qwiic":
+        - /url: /product/4698
+        - img "Adafruit AS7341 10-Channel Light / Color Sensor Breakout - STEMMA QT / Qwiic - STEMMA QT / Qwiic - Angled shot of black, rectangular light sensor breakout."
+        - generic: Adafruit AS7341 10-Channel Light / Color Sensor Breakout - STEMMA QT / Qwiic - STEMMA QT / Qwiic
+      - link "Adafruit TCS3430 / TCS34303 Ambient Tri-Stimulus Color Sensor - Angled Shot of the Adafruit TCS34303 QT Tri-Stimulus Color Sensor. Adafruit TCS3430 / TCS34303 Ambient Tri-Stimulus Color Sensor":
+        - /url: /product/6479
+        - img "Adafruit TCS3430 / TCS34303 Ambient Tri-Stimulus Color Sensor - Angled Shot of the Adafruit TCS34303 QT Tri-Stimulus Color Sensor."
+        - generic: Adafruit TCS3430 / TCS34303 Ambient Tri-Stimulus Color Sensor
+      - link "Adafruit Proximity Trinkey - USB APDS9960 Sensor Dev Board - Video of a hand waving above the Proximity trinkey plugged into a laptop. The neopixels glow green. Adafruit Proximity Trinkey - USB APDS9960 Sensor Dev Board":
+        - /url: /product/5022
+        - img "Adafruit Proximity Trinkey - USB APDS9960 Sensor Dev Board - Video of a hand waving above the Proximity trinkey plugged into a laptop. The neopixels glow green."
+        - generic: Adafruit Proximity Trinkey - USB APDS9960 Sensor Dev Board
+      - link "Adafruit STCC4 and SHT41 - CO2, Temperature & Humidity Sensor - STEMMA QT / Qwiic - STEMMA QT / Qwiic - Angled shot of CO2, temperature, and humidity sensor breakout. Adafruit STCC4 and SHT41 - CO2, Temperature & Humidity Sensor - STEMMA QT / Qwiic - STEMMA QT / Qwiic":
+        - /url: /product/6478
+        - img "Adafruit STCC4 and SHT41 - CO2, Temperature & Humidity Sensor - STEMMA QT / Qwiic - STEMMA QT / Qwiic - Angled shot of CO2, temperature, and humidity sensor breakout."
+        - generic: Adafruit STCC4 and SHT41 - CO2, Temperature & Humidity Sensor - STEMMA QT / Qwiic - STEMMA QT / Qwiic
+      - link "Adafruit VL53L4CD Time of Flight Distance Sensor - ~1 to 1300mm - STEMMA QT / Qwiic - STEMMA QT / Qwiic - Video of a hand hovering over a Adafruit VL53L4CD Time of Flight Distance Sensor thats connected to a white breadboard reading the range of motion of the hand. Adafruit VL53L4CD Time of Flight Distance Sensor - ~1 to 1300mm - STEMMA QT / Qwiic - STEMMA QT / Qwiic":
+        - /url: /product/5396
+        - img "Adafruit VL53L4CD Time of Flight Distance Sensor - ~1 to 1300mm - STEMMA QT / Qwiic - STEMMA QT / Qwiic - Video of a hand hovering over a Adafruit VL53L4CD Time of Flight Distance Sensor thats connected to a white breadboard reading the range of motion of the hand."
+        - generic: Adafruit VL53L4CD Time of Flight Distance Sensor - ~1 to 1300mm - STEMMA QT / Qwiic - STEMMA QT / Qwiic
+      - link "UV/UVA 400nm Purple LED 5mm Clear Lens - 10 pack - Single LED lit up purple UV/UVA 400nm Purple LED 5mm Clear Lens - 10 pack":
+        - /url: /product/1793
+        - img "UV/UVA 400nm Purple LED 5mm Clear Lens - 10 pack - Single LED lit up purple"
+        - generic: UV/UVA 400nm Purple LED 5mm Clear Lens - 10 pack
+      - link "Analog UV Light Sensor Breakout - GUVA-S12SD - Angled Shot of the Analog UV Light Sensor Breakout - GUVA-S12SD. Analog UV Light Sensor Breakout - GUVA-S12SD":
+        - /url: /product/1918
+        - img "Analog UV Light Sensor Breakout - GUVA-S12SD - Angled Shot of the Analog UV Light Sensor Breakout - GUVA-S12SD."
+        - generic: Analog UV Light Sensor Breakout - GUVA-S12SD
+      - link "Adafruit AS7343 14-Channel Light / Color Sensor Breakout - STEMMA QT / Qwiic - STEMMA QT / Qwiic - Angled shot of light sensor breakout board. Adafruit AS7343 14-Channel Light / Color Sensor Breakout - STEMMA QT / Qwiic - STEMMA QT / Qwiic":
+        - /url: /product/6477
+        - img "Adafruit AS7343 14-Channel Light / Color Sensor Breakout - STEMMA QT / Qwiic - STEMMA QT / Qwiic - Angled shot of light sensor breakout board."
+        - generic: Adafruit AS7343 14-Channel Light / Color Sensor Breakout - STEMMA QT / Qwiic - STEMMA QT / Qwiic
+      - link "Adafruit TSL2585 Digital UVA and Ambient Light Sensor - STEMMA QT - STEMMA QT - Angled Shot of the Adafruit TSL2585 Digital UVA and Ambient Light Sensor. Adafruit TSL2585 Digital UVA and Ambient Light Sensor - STEMMA QT - STEMMA QT":
+        - /url: /product/6524
+        - img "Adafruit TSL2585 Digital UVA and Ambient Light Sensor - STEMMA QT - STEMMA QT - Angled Shot of the Adafruit TSL2585 Digital UVA and Ambient Light Sensor."
+        - generic: Adafruit TSL2585 Digital UVA and Ambient Light Sensor - STEMMA QT - STEMMA QT
+  - region "Distributors ":
+    - heading "Distributors " [level=2]:
+      - button "Distributors "
+  - heading "Adafruit AS7331 UV / UVA / UVB / UVC Sensor Breakout - STEMMA QT / Qwiic" [level=1]
+  - generic: "Product ID: 6476"
+  - generic: $22.50
+  - generic: "There are multiple versions of this item. Please select one from the options below:"
+  - list:
+    - link "AS7331 UV / UVA / UVB / UVC Out of stock":
+      - /url: /product/6476
+      - generic: AS7331 UV / UVA / UVB / UVC
+      - generic: Out of stock
+    - link "AS7341 10-Channel Light / Color $18.95":
+      - /url: /product/4698
+      - generic: AS7341 10-Channel Light / Color
+      - generic: $18.95
+    - link "AS7343 14-Channel Light / Color $19.95":
+      - /url: /product/6477
+      - generic: AS7343 14-Channel Light / Color
+      - generic: $19.95
+    - link "TCS3448 14-Channel Light / Color $19.95":
+      - /url: /product/6525
+      - generic: TCS3448 14-Channel Light / Color
+      - generic: $19.95
+  - generic: Out of stock
+  - group "Please enter your details below and we will send you an email when this item is back in stock! You will only be emailed about this product.":
+    - generic: Please enter your details below and we will send you an email when this item is back in stock! You will only be emailed about this product.
+    - text: Your Email
+    - textbox "Your Email"
+    - button "Notify Me"
+  - link "Buy on DigiKey":
+    - /url: https://www.digikey.com/en/products?mpart=6476&v=1528
+  - link "Why buy on DigiKey?":
+    - /url: /buyfromdigikey
+  - button "Add to Wishlist"
+  - list:
+    - link "Description":
+      - /url: /product/6476#description
+    - link "Technical Details":
+      - /url: /product/6476#technical-details
+- contentinfo:
+  - navigation "Need Help?":
+    - list:
+      - link "Contact Us":
+        - /url: /contact_us
+      - link "Tech Support Forums":
+        - /url: https://forums.adafruit.com/
+      - link "FAQs":
+        - /url: /faq
+      - link "Shipping & Returns":
+        - /url: /shipping
+      - link "Freebies":
+        - /url: /free
+      - link "Terms of Service":
+        - /url: /terms_of_service
+      - link "Privacy & Legal":
+        - /url: /privacy
+      - link "Website Accessibility":
+        - /url: /accessibility
+  - navigation "Explore Adafruit":
+    - list:
+      - link "About Us":
+        - /url: /about
+      - link "Press":
+        - /url: /press
+      - link "Educators":
+        - /url: /educators
+      - link "Distributors":
+        - /url: /distributors
+      - link "Jobs":
+        - /url: https://jobs.adafruit.com
+      - link "Gift Cards":
+        - /url: /category/14
+  - generic: “ How wonderful it is that nobody need wait a single moment before starting to improve the world”
+  - link "– Anne Frank":
+    - /url: http://en.wikipedia.org/wiki/Anne_Frank
+  - link "About Adafruit":
+    - /url: /about
+  - link "Adafruit on Instagram":
+    - /url: https://www.instagram.com/adafruit/
+    - generic: 
+  - link "Adafruit on Twitter":
+    - /url: https://twitter.com/adafruit/
+    - generic: 
+  - link "Adafruit on Mastodon":
+    - /url: https://fosstodon.org/@adafruit
+  - link "Adafruit on Facebook":
+    - /url: https://www.facebook.com/adafruitindustries
+    - generic: 
+  - link "Adafruit on YouTube":
+    - /url: https://www.youtube.com/adafruit
+    - generic: 
+  - link "Adafruit on GitHub":
+    - /url: https://github.com/adafruit
+    - generic: 
+  - link "Adafruit on TikTok":
+    - /url: https://www.tiktok.com/@adafruit
+  - link "Adafruit on Tumblr":
+    - /url: https://adafruit.tumblr.com/
+    - generic: 
+  - link "Adafruit on Threads":
+    - /url: https://www.threads.net/@adafruit
+  - link "Adafruit on Discord":
+    - /url: https://adafru.it/discord
+  - link "Adafruit on BlueSky":
+    - /url: https://bsky.app/profile/adafruit.com
+  - link "A Minority and Woman-owned Business Enterprise (M/WBE)":
+    - /url: /about

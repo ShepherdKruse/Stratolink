@@ -1,0 +1,32 @@
+{
+  "date": "2026-10-13",
+  "status": "pass",
+  "supplier_part": "C5452091",
+  "mpn": "RAK3172-8-SM-NI",
+  "probe_u2_row": {
+    "Designator": "U2",
+    "Mid X": "64.950000",
+    "Mid Y": "-72.205000",
+    "Layer": "top",
+    "Rotation": "90.000000"
+  },
+  "native_pad1_mm": [
+    59.215,
+    79.605
+  ],
+  "native_rotation_degrees": 180,
+  "previous_supplier_180_degrees": "incorrect: pin1 lower-right, twelve pads on right",
+  "reviewed_supplier_90_degrees": "correct: pin1 lower-left, twelve bottom, four right, split eight top, eight left",
+  "center_translation_required": false,
+  "visual_review": "Both full.png viewport and page.png full page independently viewed. Numeric probe and matched BOM checked.",
+  "source_hashes": {
+    "analysis/v1_1_release_20261012/sourcing_followup/CPL-U2-90-probe.csv": "2b30ba3a50a094b84f2d44d6a20fd72512fbb8cef4a92adf45084ac3c8f31efa",
+    "analysis/v1_1_release_20261012/sourcing_followup/u2-placement-cpl90-full.png": "583f5396e9d0b53797e54ad10e017dffb42b142479a2a5785e5835d8aa3e7fec",
+    "analysis/v1_1_release_20261012/sourcing_followup/u2-placement-cpl90-page.png": "c215fc7f9a3e1239ab7fb2c985799292fd1a9404bb5783b85e95057b3a765f59",
+    "analysis/v1_1_release_20261012/sourcing_followup/u2-placement-cpl90-dom.txt": "ac55f8249ec2bc2cb6265fdf744d1352a02508a2aa873e218f2519c6d5bf2f62",
+    "analysis/v1_1_release_20261012/sourcing_followup/u2-placement-initial-crop.png": "2b5acf9ac829feb4b3b7f9d4a3529a1c288e1d8dbf979697108675432a2e7565",
+    "analysis/v1_1_release_20261012/radio_sourcing/native-u2.json": "e12fb00db4be5291dce1ae1a9bf490e2595426557501952bc55c1eca9e89a90d"
+  },
+  "candidate_BOM_sha256": "1ac1cad1786e2d40b2a6d10cb758c353929e9faeed5aa1db922c60bcbad958f1",
+  "manufacturing_action": "Parent must regenerate supplier profile/output at90, preserving KiCad physical180 and center. No edits made by reviewer."
+}

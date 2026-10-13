@@ -1,0 +1,747 @@
+- banner:
+  - link "lcsc notice":
+    - /url: https://www.lcsc.com/electronica
+    - img "lcsc notice"
+  - button "close":
+    - generic: 󰅙
+  - link "Hot-Selling Page":
+    - /url: https://www.lcsc.com/flashSale?isHot=1
+    - text: Hot-Selling
+  - link "Get Coupons Here":
+    - /url: https://www.lcsc.com/coupons?source=lcsc
+    - generic: Coupons
+    - generic: $20
+  - link "Get API Here":
+    - /url: https://www.lcsc.com/agent
+    - text: API
+  - generic: Language
+  - generic: Help
+  - link "Contact Us":
+    - /url: https://www.lcsc.com/service/question
+  - link "LCSC Electronics home":
+    - /url: https://www.lcsc.com/
+    - img "LCSC Electronics logo"
+    - img "LCSC Electronics svg logo"
+  - button "AS7331 clear icon search button":
+    - textbox "search input":
+      - /placeholder: ROQANG
+      - text: AS7331
+    - button "clear icon": 󰅖
+    - button "search button":
+  - link "TI":
+    - /url: https://www.lcsc.com/brand-detail/100.html?s_z=t_b_TI
+  - link "Broadcom":
+    - /url: https://www.lcsc.com/brand-detail/738.html?s_z=t_b_Broadcom
+  - link "EVERLIGHT":
+    - /url: https://www.lcsc.com/brand-detail/138.html?s_z=t_b_EVERLIGHT
+  - link "JSCJ":
+    - /url: https://www.lcsc.com/brand-detail/64.html?s_z=t_b_JSCJ
+  - link "UMW":
+    - /url: https://www.lcsc.com/brand-detail/11853.html?s_z=t_b_UMW
+  - link "BOURNS":
+    - /url: https://www.lcsc.com/brand-detail/377.html?s_z=t_b_BOURNS
+  - link "SILICON LABS":
+    - /url: https://www.lcsc.com/brand-detail/197.html?s_z=t_b_SILICON%2520LABS
+  - link "Amphenol":
+    - /url: https://www.lcsc.com/brand-detail/815.html?s_z=t_b_Amphenol
+  - link "HRE":
+    - /url: https://www.lcsc.com/brand-detail/13390.html?s_z=t_b_HRE
+  - link "Samples Offer":
+    - /url: https://www.lcsc.com/samples
+  - generic: Upload a BOM
+  - button "twarner491":
+    - generic "twarner491"
+  - button "The current currency is USD, click to change to other currencies":
+    - generic: USD
+  - link "Cart":
+    - /url: https://www.lcsc.com/cart
+    - tooltip "Cart"
+- navigation:
+  - link "Catalog Page":
+    - /url: https://www.lcsc.com/products
+    - generic: Catalog
+  - link "Products Page":
+    - /url: https://www.lcsc.com/products
+    - generic: Products
+  - link "Manufacturers Page":
+    - /url: https://www.lcsc.com/supplier
+    - generic: Manufacturers
+  - link "RFQ/BOM Page":
+    - /url: https://www.lcsc.com/inquiry
+    - generic: RFQ/BOM
+  - link "Deals Page":
+    - /url: https://www.lcsc.com/flashSale
+    - generic: Deals
+  - link "Custom Cables Page":
+    - /url: https://lcsccable.com
+    - generic: Custom Cables
+  - button "Solutions":
+    - generic: Solutions
+  - button "Resources":
+    - generic: Resources
+- main:
+  - list:
+    - link "Home":
+      - /url: https://www.lcsc.com/
+    - listitem: /
+    - link "Products":
+      - /url: https://www.lcsc.com/products
+    - listitem: /
+    - link "Sensors, Transducers":
+      - /url: https://www.lcsc.com/category/37.html
+    - listitem: /
+    - link "Optical Sensors":
+      - /url: https://www.lcsc.com/category/612.html
+    - listitem: /
+    - generic: Ambient Light, IR, UV Sensors
+  - heading "Ambient Light, IR, UV Sensors" [level=1]
+  - textbox "Search Within"
+  - text: "Results:"
+  - generic: "3"
+  - text: "from search:"
+  - text: AS7331
+  - button "Close": 󰅖
+  - generic: "Filter Options:"
+  - button "Stacked":
+    - generic: Stacked
+  - button "Scrolling":
+    - generic: Scrolling
+  - button "Copy Link":
+    - generic: Copy Link
+  - generic "Manufacturer"
+  - textbox "Search Filter"
+  - generic "OSRAM"
+  - generic "ams"
+  - generic "Package"
+  - textbox "Search Filter"
+  - generic "16-OLGA(3.65x2.6)"
+  - generic "OLGA-16(2.6x3.6)"
+  - generic "OLGA-16(3.65x2.6)"
+  - generic "Packaging"
+  - textbox "Search Filter"
+  - generic "Tape & Reel (TR)"
+  - generic "Measurement Type"
+  - textbox "Search Filter"
+  - generic "Color Recognition"
+  - generic "Photoperceptivity"
+  - textbox "Min"
+  - textbox "Max"
+  - button "lx":
+    - generic: lx
+    - generic: 󰍝
+  - generic "-"
+  - generic "Interface"
+  - textbox "Search Filter"
+  - generic "I2C"
+  - generic "Operating Temperature"
+  - textbox "Min"
+  - textbox "Max"
+  - button "℃":
+    - generic: ℃
+    - generic: 󰍝
+  - generic "-40℃~+105℃"
+  - generic "Voltage - Supply"
+  - textbox "Min"
+  - textbox "Max"
+  - button "V":
+    - generic: V
+    - generic: 󰍝
+  - generic "2.7V~3.6V"
+  - generic "Length"
+  - textbox "Min"
+  - textbox "Max"
+  - button "mm":
+    - generic: mm
+    - generic: 󰍝
+  - generic "-"
+  - generic "Width"
+  - textbox "Min"
+  - textbox "Max"
+  - button "mm":
+    - generic: mm
+    - generic: 󰍝
+  - generic "-"
+  - generic "Height"
+  - textbox "Min"
+  - textbox "Max"
+  - button "mm":
+    - generic: mm
+    - generic: 󰍝
+  - generic "-"
+  - generic "Features"
+  - textbox "Search Filter"
+  - generic "Adjustable gain control"
+  - generic "Built-in temperature compensation"
+  - generic "Low power/sleep mode"
+  - generic: 󰄱
+  - checkbox "In Stock"
+  - generic: In Stock
+  - generic: 󰄱
+  - checkbox "Lightning Deals"
+  - generic: Lightning Deals
+  - button:
+  - separator
+  - generic: 󰄱
+  - checkbox "Asian Brands"
+  - generic: Asian Brands
+  - generic: 󰄱
+  - checkbox "Deals"
+  - generic: Deals
+  - separator
+  - generic: 󰄱
+  - checkbox "RoHS"
+  - generic: RoHS
+  - separator
+  - generic: Reset All
+  - button "Apply All" [disabled]:
+    - generic: Apply All
+  - text: "Results:"
+  - generic: "3"
+  - separator
+  - generic: Showing
+  - button "1 - 3":
+    - generic: 1 - 3
+  - generic: of 3
+  - separator
+  - 'button "Sort By: Default"':
+    - generic: "Sort By:"
+    - generic: Default
+    - textbox
+    - generic: 󰍝
+  - button "Add to Cart" [disabled]:
+    - text: Add to Cart
+  - button "Compare Selected (up to 7)" [disabled]:
+    - generic: Compare Selected (up to 7)
+  - button "Download Table":
+    - text: Download Table
+  - table:
+    - rowgroup:
+      - row "MPN Manufacturer Availability Pricing Quantity Description Package Packaging Date Code Measurement Type Photoperceptivity Interface Operating Temperature Voltage - Supply Length Width Height Features":
+        - columnheader:
+          - generic: 󰄱
+          - checkbox
+        - columnheader "MPN":
+          - generic "MPN"
+          - generic: 󰜷
+          - generic: 󰜮
+        - columnheader "Manufacturer":
+          - generic "Manufacturer"
+          - generic: 󰜷
+          - generic: 󰜮
+        - columnheader "Availability":
+          - generic "Availability"
+          - generic: 󰜷
+          - generic: 󰜮
+        - columnheader "Pricing":
+          - generic "Pricing"
+          - generic: 󰜷
+          - generic: 󰜮
+        - columnheader "Quantity":
+          - generic "Quantity"
+        - columnheader "Description":
+          - generic "Description"
+        - columnheader "Package":
+          - generic "Package"
+          - generic: 󰜷
+          - generic: 󰜮
+        - columnheader "Packaging":
+          - generic "Packaging"
+          - generic: 󰜷
+          - generic: 󰜮
+        - columnheader "Date Code":
+          - generic "Date Code"
+        - columnheader "Measurement Type":
+          - generic "Measurement Type"
+          - generic: 󰜷
+          - generic: 󰜮
+        - columnheader "Photoperceptivity":
+          - generic "Photoperceptivity"
+          - generic: 󰜷
+          - generic: 󰜮
+        - columnheader "Interface":
+          - generic "Interface"
+          - generic: 󰜷
+          - generic: 󰜮
+        - columnheader "Operating Temperature":
+          - generic "Operating Temperature"
+          - generic: 󰜷
+          - generic: 󰜮
+        - columnheader "Voltage - Supply":
+          - generic "Voltage - Supply"
+          - generic: 󰜷
+          - generic: 󰜮
+        - columnheader "Length":
+          - generic "Length"
+          - generic: 󰜷
+          - generic: 󰜮
+        - columnheader "Width":
+          - generic "Width"
+          - generic: 󰜷
+          - generic: 󰜮
+        - columnheader "Height":
+          - generic "Height"
+          - generic: 󰜷
+          - generic: 󰜮
+        - columnheader "Features":
+          - generic "Features"
+          - generic: 󰜷
+          - generic: 󰜮
+  - table:
+    - rowgroup:
+      - row "MPN Manufacturer Availability Pricing Quantity Description Package Packaging Date Code Measurement Type Photoperceptivity Interface Operating Temperature Voltage - Supply Length Width Height Features":
+        - columnheader:
+          - generic: 󰄱
+          - checkbox
+        - columnheader "MPN":
+          - generic "MPN"
+          - generic: 󰜷
+          - generic: 󰜮
+        - columnheader "Manufacturer":
+          - generic "Manufacturer"
+          - generic: 󰜷
+          - generic: 󰜮
+        - columnheader "Availability":
+          - generic "Availability"
+          - generic: 󰜷
+          - generic: 󰜮
+        - columnheader "Pricing":
+          - generic "Pricing"
+          - generic: 󰜷
+          - generic: 󰜮
+        - columnheader "Quantity":
+          - generic "Quantity"
+        - columnheader "Description":
+          - generic "Description"
+        - columnheader "Package":
+          - generic "Package"
+          - generic: 󰜷
+          - generic: 󰜮
+        - columnheader "Packaging":
+          - generic "Packaging"
+          - generic: 󰜷
+          - generic: 󰜮
+        - columnheader "Date Code":
+          - generic "Date Code"
+        - columnheader "Measurement Type":
+          - generic "Measurement Type"
+          - generic: 󰜷
+          - generic: 󰜮
+        - columnheader "Photoperceptivity":
+          - generic "Photoperceptivity"
+          - generic: 󰜷
+          - generic: 󰜮
+        - columnheader "Interface":
+          - generic "Interface"
+          - generic: 󰜷
+          - generic: 󰜮
+        - columnheader "Operating Temperature":
+          - generic "Operating Temperature"
+          - generic: 󰜷
+          - generic: 󰜮
+        - columnheader "Voltage - Supply":
+          - generic "Voltage - Supply"
+          - generic: 󰜷
+          - generic: 󰜮
+        - columnheader "Length":
+          - generic "Length"
+          - generic: 󰜷
+          - generic: 󰜮
+        - columnheader "Width":
+          - generic "Width"
+          - generic: 󰜷
+          - generic: 󰜮
+        - columnheader "Height":
+          - generic "Height"
+          - generic: 󰜷
+          - generic: 󰜮
+        - columnheader "Features":
+          - generic "Features"
+          - generic: 󰜷
+          - generic: 󰜮
+    - rowgroup:
+      - 'row "View larger image of product RoHS Compliance ams AS7331_M OLGA16 LF T&RDP detail page ams AS7331_M OLGA16 LF T&RDP detail page Pre/New ams 0 In Stock 1+ $6.9701 200+ $2.7821 500+ $2.6892 1,000+ $2.642 1 Add Ext. Price: $6.97 Full Reel: 1,000 I2C 2.7V~3.6V OLGA-16(2.6x3.6) Ambient Light, IR, UV Sensors RoHS OLGA-16(2.6x3.6) Tape & Reel (TR) - Color Recognition - I2C -40℃~+105℃ 2.7V~3.6V - - - Adjustable gain control;Low power/sleep mode;Built-in temperature compensation"':
+        - cell:
+          - generic: 󰄱
+          - checkbox
+        - cell "View larger image of product RoHS Compliance ams AS7331_M OLGA16 LF T&RDP detail page ams AS7331_M OLGA16 LF T&RDP detail page Pre/New":
+          - link "View larger image of product":
+            - /url: https://www.lcsc.com/product-detail/C17474749.html?s_z=n_q_t_AS7331
+          - link "ams AS7331_M OLGA16 LF T&RDP Datasheet":
+            - /url: https://www.lcsc.com/datasheet/C17474749.pdf
+          - img "RoHS Compliance":
+            - button:
+          - link "ams AS7331_M OLGA16 LF T&RDP detail page":
+            - /url: https://www.lcsc.com/product-detail/C17474749.html?s_z=n_q_t_AS7331
+            - generic: AS7331_M OLGA16 LF T&RDP
+          - link "ams AS7331_M OLGA16 LF T&RDP detail page":
+            - /url: https://www.lcsc.com/product-detail/C17474749.html?s_z=n_q_t_AS7331
+            - text: C17474749
+          - generic: Pre/New
+        - cell "ams":
+          - link "ams":
+            - /url: https://www.lcsc.com/brand-detail/454.html?s_z=n_q_t_AS7331
+        - cell "0 In Stock":
+          - generic: "0"
+          - generic: In Stock
+          - button:
+        - cell "1+ $6.9701 200+ $2.7821 500+ $2.6892 1,000+ $2.642":
+          - table:
+            - rowgroup:
+              - row "1+ $6.9701":
+                - cell "1+"
+                - cell "$6.9701"
+              - row "200+ $2.7821":
+                - cell "200+"
+                - cell "$2.7821"
+              - row "500+ $2.6892":
+                - cell "500+"
+                - cell "$2.6892"
+              - row "1,000+ $2.642":
+                - cell "1,000+"
+                - cell "$2.642"
+        - 'cell "1 Add Ext. Price: $6.97 Full Reel: 1,000"':
+          - textbox: "1"
+          - button "Add":
+            - generic: Add
+          - generic: "Ext. Price: $6.97"
+          - generic: "Full Reel: 1,000"
+        - cell "I2C 2.7V~3.6V OLGA-16(2.6x3.6) Ambient Light, IR, UV Sensors RoHS":
+          - generic "I2C 2.7V~3.6V OLGA-16(2.6x3.6) Ambient Light, IR, UV Sensors RoHS"
+        - cell "OLGA-16(2.6x3.6)":
+          - generic: OLGA-16(2.6x3.6)
+        - cell "Tape & Reel (TR)":
+          - generic: Tape & Reel (TR)
+        - cell "-":
+          - generic: "-"
+        - cell "Color Recognition":
+          - generic: Color Recognition
+        - cell "-":
+          - generic: "-"
+        - cell "I2C":
+          - generic: I2C
+        - cell "-40℃~+105℃":
+          - generic: "-40℃~+105℃"
+        - cell "2.7V~3.6V":
+          - generic: 2.7V~3.6V
+        - cell "-":
+          - generic: "-"
+        - cell "-":
+          - generic: "-"
+        - cell "-":
+          - generic: "-"
+        - cell "Adjustable gain control;Low power/sleep mode;Built-in temperature compensation":
+          - generic: Adjustable gain control;Low power/sleep mode;Built-in temperature compensation
+      - 'row "View larger image of product RoHS Compliance OSRAM AS7331-AQFT OLGA16 LF T&R detail page OSRAM AS7331-AQFT OLGA16 LF T&R detail page Pre/New OSRAM 0 In Stock 1+ $15.9364 200+ $6.3595 500+ $6.1469 1,000+ $6.0413 1 Add Ext. Price: $15.94 Full Reel: 5,000 16-OLGA(3.65x2.6) Ambient Light, IR, UV Sensors RoHS 16-OLGA(3.65x2.6) Tape & Reel (TR) - - - - - - - - - -"':
+        - cell:
+          - generic: 󰄱
+          - checkbox
+        - cell "View larger image of product RoHS Compliance OSRAM AS7331-AQFT OLGA16 LF T&R detail page OSRAM AS7331-AQFT OLGA16 LF T&R detail page Pre/New":
+          - link "View larger image of product":
+            - /url: https://www.lcsc.com/product-detail/C20484730.html?s_z=n_q_t_AS7331
+          - img "RoHS Compliance":
+            - button:
+          - link "OSRAM AS7331-AQFT OLGA16 LF T&R detail page":
+            - /url: https://www.lcsc.com/product-detail/C20484730.html?s_z=n_q_t_AS7331
+            - generic: AS7331-AQFT OLGA16 LF T&R
+          - link "OSRAM AS7331-AQFT OLGA16 LF T&R detail page":
+            - /url: https://www.lcsc.com/product-detail/C20484730.html?s_z=n_q_t_AS7331
+            - text: C20484730
+          - generic: Pre/New
+        - cell "OSRAM":
+          - link "OSRAM":
+            - /url: https://www.lcsc.com/brand-detail/818.html?s_z=n_q_t_AS7331
+        - cell "0 In Stock":
+          - generic: "0"
+          - generic: In Stock
+          - button:
+        - cell "1+ $15.9364 200+ $6.3595 500+ $6.1469 1,000+ $6.0413":
+          - table:
+            - rowgroup:
+              - row "1+ $15.9364":
+                - cell "1+"
+                - cell "$15.9364"
+              - row "200+ $6.3595":
+                - cell "200+"
+                - cell "$6.3595"
+              - row "500+ $6.1469":
+                - cell "500+"
+                - cell "$6.1469"
+              - row "1,000+ $6.0413":
+                - cell "1,000+"
+                - cell "$6.0413"
+        - 'cell "1 Add Ext. Price: $15.94 Full Reel: 5,000"':
+          - textbox: "1"
+          - button "Add":
+            - generic: Add
+          - generic: "Ext. Price: $15.94"
+          - generic: "Full Reel: 5,000"
+        - cell "16-OLGA(3.65x2.6) Ambient Light, IR, UV Sensors RoHS":
+          - generic "16-OLGA(3.65x2.6) Ambient Light, IR, UV Sensors RoHS"
+        - cell "16-OLGA(3.65x2.6)":
+          - generic: 16-OLGA(3.65x2.6)
+        - cell "Tape & Reel (TR)":
+          - generic: Tape & Reel (TR)
+        - cell "-":
+          - generic: "-"
+        - cell "-":
+          - generic: "-"
+        - cell "-":
+          - generic: "-"
+        - cell "-":
+          - generic: "-"
+        - cell "-":
+          - generic: "-"
+        - cell "-":
+          - generic: "-"
+        - cell "-":
+          - generic: "-"
+        - cell "-":
+          - generic: "-"
+        - cell "-":
+          - generic: "-"
+        - cell "-":
+          - generic: "-"
+      - 'row "View larger image of product RoHS Compliance ams AS7331-AQFM OLGA16 LF T&R detail page ams AS7331-AQFM OLGA16 LF T&R detail page ams 0 In Stock 1+ $13.3535 10+ $12.6997 30+ $11.5678 100+ $10.5783 1 Add Ext. Price: $13.35 Full Reel: 1,000 I2C 2.7V~3.6V OLGA-16(3.65x2.6) Ambient Light, IR, UV Sensors RoHS OLGA-16(3.65x2.6) Tape & Reel (TR) - Color Recognition - I2C -40℃~+105℃ 2.7V~3.6V - - - Adjustable gain control;Low power/sleep mode;Built-in temperature compensation"':
+        - cell:
+          - generic: 󰄱
+          - checkbox
+        - cell "View larger image of product RoHS Compliance ams AS7331-AQFM OLGA16 LF T&R detail page ams AS7331-AQFM OLGA16 LF T&R detail page":
+          - link "View larger image of product":
+            - /url: https://www.lcsc.com/product-detail/C20482877.html?s_z=n_q_t_AS7331
+          - link "ams AS7331-AQFM OLGA16 LF T&R Datasheet":
+            - /url: https://www.lcsc.com/datasheet/C20482877.pdf
+          - img "RoHS Compliance":
+            - button:
+          - link "ams AS7331-AQFM OLGA16 LF T&R detail page":
+            - /url: https://www.lcsc.com/product-detail/C20482877.html?s_z=n_q_t_AS7331
+            - generic: AS7331-AQFM OLGA16 LF T&R
+          - link "ams AS7331-AQFM OLGA16 LF T&R detail page":
+            - /url: https://www.lcsc.com/product-detail/C20482877.html?s_z=n_q_t_AS7331
+            - text: C20482877
+        - cell "ams":
+          - link "ams":
+            - /url: https://www.lcsc.com/brand-detail/454.html?s_z=n_q_t_AS7331
+        - cell "0 In Stock":
+          - generic: "0"
+          - generic: In Stock
+          - button:
+        - cell "1+ $13.3535 10+ $12.6997 30+ $11.5678 100+ $10.5783":
+          - table:
+            - rowgroup:
+              - row "1+ $13.3535":
+                - cell "1+"
+                - cell "$13.3535"
+              - row "10+ $12.6997":
+                - cell "10+"
+                - cell "$12.6997"
+              - row "30+ $11.5678":
+                - cell "30+"
+                - cell "$11.5678"
+              - row "100+ $10.5783":
+                - cell "100+"
+                - cell "$10.5783"
+        - 'cell "1 Add Ext. Price: $13.35 Full Reel: 1,000"':
+          - textbox: "1"
+          - button "Add":
+            - generic: Add
+          - generic: "Ext. Price: $13.35"
+          - generic: "Full Reel: 1,000"
+        - cell "I2C 2.7V~3.6V OLGA-16(3.65x2.6) Ambient Light, IR, UV Sensors RoHS":
+          - generic "I2C 2.7V~3.6V OLGA-16(3.65x2.6) Ambient Light, IR, UV Sensors RoHS"
+        - cell "OLGA-16(3.65x2.6)":
+          - generic: OLGA-16(3.65x2.6)
+        - cell "Tape & Reel (TR)":
+          - generic: Tape & Reel (TR)
+        - cell "-":
+          - generic: "-"
+        - cell "Color Recognition":
+          - generic: Color Recognition
+        - cell "-":
+          - generic: "-"
+        - cell "I2C":
+          - generic: I2C
+        - cell "-40℃~+105℃":
+          - generic: "-40℃~+105℃"
+        - cell "2.7V~3.6V":
+          - generic: 2.7V~3.6V
+        - cell "-":
+          - generic: "-"
+        - cell "-":
+          - generic: "-"
+        - cell "-":
+          - generic: "-"
+        - cell "Adjustable gain control;Low power/sleep mode;Built-in temperature compensation":
+          - generic: Adjustable gain control;Low power/sleep mode;Built-in temperature compensation
+  - generic: Showing
+  - button "1 - 3":
+    - generic: 1 - 3
+  - generic: of 3
+  - separator
+  - navigation "Pagination Navigation":
+    - list:
+      - button "Previous page" [disabled]:
+        - generic: 󰅁
+      - button "Current Page, Page 1": "1"
+      - button "Next page" [disabled]:
+        - generic: 󰅂
+- contentinfo:
+  - generic "about Information": Information
+  - list:
+    - link "Go to About LCSC Page":
+      - /url: https://www.lcsc.com/about/company
+      - text: About LCSC
+    - link "Go to Contact Us Page":
+      - /url: https://www.lcsc.com/service/question
+      - text: Contact Us
+    - link "Go to LCSC Seller Page":
+      - /url: https://www.lcsc.com/about/supplier
+      - text: LCSC Seller
+    - link "Go to Quality Assurance Page":
+      - /url: https://assets.lcsc.com/datasheet/szlcsc/Download-ISO9001-Certification.pdf
+      - text: Quality Assurance
+    - link "Go to Terms and Conditions Page":
+      - /url: https://www.lcsc.com/help/terms-and-conditions
+      - text: Terms and Conditions
+    - link "Go to Privacy Policy Page":
+      - /url: https://www.lcsc.com/help/privacy
+      - text: Privacy Policy
+    - link "Go to Cookie Notice Page":
+      - /url: https://www.lcsc.com/help-center/lcsc-information/cookie-notice
+      - text: Cookie Notice
+    - link "Go to Blog Page":
+      - /url: https://www.lcsc.com/blog
+      - text: Blog
+  - generic "about Tools": Tools
+  - list:
+    - link "Go to BOM Tool/RFQ Page":
+      - /url: https://www.lcsc.com/bom
+      - text: BOM Tool/RFQ
+    - link "Go to API Page":
+      - /url: https://www.lcsc.com/agent
+      - text: API
+    - link "Go to LCSC Calculator Hub Page":
+      - /url: https://www.lcsc.com/tools
+      - text: LCSC Calculator Hub
+    - link "Go to Cross Reference Page":
+      - /url: https://www.lcsc.com/tools/cross-reference
+      - text: Cross Reference
+  - generic "about Customer Service": Customer Service
+  - list:
+    - link "Go to Track Order Page":
+      - /url: https://www.lcsc.com/personalCenter/order/list
+      - text: Track Order
+    - link "Go to Return Policy Page":
+      - /url: https://www.lcsc.com/help-center/return-refund
+      - text: Return Policy
+    - link "Go to How to Checkout Page":
+      - /url: https://www.lcsc.com/help-center/ordering-quotation/order-and-checkout
+      - text: How to Checkout
+    - link "Go to Orders & Payment Terms Page":
+      - /url: https://www.lcsc.com/help-center/payment-invoice/payment-methods
+      - text: Orders & Payment Terms
+    - link "Go to International Shipping Page":
+      - /url: https://www.lcsc.com/help-center/shipping-delivering
+      - text: International Shipping
+    - listitem: Feedback
+    - link "Go to FAQ Page":
+      - /url: https://www.lcsc.com/help-center
+      - text: FAQ
+    - link "Go to Help Center Page":
+      - /url: https://www.lcsc.com/help-center
+      - text: Help Center
+  - generic "about Electronic Components": Electronic Components
+  - list:
+    - link "Go to EasyEDA Page":
+      - /url: https://easyeda.com
+      - text: EasyEDA
+    - link "Go to JLCPCB Page":
+      - /url: https://jlcpcb.com
+      - text: JLCPCB
+    - link "Go to LCSC Page":
+      - /url: https://www.lcsc.com/
+      - text: LCSC
+    - link "Go to CUSTOM CABLES Page":
+      - /url: https://lcsccable.com
+      - text: CUSTOM CABLES
+    - link "Go to FRONT PANELS Page":
+      - /url: https://www.lcsc.com/front-panel
+      - text: FRONT PANELS
+  - generic "about Connect With Us": Connect With Us
+  - generic: "Customer Service: 0086-755-83210457"
+  - generic: "Logistics Dept.: 0086-755-83233027"
+  - text: "Email:"
+  - link "support@lcsc.com":
+    - /url: mailto:support@lcsc.com
+  - generic: 9:30 am - 12 am, 1:30 pm - 10 pm
+  - generic: Monday - Friday, UTC/GMT +8
+  - generic: "Current Time: Wed, Oct 14, 02:00:53 GMT+8"
+  - generic: Follow Us
+  - link "LCSC Electronics official instagram":
+    - /url: https://www.instagram.com/lcscelectronics
+  - link "LCSC Electronics official facebook":
+    - /url: https://www.facebook.com/lcsc.electronics
+  - link "LCSC Electronics official linkedIn":
+    - /url: https://www.linkedin.com/company/lcsc-electronics
+  - link "LCSC Electronics official twitter":
+    - /url: https://x.com/lcscelectronics
+  - link "LCSC Electronics official youtube":
+    - /url: https://www.youtube.com/c/LCSCElectronics
+  - link "PCI DSS certified":
+    - /url: /payment/PCI.pdf
+    - img "PCI DSS certified"
+  - link "trustlogo about lcsc.com":
+    - /url: https://www.trustlogo.com/ttb_searcher/trustlogo?v_querytype=W&v_shortname=CL1&v_search=https://www.lcsc.com&x=6&y=5
+  - text: Encrypted
+  - text: Payment
+  - link "Go to Terms & Conditions Page":
+    - /url: https://www.lcsc.com/help/terms-and-conditions
+    - text: Terms & Conditions
+  - text: "|"
+  - link "Go to Privacy Notice Page":
+    - /url: https://www.lcsc.com/help/privacy
+    - text: Privacy Notice
+  - text: "| Cookie Settings |"
+  - link "Go to Do Not Sell or Share My Personal Information Page":
+    - /url: https://www.lcsc.com/help/do-not-sell
+    - text: Do Not Sell / Do Not Share My Personal Information
+  - generic: © 2025 LCSC.COM All Rights Reserved.
+  - link "about 粤ICP备17041818号":
+    - /url: http://beian.miit.gov.cn
+    - text: 粤ICP备17041818号
+  - link "about ISO/IEC":
+    - /url: https://static.lcsc.com/feassets/pc/file/251202/ISO-IEC%20Certificate.pdf
+    - text: ISO/IEC
+- complementary:
+  - link "Contact us":
+    - /url: https://www.lcsc.com/service/question
+- contentinfo:
+  - text: LCSC uses cookies and similar technology to improve site performance, enhance security, personal content and ads, and understand how you interact with our services. This information is shared with third-party service providers. Learn more in our
+  - link "Cookie Policy":
+    - /url: https://www.lcsc.com/help-center/lcsc-information/cookie-notice
+  - text: .
+  - button "Cookie Settings":
+    - generic: Cookie Settings
+  - button "Reject All":
+    - generic: Reject All
+  - button "Accept All Cookies":
+    - generic: Accept All Cookies
+  - button "Close cookie notice":
+    - generic: 󰅖
+- dialog:
+  - generic: We've updated our Terms
+  - generic: We are committed to maintaining transparency and keeping your personal data safe. We have updated our Privacy Policy. Please take a moment to review the Privacy Policy for details of the changes. You may also choose whether to receive marketing communications from us. Your choice is entirely voluntary, and choosing not to consent to marketing communications will not affect your access to or use of our website or core services.
+  - generic: 󰄱
+  - checkbox "I agree to the updated Privacy Policy *"
+  - text: I agree to the updated
+  - link "Privacy Policy":
+    - /url: https://www.lcsc.com/help/privacy?hideAgreementUpdate=1
+  - generic: "*"
+  - generic: 󰄱
+  - checkbox "I agree to the updated Marketing Policy"
+  - text: I agree to the updated
+  - link "Marketing Policy":
+    - /url: https://www.lcsc.com/help/marketing-consulting-agreement?hideAgreementUpdate=1
+  - button "Decline" [disabled]:
+    - generic: Decline
+  - button "Accept & Continue" [disabled]:
+    - generic: Accept & Continue

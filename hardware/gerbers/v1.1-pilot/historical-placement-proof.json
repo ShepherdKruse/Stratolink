@@ -16,14 +16,15 @@
       64.732,
       37.281
     ],
-    "shipped_center_mm": [
+    "repository_v1_input_center_mm": [
       64.422,
       36.521
     ],
     "center_error_mm": 0.0,
     "native_angle_deg": -90.0,
-    "shipped_rotation_deg": 270.0,
-    "derived_rotation_deg": 270.0
+    "repository_v1_input_rotation_deg": 270.0,
+    "derived_rotation_deg": 270.0,
+    "provenance": "Historical equality reproduces the repository v1 production INPUT CPL. It is not evidence of verified JLC post-CAM placement or supplier-model rotation."
   },
   {
     "ref": "C2",
@@ -42,14 +43,15 @@
       64.348,
       40.367
     ],
-    "shipped_center_mm": [
+    "repository_v1_input_center_mm": [
       63.873,
       39.142
     ],
     "center_error_mm": 0.0,
     "native_angle_deg": -90.0,
-    "shipped_rotation_deg": 270.0,
-    "derived_rotation_deg": 270.0
+    "repository_v1_input_rotation_deg": 270.0,
+    "derived_rotation_deg": 270.0,
+    "provenance": "Historical equality reproduces the repository v1 production INPUT CPL. It is not evidence of verified JLC post-CAM placement or supplier-model rotation."
   },
   {
     "ref": "C3",
@@ -68,14 +70,15 @@
       67.105998,
       42.541998
     ],
-    "shipped_center_mm": [
+    "repository_v1_input_center_mm": [
       65.880998,
       42.066998
     ],
     "center_error_mm": 0.0,
     "native_angle_deg": 180.0,
-    "shipped_rotation_deg": 0.0,
-    "derived_rotation_deg": 0.0
+    "repository_v1_input_rotation_deg": 0.0,
+    "derived_rotation_deg": 0.0,
+    "provenance": "Historical equality reproduces the repository v1 production INPUT CPL. It is not evidence of verified JLC post-CAM placement or supplier-model rotation."
   },
   {
     "ref": "C4",
@@ -94,14 +97,15 @@
       66.735,
       41.019998
     ],
-    "shipped_center_mm": [
+    "repository_v1_input_center_mm": [
       65.975,
       40.709998
     ],
     "center_error_mm": 0.0,
     "native_angle_deg": 180.0,
-    "shipped_rotation_deg": 0.0,
-    "derived_rotation_deg": 0.0
+    "repository_v1_input_rotation_deg": 0.0,
+    "derived_rotation_deg": 0.0,
+    "provenance": "Historical equality reproduces the repository v1 production INPUT CPL. It is not evidence of verified JLC post-CAM placement or supplier-model rotation."
   },
   {
     "ref": "C6",
@@ -120,14 +124,15 @@
       71.681,
       40.040998
     ],
-    "shipped_center_mm": [
+    "repository_v1_input_center_mm": [
       70.956,
       38.591
     ],
     "center_error_mm": 0.0,
     "native_angle_deg": -90.0,
-    "shipped_rotation_deg": 270.0,
-    "derived_rotation_deg": 270.0
+    "repository_v1_input_rotation_deg": 270.0,
+    "derived_rotation_deg": 270.0,
+    "provenance": "Historical equality reproduces the repository v1 production INPUT CPL. It is not evidence of verified JLC post-CAM placement or supplier-model rotation."
   },
   {
     "ref": "C7",
@@ -146,14 +151,15 @@
       59.237,
       63.030001
     ],
-    "shipped_center_mm": [
+    "repository_v1_input_center_mm": [
       58.477,
       62.720001
     ],
     "center_error_mm": 0.0,
     "native_angle_deg": 180.0,
-    "shipped_rotation_deg": 180.0,
-    "derived_rotation_deg": 180.0
+    "repository_v1_input_rotation_deg": 180.0,
+    "derived_rotation_deg": 180.0,
+    "provenance": "Historical equality reproduces the repository v1 production INPUT CPL. It is not evidence of verified JLC post-CAM placement or supplier-model rotation."
   },
   {
     "ref": "C8",
@@ -172,14 +178,15 @@
       59.692002,
       61.905999
     ],
-    "shipped_center_mm": [
+    "repository_v1_input_center_mm": [
       58.467002,
       61.430999
     ],
     "center_error_mm": 0.0,
     "native_angle_deg": 180.0,
-    "shipped_rotation_deg": 180.0,
-    "derived_rotation_deg": 180.0
+    "repository_v1_input_rotation_deg": 180.0,
+    "derived_rotation_deg": 180.0,
+    "provenance": "Historical equality reproduces the repository v1 production INPUT CPL. It is not evidence of verified JLC post-CAM placement or supplier-model rotation."
   },
   {
     "ref": "C9",
@@ -198,14 +205,15 @@
       63.698002,
       63.008999
     ],
-    "shipped_center_mm": [
+    "repository_v1_input_center_mm": [
       62.938002,
       62.698999
     ],
     "center_error_mm": 0.0,
     "native_angle_deg": 180.0,
-    "shipped_rotation_deg": 180.0,
-    "derived_rotation_deg": 180.0
+    "repository_v1_input_rotation_deg": 180.0,
+    "derived_rotation_deg": 180.0,
+    "provenance": "Historical equality reproduces the repository v1 production INPUT CPL. It is not evidence of verified JLC post-CAM placement or supplier-model rotation."
   },
   {
     "ref": "C10",
@@ -224,14 +232,15 @@
       58.616,
       48.027
     ],
-    "shipped_center_mm": [
+    "repository_v1_input_center_mm": [
       58.306,
       47.267
     ],
     "center_error_mm": 0.0,
     "native_angle_deg": 90.0,
-    "shipped_rotation_deg": 90.0,
-    "derived_rotation_deg": 90.0
+    "repository_v1_input_rotation_deg": 90.0,
+    "derived_rotation_deg": 90.0,
+    "provenance": "Historical equality reproduces the repository v1 production INPUT CPL. It is not evidence of verified JLC post-CAM placement or supplier-model rotation."
   },
   {
     "ref": "C11",
@@ -250,14 +259,15 @@
       68.522,
       58.763
     ],
-    "shipped_center_mm": [
+    "repository_v1_input_center_mm": [
       68.212,
       58.003
     ],
     "center_error_mm": 0.0,
     "native_angle_deg": 90.0,
-    "shipped_rotation_deg": 90.0,
-    "derived_rotation_deg": 90.0
+    "repository_v1_input_rotation_deg": 90.0,
+    "derived_rotation_deg": 90.0,
+    "provenance": "Historical equality reproduces the repository v1 production INPUT CPL. It is not evidence of verified JLC post-CAM placement or supplier-model rotation."
   },
   {
     "ref": "C12",
@@ -276,14 +286,15 @@
       71.466,
       42.382
     ],
-    "shipped_center_mm": [
+    "repository_v1_input_center_mm": [
       71.156,
       41.622
     ],
     "center_error_mm": 0.0,
     "native_angle_deg": -90.0,
-    "shipped_rotation_deg": -90.0,
-    "derived_rotation_deg": 270.0
+    "repository_v1_input_rotation_deg": -90.0,
+    "derived_rotation_deg": 270.0,
+    "provenance": "Historical equality reproduces the repository v1 production INPUT CPL. It is not evidence of verified JLC post-CAM placement or supplier-model rotation."
   },
   {
     "ref": "C13",
@@ -302,14 +313,15 @@
       58.6155,
       54.674
     ],
-    "shipped_center_mm": [
+    "repository_v1_input_center_mm": [
       58.3055,
       53.914
     ],
     "center_error_mm": 0.0,
     "native_angle_deg": -90.0,
-    "shipped_rotation_deg": -90.0,
-    "derived_rotation_deg": 270.0
+    "repository_v1_input_rotation_deg": -90.0,
+    "derived_rotation_deg": 270.0,
+    "provenance": "Historical equality reproduces the repository v1 production INPUT CPL. It is not evidence of verified JLC post-CAM placement or supplier-model rotation."
   },
   {
     "ref": "C14",
@@ -328,14 +340,15 @@
       67.623,
       40.971
     ],
-    "shipped_center_mm": [
+    "repository_v1_input_center_mm": [
       67.313,
       40.211
     ],
     "center_error_mm": 0.0,
     "native_angle_deg": 90.0,
-    "shipped_rotation_deg": 90.0,
-    "derived_rotation_deg": 90.0
+    "repository_v1_input_rotation_deg": 90.0,
+    "derived_rotation_deg": 90.0,
+    "provenance": "Historical equality reproduces the repository v1 production INPUT CPL. It is not evidence of verified JLC post-CAM placement or supplier-model rotation."
   },
   {
     "ref": "C15",
@@ -354,14 +367,15 @@
       56.407999,
       81.373998
     ],
-    "shipped_center_mm": [
+    "repository_v1_input_center_mm": [
       55.647999,
       81.063998
     ],
     "center_error_mm": 0.0,
     "native_angle_deg": 0.0,
-    "shipped_rotation_deg": 0.0,
-    "derived_rotation_deg": 0.0
+    "repository_v1_input_rotation_deg": 0.0,
+    "derived_rotation_deg": 0.0,
+    "provenance": "Historical equality reproduces the repository v1 production INPUT CPL. It is not evidence of verified JLC post-CAM placement or supplier-model rotation."
   },
   {
     "ref": "C16",
@@ -380,14 +394,15 @@
       66.532,
       41.549
     ],
-    "shipped_center_mm": [
+    "repository_v1_input_center_mm": [
       66.057,
       40.324
     ],
     "center_error_mm": 0.0,
     "native_angle_deg": 90.0,
-    "shipped_rotation_deg": 90.0,
-    "derived_rotation_deg": 90.0
+    "repository_v1_input_rotation_deg": 90.0,
+    "derived_rotation_deg": 90.0,
+    "provenance": "Historical equality reproduces the repository v1 production INPUT CPL. It is not evidence of verified JLC post-CAM placement or supplier-model rotation."
   },
   {
     "ref": "C17",
@@ -406,14 +421,15 @@
       55.873,
       68.012999
     ],
-    "shipped_center_mm": [
+    "repository_v1_input_center_mm": [
       55.113,
       67.702999
     ],
     "center_error_mm": 0.0,
     "native_angle_deg": 0.0,
-    "shipped_rotation_deg": 0.0,
-    "derived_rotation_deg": 0.0
+    "repository_v1_input_rotation_deg": 0.0,
+    "derived_rotation_deg": 0.0,
+    "provenance": "Historical equality reproduces the repository v1 production INPUT CPL. It is not evidence of verified JLC post-CAM placement or supplier-model rotation."
   },
   {
     "ref": "C19",
@@ -432,14 +448,15 @@
       70.987001,
       36.263
     ],
-    "shipped_center_mm": [
+    "repository_v1_input_center_mm": [
       70.227001,
       35.953
     ],
     "center_error_mm": 0.0,
     "native_angle_deg": 180.0,
-    "shipped_rotation_deg": 180.0,
-    "derived_rotation_deg": 180.0
+    "repository_v1_input_rotation_deg": 180.0,
+    "derived_rotation_deg": 180.0,
+    "provenance": "Historical equality reproduces the repository v1 production INPUT CPL. It is not evidence of verified JLC post-CAM placement or supplier-model rotation."
   },
   {
     "ref": "C20",
@@ -458,14 +475,15 @@
       69.013,
       38.16
     ],
-    "shipped_center_mm": [
+    "repository_v1_input_center_mm": [
       68.703,
       37.4
     ],
     "center_error_mm": 0.0,
     "native_angle_deg": 90.0,
-    "shipped_rotation_deg": 90.0,
-    "derived_rotation_deg": 90.0
+    "repository_v1_input_rotation_deg": 90.0,
+    "derived_rotation_deg": 90.0,
+    "provenance": "Historical equality reproduces the repository v1 production INPUT CPL. It is not evidence of verified JLC post-CAM placement or supplier-model rotation."
   },
   {
     "ref": "C21",
@@ -484,14 +502,15 @@
       71.487,
       35.122
     ],
-    "shipped_center_mm": [
+    "repository_v1_input_center_mm": [
       70.262,
       34.647
     ],
     "center_error_mm": 0.0,
     "native_angle_deg": 180.0,
-    "shipped_rotation_deg": 180.0,
-    "derived_rotation_deg": 180.0
+    "repository_v1_input_rotation_deg": 180.0,
+    "derived_rotation_deg": 180.0,
+    "provenance": "Historical equality reproduces the repository v1 production INPUT CPL. It is not evidence of verified JLC post-CAM placement or supplier-model rotation."
   },
   {
     "ref": "D1",
@@ -510,14 +529,15 @@
       72.058001,
       83.163
     ],
-    "shipped_center_mm": [
+    "repository_v1_input_center_mm": [
       71.058,
       82.813
     ],
     "center_error_mm": 0.0,
     "native_angle_deg": 180.0,
-    "shipped_rotation_deg": 180.0,
-    "derived_rotation_deg": 180.0
+    "repository_v1_input_rotation_deg": 180.0,
+    "derived_rotation_deg": 180.0,
+    "provenance": "Historical equality reproduces the repository v1 production INPUT CPL. It is not evidence of verified JLC post-CAM placement or supplier-model rotation."
   },
   {
     "ref": "D3",
@@ -536,14 +556,15 @@
       60.656,
       38.391001
     ],
-    "shipped_center_mm": [
+    "repository_v1_input_center_mm": [
       60.306,
       37.391
     ],
     "center_error_mm": 0.0,
     "native_angle_deg": 90.0,
-    "shipped_rotation_deg": 90.0,
-    "derived_rotation_deg": 90.0
+    "repository_v1_input_rotation_deg": 90.0,
+    "derived_rotation_deg": 90.0,
+    "provenance": "Historical equality reproduces the repository v1 production INPUT CPL. It is not evidence of verified JLC post-CAM placement or supplier-model rotation."
   },
   {
     "ref": "FB1",
@@ -562,14 +583,15 @@
       56.724,
       51.618
     ],
-    "shipped_center_mm": [
+    "repository_v1_input_center_mm": [
       56.414,
       50.858
     ],
     "center_error_mm": 0.0,
     "native_angle_deg": -90.0,
-    "shipped_rotation_deg": -90.0,
-    "derived_rotation_deg": 270.0
+    "repository_v1_input_rotation_deg": -90.0,
+    "derived_rotation_deg": 270.0,
+    "provenance": "Historical equality reproduces the repository v1 production INPUT CPL. It is not evidence of verified JLC post-CAM placement or supplier-model rotation."
   },
   {
     "ref": "L1",
@@ -588,14 +610,15 @@
       62.053,
       40.3915
     ],
-    "shipped_center_mm": [
+    "repository_v1_input_center_mm": [
       60.103,
       38.1865
     ],
     "center_error_mm": 0.0,
     "native_angle_deg": 90.0,
-    "shipped_rotation_deg": 90.0,
-    "derived_rotation_deg": 90.0
+    "repository_v1_input_rotation_deg": 90.0,
+    "derived_rotation_deg": 90.0,
+    "provenance": "Historical equality reproduces the repository v1 production INPUT CPL. It is not evidence of verified JLC post-CAM placement or supplier-model rotation."
   },
   {
     "ref": "L2",
@@ -614,14 +637,15 @@
       71.387,
       41.685
     ],
-    "shipped_center_mm": [
+    "repository_v1_input_center_mm": [
       70.172,
       41.22
     ],
     "center_error_mm": 0.0,
     "native_angle_deg": 0.0,
-    "shipped_rotation_deg": 180.0,
-    "derived_rotation_deg": 180.0
+    "repository_v1_input_rotation_deg": 180.0,
+    "derived_rotation_deg": 180.0,
+    "provenance": "Historical equality reproduces the repository v1 production INPUT CPL. It is not evidence of verified JLC post-CAM placement or supplier-model rotation."
   },
   {
     "ref": "R1",
@@ -640,14 +664,15 @@
       66.254,
       34.986001
     ],
-    "shipped_center_mm": [
+    "repository_v1_input_center_mm": [
       65.934,
       34.206
     ],
     "center_error_mm": 0.0,
     "native_angle_deg": -90.0,
-    "shipped_rotation_deg": 270.0,
-    "derived_rotation_deg": 270.0
+    "repository_v1_input_rotation_deg": 270.0,
+    "derived_rotation_deg": 270.0,
+    "provenance": "Historical equality reproduces the repository v1 production INPUT CPL. It is not evidence of verified JLC post-CAM placement or supplier-model rotation."
   },
   {
     "ref": "R2",
@@ -666,14 +691,15 @@
       65.167,
       34.992002
     ],
-    "shipped_center_mm": [
+    "repository_v1_input_center_mm": [
       64.847,
       34.212001
     ],
     "center_error_mm": 0.0,
     "native_angle_deg": -90.0,
-    "shipped_rotation_deg": 270.0,
-    "derived_rotation_deg": 270.0
+    "repository_v1_input_rotation_deg": 270.0,
+    "derived_rotation_deg": 270.0,
+    "provenance": "Historical equality reproduces the repository v1 production INPUT CPL. It is not evidence of verified JLC post-CAM placement or supplier-model rotation."
   },
   {
     "ref": "R3",
@@ -692,14 +718,15 @@
       68.674,
       34.978001
     ],
-    "shipped_center_mm": [
+    "repository_v1_input_center_mm": [
       68.354,
       34.198
     ],
     "center_error_mm": 0.0,
     "native_angle_deg": -90.0,
-    "shipped_rotation_deg": 270.0,
-    "derived_rotation_deg": 270.0
+    "repository_v1_input_rotation_deg": 270.0,
+    "derived_rotation_deg": 270.0,
+    "provenance": "Historical equality reproduces the repository v1 production INPUT CPL. It is not evidence of verified JLC post-CAM placement or supplier-model rotation."
   },
   {
     "ref": "R4",
@@ -718,14 +745,15 @@
       67.343,
       34.993002
     ],
-    "shipped_center_mm": [
+    "repository_v1_input_center_mm": [
       67.023,
       34.213001
     ],
     "center_error_mm": 0.0,
     "native_angle_deg": 90.0,
-    "shipped_rotation_deg": 90.0,
-    "derived_rotation_deg": 90.0
+    "repository_v1_input_rotation_deg": 90.0,
+    "derived_rotation_deg": 90.0,
+    "provenance": "Historical equality reproduces the repository v1 production INPUT CPL. It is not evidence of verified JLC post-CAM placement or supplier-model rotation."
   },
   {
     "ref": "R5",
@@ -744,14 +772,15 @@
       69.767,
       34.978001
     ],
-    "shipped_center_mm": [
+    "repository_v1_input_center_mm": [
       69.447,
       34.198
     ],
     "center_error_mm": 0.0,
     "native_angle_deg": 90.0,
-    "shipped_rotation_deg": 90.0,
-    "derived_rotation_deg": 90.0
+    "repository_v1_input_rotation_deg": 90.0,
+    "derived_rotation_deg": 90.0,
+    "provenance": "Historical equality reproduces the repository v1 production INPUT CPL. It is not evidence of verified JLC post-CAM placement or supplier-model rotation."
   },
   {
     "ref": "R6",
@@ -770,14 +799,15 @@
       70.877,
       34.974001
     ],
-    "shipped_center_mm": [
+    "repository_v1_input_center_mm": [
       70.557,
       34.194
     ],
     "center_error_mm": 0.0,
     "native_angle_deg": -90.0,
-    "shipped_rotation_deg": 270.0,
-    "derived_rotation_deg": 270.0
+    "repository_v1_input_rotation_deg": 270.0,
+    "derived_rotation_deg": 270.0,
+    "provenance": "Historical equality reproduces the repository v1 production INPUT CPL. It is not evidence of verified JLC post-CAM placement or supplier-model rotation."
   },
   {
     "ref": "R7",
@@ -796,14 +826,15 @@
       71.99,
       34.955001
     ],
-    "shipped_center_mm": [
+    "repository_v1_input_center_mm": [
       71.67,
       34.175
     ],
     "center_error_mm": 0.0,
     "native_angle_deg": 90.0,
-    "shipped_rotation_deg": 90.0,
-    "derived_rotation_deg": 90.0
+    "repository_v1_input_rotation_deg": 90.0,
+    "derived_rotation_deg": 90.0,
+    "provenance": "Historical equality reproduces the repository v1 production INPUT CPL. It is not evidence of verified JLC post-CAM placement or supplier-model rotation."
   },
   {
     "ref": "R8",
@@ -822,14 +853,15 @@
       71.750001,
       36.596
     ],
-    "shipped_center_mm": [
+    "repository_v1_input_center_mm": [
       70.97,
       36.276
     ],
     "center_error_mm": 0.0,
     "native_angle_deg": 0.0,
-    "shipped_rotation_deg": 180.0,
-    "derived_rotation_deg": 180.0
+    "repository_v1_input_rotation_deg": 180.0,
+    "derived_rotation_deg": 180.0,
+    "provenance": "Historical equality reproduces the repository v1 production INPUT CPL. It is not evidence of verified JLC post-CAM placement or supplier-model rotation."
   },
   {
     "ref": "R9",
@@ -848,14 +880,15 @@
       64.986999,
       62.842002
     ],
-    "shipped_center_mm": [
+    "repository_v1_input_center_mm": [
       64.666999,
       62.062001
     ],
     "center_error_mm": 0.0,
     "native_angle_deg": -90.0,
-    "shipped_rotation_deg": -90.0,
-    "derived_rotation_deg": 270.0
+    "repository_v1_input_rotation_deg": -90.0,
+    "derived_rotation_deg": 270.0,
+    "provenance": "Historical equality reproduces the repository v1 production INPUT CPL. It is not evidence of verified JLC post-CAM placement or supplier-model rotation."
   },
   {
     "ref": "R10",
@@ -874,14 +907,15 @@
       61.518,
       62.854002
     ],
-    "shipped_center_mm": [
+    "repository_v1_input_center_mm": [
       61.198,
       62.074001
     ],
     "center_error_mm": 0.0,
     "native_angle_deg": -90.0,
-    "shipped_rotation_deg": -90.0,
-    "derived_rotation_deg": 270.0
+    "repository_v1_input_rotation_deg": -90.0,
+    "derived_rotation_deg": 270.0,
+    "provenance": "Historical equality reproduces the repository v1 production INPUT CPL. It is not evidence of verified JLC post-CAM placement or supplier-model rotation."
   },
   {
     "ref": "R11",
@@ -900,14 +934,15 @@
       75.428002,
       79.324996
     ],
-    "shipped_center_mm": [
+    "repository_v1_input_center_mm": [
       74.648001,
       79.004996
     ],
     "center_error_mm": 0.0,
     "native_angle_deg": 180.0,
-    "shipped_rotation_deg": 180.0,
-    "derived_rotation_deg": 180.0
+    "repository_v1_input_rotation_deg": 180.0,
+    "derived_rotation_deg": 180.0,
+    "provenance": "Historical equality reproduces the repository v1 production INPUT CPL. It is not evidence of verified JLC post-CAM placement or supplier-model rotation."
   },
   {
     "ref": "R12",
@@ -926,14 +961,15 @@
       75.422001,
       78.219
     ],
-    "shipped_center_mm": [
+    "repository_v1_input_center_mm": [
       74.642,
       77.899
     ],
     "center_error_mm": 0.0,
     "native_angle_deg": 180.0,
-    "shipped_rotation_deg": 180.0,
-    "derived_rotation_deg": 180.0
+    "repository_v1_input_rotation_deg": 180.0,
+    "derived_rotation_deg": 180.0,
+    "provenance": "Historical equality reproduces the repository v1 production INPUT CPL. It is not evidence of verified JLC post-CAM placement or supplier-model rotation."
   },
   {
     "ref": "R13",
@@ -952,14 +988,15 @@
       68.332001,
       55.867
     ],
-    "shipped_center_mm": [
+    "repository_v1_input_center_mm": [
       67.552,
       55.547
     ],
     "center_error_mm": 0.0,
     "native_angle_deg": 0.0,
-    "shipped_rotation_deg": 0.0,
-    "derived_rotation_deg": 0.0
+    "repository_v1_input_rotation_deg": 0.0,
+    "derived_rotation_deg": 0.0,
+    "provenance": "Historical equality reproduces the repository v1 production INPUT CPL. It is not evidence of verified JLC post-CAM placement or supplier-model rotation."
   },
   {
     "ref": "R14",
@@ -978,14 +1015,15 @@
       68.331,
       54.728
     ],
-    "shipped_center_mm": [
+    "repository_v1_input_center_mm": [
       67.550999,
       54.408
     ],
     "center_error_mm": 0.0,
     "native_angle_deg": 0.0,
-    "shipped_rotation_deg": 0.0,
-    "derived_rotation_deg": 0.0
+    "repository_v1_input_rotation_deg": 0.0,
+    "derived_rotation_deg": 0.0,
+    "provenance": "Historical equality reproduces the repository v1 production INPUT CPL. It is not evidence of verified JLC post-CAM placement or supplier-model rotation."
   },
   {
     "ref": "R15",
@@ -1004,14 +1042,15 @@
       74.358001,
       52.03
     ],
-    "shipped_center_mm": [
+    "repository_v1_input_center_mm": [
       73.578,
       51.71
     ],
     "center_error_mm": 0.0,
     "native_angle_deg": 180.0,
-    "shipped_rotation_deg": 180.0,
-    "derived_rotation_deg": 180.0
+    "repository_v1_input_rotation_deg": 180.0,
+    "derived_rotation_deg": 180.0,
+    "provenance": "Historical equality reproduces the repository v1 production INPUT CPL. It is not evidence of verified JLC post-CAM placement or supplier-model rotation."
   },
   {
     "ref": "R16",
@@ -1030,14 +1069,15 @@
       74.346001,
       50.895
     ],
-    "shipped_center_mm": [
+    "repository_v1_input_center_mm": [
       73.566,
       50.575
     ],
     "center_error_mm": 0.0,
     "native_angle_deg": 180.0,
-    "shipped_rotation_deg": 180.0,
-    "derived_rotation_deg": 180.0
+    "repository_v1_input_rotation_deg": 180.0,
+    "derived_rotation_deg": 180.0,
+    "provenance": "Historical equality reproduces the repository v1 production INPUT CPL. It is not evidence of verified JLC post-CAM placement or supplier-model rotation."
   },
   {
     "ref": "R18",
@@ -1056,14 +1096,15 @@
       73.903,
       45.325001
     ],
-    "shipped_center_mm": [
+    "repository_v1_input_center_mm": [
       73.583,
       44.545
     ],
     "center_error_mm": 0.0,
     "native_angle_deg": 90.0,
-    "shipped_rotation_deg": 90.0,
-    "derived_rotation_deg": 90.0
+    "repository_v1_input_rotation_deg": 90.0,
+    "derived_rotation_deg": 90.0,
+    "provenance": "Historical equality reproduces the repository v1 production INPUT CPL. It is not evidence of verified JLC post-CAM placement or supplier-model rotation."
   },
   {
     "ref": "R19",
@@ -1082,14 +1123,15 @@
       56.398001,
       83.633
     ],
-    "shipped_center_mm": [
+    "repository_v1_input_center_mm": [
       55.618,
       83.313
     ],
     "center_error_mm": 0.0,
     "native_angle_deg": 0.0,
-    "shipped_rotation_deg": 0.0,
-    "derived_rotation_deg": 0.0
+    "repository_v1_input_rotation_deg": 0.0,
+    "derived_rotation_deg": 0.0,
+    "provenance": "Historical equality reproduces the repository v1 production INPUT CPL. It is not evidence of verified JLC post-CAM placement or supplier-model rotation."
   },
   {
     "ref": "R20",
@@ -1108,14 +1150,15 @@
       58.6125,
       56.700001
     ],
-    "shipped_center_mm": [
+    "repository_v1_input_center_mm": [
       58.2925,
       55.92
     ],
     "center_error_mm": 0.0,
     "native_angle_deg": -90.0,
-    "shipped_rotation_deg": -90.0,
-    "derived_rotation_deg": 270.0
+    "repository_v1_input_rotation_deg": -90.0,
+    "derived_rotation_deg": 270.0,
+    "provenance": "Historical equality reproduces the repository v1 production INPUT CPL. It is not evidence of verified JLC post-CAM placement or supplier-model rotation."
   },
   {
     "ref": "R21",
@@ -1134,14 +1177,15 @@
       56.417001,
       82.529999
     ],
-    "shipped_center_mm": [
+    "repository_v1_input_center_mm": [
       55.637,
       82.209999
     ],
     "center_error_mm": 0.0,
     "native_angle_deg": 180.0,
-    "shipped_rotation_deg": 180.0,
-    "derived_rotation_deg": 180.0
+    "repository_v1_input_rotation_deg": 180.0,
+    "derived_rotation_deg": 180.0,
+    "provenance": "Historical equality reproduces the repository v1 production INPUT CPL. It is not evidence of verified JLC post-CAM placement or supplier-model rotation."
   },
   {
     "ref": "R22",
@@ -1160,14 +1204,15 @@
       54.893,
       66.969
     ],
-    "shipped_center_mm": [
+    "repository_v1_input_center_mm": [
       54.573,
       66.188999
     ],
     "center_error_mm": 0.0,
     "native_angle_deg": -90.0,
-    "shipped_rotation_deg": -90.0,
-    "derived_rotation_deg": 270.0
+    "repository_v1_input_rotation_deg": -90.0,
+    "derived_rotation_deg": 270.0,
+    "provenance": "Historical equality reproduces the repository v1 production INPUT CPL. It is not evidence of verified JLC post-CAM placement or supplier-model rotation."
   },
   {
     "ref": "R23",
@@ -1186,14 +1231,15 @@
       56.012,
       66.974
     ],
-    "shipped_center_mm": [
+    "repository_v1_input_center_mm": [
       55.692,
       66.193999
     ],
     "center_error_mm": 0.0,
     "native_angle_deg": 90.0,
-    "shipped_rotation_deg": 90.0,
-    "derived_rotation_deg": 90.0
+    "repository_v1_input_rotation_deg": 90.0,
+    "derived_rotation_deg": 90.0,
+    "provenance": "Historical equality reproduces the repository v1 production INPUT CPL. It is not evidence of verified JLC post-CAM placement or supplier-model rotation."
   },
   {
     "ref": "U1",
@@ -1212,14 +1258,15 @@
       69.140999,
       39.765
     ],
-    "shipped_center_mm": [
+    "repository_v1_input_center_mm": [
       67.190998,
       37.814999
     ],
     "center_error_mm": 0.0,
     "native_angle_deg": 0.0,
-    "shipped_rotation_deg": 180.0,
-    "derived_rotation_deg": 180.0
+    "repository_v1_input_rotation_deg": 180.0,
+    "derived_rotation_deg": 180.0,
+    "provenance": "Historical equality reproduces the repository v1 production INPUT CPL. It is not evidence of verified JLC post-CAM placement or supplier-model rotation."
   },
   {
     "ref": "U2",
@@ -1238,14 +1285,15 @@
       73.250001,
       80.505001
     ],
-    "shipped_center_mm": [
+    "repository_v1_input_center_mm": [
       64.95,
       72.205
     ],
     "center_error_mm": 0.0,
     "native_angle_deg": 180.0,
-    "shipped_rotation_deg": 180.0,
-    "derived_rotation_deg": 180.0
+    "repository_v1_input_rotation_deg": 180.0,
+    "derived_rotation_deg": 180.0,
+    "provenance": "Historical equality reproduces the repository v1 production INPUT CPL. It is not evidence of verified JLC post-CAM placement or supplier-model rotation."
   },
   {
     "ref": "U3",
@@ -1264,14 +1312,15 @@
       71.187001,
       53.163999
     ],
-    "shipped_center_mm": [
+    "repository_v1_input_center_mm": [
       65.537,
       48.414
     ],
     "center_error_mm": 0.0,
     "native_angle_deg": 180.0,
-    "shipped_rotation_deg": 180.0,
-    "derived_rotation_deg": 180.0
+    "repository_v1_input_rotation_deg": 180.0,
+    "derived_rotation_deg": 180.0,
+    "provenance": "Historical equality reproduces the repository v1 production INPUT CPL. It is not evidence of verified JLC post-CAM placement or supplier-model rotation."
   },
   {
     "ref": "U4",
@@ -1290,14 +1339,15 @@
       72.878,
       60.948
     ],
-    "shipped_center_mm": [
+    "repository_v1_input_center_mm": [
       71.023,
       58.808
     ],
     "center_error_mm": 0.0,
     "native_angle_deg": 0.0,
-    "shipped_rotation_deg": 0.0,
-    "derived_rotation_deg": 0.0
+    "repository_v1_input_rotation_deg": 0.0,
+    "derived_rotation_deg": 0.0,
+    "provenance": "Historical equality reproduces the repository v1 production INPUT CPL. It is not evidence of verified JLC post-CAM placement or supplier-model rotation."
   },
   {
     "ref": "U5",
@@ -1316,14 +1366,15 @@
       73.463,
       41.379
     ],
-    "shipped_center_mm": [
+    "repository_v1_input_center_mm": [
       73.148,
       40.864
     ],
     "center_error_mm": 0.0,
     "native_angle_deg": 0.0,
-    "shipped_rotation_deg": 0.0,
-    "derived_rotation_deg": 0.0
+    "repository_v1_input_rotation_deg": 0.0,
+    "derived_rotation_deg": 0.0,
+    "provenance": "Historical equality reproduces the repository v1 production INPUT CPL. It is not evidence of verified JLC post-CAM placement or supplier-model rotation."
   },
   {
     "ref": "U6",
@@ -1342,14 +1393,15 @@
       70.3045,
       41.382999
     ],
-    "shipped_center_mm": [
+    "repository_v1_input_center_mm": [
       69.098,
       40.606
     ],
     "center_error_mm": 0.0,
     "native_angle_deg": 0.0,
-    "shipped_rotation_deg": 0.0,
-    "derived_rotation_deg": 0.0
+    "repository_v1_input_rotation_deg": 0.0,
+    "derived_rotation_deg": 0.0,
+    "provenance": "Historical equality reproduces the repository v1 production INPUT CPL. It is not evidence of verified JLC post-CAM placement or supplier-model rotation."
   },
   {
     "ref": "U7",
@@ -1368,13 +1420,14 @@
       71.538,
       38.797
     ],
-    "shipped_center_mm": [
+    "repository_v1_input_center_mm": [
       70.548,
       37.807
     ],
     "center_error_mm": 0.0,
     "native_angle_deg": 90.0,
-    "shipped_rotation_deg": 90.0,
-    "derived_rotation_deg": 90.0
+    "repository_v1_input_rotation_deg": 90.0,
+    "derived_rotation_deg": 90.0,
+    "provenance": "Historical equality reproduces the repository v1 production INPUT CPL. It is not evidence of verified JLC post-CAM placement or supplier-model rotation."
   }
 ]

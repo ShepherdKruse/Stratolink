@@ -1154,8 +1154,8 @@
       "ref": "R4",
       "value": "3.65MΩ",
       "footprint": "Stratolink_v1p1_R4_R_0402_1005Metric",
-      "mpn": "0402WGF3654TCE",
-      "lcsc": "C2766827",
+      "mpn": "RC0402FR-073M65L",
+      "lcsc": "C477700",
       "native_anchor_mm": [
         67.023,
         34.213001
@@ -2065,10 +2065,10 @@
     },
     "U2": {
       "ref": "U2",
-      "value": "RAK3172-9-SM-NI",
+      "value": "RAK3172-8-SM-NI",
       "footprint": "Stratolink_v1p1_U2_RAK3172",
-      "mpn": "RAK3172-9-SM-NI",
-      "lcsc": "C18548052",
+      "mpn": "RAK3172-8-SM-NI",
+      "lcsc": "C5452091",
       "native_anchor_mm": [
         72.715,
         64.66
@@ -2089,7 +2089,7 @@
       ],
       "placement_method": "Placement-side SMD copper pad bounding center; excludes TH pads and all text/graphics/models",
       "native_angle_deg": 180.0,
-      "rotation_deg": 180.0,
+      "rotation_deg": 90.0,
       "side": "top",
       "prior_cpl": {
         "Designator": "U2",
@@ -2407,12 +2407,34 @@
         "mpn": "FRC0402F7504TS",
         "lcsc": "C3013187"
       }
+    },
+    {
+      "ref": "R4",
+      "previous": {
+        "mpn": "0402WGF3654TCE",
+        "lcsc": "C2766827"
+      },
+      "current": {
+        "mpn": "RC0402FR-073M65L",
+        "lcsc": "C477700"
+      }
+    },
+    {
+      "ref": "U2",
+      "previous": {
+        "mpn": "RAK3172-9-SM-NI",
+        "lcsc": "C18548052"
+      },
+      "current": {
+        "mpn": "RAK3172-8-SM-NI",
+        "lcsc": "C5452091"
+      }
     }
   ],
   "supplier_rotation_profile": {
     "baseline_provenance": "Historical equality reproduces the repository v1 production INPUT CPL. It is not evidence of verified JLC post-CAM placement or supplier-model rotation.",
     "profile_path": "/Users/twarn/Repositories/Stratolink/analysis/v1_1_release_20261012/jlc/supplier-rotation-profile.json",
-    "profile_sha256": "a8976ab0107919d4fd0d1aa63c263f70097ec8371fc1d183be1b6573d1912518",
+    "profile_sha256": "fadbcae4bb6bb6776a3fd9e3c1fd35073b85bbad71c441b43b1361ddf2aa00ea",
     "overrides": [
       {
         "ref": "U1",
@@ -2427,6 +2449,21 @@
         ],
         "evidence": "analysis/v1_1_release_20261012/jlc/probe-u1-90-crop.png; analysis/v1_1_release_20261012/power/placement-u1-u3-u4-review.md",
         "reason": "Reimported CPL90 gives lower-right pin1 in north-up bottom view, matching numbered pads and TI package drawing.",
+        "baseline_provenance": "Historical equality reproduces the repository v1 production INPUT CPL. It is not evidence of verified JLC post-CAM placement or supplier-model rotation."
+      },
+      {
+        "ref": "U2",
+        "base_rotation_deg": 180.0,
+        "override_rotation_deg": 90.0,
+        "mpn": "RAK3172-8-SM-NI",
+        "lcsc": "C5452091",
+        "side": "top",
+        "center_mm": [
+          64.95,
+          72.205
+        ],
+        "evidence": "analysis/v1_1_release_20261012/radio_sourcing/u2-supplier-orientation-review.md; analysis/v1_1_release_20261012/sourcing_followup/u2-placement-cpl90-full.png; analysis/v1_1_release_20261012/sourcing_followup/CPL-U2-90-probe.csv",
+        "reason": "Actual C5452091 RAK3172-8-SM-NI model after CPL90 reimport has pin 1 lower-left and its 12-pad edge at the bottom in the top view, matching native numbered lands and the manufacturer pinout.",
         "baseline_provenance": "Historical equality reproduces the repository v1 production INPUT CPL. It is not evidence of verified JLC post-CAM placement or supplier-model rotation."
       },
       {

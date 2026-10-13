@@ -1,0 +1,213 @@
+{
+  "date": "2026-10-13",
+  "method": "Independent parser over parent live in-app browser captures. Uses exact product rows and current-page marker, not old search snippets.",
+  "catalog": "https://www.lcsc.com/brand/1263-13647.html",
+  "status": "pass",
+  "distinct_orderables_checked": 39,
+  "all_show_zero_stock": true,
+  "scope_limit": "This Genicom catalog snapshot only; no claim covering every LCSC manufacturer or future restock.",
+  "pages": [
+    {
+      "page": 1,
+      "capture_path": "analysis/v1_1_release_20261012/sourcing_followup/lcsc-genicom-page1.txt",
+      "sha256": "7d04c59085a9fdb3fc4fab3f76633d66b21c090b768cc4d85a59d9e0a0b77e08",
+      "entries": [
+        {
+          "mpn": "GUVV-C20SD",
+          "stock": 0
+        },
+        {
+          "mpn": "GUVCL-T21GH",
+          "stock": 0
+        },
+        {
+          "mpn": "GUVCL-T10GD",
+          "stock": 0
+        },
+        {
+          "mpn": "GUVC-T10GM-LA",
+          "stock": 0
+        },
+        {
+          "mpn": "GUVA-S12SM-LA",
+          "stock": 0
+        },
+        {
+          "mpn": "GVBL-S12SD",
+          "stock": 0
+        },
+        {
+          "mpn": "GUVV-T13GD-L",
+          "stock": 0
+        },
+        {
+          "mpn": "GUVCL-S10GD",
+          "stock": 0
+        },
+        {
+          "mpn": "GUVB-S31GD",
+          "stock": 0
+        },
+        {
+          "mpn": "GUVA-T21GD-U",
+          "stock": 0
+        },
+        {
+          "mpn": "GUVA-S12SD",
+          "stock": 0
+        },
+        {
+          "mpn": "GVGR-T11GD",
+          "stock": 0
+        },
+        {
+          "mpn": "GUVC-T10GD",
+          "stock": 0
+        },
+        {
+          "mpn": "GUVB-S11SD",
+          "stock": 0
+        },
+        {
+          "mpn": "GUVA-T11GM-LA",
+          "stock": 0
+        },
+        {
+          "mpn": "GUVV-T20GD-U",
+          "stock": 0
+        },
+        {
+          "mpn": "GUVB-T21GH",
+          "stock": 0
+        },
+        {
+          "mpn": "GUVB-T11GD-L",
+          "stock": 0
+        },
+        {
+          "mpn": "GUVA-T21GH",
+          "stock": 0
+        },
+        {
+          "mpn": "GUVA-T13GD",
+          "stock": 0
+        },
+        {
+          "mpn": "GUVC-T10GD-L185",
+          "stock": 0
+        },
+        {
+          "mpn": "GUVB-C21SD",
+          "stock": 0
+        },
+        {
+          "mpn": "GUVV-S10SD",
+          "stock": 0
+        },
+        {
+          "mpn": "GUVA-T31GD",
+          "stock": 0
+        },
+        {
+          "mpn": "GUVC-T10GD-L",
+          "stock": 0
+        }
+      ]
+    },
+    {
+      "page": 2,
+      "capture_path": "analysis/v1_1_release_20261012/sourcing_followup/lcsc-genicom-page2.txt",
+      "sha256": "a0b5ead3216f6024500d443e0d8dfebe0450e06fb96cade687daffbe0f95d979",
+      "entries": [
+        {
+          "mpn": "GUVA-T11GD-L",
+          "stock": 0
+        },
+        {
+          "mpn": "GUVA-C22SD",
+          "stock": 0
+        },
+        {
+          "mpn": "GVGR-S11SD",
+          "stock": 0
+        },
+        {
+          "mpn": "GUVV-T10GD",
+          "stock": 0
+        },
+        {
+          "mpn": "GUVV-S10SM-LA",
+          "stock": 0
+        },
+        {
+          "mpn": "GUVC-T21GH",
+          "stock": 0
+        },
+        {
+          "mpn": "GUVC-T20GD-U",
+          "stock": 0
+        },
+        {
+          "mpn": "GUVC-S10GD",
+          "stock": 0
+        },
+        {
+          "mpn": "GUVB-T11GD",
+          "stock": 0
+        },
+        {
+          "mpn": "GUVB-S11SM-LA",
+          "stock": 0
+        },
+        {
+          "mpn": "GVBL-T14GD",
+          "stock": 0
+        },
+        {
+          "mpn": "GUVB-T21GD-U",
+          "stock": 0
+        },
+        {
+          "mpn": "GUVB-T11GM-LA",
+          "stock": 0
+        },
+        {
+          "mpn": "GUVA-T11GD",
+          "stock": 0
+        }
+      ]
+    }
+  ],
+  "direct_page_observations": {
+    "GUVB-C21SD C6565190": "Out of Stock",
+    "GUVB-S11SD C6954997": "Out of Stock",
+    "GUVA-C22SD C6050602": "Out of Stock",
+    "GUVB-C31SM C6050605": "Not available now"
+  },
+  "other_distributor_snapshot": {
+    "GUVB-C21SD": {
+      "distributor": "DigiKey",
+      "stock": 5863,
+      "unit_USD_at_1": 4.64
+    },
+    "GUVA-C22SD": {
+      "distributor": "DigiKey",
+      "stock": 2717,
+      "unit_USD_at_1": 4.13
+    }
+  },
+  "AFE_LCSC_snapshot": {
+    "LPV812DGKT C181487": {
+      "stock": 1,
+      "unit_USD_at_1": 2.4658
+    },
+    "TSU111ICT C157442": {
+      "stock": 64,
+      "unit_USD_at_1": 1.831
+    },
+    "OPA2379AIDR C94068": {
+      "stock": 151,
+      "unit_USD_at_1": 10.2328
+    }
+  }
+}

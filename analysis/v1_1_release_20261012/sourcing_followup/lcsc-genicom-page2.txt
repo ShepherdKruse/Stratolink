@@ -1,0 +1,1321 @@
+- banner:
+  - link "lcsc notice":
+    - /url: https://www.lcsc.com/electronica
+    - img "lcsc notice"
+  - button "close":
+    - generic: 󰅙
+  - link "Hot-Selling Page":
+    - /url: https://www.lcsc.com/flashSale?isHot=1
+    - text: Hot-Selling
+  - link "Get Coupons Here":
+    - /url: https://www.lcsc.com/coupons?source=lcsc
+    - generic: Coupons
+    - generic: $20
+  - link "Get API Here":
+    - /url: https://www.lcsc.com/agent
+    - text: API
+  - generic: Language
+  - generic: Help
+  - link "Contact Us":
+    - /url: https://www.lcsc.com/service/question
+  - link "LCSC Electronics home":
+    - /url: https://www.lcsc.com/
+    - img "LCSC Electronics logo"
+    - img "LCSC Electronics svg logo"
+  - button "search button":
+    - textbox "search input":
+      - /placeholder: ROQANG
+    - button "search button":
+  - generic: Upload a BOM
+  - button "twarner491":
+    - generic "twarner491"
+  - button "The current currency is USD, click to change to other currencies":
+    - generic: USD
+  - link "Cart":
+    - /url: https://www.lcsc.com/cart
+    - tooltip "Cart"
+- navigation:
+  - link "Catalog Page":
+    - /url: https://www.lcsc.com/products
+    - generic: Catalog
+  - link "Products Page":
+    - /url: https://www.lcsc.com/products
+    - generic: Products
+  - link "Manufacturers Page":
+    - /url: https://www.lcsc.com/supplier
+    - generic: Manufacturers
+  - link "RFQ/BOM Page":
+    - /url: https://www.lcsc.com/inquiry
+    - generic: RFQ/BOM
+  - link "Deals Page":
+    - /url: https://www.lcsc.com/flashSale
+    - generic: Deals
+  - link "Custom Cables Page":
+    - /url: https://lcsccable.com
+    - generic: Custom Cables
+  - button "Solutions":
+    - generic: Solutions
+  - button "Resources":
+    - generic: Resources
+- main:
+  - list:
+    - link "Home":
+      - /url: https://www.lcsc.com/
+    - listitem: /
+    - link "Products":
+      - /url: https://www.lcsc.com/products
+    - listitem: /
+    - link "Sensors, Transducers":
+      - /url: https://www.lcsc.com/category/37.html
+    - listitem: /
+    - link "Optical Sensors":
+      - /url: https://www.lcsc.com/category/612.html
+    - listitem: /
+    - generic: Photodiodes
+  - heading "Photodiodes" [level=1]
+  - textbox "Search Within"
+  - text: "Results:"
+  - generic: "39"
+  - generic: "Filter Options:"
+  - button "Stacked":
+    - generic: Stacked
+  - button "Scrolling":
+    - generic: Scrolling
+  - button "Copy Link":
+    - generic: Copy Link
+  - generic "Manufacturer"
+  - textbox "Search Filter"
+  - generic "Genicom"
+  - generic "Package"
+  - textbox "Search Filter"
+  - generic "1414"
+  - generic "SMD"
+  - generic "SMD,2.4x1.8mm"
+  - generic "SMD3528"
+  - generic "SMD3528-2P"
+  - generic "SMD3535"
+  - generic "TO-205AA"
+  - generic "TO-205AA,TO-5-3METALCAN"
+  - generic "TO-39-3"
+  - generic "TO-39-3METALCAN"
+  - generic "TO-46-2"
+  - generic "TO-46-3"
+  - generic "-"
+  - generic "Packaging"
+  - textbox "Search Filter"
+  - generic "Bag-packed"
+  - generic "Tape & Reel (TR)"
+  - generic "Tray"
+  - generic "Viewing Angle"
+  - textbox "Search Filter"
+  - generic "-"
+  - generic "Spectral Range"
+  - textbox "Min"
+  - textbox "Max"
+  - button "mm":
+    - generic: mm
+    - generic: 󰍝
+  - generic "220nm~320nm"
+  - generic "220nm~370nm"
+  - generic "220nm~280nm"
+  - generic "230nm~395nm"
+  - generic "230nm~320nm"
+  - generic "240nm~320nm"
+  - generic "240nm~370nm"
+  - generic "240nm~395nm"
+  - generic "295nm~490nm"
+  - generic "300nm~510nm"
+  - generic "330nm~445nm"
+  - generic "345nm~450nm"
+  - generic "-"
+  - generic "Dark Current"
+  - textbox "Min"
+  - textbox "Max"
+  - button "A":
+    - generic: A
+    - generic: 󰍝
+  - generic "10pA"
+  - generic "1nA"
+  - generic "20nA"
+  - generic "90nA"
+  - generic "-"
+  - generic "Operating Temperature"
+  - textbox "Min"
+  - textbox "Max"
+  - button "℃":
+    - generic: ℃
+    - generic: 󰍝
+  - generic "-30℃~+85℃"
+  - generic: 󰄱
+  - checkbox "In Stock"
+  - generic: In Stock
+  - generic: 󰄱
+  - checkbox "Lightning Deals"
+  - generic: Lightning Deals
+  - button:
+  - separator
+  - generic: 󰄱
+  - checkbox "Asian Brands"
+  - generic: Asian Brands
+  - generic: 󰄱
+  - checkbox "Deals"
+  - generic: Deals
+  - separator
+  - generic: 󰄱
+  - checkbox "RoHS"
+  - generic: RoHS
+  - separator
+  - generic: Reset All
+  - button "Apply All" [disabled]:
+    - generic: Apply All
+  - text: "Results:"
+  - generic: "39"
+  - separator
+  - generic: Showing
+  - button "26 - 39":
+    - generic: 26 - 39
+  - generic: of 39
+  - separator
+  - 'button "Sort By: Default"':
+    - generic: "Sort By:"
+    - generic: Default
+    - textbox
+    - generic: 󰍝
+  - button "Add to Cart" [disabled]:
+    - text: Add to Cart
+  - button "Compare Selected (up to 7)" [disabled]:
+    - generic: Compare Selected (up to 7)
+  - button "Download Table":
+    - text: Download Table
+  - table:
+    - rowgroup:
+      - row "MPN Manufacturer Availability Pricing Quantity Description Package Packaging Date Code Viewing Angle Spectral Range Dark Current Operating Temperature":
+        - columnheader:
+          - generic: 󰄱
+          - checkbox
+        - columnheader "MPN":
+          - generic "MPN"
+          - generic: 󰜷
+          - generic: 󰜮
+        - columnheader "Manufacturer":
+          - generic "Manufacturer"
+          - generic: 󰜷
+          - generic: 󰜮
+        - columnheader "Availability":
+          - generic "Availability"
+          - generic: 󰜷
+          - generic: 󰜮
+        - columnheader "Pricing":
+          - generic "Pricing"
+          - generic: 󰜷
+          - generic: 󰜮
+        - columnheader "Quantity":
+          - generic "Quantity"
+        - columnheader "Description":
+          - generic "Description"
+        - columnheader "Package":
+          - generic "Package"
+          - generic: 󰜷
+          - generic: 󰜮
+        - columnheader "Packaging":
+          - generic "Packaging"
+          - generic: 󰜷
+          - generic: 󰜮
+        - columnheader "Date Code":
+          - generic "Date Code"
+        - columnheader "Viewing Angle":
+          - generic "Viewing Angle"
+          - generic: 󰜷
+          - generic: 󰜮
+        - columnheader "Spectral Range":
+          - generic "Spectral Range"
+          - generic: 󰜷
+          - generic: 󰜮
+        - columnheader "Dark Current":
+          - generic "Dark Current"
+          - generic: 󰜷
+          - generic: 󰜮
+        - columnheader "Operating Temperature":
+          - generic "Operating Temperature"
+          - generic: 󰜷
+          - generic: 󰜮
+  - table:
+    - rowgroup:
+      - row "MPN Manufacturer Availability Pricing Quantity Description Package Packaging Date Code Viewing Angle Spectral Range Dark Current Operating Temperature":
+        - columnheader:
+          - generic: 󰄱
+          - checkbox
+        - columnheader "MPN":
+          - generic "MPN"
+          - generic: 󰜷
+          - generic: 󰜮
+        - columnheader "Manufacturer":
+          - generic "Manufacturer"
+          - generic: 󰜷
+          - generic: 󰜮
+        - columnheader "Availability":
+          - generic "Availability"
+          - generic: 󰜷
+          - generic: 󰜮
+        - columnheader "Pricing":
+          - generic "Pricing"
+          - generic: 󰜷
+          - generic: 󰜮
+        - columnheader "Quantity":
+          - generic "Quantity"
+        - columnheader "Description":
+          - generic "Description"
+        - columnheader "Package":
+          - generic "Package"
+          - generic: 󰜷
+          - generic: 󰜮
+        - columnheader "Packaging":
+          - generic "Packaging"
+          - generic: 󰜷
+          - generic: 󰜮
+        - columnheader "Date Code":
+          - generic "Date Code"
+        - columnheader "Viewing Angle":
+          - generic "Viewing Angle"
+          - generic: 󰜷
+          - generic: 󰜮
+        - columnheader "Spectral Range":
+          - generic "Spectral Range"
+          - generic: 󰜷
+          - generic: 󰜮
+        - columnheader "Dark Current":
+          - generic "Dark Current"
+          - generic: 󰜷
+          - generic: 󰜮
+        - columnheader "Operating Temperature":
+          - generic "Operating Temperature"
+          - generic: 󰜷
+          - generic: 󰜮
+    - rowgroup:
+      - 'row "View larger image of product RoHS Compliance Genicom GUVA-T11GD-L detail page Genicom GUVA-T11GD-L detail page Pre/New Genicom 0 In Stock 1+ $33.4536 200+ $13.3483 500+ $12.9033 1,000+ $12.6824 1 Add Ext. Price: $33.45 220nm~370nm 20nA TO-46-2 Photodiodes RoHS TO-46-2 Tray - - 220nm~370nm 20nA -30℃~+85℃"':
+        - cell:
+          - generic: 󰄱
+          - checkbox
+        - cell "View larger image of product RoHS Compliance Genicom GUVA-T11GD-L detail page Genicom GUVA-T11GD-L detail page Pre/New":
+          - link "View larger image of product":
+            - /url: https://www.lcsc.com/product-detail/C6204084.html
+          - link "Genicom GUVA-T11GD-L Datasheet":
+            - /url: https://www.lcsc.com/datasheet/C6204084.pdf
+          - img "RoHS Compliance":
+            - button:
+          - link "Genicom GUVA-T11GD-L detail page":
+            - /url: https://www.lcsc.com/product-detail/C6204084.html
+            - text: GUVA-T11GD-L
+          - link "Genicom GUVA-T11GD-L detail page":
+            - /url: https://www.lcsc.com/product-detail/C6204084.html
+            - text: C6204084
+          - generic: Pre/New
+        - cell "Genicom":
+          - link "Genicom":
+            - /url: https://www.lcsc.com/brand-detail/13647.html
+        - cell "0 In Stock":
+          - generic: "0"
+          - generic: In Stock
+          - button:
+        - cell "1+ $33.4536 200+ $13.3483 500+ $12.9033 1,000+ $12.6824":
+          - table:
+            - rowgroup:
+              - row "1+ $33.4536":
+                - cell "1+"
+                - cell "$33.4536"
+              - row "200+ $13.3483":
+                - cell "200+"
+                - cell "$13.3483"
+              - row "500+ $12.9033":
+                - cell "500+"
+                - cell "$12.9033"
+              - row "1,000+ $12.6824":
+                - cell "1,000+"
+                - cell "$12.6824"
+        - 'cell "1 Add Ext. Price: $33.45"':
+          - textbox: "1"
+          - button "Add":
+            - generic: Add
+          - generic: "Ext. Price: $33.45"
+        - cell "220nm~370nm 20nA TO-46-2 Photodiodes RoHS":
+          - generic "220nm~370nm 20nA TO-46-2 Photodiodes RoHS"
+        - cell "TO-46-2":
+          - generic: TO-46-2
+        - cell "Tray":
+          - generic: Tray
+        - cell "-":
+          - generic: "-"
+        - cell "-":
+          - generic: "-"
+        - cell "220nm~370nm":
+          - generic: 220nm~370nm
+        - cell "20nA":
+          - generic: 20nA
+        - cell "-30℃~+85℃":
+          - generic: "-30℃~+85℃"
+      - 'row "View larger image of product RoHS Compliance Genicom GUVA-C22SD detail page Genicom GUVA-C22SD detail page Genicom 0 In Stock 1+ $4.8657 200+ $1.9427 500+ $1.8775 1,000+ $1.8457 1 Add Ext. Price: $4.87 Full Reel: 3,000 240nm~370nm 1nA SMD Photodiodes RoHS SMD Tape & Reel (TR) - - 240nm~370nm 1nA -30℃~+85℃"':
+        - cell:
+          - generic: 󰄱
+          - checkbox
+        - cell "View larger image of product RoHS Compliance Genicom GUVA-C22SD detail page Genicom GUVA-C22SD detail page":
+          - link "View larger image of product":
+            - /url: https://www.lcsc.com/product-detail/C6050602.html
+          - link "Genicom GUVA-C22SD Datasheet":
+            - /url: https://www.lcsc.com/datasheet/C6050602.pdf
+          - img "RoHS Compliance":
+            - button:
+          - link "Genicom GUVA-C22SD detail page":
+            - /url: https://www.lcsc.com/product-detail/C6050602.html
+            - text: GUVA-C22SD
+          - link "Genicom GUVA-C22SD detail page":
+            - /url: https://www.lcsc.com/product-detail/C6050602.html
+            - text: C6050602
+        - cell "Genicom":
+          - link "Genicom":
+            - /url: https://www.lcsc.com/brand-detail/13647.html
+        - cell "0 In Stock":
+          - generic: "0"
+          - generic: In Stock
+          - button:
+        - cell "1+ $4.8657 200+ $1.9427 500+ $1.8775 1,000+ $1.8457":
+          - table:
+            - rowgroup:
+              - row "1+ $4.8657":
+                - cell "1+"
+                - cell "$4.8657"
+              - row "200+ $1.9427":
+                - cell "200+"
+                - cell "$1.9427"
+              - row "500+ $1.8775":
+                - cell "500+"
+                - cell "$1.8775"
+              - row "1,000+ $1.8457":
+                - cell "1,000+"
+                - cell "$1.8457"
+        - 'cell "1 Add Ext. Price: $4.87 Full Reel: 3,000"':
+          - textbox: "1"
+          - button "Add":
+            - generic: Add
+          - generic: "Ext. Price: $4.87"
+          - generic: "Full Reel: 3,000"
+        - cell "240nm~370nm 1nA SMD Photodiodes RoHS":
+          - generic "240nm~370nm 1nA SMD Photodiodes RoHS"
+        - cell "SMD":
+          - generic: SMD
+        - cell "Tape & Reel (TR)":
+          - generic: Tape & Reel (TR)
+        - cell "-":
+          - generic: "-"
+        - cell "-":
+          - generic: "-"
+        - cell "240nm~370nm":
+          - generic: 240nm~370nm
+        - cell "1nA":
+          - generic: 1nA
+        - cell "-30℃~+85℃":
+          - generic: "-30℃~+85℃"
+      - 'row "View larger image of product RoHS Compliance Genicom GVGR-S11SD detail page Genicom GVGR-S11SD detail page Pre/New Genicom 0 In Stock 1+ $4.8657 200+ $1.9427 500+ $1.8775 1,000+ $1.8457 1 Add Ext. Price: $4.87 Full Reel: 2,000 295nm~490nm 1nA SMD Photodiodes RoHS SMD Tape & Reel (TR) - - 295nm~490nm 1nA -30℃~+85℃"':
+        - cell:
+          - generic: 󰄱
+          - checkbox
+        - cell "View larger image of product RoHS Compliance Genicom GVGR-S11SD detail page Genicom GVGR-S11SD detail page Pre/New":
+          - link "View larger image of product":
+            - /url: https://www.lcsc.com/product-detail/C5756543.html
+          - link "Genicom GVGR-S11SD Datasheet":
+            - /url: https://www.lcsc.com/datasheet/C5756543.pdf
+          - img "RoHS Compliance":
+            - button:
+          - link "Genicom GVGR-S11SD detail page":
+            - /url: https://www.lcsc.com/product-detail/C5756543.html
+            - text: GVGR-S11SD
+          - link "Genicom GVGR-S11SD detail page":
+            - /url: https://www.lcsc.com/product-detail/C5756543.html
+            - text: C5756543
+          - generic: Pre/New
+        - cell "Genicom":
+          - link "Genicom":
+            - /url: https://www.lcsc.com/brand-detail/13647.html
+        - cell "0 In Stock":
+          - generic: "0"
+          - generic: In Stock
+          - button:
+        - cell "1+ $4.8657 200+ $1.9427 500+ $1.8775 1,000+ $1.8457":
+          - table:
+            - rowgroup:
+              - row "1+ $4.8657":
+                - cell "1+"
+                - cell "$4.8657"
+              - row "200+ $1.9427":
+                - cell "200+"
+                - cell "$1.9427"
+              - row "500+ $1.8775":
+                - cell "500+"
+                - cell "$1.8775"
+              - row "1,000+ $1.8457":
+                - cell "1,000+"
+                - cell "$1.8457"
+        - 'cell "1 Add Ext. Price: $4.87 Full Reel: 2,000"':
+          - textbox: "1"
+          - button "Add":
+            - generic: Add
+          - generic: "Ext. Price: $4.87"
+          - generic: "Full Reel: 2,000"
+        - cell "295nm~490nm 1nA SMD Photodiodes RoHS":
+          - generic "295nm~490nm 1nA SMD Photodiodes RoHS"
+        - cell "SMD":
+          - generic: SMD
+        - cell "Tape & Reel (TR)":
+          - generic: Tape & Reel (TR)
+        - cell "-":
+          - generic: "-"
+        - cell "-":
+          - generic: "-"
+        - cell "295nm~490nm":
+          - generic: 295nm~490nm
+        - cell "1nA":
+          - generic: 1nA
+        - cell "-30℃~+85℃":
+          - generic: "-30℃~+85℃"
+      - 'row "View larger image of product RoHS Compliance Genicom GUVV-T10GD detail page Genicom GUVV-T10GD detail page Pre/New Genicom 0 In Stock 1+ $25.5589 200+ $10.1987 500+ $9.8578 1,000+ $9.689 1 Add Ext. Price: $25.56 230nm~395nm 1nA TO-46-2 Photodiodes RoHS TO-46-2 Tray - - 230nm~395nm 1nA -30℃~+85℃"':
+        - cell:
+          - generic: 󰄱
+          - checkbox
+        - cell "View larger image of product RoHS Compliance Genicom GUVV-T10GD detail page Genicom GUVV-T10GD detail page Pre/New":
+          - link "View larger image of product":
+            - /url: https://www.lcsc.com/product-detail/C5756536.html
+          - link "Genicom GUVV-T10GD Datasheet":
+            - /url: https://www.lcsc.com/datasheet/C5756536.pdf
+          - img "RoHS Compliance":
+            - button:
+          - link "Genicom GUVV-T10GD detail page":
+            - /url: https://www.lcsc.com/product-detail/C5756536.html
+            - text: GUVV-T10GD
+          - link "Genicom GUVV-T10GD detail page":
+            - /url: https://www.lcsc.com/product-detail/C5756536.html
+            - text: C5756536
+          - generic: Pre/New
+        - cell "Genicom":
+          - link "Genicom":
+            - /url: https://www.lcsc.com/brand-detail/13647.html
+        - cell "0 In Stock":
+          - generic: "0"
+          - generic: In Stock
+          - button:
+        - cell "1+ $25.5589 200+ $10.1987 500+ $9.8578 1,000+ $9.689":
+          - table:
+            - rowgroup:
+              - row "1+ $25.5589":
+                - cell "1+"
+                - cell "$25.5589"
+              - row "200+ $10.1987":
+                - cell "200+"
+                - cell "$10.1987"
+              - row "500+ $9.8578":
+                - cell "500+"
+                - cell "$9.8578"
+              - row "1,000+ $9.689":
+                - cell "1,000+"
+                - cell "$9.689"
+        - 'cell "1 Add Ext. Price: $25.56"':
+          - textbox: "1"
+          - button "Add":
+            - generic: Add
+          - generic: "Ext. Price: $25.56"
+        - cell "230nm~395nm 1nA TO-46-2 Photodiodes RoHS":
+          - generic "230nm~395nm 1nA TO-46-2 Photodiodes RoHS"
+        - cell "TO-46-2":
+          - generic: TO-46-2
+        - cell "Tray":
+          - generic: Tray
+        - cell "-":
+          - generic: "-"
+        - cell "-":
+          - generic: "-"
+        - cell "230nm~395nm":
+          - generic: 230nm~395nm
+        - cell "1nA":
+          - generic: 1nA
+        - cell "-30℃~+85℃":
+          - generic: "-30℃~+85℃"
+      - 'row "View larger image of product Genicom GUVV-S10SM-LA detail page Genicom GUVV-S10SM-LA detail page Pre/New Genicom 0 In Stock 1+ $156.528 200+ $62.4556 500+ $60.3695 1,000+ $59.3375 1 Add Ext. Price: $156.53 240nm~395nm Photodiodes - Bag-packed - - 240nm~395nm - -30℃~+85℃"':
+        - cell:
+          - generic: 󰄱
+          - checkbox
+        - cell "View larger image of product Genicom GUVV-S10SM-LA detail page Genicom GUVV-S10SM-LA detail page Pre/New":
+          - link "View larger image of product":
+            - /url: https://www.lcsc.com/product-detail/C5756532.html
+          - link "Genicom GUVV-S10SM-LA Datasheet":
+            - /url: https://www.lcsc.com/datasheet/C5756532.pdf
+          - link "Genicom GUVV-S10SM-LA detail page":
+            - /url: https://www.lcsc.com/product-detail/C5756532.html
+            - text: GUVV-S10SM-LA
+          - link "Genicom GUVV-S10SM-LA detail page":
+            - /url: https://www.lcsc.com/product-detail/C5756532.html
+            - text: C5756532
+          - generic: Pre/New
+        - cell "Genicom":
+          - link "Genicom":
+            - /url: https://www.lcsc.com/brand-detail/13647.html
+        - cell "0 In Stock":
+          - generic: "0"
+          - generic: In Stock
+          - button:
+        - cell "1+ $156.528 200+ $62.4556 500+ $60.3695 1,000+ $59.3375":
+          - table:
+            - rowgroup:
+              - row "1+ $156.528":
+                - cell "1+"
+                - cell "$156.528"
+              - row "200+ $62.4556":
+                - cell "200+"
+                - cell "$62.4556"
+              - row "500+ $60.3695":
+                - cell "500+"
+                - cell "$60.3695"
+              - row "1,000+ $59.3375":
+                - cell "1,000+"
+                - cell "$59.3375"
+        - 'cell "1 Add Ext. Price: $156.53"':
+          - textbox: "1"
+          - button "Add":
+            - generic: Add
+          - generic: "Ext. Price: $156.53"
+        - cell "240nm~395nm Photodiodes":
+          - generic "240nm~395nm Photodiodes"
+        - cell "-":
+          - generic: "-"
+        - cell "Bag-packed":
+          - generic: Bag-packed
+        - cell "-":
+          - generic: "-"
+        - cell "-":
+          - generic: "-"
+        - cell "240nm~395nm":
+          - generic: 240nm~395nm
+        - cell "-":
+          - generic: "-"
+        - cell "-30℃~+85℃":
+          - generic: "-30℃~+85℃"
+      - 'row "View larger image of product RoHS Compliance Genicom GUVC-T21GH detail page Genicom GUVC-T21GH detail page Pre/New Genicom 0 In Stock 1+ $41.615 200+ $16.6053 500+ $16.0499 1,000+ $15.7769 1 Add Ext. Price: $41.62 220nm~280nm TO-205AA,TO-5-3METALCAN Photodiodes RoHS TO-205AA,TO-5-3METALCAN Tray - - 220nm~280nm - -30℃~+85℃"':
+        - cell:
+          - generic: 󰄱
+          - checkbox
+        - cell "View larger image of product RoHS Compliance Genicom GUVC-T21GH detail page Genicom GUVC-T21GH detail page Pre/New":
+          - link "View larger image of product":
+            - /url: https://www.lcsc.com/product-detail/C5756528.html
+          - link "Genicom GUVC-T21GH Datasheet":
+            - /url: https://www.lcsc.com/datasheet/C5756528.pdf
+          - img "RoHS Compliance":
+            - button:
+          - link "Genicom GUVC-T21GH detail page":
+            - /url: https://www.lcsc.com/product-detail/C5756528.html
+            - text: GUVC-T21GH
+          - link "Genicom GUVC-T21GH detail page":
+            - /url: https://www.lcsc.com/product-detail/C5756528.html
+            - text: C5756528
+          - generic: Pre/New
+        - cell "Genicom":
+          - link "Genicom":
+            - /url: https://www.lcsc.com/brand-detail/13647.html
+        - cell "0 In Stock":
+          - generic: "0"
+          - generic: In Stock
+          - button:
+        - cell "1+ $41.615 200+ $16.6053 500+ $16.0499 1,000+ $15.7769":
+          - table:
+            - rowgroup:
+              - row "1+ $41.615":
+                - cell "1+"
+                - cell "$41.615"
+              - row "200+ $16.6053":
+                - cell "200+"
+                - cell "$16.6053"
+              - row "500+ $16.0499":
+                - cell "500+"
+                - cell "$16.0499"
+              - row "1,000+ $15.7769":
+                - cell "1,000+"
+                - cell "$15.7769"
+        - 'cell "1 Add Ext. Price: $41.62"':
+          - textbox: "1"
+          - button "Add":
+            - generic: Add
+          - generic: "Ext. Price: $41.62"
+        - cell "220nm~280nm TO-205AA,TO-5-3METALCAN Photodiodes RoHS":
+          - generic "220nm~280nm TO-205AA,TO-5-3METALCAN Photodiodes RoHS"
+        - cell "TO-205AA,TO-5-3METALCAN":
+          - generic: TO-205AA,TO-5-3METALCAN
+        - cell "Tray":
+          - generic: Tray
+        - cell "-":
+          - generic: "-"
+        - cell "-":
+          - generic: "-"
+        - cell "220nm~280nm":
+          - generic: 220nm~280nm
+        - cell "-":
+          - generic: "-"
+        - cell "-30℃~+85℃":
+          - generic: "-30℃~+85℃"
+      - 'row "View larger image of product RoHS Compliance Genicom GUVC-T20GD-U detail page Genicom GUVC-T20GD-U detail page Pre/New Genicom 0 In Stock 1+ $128.1885 200+ $51.1494 500+ $49.4399 1,000+ $48.5955 1 Add Ext. Price: $128.19 220nm~280nm 90nA TO-39-3 Photodiodes RoHS TO-39-3 Tray - - 220nm~280nm 90nA -30℃~+85℃"':
+        - cell:
+          - generic: 󰄱
+          - checkbox
+        - cell "View larger image of product RoHS Compliance Genicom GUVC-T20GD-U detail page Genicom GUVC-T20GD-U detail page Pre/New":
+          - link "View larger image of product":
+            - /url: https://www.lcsc.com/product-detail/C5756524.html
+          - link "Genicom GUVC-T20GD-U Datasheet":
+            - /url: https://www.lcsc.com/datasheet/C5756524.pdf
+          - img "RoHS Compliance":
+            - button:
+          - link "Genicom GUVC-T20GD-U detail page":
+            - /url: https://www.lcsc.com/product-detail/C5756524.html
+            - text: GUVC-T20GD-U
+          - link "Genicom GUVC-T20GD-U detail page":
+            - /url: https://www.lcsc.com/product-detail/C5756524.html
+            - text: C5756524
+          - generic: Pre/New
+        - cell "Genicom":
+          - link "Genicom":
+            - /url: https://www.lcsc.com/brand-detail/13647.html
+        - cell "0 In Stock":
+          - generic: "0"
+          - generic: In Stock
+          - button:
+        - cell "1+ $128.1885 200+ $51.1494 500+ $49.4399 1,000+ $48.5955":
+          - table:
+            - rowgroup:
+              - row "1+ $128.1885":
+                - cell "1+"
+                - cell "$128.1885"
+              - row "200+ $51.1494":
+                - cell "200+"
+                - cell "$51.1494"
+              - row "500+ $49.4399":
+                - cell "500+"
+                - cell "$49.4399"
+              - row "1,000+ $48.5955":
+                - cell "1,000+"
+                - cell "$48.5955"
+        - 'cell "1 Add Ext. Price: $128.19"':
+          - textbox: "1"
+          - button "Add":
+            - generic: Add
+          - generic: "Ext. Price: $128.19"
+        - cell "220nm~280nm 90nA TO-39-3 Photodiodes RoHS":
+          - generic "220nm~280nm 90nA TO-39-3 Photodiodes RoHS"
+        - cell "TO-39-3":
+          - generic: TO-39-3
+        - cell "Tray":
+          - generic: Tray
+        - cell "-":
+          - generic: "-"
+        - cell "-":
+          - generic: "-"
+        - cell "220nm~280nm":
+          - generic: 220nm~280nm
+        - cell "90nA":
+          - generic: 90nA
+        - cell "-30℃~+85℃":
+          - generic: "-30℃~+85℃"
+      - 'row "View larger image of product RoHS Compliance Genicom GUVC-S10GD detail page Genicom GUVC-S10GD detail page Genicom 0 In Stock 1+ $11.6939 200+ $4.6664 500+ $4.5095 1,500+ $4.4326 1 Add Ext. Price: $11.69 Full Reel: 1,500 220nm~280nm 1nA 1414 Photodiodes RoHS 1414 Tape & Reel (TR) - - 220nm~280nm 1nA -30℃~+85℃"':
+        - cell:
+          - generic: 󰄱
+          - checkbox
+        - cell "View larger image of product RoHS Compliance Genicom GUVC-S10GD detail page Genicom GUVC-S10GD detail page":
+          - link "View larger image of product":
+            - /url: https://www.lcsc.com/product-detail/C5756522.html
+          - link "Genicom GUVC-S10GD Datasheet":
+            - /url: https://www.lcsc.com/datasheet/C5756522.pdf
+          - img "RoHS Compliance":
+            - button:
+          - link "Genicom GUVC-S10GD detail page":
+            - /url: https://www.lcsc.com/product-detail/C5756522.html
+            - text: GUVC-S10GD
+          - link "Genicom GUVC-S10GD detail page":
+            - /url: https://www.lcsc.com/product-detail/C5756522.html
+            - text: C5756522
+        - cell "Genicom":
+          - link "Genicom":
+            - /url: https://www.lcsc.com/brand-detail/13647.html
+        - cell "0 In Stock":
+          - generic: "0"
+          - generic: In Stock
+          - button:
+        - cell "1+ $11.6939 200+ $4.6664 500+ $4.5095 1,500+ $4.4326":
+          - table:
+            - rowgroup:
+              - row "1+ $11.6939":
+                - cell "1+"
+                - cell "$11.6939"
+              - row "200+ $4.6664":
+                - cell "200+"
+                - cell "$4.6664"
+              - row "500+ $4.5095":
+                - cell "500+"
+                - cell "$4.5095"
+              - row "1,500+ $4.4326":
+                - cell "1,500+"
+                - cell "$4.4326"
+        - 'cell "1 Add Ext. Price: $11.69 Full Reel: 1,500"':
+          - textbox: "1"
+          - button "Add":
+            - generic: Add
+          - generic: "Ext. Price: $11.69"
+          - generic: "Full Reel: 1,500"
+        - cell "220nm~280nm 1nA 1414 Photodiodes RoHS":
+          - generic "220nm~280nm 1nA 1414 Photodiodes RoHS"
+        - cell "1414":
+          - generic: "1414"
+        - cell "Tape & Reel (TR)":
+          - generic: Tape & Reel (TR)
+        - cell "-":
+          - generic: "-"
+        - cell "-":
+          - generic: "-"
+        - cell "220nm~280nm":
+          - generic: 220nm~280nm
+        - cell "1nA":
+          - generic: 1nA
+        - cell "-30℃~+85℃":
+          - generic: "-30℃~+85℃"
+      - 'row "View larger image of product RoHS Compliance Genicom GUVB-T11GD detail page Genicom GUVB-T11GD detail page Pre/New Genicom 0 In Stock 1+ $27.4667 200+ $10.9592 500+ $10.5932 1,000+ $10.4133 1 Add Ext. Price: $27.47 220nm~320nm 1nA TO-46-2 Photodiodes RoHS TO-46-2 Tray - - 220nm~320nm 1nA -30℃~+85℃"':
+        - cell:
+          - generic: 󰄱
+          - checkbox
+        - cell "View larger image of product RoHS Compliance Genicom GUVB-T11GD detail page Genicom GUVB-T11GD detail page Pre/New":
+          - link "View larger image of product":
+            - /url: https://www.lcsc.com/product-detail/C5756518.html
+          - link "Genicom GUVB-T11GD Datasheet":
+            - /url: https://www.lcsc.com/datasheet/C5756518.pdf
+          - img "RoHS Compliance":
+            - button:
+          - link "Genicom GUVB-T11GD detail page":
+            - /url: https://www.lcsc.com/product-detail/C5756518.html
+            - text: GUVB-T11GD
+          - link "Genicom GUVB-T11GD detail page":
+            - /url: https://www.lcsc.com/product-detail/C5756518.html
+            - text: C5756518
+          - generic: Pre/New
+        - cell "Genicom":
+          - link "Genicom":
+            - /url: https://www.lcsc.com/brand-detail/13647.html
+        - cell "0 In Stock":
+          - generic: "0"
+          - generic: In Stock
+          - button:
+        - cell "1+ $27.4667 200+ $10.9592 500+ $10.5932 1,000+ $10.4133":
+          - table:
+            - rowgroup:
+              - row "1+ $27.4667":
+                - cell "1+"
+                - cell "$27.4667"
+              - row "200+ $10.9592":
+                - cell "200+"
+                - cell "$10.9592"
+              - row "500+ $10.5932":
+                - cell "500+"
+                - cell "$10.5932"
+              - row "1,000+ $10.4133":
+                - cell "1,000+"
+                - cell "$10.4133"
+        - 'cell "1 Add Ext. Price: $27.47"':
+          - textbox: "1"
+          - button "Add":
+            - generic: Add
+          - generic: "Ext. Price: $27.47"
+        - cell "220nm~320nm 1nA TO-46-2 Photodiodes RoHS":
+          - generic "220nm~320nm 1nA TO-46-2 Photodiodes RoHS"
+        - cell "TO-46-2":
+          - generic: TO-46-2
+        - cell "Tray":
+          - generic: Tray
+        - cell "-":
+          - generic: "-"
+        - cell "-":
+          - generic: "-"
+        - cell "220nm~320nm":
+          - generic: 220nm~320nm
+        - cell "1nA":
+          - generic: 1nA
+        - cell "-30℃~+85℃":
+          - generic: "-30℃~+85℃"
+      - 'row "View larger image of product Genicom GUVB-S11SM-LA detail page Genicom GUVB-S11SM-LA detail page Pre/New Genicom 0 In Stock 1+ $138.7156 200+ $55.3483 500+ $53.4989 1,000+ $52.5853 1 Add Ext. Price: $138.72 240nm~320nm Photodiodes - Bag-packed - - 240nm~320nm - -30℃~+85℃"':
+        - cell:
+          - generic: 󰄱
+          - checkbox
+        - cell "View larger image of product Genicom GUVB-S11SM-LA detail page Genicom GUVB-S11SM-LA detail page Pre/New":
+          - link "View larger image of product":
+            - /url: https://www.lcsc.com/product-detail/C5756514.html
+          - link "Genicom GUVB-S11SM-LA Datasheet":
+            - /url: https://www.lcsc.com/datasheet/C5756514.pdf
+          - link "Genicom GUVB-S11SM-LA detail page":
+            - /url: https://www.lcsc.com/product-detail/C5756514.html
+            - text: GUVB-S11SM-LA
+          - link "Genicom GUVB-S11SM-LA detail page":
+            - /url: https://www.lcsc.com/product-detail/C5756514.html
+            - text: C5756514
+          - generic: Pre/New
+        - cell "Genicom":
+          - link "Genicom":
+            - /url: https://www.lcsc.com/brand-detail/13647.html
+        - cell "0 In Stock":
+          - generic: "0"
+          - generic: In Stock
+          - button:
+        - cell "1+ $138.7156 200+ $55.3483 500+ $53.4989 1,000+ $52.5853":
+          - table:
+            - rowgroup:
+              - row "1+ $138.7156":
+                - cell "1+"
+                - cell "$138.7156"
+              - row "200+ $55.3483":
+                - cell "200+"
+                - cell "$55.3483"
+              - row "500+ $53.4989":
+                - cell "500+"
+                - cell "$53.4989"
+              - row "1,000+ $52.5853":
+                - cell "1,000+"
+                - cell "$52.5853"
+        - 'cell "1 Add Ext. Price: $138.72"':
+          - textbox: "1"
+          - button "Add":
+            - generic: Add
+          - generic: "Ext. Price: $138.72"
+        - cell "240nm~320nm Photodiodes":
+          - generic "240nm~320nm Photodiodes"
+        - cell "-":
+          - generic: "-"
+        - cell "Bag-packed":
+          - generic: Bag-packed
+        - cell "-":
+          - generic: "-"
+        - cell "-":
+          - generic: "-"
+        - cell "240nm~320nm":
+          - generic: 240nm~320nm
+        - cell "-":
+          - generic: "-"
+        - cell "-30℃~+85℃":
+          - generic: "-30℃~+85℃"
+      - 'row "View larger image of product RoHS Compliance Genicom GVBL-T14GD detail page Genicom GVBL-T14GD detail page Pre/New Genicom 0 In Stock 1+ $20.462 200+ $8.1646 500+ $7.8916 1,000+ $7.7575 1 Add Ext. Price: $20.46 330nm~445nm 1nA TO-46-2 Photodiodes RoHS TO-46-2 Tray - - 330nm~445nm 1nA -30℃~+85℃"':
+        - cell:
+          - generic: 󰄱
+          - checkbox
+        - cell "View larger image of product RoHS Compliance Genicom GVBL-T14GD detail page Genicom GVBL-T14GD detail page Pre/New":
+          - link "View larger image of product":
+            - /url: https://www.lcsc.com/product-detail/C5719817.html
+          - link "Genicom GVBL-T14GD Datasheet":
+            - /url: https://www.lcsc.com/datasheet/C5719817.pdf
+          - img "RoHS Compliance":
+            - button:
+          - link "Genicom GVBL-T14GD detail page":
+            - /url: https://www.lcsc.com/product-detail/C5719817.html
+            - text: GVBL-T14GD
+          - link "Genicom GVBL-T14GD detail page":
+            - /url: https://www.lcsc.com/product-detail/C5719817.html
+            - text: C5719817
+          - generic: Pre/New
+        - cell "Genicom":
+          - link "Genicom":
+            - /url: https://www.lcsc.com/brand-detail/13647.html
+        - cell "0 In Stock":
+          - generic: "0"
+          - generic: In Stock
+          - button:
+        - cell "1+ $20.462 200+ $8.1646 500+ $7.8916 1,000+ $7.7575":
+          - table:
+            - rowgroup:
+              - row "1+ $20.462":
+                - cell "1+"
+                - cell "$20.462"
+              - row "200+ $8.1646":
+                - cell "200+"
+                - cell "$8.1646"
+              - row "500+ $7.8916":
+                - cell "500+"
+                - cell "$7.8916"
+              - row "1,000+ $7.7575":
+                - cell "1,000+"
+                - cell "$7.7575"
+        - 'cell "1 Add Ext. Price: $20.46"':
+          - textbox: "1"
+          - button "Add":
+            - generic: Add
+          - generic: "Ext. Price: $20.46"
+        - cell "330nm~445nm 1nA TO-46-2 Photodiodes RoHS":
+          - generic "330nm~445nm 1nA TO-46-2 Photodiodes RoHS"
+        - cell "TO-46-2":
+          - generic: TO-46-2
+        - cell "Tray":
+          - generic: Tray
+        - cell "-":
+          - generic: "-"
+        - cell "-":
+          - generic: "-"
+        - cell "330nm~445nm":
+          - generic: 330nm~445nm
+        - cell "1nA":
+          - generic: 1nA
+        - cell "-30℃~+85℃":
+          - generic: "-30℃~+85℃"
+      - 'row "View larger image of product RoHS Compliance Genicom GUVB-T21GD-U detail page Genicom GUVB-T21GD-U detail page Pre/New Genicom 0 In Stock 1+ $128.2298 200+ $51.1651 500+ $49.4561 1,000+ $48.6103 1 Add Ext. Price: $128.23 220nm~320nm 90nA TO-39-3METALCAN Photodiodes RoHS TO-39-3METALCAN Tray - - 220nm~320nm 90nA -30℃~+85℃"':
+        - cell:
+          - generic: 󰄱
+          - checkbox
+        - cell "View larger image of product RoHS Compliance Genicom GUVB-T21GD-U detail page Genicom GUVB-T21GD-U detail page Pre/New":
+          - link "View larger image of product":
+            - /url: https://www.lcsc.com/product-detail/C5719811.html
+          - link "Genicom GUVB-T21GD-U Datasheet":
+            - /url: https://www.lcsc.com/datasheet/C5719811.pdf
+          - img "RoHS Compliance":
+            - button:
+          - link "Genicom GUVB-T21GD-U detail page":
+            - /url: https://www.lcsc.com/product-detail/C5719811.html
+            - text: GUVB-T21GD-U
+          - link "Genicom GUVB-T21GD-U detail page":
+            - /url: https://www.lcsc.com/product-detail/C5719811.html
+            - text: C5719811
+          - generic: Pre/New
+        - cell "Genicom":
+          - link "Genicom":
+            - /url: https://www.lcsc.com/brand-detail/13647.html
+        - cell "0 In Stock":
+          - generic: "0"
+          - generic: In Stock
+          - button:
+        - cell "1+ $128.2298 200+ $51.1651 500+ $49.4561 1,000+ $48.6103":
+          - table:
+            - rowgroup:
+              - row "1+ $128.2298":
+                - cell "1+"
+                - cell "$128.2298"
+              - row "200+ $51.1651":
+                - cell "200+"
+                - cell "$51.1651"
+              - row "500+ $49.4561":
+                - cell "500+"
+                - cell "$49.4561"
+              - row "1,000+ $48.6103":
+                - cell "1,000+"
+                - cell "$48.6103"
+        - 'cell "1 Add Ext. Price: $128.23"':
+          - textbox: "1"
+          - button "Add":
+            - generic: Add
+          - generic: "Ext. Price: $128.23"
+        - cell "220nm~320nm 90nA TO-39-3METALCAN Photodiodes RoHS":
+          - generic "220nm~320nm 90nA TO-39-3METALCAN Photodiodes RoHS"
+        - cell "TO-39-3METALCAN":
+          - generic: TO-39-3METALCAN
+        - cell "Tray":
+          - generic: Tray
+        - cell "-":
+          - generic: "-"
+        - cell "-":
+          - generic: "-"
+        - cell "220nm~320nm":
+          - generic: 220nm~320nm
+        - cell "90nA":
+          - generic: 90nA
+        - cell "-30℃~+85℃":
+          - generic: "-30℃~+85℃"
+      - 'row "View larger image of product Genicom GUVB-T11GM-LA detail page Genicom GUVB-T11GM-LA detail page Pre/New Genicom 0 In Stock 1+ $166.4583 200+ $66.418 500+ $64.1993 1,000+ $63.1026 1 Add Ext. Price: $166.46 220nm~320nm Photodiodes - Bag-packed - - 220nm~320nm - -30℃~+85℃"':
+        - cell:
+          - generic: 󰄱
+          - checkbox
+        - cell "View larger image of product Genicom GUVB-T11GM-LA detail page Genicom GUVB-T11GM-LA detail page Pre/New":
+          - link "View larger image of product":
+            - /url: https://www.lcsc.com/product-detail/C5648651.html
+          - link "Genicom GUVB-T11GM-LA Datasheet":
+            - /url: https://www.lcsc.com/datasheet/C5648651.pdf
+          - link "Genicom GUVB-T11GM-LA detail page":
+            - /url: https://www.lcsc.com/product-detail/C5648651.html
+            - text: GUVB-T11GM-LA
+          - link "Genicom GUVB-T11GM-LA detail page":
+            - /url: https://www.lcsc.com/product-detail/C5648651.html
+            - text: C5648651
+          - generic: Pre/New
+        - cell "Genicom":
+          - link "Genicom":
+            - /url: https://www.lcsc.com/brand-detail/13647.html
+        - cell "0 In Stock":
+          - generic: "0"
+          - generic: In Stock
+          - button:
+        - cell "1+ $166.4583 200+ $66.418 500+ $64.1993 1,000+ $63.1026":
+          - table:
+            - rowgroup:
+              - row "1+ $166.4583":
+                - cell "1+"
+                - cell "$166.4583"
+              - row "200+ $66.418":
+                - cell "200+"
+                - cell "$66.418"
+              - row "500+ $64.1993":
+                - cell "500+"
+                - cell "$64.1993"
+              - row "1,000+ $63.1026":
+                - cell "1,000+"
+                - cell "$63.1026"
+        - 'cell "1 Add Ext. Price: $166.46"':
+          - textbox: "1"
+          - button "Add":
+            - generic: Add
+          - generic: "Ext. Price: $166.46"
+        - cell "220nm~320nm Photodiodes":
+          - generic "220nm~320nm Photodiodes"
+        - cell "-":
+          - generic: "-"
+        - cell "Bag-packed":
+          - generic: Bag-packed
+        - cell "-":
+          - generic: "-"
+        - cell "-":
+          - generic: "-"
+        - cell "220nm~320nm":
+          - generic: 220nm~320nm
+        - cell "-":
+          - generic: "-"
+        - cell "-30℃~+85℃":
+          - generic: "-30℃~+85℃"
+      - 'row "View larger image of product RoHS Compliance Genicom GUVA-T11GD detail page Genicom GUVA-T11GD detail page Pre/New Genicom 0 In Stock 1+ $24.7882 200+ $9.8918 500+ $9.5601 1,000+ $9.3966 1 Add Ext. Price: $24.79 220nm~370nm 1nA TO-46-2 Photodiodes RoHS TO-46-2 Tray - - 220nm~370nm 1nA -30℃~+85℃"':
+        - cell:
+          - generic: 󰄱
+          - checkbox
+        - cell "View larger image of product RoHS Compliance Genicom GUVA-T11GD detail page Genicom GUVA-T11GD detail page Pre/New":
+          - link "View larger image of product":
+            - /url: https://www.lcsc.com/product-detail/C5648648.html
+          - link "Genicom GUVA-T11GD Datasheet":
+            - /url: https://www.lcsc.com/datasheet/C5648648.pdf
+          - img "RoHS Compliance":
+            - button:
+          - link "Genicom GUVA-T11GD detail page":
+            - /url: https://www.lcsc.com/product-detail/C5648648.html
+            - text: GUVA-T11GD
+          - link "Genicom GUVA-T11GD detail page":
+            - /url: https://www.lcsc.com/product-detail/C5648648.html
+            - text: C5648648
+          - generic: Pre/New
+        - cell "Genicom":
+          - link "Genicom":
+            - /url: https://www.lcsc.com/brand-detail/13647.html
+        - cell "0 In Stock":
+          - generic: "0"
+          - generic: In Stock
+          - button:
+        - cell "1+ $24.7882 200+ $9.8918 500+ $9.5601 1,000+ $9.3966":
+          - table:
+            - rowgroup:
+              - row "1+ $24.7882":
+                - cell "1+"
+                - cell "$24.7882"
+              - row "200+ $9.8918":
+                - cell "200+"
+                - cell "$9.8918"
+              - row "500+ $9.5601":
+                - cell "500+"
+                - cell "$9.5601"
+              - row "1,000+ $9.3966":
+                - cell "1,000+"
+                - cell "$9.3966"
+        - 'cell "1 Add Ext. Price: $24.79"':
+          - textbox: "1"
+          - button "Add":
+            - generic: Add
+          - generic: "Ext. Price: $24.79"
+        - cell "220nm~370nm 1nA TO-46-2 Photodiodes RoHS":
+          - generic "220nm~370nm 1nA TO-46-2 Photodiodes RoHS"
+        - cell "TO-46-2":
+          - generic: TO-46-2
+        - cell "Tray":
+          - generic: Tray
+        - cell "-":
+          - generic: "-"
+        - cell "-":
+          - generic: "-"
+        - cell "220nm~370nm":
+          - generic: 220nm~370nm
+        - cell "1nA":
+          - generic: 1nA
+        - cell "-30℃~+85℃":
+          - generic: "-30℃~+85℃"
+  - generic: Showing
+  - button "26 - 39":
+    - generic: 26 - 39
+  - generic: of 39
+  - separator
+  - navigation "Pagination Navigation":
+    - list:
+      - button "Previous page":
+        - generic: 󰅁
+      - button "Goto Page 1": "1"
+      - button "Current Page, Page 2": "2"
+      - button "Next page" [disabled]:
+        - generic: 󰅂
+  - generic: Go to Page
+  - textbox
+  - button "Go>":
+    - generic: Go>
+- contentinfo:
+  - generic "about Information": Information
+  - list:
+    - link "Go to About LCSC Page":
+      - /url: https://www.lcsc.com/about/company
+      - text: About LCSC
+    - link "Go to Contact Us Page":
+      - /url: https://www.lcsc.com/service/question
+      - text: Contact Us
+    - link "Go to LCSC Seller Page":
+      - /url: https://www.lcsc.com/about/supplier
+      - text: LCSC Seller
+    - link "Go to Quality Assurance Page":
+      - /url: https://assets.lcsc.com/datasheet/szlcsc/Download-ISO9001-Certification.pdf
+      - text: Quality Assurance
+    - link "Go to Terms and Conditions Page":
+      - /url: https://www.lcsc.com/help/terms-and-conditions
+      - text: Terms and Conditions
+    - link "Go to Privacy Policy Page":
+      - /url: https://www.lcsc.com/help/privacy
+      - text: Privacy Policy
+    - link "Go to Cookie Notice Page":
+      - /url: https://www.lcsc.com/help-center/lcsc-information/cookie-notice
+      - text: Cookie Notice
+    - link "Go to Blog Page":
+      - /url: https://www.lcsc.com/blog
+      - text: Blog
+  - generic "about Tools": Tools
+  - list:
+    - link "Go to BOM Tool/RFQ Page":
+      - /url: https://www.lcsc.com/bom
+      - text: BOM Tool/RFQ
+    - link "Go to API Page":
+      - /url: https://www.lcsc.com/agent
+      - text: API
+    - link "Go to LCSC Calculator Hub Page":
+      - /url: https://www.lcsc.com/tools
+      - text: LCSC Calculator Hub
+    - link "Go to Cross Reference Page":
+      - /url: https://www.lcsc.com/tools/cross-reference
+      - text: Cross Reference
+  - generic "about Customer Service": Customer Service
+  - list:
+    - link "Go to Track Order Page":
+      - /url: https://www.lcsc.com/personalCenter/order/list
+      - text: Track Order
+    - link "Go to Return Policy Page":
+      - /url: https://www.lcsc.com/help-center/return-refund
+      - text: Return Policy
+    - link "Go to How to Checkout Page":
+      - /url: https://www.lcsc.com/help-center/ordering-quotation/order-and-checkout
+      - text: How to Checkout
+    - link "Go to Orders & Payment Terms Page":
+      - /url: https://www.lcsc.com/help-center/payment-invoice/payment-methods
+      - text: Orders & Payment Terms
+    - link "Go to International Shipping Page":
+      - /url: https://www.lcsc.com/help-center/shipping-delivering
+      - text: International Shipping
+    - listitem: Feedback
+    - link "Go to FAQ Page":
+      - /url: https://www.lcsc.com/help-center
+      - text: FAQ
+    - link "Go to Help Center Page":
+      - /url: https://www.lcsc.com/help-center
+      - text: Help Center
+  - generic "about Electronic Components": Electronic Components
+  - list:
+    - link "Go to EasyEDA Page":
+      - /url: https://easyeda.com
+      - text: EasyEDA
+    - link "Go to JLCPCB Page":
+      - /url: https://jlcpcb.com
+      - text: JLCPCB
+    - link "Go to LCSC Page":
+      - /url: https://www.lcsc.com/
+      - text: LCSC
+    - link "Go to CUSTOM CABLES Page":
+      - /url: https://lcsccable.com
+      - text: CUSTOM CABLES
+    - link "Go to FRONT PANELS Page":
+      - /url: https://www.lcsc.com/front-panel
+      - text: FRONT PANELS
+  - generic "about Connect With Us": Connect With Us
+  - generic: "Customer Service: 0086-755-83210457"
+  - generic: "Logistics Dept.: 0086-755-83233027"
+  - text: "Email:"
+  - link "support@lcsc.com":
+    - /url: mailto:support@lcsc.com
+  - generic: 9:30 am - 12 am, 1:30 pm - 10 pm
+  - generic: Monday - Friday, UTC/GMT +8
+  - generic: "Current Time: Wed, Oct 14, 02:04:59 GMT+8"
+  - generic: Follow Us
+  - link "LCSC Electronics official instagram":
+    - /url: https://www.instagram.com/lcscelectronics
+  - link "LCSC Electronics official facebook":
+    - /url: https://www.facebook.com/lcsc.electronics
+  - link "LCSC Electronics official linkedIn":
+    - /url: https://www.linkedin.com/company/lcsc-electronics
+  - link "LCSC Electronics official twitter":
+    - /url: https://x.com/lcscelectronics
+  - link "LCSC Electronics official youtube":
+    - /url: https://www.youtube.com/c/LCSCElectronics
+  - link "PCI DSS certified":
+    - /url: /payment/PCI.pdf
+    - img "PCI DSS certified"
+  - link "trustlogo about lcsc.com":
+    - /url: https://www.trustlogo.com/ttb_searcher/trustlogo?v_querytype=W&v_shortname=CL1&v_search=https://www.lcsc.com&x=6&y=5
+  - text: Encrypted
+  - text: Payment
+  - link "Go to Terms & Conditions Page":
+    - /url: https://www.lcsc.com/help/terms-and-conditions
+    - text: Terms & Conditions
+  - text: "|"
+  - link "Go to Privacy Notice Page":
+    - /url: https://www.lcsc.com/help/privacy
+    - text: Privacy Notice
+  - text: "| Cookie Settings |"
+  - link "Go to Do Not Sell or Share My Personal Information Page":
+    - /url: https://www.lcsc.com/help/do-not-sell
+    - text: Do Not Sell / Do Not Share My Personal Information
+  - generic: © 2025 LCSC.COM All Rights Reserved.
+  - link "about 粤ICP备17041818号":
+    - /url: http://beian.miit.gov.cn
+    - text: 粤ICP备17041818号
+  - link "about ISO/IEC":
+    - /url: https://static.lcsc.com/feassets/pc/file/251202/ISO-IEC%20Certificate.pdf
+    - text: ISO/IEC
+- complementary:
+  - link "Contact us":
+    - /url: https://www.lcsc.com/service/question
+- contentinfo:
+  - text: LCSC uses cookies and similar technology to improve site performance, enhance security, personal content and ads, and understand how you interact with our services. This information is shared with third-party service providers. Learn more in our
+  - link "Cookie Policy":
+    - /url: https://www.lcsc.com/help-center/lcsc-information/cookie-notice
+  - text: .
+  - button "Cookie Settings":
+    - generic: Cookie Settings
+  - button "Reject All":
+    - generic: Reject All
+  - button "Accept All Cookies":
+    - generic: Accept All Cookies
+  - button "Close cookie notice":
+    - generic: 󰅖
+- dialog:
+  - generic: We've updated our Terms
+  - generic: We are committed to maintaining transparency and keeping your personal data safe. We have updated our Privacy Policy. Please take a moment to review the Privacy Policy for details of the changes. You may also choose whether to receive marketing communications from us. Your choice is entirely voluntary, and choosing not to consent to marketing communications will not affect your access to or use of our website or core services.
+  - generic: 󰄱
+  - checkbox "I agree to the updated Privacy Policy *"
+  - text: I agree to the updated
+  - link "Privacy Policy":
+    - /url: https://www.lcsc.com/help/privacy?hideAgreementUpdate=1
+  - generic: "*"
+  - generic: 󰄱
+  - checkbox "I agree to the updated Marketing Policy"
+  - text: I agree to the updated
+  - link "Marketing Policy":
+    - /url: https://www.lcsc.com/help/marketing-consulting-agreement?hideAgreementUpdate=1
+  - button "Decline" [disabled]:
+    - generic: Decline
+  - button "Accept & Continue" [disabled]:
+    - generic: Accept & Continue
