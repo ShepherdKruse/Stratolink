@@ -95,13 +95,13 @@ export const fmt = {
         if (ms === null || ms === undefined) return '-';
         const d = new Date(ms);
         const p = (n: number) => String(n).padStart(2, '0');
-        return `${p(d.getUTCHours())}:${p(d.getUTCMinutes())}:${p(d.getUTCSeconds())}`;
+        return `${p(d.getHours())}:${p(d.getMinutes())}:${p(d.getSeconds())}`;
     },
     datetime: (ms: number | null | undefined): string => {
         if (ms === null || ms === undefined) return '-';
         const d = new Date(ms);
         const p = (n: number) => String(n).padStart(2, '0');
-        return `${d.getUTCFullYear()}-${p(d.getUTCMonth() + 1)}-${p(d.getUTCDate())} ${p(d.getUTCHours())}:${p(d.getUTCMinutes())}:${p(d.getUTCSeconds())}`;
+        return `${d.getFullYear()}-${p(d.getMonth() + 1)}-${p(d.getDate())} ${p(d.getHours())}:${p(d.getMinutes())}:${p(d.getSeconds())}`;
     },
     duration: (ms: number | null | undefined): string => {
         if (ms === null || ms === undefined || !Number.isFinite(ms)) return '-';

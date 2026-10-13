@@ -288,7 +288,14 @@ export default function MissionControlScreen() {
     );
 
     const isFleet = selectedId === null;
-    const fleetHistories = useMemo(() => Object.values(fleetHistory.rowsByDevice), [fleetHistory.rowsByDevice]);
+    const previewIds = new Set(previewFleet(devices, fleetHistory.rowsByDevice, Date.now()).map(device => device.id));
+    /* The timeline spans only the balloons on show, so a hidden (e.g. planned)
+     * unit's bench packets can't set the fleet's end time. */
+    const shownKey = [...(portalPreview ? previewIds : filteredIds)].sort().join('\n');
+    const fleetHistories = useMemo(() => {
+        const shown = new Set(shownKey.split('\n'));
+        return Object.entries(fleetHistory.rowsByDevice).filter(([id]) => shown.has(id)).map(([, history]) => history);
+    }, [fleetHistory.rowsByDevice, shownKey]);
     const fleetLastT = useMemo(() => historyRange(fleetHistories)?.end ?? null, [fleetHistories]);
     const fleetRecorded = fleetLastT !== null && Date.now() - fleetLastT > 15 * 60_000;
     const fleetBalloons = useMemo<V2Balloon[]>(() => devices.flatMap(device => {
@@ -302,7 +309,6 @@ export default function MissionControlScreen() {
         const position = mappedPosition(fleetHistory.rowsByDevice[device.id] ?? [], null);
         return position ? [{ id: device.id, ...position }] : [];
     }), [devices, fleetHistory.rowsByDevice]);
-    const previewIds = new Set(previewFleet(devices, fleetHistory.rowsByDevice, Date.now()).map(device => device.id));
     const shownFleet = portalPreview ? fleetBalloons.filter(balloon => previewIds.has(balloon.id)) : fleetBalloons.filter(balloon => filteredIds.has(balloon.id));
     const plannedCount = filteredDevices.filter(device => isPlannedBalloon(device.status)).length;
     const activity = fleetActivity(filteredDevices.filter(device => !isPlannedBalloon(device.status)), fleetHistory.rowsByDevice, Date.now());
@@ -384,7 +390,7 @@ export default function MissionControlScreen() {
                         selectedDevice={selectedDevice}
                         forecast={forecast}
                         scrubT={isFleet ? fleetScrubT : effectiveScrubT}
-                        terminatorDate={isFleet ? fleetScrubT ?? (fleetRecorded ? fleetLastT : null) : archived ? effectiveScrubT : scrubT}
+                        terminatorDate={isFleet ? fleetScrubT : scrubT}
                         scrubbing={isScrubbing}
                         isFuture={isFuture}
                         noReading={noReading}

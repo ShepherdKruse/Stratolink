@@ -41,10 +41,17 @@ export function relTime(ms: number): string {
     return `${d}d ${h % 24}h`;
 }
 
+/** Dashboard clocks read in the viewer's local time zone. */
 export function stamp(ms: number): string {
     const d = new Date(ms);
     const p = (n: number) => String(n).padStart(2, '0');
-    return `${d.getUTCMonth() + 1}/${p(d.getUTCDate())} ${p(d.getUTCHours())}:${p(d.getUTCMinutes())}`;
+    return `${d.getMonth() + 1}/${p(d.getDate())} ${p(d.getHours())}:${p(d.getMinutes())}`;
+}
+
+/** Viewer's time-zone abbreviation at an instant, e.g. "PDT" (DST-aware). */
+export function tzName(ms: number): string {
+    return new Intl.DateTimeFormat(undefined, { timeZoneName: 'short' })
+        .formatToParts(ms).find(part => part.type === 'timeZoneName')?.value ?? '';
 }
 
 export function worst(statuses: StatusLevel[]): StatusLevel {

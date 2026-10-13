@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowRight, faClock } from '@fortawesome/free-solid-svg-icons';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { adjacentPacketTime, historyRange, type TimelineHistories } from '@/lib/telemetry/timelineHistory';
+import { tzName } from '@/lib/telemetry/telemetryV3Format';
 
 /* ──────────────────────────────────────────────────────────────
  * Timeline — full-width scrubber. Drives the charts AND the map.
@@ -255,7 +256,7 @@ export default function Timeline({ histories, scrubT, onScrub, onScrubbingChange
                     className="sl-scrub-track"
                     role="slider"
                     aria-label="Flight timeline"
-                    aria-valuetext={`${fmtClock(cursorT)} UTC${archived ? ", recorded telemetry" : ""}`}
+                    aria-valuetext={`${fmtClock(cursorT)} ${tzName(cursorT)}${archived ? ", recorded telemetry" : ""}`}
                     onKeyDown={onKeyDown}
                     tabIndex={0}
                     aria-valuemin={tStart}
@@ -338,7 +339,7 @@ export default function Timeline({ histories, scrubT, onScrub, onScrubbingChange
                 ref={trackRef}
                 role="slider"
                 aria-label="Flight timeline"
-                aria-valuetext={`${fmtClock(cursorT)} UTC${archived ? ', recorded telemetry' : ''}`}
+                aria-valuetext={`${fmtClock(cursorT)} ${tzName(cursorT)}${archived ? ', recorded telemetry' : ''}`}
                 onKeyDown={onKeyDown}
                 tabIndex={0}
                 aria-valuemin={tStart}
@@ -394,9 +395,9 @@ export default function Timeline({ histories, scrubT, onScrub, onScrubbingChange
     );
 }
 
-/* Compact UTC clock without seconds, e.g. "05-29 18:55". */
+/* Compact local clock without seconds, e.g. "05-29 11:55". */
 export function fmtClock(ms: number): string {
     const d = new Date(ms);
     const p = (n: number) => String(n).padStart(2, '0');
-    return `${p(d.getUTCMonth() + 1)}-${p(d.getUTCDate())} ${p(d.getUTCHours())}:${p(d.getUTCMinutes())}`;
+    return `${p(d.getMonth() + 1)}-${p(d.getDate())} ${p(d.getHours())}:${p(d.getMinutes())}`;
 }

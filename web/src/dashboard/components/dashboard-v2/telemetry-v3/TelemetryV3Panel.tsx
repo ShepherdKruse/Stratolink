@@ -15,7 +15,7 @@ import {
     buildFlightSeries,
     computePayloadAttitude,
 } from '@/lib/telemetry/flightSeries';
-import { relTime, stamp, tlmFmt, type StatusLevel } from '@/lib/telemetry/telemetryV3Format';
+import { relTime, stamp, tlmFmt, tzName, type StatusLevel } from '@/lib/telemetry/telemetryV3Format';
 import { useGatewayPoints } from '@/lib/gateways/data';
 import { haversineKm } from '@/lib/gateways/range';
 import { LineTrend } from './charts';
@@ -25,16 +25,16 @@ import { balloonName } from '@/lib/telemetry/fleetPlayback';
 
 const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
-/** "May 17, 2026 · 15:55 UTC" — no seconds, friendlier than the raw stamp. */
+/** "May 17, 2026 · 08:55 PDT" (viewer's local zone) — no seconds, friendlier than the raw stamp. */
 function fmtLaunchDate(ms: number): string {
     const d = new Date(ms);
-    return `${MONTHS[d.getUTCMonth()]} ${d.getUTCDate()}, ${d.getUTCFullYear()}`;
+    return `${MONTHS[d.getMonth()]} ${d.getDate()}, ${d.getFullYear()}`;
 }
 
 function fmtLaunchTime(ms: number): string {
     const d = new Date(ms);
     const p = (n: number) => String(n).padStart(2, '0');
-    return `${p(d.getUTCHours())}:${p(d.getUTCMinutes())} UTC`;
+    return `${p(d.getHours())}:${p(d.getMinutes())} ${tzName(ms)}`;
 }
 
 function fmtLaunch(ms: number): string {
