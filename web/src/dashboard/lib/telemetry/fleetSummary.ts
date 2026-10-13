@@ -2,7 +2,7 @@ import type { DeviceSummary } from '../../components/dashboard-v2/useTelemetry';
 import type { TelemetryRow } from '../../components/dashboard-v2/atoms';
 
 export function shouldPollTelemetry(status: string): boolean {
-    return !['landed', 'recovered', 'retired', 'planned'].includes(status.toLowerCase());
+    return !['landed', 'recovered', 'retired'].includes(status.toLowerCase());
 }
 
 const summaries = new WeakMap<DeviceSummary, { rows: TelemetryRow[]; summary: DeviceSummary }>();

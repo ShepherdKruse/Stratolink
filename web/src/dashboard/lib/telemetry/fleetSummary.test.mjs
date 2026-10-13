@@ -18,8 +18,13 @@ test('fleet summaries reuse the last real fix while contact follows newer sensor
 });
 
 test('finished flights stop polling but missing balloons can still report again', () => {
-    for (const status of ['landed', 'recovered', 'retired', 'planned']) assert.equal(shouldPollTelemetry(status), false);
+    for (const status of ['landed', 'recovered', 'retired']) assert.equal(shouldPollTelemetry(status), false);
     for (const status of ['flying', 'missing', 'lost', 'idle']) assert.equal(shouldPollTelemetry(status), true);
+});
+
+test('planned field tests keep polling for new telemetry', () => {
+    assert.equal(shouldPollTelemetry('planned'), true);
+    assert.equal(shouldPollTelemetry('PLANNED'), true);
 });
 
 

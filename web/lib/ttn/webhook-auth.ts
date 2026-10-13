@@ -108,7 +108,13 @@ export function parseTTNUplinkIdentity(payload: {
     const rawDevAddr = payload.end_device_ids?.dev_addr;
     const rawSessionKeyId = payload.uplink_message?.session_key_id;
     const receivedAt = payload.received_at;
-    const frameCounter = payload.uplink_message?.f_cnt;
+    const uplink = payload.uplink_message;
+    if (typeof uplink !== 'object' || uplink === null || Array.isArray(uplink)) {
+        return null;
+    }
+    // TTN's protobuf JSON omits zero-valued scalars on first-session uplinks.
+    // Explicit null or other malformed supplied values must still fail closed.
+    const frameCounter = Object.hasOwn(uplink, 'f_cnt') ? uplink.f_cnt : 0;
 
     const sessionKeyId =
         typeof rawSessionKeyId === 'string' && rawSessionKeyId.length > 0

@@ -88,6 +88,39 @@ test('unverified, revoked or mismatched bindings fail closed for every uplink po
   assert.ok(!(await result.text()).includes('secret'));
 });
 
+test('first-session uplinks with omitted FCnt retain zero and the original delivery identity', async () => {
+  const h = harness();
+  const input = fixture();
+  delete input.uplink_message.f_cnt;
+  const response = await h.handler(request(input));
+  assert.equal(response.status, 200);
+  assert.equal(h.inserts.length, 1);
+  assert.equal(h.inserts[0].row.f_cnt, 0);
+  assert.equal(h.inserts[0].row.time, input.received_at);
+  assert.equal(h.inserts[0].row.ttn_received_at, input.received_at);
+  assert.deepEqual(h.received, [{ id: binding.radio_identity_id, time: input.received_at }]);
+
+  const retry = harness({ async insert(table, row) {
+    assert.equal(row.f_cnt, 0);
+    assert.equal(row.ttn_received_at, input.received_at);
+    return { error: { code: '23505', message: 'duplicate key violates "telemetry_ttn_scoped_delivery"' } };
+  } });
+  const retried = await retry.handler(request(input));
+  assert.equal(retried.status, 200);
+  assert.equal((await retried.json()).duplicate, true);
+});
+
+test('malformed supplied frame counters fail closed before identity lookup', async () => {
+  const h = harness();
+  for (const f_cnt of [null, false, '0', -1, 1.5, 0x100000000]) {
+    const input = fixture(); input.uplink_message.f_cnt = f_cnt;
+    assert.equal((await h.handler(request(input))).status, 400);
+  }
+  assert.equal(h.lookups.length, 0);
+  assert.equal(h.inserts.length, 0);
+  assert.equal(h.received.length, 0);
+});
+
 test('authenticated application webhooks ignore unrelated devices but reject partial identity matches', async () => {
   const ignored = harness({ async resolveIdentity() {
     return { ...binding, canonical_device_id: null, radio_identity_id: null };
