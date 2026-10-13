@@ -1,0 +1,56 @@
+{
+  "status": "PASS",
+  "source": "/Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/power-merge-audit-output",
+  "candidate": "/Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/footprint-freeze-trial",
+  "footprints": {
+    "C22": {
+      "old_id": "Capacitor_SMD:C_0402_1005Metric",
+      "new_id": "lib:Stratolink_v1p1_C22_C_0402_1005Metric",
+      "pad_count": 2,
+      "physical_geometry_sha256": "1929eee00a2fd30d5c439bded7ea081d3e98fff50777552cbd8050eeef2db921",
+      "library_sha256": "f6aa76de261a914823e3db8a937ec304354cdc044786ce012d421fe0b77cfcb2",
+      "native_library_matches": true
+    },
+    "R24": {
+      "old_id": "Resistor_SMD:R_0402_1005Metric",
+      "new_id": "lib:Stratolink_v1p1_R24_R_0402_1005Metric",
+      "pad_count": 2,
+      "physical_geometry_sha256": "f39b3bff4bfd753d7a72d53b4092c3ed43e09fc1d7bc23c1da409be34e9e9eca",
+      "library_sha256": "ef3c54e5c9b555107f736e2cab70274b7f28661e571f920870154d70ac84a3bc",
+      "native_library_matches": true
+    },
+    "R25": {
+      "old_id": "Resistor_SMD:R_0402_1005Metric",
+      "new_id": "lib:Stratolink_v1p1_R25_R_0402_1005Metric",
+      "pad_count": 2,
+      "physical_geometry_sha256": "f879946808ad8d70ab789d1b03fc700a11e39c232576bab3cef17acdf5c34c0b",
+      "library_sha256": "6eeeddf1a001e5f16fe8809288b2ad5e9d784c3e88d36469ac99d04f3f031da9",
+      "native_library_matches": true
+    },
+    "R26": {
+      "old_id": "Resistor_SMD:R_0402_1005Metric",
+      "new_id": "lib:Stratolink_v1p1_R26_R_0402_1005Metric",
+      "pad_count": 2,
+      "physical_geometry_sha256": "63af3c3df496c223ffee4918627c87a4b2e6dd715205291fc373f9dd3b89ca70",
+      "library_sha256": "cce1e1ac454d8ab140f8c849da82a231a2dcc85efac9556157e54c96cc4390d3",
+      "native_library_matches": true
+    },
+    "U8": {
+      "old_id": "Package_TO_SOT_SMD:SOT-23-5",
+      "new_id": "lib:Stratolink_v1p1_U8_SOT-23-5",
+      "pad_count": 5,
+      "physical_geometry_sha256": "7925ffdd5b2f391e7a3726d1d159aff79f3d89d9e822a2032bb7043e144fbd03",
+      "library_sha256": "eaf8ae08116eabc20bdae677f17d36490cc8c4ea0cad2e6d68eede5ce6abcbb9",
+      "native_library_matches": true
+    }
+  },
+  "pcb_physical_tree_identical": true,
+  "schematic_only_footprint_fields_changed": true,
+  "total_footprints": 66,
+  "total_pads": 245,
+  "input_pcb_sha256": "b5913a1dfec533ed6d7daedcb494780b2e216e34e7d06ffad3e8f71fdc0cc8eb",
+  "input_schematic_sha256": "4e0b4e2d12ac2c6f4644b5d4bc4027b3f5111ef539e3576b34e4d4beff678b24",
+  "pcb_sha256": "e165495878050d01fafbac605c2d782594c41d0921829d7b379924c2ff9b14f6",
+  "schematic_sha256": "60f9423e98dd3c1e6b26d8a8886c40e8ac5d609987ae7fe932ba87ac2c3c6243",
+  "thermal_manifest_sha256": null
+}

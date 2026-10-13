@@ -1,0 +1,443 @@
+{
+  "source": "/Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/identities/u7-candidate/stratolink.kicad_pcb",
+  "snapshot_pcb_sha256": "c1394009eb2475af2d5c7fa3e395328e724ea797f67bbecf74578fd57406e1ac",
+  "method": "KiCad native Gerber RoundRect aperture macros and U7-tagged flash centers, exact analytical round-rectangle area and perimeter",
+  "twelve_paste_apertures_match_twelve_copper_pads": true,
+  "linear_ratio": 0.9,
+  "area_ratio": 0.81,
+  "pads": [
+    {
+      "pin": "1",
+      "copper": {
+        "pin": "1",
+        "center_mm": [
+          69.798,
+          -38.571999
+        ],
+        "aperture_code": "22",
+        "width_mm": 0.35,
+        "height_mm": 0.44999999999999996,
+        "round_radius_mm": 0.0525,
+        "area_mm2": 0.15513401475145683,
+        "perimeter_mm": 1.5098672286269281
+      },
+      "paste": {
+        "pin": null,
+        "center_mm": [
+          69.798,
+          -38.571999
+        ],
+        "aperture_code": "17",
+        "width_mm": 0.315,
+        "height_mm": 0.405,
+        "round_radius_mm": 0.04725,
+        "area_mm2": 0.1256585519486801,
+        "perimeter_mm": 1.3588805057642352
+      },
+      "paste_to_copper_area": 0.8100000000000004,
+      "aperture_area_ratio_at_stencil_mm": {
+        "0.08": 1.1559014149482705,
+        "0.1": 0.9247211319586164,
+        "0.12": 0.7706009432988471,
+        "0.15": 0.6164807546390777
+      }
+    },
+    {
+      "pin": "2",
+      "copper": {
+        "pin": "2",
+        "center_mm": [
+          70.298,
+          -38.572
+        ],
+        "aperture_code": "22",
+        "width_mm": 0.35,
+        "height_mm": 0.44999999999999996,
+        "round_radius_mm": 0.0525,
+        "area_mm2": 0.15513401475145683,
+        "perimeter_mm": 1.5098672286269281
+      },
+      "paste": {
+        "pin": null,
+        "center_mm": [
+          70.298,
+          -38.572
+        ],
+        "aperture_code": "17",
+        "width_mm": 0.315,
+        "height_mm": 0.405,
+        "round_radius_mm": 0.04725,
+        "area_mm2": 0.1256585519486801,
+        "perimeter_mm": 1.3588805057642352
+      },
+      "paste_to_copper_area": 0.8100000000000004,
+      "aperture_area_ratio_at_stencil_mm": {
+        "0.08": 1.1559014149482705,
+        "0.1": 0.9247211319586164,
+        "0.12": 0.7706009432988471,
+        "0.15": 0.6164807546390777
+      }
+    },
+    {
+      "pin": "3",
+      "copper": {
+        "pin": "3",
+        "center_mm": [
+          70.798,
+          -38.572
+        ],
+        "aperture_code": "22",
+        "width_mm": 0.35,
+        "height_mm": 0.44999999999999996,
+        "round_radius_mm": 0.0525,
+        "area_mm2": 0.15513401475145683,
+        "perimeter_mm": 1.5098672286269281
+      },
+      "paste": {
+        "pin": null,
+        "center_mm": [
+          70.798,
+          -38.572
+        ],
+        "aperture_code": "17",
+        "width_mm": 0.315,
+        "height_mm": 0.405,
+        "round_radius_mm": 0.04725,
+        "area_mm2": 0.1256585519486801,
+        "perimeter_mm": 1.3588805057642352
+      },
+      "paste_to_copper_area": 0.8100000000000004,
+      "aperture_area_ratio_at_stencil_mm": {
+        "0.08": 1.1559014149482705,
+        "0.1": 0.9247211319586164,
+        "0.12": 0.7706009432988471,
+        "0.15": 0.6164807546390777
+      }
+    },
+    {
+      "pin": "4",
+      "copper": {
+        "pin": "4",
+        "center_mm": [
+          71.297999,
+          -38.572
+        ],
+        "aperture_code": "22",
+        "width_mm": 0.35,
+        "height_mm": 0.44999999999999996,
+        "round_radius_mm": 0.0525,
+        "area_mm2": 0.15513401475145683,
+        "perimeter_mm": 1.5098672286269281
+      },
+      "paste": {
+        "pin": null,
+        "center_mm": [
+          71.297999,
+          -38.572
+        ],
+        "aperture_code": "17",
+        "width_mm": 0.315,
+        "height_mm": 0.405,
+        "round_radius_mm": 0.04725,
+        "area_mm2": 0.1256585519486801,
+        "perimeter_mm": 1.3588805057642352
+      },
+      "paste_to_copper_area": 0.8100000000000004,
+      "aperture_area_ratio_at_stencil_mm": {
+        "0.08": 1.1559014149482705,
+        "0.1": 0.9247211319586164,
+        "0.12": 0.7706009432988471,
+        "0.15": 0.6164807546390777
+      }
+    },
+    {
+      "pin": "5",
+      "copper": {
+        "pin": "5",
+        "center_mm": [
+          71.313,
+          -38.072
+        ],
+        "aperture_code": "23",
+        "width_mm": 0.44999999999999996,
+        "height_mm": 0.35,
+        "round_radius_mm": 0.0525,
+        "area_mm2": 0.15513401475145683,
+        "perimeter_mm": 1.5098672286269281
+      },
+      "paste": {
+        "pin": null,
+        "center_mm": [
+          71.313,
+          -38.072
+        ],
+        "aperture_code": "18",
+        "width_mm": 0.405,
+        "height_mm": 0.315,
+        "round_radius_mm": 0.04725,
+        "area_mm2": 0.1256585519486801,
+        "perimeter_mm": 1.3588805057642352
+      },
+      "paste_to_copper_area": 0.8100000000000004,
+      "aperture_area_ratio_at_stencil_mm": {
+        "0.08": 1.1559014149482705,
+        "0.1": 0.9247211319586164,
+        "0.12": 0.7706009432988471,
+        "0.15": 0.6164807546390777
+      }
+    },
+    {
+      "pin": "6",
+      "copper": {
+        "pin": "6",
+        "center_mm": [
+          71.313,
+          -37.557
+        ],
+        "aperture_code": "23",
+        "width_mm": 0.44999999999999996,
+        "height_mm": 0.35,
+        "round_radius_mm": 0.0525,
+        "area_mm2": 0.15513401475145683,
+        "perimeter_mm": 1.5098672286269281
+      },
+      "paste": {
+        "pin": null,
+        "center_mm": [
+          71.313,
+          -37.557
+        ],
+        "aperture_code": "18",
+        "width_mm": 0.405,
+        "height_mm": 0.315,
+        "round_radius_mm": 0.04725,
+        "area_mm2": 0.1256585519486801,
+        "perimeter_mm": 1.3588805057642352
+      },
+      "paste_to_copper_area": 0.8100000000000004,
+      "aperture_area_ratio_at_stencil_mm": {
+        "0.08": 1.1559014149482705,
+        "0.1": 0.9247211319586164,
+        "0.12": 0.7706009432988471,
+        "0.15": 0.6164807546390777
+      }
+    },
+    {
+      "pin": "7",
+      "copper": {
+        "pin": "7",
+        "center_mm": [
+          71.298,
+          -37.042001
+        ],
+        "aperture_code": "22",
+        "width_mm": 0.35,
+        "height_mm": 0.44999999999999996,
+        "round_radius_mm": 0.0525,
+        "area_mm2": 0.15513401475145683,
+        "perimeter_mm": 1.5098672286269281
+      },
+      "paste": {
+        "pin": null,
+        "center_mm": [
+          71.298,
+          -37.042001
+        ],
+        "aperture_code": "17",
+        "width_mm": 0.315,
+        "height_mm": 0.405,
+        "round_radius_mm": 0.04725,
+        "area_mm2": 0.1256585519486801,
+        "perimeter_mm": 1.3588805057642352
+      },
+      "paste_to_copper_area": 0.8100000000000004,
+      "aperture_area_ratio_at_stencil_mm": {
+        "0.08": 1.1559014149482705,
+        "0.1": 0.9247211319586164,
+        "0.12": 0.7706009432988471,
+        "0.15": 0.6164807546390777
+      }
+    },
+    {
+      "pin": "8",
+      "copper": {
+        "pin": "8",
+        "center_mm": [
+          70.798,
+          -37.042
+        ],
+        "aperture_code": "22",
+        "width_mm": 0.35,
+        "height_mm": 0.44999999999999996,
+        "round_radius_mm": 0.0525,
+        "area_mm2": 0.15513401475145683,
+        "perimeter_mm": 1.5098672286269281
+      },
+      "paste": {
+        "pin": null,
+        "center_mm": [
+          70.798,
+          -37.042
+        ],
+        "aperture_code": "17",
+        "width_mm": 0.315,
+        "height_mm": 0.405,
+        "round_radius_mm": 0.04725,
+        "area_mm2": 0.1256585519486801,
+        "perimeter_mm": 1.3588805057642352
+      },
+      "paste_to_copper_area": 0.8100000000000004,
+      "aperture_area_ratio_at_stencil_mm": {
+        "0.08": 1.1559014149482705,
+        "0.1": 0.9247211319586164,
+        "0.12": 0.7706009432988471,
+        "0.15": 0.6164807546390777
+      }
+    },
+    {
+      "pin": "9",
+      "copper": {
+        "pin": "9",
+        "center_mm": [
+          70.298,
+          -37.042
+        ],
+        "aperture_code": "22",
+        "width_mm": 0.35,
+        "height_mm": 0.44999999999999996,
+        "round_radius_mm": 0.0525,
+        "area_mm2": 0.15513401475145683,
+        "perimeter_mm": 1.5098672286269281
+      },
+      "paste": {
+        "pin": null,
+        "center_mm": [
+          70.298,
+          -37.042
+        ],
+        "aperture_code": "17",
+        "width_mm": 0.315,
+        "height_mm": 0.405,
+        "round_radius_mm": 0.04725,
+        "area_mm2": 0.1256585519486801,
+        "perimeter_mm": 1.3588805057642352
+      },
+      "paste_to_copper_area": 0.8100000000000004,
+      "aperture_area_ratio_at_stencil_mm": {
+        "0.08": 1.1559014149482705,
+        "0.1": 0.9247211319586164,
+        "0.12": 0.7706009432988471,
+        "0.15": 0.6164807546390777
+      }
+    },
+    {
+      "pin": "10",
+      "copper": {
+        "pin": "10",
+        "center_mm": [
+          69.798001,
+          -37.042
+        ],
+        "aperture_code": "22",
+        "width_mm": 0.35,
+        "height_mm": 0.44999999999999996,
+        "round_radius_mm": 0.0525,
+        "area_mm2": 0.15513401475145683,
+        "perimeter_mm": 1.5098672286269281
+      },
+      "paste": {
+        "pin": null,
+        "center_mm": [
+          69.798001,
+          -37.042
+        ],
+        "aperture_code": "17",
+        "width_mm": 0.315,
+        "height_mm": 0.405,
+        "round_radius_mm": 0.04725,
+        "area_mm2": 0.1256585519486801,
+        "perimeter_mm": 1.3588805057642352
+      },
+      "paste_to_copper_area": 0.8100000000000004,
+      "aperture_area_ratio_at_stencil_mm": {
+        "0.08": 1.1559014149482705,
+        "0.1": 0.9247211319586164,
+        "0.12": 0.7706009432988471,
+        "0.15": 0.6164807546390777
+      }
+    },
+    {
+      "pin": "11",
+      "copper": {
+        "pin": "11",
+        "center_mm": [
+          69.783,
+          -37.557
+        ],
+        "aperture_code": "23",
+        "width_mm": 0.44999999999999996,
+        "height_mm": 0.35,
+        "round_radius_mm": 0.0525,
+        "area_mm2": 0.15513401475145683,
+        "perimeter_mm": 1.5098672286269281
+      },
+      "paste": {
+        "pin": null,
+        "center_mm": [
+          69.783,
+          -37.557
+        ],
+        "aperture_code": "18",
+        "width_mm": 0.405,
+        "height_mm": 0.315,
+        "round_radius_mm": 0.04725,
+        "area_mm2": 0.1256585519486801,
+        "perimeter_mm": 1.3588805057642352
+      },
+      "paste_to_copper_area": 0.8100000000000004,
+      "aperture_area_ratio_at_stencil_mm": {
+        "0.08": 1.1559014149482705,
+        "0.1": 0.9247211319586164,
+        "0.12": 0.7706009432988471,
+        "0.15": 0.6164807546390777
+      }
+    },
+    {
+      "pin": "12",
+      "copper": {
+        "pin": "12",
+        "center_mm": [
+          69.783,
+          -38.057
+        ],
+        "aperture_code": "23",
+        "width_mm": 0.44999999999999996,
+        "height_mm": 0.35,
+        "round_radius_mm": 0.0525,
+        "area_mm2": 0.15513401475145683,
+        "perimeter_mm": 1.5098672286269281
+      },
+      "paste": {
+        "pin": null,
+        "center_mm": [
+          69.783,
+          -38.057
+        ],
+        "aperture_code": "18",
+        "width_mm": 0.405,
+        "height_mm": 0.315,
+        "round_radius_mm": 0.04725,
+        "area_mm2": 0.1256585519486801,
+        "perimeter_mm": 1.3588805057642352
+      },
+      "paste_to_copper_area": 0.8100000000000004,
+      "aperture_area_ratio_at_stencil_mm": {
+        "0.08": 1.1559014149482705,
+        "0.1": 0.9247211319586164,
+        "0.12": 0.7706009432988471,
+        "0.15": 0.6164807546390777
+      }
+    }
+  ],
+  "process_limit": "These area ratios are geometric screening only; stencil thickness/reduction and bare-board printing require supplier process review. No global reduction was applied."
+}

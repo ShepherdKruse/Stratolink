@@ -1,0 +1,10 @@
+{
+  "candidate": "/Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/identities/metadata-candidate",
+  "output": "/Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/manufacturing-trial-2",
+  "pcb_sha256": "4d2e92f11d8f9164dfe0600c1dd1b72469ce6cc4fcc4ab0568df5c3312abf041",
+  "generator_sha256": "5fde5af3ed11f5af8fee893fda6cac757d2bf5b1270a092f7b8876daf09deb72",
+  "assembly_count": 51,
+  "exclusion_count": 10,
+  "source_unchanged": true,
+  "manifest_sha256": "6c6ac91708d04c3e600806be93f97b07f247ad7ee874d048e6d04ffeb82e45ec"
+}

@@ -1,0 +1,537 @@
+(footprint "Stratolink_v1p1_U2_RAK3172"
+	(version 20260206)
+	(generator "pcbnew")
+	(generator_version "10.0")
+	(layer "F.Cu")
+	(descr "RAK4260 LoRaWAN module from RAKwireless.")
+	(property "Reference" "U2"
+		(at 0 0 180)
+		(layer "F.SilkS")
+		(hide yes)
+		(uuid "6c6f2a33-5278-419a-aaaf-6a520958a57c")
+		(effects
+			(font
+				(size 0.787402 0.787402)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Value" "RAK3172-9-SM-NI"
+		(at 0 0 180)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "1a91362f-b14c-4684-a59d-df0b93775b31")
+		(effects
+			(font
+				(size 0.787402 0.787402)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Datasheet" ""
+		(at 0 0 180)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "684b0230-f8bb-4f9c-8fa7-a3d46249a863")
+		(effects
+			(font
+				(size 1.27 1.27)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Description" "RAK3172-9-SM-NI sub-GHz STM32WLE5CC radio module"
+		(at 0 0 180)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "1f5124d2-157f-49f2-836c-5a024c4efb31")
+		(effects
+			(font
+				(size 1.27 1.27)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "MF" "Shenzhen RAKwireless Technology Co.,Ltd."
+		(at 0 0 0)
+		(unlocked yes)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "42be41b4-0b72-4f8f-9029-1a4c5f375bed")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "DESCRIPTION" "RAK3172-9-SM-NI sub-GHz STM32WLE5CC radio module"
+		(at 0 0 0)
+		(unlocked yes)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "bbd74bb8-b86a-474b-938d-6ec1f68912e0")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "PACKAGE" "Package"
+		(at 0 0 0)
+		(unlocked yes)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "f5fe95de-e863-4aa1-b0a0-2ea0554939c9")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "PRICE" "None"
+		(at 0 0 0)
+		(unlocked yes)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "829afce7-cd99-4d46-a3a3-0df6175ff2a6")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Package" "Package"
+		(at 0 0 0)
+		(unlocked yes)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "e58bb181-7914-4d16-9528-0989874d2d29")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Check_prices" "https://www.snapeda.com/parts/RAK3172/Shenzhen+RAKwireless+Technology+Co.%252CLtd./view-part/?ref=eda"
+		(at 0 0 0)
+		(unlocked yes)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "aebaeea0-42f4-4ef1-839f-e9f760e406f0")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "SnapEDA_Link" "https://www.snapeda.com/parts/RAK3172/Shenzhen+RAKwireless+Technology+Co.%252CLtd./view-part/?ref=snap"
+		(at 0 0 0)
+		(unlocked yes)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "2388057f-0655-4f61-b155-b85601d5bfd8")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Price" "None"
+		(at 0 0 0)
+		(unlocked yes)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "92a6ea2b-21b5-48b0-8c24-41eaa9ca3fad")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "SNAPEDA_LINK" "https://www.snapeda.com/parts/RAK3172/Shenzhen+RAKwireless+Technology+Co.%252CLtd./view-part/?ref=snap"
+		(at 0 0 0)
+		(unlocked yes)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "48740832-4932-43e1-a1b4-8b6bd90499ca")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "MP" "RAK3172-9-SM-NI"
+		(at 0 0 0)
+		(unlocked yes)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "68fe7dc0-188e-48a0-a77c-87f53bc2dad6")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Description_1" "RAK3172-9-SM-NI sub-GHz STM32WLE5CC radio module"
+		(at 0 0 0)
+		(unlocked yes)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "b38de29b-0a3a-489a-80dc-ef92acad2611")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Availability" "Not in stock"
+		(at 0 0 0)
+		(unlocked yes)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "9dc669ee-916d-4abb-8cdc-699c8082d57b")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "AVAILABILITY" "Not in stock"
+		(at 0 0 0)
+		(unlocked yes)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "a44cb83e-cbf3-472c-ac45-ec66444a67da")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "CHECK_PRICES" "https://www.snapeda.com/parts/RAK3172/Shenzhen+RAKwireless+Technology+Co.%252CLtd./view-part/?ref=eda"
+		(at 0 0 0)
+		(unlocked yes)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "9f66b4bc-2dca-4ce9-b440-410cfbf6e537")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Manufacturer" "RAKwireless"
+		(at 0 0 180)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "5652f7da-5f99-4a78-925d-5d6213053721")
+		(effects
+			(font
+				(size 1.27 1.27)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Manufacturer_Part_Number" "RAK3172-9-SM-NI"
+		(at 0 0 180)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "e32fd91d-0308-4809-b970-cea009c5a301")
+		(effects
+			(font
+				(size 1.27 1.27)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Supplier" "LCSC"
+		(at 0 0 180)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "cdd768cc-a001-4a8f-a9c6-dd112793e6bc")
+		(effects
+			(font
+				(size 1.27 1.27)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "LCSC" "C18548052"
+		(at 0 0 180)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "7e22ede9-0450-4d95-8335-ac5d425c2bc7")
+		(effects
+			(font
+				(size 1.27 1.27)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Supplier Part" "C18548052"
+		(at 0 0 180)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "d6f09a62-4d27-4744-8257-13317a9178da")
+		(effects
+			(font
+				(size 1.27 1.27)
+				(thickness 0.15)
+			)
+		)
+	)
+	(sheetname "Root")
+	(sheetfile "stratolink.kicad_sch")
+	(attr smd)
+	(duplicate_pad_numbers_are_jumpers no)
+	(pad "1" smd rect
+		(at 13.5 -14.945)
+		(size 0.7 1.8)
+		(layers "F.Cu" "F.Mask" "F.Paste")
+		(solder_mask_margin 0.102)
+		(uuid "5db1d9d4-3f86-47bd-95f1-087a54df2128")
+	)
+	(pad "2" smd rect
+		(at 12.499999 -14.945001)
+		(size 0.7 1.8)
+		(layers "F.Cu" "F.Mask" "F.Paste")
+		(solder_mask_margin 0.102)
+		(uuid "3285bc63-4a67-4833-8922-36623bd05508")
+	)
+	(pad "3" smd rect
+		(at 11.5 -14.945)
+		(size 0.7 1.8)
+		(layers "F.Cu" "F.Mask" "F.Paste")
+		(solder_mask_margin 0.102)
+		(uuid "cb17c86a-d296-4123-bcd7-329fdf446e85")
+	)
+	(pad "4" smd rect
+		(at 10.5 -14.945)
+		(size 0.7 1.8)
+		(layers "F.Cu" "F.Mask" "F.Paste")
+		(solder_mask_margin 0.102)
+		(uuid "4dc2f9c5-3742-419b-a041-675366a7779b")
+	)
+	(pad "5" smd rect
+		(at 9.5 -14.945)
+		(size 0.7 1.8)
+		(layers "F.Cu" "F.Mask" "F.Paste")
+		(solder_mask_margin 0.102)
+		(uuid "51fc3f4a-61c6-49bc-a46e-c642b690de64")
+	)
+	(pad "6" smd rect
+		(at 8.5 -14.945)
+		(size 0.7 1.8)
+		(layers "F.Cu" "F.Mask" "F.Paste")
+		(solder_mask_margin 0.102)
+		(uuid "ecc3f687-4bcd-4c86-baf3-e2653ece1dcc")
+	)
+	(pad "7" smd rect
+		(at 7.500001 -14.944999)
+		(size 0.7 1.8)
+		(layers "F.Cu" "F.Mask" "F.Paste")
+		(solder_mask_margin 0.102)
+		(uuid "61fbd83f-683a-445d-a878-73e71d2bec85")
+	)
+	(pad "8" smd rect
+		(at 6.500001 -14.945001)
+		(size 0.7 1.8)
+		(layers "F.Cu" "F.Mask" "F.Paste")
+		(solder_mask_margin 0.102)
+		(uuid "9a2e31df-4e43-43ee-92d4-2d246dbe83b8")
+	)
+	(pad "9" smd rect
+		(at 5.5 -14.944999)
+		(size 0.7 1.8)
+		(layers "F.Cu" "F.Mask" "F.Paste")
+		(solder_mask_margin 0.102)
+		(uuid "6fc29875-1357-43d9-a534-2a4a5042c1bb")
+	)
+	(pad "10" smd rect
+		(at 4.5 -14.945)
+		(size 0.7 1.8)
+		(layers "F.Cu" "F.Mask" "F.Paste")
+		(solder_mask_margin 0.102)
+		(uuid "8d1b2ee4-899c-422c-b485-ab40b980e038")
+	)
+	(pad "11" smd rect
+		(at 3.499998 -14.945001)
+		(size 0.7 1.8)
+		(layers "F.Cu" "F.Mask" "F.Paste")
+		(solder_mask_margin 0.102)
+		(uuid "13e458aa-bc78-49fa-9eba-95dfeeb07c95")
+	)
+	(pad "12" smd rect
+		(at 2.5 -14.945)
+		(size 0.7 1.8)
+		(layers "F.Cu" "F.Mask" "F.Paste")
+		(solder_mask_margin 0.102)
+		(uuid "71eae4e1-2978-4e0a-bf77-c90bdf2755c0")
+	)
+	(pad "13" smd rect
+		(at 0.364999 -6.989999)
+		(size 1.8 0.7)
+		(layers "F.Cu" "F.Mask" "F.Paste")
+		(solder_mask_margin 0.102)
+		(uuid "6d448f4c-7399-4c33-b8ae-7f0d13cfa259")
+	)
+	(pad "14" smd rect
+		(at 0.365 -5.99)
+		(size 1.8 0.7)
+		(layers "F.Cu" "F.Mask" "F.Paste")
+		(solder_mask_margin 0.102)
+		(uuid "7964a6f3-1775-4f1a-9903-9fd91cfae5df")
+	)
+	(pad "15" smd rect
+		(at 0.365002 -4.99)
+		(size 1.8 0.7)
+		(layers "F.Cu" "F.Mask" "F.Paste")
+		(solder_mask_margin 0.102)
+		(uuid "e057c65f-f96c-447a-b362-d1f8e4bf54a8")
+	)
+	(pad "16" smd rect
+		(at 0.365 -3.99)
+		(size 1.8 0.7)
+		(layers "F.Cu" "F.Mask" "F.Paste")
+		(solder_mask_margin 0.102)
+		(uuid "bb6e8e52-95e7-46df-83f7-265c4c74cdf5")
+	)
+	(pad "17" smd rect
+		(at 2.5 -0.144999)
+		(size 0.7 1.8)
+		(layers "F.Cu" "F.Mask" "F.Paste")
+		(solder_mask_margin 0.102)
+		(uuid "b1f33f4d-c83f-4064-b1a4-440a5efa3f0c")
+	)
+	(pad "18" smd rect
+		(at 3.5 -0.145001)
+		(size 0.7 1.8)
+		(layers "F.Cu" "F.Mask" "F.Paste")
+		(solder_mask_margin 0.102)
+		(uuid "bd53e3f5-b5fe-4adb-b734-d553c41fce0c")
+	)
+	(pad "19" smd rect
+		(at 4.5 -0.145)
+		(size 0.7 1.8)
+		(layers "F.Cu" "F.Mask" "F.Paste")
+		(solder_mask_margin 0.102)
+		(uuid "a6004df0-70e7-43e7-8bd1-a5260d89ac74")
+	)
+	(pad "20" smd rect
+		(at 9.5 -0.145)
+		(size 0.7 1.8)
+		(layers "F.Cu" "F.Mask" "F.Paste")
+		(solder_mask_margin 0.102)
+		(uuid "7dfd8fb6-8f89-4795-851c-d0794dad6906")
+	)
+	(pad "21" smd rect
+		(at 10.500001 -0.145)
+		(size 0.7 1.8)
+		(layers "F.Cu" "F.Mask" "F.Paste")
+		(solder_mask_margin 0.102)
+		(uuid "ea60aba1-1cce-4301-b0b8-129a95a19759")
+	)
+	(pad "22" smd rect
+		(at 11.5 -0.145)
+		(size 0.7 1.8)
+		(layers "F.Cu" "F.Mask" "F.Paste")
+		(solder_mask_margin 0.102)
+		(uuid "a80b9ec6-902f-441e-b369-13658560184c")
+	)
+	(pad "23" smd rect
+		(at 12.5 -0.145)
+		(size 0.7 1.8)
+		(layers "F.Cu" "F.Mask" "F.Paste")
+		(solder_mask_margin 0.102)
+		(uuid "0e60dd9c-fcd9-435c-9da8-d5ecaf59ec10")
+	)
+	(pad "24" smd rect
+		(at 13.5 -0.145)
+		(size 0.7 1.8)
+		(layers "F.Cu" "F.Mask" "F.Paste")
+		(solder_mask_margin 0.102)
+		(uuid "94a3859f-ae16-4ff0-b7b9-d830670aa6eb")
+	)
+	(pad "25" smd rect
+		(at 15.165001 -3.990001)
+		(size 1.8 0.7)
+		(layers "F.Cu" "F.Mask" "F.Paste")
+		(solder_mask_margin 0.102)
+		(uuid "8763f83a-bd86-49a2-a881-6af1cc1bb4db")
+	)
+	(pad "26" smd rect
+		(at 15.165 -4.989999)
+		(size 1.8 0.7)
+		(layers "F.Cu" "F.Mask" "F.Paste")
+		(solder_mask_margin 0.102)
+		(uuid "df39ddf5-1f14-4c95-8ec1-a0f5a704e259")
+	)
+	(pad "27" smd rect
+		(at 15.165001 -5.990001)
+		(size 1.8 0.7)
+		(layers "F.Cu" "F.Mask" "F.Paste")
+		(solder_mask_margin 0.102)
+		(uuid "a5aa1a4a-bd4a-4d8c-8244-812fea61fed0")
+	)
+	(pad "28" smd rect
+		(at 15.165001 -6.990001)
+		(size 1.8 0.7)
+		(layers "F.Cu" "F.Mask" "F.Paste")
+		(solder_mask_margin 0.102)
+		(uuid "728aca71-9654-48d3-98d7-3ef58aff0ee4")
+	)
+	(pad "29" smd rect
+		(at 15.165 -7.990002)
+		(size 1.8 0.7)
+		(layers "F.Cu" "F.Mask" "F.Paste")
+		(solder_mask_margin 0.102)
+		(uuid "87dcf9eb-67e0-447e-844a-a4a764517b19")
+	)
+	(pad "30" smd rect
+		(at 15.165 -8.99)
+		(size 1.8 0.7)
+		(layers "F.Cu" "F.Mask" "F.Paste")
+		(solder_mask_margin 0.102)
+		(uuid "176d7e39-5762-413f-8729-8fdd8deb66c5")
+	)
+	(pad "31" smd rect
+		(at 15.165 -9.99)
+		(size 1.8 0.7)
+		(layers "F.Cu" "F.Mask" "F.Paste")
+		(solder_mask_margin 0.102)
+		(uuid "3896263e-bea4-455d-8706-423dae2a2da1")
+	)
+	(pad "32" smd rect
+		(at 15.164999 -10.989999)
+		(size 1.8 0.7)
+		(layers "F.Cu" "F.Mask" "F.Paste")
+		(solder_mask_margin 0.102)
+		(uuid "3229d9ef-058c-4af8-aab0-b63eb96bbe9d")
+	)
+	(embedded_fonts no)
+	(model "${KIPRJMOD}/lib/RAK3172.step"
+		(offset
+			(xyz 15.5 0 1)
+		)
+		(scale
+			(xyz 1 1 1)
+		)
+		(rotate
+			(xyz 0 0 -90)
+		)
+	)
+)

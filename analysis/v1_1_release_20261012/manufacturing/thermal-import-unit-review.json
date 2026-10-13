@@ -1,0 +1,12 @@
+{
+  "D3": {
+    "target_geometry_preserved": true,
+    "wrong_thermal_rejected": true,
+    "pad_uuid": "390842f8-d9d4-4229-8ca4-a68fac8e12f8"
+  },
+  "J4": {
+    "target_geometry_preserved": true,
+    "wrong_thermal_rejected": true,
+    "pad_uuid": "0650b567-d648-499e-addc-ea01fac7e599"
+  }
+}

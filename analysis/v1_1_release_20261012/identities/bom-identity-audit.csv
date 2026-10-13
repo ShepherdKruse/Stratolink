@@ -1,0 +1,54 @@
+Reference,Manufacturer part number,Supplier part,Manufacturer,Footprint,Selection evidence
+C1,GRM1555C1E103JE01D,C3855387,Murata,lib:Stratolink_v1p1_C1_C_0402_1005Metric,JLC previous selected-parts capture
+C10,CL05B104KO5NNNC,C1525,Samsung Electro-Mechanics,lib:Stratolink_v1p1_C10_C_0402_1005Metric,JLC previous selected-parts capture
+C11,CL05B104KO5NNNC,C1525,Samsung Electro-Mechanics,lib:Stratolink_v1p1_C11_C_0402_1005Metric,JLC previous selected-parts capture
+C12,CL05B104KO5NNNC,C1525,Samsung Electro-Mechanics,lib:Stratolink_v1p1_C12_C_0402_1005Metric,JLC previous selected-parts capture
+C14,CL05B104KO5NNNC,C1525,Samsung Electro-Mechanics,lib:Stratolink_v1p1_C14_C_0402_1005Metric,JLC previous selected-parts capture
+C15,CL05B104KO5NNNC,C1525,Samsung Electro-Mechanics,lib:Stratolink_v1p1_C15_C_0402_1005Metric,JLC previous selected-parts capture
+C16,CL10A475KP8NNNC,C1705,Samsung Electro-Mechanics,lib:Stratolink_v1p1_C16_C_0603_1608Metric,JLC previous selected-parts capture
+C17,CL05B104KO5NNNC,C1525,Samsung Electro-Mechanics,lib:Stratolink_v1p1_C17_C_0402_1005Metric,JLC previous selected-parts capture
+C19,CL05B104KO5NNNC,C1525,Samsung Electro-Mechanics,lib:Stratolink_v1p1_C19_C_0402_1005Metric,JLC previous selected-parts capture
+C2,CL10A475KP8NNNC,C1705,Samsung Electro-Mechanics,lib:Stratolink_v1p1_C2_C_0603_1608Metric,JLC previous selected-parts capture
+C20,CL05B104KO5NNNC,C1525,Samsung Electro-Mechanics,lib:Stratolink_v1p1_C20_C_0402_1005Metric,JLC previous selected-parts capture
+C21,CL10A106KP8NNNC,C19702,Samsung Electro-Mechanics,lib:Stratolink_v1p1_C21_C_0603_1608Metric,JLC previous selected-parts capture
+C3,CL10A475KP8NNNC,C1705,Samsung Electro-Mechanics,lib:Stratolink_v1p1_C3_C_0603_1608Metric,JLC previous selected-parts capture
+C4,CL05B104KO5NNNC,C1525,Samsung Electro-Mechanics,lib:Stratolink_v1p1_C4_C_0402_1005Metric,JLC previous selected-parts capture
+C5,DMF4B5R5G105M3DTA0,,CAP-XX / legacy Murata,lib:Stratolink_v1p1_C5_DMF4B5R5G105M3DTA0,Manual assembly / local geometry
+C6,CL21A226MAYNNNE,C602037,Samsung Electro-Mechanics,lib:Stratolink_v1p1_C6_C_0805_2012Metric,JLC previous selected-parts capture
+C7,CL05B104KO5NNNC,C1525,Samsung Electro-Mechanics,lib:Stratolink_v1p1_C7_C_0402_1005Metric,JLC previous selected-parts capture
+C8,CL10A106KP8NNNC,C19702,Samsung Electro-Mechanics,lib:Stratolink_v1p1_C8_C_0603_1608Metric,JLC previous selected-parts capture
+C9,CL05B104KO5NNNC,C1525,Samsung Electro-Mechanics,lib:Stratolink_v1p1_C9_C_0402_1005Metric,JLC previous selected-parts capture
+D1,PESD5V0U1BB,C5272735,Leiditech,lib:Stratolink_v1p1_D1_D_SOD-523,JLC previous selected-parts capture
+D3,PESD5V0U1BB,C5272735,Leiditech,lib:Stratolink_v1p1_D3_D_SOD-523,JLC previous selected-parts capture
+FB1,BLM15AG601SN1D,C76884,Murata,lib:Stratolink_v1p1_FB1_C_0402_1005Metric,JLC previous selected-parts capture
+J20,,,,lib:Stratolink_v1p1_J20_Tag-Connect_TC2030-IDC-NL_2x03_P1.27mm_Vertical,Manual assembly / local geometry
+L1,LPS4018-223MRC,C5278935,Coilcraft,lib:Stratolink_v1p1_L1_IND_LPS4018-223MRC,JLC previous selected-parts capture
+L2,PWCWAQ1608F-100KTT,C436784,PROD Tech,unchanged,JLC previous selected-parts capture
+R1,0402WGF8254TCE,C423131,UNI-ROYAL,lib:Stratolink_v1p1_R1_R_0402_1005Metric,JLC previous selected-parts capture
+R10,RC0402FR-0710KL,C60490,Yageo,lib:Stratolink_v1p1_R10_R_0402_1005Metric,JLC previous selected-parts capture
+R11,RC0402FR-074K7L,C105871,Yageo,lib:Stratolink_v1p1_R11_R_0402_1005Metric,JLC previous selected-parts capture
+R12,RC0402FR-074K7L,C105871,Yageo,lib:Stratolink_v1p1_R12_R_0402_1005Metric,JLC previous selected-parts capture
+R13,RC0402FR-070RL,C106231,Yageo,lib:Stratolink_v1p1_R13_R_0402_1005Metric,JLC previous selected-parts capture
+R14,RC0402FR-070RL,C106231,Yageo,lib:Stratolink_v1p1_R14_R_0402_1005Metric,JLC previous selected-parts capture
+R15,RC0402FR-0733RL,C138002,Yageo,lib:Stratolink_v1p1_R15_R_0402_1005Metric,JLC previous selected-parts capture
+R16,RC0402FR-0733RL,C138002,Yageo,lib:Stratolink_v1p1_R16_R_0402_1005Metric,JLC previous selected-parts capture
+R18,RC0402FR-0710KL,C60490,Yageo,lib:Stratolink_v1p1_R18_R_0402_1005Metric,JLC previous selected-parts capture
+R19,RC0402FR-071ML,C138033,Yageo,lib:Stratolink_v1p1_R19_R_0402_1005Metric,JLC previous selected-parts capture
+R2,CRCW04024M22FKED,C2091474,Vishay,lib:Stratolink_v1p1_R2_R_0402_1005Metric,JLC previous selected-parts capture
+R21,RC0402FR-071ML,C138033,Yageo,lib:Stratolink_v1p1_R21_R_0402_1005Metric,JLC previous selected-parts capture
+R22,RC0402FR-071ML,C138033,Yageo,lib:Stratolink_v1p1_R22_R_0402_1005Metric,JLC previous selected-parts capture
+R23,RC0402FR-071ML,C138033,Yageo,lib:Stratolink_v1p1_R23_R_0402_1005Metric,JLC previous selected-parts capture
+R3,FRC0402F4754TS,C2998153,,lib:Stratolink_v1p1_R3_R_0402_1005Metric,JLC previous selected-parts capture
+R4,0402WGF3654TCE,C2766827,UNI-ROYAL,lib:Stratolink_v1p1_R4_R_0402_1005Metric,JLC previous selected-parts capture
+R5,GR0402F4M42TAG00,C49654874,,lib:Stratolink_v1p1_R5_R_0402_1005Metric,JLC previous selected-parts capture
+R6,0402WGF8254TCE,C423131,UNI-ROYAL,lib:Stratolink_v1p1_R6_R_0402_1005Metric,JLC previous selected-parts capture
+R7,FRC0402F4754TS,C2998153,,lib:Stratolink_v1p1_R7_R_0402_1005Metric,JLC previous selected-parts capture
+R8,RC0402FR-07100KL,C60491,Yageo,lib:Stratolink_v1p1_R8_R_0402_1005Metric,JLC previous selected-parts capture
+R9,RC0402FR-070RL,C106231,Yageo,lib:Stratolink_v1p1_R9_R_0402_1005Metric,JLC previous selected-parts capture
+U1,BQ25570RGRR,C506250,Texas Instruments,lib:Stratolink_v1p1_U1_QFN50P350X350X100-21N,JLC previous selected-parts capture
+U2,RAK3172-9-SM-NI,C18548052,RAKwireless,lib:Stratolink_v1p1_U2_RAK3172,JLC previous selected-parts capture
+U3,MAX-M10S-00B,C4153167,u-blox,lib:Stratolink_v1p1_U3_XCVR_MAX-M10S-00B,JLC previous selected-parts capture
+U4,MS561101BA03-50,C15639,TE Connectivity,lib:Stratolink_v1p1_U4_SON125P500X300X100-8N,JLC previous selected-parts capture
+U5,TMP117AIYBGR,C2871893,Texas Instruments,lib:Stratolink_v1p1_U5_BGA6N40P3X2_148X95X53,JLC previous selected-parts capture
+U6,LTR-390UV-01,C492374,Lite-On,lib:Stratolink_v1p1_U6_SMD6_LTR-390UV-01_LTO-L,JLC previous selected-parts capture
+U7,LIS2DH12TR,C110926,STMicroelectronics,lib:Stratolink_v1p1_U7_PQFN50P200X200100-12N,JLC previous selected-parts capture

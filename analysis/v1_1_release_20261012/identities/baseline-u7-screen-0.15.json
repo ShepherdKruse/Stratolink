@@ -1,0 +1,490 @@
+{
+    "$schema": "https://schemas.kicad.org/drc.v1.json",
+    "coordinate_units": "mm",
+    "date": "2026-10-12T20:19:58",
+    "ignored_checks": [
+        {
+            "description": "Annular width",
+            "key": "annular_width"
+        },
+        {
+            "description": "Footprint has no courtyard defined",
+            "key": "missing_courtyard"
+        },
+        {
+            "description": "Solder mask aperture bridges items with different nets",
+            "key": "solder_mask_bridge"
+        },
+        {
+            "description": "Track endpoint not centered on via",
+            "key": "track_not_centered_on_via"
+        },
+        {
+            "description": "Tuning profile track geometries",
+            "key": "tuning_profile_track_geometries"
+        },
+        {
+            "description": "Footprint doesn't match symbol's footprint filters",
+            "key": "footprint_filters_mismatch"
+        },
+        {
+            "description": "PTH inside courtyard",
+            "key": "pth_inside_courtyard"
+        },
+        {
+            "description": "NPTH inside courtyard",
+            "key": "npth_inside_courtyard"
+        },
+        {
+            "description": "Footprint component type doesn't match footprint pads",
+            "key": "footprint_type_mismatch"
+        }
+    ],
+    "included_severities": [
+        "error",
+        "warning"
+    ],
+    "kicad_version": "10.0.0",
+    "schematic_parity": [],
+    "source": "stratolink.kicad_pcb",
+    "unconnected_items": [],
+    "violations": [
+        {
+            "description": "Clearance violation ( clearance 0.1500 mm; actual 0.1470 mm)",
+            "items": [
+                {
+                    "description": "Pad 2 [GND] of R23 on F.Cu",
+                    "pos": {
+                        "x": 55.692,
+                        "y": 65.683998
+                    },
+                    "uuid": "097416f6-1af1-43ca-99e0-2cf2e58f9fb2"
+                },
+                {
+                    "description": "Track [VSTOR] on F.Cu, length 1.0424 mm",
+                    "pos": {
+                        "x": 55.278848,
+                        "y": 66.201
+                    },
+                    "uuid": "2c62792d-6295-4c2c-bd6f-a6d6829e607e"
+                }
+            ],
+            "severity": "error",
+            "type": "clearance"
+        },
+        {
+            "description": "Clearance violation ( clearance 0.1500 mm; actual 0.1150 mm)",
+            "items": [
+                {
+                    "description": "Pad 1 [SCL] of U7 on F.Cu",
+                    "pos": {
+                        "x": 69.798,
+                        "y": 38.571999
+                    },
+                    "uuid": "c15edda3-911a-44fe-9d0e-b38bf0e5970f"
+                },
+                {
+                    "description": "Pad 12 [PA8] of U7 on F.Cu",
+                    "pos": {
+                        "x": 69.783,
+                        "y": 38.057
+                    },
+                    "uuid": "10c617de-60db-4459-85dc-c4e27f639bb8"
+                }
+            ],
+            "severity": "error",
+            "type": "clearance"
+        },
+        {
+            "description": "Clearance violation ( clearance 0.1500 mm; actual 0.1200 mm)",
+            "items": [
+                {
+                    "description": "PTH pad 1 [PA1] of J3",
+                    "pos": {
+                        "x": 54.444998,
+                        "y": 69.173998
+                    },
+                    "uuid": "9e1e972e-d661-4acc-91bc-aaa44d6689d4"
+                },
+                {
+                    "description": "PTH pad 2 [GND] of J3",
+                    "pos": {
+                        "x": 54.444998,
+                        "y": 70.173999
+                    },
+                    "uuid": "ee2785a4-1245-43e1-83e8-fa4973870f0b"
+                }
+            ],
+            "severity": "error",
+            "type": "clearance"
+        },
+        {
+            "description": "Clearance violation ( clearance 0.1500 mm; actual 0.1200 mm)",
+            "items": [
+                {
+                    "description": "PTH pad 2 [GND] of J3",
+                    "pos": {
+                        "x": 54.444998,
+                        "y": 70.173999
+                    },
+                    "uuid": "ee2785a4-1245-43e1-83e8-fa4973870f0b"
+                },
+                {
+                    "description": "PTH pad 3 [PA9] of J3",
+                    "pos": {
+                        "x": 54.444999,
+                        "y": 71.174001
+                    },
+                    "uuid": "78db17b2-2f62-4a45-adfd-0e17aa75a498"
+                }
+            ],
+            "severity": "error",
+            "type": "clearance"
+        },
+        {
+            "description": "Clearance violation ( clearance 0.1500 mm; actual 0.1200 mm)",
+            "items": [
+                {
+                    "description": "PTH pad 3 [PA9] of J3",
+                    "pos": {
+                        "x": 54.444999,
+                        "y": 71.174001
+                    },
+                    "uuid": "78db17b2-2f62-4a45-adfd-0e17aa75a498"
+                },
+                {
+                    "description": "PTH pad 4 [GND] of J3",
+                    "pos": {
+                        "x": 54.445,
+                        "y": 72.174
+                    },
+                    "uuid": "1a982502-40db-4b68-bfea-018025c9e930"
+                }
+            ],
+            "severity": "error",
+            "type": "clearance"
+        },
+        {
+            "description": "Clearance violation ( clearance 0.1500 mm; actual 0.1000 mm)",
+            "items": [
+                {
+                    "description": "Pad 4 [SDA] of U7 on F.Cu",
+                    "pos": {
+                        "x": 71.297999,
+                        "y": 38.572
+                    },
+                    "uuid": "97e63275-6524-4b0c-aa59-358be4aa2e66"
+                },
+                {
+                    "description": "Pad 5 [GND] of U7 on F.Cu",
+                    "pos": {
+                        "x": 71.313,
+                        "y": 38.072
+                    },
+                    "uuid": "885f4db5-7a9b-4845-9096-ed56c7826b71"
+                }
+            ],
+            "severity": "error",
+            "type": "clearance"
+        },
+        {
+            "description": "Clearance violation ( clearance 0.1500 mm; actual 0.1200 mm)",
+            "items": [
+                {
+                    "description": "PTH pad 5 [GND] of J3",
+                    "pos": {
+                        "x": 54.444998,
+                        "y": 73.173998
+                    },
+                    "uuid": "18b55959-0e81-4b52-8da7-0494f5bc61f2"
+                },
+                {
+                    "description": "PTH pad 6 [PB2] of J3",
+                    "pos": {
+                        "x": 54.444998,
+                        "y": 74.173998
+                    },
+                    "uuid": "7ae1aaaa-f303-4441-9163-758b71841e0e"
+                }
+            ],
+            "severity": "error",
+            "type": "clearance"
+        },
+        {
+            "description": "Clearance violation ( clearance 0.1500 mm; actual 0.1200 mm)",
+            "items": [
+                {
+                    "description": "PTH pad 6 [PB2] of J3",
+                    "pos": {
+                        "x": 54.444998,
+                        "y": 74.173998
+                    },
+                    "uuid": "7ae1aaaa-f303-4441-9163-758b71841e0e"
+                },
+                {
+                    "description": "PTH pad 7 [GND] of J3",
+                    "pos": {
+                        "x": 54.444998,
+                        "y": 75.173998
+                    },
+                    "uuid": "06e03c7f-5890-410b-8cd8-b2f017358ea9"
+                }
+            ],
+            "severity": "error",
+            "type": "clearance"
+        },
+        {
+            "description": "Clearance violation ( clearance 0.1500 mm; actual 0.1150 mm)",
+            "items": [
+                {
+                    "description": "Pad 10 [+3.3V] of U7 on F.Cu",
+                    "pos": {
+                        "x": 69.798001,
+                        "y": 37.042
+                    },
+                    "uuid": "8354534f-c9fa-4833-8f1c-d92a8d313fe9"
+                },
+                {
+                    "description": "Pad 11 [unconnected-(U7-INT2-Pad11)] of U7 on F.Cu",
+                    "pos": {
+                        "x": 69.783,
+                        "y": 37.557
+                    },
+                    "uuid": "5059cf4f-a448-4344-a737-e6ab6c06719b"
+                }
+            ],
+            "severity": "error",
+            "type": "clearance"
+        },
+        {
+            "description": "Clearance violation ( clearance 0.1500 mm; actual 0.1200 mm)",
+            "items": [
+                {
+                    "description": "PTH pad 1 [GND] of J4",
+                    "pos": {
+                        "x": 75.531,
+                        "y": 69.158
+                    },
+                    "uuid": "0650b567-d648-499e-addc-ea01fac7e599"
+                },
+                {
+                    "description": "PTH pad 2 [VSTOR] of J4",
+                    "pos": {
+                        "x": 75.531,
+                        "y": 70.158
+                    },
+                    "uuid": "629d6933-e9b3-4c38-91d2-f812960f1e71"
+                }
+            ],
+            "severity": "error",
+            "type": "clearance"
+        },
+        {
+            "description": "Clearance violation ( clearance 0.1500 mm; actual 0.1200 mm)",
+            "items": [
+                {
+                    "description": "PTH pad 2 [VSTOR] of J4",
+                    "pos": {
+                        "x": 75.531,
+                        "y": 70.158
+                    },
+                    "uuid": "629d6933-e9b3-4c38-91d2-f812960f1e71"
+                },
+                {
+                    "description": "PTH pad 3 [GND] of J4",
+                    "pos": {
+                        "x": 75.531,
+                        "y": 71.158
+                    },
+                    "uuid": "f9e130ac-ed56-4de6-bfc1-3bdceea6e0d0"
+                }
+            ],
+            "severity": "error",
+            "type": "clearance"
+        },
+        {
+            "description": "Clearance violation ( clearance 0.1500 mm; actual 0.1200 mm)",
+            "items": [
+                {
+                    "description": "PTH pad 3 [GND] of J4",
+                    "pos": {
+                        "x": 75.531,
+                        "y": 71.158
+                    },
+                    "uuid": "f9e130ac-ed56-4de6-bfc1-3bdceea6e0d0"
+                },
+                {
+                    "description": "PTH pad 4 [TX] of J4",
+                    "pos": {
+                        "x": 75.531,
+                        "y": 72.158
+                    },
+                    "uuid": "2e3cbf76-3be2-4c68-b1f2-89d83f085094"
+                }
+            ],
+            "severity": "error",
+            "type": "clearance"
+        },
+        {
+            "description": "Clearance violation ( clearance 0.1500 mm; actual 0.1200 mm)",
+            "items": [
+                {
+                    "description": "PTH pad 4 [TX] of J4",
+                    "pos": {
+                        "x": 75.531,
+                        "y": 72.158
+                    },
+                    "uuid": "2e3cbf76-3be2-4c68-b1f2-89d83f085094"
+                },
+                {
+                    "description": "PTH pad 5 [RX] of J4",
+                    "pos": {
+                        "x": 75.531,
+                        "y": 73.158
+                    },
+                    "uuid": "a826af09-b85c-4bd8-b045-8d9597e30e2c"
+                }
+            ],
+            "severity": "error",
+            "type": "clearance"
+        },
+        {
+            "description": "Clearance violation ( clearance 0.1500 mm; actual 0.1200 mm)",
+            "items": [
+                {
+                    "description": "PTH pad 5 [RX] of J4",
+                    "pos": {
+                        "x": 75.531,
+                        "y": 73.158
+                    },
+                    "uuid": "a826af09-b85c-4bd8-b045-8d9597e30e2c"
+                },
+                {
+                    "description": "PTH pad 6 [BOOT0] of J4",
+                    "pos": {
+                        "x": 75.531,
+                        "y": 74.158
+                    },
+                    "uuid": "95f0f8e9-8450-493a-82c2-f13fc3380988"
+                }
+            ],
+            "severity": "error",
+            "type": "clearance"
+        },
+        {
+            "description": "Clearance violation ( clearance 0.1500 mm; actual 0.1200 mm)",
+            "items": [
+                {
+                    "description": "PTH pad 6 [BOOT0] of J4",
+                    "pos": {
+                        "x": 75.531,
+                        "y": 74.158
+                    },
+                    "uuid": "95f0f8e9-8450-493a-82c2-f13fc3380988"
+                },
+                {
+                    "description": "PTH pad 7 [+3.3V] of J4",
+                    "pos": {
+                        "x": 75.531,
+                        "y": 75.158
+                    },
+                    "uuid": "bee2e1f1-6523-4de0-88bd-204f2713e431"
+                }
+            ],
+            "severity": "error",
+            "type": "clearance"
+        },
+        {
+            "description": "Silkscreen clipped by solder mask",
+            "items": [
+                {
+                    "description": "PCB text '+' on F.Silkscreen",
+                    "pos": {
+                        "x": 56.2,
+                        "y": 85.0
+                    },
+                    "uuid": "d33ff207-5537-4175-aad0-4a6a2127c38c"
+                },
+                {
+                    "description": "Rectangle on F.Mask",
+                    "pos": {
+                        "x": 52.0,
+                        "y": 28.0
+                    },
+                    "uuid": "19552f78-8bc8-5d58-a252-cce4c7aa3763"
+                }
+            ],
+            "severity": "warning",
+            "type": "silk_over_copper"
+        },
+        {
+            "description": "Silkscreen clipped by solder mask",
+            "items": [
+                {
+                    "description": "PCB text 'GND' on F.Silkscreen",
+                    "pos": {
+                        "x": 57.2,
+                        "y": 55.0
+                    },
+                    "uuid": "70fd784f-4460-4c2f-b1b0-5920dc836f3e"
+                },
+                {
+                    "description": "Rectangle on F.Mask",
+                    "pos": {
+                        "x": 52.0,
+                        "y": 28.0
+                    },
+                    "uuid": "19552f78-8bc8-5d58-a252-cce4c7aa3763"
+                }
+            ],
+            "severity": "warning",
+            "type": "silk_over_copper"
+        },
+        {
+            "description": "Silkscreen clipped by solder mask",
+            "items": [
+                {
+                    "description": "PCB text '+' on F.Silkscreen",
+                    "pos": {
+                        "x": 73.8,
+                        "y": 85.0
+                    },
+                    "uuid": "8a2d562a-cd15-40da-973d-853d9daff557"
+                },
+                {
+                    "description": "Rectangle on F.Mask",
+                    "pos": {
+                        "x": 52.0,
+                        "y": 28.0
+                    },
+                    "uuid": "19552f78-8bc8-5d58-a252-cce4c7aa3763"
+                }
+            ],
+            "severity": "warning",
+            "type": "silk_over_copper"
+        },
+        {
+            "description": "Silkscreen clipped by solder mask",
+            "items": [
+                {
+                    "description": "PCB text 'GND' on F.Silkscreen",
+                    "pos": {
+                        "x": 73.0,
+                        "y": 54.5
+                    },
+                    "uuid": "857ef018-87a1-4fd2-b5a3-b7c725b5a4a9"
+                },
+                {
+                    "description": "Rectangle on F.Mask",
+                    "pos": {
+                        "x": 52.0,
+                        "y": 28.0
+                    },
+                    "uuid": "19552f78-8bc8-5d58-a252-cce4c7aa3763"
+                }
+            ],
+            "severity": "warning",
+            "type": "silk_over_copper"
+        }
+    ]
+}

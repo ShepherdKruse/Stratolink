@@ -1,0 +1,319 @@
+(footprint "Stratolink_v1p1_L1_IND_LPS4018-223MRC"
+	(version 20260206)
+	(generator "pcbnew")
+	(generator_version "10.0")
+	(layer "F.Cu")
+	(property "Reference" "L1"
+		(at 1.175 -3.135 0)
+		(layer "F.SilkS")
+		(hide yes)
+		(uuid "14a8acf3-5c11-4b71-8d1d-d9b513c605aa")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Value" "22µH"
+		(at 9.43 3.115 0)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "c262b9fa-89a8-482f-bf8a-2fc07afa3078")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Datasheet" "https://www.lcsc.com/product-detail/C5278935.html"
+		(at 0 0 0)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "ad799686-d8d3-48a6-8672-c99b67aa3aff")
+		(effects
+			(font
+				(size 1.27 1.27)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Description" "LPS4018-223MRC"
+		(at 0 0 0)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "59c7d379-7337-4c93-bee5-2b7489121a44")
+		(effects
+			(font
+				(size 1.27 1.27)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Manufacturer" "Coilcraft"
+		(at 0 0 -90)
+		(layer "B.Fab")
+		(hide yes)
+		(uuid "9373831c-7ecb-4b63-8eeb-99a2513efd11")
+		(effects
+			(font
+				(size 1.27 1.27)
+				(thickness 0.15)
+			)
+			(justify mirror)
+		)
+	)
+	(property "LCSC" "C5278935"
+		(at 0 0 -90)
+		(layer "B.Fab")
+		(hide yes)
+		(uuid "69a92905-a1aa-4448-bfbe-58f94ddefed1")
+		(effects
+			(font
+				(size 1.27 1.27)
+				(thickness 0.15)
+			)
+			(justify mirror)
+		)
+	)
+	(property "Manufacturer_Part_Number" "LPS4018-223MRC"
+		(at 0 0 -90)
+		(layer "B.Fab")
+		(hide yes)
+		(uuid "8dc37ad4-0f83-4685-b43a-595a3f6e5152")
+		(effects
+			(font
+				(size 1.27 1.27)
+				(thickness 0.15)
+			)
+			(justify mirror)
+		)
+	)
+	(property "Supplier Part" "C5278935"
+		(at 0 0 -90)
+		(layer "B.Fab")
+		(hide yes)
+		(uuid "ddb0e964-8eab-4514-9a32-45558e9bd29b")
+		(effects
+			(font
+				(size 1.27 1.27)
+				(thickness 0.15)
+			)
+			(justify mirror)
+		)
+	)
+	(property "Supplier" "LCSC"
+		(at 0 0 -90)
+		(layer "B.Fab")
+		(hide yes)
+		(uuid "a2531f28-8a11-4081-aee8-5fce36d52f3b")
+		(effects
+			(font
+				(size 1.27 1.27)
+				(thickness 0.15)
+			)
+			(justify mirror)
+		)
+	)
+	(property ki_fp_filters "Choke_* *Coil* Inductor_* L_*")
+	(sheetname "Root")
+	(sheetfile "stratolink.kicad_sch")
+	(attr smd)
+	(duplicate_pad_numbers_are_jumpers no)
+	(fp_poly
+		(pts
+			(xy -1.68089 2.045) (xy -2.3 1.43695) (xy -2.3 -1.43695) (xy -1.68089 -2.045) (xy -0.65 -2.045) (xy -0.65 -1.12932)
+			(xy -1.23 -0.534319) (xy -1.23 0.534319) (xy -0.65 1.12932) (xy -0.65 2.045)
+		)
+		(stroke
+			(width 0.01)
+			(type solid)
+		)
+		(fill yes)
+		(layer "F.Mask")
+		(uuid "04f5ab58-3ec0-40fe-9bba-967bb503fa00")
+	)
+	(fp_poly
+		(pts
+			(xy 1.68089 -2.045) (xy 2.3 -1.43695) (xy 2.3 1.43695) (xy 1.68089 2.045) (xy 0.65 2.045) (xy 0.65 1.12932)
+			(xy 1.23 0.534319) (xy 1.23 -0.534319) (xy 0.65 -1.12932) (xy 0.65 -2.045)
+		)
+		(stroke
+			(width 0.01)
+			(type solid)
+		)
+		(fill yes)
+		(layer "F.Mask")
+		(uuid "c9118623-738a-4317-85a9-acb855ea72b9")
+	)
+	(fp_poly
+		(pts
+			(xy -1.64 1.945) (xy -2.2 1.395) (xy -2.2 -1.395) (xy -1.64 -1.945) (xy -0.75 -1.945) (xy -0.75 -1.17)
+			(xy -1.33 -0.575) (xy -1.33 0.575) (xy -0.75 1.17) (xy -0.75 1.945)
+		)
+		(stroke
+			(width 0.01)
+			(type solid)
+		)
+		(fill yes)
+		(layer "F.Paste")
+		(uuid "debabcb1-bcc0-4c3b-bf19-384b702c4728")
+	)
+	(fp_poly
+		(pts
+			(xy 1.64 -1.945) (xy 2.2 -1.395) (xy 2.2 1.395) (xy 1.64 1.945) (xy 0.75 1.945) (xy 0.75 1.17) (xy 1.33 0.575)
+			(xy 1.33 -0.575) (xy 0.75 -1.17) (xy 0.75 -1.945)
+		)
+		(stroke
+			(width 0.01)
+			(type solid)
+		)
+		(fill yes)
+		(layer "F.Paste")
+		(uuid "61d03ba5-97ec-46eb-8cdb-8f5fbbf12f40")
+	)
+	(fp_line
+		(start -2.45 -2.2)
+		(end -2.45 2.2)
+		(stroke
+			(width 0.05)
+			(type solid)
+		)
+		(layer "F.CrtYd")
+		(uuid "c4d0d3f5-ee82-4707-86a5-222066111be8")
+	)
+	(fp_line
+		(start -2.45 2.2)
+		(end 2.45 2.2)
+		(stroke
+			(width 0.05)
+			(type solid)
+		)
+		(layer "F.CrtYd")
+		(uuid "82343983-dad1-472e-b4f8-10bb2b950c3e")
+	)
+	(fp_line
+		(start 2.45 -2.2)
+		(end -2.45 -2.2)
+		(stroke
+			(width 0.05)
+			(type solid)
+		)
+		(layer "F.CrtYd")
+		(uuid "1c8ca4b9-f2cc-4cdd-b481-0573210113d8")
+	)
+	(fp_line
+		(start 2.45 2.2)
+		(end 2.45 -2.2)
+		(stroke
+			(width 0.05)
+			(type solid)
+		)
+		(layer "F.CrtYd")
+		(uuid "8ef3f5e1-98ae-45c6-98b0-cffc9777c64a")
+	)
+	(fp_line
+		(start -1.95 -1.95)
+		(end -1.95 1.95)
+		(stroke
+			(width 0.127)
+			(type solid)
+		)
+		(layer "F.Fab")
+		(uuid "4ec41bd8-08fb-48c7-ac01-0107bdfbcec0")
+	)
+	(fp_line
+		(start -1.95 1.95)
+		(end 1.95 1.95)
+		(stroke
+			(width 0.127)
+			(type solid)
+		)
+		(layer "F.Fab")
+		(uuid "c11b021c-6853-4d08-b93a-ad8a16f4421c")
+	)
+	(fp_line
+		(start 1.95 -1.95)
+		(end -1.95 -1.95)
+		(stroke
+			(width 0.127)
+			(type solid)
+		)
+		(layer "F.Fab")
+		(uuid "4bcbe9ca-ede1-4e99-a81e-7e5339613b4c")
+	)
+	(fp_line
+		(start 1.95 1.95)
+		(end 1.95 -1.95)
+		(stroke
+			(width 0.127)
+			(type solid)
+		)
+		(layer "F.Fab")
+		(uuid "5431ed1c-d493-4221-98de-910a8f4dee6c")
+	)
+	(fp_circle
+		(center -2.75 0)
+		(end -2.65 0)
+		(stroke
+			(width 0.2)
+			(type solid)
+		)
+		(fill no)
+		(layer "F.Fab")
+		(uuid "b684e56c-fd9f-4f3d-991a-3b3a878c165f")
+	)
+	(pad "1" smd custom
+		(at -1.765 0)
+		(size 0.5 2.5)
+		(layers "F.Cu")
+		(options
+			(clearance outline)
+			(anchor rect)
+		)
+		(primitives
+			(gr_poly
+				(pts
+					(xy 0.125 1.945) (xy -0.435 1.395) (xy -0.435 -1.395) (xy 0.125 -1.945) (xy 1.015 -1.945) (xy 1.015 -1.17)
+					(xy 0.435 -0.575) (xy 0.435 0.575) (xy 1.015 1.17) (xy 1.015 1.945)
+				)
+				(width 0.01)
+				(fill yes)
+			)
+		)
+		(uuid "8c647bd0-c17e-4b70-a46c-36f824b8421c")
+	)
+	(pad "2" smd custom
+		(at 1.765 0)
+		(size 0.5 2.5)
+		(layers "F.Cu")
+		(options
+			(clearance outline)
+			(anchor rect)
+		)
+		(primitives
+			(gr_poly
+				(pts
+					(xy -0.125 -1.945) (xy 0.435 -1.395) (xy 0.435 1.395) (xy -0.125 1.945) (xy -1.015 1.945) (xy -1.015 1.17)
+					(xy -0.435 0.575) (xy -0.435 -0.575) (xy -1.015 -1.17) (xy -1.015 -1.945)
+				)
+				(width 0.01)
+				(fill yes)
+			)
+		)
+		(uuid "07dfd33f-293d-4492-9f02-dbf9001ae8dc")
+	)
+	(embedded_fonts no)
+	(model "${KIPRJMOD}/lib/LPS4018-223MRC.step"
+		(offset
+			(xyz 0 0 0)
+		)
+		(scale
+			(xyz 1 1 1)
+		)
+		(rotate
+			(xyz -90 0 0)
+		)
+	)
+)

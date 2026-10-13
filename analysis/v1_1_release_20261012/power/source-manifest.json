@@ -1,0 +1,42 @@
+[
+  {
+    "file": "/Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/power/sources/bq25570.pdf",
+    "url": "https://www.ti.com/lit/gpn/BQ25570",
+    "document": "SLUSBH2G March2019",
+    "sha256": "3caec3945eab27823d07532c39a862bb8f90927019dd8c3811836bedad6b33b7"
+  },
+  {
+    "file": "/Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/power/sources/sluuaa7.pdf",
+    "url": "https://www.ti.com/lit/pdf/SLUUAA7",
+    "document": "SLUUAA7A August2014",
+    "sha256": "60aac1d0cad5e571feac7949f882b25a8eaaad814b190cbec333e7c0b5bb8d2e"
+  },
+  {
+    "file": "/Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/power/sources/capxx-balancing.pdf",
+    "url": "https://cap-xx-assets.s3.eu-west-2.amazonaws.com/cap_xx_whitepaper_supercapacitor_cell_balancing_d39dd4559f.pdf",
+    "document": "CAP-XX2025",
+    "sha256": "78c01431cc7f474cf7777dbbbdf8a9ef6e992386719cb3093eb3f33e9fa4a89f"
+  },
+  {
+    "file": "/Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/power/sources/tps709.pdf",
+    "url": "https://www.ti.com/lit/ds/symlink/tps709.pdf",
+    "document": "SBVS186H July2021",
+    "sha256": "8c14e3efae738a27b857b789aa87369de9037a8ef3616a9f71a423587cdc6949"
+  },
+  {
+    "file": "/Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/power/sources/tlv8801.pdf",
+    "url": "https://www.ti.com/lit/ds/symlink/tlv8801.pdf",
+    "document": "SNOSD34A November2016",
+    "sha256": "6b19a321505a176e8cf161cd7359879c12852ac5acae7a6263b6c8071d7b558c"
+  },
+  {
+    "file": "analysis/redesign_20261010/energy/sources/capxx_dmf_v1_9.pdf",
+    "sha256": "1b2ca70b626671820c43068ce3fca1959fa01a393b34ef76319275ade68e4607",
+    "provenance": "Existing primary-source research cache; see parent source manifest."
+  },
+  {
+    "file": "analysis/redesign_20261010/metrology/sources/MAX-M10S.pdf",
+    "sha256": "e36d9c8585809c0dc486804d2634c66cd1888ad71af0f28ce0b830ffa8df6bec",
+    "provenance": "Existing primary-source research cache; see parent source manifest."
+  }
+]

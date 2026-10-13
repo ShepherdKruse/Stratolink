@@ -1,0 +1,11 @@
+{
+  "candidate": "/Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/footprint-freeze-trial",
+  "violations": {
+    "track_dangling": 4,
+    "via_dangling": 68,
+    "silk_over_copper": 20
+  },
+  "schematic_parity": 0,
+  "library_mismatches": 0,
+  "note": "Provisional unrouted power snapshot; 73 opens were preexisting. This test validates footprint library freeze, not routing readiness."
+}

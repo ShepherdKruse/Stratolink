@@ -1,0 +1,41 @@
+{
+  "scope": "Independent pre-release merge script audit; provisional power snapshot is unrouted and not a manufacturing candidate",
+  "script_sha256": "81dde74cfc7b39f2e82522952215ad454026d68957525f9bf05d3970497723cf",
+  "positive_snapshot": "/Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/power-merge-audit-input",
+  "positive_output": "/Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/power-merge-audit-output",
+  "reviewed_pcb_sha256": "bd67d8a41848250f9e8958a7e41f1d813c33349e94047acd1769e6250c339cd5",
+  "source_pcb_sha256": "ff06c79d4480b1d7614904daa753e1949fd64a065d76a948cc9995f25d6afb5f",
+  "native_netlist_verification": {
+    "before_pin_count": 219,
+    "after_pin_count": 233,
+    "retained_all_existing_connections": true,
+    "only_existing_net_rename": [
+      "Net-(U1-VBAT)",
+      "/VBAT"
+    ],
+    "new_parts": [
+      "C22",
+      "R24",
+      "R25",
+      "R26",
+      "U8"
+    ],
+    "existing_pad_newly_connected": "C5.3 /SC_MID",
+    "feedback": "U8.1 OUT and U8.4 -IN share SC_BAL_OUT before R26; C5.3 connects after R26"
+  },
+  "negative_tests": [
+    {
+      "case": "moved-existing-R2",
+      "passed": true,
+      "expected_rejection": "Unsupported existing footprint geometry change",
+      "returncode": 1
+    },
+    {
+      "case": "swapped-C5-polarity",
+      "passed": true,
+      "expected_rejection": "Capacitor polarity/midpoint changed",
+      "returncode": 1
+    }
+  ],
+  "canonical_edits": false
+}

@@ -1,0 +1,75 @@
+{
+  "authored_pcb_sha256": "3bf0023e309336249e90deb1f52270f4108e61e40b558b4ec56a1df768ae1d4c",
+  "reports": {
+    "route-thermal-drc.json": {
+      "sha256": "65ddcb740a0fc32aa9dae1eeb112b082014084d3bc3c05e02b25f7df363cc9db",
+      "counts": {
+        "starved_thermal": 1,
+        "lib_footprint_mismatch": 56,
+        "silk_over_copper": 4
+      },
+      "opens": 0,
+      "ignored_checks": [
+        "clearance",
+        "copper_edge_clearance",
+        "annular_width",
+        "missing_courtyard",
+        "solder_mask_bridge",
+        "track_not_centered_on_via",
+        "tuning_profile_track_geometries",
+        "footprint_filters_mismatch",
+        "pth_inside_courtyard",
+        "npth_inside_courtyard",
+        "footprint_type_mismatch"
+      ]
+    },
+    "header-thermal-drc.json": {
+      "sha256": "534b0ac6b0f2deb2b029ad92572e8d61624537e1f4bbf9bd91772855bf579a24",
+      "counts": {
+        "lib_footprint_mismatch": 56,
+        "lib_footprint_issues": 1,
+        "silk_over_copper": 4
+      },
+      "opens": 0,
+      "ignored_checks": [
+        "clearance",
+        "copper_edge_clearance",
+        "annular_width",
+        "missing_courtyard",
+        "solder_mask_bridge",
+        "track_not_centered_on_via",
+        "tuning_profile_track_geometries",
+        "footprint_filters_mismatch",
+        "pth_inside_courtyard",
+        "npth_inside_courtyard",
+        "footprint_type_mismatch"
+      ]
+    },
+    "integrated-rules-refilled-drc.json": {
+      "sha256": "e685013f8beffeaaeb77863f1e5a808a7f01f17e2e5bb1be996384fe97237975",
+      "counts": {
+        "clearance": 1,
+        "lib_footprint_mismatch": 56,
+        "lib_footprint_issues": 1,
+        "silk_over_copper": 4
+      },
+      "opens": 0,
+      "ignored_checks": [
+        "missing_courtyard",
+        "solder_mask_bridge",
+        "track_not_centered_on_via",
+        "tuning_profile_track_geometries",
+        "footprint_filters_mismatch",
+        "pth_inside_courtyard",
+        "npth_inside_courtyard",
+        "footprint_type_mismatch"
+      ]
+    }
+  },
+  "dispositions": {
+    "route-thermal-drc.json": "Baseline rules; J4 baseline-size land has one starved thermal; other library/silk findings inherited.",
+    "header-thermal-drc.json": "Actual integrated J4 land but baseline rule severities: no thermal finding/opens. Not a clearance proof.",
+    "integrated-rules-refilled-drc.json": "Actual integrated J4 land + integrated PRO/DRU + refill. Zero opens, no new power clearance, edge, hole, courtyard, thermal, or dangling finding. Sole clearance is J4.4 versus baseline RX segment f61043a4-1291-4315-b94d-e8cfe8c45bbd, replaced in header integration. Local J4 library missing in diagnostic generates one library issue."
+  },
+  "remaining_gate": "Final fully integrated PCB with all header/U7 routing and local libraries requires native release DRC and independent physical-pad connectivity."
+}

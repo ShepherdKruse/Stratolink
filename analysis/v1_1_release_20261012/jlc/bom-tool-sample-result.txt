@@ -1,0 +1,289 @@
+- text: 
+- banner:
+  - generic: 24-hour PCB production. Fast Delivery to United States.
+  - link " Coupons":
+    - /url: https://jlcpcb.com/coupon-center
+    - generic: 
+    - text: Coupons
+  - link " Download APP":
+    - /url: https://jlcone.com/download
+    - generic: 
+    - text: Download APP
+  - text:     
+  - text: USD
+  - generic: 
+- navigation:
+  - text: 
+  - link "JLCPCB Home":
+    - /url: https://jlcpcb.com
+    - generic: 
+  - link "Assembly Parts Lib For PCBA Only":
+    - /url: https://jlcpcb.com/parts
+    - paragraph: Assembly Parts Lib
+    - paragraph: For PCBA Only
+  - text:   
+  - search "Search parts":
+    - text: 
+    - 'searchbox "Search by keyword or part #"'
+    - button "Submit search":
+      - generic: 
+    - generic: 
+    - text: Upload BOM
+    - text: 
+    - text: 
+    - generic: 
+  - text: 
+  - link " 0 Parts Cart":
+    - /url: https://jlcpcb.com/user-center/smtPrivateLibrary/partsCart/
+    - generic: 
+    - superscript: "0"
+    - generic: Parts Cart
+  - text:       
+  - text: My Account
+  - generic: 
+  - text: 
+- navigation "Parts navigation":
+  - list:
+    - navigation:
+      - link "Products":
+        - /url: /parts/all-electronic-components
+        - generic: 
+        - text: Products
+      - text:              
+    - link "In Stock Parts":
+      - /url: /parts/in-stock-parts
+    - link "Bom Tool":
+      - /url: /parts/bom-tool
+    - link "Request a Quote":
+      - /url: /parts/request-quote
+    - text:     
+    - text: Support
+    - generic: 
+- main:
+  - heading "BOM Tool" [level=1]
+  - paragraph: Upload a BOM file to check component pricing and availability. Order the entire BOM with one click and lock in inventory for your PCB assembly.
+  - generic: XLS, XLSX and CSV, Max size 2 MB
+  - button " Upload Your BOM":
+    - generic: 
+    - text: Upload Your BOM
+  - button " View Saved BOMs":
+    - generic: 
+    - text: View Saved BOMs
+  - link " Getting Started Guide":
+    - /url: https://jlcpcb.com/help/article/getting-started-jlcpcb-bom-tool
+    - generic: 
+    - text: Getting Started Guide
+  - generic: 
+  - text: Try Sample BOM
+  - link " BOM Template":
+    - /url: https://static.jlcpcb.com/video/JLCPCB_BOM_Template.xls
+    - generic: 
+    - text: BOM Template
+  - text: 
+  - heading "How The BOM Tool Simplifies Your Work" [level=2]
+  - paragraph: Real-time data powers AI matching to eliminate shortages and streamline your procurement.
+  - list:
+    - generic: 
+    - heading "Smart Matching" [level=3]
+    - paragraph: Automatically match against over a database of 7M+ electronic parts.
+    - generic: 
+    - heading "Real-Time Updates" [level=3]
+    - paragraph: Access the latest component data to keep your BOMs always up to date.
+    - generic: 
+    - heading "Risk Mitigation" [level=3]
+    - paragraph: Get instant alerts on shortages, price changes, and EOL issues to prevent costly delays.
+    - generic: 
+    - heading "Team Collaboration" [level=3]
+    - paragraph: Share BOMs with colleagues to easily edit and review together.
+  - text:    
+  - heading "From BOM to PCBA in 4 Steps" [level=2]
+  - paragraph: A seamless journey to turn your BOM into a production-ready PCBA order.
+  - img "Upload"
+  - generic: "01"
+  - heading "Upload" [level=3]
+  - paragraph: Upload your BOM file (CSV, XLS, XLSX).
+  - img "Review"
+  - generic: "02"
+  - heading "Review" [level=3]
+  - paragraph: Review automatically matched components from our database.
+  - img "Procure"
+  - generic: "03"
+  - heading "Procure" [level=3]
+  - paragraph: Purchase the entire BOM with one-click and lock in inventory.
+  - img "Order PCBA"
+  - generic: "04"
+  - heading "Order PCBA" [level=3]
+  - paragraph: Proceed to place your PCBA order at any time with confidence.
+  - paragraph: Frequently Asked Questions
+  - list:
+    - generic: "Q: Why is the Recommended Qty higher than the quantity in my BOM?"
+    - generic: 
+    - paragraph: "A: To assemble your PCBs, high-speed pick-and-place machines require a minimum length of component tape to load into the feeders. Additionally, a small attrition allowance is included to cover potential waste during production. Providing these extra parts ensures your assembly run finishes smoothly without delays or shortages."
+    - generic: "Q: How do I handle unmatched or out-of-stock parts?"
+    - generic: 
+    - paragraph: "A: You can click the Search icon next to any line item to manually browse our database and find suitable substitutes."
+    - generic: "Q: How to manage my BOM inventory?"
+    - generic: 
+    - paragraph:
+      - text: "A: Once you purchase your BOM, your components are stored in your"
+      - link "personal parts library":
+        - /url: https://jlcpcb.com/user-center/smtPrivateLibrary/myPartsLib
+      - text: . From there, you can track remaining stock levels and easily replenish items when needed.
+    - generic: "Q: How do I turn my matched BOM into a PCBA order?"
+    - generic: 
+    - paragraph:
+      - text: "A: We recommend purchasing and locking your BOM inventory in advance to prevent shortages. When you are ready to order PCBA later, our system will automatically pull the components from your personal library."
+      - link "Learn more >":
+        - /url: https://jlcpcb.com/help/article/how-to-use-my-own-parts-for-pcb-assembly-order
+  - paragraph: Don't Let Shortages Delay Your Project.
+  - paragraph: AI-assisted component matching in seconds. Secure inventory early and reduce sourcing risks.
+  - button "Get Started"
+- contentinfo:
+  - generic: 
+  - text: Online Chat >
+  - generic: Chat with our live agent for fast reply.
+  - generic: "Mon-Fri: 24 hours, Sat: 9am-6pm, GMT+8"
+  - link " Email Us >":
+    - /url: https://jlcpcb.com/help/contact
+    - generic: 
+    - text: Email Us >
+  - text: Contact us at support
+  - generic: 
+  - text: jlcpcb.com
+  - generic: Typically reply within hours.
+  - link " Help Center >":
+    - /url: https://jlcpcb.com/help
+    - generic: 
+    - text: Help Center >
+  - generic: Get instant answers.
+  - generic: 24/7 Available.
+  - generic: Services & Tools
+  - link "Electronic Parts":
+    - /url: https://jlcpcb.com/parts
+  - link "BOM Tool":
+    - /url: https://jlcpcb.com/parts/bom-tool
+  - link "Request a Quote":
+    - /url: https://jlcpcb.com/parts/request-quote
+  - link "Manufacturers":
+    - /url: https://jlcpcb.com/parts/manufacturers
+  - link "PCB Assembly":
+    - /url: https://jlcpcb.com/pcb-assembly
+  - generic: Support
+  - link "Contact Us":
+    - /url: https://jlcpcb.com/help/contact
+  - link "How to Order":
+    - /url: https://jlcpcb.com/help/article/how-to-build-your-own-parts-library-in-jlcpcb
+  - link "User Guides":
+    - /url: https://jlcpcb.com/help/catalog/191-PCBA-Parts-Sourcing
+  - link "Sourcing Tips":
+    - /url: https://jlcpcb.com/blog/category/components-sourcing
+  - link "Payment Methods":
+    - /url: https://jlcpcb.com/payments
+  - generic: Company
+  - link "About Us":
+    - /url: https://jlcpcb.com/about-us
+  - link "Quality Assurance":
+    - /url: https://jlcpcb.com/about-us/quality-control
+  - link "How We Work":
+    - /url: https://jlcpcb.com/about-us/how-it-works
+  - link "Certifications":
+    - /url: https://jlcpcb.com/certifications
+  - link "Security":
+    - /url: https://jlcpcb.com/privacy-security
+  - link "Environment":
+    - /url: https://jlcpcb.com/green-manufacturing
+  - link "JLCAPI":
+    - /url: https://api.jlcpcb.com/
+  - link "News":
+    - /url: https://jlcpcb.com/news
+  - link "Cooperation":
+    - /url: https://jlcpcb.com/cooperation
+  - generic: Electronics
+  - link "EasyEDA":
+    - /url: https://easyeda.com
+  - link "JLCPCB":
+    - /url: https://jlcpcb.com
+  - link "JLCDFM":
+    - /url: https://jlcdfm.com
+  - link "LCSC":
+    - /url: https://www.lcsc.com
+  - link "OSHWLAB":
+    - /url: https://oshwlab.com/
+  - generic: Mechanical
+  - link "JLC3DP":
+    - /url: https://jlc3dp.com
+  - link "JLCCNC":
+    - /url: https://jlccnc.com
+  - link "JLCMC":
+    - /url: https://jlcmc.com
+  - generic: 
+  - generic: Order on JLCONE Desktop, Save $1–$20 Every Time
+  - link " Windows":
+    - /url: https://jlcone.com/download
+    - generic: 
+    - generic: Windows
+  - link " MAC":
+    - /url: https://jlcone.com/download
+    - generic: 
+    - generic: MAC
+  - link " Android":
+    - /url: https://jlcone.com/download#mobile-app
+    - generic: 
+    - generic: Android
+  - link " IOS":
+    - /url: https://jlcone.com/download#mobile-app
+    - generic: 
+    - generic: IOS
+  - generic: CONNECT WITH US
+  - link "":
+    - /url: https://www.facebook.com/jlcpcb
+    - generic: 
+  - link "":
+    - /url: https://twitter.com/jlcpcb
+    - generic: 
+  - link "":
+    - /url: https://www.instagram.com/jlcpcb
+    - generic: 
+  - link "":
+    - /url: https://www.youtube.com/JLCPCB
+    - generic: 
+  - link "":
+    - /url: https://www.linkedin.com/company/jlcpcb
+    - generic: 
+  - link "":
+    - /url: https://www.reddit.com/r/JLCPCBLab/
+    - generic: 
+  - generic: © 2026 JLCPCB.COM All Rights Reserved.
+  - link "Privacy Policy":
+    - /url: https://jlcpcb.com/help/article/Privacy-Policy
+  - link "Terms & Conditions":
+    - /url: https://jlcpcb.com/help/article/Terms-%26-Conditions
+  - link "Cookies Policy":
+    - /url: https://jlcpcb.com/help/article/JLCPCB-Cookie-Notice
+  - link "Do Not Sell or Share My Personal Information":
+    - /url: https://jlcpcb.com/privacy-policy/do-not-sell-or-share-my-personal-information
+- textbox "Write a message"
+- iframe
+- tooltip "chat wave Welcome back, may I help you? Chat Now":
+  - generic: 
+  - img "chat wave"
+  - text: Welcome back, may I help you?
+  - button "Chat Now"
+- dialog "PCB Assembly Qty":
+  - text: PCB Assembly Qty
+  - button "Close":
+    - generic: 
+  - generic: BOM file uploaded successfully, please set your assembled PCB quantity.
+  - generic: "2"
+  - generic: "5"
+  - generic: "10"
+  - generic: "15"
+  - generic: "20"
+  - generic: "25"
+  - generic: "30"
+  - generic: "50"
+  - generic: "75"
+  - generic: Custom Qty
+  - textbox "Minimum:2"
+  - button "Process BOM"
+  - generic: "Note: Please carefully check the matched part information before adding the part to your personal library."

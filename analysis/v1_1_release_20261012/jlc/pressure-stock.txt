@@ -1,0 +1,102 @@
+JLCPCB 
+Parts Library 
+All Components 
+Search MS561101BA03-50
+MS561101BA03-50 Search results (2 Found)
+Category
+Others
+New Arrivals
+Sensors
+Pressure Sensors
+Manufacturer
+JLCPCB Assembly
+TE Connectivity
+PackageType
+LCC-18(9.7x10.1)
+QFN-8(3x5)
+Parts Type
+Basic
+Promotional Extended
+Extended
+Mechanical Assembly
+PCBA Type
+Economic
+Standard
+Information
+Datasheet
+Photo
+Results remaining:
+2
+Reset All Apply
+Hide unavailable options
+Hide Filters
+In stock PartsConsign Parts
+		
+Compare
+MFR Part #
+		Description		Manufacturer		
+Stock
+≥
+		
+Price
+			
+	
+	
+MS561101BA03-50
+C15639
+Extended
+	
+	
+-40℃~+85℃ 1.8V~3.6V 140nA 150pa 1Kpa~1.2bar 8.22ms I2C、SPI Integrated ADC and digital interface、On-chip calibration and non-volatile storage、Standby mode、On-chip temperature output Yes QFN-8(3x5) Pressure Sensors ROHS
+	
+	
+TE Connectivity
+	
+	
+3376
+	
+	
+1+
+$6.7262
+3600+
+$5.0512
+Show More
+	
+	
+
+Min: 1
+
+Full Reel: 3600
+
+Total: $6.73
+Add to My Part Lib
+1 item in total
+1
+Consign Parts
+	
+	
+MS561101BA03-50
+C9900119073
+Extended
+	
+	
+QFN-8(3x5) New Arrivals ROHS
+	
+	
+JLCPCB Assembly
+	
+	
+0
+	
+	
+Est. unit price:
+$0.0382
+	
+	
+
+Min: 443
+
+Total: $0.04
+Consign Part
+1 item in total
+1

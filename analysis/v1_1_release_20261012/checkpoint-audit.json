@@ -1,0 +1,70 @@
+{
+  "checked_at": "2026-10-13T17:37:16.079495+00:00",
+  "status": "PASS for local review checkpoint; not a manufacturing release",
+  "branch": "alpha/hardware-v1.1",
+  "parent_commit": "59979799c5809d636639084227d9fee75c8de1d9",
+  "checks": {
+    "source_inputs": {
+      "count": 160,
+      "working_and_index_hashes_match": true
+    },
+    "package_outputs": {
+      "count": 28,
+      "working_and_index_hashes_match": true
+    },
+    "unrelated_tracked": {
+      "count": 100,
+      "preserved": true
+    }
+  },
+  "staged_files_verified_before_this_report": 340,
+  "all_staged_bytes_equal_working_bytes": true,
+  "line_endings": "Scoped -text attributes preserve hashed manufacturing and evidence bytes across checkout.",
+  "supplier_draft": {
+    "url": "https://cart.jlcpcb.com/smt-order/?pcbFileNo=273e56f80db84247a68fcd5556d381e6",
+    "detected": 56,
+    "selected": 53,
+    "shortages": [
+      "R4",
+      "U2",
+      "U6"
+    ],
+    "final_cpl_byte_identical_to_reviewed_probe": true,
+    "order_submitted": false,
+    "cam_no_mask_accepted": false
+  },
+  "manifest_sha256": "61c20cef6bcb891712b0260bfbe9ab2c6acecde0f85b5b066763ed82aee34fcf",
+  "whitespace_review": {
+    "broad_diff_check_exit": 2,
+    "findings_by_file": {
+      "analysis/v1_1_release_20261012/final-drc.log": 13,
+      "analysis/v1_1_release_20261012/firmware-build.log": 4,
+      "analysis/v1_1_release_20261012/identities/CPL-u7-u8-reimport-probe.csv": 57,
+      "analysis/v1_1_release_20261012/identities/balance-native-netlist.xml": 10,
+      "analysis/v1_1_release_20261012/identities/baseline-netlist.xml": 10,
+      "analysis/v1_1_release_20261012/identities/bom-identity-audit.csv": 54,
+      "analysis/v1_1_release_20261012/jlc/10m-yageo-stock.txt": 19,
+      "analysis/v1_1_release_20261012/jlc/22ohm-stock.txt": 31,
+      "analysis/v1_1_release_20261012/jlc/4m75-stock.txt": 19,
+      "analysis/v1_1_release_20261012/jlc/7m5-fojan-stock.txt": 19,
+      "analysis/v1_1_release_20261012/jlc/CPL-pin1-reviewed-probe.csv": 57,
+      "analysis/v1_1_release_20261012/jlc/availability-screen.csv": 31,
+      "analysis/v1_1_release_20261012/jlc/gnss-stock.txt": 43,
+      "analysis/v1_1_release_20261012/jlc/preliminary-quote.txt": 17,
+      "analysis/v1_1_release_20261012/jlc/pressure-stock.txt": 31,
+      "analysis/v1_1_release_20261012/jlc/previous-selected-parts.txt": 213,
+      "analysis/v1_1_release_20261012/jlc/r1-0402WGF7324TCE-search.txt": 19,
+      "analysis/v1_1_release_20261012/jlc/rak-stock.txt": 19,
+      "analysis/v1_1_release_20261012/jlc/tlv8801-stock.txt": 19,
+      "analysis/v1_1_release_20261012/manufacturing/rotation-correction-before/CPL-stratolink.csv": 57,
+      "analysis/v1_1_release_20261012/power/build_balancer_candidate.py": 1,
+      "hardware/gerbers/v1.1-pilot/BOM-stratolink.csv": 57,
+      "hardware/gerbers/v1.1-pilot/CPL-stratolink.csv": 57,
+      "hardware/gerbers/v1.1-pilot/logs/netlist.log": 13,
+      "hardware/pcb/stratolink.kicad_sch": 56
+    },
+    "disposition": "Preserve raw supplier/export evidence and frozen source bytes. KiCad schematic has 56 whitespace-only lines; frozen balancer author script has one. These formatting findings are not electrical defects.",
+    "maintained_code_and_prose_excluding_frozen_author_script_pass": true
+  },
+  "physical_qualification": "Pending; see pilot-acceptance.md"
+}

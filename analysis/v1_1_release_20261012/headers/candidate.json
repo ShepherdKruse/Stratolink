@@ -1,0 +1,340 @@
+{
+  "baseline": "59979799c5809d636639084227d9fee75c8de1d9",
+  "baseline_dir": "/Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/headers/baseline",
+  "candidate": "/Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/headers/candidate",
+  "pad_changes": [
+    {
+      "ref": "J4",
+      "number": "1",
+      "uuid": "0650b567-d648-499e-addc-ea01fac7e599",
+      "back_size_mm": [
+        1.2,
+        0.88
+      ],
+      "back_offset_mm": [
+        -0.12,
+        0
+      ],
+      "thermal_angle_deg": 90.0
+    },
+    {
+      "ref": "J4",
+      "number": "2",
+      "uuid": "629d6933-e9b3-4c38-91d2-f812960f1e71",
+      "back_size_mm": [
+        1.2,
+        0.88
+      ],
+      "back_offset_mm": [
+        -0.12,
+        0
+      ],
+      "thermal_angle_deg": 90.0
+    },
+    {
+      "ref": "J4",
+      "number": "3",
+      "uuid": "f9e130ac-ed56-4de6-bfc1-3bdceea6e0d0",
+      "back_size_mm": [
+        1.2,
+        0.88
+      ],
+      "back_offset_mm": [
+        -0.12,
+        0
+      ],
+      "thermal_angle_deg": 90.0
+    },
+    {
+      "ref": "J4",
+      "number": "4",
+      "uuid": "2e3cbf76-3be2-4c68-b1f2-89d83f085094",
+      "back_size_mm": [
+        1.2,
+        0.88
+      ],
+      "back_offset_mm": [
+        -0.12,
+        0
+      ],
+      "thermal_angle_deg": 90.0
+    },
+    {
+      "ref": "J4",
+      "number": "5",
+      "uuid": "a826af09-b85c-4bd8-b045-8d9597e30e2c",
+      "back_size_mm": [
+        1.2,
+        0.88
+      ],
+      "back_offset_mm": [
+        -0.12,
+        0
+      ],
+      "thermal_angle_deg": 90.0
+    },
+    {
+      "ref": "J4",
+      "number": "6",
+      "uuid": "95f0f8e9-8450-493a-82c2-f13fc3380988",
+      "back_size_mm": [
+        1.2,
+        0.88
+      ],
+      "back_offset_mm": [
+        -0.12,
+        0
+      ],
+      "thermal_angle_deg": 90.0
+    },
+    {
+      "ref": "J4",
+      "number": "7",
+      "uuid": "bee2e1f1-6523-4de0-88bd-204f2713e431",
+      "back_size_mm": [
+        1.2,
+        0.88
+      ],
+      "back_offset_mm": [
+        -0.12,
+        0
+      ],
+      "thermal_angle_deg": 90.0
+    },
+    {
+      "ref": "J3",
+      "number": "1",
+      "uuid": "9e1e972e-d661-4acc-91bc-aaa44d6689d4",
+      "back_size_mm": [
+        1.2,
+        0.88
+      ],
+      "back_offset_mm": [
+        0.12,
+        0
+      ],
+      "thermal_angle_deg": 90.0
+    },
+    {
+      "ref": "J3",
+      "number": "2",
+      "uuid": "ee2785a4-1245-43e1-83e8-fa4973870f0b",
+      "back_size_mm": [
+        1.2,
+        0.88
+      ],
+      "back_offset_mm": [
+        0.12,
+        0
+      ],
+      "thermal_angle_deg": 30.0
+    },
+    {
+      "ref": "J3",
+      "number": "3",
+      "uuid": "78db17b2-2f62-4a45-adfd-0e17aa75a498",
+      "back_size_mm": [
+        1.2,
+        0.88
+      ],
+      "back_offset_mm": [
+        0.12,
+        0
+      ],
+      "thermal_angle_deg": 90.0
+    },
+    {
+      "ref": "J3",
+      "number": "4",
+      "uuid": "1a982502-40db-4b68-bfea-018025c9e930",
+      "back_size_mm": [
+        1.2,
+        0.88
+      ],
+      "back_offset_mm": [
+        0.12,
+        0
+      ],
+      "thermal_angle_deg": 90.0
+    },
+    {
+      "ref": "J3",
+      "number": "5",
+      "uuid": "18b55959-0e81-4b52-8da7-0494f5bc61f2",
+      "back_size_mm": [
+        1.2,
+        0.88
+      ],
+      "back_offset_mm": [
+        0.12,
+        0
+      ],
+      "thermal_angle_deg": 90.0
+    },
+    {
+      "ref": "J3",
+      "number": "6",
+      "uuid": "7ae1aaaa-f303-4441-9163-758b71841e0e",
+      "back_size_mm": [
+        1.2,
+        0.88
+      ],
+      "back_offset_mm": [
+        0.12,
+        0
+      ],
+      "thermal_angle_deg": 90.0
+    },
+    {
+      "ref": "J3",
+      "number": "7",
+      "uuid": "06e03c7f-5890-410b-8cd8-b2f017358ea9",
+      "back_size_mm": [
+        1.2,
+        0.88
+      ],
+      "back_offset_mm": [
+        0.12,
+        0
+      ],
+      "thermal_angle_deg": 90.0
+    }
+  ],
+  "route_changes": [
+    {
+      "uuid": "f61043a4-1291-4315-b94d-e8cfe8c45bbd",
+      "net": "RX",
+      "before_nm": [
+        [
+          73932000,
+          71733000
+        ],
+        [
+          75373000,
+          73174000
+        ]
+      ],
+      "after_mm": [
+        [
+          73.932,
+          71.733
+        ],
+        [
+          73.932,
+          72.2
+        ]
+      ]
+    },
+    {
+      "uuid": "57afa99e-0f6b-491c-a967-b4ab7afd6be7",
+      "net": "PB5",
+      "before_nm": [
+        [
+          55391000,
+          71884239
+        ],
+        [
+          55391000,
+          72558000
+        ]
+      ],
+      "after_mm": [
+        [
+          55.431,
+          71.844239
+        ],
+        [
+          55.431,
+          72.598
+        ]
+      ]
+    },
+    {
+      "uuid": "a5a38b4c-aafe-4539-83f2-20ee7d9a4890",
+      "net": "PB5",
+      "before_nm": [
+        [
+          55757116,
+          71518123
+        ],
+        [
+          55391000,
+          71884239
+        ]
+      ],
+      "after_mm": [
+        [
+          55.757116,
+          71.518123
+        ],
+        [
+          55.431,
+          71.844239
+        ]
+      ]
+    },
+    {
+      "uuid": "d058defb-6758-4864-9e39-79a15b1dd9f7",
+      "net": "PB5",
+      "before_nm": [
+        [
+          55391000,
+          72558000
+        ],
+        [
+          55974000,
+          73141000
+        ]
+      ],
+      "after_mm": [
+        [
+          55.431,
+          72.598
+        ],
+        [
+          55.974,
+          73.141
+        ]
+      ]
+    }
+  ],
+  "added_routes": [
+    {
+      "uuid": "894746a7-0c51-57e9-b153-eb8c567c8852",
+      "net": "RX",
+      "start_mm": [
+        73.932,
+        72.2
+      ],
+      "end_mm": [
+        74.906,
+        73.174
+      ],
+      "width_mm": 0.25
+    },
+    {
+      "uuid": "09997fd5-234c-53ce-828f-652c5b46cfd9",
+      "net": "RX",
+      "start_mm": [
+        74.906,
+        73.174
+      ],
+      "end_mm": [
+        75.373,
+        73.174
+      ],
+      "width_mm": 0.25
+    }
+  ],
+  "libraries": {
+    "J3": "lib/Stratolink_Programming_Left_1x07_P1p00_D0p50_BackTack1p20x0p88.kicad_mod",
+    "J4": "lib/Stratolink_Programming_Right_1x07_P1p00_D0p50_BackTack1p20x0p88.kicad_mod"
+  },
+  "files": {
+    "stratolink.kicad_pcb": "f83a344bb1bf817207c7a121dabbd4acb92815967c4ed870ca0c49b1698a56a8",
+    "stratolink.kicad_sch": "95278fba69ec433ecb0a07e506ac3bbfc1dfab8518e9fccc5f7e82b39ec71f48",
+    "stratolink.kicad_pro": "83f13e321d5736275dfa64d379330b4076344a9ffebb3021ccf3aee6c064cce9",
+    "lib/Stratolink_Programming_Left_1x07_P1p00_D0p50_BackTack1p20x0p88.kicad_mod": "8522c6287a4f7bd24164e5db3b1da5cf72be14147c29c32b4f823dd2487eda79",
+    "lib/Stratolink_Programming_Right_1x07_P1p00_D0p50_BackTack1p20x0p88.kicad_mod": "5689655367f3e168fe2d7ea8abfae3a6907760e9016c5a4e9014ed7650bd59cd"
+  }
+}

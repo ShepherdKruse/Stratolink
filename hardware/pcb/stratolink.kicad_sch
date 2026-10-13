@@ -3,7 +3,7 @@
 	(generator "eeschema")
 	(generator_version "8.0")
 	(uuid "4d146a28-be53-49f1-b1c6-484192820e45")
-	(paper "User" 265 190)
+	(paper "User" 265 225)
 	(title_block
 		(title "PICO Mainboard v1.1")
 		(date "2026-10-12")
@@ -12,7 +12,7 @@
 		(comment 1 "             Stratolink")
 	)
 	(lib_symbols
-		(symbol "Connector:Conn_ARM_SWD_TagConnect_TC2030-NL"
+(symbol "Stratolink_v1p1_Symbols:Connector_Conn_ARM_SWD_TagConnect_TC2030_NL"
 			(exclude_from_sim no)
 			(in_bom no)
 			(on_board yes)
@@ -77,7 +77,7 @@
 					(hide yes)
 				)
 			)
-			(symbol "Conn_ARM_SWD_TagConnect_TC2030-NL_0_0"
+			(symbol "Connector_Conn_ARM_SWD_TagConnect_TC2030_NL_0_0"
 				(pin power_in line
 					(at -2.54 10.16 270)
 					(length 2.54)
@@ -190,7 +190,7 @@
 					(alternate "TDO" input line)
 				)
 			)
-			(symbol "Conn_ARM_SWD_TagConnect_TC2030-NL_0_1"
+			(symbol "Connector_Conn_ARM_SWD_TagConnect_TC2030_NL_0_1"
 				(rectangle
 					(start -5.08 7.62)
 					(end 5.08 -7.62)
@@ -204,7 +204,7 @@
 				)
 			)
 		)
-		(symbol "Device:Antenna"
+(symbol "Stratolink_v1p1_Symbols:Device_Antenna"
 			(pin_numbers hide)
 			(pin_names
 				(offset 1.016) hide)
@@ -265,7 +265,7 @@
 					(hide yes)
 				)
 			)
-			(symbol "Antenna_0_1"
+			(symbol "Device_Antenna_0_1"
 				(polyline
 					(pts
 						(xy 0 2.54) (xy 0 -3.81)
@@ -291,8 +291,8 @@
 					)
 				)
 			)
-			(symbol "Antenna_1_1"
-				(pin input line
+			(symbol "Device_Antenna_1_1"
+				(pin passive line
 					(at 0 -5.08 90)
 					(length 2.54)
 					(name "A"
@@ -312,7 +312,7 @@
 				)
 			)
 		)
-		(symbol "Device:C"
+(symbol "Stratolink_v1p1_Symbols:Device_C"
 			(pin_numbers hide)
 			(pin_names
 				(offset 0.254)
@@ -356,7 +356,7 @@
 					(hide yes)
 				)
 			)
-			(property "Description" "Unpolarized capacitor"
+			(property "Description" "DMF4B5R5G105M3DTA0 1 F 5.5 V supercapacitor; CAD pads 1=positive, 2=negative, 3=isolated balance; manual backside assembly"
 				(at 0 0 0)
 				(effects
 					(font
@@ -383,7 +383,7 @@
 					(hide yes)
 				)
 			)
-			(symbol "C_0_1"
+			(symbol "Device_C_0_1"
 				(polyline
 					(pts
 						(xy -2.032 -0.762) (xy 2.032 -0.762)
@@ -409,7 +409,7 @@
 					)
 				)
 			)
-			(symbol "C_1_1"
+			(symbol "Device_C_1_1"
 				(pin passive line
 					(at 0 3.81 270)
 					(length 2.794)
@@ -448,7 +448,7 @@
 				)
 			)
 		)
-		(symbol "Device:FerriteBead_Small"
+(symbol "Stratolink_v1p1_Symbols:Device_FerriteBead_Small"
 			(pin_numbers hide)
 			(pin_names
 				(offset 0)
@@ -519,7 +519,7 @@
 					(hide yes)
 				)
 			)
-			(symbol "FerriteBead_Small_0_1"
+			(symbol "Device_FerriteBead_Small_0_1"
 				(polyline
 					(pts
 						(xy 0 -1.27) (xy 0 -0.7874)
@@ -557,7 +557,7 @@
 					)
 				)
 			)
-			(symbol "FerriteBead_Small_1_1"
+			(symbol "Device_FerriteBead_Small_1_1"
 				(pin passive line
 					(at 0 2.54 270)
 					(length 1.27)
@@ -596,7 +596,7 @@
 				)
 			)
 		)
-		(symbol "Device:L"
+(symbol "Stratolink_v1p1_Symbols:Device_L"
 			(pin_numbers hide)
 			(pin_names
 				(offset 1.016) hide)
@@ -664,7 +664,7 @@
 					(hide yes)
 				)
 			)
-			(symbol "L_0_1"
+			(symbol "Device_L_0_1"
 				(arc
 					(start 0 -2.54)
 					(mid 0.6323 -1.905)
@@ -714,7 +714,7 @@
 					)
 				)
 			)
-			(symbol "L_1_1"
+			(symbol "Device_L_1_1"
 				(pin passive line
 					(at 0 3.81 270)
 					(length 1.27)
@@ -753,7 +753,7 @@
 				)
 			)
 		)
-		(symbol "Device:R_US"
+(symbol "Stratolink_v1p1_Symbols:Device_R_US"
 			(pin_numbers hide)
 			(pin_names
 				(offset 0)
@@ -822,7 +822,7 @@
 					(hide yes)
 				)
 			)
-			(symbol "R_US_0_1"
+			(symbol "Device_R_US_0_1"
 				(polyline
 					(pts
 						(xy 0 -2.286) (xy 0 -2.54)
@@ -884,7 +884,7 @@
 					)
 				)
 			)
-			(symbol "R_US_1_1"
+			(symbol "Device_R_US_1_1"
 				(pin passive line
 					(at 0 3.81 270)
 					(length 1.27)
@@ -923,7 +923,7 @@
 				)
 			)
 		)
-		(symbol "Diode:ESD9B3.3ST5G"
+(symbol "Stratolink_v1p1_Symbols:Stratolink_Release_PESD5V0U1BB"
 			(pin_numbers hide)
 			(pin_names
 				(offset 1.016) hide)
@@ -938,7 +938,7 @@
 					)
 				)
 			)
-			(property "Value" "ESD9B3.3ST5G"
+			(property "Value" "PESD5V0U1BB"
 				(at 0 -2.54 0)
 				(effects
 					(font
@@ -955,7 +955,7 @@
 					(hide yes)
 				)
 			)
-			(property "Datasheet" "https://www.onsemi.com/pub/Collateral/ESD9B-D.PDF"
+			(property "Datasheet" "https://uploadcdn.oneyac.com/attachments/files/brand_pdf/leiditech/3D/92/PESD5V0U1BB.pdf"
 				(at 0 0 0)
 				(effects
 					(font
@@ -964,7 +964,7 @@
 					(hide yes)
 				)
 			)
-			(property "Description" "ESD protection diode, 3.3Vrwm, SOD-923"
+			(property "Description" "Bidirectional 5 V low-capacitance ESD TVS, SOD-523; nominal 0.5 pF; PESD5V0U1BB"
 				(at 0 0 0)
 				(effects
 					(font
@@ -982,7 +982,7 @@
 					(hide yes)
 				)
 			)
-			(property "ki_fp_filters" "D*SOD?923*"
+			(property "ki_fp_filters" "*SOD-523*"
 				(at 0 0 0)
 				(effects
 					(font
@@ -991,7 +991,7 @@
 					(hide yes)
 				)
 			)
-			(symbol "ESD9B3.3ST5G_0_1"
+			(symbol "Stratolink_Release_PESD5V0U1BB_0_1"
 				(polyline
 					(pts
 						(xy 1.27 0) (xy -1.27 0)
@@ -1041,7 +1041,7 @@
 					)
 				)
 			)
-			(symbol "ESD9B3.3ST5G_1_1"
+			(symbol "Stratolink_Release_PESD5V0U1BB_1_1"
 				(pin passive line
 					(at -3.81 0 0)
 					(length 2.54)
@@ -1080,7 +1080,7 @@
 				)
 			)
 		)
-		(symbol "LIS2DH12TR:LIS2DH12TR"
+(symbol "Stratolink_v1p1_Symbols:LIS2DH12TR_LIS2DH12TR"
 			(pin_names
 				(offset 1.016)
 			)
@@ -1124,7 +1124,7 @@
 					(hide yes)
 				)
 			)
-			(property "Description" "MEMS digital output motion sensor: ultra low-power high performance 3-axes femto accelerometer"
+			(property "Description" "LIS2DH12TR three-axis low-power accelerometer"
 				(at 0 0 0)
 				(effects
 					(font
@@ -1234,7 +1234,7 @@
 					(hide yes)
 				)
 			)
-			(property "Description_1" "\n                        \n                            Accelerometer X, Y, Z Axis ±2g, 4g, 8g, 16g 0.5Hz ~ 672Hz 12-LGA (2x2)\n                        \n"
+			(property "Description_1" "LIS2DH12TR three-axis low-power accelerometer"
 				(at 0 0 0)
 				(effects
 					(font
@@ -1244,7 +1244,7 @@
 					(hide yes)
 				)
 			)
-			(symbol "LIS2DH12TR_0_0"
+			(symbol "LIS2DH12TR_LIS2DH12TR_0_0"
 				(rectangle
 					(start -12.7 -15.24)
 					(end 12.7 15.24)
@@ -1474,7 +1474,7 @@
 				)
 			)
 		)
-		(symbol "ProLib_pcs_2026-01-31:BQ25570RGRR"
+(symbol "Stratolink_v1p1_Symbols:ProLib_pcs_2026_01_31_BQ25570RGRR"
 			(exclude_from_sim no)
 			(in_bom yes)
 			(on_board yes)
@@ -1512,7 +1512,7 @@
 					(hide yes)
 				)
 			)
-			(property "Description" "Operating Temperature:-40°C~+125°C Operating Temperature:-40°C~+125°C "
+			(property "Description" "BQ25570 energy-harvesting boost charger and buck converter; RGR VQFN-20 plus exposed ground pad"
 				(at 0 0 0)
 				(effects
 					(font
@@ -1566,7 +1566,7 @@
 					(hide yes)
 				)
 			)
-			(symbol "BQ25570RGRR_1_0"
+			(symbol "ProLib_pcs_2026_01_31_BQ25570RGRR_1_0"
 				(rectangle
 					(start -16.51 -17.78)
 					(end 16.51 17.78)
@@ -1589,7 +1589,7 @@
 						(type none)
 					)
 				)
-				(pin input line
+				(pin power_in line
 					(at -19.05 5.08 0)
 					(length 2.54)
 					(name "VSS"
@@ -1661,7 +1661,7 @@
 						)
 					)
 				)
-				(pin input line
+				(pin output line
 					(at 19.05 0 180)
 					(length 2.54)
 					(name "VBAT_OK"
@@ -1679,7 +1679,7 @@
 						)
 					)
 				)
-				(pin input line
+				(pin power_out line
 					(at 19.05 2.54 180)
 					(length 2.54)
 					(name "VOUT"
@@ -1697,7 +1697,7 @@
 						)
 					)
 				)
-				(pin input line
+				(pin power_in line
 					(at 19.05 5.08 180)
 					(length 2.54)
 					(name "VSS"
@@ -1715,7 +1715,7 @@
 						)
 					)
 				)
-				(pin input line
+				(pin bidirectional line
 					(at 5.08 20.32 270)
 					(length 2.54)
 					(name "LBUCK"
@@ -1751,7 +1751,7 @@
 						)
 					)
 				)
-				(pin input line
+				(pin power_in line
 					(at 0 20.32 270)
 					(length 2.54)
 					(name "VBAT"
@@ -1769,7 +1769,7 @@
 						)
 					)
 				)
-				(pin input line
+				(pin power_out line
 					(at -2.54 20.32 270)
 					(length 2.54)
 					(name "VSTOR"
@@ -1787,7 +1787,7 @@
 						)
 					)
 				)
-				(pin input line
+				(pin power_in line
 					(at -19.05 2.54 0)
 					(length 2.54)
 					(name "VIN_DC"
@@ -1805,7 +1805,7 @@
 						)
 					)
 				)
-				(pin input line
+				(pin bidirectional line
 					(at -5.08 20.32 270)
 					(length 2.54)
 					(name "LBOOST"
@@ -1823,7 +1823,7 @@
 						)
 					)
 				)
-				(pin input line
+				(pin power_in line
 					(at -7.62 20.32 270)
 					(length 2.54)
 					(name "EP"
@@ -1931,7 +1931,7 @@
 						)
 					)
 				)
-				(pin input line
+				(pin power_out line
 					(at 0 -20.32 90)
 					(length 2.54)
 					(name "VRDIV"
@@ -1969,7 +1969,7 @@
 				)
 			)
 		)
-		(symbol "ProLib_pcs_2026-02-08:MAX-M10S-00B"
+(symbol "Stratolink_v1p1_Symbols:ProLib_pcs_2026_02_08_MAX_M10S_00B"
 			(exclude_from_sim no)
 			(in_bom yes)
 			(on_board yes)
@@ -2007,7 +2007,7 @@
 					(hide yes)
 				)
 			)
-			(property "Description" ""
+			(property "Description" "MAX-M10S-00B GNSS receiver module"
 				(at 0 0 0)
 				(effects
 					(font
@@ -2061,7 +2061,7 @@
 					(hide yes)
 				)
 			)
-			(symbol "MAX-M10S-00B_1_0"
+			(symbol "ProLib_pcs_2026_02_08_MAX_M10S_00B_1_0"
 				(rectangle
 					(start -17.78 12.7)
 					(end 17.78 -12.7)
@@ -2073,7 +2073,7 @@
 						(type none)
 					)
 				)
-				(pin unspecified line
+				(pin power_in line
 					(at -20.32 10.16 0)
 					(length 2.54)
 					(name "GND"
@@ -2091,7 +2091,7 @@
 						)
 					)
 				)
-				(pin unspecified line
+				(pin power_in line
 					(at 20.32 -10.16 180)
 					(length 2.54)
 					(name "GND"
@@ -2109,7 +2109,7 @@
 						)
 					)
 				)
-				(pin unspecified line
+				(pin input line
 					(at 20.32 -7.62 180)
 					(length 2.54)
 					(name "RF_IN"
@@ -2127,7 +2127,7 @@
 						)
 					)
 				)
-				(pin unspecified line
+				(pin power_in line
 					(at 20.32 -5.08 180)
 					(length 2.54)
 					(name "GND"
@@ -2145,7 +2145,7 @@
 						)
 					)
 				)
-				(pin unspecified line
+				(pin output line
 					(at 20.32 -2.54 180)
 					(length 2.54)
 					(name "LNA_EN"
@@ -2163,7 +2163,7 @@
 						)
 					)
 				)
-				(pin unspecified line
+				(pin power_out line
 					(at 20.32 0 180)
 					(length 2.54)
 					(name "VCC_RF"
@@ -2181,7 +2181,7 @@
 						)
 					)
 				)
-				(pin unspecified line
+				(pin input line
 					(at 20.32 2.54 180)
 					(length 2.54)
 					(name "VIO_SEL"
@@ -2199,7 +2199,7 @@
 						)
 					)
 				)
-				(pin unspecified line
+				(pin bidirectional line
 					(at 20.32 5.08 180)
 					(length 2.54)
 					(name "SDA"
@@ -2217,7 +2217,7 @@
 						)
 					)
 				)
-				(pin unspecified line
+				(pin input line
 					(at 20.32 7.62 180)
 					(length 2.54)
 					(name "SCL"
@@ -2235,7 +2235,7 @@
 						)
 					)
 				)
-				(pin unspecified line
+				(pin input line
 					(at 20.32 10.16 180)
 					(length 2.54)
 					(name "SAFEBOOT_N"
@@ -2253,7 +2253,7 @@
 						)
 					)
 				)
-				(pin unspecified line
+				(pin output line
 					(at -20.32 7.62 0)
 					(length 2.54)
 					(name "TXD"
@@ -2271,7 +2271,7 @@
 						)
 					)
 				)
-				(pin unspecified line
+				(pin input line
 					(at -20.32 5.08 0)
 					(length 2.54)
 					(name "RXD"
@@ -2289,7 +2289,7 @@
 						)
 					)
 				)
-				(pin unspecified line
+				(pin output line
 					(at -20.32 2.54 0)
 					(length 2.54)
 					(name "TIMEPULSE"
@@ -2307,7 +2307,7 @@
 						)
 					)
 				)
-				(pin unspecified line
+				(pin input line
 					(at -20.32 0 0)
 					(length 2.54)
 					(name "EXTINT"
@@ -2325,7 +2325,7 @@
 						)
 					)
 				)
-				(pin unspecified line
+				(pin power_in line
 					(at -20.32 -2.54 0)
 					(length 2.54)
 					(name "V_BCKP"
@@ -2343,7 +2343,7 @@
 						)
 					)
 				)
-				(pin unspecified line
+				(pin power_in line
 					(at -20.32 -5.08 0)
 					(length 2.54)
 					(name "V_IO"
@@ -2361,7 +2361,7 @@
 						)
 					)
 				)
-				(pin unspecified line
+				(pin power_in line
 					(at -20.32 -7.62 0)
 					(length 2.54)
 					(name "VCC"
@@ -2379,7 +2379,7 @@
 						)
 					)
 				)
-				(pin unspecified line
+				(pin input line
 					(at -20.32 -10.16 0)
 					(length 2.54)
 					(name "RESET_N"
@@ -2399,7 +2399,7 @@
 				)
 			)
 		)
-		(symbol "ProLib_pcs_2026-02-20:LTR-390UV-01"
+(symbol "Stratolink_v1p1_Symbols:ProLib_pcs_2026_02_20_LTR_390UV_01"
 			(exclude_from_sim no)
 			(in_bom yes)
 			(on_board yes)
@@ -2437,7 +2437,7 @@
 					(hide yes)
 				)
 			)
-			(property "Description" "Measurement Type:Light Intensity Photoperceptivity:157klx Interface:I2C Resolution(Bits):18bit Voltage - Supply:1.7V~3.6V Voltage - Supply:1.7V~3.6V Operating Temperature:-40°C~+85°C Operating Temperature:-40°C~+85°C "
+			(property "Description" "LTR-390UV-01 ambient light and UVA sensor"
 				(at 0 0 0)
 				(effects
 					(font
@@ -2491,7 +2491,7 @@
 					(hide yes)
 				)
 			)
-			(symbol "LTR-390UV-01_1_0"
+			(symbol "ProLib_pcs_2026_02_20_LTR_390UV_01_1_0"
 				(rectangle
 					(start -6.35 -5.08)
 					(end 6.35 5.08)
@@ -2514,7 +2514,7 @@
 						(type none)
 					)
 				)
-				(pin unspecified line
+				(pin power_in line
 					(at -8.89 2.54 0)
 					(length 2.54)
 					(name "VDD"
@@ -2532,7 +2532,7 @@
 						)
 					)
 				)
-				(pin unspecified line
+				(pin no_connect line
 					(at -8.89 0 0)
 					(length 2.54)
 					(name "NC"
@@ -2550,7 +2550,7 @@
 						)
 					)
 				)
-				(pin unspecified line
+				(pin power_in line
 					(at -8.89 -2.54 0)
 					(length 2.54)
 					(name "GND"
@@ -2568,7 +2568,7 @@
 						)
 					)
 				)
-				(pin unspecified line
+				(pin input line
 					(at 8.89 -2.54 180)
 					(length 2.54)
 					(name "SCL"
@@ -2586,7 +2586,7 @@
 						)
 					)
 				)
-				(pin unspecified line
+				(pin open_collector line
 					(at 8.89 0 180)
 					(length 2.54)
 					(name "INT"
@@ -2604,7 +2604,7 @@
 						)
 					)
 				)
-				(pin unspecified line
+				(pin bidirectional line
 					(at 8.89 2.54 180)
 					(length 2.54)
 					(name "SDA"
@@ -2624,7 +2624,7 @@
 				)
 			)
 		)
-		(symbol "RAK3172:RAK3172"
+(symbol "Stratolink_v1p1_Symbols:RAK3172_RAK3172"
 			(pin_names
 				(offset 1.016)
 			)
@@ -2668,7 +2668,7 @@
 					(hide yes)
 				)
 			)
-			(property "Description" "RAK3172 is a low-power long-range transceiver module based on the STM32WLE5CC chip. It provides an easy-to-use, small-size, low-power solution for long range wireless data applications"
+			(property "Description" "RAK3172-9-SM-NI sub-GHz STM32WLE5CC radio module"
 				(at 0 0 0)
 				(effects
 					(font
@@ -2768,7 +2768,7 @@
 					(hide yes)
 				)
 			)
-			(property "Description_1" "\n                        \n                            RAK3172 is a low-power long-range transceiver module based on the STM32WLE5CC chip. It provides an easy-to-use, small-size, low-power solution for long range wireless data applications\n                        \n"
+			(property "Description_1" "RAK3172-9-SM-NI sub-GHz STM32WLE5CC radio module"
 				(at 0 0 0)
 				(effects
 					(font
@@ -2808,7 +2808,7 @@
 					(hide yes)
 				)
 			)
-			(symbol "RAK3172_0_0"
+			(symbol "RAK3172_RAK3172_0_0"
 				(rectangle
 					(start 0 -2.54)
 					(end 40.64 40.64)
@@ -3398,7 +3398,7 @@
 				)
 			)
 		)
-		(symbol "TMP117NAIYBGR:TMP117NAIYBGR"
+(symbol "Stratolink_v1p1_Symbols:Stratolink_Release_TMP117AIYBGR"
 			(pin_names
 				(offset 1.016)
 			)
@@ -3414,7 +3414,7 @@
 					(justify left bottom)
 				)
 			)
-			(property "Value" "TMP117NAIYBGR"
+			(property "Value" "TMP117AIYBGR"
 				(at -10.16 -10.16 0)
 				(effects
 					(font
@@ -3442,7 +3442,7 @@
 					(hide yes)
 				)
 			)
-			(property "Description" "TMP117N precision digital temperature sensor; +/-0.2 C from -40 to 100 C; YBG DSBGA-6"
+			(property "Description" "TMP117 precision digital temperature sensor, YBG DSBGA-6; max +/-0.2 C at -40 to 100 C, +/-0.25 C at -55 to 125 C under TI test conditions"
 				(at 0 0 0)
 				(effects
 					(font
@@ -3491,7 +3491,7 @@
 					(hide yes)
 				)
 			)
-			(property "Check_prices" "https://www.snapeda.com/parts/TMP117NAIYBGR/Texas+Instruments/view-part/?ref=eda"
+			(property "Check_prices" "https://www.snapeda.com/parts/TMP117AIYBGR/Texas+Instruments/view-part/?ref=eda"
 				(at 0 0 0)
 				(effects
 					(font
@@ -3521,7 +3521,7 @@
 					(hide yes)
 				)
 			)
-			(property "SnapEDA_Link" "https://www.snapeda.com/parts/TMP117NAIYBGR/Texas+Instruments/view-part/?ref=snap"
+			(property "SnapEDA_Link" "https://www.snapeda.com/parts/TMP117AIYBGR/Texas+Instruments/view-part/?ref=snap"
 				(at 0 0 0)
 				(effects
 					(font
@@ -3541,7 +3541,7 @@
 					(hide yes)
 				)
 			)
-			(property "MP" "TMP117NAIYBGR"
+			(property "MP" "TMP117AIYBGR"
 				(at 0 0 0)
 				(effects
 					(font
@@ -3551,7 +3551,7 @@
 					(hide yes)
 				)
 			)
-			(property "Description_1" "\n                        \n                            0.1°C digital temperature sensor, 48-bit EEPROM, PT100/PT1000 RTD replacement\n                        \n"
+			(property "Description_1" "TMP117 precision digital temperature sensor, YBG DSBGA-6; max +/-0.2 C at -40 to 100 C, +/-0.25 C at -55 to 125 C under TI test conditions"
 				(at 0 0 0)
 				(effects
 					(font
@@ -3581,7 +3581,7 @@
 					(hide yes)
 				)
 			)
-			(symbol "TMP117NAIYBGR_0_0"
+			(symbol "Stratolink_Release_TMP117AIYBGR_0_0"
 				(rectangle
 					(start -10.16 -7.62)
 					(end 10.16 7.62)
@@ -3703,7 +3703,7 @@
 				)
 			)
 		)
-		(symbol "fab:Conn_Header_JST_PH_1x02_P2mm_Vertical_SMD"
+(symbol "Stratolink_v1p1_Symbols:fab_Conn_Header_JST_PH_1x02_P2mm_Vertical_SMD"
 			(exclude_from_sim no)
 			(in_bom yes)
 			(on_board yes)
@@ -3768,7 +3768,7 @@
 					(hide yes)
 				)
 			)
-			(symbol "Conn_Header_JST_PH_1x02_P2mm_Vertical_SMD_0_1"
+			(symbol "fab_Conn_Header_JST_PH_1x02_P2mm_Vertical_SMD_0_1"
 				(rectangle
 					(start -2.54 3.81)
 					(end 2.54 -3.81)
@@ -3781,7 +3781,7 @@
 					)
 				)
 			)
-			(symbol "Conn_Header_JST_PH_1x02_P2mm_Vertical_SMD_1_1"
+			(symbol "fab_Conn_Header_JST_PH_1x02_P2mm_Vertical_SMD_1_1"
 				(pin passive line
 					(at 5.08 0 180)
 					(length 2.54)
@@ -3820,7 +3820,7 @@
 				)
 			)
 		)
-		(symbol "fab:Conn_PinHeader_1x07_P2.54mm_Vertical_THT_D1mm"
+(symbol "Stratolink_v1p1_Symbols:fab_Conn_PinHeader_1x07_P2_54mm_Vertical_THT_D1mm"
 			(pin_names hide)
 			(exclude_from_sim no)
 			(in_bom yes)
@@ -3886,7 +3886,7 @@
 					(hide yes)
 				)
 			)
-			(symbol "Conn_PinHeader_1x07_P2.54mm_Vertical_THT_D1mm_1_1"
+			(symbol "fab_Conn_PinHeader_1x07_P2_54mm_Vertical_THT_D1mm_1_1"
 				(rectangle
 					(start -1.27 -6.985)
 					(end 1.27 -8.255)
@@ -4092,7 +4092,7 @@
 				)
 			)
 		)
-		(symbol "power:+5V"
+(symbol "Stratolink_v1p1_Symbols:power_5V"
 			(power)
 			(pin_numbers hide)
 			(pin_names
@@ -4153,7 +4153,7 @@
 					(hide yes)
 				)
 			)
-			(symbol "+5V_0_1"
+			(symbol "power_5V_0_1"
 				(polyline
 					(pts
 						(xy -0.762 1.27) (xy 0 2.54)
@@ -4191,7 +4191,7 @@
 					)
 				)
 			)
-			(symbol "+5V_1_1"
+			(symbol "power_5V_1_1"
 				(pin power_in line
 					(at 0 0 90)
 					(length 0)
@@ -4212,7 +4212,7 @@
 				)
 			)
 		)
-		(symbol "power:GND"
+(symbol "Stratolink_v1p1_Symbols:power_GND"
 			(power)
 			(pin_numbers hide)
 			(pin_names
@@ -4273,7 +4273,7 @@
 					(hide yes)
 				)
 			)
-			(symbol "GND_0_1"
+			(symbol "power_GND_0_1"
 				(polyline
 					(pts
 						(xy 0 0) (xy 0 -1.27) (xy 1.27 -1.27) (xy 0 -2.54) (xy -1.27 -1.27) (xy 0 -1.27)
@@ -4287,7 +4287,7 @@
 					)
 				)
 			)
-			(symbol "GND_1_1"
+			(symbol "power_GND_1_1"
 				(pin power_in line
 					(at 0 0 270)
 					(length 0)
@@ -4308,7 +4308,7 @@
 				)
 			)
 		)
-		(symbol "pressure:MS561101BA03-50"
+(symbol "Stratolink_v1p1_Symbols:pressure_MS561101BA03_50"
 			(exclude_from_sim no)
 			(in_bom yes)
 			(on_board yes)
@@ -4346,7 +4346,7 @@
 					(hide yes)
 				)
 			)
-			(property "Description" "Pressure range:1Kpa~1.2bar Pressure range:1Kpa~1.2bar Voltage - Supply:1.8V~3.6V Voltage - Supply:1.8V~3.6V Standby Current:140nA Interface:SpI；I2C Operating Temperature:-40°C~+85°C Operating Temperature:-40°C~+85°C Response time:8.22ms "
+			(property "Description" "MS561101BA03-50 digital pressure and temperature sensor"
 				(at 0 0 0)
 				(effects
 					(font
@@ -4400,7 +4400,7 @@
 					(hide yes)
 				)
 			)
-			(symbol "MS561101BA03-50_1_0"
+			(symbol "pressure_MS561101BA03_50_1_0"
 				(rectangle
 					(start -10.16 6.35)
 					(end 10.16 -6.35)
@@ -4412,7 +4412,7 @@
 						(type none)
 					)
 				)
-				(pin unspecified line
+				(pin power_in line
 					(at -12.7 3.81 0)
 					(length 2.54)
 					(name "VDD"
@@ -4430,7 +4430,7 @@
 						)
 					)
 				)
-				(pin unspecified line
+				(pin input line
 					(at -12.7 1.27 0)
 					(length 2.54)
 					(name "PS"
@@ -4448,7 +4448,7 @@
 						)
 					)
 				)
-				(pin unspecified line
+				(pin power_in line
 					(at -12.7 -1.27 0)
 					(length 2.54)
 					(name "GND"
@@ -4466,7 +4466,7 @@
 						)
 					)
 				)
-				(pin unspecified line
+				(pin input line
 					(at -12.7 -3.81 0)
 					(length 2.54)
 					(name "CSB"
@@ -4484,7 +4484,7 @@
 						)
 					)
 				)
-				(pin unspecified line
+				(pin input line
 					(at 12.7 -3.81 180)
 					(length 2.54)
 					(name "CSB"
@@ -4502,7 +4502,7 @@
 						)
 					)
 				)
-				(pin unspecified line
+				(pin output line
 					(at 12.7 -1.27 180)
 					(length 2.54)
 					(name "SDO"
@@ -4520,7 +4520,7 @@
 						)
 					)
 				)
-				(pin unspecified line
+				(pin bidirectional line
 					(at 12.7 1.27 180)
 					(length 2.54)
 					(name "SDI/SDA"
@@ -4538,7 +4538,7 @@
 						)
 					)
 				)
-				(pin unspecified line
+				(pin input line
 					(at 12.7 3.81 180)
 					(length 2.54)
 					(name "SCLK"
@@ -4558,7 +4558,124 @@
 				)
 			)
 		)
+(symbol "Stratolink_v1p1_Symbols:Stratolink_Power_DMF4B5R5G105M3DTA0_3T" (pin_names (offset 0.5)) (exclude_from_sim no) (in_bom yes) (on_board yes) (property "Reference" "C" (at 0 7 0) (effects (font (size 1 1)))) (property "Value" "1F" (at 0 -7 0) (effects (font (size 1 1)))) (property "Footprint" "lib:DMF4B5R5G105M3DTA0" (at 0 0 0) (effects (font (size 1 1)) (hide yes))) (property "Datasheet" "https://www.cap-xx.com" (at 0 0 0) (effects (font (size 1 1)) (hide yes))) (property "Description" "CAP-XX DMF dual cell; placed pin1 positive, pin2 negative, pin3 midpoint; hand-install" (at 0 0 0) (effects (font (size 1 1)) (hide yes))) (symbol "Stratolink_Power_DMF4B5R5G105M3DTA0_3T_0_1" (polyline (pts (xy -2 -1.905) (xy 2 -1.905)) (stroke (width 0.2) (type default)) (fill (type none)))(polyline (pts (xy -2 -0.635) (xy 2 -0.635)) (stroke (width 0.2) (type default)) (fill (type none)))(polyline (pts (xy -2 0.635) (xy 2 0.635)) (stroke (width 0.2) (type default)) (fill (type none)))(polyline (pts (xy -2 1.905) (xy 2 1.905)) (stroke (width 0.2) (type default)) (fill (type none)))(polyline (pts (xy 0 -0.635) (xy 0 0.635)) (stroke (width 0.2) (type default)) (fill (type none)))(polyline (pts (xy -2.54 0) (xy 0 0)) (stroke (width 0.2) (type default)) (fill (type none)))) (symbol "Stratolink_Power_DMF4B5R5G105M3DTA0_3T_1_1" (pin passive line (at 0 3.81 270) (length 1.905) (name "+" (effects (font (size 1 1)))) (number "1" (effects (font (size 1 1))))) (pin passive line (at 0 -3.81 90) (length 1.905) (name "-" (effects (font (size 1 1)))) (number "2" (effects (font (size 1 1))))) (pin passive line (at -5.08 0 0) (length 2.54) (name "MID" (effects (font (size 1 1)))) (number "3" (effects (font (size 1 1)))))))
+(symbol "Stratolink_v1p1_Symbols:Stratolink_Power_TLV8801DBVT" (pin_names (offset 0.5)) (exclude_from_sim no) (in_bom yes) (on_board yes) (property "Reference" "U" (at 0 7 0) (effects (font (size 1 1)))) (property "Value" "TLV8801DBVT" (at 0 -7 0) (effects (font (size 1 1)))) (property "Footprint" "Package_TO_SOT_SMD:SOT-23-5" (at 0 0 0) (effects (font (size 1 1)) (hide yes))) (property "Datasheet" "https://www.ti.com/lit/ds/symlink/tlv8801.pdf" (at 0 0 0) (effects (font (size 1 1)) (hide yes))) (property "Description" "450nA typical nanopower amplifier; CAP-XX midpoint follower" (at 0 0 0) (effects (font (size 1 1)) (hide yes))) (symbol "Stratolink_Power_TLV8801DBVT_0_1" (polyline (pts (xy -5.08 5.08) (xy -5.08 -5.08)) (stroke (width 0.2) (type default)) (fill (type none)))(polyline (pts (xy -5.08 -5.08) (xy 5.08 0)) (stroke (width 0.2) (type default)) (fill (type none)))(polyline (pts (xy 5.08 0) (xy -5.08 5.08)) (stroke (width 0.2) (type default)) (fill (type none)))) (symbol "Stratolink_Power_TLV8801DBVT_1_1" (pin output line (at 7.62 0 180) (length 2.54) (name "OUT" (effects (font (size 1 1)))) (number "1" (effects (font (size 1 1))))) (pin power_in line (at 0 -7.62 90) (length 5.08) (name "V-" (effects (font (size 1 1)))) (number "2" (effects (font (size 1 1))))) (pin input line (at -7.62 2.54 0) (length 2.54) (name "+" (effects (font (size 1 1)))) (number "3" (effects (font (size 1 1))))) (pin input line (at -7.62 -2.54 0) (length 2.54) (name "-" (effects (font (size 1 1)))) (number "4" (effects (font (size 1 1))))) (pin power_in line (at 0 7.62 270) (length 5.08) (name "V+" (effects (font (size 1 1)))) (number "5" (effects (font (size 1 1)))))))
+(symbol "Stratolink_v1p1_Symbols:PWR_FLAG"
+		(power global)
+		(pin_numbers
+			(hide yes)
+		)
+		(pin_names
+			(offset 0)
+			(hide yes)
+		)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(duplicate_pin_numbers_are_jumpers no)
+		(property "Reference" "#FLG"
+			(at 0 1.905 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "PWR_FLAG"
+			(at 0 3.81 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Special symbol for telling ERC where power comes from"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "ki_keywords" "flag power"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(symbol "PWR_FLAG_0_0"
+			(pin power_out line
+				(at 0 0 90)
+				(length 0)
+				(name ""
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "1"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+		)
+		(symbol "PWR_FLAG_0_1"
+			(polyline
+				(pts
+					(xy 0 0) (xy 0 1.27) (xy -1.016 1.905) (xy 0 2.54) (xy 1.016 1.905) (xy 0 1.27)
+				)
+				(stroke
+					(width 0)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+		)
+		(embedded_fonts no)
 	)
+)
 	(junction
 		(at 111.76 120.65)
 		(diameter 0)
@@ -52950,7 +53067,7 @@
 		)
 	)
 	(symbol
-		(lib_id "power:GND")
+		(lib_id "Stratolink_v1p1_Symbols:power_GND")
 		(at 33.02 73.66 90)
 		(unit 1)
 		(exclude_from_sim no)
@@ -53015,7 +53132,7 @@
 		)
 	)
 	(symbol
-		(lib_id "Device:R_US")
+		(lib_id "Stratolink_v1p1_Symbols:Device_R_US")
 		(at 71.12 165.1 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -53042,7 +53159,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Resistor_SMD:R_0402_1005Metric"
+		(property "Footprint" "lib:Stratolink_v1p1_R21_R_0402_1005Metric"
 			(at 72.136 165.354 90)
 			(effects
 				(font
@@ -53051,7 +53168,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "https://www.lcsc.com/product-detail/C60490.html?s_z=n_10kohm%2520resistor%25200402"
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C138033.html"
 			(at 71.12 165.1 0)
 			(effects
 				(font
@@ -53060,7 +53177,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "RC0402FR-0710KL"
+		(property "Description" "RC0402FR-071ML"
 			(at 71.12 165.1 0)
 			(effects
 				(font
@@ -53083,9 +53200,19 @@
 				)
 			)
 		)
-	)
+	
+ (property "Manufacturer" "Yageo" (at 71.12 165.1 0) (effects (font (size 1.27 1.27)) (hide yes)))
+
+ (property "Manufacturer_Part_Number" "RC0402FR-071ML" (at 71.12 165.1 0) (effects (font (size 1.27 1.27)) (hide yes)))
+
+ (property "Supplier" "LCSC" (at 71.12 165.1 0) (effects (font (size 1.27 1.27)) (hide yes)))
+
+ (property "LCSC" "C138033" (at 71.12 165.1 0) (effects (font (size 1.27 1.27)) (hide yes)))
+
+ (property "Supplier Part" "C138033" (at 71.12 165.1 0) (effects (font (size 1.27 1.27)) (hide yes)))
+)
 	(symbol
-		(lib_id "Device:Antenna")
+		(lib_id "Stratolink_v1p1_Symbols:Device_Antenna")
 		(at 157.48 19.05 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -53154,7 +53281,7 @@
 		)
 	)
 	(symbol
-		(lib_id "power:GND")
+		(lib_id "Stratolink_v1p1_Symbols:power_GND")
 		(at 210.82 36.83 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -53219,7 +53346,7 @@
 		)
 	)
 	(symbol
-		(lib_id "Device:FerriteBead_Small")
+		(lib_id "Stratolink_v1p1_Symbols:Device_FerriteBead_Small")
 		(at 90.17 121.92 270)
 		(unit 1)
 		(exclude_from_sim no)
@@ -53237,7 +53364,7 @@
 				(hide yes)
 			)
 		)
-		(property "Value" "~"
+		(property "Value" "BLM15AG601SN1D"
 			(at 87.884 124.206 90)
 			(effects
 				(font
@@ -53247,7 +53374,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "Capacitor_SMD:C_0402_1005Metric"
+		(property "Footprint" "lib:Stratolink_v1p1_FB1_C_0402_1005Metric"
 			(at 90.17 120.142 90)
 			(effects
 				(font
@@ -53256,7 +53383,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "https://www.lcsc.com/product-detail/C76884.html?s_z=n_BLM15AG601SN1%2520"
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C76884.html"
 			(at 90.17 121.92 0)
 			(effects
 				(font
@@ -53288,9 +53415,19 @@
 				)
 			)
 		)
-	)
+	
+ (property "Manufacturer" "Murata" (at 90.17 121.92 0) (effects (font (size 1.27 1.27)) (hide yes)))
+
+ (property "Manufacturer_Part_Number" "BLM15AG601SN1D" (at 90.17 121.92 0) (effects (font (size 1.27 1.27)) (hide yes)))
+
+ (property "Supplier" "LCSC" (at 90.17 121.92 0) (effects (font (size 1.27 1.27)) (hide yes)))
+
+ (property "LCSC" "C76884" (at 90.17 121.92 0) (effects (font (size 1.27 1.27)) (hide yes)))
+
+ (property "Supplier Part" "C76884" (at 90.17 121.92 0) (effects (font (size 1.27 1.27)) (hide yes)))
+)
 	(symbol
-		(lib_id "power:GND")
+		(lib_id "Stratolink_v1p1_Symbols:power_GND")
 		(at 128.27 88.9 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -53355,7 +53492,7 @@
 		)
 	)
 	(symbol
-		(lib_id "power:GND")
+		(lib_id "Stratolink_v1p1_Symbols:power_GND")
 		(at 234.95 109.22 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -53420,7 +53557,7 @@
 		)
 	)
 	(symbol
-		(lib_id "power:GND")
+		(lib_id "Stratolink_v1p1_Symbols:power_GND")
 		(at 154.94 133.35 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -53485,7 +53622,7 @@
 		)
 	)
 	(symbol
-		(lib_id "ProLib_pcs_2026-02-08:MAX-M10S-00B")
+		(lib_id "Stratolink_v1p1_Symbols:ProLib_pcs_2026_02_08_MAX_M10S_00B")
 		(at 132.08 115.57 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -53503,7 +53640,7 @@
 				(hide yes)
 			)
 		)
-		(property "Value" "~"
+		(property "Value" "MAX-M10S-00B"
 			(at 132.08 101.6 0)
 			(effects
 				(font
@@ -53511,7 +53648,7 @@
 				)
 			)
 		)
-		(property "Footprint" "lib:XCVR_MAX-M10S-00B"
+		(property "Footprint" "lib:Stratolink_v1p1_U3_XCVR_MAX-M10S-00B"
 			(at 132.08 115.57 0)
 			(effects
 				(font
@@ -53529,7 +53666,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" ""
+		(property "Description" "MAX-M10S-00B GNSS receiver module"
 			(at 132.08 115.57 0)
 			(effects
 				(font
@@ -53547,7 +53684,7 @@
 				(hide yes)
 			)
 		)
-		(property "Manufacturer" "U-BLOX"
+		(property "Manufacturer" "u-blox"
 			(at 132.08 115.57 0)
 			(effects
 				(font
@@ -53645,9 +53782,13 @@
 				)
 			)
 		)
-	)
+	
+ (property "Manufacturer_Part_Number" "MAX-M10S-00B" (at 132.08 115.57 0) (effects (font (size 1.27 1.27)) (hide yes)))
+
+ (property "LCSC" "C4153167" (at 132.08 115.57 0) (effects (font (size 1.27 1.27)) (hide yes)))
+)
 	(symbol
-		(lib_id "power:GND")
+		(lib_id "Stratolink_v1p1_Symbols:power_GND")
 		(at 201.93 66.04 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -53712,7 +53853,7 @@
 		)
 	)
 	(symbol
-		(lib_id "power:+5V")
+		(lib_id "Stratolink_v1p1_Symbols:power_5V")
 		(at 196.85 124.46 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -53777,7 +53918,7 @@
 		)
 	)
 	(symbol
-		(lib_id "Device:C")
+		(lib_id "Stratolink_v1p1_Symbols:Device_C")
 		(at 67.31 29.21 270)
 		(unit 1)
 		(exclude_from_sim no)
@@ -53802,7 +53943,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Capacitor_SMD:C_0402_1005Metric"
+		(property "Footprint" "lib:Stratolink_v1p1_C20_C_0402_1005Metric"
 			(at 63.5 30.1752 0)
 			(effects
 				(font
@@ -53811,7 +53952,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "~"
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C1525.html"
 			(at 67.31 29.21 0)
 			(effects
 				(font
@@ -53820,7 +53961,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Unpolarized capacitor"
+		(property "Description" "CL05B104KO5NNNC"
 			(at 67.31 29.21 0)
 			(effects
 				(font
@@ -53843,9 +53984,19 @@
 				)
 			)
 		)
-	)
+	
+ (property "Manufacturer" "Samsung Electro-Mechanics" (at 67.31 29.21 0) (effects (font (size 1.27 1.27)) (hide yes)))
+
+ (property "Manufacturer_Part_Number" "CL05B104KO5NNNC" (at 67.31 29.21 0) (effects (font (size 1.27 1.27)) (hide yes)))
+
+ (property "Supplier" "LCSC" (at 67.31 29.21 0) (effects (font (size 1.27 1.27)) (hide yes)))
+
+ (property "LCSC" "C1525" (at 67.31 29.21 0) (effects (font (size 1.27 1.27)) (hide yes)))
+
+ (property "Supplier Part" "C1525" (at 67.31 29.21 0) (effects (font (size 1.27 1.27)) (hide yes)))
+)
 	(symbol
-		(lib_id "Device:C")
+		(lib_id "Stratolink_v1p1_Symbols:Device_C")
 		(at 67.31 17.78 270)
 		(unit 1)
 		(exclude_from_sim no)
@@ -53870,7 +54021,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Capacitor_SMD:C_0402_1005Metric"
+		(property "Footprint" "lib:Stratolink_v1p1_C19_C_0402_1005Metric"
 			(at 63.5 18.7452 0)
 			(effects
 				(font
@@ -53879,7 +54030,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "~"
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C1525.html"
 			(at 67.31 17.78 0)
 			(effects
 				(font
@@ -53888,7 +54039,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Unpolarized capacitor"
+		(property "Description" "CL05B104KO5NNNC"
 			(at 67.31 17.78 0)
 			(effects
 				(font
@@ -53911,9 +54062,19 @@
 				)
 			)
 		)
-	)
+	
+ (property "Manufacturer" "Samsung Electro-Mechanics" (at 67.31 17.78 0) (effects (font (size 1.27 1.27)) (hide yes)))
+
+ (property "Manufacturer_Part_Number" "CL05B104KO5NNNC" (at 67.31 17.78 0) (effects (font (size 1.27 1.27)) (hide yes)))
+
+ (property "Supplier" "LCSC" (at 67.31 17.78 0) (effects (font (size 1.27 1.27)) (hide yes)))
+
+ (property "LCSC" "C1525" (at 67.31 17.78 0) (effects (font (size 1.27 1.27)) (hide yes)))
+
+ (property "Supplier Part" "C1525" (at 67.31 17.78 0) (effects (font (size 1.27 1.27)) (hide yes)))
+)
 	(symbol
-		(lib_id "power:GND")
+		(lib_id "Stratolink_v1p1_Symbols:power_GND")
 		(at 196.85 134.62 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -53978,7 +54139,7 @@
 		)
 	)
 	(symbol
-		(lib_id "Device:L")
+		(lib_id "Stratolink_v1p1_Symbols:Device_L")
 		(at 238.76 36.83 90)
 		(unit 1)
 		(exclude_from_sim no)
@@ -54046,9 +54207,19 @@
 				)
 			)
 		)
-	)
+	
+ (property "Manufacturer" "PROD Tech" (at 238.76 36.83 0) (effects (font (size 1.27 1.27)) (hide yes)))
+
+ (property "LCSC" "C436784" (at 238.76 36.83 0) (effects (font (size 1.27 1.27)) (hide yes)))
+
+ (property "Manufacturer_Part_Number" "PWCWAQ1608F-100KTT" (at 238.76 36.83 0) (effects (font (size 1.27 1.27)) (hide yes)))
+
+ (property "Supplier Part" "C436784" (at 238.76 36.83 0) (effects (font (size 1.27 1.27)) (hide yes)))
+
+ (property "Supplier" "LCSC" (at 238.76 36.83 0) (effects (font (size 1.27 1.27)) (hide yes)))
+)
 	(symbol
-		(lib_id "power:+5V")
+		(lib_id "Stratolink_v1p1_Symbols:power_5V")
 		(at 57.15 81.28 270)
 		(unit 1)
 		(exclude_from_sim no)
@@ -54113,7 +54284,7 @@
 		)
 	)
 	(symbol
-		(lib_id "power:GND")
+		(lib_id "Stratolink_v1p1_Symbols:power_GND")
 		(at 25.4 76.2 90)
 		(unit 1)
 		(exclude_from_sim no)
@@ -54178,7 +54349,7 @@
 		)
 	)
 	(symbol
-		(lib_id "fab:Conn_PinHeader_1x07_P2.54mm_Vertical_THT_D1mm")
+		(lib_id "Stratolink_v1p1_Symbols:fab_Conn_PinHeader_1x07_P2_54mm_Vertical_THT_D1mm")
 		(at 52.07 73.66 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -54196,7 +54367,7 @@
 				(hide yes)
 			)
 		)
-		(property "Value" "Conn_PinHeader_1x07_P2.54mm_Vertical_THT_D1mm"
+		(property "Value" "Programming_1x07_P1.00mm_D0.50mm"
 			(at 52.07 63.5 0)
 			(effects
 				(font
@@ -54205,7 +54376,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "lib:Stratolink_Header_Right_1x07_P1p00_D0p50_Pad0p88"
+		(property "Footprint" "lib:Stratolink_v1p1_J4_Stratolink_Programming_Right_1x07_P1p00_D0p50_BackTack1p20x0p88"
 			(at 52.07 73.66 0)
 			(effects
 				(font
@@ -54223,7 +54394,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Connector Header Through Hole 7 positions 0.100\" (2.54mm)"
+		(property "Description" "Programming/wire pads: 7 positions, 1.00 mm pitch, 0.50 mm holes; 0.88 mm front lands and 1.20 x 0.88 mm inward-extended back tack lands."
 			(at 52.07 73.66 0)
 			(effects
 				(font
@@ -54263,7 +54434,7 @@
 		)
 	)
 	(symbol
-		(lib_id "Device:R_US")
+		(lib_id "Stratolink_v1p1_Symbols:Device_R_US")
 		(at 228.6 104.14 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -54290,7 +54461,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Resistor_SMD:R_0402_1005Metric"
+		(property "Footprint" "lib:Stratolink_v1p1_R5_R_0402_1005Metric"
 			(at 229.616 104.394 90)
 			(effects
 				(font
@@ -54299,7 +54470,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "~"
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C49654874.html"
 			(at 228.6 104.14 0)
 			(effects
 				(font
@@ -54308,7 +54479,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Resistor, US symbol"
+		(property "Description" "GR0402F4M42TAG00"
 			(at 228.6 104.14 0)
 			(effects
 				(font
@@ -54331,9 +54502,17 @@
 				)
 			)
 		)
-	)
+	
+ (property "LCSC" "C49654874" (at 228.6 104.14 0) (effects (font (size 1.27 1.27)) (hide yes)))
+
+ (property "Manufacturer_Part_Number" "GR0402F4M42TAG00" (at 228.6 104.14 0) (effects (font (size 1.27 1.27)) (hide yes)))
+
+ (property "Supplier Part" "C49654874" (at 228.6 104.14 0) (effects (font (size 1.27 1.27)) (hide yes)))
+
+ (property "Supplier" "LCSC" (at 228.6 104.14 0) (effects (font (size 1.27 1.27)) (hide yes)))
+)
 	(symbol
-		(lib_id "power:GND")
+		(lib_id "Stratolink_v1p1_Symbols:power_GND")
 		(at 224.79 80.01 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -54398,7 +54577,7 @@
 		)
 	)
 	(symbol
-		(lib_id "Diode:ESD9B3.3ST5G")
+		(lib_id "Stratolink_v1p1_Symbols:Stratolink_Release_PESD5V0U1BB")
 		(at 153.67 27.94 90)
 		(unit 1)
 		(exclude_from_sim no)
@@ -54417,7 +54596,7 @@
 				(hide yes)
 			)
 		)
-		(property "Value" "ESD9B3.3ST5G"
+		(property "Value" "PESD5V0U1BB"
 			(at 156.21 29.2099 90)
 			(effects
 				(font
@@ -54427,7 +54606,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "Diode_SMD:D_SOD-523"
+		(property "Footprint" "lib:Stratolink_v1p1_D1_D_SOD-523"
 			(at 153.67 27.94 0)
 			(effects
 				(font
@@ -54436,7 +54615,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "https://www.lcsc.com/product-detail/C5272735.html?s_z=n_C5272735%2520"
+		(property "Datasheet" "https://uploadcdn.oneyac.com/attachments/files/brand_pdf/leiditech/3D/92/PESD5V0U1BB.pdf"
 			(at 153.67 27.94 0)
 			(effects
 				(font
@@ -54445,7 +54624,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "UNI-ROYAL 0402WGF3654TCE"
+		(property "Description" "Bidirectional 5 V low-capacitance ESD TVS, SOD-523; nominal 0.5 pF; PESD5V0U1BB"
 			(at 153.67 27.94 0)
 			(effects
 				(font
@@ -54468,9 +54647,19 @@
 				)
 			)
 		)
-	)
+	
+ (property "Manufacturer" "Leiditech" (at 153.67 27.94 0) (effects (font (size 1.27 1.27)) (hide yes)))
+
+ (property "Manufacturer_Part_Number" "PESD5V0U1BB" (at 153.67 27.94 0) (effects (font (size 1.27 1.27)) (hide yes)))
+
+ (property "Supplier" "LCSC" (at 153.67 27.94 0) (effects (font (size 1.27 1.27)) (hide yes)))
+
+ (property "LCSC" "C5272735" (at 153.67 27.94 0) (effects (font (size 1.27 1.27)) (hide yes)))
+
+ (property "Supplier Part" "C5272735" (at 153.67 27.94 0) (effects (font (size 1.27 1.27)) (hide yes)))
+)
 	(symbol
-		(lib_id "power:GND")
+		(lib_id "Stratolink_v1p1_Symbols:power_GND")
 		(at 109.22 116.84 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -54535,7 +54724,7 @@
 		)
 	)
 	(symbol
-		(lib_id "power:GND")
+		(lib_id "Stratolink_v1p1_Symbols:power_GND")
 		(at 69.85 49.53 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -54600,7 +54789,7 @@
 		)
 	)
 	(symbol
-		(lib_id "power:+5V")
+		(lib_id "Stratolink_v1p1_Symbols:power_5V")
 		(at 86.36 118.11 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -54665,7 +54854,7 @@
 		)
 	)
 	(symbol
-		(lib_id "power:+5V")
+		(lib_id "Stratolink_v1p1_Symbols:power_5V")
 		(at 201.93 105.41 270)
 		(unit 1)
 		(exclude_from_sim no)
@@ -54730,7 +54919,7 @@
 		)
 	)
 	(symbol
-		(lib_id "Device:C")
+		(lib_id "Stratolink_v1p1_Symbols:Stratolink_Power_DMF4B5R5G105M3DTA0_3T")
 		(at 223.52 33.02 180)
 		(unit 1)
 		(exclude_from_sim no)
@@ -54738,50 +54927,11 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "4bc45da9-a541-47e3-b96e-485d85f9240a")
-		(property "Reference" "C5"
-			(at 215.9 35.56 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value" "1F"
-			(at 221.996 29.972 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "lib:DMF4B5R5G105M3DTA0"
-			(at 222.5548 29.21 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "~"
-			(at 223.52 33.02 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Supercap"
-			(at 223.52 33.02 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
+		
+		
+		
+		
+		
 		(pin "1"
 			(uuid "4d61439c-b15f-4dee-9d6e-d1098cdca4fe")
 		)
@@ -54796,9 +54946,59 @@
 				)
 			)
 		)
-	)
+	(pin "3" (uuid "d70a667f-ea35-52ff-9edc-084d674e5858"))
+(property "Reference" "C5"
+			(at 215.9 35.56 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+(property "Value" "1F"
+			(at 221.996 29.972 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+(property "Footprint" "lib:Stratolink_v1p1_C5_DMF4B5R5G105M3DTA0"
+			(at 222.5548 29.21 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+(property "Datasheet" "~"
+			(at 223.52 33.02 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+(property "Description" "DMF4B5R5G105M3DTA0; 1 F dual-cell capacitor, pad 1 positive, pad 2 negative, pad 3 midpoint; hand-install after reflow and cleaning"
+			(at 223.52 33.02 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+(property "Manufacturer" "CAP-XX / legacy Murata" (at 223.52 33.02 0) (effects (font (size 1.27 1.27)) (hide yes)))
+(property "Manufacturer_Part_Number" "DMF4B5R5G105M3DTA0" (at 223.52 33.02 0) (effects (font (size 1.27 1.27)) (hide yes)))
+(property "Assembly_Note" "Preserve proven outer polarity. Center pad 3 connects to SC_MID through R26 and the active balancer. Hand-install after board cleaning; no normal reflow." (at 223.52 33.02 0) (effects (font (size 1.27 1.27)) (hide yes)))
+
+
+)
 	(symbol
-		(lib_id "power:GND")
+		(lib_id "Stratolink_v1p1_Symbols:power_GND")
 		(at 153.67 31.75 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -54863,7 +55063,7 @@
 		)
 	)
 	(symbol
-		(lib_id "Device:C")
+		(lib_id "Stratolink_v1p1_Symbols:Device_C")
 		(at 96.52 167.64 180)
 		(unit 1)
 		(exclude_from_sim no)
@@ -54888,7 +55088,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Capacitor_SMD:C_0402_1005Metric"
+		(property "Footprint" "lib:Stratolink_v1p1_C17_C_0402_1005Metric"
 			(at 95.5548 163.83 0)
 			(effects
 				(font
@@ -54897,7 +55097,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "~"
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C1525.html"
 			(at 96.52 167.64 0)
 			(effects
 				(font
@@ -54906,7 +55106,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Unpolarized capacitor"
+		(property "Description" "CL05B104KO5NNNC"
 			(at 96.52 167.64 0)
 			(effects
 				(font
@@ -54929,9 +55129,19 @@
 				)
 			)
 		)
-	)
+	
+ (property "Manufacturer" "Samsung Electro-Mechanics" (at 96.52 167.64 0) (effects (font (size 1.27 1.27)) (hide yes)))
+
+ (property "Manufacturer_Part_Number" "CL05B104KO5NNNC" (at 96.52 167.64 0) (effects (font (size 1.27 1.27)) (hide yes)))
+
+ (property "Supplier" "LCSC" (at 96.52 167.64 0) (effects (font (size 1.27 1.27)) (hide yes)))
+
+ (property "LCSC" "C1525" (at 96.52 167.64 0) (effects (font (size 1.27 1.27)) (hide yes)))
+
+ (property "Supplier Part" "C1525" (at 96.52 167.64 0) (effects (font (size 1.27 1.27)) (hide yes)))
+)
 	(symbol
-		(lib_id "power:+5V")
+		(lib_id "Stratolink_v1p1_Symbols:power_5V")
 		(at 71.12 153.67 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -54996,7 +55206,7 @@
 		)
 	)
 	(symbol
-		(lib_id "Device:L")
+		(lib_id "Stratolink_v1p1_Symbols:Device_L")
 		(at 217.17 34.29 180)
 		(unit 1)
 		(exclude_from_sim no)
@@ -55023,7 +55233,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" "lib:IND_LPS4018-223MRC"
+		(property "Footprint" "lib:Stratolink_v1p1_L1_IND_LPS4018-223MRC"
 			(at 217.17 34.29 0)
 			(effects
 				(font
@@ -55064,9 +55274,19 @@
 				)
 			)
 		)
-	)
+	
+ (property "Manufacturer" "Coilcraft" (at 217.17 34.29 0) (effects (font (size 1.27 1.27)) (hide yes)))
+
+ (property "LCSC" "C5278935" (at 217.17 34.29 0) (effects (font (size 1.27 1.27)) (hide yes)))
+
+ (property "Manufacturer_Part_Number" "LPS4018-223MRC" (at 217.17 34.29 0) (effects (font (size 1.27 1.27)) (hide yes)))
+
+ (property "Supplier Part" "C5278935" (at 217.17 34.29 0) (effects (font (size 1.27 1.27)) (hide yes)))
+
+ (property "Supplier" "LCSC" (at 217.17 34.29 0) (effects (font (size 1.27 1.27)) (hide yes)))
+)
 	(symbol
-		(lib_id "power:+5V")
+		(lib_id "Stratolink_v1p1_Symbols:power_5V")
 		(at 130.81 21.59 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -55131,7 +55351,7 @@
 		)
 	)
 	(symbol
-		(lib_id "fab:Conn_Header_JST_PH_1x02_P2mm_Vertical_SMD")
+		(lib_id "Stratolink_v1p1_Symbols:fab_Conn_Header_JST_PH_1x02_P2mm_Vertical_SMD")
 		(at 194.31 105.41 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -55201,7 +55421,7 @@
 		)
 	)
 	(symbol
-		(lib_id "ProLib_pcs_2026-01-31:BQ25570RGRR")
+		(lib_id "Stratolink_v1p1_Symbols:ProLib_pcs_2026_01_31_BQ25570RGRR")
 		(at 222.25 59.69 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -55218,7 +55438,7 @@
 				)
 			)
 		)
-		(property "Value" "~"
+		(property "Value" "BQ25570RGRR"
 			(at 241.3 51.4665 0)
 			(effects
 				(font
@@ -55226,7 +55446,7 @@
 				)
 			)
 		)
-		(property "Footprint" "lib:QFN50P350X350X100-21N"
+		(property "Footprint" "lib:Stratolink_v1p1_U1_QFN50P350X350X100-21N"
 			(at 222.25 59.69 0)
 			(effects
 				(font
@@ -55244,7 +55464,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Operating Temperature:-40°C~+125°C Operating Temperature:-40°C~+125°C "
+		(property "Description" "BQ25570 energy-harvesting boost charger and buck converter; RGR VQFN-20 plus exposed ground pad"
 			(at 222.25 59.69 0)
 			(effects
 				(font
@@ -55262,7 +55482,7 @@
 				(hide yes)
 			)
 		)
-		(property "Manufacturer" "TI(德州仪器)"
+		(property "Manufacturer" "Texas Instruments"
 			(at 222.25 59.69 0)
 			(effects
 				(font
@@ -55369,9 +55589,13 @@
 				)
 			)
 		)
-	)
+	
+ (property "Manufacturer_Part_Number" "BQ25570RGRR" (at 222.25 59.69 0) (effects (font (size 1.27 1.27)) (hide yes)))
+
+ (property "LCSC" "C506250" (at 222.25 59.69 0) (effects (font (size 1.27 1.27)) (hide yes)))
+)
 	(symbol
-		(lib_id "Device:C")
+		(lib_id "Stratolink_v1p1_Symbols:Device_C")
 		(at 196.85 129.54 180)
 		(unit 1)
 		(exclude_from_sim no)
@@ -55396,7 +55620,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Capacitor_SMD:C_0402_1005Metric"
+		(property "Footprint" "lib:Stratolink_v1p1_C11_C_0402_1005Metric"
 			(at 195.8848 125.73 0)
 			(effects
 				(font
@@ -55405,7 +55629,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "~"
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C1525.html"
 			(at 196.85 129.54 0)
 			(effects
 				(font
@@ -55414,7 +55638,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Unpolarized capacitor"
+		(property "Description" "CL05B104KO5NNNC"
 			(at 196.85 129.54 0)
 			(effects
 				(font
@@ -55437,9 +55661,19 @@
 				)
 			)
 		)
-	)
+	
+ (property "Manufacturer" "Samsung Electro-Mechanics" (at 196.85 129.54 0) (effects (font (size 1.27 1.27)) (hide yes)))
+
+ (property "Manufacturer_Part_Number" "CL05B104KO5NNNC" (at 196.85 129.54 0) (effects (font (size 1.27 1.27)) (hide yes)))
+
+ (property "Supplier" "LCSC" (at 196.85 129.54 0) (effects (font (size 1.27 1.27)) (hide yes)))
+
+ (property "LCSC" "C1525" (at 196.85 129.54 0) (effects (font (size 1.27 1.27)) (hide yes)))
+
+ (property "Supplier Part" "C1525" (at 196.85 129.54 0) (effects (font (size 1.27 1.27)) (hide yes)))
+)
 	(symbol
-		(lib_id "power:+5V")
+		(lib_id "Stratolink_v1p1_Symbols:power_5V")
 		(at 162.56 34.29 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -55504,7 +55738,7 @@
 		)
 	)
 	(symbol
-		(lib_id "power:GND")
+		(lib_id "Stratolink_v1p1_Symbols:power_GND")
 		(at 190.5 54.61 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -55569,7 +55803,7 @@
 		)
 	)
 	(symbol
-		(lib_id "power:GND")
+		(lib_id "Stratolink_v1p1_Symbols:power_GND")
 		(at 57.15 66.04 90)
 		(unit 1)
 		(exclude_from_sim no)
@@ -55634,7 +55868,7 @@
 		)
 	)
 	(symbol
-		(lib_id "Device:R_US")
+		(lib_id "Stratolink_v1p1_Symbols:Device_R_US")
 		(at 222.25 99.06 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -55661,7 +55895,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Resistor_SMD:R_0402_1005Metric"
+		(property "Footprint" "lib:Stratolink_v1p1_R2_R_0402_1005Metric"
 			(at 223.266 99.314 90)
 			(effects
 				(font
@@ -55670,7 +55904,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "~"
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C2091474.html"
 			(at 222.25 99.06 0)
 			(effects
 				(font
@@ -55679,7 +55913,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Resistor, US symbol"
+		(property "Description" "CRCW04024M22FKED"
 			(at 222.25 99.06 0)
 			(effects
 				(font
@@ -55702,9 +55936,19 @@
 				)
 			)
 		)
-	)
+	
+ (property "Manufacturer" "Vishay" (at 222.25 99.06 0) (effects (font (size 1.27 1.27)) (hide yes)))
+
+ (property "Manufacturer_Part_Number" "CRCW04024M22FKED" (at 222.25 99.06 0) (effects (font (size 1.27 1.27)) (hide yes)))
+
+ (property "Supplier" "LCSC" (at 222.25 99.06 0) (effects (font (size 1.27 1.27)) (hide yes)))
+
+ (property "LCSC" "C2091474" (at 222.25 99.06 0) (effects (font (size 1.27 1.27)) (hide yes)))
+
+ (property "Supplier Part" "C2091474" (at 222.25 99.06 0) (effects (font (size 1.27 1.27)) (hide yes)))
+)
 	(symbol
-		(lib_id "power:GND")
+		(lib_id "Stratolink_v1p1_Symbols:power_GND")
 		(at 158.75 119.38 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -55769,7 +56013,7 @@
 		)
 	)
 	(symbol
-		(lib_id "Device:R_US")
+		(lib_id "Stratolink_v1p1_Symbols:Device_R_US")
 		(at 71.12 157.48 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -55796,7 +56040,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Resistor_SMD:R_0402_1005Metric"
+		(property "Footprint" "lib:Stratolink_v1p1_R19_R_0402_1005Metric"
 			(at 72.136 157.734 90)
 			(effects
 				(font
@@ -55805,7 +56049,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "https://www.lcsc.com/product-detail/C60490.html?s_z=n_10kohm%2520resistor%25200402"
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C138033.html"
 			(at 71.12 157.48 0)
 			(effects
 				(font
@@ -55814,7 +56058,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "RC0402FR-0710KL"
+		(property "Description" "RC0402FR-071ML"
 			(at 71.12 157.48 0)
 			(effects
 				(font
@@ -55837,9 +56081,19 @@
 				)
 			)
 		)
-	)
+	
+ (property "Manufacturer" "Yageo" (at 71.12 157.48 0) (effects (font (size 1.27 1.27)) (hide yes)))
+
+ (property "Manufacturer_Part_Number" "RC0402FR-071ML" (at 71.12 157.48 0) (effects (font (size 1.27 1.27)) (hide yes)))
+
+ (property "Supplier" "LCSC" (at 71.12 157.48 0) (effects (font (size 1.27 1.27)) (hide yes)))
+
+ (property "LCSC" "C138033" (at 71.12 157.48 0) (effects (font (size 1.27 1.27)) (hide yes)))
+
+ (property "Supplier Part" "C138033" (at 71.12 157.48 0) (effects (font (size 1.27 1.27)) (hide yes)))
+)
 	(symbol
-		(lib_id "Device:C")
+		(lib_id "Stratolink_v1p1_Symbols:Device_C")
 		(at 104.14 119.38 180)
 		(unit 1)
 		(exclude_from_sim no)
@@ -55864,7 +56118,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Capacitor_SMD:C_0402_1005Metric"
+		(property "Footprint" "lib:Stratolink_v1p1_C10_C_0402_1005Metric"
 			(at 103.1748 115.57 0)
 			(effects
 				(font
@@ -55873,7 +56127,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "~"
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C1525.html"
 			(at 104.14 119.38 0)
 			(effects
 				(font
@@ -55882,7 +56136,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Unpolarized capacitor"
+		(property "Description" "CL05B104KO5NNNC"
 			(at 104.14 119.38 0)
 			(effects
 				(font
@@ -55905,9 +56159,19 @@
 				)
 			)
 		)
-	)
+	
+ (property "Manufacturer" "Samsung Electro-Mechanics" (at 104.14 119.38 0) (effects (font (size 1.27 1.27)) (hide yes)))
+
+ (property "Manufacturer_Part_Number" "CL05B104KO5NNNC" (at 104.14 119.38 0) (effects (font (size 1.27 1.27)) (hide yes)))
+
+ (property "Supplier" "LCSC" (at 104.14 119.38 0) (effects (font (size 1.27 1.27)) (hide yes)))
+
+ (property "LCSC" "C1525" (at 104.14 119.38 0) (effects (font (size 1.27 1.27)) (hide yes)))
+
+ (property "Supplier Part" "C1525" (at 104.14 119.38 0) (effects (font (size 1.27 1.27)) (hide yes)))
+)
 	(symbol
-		(lib_id "power:+5V")
+		(lib_id "Stratolink_v1p1_Symbols:power_5V")
 		(at 217.17 26.67 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -55972,7 +56236,7 @@
 		)
 	)
 	(symbol
-		(lib_id "power:GND")
+		(lib_id "Stratolink_v1p1_Symbols:power_GND")
 		(at 88.9 171.45 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -56037,7 +56301,7 @@
 		)
 	)
 	(symbol
-		(lib_id "power:+5V")
+		(lib_id "Stratolink_v1p1_Symbols:power_5V")
 		(at 173.99 34.29 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -56102,7 +56366,7 @@
 		)
 	)
 	(symbol
-		(lib_id "power:GND")
+		(lib_id "Stratolink_v1p1_Symbols:power_GND")
 		(at 71.12 170.18 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -56167,7 +56431,7 @@
 		)
 	)
 	(symbol
-		(lib_id "Device:C")
+		(lib_id "Stratolink_v1p1_Symbols:Device_C")
 		(at 60.96 160.02 180)
 		(unit 1)
 		(exclude_from_sim no)
@@ -56192,7 +56456,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Capacitor_SMD:C_0402_1005Metric"
+		(property "Footprint" "lib:Stratolink_v1p1_C12_C_0402_1005Metric"
 			(at 59.9948 156.21 0)
 			(effects
 				(font
@@ -56201,7 +56465,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "~"
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C1525.html"
 			(at 60.96 160.02 0)
 			(effects
 				(font
@@ -56210,7 +56474,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Unpolarized capacitor"
+		(property "Description" "CL05B104KO5NNNC"
 			(at 60.96 160.02 0)
 			(effects
 				(font
@@ -56233,9 +56497,19 @@
 				)
 			)
 		)
-	)
+	
+ (property "Manufacturer" "Samsung Electro-Mechanics" (at 60.96 160.02 0) (effects (font (size 1.27 1.27)) (hide yes)))
+
+ (property "Manufacturer_Part_Number" "CL05B104KO5NNNC" (at 60.96 160.02 0) (effects (font (size 1.27 1.27)) (hide yes)))
+
+ (property "Supplier" "LCSC" (at 60.96 160.02 0) (effects (font (size 1.27 1.27)) (hide yes)))
+
+ (property "LCSC" "C1525" (at 60.96 160.02 0) (effects (font (size 1.27 1.27)) (hide yes)))
+
+ (property "Supplier Part" "C1525" (at 60.96 160.02 0) (effects (font (size 1.27 1.27)) (hide yes)))
+)
 	(symbol
-		(lib_id "power:GND")
+		(lib_id "Stratolink_v1p1_Symbols:power_GND")
 		(at 90.17 50.8 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -56300,7 +56574,7 @@
 		)
 	)
 	(symbol
-		(lib_id "power:GND")
+		(lib_id "Stratolink_v1p1_Symbols:power_GND")
 		(at 31.75 68.58 90)
 		(unit 1)
 		(exclude_from_sim no)
@@ -56365,7 +56639,7 @@
 		)
 	)
 	(symbol
-		(lib_id "Device:R_US")
+		(lib_id "Stratolink_v1p1_Symbols:Device_R_US")
 		(at 106.68 107.95 90)
 		(unit 1)
 		(exclude_from_sim no)
@@ -56392,7 +56666,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Resistor_SMD:R_0402_1005Metric"
+		(property "Footprint" "lib:Stratolink_v1p1_R15_R_0402_1005Metric"
 			(at 106.934 106.934 90)
 			(effects
 				(font
@@ -56401,7 +56675,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "~"
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C138002.html"
 			(at 106.68 107.95 0)
 			(effects
 				(font
@@ -56410,7 +56684,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Resistor, US symbol"
+		(property "Description" "RC0402FR-0733RL"
 			(at 106.68 107.95 0)
 			(effects
 				(font
@@ -56433,9 +56707,19 @@
 				)
 			)
 		)
-	)
+	
+ (property "Manufacturer" "Yageo" (at 106.68 107.95 0) (effects (font (size 1.27 1.27)) (hide yes)))
+
+ (property "Manufacturer_Part_Number" "RC0402FR-0733RL" (at 106.68 107.95 0) (effects (font (size 1.27 1.27)) (hide yes)))
+
+ (property "Supplier" "LCSC" (at 106.68 107.95 0) (effects (font (size 1.27 1.27)) (hide yes)))
+
+ (property "LCSC" "C138002" (at 106.68 107.95 0) (effects (font (size 1.27 1.27)) (hide yes)))
+
+ (property "Supplier Part" "C138002" (at 106.68 107.95 0) (effects (font (size 1.27 1.27)) (hide yes)))
+)
 	(symbol
-		(lib_id "Device:Antenna")
+		(lib_id "Stratolink_v1p1_Symbols:Device_Antenna")
 		(at 165.1 118.11 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -56504,7 +56788,7 @@
 		)
 	)
 	(symbol
-		(lib_id "pressure:MS561101BA03-50")
+		(lib_id "Stratolink_v1p1_Symbols:pressure_MS561101BA03_50")
 		(at 218.44 129.54 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -56522,7 +56806,7 @@
 				(hide yes)
 			)
 		)
-		(property "Value" "~"
+		(property "Value" "MS561101BA03-50"
 			(at 218.44 121.92 0)
 			(effects
 				(font
@@ -56530,7 +56814,7 @@
 				)
 			)
 		)
-		(property "Footprint" "lib:SON125P500X300X100-8N"
+		(property "Footprint" "lib:Stratolink_v1p1_U4_SON125P500X300X100-8N"
 			(at 218.44 129.54 0)
 			(effects
 				(font
@@ -56548,7 +56832,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Pressure range:1Kpa~1.2bar Pressure range:1Kpa~1.2bar Voltage - Supply:1.8V~3.6V Voltage - Supply:1.8V~3.6V Standby Current:140nA Interface:SpI；I2C Operating Temperature:-40°C~+85°C Operating Temperature:-40°C~+85°C Response time:8.22ms "
+		(property "Description" "MS561101BA03-50 digital pressure and temperature sensor"
 			(at 218.44 129.54 0)
 			(effects
 				(font
@@ -56566,7 +56850,7 @@
 				(hide yes)
 			)
 		)
-		(property "Manufacturer" "TE Connectivity(泰科电子)"
+		(property "Manufacturer" "TE Connectivity"
 			(at 218.44 129.54 0)
 			(effects
 				(font
@@ -56634,9 +56918,13 @@
 				)
 			)
 		)
-	)
+	
+ (property "Manufacturer_Part_Number" "MS561101BA03-50" (at 218.44 129.54 0) (effects (font (size 1.27 1.27)) (hide yes)))
+
+ (property "LCSC" "C15639" (at 218.44 129.54 0) (effects (font (size 1.27 1.27)) (hide yes)))
+)
 	(symbol
-		(lib_id "Device:R_US")
+		(lib_id "Stratolink_v1p1_Symbols:Device_R_US")
 		(at 106.68 132.08 90)
 		(unit 1)
 		(exclude_from_sim no)
@@ -56663,7 +56951,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Resistor_SMD:R_0402_1005Metric"
+		(property "Footprint" "lib:Stratolink_v1p1_R18_R_0402_1005Metric"
 			(at 106.934 131.064 90)
 			(effects
 				(font
@@ -56672,7 +56960,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "~"
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C60490.html"
 			(at 106.68 132.08 0)
 			(effects
 				(font
@@ -56681,7 +56969,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Resistor, US symbol"
+		(property "Description" "RC0402FR-0710KL"
 			(at 106.68 132.08 0)
 			(effects
 				(font
@@ -56704,9 +56992,19 @@
 				)
 			)
 		)
-	)
+	
+ (property "Manufacturer" "Yageo" (at 106.68 132.08 0) (effects (font (size 1.27 1.27)) (hide yes)))
+
+ (property "Manufacturer_Part_Number" "RC0402FR-0710KL" (at 106.68 132.08 0) (effects (font (size 1.27 1.27)) (hide yes)))
+
+ (property "Supplier" "LCSC" (at 106.68 132.08 0) (effects (font (size 1.27 1.27)) (hide yes)))
+
+ (property "LCSC" "C60490" (at 106.68 132.08 0) (effects (font (size 1.27 1.27)) (hide yes)))
+
+ (property "Supplier Part" "C60490" (at 106.68 132.08 0) (effects (font (size 1.27 1.27)) (hide yes)))
+)
 	(symbol
-		(lib_id "Device:C")
+		(lib_id "Stratolink_v1p1_Symbols:Device_C")
 		(at 27.94 133.35 180)
 		(unit 1)
 		(exclude_from_sim no)
@@ -56731,7 +57029,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
+		(property "Footprint" "lib:Stratolink_v1p1_C16_C_0603_1608Metric"
 			(at 26.9748 129.54 0)
 			(effects
 				(font
@@ -56740,7 +57038,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "~"
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C1705.html"
 			(at 27.94 133.35 0)
 			(effects
 				(font
@@ -56749,7 +57047,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Unpolarized capacitor"
+		(property "Description" "CL10A475KP8NNNC"
 			(at 27.94 133.35 0)
 			(effects
 				(font
@@ -56772,9 +57070,19 @@
 				)
 			)
 		)
-	)
+	
+ (property "Manufacturer" "Samsung Electro-Mechanics" (at 27.94 133.35 0) (effects (font (size 1.27 1.27)) (hide yes)))
+
+ (property "Manufacturer_Part_Number" "CL10A475KP8NNNC" (at 27.94 133.35 0) (effects (font (size 1.27 1.27)) (hide yes)))
+
+ (property "Supplier" "LCSC" (at 27.94 133.35 0) (effects (font (size 1.27 1.27)) (hide yes)))
+
+ (property "LCSC" "C1705" (at 27.94 133.35 0) (effects (font (size 1.27 1.27)) (hide yes)))
+
+ (property "Supplier Part" "C1705" (at 27.94 133.35 0) (effects (font (size 1.27 1.27)) (hide yes)))
+)
 	(symbol
-		(lib_id "power:+5V")
+		(lib_id "Stratolink_v1p1_Symbols:power_5V")
 		(at 62.23 17.78 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -56839,7 +57147,7 @@
 		)
 	)
 	(symbol
-		(lib_id "Device:R_US")
+		(lib_id "Stratolink_v1p1_Symbols:Device_R_US")
 		(at 228.6 88.9 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -56866,7 +57174,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Resistor_SMD:R_0402_1005Metric"
+		(property "Footprint" "lib:Stratolink_v1p1_R4_R_0402_1005Metric"
 			(at 229.616 89.154 90)
 			(effects
 				(font
@@ -56875,7 +57183,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "https://www.lcsc.com/product-detail/C2766827.html?s_z=n_C2766827%2520"
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C2766827.html"
 			(at 228.6 88.9 0)
 			(effects
 				(font
@@ -56884,7 +57192,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Resistor, US symbol"
+		(property "Description" "0402WGF3654TCE"
 			(at 228.6 88.9 0)
 			(effects
 				(font
@@ -56907,9 +57215,19 @@
 				)
 			)
 		)
-	)
+	
+ (property "Manufacturer" "UNI-ROYAL" (at 228.6 88.9 0) (effects (font (size 1.27 1.27)) (hide yes)))
+
+ (property "Manufacturer_Part_Number" "0402WGF3654TCE" (at 228.6 88.9 0) (effects (font (size 1.27 1.27)) (hide yes)))
+
+ (property "Supplier" "LCSC" (at 228.6 88.9 0) (effects (font (size 1.27 1.27)) (hide yes)))
+
+ (property "LCSC" "C2766827" (at 228.6 88.9 0) (effects (font (size 1.27 1.27)) (hide yes)))
+
+ (property "Supplier Part" "C2766827" (at 228.6 88.9 0) (effects (font (size 1.27 1.27)) (hide yes)))
+)
 	(symbol
-		(lib_id "Device:R_US")
+		(lib_id "Stratolink_v1p1_Symbols:Device_R_US")
 		(at 157.48 107.95 90)
 		(unit 1)
 		(exclude_from_sim no)
@@ -56936,7 +57254,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Resistor_SMD:R_0402_1005Metric"
+		(property "Footprint" "lib:Stratolink_v1p1_R13_R_0402_1005Metric"
 			(at 157.734 106.934 90)
 			(effects
 				(font
@@ -56945,7 +57263,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "~"
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C106231.html"
 			(at 157.48 107.95 0)
 			(effects
 				(font
@@ -56954,7 +57272,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Resistor, US symbol"
+		(property "Description" "RC0402FR-070RL"
 			(at 157.48 107.95 0)
 			(effects
 				(font
@@ -56977,9 +57295,19 @@
 				)
 			)
 		)
-	)
+	
+ (property "Manufacturer" "Yageo" (at 157.48 107.95 0) (effects (font (size 1.27 1.27)) (hide yes)))
+
+ (property "Manufacturer_Part_Number" "RC0402FR-070RL" (at 157.48 107.95 0) (effects (font (size 1.27 1.27)) (hide yes)))
+
+ (property "Supplier" "LCSC" (at 157.48 107.95 0) (effects (font (size 1.27 1.27)) (hide yes)))
+
+ (property "LCSC" "C106231" (at 157.48 107.95 0) (effects (font (size 1.27 1.27)) (hide yes)))
+
+ (property "Supplier Part" "C106231" (at 157.48 107.95 0) (effects (font (size 1.27 1.27)) (hide yes)))
+)
 	(symbol
-		(lib_id "Device:R_US")
+		(lib_id "Stratolink_v1p1_Symbols:Device_R_US")
 		(at 173.99 41.91 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -57006,7 +57334,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Resistor_SMD:R_0402_1005Metric"
+		(property "Footprint" "lib:Stratolink_v1p1_R12_R_0402_1005Metric"
 			(at 175.006 42.164 90)
 			(effects
 				(font
@@ -57015,7 +57343,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "~"
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C105871.html"
 			(at 173.99 41.91 0)
 			(effects
 				(font
@@ -57024,7 +57352,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Resistor, US symbol"
+		(property "Description" "RC0402FR-074K7L"
 			(at 173.99 41.91 0)
 			(effects
 				(font
@@ -57047,9 +57375,19 @@
 				)
 			)
 		)
-	)
+	
+ (property "Manufacturer" "Yageo" (at 173.99 41.91 0) (effects (font (size 1.27 1.27)) (hide yes)))
+
+ (property "Manufacturer_Part_Number" "RC0402FR-074K7L" (at 173.99 41.91 0) (effects (font (size 1.27 1.27)) (hide yes)))
+
+ (property "Supplier" "LCSC" (at 173.99 41.91 0) (effects (font (size 1.27 1.27)) (hide yes)))
+
+ (property "LCSC" "C105871" (at 173.99 41.91 0) (effects (font (size 1.27 1.27)) (hide yes)))
+
+ (property "Supplier Part" "C105871" (at 173.99 41.91 0) (effects (font (size 1.27 1.27)) (hide yes)))
+)
 	(symbol
-		(lib_id "Device:C")
+		(lib_id "Stratolink_v1p1_Symbols:Device_C")
 		(at 111.76 27.94 180)
 		(unit 1)
 		(exclude_from_sim no)
@@ -57074,7 +57412,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
+		(property "Footprint" "lib:Stratolink_v1p1_C8_C_0603_1608Metric"
 			(at 110.7948 24.13 0)
 			(effects
 				(font
@@ -57083,7 +57421,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "~"
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C19702.html"
 			(at 111.76 27.94 0)
 			(effects
 				(font
@@ -57092,7 +57430,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Unpolarized capacitor"
+		(property "Description" "CL10A106KP8NNNC"
 			(at 111.76 27.94 0)
 			(effects
 				(font
@@ -57115,9 +57453,19 @@
 				)
 			)
 		)
-	)
+	
+ (property "Manufacturer" "Samsung Electro-Mechanics" (at 111.76 27.94 0) (effects (font (size 1.27 1.27)) (hide yes)))
+
+ (property "Manufacturer_Part_Number" "CL10A106KP8NNNC" (at 111.76 27.94 0) (effects (font (size 1.27 1.27)) (hide yes)))
+
+ (property "Supplier" "LCSC" (at 111.76 27.94 0) (effects (font (size 1.27 1.27)) (hide yes)))
+
+ (property "LCSC" "C19702" (at 111.76 27.94 0) (effects (font (size 1.27 1.27)) (hide yes)))
+
+ (property "Supplier Part" "C19702" (at 111.76 27.94 0) (effects (font (size 1.27 1.27)) (hide yes)))
+)
 	(symbol
-		(lib_id "Device:R_US")
+		(lib_id "Stratolink_v1p1_Symbols:Device_R_US")
 		(at 88.9 166.37 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -57144,7 +57492,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Resistor_SMD:R_0402_1005Metric"
+		(property "Footprint" "lib:Stratolink_v1p1_R23_R_0402_1005Metric"
 			(at 89.916 166.624 90)
 			(effects
 				(font
@@ -57153,7 +57501,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "https://www.lcsc.com/product-detail/C60490.html?s_z=n_10kohm%2520resistor%25200402"
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C138033.html"
 			(at 88.9 166.37 0)
 			(effects
 				(font
@@ -57162,7 +57510,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "RC0402FR-0710KL"
+		(property "Description" "RC0402FR-071ML"
 			(at 88.9 166.37 0)
 			(effects
 				(font
@@ -57185,9 +57533,19 @@
 				)
 			)
 		)
-	)
+	
+ (property "Manufacturer" "Yageo" (at 88.9 166.37 0) (effects (font (size 1.27 1.27)) (hide yes)))
+
+ (property "Manufacturer_Part_Number" "RC0402FR-071ML" (at 88.9 166.37 0) (effects (font (size 1.27 1.27)) (hide yes)))
+
+ (property "Supplier" "LCSC" (at 88.9 166.37 0) (effects (font (size 1.27 1.27)) (hide yes)))
+
+ (property "LCSC" "C138033" (at 88.9 166.37 0) (effects (font (size 1.27 1.27)) (hide yes)))
+
+ (property "Supplier Part" "C138033" (at 88.9 166.37 0) (effects (font (size 1.27 1.27)) (hide yes)))
+)
 	(symbol
-		(lib_id "power:GND")
+		(lib_id "Stratolink_v1p1_Symbols:power_GND")
 		(at 120.65 31.75 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -57252,7 +57610,7 @@
 		)
 	)
 	(symbol
-		(lib_id "Connector:Conn_ARM_SWD_TagConnect_TC2030-NL")
+		(lib_id "Stratolink_v1p1_Symbols:Connector_Conn_ARM_SWD_TagConnect_TC2030_NL")
 		(at 124.46 166.37 90)
 		(unit 1)
 		(exclude_from_sim no)
@@ -57281,7 +57639,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "Connector:Tag-Connect_TC2030-IDC-NL_2x03_P1.27mm_Vertical"
+		(property "Footprint" "lib:Stratolink_v1p1_J20_Tag-Connect_TC2030-IDC-NL_2x03_P1.27mm_Vertical"
 			(at 142.24 166.37 0)
 			(effects
 				(font
@@ -57336,7 +57694,7 @@
 		)
 	)
 	(symbol
-		(lib_id "Device:C")
+		(lib_id "Stratolink_v1p1_Symbols:Device_C")
 		(at 120.65 27.94 180)
 		(unit 1)
 		(exclude_from_sim no)
@@ -57361,7 +57719,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Capacitor_SMD:C_0402_1005Metric"
+		(property "Footprint" "lib:Stratolink_v1p1_C7_C_0402_1005Metric"
 			(at 119.6848 24.13 0)
 			(effects
 				(font
@@ -57370,7 +57728,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "~"
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C1525.html"
 			(at 120.65 27.94 0)
 			(effects
 				(font
@@ -57379,7 +57737,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Unpolarized capacitor"
+		(property "Description" "CL05B104KO5NNNC"
 			(at 120.65 27.94 0)
 			(effects
 				(font
@@ -57402,9 +57760,19 @@
 				)
 			)
 		)
-	)
+	
+ (property "Manufacturer" "Samsung Electro-Mechanics" (at 120.65 27.94 0) (effects (font (size 1.27 1.27)) (hide yes)))
+
+ (property "Manufacturer_Part_Number" "CL05B104KO5NNNC" (at 120.65 27.94 0) (effects (font (size 1.27 1.27)) (hide yes)))
+
+ (property "Supplier" "LCSC" (at 120.65 27.94 0) (effects (font (size 1.27 1.27)) (hide yes)))
+
+ (property "LCSC" "C1525" (at 120.65 27.94 0) (effects (font (size 1.27 1.27)) (hide yes)))
+
+ (property "Supplier Part" "C1525" (at 120.65 27.94 0) (effects (font (size 1.27 1.27)) (hide yes)))
+)
 	(symbol
-		(lib_id "power:GND")
+		(lib_id "Stratolink_v1p1_Symbols:power_GND")
 		(at 111.76 31.75 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -57469,7 +57837,7 @@
 		)
 	)
 	(symbol
-		(lib_id "power:+5V")
+		(lib_id "Stratolink_v1p1_Symbols:power_5V")
 		(at 201.93 95.25 270)
 		(unit 1)
 		(exclude_from_sim no)
@@ -57534,7 +57902,7 @@
 		)
 	)
 	(symbol
-		(lib_id "Device:C")
+		(lib_id "Stratolink_v1p1_Symbols:Device_C")
 		(at 67.31 22.86 270)
 		(unit 1)
 		(exclude_from_sim no)
@@ -57559,7 +57927,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
+		(property "Footprint" "lib:Stratolink_v1p1_C21_C_0603_1608Metric"
 			(at 63.5 23.8252 0)
 			(effects
 				(font
@@ -57568,7 +57936,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "~"
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C19702.html"
 			(at 67.31 22.86 0)
 			(effects
 				(font
@@ -57577,7 +57945,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Unpolarized capacitor"
+		(property "Description" "CL10A106KP8NNNC"
 			(at 67.31 22.86 0)
 			(effects
 				(font
@@ -57600,9 +57968,19 @@
 				)
 			)
 		)
-	)
+	
+ (property "Manufacturer" "Samsung Electro-Mechanics" (at 67.31 22.86 0) (effects (font (size 1.27 1.27)) (hide yes)))
+
+ (property "Manufacturer_Part_Number" "CL10A106KP8NNNC" (at 67.31 22.86 0) (effects (font (size 1.27 1.27)) (hide yes)))
+
+ (property "Supplier" "LCSC" (at 67.31 22.86 0) (effects (font (size 1.27 1.27)) (hide yes)))
+
+ (property "LCSC" "C19702" (at 67.31 22.86 0) (effects (font (size 1.27 1.27)) (hide yes)))
+
+ (property "Supplier Part" "C19702" (at 67.31 22.86 0) (effects (font (size 1.27 1.27)) (hide yes)))
+)
 	(symbol
-		(lib_id "Device:R_US")
+		(lib_id "Stratolink_v1p1_Symbols:Device_R_US")
 		(at 100.33 110.49 90)
 		(unit 1)
 		(exclude_from_sim no)
@@ -57629,7 +58007,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Resistor_SMD:R_0402_1005Metric"
+		(property "Footprint" "lib:Stratolink_v1p1_R16_R_0402_1005Metric"
 			(at 100.584 109.474 90)
 			(effects
 				(font
@@ -57638,7 +58016,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "~"
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C138002.html"
 			(at 100.33 110.49 0)
 			(effects
 				(font
@@ -57647,7 +58025,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Resistor, US symbol"
+		(property "Description" "RC0402FR-0733RL"
 			(at 100.33 110.49 0)
 			(effects
 				(font
@@ -57670,9 +58048,19 @@
 				)
 			)
 		)
-	)
+	
+ (property "Manufacturer" "Yageo" (at 100.33 110.49 0) (effects (font (size 1.27 1.27)) (hide yes)))
+
+ (property "Manufacturer_Part_Number" "RC0402FR-0733RL" (at 100.33 110.49 0) (effects (font (size 1.27 1.27)) (hide yes)))
+
+ (property "Supplier" "LCSC" (at 100.33 110.49 0) (effects (font (size 1.27 1.27)) (hide yes)))
+
+ (property "LCSC" "C138002" (at 100.33 110.49 0) (effects (font (size 1.27 1.27)) (hide yes)))
+
+ (property "Supplier Part" "C138002" (at 100.33 110.49 0) (effects (font (size 1.27 1.27)) (hide yes)))
+)
 	(symbol
-		(lib_id "power:+5V")
+		(lib_id "Stratolink_v1p1_Symbols:power_5V")
 		(at 113.03 168.91 90)
 		(unit 1)
 		(exclude_from_sim no)
@@ -57737,7 +58125,7 @@
 		)
 	)
 	(symbol
-		(lib_id "Device:C")
+		(lib_id "Stratolink_v1p1_Symbols:Device_C")
 		(at 90.17 45.72 180)
 		(unit 1)
 		(exclude_from_sim no)
@@ -57762,7 +58150,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Capacitor_SMD:C_0402_1005Metric"
+		(property "Footprint" "lib:Stratolink_v1p1_C9_C_0402_1005Metric"
 			(at 89.2048 41.91 0)
 			(effects
 				(font
@@ -57771,7 +58159,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "~"
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C1525.html"
 			(at 90.17 45.72 0)
 			(effects
 				(font
@@ -57780,7 +58168,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Unpolarized capacitor"
+		(property "Description" "CL05B104KO5NNNC"
 			(at 90.17 45.72 0)
 			(effects
 				(font
@@ -57803,9 +58191,19 @@
 				)
 			)
 		)
-	)
+	
+ (property "Manufacturer" "Samsung Electro-Mechanics" (at 90.17 45.72 0) (effects (font (size 1.27 1.27)) (hide yes)))
+
+ (property "Manufacturer_Part_Number" "CL05B104KO5NNNC" (at 90.17 45.72 0) (effects (font (size 1.27 1.27)) (hide yes)))
+
+ (property "Supplier" "LCSC" (at 90.17 45.72 0) (effects (font (size 1.27 1.27)) (hide yes)))
+
+ (property "LCSC" "C1525" (at 90.17 45.72 0) (effects (font (size 1.27 1.27)) (hide yes)))
+
+ (property "Supplier Part" "C1525" (at 90.17 45.72 0) (effects (font (size 1.27 1.27)) (hide yes)))
+)
 	(symbol
-		(lib_id "Device:C")
+		(lib_id "Stratolink_v1p1_Symbols:Device_C")
 		(at 36.83 133.35 180)
 		(unit 1)
 		(exclude_from_sim no)
@@ -57830,7 +58228,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Capacitor_SMD:C_0402_1005Metric"
+		(property "Footprint" "lib:Stratolink_v1p1_C14_C_0402_1005Metric"
 			(at 35.8648 129.54 0)
 			(effects
 				(font
@@ -57839,7 +58237,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "~"
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C1525.html"
 			(at 36.83 133.35 0)
 			(effects
 				(font
@@ -57848,7 +58246,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Unpolarized capacitor"
+		(property "Description" "CL05B104KO5NNNC"
 			(at 36.83 133.35 0)
 			(effects
 				(font
@@ -57871,9 +58269,19 @@
 				)
 			)
 		)
-	)
+	
+ (property "Manufacturer" "Samsung Electro-Mechanics" (at 36.83 133.35 0) (effects (font (size 1.27 1.27)) (hide yes)))
+
+ (property "Manufacturer_Part_Number" "CL05B104KO5NNNC" (at 36.83 133.35 0) (effects (font (size 1.27 1.27)) (hide yes)))
+
+ (property "Supplier" "LCSC" (at 36.83 133.35 0) (effects (font (size 1.27 1.27)) (hide yes)))
+
+ (property "LCSC" "C1525" (at 36.83 133.35 0) (effects (font (size 1.27 1.27)) (hide yes)))
+
+ (property "Supplier Part" "C1525" (at 36.83 133.35 0) (effects (font (size 1.27 1.27)) (hide yes)))
+)
 	(symbol
-		(lib_id "RAK3172:RAK3172")
+		(lib_id "Stratolink_v1p1_Symbols:RAK3172_RAK3172")
 		(at 110.49 77.47 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -57892,7 +58300,7 @@
 				(hide yes)
 			)
 		)
-		(property "Value" "RAK3172"
+		(property "Value" "RAK3172-9-SM-NI"
 			(at 132.8294 34.29 0)
 			(effects
 				(font
@@ -57901,7 +58309,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "lib:RAK3172"
+		(property "Footprint" "lib:Stratolink_v1p1_U2_RAK3172"
 			(at 110.49 77.47 0)
 			(effects
 				(font
@@ -57920,7 +58328,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" ""
+		(property "Description" "RAK3172-9-SM-NI sub-GHz STM32WLE5CC radio module"
 			(at 110.49 77.47 0)
 			(effects
 				(font
@@ -57939,7 +58347,7 @@
 				(hide yes)
 			)
 		)
-		(property "DESCRIPTION" "RAK3172 is a low-power long-range transceiver module based on the STM32WLE5CC chip. It provides an easy-to-use, small-size, low-power solution for long range wireless data applications"
+		(property "DESCRIPTION" "RAK3172-9-SM-NI sub-GHz STM32WLE5CC radio module"
 			(at 110.49 77.47 0)
 			(effects
 				(font
@@ -58019,7 +58427,7 @@
 				(hide yes)
 			)
 		)
-		(property "MP" "RAK3172"
+		(property "MP" "RAK3172-9-SM-NI"
 			(at 110.49 77.47 0)
 			(effects
 				(font
@@ -58029,7 +58437,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description_1" "\n                        \n                            RAK3172 is a low-power long-range transceiver module based on the STM32WLE5CC chip. It provides an easy-to-use, small-size, low-power solution for long range wireless data applications\n                        \n"
+		(property "Description_1" "RAK3172-9-SM-NI sub-GHz STM32WLE5CC radio module"
 			(at 110.49 77.47 0)
 			(effects
 				(font
@@ -58173,9 +58581,19 @@
 				)
 			)
 		)
-	)
+	
+ (property "Manufacturer" "RAKwireless" (at 110.49 77.47 0) (effects (font (size 1.27 1.27)) (hide yes)))
+
+ (property "Manufacturer_Part_Number" "RAK3172-9-SM-NI" (at 110.49 77.47 0) (effects (font (size 1.27 1.27)) (hide yes)))
+
+ (property "Supplier" "LCSC" (at 110.49 77.47 0) (effects (font (size 1.27 1.27)) (hide yes)))
+
+ (property "LCSC" "C18548052" (at 110.49 77.47 0) (effects (font (size 1.27 1.27)) (hide yes)))
+
+ (property "Supplier Part" "C18548052" (at 110.49 77.47 0) (effects (font (size 1.27 1.27)) (hide yes)))
+)
 	(symbol
-		(lib_id "Device:R_US")
+		(lib_id "Stratolink_v1p1_Symbols:Device_R_US")
 		(at 163.83 110.49 90)
 		(unit 1)
 		(exclude_from_sim no)
@@ -58202,7 +58620,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Resistor_SMD:R_0402_1005Metric"
+		(property "Footprint" "lib:Stratolink_v1p1_R14_R_0402_1005Metric"
 			(at 164.084 109.474 90)
 			(effects
 				(font
@@ -58211,7 +58629,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "~"
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C106231.html"
 			(at 163.83 110.49 0)
 			(effects
 				(font
@@ -58220,7 +58638,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Resistor, US symbol"
+		(property "Description" "RC0402FR-070RL"
 			(at 163.83 110.49 0)
 			(effects
 				(font
@@ -58243,9 +58661,19 @@
 				)
 			)
 		)
-	)
+	
+ (property "Manufacturer" "Yageo" (at 163.83 110.49 0) (effects (font (size 1.27 1.27)) (hide yes)))
+
+ (property "Manufacturer_Part_Number" "RC0402FR-070RL" (at 163.83 110.49 0) (effects (font (size 1.27 1.27)) (hide yes)))
+
+ (property "Supplier" "LCSC" (at 163.83 110.49 0) (effects (font (size 1.27 1.27)) (hide yes)))
+
+ (property "LCSC" "C106231" (at 163.83 110.49 0) (effects (font (size 1.27 1.27)) (hide yes)))
+
+ (property "Supplier Part" "C106231" (at 163.83 110.49 0) (effects (font (size 1.27 1.27)) (hide yes)))
+)
 	(symbol
-		(lib_id "power:+5V")
+		(lib_id "Stratolink_v1p1_Symbols:power_5V")
 		(at 60.96 153.67 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -58310,7 +58738,7 @@
 		)
 	)
 	(symbol
-		(lib_id "power:+5V")
+		(lib_id "Stratolink_v1p1_Symbols:power_5V")
 		(at 247.65 35.56 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -58375,7 +58803,7 @@
 		)
 	)
 	(symbol
-		(lib_id "power:GND")
+		(lib_id "Stratolink_v1p1_Symbols:power_GND")
 		(at 109.22 101.6 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -58440,7 +58868,7 @@
 		)
 	)
 	(symbol
-		(lib_id "Device:C")
+		(lib_id "Stratolink_v1p1_Symbols:Device_C")
 		(at 243.84 45.72 180)
 		(unit 1)
 		(exclude_from_sim no)
@@ -58465,7 +58893,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Capacitor_SMD:C_0805_2012Metric"
+		(property "Footprint" "lib:Stratolink_v1p1_C6_C_0805_2012Metric"
 			(at 242.8748 41.91 0)
 			(effects
 				(font
@@ -58474,7 +58902,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "~"
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C602037.html"
 			(at 243.84 45.72 0)
 			(effects
 				(font
@@ -58483,7 +58911,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Unpolarized capacitor"
+		(property "Description" "CL21A226MAYNNNE"
 			(at 243.84 45.72 0)
 			(effects
 				(font
@@ -58506,9 +58934,19 @@
 				)
 			)
 		)
-	)
+	
+ (property "Manufacturer" "Samsung Electro-Mechanics" (at 243.84 45.72 0) (effects (font (size 1.27 1.27)) (hide yes)))
+
+ (property "Manufacturer_Part_Number" "CL21A226MAYNNNE" (at 243.84 45.72 0) (effects (font (size 1.27 1.27)) (hide yes)))
+
+ (property "Supplier" "LCSC" (at 243.84 45.72 0) (effects (font (size 1.27 1.27)) (hide yes)))
+
+ (property "LCSC" "C602037" (at 243.84 45.72 0) (effects (font (size 1.27 1.27)) (hide yes)))
+
+ (property "Supplier Part" "C602037" (at 243.84 45.72 0) (effects (font (size 1.27 1.27)) (hide yes)))
+)
 	(symbol
-		(lib_id "fab:Conn_PinHeader_1x07_P2.54mm_Vertical_THT_D1mm")
+		(lib_id "Stratolink_v1p1_Symbols:fab_Conn_PinHeader_1x07_P2_54mm_Vertical_THT_D1mm")
 		(at 20.32 73.66 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -58526,7 +58964,7 @@
 				(hide yes)
 			)
 		)
-		(property "Value" "Conn_PinHeader_1x07_P2.54mm_Vertical_THT_D1mm"
+		(property "Value" "Programming_1x07_P1.00mm_D0.50mm"
 			(at 20.32 63.5 0)
 			(effects
 				(font
@@ -58535,7 +58973,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "lib:Stratolink_Header_Left_1x07_P1p00_D0p50_Pad0p88"
+		(property "Footprint" "lib:Stratolink_Programming_Left_1x07_P1p00_D0p50_BackTack1p20x0p88"
 			(at 20.32 73.66 0)
 			(effects
 				(font
@@ -58553,7 +58991,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Connector Header Through Hole 7 positions 0.100\" (2.54mm)"
+		(property "Description" "Programming/wire pads: 7 positions, 1.00 mm pitch, 0.50 mm holes; 0.88 mm front lands and 1.20 x 0.88 mm inward-extended back tack lands."
 			(at 20.32 73.66 0)
 			(effects
 				(font
@@ -58593,7 +59031,7 @@
 		)
 	)
 	(symbol
-		(lib_id "power:GND")
+		(lib_id "Stratolink_v1p1_Symbols:power_GND")
 		(at 27.94 137.16 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -58658,7 +59096,7 @@
 		)
 	)
 	(symbol
-		(lib_id "power:GND")
+		(lib_id "Stratolink_v1p1_Symbols:power_GND")
 		(at 135.89 168.91 90)
 		(unit 1)
 		(exclude_from_sim no)
@@ -58723,7 +59161,7 @@
 		)
 	)
 	(symbol
-		(lib_id "Device:R_US")
+		(lib_id "Stratolink_v1p1_Symbols:Device_R_US")
 		(at 88.9 158.75 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -58750,7 +59188,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Resistor_SMD:R_0402_1005Metric"
+		(property "Footprint" "lib:Stratolink_v1p1_R22_R_0402_1005Metric"
 			(at 89.916 159.004 90)
 			(effects
 				(font
@@ -58759,7 +59197,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "https://www.lcsc.com/product-detail/C60490.html?s_z=n_10kohm%2520resistor%25200402"
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C138033.html"
 			(at 88.9 158.75 0)
 			(effects
 				(font
@@ -58768,7 +59206,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "RC0402FR-0710KL"
+		(property "Description" "RC0402FR-071ML"
 			(at 88.9 158.75 0)
 			(effects
 				(font
@@ -58791,9 +59229,19 @@
 				)
 			)
 		)
-	)
+	
+ (property "Manufacturer" "Yageo" (at 88.9 158.75 0) (effects (font (size 1.27 1.27)) (hide yes)))
+
+ (property "Manufacturer_Part_Number" "RC0402FR-071ML" (at 88.9 158.75 0) (effects (font (size 1.27 1.27)) (hide yes)))
+
+ (property "Supplier" "LCSC" (at 88.9 158.75 0) (effects (font (size 1.27 1.27)) (hide yes)))
+
+ (property "LCSC" "C138033" (at 88.9 158.75 0) (effects (font (size 1.27 1.27)) (hide yes)))
+
+ (property "Supplier Part" "C138033" (at 88.9 158.75 0) (effects (font (size 1.27 1.27)) (hide yes)))
+)
 	(symbol
-		(lib_id "Device:C")
+		(lib_id "Stratolink_v1p1_Symbols:Device_C")
 		(at 195.58 48.26 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -58820,7 +59268,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
+		(property "Footprint" "lib:Stratolink_v1p1_C2_C_0603_1608Metric"
 			(at 196.5452 52.07 0)
 			(effects
 				(font
@@ -58829,7 +59277,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "~"
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C1705.html"
 			(at 195.58 48.26 0)
 			(effects
 				(font
@@ -58838,7 +59286,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Unpolarized capacitor"
+		(property "Description" "CL10A475KP8NNNC"
 			(at 195.58 48.26 0)
 			(effects
 				(font
@@ -58861,9 +59309,19 @@
 				)
 			)
 		)
-	)
+	
+ (property "Manufacturer" "Samsung Electro-Mechanics" (at 195.58 48.26 0) (effects (font (size 1.27 1.27)) (hide yes)))
+
+ (property "Manufacturer_Part_Number" "CL10A475KP8NNNC" (at 195.58 48.26 0) (effects (font (size 1.27 1.27)) (hide yes)))
+
+ (property "Supplier" "LCSC" (at 195.58 48.26 0) (effects (font (size 1.27 1.27)) (hide yes)))
+
+ (property "LCSC" "C1705" (at 195.58 48.26 0) (effects (font (size 1.27 1.27)) (hide yes)))
+
+ (property "Supplier Part" "C1705" (at 195.58 48.26 0) (effects (font (size 1.27 1.27)) (hide yes)))
+)
 	(symbol
-		(lib_id "power:+5V")
+		(lib_id "Stratolink_v1p1_Symbols:power_5V")
 		(at 27.94 129.54 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -58928,7 +59386,7 @@
 		)
 	)
 	(symbol
-		(lib_id "Device:R_US")
+		(lib_id "Stratolink_v1p1_Symbols:Device_R_US")
 		(at 234.95 88.9 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -58955,7 +59413,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Resistor_SMD:R_0402_1005Metric"
+		(property "Footprint" "lib:Stratolink_v1p1_R6_R_0402_1005Metric"
 			(at 235.966 89.154 90)
 			(effects
 				(font
@@ -58964,7 +59422,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "~"
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C423131.html"
 			(at 234.95 88.9 0)
 			(effects
 				(font
@@ -58973,7 +59431,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Resistor, US symbol"
+		(property "Description" "0402WGF8254TCE"
 			(at 234.95 88.9 0)
 			(effects
 				(font
@@ -58996,9 +59454,19 @@
 				)
 			)
 		)
-	)
+	
+ (property "Manufacturer" "UNI-ROYAL" (at 234.95 88.9 0) (effects (font (size 1.27 1.27)) (hide yes)))
+
+ (property "Manufacturer_Part_Number" "0402WGF8254TCE" (at 234.95 88.9 0) (effects (font (size 1.27 1.27)) (hide yes)))
+
+ (property "Supplier" "LCSC" (at 234.95 88.9 0) (effects (font (size 1.27 1.27)) (hide yes)))
+
+ (property "LCSC" "C423131" (at 234.95 88.9 0) (effects (font (size 1.27 1.27)) (hide yes)))
+
+ (property "Supplier Part" "C423131" (at 234.95 88.9 0) (effects (font (size 1.27 1.27)) (hide yes)))
+)
 	(symbol
-		(lib_id "ProLib_pcs_2026-02-20:LTR-390UV-01")
+		(lib_id "Stratolink_v1p1_Symbols:ProLib_pcs_2026_02_20_LTR_390UV_01")
 		(at 50.8 133.35 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -59016,7 +59484,7 @@
 				(hide yes)
 			)
 		)
-		(property "Value" "~"
+		(property "Value" "LTR-390UV-01"
 			(at 50.8 127 0)
 			(effects
 				(font
@@ -59024,7 +59492,7 @@
 				)
 			)
 		)
-		(property "Footprint" "lib:21-0147E"
+		(property "Footprint" "lib:Stratolink_v1p1_U6_SMD6_LTR-390UV-01_LTO-L"
 			(at 50.8 133.35 0)
 			(effects
 				(font
@@ -59042,7 +59510,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Measurement Type:Light Intensity Photoperceptivity:157klx Interface:I2C Resolution(Bits):18bit Voltage - Supply:1.7V~3.6V Voltage - Supply:1.7V~3.6V Operating Temperature:-40°C~+85°C Operating Temperature:-40°C~+85°C "
+		(property "Description" "LTR-390UV-01 ambient light and UVA sensor"
 			(at 50.8 133.35 0)
 			(effects
 				(font
@@ -59060,7 +59528,7 @@
 				(hide yes)
 			)
 		)
-		(property "Manufacturer" "LITEON(光宝)"
+		(property "Manufacturer" "Lite-On"
 			(at 50.8 133.35 0)
 			(effects
 				(font
@@ -59122,9 +59590,13 @@
 				)
 			)
 		)
-	)
+	
+ (property "Manufacturer_Part_Number" "LTR-390UV-01" (at 50.8 133.35 0) (effects (font (size 1.27 1.27)) (hide yes)))
+
+ (property "LCSC" "C492374" (at 50.8 133.35 0) (effects (font (size 1.27 1.27)) (hide yes)))
+)
 	(symbol
-		(lib_id "Device:C")
+		(lib_id "Stratolink_v1p1_Symbols:Device_C")
 		(at 223.52 24.13 90)
 		(unit 1)
 		(exclude_from_sim no)
@@ -59149,7 +59621,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Capacitor_SMD:C_0402_1005Metric"
+		(property "Footprint" "lib:Stratolink_v1p1_C4_C_0402_1005Metric"
 			(at 227.33 23.1648 0)
 			(effects
 				(font
@@ -59158,7 +59630,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "~"
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C1525.html"
 			(at 223.52 24.13 0)
 			(effects
 				(font
@@ -59167,7 +59639,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Unpolarized capacitor"
+		(property "Description" "CL05B104KO5NNNC"
 			(at 223.52 24.13 0)
 			(effects
 				(font
@@ -59190,9 +59662,19 @@
 				)
 			)
 		)
-	)
+	
+ (property "Manufacturer" "Samsung Electro-Mechanics" (at 223.52 24.13 0) (effects (font (size 1.27 1.27)) (hide yes)))
+
+ (property "Manufacturer_Part_Number" "CL05B104KO5NNNC" (at 223.52 24.13 0) (effects (font (size 1.27 1.27)) (hide yes)))
+
+ (property "Supplier" "LCSC" (at 223.52 24.13 0) (effects (font (size 1.27 1.27)) (hide yes)))
+
+ (property "LCSC" "C1525" (at 223.52 24.13 0) (effects (font (size 1.27 1.27)) (hide yes)))
+
+ (property "Supplier Part" "C1525" (at 223.52 24.13 0) (effects (font (size 1.27 1.27)) (hide yes)))
+)
 	(symbol
-		(lib_id "power:+5V")
+		(lib_id "Stratolink_v1p1_Symbols:power_5V")
 		(at 90.17 26.67 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -59257,7 +59739,7 @@
 		)
 	)
 	(symbol
-		(lib_id "power:GND")
+		(lib_id "Stratolink_v1p1_Symbols:power_GND")
 		(at 57.15 71.12 90)
 		(unit 1)
 		(exclude_from_sim no)
@@ -59322,7 +59804,7 @@
 		)
 	)
 	(symbol
-		(lib_id "Device:R_US")
+		(lib_id "Stratolink_v1p1_Symbols:Device_R_US")
 		(at 246.38 102.87 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -59349,7 +59831,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Resistor_SMD:R_0402_1005Metric"
+		(property "Footprint" "lib:Stratolink_v1p1_R8_R_0402_1005Metric"
 			(at 247.396 103.124 90)
 			(effects
 				(font
@@ -59358,7 +59840,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "~"
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C60491.html"
 			(at 246.38 102.87 0)
 			(effects
 				(font
@@ -59367,7 +59849,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Resistor, US symbol"
+		(property "Description" "RC0402FR-07100KL"
 			(at 246.38 102.87 0)
 			(effects
 				(font
@@ -59390,9 +59872,19 @@
 				)
 			)
 		)
-	)
+	
+ (property "Manufacturer" "Yageo" (at 246.38 102.87 0) (effects (font (size 1.27 1.27)) (hide yes)))
+
+ (property "Manufacturer_Part_Number" "RC0402FR-07100KL" (at 246.38 102.87 0) (effects (font (size 1.27 1.27)) (hide yes)))
+
+ (property "Supplier" "LCSC" (at 246.38 102.87 0) (effects (font (size 1.27 1.27)) (hide yes)))
+
+ (property "LCSC" "C60491" (at 246.38 102.87 0) (effects (font (size 1.27 1.27)) (hide yes)))
+
+ (property "Supplier Part" "C60491" (at 246.38 102.87 0) (effects (font (size 1.27 1.27)) (hide yes)))
+)
 	(symbol
-		(lib_id "power:GND")
+		(lib_id "Stratolink_v1p1_Symbols:power_GND")
 		(at 25.4 81.28 90)
 		(unit 1)
 		(exclude_from_sim no)
@@ -59457,7 +59949,7 @@
 		)
 	)
 	(symbol
-		(lib_id "Device:R_US")
+		(lib_id "Stratolink_v1p1_Symbols:Device_R_US")
 		(at 234.95 100.33 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -59484,7 +59976,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Resistor_SMD:R_0402_1005Metric"
+		(property "Footprint" "lib:Stratolink_v1p1_R7_R_0402_1005Metric"
 			(at 235.966 100.584 90)
 			(effects
 				(font
@@ -59493,7 +59985,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "~"
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C2998153.html"
 			(at 234.95 100.33 0)
 			(effects
 				(font
@@ -59502,7 +59994,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Resistor, US symbol"
+		(property "Description" "FRC0402F4754TS"
 			(at 234.95 100.33 0)
 			(effects
 				(font
@@ -59525,9 +60017,17 @@
 				)
 			)
 		)
-	)
+	
+ (property "LCSC" "C2998153" (at 234.95 100.33 0) (effects (font (size 1.27 1.27)) (hide yes)))
+
+ (property "Manufacturer_Part_Number" "FRC0402F4754TS" (at 234.95 100.33 0) (effects (font (size 1.27 1.27)) (hide yes)))
+
+ (property "Supplier Part" "C2998153" (at 234.95 100.33 0) (effects (font (size 1.27 1.27)) (hide yes)))
+
+ (property "Supplier" "LCSC" (at 234.95 100.33 0) (effects (font (size 1.27 1.27)) (hide yes)))
+)
 	(symbol
-		(lib_id "Diode:ESD9B3.3ST5G")
+		(lib_id "Stratolink_v1p1_Symbols:Stratolink_Release_PESD5V0U1BB")
 		(at 165.1 128.27 90)
 		(unit 1)
 		(exclude_from_sim no)
@@ -59546,7 +60046,7 @@
 				(hide yes)
 			)
 		)
-		(property "Value" "ESD9B3.3ST5G"
+		(property "Value" "PESD5V0U1BB"
 			(at 167.64 129.5399 90)
 			(effects
 				(font
@@ -59556,7 +60056,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "Diode_SMD:D_SOD-523"
+		(property "Footprint" "lib:Stratolink_v1p1_D3_D_SOD-523"
 			(at 165.1 128.27 0)
 			(effects
 				(font
@@ -59565,7 +60065,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "https://www.lcsc.com/product-detail/C5272735.html?s_z=n_C5272735%2520"
+		(property "Datasheet" "https://uploadcdn.oneyac.com/attachments/files/brand_pdf/leiditech/3D/92/PESD5V0U1BB.pdf"
 			(at 165.1 128.27 0)
 			(effects
 				(font
@@ -59574,7 +60074,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "UNI-ROYAL 0402WGF3654TCE"
+		(property "Description" "Bidirectional 5 V low-capacitance ESD TVS, SOD-523; nominal 0.5 pF; PESD5V0U1BB"
 			(at 165.1 128.27 0)
 			(effects
 				(font
@@ -59597,9 +60097,19 @@
 				)
 			)
 		)
-	)
+	
+ (property "Manufacturer" "Leiditech" (at 165.1 128.27 0) (effects (font (size 1.27 1.27)) (hide yes)))
+
+ (property "Manufacturer_Part_Number" "PESD5V0U1BB" (at 165.1 128.27 0) (effects (font (size 1.27 1.27)) (hide yes)))
+
+ (property "Supplier" "LCSC" (at 165.1 128.27 0) (effects (font (size 1.27 1.27)) (hide yes)))
+
+ (property "LCSC" "C5272735" (at 165.1 128.27 0) (effects (font (size 1.27 1.27)) (hide yes)))
+
+ (property "Supplier Part" "C5272735" (at 165.1 128.27 0) (effects (font (size 1.27 1.27)) (hide yes)))
+)
 	(symbol
-		(lib_id "Device:R_US")
+		(lib_id "Stratolink_v1p1_Symbols:Device_R_US")
 		(at 90.17 31.75 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -59626,7 +60136,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Resistor_SMD:R_0402_1005Metric"
+		(property "Footprint" "lib:Stratolink_v1p1_R10_R_0402_1005Metric"
 			(at 91.186 32.004 90)
 			(effects
 				(font
@@ -59635,7 +60145,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "https://www.lcsc.com/product-detail/C60490.html?s_z=n_10kohm%2520resistor%25200402"
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C60490.html"
 			(at 90.17 31.75 0)
 			(effects
 				(font
@@ -59667,9 +60177,19 @@
 				)
 			)
 		)
-	)
+	
+ (property "Manufacturer" "Yageo" (at 90.17 31.75 0) (effects (font (size 1.27 1.27)) (hide yes)))
+
+ (property "Manufacturer_Part_Number" "RC0402FR-0710KL" (at 90.17 31.75 0) (effects (font (size 1.27 1.27)) (hide yes)))
+
+ (property "Supplier" "LCSC" (at 90.17 31.75 0) (effects (font (size 1.27 1.27)) (hide yes)))
+
+ (property "LCSC" "C60490" (at 90.17 31.75 0) (effects (font (size 1.27 1.27)) (hide yes)))
+
+ (property "Supplier Part" "C60490" (at 90.17 31.75 0) (effects (font (size 1.27 1.27)) (hide yes)))
+)
 	(symbol
-		(lib_id "LIS2DH12TR:LIS2DH12TR")
+		(lib_id "Stratolink_v1p1_Symbols:LIS2DH12TR_LIS2DH12TR")
 		(at 43.18 36.83 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -59696,7 +60216,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "lib:PQFN50P200X200100-12N"
+		(property "Footprint" "lib:Stratolink_v1p1_U7_PQFN50P200X200100-12N"
 			(at 43.18 36.83 0)
 			(effects
 				(font
@@ -59715,7 +60235,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" ""
+		(property "Description" "LIS2DH12TR three-axis low-power accelerometer"
 			(at 43.18 36.83 0)
 			(effects
 				(font
@@ -59734,7 +60254,7 @@
 				(hide yes)
 			)
 		)
-		(property "DESCRIPTION" "MEMS digital output motion sensor: ultra low-power high performance 3-axes femto accelerometer"
+		(property "DESCRIPTION" "LIS2DH12TR three-axis low-power accelerometer"
 			(at 43.18 36.83 0)
 			(effects
 				(font
@@ -59834,7 +60354,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description_1" "\n                        \n                            Accelerometer X, Y, Z Axis ±2g, 4g, 8g, 16g 0.5Hz ~ 672Hz 12-LGA (2x2)\n                        \n"
+		(property "Description_1" "LIS2DH12TR three-axis low-power accelerometer"
 			(at 43.18 36.83 0)
 			(effects
 				(font
@@ -59888,9 +60408,19 @@
 				)
 			)
 		)
-	)
+	
+ (property "Manufacturer" "STMicroelectronics" (at 43.18 36.83 0) (effects (font (size 1.27 1.27)) (hide yes)))
+
+ (property "Manufacturer_Part_Number" "LIS2DH12TR" (at 43.18 36.83 0) (effects (font (size 1.27 1.27)) (hide yes)))
+
+ (property "Supplier" "LCSC" (at 43.18 36.83 0) (effects (font (size 1.27 1.27)) (hide yes)))
+
+ (property "LCSC" "C110926" (at 43.18 36.83 0) (effects (font (size 1.27 1.27)) (hide yes)))
+
+ (property "Supplier Part" "C110926" (at 43.18 36.83 0) (effects (font (size 1.27 1.27)) (hide yes)))
+)
 	(symbol
-		(lib_id "TMP117NAIYBGR:TMP117NAIYBGR")
+		(lib_id "Stratolink_v1p1_Symbols:Stratolink_Release_TMP117AIYBGR")
 		(at 38.1 160.02 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -59908,7 +60438,7 @@
 				(hide yes)
 			)
 		)
-		(property "Value" "TMP117NAIYBGR"
+		(property "Value" "TMP117AIYBGR"
 			(at 38.1 149.86 0)
 			(effects
 				(font
@@ -59917,7 +60447,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "lib:BGA6N40P3X2_148X95X53"
+		(property "Footprint" "lib:Stratolink_v1p1_U5_BGA6N40P3X2_148X95X53"
 			(at 38.1 160.02 0)
 			(effects
 				(font
@@ -59936,7 +60466,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "TMP117N precision digital temperature sensor; +/-0.2 C from -40 to 100 C; YBG DSBGA-6"
+		(property "Description" "TMP117 precision digital temperature sensor, YBG DSBGA-6; max +/-0.2 C at -40 to 100 C, +/-0.25 C at -55 to 125 C under TI test conditions"
 			(at 38.1 160.02 0)
 			(effects
 				(font
@@ -60035,7 +60565,7 @@
 				(hide yes)
 			)
 		)
-		(property "MP" "TMP117NAIYBGR"
+		(property "MP" "TMP117AIYBGR"
 			(at 38.1 160.02 0)
 			(effects
 				(font
@@ -60045,7 +60575,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description_1" "TMP117N precision digital temperature sensor; +/-0.2 C from -40 to 100 C; YBG DSBGA-6"
+		(property "Description_1" "TMP117 precision digital temperature sensor, YBG DSBGA-6; max +/-0.2 C at -40 to 100 C, +/-0.25 C at -55 to 125 C under TI test conditions"
 			(at 38.1 160.02 0)
 			(effects
 				(font
@@ -60101,9 +60631,21 @@
 				)
 			)
 		)
-	)
+	
+ (property "Manufacturer" "Texas Instruments" (at 38.1 160.02 0) (effects (font (size 1.27 1.27)) (hide yes)))
+
+ (property "Manufacturer_Part_Number" "TMP117AIYBGR" (at 38.1 160.02 0) (effects (font (size 1.27 1.27)) (hide yes)))
+
+ (property "Supplier" "LCSC" (at 38.1 160.02 0) (effects (font (size 1.27 1.27)) (hide yes)))
+
+ (property "Assembly_Note" "TMP117AIYBGR C2871893: same exact orderable as flown v1; corrected YBG ball map retained. N-grade metadata in earlier CAD was inaccurate." (at 38.1 160.02 0) (effects (font (size 1.27 1.27)) (hide yes)))
+
+ (property "LCSC" "C2871893" (at 38.1 160.02 0) (effects (font (size 1.27 1.27)) (hide yes)))
+
+ (property "Supplier Part" "C2871893" (at 38.1 160.02 0) (effects (font (size 1.27 1.27)) (hide yes)))
+)
 	(symbol
-		(lib_id "Device:R_US")
+		(lib_id "Stratolink_v1p1_Symbols:Device_R_US")
 		(at 132.08 88.9 90)
 		(unit 1)
 		(exclude_from_sim no)
@@ -60130,7 +60672,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Resistor_SMD:R_0402_1005Metric"
+		(property "Footprint" "lib:Stratolink_v1p1_R9_R_0402_1005Metric"
 			(at 132.334 87.884 90)
 			(effects
 				(font
@@ -60139,7 +60681,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "~"
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C106231.html"
 			(at 132.08 88.9 0)
 			(effects
 				(font
@@ -60148,7 +60690,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Resistor, US symbol"
+		(property "Description" "RC0402FR-070RL"
 			(at 132.08 88.9 0)
 			(effects
 				(font
@@ -60171,9 +60713,19 @@
 				)
 			)
 		)
-	)
+	
+ (property "Manufacturer" "Yageo" (at 132.08 88.9 0) (effects (font (size 1.27 1.27)) (hide yes)))
+
+ (property "Manufacturer_Part_Number" "RC0402FR-070RL" (at 132.08 88.9 0) (effects (font (size 1.27 1.27)) (hide yes)))
+
+ (property "Supplier" "LCSC" (at 132.08 88.9 0) (effects (font (size 1.27 1.27)) (hide yes)))
+
+ (property "LCSC" "C106231" (at 132.08 88.9 0) (effects (font (size 1.27 1.27)) (hide yes)))
+
+ (property "Supplier Part" "C106231" (at 132.08 88.9 0) (effects (font (size 1.27 1.27)) (hide yes)))
+)
 	(symbol
-		(lib_id "power:GND")
+		(lib_id "Stratolink_v1p1_Symbols:power_GND")
 		(at 245.11 53.34 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -60238,7 +60790,7 @@
 		)
 	)
 	(symbol
-		(lib_id "Device:R_US")
+		(lib_id "Stratolink_v1p1_Symbols:Device_R_US")
 		(at 222.25 88.9 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -60256,7 +60808,7 @@
 				(hide yes)
 			)
 		)
-		(property "Value" "8.25MΩ"
+		(property "Value" "7.50MΩ"
 			(at 224.536 92.456 90)
 			(effects
 				(font
@@ -60265,7 +60817,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Resistor_SMD:R_0402_1005Metric"
+		(property "Footprint" "lib:Stratolink_v1p1_R1_R_0402_1005Metric"
 			(at 223.266 89.154 90)
 			(effects
 				(font
@@ -60274,7 +60826,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "~"
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C3013187.html"
 			(at 222.25 88.9 0)
 			(effects
 				(font
@@ -60283,7 +60835,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Resistor, US symbol"
+		(property "Description" "FRC0402F7504TS; 7.50 MΩ, 1%, 100 ppm/°C charge-ceiling resistor"
 			(at 222.25 88.9 0)
 			(effects
 				(font
@@ -60306,9 +60858,22 @@
 				)
 			)
 		)
-	)
+	
+ (property "Manufacturer" "FOJAN" (at 222.25 88.9 0) (effects (font (size 1.27 1.27)) (hide yes)))
+
+ (property "Manufacturer_Part_Number" "FRC0402F7504TS" (at 222.25 88.9 0) (effects (font (size 1.27 1.27)) (hide yes)))
+
+ (property "Supplier" "LCSC" (at 222.25 88.9 0) (effects (font (size 1.27 1.27)) (hide yes)))
+
+ (property "LCSC" "C3013187" (at 222.25 88.9 0) (effects (font (size 1.27 1.27)) (hide yes)))
+
+ (property "Supplier Part" "C3013187" (at 222.25 88.9 0) (effects (font (size 1.27 1.27)) (hide yes)))
+
+(property "MPN" "FRC0402F7504TS" (at 0 0 0)  (effects (font (size 1 1)) (hide yes)))
+(property "LCSC Part #" "C3013187" (at 0 0 0)  (effects (font (size 1 1)) (hide yes)))
+)
 	(symbol
-		(lib_id "Device:R_US")
+		(lib_id "Stratolink_v1p1_Symbols:Device_R_US")
 		(at 228.6 96.52 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -60335,7 +60900,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Resistor_SMD:R_0402_1005Metric"
+		(property "Footprint" "lib:Stratolink_v1p1_R3_R_0402_1005Metric"
 			(at 229.616 96.774 90)
 			(effects
 				(font
@@ -60344,7 +60909,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "~"
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C2998153.html"
 			(at 228.6 96.52 0)
 			(effects
 				(font
@@ -60353,7 +60918,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Resistor, US symbol"
+		(property "Description" "FRC0402F4754TS"
 			(at 228.6 96.52 0)
 			(effects
 				(font
@@ -60376,9 +60941,17 @@
 				)
 			)
 		)
-	)
+	
+ (property "LCSC" "C2998153" (at 228.6 96.52 0) (effects (font (size 1.27 1.27)) (hide yes)))
+
+ (property "Manufacturer_Part_Number" "FRC0402F4754TS" (at 228.6 96.52 0) (effects (font (size 1.27 1.27)) (hide yes)))
+
+ (property "Supplier Part" "C2998153" (at 228.6 96.52 0) (effects (font (size 1.27 1.27)) (hide yes)))
+
+ (property "Supplier" "LCSC" (at 228.6 96.52 0) (effects (font (size 1.27 1.27)) (hide yes)))
+)
 	(symbol
-		(lib_id "fab:Conn_Header_JST_PH_1x02_P2mm_Vertical_SMD")
+		(lib_id "Stratolink_v1p1_Symbols:fab_Conn_Header_JST_PH_1x02_P2mm_Vertical_SMD")
 		(at 194.31 95.25 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -60448,7 +61021,7 @@
 		)
 	)
 	(symbol
-		(lib_id "Device:C")
+		(lib_id "Stratolink_v1p1_Symbols:Device_C")
 		(at 195.58 58.42 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -60475,7 +61048,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Capacitor_SMD:C_0402_1005Metric"
+		(property "Footprint" "lib:Stratolink_v1p1_C1_C_0402_1005Metric"
 			(at 196.5452 62.23 0)
 			(effects
 				(font
@@ -60484,7 +61057,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "https://www.lcsc.com/product-detail/C3855387.html?s_z=n_C3855387%2520"
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C3855387.html"
 			(at 195.58 58.42 0)
 			(effects
 				(font
@@ -60493,7 +61066,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Unpolarized capacitor"
+		(property "Description" "GRM1555C1E103JE01D"
 			(at 195.58 58.42 0)
 			(effects
 				(font
@@ -60516,9 +61089,19 @@
 				)
 			)
 		)
-	)
+	
+ (property "Manufacturer" "Murata" (at 195.58 58.42 0) (effects (font (size 1.27 1.27)) (hide yes)))
+
+ (property "Manufacturer_Part_Number" "GRM1555C1E103JE01D" (at 195.58 58.42 0) (effects (font (size 1.27 1.27)) (hide yes)))
+
+ (property "Supplier" "LCSC" (at 195.58 58.42 0) (effects (font (size 1.27 1.27)) (hide yes)))
+
+ (property "LCSC" "C3855387" (at 195.58 58.42 0) (effects (font (size 1.27 1.27)) (hide yes)))
+
+ (property "Supplier Part" "C3855387" (at 195.58 58.42 0) (effects (font (size 1.27 1.27)) (hide yes)))
+)
 	(symbol
-		(lib_id "Device:C")
+		(lib_id "Stratolink_v1p1_Symbols:Device_C")
 		(at 223.52 17.78 90)
 		(unit 1)
 		(exclude_from_sim no)
@@ -60543,7 +61126,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
+		(property "Footprint" "lib:Stratolink_v1p1_C3_C_0603_1608Metric"
 			(at 227.33 16.8148 0)
 			(effects
 				(font
@@ -60552,7 +61135,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "~"
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C1705.html"
 			(at 223.52 17.78 0)
 			(effects
 				(font
@@ -60561,7 +61144,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Unpolarized capacitor"
+		(property "Description" "CL10A475KP8NNNC"
 			(at 223.52 17.78 0)
 			(effects
 				(font
@@ -60584,9 +61167,19 @@
 				)
 			)
 		)
-	)
+	
+ (property "Manufacturer" "Samsung Electro-Mechanics" (at 223.52 17.78 0) (effects (font (size 1.27 1.27)) (hide yes)))
+
+ (property "Manufacturer_Part_Number" "CL10A475KP8NNNC" (at 223.52 17.78 0) (effects (font (size 1.27 1.27)) (hide yes)))
+
+ (property "Supplier" "LCSC" (at 223.52 17.78 0) (effects (font (size 1.27 1.27)) (hide yes)))
+
+ (property "LCSC" "C1705" (at 223.52 17.78 0) (effects (font (size 1.27 1.27)) (hide yes)))
+
+ (property "Supplier Part" "C1705" (at 223.52 17.78 0) (effects (font (size 1.27 1.27)) (hide yes)))
+)
 	(symbol
-		(lib_id "Device:C")
+		(lib_id "Stratolink_v1p1_Symbols:Device_C")
 		(at 78.74 166.37 180)
 		(unit 1)
 		(exclude_from_sim no)
@@ -60611,7 +61204,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Capacitor_SMD:C_0402_1005Metric"
+		(property "Footprint" "lib:Stratolink_v1p1_C15_C_0402_1005Metric"
 			(at 77.7748 162.56 0)
 			(effects
 				(font
@@ -60620,7 +61213,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "~"
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C1525.html"
 			(at 78.74 166.37 0)
 			(effects
 				(font
@@ -60629,7 +61222,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Unpolarized capacitor"
+		(property "Description" "CL05B104KO5NNNC"
 			(at 78.74 166.37 0)
 			(effects
 				(font
@@ -60652,9 +61245,19 @@
 				)
 			)
 		)
-	)
+	
+ (property "Manufacturer" "Samsung Electro-Mechanics" (at 78.74 166.37 0) (effects (font (size 1.27 1.27)) (hide yes)))
+
+ (property "Manufacturer_Part_Number" "CL05B104KO5NNNC" (at 78.74 166.37 0) (effects (font (size 1.27 1.27)) (hide yes)))
+
+ (property "Supplier" "LCSC" (at 78.74 166.37 0) (effects (font (size 1.27 1.27)) (hide yes)))
+
+ (property "LCSC" "C1525" (at 78.74 166.37 0) (effects (font (size 1.27 1.27)) (hide yes)))
+
+ (property "Supplier Part" "C1525" (at 78.74 166.37 0) (effects (font (size 1.27 1.27)) (hide yes)))
+)
 	(symbol
-		(lib_id "power:GND")
+		(lib_id "Stratolink_v1p1_Symbols:power_GND")
 		(at 231.14 30.48 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -60719,7 +61322,7 @@
 		)
 	)
 	(symbol
-		(lib_id "power:GND")
+		(lib_id "Stratolink_v1p1_Symbols:power_GND")
 		(at 203.2 107.95 90)
 		(unit 1)
 		(exclude_from_sim no)
@@ -60784,7 +61387,7 @@
 		)
 	)
 	(symbol
-		(lib_id "power:GND")
+		(lib_id "Stratolink_v1p1_Symbols:power_GND")
 		(at 54.61 171.45 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -60849,7 +61452,7 @@
 		)
 	)
 	(symbol
-		(lib_id "power:GND")
+		(lib_id "Stratolink_v1p1_Symbols:power_GND")
 		(at 203.2 97.79 90)
 		(unit 1)
 		(exclude_from_sim no)
@@ -60914,7 +61517,7 @@
 		)
 	)
 	(symbol
-		(lib_id "Device:R_US")
+		(lib_id "Stratolink_v1p1_Symbols:Device_R_US")
 		(at 162.56 39.37 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -60941,7 +61544,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Resistor_SMD:R_0402_1005Metric"
+		(property "Footprint" "lib:Stratolink_v1p1_R11_R_0402_1005Metric"
 			(at 163.576 39.624 90)
 			(effects
 				(font
@@ -60950,7 +61553,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "~"
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C105871.html"
 			(at 162.56 39.37 0)
 			(effects
 				(font
@@ -60959,7 +61562,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "Resistor, US symbol"
+		(property "Description" "RC0402FR-074K7L"
 			(at 162.56 39.37 0)
 			(effects
 				(font
@@ -60982,7 +61585,17 @@
 				)
 			)
 		)
-	)
+	
+ (property "Manufacturer" "Yageo" (at 162.56 39.37 0) (effects (font (size 1.27 1.27)) (hide yes)))
+
+ (property "Manufacturer_Part_Number" "RC0402FR-074K7L" (at 162.56 39.37 0) (effects (font (size 1.27 1.27)) (hide yes)))
+
+ (property "Supplier" "LCSC" (at 162.56 39.37 0) (effects (font (size 1.27 1.27)) (hide yes)))
+
+ (property "LCSC" "C105871" (at 162.56 39.37 0) (effects (font (size 1.27 1.27)) (hide yes)))
+
+ (property "Supplier Part" "C105871" (at 162.56 39.37 0) (effects (font (size 1.27 1.27)) (hide yes)))
+)
 	(sheet_instances
 		(path "/"
 			(page "1")
@@ -60998,4 +61611,83 @@
 		(at 105.41 54.61)
 		(uuid "f73bdbe4-106d-4781-89ce-ffe15a524d8e")
 	)
+
+(symbol (lib_id "Stratolink_v1p1_Symbols:Device_C") (at 88.9 190.5 0) (unit 1) (exclude_from_sim no) (in_bom yes) (on_board yes) (dnp no) (uuid "0457256a-7e29-54b3-a08f-85f815917fd9") (property "Reference" "C22" (at 92.9 187.5 0) (effects (font (size 1 1)))) (property "Value" "100nF" (at 95.9 191.5 0) (effects (font (size 1 1)))) (property "Footprint" "lib:Stratolink_v1p1_C22_C_0402_1005Metric" (at 88.9 190.5 0) (effects (font (size 1 1)) (hide yes))) (property "Datasheet" "" (at 88.9 190.5 0) (effects (font (size 1 1)) (hide yes))) (property "Description" "Active midpoint balancer pilot" (at 88.9 190.5 0) (effects (font (size 1 1)) (hide yes))) (property "MPN" "CL05B104KO5NNNC" (at 88.9 190.5 0) (effects (font (size 1 1)) (hide yes))) (property "LCSC Part #" "C1525" (at 88.9 190.5 0) (effects (font (size 1 1)) (hide yes))) (property "Supplier Part" "C1525" (at 88.9 190.5 0) (effects (font (size 1 1)) (hide yes))) (property "Manufacturer_Part_Number" "CL05B104KO5NNNC" (at 88.9 190.5 0) (effects (font (size 1 1)) (hide yes))) (pin "1" (uuid "026d8001-33cc-52e2-b1dd-7262599194cf")) (pin "2" (uuid "ba51c582-3e94-57d1-b4a0-ca7c5ae563e3")) (instances (project "stratolink" (path "/4d146a28-be53-49f1-b1c6-484192820e45" (reference "C22") (unit 1)))))
+(symbol (lib_id "Stratolink_v1p1_Symbols:Device_R_US") (at 25.4 184.15 0) (unit 1) (exclude_from_sim no) (in_bom yes) (on_board yes) (dnp no) (uuid "c09c0a0e-cba8-562e-b648-500c761d4e09") (property "Reference" "R24" (at 29.4 181.15 0) (effects (font (size 1 1)))) (property "Value" "4.75MΩ" (at 32.4 185.15 0) (effects (font (size 1 1)))) (property "Footprint" "lib:Stratolink_v1p1_R24_R_0402_1005Metric" (at 25.4 184.15 0) (effects (font (size 1 1)) (hide yes))) (property "Datasheet" "" (at 25.4 184.15 0) (effects (font (size 1 1)) (hide yes))) (property "Description" "Active midpoint balancer pilot" (at 25.4 184.15 0) (effects (font (size 1 1)) (hide yes))) (property "MPN" "FRC0402F4754TS" (at 25.4 184.15 0) (effects (font (size 1 1)) (hide yes))) (property "LCSC Part #" "C2998153" (at 25.4 184.15 0) (effects (font (size 1 1)) (hide yes))) (property "Supplier Part" "C2998153" (at 25.4 184.15 0) (effects (font (size 1 1)) (hide yes))) (property "Manufacturer_Part_Number" "FRC0402F4754TS" (at 25.4 184.15 0) (effects (font (size 1 1)) (hide yes))) (pin "1" (uuid "5fbf3301-29c2-51d6-8000-7fa7adef6fdc")) (pin "2" (uuid "d9ba8619-524d-5a2f-9d0a-8e938721eafd")) (instances (project "stratolink" (path "/4d146a28-be53-49f1-b1c6-484192820e45" (reference "R24") (unit 1)))))
+(symbol (lib_id "Stratolink_v1p1_Symbols:Device_R_US") (at 25.4 199.39 0) (unit 1) (exclude_from_sim no) (in_bom yes) (on_board yes) (dnp no) (uuid "6f3fa491-e84d-5965-a08f-35942afcfec8") (property "Reference" "R25" (at 29.4 196.39 0) (effects (font (size 1 1)))) (property "Value" "4.75MΩ" (at 32.4 200.39 0) (effects (font (size 1 1)))) (property "Footprint" "lib:Stratolink_v1p1_R25_R_0402_1005Metric" (at 25.4 199.39 0) (effects (font (size 1 1)) (hide yes))) (property "Datasheet" "" (at 25.4 199.39 0) (effects (font (size 1 1)) (hide yes))) (property "Description" "Active midpoint balancer pilot" (at 25.4 199.39 0) (effects (font (size 1 1)) (hide yes))) (property "MPN" "FRC0402F4754TS" (at 25.4 199.39 0) (effects (font (size 1 1)) (hide yes))) (property "LCSC Part #" "C2998153" (at 25.4 199.39 0) (effects (font (size 1 1)) (hide yes))) (property "Supplier Part" "C2998153" (at 25.4 199.39 0) (effects (font (size 1 1)) (hide yes))) (property "Manufacturer_Part_Number" "FRC0402F4754TS" (at 25.4 199.39 0) (effects (font (size 1 1)) (hide yes))) (pin "1" (uuid "e7a73317-2e38-5190-acea-14f09aa8208e")) (pin "2" (uuid "e58c8aba-e8a5-5626-a133-c8dffd3567a6")) (instances (project "stratolink" (path "/4d146a28-be53-49f1-b1c6-484192820e45" (reference "R25") (unit 1)))))
+(symbol (lib_id "Stratolink_v1p1_Symbols:Device_R_US") (at 72.39 190.5 0) (unit 1) (exclude_from_sim no) (in_bom yes) (on_board yes) (dnp no) (uuid "1ca366c8-e6ea-5f76-98da-2d5e64faee8e") (property "Reference" "R26" (at 76.39 187.5 0) (effects (font (size 1 1)))) (property "Value" "22Ω" (at 79.39 191.5 0) (effects (font (size 1 1)))) (property "Footprint" "lib:Stratolink_v1p1_R26_R_0402_1005Metric" (at 72.39 190.5 0) (effects (font (size 1 1)) (hide yes))) (property "Datasheet" "" (at 72.39 190.5 0) (effects (font (size 1 1)) (hide yes))) (property "Description" "Active midpoint balancer pilot" (at 72.39 190.5 0) (effects (font (size 1 1)) (hide yes))) (property "MPN" "0402WGF220JTCE" (at 72.39 190.5 0) (effects (font (size 1 1)) (hide yes))) (property "LCSC Part #" "C25092" (at 72.39 190.5 0) (effects (font (size 1 1)) (hide yes))) (property "Supplier Part" "C25092" (at 72.39 190.5 0) (effects (font (size 1 1)) (hide yes))) (property "Manufacturer_Part_Number" "0402WGF220JTCE" (at 72.39 190.5 0) (effects (font (size 1 1)) (hide yes))) (pin "1" (uuid "49e10133-15d2-5823-bb61-cf50724a6d8c")) (pin "2" (uuid "0bfb201f-7b2e-53a8-bc2c-1a2f38963072")) (instances (project "stratolink" (path "/4d146a28-be53-49f1-b1c6-484192820e45" (reference "R26") (unit 1)))))
+(symbol (lib_id "Stratolink_v1p1_Symbols:Stratolink_Power_TLV8801DBVT") (at 50.8 190.5 0) (unit 1) (exclude_from_sim no) (in_bom yes) (on_board yes) (dnp no) (uuid "b5362f62-2d7c-536e-b8a4-f234e7de4645") (property "Reference" "U8" (at 52.07 185.42 0) (effects (font (size 1 1)))) (property "Value" "TLV8801DBVT" (at 50.8 208.28 0) (effects (font (size 1 1)))) (property "Footprint" "lib:Stratolink_v1p1_U8_SOT-23-5" (at 50.8 190.5 0) (effects (font (size 1 1)) (hide yes))) (property "Datasheet" "https://www.ti.com/lit/ds/symlink/tlv8801.pdf" (at 50.8 190.5 0) (effects (font (size 1 1)) (hide yes))) (property "Description" "Active midpoint balancer pilot" (at 50.8 190.5 0) (effects (font (size 1 1)) (hide yes))) (property "MPN" "TLV8801DBVT" (at 50.8 190.5 0) (effects (font (size 1 1)) (hide yes))) (property "LCSC Part #" "C544879" (at 50.8 190.5 0) (effects (font (size 1 1)) (hide yes))) (property "Supplier Part" "C544879" (at 50.8 190.5 0) (effects (font (size 1 1)) (hide yes))) (property "Manufacturer_Part_Number" "TLV8801DBVT" (at 50.8 190.5 0) (effects (font (size 1 1)) (hide yes))) (pin "1" (uuid "a765610b-8df4-5399-8d5d-7fc02aa7e2a8")) (pin "2" (uuid "412b1c3a-ca9b-5aa4-9434-6572eb22f9b9")) (pin "3" (uuid "a398bd5d-4e04-56ce-bcbf-1dd71c210961")) (pin "4" (uuid "30642ca3-0a84-527d-a699-19758476ea75")) (pin "5" (uuid "babc0389-aba2-5db4-b21a-fc9207abfe17")) (instances (project "stratolink" (path "/4d146a28-be53-49f1-b1c6-484192820e45" (reference "U8") (unit 1)))))
+
+(wire (pts (xy 58.42 190.5) (xy 64.77 190.5)) (stroke (width 0) (type default)) (uuid "07a628fa-4838-55fd-aa88-39c2e687e267"))
+(wire (pts (xy 64.77 186.69) (xy 72.39 186.69)) (stroke (width 0) (type default)) (uuid "443b521f-38d9-5349-8100-2288d3815af7"))
+(wire (pts (xy 39.37 200.66) (xy 39.37 193.04)) (stroke (width 0) (type default)) (uuid "5c63cb35-3816-5247-903a-ed3ccceec007"))
+(wire (pts (xy 25.4 187.96) (xy 25.4 195.58)) (stroke (width 0) (type default)) (uuid "9cd61eb4-4941-55b5-8ae9-88169d0c6f84"))
+(wire (pts (xy 64.77 190.5) (xy 64.77 186.69)) (stroke (width 0) (type default)) (uuid "a1110276-dce2-54d0-946f-479f1a1fb760"))
+(wire (pts (xy 64.77 200.66) (xy 39.37 200.66)) (stroke (width 0) (type default)) (uuid "a4c432cd-4823-588f-ac45-10bd5bac805e"))
+(wire (pts (xy 64.77 190.5) (xy 64.77 200.66)) (stroke (width 0) (type default)) (uuid "bdcec655-29e8-5a53-95d6-ee9df44d5257"))
+(wire (pts (xy 25.4 187.96) (xy 43.18 187.96)) (stroke (width 0) (type default)) (uuid "cd90180c-cfb1-5293-ae78-d92cb08a7b84"))
+(wire (pts (xy 39.37 193.04) (xy 43.18 193.04)) (stroke (width 0) (type default)) (uuid "cdd724a5-521d-5412-8ada-e74f7f2377f8"))
+(junction (at 25.4 187.96) (diameter 0) (color 0 0 0 0) (uuid "7232911e-95f3-5883-b3ab-83f8a6d535ba"))
+(junction (at 64.77 190.5) (diameter 0) (color 0 0 0 0) (uuid "e25c1d13-9e45-50da-81ee-f9d1a92863c1"))
+(label "GND" (at 50.8 198.12 0) (effects (font (size 0.9 0.9)) (justify left bottom)) (uuid "0a14f11b-94c8-59af-9546-64d916f3e8aa"))
+(label "SC_MID" (at 228.6 33.02 0) (effects (font (size 0.9 0.9)) (justify left bottom)) (uuid "28960830-7d27-59e7-8403-17e07f7e572e"))
+(label "SC_HALF_REF" (at 25.4 187.96 0) (effects (font (size 0.9 0.9)) (justify left bottom)) (uuid "3e486d3c-6465-5bc1-8e06-f46b617fefe1"))
+(label "GND" (at 88.9 194.31 0) (effects (font (size 0.9 0.9)) (justify left bottom)) (uuid "40fa3a98-d96d-52c1-8065-3526eb103d57"))
+(label "VBAT" (at 88.9 186.69 0) (effects (font (size 0.9 0.9)) (justify left bottom)) (uuid "4bcb262e-e795-5e44-833e-416c0203ca4d"))
+(label "SC_BAL_OUT" (at 58.42 190.5 0) (effects (font (size 0.9 0.9)) (justify left bottom)) (uuid "4e14a0b4-a273-5168-9bd7-64abb657b16e"))
+(label "VBAT" (at 50.8 182.88 0) (effects (font (size 0.9 0.9)) (justify left bottom)) (uuid "87c4d873-1da9-5382-abcb-b830f3f9cfef"))
+(label "VBAT" (at 223.52 36.83 0) (effects (font (size 0.9 0.9)) (justify left bottom)) (uuid "ad456143-dbdc-5a96-bbd7-de04cac5b2c0"))
+(label "SC_MID" (at 72.39 194.31 0) (effects (font (size 0.9 0.9)) (justify left bottom)) (uuid "b5852d40-c1dc-5f3b-a6c1-14e013c7378e"))
+(label "VBAT" (at 25.4 180.34 0) (effects (font (size 0.9 0.9)) (justify left bottom)) (uuid "df16b33c-10ad-541b-ac78-2ad96e37f006"))
+(label "GND" (at 25.4 203.2 0) (effects (font (size 0.9 0.9)) (justify left bottom)) (uuid "eb3da878-c3ca-595e-a29b-f33998da762e"))
+(text "CAP-XX active cell balancing (Fig. 7); hand-install C5 after cleaning.\nFeedback is before R26. Pilot: verify startup and capacitive-load stability." (at 15 213 0) (effects (font (size 1 1)) (justify left)) (uuid "85064e4c-5fbe-5d87-b96f-9f3242f6c1cc"))
+
+(no_connect (at 156.21 64.77) (uuid "68a7f0a6-ace5-5e56-a56c-6e8ebab79dd9"))
+(no_connect (at 156.21 67.31) (uuid "1aed6a1b-6420-5c31-8827-6e0746635c7b"))
+(no_connect (at 156.21 59.69) (uuid "2086370c-9492-54ed-a325-59d9854f3b8b"))
+(no_connect (at 156.21 57.15) (uuid "c0846f86-7cde-5603-860d-e05f9d99205f"))
+(no_connect (at 156.21 54.61) (uuid "88505aec-7960-5c7a-bac8-14efd8581d5d"))
+(no_connect (at 156.21 52.07) (uuid "348bb236-e614-52e7-af9c-5ecac77319d8"))
+(no_connect (at 105.41 77.47) (uuid "579304c3-03c7-5d04-a698-212667b15206"))
+(no_connect (at 111.76 113.03) (uuid "c949caa4-55f5-5c02-80d9-854c9bc981c1"))
+(no_connect (at 152.4 118.11) (uuid "7f577b73-fe2f-589d-8f6a-44712e501a70"))
+(no_connect (at 152.4 115.57) (uuid "557cd864-ec00-5af3-b8de-138b93f9a600"))
+(no_connect (at 152.4 113.03) (uuid "ca129161-0599-5692-904d-0292789d3628"))
+(no_connect (at 152.4 105.41) (uuid "df8adace-a093-52e9-a39b-2e18ea36c9e6"))
+(no_connect (at 231.14 130.81) (uuid "b7b0c005-e698-5d36-8ea8-d3cb175adfd7"))
+(no_connect (at 41.91 133.35) (uuid "f382408b-231e-5924-8317-58c28ea50e63"))
+(no_connect (at 60.96 34.29) (uuid "d6c6d9bf-516e-5255-8468-ca0f105d0665"))
+(no_connect (at 129.54 158.75) (uuid "a6609e69-0eae-5fd4-ba7a-5f0439e4947a"))
+(symbol (lib_id "Stratolink_v1p1_Symbols:PWR_FLAG") (at 199.39 105.41 0) (unit 1)
+    (exclude_from_sim no) (in_bom no) (on_board no) (dnp no) (uuid "b2660941-25bd-5bf3-9588-da4b6d50cd17")
+    (property "Reference" "#FLG101" (at 199.39 107.315 0) (effects (font (size 1.27 1.27)) (hide yes)))
+    (property "Value" "PWR_FLAG" (at 199.39 101.6 0) (effects (font (size 1.27 1.27))))
+    (property "Footprint" "" (at 199.39 105.41 0) (effects (font (size 1.27 1.27)) (hide yes)))
+    (property "Datasheet" "" (at 199.39 105.41 0) (effects (font (size 1.27 1.27)) (hide yes)))
+    (pin "1" (uuid "812f0c94-c6cd-5e55-9259-e927f51e0000"))
+    (instances (project "stratolink" (path "/4d146a28-be53-49f1-b1c6-484192820e45" (reference "#FLG101") (unit 1)))))
+(symbol (lib_id "Stratolink_v1p1_Symbols:PWR_FLAG") (at 199.39 107.95 0) (unit 1)
+    (exclude_from_sim no) (in_bom no) (on_board no) (dnp no) (uuid "c5cff5d7-32c2-5eb5-8026-6aa6cf47ee97")
+    (property "Reference" "#FLG102" (at 199.39 109.855 0) (effects (font (size 1.27 1.27)) (hide yes)))
+    (property "Value" "PWR_FLAG" (at 199.39 104.14 0) (effects (font (size 1.27 1.27))))
+    (property "Footprint" "" (at 199.39 107.95 0) (effects (font (size 1.27 1.27)) (hide yes)))
+    (property "Datasheet" "" (at 199.39 107.95 0) (effects (font (size 1.27 1.27)) (hide yes)))
+    (pin "1" (uuid "944d0dde-0354-5fbe-8d7f-fd73f10709be"))
+    (instances (project "stratolink" (path "/4d146a28-be53-49f1-b1c6-484192820e45" (reference "#FLG102") (unit 1)))))
+(symbol (lib_id "Stratolink_v1p1_Symbols:PWR_FLAG") (at 92.71 121.92 0) (unit 1)
+    (exclude_from_sim no) (in_bom no) (on_board no) (dnp no) (uuid "cf285c58-cd03-511f-b1a3-c7462b75f3b6")
+    (property "Reference" "#FLG103" (at 92.71 123.825 0) (effects (font (size 1.27 1.27)) (hide yes)))
+    (property "Value" "PWR_FLAG" (at 92.71 118.11 0) (effects (font (size 1.27 1.27))))
+    (property "Footprint" "" (at 92.71 121.92 0) (effects (font (size 1.27 1.27)) (hide yes)))
+    (property "Datasheet" "" (at 92.71 121.92 0) (effects (font (size 1.27 1.27)) (hide yes)))
+    (pin "1" (uuid "f44250c3-09b1-52f7-8169-fc262c692605"))
+    (instances (project "stratolink" (path "/4d146a28-be53-49f1-b1c6-484192820e45" (reference "#FLG103") (unit 1)))))
+(symbol (lib_id "Stratolink_v1p1_Symbols:PWR_FLAG") (at 223.52 36.83 0) (unit 1)
+    (exclude_from_sim no) (in_bom no) (on_board no) (dnp no) (uuid "5c4caa4a-a576-5240-86dc-79a7071c61c7")
+    (property "Reference" "#FLG104" (at 223.52 38.735 0) (effects (font (size 1.27 1.27)) (hide yes)))
+    (property "Value" "PWR_FLAG" (at 223.52 33.019999999999996 0) (effects (font (size 1.27 1.27))))
+    (property "Footprint" "" (at 223.52 36.83 0) (effects (font (size 1.27 1.27)) (hide yes)))
+    (property "Datasheet" "" (at 223.52 36.83 0) (effects (font (size 1.27 1.27)) (hide yes)))
+    (pin "1" (uuid "af0c1e9a-a788-5dd2-87c7-5d96cf114363"))
+    (instances (project "stratolink" (path "/4d146a28-be53-49f1-b1c6-484192820e45" (reference "#FLG104") (unit 1)))))
 )

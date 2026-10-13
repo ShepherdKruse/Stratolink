@@ -1,0 +1,648 @@
+{
+  "status": "PASS: native centers/model markers; independently viewed numeric supplier CSV reimport verifies U7 0 degrees and U8 90 degrees; preserve U5 0 degrees",
+  "pcb_sha256": "490af47db22ef076938c17319782f194623d8f8b6a3f864a2e0cc23b3d025b15",
+  "initial_cpl_sha256": "cc07c7876ed4ced465ae087aa226cab75561c13cb984fba6f14970691d61688f",
+  "historical_input_cpl_sha256": "194c91282f58cc6635dd2b929b2ab0f98a16ea066265052b8b957be5bb12a081",
+  "view_convention": "North up; top x-right/y-down, bottom horizontal mirror x-left/y-down",
+  "supplier_control_observation": "Visible CW90 button results were subsequently replaced by an uploaded numeric CSV and fresh previews; the accepted numeric angles are bound to that exact file and screenshot hashes.",
+  "parts": {
+    "U5": {
+      "mpn": "TMP117AIYBGR",
+      "cpl_initial": {
+        "Designator": "U5",
+        "Mid X": "73.148000",
+        "Mid Y": "-40.864000",
+        "Layer": "top",
+        "Rotation": "0.000000"
+      },
+      "native_angle_deg": 0.0,
+      "center_board_xy_mm": [
+        73.148,
+        40.864
+      ],
+      "cad_body_center_xy_mm": [
+        73.148,
+        40.864
+      ],
+      "body_center_error_mm": 0.0,
+      "pin1": {
+        "n": "A1",
+        "xy": [
+          72.948,
+          40.464
+        ],
+        "local": [
+          -0.2,
+          -0.4
+        ],
+        "size": [
+          0.23,
+          0.23
+        ],
+        "net": "SDA"
+      },
+      "cad_model_pin1_mark_center_board_xyz_mm": [
+        72.79174999999998,
+        40.238749999999996,
+        0.8404999999999998
+      ],
+      "cad_model_pin1_mark_bounds_board_xyz_mm": [
+        [
+          72.74473348151064,
+          40.19125,
+          0.7349999999999998
+        ],
+        [
+          72.83876651848934,
+          40.286249999999995,
+          0.946
+        ]
+      ],
+      "expected_supplier_view": "A1 upper-left; preserve orientation",
+      "native_glb_sha256": "88ca223fb3062ce5788caf7a41a8c77b6dce395865c4f64f4d4ab85604e5a526",
+      "native_model_sources": [
+        {
+          "filename": "${KIPRJMOD}/lib/TMP117NAIYBGR.step",
+          "offset": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "rotation": [
+            -90.0,
+            0.0,
+            0.0
+          ]
+        }
+      ],
+      "pads_board_xy": [
+        {
+          "n": "A1",
+          "xy": [
+            72.948,
+            40.464
+          ],
+          "local": [
+            -0.2,
+            -0.4
+          ],
+          "size": [
+            0.23,
+            0.23
+          ],
+          "net": "SDA"
+        },
+        {
+          "n": "A2",
+          "xy": [
+            73.348,
+            40.464
+          ],
+          "local": [
+            0.2,
+            -0.4
+          ],
+          "size": [
+            0.23,
+            0.23
+          ],
+          "net": "SCL"
+        },
+        {
+          "n": "B1",
+          "xy": [
+            72.948,
+            40.864
+          ],
+          "local": [
+            -0.2,
+            0.0
+          ],
+          "size": [
+            0.23,
+            0.23
+          ],
+          "net": "+3.3V"
+        },
+        {
+          "n": "B2",
+          "xy": [
+            73.348,
+            40.864
+          ],
+          "local": [
+            0.2,
+            0.0
+          ],
+          "size": [
+            0.23,
+            0.23
+          ],
+          "net": "GND"
+        },
+        {
+          "n": "C1",
+          "xy": [
+            72.948,
+            41.264
+          ],
+          "local": [
+            -0.2,
+            0.4
+          ],
+          "size": [
+            0.23,
+            0.23
+          ],
+          "net": "GND"
+        },
+        {
+          "n": "C2",
+          "xy": [
+            73.348,
+            41.264
+          ],
+          "local": [
+            0.2,
+            0.4
+          ],
+          "size": [
+            0.23,
+            0.23
+          ],
+          "net": "GND"
+        }
+      ],
+      "historical_input_exact": true,
+      "numeric_cpl_correction_verified_by_reimport": false,
+      "preserve_original_rotation_verified_at_corner_level": true
+    },
+    "U7": {
+      "mpn": "LIS2DH12TR",
+      "cpl_initial": {
+        "Designator": "U7",
+        "Mid X": "70.548000",
+        "Mid Y": "-37.807000",
+        "Layer": "top",
+        "Rotation": "90.000000"
+      },
+      "native_angle_deg": 90.0,
+      "center_board_xy_mm": [
+        70.548,
+        37.807
+      ],
+      "cad_body_center_xy_mm": [
+        70.548,
+        37.807
+      ],
+      "body_center_error_mm": 0.0,
+      "pin1": {
+        "n": "1",
+        "xy": [
+          69.798,
+          38.571999
+        ],
+        "local": [
+          -0.764999,
+          -0.75
+        ],
+        "size": [
+          0.45,
+          0.35
+        ],
+        "net": "SCL"
+      },
+      "cad_model_pin1_mark_center_board_xyz_mm": [
+        69.75299988207468,
+        38.57323966299394,
+        1.3650000000000002
+      ],
+      "cad_model_pin1_mark_bounds_board_xyz_mm": [
+        [
+          69.6720356841119,
+          38.49227546503117,
+          1.3150000000000002
+        ],
+        [
+          69.83396408003745,
+          38.654203860956706,
+          1.415
+        ]
+      ],
+      "expected_supplier_view": "Pin 1 lower-left; clockwise 90\u00b0 from initial preview",
+      "native_glb_sha256": "b7429455d558ff874e0006280d3cef1437d8df2b393dea1244354b6a37a9cf73",
+      "native_model_sources": [
+        {
+          "filename": "${KIPRJMOD}/lib/LIS2DH12TR.step",
+          "offset": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "rotation": [
+            -90.0,
+            0.0,
+            180.0
+          ]
+        }
+      ],
+      "pads_board_xy": [
+        {
+          "n": "1",
+          "xy": [
+            69.798,
+            38.571999
+          ],
+          "local": [
+            -0.764999,
+            -0.75
+          ],
+          "size": [
+            0.45,
+            0.35
+          ],
+          "net": "SCL"
+        },
+        {
+          "n": "2",
+          "xy": [
+            70.298,
+            38.572
+          ],
+          "local": [
+            -0.765,
+            -0.25
+          ],
+          "size": [
+            0.45,
+            0.35
+          ],
+          "net": "+3.3V"
+        },
+        {
+          "n": "3",
+          "xy": [
+            70.798,
+            38.572
+          ],
+          "local": [
+            -0.765,
+            0.25
+          ],
+          "size": [
+            0.45,
+            0.35
+          ],
+          "net": "GND"
+        },
+        {
+          "n": "4",
+          "xy": [
+            71.297999,
+            38.572
+          ],
+          "local": [
+            -0.765,
+            0.749999
+          ],
+          "size": [
+            0.45,
+            0.35
+          ],
+          "net": "SDA"
+        },
+        {
+          "n": "5",
+          "xy": [
+            71.313,
+            38.072
+          ],
+          "local": [
+            -0.265,
+            0.765
+          ],
+          "size": [
+            0.35,
+            0.45
+          ],
+          "net": "GND"
+        },
+        {
+          "n": "6",
+          "xy": [
+            71.313,
+            37.557
+          ],
+          "local": [
+            0.25,
+            0.765
+          ],
+          "size": [
+            0.35,
+            0.45
+          ],
+          "net": "GND"
+        },
+        {
+          "n": "7",
+          "xy": [
+            71.298,
+            37.042001
+          ],
+          "local": [
+            0.764999,
+            0.75
+          ],
+          "size": [
+            0.45,
+            0.35
+          ],
+          "net": "GND"
+        },
+        {
+          "n": "8",
+          "xy": [
+            70.798,
+            37.042
+          ],
+          "local": [
+            0.765,
+            0.25
+          ],
+          "size": [
+            0.45,
+            0.35
+          ],
+          "net": "GND"
+        },
+        {
+          "n": "9",
+          "xy": [
+            70.298,
+            37.042
+          ],
+          "local": [
+            0.765,
+            -0.25
+          ],
+          "size": [
+            0.45,
+            0.35
+          ],
+          "net": "+3.3V"
+        },
+        {
+          "n": "10",
+          "xy": [
+            69.798001,
+            37.042
+          ],
+          "local": [
+            0.765,
+            -0.749999
+          ],
+          "size": [
+            0.45,
+            0.35
+          ],
+          "net": "+3.3V"
+        },
+        {
+          "n": "11",
+          "xy": [
+            69.783,
+            37.557
+          ],
+          "local": [
+            0.25,
+            -0.765
+          ],
+          "size": [
+            0.35,
+            0.45
+          ],
+          "net": "unconnected-(U7-INT2-Pad11)"
+        },
+        {
+          "n": "12",
+          "xy": [
+            69.783,
+            38.057
+          ],
+          "local": [
+            -0.25,
+            -0.765
+          ],
+          "size": [
+            0.35,
+            0.45
+          ],
+          "net": "PA8"
+        }
+      ],
+      "historical_input_exact": true,
+      "numeric_cpl_correction_verified_by_reimport": true,
+      "cpl_reimport_verified": {
+        "Designator": "U7",
+        "Mid X": "70.548000",
+        "Mid Y": "-37.807000",
+        "Layer": "top",
+        "Rotation": "0.000000"
+      },
+      "supplier_reimport_evidence": {
+        "cpl_row": {
+          "Designator": "U7",
+          "Mid X": "70.548000",
+          "Mid Y": "-37.807000",
+          "Layer": "top",
+          "Rotation": "0.000000"
+        },
+        "supplier_view_independently_checked": true,
+        "screenshot": "../jlc/probe-u7-0-crop.png",
+        "screenshot_sha256": "5216a036693001061abd08905cf61193942643c3c9769be4121f29fde44b1120",
+        "observation": "Top view: vendor white body pin-1 index lower-left; matches native pad 1 and bottom row 1\u20134.",
+        "reviewer": "diode_antenna_clearance"
+      }
+    },
+    "U8": {
+      "mpn": "TLV8801DBVT",
+      "cpl_initial": {
+        "Designator": "U8",
+        "Mid X": "55.650000",
+        "Mid Y": "-36.100000",
+        "Layer": "bottom",
+        "Rotation": "180.000000"
+      },
+      "native_angle_deg": 0.0,
+      "center_board_xy_mm": [
+        55.65,
+        36.1
+      ],
+      "cad_body_center_xy_mm": [
+        55.65,
+        36.099999999999994
+      ],
+      "body_center_error_mm": 7.105427357601002e-15,
+      "pin1": {
+        "n": "1",
+        "xy": [
+          54.5125,
+          37.05
+        ],
+        "local": [
+          -1.1375,
+          0.95
+        ],
+        "size": [
+          1.325,
+          0.6
+        ],
+        "net": "/SC_BAL_OUT"
+      },
+      "cad_model_pin1_mark_center_board_xyz_mm": [
+        55.166351542556995,
+        37.233415606093914,
+        -1.635
+      ],
+      "cad_model_pin1_mark_bounds_board_xyz_mm": [
+        [
+          55.11646810409747,
+          37.183648457443,
+          -1.635
+        ],
+        [
+          55.21623498101653,
+          37.28318275474482,
+          -1.635
+        ]
+      ],
+      "expected_supplier_view": "Pin 1 lower-right; clockwise 90\u00b0 from initial preview",
+      "native_glb_sha256": "f79acf0b3e005cdb187a3896bbecea67fb860e3bde17c747214bdaef3cc77ba9",
+      "native_model_sources": [
+        {
+          "filename": "${KICAD10_3DMODEL_DIR}/Package_TO_SOT_SMD.3dshapes/SOT-23-5.step",
+          "offset": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "rotation": [
+            0.0,
+            0.0,
+            0.0
+          ]
+        }
+      ],
+      "pads_board_xy": [
+        {
+          "n": "1",
+          "xy": [
+            54.5125,
+            37.05
+          ],
+          "local": [
+            -1.1375,
+            0.95
+          ],
+          "size": [
+            1.325,
+            0.6
+          ],
+          "net": "/SC_BAL_OUT"
+        },
+        {
+          "n": "2",
+          "xy": [
+            54.5125,
+            36.1
+          ],
+          "local": [
+            -1.1375,
+            0.0
+          ],
+          "size": [
+            1.325,
+            0.6
+          ],
+          "net": "GND"
+        },
+        {
+          "n": "3",
+          "xy": [
+            54.5125,
+            35.15
+          ],
+          "local": [
+            -1.1375,
+            -0.95
+          ],
+          "size": [
+            1.325,
+            0.6
+          ],
+          "net": "/SC_HALF_REF"
+        },
+        {
+          "n": "4",
+          "xy": [
+            56.7875,
+            35.15
+          ],
+          "local": [
+            1.1375,
+            -0.95
+          ],
+          "size": [
+            1.325,
+            0.6
+          ],
+          "net": "/SC_BAL_OUT"
+        },
+        {
+          "n": "5",
+          "xy": [
+            56.7875,
+            37.05
+          ],
+          "local": [
+            1.1375,
+            0.95
+          ],
+          "size": [
+            1.325,
+            0.6
+          ],
+          "net": "/VBAT"
+        }
+      ],
+      "historical_input_exact": false,
+      "numeric_cpl_correction_verified_by_reimport": true,
+      "cpl_reimport_verified": {
+        "Designator": "U8",
+        "Mid X": "55.650000",
+        "Mid Y": "-36.100000",
+        "Layer": "bottom",
+        "Rotation": "90.000000"
+      },
+      "supplier_reimport_evidence": {
+        "cpl_row": {
+          "Designator": "U8",
+          "Mid X": "55.650000",
+          "Mid Y": "-36.100000",
+          "Layer": "bottom",
+          "Rotation": "90.000000"
+        },
+        "supplier_view_independently_checked": true,
+        "screenshot": "../jlc/probe-u8-90-crop.png",
+        "screenshot_sha256": "e88cc042a7330ed639f815781088e4cd1a569a0e3d41e6a953e2f87eef5d1c97",
+        "observation": "Bottom view: vertical body, three leads right and two left; supplier pin-1 marker lower-right; matches native numbered lead columns.",
+        "reviewer": "diode_antenna_clearance"
+      }
+    }
+  },
+  "reimport_input": {
+    "path": "CPL-u7-u8-reimport-probe.csv",
+    "sha256": "aff66b3d61a97cfb0c83a3aa6908c3204d78a19e1219046d3e05a89e598cf7a9"
+  },
+  "reimport_evidence_sha256": "a8b744d179b2be0dae9cd148a5ce2e4bab41af5447afa641a443539b51ccf066"
+}

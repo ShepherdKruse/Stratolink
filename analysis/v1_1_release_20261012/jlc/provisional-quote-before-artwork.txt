@@ -1,0 +1,282 @@
+- navigation:
+  - link:
+    - /url: https://jlcpcb.com
+  - generic: 
+  - generic: 
+  - link "":
+    - /url: /shopcart/cart/
+    - generic: 
+  - superscript: "1"
+  - text:    
+  - text: USD
+  - generic: 
+  - text: 
+  - text: My Account
+  - generic: 
+  - text: 
+- main:
+  - main:
+    - paragraph: Select Product
+    - img "standard-pcb-pcba"
+    - paragraph: Standard PCB/PCBA
+    - generic: 
+    - img "advanced-pcb-pcba"
+    - paragraph: Advanced PCB/PCBA
+    - img "smt-stencil"
+    - paragraph: SMT Stencil
+    - img "flexible-heater"
+    - paragraph: Flex Heater
+    - img "mechatronic-parts"
+    - paragraph: Mechatronic Parts
+    - img "3d-printing"
+    - paragraph: 3D Printing
+    - img "cnc-machining"
+    - paragraph: CNC Machining
+    - img "pcb-layout"
+    - paragraph: PCB Layout
+    - img "sheet-metal"
+    - paragraph: Sheet Metal
+    - text: 
+    - button "Next slide":
+      - generic: 
+    - heading "Online PCB Quote" [level=1]
+    - link "Instructions For Ordering>":
+      - /url: https://jlcpcb.com/help/article/Instructions-for-ordering
+    - text: Upload History
+    - generic: 
+    - text: Add gerber file
+    - text: Only accept zip or rar, Max 100 MB,
+    - link "View example >":
+      - /url: https://jlcpcb.com/help/catalog/180-PCB-Files-Preparation
+    - generic: All uploads are secure and confidential.
+    - text: Base Material
+    - generic: 
+    - button "FR-4 FR-4":
+      - img "FR-4"
+      - text: FR-4
+    - button "FR-4 Flex":
+      - img "FR-4"
+      - text: Flex
+    - button "FR-4 Aluminum":
+      - img "FR-4"
+      - text: Aluminum
+    - button "FR-4 Copper Core":
+      - img "FR-4"
+      - text: Copper Core
+    - button "FR-4 Rogers":
+      - img "FR-4"
+      - text: Rogers
+    - button "FR-4 PTFE Teflon":
+      - img "FR-4"
+      - text: PTFE Teflon
+    - button "HDI HDI":
+      - img "HDI"
+      - text: HDI
+    - text: Layers
+    - generic: 
+    - button "1"
+    - button "2"
+    - button "4"
+    - generic: High Precision PCB
+    - button "6":
+      - text: "6"
+    - button "8"
+    - button "10"
+    - button "12"
+    - button "14"
+    - button "16"
+    - textbox "Select": More
+    - text: Dimensions
+    - generic: 
+    - textbox "X": "22.67"
+    - text: "*"
+    - textbox "Y": "57.3"
+    - textbox "Select": mm
+    - text: PCB Qty
+    - generic: 
+    - text: "5"
+    - text: Product Type
+    - generic: 
+    - button "Industrial/Consumer electronics"
+    - button "Aerospace"
+    - button "Medical"
+    - heading "PCB Specifications" [level=2]
+    - generic: 
+    - text: Deburring/Edge rounding
+    - generic: 
+    - button "No"
+    - button "Yes"
+    - text: Different Design
+    - generic: 
+    - button "1"
+    - button "2"
+    - button "3"
+    - button "4"
+    - textbox
+    - text: Delivery Format
+    - generic: 
+    - button "Single PCB"
+    - button "Panel by Customer"
+    - button "Panel by JLCPCB" [disabled]
+    - text: PCB Thickness
+    - generic: 
+    - button "0.4mm"
+    - button "0.6mm"
+    - button "0.8mm"
+    - button "1.0mm"
+    - button "1.2mm"
+    - button "1.6mm"
+    - button "2.0mm"
+    - text: PCB Color
+    - generic: 
+    - button "Green":
+      - generic: Green
+    - button "Purple":
+      - generic: Purple
+    - button "Red" [disabled]:
+      - generic: Red
+    - button "Yellow" [disabled]:
+      - generic: Yellow
+    - button "Blue":
+      - generic: Blue
+    - button "White":
+      - generic: White
+    - button "Black":
+      - generic: Black
+    - text: Silkscreen
+    - generic: 
+    - button "White": White
+    - text: Material Type
+    - generic: 
+    - button "FR4 TG135"
+    - text: Surface Finish
+    - generic: 
+    - button "OSP New":
+      - text: OSP
+      - generic: New
+    - button "HASL(with lead)" [disabled]
+    - button "LeadFree HASL" [disabled]
+    - button "ENIG"
+    - text: Gold Thickness
+    - generic: 
+    - button "1 U\""
+    - button "2 U\""
+    - heading "High-spec Options" [level=2]
+    - generic: 
+    - text: Outer Copper Weight
+    - generic: 
+    - button "1 oz"
+    - button "2 oz" [disabled]
+    - text:      
+    - text: Via Covering
+    - generic: 
+    - button "Tented"
+    - button "Untented"
+    - button "Plugged"
+    - button "Epoxy Filled & Capped" [disabled]
+    - button "Copper paste Filled & Capped" [disabled]
+    - generic: Via Plating Method
+    - generic: 
+    - button "Not Specified"
+    - button "Conductive Adhesive"
+    - button "Horizontal Electroless Copper Plating"
+    - text: Min via hole size/diameter
+    - generic: 
+    - button "0.3mm/(0.4/0.45mm)"
+    - button "0.25mm/(0.35/0.4mm)"
+    - button "0.2mm/(0.3/0.35mm)"
+    - button "0.15mm/(0.25/0.3mm)"
+    - button "0.1mm/(0.2/0.25mm)"
+    - text: Board Outline Tolerance
+    - generic: 
+    - button "±0.2mm(Regular)"
+    - button "±0.1mm(Precision)" [disabled]
+    - generic: Confirm Production file
+    - generic: 
+    - button "No"
+    - button "Yes"
+    - text: Mark on PCB
+    - generic: 
+    - button "Remove Mark"
+    - button "2D barcode (Serial Number)"
+    - text: Electrical Test
+    - generic: 
+    - button "Flying Probe Fully Test"
+    - text: Gold Fingers
+    - generic: 
+    - button "No"
+    - button "Yes"
+    - text: Castellated Holes
+    - generic: 
+    - button "No"
+    - button "Yes" [disabled]
+    - generic: Edge Plating
+    - generic: 
+    - button "No"
+    - button "Yes" [disabled]
+    - generic: UL Marking
+    - generic: 
+    - button "No"
+    - button "Yes (Any Position)" [disabled]
+    - button "Yes (Specify Position)" [disabled]
+    - generic: Humidity Indicator Card
+    - generic: 
+    - button "No"
+    - button "Yes"
+    - heading "Advanced Options" [level=2]
+    - generic: 
+    - text: PCB Remark
+    - heading "PCB Assembly" [level=2]
+    - link "Assembly cost starting from $0 with coupon>":
+      - /url: https://jlcpcb.com/news/free-assembly-1-6-layer-pcb-discount-8-20-layer-pcba
+      - text: Assembly cost starting from $0 with coupon>
+    - heading "Stencil" [level=2]
+    - link "Stencil Order Guide>":
+      - /url: https://jlcpcb.com/help/article/instructions-for-stencil-order
+    - generic: Order together with PCB
+    - list:
+      - generic: Charge Details
+      - generic: 
+      - text: Engineering fee
+      - generic: $33.00
+      - text: Via Covering
+      - generic: $0.00
+      - text: Surface Finish
+      - generic: $16.70
+      - text: Deburring/Edge rounding
+      - generic: $0.10
+      - text: Board
+      - generic: $0.70
+      - strong: PCB Build Time
+      - generic: 
+      - generic: 3 days
+      - generic: $0.00
+      - text: 24 hours
+      - generic: PCBA Only
+      - generic: $0.00
+    - separator
+    - heading "Calculated Price" [level=2]
+    - strong: $50.50
+    - paragraph:
+      - text: Additional charges may apply for
+      - link "special cases":
+        - /url: https://jlcpcb.com/help/article/In-what-cases-will-there-be-charged-extra?
+    - 'link "Order on JLCONE Desktop: Save $1–$20 Per Order "':
+      - /url: https://jlcone.com/download
+      - generic: "Order on JLCONE Desktop: Save $1–$20 Per Order"
+      - generic: 
+    - button "SAVE TO CART" [disabled]:
+      - generic: SAVE TO CART
+    - heading "Shipping Estimate" [level=2]
+    - generic: $31.44
+    - generic: 
+    - generic "DHL Express (DDP)"
+    - generic "2-4 business days"
+    - text: Weight
+    - generic: 
+    - generic: 0.14kg
+    - text: Coupons
+    - generic: 
+    - generic: Save $30.00
+    - generic: Save $20.00
+    - generic: 

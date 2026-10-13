@@ -1,0 +1,104 @@
+{
+  "candidate": "/Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/erc-power-model-legacy-trial",
+  "pcb_sha256": "cdccfca18e7b570ecf87f6f6d33953e0c950c68dc2b1851676d990b28575533a",
+  "schematic_sha256": "b033898025f58deb2c20fa8c6f6e0b65cdef166a5e7a4c860e3a0fe7402d2832",
+  "symbols_frozen_without_geometry_change": 18,
+  "existing_instances_unchanged_except_library_id": 106,
+  "existing_wires_labels_junctions_text_exact": true,
+  "physical_pad_net_membership_exact": 219,
+  "full_pcb_tree_identical_except_pintype": true,
+  "project_rules_identical_except_three_exact_marker_exclusions": true,
+  "identical_native_artwork_files": [
+    "stratolink-B_Mask.gbs",
+    "stratolink-B_Paste.gbp",
+    "stratolink-F_Silkscreen.gto",
+    "stratolink-B_Silkscreen.gbo",
+    "stratolink-Edge_Cuts.gm1",
+    "stratolink-F_Mask.gts",
+    "stratolink-F_Paste.gtp",
+    "stratolink-B_Cu.gbl",
+    "stratolink-F_Cu.gtl"
+  ],
+  "erc_filtered_errors": 0,
+  "erc_filtered_warnings": 0,
+  "erc_raw_errors": 2,
+  "erc_raw_warnings": 1,
+  "erc_grounded_pin_exclusions": [
+    {
+      "description": "Pins of type Open collector and Power output are connected",
+      "items": [
+        {
+          "description": "Symbol U6 Pin 5 [INT, Open collector, Line]",
+          "pos": {
+            "x": 0.5969,
+            "y": 1.3335
+          },
+          "uuid": "97fe1358-9111-4cae-ace0-69f4a04c9922"
+        },
+        {
+          "description": "Symbol #FLG102 Pin 1 [Power output, Line]",
+          "pos": {
+            "x": 1.9939,
+            "y": 1.0795
+          },
+          "uuid": "944d0dde-0354-5fbe-8d7f-fd73f10709be"
+        }
+      ],
+      "severity": "error",
+      "type": "pin_to_pin"
+    },
+    {
+      "description": "Pins of type Open collector and Power output are connected",
+      "items": [
+        {
+          "description": "Symbol U5 Pin C2 [ALERT, Open collector, Line]",
+          "pos": {
+            "x": 0.5334,
+            "y": 1.6002
+          },
+          "uuid": "d24f236f-77e7-440c-9378-f49a6d546306"
+        },
+        {
+          "description": "Symbol #FLG102 Pin 1 [Power output, Line]",
+          "pos": {
+            "x": 1.9939,
+            "y": 1.0795
+          },
+          "uuid": "944d0dde-0354-5fbe-8d7f-fd73f10709be"
+        }
+      ],
+      "severity": "error",
+      "type": "pin_to_pin"
+    },
+    {
+      "description": "Pins of type Bidirectional and Power output are connected",
+      "items": [
+        {
+          "description": "Symbol U7 Pin 3 [SDO/SAO, Bidirectional, Line]",
+          "pos": {
+            "x": 0.254,
+            "y": 0.4191
+          },
+          "uuid": "82711c1e-7163-4ccd-9fb6-5a60e20408e1"
+        },
+        {
+          "description": "Symbol #FLG102 Pin 1 [Power output, Line]",
+          "pos": {
+            "x": 1.9939,
+            "y": 1.0795
+          },
+          "uuid": "944d0dde-0354-5fbe-8d7f-fd73f10709be"
+        }
+      ],
+      "severity": "warning",
+      "type": "pin_to_pin"
+    }
+  ],
+  "drc_violations": {
+    "silk_over_copper": 4
+  },
+  "drc_opens": 0,
+  "drc_schematic_parity": 0,
+  "script_sha256": "01fecada582caff0c17b6ab01921358350a7a386e12cba26e3bb9c4c0b92cc11",
+  "cleanup_script_sha256": "9733270c1b3229440a1d72634c70fc4357902a682a95499531249984160ce7d1"
+}

@@ -1,0 +1,2499 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<export version="E">
+  <design>
+    <source>/Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/identities/baseline/stratolink.kicad_sch</source>
+    <date>2026-10-12T19:59:59</date>
+    <tool>Eeschema 10.0.0</tool>
+    <sheet number="1" name="/" tstamps="/">
+      <title_block>
+        <title>PICO Mainboard v1.1</title>
+        <company>            Global pico-balloon telemetry system.</company>
+        <rev>1.1</rev>
+        <date>2026-10-12</date>
+        <source>stratolink.kicad_sch</source>
+        <comment number="1" value="             Stratolink"/>
+        <comment number="2" value=""/>
+        <comment number="3" value=""/>
+        <comment number="4" value=""/>
+        <comment number="5" value=""/>
+        <comment number="6" value=""/>
+        <comment number="7" value=""/>
+        <comment number="8" value=""/>
+        <comment number="9" value=""/>
+      </title_block>
+    </sheet>
+  </design>
+  <components>
+    <comp ref="AE1">
+      <value>Enameled Cu wire 82mm (915MHz reference)</value>
+      <footprint>lib:Stratolink_LoRa_Wire_PTH_D1p0</footprint>
+      <datasheet>https://stratolink.org/docs/hardware#antennas-and-suspension</datasheet>
+      <description>Hand-formed enamelled copper wire; 82 mm from feed for 915 MHz, 83 mm compromise or 86 mm for 868 MHz; diameter not yet measured</description>
+      <fields>
+        <field name="Footprint">lib:Stratolink_LoRa_Wire_PTH_D1p0</field>
+        <field name="Datasheet">https://stratolink.org/docs/hardware#antennas-and-suspension</field>
+        <field name="Description">Hand-formed enamelled copper wire; 82 mm from feed for 915 MHz, 83 mm compromise or 86 mm for 868 MHz; diameter not yet measured</field>
+      </fields>
+      <libsource lib="Device" part="Antenna" description="Antenna"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="stratolink.kicad_sch"/>
+      <property name="ki_keywords" value="antenna"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>01f3e0e6-3706-428a-92f1-d68046eb4cb5</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="AE2">
+      <value>Enameled Cu wire 48mm (GNSS L1)</value>
+      <footprint>lib:Stratolink_GNSS_Wire_PTH_D1p0</footprint>
+      <datasheet>https://stratolink.org/docs/hardware#antennas-and-suspension</datasheet>
+      <description>Hand-formed enamelled copper wire; 48 mm from feed for GNSS L1; diameter not yet measured</description>
+      <fields>
+        <field name="Footprint">lib:Stratolink_GNSS_Wire_PTH_D1p0</field>
+        <field name="Datasheet">https://stratolink.org/docs/hardware#antennas-and-suspension</field>
+        <field name="Description">Hand-formed enamelled copper wire; 48 mm from feed for GNSS L1; diameter not yet measured</field>
+      </fields>
+      <libsource lib="Device" part="Antenna" description="Antenna"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="stratolink.kicad_sch"/>
+      <property name="ki_keywords" value="antenna"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>7f00fa5a-6632-466d-a8b8-57023b93508e</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="C1">
+      <value>10nF</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <datasheet>https://www.lcsc.com/product-detail/C3855387.html?s_z=n_C3855387%2520</datasheet>
+      <description>Unpolarized capacitor</description>
+      <fields>
+        <field name="Footprint">Capacitor_SMD:C_0402_1005Metric</field>
+        <field name="Datasheet">https://www.lcsc.com/product-detail/C3855387.html?s_z=n_C3855387%2520</field>
+        <field name="Description">Unpolarized capacitor</field>
+      </fields>
+      <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="stratolink.kicad_sch"/>
+      <property name="ki_keywords" value="cap capacitor"/>
+      <property name="ki_fp_filters" value="C_*"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>eb06aa1e-fea6-4d0d-ac0a-2bd6cbd0b452</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="C2">
+      <value>4.7μF</value>
+      <footprint>Capacitor_SMD:C_0603_1608Metric</footprint>
+      <description>Unpolarized capacitor</description>
+      <fields>
+        <field name="Footprint">Capacitor_SMD:C_0603_1608Metric</field>
+        <field name="Datasheet"/>
+        <field name="Description">Unpolarized capacitor</field>
+      </fields>
+      <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="stratolink.kicad_sch"/>
+      <property name="ki_keywords" value="cap capacitor"/>
+      <property name="ki_fp_filters" value="C_*"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>c1f23a3f-96c0-4a7b-a463-c5283284bb71</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="C3">
+      <value>4.7μF</value>
+      <footprint>Capacitor_SMD:C_0603_1608Metric</footprint>
+      <description>Unpolarized capacitor</description>
+      <fields>
+        <field name="Footprint">Capacitor_SMD:C_0603_1608Metric</field>
+        <field name="Datasheet"/>
+        <field name="Description">Unpolarized capacitor</field>
+      </fields>
+      <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="stratolink.kicad_sch"/>
+      <property name="ki_keywords" value="cap capacitor"/>
+      <property name="ki_fp_filters" value="C_*"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>ee6c9fc5-b4ce-4250-8c5a-e3bb56e04153</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="C4">
+      <value>100nF</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <description>Unpolarized capacitor</description>
+      <fields>
+        <field name="Footprint">Capacitor_SMD:C_0402_1005Metric</field>
+        <field name="Datasheet"/>
+        <field name="Description">Unpolarized capacitor</field>
+      </fields>
+      <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="stratolink.kicad_sch"/>
+      <property name="ki_keywords" value="cap capacitor"/>
+      <property name="ki_fp_filters" value="C_*"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>c7b808be-600b-41a0-8a09-4d4c2c78652b</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="C5">
+      <value>1F</value>
+      <footprint>lib:DMF4B5R5G105M3DTA0</footprint>
+      <description>Supercap</description>
+      <fields>
+        <field name="Footprint">lib:DMF4B5R5G105M3DTA0</field>
+        <field name="Datasheet"/>
+        <field name="Description">Supercap</field>
+      </fields>
+      <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="stratolink.kicad_sch"/>
+      <property name="ki_keywords" value="cap capacitor"/>
+      <property name="ki_fp_filters" value="C_*"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>4bc45da9-a541-47e3-b96e-485d85f9240a</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="C6">
+      <value>22µF</value>
+      <footprint>Capacitor_SMD:C_0805_2012Metric</footprint>
+      <description>Unpolarized capacitor</description>
+      <fields>
+        <field name="Footprint">Capacitor_SMD:C_0805_2012Metric</field>
+        <field name="Datasheet"/>
+        <field name="Description">Unpolarized capacitor</field>
+      </fields>
+      <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="stratolink.kicad_sch"/>
+      <property name="ki_keywords" value="cap capacitor"/>
+      <property name="ki_fp_filters" value="C_*"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>bb373c2f-df03-404e-974b-97d827720e6b</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="C7">
+      <value>100nF</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <description>Unpolarized capacitor</description>
+      <fields>
+        <field name="Footprint">Capacitor_SMD:C_0402_1005Metric</field>
+        <field name="Datasheet"/>
+        <field name="Description">Unpolarized capacitor</field>
+      </fields>
+      <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="stratolink.kicad_sch"/>
+      <property name="ki_keywords" value="cap capacitor"/>
+      <property name="ki_fp_filters" value="C_*"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>9afd659a-0ec4-4d95-bbfa-477a6652fea6</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="C8">
+      <value>10μF</value>
+      <footprint>Capacitor_SMD:C_0603_1608Metric</footprint>
+      <description>Unpolarized capacitor</description>
+      <fields>
+        <field name="Footprint">Capacitor_SMD:C_0603_1608Metric</field>
+        <field name="Datasheet"/>
+        <field name="Description">Unpolarized capacitor</field>
+      </fields>
+      <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="stratolink.kicad_sch"/>
+      <property name="ki_keywords" value="cap capacitor"/>
+      <property name="ki_fp_filters" value="C_*"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>93e06182-b431-44ef-b7ec-34ecd5d05442</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="C9">
+      <value>100nF</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <description>Unpolarized capacitor</description>
+      <fields>
+        <field name="Footprint">Capacitor_SMD:C_0402_1005Metric</field>
+        <field name="Datasheet"/>
+        <field name="Description">Unpolarized capacitor</field>
+      </fields>
+      <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="stratolink.kicad_sch"/>
+      <property name="ki_keywords" value="cap capacitor"/>
+      <property name="ki_fp_filters" value="C_*"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>a99eacb0-cf28-4027-bef3-2f625f2efd6f</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="C10">
+      <value>100nF</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <description>Unpolarized capacitor</description>
+      <fields>
+        <field name="Footprint">Capacitor_SMD:C_0402_1005Metric</field>
+        <field name="Datasheet"/>
+        <field name="Description">Unpolarized capacitor</field>
+      </fields>
+      <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="stratolink.kicad_sch"/>
+      <property name="ki_keywords" value="cap capacitor"/>
+      <property name="ki_fp_filters" value="C_*"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>72528ee3-85e0-40c2-9176-620ca99249ea</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="C11">
+      <value>100nF</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <description>Unpolarized capacitor</description>
+      <fields>
+        <field name="Footprint">Capacitor_SMD:C_0402_1005Metric</field>
+        <field name="Datasheet"/>
+        <field name="Description">Unpolarized capacitor</field>
+      </fields>
+      <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="stratolink.kicad_sch"/>
+      <property name="ki_keywords" value="cap capacitor"/>
+      <property name="ki_fp_filters" value="C_*"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>6706bfe2-965d-4e59-b383-4867b57b402b</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="C12">
+      <value>100nF</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <description>Unpolarized capacitor</description>
+      <fields>
+        <field name="Footprint">Capacitor_SMD:C_0402_1005Metric</field>
+        <field name="Datasheet"/>
+        <field name="Description">Unpolarized capacitor</field>
+      </fields>
+      <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="stratolink.kicad_sch"/>
+      <property name="ki_keywords" value="cap capacitor"/>
+      <property name="ki_fp_filters" value="C_*"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>779ee2bc-880f-44e6-af66-0d32ab334bcf</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="C14">
+      <value>100nF</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <description>Unpolarized capacitor</description>
+      <fields>
+        <field name="Footprint">Capacitor_SMD:C_0402_1005Metric</field>
+        <field name="Datasheet"/>
+        <field name="Description">Unpolarized capacitor</field>
+      </fields>
+      <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="stratolink.kicad_sch"/>
+      <property name="ki_keywords" value="cap capacitor"/>
+      <property name="ki_fp_filters" value="C_*"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>abac15af-0cc4-43ec-b455-db4c6d91438c</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="C15">
+      <value>100nF</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <description>Unpolarized capacitor</description>
+      <fields>
+        <field name="Footprint">Capacitor_SMD:C_0402_1005Metric</field>
+        <field name="Datasheet"/>
+        <field name="Description">Unpolarized capacitor</field>
+      </fields>
+      <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="stratolink.kicad_sch"/>
+      <property name="ki_keywords" value="cap capacitor"/>
+      <property name="ki_fp_filters" value="C_*"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>f3f0b050-e956-4fe1-8c4e-c346b9b6f52e</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="C16">
+      <value>4.7μF</value>
+      <footprint>Capacitor_SMD:C_0603_1608Metric</footprint>
+      <description>Unpolarized capacitor</description>
+      <fields>
+        <field name="Footprint">Capacitor_SMD:C_0603_1608Metric</field>
+        <field name="Datasheet"/>
+        <field name="Description">Unpolarized capacitor</field>
+      </fields>
+      <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="stratolink.kicad_sch"/>
+      <property name="ki_keywords" value="cap capacitor"/>
+      <property name="ki_fp_filters" value="C_*"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>8068c166-194f-4ae9-9272-692877e0af80</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="C17">
+      <value>100nF</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <description>Unpolarized capacitor</description>
+      <fields>
+        <field name="Footprint">Capacitor_SMD:C_0402_1005Metric</field>
+        <field name="Datasheet"/>
+        <field name="Description">Unpolarized capacitor</field>
+      </fields>
+      <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="stratolink.kicad_sch"/>
+      <property name="ki_keywords" value="cap capacitor"/>
+      <property name="ki_fp_filters" value="C_*"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>528dd1cf-4b0e-4666-b7d6-3c93fafbe8b4</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="C19">
+      <value>100nF</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <description>Unpolarized capacitor</description>
+      <fields>
+        <field name="Footprint">Capacitor_SMD:C_0402_1005Metric</field>
+        <field name="Datasheet"/>
+        <field name="Description">Unpolarized capacitor</field>
+      </fields>
+      <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="stratolink.kicad_sch"/>
+      <property name="ki_keywords" value="cap capacitor"/>
+      <property name="ki_fp_filters" value="C_*"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>149a9a54-219a-4b2d-900c-14ec353f0e78</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="C20">
+      <value>100nF</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <description>Unpolarized capacitor</description>
+      <fields>
+        <field name="Footprint">Capacitor_SMD:C_0402_1005Metric</field>
+        <field name="Datasheet"/>
+        <field name="Description">Unpolarized capacitor</field>
+      </fields>
+      <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="stratolink.kicad_sch"/>
+      <property name="ki_keywords" value="cap capacitor"/>
+      <property name="ki_fp_filters" value="C_*"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>14725232-db0c-4e27-9cb6-041a5b52a1d6</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="C21">
+      <value>10μF</value>
+      <footprint>Capacitor_SMD:C_0603_1608Metric</footprint>
+      <description>Unpolarized capacitor</description>
+      <fields>
+        <field name="Footprint">Capacitor_SMD:C_0603_1608Metric</field>
+        <field name="Datasheet"/>
+        <field name="Description">Unpolarized capacitor</field>
+      </fields>
+      <libsource lib="Device" part="C" description="Unpolarized capacitor"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="stratolink.kicad_sch"/>
+      <property name="ki_keywords" value="cap capacitor"/>
+      <property name="ki_fp_filters" value="C_*"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>a2b649cd-5f87-40c6-a913-8d9235936927</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="D1">
+      <value>ESD9B3.3ST5G</value>
+      <footprint>Diode_SMD:D_SOD-523</footprint>
+      <datasheet>https://www.lcsc.com/product-detail/C5272735.html?s_z=n_C5272735%2520</datasheet>
+      <description>UNI-ROYAL 0402WGF3654TCE</description>
+      <fields>
+        <field name="Footprint">Diode_SMD:D_SOD-523</field>
+        <field name="Datasheet">https://www.lcsc.com/product-detail/C5272735.html?s_z=n_C5272735%2520</field>
+        <field name="Description">UNI-ROYAL 0402WGF3654TCE</field>
+      </fields>
+      <libsource lib="Diode" part="ESD9B3.3ST5G" description="ESD protection diode, 3.3Vrwm, SOD-923"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="stratolink.kicad_sch"/>
+      <property name="ki_keywords" value="diode TVS ESD"/>
+      <property name="ki_fp_filters" value="D*SOD?923*"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>35614f0c-0752-4f9f-961d-aa0e8618167f</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="D3">
+      <value>ESD9B3.3ST5G</value>
+      <footprint>Diode_SMD:D_SOD-523</footprint>
+      <datasheet>https://www.lcsc.com/product-detail/C5272735.html?s_z=n_C5272735%2520</datasheet>
+      <description>UNI-ROYAL 0402WGF3654TCE</description>
+      <fields>
+        <field name="Footprint">Diode_SMD:D_SOD-523</field>
+        <field name="Datasheet">https://www.lcsc.com/product-detail/C5272735.html?s_z=n_C5272735%2520</field>
+        <field name="Description">UNI-ROYAL 0402WGF3654TCE</field>
+      </fields>
+      <libsource lib="Diode" part="ESD9B3.3ST5G" description="ESD protection diode, 3.3Vrwm, SOD-923"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="stratolink.kicad_sch"/>
+      <property name="ki_keywords" value="diode TVS ESD"/>
+      <property name="ki_fp_filters" value="D*SOD?923*"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>dff613be-ff89-4cc2-853b-d7d76bda1bd5</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="FB1">
+      <value>~</value>
+      <footprint>Capacitor_SMD:C_0402_1005Metric</footprint>
+      <datasheet>https://www.lcsc.com/product-detail/C76884.html?s_z=n_BLM15AG601SN1%2520</datasheet>
+      <description>BLM15AG601SN1D</description>
+      <fields>
+        <field name="Footprint">Capacitor_SMD:C_0402_1005Metric</field>
+        <field name="Datasheet">https://www.lcsc.com/product-detail/C76884.html?s_z=n_BLM15AG601SN1%2520</field>
+        <field name="Description">BLM15AG601SN1D</field>
+      </fields>
+      <libsource lib="Device" part="FerriteBead_Small" description="Ferrite bead, small symbol"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="stratolink.kicad_sch"/>
+      <property name="ki_keywords" value="L ferrite bead inductor filter"/>
+      <property name="ki_fp_filters" value="Inductor_* L_* *Ferrite*"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>0305c98a-0cfa-4b89-afc9-fa962cd41060</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="J1">
+      <value>Solar panel direct solder</value>
+      <footprint>lib:Solar_Notch_Right_1p0x2p0</footprint>
+      <fields>
+        <field name="Footprint">lib:Solar_Notch_Right_1p0x2p0</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="fab" part="Conn_Header_JST_PH_1x02_P2mm_Vertical_SMD" description="Male JST PH 2 pin connector"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="stratolink.kicad_sch"/>
+      <property name="exclude_from_bom"/>
+      <property name="ki_keywords" value="male header JST PH"/>
+      <property name="ki_fp_filters" value="*Header*JST*PH*"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>5b862f3e-eacd-4a04-8cd1-e5cafbe9ab8c</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="J2">
+      <value>Solar panel direct solder</value>
+      <footprint>lib:Solar_Notch_Left_1p0x2p0</footprint>
+      <fields>
+        <field name="Footprint">lib:Solar_Notch_Left_1p0x2p0</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="fab" part="Conn_Header_JST_PH_1x02_P2mm_Vertical_SMD" description="Male JST PH 2 pin connector"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="stratolink.kicad_sch"/>
+      <property name="exclude_from_bom"/>
+      <property name="ki_keywords" value="male header JST PH"/>
+      <property name="ki_fp_filters" value="*Header*JST*PH*"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>e97c7a43-b503-475f-98cb-b96a9a5ae6ed</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="J3">
+      <value>Conn_PinHeader_1x07_P2.54mm_Vertical_THT_D1mm</value>
+      <footprint>lib:Stratolink_Header_Left_1x07_P1p00_D0p50_Pad0p88</footprint>
+      <description>Connector Header Through Hole 7 positions 0.100" (2.54mm)</description>
+      <fields>
+        <field name="Footprint">lib:Stratolink_Header_Left_1x07_P1p00_D0p50_Pad0p88</field>
+        <field name="Datasheet"/>
+        <field name="Description">Connector Header Through Hole 7 positions 0.100" (2.54mm)</field>
+      </fields>
+      <libsource lib="fab" part="Conn_PinHeader_1x07_P2.54mm_Vertical_THT_D1mm" description="Connector Header Through Hole 7 positions 0.100&quot; (2.54mm)"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="stratolink.kicad_sch"/>
+      <property name="ki_keywords" value="connector"/>
+      <property name="ki_fp_filters" value="*PinHeader*1x07*"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>bbd819f9-cd82-40ce-a0bf-669a0c4936fa</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+            <pin num="3"/>
+            <pin num="4"/>
+            <pin num="5"/>
+            <pin num="6"/>
+            <pin num="7"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="J4">
+      <value>Conn_PinHeader_1x07_P2.54mm_Vertical_THT_D1mm</value>
+      <footprint>lib:Stratolink_Header_Right_1x07_P1p00_D0p50_Pad0p88</footprint>
+      <description>Connector Header Through Hole 7 positions 0.100" (2.54mm)</description>
+      <fields>
+        <field name="Footprint">lib:Stratolink_Header_Right_1x07_P1p00_D0p50_Pad0p88</field>
+        <field name="Datasheet"/>
+        <field name="Description">Connector Header Through Hole 7 positions 0.100" (2.54mm)</field>
+      </fields>
+      <libsource lib="fab" part="Conn_PinHeader_1x07_P2.54mm_Vertical_THT_D1mm" description="Connector Header Through Hole 7 positions 0.100&quot; (2.54mm)"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="stratolink.kicad_sch"/>
+      <property name="ki_keywords" value="connector"/>
+      <property name="ki_fp_filters" value="*PinHeader*1x07*"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>28bf207b-2684-4a81-96b2-e527eebfaf15</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+            <pin num="3"/>
+            <pin num="4"/>
+            <pin num="5"/>
+            <pin num="6"/>
+            <pin num="7"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="J20">
+      <value>Conn_ARM_SWD_TagConnect_TC2030-NL</value>
+      <footprint>Connector:Tag-Connect_TC2030-IDC-NL_2x03_P1.27mm_Vertical</footprint>
+      <datasheet>https://www.tag-connect.com/wp-content/uploads/bsk-pdf-manager/TC2030-CTX_1.pdf</datasheet>
+      <description>Tag-Connect ARM Cortex SWD JTAG connector, 6 pin, no legs</description>
+      <fields>
+        <field name="Footprint">Connector:Tag-Connect_TC2030-IDC-NL_2x03_P1.27mm_Vertical</field>
+        <field name="Datasheet">https://www.tag-connect.com/wp-content/uploads/bsk-pdf-manager/TC2030-CTX_1.pdf</field>
+        <field name="Description">Tag-Connect ARM Cortex SWD JTAG connector, 6 pin, no legs</field>
+      </fields>
+      <libsource lib="Connector" part="Conn_ARM_SWD_TagConnect_TC2030-NL" description="Tag-Connect ARM Cortex SWD JTAG connector, 6 pin, no legs"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="stratolink.kicad_sch"/>
+      <property name="exclude_from_bom"/>
+      <property name="ki_keywords" value="Cortex Debug Connector ARM SWD JTAG"/>
+      <property name="ki_fp_filters" value="*TC2030*"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>989673b5-e785-4e78-b577-2432ea1fbd32</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="5"/>
+            <pin num="3"/>
+            <pin num="4"/>
+            <pin num="2"/>
+            <pin num="6"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="L1">
+      <value>22µH</value>
+      <footprint>lib:IND_LPS4018-223MRC</footprint>
+      <datasheet>https://www.lcsc.com/product-detail/C5278935.html</datasheet>
+      <description>LPS4018-223MRC</description>
+      <fields>
+        <field name="Footprint">lib:IND_LPS4018-223MRC</field>
+        <field name="Datasheet">https://www.lcsc.com/product-detail/C5278935.html</field>
+        <field name="Description">LPS4018-223MRC</field>
+      </fields>
+      <libsource lib="Device" part="L" description="Inductor"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="stratolink.kicad_sch"/>
+      <property name="ki_keywords" value="inductor choke coil reactor magnetic"/>
+      <property name="ki_fp_filters" value="Choke_* *Coil* Inductor_* L_*"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>5475c5c2-a59d-48ee-9ee1-6637ef303763</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="L2">
+      <value>10µH</value>
+      <footprint>lib:INDC1608X90N</footprint>
+      <datasheet>https://www.lcsc.com/product-detail/C436784.html?s_z=n_C436784%2520</datasheet>
+      <description>PROD Tech PWCWAQ1608F-100KTT</description>
+      <fields>
+        <field name="Footprint">lib:INDC1608X90N</field>
+        <field name="Datasheet">https://www.lcsc.com/product-detail/C436784.html?s_z=n_C436784%2520</field>
+        <field name="Description">PROD Tech PWCWAQ1608F-100KTT</field>
+      </fields>
+      <libsource lib="Device" part="L" description="Inductor"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="stratolink.kicad_sch"/>
+      <property name="ki_keywords" value="inductor choke coil reactor magnetic"/>
+      <property name="ki_fp_filters" value="Choke_* *Coil* Inductor_* L_*"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>1eed07a9-bbc9-4b19-9d91-8cb2a53221ec</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="R1">
+      <value>8.25MΩ</value>
+      <footprint>Resistor_SMD:R_0402_1005Metric</footprint>
+      <description>Resistor, US symbol</description>
+      <fields>
+        <field name="Footprint">Resistor_SMD:R_0402_1005Metric</field>
+        <field name="Datasheet"/>
+        <field name="Description">Resistor, US symbol</field>
+      </fields>
+      <libsource lib="Device" part="R_US" description="Resistor, US symbol"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="stratolink.kicad_sch"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <property name="ki_fp_filters" value="R_*"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>e8e2c0ce-b856-4a0c-b119-fdc249b82e36</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="R2">
+      <value>4.22MΩ</value>
+      <footprint>Resistor_SMD:R_0402_1005Metric</footprint>
+      <description>Resistor, US symbol</description>
+      <fields>
+        <field name="Footprint">Resistor_SMD:R_0402_1005Metric</field>
+        <field name="Datasheet"/>
+        <field name="Description">Resistor, US symbol</field>
+      </fields>
+      <libsource lib="Device" part="R_US" description="Resistor, US symbol"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="stratolink.kicad_sch"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <property name="ki_fp_filters" value="R_*"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>6da34062-6e89-4530-99be-f852e0f30c84</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="R3">
+      <value>4.75MΩ</value>
+      <footprint>Resistor_SMD:R_0402_1005Metric</footprint>
+      <description>Resistor, US symbol</description>
+      <fields>
+        <field name="Footprint">Resistor_SMD:R_0402_1005Metric</field>
+        <field name="Datasheet"/>
+        <field name="Description">Resistor, US symbol</field>
+      </fields>
+      <libsource lib="Device" part="R_US" description="Resistor, US symbol"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="stratolink.kicad_sch"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <property name="ki_fp_filters" value="R_*"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>e91a2a42-a8cc-4d92-a749-63ce4c2abfb8</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="R4">
+      <value>3.65MΩ</value>
+      <footprint>Resistor_SMD:R_0402_1005Metric</footprint>
+      <datasheet>https://www.lcsc.com/product-detail/C2766827.html?s_z=n_C2766827%2520</datasheet>
+      <description>Resistor, US symbol</description>
+      <fields>
+        <field name="Footprint">Resistor_SMD:R_0402_1005Metric</field>
+        <field name="Datasheet">https://www.lcsc.com/product-detail/C2766827.html?s_z=n_C2766827%2520</field>
+        <field name="Description">Resistor, US symbol</field>
+      </fields>
+      <libsource lib="Device" part="R_US" description="Resistor, US symbol"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="stratolink.kicad_sch"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <property name="ki_fp_filters" value="R_*"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>894aff4e-f7f2-4f70-8638-6efdd16a1676</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="R5">
+      <value>4.42MΩ</value>
+      <footprint>Resistor_SMD:R_0402_1005Metric</footprint>
+      <description>Resistor, US symbol</description>
+      <fields>
+        <field name="Footprint">Resistor_SMD:R_0402_1005Metric</field>
+        <field name="Datasheet"/>
+        <field name="Description">Resistor, US symbol</field>
+      </fields>
+      <libsource lib="Device" part="R_US" description="Resistor, US symbol"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="stratolink.kicad_sch"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <property name="ki_fp_filters" value="R_*"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>2a425e4f-c0f8-4229-a55b-3b189c647cd3</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="R6">
+      <value>8.25MΩ</value>
+      <footprint>Resistor_SMD:R_0402_1005Metric</footprint>
+      <description>Resistor, US symbol</description>
+      <fields>
+        <field name="Footprint">Resistor_SMD:R_0402_1005Metric</field>
+        <field name="Datasheet"/>
+        <field name="Description">Resistor, US symbol</field>
+      </fields>
+      <libsource lib="Device" part="R_US" description="Resistor, US symbol"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="stratolink.kicad_sch"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <property name="ki_fp_filters" value="R_*"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>c4cb4d48-1a2b-4f47-a341-10ec4ad46a1b</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="R7">
+      <value>4.75MΩ</value>
+      <footprint>Resistor_SMD:R_0402_1005Metric</footprint>
+      <description>Resistor, US symbol</description>
+      <fields>
+        <field name="Footprint">Resistor_SMD:R_0402_1005Metric</field>
+        <field name="Datasheet"/>
+        <field name="Description">Resistor, US symbol</field>
+      </fields>
+      <libsource lib="Device" part="R_US" description="Resistor, US symbol"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="stratolink.kicad_sch"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <property name="ki_fp_filters" value="R_*"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>df9f2997-e122-46ff-aafb-1d8496546402</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="R8">
+      <value>100kΩ</value>
+      <footprint>Resistor_SMD:R_0402_1005Metric</footprint>
+      <description>Resistor, US symbol</description>
+      <fields>
+        <field name="Footprint">Resistor_SMD:R_0402_1005Metric</field>
+        <field name="Datasheet"/>
+        <field name="Description">Resistor, US symbol</field>
+      </fields>
+      <libsource lib="Device" part="R_US" description="Resistor, US symbol"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="stratolink.kicad_sch"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <property name="ki_fp_filters" value="R_*"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>d95e2959-43b9-4194-9861-d822aeb66a67</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="R9">
+      <value>0Ω</value>
+      <footprint>Resistor_SMD:R_0402_1005Metric</footprint>
+      <description>Resistor, US symbol</description>
+      <fields>
+        <field name="Footprint">Resistor_SMD:R_0402_1005Metric</field>
+        <field name="Datasheet"/>
+        <field name="Description">Resistor, US symbol</field>
+      </fields>
+      <libsource lib="Device" part="R_US" description="Resistor, US symbol"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="stratolink.kicad_sch"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <property name="ki_fp_filters" value="R_*"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>e4e80dbc-5113-4928-a51b-fdbb694f350b</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="R10">
+      <value>10kΩ</value>
+      <footprint>Resistor_SMD:R_0402_1005Metric</footprint>
+      <datasheet>https://www.lcsc.com/product-detail/C60490.html?s_z=n_10kohm%2520resistor%25200402</datasheet>
+      <description>RC0402FR-0710KL</description>
+      <fields>
+        <field name="Footprint">Resistor_SMD:R_0402_1005Metric</field>
+        <field name="Datasheet">https://www.lcsc.com/product-detail/C60490.html?s_z=n_10kohm%2520resistor%25200402</field>
+        <field name="Description">RC0402FR-0710KL</field>
+      </fields>
+      <libsource lib="Device" part="R_US" description="Resistor, US symbol"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="stratolink.kicad_sch"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <property name="ki_fp_filters" value="R_*"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>e04f1255-41de-4df2-9e98-6f8c817b8a97</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="R11">
+      <value>4.7kΩ</value>
+      <footprint>Resistor_SMD:R_0402_1005Metric</footprint>
+      <description>Resistor, US symbol</description>
+      <fields>
+        <field name="Footprint">Resistor_SMD:R_0402_1005Metric</field>
+        <field name="Datasheet"/>
+        <field name="Description">Resistor, US symbol</field>
+      </fields>
+      <libsource lib="Device" part="R_US" description="Resistor, US symbol"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="stratolink.kicad_sch"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <property name="ki_fp_filters" value="R_*"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>fc24b18f-ea55-404d-9f6f-4cf2960498cc</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="R12">
+      <value>4.7kΩ</value>
+      <footprint>Resistor_SMD:R_0402_1005Metric</footprint>
+      <description>Resistor, US symbol</description>
+      <fields>
+        <field name="Footprint">Resistor_SMD:R_0402_1005Metric</field>
+        <field name="Datasheet"/>
+        <field name="Description">Resistor, US symbol</field>
+      </fields>
+      <libsource lib="Device" part="R_US" description="Resistor, US symbol"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="stratolink.kicad_sch"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <property name="ki_fp_filters" value="R_*"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>9387eeae-c3c7-476e-b1ab-d6be93dfc618</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="R13">
+      <value>0Ω</value>
+      <footprint>Resistor_SMD:R_0402_1005Metric</footprint>
+      <description>Resistor, US symbol</description>
+      <fields>
+        <field name="Footprint">Resistor_SMD:R_0402_1005Metric</field>
+        <field name="Datasheet"/>
+        <field name="Description">Resistor, US symbol</field>
+      </fields>
+      <libsource lib="Device" part="R_US" description="Resistor, US symbol"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="stratolink.kicad_sch"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <property name="ki_fp_filters" value="R_*"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>91e2e531-69d6-4c0a-9f64-d7abdadc2ce8</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="R14">
+      <value>0Ω</value>
+      <footprint>Resistor_SMD:R_0402_1005Metric</footprint>
+      <description>Resistor, US symbol</description>
+      <fields>
+        <field name="Footprint">Resistor_SMD:R_0402_1005Metric</field>
+        <field name="Datasheet"/>
+        <field name="Description">Resistor, US symbol</field>
+      </fields>
+      <libsource lib="Device" part="R_US" description="Resistor, US symbol"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="stratolink.kicad_sch"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <property name="ki_fp_filters" value="R_*"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>b34050ff-5573-4c4f-a8f9-30cfbb1adce5</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="R15">
+      <value>33Ω</value>
+      <footprint>Resistor_SMD:R_0402_1005Metric</footprint>
+      <description>Resistor, US symbol</description>
+      <fields>
+        <field name="Footprint">Resistor_SMD:R_0402_1005Metric</field>
+        <field name="Datasheet"/>
+        <field name="Description">Resistor, US symbol</field>
+      </fields>
+      <libsource lib="Device" part="R_US" description="Resistor, US symbol"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="stratolink.kicad_sch"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <property name="ki_fp_filters" value="R_*"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>7da2b058-7365-42d4-ba77-85fe95ebe7eb</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="R16">
+      <value>33Ω</value>
+      <footprint>Resistor_SMD:R_0402_1005Metric</footprint>
+      <description>Resistor, US symbol</description>
+      <fields>
+        <field name="Footprint">Resistor_SMD:R_0402_1005Metric</field>
+        <field name="Datasheet"/>
+        <field name="Description">Resistor, US symbol</field>
+      </fields>
+      <libsource lib="Device" part="R_US" description="Resistor, US symbol"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="stratolink.kicad_sch"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <property name="ki_fp_filters" value="R_*"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>a59040c9-d680-49e3-9629-9ea261bd2a20</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="R18">
+      <value>10kΩ</value>
+      <footprint>Resistor_SMD:R_0402_1005Metric</footprint>
+      <description>Resistor, US symbol</description>
+      <fields>
+        <field name="Footprint">Resistor_SMD:R_0402_1005Metric</field>
+        <field name="Datasheet"/>
+        <field name="Description">Resistor, US symbol</field>
+      </fields>
+      <libsource lib="Device" part="R_US" description="Resistor, US symbol"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="stratolink.kicad_sch"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <property name="ki_fp_filters" value="R_*"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>7faad56c-6f3d-441b-a82d-aa0f5b96b24a</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="R19">
+      <value>1MΩ</value>
+      <footprint>Resistor_SMD:R_0402_1005Metric</footprint>
+      <datasheet>https://www.lcsc.com/product-detail/C60490.html?s_z=n_10kohm%2520resistor%25200402</datasheet>
+      <description>RC0402FR-0710KL</description>
+      <fields>
+        <field name="Footprint">Resistor_SMD:R_0402_1005Metric</field>
+        <field name="Datasheet">https://www.lcsc.com/product-detail/C60490.html?s_z=n_10kohm%2520resistor%25200402</field>
+        <field name="Description">RC0402FR-0710KL</field>
+      </fields>
+      <libsource lib="Device" part="R_US" description="Resistor, US symbol"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="stratolink.kicad_sch"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <property name="ki_fp_filters" value="R_*"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>712b2919-7191-4eca-9784-5247e5fa3b2e</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="R21">
+      <value>1MΩ</value>
+      <footprint>Resistor_SMD:R_0402_1005Metric</footprint>
+      <datasheet>https://www.lcsc.com/product-detail/C60490.html?s_z=n_10kohm%2520resistor%25200402</datasheet>
+      <description>RC0402FR-0710KL</description>
+      <fields>
+        <field name="Footprint">Resistor_SMD:R_0402_1005Metric</field>
+        <field name="Datasheet">https://www.lcsc.com/product-detail/C60490.html?s_z=n_10kohm%2520resistor%25200402</field>
+        <field name="Description">RC0402FR-0710KL</field>
+      </fields>
+      <libsource lib="Device" part="R_US" description="Resistor, US symbol"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="stratolink.kicad_sch"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <property name="ki_fp_filters" value="R_*"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>01d85024-2a20-4efd-9e7f-f5b26bda1a53</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="R22">
+      <value>1MΩ</value>
+      <footprint>Resistor_SMD:R_0402_1005Metric</footprint>
+      <datasheet>https://www.lcsc.com/product-detail/C60490.html?s_z=n_10kohm%2520resistor%25200402</datasheet>
+      <description>RC0402FR-0710KL</description>
+      <fields>
+        <field name="Footprint">Resistor_SMD:R_0402_1005Metric</field>
+        <field name="Datasheet">https://www.lcsc.com/product-detail/C60490.html?s_z=n_10kohm%2520resistor%25200402</field>
+        <field name="Description">RC0402FR-0710KL</field>
+      </fields>
+      <libsource lib="Device" part="R_US" description="Resistor, US symbol"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="stratolink.kicad_sch"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <property name="ki_fp_filters" value="R_*"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>bf6d4e84-3073-4b40-8b7d-9f9a3ad08a24</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="R23">
+      <value>1MΩ</value>
+      <footprint>Resistor_SMD:R_0402_1005Metric</footprint>
+      <datasheet>https://www.lcsc.com/product-detail/C60490.html?s_z=n_10kohm%2520resistor%25200402</datasheet>
+      <description>RC0402FR-0710KL</description>
+      <fields>
+        <field name="Footprint">Resistor_SMD:R_0402_1005Metric</field>
+        <field name="Datasheet">https://www.lcsc.com/product-detail/C60490.html?s_z=n_10kohm%2520resistor%25200402</field>
+        <field name="Description">RC0402FR-0710KL</field>
+      </fields>
+      <libsource lib="Device" part="R_US" description="Resistor, US symbol"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="stratolink.kicad_sch"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <property name="ki_fp_filters" value="R_*"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>965e67ab-e8d9-496c-9202-ea301f40f199</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="U1">
+      <value>~</value>
+      <footprint>lib:QFN50P350X350X100-21N</footprint>
+      <datasheet>https://www.ti.com/cn/lit/gpn/bq25570</datasheet>
+      <description>Operating Temperature:-40°C~+125°C Operating Temperature:-40°C~+125°C</description>
+      <fields>
+        <field name="Manufacturer Part">BQ25570RGRR</field>
+        <field name="Manufacturer">TI(德州仪器)</field>
+        <field name="Supplier Part">C506250</field>
+        <field name="Supplier">LCSC</field>
+        <field name="LCSC Part Name">适用于能量收集器供电应用的微功率升压充电器与降压转换器</field>
+        <field name="Footprint">lib:QFN50P350X350X100-21N</field>
+        <field name="Datasheet">https://www.ti.com/cn/lit/gpn/bq25570</field>
+        <field name="Description">Operating Temperature:-40°C~+125°C Operating Temperature:-40°C~+125°C</field>
+      </fields>
+      <libsource lib="ProLib_pcs_2026-01-31" part="BQ25570RGRR" description="Operating Temperature:-40°C~+125°C Operating Temperature:-40°C~+125°C"/>
+      <property name="Manufacturer Part" value="BQ25570RGRR"/>
+      <property name="Manufacturer" value="TI(德州仪器)"/>
+      <property name="Supplier Part" value="C506250"/>
+      <property name="Supplier" value="LCSC"/>
+      <property name="LCSC Part Name" value="适用于能量收集器供电应用的微功率升压充电器与降压转换器"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="stratolink.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>65640bc6-1f78-4db5-a138-a7b1480e5e11</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+            <pin num="3"/>
+            <pin num="4"/>
+            <pin num="5"/>
+            <pin num="21"/>
+            <pin num="20"/>
+            <pin num="6"/>
+            <pin num="19"/>
+            <pin num="7"/>
+            <pin num="18"/>
+            <pin num="8"/>
+            <pin num="17"/>
+            <pin num="9"/>
+            <pin num="16"/>
+            <pin num="10"/>
+            <pin num="15"/>
+            <pin num="14"/>
+            <pin num="13"/>
+            <pin num="12"/>
+            <pin num="11"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="U2">
+      <value>RAK3172</value>
+      <footprint>lib:RAK3172</footprint>
+      <description>RAK3172 is a low-power long-range transceiver module based on the STM32WLE5CC chip. It provides an easy-to-use, small-size, low-power solution for long range wireless data applications</description>
+      <fields>
+        <field name="MF">Shenzhen RAKwireless Technology Co.,Ltd.</field>
+        <field name="PACKAGE">Package</field>
+        <field name="PRICE">None</field>
+        <field name="Package">Package</field>
+        <field name="Check_prices">https://www.snapeda.com/parts/RAK3172/Shenzhen+RAKwireless+Technology+Co.%252CLtd./view-part/?ref=eda</field>
+        <field name="SnapEDA_Link">https://www.snapeda.com/parts/RAK3172/Shenzhen+RAKwireless+Technology+Co.%252CLtd./view-part/?ref=snap</field>
+        <field name="Price">None</field>
+        <field name="SNAPEDA_LINK">https://www.snapeda.com/parts/RAK3172/Shenzhen+RAKwireless+Technology+Co.%252CLtd./view-part/?ref=snap</field>
+        <field name="MP">RAK3172</field>
+        <field name="Description_1">
+                        
+                            RAK3172 is a low-power long-range transceiver module based on the STM32WLE5CC chip. It provides an easy-to-use, small-size, low-power solution for long range wireless data applications
+                        
+</field>
+        <field name="Availability">Not in stock</field>
+        <field name="AVAILABILITY">Not in stock</field>
+        <field name="CHECK_PRICES">https://www.snapeda.com/parts/RAK3172/Shenzhen+RAKwireless+Technology+Co.%252CLtd./view-part/?ref=eda</field>
+        <field name="Footprint">lib:RAK3172</field>
+        <field name="Datasheet"/>
+        <field name="Description">RAK3172 is a low-power long-range transceiver module based on the STM32WLE5CC chip. It provides an easy-to-use, small-size, low-power solution for long range wireless data applications</field>
+      </fields>
+      <libsource lib="RAK3172" part="RAK3172" description="RAK3172 is a low-power long-range transceiver module based on the STM32WLE5CC chip. It provides an easy-to-use, small-size, low-power solution for long range wireless data applications"/>
+      <property name="MF" value="Shenzhen RAKwireless Technology Co.,Ltd."/>
+      <property name="PACKAGE" value="Package"/>
+      <property name="PRICE" value="None"/>
+      <property name="Package" value="Package"/>
+      <property name="Check_prices" value="https://www.snapeda.com/parts/RAK3172/Shenzhen+RAKwireless+Technology+Co.%252CLtd./view-part/?ref=eda"/>
+      <property name="SnapEDA_Link" value="https://www.snapeda.com/parts/RAK3172/Shenzhen+RAKwireless+Technology+Co.%252CLtd./view-part/?ref=snap"/>
+      <property name="Price" value="None"/>
+      <property name="SNAPEDA_LINK" value="https://www.snapeda.com/parts/RAK3172/Shenzhen+RAKwireless+Technology+Co.%252CLtd./view-part/?ref=snap"/>
+      <property name="MP" value="RAK3172"/>
+      <property name="Description_1" value="&#xA;                        &#xA;                            RAK3172 is a low-power long-range transceiver module based on the STM32WLE5CC chip. It provides an easy-to-use, small-size, low-power solution for long range wireless data applications&#xA;                        &#xA;"/>
+      <property name="Availability" value="Not in stock"/>
+      <property name="AVAILABILITY" value="Not in stock"/>
+      <property name="CHECK_PRICES" value="https://www.snapeda.com/parts/RAK3172/Shenzhen+RAKwireless+Technology+Co.%252CLtd./view-part/?ref=eda"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="stratolink.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>b0992b32-25bb-417d-8d22-d980e2a9f3bc</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="22"/>
+            <pin num="7"/>
+            <pin num="8"/>
+            <pin num="32"/>
+            <pin num="31"/>
+            <pin num="26"/>
+            <pin num="25"/>
+            <pin num="3"/>
+            <pin num="5"/>
+            <pin num="4"/>
+            <pin num="30"/>
+            <pin num="27"/>
+            <pin num="17"/>
+            <pin num="18"/>
+            <pin num="23"/>
+            <pin num="11"/>
+            <pin num="28"/>
+            <pin num="24"/>
+            <pin num="21"/>
+            <pin num="12"/>
+            <pin num="10"/>
+            <pin num="9"/>
+            <pin num="16"/>
+            <pin num="15"/>
+            <pin num="14"/>
+            <pin num="13"/>
+            <pin num="1"/>
+            <pin num="2"/>
+            <pin num="29"/>
+            <pin num="6"/>
+            <pin num="19"/>
+            <pin num="20"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="U3">
+      <value>~</value>
+      <footprint>lib:XCVR_MAX-M10S-00B</footprint>
+      <datasheet>https://item.szlcsc.com/datasheet/MAX-M10S-00B/4722633.html</datasheet>
+      <fields>
+        <field name="Manufacturer Part">MAX-M10S-00B</field>
+        <field name="Manufacturer">U-BLOX</field>
+        <field name="Supplier Part">C4153167</field>
+        <field name="Supplier">LCSC</field>
+        <field name="LCSC Part Name">MAX-M10S-00B</field>
+        <field name="Footprint">lib:XCVR_MAX-M10S-00B</field>
+        <field name="Datasheet">https://item.szlcsc.com/datasheet/MAX-M10S-00B/4722633.html</field>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="ProLib_pcs_2026-02-08" part="MAX-M10S-00B" description=""/>
+      <property name="Manufacturer Part" value="MAX-M10S-00B"/>
+      <property name="Manufacturer" value="U-BLOX"/>
+      <property name="Supplier Part" value="C4153167"/>
+      <property name="Supplier" value="LCSC"/>
+      <property name="LCSC Part Name" value="MAX-M10S-00B"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="stratolink.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>108da017-77b8-4751-b039-aa5a0b657fa8</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+            <pin num="3"/>
+            <pin num="4"/>
+            <pin num="5"/>
+            <pin num="6"/>
+            <pin num="7"/>
+            <pin num="8"/>
+            <pin num="9"/>
+            <pin num="18"/>
+            <pin num="17"/>
+            <pin num="16"/>
+            <pin num="15"/>
+            <pin num="14"/>
+            <pin num="13"/>
+            <pin num="12"/>
+            <pin num="11"/>
+            <pin num="10"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="U4">
+      <value>~</value>
+      <footprint>lib:SON125P500X300X100-8N</footprint>
+      <datasheet>https://item.szlcsc.com/datasheet/MS561101BA03-50/16320.html</datasheet>
+      <description>Pressure range:1Kpa~1.2bar Pressure range:1Kpa~1.2bar Voltage - Supply:1.8V~3.6V Voltage - Supply:1.8V~3.6V Standby Current:140nA Interface:SpI；I2C Operating Temperature:-40°C~+85°C Operating Temperature:-40°C~+85°C Response time:8.22ms</description>
+      <fields>
+        <field name="Manufacturer Part">MS561101BA03-50</field>
+        <field name="Manufacturer">TE Connectivity(泰科电子)</field>
+        <field name="Supplier Part">C15639</field>
+        <field name="Supplier">LCSC</field>
+        <field name="LCSC Part Name">MS561101BA03-50</field>
+        <field name="Footprint">lib:SON125P500X300X100-8N</field>
+        <field name="Datasheet">https://item.szlcsc.com/datasheet/MS561101BA03-50/16320.html</field>
+        <field name="Description">Pressure range:1Kpa~1.2bar Pressure range:1Kpa~1.2bar Voltage - Supply:1.8V~3.6V Voltage - Supply:1.8V~3.6V Standby Current:140nA Interface:SpI；I2C Operating Temperature:-40°C~+85°C Operating Temperature:-40°C~+85°C Response time:8.22ms</field>
+      </fields>
+      <libsource lib="pressure" part="MS561101BA03-50" description="Pressure range:1Kpa~1.2bar Pressure range:1Kpa~1.2bar Voltage - Supply:1.8V~3.6V Voltage - Supply:1.8V~3.6V Standby Current:140nA Interface:SpI；I2C Operating Temperature:-40°C~+85°C Operating Temperature:-40°C~+85°C Response time:8.22ms"/>
+      <property name="Manufacturer Part" value="MS561101BA03-50"/>
+      <property name="Manufacturer" value="TE Connectivity(泰科电子)"/>
+      <property name="Supplier Part" value="C15639"/>
+      <property name="Supplier" value="LCSC"/>
+      <property name="LCSC Part Name" value="MS561101BA03-50"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="stratolink.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>7f50806b-c3d7-4939-8361-4da354990fe2</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+            <pin num="3"/>
+            <pin num="4"/>
+            <pin num="8"/>
+            <pin num="7"/>
+            <pin num="6"/>
+            <pin num="5"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="U5">
+      <value>TMP117NAIYBGR</value>
+      <footprint>lib:BGA6N40P3X2_148X95X53</footprint>
+      <datasheet>https://www.ti.com/lit/ds/symlink/tmp117.pdf</datasheet>
+      <description>TMP117N precision digital temperature sensor; +/-0.2 C from -40 to 100 C; YBG DSBGA-6</description>
+      <fields>
+        <field name="MF">Texas Instruments</field>
+        <field name="MAXIMUM_PACKAGE_HEIGHT">0.531mm</field>
+        <field name="Package">DSBGA-6 Texas Instruments</field>
+        <field name="Price">None</field>
+        <field name="Check_prices">https://www.snapeda.com/parts/TMP117NAIYBGR/Texas+Instruments/view-part/?ref=eda</field>
+        <field name="STANDARD">Manufacturer Recommendations</field>
+        <field name="PARTREV">D</field>
+        <field name="SnapEDA_Link">https://www.snapeda.com/parts/TMP117NAIYBGR/Texas+Instruments/view-part/?ref=snap</field>
+        <field name="SNAPEDA_PACKAGE_ID">103200</field>
+        <field name="MP">TMP117NAIYBGR</field>
+        <field name="Description_1">TMP117N precision digital temperature sensor; +/-0.2 C from -40 to 100 C; YBG DSBGA-6</field>
+        <field name="Availability">In Stock</field>
+        <field name="MANUFACTURER">Texas Instruments</field>
+        <field name="Footprint">lib:BGA6N40P3X2_148X95X53</field>
+        <field name="Datasheet">https://www.ti.com/lit/ds/symlink/tmp117.pdf</field>
+        <field name="Description">TMP117N precision digital temperature sensor; +/-0.2 C from -40 to 100 C; YBG DSBGA-6</field>
+      </fields>
+      <libsource lib="TMP117NAIYBGR" part="TMP117NAIYBGR" description="TMP117N precision digital temperature sensor; +/-0.2 C from -40 to 100 C; YBG DSBGA-6"/>
+      <property name="MF" value="Texas Instruments"/>
+      <property name="MAXIMUM_PACKAGE_HEIGHT" value="0.531mm"/>
+      <property name="Package" value="DSBGA-6 Texas Instruments"/>
+      <property name="Price" value="None"/>
+      <property name="Check_prices" value="https://www.snapeda.com/parts/TMP117NAIYBGR/Texas+Instruments/view-part/?ref=eda"/>
+      <property name="STANDARD" value="Manufacturer Recommendations"/>
+      <property name="PARTREV" value="D"/>
+      <property name="SnapEDA_Link" value="https://www.snapeda.com/parts/TMP117NAIYBGR/Texas+Instruments/view-part/?ref=snap"/>
+      <property name="SNAPEDA_PACKAGE_ID" value="103200"/>
+      <property name="MP" value="TMP117NAIYBGR"/>
+      <property name="Description_1" value="TMP117N precision digital temperature sensor; +/-0.2 C from -40 to 100 C; YBG DSBGA-6"/>
+      <property name="Availability" value="In Stock"/>
+      <property name="MANUFACTURER" value="Texas Instruments"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="stratolink.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>e4097a48-a84d-4fd1-a88a-ddbeb095c1ca</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="C1"/>
+            <pin num="A2"/>
+            <pin num="A1"/>
+            <pin num="B1"/>
+            <pin num="C2"/>
+            <pin num="B2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="U6">
+      <value>~</value>
+      <footprint>lib:21-0147E</footprint>
+      <datasheet>https://item.szlcsc.com/datasheet/LTR-390UV-01/503413.html</datasheet>
+      <description>Measurement Type:Light Intensity Photoperceptivity:157klx Interface:I2C Resolution(Bits):18bit Voltage - Supply:1.7V~3.6V Voltage - Supply:1.7V~3.6V Operating Temperature:-40°C~+85°C Operating Temperature:-40°C~+85°C</description>
+      <fields>
+        <field name="Manufacturer Part">LTR-390UV-01</field>
+        <field name="Manufacturer">LITEON(光宝)</field>
+        <field name="Supplier Part">C492374</field>
+        <field name="Supplier">LCSC</field>
+        <field name="LCSC Part Name">LTR-390UV-01 停产</field>
+        <field name="Footprint">lib:21-0147E</field>
+        <field name="Datasheet">https://item.szlcsc.com/datasheet/LTR-390UV-01/503413.html</field>
+        <field name="Description">Measurement Type:Light Intensity Photoperceptivity:157klx Interface:I2C Resolution(Bits):18bit Voltage - Supply:1.7V~3.6V Voltage - Supply:1.7V~3.6V Operating Temperature:-40°C~+85°C Operating Temperature:-40°C~+85°C</field>
+      </fields>
+      <libsource lib="ProLib_pcs_2026-02-20" part="LTR-390UV-01" description="Measurement Type:Light Intensity Photoperceptivity:157klx Interface:I2C Resolution(Bits):18bit Voltage - Supply:1.7V~3.6V Voltage - Supply:1.7V~3.6V Operating Temperature:-40°C~+85°C Operating Temperature:-40°C~+85°C"/>
+      <property name="Manufacturer Part" value="LTR-390UV-01"/>
+      <property name="Manufacturer" value="LITEON(光宝)"/>
+      <property name="Supplier Part" value="C492374"/>
+      <property name="Supplier" value="LCSC"/>
+      <property name="LCSC Part Name" value="LTR-390UV-01 停产"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="stratolink.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>c544e489-c714-48ba-b71a-14e87f55c525</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+            <pin num="3"/>
+            <pin num="6"/>
+            <pin num="5"/>
+            <pin num="4"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="U7">
+      <value>LIS2DH12TR</value>
+      <footprint>lib:PQFN50P200X200100-12N</footprint>
+      <description>MEMS digital output motion sensor: ultra low-power high performance 3-axes femto accelerometer</description>
+      <fields>
+        <field name="MF">STMicroelectronics</field>
+        <field name="PACKAGE">LGA-12 STMicroelectronics</field>
+        <field name="PRICE">0.87 USD</field>
+        <field name="Package">LGA-12 STMicroelectronics</field>
+        <field name="Check_prices">https://www.snapeda.com/parts/LIS2DH12TR/STMicroelectronics/view-part/?ref=eda</field>
+        <field name="Price">None</field>
+        <field name="SnapEDA_Link">https://www.snapeda.com/parts/LIS2DH12TR/STMicroelectronics/view-part/?ref=snap</field>
+        <field name="MP">LIS2DH12TR</field>
+        <field name="Availability">In Stock</field>
+        <field name="AVAILABILITY">Good</field>
+        <field name="Description_1">
+                        
+                            Accelerometer X, Y, Z Axis ±2g, 4g, 8g, 16g 0.5Hz ~ 672Hz 12-LGA (2x2)
+                        
+</field>
+        <field name="Footprint">lib:PQFN50P200X200100-12N</field>
+        <field name="Datasheet"/>
+        <field name="Description">MEMS digital output motion sensor: ultra low-power high performance 3-axes femto accelerometer</field>
+      </fields>
+      <libsource lib="LIS2DH12TR" part="LIS2DH12TR" description="MEMS digital output motion sensor: ultra low-power high performance 3-axes femto accelerometer"/>
+      <property name="MF" value="STMicroelectronics"/>
+      <property name="PACKAGE" value="LGA-12 STMicroelectronics"/>
+      <property name="PRICE" value="0.87 USD"/>
+      <property name="Package" value="LGA-12 STMicroelectronics"/>
+      <property name="Check_prices" value="https://www.snapeda.com/parts/LIS2DH12TR/STMicroelectronics/view-part/?ref=eda"/>
+      <property name="Price" value="None"/>
+      <property name="SnapEDA_Link" value="https://www.snapeda.com/parts/LIS2DH12TR/STMicroelectronics/view-part/?ref=snap"/>
+      <property name="MP" value="LIS2DH12TR"/>
+      <property name="Availability" value="In Stock"/>
+      <property name="AVAILABILITY" value="Good"/>
+      <property name="Description_1" value="&#xA;                        &#xA;                            Accelerometer X, Y, Z Axis ±2g, 4g, 8g, 16g 0.5Hz ~ 672Hz 12-LGA (2x2)&#xA;                        &#xA;"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="stratolink.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>e2377f4c-39f3-4561-a208-ea062c0bb53d</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="2"/>
+            <pin num="1"/>
+            <pin num="4"/>
+            <pin num="3"/>
+            <pin num="9"/>
+            <pin num="10"/>
+            <pin num="12"/>
+            <pin num="11"/>
+            <pin num="5"/>
+            <pin num="6"/>
+            <pin num="7"/>
+            <pin num="8"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+  </components>
+  <libparts>
+    <libpart lib="Connector" part="Conn_ARM_SWD_TagConnect_TC2030-NL">
+      <description>Tag-Connect ARM Cortex SWD JTAG connector, 6 pin, no legs</description>
+      <docs>https://www.tag-connect.com/wp-content/uploads/bsk-pdf-manager/TC2030-CTX_1.pdf</docs>
+      <footprints>
+        <fp>*TC2030*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">J</field>
+        <field name="Value">Conn_ARM_SWD_TagConnect_TC2030-NL</field>
+        <field name="Footprint">Connector:Tag-Connect_TC2030-IDC-NL_2x03_P1.27mm_Vertical</field>
+        <field name="Datasheet">https://www.tag-connect.com/wp-content/uploads/bsk-pdf-manager/TC2030-CTX_1.pdf</field>
+        <field name="Description">Tag-Connect ARM Cortex SWD JTAG connector, 6 pin, no legs</field>
+      </fields>
+      <pins>
+        <pin num="1" name="VCC" type="power_in"/>
+        <pin num="2" name="SWDIO" type="bidirectional"/>
+        <pin num="3" name="~{RESET}" type="open_collector"/>
+        <pin num="4" name="SWCLK" type="output"/>
+        <pin num="5" name="GND" type="power_in"/>
+        <pin num="6" name="SWO" type="input"/>
+      </pins>
+    </libpart>
+    <libpart lib="Device" part="Antenna">
+      <description>Antenna</description>
+      <fields>
+        <field name="Reference">AE</field>
+        <field name="Value">Antenna</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description">Antenna</field>
+      </fields>
+      <pins>
+        <pin num="1" name="A" type="input"/>
+      </pins>
+    </libpart>
+    <libpart lib="Device" part="C">
+      <description>Unpolarized capacitor</description>
+      <footprints>
+        <fp>C_*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">C</field>
+        <field name="Value">C</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description">Unpolarized capacitor</field>
+      </fields>
+      <pins>
+        <pin num="1" name="" type="passive"/>
+        <pin num="2" name="" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="Device" part="FerriteBead_Small">
+      <description>Ferrite bead, small symbol</description>
+      <footprints>
+        <fp>Inductor_*</fp>
+        <fp>L_*</fp>
+        <fp>*Ferrite*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">FB</field>
+        <field name="Value">FerriteBead_Small</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description">Ferrite bead, small symbol</field>
+      </fields>
+      <pins>
+        <pin num="1" name="" type="passive"/>
+        <pin num="2" name="" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="Device" part="L">
+      <description>Inductor</description>
+      <footprints>
+        <fp>Choke_*</fp>
+        <fp>*Coil*</fp>
+        <fp>Inductor_*</fp>
+        <fp>L_*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">L</field>
+        <field name="Value">L</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description">Inductor</field>
+      </fields>
+      <pins>
+        <pin num="1" name="1" type="passive"/>
+        <pin num="2" name="2" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="Device" part="R_US">
+      <description>Resistor, US symbol</description>
+      <footprints>
+        <fp>R_*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">R</field>
+        <field name="Value">R_US</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description">Resistor, US symbol</field>
+      </fields>
+      <pins>
+        <pin num="1" name="" type="passive"/>
+        <pin num="2" name="" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="Diode" part="ESD9B3.3ST5G">
+      <description>ESD protection diode, 3.3Vrwm, SOD-923</description>
+      <docs>https://www.onsemi.com/pub/Collateral/ESD9B-D.PDF</docs>
+      <footprints>
+        <fp>D*SOD?923*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">D</field>
+        <field name="Value">ESD9B3.3ST5G</field>
+        <field name="Footprint">Diode_SMD:D_SOD-923</field>
+        <field name="Datasheet">https://www.onsemi.com/pub/Collateral/ESD9B-D.PDF</field>
+        <field name="Description">ESD protection diode, 3.3Vrwm, SOD-923</field>
+      </fields>
+      <pins>
+        <pin num="1" name="A1" type="passive"/>
+        <pin num="2" name="A2" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="LIS2DH12TR" part="LIS2DH12TR">
+      <description>MEMS digital output motion sensor: ultra low-power high performance 3-axes femto accelerometer</description>
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">LIS2DH12TR</field>
+        <field name="Footprint">LIS2DH12TR:PQFN50P200X200100-12N</field>
+        <field name="Datasheet"/>
+        <field name="Description">MEMS digital output motion sensor: ultra low-power high performance 3-axes femto accelerometer</field>
+        <field name="MF">STMicroelectronics</field>
+        <field name="PACKAGE">LGA-12 STMicroelectronics</field>
+        <field name="PRICE">0.87 USD</field>
+        <field name="Package">LGA-12 STMicroelectronics</field>
+        <field name="Check_prices">https://www.snapeda.com/parts/LIS2DH12TR/STMicroelectronics/view-part/?ref=eda</field>
+        <field name="Price">None</field>
+        <field name="SnapEDA_Link">https://www.snapeda.com/parts/LIS2DH12TR/STMicroelectronics/view-part/?ref=snap</field>
+        <field name="MP">LIS2DH12TR</field>
+        <field name="Availability">In Stock</field>
+        <field name="AVAILABILITY">Good</field>
+        <field name="Description_1">
+                        
+                            Accelerometer X, Y, Z Axis ±2g, 4g, 8g, 16g 0.5Hz ~ 672Hz 12-LGA (2x2)
+                        
+</field>
+      </fields>
+      <pins>
+        <pin num="1" name="SCL/SPC" type="bidirectional"/>
+        <pin num="2" name="CS" type="input"/>
+        <pin num="3" name="SDO/SAO" type="bidirectional"/>
+        <pin num="4" name="SDA/SDI/SDO" type="bidirectional"/>
+        <pin num="5" name="RES" type="power_in"/>
+        <pin num="6" name="GND" type="power_in"/>
+        <pin num="7" name="GND" type="power_in"/>
+        <pin num="8" name="GND" type="power_in"/>
+        <pin num="9" name="VDD" type="power_in"/>
+        <pin num="10" name="VDD_IO" type="power_in"/>
+        <pin num="11" name="INT2" type="output"/>
+        <pin num="12" name="INT1" type="output"/>
+      </pins>
+    </libpart>
+    <libpart lib="ProLib_pcs_2026-01-31" part="BQ25570RGRR">
+      <description>Operating Temperature:-40°C~+125°C Operating Temperature:-40°C~+125°C</description>
+      <docs>https://www.ti.com/cn/lit/gpn/bq25570</docs>
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value"/>
+        <field name="Footprint">ProLib_pcs_2026-01-31:VQFN-20_L3.5-W3.5-P0.50-BL-EP2.0</field>
+        <field name="Datasheet">https://www.ti.com/cn/lit/gpn/bq25570</field>
+        <field name="Description">Operating Temperature:-40°C~+125°C Operating Temperature:-40°C~+125°C</field>
+        <field name="Manufacturer Part">BQ25570RGRR</field>
+        <field name="Manufacturer">TI(德州仪器)</field>
+        <field name="Supplier Part">C506250</field>
+        <field name="Supplier">LCSC</field>
+        <field name="LCSC Part Name">适用于能量收集器供电应用的微功率升压充电器与降压转换器</field>
+      </fields>
+      <pins>
+        <pin num="1" name="VSS" type="input"/>
+        <pin num="2" name="VIN_DC" type="input"/>
+        <pin num="3" name="VOC_SAMP" type="input"/>
+        <pin num="4" name="VREF_SAMP" type="input"/>
+        <pin num="5" name="EN#" type="input"/>
+        <pin num="6" name="VOUT_EN" type="input"/>
+        <pin num="7" name="VBAT_OV" type="input"/>
+        <pin num="8" name="VRDIV" type="input"/>
+        <pin num="9" name="NC" type="input"/>
+        <pin num="10" name="OK_HYST" type="input"/>
+        <pin num="11" name="OK_PROG" type="input"/>
+        <pin num="12" name="VOUT_SET" type="input"/>
+        <pin num="13" name="VBAT_OK" type="input"/>
+        <pin num="14" name="VOUT" type="input"/>
+        <pin num="15" name="VSS" type="input"/>
+        <pin num="16" name="LBUCK" type="input"/>
+        <pin num="17" name="NC" type="input"/>
+        <pin num="18" name="VBAT" type="input"/>
+        <pin num="19" name="VSTOR" type="input"/>
+        <pin num="20" name="LBOOST" type="input"/>
+        <pin num="21" name="EP" type="input"/>
+      </pins>
+    </libpart>
+    <libpart lib="ProLib_pcs_2026-02-08" part="MAX-M10S-00B">
+      <docs>https://item.szlcsc.com/datasheet/MAX-M10S-00B/4722633.html</docs>
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value"/>
+        <field name="Footprint">ProLib_pcs_2026-02-08:SMD-18_L10.1-W9.7-P1.10-TL_SKG09F</field>
+        <field name="Datasheet">https://item.szlcsc.com/datasheet/MAX-M10S-00B/4722633.html</field>
+        <field name="Description"/>
+        <field name="Manufacturer Part">MAX-M10S-00B</field>
+        <field name="Manufacturer">U-BLOX</field>
+        <field name="Supplier Part">C4153167</field>
+        <field name="Supplier">LCSC</field>
+        <field name="LCSC Part Name">MAX-M10S-00B</field>
+      </fields>
+      <pins>
+        <pin num="1" name="GND" type="unspecified"/>
+        <pin num="2" name="TXD" type="unspecified"/>
+        <pin num="3" name="RXD" type="unspecified"/>
+        <pin num="4" name="TIMEPULSE" type="unspecified"/>
+        <pin num="5" name="EXTINT" type="unspecified"/>
+        <pin num="6" name="V_BCKP" type="unspecified"/>
+        <pin num="7" name="V_IO" type="unspecified"/>
+        <pin num="8" name="VCC" type="unspecified"/>
+        <pin num="9" name="RESET_N" type="unspecified"/>
+        <pin num="10" name="GND" type="unspecified"/>
+        <pin num="11" name="RF_IN" type="unspecified"/>
+        <pin num="12" name="GND" type="unspecified"/>
+        <pin num="13" name="LNA_EN" type="unspecified"/>
+        <pin num="14" name="VCC_RF" type="unspecified"/>
+        <pin num="15" name="VIO_SEL" type="unspecified"/>
+        <pin num="16" name="SDA" type="unspecified"/>
+        <pin num="17" name="SCL" type="unspecified"/>
+        <pin num="18" name="SAFEBOOT_N" type="unspecified"/>
+      </pins>
+    </libpart>
+    <libpart lib="ProLib_pcs_2026-02-20" part="LTR-390UV-01">
+      <description>Measurement Type:Light Intensity Photoperceptivity:157klx Interface:I2C Resolution(Bits):18bit Voltage - Supply:1.7V~3.6V Voltage - Supply:1.7V~3.6V Operating Temperature:-40°C~+85°C Operating Temperature:-40°C~+85°C</description>
+      <docs>https://item.szlcsc.com/datasheet/LTR-390UV-01/503413.html</docs>
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value"/>
+        <field name="Footprint">ProLib_pcs_2026-02-20:SENSOR-SMD_LTR-390UV-01</field>
+        <field name="Datasheet">https://item.szlcsc.com/datasheet/LTR-390UV-01/503413.html</field>
+        <field name="Description">Measurement Type:Light Intensity Photoperceptivity:157klx Interface:I2C Resolution(Bits):18bit Voltage - Supply:1.7V~3.6V Voltage - Supply:1.7V~3.6V Operating Temperature:-40°C~+85°C Operating Temperature:-40°C~+85°C</field>
+        <field name="Manufacturer Part">LTR-390UV-01</field>
+        <field name="Manufacturer">LITEON(光宝)</field>
+        <field name="Supplier Part">C492374</field>
+        <field name="Supplier">LCSC</field>
+        <field name="LCSC Part Name">LTR-390UV-01 停产</field>
+      </fields>
+      <pins>
+        <pin num="1" name="VDD" type="unspecified"/>
+        <pin num="2" name="NC" type="unspecified"/>
+        <pin num="3" name="GND" type="unspecified"/>
+        <pin num="4" name="SCL" type="unspecified"/>
+        <pin num="5" name="INT" type="unspecified"/>
+        <pin num="6" name="SDA" type="unspecified"/>
+      </pins>
+    </libpart>
+    <libpart lib="RAK3172" part="RAK3172">
+      <description>RAK3172 is a low-power long-range transceiver module based on the STM32WLE5CC chip. It provides an easy-to-use, small-size, low-power solution for long range wireless data applications</description>
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">RAK3172</field>
+        <field name="Footprint">RAK3172:RAK3172</field>
+        <field name="Datasheet"/>
+        <field name="Description">RAK3172 is a low-power long-range transceiver module based on the STM32WLE5CC chip. It provides an easy-to-use, small-size, low-power solution for long range wireless data applications</field>
+        <field name="MF">Shenzhen RAKwireless Technology Co.,Ltd.</field>
+        <field name="PACKAGE">Package</field>
+        <field name="PRICE">None</field>
+        <field name="Package">Package</field>
+        <field name="Check_prices">https://www.snapeda.com/parts/RAK3172/Shenzhen+RAKwireless+Technology+Co.%252CLtd./view-part/?ref=eda</field>
+        <field name="SnapEDA_Link">https://www.snapeda.com/parts/RAK3172/Shenzhen+RAKwireless+Technology+Co.%252CLtd./view-part/?ref=snap</field>
+        <field name="Price">None</field>
+        <field name="SNAPEDA_LINK">https://www.snapeda.com/parts/RAK3172/Shenzhen+RAKwireless+Technology+Co.%252CLtd./view-part/?ref=snap</field>
+        <field name="MP">RAK3172</field>
+        <field name="Description_1">
+                        
+                            RAK3172 is a low-power long-range transceiver module based on the STM32WLE5CC chip. It provides an easy-to-use, small-size, low-power solution for long range wireless data applications
+                        
+</field>
+        <field name="Availability">Not in stock</field>
+        <field name="AVAILABILITY">Not in stock</field>
+        <field name="CHECK_PRICES">https://www.snapeda.com/parts/RAK3172/Shenzhen+RAKwireless+Technology+Co.%252CLtd./view-part/?ref=eda</field>
+      </fields>
+      <pins>
+        <pin num="1" name="UART2_RX/PA3" type="bidirectional"/>
+        <pin num="2" name="UART2_TX/PA2" type="bidirectional"/>
+        <pin num="3" name="PA15/ADC5" type="bidirectional"/>
+        <pin num="4" name="UART1_TX/PB6" type="bidirectional"/>
+        <pin num="5" name="UART1_RX/PB7" type="bidirectional"/>
+        <pin num="6" name="PA1" type="bidirectional"/>
+        <pin num="7" name="SWDIO/PA13" type="bidirectional"/>
+        <pin num="8" name="SWCLK/PA14" type="bidirectional"/>
+        <pin num="9" name="SCL/PA12" type="bidirectional"/>
+        <pin num="10" name="SDA/PA11" type="bidirectional"/>
+        <pin num="11" name="GND" type="power_in"/>
+        <pin num="12" name="RF" type="output"/>
+        <pin num="13" name="MOSI/PA7" type="bidirectional"/>
+        <pin num="14" name="MISO/PA6" type="bidirectional"/>
+        <pin num="15" name="SCK/PA5" type="bidirectional"/>
+        <pin num="16" name="SS/PA4" type="bidirectional"/>
+        <pin num="17" name="GND" type="power_in"/>
+        <pin num="18" name="GND" type="power_in"/>
+        <pin num="19" name="PA8" type="bidirectional"/>
+        <pin num="20" name="PA9" type="bidirectional"/>
+        <pin num="21" name="BOOT0" type="input"/>
+        <pin num="22" name="RST" type="input"/>
+        <pin num="23" name="GND" type="power_in"/>
+        <pin num="24" name="VCC" type="power_in"/>
+        <pin num="25" name="PA10/ADC4" type="bidirectional"/>
+        <pin num="26" name="PB2/ADC3" type="bidirectional"/>
+        <pin num="27" name="PB12" type="bidirectional"/>
+        <pin num="28" name="GND" type="power_in"/>
+        <pin num="29" name="PA0" type="bidirectional"/>
+        <pin num="30" name="PB5" type="bidirectional"/>
+        <pin num="31" name="PB4/ADC2" type="bidirectional"/>
+        <pin num="32" name="PB3/ADC1" type="bidirectional"/>
+      </pins>
+    </libpart>
+    <libpart lib="TMP117NAIYBGR" part="TMP117NAIYBGR">
+      <description>TMP117N precision digital temperature sensor; +/-0.2 C from -40 to 100 C; YBG DSBGA-6</description>
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">TMP117NAIYBGR</field>
+        <field name="Footprint">lib:BGA6N40P3X2_148X95X53</field>
+        <field name="Datasheet"/>
+        <field name="Description">TMP117N precision digital temperature sensor; +/-0.2 C from -40 to 100 C; YBG DSBGA-6</field>
+        <field name="MF">Texas Instruments</field>
+        <field name="MAXIMUM_PACKAGE_HEIGHT">0.531mm</field>
+        <field name="Package">DSBGA-6 Texas Instruments</field>
+        <field name="Price">None</field>
+        <field name="Check_prices">https://www.snapeda.com/parts/TMP117NAIYBGR/Texas+Instruments/view-part/?ref=eda</field>
+        <field name="STANDARD">Manufacturer Recommendations</field>
+        <field name="PARTREV">D</field>
+        <field name="SnapEDA_Link">https://www.snapeda.com/parts/TMP117NAIYBGR/Texas+Instruments/view-part/?ref=snap</field>
+        <field name="SNAPEDA_PACKAGE_ID">103200</field>
+        <field name="MP">TMP117NAIYBGR</field>
+        <field name="Description_1">
+                        
+                            0.1°C digital temperature sensor, 48-bit EEPROM, PT100/PT1000 RTD replacement
+                        
+</field>
+        <field name="Availability">In Stock</field>
+        <field name="MANUFACTURER">Texas Instruments</field>
+      </fields>
+      <pins>
+        <pin num="A1" name="SDA" type="bidirectional"/>
+        <pin num="A2" name="SCL" type="input"/>
+        <pin num="B1" name="V+" type="power_in"/>
+        <pin num="B2" name="GND" type="power_in"/>
+        <pin num="C1" name="ADD0" type="input"/>
+        <pin num="C2" name="ALERT" type="open_collector"/>
+      </pins>
+    </libpart>
+    <libpart lib="fab" part="Conn_Header_JST_PH_1x02_P2mm_Vertical_SMD">
+      <description>Male JST PH 2 pin connector</description>
+      <docs>https://www.jst-mfg.com/product/pdf/eng/ePH.pdf</docs>
+      <footprints>
+        <fp>*Header*JST*PH*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">J</field>
+        <field name="Value">Conn_Header_JST_PH_1x02_P2mm_Vertical_SMD</field>
+        <field name="Footprint">fab:Header_JST_PH_1x02_P2mm_Vertical_SMD</field>
+        <field name="Datasheet">https://www.jst-mfg.com/product/pdf/eng/ePH.pdf</field>
+        <field name="Description">Male JST PH 2 pin connector</field>
+      </fields>
+      <pins>
+        <pin num="1" name="" type="passive"/>
+        <pin num="2" name="" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="fab" part="Conn_PinHeader_1x07_P2.54mm_Vertical_THT_D1mm">
+      <description>Connector Header Through Hole 7 positions 0.100" (2.54mm)</description>
+      <footprints>
+        <fp>*PinHeader*1x07*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">J</field>
+        <field name="Value">Conn_PinHeader_1x07_P2.54mm_Vertical_THT_D1mm</field>
+        <field name="Footprint">fab:PinHeader_1x07_P2.54mm_Vertical_THT_D1mm</field>
+        <field name="Datasheet"/>
+        <field name="Description">Connector Header Through Hole 7 positions 0.100" (2.54mm)</field>
+      </fields>
+      <pins>
+        <pin num="1" name="Pin_1" type="passive"/>
+        <pin num="2" name="Pin_2" type="passive"/>
+        <pin num="3" name="Pin_3" type="passive"/>
+        <pin num="4" name="Pin_4" type="passive"/>
+        <pin num="5" name="Pin_5" type="passive"/>
+        <pin num="6" name="Pin_6" type="passive"/>
+        <pin num="7" name="Pin_7" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="pressure" part="MS561101BA03-50">
+      <description>Pressure range:1Kpa~1.2bar Pressure range:1Kpa~1.2bar Voltage - Supply:1.8V~3.6V Voltage - Supply:1.8V~3.6V Standby Current:140nA Interface:SpI；I2C Operating Temperature:-40°C~+85°C Operating Temperature:-40°C~+85°C Response time:8.22ms</description>
+      <docs>https://item.szlcsc.com/datasheet/MS561101BA03-50/16320.html</docs>
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value"/>
+        <field name="Footprint">pressure:SENSORS-SMD_MS5611-01BA03</field>
+        <field name="Datasheet">https://item.szlcsc.com/datasheet/MS561101BA03-50/16320.html</field>
+        <field name="Description">Pressure range:1Kpa~1.2bar Pressure range:1Kpa~1.2bar Voltage - Supply:1.8V~3.6V Voltage - Supply:1.8V~3.6V Standby Current:140nA Interface:SpI；I2C Operating Temperature:-40°C~+85°C Operating Temperature:-40°C~+85°C Response time:8.22ms</field>
+        <field name="Manufacturer Part">MS561101BA03-50</field>
+        <field name="Manufacturer">TE Connectivity(泰科电子)</field>
+        <field name="Supplier Part">C15639</field>
+        <field name="Supplier">LCSC</field>
+        <field name="LCSC Part Name">MS561101BA03-50</field>
+      </fields>
+      <pins>
+        <pin num="1" name="VDD" type="unspecified"/>
+        <pin num="2" name="PS" type="unspecified"/>
+        <pin num="3" name="GND" type="unspecified"/>
+        <pin num="4" name="CSB" type="unspecified"/>
+        <pin num="5" name="CSB" type="unspecified"/>
+        <pin num="6" name="SDO" type="unspecified"/>
+        <pin num="7" name="SDI/SDA" type="unspecified"/>
+        <pin num="8" name="SCLK" type="unspecified"/>
+      </pins>
+    </libpart>
+  </libparts>
+  <libraries>
+    <library logical="Connector">
+      <uri>${KICAD10_SYMBOL_DIR}/Connector.kicad_sym</uri>
+    </library>
+    <library logical="Device">
+      <uri>${KICAD10_SYMBOL_DIR}/Device.kicad_sym</uri>
+    </library>
+    <library logical="Diode">
+      <uri>${KICAD10_SYMBOL_DIR}/Diode.kicad_sym</uri>
+    </library>
+  </libraries>
+  <nets>
+    <net code="1" name="+3.3V" class="Default">
+      <node ref="C11" pin="2" pintype="passive"/>
+      <node ref="C12" pin="2" pintype="passive"/>
+      <node ref="C14" pin="2" pintype="passive"/>
+      <node ref="C16" pin="2" pintype="passive"/>
+      <node ref="C19" pin="2" pintype="passive"/>
+      <node ref="C20" pin="2" pintype="passive"/>
+      <node ref="C21" pin="2" pintype="passive"/>
+      <node ref="C6" pin="2" pintype="passive"/>
+      <node ref="C7" pin="2" pintype="passive"/>
+      <node ref="C8" pin="2" pintype="passive"/>
+      <node ref="FB1" pin="2" pintype="passive"/>
+      <node ref="J20" pin="1" pinfunction="VCC_1" pintype="power_in"/>
+      <node ref="J4" pin="7" pinfunction="Pin_7_7" pintype="passive"/>
+      <node ref="L2" pin="2" pinfunction="2_2" pintype="passive"/>
+      <node ref="R10" pin="1" pintype="passive"/>
+      <node ref="R11" pin="1" pintype="passive"/>
+      <node ref="R12" pin="1" pintype="passive"/>
+      <node ref="U1" pin="14" pinfunction="VOUT_14" pintype="input"/>
+      <node ref="U2" pin="24" pinfunction="VCC_24" pintype="power_in"/>
+      <node ref="U4" pin="1" pinfunction="VDD_1" pintype="unspecified"/>
+      <node ref="U4" pin="2" pinfunction="PS_2" pintype="unspecified"/>
+      <node ref="U4" pin="4" pinfunction="CSB_4" pintype="unspecified"/>
+      <node ref="U4" pin="5" pinfunction="CSB_5" pintype="unspecified"/>
+      <node ref="U5" pin="B1" pinfunction="V+_B1" pintype="power_in"/>
+      <node ref="U6" pin="1" pinfunction="VDD_1" pintype="unspecified"/>
+      <node ref="U7" pin="10" pinfunction="VDD_IO_10" pintype="power_in"/>
+      <node ref="U7" pin="2" pinfunction="CS_2" pintype="input"/>
+      <node ref="U7" pin="9" pinfunction="VDD_9" pintype="power_in"/>
+    </net>
+    <net code="2" name="+SOLAR" class="Default">
+      <node ref="C2" pin="1" pintype="passive"/>
+      <node ref="J1" pin="1" pintype="passive"/>
+      <node ref="J2" pin="1" pintype="passive"/>
+      <node ref="L1" pin="2" pinfunction="2_2" pintype="passive"/>
+      <node ref="R19" pin="1" pintype="passive"/>
+      <node ref="U1" pin="2" pinfunction="VIN_DC_2" pintype="input"/>
+    </net>
+    <net code="3" name="BOOT0" class="Default">
+      <node ref="J4" pin="6" pinfunction="Pin_6_6" pintype="passive"/>
+      <node ref="R9" pin="2" pintype="passive"/>
+      <node ref="U2" pin="21" pinfunction="BOOT0_21" pintype="input"/>
+    </net>
+    <net code="4" name="GND" class="Default">
+      <node ref="C1" pin="1" pintype="passive"/>
+      <node ref="C10" pin="2" pintype="passive"/>
+      <node ref="C11" pin="1" pintype="passive"/>
+      <node ref="C12" pin="1" pintype="passive"/>
+      <node ref="C14" pin="1" pintype="passive"/>
+      <node ref="C15" pin="1" pintype="passive"/>
+      <node ref="C16" pin="1" pintype="passive"/>
+      <node ref="C17" pin="1" pintype="passive"/>
+      <node ref="C19" pin="1" pintype="passive"/>
+      <node ref="C2" pin="2" pintype="passive"/>
+      <node ref="C20" pin="1" pintype="passive"/>
+      <node ref="C21" pin="1" pintype="passive"/>
+      <node ref="C3" pin="2" pintype="passive"/>
+      <node ref="C4" pin="2" pintype="passive"/>
+      <node ref="C5" pin="2" pintype="passive"/>
+      <node ref="C6" pin="1" pintype="passive"/>
+      <node ref="C7" pin="1" pintype="passive"/>
+      <node ref="C8" pin="1" pintype="passive"/>
+      <node ref="C9" pin="1" pintype="passive"/>
+      <node ref="D1" pin="1" pinfunction="A1_1" pintype="passive"/>
+      <node ref="D3" pin="1" pinfunction="A1_1" pintype="passive"/>
+      <node ref="J1" pin="2" pintype="passive"/>
+      <node ref="J2" pin="2" pintype="passive"/>
+      <node ref="J20" pin="5" pinfunction="GND_5" pintype="power_in"/>
+      <node ref="J3" pin="2" pinfunction="Pin_2_2" pintype="passive"/>
+      <node ref="J3" pin="4" pinfunction="Pin_4_4" pintype="passive"/>
+      <node ref="J3" pin="5" pinfunction="Pin_5_5" pintype="passive"/>
+      <node ref="J3" pin="7" pinfunction="Pin_7_7" pintype="passive"/>
+      <node ref="J4" pin="1" pinfunction="Pin_1_1" pintype="passive"/>
+      <node ref="J4" pin="3" pinfunction="Pin_3_3" pintype="passive"/>
+      <node ref="R2" pin="2" pintype="passive"/>
+      <node ref="R21" pin="2" pintype="passive"/>
+      <node ref="R23" pin="2" pintype="passive"/>
+      <node ref="R5" pin="2" pintype="passive"/>
+      <node ref="R7" pin="2" pintype="passive"/>
+      <node ref="R9" pin="1" pintype="passive"/>
+      <node ref="U1" pin="1" pinfunction="VSS_1" pintype="input"/>
+      <node ref="U1" pin="15" pinfunction="VSS_15" pintype="input"/>
+      <node ref="U1" pin="17" pinfunction="NC_17" pintype="input"/>
+      <node ref="U1" pin="21" pinfunction="EP_21" pintype="input"/>
+      <node ref="U1" pin="5" pinfunction="EN#_5" pintype="input"/>
+      <node ref="U1" pin="9" pinfunction="NC_9" pintype="input"/>
+      <node ref="U2" pin="11" pinfunction="GND_11" pintype="power_in"/>
+      <node ref="U2" pin="17" pinfunction="GND_17" pintype="power_in"/>
+      <node ref="U2" pin="18" pinfunction="GND_18" pintype="power_in"/>
+      <node ref="U2" pin="23" pinfunction="GND_23" pintype="power_in"/>
+      <node ref="U2" pin="28" pinfunction="GND_28" pintype="power_in"/>
+      <node ref="U3" pin="1" pinfunction="GND_1" pintype="unspecified"/>
+      <node ref="U3" pin="10" pinfunction="GND_10" pintype="unspecified"/>
+      <node ref="U3" pin="12" pinfunction="GND_12" pintype="unspecified"/>
+      <node ref="U3" pin="5" pinfunction="EXTINT_5" pintype="unspecified"/>
+      <node ref="U4" pin="3" pinfunction="GND_3" pintype="unspecified"/>
+      <node ref="U5" pin="B2" pinfunction="GND_B2" pintype="power_in"/>
+      <node ref="U5" pin="C1" pinfunction="ADD0_C1" pintype="input"/>
+      <node ref="U5" pin="C2" pinfunction="ALERT_C2" pintype="open_collector"/>
+      <node ref="U6" pin="3" pinfunction="GND_3" pintype="unspecified"/>
+      <node ref="U6" pin="5" pinfunction="INT_5" pintype="unspecified"/>
+      <node ref="U7" pin="3" pinfunction="SDO/SAO_3" pintype="bidirectional"/>
+      <node ref="U7" pin="5" pinfunction="RES_5" pintype="power_in"/>
+      <node ref="U7" pin="6" pinfunction="GND_6" pintype="power_in"/>
+      <node ref="U7" pin="7" pinfunction="GND_7" pintype="power_in"/>
+      <node ref="U7" pin="8" pinfunction="GND_8" pintype="power_in"/>
+    </net>
+    <net code="5" name="Net-(AE1-A)" class="Default">
+      <node ref="AE1" pin="1" pinfunction="A_1" pintype="input"/>
+      <node ref="D1" pin="2" pinfunction="A2_2" pintype="passive"/>
+      <node ref="U2" pin="12" pinfunction="RF_12" pintype="output"/>
+    </net>
+    <net code="6" name="Net-(AE2-A)" class="Default">
+      <node ref="AE2" pin="1" pinfunction="A_1" pintype="input"/>
+      <node ref="D3" pin="2" pinfunction="A2_2" pintype="passive"/>
+      <node ref="U3" pin="11" pinfunction="RF_IN_11" pintype="unspecified"/>
+    </net>
+    <net code="7" name="Net-(U1-LBOOST)" class="Default">
+      <node ref="L1" pin="1" pinfunction="1_1" pintype="passive"/>
+      <node ref="U1" pin="20" pinfunction="LBOOST_20" pintype="input"/>
+    </net>
+    <net code="8" name="Net-(U1-LBUCK)" class="Default">
+      <node ref="L2" pin="1" pinfunction="1_1" pintype="passive"/>
+      <node ref="U1" pin="16" pinfunction="LBUCK_16" pintype="input"/>
+    </net>
+    <net code="9" name="Net-(U1-OK_HYST)" class="Default">
+      <node ref="R3" pin="1" pintype="passive"/>
+      <node ref="R4" pin="2" pintype="passive"/>
+      <node ref="U1" pin="10" pinfunction="OK_HYST_10" pintype="input"/>
+    </net>
+    <net code="10" name="Net-(U1-OK_PROG)" class="Default">
+      <node ref="R3" pin="2" pintype="passive"/>
+      <node ref="R5" pin="1" pintype="passive"/>
+      <node ref="U1" pin="11" pinfunction="OK_PROG_11" pintype="input"/>
+    </net>
+    <net code="11" name="Net-(U1-VBAT)" class="Default">
+      <node ref="C5" pin="1" pintype="passive"/>
+      <node ref="U1" pin="18" pinfunction="VBAT_18" pintype="input"/>
+    </net>
+    <net code="12" name="Net-(U1-VBAT_OK)" class="Default">
+      <node ref="R8" pin="1" pintype="passive"/>
+      <node ref="U1" pin="13" pinfunction="VBAT_OK_13" pintype="input"/>
+    </net>
+    <net code="13" name="Net-(U1-VBAT_OV)" class="Default">
+      <node ref="R1" pin="2" pintype="passive"/>
+      <node ref="R2" pin="1" pintype="passive"/>
+      <node ref="U1" pin="7" pinfunction="VBAT_OV_7" pintype="input"/>
+    </net>
+    <net code="14" name="Net-(U1-VOUT_SET)" class="Default">
+      <node ref="R6" pin="2" pintype="passive"/>
+      <node ref="R7" pin="1" pintype="passive"/>
+      <node ref="U1" pin="12" pinfunction="VOUT_SET_12" pintype="input"/>
+    </net>
+    <net code="15" name="Net-(U1-VRDIV)" class="Default">
+      <node ref="R1" pin="1" pintype="passive"/>
+      <node ref="R4" pin="1" pintype="passive"/>
+      <node ref="R6" pin="1" pintype="passive"/>
+      <node ref="U1" pin="8" pinfunction="VRDIV_8" pintype="input"/>
+    </net>
+    <net code="16" name="Net-(U1-VREF_SAMP)" class="Default">
+      <node ref="C1" pin="2" pintype="passive"/>
+      <node ref="U1" pin="4" pinfunction="VREF_SAMP_4" pintype="input"/>
+    </net>
+    <net code="17" name="Net-(U3-RXD)" class="Default">
+      <node ref="R16" pin="2" pintype="passive"/>
+      <node ref="U3" pin="3" pinfunction="RXD_3" pintype="unspecified"/>
+    </net>
+    <net code="18" name="Net-(U3-SCL)" class="Default">
+      <node ref="R13" pin="1" pintype="passive"/>
+      <node ref="U3" pin="17" pinfunction="SCL_17" pintype="unspecified"/>
+    </net>
+    <net code="19" name="Net-(U3-SDA)" class="Default">
+      <node ref="R14" pin="1" pintype="passive"/>
+      <node ref="U3" pin="16" pinfunction="SDA_16" pintype="unspecified"/>
+    </net>
+    <net code="20" name="Net-(U3-TXD)" class="Default">
+      <node ref="R15" pin="2" pintype="passive"/>
+      <node ref="U3" pin="2" pinfunction="TXD_2" pintype="unspecified"/>
+    </net>
+    <net code="21" name="Net-(U3-VCC)" class="Default">
+      <node ref="C10" pin="1" pintype="passive"/>
+      <node ref="FB1" pin="1" pintype="passive"/>
+      <node ref="R18" pin="1" pintype="passive"/>
+      <node ref="U3" pin="6" pinfunction="V_BCKP_6" pintype="unspecified"/>
+      <node ref="U3" pin="7" pinfunction="V_IO_7" pintype="unspecified"/>
+      <node ref="U3" pin="8" pinfunction="VCC_8" pintype="unspecified"/>
+    </net>
+    <net code="22" name="PA1" class="Default">
+      <node ref="J3" pin="1" pinfunction="Pin_1_1" pintype="passive"/>
+      <node ref="U2" pin="6" pinfunction="PA1_6" pintype="bidirectional"/>
+    </net>
+    <net code="23" name="PA8" class="Default">
+      <node ref="U2" pin="19" pinfunction="PA8_19" pintype="bidirectional"/>
+      <node ref="U7" pin="12" pinfunction="INT1_12" pintype="output"/>
+    </net>
+    <net code="24" name="PA9" class="Default">
+      <node ref="J3" pin="3" pinfunction="Pin_3_3" pintype="passive"/>
+      <node ref="U2" pin="20" pinfunction="PA9_20" pintype="bidirectional"/>
+    </net>
+    <net code="25" name="PA10" class="Default">
+      <node ref="C17" pin="2" pintype="passive"/>
+      <node ref="R22" pin="2" pintype="passive"/>
+      <node ref="R23" pin="1" pintype="passive"/>
+      <node ref="U2" pin="25" pinfunction="PA10/ADC4_25" pintype="bidirectional"/>
+    </net>
+    <net code="26" name="PA15" class="Default">
+      <node ref="C15" pin="2" pintype="passive"/>
+      <node ref="R19" pin="2" pintype="passive"/>
+      <node ref="R21" pin="1" pintype="passive"/>
+      <node ref="U2" pin="3" pinfunction="PA15/ADC5_3" pintype="bidirectional"/>
+    </net>
+    <net code="27" name="PB2" class="Default">
+      <node ref="J3" pin="6" pinfunction="Pin_6_6" pintype="passive"/>
+      <node ref="U2" pin="26" pinfunction="PB2/ADC3_26" pintype="bidirectional"/>
+    </net>
+    <net code="28" name="PB5" class="Default">
+      <node ref="R8" pin="2" pintype="passive"/>
+      <node ref="U2" pin="30" pinfunction="PB5_30" pintype="bidirectional"/>
+    </net>
+    <net code="29" name="RST" class="Default">
+      <node ref="C9" pin="2" pintype="passive"/>
+      <node ref="J20" pin="3" pinfunction="~{RESET}_3" pintype="open_collector"/>
+      <node ref="R10" pin="2" pintype="passive"/>
+      <node ref="U2" pin="22" pinfunction="RST_22" pintype="input"/>
+    </net>
+    <net code="30" name="RSTN" class="Default">
+      <node ref="R18" pin="2" pintype="passive"/>
+      <node ref="U2" pin="29" pinfunction="PA0_29" pintype="bidirectional"/>
+      <node ref="U3" pin="9" pinfunction="RESET_N_9" pintype="unspecified"/>
+    </net>
+    <net code="31" name="RX" class="Default">
+      <node ref="J4" pin="5" pinfunction="Pin_5_5" pintype="passive"/>
+      <node ref="R15" pin="1" pintype="passive"/>
+      <node ref="U2" pin="5" pinfunction="UART1_RX/PB7_5" pintype="bidirectional"/>
+    </net>
+    <net code="32" name="SCL" class="Default">
+      <node ref="R12" pin="2" pintype="passive"/>
+      <node ref="R13" pin="2" pintype="passive"/>
+      <node ref="U2" pin="9" pinfunction="SCL/PA12_9" pintype="bidirectional"/>
+      <node ref="U4" pin="8" pinfunction="SCLK_8" pintype="unspecified"/>
+      <node ref="U5" pin="A2" pinfunction="SCL_A2" pintype="input"/>
+      <node ref="U6" pin="4" pinfunction="SCL_4" pintype="unspecified"/>
+      <node ref="U7" pin="1" pinfunction="SCL/SPC_1" pintype="bidirectional"/>
+    </net>
+    <net code="33" name="SDA" class="Default">
+      <node ref="R11" pin="2" pintype="passive"/>
+      <node ref="R14" pin="2" pintype="passive"/>
+      <node ref="U2" pin="10" pinfunction="SDA/PA11_10" pintype="bidirectional"/>
+      <node ref="U4" pin="7" pinfunction="SDI/SDA_7" pintype="unspecified"/>
+      <node ref="U5" pin="A1" pinfunction="SDA_A1" pintype="bidirectional"/>
+      <node ref="U6" pin="6" pinfunction="SDA_6" pintype="unspecified"/>
+      <node ref="U7" pin="4" pinfunction="SDA/SDI/SDO_4" pintype="bidirectional"/>
+    </net>
+    <net code="34" name="SWCLK" class="Default">
+      <node ref="J20" pin="4" pinfunction="SWCLK_4" pintype="output"/>
+      <node ref="U2" pin="8" pinfunction="SWCLK/PA14_8" pintype="bidirectional"/>
+    </net>
+    <net code="35" name="SWDIO" class="Default">
+      <node ref="J20" pin="2" pinfunction="SWDIO_2" pintype="bidirectional"/>
+      <node ref="U2" pin="7" pinfunction="SWDIO/PA13_7" pintype="bidirectional"/>
+    </net>
+    <net code="36" name="TX" class="Default">
+      <node ref="J4" pin="4" pinfunction="Pin_4_4" pintype="passive"/>
+      <node ref="R16" pin="1" pintype="passive"/>
+      <node ref="U2" pin="4" pinfunction="UART1_TX/PB6_4" pintype="bidirectional"/>
+    </net>
+    <net code="37" name="VSTOR" class="Default">
+      <node ref="C3" pin="1" pintype="passive"/>
+      <node ref="C4" pin="1" pintype="passive"/>
+      <node ref="J4" pin="2" pinfunction="Pin_2_2" pintype="passive"/>
+      <node ref="R22" pin="1" pintype="passive"/>
+      <node ref="U1" pin="19" pinfunction="VSTOR_19" pintype="input"/>
+      <node ref="U1" pin="3" pinfunction="VOC_SAMP_3" pintype="input"/>
+      <node ref="U1" pin="6" pinfunction="VOUT_EN_6" pintype="input"/>
+    </net>
+    <net code="38" name="unconnected-(J20-SWO-Pad6)" class="Default">
+      <node ref="J20" pin="6" pinfunction="SWO_6" pintype="input"/>
+    </net>
+    <net code="39" name="unconnected-(U2-MISO/PA6-Pad14)" class="Default">
+      <node ref="U2" pin="14" pinfunction="MISO/PA6_14" pintype="bidirectional"/>
+    </net>
+    <net code="40" name="unconnected-(U2-MOSI/PA7-Pad13)" class="Default">
+      <node ref="U2" pin="13" pinfunction="MOSI/PA7_13" pintype="bidirectional"/>
+    </net>
+    <net code="41" name="unconnected-(U2-PB3/ADC1-Pad32)" class="Default">
+      <node ref="U2" pin="32" pinfunction="PB3/ADC1_32" pintype="bidirectional+no_connect"/>
+    </net>
+    <net code="42" name="unconnected-(U2-PB4/ADC2-Pad31)" class="Default">
+      <node ref="U2" pin="31" pinfunction="PB4/ADC2_31" pintype="bidirectional+no_connect"/>
+    </net>
+    <net code="43" name="unconnected-(U2-PB12-Pad27)" class="Default">
+      <node ref="U2" pin="27" pinfunction="PB12_27" pintype="bidirectional"/>
+    </net>
+    <net code="44" name="unconnected-(U2-SCK/PA5-Pad15)" class="Default">
+      <node ref="U2" pin="15" pinfunction="SCK/PA5_15" pintype="bidirectional"/>
+    </net>
+    <net code="45" name="unconnected-(U2-SS/PA4-Pad16)" class="Default">
+      <node ref="U2" pin="16" pinfunction="SS/PA4_16" pintype="bidirectional"/>
+    </net>
+    <net code="46" name="unconnected-(U2-UART2_RX/PA3-Pad1)" class="Default">
+      <node ref="U2" pin="1" pinfunction="UART2_RX/PA3_1" pintype="bidirectional"/>
+    </net>
+    <net code="47" name="unconnected-(U2-UART2_TX/PA2-Pad2)" class="Default">
+      <node ref="U2" pin="2" pinfunction="UART2_TX/PA2_2" pintype="bidirectional"/>
+    </net>
+    <net code="48" name="unconnected-(U3-LNA_EN-Pad13)" class="Default">
+      <node ref="U3" pin="13" pinfunction="LNA_EN_13" pintype="unspecified"/>
+    </net>
+    <net code="49" name="unconnected-(U3-SAFEBOOT_N-Pad18)" class="Default">
+      <node ref="U3" pin="18" pinfunction="SAFEBOOT_N_18" pintype="unspecified"/>
+    </net>
+    <net code="50" name="unconnected-(U3-TIMEPULSE-Pad4)" class="Default">
+      <node ref="U3" pin="4" pinfunction="TIMEPULSE_4" pintype="unspecified"/>
+    </net>
+    <net code="51" name="unconnected-(U3-VCC_RF-Pad14)" class="Default">
+      <node ref="U3" pin="14" pinfunction="VCC_RF_14" pintype="unspecified"/>
+    </net>
+    <net code="52" name="unconnected-(U3-VIO_SEL-Pad15)" class="Default">
+      <node ref="U3" pin="15" pinfunction="VIO_SEL_15" pintype="unspecified"/>
+    </net>
+    <net code="53" name="unconnected-(U4-SDO-Pad6)" class="Default">
+      <node ref="U4" pin="6" pinfunction="SDO_6" pintype="unspecified"/>
+    </net>
+    <net code="54" name="unconnected-(U6-NC-Pad2)" class="Default">
+      <node ref="U6" pin="2" pinfunction="NC_2" pintype="unspecified"/>
+    </net>
+    <net code="55" name="unconnected-(U7-INT2-Pad11)" class="Default">
+      <node ref="U7" pin="11" pinfunction="INT2_11" pintype="output"/>
+    </net>
+  </nets>
+</export>

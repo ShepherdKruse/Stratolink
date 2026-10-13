@@ -1,0 +1,45 @@
+{
+  "status": "PASS",
+  "candidate": "/Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/power/balancer-reviewed",
+  "candidate_sha256": {
+    "stratolink.kicad_pcb": "3bf0023e309336249e90deb1f52270f4108e61e40b558b4ec56a1df768ae1d4c",
+    "stratolink.kicad_sch": "7bd031d5b4a2ffcc22f4e8a04f664771204c4796c048ee348f0a95bebc1ef024",
+    "stratolink.kicad_pro": "83f13e321d5736275dfa64d379330b4076344a9ffebb3021ccf3aee6c064cce9"
+  },
+  "baseline": "/Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/integrated-u7-r2",
+  "baseline_pcb_sha256": "ff06c79d4480b1d7614904daa753e1949fd64a065d76a948cc9995f25d6afb5f",
+  "geometry_baseline": "/Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/identities/baseline",
+  "geometry_baseline_pcb_sha256": "ea78337c91c73d27b813f09f74dd2d2993e5a82d09800362d82c49a0c4f3ed96",
+  "old_pad_count": 232,
+  "new_pad_count": 13,
+  "existing_physical_pad_islands_preserved": true,
+  "existing_pad_copper_polygons_all_copper_layers_and_drills_preserved": true,
+  "unconnected": 0,
+  "feedback_before_22ohm": true,
+  "schematic_and_pcb_expected_pins": {
+    "U8.1": "SC_BAL_OUT",
+    "U8.2": "GND",
+    "U8.3": "SC_HALF_REF",
+    "U8.4": "SC_BAL_OUT",
+    "U8.5": "VBAT",
+    "R24.1": "VBAT",
+    "R24.2": "SC_HALF_REF",
+    "R25.1": "SC_HALF_REF",
+    "R25.2": "GND",
+    "R26.1": "SC_BAL_OUT",
+    "R26.2": "SC_MID",
+    "C22.1": "VBAT",
+    "C22.2": "GND",
+    "C5.1": "VBAT",
+    "C5.2": "GND",
+    "C5.3": "SC_MID"
+  },
+  "selected_values": {
+    "U8": "TLV8801DBVT",
+    "R1": "7.50M\u03a9",
+    "R24": "4.75M\u03a9",
+    "R25": "4.75M\u03a9",
+    "R26": "22\u03a9",
+    "C22": "100nF"
+  }
+}

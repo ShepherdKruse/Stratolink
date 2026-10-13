@@ -198,15 +198,23 @@
 // --- Programmed voltage thresholds (from resistor dividers R1-R8) ---
 // These are hardware-set by resistors and cannot be changed in firmware.
 //
-// VBAT_OK_RISE/FALL: as-built. Saleae captures on board #3 (2026-04-29) showed
-// the buck enabling at VSTOR ~2.0V, not the originally-spec'd 3.51V. The
-// OK_PROG/OK_HYST resistor stuff (R5/R6/R7) was populated for ~2V, so MCU
-// can wake at lower VSTOR but operates in buck dropout (VOUT ≈ VSTOR - 0.2V)
-// until VSTOR > ~3.5V, at which point VOUT regulates to the 3.3V setpoint.
+// R3=4.75M, R4=3.65M, R5=4.42M program VBAT_OK; these are nominal
+// computed thresholds, not measured limits. The board #3 capture on 2026-04-29
+// showed boot near VSTOR=2.0V, but VOUT_EN is tied directly to VSTOR, so boot
+// does not establish a VBAT_OK edge. Verify PB5 against measured VSTOR.
+// R1 changes only on the explicit v1.1 hardware variant; microphone presence
+// is not a reliable identifier for the fitted charge-divider value.
+#ifndef STRATOLINK_HW_V1_1
+#define STRATOLINK_HW_V1_1          0
+#endif
 #define BQ25570_VOUT_NOMINAL_MV     3312  // Buck output (VOUT_SET divider)
+#if STRATOLINK_HW_V1_1
+#define BQ25570_VBAT_OV_MV          5041  // R1=7.50M, R2=4.22M; nominal only
+#else
 #define BQ25570_VBAT_OV_MV          5363  // Nominal divider result, not a tolerance-safe maximum
-#define BQ25570_VBAT_OK_RISE_MV     2000  // observed; was 3510 in original spec
-#define BQ25570_VBAT_OK_FALL_MV     1620  // computed from R5/R6/R7; verify on bench
+#endif
+#define BQ25570_VBAT_OK_RISE_MV     3510  // Computed from R3/R4/R5; verify on bench
+#define BQ25570_VBAT_OK_FALL_MV     2510  // Computed from R3/R5; verify on bench
 #define BQ25570_BUCK_REGULATION_V   3.5f  // VSTOR above which buck holds 3.3V
 
 // --- VOUT_EN: buck converter enable (directly connected to VSTOR) ---
@@ -214,28 +222,30 @@
 
 // --- Energy budget constants ---
 //
-// Supercap energy model only: exact part is 0.8-1.2 F, nominal VSTOR ceiling
-// ~5.36 V. Historical models used ~2.51 V as an illustrative endpoint.
+// Supercap energy model only: exact part is 0.8-1.2 F. Nominal charge ceiling
+// is ~5.36 V on v1 and ~5.04 V on v1.1. Historical models used ~2.51 V as an
+// illustrative endpoint, not a measured operating floor.
 // This nominal ceiling is not a safety bound: the fitted 1% divider does not
 // meet the 0.1% resistor condition on TI's +/-2% threshold specification.
 // See analysis/diagnostics/supercap_charge_ceiling_audit.py before solar HIL.
 // Nor is Flight 3's reported ~3.32 V plateau a measured BOR/VSTOR floor: its
 // fixed-VDDA ADC lost rail observability in buck dropout. Select the real
 // energy endpoint and load gates only from exact-assembly PPK2 low-rail HIL.
-// Legacy nominal model: 0.5 × 1 F × (5.36² - 2.51²) ≈ 11.2 J.
-//
-// Sleep baseline: ~7.5 µA total system → ~1.3 J over 12 hours
-// GPS hot-start + LoRa TX: ~0.3 J per cycle (varies with fix time)
-//
-// Night survival: dropping GPS at night and running baro + LoRa beacons
-// every 30 min uses ~1.6 J total over 12 hours — easily survivable.
-// GPS hot-starts every 30 min at night exceeds the budget.
-// GPS every 2 hours at night is tight but possible.
+// Nominal model: 0.5 × 1 F × (Vmax² - 2.51²) gives ~11.2 J on v1 or
+// ~9.55 J on v1.1. This does not establish night endurance; measure leakage,
+// cold ESR, residual GNSS draw and debugger-free dark/sunrise recovery.
+// The intended night mode has no RF or GNSS operation. The board does not
+// physically isolate the GNSS supply, so verify actual sleep current.
 
 #define SUPERCAP_CAPACITANCE_F      1.0f
+#if STRATOLINK_HW_V1_1
+#define SUPERCAP_MAX_V              5.041f // Nominal energy-model ceiling only
+#define SUPERCAP_ENERGY_J           9.55f  // 0.5 × C × (Vmax² - Vmin²)
+#else
 #define SUPERCAP_MAX_V              5.36f  // Nominal energy-model ceiling only
-#define SUPERCAP_MIN_V              2.51f  // Below VBAT_OK_FALL
 #define SUPERCAP_ENERGY_J           11.2f  // 0.5 × C × (Vmax² - Vmin²)
+#endif
+#define SUPERCAP_MIN_V              2.51f  // Historical illustrative energy endpoint
 #define SYSTEM_SLEEP_CURRENT_UA     7.5f   // Legacy measured system target; remeasure in STOP1
 
 // --- Graduated power shedding thresholds (suggested, tune empirically) ---

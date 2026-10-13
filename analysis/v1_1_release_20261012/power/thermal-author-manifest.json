@@ -1,0 +1,31 @@
+{
+  "pcb_sha256": "3bf0023e309336249e90deb1f52270f4108e61e40b558b4ec56a1df768ae1d4c",
+  "changes": [
+    {
+      "reference": "D3",
+      "pad": "1",
+      "pad_uuid": "390842f8-d9d4-4229-8ca4-a68fac8e12f8",
+      "before": {
+        "thermal_gap": null,
+        "thermal_bridge_width": null
+      },
+      "after": {
+        "thermal_gap": 0.25,
+        "thermal_bridge_width": 0.25
+      }
+    },
+    {
+      "reference": "J4",
+      "pad": "1",
+      "pad_uuid": "0650b567-d648-499e-addc-ea01fac7e599",
+      "before": {
+        "thermal_gap": null,
+        "thermal_bridge_width": null
+      },
+      "after": {
+        "thermal_gap": 0.25,
+        "thermal_bridge_width": 0.25
+      }
+    }
+  ]
+}

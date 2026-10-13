@@ -1,4 +1,9 @@
 (sym_lib_table
  (version 7)
  (lib (name "TMP117NAIYBGR")(type "KiCad")(uri "${KIPRJMOD}/lib/TMP117NAIYBGR.kicad_sym")(options "")(descr "TI SNOSD82D YBG ball map corrected for v1.1"))
+ (lib (name "Stratolink_Release")(type "KiCad")(uri "${KIPRJMOD}/lib/Stratolink_Release.kicad_sym")(options "")(descr "Verified v1.1 component identity"))
+
+(lib (name "Stratolink_Power")(type "KiCad")(uri "${KIPRJMOD}/lib/Stratolink_Power.kicad_sym")(options "")(descr "v1.1 active capacitor balance symbols"))
+
+(lib (name "Stratolink_v1p1_Symbols")(type "KiCad")(uri "${KIPRJMOD}/lib/Stratolink_v1p1_Symbols.kicad_sym")(options "")(descr "Frozen embedded v1.1 symbols; datasheet-derived electrical types"))
 )

@@ -1,0 +1,72 @@
+09:47:10 AM: Debug: Adding duplicate image handler for 'PNG file'
+09:47:10 AM: Debug: Adding duplicate image handler for 'JPEG file'
+09:47:10 AM: Debug: Adding duplicate image handler for 'TIFF file'
+09:47:10 AM: Debug: Adding duplicate image handler for 'GIF file'
+09:47:10 AM: Debug: Adding duplicate image handler for 'PNM file'
+09:47:10 AM: Debug: Adding duplicate image handler for 'PCX file'
+09:47:10 AM: Debug: Adding duplicate image handler for 'IFF file'
+09:47:10 AM: Debug: Adding duplicate image handler for 'Windows icon file'
+09:47:10 AM: Debug: Adding duplicate image handler for 'Windows cursor file'
+09:47:10 AM: Debug: Adding duplicate image handler for 'Windows animated cursor file'
+09:47:10 AM: Debug: Adding duplicate image handler for 'TGA file'
+09:47:10 AM: Debug: Adding duplicate image handler for 'XPM file'
+09:47:10 AM: Debug: Adding duplicate image handler for 'PNG file'
+09:47:10 AM: Debug: Adding duplicate image handler for 'JPEG file'
+09:47:10 AM: Debug: Adding duplicate image handler for 'TIFF file'
+09:47:10 AM: Debug: Adding duplicate image handler for 'GIF file'
+09:47:10 AM: Debug: Adding duplicate image handler for 'PNM file'
+09:47:10 AM: Debug: Adding duplicate image handler for 'PCX file'
+09:47:10 AM: Debug: Adding duplicate image handler for 'IFF file'
+09:47:10 AM: Debug: Adding duplicate image handler for 'Windows icon file'
+09:47:10 AM: Debug: Adding duplicate image handler for 'Windows cursor file'
+09:47:10 AM: Debug: Adding duplicate image handler for 'Windows animated cursor file'
+09:47:10 AM: Debug: Adding duplicate image handler for 'TGA file'
+09:47:10 AM: Debug: Adding duplicate image handler for 'XPM file'
+{
+  "output": "/Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/final-preflight-export",
+  "pcb_sha256": "490af47db22ef076938c17319782f194623d8f8b6a3f864a2e0cc23b3d025b15",
+  "assembly_count": 56,
+  "exclusions": [
+    {
+      "ref": "AE1",
+      "reason": "manual assembly / no purchased placement"
+    },
+    {
+      "ref": "AE2",
+      "reason": "manual assembly / no purchased placement"
+    },
+    {
+      "ref": "C5",
+      "reason": "manual assembly / no purchased placement"
+    },
+    {
+      "ref": "H1",
+      "reason": "mechanical board-only feature"
+    },
+    {
+      "ref": "H2",
+      "reason": "mechanical board-only feature"
+    },
+    {
+      "ref": "J1",
+      "reason": "manual assembly / no purchased placement"
+    },
+    {
+      "ref": "J2",
+      "reason": "manual assembly / no purchased placement"
+    },
+    {
+      "ref": "J3",
+      "reason": "manual assembly / no purchased placement"
+    },
+    {
+      "ref": "J4",
+      "reason": "manual assembly / no purchased placement"
+    },
+    {
+      "ref": "J20",
+      "reason": "manual assembly / no purchased placement"
+    }
+  ],
+  "source_unchanged": true
+}

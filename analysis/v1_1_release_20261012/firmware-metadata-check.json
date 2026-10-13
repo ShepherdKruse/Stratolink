@@ -1,0 +1,55 @@
+{
+  "status": "PASS",
+  "purpose": "Nominal metadata variants are explicit and independent of microphone presence; unchanged runtime policy",
+  "header_sha256": "0ef610402ffa401fcd502c6385fdc443bd9fc5c40eb50e1069ada46a82cd4820",
+  "platformio_ini_sha256": "0cd71e12d3db130b32effc7809637323c360fac514e094051021188c65603708",
+  "cases": [
+    {
+      "flags": [],
+      "values": {
+        "BQ25570_VBAT_OV_MV": "5363",
+        "BQ25570_VBAT_OK_RISE_MV": "3510",
+        "BQ25570_VBAT_OK_FALL_MV": "2510",
+        "SUPERCAP_MAX_V": "5.36f",
+        "SUPERCAP_ENERGY_J": "11.2f"
+      }
+    },
+    {
+      "flags": [
+        "-DSTRATOLINK_MIC_PRESENT=0"
+      ],
+      "values": {
+        "BQ25570_VBAT_OV_MV": "5363",
+        "BQ25570_VBAT_OK_RISE_MV": "3510",
+        "BQ25570_VBAT_OK_FALL_MV": "2510",
+        "SUPERCAP_MAX_V": "5.36f",
+        "SUPERCAP_ENERGY_J": "11.2f"
+      }
+    },
+    {
+      "flags": [
+        "-DSTRATOLINK_HW_V1_1=1"
+      ],
+      "values": {
+        "BQ25570_VBAT_OV_MV": "5041",
+        "BQ25570_VBAT_OK_RISE_MV": "3510",
+        "BQ25570_VBAT_OK_FALL_MV": "2510",
+        "SUPERCAP_MAX_V": "5.041f",
+        "SUPERCAP_ENERGY_J": "9.55f"
+      }
+    },
+    {
+      "flags": [
+        "-DSTRATOLINK_HW_V1_1=1",
+        "-DSTRATOLINK_MIC_PRESENT=0"
+      ],
+      "values": {
+        "BQ25570_VBAT_OV_MV": "5041",
+        "BQ25570_VBAT_OK_RISE_MV": "3510",
+        "BQ25570_VBAT_OK_FALL_MV": "2510",
+        "SUPERCAP_MAX_V": "5.041f",
+        "SUPERCAP_ENERGY_J": "9.55f"
+      }
+    }
+  ]
+}

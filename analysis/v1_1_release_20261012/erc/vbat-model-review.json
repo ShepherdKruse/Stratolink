@@ -1,0 +1,34 @@
+{
+  "scope": "Pin-model correction evidence; power layout snapshot is provisional/unrouted",
+  "decision": "U1.18 VBAT power_in with actual C5.1 reservoir PWR_FLAG. No fourth ERC exclusion.",
+  "reason": "TI I/O denotes charge/discharge energy flow, not logic IO contention. KiCad power-terminal model preserves drive checks.",
+  "official_installed_library": "/Applications/KiCad/KiCad.app/Contents/SharedSupport/symbols/Battery_Management.kicad_sym",
+  "official_library_sha256": "c7a22a6d4c12c0f011b02b7266a1a73de47ec105d2dd1efe8c4a9a54a123ce41",
+  "official_pin": {
+    "number": "18",
+    "name": "VBAT",
+    "type": "power_in"
+  },
+  "primary_sources": [
+    "https://docs.kicad.org/10.0/en/eeschema/eeschema.html#pin-electrical-types",
+    "https://klc.kicad.org/symbol/s4/s4.4/",
+    "https://www.ti.com/lit/ds/symlink/bq25570.pdf"
+  ],
+  "failed_model": {
+    "path": "/Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/power-merge-erc-trial",
+    "pcb_sha256": "da32d526564f2c1f31ff8916aaa041394cdf18edc55257b62da3eff3fd889af0",
+    "schematic_sha256": "10b7281cfd1409bc47be26af9d7d15f1931630c78bbcd1546e5667674ba19a1b",
+    "raw_erc_sha256": "31da434a7133a0f631b760545d4d95f34e91b2ceb678aa3129f08d2a18424fca"
+  },
+  "corrected_model": {
+    "path": "/Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/power-merge-erc-power-model-trial",
+    "pcb_sha256": "d6ff2a8f15807e8070a4a45ec26d0e9daf7d70a7ae6913919f7ca9ac5bcd79a8",
+    "schematic_sha256": "8cd758fcdd4ae8c44a81768ebeccbe091215ae4b2ef44f246600e3e857698993",
+    "raw_errors": 2,
+    "raw_warnings": 1,
+    "filtered_findings": 0,
+    "exact_exclusions": 3
+  },
+  "script_sha256": "9733270c1b3229440a1d72634c70fc4357902a682a95499531249984160ce7d1",
+  "verifier_sha256": "01fecada582caff0c17b6ab01921358350a7a386e12cba26e3bb9c4c0b92cc11"
+}

@@ -1,0 +1,592 @@
+{
+  "status": "PASS",
+  "pcb_sha256": "490af47db22ef076938c17319782f194623d8f8b6a3f864a2e0cc23b3d025b15",
+  "schematic_sha256": "044984037a7346adc92ee9ea142e6c285ee7f6b66efc87e0a1ad195495379cc9",
+  "baseline_pcb_sha256": "ff06c79d4480b1d7614904daa753e1949fd64a065d76a948cc9995f25d6afb5f",
+  "author_pcb_sha256": "3bf0023e309336249e90deb1f52270f4108e61e40b558b4ec56a1df768ae1d4c",
+  "retained_conductor_count": 996,
+  "retained_conductors_exact_except_VBAT_rename": true,
+  "removed_conductors_exact_author_scope": 28,
+  "added_conductors_exact_author_scope": 353,
+  "zone_outlines_and_parameters_exact": 4,
+  "board_artwork_and_edge_geometry_exact": 32,
+  "new_13_pad_nodes_exact_author_geometry_and_nets": true,
+  "footprint_count": 66,
+  "all_component_and_model_registrations_equal_frozen_reviewed_source": true,
+  "registrations": {
+    "C19": {
+      "at": [
+        "70.227001",
+        "35.953",
+        "180"
+      ],
+      "layer": "F.Cu",
+      "model_count": 1
+    },
+    "C10": {
+      "at": [
+        "58.306",
+        "47.267",
+        "90"
+      ],
+      "layer": "F.Cu",
+      "model_count": 1
+    },
+    "C14": {
+      "at": [
+        "67.313",
+        "40.211",
+        "90"
+      ],
+      "layer": "F.Cu",
+      "model_count": 1
+    },
+    "AE2": {
+      "at": [
+        "62.882",
+        "33.218",
+        "90"
+      ],
+      "layer": "F.Cu",
+      "model_count": 1
+    },
+    "U6": {
+      "at": [
+        "69.098",
+        "40.606"
+      ],
+      "layer": "F.Cu",
+      "model_count": 1
+    },
+    "U4": {
+      "at": [
+        "71.023",
+        "58.808"
+      ],
+      "layer": "F.Cu",
+      "model_count": 1
+    },
+    "R19": {
+      "at": [
+        "55.618",
+        "83.313"
+      ],
+      "layer": "F.Cu",
+      "model_count": 1
+    },
+    "R14": {
+      "at": [
+        "67.550999",
+        "54.408"
+      ],
+      "layer": "F.Cu",
+      "model_count": 1
+    },
+    "R12": {
+      "at": [
+        "74.642",
+        "77.899",
+        "180"
+      ],
+      "layer": "F.Cu",
+      "model_count": 1
+    },
+    "U7": {
+      "at": [
+        "70.548",
+        "37.807",
+        "90"
+      ],
+      "layer": "F.Cu",
+      "model_count": 1
+    },
+    "J4": {
+      "at": [
+        "75.531",
+        "69.158"
+      ],
+      "layer": "F.Cu",
+      "model_count": 0
+    },
+    "R21": {
+      "at": [
+        "55.637",
+        "82.209999",
+        "180"
+      ],
+      "layer": "F.Cu",
+      "model_count": 1
+    },
+    "C15": {
+      "at": [
+        "55.647999",
+        "81.063998"
+      ],
+      "layer": "F.Cu",
+      "model_count": 1
+    },
+    "J2": {
+      "at": [
+        "53.3165",
+        "54.5"
+      ],
+      "layer": "F.Cu",
+      "model_count": 1
+    },
+    "U2": {
+      "at": [
+        "72.715",
+        "64.66",
+        "180"
+      ],
+      "layer": "F.Cu",
+      "model_count": 1
+    },
+    "C8": {
+      "at": [
+        "58.467002",
+        "61.430999",
+        "180"
+      ],
+      "layer": "F.Cu",
+      "model_count": 1
+    },
+    "U3": {
+      "at": [
+        "65.537",
+        "48.414",
+        "180"
+      ],
+      "layer": "F.Cu",
+      "model_count": 1
+    },
+    "C9": {
+      "at": [
+        "62.938002",
+        "62.698999",
+        "180"
+      ],
+      "layer": "F.Cu",
+      "model_count": 1
+    },
+    "C20": {
+      "at": [
+        "68.703",
+        "37.4",
+        "90"
+      ],
+      "layer": "F.Cu",
+      "model_count": 1
+    },
+    "R10": {
+      "at": [
+        "61.198",
+        "62.074001",
+        "-90"
+      ],
+      "layer": "F.Cu",
+      "model_count": 1
+    },
+    "R9": {
+      "at": [
+        "64.666999",
+        "62.062001",
+        "-90"
+      ],
+      "layer": "F.Cu",
+      "model_count": 1
+    },
+    "U5": {
+      "at": [
+        "73.148",
+        "40.864"
+      ],
+      "layer": "F.Cu",
+      "model_count": 1
+    },
+    "J1": {
+      "at": [
+        "76.6755",
+        "54.5"
+      ],
+      "layer": "F.Cu",
+      "model_count": 1
+    },
+    "R11": {
+      "at": [
+        "74.648001",
+        "79.004996",
+        "180"
+      ],
+      "layer": "F.Cu",
+      "model_count": 1
+    },
+    "J20": {
+      "at": [
+        "60.304",
+        "83.688"
+      ],
+      "layer": "F.Cu",
+      "model_count": 0
+    },
+    "R13": {
+      "at": [
+        "67.552",
+        "55.547"
+      ],
+      "layer": "F.Cu",
+      "model_count": 1
+    },
+    "R15": {
+      "at": [
+        "73.578",
+        "51.71",
+        "180"
+      ],
+      "layer": "F.Cu",
+      "model_count": 1
+    },
+    "R18": {
+      "at": [
+        "73.583",
+        "44.545",
+        "90"
+      ],
+      "layer": "F.Cu",
+      "model_count": 1
+    },
+    "C12": {
+      "at": [
+        "71.156",
+        "41.622",
+        "-90"
+      ],
+      "layer": "F.Cu",
+      "model_count": 1
+    },
+    "D1": {
+      "at": [
+        "71.058",
+        "82.813",
+        "180"
+      ],
+      "layer": "F.Cu",
+      "model_count": 1
+    },
+    "C21": {
+      "at": [
+        "70.262",
+        "34.647",
+        "180"
+      ],
+      "layer": "F.Cu",
+      "model_count": 1
+    },
+    "R23": {
+      "at": [
+        "55.692",
+        "66.193999",
+        "90"
+      ],
+      "layer": "F.Cu",
+      "model_count": 1
+    },
+    "C7": {
+      "at": [
+        "58.477",
+        "62.720001",
+        "180"
+      ],
+      "layer": "F.Cu",
+      "model_count": 1
+    },
+    "J3": {
+      "at": [
+        "54.444998",
+        "69.173998"
+      ],
+      "layer": "F.Cu",
+      "model_count": 0
+    },
+    "C17": {
+      "at": [
+        "55.113",
+        "67.702999"
+      ],
+      "layer": "F.Cu",
+      "model_count": 1
+    },
+    "H2": {
+      "at": [
+        "74.327",
+        "31.745"
+      ],
+      "layer": "F.Cu",
+      "model_count": 0
+    },
+    "AE1": {
+      "at": [
+        "68.396",
+        "82.703",
+        "-90"
+      ],
+      "layer": "F.Cu",
+      "model_count": 1
+    },
+    "R16": {
+      "at": [
+        "73.566",
+        "50.575",
+        "180"
+      ],
+      "layer": "F.Cu",
+      "model_count": 1
+    },
+    "R22": {
+      "at": [
+        "54.573",
+        "66.188999",
+        "-90"
+      ],
+      "layer": "F.Cu",
+      "model_count": 1
+    },
+    "C11": {
+      "at": [
+        "68.212",
+        "58.003",
+        "90"
+      ],
+      "layer": "F.Cu",
+      "model_count": 1
+    },
+    "H1": {
+      "at": [
+        "55.665",
+        "31.745"
+      ],
+      "layer": "F.Cu",
+      "model_count": 0
+    },
+    "D3": {
+      "at": [
+        "60.306",
+        "37.391",
+        "90"
+      ],
+      "layer": "F.Cu",
+      "model_count": 1
+    },
+    "FB1": {
+      "at": [
+        "56.414",
+        "50.858",
+        "-90"
+      ],
+      "layer": "F.Cu",
+      "model_count": 1
+    },
+    "C16": {
+      "at": [
+        "66.057",
+        "40.324",
+        "90"
+      ],
+      "layer": "F.Cu",
+      "model_count": 1
+    },
+    "R7": {
+      "at": [
+        "71.67",
+        "34.175",
+        "90"
+      ],
+      "layer": "B.Cu",
+      "model_count": 1
+    },
+    "C5": {
+      "at": [
+        "64.875",
+        "64.707",
+        "180"
+      ],
+      "layer": "B.Cu",
+      "model_count": 1
+    },
+    "L2": {
+      "at": [
+        "70.172",
+        "41.22"
+      ],
+      "layer": "B.Cu",
+      "model_count": 1
+    },
+    "R26": {
+      "at": [
+        "61.2",
+        "42.5",
+        "-90"
+      ],
+      "layer": "B.Cu",
+      "model_count": 1
+    },
+    "R1": {
+      "at": [
+        "65.934",
+        "34.206",
+        "-90"
+      ],
+      "layer": "B.Cu",
+      "model_count": 1
+    },
+    "R8": {
+      "at": [
+        "70.97",
+        "36.276"
+      ],
+      "layer": "B.Cu",
+      "model_count": 1
+    },
+    "R25": {
+      "at": [
+        "58.65",
+        "34.9"
+      ],
+      "layer": "B.Cu",
+      "model_count": 1
+    },
+    "R24": {
+      "at": [
+        "57.4",
+        "33.9",
+        "180"
+      ],
+      "layer": "B.Cu",
+      "model_count": 1
+    },
+    "U8": {
+      "at": [
+        "55.65",
+        "36.1"
+      ],
+      "layer": "B.Cu",
+      "model_count": 1
+    },
+    "C2": {
+      "at": [
+        "63.873",
+        "39.142",
+        "-90"
+      ],
+      "layer": "B.Cu",
+      "model_count": 1
+    },
+    "R5": {
+      "at": [
+        "69.447",
+        "34.198",
+        "90"
+      ],
+      "layer": "B.Cu",
+      "model_count": 1
+    },
+    "C4": {
+      "at": [
+        "65.975",
+        "40.709998",
+        "180"
+      ],
+      "layer": "B.Cu",
+      "model_count": 1
+    },
+    "U1": {
+      "at": [
+        "67.190998",
+        "37.814999"
+      ],
+      "layer": "B.Cu",
+      "model_count": 1
+    },
+    "C1": {
+      "at": [
+        "64.422",
+        "36.521",
+        "-90"
+      ],
+      "layer": "B.Cu",
+      "model_count": 1
+    },
+    "R6": {
+      "at": [
+        "70.557",
+        "34.194",
+        "-90"
+      ],
+      "layer": "B.Cu",
+      "model_count": 1
+    },
+    "C6": {
+      "at": [
+        "70.956",
+        "38.591",
+        "-90"
+      ],
+      "layer": "B.Cu",
+      "model_count": 1
+    },
+    "R2": {
+      "at": [
+        "64.847",
+        "34.212001",
+        "-90"
+      ],
+      "layer": "B.Cu",
+      "model_count": 1
+    },
+    "C3": {
+      "at": [
+        "65.880998",
+        "42.066998",
+        "180"
+      ],
+      "layer": "B.Cu",
+      "model_count": 1
+    },
+    "R3": {
+      "at": [
+        "68.354",
+        "34.198",
+        "-90"
+      ],
+      "layer": "B.Cu",
+      "model_count": 1
+    },
+    "L1": {
+      "at": [
+        "60.103",
+        "38.1865",
+        "90"
+      ],
+      "layer": "B.Cu",
+      "model_count": 1
+    },
+    "R4": {
+      "at": [
+        "67.023",
+        "34.213001",
+        "90"
+      ],
+      "layer": "B.Cu",
+      "model_count": 1
+    },
+    "C22": {
+      "at": [
+        "55.6",
+        "38.3",
+        "180"
+      ],
+      "layer": "B.Cu",
+      "model_count": 1
+    }
+  }
+}

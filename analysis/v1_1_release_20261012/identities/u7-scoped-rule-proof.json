@@ -1,0 +1,54 @@
+{
+  "status": "PASS",
+  "baseline_violations": 19,
+  "candidate_scoped_violations": 19,
+  "new_violations": 0,
+  "negative_control_new_violations": [
+    {
+      "description": "Clearance violation (rule 'U7 escape SCL to U6 SDA pad 6 - 0.12 mm' clearance 0.1300 mm; actual 0.1280 mm)",
+      "items": [
+        {
+          "description": "Pad 6 [SDA] of U6 on F.Cu",
+          "pos": {
+            "x": 69.987,
+            "y": 39.956001
+          },
+          "uuid": "588ebe7f-29ed-4912-9881-39e6b8083f25"
+        },
+        {
+          "description": "Track [SCL] on F.Cu, length 0.1081 mm",
+          "pos": {
+            "x": 69.6,
+            "y": 39.61
+          },
+          "uuid": "8ed15558-e942-5611-b684-2d7d259e2d82"
+        }
+      ],
+      "severity": "error",
+      "type": "clearance"
+    },
+    {
+      "description": "Clearance violation (rule 'U7 escape SCL to U6 SDA pad 6 - 0.12 mm' clearance 0.1300 mm; actual 0.1280 mm)",
+      "items": [
+        {
+          "description": "Pad 6 [SDA] of U6 on F.Cu",
+          "pos": {
+            "x": 69.987,
+            "y": 39.956001
+          },
+          "uuid": "588ebe7f-29ed-4912-9881-39e6b8083f25"
+        },
+        {
+          "description": "Track [SCL] on F.Cu, length 2.9690 mm",
+          "pos": {
+            "x": 69.7,
+            "y": 39.651
+          },
+          "uuid": "eba57b16-dcc4-5350-a3b5-8f698aab9b8d"
+        }
+      ],
+      "severity": "error",
+      "type": "clearance"
+    }
+  ]
+}

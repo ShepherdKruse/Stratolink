@@ -52,6 +52,7 @@ hardware/**/*.sch-bak
 hardware/**/*.pro-bak
 hardware/**/*.kicad_prl
 hardware/**/*.kicad_dru
+!hardware/pcb/stratolink.kicad_dru
 # Altium
 hardware/**/*.PrjPcbStructure
 hardware/**/*.SchDoc.Zip

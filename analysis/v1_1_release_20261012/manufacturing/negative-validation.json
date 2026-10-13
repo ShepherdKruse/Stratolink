@@ -1,0 +1,31 @@
+{
+  "source": "/Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/identities/metadata-candidate",
+  "source_pcb_sha256": "4d2e92f11d8f9164dfe0600c1dd1b72469ce6cc4fcc4ab0568df5c3312abf041",
+  "source_unchanged": true,
+  "cases": [
+    {
+      "case": "missing-supplier",
+      "expected_failure": "PCB/SCH missing or differing Supplier Part for R8",
+      "rejected": true,
+      "no_success_manifest": true
+    },
+    {
+      "case": "duplicate-ref",
+      "expected_failure": "Candidate PCB duplicate R10",
+      "rejected": true,
+      "no_success_manifest": true
+    },
+    {
+      "case": "missing-mask-opening",
+      "expected_failure": "No full-face opening rectangle",
+      "rejected": true,
+      "no_success_manifest": true
+    },
+    {
+      "case": "inconsistent-population",
+      "expected_failure": "Inconsistent BOM/placement exclusions for R8",
+      "rejected": true,
+      "no_success_manifest": true
+    }
+  ]
+}

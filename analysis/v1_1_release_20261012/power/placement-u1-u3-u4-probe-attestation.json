@@ -1,0 +1,58 @@
+{
+  "status": "SUPPLIER_PROBE_ORIENTATION_AND_CENTER_PASS",
+  "scope": [
+    "U1",
+    "U3",
+    "U4"
+  ],
+  "pcb_sha256": "490af47db22ef076938c17319782f194623d8f8b6a3f864a2e0cc23b3d025b15",
+  "native_center_evidence_sha256": "0afe7cbee3a4d6edb2850fb0e1abba648305c9a1e8e940fd7480ee0bc045bdd0",
+  "supplier_probe_path": "/Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/supplier-rotation-review/CPL-pin1-reviewed-probe.csv",
+  "supplier_probe_sha256": "eb8ef43bb3b1a6ee0b1efc3f3c1280f519686b6ba1fda44e61ace8cc6c4d1069",
+  "expected_CPL_rows": {
+    "U1": {
+      "Mid X": "67.190998",
+      "Mid Y": "-37.814999",
+      "Layer": "bottom",
+      "Rotation": "90.000000"
+    },
+    "U3": {
+      "Mid X": "65.537000",
+      "Mid Y": "-48.414000",
+      "Layer": "top",
+      "Rotation": "180.000000"
+    },
+    "U4": {
+      "Mid X": "71.023000",
+      "Mid Y": "-58.808000",
+      "Layer": "top",
+      "Rotation": "270.000000"
+    }
+  },
+  "screenshots_sha256": {
+    "/Users/twarn/Repositories/Stratolink/analysis/v1_1_release_20261012/jlc/placement-top-3d.png": "83cfa2bc878526d702211f171e8551ba2a4d1364bb666a6b56a0c9ca695283f7",
+    "/Users/twarn/Repositories/Stratolink/analysis/v1_1_release_20261012/jlc/probe-u1-90-crop.png": "6c99bb8a7bea5c0ba088706177db012cc20b407c33280f46b222dd4feb6832f7",
+    "/Users/twarn/Repositories/Stratolink/analysis/v1_1_release_20261012/jlc/probe-u4-270-crop.png": "b5895a0098007a37ff13e33d7a19237d8dc1aa99a9b2c49fe6438de9b1a4abdb",
+    "/Users/twarn/Repositories/Stratolink/analysis/v1_1_release_20261012/jlc/probe-u4-270-full.png": "01557d87bcd91f85a561ec33179eb5817060aa6ed7413db6898056d247abf4ed"
+  },
+  "visual_observations": {
+    "U1": "Both black index dot and external purple pin1 indicator lower-right in north-up bottom view.",
+    "U3": "Pin1 indicator lower-right in north-up top view, matching native pad1 and u-blox top-view numbering.",
+    "U4": "External purple pin1 indicator upper-left, 5mm body axis vertical. Black circle below center is pressure-port depiction, not pin1."
+  },
+  "center_change_mm": {
+    "U1": [
+      0,
+      0
+    ],
+    "U3": [
+      0,
+      0
+    ],
+    "U4": [
+      0,
+      0
+    ]
+  },
+  "limit": "Attests controlled supplier probe and these three references only; final profile/package generation must preserve reviewed rotations and XY. No CAD or CSV changes by this review."
+}

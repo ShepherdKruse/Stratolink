@@ -1,0 +1,2249 @@
+{
+  "assembly": {
+    "C1": {
+      "ref": "C1",
+      "value": "10nF",
+      "footprint": "Stratolink_v1p1_C1_C_0402_1005Metric",
+      "mpn": "GRM1555C1E103JE01D",
+      "lcsc": "C3855387",
+      "native_anchor_mm": [
+        64.422,
+        36.521
+      ],
+      "smd_pad_center_mm": [
+        64.422,
+        36.521
+      ],
+      "smd_pad_bounds_mm": [
+        64.112,
+        35.761,
+        64.732,
+        37.281
+      ],
+      "center_mm": [
+        64.422,
+        36.521
+      ],
+      "placement_method": "Placement-side SMD copper pad bounding center; excludes TH pads and all text/graphics/models",
+      "native_angle_deg": -90.0,
+      "rotation_deg": 270.0,
+      "side": "bottom",
+      "prior_cpl": {
+        "Designator": "C1",
+        "Val": "10nF",
+        "Package": "C_0402_1005Metric",
+        "Mid X": "64.422",
+        "Mid Y": "-36.521",
+        "Rotation": "270.0",
+        "Layer": "bottom"
+      },
+      "delta_from_prior_mm": [
+        0.0,
+        0.0
+      ],
+      "new_part": false
+    },
+    "C2": {
+      "ref": "C2",
+      "value": "4.7μF",
+      "footprint": "Stratolink_v1p1_C2_C_0603_1608Metric",
+      "mpn": "CL10A475KP8NNNC",
+      "lcsc": "C1705",
+      "native_anchor_mm": [
+        63.873,
+        39.142
+      ],
+      "smd_pad_center_mm": [
+        63.873,
+        39.142
+      ],
+      "smd_pad_bounds_mm": [
+        63.398,
+        37.917,
+        64.348,
+        40.367
+      ],
+      "center_mm": [
+        63.873,
+        39.142
+      ],
+      "placement_method": "Placement-side SMD copper pad bounding center; excludes TH pads and all text/graphics/models",
+      "native_angle_deg": -90.0,
+      "rotation_deg": 270.0,
+      "side": "bottom",
+      "prior_cpl": {
+        "Designator": "C2",
+        "Val": "4.7μF",
+        "Package": "C_0603_1608Metric",
+        "Mid X": "63.873",
+        "Mid Y": "-39.142",
+        "Rotation": "270.0",
+        "Layer": "bottom"
+      },
+      "delta_from_prior_mm": [
+        0.0,
+        0.0
+      ],
+      "new_part": false
+    },
+    "C3": {
+      "ref": "C3",
+      "value": "4.7μF",
+      "footprint": "Stratolink_v1p1_C3_C_0603_1608Metric",
+      "mpn": "CL10A475KP8NNNC",
+      "lcsc": "C1705",
+      "native_anchor_mm": [
+        65.880998,
+        42.066998
+      ],
+      "smd_pad_center_mm": [
+        65.880998,
+        42.066998
+      ],
+      "smd_pad_bounds_mm": [
+        64.655998,
+        41.591998,
+        67.105998,
+        42.541998
+      ],
+      "center_mm": [
+        65.880998,
+        42.066998
+      ],
+      "placement_method": "Placement-side SMD copper pad bounding center; excludes TH pads and all text/graphics/models",
+      "native_angle_deg": 180.0,
+      "rotation_deg": 0.0,
+      "side": "bottom",
+      "prior_cpl": {
+        "Designator": "C3",
+        "Val": "4.7μF",
+        "Package": "C_0603_1608Metric",
+        "Mid X": "65.880998",
+        "Mid Y": "-42.066998",
+        "Rotation": "0.0",
+        "Layer": "bottom"
+      },
+      "delta_from_prior_mm": [
+        0.0,
+        0.0
+      ],
+      "new_part": false
+    },
+    "C4": {
+      "ref": "C4",
+      "value": "100nF",
+      "footprint": "Stratolink_v1p1_C4_C_0402_1005Metric",
+      "mpn": "CL05B104KO5NNNC",
+      "lcsc": "C1525",
+      "native_anchor_mm": [
+        65.975,
+        40.709998
+      ],
+      "smd_pad_center_mm": [
+        65.975,
+        40.709998
+      ],
+      "smd_pad_bounds_mm": [
+        65.215,
+        40.399998,
+        66.735,
+        41.019998
+      ],
+      "center_mm": [
+        65.975,
+        40.709998
+      ],
+      "placement_method": "Placement-side SMD copper pad bounding center; excludes TH pads and all text/graphics/models",
+      "native_angle_deg": 180.0,
+      "rotation_deg": 0.0,
+      "side": "bottom",
+      "prior_cpl": {
+        "Designator": "C4",
+        "Val": "100nF",
+        "Package": "C_0402_1005Metric",
+        "Mid X": "65.975",
+        "Mid Y": "-40.709998",
+        "Rotation": "0.0",
+        "Layer": "bottom"
+      },
+      "delta_from_prior_mm": [
+        0.0,
+        0.0
+      ],
+      "new_part": false
+    },
+    "C6": {
+      "ref": "C6",
+      "value": "22µF",
+      "footprint": "Stratolink_v1p1_C6_C_0805_2012Metric",
+      "mpn": "CL21A226MAYNNNE",
+      "lcsc": "C602037",
+      "native_anchor_mm": [
+        70.956,
+        38.591
+      ],
+      "smd_pad_center_mm": [
+        70.956,
+        38.591
+      ],
+      "smd_pad_bounds_mm": [
+        70.231,
+        37.141002,
+        71.681,
+        40.040998
+      ],
+      "center_mm": [
+        70.956,
+        38.591
+      ],
+      "placement_method": "Placement-side SMD copper pad bounding center; excludes TH pads and all text/graphics/models",
+      "native_angle_deg": -90.0,
+      "rotation_deg": 270.0,
+      "side": "bottom",
+      "prior_cpl": {
+        "Designator": "C6",
+        "Val": "22µF",
+        "Package": "C_0805_2012Metric",
+        "Mid X": "70.956",
+        "Mid Y": "-38.591",
+        "Rotation": "270.0",
+        "Layer": "bottom"
+      },
+      "delta_from_prior_mm": [
+        0.0,
+        0.0
+      ],
+      "new_part": false
+    },
+    "C7": {
+      "ref": "C7",
+      "value": "100nF",
+      "footprint": "Stratolink_v1p1_C7_C_0402_1005Metric",
+      "mpn": "CL05B104KO5NNNC",
+      "lcsc": "C1525",
+      "native_anchor_mm": [
+        58.477,
+        62.720001
+      ],
+      "smd_pad_center_mm": [
+        58.477,
+        62.720001
+      ],
+      "smd_pad_bounds_mm": [
+        57.717,
+        62.410001,
+        59.237,
+        63.030001
+      ],
+      "center_mm": [
+        58.477,
+        62.720001
+      ],
+      "placement_method": "Placement-side SMD copper pad bounding center; excludes TH pads and all text/graphics/models",
+      "native_angle_deg": 180.0,
+      "rotation_deg": 180.0,
+      "side": "top",
+      "prior_cpl": {
+        "Designator": "C7",
+        "Val": "100nF",
+        "Package": "C_0402_1005Metric",
+        "Mid X": "58.477",
+        "Mid Y": "-62.720001",
+        "Rotation": "180.0",
+        "Layer": "top"
+      },
+      "delta_from_prior_mm": [
+        0.0,
+        0.0
+      ],
+      "new_part": false
+    },
+    "C8": {
+      "ref": "C8",
+      "value": "10μF",
+      "footprint": "Stratolink_v1p1_C8_C_0603_1608Metric",
+      "mpn": "CL10A106KP8NNNC",
+      "lcsc": "C19702",
+      "native_anchor_mm": [
+        58.467002,
+        61.430999
+      ],
+      "smd_pad_center_mm": [
+        58.467002,
+        61.430999
+      ],
+      "smd_pad_bounds_mm": [
+        57.242002,
+        60.955999,
+        59.692002,
+        61.905999
+      ],
+      "center_mm": [
+        58.467002,
+        61.430999
+      ],
+      "placement_method": "Placement-side SMD copper pad bounding center; excludes TH pads and all text/graphics/models",
+      "native_angle_deg": 180.0,
+      "rotation_deg": 180.0,
+      "side": "top",
+      "prior_cpl": {
+        "Designator": "C8",
+        "Val": "10μF",
+        "Package": "C_0603_1608Metric",
+        "Mid X": "58.467002",
+        "Mid Y": "-61.430999",
+        "Rotation": "180.0",
+        "Layer": "top"
+      },
+      "delta_from_prior_mm": [
+        0.0,
+        0.0
+      ],
+      "new_part": false
+    },
+    "C9": {
+      "ref": "C9",
+      "value": "100nF",
+      "footprint": "Stratolink_v1p1_C9_C_0402_1005Metric",
+      "mpn": "CL05B104KO5NNNC",
+      "lcsc": "C1525",
+      "native_anchor_mm": [
+        62.938002,
+        62.698999
+      ],
+      "smd_pad_center_mm": [
+        62.938002,
+        62.698999
+      ],
+      "smd_pad_bounds_mm": [
+        62.178002,
+        62.388999,
+        63.698002,
+        63.008999
+      ],
+      "center_mm": [
+        62.938002,
+        62.698999
+      ],
+      "placement_method": "Placement-side SMD copper pad bounding center; excludes TH pads and all text/graphics/models",
+      "native_angle_deg": 180.0,
+      "rotation_deg": 180.0,
+      "side": "top",
+      "prior_cpl": {
+        "Designator": "C9",
+        "Val": "100nF",
+        "Package": "C_0402_1005Metric",
+        "Mid X": "62.938002",
+        "Mid Y": "-62.698999",
+        "Rotation": "180.0",
+        "Layer": "top"
+      },
+      "delta_from_prior_mm": [
+        0.0,
+        0.0
+      ],
+      "new_part": false
+    },
+    "C10": {
+      "ref": "C10",
+      "value": "100nF",
+      "footprint": "Stratolink_v1p1_C10_C_0402_1005Metric",
+      "mpn": "CL05B104KO5NNNC",
+      "lcsc": "C1525",
+      "native_anchor_mm": [
+        58.306,
+        47.267
+      ],
+      "smd_pad_center_mm": [
+        58.306,
+        47.267
+      ],
+      "smd_pad_bounds_mm": [
+        57.996,
+        46.507,
+        58.616,
+        48.027
+      ],
+      "center_mm": [
+        58.306,
+        47.267
+      ],
+      "placement_method": "Placement-side SMD copper pad bounding center; excludes TH pads and all text/graphics/models",
+      "native_angle_deg": 90.0,
+      "rotation_deg": 90.0,
+      "side": "top",
+      "prior_cpl": {
+        "Designator": "C10",
+        "Val": "100nF",
+        "Package": "C_0402_1005Metric",
+        "Mid X": "58.306",
+        "Mid Y": "-47.267",
+        "Rotation": "90.0",
+        "Layer": "top"
+      },
+      "delta_from_prior_mm": [
+        0.0,
+        0.0
+      ],
+      "new_part": false
+    },
+    "C11": {
+      "ref": "C11",
+      "value": "100nF",
+      "footprint": "Stratolink_v1p1_C11_C_0402_1005Metric",
+      "mpn": "CL05B104KO5NNNC",
+      "lcsc": "C1525",
+      "native_anchor_mm": [
+        68.212,
+        58.003
+      ],
+      "smd_pad_center_mm": [
+        68.212,
+        58.003
+      ],
+      "smd_pad_bounds_mm": [
+        67.902,
+        57.243,
+        68.522,
+        58.763
+      ],
+      "center_mm": [
+        68.212,
+        58.003
+      ],
+      "placement_method": "Placement-side SMD copper pad bounding center; excludes TH pads and all text/graphics/models",
+      "native_angle_deg": 90.0,
+      "rotation_deg": 90.0,
+      "side": "top",
+      "prior_cpl": {
+        "Designator": "C11",
+        "Val": "100nF",
+        "Package": "C_0402_1005Metric",
+        "Mid X": "68.212",
+        "Mid Y": "-58.003",
+        "Rotation": "90.0",
+        "Layer": "top"
+      },
+      "delta_from_prior_mm": [
+        0.0,
+        0.0
+      ],
+      "new_part": false
+    },
+    "C12": {
+      "ref": "C12",
+      "value": "100nF",
+      "footprint": "Stratolink_v1p1_C12_C_0402_1005Metric",
+      "mpn": "CL05B104KO5NNNC",
+      "lcsc": "C1525",
+      "native_anchor_mm": [
+        71.156,
+        41.622
+      ],
+      "smd_pad_center_mm": [
+        71.156,
+        41.622
+      ],
+      "smd_pad_bounds_mm": [
+        70.846,
+        40.862,
+        71.466,
+        42.382
+      ],
+      "center_mm": [
+        71.156,
+        41.622
+      ],
+      "placement_method": "Placement-side SMD copper pad bounding center; excludes TH pads and all text/graphics/models",
+      "native_angle_deg": -90.0,
+      "rotation_deg": 270.0,
+      "side": "top",
+      "prior_cpl": {
+        "Designator": "C12",
+        "Val": "100nF",
+        "Package": "C_0402_1005Metric",
+        "Mid X": "71.156",
+        "Mid Y": "-41.622",
+        "Rotation": "-90.0",
+        "Layer": "top"
+      },
+      "delta_from_prior_mm": [
+        0.0,
+        0.0
+      ],
+      "new_part": false
+    },
+    "C14": {
+      "ref": "C14",
+      "value": "100nF",
+      "footprint": "Stratolink_v1p1_C14_C_0402_1005Metric",
+      "mpn": "CL05B104KO5NNNC",
+      "lcsc": "C1525",
+      "native_anchor_mm": [
+        67.313,
+        40.211
+      ],
+      "smd_pad_center_mm": [
+        67.313,
+        40.211
+      ],
+      "smd_pad_bounds_mm": [
+        67.003,
+        39.451,
+        67.623,
+        40.971
+      ],
+      "center_mm": [
+        67.313,
+        40.211
+      ],
+      "placement_method": "Placement-side SMD copper pad bounding center; excludes TH pads and all text/graphics/models",
+      "native_angle_deg": 90.0,
+      "rotation_deg": 90.0,
+      "side": "top",
+      "prior_cpl": {
+        "Designator": "C14",
+        "Val": "100nF",
+        "Package": "C_0402_1005Metric",
+        "Mid X": "67.313",
+        "Mid Y": "-40.211",
+        "Rotation": "90.0",
+        "Layer": "top"
+      },
+      "delta_from_prior_mm": [
+        0.0,
+        0.0
+      ],
+      "new_part": false
+    },
+    "C15": {
+      "ref": "C15",
+      "value": "100nF",
+      "footprint": "Stratolink_v1p1_C15_C_0402_1005Metric",
+      "mpn": "CL05B104KO5NNNC",
+      "lcsc": "C1525",
+      "native_anchor_mm": [
+        55.647999,
+        81.063998
+      ],
+      "smd_pad_center_mm": [
+        55.647999,
+        81.063998
+      ],
+      "smd_pad_bounds_mm": [
+        54.887999,
+        80.753998,
+        56.407999,
+        81.373998
+      ],
+      "center_mm": [
+        55.647999,
+        81.063998
+      ],
+      "placement_method": "Placement-side SMD copper pad bounding center; excludes TH pads and all text/graphics/models",
+      "native_angle_deg": 0.0,
+      "rotation_deg": 0.0,
+      "side": "top",
+      "prior_cpl": {
+        "Designator": "C15",
+        "Val": "100nF",
+        "Package": "C_0402_1005Metric",
+        "Mid X": "55.647999",
+        "Mid Y": "-81.063998",
+        "Rotation": "0.0",
+        "Layer": "top"
+      },
+      "delta_from_prior_mm": [
+        0.0,
+        0.0
+      ],
+      "new_part": false
+    },
+    "C16": {
+      "ref": "C16",
+      "value": "4.7μF",
+      "footprint": "Stratolink_v1p1_C16_C_0603_1608Metric",
+      "mpn": "CL10A475KP8NNNC",
+      "lcsc": "C1705",
+      "native_anchor_mm": [
+        66.057,
+        40.324
+      ],
+      "smd_pad_center_mm": [
+        66.057,
+        40.324
+      ],
+      "smd_pad_bounds_mm": [
+        65.582,
+        39.099,
+        66.532,
+        41.549
+      ],
+      "center_mm": [
+        66.057,
+        40.324
+      ],
+      "placement_method": "Placement-side SMD copper pad bounding center; excludes TH pads and all text/graphics/models",
+      "native_angle_deg": 90.0,
+      "rotation_deg": 90.0,
+      "side": "top",
+      "prior_cpl": {
+        "Designator": "C16",
+        "Val": "4.7μF",
+        "Package": "C_0603_1608Metric",
+        "Mid X": "66.057",
+        "Mid Y": "-40.324",
+        "Rotation": "90.0",
+        "Layer": "top"
+      },
+      "delta_from_prior_mm": [
+        0.0,
+        0.0
+      ],
+      "new_part": false
+    },
+    "C17": {
+      "ref": "C17",
+      "value": "100nF",
+      "footprint": "Stratolink_v1p1_C17_C_0402_1005Metric",
+      "mpn": "CL05B104KO5NNNC",
+      "lcsc": "C1525",
+      "native_anchor_mm": [
+        55.113,
+        67.702999
+      ],
+      "smd_pad_center_mm": [
+        55.113,
+        67.702999
+      ],
+      "smd_pad_bounds_mm": [
+        54.353,
+        67.392999,
+        55.873,
+        68.012999
+      ],
+      "center_mm": [
+        55.113,
+        67.702999
+      ],
+      "placement_method": "Placement-side SMD copper pad bounding center; excludes TH pads and all text/graphics/models",
+      "native_angle_deg": 0.0,
+      "rotation_deg": 0.0,
+      "side": "top",
+      "prior_cpl": {
+        "Designator": "C17",
+        "Val": "100nF",
+        "Package": "C_0402_1005Metric",
+        "Mid X": "55.113",
+        "Mid Y": "-67.702999",
+        "Rotation": "0.0",
+        "Layer": "top"
+      },
+      "delta_from_prior_mm": [
+        0.0,
+        0.0
+      ],
+      "new_part": false
+    },
+    "C19": {
+      "ref": "C19",
+      "value": "100nF",
+      "footprint": "Stratolink_v1p1_C19_C_0402_1005Metric",
+      "mpn": "CL05B104KO5NNNC",
+      "lcsc": "C1525",
+      "native_anchor_mm": [
+        70.227001,
+        35.953
+      ],
+      "smd_pad_center_mm": [
+        70.227001,
+        35.953
+      ],
+      "smd_pad_bounds_mm": [
+        69.467001,
+        35.643,
+        70.987001,
+        36.263
+      ],
+      "center_mm": [
+        70.227001,
+        35.953
+      ],
+      "placement_method": "Placement-side SMD copper pad bounding center; excludes TH pads and all text/graphics/models",
+      "native_angle_deg": 180.0,
+      "rotation_deg": 180.0,
+      "side": "top",
+      "prior_cpl": {
+        "Designator": "C19",
+        "Val": "100nF",
+        "Package": "C_0402_1005Metric",
+        "Mid X": "70.227001",
+        "Mid Y": "-35.953",
+        "Rotation": "180.0",
+        "Layer": "top"
+      },
+      "delta_from_prior_mm": [
+        0.0,
+        0.0
+      ],
+      "new_part": false
+    },
+    "C20": {
+      "ref": "C20",
+      "value": "100nF",
+      "footprint": "Stratolink_v1p1_C20_C_0402_1005Metric",
+      "mpn": "CL05B104KO5NNNC",
+      "lcsc": "C1525",
+      "native_anchor_mm": [
+        68.703,
+        37.4
+      ],
+      "smd_pad_center_mm": [
+        68.703,
+        37.4
+      ],
+      "smd_pad_bounds_mm": [
+        68.393,
+        36.64,
+        69.013,
+        38.16
+      ],
+      "center_mm": [
+        68.703,
+        37.4
+      ],
+      "placement_method": "Placement-side SMD copper pad bounding center; excludes TH pads and all text/graphics/models",
+      "native_angle_deg": 90.0,
+      "rotation_deg": 90.0,
+      "side": "top",
+      "prior_cpl": {
+        "Designator": "C20",
+        "Val": "100nF",
+        "Package": "C_0402_1005Metric",
+        "Mid X": "68.703",
+        "Mid Y": "-37.4",
+        "Rotation": "90.0",
+        "Layer": "top"
+      },
+      "delta_from_prior_mm": [
+        0.0,
+        0.0
+      ],
+      "new_part": false
+    },
+    "C21": {
+      "ref": "C21",
+      "value": "10μF",
+      "footprint": "Stratolink_v1p1_C21_C_0603_1608Metric",
+      "mpn": "CL10A106KP8NNNC",
+      "lcsc": "C19702",
+      "native_anchor_mm": [
+        70.262,
+        34.647
+      ],
+      "smd_pad_center_mm": [
+        70.262,
+        34.647
+      ],
+      "smd_pad_bounds_mm": [
+        69.037,
+        34.172,
+        71.487,
+        35.122
+      ],
+      "center_mm": [
+        70.262,
+        34.647
+      ],
+      "placement_method": "Placement-side SMD copper pad bounding center; excludes TH pads and all text/graphics/models",
+      "native_angle_deg": 180.0,
+      "rotation_deg": 180.0,
+      "side": "top",
+      "prior_cpl": {
+        "Designator": "C21",
+        "Val": "10μF",
+        "Package": "C_0603_1608Metric",
+        "Mid X": "70.262",
+        "Mid Y": "-34.647",
+        "Rotation": "180.0",
+        "Layer": "top"
+      },
+      "delta_from_prior_mm": [
+        0.0,
+        0.0
+      ],
+      "new_part": false
+    },
+    "D1": {
+      "ref": "D1",
+      "value": "PESD5V0U1BB",
+      "footprint": "Stratolink_v1p1_D1_D_SOD-523",
+      "mpn": "PESD5V0U1BB",
+      "lcsc": "C5272735",
+      "native_anchor_mm": [
+        71.058,
+        82.813
+      ],
+      "smd_pad_center_mm": [
+        71.058,
+        82.813
+      ],
+      "smd_pad_bounds_mm": [
+        70.057999,
+        82.463,
+        72.058001,
+        83.163
+      ],
+      "center_mm": [
+        71.058,
+        82.813
+      ],
+      "placement_method": "Placement-side SMD copper pad bounding center; excludes TH pads and all text/graphics/models",
+      "native_angle_deg": 180.0,
+      "rotation_deg": 180.0,
+      "side": "top",
+      "prior_cpl": {
+        "Designator": "D1",
+        "Val": "ESD9B3.3ST5G",
+        "Package": "D_SOD-523",
+        "Mid X": "71.058",
+        "Mid Y": "-82.813",
+        "Rotation": "180.0",
+        "Layer": "top"
+      },
+      "delta_from_prior_mm": [
+        0.0,
+        0.0
+      ],
+      "new_part": false
+    },
+    "D3": {
+      "ref": "D3",
+      "value": "PESD5V0U1BB",
+      "footprint": "Stratolink_v1p1_D3_D_SOD-523",
+      "mpn": "PESD5V0U1BB",
+      "lcsc": "C5272735",
+      "native_anchor_mm": [
+        60.306,
+        37.391
+      ],
+      "smd_pad_center_mm": [
+        60.306,
+        37.391
+      ],
+      "smd_pad_bounds_mm": [
+        59.956,
+        36.390999,
+        60.656,
+        38.391001
+      ],
+      "center_mm": [
+        60.306,
+        37.391
+      ],
+      "placement_method": "Placement-side SMD copper pad bounding center; excludes TH pads and all text/graphics/models",
+      "native_angle_deg": 90.0,
+      "rotation_deg": 90.0,
+      "side": "top",
+      "prior_cpl": {
+        "Designator": "D3",
+        "Val": "ESD9B3.3ST5G",
+        "Package": "D_SOD-523",
+        "Mid X": "60.306",
+        "Mid Y": "-37.391",
+        "Rotation": "90.0",
+        "Layer": "top"
+      },
+      "delta_from_prior_mm": [
+        0.0,
+        0.0
+      ],
+      "new_part": false
+    },
+    "FB1": {
+      "ref": "FB1",
+      "value": "BLM15AG601SN1D",
+      "footprint": "Stratolink_v1p1_FB1_C_0402_1005Metric",
+      "mpn": "BLM15AG601SN1D",
+      "lcsc": "C76884",
+      "native_anchor_mm": [
+        56.414,
+        50.858
+      ],
+      "smd_pad_center_mm": [
+        56.414,
+        50.858
+      ],
+      "smd_pad_bounds_mm": [
+        56.104,
+        50.098,
+        56.724,
+        51.618
+      ],
+      "center_mm": [
+        56.414,
+        50.858
+      ],
+      "placement_method": "Placement-side SMD copper pad bounding center; excludes TH pads and all text/graphics/models",
+      "native_angle_deg": -90.0,
+      "rotation_deg": 270.0,
+      "side": "top",
+      "prior_cpl": {
+        "Designator": "FB1",
+        "Val": "~",
+        "Package": "C_0402_1005Metric",
+        "Mid X": "56.414",
+        "Mid Y": "-50.858",
+        "Rotation": "-90.0",
+        "Layer": "top"
+      },
+      "delta_from_prior_mm": [
+        0.0,
+        0.0
+      ],
+      "new_part": false
+    },
+    "L1": {
+      "ref": "L1",
+      "value": "22µH",
+      "footprint": "Stratolink_v1p1_L1_IND_LPS4018-223MRC",
+      "mpn": "LPS4018-223MRC",
+      "lcsc": "C5278935",
+      "native_anchor_mm": [
+        60.103,
+        38.1865
+      ],
+      "smd_pad_center_mm": [
+        60.103,
+        38.1865
+      ],
+      "smd_pad_bounds_mm": [
+        58.153,
+        35.9815,
+        62.053,
+        40.3915
+      ],
+      "center_mm": [
+        60.103,
+        38.1865
+      ],
+      "placement_method": "Placement-side SMD copper pad bounding center; excludes TH pads and all text/graphics/models",
+      "native_angle_deg": 90.0,
+      "rotation_deg": 90.0,
+      "side": "bottom",
+      "prior_cpl": {
+        "Designator": "L1",
+        "Val": "22µH",
+        "Package": "IND_LPS4018-223MRC",
+        "Mid X": "60.103",
+        "Mid Y": "-38.1865",
+        "Rotation": "90.0",
+        "Layer": "bottom"
+      },
+      "delta_from_prior_mm": [
+        0.0,
+        0.0
+      ],
+      "new_part": false
+    },
+    "L2": {
+      "ref": "L2",
+      "value": "10µH",
+      "footprint": "INDC1608X90N",
+      "mpn": "PWCWAQ1608F-100KTT",
+      "lcsc": "C436784",
+      "native_anchor_mm": [
+        70.172,
+        41.22
+      ],
+      "smd_pad_center_mm": [
+        70.172,
+        41.22
+      ],
+      "smd_pad_bounds_mm": [
+        68.957,
+        40.755,
+        71.387,
+        41.685
+      ],
+      "center_mm": [
+        70.172,
+        41.22
+      ],
+      "placement_method": "Placement-side SMD copper pad bounding center; excludes TH pads and all text/graphics/models",
+      "native_angle_deg": 0.0,
+      "rotation_deg": 180.0,
+      "side": "bottom",
+      "prior_cpl": {
+        "Designator": "L2",
+        "Val": "10µH",
+        "Package": "INDC1608X90N",
+        "Mid X": "70.172",
+        "Mid Y": "-41.22",
+        "Rotation": "180.0",
+        "Layer": "bottom"
+      },
+      "delta_from_prior_mm": [
+        0.0,
+        0.0
+      ],
+      "new_part": false
+    },
+    "R1": {
+      "ref": "R1",
+      "value": "8.25MΩ",
+      "footprint": "Stratolink_v1p1_R1_R_0402_1005Metric",
+      "mpn": "0402WGF8254TCE",
+      "lcsc": "C423131",
+      "native_anchor_mm": [
+        65.934,
+        34.206
+      ],
+      "smd_pad_center_mm": [
+        65.934,
+        34.206
+      ],
+      "smd_pad_bounds_mm": [
+        65.614,
+        33.425999,
+        66.254,
+        34.986001
+      ],
+      "center_mm": [
+        65.934,
+        34.206
+      ],
+      "placement_method": "Placement-side SMD copper pad bounding center; excludes TH pads and all text/graphics/models",
+      "native_angle_deg": -90.0,
+      "rotation_deg": 270.0,
+      "side": "bottom",
+      "prior_cpl": {
+        "Designator": "R1",
+        "Val": "8.25MΩ",
+        "Package": "R_0402_1005Metric",
+        "Mid X": "65.934",
+        "Mid Y": "-34.206",
+        "Rotation": "270.0",
+        "Layer": "bottom"
+      },
+      "delta_from_prior_mm": [
+        0.0,
+        0.0
+      ],
+      "new_part": false
+    },
+    "R2": {
+      "ref": "R2",
+      "value": "4.22MΩ",
+      "footprint": "Stratolink_v1p1_R2_R_0402_1005Metric",
+      "mpn": "CRCW04024M22FKED",
+      "lcsc": "C2091474",
+      "native_anchor_mm": [
+        64.847,
+        34.212001
+      ],
+      "smd_pad_center_mm": [
+        64.847,
+        34.212001
+      ],
+      "smd_pad_bounds_mm": [
+        64.527,
+        33.432,
+        65.167,
+        34.992002
+      ],
+      "center_mm": [
+        64.847,
+        34.212001
+      ],
+      "placement_method": "Placement-side SMD copper pad bounding center; excludes TH pads and all text/graphics/models",
+      "native_angle_deg": -90.0,
+      "rotation_deg": 270.0,
+      "side": "bottom",
+      "prior_cpl": {
+        "Designator": "R2",
+        "Val": "4.22MΩ",
+        "Package": "R_0402_1005Metric",
+        "Mid X": "64.847",
+        "Mid Y": "-34.212001",
+        "Rotation": "270.0",
+        "Layer": "bottom"
+      },
+      "delta_from_prior_mm": [
+        0.0,
+        0.0
+      ],
+      "new_part": false
+    },
+    "R3": {
+      "ref": "R3",
+      "value": "4.75MΩ",
+      "footprint": "Stratolink_v1p1_R3_R_0402_1005Metric",
+      "mpn": "FRC0402F4754TS",
+      "lcsc": "C2998153",
+      "native_anchor_mm": [
+        68.354,
+        34.198
+      ],
+      "smd_pad_center_mm": [
+        68.354,
+        34.198
+      ],
+      "smd_pad_bounds_mm": [
+        68.034,
+        33.417999,
+        68.674,
+        34.978001
+      ],
+      "center_mm": [
+        68.354,
+        34.198
+      ],
+      "placement_method": "Placement-side SMD copper pad bounding center; excludes TH pads and all text/graphics/models",
+      "native_angle_deg": -90.0,
+      "rotation_deg": 270.0,
+      "side": "bottom",
+      "prior_cpl": {
+        "Designator": "R3",
+        "Val": "4.75MΩ",
+        "Package": "R_0402_1005Metric",
+        "Mid X": "68.354",
+        "Mid Y": "-34.198",
+        "Rotation": "270.0",
+        "Layer": "bottom"
+      },
+      "delta_from_prior_mm": [
+        0.0,
+        0.0
+      ],
+      "new_part": false
+    },
+    "R4": {
+      "ref": "R4",
+      "value": "3.65MΩ",
+      "footprint": "Stratolink_v1p1_R4_R_0402_1005Metric",
+      "mpn": "0402WGF3654TCE",
+      "lcsc": "C2766827",
+      "native_anchor_mm": [
+        67.023,
+        34.213001
+      ],
+      "smd_pad_center_mm": [
+        67.023,
+        34.213001
+      ],
+      "smd_pad_bounds_mm": [
+        66.703,
+        33.433,
+        67.343,
+        34.993002
+      ],
+      "center_mm": [
+        67.023,
+        34.213001
+      ],
+      "placement_method": "Placement-side SMD copper pad bounding center; excludes TH pads and all text/graphics/models",
+      "native_angle_deg": 90.0,
+      "rotation_deg": 90.0,
+      "side": "bottom",
+      "prior_cpl": {
+        "Designator": "R4",
+        "Val": "3.65MΩ",
+        "Package": "R_0402_1005Metric",
+        "Mid X": "67.023",
+        "Mid Y": "-34.213001",
+        "Rotation": "90.0",
+        "Layer": "bottom"
+      },
+      "delta_from_prior_mm": [
+        0.0,
+        0.0
+      ],
+      "new_part": false
+    },
+    "R5": {
+      "ref": "R5",
+      "value": "4.42MΩ",
+      "footprint": "Stratolink_v1p1_R5_R_0402_1005Metric",
+      "mpn": "GR0402F4M42TAG00",
+      "lcsc": "C49654874",
+      "native_anchor_mm": [
+        69.447,
+        34.198
+      ],
+      "smd_pad_center_mm": [
+        69.447,
+        34.198
+      ],
+      "smd_pad_bounds_mm": [
+        69.127,
+        33.417999,
+        69.767,
+        34.978001
+      ],
+      "center_mm": [
+        69.447,
+        34.198
+      ],
+      "placement_method": "Placement-side SMD copper pad bounding center; excludes TH pads and all text/graphics/models",
+      "native_angle_deg": 90.0,
+      "rotation_deg": 90.0,
+      "side": "bottom",
+      "prior_cpl": {
+        "Designator": "R5",
+        "Val": "4.42MΩ",
+        "Package": "R_0402_1005Metric",
+        "Mid X": "69.447",
+        "Mid Y": "-34.198",
+        "Rotation": "90.0",
+        "Layer": "bottom"
+      },
+      "delta_from_prior_mm": [
+        0.0,
+        0.0
+      ],
+      "new_part": false
+    },
+    "R6": {
+      "ref": "R6",
+      "value": "8.25MΩ",
+      "footprint": "Stratolink_v1p1_R6_R_0402_1005Metric",
+      "mpn": "0402WGF8254TCE",
+      "lcsc": "C423131",
+      "native_anchor_mm": [
+        70.557,
+        34.194
+      ],
+      "smd_pad_center_mm": [
+        70.557,
+        34.194
+      ],
+      "smd_pad_bounds_mm": [
+        70.237,
+        33.413999,
+        70.877,
+        34.974001
+      ],
+      "center_mm": [
+        70.557,
+        34.194
+      ],
+      "placement_method": "Placement-side SMD copper pad bounding center; excludes TH pads and all text/graphics/models",
+      "native_angle_deg": -90.0,
+      "rotation_deg": 270.0,
+      "side": "bottom",
+      "prior_cpl": {
+        "Designator": "R6",
+        "Val": "8.25MΩ",
+        "Package": "R_0402_1005Metric",
+        "Mid X": "70.557",
+        "Mid Y": "-34.194",
+        "Rotation": "270.0",
+        "Layer": "bottom"
+      },
+      "delta_from_prior_mm": [
+        0.0,
+        0.0
+      ],
+      "new_part": false
+    },
+    "R7": {
+      "ref": "R7",
+      "value": "4.75MΩ",
+      "footprint": "Stratolink_v1p1_R7_R_0402_1005Metric",
+      "mpn": "FRC0402F4754TS",
+      "lcsc": "C2998153",
+      "native_anchor_mm": [
+        71.67,
+        34.175
+      ],
+      "smd_pad_center_mm": [
+        71.67,
+        34.175
+      ],
+      "smd_pad_bounds_mm": [
+        71.35,
+        33.394999,
+        71.99,
+        34.955001
+      ],
+      "center_mm": [
+        71.67,
+        34.175
+      ],
+      "placement_method": "Placement-side SMD copper pad bounding center; excludes TH pads and all text/graphics/models",
+      "native_angle_deg": 90.0,
+      "rotation_deg": 90.0,
+      "side": "bottom",
+      "prior_cpl": {
+        "Designator": "R7",
+        "Val": "4.75MΩ",
+        "Package": "R_0402_1005Metric",
+        "Mid X": "71.67",
+        "Mid Y": "-34.175",
+        "Rotation": "90.0",
+        "Layer": "bottom"
+      },
+      "delta_from_prior_mm": [
+        0.0,
+        0.0
+      ],
+      "new_part": false
+    },
+    "R8": {
+      "ref": "R8",
+      "value": "100kΩ",
+      "footprint": "Stratolink_v1p1_R8_R_0402_1005Metric",
+      "mpn": "RC0402FR-07100KL",
+      "lcsc": "C60491",
+      "native_anchor_mm": [
+        70.97,
+        36.276
+      ],
+      "smd_pad_center_mm": [
+        70.97,
+        36.276
+      ],
+      "smd_pad_bounds_mm": [
+        70.189999,
+        35.956,
+        71.750001,
+        36.596
+      ],
+      "center_mm": [
+        70.97,
+        36.276
+      ],
+      "placement_method": "Placement-side SMD copper pad bounding center; excludes TH pads and all text/graphics/models",
+      "native_angle_deg": 0.0,
+      "rotation_deg": 180.0,
+      "side": "bottom",
+      "prior_cpl": {
+        "Designator": "R8",
+        "Val": "100kΩ",
+        "Package": "R_0402_1005Metric",
+        "Mid X": "70.97",
+        "Mid Y": "-36.276",
+        "Rotation": "180.0",
+        "Layer": "bottom"
+      },
+      "delta_from_prior_mm": [
+        0.0,
+        0.0
+      ],
+      "new_part": false
+    },
+    "R9": {
+      "ref": "R9",
+      "value": "0Ω",
+      "footprint": "Stratolink_v1p1_R9_R_0402_1005Metric",
+      "mpn": "RC0402FR-070RL",
+      "lcsc": "C106231",
+      "native_anchor_mm": [
+        64.666999,
+        62.062001
+      ],
+      "smd_pad_center_mm": [
+        64.666999,
+        62.062001
+      ],
+      "smd_pad_bounds_mm": [
+        64.346999,
+        61.282,
+        64.986999,
+        62.842002
+      ],
+      "center_mm": [
+        64.666999,
+        62.062001
+      ],
+      "placement_method": "Placement-side SMD copper pad bounding center; excludes TH pads and all text/graphics/models",
+      "native_angle_deg": -90.0,
+      "rotation_deg": 270.0,
+      "side": "top",
+      "prior_cpl": {
+        "Designator": "R9",
+        "Val": "0Ω",
+        "Package": "R_0402_1005Metric",
+        "Mid X": "64.666999",
+        "Mid Y": "-62.062001",
+        "Rotation": "-90.0",
+        "Layer": "top"
+      },
+      "delta_from_prior_mm": [
+        0.0,
+        0.0
+      ],
+      "new_part": false
+    },
+    "R10": {
+      "ref": "R10",
+      "value": "10kΩ",
+      "footprint": "Stratolink_v1p1_R10_R_0402_1005Metric",
+      "mpn": "RC0402FR-0710KL",
+      "lcsc": "C60490",
+      "native_anchor_mm": [
+        61.198,
+        62.074001
+      ],
+      "smd_pad_center_mm": [
+        61.198,
+        62.074001
+      ],
+      "smd_pad_bounds_mm": [
+        60.878,
+        61.294,
+        61.518,
+        62.854002
+      ],
+      "center_mm": [
+        61.198,
+        62.074001
+      ],
+      "placement_method": "Placement-side SMD copper pad bounding center; excludes TH pads and all text/graphics/models",
+      "native_angle_deg": -90.0,
+      "rotation_deg": 270.0,
+      "side": "top",
+      "prior_cpl": {
+        "Designator": "R10",
+        "Val": "10kΩ",
+        "Package": "R_0402_1005Metric",
+        "Mid X": "61.198",
+        "Mid Y": "-62.074001",
+        "Rotation": "-90.0",
+        "Layer": "top"
+      },
+      "delta_from_prior_mm": [
+        0.0,
+        0.0
+      ],
+      "new_part": false
+    },
+    "R11": {
+      "ref": "R11",
+      "value": "4.7kΩ",
+      "footprint": "Stratolink_v1p1_R11_R_0402_1005Metric",
+      "mpn": "RC0402FR-074K7L",
+      "lcsc": "C105871",
+      "native_anchor_mm": [
+        74.648001,
+        79.004996
+      ],
+      "smd_pad_center_mm": [
+        74.648001,
+        79.004996
+      ],
+      "smd_pad_bounds_mm": [
+        73.868,
+        78.684996,
+        75.428002,
+        79.324996
+      ],
+      "center_mm": [
+        74.648001,
+        79.004996
+      ],
+      "placement_method": "Placement-side SMD copper pad bounding center; excludes TH pads and all text/graphics/models",
+      "native_angle_deg": 180.0,
+      "rotation_deg": 180.0,
+      "side": "top",
+      "prior_cpl": {
+        "Designator": "R11",
+        "Val": "4.7kΩ",
+        "Package": "R_0402_1005Metric",
+        "Mid X": "74.648001",
+        "Mid Y": "-79.004996",
+        "Rotation": "180.0",
+        "Layer": "top"
+      },
+      "delta_from_prior_mm": [
+        0.0,
+        0.0
+      ],
+      "new_part": false
+    },
+    "R12": {
+      "ref": "R12",
+      "value": "4.7kΩ",
+      "footprint": "Stratolink_v1p1_R12_R_0402_1005Metric",
+      "mpn": "RC0402FR-074K7L",
+      "lcsc": "C105871",
+      "native_anchor_mm": [
+        74.642,
+        77.899
+      ],
+      "smd_pad_center_mm": [
+        74.642,
+        77.899
+      ],
+      "smd_pad_bounds_mm": [
+        73.861999,
+        77.579,
+        75.422001,
+        78.219
+      ],
+      "center_mm": [
+        74.642,
+        77.899
+      ],
+      "placement_method": "Placement-side SMD copper pad bounding center; excludes TH pads and all text/graphics/models",
+      "native_angle_deg": 180.0,
+      "rotation_deg": 180.0,
+      "side": "top",
+      "prior_cpl": {
+        "Designator": "R12",
+        "Val": "4.7kΩ",
+        "Package": "R_0402_1005Metric",
+        "Mid X": "74.642",
+        "Mid Y": "-77.899",
+        "Rotation": "180.0",
+        "Layer": "top"
+      },
+      "delta_from_prior_mm": [
+        0.0,
+        0.0
+      ],
+      "new_part": false
+    },
+    "R13": {
+      "ref": "R13",
+      "value": "0Ω",
+      "footprint": "Stratolink_v1p1_R13_R_0402_1005Metric",
+      "mpn": "RC0402FR-070RL",
+      "lcsc": "C106231",
+      "native_anchor_mm": [
+        67.552,
+        55.547
+      ],
+      "smd_pad_center_mm": [
+        67.552,
+        55.547
+      ],
+      "smd_pad_bounds_mm": [
+        66.771999,
+        55.227,
+        68.332001,
+        55.867
+      ],
+      "center_mm": [
+        67.552,
+        55.547
+      ],
+      "placement_method": "Placement-side SMD copper pad bounding center; excludes TH pads and all text/graphics/models",
+      "native_angle_deg": 0.0,
+      "rotation_deg": 0.0,
+      "side": "top",
+      "prior_cpl": {
+        "Designator": "R13",
+        "Val": "0Ω",
+        "Package": "R_0402_1005Metric",
+        "Mid X": "67.552",
+        "Mid Y": "-55.547",
+        "Rotation": "0.0",
+        "Layer": "top"
+      },
+      "delta_from_prior_mm": [
+        0.0,
+        0.0
+      ],
+      "new_part": false
+    },
+    "R14": {
+      "ref": "R14",
+      "value": "0Ω",
+      "footprint": "Stratolink_v1p1_R14_R_0402_1005Metric",
+      "mpn": "RC0402FR-070RL",
+      "lcsc": "C106231",
+      "native_anchor_mm": [
+        67.550999,
+        54.408
+      ],
+      "smd_pad_center_mm": [
+        67.550999,
+        54.408
+      ],
+      "smd_pad_bounds_mm": [
+        66.770998,
+        54.088,
+        68.331,
+        54.728
+      ],
+      "center_mm": [
+        67.550999,
+        54.408
+      ],
+      "placement_method": "Placement-side SMD copper pad bounding center; excludes TH pads and all text/graphics/models",
+      "native_angle_deg": 0.0,
+      "rotation_deg": 0.0,
+      "side": "top",
+      "prior_cpl": {
+        "Designator": "R14",
+        "Val": "0Ω",
+        "Package": "R_0402_1005Metric",
+        "Mid X": "67.550999",
+        "Mid Y": "-54.408",
+        "Rotation": "0.0",
+        "Layer": "top"
+      },
+      "delta_from_prior_mm": [
+        0.0,
+        0.0
+      ],
+      "new_part": false
+    },
+    "R15": {
+      "ref": "R15",
+      "value": "33Ω",
+      "footprint": "Stratolink_v1p1_R15_R_0402_1005Metric",
+      "mpn": "RC0402FR-0733RL",
+      "lcsc": "C138002",
+      "native_anchor_mm": [
+        73.578,
+        51.71
+      ],
+      "smd_pad_center_mm": [
+        73.578,
+        51.71
+      ],
+      "smd_pad_bounds_mm": [
+        72.797999,
+        51.39,
+        74.358001,
+        52.03
+      ],
+      "center_mm": [
+        73.578,
+        51.71
+      ],
+      "placement_method": "Placement-side SMD copper pad bounding center; excludes TH pads and all text/graphics/models",
+      "native_angle_deg": 180.0,
+      "rotation_deg": 180.0,
+      "side": "top",
+      "prior_cpl": {
+        "Designator": "R15",
+        "Val": "33Ω",
+        "Package": "R_0402_1005Metric",
+        "Mid X": "73.578",
+        "Mid Y": "-51.71",
+        "Rotation": "180.0",
+        "Layer": "top"
+      },
+      "delta_from_prior_mm": [
+        0.0,
+        0.0
+      ],
+      "new_part": false
+    },
+    "R16": {
+      "ref": "R16",
+      "value": "33Ω",
+      "footprint": "Stratolink_v1p1_R16_R_0402_1005Metric",
+      "mpn": "RC0402FR-0733RL",
+      "lcsc": "C138002",
+      "native_anchor_mm": [
+        73.566,
+        50.575
+      ],
+      "smd_pad_center_mm": [
+        73.566,
+        50.575
+      ],
+      "smd_pad_bounds_mm": [
+        72.785999,
+        50.255,
+        74.346001,
+        50.895
+      ],
+      "center_mm": [
+        73.566,
+        50.575
+      ],
+      "placement_method": "Placement-side SMD copper pad bounding center; excludes TH pads and all text/graphics/models",
+      "native_angle_deg": 180.0,
+      "rotation_deg": 180.0,
+      "side": "top",
+      "prior_cpl": {
+        "Designator": "R16",
+        "Val": "33Ω",
+        "Package": "R_0402_1005Metric",
+        "Mid X": "73.566",
+        "Mid Y": "-50.575",
+        "Rotation": "180.0",
+        "Layer": "top"
+      },
+      "delta_from_prior_mm": [
+        0.0,
+        0.0
+      ],
+      "new_part": false
+    },
+    "R18": {
+      "ref": "R18",
+      "value": "10kΩ",
+      "footprint": "Stratolink_v1p1_R18_R_0402_1005Metric",
+      "mpn": "RC0402FR-0710KL",
+      "lcsc": "C60490",
+      "native_anchor_mm": [
+        73.583,
+        44.545
+      ],
+      "smd_pad_center_mm": [
+        73.583,
+        44.545
+      ],
+      "smd_pad_bounds_mm": [
+        73.263,
+        43.764999,
+        73.903,
+        45.325001
+      ],
+      "center_mm": [
+        73.583,
+        44.545
+      ],
+      "placement_method": "Placement-side SMD copper pad bounding center; excludes TH pads and all text/graphics/models",
+      "native_angle_deg": 90.0,
+      "rotation_deg": 90.0,
+      "side": "top",
+      "prior_cpl": {
+        "Designator": "R18",
+        "Val": "10kΩ",
+        "Package": "R_0402_1005Metric",
+        "Mid X": "73.583",
+        "Mid Y": "-44.545",
+        "Rotation": "90.0",
+        "Layer": "top"
+      },
+      "delta_from_prior_mm": [
+        0.0,
+        0.0
+      ],
+      "new_part": false
+    },
+    "R19": {
+      "ref": "R19",
+      "value": "1MΩ",
+      "footprint": "Stratolink_v1p1_R19_R_0402_1005Metric",
+      "mpn": "RC0402FR-071ML",
+      "lcsc": "C138033",
+      "native_anchor_mm": [
+        55.618,
+        83.313
+      ],
+      "smd_pad_center_mm": [
+        55.618,
+        83.313
+      ],
+      "smd_pad_bounds_mm": [
+        54.837999,
+        82.993,
+        56.398001,
+        83.633
+      ],
+      "center_mm": [
+        55.618,
+        83.313
+      ],
+      "placement_method": "Placement-side SMD copper pad bounding center; excludes TH pads and all text/graphics/models",
+      "native_angle_deg": 0.0,
+      "rotation_deg": 0.0,
+      "side": "top",
+      "prior_cpl": {
+        "Designator": "R19",
+        "Val": "1MΩ",
+        "Package": "R_0402_1005Metric",
+        "Mid X": "55.618",
+        "Mid Y": "-83.313",
+        "Rotation": "0.0",
+        "Layer": "top"
+      },
+      "delta_from_prior_mm": [
+        0.0,
+        0.0
+      ],
+      "new_part": false
+    },
+    "R21": {
+      "ref": "R21",
+      "value": "1MΩ",
+      "footprint": "Stratolink_v1p1_R21_R_0402_1005Metric",
+      "mpn": "RC0402FR-071ML",
+      "lcsc": "C138033",
+      "native_anchor_mm": [
+        55.637,
+        82.209999
+      ],
+      "smd_pad_center_mm": [
+        55.637,
+        82.209999
+      ],
+      "smd_pad_bounds_mm": [
+        54.856999,
+        81.889999,
+        56.417001,
+        82.529999
+      ],
+      "center_mm": [
+        55.637,
+        82.209999
+      ],
+      "placement_method": "Placement-side SMD copper pad bounding center; excludes TH pads and all text/graphics/models",
+      "native_angle_deg": 180.0,
+      "rotation_deg": 180.0,
+      "side": "top",
+      "prior_cpl": {
+        "Designator": "R21",
+        "Val": "1MΩ",
+        "Package": "R_0402_1005Metric",
+        "Mid X": "55.637",
+        "Mid Y": "-82.209999",
+        "Rotation": "180.0",
+        "Layer": "top"
+      },
+      "delta_from_prior_mm": [
+        0.0,
+        0.0
+      ],
+      "new_part": false
+    },
+    "R22": {
+      "ref": "R22",
+      "value": "1MΩ",
+      "footprint": "Stratolink_v1p1_R22_R_0402_1005Metric",
+      "mpn": "RC0402FR-071ML",
+      "lcsc": "C138033",
+      "native_anchor_mm": [
+        54.573,
+        66.188999
+      ],
+      "smd_pad_center_mm": [
+        54.573,
+        66.188999
+      ],
+      "smd_pad_bounds_mm": [
+        54.253,
+        65.408998,
+        54.893,
+        66.969
+      ],
+      "center_mm": [
+        54.573,
+        66.188999
+      ],
+      "placement_method": "Placement-side SMD copper pad bounding center; excludes TH pads and all text/graphics/models",
+      "native_angle_deg": -90.0,
+      "rotation_deg": 270.0,
+      "side": "top",
+      "prior_cpl": {
+        "Designator": "R22",
+        "Val": "1MΩ",
+        "Package": "R_0402_1005Metric",
+        "Mid X": "54.573",
+        "Mid Y": "-66.188999",
+        "Rotation": "-90.0",
+        "Layer": "top"
+      },
+      "delta_from_prior_mm": [
+        0.0,
+        0.0
+      ],
+      "new_part": false
+    },
+    "R23": {
+      "ref": "R23",
+      "value": "1MΩ",
+      "footprint": "Stratolink_v1p1_R23_R_0402_1005Metric",
+      "mpn": "RC0402FR-071ML",
+      "lcsc": "C138033",
+      "native_anchor_mm": [
+        55.692,
+        66.193999
+      ],
+      "smd_pad_center_mm": [
+        55.692,
+        66.193999
+      ],
+      "smd_pad_bounds_mm": [
+        55.372,
+        65.413998,
+        56.012,
+        66.974
+      ],
+      "center_mm": [
+        55.692,
+        66.193999
+      ],
+      "placement_method": "Placement-side SMD copper pad bounding center; excludes TH pads and all text/graphics/models",
+      "native_angle_deg": 90.0,
+      "rotation_deg": 90.0,
+      "side": "top",
+      "prior_cpl": {
+        "Designator": "R23",
+        "Val": "1MΩ",
+        "Package": "R_0402_1005Metric",
+        "Mid X": "55.692",
+        "Mid Y": "-66.193999",
+        "Rotation": "90.0",
+        "Layer": "top"
+      },
+      "delta_from_prior_mm": [
+        0.0,
+        0.0
+      ],
+      "new_part": false
+    },
+    "U1": {
+      "ref": "U1",
+      "value": "BQ25570RGRR",
+      "footprint": "Stratolink_v1p1_U1_QFN50P350X350X100-21N",
+      "mpn": "BQ25570RGRR",
+      "lcsc": "C506250",
+      "native_anchor_mm": [
+        67.190998,
+        37.814999
+      ],
+      "smd_pad_center_mm": [
+        67.190998,
+        37.814999
+      ],
+      "smd_pad_bounds_mm": [
+        65.240997,
+        35.864998,
+        69.140999,
+        39.765
+      ],
+      "center_mm": [
+        67.190998,
+        37.814999
+      ],
+      "placement_method": "Placement-side SMD copper pad bounding center; excludes TH pads and all text/graphics/models",
+      "native_angle_deg": 0.0,
+      "rotation_deg": 180.0,
+      "side": "bottom",
+      "prior_cpl": {
+        "Designator": "U1",
+        "Val": "~",
+        "Package": "QFN50P350X350X100-21N",
+        "Mid X": "67.190998",
+        "Mid Y": "-37.814999",
+        "Rotation": "180.0",
+        "Layer": "bottom"
+      },
+      "delta_from_prior_mm": [
+        0.0,
+        0.0
+      ],
+      "new_part": false
+    },
+    "U2": {
+      "ref": "U2",
+      "value": "RAK3172-9-SM-NI",
+      "footprint": "Stratolink_v1p1_U2_RAK3172",
+      "mpn": "RAK3172-9-SM-NI",
+      "lcsc": "C18548052",
+      "native_anchor_mm": [
+        72.715,
+        64.66
+      ],
+      "smd_pad_center_mm": [
+        64.95,
+        72.205
+      ],
+      "smd_pad_bounds_mm": [
+        56.649999,
+        63.904999,
+        73.250001,
+        80.505001
+      ],
+      "center_mm": [
+        64.95,
+        72.205
+      ],
+      "placement_method": "Placement-side SMD copper pad bounding center; excludes TH pads and all text/graphics/models",
+      "native_angle_deg": 180.0,
+      "rotation_deg": 180.0,
+      "side": "top",
+      "prior_cpl": {
+        "Designator": "U2",
+        "Val": "RAK3172",
+        "Package": "RAK3172",
+        "Mid X": "64.95",
+        "Mid Y": "-72.205",
+        "Rotation": "180.0",
+        "Layer": "top"
+      },
+      "delta_from_prior_mm": [
+        0.0,
+        0.0
+      ],
+      "new_part": false
+    },
+    "U3": {
+      "ref": "U3",
+      "value": "MAX-M10S-00B",
+      "footprint": "Stratolink_v1p1_U3_XCVR_MAX-M10S-00B",
+      "mpn": "MAX-M10S-00B",
+      "lcsc": "C4153167",
+      "native_anchor_mm": [
+        65.537,
+        48.414
+      ],
+      "smd_pad_center_mm": [
+        65.537,
+        48.414
+      ],
+      "smd_pad_bounds_mm": [
+        59.886999,
+        43.664001,
+        71.187001,
+        53.163999
+      ],
+      "center_mm": [
+        65.537,
+        48.414
+      ],
+      "placement_method": "Placement-side SMD copper pad bounding center; excludes TH pads and all text/graphics/models",
+      "native_angle_deg": 180.0,
+      "rotation_deg": 180.0,
+      "side": "top",
+      "prior_cpl": {
+        "Designator": "U3",
+        "Val": "~",
+        "Package": "XCVR_MAX-M10S-00B",
+        "Mid X": "65.537",
+        "Mid Y": "-48.414",
+        "Rotation": "180.0",
+        "Layer": "top"
+      },
+      "delta_from_prior_mm": [
+        0.0,
+        0.0
+      ],
+      "new_part": false
+    },
+    "U4": {
+      "ref": "U4",
+      "value": "MS561101BA03-50",
+      "footprint": "Stratolink_v1p1_U4_SON125P500X300X100-8N",
+      "mpn": "MS561101BA03-50",
+      "lcsc": "C15639",
+      "native_anchor_mm": [
+        71.023,
+        58.808
+      ],
+      "smd_pad_center_mm": [
+        71.023,
+        58.808
+      ],
+      "smd_pad_bounds_mm": [
+        69.168,
+        56.668,
+        72.878,
+        60.948
+      ],
+      "center_mm": [
+        71.023,
+        58.808
+      ],
+      "placement_method": "Placement-side SMD copper pad bounding center; excludes TH pads and all text/graphics/models",
+      "native_angle_deg": 0.0,
+      "rotation_deg": 0.0,
+      "side": "top",
+      "prior_cpl": {
+        "Designator": "U4",
+        "Val": "~",
+        "Package": "SON125P500X300X100-8N",
+        "Mid X": "71.023",
+        "Mid Y": "-58.808",
+        "Rotation": "0.0",
+        "Layer": "top"
+      },
+      "delta_from_prior_mm": [
+        0.0,
+        0.0
+      ],
+      "new_part": false
+    },
+    "U5": {
+      "ref": "U5",
+      "value": "TMP117AIYBGR",
+      "footprint": "Stratolink_v1p1_U5_BGA6N40P3X2_148X95X53",
+      "mpn": "TMP117AIYBGR",
+      "lcsc": "C2871893",
+      "native_anchor_mm": [
+        73.148,
+        40.864
+      ],
+      "smd_pad_center_mm": [
+        73.148,
+        40.864
+      ],
+      "smd_pad_bounds_mm": [
+        72.833,
+        40.349,
+        73.463,
+        41.379
+      ],
+      "center_mm": [
+        73.148,
+        40.864
+      ],
+      "placement_method": "Placement-side SMD copper pad bounding center; excludes TH pads and all text/graphics/models",
+      "native_angle_deg": 0.0,
+      "rotation_deg": 0.0,
+      "side": "top",
+      "prior_cpl": {
+        "Designator": "U5",
+        "Val": "TMP117NAIYBGR",
+        "Package": "BGA6N40P3X2_148X95X53",
+        "Mid X": "73.148",
+        "Mid Y": "-40.864",
+        "Rotation": "0.0",
+        "Layer": "top"
+      },
+      "delta_from_prior_mm": [
+        0.0,
+        0.0
+      ],
+      "new_part": false
+    },
+    "U6": {
+      "ref": "U6",
+      "value": "LTR-390UV-01",
+      "footprint": "Stratolink_v1p1_U6_SMD6_LTR-390UV-01_LTO-L",
+      "mpn": "LTR-390UV-01",
+      "lcsc": "C492374",
+      "native_anchor_mm": [
+        69.098,
+        40.606
+      ],
+      "smd_pad_center_mm": [
+        69.098,
+        40.606
+      ],
+      "smd_pad_bounds_mm": [
+        67.8915,
+        39.829001,
+        70.3045,
+        41.382999
+      ],
+      "center_mm": [
+        69.098,
+        40.606
+      ],
+      "placement_method": "Placement-side SMD copper pad bounding center; excludes TH pads and all text/graphics/models",
+      "native_angle_deg": 0.0,
+      "rotation_deg": 0.0,
+      "side": "top",
+      "prior_cpl": {
+        "Designator": "U6",
+        "Val": "~",
+        "Package": "SMD6_LTR-390UV-01_LTO-L",
+        "Mid X": "69.098",
+        "Mid Y": "-40.606",
+        "Rotation": "0.0",
+        "Layer": "top"
+      },
+      "delta_from_prior_mm": [
+        0.0,
+        0.0
+      ],
+      "new_part": false
+    },
+    "U7": {
+      "ref": "U7",
+      "value": "LIS2DH12TR",
+      "footprint": "Stratolink_v1p1_U7_PQFN50P200X200100-12N",
+      "mpn": "LIS2DH12TR",
+      "lcsc": "C110926",
+      "native_anchor_mm": [
+        70.548,
+        37.807
+      ],
+      "smd_pad_center_mm": [
+        70.548,
+        37.807
+      ],
+      "smd_pad_bounds_mm": [
+        69.558,
+        36.817,
+        71.538,
+        38.797
+      ],
+      "center_mm": [
+        70.548,
+        37.807
+      ],
+      "placement_method": "Placement-side SMD copper pad bounding center; excludes TH pads and all text/graphics/models",
+      "native_angle_deg": 90.0,
+      "rotation_deg": 90.0,
+      "side": "top",
+      "prior_cpl": {
+        "Designator": "U7",
+        "Val": "LIS2DH12TR",
+        "Package": "PQFN50P200X200100-12N",
+        "Mid X": "70.548",
+        "Mid Y": "-37.807",
+        "Rotation": "90.0",
+        "Layer": "top"
+      },
+      "delta_from_prior_mm": [
+        0.0,
+        0.0
+      ],
+      "new_part": false
+    }
+  },
+  "exclusions": [
+    {
+      "ref": "AE1",
+      "reason": "manual assembly / no purchased placement"
+    },
+    {
+      "ref": "AE2",
+      "reason": "manual assembly / no purchased placement"
+    },
+    {
+      "ref": "C5",
+      "reason": "manual assembly / no purchased placement"
+    },
+    {
+      "ref": "H1",
+      "reason": "mechanical board-only feature"
+    },
+    {
+      "ref": "H2",
+      "reason": "mechanical board-only feature"
+    },
+    {
+      "ref": "J1",
+      "reason": "manual assembly / no purchased placement"
+    },
+    {
+      "ref": "J2",
+      "reason": "manual assembly / no purchased placement"
+    },
+    {
+      "ref": "J3",
+      "reason": "manual assembly / no purchased placement"
+    },
+    {
+      "ref": "J4",
+      "reason": "manual assembly / no purchased placement"
+    },
+    {
+      "ref": "J20",
+      "reason": "manual assembly / no purchased placement"
+    }
+  ],
+  "explicit_part_changes": [],
+  "removed_prior_selected": [
+    "C13",
+    "MK1",
+    "R20"
+  ],
+  "bom_and_cpl_refs_identical": true,
+  "previous_selected_source_sha256": "d974e52a43add30ecbbce9ab62d6c1098eecb6147f424efb4ecc9105365e5d34",
+  "historical_pcb_sha256": "2924cfa59d48c1446488d715834e84ea634516e622ed59915fb72521e9595190",
+  "historical_cpl_sha256": "194c91282f58cc6635dd2b929b2ab0f98a16ea066265052b8b957be5bb12a081"
+}

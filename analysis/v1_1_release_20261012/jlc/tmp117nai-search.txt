@@ -1,0 +1,157 @@
+- banner:
+  - generic: 24-hour PCB production. Fast Delivery to United States.
+  - link " Coupons":
+    - /url: https://jlcpcb.com/coupon-center
+    - generic: 
+    - text: Coupons
+  - link " Download APP":
+    - /url: https://jlcone.com/download
+    - generic: 
+    - text: Download APP
+  - text:     
+  - text: USD
+  - generic: 
+- navigation:
+  - text: 
+  - link "JLCPCB Home":
+    - /url: https://jlcpcb.com
+    - generic: 
+  - link "Assembly Parts Lib For PCBA Only":
+    - /url: https://jlcpcb.com/parts
+    - paragraph: Assembly Parts Lib
+    - paragraph: For PCBA Only
+  - text:   
+  - search "Search parts":
+    - text: 
+    - 'searchbox "Search by keyword or part #"': TMP117NAIYBGR
+    - button "Submit search":
+      - generic: 
+    - generic: 
+    - text: Upload BOM
+    - text: 
+    - text: 
+    - button "Clear search": 
+  - text: 
+  - link " 0 Parts Cart":
+    - /url: https://jlcpcb.com/user-center/smtPrivateLibrary/partsCart/
+    - generic: 
+    - superscript: "0"
+    - generic: Parts Cart
+  - text:       
+  - text: My Account
+  - generic: 
+  - text: 
+- navigation "Parts navigation":
+  - list:
+    - navigation:
+      - link "Products":
+        - /url: /parts/all-electronic-components
+        - generic: 
+        - text: Products
+      - text:              
+    - link "In Stock Parts":
+      - /url: /parts/in-stock-parts
+    - link "Bom Tool":
+      - /url: /parts/bom-tool
+    - link "Request a Quote":
+      - /url: /parts/request-quote
+    - text:     
+    - text: Support
+    - generic: 
+- main:
+  - navigation "Breadcrumb":
+    - link "JLCPCB":
+      - link "JLCPCB":
+        - /url: /
+    - generic: 
+    - link "Parts Library":
+      - link "Parts Library":
+        - /url: /parts
+    - generic: 
+    - link "All Components":
+      - link "All Components":
+        - /url: /parts/all-electronic-components
+    - generic: 
+    - link "Search TMP117NAIYBGR"
+    - text: 
+  - heading "TMP117NAIYBGR Search results (1 Found)" [level=1]
+  - textbox "Search within results"
+  - button "":
+    - generic: 
+  - generic: Show Filters
+  - text:   
+  - tablist:
+    - tab "Pre-order Parts"
+  - table:
+    - rowgroup:
+      - 'row "Compare MFR Part # Description Manufacturer Stock ≥ undefined Price null"':
+        - columnheader
+        - columnheader
+        - 'columnheader "Compare MFR Part #"':
+          - generic: Compare
+          - generic: "MFR Part #"
+        - columnheader
+        - columnheader "Description":
+          - generic: Description
+        - columnheader
+        - columnheader "Manufacturer":
+          - generic: Manufacturer
+        - columnheader
+        - columnheader "Stock ≥ undefined":
+          - text: Stock
+          - generic: ≥
+          - spinbutton "Quantity"
+        - columnheader
+        - columnheader "Price null":
+          - generic: Price
+          - spinbutton "Price by Qty"
+        - columnheader
+        - columnheader
+        - columnheader
+  - table:
+    - rowgroup:
+      - 'row "placeholder-image TMP117NAIYBGR  C2869827 Extended -55℃~+150℃ 1.7V~5.5V 15.5ms 16bit 3.1uA I2C、SMBus ±0.1℃ DSBGA-6 Temperature Sensors ROHS Texas Instruments 0 Est. unit price: $2.9821 Min: 3 Total: $8.95 3 Pre-order "':
+        - cell:
+          - generic: 
+        - cell:
+          - checkbox
+        - cell "placeholder-image TMP117NAIYBGR  C2869827 Extended":
+          - img "placeholder-image"
+          - link "TMP117NAIYBGR":
+            - /url: /partdetail/TexasInstruments-TMP117NAIYBGR/C2869827
+            - generic: TMP117NAIYBGR
+          - link:
+            - /url: https://www.ti.com/cn/lit/gpn/tmp117
+          - generic: 
+          - generic: C2869827
+          - generic: Extended
+        - cell
+        - cell "-55℃~+150℃ 1.7V~5.5V 15.5ms 16bit 3.1uA I2C、SMBus ±0.1℃ DSBGA-6 Temperature Sensors ROHS":
+          - generic: "-55℃~+150℃ 1.7V~5.5V 15.5ms 16bit 3.1uA I2C、SMBus ±0.1℃ DSBGA-6 Temperature Sensors ROHS"
+        - cell
+        - cell "Texas Instruments":
+          - generic: Texas Instruments
+        - cell
+        - cell "0":
+          - generic: "0"
+        - cell
+        - 'cell "Est. unit price: $2.9821"':
+          - generic: "Est. unit price:"
+          - generic: $2.9821
+        - cell
+        - 'cell "Min: 3 Total: $8.95 3 Pre-order "':
+          - paragraph: "Min: 3"
+          - generic: "Total: $8.95"
+          - spinbutton: "3"
+          - button "Pre-order":
+            - generic: Pre-order
+          - generic: 
+  - text: 
+  - generic: 1 item in total
+  - button "" [disabled]:
+    - generic: 
+  - list:
+    - listitem: "1"
+  - button "" [disabled]:
+    - generic: 
+  - text:      

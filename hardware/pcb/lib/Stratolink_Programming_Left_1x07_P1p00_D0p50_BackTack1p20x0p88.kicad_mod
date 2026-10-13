@@ -1,0 +1,320 @@
+(footprint "Stratolink_Programming_Left_1x07_P1p00_D0p50_BackTack1p20x0p88"
+	(version 20260206)
+	(generator "pcbnew")
+	(generator_version "10.0")
+	(layer "F.Cu")
+	(descr "Programming/wire pads: 7 positions, 1.00 mm pitch, 0.50 mm holes; 0.88 mm front lands and 1.20 x 0.88 mm inward-extended back tack lands.")
+	(tags "Through hole pin header THT 1x07 1.00mm single row")
+	(property "Reference" "REF**"
+		(at 0.000001 -1.559999 0)
+		(layer "F.SilkS")
+		(hide yes)
+		(uuid "abc19104-178c-4991-86fb-5b79c47d9e12")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Value" "Programming_1x07_P1.00mm_D0.50mm"
+		(at 0 7.56 0)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "eda60e40-87b6-4b76-b668-c3b8f740d94f")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Datasheet" ""
+		(at 0 0 0)
+		(unlocked yes)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "c7cee9f5-b3f2-429e-8c1e-3b8bae011fa7")
+		(effects
+			(font
+				(size 1.27 1.27)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Description" "Programming/wire pads: 7 positions, 1.00 mm pitch, 0.50 mm holes; 0.88 mm front lands and 1.20 x 0.88 mm inward-extended back tack lands."
+		(at 0 0 0)
+		(unlocked yes)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "9e437468-d118-4a9d-b9bf-a7b5163a58cb")
+		(effects
+			(font
+				(size 1.27 1.27)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property ki_fp_filters "*PinHeader*1x07*")
+	(sheetname "Root")
+	(sheetfile "stratolink.kicad_sch")
+	(attr through_hole)
+	(duplicate_pad_numbers_are_jumpers no)
+	(fp_line
+		(start -1.15 -1)
+		(end -1.149999 7)
+		(stroke
+			(width 0.05)
+			(type solid)
+		)
+		(layer "F.CrtYd")
+		(uuid "83d2819e-dafd-40e4-b243-5c61a560a414")
+	)
+	(fp_line
+		(start -1.149999 7)
+		(end 1.15 7)
+		(stroke
+			(width 0.05)
+			(type solid)
+		)
+		(layer "F.CrtYd")
+		(uuid "d2b988c7-84c1-4b34-b193-9435d213385b")
+	)
+	(fp_line
+		(start 1.149998 -0.999999)
+		(end -1.15 -1)
+		(stroke
+			(width 0.05)
+			(type solid)
+		)
+		(layer "F.CrtYd")
+		(uuid "dd832ae2-d9fe-4189-9912-e3e9921572ae")
+	)
+	(fp_line
+		(start 1.15 7)
+		(end 1.149998 -0.999999)
+		(stroke
+			(width 0.05)
+			(type solid)
+		)
+		(layer "F.CrtYd")
+		(uuid "017b4ec0-2846-4230-bbb4-7232d5512b25")
+	)
+	(fp_line
+		(start -0.635 -0.1825)
+		(end -0.317502 -0.499999)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(layer "F.Fab")
+		(uuid "2ac868b8-8e43-4c87-ba2a-5277f99d6cc9")
+	)
+	(fp_line
+		(start -0.635 6.5)
+		(end -0.635 -0.1825)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(layer "F.Fab")
+		(uuid "a48ad00b-c555-403b-9687-24ccadf282e5")
+	)
+	(fp_line
+		(start -0.317502 -0.499999)
+		(end 0.635001 -0.5)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(layer "F.Fab")
+		(uuid "0b79151a-5bb9-48c5-9372-414af95ec41b")
+	)
+	(fp_line
+		(start 0.635 6.5)
+		(end -0.635 6.5)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(layer "F.Fab")
+		(uuid "d22399be-7887-4ac7-8deb-10b54e65c531")
+	)
+	(fp_line
+		(start 0.635001 -0.5)
+		(end 0.635 6.5)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(layer "F.Fab")
+		(uuid "abd224de-433e-4248-9fc0-987a6e86191d")
+	)
+	(fp_text user "${REFERENCE}"
+		(at 0.000002 3.000002 90)
+		(layer "F.Fab")
+		(uuid "9811b873-3428-4b38-abb6-6a36b427371c")
+		(effects
+			(font
+				(size 0.76 0.76)
+				(thickness 0.114)
+			)
+		)
+	)
+	(pad "1" thru_hole rect
+		(at 0 0)
+		(size 0.88 0.88)
+		(drill 0.5
+			(offset 0 0)
+		)
+		(layers "*.Cu" "*.Mask")
+		(remove_unused_layers no)
+		(uuid "9e1e972e-d661-4acc-91bc-aaa44d6689d4")
+		(padstack
+			(mode front_inner_back)
+			(layer "Inner"
+				(shape rect)
+				(size 0.88 0.88)
+			)
+			(layer "B.Cu"
+				(shape rect)
+				(size 1.2 0.88)
+				(offset 0.12 0)
+			)
+		)
+	)
+	(pad "2" thru_hole oval
+		(at 0 1.000001)
+		(size 0.88 0.88)
+		(drill 0.5
+			(offset 0 0)
+		)
+		(layers "*.Cu" "*.Mask")
+		(remove_unused_layers no)
+		(thermal_bridge_angle 30)
+		(uuid "ee2785a4-1245-43e1-83e8-fa4973870f0b")
+		(padstack
+			(mode front_inner_back)
+			(layer "Inner"
+				(shape oval)
+				(size 0.88 0.88)
+			)
+			(layer "B.Cu"
+				(shape oval)
+				(size 1.2 0.88)
+				(offset 0.12 0)
+			)
+		)
+	)
+	(pad "3" thru_hole oval
+		(at 0.000001 2.000003)
+		(size 0.88 0.88)
+		(drill 0.5
+			(offset 0 0)
+		)
+		(layers "*.Cu" "*.Mask")
+		(remove_unused_layers no)
+		(uuid "78db17b2-2f62-4a45-adfd-0e17aa75a498")
+		(padstack
+			(mode front_inner_back)
+			(layer "Inner"
+				(shape oval)
+				(size 0.88 0.88)
+			)
+			(layer "B.Cu"
+				(shape oval)
+				(size 1.2 0.88)
+				(offset 0.12 0)
+			)
+		)
+	)
+	(pad "4" thru_hole oval
+		(at 0.000002 3.000002)
+		(size 0.88 0.88)
+		(drill 0.5
+			(offset 0 0)
+		)
+		(layers "*.Cu" "*.Mask")
+		(remove_unused_layers no)
+		(uuid "1a982502-40db-4b68-bfea-018025c9e930")
+		(padstack
+			(mode front_inner_back)
+			(layer "Inner"
+				(shape oval)
+				(size 0.88 0.88)
+			)
+			(layer "B.Cu"
+				(shape oval)
+				(size 1.2 0.88)
+				(offset 0.12 0)
+			)
+		)
+	)
+	(pad "5" thru_hole oval
+		(at 0 4)
+		(size 0.88 0.88)
+		(drill 0.5
+			(offset 0 0)
+		)
+		(layers "*.Cu" "*.Mask")
+		(remove_unused_layers no)
+		(uuid "18b55959-0e81-4b52-8da7-0494f5bc61f2")
+		(padstack
+			(mode front_inner_back)
+			(layer "Inner"
+				(shape oval)
+				(size 0.88 0.88)
+			)
+			(layer "B.Cu"
+				(shape oval)
+				(size 1.2 0.88)
+				(offset 0.12 0)
+			)
+		)
+	)
+	(pad "6" thru_hole oval
+		(at 0 5)
+		(size 0.88 0.88)
+		(drill 0.5
+			(offset 0 0)
+		)
+		(layers "*.Cu" "*.Mask")
+		(remove_unused_layers no)
+		(uuid "7ae1aaaa-f303-4441-9163-758b71841e0e")
+		(padstack
+			(mode front_inner_back)
+			(layer "Inner"
+				(shape oval)
+				(size 0.88 0.88)
+			)
+			(layer "B.Cu"
+				(shape oval)
+				(size 1.2 0.88)
+				(offset 0.12 0)
+			)
+		)
+	)
+	(pad "7" thru_hole oval
+		(at 0 6)
+		(size 0.88 0.88)
+		(drill 0.5
+			(offset 0 0)
+		)
+		(layers "*.Cu" "*.Mask")
+		(remove_unused_layers no)
+		(uuid "06e03c7f-5890-410b-8cd8-b2f017358ea9")
+		(padstack
+			(mode front_inner_back)
+			(layer "Inner"
+				(shape oval)
+				(size 0.88 0.88)
+			)
+			(layer "B.Cu"
+				(shape oval)
+				(size 1.2 0.88)
+				(offset 0.12 0)
+			)
+		)
+	)
+	(embedded_fonts no)
+)

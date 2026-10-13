@@ -1,0 +1,30 @@
+{
+  "files": {
+    "trial-vbat-legacy-verification.json": "35f94cc1f4e905a707fad62e78d680137dabe1cb09540a0b05b575a9311656d2",
+    "final-raw-erc.json": "1818dadfb25cfe388bd40a57f84e2e65a4687b0e1b1c46d0dcbe87613be99ab5",
+    "trial-vbat-power-model-raw-erc.json": "1da88b61c0eb30532ce5ecf37c048d6a21471338633f88dc7527069ab7afb1e9",
+    "merge-script-review.json": "0cb932ce61c898597e0fbd1e67e5f07aa88655391576672fd57b1b9572bcd69f",
+    "trial-manufacturing-manifest.json": "6757dcc0b5d69fa3eac952d86a542ce7b7de00465b6bf250b70569affe8d6774",
+    "trial-all-erc.json": "8307994a0bc1e5289fec0fda4a537154ba87b810a1f8f5ddde3a3cfcba8547bd",
+    "trial-vbat-power-model-after-erc.json": "3b4f2e3b7b30c56c54b6745340f9c5ebfc47b25e053ad797f325d762c924689d",
+    "power-merge-script-review.json": "95978edd4d881f6275e98e6d5f1e0dafa6d71a52cf0a25e336bb326ff904d570",
+    "trial-before-erc.json": "6656364d79a8c7cf6418d33a4d9ed42f5870772669a3e352a02ea0bad5ac12de",
+    "verify_cleanup.py": "61b3920d7cf6164a85f215440ae69badfa248a5d81f713eff2eab01661dff8bf",
+    "final-after-erc.json": "36d6d41c5944629649f00b352c20ccee8f01f436723a1636c65b285e4e96a776",
+    "final-drc.json": "ab32a9d9378c562ca77e27e6c1eaefd3684cfb1d38dc2cb0a3f2820414febb1d",
+    "vbat-model-review.json": "633f18abd052087a1ba710dc50c65274bbd117b118026ade1bfb2f670be9fb63",
+    "final-report.json": "3c8c69776b1c8d1c2400fcada926e1145501b56c33a53517231e0ee284b9003a",
+    "final-cleanup-verification.json": "33cae5fb2618f8df6895fc2d5d38e37339aa199edd273e258a4468fefe046de9",
+    "README.md": "53f8200c6df36b98307bec98beb9b8867375bce028d3e19c7c321d1b9ed20df4",
+    "clean_erc.py": "9733270c1b3229440a1d72634c70fc4357902a682a95499531249984160ce7d1",
+    "trial-report.json": "3d6e01cd49111adcba4ab32462be47ad94b578e94853fe6dbbf96fdcbf8f8381",
+    "trial-vbat-signal-model-raw-erc.json": "31da434a7133a0f631b760545d4d95f34e91b2ceb678aa3129f08d2a18424fca",
+    "trial-verification.json": "18b61fe9226dc19bfaf9b9dc12f81234ed3766aa53484da41c9dd4eefab4c376",
+    "trial-vbat-power-model-all-erc.json": "ad9725763b7d915247c47cfff7acd7603c9dc6655055a93c0a13d90d5bfb179b",
+    "trial-drc.json": "565fc16260c5d1c8ec5e9a5ff486006711ea7a5708237fa52600741cbb66f932",
+    "trial-raw-erc.json": "e82318b48d6344b15dfc91ff1d86dcfdd2f291400247d9ef08ad0a28feb8b404",
+    "trial-after-erc.json": "f52b94b7f511ebe47451451ceb2e3566ab7c11f6f361de906efdcfe983405330",
+    "final-all-erc.json": "3916e8356d6a65146bfdc060521d59f89ac1ae1d525540f996f85b6f4b387da0"
+  },
+  "scope": "Reusable cleanup, retained historical trials, and verified final integrated candidate PCB490af47d\u2026; physical qualification and supplier approval remain separate."
+}

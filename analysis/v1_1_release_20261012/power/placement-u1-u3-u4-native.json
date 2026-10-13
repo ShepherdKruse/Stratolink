@@ -1,0 +1,337 @@
+{
+  "status": "CENTER_AND_NUMBERED_PAD_CHECK_PASS",
+  "pcb_sha256": "490af47db22ef076938c17319782f194623d8f8b6a3f864a2e0cc23b3d025b15",
+  "cpl_sha256": "cc07c7876ed4ced465ae087aa226cab75561c13cb984fba6f14970691d61688f",
+  "coordinate_convention": "Canonical board X right/Y down; bottom component-side north-up view mirrors X only. CPL X is global board X, CPL Y=-boardY; bottom CPL X is not mirrored.",
+  "parts": {
+    "U4": {
+      "layer": "F.Cu",
+      "native_angle": 0.0,
+      "anchor": [
+        71.023,
+        58.808
+      ],
+      "copper_smd_bounds": [
+        69.168,
+        56.668,
+        72.878,
+        60.948
+      ],
+      "center": [
+        71.023,
+        58.808
+      ],
+      "numbered_pad_centers": {
+        "1": {
+          "x": 69.823,
+          "y": 56.933,
+          "net": "+3.3V"
+        },
+        "2": {
+          "x": 69.823,
+          "y": 58.183,
+          "net": "+3.3V"
+        },
+        "3": {
+          "x": 69.823,
+          "y": 59.433,
+          "net": "GND"
+        },
+        "4": {
+          "x": 69.823,
+          "y": 60.683,
+          "net": "+3.3V"
+        },
+        "5": {
+          "x": 72.223,
+          "y": 60.683,
+          "net": "+3.3V"
+        },
+        "6": {
+          "x": 72.223,
+          "y": 59.433,
+          "net": "unconnected-(U4-SDO-Pad6)"
+        },
+        "7": {
+          "x": 72.223,
+          "y": 58.183,
+          "net": "SDA"
+        },
+        "8": {
+          "x": 72.223,
+          "y": 56.933,
+          "net": "SCL"
+        }
+      },
+      "cpl": {
+        "Designator": "U4",
+        "Mid X": "71.023000",
+        "Mid Y": "-58.808000",
+        "Layer": "top",
+        "Rotation": "0.000000"
+      },
+      "cpl_center_error_mm": [
+        0.0,
+        0.0
+      ]
+    },
+    "U3": {
+      "layer": "F.Cu",
+      "native_angle": 180.0,
+      "anchor": [
+        65.537,
+        48.414
+      ],
+      "copper_smd_bounds": [
+        59.886999,
+        43.664001,
+        71.187001,
+        53.163999
+      ],
+      "center": [
+        65.537,
+        48.414
+      ],
+      "numbered_pad_centers": {
+        "1": {
+          "x": 70.286999,
+          "y": 52.813999,
+          "net": "GND"
+        },
+        "2": {
+          "x": 70.286999,
+          "y": 51.713999,
+          "net": "Net-(U3-TXD)"
+        },
+        "3": {
+          "x": 70.287,
+          "y": 50.614,
+          "net": "Net-(U3-RXD)"
+        },
+        "4": {
+          "x": 70.287,
+          "y": 49.514,
+          "net": "unconnected-(U3-TIMEPULSE-Pad4)"
+        },
+        "5": {
+          "x": 70.287,
+          "y": 48.414001,
+          "net": "GND"
+        },
+        "6": {
+          "x": 70.287,
+          "y": 47.314,
+          "net": "Net-(U3-VCC)"
+        },
+        "7": {
+          "x": 70.287,
+          "y": 46.214,
+          "net": "Net-(U3-VCC)"
+        },
+        "8": {
+          "x": 70.287001,
+          "y": 45.113999,
+          "net": "Net-(U3-VCC)"
+        },
+        "9": {
+          "x": 70.286999,
+          "y": 44.014001,
+          "net": "RSTN"
+        },
+        "10": {
+          "x": 60.787001,
+          "y": 44.014001,
+          "net": "GND"
+        },
+        "11": {
+          "x": 60.787001,
+          "y": 45.114001,
+          "net": "Net-(AE2-A)"
+        },
+        "12": {
+          "x": 60.787,
+          "y": 46.214,
+          "net": "GND"
+        },
+        "13": {
+          "x": 60.787,
+          "y": 47.314,
+          "net": "unconnected-(U3-LNA_EN-Pad13)"
+        },
+        "14": {
+          "x": 60.787,
+          "y": 48.413999,
+          "net": "unconnected-(U3-VCC_RF-Pad14)"
+        },
+        "15": {
+          "x": 60.787,
+          "y": 49.514,
+          "net": "unconnected-(U3-VIO_SEL-Pad15)"
+        },
+        "16": {
+          "x": 60.787,
+          "y": 50.614,
+          "net": "Net-(U3-SDA)"
+        },
+        "17": {
+          "x": 60.786999,
+          "y": 51.714001,
+          "net": "Net-(U3-SCL)"
+        },
+        "18": {
+          "x": 60.787001,
+          "y": 52.813999,
+          "net": "unconnected-(U3-SAFEBOOT_N-Pad18)"
+        }
+      },
+      "cpl": {
+        "Designator": "U3",
+        "Mid X": "65.537000",
+        "Mid Y": "-48.414000",
+        "Layer": "top",
+        "Rotation": "180.000000"
+      },
+      "cpl_center_error_mm": [
+        0.0,
+        0.0
+      ]
+    },
+    "U1": {
+      "layer": "B.Cu",
+      "native_angle": 0.0,
+      "anchor": [
+        67.190998,
+        37.814999
+      ],
+      "copper_smd_bounds": [
+        65.240997,
+        35.864998,
+        69.140999,
+        39.765
+      ],
+      "center": [
+        67.190998,
+        37.814999
+      ],
+      "numbered_pad_centers": {
+        "1": {
+          "x": 65.540999,
+          "y": 38.814998,
+          "net": "GND"
+        },
+        "2": {
+          "x": 65.540997,
+          "y": 38.315,
+          "net": "+SOLAR"
+        },
+        "3": {
+          "x": 65.540998,
+          "y": 37.814999,
+          "net": "VSTOR"
+        },
+        "4": {
+          "x": 65.540999,
+          "y": 37.314999,
+          "net": "Net-(U1-VREF_SAMP)"
+        },
+        "5": {
+          "x": 65.540997,
+          "y": 36.815001,
+          "net": "GND"
+        },
+        "6": {
+          "x": 66.190999,
+          "y": 36.165,
+          "net": "VSTOR"
+        },
+        "7": {
+          "x": 66.690997,
+          "y": 36.164998,
+          "net": "Net-(U1-VBAT_OV)"
+        },
+        "8": {
+          "x": 67.190998,
+          "y": 36.164999,
+          "net": "Net-(U1-VRDIV)"
+        },
+        "9": {
+          "x": 67.690998,
+          "y": 36.165,
+          "net": "GND"
+        },
+        "10": {
+          "x": 68.190996,
+          "y": 36.164998,
+          "net": "Net-(U1-OK_HYST)"
+        },
+        "11": {
+          "x": 68.840997,
+          "y": 36.815,
+          "net": "Net-(U1-OK_PROG)"
+        },
+        "12": {
+          "x": 68.840999,
+          "y": 37.314998,
+          "net": "Net-(U1-VOUT_SET)"
+        },
+        "13": {
+          "x": 68.840998,
+          "y": 37.814999,
+          "net": "Net-(U1-VBAT_OK)"
+        },
+        "14": {
+          "x": 68.840997,
+          "y": 38.314999,
+          "net": "+3.3V"
+        },
+        "15": {
+          "x": 68.840999,
+          "y": 38.814997,
+          "net": "GND"
+        },
+        "16": {
+          "x": 68.190997,
+          "y": 39.464998,
+          "net": "Net-(U1-LBUCK)"
+        },
+        "17": {
+          "x": 67.690999,
+          "y": 39.465,
+          "net": "GND"
+        },
+        "18": {
+          "x": 67.190998,
+          "y": 39.464999,
+          "net": "/VBAT"
+        },
+        "19": {
+          "x": 66.690998,
+          "y": 39.464998,
+          "net": "VSTOR"
+        },
+        "20": {
+          "x": 66.191,
+          "y": 39.465,
+          "net": "Net-(U1-LBOOST)"
+        },
+        "21": {
+          "x": 67.190998,
+          "y": 37.814999,
+          "net": "GND"
+        }
+      },
+      "cpl": {
+        "Designator": "U1",
+        "Mid X": "67.190998",
+        "Mid Y": "-37.814999",
+        "Layer": "bottom",
+        "Rotation": "180.000000"
+      },
+      "cpl_center_error_mm": [
+        0.0,
+        0.0
+      ]
+    }
+  },
+  "source_verification": "See placement-u1-u3-u4-review.md for primary-source orientation review and supplier-preview caveats."
+}

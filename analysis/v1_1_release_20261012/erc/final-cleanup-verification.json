@@ -1,0 +1,387 @@
+{
+  "candidate": "/Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/release-candidate",
+  "pcb_sha256": "490af47db22ef076938c17319782f194623d8f8b6a3f864a2e0cc23b3d025b15",
+  "schematic_sha256": "044984037a7346adc92ee9ea142e6c285ee7f6b66efc87e0a1ad195495379cc9",
+  "symbols_frozen_without_geometry_change": 20,
+  "existing_instances_unchanged_except_library_id": 111,
+  "existing_wires_labels_junctions_text_exact": true,
+  "physical_pad_net_membership_exact": 233,
+  "normalized_authored_pcb_tree_identical_except_pintype": true,
+  "generated_fill_caches_refilled_on_both_scratch_copies": true,
+  "all_native_filled_polygon_geometry_identical": true,
+  "native_assigned_uuids_only_for_previously_uuidless_properties": [
+    [
+      "C1",
+      "ki_fp_filters"
+    ],
+    [
+      "C10",
+      "ki_fp_filters"
+    ],
+    [
+      "C11",
+      "ki_fp_filters"
+    ],
+    [
+      "C12",
+      "ki_fp_filters"
+    ],
+    [
+      "C14",
+      "ki_fp_filters"
+    ],
+    [
+      "C15",
+      "ki_fp_filters"
+    ],
+    [
+      "C16",
+      "ki_fp_filters"
+    ],
+    [
+      "C17",
+      "ki_fp_filters"
+    ],
+    [
+      "C19",
+      "ki_fp_filters"
+    ],
+    [
+      "C2",
+      "ki_fp_filters"
+    ],
+    [
+      "C20",
+      "ki_fp_filters"
+    ],
+    [
+      "C21",
+      "ki_fp_filters"
+    ],
+    [
+      "C22",
+      "LCSC Part #"
+    ],
+    [
+      "C22",
+      "MPN"
+    ],
+    [
+      "C22",
+      "Manufacturer_Part_Number"
+    ],
+    [
+      "C22",
+      "Supplier Part"
+    ],
+    [
+      "C3",
+      "ki_fp_filters"
+    ],
+    [
+      "C4",
+      "ki_fp_filters"
+    ],
+    [
+      "C5",
+      "ki_fp_filters"
+    ],
+    [
+      "C6",
+      "ki_fp_filters"
+    ],
+    [
+      "C7",
+      "ki_fp_filters"
+    ],
+    [
+      "C8",
+      "ki_fp_filters"
+    ],
+    [
+      "C9",
+      "ki_fp_filters"
+    ],
+    [
+      "D1",
+      "ki_fp_filters"
+    ],
+    [
+      "D3",
+      "ki_fp_filters"
+    ],
+    [
+      "FB1",
+      "ki_fp_filters"
+    ],
+    [
+      "J20",
+      "ki_fp_filters"
+    ],
+    [
+      "J3",
+      "ki_fp_filters"
+    ],
+    [
+      "J4",
+      "ki_fp_filters"
+    ],
+    [
+      "L1",
+      "ki_fp_filters"
+    ],
+    [
+      "L2",
+      "ki_fp_filters"
+    ],
+    [
+      "R1",
+      "ki_fp_filters"
+    ],
+    [
+      "R10",
+      "ki_fp_filters"
+    ],
+    [
+      "R11",
+      "ki_fp_filters"
+    ],
+    [
+      "R12",
+      "ki_fp_filters"
+    ],
+    [
+      "R13",
+      "ki_fp_filters"
+    ],
+    [
+      "R14",
+      "ki_fp_filters"
+    ],
+    [
+      "R15",
+      "ki_fp_filters"
+    ],
+    [
+      "R16",
+      "ki_fp_filters"
+    ],
+    [
+      "R18",
+      "ki_fp_filters"
+    ],
+    [
+      "R19",
+      "ki_fp_filters"
+    ],
+    [
+      "R2",
+      "ki_fp_filters"
+    ],
+    [
+      "R21",
+      "ki_fp_filters"
+    ],
+    [
+      "R22",
+      "ki_fp_filters"
+    ],
+    [
+      "R23",
+      "ki_fp_filters"
+    ],
+    [
+      "R24",
+      "LCSC Part #"
+    ],
+    [
+      "R24",
+      "MPN"
+    ],
+    [
+      "R24",
+      "Manufacturer_Part_Number"
+    ],
+    [
+      "R24",
+      "Supplier Part"
+    ],
+    [
+      "R25",
+      "LCSC Part #"
+    ],
+    [
+      "R25",
+      "MPN"
+    ],
+    [
+      "R25",
+      "Manufacturer_Part_Number"
+    ],
+    [
+      "R25",
+      "Supplier Part"
+    ],
+    [
+      "R26",
+      "LCSC Part #"
+    ],
+    [
+      "R26",
+      "MPN"
+    ],
+    [
+      "R26",
+      "Manufacturer_Part_Number"
+    ],
+    [
+      "R26",
+      "Supplier Part"
+    ],
+    [
+      "R3",
+      "ki_fp_filters"
+    ],
+    [
+      "R4",
+      "ki_fp_filters"
+    ],
+    [
+      "R5",
+      "ki_fp_filters"
+    ],
+    [
+      "R6",
+      "ki_fp_filters"
+    ],
+    [
+      "R7",
+      "ki_fp_filters"
+    ],
+    [
+      "R8",
+      "ki_fp_filters"
+    ],
+    [
+      "R9",
+      "ki_fp_filters"
+    ],
+    [
+      "U8",
+      "LCSC Part #"
+    ],
+    [
+      "U8",
+      "MPN"
+    ],
+    [
+      "U8",
+      "Manufacturer_Part_Number"
+    ],
+    [
+      "U8",
+      "Supplier Part"
+    ]
+  ],
+  "project_rules_identical_except_three_exact_marker_exclusions": true,
+  "identical_native_artwork_files": [
+    "stratolink-B_Mask.gbs",
+    "stratolink-B_Paste.gbp",
+    "stratolink-F_Silkscreen.gto",
+    "stratolink-B_Silkscreen.gbo",
+    "stratolink-Edge_Cuts.gm1",
+    "stratolink-F_Mask.gts",
+    "stratolink-F_Paste.gtp",
+    "stratolink-F_Cu.gtl"
+  ],
+  "copper_export_serialization_differences": [
+    {
+      "file": "stratolink-B_Cu.gbl",
+      "before_sha256": "323993e165473f0a89f3375c3764a93133c30d34e1101fa5bb615e68cdca6661",
+      "after_sha256": "84990aed516bedccbb7b5ebe9be8a52f81028f13994fa4422d1260f374335d4e",
+      "geometry_evidence": "Exact normalized authored objects and all native filled polygons match; byte ordering is not asserted equal."
+    }
+  ],
+  "erc_filtered_errors": 0,
+  "erc_filtered_warnings": 0,
+  "erc_raw_errors": 2,
+  "erc_raw_warnings": 1,
+  "erc_grounded_pin_exclusions": [
+    {
+      "description": "Pins of type Open collector and Power output are connected",
+      "items": [
+        {
+          "description": "Symbol U6 Pin 5 [INT, Open collector, Line]",
+          "pos": {
+            "x": 0.5969,
+            "y": 1.3335
+          },
+          "uuid": "97fe1358-9111-4cae-ace0-69f4a04c9922"
+        },
+        {
+          "description": "Symbol #FLG102 Pin 1 [Power output, Line]",
+          "pos": {
+            "x": 1.9939,
+            "y": 1.0795
+          },
+          "uuid": "944d0dde-0354-5fbe-8d7f-fd73f10709be"
+        }
+      ],
+      "severity": "error",
+      "type": "pin_to_pin"
+    },
+    {
+      "description": "Pins of type Open collector and Power output are connected",
+      "items": [
+        {
+          "description": "Symbol U5 Pin C2 [ALERT, Open collector, Line]",
+          "pos": {
+            "x": 0.5334,
+            "y": 1.6002
+          },
+          "uuid": "d24f236f-77e7-440c-9378-f49a6d546306"
+        },
+        {
+          "description": "Symbol #FLG102 Pin 1 [Power output, Line]",
+          "pos": {
+            "x": 1.9939,
+            "y": 1.0795
+          },
+          "uuid": "944d0dde-0354-5fbe-8d7f-fd73f10709be"
+        }
+      ],
+      "severity": "error",
+      "type": "pin_to_pin"
+    },
+    {
+      "description": "Pins of type Bidirectional and Power output are connected",
+      "items": [
+        {
+          "description": "Symbol U7 Pin 3 [SDO/SAO, Bidirectional, Line]",
+          "pos": {
+            "x": 0.254,
+            "y": 0.4191
+          },
+          "uuid": "82711c1e-7163-4ccd-9fb6-5a60e20408e1"
+        },
+        {
+          "description": "Symbol #FLG102 Pin 1 [Power output, Line]",
+          "pos": {
+            "x": 1.9939,
+            "y": 1.0795
+          },
+          "uuid": "944d0dde-0354-5fbe-8d7f-fd73f10709be"
+        }
+      ],
+      "severity": "warning",
+      "type": "pin_to_pin"
+    }
+  ],
+  "drc_violations": {
+    "silk_over_copper": 4
+  },
+  "drc_opens": 0,
+  "drc_schematic_parity": 0,
+  "script_sha256": "61b3920d7cf6164a85f215440ae69badfa248a5d81f713eff2eab01661dff8bf",
+  "cleanup_script_sha256": "9733270c1b3229440a1d72634c70fc4357902a682a95499531249984160ce7d1"
+}

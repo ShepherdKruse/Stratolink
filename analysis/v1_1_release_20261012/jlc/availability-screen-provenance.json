@@ -1,0 +1,11 @@
+{
+  "status": "procurement screen only; NOT a fabrication release",
+  "board_quantity": 3,
+  "references": 56,
+  "part_groups": 30,
+  "sources": {
+    "/Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/preliminary-jlc-geometry/assembly-audit.json": "ec3ded73742107a76571b93dd9436a4f44d88e58529818c454a427d8d2476bce",
+    "analysis/v1_1_release_20261012/power/balancer-candidate.json": "091ec2174dbf14bbdd2efee543223036339c531ac67851023d37a7422c7420f3"
+  },
+  "intent": "Preserves prior pilot BOM except proposed R1 replacement and five reviewed balance-circuit parts. Final native CAD export must agree before ordering."
+}

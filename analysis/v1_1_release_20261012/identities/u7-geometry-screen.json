@@ -1,0 +1,40 @@
+{
+  "before": {
+    "central_track_area_mm2": 0.5080049345241892,
+    "central_zone_area_mm2": 0.0,
+    "central_all_top_copper_area_mm2": 0.5079893096239991
+  },
+  "after": {
+    "central_track_area_mm2": 0.0,
+    "central_zone_area_mm2": 0.0,
+    "central_all_top_copper_area_mm2": 0.0
+  },
+  "F.Cu": {
+    "changed_area_mm2": 2.4442040583411595,
+    "delta_bounds_mm": [
+      59.504718,
+      36.279556,
+      76.032509,
+      39.701
+    ],
+    "outside_local_window_mm2": 2.1211279687618008e-08
+  },
+  "B.Cu": {
+    "changed_area_mm2": 0.3239249967079995,
+    "delta_bounds_mm": [
+      69.604804,
+      38.782644,
+      72.181499,
+      39.445196
+    ],
+    "outside_local_window_mm2": 0.0
+  },
+  "power_via_to_C6_pad2": {
+    "net_both": "+3.3V",
+    "copper_gap_mm": 0.13750366520387547,
+    "hole_to_land_gap_mm": 0.23750365286940459,
+    "conservative_copper_bbox_gap_mm": 0.131,
+    "conservative_hole_bbox_gap_mm": 0.231,
+    "disposition": "Same-net deliberate B.Cu connection; no different-net clearance requirement or pad clearance override. Via hole is outside the paste land. Bare-board solder-wicking needs pilot inspection."
+  }
+}

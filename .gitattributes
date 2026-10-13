@@ -1,2 +1,6 @@
 # Auto detect text files and perform LF normalization
 * text=auto
+
+# Preserve exact bytes of hashed manufacturing outputs and review evidence.
+/hardware/gerbers/v1.1-pilot/** -text
+/analysis/v1_1_release_20261012/** -text

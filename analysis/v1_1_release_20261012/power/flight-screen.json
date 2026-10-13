@@ -1,0 +1,84 @@
+{
+  "file": "analysis/power/flight_power.csv",
+  "sha256": "bafc35b4a41f79c8ea6080ed994c5db89b8c62e55503ba8992bee65808c71367",
+  "records": 458,
+  "reported_solar": {
+    "minimum": {
+      "time": "2026-05-15T14:00:30.323+00:00",
+      "device_id": "stratolink-3",
+      "lat": "",
+      "lon": "",
+      "altitude_m": "",
+      "battery_voltage": "3.94",
+      "solar_voltage": "0.42",
+      "ambient_lux": "45",
+      "uv_index": "0"
+    },
+    "maximum": {
+      "time": "2026-05-15T17:55:37.588709+00:00",
+      "device_id": "stratolink-3",
+      "lat": "37.7785033",
+      "lon": "-122.3979506",
+      "altitude_m": "-14",
+      "battery_voltage": "5.41",
+      "solar_voltage": "5.538",
+      "ambient_lux": "8738",
+      "uv_index": "0"
+    }
+  },
+  "reported_vstor": {
+    "minimum": {
+      "time": "2026-05-28T19:58:20.366112+00:00",
+      "device_id": "stratolink-3-eu",
+      "lat": "",
+      "lon": "",
+      "altitude_m": "",
+      "battery_voltage": "3.322",
+      "solar_voltage": "1.426",
+      "ambient_lux": "81",
+      "uv_index": "0"
+    },
+    "maximum": {
+      "time": "2026-05-15T17:10:26.596841+00:00",
+      "device_id": "stratolink-3",
+      "lat": "37.7785117",
+      "lon": "-122.3978912",
+      "altitude_m": "-8",
+      "battery_voltage": "5.412",
+      "solar_voltage": "4.98",
+      "ambient_lux": "6617",
+      "uv_index": "0"
+    }
+  },
+  "solar_above_5p1_count": 85,
+  "solar_above_5p5_count": 1,
+  "high_altitude_solar": {
+    "minimum": {
+      "time": "2026-05-28T17:50:37.839139+00:00",
+      "device_id": "stratolink-3-eu",
+      "lat": "40.5472281",
+      "lon": "-5.3064298",
+      "altitude_m": "10020",
+      "battery_voltage": "4.132",
+      "solar_voltage": "3.596",
+      "ambient_lux": "8738",
+      "uv_index": "1"
+    },
+    "maximum": {
+      "time": "2026-05-18T01:15:29.70531+00:00",
+      "device_id": "stratolink-3",
+      "lat": "32.8720291",
+      "lon": "-118.3905433",
+      "altitude_m": "9621",
+      "battery_voltage": "5.366",
+      "solar_voltage": "5.464",
+      "ambient_lux": "8738",
+      "uv_index": "3"
+    }
+  },
+  "limitations": [
+    "ADC telemetry is not a calibrated Voc measurement.",
+    "Sampling does not capture worst-case instantaneous voltage.",
+    "Old VDDA assumptions can bias voltage when the rail is out of regulation."
+  ]
+}

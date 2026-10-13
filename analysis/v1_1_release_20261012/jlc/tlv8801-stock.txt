@@ -1,0 +1,104 @@
+JLCPCB 
+Parts Library 
+All Components 
+Search TLV8801DBVT
+TLV8801DBVT Search results (1 Found)
+Category
+Capacitors
+Aluminum Electrolytic Capacitors - Leaded
+Circuit Protection
+Varistors
+Connectors
+Connector Housings
+Crystals, Oscillators, Resonators
+Crystal Oscillators
+Crystals
+Programmable Oscillators
+Temperature Compensated Crystal Oscillators (TCXO)
+Amplifiers/Comparators
+Operational Amplifier
+Manufacturer
+CTS Electronic Components
+Glenair
+KNSCHA
+SEI(Stackpole Elec)
+Seiko Epson
+Shenzhen SCTF Elec
+Skyworks Solutions
+SKYWORKS/SILICON LABS
+TE Connectivity
+TXC Corp
+Vishay Intertech
+Texas Instruments
+PackageType
+Plugin,D16xL32mm
+Plugin,D2.3xL6.1mm
+Plugin,D2.4xL6.3mm
+Plugin,D2.4xL6.4mm
+Plugin,D3.3xL9mm
+Plugin,D3.6xL7.4mm
+Plugin,D4.5xL11.5mm
+Plugin,D4.6xL14.3mm
+Plugin,D5xL15.5mm
+SMD2016-4P
+SMD3225-4P
+SMD7050-4P
+SOT-23-5
+Parts Type
+Basic
+Promotional Extended
+Extended
+Mechanical Assembly
+PCBA Type
+Economic
+Standard
+Information
+Datasheet
+Photo
+Results remaining:
+1
+Reset All Apply
+Hide unavailable options
+Hide Filters
+In stock Parts
+		
+Compare
+MFR Part #
+		Description		Manufacturer		
+Stock
+≥
+		
+Price
+			
+	
+	
+TLV8801DBVT
+C544879
+Extended
+	
+	
+-40℃~+125℃ 0.1pA 0.1pA 1 1.5V/ms 1.7V~5.5V 1uV/℃ 340nV/√Hz@100Hz 4.5mV 450nA 87dB Built-in compensation、EMI filtering/RF suppression Rail-to-rail output SOT-23-5 Operational Amplifier ROHS
+	
+	
+Texas Instruments
+	
+	
+152
+	
+	
+1+
+$0.3502
+250+
+$0.3322
+Show More
+	
+	
+
+Min: 1
+
+Full Reel: 250
+
+Total: $0.35
+Add to My Part Lib
+1 item in total
+1

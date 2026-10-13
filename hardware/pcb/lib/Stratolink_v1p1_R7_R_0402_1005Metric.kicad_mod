@@ -1,0 +1,232 @@
+(footprint "Stratolink_v1p1_R7_R_0402_1005Metric"
+	(version 20260206)
+	(generator "pcbnew")
+	(generator_version "10.0")
+	(layer "F.Cu")
+	(descr "Resistor SMD 0402 (1005 Metric), square (rectangular) end terminal, IPC_7351 nominal, (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf), generated with kicad-footprint-generator")
+	(tags "resistor")
+	(property "Reference" "R7"
+		(at 0 -1.17 0)
+		(layer "F.SilkS")
+		(hide yes)
+		(uuid "7d3fdfa0-3213-4db3-952e-f89ece0c9395")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Value" "4.75MΩ"
+		(at 0 1.17 0)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "290941c8-05ff-49fa-8002-f4cca349253f")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Datasheet" "https://www.lcsc.com/product-detail/C2998153.html"
+		(at 0 0 0)
+		(unlocked yes)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "ab90a566-b381-4982-a580-e113860c0a68")
+		(effects
+			(font
+				(size 1.27 1.27)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Description" "FRC0402F4754TS"
+		(at 0 0 0)
+		(unlocked yes)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "1157af52-fd2f-4110-8f5f-d44d7aa5f533")
+		(effects
+			(font
+				(size 1.27 1.27)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "LCSC" "C2998153"
+		(at 0 0 -90)
+		(layer "B.Fab")
+		(hide yes)
+		(uuid "f146c0ac-8be0-44da-8f9b-e5ef4ad38005")
+		(effects
+			(font
+				(size 1.27 1.27)
+				(thickness 0.15)
+			)
+			(justify mirror)
+		)
+	)
+	(property "Manufacturer_Part_Number" "FRC0402F4754TS"
+		(at 0 0 -90)
+		(layer "B.Fab")
+		(hide yes)
+		(uuid "dce6d802-3a7c-45e9-93d8-f347879ae60e")
+		(effects
+			(font
+				(size 1.27 1.27)
+				(thickness 0.15)
+			)
+			(justify mirror)
+		)
+	)
+	(property "Supplier Part" "C2998153"
+		(at 0 0 -90)
+		(layer "B.Fab")
+		(hide yes)
+		(uuid "ec4a9769-8044-4190-81d7-be0d59a0c448")
+		(effects
+			(font
+				(size 1.27 1.27)
+				(thickness 0.15)
+			)
+			(justify mirror)
+		)
+	)
+	(property "Supplier" "LCSC"
+		(at 0 0 -90)
+		(layer "B.Fab")
+		(hide yes)
+		(uuid "7391c38c-d7d3-4a70-9533-91b816d29569")
+		(effects
+			(font
+				(size 1.27 1.27)
+				(thickness 0.15)
+			)
+			(justify mirror)
+		)
+	)
+	(property ki_fp_filters "R_*")
+	(sheetname "Root")
+	(sheetfile "stratolink.kicad_sch")
+	(attr smd)
+	(duplicate_pad_numbers_are_jumpers no)
+	(fp_line
+		(start -0.930001 0.470002)
+		(end 0.929998 0.469999)
+		(stroke
+			(width 0.05)
+			(type solid)
+		)
+		(layer "F.CrtYd")
+		(uuid "e57a4c00-05a4-4b46-ac80-28c563dbb5b1")
+	)
+	(fp_line
+		(start -0.929998 -0.469999)
+		(end -0.930001 0.470002)
+		(stroke
+			(width 0.05)
+			(type solid)
+		)
+		(layer "F.CrtYd")
+		(uuid "0e3a9c7f-f045-4630-b127-5ffc5497d5f5")
+	)
+	(fp_line
+		(start 0.929998 0.469999)
+		(end 0.930001 -0.470002)
+		(stroke
+			(width 0.05)
+			(type solid)
+		)
+		(layer "F.CrtYd")
+		(uuid "6d60b81b-69a5-4f46-874e-a2e10ad8edab")
+	)
+	(fp_line
+		(start 0.930001 -0.470002)
+		(end -0.929998 -0.469999)
+		(stroke
+			(width 0.05)
+			(type solid)
+		)
+		(layer "F.CrtYd")
+		(uuid "8a102b09-d72b-4d83-a1f9-08a6f7e47955")
+	)
+	(fp_line
+		(start -0.525 -0.27)
+		(end -0.525 0.27)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(layer "F.Fab")
+		(uuid "05059194-170d-4772-aade-2b23d84f57f4")
+	)
+	(fp_line
+		(start -0.525 0.27)
+		(end 0.525 0.27)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(layer "F.Fab")
+		(uuid "23f0d0b5-f56a-4a91-9063-2822086f07b4")
+	)
+	(fp_line
+		(start 0.525 -0.27)
+		(end -0.525 -0.27)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(layer "F.Fab")
+		(uuid "7bf17720-339f-43d7-86d5-4385fdd83ea4")
+	)
+	(fp_line
+		(start 0.525 0.27)
+		(end 0.525 -0.27)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(layer "F.Fab")
+		(uuid "be2e59d4-282c-4108-b0a5-9cac123c6c8f")
+	)
+	(fp_text user "${REFERENCE}"
+		(at 0 0 0)
+		(layer "F.Fab")
+		(uuid "2819d9ba-c6ce-40c2-a2c7-6803d5dbf571")
+		(effects
+			(font
+				(size 0.26 0.26)
+				(thickness 0.04)
+			)
+		)
+	)
+	(pad "1" smd roundrect
+		(at -0.510001 0)
+		(size 0.54 0.64)
+		(layers "F.Cu" "F.Mask" "F.Paste")
+		(roundrect_rratio 0.25)
+		(uuid "6efca8e7-5aa0-431a-83e9-28528f6e6485")
+	)
+	(pad "2" smd roundrect
+		(at 0.510001 0)
+		(size 0.54 0.64)
+		(layers "F.Cu" "F.Mask" "F.Paste")
+		(roundrect_rratio 0.25)
+		(uuid "95aa9756-621b-425b-a6cf-7ef49530956f")
+	)
+	(embedded_fonts no)
+	(model "${KICAD10_3DMODEL_DIR}/Resistor_SMD.3dshapes/R_0402_1005Metric.step"
+		(offset
+			(xyz 0 0 0)
+		)
+		(scale
+			(xyz 1 1 1)
+		)
+		(rotate
+			(xyz 0 0 0)
+		)
+	)
+)

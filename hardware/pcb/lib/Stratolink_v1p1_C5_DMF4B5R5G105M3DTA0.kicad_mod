@@ -1,0 +1,210 @@
+(footprint "Stratolink_v1p1_C5_DMF4B5R5G105M3DTA0"
+	(version 20260206)
+	(generator "pcbnew")
+	(generator_version "10.0")
+	(layer "F.Cu")
+	(descr "DMF4B5R5G105M3DTA0-4")
+	(tags "Capacitor Polarised")
+	(property "Reference" "C5"
+		(at 0 -2.625 0)
+		(layer "F.SilkS")
+		(hide yes)
+		(uuid "e7368c01-c4f8-4ae6-91a2-0b365bc36c8e")
+		(effects
+			(font
+				(size 1.27 1.27)
+				(thickness 0.254)
+			)
+		)
+	)
+	(property "Value" "1F"
+		(at 0 -2.625 0)
+		(layer "F.SilkS")
+		(hide yes)
+		(uuid "05f1aa90-8566-4f8b-a6a3-4c2da98f3240")
+		(effects
+			(font
+				(size 1.27 1.27)
+				(thickness 0.254)
+			)
+		)
+	)
+	(property "Datasheet" ""
+		(at 0 0 0)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "d380eb7f-392a-4648-83c7-07e5a73c3693")
+		(effects
+			(font
+				(size 1.27 1.27)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Description" "DMF4B5R5G105M3DTA0 1 F 5.5 V supercapacitor; CAD pads 1=positive, 2=negative, 3=isolated balance; manual backside assembly"
+		(at 0 0 0)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "298c8591-e099-4a31-81fb-8dcbae3023f7")
+		(effects
+			(font
+				(size 1.27 1.27)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Manufacturer" "CAP-XX / legacy Murata"
+		(at 0 0 0)
+		(layer "B.Fab")
+		(hide yes)
+		(uuid "9f2debbf-aab1-4104-8cf4-7c715b3e52d1")
+		(effects
+			(font
+				(size 1.27 1.27)
+				(thickness 0.15)
+			)
+			(justify mirror)
+		)
+	)
+	(property "Manufacturer_Part_Number" "DMF4B5R5G105M3DTA0"
+		(at 0 0 0)
+		(layer "B.Fab")
+		(hide yes)
+		(uuid "7ccf70af-a8ce-4361-8021-dfd94f3c0848")
+		(effects
+			(font
+				(size 1.27 1.27)
+				(thickness 0.15)
+			)
+			(justify mirror)
+		)
+	)
+	(property "Assembly_Note" "Back view: negative left, balance center, positive right. Balance is intentionally unconnected; no pin-order refresh from old library."
+		(at 0 0 0)
+		(layer "B.Fab")
+		(hide yes)
+		(uuid "77869463-68fa-4318-b438-c921cb410530")
+		(effects
+			(font
+				(size 1.27 1.27)
+				(thickness 0.15)
+			)
+			(justify mirror)
+		)
+	)
+	(property ki_fp_filters "C_*")
+	(sheetname "Root")
+	(sheetfile "stratolink.kicad_sch")
+	(attr smd)
+	(duplicate_pad_numbers_are_jumpers no)
+	(fp_line
+		(start -8 -21.25)
+		(end -8 16)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(layer "F.CrtYd")
+		(uuid "2136d50d-e38e-4c1c-bb15-8bc93ba83913")
+	)
+	(fp_line
+		(start -8 16)
+		(end 8 16)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(layer "F.CrtYd")
+		(uuid "30d45e65-08b6-45f7-8c67-3e8daa682804")
+	)
+	(fp_line
+		(start 8 -21.25)
+		(end -8 -21.25)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(layer "F.CrtYd")
+		(uuid "e71d0a9b-bf77-4095-a17e-5c02fbc85554")
+	)
+	(fp_line
+		(start 8 16)
+		(end 8 -21.25)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(layer "F.CrtYd")
+		(uuid "b5d37c5e-1865-474d-9ef2-acca1de6a446")
+	)
+	(fp_line
+		(start -7 -15)
+		(end 7 -15)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(layer "F.Fab")
+		(uuid "2ab62420-871a-448e-a390-4a720b7721c0")
+	)
+	(fp_line
+		(start -7 15)
+		(end -7 -15)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(layer "F.Fab")
+		(uuid "f87ee10d-34c0-49a2-8108-a91daaa4c25e")
+	)
+	(fp_line
+		(start 7 -15)
+		(end 7 15)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(layer "F.Fab")
+		(uuid "f7848a96-5d1d-4d50-b9c6-23f55ce45dc6")
+	)
+	(fp_line
+		(start 7 15)
+		(end -7 15)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(layer "F.Fab")
+		(uuid "98473169-333f-49f6-b143-646a2a5e7389")
+	)
+	(pad "1" smd rect
+		(at 3.5 -18.5)
+		(size 2.5 3.5)
+		(layers "F.Cu" "F.Mask" "F.Paste")
+		(uuid "360f7f4a-e111-4736-a983-3a4a1e15da29")
+	)
+	(pad "2" smd rect
+		(at -3.5 -18.5)
+		(size 2.5 3.5)
+		(layers "F.Cu" "F.Mask" "F.Paste")
+		(uuid "d4894853-70b5-43a8-ab83-4022417a457a")
+	)
+	(pad "3" smd rect
+		(at 0.01 -18.5)
+		(size 2.5 3.5)
+		(layers "F.Cu" "F.Mask" "F.Paste")
+		(uuid "a3b5ef59-5238-4d92-95c8-02036eea35e3")
+	)
+	(embedded_fonts no)
+	(model "${KIPRJMOD}/lib/cap.step"
+		(offset
+			(xyz 0 0 2)
+		)
+		(scale
+			(xyz 1 1 1)
+		)
+		(rotate
+			(xyz 0 0 -90)
+		)
+	)
+)

@@ -1,0 +1,291 @@
+(footprint "Stratolink_v1p1_D3_D_SOD-523"
+	(version 20260206)
+	(generator "pcbnew")
+	(generator_version "10.0")
+	(layer "F.Cu")
+	(descr "http://www.diodes.com/datasheets/ap02001.pdf p.144")
+	(tags "Diode SOD523")
+	(property "Reference" "D3"
+		(at -0.000001 -1.300001 0)
+		(layer "F.SilkS")
+		(hide yes)
+		(uuid "eafb068e-5d95-401b-ab5b-6389091bbaba")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Value" "PESD5V0U1BB"
+		(at 0.000001 1.4 0)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "4a067abe-eb3d-4438-a832-355e2c9e5c5d")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Datasheet" "https://uploadcdn.oneyac.com/attachments/files/brand_pdf/leiditech/3D/92/PESD5V0U1BB.pdf"
+		(at 0 0 0)
+		(unlocked yes)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "b337cfc1-3901-4111-be97-a63c1e8ef34a")
+		(effects
+			(font
+				(size 1.27 1.27)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Description" "Bidirectional 5 V low-capacitance ESD TVS, SOD-523; nominal 0.5 pF; PESD5V0U1BB"
+		(at 0 0 0)
+		(unlocked yes)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "5cfdbd90-6bcf-46fa-9263-cd843c6a3efd")
+		(effects
+			(font
+				(size 1.27 1.27)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Manufacturer" "Leiditech"
+		(at 0 0 270)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "d57299e6-2d84-4bae-85cf-59a6de010a44")
+		(effects
+			(font
+				(size 1.27 1.27)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Manufacturer_Part_Number" "PESD5V0U1BB"
+		(at 0 0 270)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "5b2d770f-190e-4a07-b34d-7ef6e007d051")
+		(effects
+			(font
+				(size 1.27 1.27)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Supplier" "LCSC"
+		(at 0 0 270)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "ddea7c9b-d232-4922-ba20-de7667d14ecb")
+		(effects
+			(font
+				(size 1.27 1.27)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "LCSC" "C5272735"
+		(at 0 0 270)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "13bb384a-61c7-4302-afca-8aca239d4c17")
+		(effects
+			(font
+				(size 1.27 1.27)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Supplier Part" "C5272735"
+		(at 0 0 270)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "9e22f49b-c08a-42d4-b10f-4a9087b195e4")
+		(effects
+			(font
+				(size 1.27 1.27)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property ki_fp_filters "D*SOD?923*")
+	(sheetname "Root")
+	(sheetfile "stratolink.kicad_sch")
+	(attr smd)
+	(duplicate_pad_numbers_are_jumpers no)
+	(fp_line
+		(start -1.25 -0.7)
+		(end 1.25 -0.7)
+		(stroke
+			(width 0.05)
+			(type solid)
+		)
+		(layer "F.CrtYd")
+		(uuid "aed73b66-ae5a-49ad-afd0-4f3ad753a945")
+	)
+	(fp_line
+		(start -1.25 0.7)
+		(end -1.25 -0.7)
+		(stroke
+			(width 0.05)
+			(type solid)
+		)
+		(layer "F.CrtYd")
+		(uuid "087af19a-242f-44c2-99d0-e77dd8e97ad5")
+	)
+	(fp_line
+		(start 1.25 -0.7)
+		(end 1.25 0.7)
+		(stroke
+			(width 0.05)
+			(type solid)
+		)
+		(layer "F.CrtYd")
+		(uuid "f32286e7-7042-46e5-923e-11f36303cbdc")
+	)
+	(fp_line
+		(start 1.25 0.7)
+		(end -1.25 0.7)
+		(stroke
+			(width 0.05)
+			(type solid)
+		)
+		(layer "F.CrtYd")
+		(uuid "ba5ac48a-82c5-471e-a3a6-b7fbc6fd1ce4")
+	)
+	(fp_line
+		(start -0.65 -0.45)
+		(end 0.65 -0.45)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(layer "F.Fab")
+		(uuid "3d3b6b3a-ed15-457d-85fd-cb0ad7d50f9c")
+	)
+	(fp_line
+		(start -0.65 0.45)
+		(end -0.65 -0.45)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(layer "F.Fab")
+		(uuid "33c6f489-4fc2-4b1d-9e83-c9c2b9f62707")
+	)
+	(fp_line
+		(start -0.200001 0.000001)
+		(end -0.35 -0.000001)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(layer "F.Fab")
+		(uuid "323ac7f0-57c2-4d0e-a652-4b6ca9e11f07")
+	)
+	(fp_line
+		(start -0.200001 0.000001)
+		(end 0.1 0.200001)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(layer "F.Fab")
+		(uuid "4db7bd3a-2ca1-45f9-b45f-22b82357fc0e")
+	)
+	(fp_line
+		(start -0.2 0.2)
+		(end -0.2 -0.2)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(layer "F.Fab")
+		(uuid "4b57df86-0717-4221-b4d4-46bf4cc05160")
+	)
+	(fp_line
+		(start 0.099996 -0.2)
+		(end -0.200001 0.000001)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(layer "F.Fab")
+		(uuid "9117384f-7af0-4423-bc2f-bf351b2a36d1")
+	)
+	(fp_line
+		(start 0.099999 0.000001)
+		(end 0.25 0)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(layer "F.Fab")
+		(uuid "5dc5ec52-6d95-4159-81eb-11847ed45c2b")
+	)
+	(fp_line
+		(start 0.1 0.200001)
+		(end 0.099996 -0.2)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(layer "F.Fab")
+		(uuid "c2db6274-da4f-430f-8636-be6defc4afbe")
+	)
+	(fp_line
+		(start 0.65 -0.45)
+		(end 0.65 0.45)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(layer "F.Fab")
+		(uuid "2f7fed85-ac20-4849-bbef-7bac7bad5d29")
+	)
+	(fp_line
+		(start 0.65 0.45)
+		(end -0.65 0.45)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(layer "F.Fab")
+		(uuid "09f21a2e-3ed2-4af5-b2e4-fd71e749cf6a")
+	)
+	(pad "1" smd roundrect
+		(at -0.700001 0 180)
+		(size 0.6 0.7)
+		(layers "F.Cu" "F.Mask" "F.Paste")
+		(roundrect_rratio 0.25)
+		(thermal_bridge_width 0.25)
+		(thermal_gap 0.25)
+		(uuid "390842f8-d9d4-4229-8ca4-a68fac8e12f8")
+	)
+	(pad "2" smd roundrect
+		(at 0.700001 0 180)
+		(size 0.6 0.7)
+		(layers "F.Cu" "F.Mask" "F.Paste")
+		(roundrect_rratio 0.25)
+		(uuid "2906e4d4-9130-471b-96b8-09e7d34351b4")
+	)
+	(embedded_fonts no)
+	(model "${KICAD10_3DMODEL_DIR}/Diode_SMD.3dshapes/D_SOD-523.step"
+		(offset
+			(xyz 0 0 0)
+		)
+		(scale
+			(xyz 1 1 1)
+		)
+		(rotate
+			(xyz 0 0 0)
+		)
+	)
+)

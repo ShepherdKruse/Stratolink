@@ -1,0 +1,96 @@
+{
+  "status": "PASS: exact inspected U7 merge; final power combination pending",
+  "base": "/Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/integrated",
+  "candidate": "/Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/integrated-u7-r2",
+  "pcb_sha256": "ff06c79d4480b1d7614904daa753e1949fd64a065d76a948cc9995f25d6afb5f",
+  "scripts": {
+    "merge_reviews.py": "19ae0863bcd302a564df5afbba83f4eed7d33eb1a6d3f9b83432135d0bb47821",
+    "build_integrated.py": "b017e344d81b5f40fe0946cc0309898b5e666f8e3c1d7942570f6c0164821fb4"
+  },
+  "all61_footprint_pad_geometry_nets_exact": true,
+  "U7_zone_connect_zero_added_only_pins": [
+    "3",
+    "6"
+  ],
+  "other60_footprints_exact": true,
+  "U7_metadata_properties_exact": true,
+  "global_outline_masks_setup_drawings_exact": true,
+  "schematic_project_tables_exact": true,
+  "unique_refs_object_uuids": true,
+  "changed_libraries": [
+    "Stratolink_v1p1_U7_PQFN50P200X200100-12N.kicad_mod"
+  ],
+  "exact_local_rule_append": true,
+  "expected_delta": {
+    "segment": {
+      "removed": [
+        "19d84636-dd1d-4c0b-826b-eb8fe3196356",
+        "3777268c-2956-4adc-8055-47eb850a79b4",
+        "3c460803-a0e0-4087-a6f3-936cf4d1fee5",
+        "4804ca70-e725-4411-8161-211cdfd420f4",
+        "50467fe8-5838-443d-bd6f-469444951d63",
+        "5b010a5d-3cf4-4a82-a8e6-cad18abe79b0",
+        "5dc0585a-7141-4f08-afce-4a3c96f8fc8d",
+        "66a82ae2-fcc0-482c-bf5c-4e43c7fe8847",
+        "6bbdefb3-9efe-4d87-82b7-4e492977fa39",
+        "84d64290-6950-4148-b45a-9ed52cbfe265",
+        "85dff8c6-5433-4e72-8157-8dcf49f19daf",
+        "8e9a2f05-b219-4858-aef3-4548091e9031",
+        "a2699bc6-d280-43ac-8fc2-ea5a3655931b",
+        "a8f806ed-4e7a-4dae-9ad1-db4955088bff",
+        "acf3109c-eb1e-4509-9789-79a4830e3dcb",
+        "bb51434a-165d-47a7-b603-0b2f78c2eb54",
+        "c071d5fe-1b47-46a1-bcdd-4d46cde56e79",
+        "c542a530-7aab-438f-8d70-88a1c96fa3d6",
+        "cb3f0267-bffe-4bc8-a5fc-742f300859ce",
+        "e884341a-a321-4ea4-ac9a-20b95cc49102",
+        "eb1489ed-e03a-4611-9a19-01ffdfe3f79b"
+      ],
+      "added": [
+        "07efb5d0-d441-5f5d-9fbb-9ef3e7d524bb",
+        "084f312f-8a73-5cac-86e3-9e2201dbe674",
+        "136d03c2-7ad1-54b5-8bb1-f975625793c3",
+        "3248dcaa-4764-59d3-bedb-7a88b3c56ced",
+        "5801e246-76eb-51d0-a30b-3c4544b930b1",
+        "60c6cc82-783b-536c-a515-2ee380fad117",
+        "6cb9e7bf-a907-5459-9d08-4a1d81649a88",
+        "6fcc5dcc-e744-5f1a-b6cb-2fc9b95c610f",
+        "702bd6bb-960f-5290-96f3-cbaf6945cc2d",
+        "78deac62-4d49-5e31-ac5d-995141b47479",
+        "8ed15558-e942-5611-b684-2d7d259e2d82",
+        "a578cff5-3cd7-5bf8-94cc-a06c6075b999",
+        "a884cced-b27f-5bd3-b432-d567e0011a69",
+        "aef38fe3-1945-5225-a839-5865d9a012d5",
+        "b34f7752-a764-58b9-9127-f7b2a90ee797",
+        "b8a74e72-ad8b-5e95-91e8-c107fc523a85",
+        "cdc600df-adb0-53f9-9a21-d590d6d5d189",
+        "d79740da-7534-56d5-a147-e9d24cc751f7",
+        "eba57b16-dcc4-5350-a3b5-8f698aab9b8d",
+        "f09fe3c8-cea9-5a0c-ae6e-b8d6e1047eff"
+      ],
+      "changed": []
+    },
+    "via": {
+      "removed": [],
+      "added": [
+        "a240e127-e26f-5f29-b95a-eeeca2eb6006",
+        "d1f5d95e-4f63-5197-a83a-6543d22cd26d"
+      ],
+      "changed": []
+    },
+    "zone": {
+      "removed": [],
+      "added": [
+        "261bbbd8-a13d-5cb8-9752-8d8f43b6e1bc",
+        "dd62436b-a3f3-5606-bb8a-42ffbda9efad"
+      ],
+      "changed": []
+    }
+  },
+  "nonblocking_hardening": [
+    "build_integrated.py permits existing OUT; rerunning after downstream integrations overwrites them. Require fresh output or use only before merges.",
+    "nodes() silently collapses duplicate refs/UUIDs; current artifacts independently verified unique. Add uniqueness assertion for future inputs.",
+    "merge_objects iterates sets when appending objects; sort keys for reproducible bytes. No geometry effect.",
+    "Merge creation alone is not DRC proof; native refill/connectivity/parity remain required."
+  ]
+}

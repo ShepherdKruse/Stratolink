@@ -1,0 +1,38 @@
+{
+  "kind": "Agent-reviewed supplier CSV reimport evidence; no inference from UI rotation button sign",
+  "test_date": "2026-10-13",
+  "uploaded_by": "root reviewer through visible JLC UI",
+  "input_csv": "CPL-u7-u8-reimport-probe.csv",
+  "input_sha256": "aff66b3d61a97cfb0c83a3aa6908c3204d78a19e1219046d3e05a89e598cf7a9",
+  "pcb_sha256": "490af47db22ef076938c17319782f194623d8f8b6a3f864a2e0cc23b3d025b15",
+  "reimported_parts": {
+    "U7": {
+      "cpl_row": {
+        "Designator": "U7",
+        "Mid X": "70.548000",
+        "Mid Y": "-37.807000",
+        "Layer": "top",
+        "Rotation": "0.000000"
+      },
+      "supplier_view_independently_checked": true,
+      "screenshot": "../jlc/probe-u7-0-crop.png",
+      "screenshot_sha256": "5216a036693001061abd08905cf61193942643c3c9769be4121f29fde44b1120",
+      "observation": "Top view: vendor white body pin-1 index lower-left; matches native pad 1 and bottom row 1\u20134.",
+      "reviewer": "diode_antenna_clearance"
+    },
+    "U8": {
+      "cpl_row": {
+        "Designator": "U8",
+        "Mid X": "55.650000",
+        "Mid Y": "-36.100000",
+        "Layer": "bottom",
+        "Rotation": "90.000000"
+      },
+      "supplier_view_independently_checked": true,
+      "screenshot": "../jlc/probe-u8-90-crop.png",
+      "screenshot_sha256": "e88cc042a7330ed639f815781088e4cd1a569a0e3d41e6a953e2f87eef5d1c97",
+      "observation": "Bottom view: vertical body, three leads right and two left; supplier pin-1 marker lower-right; matches native numbered lead columns.",
+      "reviewer": "diode_antenna_clearance"
+    }
+  }
+}

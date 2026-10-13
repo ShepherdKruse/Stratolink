@@ -1,0 +1,9 @@
+{
+  "candidate": "/Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/identities/u7-candidate",
+  "sha256": {
+    "stratolink.kicad_pcb": "c9e744b3144553e929bc3f3ba12b6bc3c272e6904ad25db113fd604e9b9cce6c",
+    "stratolink.kicad_sch": "e16bd82c79bea406fafd13f703a83d77b27d1c4cfa3540e3804959c8124ff1f9",
+    "stratolink.kicad_dru": "318609cce4ee3e6884baccdf10c1226e855879256639fa320e7582ad185f1948",
+    "lib/Stratolink_v1p1_U7_PQFN50P200X200100-12N.kicad_mod": "197cb34663451d375a17d262877d159edbd1b59b0805396381d47f0b48c895e9"
+  }
+}

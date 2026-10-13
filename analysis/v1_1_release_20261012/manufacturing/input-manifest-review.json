@@ -1,0 +1,55 @@
+{
+  "status": "PASS for current manufacturing inputs",
+  "scope": "Review of Git-based historical PCB and narrowed source-input manifest; final power board still pending",
+  "generator_sha256": "041d61120f09f0ea2c8eb502c6d132d1dbabd5b5412283fb962566ab46ee4303",
+  "trial_output": "/Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/manufacturing-input-review-trial",
+  "trial_manifest_sha256": "619e5fb3638c3681d51a36977e833c4a2c492607c7585d27b3591cefe52e7b72",
+  "historical_commit": "9bdd19ec707455271f48f5a5d8be352fc696cf9c",
+  "historical_reconstructed_pcb_sha256": "2924cfa59d48c1446488d715834e84ea634516e622ed59915fb72521e9595190",
+  "historical_placement_count": 53,
+  "source_file_count": 153,
+  "required_project_roots_hashed": [
+    "stratolink.kicad_pcb",
+    "stratolink.kicad_sch",
+    "stratolink.kicad_pro",
+    "stratolink.kicad_dru",
+    "fp-lib-table",
+    "sym-lib-table"
+  ],
+  "project_local_models_hashed": [
+    "3d/solar/zachtek_1044_left_assembly.wrl",
+    "3d/solar/zachtek_1044_right_assembly.wrl",
+    "lib/BQ25570RGRR.step",
+    "lib/LIS2DH12TR.step",
+    "lib/LPS4018-223MRC.step",
+    "lib/LTR-390UV-01.step",
+    "lib/MAX-M10S-00B.step",
+    "lib/MLZ1608N100LT000.STEP",
+    "lib/MS5611-01BA03.step",
+    "lib/RAK3172.step",
+    "lib/Stratolink_Wire_48mm_D0p321_Nominal.step",
+    "lib/Stratolink_Wire_82mm_D0p321_Nominal.step",
+    "lib/TMP117NAIYBGR.step",
+    "lib/cap.step"
+  ],
+  "external_standard_models_not_used_for_manufacturing": [
+    "${KICAD10_3DMODEL_DIR}/Capacitor_SMD.3dshapes/C_0402_1005Metric.step",
+    "${KICAD10_3DMODEL_DIR}/Capacitor_SMD.3dshapes/C_0603_1608Metric.step",
+    "${KICAD10_3DMODEL_DIR}/Capacitor_SMD.3dshapes/C_0805_2012Metric.step",
+    "${KICAD10_3DMODEL_DIR}/Diode_SMD.3dshapes/D_SOD-523.step",
+    "${KICAD10_3DMODEL_DIR}/Resistor_SMD.3dshapes/R_0402_1005Metric.step"
+  ],
+  "assembly_count": 51,
+  "source_unchanged": true,
+  "all_output_hashes_verified": true,
+  "exclusions_appropriate": [
+    "Editor UI/cache/history does not define these native manufacturing outputs.",
+    "Audit documents and package links outside lib/3d are not CAD inputs; excluding them avoids circular manifest dependencies.",
+    "Prior selected-part UI, historical CPL, immutable PCB and historical hash record remain hashed separately as evidence."
+  ],
+  "future_scope_limits": [
+    "Current project has no child sheets or project-local model paths outside lib/3d. A future generator should discover these dependencies or fail if introduced.",
+    "External standard 3D assets and system libraries are not fully pinned by this manifest; rendered mechanical-view reproducibility requires a separate resolved-model manifest.",
+    "Mutation check re-hashes the starting file list; newly created dependency files during export are not detected unless an already-hashed referencing CAD file also changes. Freeze candidate before export."
+  ]
+}

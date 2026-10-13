@@ -1,0 +1,91 @@
+{
+  "status": "PASS",
+  "candidate": "/Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/release-candidate",
+  "candidate_sha256": {
+    "stratolink.kicad_pcb": "490af47db22ef076938c17319782f194623d8f8b6a3f864a2e0cc23b3d025b15",
+    "stratolink.kicad_sch": "044984037a7346adc92ee9ea142e6c285ee7f6b66efc87e0a1ad195495379cc9",
+    "stratolink.kicad_pro": "79a2c0d01611c7ea7054cd9dbc685187b28fb4ac8792468a15d2bba821ac0ea7",
+    "stratolink.kicad_dru": "565bbdcb4ddc03de2a7bc3cdc45d57a8acd92d2e53a8eac092e0bd5a04861e0b"
+  },
+  "authored_pcb_sha256": "3bf0023e309336249e90deb1f52270f4108e61e40b558b4ec56a1df768ae1d4c",
+  "native_check": {
+    "status": "PASS",
+    "candidate": "/Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/release-candidate",
+    "candidate_sha256": {
+      "stratolink.kicad_pcb": "490af47db22ef076938c17319782f194623d8f8b6a3f864a2e0cc23b3d025b15",
+      "stratolink.kicad_sch": "044984037a7346adc92ee9ea142e6c285ee7f6b66efc87e0a1ad195495379cc9",
+      "stratolink.kicad_pro": "79a2c0d01611c7ea7054cd9dbc685187b28fb4ac8792468a15d2bba821ac0ea7"
+    },
+    "baseline": "/Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/integrated-u7-r2",
+    "baseline_pcb_sha256": "ff06c79d4480b1d7614904daa753e1949fd64a065d76a948cc9995f25d6afb5f",
+    "geometry_baseline": "/Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/integrated-u7-r2",
+    "geometry_baseline_pcb_sha256": "ff06c79d4480b1d7614904daa753e1949fd64a065d76a948cc9995f25d6afb5f",
+    "old_pad_count": 232,
+    "new_pad_count": 13,
+    "existing_physical_pad_islands_preserved": true,
+    "existing_pad_copper_polygons_all_copper_layers_and_drills_preserved": true,
+    "unconnected": 0,
+    "feedback_before_22ohm": true,
+    "schematic_and_pcb_expected_pins": {
+      "U8.1": "SC_BAL_OUT",
+      "U8.2": "GND",
+      "U8.3": "SC_HALF_REF",
+      "U8.4": "SC_BAL_OUT",
+      "U8.5": "VBAT",
+      "R24.1": "VBAT",
+      "R24.2": "SC_HALF_REF",
+      "R25.1": "SC_HALF_REF",
+      "R25.2": "GND",
+      "R26.1": "SC_BAL_OUT",
+      "R26.2": "SC_MID",
+      "C22.1": "VBAT",
+      "C22.2": "GND",
+      "C5.1": "VBAT",
+      "C5.2": "GND",
+      "C5.3": "SC_MID"
+    },
+    "selected_values": {
+      "U8": "TLV8801DBVT",
+      "R1": "7.50M\u03a9",
+      "R24": "4.75M\u03a9",
+      "R25": "4.75M\u03a9",
+      "R26": "22\u03a9",
+      "C22": "100nF"
+    }
+  },
+  "scope": {
+    "removed_original_routes": 28,
+    "added_routes": 353,
+    "all_surviving_preintegrated_routes_semantically_exact": true,
+    "all_authored_new_routes_semantically_exact": true,
+    "allowed_numeric_canonicalization": "Native save 63.0\u219263 allowed only in numeric geometry fields",
+    "all_existing_component_physical_geometry_preserved": true,
+    "all_new_component_geometry_models_positions_preserved": true,
+    "only_declared_existing_pad_thermals_applied": true,
+    "all_other_board_objects_semantically_exact": true,
+    "project_unchanged_except_reviewed_ERC_exclusion": [
+      [
+        "pin_to_pin|596900|1333500|97fe1358-9111-4cae-ace0-69f4a04c9922|944d0dde-0354-5fbe-8d7f-fd73f10709be|/4d146a28-be53-49f1-b1c6-484192820e45|/4d146a28-be53-49f1-b1c6-484192820e45|/4d146a28-be53-49f1-b1c6-484192820e45",
+        "LTR-390UV INT is an unused open-drain output tied to GND, with no pull-up or driven-high source on the output. Electrical inference: its sink cannot contend with GND; LiteOn identifies open-drain operation but an explicit recommendation to ground was not located. Interrupt functionality is unavailable; keep LS_INT_EN disabled. Only this exact GND PWR_FLAG marker is excluded."
+      ],
+      [
+        "pin_to_pin|533400|1600200|d24f236f-77e7-440c-9378-f49a6d546306|944d0dde-0354-5fbe-8d7f-fd73f10709be|/4d146a28-be53-49f1-b1c6-484192820e45|/4d146a28-be53-49f1-b1c6-484192820e45|/4d146a28-be53-49f1-b1c6-484192820e45",
+        "TMP117 ALERT is intentionally unavailable and grounded. TI TMP117 datasheet section 8.2.1 explicitly permits grounding ALERT when unused. Open-drain pin type retained; this exact marker is contention with the external GND PWR_FLAG, not a driven-high circuit."
+      ],
+      [
+        "pin_to_pin|254000|419100|82711c1e-7163-4ccd-9fb6-5a60e20408e1|944d0dde-0354-5fbe-8d7f-fd73f10709be|/4d146a28-be53-49f1-b1c6-484192820e45|/4d146a28-be53-49f1-b1c6-484192820e45|/4d146a28-be53-49f1-b1c6-484192820e45",
+        "LIS2DH12 SDO/SA0 is grounded to select I2C address 0x18 with CS high, as specified in ST datasheet section 6.1.1. Bidirectional type retained for its SPI role. Only this exact GND PWR_FLAG marker is excluded. Firmware follow-up: disable internal SDO pull-up using CTRL_REG0 SDO_PU_DISC while preserving required other bits."
+      ]
+    ],
+    "custom_rules_unchanged": true,
+    "supplier_fields_and_R1_C5_metadata_correct": true
+  },
+  "enabled_drc_report_sha256": "dcaa560a90199a9496a0781b771d0a539f63ea5e427bbe35ba7f0c74f4ed0c13",
+  "enabled_drc": {
+    "silk_warnings": 4,
+    "opens": 0,
+    "parity": 0,
+    "other_violations": 0
+  },
+  "qualification_limit": "CAD integration verified; cold/startup/load/solar-input and physical assembly qualification remain measurements, as specified in the power audit and pilot acceptance plan."
+}

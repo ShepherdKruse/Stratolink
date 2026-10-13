@@ -1,0 +1,386 @@
+Processing stratolink_v1_1 (platform: ststm32@19.6.0; board: stratolink; framework: arduino)
+--------------------------------------------------------------------------------
+Verbose mode can be enabled via `-v, --verbose` option
+CONFIGURATION: https://docs.platformio.org/page/boards/ststm32/stratolink.html
+PLATFORM: ST STM32 (19.6.0) > Stratolink PICO Tracker (RAK3172 / STM32WLE5CCU6)
+HARDWARE: STM32WLE5CCU6 48MHz, 64KB RAM, 252KB Flash
+DEBUG: Current (custom) External (jlink, stlink)
+PACKAGES: 
+ - framework-arduinoststm32 @ 4.21200.0 (2.12.0) 
+ - framework-cmsis @ 2.60300.0 (6.3.0) 
+ - framework-cmsis-dsp @ 1.16.2 
+ - toolchain-gccarmnoneeabi @ 1.120301.0 (12.3.1)
+LDF: Library Dependency Finder -> https://bit.ly/configure-pio-ldf
+LDF Modes: Finder ~ chain, Compatibility ~ soft
+Found 19 compatible libraries
+Scanning dependencies...
+Dependency Graph
+|-- SparkFun u-blox GNSS v3 @ 3.1.13
+|-- STM32duino Low Power @ 1.5.0
+|-- STM32duino RTC @ 1.9.0
+|-- RadioLib @ 7.6.0
+|-- SubGhz @ 1.0.0
+|-- Wire @ 1.0.0
+Building in release mode
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/FrameworkArduinoVariant/PeripheralPins.c.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/FrameworkArduinoVariant/PeripheralPins_WE_OCEANUS1.c.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/FrameworkArduinoVariant/generic_clock.c.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/FrameworkArduinoVariant/variant_GENERIC_NODE_SE_TTI.cpp.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/FrameworkArduinoVariant/variant_RAK3172_MODULE.cpp.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/FrameworkArduinoVariant/variant_WE_OCEANUS1.cpp.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/FrameworkArduinoVariant/variant_generic.cpp.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/SrcWrapper/src/HAL/stm32yyxx_hal.c.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/SrcWrapper/src/HAL/stm32yyxx_hal_adc.c.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/SrcWrapper/src/HAL/stm32yyxx_hal_adc_ex.c.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/SrcWrapper/src/HAL/stm32yyxx_hal_can.c.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/SrcWrapper/src/HAL/stm32yyxx_hal_ccb.c.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/SrcWrapper/src/HAL/stm32yyxx_hal_cec.c.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/SrcWrapper/src/HAL/stm32yyxx_hal_comp.c.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/SrcWrapper/src/HAL/stm32yyxx_hal_comp_ex.c.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/SrcWrapper/src/HAL/stm32yyxx_hal_cordic.c.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/SrcWrapper/src/HAL/stm32yyxx_hal_cortex.c.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/SrcWrapper/src/HAL/stm32yyxx_hal_crc.c.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/SrcWrapper/src/HAL/stm32yyxx_hal_crc_ex.c.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/SrcWrapper/src/HAL/stm32yyxx_hal_cryp.c.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/SrcWrapper/src/HAL/stm32yyxx_hal_cryp_ex.c.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/SrcWrapper/src/HAL/stm32yyxx_hal_dac.c.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/SrcWrapper/src/HAL/stm32yyxx_hal_dac_ex.c.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/SrcWrapper/src/HAL/stm32yyxx_hal_dcache.c.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/SrcWrapper/src/HAL/stm32yyxx_hal_dcmi.c.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/SrcWrapper/src/HAL/stm32yyxx_hal_dcmi_ex.c.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/SrcWrapper/src/HAL/stm32yyxx_hal_dfsdm.c.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/SrcWrapper/src/HAL/stm32yyxx_hal_dfsdm_ex.c.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/SrcWrapper/src/HAL/stm32yyxx_hal_dma.c.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/SrcWrapper/src/HAL/stm32yyxx_hal_dma2d.c.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/SrcWrapper/src/HAL/stm32yyxx_hal_dma_ex.c.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/SrcWrapper/src/HAL/stm32yyxx_hal_dsi.c.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/SrcWrapper/src/HAL/stm32yyxx_hal_dts.c.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/SrcWrapper/src/HAL/stm32yyxx_hal_eth.c.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/SrcWrapper/src/HAL/stm32yyxx_hal_eth_ex.c.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/SrcWrapper/src/HAL/stm32yyxx_hal_exti.c.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/SrcWrapper/src/HAL/stm32yyxx_hal_fdcan.c.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/SrcWrapper/src/HAL/stm32yyxx_hal_firewall.c.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/SrcWrapper/src/HAL/stm32yyxx_hal_flash.c.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/SrcWrapper/src/HAL/stm32yyxx_hal_flash_ex.c.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/SrcWrapper/src/HAL/stm32yyxx_hal_flash_ramfunc.c.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/SrcWrapper/src/HAL/stm32yyxx_hal_fmac.c.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/SrcWrapper/src/HAL/stm32yyxx_hal_fmpi2c.c.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/SrcWrapper/src/HAL/stm32yyxx_hal_fmpi2c_ex.c.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/SrcWrapper/src/HAL/stm32yyxx_hal_fmpsmbus.c.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/SrcWrapper/src/HAL/stm32yyxx_hal_fmpsmbus_ex.c.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/SrcWrapper/src/HAL/stm32yyxx_hal_gfxmmu.c.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/SrcWrapper/src/HAL/stm32yyxx_hal_gfxtim.c.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/SrcWrapper/src/HAL/stm32yyxx_hal_gpio.c.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/SrcWrapper/src/HAL/stm32yyxx_hal_gpio_ex.c.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/SrcWrapper/src/HAL/stm32yyxx_hal_gpu2d.c.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/SrcWrapper/src/HAL/stm32yyxx_hal_gtzc.c.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/SrcWrapper/src/HAL/stm32yyxx_hal_hash.c.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/SrcWrapper/src/HAL/stm32yyxx_hal_hash_ex.c.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/SrcWrapper/src/HAL/stm32yyxx_hal_hcd.c.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/SrcWrapper/src/HAL/stm32yyxx_hal_hrtim.c.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/SrcWrapper/src/HAL/stm32yyxx_hal_hsem.c.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/SrcWrapper/src/HAL/stm32yyxx_hal_i2c.c.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/SrcWrapper/src/HAL/stm32yyxx_hal_i2c_ex.c.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/SrcWrapper/src/HAL/stm32yyxx_hal_i2s.c.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/SrcWrapper/src/HAL/stm32yyxx_hal_i2s_ex.c.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/SrcWrapper/src/HAL/stm32yyxx_hal_i3c.c.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/SrcWrapper/src/HAL/stm32yyxx_hal_icache.c.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/SrcWrapper/src/HAL/stm32yyxx_hal_ipcc.c.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/SrcWrapper/src/HAL/stm32yyxx_hal_irda.c.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/SrcWrapper/src/HAL/stm32yyxx_hal_iwdg.c.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/SrcWrapper/src/HAL/stm32yyxx_hal_jpeg.c.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/SrcWrapper/src/HAL/stm32yyxx_hal_lcd.c.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/SrcWrapper/src/HAL/stm32yyxx_hal_lpawur.c.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/SrcWrapper/src/HAL/stm32yyxx_hal_lptim.c.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/SrcWrapper/src/HAL/stm32yyxx_hal_ltdc.c.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/SrcWrapper/src/HAL/stm32yyxx_hal_ltdc_ex.c.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/SrcWrapper/src/HAL/stm32yyxx_hal_mdf.c.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/SrcWrapper/src/HAL/stm32yyxx_hal_mdios.c.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/SrcWrapper/src/HAL/stm32yyxx_hal_mdma.c.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/SrcWrapper/src/HAL/stm32yyxx_hal_mmc.c.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/SrcWrapper/src/HAL/stm32yyxx_hal_mmc_ex.c.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/SrcWrapper/src/HAL/stm32yyxx_hal_mrsubg.c.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/SrcWrapper/src/HAL/stm32yyxx_hal_mrsubg_timer.c.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/SrcWrapper/src/HAL/stm32yyxx_hal_nand.c.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/SrcWrapper/src/HAL/stm32yyxx_hal_nor.c.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/SrcWrapper/src/HAL/stm32yyxx_hal_opamp.c.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/SrcWrapper/src/HAL/stm32yyxx_hal_opamp_ex.c.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/SrcWrapper/src/HAL/stm32yyxx_hal_ospi.c.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/SrcWrapper/src/HAL/stm32yyxx_hal_otfdec.c.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/SrcWrapper/src/HAL/stm32yyxx_hal_pccard.c.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/SrcWrapper/src/HAL/stm32yyxx_hal_pcd.c.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/SrcWrapper/src/HAL/stm32yyxx_hal_pcd_ex.c.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/SrcWrapper/src/HAL/stm32yyxx_hal_pka.c.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/SrcWrapper/src/HAL/stm32yyxx_hal_pssi.c.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/SrcWrapper/src/HAL/stm32yyxx_hal_pwr.c.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/SrcWrapper/src/HAL/stm32yyxx_hal_pwr_ex.c.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/SrcWrapper/src/HAL/stm32yyxx_hal_qspi.c.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/SrcWrapper/src/HAL/stm32yyxx_hal_radio.c.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/SrcWrapper/src/HAL/stm32yyxx_hal_radio_timer.c.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/SrcWrapper/src/HAL/stm32yyxx_hal_ramcfg.c.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/SrcWrapper/src/HAL/stm32yyxx_hal_ramecc.c.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/SrcWrapper/src/HAL/stm32yyxx_hal_rcc.c.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/SrcWrapper/src/HAL/stm32yyxx_hal_rcc_ex.c.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/SrcWrapper/src/HAL/stm32yyxx_hal_rng.c.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/SrcWrapper/src/HAL/stm32yyxx_hal_rng_ex.c.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/SrcWrapper/src/HAL/stm32yyxx_hal_rtc.c.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/SrcWrapper/src/HAL/stm32yyxx_hal_rtc_ex.c.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/SrcWrapper/src/HAL/stm32yyxx_hal_sai.c.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/SrcWrapper/src/HAL/stm32yyxx_hal_sai_ex.c.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/SrcWrapper/src/HAL/stm32yyxx_hal_sd.c.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/SrcWrapper/src/HAL/stm32yyxx_hal_sd_ex.c.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/SrcWrapper/src/HAL/stm32yyxx_hal_sdadc.c.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/SrcWrapper/src/HAL/stm32yyxx_hal_sdio.c.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/SrcWrapper/src/HAL/stm32yyxx_hal_sdram.c.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/SrcWrapper/src/HAL/stm32yyxx_hal_smartcard.c.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/SrcWrapper/src/HAL/stm32yyxx_hal_smartcard_ex.c.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/SrcWrapper/src/HAL/stm32yyxx_hal_smbus.c.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/SrcWrapper/src/HAL/stm32yyxx_hal_smbus_ex.c.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/SrcWrapper/src/HAL/stm32yyxx_hal_spdifrx.c.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/SrcWrapper/src/HAL/stm32yyxx_hal_spi.c.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/SrcWrapper/src/HAL/stm32yyxx_hal_spi_ex.c.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/SrcWrapper/src/HAL/stm32yyxx_hal_sram.c.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/SrcWrapper/src/HAL/stm32yyxx_hal_subghz.c.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/SrcWrapper/src/HAL/stm32yyxx_hal_swpmi.c.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/SrcWrapper/src/HAL/stm32yyxx_hal_tim.c.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/SrcWrapper/src/HAL/stm32yyxx_hal_tim_ex.c.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/SrcWrapper/src/HAL/stm32yyxx_hal_tsc.c.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/SrcWrapper/src/HAL/stm32yyxx_hal_uart.c.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/SrcWrapper/src/HAL/stm32yyxx_hal_uart_ex.c.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/SrcWrapper/src/HAL/stm32yyxx_hal_usart.c.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/SrcWrapper/src/HAL/stm32yyxx_hal_usart_ex.c.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/SrcWrapper/src/HAL/stm32yyxx_hal_wwdg.c.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/SrcWrapper/src/HAL/stm32yyxx_hal_xspi.c.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/SrcWrapper/src/HardwareTimer.cpp.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/SrcWrapper/src/LL/stm32yyxx_ll_adc.c.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/SrcWrapper/src/LL/stm32yyxx_ll_bdma.c.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/SrcWrapper/src/LL/stm32yyxx_ll_comp.c.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/SrcWrapper/src/LL/stm32yyxx_ll_cordic.c.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/SrcWrapper/src/LL/stm32yyxx_ll_crc.c.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/SrcWrapper/src/LL/stm32yyxx_ll_crs.c.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/SrcWrapper/src/LL/stm32yyxx_ll_dac.c.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/SrcWrapper/src/LL/stm32yyxx_ll_delayblock.c.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/SrcWrapper/src/LL/stm32yyxx_ll_dlyb.c.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/SrcWrapper/src/LL/stm32yyxx_ll_dma.c.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/SrcWrapper/src/LL/stm32yyxx_ll_dma2d.c.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/SrcWrapper/src/LL/stm32yyxx_ll_exti.c.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/SrcWrapper/src/LL/stm32yyxx_ll_fmac.c.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/SrcWrapper/src/LL/stm32yyxx_ll_fmc.c.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/SrcWrapper/src/LL/stm32yyxx_ll_fmpi2c.c.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/SrcWrapper/src/LL/stm32yyxx_ll_fsmc.c.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/SrcWrapper/src/LL/stm32yyxx_ll_gpio.c.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/SrcWrapper/src/LL/stm32yyxx_ll_hrtim.c.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/SrcWrapper/src/LL/stm32yyxx_ll_i2c.c.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/SrcWrapper/src/LL/stm32yyxx_ll_i3c.c.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/SrcWrapper/src/LL/stm32yyxx_ll_icache.c.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/SrcWrapper/src/LL/stm32yyxx_ll_lcsc.c.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/SrcWrapper/src/LL/stm32yyxx_ll_lpgpio.c.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/SrcWrapper/src/LL/stm32yyxx_ll_lptim.c.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/SrcWrapper/src/LL/stm32yyxx_ll_lpuart.c.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/SrcWrapper/src/LL/stm32yyxx_ll_mdma.c.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/SrcWrapper/src/LL/stm32yyxx_ll_opamp.c.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/SrcWrapper/src/LL/stm32yyxx_ll_pka.c.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/SrcWrapper/src/LL/stm32yyxx_ll_pwr.c.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/SrcWrapper/src/LL/stm32yyxx_ll_rcc.c.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/SrcWrapper/src/LL/stm32yyxx_ll_rng.c.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/SrcWrapper/src/LL/stm32yyxx_ll_rtc.c.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/SrcWrapper/src/LL/stm32yyxx_ll_sdmmc.c.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/SrcWrapper/src/LL/stm32yyxx_ll_spi.c.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/SrcWrapper/src/LL/stm32yyxx_ll_swpmi.c.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/SrcWrapper/src/LL/stm32yyxx_ll_system.c.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/SrcWrapper/src/LL/stm32yyxx_ll_tim.c.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/SrcWrapper/src/LL/stm32yyxx_ll_ucpd.c.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/SrcWrapper/src/LL/stm32yyxx_ll_usart.c.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/SrcWrapper/src/LL/stm32yyxx_ll_usb.c.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/SrcWrapper/src/LL/stm32yyxx_ll_utils.c.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/SrcWrapper/src/new.cpp.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/SrcWrapper/src/stm32/PortNames.c.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/SrcWrapper/src/stm32/analog.cpp.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/SrcWrapper/src/stm32/bootloader.c.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/SrcWrapper/src/stm32/clock.c.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/SrcWrapper/src/stm32/core_callback.c.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/SrcWrapper/src/stm32/dwt.c.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/SrcWrapper/src/stm32/hw_config.c.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/SrcWrapper/src/stm32/interrupt.cpp.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/SrcWrapper/src/stm32/otp.c.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/SrcWrapper/src/stm32/pinmap.c.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/SrcWrapper/src/stm32/stm32_def.c.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/SrcWrapper/src/stm32/system_stm32yyxx.c.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/SrcWrapper/src/stm32/timer.c.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/SrcWrapper/src/stm32/uart.c.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/SrcWrapper/src/syscalls.c.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/src/b2b.cpp.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/src/b2b_id_store.cpp.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/src/command.cpp.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/src/command_sequence_store.cpp.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/src/crypto_aes128.cpp.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/src/ctt_decode.cpp.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/src/ctt_event.cpp.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/src/ctt_queue.cpp.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/src/devnonce_store.cpp.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/src/gps_backup_policy.cpp.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/src/gps_freshness.cpp.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/src/gps_pvt_validation.cpp.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/src/gps_ublox.cpp.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/src/lorawan.cpp.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/src/lorawan_counter.cpp.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/src/lorawan_crypto.cpp.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/src/lorawan_frame.cpp.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/src/lorawan_liveness.cpp.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/src/main.cpp.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/src/meshtastic_relay_mac.cpp.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/src/mic_acoustic.cpp.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/src/ms5611_compensation.cpp.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/src/ms5611_crc.cpp.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/src/power_adc.cpp.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/src/power_manager.cpp.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/src/region_manager.cpp.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/src/reset_cause.cpp.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/src/sensor_lis2dh12.cpp.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/src/sensor_ltr390.cpp.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/src/sensor_ms5611.cpp.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/src/sensor_tmp117.cpp.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/src/sensors.cpp.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/src/shallow_yield.cpp.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/src/telemetry.cpp.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/libc39/SPI/SPI.cpp.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/libc39/SPI/utility/spi_com.c.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/lib5a2/Wire/Wire.cpp.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/lib5a2/Wire/utility/twi.c.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/lib3eb/SparkFun u-blox GNSS v3/sfe_bus.cpp.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/lib3eb/SparkFun u-blox GNSS v3/u-blox_GNSS.cpp.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/lib17d/STM32duino RTC@1.9.0/STM32RTC.cpp.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/lib17d/STM32duino RTC@1.9.0/rtc.c.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/liba7e/STM32duino Low Power/STM32LowPower.cpp.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/liba7e/STM32duino Low Power/low_power.c.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/libe89/SubGhz/SubGhz.cpp.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/libccd/RadioLib/Hal.cpp.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/libccd/RadioLib/Module.cpp.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/libccd/RadioLib/hal/Arduino/ArduinoHal.cpp.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/libccd/RadioLib/hal/RPiPico/PicoHal.cpp.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/libccd/RadioLib/modules/CC1101/CC1101.cpp.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/libccd/RadioLib/modules/LLCC68/LLCC68.cpp.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/libccd/RadioLib/modules/LR11x0/LR1110.cpp.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/libccd/RadioLib/modules/LR11x0/LR1120.cpp.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/libccd/RadioLib/modules/LR11x0/LR1121.cpp.o
+Archiving /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/libc39/libSPI.a
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/libccd/RadioLib/modules/LR11x0/LR11x0.cpp.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/libccd/RadioLib/modules/LR11x0/LR11x0_commands.cpp.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/libccd/RadioLib/modules/LR11x0/LR11x0_crypto.cpp.o
+Indexing /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/libc39/libSPI.a
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/libccd/RadioLib/modules/LR11x0/LR11x0_gnss.cpp.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/libccd/RadioLib/modules/LR11x0/LR11x0_wifi.cpp.o
+Archiving /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/lib5a2/libWire.a
+Indexing /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/lib5a2/libWire.a
+Archiving /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/liba7e/libSTM32duino Low Power.a
+Archiving /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/lib17d/libSTM32duino RTC@1.9.0.a
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/libccd/RadioLib/modules/LR11x0/LR_common.cpp.o
+Indexing /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/liba7e/libSTM32duino Low Power.a
+Indexing /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/lib17d/libSTM32duino RTC@1.9.0.a
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/libccd/RadioLib/modules/LR2021/LR2021.cpp.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/libccd/RadioLib/modules/LR2021/LR2021_cmds_chip_control.cpp.o
+Archiving /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/libe89/libSubGhz.a
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/libccd/RadioLib/modules/LR2021/LR2021_cmds_flrc.cpp.o
+Indexing /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/libe89/libSubGhz.a
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/libccd/RadioLib/modules/LR2021/LR2021_cmds_gfsk.cpp.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/libccd/RadioLib/modules/LR2021/LR2021_cmds_lora.cpp.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/libccd/RadioLib/modules/LR2021/LR2021_cmds_misc.cpp.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/libccd/RadioLib/modules/LR2021/LR2021_cmds_ook.cpp.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/libccd/RadioLib/modules/LR2021/LR2021_cmds_oqpsk.cpp.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/libccd/RadioLib/modules/LR2021/LR2021_cmds_radio.cpp.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/libccd/RadioLib/modules/LR2021/LR2021_cmds_ranging.cpp.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/libccd/RadioLib/modules/LR2021/LR2021_config.cpp.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/libccd/RadioLib/modules/RF69/RF69.cpp.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/libccd/RadioLib/modules/SX123x/SX1231.cpp.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/libccd/RadioLib/modules/SX123x/SX1233.cpp.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/libccd/RadioLib/modules/SX126x/STM32WLx.cpp.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/libccd/RadioLib/modules/SX126x/STM32WLx_Module.cpp.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/libccd/RadioLib/modules/SX126x/SX1261.cpp.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/libccd/RadioLib/modules/SX126x/SX1262.cpp.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/libccd/RadioLib/modules/SX126x/SX1268.cpp.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/libccd/RadioLib/modules/SX126x/SX126x.cpp.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/libccd/RadioLib/modules/SX126x/SX126x_LR_FHSS.cpp.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/libccd/RadioLib/modules/SX126x/SX126x_commands.cpp.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/libccd/RadioLib/modules/SX126x/SX126x_config.cpp.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/libccd/RadioLib/modules/SX127x/SX1272.cpp.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/libccd/RadioLib/modules/SX127x/SX1273.cpp.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/libccd/RadioLib/modules/SX127x/SX1276.cpp.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/libccd/RadioLib/modules/SX127x/SX1277.cpp.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/libccd/RadioLib/modules/SX127x/SX1278.cpp.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/libccd/RadioLib/modules/SX127x/SX1279.cpp.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/libccd/RadioLib/modules/SX127x/SX127x.cpp.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/libccd/RadioLib/modules/SX128x/SX1280.cpp.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/libccd/RadioLib/modules/SX128x/SX1281.cpp.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/libccd/RadioLib/modules/SX128x/SX1282.cpp.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/libccd/RadioLib/modules/SX128x/SX128x.cpp.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/libccd/RadioLib/modules/Si443x/Si4430.cpp.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/libccd/RadioLib/modules/Si443x/Si4431.cpp.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/libccd/RadioLib/modules/Si443x/Si4432.cpp.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/libccd/RadioLib/modules/Si443x/Si443x.cpp.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/libccd/RadioLib/modules/nRF24/nRF24.cpp.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/libccd/RadioLib/protocols/ADSB/ADSB.cpp.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/libccd/RadioLib/protocols/AFSK/AFSK.cpp.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/libccd/RadioLib/protocols/APRS/APRS.cpp.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/libccd/RadioLib/protocols/AX25/AX25.cpp.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/libccd/RadioLib/protocols/BellModem/BellModem.cpp.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/libccd/RadioLib/protocols/ExternalRadio/ExternalRadio.cpp.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/libccd/RadioLib/protocols/FSK4/FSK4.cpp.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/libccd/RadioLib/protocols/Hellschreiber/Hellschreiber.cpp.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/libccd/RadioLib/protocols/LoRaWAN/LoRaWAN.cpp.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/libccd/RadioLib/protocols/LoRaWAN/LoRaWANBands.cpp.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/libccd/RadioLib/protocols/Morse/Morse.cpp.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/libccd/RadioLib/protocols/Pager/Pager.cpp.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/libccd/RadioLib/protocols/PhysicalLayer/PhysicalLayer.cpp.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/libccd/RadioLib/protocols/Print/ITA2String.cpp.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/libccd/RadioLib/protocols/Print/Print.cpp.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/libccd/RadioLib/protocols/RTTY/RTTY.cpp.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/libccd/RadioLib/protocols/SSTV/SSTV.cpp.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/libccd/RadioLib/utils/CRC.cpp.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/libccd/RadioLib/utils/Cryptography.cpp.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/libccd/RadioLib/utils/FEC.cpp.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/libccd/RadioLib/utils/Utils.cpp.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/FrameworkArduino/HardwareSerial.cpp.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/FrameworkArduino/IPAddress.cpp.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/FrameworkArduino/Print.cpp.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/FrameworkArduino/RingBuffer.cpp.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/FrameworkArduino/Stream.cpp.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/FrameworkArduino/Tone.cpp.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/FrameworkArduino/WInterrupts.cpp.o
+/Users/twarn/.platformio/packages/framework-arduinoststm32/cores/arduino/Tone.cpp:135:2: warning: #warning "TIMER_TONE or HAL_TIM_MODULE_ENABLED not defined" [-Wcpp]
+  135 | #warning "TIMER_TONE or HAL_TIM_MODULE_ENABLED not defined"
+      |  ^~~~~~~
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/FrameworkArduino/WMath.cpp.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/FrameworkArduino/WSerial.cpp.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/FrameworkArduino/WString.cpp.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/FrameworkArduino/abi.cpp.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/FrameworkArduino/avr/dtostrf.c.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/FrameworkArduino/board.c.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/FrameworkArduino/core_debug.c.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/FrameworkArduino/hooks.c.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/FrameworkArduino/itoa.c.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/FrameworkArduino/main.cpp.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/FrameworkArduino/pins_arduino.c.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/FrameworkArduino/stm32/startup_stm32yyxx.S.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/FrameworkArduino/wiring_analog.c.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/FrameworkArduino/wiring_digital.c.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/FrameworkArduino/wiring_pulse.cpp.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/FrameworkArduino/wiring_shift.c.o
+Compiling /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/FrameworkArduino/wiring_time.c.o
+Archiving /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/libccd/libRadioLib.a
+Indexing /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/libccd/libRadioLib.a
+Archiving /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/libFrameworkArduino.a
+Indexing /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/libFrameworkArduino.a
+Archiving /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/lib3eb/libSparkFun u-blox GNSS v3.a
+Indexing /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/lib3eb/libSparkFun u-blox GNSS v3.a
+Linking /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/firmware.elf
+Checking size /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/firmware.elf
+Advanced Memory Usage is available via "PlatformIO Home > Project Inspect"
+RAM:   [=         ]  11.6% (used 7624 bytes from 65536 bytes)
+Flash: [=====     ]  54.8% (used 141384 bytes from 258048 bytes)
+Building /Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/firmware-build/stratolink_v1_1/firmware.bin
+========================= [SUCCESS] Took 5.59 seconds =========================
+
+Environment      Status    Duration
+---------------  --------  ------------
+stratolink_v1_1  SUCCESS   00:00:05.587
+========================= 1 succeeded in 00:00:05.587 =========================

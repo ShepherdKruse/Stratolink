@@ -1,0 +1,16 @@
+{
+  "status": "PASS",
+  "canonical_CAD_hashes_unchanged": {
+    "stratolink.kicad_pcb": "490af47db22ef076938c17319782f194623d8f8b6a3f864a2e0cc23b3d025b15",
+    "stratolink.kicad_sch": "044984037a7346adc92ee9ea142e6c285ee7f6b66efc87e0a1ad195495379cc9",
+    "stratolink.kicad_pro": "79a2c0d01611c7ea7054cd9dbc685187b28fb4ac8792468a15d2bba821ac0ea7",
+    "stratolink.kicad_dru": "565bbdcb4ddc03de2a7bc3cdc45d57a8acd92d2e53a8eac092e0bd5a04861e0b"
+  },
+  "documentation_files": {
+    "README.md": "4c8c6d8fd32e8d7804c3188c8c39b448e9ce5cc95cdcac760b074f7f21d72124",
+    "FABRICATION.md": "63ed0f98f66fedae41add8f87f2e3be2798613d2fe64592622df93d4265239fc",
+    "TODO.md": "ec0663032208470b26a7df5929d5e997f715f37e5799011773e9358e78452dba"
+  },
+  "package_manifest_sha256": "cd65577425683e2d0eeb96c58cc860263a11c4b7b41b595440add98986defcb8",
+  "canonical_matches_verified_candidate": true
+}

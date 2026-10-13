@@ -1,0 +1,39 @@
+(version 1)
+# JLC two-layer 1oz ENIG: >=0.10mm copper spacing, >=0.20mm routed edge.
+# Default net-class routing target is0.15mm; existing0.20mm diagnostic retained.
+# Exact source and release dispositions: analysis/v1_1_release_20261012/rules.
+
+(rule "JLC component lead hole annulus"
+ (condition "A.Type == 'Pad' && A.Pad_Type == 'Through-hole' && !A.memberOfFootprint('U1')")
+ (constraint annular_width (min 0.18mm)))
+
+(rule "JLC component lead hole to foreign copper"
+ (condition "(A.Type == 'Pad' && A.Pad_Type == 'Through-hole' && !A.memberOfFootprint('U1')) || (B.Type == 'Pad' && B.Pad_Type == 'Through-hole' && !B.memberOfFootprint('U1'))")
+ (constraint hole_clearance (min 0.28mm)))
+
+(rule "J3 one millimetre pitch pad spacing"
+ (condition "A.Type == 'Pad' && B.Type == 'Pad' && A.memberOfFootprint('J3') && B.memberOfFootprint('J3')")
+ (constraint clearance (min 0.12mm)))
+
+(rule "J4 one millimetre pitch pad spacing"
+ (condition "A.Type == 'Pad' && B.Type == 'Pad' && A.memberOfFootprint('J4') && B.memberOfFootprint('J4')")
+ (constraint clearance (min 0.12mm)))
+
+(rule "U7 fine pitch lands"
+ (condition "A.Type == 'Pad' && B.Type == 'Pad' && A.memberOfFootprint('U7') && B.memberOfFootprint('U7')")
+ (constraint clearance (min 0.10mm)))
+
+(rule "R23 pads beside VSTOR"
+ (condition "(A.memberOfFootprint('R23') && B.Type == 'Track' && B.NetName == 'VSTOR') || (B.memberOfFootprint('R23') && A.Type == 'Track' && A.NetName == 'VSTOR')")
+ (constraint clearance (min 0.13mm)))
+
+
+
+# U7 MEMS escape passes U6 pad 6 (SDA) at 0.128 mm actual copper gap.
+# 0.12 mm applies only to this pad/track pair; the process floor remains 0.10 mm.
+# Keeping the existing 0.30 mm drill and 0.25 mm copper-to-hole rule prevents
+# raising this short corridor to 0.15 mm without moving other proven circuitry.
+(rule "U7 escape SCL to U6 SDA pad 6 - 0.12 mm"
+  (layer "F.Cu")
+  (condition "(A.memberOfFootprint('U6') && A.Pad_Number == '6' && B.Type == 'Track' && B.NetName == 'SCL') || (B.memberOfFootprint('U6') && B.Pad_Number == '6' && A.Type == 'Track' && A.NetName == 'SCL')")
+  (constraint clearance (min 0.12mm)))

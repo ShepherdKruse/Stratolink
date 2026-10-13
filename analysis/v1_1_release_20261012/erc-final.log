@@ -1,0 +1,48 @@
+{
+  "candidate": "/Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/release-candidate",
+  "pin_type_changes": 44,
+  "nc_flags": 16,
+  "power_flags": [
+    {
+      "reference": "#FLG101",
+      "at": [
+        199.39,
+        105.41
+      ],
+      "net": "+SOLAR",
+      "connection": "J1.1",
+      "rationale": "Actual external solar power/return or supply after passive GNSS filter."
+    },
+    {
+      "reference": "#FLG102",
+      "at": [
+        199.39,
+        107.95
+      ],
+      "net": "GND",
+      "connection": "J1.2",
+      "rationale": "Actual external solar power/return or supply after passive GNSS filter."
+    },
+    {
+      "reference": "#FLG103",
+      "at": [
+        92.71,
+        121.92
+      ],
+      "net": "Net-(U3-VCC)",
+      "connection": "FB1.1",
+      "rationale": "Actual external solar power/return or supply after passive GNSS filter."
+    },
+    {
+      "reference": "#FLG104",
+      "at": [
+        223.52,
+        36.83
+      ],
+      "net": "/VBAT",
+      "connection": "C5.1",
+      "rationale": "Actual harvester/storage reservoir at C5.1. U1.VBAT is modeled as power_in, consistent with KiCad power-pin semantics and its official BQ25570 symbol; this is not a signal-bidirectional terminal."
+    }
+  ],
+  "erc_after": []
+}

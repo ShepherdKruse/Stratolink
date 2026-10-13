@@ -1,0 +1,2347 @@
+{
+  "status": "routed-authored-candidate-frozen-pending-independent-and-integrated-release-checks",
+  "baseline": "59979799c5809d636639084227d9fee75c8de1d9",
+  "path": "/Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/power/balancer-reviewed",
+  "files": {
+    "stratolink.kicad_pcb": "3bf0023e309336249e90deb1f52270f4108e61e40b558b4ec56a1df768ae1d4c",
+    "stratolink.kicad_sch": "7bd031d5b4a2ffcc22f4e8a04f664771204c4796c048ee348f0a95bebc1ef024",
+    "stratolink.kicad_pro": "83f13e321d5736275dfa64d379330b4076344a9ffebb3021ccf3aee6c064cce9",
+    "fp-lib-table": "705f05b5554f11949b16433700d994932665490bb4f91064f20890cc1c65326a",
+    "sym-lib-table": "a8659d8be7ade06b6408548c17358c6de937adea1da74d4afaae13d36e5280b8",
+    "lib/2026-03-07_16-25-25.kicad_sym": "9a79848b12d5e661e2846ab59b4aad1bda3c134d4131e5a3be96759850b6e941",
+    "lib/21-0147E.kicad_mod": "d8b8ebc85e44c7bc74c142f7189b65a37cceee2dca0531a18df6523b571999c6",
+    "lib/2450AT18A100E.kicad_sym": "4c17902873bf049dc499b066ca46e5f8567d9f7ec55a279e6c95f9d77e77e216",
+    "lib/2450AT18A100E.step": "d43e57d1a06eba29f10d1314d9db70ceafebe1f09b87a1e90ed9cef2db17ef8f",
+    "lib/4269.dcm": "73b350fb3e67f43221dc332d4aa0b9a12705ca3e654c17ad7c661d1acfc2ad4c",
+    "lib/4269.kicad_mod": "cb4f61d8466e9c3887e4211dddf0bdef20bdc81bd3461330dc84b52695016f55",
+    "lib/4269.kicad_sym": "f0e9b92024b3432c2b649a67c9f84c447718e0242492599e15ea3466bb878b3e",
+    "lib/4269.lib": "58d76bbc2fcbc31959c51fae1595e652f6171e5514844a8db3aee920c3dfdafa",
+    "lib/4269.mod": "aa41a0486dba1a6c58b3fd0229508855e14a54984435d008a773d8d2f6a4539e",
+    "lib/ANTC3216X140N.kicad_mod": "d0221f8bc21133d5619d205506f4b229491024d0a722a624e2f6abc3556cef2d",
+    "lib/AS7341-DLGM.kicad_sym": "abd1d59f41a076196e753c2b658694e77e1c5d9f519ab5672315827ddcd7a5b1",
+    "lib/AS7341-DLGM.step": "1f352ebe8c6c561d7bc090dc46eeaea65bc11fb485c887abe0d5c4540a20af73",
+    "lib/BGA6N40P3X2_148X95X53.kicad_mod": "0343aab55d5eff37c147587bba94596d8ce865012486045a074422f1746be496",
+    "lib/BQ25570RGRR.kicad_sym": "77e394cb57ae10efe7eba2d4dfeadae0a59542699f782de5f073fa621408f2fc",
+    "lib/BQ25570RGRR.step": "ede46d7189939d1295bbef027083521561cd1b231e93c2eee3e4c0f7d4af1db6",
+    "lib/CAPC1608X97N.kicad_mod": "c64240ccabb5bdcb0ec44734a0e45b0524794a53a2ddc9ccf530c0fa0bb1c66a",
+    "lib/DIO_BAS716_115.kicad_mod": "4f89dd17f2854299f0b242c9aca165594044192c924ea13825f08d0b3918d491",
+    "lib/DMF4B5R5G105M3DTA0.dcm": "7771c5de96b7d58a3825eba9dde0c83c8e30830e7e83952c7f62bba7e1c90193",
+    "lib/DMF4B5R5G105M3DTA0.kicad_mod": "9ab776792a60db5be6fbd79dbf274512ab5a8a5770dd695b40abc6f241fe076d",
+    "lib/DMF4B5R5G105M3DTA0.kicad_sym": "d61a16f42fbe02ebc78f9a2c9a19cbe607187df5f581d0702a63593aec82087f",
+    "lib/DMF4B5R5G105M3DTA0.lib": "be9e0cfc73b162b228139b9f046432f40169db6e4762d8b12e0957321f9bfc1c",
+    "lib/DMF4B5R5G105M3DTA0.mod": "e81591e3cf7073a690f18031fff9e130b0ced60858ff05f4db9e365ee8b60e45",
+    "lib/ERJU02J1R1X.kicad_sym": "2dbe1f4533020a98c94e65bc71457186153c14c325df09cd224c0426da39ace4",
+    "lib/ERJU02J1R1X.step": "d433ec4025d8cf829356864fc774877aaed40881c6f959b215a6877222d7ecff",
+    "lib/ETQP4M220YFN.kicad_sym": "3339cd09a82b3f891d5eaafd736413701fc2a17ebc59ba621a71a132e182a049",
+    "lib/ETQP4M220YFN.step": "c469fcfe7493ad42a7b4612f69a099da50f7e0a51e603c1c81473edc0920dd1f",
+    "lib/HS230F.dcm": "d5bc8c398180a49b9505dd7e2e86168fea4a594f80b85e32ec90f897c259db53",
+    "lib/HS230F.kicad_mod": "529df574736c0f6ea13c39468a44ac9dcdd8beb2fa7b52cccbe3fb26bdf8c335",
+    "lib/HS230F.kicad_sym": "811489ce5a198a6cd083fdd34451ee26f7f8186efe6d04e532546f51ef57bb93",
+    "lib/HS230F.lib": "0e787e65a19b6bc279c1cac6f20f8a7cae8f3fe38d1c25a1ac7752dda3ba73ec",
+    "lib/HS230F.mod": "b00437a67fb2634c1c0f50d349e62be917c85b7ffc185c82875fcf2bfa18f6c5",
+    "lib/INDC1608X90N.kicad_mod": "d3524646ea49e68bd74514a052a0d7db258eaef8e57a8ce70b2523c6b9cb6454",
+    "lib/IND_ETQP4M220YFN.kicad_mod": "381c6ee593f271568ce97449e3b8fb3a7e4dd50952df8fc548a95016239eb20d",
+    "lib/IND_LPS4018-223MRC.kicad_mod": "3e3f2c1ed2dfa4f3bde9f43c162a180655e7aab82d20204c3028568b7e224990",
+    "lib/LIS2DH12TR.kicad_sym": "07cac9985ca5d4bc6006008b39953cbf4b8e74acf952136da5d5bdd5024ab7e6",
+    "lib/LIS2DH12TR.step": "7a3d2316fa3f9d01dcb367295c280fd3064e9864f9b25e029afded30548432b8",
+    "lib/LPS4018-223MRC.kicad_sym": "59283d1e7d07f0724ece85c78996f50d5c81b836be4e51065a92117c93ef2f3d",
+    "lib/LPS4018-223MRC.step": "7247e578712eaab4a5fb90f55f123ce309f8a740e69b9670e4bec61481aa7bae",
+    "lib/LQM18FN100M00D.kicad_sym": "2effabbae1403948eeabacb0d3d9dbdbf7caa0ebb70a2aae9fbcacd4d1885e21",
+    "lib/LTR-390UV-01.step": "a4fef81fed3d299892089258ab37ddfefc50b64d2becda37a719e27a0b281e5b",
+    "lib/MAX-M10S-00B.kicad_sym": "7d85f2010cb778a48e2a6499bc5e681a42eb522fda2e2b9bf9ecaa89c28b7c91",
+    "lib/MAX-M10S-00B.step": "301c5c8f39597cb8a20bbfb64c6694d7f0121d89683bef55124958bd5cedb4ba",
+    "lib/MIC_T3902.kicad_mod": "1f92d8e049770a9c31db4054acd3362ef7022b6d665846ac2c70d9acf80fb7fe",
+    "lib/MLZ1608N100LT000.STEP": "d88f2217137cb303be8f3132cc776b88fdd02209cd154ab4fcafeefcddbb6694",
+    "lib/MS5611-01BA03.kicad_sym": "cb60c24e00aae0b18e91ee617e19428fc1cf4632063dfd9ddbe9d8af632ea9e3",
+    "lib/MS5611-01BA03.step": "cd4b2c1cc39faba8c3e3c66389228cdf131310b5466cdf22320cf2afd8a0e1b1",
+    "lib/PQFN50P200X200100-12N.kicad_mod": "bb10f8b0b1d0f19ba3a75cf9d0ec96834f28dcf6c5d49ca907dea1d2c66d3589",
+    "lib/ProLib_pcs_2026-01-31.elibz": "b39d8afe7e58ced1e372f83b98208b0438065880c48f102c74aeb31f84e6a646",
+    "lib/ProLib_pcs_2026-02-08.elibz": "747bb6051045cdcd8f720ab8816df1be8344a506a3ada6da75b09e35ce2957fe",
+    "lib/ProLib_pcs_2026-02-20.elibz": "83e43f38e2643ffd9d1e9a98b2e0225a04bb00dc9836cc085aff3f680889cd4b",
+    "lib/QFN50P350X350X100-21N.kicad_mod": "5ec201b9d4cba0e6afd86d2cb90b8339f7f2d1c1fbf5ad96a18bbf597a60803a",
+    "lib/RAK3172-8-SM-NI.kicad_sym": "1676e2db045544d59c3c01dd87685b93ad6ea65d20a492b6a045e085a1b28514",
+    "lib/RAK3172.kicad_mod": "e0fb3166a9bf8e865c94a07c957d91591d3ef2e9c97ee19c43a5abb001891e38",
+    "lib/RAK3172.kicad_sym": "d3131a6c168b5afdd04ba50f2b449ba380bff7b91078ce1b1212e3a0e22c3749",
+    "lib/RAK3172.step": "bd2bcd47540d611e57228d51c62f372b2393128c693611845697f020a94097f8",
+    "lib/RES_ERJU02J1R1X.kicad_mod": "26b19b06d6669428f70c92613ae025bd8d5934c62fb048261c74eafd0ce3a843",
+    "lib/SMD6_LTR-390UV-01_LTO-L.kicad_mod": "b8677d8c4594e4ec7bb875d3a08238e65363fce7788c853f45e6066d19a3781c",
+    "lib/SMD6_LTR-390UV-01_LTO-M.kicad_mod": "79bd36ae3dee2d140d9a91b4a62a5dd50051c4741de1a1863448051967efcaf7",
+    "lib/SMD6_LTR-390UV-01_LTO.kicad_mod": "9eb6ce599943c3b3a7159015b151f81e85d8390ae426ae314aefcec4cee5144f",
+    "lib/SON125P500X300X100-8N.kicad_mod": "ff2187465b1d4d695f51a19a0caa8cff843adb139aaff8052e203bd8a8719968",
+    "lib/Solar_Notch_Left_1p0x2p0.kicad_mod": "88d0ae34e02b1fadeed1b6f8261f9109735e027cfc9146fd165e487238bd3ebd",
+    "lib/Solar_Notch_Right_1p0x2p0.kicad_mod": "7bab33c2b68c8be61dad981c21736ac780836b76ddc8884d21ae82cc053f1de9",
+    "lib/Stratolink_GNSS_Wire_PTH_D1p0.kicad_mod": "3ce5f2f3ca3e850c9f6a108c82058d5ce4b7d4f267c4ef480d9010c1bc913468",
+    "lib/Stratolink_Header_Left_1x07_P1p00_D0p50_Pad0p88.kicad_mod": "678dfa4fbca321b1cf794539159747abaac8fc57909300c9c2ec8808c0c6612a",
+    "lib/Stratolink_Header_Right_1x07_P1p00_D0p50_Pad0p88.kicad_mod": "55179df22f92d771234badd935817eae5e4d93c912e265e6e9e7bf03b432046c",
+    "lib/Stratolink_LoRa_Wire_PTH_D1p0.kicad_mod": "9634c73a0eadb59d2ec6e7f6e0a98329c0f0cf281fa7b0f27688cb449698a2d1",
+    "lib/Stratolink_Wire_48mm_D0p321_Nominal.step": "18aba2561b12ccd7653bac133efc17c7833cc7c5686f563ee8c04ac862789671",
+    "lib/Stratolink_Wire_82mm_D0p321_Nominal.step": "23e13ed21d9b2f49bb232fbb04ea73eec6f713054e606b75a04a31165e9d4dbf",
+    "lib/Suspension_PTH_D2p0_OD3p2.kicad_mod": "2f71d16ba89940b2e21f46e35e96a71f7ff660adaaff82485ed805de143c9ca1",
+    "lib/T3902.kicad_sym": "66720809065a1941109082a4138fc68afeffbd06c35e963b338711417839a58f",
+    "lib/T3902.step": "214b395bb75a355bfc5ca2eac498412731dc0a5296af2382d370cf0230bdff1f",
+    "lib/TMP117NAIYBGR.kicad_sym": "1813a62d0d88664390dfc896d9a2cfd39cf37b9b75531db8980191ed2cc3c584",
+    "lib/TMP117NAIYBGR.step": "81257ef89350fbe4c930c965cd849b3f2ac885f4d30b6f6b1cd6689b145be75e",
+    "lib/VJ0603A120KXCAP.kicad_sym": "d45b48e1f00f52444dc6e20e8d2447d3dc502248c2a0446e5d44e05e462723e5",
+    "lib/VJ0603A120KXCAP.step": "7a5b19a23d2c80df52915b51adc3299ae78793909f41dc21e6b48f6bc339e4a6",
+    "lib/WCAP-CSGP_0402.kicad_mod": "44a8f032ed80387f92ffe395290a6e9accf150b77ca161ccd4edf91706f98ce9",
+    "lib/WCAP-CSGP_0402.kicad_sym": "31b8edc59adcae9059ce14724e0885f154cd6352c0536ca33a71419ce885b240",
+    "lib/WCAP-CSGP_0402.step": "fd544e31c602d8a01d21cae2c49140ea114544f70a54ec4d3b1f2d3c186ac29f",
+    "lib/XCVR_MAX-M10S-00B.kicad_mod": "f02c5f6ec6a2cc7e49e6d320e2f713a5cf826c652b7030754832415a9c33bfa7",
+    "lib/XCVR_RAK3172-8-SM-NI.kicad_mod": "341a8de38d3075e7e190495ecbe1faa77f11aef73df7211c85b56581198b6c6a",
+    "lib/XDCR_AS7341-DLGM.kicad_mod": "1b4397d0b1f6b5baa42d874ff37b2096b77d6fdfe65f692b1d3dff3db6a4e2ac",
+    "lib/cap.step": "9b8d6e2646bd53de6c21345928a71feafc695fd88a254725b14f7a7108f9681d",
+    "lib/gps.step": "6e8669ce426399a1171bfef1886e155a9c1bdf89aab8e7a59ea81c043f1fba88",
+    "lib/lora.step": "4685127e7fd516ea0e08ba7f8a8c5711f626351b480a13ade89925b33fdad9b5",
+    "lib/mic.elibz": "b68dcc389d65cf5b89763e94db81ee8ee41ad52d68ad39fffea02825559bad17",
+    "lib/pressure.elibz": "f997158b9182f3cfcc305b2efa452300f2fe3103462d244a90f23c209db269b5",
+    "lib/Stratolink_Power.kicad_sym": "2428574dbca6d67a258bf56648ea7280215e3747ba961e88c6ec96b1fd2d9b40"
+  },
+  "removed_objects": [
+    {
+      "uuid": "04009492-82c2-4153-9669-aaba7e80b052",
+      "kind": "segment",
+      "net": "VSTOR"
+    },
+    {
+      "uuid": "09fca87c-8b47-4189-8e3b-147e110778de",
+      "kind": "segment",
+      "net": "VSTOR"
+    },
+    {
+      "uuid": "21452a12-3768-4510-a2b9-f6df4d5cb154",
+      "kind": "segment",
+      "net": "VSTOR"
+    },
+    {
+      "uuid": "2c62792d-6295-4c2c-bd6f-a6d6829e607e",
+      "kind": "segment",
+      "net": "VSTOR"
+    },
+    {
+      "uuid": "4ad58470-1a80-406c-b895-8f31cadb16cd",
+      "kind": "segment",
+      "net": "VSTOR"
+    },
+    {
+      "uuid": "4b7c27a4-fa1f-461b-831d-7591c779b06f",
+      "kind": "segment",
+      "net": "VSTOR"
+    },
+    {
+      "uuid": "50ba00e9-fbcc-485d-8089-c93bc60b0957",
+      "kind": "segment",
+      "net": "VSTOR"
+    },
+    {
+      "uuid": "5966be2f-26cb-4e0a-9a10-516e69514108",
+      "kind": "segment",
+      "net": "VSTOR"
+    },
+    {
+      "uuid": "5ba400e4-1878-4bba-a25c-432909643b3b",
+      "kind": "segment",
+      "net": "VSTOR"
+    },
+    {
+      "uuid": "6970d1b2-608c-4eeb-ae17-6c63d9e5ffa7",
+      "kind": "segment",
+      "net": "VSTOR"
+    },
+    {
+      "uuid": "6cb4b0b4-5fa9-462d-95d3-a28344e6cc28",
+      "kind": "via",
+      "net": "GND"
+    },
+    {
+      "uuid": "7f67fcf4-702f-416b-b2fd-bab2eac57fdd",
+      "kind": "via",
+      "net": "VSTOR"
+    },
+    {
+      "uuid": "80a86315-610a-4e34-b120-c040afd32c5b",
+      "kind": "segment",
+      "net": "VSTOR"
+    },
+    {
+      "uuid": "8e25246c-2c06-4bc3-aa1f-067f51c7c557",
+      "kind": "segment",
+      "net": "VSTOR"
+    },
+    {
+      "uuid": "8fd4115c-607a-42ed-ae52-6c954326b1f1",
+      "kind": "segment",
+      "net": "VSTOR"
+    },
+    {
+      "uuid": "9116a49b-0f00-4b67-a344-b0b457a7df00",
+      "kind": "via",
+      "net": "VSTOR"
+    },
+    {
+      "uuid": "94269abc-2f5b-41cb-abf1-3984b70919a5",
+      "kind": "segment",
+      "net": "VSTOR"
+    },
+    {
+      "uuid": "aba2c4a0-27c1-4125-b91d-95ffb128747d",
+      "kind": "segment",
+      "net": "VSTOR"
+    },
+    {
+      "uuid": "acc183ca-d474-44e8-bd3c-69ef8aaafa23",
+      "kind": "segment",
+      "net": "VSTOR"
+    },
+    {
+      "uuid": "c24add4a-093f-41c2-846c-b6ac984833c7",
+      "kind": "segment",
+      "net": "VSTOR"
+    },
+    {
+      "uuid": "c69962c7-efdc-415c-be62-0ebf66171f61",
+      "kind": "segment",
+      "net": "VSTOR"
+    },
+    {
+      "uuid": "d93d6c7c-df67-4978-922c-d044efd564e7",
+      "kind": "segment",
+      "net": "VSTOR"
+    },
+    {
+      "uuid": "e2081ec7-9215-4270-a2b1-60b9e8aa661a",
+      "kind": "segment",
+      "net": "VSTOR"
+    },
+    {
+      "uuid": "ec9f30ee-b434-4c09-9b9a-b921a878155a",
+      "kind": "segment",
+      "net": "VSTOR"
+    },
+    {
+      "uuid": "ed2c65fd-1af8-4a7b-9f6d-559d47c84a7c",
+      "kind": "segment",
+      "net": "VSTOR"
+    },
+    {
+      "uuid": "f34d095d-caf6-4bc5-aa9a-cf56e90260f4",
+      "kind": "segment",
+      "net": "VSTOR"
+    },
+    {
+      "uuid": "f98c2a1f-d0b0-4920-8908-ffd8124a515c",
+      "kind": "segment",
+      "net": "VSTOR"
+    },
+    {
+      "uuid": "fd0ffb70-099d-4940-8e31-c872be6f6dbb",
+      "kind": "via",
+      "net": "VSTOR"
+    }
+  ],
+  "added_objects": [
+    {
+      "uuid": "00197c61-a447-5553-b9cc-0d1c01832ab6",
+      "kind": "segment",
+      "net": "/SC_HALF_REF"
+    },
+    {
+      "uuid": "004c09c4-b882-5ac4-87b6-df1f768518df",
+      "kind": "segment",
+      "net": "/SC_MID"
+    },
+    {
+      "uuid": "00970ff0-b48c-55d4-91e1-7d78cae15151",
+      "kind": "segment",
+      "net": "VSTOR"
+    },
+    {
+      "uuid": "016496e1-fee1-5f45-b074-553b261903ae",
+      "kind": "segment",
+      "net": "VSTOR"
+    },
+    {
+      "uuid": "02126ee7-5638-54e7-b934-561c1dc97761",
+      "kind": "segment",
+      "net": "/VBAT"
+    },
+    {
+      "uuid": "041dbf04-3668-5eec-95a0-59330889780b",
+      "kind": "segment",
+      "net": "VSTOR"
+    },
+    {
+      "uuid": "049f1ec2-6d90-583e-80e0-1dbad83ea012",
+      "kind": "segment",
+      "net": "/SC_BAL_OUT"
+    },
+    {
+      "uuid": "06083373-b5b1-5808-a562-89b6babb1ab2",
+      "kind": "segment",
+      "net": "/SC_BAL_OUT"
+    },
+    {
+      "uuid": "063cbb31-eec8-5b15-85e6-14461fe4c785",
+      "kind": "segment",
+      "net": "/SC_BAL_OUT"
+    },
+    {
+      "uuid": "07290d67-335d-5495-9d91-c59500ef12ac",
+      "kind": "segment",
+      "net": "VSTOR"
+    },
+    {
+      "uuid": "08b01474-10b4-50e9-9787-6ed14ac6c7a4",
+      "kind": "segment",
+      "net": "GND"
+    },
+    {
+      "uuid": "098df22a-046d-55ad-b80f-44c02640bd24",
+      "kind": "segment",
+      "net": "/SC_BAL_OUT"
+    },
+    {
+      "uuid": "0a5811e3-c6bd-53b4-b0b8-eb6ed66d3749",
+      "kind": "segment",
+      "net": "/VBAT"
+    },
+    {
+      "uuid": "0b5d5368-f752-503f-b62b-f9cb85f4daea",
+      "kind": "segment",
+      "net": "VSTOR"
+    },
+    {
+      "uuid": "0c90ebd5-0722-54a6-88ce-509430e27500",
+      "kind": "segment",
+      "net": "VSTOR"
+    },
+    {
+      "uuid": "0c98de14-2e2d-5291-8a77-0e828e338fb7",
+      "kind": "segment",
+      "net": "/VBAT"
+    },
+    {
+      "uuid": "0d0a1c46-760b-5cf9-afe7-3e0f58fa3a7e",
+      "kind": "segment",
+      "net": "/SC_HALF_REF"
+    },
+    {
+      "uuid": "0d601c11-31e9-5e87-899d-519de1c2934f",
+      "kind": "segment",
+      "net": "/SC_HALF_REF"
+    },
+    {
+      "uuid": "0de9c7e6-32ad-5303-8ab2-37cd69b77529",
+      "kind": "segment",
+      "net": "/SC_MID"
+    },
+    {
+      "uuid": "105063cc-cdb4-5b5a-ac5c-6fb51942e892",
+      "kind": "segment",
+      "net": "VSTOR"
+    },
+    {
+      "uuid": "106120aa-98f7-5cda-afda-e030bb1c570c",
+      "kind": "segment",
+      "net": "/SC_BAL_OUT"
+    },
+    {
+      "uuid": "11edda1d-b374-5844-a9cc-ae7908f1c16d",
+      "kind": "segment",
+      "net": "VSTOR"
+    },
+    {
+      "uuid": "13c3ea26-7680-5dbf-a62d-b006a0be9f2c",
+      "kind": "segment",
+      "net": "/SC_MID"
+    },
+    {
+      "uuid": "13c758af-34e6-5be4-8b43-cd8df346f856",
+      "kind": "segment",
+      "net": "/SC_HALF_REF"
+    },
+    {
+      "uuid": "145bef51-26f8-5784-a3b7-e4db753daaf6",
+      "kind": "segment",
+      "net": "GND"
+    },
+    {
+      "uuid": "155b1f6c-0367-51e4-8946-24940734ef4e",
+      "kind": "segment",
+      "net": "/SC_BAL_OUT"
+    },
+    {
+      "uuid": "15eae12a-5a0b-5633-b353-1fae7935d468",
+      "kind": "segment",
+      "net": "GND"
+    },
+    {
+      "uuid": "173ec7ad-1f8e-59d5-aa7e-89af4c16195a",
+      "kind": "segment",
+      "net": "VSTOR"
+    },
+    {
+      "uuid": "187ff614-a5ee-5327-ad6b-8af8eca72915",
+      "kind": "segment",
+      "net": "/SC_HALF_REF"
+    },
+    {
+      "uuid": "18fc5422-7214-5fa2-a1aa-aa0a6c550be9",
+      "kind": "segment",
+      "net": "VSTOR"
+    },
+    {
+      "uuid": "191e89f7-bb0c-55ef-968f-7817795dfd9b",
+      "kind": "segment",
+      "net": "GND"
+    },
+    {
+      "uuid": "195be131-3510-59d4-b561-bdb779547954",
+      "kind": "segment",
+      "net": "/SC_MID"
+    },
+    {
+      "uuid": "196fb541-7691-5437-8518-879fea935d7f",
+      "kind": "segment",
+      "net": "GND"
+    },
+    {
+      "uuid": "1a690b33-673d-5a02-ba5e-a826fe33e840",
+      "kind": "segment",
+      "net": "VSTOR"
+    },
+    {
+      "uuid": "1aff4895-f78b-57bb-955f-0f935c27bc30",
+      "kind": "segment",
+      "net": "/VBAT"
+    },
+    {
+      "uuid": "1dad97a1-d2d0-5c74-9948-b124ce28c8dc",
+      "kind": "segment",
+      "net": "GND"
+    },
+    {
+      "uuid": "1debb3c9-a417-5287-a1fa-6c7c65fe53fc",
+      "kind": "segment",
+      "net": "/VBAT"
+    },
+    {
+      "uuid": "1ebdefbe-e899-5e5f-8efd-9105c9a0a1a2",
+      "kind": "segment",
+      "net": "/SC_MID"
+    },
+    {
+      "uuid": "1f012eea-1d4c-5f1b-921b-e972370990dd",
+      "kind": "segment",
+      "net": "GND"
+    },
+    {
+      "uuid": "1f3df819-831d-5e53-bb16-69ac629c2045",
+      "kind": "segment",
+      "net": "/SC_HALF_REF"
+    },
+    {
+      "uuid": "21e61461-1fca-5d03-92c9-58a94bca532b",
+      "kind": "segment",
+      "net": "GND"
+    },
+    {
+      "uuid": "2201551f-3b73-52be-9aa1-a50b75084d53",
+      "kind": "segment",
+      "net": "/SC_HALF_REF"
+    },
+    {
+      "uuid": "222fab50-b697-51b9-85bc-5159a2a7bc54",
+      "kind": "segment",
+      "net": "/SC_HALF_REF"
+    },
+    {
+      "uuid": "226ba8ef-ef55-5a1b-9cc6-c3968f207763",
+      "kind": "segment",
+      "net": "GND"
+    },
+    {
+      "uuid": "2319d4d5-5bfe-58f9-91b9-4bad49b97522",
+      "kind": "segment",
+      "net": "/SC_BAL_OUT"
+    },
+    {
+      "uuid": "23a9ce83-cd09-59ac-9df2-507b16220a75",
+      "kind": "segment",
+      "net": "/SC_BAL_OUT"
+    },
+    {
+      "uuid": "23c11ab2-0858-5016-a6bc-79250091e079",
+      "kind": "segment",
+      "net": "GND"
+    },
+    {
+      "uuid": "24564953-f4b9-5dc3-ae8a-d2415f53d097",
+      "kind": "segment",
+      "net": "/SC_BAL_OUT"
+    },
+    {
+      "uuid": "25c9c1fb-9c7e-5aa9-8090-6ec31d53bde8",
+      "kind": "segment",
+      "net": "VSTOR"
+    },
+    {
+      "uuid": "262d3024-d9d2-5a90-8132-7852dc02e804",
+      "kind": "segment",
+      "net": "/VBAT"
+    },
+    {
+      "uuid": "26d2aea5-82f6-5b9c-87f8-369423e25a75",
+      "kind": "segment",
+      "net": "/VBAT"
+    },
+    {
+      "uuid": "26d48ee4-293e-599b-973a-d81f79c80a5c",
+      "kind": "segment",
+      "net": "VSTOR"
+    },
+    {
+      "uuid": "277f8d4a-28e7-5975-bd0c-b93b02bf2299",
+      "kind": "via",
+      "net": "VSTOR"
+    },
+    {
+      "uuid": "279a45c5-047c-53db-9718-cb7b9a1f36ea",
+      "kind": "segment",
+      "net": "GND"
+    },
+    {
+      "uuid": "27b62b2e-145f-5a58-afc7-5933b4095cf8",
+      "kind": "segment",
+      "net": "/VBAT"
+    },
+    {
+      "uuid": "295f80fe-60ca-525e-a3fc-caeefac2ea05",
+      "kind": "segment",
+      "net": "GND"
+    },
+    {
+      "uuid": "2a79575e-00f7-5a47-b18c-a9d0e1ee9869",
+      "kind": "segment",
+      "net": "/SC_HALF_REF"
+    },
+    {
+      "uuid": "2ae1807d-9eaf-5d83-8ea2-a813622187a8",
+      "kind": "segment",
+      "net": "/SC_MID"
+    },
+    {
+      "uuid": "2d3caafd-b383-5506-8a10-3349c0f73dfc",
+      "kind": "segment",
+      "net": "/SC_HALF_REF"
+    },
+    {
+      "uuid": "2da1e708-a556-5c4d-a73f-1785cd478c4b",
+      "kind": "segment",
+      "net": "/SC_HALF_REF"
+    },
+    {
+      "uuid": "2db5927a-bb3d-5e12-af7f-ff54c210e8f4",
+      "kind": "segment",
+      "net": "/SC_MID"
+    },
+    {
+      "uuid": "2e1eac50-1542-53fc-914e-1d6f769fe801",
+      "kind": "segment",
+      "net": "/SC_HALF_REF"
+    },
+    {
+      "uuid": "2e54ce89-29fe-5584-b444-aeaa2a347d35",
+      "kind": "segment",
+      "net": "/VBAT"
+    },
+    {
+      "uuid": "2f3982e6-77d4-55fe-9ad8-b75b8029b35e",
+      "kind": "segment",
+      "net": "GND"
+    },
+    {
+      "uuid": "2fbfcb9f-4c59-5b37-b925-6684299496de",
+      "kind": "segment",
+      "net": "VSTOR"
+    },
+    {
+      "uuid": "30088592-0311-5e9a-97d5-967c5d94b59c",
+      "kind": "segment",
+      "net": "VSTOR"
+    },
+    {
+      "uuid": "30fb0dd5-baef-5ffa-87bb-4dea513d04d0",
+      "kind": "segment",
+      "net": "/VBAT"
+    },
+    {
+      "uuid": "3237d7b9-b1c6-5806-bbbb-b154f05a639d",
+      "kind": "segment",
+      "net": "VSTOR"
+    },
+    {
+      "uuid": "33fcf744-e4c5-522b-81a7-62af6a4bc7be",
+      "kind": "segment",
+      "net": "VSTOR"
+    },
+    {
+      "uuid": "341404ff-0625-5220-ab98-016f3cf5bf44",
+      "kind": "segment",
+      "net": "VSTOR"
+    },
+    {
+      "uuid": "342c8715-b55e-5543-843e-da1747534068",
+      "kind": "segment",
+      "net": "/VBAT"
+    },
+    {
+      "uuid": "353681cb-898c-5d1e-9746-d55cd9665fd2",
+      "kind": "segment",
+      "net": "VSTOR"
+    },
+    {
+      "uuid": "35fbfb3b-b62c-5c00-b0e6-fe88660fe356",
+      "kind": "segment",
+      "net": "/VBAT"
+    },
+    {
+      "uuid": "3726409b-6e6e-509b-9711-66c10e27135e",
+      "kind": "segment",
+      "net": "/SC_HALF_REF"
+    },
+    {
+      "uuid": "378c0817-2c7c-59a8-a2b2-7f240c813749",
+      "kind": "segment",
+      "net": "GND"
+    },
+    {
+      "uuid": "3790a687-d00b-53fa-8d54-4d580f47f0ba",
+      "kind": "segment",
+      "net": "VSTOR"
+    },
+    {
+      "uuid": "37ceaf24-32ac-575c-ab4d-98efd93e8024",
+      "kind": "segment",
+      "net": "/SC_HALF_REF"
+    },
+    {
+      "uuid": "387d335b-5ac3-5823-864a-c856d7e746cf",
+      "kind": "segment",
+      "net": "/SC_HALF_REF"
+    },
+    {
+      "uuid": "39289da3-43ac-54cf-9bd2-4ef0f33c14e0",
+      "kind": "via",
+      "net": "VSTOR"
+    },
+    {
+      "uuid": "39807d07-fe7d-5963-af5a-aa8249ff96bc",
+      "kind": "segment",
+      "net": "VSTOR"
+    },
+    {
+      "uuid": "3a51ac09-d9a6-51ca-afa9-3fc5ea42a6d7",
+      "kind": "segment",
+      "net": "GND"
+    },
+    {
+      "uuid": "3aec5189-cdb2-59b6-a283-bb8f0968c4be",
+      "kind": "segment",
+      "net": "/SC_MID"
+    },
+    {
+      "uuid": "3aec9b44-8b31-5530-8a59-f3d01c8c4719",
+      "kind": "segment",
+      "net": "/VBAT"
+    },
+    {
+      "uuid": "3c4ff291-5189-5e65-8842-d2cb4d6274d2",
+      "kind": "segment",
+      "net": "GND"
+    },
+    {
+      "uuid": "3e413ca9-bea7-51de-94ef-5c46830b631d",
+      "kind": "segment",
+      "net": "/VBAT"
+    },
+    {
+      "uuid": "3f38c618-f0cf-588e-8898-89bc9c746923",
+      "kind": "segment",
+      "net": "/SC_HALF_REF"
+    },
+    {
+      "uuid": "3f3a760b-767f-58d2-a746-e72a82a90a59",
+      "kind": "segment",
+      "net": "VSTOR"
+    },
+    {
+      "uuid": "3f69e019-f363-5df2-a42b-9194eae08ea1",
+      "kind": "segment",
+      "net": "GND"
+    },
+    {
+      "uuid": "3f813a48-b922-531a-af76-20fe77752952",
+      "kind": "segment",
+      "net": "VSTOR"
+    },
+    {
+      "uuid": "40be4a34-e7f3-5430-83ce-ecdca0a8cccc",
+      "kind": "segment",
+      "net": "GND"
+    },
+    {
+      "uuid": "41273cd7-f660-5069-b39d-10f5094d9441",
+      "kind": "segment",
+      "net": "/VBAT"
+    },
+    {
+      "uuid": "42c7d6e1-1838-5c93-8074-9b87551c783f",
+      "kind": "segment",
+      "net": "GND"
+    },
+    {
+      "uuid": "43b4c8f6-e308-52cc-bf73-fb2122e4bdfe",
+      "kind": "segment",
+      "net": "/SC_MID"
+    },
+    {
+      "uuid": "43f181f6-8aa8-5b1d-987c-6e67e18ff852",
+      "kind": "segment",
+      "net": "/VBAT"
+    },
+    {
+      "uuid": "4435953c-5f46-5e97-a5a5-3dc3e81c664c",
+      "kind": "segment",
+      "net": "GND"
+    },
+    {
+      "uuid": "4459a48c-6003-5e1c-943d-dce47aa96fd5",
+      "kind": "segment",
+      "net": "VSTOR"
+    },
+    {
+      "uuid": "445dd30b-5595-55eb-a833-bf9908f19caf",
+      "kind": "segment",
+      "net": "/SC_BAL_OUT"
+    },
+    {
+      "uuid": "44737ab9-7bb7-5911-8f50-6b2d987d2a6f",
+      "kind": "segment",
+      "net": "/SC_HALF_REF"
+    },
+    {
+      "uuid": "44cc07c6-01e0-50a6-b2cf-8ef4b56b485e",
+      "kind": "segment",
+      "net": "/SC_HALF_REF"
+    },
+    {
+      "uuid": "45427562-abaa-5366-a11d-242da89831f3",
+      "kind": "segment",
+      "net": "/VBAT"
+    },
+    {
+      "uuid": "4622f2fb-0de3-521b-9646-8b971aef6803",
+      "kind": "segment",
+      "net": "/SC_BAL_OUT"
+    },
+    {
+      "uuid": "479005cd-ebc4-5b3a-8d95-6a5df33d346d",
+      "kind": "segment",
+      "net": "VSTOR"
+    },
+    {
+      "uuid": "479a18bd-1216-57a3-9c6b-ccc00039dd48",
+      "kind": "segment",
+      "net": "VSTOR"
+    },
+    {
+      "uuid": "480a8e2c-aad9-59fe-9bc7-f6d5c46fd890",
+      "kind": "segment",
+      "net": "VSTOR"
+    },
+    {
+      "uuid": "48d787e3-fbc0-5dee-83be-0c2ce9ba6fc3",
+      "kind": "segment",
+      "net": "GND"
+    },
+    {
+      "uuid": "49bc7b24-b31e-55d6-9c16-22e1bf81b484",
+      "kind": "segment",
+      "net": "GND"
+    },
+    {
+      "uuid": "49ce989a-71a5-5df7-acd9-f7960ad76b42",
+      "kind": "segment",
+      "net": "/SC_HALF_REF"
+    },
+    {
+      "uuid": "4a0c28a3-f761-5f60-9d0d-5f7e4be25a65",
+      "kind": "segment",
+      "net": "/SC_BAL_OUT"
+    },
+    {
+      "uuid": "4a21b4d5-4688-5b54-ab2a-9b1490f20b34",
+      "kind": "segment",
+      "net": "/VBAT"
+    },
+    {
+      "uuid": "4a2f3bc2-10a8-5f33-b3c0-5b22e136fa4f",
+      "kind": "segment",
+      "net": "VSTOR"
+    },
+    {
+      "uuid": "4bb66fb7-8480-5071-80f9-c4d8ee812d09",
+      "kind": "segment",
+      "net": "/SC_BAL_OUT"
+    },
+    {
+      "uuid": "4c7bb563-ed86-50cb-ae90-0e3310545a40",
+      "kind": "segment",
+      "net": "/SC_BAL_OUT"
+    },
+    {
+      "uuid": "4d60f976-2ea8-56aa-acb4-b541bee0bac7",
+      "kind": "segment",
+      "net": "/SC_MID"
+    },
+    {
+      "uuid": "506512e9-1a19-5938-8e72-0359670bdef4",
+      "kind": "segment",
+      "net": "/SC_MID"
+    },
+    {
+      "uuid": "50de0a81-c702-515e-a99a-be8146cc3113",
+      "kind": "segment",
+      "net": "VSTOR"
+    },
+    {
+      "uuid": "51450d02-748b-5a81-ab66-0ef229f003b6",
+      "kind": "segment",
+      "net": "/SC_HALF_REF"
+    },
+    {
+      "uuid": "519f8574-6516-56eb-82d6-0e3cad3f1199",
+      "kind": "segment",
+      "net": "/SC_HALF_REF"
+    },
+    {
+      "uuid": "52310ce8-ccfe-5756-bbd4-d787df0feee2",
+      "kind": "segment",
+      "net": "GND"
+    },
+    {
+      "uuid": "52873d18-abac-50cc-83a4-6a3742c6d9a9",
+      "kind": "segment",
+      "net": "/SC_MID"
+    },
+    {
+      "uuid": "52a88a5f-158c-5dad-858e-28796e316e59",
+      "kind": "segment",
+      "net": "VSTOR"
+    },
+    {
+      "uuid": "53bd8c1b-60ce-55b3-96a4-43363287db72",
+      "kind": "segment",
+      "net": "VSTOR"
+    },
+    {
+      "uuid": "53d3804a-0309-5a8c-b9c0-bcbda69523ea",
+      "kind": "segment",
+      "net": "/SC_BAL_OUT"
+    },
+    {
+      "uuid": "542bfe5f-b152-5b75-bb43-f8f4cfb28bf5",
+      "kind": "segment",
+      "net": "/SC_MID"
+    },
+    {
+      "uuid": "543e40a0-34b0-53b0-8398-850ee0daf38c",
+      "kind": "segment",
+      "net": "VSTOR"
+    },
+    {
+      "uuid": "54cdaa43-dc63-5634-9019-0d203437c246",
+      "kind": "segment",
+      "net": "/SC_BAL_OUT"
+    },
+    {
+      "uuid": "55faa006-0437-5601-9aa6-8b160c257103",
+      "kind": "segment",
+      "net": "GND"
+    },
+    {
+      "uuid": "56644210-8cb3-5d2b-aede-5391b0f6a62a",
+      "kind": "segment",
+      "net": "/VBAT"
+    },
+    {
+      "uuid": "57742132-9e2e-5f4f-a31a-39a233edbc54",
+      "kind": "segment",
+      "net": "/VBAT"
+    },
+    {
+      "uuid": "5805a356-10dd-54b9-a899-e2fa937e021a",
+      "kind": "segment",
+      "net": "/VBAT"
+    },
+    {
+      "uuid": "580f1d8e-38a3-56d2-a93d-66e4fba63c3c",
+      "kind": "segment",
+      "net": "VSTOR"
+    },
+    {
+      "uuid": "5840af72-87f5-5279-99cb-0f1d26a98d06",
+      "kind": "segment",
+      "net": "/SC_BAL_OUT"
+    },
+    {
+      "uuid": "5973ec29-f9b7-511c-9ec6-3b4548ccd25b",
+      "kind": "segment",
+      "net": "GND"
+    },
+    {
+      "uuid": "599c02da-7a09-5aed-a24e-75993857238a",
+      "kind": "segment",
+      "net": "/SC_MID"
+    },
+    {
+      "uuid": "59d33dd6-fde3-52ac-9a57-047d34044493",
+      "kind": "segment",
+      "net": "GND"
+    },
+    {
+      "uuid": "5acec003-6cea-5a20-8dcf-1e5a4f6c9879",
+      "kind": "segment",
+      "net": "/VBAT"
+    },
+    {
+      "uuid": "5af60cc1-d0a6-5358-b6ef-d37035b809aa",
+      "kind": "segment",
+      "net": "GND"
+    },
+    {
+      "uuid": "5b287d46-daf5-5c38-9ba3-1c5df0e3425c",
+      "kind": "segment",
+      "net": "GND"
+    },
+    {
+      "uuid": "5b4e8a14-0ada-5ca3-9a4e-93f543f3d493",
+      "kind": "segment",
+      "net": "/SC_HALF_REF"
+    },
+    {
+      "uuid": "5b5db6b4-01e0-53c9-b36b-5114faf77456",
+      "kind": "segment",
+      "net": "/SC_HALF_REF"
+    },
+    {
+      "uuid": "5ba3436a-58d3-5657-b282-3bb5d15c9dec",
+      "kind": "segment",
+      "net": "/VBAT"
+    },
+    {
+      "uuid": "5bacaf99-2cfa-5026-bf84-8b1aacb91464",
+      "kind": "segment",
+      "net": "/SC_BAL_OUT"
+    },
+    {
+      "uuid": "5ddc1d90-3f88-5395-9508-29d7167676e6",
+      "kind": "segment",
+      "net": "/SC_BAL_OUT"
+    },
+    {
+      "uuid": "5e7f5cfc-69da-5506-a2ae-64eeafeefdc5",
+      "kind": "segment",
+      "net": "/SC_HALF_REF"
+    },
+    {
+      "uuid": "5efcac67-d2f5-5d3e-bd20-3f5ab96ef272",
+      "kind": "segment",
+      "net": "/VBAT"
+    },
+    {
+      "uuid": "5fdc8908-8f86-561e-b92a-eeebda825e45",
+      "kind": "segment",
+      "net": "/SC_BAL_OUT"
+    },
+    {
+      "uuid": "60b95587-a174-5c9b-bbb7-7808146aba8a",
+      "kind": "segment",
+      "net": "/SC_BAL_OUT"
+    },
+    {
+      "uuid": "61901f1d-2440-596c-9d97-7fc233cbe62d",
+      "kind": "segment",
+      "net": "/SC_HALF_REF"
+    },
+    {
+      "uuid": "62dd8482-4d6e-58b2-b794-a866201ebf47",
+      "kind": "segment",
+      "net": "/SC_HALF_REF"
+    },
+    {
+      "uuid": "62f97388-f2c3-54b3-bfff-8983ca8bea9f",
+      "kind": "segment",
+      "net": "/SC_BAL_OUT"
+    },
+    {
+      "uuid": "647107fd-c015-55fd-9241-125c326c4979",
+      "kind": "segment",
+      "net": "GND"
+    },
+    {
+      "uuid": "673b9ee3-2a0a-5b62-8d2f-306bb890ef0e",
+      "kind": "segment",
+      "net": "/SC_MID"
+    },
+    {
+      "uuid": "67d269e1-ae13-50ba-9a0c-cf219bdcef7e",
+      "kind": "segment",
+      "net": "GND"
+    },
+    {
+      "uuid": "688f32b1-c075-56a8-9c4d-5565f5bc3333",
+      "kind": "segment",
+      "net": "/SC_HALF_REF"
+    },
+    {
+      "uuid": "6916e49a-61a5-5995-8099-e261ea03e26a",
+      "kind": "segment",
+      "net": "/SC_MID"
+    },
+    {
+      "uuid": "6b35f3db-3eb7-56b6-b401-73307f345c36",
+      "kind": "segment",
+      "net": "/SC_MID"
+    },
+    {
+      "uuid": "6d2df767-2b75-5949-87d6-a897f4579522",
+      "kind": "segment",
+      "net": "/SC_HALF_REF"
+    },
+    {
+      "uuid": "6fa10263-5a26-5fc1-b630-95245c13c5f1",
+      "kind": "segment",
+      "net": "GND"
+    },
+    {
+      "uuid": "70016551-4949-5888-82d8-48c5e90fd3b1",
+      "kind": "segment",
+      "net": "/SC_MID"
+    },
+    {
+      "uuid": "701ee450-8f55-506c-908e-f6d38f8804e9",
+      "kind": "segment",
+      "net": "GND"
+    },
+    {
+      "uuid": "7056497e-f45c-50f8-9b42-8db8ace9e36e",
+      "kind": "segment",
+      "net": "VSTOR"
+    },
+    {
+      "uuid": "71e10173-2d45-5b59-9ce3-449812d7ea7e",
+      "kind": "segment",
+      "net": "/SC_MID"
+    },
+    {
+      "uuid": "72d3a268-31f7-5b43-8bd0-153e4556ba51",
+      "kind": "segment",
+      "net": "GND"
+    },
+    {
+      "uuid": "73a23e5a-fa7c-5183-b966-b3562595c45c",
+      "kind": "via",
+      "net": "/VBAT"
+    },
+    {
+      "uuid": "73f90b7a-912c-5ea0-b3df-db572421f745",
+      "kind": "segment",
+      "net": "GND"
+    },
+    {
+      "uuid": "740ef59a-6a7c-5ad5-8be5-d58f01427000",
+      "kind": "segment",
+      "net": "GND"
+    },
+    {
+      "uuid": "7526237a-3dda-5724-bee9-df8d42be365e",
+      "kind": "via",
+      "net": "VSTOR"
+    },
+    {
+      "uuid": "7662e6e2-269c-51de-b4ac-494e7cac437d",
+      "kind": "segment",
+      "net": "GND"
+    },
+    {
+      "uuid": "76860f77-f20b-5d05-b6a7-b54be04ec3fe",
+      "kind": "segment",
+      "net": "VSTOR"
+    },
+    {
+      "uuid": "76e952ec-11a0-5a88-afaf-72c1a37960e3",
+      "kind": "segment",
+      "net": "VSTOR"
+    },
+    {
+      "uuid": "77522b4f-6368-5862-acf1-eb082fa7f0d3",
+      "kind": "segment",
+      "net": "GND"
+    },
+    {
+      "uuid": "7862898c-a579-5311-adb9-7ce6a9247b2d",
+      "kind": "segment",
+      "net": "VSTOR"
+    },
+    {
+      "uuid": "78a51721-cb2f-54f6-bb18-971f035e4291",
+      "kind": "segment",
+      "net": "GND"
+    },
+    {
+      "uuid": "79264403-382c-58e8-88ab-d85eabb5e900",
+      "kind": "segment",
+      "net": "/SC_HALF_REF"
+    },
+    {
+      "uuid": "79495cdd-6e42-586f-97bc-a448ac3c8fc5",
+      "kind": "segment",
+      "net": "/SC_HALF_REF"
+    },
+    {
+      "uuid": "7b45150e-0bdb-5e22-92ce-e1878b32ff72",
+      "kind": "segment",
+      "net": "VSTOR"
+    },
+    {
+      "uuid": "7bd24b0e-b67f-51b0-b717-ef9dc9fac463",
+      "kind": "segment",
+      "net": "VSTOR"
+    },
+    {
+      "uuid": "7c855a9a-136a-5ffe-8752-1c86e97356e0",
+      "kind": "segment",
+      "net": "/SC_MID"
+    },
+    {
+      "uuid": "7d4ff004-32b9-5e52-898c-8085f1231f99",
+      "kind": "segment",
+      "net": "GND"
+    },
+    {
+      "uuid": "7d8e93db-bead-5cc4-ad3a-673ac1a151b3",
+      "kind": "segment",
+      "net": "/SC_MID"
+    },
+    {
+      "uuid": "7e76aa94-0b14-57ea-ae79-a39b931ebe50",
+      "kind": "segment",
+      "net": "/VBAT"
+    },
+    {
+      "uuid": "7ee114a8-039b-54ef-90fa-e208480d2ded",
+      "kind": "segment",
+      "net": "/SC_BAL_OUT"
+    },
+    {
+      "uuid": "7ef6458a-996f-5958-ad72-501cbb198a96",
+      "kind": "segment",
+      "net": "GND"
+    },
+    {
+      "uuid": "7f8a37c4-64ef-5281-9d7d-c501b9a7b164",
+      "kind": "segment",
+      "net": "GND"
+    },
+    {
+      "uuid": "7fe0ae50-e54d-5f60-8de3-851128217ca2",
+      "kind": "segment",
+      "net": "VSTOR"
+    },
+    {
+      "uuid": "80885518-665d-52d6-bd64-9ff182da4fff",
+      "kind": "via",
+      "net": "/SC_MID"
+    },
+    {
+      "uuid": "80a97a59-51a3-5ffd-acbc-76768fbacd3e",
+      "kind": "segment",
+      "net": "VSTOR"
+    },
+    {
+      "uuid": "816a76da-d931-5b08-b1e9-2b27d91147ba",
+      "kind": "segment",
+      "net": "/SC_HALF_REF"
+    },
+    {
+      "uuid": "8218dd7c-125d-54eb-894b-c8bd735d2b8e",
+      "kind": "segment",
+      "net": "GND"
+    },
+    {
+      "uuid": "821a5dff-e75f-5c71-b50f-7f5e465d7f13",
+      "kind": "segment",
+      "net": "/SC_MID"
+    },
+    {
+      "uuid": "8227c369-cd6d-5059-94a6-6ba0bf64394e",
+      "kind": "segment",
+      "net": "/SC_MID"
+    },
+    {
+      "uuid": "82a3f0e5-8d9f-5c51-a719-1a0f3c436af0",
+      "kind": "segment",
+      "net": "/SC_BAL_OUT"
+    },
+    {
+      "uuid": "8597ee2d-9932-52ce-b8d9-32f737a2301e",
+      "kind": "segment",
+      "net": "VSTOR"
+    },
+    {
+      "uuid": "85e4818b-7c2e-51aa-90c2-d23a52db4ae1",
+      "kind": "segment",
+      "net": "/SC_BAL_OUT"
+    },
+    {
+      "uuid": "867676bd-c0d6-5e08-8c00-7b053b34eaad",
+      "kind": "segment",
+      "net": "/SC_MID"
+    },
+    {
+      "uuid": "87acfd1f-88c6-5c67-97ab-c66a97e1b21f",
+      "kind": "via",
+      "net": "/VBAT"
+    },
+    {
+      "uuid": "8941ee15-cf1a-5f64-884e-9481c9aed7af",
+      "kind": "segment",
+      "net": "VSTOR"
+    },
+    {
+      "uuid": "89525f2b-11bf-5ad1-8e43-68c40581bd2b",
+      "kind": "segment",
+      "net": "/SC_MID"
+    },
+    {
+      "uuid": "89eb4dc6-8887-5bd3-937e-60f49d41a6a1",
+      "kind": "segment",
+      "net": "GND"
+    },
+    {
+      "uuid": "8acf55d3-ee1b-50fb-949f-e7684386e8aa",
+      "kind": "segment",
+      "net": "/VBAT"
+    },
+    {
+      "uuid": "8b4d806d-2535-545a-8425-3017a3da1776",
+      "kind": "segment",
+      "net": "VSTOR"
+    },
+    {
+      "uuid": "8ba1a9d7-d949-512b-81bc-52e89f70ce4d",
+      "kind": "segment",
+      "net": "/SC_HALF_REF"
+    },
+    {
+      "uuid": "8bb6f382-e85b-5077-bac6-e4ce8b425ce3",
+      "kind": "segment",
+      "net": "GND"
+    },
+    {
+      "uuid": "8bc9b188-48ea-5123-b5d7-c54c37f0c9fb",
+      "kind": "segment",
+      "net": "VSTOR"
+    },
+    {
+      "uuid": "8c1300eb-768a-5384-9854-31b9e78ff17e",
+      "kind": "segment",
+      "net": "VSTOR"
+    },
+    {
+      "uuid": "8cdcee5e-77d5-53ac-a25a-26f164213b2d",
+      "kind": "segment",
+      "net": "/VBAT"
+    },
+    {
+      "uuid": "8de06676-5bb2-5959-9b35-a13a69d04030",
+      "kind": "segment",
+      "net": "VSTOR"
+    },
+    {
+      "uuid": "8e39db29-13e0-5d00-9ea6-7c5aeaedf460",
+      "kind": "segment",
+      "net": "GND"
+    },
+    {
+      "uuid": "8e8d88c2-5729-51dc-b720-578a0ced7c01",
+      "kind": "segment",
+      "net": "VSTOR"
+    },
+    {
+      "uuid": "90de4e5e-6769-5a93-b892-6b187ffda255",
+      "kind": "segment",
+      "net": "GND"
+    },
+    {
+      "uuid": "90e984d1-1893-58a6-ad63-553add1d04d9",
+      "kind": "segment",
+      "net": "GND"
+    },
+    {
+      "uuid": "923f4811-aaee-57a2-8dcd-2c1b1dabfc6f",
+      "kind": "segment",
+      "net": "/SC_BAL_OUT"
+    },
+    {
+      "uuid": "92d8c52b-0931-56da-b2e8-afcfb11ba22b",
+      "kind": "segment",
+      "net": "/VBAT"
+    },
+    {
+      "uuid": "92e01f38-c2b8-50f1-a028-71380ae11a69",
+      "kind": "segment",
+      "net": "VSTOR"
+    },
+    {
+      "uuid": "934ef44f-d101-50b9-8860-811f49556c94",
+      "kind": "segment",
+      "net": "/SC_MID"
+    },
+    {
+      "uuid": "938ff0b5-5a42-5103-8fbd-815b91721022",
+      "kind": "segment",
+      "net": "/SC_BAL_OUT"
+    },
+    {
+      "uuid": "93e0004f-1ae0-5a04-bea9-6ea39812e610",
+      "kind": "segment",
+      "net": "VSTOR"
+    },
+    {
+      "uuid": "94a4f764-c3f5-54ad-bfc5-37b94161a205",
+      "kind": "segment",
+      "net": "/SC_HALF_REF"
+    },
+    {
+      "uuid": "94ecea04-052d-55d1-af8e-7cbddef4c660",
+      "kind": "segment",
+      "net": "GND"
+    },
+    {
+      "uuid": "95f73530-b028-522b-9349-d7ac22f8f671",
+      "kind": "segment",
+      "net": "/SC_HALF_REF"
+    },
+    {
+      "uuid": "9623f75c-3d40-58ef-b50f-59f40c7dc4e4",
+      "kind": "segment",
+      "net": "/SC_MID"
+    },
+    {
+      "uuid": "9637b84e-a81b-596d-a264-6c2d7daaf833",
+      "kind": "segment",
+      "net": "GND"
+    },
+    {
+      "uuid": "96ea3c19-8d58-5c76-aba5-7b4a9aac5ecd",
+      "kind": "segment",
+      "net": "VSTOR"
+    },
+    {
+      "uuid": "9a069672-6ffd-5cc2-8d2b-5b570d1ac436",
+      "kind": "segment",
+      "net": "/SC_BAL_OUT"
+    },
+    {
+      "uuid": "9a8ac326-1027-5cda-a5be-11d36d36f341",
+      "kind": "segment",
+      "net": "GND"
+    },
+    {
+      "uuid": "9d31cf3d-e5eb-5d8f-aad8-a10e90984199",
+      "kind": "segment",
+      "net": "VSTOR"
+    },
+    {
+      "uuid": "9d7ebe9a-f231-5cfc-a38f-2ecd1778a91f",
+      "kind": "segment",
+      "net": "/SC_HALF_REF"
+    },
+    {
+      "uuid": "9d8fe7cc-67f8-5c59-b752-e022387394c2",
+      "kind": "segment",
+      "net": "GND"
+    },
+    {
+      "uuid": "9ecc1a7c-7674-5b7a-b8cc-0df1c127eda3",
+      "kind": "segment",
+      "net": "VSTOR"
+    },
+    {
+      "uuid": "9f22ac83-1f10-5ff7-8940-a7a6d1e550a0",
+      "kind": "segment",
+      "net": "/SC_MID"
+    },
+    {
+      "uuid": "9f4f4ea5-1657-589a-a7d8-4822ad2bf0db",
+      "kind": "segment",
+      "net": "/SC_HALF_REF"
+    },
+    {
+      "uuid": "9f625e67-ae0b-557b-be9f-9c65709b4f69",
+      "kind": "segment",
+      "net": "/VBAT"
+    },
+    {
+      "uuid": "a11f1fcf-3bd9-5de2-a4d9-c4621e6c9454",
+      "kind": "segment",
+      "net": "VSTOR"
+    },
+    {
+      "uuid": "a1f4b53f-b2f8-59fb-b340-bb860d37f839",
+      "kind": "segment",
+      "net": "/SC_HALF_REF"
+    },
+    {
+      "uuid": "a256ac72-57a9-5f46-a646-e93ea08876a8",
+      "kind": "segment",
+      "net": "GND"
+    },
+    {
+      "uuid": "a26911cd-1e51-509d-83c0-c8396a6f9aaf",
+      "kind": "segment",
+      "net": "GND"
+    },
+    {
+      "uuid": "a38fa4d5-eadf-55f6-af6e-d940c8a2768a",
+      "kind": "segment",
+      "net": "VSTOR"
+    },
+    {
+      "uuid": "a559c9e3-1ae5-598c-8df1-57100cd53052",
+      "kind": "segment",
+      "net": "GND"
+    },
+    {
+      "uuid": "a582dfbb-805f-5ebe-b4fb-6f38f78e0c9e",
+      "kind": "segment",
+      "net": "/SC_MID"
+    },
+    {
+      "uuid": "a59747b9-3c90-5dbe-8358-d3e675ddfdd8",
+      "kind": "segment",
+      "net": "VSTOR"
+    },
+    {
+      "uuid": "a64d897a-c274-5632-873a-ae3f00529e42",
+      "kind": "segment",
+      "net": "/SC_HALF_REF"
+    },
+    {
+      "uuid": "a6b73d96-5fc4-5068-9240-70f3b3935da4",
+      "kind": "segment",
+      "net": "/SC_BAL_OUT"
+    },
+    {
+      "uuid": "a75737c7-ed29-5d97-8888-19fc917b8770",
+      "kind": "segment",
+      "net": "GND"
+    },
+    {
+      "uuid": "a90b4905-383f-547a-82d1-dd872b16445d",
+      "kind": "segment",
+      "net": "/SC_BAL_OUT"
+    },
+    {
+      "uuid": "a914aa81-484f-5cc0-95c1-d95341e7e5c2",
+      "kind": "segment",
+      "net": "/VBAT"
+    },
+    {
+      "uuid": "a94da762-385f-565f-9888-01e42fe1f0b8",
+      "kind": "segment",
+      "net": "GND"
+    },
+    {
+      "uuid": "aaab34f8-380c-55ba-a911-c0477b0c3e76",
+      "kind": "segment",
+      "net": "GND"
+    },
+    {
+      "uuid": "aaab762b-cebe-5649-800d-6a0e876390e6",
+      "kind": "segment",
+      "net": "GND"
+    },
+    {
+      "uuid": "ab1c0754-8494-5f60-b6b9-304d2573794a",
+      "kind": "segment",
+      "net": "/SC_BAL_OUT"
+    },
+    {
+      "uuid": "adcb25e1-caf3-5310-bbc7-5b9c3cb88422",
+      "kind": "segment",
+      "net": "GND"
+    },
+    {
+      "uuid": "add8d029-b835-5b49-b2ab-63a632528ee0",
+      "kind": "segment",
+      "net": "/SC_HALF_REF"
+    },
+    {
+      "uuid": "adfb51d8-0323-50a9-8deb-4e8f0eac784a",
+      "kind": "segment",
+      "net": "/SC_HALF_REF"
+    },
+    {
+      "uuid": "ae1895cc-4ad6-56b6-a036-5b23628d39ad",
+      "kind": "segment",
+      "net": "/SC_BAL_OUT"
+    },
+    {
+      "uuid": "aebab596-86a1-56fc-ab82-62293646b57d",
+      "kind": "segment",
+      "net": "/SC_MID"
+    },
+    {
+      "uuid": "af47af7c-f471-51b3-9b4c-cedf84d07ebb",
+      "kind": "segment",
+      "net": "VSTOR"
+    },
+    {
+      "uuid": "b0d4e863-fc78-5a37-9a9c-f1aaf0a2851e",
+      "kind": "segment",
+      "net": "VSTOR"
+    },
+    {
+      "uuid": "b3213e4b-5916-5ef7-a054-2f8058b68f27",
+      "kind": "segment",
+      "net": "GND"
+    },
+    {
+      "uuid": "b396530c-b559-55d8-8290-326f2e04abf5",
+      "kind": "via",
+      "net": "VSTOR"
+    },
+    {
+      "uuid": "b3f0bd62-0074-51be-8453-89347a079b5c",
+      "kind": "segment",
+      "net": "/SC_HALF_REF"
+    },
+    {
+      "uuid": "b3fbc2dd-3478-5efd-b13b-f49041f71f23",
+      "kind": "segment",
+      "net": "VSTOR"
+    },
+    {
+      "uuid": "b42b9fa5-7c89-53c5-b976-1276601c26aa",
+      "kind": "segment",
+      "net": "/VBAT"
+    },
+    {
+      "uuid": "b459dbf8-3188-5a86-91fd-844a5be09b90",
+      "kind": "segment",
+      "net": "GND"
+    },
+    {
+      "uuid": "b49cc04b-6818-5d1e-9307-06c12936b6b0",
+      "kind": "segment",
+      "net": "VSTOR"
+    },
+    {
+      "uuid": "b776b149-6cc4-5296-b136-ad6d0d6e2e52",
+      "kind": "segment",
+      "net": "/SC_HALF_REF"
+    },
+    {
+      "uuid": "b918d6fc-a19d-5de9-84b1-186dd995dafa",
+      "kind": "segment",
+      "net": "VSTOR"
+    },
+    {
+      "uuid": "b93a06c5-bdf2-5aaf-9dba-89aef3eb86c9",
+      "kind": "segment",
+      "net": "VSTOR"
+    },
+    {
+      "uuid": "ba726846-2556-5256-81c0-b4d6ea8bde23",
+      "kind": "segment",
+      "net": "GND"
+    },
+    {
+      "uuid": "bab1eeff-38ea-5c9e-8be5-030286ffe6f2",
+      "kind": "segment",
+      "net": "/VBAT"
+    },
+    {
+      "uuid": "bb6406a3-d2c4-5483-adaf-42b53c04f6f3",
+      "kind": "segment",
+      "net": "/SC_BAL_OUT"
+    },
+    {
+      "uuid": "bbe878f3-821b-58ff-8b58-78a83d701c0f",
+      "kind": "segment",
+      "net": "VSTOR"
+    },
+    {
+      "uuid": "bc386f36-298a-55ac-8e94-b998e5069ff8",
+      "kind": "segment",
+      "net": "GND"
+    },
+    {
+      "uuid": "bc847b07-195f-5856-9f28-c2adcc83291e",
+      "kind": "segment",
+      "net": "/SC_BAL_OUT"
+    },
+    {
+      "uuid": "bcaaec26-f522-5787-b2d1-de41f38dc6f4",
+      "kind": "segment",
+      "net": "GND"
+    },
+    {
+      "uuid": "be871ded-7b01-5798-b666-f8bf3996fa7e",
+      "kind": "segment",
+      "net": "/VBAT"
+    },
+    {
+      "uuid": "c055a225-43dc-57cb-aa80-d02131a33783",
+      "kind": "segment",
+      "net": "/SC_MID"
+    },
+    {
+      "uuid": "c0d3824d-8348-5420-9c1a-4d465910bbd0",
+      "kind": "segment",
+      "net": "/VBAT"
+    },
+    {
+      "uuid": "c0e1c6f8-6ef9-5893-8ead-a90b940dfefb",
+      "kind": "segment",
+      "net": "/SC_HALF_REF"
+    },
+    {
+      "uuid": "c174ae1c-c874-542e-b940-a9ea5fba5360",
+      "kind": "segment",
+      "net": "GND"
+    },
+    {
+      "uuid": "c23712c1-df56-5d41-94c3-bba1560a70e4",
+      "kind": "segment",
+      "net": "/SC_MID"
+    },
+    {
+      "uuid": "c2f51cce-17a2-5b43-a3f5-e6e56436700c",
+      "kind": "segment",
+      "net": "/VBAT"
+    },
+    {
+      "uuid": "c59b932d-bcc2-52a5-b1c0-aea5e640bb50",
+      "kind": "segment",
+      "net": "VSTOR"
+    },
+    {
+      "uuid": "c5eb52f2-cd2d-5944-a6bd-7e7afd296b75",
+      "kind": "segment",
+      "net": "/SC_MID"
+    },
+    {
+      "uuid": "c789a052-9c53-5c10-b0d2-34e273f006ed",
+      "kind": "segment",
+      "net": "/VBAT"
+    },
+    {
+      "uuid": "c9cc13ba-eff7-5dd5-801e-9ab294ff0c4d",
+      "kind": "segment",
+      "net": "/SC_HALF_REF"
+    },
+    {
+      "uuid": "cbf87e11-5f35-571f-98d8-07187465eaee",
+      "kind": "segment",
+      "net": "/VBAT"
+    },
+    {
+      "uuid": "cce161df-9f1f-5a2c-a6b7-5e99206ee8e5",
+      "kind": "segment",
+      "net": "VSTOR"
+    },
+    {
+      "uuid": "cd7ce65e-5f70-5a54-a205-71795a185fcd",
+      "kind": "segment",
+      "net": "VSTOR"
+    },
+    {
+      "uuid": "cffc04cd-5620-53c9-bc82-c343e136e1d4",
+      "kind": "segment",
+      "net": "/SC_MID"
+    },
+    {
+      "uuid": "d00cc03c-079e-5c03-936f-84cf16d66269",
+      "kind": "segment",
+      "net": "GND"
+    },
+    {
+      "uuid": "d09a87e6-fcf5-5d06-8f5e-38ad54bd9ada",
+      "kind": "segment",
+      "net": "GND"
+    },
+    {
+      "uuid": "d2de99fa-c501-57a8-b649-ce0f85ff4cce",
+      "kind": "segment",
+      "net": "/VBAT"
+    },
+    {
+      "uuid": "d41502f0-31b9-5239-bc6f-940c6f403256",
+      "kind": "segment",
+      "net": "/SC_BAL_OUT"
+    },
+    {
+      "uuid": "d449fc03-6785-5567-82ea-5dd1ffb56df1",
+      "kind": "segment",
+      "net": "VSTOR"
+    },
+    {
+      "uuid": "d4db4626-2f36-5f70-9f4f-c2358bdf416c",
+      "kind": "segment",
+      "net": "GND"
+    },
+    {
+      "uuid": "d62e86f5-792e-58d5-a169-0ff9d87c4561",
+      "kind": "segment",
+      "net": "/VBAT"
+    },
+    {
+      "uuid": "d65be272-aed4-5e96-8928-4b1c310b9ec4",
+      "kind": "segment",
+      "net": "GND"
+    },
+    {
+      "uuid": "d6c23cb0-9200-59f0-8f5f-20c619a4bb54",
+      "kind": "segment",
+      "net": "/SC_BAL_OUT"
+    },
+    {
+      "uuid": "d6d74205-d99a-5abe-8df4-8470532d04d2",
+      "kind": "segment",
+      "net": "GND"
+    },
+    {
+      "uuid": "d9434385-da9a-5f27-9280-c630f745af8b",
+      "kind": "segment",
+      "net": "VSTOR"
+    },
+    {
+      "uuid": "d9cda284-c5a9-5e80-84b6-add80e3d0623",
+      "kind": "segment",
+      "net": "/VBAT"
+    },
+    {
+      "uuid": "d9e942ab-67d2-5112-920f-c75980f53fa4",
+      "kind": "segment",
+      "net": "VSTOR"
+    },
+    {
+      "uuid": "da741fe1-bd90-56c7-b6ac-5366c5757d4f",
+      "kind": "segment",
+      "net": "VSTOR"
+    },
+    {
+      "uuid": "db780cf5-870a-5f0a-abd1-2646d29cc09c",
+      "kind": "segment",
+      "net": "/SC_MID"
+    },
+    {
+      "uuid": "dba3dfbd-cc7c-54aa-815c-7cbf2421b967",
+      "kind": "segment",
+      "net": "/SC_MID"
+    },
+    {
+      "uuid": "dc7cf8ab-6a20-571d-a024-84b1660278b2",
+      "kind": "segment",
+      "net": "VSTOR"
+    },
+    {
+      "uuid": "dca69cf3-acaf-590f-8083-eefa74b816e0",
+      "kind": "segment",
+      "net": "VSTOR"
+    },
+    {
+      "uuid": "dd3b87d6-87e4-5893-959b-ce29079c606f",
+      "kind": "segment",
+      "net": "GND"
+    },
+    {
+      "uuid": "dd9adc7d-9ce8-5b5f-8514-ce94e87194fa",
+      "kind": "via",
+      "net": "/SC_BAL_OUT"
+    },
+    {
+      "uuid": "de44ec09-0da3-559a-9b89-7ca2bf73dde0",
+      "kind": "segment",
+      "net": "VSTOR"
+    },
+    {
+      "uuid": "df402761-a015-55cb-846f-6cf90bd4747c",
+      "kind": "segment",
+      "net": "/SC_BAL_OUT"
+    },
+    {
+      "uuid": "dfaccb86-d4f6-5750-91f3-09b298544382",
+      "kind": "segment",
+      "net": "/SC_MID"
+    },
+    {
+      "uuid": "dfdcc5a1-a9c1-597d-aa31-5103a97eeceb",
+      "kind": "segment",
+      "net": "/VBAT"
+    },
+    {
+      "uuid": "e14d4642-da83-5c72-a664-5eed2e67b9f1",
+      "kind": "segment",
+      "net": "/SC_MID"
+    },
+    {
+      "uuid": "e299e300-b992-54a5-b522-d3d3721e3db5",
+      "kind": "segment",
+      "net": "/SC_BAL_OUT"
+    },
+    {
+      "uuid": "e37e874d-4fd5-59e4-a6a9-aa858d425d37",
+      "kind": "segment",
+      "net": "/VBAT"
+    },
+    {
+      "uuid": "e3cdac6b-23d3-51b4-ae04-e5267171ada4",
+      "kind": "via",
+      "net": "/SC_MID"
+    },
+    {
+      "uuid": "e463afd0-b511-528f-bbc9-d08a6f44f50c",
+      "kind": "segment",
+      "net": "/VBAT"
+    },
+    {
+      "uuid": "e4ddfb1f-00a4-5b59-9ac2-e9297577adc0",
+      "kind": "segment",
+      "net": "/SC_BAL_OUT"
+    },
+    {
+      "uuid": "e5040f5d-23eb-58f1-95a3-2362665ec9a6",
+      "kind": "segment",
+      "net": "GND"
+    },
+    {
+      "uuid": "e5d40009-6a97-5543-ae04-59babda06bd0",
+      "kind": "segment",
+      "net": "GND"
+    },
+    {
+      "uuid": "e6ca6ed2-ff9c-52da-af43-ee47e195a801",
+      "kind": "segment",
+      "net": "/SC_MID"
+    },
+    {
+      "uuid": "e6e59b5c-64c3-51b0-9f8d-4edadc5a99e0",
+      "kind": "segment",
+      "net": "/SC_MID"
+    },
+    {
+      "uuid": "e8b454e0-9ab7-5ef4-b13d-54d5f67d1f09",
+      "kind": "segment",
+      "net": "/SC_BAL_OUT"
+    },
+    {
+      "uuid": "ec8df756-94c7-5701-ba6a-12997005d70b",
+      "kind": "segment",
+      "net": "GND"
+    },
+    {
+      "uuid": "ecd0f474-83cd-5ecd-8549-569a8af7fc4d",
+      "kind": "segment",
+      "net": "GND"
+    },
+    {
+      "uuid": "ed3c2424-a6ad-5bae-9ba7-e3d94993ba1c",
+      "kind": "segment",
+      "net": "/VBAT"
+    },
+    {
+      "uuid": "ed3e94d1-674d-56be-8b05-d407b79f4a8b",
+      "kind": "segment",
+      "net": "VSTOR"
+    },
+    {
+      "uuid": "ee2bbc75-1410-59f9-8c95-7e5259588803",
+      "kind": "segment",
+      "net": "/VBAT"
+    },
+    {
+      "uuid": "ef89485f-b290-541c-95de-2850ca4adb13",
+      "kind": "segment",
+      "net": "/SC_HALF_REF"
+    },
+    {
+      "uuid": "efbcee0e-99fe-5267-8f05-0542ce1a114d",
+      "kind": "segment",
+      "net": "/VBAT"
+    },
+    {
+      "uuid": "efc084a0-5523-5b33-8bfa-c9781ee34996",
+      "kind": "segment",
+      "net": "/VBAT"
+    },
+    {
+      "uuid": "f0aaef5a-e7de-59c4-9a12-597d68523c43",
+      "kind": "segment",
+      "net": "GND"
+    },
+    {
+      "uuid": "f10ac2af-f05e-54fc-a881-9bb709b85e77",
+      "kind": "segment",
+      "net": "/SC_MID"
+    },
+    {
+      "uuid": "f18c3075-2fc0-5553-9337-65dfe2b83a44",
+      "kind": "segment",
+      "net": "GND"
+    },
+    {
+      "uuid": "f23dbd92-7640-5675-b144-db6a113413b6",
+      "kind": "via",
+      "net": "/SC_BAL_OUT"
+    },
+    {
+      "uuid": "f2eaa98a-0aaf-54e3-8b26-eda649ebaa0f",
+      "kind": "segment",
+      "net": "VSTOR"
+    },
+    {
+      "uuid": "f2f1133f-5ba5-5a4c-8625-64a3c28386d4",
+      "kind": "segment",
+      "net": "GND"
+    },
+    {
+      "uuid": "f3afd864-0800-5fcd-b72c-6c49faeaf2e6",
+      "kind": "segment",
+      "net": "VSTOR"
+    },
+    {
+      "uuid": "f5d77d22-53d1-5c72-b64b-c2524d8ad397",
+      "kind": "segment",
+      "net": "GND"
+    },
+    {
+      "uuid": "f794aced-df3a-5d43-83e8-ffe0e6a2d7d1",
+      "kind": "segment",
+      "net": "/SC_HALF_REF"
+    },
+    {
+      "uuid": "f7cc687c-038f-5b52-bf9b-b91863dac750",
+      "kind": "segment",
+      "net": "GND"
+    },
+    {
+      "uuid": "f888b0d1-9ab8-5144-8358-aa321d12e92b",
+      "kind": "segment",
+      "net": "/SC_MID"
+    },
+    {
+      "uuid": "f8b67cb0-d3f0-547b-95c2-62a06ef3497a",
+      "kind": "segment",
+      "net": "VSTOR"
+    },
+    {
+      "uuid": "f8bb0748-aeee-5b34-a435-2e57b480a000",
+      "kind": "segment",
+      "net": "VSTOR"
+    },
+    {
+      "uuid": "f8e9e7c1-638e-59ac-b41b-5bab35d31d1c",
+      "kind": "segment",
+      "net": "GND"
+    },
+    {
+      "uuid": "f944d501-5c48-5f47-812b-a868070213e9",
+      "kind": "segment",
+      "net": "/SC_HALF_REF"
+    },
+    {
+      "uuid": "f9bfc68d-783c-5247-9f24-f3dcb699c781",
+      "kind": "segment",
+      "net": "VSTOR"
+    },
+    {
+      "uuid": "f9c057b5-f7c6-5910-9042-4e8f1dac31bc",
+      "kind": "segment",
+      "net": "GND"
+    },
+    {
+      "uuid": "f9d6fc3a-4f35-5390-8d03-298e939d2931",
+      "kind": "segment",
+      "net": "/SC_MID"
+    },
+    {
+      "uuid": "fbc92e6d-f173-53d9-8dde-058f37240ea0",
+      "kind": "segment",
+      "net": "/VBAT"
+    },
+    {
+      "uuid": "fc3d5a93-e65a-5a26-9677-eddaa0e379f7",
+      "kind": "segment",
+      "net": "GND"
+    },
+    {
+      "uuid": "fe768605-943a-515c-b706-eae60afa9082",
+      "kind": "segment",
+      "net": "/SC_HALF_REF"
+    },
+    {
+      "uuid": "ff22f9b4-7738-5f07-a581-f123e1aeed54",
+      "kind": "segment",
+      "net": "/SC_BAL_OUT"
+    },
+    {
+      "uuid": "ff6f53e4-7e5e-5def-aa1a-828c6efa81f0",
+      "kind": "segment",
+      "net": "VSTOR"
+    }
+  ],
+  "existing_changed_footprints": [
+    "C5",
+    "D3",
+    "J4",
+    "R1"
+  ],
+  "existing_changed_pads": [
+    {
+      "reference": "J4",
+      "pad": "1",
+      "pad_uuid": "0650b567-d648-499e-addc-ea01fac7e599",
+      "fields": [
+        "thermal_gap",
+        "thermal_bridge_width"
+      ]
+    },
+    {
+      "reference": "D3",
+      "pad": "1",
+      "pad_uuid": "390842f8-d9d4-4229-8ca4-a68fac8e12f8",
+      "fields": [
+        "thermal_gap",
+        "thermal_bridge_width"
+      ]
+    },
+    {
+      "reference": "C5",
+      "pad": "3",
+      "pad_uuid": "a3b5ef59-5238-4d92-95c8-02036eea35e3",
+      "fields": [
+        "net",
+        "pinfunction",
+        "pintype"
+      ]
+    }
+  ],
+  "new_parts": {
+    "U8": {
+      "lib": "Stratolink_Power:TLV8801DBVT",
+      "value": "TLV8801DBVT",
+      "fp": "Package_TO_SOT_SMD:SOT-23-5",
+      "sch": [
+        50.8,
+        190.5
+      ],
+      "pcb": [
+        55.65,
+        36.1
+      ],
+      "nets": {
+        "1": "SC_BAL_OUT",
+        "2": "GND",
+        "3": "SC_HALF_REF",
+        "4": "SC_BAL_OUT",
+        "5": "VBAT"
+      },
+      "pins": {
+        "1": [
+          7.62,
+          0
+        ],
+        "2": [
+          0,
+          -7.62
+        ],
+        "3": [
+          -7.62,
+          2.54
+        ],
+        "4": [
+          -7.62,
+          -2.54
+        ],
+        "5": [
+          0,
+          7.62
+        ]
+      },
+      "ds": "https://www.ti.com/lit/ds/symlink/tlv8801.pdf",
+      "mpn": "TLV8801DBVT",
+      "lcsc": "C544879"
+    },
+    "R24": {
+      "lib": "Device:R_US",
+      "value": "4.75MΩ",
+      "fp": "Resistor_SMD:R_0402_1005Metric",
+      "sch": [
+        25.4,
+        184.15
+      ],
+      "pcb": [
+        57.4,
+        33.9
+      ],
+      "nets": {
+        "1": "VBAT",
+        "2": "SC_HALF_REF"
+      },
+      "pins": {
+        "1": [
+          0,
+          3.81
+        ],
+        "2": [
+          0,
+          -3.81
+        ]
+      },
+      "mpn": "FRC0402F4754TS",
+      "lcsc": "C2998153"
+    },
+    "R25": {
+      "lib": "Device:R_US",
+      "value": "4.75MΩ",
+      "fp": "Resistor_SMD:R_0402_1005Metric",
+      "sch": [
+        25.4,
+        199.39
+      ],
+      "pcb": [
+        58.65,
+        34.9
+      ],
+      "nets": {
+        "1": "SC_HALF_REF",
+        "2": "GND"
+      },
+      "pins": {
+        "1": [
+          0,
+          3.81
+        ],
+        "2": [
+          0,
+          -3.81
+        ]
+      },
+      "mpn": "FRC0402F4754TS",
+      "lcsc": "C2998153"
+    },
+    "R26": {
+      "lib": "Device:R_US",
+      "value": "22Ω",
+      "fp": "Resistor_SMD:R_0402_1005Metric",
+      "sch": [
+        72.39,
+        190.5
+      ],
+      "pcb": [
+        61.2,
+        42.5
+      ],
+      "nets": {
+        "1": "SC_BAL_OUT",
+        "2": "SC_MID"
+      },
+      "pins": {
+        "1": [
+          0,
+          3.81
+        ],
+        "2": [
+          0,
+          -3.81
+        ]
+      },
+      "mpn": "0402WGF220JTCE",
+      "lcsc": "C25092"
+    },
+    "C22": {
+      "lib": "Device:C",
+      "value": "100nF",
+      "fp": "Capacitor_SMD:C_0402_1005Metric",
+      "sch": [
+        88.9,
+        190.5
+      ],
+      "pcb": [
+        55.6,
+        38.3
+      ],
+      "nets": {
+        "1": "VBAT",
+        "2": "GND"
+      },
+      "pins": {
+        "1": [
+          0,
+          3.81
+        ],
+        "2": [
+          0,
+          -3.81
+        ]
+      },
+      "mpn": "CL05B104KO5NNNC",
+      "lcsc": "C1525"
+    }
+  },
+  "route_summary": [
+    {
+      "net": "/VBAT",
+      "first": "VBAT_ANY",
+      "second": "U8.5",
+      "length_mm": 9.318744584051396,
+      "vias": 2,
+      "width_mm": 0.15,
+      "copper_resistance_20C_ohm_excluding_vias": 0.030529982256320767
+    },
+    {
+      "net": "/SC_MID",
+      "first": "C5.3",
+      "second": "R26.2",
+      "length_mm": 22.135488722866775,
+      "vias": 2,
+      "width_mm": 0.15,
+      "copper_resistance_20C_ohm_excluding_vias": 0.07252007733967783
+    },
+    {
+      "net": "/SC_BAL_OUT",
+      "first": "U8.1",
+      "second": "U8.4",
+      "length_mm": 3.112005768508878,
+      "vias": 0,
+      "width_mm": 0.15,
+      "copper_resistance_20C_ohm_excluding_vias": 0.010195523660638611
+    },
+    {
+      "net": "/SC_HALF_REF",
+      "first": "U8.3",
+      "second": "R24.2",
+      "length_mm": 2.940266952966371,
+      "vias": 0,
+      "width_mm": 0.15,
+      "copper_resistance_20C_ohm_excluding_vias": 0.009632874588766016
+    },
+    {
+      "net": "/SC_HALF_REF",
+      "first": "R24.2",
+      "second": "R25.1",
+      "length_mm": 1.6842135623730912,
+      "vias": 0,
+      "width_mm": 0.15,
+      "copper_resistance_20C_ohm_excluding_vias": 0.005517804432917556
+    },
+    {
+      "net": "/VBAT",
+      "first": "U8.5",
+      "second": "C22.1",
+      "length_mm": 1.5724494936611617,
+      "vias": 0,
+      "width_mm": 0.15,
+      "copper_resistance_20C_ohm_excluding_vias": 0.005151644055423235
+    },
+    {
+      "net": "/VBAT",
+      "first": "U8.5",
+      "second": "R24.1",
+      "length_mm": 4.395901871576766,
+      "vias": 0,
+      "width_mm": 0.15,
+      "copper_resistance_20C_ohm_excluding_vias": 0.014401811845927691
+    },
+    {
+      "net": "/SC_BAL_OUT",
+      "first": "U8.1",
+      "second": "R26.1",
+      "length_mm": 12.275800858899112,
+      "vias": 2,
+      "width_mm": 0.15,
+      "copper_resistance_20C_ohm_excluding_vias": 0.04021786186153615
+    },
+    {
+      "net": "VSTOR",
+      "first": "R22.1",
+      "second": "J4.2",
+      "length_mm": 28.825877838777053,
+      "vias": 4,
+      "width_mm": 0.15,
+      "copper_resistance_20C_ohm_excluding_vias": 0.09443906644323151
+    },
+    {
+      "net": "GND",
+      "first": "U8.2",
+      "second": "GND_STITCH",
+      "length_mm": 3.3007852374950595,
+      "vias": 0,
+      "width_mm": 0.15,
+      "copper_resistance_20C_ohm_excluding_vias": 0.010814001159031434
+    },
+    {
+      "net": "GND",
+      "first": "C22.2",
+      "second": "U8.2",
+      "length_mm": 3.7538203435596382,
+      "vias": 0,
+      "width_mm": 0.15,
+      "copper_resistance_20C_ohm_excluding_vias": 0.01229823045890015
+    },
+    {
+      "net": "GND",
+      "first": "R25.2",
+      "second": "GND_STITCH",
+      "length_mm": 6.077574559376394,
+      "vias": 0,
+      "width_mm": 0.15,
+      "copper_resistance_20C_ohm_excluding_vias": 0.019911291889766477
+    },
+    {
+      "net": "GND",
+      "first": "D3.1",
+      "second": "GND_D3_VIA",
+      "length_mm": 1.274908746125142,
+      "vias": 0,
+      "width_mm": 0.15,
+      "copper_resistance_20C_ohm_excluding_vias": 0.004176843892067133
+    },
+    {
+      "net": "GND",
+      "first": "J4.1",
+      "second": "GND_J4_ZONE",
+      "length_mm": 1.4155902749586695,
+      "vias": 0,
+      "width_mm": 0.15,
+      "copper_resistance_20C_ohm_excluding_vias": 0.004637743377007451
+    }
+  ],
+  "checks": {
+    "surviving_tracks_exact": true,
+    "unrelated_board_geometry_metadata_exact": true,
+    "old_pad_geometry_exact": true,
+    "new_part_supplier_metadata_matches_schematic": true
+  },
+  "limitations": [
+    "Authored candidate uses baseline header geometry; final integrated J4 has elongated land.",
+    "D3.1/J4.1 local .25 mm gap and .25 mm bridge widths require matching local-footprint metadata freeze during integration.",
+    "Final integrated project DRC and independent physical-pad islands remain release gates.",
+    "Native CAD checks do not establish cold capacitor balance, electrochemical leakage, solar input limits, or physical assembly tolerances."
+  ]
+}

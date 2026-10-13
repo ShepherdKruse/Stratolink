@@ -1,0 +1,113 @@
+{
+    "$schema": "https://schemas.kicad.org/erc.v1.json",
+    "coordinate_units": "mm",
+    "date": "2026-10-13T09:16:24",
+    "ignored_checks": [
+        {
+            "description": "Global label only appears once in the schematic",
+            "key": "single_global_label"
+        },
+        {
+            "description": "Four connection points are joined together",
+            "key": "four_way_junction"
+        },
+        {
+            "description": "SPICE model issue",
+            "key": "simulation_model_issue"
+        },
+        {
+            "description": "Assigned footprint doesn't match footprint filters",
+            "key": "footprint_filter"
+        }
+    ],
+    "included_severities": [
+        "error",
+        "warning",
+        "exclusion"
+    ],
+    "kicad_version": "10.0.0",
+    "sheets": [
+        {
+            "path": "/",
+            "uuid_path": "/4d146a28-be53-49f1-b1c6-484192820e45",
+            "violations": [
+                {
+                    "comment": "LIS2DH12 SDO/SA0 is grounded to select I2C address 0x18 with CS high, as specified in ST datasheet section 6.1.1. Bidirectional type retained for its SPI role. Only this exact GND PWR_FLAG marker is excluded. Firmware follow-up: disable internal SDO pull-up using CTRL_REG0 SDO_PU_DISC while preserving required other bits.",
+                    "description": "Conflict problem between pins",
+                    "excluded": true,
+                    "items": [
+                        {
+                            "description": "Symbol U7 Pin 3 [SDO/SAO, Bidirectional, Line]",
+                            "pos": {
+                                "x": 0.254,
+                                "y": 0.4191
+                            },
+                            "uuid": "82711c1e-7163-4ccd-9fb6-5a60e20408e1"
+                        },
+                        {
+                            "description": "Symbol #FLG102 Pin 1 [Power output, Line]",
+                            "pos": {
+                                "x": 1.9939,
+                                "y": 1.0795
+                            },
+                            "uuid": "944d0dde-0354-5fbe-8d7f-fd73f10709be"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "pin_to_pin"
+                },
+                {
+                    "comment": "LTR-390UV INT is an unused open-drain output tied to GND, with no pull-up or driven-high source on the output. Electrical inference: its sink cannot contend with GND; LiteOn identifies open-drain operation but an explicit recommendation to ground was not located. Interrupt functionality is unavailable; keep LS_INT_EN disabled. Only this exact GND PWR_FLAG marker is excluded.",
+                    "description": "Conflict problem between pins",
+                    "excluded": true,
+                    "items": [
+                        {
+                            "description": "Symbol U6 Pin 5 [INT, Open collector, Line]",
+                            "pos": {
+                                "x": 0.5969,
+                                "y": 1.3335
+                            },
+                            "uuid": "97fe1358-9111-4cae-ace0-69f4a04c9922"
+                        },
+                        {
+                            "description": "Symbol #FLG102 Pin 1 [Power output, Line]",
+                            "pos": {
+                                "x": 1.9939,
+                                "y": 1.0795
+                            },
+                            "uuid": "944d0dde-0354-5fbe-8d7f-fd73f10709be"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "pin_to_pin"
+                },
+                {
+                    "comment": "TMP117 ALERT is intentionally unavailable and grounded. TI TMP117 datasheet section 8.2.1 explicitly permits grounding ALERT when unused. Open-drain pin type retained; this exact marker is contention with the external GND PWR_FLAG, not a driven-high circuit.",
+                    "description": "Conflict problem between pins",
+                    "excluded": true,
+                    "items": [
+                        {
+                            "description": "Symbol U5 Pin C2 [ALERT, Open collector, Line]",
+                            "pos": {
+                                "x": 0.5334,
+                                "y": 1.6002
+                            },
+                            "uuid": "d24f236f-77e7-440c-9378-f49a6d546306"
+                        },
+                        {
+                            "description": "Symbol #FLG102 Pin 1 [Power output, Line]",
+                            "pos": {
+                                "x": 1.9939,
+                                "y": 1.0795
+                            },
+                            "uuid": "944d0dde-0354-5fbe-8d7f-fd73f10709be"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "pin_to_pin"
+                }
+            ]
+        }
+    ],
+    "source": "stratolink.kicad_sch"
+}

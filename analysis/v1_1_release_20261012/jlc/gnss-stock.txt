@@ -1,0 +1,137 @@
+JLCPCB 
+Parts Library 
+All Components 
+Search MAX-M10S-00B
+MAX-M10S-00B Search results (3 Found)
+Category
+IoT/Communication Modules
+GNSS Modules
+Others
+New Arrivals
+Manufacturer
+JLCPCB Assembly
+U-BLOX
+PackageType
+LCC-18(9.7x10.1)
+SMD
+Parts Type
+Basic
+Promotional Extended
+Extended
+Mechanical Assembly
+PCBA Type
+Economic
+Standard
+Information
+Datasheet
+Photo
+Results remaining:
+3
+Reset All Apply
+Hide unavailable options
+Hide Filters
+In stock PartsConsign Parts
+		
+Compare
+MFR Part #
+		Description		Manufacturer		
+Stock
+≥
+		
+Price
+			
+	
+	
+MAX-M10S-00B
+C4153167
+Extended
+	
+	
+LCC-18(9.7x10.1) GNSS Modules ROHS
+	
+	
+U-BLOX
+	
+	
+1166
+	
+	
+1+
+$10.8395
+500+
+$10.5818
+Show More
+
+Idle parts available
+
+	
+	
+
+Min: 1
+
+Full Reel: 500
+
+Total: $10.84
+Add to My Part Lib
+
+
+	
+	
+MAX-M10S-00B-01
+C24834155
+Extended
+	
+	
+-167dBm -40℃~+85℃ 1.5m 1.76V~3.6V 27s GPS、QZSS、BeiDou、GLONASS、GALILEO UART、I2C - GNSS Modules ROHS
+	
+	
+U-BLOX
+	
+	
+157
+	
+	
+1+
+$10.9733
+500+
+$10.7107
+Show More
+	
+	
+
+Min: 1
+
+Full Reel: 500
+
+Total: $10.97
+Add to My Part Lib
+2 items in total
+1
+Consign Parts
+	
+	
+377-MAX-M10S-00B
+C41420554
+Extended
+	
+	
+SMD New Arrivals ROHS
+	
+	
+U-BLOX
+	
+	
+0
+	
+	
+Est. unit price:
+$0.0382
+	
+	
+
+Min: 443
+
+Total: $0.04
+Consign Part
+1 item in total
+1

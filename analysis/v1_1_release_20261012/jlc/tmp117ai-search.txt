@@ -1,0 +1,164 @@
+- banner:
+  - generic: 24-hour PCB production. Fast Delivery to United States.
+  - link " Coupons":
+    - /url: https://jlcpcb.com/coupon-center
+    - generic: 
+    - text: Coupons
+  - link " Download APP":
+    - /url: https://jlcone.com/download
+    - generic: 
+    - text: Download APP
+  - text:     
+  - text: USD
+  - generic: 
+- navigation:
+  - text: 
+  - link "JLCPCB Home":
+    - /url: https://jlcpcb.com
+    - generic: 
+  - link "Assembly Parts Lib For PCBA Only":
+    - /url: https://jlcpcb.com/parts
+    - paragraph: Assembly Parts Lib
+    - paragraph: For PCBA Only
+  - text:   
+  - search "Search parts":
+    - text: 
+    - 'searchbox "Search by keyword or part #" [active]': TMP117AIYBGR
+    - button "Submit search":
+      - generic: 
+    - generic: 
+    - text: Upload BOM
+    - text: 
+    - text: 
+    - button "Clear search": 
+    - generic: Part
+    - generic:  tmp117aiybgr
+  - text: 
+  - link " 0 Parts Cart":
+    - /url: https://jlcpcb.com/user-center/smtPrivateLibrary/partsCart/
+    - generic: 
+    - superscript: "0"
+    - generic: Parts Cart
+  - text:       
+  - text: My Account
+  - generic: 
+  - text: 
+- navigation "Parts navigation":
+  - list:
+    - navigation:
+      - link "Products":
+        - /url: /parts/all-electronic-components
+        - generic: 
+        - text: Products
+      - text:              
+    - link "In Stock Parts":
+      - /url: /parts/in-stock-parts
+    - link "Bom Tool":
+      - /url: /parts/bom-tool
+    - link "Request a Quote":
+      - /url: /parts/request-quote
+    - text:     
+    - text: Support
+    - generic: 
+- main:
+  - navigation "Breadcrumb":
+    - link "JLCPCB":
+      - link "JLCPCB":
+        - /url: /
+    - generic: 
+    - link "Parts Library":
+      - link "Parts Library":
+        - /url: /parts
+    - generic: 
+    - link "All Components":
+      - link "All Components":
+        - /url: /parts/all-electronic-components
+    - generic: 
+    - link "Search TMP117AIYBGR"
+    - text: 
+  - heading "TMP117AIYBGR Search results (1 Found)" [level=1]
+  - textbox "Search within results"
+  - button "":
+    - generic: 
+  - generic: Show Filters
+  - text:   
+  - tablist:
+    - tab "In stock Parts"
+  - table:
+    - rowgroup:
+      - 'row "Compare MFR Part # Description Manufacturer Stock ≥ undefined Price null"':
+        - columnheader
+        - columnheader
+        - 'columnheader "Compare MFR Part #"':
+          - generic: Compare
+          - generic: "MFR Part #"
+        - columnheader
+        - columnheader "Description":
+          - generic: Description
+        - columnheader
+        - columnheader "Manufacturer":
+          - generic: Manufacturer
+        - columnheader
+        - columnheader "Stock ≥ undefined":
+          - text: Stock
+          - generic: ≥
+          - spinbutton "Quantity"
+        - columnheader
+        - columnheader "Price null":
+          - generic: Price
+          - spinbutton "Price by Qty"
+        - columnheader
+        - columnheader
+        - columnheader
+  - table:
+    - rowgroup:
+      - 'row "placeholder-image TMP117AIYBGR  C2871893 Extended -55℃~+150℃ 1.8V~5.5V 15.5ms 16bit 3.1uA I2C、SMBus ±0.1℃ DSBGA-6 Temperature Sensors ROHS Texas Instruments 1198 1+ $2.2636 3000+ $1.4184 Show More Idle parts available Min: 1 Full Reel: 3000 Total: $2.26 1 Add to My Part Lib "':
+        - cell:
+          - generic: 
+        - cell:
+          - checkbox
+        - cell "placeholder-image TMP117AIYBGR  C2871893 Extended":
+          - img "placeholder-image"
+          - link "TMP117AIYBGR":
+            - /url: /partdetail/TexasInstruments-TMP117AIYBGR/C2871893
+            - generic: TMP117AIYBGR
+          - link:
+            - /url: https://www.ti.com/cn/lit/gpn/tmp117
+          - generic: 
+          - generic: C2871893
+          - generic: Extended
+        - cell
+        - cell "-55℃~+150℃ 1.8V~5.5V 15.5ms 16bit 3.1uA I2C、SMBus ±0.1℃ DSBGA-6 Temperature Sensors ROHS":
+          - generic: "-55℃~+150℃ 1.8V~5.5V 15.5ms 16bit 3.1uA I2C、SMBus ±0.1℃ DSBGA-6 Temperature Sensors ROHS"
+        - cell
+        - cell "Texas Instruments":
+          - generic: Texas Instruments
+        - cell
+        - cell "1198":
+          - generic: "1198"
+        - cell
+        - cell "1+ $2.2636 3000+ $1.4184 Show More Idle parts available":
+          - generic: 1+
+          - generic: $2.2636
+          - generic: 3000+
+          - generic: $1.4184
+          - generic: Show More
+          - paragraph: Idle parts available
+        - cell
+        - 'cell "Min: 1 Full Reel: 3000 Total: $2.26 1 Add to My Part Lib "':
+          - paragraph: "Min: 1"
+          - paragraph: "Full Reel: 3000"
+          - generic: "Total: $2.26"
+          - spinbutton: "1"
+          - button "Add to My Part Lib":
+            - generic: Add to My Part Lib
+          - generic: 
+  - text: 
+  - generic: 1 item in total
+  - button "" [disabled]:
+    - generic: 
+  - list:
+    - listitem: "1"
+  - button "" [disabled]:
+    - generic: 
+  - text:      

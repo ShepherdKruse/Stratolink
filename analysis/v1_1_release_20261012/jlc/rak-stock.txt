@@ -1,0 +1,71 @@
+JLCPCB 
+Parts Library 
+All Components 
+Search RAK3172-9-SM-NI
+RAK3172-9-SM-NI Search results (1 Found)
+Category
+Others
+New Arrivals
+IoT/Communication Modules
+LoRa Modules
+Manufacturer
+JLCPCB Assembly
+RAKwireless
+PackageType
+SMD,15.5x15mm
+Parts Type
+Basic
+Promotional Extended
+Extended
+Mechanical Assembly
+PCBA Type
+Economic
+Standard
+Information
+Datasheet
+Photo
+Results remaining:
+1
+Reset All Apply
+Hide unavailable options
+Hide Filters
+In stock Parts
+		
+Compare
+MFR Part #
+		Description		Manufacturer		
+Stock
+≥
+		
+Price
+			
+	
+	
+RAK3172-9-SM-NI
+C18548052
+Extended
+	
+	
+-40℃~+85℃ 15km 2V~3.6V 5.22mA 87mA IPEX interface LoRa SPI、UART、I2C SMD,15.5x15mm LoRa Modules ROHS
+	
+	
+RAKwireless
+	
+	
+1
+	
+	
+Est. unit price:
+$7.6012
+
+Idle parts available
+
+	
+	
+
+Min: 2
+
+Total: $15.20
+Pre-order
+1 item in total
+1

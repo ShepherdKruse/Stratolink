@@ -1,0 +1,34 @@
+{
+  "F": {
+    "mask_file": "stratolink-F_Mask.gts",
+    "opening_bounds_mm": [
+      52.0,
+      28.0,
+      78.0,
+      88.0
+    ],
+    "outline_overrun_min_mm": 1.3050000000000068,
+    "native_copper_islands": 148,
+    "all_copper_and_board_vertices_inside": true,
+    "dark_full_region": true,
+    "negative_mask_file": true,
+    "no_clear_plot_operations": true
+  },
+  "B": {
+    "mask_file": "stratolink-B_Mask.gbs",
+    "opening_bounds_mm": [
+      52.0,
+      28.0,
+      78.0,
+      88.0
+    ],
+    "outline_overrun_min_mm": 1.3050000000000068,
+    "native_copper_islands": 70,
+    "all_copper_and_board_vertices_inside": true,
+    "dark_full_region": true,
+    "negative_mask_file": true,
+    "no_clear_plot_operations": true
+  },
+  "board_thickness_mm": 0.4,
+  "interpretation": "Negative mask-file polarity identifies openings; full-face dark rectangles remove mask. Empty mask Gerbers are not accepted as no mask."
+}

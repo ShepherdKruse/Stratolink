@@ -1,0 +1,1492 @@
+- text: 
+- banner:
+  - generic: 24-hour PCB production. Fast Delivery to United States.
+  - link " Coupons":
+    - /url: https://jlcpcb.com/coupon-center
+    - generic: 
+    - text: Coupons
+  - link " Download APP":
+    - /url: https://jlcone.com/download
+    - generic: 
+    - text: Download APP
+  - text:     
+  - text: USD
+  - generic: 
+- navigation:
+  - text: 
+  - link "JLCPCB Home":
+    - /url: https://jlcpcb.com
+    - generic: 
+  - link "Assembly Parts Lib For PCBA Only":
+    - /url: https://jlcpcb.com/parts
+    - paragraph: Assembly Parts Lib
+    - paragraph: For PCBA Only
+  - text:   
+  - search "Search parts":
+    - text: 
+    - 'searchbox "Search by keyword or part #"'
+    - button "Submit search":
+      - generic: 
+    - generic: 
+    - text: Upload BOM
+    - text: 
+    - text: 
+    - generic: 
+  - text: 
+  - link " 0 Parts Cart":
+    - /url: https://jlcpcb.com/user-center/smtPrivateLibrary/partsCart/
+    - generic: 
+    - superscript: "0"
+    - generic: Parts Cart
+  - text:       
+  - text: My Account
+  - generic: 
+  - text: 
+- navigation "Parts navigation":
+  - list:
+    - navigation:
+      - link "Products":
+        - /url: /parts/all-electronic-components
+        - generic: 
+        - text: Products
+      - text:              
+    - link "In Stock Parts":
+      - /url: /parts/in-stock-parts
+    - link "Bom Tool":
+      - /url: /parts/bom-tool
+    - link "Request a Quote":
+      - /url: /parts/request-quote
+    - text:     
+    - text: Support
+    - generic: 
+- main:
+  - generic: 
+  - generic: BOM-stratolink
+  - generic: 
+  - generic: PCB Assembled Qty
+  - text: "5"
+  - generic: 
+  - generic: 
+  - generic: 
+  - text:  
+  - tablist:
+    - tab "All Parts (57)" [selected]:
+      - generic: All Parts (57)
+    - tab "JLCPCB Parts ( 56 )":
+      - text: JLCPCB Parts
+      - generic: ( 56 )
+    - tab "Not Matched Parts ( 1 )":
+      - text: Not Matched Parts
+      - generic: ( 1 )
+  - tabpanel "All Parts (57)"
+  - generic: JLCPCB Parts
+  - generic: "Item Selected: 0"
+  - generic: "Ext Total: $0.00"
+  - button "Add Part"
+  - button "Create Quote"
+  - button "Add All to My parts Lib"
+  - table:
+    - rowgroup:
+      - row "Comment Footprint Designator Matched Part Detail Availability Rec. Order Qty Total Cost Operate":
+        - columnheader:
+          - checkbox
+        - columnheader "Comment":
+          - generic: Comment
+        - columnheader "Footprint":
+          - generic: Footprint
+        - columnheader "Designator":
+          - generic: Designator
+        - columnheader "Matched Part Detail":
+          - generic: Matched Part Detail
+        - columnheader "Availability":
+          - generic: Availability
+        - columnheader "Rec. Order Qty":
+          - generic: Rec. Order Qty
+        - columnheader "Total Cost":
+          - generic: Total Cost
+        - columnheader "Operate":
+          - generic: Operate
+  - table:
+    - rowgroup:
+      - row " In-stock Items":
+        - cell " In-stock Items":
+          - generic: 
+          - text: In-stock Items
+      - row " RC0402FR-074K7L Stratolink_v1p1_R12_R_0402_1005Metric R12 no-image C105871 RC0402FR-074K7L Extended -55℃~+155℃ 4.7kΩ 50V 62.5mW Thick Film Resistor ±1% ±100ppm/℃ 0402 Chip Resistor - Surface Mount ROHS Stock：9101014 Parts Cart：0 20 Add  $0.0580":
+        - cell "":
+          - checkbox
+          - generic: 
+        - cell "RC0402FR-074K7L":
+          - generic: RC0402FR-074K7L
+        - cell "Stratolink_v1p1_R12_R_0402_1005Metric":
+          - generic: Stratolink_v1p1_R12_R_0402_1005Metric
+        - cell "R12":
+          - generic: R12
+        - cell "no-image C105871 RC0402FR-074K7L Extended -55℃~+155℃ 4.7kΩ 50V 62.5mW Thick Film Resistor ±1% ±100ppm/℃ 0402 Chip Resistor - Surface Mount ROHS":
+          - img "no-image"
+          - generic: C105871
+          - generic: RC0402FR-074K7L
+          - generic: Extended
+          - generic: "-55℃~+155℃ 4.7kΩ 50V 62.5mW Thick Film Resistor ±1% ±100ppm/℃ 0402 Chip Resistor - Surface Mount ROHS"
+        - cell "Stock：9101014 Parts Cart：0":
+          - paragraph: Stock：9101014
+          - paragraph: Parts Cart：0
+        - cell "20 Add ":
+          - textbox: "20"
+          - button "Add"
+          - generic: 
+        - cell "$0.0580":
+          - generic: $0.0580
+        - cell:
+      - row " RC0402FR-074K7L Stratolink_v1p1_R11_R_0402_1005Metric R11 no-image C105871 RC0402FR-074K7L Extended -55℃~+155℃ 4.7kΩ 50V 62.5mW Thick Film Resistor ±1% ±100ppm/℃ 0402 Chip Resistor - Surface Mount ROHS":
+        - cell "":
+          - checkbox
+          - generic: 
+        - cell "RC0402FR-074K7L":
+          - generic: RC0402FR-074K7L
+        - cell "Stratolink_v1p1_R11_R_0402_1005Metric":
+          - generic: Stratolink_v1p1_R11_R_0402_1005Metric
+        - cell "R11":
+          - generic: R11
+        - cell "no-image C105871 RC0402FR-074K7L Extended -55℃~+155℃ 4.7kΩ 50V 62.5mW Thick Film Resistor ±1% ±100ppm/℃ 0402 Chip Resistor - Surface Mount ROHS":
+          - img "no-image"
+          - generic: C105871
+          - generic: RC0402FR-074K7L
+          - generic: Extended
+          - generic: "-55℃~+155℃ 4.7kΩ 50V 62.5mW Thick Film Resistor ±1% ±100ppm/℃ 0402 Chip Resistor - Surface Mount ROHS"
+        - cell:
+      - row " RC0402FR-070RL Stratolink_v1p1_R14_R_0402_1005Metric R14 no-image C106231 RC0402FR-070RL Extended -55℃~+155℃ 0Ω 50V 62.5mW Thick Film Resistor ±1% 0402 Chip Resistor - Surface Mount ROHS Stock：1777524 Parts Cart：0 25 Add  $0.0725":
+        - cell "":
+          - checkbox
+          - generic: 
+        - cell "RC0402FR-070RL":
+          - generic: RC0402FR-070RL
+        - cell "Stratolink_v1p1_R14_R_0402_1005Metric":
+          - generic: Stratolink_v1p1_R14_R_0402_1005Metric
+        - cell "R14":
+          - generic: R14
+        - cell "no-image C106231 RC0402FR-070RL Extended -55℃~+155℃ 0Ω 50V 62.5mW Thick Film Resistor ±1% 0402 Chip Resistor - Surface Mount ROHS":
+          - img "no-image"
+          - generic: C106231
+          - generic: RC0402FR-070RL
+          - generic: Extended
+          - generic: "-55℃~+155℃ 0Ω 50V 62.5mW Thick Film Resistor ±1% 0402 Chip Resistor - Surface Mount ROHS"
+        - cell "Stock：1777524 Parts Cart：0":
+          - paragraph: Stock：1777524
+          - paragraph: Parts Cart：0
+        - cell "25 Add ":
+          - textbox: "25"
+          - button "Add"
+          - generic: 
+        - cell "$0.0725":
+          - generic: $0.0725
+        - cell:
+      - row " RC0402FR-070RL Stratolink_v1p1_R13_R_0402_1005Metric R13 no-image C106231 RC0402FR-070RL Extended -55℃~+155℃ 0Ω 50V 62.5mW Thick Film Resistor ±1% 0402 Chip Resistor - Surface Mount ROHS":
+        - cell "":
+          - checkbox
+          - generic: 
+        - cell "RC0402FR-070RL":
+          - generic: RC0402FR-070RL
+        - cell "Stratolink_v1p1_R13_R_0402_1005Metric":
+          - generic: Stratolink_v1p1_R13_R_0402_1005Metric
+        - cell "R13":
+          - generic: R13
+        - cell "no-image C106231 RC0402FR-070RL Extended -55℃~+155℃ 0Ω 50V 62.5mW Thick Film Resistor ±1% 0402 Chip Resistor - Surface Mount ROHS":
+          - img "no-image"
+          - generic: C106231
+          - generic: RC0402FR-070RL
+          - generic: Extended
+          - generic: "-55℃~+155℃ 0Ω 50V 62.5mW Thick Film Resistor ±1% 0402 Chip Resistor - Surface Mount ROHS"
+        - cell:
+      - row " RC0402FR-070RL Stratolink_v1p1_R9_R_0402_1005Metric R9 no-image C106231 RC0402FR-070RL Extended -55℃~+155℃ 0Ω 50V 62.5mW Thick Film Resistor ±1% 0402 Chip Resistor - Surface Mount ROHS":
+        - cell "":
+          - checkbox
+          - generic: 
+        - cell "RC0402FR-070RL":
+          - generic: RC0402FR-070RL
+        - cell "Stratolink_v1p1_R9_R_0402_1005Metric":
+          - generic: Stratolink_v1p1_R9_R_0402_1005Metric
+        - cell "R9":
+          - generic: R9
+        - cell "no-image C106231 RC0402FR-070RL Extended -55℃~+155℃ 0Ω 50V 62.5mW Thick Film Resistor ±1% 0402 Chip Resistor - Surface Mount ROHS":
+          - img "no-image"
+          - generic: C106231
+          - generic: RC0402FR-070RL
+          - generic: Extended
+          - generic: "-55℃~+155℃ 0Ω 50V 62.5mW Thick Film Resistor ±1% 0402 Chip Resistor - Surface Mount ROHS"
+        - cell:
+      - row "LIS2DH12TR Stratolink_v1p1_U7_PQFN50P200X200100-12N U7 no-image C110926 LIS2DH12TR Extended -40℃~+85℃ 0.2KB 1.71V~3.6V 500nA 8bit、10bit、12bit Accelerometer Motion event detection SPI、I2C X,Y,Z ±16g LGA-12(2x2) Accelerometers ROHS Stock：21650 Parts Cart：0 5 Add  $4.6485":
+        - cell:
+          - checkbox
+        - cell "LIS2DH12TR":
+          - generic: LIS2DH12TR
+        - cell "Stratolink_v1p1_U7_PQFN50P200X200100-12N":
+          - generic: Stratolink_v1p1_U7_PQFN50P200X200100-12N
+        - cell "U7":
+          - generic: U7
+        - cell "no-image C110926 LIS2DH12TR Extended -40℃~+85℃ 0.2KB 1.71V~3.6V 500nA 8bit、10bit、12bit Accelerometer Motion event detection SPI、I2C X,Y,Z ±16g LGA-12(2x2) Accelerometers ROHS":
+          - img "no-image"
+          - generic: C110926
+          - generic: LIS2DH12TR
+          - generic: Extended
+          - generic: "-40℃~+85℃ 0.2KB 1.71V~3.6V 500nA 8bit、10bit、12bit Accelerometer Motion event detection SPI、I2C X,Y,Z ±16g LGA-12(2x2) Accelerometers ROHS"
+        - cell "Stock：21650 Parts Cart：0":
+          - paragraph: Stock：21650
+          - paragraph: Parts Cart：0
+        - cell "5 Add ":
+          - textbox: "5"
+          - button "Add"
+          - generic: 
+        - cell "$4.6485":
+          - generic: $4.6485
+        - cell:
+      - row " RC0402FR-0733RL Stratolink_v1p1_R15_R_0402_1005Metric R15 no-image C138002 RC0402FR-0733RL Extended -55℃~+155℃ 33Ω 50V 62.5mW Thick Film Resistor ±1% ±100ppm/℃ 0402 Chip Resistor - Surface Mount ROHS Stock：7185691 Parts Cart：0 20 Add  $0.0720":
+        - cell "":
+          - checkbox
+          - generic: 
+        - cell "RC0402FR-0733RL":
+          - generic: RC0402FR-0733RL
+        - cell "Stratolink_v1p1_R15_R_0402_1005Metric":
+          - generic: Stratolink_v1p1_R15_R_0402_1005Metric
+        - cell "R15":
+          - generic: R15
+        - cell "no-image C138002 RC0402FR-0733RL Extended -55℃~+155℃ 33Ω 50V 62.5mW Thick Film Resistor ±1% ±100ppm/℃ 0402 Chip Resistor - Surface Mount ROHS":
+          - img "no-image"
+          - generic: C138002
+          - generic: RC0402FR-0733RL
+          - generic: Extended
+          - generic: "-55℃~+155℃ 33Ω 50V 62.5mW Thick Film Resistor ±1% ±100ppm/℃ 0402 Chip Resistor - Surface Mount ROHS"
+        - cell "Stock：7185691 Parts Cart：0":
+          - paragraph: Stock：7185691
+          - paragraph: Parts Cart：0
+        - cell "20 Add ":
+          - textbox: "20"
+          - button "Add"
+          - generic: 
+        - cell "$0.0720":
+          - generic: $0.0720
+        - cell:
+      - row " RC0402FR-0733RL Stratolink_v1p1_R16_R_0402_1005Metric R16 no-image C138002 RC0402FR-0733RL Extended -55℃~+155℃ 33Ω 50V 62.5mW Thick Film Resistor ±1% ±100ppm/℃ 0402 Chip Resistor - Surface Mount ROHS":
+        - cell "":
+          - checkbox
+          - generic: 
+        - cell "RC0402FR-0733RL":
+          - generic: RC0402FR-0733RL
+        - cell "Stratolink_v1p1_R16_R_0402_1005Metric":
+          - generic: Stratolink_v1p1_R16_R_0402_1005Metric
+        - cell "R16":
+          - generic: R16
+        - cell "no-image C138002 RC0402FR-0733RL Extended -55℃~+155℃ 33Ω 50V 62.5mW Thick Film Resistor ±1% ±100ppm/℃ 0402 Chip Resistor - Surface Mount ROHS":
+          - img "no-image"
+          - generic: C138002
+          - generic: RC0402FR-0733RL
+          - generic: Extended
+          - generic: "-55℃~+155℃ 33Ω 50V 62.5mW Thick Film Resistor ±1% ±100ppm/℃ 0402 Chip Resistor - Surface Mount ROHS"
+        - cell:
+      - row " RC0402FR-071ML Stratolink_v1p1_R19_R_0402_1005Metric R19 no-image C138033 RC0402FR-071ML Extended -55℃~+155℃ 1MΩ 50V 62.5mW Thick Film Resistor ±1% ±100ppm/℃ 0402 Chip Resistor - Surface Mount ROHS Stock：1916475 Parts Cart：0 30 Add  $0.0930":
+        - cell "":
+          - checkbox
+          - generic: 
+        - cell "RC0402FR-071ML":
+          - generic: RC0402FR-071ML
+        - cell "Stratolink_v1p1_R19_R_0402_1005Metric":
+          - generic: Stratolink_v1p1_R19_R_0402_1005Metric
+        - cell "R19":
+          - generic: R19
+        - cell "no-image C138033 RC0402FR-071ML Extended -55℃~+155℃ 1MΩ 50V 62.5mW Thick Film Resistor ±1% ±100ppm/℃ 0402 Chip Resistor - Surface Mount ROHS":
+          - img "no-image"
+          - generic: C138033
+          - generic: RC0402FR-071ML
+          - generic: Extended
+          - generic: "-55℃~+155℃ 1MΩ 50V 62.5mW Thick Film Resistor ±1% ±100ppm/℃ 0402 Chip Resistor - Surface Mount ROHS"
+        - cell "Stock：1916475 Parts Cart：0":
+          - paragraph: Stock：1916475
+          - paragraph: Parts Cart：0
+        - cell "30 Add ":
+          - textbox: "30"
+          - button "Add"
+          - generic: 
+        - cell "$0.0930":
+          - generic: $0.0930
+        - cell:
+      - row " RC0402FR-071ML Stratolink_v1p1_R21_R_0402_1005Metric R21 no-image C138033 RC0402FR-071ML Extended -55℃~+155℃ 1MΩ 50V 62.5mW Thick Film Resistor ±1% ±100ppm/℃ 0402 Chip Resistor - Surface Mount ROHS":
+        - cell "":
+          - checkbox
+          - generic: 
+        - cell "RC0402FR-071ML":
+          - generic: RC0402FR-071ML
+        - cell "Stratolink_v1p1_R21_R_0402_1005Metric":
+          - generic: Stratolink_v1p1_R21_R_0402_1005Metric
+        - cell "R21":
+          - generic: R21
+        - cell "no-image C138033 RC0402FR-071ML Extended -55℃~+155℃ 1MΩ 50V 62.5mW Thick Film Resistor ±1% ±100ppm/℃ 0402 Chip Resistor - Surface Mount ROHS":
+          - img "no-image"
+          - generic: C138033
+          - generic: RC0402FR-071ML
+          - generic: Extended
+          - generic: "-55℃~+155℃ 1MΩ 50V 62.5mW Thick Film Resistor ±1% ±100ppm/℃ 0402 Chip Resistor - Surface Mount ROHS"
+        - cell:
+      - row " RC0402FR-071ML Stratolink_v1p1_R22_R_0402_1005Metric R22 no-image C138033 RC0402FR-071ML Extended -55℃~+155℃ 1MΩ 50V 62.5mW Thick Film Resistor ±1% ±100ppm/℃ 0402 Chip Resistor - Surface Mount ROHS":
+        - cell "":
+          - checkbox
+          - generic: 
+        - cell "RC0402FR-071ML":
+          - generic: RC0402FR-071ML
+        - cell "Stratolink_v1p1_R22_R_0402_1005Metric":
+          - generic: Stratolink_v1p1_R22_R_0402_1005Metric
+        - cell "R22":
+          - generic: R22
+        - cell "no-image C138033 RC0402FR-071ML Extended -55℃~+155℃ 1MΩ 50V 62.5mW Thick Film Resistor ±1% ±100ppm/℃ 0402 Chip Resistor - Surface Mount ROHS":
+          - img "no-image"
+          - generic: C138033
+          - generic: RC0402FR-071ML
+          - generic: Extended
+          - generic: "-55℃~+155℃ 1MΩ 50V 62.5mW Thick Film Resistor ±1% ±100ppm/℃ 0402 Chip Resistor - Surface Mount ROHS"
+        - cell:
+      - row " RC0402FR-071ML Stratolink_v1p1_R23_R_0402_1005Metric R23 no-image C138033 RC0402FR-071ML Extended -55℃~+155℃ 1MΩ 50V 62.5mW Thick Film Resistor ±1% ±100ppm/℃ 0402 Chip Resistor - Surface Mount ROHS":
+        - cell "":
+          - checkbox
+          - generic: 
+        - cell "RC0402FR-071ML":
+          - generic: RC0402FR-071ML
+        - cell "Stratolink_v1p1_R23_R_0402_1005Metric":
+          - generic: Stratolink_v1p1_R23_R_0402_1005Metric
+        - cell "R23":
+          - generic: R23
+        - cell "no-image C138033 RC0402FR-071ML Extended -55℃~+155℃ 1MΩ 50V 62.5mW Thick Film Resistor ±1% ±100ppm/℃ 0402 Chip Resistor - Surface Mount ROHS":
+          - img "no-image"
+          - generic: C138033
+          - generic: RC0402FR-071ML
+          - generic: Extended
+          - generic: "-55℃~+155℃ 1MΩ 50V 62.5mW Thick Film Resistor ±1% ±100ppm/℃ 0402 Chip Resistor - Surface Mount ROHS"
+        - cell:
+      - row " CL05B104KO5NNNC Stratolink_v1p1_C22_C_0402_1005Metric C22 no-image C1525 CL05B104KO5NNNC Basic 100nF 16V X7R ±10% 0402 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS Stock：23508686 Parts Cart：0 70 Add  $0.3220":
+        - cell "":
+          - checkbox
+          - generic: 
+        - cell "CL05B104KO5NNNC":
+          - generic: CL05B104KO5NNNC
+        - cell "Stratolink_v1p1_C22_C_0402_1005Metric":
+          - generic: Stratolink_v1p1_C22_C_0402_1005Metric
+        - cell "C22":
+          - generic: C22
+        - cell "no-image C1525 CL05B104KO5NNNC Basic 100nF 16V X7R ±10% 0402 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS":
+          - img "no-image"
+          - generic: C1525
+          - generic: CL05B104KO5NNNC
+          - generic: Basic
+          - generic: 100nF 16V X7R ±10% 0402 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS
+        - cell "Stock：23508686 Parts Cart：0":
+          - paragraph: Stock：23508686
+          - paragraph: Parts Cart：0
+        - cell "70 Add ":
+          - textbox: "70"
+          - button "Add"
+          - generic: 
+        - cell "$0.3220":
+          - generic: $0.3220
+        - cell:
+      - row " CL05B104KO5NNNC Stratolink_v1p1_C9_C_0402_1005Metric C9 no-image C1525 CL05B104KO5NNNC Basic 100nF 16V X7R ±10% 0402 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS":
+        - cell "":
+          - checkbox
+          - generic: 
+        - cell "CL05B104KO5NNNC":
+          - generic: CL05B104KO5NNNC
+        - cell "Stratolink_v1p1_C9_C_0402_1005Metric":
+          - generic: Stratolink_v1p1_C9_C_0402_1005Metric
+        - cell "C9":
+          - generic: C9
+        - cell "no-image C1525 CL05B104KO5NNNC Basic 100nF 16V X7R ±10% 0402 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS":
+          - img "no-image"
+          - generic: C1525
+          - generic: CL05B104KO5NNNC
+          - generic: Basic
+          - generic: 100nF 16V X7R ±10% 0402 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS
+        - cell:
+      - row " CL05B104KO5NNNC Stratolink_v1p1_C7_C_0402_1005Metric C7 no-image C1525 CL05B104KO5NNNC Basic 100nF 16V X7R ±10% 0402 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS":
+        - cell "":
+          - checkbox
+          - generic: 
+        - cell "CL05B104KO5NNNC":
+          - generic: CL05B104KO5NNNC
+        - cell "Stratolink_v1p1_C7_C_0402_1005Metric":
+          - generic: Stratolink_v1p1_C7_C_0402_1005Metric
+        - cell "C7":
+          - generic: C7
+        - cell "no-image C1525 CL05B104KO5NNNC Basic 100nF 16V X7R ±10% 0402 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS":
+          - img "no-image"
+          - generic: C1525
+          - generic: CL05B104KO5NNNC
+          - generic: Basic
+          - generic: 100nF 16V X7R ±10% 0402 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS
+        - cell:
+      - row " CL05B104KO5NNNC Stratolink_v1p1_C19_C_0402_1005Metric C19 no-image C1525 CL05B104KO5NNNC Basic 100nF 16V X7R ±10% 0402 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS":
+        - cell "":
+          - checkbox
+          - generic: 
+        - cell "CL05B104KO5NNNC":
+          - generic: CL05B104KO5NNNC
+        - cell "Stratolink_v1p1_C19_C_0402_1005Metric":
+          - generic: Stratolink_v1p1_C19_C_0402_1005Metric
+        - cell "C19":
+          - generic: C19
+        - cell "no-image C1525 CL05B104KO5NNNC Basic 100nF 16V X7R ±10% 0402 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS":
+          - img "no-image"
+          - generic: C1525
+          - generic: CL05B104KO5NNNC
+          - generic: Basic
+          - generic: 100nF 16V X7R ±10% 0402 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS
+        - cell:
+      - row " CL05B104KO5NNNC Stratolink_v1p1_C14_C_0402_1005Metric C14 no-image C1525 CL05B104KO5NNNC Basic 100nF 16V X7R ±10% 0402 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS":
+        - cell "":
+          - checkbox
+          - generic: 
+        - cell "CL05B104KO5NNNC":
+          - generic: CL05B104KO5NNNC
+        - cell "Stratolink_v1p1_C14_C_0402_1005Metric":
+          - generic: Stratolink_v1p1_C14_C_0402_1005Metric
+        - cell "C14":
+          - generic: C14
+        - cell "no-image C1525 CL05B104KO5NNNC Basic 100nF 16V X7R ±10% 0402 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS":
+          - img "no-image"
+          - generic: C1525
+          - generic: CL05B104KO5NNNC
+          - generic: Basic
+          - generic: 100nF 16V X7R ±10% 0402 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS
+        - cell:
+      - row " CL05B104KO5NNNC Stratolink_v1p1_C17_C_0402_1005Metric C17 no-image C1525 CL05B104KO5NNNC Basic 100nF 16V X7R ±10% 0402 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS":
+        - cell "":
+          - checkbox
+          - generic: 
+        - cell "CL05B104KO5NNNC":
+          - generic: CL05B104KO5NNNC
+        - cell "Stratolink_v1p1_C17_C_0402_1005Metric":
+          - generic: Stratolink_v1p1_C17_C_0402_1005Metric
+        - cell "C17":
+          - generic: C17
+        - cell "no-image C1525 CL05B104KO5NNNC Basic 100nF 16V X7R ±10% 0402 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS":
+          - img "no-image"
+          - generic: C1525
+          - generic: CL05B104KO5NNNC
+          - generic: Basic
+          - generic: 100nF 16V X7R ±10% 0402 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS
+        - cell:
+      - row " CL05B104KO5NNNC Stratolink_v1p1_C11_C_0402_1005Metric C11 no-image C1525 CL05B104KO5NNNC Basic 100nF 16V X7R ±10% 0402 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS":
+        - cell "":
+          - checkbox
+          - generic: 
+        - cell "CL05B104KO5NNNC":
+          - generic: CL05B104KO5NNNC
+        - cell "Stratolink_v1p1_C11_C_0402_1005Metric":
+          - generic: Stratolink_v1p1_C11_C_0402_1005Metric
+        - cell "C11":
+          - generic: C11
+        - cell "no-image C1525 CL05B104KO5NNNC Basic 100nF 16V X7R ±10% 0402 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS":
+          - img "no-image"
+          - generic: C1525
+          - generic: CL05B104KO5NNNC
+          - generic: Basic
+          - generic: 100nF 16V X7R ±10% 0402 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS
+        - cell:
+      - row " CL05B104KO5NNNC Stratolink_v1p1_C4_C_0402_1005Metric C4 no-image C1525 CL05B104KO5NNNC Basic 100nF 16V X7R ±10% 0402 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS":
+        - cell "":
+          - checkbox
+          - generic: 
+        - cell "CL05B104KO5NNNC":
+          - generic: CL05B104KO5NNNC
+        - cell "Stratolink_v1p1_C4_C_0402_1005Metric":
+          - generic: Stratolink_v1p1_C4_C_0402_1005Metric
+        - cell "C4":
+          - generic: C4
+        - cell "no-image C1525 CL05B104KO5NNNC Basic 100nF 16V X7R ±10% 0402 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS":
+          - img "no-image"
+          - generic: C1525
+          - generic: CL05B104KO5NNNC
+          - generic: Basic
+          - generic: 100nF 16V X7R ±10% 0402 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS
+        - cell:
+      - row " CL05B104KO5NNNC Stratolink_v1p1_C10_C_0402_1005Metric C10 no-image C1525 CL05B104KO5NNNC Basic 100nF 16V X7R ±10% 0402 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS":
+        - cell "":
+          - checkbox
+          - generic: 
+        - cell "CL05B104KO5NNNC":
+          - generic: CL05B104KO5NNNC
+        - cell "Stratolink_v1p1_C10_C_0402_1005Metric":
+          - generic: Stratolink_v1p1_C10_C_0402_1005Metric
+        - cell "C10":
+          - generic: C10
+        - cell "no-image C1525 CL05B104KO5NNNC Basic 100nF 16V X7R ±10% 0402 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS":
+          - img "no-image"
+          - generic: C1525
+          - generic: CL05B104KO5NNNC
+          - generic: Basic
+          - generic: 100nF 16V X7R ±10% 0402 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS
+        - cell:
+      - row " CL05B104KO5NNNC Stratolink_v1p1_C15_C_0402_1005Metric C15 no-image C1525 CL05B104KO5NNNC Basic 100nF 16V X7R ±10% 0402 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS":
+        - cell "":
+          - checkbox
+          - generic: 
+        - cell "CL05B104KO5NNNC":
+          - generic: CL05B104KO5NNNC
+        - cell "Stratolink_v1p1_C15_C_0402_1005Metric":
+          - generic: Stratolink_v1p1_C15_C_0402_1005Metric
+        - cell "C15":
+          - generic: C15
+        - cell "no-image C1525 CL05B104KO5NNNC Basic 100nF 16V X7R ±10% 0402 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS":
+          - img "no-image"
+          - generic: C1525
+          - generic: CL05B104KO5NNNC
+          - generic: Basic
+          - generic: 100nF 16V X7R ±10% 0402 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS
+        - cell:
+      - row " CL05B104KO5NNNC Stratolink_v1p1_C20_C_0402_1005Metric C20 no-image C1525 CL05B104KO5NNNC Basic 100nF 16V X7R ±10% 0402 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS":
+        - cell "":
+          - checkbox
+          - generic: 
+        - cell "CL05B104KO5NNNC":
+          - generic: CL05B104KO5NNNC
+        - cell "Stratolink_v1p1_C20_C_0402_1005Metric":
+          - generic: Stratolink_v1p1_C20_C_0402_1005Metric
+        - cell "C20":
+          - generic: C20
+        - cell "no-image C1525 CL05B104KO5NNNC Basic 100nF 16V X7R ±10% 0402 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS":
+          - img "no-image"
+          - generic: C1525
+          - generic: CL05B104KO5NNNC
+          - generic: Basic
+          - generic: 100nF 16V X7R ±10% 0402 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS
+        - cell:
+      - row " CL05B104KO5NNNC Stratolink_v1p1_C12_C_0402_1005Metric C12 no-image C1525 CL05B104KO5NNNC Basic 100nF 16V X7R ±10% 0402 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS":
+        - cell "":
+          - checkbox
+          - generic: 
+        - cell "CL05B104KO5NNNC":
+          - generic: CL05B104KO5NNNC
+        - cell "Stratolink_v1p1_C12_C_0402_1005Metric":
+          - generic: Stratolink_v1p1_C12_C_0402_1005Metric
+        - cell "C12":
+          - generic: C12
+        - cell "no-image C1525 CL05B104KO5NNNC Basic 100nF 16V X7R ±10% 0402 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS":
+          - img "no-image"
+          - generic: C1525
+          - generic: CL05B104KO5NNNC
+          - generic: Basic
+          - generic: 100nF 16V X7R ±10% 0402 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS
+        - cell:
+      - row "MS561101BA03-50 Stratolink_v1p1_U4_SON125P500X300X100-8N U4 no-image C15639 MS561101BA03-50  Extended -40℃~+85℃ 1.8V~3.6V 140nA 150pa 1Kpa~1.2bar 8.22ms I2C、SPI Integrated ADC and digital interface、On-chip calibration and non-volatile storage、Standby mode、On-chip temperature output Yes QFN-8(3x5) Pressure Sensors ROHS Stock：3376 Parts Cart：0 5 Add  $33.6310":
+        - cell:
+          - checkbox
+        - cell "MS561101BA03-50":
+          - generic: MS561101BA03-50
+        - cell "Stratolink_v1p1_U4_SON125P500X300X100-8N":
+          - generic: Stratolink_v1p1_U4_SON125P500X300X100-8N
+        - cell "U4":
+          - generic: U4
+        - cell "no-image C15639 MS561101BA03-50  Extended -40℃~+85℃ 1.8V~3.6V 140nA 150pa 1Kpa~1.2bar 8.22ms I2C、SPI Integrated ADC and digital interface、On-chip calibration and non-volatile storage、Standby mode、On-chip temperature output Yes QFN-8(3x5) Pressure Sensors ROHS":
+          - img "no-image"
+          - generic: C15639
+          - text: MS561101BA03-50
+          - generic: 
+          - generic: Extended
+          - generic: "-40℃~+85℃ 1.8V~3.6V 140nA 150pa 1Kpa~1.2bar 8.22ms I2C、SPI Integrated ADC and digital interface、On-chip calibration and non-volatile storage、Standby mode、On-chip temperature output Yes QFN-8(3x5) Pressure Sensors ROHS"
+        - cell "Stock：3376 Parts Cart：0":
+          - paragraph: Stock：3376
+          - paragraph: Parts Cart：0
+        - cell "5 Add ":
+          - textbox: "5"
+          - button "Add"
+          - generic: 
+        - cell "$33.6310":
+          - generic: $33.6310
+        - cell:
+      - row " CL10A475KP8NNNC Stratolink_v1p1_C3_C_0603_1608Metric C3 no-image C1705 CL10A475KP8NNNC Extended 10V 4.7uF X5R ±10% 0603 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS Stock：1809534 Parts Cart：0 25 Add  $0.3275":
+        - cell "":
+          - checkbox
+          - generic: 
+        - cell "CL10A475KP8NNNC":
+          - generic: CL10A475KP8NNNC
+        - cell "Stratolink_v1p1_C3_C_0603_1608Metric":
+          - generic: Stratolink_v1p1_C3_C_0603_1608Metric
+        - cell "C3":
+          - generic: C3
+        - cell "no-image C1705 CL10A475KP8NNNC Extended 10V 4.7uF X5R ±10% 0603 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS":
+          - img "no-image"
+          - generic: C1705
+          - generic: CL10A475KP8NNNC
+          - generic: Extended
+          - generic: 10V 4.7uF X5R ±10% 0603 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS
+        - cell "Stock：1809534 Parts Cart：0":
+          - paragraph: Stock：1809534
+          - paragraph: Parts Cart：0
+        - cell "25 Add ":
+          - textbox: "25"
+          - button "Add"
+          - generic: 
+        - cell "$0.3275":
+          - generic: $0.3275
+        - cell:
+      - row " CL10A475KP8NNNC Stratolink_v1p1_C16_C_0603_1608Metric C16 no-image C1705 CL10A475KP8NNNC Extended 10V 4.7uF X5R ±10% 0603 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS":
+        - cell "":
+          - checkbox
+          - generic: 
+        - cell "CL10A475KP8NNNC":
+          - generic: CL10A475KP8NNNC
+        - cell "Stratolink_v1p1_C16_C_0603_1608Metric":
+          - generic: Stratolink_v1p1_C16_C_0603_1608Metric
+        - cell "C16":
+          - generic: C16
+        - cell "no-image C1705 CL10A475KP8NNNC Extended 10V 4.7uF X5R ±10% 0603 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS":
+          - img "no-image"
+          - generic: C1705
+          - generic: CL10A475KP8NNNC
+          - generic: Extended
+          - generic: 10V 4.7uF X5R ±10% 0603 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS
+        - cell:
+      - row " CL10A475KP8NNNC Stratolink_v1p1_C2_C_0603_1608Metric C2 no-image C1705 CL10A475KP8NNNC Extended 10V 4.7uF X5R ±10% 0603 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS":
+        - cell "":
+          - checkbox
+          - generic: 
+        - cell "CL10A475KP8NNNC":
+          - generic: CL10A475KP8NNNC
+        - cell "Stratolink_v1p1_C2_C_0603_1608Metric":
+          - generic: Stratolink_v1p1_C2_C_0603_1608Metric
+        - cell "C2":
+          - generic: C2
+        - cell "no-image C1705 CL10A475KP8NNNC Extended 10V 4.7uF X5R ±10% 0603 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS":
+          - img "no-image"
+          - generic: C1705
+          - generic: CL10A475KP8NNNC
+          - generic: Extended
+          - generic: 10V 4.7uF X5R ±10% 0603 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS
+        - cell:
+      - row " CL10A106KP8NNNC Stratolink_v1p1_C8_C_0603_1608Metric C8 no-image C19702 CL10A106KP8NNNC Basic 10V 10uF X5R ±10% 0603 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS Stock：9374086 Parts Cart：0 20 Add  $0.6140":
+        - cell "":
+          - checkbox
+          - generic: 
+        - cell "CL10A106KP8NNNC":
+          - generic: CL10A106KP8NNNC
+        - cell "Stratolink_v1p1_C8_C_0603_1608Metric":
+          - generic: Stratolink_v1p1_C8_C_0603_1608Metric
+        - cell "C8":
+          - generic: C8
+        - cell "no-image C19702 CL10A106KP8NNNC Basic 10V 10uF X5R ±10% 0603 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS":
+          - img "no-image"
+          - generic: C19702
+          - generic: CL10A106KP8NNNC
+          - generic: Basic
+          - generic: 10V 10uF X5R ±10% 0603 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS
+        - cell "Stock：9374086 Parts Cart：0":
+          - paragraph: Stock：9374086
+          - paragraph: Parts Cart：0
+        - cell "20 Add ":
+          - textbox: "20"
+          - button "Add"
+          - generic: 
+        - cell "$0.6140":
+          - generic: $0.6140
+        - cell:
+      - row " CL10A106KP8NNNC Stratolink_v1p1_C21_C_0603_1608Metric C21 no-image C19702 CL10A106KP8NNNC Basic 10V 10uF X5R ±10% 0603 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS":
+        - cell "":
+          - checkbox
+          - generic: 
+        - cell "CL10A106KP8NNNC":
+          - generic: CL10A106KP8NNNC
+        - cell "Stratolink_v1p1_C21_C_0603_1608Metric":
+          - generic: Stratolink_v1p1_C21_C_0603_1608Metric
+        - cell "C21":
+          - generic: C21
+        - cell "no-image C19702 CL10A106KP8NNNC Basic 10V 10uF X5R ±10% 0603 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS":
+          - img "no-image"
+          - generic: C19702
+          - generic: CL10A106KP8NNNC
+          - generic: Basic
+          - generic: 10V 10uF X5R ±10% 0603 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS
+        - cell:
+      - row "CRCW04024M22FKED Stratolink_v1p1_R2_R_0402_1005Metric R2 no-image C2091474 CRCW04024M22FKED Extended -55℃~+155℃ 4.22MΩ 50V 62.5mW Thick Film Resistor ±1% ±100ppm/℃ 0402 Chip Resistor - Surface Mount ROHS Stock：375 Parts Cart：0 20 Add  $0.5000":
+        - cell:
+          - checkbox
+        - cell "CRCW04024M22FKED":
+          - generic: CRCW04024M22FKED
+        - cell "Stratolink_v1p1_R2_R_0402_1005Metric":
+          - generic: Stratolink_v1p1_R2_R_0402_1005Metric
+        - cell "R2":
+          - generic: R2
+        - cell "no-image C2091474 CRCW04024M22FKED Extended -55℃~+155℃ 4.22MΩ 50V 62.5mW Thick Film Resistor ±1% ±100ppm/℃ 0402 Chip Resistor - Surface Mount ROHS":
+          - img "no-image"
+          - generic: C2091474
+          - generic: CRCW04024M22FKED
+          - generic: Extended
+          - generic: "-55℃~+155℃ 4.22MΩ 50V 62.5mW Thick Film Resistor ±1% ±100ppm/℃ 0402 Chip Resistor - Surface Mount ROHS"
+        - cell "Stock：375 Parts Cart：0":
+          - paragraph: Stock：375
+          - paragraph: Parts Cart：0
+        - cell "20 Add ":
+          - textbox: "20"
+          - button "Add"
+          - generic: 
+        - cell "$0.5000":
+          - generic: $0.5000
+        - cell:
+      - row "0402WGF220JTCE Stratolink_v1p1_R26_R_0402_1005Metric R26 no-image C25092 0402WGF220JTCE Basic -55℃~+155℃ 22Ω 50V 62.5mW Thick Film Resistor ±1% ±100ppm/℃ 0402 Chip Resistor - Surface Mount ROHS Stock：5947400 Parts Cart：0 20 Add  $0.0240":
+        - cell:
+          - checkbox
+        - cell "0402WGF220JTCE":
+          - generic: 0402WGF220JTCE
+        - cell "Stratolink_v1p1_R26_R_0402_1005Metric":
+          - generic: Stratolink_v1p1_R26_R_0402_1005Metric
+        - cell "R26":
+          - generic: R26
+        - cell "no-image C25092 0402WGF220JTCE Basic -55℃~+155℃ 22Ω 50V 62.5mW Thick Film Resistor ±1% ±100ppm/℃ 0402 Chip Resistor - Surface Mount ROHS":
+          - img "no-image"
+          - generic: C25092
+          - generic: 0402WGF220JTCE
+          - generic: Basic
+          - generic: "-55℃~+155℃ 22Ω 50V 62.5mW Thick Film Resistor ±1% ±100ppm/℃ 0402 Chip Resistor - Surface Mount ROHS"
+        - cell "Stock：5947400 Parts Cart：0":
+          - paragraph: Stock：5947400
+          - paragraph: Parts Cart：0
+        - cell "20 Add ":
+          - textbox: "20"
+          - button "Add"
+          - generic: 
+        - cell "$0.0240":
+          - generic: $0.0240
+        - cell:
+      - row "TMP117AIYBGR Stratolink_v1p1_U5_BGA6N40P3X2_148X95X53 U5 no-image C2871893 TMP117AIYBGR Extended -55℃~+150℃ 1.8V~5.5V 15.5ms 16bit 3.1uA I2C、SMBus ±0.1℃ DSBGA-6 Temperature Sensors ROHS Stock：1198 Parts Cart：0 5 Add  $11.3355":
+        - cell:
+          - checkbox
+        - cell "TMP117AIYBGR":
+          - generic: TMP117AIYBGR
+        - cell "Stratolink_v1p1_U5_BGA6N40P3X2_148X95X53":
+          - generic: Stratolink_v1p1_U5_BGA6N40P3X2_148X95X53
+        - cell "U5":
+          - generic: U5
+        - cell "no-image C2871893 TMP117AIYBGR Extended -55℃~+150℃ 1.8V~5.5V 15.5ms 16bit 3.1uA I2C、SMBus ±0.1℃ DSBGA-6 Temperature Sensors ROHS":
+          - img "no-image"
+          - generic: C2871893
+          - generic: TMP117AIYBGR
+          - generic: Extended
+          - generic: "-55℃~+150℃ 1.8V~5.5V 15.5ms 16bit 3.1uA I2C、SMBus ±0.1℃ DSBGA-6 Temperature Sensors ROHS"
+        - cell "Stock：1198 Parts Cart：0":
+          - paragraph: Stock：1198
+          - paragraph: Parts Cart：0
+        - cell "5 Add ":
+          - textbox: "5"
+          - button "Add"
+          - generic: 
+        - cell "$11.3355":
+          - generic: $11.3355
+        - cell:
+      - row " FRC0402F4754TS Stratolink_v1p1_R7_R_0402_1005Metric R7 no-image C2998153 FRC0402F4754TS Extended -55℃~+155℃ 4.75MΩ 50V 62.5mW Thick Film Resistor ±1% ±100ppm/℃ 0402 Chip Resistor - Surface Mount ROHS Stock：137418 Parts Cart：0 30 Add  $0.0540":
+        - cell "":
+          - checkbox
+          - generic: 
+        - cell "FRC0402F4754TS":
+          - generic: FRC0402F4754TS
+        - cell "Stratolink_v1p1_R7_R_0402_1005Metric":
+          - generic: Stratolink_v1p1_R7_R_0402_1005Metric
+        - cell "R7":
+          - generic: R7
+        - cell "no-image C2998153 FRC0402F4754TS Extended -55℃~+155℃ 4.75MΩ 50V 62.5mW Thick Film Resistor ±1% ±100ppm/℃ 0402 Chip Resistor - Surface Mount ROHS":
+          - img "no-image"
+          - generic: C2998153
+          - generic: FRC0402F4754TS
+          - generic: Extended
+          - generic: "-55℃~+155℃ 4.75MΩ 50V 62.5mW Thick Film Resistor ±1% ±100ppm/℃ 0402 Chip Resistor - Surface Mount ROHS"
+        - cell "Stock：137418 Parts Cart：0":
+          - paragraph: Stock：137418
+          - paragraph: Parts Cart：0
+        - cell "30 Add ":
+          - textbox: "30"
+          - button "Add"
+          - generic: 
+        - cell "$0.0540":
+          - generic: $0.0540
+        - cell:
+      - row " FRC0402F4754TS Stratolink_v1p1_R25_R_0402_1005Metric R25 no-image C2998153 FRC0402F4754TS Extended -55℃~+155℃ 4.75MΩ 50V 62.5mW Thick Film Resistor ±1% ±100ppm/℃ 0402 Chip Resistor - Surface Mount ROHS":
+        - cell "":
+          - checkbox
+          - generic: 
+        - cell "FRC0402F4754TS":
+          - generic: FRC0402F4754TS
+        - cell "Stratolink_v1p1_R25_R_0402_1005Metric":
+          - generic: Stratolink_v1p1_R25_R_0402_1005Metric
+        - cell "R25":
+          - generic: R25
+        - cell "no-image C2998153 FRC0402F4754TS Extended -55℃~+155℃ 4.75MΩ 50V 62.5mW Thick Film Resistor ±1% ±100ppm/℃ 0402 Chip Resistor - Surface Mount ROHS":
+          - img "no-image"
+          - generic: C2998153
+          - generic: FRC0402F4754TS
+          - generic: Extended
+          - generic: "-55℃~+155℃ 4.75MΩ 50V 62.5mW Thick Film Resistor ±1% ±100ppm/℃ 0402 Chip Resistor - Surface Mount ROHS"
+        - cell:
+      - row " FRC0402F4754TS Stratolink_v1p1_R24_R_0402_1005Metric R24 no-image C2998153 FRC0402F4754TS Extended -55℃~+155℃ 4.75MΩ 50V 62.5mW Thick Film Resistor ±1% ±100ppm/℃ 0402 Chip Resistor - Surface Mount ROHS":
+        - cell "":
+          - checkbox
+          - generic: 
+        - cell "FRC0402F4754TS":
+          - generic: FRC0402F4754TS
+        - cell "Stratolink_v1p1_R24_R_0402_1005Metric":
+          - generic: Stratolink_v1p1_R24_R_0402_1005Metric
+        - cell "R24":
+          - generic: R24
+        - cell "no-image C2998153 FRC0402F4754TS Extended -55℃~+155℃ 4.75MΩ 50V 62.5mW Thick Film Resistor ±1% ±100ppm/℃ 0402 Chip Resistor - Surface Mount ROHS":
+          - img "no-image"
+          - generic: C2998153
+          - generic: FRC0402F4754TS
+          - generic: Extended
+          - generic: "-55℃~+155℃ 4.75MΩ 50V 62.5mW Thick Film Resistor ±1% ±100ppm/℃ 0402 Chip Resistor - Surface Mount ROHS"
+        - cell:
+      - row " FRC0402F4754TS Stratolink_v1p1_R3_R_0402_1005Metric R3 no-image C2998153 FRC0402F4754TS Extended -55℃~+155℃ 4.75MΩ 50V 62.5mW Thick Film Resistor ±1% ±100ppm/℃ 0402 Chip Resistor - Surface Mount ROHS":
+        - cell "":
+          - checkbox
+          - generic: 
+        - cell "FRC0402F4754TS":
+          - generic: FRC0402F4754TS
+        - cell "Stratolink_v1p1_R3_R_0402_1005Metric":
+          - generic: Stratolink_v1p1_R3_R_0402_1005Metric
+        - cell "R3":
+          - generic: R3
+        - cell "no-image C2998153 FRC0402F4754TS Extended -55℃~+155℃ 4.75MΩ 50V 62.5mW Thick Film Resistor ±1% ±100ppm/℃ 0402 Chip Resistor - Surface Mount ROHS":
+          - img "no-image"
+          - generic: C2998153
+          - generic: FRC0402F4754TS
+          - generic: Extended
+          - generic: "-55℃~+155℃ 4.75MΩ 50V 62.5mW Thick Film Resistor ±1% ±100ppm/℃ 0402 Chip Resistor - Surface Mount ROHS"
+        - cell:
+      - row "FRC0402F7504TS Stratolink_v1p1_R1_R_0402_1005Metric R1 no-image C3013187 FRC0402F7504TS Extended -55℃~+155℃ 50V 62.5mW 7.5MΩ Thick Film Resistor ±1% ±100ppm/℃ 0402 Chip Resistor - Surface Mount ROHS Stock：65 Parts Cart：0 20 Add  $0.0200":
+        - cell:
+          - checkbox
+        - cell "FRC0402F7504TS":
+          - generic: FRC0402F7504TS
+        - cell "Stratolink_v1p1_R1_R_0402_1005Metric":
+          - generic: Stratolink_v1p1_R1_R_0402_1005Metric
+        - cell "R1":
+          - generic: R1
+        - cell "no-image C3013187 FRC0402F7504TS Extended -55℃~+155℃ 50V 62.5mW 7.5MΩ Thick Film Resistor ±1% ±100ppm/℃ 0402 Chip Resistor - Surface Mount ROHS":
+          - img "no-image"
+          - generic: C3013187
+          - generic: FRC0402F7504TS
+          - generic: Extended
+          - generic: "-55℃~+155℃ 50V 62.5mW 7.5MΩ Thick Film Resistor ±1% ±100ppm/℃ 0402 Chip Resistor - Surface Mount ROHS"
+        - cell "Stock：65 Parts Cart：0":
+          - paragraph: Stock：65
+          - paragraph: Parts Cart：0
+        - cell "20 Add ":
+          - textbox: "20"
+          - button "Add"
+          - generic: 
+        - cell "$0.0200":
+          - generic: $0.0200
+        - cell:
+      - row "GRM1555C1E103JE01D Stratolink_v1p1_C1_C_0402_1005Metric C1 no-image C3855387 GRM1555C1E103JE01D Extended 10nF 25V C0G ±5% 0402 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS Stock：54978 Parts Cart：0 9 Add  $0.7389":
+        - cell:
+          - checkbox
+        - cell "GRM1555C1E103JE01D":
+          - generic: GRM1555C1E103JE01D
+        - cell "Stratolink_v1p1_C1_C_0402_1005Metric":
+          - generic: Stratolink_v1p1_C1_C_0402_1005Metric
+        - cell "C1":
+          - generic: C1
+        - cell "no-image C3855387 GRM1555C1E103JE01D Extended 10nF 25V C0G ±5% 0402 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS":
+          - img "no-image"
+          - generic: C3855387
+          - generic: GRM1555C1E103JE01D
+          - generic: Extended
+          - generic: 10nF 25V C0G ±5% 0402 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS
+        - cell "Stock：54978 Parts Cart：0":
+          - paragraph: Stock：54978
+          - paragraph: Parts Cart：0
+        - cell "9 Add ":
+          - textbox: "9"
+          - button "Add"
+          - generic: 
+        - cell "$0.7389":
+          - generic: $0.7389
+        - cell:
+      - row "MAX-M10S-00B Stratolink_v1p1_U3_XCVR_MAX-M10S-00B U3 no-image C4153167 MAX-M10S-00B Extended LCC-18(9.7x10.1) GNSS Modules ROHS Stock：1164 Parts Cart：0 5 Add  $54.1975":
+        - cell:
+          - checkbox
+        - cell "MAX-M10S-00B":
+          - generic: MAX-M10S-00B
+        - cell "Stratolink_v1p1_U3_XCVR_MAX-M10S-00B":
+          - generic: Stratolink_v1p1_U3_XCVR_MAX-M10S-00B
+        - cell "U3":
+          - generic: U3
+        - cell "no-image C4153167 MAX-M10S-00B Extended LCC-18(9.7x10.1) GNSS Modules ROHS":
+          - img "no-image"
+          - generic: C4153167
+          - generic: MAX-M10S-00B
+          - generic: Extended
+          - generic: LCC-18(9.7x10.1) GNSS Modules ROHS
+        - cell "Stock：1164 Parts Cart：0":
+          - paragraph: Stock：1164
+          - paragraph: Parts Cart：0
+        - cell "5 Add ":
+          - textbox: "5"
+          - button "Add"
+          - generic: 
+        - cell "$54.1975":
+          - generic: $54.1975
+        - cell:
+      - row "PWCWAQ1608F-100KTT INDC1608X90N L2 no-image C436784 PWCWAQ1608F-100KTT Extended 10uH 2.405Ω 280mA 280mA 35MHz Wire-wound chip inductor ±10% 0603 Inductors (SMD) ROHS Stock：8087 Parts Cart：0 9 Add  $0.5040":
+        - cell:
+          - checkbox
+        - cell "PWCWAQ1608F-100KTT":
+          - generic: PWCWAQ1608F-100KTT
+        - cell "INDC1608X90N":
+          - generic: INDC1608X90N
+        - cell "L2":
+          - generic: L2
+        - cell "no-image C436784 PWCWAQ1608F-100KTT Extended 10uH 2.405Ω 280mA 280mA 35MHz Wire-wound chip inductor ±10% 0603 Inductors (SMD) ROHS":
+          - img "no-image"
+          - generic: C436784
+          - generic: PWCWAQ1608F-100KTT
+          - generic: Extended
+          - generic: 10uH 2.405Ω 280mA 280mA 35MHz Wire-wound chip inductor ±10% 0603 Inductors (SMD) ROHS
+        - cell "Stock：8087 Parts Cart：0":
+          - paragraph: Stock：8087
+          - paragraph: Parts Cart：0
+        - cell "9 Add ":
+          - textbox: "9"
+          - button "Add"
+          - generic: 
+        - cell "$0.5040":
+          - generic: $0.5040
+        - cell:
+      - row "GR0402F4M42TAG00 Stratolink_v1p1_R5_R_0402_1005Metric R5 no-image C49654874 GR0402F4M42TAG00 Extended -55℃~+155℃ 4.42MΩ 50V 62.5mW Thick Film Resistor ±1% ±100ppm/℃ 0402 Chip Resistor - Surface Mount ROHS Stock：18389 Parts Cart：0 20 Add  $0.0180":
+        - cell:
+          - checkbox
+        - cell "GR0402F4M42TAG00":
+          - generic: GR0402F4M42TAG00
+        - cell "Stratolink_v1p1_R5_R_0402_1005Metric":
+          - generic: Stratolink_v1p1_R5_R_0402_1005Metric
+        - cell "R5":
+          - generic: R5
+        - cell "no-image C49654874 GR0402F4M42TAG00 Extended -55℃~+155℃ 4.42MΩ 50V 62.5mW Thick Film Resistor ±1% ±100ppm/℃ 0402 Chip Resistor - Surface Mount ROHS":
+          - img "no-image"
+          - generic: C49654874
+          - generic: GR0402F4M42TAG00
+          - generic: Extended
+          - generic: "-55℃~+155℃ 4.42MΩ 50V 62.5mW Thick Film Resistor ±1% ±100ppm/℃ 0402 Chip Resistor - Surface Mount ROHS"
+        - cell "Stock：18389 Parts Cart：0":
+          - paragraph: Stock：18389
+          - paragraph: Parts Cart：0
+        - cell "20 Add ":
+          - textbox: "20"
+          - button "Add"
+          - generic: 
+        - cell "$0.0180":
+          - generic: $0.0180
+        - cell:
+      - row "BQ25570RGRR Stratolink_v1p1_U1_QFN50P350X350X100-21N U1 no-image C506250 BQ25570RGRR Extended -40℃~+125℃ 1.95V 285mA 2V~5.5V 488nA Charging IC、Protection IC Not supported Supercapacitor、Lithium Battery VQFN-20-EP(3.5x3.5) Battery Management ROHS Stock：369 Parts Cart：0 5 Add  $29.1705":
+        - cell:
+          - checkbox
+        - cell "BQ25570RGRR":
+          - generic: BQ25570RGRR
+        - cell "Stratolink_v1p1_U1_QFN50P350X350X100-21N":
+          - generic: Stratolink_v1p1_U1_QFN50P350X350X100-21N
+        - cell "U1":
+          - generic: U1
+        - cell "no-image C506250 BQ25570RGRR Extended -40℃~+125℃ 1.95V 285mA 2V~5.5V 488nA Charging IC、Protection IC Not supported Supercapacitor、Lithium Battery VQFN-20-EP(3.5x3.5) Battery Management ROHS":
+          - img "no-image"
+          - generic: C506250
+          - generic: BQ25570RGRR
+          - generic: Extended
+          - generic: "-40℃~+125℃ 1.95V 285mA 2V~5.5V 488nA Charging IC、Protection IC Not supported Supercapacitor、Lithium Battery VQFN-20-EP(3.5x3.5) Battery Management ROHS"
+        - cell "Stock：369 Parts Cart：0":
+          - paragraph: Stock：369
+          - paragraph: Parts Cart：0
+        - cell "5 Add ":
+          - textbox: "5"
+          - button "Add"
+          - generic: 
+        - cell "$29.1705":
+          - generic: $29.1705
+        - cell:
+      - row " PESD5V0U1BB Stratolink_v1p1_D3_D_SOD-523 D3 no-image C5272735 PESD5V0U1BB Extended 0.5pF 18V 1uA 200W@8/20us 5V 6V ESD IEC 61000-4-2、IEC 61000-4-5、IEC 61000-4-4 SOD-523 ESD and Surge Protection (TVS/ESD) ROHS Stock：1185 Parts Cart：0 14 Add  $0.5768":
+        - cell "":
+          - checkbox
+          - generic: 
+        - cell "PESD5V0U1BB":
+          - generic: PESD5V0U1BB
+        - cell "Stratolink_v1p1_D3_D_SOD-523":
+          - generic: Stratolink_v1p1_D3_D_SOD-523
+        - cell "D3":
+          - generic: D3
+        - cell "no-image C5272735 PESD5V0U1BB Extended 0.5pF 18V 1uA 200W@8/20us 5V 6V ESD IEC 61000-4-2、IEC 61000-4-5、IEC 61000-4-4 SOD-523 ESD and Surge Protection (TVS/ESD) ROHS":
+          - img "no-image"
+          - generic: C5272735
+          - generic: PESD5V0U1BB
+          - generic: Extended
+          - generic: 0.5pF 18V 1uA 200W@8/20us 5V 6V ESD IEC 61000-4-2、IEC 61000-4-5、IEC 61000-4-4 SOD-523 ESD and Surge Protection (TVS/ESD) ROHS
+        - cell "Stock：1185 Parts Cart：0":
+          - paragraph: Stock：1185
+          - paragraph: Parts Cart：0
+        - cell "14 Add ":
+          - textbox: "14"
+          - button "Add"
+          - generic: 
+        - cell "$0.5768":
+          - generic: $0.5768
+        - cell:
+      - row " PESD5V0U1BB Stratolink_v1p1_D1_D_SOD-523 D1 no-image C5272735 PESD5V0U1BB Extended 0.5pF 18V 1uA 200W@8/20us 5V 6V ESD IEC 61000-4-2、IEC 61000-4-5、IEC 61000-4-4 SOD-523 ESD and Surge Protection (TVS/ESD) ROHS":
+        - cell "":
+          - checkbox
+          - generic: 
+        - cell "PESD5V0U1BB":
+          - generic: PESD5V0U1BB
+        - cell "Stratolink_v1p1_D1_D_SOD-523":
+          - generic: Stratolink_v1p1_D1_D_SOD-523
+        - cell "D1":
+          - generic: D1
+        - cell "no-image C5272735 PESD5V0U1BB Extended 0.5pF 18V 1uA 200W@8/20us 5V 6V ESD IEC 61000-4-2、IEC 61000-4-5、IEC 61000-4-4 SOD-523 ESD and Surge Protection (TVS/ESD) ROHS":
+          - img "no-image"
+          - generic: C5272735
+          - generic: PESD5V0U1BB
+          - generic: Extended
+          - generic: 0.5pF 18V 1uA 200W@8/20us 5V 6V ESD IEC 61000-4-2、IEC 61000-4-5、IEC 61000-4-4 SOD-523 ESD and Surge Protection (TVS/ESD) ROHS
+        - cell:
+      - row "LPS4018-223MRC Stratolink_v1p1_L1_IND_LPS4018-223MRC L1 no-image C5278935 LPS4018-223MRC Extended 22uH 360mΩ 650mA 740mA Magnetic Shielded Inductor ±20% SMD,3.9x3.9mm Power Inductors ROHS Stock：3770 Parts Cart：0 5 Add  $5.9695":
+        - cell:
+          - checkbox
+        - cell "LPS4018-223MRC":
+          - generic: LPS4018-223MRC
+        - cell "Stratolink_v1p1_L1_IND_LPS4018-223MRC":
+          - generic: Stratolink_v1p1_L1_IND_LPS4018-223MRC
+        - cell "L1":
+          - generic: L1
+        - cell "no-image C5278935 LPS4018-223MRC Extended 22uH 360mΩ 650mA 740mA Magnetic Shielded Inductor ±20% SMD,3.9x3.9mm Power Inductors ROHS":
+          - img "no-image"
+          - generic: C5278935
+          - generic: LPS4018-223MRC
+          - generic: Extended
+          - generic: 22uH 360mΩ 650mA 740mA Magnetic Shielded Inductor ±20% SMD,3.9x3.9mm Power Inductors ROHS
+        - cell "Stock：3770 Parts Cart：0":
+          - paragraph: Stock：3770
+          - paragraph: Parts Cart：0
+        - cell "5 Add ":
+          - textbox: "5"
+          - button "Add"
+          - generic: 
+        - cell "$5.9695":
+          - generic: $5.9695
+        - cell:
+      - row "TLV8801DBVT Stratolink_v1p1_U8_SOT-23-5 U8 no-image C544879 TLV8801DBVT Extended -40℃~+125℃ 0.1pA 0.1pA 1 1.5V/ms 1.7V~5.5V 1uV/℃ 340nV/√Hz@100Hz 4.5mV 450nA 87dB Built-in compensation、EMI filtering/RF suppression Rail-to-rail output SOT-23-5 Operational Amplifier ROHS Stock：152 Parts Cart：0 5 Add  $1.7535":
+        - cell:
+          - checkbox
+        - cell "TLV8801DBVT":
+          - generic: TLV8801DBVT
+        - cell "Stratolink_v1p1_U8_SOT-23-5":
+          - generic: Stratolink_v1p1_U8_SOT-23-5
+        - cell "U8":
+          - generic: U8
+        - cell "no-image C544879 TLV8801DBVT Extended -40℃~+125℃ 0.1pA 0.1pA 1 1.5V/ms 1.7V~5.5V 1uV/℃ 340nV/√Hz@100Hz 4.5mV 450nA 87dB Built-in compensation、EMI filtering/RF suppression Rail-to-rail output SOT-23-5 Operational Amplifier ROHS":
+          - img "no-image"
+          - generic: C544879
+          - generic: TLV8801DBVT
+          - generic: Extended
+          - generic: "-40℃~+125℃ 0.1pA 0.1pA 1 1.5V/ms 1.7V~5.5V 1uV/℃ 340nV/√Hz@100Hz 4.5mV 450nA 87dB Built-in compensation、EMI filtering/RF suppression Rail-to-rail output SOT-23-5 Operational Amplifier ROHS"
+        - cell "Stock：152 Parts Cart：0":
+          - paragraph: Stock：152
+          - paragraph: Parts Cart：0
+        - cell "5 Add ":
+          - textbox: "5"
+          - button "Add"
+          - generic: 
+        - cell "$1.7535":
+          - generic: $1.7535
+        - cell:
+      - row "CL21A226MAYNNNE Stratolink_v1p1_C6_C_0805_2012Metric C6 no-image C602037 CL21A226MAYNNNE Extended 22uF 25V X5R ±20% 0805 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS Stock：511444 Parts Cart：0 20 Add  $3.1920":
+        - cell:
+          - checkbox
+        - cell "CL21A226MAYNNNE":
+          - generic: CL21A226MAYNNNE
+        - cell "Stratolink_v1p1_C6_C_0805_2012Metric":
+          - generic: Stratolink_v1p1_C6_C_0805_2012Metric
+        - cell "C6":
+          - generic: C6
+        - cell "no-image C602037 CL21A226MAYNNNE Extended 22uF 25V X5R ±20% 0805 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS":
+          - img "no-image"
+          - generic: C602037
+          - generic: CL21A226MAYNNNE
+          - generic: Extended
+          - generic: 22uF 25V X5R ±20% 0805 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS
+        - cell "Stock：511444 Parts Cart：0":
+          - paragraph: Stock：511444
+          - paragraph: Parts Cart：0
+        - cell "20 Add ":
+          - textbox: "20"
+          - button "Add"
+          - generic: 
+        - cell "$3.1920":
+          - generic: $3.1920
+        - cell:
+      - row " RC0402FR-0710KL Stratolink_v1p1_R18_R_0402_1005Metric R18 no-image C60490 RC0402FR-0710KL Extended -55℃~+155℃ 10kΩ 50V 62.5mW Thick Film Resistor ±1% ±100ppm/℃ 0402 Chip Resistor - Surface Mount ROHS Stock：8400662 Parts Cart：0 20 Add  $0.0460":
+        - cell "":
+          - checkbox
+          - generic: 
+        - cell "RC0402FR-0710KL":
+          - generic: RC0402FR-0710KL
+        - cell "Stratolink_v1p1_R18_R_0402_1005Metric":
+          - generic: Stratolink_v1p1_R18_R_0402_1005Metric
+        - cell "R18":
+          - generic: R18
+        - cell "no-image C60490 RC0402FR-0710KL Extended -55℃~+155℃ 10kΩ 50V 62.5mW Thick Film Resistor ±1% ±100ppm/℃ 0402 Chip Resistor - Surface Mount ROHS":
+          - img "no-image"
+          - generic: C60490
+          - generic: RC0402FR-0710KL
+          - generic: Extended
+          - generic: "-55℃~+155℃ 10kΩ 50V 62.5mW Thick Film Resistor ±1% ±100ppm/℃ 0402 Chip Resistor - Surface Mount ROHS"
+        - cell "Stock：8400662 Parts Cart：0":
+          - paragraph: Stock：8400662
+          - paragraph: Parts Cart：0
+        - cell "20 Add ":
+          - textbox: "20"
+          - button "Add"
+          - generic: 
+        - cell "$0.0460":
+          - generic: $0.0460
+        - cell:
+      - row " RC0402FR-0710KL Stratolink_v1p1_R10_R_0402_1005Metric R10 no-image C60490 RC0402FR-0710KL Extended -55℃~+155℃ 10kΩ 50V 62.5mW Thick Film Resistor ±1% ±100ppm/℃ 0402 Chip Resistor - Surface Mount ROHS":
+        - cell "":
+          - checkbox
+          - generic: 
+        - cell "RC0402FR-0710KL":
+          - generic: RC0402FR-0710KL
+        - cell "Stratolink_v1p1_R10_R_0402_1005Metric":
+          - generic: Stratolink_v1p1_R10_R_0402_1005Metric
+        - cell "R10":
+          - generic: R10
+        - cell "no-image C60490 RC0402FR-0710KL Extended -55℃~+155℃ 10kΩ 50V 62.5mW Thick Film Resistor ±1% ±100ppm/℃ 0402 Chip Resistor - Surface Mount ROHS":
+          - img "no-image"
+          - generic: C60490
+          - generic: RC0402FR-0710KL
+          - generic: Extended
+          - generic: "-55℃~+155℃ 10kΩ 50V 62.5mW Thick Film Resistor ±1% ±100ppm/℃ 0402 Chip Resistor - Surface Mount ROHS"
+        - cell:
+      - row "RC0402FR-07100KL Stratolink_v1p1_R8_R_0402_1005Metric R8 no-image C60491 RC0402FR-07100KL Extended -55℃~+155℃ 100kΩ 50V 62.5mW Thick Film Resistor ±1% ±100ppm/℃ 0402 Chip Resistor - Surface Mount ROHS Stock：8802720 Parts Cart：0 20 Add  $0.0460":
+        - cell:
+          - checkbox
+        - cell "RC0402FR-07100KL":
+          - generic: RC0402FR-07100KL
+        - cell "Stratolink_v1p1_R8_R_0402_1005Metric":
+          - generic: Stratolink_v1p1_R8_R_0402_1005Metric
+        - cell "R8":
+          - generic: R8
+        - cell "no-image C60491 RC0402FR-07100KL Extended -55℃~+155℃ 100kΩ 50V 62.5mW Thick Film Resistor ±1% ±100ppm/℃ 0402 Chip Resistor - Surface Mount ROHS":
+          - img "no-image"
+          - generic: C60491
+          - generic: RC0402FR-07100KL
+          - generic: Extended
+          - generic: "-55℃~+155℃ 100kΩ 50V 62.5mW Thick Film Resistor ±1% ±100ppm/℃ 0402 Chip Resistor - Surface Mount ROHS"
+        - cell "Stock：8802720 Parts Cart：0":
+          - paragraph: Stock：8802720
+          - paragraph: Parts Cart：0
+        - cell "20 Add ":
+          - textbox: "20"
+          - button "Add"
+          - generic: 
+        - cell "$0.0460":
+          - generic: $0.0460
+        - cell:
+      - row "BLM15AG601SN1D Stratolink_v1p1_FB1_C_0402_1005Metric FB1 no-image C76884 BLM15AG601SN1D Extended -55℃~+125℃ 1 300mA 520mΩ 600Ω@100MHz ±25% 0402 Ferrite Beads ROHS Stock：1358302 Parts Cart：0 20 Add  $0.1800":
+        - cell:
+          - checkbox
+        - cell "BLM15AG601SN1D":
+          - generic: BLM15AG601SN1D
+        - cell "Stratolink_v1p1_FB1_C_0402_1005Metric":
+          - generic: Stratolink_v1p1_FB1_C_0402_1005Metric
+        - cell "FB1":
+          - generic: FB1
+        - cell "no-image C76884 BLM15AG601SN1D Extended -55℃~+125℃ 1 300mA 520mΩ 600Ω@100MHz ±25% 0402 Ferrite Beads ROHS":
+          - img "no-image"
+          - generic: C76884
+          - generic: BLM15AG601SN1D
+          - generic: Extended
+          - generic: "-55℃~+125℃ 1 300mA 520mΩ 600Ω@100MHz ±25% 0402 Ferrite Beads ROHS"
+        - cell "Stock：1358302 Parts Cart：0":
+          - paragraph: Stock：1358302
+          - paragraph: Parts Cart：0
+        - cell "20 Add ":
+          - textbox: "20"
+          - button "Add"
+          - generic: 
+        - cell "$0.1800":
+          - generic: $0.1800
+        - cell:
+      - row " Pre-order Items Price for pre-order items are for reference only. The confirmed price will be quoted within 48 hours after finish the payment.":
+        - cell " Pre-order Items Price for pre-order items are for reference only. The confirmed price will be quoted within 48 hours after finish the payment.":
+          - generic: 
+          - text: Pre-order Items Price for pre-order items are for reference only. The confirmed price will be quoted within 48 hours after finish the payment.
+      - row "RAK3172-9-SM-NI Stratolink_v1p1_U2_RAK3172 U2 no-image C18548052 RAK3172-9-SM-NI Extended -40℃~+85℃ 15km 2V~3.6V 5.22mA 87mA IPEX interface LoRa SPI、UART、I2C SMD,15.5x15mm LoRa Modules ROHS Stock：1 Parts Cart：0 MOQ：2 5 Add  $39.4535":
+        - cell:
+          - checkbox
+        - cell "RAK3172-9-SM-NI":
+          - generic: RAK3172-9-SM-NI
+        - cell "Stratolink_v1p1_U2_RAK3172":
+          - generic: Stratolink_v1p1_U2_RAK3172
+        - cell "U2":
+          - generic: U2
+        - cell "no-image C18548052 RAK3172-9-SM-NI Extended -40℃~+85℃ 15km 2V~3.6V 5.22mA 87mA IPEX interface LoRa SPI、UART、I2C SMD,15.5x15mm LoRa Modules ROHS":
+          - img "no-image"
+          - generic: C18548052
+          - generic: RAK3172-9-SM-NI
+          - generic: Extended
+          - generic: "-40℃~+85℃ 15km 2V~3.6V 5.22mA 87mA IPEX interface LoRa SPI、UART、I2C SMD,15.5x15mm LoRa Modules ROHS"
+        - cell "Stock：1 Parts Cart：0 MOQ：2":
+          - paragraph: Stock：1
+          - paragraph: Parts Cart：0
+          - paragraph: MOQ：2
+        - cell "5 Add ":
+          - textbox: "5"
+          - button "Add"
+          - generic: 
+        - cell "$39.4535":
+          - generic: $39.4535
+        - cell:
+      - row "0402WGF3654TCE Stratolink_v1p1_R4_R_0402_1005Metric R4 no-image C2766827 0402WGF3654TCE Extended -55℃~+155℃ 3.65MΩ 50V 62.5mW Thick Film Resistor ±1% ±100ppm/℃ 0402 Chip Resistor - Surface Mount ROHS Stock：0 Parts Cart：0 MOQ：10000 10000 Add  $5.0000":
+        - cell:
+          - checkbox
+        - cell "0402WGF3654TCE":
+          - generic: 0402WGF3654TCE
+        - cell "Stratolink_v1p1_R4_R_0402_1005Metric":
+          - generic: Stratolink_v1p1_R4_R_0402_1005Metric
+        - cell "R4":
+          - generic: R4
+        - cell "no-image C2766827 0402WGF3654TCE Extended -55℃~+155℃ 3.65MΩ 50V 62.5mW Thick Film Resistor ±1% ±100ppm/℃ 0402 Chip Resistor - Surface Mount ROHS":
+          - img "no-image"
+          - generic: C2766827
+          - generic: 0402WGF3654TCE
+          - generic: Extended
+          - generic: "-55℃~+155℃ 3.65MΩ 50V 62.5mW Thick Film Resistor ±1% ±100ppm/℃ 0402 Chip Resistor - Surface Mount ROHS"
+        - cell "Stock：0 Parts Cart：0 MOQ：10000":
+          - paragraph: Stock：0
+          - paragraph: Parts Cart：0
+          - paragraph: MOQ：10000
+        - cell "10000 Add ":
+          - textbox: "10000"
+          - button "Add"
+          - generic: 
+        - cell "$5.0000":
+          - generic: $5.0000
+        - cell:
+      - row "0402WGF8254TCE Stratolink_v1p1_R6_R_0402_1005Metric R6 no-image C423131 0402WGF8254TCE Extended -55℃~+155℃ 50V 62.5mW 8.25MΩ Thick Film Resistor ±1% ±100ppm/℃ 0402 Chip Resistor - Surface Mount ROHS Stock：24 Parts Cart：0 MOQ：10000 10000 Add  $4.0000":
+        - cell:
+          - checkbox
+        - cell "0402WGF8254TCE":
+          - generic: 0402WGF8254TCE
+        - cell "Stratolink_v1p1_R6_R_0402_1005Metric":
+          - generic: Stratolink_v1p1_R6_R_0402_1005Metric
+        - cell "R6":
+          - generic: R6
+        - cell "no-image C423131 0402WGF8254TCE Extended -55℃~+155℃ 50V 62.5mW 8.25MΩ Thick Film Resistor ±1% ±100ppm/℃ 0402 Chip Resistor - Surface Mount ROHS":
+          - img "no-image"
+          - generic: C423131
+          - generic: 0402WGF8254TCE
+          - generic: Extended
+          - generic: "-55℃~+155℃ 50V 62.5mW 8.25MΩ Thick Film Resistor ±1% ±100ppm/℃ 0402 Chip Resistor - Surface Mount ROHS"
+        - cell "Stock：24 Parts Cart：0 MOQ：10000":
+          - paragraph: Stock：24
+          - paragraph: Parts Cart：0
+          - paragraph: MOQ：10000
+        - cell "10000 Add ":
+          - textbox: "10000"
+          - button "Add"
+          - generic: 
+        - cell "$4.0000":
+          - generic: $4.0000
+        - cell:
+      - row "LTR-390UV-01 Stratolink_v1p1_U6_SMD6_LTR-390UV-01_LTO-L U6 no-image C492374 LTR-390UV-01 Extended -40℃~+85℃ 1.7V~3.6V 157klx 18bit I2C Light Intensity Low power/sleep mode、Spectral correction/filtering、High dynamic range measurement、Adjustable gain control、Interrupt/event trigger、Built-in temperature compensation SMD-6P,2x2mm Ambient Light Sensors ROHS Stock：0 Parts Cart：0 MOQ：3 Consign Part  $16.8485":
+        - cell:
+          - checkbox [disabled]
+        - cell "LTR-390UV-01":
+          - generic: LTR-390UV-01
+        - cell "Stratolink_v1p1_U6_SMD6_LTR-390UV-01_LTO-L":
+          - generic: Stratolink_v1p1_U6_SMD6_LTR-390UV-01_LTO-L
+        - cell "U6":
+          - generic: U6
+        - cell "no-image C492374 LTR-390UV-01 Extended -40℃~+85℃ 1.7V~3.6V 157klx 18bit I2C Light Intensity Low power/sleep mode、Spectral correction/filtering、High dynamic range measurement、Adjustable gain control、Interrupt/event trigger、Built-in temperature compensation SMD-6P,2x2mm Ambient Light Sensors ROHS":
+          - img "no-image"
+          - generic: C492374
+          - generic: LTR-390UV-01
+          - generic: Extended
+          - generic: "-40℃~+85℃ 1.7V~3.6V 157klx 18bit I2C Light Intensity Low power/sleep mode、Spectral correction/filtering、High dynamic range measurement、Adjustable gain control、Interrupt/event trigger、Built-in temperature compensation SMD-6P,2x2mm Ambient Light Sensors ROHS"
+        - cell "Stock：0 Parts Cart：0 MOQ：3":
+          - paragraph: Stock：0
+          - paragraph: Parts Cart：0
+          - paragraph: MOQ：3
+        - cell "Consign Part ":
+          - button "Consign Part"
+          - generic: 
+        - cell "$16.8485":
+          - generic: $16.8485
+        - cell:
+  - text: 
+  - generic: Not Matched Parts
+  - table:
+    - rowgroup:
+      - row "Comment Footprint Designator Matched Part Detail Availability Rec. Order Qty Total Cost":
+        - columnheader "Comment":
+          - generic: Comment
+        - columnheader "Footprint":
+          - generic: Footprint
+        - columnheader "Designator":
+          - generic: Designator
+        - columnheader "Matched Part Detail":
+          - generic: Matched Part Detail
+        - columnheader "Availability":
+          - generic: Availability
+        - columnheader "Rec. Order Qty":
+          - generic: Rec. Order Qty
+        - columnheader "Total Cost":
+          - generic: Total Cost
+        - columnheader
+  - table:
+    - rowgroup:
+      - row "Comment Footprint DESIGNATOR No matches found":
+        - cell "Comment":
+          - generic: Comment
+        - cell "Footprint":
+          - generic: Footprint
+        - cell "DESIGNATOR":
+          - generic: DESIGNATOR
+        - cell "No matches found":
+          - generic: No matches found
+        - cell
+        - cell
+        - cell
+        - cell
+  - text: 
+  - text: 
+- contentinfo:
+  - generic: 
+  - text: Online Chat >
+  - generic: Chat with our live agent for fast reply.
+  - generic: "Mon-Fri: 24 hours, Sat: 9am-6pm, GMT+8"
+  - link " Email Us >":
+    - /url: https://jlcpcb.com/help/contact
+    - generic: 
+    - text: Email Us >
+  - text: Contact us at support
+  - generic: 
+  - text: jlcpcb.com
+  - generic: Typically reply within hours.
+  - link " Help Center >":
+    - /url: https://jlcpcb.com/help
+    - generic: 
+    - text: Help Center >
+  - generic: Get instant answers.
+  - generic: 24/7 Available.
+  - generic: Services & Tools
+  - link "Electronic Parts":
+    - /url: https://jlcpcb.com/parts
+  - link "BOM Tool":
+    - /url: https://jlcpcb.com/parts/bom-tool
+  - link "Request a Quote":
+    - /url: https://jlcpcb.com/parts/request-quote
+  - link "Manufacturers":
+    - /url: https://jlcpcb.com/parts/manufacturers
+  - link "PCB Assembly":
+    - /url: https://jlcpcb.com/pcb-assembly
+  - generic: Support
+  - link "Contact Us":
+    - /url: https://jlcpcb.com/help/contact
+  - link "How to Order":
+    - /url: https://jlcpcb.com/help/article/how-to-build-your-own-parts-library-in-jlcpcb
+  - link "User Guides":
+    - /url: https://jlcpcb.com/help/catalog/191-PCBA-Parts-Sourcing
+  - link "Sourcing Tips":
+    - /url: https://jlcpcb.com/blog/category/components-sourcing
+  - link "Payment Methods":
+    - /url: https://jlcpcb.com/payments
+  - generic: Company
+  - link "About Us":
+    - /url: https://jlcpcb.com/about-us
+  - link "Quality Assurance":
+    - /url: https://jlcpcb.com/about-us/quality-control
+  - link "How We Work":
+    - /url: https://jlcpcb.com/about-us/how-it-works
+  - link "Certifications":
+    - /url: https://jlcpcb.com/certifications
+  - link "Security":
+    - /url: https://jlcpcb.com/privacy-security
+  - link "Environment":
+    - /url: https://jlcpcb.com/green-manufacturing
+  - link "JLCAPI":
+    - /url: https://api.jlcpcb.com/
+  - link "News":
+    - /url: https://jlcpcb.com/news
+  - link "Cooperation":
+    - /url: https://jlcpcb.com/cooperation
+  - generic: Electronics
+  - link "EasyEDA":
+    - /url: https://easyeda.com
+  - link "JLCPCB":
+    - /url: https://jlcpcb.com
+  - link "JLCDFM":
+    - /url: https://jlcdfm.com
+  - link "LCSC":
+    - /url: https://www.lcsc.com
+  - link "OSHWLAB":
+    - /url: https://oshwlab.com/
+  - generic: Mechanical
+  - link "JLC3DP":
+    - /url: https://jlc3dp.com
+  - link "JLCCNC":
+    - /url: https://jlccnc.com
+  - link "JLCMC":
+    - /url: https://jlcmc.com
+  - generic: 
+  - generic: Order on JLCONE Desktop, Save $1–$20 Every Time
+  - link " Windows":
+    - /url: https://jlcone.com/download
+    - generic: 
+    - generic: Windows
+  - link " MAC":
+    - /url: https://jlcone.com/download
+    - generic: 
+    - generic: MAC
+  - link " Android":
+    - /url: https://jlcone.com/download#mobile-app
+    - generic: 
+    - generic: Android
+  - link " IOS":
+    - /url: https://jlcone.com/download#mobile-app
+    - generic: 
+    - generic: IOS
+  - generic: CONNECT WITH US
+  - link "":
+    - /url: https://www.facebook.com/jlcpcb
+    - generic: 
+  - link "":
+    - /url: https://twitter.com/jlcpcb
+    - generic: 
+  - link "":
+    - /url: https://www.instagram.com/jlcpcb
+    - generic: 
+  - link "":
+    - /url: https://www.youtube.com/JLCPCB
+    - generic: 
+  - link "":
+    - /url: https://www.linkedin.com/company/jlcpcb
+    - generic: 
+  - link "":
+    - /url: https://www.reddit.com/r/JLCPCBLab/
+    - generic: 
+  - generic: © 2026 JLCPCB.COM All Rights Reserved.
+  - link "Privacy Policy":
+    - /url: https://jlcpcb.com/help/article/Privacy-Policy
+  - link "Terms & Conditions":
+    - /url: https://jlcpcb.com/help/article/Terms-%26-Conditions
+  - link "Cookies Policy":
+    - /url: https://jlcpcb.com/help/article/JLCPCB-Cookie-Notice
+  - link "Do Not Sell or Share My Personal Information":
+    - /url: https://jlcpcb.com/privacy-policy/do-not-sell-or-share-my-personal-information
+- textbox "Write a message"
+- iframe
+- tooltip "chat wave Welcome back, may I help you? Chat Now":
+  - generic: 
+  - img "chat wave"
+  - text: Welcome back, may I help you?
+  - button "Chat Now"

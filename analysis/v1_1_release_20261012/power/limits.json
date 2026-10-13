@@ -1,0 +1,217 @@
+{
+  "pcb_sha256": "ea78337c91c73d27b813f09f74dd2d2993e5a82d09800362d82c49a0c4f3ed96",
+  "actual_resistors_Mohm": {
+    "R1": 8.25,
+    "R2": 4.22,
+    "R3": 4.75,
+    "R4": 3.65,
+    "R5": 4.42,
+    "R6": 8.25,
+    "R7": 4.75
+  },
+  "thresholds": {
+    "existing_charge": {
+      "room_1percent_2percent_screen": {
+        "nominal_V": 5.363281990521327,
+        "minimum_V": 5.187158601191872,
+        "maximum_V": 5.543663744075829
+      },
+      "independent_TCR_100ppm_65K_screen": {
+        "nominal_V": 5.363281990521327,
+        "minimum_V": 5.143134794122331,
+        "maximum_V": 5.591978518784421
+      },
+      "cell_initial_52percent_upper_V": 2.907828829767899,
+      "stack_max_margin_to_5p5_V": -0.09197851878442087
+    },
+    "candidate_7M32_charge": {
+      "room_1percent_2percent_screen": {
+        "nominal_V": 4.963293838862559,
+        "minimum_V": 4.802932358875697,
+        "maximum_V": 5.1274336492891
+      },
+      "independent_TCR_100ppm_65K_screen": {
+        "nominal_V": 4.963293838862559,
+        "minimum_V": 4.763871235512177,
+        "maximum_V": 5.170302031212359
+      },
+      "cell_initial_52percent_upper_V": 2.688557056230427,
+      "stack_max_margin_to_5p5_V": 0.3296979687876407
+    },
+    "reference_7M50_charge": {
+      "room_1percent_2percent_screen": {
+        "nominal_V": 5.040710900473933,
+        "minimum_V": 4.877298728356248,
+        "maximum_V": 5.207994312796209
+      },
+      "independent_TCR_100ppm_65K_screen": {
+        "nominal_V": 5.040710900473933,
+        "minimum_V": 4.837277085565755,
+        "maximum_V": 5.251916835258564
+      },
+      "cell_initial_52percent_upper_V": 2.7309967543344533,
+      "stack_max_margin_to_5p5_V": 0.24808316474143588
+    },
+    "reference_7M68_charge": {
+      "room_1percent_2percent_screen": {
+        "nominal_V": 5.118127962085308,
+        "minimum_V": 4.9516650978367975,
+        "maximum_V": 5.288554976303319
+      },
+      "independent_TCR_100ppm_65K_screen": {
+        "nominal_V": 5.118127962085308,
+        "minimum_V": 4.910682935619333,
+        "maximum_V": 5.33353163930477
+      },
+      "cell_initial_52percent_upper_V": 2.7734364524384802,
+      "stack_max_margin_to_5p5_V": 0.1664683606952302
+    },
+    "reference_7M87_charge": {
+      "room_1percent_2percent_screen": {
+        "nominal_V": 5.199845971563981,
+        "minimum_V": 5.03016293228849,
+        "maximum_V": 5.373591232227489
+      },
+      "independent_TCR_100ppm_65K_screen": {
+        "nominal_V": 5.199845971563981,
+        "minimum_V": 4.988166888453665,
+        "maximum_V": 5.41968059913132
+      },
+      "cell_initial_52percent_upper_V": 2.8182339115482864,
+      "stack_max_margin_to_5p5_V": 0.08031940086867984
+    },
+    "buck_output": {
+      "room_1percent_2percent_screen": {
+        "nominal_V": 3.311578947368421,
+        "minimum_V": 3.204564252214695,
+        "maximum_V": 3.4211157894736837
+      },
+      "independent_TCR_100ppm_65K_screen": {
+        "nominal_V": 3.311578947368421,
+        "minimum_V": 3.1784898008696474,
+        "maximum_V": 3.4497316981431942
+      }
+    },
+    "good_falling": {
+      "room_1percent_2percent_screen": {
+        "nominal_V": 2.510339366515837,
+        "minimum_V": 2.4348982706867974,
+        "maximum_V": 2.5873410256410256
+      },
+      "independent_TCR_100ppm_65K_screen": {
+        "nominal_V": 2.510339366515837,
+        "minimum_V": 2.4187648603351546,
+        "maximum_V": 2.6050469474662226
+      }
+    },
+    "good_rising": {
+      "room_1percent_2percent_screen": {
+        "nominal_V": 3.5095475113122174,
+        "minimum_V": 3.394731678688231,
+        "maximum_V": 3.6271230769230765
+      },
+      "independent_TCR_100ppm_65K_screen": {
+        "nominal_V": 3.5095475113122174,
+        "minimum_V": 3.3662010161716425,
+        "maximum_V": 3.658434601835004
+      }
+    }
+  },
+  "solar": {
+    "parallel_nameplate_W": 0.48,
+    "recommended_input_W": 0.4,
+    "peak_absolute_input_W": 0.51,
+    "recommended_Vin_V": 5.1,
+    "absolute_Vin_V": 5.5,
+    "configured_mppt_fraction": 0.8,
+    "minimum_boost_headroom_V": 0.4,
+    "proposed_low_corner_boost_Vin_ceiling_V": 4.3638712355121765,
+    "implied_Voc_ceiling_by_headroom_only_V": 5.45483904439022,
+    "scope": "Panel4.8V label is ambiguous Voc/Vmp; actual coldVoc and available power not characterized. Open-circuit sampling must itself respect Vin ratings."
+  },
+  "buck": {
+    "shared_rail_voltage_rating_MAXM10S_V": 3.6,
+    "output_current_min_93mA_typ_110mA_spec_conditions": "VSTOR3.3V,VOUT1.8V; do not assume a guaranteed3.3V/cold current budget",
+    "radio_GNSS_concurrent_load_requires_measurement": true
+  },
+  "passive_balance_sensitivity": [
+    {
+      "per_cell_R_ohm": 10000,
+      "stack_shunt_current_at_upper_ua": 258.51510156061795,
+      "allowable_cell_leakage_difference_at_upper_ua": 32.96979687876407,
+      "RC_only_minC_runtime_from_lower_to3p5_h": 1.370211795478081
+    },
+    {
+      "per_cell_R_ohm": 39000,
+      "stack_shunt_current_at_upper_ua": 66.28592347708152,
+      "allowable_cell_leakage_difference_at_upper_ua": 8.453794071477967,
+      "RC_only_minC_runtime_from_lower_to3p5_h": 5.3438260023645165
+    },
+    {
+      "per_cell_R_ohm": 100000,
+      "stack_shunt_current_at_upper_ua": 25.8515101560618,
+      "allowable_cell_leakage_difference_at_upper_ua": 3.296979687876407,
+      "RC_only_minC_runtime_from_lower_to3p5_h": 13.702117954780812
+    },
+    {
+      "per_cell_R_ohm": 470000,
+      "stack_shunt_current_at_upper_ua": 5.500321309800382,
+      "allowable_cell_leakage_difference_at_upper_ua": 0.7014850399737036,
+      "RC_only_minC_runtime_from_lower_to3p5_h": 64.3999543874698
+    },
+    {
+      "per_cell_R_ohm": 1000000,
+      "stack_shunt_current_at_upper_ua": 2.5851510156061797,
+      "allowable_cell_leakage_difference_at_upper_ua": 0.3296979687876407,
+      "RC_only_minC_runtime_from_lower_to3p5_h": 137.02117954780812
+    }
+  ],
+  "active_balance_screen": {
+    "topology": "CAP-XX Fig7; TLV8801 follower with feedback before22ohm isolation resistor; 10Mohm equal divider; 100nF local bypass",
+    "reference_max_fraction": 0.508249463784854,
+    "high_cell_screen_V": 2.632303234969423,
+    "high_cell_margin_V": 0.11769676503057713,
+    "divider_max_current_uA": 0.26283479135656307,
+    "initial_fourpercent_imbalance_22ohm_current_demand_mA": 4.700274573829418,
+    "rated_supply_max_V": 5.5,
+    "supply_max_margin_V": 0.3296979687876407,
+    "low_supply_min_V": 1.7,
+    "half_stack_within_specified_common_mode_above_V": 1.8,
+    "typical_IC_Iq_uA": 0.45,
+    "Iq_table_max_25C_3p3V_uA": 0.7,
+    "typical_current_plus_divider_uA": 0.7128347913565631,
+    "note": "Offset max4.5mV is at25C; TCR is an independent65K screen. IQ and4.7mA drive are not guaranteed cold/full-voltage bounds. Required balancing current adds to idle current."
+  },
+  "selected_pilot": {
+    "charge_R1_Mohm": 7.5,
+    "divider_each_Mohm": 4.75,
+    "screen": {
+      "nominal_V": 5.040710900473933,
+      "minimum_V": 4.837277085565755,
+      "maximum_V": 5.251916835258564
+    },
+    "high_cell_screen_V": 2.673783915362813,
+    "high_cell_margin_V": 0.0762160846371871,
+    "initial_52percent_cell_V": 2.7309967543344533,
+    "divider_max_current_uA": 0.562070987763746,
+    "typical_IC_plus_divider_uA": 1.012070987763746,
+    "illustrative_endpoint_V": 2.51,
+    "nominal_capacitance_F": 1,
+    "usable_nominal_energy_J": 9.554333191078367,
+    "original_usable_nominal_energy_J": 11.232346854925204,
+    "energy_note": "Same illustrative endpoint and nominal capacitance; stored energy comparison is not night endurance. Offset limit is25C only; cold/ripple qualification remains required.",
+    "usable_energy_reduction_fraction": 0.14939119006203538
+  },
+  "assertions": {
+    "existing_charge_room_corner_exceeds_5p5": true,
+    "candidate_7M32_stack_screen_below5p5": true,
+    "candidate_7M32_initial_match_screen_below2p75": true,
+    "buck_screen_below_MAXM10S3p6": true
+  },
+  "limitations": [
+    "No bounded cold/aged cell leakage mismatch: a total-stack ceiling alone does not establish long-term individual-cell safety.",
+    "Two source readings from a working board cannot establish worst-case tolerances for15 future assemblies.",
+    "The EVM method is a screening calculation; arbitrary1% divider parts do not inherit the datasheet\u00b12% specification conditioned on0.1% resistors.",
+    "Footnote voltage headroom and input power limits coexist; they are not a claim of automatic protection."
+  ]
+}

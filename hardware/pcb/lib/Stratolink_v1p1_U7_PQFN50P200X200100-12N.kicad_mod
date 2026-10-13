@@ -1,0 +1,489 @@
+(footprint "Stratolink_v1p1_U7_PQFN50P200X200100-12N"
+	(version 20260206)
+	(generator "pcbnew")
+	(generator_version "10.0")
+	(layer "F.Cu")
+	(property "Reference" "U7"
+		(at 0.261539 -2.02186 0)
+		(layer "F.SilkS")
+		(hide yes)
+		(uuid "4f60b92c-a07b-47c7-b731-243eff9d2fbb")
+		(effects
+			(font
+				(size 0.810205 0.810205)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Value" "LIS2DH12TR"
+		(at 8.69633 1.89168 0)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "63763501-9702-4f6c-83fc-5c76d4050344")
+		(effects
+			(font
+				(size 0.810409 0.810409)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Datasheet" ""
+		(at 0 0 0)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "f7d3edf1-8b6e-4bb3-83a9-eb50e69c6d9b")
+		(effects
+			(font
+				(size 1.27 1.27)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Description" "LIS2DH12TR three-axis low-power accelerometer"
+		(at 0 0 0)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "319b649f-3e98-4e0a-8829-099d5d5e8aa9")
+		(effects
+			(font
+				(size 1.27 1.27)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "MF" "STMicroelectronics"
+		(at 0 0 0)
+		(unlocked yes)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "8812845f-b1a0-43c1-a987-6285abdd6ff8")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "DESCRIPTION" "LIS2DH12TR three-axis low-power accelerometer"
+		(at 0 0 0)
+		(unlocked yes)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "55e2e6d0-0977-47b8-98ce-d60bd5cdc78a")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "PACKAGE" "LGA-12 STMicroelectronics"
+		(at 0 0 0)
+		(unlocked yes)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "f96275be-7cd0-4588-abf7-593008ce2389")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "PRICE" "0.87 USD"
+		(at 0 0 0)
+		(unlocked yes)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "fa623095-eb25-487a-b688-c16c00197cf8")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Package" "LGA-12 STMicroelectronics"
+		(at 0 0 0)
+		(unlocked yes)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "cbe02cfb-f69b-41de-a4bb-eb6aff8dd082")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Check_prices" "https://www.snapeda.com/parts/LIS2DH12TR/STMicroelectronics/view-part/?ref=eda"
+		(at 0 0 0)
+		(unlocked yes)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "0cbea19a-e8cb-473e-817b-5c46cd2dcdff")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Price" "None"
+		(at 0 0 0)
+		(unlocked yes)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "e3ee09d5-20ea-4c6d-a82b-bb56a8601305")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "SnapEDA_Link" "https://www.snapeda.com/parts/LIS2DH12TR/STMicroelectronics/view-part/?ref=snap"
+		(at 0 0 0)
+		(unlocked yes)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "9b4ef1b7-77e3-4053-a649-4ac3af9fe64f")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "MP" "LIS2DH12TR"
+		(at 0 0 0)
+		(unlocked yes)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "c276de47-5acc-4093-adf4-70c83a8c816e")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Availability" "In Stock"
+		(at 0 0 0)
+		(unlocked yes)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "862ed5a7-d667-4032-9ac5-dec82b64b28c")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "AVAILABILITY" "Good"
+		(at 0 0 0)
+		(unlocked yes)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "6e6ff780-2ea8-4680-a2bc-757b82d6325e")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Description_1" "LIS2DH12TR three-axis low-power accelerometer"
+		(at 0 0 0)
+		(unlocked yes)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "2f7d1d41-f321-404c-9db5-364eccf674ad")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Manufacturer" "STMicroelectronics"
+		(at 0 0 270)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "918b07c4-a9e2-4751-ad64-28858ac513f2")
+		(effects
+			(font
+				(size 1.27 1.27)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Manufacturer_Part_Number" "LIS2DH12TR"
+		(at 0 0 270)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "e41cdb5a-698a-430b-b2ac-d7838740891b")
+		(effects
+			(font
+				(size 1.27 1.27)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Supplier" "LCSC"
+		(at 0 0 270)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "2202f982-b28c-4bbd-904b-c94e0e5029a8")
+		(effects
+			(font
+				(size 1.27 1.27)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "LCSC" "C110926"
+		(at 0 0 270)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "b52b06a2-207e-453f-ab72-0911aac3e82e")
+		(effects
+			(font
+				(size 1.27 1.27)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Supplier Part" "C110926"
+		(at 0 0 270)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "a20ae757-90c3-4e88-9852-09775f0337fc")
+		(effects
+			(font
+				(size 1.27 1.27)
+				(thickness 0.15)
+			)
+		)
+	)
+	(sheetname "Root")
+	(sheetfile "stratolink.kicad_sch")
+	(solder_paste_margin_ratio -0.05)
+	(attr smd)
+	(duplicate_pad_numbers_are_jumpers no)
+	(fp_line
+		(start -1.24 -1.24)
+		(end 1.24 -1.24)
+		(stroke
+			(width 0.05)
+			(type solid)
+		)
+		(layer "F.CrtYd")
+		(uuid "b2e50552-c8a2-4e3e-905f-eb1ef29dd8f2")
+	)
+	(fp_line
+		(start -1.24 1.24)
+		(end -1.24 -1.24)
+		(stroke
+			(width 0.05)
+			(type solid)
+		)
+		(layer "F.CrtYd")
+		(uuid "4e7123a2-6aaf-42ae-a76d-86c89417adf6")
+	)
+	(fp_line
+		(start 1.24 -1.24)
+		(end 1.24 1.24)
+		(stroke
+			(width 0.05)
+			(type solid)
+		)
+		(layer "F.CrtYd")
+		(uuid "610289db-1697-468d-a4ee-8d7b28b847ee")
+	)
+	(fp_line
+		(start 1.24 1.24)
+		(end -1.24 1.24)
+		(stroke
+			(width 0.05)
+			(type solid)
+		)
+		(layer "F.CrtYd")
+		(uuid "3afa1140-dbe3-47ec-b190-a6502c1ea4c8")
+	)
+	(fp_line
+		(start -1.32 -1.099999)
+		(end -1.27 -1.1)
+		(stroke
+			(width 0.127)
+			(type solid)
+		)
+		(layer "F.Fab")
+		(uuid "a1c45813-e55f-4497-8a81-695d2a68a335")
+	)
+	(fp_line
+		(start -1.08 -1.08)
+		(end 1.08 -1.08)
+		(stroke
+			(width 0.127)
+			(type solid)
+		)
+		(layer "F.Fab")
+		(uuid "e9cea2ff-043d-4673-9d1f-bb6b035208a6")
+	)
+	(fp_line
+		(start -1.08 1.08)
+		(end -1.08 -1.08)
+		(stroke
+			(width 0.127)
+			(type solid)
+		)
+		(layer "F.Fab")
+		(uuid "f52db5c0-ac6d-4b49-bbfd-9eb2997c6348")
+	)
+	(fp_line
+		(start 1.08 -1.08)
+		(end 1.08 1.08)
+		(stroke
+			(width 0.127)
+			(type solid)
+		)
+		(layer "F.Fab")
+		(uuid "db39b67a-bc01-4a65-9b2c-498378242eaa")
+	)
+	(fp_line
+		(start 1.08 1.08)
+		(end -1.08 1.08)
+		(stroke
+			(width 0.127)
+			(type solid)
+		)
+		(layer "F.Fab")
+		(uuid "934fead8-ab4f-44bc-94f8-8d74f54a5780")
+	)
+	(fp_circle
+		(center -0.780001 -0.8)
+		(end -0.73 -0.800001)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(fill no)
+		(layer "F.Fab")
+		(uuid "7bd3b97e-94b1-4033-90dd-98637abbe503")
+	)
+	(pad "1" smd roundrect
+		(at -0.764999 -0.75)
+		(size 0.45 0.35)
+		(layers "F.Cu" "F.Mask" "F.Paste")
+		(roundrect_rratio 0.15)
+		(solder_mask_margin 0)
+		(uuid "c15edda3-911a-44fe-9d0e-b38bf0e5970f")
+	)
+	(pad "2" smd roundrect
+		(at -0.765 -0.25)
+		(size 0.45 0.35)
+		(layers "F.Cu" "F.Mask" "F.Paste")
+		(roundrect_rratio 0.15)
+		(solder_mask_margin 0)
+		(uuid "9ba169d3-5736-49df-b848-9088befd6a05")
+	)
+	(pad "3" smd roundrect
+		(at -0.765 0.25)
+		(size 0.45 0.35)
+		(layers "F.Cu" "F.Mask" "F.Paste")
+		(roundrect_rratio 0.15)
+		(solder_mask_margin 0)
+		(zone_connect 0)
+		(uuid "a93cbc1e-4e77-4486-a48b-8187656ae968")
+	)
+	(pad "4" smd roundrect
+		(at -0.765 0.749999)
+		(size 0.45 0.35)
+		(layers "F.Cu" "F.Mask" "F.Paste")
+		(roundrect_rratio 0.15)
+		(solder_mask_margin 0)
+		(uuid "97e63275-6524-4b0c-aa59-358be4aa2e66")
+	)
+	(pad "5" smd roundrect
+		(at -0.265 0.765)
+		(size 0.35 0.45)
+		(layers "F.Cu" "F.Mask" "F.Paste")
+		(roundrect_rratio 0.15)
+		(solder_mask_margin 0)
+		(zone_connect 0)
+		(uuid "885f4db5-7a9b-4845-9096-ed56c7826b71")
+	)
+	(pad "6" smd roundrect
+		(at 0.25 0.765)
+		(size 0.35 0.45)
+		(layers "F.Cu" "F.Mask" "F.Paste")
+		(roundrect_rratio 0.15)
+		(solder_mask_margin 0)
+		(zone_connect 0)
+		(uuid "ddc59d54-538b-43a3-a480-3408e0029eba")
+	)
+	(pad "7" smd roundrect
+		(at 0.764999 0.75)
+		(size 0.45 0.35)
+		(layers "F.Cu" "F.Mask" "F.Paste")
+		(roundrect_rratio 0.15)
+		(solder_mask_margin 0)
+		(zone_connect 0)
+		(uuid "16f1a707-a926-4839-8937-9c29f4503070")
+	)
+	(pad "8" smd roundrect
+		(at 0.765 0.25)
+		(size 0.45 0.35)
+		(layers "F.Cu" "F.Mask" "F.Paste")
+		(roundrect_rratio 0.15)
+		(solder_mask_margin 0)
+		(zone_connect 0)
+		(uuid "77d55d14-93f0-45c2-9c41-d0881e10a934")
+	)
+	(pad "9" smd roundrect
+		(at 0.765 -0.25)
+		(size 0.45 0.35)
+		(layers "F.Cu" "F.Mask" "F.Paste")
+		(roundrect_rratio 0.15)
+		(solder_mask_margin 0)
+		(uuid "840ac94f-0c85-4cce-bee7-7a770472d316")
+	)
+	(pad "10" smd roundrect
+		(at 0.765 -0.749999)
+		(size 0.45 0.35)
+		(layers "F.Cu" "F.Mask" "F.Paste")
+		(roundrect_rratio 0.15)
+		(solder_mask_margin 0)
+		(uuid "8354534f-c9fa-4833-8f1c-d92a8d313fe9")
+	)
+	(pad "11" smd roundrect
+		(at 0.25 -0.765)
+		(size 0.35 0.45)
+		(layers "F.Cu" "F.Mask" "F.Paste")
+		(roundrect_rratio 0.15)
+		(solder_mask_margin 0)
+		(uuid "5059cf4f-a448-4344-a737-e6ab6c06719b")
+	)
+	(pad "12" smd roundrect
+		(at -0.25 -0.765)
+		(size 0.35 0.45)
+		(layers "F.Cu" "F.Mask" "F.Paste")
+		(roundrect_rratio 0.15)
+		(solder_mask_margin 0)
+		(uuid "10c617de-60db-4459-85dc-c4e27f639bb8")
+	)
+	(embedded_fonts no)
+	(model "${KIPRJMOD}/lib/LIS2DH12TR.step"
+		(offset
+			(xyz 0 0 0)
+		)
+		(scale
+			(xyz 1 1 1)
+		)
+		(rotate
+			(xyz -90 0 180)
+		)
+	)
+)

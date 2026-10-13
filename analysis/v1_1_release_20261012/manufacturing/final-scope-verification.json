@@ -1,0 +1,60 @@
+{
+  "status": "PASS",
+  "pcb_sha256": "490af47db22ef076938c17319782f194623d8f8b6a3f864a2e0cc23b3d025b15",
+  "schematic_sha256": "044984037a7346adc92ee9ea142e6c285ee7f6b66efc87e0a1ad195495379cc9",
+  "exact_thermal_changes": [
+    {
+      "reference": "J4",
+      "pad": "1",
+      "pad_uuid": "0650b567-d648-499e-addc-ea01fac7e599",
+      "before": {
+        "thermal_gap": null,
+        "thermal_bridge_width": null,
+        "zone_connect": null
+      },
+      "after": {
+        "thermal_gap": [
+          "0.25"
+        ],
+        "thermal_bridge_width": [
+          "0.25"
+        ],
+        "zone_connect": null
+      }
+    },
+    {
+      "reference": "D3",
+      "pad": "1",
+      "pad_uuid": "390842f8-d9d4-4229-8ca4-a68fac8e12f8",
+      "before": {
+        "thermal_gap": null,
+        "thermal_bridge_width": null,
+        "zone_connect": null
+      },
+      "after": {
+        "thermal_gap": [
+          "0.25"
+        ],
+        "thermal_bridge_width": [
+          "0.25"
+        ],
+        "zone_connect": null
+      }
+    }
+  ],
+  "existing_netlist_pins": 219,
+  "final_netlist_pins": 233,
+  "only_existing_net_rename": [
+    "Net-(U1-VBAT)",
+    "/VBAT"
+  ],
+  "only_added_existing_pin": "C5.3 /SC_MID",
+  "new_parts": [
+    "C22",
+    "R24",
+    "R25",
+    "R26",
+    "U8"
+  ],
+  "custom_rules_byte_identical_to_integrated_u7_baseline": true
+}

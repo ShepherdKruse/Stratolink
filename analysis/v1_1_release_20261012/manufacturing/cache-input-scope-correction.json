@@ -1,0 +1,49 @@
+{
+  "status": "PASS",
+  "scope": "Remove only interpreter/macOS cache artifacts from source-input hashing; no fabrication re-export.",
+  "package": "/Users/twarn/Repositories/Stratolink/hardware/gerbers/v1.1-pilot",
+  "removed_non_inputs": {
+    "3d/solar/__pycache__/generate.cpython-312.pyc": "632b43e7f1f55b609111b5facbfd14cff4270e72f836b357f01df8d01ed5068d",
+    "3d/solar/__pycache__/generate.cpython-314.pyc": "f54e27235928cf148423f1e03f9e927a4a93cadfefe8d13a72ab8a2cc1d72672"
+  },
+  "source_files_before": 162,
+  "source_files_after": 160,
+  "source_inputs_all_match": true,
+  "output_files_all_unchanged": {
+    "CPL-stratolink.csv": "cc07c7876ed4ced465ae087aa226cab75561c13cb984fba6f14970691d61688f",
+    "historical-placement-proof.json": "c7eaf1d8b3f133eda28158c297c4259ad9eaf550ed52ae0fc9740b2e3240b7dc",
+    "assembly-audit.json": "a8606f14c8e6f719d29358599bf84c0dc3f756d341ebcf1daa8768d62877cfc2",
+    "README.md": "d2f70c60baa1fdddeec750ea3a7a40704653cdc6d4d5ca9b4779f0ce740b6186",
+    "BOM-stratolink.csv": "a8316e5907e24c0a336a23464fdd46f2c4492f055caccef7d20f6f6b0d2bad38",
+    "no-mask-proof.json": "e1767e29127f05f1d003299f92d23016e8d22bc738d359a9f18320d93e4a6bcd",
+    "fabrication-review.zip": "a40250993aee05254827a5090b7b569212d70bfcd8844bfa68adf0870c42a086",
+    "native/historical-v1.kicad_pcb": "2924cfa59d48c1446488d715834e84ea634516e622ed59915fb72521e9595190",
+    "native/netlist.xml": "c9d57df124d5a7709e817e6d1f8e83a2d71da45edc2a13377dcf7144e90ae07d",
+    "native/positions.csv": "15c2659fb6c1009efcd37d067a288595c7d31356444cf151fa672d99b14a94b2",
+    "native/drill-report.txt": "26f088590160182f7ea457cea797125fd2d29576813bffc2c63e6ad94082a1d1",
+    "logs/drill.log": "845018d686dd7eb6ae5a74f012aab6a140455b7d33b055280e126cd545c39c3a",
+    "logs/netlist.log": "5725e042332ee49c152fa36b8c2f658df9b14186c010b4cfabd1c3426edb7eb2",
+    "logs/gerbers.log": "be5ee3aa787a0a21ae6d395b54468e319c187fd5f72a35425897b219901023e6",
+    "logs/positions.log": "25ed03b1aa2874826b63027328234f1db721575081ac1172eacae794e845885f",
+    "gerbers/stratolink-B_Mask.gbs": "e3feb6a305b43e68e0bd35b75ea20031b618f9c05a6259143f753fbd3d7b4587",
+    "gerbers/stratolink-PTH.drl": "7e5068e6658b01d2c84e3f26ab1d546a06c05240afbf40c2580544f3a4443e55",
+    "gerbers/stratolink-B_Paste.gbp": "6176a4f0d5d8fbf5f98925edd514d76eb1a6903aa7971858c1d581fe92e9f49c",
+    "gerbers/stratolink-F_Silkscreen.gto": "dce8f5015339083a638d439b7f82b5681e79e35509df9d950137064b899883b1",
+    "gerbers/stratolink-B_Silkscreen.gbo": "1e8d644f45bebe15b8a2560cac756572872f0075d15b8b72427a2eb430d21051",
+    "gerbers/stratolink-Edge_Cuts.gm1": "c32261fee854d76db26c5bbba38a11101034b252574288212618a77d8968123e",
+    "gerbers/stratolink-F_Mask.gts": "6e2edf85dae0885039f8eec12337a87ceb20ec9bba8afa7ffacae3a56f77e298",
+    "gerbers/stratolink-job.gbrjob": "6e726ee03e48e278a36fc1151eddb2aa0298d0e472b353a9ef7b71cf64012176",
+    "gerbers/stratolink-F_Paste.gtp": "5f210a7840988cfb9ed165bf27c43b5905b6db44030dfba8c48ceeeededc62b3",
+    "gerbers/stratolink-B_Cu.gbl": "3e021b8eca02cd7123360121c26f160a6317308dedf845cd4b650e699b95711e",
+    "gerbers/stratolink-F_Cu.gtl": "73c4c2cdbbef67d48f25e2249039e9f454d73d60e7fa9f2806892a38e53a8435",
+    "gerbers/stratolink-NPTH.drl": "a1b0ec32cadf18f3dffe4a51aba334b0425fe073f2a6f79f39e81e6cf3ac77d8"
+  },
+  "original_generator_sha256_used_for_export": "041d61120f09f0ea2c8eb502c6d132d1dbabd5b5412283fb962566ab46ee4303",
+  "updated_generator_sha256": "22f767f2dca0fbac61b2317f486b4ef47b6137c03a80ff25c60e587364f4c4b9",
+  "manifest_generator_provenance_retained": true,
+  "manifest_sha256": "cd65577425683e2d0eeb96c58cc860263a11c4b7b41b595440add98986defcb8",
+  "filter_checks": {
+    "cache_examples_rejected": 3,
+    "actual_CAD_library_model_source_examples_retained": 5
+  }
+}

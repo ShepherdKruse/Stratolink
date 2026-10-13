@@ -1,0 +1,5391 @@
+{
+  "pcb_sha256": "ea78337c91c73d27b813f09f74dd2d2993e5a82d09800362d82c49a0c4f3ed96",
+  "footprints": {
+    "C19": {
+      "value": "100nF",
+      "footprint": "Capacitor_SMD:C_0402_1005Metric",
+      "properties": {
+        "Reference": "C19",
+        "Value": "100nF",
+        "Datasheet": "",
+        "Description": "Unpolarized capacitor",
+        "ki_fp_filters": "C_*"
+      },
+      "pads": [
+        {
+          "number": "1",
+          "net": "GND",
+          "pinfunction": null,
+          "size": [
+            [
+              "size",
+              "0.56",
+              "0.62"
+            ]
+          ],
+          "at": [
+            [
+              "at",
+              "-0.48",
+              "0",
+              "180"
+            ]
+          ]
+        },
+        {
+          "number": "2",
+          "net": "+3.3V",
+          "pinfunction": null,
+          "size": [
+            [
+              "size",
+              "0.56",
+              "0.62"
+            ]
+          ],
+          "at": [
+            [
+              "at",
+              "0.48",
+              "0",
+              "180"
+            ]
+          ]
+        }
+      ]
+    },
+    "C10": {
+      "value": "100nF",
+      "footprint": "Capacitor_SMD:C_0402_1005Metric",
+      "properties": {
+        "Reference": "C10",
+        "Value": "100nF",
+        "Datasheet": "",
+        "Description": "Unpolarized capacitor",
+        "ki_fp_filters": "C_*"
+      },
+      "pads": [
+        {
+          "number": "1",
+          "net": "Net-(U3-VCC)",
+          "pinfunction": null,
+          "size": [
+            [
+              "size",
+              "0.56",
+              "0.62"
+            ]
+          ],
+          "at": [
+            [
+              "at",
+              "-0.48",
+              "0",
+              "90"
+            ]
+          ]
+        },
+        {
+          "number": "2",
+          "net": "GND",
+          "pinfunction": null,
+          "size": [
+            [
+              "size",
+              "0.56",
+              "0.62"
+            ]
+          ],
+          "at": [
+            [
+              "at",
+              "0.48",
+              "0",
+              "90"
+            ]
+          ]
+        }
+      ]
+    },
+    "C14": {
+      "value": "100nF",
+      "footprint": "Capacitor_SMD:C_0402_1005Metric",
+      "properties": {
+        "Reference": "C14",
+        "Value": "100nF",
+        "Datasheet": "",
+        "Description": "Unpolarized capacitor",
+        "ki_fp_filters": "C_*"
+      },
+      "pads": [
+        {
+          "number": "1",
+          "net": "GND",
+          "pinfunction": null,
+          "size": [
+            [
+              "size",
+              "0.56",
+              "0.62"
+            ]
+          ],
+          "at": [
+            [
+              "at",
+              "-0.48",
+              "0",
+              "90"
+            ]
+          ]
+        },
+        {
+          "number": "2",
+          "net": "+3.3V",
+          "pinfunction": null,
+          "size": [
+            [
+              "size",
+              "0.56",
+              "0.62"
+            ]
+          ],
+          "at": [
+            [
+              "at",
+              "0.48",
+              "0",
+              "90"
+            ]
+          ]
+        }
+      ]
+    },
+    "AE2": {
+      "value": "Enameled Cu wire 48mm (GNSS L1)",
+      "footprint": "lib:Stratolink_GNSS_Wire_PTH_D1p0",
+      "properties": {
+        "Reference": "AE2",
+        "Value": "Enameled Cu wire 48mm (GNSS L1)",
+        "Datasheet": "https://stratolink.org/docs/hardware#antennas-and-suspension",
+        "Description": "Hand-formed enamelled copper wire; 48 mm from feed for GNSS L1; diameter not yet measured"
+      },
+      "pads": [
+        {
+          "number": "1",
+          "net": "Net-(AE2-A)",
+          "pinfunction": "A",
+          "size": [
+            [
+              "size",
+              "1.5",
+              "1.5"
+            ]
+          ],
+          "at": [
+            [
+              "at",
+              "0",
+              "0",
+              "90"
+            ]
+          ]
+        }
+      ]
+    },
+    "U6": {
+      "value": "~",
+      "footprint": "lib:SMD6_LTR-390UV-01_LTO-L",
+      "properties": {
+        "Reference": "U6",
+        "Value": "~",
+        "Datasheet": "https://item.szlcsc.com/datasheet/LTR-390UV-01/503413.html",
+        "Description": "Measurement Type:Light Intensity Photoperceptivity:157klx Interface:I2C Resolution(Bits):18bit Voltage - Supply:1.7V~3.6V Voltage - Supply:1.7V~3.6V Operating Temperature:-40\u00b0C~+85\u00b0C Operating Temperature:-40\u00b0C~+85\u00b0C ",
+        "Manufacturer Part": "LTR-390UV-01",
+        "Manufacturer": "LITEON(\u5149\u5b9d)",
+        "Supplier Part": "C492374",
+        "Supplier": "LCSC",
+        "LCSC Part Name": "LTR-390UV-01 \u505c\u4ea7"
+      },
+      "pads": [
+        {
+          "number": "1",
+          "net": "+3.3V",
+          "pinfunction": "VDD",
+          "size": [
+            [
+              "size",
+              "0.635",
+              "0.254"
+            ]
+          ],
+          "at": [
+            [
+              "at",
+              "-0.889",
+              "-0.649999"
+            ]
+          ]
+        },
+        {
+          "number": "2",
+          "net": "unconnected-(U6-NC-Pad2)",
+          "pinfunction": "NC",
+          "size": [
+            [
+              "size",
+              "0.635",
+              "0.254"
+            ]
+          ],
+          "at": [
+            [
+              "at",
+              "-0.889",
+              "0"
+            ]
+          ]
+        },
+        {
+          "number": "3",
+          "net": "GND",
+          "pinfunction": "GND",
+          "size": [
+            [
+              "size",
+              "0.635",
+              "0.254"
+            ]
+          ],
+          "at": [
+            [
+              "at",
+              "-0.889",
+              "0.649999"
+            ]
+          ]
+        },
+        {
+          "number": "4",
+          "net": "SCL",
+          "pinfunction": "SCL",
+          "size": [
+            [
+              "size",
+              "0.635",
+              "0.254"
+            ]
+          ],
+          "at": [
+            [
+              "at",
+              "0.889",
+              "0.649999"
+            ]
+          ]
+        },
+        {
+          "number": "5",
+          "net": "GND",
+          "pinfunction": "INT",
+          "size": [
+            [
+              "size",
+              "0.635",
+              "0.254"
+            ]
+          ],
+          "at": [
+            [
+              "at",
+              "0.889",
+              "0"
+            ]
+          ]
+        },
+        {
+          "number": "6",
+          "net": "SDA",
+          "pinfunction": "SDA",
+          "size": [
+            [
+              "size",
+              "0.635",
+              "0.254"
+            ]
+          ],
+          "at": [
+            [
+              "at",
+              "0.889",
+              "-0.649999"
+            ]
+          ]
+        }
+      ]
+    },
+    "U4": {
+      "value": "~",
+      "footprint": "lib:SON125P500X300X100-8N",
+      "properties": {
+        "Reference": "U4",
+        "Value": "~",
+        "Datasheet": "https://item.szlcsc.com/datasheet/MS561101BA03-50/16320.html",
+        "Description": "Pressure range:1Kpa~1.2bar Pressure range:1Kpa~1.2bar Voltage - Supply:1.8V~3.6V Voltage - Supply:1.8V~3.6V Standby Current:140nA Interface:SpI\uff1bI2C Operating Temperature:-40\u00b0C~+85\u00b0C Operating Temperature:-40\u00b0C~+85\u00b0C Response time:8.22ms ",
+        "Manufacturer Part": "MS561101BA03-50",
+        "Manufacturer": "TE Connectivity(\u6cf0\u79d1\u7535\u5b50)",
+        "Supplier Part": "C15639",
+        "Supplier": "LCSC",
+        "LCSC Part Name": "MS561101BA03-50"
+      },
+      "pads": [
+        {
+          "number": "1",
+          "net": "+3.3V",
+          "pinfunction": "VDD",
+          "size": [
+            [
+              "size",
+              "1.31",
+              "0.53"
+            ]
+          ],
+          "at": [
+            [
+              "at",
+              "-1.2",
+              "-1.875"
+            ]
+          ]
+        },
+        {
+          "number": "2",
+          "net": "+3.3V",
+          "pinfunction": "PS",
+          "size": [
+            [
+              "size",
+              "1.31",
+              "0.53"
+            ]
+          ],
+          "at": [
+            [
+              "at",
+              "-1.2",
+              "-0.625"
+            ]
+          ]
+        },
+        {
+          "number": "3",
+          "net": "GND",
+          "pinfunction": "GND",
+          "size": [
+            [
+              "size",
+              "1.31",
+              "0.53"
+            ]
+          ],
+          "at": [
+            [
+              "at",
+              "-1.2",
+              "0.625"
+            ]
+          ]
+        },
+        {
+          "number": "4",
+          "net": "+3.3V",
+          "pinfunction": "CSB",
+          "size": [
+            [
+              "size",
+              "1.31",
+              "0.53"
+            ]
+          ],
+          "at": [
+            [
+              "at",
+              "-1.2",
+              "1.875"
+            ]
+          ]
+        },
+        {
+          "number": "5",
+          "net": "+3.3V",
+          "pinfunction": "CSB",
+          "size": [
+            [
+              "size",
+              "1.31",
+              "0.53"
+            ]
+          ],
+          "at": [
+            [
+              "at",
+              "1.2",
+              "1.875"
+            ]
+          ]
+        },
+        {
+          "number": "6",
+          "net": "unconnected-(U4-SDO-Pad6)",
+          "pinfunction": "SDO",
+          "size": [
+            [
+              "size",
+              "1.31",
+              "0.53"
+            ]
+          ],
+          "at": [
+            [
+              "at",
+              "1.2",
+              "0.625"
+            ]
+          ]
+        },
+        {
+          "number": "7",
+          "net": "SDA",
+          "pinfunction": "SDI/SDA",
+          "size": [
+            [
+              "size",
+              "1.31",
+              "0.53"
+            ]
+          ],
+          "at": [
+            [
+              "at",
+              "1.2",
+              "-0.625"
+            ]
+          ]
+        },
+        {
+          "number": "8",
+          "net": "SCL",
+          "pinfunction": "SCLK",
+          "size": [
+            [
+              "size",
+              "1.31",
+              "0.53"
+            ]
+          ],
+          "at": [
+            [
+              "at",
+              "1.2",
+              "-1.875"
+            ]
+          ]
+        }
+      ]
+    },
+    "R19": {
+      "value": "1M\u03a9",
+      "footprint": "Resistor_SMD:R_0402_1005Metric",
+      "properties": {
+        "Reference": "R19",
+        "Value": "1M\u03a9",
+        "Datasheet": "https://www.lcsc.com/product-detail/C60490.html?s_z=n_10kohm%2520resistor%25200402",
+        "Description": "RC0402FR-0710KL",
+        "ki_fp_filters": "R_*"
+      },
+      "pads": [
+        {
+          "number": "1",
+          "net": "+SOLAR",
+          "pinfunction": null,
+          "size": [
+            [
+              "size",
+              "0.54",
+              "0.64"
+            ]
+          ],
+          "at": [
+            [
+              "at",
+              "-0.510001",
+              "0"
+            ]
+          ]
+        },
+        {
+          "number": "2",
+          "net": "PA15",
+          "pinfunction": null,
+          "size": [
+            [
+              "size",
+              "0.54",
+              "0.64"
+            ]
+          ],
+          "at": [
+            [
+              "at",
+              "0.510001",
+              "0"
+            ]
+          ]
+        }
+      ]
+    },
+    "R14": {
+      "value": "0\u03a9",
+      "footprint": "Resistor_SMD:R_0402_1005Metric",
+      "properties": {
+        "Reference": "R14",
+        "Value": "0\u03a9",
+        "Datasheet": "",
+        "Description": "Resistor, US symbol",
+        "ki_fp_filters": "R_*"
+      },
+      "pads": [
+        {
+          "number": "1",
+          "net": "Net-(U3-SDA)",
+          "pinfunction": null,
+          "size": [
+            [
+              "size",
+              "0.54",
+              "0.64"
+            ]
+          ],
+          "at": [
+            [
+              "at",
+              "-0.510001",
+              "0"
+            ]
+          ]
+        },
+        {
+          "number": "2",
+          "net": "SDA",
+          "pinfunction": null,
+          "size": [
+            [
+              "size",
+              "0.54",
+              "0.64"
+            ]
+          ],
+          "at": [
+            [
+              "at",
+              "0.510001",
+              "0"
+            ]
+          ]
+        }
+      ]
+    },
+    "R12": {
+      "value": "4.7k\u03a9",
+      "footprint": "Resistor_SMD:R_0402_1005Metric",
+      "properties": {
+        "Reference": "R12",
+        "Value": "4.7k\u03a9",
+        "Datasheet": "",
+        "Description": "Resistor, US symbol",
+        "ki_fp_filters": "R_*"
+      },
+      "pads": [
+        {
+          "number": "1",
+          "net": "+3.3V",
+          "pinfunction": null,
+          "size": [
+            [
+              "size",
+              "0.54",
+              "0.64"
+            ]
+          ],
+          "at": [
+            [
+              "at",
+              "-0.510001",
+              "0",
+              "180"
+            ]
+          ]
+        },
+        {
+          "number": "2",
+          "net": "SCL",
+          "pinfunction": null,
+          "size": [
+            [
+              "size",
+              "0.54",
+              "0.64"
+            ]
+          ],
+          "at": [
+            [
+              "at",
+              "0.510001",
+              "0",
+              "180"
+            ]
+          ]
+        }
+      ]
+    },
+    "U7": {
+      "value": "LIS2DH12TR",
+      "footprint": "lib:PQFN50P200X200100-12N",
+      "properties": {
+        "Reference": "U7",
+        "Value": "LIS2DH12TR",
+        "Datasheet": "",
+        "Description": "",
+        "MF": "STMicroelectronics",
+        "DESCRIPTION": "MEMS digital output motion sensor: ultra low-power high performance 3-axes femto accelerometer",
+        "PACKAGE": "LGA-12 STMicroelectronics",
+        "PRICE": "0.87 USD",
+        "Package": "LGA-12 STMicroelectronics",
+        "Check_prices": "https://www.snapeda.com/parts/LIS2DH12TR/STMicroelectronics/view-part/?ref=eda",
+        "Price": "None",
+        "SnapEDA_Link": "https://www.snapeda.com/parts/LIS2DH12TR/STMicroelectronics/view-part/?ref=snap",
+        "MP": "LIS2DH12TR",
+        "Availability": "In Stock",
+        "AVAILABILITY": "Good",
+        "Description_1": "\n                        \n                            Accelerometer X, Y, Z Axis \u00b12g, 4g, 8g, 16g 0.5Hz ~ 672Hz 12-LGA (2x2)\n                        \n"
+      },
+      "pads": [
+        {
+          "number": "1",
+          "net": "SCL",
+          "pinfunction": "SCL/SPC",
+          "size": [
+            [
+              "size",
+              "0.45",
+              "0.35"
+            ]
+          ],
+          "at": [
+            [
+              "at",
+              "-0.764999",
+              "-0.75",
+              "90"
+            ]
+          ]
+        },
+        {
+          "number": "2",
+          "net": "+3.3V",
+          "pinfunction": "CS",
+          "size": [
+            [
+              "size",
+              "0.45",
+              "0.35"
+            ]
+          ],
+          "at": [
+            [
+              "at",
+              "-0.765",
+              "-0.25",
+              "90"
+            ]
+          ]
+        },
+        {
+          "number": "3",
+          "net": "GND",
+          "pinfunction": "SDO/SAO",
+          "size": [
+            [
+              "size",
+              "0.45",
+              "0.35"
+            ]
+          ],
+          "at": [
+            [
+              "at",
+              "-0.765",
+              "0.25",
+              "90"
+            ]
+          ]
+        },
+        {
+          "number": "4",
+          "net": "SDA",
+          "pinfunction": "SDA/SDI/SDO",
+          "size": [
+            [
+              "size",
+              "0.45",
+              "0.35"
+            ]
+          ],
+          "at": [
+            [
+              "at",
+              "-0.765",
+              "0.749999",
+              "90"
+            ]
+          ]
+        },
+        {
+          "number": "5",
+          "net": "GND",
+          "pinfunction": "RES",
+          "size": [
+            [
+              "size",
+              "0.35",
+              "0.45"
+            ]
+          ],
+          "at": [
+            [
+              "at",
+              "-0.265",
+              "0.765",
+              "90"
+            ]
+          ]
+        },
+        {
+          "number": "6",
+          "net": "GND",
+          "pinfunction": "GND",
+          "size": [
+            [
+              "size",
+              "0.35",
+              "0.45"
+            ]
+          ],
+          "at": [
+            [
+              "at",
+              "0.25",
+              "0.765",
+              "90"
+            ]
+          ]
+        },
+        {
+          "number": "7",
+          "net": "GND",
+          "pinfunction": "GND",
+          "size": [
+            [
+              "size",
+              "0.45",
+              "0.35"
+            ]
+          ],
+          "at": [
+            [
+              "at",
+              "0.764999",
+              "0.75",
+              "90"
+            ]
+          ]
+        },
+        {
+          "number": "8",
+          "net": "GND",
+          "pinfunction": "GND",
+          "size": [
+            [
+              "size",
+              "0.45",
+              "0.35"
+            ]
+          ],
+          "at": [
+            [
+              "at",
+              "0.765",
+              "0.25",
+              "90"
+            ]
+          ]
+        },
+        {
+          "number": "9",
+          "net": "+3.3V",
+          "pinfunction": "VDD",
+          "size": [
+            [
+              "size",
+              "0.45",
+              "0.35"
+            ]
+          ],
+          "at": [
+            [
+              "at",
+              "0.765",
+              "-0.25",
+              "90"
+            ]
+          ]
+        },
+        {
+          "number": "10",
+          "net": "+3.3V",
+          "pinfunction": "VDD_IO",
+          "size": [
+            [
+              "size",
+              "0.45",
+              "0.35"
+            ]
+          ],
+          "at": [
+            [
+              "at",
+              "0.765",
+              "-0.749999",
+              "90"
+            ]
+          ]
+        },
+        {
+          "number": "11",
+          "net": "unconnected-(U7-INT2-Pad11)",
+          "pinfunction": "INT2",
+          "size": [
+            [
+              "size",
+              "0.35",
+              "0.45"
+            ]
+          ],
+          "at": [
+            [
+              "at",
+              "0.25",
+              "-0.765",
+              "90"
+            ]
+          ]
+        },
+        {
+          "number": "12",
+          "net": "PA8",
+          "pinfunction": "INT1",
+          "size": [
+            [
+              "size",
+              "0.35",
+              "0.45"
+            ]
+          ],
+          "at": [
+            [
+              "at",
+              "-0.25",
+              "-0.765",
+              "90"
+            ]
+          ]
+        }
+      ]
+    },
+    "J4": {
+      "value": "Conn_PinHeader_1x07_P2.54mm_Vertical_THT_D1mm",
+      "footprint": "lib:Stratolink_Header_Right_1x07_P1p00_D0p50_Pad0p88",
+      "properties": {
+        "Reference": "J4",
+        "Value": "Conn_PinHeader_1x07_P2.54mm_Vertical_THT_D1mm",
+        "Datasheet": "",
+        "Description": "Connector Header Through Hole 7 positions 0.100\" (2.54mm)",
+        "ki_fp_filters": "*PinHeader*1x07*"
+      },
+      "pads": [
+        {
+          "number": "1",
+          "net": "GND",
+          "pinfunction": "Pin_1",
+          "size": [
+            [
+              "size",
+              "0.88",
+              "0.88"
+            ]
+          ],
+          "at": [
+            [
+              "at",
+              "0",
+              "0"
+            ]
+          ]
+        },
+        {
+          "number": "2",
+          "net": "VSTOR",
+          "pinfunction": "Pin_2",
+          "size": [
+            [
+              "size",
+              "0.88",
+              "0.88"
+            ]
+          ],
+          "at": [
+            [
+              "at",
+              "0",
+              "1"
+            ]
+          ]
+        },
+        {
+          "number": "3",
+          "net": "GND",
+          "pinfunction": "Pin_3",
+          "size": [
+            [
+              "size",
+              "0.88",
+              "0.88"
+            ]
+          ],
+          "at": [
+            [
+              "at",
+              "0",
+              "2"
+            ]
+          ]
+        },
+        {
+          "number": "4",
+          "net": "TX",
+          "pinfunction": "Pin_4",
+          "size": [
+            [
+              "size",
+              "0.88",
+              "0.88"
+            ]
+          ],
+          "at": [
+            [
+              "at",
+              "0",
+              "3"
+            ]
+          ]
+        },
+        {
+          "number": "5",
+          "net": "RX",
+          "pinfunction": "Pin_5",
+          "size": [
+            [
+              "size",
+              "0.88",
+              "0.88"
+            ]
+          ],
+          "at": [
+            [
+              "at",
+              "0",
+              "4"
+            ]
+          ]
+        },
+        {
+          "number": "6",
+          "net": "BOOT0",
+          "pinfunction": "Pin_6",
+          "size": [
+            [
+              "size",
+              "0.88",
+              "0.88"
+            ]
+          ],
+          "at": [
+            [
+              "at",
+              "0",
+              "5"
+            ]
+          ]
+        },
+        {
+          "number": "7",
+          "net": "+3.3V",
+          "pinfunction": "Pin_7",
+          "size": [
+            [
+              "size",
+              "0.88",
+              "0.88"
+            ]
+          ],
+          "at": [
+            [
+              "at",
+              "0",
+              "6"
+            ]
+          ]
+        }
+      ]
+    },
+    "R21": {
+      "value": "1M\u03a9",
+      "footprint": "Resistor_SMD:R_0402_1005Metric",
+      "properties": {
+        "Reference": "R21",
+        "Value": "1M\u03a9",
+        "Datasheet": "https://www.lcsc.com/product-detail/C60490.html?s_z=n_10kohm%2520resistor%25200402",
+        "Description": "RC0402FR-0710KL",
+        "ki_fp_filters": "R_*"
+      },
+      "pads": [
+        {
+          "number": "1",
+          "net": "PA15",
+          "pinfunction": null,
+          "size": [
+            [
+              "size",
+              "0.54",
+              "0.64"
+            ]
+          ],
+          "at": [
+            [
+              "at",
+              "-0.510001",
+              "0",
+              "180"
+            ]
+          ]
+        },
+        {
+          "number": "2",
+          "net": "GND",
+          "pinfunction": null,
+          "size": [
+            [
+              "size",
+              "0.54",
+              "0.64"
+            ]
+          ],
+          "at": [
+            [
+              "at",
+              "0.510001",
+              "0",
+              "180"
+            ]
+          ]
+        }
+      ]
+    },
+    "C15": {
+      "value": "100nF",
+      "footprint": "Capacitor_SMD:C_0402_1005Metric",
+      "properties": {
+        "Reference": "C15",
+        "Value": "100nF",
+        "Datasheet": "",
+        "Description": "Unpolarized capacitor",
+        "ki_fp_filters": "C_*"
+      },
+      "pads": [
+        {
+          "number": "1",
+          "net": "GND",
+          "pinfunction": null,
+          "size": [
+            [
+              "size",
+              "0.56",
+              "0.62"
+            ]
+          ],
+          "at": [
+            [
+              "at",
+              "-0.48",
+              "0"
+            ]
+          ]
+        },
+        {
+          "number": "2",
+          "net": "PA15",
+          "pinfunction": null,
+          "size": [
+            [
+              "size",
+              "0.56",
+              "0.62"
+            ]
+          ],
+          "at": [
+            [
+              "at",
+              "0.48",
+              "0"
+            ]
+          ]
+        }
+      ]
+    },
+    "J2": {
+      "value": "Solar panel direct solder",
+      "footprint": "lib:Solar_Notch_Left_1p0x2p0",
+      "properties": {
+        "Reference": "J2",
+        "Value": "Solar panel direct solder",
+        "Datasheet": "",
+        "Description": ""
+      },
+      "pads": [
+        {
+          "number": "1",
+          "net": "+SOLAR",
+          "pinfunction": null,
+          "size": [
+            [
+              "size",
+              "1.4",
+              "1.4"
+            ]
+          ],
+          "at": [
+            [
+              "at",
+              "1.4835",
+              "30.5"
+            ]
+          ]
+        },
+        {
+          "number": "2",
+          "net": "GND",
+          "pinfunction": null,
+          "size": [
+            [
+              "size",
+              "2.1",
+              "0.68"
+            ]
+          ],
+          "at": [
+            [
+              "at",
+              "1.25",
+              "-1.06"
+            ]
+          ]
+        },
+        {
+          "number": "2",
+          "net": "GND",
+          "pinfunction": null,
+          "size": [
+            [
+              "size",
+              "2.1",
+              "0.68"
+            ]
+          ],
+          "at": [
+            [
+              "at",
+              "1.25",
+              "-1.06"
+            ]
+          ]
+        }
+      ]
+    },
+    "U2": {
+      "value": "RAK3172",
+      "footprint": "lib:RAK3172",
+      "properties": {
+        "Reference": "U2",
+        "Value": "RAK3172",
+        "Datasheet": "",
+        "Description": "",
+        "MF": "Shenzhen RAKwireless Technology Co.,Ltd.",
+        "DESCRIPTION": "RAK3172 is a low-power long-range transceiver module based on the STM32WLE5CC chip. It provides an easy-to-use, small-size, low-power solution for long range wireless data applications",
+        "PACKAGE": "Package",
+        "PRICE": "None",
+        "Package": "Package",
+        "Check_prices": "https://www.snapeda.com/parts/RAK3172/Shenzhen+RAKwireless+Technology+Co.%252CLtd./view-part/?ref=eda",
+        "SnapEDA_Link": "https://www.snapeda.com/parts/RAK3172/Shenzhen+RAKwireless+Technology+Co.%252CLtd./view-part/?ref=snap",
+        "Price": "None",
+        "SNAPEDA_LINK": "https://www.snapeda.com/parts/RAK3172/Shenzhen+RAKwireless+Technology+Co.%252CLtd./view-part/?ref=snap",
+        "MP": "RAK3172",
+        "Description_1": "\n                        \n                            RAK3172 is a low-power long-range transceiver module based on the STM32WLE5CC chip. It provides an easy-to-use, small-size, low-power solution for long range wireless data applications\n                        \n",
+        "Availability": "Not in stock",
+        "AVAILABILITY": "Not in stock",
+        "CHECK_PRICES": "https://www.snapeda.com/parts/RAK3172/Shenzhen+RAKwireless+Technology+Co.%252CLtd./view-part/?ref=eda"
+      },
+      "pads": [
+        {
+          "number": "1",
+          "net": "unconnected-(U2-UART2_RX{slash}PA3-Pad1)",
+          "pinfunction": "UART2_RX/PA3",
+          "size": [
+            [
+              "size",
+              "0.7",
+              "1.8"
+            ]
+          ],
+          "at": [
+            [
+              "at",
+              "13.5",
+              "-14.945",
+              "180"
+            ]
+          ]
+        },
+        {
+          "number": "2",
+          "net": "unconnected-(U2-UART2_TX{slash}PA2-Pad2)",
+          "pinfunction": "UART2_TX/PA2",
+          "size": [
+            [
+              "size",
+              "0.7",
+              "1.8"
+            ]
+          ],
+          "at": [
+            [
+              "at",
+              "12.499999",
+              "-14.945001",
+              "180"
+            ]
+          ]
+        },
+        {
+          "number": "3",
+          "net": "PA15",
+          "pinfunction": "PA15/ADC5",
+          "size": [
+            [
+              "size",
+              "0.7",
+              "1.8"
+            ]
+          ],
+          "at": [
+            [
+              "at",
+              "11.5",
+              "-14.945",
+              "180"
+            ]
+          ]
+        },
+        {
+          "number": "4",
+          "net": "TX",
+          "pinfunction": "UART1_TX/PB6",
+          "size": [
+            [
+              "size",
+              "0.7",
+              "1.8"
+            ]
+          ],
+          "at": [
+            [
+              "at",
+              "10.5",
+              "-14.945",
+              "180"
+            ]
+          ]
+        },
+        {
+          "number": "5",
+          "net": "RX",
+          "pinfunction": "UART1_RX/PB7",
+          "size": [
+            [
+              "size",
+              "0.7",
+              "1.8"
+            ]
+          ],
+          "at": [
+            [
+              "at",
+              "9.5",
+              "-14.945",
+              "180"
+            ]
+          ]
+        },
+        {
+          "number": "6",
+          "net": "PA1",
+          "pinfunction": "PA1",
+          "size": [
+            [
+              "size",
+              "0.7",
+              "1.8"
+            ]
+          ],
+          "at": [
+            [
+              "at",
+              "8.5",
+              "-14.945",
+              "180"
+            ]
+          ]
+        },
+        {
+          "number": "7",
+          "net": "SWDIO",
+          "pinfunction": "SWDIO/PA13",
+          "size": [
+            [
+              "size",
+              "0.7",
+              "1.8"
+            ]
+          ],
+          "at": [
+            [
+              "at",
+              "7.500001",
+              "-14.944999",
+              "180"
+            ]
+          ]
+        },
+        {
+          "number": "8",
+          "net": "SWCLK",
+          "pinfunction": "SWCLK/PA14",
+          "size": [
+            [
+              "size",
+              "0.7",
+              "1.8"
+            ]
+          ],
+          "at": [
+            [
+              "at",
+              "6.500001",
+              "-14.945001",
+              "180"
+            ]
+          ]
+        },
+        {
+          "number": "9",
+          "net": "SCL",
+          "pinfunction": "SCL/PA12",
+          "size": [
+            [
+              "size",
+              "0.7",
+              "1.8"
+            ]
+          ],
+          "at": [
+            [
+              "at",
+              "5.5",
+              "-14.944999",
+              "180"
+            ]
+          ]
+        },
+        {
+          "number": "10",
+          "net": "SDA",
+          "pinfunction": "SDA/PA11",
+          "size": [
+            [
+              "size",
+              "0.7",
+              "1.8"
+            ]
+          ],
+          "at": [
+            [
+              "at",
+              "4.5",
+              "-14.945",
+              "180"
+            ]
+          ]
+        },
+        {
+          "number": "11",
+          "net": "GND",
+          "pinfunction": "GND",
+          "size": [
+            [
+              "size",
+              "0.7",
+              "1.8"
+            ]
+          ],
+          "at": [
+            [
+              "at",
+              "3.499998",
+              "-14.945001",
+              "180"
+            ]
+          ]
+        },
+        {
+          "number": "12",
+          "net": "Net-(AE1-A)",
+          "pinfunction": "RF",
+          "size": [
+            [
+              "size",
+              "0.7",
+              "1.8"
+            ]
+          ],
+          "at": [
+            [
+              "at",
+              "2.5",
+              "-14.945",
+              "180"
+            ]
+          ]
+        },
+        {
+          "number": "13",
+          "net": "unconnected-(U2-MOSI{slash}PA7-Pad13)",
+          "pinfunction": "MOSI/PA7",
+          "size": [
+            [
+              "size",
+              "1.8",
+              "0.7"
+            ]
+          ],
+          "at": [
+            [
+              "at",
+              "0.364999",
+              "-6.989999",
+              "180"
+            ]
+          ]
+        },
+        {
+          "number": "14",
+          "net": "unconnected-(U2-MISO{slash}PA6-Pad14)",
+          "pinfunction": "MISO/PA6",
+          "size": [
+            [
+              "size",
+              "1.8",
+              "0.7"
+            ]
+          ],
+          "at": [
+            [
+              "at",
+              "0.365",
+              "-5.99",
+              "180"
+            ]
+          ]
+        },
+        {
+          "number": "15",
+          "net": "unconnected-(U2-SCK{slash}PA5-Pad15)",
+          "pinfunction": "SCK/PA5",
+          "size": [
+            [
+              "size",
+              "1.8",
+              "0.7"
+            ]
+          ],
+          "at": [
+            [
+              "at",
+              "0.365002",
+              "-4.99",
+              "180"
+            ]
+          ]
+        },
+        {
+          "number": "16",
+          "net": "unconnected-(U2-SS{slash}PA4-Pad16)",
+          "pinfunction": "SS/PA4",
+          "size": [
+            [
+              "size",
+              "1.8",
+              "0.7"
+            ]
+          ],
+          "at": [
+            [
+              "at",
+              "0.365",
+              "-3.99",
+              "180"
+            ]
+          ]
+        },
+        {
+          "number": "17",
+          "net": "GND",
+          "pinfunction": "GND",
+          "size": [
+            [
+              "size",
+              "0.7",
+              "1.8"
+            ]
+          ],
+          "at": [
+            [
+              "at",
+              "2.5",
+              "-0.144999",
+              "180"
+            ]
+          ]
+        },
+        {
+          "number": "18",
+          "net": "GND",
+          "pinfunction": "GND",
+          "size": [
+            [
+              "size",
+              "0.7",
+              "1.8"
+            ]
+          ],
+          "at": [
+            [
+              "at",
+              "3.5",
+              "-0.145001",
+              "180"
+            ]
+          ]
+        },
+        {
+          "number": "19",
+          "net": "PA8",
+          "pinfunction": "PA8",
+          "size": [
+            [
+              "size",
+              "0.7",
+              "1.8"
+            ]
+          ],
+          "at": [
+            [
+              "at",
+              "4.5",
+              "-0.145",
+              "180"
+            ]
+          ]
+        },
+        {
+          "number": "20",
+          "net": "PA9",
+          "pinfunction": "PA9",
+          "size": [
+            [
+              "size",
+              "0.7",
+              "1.8"
+            ]
+          ],
+          "at": [
+            [
+              "at",
+              "9.5",
+              "-0.145",
+              "180"
+            ]
+          ]
+        },
+        {
+          "number": "21",
+          "net": "BOOT0",
+          "pinfunction": "BOOT0",
+          "size": [
+            [
+              "size",
+              "0.7",
+              "1.8"
+            ]
+          ],
+          "at": [
+            [
+              "at",
+              "10.500001",
+              "-0.145",
+              "180"
+            ]
+          ]
+        },
+        {
+          "number": "22",
+          "net": "RST",
+          "pinfunction": "RST",
+          "size": [
+            [
+              "size",
+              "0.7",
+              "1.8"
+            ]
+          ],
+          "at": [
+            [
+              "at",
+              "11.5",
+              "-0.145",
+              "180"
+            ]
+          ]
+        },
+        {
+          "number": "23",
+          "net": "GND",
+          "pinfunction": "GND",
+          "size": [
+            [
+              "size",
+              "0.7",
+              "1.8"
+            ]
+          ],
+          "at": [
+            [
+              "at",
+              "12.5",
+              "-0.145",
+              "180"
+            ]
+          ]
+        },
+        {
+          "number": "24",
+          "net": "+3.3V",
+          "pinfunction": "VCC",
+          "size": [
+            [
+              "size",
+              "0.7",
+              "1.8"
+            ]
+          ],
+          "at": [
+            [
+              "at",
+              "13.5",
+              "-0.145",
+              "180"
+            ]
+          ]
+        },
+        {
+          "number": "25",
+          "net": "PA10",
+          "pinfunction": "PA10/ADC4",
+          "size": [
+            [
+              "size",
+              "1.8",
+              "0.7"
+            ]
+          ],
+          "at": [
+            [
+              "at",
+              "15.165001",
+              "-3.990001",
+              "180"
+            ]
+          ]
+        },
+        {
+          "number": "26",
+          "net": "PB2",
+          "pinfunction": "PB2/ADC3",
+          "size": [
+            [
+              "size",
+              "1.8",
+              "0.7"
+            ]
+          ],
+          "at": [
+            [
+              "at",
+              "15.165",
+              "-4.989999",
+              "180"
+            ]
+          ]
+        },
+        {
+          "number": "27",
+          "net": "unconnected-(U2-PB12-Pad27)",
+          "pinfunction": "PB12",
+          "size": [
+            [
+              "size",
+              "1.8",
+              "0.7"
+            ]
+          ],
+          "at": [
+            [
+              "at",
+              "15.165001",
+              "-5.990001",
+              "180"
+            ]
+          ]
+        },
+        {
+          "number": "28",
+          "net": "GND",
+          "pinfunction": "GND",
+          "size": [
+            [
+              "size",
+              "1.8",
+              "0.7"
+            ]
+          ],
+          "at": [
+            [
+              "at",
+              "15.165001",
+              "-6.990001",
+              "180"
+            ]
+          ]
+        },
+        {
+          "number": "29",
+          "net": "RSTN",
+          "pinfunction": "PA0",
+          "size": [
+            [
+              "size",
+              "1.8",
+              "0.7"
+            ]
+          ],
+          "at": [
+            [
+              "at",
+              "15.165",
+              "-7.990002",
+              "180"
+            ]
+          ]
+        },
+        {
+          "number": "30",
+          "net": "PB5",
+          "pinfunction": "PB5",
+          "size": [
+            [
+              "size",
+              "1.8",
+              "0.7"
+            ]
+          ],
+          "at": [
+            [
+              "at",
+              "15.165",
+              "-8.99",
+              "180"
+            ]
+          ]
+        },
+        {
+          "number": "31",
+          "net": "unconnected-(U2-PB4{slash}ADC2-Pad31)",
+          "pinfunction": "PB4/ADC2",
+          "size": [
+            [
+              "size",
+              "1.8",
+              "0.7"
+            ]
+          ],
+          "at": [
+            [
+              "at",
+              "15.165",
+              "-9.99",
+              "180"
+            ]
+          ]
+        },
+        {
+          "number": "32",
+          "net": "unconnected-(U2-PB3{slash}ADC1-Pad32)",
+          "pinfunction": "PB3/ADC1",
+          "size": [
+            [
+              "size",
+              "1.8",
+              "0.7"
+            ]
+          ],
+          "at": [
+            [
+              "at",
+              "15.164999",
+              "-10.989999",
+              "180"
+            ]
+          ]
+        }
+      ]
+    },
+    "C8": {
+      "value": "10\u03bcF",
+      "footprint": "Capacitor_SMD:C_0603_1608Metric",
+      "properties": {
+        "Reference": "C8",
+        "Value": "10\u03bcF",
+        "Datasheet": "",
+        "Description": "Unpolarized capacitor",
+        "ki_fp_filters": "C_*"
+      },
+      "pads": [
+        {
+          "number": "1",
+          "net": "GND",
+          "pinfunction": null,
+          "size": [
+            [
+              "size",
+              "0.9",
+              "0.95"
+            ]
+          ],
+          "at": [
+            [
+              "at",
+              "-0.775",
+              "0",
+              "180"
+            ]
+          ]
+        },
+        {
+          "number": "2",
+          "net": "+3.3V",
+          "pinfunction": null,
+          "size": [
+            [
+              "size",
+              "0.9",
+              "0.95"
+            ]
+          ],
+          "at": [
+            [
+              "at",
+              "0.775",
+              "0",
+              "180"
+            ]
+          ]
+        }
+      ]
+    },
+    "U3": {
+      "value": "~",
+      "footprint": "lib:XCVR_MAX-M10S-00B",
+      "properties": {
+        "Reference": "U3",
+        "Value": "~",
+        "Datasheet": "https://item.szlcsc.com/datasheet/MAX-M10S-00B/4722633.html",
+        "Description": "",
+        "Manufacturer Part": "MAX-M10S-00B",
+        "Manufacturer": "U-BLOX",
+        "Supplier Part": "C4153167",
+        "Supplier": "LCSC",
+        "LCSC Part Name": "MAX-M10S-00B"
+      },
+      "pads": [
+        {
+          "number": "1",
+          "net": "GND",
+          "pinfunction": "GND",
+          "size": [
+            [
+              "size",
+              "1.8",
+              "0.7"
+            ]
+          ],
+          "at": [
+            [
+              "at",
+              "-4.749999",
+              "-4.399999",
+              "180"
+            ]
+          ]
+        },
+        {
+          "number": "2",
+          "net": "Net-(U3-TXD)",
+          "pinfunction": "TXD",
+          "size": [
+            [
+              "size",
+              "1.8",
+              "0.8"
+            ]
+          ],
+          "at": [
+            [
+              "at",
+              "-4.749999",
+              "-3.299999",
+              "180"
+            ]
+          ]
+        },
+        {
+          "number": "3",
+          "net": "Net-(U3-RXD)",
+          "pinfunction": "RXD",
+          "size": [
+            [
+              "size",
+              "1.8",
+              "0.8"
+            ]
+          ],
+          "at": [
+            [
+              "at",
+              "-4.75",
+              "-2.2",
+              "180"
+            ]
+          ]
+        },
+        {
+          "number": "4",
+          "net": "unconnected-(U3-TIMEPULSE-Pad4)",
+          "pinfunction": "TIMEPULSE",
+          "size": [
+            [
+              "size",
+              "1.8",
+              "0.8"
+            ]
+          ],
+          "at": [
+            [
+              "at",
+              "-4.75",
+              "-1.1",
+              "180"
+            ]
+          ]
+        },
+        {
+          "number": "5",
+          "net": "GND",
+          "pinfunction": "EXTINT",
+          "size": [
+            [
+              "size",
+              "1.8",
+              "0.8"
+            ]
+          ],
+          "at": [
+            [
+              "at",
+              "-4.75",
+              "-0.000001",
+              "180"
+            ]
+          ]
+        },
+        {
+          "number": "6",
+          "net": "Net-(U3-VCC)",
+          "pinfunction": "V_BCKP",
+          "size": [
+            [
+              "size",
+              "1.8",
+              "0.8"
+            ]
+          ],
+          "at": [
+            [
+              "at",
+              "-4.75",
+              "1.1",
+              "180"
+            ]
+          ]
+        },
+        {
+          "number": "7",
+          "net": "Net-(U3-VCC)",
+          "pinfunction": "V_IO",
+          "size": [
+            [
+              "size",
+              "1.8",
+              "0.8"
+            ]
+          ],
+          "at": [
+            [
+              "at",
+              "-4.75",
+              "2.2",
+              "180"
+            ]
+          ]
+        },
+        {
+          "number": "8",
+          "net": "Net-(U3-VCC)",
+          "pinfunction": "VCC",
+          "size": [
+            [
+              "size",
+              "1.8",
+              "0.8"
+            ]
+          ],
+          "at": [
+            [
+              "at",
+              "-4.750001",
+              "3.300001",
+              "180"
+            ]
+          ]
+        },
+        {
+          "number": "9",
+          "net": "RSTN",
+          "pinfunction": "RESET_N",
+          "size": [
+            [
+              "size",
+              "1.8",
+              "0.7"
+            ]
+          ],
+          "at": [
+            [
+              "at",
+              "-4.749999",
+              "4.399999",
+              "180"
+            ]
+          ]
+        },
+        {
+          "number": "10",
+          "net": "GND",
+          "pinfunction": "GND",
+          "size": [
+            [
+              "size",
+              "1.8",
+              "0.7"
+            ]
+          ],
+          "at": [
+            [
+              "at",
+              "4.749999",
+              "4.399999",
+              "180"
+            ]
+          ]
+        },
+        {
+          "number": "11",
+          "net": "Net-(AE2-A)",
+          "pinfunction": "RF_IN",
+          "size": [
+            [
+              "size",
+              "1.8",
+              "0.8"
+            ]
+          ],
+          "at": [
+            [
+              "at",
+              "4.749999",
+              "3.299999",
+              "180"
+            ]
+          ]
+        },
+        {
+          "number": "12",
+          "net": "GND",
+          "pinfunction": "GND",
+          "size": [
+            [
+              "size",
+              "1.8",
+              "0.8"
+            ]
+          ],
+          "at": [
+            [
+              "at",
+              "4.75",
+              "2.2",
+              "180"
+            ]
+          ]
+        },
+        {
+          "number": "13",
+          "net": "unconnected-(U3-LNA_EN-Pad13)",
+          "pinfunction": "LNA_EN",
+          "size": [
+            [
+              "size",
+              "1.8",
+              "0.8"
+            ]
+          ],
+          "at": [
+            [
+              "at",
+              "4.75",
+              "1.1",
+              "180"
+            ]
+          ]
+        },
+        {
+          "number": "14",
+          "net": "unconnected-(U3-VCC_RF-Pad14)",
+          "pinfunction": "VCC_RF",
+          "size": [
+            [
+              "size",
+              "1.8",
+              "0.8"
+            ]
+          ],
+          "at": [
+            [
+              "at",
+              "4.75",
+              "0.000001",
+              "180"
+            ]
+          ]
+        },
+        {
+          "number": "15",
+          "net": "unconnected-(U3-VIO_SEL-Pad15)",
+          "pinfunction": "VIO_SEL",
+          "size": [
+            [
+              "size",
+              "1.8",
+              "0.8"
+            ]
+          ],
+          "at": [
+            [
+              "at",
+              "4.75",
+              "-1.1",
+              "180"
+            ]
+          ]
+        },
+        {
+          "number": "16",
+          "net": "Net-(U3-SDA)",
+          "pinfunction": "SDA",
+          "size": [
+            [
+              "size",
+              "1.8",
+              "0.8"
+            ]
+          ],
+          "at": [
+            [
+              "at",
+              "4.75",
+              "-2.2",
+              "180"
+            ]
+          ]
+        },
+        {
+          "number": "17",
+          "net": "Net-(U3-SCL)",
+          "pinfunction": "SCL",
+          "size": [
+            [
+              "size",
+              "1.8",
+              "0.8"
+            ]
+          ],
+          "at": [
+            [
+              "at",
+              "4.750001",
+              "-3.300001",
+              "180"
+            ]
+          ]
+        },
+        {
+          "number": "18",
+          "net": "unconnected-(U3-SAFEBOOT_N-Pad18)",
+          "pinfunction": "SAFEBOOT_N",
+          "size": [
+            [
+              "size",
+              "1.8",
+              "0.7"
+            ]
+          ],
+          "at": [
+            [
+              "at",
+              "4.749999",
+              "-4.399999",
+              "180"
+            ]
+          ]
+        }
+      ]
+    },
+    "C9": {
+      "value": "100nF",
+      "footprint": "Capacitor_SMD:C_0402_1005Metric",
+      "properties": {
+        "Reference": "C9",
+        "Value": "100nF",
+        "Datasheet": "",
+        "Description": "Unpolarized capacitor",
+        "ki_fp_filters": "C_*"
+      },
+      "pads": [
+        {
+          "number": "1",
+          "net": "GND",
+          "pinfunction": null,
+          "size": [
+            [
+              "size",
+              "0.56",
+              "0.62"
+            ]
+          ],
+          "at": [
+            [
+              "at",
+              "-0.48",
+              "0",
+              "180"
+            ]
+          ]
+        },
+        {
+          "number": "2",
+          "net": "RST",
+          "pinfunction": null,
+          "size": [
+            [
+              "size",
+              "0.56",
+              "0.62"
+            ]
+          ],
+          "at": [
+            [
+              "at",
+              "0.48",
+              "0",
+              "180"
+            ]
+          ]
+        }
+      ]
+    },
+    "C20": {
+      "value": "100nF",
+      "footprint": "Capacitor_SMD:C_0402_1005Metric",
+      "properties": {
+        "Reference": "C20",
+        "Value": "100nF",
+        "Datasheet": "",
+        "Description": "Unpolarized capacitor",
+        "ki_fp_filters": "C_*"
+      },
+      "pads": [
+        {
+          "number": "1",
+          "net": "GND",
+          "pinfunction": null,
+          "size": [
+            [
+              "size",
+              "0.56",
+              "0.62"
+            ]
+          ],
+          "at": [
+            [
+              "at",
+              "-0.48",
+              "0",
+              "90"
+            ]
+          ]
+        },
+        {
+          "number": "2",
+          "net": "+3.3V",
+          "pinfunction": null,
+          "size": [
+            [
+              "size",
+              "0.56",
+              "0.62"
+            ]
+          ],
+          "at": [
+            [
+              "at",
+              "0.48",
+              "0",
+              "90"
+            ]
+          ]
+        }
+      ]
+    },
+    "R10": {
+      "value": "10k\u03a9",
+      "footprint": "Resistor_SMD:R_0402_1005Metric",
+      "properties": {
+        "Reference": "R10",
+        "Value": "10k\u03a9",
+        "Datasheet": "https://www.lcsc.com/product-detail/C60490.html?s_z=n_10kohm%2520resistor%25200402",
+        "Description": "RC0402FR-0710KL",
+        "ki_fp_filters": "R_*"
+      },
+      "pads": [
+        {
+          "number": "1",
+          "net": "+3.3V",
+          "pinfunction": null,
+          "size": [
+            [
+              "size",
+              "0.54",
+              "0.64"
+            ]
+          ],
+          "at": [
+            [
+              "at",
+              "-0.510001",
+              "0",
+              "270"
+            ]
+          ]
+        },
+        {
+          "number": "2",
+          "net": "RST",
+          "pinfunction": null,
+          "size": [
+            [
+              "size",
+              "0.54",
+              "0.64"
+            ]
+          ],
+          "at": [
+            [
+              "at",
+              "0.510001",
+              "0",
+              "270"
+            ]
+          ]
+        }
+      ]
+    },
+    "R9": {
+      "value": "0\u03a9",
+      "footprint": "Resistor_SMD:R_0402_1005Metric",
+      "properties": {
+        "Reference": "R9",
+        "Value": "0\u03a9",
+        "Datasheet": "",
+        "Description": "Resistor, US symbol",
+        "ki_fp_filters": "R_*"
+      },
+      "pads": [
+        {
+          "number": "1",
+          "net": "GND",
+          "pinfunction": null,
+          "size": [
+            [
+              "size",
+              "0.54",
+              "0.64"
+            ]
+          ],
+          "at": [
+            [
+              "at",
+              "-0.510001",
+              "0",
+              "270"
+            ]
+          ]
+        },
+        {
+          "number": "2",
+          "net": "BOOT0",
+          "pinfunction": null,
+          "size": [
+            [
+              "size",
+              "0.54",
+              "0.64"
+            ]
+          ],
+          "at": [
+            [
+              "at",
+              "0.510001",
+              "0",
+              "270"
+            ]
+          ]
+        }
+      ]
+    },
+    "U5": {
+      "value": "TMP117NAIYBGR",
+      "footprint": "lib:BGA6N40P3X2_148X95X53",
+      "properties": {
+        "Reference": "U5",
+        "Value": "TMP117NAIYBGR",
+        "Datasheet": "https://www.ti.com/lit/ds/symlink/tmp117.pdf",
+        "Description": "TMP117N precision digital temperature sensor; +/-0.2 C from -40 to 100 C; YBG DSBGA-6",
+        "MF": "Texas Instruments",
+        "MAXIMUM_PACKAGE_HEIGHT": "0.531mm",
+        "Package": "DSBGA-6 Texas Instruments",
+        "Price": "None",
+        "Check_prices": "https://www.snapeda.com/parts/TMP117NAIYBGR/Texas+Instruments/view-part/?ref=eda",
+        "STANDARD": "Manufacturer Recommendations",
+        "PARTREV": "D",
+        "SnapEDA_Link": "https://www.snapeda.com/parts/TMP117NAIYBGR/Texas+Instruments/view-part/?ref=snap",
+        "SNAPEDA_PACKAGE_ID": "103200",
+        "MP": "TMP117NAIYBGR",
+        "Description_1": "TMP117N precision digital temperature sensor; +/-0.2 C from -40 to 100 C; YBG DSBGA-6",
+        "Availability": "In Stock",
+        "MANUFACTURER": "Texas Instruments"
+      },
+      "pads": [
+        {
+          "number": "A1",
+          "net": "SDA",
+          "pinfunction": "SDA",
+          "size": [
+            [
+              "size",
+              "0.23",
+              "0.23"
+            ]
+          ],
+          "at": [
+            [
+              "at",
+              "-0.2",
+              "-0.4"
+            ]
+          ]
+        },
+        {
+          "number": "A2",
+          "net": "SCL",
+          "pinfunction": "SCL",
+          "size": [
+            [
+              "size",
+              "0.23",
+              "0.23"
+            ]
+          ],
+          "at": [
+            [
+              "at",
+              "0.2",
+              "-0.4"
+            ]
+          ]
+        },
+        {
+          "number": "B1",
+          "net": "+3.3V",
+          "pinfunction": "V+",
+          "size": [
+            [
+              "size",
+              "0.23",
+              "0.23"
+            ]
+          ],
+          "at": [
+            [
+              "at",
+              "-0.2",
+              "0"
+            ]
+          ]
+        },
+        {
+          "number": "B2",
+          "net": "GND",
+          "pinfunction": "GND",
+          "size": [
+            [
+              "size",
+              "0.23",
+              "0.23"
+            ]
+          ],
+          "at": [
+            [
+              "at",
+              "0.2",
+              "0"
+            ]
+          ]
+        },
+        {
+          "number": "C1",
+          "net": "GND",
+          "pinfunction": "ADD0",
+          "size": [
+            [
+              "size",
+              "0.23",
+              "0.23"
+            ]
+          ],
+          "at": [
+            [
+              "at",
+              "-0.2",
+              "0.4"
+            ]
+          ]
+        },
+        {
+          "number": "C2",
+          "net": "GND",
+          "pinfunction": "ALERT",
+          "size": [
+            [
+              "size",
+              "0.23",
+              "0.23"
+            ]
+          ],
+          "at": [
+            [
+              "at",
+              "0.2",
+              "0.4"
+            ]
+          ]
+        }
+      ]
+    },
+    "J1": {
+      "value": "Solar panel direct solder",
+      "footprint": "lib:Solar_Notch_Right_1p0x2p0",
+      "properties": {
+        "Reference": "J1",
+        "Value": "Solar panel direct solder",
+        "Datasheet": "",
+        "Description": ""
+      },
+      "pads": [
+        {
+          "number": "1",
+          "net": "+SOLAR",
+          "pinfunction": null,
+          "size": [
+            [
+              "size",
+              "1.4",
+              "1.4"
+            ]
+          ],
+          "at": [
+            [
+              "at",
+              "-1.4755",
+              "30.5"
+            ]
+          ]
+        },
+        {
+          "number": "2",
+          "net": "GND",
+          "pinfunction": null,
+          "size": [
+            [
+              "size",
+              "2.1",
+              "0.68"
+            ]
+          ],
+          "at": [
+            [
+              "at",
+              "-1.25",
+              "-1.06"
+            ]
+          ]
+        },
+        {
+          "number": "2",
+          "net": "GND",
+          "pinfunction": null,
+          "size": [
+            [
+              "size",
+              "2.1",
+              "0.68"
+            ]
+          ],
+          "at": [
+            [
+              "at",
+              "-1.25",
+              "-1.06"
+            ]
+          ]
+        }
+      ]
+    },
+    "R11": {
+      "value": "4.7k\u03a9",
+      "footprint": "Resistor_SMD:R_0402_1005Metric",
+      "properties": {
+        "Reference": "R11",
+        "Value": "4.7k\u03a9",
+        "Datasheet": "",
+        "Description": "Resistor, US symbol",
+        "ki_fp_filters": "R_*"
+      },
+      "pads": [
+        {
+          "number": "1",
+          "net": "+3.3V",
+          "pinfunction": null,
+          "size": [
+            [
+              "size",
+              "0.54",
+              "0.64"
+            ]
+          ],
+          "at": [
+            [
+              "at",
+              "-0.510001",
+              "0",
+              "180"
+            ]
+          ]
+        },
+        {
+          "number": "2",
+          "net": "SDA",
+          "pinfunction": null,
+          "size": [
+            [
+              "size",
+              "0.54",
+              "0.64"
+            ]
+          ],
+          "at": [
+            [
+              "at",
+              "0.510001",
+              "0",
+              "180"
+            ]
+          ]
+        }
+      ]
+    },
+    "J20": {
+      "value": "Conn_ARM_SWD_TagConnect_TC2030-NL",
+      "footprint": "Connector:Tag-Connect_TC2030-IDC-NL_2x03_P1.27mm_Vertical",
+      "properties": {
+        "Reference": "J20",
+        "Value": "Conn_ARM_SWD_TagConnect_TC2030-NL",
+        "Datasheet": "https://www.tag-connect.com/wp-content/uploads/bsk-pdf-manager/TC2030-CTX_1.pdf",
+        "Description": "Tag-Connect ARM Cortex SWD JTAG connector, 6 pin, no legs",
+        "ki_fp_filters": "*TC2030*"
+      },
+      "pads": [
+        {
+          "number": "",
+          "net": null,
+          "pinfunction": null,
+          "size": [
+            [
+              "size",
+              "0.9906",
+              "0.9906"
+            ]
+          ],
+          "at": [
+            [
+              "at",
+              "-2.54",
+              "0"
+            ]
+          ]
+        },
+        {
+          "number": "",
+          "net": null,
+          "pinfunction": null,
+          "size": [
+            [
+              "size",
+              "0.9906",
+              "0.9906"
+            ]
+          ],
+          "at": [
+            [
+              "at",
+              "2.539999",
+              "1.016"
+            ]
+          ]
+        },
+        {
+          "number": "",
+          "net": null,
+          "pinfunction": null,
+          "size": [
+            [
+              "size",
+              "0.9906",
+              "0.9906"
+            ]
+          ],
+          "at": [
+            [
+              "at",
+              "2.54",
+              "-1.016"
+            ]
+          ]
+        },
+        {
+          "number": "1",
+          "net": "+3.3V",
+          "pinfunction": "VCC",
+          "size": [
+            [
+              "size",
+              "0.7874",
+              "0.7874"
+            ]
+          ],
+          "at": [
+            [
+              "at",
+              "-1.27",
+              "0.635"
+            ]
+          ]
+        },
+        {
+          "number": "2",
+          "net": "SWDIO",
+          "pinfunction": "SWDIO",
+          "size": [
+            [
+              "size",
+              "0.7874",
+              "0.7874"
+            ]
+          ],
+          "at": [
+            [
+              "at",
+              "-1.27",
+              "-0.635001"
+            ]
+          ]
+        },
+        {
+          "number": "3",
+          "net": "RST",
+          "pinfunction": "~{RESET}",
+          "size": [
+            [
+              "size",
+              "0.7874",
+              "0.7874"
+            ]
+          ],
+          "at": [
+            [
+              "at",
+              "0",
+              "0.635"
+            ]
+          ]
+        },
+        {
+          "number": "4",
+          "net": "SWCLK",
+          "pinfunction": "SWCLK",
+          "size": [
+            [
+              "size",
+              "0.7874",
+              "0.7874"
+            ]
+          ],
+          "at": [
+            [
+              "at",
+              "0",
+              "-0.635"
+            ]
+          ]
+        },
+        {
+          "number": "5",
+          "net": "GND",
+          "pinfunction": "GND",
+          "size": [
+            [
+              "size",
+              "0.7874",
+              "0.7874"
+            ]
+          ],
+          "at": [
+            [
+              "at",
+              "1.27",
+              "0.635001"
+            ]
+          ]
+        },
+        {
+          "number": "6",
+          "net": "unconnected-(J20-SWO-Pad6)",
+          "pinfunction": "SWO",
+          "size": [
+            [
+              "size",
+              "0.7874",
+              "0.7874"
+            ]
+          ],
+          "at": [
+            [
+              "at",
+              "1.27",
+              "-0.635"
+            ]
+          ]
+        }
+      ]
+    },
+    "R13": {
+      "value": "0\u03a9",
+      "footprint": "Resistor_SMD:R_0402_1005Metric",
+      "properties": {
+        "Reference": "R13",
+        "Value": "0\u03a9",
+        "Datasheet": "",
+        "Description": "Resistor, US symbol",
+        "ki_fp_filters": "R_*"
+      },
+      "pads": [
+        {
+          "number": "1",
+          "net": "Net-(U3-SCL)",
+          "pinfunction": null,
+          "size": [
+            [
+              "size",
+              "0.54",
+              "0.64"
+            ]
+          ],
+          "at": [
+            [
+              "at",
+              "-0.510001",
+              "0"
+            ]
+          ]
+        },
+        {
+          "number": "2",
+          "net": "SCL",
+          "pinfunction": null,
+          "size": [
+            [
+              "size",
+              "0.54",
+              "0.64"
+            ]
+          ],
+          "at": [
+            [
+              "at",
+              "0.510001",
+              "0"
+            ]
+          ]
+        }
+      ]
+    },
+    "R15": {
+      "value": "33\u03a9",
+      "footprint": "Resistor_SMD:R_0402_1005Metric",
+      "properties": {
+        "Reference": "R15",
+        "Value": "33\u03a9",
+        "Datasheet": "",
+        "Description": "Resistor, US symbol",
+        "ki_fp_filters": "R_*"
+      },
+      "pads": [
+        {
+          "number": "1",
+          "net": "RX",
+          "pinfunction": null,
+          "size": [
+            [
+              "size",
+              "0.54",
+              "0.64"
+            ]
+          ],
+          "at": [
+            [
+              "at",
+              "-0.510001",
+              "0",
+              "180"
+            ]
+          ]
+        },
+        {
+          "number": "2",
+          "net": "Net-(U3-TXD)",
+          "pinfunction": null,
+          "size": [
+            [
+              "size",
+              "0.54",
+              "0.64"
+            ]
+          ],
+          "at": [
+            [
+              "at",
+              "0.510001",
+              "0",
+              "180"
+            ]
+          ]
+        }
+      ]
+    },
+    "R18": {
+      "value": "10k\u03a9",
+      "footprint": "Resistor_SMD:R_0402_1005Metric",
+      "properties": {
+        "Reference": "R18",
+        "Value": "10k\u03a9",
+        "Datasheet": "",
+        "Description": "Resistor, US symbol",
+        "ki_fp_filters": "R_*"
+      },
+      "pads": [
+        {
+          "number": "1",
+          "net": "Net-(U3-VCC)",
+          "pinfunction": null,
+          "size": [
+            [
+              "size",
+              "0.54",
+              "0.64"
+            ]
+          ],
+          "at": [
+            [
+              "at",
+              "-0.510001",
+              "0",
+              "90"
+            ]
+          ]
+        },
+        {
+          "number": "2",
+          "net": "RSTN",
+          "pinfunction": null,
+          "size": [
+            [
+              "size",
+              "0.54",
+              "0.64"
+            ]
+          ],
+          "at": [
+            [
+              "at",
+              "0.510001",
+              "0",
+              "90"
+            ]
+          ]
+        }
+      ]
+    },
+    "C12": {
+      "value": "100nF",
+      "footprint": "Capacitor_SMD:C_0402_1005Metric",
+      "properties": {
+        "Reference": "C12",
+        "Value": "100nF",
+        "Datasheet": "",
+        "Description": "Unpolarized capacitor",
+        "ki_fp_filters": "C_*"
+      },
+      "pads": [
+        {
+          "number": "1",
+          "net": "GND",
+          "pinfunction": null,
+          "size": [
+            [
+              "size",
+              "0.56",
+              "0.62"
+            ]
+          ],
+          "at": [
+            [
+              "at",
+              "-0.48",
+              "0",
+              "270"
+            ]
+          ]
+        },
+        {
+          "number": "2",
+          "net": "+3.3V",
+          "pinfunction": null,
+          "size": [
+            [
+              "size",
+              "0.56",
+              "0.62"
+            ]
+          ],
+          "at": [
+            [
+              "at",
+              "0.48",
+              "0",
+              "270"
+            ]
+          ]
+        }
+      ]
+    },
+    "D1": {
+      "value": "ESD9B3.3ST5G",
+      "footprint": "Diode_SMD:D_SOD-523",
+      "properties": {
+        "Reference": "D1",
+        "Value": "ESD9B3.3ST5G",
+        "Datasheet": "https://www.lcsc.com/product-detail/C5272735.html?s_z=n_C5272735%2520",
+        "Description": "UNI-ROYAL 0402WGF3654TCE",
+        "ki_fp_filters": "D*SOD?923*"
+      },
+      "pads": [
+        {
+          "number": "1",
+          "net": "GND",
+          "pinfunction": "A1",
+          "size": [
+            [
+              "size",
+              "0.6",
+              "0.7"
+            ]
+          ],
+          "at": [
+            [
+              "at",
+              "-0.700001",
+              "0"
+            ]
+          ]
+        },
+        {
+          "number": "2",
+          "net": "Net-(AE1-A)",
+          "pinfunction": "A2",
+          "size": [
+            [
+              "size",
+              "0.6",
+              "0.7"
+            ]
+          ],
+          "at": [
+            [
+              "at",
+              "0.700001",
+              "0"
+            ]
+          ]
+        }
+      ]
+    },
+    "C21": {
+      "value": "10\u03bcF",
+      "footprint": "Capacitor_SMD:C_0603_1608Metric",
+      "properties": {
+        "Reference": "C21",
+        "Value": "10\u03bcF",
+        "Datasheet": "",
+        "Description": "Unpolarized capacitor",
+        "ki_fp_filters": "C_*"
+      },
+      "pads": [
+        {
+          "number": "1",
+          "net": "GND",
+          "pinfunction": null,
+          "size": [
+            [
+              "size",
+              "0.9",
+              "0.95"
+            ]
+          ],
+          "at": [
+            [
+              "at",
+              "-0.775",
+              "0",
+              "180"
+            ]
+          ]
+        },
+        {
+          "number": "2",
+          "net": "+3.3V",
+          "pinfunction": null,
+          "size": [
+            [
+              "size",
+              "0.9",
+              "0.95"
+            ]
+          ],
+          "at": [
+            [
+              "at",
+              "0.775",
+              "0",
+              "180"
+            ]
+          ]
+        }
+      ]
+    },
+    "R23": {
+      "value": "1M\u03a9",
+      "footprint": "Resistor_SMD:R_0402_1005Metric",
+      "properties": {
+        "Reference": "R23",
+        "Value": "1M\u03a9",
+        "Datasheet": "https://www.lcsc.com/product-detail/C60490.html?s_z=n_10kohm%2520resistor%25200402",
+        "Description": "RC0402FR-0710KL",
+        "ki_fp_filters": "R_*"
+      },
+      "pads": [
+        {
+          "number": "1",
+          "net": "PA10",
+          "pinfunction": null,
+          "size": [
+            [
+              "size",
+              "0.54",
+              "0.64"
+            ]
+          ],
+          "at": [
+            [
+              "at",
+              "-0.510001",
+              "0",
+              "90"
+            ]
+          ]
+        },
+        {
+          "number": "2",
+          "net": "GND",
+          "pinfunction": null,
+          "size": [
+            [
+              "size",
+              "0.54",
+              "0.64"
+            ]
+          ],
+          "at": [
+            [
+              "at",
+              "0.510001",
+              "0",
+              "90"
+            ]
+          ]
+        }
+      ]
+    },
+    "C7": {
+      "value": "100nF",
+      "footprint": "Capacitor_SMD:C_0402_1005Metric",
+      "properties": {
+        "Reference": "C7",
+        "Value": "100nF",
+        "Datasheet": "",
+        "Description": "Unpolarized capacitor",
+        "ki_fp_filters": "C_*"
+      },
+      "pads": [
+        {
+          "number": "1",
+          "net": "GND",
+          "pinfunction": null,
+          "size": [
+            [
+              "size",
+              "0.56",
+              "0.62"
+            ]
+          ],
+          "at": [
+            [
+              "at",
+              "-0.48",
+              "0",
+              "180"
+            ]
+          ]
+        },
+        {
+          "number": "2",
+          "net": "+3.3V",
+          "pinfunction": null,
+          "size": [
+            [
+              "size",
+              "0.56",
+              "0.62"
+            ]
+          ],
+          "at": [
+            [
+              "at",
+              "0.48",
+              "0",
+              "180"
+            ]
+          ]
+        }
+      ]
+    },
+    "J3": {
+      "value": "Conn_PinHeader_1x07_P2.54mm_Vertical_THT_D1mm",
+      "footprint": "lib:Stratolink_Header_Left_1x07_P1p00_D0p50_Pad0p88",
+      "properties": {
+        "Reference": "J3",
+        "Value": "Conn_PinHeader_1x07_P2.54mm_Vertical_THT_D1mm",
+        "Datasheet": "",
+        "Description": "Connector Header Through Hole 7 positions 0.100\" (2.54mm)",
+        "ki_fp_filters": "*PinHeader*1x07*"
+      },
+      "pads": [
+        {
+          "number": "1",
+          "net": "PA1",
+          "pinfunction": "Pin_1",
+          "size": [
+            [
+              "size",
+              "0.88",
+              "0.88"
+            ]
+          ],
+          "at": [
+            [
+              "at",
+              "0",
+              "0"
+            ]
+          ]
+        },
+        {
+          "number": "2",
+          "net": "GND",
+          "pinfunction": "Pin_2",
+          "size": [
+            [
+              "size",
+              "0.88",
+              "0.88"
+            ]
+          ],
+          "at": [
+            [
+              "at",
+              "0",
+              "1.000001"
+            ]
+          ]
+        },
+        {
+          "number": "3",
+          "net": "PA9",
+          "pinfunction": "Pin_3",
+          "size": [
+            [
+              "size",
+              "0.88",
+              "0.88"
+            ]
+          ],
+          "at": [
+            [
+              "at",
+              "0.000001",
+              "2.000003"
+            ]
+          ]
+        },
+        {
+          "number": "4",
+          "net": "GND",
+          "pinfunction": "Pin_4",
+          "size": [
+            [
+              "size",
+              "0.88",
+              "0.88"
+            ]
+          ],
+          "at": [
+            [
+              "at",
+              "0.000002",
+              "3.000002"
+            ]
+          ]
+        },
+        {
+          "number": "5",
+          "net": "GND",
+          "pinfunction": "Pin_5",
+          "size": [
+            [
+              "size",
+              "0.88",
+              "0.88"
+            ]
+          ],
+          "at": [
+            [
+              "at",
+              "0",
+              "4"
+            ]
+          ]
+        },
+        {
+          "number": "6",
+          "net": "PB2",
+          "pinfunction": "Pin_6",
+          "size": [
+            [
+              "size",
+              "0.88",
+              "0.88"
+            ]
+          ],
+          "at": [
+            [
+              "at",
+              "0",
+              "5"
+            ]
+          ]
+        },
+        {
+          "number": "7",
+          "net": "GND",
+          "pinfunction": "Pin_7",
+          "size": [
+            [
+              "size",
+              "0.88",
+              "0.88"
+            ]
+          ],
+          "at": [
+            [
+              "at",
+              "0",
+              "6"
+            ]
+          ]
+        }
+      ]
+    },
+    "C17": {
+      "value": "100nF",
+      "footprint": "Capacitor_SMD:C_0402_1005Metric",
+      "properties": {
+        "Reference": "C17",
+        "Value": "100nF",
+        "Datasheet": "",
+        "Description": "Unpolarized capacitor",
+        "ki_fp_filters": "C_*"
+      },
+      "pads": [
+        {
+          "number": "1",
+          "net": "GND",
+          "pinfunction": null,
+          "size": [
+            [
+              "size",
+              "0.56",
+              "0.62"
+            ]
+          ],
+          "at": [
+            [
+              "at",
+              "-0.48",
+              "0"
+            ]
+          ]
+        },
+        {
+          "number": "2",
+          "net": "PA10",
+          "pinfunction": null,
+          "size": [
+            [
+              "size",
+              "0.56",
+              "0.62"
+            ]
+          ],
+          "at": [
+            [
+              "at",
+              "0.48",
+              "0"
+            ]
+          ]
+        }
+      ]
+    },
+    "H2": {
+      "value": "Suspension 2.0 mm PTH",
+      "footprint": "lib:Suspension_PTH_D2p0_OD3p2",
+      "properties": {
+        "Reference": "H2",
+        "Value": "Suspension 2.0 mm PTH",
+        "Datasheet": "",
+        "Description": ""
+      },
+      "pads": [
+        {
+          "number": "1",
+          "net": "GND",
+          "pinfunction": null,
+          "size": [
+            [
+              "size",
+              "3.2",
+              "3.2"
+            ]
+          ],
+          "at": [
+            [
+              "at",
+              "0",
+              "0"
+            ]
+          ]
+        }
+      ]
+    },
+    "AE1": {
+      "value": "Enameled Cu wire 82mm (915MHz reference)",
+      "footprint": "lib:Stratolink_LoRa_Wire_PTH_D1p0",
+      "properties": {
+        "Reference": "AE1",
+        "Value": "Enameled Cu wire 82mm (915MHz reference)",
+        "Datasheet": "https://stratolink.org/docs/hardware#antennas-and-suspension",
+        "Description": "Hand-formed enamelled copper wire; 82 mm from feed for 915 MHz, 83 mm compromise or 86 mm for 868 MHz; diameter not yet measured"
+      },
+      "pads": [
+        {
+          "number": "1",
+          "net": "Net-(AE1-A)",
+          "pinfunction": "A",
+          "size": [
+            [
+              "size",
+              "1.5",
+              "1.5"
+            ]
+          ],
+          "at": [
+            [
+              "at",
+              "0",
+              "0",
+              "270"
+            ]
+          ]
+        }
+      ]
+    },
+    "R16": {
+      "value": "33\u03a9",
+      "footprint": "Resistor_SMD:R_0402_1005Metric",
+      "properties": {
+        "Reference": "R16",
+        "Value": "33\u03a9",
+        "Datasheet": "",
+        "Description": "Resistor, US symbol",
+        "ki_fp_filters": "R_*"
+      },
+      "pads": [
+        {
+          "number": "1",
+          "net": "TX",
+          "pinfunction": null,
+          "size": [
+            [
+              "size",
+              "0.54",
+              "0.64"
+            ]
+          ],
+          "at": [
+            [
+              "at",
+              "-0.510001",
+              "0",
+              "180"
+            ]
+          ]
+        },
+        {
+          "number": "2",
+          "net": "Net-(U3-RXD)",
+          "pinfunction": null,
+          "size": [
+            [
+              "size",
+              "0.54",
+              "0.64"
+            ]
+          ],
+          "at": [
+            [
+              "at",
+              "0.510001",
+              "0",
+              "180"
+            ]
+          ]
+        }
+      ]
+    },
+    "R22": {
+      "value": "1M\u03a9",
+      "footprint": "Resistor_SMD:R_0402_1005Metric",
+      "properties": {
+        "Reference": "R22",
+        "Value": "1M\u03a9",
+        "Datasheet": "https://www.lcsc.com/product-detail/C60490.html?s_z=n_10kohm%2520resistor%25200402",
+        "Description": "RC0402FR-0710KL",
+        "ki_fp_filters": "R_*"
+      },
+      "pads": [
+        {
+          "number": "1",
+          "net": "VSTOR",
+          "pinfunction": null,
+          "size": [
+            [
+              "size",
+              "0.54",
+              "0.64"
+            ]
+          ],
+          "at": [
+            [
+              "at",
+              "-0.510001",
+              "0",
+              "270"
+            ]
+          ]
+        },
+        {
+          "number": "2",
+          "net": "PA10",
+          "pinfunction": null,
+          "size": [
+            [
+              "size",
+              "0.54",
+              "0.64"
+            ]
+          ],
+          "at": [
+            [
+              "at",
+              "0.510001",
+              "0",
+              "270"
+            ]
+          ]
+        }
+      ]
+    },
+    "C11": {
+      "value": "100nF",
+      "footprint": "Capacitor_SMD:C_0402_1005Metric",
+      "properties": {
+        "Reference": "C11",
+        "Value": "100nF",
+        "Datasheet": "",
+        "Description": "Unpolarized capacitor",
+        "ki_fp_filters": "C_*"
+      },
+      "pads": [
+        {
+          "number": "1",
+          "net": "GND",
+          "pinfunction": null,
+          "size": [
+            [
+              "size",
+              "0.56",
+              "0.62"
+            ]
+          ],
+          "at": [
+            [
+              "at",
+              "-0.48",
+              "0",
+              "90"
+            ]
+          ]
+        },
+        {
+          "number": "2",
+          "net": "+3.3V",
+          "pinfunction": null,
+          "size": [
+            [
+              "size",
+              "0.56",
+              "0.62"
+            ]
+          ],
+          "at": [
+            [
+              "at",
+              "0.48",
+              "0",
+              "90"
+            ]
+          ]
+        }
+      ]
+    },
+    "H1": {
+      "value": "Suspension 2.0 mm PTH",
+      "footprint": "lib:Suspension_PTH_D2p0_OD3p2",
+      "properties": {
+        "Reference": "H1",
+        "Value": "Suspension 2.0 mm PTH",
+        "Datasheet": "",
+        "Description": ""
+      },
+      "pads": [
+        {
+          "number": "1",
+          "net": "GND",
+          "pinfunction": null,
+          "size": [
+            [
+              "size",
+              "3.2",
+              "3.2"
+            ]
+          ],
+          "at": [
+            [
+              "at",
+              "0",
+              "0"
+            ]
+          ]
+        }
+      ]
+    },
+    "D3": {
+      "value": "ESD9B3.3ST5G",
+      "footprint": "Diode_SMD:D_SOD-523",
+      "properties": {
+        "Reference": "D3",
+        "Value": "ESD9B3.3ST5G",
+        "Datasheet": "https://www.lcsc.com/product-detail/C5272735.html?s_z=n_C5272735%2520",
+        "Description": "UNI-ROYAL 0402WGF3654TCE",
+        "ki_fp_filters": "D*SOD?923*"
+      },
+      "pads": [
+        {
+          "number": "1",
+          "net": "GND",
+          "pinfunction": "A1",
+          "size": [
+            [
+              "size",
+              "0.6",
+              "0.7"
+            ]
+          ],
+          "at": [
+            [
+              "at",
+              "-0.700001",
+              "0",
+              "270"
+            ]
+          ]
+        },
+        {
+          "number": "2",
+          "net": "Net-(AE2-A)",
+          "pinfunction": "A2",
+          "size": [
+            [
+              "size",
+              "0.6",
+              "0.7"
+            ]
+          ],
+          "at": [
+            [
+              "at",
+              "0.700001",
+              "0",
+              "270"
+            ]
+          ]
+        }
+      ]
+    },
+    "FB1": {
+      "value": "~",
+      "footprint": "Capacitor_SMD:C_0402_1005Metric",
+      "properties": {
+        "Reference": "FB1",
+        "Value": "~",
+        "Datasheet": "https://www.lcsc.com/product-detail/C76884.html?s_z=n_BLM15AG601SN1%2520",
+        "Description": "BLM15AG601SN1D",
+        "ki_fp_filters": "Inductor_* L_* *Ferrite*"
+      },
+      "pads": [
+        {
+          "number": "1",
+          "net": "Net-(U3-VCC)",
+          "pinfunction": null,
+          "size": [
+            [
+              "size",
+              "0.56",
+              "0.62"
+            ]
+          ],
+          "at": [
+            [
+              "at",
+              "-0.48",
+              "0",
+              "270"
+            ]
+          ]
+        },
+        {
+          "number": "2",
+          "net": "+3.3V",
+          "pinfunction": null,
+          "size": [
+            [
+              "size",
+              "0.56",
+              "0.62"
+            ]
+          ],
+          "at": [
+            [
+              "at",
+              "0.48",
+              "0",
+              "270"
+            ]
+          ]
+        }
+      ]
+    },
+    "C16": {
+      "value": "4.7\u03bcF",
+      "footprint": "Capacitor_SMD:C_0603_1608Metric",
+      "properties": {
+        "Reference": "C16",
+        "Value": "4.7\u03bcF",
+        "Datasheet": "",
+        "Description": "Unpolarized capacitor",
+        "ki_fp_filters": "C_*"
+      },
+      "pads": [
+        {
+          "number": "1",
+          "net": "GND",
+          "pinfunction": null,
+          "size": [
+            [
+              "size",
+              "0.9",
+              "0.95"
+            ]
+          ],
+          "at": [
+            [
+              "at",
+              "-0.775",
+              "0",
+              "90"
+            ]
+          ]
+        },
+        {
+          "number": "2",
+          "net": "+3.3V",
+          "pinfunction": null,
+          "size": [
+            [
+              "size",
+              "0.9",
+              "0.95"
+            ]
+          ],
+          "at": [
+            [
+              "at",
+              "0.775",
+              "0",
+              "90"
+            ]
+          ]
+        }
+      ]
+    },
+    "R7": {
+      "value": "4.75M\u03a9",
+      "footprint": "Resistor_SMD:R_0402_1005Metric",
+      "properties": {
+        "Reference": "R7",
+        "Value": "4.75M\u03a9",
+        "Datasheet": "",
+        "Description": "Resistor, US symbol",
+        "ki_fp_filters": "R_*"
+      },
+      "pads": [
+        {
+          "number": "1",
+          "net": "Net-(U1-VOUT_SET)",
+          "pinfunction": null,
+          "size": [
+            [
+              "size",
+              "0.54",
+              "0.64"
+            ]
+          ],
+          "at": [
+            [
+              "at",
+              "-0.510001",
+              "0",
+              "90"
+            ]
+          ]
+        },
+        {
+          "number": "2",
+          "net": "GND",
+          "pinfunction": null,
+          "size": [
+            [
+              "size",
+              "0.54",
+              "0.64"
+            ]
+          ],
+          "at": [
+            [
+              "at",
+              "0.510001",
+              "0",
+              "90"
+            ]
+          ]
+        }
+      ]
+    },
+    "C5": {
+      "value": "1F",
+      "footprint": "lib:DMF4B5R5G105M3DTA0",
+      "properties": {
+        "Reference": "C5",
+        "Value": "1F",
+        "Datasheet": "",
+        "Description": "Supercap",
+        "ki_fp_filters": "C_*"
+      },
+      "pads": [
+        {
+          "number": "1",
+          "net": "Net-(U1-VBAT)",
+          "pinfunction": null,
+          "size": [
+            [
+              "size",
+              "2.5",
+              "3.5"
+            ]
+          ],
+          "at": [
+            [
+              "at",
+              "3.5",
+              "18.5",
+              "180"
+            ]
+          ]
+        },
+        {
+          "number": "2",
+          "net": "GND",
+          "pinfunction": null,
+          "size": [
+            [
+              "size",
+              "2.5",
+              "3.5"
+            ]
+          ],
+          "at": [
+            [
+              "at",
+              "-3.5",
+              "18.5",
+              "180"
+            ]
+          ]
+        },
+        {
+          "number": "3",
+          "net": null,
+          "pinfunction": null,
+          "size": [
+            [
+              "size",
+              "2.5",
+              "3.5"
+            ]
+          ],
+          "at": [
+            [
+              "at",
+              "0.01",
+              "18.5",
+              "180"
+            ]
+          ]
+        }
+      ]
+    },
+    "L2": {
+      "value": "10\u00b5H",
+      "footprint": "lib:INDC1608X90N",
+      "properties": {
+        "Reference": "L2",
+        "Value": "10\u00b5H",
+        "Datasheet": "https://www.lcsc.com/product-detail/C436784.html?s_z=n_C436784%2520",
+        "Description": "PROD Tech PWCWAQ1608F-100KTT",
+        "ki_fp_filters": "Choke_* *Coil* Inductor_* L_*"
+      },
+      "pads": [
+        {
+          "number": "1",
+          "net": "Net-(U1-LBUCK)",
+          "pinfunction": "1",
+          "size": [
+            [
+              "size",
+              "0.87",
+              "0.93"
+            ]
+          ],
+          "at": [
+            [
+              "at",
+              "-0.78",
+              "0"
+            ]
+          ]
+        },
+        {
+          "number": "2",
+          "net": "+3.3V",
+          "pinfunction": "2",
+          "size": [
+            [
+              "size",
+              "0.87",
+              "0.93"
+            ]
+          ],
+          "at": [
+            [
+              "at",
+              "0.78",
+              "0"
+            ]
+          ]
+        }
+      ]
+    },
+    "R1": {
+      "value": "8.25M\u03a9",
+      "footprint": "Resistor_SMD:R_0402_1005Metric",
+      "properties": {
+        "Reference": "R1",
+        "Value": "8.25M\u03a9",
+        "Datasheet": "",
+        "Description": "Resistor, US symbol",
+        "ki_fp_filters": "R_*"
+      },
+      "pads": [
+        {
+          "number": "1",
+          "net": "Net-(U1-VRDIV)",
+          "pinfunction": null,
+          "size": [
+            [
+              "size",
+              "0.54",
+              "0.64"
+            ]
+          ],
+          "at": [
+            [
+              "at",
+              "-0.510001",
+              "0",
+              "270"
+            ]
+          ]
+        },
+        {
+          "number": "2",
+          "net": "Net-(U1-VBAT_OV)",
+          "pinfunction": null,
+          "size": [
+            [
+              "size",
+              "0.54",
+              "0.64"
+            ]
+          ],
+          "at": [
+            [
+              "at",
+              "0.510001",
+              "0",
+              "270"
+            ]
+          ]
+        }
+      ]
+    },
+    "R8": {
+      "value": "100k\u03a9",
+      "footprint": "Resistor_SMD:R_0402_1005Metric",
+      "properties": {
+        "Reference": "R8",
+        "Value": "100k\u03a9",
+        "Datasheet": "",
+        "Description": "Resistor, US symbol",
+        "ki_fp_filters": "R_*"
+      },
+      "pads": [
+        {
+          "number": "1",
+          "net": "Net-(U1-VBAT_OK)",
+          "pinfunction": null,
+          "size": [
+            [
+              "size",
+              "0.54",
+              "0.64"
+            ]
+          ],
+          "at": [
+            [
+              "at",
+              "-0.510001",
+              "0"
+            ]
+          ]
+        },
+        {
+          "number": "2",
+          "net": "PB5",
+          "pinfunction": null,
+          "size": [
+            [
+              "size",
+              "0.54",
+              "0.64"
+            ]
+          ],
+          "at": [
+            [
+              "at",
+              "0.510001",
+              "0"
+            ]
+          ]
+        }
+      ]
+    },
+    "C2": {
+      "value": "4.7\u03bcF",
+      "footprint": "Capacitor_SMD:C_0603_1608Metric",
+      "properties": {
+        "Reference": "C2",
+        "Value": "4.7\u03bcF",
+        "Datasheet": "",
+        "Description": "Unpolarized capacitor",
+        "ki_fp_filters": "C_*"
+      },
+      "pads": [
+        {
+          "number": "1",
+          "net": "+SOLAR",
+          "pinfunction": null,
+          "size": [
+            [
+              "size",
+              "0.9",
+              "0.95"
+            ]
+          ],
+          "at": [
+            [
+              "at",
+              "-0.775",
+              "0",
+              "270"
+            ]
+          ]
+        },
+        {
+          "number": "2",
+          "net": "GND",
+          "pinfunction": null,
+          "size": [
+            [
+              "size",
+              "0.9",
+              "0.95"
+            ]
+          ],
+          "at": [
+            [
+              "at",
+              "0.775",
+              "0",
+              "270"
+            ]
+          ]
+        }
+      ]
+    },
+    "R5": {
+      "value": "4.42M\u03a9",
+      "footprint": "Resistor_SMD:R_0402_1005Metric",
+      "properties": {
+        "Reference": "R5",
+        "Value": "4.42M\u03a9",
+        "Datasheet": "",
+        "Description": "Resistor, US symbol",
+        "ki_fp_filters": "R_*"
+      },
+      "pads": [
+        {
+          "number": "1",
+          "net": "Net-(U1-OK_PROG)",
+          "pinfunction": null,
+          "size": [
+            [
+              "size",
+              "0.54",
+              "0.64"
+            ]
+          ],
+          "at": [
+            [
+              "at",
+              "-0.510001",
+              "0",
+              "90"
+            ]
+          ]
+        },
+        {
+          "number": "2",
+          "net": "GND",
+          "pinfunction": null,
+          "size": [
+            [
+              "size",
+              "0.54",
+              "0.64"
+            ]
+          ],
+          "at": [
+            [
+              "at",
+              "0.510001",
+              "0",
+              "90"
+            ]
+          ]
+        }
+      ]
+    },
+    "C4": {
+      "value": "100nF",
+      "footprint": "Capacitor_SMD:C_0402_1005Metric",
+      "properties": {
+        "Reference": "C4",
+        "Value": "100nF",
+        "Datasheet": "",
+        "Description": "Unpolarized capacitor",
+        "ki_fp_filters": "C_*"
+      },
+      "pads": [
+        {
+          "number": "1",
+          "net": "VSTOR",
+          "pinfunction": null,
+          "size": [
+            [
+              "size",
+              "0.56",
+              "0.62"
+            ]
+          ],
+          "at": [
+            [
+              "at",
+              "-0.48",
+              "0",
+              "180"
+            ]
+          ]
+        },
+        {
+          "number": "2",
+          "net": "GND",
+          "pinfunction": null,
+          "size": [
+            [
+              "size",
+              "0.56",
+              "0.62"
+            ]
+          ],
+          "at": [
+            [
+              "at",
+              "0.48",
+              "0",
+              "180"
+            ]
+          ]
+        }
+      ]
+    },
+    "U1": {
+      "value": "~",
+      "footprint": "lib:QFN50P350X350X100-21N",
+      "properties": {
+        "Reference": "U1",
+        "Value": "~",
+        "Datasheet": "https://www.ti.com/cn/lit/gpn/bq25570",
+        "Description": "Operating Temperature:-40\u00b0C~+125\u00b0C Operating Temperature:-40\u00b0C~+125\u00b0C ",
+        "Manufacturer Part": "BQ25570RGRR",
+        "Manufacturer": "TI(\u5fb7\u5dde\u4eea\u5668)",
+        "Supplier Part": "C506250",
+        "Supplier": "LCSC",
+        "LCSC Part Name": "\u9002\u7528\u4e8e\u80fd\u91cf\u6536\u96c6\u5668\u4f9b\u7535\u5e94\u7528\u7684\u5fae\u529f\u7387\u5347\u538b\u5145\u7535\u5668\u4e0e\u964d\u538b\u8f6c\u6362\u5668"
+      },
+      "pads": [
+        {
+          "number": "1",
+          "net": "GND",
+          "pinfunction": "VSS",
+          "size": [
+            [
+              "size",
+              "0.6",
+              "0.24"
+            ]
+          ],
+          "at": [
+            [
+              "at",
+              "-1.649999",
+              "0.999999"
+            ]
+          ]
+        },
+        {
+          "number": "2",
+          "net": "+SOLAR",
+          "pinfunction": "VIN_DC",
+          "size": [
+            [
+              "size",
+              "0.6",
+              "0.24"
+            ]
+          ],
+          "at": [
+            [
+              "at",
+              "-1.650001",
+              "0.500001"
+            ]
+          ]
+        },
+        {
+          "number": "3",
+          "net": "VSTOR",
+          "pinfunction": "VOC_SAMP",
+          "size": [
+            [
+              "size",
+              "0.6",
+              "0.24"
+            ]
+          ],
+          "at": [
+            [
+              "at",
+              "-1.65",
+              "0"
+            ]
+          ]
+        },
+        {
+          "number": "4",
+          "net": "Net-(U1-VREF_SAMP)",
+          "pinfunction": "VREF_SAMP",
+          "size": [
+            [
+              "size",
+              "0.6",
+              "0.24"
+            ]
+          ],
+          "at": [
+            [
+              "at",
+              "-1.649999",
+              "-0.5"
+            ]
+          ]
+        },
+        {
+          "number": "5",
+          "net": "GND",
+          "pinfunction": "EN#",
+          "size": [
+            [
+              "size",
+              "0.6",
+              "0.24"
+            ]
+          ],
+          "at": [
+            [
+              "at",
+              "-1.650001",
+              "-0.999998"
+            ]
+          ]
+        },
+        {
+          "number": "6",
+          "net": "VSTOR",
+          "pinfunction": "VOUT_EN",
+          "size": [
+            [
+              "size",
+              "0.24",
+              "0.6"
+            ]
+          ],
+          "at": [
+            [
+              "at",
+              "-0.999999",
+              "-1.649999"
+            ]
+          ]
+        },
+        {
+          "number": "7",
+          "net": "Net-(U1-VBAT_OV)",
+          "pinfunction": "VBAT_OV",
+          "size": [
+            [
+              "size",
+              "0.24",
+              "0.6"
+            ]
+          ],
+          "at": [
+            [
+              "at",
+              "-0.500001",
+              "-1.650001"
+            ]
+          ]
+        },
+        {
+          "number": "8",
+          "net": "Net-(U1-VRDIV)",
+          "pinfunction": "VRDIV",
+          "size": [
+            [
+              "size",
+              "0.24",
+              "0.6"
+            ]
+          ],
+          "at": [
+            [
+              "at",
+              "0",
+              "-1.65"
+            ]
+          ]
+        },
+        {
+          "number": "9",
+          "net": "GND",
+          "pinfunction": "NC",
+          "size": [
+            [
+              "size",
+              "0.24",
+              "0.6"
+            ]
+          ],
+          "at": [
+            [
+              "at",
+              "0.5",
+              "-1.649999"
+            ]
+          ]
+        },
+        {
+          "number": "10",
+          "net": "Net-(U1-OK_HYST)",
+          "pinfunction": "OK_HYST",
+          "size": [
+            [
+              "size",
+              "0.24",
+              "0.6"
+            ]
+          ],
+          "at": [
+            [
+              "at",
+              "0.999998",
+              "-1.650001"
+            ]
+          ]
+        },
+        {
+          "number": "11",
+          "net": "Net-(U1-OK_PROG)",
+          "pinfunction": "OK_PROG",
+          "size": [
+            [
+              "size",
+              "0.6",
+              "0.24"
+            ]
+          ],
+          "at": [
+            [
+              "at",
+              "1.649999",
+              "-0.999999"
+            ]
+          ]
+        },
+        {
+          "number": "12",
+          "net": "Net-(U1-VOUT_SET)",
+          "pinfunction": "VOUT_SET",
+          "size": [
+            [
+              "size",
+              "0.6",
+              "0.24"
+            ]
+          ],
+          "at": [
+            [
+              "at",
+              "1.650001",
+              "-0.500001"
+            ]
+          ]
+        },
+        {
+          "number": "13",
+          "net": "Net-(U1-VBAT_OK)",
+          "pinfunction": "VBAT_OK",
+          "size": [
+            [
+              "size",
+              "0.6",
+              "0.24"
+            ]
+          ],
+          "at": [
+            [
+              "at",
+              "1.65",
+              "0"
+            ]
+          ]
+        },
+        {
+          "number": "14",
+          "net": "+3.3V",
+          "pinfunction": "VOUT",
+          "size": [
+            [
+              "size",
+              "0.6",
+              "0.24"
+            ]
+          ],
+          "at": [
+            [
+              "at",
+              "1.649999",
+              "0.5"
+            ]
+          ]
+        },
+        {
+          "number": "15",
+          "net": "GND",
+          "pinfunction": "VSS",
+          "size": [
+            [
+              "size",
+              "0.6",
+              "0.24"
+            ]
+          ],
+          "at": [
+            [
+              "at",
+              "1.650001",
+              "0.999998"
+            ]
+          ]
+        },
+        {
+          "number": "16",
+          "net": "Net-(U1-LBUCK)",
+          "pinfunction": "LBUCK",
+          "size": [
+            [
+              "size",
+              "0.24",
+              "0.6"
+            ]
+          ],
+          "at": [
+            [
+              "at",
+              "0.999999",
+              "1.649999"
+            ]
+          ]
+        },
+        {
+          "number": "17",
+          "net": "GND",
+          "pinfunction": "NC",
+          "size": [
+            [
+              "size",
+              "0.24",
+              "0.6"
+            ]
+          ],
+          "at": [
+            [
+              "at",
+              "0.500001",
+              "1.650001"
+            ]
+          ]
+        },
+        {
+          "number": "18",
+          "net": "Net-(U1-VBAT)",
+          "pinfunction": "VBAT",
+          "size": [
+            [
+              "size",
+              "0.24",
+              "0.6"
+            ]
+          ],
+          "at": [
+            [
+              "at",
+              "0",
+              "1.65"
+            ]
+          ]
+        },
+        {
+          "number": "19",
+          "net": "VSTOR",
+          "pinfunction": "VSTOR",
+          "size": [
+            [
+              "size",
+              "0.24",
+              "0.6"
+            ]
+          ],
+          "at": [
+            [
+              "at",
+              "-0.5",
+              "1.649999"
+            ]
+          ]
+        },
+        {
+          "number": "20",
+          "net": "Net-(U1-LBOOST)",
+          "pinfunction": "LBOOST",
+          "size": [
+            [
+              "size",
+              "0.24",
+              "0.6"
+            ]
+          ],
+          "at": [
+            [
+              "at",
+              "-0.999998",
+              "1.650001"
+            ]
+          ]
+        },
+        {
+          "number": "21",
+          "net": "GND",
+          "pinfunction": "EP",
+          "size": [
+            [
+              "size",
+              "2.05",
+              "2.05"
+            ]
+          ],
+          "at": [
+            [
+              "at",
+              "0",
+              "0"
+            ]
+          ]
+        },
+        {
+          "number": "22",
+          "net": "GND",
+          "pinfunction": null,
+          "size": [
+            [
+              "size",
+              "0.5",
+              "0.5"
+            ]
+          ],
+          "at": [
+            [
+              "at",
+              "0",
+              "0.775"
+            ]
+          ]
+        },
+        {
+          "number": "23",
+          "net": "GND",
+          "pinfunction": null,
+          "size": [
+            [
+              "size",
+              "0.5",
+              "0.5"
+            ]
+          ],
+          "at": [
+            [
+              "at",
+              "-0.775",
+              "0"
+            ]
+          ]
+        },
+        {
+          "number": "24",
+          "net": "GND",
+          "pinfunction": null,
+          "size": [
+            [
+              "size",
+              "0.5",
+              "0.5"
+            ]
+          ],
+          "at": [
+            [
+              "at",
+              "0",
+              "0"
+            ]
+          ]
+        },
+        {
+          "number": "25",
+          "net": "GND",
+          "pinfunction": null,
+          "size": [
+            [
+              "size",
+              "0.5",
+              "0.5"
+            ]
+          ],
+          "at": [
+            [
+              "at",
+              "0.775",
+              "0"
+            ]
+          ]
+        },
+        {
+          "number": "26",
+          "net": "GND",
+          "pinfunction": null,
+          "size": [
+            [
+              "size",
+              "0.5",
+              "0.5"
+            ]
+          ],
+          "at": [
+            [
+              "at",
+              "0",
+              "-0.775"
+            ]
+          ]
+        }
+      ]
+    },
+    "C1": {
+      "value": "10nF",
+      "footprint": "Capacitor_SMD:C_0402_1005Metric",
+      "properties": {
+        "Reference": "C1",
+        "Value": "10nF",
+        "Datasheet": "https://www.lcsc.com/product-detail/C3855387.html?s_z=n_C3855387%2520",
+        "Description": "Unpolarized capacitor",
+        "ki_fp_filters": "C_*"
+      },
+      "pads": [
+        {
+          "number": "1",
+          "net": "GND",
+          "pinfunction": null,
+          "size": [
+            [
+              "size",
+              "0.56",
+              "0.62"
+            ]
+          ],
+          "at": [
+            [
+              "at",
+              "-0.48",
+              "0",
+              "270"
+            ]
+          ]
+        },
+        {
+          "number": "2",
+          "net": "Net-(U1-VREF_SAMP)",
+          "pinfunction": null,
+          "size": [
+            [
+              "size",
+              "0.56",
+              "0.62"
+            ]
+          ],
+          "at": [
+            [
+              "at",
+              "0.48",
+              "0",
+              "270"
+            ]
+          ]
+        }
+      ]
+    },
+    "R6": {
+      "value": "8.25M\u03a9",
+      "footprint": "Resistor_SMD:R_0402_1005Metric",
+      "properties": {
+        "Reference": "R6",
+        "Value": "8.25M\u03a9",
+        "Datasheet": "",
+        "Description": "Resistor, US symbol",
+        "ki_fp_filters": "R_*"
+      },
+      "pads": [
+        {
+          "number": "1",
+          "net": "Net-(U1-VRDIV)",
+          "pinfunction": null,
+          "size": [
+            [
+              "size",
+              "0.54",
+              "0.64"
+            ]
+          ],
+          "at": [
+            [
+              "at",
+              "-0.510001",
+              "0",
+              "270"
+            ]
+          ]
+        },
+        {
+          "number": "2",
+          "net": "Net-(U1-VOUT_SET)",
+          "pinfunction": null,
+          "size": [
+            [
+              "size",
+              "0.54",
+              "0.64"
+            ]
+          ],
+          "at": [
+            [
+              "at",
+              "0.510001",
+              "0",
+              "270"
+            ]
+          ]
+        }
+      ]
+    },
+    "C6": {
+      "value": "22\u00b5F",
+      "footprint": "Capacitor_SMD:C_0805_2012Metric",
+      "properties": {
+        "Reference": "C6",
+        "Value": "22\u00b5F",
+        "Datasheet": "",
+        "Description": "Unpolarized capacitor",
+        "ki_fp_filters": "C_*"
+      },
+      "pads": [
+        {
+          "number": "1",
+          "net": "GND",
+          "pinfunction": null,
+          "size": [
+            [
+              "size",
+              "1",
+              "1.45"
+            ]
+          ],
+          "at": [
+            [
+              "at",
+              "-0.949998",
+              "0",
+              "270"
+            ]
+          ]
+        },
+        {
+          "number": "2",
+          "net": "+3.3V",
+          "pinfunction": null,
+          "size": [
+            [
+              "size",
+              "1",
+              "1.45"
+            ]
+          ],
+          "at": [
+            [
+              "at",
+              "0.949998",
+              "0",
+              "270"
+            ]
+          ]
+        }
+      ]
+    },
+    "R2": {
+      "value": "4.22M\u03a9",
+      "footprint": "Resistor_SMD:R_0402_1005Metric",
+      "properties": {
+        "Reference": "R2",
+        "Value": "4.22M\u03a9",
+        "Datasheet": "",
+        "Description": "Resistor, US symbol",
+        "ki_fp_filters": "R_*"
+      },
+      "pads": [
+        {
+          "number": "1",
+          "net": "Net-(U1-VBAT_OV)",
+          "pinfunction": null,
+          "size": [
+            [
+              "size",
+              "0.54",
+              "0.64"
+            ]
+          ],
+          "at": [
+            [
+              "at",
+              "-0.510001",
+              "0",
+              "270"
+            ]
+          ]
+        },
+        {
+          "number": "2",
+          "net": "GND",
+          "pinfunction": null,
+          "size": [
+            [
+              "size",
+              "0.54",
+              "0.64"
+            ]
+          ],
+          "at": [
+            [
+              "at",
+              "0.510001",
+              "0",
+              "270"
+            ]
+          ]
+        }
+      ]
+    },
+    "C3": {
+      "value": "4.7\u03bcF",
+      "footprint": "Capacitor_SMD:C_0603_1608Metric",
+      "properties": {
+        "Reference": "C3",
+        "Value": "4.7\u03bcF",
+        "Datasheet": "",
+        "Description": "Unpolarized capacitor",
+        "ki_fp_filters": "C_*"
+      },
+      "pads": [
+        {
+          "number": "1",
+          "net": "VSTOR",
+          "pinfunction": null,
+          "size": [
+            [
+              "size",
+              "0.9",
+              "0.95"
+            ]
+          ],
+          "at": [
+            [
+              "at",
+              "-0.775",
+              "0",
+              "180"
+            ]
+          ]
+        },
+        {
+          "number": "2",
+          "net": "GND",
+          "pinfunction": null,
+          "size": [
+            [
+              "size",
+              "0.9",
+              "0.95"
+            ]
+          ],
+          "at": [
+            [
+              "at",
+              "0.775",
+              "0",
+              "180"
+            ]
+          ]
+        }
+      ]
+    },
+    "R3": {
+      "value": "4.75M\u03a9",
+      "footprint": "Resistor_SMD:R_0402_1005Metric",
+      "properties": {
+        "Reference": "R3",
+        "Value": "4.75M\u03a9",
+        "Datasheet": "",
+        "Description": "Resistor, US symbol",
+        "ki_fp_filters": "R_*"
+      },
+      "pads": [
+        {
+          "number": "1",
+          "net": "Net-(U1-OK_HYST)",
+          "pinfunction": null,
+          "size": [
+            [
+              "size",
+              "0.54",
+              "0.64"
+            ]
+          ],
+          "at": [
+            [
+              "at",
+              "-0.510001",
+              "0",
+              "270"
+            ]
+          ]
+        },
+        {
+          "number": "2",
+          "net": "Net-(U1-OK_PROG)",
+          "pinfunction": null,
+          "size": [
+            [
+              "size",
+              "0.54",
+              "0.64"
+            ]
+          ],
+          "at": [
+            [
+              "at",
+              "0.510001",
+              "0",
+              "270"
+            ]
+          ]
+        }
+      ]
+    },
+    "L1": {
+      "value": "22\u00b5H",
+      "footprint": "lib:IND_LPS4018-223MRC",
+      "properties": {
+        "Reference": "L1",
+        "Value": "22\u00b5H",
+        "Datasheet": "https://www.lcsc.com/product-detail/C5278935.html",
+        "Description": "LPS4018-223MRC",
+        "ki_fp_filters": "Choke_* *Coil* Inductor_* L_*"
+      },
+      "pads": [
+        {
+          "number": "1",
+          "net": "Net-(U1-LBOOST)",
+          "pinfunction": "1",
+          "size": [
+            [
+              "size",
+              "0.5",
+              "2.5"
+            ]
+          ],
+          "at": [
+            [
+              "at",
+              "-1.765",
+              "0",
+              "90"
+            ]
+          ]
+        },
+        {
+          "number": "2",
+          "net": "+SOLAR",
+          "pinfunction": "2",
+          "size": [
+            [
+              "size",
+              "0.5",
+              "2.5"
+            ]
+          ],
+          "at": [
+            [
+              "at",
+              "1.765",
+              "0",
+              "90"
+            ]
+          ]
+        }
+      ]
+    },
+    "R4": {
+      "value": "3.65M\u03a9",
+      "footprint": "Resistor_SMD:R_0402_1005Metric",
+      "properties": {
+        "Reference": "R4",
+        "Value": "3.65M\u03a9",
+        "Datasheet": "https://www.lcsc.com/product-detail/C2766827.html?s_z=n_C2766827%2520",
+        "Description": "Resistor, US symbol",
+        "ki_fp_filters": "R_*"
+      },
+      "pads": [
+        {
+          "number": "1",
+          "net": "Net-(U1-VRDIV)",
+          "pinfunction": null,
+          "size": [
+            [
+              "size",
+              "0.54",
+              "0.64"
+            ]
+          ],
+          "at": [
+            [
+              "at",
+              "-0.510001",
+              "0",
+              "90"
+            ]
+          ]
+        },
+        {
+          "number": "2",
+          "net": "Net-(U1-OK_HYST)",
+          "pinfunction": null,
+          "size": [
+            [
+              "size",
+              "0.54",
+              "0.64"
+            ]
+          ],
+          "at": [
+            [
+              "at",
+              "0.510001",
+              "0",
+              "90"
+            ]
+          ]
+        }
+      ]
+    }
+  }
+}

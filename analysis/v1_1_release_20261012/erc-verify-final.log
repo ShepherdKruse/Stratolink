@@ -1,0 +1,6 @@
+Traceback (most recent call last):
+  File "/Users/twarn/Repositories/Stratolink/analysis/v1_1_release_20261012/erc/verify_cleanup.py", line 76, in <module>
+    if __name__=='__main__':main()
+  File "/Users/twarn/Repositories/Stratolink/analysis/v1_1_release_20261012/erc/verify_cleanup.py", line 68, in main
+    drc=json.loads((audit/'drc.json').read_text());assert not drc['unconnected_items'] and not drc['schematic_parity'];assert all(v['type']=='silk_over_copper' for v in drc['violations'])
+AssertionError

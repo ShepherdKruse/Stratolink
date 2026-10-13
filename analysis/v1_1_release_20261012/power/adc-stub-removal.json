@@ -1,0 +1,141 @@
+{
+  "removed_uuids": [
+    "04009492-82c2-4153-9669-aaba7e80b052",
+    "09fca87c-8b47-4189-8e3b-147e110778de",
+    "21452a12-3768-4510-a2b9-f6df4d5cb154",
+    "2c62792d-6295-4c2c-bd6f-a6d6829e607e",
+    "4ad58470-1a80-406c-b895-8f31cadb16cd",
+    "4b7c27a4-fa1f-461b-831d-7591c779b06f",
+    "50ba00e9-fbcc-485d-8089-c93bc60b0957",
+    "5966be2f-26cb-4e0a-9a10-516e69514108",
+    "5ba400e4-1878-4bba-a25c-432909643b3b",
+    "6970d1b2-608c-4eeb-ae17-6c63d9e5ffa7",
+    "7f67fcf4-702f-416b-b2fd-bab2eac57fdd",
+    "80a86315-610a-4e34-b120-c040afd32c5b",
+    "8e25246c-2c06-4bc3-aa1f-067f51c7c557",
+    "8fd4115c-607a-42ed-ae52-6c954326b1f1",
+    "9116a49b-0f00-4b67-a344-b0b457a7df00",
+    "94269abc-2f5b-41cb-abf1-3984b70919a5",
+    "aba2c4a0-27c1-4125-b91d-95ffb128747d",
+    "acc183ca-d474-44e8-bd3c-69ef8aaafa23",
+    "c24add4a-093f-41c2-846c-b6ac984833c7",
+    "c69962c7-efdc-415c-be62-0ebf66171f61",
+    "d93d6c7c-df67-4978-922c-d044efd564e7",
+    "e2081ec7-9215-4270-a2b1-60b9e8aa661a",
+    "ec9f30ee-b434-4c09-9b9a-b921a878155a",
+    "ed2c65fd-1af8-4a7b-9f6d-559d47c84a7c",
+    "f34d095d-caf6-4bc5-aa9a-cf56e90260f4",
+    "f98c2a1f-d0b0-4920-8908-ffd8124a515c",
+    "fd0ffb70-099d-4940-8e31-c872be6f6dbb"
+  ],
+  "adc_branch_original_items": [
+    {
+      "uuid": "04009492-82c2-4153-9669-aaba7e80b052",
+      "kind": "segment",
+      "net": "VSTOR"
+    },
+    {
+      "uuid": "ec9f30ee-b434-4c09-9b9a-b921a878155a",
+      "kind": "segment",
+      "net": "VSTOR"
+    },
+    {
+      "uuid": "f98c2a1f-d0b0-4920-8908-ffd8124a515c",
+      "kind": "segment",
+      "net": "VSTOR"
+    },
+    {
+      "uuid": "9116a49b-0f00-4b67-a344-b0b457a7df00",
+      "kind": "via",
+      "net": "VSTOR"
+    },
+    {
+      "uuid": "4b7c27a4-fa1f-461b-831d-7591c779b06f",
+      "kind": "segment",
+      "net": "VSTOR"
+    },
+    {
+      "uuid": "5ba400e4-1878-4bba-a25c-432909643b3b",
+      "kind": "segment",
+      "net": "VSTOR"
+    },
+    {
+      "uuid": "94269abc-2f5b-41cb-abf1-3984b70919a5",
+      "kind": "segment",
+      "net": "VSTOR"
+    },
+    {
+      "uuid": "e2081ec7-9215-4270-a2b1-60b9e8aa661a",
+      "kind": "segment",
+      "net": "VSTOR"
+    },
+    {
+      "uuid": "d93d6c7c-df67-4978-922c-d044efd564e7",
+      "kind": "segment",
+      "net": "VSTOR"
+    },
+    {
+      "uuid": "fd0ffb70-099d-4940-8e31-c872be6f6dbb",
+      "kind": "via",
+      "net": "VSTOR"
+    },
+    {
+      "uuid": "5966be2f-26cb-4e0a-9a10-516e69514108",
+      "kind": "segment",
+      "net": "VSTOR"
+    },
+    {
+      "uuid": "f34d095d-caf6-4bc5-aa9a-cf56e90260f4",
+      "kind": "segment",
+      "net": "VSTOR"
+    },
+    {
+      "uuid": "aba2c4a0-27c1-4125-b91d-95ffb128747d",
+      "kind": "segment",
+      "net": "VSTOR"
+    },
+    {
+      "uuid": "7f67fcf4-702f-416b-b2fd-bab2eac57fdd",
+      "kind": "via",
+      "net": "VSTOR"
+    },
+    {
+      "uuid": "2c62792d-6295-4c2c-bd6f-a6d6829e607e",
+      "kind": "segment",
+      "net": "VSTOR"
+    },
+    {
+      "uuid": "8e25246c-2c06-4bc3-aa1f-067f51c7c557",
+      "kind": "segment",
+      "net": "VSTOR"
+    },
+    {
+      "uuid": "c24add4a-093f-41c2-846c-b6ac984833c7",
+      "kind": "segment",
+      "net": "VSTOR"
+    },
+    {
+      "uuid": "8fd4115c-607a-42ed-ae52-6c954326b1f1",
+      "kind": "segment",
+      "net": "VSTOR"
+    },
+    {
+      "uuid": "80a86315-610a-4e34-b120-c040afd32c5b",
+      "kind": "segment",
+      "net": "VSTOR"
+    }
+  ],
+  "upper_stem_uuids": [
+    "50ba00e9-fbcc-485d-8089-c93bc60b0957",
+    "4ad58470-1a80-406c-b895-8f31cadb16cd",
+    "09fca87c-8b47-4189-8e3b-147e110778de",
+    "c69962c7-efdc-415c-be62-0ebf66171f61",
+    "ed2c65fd-1af8-4a7b-9f6d-559d47c84a7c",
+    "6970d1b2-608c-4eeb-ae17-6c63d9e5ffa7",
+    "21452a12-3768-4510-a2b9-f6df4d5cb154"
+  ],
+  "upper_stem_stop": [
+    66.005,
+    42.824
+  ]
+}

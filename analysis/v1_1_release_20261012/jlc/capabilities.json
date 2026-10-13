@@ -1,0 +1,18 @@
+{
+  "source": "https://jlcpcb.com/capabilities/pcb-capabilities",
+  "checked": "2026-10-12",
+  "rows": [
+    "Minimum Dimensions\n\t\n\nFR4/Rogers/PTFE: 3 × 3 mm\n\nCastellated / Plated Edges: 10 × 10 mm\n\nAluminum/Copper PCB: 5 × 5 mm\n\n\t\nThese limits apply to PCBs with thickness ≥ 0.6 mm. Manual review required for thinner PCBs. Panelization is recommended for small-sized boards.\n\t",
+    "Dimension Tolerance\n\t\n±0.1mm\n\t\n±0.1mm(Precision) and ±0.2mm(Regular) for CNC routing, and ±0.4mm for V-scoring\n\t",
+    "Via Hole-to-Hole Spacing0.2mm",
+    "Pad Hole-to-Hole Spacing0.45mm",
+    "Min. Castellated Holes0.5mmCastellated holes are metalized half-holes on PCB edges, commonly used on daughter boards to be soldered onto carrier PCBs.① Hole diameter (Φ): ≥ 0.5 mm② Hole to board edge (L): ≥ 1 mm③ Hole to hole (D): ≥ 0.5 mm④ Min. PCB size：10 × 10 mm⑤ Min. PCB thickness: 0.6 mm",
+    "Plated Edges10 x 10mmPlated edges are copper-plated and ENIG treated. HASL is not supported.① Min. PCB size: 10 × 10 mm② Min. PCB thickness: 0.6 mm③ At least 3 breaks (more for larger PCBs) in the edge plating are required for support tab connections",
+    "Min. track width and spacing (1 oz)0.10 / 0.10 mm (4 / 4 mil)1- and 2-layer: 0.10 / 0.10 mm (4 / 4 mil)Multilayer: 0.09 / 0.09 mm (3.5 / 3.5 mil). 3 mil is acceptable in BGA fan-outs.",
+    "PTH annular ring≧0.20mm2-layer:1 oz: Recommended 0.25 mm or above; absolute minimum 0.18 mm2 oz: 0.254 mm or aboveMultilayer: 1 oz: Recommended 0.20 mm or above; absolute minimum 0.15 mm2 oz: 0.254 mm or above",
+    "BGA0.2mm① 0.2mm-0.25mm BGA pad diameter requires ENIG② BGA pad to trace clearance ≥ 0.1 mm (min. 0.09 mm for multilayer boards)③ Vias can be placed within BGA pads using filled and plated-over vias",
+    "Inner layer via hole to copper clearance0.2mm",
+    "Inner layer PTH pad hole to copper clearance0.3mm",
+    "Pad to track clearance (1oz)0.1mmMin. 0.1 mm (stay well above if possible). Min. 0.09 mm locally for BGA pads"
+  ]
+}

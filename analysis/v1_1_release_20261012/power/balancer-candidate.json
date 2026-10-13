@@ -1,0 +1,184 @@
+{
+  "status": "unrouted-pilot-candidate",
+  "baseline": "59979799c5809d636639084227d9fee75c8de1d9",
+  "path": "/Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/power/balancer-candidate",
+  "new_parts": {
+    "U8": {
+      "lib": "Stratolink_Power:TLV8801DBVT",
+      "value": "TLV8801DBVT",
+      "fp": "Package_TO_SOT_SMD:SOT-23-5",
+      "sch": [
+        50.8,
+        190.5
+      ],
+      "pcb": [
+        55.65,
+        36.1
+      ],
+      "nets": {
+        "1": "SC_BAL_OUT",
+        "2": "GND",
+        "3": "SC_HALF_REF",
+        "4": "SC_BAL_OUT",
+        "5": "VBAT"
+      },
+      "pins": {
+        "1": [
+          7.62,
+          0
+        ],
+        "2": [
+          0,
+          -7.62
+        ],
+        "3": [
+          -7.62,
+          2.54
+        ],
+        "4": [
+          -7.62,
+          -2.54
+        ],
+        "5": [
+          0,
+          7.62
+        ]
+      },
+      "ds": "https://www.ti.com/lit/ds/symlink/tlv8801.pdf",
+      "mpn": "TLV8801DBVT",
+      "lcsc": "C544879"
+    },
+    "R24": {
+      "lib": "Device:R_US",
+      "value": "4.75M\u03a9",
+      "fp": "Resistor_SMD:R_0402_1005Metric",
+      "sch": [
+        25.4,
+        184.15
+      ],
+      "pcb": [
+        57.4,
+        33.9
+      ],
+      "nets": {
+        "1": "VBAT",
+        "2": "SC_HALF_REF"
+      },
+      "pins": {
+        "1": [
+          0,
+          3.81
+        ],
+        "2": [
+          0,
+          -3.81
+        ]
+      },
+      "mpn": "FRC0402F4754TS",
+      "lcsc": "C2998153"
+    },
+    "R25": {
+      "lib": "Device:R_US",
+      "value": "4.75M\u03a9",
+      "fp": "Resistor_SMD:R_0402_1005Metric",
+      "sch": [
+        25.4,
+        199.39
+      ],
+      "pcb": [
+        58.65,
+        34.9
+      ],
+      "nets": {
+        "1": "SC_HALF_REF",
+        "2": "GND"
+      },
+      "pins": {
+        "1": [
+          0,
+          3.81
+        ],
+        "2": [
+          0,
+          -3.81
+        ]
+      },
+      "mpn": "FRC0402F4754TS",
+      "lcsc": "C2998153"
+    },
+    "R26": {
+      "lib": "Device:R_US",
+      "value": "22\u03a9",
+      "fp": "Resistor_SMD:R_0402_1005Metric",
+      "sch": [
+        72.39,
+        190.5
+      ],
+      "pcb": [
+        61.2,
+        42.5
+      ],
+      "nets": {
+        "1": "SC_BAL_OUT",
+        "2": "SC_MID"
+      },
+      "pins": {
+        "1": [
+          0,
+          3.81
+        ],
+        "2": [
+          0,
+          -3.81
+        ]
+      },
+      "mpn": "0402WGF220JTCE",
+      "lcsc": "C25092"
+    },
+    "C22": {
+      "lib": "Device:C",
+      "value": "100nF",
+      "fp": "Capacitor_SMD:C_0402_1005Metric",
+      "sch": [
+        88.9,
+        190.5
+      ],
+      "pcb": [
+        55.6,
+        38.3
+      ],
+      "nets": {
+        "1": "VBAT",
+        "2": "GND"
+      },
+      "pins": {
+        "1": [
+          0,
+          3.81
+        ],
+        "2": [
+          0,
+          -3.81
+        ]
+      },
+      "mpn": "CL05B104KO5NNNC",
+      "lcsc": "C1525"
+    }
+  },
+  "scope": [
+    "R1 value8.25M\u21927.50M; FRC0402F7504TS C3013187 selected",
+    "C5 three-terminal symbol and pad3 SC_MID; all pad geometry unchanged",
+    "Rename existing Net-(U1-VBAT) net to VBAT without changing connectivity",
+    "Add U8,R24,R25,R26,C22 on rear; all existing positions preserved",
+    "Schematic paper height190\u2192225mm to fit added circuit",
+    "New circuit intentionally unrouted; do not fabricate"
+  ],
+  "files": {
+    "stratolink.kicad_pcb": "8a6688b354e6df46a6b99fe5061916b69c666d45790b41b3ddb9e7775b68bb6b",
+    "stratolink.kicad_sch": "7bd031d5b4a2ffcc22f4e8a04f664771204c4796c048ee348f0a95bebc1ef024",
+    "stratolink.kicad_pro": "83f13e321d5736275dfa64d379330b4076344a9ffebb3021ccf3aee6c064cce9",
+    "fp-lib-table": "705f05b5554f11949b16433700d994932665490bb4f91064f20890cc1c65326a",
+    "sym-lib-table": "a8659d8be7ade06b6408548c17358c6de937adea1da74d4afaae13d36e5280b8",
+    "lib/Stratolink_Power.kicad_sym": "2428574dbca6d67a258bf56648ea7280215e3747ba961e88c6ec96b1fd2d9b40"
+  }
+}

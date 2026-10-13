@@ -1,0 +1,425 @@
+{
+  "pcb_sha256": "f83a344bb1bf817207c7a121dabbd4acb92815967c4ed870ca0c49b1698a56a8",
+  "physical_pad_connectivity_sets": 232,
+  "zero_opens": true,
+  "padstacks": [
+    {
+      "ref": "J4",
+      "pad": "1",
+      "hole_center_nm": [
+        75531000,
+        69158000
+      ],
+      "hole_nm": [
+        500000,
+        500000
+      ],
+      "front_size_nm": [
+        880000,
+        880000
+      ],
+      "back_size_nm": [
+        1200000,
+        880000
+      ],
+      "back_offset_nm": [
+        -120000,
+        0
+      ],
+      "thermal_angle_deg": 90.0
+    },
+    {
+      "ref": "J4",
+      "pad": "2",
+      "hole_center_nm": [
+        75531000,
+        70158000
+      ],
+      "hole_nm": [
+        500000,
+        500000
+      ],
+      "front_size_nm": [
+        880000,
+        880000
+      ],
+      "back_size_nm": [
+        1200000,
+        880000
+      ],
+      "back_offset_nm": [
+        -120000,
+        0
+      ],
+      "thermal_angle_deg": 90.0
+    },
+    {
+      "ref": "J4",
+      "pad": "3",
+      "hole_center_nm": [
+        75531000,
+        71158000
+      ],
+      "hole_nm": [
+        500000,
+        500000
+      ],
+      "front_size_nm": [
+        880000,
+        880000
+      ],
+      "back_size_nm": [
+        1200000,
+        880000
+      ],
+      "back_offset_nm": [
+        -120000,
+        0
+      ],
+      "thermal_angle_deg": 90.0
+    },
+    {
+      "ref": "J4",
+      "pad": "4",
+      "hole_center_nm": [
+        75531000,
+        72158000
+      ],
+      "hole_nm": [
+        500000,
+        500000
+      ],
+      "front_size_nm": [
+        880000,
+        880000
+      ],
+      "back_size_nm": [
+        1200000,
+        880000
+      ],
+      "back_offset_nm": [
+        -120000,
+        0
+      ],
+      "thermal_angle_deg": 90.0
+    },
+    {
+      "ref": "J4",
+      "pad": "5",
+      "hole_center_nm": [
+        75531000,
+        73158000
+      ],
+      "hole_nm": [
+        500000,
+        500000
+      ],
+      "front_size_nm": [
+        880000,
+        880000
+      ],
+      "back_size_nm": [
+        1200000,
+        880000
+      ],
+      "back_offset_nm": [
+        -120000,
+        0
+      ],
+      "thermal_angle_deg": 90.0
+    },
+    {
+      "ref": "J4",
+      "pad": "6",
+      "hole_center_nm": [
+        75531000,
+        74158000
+      ],
+      "hole_nm": [
+        500000,
+        500000
+      ],
+      "front_size_nm": [
+        880000,
+        880000
+      ],
+      "back_size_nm": [
+        1200000,
+        880000
+      ],
+      "back_offset_nm": [
+        -120000,
+        0
+      ],
+      "thermal_angle_deg": 90.0
+    },
+    {
+      "ref": "J4",
+      "pad": "7",
+      "hole_center_nm": [
+        75531000,
+        75158000
+      ],
+      "hole_nm": [
+        500000,
+        500000
+      ],
+      "front_size_nm": [
+        880000,
+        880000
+      ],
+      "back_size_nm": [
+        1200000,
+        880000
+      ],
+      "back_offset_nm": [
+        -120000,
+        0
+      ],
+      "thermal_angle_deg": 90.0
+    },
+    {
+      "ref": "J3",
+      "pad": "1",
+      "hole_center_nm": [
+        54444998,
+        69173998
+      ],
+      "hole_nm": [
+        500000,
+        500000
+      ],
+      "front_size_nm": [
+        880000,
+        880000
+      ],
+      "back_size_nm": [
+        1200000,
+        880000
+      ],
+      "back_offset_nm": [
+        120000,
+        0
+      ],
+      "thermal_angle_deg": 90.0
+    },
+    {
+      "ref": "J3",
+      "pad": "2",
+      "hole_center_nm": [
+        54444998,
+        70173999
+      ],
+      "hole_nm": [
+        500000,
+        500000
+      ],
+      "front_size_nm": [
+        880000,
+        880000
+      ],
+      "back_size_nm": [
+        1200000,
+        880000
+      ],
+      "back_offset_nm": [
+        120000,
+        0
+      ],
+      "thermal_angle_deg": 30.0
+    },
+    {
+      "ref": "J3",
+      "pad": "3",
+      "hole_center_nm": [
+        54444999,
+        71174001
+      ],
+      "hole_nm": [
+        500000,
+        500000
+      ],
+      "front_size_nm": [
+        880000,
+        880000
+      ],
+      "back_size_nm": [
+        1200000,
+        880000
+      ],
+      "back_offset_nm": [
+        120000,
+        0
+      ],
+      "thermal_angle_deg": 90.0
+    },
+    {
+      "ref": "J3",
+      "pad": "4",
+      "hole_center_nm": [
+        54445000,
+        72174000
+      ],
+      "hole_nm": [
+        500000,
+        500000
+      ],
+      "front_size_nm": [
+        880000,
+        880000
+      ],
+      "back_size_nm": [
+        1200000,
+        880000
+      ],
+      "back_offset_nm": [
+        120000,
+        0
+      ],
+      "thermal_angle_deg": 90.0
+    },
+    {
+      "ref": "J3",
+      "pad": "5",
+      "hole_center_nm": [
+        54444998,
+        73173998
+      ],
+      "hole_nm": [
+        500000,
+        500000
+      ],
+      "front_size_nm": [
+        880000,
+        880000
+      ],
+      "back_size_nm": [
+        1200000,
+        880000
+      ],
+      "back_offset_nm": [
+        120000,
+        0
+      ],
+      "thermal_angle_deg": 90.0
+    },
+    {
+      "ref": "J3",
+      "pad": "6",
+      "hole_center_nm": [
+        54444998,
+        74173998
+      ],
+      "hole_nm": [
+        500000,
+        500000
+      ],
+      "front_size_nm": [
+        880000,
+        880000
+      ],
+      "back_size_nm": [
+        1200000,
+        880000
+      ],
+      "back_offset_nm": [
+        120000,
+        0
+      ],
+      "thermal_angle_deg": 90.0
+    },
+    {
+      "ref": "J3",
+      "pad": "7",
+      "hole_center_nm": [
+        54444998,
+        75173998
+      ],
+      "hole_nm": [
+        500000,
+        500000
+      ],
+      "front_size_nm": [
+        880000,
+        880000
+      ],
+      "back_size_nm": [
+        1200000,
+        880000
+      ],
+      "back_offset_nm": [
+        120000,
+        0
+      ],
+      "thermal_angle_deg": 90.0
+    }
+  ],
+  "schematic_metadata_changes": [
+    {
+      "ref": "J4",
+      "field": "Footprint",
+      "before": "lib:Stratolink_Header_Right_1x07_P1p00_D0p50_Pad0p88",
+      "after": "lib:Stratolink_Programming_Right_1x07_P1p00_D0p50_BackTack1p20x0p88"
+    },
+    {
+      "ref": "J4",
+      "field": "Value",
+      "before": "Conn_PinHeader_1x07_P2.54mm_Vertical_THT_D1mm",
+      "after": "Programming_1x07_P1.00mm_D0.50mm"
+    },
+    {
+      "ref": "J4",
+      "field": "Description",
+      "before": "Connector Header Through Hole 7 positions 0.100\" (2.54mm)",
+      "after": "Programming/wire pads: 7 positions, 1.00 mm pitch, 0.50 mm holes; 0.88 mm front lands and 1.20 x 0.88 mm inward-extended back tack lands."
+    },
+    {
+      "ref": "J3",
+      "field": "Footprint",
+      "before": "lib:Stratolink_Header_Left_1x07_P1p00_D0p50_Pad0p88",
+      "after": "lib:Stratolink_Programming_Left_1x07_P1p00_D0p50_BackTack1p20x0p88"
+    },
+    {
+      "ref": "J3",
+      "field": "Value",
+      "before": "Conn_PinHeader_1x07_P2.54mm_Vertical_THT_D1mm",
+      "after": "Programming_1x07_P1.00mm_D0.50mm"
+    },
+    {
+      "ref": "J3",
+      "field": "Description",
+      "before": "Connector Header Through Hole 7 positions 0.100\" (2.54mm)",
+      "after": "Programming/wire pads: 7 positions, 1.00 mm pitch, 0.50 mm holes; 0.88 mm front lands and 1.20 x 0.88 mm inward-extended back tack lands."
+    }
+  ],
+  "unchanged_hole_centers_and_drills": true,
+  "unchanged_front_pad_geometry": true,
+  "unchanged_baseline_libraries": 86,
+  "new_libraries": [
+    "Stratolink_Programming_Left_1x07_P1p00_D0p50_BackTack1p20x0p88.kicad_mod",
+    "Stratolink_Programming_Right_1x07_P1p00_D0p50_BackTack1p20x0p88.kicad_mod"
+  ],
+  "changed_manufacturing_plots": [
+    "stratolink-B_Mask.gbs",
+    "stratolink-B_Cu.gbl",
+    "stratolink-F_Cu.gtl"
+  ],
+  "project_drc": {
+    "baseline": {
+      "count": 55,
+      "types": {
+        "lib_footprint_mismatch": 51,
+        "silk_over_copper": 4
+      },
+      "parity": 11
+    },
+    "candidate": {
+      "count": 55,
+      "types": {
+        "lib_footprint_mismatch": 51,
+        "silk_over_copper": 4
+      },
+      "parity": 11
+    }
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "status": "PASS",
+  "canonical_CAD_hashes_unchanged": {
+    "stratolink.kicad_pcb": "490af47db22ef076938c17319782f194623d8f8b6a3f864a2e0cc23b3d025b15",
+    "stratolink.kicad_sch": "044984037a7346adc92ee9ea142e6c285ee7f6b66efc87e0a1ad195495379cc9",
+    "stratolink.kicad_pro": "79a2c0d01611c7ea7054cd9dbc685187b28fb4ac8792468a15d2bba821ac0ea7",
+    "stratolink.kicad_dru": "565bbdcb4ddc03de2a7bc3cdc45d57a8acd92d2e53a8eac092e0bd5a04861e0b"
+  },
+  "documentation_files": {
+    "README.md": "c4324221d13aebdd7032fb9cd9d5565935ecba8ffb152b56d7a7f8396f811373",
+    "FABRICATION.md": "ac51d3373f6b4d5955a64d2f23bb0490eca3ecfaafb2b8f943911d8418a25c10",
+    "TODO.md": "7a81bbebe890ec95c08df51e824d15a33164d77d6932729a91fded9cae8643ea"
+  },
+  "package_manifest_sha256": "61c20cef6bcb891712b0260bfbe9ab2c6acecde0f85b5b066763ed82aee34fcf",
+  "canonical_matches_verified_candidate": true,
+  "checked_at": "2026-10-13T17:36:02.435306+00:00",
+  "previous_snapshot": "documentation-promotion-before-rotation.json",
+  "scope": "Final documentation after supplier rotation correction and final package reimport; CAD unchanged."
+}

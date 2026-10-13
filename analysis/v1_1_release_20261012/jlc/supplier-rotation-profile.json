@@ -1,0 +1,22 @@
+{
+  "U1": {
+    "rotation_deg": 90,
+    "evidence": "analysis/v1_1_release_20261012/jlc/probe-u1-90-crop.png; analysis/v1_1_release_20261012/power/placement-u1-u3-u4-review.md",
+    "reason": "Reimported CPL90 gives lower-right pin1 in north-up bottom view, matching numbered pads and TI package drawing."
+  },
+  "U4": {
+    "rotation_deg": 270,
+    "evidence": "analysis/v1_1_release_20261012/jlc/probe-u4-270-crop.png; analysis/v1_1_release_20261012/power/placement-u1-u3-u4-review.md",
+    "reason": "Reimported CPL270 gives upper-left external pin1 indicator and vertical 3x5mm body in top view. The black circle is the pressure-port depiction, not pin1."
+  },
+  "U7": {
+    "rotation_deg": 0,
+    "evidence": "analysis/v1_1_release_20261012/jlc/probe-u7-0-crop.png; analysis/v1_1_release_20261012/identities/supplier-placement-review.md",
+    "reason": "Reimported CPL0 gives lower-left body index in top view, matching native numbered lands and manufacturer package mapping."
+  },
+  "U8": {
+    "rotation_deg": 90,
+    "evidence": "analysis/v1_1_release_20261012/jlc/probe-u8-90-crop.png; analysis/v1_1_release_20261012/identities/supplier-placement-review.md",
+    "reason": "Reimported CPL90 gives three leads right, two left, pin1 lower-right in bottom view, matching native SOT-23-5 lands."
+  }
+}
