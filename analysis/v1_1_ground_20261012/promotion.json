@@ -1,0 +1,25 @@
+{
+  "baseline": "c3d70a429a95591607341d57bf16ee153972da71",
+  "branch": "alpha/hardware-v1.1",
+  "source": "/Users/twarn/Repositories/ai-working/scratch/stratolink-zones-20261012/combined",
+  "canonical": "/Users/twarn/Repositories/Stratolink/hardware/pcb",
+  "files": {
+    "stratolink.kicad_pcb": "6a5acb81ba62755336af9854c99c7b035282fa712684ed4815fa456e7ffa5951",
+    "stratolink.kicad_sch": "20f0d465521daaa088e171e174108644069755c4067b28239657019266088bc4",
+    "stratolink.kicad_pro": "5dd65b15408657138b37fb9ee274f0798e96aadb4092f4e799c61d03bece1786",
+    "fp-lib-table": "705f05b5554f11949b16433700d994932665490bb4f91064f20890cc1c65326a",
+    "sym-lib-table": "27b94afc068fa31c7f6b0e2e00012a1fdc75c17277f1dc9d9d7aefd9cf149b87",
+    "lib/PQFN50P200X200100-12N.kicad_mod": "bb10f8b0b1d0f19ba3a75cf9d0ec96834f28dcf6c5d49ca907dea1d2c66d3589"
+  },
+  "unrelated_tracked_changes_preserved": 100,
+  "source_matches_reviewed_candidate": true,
+  "gui_closed_cleanly_before_promotion": true,
+  "canonical_drc": {
+    "violations": 57,
+    "unconnected_items": 0,
+    "schematic_parity": 11
+  },
+  "canonical_drc_signatures_match_reviewed": true,
+  "canonical_reopened_in_kicad": true,
+  "unchanged_hashes_after_native_check_and_gui_reload": true
+}

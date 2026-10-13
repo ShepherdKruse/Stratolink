@@ -1,0 +1,113 @@
+{
+  "baseline": "c3d70a429a95591607341d57bf16ee153972da71",
+  "trials": [
+    {
+      "name": "u7_g150_w250_a90",
+      "gap": 0.15,
+      "width": 0.25,
+      "angle": 90,
+      "jgap": 0.5,
+      "jwidth": 0.5,
+      "jangle": 45,
+      "directory": "/Users/twarn/Repositories/ai-working/scratch/stratolink-zones-20261012/thermal/u7_g150_w250_a90"
+    },
+    {
+      "name": "u7_g200_w250_a90",
+      "gap": 0.2,
+      "width": 0.25,
+      "angle": 90,
+      "jgap": 0.5,
+      "jwidth": 0.5,
+      "jangle": 45,
+      "directory": "/Users/twarn/Repositories/ai-working/scratch/stratolink-zones-20261012/thermal/u7_g200_w250_a90"
+    },
+    {
+      "name": "u7_g250_w250_a90",
+      "gap": 0.25,
+      "width": 0.25,
+      "angle": 90,
+      "jgap": 0.5,
+      "jwidth": 0.5,
+      "jangle": 45,
+      "directory": "/Users/twarn/Repositories/ai-working/scratch/stratolink-zones-20261012/thermal/u7_g250_w250_a90"
+    },
+    {
+      "name": "u7_g150_w250_a45",
+      "gap": 0.15,
+      "width": 0.25,
+      "angle": 45,
+      "jgap": 0.5,
+      "jwidth": 0.5,
+      "jangle": 45,
+      "directory": "/Users/twarn/Repositories/ai-working/scratch/stratolink-zones-20261012/thermal/u7_g150_w250_a45"
+    },
+    {
+      "name": "u7_g200_w250_a45",
+      "gap": 0.2,
+      "width": 0.25,
+      "angle": 45,
+      "jgap": 0.5,
+      "jwidth": 0.5,
+      "jangle": 45,
+      "directory": "/Users/twarn/Repositories/ai-working/scratch/stratolink-zones-20261012/thermal/u7_g200_w250_a45"
+    },
+    {
+      "name": "u7_g250_w250_a45",
+      "gap": 0.25,
+      "width": 0.25,
+      "angle": 45,
+      "jgap": 0.5,
+      "jwidth": 0.5,
+      "jangle": 45,
+      "directory": "/Users/twarn/Repositories/ai-working/scratch/stratolink-zones-20261012/thermal/u7_g250_w250_a45"
+    },
+    {
+      "name": "j20_g500_w500_a0",
+      "gap": 0.2,
+      "width": 0.25,
+      "angle": 90,
+      "jgap": 0.5,
+      "jwidth": 0.5,
+      "jangle": 0,
+      "directory": "/Users/twarn/Repositories/ai-working/scratch/stratolink-zones-20261012/thermal/j20_g500_w500_a0"
+    },
+    {
+      "name": "j20_g250_w250_a0",
+      "gap": 0.2,
+      "width": 0.25,
+      "angle": 90,
+      "jgap": 0.25,
+      "jwidth": 0.25,
+      "jangle": 0,
+      "directory": "/Users/twarn/Repositories/ai-working/scratch/stratolink-zones-20261012/thermal/j20_g250_w250_a0"
+    },
+    {
+      "name": "j20_g250_w250_a45",
+      "gap": 0.2,
+      "width": 0.25,
+      "angle": 90,
+      "jgap": 0.25,
+      "jwidth": 0.25,
+      "jangle": 45,
+      "directory": "/Users/twarn/Repositories/ai-working/scratch/stratolink-zones-20261012/thermal/j20_g250_w250_a45"
+    },
+    {
+      "name": "j20_g300_w250_a0",
+      "gap": 0.2,
+      "width": 0.25,
+      "angle": 90,
+      "jgap": 0.3,
+      "jwidth": 0.25,
+      "jangle": 0,
+      "directory": "/Users/twarn/Repositories/ai-working/scratch/stratolink-zones-20261012/thermal/j20_g300_w250_a0"
+    },
+    {
+      "name": "j20_direct",
+      "gap": 0.2,
+      "width": 0.25,
+      "angle": 90,
+      "jdirect": true,
+      "directory": "/Users/twarn/Repositories/ai-working/scratch/stratolink-zones-20261012/thermal/j20_direct"
+    }
+  ]
+}

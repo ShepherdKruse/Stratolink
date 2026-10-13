@@ -1,0 +1,150 @@
+{
+  "baseline": "c3d70a4",
+  "hashes": {
+    "baseline": "268f5ef0f8d59caf0a46a0cb990fb26c1d74563e3423a15c16d361d392f9f96c",
+    "front-only-main": "2bf30c00293138b04fdc22218be3d358cac8c888bd4229ddfcf2321a763b7c78",
+    "single-two-layer": "ab6190a1a7b7fc2b79976c282bd1074151ad8b0cc5834413b6b48b1058f91bb4"
+  },
+  "variants": {
+    "front-only-main": {
+      "non_zone_objects_exact": true,
+      "all_retained_zone_settings_and_boundaries_exact": true,
+      "physical_pad_checks": 232,
+      "logical_pad_nodes": 228,
+      "native_opens": 0,
+      "schematic_and_project_byte_identical": true,
+      "drc": {
+        "project": {
+          "violations": {
+            "before": 61,
+            "after": 60,
+            "added": [],
+            "removed": [
+              {
+                "description": "Copper zones intersect (intersecting zones must have distinct priorities)",
+                "item_uuids": [
+                  "795c4093-4930-4bcb-9c07-8e31d04084fe",
+                  "e9b71a22-0a8a-41f9-b5c4-115945b7ef58"
+                ],
+                "severity": "error",
+                "type": "zones_intersect"
+              }
+            ]
+          },
+          "schematic_parity": {
+            "before": 11,
+            "after": 11,
+            "added": [],
+            "removed": []
+          },
+          "unconnected_items": {
+            "before": 0,
+            "after": 0,
+            "added": [],
+            "removed": []
+          }
+        },
+        "diagnostic": {
+          "violations": {
+            "before": 74,
+            "after": 73,
+            "added": [],
+            "removed": [
+              {
+                "description": "Copper zones intersect (intersecting zones must have distinct priorities)",
+                "item_uuids": [
+                  "795c4093-4930-4bcb-9c07-8e31d04084fe",
+                  "e9b71a22-0a8a-41f9-b5c4-115945b7ef58"
+                ],
+                "severity": "error",
+                "type": "zones_intersect"
+              }
+            ]
+          },
+          "schematic_parity": {
+            "before": 11,
+            "after": 11,
+            "added": [],
+            "removed": []
+          },
+          "unconnected_items": {
+            "before": 0,
+            "after": 0,
+            "added": [],
+            "removed": []
+          }
+        }
+      }
+    },
+    "single-two-layer": {
+      "non_zone_objects_exact": true,
+      "all_retained_zone_settings_and_boundaries_exact": true,
+      "physical_pad_checks": 232,
+      "logical_pad_nodes": 228,
+      "native_opens": 0,
+      "schematic_and_project_byte_identical": true,
+      "drc": {
+        "project": {
+          "violations": {
+            "before": 61,
+            "after": 60,
+            "added": [],
+            "removed": [
+              {
+                "description": "Copper zones intersect (intersecting zones must have distinct priorities)",
+                "item_uuids": [
+                  "795c4093-4930-4bcb-9c07-8e31d04084fe",
+                  "e9b71a22-0a8a-41f9-b5c4-115945b7ef58"
+                ],
+                "severity": "error",
+                "type": "zones_intersect"
+              }
+            ]
+          },
+          "schematic_parity": {
+            "before": 11,
+            "after": 11,
+            "added": [],
+            "removed": []
+          },
+          "unconnected_items": {
+            "before": 0,
+            "after": 0,
+            "added": [],
+            "removed": []
+          }
+        },
+        "diagnostic": {
+          "violations": {
+            "before": 74,
+            "after": 73,
+            "added": [],
+            "removed": [
+              {
+                "description": "Copper zones intersect (intersecting zones must have distinct priorities)",
+                "item_uuids": [
+                  "795c4093-4930-4bcb-9c07-8e31d04084fe",
+                  "e9b71a22-0a8a-41f9-b5c4-115945b7ef58"
+                ],
+                "severity": "error",
+                "type": "zones_intersect"
+              }
+            ]
+          },
+          "schematic_parity": {
+            "before": 11,
+            "after": 11,
+            "added": [],
+            "removed": []
+          },
+          "unconnected_items": {
+            "before": 0,
+            "after": 0,
+            "added": [],
+            "removed": []
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,153 @@
+{
+  "baseline": "c3d70a429a95591607341d57bf16ee153972da71",
+  "trials": [
+    {
+      "name": "mixed_g150_w250_j20angle",
+      "gap": 0.15,
+      "width": 0.25,
+      "angle": 90,
+      "angle5": 45,
+      "jangle_only": 0,
+      "directory": "/Users/twarn/Repositories/ai-working/scratch/stratolink-zones-20261012/thermal/mixed_g150_w250_j20angle",
+      "violations": 59,
+      "opens": 0,
+      "parity": 11,
+      "thermals": [
+        {
+          "description": "Thermal relief connection to zone incomplete (layer F.Cu; zone min spoke count 2; actual 1)",
+          "items": [
+            {
+              "description": "Zone [GND] on F.Cu and B.Cu, priority 0",
+              "pos": {
+                "x": 53.011,
+                "y": 29.026164
+              },
+              "uuid": "795c4093-4930-4bcb-9c07-8e31d04084fe"
+            },
+            {
+              "description": "Pad 7 [GND] of U7 on F.Cu",
+              "pos": {
+                "x": 71.298,
+                "y": 37.042001
+              },
+              "uuid": "16f1a707-a926-4839-8937-9c29f4503070"
+            }
+          ],
+          "severity": "error",
+          "type": "starved_thermal"
+        }
+      ]
+    },
+    {
+      "name": "mixed_g200_w250_j20angle",
+      "gap": 0.2,
+      "width": 0.25,
+      "angle": 90,
+      "angle5": 45,
+      "jangle_only": 0,
+      "directory": "/Users/twarn/Repositories/ai-working/scratch/stratolink-zones-20261012/thermal/mixed_g200_w250_j20angle",
+      "violations": 59,
+      "opens": 0,
+      "parity": 11,
+      "thermals": [
+        {
+          "description": "Thermal relief connection to zone incomplete (layer F.Cu; zone min spoke count 2; actual 1)",
+          "items": [
+            {
+              "description": "Zone [GND] on F.Cu and B.Cu, priority 0",
+              "pos": {
+                "x": 53.011,
+                "y": 29.026164
+              },
+              "uuid": "795c4093-4930-4bcb-9c07-8e31d04084fe"
+            },
+            {
+              "description": "Pad 7 [GND] of U7 on F.Cu",
+              "pos": {
+                "x": 71.298,
+                "y": 37.042001
+              },
+              "uuid": "16f1a707-a926-4839-8937-9c29f4503070"
+            }
+          ],
+          "severity": "error",
+          "type": "starved_thermal"
+        }
+      ]
+    },
+    {
+      "name": "mixed_g250_w250_j20angle",
+      "gap": 0.25,
+      "width": 0.25,
+      "angle": 90,
+      "angle5": 45,
+      "jangle_only": 0,
+      "directory": "/Users/twarn/Repositories/ai-working/scratch/stratolink-zones-20261012/thermal/mixed_g250_w250_j20angle",
+      "violations": 59,
+      "opens": 0,
+      "parity": 11,
+      "thermals": [
+        {
+          "description": "Thermal relief connection to zone incomplete (layer F.Cu; zone min spoke count 2; actual 1)",
+          "items": [
+            {
+              "description": "Zone [GND] on F.Cu and B.Cu, priority 0",
+              "pos": {
+                "x": 53.011,
+                "y": 29.026164
+              },
+              "uuid": "795c4093-4930-4bcb-9c07-8e31d04084fe"
+            },
+            {
+              "description": "Pad 7 [GND] of U7 on F.Cu",
+              "pos": {
+                "x": 71.298,
+                "y": 37.042001
+              },
+              "uuid": "16f1a707-a926-4839-8937-9c29f4503070"
+            }
+          ],
+          "severity": "error",
+          "type": "starved_thermal"
+        }
+      ]
+    },
+    {
+      "name": "mixed_g200_w250_j20direct",
+      "gap": 0.2,
+      "width": 0.25,
+      "angle": 90,
+      "angle5": 45,
+      "jdirect": true,
+      "directory": "/Users/twarn/Repositories/ai-working/scratch/stratolink-zones-20261012/thermal/mixed_g200_w250_j20direct",
+      "violations": 59,
+      "opens": 0,
+      "parity": 11,
+      "thermals": [
+        {
+          "description": "Thermal relief connection to zone incomplete (layer F.Cu; zone min spoke count 2; actual 1)",
+          "items": [
+            {
+              "description": "Zone [GND] on F.Cu and B.Cu, priority 0",
+              "pos": {
+                "x": 53.011,
+                "y": 29.026164
+              },
+              "uuid": "795c4093-4930-4bcb-9c07-8e31d04084fe"
+            },
+            {
+              "description": "Pad 7 [GND] of U7 on F.Cu",
+              "pos": {
+                "x": 71.298,
+                "y": 37.042001
+              },
+              "uuid": "16f1a707-a926-4839-8937-9c29f4503070"
+            }
+          ],
+          "severity": "error",
+          "type": "starved_thermal"
+        }
+      ]
+    }
+  ]
+}

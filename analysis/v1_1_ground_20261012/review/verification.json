@@ -1,0 +1,282 @@
+{
+  "status": "pass: native scope, connectivity, DRC, manufacturing exports, and copper review",
+  "baseline": "c3d70a4",
+  "candidate": "/Users/twarn/Repositories/ai-working/scratch/stratolink-zones-20261012/combined",
+  "source_hashes": {
+    "/Users/twarn/Repositories/ai-working/scratch/stratolink-zones-20261012/combined/stratolink.kicad_pcb": "6a5acb81ba62755336af9854c99c7b035282fa712684ed4815fa456e7ffa5951",
+    "/Users/twarn/Repositories/ai-working/scratch/stratolink-zones-20261012/combined/stratolink.kicad_sch": "20f0d465521daaa088e171e174108644069755c4067b28239657019266088bc4",
+    "/Users/twarn/Repositories/ai-working/scratch/stratolink-zones-20261012/combined/stratolink.kicad_pro": "5dd65b15408657138b37fb9ee274f0798e96aadb4092f4e799c61d03bece1786",
+    "/Users/twarn/Repositories/ai-working/scratch/stratolink-zones-20261012/combined/fp-lib-table": "705f05b5554f11949b16433700d994932665490bb4f91064f20890cc1c65326a",
+    "/Users/twarn/Repositories/ai-working/scratch/stratolink-zones-20261012/combined/sym-lib-table": "27b94afc068fa31c7f6b0e2e00012a1fdc75c17277f1dc9d9d7aefd9cf149b87",
+    "/Users/twarn/Repositories/ai-working/scratch/stratolink-zones-20261012/combined/lib/SON125P500X300X100-8N.kicad_mod": "ff2187465b1d4d695f51a19a0caa8cff843adb139aaff8052e203bd8a8719968",
+    "/Users/twarn/Repositories/ai-working/scratch/stratolink-zones-20261012/combined/lib/4269.mod": "aa41a0486dba1a6c58b3fd0229508855e14a54984435d008a773d8d2f6a4539e",
+    "/Users/twarn/Repositories/ai-working/scratch/stratolink-zones-20261012/combined/lib/IND_ETQP4M220YFN.kicad_mod": "381c6ee593f271568ce97449e3b8fb3a7e4dd50952df8fc548a95016239eb20d",
+    "/Users/twarn/Repositories/ai-working/scratch/stratolink-zones-20261012/combined/lib/4269.kicad_sym": "f0e9b92024b3432c2b649a67c9f84c447718e0242492599e15ea3466bb878b3e",
+    "/Users/twarn/Repositories/ai-working/scratch/stratolink-zones-20261012/combined/lib/Solar_Notch_Right_1p0x2p0.kicad_mod": "7bab33c2b68c8be61dad981c21736ac780836b76ddc8884d21ae82cc053f1de9",
+    "/Users/twarn/Repositories/ai-working/scratch/stratolink-zones-20261012/combined/lib/HS230F.dcm": "d5bc8c398180a49b9505dd7e2e86168fea4a594f80b85e32ec90f897c259db53",
+    "/Users/twarn/Repositories/ai-working/scratch/stratolink-zones-20261012/combined/lib/2450AT18A100E.kicad_sym": "4c17902873bf049dc499b066ca46e5f8567d9f7ec55a279e6c95f9d77e77e216",
+    "/Users/twarn/Repositories/ai-working/scratch/stratolink-zones-20261012/combined/lib/SMD6_LTR-390UV-01_LTO-L.kicad_mod": "b8677d8c4594e4ec7bb875d3a08238e65363fce7788c853f45e6066d19a3781c",
+    "/Users/twarn/Repositories/ai-working/scratch/stratolink-zones-20261012/combined/lib/LIS2DH12TR.kicad_sym": "07cac9985ca5d4bc6006008b39953cbf4b8e74acf952136da5d5bdd5024ab7e6",
+    "/Users/twarn/Repositories/ai-working/scratch/stratolink-zones-20261012/combined/lib/WCAP-CSGP_0402.kicad_mod": "44a8f032ed80387f92ffe395290a6e9accf150b77ca161ccd4edf91706f98ce9",
+    "/Users/twarn/Repositories/ai-working/scratch/stratolink-zones-20261012/combined/lib/RAK3172.step": "bd2bcd47540d611e57228d51c62f372b2393128c693611845697f020a94097f8",
+    "/Users/twarn/Repositories/ai-working/scratch/stratolink-zones-20261012/combined/lib/cap.step": "9b8d6e2646bd53de6c21345928a71feafc695fd88a254725b14f7a7108f9681d",
+    "/Users/twarn/Repositories/ai-working/scratch/stratolink-zones-20261012/combined/lib/ProLib_pcs_2026-02-20.elibz": "83e43f38e2643ffd9d1e9a98b2e0225a04bb00dc9836cc085aff3f680889cd4b",
+    "/Users/twarn/Repositories/ai-working/scratch/stratolink-zones-20261012/combined/lib/RAK3172.kicad_mod": "e0fb3166a9bf8e865c94a07c957d91591d3ef2e9c97ee19c43a5abb001891e38",
+    "/Users/twarn/Repositories/ai-working/scratch/stratolink-zones-20261012/combined/lib/2450AT18A100E.step": "d43e57d1a06eba29f10d1314d9db70ceafebe1f09b87a1e90ed9cef2db17ef8f",
+    "/Users/twarn/Repositories/ai-working/scratch/stratolink-zones-20261012/combined/lib/pressure.elibz": "f997158b9182f3cfcc305b2efa452300f2fe3103462d244a90f23c209db269b5",
+    "/Users/twarn/Repositories/ai-working/scratch/stratolink-zones-20261012/combined/lib/BGA6N40P3X2_148X95X53.kicad_mod": "0343aab55d5eff37c147587bba94596d8ce865012486045a074422f1746be496",
+    "/Users/twarn/Repositories/ai-working/scratch/stratolink-zones-20261012/combined/lib/WCAP-CSGP_0402.step": "fd544e31c602d8a01d21cae2c49140ea114544f70a54ec4d3b1f2d3c186ac29f",
+    "/Users/twarn/Repositories/ai-working/scratch/stratolink-zones-20261012/combined/lib/lora.step": "4685127e7fd516ea0e08ba7f8a8c5711f626351b480a13ade89925b33fdad9b5",
+    "/Users/twarn/Repositories/ai-working/scratch/stratolink-zones-20261012/combined/lib/CAPC1608X97N.kicad_mod": "c64240ccabb5bdcb0ec44734a0e45b0524794a53a2ddc9ccf530c0fa0bb1c66a",
+    "/Users/twarn/Repositories/ai-working/scratch/stratolink-zones-20261012/combined/lib/BQ25570RGRR.step": "ede46d7189939d1295bbef027083521561cd1b231e93c2eee3e4c0f7d4af1db6",
+    "/Users/twarn/Repositories/ai-working/scratch/stratolink-zones-20261012/combined/lib/4269.lib": "58d76bbc2fcbc31959c51fae1595e652f6171e5514844a8db3aee920c3dfdafa",
+    "/Users/twarn/Repositories/ai-working/scratch/stratolink-zones-20261012/combined/lib/IND_LPS4018-223MRC.kicad_mod": "3e3f2c1ed2dfa4f3bde9f43c162a180655e7aab82d20204c3028568b7e224990",
+    "/Users/twarn/Repositories/ai-working/scratch/stratolink-zones-20261012/combined/lib/VJ0603A120KXCAP.step": "7a5b19a23d2c80df52915b51adc3299ae78793909f41dc21e6b48f6bc339e4a6",
+    "/Users/twarn/Repositories/ai-working/scratch/stratolink-zones-20261012/combined/lib/AS7341-DLGM.step": "1f352ebe8c6c561d7bc090dc46eeaea65bc11fb485c887abe0d5c4540a20af73",
+    "/Users/twarn/Repositories/ai-working/scratch/stratolink-zones-20261012/combined/lib/ANTC3216X140N.kicad_mod": "d0221f8bc21133d5619d205506f4b229491024d0a722a624e2f6abc3556cef2d",
+    "/Users/twarn/Repositories/ai-working/scratch/stratolink-zones-20261012/combined/lib/DMF4B5R5G105M3DTA0.dcm": "7771c5de96b7d58a3825eba9dde0c83c8e30830e7e83952c7f62bba7e1c90193",
+    "/Users/twarn/Repositories/ai-working/scratch/stratolink-zones-20261012/combined/lib/MLZ1608N100LT000.STEP": "d88f2217137cb303be8f3132cc776b88fdd02209cd154ab4fcafeefcddbb6694",
+    "/Users/twarn/Repositories/ai-working/scratch/stratolink-zones-20261012/combined/lib/ProLib_pcs_2026-01-31.elibz": "b39d8afe7e58ced1e372f83b98208b0438065880c48f102c74aeb31f84e6a646",
+    "/Users/twarn/Repositories/ai-working/scratch/stratolink-zones-20261012/combined/lib/T3902.kicad_sym": "66720809065a1941109082a4138fc68afeffbd06c35e963b338711417839a58f",
+    "/Users/twarn/Repositories/ai-working/scratch/stratolink-zones-20261012/combined/lib/MAX-M10S-00B.step": "301c5c8f39597cb8a20bbfb64c6694d7f0121d89683bef55124958bd5cedb4ba",
+    "/Users/twarn/Repositories/ai-working/scratch/stratolink-zones-20261012/combined/lib/QFN50P350X350X100-21N.kicad_mod": "5ec201b9d4cba0e6afd86d2cb90b8339f7f2d1c1fbf5ad96a18bbf597a60803a",
+    "/Users/twarn/Repositories/ai-working/scratch/stratolink-zones-20261012/combined/lib/Solar_Notch_Left_1p0x2p0.kicad_mod": "88d0ae34e02b1fadeed1b6f8261f9109735e027cfc9146fd165e487238bd3ebd",
+    "/Users/twarn/Repositories/ai-working/scratch/stratolink-zones-20261012/combined/lib/SMD6_LTR-390UV-01_LTO-M.kicad_mod": "79bd36ae3dee2d140d9a91b4a62a5dd50051c4741de1a1863448051967efcaf7",
+    "/Users/twarn/Repositories/ai-working/scratch/stratolink-zones-20261012/combined/lib/ERJU02J1R1X.step": "d433ec4025d8cf829356864fc774877aaed40881c6f959b215a6877222d7ecff",
+    "/Users/twarn/Repositories/ai-working/scratch/stratolink-zones-20261012/combined/lib/DMF4B5R5G105M3DTA0.kicad_mod": "9ab776792a60db5be6fbd79dbf274512ab5a8a5770dd695b40abc6f241fe076d",
+    "/Users/twarn/Repositories/ai-working/scratch/stratolink-zones-20261012/combined/lib/gps.step": "6e8669ce426399a1171bfef1886e155a9c1bdf89aab8e7a59ea81c043f1fba88",
+    "/Users/twarn/Repositories/ai-working/scratch/stratolink-zones-20261012/combined/lib/XCVR_MAX-M10S-00B.kicad_mod": "f02c5f6ec6a2cc7e49e6d320e2f713a5cf826c652b7030754832415a9c33bfa7",
+    "/Users/twarn/Repositories/ai-working/scratch/stratolink-zones-20261012/combined/lib/2026-03-07_16-25-25.kicad_sym": "9a79848b12d5e661e2846ab59b4aad1bda3c134d4131e5a3be96759850b6e941",
+    "/Users/twarn/Repositories/ai-working/scratch/stratolink-zones-20261012/combined/lib/MAX-M10S-00B.kicad_sym": "7d85f2010cb778a48e2a6499bc5e681a42eb522fda2e2b9bf9ecaa89c28b7c91",
+    "/Users/twarn/Repositories/ai-working/scratch/stratolink-zones-20261012/combined/lib/INDC1608X90N.kicad_mod": "d3524646ea49e68bd74514a052a0d7db258eaef8e57a8ce70b2523c6b9cb6454",
+    "/Users/twarn/Repositories/ai-working/scratch/stratolink-zones-20261012/combined/lib/LPS4018-223MRC.step": "7247e578712eaab4a5fb90f55f123ce309f8a740e69b9670e4bec61481aa7bae",
+    "/Users/twarn/Repositories/ai-working/scratch/stratolink-zones-20261012/combined/lib/MS5611-01BA03.step": "cd4b2c1cc39faba8c3e3c66389228cdf131310b5466cdf22320cf2afd8a0e1b1",
+    "/Users/twarn/Repositories/ai-working/scratch/stratolink-zones-20261012/combined/lib/VJ0603A120KXCAP.kicad_sym": "d45b48e1f00f52444dc6e20e8d2447d3dc502248c2a0446e5d44e05e462723e5",
+    "/Users/twarn/Repositories/ai-working/scratch/stratolink-zones-20261012/combined/lib/HS230F.kicad_mod": "529df574736c0f6ea13c39468a44ac9dcdd8beb2fa7b52cccbe3fb26bdf8c335",
+    "/Users/twarn/Repositories/ai-working/scratch/stratolink-zones-20261012/combined/lib/DMF4B5R5G105M3DTA0.mod": "e81591e3cf7073a690f18031fff9e130b0ced60858ff05f4db9e365ee8b60e45",
+    "/Users/twarn/Repositories/ai-working/scratch/stratolink-zones-20261012/combined/lib/HS230F.lib": "0e787e65a19b6bc279c1cac6f20f8a7cae8f3fe38d1c25a1ac7752dda3ba73ec",
+    "/Users/twarn/Repositories/ai-working/scratch/stratolink-zones-20261012/combined/lib/LTR-390UV-01.step": "a4fef81fed3d299892089258ab37ddfefc50b64d2becda37a719e27a0b281e5b",
+    "/Users/twarn/Repositories/ai-working/scratch/stratolink-zones-20261012/combined/lib/LIS2DH12TR.step": "7a3d2316fa3f9d01dcb367295c280fd3064e9864f9b25e029afded30548432b8",
+    "/Users/twarn/Repositories/ai-working/scratch/stratolink-zones-20261012/combined/lib/T3902.step": "214b395bb75a355bfc5ca2eac498412731dc0a5296af2382d370cf0230bdff1f",
+    "/Users/twarn/Repositories/ai-working/scratch/stratolink-zones-20261012/combined/lib/Suspension_PTH_D2p0_OD3p2.kicad_mod": "2f71d16ba89940b2e21f46e35e96a71f7ff660adaaff82485ed805de143c9ca1",
+    "/Users/twarn/Repositories/ai-working/scratch/stratolink-zones-20261012/combined/lib/HS230F.kicad_sym": "811489ce5a198a6cd083fdd34451ee26f7f8186efe6d04e532546f51ef57bb93",
+    "/Users/twarn/Repositories/ai-working/scratch/stratolink-zones-20261012/combined/lib/DIO_BAS716_115.kicad_mod": "4f89dd17f2854299f0b242c9aca165594044192c924ea13825f08d0b3918d491",
+    "/Users/twarn/Repositories/ai-working/scratch/stratolink-zones-20261012/combined/lib/TMP117NAIYBGR.kicad_sym": "1813a62d0d88664390dfc896d9a2cfd39cf37b9b75531db8980191ed2cc3c584",
+    "/Users/twarn/Repositories/ai-working/scratch/stratolink-zones-20261012/combined/lib/XDCR_AS7341-DLGM.kicad_mod": "1b4397d0b1f6b5baa42d874ff37b2096b77d6fdfe65f692b1d3dff3db6a4e2ac",
+    "/Users/twarn/Repositories/ai-working/scratch/stratolink-zones-20261012/combined/lib/DMF4B5R5G105M3DTA0.kicad_sym": "d61a16f42fbe02ebc78f9a2c9a19cbe607187df5f581d0702a63593aec82087f",
+    "/Users/twarn/Repositories/ai-working/scratch/stratolink-zones-20261012/combined/lib/RES_ERJU02J1R1X.kicad_mod": "26b19b06d6669428f70c92613ae025bd8d5934c62fb048261c74eafd0ce3a843",
+    "/Users/twarn/Repositories/ai-working/scratch/stratolink-zones-20261012/combined/lib/LQM18FN100M00D.kicad_sym": "2effabbae1403948eeabacb0d3d9dbdbf7caa0ebb70a2aae9fbcacd4d1885e21",
+    "/Users/twarn/Repositories/ai-working/scratch/stratolink-zones-20261012/combined/lib/ERJU02J1R1X.kicad_sym": "2dbe1f4533020a98c94e65bc71457186153c14c325df09cd224c0426da39ace4",
+    "/Users/twarn/Repositories/ai-working/scratch/stratolink-zones-20261012/combined/lib/ETQP4M220YFN.step": "c469fcfe7493ad42a7b4612f69a099da50f7e0a51e603c1c81473edc0920dd1f",
+    "/Users/twarn/Repositories/ai-working/scratch/stratolink-zones-20261012/combined/lib/MS5611-01BA03.kicad_sym": "cb60c24e00aae0b18e91ee617e19428fc1cf4632063dfd9ddbe9d8af632ea9e3",
+    "/Users/twarn/Repositories/ai-working/scratch/stratolink-zones-20261012/combined/lib/BQ25570RGRR.kicad_sym": "77e394cb57ae10efe7eba2d4dfeadae0a59542699f782de5f073fa621408f2fc",
+    "/Users/twarn/Repositories/ai-working/scratch/stratolink-zones-20261012/combined/lib/RAK3172-8-SM-NI.kicad_sym": "1676e2db045544d59c3c01dd87685b93ad6ea65d20a492b6a045e085a1b28514",
+    "/Users/twarn/Repositories/ai-working/scratch/stratolink-zones-20261012/combined/lib/MIC_T3902.kicad_mod": "1f92d8e049770a9c31db4054acd3362ef7022b6d665846ac2c70d9acf80fb7fe",
+    "/Users/twarn/Repositories/ai-working/scratch/stratolink-zones-20261012/combined/lib/ETQP4M220YFN.kicad_sym": "3339cd09a82b3f891d5eaafd736413701fc2a17ebc59ba621a71a132e182a049",
+    "/Users/twarn/Repositories/ai-working/scratch/stratolink-zones-20261012/combined/lib/HS230F.mod": "b00437a67fb2634c1c0f50d349e62be917c85b7ffc185c82875fcf2bfa18f6c5",
+    "/Users/twarn/Repositories/ai-working/scratch/stratolink-zones-20261012/combined/lib/DMF4B5R5G105M3DTA0.lib": "be9e0cfc73b162b228139b9f046432f40169db6e4762d8b12e0957321f9bfc1c",
+    "/Users/twarn/Repositories/ai-working/scratch/stratolink-zones-20261012/combined/lib/SMD6_LTR-390UV-01_LTO.kicad_mod": "9eb6ce599943c3b3a7159015b151f81e85d8390ae426ae314aefcec4cee5144f",
+    "/Users/twarn/Repositories/ai-working/scratch/stratolink-zones-20261012/combined/lib/PQFN50P200X200100-12N.kicad_mod": "bb10f8b0b1d0f19ba3a75cf9d0ec96834f28dcf6c5d49ca907dea1d2c66d3589",
+    "/Users/twarn/Repositories/ai-working/scratch/stratolink-zones-20261012/combined/lib/WCAP-CSGP_0402.kicad_sym": "31b8edc59adcae9059ce14724e0885f154cd6352c0536ca33a71419ce885b240",
+    "/Users/twarn/Repositories/ai-working/scratch/stratolink-zones-20261012/combined/lib/LPS4018-223MRC.kicad_sym": "59283d1e7d07f0724ece85c78996f50d5c81b836be4e51065a92117c93ef2f3d",
+    "/Users/twarn/Repositories/ai-working/scratch/stratolink-zones-20261012/combined/lib/ProLib_pcs_2026-02-08.elibz": "747bb6051045cdcd8f720ab8816df1be8344a506a3ada6da75b09e35ce2957fe",
+    "/Users/twarn/Repositories/ai-working/scratch/stratolink-zones-20261012/combined/lib/RAK3172.kicad_sym": "d3131a6c168b5afdd04ba50f2b449ba380bff7b91078ce1b1212e3a0e22c3749",
+    "/Users/twarn/Repositories/ai-working/scratch/stratolink-zones-20261012/combined/lib/TMP117NAIYBGR.step": "81257ef89350fbe4c930c965cd849b3f2ac885f4d30b6f6b1cd6689b145be75e",
+    "/Users/twarn/Repositories/ai-working/scratch/stratolink-zones-20261012/combined/lib/4269.dcm": "73b350fb3e67f43221dc332d4aa0b9a12705ca3e654c17ad7c661d1acfc2ad4c",
+    "/Users/twarn/Repositories/ai-working/scratch/stratolink-zones-20261012/combined/lib/4269.kicad_mod": "cb4f61d8466e9c3887e4211dddf0bdef20bdc81bd3461330dc84b52695016f55",
+    "/Users/twarn/Repositories/ai-working/scratch/stratolink-zones-20261012/combined/lib/mic.elibz": "b68dcc389d65cf5b89763e94db81ee8ee41ad52d68ad39fffea02825559bad17",
+    "/Users/twarn/Repositories/ai-working/scratch/stratolink-zones-20261012/combined/lib/XCVR_RAK3172-8-SM-NI.kicad_mod": "341a8de38d3075e7e190495ecbe1faa77f11aef73df7211c85b56581198b6c6a",
+    "/Users/twarn/Repositories/ai-working/scratch/stratolink-zones-20261012/combined/lib/21-0147E.kicad_mod": "d8b8ebc85e44c7bc74c142f7189b65a37cceee2dca0531a18df6523b571999c6",
+    "/Users/twarn/Repositories/ai-working/scratch/stratolink-zones-20261012/combined/lib/AS7341-DLGM.kicad_sym": "abd1d59f41a076196e753c2b658694e77e1c5d9f519ab5672315827ddcd7a5b1"
+  },
+  "pad_changes": [
+    {
+      "ref": "U7",
+      "pad": "5",
+      "before": [],
+      "after": [
+        [
+          "zone_connect",
+          "0"
+        ]
+      ]
+    },
+    {
+      "ref": "U7",
+      "pad": "7",
+      "before": [],
+      "after": [
+        [
+          "zone_connect",
+          "0"
+        ]
+      ]
+    },
+    {
+      "ref": "U7",
+      "pad": "8",
+      "before": [],
+      "after": [
+        [
+          "zone_connect",
+          "0"
+        ]
+      ]
+    },
+    {
+      "ref": "J20",
+      "pad": "5",
+      "before": [],
+      "after": [
+        [
+          "zone_connect",
+          "2"
+        ]
+      ]
+    }
+  ],
+  "deleted_zone": "e9b71a22-0a8a-41f9-b5c4-115945b7ef58",
+  "all_other_board_objects_exact": true,
+  "physical_pad_checks": 232,
+  "unconnected": 0,
+  "changed_library_files": [
+    "PQFN50P200X200100-12N.kicad_mod"
+  ],
+  "baseline_libraries_frozen_regular_files": true,
+  "minimum_spokes_preserved": 2,
+  "drc": {
+    "project": {
+      "violations": {
+        "before": 61,
+        "after": 57,
+        "added": [],
+        "removed": [
+          {
+            "description": "Copper zones intersect (intersecting zones must have distinct priorities)",
+            "item_uuids": [
+              "795c4093-4930-4bcb-9c07-8e31d04084fe",
+              "e9b71a22-0a8a-41f9-b5c4-115945b7ef58"
+            ],
+            "severity": "error",
+            "type": "zones_intersect"
+          },
+          {
+            "description": "Thermal relief connection to zone incomplete (layer F.Cu; zone min spoke count 2; actual 1)",
+            "item_uuids": [
+              "795c4093-4930-4bcb-9c07-8e31d04084fe",
+              "885f4db5-7a9b-4845-9096-ed56c7826b71"
+            ],
+            "severity": "error",
+            "type": "starved_thermal"
+          },
+          {
+            "description": "Thermal relief connection to zone incomplete (layer F.Cu; zone min spoke count 2; actual 1)",
+            "item_uuids": [
+              "77d55d14-93f0-45c2-9c41-d0881e10a934",
+              "795c4093-4930-4bcb-9c07-8e31d04084fe"
+            ],
+            "severity": "error",
+            "type": "starved_thermal"
+          },
+          {
+            "description": "Thermal relief connection to zone incomplete (layer F.Cu; zone min spoke count 2; actual 1)",
+            "item_uuids": [
+              "795c4093-4930-4bcb-9c07-8e31d04084fe",
+              "aec9ea08-f671-4b4c-aaa4-04ae23e80306"
+            ],
+            "severity": "error",
+            "type": "starved_thermal"
+          }
+        ]
+      },
+      "unconnected_items": {
+        "before": 0,
+        "after": 0,
+        "added": [],
+        "removed": []
+      },
+      "schematic_parity": {
+        "before": 11,
+        "after": 11,
+        "added": [],
+        "removed": []
+      }
+    },
+    "diagnostic": {
+      "violations": {
+        "before": 125,
+        "after": 121,
+        "added": [],
+        "removed": [
+          {
+            "description": "Copper zones intersect (intersecting zones must have distinct priorities)",
+            "item_uuids": [
+              "795c4093-4930-4bcb-9c07-8e31d04084fe",
+              "e9b71a22-0a8a-41f9-b5c4-115945b7ef58"
+            ],
+            "severity": "error",
+            "type": "zones_intersect"
+          },
+          {
+            "description": "Thermal relief connection to zone incomplete (layer F.Cu; zone min spoke count 2; actual 1)",
+            "item_uuids": [
+              "795c4093-4930-4bcb-9c07-8e31d04084fe",
+              "885f4db5-7a9b-4845-9096-ed56c7826b71"
+            ],
+            "severity": "error",
+            "type": "starved_thermal"
+          },
+          {
+            "description": "Thermal relief connection to zone incomplete (layer F.Cu; zone min spoke count 2; actual 1)",
+            "item_uuids": [
+              "77d55d14-93f0-45c2-9c41-d0881e10a934",
+              "795c4093-4930-4bcb-9c07-8e31d04084fe"
+            ],
+            "severity": "error",
+            "type": "starved_thermal"
+          },
+          {
+            "description": "Thermal relief connection to zone incomplete (layer F.Cu; zone min spoke count 2; actual 1)",
+            "item_uuids": [
+              "795c4093-4930-4bcb-9c07-8e31d04084fe",
+              "aec9ea08-f671-4b4c-aaa4-04ae23e80306"
+            ],
+            "severity": "error",
+            "type": "starved_thermal"
+          }
+        ]
+      },
+      "unconnected_items": {
+        "before": 0,
+        "after": 0,
+        "added": [],
+        "removed": []
+      },
+      "schematic_parity": {
+        "before": 11,
+        "after": 11,
+        "added": [],
+        "removed": []
+      }
+    }
+  },
+  "unchanged_manufacturing_plots": [
+    "stratolink-F_Mask.gts",
+    "stratolink-B_Mask.gbs",
+    "stratolink-F_Paste.gtp",
+    "stratolink-B_Paste.gbp",
+    "stratolink-Edge_Cuts.gm1",
+    "stratolink-PTH.drl",
+    "stratolink-NPTH.drl"
+  ],
+  "review_export_zip_sha256": "88563875f546a233f2d26d66043109bc2c7cf6a22a5ac2f4851455541550fd40",
+  "review_scratch_path": "/Users/twarn/Repositories/ai-working/scratch/stratolink-zones-20261012/review",
+  "scratch_migration_note": "Completed snapshots moved unchanged from the former review/.scratch path after checks; source hashes and manufacturing-export ZIP remain valid.",
+  "library_only_changed_zone_connect_on_pads": [
+    "5",
+    "7",
+    "8"
+  ],
+  "copper_result": "copper-verification.json",
+  "review_plot": "U7-zone-contacts.png"
+}

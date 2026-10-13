@@ -1,0 +1,387 @@
+{
+  "status": "pass",
+  "baseline": "c3d70a429a95591607341d57bf16ee153972da71",
+  "candidate": "/Users/twarn/Repositories/ai-working/scratch/stratolink-zones-20261012/thermal/trace_only_5_7_8/stratolink.kicad_pcb",
+  "candidate_sha256": "3a1e394936575f54f7039e6f925b302fea81dc3a9f339b11f305c0e6a22684b6",
+  "allowed_pad_changes": [
+    {
+      "ref": "U7",
+      "pad": "5",
+      "zone_connect": 0
+    },
+    {
+      "ref": "U7",
+      "pad": "7",
+      "zone_connect": 0
+    },
+    {
+      "ref": "U7",
+      "pad": "8",
+      "zone_connect": 0
+    },
+    {
+      "ref": "J20",
+      "pad": "5",
+      "zone_connect": 2
+    }
+  ],
+  "unchanged_schematic_project_tables": true,
+  "all_other_board_objects_unchanged_except_refill": true,
+  "physical_pad_connectivity_checks": 232,
+  "track_only_U7": {
+    "U7.3": {
+      "reached_pads": [
+        [
+          "C19",
+          "1"
+        ],
+        [
+          "C21",
+          "1"
+        ],
+        [
+          "R5",
+          "2"
+        ],
+        [
+          "U7",
+          "3"
+        ],
+        [
+          "U7",
+          "5"
+        ],
+        [
+          "U7",
+          "6"
+        ],
+        [
+          "U7",
+          "7"
+        ],
+        [
+          "U7",
+          "8"
+        ]
+      ],
+      "track_count": 20,
+      "widths_mm": [
+        0.2
+      ],
+      "via_uuids": [
+        "8b6ba619-85cc-4b9e-8cbe-dcff90c1bcc4",
+        "9c1dbeda-64ec-469f-9930-83c8b6488c88"
+      ]
+    },
+    "U7.5": {
+      "reached_pads": [
+        [
+          "C19",
+          "1"
+        ],
+        [
+          "C21",
+          "1"
+        ],
+        [
+          "R5",
+          "2"
+        ],
+        [
+          "U7",
+          "3"
+        ],
+        [
+          "U7",
+          "5"
+        ],
+        [
+          "U7",
+          "6"
+        ],
+        [
+          "U7",
+          "7"
+        ],
+        [
+          "U7",
+          "8"
+        ]
+      ],
+      "track_count": 20,
+      "widths_mm": [
+        0.2
+      ],
+      "via_uuids": [
+        "8b6ba619-85cc-4b9e-8cbe-dcff90c1bcc4",
+        "9c1dbeda-64ec-469f-9930-83c8b6488c88"
+      ]
+    },
+    "U7.6": {
+      "reached_pads": [
+        [
+          "C19",
+          "1"
+        ],
+        [
+          "C21",
+          "1"
+        ],
+        [
+          "R5",
+          "2"
+        ],
+        [
+          "U7",
+          "3"
+        ],
+        [
+          "U7",
+          "5"
+        ],
+        [
+          "U7",
+          "6"
+        ],
+        [
+          "U7",
+          "7"
+        ],
+        [
+          "U7",
+          "8"
+        ]
+      ],
+      "track_count": 20,
+      "widths_mm": [
+        0.2
+      ],
+      "via_uuids": [
+        "8b6ba619-85cc-4b9e-8cbe-dcff90c1bcc4",
+        "9c1dbeda-64ec-469f-9930-83c8b6488c88"
+      ]
+    },
+    "U7.7": {
+      "reached_pads": [
+        [
+          "C19",
+          "1"
+        ],
+        [
+          "C21",
+          "1"
+        ],
+        [
+          "R5",
+          "2"
+        ],
+        [
+          "U7",
+          "3"
+        ],
+        [
+          "U7",
+          "5"
+        ],
+        [
+          "U7",
+          "6"
+        ],
+        [
+          "U7",
+          "7"
+        ],
+        [
+          "U7",
+          "8"
+        ]
+      ],
+      "track_count": 20,
+      "widths_mm": [
+        0.2
+      ],
+      "via_uuids": [
+        "8b6ba619-85cc-4b9e-8cbe-dcff90c1bcc4",
+        "9c1dbeda-64ec-469f-9930-83c8b6488c88"
+      ]
+    },
+    "U7.8": {
+      "reached_pads": [
+        [
+          "C19",
+          "1"
+        ],
+        [
+          "C21",
+          "1"
+        ],
+        [
+          "R5",
+          "2"
+        ],
+        [
+          "U7",
+          "3"
+        ],
+        [
+          "U7",
+          "5"
+        ],
+        [
+          "U7",
+          "6"
+        ],
+        [
+          "U7",
+          "7"
+        ],
+        [
+          "U7",
+          "8"
+        ]
+      ],
+      "track_count": 20,
+      "widths_mm": [
+        0.2
+      ],
+      "via_uuids": [
+        "8b6ba619-85cc-4b9e-8cbe-dcff90c1bcc4",
+        "9c1dbeda-64ec-469f-9930-83c8b6488c88"
+      ]
+    }
+  },
+  "drc": {
+    "project": {
+      "violations": 58,
+      "opens": 0,
+      "parity": 11,
+      "violations_delta": {
+        "added": [],
+        "removed": [
+          {
+            "description": "Thermal relief connection to zone incomplete (layer F.Cu; zone min spoke count 2; actual 1)",
+            "item_uuids": [
+              "795c4093-4930-4bcb-9c07-8e31d04084fe",
+              "885f4db5-7a9b-4845-9096-ed56c7826b71"
+            ],
+            "severity": "error",
+            "type": "starved_thermal"
+          },
+          {
+            "description": "Thermal relief connection to zone incomplete (layer F.Cu; zone min spoke count 2; actual 1)",
+            "item_uuids": [
+              "77d55d14-93f0-45c2-9c41-d0881e10a934",
+              "795c4093-4930-4bcb-9c07-8e31d04084fe"
+            ],
+            "severity": "error",
+            "type": "starved_thermal"
+          },
+          {
+            "description": "Thermal relief connection to zone incomplete (layer F.Cu; zone min spoke count 2; actual 1)",
+            "item_uuids": [
+              "795c4093-4930-4bcb-9c07-8e31d04084fe",
+              "aec9ea08-f671-4b4c-aaa4-04ae23e80306"
+            ],
+            "severity": "error",
+            "type": "starved_thermal"
+          }
+        ]
+      },
+      "unconnected_items_delta": {
+        "added": [],
+        "removed": []
+      },
+      "schematic_parity_delta": {
+        "added": [],
+        "removed": []
+      }
+    },
+    "diagnostic": {
+      "violations": 71,
+      "opens": 0,
+      "parity": 11,
+      "violations_delta": {
+        "added": [],
+        "removed": [
+          {
+            "description": "Thermal relief connection to zone incomplete (layer F.Cu; zone min spoke count 2; actual 1)",
+            "item_uuids": [
+              "795c4093-4930-4bcb-9c07-8e31d04084fe",
+              "885f4db5-7a9b-4845-9096-ed56c7826b71"
+            ],
+            "severity": "error",
+            "type": "starved_thermal"
+          },
+          {
+            "description": "Thermal relief connection to zone incomplete (layer F.Cu; zone min spoke count 2; actual 1)",
+            "item_uuids": [
+              "77d55d14-93f0-45c2-9c41-d0881e10a934",
+              "795c4093-4930-4bcb-9c07-8e31d04084fe"
+            ],
+            "severity": "error",
+            "type": "starved_thermal"
+          },
+          {
+            "description": "Thermal relief connection to zone incomplete (layer F.Cu; zone min spoke count 2; actual 1)",
+            "item_uuids": [
+              "795c4093-4930-4bcb-9c07-8e31d04084fe",
+              "aec9ea08-f671-4b4c-aaa4-04ae23e80306"
+            ],
+            "severity": "error",
+            "type": "starved_thermal"
+          }
+        ]
+      },
+      "unconnected_items_delta": {
+        "added": [],
+        "removed": []
+      },
+      "schematic_parity_delta": {
+        "added": [],
+        "removed": []
+      }
+    },
+    "minimum-four": {
+      "violations": 85,
+      "opens": 0,
+      "parity": 11,
+      "U7_thermal_findings": [
+        {
+          "description": "Thermal relief connection to zone incomplete (layer F.Cu; zone min spoke count 4; actual 2)",
+          "items": [
+            {
+              "description": "Zone [GND] on F.Cu and B.Cu, priority 0",
+              "pos": {
+                "x": 53.011,
+                "y": 29.026164
+              },
+              "uuid": "795c4093-4930-4bcb-9c07-8e31d04084fe"
+            },
+            {
+              "description": "Pad 6 [GND] of U7 on F.Cu",
+              "pos": {
+                "x": 71.313,
+                "y": 37.557
+              },
+              "uuid": "ddc59d54-538b-43a3-a480-3408e0029eba"
+            }
+          ],
+          "severity": "error",
+          "type": "starved_thermal"
+        }
+      ]
+    }
+  },
+  "exports": {
+    "F_Cu.gtl": "changed_front_ground_fill_only",
+    "B_Cu.gbl": "identical",
+    "F_Mask.gts": "identical",
+    "B_Mask.gbs": "identical",
+    "F_Paste.gtp": "identical",
+    "B_Paste.gbp": "identical",
+    "Edge_Cuts.gm1": "identical",
+    "PTH.drl": "identical",
+    "NPTH.drl": "identical"
+  },
+  "library_change_recommendation": "Board-position-dependent choices: root combined candidate mirrors U7 pads5/7/8 local no-zone in the existing project-local U7 library to preserve update consistency. This is not generic ST package geometry guidance. Keep J20.5 override board-local; mask/paste/copper dimensions remain unchanged."
+}

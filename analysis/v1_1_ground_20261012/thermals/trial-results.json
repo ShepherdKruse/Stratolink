@@ -1,0 +1,559 @@
+{
+  "baseline": "c3d70a429a95591607341d57bf16ee153972da71",
+  "trials": [
+    {
+      "name": "u7_g150_w250_a90",
+      "gap": 0.15,
+      "width": 0.25,
+      "angle": 90,
+      "jgap": 0.5,
+      "jwidth": 0.5,
+      "jangle": 45,
+      "directory": "/Users/twarn/Repositories/ai-working/scratch/stratolink-zones-20261012/thermal/u7_g150_w250_a90",
+      "violations": 60,
+      "opens": 0,
+      "parity": 11,
+      "thermals": [
+        {
+          "description": "Thermal relief connection to zone incomplete (layer F.Cu; pad min spoke count 2; actual 1)",
+          "items": [
+            {
+              "description": "Zone [GND] on F.Cu and B.Cu, priority 0",
+              "pos": {
+                "x": 53.011,
+                "y": 29.026164
+              },
+              "uuid": "795c4093-4930-4bcb-9c07-8e31d04084fe"
+            },
+            {
+              "description": "Pad 5 [GND] of U7 on F.Cu",
+              "pos": {
+                "x": 71.313,
+                "y": 38.072
+              },
+              "uuid": "885f4db5-7a9b-4845-9096-ed56c7826b71"
+            }
+          ],
+          "severity": "error",
+          "type": "starved_thermal"
+        },
+        {
+          "description": "Thermal relief connection to zone incomplete (layer F.Cu; pad min spoke count 2; actual 1)",
+          "items": [
+            {
+              "description": "Zone [GND] on F.Cu and B.Cu, priority 0",
+              "pos": {
+                "x": 53.011,
+                "y": 29.026164
+              },
+              "uuid": "795c4093-4930-4bcb-9c07-8e31d04084fe"
+            },
+            {
+              "description": "Pad 5 [GND] of J20 on F.Cu",
+              "pos": {
+                "x": 61.574,
+                "y": 84.323001
+              },
+              "uuid": "aec9ea08-f671-4b4c-aaa4-04ae23e80306"
+            }
+          ],
+          "severity": "error",
+          "type": "starved_thermal"
+        }
+      ]
+    },
+    {
+      "name": "u7_g200_w250_a90",
+      "gap": 0.2,
+      "width": 0.25,
+      "angle": 90,
+      "jgap": 0.5,
+      "jwidth": 0.5,
+      "jangle": 45,
+      "directory": "/Users/twarn/Repositories/ai-working/scratch/stratolink-zones-20261012/thermal/u7_g200_w250_a90",
+      "violations": 60,
+      "opens": 0,
+      "parity": 11,
+      "thermals": [
+        {
+          "description": "Thermal relief connection to zone incomplete (layer F.Cu; pad min spoke count 2; actual 1)",
+          "items": [
+            {
+              "description": "Zone [GND] on F.Cu and B.Cu, priority 0",
+              "pos": {
+                "x": 53.011,
+                "y": 29.026164
+              },
+              "uuid": "795c4093-4930-4bcb-9c07-8e31d04084fe"
+            },
+            {
+              "description": "Pad 5 [GND] of U7 on F.Cu",
+              "pos": {
+                "x": 71.313,
+                "y": 38.072
+              },
+              "uuid": "885f4db5-7a9b-4845-9096-ed56c7826b71"
+            }
+          ],
+          "severity": "error",
+          "type": "starved_thermal"
+        },
+        {
+          "description": "Thermal relief connection to zone incomplete (layer F.Cu; pad min spoke count 2; actual 1)",
+          "items": [
+            {
+              "description": "Zone [GND] on F.Cu and B.Cu, priority 0",
+              "pos": {
+                "x": 53.011,
+                "y": 29.026164
+              },
+              "uuid": "795c4093-4930-4bcb-9c07-8e31d04084fe"
+            },
+            {
+              "description": "Pad 5 [GND] of J20 on F.Cu",
+              "pos": {
+                "x": 61.574,
+                "y": 84.323001
+              },
+              "uuid": "aec9ea08-f671-4b4c-aaa4-04ae23e80306"
+            }
+          ],
+          "severity": "error",
+          "type": "starved_thermal"
+        }
+      ]
+    },
+    {
+      "name": "u7_g250_w250_a90",
+      "gap": 0.25,
+      "width": 0.25,
+      "angle": 90,
+      "jgap": 0.5,
+      "jwidth": 0.5,
+      "jangle": 45,
+      "directory": "/Users/twarn/Repositories/ai-working/scratch/stratolink-zones-20261012/thermal/u7_g250_w250_a90",
+      "violations": 60,
+      "opens": 0,
+      "parity": 11,
+      "thermals": [
+        {
+          "description": "Thermal relief connection to zone incomplete (layer F.Cu; pad min spoke count 2; actual 1)",
+          "items": [
+            {
+              "description": "Zone [GND] on F.Cu and B.Cu, priority 0",
+              "pos": {
+                "x": 53.011,
+                "y": 29.026164
+              },
+              "uuid": "795c4093-4930-4bcb-9c07-8e31d04084fe"
+            },
+            {
+              "description": "Pad 5 [GND] of U7 on F.Cu",
+              "pos": {
+                "x": 71.313,
+                "y": 38.072
+              },
+              "uuid": "885f4db5-7a9b-4845-9096-ed56c7826b71"
+            }
+          ],
+          "severity": "error",
+          "type": "starved_thermal"
+        },
+        {
+          "description": "Thermal relief connection to zone incomplete (layer F.Cu; pad min spoke count 2; actual 1)",
+          "items": [
+            {
+              "description": "Zone [GND] on F.Cu and B.Cu, priority 0",
+              "pos": {
+                "x": 53.011,
+                "y": 29.026164
+              },
+              "uuid": "795c4093-4930-4bcb-9c07-8e31d04084fe"
+            },
+            {
+              "description": "Pad 5 [GND] of J20 on F.Cu",
+              "pos": {
+                "x": 61.574,
+                "y": 84.323001
+              },
+              "uuid": "aec9ea08-f671-4b4c-aaa4-04ae23e80306"
+            }
+          ],
+          "severity": "error",
+          "type": "starved_thermal"
+        }
+      ]
+    },
+    {
+      "name": "u7_g150_w250_a45",
+      "gap": 0.15,
+      "width": 0.25,
+      "angle": 45,
+      "jgap": 0.5,
+      "jwidth": 0.5,
+      "jangle": 45,
+      "directory": "/Users/twarn/Repositories/ai-working/scratch/stratolink-zones-20261012/thermal/u7_g150_w250_a45",
+      "violations": 60,
+      "opens": 0,
+      "parity": 11,
+      "thermals": [
+        {
+          "description": "Thermal relief connection to zone incomplete (layer F.Cu; zone min spoke count 2; actual 1)",
+          "items": [
+            {
+              "description": "Zone [GND] on F.Cu and B.Cu, priority 0",
+              "pos": {
+                "x": 53.011,
+                "y": 29.026164
+              },
+              "uuid": "795c4093-4930-4bcb-9c07-8e31d04084fe"
+            },
+            {
+              "description": "Pad 7 [GND] of U7 on F.Cu",
+              "pos": {
+                "x": 71.298,
+                "y": 37.042001
+              },
+              "uuid": "16f1a707-a926-4839-8937-9c29f4503070"
+            }
+          ],
+          "severity": "error",
+          "type": "starved_thermal"
+        },
+        {
+          "description": "Thermal relief connection to zone incomplete (layer F.Cu; pad min spoke count 2; actual 1)",
+          "items": [
+            {
+              "description": "Zone [GND] on F.Cu and B.Cu, priority 0",
+              "pos": {
+                "x": 53.011,
+                "y": 29.026164
+              },
+              "uuid": "795c4093-4930-4bcb-9c07-8e31d04084fe"
+            },
+            {
+              "description": "Pad 5 [GND] of J20 on F.Cu",
+              "pos": {
+                "x": 61.574,
+                "y": 84.323001
+              },
+              "uuid": "aec9ea08-f671-4b4c-aaa4-04ae23e80306"
+            }
+          ],
+          "severity": "error",
+          "type": "starved_thermal"
+        }
+      ]
+    },
+    {
+      "name": "u7_g200_w250_a45",
+      "gap": 0.2,
+      "width": 0.25,
+      "angle": 45,
+      "jgap": 0.5,
+      "jwidth": 0.5,
+      "jangle": 45,
+      "directory": "/Users/twarn/Repositories/ai-working/scratch/stratolink-zones-20261012/thermal/u7_g200_w250_a45",
+      "violations": 60,
+      "opens": 0,
+      "parity": 11,
+      "thermals": [
+        {
+          "description": "Thermal relief connection to zone incomplete (layer F.Cu; zone min spoke count 2; actual 1)",
+          "items": [
+            {
+              "description": "Zone [GND] on F.Cu and B.Cu, priority 0",
+              "pos": {
+                "x": 53.011,
+                "y": 29.026164
+              },
+              "uuid": "795c4093-4930-4bcb-9c07-8e31d04084fe"
+            },
+            {
+              "description": "Pad 7 [GND] of U7 on F.Cu",
+              "pos": {
+                "x": 71.298,
+                "y": 37.042001
+              },
+              "uuid": "16f1a707-a926-4839-8937-9c29f4503070"
+            }
+          ],
+          "severity": "error",
+          "type": "starved_thermal"
+        },
+        {
+          "description": "Thermal relief connection to zone incomplete (layer F.Cu; pad min spoke count 2; actual 1)",
+          "items": [
+            {
+              "description": "Zone [GND] on F.Cu and B.Cu, priority 0",
+              "pos": {
+                "x": 53.011,
+                "y": 29.026164
+              },
+              "uuid": "795c4093-4930-4bcb-9c07-8e31d04084fe"
+            },
+            {
+              "description": "Pad 5 [GND] of J20 on F.Cu",
+              "pos": {
+                "x": 61.574,
+                "y": 84.323001
+              },
+              "uuid": "aec9ea08-f671-4b4c-aaa4-04ae23e80306"
+            }
+          ],
+          "severity": "error",
+          "type": "starved_thermal"
+        }
+      ]
+    },
+    {
+      "name": "u7_g250_w250_a45",
+      "gap": 0.25,
+      "width": 0.25,
+      "angle": 45,
+      "jgap": 0.5,
+      "jwidth": 0.5,
+      "jangle": 45,
+      "directory": "/Users/twarn/Repositories/ai-working/scratch/stratolink-zones-20261012/thermal/u7_g250_w250_a45",
+      "violations": 60,
+      "opens": 0,
+      "parity": 11,
+      "thermals": [
+        {
+          "description": "Thermal relief connection to zone incomplete (layer F.Cu; zone min spoke count 2; actual 1)",
+          "items": [
+            {
+              "description": "Zone [GND] on F.Cu and B.Cu, priority 0",
+              "pos": {
+                "x": 53.011,
+                "y": 29.026164
+              },
+              "uuid": "795c4093-4930-4bcb-9c07-8e31d04084fe"
+            },
+            {
+              "description": "Pad 7 [GND] of U7 on F.Cu",
+              "pos": {
+                "x": 71.298,
+                "y": 37.042001
+              },
+              "uuid": "16f1a707-a926-4839-8937-9c29f4503070"
+            }
+          ],
+          "severity": "error",
+          "type": "starved_thermal"
+        },
+        {
+          "description": "Thermal relief connection to zone incomplete (layer F.Cu; pad min spoke count 2; actual 1)",
+          "items": [
+            {
+              "description": "Zone [GND] on F.Cu and B.Cu, priority 0",
+              "pos": {
+                "x": 53.011,
+                "y": 29.026164
+              },
+              "uuid": "795c4093-4930-4bcb-9c07-8e31d04084fe"
+            },
+            {
+              "description": "Pad 5 [GND] of J20 on F.Cu",
+              "pos": {
+                "x": 61.574,
+                "y": 84.323001
+              },
+              "uuid": "aec9ea08-f671-4b4c-aaa4-04ae23e80306"
+            }
+          ],
+          "severity": "error",
+          "type": "starved_thermal"
+        }
+      ]
+    },
+    {
+      "name": "j20_g500_w500_a0",
+      "gap": 0.2,
+      "width": 0.25,
+      "angle": 90,
+      "jgap": 0.5,
+      "jwidth": 0.5,
+      "jangle": 0,
+      "directory": "/Users/twarn/Repositories/ai-working/scratch/stratolink-zones-20261012/thermal/j20_g500_w500_a0",
+      "violations": 59,
+      "opens": 0,
+      "parity": 11,
+      "thermals": [
+        {
+          "description": "Thermal relief connection to zone incomplete (layer F.Cu; pad min spoke count 2; actual 1)",
+          "items": [
+            {
+              "description": "Zone [GND] on F.Cu and B.Cu, priority 0",
+              "pos": {
+                "x": 53.011,
+                "y": 29.026164
+              },
+              "uuid": "795c4093-4930-4bcb-9c07-8e31d04084fe"
+            },
+            {
+              "description": "Pad 5 [GND] of U7 on F.Cu",
+              "pos": {
+                "x": 71.313,
+                "y": 38.072
+              },
+              "uuid": "885f4db5-7a9b-4845-9096-ed56c7826b71"
+            }
+          ],
+          "severity": "error",
+          "type": "starved_thermal"
+        }
+      ]
+    },
+    {
+      "name": "j20_g250_w250_a0",
+      "gap": 0.2,
+      "width": 0.25,
+      "angle": 90,
+      "jgap": 0.25,
+      "jwidth": 0.25,
+      "jangle": 0,
+      "directory": "/Users/twarn/Repositories/ai-working/scratch/stratolink-zones-20261012/thermal/j20_g250_w250_a0",
+      "violations": 59,
+      "opens": 0,
+      "parity": 11,
+      "thermals": [
+        {
+          "description": "Thermal relief connection to zone incomplete (layer F.Cu; pad min spoke count 2; actual 1)",
+          "items": [
+            {
+              "description": "Zone [GND] on F.Cu and B.Cu, priority 0",
+              "pos": {
+                "x": 53.011,
+                "y": 29.026164
+              },
+              "uuid": "795c4093-4930-4bcb-9c07-8e31d04084fe"
+            },
+            {
+              "description": "Pad 5 [GND] of U7 on F.Cu",
+              "pos": {
+                "x": 71.313,
+                "y": 38.072
+              },
+              "uuid": "885f4db5-7a9b-4845-9096-ed56c7826b71"
+            }
+          ],
+          "severity": "error",
+          "type": "starved_thermal"
+        }
+      ]
+    },
+    {
+      "name": "j20_g250_w250_a45",
+      "gap": 0.2,
+      "width": 0.25,
+      "angle": 90,
+      "jgap": 0.25,
+      "jwidth": 0.25,
+      "jangle": 45,
+      "directory": "/Users/twarn/Repositories/ai-working/scratch/stratolink-zones-20261012/thermal/j20_g250_w250_a45",
+      "violations": 59,
+      "opens": 0,
+      "parity": 11,
+      "thermals": [
+        {
+          "description": "Thermal relief connection to zone incomplete (layer F.Cu; pad min spoke count 2; actual 1)",
+          "items": [
+            {
+              "description": "Zone [GND] on F.Cu and B.Cu, priority 0",
+              "pos": {
+                "x": 53.011,
+                "y": 29.026164
+              },
+              "uuid": "795c4093-4930-4bcb-9c07-8e31d04084fe"
+            },
+            {
+              "description": "Pad 5 [GND] of U7 on F.Cu",
+              "pos": {
+                "x": 71.313,
+                "y": 38.072
+              },
+              "uuid": "885f4db5-7a9b-4845-9096-ed56c7826b71"
+            }
+          ],
+          "severity": "error",
+          "type": "starved_thermal"
+        }
+      ]
+    },
+    {
+      "name": "j20_g300_w250_a0",
+      "gap": 0.2,
+      "width": 0.25,
+      "angle": 90,
+      "jgap": 0.3,
+      "jwidth": 0.25,
+      "jangle": 0,
+      "directory": "/Users/twarn/Repositories/ai-working/scratch/stratolink-zones-20261012/thermal/j20_g300_w250_a0",
+      "violations": 59,
+      "opens": 0,
+      "parity": 11,
+      "thermals": [
+        {
+          "description": "Thermal relief connection to zone incomplete (layer F.Cu; pad min spoke count 2; actual 1)",
+          "items": [
+            {
+              "description": "Zone [GND] on F.Cu and B.Cu, priority 0",
+              "pos": {
+                "x": 53.011,
+                "y": 29.026164
+              },
+              "uuid": "795c4093-4930-4bcb-9c07-8e31d04084fe"
+            },
+            {
+              "description": "Pad 5 [GND] of U7 on F.Cu",
+              "pos": {
+                "x": 71.313,
+                "y": 38.072
+              },
+              "uuid": "885f4db5-7a9b-4845-9096-ed56c7826b71"
+            }
+          ],
+          "severity": "error",
+          "type": "starved_thermal"
+        }
+      ]
+    },
+    {
+      "name": "j20_direct",
+      "gap": 0.2,
+      "width": 0.25,
+      "angle": 90,
+      "jdirect": true,
+      "directory": "/Users/twarn/Repositories/ai-working/scratch/stratolink-zones-20261012/thermal/j20_direct",
+      "violations": 59,
+      "opens": 0,
+      "parity": 11,
+      "thermals": [
+        {
+          "description": "Thermal relief connection to zone incomplete (layer F.Cu; pad min spoke count 2; actual 1)",
+          "items": [
+            {
+              "description": "Zone [GND] on F.Cu and B.Cu, priority 0",
+              "pos": {
+                "x": 53.011,
+                "y": 29.026164
+              },
+              "uuid": "795c4093-4930-4bcb-9c07-8e31d04084fe"
+            },
+            {
+              "description": "Pad 5 [GND] of U7 on F.Cu",
+              "pos": {
+                "x": 71.313,
+                "y": 38.072
+              },
+              "uuid": "885f4db5-7a9b-4845-9096-ed56c7826b71"
+            }
+          ],
+          "severity": "error",
+          "type": "starved_thermal"
+        }
+      ]
+    }
+  ]
+}

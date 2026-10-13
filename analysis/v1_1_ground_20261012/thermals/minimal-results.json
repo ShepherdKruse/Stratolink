@@ -1,0 +1,32 @@
+{
+  "baseline": "c3d70a429a95591607341d57bf16ee153972da71",
+  "trials": [
+    {
+      "name": "trace_only_5_7_8",
+      "pads": {
+        "5": "(zone_connect 0)",
+        "7": "(zone_connect 0)",
+        "8": "(zone_connect 0)"
+      },
+      "directory": "/Users/twarn/Repositories/ai-working/scratch/stratolink-zones-20261012/thermal/trace_only_5_7_8",
+      "violations": 58,
+      "opens": 0,
+      "parity": 11,
+      "thermals": []
+    },
+    {
+      "name": "trace_only_3_5_7_8",
+      "pads": {
+        "3": "(zone_connect 0)",
+        "5": "(zone_connect 0)",
+        "7": "(zone_connect 0)",
+        "8": "(zone_connect 0)"
+      },
+      "directory": "/Users/twarn/Repositories/ai-working/scratch/stratolink-zones-20261012/thermal/trace_only_3_5_7_8",
+      "violations": 58,
+      "opens": 0,
+      "parity": 11,
+      "thermals": []
+    }
+  ]
+}

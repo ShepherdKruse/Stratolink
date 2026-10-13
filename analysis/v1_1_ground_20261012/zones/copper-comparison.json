@@ -1,0 +1,86 @@
+{
+  "front-only-main": {
+    "F.Cu": {
+      "before_area_mm2": 663.9307016499898,
+      "after_area_mm2": 663.9307016499898,
+      "added_area_mm2": 0.0,
+      "removed_area_mm2": 0.0,
+      "symmetric_difference_area_mm2": 0.0,
+      "exact_geometric_equality": true,
+      "added_bounds_mm": null,
+      "removed_bounds_mm": null,
+      "GND_fill_only": {
+        "before_area_mm2": 357.3781593291436,
+        "after_area_mm2": 357.3781593291436,
+        "added_area_mm2": 0.0,
+        "removed_area_mm2": 0.0,
+        "symmetric_difference_area_mm2": 0.0,
+        "exact_geometric_equality": true,
+        "added_bounds_mm": null,
+        "removed_bounds_mm": null
+      }
+    },
+    "B.Cu": {
+      "before_area_mm2": 816.7074854891822,
+      "after_area_mm2": 816.7074854891822,
+      "added_area_mm2": 0.0,
+      "removed_area_mm2": 0.0,
+      "symmetric_difference_area_mm2": 0.0,
+      "exact_geometric_equality": true,
+      "added_bounds_mm": null,
+      "removed_bounds_mm": null,
+      "GND_fill_only": {
+        "before_area_mm2": 583.7183162375283,
+        "after_area_mm2": 583.7183162375283,
+        "added_area_mm2": 0.0,
+        "removed_area_mm2": 0.0,
+        "symmetric_difference_area_mm2": 0.0,
+        "exact_geometric_equality": true,
+        "added_bounds_mm": null,
+        "removed_bounds_mm": null
+      }
+    }
+  },
+  "single-two-layer": {
+    "F.Cu": {
+      "before_area_mm2": 663.9307016499898,
+      "after_area_mm2": 663.9307016499898,
+      "added_area_mm2": 0.0,
+      "removed_area_mm2": 0.0,
+      "symmetric_difference_area_mm2": 0.0,
+      "exact_geometric_equality": true,
+      "added_bounds_mm": null,
+      "removed_bounds_mm": null,
+      "GND_fill_only": {
+        "before_area_mm2": 357.3781593291436,
+        "after_area_mm2": 357.3781593291436,
+        "added_area_mm2": 0.0,
+        "removed_area_mm2": 0.0,
+        "symmetric_difference_area_mm2": 0.0,
+        "exact_geometric_equality": true,
+        "added_bounds_mm": null,
+        "removed_bounds_mm": null
+      }
+    },
+    "B.Cu": {
+      "before_area_mm2": 816.7074854891822,
+      "after_area_mm2": 816.7074854891822,
+      "added_area_mm2": 0.0,
+      "removed_area_mm2": 0.0,
+      "symmetric_difference_area_mm2": 0.0,
+      "exact_geometric_equality": true,
+      "added_bounds_mm": null,
+      "removed_bounds_mm": null,
+      "GND_fill_only": {
+        "before_area_mm2": 583.7183162375283,
+        "after_area_mm2": 583.7183162375283,
+        "added_area_mm2": 0.0,
+        "removed_area_mm2": 0.0,
+        "symmetric_difference_area_mm2": 0.0,
+        "exact_geometric_equality": true,
+        "added_bounds_mm": null,
+        "removed_bounds_mm": null
+      }
+    }
+  }
+}

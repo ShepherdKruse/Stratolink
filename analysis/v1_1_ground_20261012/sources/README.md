@@ -1,0 +1,9 @@
+# Sources and interpretation
+
+Read in the Codex in-app browser on 2026-10-12. The exact input circuit and copper are frozen at Git `c3d70a4`; the source hashes and unrelated-work guards are in `../before.json`.
+
+- [KiCad 10 PCB Editor documentation](https://docs.kicad.org/10.0/en/pcbnew/pcbnew.html): pad-level relief gap and spoke width override the connecting zone's values. Blank values inherit; zero is an actual zero in current KiCad. The minimum resolved-spoke count is a DRC requirement. This change keeps the project's two-spoke requirement. The saved excerpt records these behaviors; an absent warning proves only that KiCad's check passes, not physical solder-joint quality.
+- [Tag-Connect TC2030-NL footprint description](https://www.tag-connect.com/product/tc2030-nl-fp-footprint): the PCB carries contact pads and guide holes; there is no mating component soldered to the board. Therefore a local solid ground-zone connection at J20.5 is an engineering choice appropriate to this unsoldered contact. It does not require the heat isolation used for soldered component pads and does not repair mechanical cable-retention problems.
+- [ST TN0018 MEMS handling/mounting/soldering guidance](https://www.st.com/resource/en/technical_note/tn0018-handling-mounting-and-soldering-guidelines-for-mems-devices-stmicroelectronics.pdf): the previous U7 review records the top-metal, land and paste constraints. Keep that assembly-pattern issue open. The present change reviews actual local copper differences and connectivity, without claiming the imported U7 footprint is a qualified ST reference layout. [Previous source review](../../v1_1_fabrication_20261012/mask_u7/README.md).
+
+Supplier copper capabilities were reviewed in the preceding hardware steps. No thinner global routing or relaxed design rule is required to clear these zone/thermal findings.

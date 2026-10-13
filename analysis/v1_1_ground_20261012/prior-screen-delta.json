@@ -1,0 +1,57 @@
+{
+  "violations": {
+    "before": 74,
+    "after": 70,
+    "added": [],
+    "removed": [
+      {
+        "description": "Copper zones intersect (intersecting zones must have distinct priorities)",
+        "item_uuids": [
+          "795c4093-4930-4bcb-9c07-8e31d04084fe",
+          "e9b71a22-0a8a-41f9-b5c4-115945b7ef58"
+        ],
+        "severity": "error",
+        "type": "zones_intersect"
+      },
+      {
+        "description": "Thermal relief connection to zone incomplete (layer F.Cu; zone min spoke count 2; actual 1)",
+        "item_uuids": [
+          "795c4093-4930-4bcb-9c07-8e31d04084fe",
+          "885f4db5-7a9b-4845-9096-ed56c7826b71"
+        ],
+        "severity": "error",
+        "type": "starved_thermal"
+      },
+      {
+        "description": "Thermal relief connection to zone incomplete (layer F.Cu; zone min spoke count 2; actual 1)",
+        "item_uuids": [
+          "77d55d14-93f0-45c2-9c41-d0881e10a934",
+          "795c4093-4930-4bcb-9c07-8e31d04084fe"
+        ],
+        "severity": "error",
+        "type": "starved_thermal"
+      },
+      {
+        "description": "Thermal relief connection to zone incomplete (layer F.Cu; zone min spoke count 2; actual 1)",
+        "item_uuids": [
+          "795c4093-4930-4bcb-9c07-8e31d04084fe",
+          "aec9ea08-f671-4b4c-aaa4-04ae23e80306"
+        ],
+        "severity": "error",
+        "type": "starved_thermal"
+      }
+    ]
+  },
+  "unconnected_items": {
+    "before": 0,
+    "after": 0,
+    "added": [],
+    "removed": []
+  },
+  "schematic_parity": {
+    "before": 11,
+    "after": 11,
+    "added": [],
+    "removed": []
+  }
+}

@@ -1,0 +1,5 @@
+{
+  "url": "https://www.tag-connect.com/product/tc2030-nl-fp-footprint",
+  "captured": "2026-10-12",
+  "excerpt": "This code has ended up on your BOM as this is the code given to the pattern of pads and holes that allows our test cable to connect with the PCB. There is no mating part connector or header soldered to the PCB. What goes on your PCB is a footprint of test points and holes. It is designed into the bare PCB and often ends up as an item in the BOM. There is no part to buy that is soldered to the board. The BOM should have a note against this item saying “Not a part – Do Not load”.\n\n"
+}

@@ -1,0 +1,389 @@
+{
+  "F.Cu": {
+    "before_mm2": 663.9307016499898,
+    "after_mm2": 664.3800317179564,
+    "added_mm2": 0.5252221454699236,
+    "removed_mm2": 0.07589207750342816,
+    "changed_bounds_mm": [
+      59.458899,
+      36.279556,
+      75.828818,
+      85.281118
+    ],
+    "outside_roi_area_mm2": 8.919510326095393e-07,
+    "outside_roi_residue_after_2nm_boundary_buffer_mm2": 0.0,
+    "boundary_tolerance_mm": 2e-06,
+    "reviewed_roi_bounds_mm": {
+      "U7": [
+        69.2,
+        36.4,
+        72.4,
+        39.2
+      ],
+      "J20": [
+        60.5,
+        83.3,
+        62.7,
+        85.35
+      ]
+    },
+    "roi_areas": {
+      "U7": {
+        "added_mm2": 1.1145068744365523e-08,
+        "removed_mm2": 0.07589178727706797
+      },
+      "J20": {
+        "added_mm2": 0.5252214459018616,
+        "removed_mm2": 8.669832067563207e-08
+      }
+    }
+  },
+  "B.Cu": {
+    "before_mm2": 816.7074854891822,
+    "after_mm2": 816.7074854891822,
+    "added_mm2": 0.0,
+    "removed_mm2": 0.0,
+    "changed_bounds_mm": [],
+    "outside_roi_area_mm2": 0.0,
+    "outside_roi_residue_after_2nm_boundary_buffer_mm2": 0.0,
+    "boundary_tolerance_mm": 2e-06,
+    "reviewed_roi_bounds_mm": {
+      "U7": [
+        69.2,
+        36.4,
+        72.4,
+        39.2
+      ],
+      "J20": [
+        60.5,
+        83.3,
+        62.7,
+        85.35
+      ]
+    },
+    "roi_areas": {
+      "U7": {
+        "added_mm2": 0.0,
+        "removed_mm2": 0.0
+      },
+      "J20": {
+        "added_mm2": 0.0,
+        "removed_mm2": 0.0
+      }
+    }
+  },
+  "baseline_U7_body": {
+    "total_FCu_under_nominal_body_mm2": 2.5339788074522653,
+    "total_FCu_under_central_1p4mm_square_mm2": 1.0532230156869984,
+    "zone_Cu_under_nominal_body_mm2": 0.29306143466549806,
+    "zone_Cu_under_central_1p4mm_square_mm2": 0.08724438518938703
+  },
+  "candidate_U7_body": {
+    "total_FCu_under_nominal_body_mm2": 2.458207103455266,
+    "total_FCu_under_central_1p4mm_square_mm2": 1.0283185692405066,
+    "zone_Cu_under_nominal_body_mm2": 0.07318708839400064,
+    "zone_Cu_under_central_1p4mm_square_mm2": 0.0
+  },
+  "zone_contact_geometry": {
+    "baseline": {
+      "U7.3": {
+        "pad_area_mm2": 0.15522525289999817,
+        "zone_overlap_pad_area_mm2": 0.0,
+        "offset_contours": {
+          "0.01": {
+            "zone_contact_segment_count": 0,
+            "segment_lengths_mm": [],
+            "total_contact_length_mm": 0
+          },
+          "0.025": {
+            "zone_contact_segment_count": 0,
+            "segment_lengths_mm": [],
+            "total_contact_length_mm": 0
+          },
+          "0.05": {
+            "zone_contact_segment_count": 0,
+            "segment_lengths_mm": [],
+            "total_contact_length_mm": 0
+          }
+        }
+      },
+      "U7.5": {
+        "pad_area_mm2": 0.15522525289999972,
+        "zone_overlap_pad_area_mm2": 0.0,
+        "offset_contours": {
+          "0.01": {
+            "zone_contact_segment_count": 0,
+            "segment_lengths_mm": [],
+            "total_contact_length_mm": 0
+          },
+          "0.025": {
+            "zone_contact_segment_count": 0,
+            "segment_lengths_mm": [],
+            "total_contact_length_mm": 0
+          },
+          "0.05": {
+            "zone_contact_segment_count": 0,
+            "segment_lengths_mm": [],
+            "total_contact_length_mm": 0
+          }
+        }
+      },
+      "U7.6": {
+        "pad_area_mm2": 0.15522525289999972,
+        "zone_overlap_pad_area_mm2": 0.14405940734485062,
+        "offset_contours": {
+          "0.01": {
+            "zone_contact_segment_count": 4,
+            "segment_lengths_mm": [
+              0.3489092703242043,
+              0.37077768592053856,
+              0.3619664630829434,
+              0.006582195966024316
+            ],
+            "total_contact_length_mm": 1.0882356152937105
+          },
+          "0.025": {
+            "zone_contact_segment_count": 3,
+            "segment_lengths_mm": [
+              0.3425985163005763,
+              0.35964898595340833,
+              0.3610862763322927
+            ],
+            "total_contact_length_mm": 1.0633337785862773
+          },
+          "0.05": {
+            "zone_contact_segment_count": 3,
+            "segment_lengths_mm": [
+              0.3140063604282019,
+              0.35565899598051,
+              0.359619298414538
+            ],
+            "total_contact_length_mm": 1.02928465482325
+          }
+        }
+      },
+      "U7.7": {
+        "pad_area_mm2": 0.15522525289999914,
+        "zone_overlap_pad_area_mm2": 0.06877736445604536,
+        "offset_contours": {
+          "0.01": {
+            "zone_contact_segment_count": 2,
+            "segment_lengths_mm": [
+              0.3230268928450284,
+              0.05575249240272389
+            ],
+            "total_contact_length_mm": 0.3787793852477523
+          },
+          "0.025": {
+            "zone_contact_segment_count": 2,
+            "segment_lengths_mm": [
+              0.32077885340374734,
+              0.047242955874680526
+            ],
+            "total_contact_length_mm": 0.36802180927842787
+          },
+          "0.05": {
+            "zone_contact_segment_count": 2,
+            "segment_lengths_mm": [
+              0.32443476738882066,
+              0.04033931664742665
+            ],
+            "total_contact_length_mm": 0.3647740840362473
+          }
+        }
+      },
+      "U7.8": {
+        "pad_area_mm2": 0.1552252528999991,
+        "zone_overlap_pad_area_mm2": 0.0,
+        "offset_contours": {
+          "0.01": {
+            "zone_contact_segment_count": 0,
+            "segment_lengths_mm": [],
+            "total_contact_length_mm": 0
+          },
+          "0.025": {
+            "zone_contact_segment_count": 0,
+            "segment_lengths_mm": [],
+            "total_contact_length_mm": 0
+          },
+          "0.05": {
+            "zone_contact_segment_count": 0,
+            "segment_lengths_mm": [],
+            "total_contact_length_mm": 0
+          }
+        }
+      },
+      "J20.5": {
+        "pad_area_mm2": 0.48764327963000037,
+        "zone_overlap_pad_area_mm2": 0.14256467641313444,
+        "offset_contours": {
+          "0.01": {
+            "zone_contact_segment_count": 1,
+            "segment_lengths_mm": [
+              0.45748559626988605
+            ],
+            "total_contact_length_mm": 0.45748559626988605
+          },
+          "0.025": {
+            "zone_contact_segment_count": 1,
+            "segment_lengths_mm": [
+              0.4387577014892439
+            ],
+            "total_contact_length_mm": 0.4387577014892439
+          },
+          "0.05": {
+            "zone_contact_segment_count": 1,
+            "segment_lengths_mm": [
+              0.4087643704681419
+            ],
+            "total_contact_length_mm": 0.4087643704681419
+          }
+        }
+      }
+    },
+    "candidate": {
+      "U7.3": {
+        "pad_area_mm2": 0.15522525289999817,
+        "zone_overlap_pad_area_mm2": 0.0,
+        "offset_contours": {
+          "0.01": {
+            "zone_contact_segment_count": 0,
+            "segment_lengths_mm": [],
+            "total_contact_length_mm": 0
+          },
+          "0.025": {
+            "zone_contact_segment_count": 0,
+            "segment_lengths_mm": [],
+            "total_contact_length_mm": 0
+          },
+          "0.05": {
+            "zone_contact_segment_count": 0,
+            "segment_lengths_mm": [],
+            "total_contact_length_mm": 0
+          }
+        }
+      },
+      "U7.5": {
+        "pad_area_mm2": 0.15522525289999972,
+        "zone_overlap_pad_area_mm2": 0.0,
+        "offset_contours": {
+          "0.01": {
+            "zone_contact_segment_count": 0,
+            "segment_lengths_mm": [],
+            "total_contact_length_mm": 0
+          },
+          "0.025": {
+            "zone_contact_segment_count": 0,
+            "segment_lengths_mm": [],
+            "total_contact_length_mm": 0
+          },
+          "0.05": {
+            "zone_contact_segment_count": 0,
+            "segment_lengths_mm": [],
+            "total_contact_length_mm": 0
+          }
+        }
+      },
+      "U7.6": {
+        "pad_area_mm2": 0.15522525289999972,
+        "zone_overlap_pad_area_mm2": 0.06854985618935505,
+        "offset_contours": {
+          "0.01": {
+            "zone_contact_segment_count": 1,
+            "segment_lengths_mm": [
+              0.37077768592053856
+            ],
+            "total_contact_length_mm": 0.37077768592053856
+          },
+          "0.025": {
+            "zone_contact_segment_count": 1,
+            "segment_lengths_mm": [
+              0.35964898595340833
+            ],
+            "total_contact_length_mm": 0.35964898595340833
+          },
+          "0.05": {
+            "zone_contact_segment_count": 1,
+            "segment_lengths_mm": [
+              0.35565899598051
+            ],
+            "total_contact_length_mm": 0.35565899598051
+          }
+        }
+      },
+      "U7.7": {
+        "pad_area_mm2": 0.15522525289999914,
+        "zone_overlap_pad_area_mm2": 0.0,
+        "offset_contours": {
+          "0.01": {
+            "zone_contact_segment_count": 0,
+            "segment_lengths_mm": [],
+            "total_contact_length_mm": 0
+          },
+          "0.025": {
+            "zone_contact_segment_count": 0,
+            "segment_lengths_mm": [],
+            "total_contact_length_mm": 0
+          },
+          "0.05": {
+            "zone_contact_segment_count": 0,
+            "segment_lengths_mm": [],
+            "total_contact_length_mm": 0
+          }
+        }
+      },
+      "U7.8": {
+        "pad_area_mm2": 0.1552252528999991,
+        "zone_overlap_pad_area_mm2": 0.0,
+        "offset_contours": {
+          "0.01": {
+            "zone_contact_segment_count": 0,
+            "segment_lengths_mm": [],
+            "total_contact_length_mm": 0
+          },
+          "0.025": {
+            "zone_contact_segment_count": 0,
+            "segment_lengths_mm": [],
+            "total_contact_length_mm": 0
+          },
+          "0.05": {
+            "zone_contact_segment_count": 0,
+            "segment_lengths_mm": [],
+            "total_contact_length_mm": 0
+          }
+        }
+      },
+      "J20.5": {
+        "pad_area_mm2": 0.48764327963000037,
+        "zone_overlap_pad_area_mm2": 0.3563467824559767,
+        "offset_contours": {
+          "0.01": {
+            "zone_contact_segment_count": 2,
+            "segment_lengths_mm": [
+              0.479253413237906,
+              1.1658724035393413
+            ],
+            "total_contact_length_mm": 1.6451258167772473
+          },
+          "0.025": {
+            "zone_contact_segment_count": 2,
+            "segment_lengths_mm": [
+              0.4739988299751505,
+              1.1841788389355106
+            ],
+            "total_contact_length_mm": 1.658177668910661
+          },
+          "0.05": {
+            "zone_contact_segment_count": 2,
+            "segment_lengths_mm": [
+              0.46646101815050256,
+              1.215908507031624
+            ],
+            "total_contact_length_mm": 1.6823695251821267
+          }
+        }
+      }
+    }
+  },
+  "interpretation": "Offset-contour contacts measure actual zone touch, separately from fixed pads/traces. Counts need geometric interpretation; they are not automatically KiCad relief-spoke counts. Body areas are geometry, not a temperature/reflow model. Raw full-copper XOR is reported even where tiny remote boundary slivers are contained within the independently checked 2 nm native-polygon rounding tolerance."
+}

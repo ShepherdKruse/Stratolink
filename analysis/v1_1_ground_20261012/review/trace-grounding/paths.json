@@ -1,0 +1,751 @@
+{
+  "source_sha256": "268f5ef0f8d59caf0a46a0cb990fb26c1d74563e3423a15c16d361d392f9f96c",
+  "zone_free_sha256": "23ecfdd7db002deefe03993675d334e3f71aa99ff4136de4cd50a5aac82f2af3",
+  "zones_removed_for_experiment": 3,
+  "selected_zone_connect_none_pads": [
+    "U7.5",
+    "U7.7",
+    "U7.8"
+  ],
+  "selected_ground_pads_retaining_original_zone_relief": [
+    "U7.3",
+    "U7.6"
+  ],
+  "assumptions": {
+    "copper_resistivity_ohm_m_at20C": 1.724e-08,
+    "copper_thickness_mm": 0.035,
+    "model": "Sum rho*L/(width*thickness) along explicit trace centrelines to each via; ignores pad spreading, vias, plane resistance, contacts and parallel paths. A dimensional DC sanity check, not an AC impedance or assembly qualification."
+  },
+  "native_reachable_pads": [
+    [
+      "C19",
+      "1"
+    ],
+    [
+      "C21",
+      "1"
+    ],
+    [
+      "R5",
+      "2"
+    ],
+    [
+      "U7",
+      "3"
+    ],
+    [
+      "U7",
+      "5"
+    ],
+    [
+      "U7",
+      "6"
+    ],
+    [
+      "U7",
+      "7"
+    ],
+    [
+      "U7",
+      "8"
+    ]
+  ],
+  "vias": {
+    "8b6ba619-85cc-4b9e-8cbe-dcff90c1bcc4": {
+      "uuid": "8b6ba619-85cc-4b9e-8cbe-dcff90c1bcc4",
+      "type": "PCB_VIA",
+      "net": "GND",
+      "start": [
+        73.721,
+        36.683
+      ],
+      "end": [
+        73.721,
+        36.683
+      ],
+      "width_mm": 0.6,
+      "length_mm": 0.0,
+      "drill_mm": 0.3
+    },
+    "9c1dbeda-64ec-469f-9930-83c8b6488c88": {
+      "uuid": "9c1dbeda-64ec-469f-9930-83c8b6488c88",
+      "type": "PCB_VIA",
+      "net": "GND",
+      "start": [
+        69.45,
+        33.635
+      ],
+      "end": [
+        69.45,
+        33.635
+      ],
+      "width_mm": 0.6,
+      "length_mm": 0.0,
+      "drill_mm": 0.3
+    }
+  },
+  "paths": {
+    "U7.3": {
+      "8b6ba619-85cc-4b9e-8cbe-dcff90c1bcc4": {
+        "length_mm": 7.498029874361181,
+        "nominal_trace_resistance_milliohm": 18.466576433426678,
+        "segments": [
+          {
+            "uuid": "c071d5fe-1b47-46a1-bcdd-4d46cde56e79",
+            "from_node": "xy:70.798000,38.572000",
+            "to_node": "xy:70.798000,38.100000",
+            "length_mm": 0.472,
+            "width_mm": 0.2,
+            "resistance_milliohm": 1.1624685714285712
+          },
+          {
+            "uuid": "84d64290-6950-4148-b45a-9ed52cbfe265",
+            "from_node": "xy:70.798000,38.100000",
+            "to_node": "xy:70.798000,37.556000",
+            "length_mm": 0.544,
+            "width_mm": 0.2,
+            "resistance_milliohm": 1.3397942857142857
+          },
+          {
+            "uuid": "50467fe8-5838-443d-bd6f-469444951d63",
+            "from_node": "xy:70.798000,37.556000",
+            "to_node": "xy:70.798000,37.042000",
+            "length_mm": 0.514,
+            "width_mm": 0.2,
+            "resistance_milliohm": 1.2659085714285712
+          },
+          {
+            "uuid": "b83cdd6f-5d0d-44eb-8891-dc997365b3ff",
+            "from_node": "xy:70.798000,37.042000",
+            "to_node": "xy:70.798000,36.043999",
+            "length_mm": 0.998001,
+            "width_mm": 0.2,
+            "resistance_milliohm": 2.4579338914285715
+          },
+          {
+            "uuid": "c2b71d8f-6204-446b-8d9a-9471fe1a2e01",
+            "from_node": "xy:70.707001,35.953000",
+            "to_node": "xy:71.037000,35.623001",
+            "length_mm": 0.466689061369559,
+            "width_mm": 0.2,
+            "resistance_milliohm": 1.149388488287314
+          },
+          {
+            "uuid": "4bde1a70-cc6c-4f9e-95a2-a838219fcb08",
+            "from_node": "xy:71.037000,35.623001",
+            "to_node": "xy:71.037000,34.647000",
+            "length_mm": 0.976001,
+            "width_mm": 0.2,
+            "resistance_milliohm": 2.403751034285714
+          },
+          {
+            "uuid": "ba200d33-b863-4501-a1e2-84e570cb3a30",
+            "from_node": "xy:71.037000,34.647000",
+            "to_node": "xy:71.685000,34.647000",
+            "length_mm": 0.648,
+            "width_mm": 0.2,
+            "resistance_milliohm": 1.5959314285714281
+          },
+          {
+            "uuid": "abc32322-38b2-4052-83c4-1a9093e9507b",
+            "from_node": "xy:71.685000,34.647000",
+            "to_node": "xy:73.721000,36.683000",
+            "length_mm": 2.8793388129916218,
+            "width_mm": 0.2,
+            "resistance_milliohm": 7.091400162282222
+          }
+        ]
+      },
+      "9c1dbeda-64ec-469f-9930-83c8b6488c88": {
+        "length_mm": 5.976875186491132,
+        "nominal_trace_resistance_milliohm": 14.720189745015299,
+        "segments": [
+          {
+            "uuid": "c071d5fe-1b47-46a1-bcdd-4d46cde56e79",
+            "from_node": "xy:70.798000,38.572000",
+            "to_node": "xy:70.798000,38.100000",
+            "length_mm": 0.472,
+            "width_mm": 0.2,
+            "resistance_milliohm": 1.1624685714285712
+          },
+          {
+            "uuid": "84d64290-6950-4148-b45a-9ed52cbfe265",
+            "from_node": "xy:70.798000,38.100000",
+            "to_node": "xy:70.798000,37.556000",
+            "length_mm": 0.544,
+            "width_mm": 0.2,
+            "resistance_milliohm": 1.3397942857142857
+          },
+          {
+            "uuid": "50467fe8-5838-443d-bd6f-469444951d63",
+            "from_node": "xy:70.798000,37.556000",
+            "to_node": "xy:70.798000,37.042000",
+            "length_mm": 0.514,
+            "width_mm": 0.2,
+            "resistance_milliohm": 1.2659085714285712
+          },
+          {
+            "uuid": "b83cdd6f-5d0d-44eb-8891-dc997365b3ff",
+            "from_node": "xy:70.798000,37.042000",
+            "to_node": "xy:70.798000,36.043999",
+            "length_mm": 0.998001,
+            "width_mm": 0.2,
+            "resistance_milliohm": 2.4579338914285715
+          },
+          {
+            "uuid": "c2b71d8f-6204-446b-8d9a-9471fe1a2e01",
+            "from_node": "xy:70.707001,35.953000",
+            "to_node": "xy:71.037000,35.623001",
+            "length_mm": 0.466689061369559,
+            "width_mm": 0.2,
+            "resistance_milliohm": 1.149388488287314
+          },
+          {
+            "uuid": "4bde1a70-cc6c-4f9e-95a2-a838219fcb08",
+            "from_node": "xy:71.037000,35.623001",
+            "to_node": "xy:71.037000,34.647000",
+            "length_mm": 0.976001,
+            "width_mm": 0.2,
+            "resistance_milliohm": 2.403751034285714
+          },
+          {
+            "uuid": "d77de296-cfdd-4a11-9366-786834a091e5",
+            "from_node": "xy:71.037000,34.647000",
+            "to_node": "xy:70.025000,33.635000",
+            "length_mm": 1.4311841251215722,
+            "width_mm": 0.2,
+            "resistance_milliohm": 3.5248020452994147
+          },
+          {
+            "uuid": "6bee36ac-c977-4941-a574-dd59ea3b3f3e",
+            "from_node": "xy:70.025000,33.635000",
+            "to_node": "xy:69.450000,33.635000",
+            "length_mm": 0.575,
+            "width_mm": 0.2,
+            "resistance_milliohm": 1.416142857142857
+          }
+        ]
+      }
+    },
+    "U7.5": {
+      "8b6ba619-85cc-4b9e-8cbe-dcff90c1bcc4": {
+        "length_mm": 7.562983193166955,
+        "nominal_trace_resistance_milliohm": 18.626547178599754,
+        "segments": [
+          {
+            "uuid": "5dc0585a-7141-4f08-afce-4a3c96f8fc8d",
+            "from_node": "xy:71.313000,38.047000",
+            "to_node": "xy:70.851000,38.047000",
+            "length_mm": 0.462,
+            "width_mm": 0.2,
+            "resistance_milliohm": 1.1378399999999997
+          },
+          {
+            "uuid": "c542a530-7aab-438f-8d70-88a1c96fa3d6",
+            "from_node": "xy:70.851000,38.047000",
+            "to_node": "xy:70.798000,38.100000",
+            "length_mm": 0.07495331880577405,
+            "width_mm": 0.2,
+            "resistance_milliohm": 0.18459931660164922
+          },
+          {
+            "uuid": "84d64290-6950-4148-b45a-9ed52cbfe265",
+            "from_node": "xy:70.798000,38.100000",
+            "to_node": "xy:70.798000,37.556000",
+            "length_mm": 0.544,
+            "width_mm": 0.2,
+            "resistance_milliohm": 1.3397942857142857
+          },
+          {
+            "uuid": "50467fe8-5838-443d-bd6f-469444951d63",
+            "from_node": "xy:70.798000,37.556000",
+            "to_node": "xy:70.798000,37.042000",
+            "length_mm": 0.514,
+            "width_mm": 0.2,
+            "resistance_milliohm": 1.2659085714285712
+          },
+          {
+            "uuid": "b83cdd6f-5d0d-44eb-8891-dc997365b3ff",
+            "from_node": "xy:70.798000,37.042000",
+            "to_node": "xy:70.798000,36.043999",
+            "length_mm": 0.998001,
+            "width_mm": 0.2,
+            "resistance_milliohm": 2.4579338914285715
+          },
+          {
+            "uuid": "c2b71d8f-6204-446b-8d9a-9471fe1a2e01",
+            "from_node": "xy:70.707001,35.953000",
+            "to_node": "xy:71.037000,35.623001",
+            "length_mm": 0.466689061369559,
+            "width_mm": 0.2,
+            "resistance_milliohm": 1.149388488287314
+          },
+          {
+            "uuid": "4bde1a70-cc6c-4f9e-95a2-a838219fcb08",
+            "from_node": "xy:71.037000,35.623001",
+            "to_node": "xy:71.037000,34.647000",
+            "length_mm": 0.976001,
+            "width_mm": 0.2,
+            "resistance_milliohm": 2.403751034285714
+          },
+          {
+            "uuid": "ba200d33-b863-4501-a1e2-84e570cb3a30",
+            "from_node": "xy:71.037000,34.647000",
+            "to_node": "xy:71.685000,34.647000",
+            "length_mm": 0.648,
+            "width_mm": 0.2,
+            "resistance_milliohm": 1.5959314285714281
+          },
+          {
+            "uuid": "abc32322-38b2-4052-83c4-1a9093e9507b",
+            "from_node": "xy:71.685000,34.647000",
+            "to_node": "xy:73.721000,36.683000",
+            "length_mm": 2.8793388129916218,
+            "width_mm": 0.2,
+            "resistance_milliohm": 7.091400162282222
+          }
+        ]
+      },
+      "9c1dbeda-64ec-469f-9930-83c8b6488c88": {
+        "length_mm": 6.041828505296905,
+        "nominal_trace_resistance_milliohm": 14.880160490188375,
+        "segments": [
+          {
+            "uuid": "5dc0585a-7141-4f08-afce-4a3c96f8fc8d",
+            "from_node": "xy:71.313000,38.047000",
+            "to_node": "xy:70.851000,38.047000",
+            "length_mm": 0.462,
+            "width_mm": 0.2,
+            "resistance_milliohm": 1.1378399999999997
+          },
+          {
+            "uuid": "c542a530-7aab-438f-8d70-88a1c96fa3d6",
+            "from_node": "xy:70.851000,38.047000",
+            "to_node": "xy:70.798000,38.100000",
+            "length_mm": 0.07495331880577405,
+            "width_mm": 0.2,
+            "resistance_milliohm": 0.18459931660164922
+          },
+          {
+            "uuid": "84d64290-6950-4148-b45a-9ed52cbfe265",
+            "from_node": "xy:70.798000,38.100000",
+            "to_node": "xy:70.798000,37.556000",
+            "length_mm": 0.544,
+            "width_mm": 0.2,
+            "resistance_milliohm": 1.3397942857142857
+          },
+          {
+            "uuid": "50467fe8-5838-443d-bd6f-469444951d63",
+            "from_node": "xy:70.798000,37.556000",
+            "to_node": "xy:70.798000,37.042000",
+            "length_mm": 0.514,
+            "width_mm": 0.2,
+            "resistance_milliohm": 1.2659085714285712
+          },
+          {
+            "uuid": "b83cdd6f-5d0d-44eb-8891-dc997365b3ff",
+            "from_node": "xy:70.798000,37.042000",
+            "to_node": "xy:70.798000,36.043999",
+            "length_mm": 0.998001,
+            "width_mm": 0.2,
+            "resistance_milliohm": 2.4579338914285715
+          },
+          {
+            "uuid": "c2b71d8f-6204-446b-8d9a-9471fe1a2e01",
+            "from_node": "xy:70.707001,35.953000",
+            "to_node": "xy:71.037000,35.623001",
+            "length_mm": 0.466689061369559,
+            "width_mm": 0.2,
+            "resistance_milliohm": 1.149388488287314
+          },
+          {
+            "uuid": "4bde1a70-cc6c-4f9e-95a2-a838219fcb08",
+            "from_node": "xy:71.037000,35.623001",
+            "to_node": "xy:71.037000,34.647000",
+            "length_mm": 0.976001,
+            "width_mm": 0.2,
+            "resistance_milliohm": 2.403751034285714
+          },
+          {
+            "uuid": "d77de296-cfdd-4a11-9366-786834a091e5",
+            "from_node": "xy:71.037000,34.647000",
+            "to_node": "xy:70.025000,33.635000",
+            "length_mm": 1.4311841251215722,
+            "width_mm": 0.2,
+            "resistance_milliohm": 3.5248020452994147
+          },
+          {
+            "uuid": "6bee36ac-c977-4941-a574-dd59ea3b3f3e",
+            "from_node": "xy:70.025000,33.635000",
+            "to_node": "xy:69.450000,33.635000",
+            "length_mm": 0.575,
+            "width_mm": 0.2,
+            "resistance_milliohm": 1.416142857142857
+          }
+        ]
+      }
+    },
+    "U7.6": {
+      "8b6ba619-85cc-4b9e-8cbe-dcff90c1bcc4": {
+        "length_mm": 6.9974440879235535,
+        "nominal_trace_resistance_milliohm": 17.233705153686007,
+        "segments": [
+          {
+            "uuid": "6bbdefb3-9efe-4d87-82b7-4e492977fa39",
+            "from_node": "xy:71.313000,37.557000",
+            "to_node": "xy:70.894000,37.557000",
+            "length_mm": 0.419,
+            "width_mm": 0.2,
+            "resistance_milliohm": 1.0319371428571427
+          },
+          {
+            "uuid": "eb1489ed-e03a-4611-9a19-01ffdfe3f79b",
+            "from_node": "xy:70.894000,37.557000",
+            "to_node": "xy:70.893000,37.556000",
+            "length_mm": 0.001414213562373095,
+            "width_mm": 0.2,
+            "resistance_milliohm": 0.0034830059736160224
+          },
+          {
+            "uuid": "3c460803-a0e0-4087-a6f3-936cf4d1fee5",
+            "from_node": "xy:70.893000,37.556000",
+            "to_node": "xy:70.798000,37.556000",
+            "length_mm": 0.095,
+            "width_mm": 0.2,
+            "resistance_milliohm": 0.23397142857142852
+          },
+          {
+            "uuid": "50467fe8-5838-443d-bd6f-469444951d63",
+            "from_node": "xy:70.798000,37.556000",
+            "to_node": "xy:70.798000,37.042000",
+            "length_mm": 0.514,
+            "width_mm": 0.2,
+            "resistance_milliohm": 1.2659085714285712
+          },
+          {
+            "uuid": "b83cdd6f-5d0d-44eb-8891-dc997365b3ff",
+            "from_node": "xy:70.798000,37.042000",
+            "to_node": "xy:70.798000,36.043999",
+            "length_mm": 0.998001,
+            "width_mm": 0.2,
+            "resistance_milliohm": 2.4579338914285715
+          },
+          {
+            "uuid": "c2b71d8f-6204-446b-8d9a-9471fe1a2e01",
+            "from_node": "xy:70.707001,35.953000",
+            "to_node": "xy:71.037000,35.623001",
+            "length_mm": 0.466689061369559,
+            "width_mm": 0.2,
+            "resistance_milliohm": 1.149388488287314
+          },
+          {
+            "uuid": "4bde1a70-cc6c-4f9e-95a2-a838219fcb08",
+            "from_node": "xy:71.037000,35.623001",
+            "to_node": "xy:71.037000,34.647000",
+            "length_mm": 0.976001,
+            "width_mm": 0.2,
+            "resistance_milliohm": 2.403751034285714
+          },
+          {
+            "uuid": "ba200d33-b863-4501-a1e2-84e570cb3a30",
+            "from_node": "xy:71.037000,34.647000",
+            "to_node": "xy:71.685000,34.647000",
+            "length_mm": 0.648,
+            "width_mm": 0.2,
+            "resistance_milliohm": 1.5959314285714281
+          },
+          {
+            "uuid": "abc32322-38b2-4052-83c4-1a9093e9507b",
+            "from_node": "xy:71.685000,34.647000",
+            "to_node": "xy:73.721000,36.683000",
+            "length_mm": 2.8793388129916218,
+            "width_mm": 0.2,
+            "resistance_milliohm": 7.091400162282222
+          }
+        ]
+      },
+      "9c1dbeda-64ec-469f-9930-83c8b6488c88": {
+        "length_mm": 5.4762894000535045,
+        "nominal_trace_resistance_milliohm": 13.487318465274628,
+        "segments": [
+          {
+            "uuid": "6bbdefb3-9efe-4d87-82b7-4e492977fa39",
+            "from_node": "xy:71.313000,37.557000",
+            "to_node": "xy:70.894000,37.557000",
+            "length_mm": 0.419,
+            "width_mm": 0.2,
+            "resistance_milliohm": 1.0319371428571427
+          },
+          {
+            "uuid": "eb1489ed-e03a-4611-9a19-01ffdfe3f79b",
+            "from_node": "xy:70.894000,37.557000",
+            "to_node": "xy:70.893000,37.556000",
+            "length_mm": 0.001414213562373095,
+            "width_mm": 0.2,
+            "resistance_milliohm": 0.0034830059736160224
+          },
+          {
+            "uuid": "3c460803-a0e0-4087-a6f3-936cf4d1fee5",
+            "from_node": "xy:70.893000,37.556000",
+            "to_node": "xy:70.798000,37.556000",
+            "length_mm": 0.095,
+            "width_mm": 0.2,
+            "resistance_milliohm": 0.23397142857142852
+          },
+          {
+            "uuid": "50467fe8-5838-443d-bd6f-469444951d63",
+            "from_node": "xy:70.798000,37.556000",
+            "to_node": "xy:70.798000,37.042000",
+            "length_mm": 0.514,
+            "width_mm": 0.2,
+            "resistance_milliohm": 1.2659085714285712
+          },
+          {
+            "uuid": "b83cdd6f-5d0d-44eb-8891-dc997365b3ff",
+            "from_node": "xy:70.798000,37.042000",
+            "to_node": "xy:70.798000,36.043999",
+            "length_mm": 0.998001,
+            "width_mm": 0.2,
+            "resistance_milliohm": 2.4579338914285715
+          },
+          {
+            "uuid": "c2b71d8f-6204-446b-8d9a-9471fe1a2e01",
+            "from_node": "xy:70.707001,35.953000",
+            "to_node": "xy:71.037000,35.623001",
+            "length_mm": 0.466689061369559,
+            "width_mm": 0.2,
+            "resistance_milliohm": 1.149388488287314
+          },
+          {
+            "uuid": "4bde1a70-cc6c-4f9e-95a2-a838219fcb08",
+            "from_node": "xy:71.037000,35.623001",
+            "to_node": "xy:71.037000,34.647000",
+            "length_mm": 0.976001,
+            "width_mm": 0.2,
+            "resistance_milliohm": 2.403751034285714
+          },
+          {
+            "uuid": "d77de296-cfdd-4a11-9366-786834a091e5",
+            "from_node": "xy:71.037000,34.647000",
+            "to_node": "xy:70.025000,33.635000",
+            "length_mm": 1.4311841251215722,
+            "width_mm": 0.2,
+            "resistance_milliohm": 3.5248020452994147
+          },
+          {
+            "uuid": "6bee36ac-c977-4941-a574-dd59ea3b3f3e",
+            "from_node": "xy:70.025000,33.635000",
+            "to_node": "xy:69.450000,33.635000",
+            "length_mm": 0.575,
+            "width_mm": 0.2,
+            "resistance_milliohm": 1.416142857142857
+          }
+        ]
+      }
+    },
+    "U7.7": {
+      "8b6ba619-85cc-4b9e-8cbe-dcff90c1bcc4": {
+        "length_mm": 6.468028874361181,
+        "nominal_trace_resistance_milliohm": 15.929831113426676,
+        "segments": [
+          {
+            "uuid": "acf3109c-eb1e-4509-9789-79a4830e3dcb",
+            "from_node": "xy:71.297999,37.042000",
+            "to_node": "xy:70.798000,37.042000",
+            "length_mm": 0.499999,
+            "width_mm": 0.2,
+            "resistance_milliohm": 1.2314261085714284
+          },
+          {
+            "uuid": "b83cdd6f-5d0d-44eb-8891-dc997365b3ff",
+            "from_node": "xy:70.798000,37.042000",
+            "to_node": "xy:70.798000,36.043999",
+            "length_mm": 0.998001,
+            "width_mm": 0.2,
+            "resistance_milliohm": 2.4579338914285715
+          },
+          {
+            "uuid": "c2b71d8f-6204-446b-8d9a-9471fe1a2e01",
+            "from_node": "xy:70.707001,35.953000",
+            "to_node": "xy:71.037000,35.623001",
+            "length_mm": 0.466689061369559,
+            "width_mm": 0.2,
+            "resistance_milliohm": 1.149388488287314
+          },
+          {
+            "uuid": "4bde1a70-cc6c-4f9e-95a2-a838219fcb08",
+            "from_node": "xy:71.037000,35.623001",
+            "to_node": "xy:71.037000,34.647000",
+            "length_mm": 0.976001,
+            "width_mm": 0.2,
+            "resistance_milliohm": 2.403751034285714
+          },
+          {
+            "uuid": "ba200d33-b863-4501-a1e2-84e570cb3a30",
+            "from_node": "xy:71.037000,34.647000",
+            "to_node": "xy:71.685000,34.647000",
+            "length_mm": 0.648,
+            "width_mm": 0.2,
+            "resistance_milliohm": 1.5959314285714281
+          },
+          {
+            "uuid": "abc32322-38b2-4052-83c4-1a9093e9507b",
+            "from_node": "xy:71.685000,34.647000",
+            "to_node": "xy:73.721000,36.683000",
+            "length_mm": 2.8793388129916218,
+            "width_mm": 0.2,
+            "resistance_milliohm": 7.091400162282222
+          }
+        ]
+      },
+      "9c1dbeda-64ec-469f-9930-83c8b6488c88": {
+        "length_mm": 4.946874186491131,
+        "nominal_trace_resistance_milliohm": 12.1834444250153,
+        "segments": [
+          {
+            "uuid": "acf3109c-eb1e-4509-9789-79a4830e3dcb",
+            "from_node": "xy:71.297999,37.042000",
+            "to_node": "xy:70.798000,37.042000",
+            "length_mm": 0.499999,
+            "width_mm": 0.2,
+            "resistance_milliohm": 1.2314261085714284
+          },
+          {
+            "uuid": "b83cdd6f-5d0d-44eb-8891-dc997365b3ff",
+            "from_node": "xy:70.798000,37.042000",
+            "to_node": "xy:70.798000,36.043999",
+            "length_mm": 0.998001,
+            "width_mm": 0.2,
+            "resistance_milliohm": 2.4579338914285715
+          },
+          {
+            "uuid": "c2b71d8f-6204-446b-8d9a-9471fe1a2e01",
+            "from_node": "xy:70.707001,35.953000",
+            "to_node": "xy:71.037000,35.623001",
+            "length_mm": 0.466689061369559,
+            "width_mm": 0.2,
+            "resistance_milliohm": 1.149388488287314
+          },
+          {
+            "uuid": "4bde1a70-cc6c-4f9e-95a2-a838219fcb08",
+            "from_node": "xy:71.037000,35.623001",
+            "to_node": "xy:71.037000,34.647000",
+            "length_mm": 0.976001,
+            "width_mm": 0.2,
+            "resistance_milliohm": 2.403751034285714
+          },
+          {
+            "uuid": "d77de296-cfdd-4a11-9366-786834a091e5",
+            "from_node": "xy:71.037000,34.647000",
+            "to_node": "xy:70.025000,33.635000",
+            "length_mm": 1.4311841251215722,
+            "width_mm": 0.2,
+            "resistance_milliohm": 3.5248020452994147
+          },
+          {
+            "uuid": "6bee36ac-c977-4941-a574-dd59ea3b3f3e",
+            "from_node": "xy:70.025000,33.635000",
+            "to_node": "xy:69.450000,33.635000",
+            "length_mm": 0.575,
+            "width_mm": 0.2,
+            "resistance_milliohm": 1.416142857142857
+          }
+        ]
+      }
+    },
+    "U7.8": {
+      "8b6ba619-85cc-4b9e-8cbe-dcff90c1bcc4": {
+        "length_mm": 5.96802987436118,
+        "nominal_trace_resistance_milliohm": 14.69840500485525,
+        "segments": [
+          {
+            "uuid": "b83cdd6f-5d0d-44eb-8891-dc997365b3ff",
+            "from_node": "xy:70.798000,37.042000",
+            "to_node": "xy:70.798000,36.043999",
+            "length_mm": 0.998001,
+            "width_mm": 0.2,
+            "resistance_milliohm": 2.4579338914285715
+          },
+          {
+            "uuid": "c2b71d8f-6204-446b-8d9a-9471fe1a2e01",
+            "from_node": "xy:70.707001,35.953000",
+            "to_node": "xy:71.037000,35.623001",
+            "length_mm": 0.466689061369559,
+            "width_mm": 0.2,
+            "resistance_milliohm": 1.149388488287314
+          },
+          {
+            "uuid": "4bde1a70-cc6c-4f9e-95a2-a838219fcb08",
+            "from_node": "xy:71.037000,35.623001",
+            "to_node": "xy:71.037000,34.647000",
+            "length_mm": 0.976001,
+            "width_mm": 0.2,
+            "resistance_milliohm": 2.403751034285714
+          },
+          {
+            "uuid": "ba200d33-b863-4501-a1e2-84e570cb3a30",
+            "from_node": "xy:71.037000,34.647000",
+            "to_node": "xy:71.685000,34.647000",
+            "length_mm": 0.648,
+            "width_mm": 0.2,
+            "resistance_milliohm": 1.5959314285714281
+          },
+          {
+            "uuid": "abc32322-38b2-4052-83c4-1a9093e9507b",
+            "from_node": "xy:71.685000,34.647000",
+            "to_node": "xy:73.721000,36.683000",
+            "length_mm": 2.8793388129916218,
+            "width_mm": 0.2,
+            "resistance_milliohm": 7.091400162282222
+          }
+        ]
+      },
+      "9c1dbeda-64ec-469f-9930-83c8b6488c88": {
+        "length_mm": 4.446875186491131,
+        "nominal_trace_resistance_milliohm": 10.952018316443871,
+        "segments": [
+          {
+            "uuid": "b83cdd6f-5d0d-44eb-8891-dc997365b3ff",
+            "from_node": "xy:70.798000,37.042000",
+            "to_node": "xy:70.798000,36.043999",
+            "length_mm": 0.998001,
+            "width_mm": 0.2,
+            "resistance_milliohm": 2.4579338914285715
+          },
+          {
+            "uuid": "c2b71d8f-6204-446b-8d9a-9471fe1a2e01",
+            "from_node": "xy:70.707001,35.953000",
+            "to_node": "xy:71.037000,35.623001",
+            "length_mm": 0.466689061369559,
+            "width_mm": 0.2,
+            "resistance_milliohm": 1.149388488287314
+          },
+          {
+            "uuid": "4bde1a70-cc6c-4f9e-95a2-a838219fcb08",
+            "from_node": "xy:71.037000,35.623001",
+            "to_node": "xy:71.037000,34.647000",
+            "length_mm": 0.976001,
+            "width_mm": 0.2,
+            "resistance_milliohm": 2.403751034285714
+          },
+          {
+            "uuid": "d77de296-cfdd-4a11-9366-786834a091e5",
+            "from_node": "xy:71.037000,34.647000",
+            "to_node": "xy:70.025000,33.635000",
+            "length_mm": 1.4311841251215722,
+            "width_mm": 0.2,
+            "resistance_milliohm": 3.5248020452994147
+          },
+          {
+            "uuid": "6bee36ac-c977-4941-a574-dd59ea3b3f3e",
+            "from_node": "xy:70.025000,33.635000",
+            "to_node": "xy:69.450000,33.635000",
+            "length_mm": 0.575,
+            "width_mm": 0.2,
+            "resistance_milliohm": 1.416142857142857
+          }
+        ]
+      }
+    }
+  }
+}

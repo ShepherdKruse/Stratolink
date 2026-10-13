@@ -1,0 +1,130 @@
+{
+  "baseline": "c3d70a429a95591607341d57bf16ee153972da71",
+  "trials": [
+    {
+      "name": "trace_only_5_8",
+      "pads": {
+        "5": "(zone_connect 0)",
+        "8": "(zone_connect 0)"
+      },
+      "directory": "/Users/twarn/Repositories/ai-working/scratch/stratolink-zones-20261012/thermal/trace_only_5_8",
+      "violations": 59,
+      "opens": 0,
+      "parity": 11,
+      "thermals": [
+        {
+          "description": "Thermal relief connection to zone incomplete (layer F.Cu; zone min spoke count 2; actual 1)",
+          "items": [
+            {
+              "description": "Zone [GND] on F.Cu and B.Cu, priority 0",
+              "pos": {
+                "x": 53.011,
+                "y": 29.026164
+              },
+              "uuid": "795c4093-4930-4bcb-9c07-8e31d04084fe"
+            },
+            {
+              "description": "Pad 7 [GND] of U7 on F.Cu",
+              "pos": {
+                "x": 71.298,
+                "y": 37.042001
+              },
+              "uuid": "16f1a707-a926-4839-8937-9c29f4503070"
+            }
+          ],
+          "severity": "error",
+          "type": "starved_thermal"
+        }
+      ]
+    },
+    {
+      "name": "trace_only_ground_cluster",
+      "pads": {
+        "3": "(zone_connect 0)",
+        "5": "(zone_connect 0)",
+        "6": "(zone_connect 0)",
+        "7": "(zone_connect 0)",
+        "8": "(zone_connect 0)"
+      },
+      "directory": "/Users/twarn/Repositories/ai-working/scratch/stratolink-zones-20261012/thermal/trace_only_ground_cluster",
+      "violations": 59,
+      "opens": 0,
+      "parity": 11,
+      "thermals": []
+    },
+    {
+      "name": "cluster_5_7_8_g250_w250_7a90",
+      "pads": {
+        "5": "(thermal_gap 0.25) (thermal_bridge_width 0.25) (thermal_bridge_angle 45)",
+        "7": "(thermal_gap 0.25) (thermal_bridge_width 0.25) (thermal_bridge_angle 90)",
+        "8": "(thermal_gap 0.25) (thermal_bridge_width 0.25) (thermal_bridge_angle 90)"
+      },
+      "directory": "/Users/twarn/Repositories/ai-working/scratch/stratolink-zones-20261012/thermal/cluster_5_7_8_g250_w250_7a90",
+      "violations": 59,
+      "opens": 0,
+      "parity": 11,
+      "thermals": [
+        {
+          "description": "Thermal relief connection to zone incomplete (layer F.Cu; pad min spoke count 2; actual 1)",
+          "items": [
+            {
+              "description": "Zone [GND] on F.Cu and B.Cu, priority 0",
+              "pos": {
+                "x": 53.011,
+                "y": 29.026164
+              },
+              "uuid": "795c4093-4930-4bcb-9c07-8e31d04084fe"
+            },
+            {
+              "description": "Pad 7 [GND] of U7 on F.Cu",
+              "pos": {
+                "x": 71.298,
+                "y": 37.042001
+              },
+              "uuid": "16f1a707-a926-4839-8937-9c29f4503070"
+            }
+          ],
+          "severity": "error",
+          "type": "starved_thermal"
+        }
+      ]
+    },
+    {
+      "name": "cluster_5_7_8_g250_w250_7a45",
+      "pads": {
+        "5": "(thermal_gap 0.25) (thermal_bridge_width 0.25) (thermal_bridge_angle 45)",
+        "7": "(thermal_gap 0.25) (thermal_bridge_width 0.25) (thermal_bridge_angle 45)",
+        "8": "(thermal_gap 0.25) (thermal_bridge_width 0.25) (thermal_bridge_angle 90)"
+      },
+      "directory": "/Users/twarn/Repositories/ai-working/scratch/stratolink-zones-20261012/thermal/cluster_5_7_8_g250_w250_7a45",
+      "violations": 59,
+      "opens": 0,
+      "parity": 11,
+      "thermals": [
+        {
+          "description": "Thermal relief connection to zone incomplete (layer F.Cu; pad min spoke count 2; actual 1)",
+          "items": [
+            {
+              "description": "Zone [GND] on F.Cu and B.Cu, priority 0",
+              "pos": {
+                "x": 53.011,
+                "y": 29.026164
+              },
+              "uuid": "795c4093-4930-4bcb-9c07-8e31d04084fe"
+            },
+            {
+              "description": "Pad 7 [GND] of U7 on F.Cu",
+              "pos": {
+                "x": 71.298,
+                "y": 37.042001
+              },
+              "uuid": "16f1a707-a926-4839-8937-9c29f4503070"
+            }
+          ],
+          "severity": "error",
+          "type": "starved_thermal"
+        }
+      ]
+    }
+  ]
+}

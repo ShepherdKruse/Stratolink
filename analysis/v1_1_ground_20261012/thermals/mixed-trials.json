@@ -1,0 +1,41 @@
+{
+  "baseline": "c3d70a429a95591607341d57bf16ee153972da71",
+  "trials": [
+    {
+      "name": "mixed_g150_w250_j20angle",
+      "gap": 0.15,
+      "width": 0.25,
+      "angle": 90,
+      "angle5": 45,
+      "jangle_only": 0,
+      "directory": "/Users/twarn/Repositories/ai-working/scratch/stratolink-zones-20261012/thermal/mixed_g150_w250_j20angle"
+    },
+    {
+      "name": "mixed_g200_w250_j20angle",
+      "gap": 0.2,
+      "width": 0.25,
+      "angle": 90,
+      "angle5": 45,
+      "jangle_only": 0,
+      "directory": "/Users/twarn/Repositories/ai-working/scratch/stratolink-zones-20261012/thermal/mixed_g200_w250_j20angle"
+    },
+    {
+      "name": "mixed_g250_w250_j20angle",
+      "gap": 0.25,
+      "width": 0.25,
+      "angle": 90,
+      "angle5": 45,
+      "jangle_only": 0,
+      "directory": "/Users/twarn/Repositories/ai-working/scratch/stratolink-zones-20261012/thermal/mixed_g250_w250_j20angle"
+    },
+    {
+      "name": "mixed_g200_w250_j20direct",
+      "gap": 0.2,
+      "width": 0.25,
+      "angle": 90,
+      "angle5": 45,
+      "jdirect": true,
+      "directory": "/Users/twarn/Repositories/ai-working/scratch/stratolink-zones-20261012/thermal/mixed_g200_w250_j20direct"
+    }
+  ]
+}

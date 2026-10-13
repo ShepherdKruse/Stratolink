@@ -1,0 +1,18 @@
+{
+  "url": "https://docs.kicad.org/10.0/en/pcbnew/pcbnew.html",
+  "captured": "2026-10-12",
+  "excerpts": [
+    {
+      "term": "Relief gap controls",
+      "text": "Relief gap controls the length of the thermal spokes, or the gap between the pad’s shape and the filled copper area of the zone. This value is normally empty which will cause the relief gap to be inherited from the connecting zone’s settings.\n\nSpoke width controls the width of the spokes generated when the zone connection mode is Thermal Relief. This value is normally empty which will cause the spoke width to be inhe"
+    },
+    {
+      "term": "Spoke width controls",
+      "text": "Spoke width controls the width of the spokes generated when the zone connection mode is Thermal Relief. This value is normally empty which will cause the spoke width to be inherited from the connecting zone’s settings.\n\n\tPrior to KiCad version 9, a relief gap or spoke width of 0 caused that value to be inherited. In KiCad 9 and later, a relief gap or spoke width of 0 sets that value to 0, while a blank value causes t"
+    },
+    {
+      "term": "Minimum thermal relief spoke count",
+      "text": "Minimum thermal relief spoke count\n\n\t\n\nThis sets the minimum acceptable number of thermal relief spokes connecting a pad to a zone. A DRC violation will be generated if this constraint is violated.\n\n\n\n\nInclude stackup height in track length calculations\n\n\t\n\nBy"
+    }
+  ]
+}

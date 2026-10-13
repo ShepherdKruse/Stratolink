@@ -351,6 +351,7 @@
 		(roundrect_rratio 0.15)
 		(solder_mask_margin 0)
 		(uuid "885f4db5-7a9b-4845-9096-ed56c7826b71")
+		(zone_connect 0)
 	)
 	(pad "6" smd roundrect
 		(at 0.25 0.765)
@@ -367,6 +368,7 @@
 		(roundrect_rratio 0.15)
 		(solder_mask_margin 0)
 		(uuid "16f1a707-a926-4839-8937-9c29f4503070")
+		(zone_connect 0)
 	)
 	(pad "8" smd roundrect
 		(at 0.765 0.25)
@@ -375,6 +377,7 @@
 		(roundrect_rratio 0.15)
 		(solder_mask_margin 0)
 		(uuid "77d55d14-93f0-45c2-9c41-d0881e10a934")
+		(zone_connect 0)
 	)
 	(pad "9" smd roundrect
 		(at 0.765 -0.25)
