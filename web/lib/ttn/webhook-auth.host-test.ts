@@ -108,6 +108,24 @@ assert.deepEqual(parseTTNUplinkIdentity(sessionA), {
     receivedAt: '2026-07-25T00:05:13.437315613Z',
     frameCounter: 0,
 });
+// Protobuf JSON omits an unsigned scalar when its value is zero.
+for (const uplink of [{ session_key_id: 'session-a' }, {}]) {
+    assert.deepEqual(parseTTNUplinkIdentity({ ...sessionA, uplink_message: uplink }), {
+        rawDeviceId: 'stratolink-2',
+        devAddr: '260CACD0',
+        sessionKeyId: 'session_key_id' in uplink ? 'session-a' : null,
+        receivedAt: sessionA.received_at,
+        frameCounter: 0,
+    });
+}
+// Default only an absent scalar, never a malformed supplied value or message.
+for (const f_cnt of [null, undefined, false, '0', -1, 1.5, 0x100000000]) {
+    assert.equal(parseTTNUplinkIdentity({
+        ...sessionA,
+        uplink_message: { f_cnt } as { f_cnt?: number },
+    }), null);
+}
+assert.equal(parseTTNUplinkIdentity({ ...sessionA, uplink_message: undefined }), null);
 assert.deepEqual(parseTTNUplinkIdentity({
     ...sessionA,
     uplink_message: { session_key_id: 'session-b', f_cnt: 0 },
@@ -168,11 +186,6 @@ for (const invalid of [
         end_device_ids: { device_id: 'x', dev_addr: '260CACD0' },
         received_at: 'not-a-time',
         uplink_message: { f_cnt: 1 },
-    },
-    {
-        end_device_ids: { device_id: 'x' },
-        received_at: '2026-07-25T00:00:00Z',
-        uplink_message: { session_key_id: 's' },
     },
     {
         end_device_ids: { device_id: 'x' },
