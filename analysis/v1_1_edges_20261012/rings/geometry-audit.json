@@ -1,0 +1,3260 @@
+{
+  "baseline": "d70a53d2093454084c9b1ae989d0276a88395334",
+  "native_polygon_tolerance_mm": 0.0001,
+  "modeled_circle_tolerance_mm": 1e-06,
+  "component_PTH_inventory": [
+    {
+      "key": "AE2.1",
+      "uuid": "ea905b28-8305-405a-81ea-939d803338f6",
+      "footprint": "lib:4269",
+      "at_mm": [
+        62.882,
+        33.218
+      ],
+      "net": "Net-(AE2-A)",
+      "size_mm": [
+        1.5,
+        1.5
+      ],
+      "drill_mm": [
+        1.0,
+        1.0
+      ],
+      "offset_mm": [
+        0.0,
+        0.0
+      ],
+      "shape": 0,
+      "layers": "00000000_00000000_55555555_5555555f",
+      "mask_margin_mm": 0.0,
+      "value": "Antenna",
+      "annulus_min_mm": 0.25,
+      "functional_class": "component/wire/structure PTH",
+      "outer_shape": "circle"
+    },
+    {
+      "key": "J4.1",
+      "uuid": "0650b567-d648-499e-addc-ea01fac7e599",
+      "footprint": "Connector_PinHeader_1.00mm:PinHeader_1x07_P1.00mm_Vertical",
+      "at_mm": [
+        75.531,
+        69.158
+      ],
+      "net": "GND",
+      "size_mm": [
+        0.85,
+        0.85
+      ],
+      "drill_mm": [
+        0.5,
+        0.5
+      ],
+      "offset_mm": [
+        0.0,
+        0.0
+      ],
+      "shape": 1,
+      "layers": "00000000_00000000_55555555_5555555f",
+      "mask_margin_mm": 0.0,
+      "value": "Conn_PinHeader_1x07_P2.54mm_Vertical_THT_D1mm",
+      "annulus_min_mm": 0.175,
+      "functional_class": "component/wire/structure PTH",
+      "outer_shape": "rectangle"
+    },
+    {
+      "key": "J4.2",
+      "uuid": "629d6933-e9b3-4c38-91d2-f812960f1e71",
+      "footprint": "Connector_PinHeader_1.00mm:PinHeader_1x07_P1.00mm_Vertical",
+      "at_mm": [
+        75.531,
+        70.158
+      ],
+      "net": "VSTOR",
+      "size_mm": [
+        0.85,
+        0.85
+      ],
+      "drill_mm": [
+        0.5,
+        0.5
+      ],
+      "offset_mm": [
+        0.0,
+        0.0
+      ],
+      "shape": 2,
+      "layers": "00000000_00000000_55555555_5555555f",
+      "mask_margin_mm": 0.0,
+      "value": "Conn_PinHeader_1x07_P2.54mm_Vertical_THT_D1mm",
+      "annulus_min_mm": 0.175,
+      "functional_class": "component/wire/structure PTH",
+      "outer_shape": "circle"
+    },
+    {
+      "key": "J4.3",
+      "uuid": "f9e130ac-ed56-4de6-bfc1-3bdceea6e0d0",
+      "footprint": "Connector_PinHeader_1.00mm:PinHeader_1x07_P1.00mm_Vertical",
+      "at_mm": [
+        75.531,
+        71.158
+      ],
+      "net": "GND",
+      "size_mm": [
+        0.85,
+        0.85
+      ],
+      "drill_mm": [
+        0.5,
+        0.5
+      ],
+      "offset_mm": [
+        0.0,
+        0.0
+      ],
+      "shape": 2,
+      "layers": "00000000_00000000_55555555_5555555f",
+      "mask_margin_mm": 0.0,
+      "value": "Conn_PinHeader_1x07_P2.54mm_Vertical_THT_D1mm",
+      "annulus_min_mm": 0.175,
+      "functional_class": "component/wire/structure PTH",
+      "outer_shape": "circle"
+    },
+    {
+      "key": "J4.4",
+      "uuid": "2e3cbf76-3be2-4c68-b1f2-89d83f085094",
+      "footprint": "Connector_PinHeader_1.00mm:PinHeader_1x07_P1.00mm_Vertical",
+      "at_mm": [
+        75.531,
+        72.158
+      ],
+      "net": "TX",
+      "size_mm": [
+        0.85,
+        0.85
+      ],
+      "drill_mm": [
+        0.5,
+        0.5
+      ],
+      "offset_mm": [
+        0.0,
+        0.0
+      ],
+      "shape": 2,
+      "layers": "00000000_00000000_55555555_5555555f",
+      "mask_margin_mm": 0.0,
+      "value": "Conn_PinHeader_1x07_P2.54mm_Vertical_THT_D1mm",
+      "annulus_min_mm": 0.175,
+      "functional_class": "component/wire/structure PTH",
+      "outer_shape": "circle"
+    },
+    {
+      "key": "J4.5",
+      "uuid": "a826af09-b85c-4bd8-b045-8d9597e30e2c",
+      "footprint": "Connector_PinHeader_1.00mm:PinHeader_1x07_P1.00mm_Vertical",
+      "at_mm": [
+        75.531,
+        73.158
+      ],
+      "net": "RX",
+      "size_mm": [
+        0.85,
+        0.85
+      ],
+      "drill_mm": [
+        0.5,
+        0.5
+      ],
+      "offset_mm": [
+        0.0,
+        0.0
+      ],
+      "shape": 2,
+      "layers": "00000000_00000000_55555555_5555555f",
+      "mask_margin_mm": 0.0,
+      "value": "Conn_PinHeader_1x07_P2.54mm_Vertical_THT_D1mm",
+      "annulus_min_mm": 0.175,
+      "functional_class": "component/wire/structure PTH",
+      "outer_shape": "circle"
+    },
+    {
+      "key": "J4.6",
+      "uuid": "95f0f8e9-8450-493a-82c2-f13fc3380988",
+      "footprint": "Connector_PinHeader_1.00mm:PinHeader_1x07_P1.00mm_Vertical",
+      "at_mm": [
+        75.531,
+        74.158
+      ],
+      "net": "BOOT0",
+      "size_mm": [
+        0.85,
+        0.85
+      ],
+      "drill_mm": [
+        0.5,
+        0.5
+      ],
+      "offset_mm": [
+        0.0,
+        0.0
+      ],
+      "shape": 2,
+      "layers": "00000000_00000000_55555555_5555555f",
+      "mask_margin_mm": 0.0,
+      "value": "Conn_PinHeader_1x07_P2.54mm_Vertical_THT_D1mm",
+      "annulus_min_mm": 0.175,
+      "functional_class": "component/wire/structure PTH",
+      "outer_shape": "circle"
+    },
+    {
+      "key": "J4.7",
+      "uuid": "bee2e1f1-6523-4de0-88bd-204f2713e431",
+      "footprint": "Connector_PinHeader_1.00mm:PinHeader_1x07_P1.00mm_Vertical",
+      "at_mm": [
+        75.531,
+        75.158
+      ],
+      "net": "+3.3V",
+      "size_mm": [
+        0.85,
+        0.85
+      ],
+      "drill_mm": [
+        0.5,
+        0.5
+      ],
+      "offset_mm": [
+        0.0,
+        0.0
+      ],
+      "shape": 2,
+      "layers": "00000000_00000000_55555555_5555555f",
+      "mask_margin_mm": 0.0,
+      "value": "Conn_PinHeader_1x07_P2.54mm_Vertical_THT_D1mm",
+      "annulus_min_mm": 0.175,
+      "functional_class": "component/wire/structure PTH",
+      "outer_shape": "circle"
+    },
+    {
+      "key": "J2.1",
+      "uuid": "59aafa47-5be7-4efa-8b26-3fc50d65e9db",
+      "footprint": "lib:Solar_Notch_Left_1p0x2p0",
+      "at_mm": [
+        54.8,
+        85.0
+      ],
+      "net": "+SOLAR",
+      "size_mm": [
+        1.4,
+        1.4
+      ],
+      "drill_mm": [
+        0.7,
+        0.7
+      ],
+      "offset_mm": [
+        0.0,
+        0.0
+      ],
+      "shape": 0,
+      "layers": "00000000_00000000_55555555_5555555f",
+      "mask_margin_mm": 0.0,
+      "value": "Solar panel direct solder",
+      "annulus_min_mm": 0.35,
+      "functional_class": "component/wire/structure PTH",
+      "outer_shape": "circle"
+    },
+    {
+      "key": "J1.1",
+      "uuid": "f073055f-37a6-47cc-9da3-ced10e246e1f",
+      "footprint": "lib:Solar_Notch_Right_1p0x2p0",
+      "at_mm": [
+        75.2,
+        85.0
+      ],
+      "net": "+SOLAR",
+      "size_mm": [
+        1.4,
+        1.4
+      ],
+      "drill_mm": [
+        0.7,
+        0.7
+      ],
+      "offset_mm": [
+        0.0,
+        0.0
+      ],
+      "shape": 0,
+      "layers": "00000000_00000000_55555555_5555555f",
+      "mask_margin_mm": 0.0,
+      "value": "Solar panel direct solder",
+      "annulus_min_mm": 0.35,
+      "functional_class": "component/wire/structure PTH",
+      "outer_shape": "circle"
+    },
+    {
+      "key": "J3.1",
+      "uuid": "9e1e972e-d661-4acc-91bc-aaa44d6689d4",
+      "footprint": "Connector_PinHeader_1.00mm:PinHeader_1x07_P1.00mm_Vertical",
+      "at_mm": [
+        54.444998,
+        69.173998
+      ],
+      "net": "PA1",
+      "size_mm": [
+        0.85,
+        0.85
+      ],
+      "drill_mm": [
+        0.5,
+        0.5
+      ],
+      "offset_mm": [
+        0.0,
+        0.0
+      ],
+      "shape": 1,
+      "layers": "00000000_00000000_55555555_5555555f",
+      "mask_margin_mm": 0.0,
+      "value": "Conn_PinHeader_1x07_P2.54mm_Vertical_THT_D1mm",
+      "annulus_min_mm": 0.175,
+      "functional_class": "component/wire/structure PTH",
+      "outer_shape": "rectangle"
+    },
+    {
+      "key": "J3.2",
+      "uuid": "ee2785a4-1245-43e1-83e8-fa4973870f0b",
+      "footprint": "Connector_PinHeader_1.00mm:PinHeader_1x07_P1.00mm_Vertical",
+      "at_mm": [
+        54.444998,
+        70.173999
+      ],
+      "net": "GND",
+      "size_mm": [
+        0.85,
+        0.85
+      ],
+      "drill_mm": [
+        0.5,
+        0.5
+      ],
+      "offset_mm": [
+        0.0,
+        0.0
+      ],
+      "shape": 2,
+      "layers": "00000000_00000000_55555555_5555555f",
+      "mask_margin_mm": 0.0,
+      "value": "Conn_PinHeader_1x07_P2.54mm_Vertical_THT_D1mm",
+      "annulus_min_mm": 0.175,
+      "functional_class": "component/wire/structure PTH",
+      "outer_shape": "circle"
+    },
+    {
+      "key": "J3.3",
+      "uuid": "78db17b2-2f62-4a45-adfd-0e17aa75a498",
+      "footprint": "Connector_PinHeader_1.00mm:PinHeader_1x07_P1.00mm_Vertical",
+      "at_mm": [
+        54.444999,
+        71.174001
+      ],
+      "net": "PA9",
+      "size_mm": [
+        0.85,
+        0.85
+      ],
+      "drill_mm": [
+        0.5,
+        0.5
+      ],
+      "offset_mm": [
+        0.0,
+        0.0
+      ],
+      "shape": 2,
+      "layers": "00000000_00000000_55555555_5555555f",
+      "mask_margin_mm": 0.0,
+      "value": "Conn_PinHeader_1x07_P2.54mm_Vertical_THT_D1mm",
+      "annulus_min_mm": 0.175,
+      "functional_class": "component/wire/structure PTH",
+      "outer_shape": "circle"
+    },
+    {
+      "key": "J3.4",
+      "uuid": "1a982502-40db-4b68-bfea-018025c9e930",
+      "footprint": "Connector_PinHeader_1.00mm:PinHeader_1x07_P1.00mm_Vertical",
+      "at_mm": [
+        54.445,
+        72.174
+      ],
+      "net": "GND",
+      "size_mm": [
+        0.85,
+        0.85
+      ],
+      "drill_mm": [
+        0.5,
+        0.5
+      ],
+      "offset_mm": [
+        0.0,
+        0.0
+      ],
+      "shape": 2,
+      "layers": "00000000_00000000_55555555_5555555f",
+      "mask_margin_mm": 0.0,
+      "value": "Conn_PinHeader_1x07_P2.54mm_Vertical_THT_D1mm",
+      "annulus_min_mm": 0.175,
+      "functional_class": "component/wire/structure PTH",
+      "outer_shape": "circle"
+    },
+    {
+      "key": "J3.5",
+      "uuid": "18b55959-0e81-4b52-8da7-0494f5bc61f2",
+      "footprint": "Connector_PinHeader_1.00mm:PinHeader_1x07_P1.00mm_Vertical",
+      "at_mm": [
+        54.444998,
+        73.173998
+      ],
+      "net": "GND",
+      "size_mm": [
+        0.85,
+        0.85
+      ],
+      "drill_mm": [
+        0.5,
+        0.5
+      ],
+      "offset_mm": [
+        0.0,
+        0.0
+      ],
+      "shape": 2,
+      "layers": "00000000_00000000_55555555_5555555f",
+      "mask_margin_mm": 0.0,
+      "value": "Conn_PinHeader_1x07_P2.54mm_Vertical_THT_D1mm",
+      "annulus_min_mm": 0.175,
+      "functional_class": "component/wire/structure PTH",
+      "outer_shape": "circle"
+    },
+    {
+      "key": "J3.6",
+      "uuid": "7ae1aaaa-f303-4441-9163-758b71841e0e",
+      "footprint": "Connector_PinHeader_1.00mm:PinHeader_1x07_P1.00mm_Vertical",
+      "at_mm": [
+        54.444998,
+        74.173998
+      ],
+      "net": "PB2",
+      "size_mm": [
+        0.85,
+        0.85
+      ],
+      "drill_mm": [
+        0.5,
+        0.5
+      ],
+      "offset_mm": [
+        0.0,
+        0.0
+      ],
+      "shape": 2,
+      "layers": "00000000_00000000_55555555_5555555f",
+      "mask_margin_mm": 0.0,
+      "value": "Conn_PinHeader_1x07_P2.54mm_Vertical_THT_D1mm",
+      "annulus_min_mm": 0.175,
+      "functional_class": "component/wire/structure PTH",
+      "outer_shape": "circle"
+    },
+    {
+      "key": "J3.7",
+      "uuid": "06e03c7f-5890-410b-8cd8-b2f017358ea9",
+      "footprint": "Connector_PinHeader_1.00mm:PinHeader_1x07_P1.00mm_Vertical",
+      "at_mm": [
+        54.444998,
+        75.173998
+      ],
+      "net": "GND",
+      "size_mm": [
+        0.85,
+        0.85
+      ],
+      "drill_mm": [
+        0.5,
+        0.5
+      ],
+      "offset_mm": [
+        0.0,
+        0.0
+      ],
+      "shape": 2,
+      "layers": "00000000_00000000_55555555_5555555f",
+      "mask_margin_mm": 0.0,
+      "value": "Conn_PinHeader_1x07_P2.54mm_Vertical_THT_D1mm",
+      "annulus_min_mm": 0.175,
+      "functional_class": "component/wire/structure PTH",
+      "outer_shape": "circle"
+    },
+    {
+      "key": "H2.1",
+      "uuid": "03bafdc5-03a8-4d80-8505-9c0f32d12e8a",
+      "footprint": "lib:Suspension_PTH_D2p0_OD3p2",
+      "at_mm": [
+        74.327,
+        31.745
+      ],
+      "net": "GND",
+      "size_mm": [
+        3.2,
+        3.2
+      ],
+      "drill_mm": [
+        2.0,
+        2.0
+      ],
+      "offset_mm": [
+        0.0,
+        0.0
+      ],
+      "shape": 0,
+      "layers": "00000000_00000000_55555555_5555555f",
+      "mask_margin_mm": 0.0,
+      "value": "Suspension 2.0 mm PTH",
+      "annulus_min_mm": 0.6000000000000001,
+      "functional_class": "component/wire/structure PTH",
+      "outer_shape": "circle"
+    },
+    {
+      "key": "AE1.1",
+      "uuid": "4030e0a2-b9c3-4ae6-9d6f-ffae3c8a1895",
+      "footprint": "lib:4269",
+      "at_mm": [
+        68.396,
+        82.703
+      ],
+      "net": "Net-(AE1-A)",
+      "size_mm": [
+        1.5,
+        1.5
+      ],
+      "drill_mm": [
+        1.0,
+        1.0
+      ],
+      "offset_mm": [
+        0.0,
+        0.0
+      ],
+      "shape": 0,
+      "layers": "00000000_00000000_55555555_5555555f",
+      "mask_margin_mm": 0.0,
+      "value": "Antenna",
+      "annulus_min_mm": 0.25,
+      "functional_class": "component/wire/structure PTH",
+      "outer_shape": "circle"
+    },
+    {
+      "key": "H1.1",
+      "uuid": "b2425c32-c6fd-4205-b8df-f3e09a27b753",
+      "footprint": "lib:Suspension_PTH_D2p0_OD3p2",
+      "at_mm": [
+        55.665,
+        31.745
+      ],
+      "net": "GND",
+      "size_mm": [
+        3.2,
+        3.2
+      ],
+      "drill_mm": [
+        2.0,
+        2.0
+      ],
+      "offset_mm": [
+        0.0,
+        0.0
+      ],
+      "shape": 0,
+      "layers": "00000000_00000000_55555555_5555555f",
+      "mask_margin_mm": 0.0,
+      "value": "Suspension 2.0 mm PTH",
+      "annulus_min_mm": 0.6000000000000001,
+      "functional_class": "component/wire/structure PTH",
+      "outer_shape": "circle"
+    },
+    {
+      "key": "U1.22",
+      "uuid": "55059a9c-4e0c-4a90-9a82-421cc61a6ab1",
+      "footprint": "lib:QFN50P350X350X100-21N",
+      "at_mm": [
+        67.190998,
+        38.589999
+      ],
+      "net": "GND",
+      "size_mm": [
+        0.5,
+        0.5
+      ],
+      "drill_mm": [
+        0.3,
+        0.3
+      ],
+      "offset_mm": [
+        0.0,
+        0.0
+      ],
+      "shape": 0,
+      "layers": "00000000_00000000_55555555_55555555",
+      "mask_margin_mm": 0.0,
+      "value": "~",
+      "annulus_min_mm": 0.1,
+      "functional_class": "thermal via encoded as footprint PTH",
+      "outer_shape": "circle"
+    },
+    {
+      "key": "U1.23",
+      "uuid": "67b09878-6cd8-4d5e-a5ef-dcc0e9b29c30",
+      "footprint": "lib:QFN50P350X350X100-21N",
+      "at_mm": [
+        66.415998,
+        37.814999
+      ],
+      "net": "GND",
+      "size_mm": [
+        0.5,
+        0.5
+      ],
+      "drill_mm": [
+        0.3,
+        0.3
+      ],
+      "offset_mm": [
+        0.0,
+        0.0
+      ],
+      "shape": 0,
+      "layers": "00000000_00000000_55555555_55555555",
+      "mask_margin_mm": 0.0,
+      "value": "~",
+      "annulus_min_mm": 0.1,
+      "functional_class": "thermal via encoded as footprint PTH",
+      "outer_shape": "circle"
+    },
+    {
+      "key": "U1.24",
+      "uuid": "719471d0-f962-4593-b47e-b2f632eefa5d",
+      "footprint": "lib:QFN50P350X350X100-21N",
+      "at_mm": [
+        67.190998,
+        37.814999
+      ],
+      "net": "GND",
+      "size_mm": [
+        0.5,
+        0.5
+      ],
+      "drill_mm": [
+        0.3,
+        0.3
+      ],
+      "offset_mm": [
+        0.0,
+        0.0
+      ],
+      "shape": 0,
+      "layers": "00000000_00000000_55555555_55555555",
+      "mask_margin_mm": 0.0,
+      "value": "~",
+      "annulus_min_mm": 0.1,
+      "functional_class": "thermal via encoded as footprint PTH",
+      "outer_shape": "circle"
+    },
+    {
+      "key": "U1.25",
+      "uuid": "857bfa7b-03e5-4c18-9929-7b458507fe22",
+      "footprint": "lib:QFN50P350X350X100-21N",
+      "at_mm": [
+        67.965998,
+        37.814999
+      ],
+      "net": "GND",
+      "size_mm": [
+        0.5,
+        0.5
+      ],
+      "drill_mm": [
+        0.3,
+        0.3
+      ],
+      "offset_mm": [
+        0.0,
+        0.0
+      ],
+      "shape": 0,
+      "layers": "00000000_00000000_55555555_55555555",
+      "mask_margin_mm": 0.0,
+      "value": "~",
+      "annulus_min_mm": 0.1,
+      "functional_class": "thermal via encoded as footprint PTH",
+      "outer_shape": "circle"
+    },
+    {
+      "key": "U1.26",
+      "uuid": "9f072398-92c6-41bb-97ec-02f8f95d342a",
+      "footprint": "lib:QFN50P350X350X100-21N",
+      "at_mm": [
+        67.190998,
+        37.039999
+      ],
+      "net": "GND",
+      "size_mm": [
+        0.5,
+        0.5
+      ],
+      "drill_mm": [
+        0.3,
+        0.3
+      ],
+      "offset_mm": [
+        0.0,
+        0.0
+      ],
+      "shape": 0,
+      "layers": "00000000_00000000_55555555_55555555",
+      "mask_margin_mm": 0.0,
+      "value": "~",
+      "annulus_min_mm": 0.1,
+      "functional_class": "thermal via encoded as footprint PTH",
+      "outer_shape": "circle"
+    }
+  ],
+  "via_count": 142,
+  "via_geometry_counts": [
+    {
+      "diameter_mm": 0.6,
+      "drill_mm": 0.3,
+      "annulus_mm": 0.15,
+      "count": 142
+    }
+  ],
+  "header_candidate_summary": [
+    {
+      "land_mm": 0.85,
+      "drill_mm": 0.5,
+      "annulus_mm": 0.175,
+      "min_adjacent_copper_mask_gap_mm": 0.14999900000334157,
+      "min_drill_to_foreign_copper_mm": 0.32499900000154386,
+      "min_copper_to_outline_mm": 0.7037335085983708,
+      "min_mask_to_foreign_track_mm": 0.21182699999999954
+    },
+    {
+      "land_mm": 0.88,
+      "drill_mm": 0.5,
+      "annulus_mm": 0.19,
+      "min_adjacent_copper_mask_gap_mm": 0.11999900000417378,
+      "min_drill_to_foreign_copper_mm": 0.30999900000161773,
+      "min_copper_to_outline_mm": 0.6887332516632635,
+      "min_mask_to_foreign_track_mm": 0.19538774577746557
+    },
+    {
+      "land_mm": 0.9,
+      "drill_mm": 0.5,
+      "annulus_mm": 0.2,
+      "min_adjacent_copper_mask_gap_mm": 0.0999990000049969,
+      "min_drill_to_foreign_copper_mm": 0.29999900000166635,
+      "min_copper_to_outline_mm": 0.6787330803731872,
+      "min_mask_to_foreign_track_mm": 0.18124561015372742
+    },
+    {
+      "land_mm": 1.0,
+      "drill_mm": 0.5,
+      "annulus_mm": 0.25,
+      "min_adjacent_copper_mask_gap_mm": 0.0,
+      "min_drill_to_foreign_copper_mm": 0.24999900000200254,
+      "min_copper_to_outline_mm": 0.6287322239228345,
+      "min_mask_to_foreign_track_mm": 0.1105349320350767
+    }
+  ],
+  "header_details": {
+    "0.85": [
+      {
+        "key": "J4.1",
+        "uuid": "0650b567-d648-499e-addc-ea01fac7e599",
+        "at_mm": [
+          75.531,
+          69.158
+        ],
+        "net": "GND",
+        "drill_mm": 0.5,
+        "land_mm": 0.85,
+        "annulus_mm": 0.175,
+        "layers": {
+          "0": {
+            "copper_to_foreign": {
+              "clearance_mm": 0.15000000000000566,
+              "other": "J4.2",
+              "kind": "pad"
+            },
+            "drill_to_foreign": {
+              "clearance_mm": 0.32500000000000284,
+              "other": "J4.2",
+              "kind": "pad"
+            },
+            "mask_to_foreign_track_mm": 0.2166009492130629,
+            "nearest_foreign_track_uuid": "cd6977b0-9d88-4014-8ee0-75e9feff1d59",
+            "copper_to_outline_mm": 0.7197352345638169
+          },
+          "2": {
+            "copper_to_foreign": {
+              "clearance_mm": 0.15000000000000566,
+              "other": "J4.2",
+              "kind": "pad"
+            },
+            "drill_to_foreign": {
+              "clearance_mm": 0.32500000000000284,
+              "other": "J4.2",
+              "kind": "pad"
+            },
+            "mask_to_foreign_track_mm": 1.2869509358044735,
+            "nearest_foreign_track_uuid": "3f48bc47-4701-495e-8cc9-f1f001459e79",
+            "copper_to_outline_mm": 0.7197352345638169
+          }
+        }
+      },
+      {
+        "key": "J4.2",
+        "uuid": "629d6933-e9b3-4c38-91d2-f812960f1e71",
+        "at_mm": [
+          75.531,
+          70.158
+        ],
+        "net": "VSTOR",
+        "drill_mm": 0.5,
+        "land_mm": 0.85,
+        "annulus_mm": 0.175,
+        "layers": {
+          "0": {
+            "copper_to_foreign": {
+              "clearance_mm": 0.15000000000000566,
+              "other": "J4.1",
+              "kind": "pad"
+            },
+            "drill_to_foreign": {
+              "clearance_mm": 0.3250000000000028,
+              "other": "J4.1",
+              "kind": "pad"
+            },
+            "mask_to_foreign_track_mm": 0.4170000000000158,
+            "nearest_foreign_track_uuid": "f5ebf441-8ad7-4c96-8b96-4b5ad58466c9",
+            "copper_to_outline_mm": 0.7197596436080067
+          },
+          "2": {
+            "copper_to_foreign": {
+              "clearance_mm": 0.15000000000000566,
+              "other": "J4.1",
+              "kind": "pad"
+            },
+            "drill_to_foreign": {
+              "clearance_mm": 0.3250000000000028,
+              "other": "J4.1",
+              "kind": "pad"
+            },
+            "mask_to_foreign_track_mm": 0.374361253104812,
+            "nearest_foreign_track_uuid": "58ca0d98-4c28-4f9a-990d-c4448da47607",
+            "copper_to_outline_mm": 0.7197596436080067
+          }
+        }
+      },
+      {
+        "key": "J4.3",
+        "uuid": "f9e130ac-ed56-4de6-bfc1-3bdceea6e0d0",
+        "at_mm": [
+          75.531,
+          71.158
+        ],
+        "net": "GND",
+        "drill_mm": 0.5,
+        "land_mm": 0.85,
+        "annulus_mm": 0.175,
+        "layers": {
+          "0": {
+            "copper_to_foreign": {
+              "clearance_mm": 0.15000000000000568,
+              "other": "J4.2",
+              "kind": "pad"
+            },
+            "drill_to_foreign": {
+              "clearance_mm": 0.32500000000000284,
+              "other": "J4.2",
+              "kind": "pad"
+            },
+            "mask_to_foreign_track_mm": 0.4170000000000158,
+            "nearest_foreign_track_uuid": "f5ebf441-8ad7-4c96-8b96-4b5ad58466c9",
+            "copper_to_outline_mm": 0.7197767727618241
+          },
+          "2": {
+            "copper_to_foreign": {
+              "clearance_mm": 0.15000000000000568,
+              "other": "J4.2",
+              "kind": "pad"
+            },
+            "drill_to_foreign": {
+              "clearance_mm": 0.32500000000000284,
+              "other": "J4.2",
+              "kind": "pad"
+            },
+            "mask_to_foreign_track_mm": 0.9742408092384892,
+            "nearest_foreign_track_uuid": "4ab51928-3719-4e11-86d6-f1a175016b3d",
+            "copper_to_outline_mm": 0.7197767727618241
+          }
+        }
+      },
+      {
+        "key": "J4.4",
+        "uuid": "2e3cbf76-3be2-4c68-b1f2-89d83f085094",
+        "at_mm": [
+          75.531,
+          72.158
+        ],
+        "net": "TX",
+        "drill_mm": 0.5,
+        "land_mm": 0.85,
+        "annulus_mm": 0.175,
+        "layers": {
+          "0": {
+            "copper_to_foreign": {
+              "clearance_mm": 0.15000000000000568,
+              "other": "J4.3",
+              "kind": "pad"
+            },
+            "drill_to_foreign": {
+              "clearance_mm": 0.32500000000000284,
+              "other": "J4.3",
+              "kind": "pad"
+            },
+            "mask_to_foreign_track_mm": 0.45000000000000284,
+            "nearest_foreign_track_uuid": "09aa0d2e-a49b-4f69-b456-77aede8f991c",
+            "copper_to_outline_mm": 0.7197939019156414
+          },
+          "2": {
+            "copper_to_foreign": {
+              "clearance_mm": 0.15000000000000568,
+              "other": "J4.3",
+              "kind": "pad"
+            },
+            "drill_to_foreign": {
+              "clearance_mm": 0.32500000000000284,
+              "other": "J4.3",
+              "kind": "pad"
+            },
+            "mask_to_foreign_track_mm": 0.2801431456552008,
+            "nearest_foreign_track_uuid": "f61043a4-1291-4315-b94d-e8cfe8c45bbd",
+            "copper_to_outline_mm": 0.7197939019156414
+          }
+        }
+      },
+      {
+        "key": "J4.5",
+        "uuid": "a826af09-b85c-4bd8-b045-8d9597e30e2c",
+        "at_mm": [
+          75.531,
+          73.158
+        ],
+        "net": "RX",
+        "drill_mm": 0.5,
+        "land_mm": 0.85,
+        "annulus_mm": 0.175,
+        "layers": {
+          "0": {
+            "copper_to_foreign": {
+              "clearance_mm": 0.15000000000000568,
+              "other": "J4.4",
+              "kind": "pad"
+            },
+            "drill_to_foreign": {
+              "clearance_mm": 0.32500000000000284,
+              "other": "J4.4",
+              "kind": "pad"
+            },
+            "mask_to_foreign_track_mm": 0.4339999999999975,
+            "nearest_foreign_track_uuid": "b7d98b72-0077-4ff3-be7c-ce0c0d464d37",
+            "copper_to_outline_mm": 0.7198110310694588
+          },
+          "2": {
+            "copper_to_foreign": {
+              "clearance_mm": 0.15000000000000568,
+              "other": "J4.4",
+              "kind": "pad"
+            },
+            "drill_to_foreign": {
+              "clearance_mm": 0.32500000000000284,
+              "other": "J4.4",
+              "kind": "pad"
+            },
+            "mask_to_foreign_track_mm": 0.45000000000000284,
+            "nearest_foreign_track_uuid": "8498e772-4a08-4e24-9cb1-7015f654304f",
+            "copper_to_outline_mm": 0.7198110310694588
+          }
+        }
+      },
+      {
+        "key": "J4.6",
+        "uuid": "95f0f8e9-8450-493a-82c2-f13fc3380988",
+        "at_mm": [
+          75.531,
+          74.158
+        ],
+        "net": "BOOT0",
+        "drill_mm": 0.5,
+        "land_mm": 0.85,
+        "annulus_mm": 0.175,
+        "layers": {
+          "0": {
+            "copper_to_foreign": {
+              "clearance_mm": 0.15000000000000568,
+              "other": "J4.5",
+              "kind": "pad"
+            },
+            "drill_to_foreign": {
+              "clearance_mm": 0.32500000000000284,
+              "other": "J4.5",
+              "kind": "pad"
+            },
+            "mask_to_foreign_track_mm": 0.3849990000000077,
+            "nearest_foreign_track_uuid": "bece7755-de06-49a9-9ac3-063b05b2dc4c",
+            "copper_to_outline_mm": 0.7198281602232762
+          },
+          "2": {
+            "copper_to_foreign": {
+              "clearance_mm": 0.15000000000000568,
+              "other": "J4.5",
+              "kind": "pad"
+            },
+            "drill_to_foreign": {
+              "clearance_mm": 0.32500000000000284,
+              "other": "J4.5",
+              "kind": "pad"
+            },
+            "mask_to_foreign_track_mm": 0.3849990000000077,
+            "nearest_foreign_track_uuid": "7be7571d-9b76-4981-8b29-86a7e231b6a6",
+            "copper_to_outline_mm": 0.7198281602232762
+          }
+        }
+      },
+      {
+        "key": "J4.7",
+        "uuid": "bee2e1f1-6523-4de0-88bd-204f2713e431",
+        "at_mm": [
+          75.531,
+          75.158
+        ],
+        "net": "+3.3V",
+        "drill_mm": 0.5,
+        "land_mm": 0.85,
+        "annulus_mm": 0.175,
+        "layers": {
+          "0": {
+            "copper_to_foreign": {
+              "clearance_mm": 0.15000000000000568,
+              "other": "J4.6",
+              "kind": "pad"
+            },
+            "drill_to_foreign": {
+              "clearance_mm": 0.32500000000000284,
+              "other": "J4.6",
+              "kind": "pad"
+            },
+            "mask_to_foreign_track_mm": 1.1930149835244195,
+            "nearest_foreign_track_uuid": "915cb245-fea9-455a-9d03-1b87e1d72ae2",
+            "copper_to_outline_mm": 0.7198452893770936
+          },
+          "2": {
+            "copper_to_foreign": {
+              "clearance_mm": 0.15000000000000568,
+              "other": "J4.6",
+              "kind": "pad"
+            },
+            "drill_to_foreign": {
+              "clearance_mm": 0.32500000000000284,
+              "other": "J4.6",
+              "kind": "pad"
+            },
+            "mask_to_foreign_track_mm": 0.3225386007330606,
+            "nearest_foreign_track_uuid": "c6221fc0-d983-44cf-91bb-57b72c13f950",
+            "copper_to_outline_mm": 0.7198452893770936
+          }
+        }
+      },
+      {
+        "key": "J3.1",
+        "uuid": "9e1e972e-d661-4acc-91bc-aaa44d6689d4",
+        "at_mm": [
+          54.444998,
+          69.173998
+        ],
+        "net": "PA1",
+        "drill_mm": 0.5,
+        "land_mm": 0.85,
+        "annulus_mm": 0.175,
+        "layers": {
+          "0": {
+            "copper_to_foreign": {
+              "clearance_mm": 0.15000100000000316,
+              "other": "J3.2",
+              "kind": "pad"
+            },
+            "drill_to_foreign": {
+              "clearance_mm": 0.3250010000000003,
+              "other": "J3.2",
+              "kind": "pad"
+            },
+            "mask_to_foreign_track_mm": 0.21182699999999954,
+            "nearest_foreign_track_uuid": "c1227579-013e-4ffa-b72b-869589a0d2ea",
+            "copper_to_outline_mm": 0.7037335085983708
+          },
+          "2": {
+            "copper_to_foreign": {
+              "clearance_mm": 0.15000100000000316,
+              "other": "J3.2",
+              "kind": "pad"
+            },
+            "drill_to_foreign": {
+              "clearance_mm": 0.3250010000000003,
+              "other": "J3.2",
+              "kind": "pad"
+            },
+            "mask_to_foreign_track_mm": 0.23491405127386114,
+            "nearest_foreign_track_uuid": "a379a696-fdc3-4f66-808c-ae939631c307",
+            "copper_to_outline_mm": 0.7037335085983708
+          }
+        }
+      },
+      {
+        "key": "J3.2",
+        "uuid": "ee2785a4-1245-43e1-83e8-fa4973870f0b",
+        "at_mm": [
+          54.444998,
+          70.173999
+        ],
+        "net": "GND",
+        "drill_mm": 0.5,
+        "land_mm": 0.85,
+        "annulus_mm": 0.175,
+        "layers": {
+          "0": {
+            "copper_to_foreign": {
+              "clearance_mm": 0.15000100000000316,
+              "other": "J3.1",
+              "kind": "pad"
+            },
+            "drill_to_foreign": {
+              "clearance_mm": 0.3250010000000003,
+              "other": "J3.1",
+              "kind": "pad"
+            },
+            "mask_to_foreign_track_mm": 0.21182699999999954,
+            "nearest_foreign_track_uuid": "c1227579-013e-4ffa-b72b-869589a0d2ea",
+            "copper_to_outline_mm": 0.7037579176596893
+          },
+          "2": {
+            "copper_to_foreign": {
+              "clearance_mm": 0.15000100000000316,
+              "other": "J3.1",
+              "kind": "pad"
+            },
+            "drill_to_foreign": {
+              "clearance_mm": 0.3250010000000003,
+              "other": "J3.1",
+              "kind": "pad"
+            },
+            "mask_to_foreign_track_mm": 0.28232315586159956,
+            "nearest_foreign_track_uuid": "91541222-310a-48bc-b525-2eec1e0cb20f",
+            "copper_to_outline_mm": 0.7037579176596893
+          }
+        }
+      },
+      {
+        "key": "J3.3",
+        "uuid": "78db17b2-2f62-4a45-adfd-0e17aa75a498",
+        "at_mm": [
+          54.444999,
+          71.174001
+        ],
+        "net": "PA9",
+        "drill_mm": 0.5,
+        "land_mm": 0.85,
+        "annulus_mm": 0.175,
+        "layers": {
+          "0": {
+            "copper_to_foreign": {
+              "clearance_mm": 0.14999900000334157,
+              "other": "J3.4",
+              "kind": "pad"
+            },
+            "drill_to_foreign": {
+              "clearance_mm": 0.32499900000154386,
+              "other": "J3.4",
+              "kind": "pad"
+            },
+            "mask_to_foreign_track_mm": 0.21182800000000415,
+            "nearest_foreign_track_uuid": "c1227579-013e-4ffa-b72b-869589a0d2ea",
+            "copper_to_outline_mm": 0.7037760468477691
+          },
+          "2": {
+            "copper_to_foreign": {
+              "clearance_mm": 0.14999900000334157,
+              "other": "J3.4",
+              "kind": "pad"
+            },
+            "drill_to_foreign": {
+              "clearance_mm": 0.32499900000154386,
+              "other": "J3.4",
+              "kind": "pad"
+            },
+            "mask_to_foreign_track_mm": 0.45000200000001195,
+            "nearest_foreign_track_uuid": "66c1da99-2bef-4aeb-9576-d648045d9212",
+            "copper_to_outline_mm": 0.7037760468477691
+          }
+        }
+      },
+      {
+        "key": "J3.4",
+        "uuid": "1a982502-40db-4b68-bfea-018025c9e930",
+        "at_mm": [
+          54.445,
+          72.174
+        ],
+        "net": "GND",
+        "drill_mm": 0.5,
+        "land_mm": 0.85,
+        "annulus_mm": 0.175,
+        "layers": {
+          "0": {
+            "copper_to_foreign": {
+              "clearance_mm": 0.14999900000334157,
+              "other": "J3.3",
+              "kind": "pad"
+            },
+            "drill_to_foreign": {
+              "clearance_mm": 0.32499900000154386,
+              "other": "J3.3",
+              "kind": "pad"
+            },
+            "mask_to_foreign_track_mm": 0.2118290000000016,
+            "nearest_foreign_track_uuid": "c1227579-013e-4ffa-b72b-869589a0d2ea",
+            "copper_to_outline_mm": 0.7037941759844544
+          },
+          "2": {
+            "copper_to_foreign": {
+              "clearance_mm": 0.14999900000334157,
+              "other": "J3.3",
+              "kind": "pad"
+            },
+            "drill_to_foreign": {
+              "clearance_mm": 0.32499900000154386,
+              "other": "J3.3",
+              "kind": "pad"
+            },
+            "mask_to_foreign_track_mm": 0.39600000000000074,
+            "nearest_foreign_track_uuid": "57afa99e-0f6b-491c-a967-b4ab7afd6be7",
+            "copper_to_outline_mm": 0.7037941759844544
+          }
+        }
+      },
+      {
+        "key": "J3.5",
+        "uuid": "18b55959-0e81-4b52-8da7-0494f5bc61f2",
+        "at_mm": [
+          54.444998,
+          73.173998
+        ],
+        "net": "GND",
+        "drill_mm": 0.5,
+        "land_mm": 0.85,
+        "annulus_mm": 0.175,
+        "layers": {
+          "0": {
+            "copper_to_foreign": {
+              "clearance_mm": 0.15000000000000568,
+              "other": "J3.6",
+              "kind": "pad"
+            },
+            "drill_to_foreign": {
+              "clearance_mm": 0.32500000000000284,
+              "other": "J3.6",
+              "kind": "pad"
+            },
+            "mask_to_foreign_track_mm": 0.21182699999999954,
+            "nearest_foreign_track_uuid": "c1227579-013e-4ffa-b72b-869589a0d2ea",
+            "copper_to_outline_mm": 0.7038093051040115
+          },
+          "2": {
+            "copper_to_foreign": {
+              "clearance_mm": 0.15000000000000568,
+              "other": "J3.6",
+              "kind": "pad"
+            },
+            "drill_to_foreign": {
+              "clearance_mm": 0.32500000000000284,
+              "other": "J3.6",
+              "kind": "pad"
+            },
+            "mask_to_foreign_track_mm": 0.5787951177047637,
+            "nearest_foreign_track_uuid": "57afa99e-0f6b-491c-a967-b4ab7afd6be7",
+            "copper_to_outline_mm": 0.7038093051040115
+          }
+        }
+      },
+      {
+        "key": "J3.6",
+        "uuid": "7ae1aaaa-f303-4441-9163-758b71841e0e",
+        "at_mm": [
+          54.444998,
+          74.173998
+        ],
+        "net": "PB2",
+        "drill_mm": 0.5,
+        "land_mm": 0.85,
+        "annulus_mm": 0.175,
+        "layers": {
+          "0": {
+            "copper_to_foreign": {
+              "clearance_mm": 0.15000000000000568,
+              "other": "J3.5",
+              "kind": "pad"
+            },
+            "drill_to_foreign": {
+              "clearance_mm": 0.32500000000000284,
+              "other": "J3.5",
+              "kind": "pad"
+            },
+            "mask_to_foreign_track_mm": 0.21182699999999954,
+            "nearest_foreign_track_uuid": "c1227579-013e-4ffa-b72b-869589a0d2ea",
+            "copper_to_outline_mm": 0.7038264342578286
+          },
+          "2": {
+            "copper_to_foreign": {
+              "clearance_mm": 0.15000000000000568,
+              "other": "J3.5",
+              "kind": "pad"
+            },
+            "drill_to_foreign": {
+              "clearance_mm": 0.32500000000000284,
+              "other": "J3.5",
+              "kind": "pad"
+            },
+            "mask_to_foreign_track_mm": 0.4749999999999943,
+            "nearest_foreign_track_uuid": "33d083b2-6a22-4029-a7f9-15a1c350c983",
+            "copper_to_outline_mm": 0.7038264342578286
+          }
+        }
+      },
+      {
+        "key": "J3.7",
+        "uuid": "06e03c7f-5890-410b-8cd8-b2f017358ea9",
+        "at_mm": [
+          54.444998,
+          75.173998
+        ],
+        "net": "GND",
+        "drill_mm": 0.5,
+        "land_mm": 0.85,
+        "annulus_mm": 0.175,
+        "layers": {
+          "0": {
+            "copper_to_foreign": {
+              "clearance_mm": 0.15000000000000568,
+              "other": "J3.6",
+              "kind": "pad"
+            },
+            "drill_to_foreign": {
+              "clearance_mm": 0.32500000000000284,
+              "other": "J3.6",
+              "kind": "pad"
+            },
+            "mask_to_foreign_track_mm": 0.21182699999999954,
+            "nearest_foreign_track_uuid": "c1227579-013e-4ffa-b72b-869589a0d2ea",
+            "copper_to_outline_mm": 0.7038435634116458
+          },
+          "2": {
+            "copper_to_foreign": {
+              "clearance_mm": 0.15000000000000568,
+              "other": "J3.6",
+              "kind": "pad"
+            },
+            "drill_to_foreign": {
+              "clearance_mm": 0.32500000000000284,
+              "other": "J3.6",
+              "kind": "pad"
+            },
+            "mask_to_foreign_track_mm": 1.2234445759685042,
+            "nearest_foreign_track_uuid": "3f13681e-1aa3-4e96-86e7-d10748261e4d",
+            "copper_to_outline_mm": 0.7038435634116458
+          }
+        }
+      }
+    ],
+    "0.88": [
+      {
+        "key": "J4.1",
+        "uuid": "0650b567-d648-499e-addc-ea01fac7e599",
+        "at_mm": [
+          75.531,
+          69.158
+        ],
+        "net": "GND",
+        "drill_mm": 0.5,
+        "land_mm": 0.88,
+        "annulus_mm": 0.19,
+        "layers": {
+          "0": {
+            "copper_to_foreign": {
+              "clearance_mm": 0.12000000000000455,
+              "other": "J4.2",
+              "kind": "pad"
+            },
+            "drill_to_foreign": {
+              "clearance_mm": 0.3100000000000023,
+              "other": "J4.2",
+              "kind": "pad"
+            },
+            "mask_to_foreign_track_mm": 0.19538774577746557,
+            "nearest_foreign_track_uuid": "cd6977b0-9d88-4014-8ee0-75e9feff1d59",
+            "copper_to_outline_mm": 0.7047349776287096
+          },
+          "2": {
+            "copper_to_foreign": {
+              "clearance_mm": 0.12000000000000455,
+              "other": "J4.2",
+              "kind": "pad"
+            },
+            "drill_to_foreign": {
+              "clearance_mm": 0.3100000000000023,
+              "other": "J4.2",
+              "kind": "pad"
+            },
+            "mask_to_foreign_track_mm": 1.266707697603519,
+            "nearest_foreign_track_uuid": "3f48bc47-4701-495e-8cc9-f1f001459e79",
+            "copper_to_outline_mm": 0.7047349776287096
+          }
+        }
+      },
+      {
+        "key": "J4.2",
+        "uuid": "629d6933-e9b3-4c38-91d2-f812960f1e71",
+        "at_mm": [
+          75.531,
+          70.158
+        ],
+        "net": "VSTOR",
+        "drill_mm": 0.5,
+        "land_mm": 0.88,
+        "annulus_mm": 0.19,
+        "layers": {
+          "0": {
+            "copper_to_foreign": {
+              "clearance_mm": 0.12000000000000455,
+              "other": "J4.1",
+              "kind": "pad"
+            },
+            "drill_to_foreign": {
+              "clearance_mm": 0.3100000000000023,
+              "other": "J4.1",
+              "kind": "pad"
+            },
+            "mask_to_foreign_track_mm": 0.40200000000001523,
+            "nearest_foreign_track_uuid": "f5ebf441-8ad7-4c96-8b96-4b5ad58466c9",
+            "copper_to_outline_mm": 0.7047596436102066
+          },
+          "2": {
+            "copper_to_foreign": {
+              "clearance_mm": 0.12000000000000455,
+              "other": "J4.1",
+              "kind": "pad"
+            },
+            "drill_to_foreign": {
+              "clearance_mm": 0.3100000000000023,
+              "other": "J4.1",
+              "kind": "pad"
+            },
+            "mask_to_foreign_track_mm": 0.35936127075303403,
+            "nearest_foreign_track_uuid": "58ca0d98-4c28-4f9a-990d-c4448da47607",
+            "copper_to_outline_mm": 0.7047596436102066
+          }
+        }
+      },
+      {
+        "key": "J4.3",
+        "uuid": "f9e130ac-ed56-4de6-bfc1-3bdceea6e0d0",
+        "at_mm": [
+          75.531,
+          71.158
+        ],
+        "net": "GND",
+        "drill_mm": 0.5,
+        "land_mm": 0.88,
+        "annulus_mm": 0.19,
+        "layers": {
+          "0": {
+            "copper_to_foreign": {
+              "clearance_mm": 0.12000000000000455,
+              "other": "J4.2",
+              "kind": "pad"
+            },
+            "drill_to_foreign": {
+              "clearance_mm": 0.3100000000000023,
+              "other": "J4.2",
+              "kind": "pad"
+            },
+            "mask_to_foreign_track_mm": 0.40200000000001523,
+            "nearest_foreign_track_uuid": "f5ebf441-8ad7-4c96-8b96-4b5ad58466c9",
+            "copper_to_outline_mm": 0.704776772764024
+          },
+          "2": {
+            "copper_to_foreign": {
+              "clearance_mm": 0.12000000000000455,
+              "other": "J4.2",
+              "kind": "pad"
+            },
+            "drill_to_foreign": {
+              "clearance_mm": 0.3100000000000023,
+              "other": "J4.2",
+              "kind": "pad"
+            },
+            "mask_to_foreign_track_mm": 0.9592408092385645,
+            "nearest_foreign_track_uuid": "4ab51928-3719-4e11-86d6-f1a175016b3d",
+            "copper_to_outline_mm": 0.704776772764024
+          }
+        }
+      },
+      {
+        "key": "J4.4",
+        "uuid": "2e3cbf76-3be2-4c68-b1f2-89d83f085094",
+        "at_mm": [
+          75.531,
+          72.158
+        ],
+        "net": "TX",
+        "drill_mm": 0.5,
+        "land_mm": 0.88,
+        "annulus_mm": 0.19,
+        "layers": {
+          "0": {
+            "copper_to_foreign": {
+              "clearance_mm": 0.12000000000000455,
+              "other": "J4.3",
+              "kind": "pad"
+            },
+            "drill_to_foreign": {
+              "clearance_mm": 0.3100000000000023,
+              "other": "J4.3",
+              "kind": "pad"
+            },
+            "mask_to_foreign_track_mm": 0.4350000000000023,
+            "nearest_foreign_track_uuid": "09aa0d2e-a49b-4f69-b456-77aede8f991c",
+            "copper_to_outline_mm": 0.7047939019178414
+          },
+          "2": {
+            "copper_to_foreign": {
+              "clearance_mm": 0.12000000000000455,
+              "other": "J4.3",
+              "kind": "pad"
+            },
+            "drill_to_foreign": {
+              "clearance_mm": 0.3100000000000023,
+              "other": "J4.3",
+              "kind": "pad"
+            },
+            "mask_to_foreign_track_mm": 0.2651431456552032,
+            "nearest_foreign_track_uuid": "f61043a4-1291-4315-b94d-e8cfe8c45bbd",
+            "copper_to_outline_mm": 0.7047939019178414
+          }
+        }
+      },
+      {
+        "key": "J4.5",
+        "uuid": "a826af09-b85c-4bd8-b045-8d9597e30e2c",
+        "at_mm": [
+          75.531,
+          73.158
+        ],
+        "net": "RX",
+        "drill_mm": 0.5,
+        "land_mm": 0.88,
+        "annulus_mm": 0.19,
+        "layers": {
+          "0": {
+            "copper_to_foreign": {
+              "clearance_mm": 0.12000000000000455,
+              "other": "J4.4",
+              "kind": "pad"
+            },
+            "drill_to_foreign": {
+              "clearance_mm": 0.3100000000000023,
+              "other": "J4.4",
+              "kind": "pad"
+            },
+            "mask_to_foreign_track_mm": 0.41899999999999693,
+            "nearest_foreign_track_uuid": "b7d98b72-0077-4ff3-be7c-ce0c0d464d37",
+            "copper_to_outline_mm": 0.7048110310716588
+          },
+          "2": {
+            "copper_to_foreign": {
+              "clearance_mm": 0.12000000000000455,
+              "other": "J4.4",
+              "kind": "pad"
+            },
+            "drill_to_foreign": {
+              "clearance_mm": 0.3100000000000023,
+              "other": "J4.4",
+              "kind": "pad"
+            },
+            "mask_to_foreign_track_mm": 0.4350000000000023,
+            "nearest_foreign_track_uuid": "8498e772-4a08-4e24-9cb1-7015f654304f",
+            "copper_to_outline_mm": 0.7048110310716588
+          }
+        }
+      },
+      {
+        "key": "J4.6",
+        "uuid": "95f0f8e9-8450-493a-82c2-f13fc3380988",
+        "at_mm": [
+          75.531,
+          74.158
+        ],
+        "net": "BOOT0",
+        "drill_mm": 0.5,
+        "land_mm": 0.88,
+        "annulus_mm": 0.19,
+        "layers": {
+          "0": {
+            "copper_to_foreign": {
+              "clearance_mm": 0.12000000000000455,
+              "other": "J4.5",
+              "kind": "pad"
+            },
+            "drill_to_foreign": {
+              "clearance_mm": 0.3100000000000023,
+              "other": "J4.5",
+              "kind": "pad"
+            },
+            "mask_to_foreign_track_mm": 0.369999000000007,
+            "nearest_foreign_track_uuid": "bece7755-de06-49a9-9ac3-063b05b2dc4c",
+            "copper_to_outline_mm": 0.704828160225476
+          },
+          "2": {
+            "copper_to_foreign": {
+              "clearance_mm": 0.12000000000000455,
+              "other": "J4.5",
+              "kind": "pad"
+            },
+            "drill_to_foreign": {
+              "clearance_mm": 0.3100000000000023,
+              "other": "J4.5",
+              "kind": "pad"
+            },
+            "mask_to_foreign_track_mm": 0.369999000000007,
+            "nearest_foreign_track_uuid": "7be7571d-9b76-4981-8b29-86a7e231b6a6",
+            "copper_to_outline_mm": 0.704828160225476
+          }
+        }
+      },
+      {
+        "key": "J4.7",
+        "uuid": "bee2e1f1-6523-4de0-88bd-204f2713e431",
+        "at_mm": [
+          75.531,
+          75.158
+        ],
+        "net": "+3.3V",
+        "drill_mm": 0.5,
+        "land_mm": 0.88,
+        "annulus_mm": 0.19,
+        "layers": {
+          "0": {
+            "copper_to_foreign": {
+              "clearance_mm": 0.12000000000000455,
+              "other": "J4.6",
+              "kind": "pad"
+            },
+            "drill_to_foreign": {
+              "clearance_mm": 0.3100000000000023,
+              "other": "J4.6",
+              "kind": "pad"
+            },
+            "mask_to_foreign_track_mm": 1.178014983532238,
+            "nearest_foreign_track_uuid": "915cb245-fea9-455a-9d03-1b87e1d72ae2",
+            "copper_to_outline_mm": 0.7048452893792935
+          },
+          "2": {
+            "copper_to_foreign": {
+              "clearance_mm": 0.12000000000000455,
+              "other": "J4.6",
+              "kind": "pad"
+            },
+            "drill_to_foreign": {
+              "clearance_mm": 0.3100000000000023,
+              "other": "J4.6",
+              "kind": "pad"
+            },
+            "mask_to_foreign_track_mm": 0.30753860347274337,
+            "nearest_foreign_track_uuid": "c6221fc0-d983-44cf-91bb-57b72c13f950",
+            "copper_to_outline_mm": 0.7048452893792935
+          }
+        }
+      },
+      {
+        "key": "J3.1",
+        "uuid": "9e1e972e-d661-4acc-91bc-aaa44d6689d4",
+        "at_mm": [
+          54.444998,
+          69.173998
+        ],
+        "net": "PA1",
+        "drill_mm": 0.5,
+        "land_mm": 0.88,
+        "annulus_mm": 0.19,
+        "layers": {
+          "0": {
+            "copper_to_foreign": {
+              "clearance_mm": 0.12000100000000202,
+              "other": "J3.2",
+              "kind": "pad"
+            },
+            "drill_to_foreign": {
+              "clearance_mm": 0.31000099999999975,
+              "other": "J3.2",
+              "kind": "pad"
+            },
+            "mask_to_foreign_track_mm": 0.19682699999999897,
+            "nearest_foreign_track_uuid": "c1227579-013e-4ffa-b72b-869589a0d2ea",
+            "copper_to_outline_mm": 0.6887332516632635
+          },
+          "2": {
+            "copper_to_foreign": {
+              "clearance_mm": 0.12000100000000202,
+              "other": "J3.2",
+              "kind": "pad"
+            },
+            "drill_to_foreign": {
+              "clearance_mm": 0.31000099999999975,
+              "other": "J3.2",
+              "kind": "pad"
+            },
+            "mask_to_foreign_track_mm": 0.2137008478382728,
+            "nearest_foreign_track_uuid": "a379a696-fdc3-4f66-808c-ae939631c307",
+            "copper_to_outline_mm": 0.6887332516632635
+          }
+        }
+      },
+      {
+        "key": "J3.2",
+        "uuid": "ee2785a4-1245-43e1-83e8-fa4973870f0b",
+        "at_mm": [
+          54.444998,
+          70.173999
+        ],
+        "net": "GND",
+        "drill_mm": 0.5,
+        "land_mm": 0.88,
+        "annulus_mm": 0.19,
+        "layers": {
+          "0": {
+            "copper_to_foreign": {
+              "clearance_mm": 0.12000100000000202,
+              "other": "J3.1",
+              "kind": "pad"
+            },
+            "drill_to_foreign": {
+              "clearance_mm": 0.31000099999999975,
+              "other": "J3.1",
+              "kind": "pad"
+            },
+            "mask_to_foreign_track_mm": 0.19682699999999897,
+            "nearest_foreign_track_uuid": "c1227579-013e-4ffa-b72b-869589a0d2ea",
+            "copper_to_outline_mm": 0.6887579176618892
+          },
+          "2": {
+            "copper_to_foreign": {
+              "clearance_mm": 0.12000100000000202,
+              "other": "J3.1",
+              "kind": "pad"
+            },
+            "drill_to_foreign": {
+              "clearance_mm": 0.31000099999999975,
+              "other": "J3.1",
+              "kind": "pad"
+            },
+            "mask_to_foreign_track_mm": 0.26732315586159683,
+            "nearest_foreign_track_uuid": "91541222-310a-48bc-b525-2eec1e0cb20f",
+            "copper_to_outline_mm": 0.6887579176618892
+          }
+        }
+      },
+      {
+        "key": "J3.3",
+        "uuid": "78db17b2-2f62-4a45-adfd-0e17aa75a498",
+        "at_mm": [
+          54.444999,
+          71.174001
+        ],
+        "net": "PA9",
+        "drill_mm": 0.5,
+        "land_mm": 0.88,
+        "annulus_mm": 0.19,
+        "layers": {
+          "0": {
+            "copper_to_foreign": {
+              "clearance_mm": 0.11999900000417378,
+              "other": "J3.4",
+              "kind": "pad"
+            },
+            "drill_to_foreign": {
+              "clearance_mm": 0.30999900000161773,
+              "other": "J3.4",
+              "kind": "pad"
+            },
+            "mask_to_foreign_track_mm": 0.19682800000000356,
+            "nearest_foreign_track_uuid": "c1227579-013e-4ffa-b72b-869589a0d2ea",
+            "copper_to_outline_mm": 0.6887760468499692
+          },
+          "2": {
+            "copper_to_foreign": {
+              "clearance_mm": 0.11999900000417378,
+              "other": "J3.4",
+              "kind": "pad"
+            },
+            "drill_to_foreign": {
+              "clearance_mm": 0.30999900000161773,
+              "other": "J3.4",
+              "kind": "pad"
+            },
+            "mask_to_foreign_track_mm": 0.43500200000001144,
+            "nearest_foreign_track_uuid": "66c1da99-2bef-4aeb-9576-d648045d9212",
+            "copper_to_outline_mm": 0.6887760468499692
+          }
+        }
+      },
+      {
+        "key": "J3.4",
+        "uuid": "1a982502-40db-4b68-bfea-018025c9e930",
+        "at_mm": [
+          54.445,
+          72.174
+        ],
+        "net": "GND",
+        "drill_mm": 0.5,
+        "land_mm": 0.88,
+        "annulus_mm": 0.19,
+        "layers": {
+          "0": {
+            "copper_to_foreign": {
+              "clearance_mm": 0.11999900000417378,
+              "other": "J3.3",
+              "kind": "pad"
+            },
+            "drill_to_foreign": {
+              "clearance_mm": 0.30999900000161773,
+              "other": "J3.3",
+              "kind": "pad"
+            },
+            "mask_to_foreign_track_mm": 0.19682900000000103,
+            "nearest_foreign_track_uuid": "c1227579-013e-4ffa-b72b-869589a0d2ea",
+            "copper_to_outline_mm": 0.6887941759866544
+          },
+          "2": {
+            "copper_to_foreign": {
+              "clearance_mm": 0.11999900000417378,
+              "other": "J3.3",
+              "kind": "pad"
+            },
+            "drill_to_foreign": {
+              "clearance_mm": 0.30999900000161773,
+              "other": "J3.3",
+              "kind": "pad"
+            },
+            "mask_to_foreign_track_mm": 0.3810000000000002,
+            "nearest_foreign_track_uuid": "57afa99e-0f6b-491c-a967-b4ab7afd6be7",
+            "copper_to_outline_mm": 0.6887941759866544
+          }
+        }
+      },
+      {
+        "key": "J3.5",
+        "uuid": "18b55959-0e81-4b52-8da7-0494f5bc61f2",
+        "at_mm": [
+          54.444998,
+          73.173998
+        ],
+        "net": "GND",
+        "drill_mm": 0.5,
+        "land_mm": 0.88,
+        "annulus_mm": 0.19,
+        "layers": {
+          "0": {
+            "copper_to_foreign": {
+              "clearance_mm": 0.12000000000000455,
+              "other": "J3.6",
+              "kind": "pad"
+            },
+            "drill_to_foreign": {
+              "clearance_mm": 0.3100000000000023,
+              "other": "J3.6",
+              "kind": "pad"
+            },
+            "mask_to_foreign_track_mm": 0.19682699999999897,
+            "nearest_foreign_track_uuid": "c1227579-013e-4ffa-b72b-869589a0d2ea",
+            "copper_to_outline_mm": 0.6888093051062114
+          },
+          "2": {
+            "copper_to_foreign": {
+              "clearance_mm": 0.12000000000000455,
+              "other": "J3.6",
+              "kind": "pad"
+            },
+            "drill_to_foreign": {
+              "clearance_mm": 0.3100000000000023,
+              "other": "J3.6",
+              "kind": "pad"
+            },
+            "mask_to_foreign_track_mm": 0.5637951353529819,
+            "nearest_foreign_track_uuid": "57afa99e-0f6b-491c-a967-b4ab7afd6be7",
+            "copper_to_outline_mm": 0.6888093051062114
+          }
+        }
+      },
+      {
+        "key": "J3.6",
+        "uuid": "7ae1aaaa-f303-4441-9163-758b71841e0e",
+        "at_mm": [
+          54.444998,
+          74.173998
+        ],
+        "net": "PB2",
+        "drill_mm": 0.5,
+        "land_mm": 0.88,
+        "annulus_mm": 0.19,
+        "layers": {
+          "0": {
+            "copper_to_foreign": {
+              "clearance_mm": 0.12000000000000455,
+              "other": "J3.5",
+              "kind": "pad"
+            },
+            "drill_to_foreign": {
+              "clearance_mm": 0.3100000000000023,
+              "other": "J3.5",
+              "kind": "pad"
+            },
+            "mask_to_foreign_track_mm": 0.19682699999999897,
+            "nearest_foreign_track_uuid": "c1227579-013e-4ffa-b72b-869589a0d2ea",
+            "copper_to_outline_mm": 0.6888264342600285
+          },
+          "2": {
+            "copper_to_foreign": {
+              "clearance_mm": 0.12000000000000455,
+              "other": "J3.5",
+              "kind": "pad"
+            },
+            "drill_to_foreign": {
+              "clearance_mm": 0.3100000000000023,
+              "other": "J3.5",
+              "kind": "pad"
+            },
+            "mask_to_foreign_track_mm": 0.45999999999999375,
+            "nearest_foreign_track_uuid": "33d083b2-6a22-4029-a7f9-15a1c350c983",
+            "copper_to_outline_mm": 0.6888264342600285
+          }
+        }
+      },
+      {
+        "key": "J3.7",
+        "uuid": "06e03c7f-5890-410b-8cd8-b2f017358ea9",
+        "at_mm": [
+          54.444998,
+          75.173998
+        ],
+        "net": "GND",
+        "drill_mm": 0.5,
+        "land_mm": 0.88,
+        "annulus_mm": 0.19,
+        "layers": {
+          "0": {
+            "copper_to_foreign": {
+              "clearance_mm": 0.12000000000000455,
+              "other": "J3.6",
+              "kind": "pad"
+            },
+            "drill_to_foreign": {
+              "clearance_mm": 0.3100000000000023,
+              "other": "J3.6",
+              "kind": "pad"
+            },
+            "mask_to_foreign_track_mm": 0.19682699999999897,
+            "nearest_foreign_track_uuid": "c1227579-013e-4ffa-b72b-869589a0d2ea",
+            "copper_to_outline_mm": 0.6888435634138457
+          },
+          "2": {
+            "copper_to_foreign": {
+              "clearance_mm": 0.12000000000000455,
+              "other": "J3.6",
+              "kind": "pad"
+            },
+            "drill_to_foreign": {
+              "clearance_mm": 0.3100000000000023,
+              "other": "J3.6",
+              "kind": "pad"
+            },
+            "mask_to_foreign_track_mm": 1.208444593616726,
+            "nearest_foreign_track_uuid": "3f13681e-1aa3-4e96-86e7-d10748261e4d",
+            "copper_to_outline_mm": 0.6888435634138457
+          }
+        }
+      }
+    ],
+    "0.9": [
+      {
+        "key": "J4.1",
+        "uuid": "0650b567-d648-499e-addc-ea01fac7e599",
+        "at_mm": [
+          75.531,
+          69.158
+        ],
+        "net": "GND",
+        "drill_mm": 0.5,
+        "land_mm": 0.9,
+        "annulus_mm": 0.2,
+        "layers": {
+          "0": {
+            "copper_to_foreign": {
+              "clearance_mm": 0.09999999999999432,
+              "other": "J4.2",
+              "kind": "pad"
+            },
+            "drill_to_foreign": {
+              "clearance_mm": 0.29999999999999716,
+              "other": "J4.2",
+              "kind": "pad"
+            },
+            "mask_to_foreign_track_mm": 0.18124561015372742,
+            "nearest_foreign_track_uuid": "cd6977b0-9d88-4014-8ee0-75e9feff1d59",
+            "copper_to_outline_mm": 0.6947348063386334
+          },
+          "2": {
+            "copper_to_foreign": {
+              "clearance_mm": 0.09999999999999432,
+              "other": "J4.2",
+              "kind": "pad"
+            },
+            "drill_to_foreign": {
+              "clearance_mm": 0.29999999999999716,
+              "other": "J4.2",
+              "kind": "pad"
+            },
+            "mask_to_foreign_track_mm": 1.2532300312265066,
+            "nearest_foreign_track_uuid": "3f48bc47-4701-495e-8cc9-f1f001459e79",
+            "copper_to_outline_mm": 0.6947348063386334
+          }
+        }
+      },
+      {
+        "key": "J4.2",
+        "uuid": "629d6933-e9b3-4c38-91d2-f812960f1e71",
+        "at_mm": [
+          75.531,
+          70.158
+        ],
+        "net": "VSTOR",
+        "drill_mm": 0.5,
+        "land_mm": 0.9,
+        "annulus_mm": 0.2,
+        "layers": {
+          "0": {
+            "copper_to_foreign": {
+              "clearance_mm": 0.09999999999999432,
+              "other": "J4.1",
+              "kind": "pad"
+            },
+            "drill_to_foreign": {
+              "clearance_mm": 0.29999999999999716,
+              "other": "J4.1",
+              "kind": "pad"
+            },
+            "mask_to_foreign_track_mm": 0.39200000000001006,
+            "nearest_foreign_track_uuid": "f5ebf441-8ad7-4c96-8b96-4b5ad58466c9",
+            "copper_to_outline_mm": 0.6947596436116686
+          },
+          "2": {
+            "copper_to_foreign": {
+              "clearance_mm": 0.09999999999999432,
+              "other": "J4.1",
+              "kind": "pad"
+            },
+            "drill_to_foreign": {
+              "clearance_mm": 0.29999999999999716,
+              "other": "J4.1",
+              "kind": "pad"
+            },
+            "mask_to_foreign_track_mm": 0.34936128251851956,
+            "nearest_foreign_track_uuid": "58ca0d98-4c28-4f9a-990d-c4448da47607",
+            "copper_to_outline_mm": 0.6947596436116686
+          }
+        }
+      },
+      {
+        "key": "J4.3",
+        "uuid": "f9e130ac-ed56-4de6-bfc1-3bdceea6e0d0",
+        "at_mm": [
+          75.531,
+          71.158
+        ],
+        "net": "GND",
+        "drill_mm": 0.5,
+        "land_mm": 0.9,
+        "annulus_mm": 0.2,
+        "layers": {
+          "0": {
+            "copper_to_foreign": {
+              "clearance_mm": 0.09999999999999432,
+              "other": "J4.2",
+              "kind": "pad"
+            },
+            "drill_to_foreign": {
+              "clearance_mm": 0.29999999999999716,
+              "other": "J4.2",
+              "kind": "pad"
+            },
+            "mask_to_foreign_track_mm": 0.39200000000001006,
+            "nearest_foreign_track_uuid": "f5ebf441-8ad7-4c96-8b96-4b5ad58466c9",
+            "copper_to_outline_mm": 0.6947767727654859
+          },
+          "2": {
+            "copper_to_foreign": {
+              "clearance_mm": 0.09999999999999432,
+              "other": "J4.2",
+              "kind": "pad"
+            },
+            "drill_to_foreign": {
+              "clearance_mm": 0.29999999999999716,
+              "other": "J4.2",
+              "kind": "pad"
+            },
+            "mask_to_foreign_track_mm": 0.9492408092386057,
+            "nearest_foreign_track_uuid": "4ab51928-3719-4e11-86d6-f1a175016b3d",
+            "copper_to_outline_mm": 0.6947767727654859
+          }
+        }
+      },
+      {
+        "key": "J4.4",
+        "uuid": "2e3cbf76-3be2-4c68-b1f2-89d83f085094",
+        "at_mm": [
+          75.531,
+          72.158
+        ],
+        "net": "TX",
+        "drill_mm": 0.5,
+        "land_mm": 0.9,
+        "annulus_mm": 0.2,
+        "layers": {
+          "0": {
+            "copper_to_foreign": {
+              "clearance_mm": 0.09999999999999432,
+              "other": "J4.3",
+              "kind": "pad"
+            },
+            "drill_to_foreign": {
+              "clearance_mm": 0.29999999999999716,
+              "other": "J4.3",
+              "kind": "pad"
+            },
+            "mask_to_foreign_track_mm": 0.4249999999999971,
+            "nearest_foreign_track_uuid": "09aa0d2e-a49b-4f69-b456-77aede8f991c",
+            "copper_to_outline_mm": 0.6947939019193033
+          },
+          "2": {
+            "copper_to_foreign": {
+              "clearance_mm": 0.09999999999999432,
+              "other": "J4.3",
+              "kind": "pad"
+            },
+            "drill_to_foreign": {
+              "clearance_mm": 0.29999999999999716,
+              "other": "J4.3",
+              "kind": "pad"
+            },
+            "mask_to_foreign_track_mm": 0.2551431456552047,
+            "nearest_foreign_track_uuid": "f61043a4-1291-4315-b94d-e8cfe8c45bbd",
+            "copper_to_outline_mm": 0.6947939019193033
+          }
+        }
+      },
+      {
+        "key": "J4.5",
+        "uuid": "a826af09-b85c-4bd8-b045-8d9597e30e2c",
+        "at_mm": [
+          75.531,
+          73.158
+        ],
+        "net": "RX",
+        "drill_mm": 0.5,
+        "land_mm": 0.9,
+        "annulus_mm": 0.2,
+        "layers": {
+          "0": {
+            "copper_to_foreign": {
+              "clearance_mm": 0.09999999999999432,
+              "other": "J4.4",
+              "kind": "pad"
+            },
+            "drill_to_foreign": {
+              "clearance_mm": 0.29999999999999716,
+              "other": "J4.4",
+              "kind": "pad"
+            },
+            "mask_to_foreign_track_mm": 0.40899999999999176,
+            "nearest_foreign_track_uuid": "b7d98b72-0077-4ff3-be7c-ce0c0d464d37",
+            "copper_to_outline_mm": 0.6948110310731207
+          },
+          "2": {
+            "copper_to_foreign": {
+              "clearance_mm": 0.09999999999999432,
+              "other": "J4.4",
+              "kind": "pad"
+            },
+            "drill_to_foreign": {
+              "clearance_mm": 0.29999999999999716,
+              "other": "J4.4",
+              "kind": "pad"
+            },
+            "mask_to_foreign_track_mm": 0.42499999999999716,
+            "nearest_foreign_track_uuid": "8498e772-4a08-4e24-9cb1-7015f654304f",
+            "copper_to_outline_mm": 0.6948110310731207
+          }
+        }
+      },
+      {
+        "key": "J4.6",
+        "uuid": "95f0f8e9-8450-493a-82c2-f13fc3380988",
+        "at_mm": [
+          75.531,
+          74.158
+        ],
+        "net": "BOOT0",
+        "drill_mm": 0.5,
+        "land_mm": 0.9,
+        "annulus_mm": 0.2,
+        "layers": {
+          "0": {
+            "copper_to_foreign": {
+              "clearance_mm": 0.09999999999999432,
+              "other": "J4.5",
+              "kind": "pad"
+            },
+            "drill_to_foreign": {
+              "clearance_mm": 0.29999999999999716,
+              "other": "J4.5",
+              "kind": "pad"
+            },
+            "mask_to_foreign_track_mm": 0.35999900000000196,
+            "nearest_foreign_track_uuid": "bece7755-de06-49a9-9ac3-063b05b2dc4c",
+            "copper_to_outline_mm": 0.694828160226938
+          },
+          "2": {
+            "copper_to_foreign": {
+              "clearance_mm": 0.09999999999999432,
+              "other": "J4.5",
+              "kind": "pad"
+            },
+            "drill_to_foreign": {
+              "clearance_mm": 0.29999999999999716,
+              "other": "J4.5",
+              "kind": "pad"
+            },
+            "mask_to_foreign_track_mm": 0.35999900000000196,
+            "nearest_foreign_track_uuid": "7be7571d-9b76-4981-8b29-86a7e231b6a6",
+            "copper_to_outline_mm": 0.694828160226938
+          }
+        }
+      },
+      {
+        "key": "J4.7",
+        "uuid": "bee2e1f1-6523-4de0-88bd-204f2713e431",
+        "at_mm": [
+          75.531,
+          75.158
+        ],
+        "net": "+3.3V",
+        "drill_mm": 0.5,
+        "land_mm": 0.9,
+        "annulus_mm": 0.2,
+        "layers": {
+          "0": {
+            "copper_to_foreign": {
+              "clearance_mm": 0.09999999999999432,
+              "other": "J4.6",
+              "kind": "pad"
+            },
+            "drill_to_foreign": {
+              "clearance_mm": 0.29999999999999716,
+              "other": "J4.6",
+              "kind": "pad"
+            },
+            "mask_to_foreign_track_mm": 1.1680149835374396,
+            "nearest_foreign_track_uuid": "915cb245-fea9-455a-9d03-1b87e1d72ae2",
+            "copper_to_outline_mm": 0.6948452893807554
+          },
+          "2": {
+            "copper_to_foreign": {
+              "clearance_mm": 0.09999999999999432,
+              "other": "J4.6",
+              "kind": "pad"
+            },
+            "drill_to_foreign": {
+              "clearance_mm": 0.29999999999999716,
+              "other": "J4.6",
+              "kind": "pad"
+            },
+            "mask_to_foreign_track_mm": 0.29753860545265837,
+            "nearest_foreign_track_uuid": "c6221fc0-d983-44cf-91bb-57b72c13f950",
+            "copper_to_outline_mm": 0.6948452893807554
+          }
+        }
+      },
+      {
+        "key": "J3.1",
+        "uuid": "9e1e972e-d661-4acc-91bc-aaa44d6689d4",
+        "at_mm": [
+          54.444998,
+          69.173998
+        ],
+        "net": "PA1",
+        "drill_mm": 0.5,
+        "land_mm": 0.9,
+        "annulus_mm": 0.2,
+        "layers": {
+          "0": {
+            "copper_to_foreign": {
+              "clearance_mm": 0.10000099999999179,
+              "other": "J3.2",
+              "kind": "pad"
+            },
+            "drill_to_foreign": {
+              "clearance_mm": 0.30000099999999463,
+              "other": "J3.2",
+              "kind": "pad"
+            },
+            "mask_to_foreign_track_mm": 0.18682699999999386,
+            "nearest_foreign_track_uuid": "c1227579-013e-4ffa-b72b-869589a0d2ea",
+            "copper_to_outline_mm": 0.6787330803731872
+          },
+          "2": {
+            "copper_to_foreign": {
+              "clearance_mm": 0.10000099999999179,
+              "other": "J3.2",
+              "kind": "pad"
+            },
+            "drill_to_foreign": {
+              "clearance_mm": 0.30000099999999463,
+              "other": "J3.2",
+              "kind": "pad"
+            },
+            "mask_to_foreign_track_mm": 0.19955871221454044,
+            "nearest_foreign_track_uuid": "a379a696-fdc3-4f66-808c-ae939631c307",
+            "copper_to_outline_mm": 0.6787330803731872
+          }
+        }
+      },
+      {
+        "key": "J3.2",
+        "uuid": "ee2785a4-1245-43e1-83e8-fa4973870f0b",
+        "at_mm": [
+          54.444998,
+          70.173999
+        ],
+        "net": "GND",
+        "drill_mm": 0.5,
+        "land_mm": 0.9,
+        "annulus_mm": 0.2,
+        "layers": {
+          "0": {
+            "copper_to_foreign": {
+              "clearance_mm": 0.10000099999999179,
+              "other": "J3.1",
+              "kind": "pad"
+            },
+            "drill_to_foreign": {
+              "clearance_mm": 0.30000099999999463,
+              "other": "J3.1",
+              "kind": "pad"
+            },
+            "mask_to_foreign_track_mm": 0.18682699999999386,
+            "nearest_foreign_track_uuid": "c1227579-013e-4ffa-b72b-869589a0d2ea",
+            "copper_to_outline_mm": 0.6787579176633513
+          },
+          "2": {
+            "copper_to_foreign": {
+              "clearance_mm": 0.10000099999999179,
+              "other": "J3.1",
+              "kind": "pad"
+            },
+            "drill_to_foreign": {
+              "clearance_mm": 0.30000099999999463,
+              "other": "J3.1",
+              "kind": "pad"
+            },
+            "mask_to_foreign_track_mm": 0.25732315586159826,
+            "nearest_foreign_track_uuid": "91541222-310a-48bc-b525-2eec1e0cb20f",
+            "copper_to_outline_mm": 0.6787579176633513
+          }
+        }
+      },
+      {
+        "key": "J3.3",
+        "uuid": "78db17b2-2f62-4a45-adfd-0e17aa75a498",
+        "at_mm": [
+          54.444999,
+          71.174001
+        ],
+        "net": "PA9",
+        "drill_mm": 0.5,
+        "land_mm": 0.9,
+        "annulus_mm": 0.2,
+        "layers": {
+          "0": {
+            "copper_to_foreign": {
+              "clearance_mm": 0.0999990000049969,
+              "other": "J3.4",
+              "kind": "pad"
+            },
+            "drill_to_foreign": {
+              "clearance_mm": 0.29999900000166635,
+              "other": "J3.4",
+              "kind": "pad"
+            },
+            "mask_to_foreign_track_mm": 0.18682799999999847,
+            "nearest_foreign_track_uuid": "c1227579-013e-4ffa-b72b-869589a0d2ea",
+            "copper_to_outline_mm": 0.6787760468514311
+          },
+          "2": {
+            "copper_to_foreign": {
+              "clearance_mm": 0.0999990000049969,
+              "other": "J3.4",
+              "kind": "pad"
+            },
+            "drill_to_foreign": {
+              "clearance_mm": 0.29999900000166635,
+              "other": "J3.4",
+              "kind": "pad"
+            },
+            "mask_to_foreign_track_mm": 0.42500200000000626,
+            "nearest_foreign_track_uuid": "66c1da99-2bef-4aeb-9576-d648045d9212",
+            "copper_to_outline_mm": 0.6787760468514311
+          }
+        }
+      },
+      {
+        "key": "J3.4",
+        "uuid": "1a982502-40db-4b68-bfea-018025c9e930",
+        "at_mm": [
+          54.445,
+          72.174
+        ],
+        "net": "GND",
+        "drill_mm": 0.5,
+        "land_mm": 0.9,
+        "annulus_mm": 0.2,
+        "layers": {
+          "0": {
+            "copper_to_foreign": {
+              "clearance_mm": 0.0999990000049969,
+              "other": "J3.3",
+              "kind": "pad"
+            },
+            "drill_to_foreign": {
+              "clearance_mm": 0.29999900000166635,
+              "other": "J3.3",
+              "kind": "pad"
+            },
+            "mask_to_foreign_track_mm": 0.18682899999999594,
+            "nearest_foreign_track_uuid": "c1227579-013e-4ffa-b72b-869589a0d2ea",
+            "copper_to_outline_mm": 0.6787941759881163
+          },
+          "2": {
+            "copper_to_foreign": {
+              "clearance_mm": 0.0999990000049969,
+              "other": "J3.3",
+              "kind": "pad"
+            },
+            "drill_to_foreign": {
+              "clearance_mm": 0.29999900000166635,
+              "other": "J3.3",
+              "kind": "pad"
+            },
+            "mask_to_foreign_track_mm": 0.3709999999999951,
+            "nearest_foreign_track_uuid": "57afa99e-0f6b-491c-a967-b4ab7afd6be7",
+            "copper_to_outline_mm": 0.6787941759881163
+          }
+        }
+      },
+      {
+        "key": "J3.5",
+        "uuid": "18b55959-0e81-4b52-8da7-0494f5bc61f2",
+        "at_mm": [
+          54.444998,
+          73.173998
+        ],
+        "net": "GND",
+        "drill_mm": 0.5,
+        "land_mm": 0.9,
+        "annulus_mm": 0.2,
+        "layers": {
+          "0": {
+            "copper_to_foreign": {
+              "clearance_mm": 0.09999999999999432,
+              "other": "J3.6",
+              "kind": "pad"
+            },
+            "drill_to_foreign": {
+              "clearance_mm": 0.29999999999999716,
+              "other": "J3.6",
+              "kind": "pad"
+            },
+            "mask_to_foreign_track_mm": 0.18682699999999386,
+            "nearest_foreign_track_uuid": "c1227579-013e-4ffa-b72b-869589a0d2ea",
+            "copper_to_outline_mm": 0.6788093051076735
+          },
+          "2": {
+            "copper_to_foreign": {
+              "clearance_mm": 0.09999999999999432,
+              "other": "J3.6",
+              "kind": "pad"
+            },
+            "drill_to_foreign": {
+              "clearance_mm": 0.29999999999999716,
+              "other": "J3.6",
+              "kind": "pad"
+            },
+            "mask_to_foreign_track_mm": 0.5537951471184676,
+            "nearest_foreign_track_uuid": "57afa99e-0f6b-491c-a967-b4ab7afd6be7",
+            "copper_to_outline_mm": 0.6788093051076735
+          }
+        }
+      },
+      {
+        "key": "J3.6",
+        "uuid": "7ae1aaaa-f303-4441-9163-758b71841e0e",
+        "at_mm": [
+          54.444998,
+          74.173998
+        ],
+        "net": "PB2",
+        "drill_mm": 0.5,
+        "land_mm": 0.9,
+        "annulus_mm": 0.2,
+        "layers": {
+          "0": {
+            "copper_to_foreign": {
+              "clearance_mm": 0.09999999999999432,
+              "other": "J3.5",
+              "kind": "pad"
+            },
+            "drill_to_foreign": {
+              "clearance_mm": 0.29999999999999716,
+              "other": "J3.5",
+              "kind": "pad"
+            },
+            "mask_to_foreign_track_mm": 0.18682699999999386,
+            "nearest_foreign_track_uuid": "c1227579-013e-4ffa-b72b-869589a0d2ea",
+            "copper_to_outline_mm": 0.6788264342614906
+          },
+          "2": {
+            "copper_to_foreign": {
+              "clearance_mm": 0.09999999999999432,
+              "other": "J3.5",
+              "kind": "pad"
+            },
+            "drill_to_foreign": {
+              "clearance_mm": 0.29999999999999716,
+              "other": "J3.5",
+              "kind": "pad"
+            },
+            "mask_to_foreign_track_mm": 0.44999999999998863,
+            "nearest_foreign_track_uuid": "33d083b2-6a22-4029-a7f9-15a1c350c983",
+            "copper_to_outline_mm": 0.6788264342614906
+          }
+        }
+      },
+      {
+        "key": "J3.7",
+        "uuid": "06e03c7f-5890-410b-8cd8-b2f017358ea9",
+        "at_mm": [
+          54.444998,
+          75.173998
+        ],
+        "net": "GND",
+        "drill_mm": 0.5,
+        "land_mm": 0.9,
+        "annulus_mm": 0.2,
+        "layers": {
+          "0": {
+            "copper_to_foreign": {
+              "clearance_mm": 0.09999999999999432,
+              "other": "J3.6",
+              "kind": "pad"
+            },
+            "drill_to_foreign": {
+              "clearance_mm": 0.29999999999999716,
+              "other": "J3.6",
+              "kind": "pad"
+            },
+            "mask_to_foreign_track_mm": 0.18682699999999386,
+            "nearest_foreign_track_uuid": "c1227579-013e-4ffa-b72b-869589a0d2ea",
+            "copper_to_outline_mm": 0.6788435634153077
+          },
+          "2": {
+            "copper_to_foreign": {
+              "clearance_mm": 0.09999999999999432,
+              "other": "J3.6",
+              "kind": "pad"
+            },
+            "drill_to_foreign": {
+              "clearance_mm": 0.29999999999999716,
+              "other": "J3.6",
+              "kind": "pad"
+            },
+            "mask_to_foreign_track_mm": 1.1984446053822078,
+            "nearest_foreign_track_uuid": "3f13681e-1aa3-4e96-86e7-d10748261e4d",
+            "copper_to_outline_mm": 0.6788435634153077
+          }
+        }
+      }
+    ],
+    "1.0": [
+      {
+        "key": "J4.1",
+        "uuid": "0650b567-d648-499e-addc-ea01fac7e599",
+        "at_mm": [
+          75.531,
+          69.158
+        ],
+        "net": "GND",
+        "drill_mm": 0.5,
+        "land_mm": 1.0,
+        "annulus_mm": 0.25,
+        "layers": {
+          "0": {
+            "copper_to_foreign": {
+              "clearance_mm": 0.0,
+              "other": "J4.2",
+              "kind": "pad"
+            },
+            "drill_to_foreign": {
+              "clearance_mm": 0.25,
+              "other": "J4.2",
+              "kind": "pad"
+            },
+            "mask_to_foreign_track_mm": 0.1105349320350767,
+            "nearest_foreign_track_uuid": "cd6977b0-9d88-4014-8ee0-75e9feff1d59",
+            "copper_to_outline_mm": 0.6447339498882806
+          },
+          "2": {
+            "copper_to_foreign": {
+              "clearance_mm": 0.0,
+              "other": "J4.2",
+              "kind": "pad"
+            },
+            "drill_to_foreign": {
+              "clearance_mm": 0.25,
+              "other": "J4.2",
+              "kind": "pad"
+            },
+            "mask_to_foreign_track_mm": 1.1860738219723088,
+            "nearest_foreign_track_uuid": "3f48bc47-4701-495e-8cc9-f1f001459e79",
+            "copper_to_outline_mm": 0.6447339498882806
+          }
+        }
+      },
+      {
+        "key": "J4.2",
+        "uuid": "629d6933-e9b3-4c38-91d2-f812960f1e71",
+        "at_mm": [
+          75.531,
+          70.158
+        ],
+        "net": "VSTOR",
+        "drill_mm": 0.5,
+        "land_mm": 1.0,
+        "annulus_mm": 0.25,
+        "layers": {
+          "0": {
+            "copper_to_foreign": {
+              "clearance_mm": 0.0,
+              "other": "J4.1",
+              "kind": "pad"
+            },
+            "drill_to_foreign": {
+              "clearance_mm": 0.25,
+              "other": "J4.1",
+              "kind": "pad"
+            },
+            "mask_to_foreign_track_mm": 0.34200000000001296,
+            "nearest_foreign_track_uuid": "f5ebf441-8ad7-4c96-8b96-4b5ad58466c9",
+            "copper_to_outline_mm": 0.6447596436190066
+          },
+          "2": {
+            "copper_to_foreign": {
+              "clearance_mm": 0.0,
+              "other": "J4.1",
+              "kind": "pad"
+            },
+            "drill_to_foreign": {
+              "clearance_mm": 0.25,
+              "other": "J4.1",
+              "kind": "pad"
+            },
+            "mask_to_foreign_track_mm": 0.2993613413459357,
+            "nearest_foreign_track_uuid": "58ca0d98-4c28-4f9a-990d-c4448da47607",
+            "copper_to_outline_mm": 0.6447596436190066
+          }
+        }
+      },
+      {
+        "key": "J4.3",
+        "uuid": "f9e130ac-ed56-4de6-bfc1-3bdceea6e0d0",
+        "at_mm": [
+          75.531,
+          71.158
+        ],
+        "net": "GND",
+        "drill_mm": 0.5,
+        "land_mm": 1.0,
+        "annulus_mm": 0.25,
+        "layers": {
+          "0": {
+            "copper_to_foreign": {
+              "clearance_mm": 0.0,
+              "other": "J4.2",
+              "kind": "pad"
+            },
+            "drill_to_foreign": {
+              "clearance_mm": 0.25,
+              "other": "J4.2",
+              "kind": "pad"
+            },
+            "mask_to_foreign_track_mm": 0.34200000000001296,
+            "nearest_foreign_track_uuid": "f5ebf441-8ad7-4c96-8b96-4b5ad58466c9",
+            "copper_to_outline_mm": 0.644776772772824
+          },
+          "2": {
+            "copper_to_foreign": {
+              "clearance_mm": 0.0,
+              "other": "J4.2",
+              "kind": "pad"
+            },
+            "drill_to_foreign": {
+              "clearance_mm": 0.25,
+              "other": "J4.2",
+              "kind": "pad"
+            },
+            "mask_to_foreign_track_mm": 0.8992408092388615,
+            "nearest_foreign_track_uuid": "4ab51928-3719-4e11-86d6-f1a175016b3d",
+            "copper_to_outline_mm": 0.644776772772824
+          }
+        }
+      },
+      {
+        "key": "J4.4",
+        "uuid": "2e3cbf76-3be2-4c68-b1f2-89d83f085094",
+        "at_mm": [
+          75.531,
+          72.158
+        ],
+        "net": "TX",
+        "drill_mm": 0.5,
+        "land_mm": 1.0,
+        "annulus_mm": 0.25,
+        "layers": {
+          "0": {
+            "copper_to_foreign": {
+              "clearance_mm": 0.0,
+              "other": "J4.3",
+              "kind": "pad"
+            },
+            "drill_to_foreign": {
+              "clearance_mm": 0.25,
+              "other": "J4.3",
+              "kind": "pad"
+            },
+            "mask_to_foreign_track_mm": 0.37499999999999994,
+            "nearest_foreign_track_uuid": "09aa0d2e-a49b-4f69-b456-77aede8f991c",
+            "copper_to_outline_mm": 0.6447939019266413
+          },
+          "2": {
+            "copper_to_foreign": {
+              "clearance_mm": 0.0,
+              "other": "J4.3",
+              "kind": "pad"
+            },
+            "drill_to_foreign": {
+              "clearance_mm": 0.25,
+              "other": "J4.3",
+              "kind": "pad"
+            },
+            "mask_to_foreign_track_mm": 0.2051431456551922,
+            "nearest_foreign_track_uuid": "f61043a4-1291-4315-b94d-e8cfe8c45bbd",
+            "copper_to_outline_mm": 0.6447939019266413
+          }
+        }
+      },
+      {
+        "key": "J4.5",
+        "uuid": "a826af09-b85c-4bd8-b045-8d9597e30e2c",
+        "at_mm": [
+          75.531,
+          73.158
+        ],
+        "net": "RX",
+        "drill_mm": 0.5,
+        "land_mm": 1.0,
+        "annulus_mm": 0.25,
+        "layers": {
+          "0": {
+            "copper_to_foreign": {
+              "clearance_mm": 0.0,
+              "other": "J4.4",
+              "kind": "pad"
+            },
+            "drill_to_foreign": {
+              "clearance_mm": 0.25,
+              "other": "J4.4",
+              "kind": "pad"
+            },
+            "mask_to_foreign_track_mm": 0.3589999999999946,
+            "nearest_foreign_track_uuid": "b7d98b72-0077-4ff3-be7c-ce0c0d464d37",
+            "copper_to_outline_mm": 0.6448110310804588
+          },
+          "2": {
+            "copper_to_foreign": {
+              "clearance_mm": 0.0,
+              "other": "J4.4",
+              "kind": "pad"
+            },
+            "drill_to_foreign": {
+              "clearance_mm": 0.25,
+              "other": "J4.4",
+              "kind": "pad"
+            },
+            "mask_to_foreign_track_mm": 0.37499999999999994,
+            "nearest_foreign_track_uuid": "8498e772-4a08-4e24-9cb1-7015f654304f",
+            "copper_to_outline_mm": 0.6448110310804588
+          }
+        }
+      },
+      {
+        "key": "J4.6",
+        "uuid": "95f0f8e9-8450-493a-82c2-f13fc3380988",
+        "at_mm": [
+          75.531,
+          74.158
+        ],
+        "net": "BOOT0",
+        "drill_mm": 0.5,
+        "land_mm": 1.0,
+        "annulus_mm": 0.25,
+        "layers": {
+          "0": {
+            "copper_to_foreign": {
+              "clearance_mm": 0.0,
+              "other": "J4.5",
+              "kind": "pad"
+            },
+            "drill_to_foreign": {
+              "clearance_mm": 0.25,
+              "other": "J4.5",
+              "kind": "pad"
+            },
+            "mask_to_foreign_track_mm": 0.30999900000000474,
+            "nearest_foreign_track_uuid": "bece7755-de06-49a9-9ac3-063b05b2dc4c",
+            "copper_to_outline_mm": 0.6448281602342761
+          },
+          "2": {
+            "copper_to_foreign": {
+              "clearance_mm": 0.0,
+              "other": "J4.5",
+              "kind": "pad"
+            },
+            "drill_to_foreign": {
+              "clearance_mm": 0.25,
+              "other": "J4.5",
+              "kind": "pad"
+            },
+            "mask_to_foreign_track_mm": 0.30999900000000474,
+            "nearest_foreign_track_uuid": "7be7571d-9b76-4981-8b29-86a7e231b6a6",
+            "copper_to_outline_mm": 0.6448281602342761
+          }
+        }
+      },
+      {
+        "key": "J4.7",
+        "uuid": "bee2e1f1-6523-4de0-88bd-204f2713e431",
+        "at_mm": [
+          75.531,
+          75.158
+        ],
+        "net": "+3.3V",
+        "drill_mm": 0.5,
+        "land_mm": 1.0,
+        "annulus_mm": 0.25,
+        "layers": {
+          "0": {
+            "copper_to_foreign": {
+              "clearance_mm": 0.0,
+              "other": "J4.6",
+              "kind": "pad"
+            },
+            "drill_to_foreign": {
+              "clearance_mm": 0.25,
+              "other": "J4.6",
+              "kind": "pad"
+            },
+            "mask_to_foreign_track_mm": 1.1180149835635047,
+            "nearest_foreign_track_uuid": "915cb245-fea9-455a-9d03-1b87e1d72ae2",
+            "copper_to_outline_mm": 0.6448452893880935
+          },
+          "2": {
+            "copper_to_foreign": {
+              "clearance_mm": 0.0,
+              "other": "J4.6",
+              "kind": "pad"
+            },
+            "drill_to_foreign": {
+              "clearance_mm": 0.25,
+              "other": "J4.6",
+              "kind": "pad"
+            },
+            "mask_to_foreign_track_mm": 0.2475386177517628,
+            "nearest_foreign_track_uuid": "c6221fc0-d983-44cf-91bb-57b72c13f950",
+            "copper_to_outline_mm": 0.6448452893880935
+          }
+        }
+      },
+      {
+        "key": "J3.1",
+        "uuid": "9e1e972e-d661-4acc-91bc-aaa44d6689d4",
+        "at_mm": [
+          54.444998,
+          69.173998
+        ],
+        "net": "PA1",
+        "drill_mm": 0.5,
+        "land_mm": 1.0,
+        "annulus_mm": 0.25,
+        "layers": {
+          "0": {
+            "copper_to_foreign": {
+              "clearance_mm": 9.999999974752427e-07,
+              "other": "J3.2",
+              "kind": "pad"
+            },
+            "drill_to_foreign": {
+              "clearance_mm": 0.2500009999999975,
+              "other": "J3.2",
+              "kind": "pad"
+            },
+            "mask_to_foreign_track_mm": 0.1368269999999967,
+            "nearest_foreign_track_uuid": "c1227579-013e-4ffa-b72b-869589a0d2ea",
+            "copper_to_outline_mm": 0.6287322239228345
+          },
+          "2": {
+            "copper_to_foreign": {
+              "clearance_mm": 9.999999974752427e-07,
+              "other": "J3.2",
+              "kind": "pad"
+            },
+            "drill_to_foreign": {
+              "clearance_mm": 0.2500009999999975,
+              "other": "J3.2",
+              "kind": "pad"
+            },
+            "mask_to_foreign_track_mm": 0.1288480340959191,
+            "nearest_foreign_track_uuid": "a379a696-fdc3-4f66-808c-ae939631c307",
+            "copper_to_outline_mm": 0.6287322239228345
+          }
+        }
+      },
+      {
+        "key": "J3.2",
+        "uuid": "ee2785a4-1245-43e1-83e8-fa4973870f0b",
+        "at_mm": [
+          54.444998,
+          70.173999
+        ],
+        "net": "GND",
+        "drill_mm": 0.5,
+        "land_mm": 1.0,
+        "annulus_mm": 0.25,
+        "layers": {
+          "0": {
+            "copper_to_foreign": {
+              "clearance_mm": 9.999999974752427e-07,
+              "other": "J3.1",
+              "kind": "pad"
+            },
+            "drill_to_foreign": {
+              "clearance_mm": 0.2500009999999975,
+              "other": "J3.1",
+              "kind": "pad"
+            },
+            "mask_to_foreign_track_mm": 0.1368269999999967,
+            "nearest_foreign_track_uuid": "c1227579-013e-4ffa-b72b-869589a0d2ea",
+            "copper_to_outline_mm": 0.6287579176706893
+          },
+          "2": {
+            "copper_to_foreign": {
+              "clearance_mm": 9.999999974752427e-07,
+              "other": "J3.1",
+              "kind": "pad"
+            },
+            "drill_to_foreign": {
+              "clearance_mm": 0.2500009999999975,
+              "other": "J3.1",
+              "kind": "pad"
+            },
+            "mask_to_foreign_track_mm": 0.2073231558615909,
+            "nearest_foreign_track_uuid": "91541222-310a-48bc-b525-2eec1e0cb20f",
+            "copper_to_outline_mm": 0.6287579176706893
+          }
+        }
+      },
+      {
+        "key": "J3.3",
+        "uuid": "78db17b2-2f62-4a45-adfd-0e17aa75a498",
+        "at_mm": [
+          54.444999,
+          71.174001
+        ],
+        "net": "PA9",
+        "drill_mm": 0.5,
+        "land_mm": 1.0,
+        "annulus_mm": 0.25,
+        "layers": {
+          "0": {
+            "copper_to_foreign": {
+              "clearance_mm": 0.0,
+              "other": "J3.4",
+              "kind": "pad"
+            },
+            "drill_to_foreign": {
+              "clearance_mm": 0.24999900000200254,
+              "other": "J3.4",
+              "kind": "pad"
+            },
+            "mask_to_foreign_track_mm": 0.13682800000000128,
+            "nearest_foreign_track_uuid": "c1227579-013e-4ffa-b72b-869589a0d2ea",
+            "copper_to_outline_mm": 0.6287760468587692
+          },
+          "2": {
+            "copper_to_foreign": {
+              "clearance_mm": 0.0,
+              "other": "J3.4",
+              "kind": "pad"
+            },
+            "drill_to_foreign": {
+              "clearance_mm": 0.24999900000200254,
+              "other": "J3.4",
+              "kind": "pad"
+            },
+            "mask_to_foreign_track_mm": 0.37500200000000916,
+            "nearest_foreign_track_uuid": "66c1da99-2bef-4aeb-9576-d648045d9212",
+            "copper_to_outline_mm": 0.6287760468587692
+          }
+        }
+      },
+      {
+        "key": "J3.4",
+        "uuid": "1a982502-40db-4b68-bfea-018025c9e930",
+        "at_mm": [
+          54.445,
+          72.174
+        ],
+        "net": "GND",
+        "drill_mm": 0.5,
+        "land_mm": 1.0,
+        "annulus_mm": 0.25,
+        "layers": {
+          "0": {
+            "copper_to_foreign": {
+              "clearance_mm": 0.0,
+              "other": "J3.3",
+              "kind": "pad"
+            },
+            "drill_to_foreign": {
+              "clearance_mm": 0.24999900000200254,
+              "other": "J3.3",
+              "kind": "pad"
+            },
+            "mask_to_foreign_track_mm": 0.13682899999999876,
+            "nearest_foreign_track_uuid": "c1227579-013e-4ffa-b72b-869589a0d2ea",
+            "copper_to_outline_mm": 0.6287941759954544
+          },
+          "2": {
+            "copper_to_foreign": {
+              "clearance_mm": 0.0,
+              "other": "J3.3",
+              "kind": "pad"
+            },
+            "drill_to_foreign": {
+              "clearance_mm": 0.24999900000200254,
+              "other": "J3.3",
+              "kind": "pad"
+            },
+            "mask_to_foreign_track_mm": 0.32099999999999795,
+            "nearest_foreign_track_uuid": "57afa99e-0f6b-491c-a967-b4ab7afd6be7",
+            "copper_to_outline_mm": 0.6287941759954544
+          }
+        }
+      },
+      {
+        "key": "J3.5",
+        "uuid": "18b55959-0e81-4b52-8da7-0494f5bc61f2",
+        "at_mm": [
+          54.444998,
+          73.173998
+        ],
+        "net": "GND",
+        "drill_mm": 0.5,
+        "land_mm": 1.0,
+        "annulus_mm": 0.25,
+        "layers": {
+          "0": {
+            "copper_to_foreign": {
+              "clearance_mm": 0.0,
+              "other": "J3.6",
+              "kind": "pad"
+            },
+            "drill_to_foreign": {
+              "clearance_mm": 0.25,
+              "other": "J3.6",
+              "kind": "pad"
+            },
+            "mask_to_foreign_track_mm": 0.1368269999999967,
+            "nearest_foreign_track_uuid": "c1227579-013e-4ffa-b72b-869589a0d2ea",
+            "copper_to_outline_mm": 0.6288093051150114
+          },
+          "2": {
+            "copper_to_foreign": {
+              "clearance_mm": 0.0,
+              "other": "J3.6",
+              "kind": "pad"
+            },
+            "drill_to_foreign": {
+              "clearance_mm": 0.25,
+              "other": "J3.6",
+              "kind": "pad"
+            },
+            "mask_to_foreign_track_mm": 0.5037952059458843,
+            "nearest_foreign_track_uuid": "57afa99e-0f6b-491c-a967-b4ab7afd6be7",
+            "copper_to_outline_mm": 0.6288093051150114
+          }
+        }
+      },
+      {
+        "key": "J3.6",
+        "uuid": "7ae1aaaa-f303-4441-9163-758b71841e0e",
+        "at_mm": [
+          54.444998,
+          74.173998
+        ],
+        "net": "PB2",
+        "drill_mm": 0.5,
+        "land_mm": 1.0,
+        "annulus_mm": 0.25,
+        "layers": {
+          "0": {
+            "copper_to_foreign": {
+              "clearance_mm": 0.0,
+              "other": "J3.5",
+              "kind": "pad"
+            },
+            "drill_to_foreign": {
+              "clearance_mm": 0.25,
+              "other": "J3.5",
+              "kind": "pad"
+            },
+            "mask_to_foreign_track_mm": 0.1368269999999967,
+            "nearest_foreign_track_uuid": "c1227579-013e-4ffa-b72b-869589a0d2ea",
+            "copper_to_outline_mm": 0.6288264342688286
+          },
+          "2": {
+            "copper_to_foreign": {
+              "clearance_mm": 0.0,
+              "other": "J3.5",
+              "kind": "pad"
+            },
+            "drill_to_foreign": {
+              "clearance_mm": 0.25,
+              "other": "J3.5",
+              "kind": "pad"
+            },
+            "mask_to_foreign_track_mm": 0.3999999999999915,
+            "nearest_foreign_track_uuid": "33d083b2-6a22-4029-a7f9-15a1c350c983",
+            "copper_to_outline_mm": 0.6288264342688286
+          }
+        }
+      },
+      {
+        "key": "J3.7",
+        "uuid": "06e03c7f-5890-410b-8cd8-b2f017358ea9",
+        "at_mm": [
+          54.444998,
+          75.173998
+        ],
+        "net": "GND",
+        "drill_mm": 0.5,
+        "land_mm": 1.0,
+        "annulus_mm": 0.25,
+        "layers": {
+          "0": {
+            "copper_to_foreign": {
+              "clearance_mm": 0.0,
+              "other": "J3.6",
+              "kind": "pad"
+            },
+            "drill_to_foreign": {
+              "clearance_mm": 0.25,
+              "other": "J3.6",
+              "kind": "pad"
+            },
+            "mask_to_foreign_track_mm": 0.1368269999999967,
+            "nearest_foreign_track_uuid": "c1227579-013e-4ffa-b72b-869589a0d2ea",
+            "copper_to_outline_mm": 0.6288435634226457
+          },
+          "2": {
+            "copper_to_foreign": {
+              "clearance_mm": 0.0,
+              "other": "J3.6",
+              "kind": "pad"
+            },
+            "drill_to_foreign": {
+              "clearance_mm": 0.25,
+              "other": "J3.6",
+              "kind": "pad"
+            },
+            "mask_to_foreign_track_mm": 1.1484446642096218,
+            "nearest_foreign_track_uuid": "3f13681e-1aa3-4e96-86e7-d10748261e4d",
+            "copper_to_outline_mm": 0.6288435634226457
+          }
+        }
+      }
+    ]
+  },
+  "notes": [
+    "Header mask margins currently zero; modeled mask uses exactly copper aperture size.",
+    "Keeps installed routing: integrated edge candidate has separately reviewed trace changes.",
+    "Closest-foreign distances exclude same-net copper and zone fill; candidate refill preserves clearance.",
+    "U1.22-.26 are BQ25570 thermal vias embedded in a footprint, not component insertion holes.",
+    "Pin1 square shape preserved; remaining equal-axis oval pads are geometrically circular."
+  ]
+}

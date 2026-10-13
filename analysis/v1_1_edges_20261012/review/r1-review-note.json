@@ -1,0 +1,6 @@
+{
+  "candidate_pcb_sha256": "804094fbd6ba36ff1dce9fbbe0d9976d04e665df2e5612f2b2ada4805dcaae7e",
+  "rejection": "New J4.1/VSTOR0.1954mm and J3.4/+SOLAR0.1968mm clearances after pad growth; preserve full0.25mm routes and correct those corners.",
+  "remote_fill_review": "Outside expanded edge/header neighborhoods, all F.Cu changes above10nm occur in the reviewed GND-only corner x65.53\u201365.60/y69.52\u201369.60. Maximum boundary shift is below5um, matching the saved polygon approximation error. This is consistent with refill approximation but its cause is not proved by the bound alone. Closest foreign conductor to the entire corner review box is unchanged BOOT0 at0.450199mm. No new remote DRC signature or connectivity change. B.Cu remote changes are bounded by2nm.",
+  "image": "remote-refill-corner-r1.png"
+}

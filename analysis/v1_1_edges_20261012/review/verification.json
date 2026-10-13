@@ -1,0 +1,1898 @@
+{
+  "changed_pads": [
+    {
+      "ref": "J4",
+      "pad": "1",
+      "before": [
+        [
+          "size",
+          "0.85",
+          "0.85"
+        ]
+      ],
+      "after": [
+        [
+          "size",
+          "0.88",
+          "0.88"
+        ]
+      ]
+    },
+    {
+      "ref": "J4",
+      "pad": "2",
+      "before": [
+        [
+          "size",
+          "0.85",
+          "0.85"
+        ]
+      ],
+      "after": [
+        [
+          "size",
+          "0.88",
+          "0.88"
+        ]
+      ]
+    },
+    {
+      "ref": "J4",
+      "pad": "3",
+      "before": [
+        [
+          "size",
+          "0.85",
+          "0.85"
+        ]
+      ],
+      "after": [
+        [
+          "size",
+          "0.88",
+          "0.88"
+        ]
+      ]
+    },
+    {
+      "ref": "J4",
+      "pad": "4",
+      "before": [
+        [
+          "size",
+          "0.85",
+          "0.85"
+        ]
+      ],
+      "after": [
+        [
+          "size",
+          "0.88",
+          "0.88"
+        ]
+      ]
+    },
+    {
+      "ref": "J4",
+      "pad": "5",
+      "before": [
+        [
+          "size",
+          "0.85",
+          "0.85"
+        ]
+      ],
+      "after": [
+        [
+          "size",
+          "0.88",
+          "0.88"
+        ]
+      ]
+    },
+    {
+      "ref": "J4",
+      "pad": "6",
+      "before": [
+        [
+          "size",
+          "0.85",
+          "0.85"
+        ]
+      ],
+      "after": [
+        [
+          "size",
+          "0.88",
+          "0.88"
+        ]
+      ]
+    },
+    {
+      "ref": "J4",
+      "pad": "7",
+      "before": [
+        [
+          "size",
+          "0.85",
+          "0.85"
+        ]
+      ],
+      "after": [
+        [
+          "size",
+          "0.88",
+          "0.88"
+        ]
+      ]
+    },
+    {
+      "ref": "J3",
+      "pad": "1",
+      "before": [
+        [
+          "size",
+          "0.85",
+          "0.85"
+        ]
+      ],
+      "after": [
+        [
+          "size",
+          "0.88",
+          "0.88"
+        ]
+      ]
+    },
+    {
+      "ref": "J3",
+      "pad": "2",
+      "before": [
+        [
+          "size",
+          "0.85",
+          "0.85"
+        ]
+      ],
+      "after": [
+        [
+          "size",
+          "0.88",
+          "0.88"
+        ]
+      ]
+    },
+    {
+      "ref": "J3",
+      "pad": "3",
+      "before": [
+        [
+          "size",
+          "0.85",
+          "0.85"
+        ]
+      ],
+      "after": [
+        [
+          "size",
+          "0.88",
+          "0.88"
+        ]
+      ]
+    },
+    {
+      "ref": "J3",
+      "pad": "4",
+      "before": [
+        [
+          "size",
+          "0.85",
+          "0.85"
+        ]
+      ],
+      "after": [
+        [
+          "size",
+          "0.88",
+          "0.88"
+        ]
+      ]
+    },
+    {
+      "ref": "J3",
+      "pad": "5",
+      "before": [
+        [
+          "size",
+          "0.85",
+          "0.85"
+        ]
+      ],
+      "after": [
+        [
+          "size",
+          "0.88",
+          "0.88"
+        ]
+      ]
+    },
+    {
+      "ref": "J3",
+      "pad": "6",
+      "before": [
+        [
+          "size",
+          "0.85",
+          "0.85"
+        ]
+      ],
+      "after": [
+        [
+          "size",
+          "0.88",
+          "0.88"
+        ]
+      ]
+    },
+    {
+      "ref": "J3",
+      "pad": "7",
+      "before": [
+        [
+          "size",
+          "0.85",
+          "0.85"
+        ]
+      ],
+      "after": [
+        [
+          "size",
+          "0.88",
+          "0.88"
+        ]
+      ]
+    }
+  ],
+  "changed_segments": [
+    {
+      "uuid": "e9b21ab4-de4f-4bb7-a599-94cd191c0bc8",
+      "before": [
+        "segment",
+        [
+          "start",
+          "54.301",
+          "77.446"
+        ],
+        [
+          "end",
+          "53.683171",
+          "76.828171"
+        ],
+        [
+          "width",
+          "0.25"
+        ],
+        [
+          "layer",
+          "F.Cu"
+        ],
+        [
+          "net",
+          "+SOLAR"
+        ],
+        [
+          "uuid",
+          "e9b21ab4-de4f-4bb7-a599-94cd191c0bc8"
+        ]
+      ],
+      "after": [
+        "segment",
+        [
+          "start",
+          "54.301",
+          "77.446"
+        ],
+        [
+          "end",
+          "53.675",
+          "76.82"
+        ],
+        [
+          "width",
+          "0.25"
+        ],
+        [
+          "layer",
+          "F.Cu"
+        ],
+        [
+          "net",
+          "+SOLAR"
+        ],
+        [
+          "uuid",
+          "e9b21ab4-de4f-4bb7-a599-94cd191c0bc8"
+        ]
+      ]
+    },
+    {
+      "uuid": "b6acae82-f692-4c92-8407-867053d1eac9",
+      "before": [
+        "segment",
+        [
+          "start",
+          "75.864097",
+          "70.158"
+        ],
+        [
+          "end",
+          "75.531",
+          "70.158"
+        ],
+        [
+          "width",
+          "0.25"
+        ],
+        [
+          "layer",
+          "F.Cu"
+        ],
+        [
+          "net",
+          "VSTOR"
+        ],
+        [
+          "uuid",
+          "b6acae82-f692-4c92-8407-867053d1eac9"
+        ]
+      ],
+      "after": [
+        "segment",
+        [
+          "start",
+          "75.891",
+          "70.158"
+        ],
+        [
+          "end",
+          "75.531",
+          "70.158"
+        ],
+        [
+          "width",
+          "0.25"
+        ],
+        [
+          "layer",
+          "F.Cu"
+        ],
+        [
+          "net",
+          "VSTOR"
+        ],
+        [
+          "uuid",
+          "b6acae82-f692-4c92-8407-867053d1eac9"
+        ]
+      ]
+    },
+    {
+      "uuid": "cd6977b0-9d88-4014-8ee0-75e9feff1d59",
+      "before": [
+        "segment",
+        [
+          "start",
+          "76.449",
+          "69.573097"
+        ],
+        [
+          "end",
+          "75.864097",
+          "70.158"
+        ],
+        [
+          "width",
+          "0.25"
+        ],
+        [
+          "layer",
+          "F.Cu"
+        ],
+        [
+          "net",
+          "VSTOR"
+        ],
+        [
+          "uuid",
+          "cd6977b0-9d88-4014-8ee0-75e9feff1d59"
+        ]
+      ],
+      "after": [
+        "segment",
+        [
+          "start",
+          "76.299",
+          "69.75"
+        ],
+        [
+          "end",
+          "75.891",
+          "70.158"
+        ],
+        [
+          "width",
+          "0.25"
+        ],
+        [
+          "layer",
+          "F.Cu"
+        ],
+        [
+          "net",
+          "VSTOR"
+        ],
+        [
+          "uuid",
+          "cd6977b0-9d88-4014-8ee0-75e9feff1d59"
+        ]
+      ]
+    },
+    {
+      "uuid": "c1227579-013e-4ffa-b72b-869589a0d2ea",
+      "before": [
+        "segment",
+        [
+          "start",
+          "53.683171",
+          "76.828171"
+        ],
+        [
+          "end",
+          "53.683171",
+          "65.049963"
+        ],
+        [
+          "width",
+          "0.25"
+        ],
+        [
+          "layer",
+          "F.Cu"
+        ],
+        [
+          "net",
+          "+SOLAR"
+        ],
+        [
+          "uuid",
+          "c1227579-013e-4ffa-b72b-869589a0d2ea"
+        ]
+      ],
+      "after": [
+        "segment",
+        [
+          "start",
+          "53.675",
+          "76.82"
+        ],
+        [
+          "end",
+          "53.675",
+          "65.104963"
+        ],
+        [
+          "width",
+          "0.25"
+        ],
+        [
+          "layer",
+          "F.Cu"
+        ],
+        [
+          "net",
+          "+SOLAR"
+        ],
+        [
+          "uuid",
+          "c1227579-013e-4ffa-b72b-869589a0d2ea"
+        ]
+      ]
+    },
+    {
+      "uuid": "18c9a067-24a5-4625-8e36-1a2ab661e9bc",
+      "before": [
+        "segment",
+        [
+          "start",
+          "53.580921",
+          "64.947713"
+        ],
+        [
+          "end",
+          "53.580921",
+          "62.991411"
+        ],
+        [
+          "width",
+          "0.25"
+        ],
+        [
+          "layer",
+          "F.Cu"
+        ],
+        [
+          "net",
+          "+SOLAR"
+        ],
+        [
+          "uuid",
+          "18c9a067-24a5-4625-8e36-1a2ab661e9bc"
+        ]
+      ],
+      "after": [
+        "segment",
+        [
+          "start",
+          "53.73",
+          "64.947713"
+        ],
+        [
+          "end",
+          "53.73",
+          "62.842332"
+        ],
+        [
+          "width",
+          "0.25"
+        ],
+        [
+          "layer",
+          "F.Cu"
+        ],
+        [
+          "net",
+          "+SOLAR"
+        ],
+        [
+          "uuid",
+          "18c9a067-24a5-4625-8e36-1a2ab661e9bc"
+        ]
+      ]
+    },
+    {
+      "uuid": "bfbfa6f4-1dbe-4095-a771-3fb9a012fb75",
+      "before": [
+        "segment",
+        [
+          "start",
+          "75.187",
+          "67.249"
+        ],
+        [
+          "end",
+          "76.449",
+          "68.511"
+        ],
+        [
+          "width",
+          "0.25"
+        ],
+        [
+          "layer",
+          "F.Cu"
+        ],
+        [
+          "net",
+          "VSTOR"
+        ],
+        [
+          "uuid",
+          "bfbfa6f4-1dbe-4095-a771-3fb9a012fb75"
+        ]
+      ],
+      "after": [
+        "segment",
+        [
+          "start",
+          "75.187",
+          "67.249"
+        ],
+        [
+          "end",
+          "76.299",
+          "68.361"
+        ],
+        [
+          "width",
+          "0.25"
+        ],
+        [
+          "layer",
+          "F.Cu"
+        ],
+        [
+          "net",
+          "VSTOR"
+        ],
+        [
+          "uuid",
+          "bfbfa6f4-1dbe-4095-a771-3fb9a012fb75"
+        ]
+      ]
+    },
+    {
+      "uuid": "a2cfd543-5b76-494b-9bcc-1e523f422c16",
+      "before": [
+        "segment",
+        [
+          "start",
+          "53.683171",
+          "65.049963"
+        ],
+        [
+          "end",
+          "53.580921",
+          "64.947713"
+        ],
+        [
+          "width",
+          "0.25"
+        ],
+        [
+          "layer",
+          "F.Cu"
+        ],
+        [
+          "net",
+          "+SOLAR"
+        ],
+        [
+          "uuid",
+          "a2cfd543-5b76-494b-9bcc-1e523f422c16"
+        ]
+      ],
+      "after": [
+        "segment",
+        [
+          "start",
+          "53.73",
+          "65.049963"
+        ],
+        [
+          "end",
+          "53.73",
+          "64.947713"
+        ],
+        [
+          "width",
+          "0.25"
+        ],
+        [
+          "layer",
+          "F.Cu"
+        ],
+        [
+          "net",
+          "+SOLAR"
+        ],
+        [
+          "uuid",
+          "a2cfd543-5b76-494b-9bcc-1e523f422c16"
+        ]
+      ]
+    },
+    {
+      "uuid": "91c5ca5e-308e-4f8b-8d63-7c761c4637bd",
+      "before": [
+        "segment",
+        [
+          "start",
+          "53.57",
+          "70.476084"
+        ],
+        [
+          "end",
+          "53.57",
+          "68.69"
+        ],
+        [
+          "width",
+          "0.25"
+        ],
+        [
+          "layer",
+          "B.Cu"
+        ],
+        [
+          "net",
+          "PA9"
+        ],
+        [
+          "uuid",
+          "91c5ca5e-308e-4f8b-8d63-7c761c4637bd"
+        ]
+      ],
+      "after": [
+        "segment",
+        [
+          "start",
+          "53.675",
+          "70.581084"
+        ],
+        [
+          "end",
+          "53.675",
+          "68.584999"
+        ],
+        [
+          "width",
+          "0.25"
+        ],
+        [
+          "layer",
+          "B.Cu"
+        ],
+        [
+          "net",
+          "PA9"
+        ],
+        [
+          "uuid",
+          "91c5ca5e-308e-4f8b-8d63-7c761c4637bd"
+        ]
+      ]
+    },
+    {
+      "uuid": "2727baf4-a20e-4dc4-8d56-2cae36ad27a0",
+      "before": [
+        "segment",
+        [
+          "start",
+          "53.580921",
+          "62.991411"
+        ],
+        [
+          "end",
+          "55.961085",
+          "60.611247"
+        ],
+        [
+          "width",
+          "0.25"
+        ],
+        [
+          "layer",
+          "F.Cu"
+        ],
+        [
+          "net",
+          "+SOLAR"
+        ],
+        [
+          "uuid",
+          "2727baf4-a20e-4dc4-8d56-2cae36ad27a0"
+        ]
+      ],
+      "after": [
+        "segment",
+        [
+          "start",
+          "53.73",
+          "62.842332"
+        ],
+        [
+          "end",
+          "55.961085",
+          "60.611247"
+        ],
+        [
+          "width",
+          "0.25"
+        ],
+        [
+          "layer",
+          "F.Cu"
+        ],
+        [
+          "net",
+          "+SOLAR"
+        ],
+        [
+          "uuid",
+          "2727baf4-a20e-4dc4-8d56-2cae36ad27a0"
+        ]
+      ]
+    },
+    {
+      "uuid": "a379a696-fdc3-4f66-808c-ae939631c307",
+      "before": [
+        "segment",
+        [
+          "start",
+          "53.57",
+          "68.69"
+        ],
+        [
+          "end",
+          "54.111648",
+          "68.148353"
+        ],
+        [
+          "width",
+          "0.25"
+        ],
+        [
+          "layer",
+          "B.Cu"
+        ],
+        [
+          "net",
+          "PA9"
+        ],
+        [
+          "uuid",
+          "a379a696-fdc3-4f66-808c-ae939631c307"
+        ]
+      ],
+      "after": [
+        "segment",
+        [
+          "start",
+          "53.675",
+          "68.584999"
+        ],
+        [
+          "end",
+          "54.111648",
+          "68.148353"
+        ],
+        [
+          "width",
+          "0.25"
+        ],
+        [
+          "layer",
+          "B.Cu"
+        ],
+        [
+          "net",
+          "PA9"
+        ],
+        [
+          "uuid",
+          "a379a696-fdc3-4f66-808c-ae939631c307"
+        ]
+      ]
+    },
+    {
+      "uuid": "91541222-310a-48bc-b525-2eec1e0cb20f",
+      "before": [
+        "segment",
+        [
+          "start",
+          "54.267917",
+          "71.174001"
+        ],
+        [
+          "end",
+          "53.57",
+          "70.476084"
+        ],
+        [
+          "width",
+          "0.25"
+        ],
+        [
+          "layer",
+          "B.Cu"
+        ],
+        [
+          "net",
+          "PA9"
+        ],
+        [
+          "uuid",
+          "91541222-310a-48bc-b525-2eec1e0cb20f"
+        ]
+      ],
+      "after": [
+        "segment",
+        [
+          "start",
+          "54.267917",
+          "71.174001"
+        ],
+        [
+          "end",
+          "53.675",
+          "70.581084"
+        ],
+        [
+          "width",
+          "0.25"
+        ],
+        [
+          "layer",
+          "B.Cu"
+        ],
+        [
+          "net",
+          "PA9"
+        ],
+        [
+          "uuid",
+          "91541222-310a-48bc-b525-2eec1e0cb20f"
+        ]
+      ]
+    },
+    {
+      "uuid": "1e1073b6-2c7c-4ad4-a31b-c180809f6da6",
+      "before": [
+        "segment",
+        [
+          "start",
+          "76.449",
+          "68.511"
+        ],
+        [
+          "end",
+          "76.449",
+          "69.573097"
+        ],
+        [
+          "width",
+          "0.25"
+        ],
+        [
+          "layer",
+          "F.Cu"
+        ],
+        [
+          "net",
+          "VSTOR"
+        ],
+        [
+          "uuid",
+          "1e1073b6-2c7c-4ad4-a31b-c180809f6da6"
+        ]
+      ],
+      "after": [
+        "segment",
+        [
+          "start",
+          "76.299",
+          "68.361"
+        ],
+        [
+          "end",
+          "76.299",
+          "69.75"
+        ],
+        [
+          "width",
+          "0.25"
+        ],
+        [
+          "layer",
+          "F.Cu"
+        ],
+        [
+          "net",
+          "VSTOR"
+        ],
+        [
+          "uuid",
+          "1e1073b6-2c7c-4ad4-a31b-c180809f6da6"
+        ]
+      ]
+    }
+  ],
+  "changed_libraries": [
+    "Stratolink_Header_Right_1x07_P1p00_D0p50_Pad0p88.kicad_mod",
+    "Stratolink_Header_Left_1x07_P1p00_D0p50_Pad0p88.kicad_mod"
+  ],
+  "schematic_footprint_metadata_changes": [
+    {
+      "ref": "J4",
+      "before": "Connector_PinHeader_1.00mm:PinHeader_1x07_P1.00mm_Vertical",
+      "after": "lib:Stratolink_Header_Right_1x07_P1p00_D0p50_Pad0p88"
+    },
+    {
+      "ref": "J3",
+      "before": "Connector_PinHeader_1.00mm:PinHeader_1x07_P1.00mm_Vertical",
+      "after": "lib:Stratolink_Header_Left_1x07_P1p00_D0p50_Pad0p88"
+    }
+  ],
+  "status": "pass: scoped R2 CAD, connectivity, expected DRC inventory and manufacturing geometry; header mask conditional on supported 1 oz color/process",
+  "candidate": "/Users/twarn/Repositories/ai-working/scratch/stratolink-edges-20261012/combined-r2",
+  "source_hashes": {
+    "/Users/twarn/Repositories/ai-working/scratch/stratolink-edges-20261012/combined-r2/stratolink.kicad_pro": "5dd65b15408657138b37fb9ee274f0798e96aadb4092f4e799c61d03bece1786",
+    "/Users/twarn/Repositories/ai-working/scratch/stratolink-edges-20261012/combined-r2/stratolink.kicad_sch": "dfc86e757284ec980a3ba6fe2f9dec067af22c6992824b3fcd0e340135f97467",
+    "/Users/twarn/Repositories/ai-working/scratch/stratolink-edges-20261012/combined-r2/fp-lib-table": "705f05b5554f11949b16433700d994932665490bb4f91064f20890cc1c65326a",
+    "/Users/twarn/Repositories/ai-working/scratch/stratolink-edges-20261012/combined-r2/stratolink.kicad_pcb": "c87926d6c121162258d936f6aa3e4cc3cc633ad249438340e551040a832d372a",
+    "/Users/twarn/Repositories/ai-working/scratch/stratolink-edges-20261012/combined-r2/sym-lib-table": "27b94afc068fa31c7f6b0e2e00012a1fdc75c17277f1dc9d9d7aefd9cf149b87",
+    "/Users/twarn/Repositories/ai-working/scratch/stratolink-edges-20261012/combined-r2/lib/SON125P500X300X100-8N.kicad_mod": "ff2187465b1d4d695f51a19a0caa8cff843adb139aaff8052e203bd8a8719968",
+    "/Users/twarn/Repositories/ai-working/scratch/stratolink-edges-20261012/combined-r2/lib/Stratolink_Header_Right_1x07_P1p00_D0p50_Pad0p88.kicad_mod": "55179df22f92d771234badd935817eae5e4d93c912e265e6e9e7bf03b432046c",
+    "/Users/twarn/Repositories/ai-working/scratch/stratolink-edges-20261012/combined-r2/lib/IND_ETQP4M220YFN.kicad_mod": "381c6ee593f271568ce97449e3b8fb3a7e4dd50952df8fc548a95016239eb20d",
+    "/Users/twarn/Repositories/ai-working/scratch/stratolink-edges-20261012/combined-r2/lib/4269.kicad_sym": "f0e9b92024b3432c2b649a67c9f84c447718e0242492599e15ea3466bb878b3e",
+    "/Users/twarn/Repositories/ai-working/scratch/stratolink-edges-20261012/combined-r2/lib/Solar_Notch_Right_1p0x2p0.kicad_mod": "7bab33c2b68c8be61dad981c21736ac780836b76ddc8884d21ae82cc053f1de9",
+    "/Users/twarn/Repositories/ai-working/scratch/stratolink-edges-20261012/combined-r2/lib/2450AT18A100E.kicad_sym": "4c17902873bf049dc499b066ca46e5f8567d9f7ec55a279e6c95f9d77e77e216",
+    "/Users/twarn/Repositories/ai-working/scratch/stratolink-edges-20261012/combined-r2/lib/SMD6_LTR-390UV-01_LTO-L.kicad_mod": "b8677d8c4594e4ec7bb875d3a08238e65363fce7788c853f45e6066d19a3781c",
+    "/Users/twarn/Repositories/ai-working/scratch/stratolink-edges-20261012/combined-r2/lib/LIS2DH12TR.kicad_sym": "07cac9985ca5d4bc6006008b39953cbf4b8e74acf952136da5d5bdd5024ab7e6",
+    "/Users/twarn/Repositories/ai-working/scratch/stratolink-edges-20261012/combined-r2/lib/WCAP-CSGP_0402.kicad_mod": "44a8f032ed80387f92ffe395290a6e9accf150b77ca161ccd4edf91706f98ce9",
+    "/Users/twarn/Repositories/ai-working/scratch/stratolink-edges-20261012/combined-r2/lib/RAK3172.kicad_mod": "e0fb3166a9bf8e865c94a07c957d91591d3ef2e9c97ee19c43a5abb001891e38",
+    "/Users/twarn/Repositories/ai-working/scratch/stratolink-edges-20261012/combined-r2/lib/BGA6N40P3X2_148X95X53.kicad_mod": "0343aab55d5eff37c147587bba94596d8ce865012486045a074422f1746be496",
+    "/Users/twarn/Repositories/ai-working/scratch/stratolink-edges-20261012/combined-r2/lib/CAPC1608X97N.kicad_mod": "c64240ccabb5bdcb0ec44734a0e45b0524794a53a2ddc9ccf530c0fa0bb1c66a",
+    "/Users/twarn/Repositories/ai-working/scratch/stratolink-edges-20261012/combined-r2/lib/IND_LPS4018-223MRC.kicad_mod": "3e3f2c1ed2dfa4f3bde9f43c162a180655e7aab82d20204c3028568b7e224990",
+    "/Users/twarn/Repositories/ai-working/scratch/stratolink-edges-20261012/combined-r2/lib/ANTC3216X140N.kicad_mod": "d0221f8bc21133d5619d205506f4b229491024d0a722a624e2f6abc3556cef2d",
+    "/Users/twarn/Repositories/ai-working/scratch/stratolink-edges-20261012/combined-r2/lib/Stratolink_Header_Left_1x07_P1p00_D0p50_Pad0p88.kicad_mod": "678dfa4fbca321b1cf794539159747abaac8fc57909300c9c2ec8808c0c6612a",
+    "/Users/twarn/Repositories/ai-working/scratch/stratolink-edges-20261012/combined-r2/lib/T3902.kicad_sym": "66720809065a1941109082a4138fc68afeffbd06c35e963b338711417839a58f",
+    "/Users/twarn/Repositories/ai-working/scratch/stratolink-edges-20261012/combined-r2/lib/QFN50P350X350X100-21N.kicad_mod": "5ec201b9d4cba0e6afd86d2cb90b8339f7f2d1c1fbf5ad96a18bbf597a60803a",
+    "/Users/twarn/Repositories/ai-working/scratch/stratolink-edges-20261012/combined-r2/lib/Solar_Notch_Left_1p0x2p0.kicad_mod": "88d0ae34e02b1fadeed1b6f8261f9109735e027cfc9146fd165e487238bd3ebd",
+    "/Users/twarn/Repositories/ai-working/scratch/stratolink-edges-20261012/combined-r2/lib/SMD6_LTR-390UV-01_LTO-M.kicad_mod": "79bd36ae3dee2d140d9a91b4a62a5dd50051c4741de1a1863448051967efcaf7",
+    "/Users/twarn/Repositories/ai-working/scratch/stratolink-edges-20261012/combined-r2/lib/DMF4B5R5G105M3DTA0.kicad_mod": "9ab776792a60db5be6fbd79dbf274512ab5a8a5770dd695b40abc6f241fe076d",
+    "/Users/twarn/Repositories/ai-working/scratch/stratolink-edges-20261012/combined-r2/lib/XCVR_MAX-M10S-00B.kicad_mod": "f02c5f6ec6a2cc7e49e6d320e2f713a5cf826c652b7030754832415a9c33bfa7",
+    "/Users/twarn/Repositories/ai-working/scratch/stratolink-edges-20261012/combined-r2/lib/2026-03-07_16-25-25.kicad_sym": "9a79848b12d5e661e2846ab59b4aad1bda3c134d4131e5a3be96759850b6e941",
+    "/Users/twarn/Repositories/ai-working/scratch/stratolink-edges-20261012/combined-r2/lib/MAX-M10S-00B.kicad_sym": "7d85f2010cb778a48e2a6499bc5e681a42eb522fda2e2b9bf9ecaa89c28b7c91",
+    "/Users/twarn/Repositories/ai-working/scratch/stratolink-edges-20261012/combined-r2/lib/INDC1608X90N.kicad_mod": "d3524646ea49e68bd74514a052a0d7db258eaef8e57a8ce70b2523c6b9cb6454",
+    "/Users/twarn/Repositories/ai-working/scratch/stratolink-edges-20261012/combined-r2/lib/VJ0603A120KXCAP.kicad_sym": "d45b48e1f00f52444dc6e20e8d2447d3dc502248c2a0446e5d44e05e462723e5",
+    "/Users/twarn/Repositories/ai-working/scratch/stratolink-edges-20261012/combined-r2/lib/HS230F.kicad_mod": "529df574736c0f6ea13c39468a44ac9dcdd8beb2fa7b52cccbe3fb26bdf8c335",
+    "/Users/twarn/Repositories/ai-working/scratch/stratolink-edges-20261012/combined-r2/lib/Suspension_PTH_D2p0_OD3p2.kicad_mod": "2f71d16ba89940b2e21f46e35e96a71f7ff660adaaff82485ed805de143c9ca1",
+    "/Users/twarn/Repositories/ai-working/scratch/stratolink-edges-20261012/combined-r2/lib/HS230F.kicad_sym": "811489ce5a198a6cd083fdd34451ee26f7f8186efe6d04e532546f51ef57bb93",
+    "/Users/twarn/Repositories/ai-working/scratch/stratolink-edges-20261012/combined-r2/lib/DIO_BAS716_115.kicad_mod": "4f89dd17f2854299f0b242c9aca165594044192c924ea13825f08d0b3918d491",
+    "/Users/twarn/Repositories/ai-working/scratch/stratolink-edges-20261012/combined-r2/lib/TMP117NAIYBGR.kicad_sym": "1813a62d0d88664390dfc896d9a2cfd39cf37b9b75531db8980191ed2cc3c584",
+    "/Users/twarn/Repositories/ai-working/scratch/stratolink-edges-20261012/combined-r2/lib/XDCR_AS7341-DLGM.kicad_mod": "1b4397d0b1f6b5baa42d874ff37b2096b77d6fdfe65f692b1d3dff3db6a4e2ac",
+    "/Users/twarn/Repositories/ai-working/scratch/stratolink-edges-20261012/combined-r2/lib/DMF4B5R5G105M3DTA0.kicad_sym": "d61a16f42fbe02ebc78f9a2c9a19cbe607187df5f581d0702a63593aec82087f",
+    "/Users/twarn/Repositories/ai-working/scratch/stratolink-edges-20261012/combined-r2/lib/RES_ERJU02J1R1X.kicad_mod": "26b19b06d6669428f70c92613ae025bd8d5934c62fb048261c74eafd0ce3a843",
+    "/Users/twarn/Repositories/ai-working/scratch/stratolink-edges-20261012/combined-r2/lib/LQM18FN100M00D.kicad_sym": "2effabbae1403948eeabacb0d3d9dbdbf7caa0ebb70a2aae9fbcacd4d1885e21",
+    "/Users/twarn/Repositories/ai-working/scratch/stratolink-edges-20261012/combined-r2/lib/ERJU02J1R1X.kicad_sym": "2dbe1f4533020a98c94e65bc71457186153c14c325df09cd224c0426da39ace4",
+    "/Users/twarn/Repositories/ai-working/scratch/stratolink-edges-20261012/combined-r2/lib/MS5611-01BA03.kicad_sym": "cb60c24e00aae0b18e91ee617e19428fc1cf4632063dfd9ddbe9d8af632ea9e3",
+    "/Users/twarn/Repositories/ai-working/scratch/stratolink-edges-20261012/combined-r2/lib/BQ25570RGRR.kicad_sym": "77e394cb57ae10efe7eba2d4dfeadae0a59542699f782de5f073fa621408f2fc",
+    "/Users/twarn/Repositories/ai-working/scratch/stratolink-edges-20261012/combined-r2/lib/RAK3172-8-SM-NI.kicad_sym": "1676e2db045544d59c3c01dd87685b93ad6ea65d20a492b6a045e085a1b28514",
+    "/Users/twarn/Repositories/ai-working/scratch/stratolink-edges-20261012/combined-r2/lib/MIC_T3902.kicad_mod": "1f92d8e049770a9c31db4054acd3362ef7022b6d665846ac2c70d9acf80fb7fe",
+    "/Users/twarn/Repositories/ai-working/scratch/stratolink-edges-20261012/combined-r2/lib/ETQP4M220YFN.kicad_sym": "3339cd09a82b3f891d5eaafd736413701fc2a17ebc59ba621a71a132e182a049",
+    "/Users/twarn/Repositories/ai-working/scratch/stratolink-edges-20261012/combined-r2/lib/SMD6_LTR-390UV-01_LTO.kicad_mod": "9eb6ce599943c3b3a7159015b151f81e85d8390ae426ae314aefcec4cee5144f",
+    "/Users/twarn/Repositories/ai-working/scratch/stratolink-edges-20261012/combined-r2/lib/PQFN50P200X200100-12N.kicad_mod": "bb10f8b0b1d0f19ba3a75cf9d0ec96834f28dcf6c5d49ca907dea1d2c66d3589",
+    "/Users/twarn/Repositories/ai-working/scratch/stratolink-edges-20261012/combined-r2/lib/WCAP-CSGP_0402.kicad_sym": "31b8edc59adcae9059ce14724e0885f154cd6352c0536ca33a71419ce885b240",
+    "/Users/twarn/Repositories/ai-working/scratch/stratolink-edges-20261012/combined-r2/lib/LPS4018-223MRC.kicad_sym": "59283d1e7d07f0724ece85c78996f50d5c81b836be4e51065a92117c93ef2f3d",
+    "/Users/twarn/Repositories/ai-working/scratch/stratolink-edges-20261012/combined-r2/lib/RAK3172.kicad_sym": "d3131a6c168b5afdd04ba50f2b449ba380bff7b91078ce1b1212e3a0e22c3749",
+    "/Users/twarn/Repositories/ai-working/scratch/stratolink-edges-20261012/combined-r2/lib/4269.kicad_mod": "cb4f61d8466e9c3887e4211dddf0bdef20bdc81bd3461330dc84b52695016f55",
+    "/Users/twarn/Repositories/ai-working/scratch/stratolink-edges-20261012/combined-r2/lib/XCVR_RAK3172-8-SM-NI.kicad_mod": "341a8de38d3075e7e190495ecbe1faa77f11aef73df7211c85b56581198b6c6a",
+    "/Users/twarn/Repositories/ai-working/scratch/stratolink-edges-20261012/combined-r2/lib/21-0147E.kicad_mod": "d8b8ebc85e44c7bc74c142f7189b65a37cceee2dca0531a18df6523b571999c6",
+    "/Users/twarn/Repositories/ai-working/scratch/stratolink-edges-20261012/combined-r2/lib/AS7341-DLGM.kicad_sym": "abd1d59f41a076196e753c2b658694e77e1c5d9f519ab5672315827ddcd7a5b1"
+  },
+  "baseline_revision": "d70a53d2093454084c9b1ae989d0276a88395334",
+  "all_physical_pad_sets_checked": 232,
+  "unconnected": 0,
+  "drc": {
+    "project": {
+      "violations": {
+        "before": 57,
+        "after": 55,
+        "added": [],
+        "removed": [
+          {
+            "description": "Footprint 'PinHeader_1x07_P1.00mm_Vertical' does not match copy in library 'Connector_PinHeader_1.00mm'",
+            "item_uuids": [
+              "3240801f-f64a-4643-9616-2075f77afb4c"
+            ],
+            "severity": "warning",
+            "type": "lib_footprint_mismatch"
+          },
+          {
+            "description": "Footprint 'PinHeader_1x07_P1.00mm_Vertical' does not match copy in library 'Connector_PinHeader_1.00mm'",
+            "item_uuids": [
+              "bf680257-8d20-43fa-8238-9a189f9c2bf5"
+            ],
+            "severity": "warning",
+            "type": "lib_footprint_mismatch"
+          }
+        ]
+      },
+      "unconnected_items": {
+        "before": 0,
+        "after": 0,
+        "added": [],
+        "removed": []
+      },
+      "schematic_parity": {
+        "before": 11,
+        "after": 11,
+        "added": [],
+        "removed": []
+      }
+    },
+    "prior-uniform": {
+      "violations": {
+        "before": 70,
+        "after": 70,
+        "added": [
+          {
+            "description": "Clearance violation ( clearance 0.1500 mm; actual 0.1200 mm)",
+            "item_uuids": [
+              "9e1e972e-d661-4acc-91bc-aaa44d6689d4",
+              "ee2785a4-1245-43e1-83e8-fa4973870f0b"
+            ],
+            "severity": "error",
+            "type": "clearance"
+          },
+          {
+            "description": "Clearance violation ( clearance 0.1500 mm; actual 0.1200 mm)",
+            "item_uuids": [
+              "78db17b2-2f62-4a45-adfd-0e17aa75a498",
+              "ee2785a4-1245-43e1-83e8-fa4973870f0b"
+            ],
+            "severity": "error",
+            "type": "clearance"
+          },
+          {
+            "description": "Clearance violation ( clearance 0.1500 mm; actual 0.1200 mm)",
+            "item_uuids": [
+              "1a982502-40db-4b68-bfea-018025c9e930",
+              "78db17b2-2f62-4a45-adfd-0e17aa75a498"
+            ],
+            "severity": "error",
+            "type": "clearance"
+          },
+          {
+            "description": "Clearance violation ( clearance 0.1500 mm; actual 0.1200 mm)",
+            "item_uuids": [
+              "18b55959-0e81-4b52-8da7-0494f5bc61f2",
+              "7ae1aaaa-f303-4441-9163-758b71841e0e"
+            ],
+            "severity": "error",
+            "type": "clearance"
+          },
+          {
+            "description": "Clearance violation ( clearance 0.1500 mm; actual 0.1200 mm)",
+            "item_uuids": [
+              "06e03c7f-5890-410b-8cd8-b2f017358ea9",
+              "7ae1aaaa-f303-4441-9163-758b71841e0e"
+            ],
+            "severity": "error",
+            "type": "clearance"
+          },
+          {
+            "description": "Clearance violation ( clearance 0.1500 mm; actual 0.1200 mm)",
+            "item_uuids": [
+              "0650b567-d648-499e-addc-ea01fac7e599",
+              "629d6933-e9b3-4c38-91d2-f812960f1e71"
+            ],
+            "severity": "error",
+            "type": "clearance"
+          },
+          {
+            "description": "Clearance violation ( clearance 0.1500 mm; actual 0.1200 mm)",
+            "item_uuids": [
+              "629d6933-e9b3-4c38-91d2-f812960f1e71",
+              "f9e130ac-ed56-4de6-bfc1-3bdceea6e0d0"
+            ],
+            "severity": "error",
+            "type": "clearance"
+          },
+          {
+            "description": "Clearance violation ( clearance 0.1500 mm; actual 0.1200 mm)",
+            "item_uuids": [
+              "2e3cbf76-3be2-4c68-b1f2-89d83f085094",
+              "f9e130ac-ed56-4de6-bfc1-3bdceea6e0d0"
+            ],
+            "severity": "error",
+            "type": "clearance"
+          },
+          {
+            "description": "Clearance violation ( clearance 0.1500 mm; actual 0.1200 mm)",
+            "item_uuids": [
+              "2e3cbf76-3be2-4c68-b1f2-89d83f085094",
+              "a826af09-b85c-4bd8-b045-8d9597e30e2c"
+            ],
+            "severity": "error",
+            "type": "clearance"
+          },
+          {
+            "description": "Clearance violation ( clearance 0.1500 mm; actual 0.1200 mm)",
+            "item_uuids": [
+              "95f0f8e9-8450-493a-82c2-f13fc3380988",
+              "a826af09-b85c-4bd8-b045-8d9597e30e2c"
+            ],
+            "severity": "error",
+            "type": "clearance"
+          },
+          {
+            "description": "Clearance violation ( clearance 0.1500 mm; actual 0.1200 mm)",
+            "item_uuids": [
+              "95f0f8e9-8450-493a-82c2-f13fc3380988",
+              "bee2e1f1-6523-4de0-88bd-204f2713e431"
+            ],
+            "severity": "error",
+            "type": "clearance"
+          }
+        ],
+        "removed": [
+          {
+            "description": "Board edge clearance violation (board setup constraints edge clearance 0.2000 mm; actual 0.1396 mm)",
+            "item_uuids": [
+              "18c9a067-24a5-4625-8e36-1a2ab661e9bc",
+              "e365573c-c04a-42f2-870c-493799cef56f"
+            ],
+            "severity": "error",
+            "type": "copper_edge_clearance"
+          },
+          {
+            "description": "Board edge clearance violation (board setup constraints edge clearance 0.2000 mm; actual 0.1396 mm)",
+            "item_uuids": [
+              "2727baf4-a20e-4dc4-8d56-2cae36ad27a0",
+              "e365573c-c04a-42f2-870c-493799cef56f"
+            ],
+            "severity": "error",
+            "type": "copper_edge_clearance"
+          },
+          {
+            "description": "Board edge clearance violation (board setup constraints edge clearance 0.2000 mm; actual 0.1396 mm)",
+            "item_uuids": [
+              "a2cfd543-5b76-494b-9bcc-1e523f422c16",
+              "e365573c-c04a-42f2-870c-493799cef56f"
+            ],
+            "severity": "error",
+            "type": "copper_edge_clearance"
+          },
+          {
+            "description": "Board edge clearance violation (board setup constraints edge clearance 0.2000 mm; actual 0.1017 mm)",
+            "item_uuids": [
+              "1af69ad7-30f3-4fc3-b566-1d187dbea766",
+              "1e1073b6-2c7c-4ad4-a31b-c180809f6da6"
+            ],
+            "severity": "error",
+            "type": "copper_edge_clearance"
+          },
+          {
+            "description": "Board edge clearance violation (board setup constraints edge clearance 0.2000 mm; actual 0.1017 mm)",
+            "item_uuids": [
+              "1af69ad7-30f3-4fc3-b566-1d187dbea766",
+              "bfbfa6f4-1dbe-4095-a771-3fb9a012fb75"
+            ],
+            "severity": "error",
+            "type": "copper_edge_clearance"
+          },
+          {
+            "description": "Board edge clearance violation (board setup constraints edge clearance 0.2000 mm; actual 0.1017 mm)",
+            "item_uuids": [
+              "1af69ad7-30f3-4fc3-b566-1d187dbea766",
+              "cd6977b0-9d88-4014-8ee0-75e9feff1d59"
+            ],
+            "severity": "error",
+            "type": "copper_edge_clearance"
+          },
+          {
+            "description": "Board edge clearance violation (board setup constraints edge clearance 0.2000 mm; actual 0.1288 mm)",
+            "item_uuids": [
+              "91541222-310a-48bc-b525-2eec1e0cb20f",
+              "e365573c-c04a-42f2-870c-493799cef56f"
+            ],
+            "severity": "error",
+            "type": "copper_edge_clearance"
+          },
+          {
+            "description": "Board edge clearance violation (board setup constraints edge clearance 0.2000 mm; actual 0.1287 mm)",
+            "item_uuids": [
+              "91c5ca5e-308e-4f8b-8d63-7c761c4637bd",
+              "e365573c-c04a-42f2-870c-493799cef56f"
+            ],
+            "severity": "error",
+            "type": "copper_edge_clearance"
+          },
+          {
+            "description": "Board edge clearance violation (board setup constraints edge clearance 0.2000 mm; actual 0.1287 mm)",
+            "item_uuids": [
+              "a379a696-fdc3-4f66-808c-ae939631c307",
+              "e365573c-c04a-42f2-870c-493799cef56f"
+            ],
+            "severity": "error",
+            "type": "copper_edge_clearance"
+          },
+          {
+            "description": "Footprint 'PinHeader_1x07_P1.00mm_Vertical' does not match copy in library 'Connector_PinHeader_1.00mm'",
+            "item_uuids": [
+              "3240801f-f64a-4643-9616-2075f77afb4c"
+            ],
+            "severity": "warning",
+            "type": "lib_footprint_mismatch"
+          },
+          {
+            "description": "Footprint 'PinHeader_1x07_P1.00mm_Vertical' does not match copy in library 'Connector_PinHeader_1.00mm'",
+            "item_uuids": [
+              "bf680257-8d20-43fa-8238-9a189f9c2bf5"
+            ],
+            "severity": "warning",
+            "type": "lib_footprint_mismatch"
+          }
+        ]
+      },
+      "unconnected_items": {
+        "before": 0,
+        "after": 0,
+        "added": [],
+        "removed": []
+      },
+      "schematic_parity": {
+        "before": 11,
+        "after": 11,
+        "added": [],
+        "removed": []
+      }
+    },
+    "retained-netclasses": {
+      "violations": {
+        "before": 121,
+        "after": 110,
+        "added": [
+          {
+            "description": "Clearance violation ( clearance 0.2000 mm; actual 0.1200 mm)",
+            "item_uuids": [
+              "9e1e972e-d661-4acc-91bc-aaa44d6689d4",
+              "ee2785a4-1245-43e1-83e8-fa4973870f0b"
+            ],
+            "severity": "error",
+            "type": "clearance"
+          },
+          {
+            "description": "Clearance violation ( clearance 0.2000 mm; actual 0.1200 mm)",
+            "item_uuids": [
+              "78db17b2-2f62-4a45-adfd-0e17aa75a498",
+              "ee2785a4-1245-43e1-83e8-fa4973870f0b"
+            ],
+            "severity": "error",
+            "type": "clearance"
+          },
+          {
+            "description": "Clearance violation ( clearance 0.2000 mm; actual 0.1200 mm)",
+            "item_uuids": [
+              "1a982502-40db-4b68-bfea-018025c9e930",
+              "78db17b2-2f62-4a45-adfd-0e17aa75a498"
+            ],
+            "severity": "error",
+            "type": "clearance"
+          },
+          {
+            "description": "Clearance violation ( clearance 0.2000 mm; actual 0.1200 mm)",
+            "item_uuids": [
+              "18b55959-0e81-4b52-8da7-0494f5bc61f2",
+              "7ae1aaaa-f303-4441-9163-758b71841e0e"
+            ],
+            "severity": "error",
+            "type": "clearance"
+          },
+          {
+            "description": "Clearance violation ( clearance 0.2000 mm; actual 0.1200 mm)",
+            "item_uuids": [
+              "06e03c7f-5890-410b-8cd8-b2f017358ea9",
+              "7ae1aaaa-f303-4441-9163-758b71841e0e"
+            ],
+            "severity": "error",
+            "type": "clearance"
+          },
+          {
+            "description": "Clearance violation ( clearance 0.2000 mm; actual 0.1200 mm)",
+            "item_uuids": [
+              "0650b567-d648-499e-addc-ea01fac7e599",
+              "629d6933-e9b3-4c38-91d2-f812960f1e71"
+            ],
+            "severity": "error",
+            "type": "clearance"
+          },
+          {
+            "description": "Clearance violation ( clearance 0.2000 mm; actual 0.1200 mm)",
+            "item_uuids": [
+              "629d6933-e9b3-4c38-91d2-f812960f1e71",
+              "f9e130ac-ed56-4de6-bfc1-3bdceea6e0d0"
+            ],
+            "severity": "error",
+            "type": "clearance"
+          },
+          {
+            "description": "Clearance violation ( clearance 0.2000 mm; actual 0.1200 mm)",
+            "item_uuids": [
+              "2e3cbf76-3be2-4c68-b1f2-89d83f085094",
+              "f9e130ac-ed56-4de6-bfc1-3bdceea6e0d0"
+            ],
+            "severity": "error",
+            "type": "clearance"
+          },
+          {
+            "description": "Clearance violation ( clearance 0.2000 mm; actual 0.1200 mm)",
+            "item_uuids": [
+              "2e3cbf76-3be2-4c68-b1f2-89d83f085094",
+              "a826af09-b85c-4bd8-b045-8d9597e30e2c"
+            ],
+            "severity": "error",
+            "type": "clearance"
+          },
+          {
+            "description": "Clearance violation ( clearance 0.2000 mm; actual 0.1200 mm)",
+            "item_uuids": [
+              "95f0f8e9-8450-493a-82c2-f13fc3380988",
+              "a826af09-b85c-4bd8-b045-8d9597e30e2c"
+            ],
+            "severity": "error",
+            "type": "clearance"
+          },
+          {
+            "description": "Clearance violation ( clearance 0.2000 mm; actual 0.1200 mm)",
+            "item_uuids": [
+              "95f0f8e9-8450-493a-82c2-f13fc3380988",
+              "bee2e1f1-6523-4de0-88bd-204f2713e431"
+            ],
+            "severity": "error",
+            "type": "clearance"
+          }
+        ],
+        "removed": [
+          {
+            "description": "Clearance violation ( clearance 0.2000 mm; actual 0.1500 mm)",
+            "item_uuids": [
+              "9e1e972e-d661-4acc-91bc-aaa44d6689d4",
+              "ee2785a4-1245-43e1-83e8-fa4973870f0b"
+            ],
+            "severity": "error",
+            "type": "clearance"
+          },
+          {
+            "description": "Clearance violation ( clearance 0.2000 mm; actual 0.1500 mm)",
+            "item_uuids": [
+              "78db17b2-2f62-4a45-adfd-0e17aa75a498",
+              "ee2785a4-1245-43e1-83e8-fa4973870f0b"
+            ],
+            "severity": "error",
+            "type": "clearance"
+          },
+          {
+            "description": "Clearance violation ( clearance 0.2000 mm; actual 0.1500 mm)",
+            "item_uuids": [
+              "1a982502-40db-4b68-bfea-018025c9e930",
+              "78db17b2-2f62-4a45-adfd-0e17aa75a498"
+            ],
+            "severity": "error",
+            "type": "clearance"
+          },
+          {
+            "description": "Clearance violation ( clearance 0.2000 mm; actual 0.1500 mm)",
+            "item_uuids": [
+              "18b55959-0e81-4b52-8da7-0494f5bc61f2",
+              "7ae1aaaa-f303-4441-9163-758b71841e0e"
+            ],
+            "severity": "error",
+            "type": "clearance"
+          },
+          {
+            "description": "Clearance violation ( clearance 0.2000 mm; actual 0.1500 mm)",
+            "item_uuids": [
+              "06e03c7f-5890-410b-8cd8-b2f017358ea9",
+              "7ae1aaaa-f303-4441-9163-758b71841e0e"
+            ],
+            "severity": "error",
+            "type": "clearance"
+          },
+          {
+            "description": "Clearance violation ( clearance 0.2000 mm; actual 0.1500 mm)",
+            "item_uuids": [
+              "0650b567-d648-499e-addc-ea01fac7e599",
+              "629d6933-e9b3-4c38-91d2-f812960f1e71"
+            ],
+            "severity": "error",
+            "type": "clearance"
+          },
+          {
+            "description": "Clearance violation ( clearance 0.2000 mm; actual 0.1500 mm)",
+            "item_uuids": [
+              "629d6933-e9b3-4c38-91d2-f812960f1e71",
+              "f9e130ac-ed56-4de6-bfc1-3bdceea6e0d0"
+            ],
+            "severity": "error",
+            "type": "clearance"
+          },
+          {
+            "description": "Clearance violation ( clearance 0.2000 mm; actual 0.1500 mm)",
+            "item_uuids": [
+              "2e3cbf76-3be2-4c68-b1f2-89d83f085094",
+              "f9e130ac-ed56-4de6-bfc1-3bdceea6e0d0"
+            ],
+            "severity": "error",
+            "type": "clearance"
+          },
+          {
+            "description": "Clearance violation ( clearance 0.2000 mm; actual 0.1500 mm)",
+            "item_uuids": [
+              "2e3cbf76-3be2-4c68-b1f2-89d83f085094",
+              "a826af09-b85c-4bd8-b045-8d9597e30e2c"
+            ],
+            "severity": "error",
+            "type": "clearance"
+          },
+          {
+            "description": "Clearance violation ( clearance 0.2000 mm; actual 0.1500 mm)",
+            "item_uuids": [
+              "95f0f8e9-8450-493a-82c2-f13fc3380988",
+              "a826af09-b85c-4bd8-b045-8d9597e30e2c"
+            ],
+            "severity": "error",
+            "type": "clearance"
+          },
+          {
+            "description": "Clearance violation ( clearance 0.2000 mm; actual 0.1500 mm)",
+            "item_uuids": [
+              "95f0f8e9-8450-493a-82c2-f13fc3380988",
+              "bee2e1f1-6523-4de0-88bd-204f2713e431"
+            ],
+            "severity": "error",
+            "type": "clearance"
+          },
+          {
+            "description": "Board edge clearance violation (board setup constraints edge clearance 0.2000 mm; actual 0.1396 mm)",
+            "item_uuids": [
+              "18c9a067-24a5-4625-8e36-1a2ab661e9bc",
+              "e365573c-c04a-42f2-870c-493799cef56f"
+            ],
+            "severity": "error",
+            "type": "copper_edge_clearance"
+          },
+          {
+            "description": "Board edge clearance violation (board setup constraints edge clearance 0.2000 mm; actual 0.1396 mm)",
+            "item_uuids": [
+              "2727baf4-a20e-4dc4-8d56-2cae36ad27a0",
+              "e365573c-c04a-42f2-870c-493799cef56f"
+            ],
+            "severity": "error",
+            "type": "copper_edge_clearance"
+          },
+          {
+            "description": "Board edge clearance violation (board setup constraints edge clearance 0.2000 mm; actual 0.1396 mm)",
+            "item_uuids": [
+              "a2cfd543-5b76-494b-9bcc-1e523f422c16",
+              "e365573c-c04a-42f2-870c-493799cef56f"
+            ],
+            "severity": "error",
+            "type": "copper_edge_clearance"
+          },
+          {
+            "description": "Board edge clearance violation (board setup constraints edge clearance 0.2000 mm; actual 0.1017 mm)",
+            "item_uuids": [
+              "1af69ad7-30f3-4fc3-b566-1d187dbea766",
+              "1e1073b6-2c7c-4ad4-a31b-c180809f6da6"
+            ],
+            "severity": "error",
+            "type": "copper_edge_clearance"
+          },
+          {
+            "description": "Board edge clearance violation (board setup constraints edge clearance 0.2000 mm; actual 0.1017 mm)",
+            "item_uuids": [
+              "1af69ad7-30f3-4fc3-b566-1d187dbea766",
+              "bfbfa6f4-1dbe-4095-a771-3fb9a012fb75"
+            ],
+            "severity": "error",
+            "type": "copper_edge_clearance"
+          },
+          {
+            "description": "Board edge clearance violation (board setup constraints edge clearance 0.2000 mm; actual 0.1017 mm)",
+            "item_uuids": [
+              "1af69ad7-30f3-4fc3-b566-1d187dbea766",
+              "cd6977b0-9d88-4014-8ee0-75e9feff1d59"
+            ],
+            "severity": "error",
+            "type": "copper_edge_clearance"
+          },
+          {
+            "description": "Board edge clearance violation (board setup constraints edge clearance 0.2000 mm; actual 0.1288 mm)",
+            "item_uuids": [
+              "91541222-310a-48bc-b525-2eec1e0cb20f",
+              "e365573c-c04a-42f2-870c-493799cef56f"
+            ],
+            "severity": "error",
+            "type": "copper_edge_clearance"
+          },
+          {
+            "description": "Board edge clearance violation (board setup constraints edge clearance 0.2000 mm; actual 0.1287 mm)",
+            "item_uuids": [
+              "91c5ca5e-308e-4f8b-8d63-7c761c4637bd",
+              "e365573c-c04a-42f2-870c-493799cef56f"
+            ],
+            "severity": "error",
+            "type": "copper_edge_clearance"
+          },
+          {
+            "description": "Board edge clearance violation (board setup constraints edge clearance 0.2000 mm; actual 0.1287 mm)",
+            "item_uuids": [
+              "a379a696-fdc3-4f66-808c-ae939631c307",
+              "e365573c-c04a-42f2-870c-493799cef56f"
+            ],
+            "severity": "error",
+            "type": "copper_edge_clearance"
+          },
+          {
+            "description": "Footprint 'PinHeader_1x07_P1.00mm_Vertical' does not match copy in library 'Connector_PinHeader_1.00mm'",
+            "item_uuids": [
+              "3240801f-f64a-4643-9616-2075f77afb4c"
+            ],
+            "severity": "warning",
+            "type": "lib_footprint_mismatch"
+          },
+          {
+            "description": "Footprint 'PinHeader_1x07_P1.00mm_Vertical' does not match copy in library 'Connector_PinHeader_1.00mm'",
+            "item_uuids": [
+              "bf680257-8d20-43fa-8238-9a189f9c2bf5"
+            ],
+            "severity": "warning",
+            "type": "lib_footprint_mismatch"
+          }
+        ]
+      },
+      "unconnected_items": {
+        "before": 0,
+        "after": 0,
+        "added": [],
+        "removed": []
+      },
+      "schematic_parity": {
+        "before": 11,
+        "after": 11,
+        "added": [],
+        "removed": []
+      }
+    },
+    "original-edge-policy": {
+      "violations": {
+        "before": 92,
+        "after": 91,
+        "added": [
+          {
+            "description": "Board edge clearance violation (board setup constraints edge clearance 0.5000 mm; actual 0.2886 mm)",
+            "item_uuids": [
+              "18c9a067-24a5-4625-8e36-1a2ab661e9bc",
+              "e365573c-c04a-42f2-870c-493799cef56f"
+            ],
+            "severity": "error",
+            "type": "copper_edge_clearance"
+          },
+          {
+            "description": "Board edge clearance violation (board setup constraints edge clearance 0.5000 mm; actual 0.2337 mm)",
+            "item_uuids": [
+              "221164e1-cdf9-5071-8de2-3a16ece9ed30",
+              "e365573c-c04a-42f2-870c-493799cef56f"
+            ],
+            "severity": "error",
+            "type": "copper_edge_clearance"
+          },
+          {
+            "description": "Board edge clearance violation (board setup constraints edge clearance 0.5000 mm; actual 0.2886 mm)",
+            "item_uuids": [
+              "2727baf4-a20e-4dc4-8d56-2cae36ad27a0",
+              "e365573c-c04a-42f2-870c-493799cef56f"
+            ],
+            "severity": "error",
+            "type": "copper_edge_clearance"
+          },
+          {
+            "description": "Board edge clearance violation (board setup constraints edge clearance 0.5000 mm; actual 0.2887 mm)",
+            "item_uuids": [
+              "a2cfd543-5b76-494b-9bcc-1e523f422c16",
+              "e365573c-c04a-42f2-870c-493799cef56f"
+            ],
+            "severity": "error",
+            "type": "copper_edge_clearance"
+          },
+          {
+            "description": "Board edge clearance violation (board setup constraints edge clearance 0.5000 mm; actual 0.2337 mm)",
+            "item_uuids": [
+              "c1227579-013e-4ffa-b72b-869589a0d2ea",
+              "e365573c-c04a-42f2-870c-493799cef56f"
+            ],
+            "severity": "error",
+            "type": "copper_edge_clearance"
+          },
+          {
+            "description": "Board edge clearance violation (board setup constraints edge clearance 0.5000 mm; actual 0.2339 mm)",
+            "item_uuids": [
+              "e365573c-c04a-42f2-870c-493799cef56f",
+              "e9b21ab4-de4f-4bb7-a599-94cd191c0bc8"
+            ],
+            "severity": "error",
+            "type": "copper_edge_clearance"
+          },
+          {
+            "description": "Board edge clearance violation (board setup constraints edge clearance 0.5000 mm; actual 0.2517 mm)",
+            "item_uuids": [
+              "1af69ad7-30f3-4fc3-b566-1d187dbea766",
+              "1e1073b6-2c7c-4ad4-a31b-c180809f6da6"
+            ],
+            "severity": "error",
+            "type": "copper_edge_clearance"
+          },
+          {
+            "description": "Board edge clearance violation (board setup constraints edge clearance 0.5000 mm; actual 0.2517 mm)",
+            "item_uuids": [
+              "1af69ad7-30f3-4fc3-b566-1d187dbea766",
+              "bfbfa6f4-1dbe-4095-a771-3fb9a012fb75"
+            ],
+            "severity": "error",
+            "type": "copper_edge_clearance"
+          },
+          {
+            "description": "Board edge clearance violation (board setup constraints edge clearance 0.5000 mm; actual 0.2518 mm)",
+            "item_uuids": [
+              "1af69ad7-30f3-4fc3-b566-1d187dbea766",
+              "cd6977b0-9d88-4014-8ee0-75e9feff1d59"
+            ],
+            "severity": "error",
+            "type": "copper_edge_clearance"
+          },
+          {
+            "description": "Board edge clearance violation (board setup constraints edge clearance 0.5000 mm; actual 0.2338 mm)",
+            "item_uuids": [
+              "91541222-310a-48bc-b525-2eec1e0cb20f",
+              "e365573c-c04a-42f2-870c-493799cef56f"
+            ],
+            "severity": "error",
+            "type": "copper_edge_clearance"
+          },
+          {
+            "description": "Board edge clearance violation (board setup constraints edge clearance 0.5000 mm; actual 0.2337 mm)",
+            "item_uuids": [
+              "91c5ca5e-308e-4f8b-8d63-7c761c4637bd",
+              "e365573c-c04a-42f2-870c-493799cef56f"
+            ],
+            "severity": "error",
+            "type": "copper_edge_clearance"
+          },
+          {
+            "description": "Board edge clearance violation (board setup constraints edge clearance 0.5000 mm; actual 0.2337 mm)",
+            "item_uuids": [
+              "a379a696-fdc3-4f66-808c-ae939631c307",
+              "e365573c-c04a-42f2-870c-493799cef56f"
+            ],
+            "severity": "error",
+            "type": "copper_edge_clearance"
+          }
+        ],
+        "removed": [
+          {
+            "description": "Board edge clearance violation (board setup constraints edge clearance 0.5000 mm; actual 0.1396 mm)",
+            "item_uuids": [
+              "18c9a067-24a5-4625-8e36-1a2ab661e9bc",
+              "e365573c-c04a-42f2-870c-493799cef56f"
+            ],
+            "severity": "error",
+            "type": "copper_edge_clearance"
+          },
+          {
+            "description": "Board edge clearance violation (board setup constraints edge clearance 0.5000 mm; actual 0.1396 mm)",
+            "item_uuids": [
+              "2727baf4-a20e-4dc4-8d56-2cae36ad27a0",
+              "e365573c-c04a-42f2-870c-493799cef56f"
+            ],
+            "severity": "error",
+            "type": "copper_edge_clearance"
+          },
+          {
+            "description": "Board edge clearance violation (board setup constraints edge clearance 0.5000 mm; actual 0.1396 mm)",
+            "item_uuids": [
+              "a2cfd543-5b76-494b-9bcc-1e523f422c16",
+              "e365573c-c04a-42f2-870c-493799cef56f"
+            ],
+            "severity": "error",
+            "type": "copper_edge_clearance"
+          },
+          {
+            "description": "Board edge clearance violation (board setup constraints edge clearance 0.5000 mm; actual 0.2418 mm)",
+            "item_uuids": [
+              "c1227579-013e-4ffa-b72b-869589a0d2ea",
+              "e365573c-c04a-42f2-870c-493799cef56f"
+            ],
+            "severity": "error",
+            "type": "copper_edge_clearance"
+          },
+          {
+            "description": "Board edge clearance violation (board setup constraints edge clearance 0.5000 mm; actual 0.2420 mm)",
+            "item_uuids": [
+              "e365573c-c04a-42f2-870c-493799cef56f",
+              "e9b21ab4-de4f-4bb7-a599-94cd191c0bc8"
+            ],
+            "severity": "error",
+            "type": "copper_edge_clearance"
+          },
+          {
+            "description": "Board edge clearance violation (board setup constraints edge clearance 0.5000 mm; actual 0.1017 mm)",
+            "item_uuids": [
+              "1af69ad7-30f3-4fc3-b566-1d187dbea766",
+              "1e1073b6-2c7c-4ad4-a31b-c180809f6da6"
+            ],
+            "severity": "error",
+            "type": "copper_edge_clearance"
+          },
+          {
+            "description": "Board edge clearance violation (board setup constraints edge clearance 0.5000 mm; actual 0.1017 mm)",
+            "item_uuids": [
+              "1af69ad7-30f3-4fc3-b566-1d187dbea766",
+              "bfbfa6f4-1dbe-4095-a771-3fb9a012fb75"
+            ],
+            "severity": "error",
+            "type": "copper_edge_clearance"
+          },
+          {
+            "description": "Board edge clearance violation (board setup constraints edge clearance 0.5000 mm; actual 0.1017 mm)",
+            "item_uuids": [
+              "1af69ad7-30f3-4fc3-b566-1d187dbea766",
+              "cd6977b0-9d88-4014-8ee0-75e9feff1d59"
+            ],
+            "severity": "error",
+            "type": "copper_edge_clearance"
+          },
+          {
+            "description": "Board edge clearance violation (board setup constraints edge clearance 0.5000 mm; actual 0.1288 mm)",
+            "item_uuids": [
+              "91541222-310a-48bc-b525-2eec1e0cb20f",
+              "e365573c-c04a-42f2-870c-493799cef56f"
+            ],
+            "severity": "error",
+            "type": "copper_edge_clearance"
+          },
+          {
+            "description": "Board edge clearance violation (board setup constraints edge clearance 0.5000 mm; actual 0.1287 mm)",
+            "item_uuids": [
+              "91c5ca5e-308e-4f8b-8d63-7c761c4637bd",
+              "e365573c-c04a-42f2-870c-493799cef56f"
+            ],
+            "severity": "error",
+            "type": "copper_edge_clearance"
+          },
+          {
+            "description": "Board edge clearance violation (board setup constraints edge clearance 0.5000 mm; actual 0.1287 mm)",
+            "item_uuids": [
+              "a379a696-fdc3-4f66-808c-ae939631c307",
+              "e365573c-c04a-42f2-870c-493799cef56f"
+            ],
+            "severity": "error",
+            "type": "copper_edge_clearance"
+          },
+          {
+            "description": "Footprint 'PinHeader_1x07_P1.00mm_Vertical' does not match copy in library 'Connector_PinHeader_1.00mm'",
+            "item_uuids": [
+              "3240801f-f64a-4643-9616-2075f77afb4c"
+            ],
+            "severity": "warning",
+            "type": "lib_footprint_mismatch"
+          },
+          {
+            "description": "Footprint 'PinHeader_1x07_P1.00mm_Vertical' does not match copy in library 'Connector_PinHeader_1.00mm'",
+            "item_uuids": [
+              "bf680257-8d20-43fa-8238-9a189f9c2bf5"
+            ],
+            "severity": "warning",
+            "type": "lib_footprint_mismatch"
+          }
+        ]
+      },
+      "unconnected_items": {
+        "before": 0,
+        "after": 0,
+        "added": [],
+        "removed": []
+      },
+      "schematic_parity": {
+        "before": 11,
+        "after": 11,
+        "added": [],
+        "removed": []
+      }
+    }
+  },
+  "unchanged_manufacturing_plots": [
+    "stratolink-F_Paste.gtp",
+    "stratolink-B_Paste.gbp",
+    "stratolink-Edge_Cuts.gm1",
+    "stratolink-PTH.drl",
+    "stratolink-NPTH.drl"
+  ],
+  "export_zip_sha256": "cb8555cbe219766c93f7461708a14caf39928cb7db1f57b7a3fcdaba85fa4b4d",
+  "geometry_review": "geometry-verification.json",
+  "rejected_first_candidate_archive": "rejected-r1.zip",
+  "mask_process_condition": "Header web 0.119998 mm passes listed 0.10 mm minimum for 1 oz green/red/yellow/blue/purple; below 0.13 mm minimum for black/white.",
+  "original_edge_policy_added_findings_only_scoped_route_objects": true
+}

@@ -1,0 +1,295 @@
+{
+  "hashes": {
+    "baseline": "6a5acb81ba62755336af9854c99c7b035282fa712684ed4815fa456e7ffa5951",
+    "candidate": "92e890fad45ce4717198d4777afe6665475c000d052fc04f524eadbc17c878c5"
+  },
+  "physical_pad_checks": 232,
+  "logical_pad_nodes": 228,
+  "native_opens": 0,
+  "all_footprints_vias_arcs_outline_and_nonroute_objects_exact": true,
+  "all_zone_settings_and_boundaries_exact": true,
+  "schematic_and_project_byte_identical": true,
+  "changed_segment_uuids": [
+    "18c9a067-24a5-4625-8e36-1a2ab661e9bc",
+    "1e1073b6-2c7c-4ad4-a31b-c180809f6da6",
+    "2727baf4-a20e-4dc4-8d56-2cae36ad27a0",
+    "91541222-310a-48bc-b525-2eec1e0cb20f",
+    "91c5ca5e-308e-4f8b-8d63-7c761c4637bd",
+    "a2cfd543-5b76-494b-9bcc-1e523f422c16",
+    "a379a696-fdc3-4f66-808c-ae939631c307",
+    "bfbfa6f4-1dbe-4095-a771-3fb9a012fb75",
+    "c1227579-013e-4ffa-b72b-869589a0d2ea",
+    "cd6977b0-9d88-4014-8ee0-75e9feff1d59"
+  ],
+  "added_segment_uuids": [
+    "221164e1-cdf9-5071-8de2-3a16ece9ed30"
+  ],
+  "drc": {
+    "project": {
+      "violations": {
+        "before": 57,
+        "after": 57,
+        "added": [],
+        "removed": []
+      },
+      "schematic_parity": {
+        "before": 11,
+        "after": 11,
+        "added": [],
+        "removed": []
+      },
+      "unconnected_items": {
+        "before": 0,
+        "after": 0,
+        "added": [],
+        "removed": []
+      },
+      "types": {
+        "before": {
+          "courtyards_overlap": 1,
+          "track_dangling": 1,
+          "lib_footprint_mismatch": 55
+        },
+        "after": {
+          "courtyards_overlap": 1,
+          "track_dangling": 1,
+          "lib_footprint_mismatch": 55
+        }
+      }
+    },
+    "prior": {
+      "violations": {
+        "before": 70,
+        "after": 61,
+        "added": [],
+        "removed": [
+          {
+            "description": "Board edge clearance violation (board setup constraints edge clearance 0.2000 mm; actual 0.1396 mm)",
+            "item_uuids": [
+              "18c9a067-24a5-4625-8e36-1a2ab661e9bc",
+              "e365573c-c04a-42f2-870c-493799cef56f"
+            ],
+            "severity": "error",
+            "type": "copper_edge_clearance"
+          },
+          {
+            "description": "Board edge clearance violation (board setup constraints edge clearance 0.2000 mm; actual 0.1396 mm)",
+            "item_uuids": [
+              "2727baf4-a20e-4dc4-8d56-2cae36ad27a0",
+              "e365573c-c04a-42f2-870c-493799cef56f"
+            ],
+            "severity": "error",
+            "type": "copper_edge_clearance"
+          },
+          {
+            "description": "Board edge clearance violation (board setup constraints edge clearance 0.2000 mm; actual 0.1396 mm)",
+            "item_uuids": [
+              "a2cfd543-5b76-494b-9bcc-1e523f422c16",
+              "e365573c-c04a-42f2-870c-493799cef56f"
+            ],
+            "severity": "error",
+            "type": "copper_edge_clearance"
+          },
+          {
+            "description": "Board edge clearance violation (board setup constraints edge clearance 0.2000 mm; actual 0.1017 mm)",
+            "item_uuids": [
+              "1af69ad7-30f3-4fc3-b566-1d187dbea766",
+              "1e1073b6-2c7c-4ad4-a31b-c180809f6da6"
+            ],
+            "severity": "error",
+            "type": "copper_edge_clearance"
+          },
+          {
+            "description": "Board edge clearance violation (board setup constraints edge clearance 0.2000 mm; actual 0.1017 mm)",
+            "item_uuids": [
+              "1af69ad7-30f3-4fc3-b566-1d187dbea766",
+              "bfbfa6f4-1dbe-4095-a771-3fb9a012fb75"
+            ],
+            "severity": "error",
+            "type": "copper_edge_clearance"
+          },
+          {
+            "description": "Board edge clearance violation (board setup constraints edge clearance 0.2000 mm; actual 0.1017 mm)",
+            "item_uuids": [
+              "1af69ad7-30f3-4fc3-b566-1d187dbea766",
+              "cd6977b0-9d88-4014-8ee0-75e9feff1d59"
+            ],
+            "severity": "error",
+            "type": "copper_edge_clearance"
+          },
+          {
+            "description": "Board edge clearance violation (board setup constraints edge clearance 0.2000 mm; actual 0.1288 mm)",
+            "item_uuids": [
+              "91541222-310a-48bc-b525-2eec1e0cb20f",
+              "e365573c-c04a-42f2-870c-493799cef56f"
+            ],
+            "severity": "error",
+            "type": "copper_edge_clearance"
+          },
+          {
+            "description": "Board edge clearance violation (board setup constraints edge clearance 0.2000 mm; actual 0.1287 mm)",
+            "item_uuids": [
+              "91c5ca5e-308e-4f8b-8d63-7c761c4637bd",
+              "e365573c-c04a-42f2-870c-493799cef56f"
+            ],
+            "severity": "error",
+            "type": "copper_edge_clearance"
+          },
+          {
+            "description": "Board edge clearance violation (board setup constraints edge clearance 0.2000 mm; actual 0.1287 mm)",
+            "item_uuids": [
+              "a379a696-fdc3-4f66-808c-ae939631c307",
+              "e365573c-c04a-42f2-870c-493799cef56f"
+            ],
+            "severity": "error",
+            "type": "copper_edge_clearance"
+          }
+        ]
+      },
+      "schematic_parity": {
+        "before": 11,
+        "after": 11,
+        "added": [],
+        "removed": []
+      },
+      "unconnected_items": {
+        "before": 0,
+        "after": 0,
+        "added": [],
+        "removed": []
+      },
+      "types": {
+        "before": {
+          "clearance": 4,
+          "courtyards_overlap": 1,
+          "copper_edge_clearance": 9,
+          "track_dangling": 1,
+          "lib_footprint_mismatch": 55
+        },
+        "after": {
+          "clearance": 4,
+          "courtyards_overlap": 1,
+          "track_dangling": 1,
+          "lib_footprint_mismatch": 55
+        }
+      }
+    },
+    "retained-netclass": {
+      "violations": {
+        "before": 121,
+        "after": 112,
+        "added": [],
+        "removed": [
+          {
+            "description": "Board edge clearance violation (board setup constraints edge clearance 0.2000 mm; actual 0.1396 mm)",
+            "item_uuids": [
+              "18c9a067-24a5-4625-8e36-1a2ab661e9bc",
+              "e365573c-c04a-42f2-870c-493799cef56f"
+            ],
+            "severity": "error",
+            "type": "copper_edge_clearance"
+          },
+          {
+            "description": "Board edge clearance violation (board setup constraints edge clearance 0.2000 mm; actual 0.1396 mm)",
+            "item_uuids": [
+              "2727baf4-a20e-4dc4-8d56-2cae36ad27a0",
+              "e365573c-c04a-42f2-870c-493799cef56f"
+            ],
+            "severity": "error",
+            "type": "copper_edge_clearance"
+          },
+          {
+            "description": "Board edge clearance violation (board setup constraints edge clearance 0.2000 mm; actual 0.1396 mm)",
+            "item_uuids": [
+              "a2cfd543-5b76-494b-9bcc-1e523f422c16",
+              "e365573c-c04a-42f2-870c-493799cef56f"
+            ],
+            "severity": "error",
+            "type": "copper_edge_clearance"
+          },
+          {
+            "description": "Board edge clearance violation (board setup constraints edge clearance 0.2000 mm; actual 0.1017 mm)",
+            "item_uuids": [
+              "1af69ad7-30f3-4fc3-b566-1d187dbea766",
+              "1e1073b6-2c7c-4ad4-a31b-c180809f6da6"
+            ],
+            "severity": "error",
+            "type": "copper_edge_clearance"
+          },
+          {
+            "description": "Board edge clearance violation (board setup constraints edge clearance 0.2000 mm; actual 0.1017 mm)",
+            "item_uuids": [
+              "1af69ad7-30f3-4fc3-b566-1d187dbea766",
+              "bfbfa6f4-1dbe-4095-a771-3fb9a012fb75"
+            ],
+            "severity": "error",
+            "type": "copper_edge_clearance"
+          },
+          {
+            "description": "Board edge clearance violation (board setup constraints edge clearance 0.2000 mm; actual 0.1017 mm)",
+            "item_uuids": [
+              "1af69ad7-30f3-4fc3-b566-1d187dbea766",
+              "cd6977b0-9d88-4014-8ee0-75e9feff1d59"
+            ],
+            "severity": "error",
+            "type": "copper_edge_clearance"
+          },
+          {
+            "description": "Board edge clearance violation (board setup constraints edge clearance 0.2000 mm; actual 0.1288 mm)",
+            "item_uuids": [
+              "91541222-310a-48bc-b525-2eec1e0cb20f",
+              "e365573c-c04a-42f2-870c-493799cef56f"
+            ],
+            "severity": "error",
+            "type": "copper_edge_clearance"
+          },
+          {
+            "description": "Board edge clearance violation (board setup constraints edge clearance 0.2000 mm; actual 0.1287 mm)",
+            "item_uuids": [
+              "91c5ca5e-308e-4f8b-8d63-7c761c4637bd",
+              "e365573c-c04a-42f2-870c-493799cef56f"
+            ],
+            "severity": "error",
+            "type": "copper_edge_clearance"
+          },
+          {
+            "description": "Board edge clearance violation (board setup constraints edge clearance 0.2000 mm; actual 0.1287 mm)",
+            "item_uuids": [
+              "a379a696-fdc3-4f66-808c-ae939631c307",
+              "e365573c-c04a-42f2-870c-493799cef56f"
+            ],
+            "severity": "error",
+            "type": "copper_edge_clearance"
+          }
+        ]
+      },
+      "schematic_parity": {
+        "before": 11,
+        "after": 11,
+        "added": [],
+        "removed": []
+      },
+      "unconnected_items": {
+        "before": 0,
+        "after": 0,
+        "added": [],
+        "removed": []
+      },
+      "types": {
+        "before": {
+          "clearance": 55,
+          "courtyards_overlap": 1,
+          "copper_edge_clearance": 9,
+          "track_dangling": 1,
+          "lib_footprint_mismatch": 55
+        },
+        "after": {
+          "clearance": 55,
+          "courtyards_overlap": 1,
+          "track_dangling": 1,
+          "lib_footprint_mismatch": 55
+        }
+      }
+    }
+  }
+}

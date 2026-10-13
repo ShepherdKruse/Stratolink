@@ -1,0 +1,158 @@
+{
+  "baseline_commit": "d70a53d",
+  "frozen_combined_source": "/Users/twarn/Repositories/ai-working/scratch/stratolink-edges-20261012/combined/stratolink.kicad_pcb",
+  "frozen_combined_sha256": "804094fbd6ba36ff1dce9fbbe0d9976d04e665df2e5612f2b2ada4805dcaae7e",
+  "candidate": "/Users/twarn/Repositories/ai-working/scratch/stratolink-edges-20261012/routing/candidate-r2/stratolink.kicad_pcb",
+  "candidate_sha256": "c87926d6c121162258d936f6aa3e4cc3cc633ad249438340e551040a832d372a",
+  "route_only_patch_vs_d70a53d": {
+    "modified_segment_uuids": [
+      "18c9a067-24a5-4625-8e36-1a2ab661e9bc",
+      "1e1073b6-2c7c-4ad4-a31b-c180809f6da6",
+      "2727baf4-a20e-4dc4-8d56-2cae36ad27a0",
+      "91541222-310a-48bc-b525-2eec1e0cb20f",
+      "91c5ca5e-308e-4f8b-8d63-7c761c4637bd",
+      "a2cfd543-5b76-494b-9bcc-1e523f422c16",
+      "a379a696-fdc3-4f66-808c-ae939631c307",
+      "b6acae82-f692-4c92-8407-867053d1eac9",
+      "bfbfa6f4-1dbe-4095-a771-3fb9a012fb75",
+      "c1227579-013e-4ffa-b72b-869589a0d2ea",
+      "cd6977b0-9d88-4014-8ee0-75e9feff1d59",
+      "e9b21ab4-de4f-4bb7-a599-94cd191c0bc8"
+    ],
+    "added_segment_uuids": [
+      "221164e1-cdf9-5071-8de2-3a16ece9ed30"
+    ],
+    "segment_coordinates_mm": {
+      "18c9a067-24a5-4625-8e36-1a2ab661e9bc": {
+        "start": [
+          53.73,
+          64.947713
+        ],
+        "end": [
+          53.73,
+          62.842332
+        ]
+      },
+      "2727baf4-a20e-4dc4-8d56-2cae36ad27a0": {
+        "start": [
+          53.73,
+          62.842332
+        ],
+        "end": [
+          55.961085,
+          60.611247
+        ]
+      },
+      "a2cfd543-5b76-494b-9bcc-1e523f422c16": {
+        "start": [
+          53.73,
+          65.049963
+        ],
+        "end": [
+          53.73,
+          64.947713
+        ]
+      },
+      "c1227579-013e-4ffa-b72b-869589a0d2ea": {
+        "start": [
+          53.675,
+          76.82
+        ],
+        "end": [
+          53.675,
+          65.104963
+        ]
+      },
+      "bfbfa6f4-1dbe-4095-a771-3fb9a012fb75": {
+        "start": [
+          75.187,
+          67.249
+        ],
+        "end": [
+          76.299,
+          68.361
+        ]
+      },
+      "1e1073b6-2c7c-4ad4-a31b-c180809f6da6": {
+        "start": [
+          76.299,
+          68.361
+        ],
+        "end": [
+          76.299,
+          69.75
+        ]
+      },
+      "cd6977b0-9d88-4014-8ee0-75e9feff1d59": {
+        "start": [
+          76.299,
+          69.75
+        ],
+        "end": [
+          75.891,
+          70.158
+        ]
+      },
+      "a379a696-fdc3-4f66-808c-ae939631c307": {
+        "start": [
+          53.675,
+          68.584999
+        ],
+        "end": [
+          54.111648,
+          68.148353
+        ]
+      },
+      "91c5ca5e-308e-4f8b-8d63-7c761c4637bd": {
+        "start": [
+          53.675,
+          70.581084
+        ],
+        "end": [
+          53.675,
+          68.584999
+        ]
+      },
+      "91541222-310a-48bc-b525-2eec1e0cb20f": {
+        "start": [
+          54.267917,
+          71.174001
+        ],
+        "end": [
+          53.675,
+          70.581084
+        ]
+      },
+      "e9b21ab4-de4f-4bb7-a599-94cd191c0bc8": {
+        "start": [
+          54.301,
+          77.446
+        ],
+        "end": [
+          53.675,
+          76.82
+        ]
+      },
+      "b6acae82-f692-4c92-8407-867053d1eac9": {
+        "start": [
+          75.891,
+          70.158
+        ],
+        "end": [
+          75.531,
+          70.158
+        ]
+      },
+      "221164e1-cdf9-5071-8de2-3a16ece9ed30": {
+        "start": [
+          53.73,
+          65.049963
+        ],
+        "end": [
+          53.675,
+          65.104963
+        ]
+      }
+    }
+  }
+}

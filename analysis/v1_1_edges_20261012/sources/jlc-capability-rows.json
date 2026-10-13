@@ -1,0 +1,18 @@
+{
+  "url": "https://jlcpcb.com/capabilities/pcb-capabilities",
+  "readDate": "2026-10-12",
+  "rows": [
+    "          - 'row \"Hole size Tolerance Through-holes: +0.13 / -0.08 mm Press-fit holes：±0.05 mm (Finished hole size: 0.55-2.0mm. Multilayer ENIG boards and circular holes only. Mention the specific holes in PCB Remark) e.g. for the 0.6mm hole size, the finished hole size between 0.52mm to 0.73mm is acceptable. To avoid soldermask or tin stuck in the hole, recommended PTH size≥0.5mm. pcb-hole-size-tolerance-diagram\"':",
+    "          - 'row \"Min. Via hole size/diameter 0.15/0.25mm (0.1mm/0.2mm only available for board thickness ≤1mm; ENIG/OSP surface finish required) 1-layer (NPTH only): 0.3 mm hole size / 0.5 mm via diameter 2-layer: 0.15mm hole size / 0.25mm via diameter (0.1mm hole size / 0.2mm via diameter only available for board thickness ≤1mm; ENIG/OSP surface finish required) Multilayer: 0.15 mm hole size / 0.25 mm via diameter (0.1mm hole size / 0.2mm via diameter only available for board thickness ≤1mm; ENIG/OSP surface finish required) ① Via diameter should be 0.1mm(0.15mm preferred) larger than Via hole size. ② Preferred Min. Via hole size: 0.2mm ③ 0.1mm or 0.15mm hole size with any size via diameter, and 0.2mm or 0.25mm hole size with via diameter less than 0.45mm, will cost more. Please select corresponding via size option when placing order. min-via-hole-size-diameter-diagram\"':",
+    "          - row \"Pad Hole-to-Hole Spacing 0.45mm pad-hole-to-hole-spacing-diagram\":",
+    "          - 'row \"Min. track width and spacing (1 oz) 0.10 / 0.10 mm (4 / 4 mil) 1- and 2-layer: 0.10 / 0.10 mm (4 / 4 mil) Multilayer: 0.09 / 0.09 mm (3.5 / 3.5 mil). 3 mil is acceptable in BGA fan-outs. min-trace-width-spacing-diagram\"':",
+    "          - 'row \"PTH annular ring ≧0.20mm 2-layer: 1 oz: Recommended 0.25 mm or above; absolute minimum 0.18 mm 2 oz: 0.254 mm or above Multilayer: 1 oz: Recommended 0.20 mm or above; absolute minimum 0.15 mm 2 oz: 0.254 mm or above pth-pad-annular-ring-diagram\"':",
+    "          - row \"Pad to track clearance (1oz) 0.1mm Min. 0.1 mm (stay well above if possible). Min. 0.09 mm locally for BGA pads pad-to-track-clearance-diagram\":",
+    "          - row \"PTH to Track 0.28mm 0.35mm is recommended, minimum 0.28mm pth-to-track-clearance-limit\":",
+    "          - 'row \"Routed 0.2mm ① Copper clearance from routed board edges: ≧0.2 mm ② Copper clearance from routed slots: ≧0.2 mm ③ Dimension tolerance for routed board edges: ±0.2 mm (regular precision); ±0.1 mm (high precision) ④ Minimum dimension 50*50mm for high precision, and at least 3 tooling holes with minimum 1.5mm diameter on different corners. ⑤ Minimum slot width for aluminum/copper core PCB: 1.6mm. pcb-via-solder-mask-opening-process\"':",
+    "          - row \"Soldermask Expansion 1:1 LDI equipment upgraded in June 2025. Pad size:soldermask opening can be 1:1(Previous production file will be followed in Reorder). Keep at least 0.09 mm clearance between soldermask openings and neighboring traces. soldermask-expansion-and-clearance\":",
+    "          - 'row \"Soldermask bridge 0.10mm 1oz: Min. pad spacing: 0.10 mm (green, red, yellow, blue, purple) Min. pad spacing: 0.13 mm (black, white) 2oz: Min. pad spacing: 0.20 mm (any color) min-soldermask-bridge-width-diagram\"':",
+    "          - row \"Solder mask dielectric constant 3.8 pcb-solder-mask-thickness-cross-section\":",
+    "          - row \"Solder mask ink thickness ≥ 10μm\":"
+  ]
+}

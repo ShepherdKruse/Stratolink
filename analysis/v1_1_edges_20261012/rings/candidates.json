@@ -1,0 +1,39 @@
+{
+  "baseline": "d70a53d2093454084c9b1ae989d0276a88395334",
+  "candidates": [
+    {
+      "name": "pad0p88",
+      "directory": "/Users/twarn/Repositories/ai-working/scratch/stratolink-edges-20261012/rings/pad0p88",
+      "land_mm": 0.88,
+      "annulus_mm": 0.19,
+      "nominal_adjacent_gap_mm": 0.12,
+      "libraries": [
+        "Stratolink_Header_Left_1x07_P1p00_D0p50_Pad0p88.kicad_mod",
+        "Stratolink_Header_Right_1x07_P1p00_D0p50_Pad0p88.kicad_mod"
+      ],
+      "pcb_sha256": "194705abb2dc3151d6cf067892d350fda43a495820eb89e202c78e2a616d5ec1",
+      "counts": {
+        "violations": 55,
+        "unconnected_items": 0,
+        "schematic_parity": 11
+      }
+    },
+    {
+      "name": "pad0p90",
+      "directory": "/Users/twarn/Repositories/ai-working/scratch/stratolink-edges-20261012/rings/pad0p90",
+      "land_mm": 0.9,
+      "annulus_mm": 0.2,
+      "nominal_adjacent_gap_mm": 0.09999999999999998,
+      "libraries": [
+        "Stratolink_Header_Left_1x07_P1p00_D0p50_Pad0p90.kicad_mod",
+        "Stratolink_Header_Right_1x07_P1p00_D0p50_Pad0p90.kicad_mod"
+      ],
+      "pcb_sha256": "f6bdea31f5b861c4bb87f39b9eb8c0759451618048e942470a3572a5b698a307",
+      "counts": {
+        "violations": 55,
+        "unconnected_items": 0,
+        "schematic_parity": 11
+      }
+    }
+  ]
+}

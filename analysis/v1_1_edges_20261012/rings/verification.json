@@ -1,0 +1,409 @@
+{
+  "status": "pass_scoped_candidate_not_manufacturing_release",
+  "baseline": "d70a53d2093454084c9b1ae989d0276a88395334",
+  "candidate": "/Users/twarn/Repositories/ai-working/scratch/stratolink-edges-20261012/rings/pad0p88",
+  "pcb_sha256": "194705abb2dc3151d6cf067892d350fda43a495820eb89e202c78e2a616d5ec1",
+  "schematic_sha256": "dfc86e757284ec980a3ba6fe2f9dec067af22c6992824b3fcd0e340135f97467",
+  "changes": [
+    {
+      "ref": "J3",
+      "pad": "1",
+      "uuid": "9e1e972e-d661-4acc-91bc-aaa44d6689d4",
+      "net": "PA1",
+      "old_size_mm": [
+        0.85,
+        0.85
+      ],
+      "new_size_mm": [
+        0.88,
+        0.88
+      ],
+      "drill_mm": 0.5
+    },
+    {
+      "ref": "J3",
+      "pad": "2",
+      "uuid": "ee2785a4-1245-43e1-83e8-fa4973870f0b",
+      "net": "GND",
+      "old_size_mm": [
+        0.85,
+        0.85
+      ],
+      "new_size_mm": [
+        0.88,
+        0.88
+      ],
+      "drill_mm": 0.5
+    },
+    {
+      "ref": "J3",
+      "pad": "3",
+      "uuid": "78db17b2-2f62-4a45-adfd-0e17aa75a498",
+      "net": "PA9",
+      "old_size_mm": [
+        0.85,
+        0.85
+      ],
+      "new_size_mm": [
+        0.88,
+        0.88
+      ],
+      "drill_mm": 0.5
+    },
+    {
+      "ref": "J3",
+      "pad": "4",
+      "uuid": "1a982502-40db-4b68-bfea-018025c9e930",
+      "net": "GND",
+      "old_size_mm": [
+        0.85,
+        0.85
+      ],
+      "new_size_mm": [
+        0.88,
+        0.88
+      ],
+      "drill_mm": 0.5
+    },
+    {
+      "ref": "J3",
+      "pad": "5",
+      "uuid": "18b55959-0e81-4b52-8da7-0494f5bc61f2",
+      "net": "GND",
+      "old_size_mm": [
+        0.85,
+        0.85
+      ],
+      "new_size_mm": [
+        0.88,
+        0.88
+      ],
+      "drill_mm": 0.5
+    },
+    {
+      "ref": "J3",
+      "pad": "6",
+      "uuid": "7ae1aaaa-f303-4441-9163-758b71841e0e",
+      "net": "PB2",
+      "old_size_mm": [
+        0.85,
+        0.85
+      ],
+      "new_size_mm": [
+        0.88,
+        0.88
+      ],
+      "drill_mm": 0.5
+    },
+    {
+      "ref": "J3",
+      "pad": "7",
+      "uuid": "06e03c7f-5890-410b-8cd8-b2f017358ea9",
+      "net": "GND",
+      "old_size_mm": [
+        0.85,
+        0.85
+      ],
+      "new_size_mm": [
+        0.88,
+        0.88
+      ],
+      "drill_mm": 0.5
+    },
+    {
+      "ref": "J4",
+      "pad": "1",
+      "uuid": "0650b567-d648-499e-addc-ea01fac7e599",
+      "net": "GND",
+      "old_size_mm": [
+        0.85,
+        0.85
+      ],
+      "new_size_mm": [
+        0.88,
+        0.88
+      ],
+      "drill_mm": 0.5
+    },
+    {
+      "ref": "J4",
+      "pad": "2",
+      "uuid": "629d6933-e9b3-4c38-91d2-f812960f1e71",
+      "net": "VSTOR",
+      "old_size_mm": [
+        0.85,
+        0.85
+      ],
+      "new_size_mm": [
+        0.88,
+        0.88
+      ],
+      "drill_mm": 0.5
+    },
+    {
+      "ref": "J4",
+      "pad": "3",
+      "uuid": "f9e130ac-ed56-4de6-bfc1-3bdceea6e0d0",
+      "net": "GND",
+      "old_size_mm": [
+        0.85,
+        0.85
+      ],
+      "new_size_mm": [
+        0.88,
+        0.88
+      ],
+      "drill_mm": 0.5
+    },
+    {
+      "ref": "J4",
+      "pad": "4",
+      "uuid": "2e3cbf76-3be2-4c68-b1f2-89d83f085094",
+      "net": "TX",
+      "old_size_mm": [
+        0.85,
+        0.85
+      ],
+      "new_size_mm": [
+        0.88,
+        0.88
+      ],
+      "drill_mm": 0.5
+    },
+    {
+      "ref": "J4",
+      "pad": "5",
+      "uuid": "a826af09-b85c-4bd8-b045-8d9597e30e2c",
+      "net": "RX",
+      "old_size_mm": [
+        0.85,
+        0.85
+      ],
+      "new_size_mm": [
+        0.88,
+        0.88
+      ],
+      "drill_mm": 0.5
+    },
+    {
+      "ref": "J4",
+      "pad": "6",
+      "uuid": "95f0f8e9-8450-493a-82c2-f13fc3380988",
+      "net": "BOOT0",
+      "old_size_mm": [
+        0.85,
+        0.85
+      ],
+      "new_size_mm": [
+        0.88,
+        0.88
+      ],
+      "drill_mm": 0.5
+    },
+    {
+      "ref": "J4",
+      "pad": "7",
+      "uuid": "bee2e1f1-6523-4de0-88bd-204f2713e431",
+      "net": "+3.3V",
+      "old_size_mm": [
+        0.85,
+        0.85
+      ],
+      "new_size_mm": [
+        0.88,
+        0.88
+      ],
+      "drill_mm": 0.5
+    }
+  ],
+  "footprint_identities": {
+    "J3": "lib:Stratolink_Header_Left_1x07_P1p00_D0p50_Pad0p88",
+    "J4": "lib:Stratolink_Header_Right_1x07_P1p00_D0p50_Pad0p88"
+  },
+  "new_libraries": {
+    "Stratolink_Header_Left_1x07_P1p00_D0p50_Pad0p88.kicad_mod": "678dfa4fbca321b1cf794539159747abaac8fc57909300c9c2ec8808c0c6612a",
+    "Stratolink_Header_Right_1x07_P1p00_D0p50_Pad0p88.kicad_mod": "55179df22f92d771234badd935817eae5e4d93c912e265e6e9e7bf03b432046c"
+  },
+  "baseline_libraries_unchanged": 80,
+  "all_other_geometry_routing_and_project_settings_unchanged": true,
+  "physical_pad_connectivity_checks": 232,
+  "holes_and_centers_unchanged": true,
+  "mask_margin_unchanged_zero": true,
+  "native_drc_delta": {
+    "project": {
+      "violations": {
+        "before": 57,
+        "after": 55,
+        "added": [],
+        "removed": [
+          {
+            "description": "Footprint 'PinHeader_1x07_P1.00mm_Vertical' does not match copy in library 'Connector_PinHeader_1.00mm'",
+            "item_uuids": [
+              "3240801f-f64a-4643-9616-2075f77afb4c"
+            ],
+            "severity": "warning",
+            "type": "lib_footprint_mismatch"
+          },
+          {
+            "description": "Footprint 'PinHeader_1x07_P1.00mm_Vertical' does not match copy in library 'Connector_PinHeader_1.00mm'",
+            "item_uuids": [
+              "bf680257-8d20-43fa-8238-9a189f9c2bf5"
+            ],
+            "severity": "warning",
+            "type": "lib_footprint_mismatch"
+          }
+        ]
+      },
+      "unconnected_items": {
+        "before": 0,
+        "after": 0,
+        "added": [],
+        "removed": []
+      },
+      "schematic_parity": {
+        "before": 11,
+        "after": 11,
+        "added": [],
+        "removed": []
+      }
+    },
+    "diagnostic": {
+      "violations": {
+        "before": 70,
+        "after": 79,
+        "added": [
+          {
+            "description": "Clearance violation ( clearance 0.1500 mm; actual 0.1200 mm)",
+            "item_uuids": [
+              "9e1e972e-d661-4acc-91bc-aaa44d6689d4",
+              "ee2785a4-1245-43e1-83e8-fa4973870f0b"
+            ],
+            "severity": "error",
+            "type": "clearance"
+          },
+          {
+            "description": "Clearance violation ( clearance 0.1500 mm; actual 0.1200 mm)",
+            "item_uuids": [
+              "78db17b2-2f62-4a45-adfd-0e17aa75a498",
+              "ee2785a4-1245-43e1-83e8-fa4973870f0b"
+            ],
+            "severity": "error",
+            "type": "clearance"
+          },
+          {
+            "description": "Clearance violation ( clearance 0.1500 mm; actual 0.1200 mm)",
+            "item_uuids": [
+              "1a982502-40db-4b68-bfea-018025c9e930",
+              "78db17b2-2f62-4a45-adfd-0e17aa75a498"
+            ],
+            "severity": "error",
+            "type": "clearance"
+          },
+          {
+            "description": "Clearance violation ( clearance 0.1500 mm; actual 0.1200 mm)",
+            "item_uuids": [
+              "18b55959-0e81-4b52-8da7-0494f5bc61f2",
+              "7ae1aaaa-f303-4441-9163-758b71841e0e"
+            ],
+            "severity": "error",
+            "type": "clearance"
+          },
+          {
+            "description": "Clearance violation ( clearance 0.1500 mm; actual 0.1200 mm)",
+            "item_uuids": [
+              "06e03c7f-5890-410b-8cd8-b2f017358ea9",
+              "7ae1aaaa-f303-4441-9163-758b71841e0e"
+            ],
+            "severity": "error",
+            "type": "clearance"
+          },
+          {
+            "description": "Clearance violation ( clearance 0.1500 mm; actual 0.1200 mm)",
+            "item_uuids": [
+              "0650b567-d648-499e-addc-ea01fac7e599",
+              "629d6933-e9b3-4c38-91d2-f812960f1e71"
+            ],
+            "severity": "error",
+            "type": "clearance"
+          },
+          {
+            "description": "Clearance violation ( clearance 0.1500 mm; actual 0.1200 mm)",
+            "item_uuids": [
+              "629d6933-e9b3-4c38-91d2-f812960f1e71",
+              "f9e130ac-ed56-4de6-bfc1-3bdceea6e0d0"
+            ],
+            "severity": "error",
+            "type": "clearance"
+          },
+          {
+            "description": "Clearance violation ( clearance 0.1500 mm; actual 0.1200 mm)",
+            "item_uuids": [
+              "2e3cbf76-3be2-4c68-b1f2-89d83f085094",
+              "f9e130ac-ed56-4de6-bfc1-3bdceea6e0d0"
+            ],
+            "severity": "error",
+            "type": "clearance"
+          },
+          {
+            "description": "Clearance violation ( clearance 0.1500 mm; actual 0.1200 mm)",
+            "item_uuids": [
+              "2e3cbf76-3be2-4c68-b1f2-89d83f085094",
+              "a826af09-b85c-4bd8-b045-8d9597e30e2c"
+            ],
+            "severity": "error",
+            "type": "clearance"
+          },
+          {
+            "description": "Clearance violation ( clearance 0.1500 mm; actual 0.1200 mm)",
+            "item_uuids": [
+              "95f0f8e9-8450-493a-82c2-f13fc3380988",
+              "a826af09-b85c-4bd8-b045-8d9597e30e2c"
+            ],
+            "severity": "error",
+            "type": "clearance"
+          },
+          {
+            "description": "Clearance violation ( clearance 0.1500 mm; actual 0.1200 mm)",
+            "item_uuids": [
+              "95f0f8e9-8450-493a-82c2-f13fc3380988",
+              "bee2e1f1-6523-4de0-88bd-204f2713e431"
+            ],
+            "severity": "error",
+            "type": "clearance"
+          }
+        ],
+        "removed": [
+          {
+            "description": "Footprint 'PinHeader_1x07_P1.00mm_Vertical' does not match copy in library 'Connector_PinHeader_1.00mm'",
+            "item_uuids": [
+              "3240801f-f64a-4643-9616-2075f77afb4c"
+            ],
+            "severity": "warning",
+            "type": "lib_footprint_mismatch"
+          },
+          {
+            "description": "Footprint 'PinHeader_1x07_P1.00mm_Vertical' does not match copy in library 'Connector_PinHeader_1.00mm'",
+            "item_uuids": [
+              "bf680257-8d20-43fa-8238-9a189f9c2bf5"
+            ],
+            "severity": "warning",
+            "type": "lib_footprint_mismatch"
+          }
+        ]
+      },
+      "unconnected_items": {
+        "before": 0,
+        "after": 0,
+        "added": [],
+        "removed": []
+      },
+      "schematic_parity": {
+        "before": 11,
+        "after": 11,
+        "added": [],
+        "removed": []
+      }
+    }
+  },
+  "limits": "Uniform0.15mm diagnostic intentionally rejects the ~0.12mm PTH pad gaps; those are explicit fabrication-screen findings, not suppressed. Independent combined review must check edge-route changes and local manufacturing minima."
+}

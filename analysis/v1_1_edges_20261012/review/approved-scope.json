@@ -1,0 +1,327 @@
+{
+  "changed_segments": [
+    "18c9a067-24a5-4625-8e36-1a2ab661e9bc",
+    "1e1073b6-2c7c-4ad4-a31b-c180809f6da6",
+    "2727baf4-a20e-4dc4-8d56-2cae36ad27a0",
+    "91541222-310a-48bc-b525-2eec1e0cb20f",
+    "91c5ca5e-308e-4f8b-8d63-7c761c4637bd",
+    "a2cfd543-5b76-494b-9bcc-1e523f422c16",
+    "a379a696-fdc3-4f66-808c-ae939631c307",
+    "b6acae82-f692-4c92-8407-867053d1eac9",
+    "bfbfa6f4-1dbe-4095-a771-3fb9a012fb75",
+    "c1227579-013e-4ffa-b72b-869589a0d2ea",
+    "cd6977b0-9d88-4014-8ee0-75e9feff1d59",
+    "e9b21ab4-de4f-4bb7-a599-94cd191c0bc8"
+  ],
+  "added_segments": [
+    "221164e1-cdf9-5071-8de2-3a16ece9ed30"
+  ],
+  "removed_segments": [],
+  "library_files": [
+    "Stratolink_Header_Left_1x07_P1p00_D0p50_Pad0p88.kicad_mod",
+    "Stratolink_Header_Right_1x07_P1p00_D0p50_Pad0p88.kicad_mod"
+  ],
+  "schematic_footprints": {
+    "J3": "lib:Stratolink_Header_Left_1x07_P1p00_D0p50_Pad0p88",
+    "J4": "lib:Stratolink_Header_Right_1x07_P1p00_D0p50_Pad0p88"
+  },
+  "footprints": {
+    "J3": {
+      "library_id": "lib:Stratolink_Header_Left_1x07_P1p00_D0p50_Pad0p88",
+      "pads": {
+        "1": {
+          "fields": [
+            "size"
+          ]
+        },
+        "2": {
+          "fields": [
+            "size"
+          ]
+        },
+        "3": {
+          "fields": [
+            "size"
+          ]
+        },
+        "4": {
+          "fields": [
+            "size"
+          ]
+        },
+        "5": {
+          "fields": [
+            "size"
+          ]
+        },
+        "6": {
+          "fields": [
+            "size"
+          ]
+        },
+        "7": {
+          "fields": [
+            "size"
+          ]
+        }
+      }
+    },
+    "J4": {
+      "library_id": "lib:Stratolink_Header_Right_1x07_P1p00_D0p50_Pad0p88",
+      "pads": {
+        "1": {
+          "fields": [
+            "size"
+          ]
+        },
+        "2": {
+          "fields": [
+            "size"
+          ]
+        },
+        "3": {
+          "fields": [
+            "size"
+          ]
+        },
+        "4": {
+          "fields": [
+            "size"
+          ]
+        },
+        "5": {
+          "fields": [
+            "size"
+          ]
+        },
+        "6": {
+          "fields": [
+            "size"
+          ]
+        },
+        "7": {
+          "fields": [
+            "size"
+          ]
+        }
+      }
+    }
+  },
+  "expected_new_drc": {
+    "project": {
+      "violations": [],
+      "unconnected_items": [],
+      "schematic_parity": []
+    },
+    "prior-uniform": {
+      "violations": [
+        {
+          "description": "Clearance violation ( clearance 0.1500 mm; actual 0.1200 mm)",
+          "item_uuids": [
+            "9e1e972e-d661-4acc-91bc-aaa44d6689d4",
+            "ee2785a4-1245-43e1-83e8-fa4973870f0b"
+          ],
+          "severity": "error",
+          "type": "clearance"
+        },
+        {
+          "description": "Clearance violation ( clearance 0.1500 mm; actual 0.1200 mm)",
+          "item_uuids": [
+            "78db17b2-2f62-4a45-adfd-0e17aa75a498",
+            "ee2785a4-1245-43e1-83e8-fa4973870f0b"
+          ],
+          "severity": "error",
+          "type": "clearance"
+        },
+        {
+          "description": "Clearance violation ( clearance 0.1500 mm; actual 0.1200 mm)",
+          "item_uuids": [
+            "1a982502-40db-4b68-bfea-018025c9e930",
+            "78db17b2-2f62-4a45-adfd-0e17aa75a498"
+          ],
+          "severity": "error",
+          "type": "clearance"
+        },
+        {
+          "description": "Clearance violation ( clearance 0.1500 mm; actual 0.1200 mm)",
+          "item_uuids": [
+            "18b55959-0e81-4b52-8da7-0494f5bc61f2",
+            "7ae1aaaa-f303-4441-9163-758b71841e0e"
+          ],
+          "severity": "error",
+          "type": "clearance"
+        },
+        {
+          "description": "Clearance violation ( clearance 0.1500 mm; actual 0.1200 mm)",
+          "item_uuids": [
+            "06e03c7f-5890-410b-8cd8-b2f017358ea9",
+            "7ae1aaaa-f303-4441-9163-758b71841e0e"
+          ],
+          "severity": "error",
+          "type": "clearance"
+        },
+        {
+          "description": "Clearance violation ( clearance 0.1500 mm; actual 0.1200 mm)",
+          "item_uuids": [
+            "0650b567-d648-499e-addc-ea01fac7e599",
+            "629d6933-e9b3-4c38-91d2-f812960f1e71"
+          ],
+          "severity": "error",
+          "type": "clearance"
+        },
+        {
+          "description": "Clearance violation ( clearance 0.1500 mm; actual 0.1200 mm)",
+          "item_uuids": [
+            "629d6933-e9b3-4c38-91d2-f812960f1e71",
+            "f9e130ac-ed56-4de6-bfc1-3bdceea6e0d0"
+          ],
+          "severity": "error",
+          "type": "clearance"
+        },
+        {
+          "description": "Clearance violation ( clearance 0.1500 mm; actual 0.1200 mm)",
+          "item_uuids": [
+            "2e3cbf76-3be2-4c68-b1f2-89d83f085094",
+            "f9e130ac-ed56-4de6-bfc1-3bdceea6e0d0"
+          ],
+          "severity": "error",
+          "type": "clearance"
+        },
+        {
+          "description": "Clearance violation ( clearance 0.1500 mm; actual 0.1200 mm)",
+          "item_uuids": [
+            "2e3cbf76-3be2-4c68-b1f2-89d83f085094",
+            "a826af09-b85c-4bd8-b045-8d9597e30e2c"
+          ],
+          "severity": "error",
+          "type": "clearance"
+        },
+        {
+          "description": "Clearance violation ( clearance 0.1500 mm; actual 0.1200 mm)",
+          "item_uuids": [
+            "95f0f8e9-8450-493a-82c2-f13fc3380988",
+            "a826af09-b85c-4bd8-b045-8d9597e30e2c"
+          ],
+          "severity": "error",
+          "type": "clearance"
+        },
+        {
+          "description": "Clearance violation ( clearance 0.1500 mm; actual 0.1200 mm)",
+          "item_uuids": [
+            "95f0f8e9-8450-493a-82c2-f13fc3380988",
+            "bee2e1f1-6523-4de0-88bd-204f2713e431"
+          ],
+          "severity": "error",
+          "type": "clearance"
+        }
+      ],
+      "unconnected_items": [],
+      "schematic_parity": []
+    },
+    "retained-netclasses": {
+      "violations": [
+        {
+          "description": "Clearance violation ( clearance 0.2000 mm; actual 0.1200 mm)",
+          "item_uuids": [
+            "9e1e972e-d661-4acc-91bc-aaa44d6689d4",
+            "ee2785a4-1245-43e1-83e8-fa4973870f0b"
+          ],
+          "severity": "error",
+          "type": "clearance"
+        },
+        {
+          "description": "Clearance violation ( clearance 0.2000 mm; actual 0.1200 mm)",
+          "item_uuids": [
+            "78db17b2-2f62-4a45-adfd-0e17aa75a498",
+            "ee2785a4-1245-43e1-83e8-fa4973870f0b"
+          ],
+          "severity": "error",
+          "type": "clearance"
+        },
+        {
+          "description": "Clearance violation ( clearance 0.2000 mm; actual 0.1200 mm)",
+          "item_uuids": [
+            "1a982502-40db-4b68-bfea-018025c9e930",
+            "78db17b2-2f62-4a45-adfd-0e17aa75a498"
+          ],
+          "severity": "error",
+          "type": "clearance"
+        },
+        {
+          "description": "Clearance violation ( clearance 0.2000 mm; actual 0.1200 mm)",
+          "item_uuids": [
+            "18b55959-0e81-4b52-8da7-0494f5bc61f2",
+            "7ae1aaaa-f303-4441-9163-758b71841e0e"
+          ],
+          "severity": "error",
+          "type": "clearance"
+        },
+        {
+          "description": "Clearance violation ( clearance 0.2000 mm; actual 0.1200 mm)",
+          "item_uuids": [
+            "06e03c7f-5890-410b-8cd8-b2f017358ea9",
+            "7ae1aaaa-f303-4441-9163-758b71841e0e"
+          ],
+          "severity": "error",
+          "type": "clearance"
+        },
+        {
+          "description": "Clearance violation ( clearance 0.2000 mm; actual 0.1200 mm)",
+          "item_uuids": [
+            "0650b567-d648-499e-addc-ea01fac7e599",
+            "629d6933-e9b3-4c38-91d2-f812960f1e71"
+          ],
+          "severity": "error",
+          "type": "clearance"
+        },
+        {
+          "description": "Clearance violation ( clearance 0.2000 mm; actual 0.1200 mm)",
+          "item_uuids": [
+            "629d6933-e9b3-4c38-91d2-f812960f1e71",
+            "f9e130ac-ed56-4de6-bfc1-3bdceea6e0d0"
+          ],
+          "severity": "error",
+          "type": "clearance"
+        },
+        {
+          "description": "Clearance violation ( clearance 0.2000 mm; actual 0.1200 mm)",
+          "item_uuids": [
+            "2e3cbf76-3be2-4c68-b1f2-89d83f085094",
+            "f9e130ac-ed56-4de6-bfc1-3bdceea6e0d0"
+          ],
+          "severity": "error",
+          "type": "clearance"
+        },
+        {
+          "description": "Clearance violation ( clearance 0.2000 mm; actual 0.1200 mm)",
+          "item_uuids": [
+            "2e3cbf76-3be2-4c68-b1f2-89d83f085094",
+            "a826af09-b85c-4bd8-b045-8d9597e30e2c"
+          ],
+          "severity": "error",
+          "type": "clearance"
+        },
+        {
+          "description": "Clearance violation ( clearance 0.2000 mm; actual 0.1200 mm)",
+          "item_uuids": [
+            "95f0f8e9-8450-493a-82c2-f13fc3380988",
+            "a826af09-b85c-4bd8-b045-8d9597e30e2c"
+          ],
+          "severity": "error",
+          "type": "clearance"
+        },
+        {
+          "description": "Clearance violation ( clearance 0.2000 mm; actual 0.1200 mm)",
+          "item_uuids": [
+            "95f0f8e9-8450-493a-82c2-f13fc3380988",
+            "bee2e1f1-6523-4de0-88bd-204f2713e431"
+          ],
+          "severity": "error",
+          "type": "clearance"
+        }
+      ],
+      "unconnected_items": [],
+      "schematic_parity": []
+    }
+  }
+}

@@ -54205,7 +54205,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "Connector_PinHeader_1.00mm:PinHeader_1x07_P1.00mm_Vertical"
+		(property "Footprint" "lib:Stratolink_Header_Right_1x07_P1p00_D0p50_Pad0p88"
 			(at 52.07 73.66 0)
 			(effects
 				(font
@@ -58535,7 +58535,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "Connector_PinHeader_1.00mm:PinHeader_1x07_P1.00mm_Vertical"
+		(property "Footprint" "lib:Stratolink_Header_Left_1x07_P1p00_D0p50_Pad0p88"
 			(at 20.32 73.66 0)
 			(effects
 				(font
