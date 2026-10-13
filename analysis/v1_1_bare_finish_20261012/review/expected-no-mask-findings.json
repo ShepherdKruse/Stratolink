@@ -1,0 +1,41 @@
+{
+  "non_bridge_findings": [
+    {
+      "description": "Silkscreen clipped by solder mask",
+      "item_uuids": [
+        "19552f78-8bc8-5d58-a252-cce4c7aa3763",
+        "d33ff207-5537-4175-aad0-4a6a2127c38c"
+      ],
+      "severity": "warning",
+      "type": "silk_over_copper"
+    },
+    {
+      "description": "Silkscreen clipped by solder mask",
+      "item_uuids": [
+        "19552f78-8bc8-5d58-a252-cce4c7aa3763",
+        "70fd784f-4460-4c2f-b1b0-5920dc836f3e"
+      ],
+      "severity": "warning",
+      "type": "silk_over_copper"
+    },
+    {
+      "description": "Silkscreen clipped by solder mask",
+      "item_uuids": [
+        "19552f78-8bc8-5d58-a252-cce4c7aa3763",
+        "8a2d562a-cd15-40da-973d-853d9daff557"
+      ],
+      "severity": "warning",
+      "type": "silk_over_copper"
+    },
+    {
+      "description": "Silkscreen clipped by solder mask",
+      "item_uuids": [
+        "19552f78-8bc8-5d58-a252-cce4c7aa3763",
+        "857ef018-87a1-4fd2-b5a3-b7c725b5a4a9"
+      ],
+      "severity": "warning",
+      "type": "silk_over_copper"
+    }
+  ],
+  "mask_bridge_policy": "Raw enabled diagnostics may enumerate different representative collisions across repeated native runs. Every added mask-bridge finding must explicitly name one of the two full-board opening rectangles. Record all raw findings and counts, but do not require an invariant representative count."
+}

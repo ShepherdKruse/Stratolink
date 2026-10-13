@@ -1,0 +1,21 @@
+{
+  "source_url": "https://stratolink.org/docs/hardware#antennas-and-suspension",
+  "accessed": "2026-10-12",
+  "access_method": "Codex in-app browser visible documentation",
+  "user_confirmation": "Both antennas are straight enameled copper wire, cut to different lengths.",
+  "feed_mapping": {
+    "AE1": "LoRa",
+    "AE2": "GNSS"
+  },
+  "starting_lengths_from_feed_mm": {
+    "GPS_L1_1575p42_MHz": 48,
+    "LoRa_915_MHz": 82,
+    "LoRa_868_MHz": 86,
+    "LoRa_868_to_928_compromise": 83
+  },
+  "reference_model_selection_mm": {
+    "AE1": 82,
+    "AE2": 48
+  },
+  "scope": "Hardware assembly reference only; actual match depends on installed panels, coating, wiring and shape. Published docs do not state wire gauge or solder insertion tail."
+}

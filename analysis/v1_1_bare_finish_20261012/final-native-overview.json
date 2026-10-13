@@ -1,0 +1,18 @@
+{
+  "renderer": "KiCad 10.0.0 native pcb render",
+  "source": "/Users/twarn/Repositories/ai-working/scratch/stratolink-bare-finish-20261012/combined",
+  "source_pcb_sha256": "c0278f66e3eae9c135da38b97afaa241990706feb0ae730cbd5dc9a1a9ee4603",
+  "render_copy": "/Users/twarn/Repositories/ai-working/scratch/stratolink-bare-finish-20261012/mask/final-render",
+  "image_sha256": "5fbe3c915d95261ba43177b1df5e36905b12bd9fb13840b586d413b363b52eed",
+  "parameters": {
+    "width": 2400,
+    "height": 2100,
+    "side": "top",
+    "zoom": 0.25,
+    "quality": "basic",
+    "background": "transparent",
+    "rotate": "30,0,0"
+  },
+  "model_load_warnings": [],
+  "visual_review": "Full mainboard, two curved solar panels, red solar leads and both straight antenna wires visible. GNSS top wire visibly shorter than915MHz bottom wire. All endpoints fit frame; body exposed copper visible. Native colors are illustrative surface-finish colors."
+}

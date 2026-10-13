@@ -1,0 +1,190 @@
+{
+  "pass_scope": true,
+  "unchanged_physical_pad_sets": 232,
+  "opens": 0,
+  "unchanged_fabrication_outputs": [
+    "stratolink-F_Cu.gtl",
+    "stratolink-B_Cu.gbl",
+    "stratolink-F_Mask.gts",
+    "stratolink-B_Mask.gbs",
+    "stratolink-F_Paste.gtp",
+    "stratolink-B_Paste.gbp",
+    "stratolink-Edge_Cuts.gm1",
+    "stratolink-PTH.drl",
+    "stratolink-NPTH.drl"
+  ],
+  "project_drc_delta": {
+    "violations": {
+      "before": 55,
+      "after": 52,
+      "added": [],
+      "removed": [
+        {
+          "description": "Courtyards overlap",
+          "item_uuids": [
+            "ac1294a3-a7f7-4b6f-861f-9caf238595b7",
+            "cb6e427a-5658-48c0-b3e5-886229735fee"
+          ],
+          "severity": "error",
+          "type": "courtyards_overlap"
+        },
+        {
+          "description": "Footprint '4269' does not match copy in library 'lib'",
+          "item_uuids": [
+            "13246e82-bda3-4c58-a5aa-eaafc07e970a"
+          ],
+          "severity": "warning",
+          "type": "lib_footprint_mismatch"
+        },
+        {
+          "description": "Footprint '4269' does not match copy in library 'lib'",
+          "item_uuids": [
+            "cb6e427a-5658-48c0-b3e5-886229735fee"
+          ],
+          "severity": "warning",
+          "type": "lib_footprint_mismatch"
+        }
+      ]
+    },
+    "unconnected_items": {
+      "before": 0,
+      "after": 0,
+      "added": [],
+      "removed": []
+    },
+    "schematic_parity": {
+      "before": 11,
+      "after": 11,
+      "added": [],
+      "removed": []
+    }
+  },
+  "geometry": {
+    "AE2": {
+      "at_mm": [
+        62.882,
+        33.218
+      ],
+      "angle_degrees": 90.0,
+      "pads": [
+        {
+          "number": "1",
+          "at_mm": [
+            62.882,
+            33.218
+          ],
+          "size_mm": [
+            1.5,
+            1.5
+          ],
+          "drill_mm": [
+            1.0,
+            1.0
+          ]
+        }
+      ]
+    },
+    "D1": {
+      "at_mm": [
+        71.058,
+        82.813
+      ],
+      "angle_degrees": 180.0,
+      "pads": [
+        {
+          "number": "1",
+          "at_mm": [
+            71.758001,
+            82.813
+          ],
+          "size_mm": [
+            0.6,
+            0.7
+          ],
+          "drill_mm": [
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "number": "2",
+          "at_mm": [
+            70.357999,
+            82.813
+          ],
+          "size_mm": [
+            0.6,
+            0.7
+          ],
+          "drill_mm": [
+            0.0,
+            0.0
+          ]
+        }
+      ]
+    },
+    "AE1": {
+      "at_mm": [
+        68.396,
+        82.703
+      ],
+      "angle_degrees": -90.0,
+      "pads": [
+        {
+          "number": "1",
+          "at_mm": [
+            68.396,
+            82.703
+          ],
+          "size_mm": [
+            1.5,
+            1.5
+          ],
+          "drill_mm": [
+            1.0,
+            1.0
+          ]
+        }
+      ]
+    },
+    "D3": {
+      "at_mm": [
+        60.306,
+        37.391
+      ],
+      "angle_degrees": 90.0,
+      "pads": [
+        {
+          "number": "1",
+          "at_mm": [
+            60.306,
+            38.091001
+          ],
+          "size_mm": [
+            0.6,
+            0.7
+          ],
+          "drill_mm": [
+            0.0,
+            0.0
+          ]
+        },
+        {
+          "number": "2",
+          "at_mm": [
+            60.306,
+            36.690999
+          ],
+          "size_mm": [
+            0.6,
+            0.7
+          ],
+          "drill_mm": [
+            0.0,
+            0.0
+          ]
+        }
+      ]
+    }
+  }
+}

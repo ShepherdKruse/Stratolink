@@ -1,0 +1,58 @@
+{
+  "AE1": {
+    "model_vertices": 188,
+    "model_bounds_board_mm": [
+      [
+        68.396,
+        82.54250000096009,
+        -1.8000000434472165
+      ],
+      [
+        68.71699999300003,
+        164.70300126360564,
+        0.3605837154964762
+      ]
+    ],
+    "courtyard_bounds_mm": [
+      67.146,
+      81.453,
+      69.646,
+      169.703
+    ],
+    "model_projection_inside_courtyard": true,
+    "diameter_mm_nominal": 0.321,
+    "insertion_leg_mm_nominal": 2,
+    "margin_model_to_courtyard_mm": 0.9290000069999705
+  },
+  "AE2": {
+    "model_vertices": 188,
+    "model_bounds_board_mm": [
+      [
+        62.76100758700113,
+        -14.781992322230693,
+        -1.650001290111665
+      ],
+      [
+        63.08209764582518,
+        33.37850849788563,
+        0.5104989979666067
+      ]
+    ],
+    "courtyard_bounds_mm": [
+      61.632,
+      -15.781999999999996,
+      64.132,
+      34.468
+    ],
+    "model_projection_inside_courtyard": true,
+    "diameter_mm_nominal": 0.321,
+    "insertion_leg_mm_nominal": 2,
+    "margin_model_to_courtyard_mm": 1.0000076777693039
+  },
+  "D1_AE1": {
+    "courtyard_clearance_mm": 0.16200000000000614,
+    "ant_land_to_diode_nearest_land_mm": 0.9119989999999942,
+    "recorded_diode_fab_body_to_model_projection_mm": 1.691000006999999,
+    "original_courtyard_overlap_area_mm2": 3.2732000000000046
+  }
+}

@@ -1,0 +1,99 @@
+(footprint "Stratolink_LoRa_Wire_PTH_D1p0"
+		(version 20260101) (generator "pcbnew") (generator_version "10.0")
+	(layer "F.Cu")
+
+
+		(descr "Hand-formed enamelled copper wire; 82 mm from feed for 915 MHz, 83 mm compromise or 86 mm for 868 MHz; diameter not yet measured")
+		(tags "Antenna")
+		(property "Reference" "AE**"
+			(at 7.875 0 90)
+			(layer "F.SilkS")
+			(hide yes)
+			(uuid "ec86b66a-9f12-4199-833b-6b3e8047e805")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.254)
+				)
+			)
+		)
+		(property "Value" "Enameled Cu wire 82mm (915MHz reference)"
+			(at 7.875 0 90)
+			(layer "F.SilkS")
+			(hide yes)
+			(uuid "5d32c2d6-3a9d-4619-9d37-9edb8882f931")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.254)
+				)
+			)
+		)
+		(property "Datasheet" "https://stratolink.org/docs/hardware#antennas-and-suspension"
+			(at 0 0 90)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "54b79d5b-63a1-48a0-8ddc-fc9896ff9a4e")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+		(property "Description" "Hand-formed enamelled copper wire; 82 mm from feed for 915 MHz, 83 mm compromise or 86 mm for 868 MHz; diameter not yet measured"
+			(at 0 0 90)
+			(layer "F.Fab")
+			(hide yes)
+			(uuid "a99b7cdf-0e2a-4f5c-aec9-f3b67b72ec8e")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+			)
+		)
+
+
+
+		(attr through_hole)
+		(duplicate_pad_numbers_are_jumpers no)
+
+
+
+
+
+
+
+
+
+		(pad "1" thru_hole circle
+			(at 0 0)
+			(size 1.5 1.5)
+			(drill 1)
+			(layers "*.Cu" "*.Mask")
+			(remove_unused_layers no)
+
+
+
+			(uuid "4030e0a2-b9c3-4ae6-9d6f-ffae3c8a1895")
+		)
+		(embedded_fonts no)
+		(model "${KIPRJMOD}/lib/Stratolink_Wire_82mm_D0p321_Nominal.step"
+			(offset
+				(xyz 0 0 0)
+			)
+			(scale
+				(xyz 1 1 1)
+			)
+			(rotate
+				(xyz 90 180 90)
+			)
+		)
+
+	(fp_line (start -1.25 -1.25) (end 87 -1.25) (stroke (width 0.05) (type solid)) (layer "F.CrtYd") (uuid "56a72bb7-b809-5d2a-80f7-7a6c4b5a16d5"))
+	(fp_line (start 87 -1.25) (end 87 1.25) (stroke (width 0.05) (type solid)) (layer "F.CrtYd") (uuid "b61f2685-13f8-5a1e-b5bc-488ca4a2eefb"))
+	(fp_line (start 87 1.25) (end -1.25 1.25) (stroke (width 0.05) (type solid)) (layer "F.CrtYd") (uuid "81f09384-5dfb-5a6c-959d-ba51ad3d1207"))
+	(fp_line (start -1.25 1.25) (end -1.25 -1.25) (stroke (width 0.05) (type solid)) (layer "F.CrtYd") (uuid "e423757f-99a2-5673-8dae-fd04efd85a48"))
+	(fp_line (start 0 0) (end 82 0) (stroke (width 0.321) (type solid)) (layer "F.Fab") (uuid "bbef88b5-ef8e-5dc3-91ca-910d7037b25c"))
+)

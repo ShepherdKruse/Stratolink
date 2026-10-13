@@ -1,0 +1,44 @@
+{
+  "source_hash": "35ebb51bba5fa2cf2760db6865276754bf8a75a0c8bdef4f4eb364838037f9c3",
+  "native_version": "10.0.0",
+  "physical_pad_sets_preserved": 232,
+  "zero_opens": true,
+  "front_and_back_native_copper_polygons_exact": true,
+  "unchanged_manufacturing_plots": [
+    "stratolink-B_Cu.gbl",
+    "stratolink-B_Paste.gbp",
+    "stratolink-Edge_Cuts.gm1",
+    "stratolink-F_Cu.gtl",
+    "stratolink-F_Paste.gtp",
+    "stratolink-NPTH.drl",
+    "stratolink-PTH.drl"
+  ],
+  "changed_manufacturing_plots": [
+    "stratolink-B_Mask.gbs",
+    "stratolink-F_Mask.gts"
+  ],
+  "drc": {
+    "baseline": {
+      "violations": 55,
+      "types": {
+        "courtyards_overlap": 1,
+        "track_dangling": 1,
+        "lib_footprint_mismatch": 53
+      },
+      "unconnected": 0,
+      "parity": 11
+    },
+    "candidate": {
+      "violations": 356,
+      "types": {
+        "courtyards_overlap": 1,
+        "solder_mask_bridge": 297,
+        "track_dangling": 1,
+        "lib_footprint_mismatch": 53,
+        "silk_over_copper": 4
+      },
+      "unconnected": 0,
+      "parity": 11
+    }
+  }
+}

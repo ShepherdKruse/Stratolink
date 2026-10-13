@@ -1,0 +1,42 @@
+[
+  {
+    "text": "+",
+    "uuid": "d33ff207-5537-4175-aad0-4a6a2127c38c",
+    "distance_to_old_mask_opening_mm": 0.33850900000000195,
+    "area_on_old_mask_openings_mm2": 0.0,
+    "nearest_copper_pad": "J2.1",
+    "distance_to_copper_pad_mm": 0.33656618429366875,
+    "area_on_copper_pads_mm2": 0.0,
+    "area_on_copper_mm2": 0.0
+  },
+  {
+    "text": "GND",
+    "uuid": "70fd784f-4460-4c2f-b1b0-5920dc836f3e",
+    "distance_to_old_mask_opening_mm": 0.9997641408772354,
+    "area_on_old_mask_openings_mm2": 0.0,
+    "nearest_copper_pad": "J2.2",
+    "distance_to_copper_pad_mm": 0.9997641408772354,
+    "area_on_copper_pads_mm2": 0.0,
+    "area_on_copper_mm2": 0.6213444464785234
+  },
+  {
+    "text": "GND",
+    "uuid": "857ef018-87a1-4fd2-b5a3-b7c725b5a4a9",
+    "distance_to_old_mask_opening_mm": 0.49368074142101515,
+    "area_on_old_mask_openings_mm2": 0.0,
+    "nearest_copper_pad": "J1.2",
+    "distance_to_copper_pad_mm": 0.49368074142101515,
+    "area_on_copper_pads_mm2": 0.0,
+    "area_on_copper_mm2": 0.3560129532607598
+  },
+  {
+    "text": "+",
+    "uuid": "8a2d562a-cd15-40da-973d-853d9daff557",
+    "distance_to_old_mask_opening_mm": 0.33850900000000195,
+    "area_on_old_mask_openings_mm2": 0.0,
+    "nearest_copper_pad": "J1.1",
+    "distance_to_copper_pad_mm": 0.33656618429366875,
+    "area_on_copper_pads_mm2": 0.0,
+    "area_on_copper_mm2": 0.13651650573013321
+  }
+]

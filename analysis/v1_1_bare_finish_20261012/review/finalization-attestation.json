@@ -1,0 +1,35 @@
+{
+  "status": "passed",
+  "reviewed_candidate": "/Users/twarn/Repositories/ai-working/scratch/stratolink-bare-finish-20261012/combined",
+  "final_candidate": "/Users/twarn/Repositories/ai-working/scratch/stratolink-bare-finish-20261012/combined-final",
+  "reviewed_pcb_sha256": "c0278f66e3eae9c135da38b97afaa241990706feb0ae730cbd5dc9a1a9ee4603",
+  "final_pcb_sha256": "ea78337c91c73d27b813f09f74dd2d2993e5a82d09800362d82c49a0c4f3ed96",
+  "normalized_files": {
+    "stratolink.kicad_pcb": {
+      "before_sha256": "c0278f66e3eae9c135da38b97afaa241990706feb0ae730cbd5dc9a1a9ee4603",
+      "after_sha256": "ea78337c91c73d27b813f09f74dd2d2993e5a82d09800362d82c49a0c4f3ed96",
+      "blank_lines_normalized": 21,
+      "entire_parse_tree_exact": true,
+      "only_removed_blank_line_whitespace": true
+    },
+    "lib/Stratolink_GNSS_Wire_PTH_D1p0.kicad_mod": {
+      "before_sha256": "362c70435248e198cec1006944264f4c3a20c5b34dc55fafcde1096616b5baea",
+      "after_sha256": "3ce5f2f3ca3e850c9f6a108c82058d5ce4b7d4f267c4ef480d9010c1bc913468",
+      "blank_lines_normalized": 18,
+      "entire_parse_tree_exact": true,
+      "only_removed_blank_line_whitespace": true
+    },
+    "lib/Stratolink_LoRa_Wire_PTH_D1p0.kicad_mod": {
+      "before_sha256": "6676e1f0e85b33b5cc2bbff20d038db687fed4f4fbd1701b1c78c8975010ab48",
+      "after_sha256": "9634c73a0eadb59d2ec6e7f6e0a98329c0f0cf281fa7b0f27688cb449698a2d1",
+      "blank_lines_normalized": 18,
+      "entire_parse_tree_exact": true,
+      "only_removed_blank_line_whitespace": true
+    }
+  },
+  "other_88_cad_library_files_byte_exact": true,
+  "all_91_manifest_hashes_verified": true,
+  "prior_verification_sha256": "23afe0455e26f28070b03af073c377b4c999ac58a757e55583125a157b2c4f03",
+  "geometry_verification_sha256": "77ba0043a3c4c07c2c2924304f4a6cd4b16c976301dd1ed9077039aa7029b8df",
+  "interpretation": "Final bytes differ only by whitespace on 21 blank PCB lines and 18 blank lines in each of the two new antenna footprints. Complete parse trees are exact for all three changed files; the other 88 files are byte-identical. Previous native connectivity, DRC and fabrication evidence therefore applies to this final source without a second broad test run."
+}

@@ -1,0 +1,29 @@
+{
+  "reviewed_source": "/Users/twarn/Repositories/ai-working/scratch/stratolink-bare-finish-20261012/combined",
+  "final_source": "/Users/twarn/Repositories/ai-working/scratch/stratolink-bare-finish-20261012/combined-final",
+  "reviewed_pcb_sha256": "c0278f66e3eae9c135da38b97afaa241990706feb0ae730cbd5dc9a1a9ee4603",
+  "final_pcb_sha256": "ea78337c91c73d27b813f09f74dd2d2993e5a82d09800362d82c49a0c4f3ed96",
+  "whitespace_only_lines_cleared": 21,
+  "entire_parsed_pcb_equal": true,
+  "other_project_library_files_exact": 88,
+  "normalized_files": {
+    "stratolink.kicad_pcb": {
+      "before_sha256": "c0278f66e3eae9c135da38b97afaa241990706feb0ae730cbd5dc9a1a9ee4603",
+      "after_sha256": "ea78337c91c73d27b813f09f74dd2d2993e5a82d09800362d82c49a0c4f3ed96",
+      "whitespace_only_lines_cleared": 21,
+      "entire_parsed_tree_equal": true
+    },
+    "lib/Stratolink_GNSS_Wire_PTH_D1p0.kicad_mod": {
+      "before_sha256": "362c70435248e198cec1006944264f4c3a20c5b34dc55fafcde1096616b5baea",
+      "after_sha256": "3ce5f2f3ca3e850c9f6a108c82058d5ce4b7d4f267c4ef480d9010c1bc913468",
+      "whitespace_only_lines_cleared": 18,
+      "entire_parsed_tree_equal": true
+    },
+    "lib/Stratolink_LoRa_Wire_PTH_D1p0.kicad_mod": {
+      "before_sha256": "6676e1f0e85b33b5cc2bbff20d038db687fed4f4fbd1701b1c78c8975010ab48",
+      "after_sha256": "9634c73a0eadb59d2ec6e7f6e0a98329c0f0cf281fa7b0f27688cb449698a2d1",
+      "whitespace_only_lines_cleared": 18,
+      "entire_parsed_tree_equal": true
+    }
+  }
+}

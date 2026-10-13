@@ -53104,7 +53104,7 @@
 				(hide yes)
 			)
 		)
-		(property "Value" "Antenna"
+		(property "Value" "Enameled Cu wire 82mm (915MHz reference)"
 			(at 160.02 20.9549 0)
 			(effects
 				(font
@@ -53114,7 +53114,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "lib:4269"
+		(property "Footprint" "lib:Stratolink_LoRa_Wire_PTH_D1p0"
 			(at 157.48 19.05 0)
 			(effects
 				(font
@@ -53123,7 +53123,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "https://www.digikey.com/en/products/detail/adafruit-industries-llc/4269/10313908"
+		(property "Datasheet" "https://stratolink.org/docs/hardware#antennas-and-suspension"
 			(at 157.48 19.05 0)
 			(effects
 				(font
@@ -53132,7 +53132,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "1528-4269-ND"
+		(property "Description" "Hand-formed enamelled copper wire; 82 mm from feed for 915 MHz, 83 mm compromise or 86 mm for 868 MHz; diameter not yet measured"
 			(at 157.48 19.05 0)
 			(effects
 				(font
@@ -56454,7 +56454,7 @@
 				(hide yes)
 			)
 		)
-		(property "Value" "Antenna"
+		(property "Value" "Enameled Cu wire 48mm (GNSS L1)"
 			(at 167.64 120.0149 0)
 			(effects
 				(font
@@ -56464,7 +56464,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "lib:4269"
+		(property "Footprint" "lib:Stratolink_GNSS_Wire_PTH_D1p0"
 			(at 165.1 118.11 0)
 			(effects
 				(font
@@ -56473,7 +56473,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "https://www.lcsc.com/product-detail/C89334.html?s_z=n_Johanson%25201575AT43A40"
+		(property "Datasheet" "https://stratolink.org/docs/hardware#antennas-and-suspension"
 			(at 165.1 118.11 0)
 			(effects
 				(font
@@ -56482,7 +56482,7 @@
 				(hide yes)
 			)
 		)
-		(property "Description" "2450AT18A100E"
+		(property "Description" "Hand-formed enamelled copper wire; 48 mm from feed for GNSS L1; diameter not yet measured"
 			(at 165.1 118.11 0)
 			(effects
 				(font

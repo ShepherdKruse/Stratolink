@@ -1,0 +1,123 @@
+{
+  "duplicate_stub": {
+    "uuid": "fa277942-2f97-4c70-a150-464479c3b65e",
+    "containing_track": "bfbfa6f4-1dbe-4095-a771-3fb9a012fb75",
+    "ideal_width_mm": 0.25,
+    "centerline_length_mm": 0.01131370849898854,
+    "exactly_collinear": true,
+    "fully_contained_same_width": true,
+    "raw_polygon_approximation_residue_mm2": 0.0
+  },
+  "copper": {
+    "F.Cu": {
+      "added_mm2": 1.993994939619322e-08,
+      "removed_mm2": 1.1938964304744363e-08,
+      "difference_beyond_50nm_mm2": 0.0
+    },
+    "B.Cu": {
+      "added_mm2": 0.0,
+      "removed_mm2": 0.0,
+      "difference_beyond_50nm_mm2": 0.0
+    }
+  },
+  "mask_exports": {
+    "F": {
+      "negative_mask_file_polarity": true,
+      "no_clear_operations": true,
+      "full_opening_bounds_mm": [
+        52.0,
+        28.0,
+        78.0,
+        88.0
+      ],
+      "covered_board_area_mm2": 0,
+      "covered_copper_area_mm2": 0,
+      "outline_to_opening_edge_margin_mm": 1.3050000000000068
+    },
+    "B": {
+      "negative_mask_file_polarity": true,
+      "no_clear_operations": true,
+      "full_opening_bounds_mm": [
+        52.0,
+        28.0,
+        78.0,
+        88.0
+      ],
+      "covered_board_area_mm2": 0,
+      "covered_copper_area_mm2": 0,
+      "outline_to_opening_edge_margin_mm": 1.3050000000000068
+    }
+  },
+  "courtyard": {
+    "baseline": {
+      "native_cached_overlap_mm2": 3.2359200000000055,
+      "native_cached_clearance_mm": 0.0,
+      "drawn_envelope_overlap_mm2": 3.2732000000000046,
+      "drawn_envelope_clearance_mm": 0.0,
+      "native_cached_bounds_mm": {
+        "AE1": [
+          64.650999,
+          80.957999,
+          72.141,
+          100.198
+        ],
+        "D1": [
+          69.813,
+          82.118,
+          72.303,
+          83.508
+        ]
+      },
+      "drawn_bounds_mm": {
+        "AE1": [
+          64.645999,
+          80.952999,
+          72.146,
+          100.203001
+        ],
+        "D1": [
+          69.808,
+          82.113,
+          72.308,
+          83.513
+        ]
+      }
+    },
+    "candidate": {
+      "native_cached_overlap_mm2": 0.0,
+      "native_cached_clearance_mm": 0.17199999999999704,
+      "drawn_envelope_overlap_mm2": 0.0,
+      "drawn_envelope_clearance_mm": 0.16200000000000614,
+      "native_cached_bounds_mm": {
+        "AE1": [
+          67.151,
+          81.458,
+          69.641,
+          169.698
+        ],
+        "D1": [
+          69.813,
+          82.118,
+          72.303,
+          83.508
+        ]
+      },
+      "drawn_bounds_mm": {
+        "AE1": [
+          67.146,
+          81.453,
+          69.646,
+          169.703
+        ],
+        "D1": [
+          69.808,
+          82.113,
+          72.308,
+          83.513
+        ]
+      }
+    }
+  },
+  "unchanged_antenna_to_diode_copper_mm": 0.9119989999999946,
+  "interpretation": "All pad, via and remaining track polygons are identical. The sole removed conductor is an exact duplicate inside the retained route. Full-board mask openings cover all native board and copper geometry on both faces; no clear-polarity Gerber operation can re-cover an area. Drawn courtyard centerline envelopes have a 0.162 mm gap; native GetCourtyard caches have boundaries inset 0.005 mm each and therefore a 0.172 mm gap. Stroke width is a drawing convention, not extra assembly space. Antenna courtyard represents the documented installation envelope, not a measured final solder joint or RF qualification. Stackup thickness is nominal."
+}

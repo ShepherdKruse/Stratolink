@@ -54,7 +54,7 @@
 			)
 			(layer "F.Mask"
 				(type "Top Solder Mask")
-				(thickness 0.01)
+				(thickness 0)
 			)
 			(layer "F.Cu"
 				(type "copper")
@@ -62,7 +62,7 @@
 			)
 			(layer "dielectric 1"
 				(type "core")
-				(thickness 0.31)
+				(thickness 0.33)
 				(material "FR4")
 				(epsilon_r 4.5)
 				(loss_tangent 0.02)
@@ -73,7 +73,7 @@
 			)
 			(layer "B.Mask"
 				(type "Bottom Solder Mask")
-				(thickness 0.01)
+				(thickness 0)
 			)
 			(layer "B.Paste"
 				(type "Bottom Solder Paste")
@@ -87,8 +87,8 @@
 		(pad_to_mask_clearance 0)
 		(allow_soldermask_bridges_in_footprints no)
 		(tenting
-			(front yes)
-			(back yes)
+			(front no)
+			(back no)
 		)
 		(covering
 			(front no)
@@ -689,11 +689,11 @@
 			)
 		)
 	)
-	(footprint "lib:4269"
+	(footprint "lib:Stratolink_GNSS_Wire_PTH_D1p0"
 		(layer "F.Cu")
 		(uuid "13246e82-bda3-4c58-a5aa-eaafc07e970a")
 		(at 62.882 33.218 90)
-		(descr "4269-2")
+		(descr "Hand-formed enamelled copper wire; 48 mm from feed for GNSS L1; diameter not yet measured")
 		(tags "Antenna")
 		(property "Reference" "AE2"
 			(at 7.875 0 90)
@@ -707,7 +707,7 @@
 				)
 			)
 		)
-		(property "Value" "Antenna"
+		(property "Value" "Enameled Cu wire 48mm (GNSS L1)"
 			(at 7.875 0 90)
 			(layer "F.SilkS")
 			(hide yes)
@@ -719,7 +719,7 @@
 				)
 			)
 		)
-		(property "Datasheet" "https://www.lcsc.com/product-detail/C89334.html?s_z=n_Johanson%25201575AT43A40"
+		(property "Datasheet" "https://stratolink.org/docs/hardware#antennas-and-suspension"
 			(at 0 0 90)
 			(layer "F.Fab")
 			(hide yes)
@@ -731,7 +731,7 @@
 				)
 			)
 		)
-		(property "Description" "2450AT18A100E"
+		(property "Description" "Hand-formed enamelled copper wire; 48 mm from feed for GNSS L1; diameter not yet measured"
 			(at 0 0 90)
 			(layer "F.Fab")
 			(hide yes)
@@ -748,96 +748,15 @@
 		(sheetfile "stratolink.kicad_sch")
 		(attr through_hole)
 		(duplicate_pad_numbers_are_jumpers no)
-		(fp_line
-			(start 17.5 -3.75)
-			(end 17.500001 3.749999)
-			(stroke
-				(width 0.1)
-				(type solid)
-			)
-			(layer "F.CrtYd")
-			(uuid "c4ad32d0-3dc5-4653-ad54-604358f2ae2f")
-		)
-		(fp_line
-			(start -1.750001 -3.75)
-			(end 17.5 -3.75)
-			(stroke
-				(width 0.1)
-				(type solid)
-			)
-			(layer "F.CrtYd")
-			(uuid "b8aeb7ab-750f-4458-b23c-1f58183e5080")
-		)
-		(fp_line
-			(start 17.500001 3.749999)
-			(end -1.75 3.750001)
-			(stroke
-				(width 0.1)
-				(type solid)
-			)
-			(layer "F.CrtYd")
-			(uuid "82286c54-26e3-436a-835b-437bebfc5b35")
-		)
-		(fp_line
-			(start -1.75 3.750001)
-			(end -1.750001 -3.75)
-			(stroke
-				(width 0.1)
-				(type solid)
-			)
-			(layer "F.CrtYd")
-			(uuid "537b872d-f47a-49f8-9ec1-5e0614e5d57b")
-		)
-		(fp_line
-			(start 4.5 -2.75)
-			(end 16.500001 -2.749999)
-			(stroke
-				(width 0.2)
-				(type solid)
-			)
-			(layer "F.Fab")
-			(uuid "2ae42035-8795-4fed-a0b3-34c66b7aacb6")
-		)
-		(fp_line
-			(start 16.500001 -2.749999)
-			(end 16.5 2.750001)
-			(stroke
-				(width 0.2)
-				(type solid)
-			)
-			(layer "F.Fab")
-			(uuid "f04b9f46-6e6f-45cb-85b8-ae0a9740ca4b")
-		)
-		(fp_line
-			(start 0 0)
-			(end 4.5 0)
-			(stroke
-				(width 0.8)
-				(type solid)
-			)
-			(layer "F.Fab")
-			(uuid "39c889a6-1765-433a-a7cd-fffb4c9d7650")
-		)
-		(fp_line
-			(start 4.5 2.75)
-			(end 4.5 -2.75)
-			(stroke
-				(width 0.2)
-				(type solid)
-			)
-			(layer "F.Fab")
-			(uuid "44e99de2-90e6-4da1-805c-f0dd458e26ab")
-		)
-		(fp_line
-			(start 16.5 2.750001)
-			(end 4.5 2.75)
-			(stroke
-				(width 0.2)
-				(type solid)
-			)
-			(layer "F.Fab")
-			(uuid "5f104e2c-6728-4453-ad24-5fde141f619a")
-		)
+
+
+
+
+
+
+
+
+
 		(pad "1" thru_hole circle
 			(at 0 0 90)
 			(size 1.5 1.5)
@@ -850,7 +769,7 @@
 			(uuid "ea905b28-8305-405a-81ea-939d803338f6")
 		)
 		(embedded_fonts no)
-		(model "${KIPRJMOD}/lib/gps.step"
+		(model "${KIPRJMOD}/lib/Stratolink_Wire_48mm_D0p321_Nominal.step"
 			(offset
 				(xyz 0 -0.2 0.15)
 			)
@@ -861,7 +780,13 @@
 				(xyz -90 0 -90)
 			)
 		)
-	)
+
+	(fp_line (start -1.25 -1.25) (end 49 -1.25) (stroke (width 0.05) (type solid)) (layer "F.CrtYd") (uuid "9cb8d863-a037-5538-8ea7-246520abbaef"))
+	(fp_line (start 49 -1.25) (end 49 1.25) (stroke (width 0.05) (type solid)) (layer "F.CrtYd") (uuid "ecc5c221-d3f9-5c6a-b949-9ab2e8a1e38e"))
+	(fp_line (start 49 1.25) (end -1.25 1.25) (stroke (width 0.05) (type solid)) (layer "F.CrtYd") (uuid "c9299f72-caf1-5ef1-b5bc-1d109e08ab4e"))
+	(fp_line (start -1.25 1.25) (end -1.25 -1.25) (stroke (width 0.05) (type solid)) (layer "F.CrtYd") (uuid "0f6d63c8-cebc-5937-afdf-5a96b8b691fd"))
+	(fp_line (start 0 0) (end 48 0) (stroke (width 0.321) (type solid)) (layer "F.Fab") (uuid "57a15ec1-1fde-5f79-ae3d-3c718fed0643"))
+)
 	(footprint "lib:SMD6_LTR-390UV-01_LTO-L"
 		(layer "F.Cu")
 		(uuid "152294ae-3a82-4899-9b98-d0f0561ff04d")
@@ -9131,11 +9056,11 @@
 		)
 		(embedded_fonts no)
 	)
-	(footprint "lib:4269"
+	(footprint "lib:Stratolink_LoRa_Wire_PTH_D1p0"
 		(layer "F.Cu")
 		(uuid "cb6e427a-5658-48c0-b3e5-886229735fee")
 		(at 68.396 82.703 -90)
-		(descr "4269-2")
+		(descr "Hand-formed enamelled copper wire; 82 mm from feed for 915 MHz, 83 mm compromise or 86 mm for 868 MHz; diameter not yet measured")
 		(tags "Antenna")
 		(property "Reference" "AE1"
 			(at 7.875 0 90)
@@ -9149,7 +9074,7 @@
 				)
 			)
 		)
-		(property "Value" "Antenna"
+		(property "Value" "Enameled Cu wire 82mm (915MHz reference)"
 			(at 7.875 0 90)
 			(layer "F.SilkS")
 			(hide yes)
@@ -9161,7 +9086,7 @@
 				)
 			)
 		)
-		(property "Datasheet" "https://www.digikey.com/en/products/detail/adafruit-industries-llc/4269/10313908"
+		(property "Datasheet" "https://stratolink.org/docs/hardware#antennas-and-suspension"
 			(at 0 0 90)
 			(layer "F.Fab")
 			(hide yes)
@@ -9173,7 +9098,7 @@
 				)
 			)
 		)
-		(property "Description" "1528-4269-ND"
+		(property "Description" "Hand-formed enamelled copper wire; 82 mm from feed for 915 MHz, 83 mm compromise or 86 mm for 868 MHz; diameter not yet measured"
 			(at 0 0 90)
 			(layer "F.Fab")
 			(hide yes)
@@ -9190,96 +9115,15 @@
 		(sheetfile "stratolink.kicad_sch")
 		(attr through_hole)
 		(duplicate_pad_numbers_are_jumpers no)
-		(fp_line
-			(start -1.750001 3.750001)
-			(end -1.750001 -3.75)
-			(stroke
-				(width 0.1)
-				(type solid)
-			)
-			(layer "F.CrtYd")
-			(uuid "c2721d18-eacd-4143-b4e0-83a3599835c9")
-		)
-		(fp_line
-			(start 17.500001 3.749999)
-			(end -1.750001 3.750001)
-			(stroke
-				(width 0.1)
-				(type solid)
-			)
-			(layer "F.CrtYd")
-			(uuid "3840f785-b948-41c4-9720-fe5d5fc8cc1e")
-		)
-		(fp_line
-			(start -1.750001 -3.75)
-			(end 17.5 -3.75)
-			(stroke
-				(width 0.1)
-				(type solid)
-			)
-			(layer "F.CrtYd")
-			(uuid "86bf2fb3-1199-4647-9899-8923b72e182d")
-		)
-		(fp_line
-			(start 17.5 -3.75)
-			(end 17.500001 3.749999)
-			(stroke
-				(width 0.1)
-				(type solid)
-			)
-			(layer "F.CrtYd")
-			(uuid "d5bbeee4-e110-4985-b729-e36b67ad2ef5")
-		)
-		(fp_line
-			(start 4.5 2.75)
-			(end 4.5 -2.75)
-			(stroke
-				(width 0.2)
-				(type solid)
-			)
-			(layer "F.Fab")
-			(uuid "3e10354e-ffc5-4da6-9308-534e2b1797fd")
-		)
-		(fp_line
-			(start 16.499998 2.75)
-			(end 4.5 2.75)
-			(stroke
-				(width 0.2)
-				(type solid)
-			)
-			(layer "F.Fab")
-			(uuid "b1491824-ff6c-4571-9b91-e5c26e03ae83")
-		)
-		(fp_line
-			(start 0 0)
-			(end 4.5 0)
-			(stroke
-				(width 0.8)
-				(type solid)
-			)
-			(layer "F.Fab")
-			(uuid "49e59521-63bf-4c0a-b37e-48638bf4ac2b")
-		)
-		(fp_line
-			(start 16.500001 -2.749999)
-			(end 16.499998 2.75)
-			(stroke
-				(width 0.2)
-				(type solid)
-			)
-			(layer "F.Fab")
-			(uuid "f622f0e7-5bff-4ec4-8a42-4c71b39196f0")
-		)
-		(fp_line
-			(start 4.5 -2.75)
-			(end 16.500001 -2.749999)
-			(stroke
-				(width 0.2)
-				(type solid)
-			)
-			(layer "F.Fab")
-			(uuid "c3333e8a-26dd-40e7-8e61-b5754e386d85")
-		)
+
+
+
+
+
+
+
+
+
 		(pad "1" thru_hole circle
 			(at 0 0 270)
 			(size 1.5 1.5)
@@ -9292,7 +9136,7 @@
 			(uuid "4030e0a2-b9c3-4ae6-9d6f-ffae3c8a1895")
 		)
 		(embedded_fonts no)
-		(model "${KIPRJMOD}/lib/gps.step"
+		(model "${KIPRJMOD}/lib/Stratolink_Wire_82mm_D0p321_Nominal.step"
 			(offset
 				(xyz 0 0 0)
 			)
@@ -9303,7 +9147,13 @@
 				(xyz 90 180 90)
 			)
 		)
-	)
+
+	(fp_line (start -1.25 -1.25) (end 87 -1.25) (stroke (width 0.05) (type solid)) (layer "F.CrtYd") (uuid "56a72bb7-b809-5d2a-80f7-7a6c4b5a16d5"))
+	(fp_line (start 87 -1.25) (end 87 1.25) (stroke (width 0.05) (type solid)) (layer "F.CrtYd") (uuid "b61f2685-13f8-5a1e-b5bc-488ca4a2eefb"))
+	(fp_line (start 87 1.25) (end -1.25 1.25) (stroke (width 0.05) (type solid)) (layer "F.CrtYd") (uuid "81f09384-5dfb-5a6c-959d-ba51ad3d1207"))
+	(fp_line (start -1.25 1.25) (end -1.25 -1.25) (stroke (width 0.05) (type solid)) (layer "F.CrtYd") (uuid "e423757f-99a2-5673-8dae-fd04efd85a48"))
+	(fp_line (start 0 0) (end 82 0) (stroke (width 0.321) (type solid)) (layer "F.Fab") (uuid "bbef88b5-ef8e-5dc3-91ca-910d7037b25c"))
+)
 	(footprint "Resistor_SMD:R_0402_1005Metric"
 		(layer "F.Cu")
 		(uuid "d1d520c2-d00f-42b9-b858-28cd20e74723")
@@ -23811,14 +23661,7 @@
 		(net "VSTOR")
 		(uuid "f98c2a1f-d0b0-4920-8908-ffd8124a515c")
 	)
-	(segment
-		(start 75.187 67.249)
-		(end 75.195 67.257)
-		(width 0.25)
-		(layer "F.Cu")
-		(net "VSTOR")
-		(uuid "fa277942-2f97-4c70-a150-464479c3b65e")
-	)
+
 	(segment
 		(start 71.824 33.503)
 		(end 75.909911 37.588911)
@@ -29178,4 +29021,28 @@
 		(members "5d8f9a43-feef-4be6-ab63-f76f9053b5b2")
 	)
 	(embedded_fonts no)
+	(gr_rect
+		(start 52 28)
+		(end 78 88)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(fill yes)
+		(locked yes)
+		(layer "F.Mask")
+		(uuid "19552f78-8bc8-5d58-a252-cce4c7aa3763")
+	)
+	(gr_rect
+		(start 52 28)
+		(end 78 88)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(fill yes)
+		(locked yes)
+		(layer "B.Mask")
+		(uuid "65f5aa32-1dfc-539e-ac84-add1df7c2354")
+	)
 )

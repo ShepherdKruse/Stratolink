@@ -1,0 +1,51 @@
+{
+  "front": {
+    "opening_bounds_mm": [
+      52.0,
+      28.0,
+      78.0,
+      88.0
+    ],
+    "opening_area_mm2": 1560.0,
+    "board_projected_area_mm2": 1329.5734371873466,
+    "covered_board_area_mm2": 0.0,
+    "copper_area_mm2": 664.6019973666259,
+    "covered_copper_area_mm2": 0.0,
+    "board_to_opening_boundary_min_mm": 1.3050000000000068,
+    "copper_islands": 143,
+    "every_native_island_exposed": true,
+    "actual_gerber_negative_file_polarity": true,
+    "actual_gerber_full_rectangle_region": true,
+    "actual_gerber_has_no_clear_plot_operation": true,
+    "actual_gerber_mask": "/Users/twarn/Repositories/ai-working/scratch/stratolink-bare-finish-20261012/mask/candidate-exports/stratolink-F_Mask.gts"
+  },
+  "back": {
+    "opening_bounds_mm": [
+      52.0,
+      28.0,
+      78.0,
+      88.0
+    ],
+    "opening_area_mm2": 1560.0,
+    "board_projected_area_mm2": 1329.5734371873466,
+    "covered_board_area_mm2": 0.0,
+    "copper_area_mm2": 817.069797296541,
+    "covered_copper_area_mm2": 0.0,
+    "board_to_opening_boundary_min_mm": 1.3050000000000068,
+    "copper_islands": 62,
+    "every_native_island_exposed": true,
+    "actual_gerber_negative_file_polarity": true,
+    "actual_gerber_full_rectangle_region": true,
+    "actual_gerber_has_no_clear_plot_operation": true,
+    "actual_gerber_mask": "/Users/twarn/Repositories/ai-working/scratch/stratolink-bare-finish-20261012/mask/candidate-exports/stratolink-B_Mask.gbs"
+  },
+  "stackup": {
+    "board_mm": 0.4,
+    "mask_layers_mm": [
+      0.0,
+      0.0
+    ],
+    "core_mm": 0.33
+  },
+  "interpretation": "The Gerber FilePolarity Negative designation identifies mask openings. Its dark full-board region removes mask over both faces. Blank mask files would not communicate this."
+}

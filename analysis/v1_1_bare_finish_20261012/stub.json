@@ -1,0 +1,14 @@
+{
+  "baseline": "41027a4a5115713016c49e61b76ecb4f4048da79",
+  "remove_uuid": "fa277942-2f97-4c70-a150-464479c3b65e",
+  "net": "VSTOR",
+  "layer": "F.Cu",
+  "width_mm": 0.25,
+  "start_mm": [75.187, 67.249],
+  "end_mm": [75.195, 67.257],
+  "length_mm": 0.01131370849898476,
+  "containing_segment_uuid": "bfbfa6f4-1dbe-4095-a771-3fb9a012fb75",
+  "containing_segment_start_mm": [75.187, 67.249],
+  "containing_segment_end_mm": [76.299, 68.361],
+  "interpretation": "The short segment is exactly collinear, shares its start with the longer segment, and is wholly contained by its same-width, same-layer, same-net copper. Its removal should leave ideal copper geometry unchanged. Final native connectivity, refilled copper and fabrication exports are checked independently on the combined candidate."
+}

@@ -1,0 +1,80 @@
+[
+  {
+    "file": "/Users/twarn/Repositories/Stratolink/hardware/pcb/lib/gps.step",
+    "status": "IFSelect_ReturnStatus.IFSelect_RetDone",
+    "load_checks": " **  Model Complete Check List  **\nCheck:1 -- Global Check\nParameter n0.1 (description) not a quoted String\nCheck:2 -- Entity (n0:id) 3:#3   Type:UNCERTAINTY_MEASURE_WITH_UNIT\nParameter n0.4 (description) not a quoted String\nCheck:3 -- Entity (n0:id) 281:#281   Type:PRODUCT\nParameter n0.4 (frame_of_reference) is an empty LIST\n",
+    "valid_brep": true,
+    "bounds_mm": [
+      [
+        -1e-07,
+        -2.0000001,
+        -0.16050000000000003
+      ],
+      [
+        0.3210001,
+        0.1605,
+        45.6000001
+      ]
+    ],
+    "volume_mm3": 3.8465624402358523,
+    "counts": {
+      "solids": 1,
+      "faces": 8
+    },
+    "nominal_feed_to_tip_mm": 45.6
+  },
+  {
+    "file": "/Users/twarn/Repositories/ai-working/scratch/stratolink-bare-finish-20261012/assembly/wire-candidate/lib/Stratolink_Wire_82mm_D0p321_Nominal.step",
+    "status": "IFSelect_ReturnStatus.IFSelect_RetDone",
+    "load_checks": " **  Model Complete Check List  **\nCheck:1 -- Global Check\nParameter n0.1 (description) not a quoted String\nCheck:2 -- Entity (n0:id) 3:#3   Type:UNCERTAINTY_MEASURE_WITH_UNIT\nParameter n0.4 (description) not a quoted String\nCheck:3 -- Entity (n0:id) 281:#281   Type:PRODUCT\nParameter n0.4 (frame_of_reference) is an empty LIST\n",
+    "valid_brep": true,
+    "bounds_mm": [
+      [
+        -1e-07,
+        -2.0000001,
+        -0.16050000000000003
+      ],
+      [
+        0.3210001,
+        0.1605,
+        82.0000001
+      ]
+    ],
+    "volume_mm3": 6.792263326571685,
+    "counts": {
+      "solids": 1,
+      "faces": 8
+    },
+    "nominal_feed_to_tip_mm": 82,
+    "added_volume_mm3": 2.945700886335833,
+    "ideal_cylinder_extension_mm3": 2.9457869224287676,
+    "relative_volume_difference": 2.9206488860203675e-05
+  },
+  {
+    "file": "/Users/twarn/Repositories/ai-working/scratch/stratolink-bare-finish-20261012/assembly/wire-candidate/lib/Stratolink_Wire_48mm_D0p321_Nominal.step",
+    "status": "IFSelect_ReturnStatus.IFSelect_RetDone",
+    "load_checks": " **  Model Complete Check List  **\nCheck:1 -- Global Check\nParameter n0.1 (description) not a quoted String\nCheck:2 -- Entity (n0:id) 3:#3   Type:UNCERTAINTY_MEASURE_WITH_UNIT\nParameter n0.4 (description) not a quoted String\nCheck:3 -- Entity (n0:id) 281:#281   Type:PRODUCT\nParameter n0.4 (frame_of_reference) is an empty LIST\n",
+    "valid_brep": true,
+    "bounds_mm": [
+      [
+        -1e-07,
+        -2.0000001,
+        -0.16050000000000003
+      ],
+      [
+        0.3210001,
+        0.1605,
+        48.0000001
+      ]
+    ],
+    "volume_mm3": 4.040784476697555,
+    "counts": {
+      "solids": 1,
+      "faces": 8
+    },
+    "nominal_feed_to_tip_mm": 48,
+    "added_volume_mm3": 0.19422203646170244,
+    "ideal_cylinder_extension_mm3": 0.19422770917112742,
+    "relative_volume_difference": 2.9206488863941137e-05
+  }
+]

@@ -1,0 +1,78 @@
+{
+  "baseline": "41027a4a5115713016c49e61b76ecb4f4048da79",
+  "candidate": "/Users/twarn/Repositories/ai-working/scratch/stratolink-bare-finish-20261012/assembly/wire-candidate",
+  "parts": {
+    "AE1": {
+      "lib": "Stratolink_LoRa_Wire_PTH_D1p0",
+      "length": 82,
+      "courtyard_length": 87,
+      "value": "Enameled Cu wire 82mm (915MHz reference)",
+      "description": "Hand-formed enamelled copper wire; 82 mm from feed for 915 MHz, 83 mm compromise or 86 mm for 868 MHz; diameter not yet measured",
+      "model": "Stratolink_Wire_82mm_D0p321_Nominal.step",
+      "points": [
+        [
+          -1.25,
+          -1.25
+        ],
+        [
+          87,
+          -1.25
+        ],
+        [
+          87,
+          1.25
+        ],
+        [
+          -1.25,
+          1.25
+        ]
+      ]
+    },
+    "AE2": {
+      "lib": "Stratolink_GNSS_Wire_PTH_D1p0",
+      "length": 48,
+      "courtyard_length": 49,
+      "value": "Enameled Cu wire 48mm (GNSS L1)",
+      "description": "Hand-formed enamelled copper wire; 48 mm from feed for GNSS L1; diameter not yet measured",
+      "model": "Stratolink_Wire_48mm_D0p321_Nominal.step",
+      "points": [
+        [
+          -1.25,
+          -1.25
+        ],
+        [
+          49,
+          -1.25
+        ],
+        [
+          49,
+          1.25
+        ],
+        [
+          -1.25,
+          1.25
+        ]
+      ]
+    }
+  },
+  "source": "https://stratolink.org/docs/hardware#antennas-and-suspension",
+  "nominal_model_diameter_mm": 0.321,
+  "nominal_model_insertion_leg_mm": 2,
+  "new_library_files": [
+    "lib/Stratolink_GNSS_Wire_PTH_D1p0.kicad_mod",
+    "lib/Stratolink_Wire_48mm_D0p321_Nominal.step",
+    "lib/Stratolink_LoRa_Wire_PTH_D1p0.kicad_mod",
+    "lib/Stratolink_Wire_82mm_D0p321_Nominal.step"
+  ],
+  "files": {
+    "stratolink.kicad_pcb": "b067f1b0e8077c9cb8b8feb2acad956175ec205929fc5e49e372dae899a7070c",
+    "stratolink.kicad_sch": "d56214c9dbaaa02a16d671c1c4ab92df129a5f867466a898ce47becdc7410c09",
+    "stratolink.kicad_pro": "5dd65b15408657138b37fb9ee274f0798e96aadb4092f4e799c61d03bece1786",
+    "fp-lib-table": "705f05b5554f11949b16433700d994932665490bb4f91064f20890cc1c65326a",
+    "sym-lib-table": "27b94afc068fa31c7f6b0e2e00012a1fdc75c17277f1dc9d9d7aefd9cf149b87",
+    "lib/Stratolink_GNSS_Wire_PTH_D1p0.kicad_mod": "362c70435248e198cec1006944264f4c3a20c5b34dc55fafcde1096616b5baea",
+    "lib/Stratolink_Wire_48mm_D0p321_Nominal.step": "18aba2561b12ccd7653bac133efc17c7833cc7c5686f563ee8c04ac862789671",
+    "lib/Stratolink_LoRa_Wire_PTH_D1p0.kicad_mod": "6676e1f0e85b33b5cc2bbff20d038db687fed4f4fbd1701b1c78c8975010ab48",
+    "lib/Stratolink_Wire_82mm_D0p321_Nominal.step": "23e13ed21d9b2f49bb232fbb04ea73eec6f713054e606b75a04a31165e9d4dbf"
+  }
+}
