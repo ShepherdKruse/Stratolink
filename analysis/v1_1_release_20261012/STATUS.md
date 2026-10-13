@@ -1,144 +1,32 @@
-# v1.1 canonical pilot verified; supplier review in progress
+# v1.1 AS7331 pilot — current release status
 
-Canonical project: `hardware/pcb`, branch `alpha/hardware-v1.1`. Baseline
-`5997979` is frozen in `baseline.json`; hashes protect all 100 unrelated tracked
-changes. The user authorized minimum v1.1 changes, manufacturing exports and a
-JLC draft for **5 PCBs / 3 assembled**. Checkout/payment is not authorized.
+Canonical project: `hardware/pcb`, branch `alpha/hardware-v1.1`. Final status: **promoted to the canonical hardware folder / native and independent electrical/geometry checks passed; factory CAM and physical qualification pending**. Use the [canonical README](../../hardware/pcb/README.md) for source hashes and the [fabrication record](../../hardware/pcb/FABRICATION.md) for exact assembly intent. The user authorized a reviewed JLC cart draft for **five PCBs / three assembled**; checkout/payment is not authorized.
 
-## Verified in scratch
+The UV decision is settled: **AS7331-AQFM C20482877** in the complete native design, with **U6 omitted only** for the first pilot. **C14/C23 100 nF and R27 MCU0805MD3304BP500, 3.3 MΩ ±0.1% ±25 ppm/K, remain fitted.** The pilot BOM/CPL and stencil carry that explicit population; full-design paste is retained separately. Circuit, sourcing, primary-source limits and review evidence are collected in [the AS7331 record](as7331/README.md).
 
-- **Headers:** rear lands enlarged to 1.20 × 0.88 mm, with unchanged 0.50 mm
-  holes, 1 mm pitch and front lands. Four back-layer routes adjusted and two
-  transitions added. A further 0.010 mm shift clears the adjacent route and via
-  at the 0.15 mm target. JLC requires at least 0.6 mm thickness for castellations
-  and plated edges, so ordinary through-holes retain the lighter 0.4 mm board.
-- **Part identities:** actual shipped JLC selections recovered. TMP117AIYBGR
-  (C2871893), PESD5V0U1BB protection diodes and the four 1 MΩ resistors replace
-  stale descriptions. No substituted temperature-sensor package. Exact placed
-  footprints are frozen as local release variants, with zero library or
-  schematic-parity mismatches.
-- **Rules:** clearance, edge and annular checks enabled. The normal routing
-  target is 0.15 mm, above the 0.10 mm process floor. Narrow component-specific
-  exceptions describe the actual fine-pitch geometry. Integrated headers and
-  identities pass native refill/DRC with zero opens, zero parity findings and
-  four existing bare-board legend warnings.
-- **Exports:** the read-only generator checks matching PCB/schematic supplier
-  fields, population exclusions, full-board negative-polarity mask openings,
-  drills and native placements. The historical input CPL establishes baseline placement centers
-  and rotation conventions, not the supplier's post-CAM orientations; raw footprint
-  anchors would have misplaced several imported packages.
+## Current work and evidence
 
-## Integrated design promoted; supplier review remains
+| Item | Status / record |
+|---|---|
+| Earlier v1.1 changes | TMP117 correction, microphone removal, solar notches/models, suspension rings, enlarged PTH programming lands, green mask/no silkscreen, ground/edge cleanup, U7 paste/routing, exact identities, charge ceiling and balancing circuit retained. [Manual review](manual-review-changes.md). |
+| UV placement and local routing | **U6 (74.25, 37.10 mm), C14 (74.30, 34.50 mm), front side**; scope **local SDA/SCL, PB5, VSTOR and GND rerouting; C21 shifts 0.90 mm left to (69.362, 34.647 mm), C6 stays fixed; C23 at (75.20, 39.80 mm), R27 at (71.90, 34.08 mm); 0.15 mm local I²C/supply routing, short 0.125 mm GND necks; PB5/VSTOR retain 0.25 mm; original copper branding retained, solar +/- legends in exposed copper**. Retained component moves are U6/C14 and the documented C21 bypass adjustment. |
+| Final native and independent review | DRC **0 violations, 0 open connections, 0 schematic mismatches**; ERC **0 unexcluded errors or warnings; two documented exclusions retained**. Only U5 ALERT / U7 SA0 exclusions remain; AS7331 READY is NC. Evidence **[independent review](../../analysis/v1_1_release_20261012/as7331/review/README.md)**. |
+| Manufacturing package | **58 full / 57 pilot references**, **30 distinct pilot part groups**, **11 exclusions**. [Manifest](../../hardware/gerbers/v1.1-pilot/manifest.json): **166 inputs / 37 outputs**. |
+| Population and stencil checks | Identity-bound U6-only omission, 16 U6 paste apertures suppressed, C14/C23/R27 retained, all other rows/apertures and source/output/ZIP hashes checked. [Verification method](as7331/manufacturing/README.md). Final result **passed: 57/58 references, U6-only omission, 16 apertures removed, 166 source and 37 output hashes plus all 12 ZIP members verified**. |
+| Pilot firmware | **`stratolink_v1_1_uv_dnp`** builds; no optical transactions or waits, unavailable UV/lux, quiet microphone pins. Earlier v1.1 firmware.bin remains byte-identical. [Evidence](as7331/firmware/README.md). A populated AS7331 driver remains unimplemented. |
+| Supplier/cart | **Saved and verified:** [JLC cart](https://cart.jlcpcb.com/shopcart/cart), item **fabrication-review_Y24**, PCB **Y24-2680969A**, PCBA **SMT026101364685-2680969A**. All 57 exact MPN/LCSC selections passed independent review; top/bottom placements were reviewed with U6 absent and no browser rotation changes. Five PCBs / three assembled, Standard Both Sides; **US$332.47** before shipping, tax and advanced-remark review changes. [Supplier evidence](as7331/jlc/README.md). |
+| Factory confirmation | Production-file and parts-placement confirmation enabled; manual approval required, automatic changes disabled. Green/no-silk, rail/tab layout and final CAM approval remain pending. Cart rail envelope **71.36 × 71.30 mm**; actual board **23.36 × 57.30 mm**. No checkout/payment. |
+| Unrelated working changes | Original scope baseline `baseline.json` protects 100 unrelated tracked changes. Final preservation evidence **[promotion and preservation record](../../analysis/v1_1_release_20261012/as7331/promotion.json)**. |
 
-- **U7:** the frozen candidate reduces stencil aperture area to 81% and removes
-  top copper from the unsupported central body area. It passes independently
-  and together with the headers: zero opens/parity findings, four unchanged
-  bare-board legend advisories. Final power integration passes the same checks.
-- **Storage:** integrated a CAP-XX-style active midpoint follower while retaining the
-  flat on-hand 1 F capacitor. Selected parts are TLV8801DBVT, two 4.75 MΩ
-  resistors, 22 Ω output isolation and 100 nF bypass. Changed R1 to an obtainable
-  7.50 MΩ part. The authored candidate is routed and frozen at PCB `3bf0023e…`;
-  final integrated PCB `490af47d…` passes native and independent review.
-  D3.1/J4.1 alone receive 0.25 mm thermal gap/bridge overrides, with the existing
-  two-spoke minimum preserved. All 232 retained physical pads preserve copper,
-  drills and connected pad sets; 13 new pads and the midpoint connection match
-  the intended circuit. Independent native schematic exports account for all
-  233 pin records, with only the intended VBAT net rename.
-- **ERC:** the reviewed cleanup freezes actual embedded symbols, corrects
-  imported electrical pin types and explicitly marks unused pins. It preserves
-  all physical nets and raw evidence, with three narrowly documented inherited
-  grounded-output/address-strap findings. Final filtered ERC is zero; raw two
-  errors and one warning remain under exactly three exclusions. Refilled
-  before/after scratch copies preserve authored geometry and every fill polygon.
-- **Final integration:** native and independent checks pass with four retained
-  silk warnings, zero opens/parity/library/thermal findings. The verified CAD is
-  promoted to `hardware/pcb`; README/FABRICATION/TODO are updated. Canonical PCB
-  and native 3D are open in KiCad, and all source hashes remain unchanged.
-- **Final exports:** [the package](../../hardware/gerbers/v1.1-pilot/README.md)
-  is generated from canonical CAD. Its [manifest](../../hardware/gerbers/v1.1-pilot/manifest.json)
-  pins 160 actual source/library/model inputs and 28 manufacturing outputs,
-  including the BOM, CPL, Gerbers, separate drills and fabrication ZIP. The
-  source-input list excludes interpreter/macOS cache artifacts. The earlier scoped
-  cache-manifest correction did not regenerate or change any manufacturing byte;
-  [its audit](manufacturing/cache-input-scope-correction.json) records original
-  export-generator and current corrected-generator hashes separately.
-  The later [supplier-rotation correction](manufacturing/rotation-correction-before/correction-report.json)
-  changes only CPL rotations and associated audit/documentation/profile data;
-  all 24 retained outputs, including BOM, native files and fabrication artwork,
-  remain byte-identical. Both operations retain separate provenance.
-- **Firmware metadata:** the explicit v1.1 variant now uses the new nominal
-  5.041 V / 9.55 J values; v1 retains 5.363 V / 11.2 J. Diagnostic VBAT_OK labels
-  are corrected to nominal 3.510/2.510 V. Microphone presence does not select the
-  divider model. Runtime power policies are unchanged; the v1.1 build and four
-  preprocessing checks passed. All 100 pre-existing unrelated tracked changes
-  remain byte-identical to the baseline.
+The old Y22 fifteen-board cart item remains unchanged; its out-of-stock warning is scoped to Y22, not the new Y24 pilot. Saved price comprises US$70.63 PCB and US$261.84 assembly. Saved construction is green 0.40 mm FR4, 1 oz copper and ENIG with 1 µin gold.
 
-## Supplier workflow
+The retained supplier CPL profile is **U1 90°, U2 90°, U4 270°, U7 0°, U8 90°; U3 180°, U5 0°**. These are supplier conventions, not native footprint moves. U6 is not in the pilot CPL; its future exact model needs a separate placement review. [Profile and evidence](jlc/supplier-rotation-profile.json).
 
-The shipped order W2026030801021565 confirms five boards / three assembled,
-0.4 mm, 1 oz, ENIG 1 µin and assembly on both sides. Its mask was green; this
-revision deliberately removes mask on both faces.
+## Limits still requiring physical work
 
-A preliminary geometry package was uploaded to the signed-in JLC quote earlier.
-JLC detects **23.36 × 57.30 mm**. Standard two-sided assembly adds a factory
-panel of **71.36 × 71.30 mm**, as in the prior order. The draft is set to
-0.4 mm, ENIG, untented vias, five boards / three assembled, with production-file
-and placement confirmation requested and automatic confirmation disabled.
-The displayed preliminary PCB price was $55.62 before assembly/shipping; this
-is not the final quote. The final source-derived fabrication ZIP is now uploaded
-with five boards/three assembled, 0.4 mm ENIG, untented vias and manual CAM and
-placement confirmation configured. Final assembly import is complete; shortages and supplier approval remain.
-No new cart item or order has been submitted.
+- Measure panel cold Voc/I–V and actual BQ25570 input voltage/power. Historical telemetry reaching 5.538 V is uncalibrated ADC evidence, not proof of actual pin stress or a resolved input limit.
+- Qualify both capacitor cell voltages, charge plateau, midpoint startup/stability, cold ESR/leakage and radio/GNSS load transients. Keep the flat capacitor out of board reflow.
+- Inspect sensor operation, unavailable-data reporting, night current, sunrise recovery, solar joints, suspension wear and installed RF/GNSS behavior using the [pilot acceptance procedure](pilot-acceptance.md).
+- Later AS7331 population needs firmware, controlled-angle optics, solar VIS/NIR rejection and independent calibration. Separate UV bands enable an experimental column above the balloon; they do not alone establish ozone accuracy. U6-DNP pilots produce no UV measurements.
 
-The final BOM and CPL are uploaded to the actual assembly flow for three boards.
-It detects 56 references: 53 confirmed and three inventory shortages. R4
-C2766827 requires 20 including feeder allowance, with stock 0; U2 C18548052
-requires 3, with stock 1 (short 2); U6 C492374 requires 3, with stock 0 (short 3).
-R6 C423131 is confirmed with its 20-piece feeder quantity available. The actual
-assembly flow accepts quantity 3 and has no extra header row; the earlier public
-BOM tool defects are not current assembly blockers. See
-[jlc/assembly-bom-match.txt](jlc/assembly-bom-match.txt).
-
-The source-derived export has 56 assembly references, 30 part groups and 10
-intentional exclusions; U7 has 12 paste apertures at 81% area. Shortage resolution,
-missing-part placement and final CAM review remain pending. No substitute is accepted
-by default and no component reservation is implied. The ordinary assembly-terms
-step is within the authorized draft workflow; checkout/payment remains outside
-scope.
-
-## Actual supplier placement correction
-
-The partial preview includes all 53 in-stock references; exactly R4/U2/U6 are
-unavailable. Historical CPL equality only reproduced the repository's v1 input,
-not JLC's final post-CAM placement. The actual preview revealed four supplier
-rotation differences. Native numbered lands, manufacturer drawings and model
-markers establish the required orientations. Reimported CPL files confirm
-**U1 90°, U4 270°, U7 0°, U8 90°**; U3 stays 180° and U5 stays 0°.
-U4's black circle represents its pressure port; its separate pin-1 marker is
-upper-left in the correct top view. All XY centers, sides and CAD remain unchanged.
-The [profile](jlc/supplier-rotation-profile.json) links the independent reviews
-and saved before/after screenshots. The final tested CPL is
-`eb8ef43bb3b1a6ee0b1efc3f3c1280f519686b6ba1fda44e61ace8cc6c4d1069`.
-The actual final package BOM/CPL has been reimported, with 53 placements selected
-and exactly R4/U2/U6 unavailable; [the final import record](jlc/final-package-import-selection.json)
-captures that state. The canonical BOM retains all 56 assembly references.
-
-The [auto-saved draft](https://cart.jlcpcb.com/smt-order/?pcbFileNo=273e56f80db84247a68fcd5556d381e6)
-is for review only. Its displayed partial quote was $286.16: $55.57 PCB plus
-$230.59 assembly, excluding R4/U2/U6, shipping and any additional checkout charges.
-This is not the price of a complete payload build. No new cart item, reservation,
-order or payment was submitted. No-mask processing still requires explicit CAM
-acceptance; the public color dropdown's Green label does not establish acceptance.
-
-## Physical limits that CAD cannot close
-
-- Lowering the charge ceiling and balancing cells require pilot validation of
-  both cell voltages, startup, capacitive-load stability, leakage and cold ESR.
-- Historical solar telemetry reaches 5.538 V, above the BQ25570's recommended
-  input ceiling. This is uncalibrated ADC evidence, not proof of actual pin
-  overstress. Cold panel I–V / Voc and direct input measurements remain required.
-- No unbuilt board can be physically smoke-tested or flight-qualified. Sensor,
-  sunrise recovery, night endurance, joint strength and installed RF/GNSS tests
-  remain explicit pilot acceptance work.
-
-Do not mark the goal complete from this progress file.
+Earlier detailed reports in `sourcing_followup/`, `jlc/`, `power/`, `identities/` and `erc/` remain historical evidence. Their previous UV indecision, LTR390 shortage, three-exclusion ERC count, source hashes, partial prices and supplier selections do not identify the final AS7331 package. Only the final canonical hashes, manifest and current supplier evidence do.

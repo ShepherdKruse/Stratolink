@@ -1,0 +1,436 @@
+{
+  "pcb": "/Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/as7331/final-green-filled/stratolink.kicad_pcb",
+  "pcb_sha256": "9d63500a087ef8d345c2337942106e6704d32ded953846883454bfad718adf6c",
+  "method": "Native copper-box proximity screen for REXT.\n\nReports conservative planar lower bounds, not a parasitic or noise simulation.\nActual copper can be farther apart than its bounding rectangles. Opposite-layer\nmeasurements are projected distances, not through-substrate 3-D clearances.\n",
+  "reference_copper": [
+    {
+      "identifier": "U6.4",
+      "net": "/UV_REXT",
+      "kind": "PAD",
+      "bounds_mm": [
+        74.825,
+        35.35,
+        75.175,
+        35.7
+      ],
+      "layers": [
+        "F.Cu"
+      ]
+    },
+    {
+      "identifier": "R27.1",
+      "net": "/UV_REXT",
+      "kind": "PAD",
+      "bounds_mm": [
+        71.2,
+        34.48,
+        72.6,
+        35.505
+      ],
+      "layers": [
+        "F.Cu"
+      ]
+    },
+    {
+      "identifier": "72fe52c4-6365-5010-9997-6bdb8046b961",
+      "net": "/UV_REXT",
+      "kind": "PCB_TRACK",
+      "bounds_mm": [
+        75.25,
+        34.025,
+        75.400001,
+        34.950001
+      ],
+      "layers": [
+        "F.Cu"
+      ]
+    },
+    {
+      "identifier": "913d1e66-26c3-5a9d-8587-31c560d2a1b4",
+      "net": "/UV_REXT",
+      "kind": "PCB_TRACK",
+      "bounds_mm": [
+        71.825,
+        33.85,
+        73.050001,
+        35.075001
+      ],
+      "layers": [
+        "F.Cu"
+      ]
+    },
+    {
+      "identifier": "981c5036-819a-534a-868e-0aed0c978f51",
+      "net": "/UV_REXT",
+      "kind": "PCB_TRACK",
+      "bounds_mm": [
+        74.925,
+        34.8,
+        75.400001,
+        35.275001
+      ],
+      "layers": [
+        "F.Cu"
+      ]
+    },
+    {
+      "identifier": "bef6b6f1-1cf5-5541-8a51-a677a7bac8cb",
+      "net": "/UV_REXT",
+      "kind": "PCB_TRACK",
+      "bounds_mm": [
+        74.925,
+        35.125,
+        75.075001,
+        35.600001
+      ],
+      "layers": [
+        "F.Cu"
+      ]
+    },
+    {
+      "identifier": "e880da74-9ccc-56b1-9bde-4ae1ba547b87",
+      "net": "/UV_REXT",
+      "kind": "PCB_TRACK",
+      "bounds_mm": [
+        75.075,
+        33.85,
+        75.400001,
+        34.175001
+      ],
+      "layers": [
+        "F.Cu"
+      ]
+    },
+    {
+      "identifier": "f6865e28-34ec-5d5e-801e-5c825737f9a7",
+      "net": "/UV_REXT",
+      "kind": "PCB_TRACK",
+      "bounds_mm": [
+        72.9,
+        33.85,
+        75.225001,
+        34.000001
+      ],
+      "layers": [
+        "F.Cu"
+      ]
+    }
+  ],
+  "reference_track_lengths": [
+    {
+      "identifier": "72fe52c4-6365-5010-9997-6bdb8046b961",
+      "length_mm": 0.775,
+      "layer": "F.Cu"
+    },
+    {
+      "identifier": "913d1e66-26c3-5a9d-8587-31c560d2a1b4",
+      "length_mm": 1.5202795795510773,
+      "layer": "F.Cu"
+    },
+    {
+      "identifier": "981c5036-819a-534a-868e-0aed0c978f51",
+      "length_mm": 0.45961940777125593,
+      "layer": "F.Cu"
+    },
+    {
+      "identifier": "bef6b6f1-1cf5-5541-8a51-a677a7bac8cb",
+      "length_mm": 0.325,
+      "layer": "F.Cu"
+    },
+    {
+      "identifier": "e880da74-9ccc-56b1-9bde-4ae1ba547b87",
+      "length_mm": 0.24748737341529164,
+      "layer": "F.Cu"
+    },
+    {
+      "identifier": "f6865e28-34ec-5d5e-801e-5c825737f9a7",
+      "length_mm": 2.175,
+      "layer": "F.Cu"
+    }
+  ],
+  "total_reference_track_mm": 5.502386360737624,
+  "nearest": {
+    "same_layer_I2C": {
+      "lower_bound_mm": 2.211227034928794,
+      "rext_item": {
+        "identifier": "R27.1",
+        "net": "/UV_REXT",
+        "kind": "PAD",
+        "bounds_mm": [
+          71.2,
+          34.48,
+          72.6,
+          35.505
+        ],
+        "layers": [
+          "F.Cu"
+        ]
+      },
+      "nearest_other_item": {
+        "identifier": "U6.13",
+        "net": "SCL",
+        "kind": "PAD",
+        "bounds_mm": [
+          73.025,
+          37.675,
+          73.375,
+          38.025
+        ],
+        "layers": [
+          "F.Cu"
+        ]
+      }
+    },
+    "opposite_layer_I2C_projected": {
+      "lower_bound_mm": 2.238442192686912,
+      "rext_item": {
+        "identifier": "U6.4",
+        "net": "/UV_REXT",
+        "kind": "PAD",
+        "bounds_mm": [
+          74.825,
+          35.35,
+          75.175,
+          35.7
+        ],
+        "layers": [
+          "F.Cu"
+        ]
+      },
+      "nearest_other_item": {
+        "identifier": "64ae0245-c864-5a89-937f-95f0ac7d31ff",
+        "net": "SCL",
+        "kind": "PCB_VIA",
+        "bounds_mm": [
+          73.55,
+          37.8,
+          74.050001,
+          38.300001
+        ],
+        "layers": [
+          "F.Cu",
+          "B.Cu"
+        ]
+      }
+    },
+    "opposite_layer_switching_projected": {
+      "lower_bound_mm": 4.662823575261343,
+      "rext_item": {
+        "identifier": "R27.1",
+        "net": "/UV_REXT",
+        "kind": "PAD",
+        "bounds_mm": [
+          71.2,
+          34.48,
+          72.6,
+          35.505
+        ],
+        "layers": [
+          "F.Cu"
+        ]
+      },
+      "nearest_other_item": {
+        "identifier": "U1.16",
+        "net": "Net-(U1-LBUCK)",
+        "kind": "PAD",
+        "bounds_mm": [
+          68.070997,
+          39.164998,
+          68.310997,
+          39.764998
+        ],
+        "layers": [
+          "B.Cu"
+        ]
+      }
+    },
+    "same_layer_PB5": {
+      "lower_bound_mm": 4.575273204957378,
+      "rext_item": {
+        "identifier": "U6.4",
+        "net": "/UV_REXT",
+        "kind": "PAD",
+        "bounds_mm": [
+          74.825,
+          35.35,
+          75.175,
+          35.7
+        ],
+        "layers": [
+          "F.Cu"
+        ]
+      },
+      "nearest_other_item": {
+        "identifier": "5e74d52c-092f-54e2-a8a2-abdf9b412949",
+        "net": "PB5",
+        "kind": "PCB_VIA",
+        "bounds_mm": [
+          74.275,
+          40.275,
+          74.775001,
+          40.775001
+        ],
+        "layers": [
+          "F.Cu",
+          "B.Cu"
+        ]
+      }
+    },
+    "opposite_layer_PB5_projected": {
+      "lower_bound_mm": 0.14577293987911472,
+      "rext_item": {
+        "identifier": "U6.4",
+        "net": "/UV_REXT",
+        "kind": "PAD",
+        "bounds_mm": [
+          74.825,
+          35.35,
+          75.175,
+          35.7
+        ],
+        "layers": [
+          "F.Cu"
+        ]
+      },
+      "nearest_other_item": {
+        "identifier": "5a50f10e-8814-5221-aaf8-6681d0cd5817",
+        "net": "PB5",
+        "kind": "PCB_TRACK",
+        "bounds_mm": [
+          74.1,
+          35.775,
+          74.700001,
+          36.375001
+        ],
+        "layers": [
+          "B.Cu"
+        ]
+      }
+    },
+    "same_layer_VSTOR": {
+      "lower_bound_mm": 0.7499990000000025,
+      "rext_item": {
+        "identifier": "72fe52c4-6365-5010-9997-6bdb8046b961",
+        "net": "/UV_REXT",
+        "kind": "PCB_TRACK",
+        "bounds_mm": [
+          75.25,
+          34.025,
+          75.400001,
+          34.950001
+        ],
+        "layers": [
+          "F.Cu"
+        ]
+      },
+      "nearest_other_item": {
+        "identifier": "439488b5-85f6-5b88-b4cd-186528688869",
+        "net": "VSTOR",
+        "kind": "PCB_TRACK",
+        "bounds_mm": [
+          76.15,
+          31.648,
+          76.400001,
+          42.759912
+        ],
+        "layers": [
+          "F.Cu"
+        ]
+      }
+    },
+    "opposite_layer_VSTOR_projected": {
+      "lower_bound_mm": 4.884,
+      "rext_item": {
+        "identifier": "R27.1",
+        "net": "/UV_REXT",
+        "kind": "PAD",
+        "bounds_mm": [
+          71.2,
+          34.48,
+          72.6,
+          35.505
+        ],
+        "layers": [
+          "F.Cu"
+        ]
+      },
+      "nearest_other_item": {
+        "identifier": "689635a6-5fe6-4e3d-9625-0aa6d798e177",
+        "net": "VSTOR",
+        "kind": "PCB_TRACK",
+        "bounds_mm": [
+          65.813,
+          35.467,
+          66.316,
+          35.97
+        ],
+        "layers": [
+          "B.Cu"
+        ]
+      }
+    },
+    "any_layer_GNSS_feed_projected": {
+      "lower_bound_mm": 7.5852994667316915,
+      "rext_item": {
+        "identifier": "R27.1",
+        "net": "/UV_REXT",
+        "kind": "PAD",
+        "bounds_mm": [
+          71.2,
+          34.48,
+          72.6,
+          35.505
+        ],
+        "layers": [
+          "F.Cu"
+        ]
+      },
+      "nearest_other_item": {
+        "identifier": "AE2.1",
+        "net": "Net-(AE2-A)",
+        "kind": "PAD",
+        "bounds_mm": [
+          62.132,
+          32.468,
+          63.632,
+          33.968
+        ],
+        "layers": [
+          "F.Cu",
+          "B.Cu"
+        ]
+      }
+    },
+    "opposite_layer_balancer_projected": {
+      "lower_bound_mm": 10.29541300774282,
+      "rext_item": {
+        "identifier": "R27.1",
+        "net": "/UV_REXT",
+        "kind": "PAD",
+        "bounds_mm": [
+          71.2,
+          34.48,
+          72.6,
+          35.505
+        ],
+        "layers": [
+          "F.Cu"
+        ]
+      },
+      "nearest_other_item": {
+        "identifier": "C5.3",
+        "net": "/SC_MID",
+        "kind": "PAD",
+        "bounds_mm": [
+          63.615,
+          44.457,
+          66.115,
+          47.957
+        ],
+        "layers": [
+          "B.Cu"
+        ]
+      }
+    }
+  }
+}

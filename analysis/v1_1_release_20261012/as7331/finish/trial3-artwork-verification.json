@@ -1,0 +1,154 @@
+{
+  "pcb_sha256": "a242e54ed4dcb65b3c7e7101c541d2b0a76804ce071be1a6a3b3a0bbc85c4553",
+  "artwork": "/Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/as7331/finish-artwork-trial3",
+  "mask_files": {
+    "F": {
+      "sha256": "eec44d2aea070302607541169f47dcdb3c56688da3ae8535c48b12c3cbc35569",
+      "regions": 170
+    },
+    "B": {
+      "sha256": "f2d2c0079e033f9dabc845e07c96c1c39ef890586594ee12c435812616878258",
+      "regions": 92
+    }
+  },
+  "solar_pad_window_tests": [
+    {
+      "ref": "J1",
+      "pad": "1",
+      "face": "F",
+      "center_mm": [
+        75.2,
+        85.0
+      ],
+      "inside_opening": true,
+      "nearest_opening_boundary_mm": 0.6966288729029215
+    },
+    {
+      "ref": "J1",
+      "pad": "1",
+      "face": "B",
+      "center_mm": [
+        75.2,
+        85.0
+      ],
+      "inside_opening": true,
+      "nearest_opening_boundary_mm": 0.6966288729029215
+    },
+    {
+      "ref": "J1",
+      "pad": "2",
+      "face": "F",
+      "center_mm": [
+        75.4255,
+        53.44
+      ],
+      "inside_opening": true,
+      "nearest_opening_boundary_mm": 0.3399999999999963
+    },
+    {
+      "ref": "J1",
+      "pad": "2",
+      "face": "B",
+      "center_mm": [
+        75.4255,
+        53.44
+      ],
+      "inside_opening": true,
+      "nearest_opening_boundary_mm": 0.3399999999999963
+    },
+    {
+      "ref": "J2",
+      "pad": "1",
+      "face": "F",
+      "center_mm": [
+        54.8,
+        85.0
+      ],
+      "inside_opening": true,
+      "nearest_opening_boundary_mm": 0.6966288729029165
+    },
+    {
+      "ref": "J2",
+      "pad": "1",
+      "face": "B",
+      "center_mm": [
+        54.8,
+        85.0
+      ],
+      "inside_opening": true,
+      "nearest_opening_boundary_mm": 0.6966288729029165
+    },
+    {
+      "ref": "J2",
+      "pad": "2",
+      "face": "F",
+      "center_mm": [
+        54.5665,
+        53.44
+      ],
+      "inside_opening": true,
+      "nearest_opening_boundary_mm": 0.3399999999999963
+    },
+    {
+      "ref": "J2",
+      "pad": "2",
+      "face": "B",
+      "center_mm": [
+        54.5665,
+        53.44
+      ],
+      "inside_opening": true,
+      "nearest_opening_boundary_mm": 0.3399999999999963
+    }
+  ],
+  "U1_thermal_hole_component_side_window_tests": [
+    {
+      "face": "B",
+      "center_mm": [
+        66.415998,
+        37.814999
+      ],
+      "inside_opening": true,
+      "nearest_opening_boundary_mm": 0.3299999999999983
+    },
+    {
+      "face": "B",
+      "center_mm": [
+        67.190998,
+        37.039999
+      ],
+      "inside_opening": true,
+      "nearest_opening_boundary_mm": 0.3299999999999983
+    },
+    {
+      "face": "B",
+      "center_mm": [
+        67.190998,
+        37.814999
+      ],
+      "inside_opening": true,
+      "nearest_opening_boundary_mm": 1.1049999999999898
+    },
+    {
+      "face": "B",
+      "center_mm": [
+        67.190998,
+        38.589999
+      ],
+      "inside_opening": true,
+      "nearest_opening_boundary_mm": 0.3299999999999983
+    },
+    {
+      "face": "B",
+      "center_mm": [
+        67.965998,
+        37.814999
+      ],
+      "inside_opening": true,
+      "nearest_opening_boundary_mm": 0.3299999999999983
+    }
+  ],
+  "under_U6_vias": [],
+  "silkscreen_artwork_empty": true,
+  "limitation": "Nominal supplied Gerber geometry only; tent integrity and supplier registration require CAM/manufacturing inspection."
+}

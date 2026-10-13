@@ -1,0 +1,2503 @@
+{
+  "status": "PASS",
+  "timestamp_utc": "2026-10-13T20:39:20.706054+00:00",
+  "scope": "Read-only final integrity audit; only this new report was written. No full tests rerun because verified files are unchanged.",
+  "git_branch": "alpha/hardware-v1.1",
+  "git_HEAD_at_audit": "60c805edb8322487f2d4266d26b37169ff260efe",
+  "canonical_pcb_sha256": "9d63500a087ef8d345c2337942106e6704d32ded953846883454bfad718adf6c",
+  "canonical_schematic_sha256": "a06740b35d07d7b81999f7ace2a7a7ff02e185ca3e46a664630bd4bbd00c54b7",
+  "manufacturing_manifest_sha256": "4bcf43f2b06c63de17595a4e501104f16c15d2557de24f85ef7bb041851cab81",
+  "independent_final_review_sha256": "99d1e7bd0502acde1324200e57b62588b9814b05a110d3262f31923f6b4e0734",
+  "fabrication_zip_sha256": "6fd6f81550d8a30e163028bc88d30aad88fad6c8391e8dbdbe215322d3bef4e0",
+  "archive_all_12_entries_match": true,
+  "manifest_output_file_set_exact": true,
+  "assembly_count": 57,
+  "full_design_assembly_count": 58,
+  "exclusion_count": 11,
+  "checks": {
+    "manufacturing_sources": {
+      "checked": 166,
+      "all_match": true,
+      "files": {
+        "3d/AS7331_OLGA16.wrl": {
+          "expected_sha256": "afdc02ac1a2cd3a2756fab812bc0d14105fdcd7a01981381f25e329c4c64e443",
+          "actual_sha256": "afdc02ac1a2cd3a2756fab812bc0d14105fdcd7a01981381f25e329c4c64e443",
+          "match": true
+        },
+        "3d/R_0805_2012Metric.step": {
+          "expected_sha256": "ded342cdb394fb45395227beaaa75cc390613cf2581b29cd6d22c12abd6103b2",
+          "actual_sha256": "ded342cdb394fb45395227beaaa75cc390613cf2581b29cd6d22c12abd6103b2",
+          "match": true
+        },
+        "3d/solar/README.md": {
+          "expected_sha256": "081b8db88a9c95e9b2bdf0a98bf5084ca4dc2a8daac74f54132205c56f8b4a75",
+          "actual_sha256": "081b8db88a9c95e9b2bdf0a98bf5084ca4dc2a8daac74f54132205c56f8b4a75",
+          "match": true
+        },
+        "3d/solar/generate.py": {
+          "expected_sha256": "d54881036939cdadcbc841402fa829d62c2e80e0fd08c53905b5f359cf592d76",
+          "actual_sha256": "d54881036939cdadcbc841402fa829d62c2e80e0fd08c53905b5f359cf592d76",
+          "match": true
+        },
+        "3d/solar/geometry.json": {
+          "expected_sha256": "6fbebdc0d49e8a2d299d60c59133cf87ff17ec8e6b5bfadfc3c5e2111e4e8981",
+          "actual_sha256": "6fbebdc0d49e8a2d299d60c59133cf87ff17ec8e6b5bfadfc3c5e2111e4e8981",
+          "match": true
+        },
+        "3d/solar/zachtek_1044_left_assembly.wrl": {
+          "expected_sha256": "d38d946746754d12ad69b04946b51fe3443e8bee42bf85d54c57bf92362e4047",
+          "actual_sha256": "d38d946746754d12ad69b04946b51fe3443e8bee42bf85d54c57bf92362e4047",
+          "match": true
+        },
+        "3d/solar/zachtek_1044_right_assembly.wrl": {
+          "expected_sha256": "1d51c705686a98fa6c52a2003d35441c2d42066cf981cdbdb1aa55ca48e3cbb7",
+          "actual_sha256": "1d51c705686a98fa6c52a2003d35441c2d42066cf981cdbdb1aa55ca48e3cbb7",
+          "match": true
+        },
+        "fp-lib-table": {
+          "expected_sha256": "705f05b5554f11949b16433700d994932665490bb4f91064f20890cc1c65326a",
+          "actual_sha256": "705f05b5554f11949b16433700d994932665490bb4f91064f20890cc1c65326a",
+          "match": true
+        },
+        "lib/2026-03-07_16-25-25.kicad_sym": {
+          "expected_sha256": "9a79848b12d5e661e2846ab59b4aad1bda3c134d4131e5a3be96759850b6e941",
+          "actual_sha256": "9a79848b12d5e661e2846ab59b4aad1bda3c134d4131e5a3be96759850b6e941",
+          "match": true
+        },
+        "lib/21-0147E.kicad_mod": {
+          "expected_sha256": "d8b8ebc85e44c7bc74c142f7189b65a37cceee2dca0531a18df6523b571999c6",
+          "actual_sha256": "d8b8ebc85e44c7bc74c142f7189b65a37cceee2dca0531a18df6523b571999c6",
+          "match": true
+        },
+        "lib/2450AT18A100E.kicad_sym": {
+          "expected_sha256": "4c17902873bf049dc499b066ca46e5f8567d9f7ec55a279e6c95f9d77e77e216",
+          "actual_sha256": "4c17902873bf049dc499b066ca46e5f8567d9f7ec55a279e6c95f9d77e77e216",
+          "match": true
+        },
+        "lib/2450AT18A100E.step": {
+          "expected_sha256": "d43e57d1a06eba29f10d1314d9db70ceafebe1f09b87a1e90ed9cef2db17ef8f",
+          "actual_sha256": "d43e57d1a06eba29f10d1314d9db70ceafebe1f09b87a1e90ed9cef2db17ef8f",
+          "match": true
+        },
+        "lib/4269.dcm": {
+          "expected_sha256": "73b350fb3e67f43221dc332d4aa0b9a12705ca3e654c17ad7c661d1acfc2ad4c",
+          "actual_sha256": "73b350fb3e67f43221dc332d4aa0b9a12705ca3e654c17ad7c661d1acfc2ad4c",
+          "match": true
+        },
+        "lib/4269.kicad_mod": {
+          "expected_sha256": "cb4f61d8466e9c3887e4211dddf0bdef20bdc81bd3461330dc84b52695016f55",
+          "actual_sha256": "cb4f61d8466e9c3887e4211dddf0bdef20bdc81bd3461330dc84b52695016f55",
+          "match": true
+        },
+        "lib/4269.kicad_sym": {
+          "expected_sha256": "f0e9b92024b3432c2b649a67c9f84c447718e0242492599e15ea3466bb878b3e",
+          "actual_sha256": "f0e9b92024b3432c2b649a67c9f84c447718e0242492599e15ea3466bb878b3e",
+          "match": true
+        },
+        "lib/4269.lib": {
+          "expected_sha256": "58d76bbc2fcbc31959c51fae1595e652f6171e5514844a8db3aee920c3dfdafa",
+          "actual_sha256": "58d76bbc2fcbc31959c51fae1595e652f6171e5514844a8db3aee920c3dfdafa",
+          "match": true
+        },
+        "lib/4269.mod": {
+          "expected_sha256": "aa41a0486dba1a6c58b3fd0229508855e14a54984435d008a773d8d2f6a4539e",
+          "actual_sha256": "aa41a0486dba1a6c58b3fd0229508855e14a54984435d008a773d8d2f6a4539e",
+          "match": true
+        },
+        "lib/ANTC3216X140N.kicad_mod": {
+          "expected_sha256": "d0221f8bc21133d5619d205506f4b229491024d0a722a624e2f6abc3556cef2d",
+          "actual_sha256": "d0221f8bc21133d5619d205506f4b229491024d0a722a624e2f6abc3556cef2d",
+          "match": true
+        },
+        "lib/AS7341-DLGM.kicad_sym": {
+          "expected_sha256": "abd1d59f41a076196e753c2b658694e77e1c5d9f519ab5672315827ddcd7a5b1",
+          "actual_sha256": "abd1d59f41a076196e753c2b658694e77e1c5d9f519ab5672315827ddcd7a5b1",
+          "match": true
+        },
+        "lib/AS7341-DLGM.step": {
+          "expected_sha256": "1f352ebe8c6c561d7bc090dc46eeaea65bc11fb485c887abe0d5c4540a20af73",
+          "actual_sha256": "1f352ebe8c6c561d7bc090dc46eeaea65bc11fb485c887abe0d5c4540a20af73",
+          "match": true
+        },
+        "lib/BGA6N40P3X2_148X95X53.kicad_mod": {
+          "expected_sha256": "0343aab55d5eff37c147587bba94596d8ce865012486045a074422f1746be496",
+          "actual_sha256": "0343aab55d5eff37c147587bba94596d8ce865012486045a074422f1746be496",
+          "match": true
+        },
+        "lib/BQ25570RGRR.kicad_sym": {
+          "expected_sha256": "77e394cb57ae10efe7eba2d4dfeadae0a59542699f782de5f073fa621408f2fc",
+          "actual_sha256": "77e394cb57ae10efe7eba2d4dfeadae0a59542699f782de5f073fa621408f2fc",
+          "match": true
+        },
+        "lib/BQ25570RGRR.step": {
+          "expected_sha256": "ede46d7189939d1295bbef027083521561cd1b231e93c2eee3e4c0f7d4af1db6",
+          "actual_sha256": "ede46d7189939d1295bbef027083521561cd1b231e93c2eee3e4c0f7d4af1db6",
+          "match": true
+        },
+        "lib/CAPC1608X97N.kicad_mod": {
+          "expected_sha256": "c64240ccabb5bdcb0ec44734a0e45b0524794a53a2ddc9ccf530c0fa0bb1c66a",
+          "actual_sha256": "c64240ccabb5bdcb0ec44734a0e45b0524794a53a2ddc9ccf530c0fa0bb1c66a",
+          "match": true
+        },
+        "lib/DIO_BAS716_115.kicad_mod": {
+          "expected_sha256": "4f89dd17f2854299f0b242c9aca165594044192c924ea13825f08d0b3918d491",
+          "actual_sha256": "4f89dd17f2854299f0b242c9aca165594044192c924ea13825f08d0b3918d491",
+          "match": true
+        },
+        "lib/DMF4B5R5G105M3DTA0.dcm": {
+          "expected_sha256": "7771c5de96b7d58a3825eba9dde0c83c8e30830e7e83952c7f62bba7e1c90193",
+          "actual_sha256": "7771c5de96b7d58a3825eba9dde0c83c8e30830e7e83952c7f62bba7e1c90193",
+          "match": true
+        },
+        "lib/DMF4B5R5G105M3DTA0.kicad_mod": {
+          "expected_sha256": "9ab776792a60db5be6fbd79dbf274512ab5a8a5770dd695b40abc6f241fe076d",
+          "actual_sha256": "9ab776792a60db5be6fbd79dbf274512ab5a8a5770dd695b40abc6f241fe076d",
+          "match": true
+        },
+        "lib/DMF4B5R5G105M3DTA0.kicad_sym": {
+          "expected_sha256": "d61a16f42fbe02ebc78f9a2c9a19cbe607187df5f581d0702a63593aec82087f",
+          "actual_sha256": "d61a16f42fbe02ebc78f9a2c9a19cbe607187df5f581d0702a63593aec82087f",
+          "match": true
+        },
+        "lib/DMF4B5R5G105M3DTA0.lib": {
+          "expected_sha256": "be9e0cfc73b162b228139b9f046432f40169db6e4762d8b12e0957321f9bfc1c",
+          "actual_sha256": "be9e0cfc73b162b228139b9f046432f40169db6e4762d8b12e0957321f9bfc1c",
+          "match": true
+        },
+        "lib/DMF4B5R5G105M3DTA0.mod": {
+          "expected_sha256": "e81591e3cf7073a690f18031fff9e130b0ced60858ff05f4db9e365ee8b60e45",
+          "actual_sha256": "e81591e3cf7073a690f18031fff9e130b0ced60858ff05f4db9e365ee8b60e45",
+          "match": true
+        },
+        "lib/ERJU02J1R1X.kicad_sym": {
+          "expected_sha256": "2dbe1f4533020a98c94e65bc71457186153c14c325df09cd224c0426da39ace4",
+          "actual_sha256": "2dbe1f4533020a98c94e65bc71457186153c14c325df09cd224c0426da39ace4",
+          "match": true
+        },
+        "lib/ERJU02J1R1X.step": {
+          "expected_sha256": "d433ec4025d8cf829356864fc774877aaed40881c6f959b215a6877222d7ecff",
+          "actual_sha256": "d433ec4025d8cf829356864fc774877aaed40881c6f959b215a6877222d7ecff",
+          "match": true
+        },
+        "lib/ETQP4M220YFN.kicad_sym": {
+          "expected_sha256": "3339cd09a82b3f891d5eaafd736413701fc2a17ebc59ba621a71a132e182a049",
+          "actual_sha256": "3339cd09a82b3f891d5eaafd736413701fc2a17ebc59ba621a71a132e182a049",
+          "match": true
+        },
+        "lib/ETQP4M220YFN.step": {
+          "expected_sha256": "c469fcfe7493ad42a7b4612f69a099da50f7e0a51e603c1c81473edc0920dd1f",
+          "actual_sha256": "c469fcfe7493ad42a7b4612f69a099da50f7e0a51e603c1c81473edc0920dd1f",
+          "match": true
+        },
+        "lib/HS230F.dcm": {
+          "expected_sha256": "d5bc8c398180a49b9505dd7e2e86168fea4a594f80b85e32ec90f897c259db53",
+          "actual_sha256": "d5bc8c398180a49b9505dd7e2e86168fea4a594f80b85e32ec90f897c259db53",
+          "match": true
+        },
+        "lib/HS230F.kicad_mod": {
+          "expected_sha256": "529df574736c0f6ea13c39468a44ac9dcdd8beb2fa7b52cccbe3fb26bdf8c335",
+          "actual_sha256": "529df574736c0f6ea13c39468a44ac9dcdd8beb2fa7b52cccbe3fb26bdf8c335",
+          "match": true
+        },
+        "lib/HS230F.kicad_sym": {
+          "expected_sha256": "811489ce5a198a6cd083fdd34451ee26f7f8186efe6d04e532546f51ef57bb93",
+          "actual_sha256": "811489ce5a198a6cd083fdd34451ee26f7f8186efe6d04e532546f51ef57bb93",
+          "match": true
+        },
+        "lib/HS230F.lib": {
+          "expected_sha256": "0e787e65a19b6bc279c1cac6f20f8a7cae8f3fe38d1c25a1ac7752dda3ba73ec",
+          "actual_sha256": "0e787e65a19b6bc279c1cac6f20f8a7cae8f3fe38d1c25a1ac7752dda3ba73ec",
+          "match": true
+        },
+        "lib/HS230F.mod": {
+          "expected_sha256": "b00437a67fb2634c1c0f50d349e62be917c85b7ffc185c82875fcf2bfa18f6c5",
+          "actual_sha256": "b00437a67fb2634c1c0f50d349e62be917c85b7ffc185c82875fcf2bfa18f6c5",
+          "match": true
+        },
+        "lib/INDC1608X90N.kicad_mod": {
+          "expected_sha256": "1e618be7ba948498203845f15ce69e8fe16c605c5cd1fdd2537cfcb0f5849f7d",
+          "actual_sha256": "1e618be7ba948498203845f15ce69e8fe16c605c5cd1fdd2537cfcb0f5849f7d",
+          "match": true
+        },
+        "lib/IND_ETQP4M220YFN.kicad_mod": {
+          "expected_sha256": "381c6ee593f271568ce97449e3b8fb3a7e4dd50952df8fc548a95016239eb20d",
+          "actual_sha256": "381c6ee593f271568ce97449e3b8fb3a7e4dd50952df8fc548a95016239eb20d",
+          "match": true
+        },
+        "lib/IND_LPS4018-223MRC.kicad_mod": {
+          "expected_sha256": "3e3f2c1ed2dfa4f3bde9f43c162a180655e7aab82d20204c3028568b7e224990",
+          "actual_sha256": "3e3f2c1ed2dfa4f3bde9f43c162a180655e7aab82d20204c3028568b7e224990",
+          "match": true
+        },
+        "lib/LIS2DH12TR.kicad_sym": {
+          "expected_sha256": "07cac9985ca5d4bc6006008b39953cbf4b8e74acf952136da5d5bdd5024ab7e6",
+          "actual_sha256": "07cac9985ca5d4bc6006008b39953cbf4b8e74acf952136da5d5bdd5024ab7e6",
+          "match": true
+        },
+        "lib/LIS2DH12TR.step": {
+          "expected_sha256": "7a3d2316fa3f9d01dcb367295c280fd3064e9864f9b25e029afded30548432b8",
+          "actual_sha256": "7a3d2316fa3f9d01dcb367295c280fd3064e9864f9b25e029afded30548432b8",
+          "match": true
+        },
+        "lib/LPS4018-223MRC.kicad_sym": {
+          "expected_sha256": "59283d1e7d07f0724ece85c78996f50d5c81b836be4e51065a92117c93ef2f3d",
+          "actual_sha256": "59283d1e7d07f0724ece85c78996f50d5c81b836be4e51065a92117c93ef2f3d",
+          "match": true
+        },
+        "lib/LPS4018-223MRC.step": {
+          "expected_sha256": "7247e578712eaab4a5fb90f55f123ce309f8a740e69b9670e4bec61481aa7bae",
+          "actual_sha256": "7247e578712eaab4a5fb90f55f123ce309f8a740e69b9670e4bec61481aa7bae",
+          "match": true
+        },
+        "lib/LQM18FN100M00D.kicad_sym": {
+          "expected_sha256": "2effabbae1403948eeabacb0d3d9dbdbf7caa0ebb70a2aae9fbcacd4d1885e21",
+          "actual_sha256": "2effabbae1403948eeabacb0d3d9dbdbf7caa0ebb70a2aae9fbcacd4d1885e21",
+          "match": true
+        },
+        "lib/LTR-390UV-01.step": {
+          "expected_sha256": "a4fef81fed3d299892089258ab37ddfefc50b64d2becda37a719e27a0b281e5b",
+          "actual_sha256": "a4fef81fed3d299892089258ab37ddfefc50b64d2becda37a719e27a0b281e5b",
+          "match": true
+        },
+        "lib/MAX-M10S-00B.kicad_sym": {
+          "expected_sha256": "7d85f2010cb778a48e2a6499bc5e681a42eb522fda2e2b9bf9ecaa89c28b7c91",
+          "actual_sha256": "7d85f2010cb778a48e2a6499bc5e681a42eb522fda2e2b9bf9ecaa89c28b7c91",
+          "match": true
+        },
+        "lib/MAX-M10S-00B.step": {
+          "expected_sha256": "301c5c8f39597cb8a20bbfb64c6694d7f0121d89683bef55124958bd5cedb4ba",
+          "actual_sha256": "301c5c8f39597cb8a20bbfb64c6694d7f0121d89683bef55124958bd5cedb4ba",
+          "match": true
+        },
+        "lib/MIC_T3902.kicad_mod": {
+          "expected_sha256": "1f92d8e049770a9c31db4054acd3362ef7022b6d665846ac2c70d9acf80fb7fe",
+          "actual_sha256": "1f92d8e049770a9c31db4054acd3362ef7022b6d665846ac2c70d9acf80fb7fe",
+          "match": true
+        },
+        "lib/MLZ1608N100LT000.STEP": {
+          "expected_sha256": "d88f2217137cb303be8f3132cc776b88fdd02209cd154ab4fcafeefcddbb6694",
+          "actual_sha256": "d88f2217137cb303be8f3132cc776b88fdd02209cd154ab4fcafeefcddbb6694",
+          "match": true
+        },
+        "lib/MS5611-01BA03.kicad_sym": {
+          "expected_sha256": "cb60c24e00aae0b18e91ee617e19428fc1cf4632063dfd9ddbe9d8af632ea9e3",
+          "actual_sha256": "cb60c24e00aae0b18e91ee617e19428fc1cf4632063dfd9ddbe9d8af632ea9e3",
+          "match": true
+        },
+        "lib/MS5611-01BA03.step": {
+          "expected_sha256": "cd4b2c1cc39faba8c3e3c66389228cdf131310b5466cdf22320cf2afd8a0e1b1",
+          "actual_sha256": "cd4b2c1cc39faba8c3e3c66389228cdf131310b5466cdf22320cf2afd8a0e1b1",
+          "match": true
+        },
+        "lib/PQFN50P200X200100-12N.kicad_mod": {
+          "expected_sha256": "bb10f8b0b1d0f19ba3a75cf9d0ec96834f28dcf6c5d49ca907dea1d2c66d3589",
+          "actual_sha256": "bb10f8b0b1d0f19ba3a75cf9d0ec96834f28dcf6c5d49ca907dea1d2c66d3589",
+          "match": true
+        },
+        "lib/ProLib_pcs_2026-01-31.elibz": {
+          "expected_sha256": "b39d8afe7e58ced1e372f83b98208b0438065880c48f102c74aeb31f84e6a646",
+          "actual_sha256": "b39d8afe7e58ced1e372f83b98208b0438065880c48f102c74aeb31f84e6a646",
+          "match": true
+        },
+        "lib/ProLib_pcs_2026-02-08.elibz": {
+          "expected_sha256": "747bb6051045cdcd8f720ab8816df1be8344a506a3ada6da75b09e35ce2957fe",
+          "actual_sha256": "747bb6051045cdcd8f720ab8816df1be8344a506a3ada6da75b09e35ce2957fe",
+          "match": true
+        },
+        "lib/ProLib_pcs_2026-02-20.elibz": {
+          "expected_sha256": "83e43f38e2643ffd9d1e9a98b2e0225a04bb00dc9836cc085aff3f680889cd4b",
+          "actual_sha256": "83e43f38e2643ffd9d1e9a98b2e0225a04bb00dc9836cc085aff3f680889cd4b",
+          "match": true
+        },
+        "lib/QFN50P350X350X100-21N.kicad_mod": {
+          "expected_sha256": "5ec201b9d4cba0e6afd86d2cb90b8339f7f2d1c1fbf5ad96a18bbf597a60803a",
+          "actual_sha256": "5ec201b9d4cba0e6afd86d2cb90b8339f7f2d1c1fbf5ad96a18bbf597a60803a",
+          "match": true
+        },
+        "lib/RAK3172-8-SM-NI.kicad_sym": {
+          "expected_sha256": "1676e2db045544d59c3c01dd87685b93ad6ea65d20a492b6a045e085a1b28514",
+          "actual_sha256": "1676e2db045544d59c3c01dd87685b93ad6ea65d20a492b6a045e085a1b28514",
+          "match": true
+        },
+        "lib/RAK3172.kicad_mod": {
+          "expected_sha256": "e0fb3166a9bf8e865c94a07c957d91591d3ef2e9c97ee19c43a5abb001891e38",
+          "actual_sha256": "e0fb3166a9bf8e865c94a07c957d91591d3ef2e9c97ee19c43a5abb001891e38",
+          "match": true
+        },
+        "lib/RAK3172.kicad_sym": {
+          "expected_sha256": "d3131a6c168b5afdd04ba50f2b449ba380bff7b91078ce1b1212e3a0e22c3749",
+          "actual_sha256": "d3131a6c168b5afdd04ba50f2b449ba380bff7b91078ce1b1212e3a0e22c3749",
+          "match": true
+        },
+        "lib/RAK3172.step": {
+          "expected_sha256": "bd2bcd47540d611e57228d51c62f372b2393128c693611845697f020a94097f8",
+          "actual_sha256": "bd2bcd47540d611e57228d51c62f372b2393128c693611845697f020a94097f8",
+          "match": true
+        },
+        "lib/RES_ERJU02J1R1X.kicad_mod": {
+          "expected_sha256": "26b19b06d6669428f70c92613ae025bd8d5934c62fb048261c74eafd0ce3a843",
+          "actual_sha256": "26b19b06d6669428f70c92613ae025bd8d5934c62fb048261c74eafd0ce3a843",
+          "match": true
+        },
+        "lib/SMD6_LTR-390UV-01_LTO-L.kicad_mod": {
+          "expected_sha256": "b8677d8c4594e4ec7bb875d3a08238e65363fce7788c853f45e6066d19a3781c",
+          "actual_sha256": "b8677d8c4594e4ec7bb875d3a08238e65363fce7788c853f45e6066d19a3781c",
+          "match": true
+        },
+        "lib/SMD6_LTR-390UV-01_LTO-M.kicad_mod": {
+          "expected_sha256": "79bd36ae3dee2d140d9a91b4a62a5dd50051c4741de1a1863448051967efcaf7",
+          "actual_sha256": "79bd36ae3dee2d140d9a91b4a62a5dd50051c4741de1a1863448051967efcaf7",
+          "match": true
+        },
+        "lib/SMD6_LTR-390UV-01_LTO.kicad_mod": {
+          "expected_sha256": "9eb6ce599943c3b3a7159015b151f81e85d8390ae426ae314aefcec4cee5144f",
+          "actual_sha256": "9eb6ce599943c3b3a7159015b151f81e85d8390ae426ae314aefcec4cee5144f",
+          "match": true
+        },
+        "lib/SON125P500X300X100-8N.kicad_mod": {
+          "expected_sha256": "ff2187465b1d4d695f51a19a0caa8cff843adb139aaff8052e203bd8a8719968",
+          "actual_sha256": "ff2187465b1d4d695f51a19a0caa8cff843adb139aaff8052e203bd8a8719968",
+          "match": true
+        },
+        "lib/Solar_Notch_Left_1p0x2p0.kicad_mod": {
+          "expected_sha256": "e4757761c887acdb67a1ed9f551f2987b17a088a1ddf6fcb8059682a2c8195d1",
+          "actual_sha256": "e4757761c887acdb67a1ed9f551f2987b17a088a1ddf6fcb8059682a2c8195d1",
+          "match": true
+        },
+        "lib/Solar_Notch_Right_1p0x2p0.kicad_mod": {
+          "expected_sha256": "938e0d927c9957d44778f1d33facc2827ea2d4ede5b19d07d7021084f818beb5",
+          "actual_sha256": "938e0d927c9957d44778f1d33facc2827ea2d4ede5b19d07d7021084f818beb5",
+          "match": true
+        },
+        "lib/Stratolink_GNSS_Wire_PTH_D1p0.kicad_mod": {
+          "expected_sha256": "13f1d0c04e83beec958825c7438e3e25f6ed6ae3f2d1328c997ea62967fc92d3",
+          "actual_sha256": "13f1d0c04e83beec958825c7438e3e25f6ed6ae3f2d1328c997ea62967fc92d3",
+          "match": true
+        },
+        "lib/Stratolink_Header_Left_1x07_P1p00_D0p50_Pad0p88.kicad_mod": {
+          "expected_sha256": "678dfa4fbca321b1cf794539159747abaac8fc57909300c9c2ec8808c0c6612a",
+          "actual_sha256": "678dfa4fbca321b1cf794539159747abaac8fc57909300c9c2ec8808c0c6612a",
+          "match": true
+        },
+        "lib/Stratolink_Header_Right_1x07_P1p00_D0p50_Pad0p88.kicad_mod": {
+          "expected_sha256": "55179df22f92d771234badd935817eae5e4d93c912e265e6e9e7bf03b432046c",
+          "actual_sha256": "55179df22f92d771234badd935817eae5e4d93c912e265e6e9e7bf03b432046c",
+          "match": true
+        },
+        "lib/Stratolink_LoRa_Wire_PTH_D1p0.kicad_mod": {
+          "expected_sha256": "6da6fa668c4e88a972bc41c73a631a5ce76c48bc84ba5d1b49e229fdcb12ea1a",
+          "actual_sha256": "6da6fa668c4e88a972bc41c73a631a5ce76c48bc84ba5d1b49e229fdcb12ea1a",
+          "match": true
+        },
+        "lib/Stratolink_Power.kicad_sym": {
+          "expected_sha256": "2428574dbca6d67a258bf56648ea7280215e3747ba961e88c6ec96b1fd2d9b40",
+          "actual_sha256": "2428574dbca6d67a258bf56648ea7280215e3747ba961e88c6ec96b1fd2d9b40",
+          "match": true
+        },
+        "lib/Stratolink_Programming_Left_1x07_P1p00_D0p50_BackTack1p20x0p88.kicad_mod": {
+          "expected_sha256": "1638681d81685da85f72231dca59f42171c11cd7c1f480c557e5ced826fdf7ab",
+          "actual_sha256": "1638681d81685da85f72231dca59f42171c11cd7c1f480c557e5ced826fdf7ab",
+          "match": true
+        },
+        "lib/Stratolink_Programming_Right_1x07_P1p00_D0p50_BackTack1p20x0p88.kicad_mod": {
+          "expected_sha256": "5689655367f3e168fe2d7ea8abfae3a6907760e9016c5a4e9014ed7650bd59cd",
+          "actual_sha256": "5689655367f3e168fe2d7ea8abfae3a6907760e9016c5a4e9014ed7650bd59cd",
+          "match": true
+        },
+        "lib/Stratolink_Release.kicad_sym": {
+          "expected_sha256": "aa1c6dbc240d945f26dd51b42bb3c4607b8c826c380acaada870ea9c416069a1",
+          "actual_sha256": "aa1c6dbc240d945f26dd51b42bb3c4607b8c826c380acaada870ea9c416069a1",
+          "match": true
+        },
+        "lib/Stratolink_UV.kicad_sym": {
+          "expected_sha256": "16063d37f9584c864a2589881d927f8d866192cf1521cc60e69738a905187230",
+          "actual_sha256": "16063d37f9584c864a2589881d927f8d866192cf1521cc60e69738a905187230",
+          "match": true
+        },
+        "lib/Stratolink_Wire_48mm_D0p321_Nominal.step": {
+          "expected_sha256": "18aba2561b12ccd7653bac133efc17c7833cc7c5686f563ee8c04ac862789671",
+          "actual_sha256": "18aba2561b12ccd7653bac133efc17c7833cc7c5686f563ee8c04ac862789671",
+          "match": true
+        },
+        "lib/Stratolink_Wire_82mm_D0p321_Nominal.step": {
+          "expected_sha256": "23e13ed21d9b2f49bb232fbb04ea73eec6f713054e606b75a04a31165e9d4dbf",
+          "actual_sha256": "23e13ed21d9b2f49bb232fbb04ea73eec6f713054e606b75a04a31165e9d4dbf",
+          "match": true
+        },
+        "lib/Stratolink_v1p1_C10_C_0402_1005Metric.kicad_mod": {
+          "expected_sha256": "c72d76379193997b4d7fb64e9cf6c0a10a71d8cbc72a93594f878c9f2f4cc2f6",
+          "actual_sha256": "c72d76379193997b4d7fb64e9cf6c0a10a71d8cbc72a93594f878c9f2f4cc2f6",
+          "match": true
+        },
+        "lib/Stratolink_v1p1_C11_C_0402_1005Metric.kicad_mod": {
+          "expected_sha256": "eeb9f74ded8b27a6273dc2a482aefbca8a6fb085d37b7ea683a41608182202e6",
+          "actual_sha256": "eeb9f74ded8b27a6273dc2a482aefbca8a6fb085d37b7ea683a41608182202e6",
+          "match": true
+        },
+        "lib/Stratolink_v1p1_C12_C_0402_1005Metric.kicad_mod": {
+          "expected_sha256": "1f1e06a0c652933886d38f7fccc49193b45e3f09726a9ca497f1fc5652699140",
+          "actual_sha256": "1f1e06a0c652933886d38f7fccc49193b45e3f09726a9ca497f1fc5652699140",
+          "match": true
+        },
+        "lib/Stratolink_v1p1_C14_C_0402_1005Metric.kicad_mod": {
+          "expected_sha256": "1aa0e2090dad99ab6047f44e2bce908f51170e51f98a6b6f58d101239289a406",
+          "actual_sha256": "1aa0e2090dad99ab6047f44e2bce908f51170e51f98a6b6f58d101239289a406",
+          "match": true
+        },
+        "lib/Stratolink_v1p1_C15_C_0402_1005Metric.kicad_mod": {
+          "expected_sha256": "47bbcbf140bf70e50fffe3a1be167cc9cf71a35e9f2683fa803f0d5da53dd35e",
+          "actual_sha256": "47bbcbf140bf70e50fffe3a1be167cc9cf71a35e9f2683fa803f0d5da53dd35e",
+          "match": true
+        },
+        "lib/Stratolink_v1p1_C16_C_0603_1608Metric.kicad_mod": {
+          "expected_sha256": "1c423c997347968cfb851db912359db85a1f81c5a26f6372fcc9ac040bdcfc6a",
+          "actual_sha256": "1c423c997347968cfb851db912359db85a1f81c5a26f6372fcc9ac040bdcfc6a",
+          "match": true
+        },
+        "lib/Stratolink_v1p1_C17_C_0402_1005Metric.kicad_mod": {
+          "expected_sha256": "d39eec4d33aaacf712c989875b0d253efefe9de20a8c1aac694a236cd139b0bf",
+          "actual_sha256": "d39eec4d33aaacf712c989875b0d253efefe9de20a8c1aac694a236cd139b0bf",
+          "match": true
+        },
+        "lib/Stratolink_v1p1_C19_C_0402_1005Metric.kicad_mod": {
+          "expected_sha256": "c08da34564f311a1b776a75b5a840a8d3b8338ed728afef4462797bb8f1a7243",
+          "actual_sha256": "c08da34564f311a1b776a75b5a840a8d3b8338ed728afef4462797bb8f1a7243",
+          "match": true
+        },
+        "lib/Stratolink_v1p1_C1_C_0402_1005Metric.kicad_mod": {
+          "expected_sha256": "e0c2a1d756781c77ec8713b6a8fee9099d20d575c3346930102c2234b8e209a9",
+          "actual_sha256": "e0c2a1d756781c77ec8713b6a8fee9099d20d575c3346930102c2234b8e209a9",
+          "match": true
+        },
+        "lib/Stratolink_v1p1_C20_C_0402_1005Metric.kicad_mod": {
+          "expected_sha256": "225c70d96dbc89caffdb7408a20db1c13ba5bf41fed40596dc86a84da9962785",
+          "actual_sha256": "225c70d96dbc89caffdb7408a20db1c13ba5bf41fed40596dc86a84da9962785",
+          "match": true
+        },
+        "lib/Stratolink_v1p1_C21_C_0603_1608Metric.kicad_mod": {
+          "expected_sha256": "82947e9ca91f2e45e4d22dbdcc285d642c575a44eedd9b554c936c8418e34e72",
+          "actual_sha256": "82947e9ca91f2e45e4d22dbdcc285d642c575a44eedd9b554c936c8418e34e72",
+          "match": true
+        },
+        "lib/Stratolink_v1p1_C22_C_0402_1005Metric.kicad_mod": {
+          "expected_sha256": "e4ce11cf6dc2e5bf752ac69404a037546825ce9476b21141c0bfa15cf41b05bb",
+          "actual_sha256": "e4ce11cf6dc2e5bf752ac69404a037546825ce9476b21141c0bfa15cf41b05bb",
+          "match": true
+        },
+        "lib/Stratolink_v1p1_C23_C_0402_1005Metric.kicad_mod": {
+          "expected_sha256": "657f018602ad14fef177d5ccf07e14ed553f4674687295e43cbbee6fbd5f235e",
+          "actual_sha256": "657f018602ad14fef177d5ccf07e14ed553f4674687295e43cbbee6fbd5f235e",
+          "match": true
+        },
+        "lib/Stratolink_v1p1_C2_C_0603_1608Metric.kicad_mod": {
+          "expected_sha256": "7d614e6c8a8b9741716532aedf53ce22fd2b9a4122e02d21168b10de849d50ae",
+          "actual_sha256": "7d614e6c8a8b9741716532aedf53ce22fd2b9a4122e02d21168b10de849d50ae",
+          "match": true
+        },
+        "lib/Stratolink_v1p1_C3_C_0603_1608Metric.kicad_mod": {
+          "expected_sha256": "4364deee2ca9a60b5e04140976b94c70e4c82564a1646c41977514c26d2f145e",
+          "actual_sha256": "4364deee2ca9a60b5e04140976b94c70e4c82564a1646c41977514c26d2f145e",
+          "match": true
+        },
+        "lib/Stratolink_v1p1_C4_C_0402_1005Metric.kicad_mod": {
+          "expected_sha256": "3e76c346e66fa6f26852f553485d4e46c153dea976525f99bf877431c4b6b5c3",
+          "actual_sha256": "3e76c346e66fa6f26852f553485d4e46c153dea976525f99bf877431c4b6b5c3",
+          "match": true
+        },
+        "lib/Stratolink_v1p1_C5_DMF4B5R5G105M3DTA0.kicad_mod": {
+          "expected_sha256": "e078558f7304757b892e0d2af975feb7ce1cf93106803ab14dca003767d15fd0",
+          "actual_sha256": "e078558f7304757b892e0d2af975feb7ce1cf93106803ab14dca003767d15fd0",
+          "match": true
+        },
+        "lib/Stratolink_v1p1_C6_C_0805_2012Metric.kicad_mod": {
+          "expected_sha256": "3fa616303db3b8efea61f1aac12214632b4d89b9ba489d236ffff2d167398f58",
+          "actual_sha256": "3fa616303db3b8efea61f1aac12214632b4d89b9ba489d236ffff2d167398f58",
+          "match": true
+        },
+        "lib/Stratolink_v1p1_C7_C_0402_1005Metric.kicad_mod": {
+          "expected_sha256": "1dab1b84bf930a4dc5de7575742d3c5e4ac593f1c00f8680b6074d1cae3183e1",
+          "actual_sha256": "1dab1b84bf930a4dc5de7575742d3c5e4ac593f1c00f8680b6074d1cae3183e1",
+          "match": true
+        },
+        "lib/Stratolink_v1p1_C8_C_0603_1608Metric.kicad_mod": {
+          "expected_sha256": "5bb83b92dbc61de8a608f3bc537606b5d0166d1fdd82a13eaad40d15f1f2d56b",
+          "actual_sha256": "5bb83b92dbc61de8a608f3bc537606b5d0166d1fdd82a13eaad40d15f1f2d56b",
+          "match": true
+        },
+        "lib/Stratolink_v1p1_C9_C_0402_1005Metric.kicad_mod": {
+          "expected_sha256": "4611d00df18c5d74d2851ca4a3991bfbaaa456a87541c4a261daaec02e7cf046",
+          "actual_sha256": "4611d00df18c5d74d2851ca4a3991bfbaaa456a87541c4a261daaec02e7cf046",
+          "match": true
+        },
+        "lib/Stratolink_v1p1_D1_D_SOD-523.kicad_mod": {
+          "expected_sha256": "b8bd6d891fd10df2dd234bc9e774be4fabbca8f62ff039bdbde045b621e3d21f",
+          "actual_sha256": "b8bd6d891fd10df2dd234bc9e774be4fabbca8f62ff039bdbde045b621e3d21f",
+          "match": true
+        },
+        "lib/Stratolink_v1p1_D3_D_SOD-523.kicad_mod": {
+          "expected_sha256": "12d3ed6cfab8ea82a541b29807498241195f1f47cc6c227e4ebc0af45cef39c8",
+          "actual_sha256": "12d3ed6cfab8ea82a541b29807498241195f1f47cc6c227e4ebc0af45cef39c8",
+          "match": true
+        },
+        "lib/Stratolink_v1p1_FB1_C_0402_1005Metric.kicad_mod": {
+          "expected_sha256": "d30ed3e773c702368a3f8b3fec7c0c2fccd23be4cddfbf37b8e4b6330ead10cc",
+          "actual_sha256": "d30ed3e773c702368a3f8b3fec7c0c2fccd23be4cddfbf37b8e4b6330ead10cc",
+          "match": true
+        },
+        "lib/Stratolink_v1p1_J20_Tag-Connect_TC2030-IDC-NL_2x03_P1.27mm_Vertical.kicad_mod": {
+          "expected_sha256": "61e7ae51c2fe7d64429dc5fd902070a046985eccceb2f161eaf622e80791371f",
+          "actual_sha256": "61e7ae51c2fe7d64429dc5fd902070a046985eccceb2f161eaf622e80791371f",
+          "match": true
+        },
+        "lib/Stratolink_v1p1_J4_Stratolink_Programming_Right_1x07_P1p00_D0p50_BackTack1p20x0p88.kicad_mod": {
+          "expected_sha256": "758bbc39f31cbc0714fc725ffbb98913b6201dc4cb043c679e4230b315096bb7",
+          "actual_sha256": "758bbc39f31cbc0714fc725ffbb98913b6201dc4cb043c679e4230b315096bb7",
+          "match": true
+        },
+        "lib/Stratolink_v1p1_L1_IND_LPS4018-223MRC.kicad_mod": {
+          "expected_sha256": "de2f9f1af3b42ceff5a7d6b1a9d47dcfcee940ceaf13e9bb18efdf44c58c6167",
+          "actual_sha256": "de2f9f1af3b42ceff5a7d6b1a9d47dcfcee940ceaf13e9bb18efdf44c58c6167",
+          "match": true
+        },
+        "lib/Stratolink_v1p1_R10_R_0402_1005Metric.kicad_mod": {
+          "expected_sha256": "70aadfe99ebd0f8b99cf0c1c534e5458377ab53791c03cf197555bda169af8fe",
+          "actual_sha256": "70aadfe99ebd0f8b99cf0c1c534e5458377ab53791c03cf197555bda169af8fe",
+          "match": true
+        },
+        "lib/Stratolink_v1p1_R11_R_0402_1005Metric.kicad_mod": {
+          "expected_sha256": "f74b44a21b5b0fae443553a569a82603fe479f8ab43222552ec4b668bce9a2b5",
+          "actual_sha256": "f74b44a21b5b0fae443553a569a82603fe479f8ab43222552ec4b668bce9a2b5",
+          "match": true
+        },
+        "lib/Stratolink_v1p1_R12_R_0402_1005Metric.kicad_mod": {
+          "expected_sha256": "26d037a375aad5da7e826c0929db83ab075429470b05eaa40e821143ef61233d",
+          "actual_sha256": "26d037a375aad5da7e826c0929db83ab075429470b05eaa40e821143ef61233d",
+          "match": true
+        },
+        "lib/Stratolink_v1p1_R13_R_0402_1005Metric.kicad_mod": {
+          "expected_sha256": "4c6536173ff914cabc1c5785cb9793a43e87aed0fdcb75fa9afb4d6a50d16a3f",
+          "actual_sha256": "4c6536173ff914cabc1c5785cb9793a43e87aed0fdcb75fa9afb4d6a50d16a3f",
+          "match": true
+        },
+        "lib/Stratolink_v1p1_R14_R_0402_1005Metric.kicad_mod": {
+          "expected_sha256": "94a0fe7e65a41f84a40633fcc66f9562c03840ef553a60b0809a48daa671ee98",
+          "actual_sha256": "94a0fe7e65a41f84a40633fcc66f9562c03840ef553a60b0809a48daa671ee98",
+          "match": true
+        },
+        "lib/Stratolink_v1p1_R15_R_0402_1005Metric.kicad_mod": {
+          "expected_sha256": "d6a2bb18a4958140492dd74870ebef2f0ee98f08216f07521f8d75b088c5e2a7",
+          "actual_sha256": "d6a2bb18a4958140492dd74870ebef2f0ee98f08216f07521f8d75b088c5e2a7",
+          "match": true
+        },
+        "lib/Stratolink_v1p1_R16_R_0402_1005Metric.kicad_mod": {
+          "expected_sha256": "06f9e18c8229c122626f08deaec2e27fd6d1653f937d65f42d2fb1dbc36b8a2f",
+          "actual_sha256": "06f9e18c8229c122626f08deaec2e27fd6d1653f937d65f42d2fb1dbc36b8a2f",
+          "match": true
+        },
+        "lib/Stratolink_v1p1_R18_R_0402_1005Metric.kicad_mod": {
+          "expected_sha256": "913fdb46bdb551aad3eb0c4b0593dfa0ede23b740874eeb3ad89bec1cbef66c7",
+          "actual_sha256": "913fdb46bdb551aad3eb0c4b0593dfa0ede23b740874eeb3ad89bec1cbef66c7",
+          "match": true
+        },
+        "lib/Stratolink_v1p1_R19_R_0402_1005Metric.kicad_mod": {
+          "expected_sha256": "650dcebbeca5dff51f64a801db898948c5da4647d34f38a798b4d0597f09f86e",
+          "actual_sha256": "650dcebbeca5dff51f64a801db898948c5da4647d34f38a798b4d0597f09f86e",
+          "match": true
+        },
+        "lib/Stratolink_v1p1_R1_R_0402_1005Metric.kicad_mod": {
+          "expected_sha256": "3dfcd009addff1d7d279bd7834144f69d07c8a550e9897ed9dfa251fc5044f43",
+          "actual_sha256": "3dfcd009addff1d7d279bd7834144f69d07c8a550e9897ed9dfa251fc5044f43",
+          "match": true
+        },
+        "lib/Stratolink_v1p1_R21_R_0402_1005Metric.kicad_mod": {
+          "expected_sha256": "4b3d21a82278cb2abcb7243a1c13b56dc34cecba8b2545254651083dd6fcb7ae",
+          "actual_sha256": "4b3d21a82278cb2abcb7243a1c13b56dc34cecba8b2545254651083dd6fcb7ae",
+          "match": true
+        },
+        "lib/Stratolink_v1p1_R22_R_0402_1005Metric.kicad_mod": {
+          "expected_sha256": "933ca9c550e1e199b019c38a14103317739024d94b7e672e066441051bb407dc",
+          "actual_sha256": "933ca9c550e1e199b019c38a14103317739024d94b7e672e066441051bb407dc",
+          "match": true
+        },
+        "lib/Stratolink_v1p1_R23_R_0402_1005Metric.kicad_mod": {
+          "expected_sha256": "ae02af118486ba8a2fa973a086d6d534baaa3974bb78c3b49c10d51471a88eb3",
+          "actual_sha256": "ae02af118486ba8a2fa973a086d6d534baaa3974bb78c3b49c10d51471a88eb3",
+          "match": true
+        },
+        "lib/Stratolink_v1p1_R24_R_0402_1005Metric.kicad_mod": {
+          "expected_sha256": "e792c57dea25ecf9fcdb9a86fd97577e09827516d41d86a3b2dc4ed07b5707f8",
+          "actual_sha256": "e792c57dea25ecf9fcdb9a86fd97577e09827516d41d86a3b2dc4ed07b5707f8",
+          "match": true
+        },
+        "lib/Stratolink_v1p1_R25_R_0402_1005Metric.kicad_mod": {
+          "expected_sha256": "7361e857e6839ae17c986b62a2696eeaf019abc089dd988cbcbb4074f118e84a",
+          "actual_sha256": "7361e857e6839ae17c986b62a2696eeaf019abc089dd988cbcbb4074f118e84a",
+          "match": true
+        },
+        "lib/Stratolink_v1p1_R26_R_0402_1005Metric.kicad_mod": {
+          "expected_sha256": "df29b26854ae20219285e08395f5fd3efefa0ec6f61f4e63de62a90cafe05653",
+          "actual_sha256": "df29b26854ae20219285e08395f5fd3efefa0ec6f61f4e63de62a90cafe05653",
+          "match": true
+        },
+        "lib/Stratolink_v1p1_R27_R_0805_2012Metric.kicad_mod": {
+          "expected_sha256": "3f55467a61f5b75e9affe2e1c58c1d008796bccce32942a585a39553812902cf",
+          "actual_sha256": "3f55467a61f5b75e9affe2e1c58c1d008796bccce32942a585a39553812902cf",
+          "match": true
+        },
+        "lib/Stratolink_v1p1_R2_R_0402_1005Metric.kicad_mod": {
+          "expected_sha256": "aae5b3b6611758699a482dcb999da62794331bb1038ca222480018d0afa4723e",
+          "actual_sha256": "aae5b3b6611758699a482dcb999da62794331bb1038ca222480018d0afa4723e",
+          "match": true
+        },
+        "lib/Stratolink_v1p1_R3_R_0402_1005Metric.kicad_mod": {
+          "expected_sha256": "b2e605d2c1ca7f6ef77f832d3620836b3945d85dfac7e1600dce3e46ffa40814",
+          "actual_sha256": "b2e605d2c1ca7f6ef77f832d3620836b3945d85dfac7e1600dce3e46ffa40814",
+          "match": true
+        },
+        "lib/Stratolink_v1p1_R4_R_0402_1005Metric.kicad_mod": {
+          "expected_sha256": "9f1bff845999d7910c559514d328bba25e6dcbc8f48bf99ceb171818fa7e393b",
+          "actual_sha256": "9f1bff845999d7910c559514d328bba25e6dcbc8f48bf99ceb171818fa7e393b",
+          "match": true
+        },
+        "lib/Stratolink_v1p1_R5_R_0402_1005Metric.kicad_mod": {
+          "expected_sha256": "e68590d932a5eec5eb45ed3eb280a5f1397d538b57b72eaeff27c20cd74d6b0b",
+          "actual_sha256": "e68590d932a5eec5eb45ed3eb280a5f1397d538b57b72eaeff27c20cd74d6b0b",
+          "match": true
+        },
+        "lib/Stratolink_v1p1_R6_R_0402_1005Metric.kicad_mod": {
+          "expected_sha256": "e52a0d67835b49a4afcc74b1d02f5d4ec9f8e36af32346958e56a3ddab6fa13c",
+          "actual_sha256": "e52a0d67835b49a4afcc74b1d02f5d4ec9f8e36af32346958e56a3ddab6fa13c",
+          "match": true
+        },
+        "lib/Stratolink_v1p1_R7_R_0402_1005Metric.kicad_mod": {
+          "expected_sha256": "85b2f4178913e53fabf922fa684412d75b9d5e0bc4c2873713d9f88ed47dde92",
+          "actual_sha256": "85b2f4178913e53fabf922fa684412d75b9d5e0bc4c2873713d9f88ed47dde92",
+          "match": true
+        },
+        "lib/Stratolink_v1p1_R8_R_0402_1005Metric.kicad_mod": {
+          "expected_sha256": "96137fae2b4476d119b4dea2b0e28db41874abc4b7323c7631fcadf9598c3c6e",
+          "actual_sha256": "96137fae2b4476d119b4dea2b0e28db41874abc4b7323c7631fcadf9598c3c6e",
+          "match": true
+        },
+        "lib/Stratolink_v1p1_R9_R_0402_1005Metric.kicad_mod": {
+          "expected_sha256": "0b7c4c65884a457cceb799017c5d5167566a26265e751ca314326d123e32e239",
+          "actual_sha256": "0b7c4c65884a457cceb799017c5d5167566a26265e751ca314326d123e32e239",
+          "match": true
+        },
+        "lib/Stratolink_v1p1_Symbols.kicad_sym": {
+          "expected_sha256": "5445aa38794607a1057befdb5a2f01ac1ea4d358a16bc90645849b96dafed883",
+          "actual_sha256": "5445aa38794607a1057befdb5a2f01ac1ea4d358a16bc90645849b96dafed883",
+          "match": true
+        },
+        "lib/Stratolink_v1p1_U1_QFN50P350X350X100-21N.kicad_mod": {
+          "expected_sha256": "d2bc0bbaeea076a4000dbcc80cf3cf57e36ed463e31f63143e45302852b26458",
+          "actual_sha256": "d2bc0bbaeea076a4000dbcc80cf3cf57e36ed463e31f63143e45302852b26458",
+          "match": true
+        },
+        "lib/Stratolink_v1p1_U2_RAK3172.kicad_mod": {
+          "expected_sha256": "5d30ca8d063ec6e96c760ec0600b5da9550ef9556d79dd463343427bab363ca3",
+          "actual_sha256": "5d30ca8d063ec6e96c760ec0600b5da9550ef9556d79dd463343427bab363ca3",
+          "match": true
+        },
+        "lib/Stratolink_v1p1_U3_XCVR_MAX-M10S-00B.kicad_mod": {
+          "expected_sha256": "eb07df0a8649b6a8e87fe9b896641b67e0836af2616a71d32f0619b014542b5a",
+          "actual_sha256": "eb07df0a8649b6a8e87fe9b896641b67e0836af2616a71d32f0619b014542b5a",
+          "match": true
+        },
+        "lib/Stratolink_v1p1_U4_SON125P500X300X100-8N.kicad_mod": {
+          "expected_sha256": "6138b67efb5402a88822516743abb3518b83a1d8fa2ad5b27f07176cf560d80c",
+          "actual_sha256": "6138b67efb5402a88822516743abb3518b83a1d8fa2ad5b27f07176cf560d80c",
+          "match": true
+        },
+        "lib/Stratolink_v1p1_U5_BGA6N40P3X2_148X95X53.kicad_mod": {
+          "expected_sha256": "3256b34e7388c38b8081c07a543c96b1d3b4901d72d3c7038e40fdb4bc4eae60",
+          "actual_sha256": "3256b34e7388c38b8081c07a543c96b1d3b4901d72d3c7038e40fdb4bc4eae60",
+          "match": true
+        },
+        "lib/Stratolink_v1p1_U6_AS7331_OLGA16.kicad_mod": {
+          "expected_sha256": "dd991771e76105bfef10cb046bc9b54a1a0c8cc0c7b19c0338a8981ae8168923",
+          "actual_sha256": "dd991771e76105bfef10cb046bc9b54a1a0c8cc0c7b19c0338a8981ae8168923",
+          "match": true
+        },
+        "lib/Stratolink_v1p1_U6_SMD6_LTR-390UV-01_LTO-L.kicad_mod": {
+          "expected_sha256": "abe88a75341b164c627efc692cd4f2e6be63cba8fa0dbb87fcb0beff7491400f",
+          "actual_sha256": "abe88a75341b164c627efc692cd4f2e6be63cba8fa0dbb87fcb0beff7491400f",
+          "match": true
+        },
+        "lib/Stratolink_v1p1_U7_PQFN50P200X200100-12N.kicad_mod": {
+          "expected_sha256": "352f082a796cf08e231f2968cece1918acc9816074ec26db8c7ae8586039ded1",
+          "actual_sha256": "352f082a796cf08e231f2968cece1918acc9816074ec26db8c7ae8586039ded1",
+          "match": true
+        },
+        "lib/Stratolink_v1p1_U8_SOT-23-5.kicad_mod": {
+          "expected_sha256": "72f10c1c71e218b060fec25aadd0c59e63eec7c1aa92ad3ddedd725639e3a208",
+          "actual_sha256": "72f10c1c71e218b060fec25aadd0c59e63eec7c1aa92ad3ddedd725639e3a208",
+          "match": true
+        },
+        "lib/Suspension_PTH_D2p0_OD3p2.kicad_mod": {
+          "expected_sha256": "2f71d16ba89940b2e21f46e35e96a71f7ff660adaaff82485ed805de143c9ca1",
+          "actual_sha256": "2f71d16ba89940b2e21f46e35e96a71f7ff660adaaff82485ed805de143c9ca1",
+          "match": true
+        },
+        "lib/T3902.kicad_sym": {
+          "expected_sha256": "66720809065a1941109082a4138fc68afeffbd06c35e963b338711417839a58f",
+          "actual_sha256": "66720809065a1941109082a4138fc68afeffbd06c35e963b338711417839a58f",
+          "match": true
+        },
+        "lib/T3902.step": {
+          "expected_sha256": "214b395bb75a355bfc5ca2eac498412731dc0a5296af2382d370cf0230bdff1f",
+          "actual_sha256": "214b395bb75a355bfc5ca2eac498412731dc0a5296af2382d370cf0230bdff1f",
+          "match": true
+        },
+        "lib/TMP117NAIYBGR.kicad_sym": {
+          "expected_sha256": "1813a62d0d88664390dfc896d9a2cfd39cf37b9b75531db8980191ed2cc3c584",
+          "actual_sha256": "1813a62d0d88664390dfc896d9a2cfd39cf37b9b75531db8980191ed2cc3c584",
+          "match": true
+        },
+        "lib/TMP117NAIYBGR.step": {
+          "expected_sha256": "81257ef89350fbe4c930c965cd849b3f2ac885f4d30b6f6b1cd6689b145be75e",
+          "actual_sha256": "81257ef89350fbe4c930c965cd849b3f2ac885f4d30b6f6b1cd6689b145be75e",
+          "match": true
+        },
+        "lib/VJ0603A120KXCAP.kicad_sym": {
+          "expected_sha256": "d45b48e1f00f52444dc6e20e8d2447d3dc502248c2a0446e5d44e05e462723e5",
+          "actual_sha256": "d45b48e1f00f52444dc6e20e8d2447d3dc502248c2a0446e5d44e05e462723e5",
+          "match": true
+        },
+        "lib/VJ0603A120KXCAP.step": {
+          "expected_sha256": "7a5b19a23d2c80df52915b51adc3299ae78793909f41dc21e6b48f6bc339e4a6",
+          "actual_sha256": "7a5b19a23d2c80df52915b51adc3299ae78793909f41dc21e6b48f6bc339e4a6",
+          "match": true
+        },
+        "lib/WCAP-CSGP_0402.kicad_mod": {
+          "expected_sha256": "44a8f032ed80387f92ffe395290a6e9accf150b77ca161ccd4edf91706f98ce9",
+          "actual_sha256": "44a8f032ed80387f92ffe395290a6e9accf150b77ca161ccd4edf91706f98ce9",
+          "match": true
+        },
+        "lib/WCAP-CSGP_0402.kicad_sym": {
+          "expected_sha256": "31b8edc59adcae9059ce14724e0885f154cd6352c0536ca33a71419ce885b240",
+          "actual_sha256": "31b8edc59adcae9059ce14724e0885f154cd6352c0536ca33a71419ce885b240",
+          "match": true
+        },
+        "lib/WCAP-CSGP_0402.step": {
+          "expected_sha256": "fd544e31c602d8a01d21cae2c49140ea114544f70a54ec4d3b1f2d3c186ac29f",
+          "actual_sha256": "fd544e31c602d8a01d21cae2c49140ea114544f70a54ec4d3b1f2d3c186ac29f",
+          "match": true
+        },
+        "lib/XCVR_MAX-M10S-00B.kicad_mod": {
+          "expected_sha256": "f02c5f6ec6a2cc7e49e6d320e2f713a5cf826c652b7030754832415a9c33bfa7",
+          "actual_sha256": "f02c5f6ec6a2cc7e49e6d320e2f713a5cf826c652b7030754832415a9c33bfa7",
+          "match": true
+        },
+        "lib/XCVR_RAK3172-8-SM-NI.kicad_mod": {
+          "expected_sha256": "341a8de38d3075e7e190495ecbe1faa77f11aef73df7211c85b56581198b6c6a",
+          "actual_sha256": "341a8de38d3075e7e190495ecbe1faa77f11aef73df7211c85b56581198b6c6a",
+          "match": true
+        },
+        "lib/XDCR_AS7341-DLGM.kicad_mod": {
+          "expected_sha256": "1b4397d0b1f6b5baa42d874ff37b2096b77d6fdfe65f692b1d3dff3db6a4e2ac",
+          "actual_sha256": "1b4397d0b1f6b5baa42d874ff37b2096b77d6fdfe65f692b1d3dff3db6a4e2ac",
+          "match": true
+        },
+        "lib/cap.step": {
+          "expected_sha256": "9b8d6e2646bd53de6c21345928a71feafc695fd88a254725b14f7a7108f9681d",
+          "actual_sha256": "9b8d6e2646bd53de6c21345928a71feafc695fd88a254725b14f7a7108f9681d",
+          "match": true
+        },
+        "lib/gps.step": {
+          "expected_sha256": "6e8669ce426399a1171bfef1886e155a9c1bdf89aab8e7a59ea81c043f1fba88",
+          "actual_sha256": "6e8669ce426399a1171bfef1886e155a9c1bdf89aab8e7a59ea81c043f1fba88",
+          "match": true
+        },
+        "lib/lora.step": {
+          "expected_sha256": "4685127e7fd516ea0e08ba7f8a8c5711f626351b480a13ade89925b33fdad9b5",
+          "actual_sha256": "4685127e7fd516ea0e08ba7f8a8c5711f626351b480a13ade89925b33fdad9b5",
+          "match": true
+        },
+        "lib/mic.elibz": {
+          "expected_sha256": "b68dcc389d65cf5b89763e94db81ee8ee41ad52d68ad39fffea02825559bad17",
+          "actual_sha256": "b68dcc389d65cf5b89763e94db81ee8ee41ad52d68ad39fffea02825559bad17",
+          "match": true
+        },
+        "lib/pressure.elibz": {
+          "expected_sha256": "f997158b9182f3cfcc305b2efa452300f2fe3103462d244a90f23c209db269b5",
+          "actual_sha256": "f997158b9182f3cfcc305b2efa452300f2fe3103462d244a90f23c209db269b5",
+          "match": true
+        },
+        "stratolink.kicad_dru": {
+          "expected_sha256": "071d900e34c4eb3d3f91003cc0698e261e7fe23beea7107c4db50a1bf60a5136",
+          "actual_sha256": "071d900e34c4eb3d3f91003cc0698e261e7fe23beea7107c4db50a1bf60a5136",
+          "match": true
+        },
+        "stratolink.kicad_pcb": {
+          "expected_sha256": "9d63500a087ef8d345c2337942106e6704d32ded953846883454bfad718adf6c",
+          "actual_sha256": "9d63500a087ef8d345c2337942106e6704d32ded953846883454bfad718adf6c",
+          "match": true
+        },
+        "stratolink.kicad_pro": {
+          "expected_sha256": "d58c7e480ea727fc2dde90065d4c489dec0b535a4b73994d643b88cfe2e9e449",
+          "actual_sha256": "d58c7e480ea727fc2dde90065d4c489dec0b535a4b73994d643b88cfe2e9e449",
+          "match": true
+        },
+        "stratolink.kicad_sch": {
+          "expected_sha256": "a06740b35d07d7b81999f7ace2a7a7ff02e185ca3e46a664630bd4bbd00c54b7",
+          "actual_sha256": "a06740b35d07d7b81999f7ace2a7a7ff02e185ca3e46a664630bd4bbd00c54b7",
+          "match": true
+        },
+        "sym-lib-table": {
+          "expected_sha256": "6d16fafd9ca5f0074df23d7ad6c75308ece058bd043d1297ce67fa3d25ee519e",
+          "actual_sha256": "6d16fafd9ca5f0074df23d7ad6c75308ece058bd043d1297ce67fa3d25ee519e",
+          "match": true
+        }
+      }
+    },
+    "manufacturing_outputs": {
+      "checked": 37,
+      "all_match": true,
+      "files": {
+        "BOM-stratolink.csv": {
+          "expected_sha256": "55b681ab8d23de3ec711cbc7957fc5375e99b6118513ed9acee47a928077a6cb",
+          "actual_sha256": "55b681ab8d23de3ec711cbc7957fc5375e99b6118513ed9acee47a928077a6cb",
+          "match": true
+        },
+        "CPL-stratolink.csv": {
+          "expected_sha256": "907ae41e92261e9c436d787050f74c991dade5d6a306c1a75a4d8b11c4c8ea6f",
+          "actual_sha256": "907ae41e92261e9c436d787050f74c991dade5d6a306c1a75a4d8b11c4c8ea6f",
+          "match": true
+        },
+        "README.md": {
+          "expected_sha256": "35c92e1ccc377338f7c2b37a2f418be6bdf9a7ea5757a111e6470ea3364aaed6",
+          "actual_sha256": "35c92e1ccc377338f7c2b37a2f418be6bdf9a7ea5757a111e6470ea3364aaed6",
+          "match": true
+        },
+        "assembly-audit.json": {
+          "expected_sha256": "b4bbf34a361ba732e286e369a69ad853e1ac894d52d4f35c69180a081c8c8498",
+          "actual_sha256": "b4bbf34a361ba732e286e369a69ad853e1ac894d52d4f35c69180a081c8c8498",
+          "match": true
+        },
+        "fabrication-review.zip": {
+          "expected_sha256": "6fd6f81550d8a30e163028bc88d30aad88fad6c8391e8dbdbe215322d3bef4e0",
+          "actual_sha256": "6fd6f81550d8a30e163028bc88d30aad88fad6c8391e8dbdbe215322d3bef4e0",
+          "match": true
+        },
+        "finish-proof.json": {
+          "expected_sha256": "668a4d1bb810db087a8bfb482cd3082ba144f4ee1e365bc262a29ae7101f8856",
+          "actual_sha256": "668a4d1bb810db087a8bfb482cd3082ba144f4ee1e365bc262a29ae7101f8856",
+          "match": true
+        },
+        "gerbers/stratolink-B_Cu.gbl": {
+          "expected_sha256": "6b985c6c25fe6e5d0a6ffa5e7c85166a3e8afeb9ce793e046724e0cafcd4cecb",
+          "actual_sha256": "6b985c6c25fe6e5d0a6ffa5e7c85166a3e8afeb9ce793e046724e0cafcd4cecb",
+          "match": true
+        },
+        "gerbers/stratolink-B_Mask.gbs": {
+          "expected_sha256": "3678e60381599c7c90f03ea154854383ced6021b0897fec283e8f4884e5c9daf",
+          "actual_sha256": "3678e60381599c7c90f03ea154854383ced6021b0897fec283e8f4884e5c9daf",
+          "match": true
+        },
+        "gerbers/stratolink-B_Paste.gbp": {
+          "expected_sha256": "f871f015a4b9cd1185fe01d98a296d10f59db8b2e89f501611238e798c7ed8e3",
+          "actual_sha256": "f871f015a4b9cd1185fe01d98a296d10f59db8b2e89f501611238e798c7ed8e3",
+          "match": true
+        },
+        "gerbers/stratolink-B_Silkscreen.gbo": {
+          "expected_sha256": "f9a55927485573bcda341e57c8d4fee6ab9aecb86437a921c43936086c74da48",
+          "actual_sha256": "f9a55927485573bcda341e57c8d4fee6ab9aecb86437a921c43936086c74da48",
+          "match": true
+        },
+        "gerbers/stratolink-Edge_Cuts.gm1": {
+          "expected_sha256": "874700afc9460f42b1515c2f91cd92137eae1021c695d5acfb9bb31eb4b629fa",
+          "actual_sha256": "874700afc9460f42b1515c2f91cd92137eae1021c695d5acfb9bb31eb4b629fa",
+          "match": true
+        },
+        "gerbers/stratolink-F_Cu.gtl": {
+          "expected_sha256": "a5773eb551bf3335380ec13d4ca99924ea6c55e9d185b9b174505a8ca6cf25a5",
+          "actual_sha256": "a5773eb551bf3335380ec13d4ca99924ea6c55e9d185b9b174505a8ca6cf25a5",
+          "match": true
+        },
+        "gerbers/stratolink-F_Mask.gts": {
+          "expected_sha256": "11cc8573f7bd7bd9a42deb10484521fbd38757eeb092e6c387cf8a756cac8dbe",
+          "actual_sha256": "11cc8573f7bd7bd9a42deb10484521fbd38757eeb092e6c387cf8a756cac8dbe",
+          "match": true
+        },
+        "gerbers/stratolink-F_Paste.gtp": {
+          "expected_sha256": "60082ee66d78fb40b484c0f624af29ad5c635357041a251e6057dcd7033d0758",
+          "actual_sha256": "60082ee66d78fb40b484c0f624af29ad5c635357041a251e6057dcd7033d0758",
+          "match": true
+        },
+        "gerbers/stratolink-F_Silkscreen.gto": {
+          "expected_sha256": "3a21d0beab933a59d77ec0812c0cabf8f9008f110650816d37dd32de151c252e",
+          "actual_sha256": "3a21d0beab933a59d77ec0812c0cabf8f9008f110650816d37dd32de151c252e",
+          "match": true
+        },
+        "gerbers/stratolink-NPTH.drl": {
+          "expected_sha256": "a909dc79d7648c0b92e8b91ed0ffd8ef1704e201b15affdec0066c8abf7a78b1",
+          "actual_sha256": "a909dc79d7648c0b92e8b91ed0ffd8ef1704e201b15affdec0066c8abf7a78b1",
+          "match": true
+        },
+        "gerbers/stratolink-PTH.drl": {
+          "expected_sha256": "e16cc3feba7ab774479741ffd7bbec189d93a8e76e69d5e79a3c5ca6adbbae4b",
+          "actual_sha256": "e16cc3feba7ab774479741ffd7bbec189d93a8e76e69d5e79a3c5ca6adbbae4b",
+          "match": true
+        },
+        "gerbers/stratolink-job.gbrjob": {
+          "expected_sha256": "feb8be2fb48a588c5a3e23c126f61db8f16b4bf32cfcc4db70985f89620b7704",
+          "actual_sha256": "feb8be2fb48a588c5a3e23c126f61db8f16b4bf32cfcc4db70985f89620b7704",
+          "match": true
+        },
+        "historical-placement-proof.json": {
+          "expected_sha256": "7bf5ebdcf7a4e66e50c0c858fc73fd50835a258eacc692983fecfdc2e44b836c",
+          "actual_sha256": "7bf5ebdcf7a4e66e50c0c858fc73fd50835a258eacc692983fecfdc2e44b836c",
+          "match": true
+        },
+        "logs/drill.log": {
+          "expected_sha256": "845018d686dd7eb6ae5a74f012aab6a140455b7d33b055280e126cd545c39c3a",
+          "actual_sha256": "845018d686dd7eb6ae5a74f012aab6a140455b7d33b055280e126cd545c39c3a",
+          "match": true
+        },
+        "logs/gerbers.log": {
+          "expected_sha256": "be5ee3aa787a0a21ae6d395b54468e319c187fd5f72a35425897b219901023e6",
+          "actual_sha256": "be5ee3aa787a0a21ae6d395b54468e319c187fd5f72a35425897b219901023e6",
+          "match": true
+        },
+        "logs/netlist.log": {
+          "expected_sha256": "5725e042332ee49c152fa36b8c2f658df9b14186c010b4cfabd1c3426edb7eb2",
+          "actual_sha256": "5725e042332ee49c152fa36b8c2f658df9b14186c010b4cfabd1c3426edb7eb2",
+          "match": true
+        },
+        "logs/pilot-stencil.log": {
+          "expected_sha256": "aa26179b4852e4f68ff8d09ab0487bb9657623b63a6f02b2f71d37626b1a7106",
+          "actual_sha256": "aa26179b4852e4f68ff8d09ab0487bb9657623b63a6f02b2f71d37626b1a7106",
+          "match": true
+        },
+        "logs/positions.log": {
+          "expected_sha256": "25ed03b1aa2874826b63027328234f1db721575081ac1172eacae794e845885f",
+          "actual_sha256": "25ed03b1aa2874826b63027328234f1db721575081ac1172eacae794e845885f",
+          "match": true
+        },
+        "native/drill-report.txt": {
+          "expected_sha256": "36f8234c68aa4703ae7de105f2af19b7aaf38b204c048f2ff50465fdd857fd25",
+          "actual_sha256": "36f8234c68aa4703ae7de105f2af19b7aaf38b204c048f2ff50465fdd857fd25",
+          "match": true
+        },
+        "native/full-design-paste/stratolink-B_Paste.gbp": {
+          "expected_sha256": "7875d6dc5e387071095dc2f12a1f50cedda8e790811c9211c95c8d8fedf1e19f",
+          "actual_sha256": "7875d6dc5e387071095dc2f12a1f50cedda8e790811c9211c95c8d8fedf1e19f",
+          "match": true
+        },
+        "native/full-design-paste/stratolink-F_Paste.gtp": {
+          "expected_sha256": "a23d3d007032d2af9279a77d9e14b68d0db4e7b477df4e08135d0e4d87b5a8c4",
+          "actual_sha256": "a23d3d007032d2af9279a77d9e14b68d0db4e7b477df4e08135d0e4d87b5a8c4",
+          "match": true
+        },
+        "native/historical-v1.kicad_pcb": {
+          "expected_sha256": "2924cfa59d48c1446488d715834e84ea634516e622ed59915fb72521e9595190",
+          "actual_sha256": "2924cfa59d48c1446488d715834e84ea634516e622ed59915fb72521e9595190",
+          "match": true
+        },
+        "native/netlist.xml": {
+          "expected_sha256": "2e1a63ab20f04fba4697ed5452f7d4fb6ed19aa6081b2718afa098f01cdba843",
+          "actual_sha256": "2e1a63ab20f04fba4697ed5452f7d4fb6ed19aa6081b2718afa098f01cdba843",
+          "match": true
+        },
+        "native/positions.csv": {
+          "expected_sha256": "4b5e7592b2664b6e89440361323ea59dd94d2bc6a1bd1f97e1b1016f1b6c5c7f",
+          "actual_sha256": "4b5e7592b2664b6e89440361323ea59dd94d2bc6a1bd1f97e1b1016f1b6c5c7f",
+          "match": true
+        },
+        "native/stencil/gerbers/stratolink-B_Paste.gbp": {
+          "expected_sha256": "f871f015a4b9cd1185fe01d98a296d10f59db8b2e89f501611238e798c7ed8e3",
+          "actual_sha256": "f871f015a4b9cd1185fe01d98a296d10f59db8b2e89f501611238e798c7ed8e3",
+          "match": true
+        },
+        "native/stencil/gerbers/stratolink-F_Paste.gtp": {
+          "expected_sha256": "60082ee66d78fb40b484c0f624af29ad5c635357041a251e6057dcd7033d0758",
+          "actual_sha256": "60082ee66d78fb40b484c0f624af29ad5c635357041a251e6057dcd7033d0758",
+          "match": true
+        },
+        "native/stencil/gerbers/stratolink-job.gbrjob": {
+          "expected_sha256": "6eabf4debf36b17bea15002f83911f9dd07224cd33507e5d6851da4cac518536",
+          "actual_sha256": "6eabf4debf36b17bea15002f83911f9dd07224cd33507e5d6851da4cac518536",
+          "match": true
+        },
+        "native/stencil/stratolink.kicad_pcb": {
+          "expected_sha256": "a089adc65a5265cc7628ffd6a95205f0875525846d1599cbe5262acd154cf3c9",
+          "actual_sha256": "a089adc65a5265cc7628ffd6a95205f0875525846d1599cbe5262acd154cf3c9",
+          "match": true
+        },
+        "population-profile.json": {
+          "expected_sha256": "245f06375a0641c170406a4ebb2b491d09127b2a3320e0928d2719deba146569",
+          "actual_sha256": "245f06375a0641c170406a4ebb2b491d09127b2a3320e0928d2719deba146569",
+          "match": true
+        },
+        "stencil-population-proof.json": {
+          "expected_sha256": "10c26d618beb68ca7a74996226ba398583872f944ce6dd3a4ea0e809a16f1379",
+          "actual_sha256": "10c26d618beb68ca7a74996226ba398583872f944ce6dd3a4ea0e809a16f1379",
+          "match": true
+        },
+        "supplier-rotation-profile.json": {
+          "expected_sha256": "fadbcae4bb6bb6776a3fd9e3c1fd35073b85bbad71c441b43b1361ddf2aa00ea",
+          "actual_sha256": "fadbcae4bb6bb6776a3fd9e3c1fd35073b85bbad71c441b43b1361ddf2aa00ea",
+          "match": true
+        }
+      }
+    },
+    "manufacturing_evidence": {
+      "checked": 7,
+      "all_match": true,
+      "files": {
+        "/Users/twarn/Repositories/Stratolink/analysis/v1_1_release_20261012/jlc/previous-selected-parts.txt": {
+          "expected_sha256": "d974e52a43add30ecbbce9ab62d6c1098eecb6147f424efb4ecc9105365e5d34",
+          "actual_sha256": "d974e52a43add30ecbbce9ab62d6c1098eecb6147f424efb4ecc9105365e5d34",
+          "match": true
+        },
+        "/Users/twarn/Repositories/Stratolink/hardware/gerbers/production_files/CPL-stratolink.csv": {
+          "expected_sha256": "194c91282f58cc6635dd2b929b2ab0f98a16ea066265052b8b957be5bb12a081",
+          "actual_sha256": "194c91282f58cc6635dd2b929b2ab0f98a16ea066265052b8b957be5bb12a081",
+          "match": true
+        },
+        "/Users/twarn/Repositories/Stratolink/hardware/gerbers/v1.1-pilot/native/historical-v1.kicad_pcb": {
+          "expected_sha256": "2924cfa59d48c1446488d715834e84ea634516e622ed59915fb72521e9595190",
+          "actual_sha256": "2924cfa59d48c1446488d715834e84ea634516e622ed59915fb72521e9595190",
+          "match": true
+        },
+        "/Users/twarn/Repositories/Stratolink/analysis/v1_1_layout_20261012/pcb_audit/source_hashes.json": {
+          "expected_sha256": "91cc28d2d77fa1137c43d39be4807a94c963acdd51625b58f23d55bd2b9cb488",
+          "actual_sha256": "91cc28d2d77fa1137c43d39be4807a94c963acdd51625b58f23d55bd2b9cb488",
+          "match": true
+        },
+        "/Users/twarn/Repositories/Stratolink/analysis/v1_1_release_20261012/manufacturing/generate.py": {
+          "expected_sha256": "5f5490dce5ef8d0a6114935cddda1ab1c8c7cc536c6a8ee42832ec362c7806a8",
+          "actual_sha256": "5f5490dce5ef8d0a6114935cddda1ab1c8c7cc536c6a8ee42832ec362c7806a8",
+          "match": true
+        },
+        "/Users/twarn/Repositories/Stratolink/analysis/v1_1_release_20261012/jlc/supplier-rotation-profile.json": {
+          "expected_sha256": "fadbcae4bb6bb6776a3fd9e3c1fd35073b85bbad71c441b43b1361ddf2aa00ea",
+          "actual_sha256": "fadbcae4bb6bb6776a3fd9e3c1fd35073b85bbad71c441b43b1361ddf2aa00ea",
+          "match": true
+        },
+        "/Users/twarn/Repositories/Stratolink/analysis/v1_1_release_20261012/as7331/manufacturing/pilot-population.json": {
+          "expected_sha256": "245f06375a0641c170406a4ebb2b491d09127b2a3320e0928d2719deba146569",
+          "actual_sha256": "245f06375a0641c170406a4ebb2b491d09127b2a3320e0928d2719deba146569",
+          "match": true
+        }
+      }
+    },
+    "independent_review_evidence": {
+      "checked": 42,
+      "all_match": true,
+      "files": {
+        "README.md": {
+          "expected_sha256": "59838b5dba85a115ebb59b13deff11674993c275ba07574c0870136c5e145038",
+          "actual_sha256": "59838b5dba85a115ebb59b13deff11674993c275ba07574c0870136c5e145038",
+          "match": true
+        },
+        "source-ledger.json": {
+          "expected_sha256": "9381e453a1eb772cf8f785d824ed3896cd44537c887cee540ffa24558519e202",
+          "actual_sha256": "9381e453a1eb772cf8f785d824ed3896cd44537c887cee540ffa24558519e202",
+          "match": true
+        },
+        "requirements.md": {
+          "expected_sha256": "ffeb0c7e036a05e3abb1d645deb6c5c11e8998fa5d1760e28d25f74235e97040",
+          "actual_sha256": "ffeb0c7e036a05e3abb1d645deb6c5c11e8998fa5d1760e28d25f74235e97040",
+          "match": true
+        },
+        "mask-process-notes.md": {
+          "expected_sha256": "dbbc795af3148b89d93c1c8d5ea40315bebc3109e7325e755cad26429d0d7901",
+          "actual_sha256": "dbbc795af3148b89d93c1c8d5ea40315bebc3109e7325e755cad26429d0d7901",
+          "match": true
+        },
+        "candidate-independent-review.json": {
+          "expected_sha256": "9ed2431432963c1aab5b6f0dfec1f25a871f8395fe9eddedff31862595fffa51",
+          "actual_sha256": "9ed2431432963c1aab5b6f0dfec1f25a871f8395fe9eddedff31862595fffa51",
+          "match": true
+        },
+        "candidate-native.json": {
+          "expected_sha256": "dde698473a0697855cf5898036ee2b5765665bf582a049cf4a77424877108755",
+          "actual_sha256": "dde698473a0697855cf5898036ee2b5765665bf582a049cf4a77424877108755",
+          "match": true
+        },
+        "candidate-netlist.xml": {
+          "expected_sha256": "54da6d780223b61d5e7da089af5173ffa97ce002bab526a3b4471ab1d0bce907",
+          "actual_sha256": "54da6d780223b61d5e7da089af5173ffa97ce002bab526a3b4471ab1d0bce907",
+          "match": true
+        },
+        "uv-library-review.json": {
+          "expected_sha256": "290941fc1eaa3db8f37b7ebc0eb165f2883c7fd87f28feb922d87f82af53c25c",
+          "actual_sha256": "290941fc1eaa3db8f37b7ebc0eb165f2883c7fd87f28feb922d87f82af53c25c",
+          "match": true
+        },
+        "project-rule-scope.json": {
+          "expected_sha256": "65fa5575e92f4b99f9a05332f13cf51ee3b6116625d718b029061fba1a5f398e",
+          "actual_sha256": "65fa5575e92f4b99f9a05332f13cf51ee3b6116625d718b029061fba1a5f398e",
+          "match": true
+        },
+        "retained-model-body-primitives.json": {
+          "expected_sha256": "09b85a1203921f4e59010691efdeaf6ce80b6e6af1334fb654fc56db5e398d7f",
+          "actual_sha256": "09b85a1203921f4e59010691efdeaf6ce80b6e6af1334fb654fc56db5e398d7f",
+          "match": true
+        },
+        "analog-screen.json": {
+          "expected_sha256": "81769c9c01cfc3fea2982f4d2bd622af61b3b4045dc5b050b3b49cc11fc2171b",
+          "actual_sha256": "81769c9c01cfc3fea2982f4d2bd622af61b3b4045dc5b050b3b49cc11fc2171b",
+          "match": true
+        },
+        "mechanical-screen.json": {
+          "expected_sha256": "ba379de791166c562686c6540850074427a77b642a06e0765d86ea31c088d958",
+          "actual_sha256": "ba379de791166c562686c6540850074427a77b642a06e0765d86ea31c088d958",
+          "match": true
+        },
+        "optical-envelope.json": {
+          "expected_sha256": "516ad9264f3a23e6a3efb0c70850e5a14215e22826cdb70f3768841a861c8d14",
+          "actual_sha256": "516ad9264f3a23e6a3efb0c70850e5a14215e22826cdb70f3768841a861c8d14",
+          "match": true
+        },
+        "baseline-native.json": {
+          "expected_sha256": "b2a382898581f797dbc1a5964fef9cf47af2eba8ab1a2edf99aba3a29d755d28",
+          "actual_sha256": "b2a382898581f797dbc1a5964fef9cf47af2eba8ab1a2edf99aba3a29d755d28",
+          "match": true
+        },
+        "baseline-netlist.xml": {
+          "expected_sha256": "8a822967bc61cd60e3cf61d6249af4c4c64de385303e6db330a022d9f480c2c5",
+          "actual_sha256": "8a822967bc61cd60e3cf61d6249af4c4c64de385303e6db330a022d9f480c2c5",
+          "match": true
+        },
+        "baseline-gnss-return.json": {
+          "expected_sha256": "2a2a746a0bccf3aac9ad1c69d682a83ce44c41a3e812b46f7db5d3ce149e51f2",
+          "actual_sha256": "2a2a746a0bccf3aac9ad1c69d682a83ce44c41a3e812b46f7db5d3ce149e51f2",
+          "match": true
+        },
+        "candidate-gnss-return.json": {
+          "expected_sha256": "cea59a4e7574f61b51db8643ce003fc8552bc63b0376fba9930d5f7fac4d3c96",
+          "actual_sha256": "cea59a4e7574f61b51db8643ce003fc8552bc63b0376fba9930d5f7fac4d3c96",
+          "match": true
+        },
+        "gnss-return-comparison.json": {
+          "expected_sha256": "5a9d70290e02c815c17d6219b50ace60bfb102a0f89bde1aeb35d6bd66cf4937",
+          "actual_sha256": "5a9d70290e02c815c17d6219b50ace60bfb102a0f89bde1aeb35d6bd66cf4937",
+          "match": true
+        },
+        "gnss-ground-boolean.json": {
+          "expected_sha256": "dd5f97a948e6fa5a2d25bf5ad2826d9102ac6f0889bec76e1a02fc7e865d5a66",
+          "actual_sha256": "dd5f97a948e6fa5a2d25bf5ad2826d9102ac6f0889bec76e1a02fc7e865d5a66",
+          "match": true
+        },
+        "trials/refill-candidate/manifest.json": {
+          "expected_sha256": "3e3ce9dca4100b0d7e2b18bd775ec637e27069e4083c51484b9b3d6b7d8ee56e",
+          "actual_sha256": "3e3ce9dca4100b0d7e2b18bd775ec637e27069e4083c51484b9b3d6b7d8ee56e",
+          "match": true
+        },
+        "trials/refill-candidate/refill-drc.json": {
+          "expected_sha256": "208588d0e242a9b4de4b04a1b1db02c77ae900df81973bd580949e9cc446bab5",
+          "actual_sha256": "208588d0e242a9b4de4b04a1b1db02c77ae900df81973bd580949e9cc446bab5",
+          "match": true
+        },
+        "scratch-relocations.json": {
+          "expected_sha256": "2c2f6e31f6cbc7b42b4ab152256af051d29c1c3b0a030bd95a5ac9b6b9c5e704",
+          "actual_sha256": "2c2f6e31f6cbc7b42b4ab152256af051d29c1c3b0a030bd95a5ac9b6b9c5e704",
+          "match": true
+        },
+        "../finish/final-artwork-verification.json": {
+          "expected_sha256": "458a57597cdb88456c16166795b56b4c68fb56c363b466551c00798a42cd22e8",
+          "actual_sha256": "458a57597cdb88456c16166795b56b4c68fb56c363b466551c00798a42cd22e8",
+          "match": true
+        },
+        "../manufacturing/package-verification.json": {
+          "expected_sha256": "4776e668ac46e15df1c4e7aec7c42d564d28c85be882d8ede0d91fc3a8328e20",
+          "actual_sha256": "4776e668ac46e15df1c4e7aec7c42d564d28c85be882d8ede0d91fc3a8328e20",
+          "match": true
+        },
+        "../manufacturing/package-mask-verification.json": {
+          "expected_sha256": "8f7de8404ae2c2a93da886a46ef442299e33c8ec53a3037b80d3bd236a903b7c",
+          "actual_sha256": "8f7de8404ae2c2a93da886a46ef442299e33c8ec53a3037b80d3bd236a903b7c",
+          "match": true
+        },
+        "../manufacturing/package-archive-verification.json": {
+          "expected_sha256": "6bef45c1a7b258975b8a56c5c3c23ecc2be852551e28d065d587d9621d647496",
+          "actual_sha256": "6bef45c1a7b258975b8a56c5c3c23ecc2be852551e28d065d587d9621d647496",
+          "match": true
+        },
+        "analog_screen.py": {
+          "expected_sha256": "c75cbb68779db35f1639a1f7f83191dac06d5e887ac631dc5ea732c80c35796c",
+          "actual_sha256": "c75cbb68779db35f1639a1f7f83191dac06d5e887ac631dc5ea732c80c35796c",
+          "match": true
+        },
+        "check_retained_models.py": {
+          "expected_sha256": "7f48f22547f66088c55af79a80b0416d455d96a53eef0ade73bbd307136d0098",
+          "actual_sha256": "7f48f22547f66088c55af79a80b0416d455d96a53eef0ade73bbd307136d0098",
+          "match": true
+        },
+        "check_rule_scope.py": {
+          "expected_sha256": "5b9889fb00dda98a513a79abd4f2defe5dc8e5a8dfa00f99f30574054e604175",
+          "actual_sha256": "5b9889fb00dda98a513a79abd4f2defe5dc8e5a8dfa00f99f30574054e604175",
+          "match": true
+        },
+        "check_static_geometry.py": {
+          "expected_sha256": "888b4c1d2a945276d0e2f5d2f47216ef7626ca9b71c8e3a50fde6793c4098146",
+          "actual_sha256": "888b4c1d2a945276d0e2f5d2f47216ef7626ca9b71c8e3a50fde6793c4098146",
+          "match": true
+        },
+        "check_uv_library.py": {
+          "expected_sha256": "3848bc2853a2fbe39bbfd3af3d5e00b186b9ecf35fde8b04daff5fd0eea93cb5",
+          "actual_sha256": "3848bc2853a2fbe39bbfd3af3d5e00b186b9ecf35fde8b04daff5fd0eea93cb5",
+          "match": true
+        },
+        "compare_candidate.py": {
+          "expected_sha256": "82e4aa3e43980d1c921e40368f095b6dd474d2a89b3615b413134dad9e571a48",
+          "actual_sha256": "82e4aa3e43980d1c921e40368f095b6dd474d2a89b3615b413134dad9e571a48",
+          "match": true
+        },
+        "compare_gnss_return.py": {
+          "expected_sha256": "51fb4948d6d6f55763f66954e874eabbf69daf4cef3dce7eab950a8a137d0017",
+          "actual_sha256": "51fb4948d6d6f55763f66954e874eabbf69daf4cef3dce7eab950a8a137d0017",
+          "match": true
+        },
+        "gnss_ground_boolean.py": {
+          "expected_sha256": "5b5bf35743e04959f76cae2373004f7ac62d151b18713f2892ca309e7385f777",
+          "actual_sha256": "5b5bf35743e04959f76cae2373004f7ac62d151b18713f2892ca309e7385f777",
+          "match": true
+        },
+        "gnss_return_sample.py": {
+          "expected_sha256": "a4fb7e353d41192ecf1da2b0250cb19d54ef9095b458b93da2b680b3037bdd5e",
+          "actual_sha256": "a4fb7e353d41192ecf1da2b0250cb19d54ef9095b458b93da2b680b3037bdd5e",
+          "match": true
+        },
+        "mechanical_screen.py": {
+          "expected_sha256": "cc869d1bd0bb699bc809bf3ca3033050791bd32b1ffcce56cd549bf4e9cdf777",
+          "actual_sha256": "cc869d1bd0bb699bc809bf3ca3033050791bd32b1ffcce56cd549bf4e9cdf777",
+          "match": true
+        },
+        "native_snapshot.py": {
+          "expected_sha256": "a3c3f221cd41c29a47a9939e8694bc2c197033704c9f849c67faa0c56a01f62a",
+          "actual_sha256": "a3c3f221cd41c29a47a9939e8694bc2c197033704c9f849c67faa0c56a01f62a",
+          "match": true
+        },
+        "optical_envelope.py": {
+          "expected_sha256": "866463184d650402473c4e69fca67cf7e5ab53b0e8d33b80b365dc88c8aa9374",
+          "actual_sha256": "866463184d650402473c4e69fca67cf7e5ab53b0e8d33b80b365dc88c8aa9374",
+          "match": true
+        },
+        "prepare_refill.py": {
+          "expected_sha256": "ccbb45484a29153c3bf5f4a4dc9d7abd37a683a9eaf84fdb4dc7544d27fc211f",
+          "actual_sha256": "ccbb45484a29153c3bf5f4a4dc9d7abd37a683a9eaf84fdb4dc7544d27fc211f",
+          "match": true
+        },
+        "propose_courtyards.py": {
+          "expected_sha256": "f7350350ca196d12109d1d7a7387c7b17c631de3ecd53db5b659323463c39cf3",
+          "actual_sha256": "f7350350ca196d12109d1d7a7387c7b17c631de3ecd53db5b659323463c39cf3",
+          "match": true
+        },
+        "propose_right_ground.py": {
+          "expected_sha256": "51968c86b49f2608508ae8389c79703b814fc944afd2fdd1f767c956258d5c1d",
+          "actual_sha256": "51968c86b49f2608508ae8389c79703b814fc944afd2fdd1f767c956258d5c1d",
+          "match": true
+        },
+        "propose_uv_ground.py": {
+          "expected_sha256": "7b450ba7b728adc53b82ab27aa2c5e3825c10d6b8aba1e6067877ec134bf2d12",
+          "actual_sha256": "7b450ba7b728adc53b82ab27aa2c5e3825c10d6b8aba1e6067877ec134bf2d12",
+          "match": true
+        }
+      }
+    },
+    "protected_unrelated_tracked": {
+      "checked": 100,
+      "all_match": true,
+      "files": {
+        "README.md": {
+          "expected_sha256": "69c19c1ad7959edb410c04d635227697bd5f88f435e3062010078a706c64ba32",
+          "actual_sha256": "69c19c1ad7959edb410c04d635227697bd5f88f435e3062010078a706c64ba32",
+          "match": true
+        },
+        "SETUP.md": {
+          "expected_sha256": "cbf63e9420fa63c7debe718ac07f2c241577eb183e54dd7c5548e586dfdc6852",
+          "actual_sha256": "cbf63e9420fa63c7debe718ac07f2c241577eb183e54dd7c5548e586dfdc6852",
+          "match": true
+        },
+        "analysis/diagnostics/STRATOLINK2_BACKEND_ROLLOUT.md": {
+          "expected_sha256": "64d9cb6d5028267a1ecc25ecf07370c8cced8d98278b67b0bdd749aba75560bb",
+          "actual_sha256": "64d9cb6d5028267a1ecc25ecf07370c8cced8d98278b67b0bdd749aba75560bb",
+          "match": true
+        },
+        "analysis/diagnostics/STRATOLINK2_POSTSOAK_HIL.md": {
+          "expected_sha256": "2621f541d4bf22c71f389869fbf8507ba5982862f0d60bce609f9009a863a4e0",
+          "actual_sha256": "2621f541d4bf22c71f389869fbf8507ba5982862f0d60bce609f9009a863a4e0",
+          "match": true
+        },
+        "analysis/diagnostics/apply_flight_hil_action.py": {
+          "expected_sha256": "8fb538c0ab3ec324f076492483953576fd359bc0a7045006294ef395a55c04d9",
+          "actual_sha256": "8fb538c0ab3ec324f076492483953576fd359bc0a7045006294ef395a55c04d9",
+          "match": true
+        },
+        "analysis/diagnostics/apply_flight_hil_action_test.py": {
+          "expected_sha256": "979aa516357100cb49ca1621497f4fa2ccb2eeef033171c65725a649be100c1a",
+          "actual_sha256": "979aa516357100cb49ca1621497f4fa2ccb2eeef033171c65725a649be100c1a",
+          "match": true
+        },
+        "analysis/diagnostics/auxiliary_rx_energy_audit.py": {
+          "expected_sha256": "abc11aed2ab1dc7cedf896ad8eb6913b8b09f54ee6e818b69b38646fbec84afa",
+          "actual_sha256": "abc11aed2ab1dc7cedf896ad8eb6913b8b09f54ee6e818b69b38646fbec84afa",
+          "match": true
+        },
+        "analysis/diagnostics/auxiliary_rx_energy_audit_test.py": {
+          "expected_sha256": "6ef43737cb6eb6a1a1b2b8e1331ccb0ebe451a5fa54e3f492599e45999304ecb",
+          "actual_sha256": "6ef43737cb6eb6a1a1b2b8e1331ccb0ebe451a5fa54e3f492599e45999304ecb",
+          "match": true
+        },
+        "analysis/diagnostics/b2b_queue_age_integration_test.py": {
+          "expected_sha256": "80887b2f396426e3c50697f47ec97ee0af509dcd191321489806762a9af4f5fb",
+          "actual_sha256": "80887b2f396426e3c50697f47ec97ee0af509dcd191321489806762a9af4f5fb",
+          "match": true
+        },
+        "analysis/diagnostics/capture_flight_state.py": {
+          "expected_sha256": "06b32247a20172f4571457076c704e09337f8eddc2bd955bae3df5b96bdae21b",
+          "actual_sha256": "06b32247a20172f4571457076c704e09337f8eddc2bd955bae3df5b96bdae21b",
+          "match": true
+        },
+        "analysis/diagnostics/capture_flight_state_test.py": {
+          "expected_sha256": "0e308f420716c2e95c0c1c9979de564bce88e79ec0348a63fa80389d214a1a78",
+          "actual_sha256": "0e308f420716c2e95c0c1c9979de564bce88e79ec0348a63fa80389d214a1a78",
+          "match": true
+        },
+        "analysis/diagnostics/class_a_energy_audit_test.py": {
+          "expected_sha256": "179be9bcc2f6bb225cd604bb5e6f32668f45260393bec91dea0391810248af76",
+          "actual_sha256": "179be9bcc2f6bb225cd604bb5e6f32668f45260393bec91dea0391810248af76",
+          "match": true
+        },
+        "analysis/diagnostics/decode_flight_state.py": {
+          "expected_sha256": "1a50fcaba9ab356d8e06f888d90818669ac59c1bc4d6cb2ccf259a3bc86db225",
+          "actual_sha256": "1a50fcaba9ab356d8e06f888d90818669ac59c1bc4d6cb2ccf259a3bc86db225",
+          "match": true
+        },
+        "analysis/diagnostics/decode_flight_state_test.py": {
+          "expected_sha256": "1b4a714032242d360e862090a276ac446390b87e6a0973886ce23ded072a11b0",
+          "actual_sha256": "1b4a714032242d360e862090a276ac446390b87e6a0973886ce23ded072a11b0",
+          "match": true
+        },
+        "analysis/diagnostics/dynamic_memory_audit.py": {
+          "expected_sha256": "882b7644505d50f7197856888d635f5df40d236f27ffdbb34b35bdf669837cad",
+          "actual_sha256": "882b7644505d50f7197856888d635f5df40d236f27ffdbb34b35bdf669837cad",
+          "match": true
+        },
+        "analysis/diagnostics/dynamic_memory_audit_test.py": {
+          "expected_sha256": "a195a2ca60f181f6f7c0faf582f90b7a6246cd4e293a675c18f314fb0540938d",
+          "actual_sha256": "a195a2ca60f181f6f7c0faf582f90b7a6246cd4e293a675c18f314fb0540938d",
+          "match": true
+        },
+        "analysis/diagnostics/export_supabase_soak.py": {
+          "expected_sha256": "0b081ded18eb6b85167b7b4019c6f2f2903d3ab32c8c7bb0d9d960a9013f0310",
+          "actual_sha256": "0b081ded18eb6b85167b7b4019c6f2f2903d3ab32c8c7bb0d9d960a9013f0310",
+          "match": true
+        },
+        "analysis/diagnostics/export_supabase_soak_test.py": {
+          "expected_sha256": "ca48d0393401bd724622ea704e1f94ac9373d8f87b4623e56de3517bdf591948",
+          "actual_sha256": "ca48d0393401bd724622ea704e1f94ac9373d8f87b4623e56de3517bdf591948",
+          "match": true
+        },
+        "analysis/diagnostics/firmware_docs_consistency_test.py": {
+          "expected_sha256": "001c56cbd29fa62acf209da8614ce0de41fe249264a3ff67794d3db39188ba6e",
+          "actual_sha256": "001c56cbd29fa62acf209da8614ce0de41fe249264a3ff67794d3db39188ba6e",
+          "match": true
+        },
+        "analysis/diagnostics/flight_disabled_feature_binary_test.py": {
+          "expected_sha256": "9d6820d09024a28d4a17ac3f0646bcbeb517cd0c80193a21ef7068e59c5eba35",
+          "actual_sha256": "9d6820d09024a28d4a17ac3f0646bcbeb517cd0c80193a21ef7068e59c5eba35",
+          "match": true
+        },
+        "analysis/diagnostics/generate_flight_hil.py": {
+          "expected_sha256": "5110b2d8aa9b864065678f9e06925c0fcdbde80384e34fc6936607f3accd4a52",
+          "actual_sha256": "5110b2d8aa9b864065678f9e06925c0fcdbde80384e34fc6936607f3accd4a52",
+          "match": true
+        },
+        "analysis/diagnostics/generated/jlink_bench_authorize_us.jlink": {
+          "expected_sha256": null,
+          "actual_sha256": null,
+          "match": true
+        },
+        "analysis/diagnostics/generated/jlink_read_flight_health.jlink": {
+          "expected_sha256": "b729e0caffbdd896ffe932865e641b16ade8eb0fc8617017f08582b2b859d4e5",
+          "actual_sha256": "b729e0caffbdd896ffe932865e641b16ade8eb0fc8617017f08582b2b859d4e5",
+          "match": true
+        },
+        "analysis/diagnostics/generated/jlink_read_flight_state.jlink": {
+          "expected_sha256": "1b1511992c214e56ce12a54b979f87911101ea397476817b76810ef9b5d82a82",
+          "actual_sha256": "1b1511992c214e56ce12a54b979f87911101ea397476817b76810ef9b5d82a82",
+          "match": true
+        },
+        "analysis/diagnostics/generated/jlink_wake_read_flight_state.jlink": {
+          "expected_sha256": "92bdb943c7055339bda8a6ebba7eb983c734384eda6394601f0dcbf9e9a8b52e",
+          "actual_sha256": "92bdb943c7055339bda8a6ebba7eb983c734384eda6394601f0dcbf9e9a8b52e",
+          "match": true
+        },
+        "analysis/diagnostics/generated/stratolink_flight_hil_manifest.json": {
+          "expected_sha256": "fcb82184149a4cbc5b7913a6573d3a8a6c756e7d2f2769c8f02dbd7cb8a59b42",
+          "actual_sha256": "fcb82184149a4cbc5b7913a6573d3a8a6c756e7d2f2769c8f02dbd7cb8a59b42",
+          "match": true
+        },
+        "analysis/diagnostics/gps_airborne_model_integration_test.py": {
+          "expected_sha256": "03c18e5d0e96eeffb6f433b184831674241d77b5b125137e4979af6f455d3a5f",
+          "actual_sha256": "03c18e5d0e96eeffb6f433b184831674241d77b5b125137e4979af6f455d3a5f",
+          "match": true
+        },
+        "analysis/diagnostics/gps_atomic_nofix_integration_test.py": {
+          "expected_sha256": "cfe55b1a982305f6938d6f57786a5f2bdbea2a32f6fead5162d2d859acb01f5b",
+          "actual_sha256": "cfe55b1a982305f6938d6f57786a5f2bdbea2a32f6fead5162d2d859acb01f5b",
+          "match": true
+        },
+        "analysis/diagnostics/gps_backup_energy_audit.py": {
+          "expected_sha256": "77245fef75b800ded5dacedda9825b74bd49d9df40944264e7573dccfecedb56",
+          "actual_sha256": "77245fef75b800ded5dacedda9825b74bd49d9df40944264e7573dccfecedb56",
+          "match": true
+        },
+        "analysis/diagnostics/gps_backup_energy_audit_test.py": {
+          "expected_sha256": "9db89b9657a2bfff8dd14d4b279564cf051bbe021194df548faaf85e897daf3e",
+          "actual_sha256": "9db89b9657a2bfff8dd14d4b279564cf051bbe021194df548faaf85e897daf3e",
+          "match": true
+        },
+        "analysis/diagnostics/gps_backup_integration_test.py": {
+          "expected_sha256": "62c3a11bb28cab7155c4e0472ed67223e1719ec5bbe03a02aab8e1fe79b79b46",
+          "actual_sha256": "62c3a11bb28cab7155c4e0472ed67223e1719ec5bbe03a02aab8e1fe79b79b46",
+          "match": true
+        },
+        "analysis/diagnostics/gps_pvt_integration_test.py": {
+          "expected_sha256": "71f8ec7e8071e920a56695be6c212d984bf442df7b0a3542409d6e62520903e3",
+          "actual_sha256": "71f8ec7e8071e920a56695be6c212d984bf442df7b0a3542409d6e62520903e3",
+          "match": true
+        },
+        "analysis/diagnostics/lorawan_rx2_fallback_test.py": {
+          "expected_sha256": "20eb590758ed09f9ce3e66186800666bc20921b2969248b335962212decec925",
+          "actual_sha256": "20eb590758ed09f9ce3e66186800666bc20921b2969248b335962212decec925",
+          "match": true
+        },
+        "analysis/diagnostics/ltr390_quiescence_integration_test.py": {
+          "expected_sha256": "ed92c9f2e8d777e50762bc4e985c1b007dd1f5148f1cc2bbcf6096fae6570601",
+          "actual_sha256": "ed92c9f2e8d777e50762bc4e985c1b007dd1f5148f1cc2bbcf6096fae6570601",
+          "match": true
+        },
+        "analysis/diagnostics/mission_energy_store_sizing_audit_test.py": {
+          "expected_sha256": "6d352a450427b1f5bce39275e5767c3d57df192e92a0146bca3f45e09c5d7d65",
+          "actual_sha256": "6d352a450427b1f5bce39275e5767c3d57df192e92a0146bca3f45e09c5d7d65",
+          "match": true
+        },
+        "analysis/diagnostics/packet_buffer_bounds_integration_test.py": {
+          "expected_sha256": "e3c71ecc7c2995a4e6095dfdad6a99ddaa376bd5fde42eafff1162f7ee642468",
+          "actual_sha256": "e3c71ecc7c2995a4e6095dfdad6a99ddaa376bd5fde42eafff1162f7ee642468",
+          "match": true
+        },
+        "analysis/diagnostics/peripheral_quiescence_integration_test.py": {
+          "expected_sha256": "fe7780a33feda71115591ea6fd7405ac763ea6cd1e06875f754af9e19ea302f9",
+          "actual_sha256": "fe7780a33feda71115591ea6fd7405ac763ea6cd1e06875f754af9e19ea302f9",
+          "match": true
+        },
+        "analysis/diagnostics/radio_sleep_fault_energy_audit_test.py": {
+          "expected_sha256": "d6788399a69da94c1872a8941704b31f7c720e0b81d22d6ca38d29d17c36568b",
+          "actual_sha256": "d6788399a69da94c1872a8941704b31f7c720e0b81d22d6ca38d29d17c36568b",
+          "match": true
+        },
+        "analysis/diagnostics/region_lease_provenance_test.py": {
+          "expected_sha256": "9ae29a05363ba238581ffd890500105d9a15cd526fed2c2e2bd680ec334dd91b",
+          "actual_sha256": "9ae29a05363ba238581ffd890500105d9a15cd526fed2c2e2bd680ec334dd91b",
+          "match": true
+        },
+        "analysis/diagnostics/rf_module_band_audit_test.py": {
+          "expected_sha256": "e11ac5787f9addb61f8c545a804336b392a61a26db983525fff3dfa595e416d3",
+          "actual_sha256": "e11ac5787f9addb61f8c545a804336b392a61a26db983525fff3dfa595e416d3",
+          "match": true
+        },
+        "analysis/diagnostics/run_host_suites.sh": {
+          "expected_sha256": "9a061f0d6e2efd89a62774277be9acc8c23023b5e49f14694647dbdcf31dc998",
+          "actual_sha256": "9a061f0d6e2efd89a62774277be9acc8c23023b5e49f14694647dbdcf31dc998",
+          "match": true
+        },
+        "analysis/diagnostics/shallow_yield_integration_test.py": {
+          "expected_sha256": "bbef30eaa4eaca903933650d0fe40f62fdc83b7d614f686c789c2a2eaf031bc3",
+          "actual_sha256": "bbef30eaa4eaca903933650d0fe40f62fdc83b7d614f686c789c2a2eaf031bc3",
+          "match": true
+        },
+        "analysis/diagnostics/supabase_schema_probe.py": {
+          "expected_sha256": "3a614259ae70d9e6533cded60da1a3d3af01fc6ec85196e57cdcf991ee7c774c",
+          "actual_sha256": "3a614259ae70d9e6533cded60da1a3d3af01fc6ec85196e57cdcf991ee7c774c",
+          "match": true
+        },
+        "analysis/diagnostics/supabase_schema_probe_test.py": {
+          "expected_sha256": "cfbbb93b832b0d811579863bfa7de59cd2f61387d71d099ce93a1ad20ce64f98",
+          "actual_sha256": "cfbbb93b832b0d811579863bfa7de59cd2f61387d71d099ce93a1ad20ce64f98",
+          "match": true
+        },
+        "analysis/diagnostics/ttn_devnonce_audit.py": {
+          "expected_sha256": "be0af106acb9739f849433f151e14607cf5e3e32011983b64744358c8cf892e0",
+          "actual_sha256": "be0af106acb9739f849433f151e14607cf5e3e32011983b64744358c8cf892e0",
+          "match": true
+        },
+        "analysis/diagnostics/ttn_downlink_queue_test.py": {
+          "expected_sha256": "c07460e66166975117f6a9b9a8fc0d6761d58f89f06cda8b4849867cb6685d5c",
+          "actual_sha256": "c07460e66166975117f6a9b9a8fc0d6761d58f89f06cda8b4849867cb6685d5c",
+          "match": true
+        },
+        "analysis/diagnostics/ttn_downlink_test.py": {
+          "expected_sha256": "0cc4291e697060100de07b050c703efde4999f6207973c77096e8cf62c5e8b91",
+          "actual_sha256": "0cc4291e697060100de07b050c703efde4999f6207973c77096e8cf62c5e8b91",
+          "match": true
+        },
+        "analysis/diagnostics/ttn_soak_monitor.py": {
+          "expected_sha256": "09e76969d8b76682d3ae77aa1c93f2e092a453ffdf710cde487c6d9ff28e12bf",
+          "actual_sha256": "09e76969d8b76682d3ae77aa1c93f2e092a453ffdf710cde487c6d9ff28e12bf",
+          "match": true
+        },
+        "analysis/diagnostics/ttn_storage_presence_audit.py": {
+          "expected_sha256": "fe32c4c35007037190a14d61b85a1ba2de098a164c782fd45f9ce86ae4f1be58",
+          "actual_sha256": "fe32c4c35007037190a14d61b85a1ba2de098a164c782fd45f9ce86ae4f1be58",
+          "match": true
+        },
+        "analysis/diagnostics/ttn_storage_replay.py": {
+          "expected_sha256": "6e4063690683c9645d8616c9e919ca10864ec95faf951ac61600fb477bb44f02",
+          "actual_sha256": "6e4063690683c9645d8616c9e919ca10864ec95faf951ac61600fb477bb44f02",
+          "match": true
+        },
+        "analysis/diagnostics/ttn_storage_replay_test.py": {
+          "expected_sha256": "41764943bca421d20a893c7cc9cc08b748f1c92a2d73799c39d340a2ba5835a1",
+          "actual_sha256": "41764943bca421d20a893c7cc9cc08b748f1c92a2d73799c39d340a2ba5835a1",
+          "match": true
+        },
+        "analysis/diagnostics/vendor_balanced_module_screen.py": {
+          "expected_sha256": "a276bdf2ea421bdb9d73806f782f70875a3583cc90cb59ba4bb81714dcde8191",
+          "actual_sha256": "a276bdf2ea421bdb9d73806f782f70875a3583cc90cb59ba4bb81714dcde8191",
+          "match": true
+        },
+        "analysis/diagnostics/vendor_balanced_module_screen_test.py": {
+          "expected_sha256": "d9bad56b27cd0a2bbfacaeb822cd63892f1739d1bb5f4d7f4499176cdc1736a6",
+          "actual_sha256": "d9bad56b27cd0a2bbfacaeb822cd63892f1739d1bb5f4d7f4499176cdc1736a6",
+          "match": true
+        },
+        "analysis/diagnostics/verify_flight_candidate.py": {
+          "expected_sha256": "c45f93b7b952de19c69b902dad2be35c8b8f2b4507eaf0377b246e8605c91893",
+          "actual_sha256": "c45f93b7b952de19c69b902dad2be35c8b8f2b4507eaf0377b246e8605c91893",
+          "match": true
+        },
+        "analysis/network/09_observability_payload.md": {
+          "expected_sha256": "54bbf0e3f9b787c3328a0afab314a52d0287b88bf8a7442e5a7d6f3cd67875d8",
+          "actual_sha256": "54bbf0e3f9b787c3328a0afab314a52d0287b88bf8a7442e5a7d6f3cd67875d8",
+          "match": true
+        },
+        "analysis/research/README.md": {
+          "expected_sha256": "7ccce13afcd3ae3ab02afbfaeb96df7c14f9f8dee5efba226a0697587820521c",
+          "actual_sha256": "7ccce13afcd3ae3ab02afbfaeb96df7c14f9f8dee5efba226a0697587820521c",
+          "match": true
+        },
+        "analysis/research/inversion.md": {
+          "expected_sha256": "c05c195393aa3b66dd7b7f592b04225ac5a5935a352d9ca1f4cc47869078d0e7",
+          "actual_sha256": "c05c195393aa3b66dd7b7f592b04225ac5a5935a352d9ca1f4cc47869078d0e7",
+          "match": true
+        },
+        "analysis/research/ozone.md": {
+          "expected_sha256": "4509ad2cff92cc9424430bbc4576ea54f30499769d6db3bc1e6963a5c8f10413",
+          "actual_sha256": "4509ad2cff92cc9424430bbc4576ea54f30499769d6db3bc1e6963a5c8f10413",
+          "match": true
+        },
+        "analysis/visualization/ttn_vs_supabase_audit.py": {
+          "expected_sha256": "e39f9cdb9786faedd00dc353a2f0584505c83f5ce8bf00ad0a70d251844e37c6",
+          "actual_sha256": "e39f9cdb9786faedd00dc353a2f0584505c83f5ce8bf00ad0a70d251844e37c6",
+          "match": true
+        },
+        "firmware/DOCUMENTATION.md": {
+          "expected_sha256": "1d0d080f124e5c40e53b43e2dc399ff600ba24016a8f6065633e8d3a91d594c6",
+          "actual_sha256": "1d0d080f124e5c40e53b43e2dc399ff600ba24016a8f6065633e8d3a91d594c6",
+          "match": true
+        },
+        "firmware/README.md": {
+          "expected_sha256": "e5608bb8244afe44a18fe16ea9978ae0def540c3bf38be58c9b019df8e089155",
+          "actual_sha256": "e5608bb8244afe44a18fe16ea9978ae0def540c3bf38be58c9b019df8e089155",
+          "match": true
+        },
+        "firmware/include/config.h": {
+          "expected_sha256": "1d77fe7fb4529119c8ff9f923b82fc6a4eb4fa9ab851121fd53106bfdcab41a2",
+          "actual_sha256": "1d77fe7fb4529119c8ff9f923b82fc6a4eb4fa9ab851121fd53106bfdcab41a2",
+          "match": true
+        },
+        "firmware/include/gps_backup_policy.h": {
+          "expected_sha256": "c3b312b179b349c0fe7bd8c1fc5ecb591e7fd0fd480c5e3daf9489ecfc051fb5",
+          "actual_sha256": "c3b312b179b349c0fe7bd8c1fc5ecb591e7fd0fd480c5e3daf9489ecfc051fb5",
+          "match": true
+        },
+        "firmware/include/gps_freshness.h": {
+          "expected_sha256": "c8413dc03855d5d05bd25711cded51662448b65d6021ed94d56791ba8eac1f73",
+          "actual_sha256": "c8413dc03855d5d05bd25711cded51662448b65d6021ed94d56791ba8eac1f73",
+          "match": true
+        },
+        "firmware/include/gps_ublox.h": {
+          "expected_sha256": "2b141ff48a47911eb54ed75db7227828a22ec483a72336ed4f99333fd4bc8080",
+          "actual_sha256": "2b141ff48a47911eb54ed75db7227828a22ec483a72336ed4f99333fd4bc8080",
+          "match": true
+        },
+        "firmware/include/lorawan.h": {
+          "expected_sha256": "c62684034042de69a602472d79e9498a84976c54687108d8524265c0973a9cad",
+          "actual_sha256": "c62684034042de69a602472d79e9498a84976c54687108d8524265c0973a9cad",
+          "match": true
+        },
+        "firmware/include/lorawan_frame.h": {
+          "expected_sha256": "259e81347bdf81b2b56270852ef79c955a1ee6cb53fe2bf93b722c38bacacbbd",
+          "actual_sha256": "259e81347bdf81b2b56270852ef79c955a1ee6cb53fe2bf93b722c38bacacbbd",
+          "match": true
+        },
+        "firmware/include/region_manager.h": {
+          "expected_sha256": "5bd5e07dd19d695b4ae4b18fb2420b8cb07c0e9e0d46553f6b2025827b1702ad",
+          "actual_sha256": "5bd5e07dd19d695b4ae4b18fb2420b8cb07c0e9e0d46553f6b2025827b1702ad",
+          "match": true
+        },
+        "firmware/include/secrets.h.example": {
+          "expected_sha256": "1ad9f9db2617474536fb5296b04682ec574de5f7af1419839654759563408a23",
+          "actual_sha256": "1ad9f9db2617474536fb5296b04682ec574de5f7af1419839654759563408a23",
+          "match": true
+        },
+        "firmware/include/tamp_record.h": {
+          "expected_sha256": "74666fff2a93bc28f8a6e1eac0adc3cb8ac7921dbb2d0a1439a62f066cd4e3b9",
+          "actual_sha256": "74666fff2a93bc28f8a6e1eac0adc3cb8ac7921dbb2d0a1439a62f066cd4e3b9",
+          "match": true
+        },
+        "firmware/include/telemetry.h": {
+          "expected_sha256": "4befc1f6b972f815d274ad5df3cd5f463529d43b7b4dd8f66d2b6c8949c6c769",
+          "actual_sha256": "4befc1f6b972f815d274ad5df3cd5f463529d43b7b4dd8f66d2b6c8949c6c769",
+          "match": true
+        },
+        "firmware/src/b2b.cpp": {
+          "expected_sha256": "78511daab08b663225ea8cf69a2ab5ded3add8fb6a8fdf32690e2308656d5bf5",
+          "actual_sha256": "78511daab08b663225ea8cf69a2ab5ded3add8fb6a8fdf32690e2308656d5bf5",
+          "match": true
+        },
+        "firmware/src/b2b.h": {
+          "expected_sha256": "5d573f843a2f1e7871613ad9dcd782aa224f575b5431acc5cf4d6676c76cf79d",
+          "actual_sha256": "5d573f843a2f1e7871613ad9dcd782aa224f575b5431acc5cf4d6676c76cf79d",
+          "match": true
+        },
+        "firmware/src/gps_backup_policy.cpp": {
+          "expected_sha256": "8b66b21af4a01ace5f9af9b02d104d8a9a11a78e92d910bbc49b3324a098bd83",
+          "actual_sha256": "8b66b21af4a01ace5f9af9b02d104d8a9a11a78e92d910bbc49b3324a098bd83",
+          "match": true
+        },
+        "firmware/src/gps_freshness.cpp": {
+          "expected_sha256": "3cd4ff2727735a3f6a78e01c9ec2684831e7cf030d4567a84b98d016251952d5",
+          "actual_sha256": "3cd4ff2727735a3f6a78e01c9ec2684831e7cf030d4567a84b98d016251952d5",
+          "match": true
+        },
+        "firmware/src/gps_ublox.cpp": {
+          "expected_sha256": "0a9ff7eb7747308b24cfb48244e729b84e21e5fb0cce76323f22101674de5989",
+          "actual_sha256": "0a9ff7eb7747308b24cfb48244e729b84e21e5fb0cce76323f22101674de5989",
+          "match": true
+        },
+        "firmware/src/lorawan.cpp": {
+          "expected_sha256": "60cacaadbfd002a3780fd337669f9782235fee4b554b110028a747b3576a9294",
+          "actual_sha256": "60cacaadbfd002a3780fd337669f9782235fee4b554b110028a747b3576a9294",
+          "match": true
+        },
+        "firmware/src/lorawan_frame.cpp": {
+          "expected_sha256": "3290a03802b2844a914322b6fdc5e3a291fc41533e924a5d0296763929f0ac8f",
+          "actual_sha256": "3290a03802b2844a914322b6fdc5e3a291fc41533e924a5d0296763929f0ac8f",
+          "match": true
+        },
+        "firmware/src/main.cpp": {
+          "expected_sha256": "28be00778998f57ae67ad4b9f54dbb6ee93c3ce0c75d0f3bce79ee5fac7012f4",
+          "actual_sha256": "28be00778998f57ae67ad4b9f54dbb6ee93c3ce0c75d0f3bce79ee5fac7012f4",
+          "match": true
+        },
+        "firmware/src/power_manager.cpp": {
+          "expected_sha256": "ac949d7affad3081fcd1a9489c9be1ace0071bae3d5cfe964f1c9949a98ba5b2",
+          "actual_sha256": "ac949d7affad3081fcd1a9489c9be1ace0071bae3d5cfe964f1c9949a98ba5b2",
+          "match": true
+        },
+        "firmware/src/power_manager.h": {
+          "expected_sha256": "f611b9685d034e9b9ff49b7bc90b94f7186790ef9c1311bee752a3b7938415d5",
+          "actual_sha256": "f611b9685d034e9b9ff49b7bc90b94f7186790ef9c1311bee752a3b7938415d5",
+          "match": true
+        },
+        "firmware/src/region_manager.cpp": {
+          "expected_sha256": "ada1c32b0d69a733498b77e55aae9767c69cba0a92c4e00bbcfdabee23cb2fc8",
+          "actual_sha256": "ada1c32b0d69a733498b77e55aae9767c69cba0a92c4e00bbcfdabee23cb2fc8",
+          "match": true
+        },
+        "firmware/src/telemetry.cpp": {
+          "expected_sha256": "c8c2e0e6cb0e6b0288f1c9c6eb77af4e4ac4ccc2270523307e508600ebda1490",
+          "actual_sha256": "c8c2e0e6cb0e6b0288f1c9c6eb77af4e4ac4ccc2270523307e508600ebda1490",
+          "match": true
+        },
+        "firmware/test/sdr_gateway.py": {
+          "expected_sha256": "8720066b26596d89e710398f55da90723776a686dac87f9d5463ccdbd687e5fa",
+          "actual_sha256": "8720066b26596d89e710398f55da90723776a686dac87f9d5463ccdbd687e5fa",
+          "match": true
+        },
+        "firmware/test/test_b2b_wire.cpp": {
+          "expected_sha256": "0ad823a677df3b322dac783fdffd2da8c0a205399cf3c36683af0fc8cf1039eb",
+          "actual_sha256": "0ad823a677df3b322dac783fdffd2da8c0a205399cf3c36683af0fc8cf1039eb",
+          "match": true
+        },
+        "firmware/test/test_gps_backup_policy.cpp": {
+          "expected_sha256": "0ef18c2bfd2840d7480ce1b15f1f8e842366a2c6f06218475de294f446612ed8",
+          "actual_sha256": "0ef18c2bfd2840d7480ce1b15f1f8e842366a2c6f06218475de294f446612ed8",
+          "match": true
+        },
+        "firmware/test/test_gps_freshness.cpp": {
+          "expected_sha256": "f4cdf8b15598ee1ea635b1b281bf1b20d469f370a44642e4b8af53405878680c",
+          "actual_sha256": "f4cdf8b15598ee1ea635b1b281bf1b20d469f370a44642e4b8af53405878680c",
+          "match": true
+        },
+        "firmware/test/test_lorawan_frame.cpp": {
+          "expected_sha256": "4317cfa7f9fbc81d9759f22899303da9c487e1eae572bdb8e07281435d0c3c15",
+          "actual_sha256": "4317cfa7f9fbc81d9759f22899303da9c487e1eae572bdb8e07281435d0c3c15",
+          "match": true
+        },
+        "firmware/test/test_region.cpp": {
+          "expected_sha256": "1fa8af16afc2bb1f8158f2a108ee270aa72775b9a41ab523fcad5fb6aa3dbaca",
+          "actual_sha256": "1fa8af16afc2bb1f8158f2a108ee270aa72775b9a41ab523fcad5fb6aa3dbaca",
+          "match": true
+        },
+        "firmware/test/test_tamp_record.cpp": {
+          "expected_sha256": "2ad9711733a8ae38c1230bcdcab709675fa5115f8d3ff852a9d87314e7800d27",
+          "actual_sha256": "2ad9711733a8ae38c1230bcdcab709675fa5115f8d3ff852a9d87314e7800d27",
+          "match": true
+        },
+        "firmware/test/test_telemetry_v2.cpp": {
+          "expected_sha256": "df8cbffcf02694a119454d32249022eca68e339f6297be3827f4694cb22c9dd6",
+          "actual_sha256": "df8cbffcf02694a119454d32249022eca68e339f6297be3827f4694cb22c9dd6",
+          "match": true
+        },
+        "firmware/test/ttn_listener.py": {
+          "expected_sha256": "f51898c680829453dbf36734a95574f2e2b20bd35fa995fa2b219608b5bfd7de",
+          "actual_sha256": "f51898c680829453dbf36734a95574f2e2b20bd35fa995fa2b219608b5bfd7de",
+          "match": true
+        },
+        "web/app/api/ttn-webhook/route.ts": {
+          "expected_sha256": "2713320da8f3897366d7af55f3e8d2adaaa2a0879a255c17e9a046971a1eb8a7",
+          "actual_sha256": "2713320da8f3897366d7af55f3e8d2adaaa2a0879a255c17e9a046971a1eb8a7",
+          "match": true
+        },
+        "web/components/how-it-works/PacketAnatomy.tsx": {
+          "expected_sha256": "d5a97c25a440fd5a513e58288282a66c435bd3f4a52074459d19516634e14a6d",
+          "actual_sha256": "d5a97c25a440fd5a513e58288282a66c435bd3f4a52074459d19516634e14a6d",
+          "match": true
+        },
+        "web/lib/supabase/migrations/20260725222000_telemetry_observability_v2.sql": {
+          "expected_sha256": "86e2d9abad4c04d284fddfc0d8e507f1d73b813eb76e98bc5fbfbff212923cf1",
+          "actual_sha256": "86e2d9abad4c04d284fddfc0d8e507f1d73b813eb76e98bc5fbfbff212923cf1",
+          "match": true
+        },
+        "web/lib/supabase/migrations/README.md": {
+          "expected_sha256": "c608620227683c3d5cd512457b8f53b18e9a0ba17a1c89f29f3299bab398f3d4",
+          "actual_sha256": "c608620227683c3d5cd512457b8f53b18e9a0ba17a1c89f29f3299bab398f3d4",
+          "match": true
+        },
+        "web/lib/supabase/migrations/migration-contract.host-test.ts": {
+          "expected_sha256": "b9608a9764aec15b51438e5aba392aaaf530663a03e2193b12b25589aafe48e1",
+          "actual_sha256": "b9608a9764aec15b51438e5aba392aaaf530663a03e2193b12b25589aafe48e1",
+          "match": true
+        },
+        "web/lib/ttn/payload-parser.host-test.ts": {
+          "expected_sha256": "7ba1d32a7632101624e9604a03fcd51ffaa0656470558e3e47307609e19719a6",
+          "actual_sha256": "7ba1d32a7632101624e9604a03fcd51ffaa0656470558e3e47307609e19719a6",
+          "match": true
+        },
+        "web/lib/ttn/payload-parser.ts": {
+          "expected_sha256": "cff5779e5913440c1ecac5da9155a077130c32cfc268480e488316dbb49c94ac",
+          "actual_sha256": "cff5779e5913440c1ecac5da9155a077130c32cfc268480e488316dbb49c94ac",
+          "match": true
+        },
+        "web/package.json": {
+          "expected_sha256": "a7600d0fe6f7bd0ead5c233775c90ded5f284c1f3ed658b7736c533538b96c96",
+          "actual_sha256": "a7600d0fe6f7bd0ead5c233775c90ded5f284c1f3ed658b7736c533538b96c96",
+          "match": true
+        }
+      }
+    },
+    "validated_DNP_firmware": {
+      "checked": 2,
+      "all_match": true,
+      "files": {
+        "firmware/platformio.ini": {
+          "expected_sha256": "9be154182da5852419edc5a0e6bd32fba80065ffc60959f1ebae40e4317cdc60",
+          "actual_sha256": "9be154182da5852419edc5a0e6bd32fba80065ffc60959f1ebae40e4317cdc60",
+          "match": true
+        },
+        "firmware/src/sensor_ltr390.cpp": {
+          "expected_sha256": "efe5673fa07b53493230a388b987a95d6ec8104414e4f26dd33b96d04787e184",
+          "actual_sha256": "efe5673fa07b53493230a388b987a95d6ec8104414e4f26dd33b96d04787e184",
+          "match": true
+        }
+      }
+    },
+    "other_tracked_firmware": {
+      "checked": 134,
+      "all_match": true,
+      "files": {
+        "firmware/.gitignore": {
+          "expected_sha256": "67cca8c6c85c4698d0b5592a07a40ef2c16e9270cbe2773c6798944272525125",
+          "actual_sha256": "67cca8c6c85c4698d0b5592a07a40ef2c16e9270cbe2773c6798944272525125",
+          "match": true
+        },
+        "firmware/DOCUMENTATION.md": {
+          "expected_sha256": "1d0d080f124e5c40e53b43e2dc399ff600ba24016a8f6065633e8d3a91d594c6",
+          "actual_sha256": "1d0d080f124e5c40e53b43e2dc399ff600ba24016a8f6065633e8d3a91d594c6",
+          "match": true
+        },
+        "firmware/GPS_BUG_BOARD2.md": {
+          "expected_sha256": "953069375697356846bc68cebcec15cf4f9ffae5d5d2e6fea2f713d06eedb6d2",
+          "actual_sha256": "953069375697356846bc68cebcec15cf4f9ffae5d5d2e6fea2f713d06eedb6d2",
+          "match": true
+        },
+        "firmware/GPS_TEST_PLAN.md": {
+          "expected_sha256": "27b8e2b7a3b99d794489846c1c5c6e64d566f805b9f3883d9f128dd81600f2cb",
+          "actual_sha256": "27b8e2b7a3b99d794489846c1c5c6e64d566f805b9f3883d9f128dd81600f2cb",
+          "match": true
+        },
+        "firmware/README.md": {
+          "expected_sha256": "e5608bb8244afe44a18fe16ea9978ae0def540c3bf38be58c9b019df8e089155",
+          "actual_sha256": "e5608bb8244afe44a18fe16ea9978ae0def540c3bf38be58c9b019df8e089155",
+          "match": true
+        },
+        "firmware/STRATOLINK_3_FLIGHT_NOTES.md": {
+          "expected_sha256": "1d5590977132951823f6b8f53be2899a62d4738985c35de58b2393b96fdfd787",
+          "actual_sha256": "1d5590977132951823f6b8f53be2899a62d4738985c35de58b2393b96fdfd787",
+          "match": true
+        },
+        "firmware/boards/stratolink.json": {
+          "expected_sha256": "8da364b37f1723e13fb5439c4d46b83545a9d1662269069364ddaea455b73820",
+          "actual_sha256": "8da364b37f1723e13fb5439c4d46b83545a9d1662269069364ddaea455b73820",
+          "match": true
+        },
+        "firmware/flash_firmware.bat": {
+          "expected_sha256": "403d1f6823a6a3351c4bf62c92795d9f31b479590911c9dd5433b1b246b370c9",
+          "actual_sha256": "403d1f6823a6a3351c4bf62c92795d9f31b479590911c9dd5433b1b246b370c9",
+          "match": true
+        },
+        "firmware/include/b2b_id_store.h": {
+          "expected_sha256": "43b63cefb5fff2024401008ece011de720c2e973b12364191e1c023ee6afa3c2",
+          "actual_sha256": "43b63cefb5fff2024401008ece011de720c2e973b12364191e1c023ee6afa3c2",
+          "match": true
+        },
+        "firmware/include/b2b_rf_diag_config.h": {
+          "expected_sha256": "6d4c91974b2d478e081ff6ccbe0f6643f6cf615ede3da38cceab54cc6a3c6302",
+          "actual_sha256": "6d4c91974b2d478e081ff6ccbe0f6643f6cf615ede3da38cceab54cc6a3c6302",
+          "match": true
+        },
+        "firmware/include/command.h": {
+          "expected_sha256": "f93a0fd0be9c1144532494cbbebcb4fabbae4cadeabc7bb321f8360e5213859f",
+          "actual_sha256": "f93a0fd0be9c1144532494cbbebcb4fabbae4cadeabc7bb321f8360e5213859f",
+          "match": true
+        },
+        "firmware/include/command_sequence_store.h": {
+          "expected_sha256": "7d3ae74292aac169e41b5ba92f6a69e201e8c69082fbabb5fa16220c0629940d",
+          "actual_sha256": "7d3ae74292aac169e41b5ba92f6a69e201e8c69082fbabb5fa16220c0629940d",
+          "match": true
+        },
+        "firmware/include/config.h": {
+          "expected_sha256": "1d77fe7fb4529119c8ff9f923b82fc6a4eb4fa9ab851121fd53106bfdcab41a2",
+          "actual_sha256": "1d77fe7fb4529119c8ff9f923b82fc6a4eb4fa9ab851121fd53106bfdcab41a2",
+          "match": true
+        },
+        "firmware/include/crypto_aes128.h": {
+          "expected_sha256": "6c8105d9a45338db69260798dac5b1ba61b808b2e7a082dd06cd6263cc77e6c2",
+          "actual_sha256": "6c8105d9a45338db69260798dac5b1ba61b808b2e7a082dd06cd6263cc77e6c2",
+          "match": true
+        },
+        "firmware/include/ctt_event.h": {
+          "expected_sha256": "8409b659c64a11a078c62f4009cfd2b9153ae8c2521aae7486273c6b48f3db96",
+          "actual_sha256": "8409b659c64a11a078c62f4009cfd2b9153ae8c2521aae7486273c6b48f3db96",
+          "match": true
+        },
+        "firmware/include/ctt_queue.h": {
+          "expected_sha256": "868a4f2a6310105b78ace38e4b76ce8480d9db8d38c22a076d09010e286014e3",
+          "actual_sha256": "868a4f2a6310105b78ace38e4b76ce8480d9db8d38c22a076d09010e286014e3",
+          "match": true
+        },
+        "firmware/include/ctt_test_tag.h": {
+          "expected_sha256": "13cb8219f7f0856eac22c4b8eb03cf3092987d8e82f9c5c8e5c4adcc1e30796d",
+          "actual_sha256": "13cb8219f7f0856eac22c4b8eb03cf3092987d8e82f9c5c8e5c4adcc1e30796d",
+          "match": true
+        },
+        "firmware/include/device_identity.h": {
+          "expected_sha256": "ddcdfd8ec310150d07b0c99ab8f4cafa7ae298c20ffa83b43895f2c36ac13ee9",
+          "actual_sha256": "ddcdfd8ec310150d07b0c99ab8f4cafa7ae298c20ffa83b43895f2c36ac13ee9",
+          "match": true
+        },
+        "firmware/include/devnonce_store.h": {
+          "expected_sha256": "efbd6fb6fffe22dc3869130ccb81ac45bd817b3c4026b206b87e293652d96d70",
+          "actual_sha256": "efbd6fb6fffe22dc3869130ccb81ac45bd817b3c4026b206b87e293652d96d70",
+          "match": true
+        },
+        "firmware/include/gps_backup_policy.h": {
+          "expected_sha256": "c3b312b179b349c0fe7bd8c1fc5ecb591e7fd0fd480c5e3daf9489ecfc051fb5",
+          "actual_sha256": "c3b312b179b349c0fe7bd8c1fc5ecb591e7fd0fd480c5e3daf9489ecfc051fb5",
+          "match": true
+        },
+        "firmware/include/gps_freshness.h": {
+          "expected_sha256": "c8413dc03855d5d05bd25711cded51662448b65d6021ed94d56791ba8eac1f73",
+          "actual_sha256": "c8413dc03855d5d05bd25711cded51662448b65d6021ed94d56791ba8eac1f73",
+          "match": true
+        },
+        "firmware/include/gps_pvt_validation.h": {
+          "expected_sha256": "78768da33a574b59b1043980d673772b151d82a81eb6fef9b957f6026911a756",
+          "actual_sha256": "78768da33a574b59b1043980d673772b151d82a81eb6fef9b957f6026911a756",
+          "match": true
+        },
+        "firmware/include/gps_ublox.h": {
+          "expected_sha256": "2b141ff48a47911eb54ed75db7227828a22ec483a72336ed4f99333fd4bc8080",
+          "actual_sha256": "2b141ff48a47911eb54ed75db7227828a22ec483a72336ed4f99333fd4bc8080",
+          "match": true
+        },
+        "firmware/include/lis2dh12_conversion.h": {
+          "expected_sha256": "201a61b6af9a2271079fdf10a57f34c0ad2289eafcf12879343a4d128e21f13c",
+          "actual_sha256": "201a61b6af9a2271079fdf10a57f34c0ad2289eafcf12879343a4d128e21f13c",
+          "match": true
+        },
+        "firmware/include/lorawan.h": {
+          "expected_sha256": "c62684034042de69a602472d79e9498a84976c54687108d8524265c0973a9cad",
+          "actual_sha256": "c62684034042de69a602472d79e9498a84976c54687108d8524265c0973a9cad",
+          "match": true
+        },
+        "firmware/include/lorawan_counter.h": {
+          "expected_sha256": "1fd31219c45a8bcabe2438df0d275cc39b37d513470c8611c02e378bf97e09b8",
+          "actual_sha256": "1fd31219c45a8bcabe2438df0d275cc39b37d513470c8611c02e378bf97e09b8",
+          "match": true
+        },
+        "firmware/include/lorawan_crypto.h": {
+          "expected_sha256": "e83cccb4dc17479225fe744e4e295e530a95fa245a0634b25da3930e15398c90",
+          "actual_sha256": "e83cccb4dc17479225fe744e4e295e530a95fa245a0634b25da3930e15398c90",
+          "match": true
+        },
+        "firmware/include/lorawan_frame.h": {
+          "expected_sha256": "259e81347bdf81b2b56270852ef79c955a1ee6cb53fe2bf93b722c38bacacbbd",
+          "actual_sha256": "259e81347bdf81b2b56270852ef79c955a1ee6cb53fe2bf93b722c38bacacbbd",
+          "match": true
+        },
+        "firmware/include/ltr390_conversion.h": {
+          "expected_sha256": "0b5fe8fdc10e56424f74de8cb96ff692d8e2b661e7ae75d4f4beed3c247472be",
+          "actual_sha256": "0b5fe8fdc10e56424f74de8cb96ff692d8e2b661e7ae75d4f4beed3c247472be",
+          "match": true
+        },
+        "firmware/include/meshtastic_relay_mac.h": {
+          "expected_sha256": "c6f40ce6bc1e45615922251957e9006a1408fb70601e18d5f3fd3811e5341052",
+          "actual_sha256": "c6f40ce6bc1e45615922251957e9006a1408fb70601e18d5f3fd3811e5341052",
+          "match": true
+        },
+        "firmware/include/mic_acoustic.h": {
+          "expected_sha256": "72318c19624ef2d9d4866d6edbe97bfbc4d5bc72f9f5194fbd751a2cdff71cac",
+          "actual_sha256": "72318c19624ef2d9d4866d6edbe97bfbc4d5bc72f9f5194fbd751a2cdff71cac",
+          "match": true
+        },
+        "firmware/include/mic_noise_ema.h": {
+          "expected_sha256": "29c3cbfb90f2f873ac97f17ba1cbfa014d1bf7be0e674605846689745b49c92d",
+          "actual_sha256": "29c3cbfb90f2f873ac97f17ba1cbfa014d1bf7be0e674605846689745b49c92d",
+          "match": true
+        },
+        "firmware/include/ms5611_compensation.h": {
+          "expected_sha256": "c35e9ba3bad7864c89e8285a4a1789401239a22298b5cbfbdc5e44ea7e6f3227",
+          "actual_sha256": "c35e9ba3bad7864c89e8285a4a1789401239a22298b5cbfbdc5e44ea7e6f3227",
+          "match": true
+        },
+        "firmware/include/ms5611_crc.h": {
+          "expected_sha256": "891c2c3ecd21a9ebca729beb195df9277484ad1f88bb2dfe0bb9744ac9f3b801",
+          "actual_sha256": "891c2c3ecd21a9ebca729beb195df9277484ad1f88bb2dfe0bb9744ac9f3b801",
+          "match": true
+        },
+        "firmware/include/optical_fault_policy.h": {
+          "expected_sha256": "8cc7f00fece427f2241ae10fde09f34e82fe938a5bacdc2cc5adf92bc7b2a806",
+          "actual_sha256": "8cc7f00fece427f2241ae10fde09f34e82fe938a5bacdc2cc5adf92bc7b2a806",
+          "match": true
+        },
+        "firmware/include/power_adc.h": {
+          "expected_sha256": "6e75833e2c6f6dd425a4225fe7cad0a83fbeb374d011c283523ecbeccefabd91",
+          "actual_sha256": "6e75833e2c6f6dd425a4225fe7cad0a83fbeb374d011c283523ecbeccefabd91",
+          "match": true
+        },
+        "firmware/include/region_manager.h": {
+          "expected_sha256": "5bd5e07dd19d695b4ae4b18fb2420b8cb07c0e9e0d46553f6b2025827b1702ad",
+          "actual_sha256": "5bd5e07dd19d695b4ae4b18fb2420b8cb07c0e9e0d46553f6b2025827b1702ad",
+          "match": true
+        },
+        "firmware/include/reset_cause.h": {
+          "expected_sha256": "c709eab6647f5d08beed3b155a40fe419b7450e945da1633cc49a99cf8eee3a7",
+          "actual_sha256": "c709eab6647f5d08beed3b155a40fe419b7450e945da1633cc49a99cf8eee3a7",
+          "match": true
+        },
+        "firmware/include/secrets.h.example": {
+          "expected_sha256": "1ad9f9db2617474536fb5296b04682ec574de5f7af1419839654759563408a23",
+          "actual_sha256": "1ad9f9db2617474536fb5296b04682ec574de5f7af1419839654759563408a23",
+          "match": true
+        },
+        "firmware/include/sensor_lis2dh12.h": {
+          "expected_sha256": "677ed79bb5ccd94d82cbe8e1677601b0fc02e4f306f21cffa5a47e03000c7193",
+          "actual_sha256": "677ed79bb5ccd94d82cbe8e1677601b0fc02e4f306f21cffa5a47e03000c7193",
+          "match": true
+        },
+        "firmware/include/sensor_ltr390.h": {
+          "expected_sha256": "bb51bb3f269f16903d734e261af814a6a570273e3b06288624b02846054bc8dd",
+          "actual_sha256": "bb51bb3f269f16903d734e261af814a6a570273e3b06288624b02846054bc8dd",
+          "match": true
+        },
+        "firmware/include/sensor_ms5611.h": {
+          "expected_sha256": "e5a220e858b9b213c823e6f0bd89917e5898901f5ac2622f0f1496e6e0bbcbe8",
+          "actual_sha256": "e5a220e858b9b213c823e6f0bd89917e5898901f5ac2622f0f1496e6e0bbcbe8",
+          "match": true
+        },
+        "firmware/include/sensor_tmp117.h": {
+          "expected_sha256": "eea2f7a8398af2bc2a9d4dfd52ebd0e65e27516ebd5692d1e3f58a9048afad39",
+          "actual_sha256": "eea2f7a8398af2bc2a9d4dfd52ebd0e65e27516ebd5692d1e3f58a9048afad39",
+          "match": true
+        },
+        "firmware/include/sensors.h": {
+          "expected_sha256": "6f1417ae46fa14d6f6c03b5b00a38f64b548913b5a7ad44d5286b45612fa53ae",
+          "actual_sha256": "6f1417ae46fa14d6f6c03b5b00a38f64b548913b5a7ad44d5286b45612fa53ae",
+          "match": true
+        },
+        "firmware/include/stop1_progress_policy.h": {
+          "expected_sha256": "71eecd01a0cd6e19a9057a64fd1ab137c7fd31cfee6f608b031266fd2baca44c",
+          "actual_sha256": "71eecd01a0cd6e19a9057a64fd1ab137c7fd31cfee6f608b031266fd2baca44c",
+          "match": true
+        },
+        "firmware/include/stratolink_pins.h": {
+          "expected_sha256": "0ef610402ffa401fcd502c6385fdc443bd9fc5c40eb50e1069ada46a82cd4820",
+          "actual_sha256": "0ef610402ffa401fcd502c6385fdc443bd9fc5c40eb50e1069ada46a82cd4820",
+          "match": true
+        },
+        "firmware/include/tamp_record.h": {
+          "expected_sha256": "74666fff2a93bc28f8a6e1eac0adc3cb8ac7921dbb2d0a1439a62f066cd4e3b9",
+          "actual_sha256": "74666fff2a93bc28f8a6e1eac0adc3cb8ac7921dbb2d0a1439a62f066cd4e3b9",
+          "match": true
+        },
+        "firmware/include/telemetry.h": {
+          "expected_sha256": "4befc1f6b972f815d274ad5df3cd5f463529d43b7b4dd8f66d2b6c8949c6c769",
+          "actual_sha256": "4befc1f6b972f815d274ad5df3cd5f463529d43b7b4dd8f66d2b6c8949c6c769",
+          "match": true
+        },
+        "firmware/include/tmp117_conversion.h": {
+          "expected_sha256": "6f4da7da232c280b3051bebf51cd5463d713ed943fdd83f625df4e65afba9d8b",
+          "actual_sha256": "6f4da7da232c280b3051bebf51cd5463d713ed943fdd83f625df4e65afba9d8b",
+          "match": true
+        },
+        "firmware/src/b2b.cpp": {
+          "expected_sha256": "78511daab08b663225ea8cf69a2ab5ded3add8fb6a8fdf32690e2308656d5bf5",
+          "actual_sha256": "78511daab08b663225ea8cf69a2ab5ded3add8fb6a8fdf32690e2308656d5bf5",
+          "match": true
+        },
+        "firmware/src/b2b.h": {
+          "expected_sha256": "5d573f843a2f1e7871613ad9dcd782aa224f575b5431acc5cf4d6676c76cf79d",
+          "actual_sha256": "5d573f843a2f1e7871613ad9dcd782aa224f575b5431acc5cf4d6676c76cf79d",
+          "match": true
+        },
+        "firmware/src/b2b_id_store.cpp": {
+          "expected_sha256": "ec3b4502ee1f77bcb2c481bbdc1663ee79d65b1ed4f86efd78ba0ac2f6b6c0e2",
+          "actual_sha256": "ec3b4502ee1f77bcb2c481bbdc1663ee79d65b1ed4f86efd78ba0ac2f6b6c0e2",
+          "match": true
+        },
+        "firmware/src/command.cpp": {
+          "expected_sha256": "34de408e0b767dad06fdf28fa80a566dc7c6f1e1be5ff47d0486cc576ff00517",
+          "actual_sha256": "34de408e0b767dad06fdf28fa80a566dc7c6f1e1be5ff47d0486cc576ff00517",
+          "match": true
+        },
+        "firmware/src/command_sequence_store.cpp": {
+          "expected_sha256": "7af072335f1beb8641e00a922b851cc3669496b327eef2074da11d9ba237b755",
+          "actual_sha256": "7af072335f1beb8641e00a922b851cc3669496b327eef2074da11d9ba237b755",
+          "match": true
+        },
+        "firmware/src/crypto_aes128.cpp": {
+          "expected_sha256": "fb670e67f9ff776e10f6aac14347dca24db2412c0f83b3571aac6fd8cadf2438",
+          "actual_sha256": "fb670e67f9ff776e10f6aac14347dca24db2412c0f83b3571aac6fd8cadf2438",
+          "match": true
+        },
+        "firmware/src/ctt_decode.cpp": {
+          "expected_sha256": "171f1c6dea5d5a1e6f647e378cbd307e6fa848bd4385b4341575d107a21611b7",
+          "actual_sha256": "171f1c6dea5d5a1e6f647e378cbd307e6fa848bd4385b4341575d107a21611b7",
+          "match": true
+        },
+        "firmware/src/ctt_decode.h": {
+          "expected_sha256": "2d28d76205f96993b83e98f76392d9987e5be5b89f49916809fae9c8601d2f01",
+          "actual_sha256": "2d28d76205f96993b83e98f76392d9987e5be5b89f49916809fae9c8601d2f01",
+          "match": true
+        },
+        "firmware/src/ctt_event.cpp": {
+          "expected_sha256": "9ea2ce9d5f48880a8a1fe78e8121752636b62962d88ee77ec699715e2c4aad6e",
+          "actual_sha256": "9ea2ce9d5f48880a8a1fe78e8121752636b62962d88ee77ec699715e2c4aad6e",
+          "match": true
+        },
+        "firmware/src/ctt_queue.cpp": {
+          "expected_sha256": "9b962497a33f664c90ee76b4a4c807c9dccacea379c687848711ca9fedbd5b42",
+          "actual_sha256": "9b962497a33f664c90ee76b4a4c807c9dccacea379c687848711ca9fedbd5b42",
+          "match": true
+        },
+        "firmware/src/devnonce_store.cpp": {
+          "expected_sha256": "bba6da170ffe7156d248c25ba902260108c3d557173053c1efc4cfeb90456069",
+          "actual_sha256": "bba6da170ffe7156d248c25ba902260108c3d557173053c1efc4cfeb90456069",
+          "match": true
+        },
+        "firmware/src/gps_backup_policy.cpp": {
+          "expected_sha256": "8b66b21af4a01ace5f9af9b02d104d8a9a11a78e92d910bbc49b3324a098bd83",
+          "actual_sha256": "8b66b21af4a01ace5f9af9b02d104d8a9a11a78e92d910bbc49b3324a098bd83",
+          "match": true
+        },
+        "firmware/src/gps_freshness.cpp": {
+          "expected_sha256": "3cd4ff2727735a3f6a78e01c9ec2684831e7cf030d4567a84b98d016251952d5",
+          "actual_sha256": "3cd4ff2727735a3f6a78e01c9ec2684831e7cf030d4567a84b98d016251952d5",
+          "match": true
+        },
+        "firmware/src/gps_pvt_validation.cpp": {
+          "expected_sha256": "a803d82d1fca95ef650c076a238ea30b648e1d2ae2791083f23e7805baa19d1b",
+          "actual_sha256": "a803d82d1fca95ef650c076a238ea30b648e1d2ae2791083f23e7805baa19d1b",
+          "match": true
+        },
+        "firmware/src/gps_ublox.cpp": {
+          "expected_sha256": "0a9ff7eb7747308b24cfb48244e729b84e21e5fb0cce76323f22101674de5989",
+          "actual_sha256": "0a9ff7eb7747308b24cfb48244e729b84e21e5fb0cce76323f22101674de5989",
+          "match": true
+        },
+        "firmware/src/lorawan.cpp": {
+          "expected_sha256": "60cacaadbfd002a3780fd337669f9782235fee4b554b110028a747b3576a9294",
+          "actual_sha256": "60cacaadbfd002a3780fd337669f9782235fee4b554b110028a747b3576a9294",
+          "match": true
+        },
+        "firmware/src/lorawan_counter.cpp": {
+          "expected_sha256": "e60f26714e6b8e0ef0ed5a1876746b1bc0b06eee78332c16ea9d723cbf7b752f",
+          "actual_sha256": "e60f26714e6b8e0ef0ed5a1876746b1bc0b06eee78332c16ea9d723cbf7b752f",
+          "match": true
+        },
+        "firmware/src/lorawan_crypto.cpp": {
+          "expected_sha256": "dc437d09a254ac8cd464e506a9652e46fd433d2a33762ddfa76e34b09da4ae98",
+          "actual_sha256": "dc437d09a254ac8cd464e506a9652e46fd433d2a33762ddfa76e34b09da4ae98",
+          "match": true
+        },
+        "firmware/src/lorawan_frame.cpp": {
+          "expected_sha256": "3290a03802b2844a914322b6fdc5e3a291fc41533e924a5d0296763929f0ac8f",
+          "actual_sha256": "3290a03802b2844a914322b6fdc5e3a291fc41533e924a5d0296763929f0ac8f",
+          "match": true
+        },
+        "firmware/src/main.cpp": {
+          "expected_sha256": "28be00778998f57ae67ad4b9f54dbb6ee93c3ce0c75d0f3bce79ee5fac7012f4",
+          "actual_sha256": "28be00778998f57ae67ad4b9f54dbb6ee93c3ce0c75d0f3bce79ee5fac7012f4",
+          "match": true
+        },
+        "firmware/src/main_b2b_diag.cpp": {
+          "expected_sha256": "e18022fa6ae5b23e411b56a8893d3d5e87c42cf6a1c23b4175f1ffe86cbd47b5",
+          "actual_sha256": "e18022fa6ae5b23e411b56a8893d3d5e87c42cf6a1c23b4175f1ffe86cbd47b5",
+          "match": true
+        },
+        "firmware/src/main_b2b_rf_diag.cpp": {
+          "expected_sha256": "ea3f2d486b6b8097a6bfcffadfbd65a61c627eec8aa70e1fb264c71621dfe209",
+          "actual_sha256": "ea3f2d486b6b8097a6bfcffadfbd65a61c627eec8aa70e1fb264c71621dfe209",
+          "match": true
+        },
+        "firmware/src/main_ctt_diag.cpp": {
+          "expected_sha256": "f969dfc93ac27785f6978c0b44fb29957a49d1cc56cc79b734a060d11d7eae6e",
+          "actual_sha256": "f969dfc93ac27785f6978c0b44fb29957a49d1cc56cc79b734a060d11d7eae6e",
+          "match": true
+        },
+        "firmware/src/main_ctt_tx_diag.cpp": {
+          "expected_sha256": "d2b408da108b9a6b5039ba7094c2afdb0af76b0bee5d9eef877db892ffd750a3",
+          "actual_sha256": "d2b408da108b9a6b5039ba7094c2afdb0af76b0bee5d9eef877db892ffd750a3",
+          "match": true
+        },
+        "firmware/src/main_gps_diag.cpp": {
+          "expected_sha256": "1fe4c80fecb68a9cd942e30c13c496375d09900d051e3ab548526eb170d0073a",
+          "actual_sha256": "1fe4c80fecb68a9cd942e30c13c496375d09900d051e3ab548526eb170d0073a",
+          "match": true
+        },
+        "firmware/src/main_gps_diag2.cpp": {
+          "expected_sha256": "8b880e55c37740ab8c27824216184b380e59c5641612a241a910dbd142d4f5b3",
+          "actual_sha256": "8b880e55c37740ab8c27824216184b380e59c5641612a241a910dbd142d4f5b3",
+          "match": true
+        },
+        "firmware/src/main_gps_iprobe.cpp": {
+          "expected_sha256": "7b903a35a74604d828245e5543031cfa45bd7a7820e5219f57fcbdac9aabc68b",
+          "actual_sha256": "7b903a35a74604d828245e5543031cfa45bd7a7820e5219f57fcbdac9aabc68b",
+          "match": true
+        },
+        "firmware/src/main_gps_power_states.cpp": {
+          "expected_sha256": "aa8eef7a02cb5c7583f3b02f399bcbe6c3a9af5b38ace29b203ab112ca0b5258",
+          "actual_sha256": "aa8eef7a02cb5c7583f3b02f399bcbe6c3a9af5b38ace29b203ab112ca0b5258",
+          "match": true
+        },
+        "firmware/src/main_meshtastic_diag.cpp": {
+          "expected_sha256": "f03f4d5290c4c5952597236e1e7f78c27f921c9d685de6e8458b9543619092cc",
+          "actual_sha256": "f03f4d5290c4c5952597236e1e7f78c27f921c9d685de6e8458b9543619092cc",
+          "match": true
+        },
+        "firmware/src/main_mic_test.cpp": {
+          "expected_sha256": "8187c1d32a740e5ae0225a8638fdfca6ecfacf216363dc14cb2c5057ffe8fdbc",
+          "actual_sha256": "8187c1d32a740e5ae0225a8638fdfca6ecfacf216363dc14cb2c5057ffe8fdbc",
+          "match": true
+        },
+        "firmware/src/main_power_test.cpp": {
+          "expected_sha256": "5b7ab0959e759c51c6a0df585bfbb2d43371a0a31f9babd3a4b2790347d6c6c1",
+          "actual_sha256": "5b7ab0959e759c51c6a0df585bfbb2d43371a0a31f9babd3a4b2790347d6c6c1",
+          "match": true
+        },
+        "firmware/src/main_region_test.cpp": {
+          "expected_sha256": "8afe3f3d60e535d60458a2c5d6b2388bb9910cdb3e142f8edb916c2174721b23",
+          "actual_sha256": "8afe3f3d60e535d60458a2c5d6b2388bb9910cdb3e142f8edb916c2174721b23",
+          "match": true
+        },
+        "firmware/src/meshtastic_relay_mac.cpp": {
+          "expected_sha256": "2fc7af90b134737147e532111c1e6661474a591ee2ec5dd219c5a9f1ed0cddf8",
+          "actual_sha256": "2fc7af90b134737147e532111c1e6661474a591ee2ec5dd219c5a9f1ed0cddf8",
+          "match": true
+        },
+        "firmware/src/mic_acoustic.cpp": {
+          "expected_sha256": "1e51882b00ed5c07fbd6f0f42a41d2694340bf5e2848f84dcd3de3e0fdce564d",
+          "actual_sha256": "1e51882b00ed5c07fbd6f0f42a41d2694340bf5e2848f84dcd3de3e0fdce564d",
+          "match": true
+        },
+        "firmware/src/ms5611_compensation.cpp": {
+          "expected_sha256": "1885edde9207e4c9737bbea4e65e3efbbc4febfcc30630f7143bf84e25ce9bec",
+          "actual_sha256": "1885edde9207e4c9737bbea4e65e3efbbc4febfcc30630f7143bf84e25ce9bec",
+          "match": true
+        },
+        "firmware/src/ms5611_crc.cpp": {
+          "expected_sha256": "b717d8acb19446b6edf9c0296bab25921450cef0964c5ccf89ee5703040534ec",
+          "actual_sha256": "b717d8acb19446b6edf9c0296bab25921450cef0964c5ccf89ee5703040534ec",
+          "match": true
+        },
+        "firmware/src/power_adc.cpp": {
+          "expected_sha256": "c1027f09105aea2391a6d7546c26c0bf04b492d2e6bde0181fec8b66693827e2",
+          "actual_sha256": "c1027f09105aea2391a6d7546c26c0bf04b492d2e6bde0181fec8b66693827e2",
+          "match": true
+        },
+        "firmware/src/power_manager.cpp": {
+          "expected_sha256": "ac949d7affad3081fcd1a9489c9be1ace0071bae3d5cfe964f1c9949a98ba5b2",
+          "actual_sha256": "ac949d7affad3081fcd1a9489c9be1ace0071bae3d5cfe964f1c9949a98ba5b2",
+          "match": true
+        },
+        "firmware/src/power_manager.h": {
+          "expected_sha256": "f611b9685d034e9b9ff49b7bc90b94f7186790ef9c1311bee752a3b7938415d5",
+          "actual_sha256": "f611b9685d034e9b9ff49b7bc90b94f7186790ef9c1311bee752a3b7938415d5",
+          "match": true
+        },
+        "firmware/src/region_manager.cpp": {
+          "expected_sha256": "ada1c32b0d69a733498b77e55aae9767c69cba0a92c4e00bbcfdabee23cb2fc8",
+          "actual_sha256": "ada1c32b0d69a733498b77e55aae9767c69cba0a92c4e00bbcfdabee23cb2fc8",
+          "match": true
+        },
+        "firmware/src/reset_cause.cpp": {
+          "expected_sha256": "a632e69bc74bc3ac967ac301d95c9d972b3097c6b4f3407fb0a19fb0fe1f8c65",
+          "actual_sha256": "a632e69bc74bc3ac967ac301d95c9d972b3097c6b4f3407fb0a19fb0fe1f8c65",
+          "match": true
+        },
+        "firmware/src/sensor_lis2dh12.cpp": {
+          "expected_sha256": "d311c35fbff3dd92a954fbc90727cf1a1ce65201fd0f047df6574204c5fe9a8d",
+          "actual_sha256": "d311c35fbff3dd92a954fbc90727cf1a1ce65201fd0f047df6574204c5fe9a8d",
+          "match": true
+        },
+        "firmware/src/sensor_ms5611.cpp": {
+          "expected_sha256": "951d7a03f38e8dbde722262ebaeb59567c6c96b35e5b0ecd2544900b62401892",
+          "actual_sha256": "951d7a03f38e8dbde722262ebaeb59567c6c96b35e5b0ecd2544900b62401892",
+          "match": true
+        },
+        "firmware/src/sensor_tmp117.cpp": {
+          "expected_sha256": "946ec6461730e0aba0fde8d2a97af9403c841af608dd76204cbcdaf3b98b5b57",
+          "actual_sha256": "946ec6461730e0aba0fde8d2a97af9403c841af608dd76204cbcdaf3b98b5b57",
+          "match": true
+        },
+        "firmware/src/sensors.cpp": {
+          "expected_sha256": "e3a0d5d144e088c170122e0ffe80f61c05b575150d08e71483f1ff242b45e0ea",
+          "actual_sha256": "e3a0d5d144e088c170122e0ffe80f61c05b575150d08e71483f1ff242b45e0ea",
+          "match": true
+        },
+        "firmware/src/shallow_yield.cpp": {
+          "expected_sha256": "749ffe78df25a776953cde507a04b337e162c5e4c8f216c0e6dcb37219f3ef5f",
+          "actual_sha256": "749ffe78df25a776953cde507a04b337e162c5e4c8f216c0e6dcb37219f3ef5f",
+          "match": true
+        },
+        "firmware/src/telemetry.cpp": {
+          "expected_sha256": "c8c2e0e6cb0e6b0288f1c9c6eb77af4e4ac4ccc2270523307e508600ebda1490",
+          "actual_sha256": "c8c2e0e6cb0e6b0288f1c9c6eb77af4e4ac4ccc2270523307e508600ebda1490",
+          "match": true
+        },
+        "firmware/test/audio_capture.cpp": {
+          "expected_sha256": "c702a01b1d7489872ddf234a28542c39b988ffb025473145953690a8cd8fcc56",
+          "actual_sha256": "c702a01b1d7489872ddf234a28542c39b988ffb025473145953690a8cd8fcc56",
+          "match": true
+        },
+        "firmware/test/board_test.cpp": {
+          "expected_sha256": "3401ac5a4ac04143d3075e25d8c66c94e47665f5102ab4d28a1152513139427d",
+          "actual_sha256": "3401ac5a4ac04143d3075e25d8c66c94e47665f5102ab4d28a1152513139427d",
+          "match": true
+        },
+        "firmware/test/capture_audio.py": {
+          "expected_sha256": "3d95b20d85da561519a55807d6eaff165f9fc39ae94eb3bbcbbba571fbf60fe5",
+          "actual_sha256": "3d95b20d85da561519a55807d6eaff165f9fc39ae94eb3bbcbbba571fbf60fe5",
+          "match": true
+        },
+        "firmware/test/decode_results.py": {
+          "expected_sha256": "bb9aed6e6e3cd862e3526220ea403aa904e6b72d66597c25694a58a4ac6758eb",
+          "actual_sha256": "bb9aed6e6e3cd862e3526220ea403aa904e6b72d66597c25694a58a4ac6758eb",
+          "match": true
+        },
+        "firmware/test/sdr_gateway.py": {
+          "expected_sha256": "8720066b26596d89e710398f55da90723776a686dac87f9d5463ccdbd687e5fa",
+          "actual_sha256": "8720066b26596d89e710398f55da90723776a686dac87f9d5463ccdbd687e5fa",
+          "match": true
+        },
+        "firmware/test/sdr_listen.py": {
+          "expected_sha256": "cf1fcead70e383fbeb41c77343c5ef98da0479dfdaa963561835362bcde82b1d",
+          "actual_sha256": "cf1fcead70e383fbeb41c77343c5ef98da0479dfdaa963561835362bcde82b1d",
+          "match": true
+        },
+        "firmware/test/test_b2b_id_store.cpp": {
+          "expected_sha256": "5dc9b6e2d89885468fe2fccb754dab30985ef7402c4e979cfca2834043f42d01",
+          "actual_sha256": "5dc9b6e2d89885468fe2fccb754dab30985ef7402c4e979cfca2834043f42d01",
+          "match": true
+        },
+        "firmware/test/test_b2b_wire.cpp": {
+          "expected_sha256": "0ad823a677df3b322dac783fdffd2da8c0a205399cf3c36683af0fc8cf1039eb",
+          "actual_sha256": "0ad823a677df3b322dac783fdffd2da8c0a205399cf3c36683af0fc8cf1039eb",
+          "match": true
+        },
+        "firmware/test/test_command.cpp": {
+          "expected_sha256": "6e7ccd6c3b56ed26b6e860cca9a54bc4689710dd64e9ab1984460f7421a1f5b8",
+          "actual_sha256": "6e7ccd6c3b56ed26b6e860cca9a54bc4689710dd64e9ab1984460f7421a1f5b8",
+          "match": true
+        },
+        "firmware/test/test_command_sequence_store.cpp": {
+          "expected_sha256": "783aed291b88f2fa1409bfa28ab3ecda7ab8970e437b5f81c9a48b7c4475b326",
+          "actual_sha256": "783aed291b88f2fa1409bfa28ab3ecda7ab8970e437b5f81c9a48b7c4475b326",
+          "match": true
+        },
+        "firmware/test/test_crypto_aes128.cpp": {
+          "expected_sha256": "1e39e9759f2f96875e000500f9a8d911db691fa04009fea40eaace09164dd409",
+          "actual_sha256": "1e39e9759f2f96875e000500f9a8d911db691fa04009fea40eaace09164dd409",
+          "match": true
+        },
+        "firmware/test/test_ctt_decode.cpp": {
+          "expected_sha256": "3faa0403f5e469040d1fa2a91131ff1e030adafe3458018d8c30d9c48db1c2b4",
+          "actual_sha256": "3faa0403f5e469040d1fa2a91131ff1e030adafe3458018d8c30d9c48db1c2b4",
+          "match": true
+        },
+        "firmware/test/test_ctt_event.cpp": {
+          "expected_sha256": "dece8c9c91640f56f746fa16da3fdc411c088a0d6d3c5c973f954a7ee6d24071",
+          "actual_sha256": "dece8c9c91640f56f746fa16da3fdc411c088a0d6d3c5c973f954a7ee6d24071",
+          "match": true
+        },
+        "firmware/test/test_ctt_queue.cpp": {
+          "expected_sha256": "d5baa2550f1708100331e43ca02069abcc70cfcd0825860e508aba4f86210b74",
+          "actual_sha256": "d5baa2550f1708100331e43ca02069abcc70cfcd0825860e508aba4f86210b74",
+          "match": true
+        },
+        "firmware/test/test_ctt_test_tag.cpp": {
+          "expected_sha256": "0f3dfca7c59c1ec64c6acf9973d191b6b4d50f89dd1cee91b56ecd8686eecf80",
+          "actual_sha256": "0f3dfca7c59c1ec64c6acf9973d191b6b4d50f89dd1cee91b56ecd8686eecf80",
+          "match": true
+        },
+        "firmware/test/test_devnonce_store.cpp": {
+          "expected_sha256": "1b63f00d26078d693b30490944c06f2fe0809c6028c8bd520e972f5ca7704ee3",
+          "actual_sha256": "1b63f00d26078d693b30490944c06f2fe0809c6028c8bd520e972f5ca7704ee3",
+          "match": true
+        },
+        "firmware/test/test_gps_backup_policy.cpp": {
+          "expected_sha256": "0ef18c2bfd2840d7480ce1b15f1f8e842366a2c6f06218475de294f446612ed8",
+          "actual_sha256": "0ef18c2bfd2840d7480ce1b15f1f8e842366a2c6f06218475de294f446612ed8",
+          "match": true
+        },
+        "firmware/test/test_gps_freshness.cpp": {
+          "expected_sha256": "f4cdf8b15598ee1ea635b1b281bf1b20d469f370a44642e4b8af53405878680c",
+          "actual_sha256": "f4cdf8b15598ee1ea635b1b281bf1b20d469f370a44642e4b8af53405878680c",
+          "match": true
+        },
+        "firmware/test/test_gps_pvt_validation.cpp": {
+          "expected_sha256": "01c291682f454e1e7ee14584d87ac7f90c912a80cd316a6496acc8562aba3132",
+          "actual_sha256": "01c291682f454e1e7ee14584d87ac7f90c912a80cd316a6496acc8562aba3132",
+          "match": true
+        },
+        "firmware/test/test_lis2dh12_conversion.cpp": {
+          "expected_sha256": "90dd3639c2227fdebd0489571f2ff39fd39f9a63e5a589b5fad50807beab672a",
+          "actual_sha256": "90dd3639c2227fdebd0489571f2ff39fd39f9a63e5a589b5fad50807beab672a",
+          "match": true
+        },
+        "firmware/test/test_lorawan_counter.cpp": {
+          "expected_sha256": "26107924eb83e37ee37260e2aeb22d376954ef12a726cb124f9a8e9c014f372e",
+          "actual_sha256": "26107924eb83e37ee37260e2aeb22d376954ef12a726cb124f9a8e9c014f372e",
+          "match": true
+        },
+        "firmware/test/test_lorawan_crypto.cpp": {
+          "expected_sha256": "70ace0c67758f916168cbee34075b6d13c602fc685ecb101eb7d8840cd50dd73",
+          "actual_sha256": "70ace0c67758f916168cbee34075b6d13c602fc685ecb101eb7d8840cd50dd73",
+          "match": true
+        },
+        "firmware/test/test_lorawan_frame.cpp": {
+          "expected_sha256": "4317cfa7f9fbc81d9759f22899303da9c487e1eae572bdb8e07281435d0c3c15",
+          "actual_sha256": "4317cfa7f9fbc81d9759f22899303da9c487e1eae572bdb8e07281435d0c3c15",
+          "match": true
+        },
+        "firmware/test/test_ltr390_conversion.cpp": {
+          "expected_sha256": "9ad0d467ea578667483ae7231d99c57ea087e177e51a5af67679bc73342a873d",
+          "actual_sha256": "9ad0d467ea578667483ae7231d99c57ea087e177e51a5af67679bc73342a873d",
+          "match": true
+        },
+        "firmware/test/test_meshtastic_relay_mac.cpp": {
+          "expected_sha256": "6ed6906d98a52dc7d5dadcd3633a9c1c41242c9c31e8a5f282895b571b168fcf",
+          "actual_sha256": "6ed6906d98a52dc7d5dadcd3633a9c1c41242c9c31e8a5f282895b571b168fcf",
+          "match": true
+        },
+        "firmware/test/test_mic_noise_ema.cpp": {
+          "expected_sha256": "ef03d4df2ea186a414a0ad3a14c5c36d6955c51bbc911d21cc0bfd7270058188",
+          "actual_sha256": "ef03d4df2ea186a414a0ad3a14c5c36d6955c51bbc911d21cc0bfd7270058188",
+          "match": true
+        },
+        "firmware/test/test_ms5611_compensation.cpp": {
+          "expected_sha256": "1cf4fd75d9abb18eb8421a337ca18bf10d46c023b0d7be58375f0a77cf269103",
+          "actual_sha256": "1cf4fd75d9abb18eb8421a337ca18bf10d46c023b0d7be58375f0a77cf269103",
+          "match": true
+        },
+        "firmware/test/test_ms5611_crc.cpp": {
+          "expected_sha256": "1b7873b53d8ba8e3d45001f58a598a18fb4178a2088bc4d607bbefea0585c396",
+          "actual_sha256": "1b7873b53d8ba8e3d45001f58a598a18fb4178a2088bc4d607bbefea0585c396",
+          "match": true
+        },
+        "firmware/test/test_optical_fault_policy.cpp": {
+          "expected_sha256": "13c62ec07e94f1ba9beda5f9764c8f4a2be036207c03e7a43b90a364cb7c60f5",
+          "actual_sha256": "13c62ec07e94f1ba9beda5f9764c8f4a2be036207c03e7a43b90a364cb7c60f5",
+          "match": true
+        },
+        "firmware/test/test_power_adc_policy.cpp": {
+          "expected_sha256": "925da4a056950ec21969963ff3273ac5bc5b1ec2b616ca8f4c75c5724e2a936d",
+          "actual_sha256": "925da4a056950ec21969963ff3273ac5bc5b1ec2b616ca8f4c75c5724e2a936d",
+          "match": true
+        },
+        "firmware/test/test_region.cpp": {
+          "expected_sha256": "1fa8af16afc2bb1f8158f2a108ee270aa72775b9a41ab523fcad5fb6aa3dbaca",
+          "actual_sha256": "1fa8af16afc2bb1f8158f2a108ee270aa72775b9a41ab523fcad5fb6aa3dbaca",
+          "match": true
+        },
+        "firmware/test/test_reset_cause.cpp": {
+          "expected_sha256": "dba6d133ffbbeaed33ac4b33b2e92b2845b0430066a21aeba0972c13d20f206f",
+          "actual_sha256": "dba6d133ffbbeaed33ac4b33b2e92b2845b0430066a21aeba0972c13d20f206f",
+          "match": true
+        },
+        "firmware/test/test_stop1_progress_policy.cpp": {
+          "expected_sha256": "08da87bd4c5b6c06efe91f9444505ecfd815fa9e679b41e8f9f09e48d5b56c25",
+          "actual_sha256": "08da87bd4c5b6c06efe91f9444505ecfd815fa9e679b41e8f9f09e48d5b56c25",
+          "match": true
+        },
+        "firmware/test/test_tamp_record.cpp": {
+          "expected_sha256": "2ad9711733a8ae38c1230bcdcab709675fa5115f8d3ff852a9d87314e7800d27",
+          "actual_sha256": "2ad9711733a8ae38c1230bcdcab709675fa5115f8d3ff852a9d87314e7800d27",
+          "match": true
+        },
+        "firmware/test/test_telemetry_v2.cpp": {
+          "expected_sha256": "df8cbffcf02694a119454d32249022eca68e339f6297be3827f4694cb22c9dd6",
+          "actual_sha256": "df8cbffcf02694a119454d32249022eca68e339f6297be3827f4694cb22c9dd6",
+          "match": true
+        },
+        "firmware/test/test_temperature_wire.cpp": {
+          "expected_sha256": "1c34b250129dd4cbaef48cdc1be011c69a6058a6b4e36e67cb505116c4867ee8",
+          "actual_sha256": "1c34b250129dd4cbaef48cdc1be011c69a6058a6b4e36e67cb505116c4867ee8",
+          "match": true
+        },
+        "firmware/test/test_tmp117_conversion.cpp": {
+          "expected_sha256": "676ac223d5bb4139c262ff37f3c184457192337eeab602f200396f7214cfdb42",
+          "actual_sha256": "676ac223d5bb4139c262ff37f3c184457192337eeab602f200396f7214cfdb42",
+          "match": true
+        },
+        "firmware/test/ttn_listener.py": {
+          "expected_sha256": "f51898c680829453dbf36734a95574f2e2b20bd35fa995fa2b219608b5bfd7de",
+          "actual_sha256": "f51898c680829453dbf36734a95574f2e2b20bd35fa995fa2b219608b5bfd7de",
+          "match": true
+        }
+      }
+    }
+  },
+  "errors": [],
+  "boundary": "Confirms local file identity against prior validated evidence. Does not independently revisit the supplier cart, place an order, or qualify existing unrelated firmware changes."
+}

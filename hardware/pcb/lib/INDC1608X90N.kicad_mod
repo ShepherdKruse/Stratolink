@@ -2,9 +2,7 @@
 (footprint INDC1608X90N (layer F.Cu) (tedit 698CF58A)
   (descr "")
   (attr smd)
-  (fp_text reference REF** (at -0.21 -1.05 0) (layer F.SilkS)
-    (effects (font (size 0.393700787402 0.393700787402) (thickness 0.15)))
-  )
+  
   (fp_text value INDC1608X90N (at 1.54 1.05 0) (layer F.Fab)
     (effects (font (size 0.393700787402 0.393700787402) (thickness 0.15)))
   )

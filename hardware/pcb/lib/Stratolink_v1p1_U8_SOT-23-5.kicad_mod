@@ -7,7 +7,7 @@
 	(tags "SOT TO_SOT_SMD")
 	(property "Reference" "U8"
 		(at 0 -2.4 0)
-		(layer "F.SilkS")
+		(layer "F.Fab")
 		(hide yes)
 		(uuid "c62a40be-2be4-4db5-8656-b85a4615286c")
 		(effects
@@ -52,7 +52,7 @@
 	)
 	(property "KiLib_Generator" "package/gullwing"
 		(at 0 0 0)
-		(layer "F.SilkS")
+		(layer "F.Fab")
 		(hide yes)
 		(uuid "b15a46a1-e4cd-40d1-af00-68345fda1e2b")
 		(effects

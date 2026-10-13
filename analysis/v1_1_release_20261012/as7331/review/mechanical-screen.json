@@ -1,0 +1,90 @@
+{
+  "status": "PASS_OUTLINE_SCREEN",
+  "vias_touching_max_u6_body": [
+    {
+      "uuid": "0aa17cc0-147a-5bf6-8813-7fe3c47353db",
+      "net": "GND",
+      "at_mm": [
+        73.025,
+        35.1
+      ],
+      "diameter_mm": 0.5,
+      "drill_mm": 0.3,
+      "minimum_annulus_to_u6_land_mm": 0.14051248379533055,
+      "nearest_u6_pin": "1",
+      "annulus_to_that_paste_mm": 0.1757346591481504,
+      "tented_front": true,
+      "tented_back": true
+    },
+    {
+      "uuid": "3fcd3c9e-7799-5a08-9f7b-9fb708bd9814",
+      "net": "+3.3V",
+      "at_mm": [
+        74.025,
+        36.85
+      ],
+      "diameter_mm": 0.5,
+      "drill_mm": 0.3,
+      "minimum_annulus_to_u6_land_mm": 0.4000000000000057,
+      "nearest_u6_pin": "15",
+      "annulus_to_that_paste_mm": 0.42499999999999716,
+      "tented_front": true,
+      "tented_back": true
+    },
+    {
+      "uuid": "64ae0245-c864-5a89-937f-95f0ac7d31ff",
+      "net": "SCL",
+      "at_mm": [
+        73.8,
+        38.05
+      ],
+      "diameter_mm": 0.5,
+      "drill_mm": 0.3,
+      "minimum_annulus_to_u6_land_mm": 0.1757346591481571,
+      "nearest_u6_pin": "13",
+      "annulus_to_that_paste_mm": 0.2027692569068592,
+      "tented_front": true,
+      "tented_back": true
+    }
+  ],
+  "u6_to_r27_max_bodies_mm": 0.3146823795511903,
+  "u6_r27_signed_axis_overlap_mm": [
+    -0.29999999999999716,
+    -0.09500000000000597
+  ],
+  "pcb_sha256": "9d63500a087ef8d345c2337942106e6704d32ded953846883454bfad718adf6c",
+  "u6_max_body_mm": [
+    72.9,
+    35.225,
+    75.6,
+    38.975
+  ],
+  "r27_max_body_mm": [
+    71.2,
+    33.03,
+    72.60000000000001,
+    35.129999999999995
+  ],
+  "u5_max_body_mm": [
+    72.658,
+    40.105,
+    73.63799999999999,
+    41.623
+  ],
+  "u6_to_u5_max_bodies_mm": 1.1299999999999955,
+  "u6_to_neighbor_courtyard_AABB_lower_bounds_mm": {
+    "U7": 1.0870000000000033,
+    "U5": 0.8549999999999969,
+    "C14": 0.240000000000002,
+    "C23": 0.3399999999999963
+  },
+  "r27_to_h2_hole_maxbody_mm": 1.1526156182653615,
+  "r27_to_h2_copper_maxbody_mm": 0.5526156182653614,
+  "r27_rext_pad_to_h2_copper_mm": 1.730328755854682,
+  "notes": [
+    "U6 maximum 2.7\u00d73.75 mm from DS001047; R27 maximum2.1\u00d71.4mm from Vishay28952; U5max0.98\u00d71.518mm from TI YBG0006-C01.",
+    "AABB distances can understate actual separation; dimensions do not include PCB feature tolerance, placement error, or solder fillets.",
+    "Ceramic body overlap above a grounded mounting annulus is not by itself an electrical short.",
+    "Only the known hole and component geometry is tested. The triangular stretchy string has unknown diameter and trajectory; actual lashing, panel bends and future optics require fit check."
+  ]
+}

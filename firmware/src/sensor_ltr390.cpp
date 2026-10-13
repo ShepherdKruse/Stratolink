@@ -1,4 +1,25 @@
 #include "sensor_ltr390.h"
+
+/* Population is explicit in the AS7331-layout pilot build. Keep the default
+ * legacy driver for the flown v1 and earlier LTR390-layout v1.1 boards.
+ * 0 = no optical IC populated; 1 = LTR390. AS7331 needs its own driver and
+ * power-state containment, so no other value may silently use either path. */
+#ifndef STRATOLINK_UV_SENSOR
+#define STRATOLINK_UV_SENSOR 1
+#endif
+
+#if STRATOLINK_UV_SENSOR == 0
+
+/* Intentional DNP is an initialized, quiescent population. No sensor is
+ * enabled or probed, including after shared-I2C recovery. Failed reads leave
+ * the caller's freshly initialized telemetry sentinels untouched. */
+bool sensor_ltr390_init(void) { return true; }
+bool sensor_ltr390_quiesce(void) { return true; }
+bool sensor_ltr390_read_uv_index(uint8_t*) { return false; }
+bool sensor_ltr390_read_ambient_lux(uint16_t*) { return false; }
+
+#elif STRATOLINK_UV_SENSOR == 1
+
 #include "ltr390_conversion.h"
 #include "stratolink_pins.h"
 #include <Wire.h>
@@ -209,3 +230,7 @@ bool sensor_ltr390_read_ambient_lux(uint16_t* lux) {
     *lux = ltr390_lux_from_raw_1x_18bit(raw);
     return true;
 }
+
+#else
+#error "Unsupported UV population: AS7331 needs a dedicated validated driver"
+#endif /* STRATOLINK_UV_SENSOR */

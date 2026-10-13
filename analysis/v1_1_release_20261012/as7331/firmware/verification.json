@@ -1,0 +1,33 @@
+{
+  "files": {
+    "firmware/platformio.ini": {
+      "before_sha256": "0cd71e12d3db130b32effc7809637323c360fac514e094051021188c65603708",
+      "after_sha256": "9be154182da5852419edc5a0e6bd32fba80065ffc60959f1ebae40e4317cdc60"
+    },
+    "firmware/src/sensor_ltr390.cpp": {
+      "before_sha256": "ddc3b82398d0fc111947632dd053e561391ab3085ebd2bf2c4cb00df1bbfe024",
+      "after_sha256": "efe5673fa07b53493230a388b987a95d6ec8104414e4f26dd33b96d04787e184"
+    }
+  },
+  "unchanged_other_tracked_firmware_files": 134,
+  "selected_pilot_environment": "stratolink_v1_1_uv_dnp",
+  "selected_pilot_population": "U6 intentionally absent",
+  "legacy_v1_1_binary_before_after_identical": true,
+  "legacy_v1_1_binary_sha256": "3d6b80c256949ec0e02d739a0eab2f3efca23aa2730bcc3928d602589eab1c43",
+  "legacy_v1_1_flash_bytes": 141384,
+  "dnp_binary_sha256": "da633d692039a9ce07bf3037d04bab14c7136e51c1c224f497e4bc772e1c715c",
+  "dnp_flash_bytes": 140584,
+  "dnp_ram_bytes": 7608,
+  "host_test": "host-test.json",
+  "existing_regressions_passed": [
+    "analysis/diagnostics/sensor_i2c_recovery_integration_test.py",
+    "analysis/diagnostics/ltr390_quiescence_integration_test.py"
+  ],
+  "population_patch_sha256": "cb69840098d01c3851ee6430661dd327f3e2255b9cddbb254d9369d3b0e0e4d2",
+  "build_log_scratch": "/Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/as7331/firmware/build.log",
+  "scope_limitations": [
+    "No AS7331 populated driver implemented",
+    "No physical hardware test or firmware flash",
+    "Existing dirty firmware changes preserved, not independently qualified by this patch"
+  ]
+}

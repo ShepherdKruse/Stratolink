@@ -1,0 +1,93 @@
+{
+  "status": "ACCEPTED_FOR_THREE_BOARD_PILOT_DESIGN_REVIEW",
+  "reviewed_date": "2026-10-13",
+  "reviewer": "independent AS7331 review agent",
+  "candidate": "/Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/as7331/final-green-filled",
+  "baseline_git_revision": "60c805e",
+  "baseline_pcb_sha256": "8e2f83797dd68195aa71b73fc252fe57e53ccd3683ef5f74739dc4d25d6ce8d5",
+  "final_pcb_sha256": "9d63500a087ef8d345c2337942106e6704d32ded953846883454bfad718adf6c",
+  "final_schematic_sha256": "a06740b35d07d7b81999f7ace2a7a7ff02e185ca3e46a664630bd4bbd00c54b7",
+  "canonical_promotion_exact": true,
+  "project_aware_refill_byte_identical": true,
+  "native_drc_counts": {
+    "violations": 0,
+    "unconnected_items": 0,
+    "schematic_parity": 0
+  },
+  "retained_physical_pads_checked": 239,
+  "retained_schematic_pins_checked": 227,
+  "as7331_symbol_board_library_verified": true,
+  "all_added_vias_standard_0p5_copper_0p3_drill": true,
+  "unresolved_design_findings": [],
+  "reviewed_dispositions": [
+    {
+      "finding": "Exact GNSS rear-ground polygon boundary changed after refill.",
+      "disposition": "Accepted: lost area 0.000062251192 mm^2 is entirely within 2 micrometres of new boundary; gained area 0.0180356660855 mm^2, sampled loss zero; no new return-path cut or changed local RF copper primitives. Raw automatic flag retained for transparency."
+    },
+    {
+      "finding": "Three via annuli intersect maximum AS7331 package envelope, including corner GND.",
+      "disposition": "Accepted for pilot: native tenting on both faces and actual mask Gerbers cover full annuli; no package center contact in primary drawing. Inspect tent integrity before future U6 population."
+    },
+    {
+      "finding": "Local 0.125 mm GND necks needed to preserve U7 and UV digital ground connections.",
+      "disposition": "Accepted: explicit physical islands preserved under existing width/clearance constraints; no new DRC waiver. Continuous traces checked in native final fill."
+    },
+    {
+      "finding": "Eight unchanged baseline no-connect net labels encode slash differently in native board versus XML.",
+      "disposition": "Accepted only for enumerated exact unchanged baseline pins, recorded in candidate-independent-review.json; no broad net-name normalization."
+    }
+  ],
+  "remaining_assembly_and_bench_acceptance": [
+    "Factory CAM must retain reviewed fine-pitch mask apertures and via tenting; the derived U6 land/paste pattern requires assembly validation when populated.",
+    "Measure I2C rise time and power/noise/cold behavior on assembled pilots; nominal RC screening is not a bus measurement.",
+    "Verify GNSS/antenna performance with green solder mask and real panel/string assembly.",
+    "Inspect physical lashing/panel fit; line diameter and bend trajectories are unmeasured.",
+    "For future U6 population, apply MSL/stencil handling, clean aperture and high-impedance reference region, and verify all tented annuli.",
+    "AS7331 broad-band channels require calibrated optics, angular acceptance and VIS/NIR rejection before an ozone-column accuracy claim; present board has no angle-limiter."
+  ],
+  "scope_limit": "Design review only; not an assertion that manufacturing order was placed, factory CAM accepted, pilots assembled, or ozone retrieval calibrated.",
+  "evidence_sha256": {
+    "README.md": "59838b5dba85a115ebb59b13deff11674993c275ba07574c0870136c5e145038",
+    "source-ledger.json": "9381e453a1eb772cf8f785d824ed3896cd44537c887cee540ffa24558519e202",
+    "requirements.md": "ffeb0c7e036a05e3abb1d645deb6c5c11e8998fa5d1760e28d25f74235e97040",
+    "mask-process-notes.md": "dbbc795af3148b89d93c1c8d5ea40315bebc3109e7325e755cad26429d0d7901",
+    "candidate-independent-review.json": "9ed2431432963c1aab5b6f0dfec1f25a871f8395fe9eddedff31862595fffa51",
+    "candidate-native.json": "dde698473a0697855cf5898036ee2b5765665bf582a049cf4a77424877108755",
+    "candidate-netlist.xml": "54da6d780223b61d5e7da089af5173ffa97ce002bab526a3b4471ab1d0bce907",
+    "uv-library-review.json": "290941fc1eaa3db8f37b7ebc0eb165f2883c7fd87f28feb922d87f82af53c25c",
+    "project-rule-scope.json": "65fa5575e92f4b99f9a05332f13cf51ee3b6116625d718b029061fba1a5f398e",
+    "retained-model-body-primitives.json": "09b85a1203921f4e59010691efdeaf6ce80b6e6af1334fb654fc56db5e398d7f",
+    "analog-screen.json": "81769c9c01cfc3fea2982f4d2bd622af61b3b4045dc5b050b3b49cc11fc2171b",
+    "mechanical-screen.json": "ba379de791166c562686c6540850074427a77b642a06e0765d86ea31c088d958",
+    "optical-envelope.json": "516ad9264f3a23e6a3efb0c70850e5a14215e22826cdb70f3768841a861c8d14",
+    "baseline-native.json": "b2a382898581f797dbc1a5964fef9cf47af2eba8ab1a2edf99aba3a29d755d28",
+    "baseline-netlist.xml": "8a822967bc61cd60e3cf61d6249af4c4c64de385303e6db330a022d9f480c2c5",
+    "baseline-gnss-return.json": "2a2a746a0bccf3aac9ad1c69d682a83ce44c41a3e812b46f7db5d3ce149e51f2",
+    "candidate-gnss-return.json": "cea59a4e7574f61b51db8643ce003fc8552bc63b0376fba9930d5f7fac4d3c96",
+    "gnss-return-comparison.json": "5a9d70290e02c815c17d6219b50ace60bfb102a0f89bde1aeb35d6bd66cf4937",
+    "gnss-ground-boolean.json": "dd5f97a948e6fa5a2d25bf5ad2826d9102ac6f0889bec76e1a02fc7e865d5a66",
+    "trials/refill-candidate/manifest.json": "3e3ce9dca4100b0d7e2b18bd775ec637e27069e4083c51484b9b3d6b7d8ee56e",
+    "trials/refill-candidate/refill-drc.json": "208588d0e242a9b4de4b04a1b1db02c77ae900df81973bd580949e9cc446bab5",
+    "scratch-relocations.json": "2c2f6e31f6cbc7b42b4ab152256af051d29c1c3b0a030bd95a5ac9b6b9c5e704",
+    "../finish/final-artwork-verification.json": "458a57597cdb88456c16166795b56b4c68fb56c363b466551c00798a42cd22e8",
+    "../manufacturing/package-verification.json": "4776e668ac46e15df1c4e7aec7c42d564d28c85be882d8ede0d91fc3a8328e20",
+    "../manufacturing/package-mask-verification.json": "8f7de8404ae2c2a93da886a46ef442299e33c8ec53a3037b80d3bd236a903b7c",
+    "../manufacturing/package-archive-verification.json": "6bef45c1a7b258975b8a56c5c3c23ecc2be852551e28d065d587d9621d647496",
+    "analog_screen.py": "c75cbb68779db35f1639a1f7f83191dac06d5e887ac631dc5ea732c80c35796c",
+    "check_retained_models.py": "7f48f22547f66088c55af79a80b0416d455d96a53eef0ade73bbd307136d0098",
+    "check_rule_scope.py": "5b9889fb00dda98a513a79abd4f2defe5dc8e5a8dfa00f99f30574054e604175",
+    "check_static_geometry.py": "888b4c1d2a945276d0e2f5d2f47216ef7626ca9b71c8e3a50fde6793c4098146",
+    "check_uv_library.py": "3848bc2853a2fbe39bbfd3af3d5e00b186b9ecf35fde8b04daff5fd0eea93cb5",
+    "compare_candidate.py": "82e4aa3e43980d1c921e40368f095b6dd474d2a89b3615b413134dad9e571a48",
+    "compare_gnss_return.py": "51fb4948d6d6f55763f66954e874eabbf69daf4cef3dce7eab950a8a137d0017",
+    "gnss_ground_boolean.py": "5b5bf35743e04959f76cae2373004f7ac62d151b18713f2892ca309e7385f777",
+    "gnss_return_sample.py": "a4fb7e353d41192ecf1da2b0250cb19d54ef9095b458b93da2b680b3037bdd5e",
+    "mechanical_screen.py": "cc869d1bd0bb699bc809bf3ca3033050791bd32b1ffcce56cd549bf4e9cdf777",
+    "native_snapshot.py": "a3c3f221cd41c29a47a9939e8694bc2c197033704c9f849c67faa0c56a01f62a",
+    "optical_envelope.py": "866463184d650402473c4e69fca67cf7e5ab53b0e8d33b80b365dc88c8aa9374",
+    "prepare_refill.py": "ccbb45484a29153c3bf5f4a4dc9d7abd37a683a9eaf84fdb4dc7544d27fc211f",
+    "propose_courtyards.py": "f7350350ca196d12109d1d7a7387c7b17c631de3ecd53db5b659323463c39cf3",
+    "propose_right_ground.py": "51968c86b49f2608508ae8389c79703b814fc944afd2fdd1f767c956258d5c1d",
+    "propose_uv_ground.py": "7b450ba7b728adc53b82ab27aa2c5e3825c10d6b8aba1e6067877ec134bf2d12"
+  }
+}

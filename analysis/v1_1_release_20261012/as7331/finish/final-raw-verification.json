@@ -1,0 +1,2834 @@
+{
+  "source_pcb_sha256": "fdf54d973c3a7e75bdd574e9e05b083a9677dac9c9ef3fa1f300f9a7fad928f5",
+  "finished_pcb_sha256": "00b5432bd4f377718ac4f1b5df5bb0365a05a891690460ce7176a8aa657689e9",
+  "copper_paste_routing_nets_outline_zones_identical_except_4_isolated_markers": true,
+  "all_footprints_verified": 68,
+  "active_libraries_verified": 67,
+  "native_silkscreen_items": 0,
+  "solar_copper_markers": 4,
+  "mask_to_copper_mm": 0.09,
+  "mask_min_web_mm": 0.1,
+  "global_mask_expansion_mm": 0,
+  "vias": [
+    {
+      "uuid": "03b0ab52-29e7-4083-961b-665631361167",
+      "net": "GND",
+      "center_mm": [
+        65.76,
+        77.928
+      ],
+      "annulus_radii_mm": {
+        "F": 0.3,
+        "B": 0.3
+      },
+      "tented_front": true,
+      "tented_back": true,
+      "covering_openings": {
+        "F.Mask": [],
+        "B.Mask": []
+      }
+    },
+    {
+      "uuid": "0aa17cc0-147a-5bf6-8813-7fe3c47353db",
+      "net": "GND",
+      "center_mm": [
+        73.025,
+        35.1
+      ],
+      "annulus_radii_mm": {
+        "F": 0.25,
+        "B": 0.25
+      },
+      "tented_front": true,
+      "tented_back": true,
+      "covering_openings": {
+        "F.Mask": [],
+        "B.Mask": []
+      }
+    },
+    {
+      "uuid": "0b7faae3-38a3-5b73-a927-61462a9412c7",
+      "net": "GND",
+      "center_mm": [
+        72.2,
+        39.16
+      ],
+      "annulus_radii_mm": {
+        "F": 0.25,
+        "B": 0.25
+      },
+      "tented_front": true,
+      "tented_back": true,
+      "covering_openings": {
+        "F.Mask": [],
+        "B.Mask": []
+      }
+    },
+    {
+      "uuid": "0bfcd2d0-e08c-4898-b421-bf19060d510f",
+      "net": "GND",
+      "center_mm": [
+        60.617,
+        30.583
+      ],
+      "annulus_radii_mm": {
+        "F": 0.3,
+        "B": 0.3
+      },
+      "tented_front": true,
+      "tented_back": true,
+      "covering_openings": {
+        "F.Mask": [],
+        "B.Mask": []
+      }
+    },
+    {
+      "uuid": "0db11161-5175-4bf4-99ba-7efe8bd9e7be",
+      "net": "GND",
+      "center_mm": [
+        62.827,
+        52.816
+      ],
+      "annulus_radii_mm": {
+        "F": 0.3,
+        "B": 0.3
+      },
+      "tented_front": true,
+      "tented_back": true,
+      "covering_openings": {
+        "F.Mask": [],
+        "B.Mask": []
+      }
+    },
+    {
+      "uuid": "0db2f259-038c-4ae9-ae33-5baecc2c6904",
+      "net": "GND",
+      "center_mm": [
+        54.264,
+        33.665
+      ],
+      "annulus_radii_mm": {
+        "F": 0.3,
+        "B": 0.3
+      },
+      "tented_front": true,
+      "tented_back": true,
+      "covering_openings": {
+        "F.Mask": [],
+        "B.Mask": []
+      }
+    },
+    {
+      "uuid": "0ea18c78-a720-47bd-880f-3145fb9f83d6",
+      "net": "GND",
+      "center_mm": [
+        55.0,
+        50.351
+      ],
+      "annulus_radii_mm": {
+        "F": 0.3,
+        "B": 0.3
+      },
+      "tented_front": true,
+      "tented_back": true,
+      "covering_openings": {
+        "F.Mask": [],
+        "B.Mask": []
+      }
+    },
+    {
+      "uuid": "11c8711b-1b4e-49d9-961a-2262c2e48216",
+      "net": "GND",
+      "center_mm": [
+        65.073,
+        68.273
+      ],
+      "annulus_radii_mm": {
+        "F": 0.3,
+        "B": 0.3
+      },
+      "tented_front": true,
+      "tented_back": true,
+      "covering_openings": {
+        "F.Mask": [],
+        "B.Mask": []
+      }
+    },
+    {
+      "uuid": "11de0c41-aa4d-4e27-b6d0-b58a933e695a",
+      "net": "GND",
+      "center_mm": [
+        62.3,
+        49.831
+      ],
+      "annulus_radii_mm": {
+        "F": 0.3,
+        "B": 0.3
+      },
+      "tented_front": true,
+      "tented_back": true,
+      "covering_openings": {
+        "F.Mask": [],
+        "B.Mask": []
+      }
+    },
+    {
+      "uuid": "12a5d360-3138-494f-90e5-356849e7db4e",
+      "net": "GND",
+      "center_mm": [
+        58.625,
+        41.708
+      ],
+      "annulus_radii_mm": {
+        "F": 0.3,
+        "B": 0.3
+      },
+      "tented_front": true,
+      "tented_back": true,
+      "covering_openings": {
+        "F.Mask": [],
+        "B.Mask": []
+      }
+    },
+    {
+      "uuid": "1397287e-c0f0-418a-955a-3ae94b88698a",
+      "net": "GND",
+      "center_mm": [
+        62.176,
+        59.953
+      ],
+      "annulus_radii_mm": {
+        "F": 0.3,
+        "B": 0.3
+      },
+      "tented_front": true,
+      "tented_back": true,
+      "covering_openings": {
+        "F.Mask": [],
+        "B.Mask": []
+      }
+    },
+    {
+      "uuid": "16b1a70f-4425-4da6-8273-01b77f6aa235",
+      "net": "GND",
+      "center_mm": [
+        75.766,
+        66.09
+      ],
+      "annulus_radii_mm": {
+        "F": 0.3,
+        "B": 0.3
+      },
+      "tented_front": true,
+      "tented_back": true,
+      "covering_openings": {
+        "F.Mask": [],
+        "B.Mask": []
+      }
+    },
+    {
+      "uuid": "1819afe9-bd05-43d8-a271-633693b4bedb",
+      "net": "GND",
+      "center_mm": [
+        63.757,
+        36.207
+      ],
+      "annulus_radii_mm": {
+        "F": 0.3,
+        "B": 0.3
+      },
+      "tented_front": true,
+      "tented_back": true,
+      "covering_openings": {
+        "F.Mask": [],
+        "B.Mask": []
+      }
+    },
+    {
+      "uuid": "20c59e2b-98b8-4b22-882d-bb0c5a48db88",
+      "net": "GND",
+      "center_mm": [
+        65.499,
+        49.601
+      ],
+      "annulus_radii_mm": {
+        "F": 0.3,
+        "B": 0.3
+      },
+      "tented_front": true,
+      "tented_back": true,
+      "covering_openings": {
+        "F.Mask": [],
+        "B.Mask": []
+      }
+    },
+    {
+      "uuid": "21c63f2c-64b2-4f2d-bd9c-bca5aa71172b",
+      "net": "GND",
+      "center_mm": [
+        69.327,
+        68.538
+      ],
+      "annulus_radii_mm": {
+        "F": 0.3,
+        "B": 0.3
+      },
+      "tented_front": true,
+      "tented_back": true,
+      "covering_openings": {
+        "F.Mask": [],
+        "B.Mask": []
+      }
+    },
+    {
+      "uuid": "25bb932c-16c3-4ec4-8314-2f9a2aafa2e0",
+      "net": "GND",
+      "center_mm": [
+        61.925,
+        72.911
+      ],
+      "annulus_radii_mm": {
+        "F": 0.3,
+        "B": 0.3
+      },
+      "tented_front": true,
+      "tented_back": true,
+      "covering_openings": {
+        "F.Mask": [],
+        "B.Mask": []
+      }
+    },
+    {
+      "uuid": "26964a10-b119-40ba-92d4-d4e9ca693078",
+      "net": "GND",
+      "center_mm": [
+        74.549,
+        65.696
+      ],
+      "annulus_radii_mm": {
+        "F": 0.3,
+        "B": 0.3
+      },
+      "tented_front": true,
+      "tented_back": true,
+      "covering_openings": {
+        "F.Mask": [],
+        "B.Mask": []
+      }
+    },
+    {
+      "uuid": "26d8b9fa-22a6-4736-8702-044d900c46e1",
+      "net": "GND",
+      "center_mm": [
+        56.029,
+        70.734
+      ],
+      "annulus_radii_mm": {
+        "F": 0.3,
+        "B": 0.3
+      },
+      "tented_front": true,
+      "tented_back": true,
+      "covering_openings": {
+        "F.Mask": [],
+        "B.Mask": []
+      }
+    },
+    {
+      "uuid": "26e5abe0-fcff-46bf-b6f5-8712708dafac",
+      "net": "GND",
+      "center_mm": [
+        72.5,
+        53.45
+      ],
+      "annulus_radii_mm": {
+        "F": 0.3,
+        "B": 0.3
+      },
+      "tented_front": true,
+      "tented_back": true,
+      "covering_openings": {
+        "F.Mask": [],
+        "B.Mask": []
+      }
+    },
+    {
+      "uuid": "2d99808b-7999-499e-ada7-ab657dcb7120",
+      "net": "GND",
+      "center_mm": [
+        70.363,
+        84.304
+      ],
+      "annulus_radii_mm": {
+        "F": 0.3,
+        "B": 0.3
+      },
+      "tented_front": true,
+      "tented_back": true,
+      "covering_openings": {
+        "F.Mask": [],
+        "B.Mask": []
+      }
+    },
+    {
+      "uuid": "2e4603ca-9450-43fb-9b0b-3b05d143786e",
+      "net": "GND",
+      "center_mm": [
+        57.803,
+        66.862
+      ],
+      "annulus_radii_mm": {
+        "F": 0.3,
+        "B": 0.3
+      },
+      "tented_front": true,
+      "tented_back": true,
+      "covering_openings": {
+        "F.Mask": [],
+        "B.Mask": []
+      }
+    },
+    {
+      "uuid": "2fae6961-7275-42b6-9f2a-0c761e5de590",
+      "net": "GND",
+      "center_mm": [
+        68.944,
+        30.586
+      ],
+      "annulus_radii_mm": {
+        "F": 0.3,
+        "B": 0.3
+      },
+      "tented_front": true,
+      "tented_back": true,
+      "covering_openings": {
+        "F.Mask": [],
+        "B.Mask": []
+      }
+    },
+    {
+      "uuid": "30ad458e-9dbe-4612-a1bd-f4dcac39e581",
+      "net": "GND",
+      "center_mm": [
+        67.98,
+        60.765
+      ],
+      "annulus_radii_mm": {
+        "F": 0.3,
+        "B": 0.3
+      },
+      "tented_front": true,
+      "tented_back": true,
+      "covering_openings": {
+        "F.Mask": [],
+        "B.Mask": []
+      }
+    },
+    {
+      "uuid": "31711835-02ce-4524-885d-37fd4bd7a217",
+      "net": "GND",
+      "center_mm": [
+        57.118,
+        45.941
+      ],
+      "annulus_radii_mm": {
+        "F": 0.3,
+        "B": 0.3
+      },
+      "tented_front": true,
+      "tented_back": true,
+      "covering_openings": {
+        "F.Mask": [],
+        "B.Mask": []
+      }
+    },
+    {
+      "uuid": "31f03d00-fa40-52bc-8e00-0907f1ae7382",
+      "net": "GND",
+      "center_mm": [
+        72.55,
+        36.9
+      ],
+      "annulus_radii_mm": {
+        "F": 0.25,
+        "B": 0.25
+      },
+      "tented_front": true,
+      "tented_back": true,
+      "covering_openings": {
+        "F.Mask": [],
+        "B.Mask": []
+      }
+    },
+    {
+      "uuid": "34577225-a0e7-46c2-94cd-83eed8e4e32c",
+      "net": "GND",
+      "center_mm": [
+        70.612,
+        32.655
+      ],
+      "annulus_radii_mm": {
+        "F": 0.3,
+        "B": 0.3
+      },
+      "tented_front": true,
+      "tented_back": true,
+      "covering_openings": {
+        "F.Mask": [],
+        "B.Mask": []
+      }
+    },
+    {
+      "uuid": "34d50688-ce8f-4ed1-a88d-cc835573c80b",
+      "net": "GND",
+      "center_mm": [
+        67.18,
+        66.209
+      ],
+      "annulus_radii_mm": {
+        "F": 0.3,
+        "B": 0.3
+      },
+      "tented_front": true,
+      "tented_back": true,
+      "covering_openings": {
+        "F.Mask": [],
+        "B.Mask": []
+      }
+    },
+    {
+      "uuid": "369a113d-3ec9-4302-b3a2-0575c3bc5b32",
+      "net": "GND",
+      "center_mm": [
+        74.322,
+        60.602
+      ],
+      "annulus_radii_mm": {
+        "F": 0.3,
+        "B": 0.3
+      },
+      "tented_front": true,
+      "tented_back": true,
+      "covering_openings": {
+        "F.Mask": [],
+        "B.Mask": []
+      }
+    },
+    {
+      "uuid": "37ac3f48-e30e-476d-8ff5-2e235e29bb9f",
+      "net": "GND",
+      "center_mm": [
+        61.931,
+        42.549
+      ],
+      "annulus_radii_mm": {
+        "F": 0.3,
+        "B": 0.3
+      },
+      "tented_front": true,
+      "tented_back": true,
+      "covering_openings": {
+        "F.Mask": [],
+        "B.Mask": []
+      }
+    },
+    {
+      "uuid": "37afa236-74ce-472b-9693-ad420388b7b1",
+      "net": "GND",
+      "center_mm": [
+        63.856,
+        39.946
+      ],
+      "annulus_radii_mm": {
+        "F": 0.3,
+        "B": 0.3
+      },
+      "tented_front": true,
+      "tented_back": true,
+      "covering_openings": {
+        "F.Mask": [],
+        "B.Mask": [
+          "pad C2.2"
+        ]
+      }
+    },
+    {
+      "uuid": "3a50cd87-3bd9-4a94-99f2-0b12f2f385c6",
+      "net": "GND",
+      "center_mm": [
+        63.218,
+        70.455
+      ],
+      "annulus_radii_mm": {
+        "F": 0.3,
+        "B": 0.3
+      },
+      "tented_front": true,
+      "tented_back": true,
+      "covering_openings": {
+        "F.Mask": [],
+        "B.Mask": []
+      }
+    },
+    {
+      "uuid": "40845570-2f7f-4e15-b0bc-47384110e9d6",
+      "net": "GND",
+      "center_mm": [
+        59.243,
+        60.155
+      ],
+      "annulus_radii_mm": {
+        "F": 0.3,
+        "B": 0.3
+      },
+      "tented_front": true,
+      "tented_back": true,
+      "covering_openings": {
+        "F.Mask": [],
+        "B.Mask": []
+      }
+    },
+    {
+      "uuid": "48948d69-e327-47a1-9bad-4d63eccaa9fd",
+      "net": "GND",
+      "center_mm": [
+        71.012,
+        62.358
+      ],
+      "annulus_radii_mm": {
+        "F": 0.3,
+        "B": 0.3
+      },
+      "tented_front": true,
+      "tented_back": true,
+      "covering_openings": {
+        "F.Mask": [],
+        "B.Mask": []
+      }
+    },
+    {
+      "uuid": "4a760ce3-2f6b-4cf9-bd55-4b89f4f8bb06",
+      "net": "GND",
+      "center_mm": [
+        67.588,
+        47.452
+      ],
+      "annulus_radii_mm": {
+        "F": 0.3,
+        "B": 0.3
+      },
+      "tented_front": true,
+      "tented_back": true,
+      "covering_openings": {
+        "F.Mask": [],
+        "B.Mask": [
+          "pad C5.2"
+        ]
+      }
+    },
+    {
+      "uuid": "51c1f328-946d-4172-abc1-7d27a8edf354",
+      "net": "GND",
+      "center_mm": [
+        72.476,
+        37.635
+      ],
+      "annulus_radii_mm": {
+        "F": 0.3,
+        "B": 0.3
+      },
+      "tented_front": true,
+      "tented_back": true,
+      "covering_openings": {
+        "F.Mask": [],
+        "B.Mask": []
+      }
+    },
+    {
+      "uuid": "53f723fc-0789-4808-bc5f-268a7b7cb4b1",
+      "net": "GND",
+      "center_mm": [
+        68.542,
+        48.708
+      ],
+      "annulus_radii_mm": {
+        "F": 0.3,
+        "B": 0.3
+      },
+      "tented_front": true,
+      "tented_back": true,
+      "covering_openings": {
+        "F.Mask": [],
+        "B.Mask": []
+      }
+    },
+    {
+      "uuid": "56cc68d0-4695-4ea1-83ad-7cba0430de38",
+      "net": "GND",
+      "center_mm": [
+        63.823,
+        41.571
+      ],
+      "annulus_radii_mm": {
+        "F": 0.3,
+        "B": 0.3
+      },
+      "tented_front": true,
+      "tented_back": true,
+      "covering_openings": {
+        "F.Mask": [],
+        "B.Mask": []
+      }
+    },
+    {
+      "uuid": "65647ee5-d285-4e1e-8196-63e441d5a323",
+      "net": "GND",
+      "center_mm": [
+        60.215,
+        63.993
+      ],
+      "annulus_radii_mm": {
+        "F": 0.3,
+        "B": 0.3
+      },
+      "tented_front": true,
+      "tented_back": true,
+      "covering_openings": {
+        "F.Mask": [
+          "pad U2.23"
+        ],
+        "B.Mask": []
+      }
+    },
+    {
+      "uuid": "676d6056-23d8-4569-a18b-5cc32507d6d5",
+      "net": "GND",
+      "center_mm": [
+        65.711251,
+        41.099962
+      ],
+      "annulus_radii_mm": {
+        "F": 0.3,
+        "B": 0.3
+      },
+      "tented_front": true,
+      "tented_back": true,
+      "covering_openings": {
+        "F.Mask": [
+          "pad C16.1"
+        ],
+        "B.Mask": []
+      }
+    },
+    {
+      "uuid": "6b62f4e3-02be-4bb1-bec8-aa3891b9b225",
+      "net": "GND",
+      "center_mm": [
+        74.495,
+        47.76
+      ],
+      "annulus_radii_mm": {
+        "F": 0.3,
+        "B": 0.3
+      },
+      "tented_front": true,
+      "tented_back": true,
+      "covering_openings": {
+        "F.Mask": [],
+        "B.Mask": []
+      }
+    },
+    {
+      "uuid": "6db80ae9-a89a-43c0-982f-7aeedf662e28",
+      "net": "GND",
+      "center_mm": [
+        66.828,
+        81.282
+      ],
+      "annulus_radii_mm": {
+        "F": 0.3,
+        "B": 0.3
+      },
+      "tented_front": true,
+      "tented_back": true,
+      "covering_openings": {
+        "F.Mask": [],
+        "B.Mask": []
+      }
+    },
+    {
+      "uuid": "717b40e3-51e9-4e3d-90ec-403a09461237",
+      "net": "GND",
+      "center_mm": [
+        63.531,
+        74.797
+      ],
+      "annulus_radii_mm": {
+        "F": 0.3,
+        "B": 0.3
+      },
+      "tented_front": true,
+      "tented_back": true,
+      "covering_openings": {
+        "F.Mask": [],
+        "B.Mask": []
+      }
+    },
+    {
+      "uuid": "7233d44f-e0cb-4a2f-80f8-51eed4203107",
+      "net": "GND",
+      "center_mm": [
+        61.506,
+        85.148
+      ],
+      "annulus_radii_mm": {
+        "F": 0.3,
+        "B": 0.3
+      },
+      "tented_front": true,
+      "tented_back": true,
+      "covering_openings": {
+        "F.Mask": [],
+        "B.Mask": []
+      }
+    },
+    {
+      "uuid": "731a9fb4-6622-4c6a-ba18-438dc09adc5b",
+      "net": "GND",
+      "center_mm": [
+        58.375,
+        52.006
+      ],
+      "annulus_radii_mm": {
+        "F": 0.3,
+        "B": 0.3
+      },
+      "tented_front": true,
+      "tented_back": true,
+      "covering_openings": {
+        "F.Mask": [],
+        "B.Mask": []
+      }
+    },
+    {
+      "uuid": "78a62194-0471-45b8-b787-030afe7db3ea",
+      "net": "GND",
+      "center_mm": [
+        54.1665,
+        53.45
+      ],
+      "annulus_radii_mm": {
+        "F": 0.3,
+        "B": 0.3
+      },
+      "tented_front": true,
+      "tented_back": true,
+      "covering_openings": {
+        "F.Mask": [
+          "pad J2.2"
+        ],
+        "B.Mask": [
+          "pad J2.2"
+        ]
+      }
+    },
+    {
+      "uuid": "839c7715-480e-4339-a257-030433660756",
+      "net": "GND",
+      "center_mm": [
+        58.102,
+        32.711
+      ],
+      "annulus_radii_mm": {
+        "F": 0.3,
+        "B": 0.3
+      },
+      "tented_front": true,
+      "tented_back": true,
+      "covering_openings": {
+        "F.Mask": [],
+        "B.Mask": []
+      }
+    },
+    {
+      "uuid": "8bde6f3b-9b10-45ee-8c53-10d0599c39a2",
+      "net": "GND",
+      "center_mm": [
+        63.09,
+        66.525
+      ],
+      "annulus_radii_mm": {
+        "F": 0.3,
+        "B": 0.3
+      },
+      "tented_front": true,
+      "tented_back": true,
+      "covering_openings": {
+        "F.Mask": [],
+        "B.Mask": []
+      }
+    },
+    {
+      "uuid": "9133ca0b-9cc6-4d6b-a4c0-ea9da64df1d5",
+      "net": "GND",
+      "center_mm": [
+        68.305,
+        51.235
+      ],
+      "annulus_radii_mm": {
+        "F": 0.3,
+        "B": 0.3
+      },
+      "tented_front": true,
+      "tented_back": true,
+      "covering_openings": {
+        "F.Mask": [],
+        "B.Mask": []
+      }
+    },
+    {
+      "uuid": "915cb245-fea9-455a-9d03-1b87e1d72ae2",
+      "net": "GND",
+      "center_mm": [
+        73.799,
+        75.982
+      ],
+      "annulus_radii_mm": {
+        "F": 0.3,
+        "B": 0.3
+      },
+      "tented_front": true,
+      "tented_back": true,
+      "covering_openings": {
+        "F.Mask": [],
+        "B.Mask": []
+      }
+    },
+    {
+      "uuid": "92b8a029-0338-490b-9897-63e4983e4ae9",
+      "net": "GND",
+      "center_mm": [
+        54.3,
+        61.35
+      ],
+      "annulus_radii_mm": {
+        "F": 0.3,
+        "B": 0.3
+      },
+      "tented_front": true,
+      "tented_back": true,
+      "covering_openings": {
+        "F.Mask": [],
+        "B.Mask": []
+      }
+    },
+    {
+      "uuid": "94a8f661-8f6d-47e7-8ffd-177a5428270a",
+      "net": "GND",
+      "center_mm": [
+        62.728,
+        61.64
+      ],
+      "annulus_radii_mm": {
+        "F": 0.3,
+        "B": 0.3
+      },
+      "tented_front": true,
+      "tented_back": true,
+      "covering_openings": {
+        "F.Mask": [],
+        "B.Mask": []
+      }
+    },
+    {
+      "uuid": "96c69d44-16d8-4726-9883-9e2cd56ecd4f",
+      "net": "GND",
+      "center_mm": [
+        67.775,
+        49.861
+      ],
+      "annulus_radii_mm": {
+        "F": 0.3,
+        "B": 0.3
+      },
+      "tented_front": true,
+      "tented_back": true,
+      "covering_openings": {
+        "F.Mask": [],
+        "B.Mask": []
+      }
+    },
+    {
+      "uuid": "96d0f8c5-cacd-4704-ae1f-fcf30fdd0cd6",
+      "net": "GND",
+      "center_mm": [
+        63.82,
+        35.152
+      ],
+      "annulus_radii_mm": {
+        "F": 0.3,
+        "B": 0.3
+      },
+      "tented_front": true,
+      "tented_back": true,
+      "covering_openings": {
+        "F.Mask": [],
+        "B.Mask": []
+      }
+    },
+    {
+      "uuid": "9c1dbeda-64ec-469f-9930-83c8b6488c88",
+      "net": "GND",
+      "center_mm": [
+        69.45,
+        33.635
+      ],
+      "annulus_radii_mm": {
+        "F": 0.3,
+        "B": 0.3
+      },
+      "tented_front": true,
+      "tented_back": true,
+      "covering_openings": {
+        "F.Mask": [],
+        "B.Mask": [
+          "pad R5.2"
+        ]
+      }
+    },
+    {
+      "uuid": "9c62fa0c-12d4-45c6-b4af-71d1594c9fd3",
+      "net": "GND",
+      "center_mm": [
+        57.936,
+        58.943
+      ],
+      "annulus_radii_mm": {
+        "F": 0.3,
+        "B": 0.3
+      },
+      "tented_front": true,
+      "tented_back": true,
+      "covering_openings": {
+        "F.Mask": [],
+        "B.Mask": []
+      }
+    },
+    {
+      "uuid": "9ed60aaf-ea41-4256-bde4-9661188f60ee",
+      "net": "GND",
+      "center_mm": [
+        68.341,
+        44.754
+      ],
+      "annulus_radii_mm": {
+        "F": 0.3,
+        "B": 0.3
+      },
+      "tented_front": true,
+      "tented_back": true,
+      "covering_openings": {
+        "F.Mask": [],
+        "B.Mask": [
+          "pad C5.2"
+        ]
+      }
+    },
+    {
+      "uuid": "9fccd6ce-6336-4ac2-8c67-2db8f425b760",
+      "net": "GND",
+      "center_mm": [
+        63.311,
+        56.392
+      ],
+      "annulus_radii_mm": {
+        "F": 0.3,
+        "B": 0.3
+      },
+      "tented_front": true,
+      "tented_back": true,
+      "covering_openings": {
+        "F.Mask": [],
+        "B.Mask": []
+      }
+    },
+    {
+      "uuid": "a030cade-d599-496b-9634-28771af2e21a",
+      "net": "GND",
+      "center_mm": [
+        72.038,
+        49.091
+      ],
+      "annulus_radii_mm": {
+        "F": 0.3,
+        "B": 0.3
+      },
+      "tented_front": true,
+      "tented_back": true,
+      "covering_openings": {
+        "F.Mask": [],
+        "B.Mask": []
+      }
+    },
+    {
+      "uuid": "a4570829-3d4d-4240-af68-c032e3a0feb8",
+      "net": "GND",
+      "center_mm": [
+        57.721,
+        64.014
+      ],
+      "annulus_radii_mm": {
+        "F": 0.3,
+        "B": 0.3
+      },
+      "tented_front": true,
+      "tented_back": true,
+      "covering_openings": {
+        "F.Mask": [],
+        "B.Mask": []
+      }
+    },
+    {
+      "uuid": "a6243bdc-054f-43e1-b427-7b45f3cafa70",
+      "net": "GND",
+      "center_mm": [
+        55.834,
+        79.721
+      ],
+      "annulus_radii_mm": {
+        "F": 0.3,
+        "B": 0.3
+      },
+      "tented_front": true,
+      "tented_back": true,
+      "covering_openings": {
+        "F.Mask": [],
+        "B.Mask": []
+      }
+    },
+    {
+      "uuid": "aad4e829-ffe8-419d-8fe6-78018809a863",
+      "net": "GND",
+      "center_mm": [
+        61.507,
+        38.174
+      ],
+      "annulus_radii_mm": {
+        "F": 0.3,
+        "B": 0.3
+      },
+      "tented_front": true,
+      "tented_back": true,
+      "covering_openings": {
+        "F.Mask": [],
+        "B.Mask": []
+      }
+    },
+    {
+      "uuid": "b117dc76-c1aa-4383-84c4-b10c84290926",
+      "net": "GND",
+      "center_mm": [
+        75.8255,
+        53.45
+      ],
+      "annulus_radii_mm": {
+        "F": 0.3,
+        "B": 0.3
+      },
+      "tented_front": true,
+      "tented_back": true,
+      "covering_openings": {
+        "F.Mask": [
+          "pad J1.2"
+        ],
+        "B.Mask": [
+          "pad J1.2"
+        ]
+      }
+    },
+    {
+      "uuid": "b1a0a468-5a86-4dcb-8eba-82fff520d7e5",
+      "net": "GND",
+      "center_mm": [
+        68.536,
+        73.457
+      ],
+      "annulus_radii_mm": {
+        "F": 0.3,
+        "B": 0.3
+      },
+      "tented_front": true,
+      "tented_back": true,
+      "covering_openings": {
+        "F.Mask": [],
+        "B.Mask": []
+      }
+    },
+    {
+      "uuid": "bd5ce749-5087-47f6-9f33-1d77079cd60a",
+      "net": "GND",
+      "center_mm": [
+        75.141,
+        83.85
+      ],
+      "annulus_radii_mm": {
+        "F": 0.3,
+        "B": 0.3
+      },
+      "tented_front": true,
+      "tented_back": true,
+      "covering_openings": {
+        "F.Mask": [],
+        "B.Mask": []
+      }
+    },
+    {
+      "uuid": "c0a3af08-f24e-40e7-b9e3-091c343e44b1",
+      "net": "GND",
+      "center_mm": [
+        59.083,
+        38.185
+      ],
+      "annulus_radii_mm": {
+        "F": 0.3,
+        "B": 0.3
+      },
+      "tented_front": true,
+      "tented_back": true,
+      "covering_openings": {
+        "F.Mask": [],
+        "B.Mask": []
+      }
+    },
+    {
+      "uuid": "c0b021c8-a655-4325-9a70-296702ff486c",
+      "net": "GND",
+      "center_mm": [
+        55.698529,
+        62.469732
+      ],
+      "annulus_radii_mm": {
+        "F": 0.3,
+        "B": 0.3
+      },
+      "tented_front": true,
+      "tented_back": true,
+      "covering_openings": {
+        "F.Mask": [],
+        "B.Mask": []
+      }
+    },
+    {
+      "uuid": "c4530ce1-5cce-4912-870b-345cf24d1d2a",
+      "net": "GND",
+      "center_mm": [
+        54.369,
+        76.14
+      ],
+      "annulus_radii_mm": {
+        "F": 0.3,
+        "B": 0.3
+      },
+      "tented_front": true,
+      "tented_back": true,
+      "covering_openings": {
+        "F.Mask": [],
+        "B.Mask": []
+      }
+    },
+    {
+      "uuid": "c666aaaa-1670-4485-9af9-c451f9ade9ca",
+      "net": "GND",
+      "center_mm": [
+        63.195,
+        59.175
+      ],
+      "annulus_radii_mm": {
+        "F": 0.3,
+        "B": 0.3
+      },
+      "tented_front": true,
+      "tented_back": true,
+      "covering_openings": {
+        "F.Mask": [],
+        "B.Mask": []
+      }
+    },
+    {
+      "uuid": "c97ff2de-8804-4860-8d97-7af760d8bd4c",
+      "net": "GND",
+      "center_mm": [
+        55.6,
+        74.605
+      ],
+      "annulus_radii_mm": {
+        "F": 0.3,
+        "B": 0.3
+      },
+      "tented_front": true,
+      "tented_back": true,
+      "covering_openings": {
+        "F.Mask": [],
+        "B.Mask": []
+      }
+    },
+    {
+      "uuid": "cc1ebe29-cc66-48db-9b8d-f992f6eaeb26",
+      "net": "GND",
+      "center_mm": [
+        61.915,
+        41.507
+      ],
+      "annulus_radii_mm": {
+        "F": 0.3,
+        "B": 0.3
+      },
+      "tented_front": true,
+      "tented_back": true,
+      "covering_openings": {
+        "F.Mask": [],
+        "B.Mask": []
+      }
+    },
+    {
+      "uuid": "cd1778a3-c29f-4ee4-b37f-b396b36ebc34",
+      "net": "GND",
+      "center_mm": [
+        58.977,
+        62.755
+      ],
+      "annulus_radii_mm": {
+        "F": 0.3,
+        "B": 0.3
+      },
+      "tented_front": true,
+      "tented_back": true,
+      "covering_openings": {
+        "F.Mask": [
+          "pad C7.1"
+        ],
+        "B.Mask": []
+      }
+    },
+    {
+      "uuid": "cdba3f07-3e5c-4aa1-bc47-64df7b103fba",
+      "net": "GND",
+      "center_mm": [
+        60.249,
+        66.642
+      ],
+      "annulus_radii_mm": {
+        "F": 0.3,
+        "B": 0.3
+      },
+      "tented_front": true,
+      "tented_back": true,
+      "covering_openings": {
+        "F.Mask": [],
+        "B.Mask": []
+      }
+    },
+    {
+      "uuid": "ce824b12-0634-451a-97a2-43df735d86e1",
+      "net": "GND",
+      "center_mm": [
+        72.5,
+        41.65
+      ],
+      "annulus_radii_mm": {
+        "F": 0.3,
+        "B": 0.3
+      },
+      "tented_front": true,
+      "tented_back": true,
+      "covering_openings": {
+        "F.Mask": [],
+        "B.Mask": []
+      }
+    },
+    {
+      "uuid": "d1e5fcb2-1f4f-4285-876f-b0fd3e90ca5a",
+      "net": "GND",
+      "center_mm": [
+        54.335,
+        67.523372
+      ],
+      "annulus_radii_mm": {
+        "F": 0.3,
+        "B": 0.3
+      },
+      "tented_front": true,
+      "tented_back": true,
+      "covering_openings": {
+        "F.Mask": [],
+        "B.Mask": []
+      }
+    },
+    {
+      "uuid": "da9f4637-2506-4cfe-abda-450753598dd3",
+      "net": "GND",
+      "center_mm": [
+        73.968,
+        81.485
+      ],
+      "annulus_radii_mm": {
+        "F": 0.3,
+        "B": 0.3
+      },
+      "tented_front": true,
+      "tented_back": true,
+      "covering_openings": {
+        "F.Mask": [],
+        "B.Mask": []
+      }
+    },
+    {
+      "uuid": "de4a166e-d8f9-4212-bf08-3b1693e3c8b7",
+      "net": "GND",
+      "center_mm": [
+        57.632,
+        40.68
+      ],
+      "annulus_radii_mm": {
+        "F": 0.3,
+        "B": 0.3
+      },
+      "tented_front": true,
+      "tented_back": true,
+      "covering_openings": {
+        "F.Mask": [],
+        "B.Mask": []
+      }
+    },
+    {
+      "uuid": "e1e21375-ec74-4eb9-b781-fd5f3d0fde1e",
+      "net": "GND",
+      "center_mm": [
+        56.927,
+        77.796
+      ],
+      "annulus_radii_mm": {
+        "F": 0.3,
+        "B": 0.3
+      },
+      "tented_front": true,
+      "tented_back": true,
+      "covering_openings": {
+        "F.Mask": [],
+        "B.Mask": []
+      }
+    },
+    {
+      "uuid": "e501f956-1209-4097-8690-10b74893b5d8",
+      "net": "GND",
+      "center_mm": [
+        65.829,
+        83.357
+      ],
+      "annulus_radii_mm": {
+        "F": 0.3,
+        "B": 0.3
+      },
+      "tented_front": true,
+      "tented_back": true,
+      "covering_openings": {
+        "F.Mask": [],
+        "B.Mask": []
+      }
+    },
+    {
+      "uuid": "e57d7f71-2278-444f-995f-156723a1a4cb",
+      "net": "GND",
+      "center_mm": [
+        55.804,
+        47.868
+      ],
+      "annulus_radii_mm": {
+        "F": 0.3,
+        "B": 0.3
+      },
+      "tented_front": true,
+      "tented_back": true,
+      "covering_openings": {
+        "F.Mask": [],
+        "B.Mask": []
+      }
+    },
+    {
+      "uuid": "ec3784c4-56c8-4a69-afa8-99cda8f30677",
+      "net": "GND",
+      "center_mm": [
+        64.251002,
+        42.415998
+      ],
+      "annulus_radii_mm": {
+        "F": 0.3,
+        "B": 0.3
+      },
+      "tented_front": true,
+      "tented_back": true,
+      "covering_openings": {
+        "F.Mask": [],
+        "B.Mask": []
+      }
+    },
+    {
+      "uuid": "ee0896b9-e47f-4385-9278-d220305f5b09",
+      "net": "GND",
+      "center_mm": [
+        68.7205,
+        58.9915
+      ],
+      "annulus_radii_mm": {
+        "F": 0.3,
+        "B": 0.3
+      },
+      "tented_front": true,
+      "tented_back": true,
+      "covering_openings": {
+        "F.Mask": [],
+        "B.Mask": []
+      }
+    },
+    {
+      "uuid": "efd8b323-a14a-43cc-b31b-6c7b5d7ef75a",
+      "net": "GND",
+      "center_mm": [
+        61.963,
+        35.461
+      ],
+      "annulus_radii_mm": {
+        "F": 0.3,
+        "B": 0.3
+      },
+      "tented_front": true,
+      "tented_back": true,
+      "covering_openings": {
+        "F.Mask": [],
+        "B.Mask": []
+      }
+    },
+    {
+      "uuid": "f6bc55cb-d86d-4bc2-9d3b-43d25b522423",
+      "net": "GND",
+      "center_mm": [
+        69.931,
+        70.667
+      ],
+      "annulus_radii_mm": {
+        "F": 0.3,
+        "B": 0.3
+      },
+      "tented_front": true,
+      "tented_back": true,
+      "covering_openings": {
+        "F.Mask": [],
+        "B.Mask": []
+      }
+    },
+    {
+      "uuid": "fd7d96a4-d03b-4ff8-b1f7-85baa8a1a566",
+      "net": "GND",
+      "center_mm": [
+        70.714,
+        54.823
+      ],
+      "annulus_radii_mm": {
+        "F": 0.3,
+        "B": 0.3
+      },
+      "tented_front": true,
+      "tented_back": true,
+      "covering_openings": {
+        "F.Mask": [],
+        "B.Mask": []
+      }
+    },
+    {
+      "uuid": "fe7e7fd2-70a7-4476-bfef-8da5c7879d6f",
+      "net": "GND",
+      "center_mm": [
+        59.209,
+        54.46
+      ],
+      "annulus_radii_mm": {
+        "F": 0.3,
+        "B": 0.3
+      },
+      "tented_front": true,
+      "tented_back": true,
+      "covering_openings": {
+        "F.Mask": [],
+        "B.Mask": []
+      }
+    },
+    {
+      "uuid": "11dcade4-d7f5-4286-9ac5-3c52a47af1c4",
+      "net": "+3.3V",
+      "center_mm": [
+        59.06,
+        63.907
+      ],
+      "annulus_radii_mm": {
+        "F": 0.3,
+        "B": 0.3
+      },
+      "tented_front": true,
+      "tented_back": true,
+      "covering_openings": {
+        "F.Mask": [
+          "pad U2.24"
+        ],
+        "B.Mask": []
+      }
+    },
+    {
+      "uuid": "3fcd3c9e-7799-5a08-9f7b-9fb708bd9814",
+      "net": "+3.3V",
+      "center_mm": [
+        74.025,
+        36.85
+      ],
+      "annulus_radii_mm": {
+        "F": 0.25,
+        "B": 0.25
+      },
+      "tented_front": true,
+      "tented_back": true,
+      "covering_openings": {
+        "F.Mask": [],
+        "B.Mask": []
+      }
+    },
+    {
+      "uuid": "5672c66f-23e1-4387-9eb3-49cc07a3fbf1",
+      "net": "+3.3V",
+      "center_mm": [
+        71.009593,
+        42.107097
+      ],
+      "annulus_radii_mm": {
+        "F": 0.3,
+        "B": 0.3
+      },
+      "tented_front": true,
+      "tented_back": true,
+      "covering_openings": {
+        "F.Mask": [
+          "pad C12.2"
+        ],
+        "B.Mask": []
+      }
+    },
+    {
+      "uuid": "a240e127-e26f-5f29-b95a-eeeca2eb6006",
+      "net": "+3.3V",
+      "center_mm": [
+        69.85,
+        39.2
+      ],
+      "annulus_radii_mm": {
+        "F": 0.25,
+        "B": 0.25
+      },
+      "tented_front": true,
+      "tented_back": true,
+      "covering_openings": {
+        "F.Mask": [],
+        "B.Mask": []
+      }
+    },
+    {
+      "uuid": "b68e80b8-06f0-4ece-8d98-c7c175754877",
+      "net": "+3.3V",
+      "center_mm": [
+        65.903,
+        72.81
+      ],
+      "annulus_radii_mm": {
+        "F": 0.3,
+        "B": 0.3
+      },
+      "tented_front": true,
+      "tented_back": true,
+      "covering_openings": {
+        "F.Mask": [],
+        "B.Mask": []
+      }
+    },
+    {
+      "uuid": "cd022b26-777a-4397-9ec5-46ef5bd750ea",
+      "net": "+3.3V",
+      "center_mm": [
+        62.138,
+        67.221
+      ],
+      "annulus_radii_mm": {
+        "F": 0.3,
+        "B": 0.3
+      },
+      "tented_front": true,
+      "tented_back": true,
+      "covering_openings": {
+        "F.Mask": [],
+        "B.Mask": []
+      }
+    },
+    {
+      "uuid": "cf17d991-1121-4118-af03-dd6ee7363ed1",
+      "net": "+3.3V",
+      "center_mm": [
+        63.677,
+        54.312
+      ],
+      "annulus_radii_mm": {
+        "F": 0.3,
+        "B": 0.3
+      },
+      "tented_front": true,
+      "tented_back": true,
+      "covering_openings": {
+        "F.Mask": [],
+        "B.Mask": []
+      }
+    },
+    {
+      "uuid": "e039195d-87bc-4bab-b43c-1df66d4534da",
+      "net": "+3.3V",
+      "center_mm": [
+        72.0,
+        40.864
+      ],
+      "annulus_radii_mm": {
+        "F": 0.3,
+        "B": 0.3
+      },
+      "tented_front": true,
+      "tented_back": true,
+      "covering_openings": {
+        "F.Mask": [],
+        "B.Mask": []
+      }
+    },
+    {
+      "uuid": "f9adcc9d-2e2d-4e5d-bde5-b769c57286e8",
+      "net": "+3.3V",
+      "center_mm": [
+        68.553,
+        42.199
+      ],
+      "annulus_radii_mm": {
+        "F": 0.3,
+        "B": 0.3
+      },
+      "tented_front": true,
+      "tented_back": true,
+      "covering_openings": {
+        "F.Mask": [],
+        "B.Mask": []
+      }
+    },
+    {
+      "uuid": "516f550e-f9e7-4cf7-9146-a2ad18dfe7e4",
+      "net": "Net-(U3-VCC)",
+      "center_mm": [
+        58.322,
+        48.41
+      ],
+      "annulus_radii_mm": {
+        "F": 0.3,
+        "B": 0.3
+      },
+      "tented_front": true,
+      "tented_back": true,
+      "covering_openings": {
+        "F.Mask": [],
+        "B.Mask": []
+      }
+    },
+    {
+      "uuid": "bc8001e7-6df3-447f-aa26-de4355df5235",
+      "net": "Net-(U3-VCC)",
+      "center_mm": [
+        64.336,
+        48.58
+      ],
+      "annulus_radii_mm": {
+        "F": 0.3,
+        "B": 0.3
+      },
+      "tented_front": true,
+      "tented_back": true,
+      "covering_openings": {
+        "F.Mask": [],
+        "B.Mask": []
+      }
+    },
+    {
+      "uuid": "79c64984-dd1a-4707-b8a8-36d9281bbc7f",
+      "net": "SDA",
+      "center_mm": [
+        67.188702,
+        75.050298
+      ],
+      "annulus_radii_mm": {
+        "F": 0.3,
+        "B": 0.3
+      },
+      "tented_front": true,
+      "tented_back": true,
+      "covering_openings": {
+        "F.Mask": [],
+        "B.Mask": []
+      }
+    },
+    {
+      "uuid": "b230a14e-a65e-49ca-b554-5f2d9f658df9",
+      "net": "SDA",
+      "center_mm": [
+        74.173,
+        80.064
+      ],
+      "annulus_radii_mm": {
+        "F": 0.3,
+        "B": 0.3
+      },
+      "tented_front": true,
+      "tented_back": true,
+      "covering_openings": {
+        "F.Mask": [],
+        "B.Mask": []
+      }
+    },
+    {
+      "uuid": "e7c56964-162b-4c5e-a0b4-e539313b218b",
+      "net": "SDA",
+      "center_mm": [
+        73.4,
+        39.9
+      ],
+      "annulus_radii_mm": {
+        "F": 0.3,
+        "B": 0.3
+      },
+      "tented_front": true,
+      "tented_back": true,
+      "covering_openings": {
+        "F.Mask": [],
+        "B.Mask": []
+      }
+    },
+    {
+      "uuid": "f257286f-2bb6-4760-8d0d-0459541fb64c",
+      "net": "SDA",
+      "center_mm": [
+        73.838,
+        41.75
+      ],
+      "annulus_radii_mm": {
+        "F": 0.3,
+        "B": 0.3
+      },
+      "tented_front": true,
+      "tented_back": true,
+      "covering_openings": {
+        "F.Mask": [],
+        "B.Mask": []
+      }
+    },
+    {
+      "uuid": "1c76f756-7ff4-4974-8969-fe9951935ea2",
+      "net": "SCL",
+      "center_mm": [
+        64.191,
+        57.278
+      ],
+      "annulus_radii_mm": {
+        "F": 0.3,
+        "B": 0.3
+      },
+      "tented_front": true,
+      "tented_back": true,
+      "covering_openings": {
+        "F.Mask": [],
+        "B.Mask": []
+      }
+    },
+    {
+      "uuid": "49fb8782-418d-4503-8247-8b55774f10e9",
+      "net": "SCL",
+      "center_mm": [
+        74.202,
+        76.756
+      ],
+      "annulus_radii_mm": {
+        "F": 0.3,
+        "B": 0.3
+      },
+      "tented_front": true,
+      "tented_back": true,
+      "covering_openings": {
+        "F.Mask": [],
+        "B.Mask": []
+      }
+    },
+    {
+      "uuid": "5932aabb-d657-4502-880b-69e06a485e97",
+      "net": "SCL",
+      "center_mm": [
+        74.463,
+        41.267386
+      ],
+      "annulus_radii_mm": {
+        "F": 0.3,
+        "B": 0.3
+      },
+      "tented_front": true,
+      "tented_back": true,
+      "covering_openings": {
+        "F.Mask": [],
+        "B.Mask": []
+      }
+    },
+    {
+      "uuid": "64ae0245-c864-5a89-937f-95f0ac7d31ff",
+      "net": "SCL",
+      "center_mm": [
+        73.8,
+        38.05
+      ],
+      "annulus_radii_mm": {
+        "F": 0.25,
+        "B": 0.25
+      },
+      "tented_front": true,
+      "tented_back": true,
+      "covering_openings": {
+        "F.Mask": [],
+        "B.Mask": []
+      }
+    },
+    {
+      "uuid": "667f49f8-c058-4167-9173-801121286f3c",
+      "net": "SCL",
+      "center_mm": [
+        67.279,
+        56.714
+      ],
+      "annulus_radii_mm": {
+        "F": 0.3,
+        "B": 0.3
+      },
+      "tented_front": true,
+      "tented_back": true,
+      "covering_openings": {
+        "F.Mask": [],
+        "B.Mask": []
+      }
+    },
+    {
+      "uuid": "bf544cf4-2678-48da-9c5e-81f1ef812194",
+      "net": "SCL",
+      "center_mm": [
+        70.586,
+        68.431
+      ],
+      "annulus_radii_mm": {
+        "F": 0.3,
+        "B": 0.3
+      },
+      "tented_front": true,
+      "tented_back": true,
+      "covering_openings": {
+        "F.Mask": [],
+        "B.Mask": []
+      }
+    },
+    {
+      "uuid": "c55464f6-dcbe-48d5-ac9c-b1e3dbb102b7",
+      "net": "SCL",
+      "center_mm": [
+        66.138,
+        75.287
+      ],
+      "annulus_radii_mm": {
+        "F": 0.3,
+        "B": 0.3
+      },
+      "tented_front": true,
+      "tented_back": true,
+      "covering_openings": {
+        "F.Mask": [],
+        "B.Mask": []
+      }
+    },
+    {
+      "uuid": "d49f9a10-8bee-4ddd-abb3-b20cd72ebdb5",
+      "net": "SCL",
+      "center_mm": [
+        63.435,
+        60.013
+      ],
+      "annulus_radii_mm": {
+        "F": 0.3,
+        "B": 0.3
+      },
+      "tented_front": true,
+      "tented_back": true,
+      "covering_openings": {
+        "F.Mask": [],
+        "B.Mask": []
+      }
+    },
+    {
+      "uuid": "e4cbef61-4b24-594f-b219-99e06e3518ab",
+      "net": "SCL",
+      "center_mm": [
+        73.0,
+        39.275
+      ],
+      "annulus_radii_mm": {
+        "F": 0.25,
+        "B": 0.25
+      },
+      "tented_front": true,
+      "tented_back": true,
+      "covering_openings": {
+        "F.Mask": [],
+        "B.Mask": []
+      }
+    },
+    {
+      "uuid": "3f781e82-4a6f-48cf-9149-826ed6ece56a",
+      "net": "+SOLAR",
+      "center_mm": [
+        54.0,
+        64.35
+      ],
+      "annulus_radii_mm": {
+        "F": 0.3,
+        "B": 0.3
+      },
+      "tented_front": true,
+      "tented_back": true,
+      "covering_openings": {
+        "F.Mask": [],
+        "B.Mask": []
+      }
+    },
+    {
+      "uuid": "a7008958-12de-4502-bea0-8024774ae913",
+      "net": "+SOLAR",
+      "center_mm": [
+        54.781,
+        58.032
+      ],
+      "annulus_radii_mm": {
+        "F": 0.3,
+        "B": 0.3
+      },
+      "tented_front": true,
+      "tented_back": true,
+      "covering_openings": {
+        "F.Mask": [],
+        "B.Mask": []
+      }
+    },
+    {
+      "uuid": "c3bd2d04-d137-461d-b0f2-46161b3136c2",
+      "net": "+SOLAR",
+      "center_mm": [
+        54.0,
+        78.5
+      ],
+      "annulus_radii_mm": {
+        "F": 0.3,
+        "B": 0.3
+      },
+      "tented_front": true,
+      "tented_back": true,
+      "covering_openings": {
+        "F.Mask": [],
+        "B.Mask": []
+      }
+    },
+    {
+      "uuid": "0147ca8d-d54f-42f9-b083-220b41c5d186",
+      "net": "PA15",
+      "center_mm": [
+        57.945,
+        78.481
+      ],
+      "annulus_radii_mm": {
+        "F": 0.3,
+        "B": 0.3
+      },
+      "tented_front": true,
+      "tented_back": true,
+      "covering_openings": {
+        "F.Mask": [],
+        "B.Mask": []
+      }
+    },
+    {
+      "uuid": "fecec221-bd40-4413-8eef-14584aba0c38",
+      "net": "PA15",
+      "center_mm": [
+        57.424,
+        80.945
+      ],
+      "annulus_radii_mm": {
+        "F": 0.3,
+        "B": 0.3
+      },
+      "tented_front": true,
+      "tented_back": true,
+      "covering_openings": {
+        "F.Mask": [],
+        "B.Mask": []
+      }
+    },
+    {
+      "uuid": "0ce57ab0-bfa1-4331-8493-ef866f1ed743",
+      "net": "PA8",
+      "center_mm": [
+        65.534,
+        59.807
+      ],
+      "annulus_radii_mm": {
+        "F": 0.3,
+        "B": 0.3
+      },
+      "tented_front": true,
+      "tented_back": true,
+      "covering_openings": {
+        "F.Mask": [],
+        "B.Mask": []
+      }
+    },
+    {
+      "uuid": "22099440-ce5f-4187-ac5e-6cccfd7f3857",
+      "net": "PA8",
+      "center_mm": [
+        65.520741,
+        56.721199
+      ],
+      "annulus_radii_mm": {
+        "F": 0.3,
+        "B": 0.3
+      },
+      "tented_front": true,
+      "tented_back": true,
+      "covering_openings": {
+        "F.Mask": [],
+        "B.Mask": []
+      }
+    },
+    {
+      "uuid": "281fc163-7390-4fe7-a82b-9a49ff3adeaa",
+      "net": "PA8",
+      "center_mm": [
+        69.618,
+        62.325
+      ],
+      "annulus_radii_mm": {
+        "F": 0.3,
+        "B": 0.3
+      },
+      "tented_front": true,
+      "tented_back": true,
+      "covering_openings": {
+        "F.Mask": [],
+        "B.Mask": []
+      }
+    },
+    {
+      "uuid": "3948da7f-ee11-4de1-8e1f-f03737337e0f",
+      "net": "PA8",
+      "center_mm": [
+        67.416558,
+        53.457442
+      ],
+      "annulus_radii_mm": {
+        "F": 0.3,
+        "B": 0.3
+      },
+      "tented_front": true,
+      "tented_back": true,
+      "covering_openings": {
+        "F.Mask": [],
+        "B.Mask": []
+      }
+    },
+    {
+      "uuid": "b9349a1b-1761-4f4a-a8be-b85ac404824b",
+      "net": "PA8",
+      "center_mm": [
+        69.097,
+        39.797
+      ],
+      "annulus_radii_mm": {
+        "F": 0.3,
+        "B": 0.3
+      },
+      "tented_front": true,
+      "tented_back": true,
+      "covering_openings": {
+        "F.Mask": [],
+        "B.Mask": []
+      }
+    },
+    {
+      "uuid": "f5128181-3ded-496d-ac62-4cbda2021c59",
+      "net": "PA8",
+      "center_mm": [
+        69.314,
+        42.451
+      ],
+      "annulus_radii_mm": {
+        "F": 0.3,
+        "B": 0.3
+      },
+      "tented_front": true,
+      "tented_back": true,
+      "covering_openings": {
+        "F.Mask": [],
+        "B.Mask": []
+      }
+    },
+    {
+      "uuid": "212639cd-9b8e-40b3-939a-1dd53a75d63b",
+      "net": "VSTOR",
+      "center_mm": [
+        66.005,
+        42.824
+      ],
+      "annulus_radii_mm": {
+        "F": 0.3,
+        "B": 0.3
+      },
+      "tented_front": true,
+      "tented_back": true,
+      "covering_openings": {
+        "F.Mask": [],
+        "B.Mask": []
+      }
+    },
+    {
+      "uuid": "277f8d4a-28e7-5975-bd0c-b93b02bf2299",
+      "net": "VSTOR",
+      "center_mm": [
+        55.0,
+        65.35
+      ],
+      "annulus_radii_mm": {
+        "F": 0.25,
+        "B": 0.25
+      },
+      "tented_front": true,
+      "tented_back": true,
+      "covering_openings": {
+        "F.Mask": [],
+        "B.Mask": []
+      }
+    },
+    {
+      "uuid": "285e976a-7f40-4d68-9950-dcdf0ccdfedc",
+      "net": "VSTOR",
+      "center_mm": [
+        65.53,
+        35.592
+      ],
+      "annulus_radii_mm": {
+        "F": 0.3,
+        "B": 0.3
+      },
+      "tented_front": true,
+      "tented_back": true,
+      "covering_openings": {
+        "F.Mask": [],
+        "B.Mask": []
+      }
+    },
+    {
+      "uuid": "39289da3-43ac-54cf-9bd2-4ef0f33c14e0",
+      "net": "VSTOR",
+      "center_mm": [
+        68.15,
+        63.0
+      ],
+      "annulus_radii_mm": {
+        "F": 0.25,
+        "B": 0.25
+      },
+      "tented_front": true,
+      "tented_back": true,
+      "covering_openings": {
+        "F.Mask": [],
+        "B.Mask": []
+      }
+    },
+    {
+      "uuid": "7526237a-3dda-5724-bee9-df8d42be365e",
+      "net": "VSTOR",
+      "center_mm": [
+        66.65,
+        64.1
+      ],
+      "annulus_radii_mm": {
+        "F": 0.25,
+        "B": 0.25
+      },
+      "tented_front": true,
+      "tented_back": true,
+      "covering_openings": {
+        "F.Mask": [],
+        "B.Mask": []
+      }
+    },
+    {
+      "uuid": "b396530c-b559-55d8-8290-326f2e04abf5",
+      "net": "VSTOR",
+      "center_mm": [
+        76.2,
+        70.0
+      ],
+      "annulus_radii_mm": {
+        "F": 0.25,
+        "B": 0.25
+      },
+      "tented_front": true,
+      "tented_back": true,
+      "covering_openings": {
+        "F.Mask": [],
+        "B.Mask": []
+      }
+    },
+    {
+      "uuid": "ce149c68-a1d8-4251-b0e1-69b5d5c5c787",
+      "net": "VSTOR",
+      "center_mm": [
+        64.806,
+        37.773
+      ],
+      "annulus_radii_mm": {
+        "F": 0.3,
+        "B": 0.3
+      },
+      "tented_front": true,
+      "tented_back": true,
+      "covering_openings": {
+        "F.Mask": [],
+        "B.Mask": []
+      }
+    },
+    {
+      "uuid": "3f48bc47-4701-495e-8cc9-f1f001459e79",
+      "net": "TX",
+      "center_mm": [
+        74.371884,
+        67.326
+      ],
+      "annulus_radii_mm": {
+        "F": 0.3,
+        "B": 0.3
+      },
+      "tented_front": true,
+      "tented_back": true,
+      "covering_openings": {
+        "F.Mask": [],
+        "B.Mask": []
+      }
+    },
+    {
+      "uuid": "bebef8e6-820c-4d47-96f3-d2279c999624",
+      "net": "TX",
+      "center_mm": [
+        74.28,
+        49.767
+      ],
+      "annulus_radii_mm": {
+        "F": 0.3,
+        "B": 0.3
+      },
+      "tented_front": true,
+      "tented_back": true,
+      "covering_openings": {
+        "F.Mask": [],
+        "B.Mask": []
+      }
+    },
+    {
+      "uuid": "4ab51928-3719-4e11-86d6-f1a175016b3d",
+      "net": "RX",
+      "center_mm": [
+        73.932,
+        71.733
+      ],
+      "annulus_radii_mm": {
+        "F": 0.3,
+        "B": 0.3
+      },
+      "tented_front": true,
+      "tented_back": true,
+      "covering_openings": {
+        "F.Mask": [],
+        "B.Mask": []
+      }
+    },
+    {
+      "uuid": "666ad518-4b98-4f97-8291-23647a3a3c7d",
+      "net": "RX",
+      "center_mm": [
+        74.85,
+        51.55
+      ],
+      "annulus_radii_mm": {
+        "F": 0.3,
+        "B": 0.3
+      },
+      "tented_front": true,
+      "tented_back": true,
+      "covering_openings": {
+        "F.Mask": [],
+        "B.Mask": []
+      }
+    },
+    {
+      "uuid": "f62c47fc-845f-4b84-955e-b097243e2807",
+      "net": "RX",
+      "center_mm": [
+        73.488,
+        66.687
+      ],
+      "annulus_radii_mm": {
+        "F": 0.3,
+        "B": 0.3
+      },
+      "tented_front": true,
+      "tented_back": true,
+      "covering_openings": {
+        "F.Mask": [],
+        "B.Mask": []
+      }
+    },
+    {
+      "uuid": "f26f19a9-8ee5-48be-a25d-aaf5c25d5bec",
+      "net": "BOOT0",
+      "center_mm": [
+        71.075,
+        74.212
+      ],
+      "annulus_radii_mm": {
+        "F": 0.3,
+        "B": 0.3
+      },
+      "tented_front": true,
+      "tented_back": true,
+      "covering_openings": {
+        "F.Mask": [],
+        "B.Mask": []
+      }
+    },
+    {
+      "uuid": "0840c536-2aa8-4129-adeb-fafce4b98251",
+      "net": "PA1",
+      "center_mm": [
+        60.589,
+        69.206
+      ],
+      "annulus_radii_mm": {
+        "F": 0.3,
+        "B": 0.3
+      },
+      "tented_front": true,
+      "tented_back": true,
+      "covering_openings": {
+        "F.Mask": [],
+        "B.Mask": []
+      }
+    },
+    {
+      "uuid": "3f13681e-1aa3-4e96-86e7-d10748261e4d",
+      "net": "PA1",
+      "center_mm": [
+        55.264,
+        76.942
+      ],
+      "annulus_radii_mm": {
+        "F": 0.3,
+        "B": 0.3
+      },
+      "tented_front": true,
+      "tented_back": true,
+      "covering_openings": {
+        "F.Mask": [],
+        "B.Mask": []
+      }
+    },
+    {
+      "uuid": "f8b596ce-d768-4a35-ab3a-c5669058393f",
+      "net": "PA1",
+      "center_mm": [
+        59.598,
+        76.569
+      ],
+      "annulus_radii_mm": {
+        "F": 0.3,
+        "B": 0.3
+      },
+      "tented_front": true,
+      "tented_back": true,
+      "covering_openings": {
+        "F.Mask": [],
+        "B.Mask": []
+      }
+    },
+    {
+      "uuid": "78108dc8-75cc-4f53-ae18-85b3deaa40f7",
+      "net": "PA9",
+      "center_mm": [
+        65.392,
+        63.827
+      ],
+      "annulus_radii_mm": {
+        "F": 0.3,
+        "B": 0.3
+      },
+      "tented_front": true,
+      "tented_back": true,
+      "covering_openings": {
+        "F.Mask": [],
+        "B.Mask": []
+      }
+    },
+    {
+      "uuid": "7c950b5d-4110-452d-887c-3be26367eb03",
+      "net": "RST",
+      "center_mm": [
+        60.324,
+        85.224
+      ],
+      "annulus_radii_mm": {
+        "F": 0.3,
+        "B": 0.3
+      },
+      "tented_front": true,
+      "tented_back": true,
+      "covering_openings": {
+        "F.Mask": [],
+        "B.Mask": []
+      }
+    },
+    {
+      "uuid": "969dd266-240e-4bca-ac21-be2934b24b50",
+      "net": "RST",
+      "center_mm": [
+        61.193,
+        76.374
+      ],
+      "annulus_radii_mm": {
+        "F": 0.3,
+        "B": 0.3
+      },
+      "tented_front": true,
+      "tented_back": true,
+      "covering_openings": {
+        "F.Mask": [],
+        "B.Mask": []
+      }
+    },
+    {
+      "uuid": "02719f80-e0c7-405a-b1f9-c05d2659f21b",
+      "net": "RSTN",
+      "center_mm": [
+        56.016,
+        72.143123
+      ],
+      "annulus_radii_mm": {
+        "F": 0.3,
+        "B": 0.3
+      },
+      "tented_front": true,
+      "tented_back": true,
+      "covering_openings": {
+        "F.Mask": [],
+        "B.Mask": []
+      }
+    },
+    {
+      "uuid": "0864b351-b724-479b-805a-54dad392af49",
+      "net": "RSTN",
+      "center_mm": [
+        64.795,
+        56.384593
+      ],
+      "annulus_radii_mm": {
+        "F": 0.3,
+        "B": 0.3
+      },
+      "tented_front": true,
+      "tented_back": true,
+      "covering_openings": {
+        "F.Mask": [],
+        "B.Mask": []
+      }
+    },
+    {
+      "uuid": "af862859-e9dc-4a86-8eef-6c7ff905077f",
+      "net": "RSTN",
+      "center_mm": [
+        72.703,
+        47.555
+      ],
+      "annulus_radii_mm": {
+        "F": 0.3,
+        "B": 0.3
+      },
+      "tented_front": true,
+      "tented_back": true,
+      "covering_openings": {
+        "F.Mask": [],
+        "B.Mask": []
+      }
+    },
+    {
+      "uuid": "bac082ab-ed1d-4fe5-97fd-8fabd76e0026",
+      "net": "RSTN",
+      "center_mm": [
+        64.347942,
+        59.983942
+      ],
+      "annulus_radii_mm": {
+        "F": 0.3,
+        "B": 0.3
+      },
+      "tented_front": true,
+      "tented_back": true,
+      "covering_openings": {
+        "F.Mask": [],
+        "B.Mask": []
+      }
+    },
+    {
+      "uuid": "5e74d52c-092f-54e2-a8a2-abdf9b412949",
+      "net": "PB5",
+      "center_mm": [
+        74.525,
+        40.525
+      ],
+      "annulus_radii_mm": {
+        "F": 0.25,
+        "B": 0.25
+      },
+      "tented_front": true,
+      "tented_back": true,
+      "covering_openings": {
+        "F.Mask": [],
+        "B.Mask": []
+      }
+    },
+    {
+      "uuid": "8afca871-4b7c-4754-a314-5ce82792f84e",
+      "net": "PB5",
+      "center_mm": [
+        68.207,
+        68.01
+      ],
+      "annulus_radii_mm": {
+        "F": 0.3,
+        "B": 0.3
+      },
+      "tented_front": true,
+      "tented_back": true,
+      "covering_openings": {
+        "F.Mask": [],
+        "B.Mask": []
+      }
+    },
+    {
+      "uuid": "a17b990a-7161-457f-a9e4-73b9a5a3c17b",
+      "net": "PB5",
+      "center_mm": [
+        55.974,
+        73.141
+      ],
+      "annulus_radii_mm": {
+        "F": 0.3,
+        "B": 0.3
+      },
+      "tented_front": true,
+      "tented_back": true,
+      "covering_openings": {
+        "F.Mask": [],
+        "B.Mask": []
+      }
+    },
+    {
+      "uuid": "73a23e5a-fa7c-5183-b966-b3562595c45c",
+      "net": "/VBAT",
+      "center_mm": [
+        57.6,
+        38.95
+      ],
+      "annulus_radii_mm": {
+        "F": 0.25,
+        "B": 0.25
+      },
+      "tented_front": true,
+      "tented_back": true,
+      "covering_openings": {
+        "F.Mask": [],
+        "B.Mask": []
+      }
+    },
+    {
+      "uuid": "87acfd1f-88c6-5c67-97ab-c66a97e1b21f",
+      "net": "/VBAT",
+      "center_mm": [
+        57.6,
+        37.05
+      ],
+      "annulus_radii_mm": {
+        "F": 0.25,
+        "B": 0.25
+      },
+      "tented_front": true,
+      "tented_back": true,
+      "covering_openings": {
+        "F.Mask": [],
+        "B.Mask": []
+      }
+    },
+    {
+      "uuid": "80885518-665d-52d6-bd64-9ff182da4fff",
+      "net": "/SC_MID",
+      "center_mm": [
+        57.75,
+        45.6
+      ],
+      "annulus_radii_mm": {
+        "F": 0.25,
+        "B": 0.25
+      },
+      "tented_front": true,
+      "tented_back": true,
+      "covering_openings": {
+        "F.Mask": [],
+        "B.Mask": []
+      }
+    },
+    {
+      "uuid": "e3cdac6b-23d3-51b4-ae04-e5267171ada4",
+      "net": "/SC_MID",
+      "center_mm": [
+        59.75,
+        41.15
+      ],
+      "annulus_radii_mm": {
+        "F": 0.25,
+        "B": 0.25
+      },
+      "tented_front": true,
+      "tented_back": true,
+      "covering_openings": {
+        "F.Mask": [],
+        "B.Mask": []
+      }
+    },
+    {
+      "uuid": "dd9adc7d-9ce8-5b5f-8514-ce94e87194fa",
+      "net": "/SC_BAL_OUT",
+      "center_mm": [
+        60.9,
+        40.85
+      ],
+      "annulus_radii_mm": {
+        "F": 0.25,
+        "B": 0.25
+      },
+      "tented_front": true,
+      "tented_back": true,
+      "covering_openings": {
+        "F.Mask": [],
+        "B.Mask": []
+      }
+    },
+    {
+      "uuid": "f23dbd92-7640-5675-b144-db6a113413b6",
+      "net": "/SC_BAL_OUT",
+      "center_mm": [
+        57.5,
+        35.65
+      ],
+      "annulus_radii_mm": {
+        "F": 0.25,
+        "B": 0.25
+      },
+      "tented_front": true,
+      "tented_back": true,
+      "covering_openings": {
+        "F.Mask": [],
+        "B.Mask": []
+      }
+    }
+  ],
+  "under_U6_vias": [
+    {
+      "uuid": "0aa17cc0-147a-5bf6-8813-7fe3c47353db",
+      "net": "GND",
+      "center_mm": [
+        73.025,
+        35.1
+      ],
+      "annulus_radii_mm": {
+        "F": 0.25,
+        "B": 0.25
+      },
+      "tented_front": true,
+      "tented_back": true,
+      "covering_openings": {
+        "F.Mask": [],
+        "B.Mask": []
+      }
+    },
+    {
+      "uuid": "3fcd3c9e-7799-5a08-9f7b-9fb708bd9814",
+      "net": "+3.3V",
+      "center_mm": [
+        74.025,
+        36.85
+      ],
+      "annulus_radii_mm": {
+        "F": 0.25,
+        "B": 0.25
+      },
+      "tented_front": true,
+      "tented_back": true,
+      "covering_openings": {
+        "F.Mask": [],
+        "B.Mask": []
+      }
+    },
+    {
+      "uuid": "64ae0245-c864-5a89-937f-95f0ac7d31ff",
+      "net": "SCL",
+      "center_mm": [
+        73.8,
+        38.05
+      ],
+      "annulus_radii_mm": {
+        "F": 0.25,
+        "B": 0.25
+      },
+      "tented_front": true,
+      "tented_back": true,
+      "covering_openings": {
+        "F.Mask": [],
+        "B.Mask": []
+      }
+    }
+  ],
+  "under_U6_selection": "Copper annulus intersects maximum 2.7 x 3.75 mm body envelope",
+  "limit": "Native aperture point test includes explicit pad margins and custom graphics. Final Gerber point test/CAM remains separate; tenting is not resin filling."
+}

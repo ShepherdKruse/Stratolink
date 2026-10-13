@@ -7,7 +7,7 @@
 	(tags "capacitor")
 	(property "Reference" "C6"
 		(at 0.000001 -1.68 0)
-		(layer "F.SilkS")
+		(layer "F.Fab")
 		(hide yes)
 		(uuid "d96e7405-52ec-4c1f-836d-6993673846a3")
 		(effects

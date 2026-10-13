@@ -1,0 +1,105 @@
+{
+    "$schema": "https://schemas.kicad.org/erc.v1.json",
+    "coordinate_units": "mm",
+    "date": "2026-10-13T11:43:34",
+    "ignored_checks": [
+        {
+            "description": "Global label only appears once in the schematic",
+            "key": "single_global_label"
+        },
+        {
+            "description": "Four connection points are joined together",
+            "key": "four_way_junction"
+        },
+        {
+            "description": "SPICE model issue",
+            "key": "simulation_model_issue"
+        },
+        {
+            "description": "Assigned footprint doesn't match footprint filters",
+            "key": "footprint_filter"
+        }
+    ],
+    "included_severities": [
+        "error",
+        "warning"
+    ],
+    "kicad_version": "10.0.0",
+    "sheets": [
+        {
+            "path": "/",
+            "uuid_path": "/4d146a28-be53-49f1-b1c6-484192820e45",
+            "violations": [
+                {
+                    "description": "Local and global labels have same name",
+                    "items": [
+                        {
+                            "description": "Global Label 'GND'",
+                            "pos": {
+                                "x": 1.0541,
+                                "y": 1.9177
+                            },
+                            "uuid": "b92f1d04-2c8b-5b86-9bf0-1970d677cb05"
+                        },
+                        {
+                            "description": "Label 'GND'",
+                            "pos": {
+                                "x": 0.889,
+                                "y": 1.9431
+                            },
+                            "uuid": "40fa3a98-d96d-52c1-8065-3526eb103d57"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "same_local_global_label"
+                },
+                {
+                    "description": "Symbol pin or wire end off connection grid",
+                    "items": [
+                        {
+                            "description": "Symbol C14 Pin 1 [Passive, Line]",
+                            "pos": {
+                                "x": 1.55,
+                                "y": 1.9381
+                            },
+                            "uuid": "09be2ffb-a532-464a-b735-3417496a13de"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "endpoint_off_grid"
+                },
+                {
+                    "description": "Symbol pin or wire end off connection grid",
+                    "items": [
+                        {
+                            "description": "Symbol C23 Pin 1 [Passive, Line]",
+                            "pos": {
+                                "x": 1.7,
+                                "y": 1.9381
+                            },
+                            "uuid": "cb0fc4e1-ff1a-5368-9497-3fa620ce0553"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "endpoint_off_grid"
+                },
+                {
+                    "description": "Symbol pin or wire end off connection grid",
+                    "items": [
+                        {
+                            "description": "Symbol R27 Pin 1 [Passive, Line]",
+                            "pos": {
+                                "x": 1.85,
+                                "y": 1.8619
+                            },
+                            "uuid": "4d0d0cc7-059e-547a-80d9-ee658fa9b5c7"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "endpoint_off_grid"
+                }
+            ]
+        }
+    ],
+    "source": "stratolink.kicad_sch"
+}

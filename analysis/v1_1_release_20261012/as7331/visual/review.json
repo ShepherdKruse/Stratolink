@@ -1,0 +1,10 @@
+{
+  "pcb_sha256": "9d63500a087ef8d345c2337942106e6704d32ded953846883454bfad718adf6c",
+  "schematic_sha256": "a06740b35d07d7b81999f7ace2a7a7ff02e185ca3e46a664630bd4bbd00c54b7",
+  "review": "Root inspected full native top/bottom renders and final UV schematic crop. Green mask, no silk, copper solar polarity, retained rear capacitor and enlarged programming lands visible. UV body/aperture and adjacent passives visible without modeled body collision. Exact spacing/connectivity handled by independent numeric and native checks.",
+  "limits": "3D renders are nominal CAD visualization, not proof of physical tolerances, mask registration, solar fit or optical calibration.",
+  "images": {
+    "final-green-full.png": "b4cbb04f7916d4d668af62f029555bb6eaad4ff2e401bc6c4fc43d049f2bd70d",
+    "final-green-bottom.png": "f84878dcb83b470e1631a9f1056d0c96fccad9d0f26aeafce5e12d1bd340c625"
+  }
+}

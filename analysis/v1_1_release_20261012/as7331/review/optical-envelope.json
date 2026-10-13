@@ -1,0 +1,1474 @@
+{
+  "purpose": "Geometric lower-angle bound for existing illustrative solar geometry, not optical or structural qualification",
+  "source_sha256": "d54881036939cdadcbc841402fa829d62c2e80e0fd08c53905b5f359cf592d76",
+  "candidate_pcb_sha256": "9d63500a087ef8d345c2337942106e6704d32ded953846883454bfad718adf6c",
+  "u6_candidate_xy_mm": [
+    74.25,
+    37.1
+  ],
+  "filter_z_above_board_midplane_mm": 0.9450000000000001,
+  "active_area_half_width_mm": 0.34,
+  "filter_z_assumptions": "0.4mm PCB,1.09mm nominal packageheight,0.345mm dierecess; solderstandoffnotmodeled",
+  "all_existing_solar_parts_clear_of_10_degree_normal_cone": true,
+  "minimum_lower_bound_degrees": 24.38474236486041,
+  "part_bounds": [
+    {
+      "side": "left",
+      "part": "polymer laminate",
+      "world_bbox_mm": [
+        [
+          -33.691115106180526,
+          54.8165
+        ],
+        [
+          54.028,
+          80.36394884340318
+        ],
+        [
+          -37.5,
+          37.5
+        ]
+      ],
+      "minimum_planar_distance_mm": 25.292755608078764,
+      "maximum_above_filter_mm": 36.555,
+      "conservative_minimum_incidence_degrees": 34.6797319591518,
+      "clear_of_10deg_cone": true
+    },
+    {
+      "side": "left",
+      "part": "cosmetic cell finger 1",
+      "world_bbox_mm": [
+        [
+          -29.583056927576187,
+          49.8165
+        ],
+        [
+          54.013,
+          77.35105792310593
+        ],
+        [
+          -36.7,
+          -33.15
+        ]
+      ],
+      "minimum_planar_distance_mm": 29.243137164982823,
+      "maximum_above_filter_mm": 0,
+      "conservative_minimum_incidence_degrees": 90.0,
+      "clear_of_10deg_cone": true
+    },
+    {
+      "side": "left",
+      "part": "cosmetic cell finger 2",
+      "world_bbox_mm": [
+        [
+          -29.583056927576187,
+          49.8165
+        ],
+        [
+          54.013,
+          77.35105792310593
+        ],
+        [
+          -33.03,
+          -29.48
+        ]
+      ],
+      "minimum_planar_distance_mm": 29.243137164982823,
+      "maximum_above_filter_mm": 0,
+      "conservative_minimum_incidence_degrees": 90.0,
+      "clear_of_10deg_cone": true
+    },
+    {
+      "side": "left",
+      "part": "cosmetic cell finger 3",
+      "world_bbox_mm": [
+        [
+          -29.583056927576187,
+          49.8165
+        ],
+        [
+          54.013,
+          77.35105792310593
+        ],
+        [
+          -29.360000000000003,
+          -25.810000000000002
+        ]
+      ],
+      "minimum_planar_distance_mm": 29.243137164982823,
+      "maximum_above_filter_mm": 0,
+      "conservative_minimum_incidence_degrees": 90.0,
+      "clear_of_10deg_cone": true
+    },
+    {
+      "side": "left",
+      "part": "cosmetic cell finger 4",
+      "world_bbox_mm": [
+        [
+          -29.583056927576187,
+          49.8165
+        ],
+        [
+          54.013,
+          77.35105792310593
+        ],
+        [
+          -25.69,
+          -22.14
+        ]
+      ],
+      "minimum_planar_distance_mm": 29.243137164982823,
+      "maximum_above_filter_mm": 0,
+      "conservative_minimum_incidence_degrees": 90.0,
+      "clear_of_10deg_cone": true
+    },
+    {
+      "side": "left",
+      "part": "cosmetic cell finger 5",
+      "world_bbox_mm": [
+        [
+          -29.583056927576187,
+          49.8165
+        ],
+        [
+          54.013,
+          77.35105792310593
+        ],
+        [
+          -22.020000000000003,
+          -18.75
+        ]
+      ],
+      "minimum_planar_distance_mm": 29.243137164982823,
+      "maximum_above_filter_mm": 0,
+      "conservative_minimum_incidence_degrees": 90.0,
+      "clear_of_10deg_cone": true
+    },
+    {
+      "side": "left",
+      "part": "cosmetic cell finger 6",
+      "world_bbox_mm": [
+        [
+          -29.583056927576187,
+          49.8165
+        ],
+        [
+          54.013,
+          77.35105792310593
+        ],
+        [
+          -18.35,
+          -14.8
+        ]
+      ],
+      "minimum_planar_distance_mm": 29.243137164982823,
+      "maximum_above_filter_mm": 0,
+      "conservative_minimum_incidence_degrees": 90.0,
+      "clear_of_10deg_cone": true
+    },
+    {
+      "side": "left",
+      "part": "cosmetic cell finger 7",
+      "world_bbox_mm": [
+        [
+          -29.583056927576187,
+          49.8165
+        ],
+        [
+          54.013,
+          77.35105792310593
+        ],
+        [
+          -14.68,
+          -11.129999999999999
+        ]
+      ],
+      "minimum_planar_distance_mm": 29.243137164982823,
+      "maximum_above_filter_mm": 0,
+      "conservative_minimum_incidence_degrees": 90.0,
+      "clear_of_10deg_cone": true
+    },
+    {
+      "side": "left",
+      "part": "cosmetic cell finger 8",
+      "world_bbox_mm": [
+        [
+          -29.583056927576187,
+          49.8165
+        ],
+        [
+          54.013,
+          77.35105792310593
+        ],
+        [
+          -11.009999999999998,
+          -7.459999999999998
+        ]
+      ],
+      "minimum_planar_distance_mm": 29.243137164982823,
+      "maximum_above_filter_mm": 0,
+      "conservative_minimum_incidence_degrees": 90.0,
+      "clear_of_10deg_cone": true
+    },
+    {
+      "side": "left",
+      "part": "cosmetic cell finger 9",
+      "world_bbox_mm": [
+        [
+          -29.583056927576187,
+          49.8165
+        ],
+        [
+          54.013,
+          77.35105792310593
+        ],
+        [
+          -7.34,
+          -3.7899999999999996
+        ]
+      ],
+      "minimum_planar_distance_mm": 29.243137164982823,
+      "maximum_above_filter_mm": 0,
+      "conservative_minimum_incidence_degrees": 90.0,
+      "clear_of_10deg_cone": true
+    },
+    {
+      "side": "left",
+      "part": "cosmetic cell finger 10",
+      "world_bbox_mm": [
+        [
+          -29.583056927576187,
+          49.8165
+        ],
+        [
+          54.013,
+          77.35105792310593
+        ],
+        [
+          -3.6700000000000017,
+          -0.40000000000000135
+        ]
+      ],
+      "minimum_planar_distance_mm": 29.243137164982823,
+      "maximum_above_filter_mm": 0,
+      "conservative_minimum_incidence_degrees": 90.0,
+      "clear_of_10deg_cone": true
+    },
+    {
+      "side": "left",
+      "part": "cosmetic cell finger 11",
+      "world_bbox_mm": [
+        [
+          -29.583056927576187,
+          49.8165
+        ],
+        [
+          54.013,
+          77.35105792310593
+        ],
+        [
+          0.0,
+          3.5500000000000003
+        ]
+      ],
+      "minimum_planar_distance_mm": 29.243137164982823,
+      "maximum_above_filter_mm": 2.6050000000000004,
+      "conservative_minimum_incidence_degrees": 84.90948681763099,
+      "clear_of_10deg_cone": true
+    },
+    {
+      "side": "left",
+      "part": "cosmetic cell finger 12",
+      "world_bbox_mm": [
+        [
+          -29.583056927576187,
+          49.8165
+        ],
+        [
+          54.013,
+          77.35105792310593
+        ],
+        [
+          3.6700000000000017,
+          7.2200000000000015
+        ]
+      ],
+      "minimum_planar_distance_mm": 29.243137164982823,
+      "maximum_above_filter_mm": 6.275000000000001,
+      "conservative_minimum_incidence_degrees": 77.88910853344312,
+      "clear_of_10deg_cone": true
+    },
+    {
+      "side": "left",
+      "part": "cosmetic cell finger 13",
+      "world_bbox_mm": [
+        [
+          -29.583056927576187,
+          49.8165
+        ],
+        [
+          54.013,
+          77.35105792310593
+        ],
+        [
+          7.340000000000003,
+          10.890000000000004
+        ]
+      ],
+      "minimum_planar_distance_mm": 29.243137164982823,
+      "maximum_above_filter_mm": 9.945000000000004,
+      "conservative_minimum_incidence_degrees": 71.21786887073176,
+      "clear_of_10deg_cone": true
+    },
+    {
+      "side": "left",
+      "part": "cosmetic cell finger 14",
+      "world_bbox_mm": [
+        [
+          -29.583056927576187,
+          49.8165
+        ],
+        [
+          54.013,
+          77.35105792310593
+        ],
+        [
+          11.009999999999998,
+          14.559999999999999
+        ]
+      ],
+      "minimum_planar_distance_mm": 29.243137164982823,
+      "maximum_above_filter_mm": 13.614999999999998,
+      "conservative_minimum_incidence_degrees": 65.0342867659303,
+      "clear_of_10deg_cone": true
+    },
+    {
+      "side": "left",
+      "part": "cosmetic cell finger 15",
+      "world_bbox_mm": [
+        [
+          -29.583056927576187,
+          49.8165
+        ],
+        [
+          54.013,
+          77.35105792310593
+        ],
+        [
+          14.680000000000007,
+          17.95000000000001
+        ]
+      ],
+      "minimum_planar_distance_mm": 29.243137164982823,
+      "maximum_above_filter_mm": 17.00500000000001,
+      "conservative_minimum_incidence_degrees": 59.82182941274576,
+      "clear_of_10deg_cone": true
+    },
+    {
+      "side": "left",
+      "part": "cosmetic cell finger 16",
+      "world_bbox_mm": [
+        [
+          -29.583056927576187,
+          49.8165
+        ],
+        [
+          54.013,
+          77.35105792310593
+        ],
+        [
+          18.349999999999994,
+          21.899999999999995
+        ]
+      ],
+      "minimum_planar_distance_mm": 29.243137164982823,
+      "maximum_above_filter_mm": 20.954999999999995,
+      "conservative_minimum_incidence_degrees": 54.37543463852154,
+      "clear_of_10deg_cone": true
+    },
+    {
+      "side": "left",
+      "part": "cosmetic cell finger 17",
+      "world_bbox_mm": [
+        [
+          -29.583056927576187,
+          49.8165
+        ],
+        [
+          54.013,
+          77.35105792310593
+        ],
+        [
+          22.020000000000003,
+          25.570000000000004
+        ]
+      ],
+      "minimum_planar_distance_mm": 29.243137164982823,
+      "maximum_above_filter_mm": 24.625000000000004,
+      "conservative_minimum_incidence_degrees": 49.9000092300651,
+      "clear_of_10deg_cone": true
+    },
+    {
+      "side": "left",
+      "part": "cosmetic cell finger 18",
+      "world_bbox_mm": [
+        [
+          -29.583056927576187,
+          49.8165
+        ],
+        [
+          54.013,
+          77.35105792310593
+        ],
+        [
+          25.690000000000005,
+          29.240000000000006
+        ]
+      ],
+      "minimum_planar_distance_mm": 29.243137164982823,
+      "maximum_above_filter_mm": 28.295000000000005,
+      "conservative_minimum_incidence_degrees": 45.9440580525446,
+      "clear_of_10deg_cone": true
+    },
+    {
+      "side": "left",
+      "part": "cosmetic cell finger 19",
+      "world_bbox_mm": [
+        [
+          -29.583056927576187,
+          49.8165
+        ],
+        [
+          54.013,
+          77.35105792310593
+        ],
+        [
+          29.36,
+          32.910000000000004
+        ]
+      ],
+      "minimum_planar_distance_mm": 29.243137164982823,
+      "maximum_above_filter_mm": 31.965000000000003,
+      "conservative_minimum_incidence_degrees": 42.453793162764356,
+      "clear_of_10deg_cone": true
+    },
+    {
+      "side": "left",
+      "part": "cosmetic cell finger 20",
+      "world_bbox_mm": [
+        [
+          -29.583056927576187,
+          49.8165
+        ],
+        [
+          54.013,
+          77.35105792310593
+        ],
+        [
+          33.03,
+          36.300000000000004
+        ]
+      ],
+      "minimum_planar_distance_mm": 29.243137164982823,
+      "maximum_above_filter_mm": 35.355000000000004,
+      "conservative_minimum_incidence_degrees": 39.59512890850977,
+      "clear_of_10deg_cone": true
+    },
+    {
+      "side": "left",
+      "part": "inner NEGATIVE terminal",
+      "world_bbox_mm": [
+        [
+          49.8165,
+          54.8165
+        ],
+        [
+          54.0,
+          54.0
+        ],
+        [
+          -37.5,
+          37.5
+        ]
+      ],
+      "minimum_planar_distance_mm": 25.274400927618437,
+      "maximum_above_filter_mm": 36.555,
+      "conservative_minimum_incidence_degrees": 34.660272390784414,
+      "clear_of_10deg_cone": true
+    },
+    {
+      "side": "left",
+      "part": "outer POSITIVE terminal",
+      "world_bbox_mm": [
+        [
+          -33.70741662920177,
+          -29.590243259326776
+        ],
+        [
+          77.34022479631952,
+          80.17857399602332
+        ],
+        [
+          -37.5,
+          37.5
+        ]
+      ],
+      "minimum_planar_distance_mm": 110.92487680198994,
+      "maximum_above_filter_mm": 36.555,
+      "conservative_minimum_incidence_degrees": 71.76050081750769,
+      "clear_of_10deg_cone": true
+    },
+    {
+      "side": "left",
+      "part": "polarity minus",
+      "world_bbox_mm": [
+        [
+          52.9865,
+          53.2465
+        ],
+        [
+          53.818,
+          54.078
+        ],
+        [
+          8.0,
+          10.0
+        ]
+      ],
+      "minimum_planar_distance_mm": 26.36700810198229,
+      "maximum_above_filter_mm": 9.055,
+      "conservative_minimum_incidence_degrees": 71.04642162834817,
+      "clear_of_10deg_cone": true
+    },
+    {
+      "side": "left",
+      "part": "polarity minus",
+      "world_bbox_mm": [
+        [
+          -32.64276497147332,
+          -32.38276497147333
+        ],
+        [
+          79.13905442649437,
+          79.39905442649437
+        ],
+        [
+          8.0,
+          10.0
+        ]
+      ],
+      "minimum_planar_distance_mm": 114.17952104184273,
+      "maximum_above_filter_mm": 9.055,
+      "conservative_minimum_incidence_degrees": 85.46565170459495,
+      "clear_of_10deg_cone": true
+    },
+    {
+      "side": "left",
+      "part": "polarity plus",
+      "world_bbox_mm": [
+        [
+          -33.40496440904307,
+          -31.616467119442554
+        ],
+        [
+          78.59170533285373,
+          79.95225854348467
+        ],
+        [
+          8.87,
+          9.13
+        ]
+      ],
+      "minimum_planar_distance_mm": 113.26649157854591,
+      "maximum_above_filter_mm": 8.185,
+      "conservative_minimum_incidence_degrees": 85.86680766718521,
+      "clear_of_10deg_cone": true
+    },
+    {
+      "side": "left",
+      "part": "ground solder fillet rear",
+      "world_bbox_mm": [
+        [
+          53.5665,
+          54.7665
+        ],
+        [
+          53.3,
+          54.0
+        ],
+        [
+          -0.8,
+          -0.2
+        ]
+      ],
+      "minimum_planar_distance_mm": 24.859871122956363,
+      "maximum_above_filter_mm": 0,
+      "conservative_minimum_incidence_degrees": 90.0,
+      "clear_of_10deg_cone": true
+    },
+    {
+      "side": "left",
+      "part": "ground solder fillet front",
+      "world_bbox_mm": [
+        [
+          53.5665,
+          54.7665
+        ],
+        [
+          53.3,
+          54.0
+        ],
+        [
+          0.2,
+          0.8
+        ]
+      ],
+      "minimum_planar_distance_mm": 24.859871122956363,
+      "maximum_above_filter_mm": 0,
+      "conservative_minimum_incidence_degrees": 90.0,
+      "clear_of_10deg_cone": true
+    },
+    {
+      "side": "left",
+      "part": "positive copper lead",
+      "world_bbox_mm": [
+        [
+          -35.27533671858226,
+          55.05
+        ],
+        [
+          78.29657234499292,
+          85.25
+        ],
+        [
+          -0.8,
+          1.2499838962602534
+        ]
+      ],
+      "minimum_planar_distance_mm": 44.999545595279514,
+      "maximum_above_filter_mm": 0.30498389626025335,
+      "conservative_minimum_incidence_degrees": 89.61168446715014,
+      "clear_of_10deg_cone": true
+    },
+    {
+      "side": "left",
+      "part": "positive red insulation",
+      "world_bbox_mm": [
+        [
+          -33.927866596895605,
+          54.86258772091034
+        ],
+        [
+          81.24556824957486,
+          85.35
+        ],
+        [
+          -0.349977186977906,
+          1.3499774547643546
+        ]
+      ],
+      "minimum_planar_distance_mm": 47.76747558954498,
+      "maximum_above_filter_mm": 0.40497745476435454,
+      "conservative_minimum_incidence_degrees": 89.51425226575735,
+      "clear_of_10deg_cone": true
+    },
+    {
+      "side": "left",
+      "part": "panel positive solder",
+      "world_bbox_mm": [
+        [
+          -32.227236738814305,
+          -31.427236738814294
+        ],
+        [
+          78.10061104708356,
+          78.90061104708356
+        ],
+        [
+          -0.65,
+          0.65
+        ]
+      ],
+      "minimum_planar_distance_mm": 112.91243835154397,
+      "maximum_above_filter_mm": 0,
+      "conservative_minimum_incidence_degrees": 90.0,
+      "clear_of_10deg_cone": true
+    },
+    {
+      "side": "left",
+      "part": "positive PTH solder",
+      "world_bbox_mm": [
+        [
+          54.22,
+          55.379229556267546
+        ],
+        [
+          84.42,
+          85.58
+        ],
+        [
+          -0.43000000000000005,
+          -0.10999999999999999
+        ]
+      ],
+      "minimum_planar_distance_mm": 50.50257273880518,
+      "maximum_above_filter_mm": 0,
+      "conservative_minimum_incidence_degrees": 90.0,
+      "clear_of_10deg_cone": true
+    },
+    {
+      "side": "left",
+      "part": "positive PTH solder",
+      "world_bbox_mm": [
+        [
+          54.22,
+          55.379229556267546
+        ],
+        [
+          84.42,
+          85.58
+        ],
+        [
+          0.10999999999999999,
+          0.43000000000000005
+        ]
+      ],
+      "minimum_planar_distance_mm": 50.50257273880518,
+      "maximum_above_filter_mm": 0,
+      "conservative_minimum_incidence_degrees": 90.0,
+      "clear_of_10deg_cone": true
+    },
+    {
+      "side": "right",
+      "part": "polymer laminate",
+      "world_bbox_mm": [
+        [
+          75.1755,
+          163.68311510618054
+        ],
+        [
+          54.028,
+          80.36394884340318
+        ],
+        [
+          -37.5,
+          37.5
+        ]
+      ],
+      "minimum_planar_distance_mm": 16.598329863272383,
+      "maximum_above_filter_mm": 36.555,
+      "conservative_minimum_incidence_degrees": 24.421115268978387,
+      "clear_of_10deg_cone": true
+    },
+    {
+      "side": "right",
+      "part": "cosmetic cell finger 1",
+      "world_bbox_mm": [
+        [
+          80.1755,
+          159.57505692757618
+        ],
+        [
+          54.013,
+          77.35105792310593
+        ],
+        [
+          -36.7,
+          -33.15
+        ]
+      ],
+      "minimum_planar_distance_mm": 17.488914753351615,
+      "maximum_above_filter_mm": 0,
+      "conservative_minimum_incidence_degrees": 90.0,
+      "clear_of_10deg_cone": true
+    },
+    {
+      "side": "right",
+      "part": "cosmetic cell finger 2",
+      "world_bbox_mm": [
+        [
+          80.1755,
+          159.57505692757618
+        ],
+        [
+          54.013,
+          77.35105792310593
+        ],
+        [
+          -33.03,
+          -29.48
+        ]
+      ],
+      "minimum_planar_distance_mm": 17.488914753351615,
+      "maximum_above_filter_mm": 0,
+      "conservative_minimum_incidence_degrees": 90.0,
+      "clear_of_10deg_cone": true
+    },
+    {
+      "side": "right",
+      "part": "cosmetic cell finger 3",
+      "world_bbox_mm": [
+        [
+          80.1755,
+          159.57505692757618
+        ],
+        [
+          54.013,
+          77.35105792310593
+        ],
+        [
+          -29.360000000000003,
+          -25.810000000000002
+        ]
+      ],
+      "minimum_planar_distance_mm": 17.488914753351615,
+      "maximum_above_filter_mm": 0,
+      "conservative_minimum_incidence_degrees": 90.0,
+      "clear_of_10deg_cone": true
+    },
+    {
+      "side": "right",
+      "part": "cosmetic cell finger 4",
+      "world_bbox_mm": [
+        [
+          80.1755,
+          159.57505692757618
+        ],
+        [
+          54.013,
+          77.35105792310593
+        ],
+        [
+          -25.69,
+          -22.14
+        ]
+      ],
+      "minimum_planar_distance_mm": 17.488914753351615,
+      "maximum_above_filter_mm": 0,
+      "conservative_minimum_incidence_degrees": 90.0,
+      "clear_of_10deg_cone": true
+    },
+    {
+      "side": "right",
+      "part": "cosmetic cell finger 5",
+      "world_bbox_mm": [
+        [
+          80.1755,
+          159.57505692757618
+        ],
+        [
+          54.013,
+          77.35105792310593
+        ],
+        [
+          -22.020000000000003,
+          -18.75
+        ]
+      ],
+      "minimum_planar_distance_mm": 17.488914753351615,
+      "maximum_above_filter_mm": 0,
+      "conservative_minimum_incidence_degrees": 90.0,
+      "clear_of_10deg_cone": true
+    },
+    {
+      "side": "right",
+      "part": "cosmetic cell finger 6",
+      "world_bbox_mm": [
+        [
+          80.1755,
+          159.57505692757618
+        ],
+        [
+          54.013,
+          77.35105792310593
+        ],
+        [
+          -18.35,
+          -14.8
+        ]
+      ],
+      "minimum_planar_distance_mm": 17.488914753351615,
+      "maximum_above_filter_mm": 0,
+      "conservative_minimum_incidence_degrees": 90.0,
+      "clear_of_10deg_cone": true
+    },
+    {
+      "side": "right",
+      "part": "cosmetic cell finger 7",
+      "world_bbox_mm": [
+        [
+          80.1755,
+          159.57505692757618
+        ],
+        [
+          54.013,
+          77.35105792310593
+        ],
+        [
+          -14.68,
+          -11.129999999999999
+        ]
+      ],
+      "minimum_planar_distance_mm": 17.488914753351615,
+      "maximum_above_filter_mm": 0,
+      "conservative_minimum_incidence_degrees": 90.0,
+      "clear_of_10deg_cone": true
+    },
+    {
+      "side": "right",
+      "part": "cosmetic cell finger 8",
+      "world_bbox_mm": [
+        [
+          80.1755,
+          159.57505692757618
+        ],
+        [
+          54.013,
+          77.35105792310593
+        ],
+        [
+          -11.009999999999998,
+          -7.459999999999998
+        ]
+      ],
+      "minimum_planar_distance_mm": 17.488914753351615,
+      "maximum_above_filter_mm": 0,
+      "conservative_minimum_incidence_degrees": 90.0,
+      "clear_of_10deg_cone": true
+    },
+    {
+      "side": "right",
+      "part": "cosmetic cell finger 9",
+      "world_bbox_mm": [
+        [
+          80.1755,
+          159.57505692757618
+        ],
+        [
+          54.013,
+          77.35105792310593
+        ],
+        [
+          -7.34,
+          -3.7899999999999996
+        ]
+      ],
+      "minimum_planar_distance_mm": 17.488914753351615,
+      "maximum_above_filter_mm": 0,
+      "conservative_minimum_incidence_degrees": 90.0,
+      "clear_of_10deg_cone": true
+    },
+    {
+      "side": "right",
+      "part": "cosmetic cell finger 10",
+      "world_bbox_mm": [
+        [
+          80.1755,
+          159.57505692757618
+        ],
+        [
+          54.013,
+          77.35105792310593
+        ],
+        [
+          -3.6700000000000017,
+          -0.40000000000000135
+        ]
+      ],
+      "minimum_planar_distance_mm": 17.488914753351615,
+      "maximum_above_filter_mm": 0,
+      "conservative_minimum_incidence_degrees": 90.0,
+      "clear_of_10deg_cone": true
+    },
+    {
+      "side": "right",
+      "part": "cosmetic cell finger 11",
+      "world_bbox_mm": [
+        [
+          80.1755,
+          159.57505692757618
+        ],
+        [
+          54.013,
+          77.35105792310593
+        ],
+        [
+          0.0,
+          3.5500000000000003
+        ]
+      ],
+      "minimum_planar_distance_mm": 17.488914753351615,
+      "maximum_above_filter_mm": 2.6050000000000004,
+      "conservative_minimum_incidence_degrees": 81.52799637240527,
+      "clear_of_10deg_cone": true
+    },
+    {
+      "side": "right",
+      "part": "cosmetic cell finger 12",
+      "world_bbox_mm": [
+        [
+          80.1755,
+          159.57505692757618
+        ],
+        [
+          54.013,
+          77.35105792310593
+        ],
+        [
+          3.6700000000000017,
+          7.2200000000000015
+        ]
+      ],
+      "minimum_planar_distance_mm": 17.488914753351615,
+      "maximum_above_filter_mm": 6.275000000000001,
+      "conservative_minimum_incidence_degrees": 70.26207916526053,
+      "clear_of_10deg_cone": true
+    },
+    {
+      "side": "right",
+      "part": "cosmetic cell finger 13",
+      "world_bbox_mm": [
+        [
+          80.1755,
+          159.57505692757618
+        ],
+        [
+          54.013,
+          77.35105792310593
+        ],
+        [
+          7.340000000000003,
+          10.890000000000004
+        ]
+      ],
+      "minimum_planar_distance_mm": 17.488914753351615,
+      "maximum_above_filter_mm": 9.945000000000004,
+      "conservative_minimum_incidence_degrees": 60.375451661323446,
+      "clear_of_10deg_cone": true
+    },
+    {
+      "side": "right",
+      "part": "cosmetic cell finger 14",
+      "world_bbox_mm": [
+        [
+          80.1755,
+          159.57505692757618
+        ],
+        [
+          54.013,
+          77.35105792310593
+        ],
+        [
+          11.009999999999998,
+          14.559999999999999
+        ]
+      ],
+      "minimum_planar_distance_mm": 17.488914753351615,
+      "maximum_above_filter_mm": 13.614999999999998,
+      "conservative_minimum_incidence_degrees": 52.099487329499404,
+      "clear_of_10deg_cone": true
+    },
+    {
+      "side": "right",
+      "part": "cosmetic cell finger 15",
+      "world_bbox_mm": [
+        [
+          80.1755,
+          159.57505692757618
+        ],
+        [
+          54.013,
+          77.35105792310593
+        ],
+        [
+          14.680000000000007,
+          17.95000000000001
+        ]
+      ],
+      "minimum_planar_distance_mm": 17.488914753351615,
+      "maximum_above_filter_mm": 17.00500000000001,
+      "conservative_minimum_incidence_degrees": 45.80374913850213,
+      "clear_of_10deg_cone": true
+    },
+    {
+      "side": "right",
+      "part": "cosmetic cell finger 16",
+      "world_bbox_mm": [
+        [
+          80.1755,
+          159.57505692757618
+        ],
+        [
+          54.013,
+          77.35105792310593
+        ],
+        [
+          18.349999999999994,
+          21.899999999999995
+        ]
+      ],
+      "minimum_planar_distance_mm": 17.488914753351615,
+      "maximum_above_filter_mm": 20.954999999999995,
+      "conservative_minimum_incidence_degrees": 39.84816867541031,
+      "clear_of_10deg_cone": true
+    },
+    {
+      "side": "right",
+      "part": "cosmetic cell finger 17",
+      "world_bbox_mm": [
+        [
+          80.1755,
+          159.57505692757618
+        ],
+        [
+          54.013,
+          77.35105792310593
+        ],
+        [
+          22.020000000000003,
+          25.570000000000004
+        ]
+      ],
+      "minimum_planar_distance_mm": 17.488914753351615,
+      "maximum_above_filter_mm": 24.625000000000004,
+      "conservative_minimum_incidence_degrees": 35.38274054678141,
+      "clear_of_10deg_cone": true
+    },
+    {
+      "side": "right",
+      "part": "cosmetic cell finger 18",
+      "world_bbox_mm": [
+        [
+          80.1755,
+          159.57505692757618
+        ],
+        [
+          54.013,
+          77.35105792310593
+        ],
+        [
+          25.690000000000005,
+          29.240000000000006
+        ]
+      ],
+      "minimum_planar_distance_mm": 17.488914753351615,
+      "maximum_above_filter_mm": 28.295000000000005,
+      "conservative_minimum_incidence_degrees": 31.719881837051954,
+      "clear_of_10deg_cone": true
+    },
+    {
+      "side": "right",
+      "part": "cosmetic cell finger 19",
+      "world_bbox_mm": [
+        [
+          80.1755,
+          159.57505692757618
+        ],
+        [
+          54.013,
+          77.35105792310593
+        ],
+        [
+          29.36,
+          32.910000000000004
+        ]
+      ],
+      "minimum_planar_distance_mm": 17.488914753351615,
+      "maximum_above_filter_mm": 31.965000000000003,
+      "conservative_minimum_incidence_degrees": 28.68426008222316,
+      "clear_of_10deg_cone": true
+    },
+    {
+      "side": "right",
+      "part": "cosmetic cell finger 20",
+      "world_bbox_mm": [
+        [
+          80.1755,
+          159.57505692757618
+        ],
+        [
+          54.013,
+          77.35105792310593
+        ],
+        [
+          33.03,
+          36.300000000000004
+        ]
+      ],
+      "minimum_planar_distance_mm": 17.488914753351615,
+      "maximum_above_filter_mm": 35.355000000000004,
+      "conservative_minimum_incidence_degrees": 26.32003517258814,
+      "clear_of_10deg_cone": true
+    },
+    {
+      "side": "right",
+      "part": "inner NEGATIVE terminal",
+      "world_bbox_mm": [
+        [
+          75.1755,
+          80.1755
+        ],
+        [
+          54.0,
+          54.0
+        ],
+        [
+          -37.5,
+          37.5
+        ]
+      ],
+      "minimum_planar_distance_mm": 16.570347318327393,
+      "maximum_above_filter_mm": 36.555,
+      "conservative_minimum_incidence_degrees": 24.38474236486041,
+      "clear_of_10deg_cone": true
+    },
+    {
+      "side": "right",
+      "part": "outer POSITIVE terminal",
+      "world_bbox_mm": [
+        [
+          159.5822432593268,
+          163.69941662920178
+        ],
+        [
+          77.34022479631952,
+          80.17857399602332
+        ],
+        [
+          -37.5,
+          37.5
+        ]
+      ],
+      "minimum_planar_distance_mm": 93.8920089946392,
+      "maximum_above_filter_mm": 36.555,
+      "conservative_minimum_incidence_degrees": 68.72753132009667,
+      "clear_of_10deg_cone": true
+    },
+    {
+      "side": "right",
+      "part": "polarity minus",
+      "world_bbox_mm": [
+        [
+          76.74549999999999,
+          77.0055
+        ],
+        [
+          53.818,
+          54.078
+        ],
+        [
+          8.0,
+          10.0
+        ]
+      ],
+      "minimum_planar_distance_mm": 16.51923316168156,
+      "maximum_above_filter_mm": 9.055,
+      "conservative_minimum_incidence_degrees": 61.270696720811664,
+      "clear_of_10deg_cone": true
+    },
+    {
+      "side": "right",
+      "part": "polarity minus",
+      "world_bbox_mm": [
+        [
+          162.37476497147333,
+          162.63476497147332
+        ],
+        [
+          79.13905442649437,
+          79.39905442649437
+        ],
+        [
+          8.0,
+          10.0
+        ]
+      ],
+      "minimum_planar_distance_mm": 97.18526689349858,
+      "maximum_above_filter_mm": 9.055,
+      "conservative_minimum_incidence_degrees": 84.67697340171428,
+      "clear_of_10deg_cone": true
+    },
+    {
+      "side": "right",
+      "part": "polarity plus",
+      "world_bbox_mm": [
+        [
+          161.60846711944254,
+          163.39696440904305
+        ],
+        [
+          78.59170533285373,
+          79.95225854348467
+        ],
+        [
+          8.87,
+          9.13
+        ]
+      ],
+      "minimum_planar_distance_mm": 96.25838390301139,
+      "maximum_above_filter_mm": 8.185,
+      "conservative_minimum_incidence_degrees": 85.13974212474238,
+      "clear_of_10deg_cone": true
+    },
+    {
+      "side": "right",
+      "part": "ground solder fillet rear",
+      "world_bbox_mm": [
+        [
+          75.2255,
+          76.4255
+        ],
+        [
+          53.3,
+          54.0
+        ],
+        [
+          -0.8,
+          -0.2
+        ]
+      ],
+      "minimum_planar_distance_mm": 15.872726931753085,
+      "maximum_above_filter_mm": 0,
+      "conservative_minimum_incidence_degrees": 90.0,
+      "clear_of_10deg_cone": true
+    },
+    {
+      "side": "right",
+      "part": "ground solder fillet front",
+      "world_bbox_mm": [
+        [
+          75.2255,
+          76.4255
+        ],
+        [
+          53.3,
+          54.0
+        ],
+        [
+          0.2,
+          0.8
+        ]
+      ],
+      "minimum_planar_distance_mm": 15.872726931753085,
+      "maximum_above_filter_mm": 0,
+      "conservative_minimum_incidence_degrees": 90.0,
+      "clear_of_10deg_cone": true
+    },
+    {
+      "side": "right",
+      "part": "positive copper lead",
+      "world_bbox_mm": [
+        [
+          74.95,
+          165.26733671858227
+        ],
+        [
+          78.29657234499292,
+          85.25
+        ],
+        [
+          -0.8,
+          1.2499838933274332
+        ]
+      ],
+      "minimum_planar_distance_mm": 40.85815835034223,
+      "maximum_above_filter_mm": 0.30498389332743314,
+      "conservative_minimum_incidence_degrees": 89.57232616253891,
+      "clear_of_10deg_cone": true
+    },
+    {
+      "side": "right",
+      "part": "positive red insulation",
+      "world_bbox_mm": [
+        [
+          75.13741227908966,
+          163.91986785448324
+        ],
+        [
+          81.24556829789799,
+          85.35
+        ],
+        [
+          -0.3499771828131941,
+          1.3499774506584066
+        ]
+      ],
+      "minimum_planar_distance_mm": 43.80898850812585,
+      "maximum_above_filter_mm": 0.4049774506584065,
+      "conservative_minimum_incidence_degrees": 89.47036353505322,
+      "clear_of_10deg_cone": true
+    },
+    {
+      "side": "right",
+      "part": "panel positive solder",
+      "world_bbox_mm": [
+        [
+          161.41923673881428,
+          162.2192367388143
+        ],
+        [
+          78.10061104708356,
+          78.90061104708356
+        ],
+        [
+          -0.65,
+          0.65
+        ]
+      ],
+      "minimum_planar_distance_mm": 95.87805610966082,
+      "maximum_above_filter_mm": 0,
+      "conservative_minimum_incidence_degrees": 90.0,
+      "clear_of_10deg_cone": true
+    },
+    {
+      "side": "right",
+      "part": "positive PTH solder",
+      "world_bbox_mm": [
+        [
+          74.62,
+          75.77922955626755
+        ],
+        [
+          84.42,
+          85.58
+        ],
+        [
+          -0.43000000000000005,
+          -0.10999999999999999
+        ]
+      ],
+      "minimum_planar_distance_mm": 46.98000957854308,
+      "maximum_above_filter_mm": 0,
+      "conservative_minimum_incidence_degrees": 90.0,
+      "clear_of_10deg_cone": true
+    },
+    {
+      "side": "right",
+      "part": "positive PTH solder",
+      "world_bbox_mm": [
+        [
+          74.62,
+          75.77922955626755
+        ],
+        [
+          84.42,
+          85.58
+        ],
+        [
+          0.10999999999999999,
+          0.43000000000000005
+        ]
+      ],
+      "minimum_planar_distance_mm": 46.98000957854308,
+      "maximum_above_filter_mm": 0,
+      "conservative_minimum_incidence_degrees": 90.0,
+      "clear_of_10deg_cone": true
+    }
+  ],
+  "limitations": [
+    "Current panel/lead CAD is photo-scaled and has unmeasured real bends/thickness/wire placements.",
+    "Does not include future aperture/diffuser, actual suspension strings or clouds.",
+    "An unobstructed \u00b110degree cone is not proof that illumination outside that cone is rejected; an appropriate optical collector is still required.",
+    "Does not establish sunlight out-of-band rejection or UV calibration."
+  ]
+}

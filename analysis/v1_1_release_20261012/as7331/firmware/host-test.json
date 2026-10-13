@@ -1,0 +1,12 @@
+{
+  "dnp_cycles": 20000,
+  "optical_i2c_transactions": 0,
+  "optical_delay_calls": 0,
+  "wire_uv_invalid": "0xfe",
+  "wire_lux_invalid": "0xfffe",
+  "fitted_sensor_recovery_preserved": true,
+  "unsupported_population_compile_rejected": true,
+  "legacy_default_and_explicit_compile": true,
+  "stdout": "PASS: 20,000 DNP cycles, zero optical I2C/waits, invalid wire data; fitted-sensor failure/recovery preserved",
+  "limitations": "Host mocks; no physical DNP board, flight or AS7331 driver test."
+}

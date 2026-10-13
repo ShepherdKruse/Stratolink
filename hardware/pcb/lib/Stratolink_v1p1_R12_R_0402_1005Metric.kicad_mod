@@ -7,7 +7,7 @@
 	(tags "resistor")
 	(property "Reference" "R12"
 		(at 0 -1.17 180)
-		(layer "F.SilkS")
+		(layer "F.Fab")
 		(hide yes)
 		(uuid "81d27994-e8a7-4c93-afa5-ff775bfb099f")
 		(effects

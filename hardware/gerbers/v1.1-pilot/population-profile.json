@@ -1,0 +1,10 @@
+{
+  "name": "v1.1 AS7331-layout pilot — U6 omitted, support circuit fitted",
+  "omit": {
+    "U6": {
+      "mpn": "AS7331-AQFM",
+      "lcsc": "C20482877",
+      "reason": "User-approved initial pilot omission because the exact sensor has no JLC inventory. Populate R27/C14/C23; use stratolink_v1_1_uv_dnp firmware. Later U6 population requires its own driver, optical qualification and assembly orientation review."
+    }
+  }
+}

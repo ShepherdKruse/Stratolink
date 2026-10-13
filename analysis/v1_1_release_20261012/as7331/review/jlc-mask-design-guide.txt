@@ -1,0 +1,137 @@
+URL: https://jlcpcb.com/blog/basic-design-of-solder-mask
+Read: 2026-10-13
+
+Blog
+PCB Engineering & Fundamentals
+PCB Design
+PCB Manufacturing
+Advanced PCB
+PCB Assembly
+SMT Stencil
+PCB Layout
+Flexible Heater
+Case Studies
+Home
+Blog
+PCB Design
+Design Tools & Best Practices
+Basic Design of Solder Mask
+Published Feb 27, 2024,
+updated Sep 09, 2026
+
+ 10 min
+
+Key Takeaways
+
+Negative Mask: Openings on the solder mask layer remove ink to expose copper pads.
+Standard Expansion: Standard 1/2-layer designs require a 0.05 mm (2 mil) expansion per side.
+LDI 1:1 Precision: Multilayer LDI tech enables 1:1 pad matching with ±0.02 mm accuracy.
+Solder Mask Dams: Dams require ≥ 0.10 mm pad spacing for green ink (1oz); narrower gaps are removed.
+
+A standard double-sided PCB consists of multiple functional layers built upon a central dielectric substrate (Core Board). From the center outwards, these include the Top/Bottom Copper Layers, Top/Bottom Solder Mask Layers, and Top/Bottom Silkscreen Layers. Electrical connectivity between the top and bottom copper layers is achieved through Plated Through Holes (PTH). Note that standard double-sided boards only use through-hole PTHs; blind or buried vias are exclusively reserved for multilayer PCBs.
+
+Purpose of Solder Mask
+
+1. Prevents moisture and the intrusion of various chemicals and electrolytes, which can cause oxidation and corrosion of the copper traces, compromising electrical performance.
+
+2. Guards against external mechanical scratches, thus maintaining insulation between copper traces and preventing short circuits.
+
+3. Prevents unintended solder connections during component soldering, avoiding short circuits.
+
+4. Reduces the consumption of pad surface finish (e.g., ENIG, HASL) in non-solderable areas.
+
+5. Enhances the aesthetics of the board by giving it various colors.
+
+Solder Mask Design
+
+Solder Mask, as the name implies, is not about preventing all soldering. Some novice engineers may mistakenly believe that patterns drawn on the solder mask layer cause areas to be not solderable. This understanding is incorrect. Solder Mask refers to the areas on the board where solder resist ink is applied. As it is a negative pattern, the areas with patterns on the solder mask layer are not coated with ink. To facilitate understanding, let's use a snowy landscape analogy:
+
+Imagine a pavilion (A) as the solder mask layer. After a heavy snowfall, the ground below the pavilion (B) will not have snow (solder resist ink), while the area not covered by the pavilion (C) will be entirely covered in snow (solder resist ink). Using this analogy, we return to PCB design for solder mask:
+
+1. Patterns on the copper layer represent the copper traces.
+
+2. Patterns on the solder mask layer remove ink coverage.
+
+3. Areas where the copper layer and solder mask layer overlap on the same side create exposed copper (solder-coated or gold-plated) regions.
+
+Solder Mask Manufacturing
+
+In the actual production process, after drilling and copper plating the board, unwanted copper areas are removed, leaving behind the required copper areas (the traces). The process of soldermask production then begins:
+
+1. The etched copper traces undergo processes such as board scrubbing and acid washing to remove oxide and impurities, roughen the copper surface for better adhesion with solder resist ink.
+
+2. The entire board is coated with solder resist ink, dried, and a solder mask film is placed over the board. Ultraviolet (UV) light exposure causes the solder resist ink to solidify where soldermask patterns are present, protecting the designated areas.
+
+3. Subsequent development and cleaning remove any uncured ink, revealing the original copper surface. Tin or gold plating can then be applied in later steps.
+
+Solder Mask Openings & Their Impact on Pad Geometries
+
+Solder mask openings (windows) are traditionally designed slightly larger than their corresponding copper pads (typically 0.05 mm / 2 mil expansion per side, or 0.1 mm overall). This design margin prevents solder mask ink from encroaching onto the solderable copper pad surface due to optical registration tolerances during standard UV exposure. However, this expansion alters the physical geometry of pads in three key design scenarios:
+
+1. Isolated Pads (No connected traces): The exposed copper pad size remains as designed. However, because the solder mask opening expands outward, a narrow ring of bare dielectric substrate (FR-4) is exposed surrounding the copper pad perimeter.
+
+2. Pads Connected to Traces:A short segment of the copper trace adjacent to the pad becomes exposed alongside the pad. During reflow soldering, molten solder may wick along this exposed trace section, potentially reducing the solder volume on the pad and causing uneven solder fillet formation or tombstoning.
+
+3. Solder Mask Defined (SMD) Pads on Large Copper Planes: For pads created inside a large copper pour (e.g., ground planes or heat sinks), the functional pad geometry is defined strictly by the edge of the solder mask opening. Solder mask expansion directly enlarges the exposed copper region, making the pad larger than specified in the EDA footprint.
+
+Advanced Multilayer Manufacturing: LDI 1:1 Precision Matching
+
+Traditional PCB fabrication uses film-based photolithography, requiring expansion margins to compensate for film stretch and registration offsets. To overcome these limits on fine-pitch designs, JLCPCB has deployed High-Precision Laser Direct Imaging (LDI) technology across multilayer PCB production lines:
+
+·Zero Expansion (1:1 Ratio): LDI directly writes the solder mask pattern onto the board using computer-controlled laser    beams, achieving alignment tolerances within $\pm 0.02\text{ mm}$. This enables a 1:1 match between solder mask openings and copper pads on multilayer PCBs without risking solder mask encroachment.  
+
+·Preventing Trace Exposure: A 1:1 opening completely avoids unwanted trace exposure near fine-pitch ICs, preserving impedance boundaries and preventing solder bridges during assembly.
+
+·Custom Expansion Options: For 1-layer and 2-layer boards utilizing standard process routes, or for specialized DFM requirements, designers can specify "Do not modify original solder mask size" during ordering. Ensure that your Gerber production files are carefully reviewed before final approval.
+
+Solder Mask Bridge (Dam) Specifications for Fine-Pitch ICs
+
+On dense IC designs (such as QFP, QFN, and BGA components), maintaining a narrow strip of solder mask ink—known as a Solder Mask Bridge or Dam—between adjacent pin pads is crucial. The dam acts as a physical barrier against liquid solder bridging and pin shorts during SMT reflow.
+
+The manufacturability of a solder mask dam depends heavily on the pad-to-pad spacing, finished copper thickness, and ink color flow dynamics. Below are JLCPCB's standard manufacturing specifications:
+
+JLCPCB Solder Mask Dam Design Guidelines：
+
+Process & Material Configuration	Finished Copper 1 oz (35 μm)	Finished Copper 2 oz (70 μm)
+Standard Inks (Green, Red, Yellow, Blue, Purple)	Minimum Pad Spacing ≥ 0.10 mm (4 mil)	Minimum Pad Spacing ≥ 0.20 mm (8 mil)
+Pigmented Inks (Matte/Glossy Black, White)	Minimum Pad Spacing ≥ 0.13 mm (5.1 mil)	Minimum Pad Spacing ≥ 0.20 mm (8 mil)
+Solder Mask Expansion (1/2 Layer Standard)	0.05 mm (2 mil) per side	0.05 mm (2 mil) per side
+Multilayer Opening Ratio (LDI Process)	1:1 with Pad Size	1:1 with Pad Size
+
+Difference Between Solder Paste and Solder Mask Layers
+
+Solder Paste Layer: Used by stencil manufacturers to create stencils, ensuring precise application of solder paste onto component pads for subsequent SMT processing.
+
+Solder Mask Layer: Used in PCB manufacturing, areas with patterns on the solder mask layer remain uncoated by solder resist, while areas without patterns are covered in solder resist ink.
+
+Emphasis:
+
+To have specific traces, copper areas, or pads remain uncoated by solder resist ink and coated with solder (or gold), you must add a soldermask layer pattern. Only the areas of the copper geometry overlapping with this soldermask pattern will have exposed copper and be treated with the selected surface finish (e.g., HASL, ENIG).
+
+In contrast, paste layers are exclusively for stencil creation and have no relevance to PCB production. PCB review engineers do not handle or provide paste layer files.
+
+Soldermask Bridge Fabrication
+
+For densely packed IC pads, in order to reduce the risk of solder flowing to adjacent IC pins and causing shorts during soldering, soldermask bridges can be designed (i.e. applying a layer of soldermask ink between the two IC pads). According to JLCPCB’s manufacturing process, soldermask bridges may be applied when the following conditions are met:
+
+Affordable, High-Quality PCB Manufacturing
+
+Save time and money with an all-in-one solution for fabrication, assembly, and parts. Reduce vendor coordination, avoid split shipments, and get consistent, reliable quality—without stretching your budget.
+
+Get Free Quote >
+FAQ about Design of Solder Mask
+Q: What is the main difference between Solder Mask and Solder Paste layers in PCB design?
+Q: Why are solder mask openings traditionally larger than copper pads?
+Q: How does JLCPCB's LDI technology achieve a 1:1 solder mask opening on multilayer PCBs?
+Q: What is a Solder Mask Bridge (Dam), and why is it important for fine-pitch ICs?
+Q: What happens if the pad spacing on my design is too tight to form a solder mask bridge?
+Conclusion
+
+The solder mask is applied as a negative pattern, meaning that areas with patterns on the solder mask layer are not coated with the protective ink. This allows for the desired copper traces and pads to be exposed for soldering.
+
+During PCB manufacturing, the solder mask is applied to the board and solidified using UV light. It helps prevent moisture and chemicals from damaging the copper traces and provides insulation between them to avoid short circuits.
+
+It's important to design the solder mask with consideration for the size of solder mask windows, which should be slightly larger than the associated pads to account for any alignment errors. This may slightly change the shape of some pads.
+
+To summarize, the solder mask is a protective layer that prevents solder from adhering to unwanted areas on the PCB. It helps maintain the integrity and reliability of the circuit by protecting the copper traces and preventing short circuits.
+

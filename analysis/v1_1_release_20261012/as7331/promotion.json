@@ -1,0 +1,551 @@
+{
+  "date": "2026-10-13T13:14:05.684094",
+  "branch": "alpha/hardware-v1.1",
+  "source": "/Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/as7331/final-green-filled",
+  "destination": "/Users/twarn/Repositories/Stratolink/hardware/pcb",
+  "archive": "/Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/as7331/canonical-before-as7331-green",
+  "source_hashes": {
+    "stratolink.kicad_pro": "d58c7e480ea727fc2dde90065d4c489dec0b535a4b73994d643b88cfe2e9e449",
+    "stratolink.kicad_sch": "a06740b35d07d7b81999f7ace2a7a7ff02e185ca3e46a664630bd4bbd00c54b7",
+    "fp-lib-table": "705f05b5554f11949b16433700d994932665490bb4f91064f20890cc1c65326a",
+    "stratolink.kicad_pcb": "9d63500a087ef8d345c2337942106e6704d32ded953846883454bfad718adf6c",
+    "stratolink.kicad_dru": "071d900e34c4eb3d3f91003cc0698e261e7fe23beea7107c4db50a1bf60a5136",
+    "sym-lib-table": "6d16fafd9ca5f0074df23d7ad6c75308ece058bd043d1297ce67fa3d25ee519e",
+    "lib/Stratolink_v1p1_C5_DMF4B5R5G105M3DTA0.kicad_mod": "e078558f7304757b892e0d2af975feb7ce1cf93106803ab14dca003767d15fd0",
+    "lib/Stratolink_v1p1_R21_R_0402_1005Metric.kicad_mod": "4b3d21a82278cb2abcb7243a1c13b56dc34cecba8b2545254651083dd6fcb7ae",
+    "lib/Stratolink_v1p1_C17_C_0402_1005Metric.kicad_mod": "d39eec4d33aaacf712c989875b0d253efefe9de20a8c1aac694a236cd139b0bf",
+    "lib/Stratolink_v1p1_U8_SOT-23-5.kicad_mod": "72f10c1c71e218b060fec25aadd0c59e63eec7c1aa92ad3ddedd725639e3a208",
+    "lib/Stratolink_v1p1_R2_R_0402_1005Metric.kicad_mod": "aae5b3b6611758699a482dcb999da62794331bb1038ca222480018d0afa4723e",
+    "lib/SON125P500X300X100-8N.kicad_mod": "ff2187465b1d4d695f51a19a0caa8cff843adb139aaff8052e203bd8a8719968",
+    "lib/Stratolink_Header_Right_1x07_P1p00_D0p50_Pad0p88.kicad_mod": "55179df22f92d771234badd935817eae5e4d93c912e265e6e9e7bf03b432046c",
+    "lib/4269.mod": "aa41a0486dba1a6c58b3fd0229508855e14a54984435d008a773d8d2f6a4539e",
+    "lib/IND_ETQP4M220YFN.kicad_mod": "381c6ee593f271568ce97449e3b8fb3a7e4dd50952df8fc548a95016239eb20d",
+    "lib/4269.kicad_sym": "f0e9b92024b3432c2b649a67c9f84c447718e0242492599e15ea3466bb878b3e",
+    "lib/Solar_Notch_Right_1p0x2p0.kicad_mod": "938e0d927c9957d44778f1d33facc2827ea2d4ede5b19d07d7021084f818beb5",
+    "lib/Stratolink_v1p1_J4_Stratolink_Programming_Right_1x07_P1p00_D0p50_BackTack1p20x0p88.kicad_mod": "758bbc39f31cbc0714fc725ffbb98913b6201dc4cb043c679e4230b315096bb7",
+    "lib/Stratolink_v1p1_C9_C_0402_1005Metric.kicad_mod": "4611d00df18c5d74d2851ca4a3991bfbaaa456a87541c4a261daaec02e7cf046",
+    "lib/HS230F.dcm": "d5bc8c398180a49b9505dd7e2e86168fea4a594f80b85e32ec90f897c259db53",
+    "lib/Stratolink_v1p1_R7_R_0402_1005Metric.kicad_mod": "85b2f4178913e53fabf922fa684412d75b9d5e0bc4c2873713d9f88ed47dde92",
+    "lib/Stratolink_v1p1_C12_C_0402_1005Metric.kicad_mod": "1f1e06a0c652933886d38f7fccc49193b45e3f09726a9ca497f1fc5652699140",
+    "lib/Stratolink_v1p1_R24_R_0402_1005Metric.kicad_mod": "e792c57dea25ecf9fcdb9a86fd97577e09827516d41d86a3b2dc4ed07b5707f8",
+    "lib/2450AT18A100E.kicad_sym": "4c17902873bf049dc499b066ca46e5f8567d9f7ec55a279e6c95f9d77e77e216",
+    "lib/SMD6_LTR-390UV-01_LTO-L.kicad_mod": "b8677d8c4594e4ec7bb875d3a08238e65363fce7788c853f45e6066d19a3781c",
+    "lib/Stratolink_v1p1_U7_PQFN50P200X200100-12N.kicad_mod": "352f082a796cf08e231f2968cece1918acc9816074ec26db8c7ae8586039ded1",
+    "lib/Stratolink_v1p1_R14_R_0402_1005Metric.kicad_mod": "94a0fe7e65a41f84a40633fcc66f9562c03840ef553a60b0809a48daa671ee98",
+    "lib/Stratolink_v1p1_C22_C_0402_1005Metric.kicad_mod": "e4ce11cf6dc2e5bf752ac69404a037546825ce9476b21141c0bfa15cf41b05bb",
+    "lib/LIS2DH12TR.kicad_sym": "07cac9985ca5d4bc6006008b39953cbf4b8e74acf952136da5d5bdd5024ab7e6",
+    "lib/WCAP-CSGP_0402.kicad_mod": "44a8f032ed80387f92ffe395290a6e9accf150b77ca161ccd4edf91706f98ce9",
+    "lib/RAK3172.step": "bd2bcd47540d611e57228d51c62f372b2393128c693611845697f020a94097f8",
+    "lib/Stratolink_v1p1_FB1_C_0402_1005Metric.kicad_mod": "d30ed3e773c702368a3f8b3fec7c0c2fccd23be4cddfbf37b8e4b6330ead10cc",
+    "lib/Stratolink_v1p1_R8_R_0402_1005Metric.kicad_mod": "96137fae2b4476d119b4dea2b0e28db41874abc4b7323c7631fcadf9598c3c6e",
+    "lib/cap.step": "9b8d6e2646bd53de6c21345928a71feafc695fd88a254725b14f7a7108f9681d",
+    "lib/Stratolink_v1p1_D3_D_SOD-523.kicad_mod": "12d3ed6cfab8ea82a541b29807498241195f1f47cc6c227e4ebc0af45cef39c8",
+    "lib/ProLib_pcs_2026-02-20.elibz": "83e43f38e2643ffd9d1e9a98b2e0225a04bb00dc9836cc085aff3f680889cd4b",
+    "lib/RAK3172.kicad_mod": "e0fb3166a9bf8e865c94a07c957d91591d3ef2e9c97ee19c43a5abb001891e38",
+    "lib/Stratolink_v1p1_R11_R_0402_1005Metric.kicad_mod": "f74b44a21b5b0fae443553a569a82603fe479f8ab43222552ec4b668bce9a2b5",
+    "lib/2450AT18A100E.step": "d43e57d1a06eba29f10d1314d9db70ceafebe1f09b87a1e90ed9cef2db17ef8f",
+    "lib/pressure.elibz": "f997158b9182f3cfcc305b2efa452300f2fe3103462d244a90f23c209db269b5",
+    "lib/Stratolink_v1p1_D1_D_SOD-523.kicad_mod": "b8bd6d891fd10df2dd234bc9e774be4fabbca8f62ff039bdbde045b621e3d21f",
+    "lib/BGA6N40P3X2_148X95X53.kicad_mod": "0343aab55d5eff37c147587bba94596d8ce865012486045a074422f1746be496",
+    "lib/WCAP-CSGP_0402.step": "fd544e31c602d8a01d21cae2c49140ea114544f70a54ec4d3b1f2d3c186ac29f",
+    "lib/Stratolink_v1p1_R6_R_0402_1005Metric.kicad_mod": "e52a0d67835b49a4afcc74b1d02f5d4ec9f8e36af32346958e56a3ddab6fa13c",
+    "lib/lora.step": "4685127e7fd516ea0e08ba7f8a8c5711f626351b480a13ade89925b33fdad9b5",
+    "lib/Stratolink_Release.kicad_sym": "aa1c6dbc240d945f26dd51b42bb3c4607b8c826c380acaada870ea9c416069a1",
+    "lib/Stratolink_v1p1_R25_R_0402_1005Metric.kicad_mod": "7361e857e6839ae17c986b62a2696eeaf019abc089dd988cbcbb4074f118e84a",
+    "lib/CAPC1608X97N.kicad_mod": "c64240ccabb5bdcb0ec44734a0e45b0524794a53a2ddc9ccf530c0fa0bb1c66a",
+    "lib/BQ25570RGRR.step": "ede46d7189939d1295bbef027083521561cd1b231e93c2eee3e4c0f7d4af1db6",
+    "lib/4269.lib": "58d76bbc2fcbc31959c51fae1595e652f6171e5514844a8db3aee920c3dfdafa",
+    "lib/IND_LPS4018-223MRC.kicad_mod": "3e3f2c1ed2dfa4f3bde9f43c162a180655e7aab82d20204c3028568b7e224990",
+    "lib/VJ0603A120KXCAP.step": "7a5b19a23d2c80df52915b51adc3299ae78793909f41dc21e6b48f6bc339e4a6",
+    "lib/AS7341-DLGM.step": "1f352ebe8c6c561d7bc090dc46eeaea65bc11fb485c887abe0d5c4540a20af73",
+    "lib/ANTC3216X140N.kicad_mod": "d0221f8bc21133d5619d205506f4b229491024d0a722a624e2f6abc3556cef2d",
+    "lib/DMF4B5R5G105M3DTA0.dcm": "7771c5de96b7d58a3825eba9dde0c83c8e30830e7e83952c7f62bba7e1c90193",
+    "lib/Stratolink_v1p1_R3_R_0402_1005Metric.kicad_mod": "b2e605d2c1ca7f6ef77f832d3620836b3945d85dfac7e1600dce3e46ffa40814",
+    "lib/Stratolink_v1p1_U5_BGA6N40P3X2_148X95X53.kicad_mod": "3256b34e7388c38b8081c07a543c96b1d3b4901d72d3c7038e40fdb4bc4eae60",
+    "lib/Stratolink_v1p1_U2_RAK3172.kicad_mod": "5d30ca8d063ec6e96c760ec0600b5da9550ef9556d79dd463343427bab363ca3",
+    "lib/Stratolink_GNSS_Wire_PTH_D1p0.kicad_mod": "13f1d0c04e83beec958825c7438e3e25f6ed6ae3f2d1328c997ea62967fc92d3",
+    "lib/Stratolink_Header_Left_1x07_P1p00_D0p50_Pad0p88.kicad_mod": "678dfa4fbca321b1cf794539159747abaac8fc57909300c9c2ec8808c0c6612a",
+    "lib/MLZ1608N100LT000.STEP": "d88f2217137cb303be8f3132cc776b88fdd02209cd154ab4fcafeefcddbb6694",
+    "lib/ProLib_pcs_2026-01-31.elibz": "b39d8afe7e58ced1e372f83b98208b0438065880c48f102c74aeb31f84e6a646",
+    "lib/T3902.kicad_sym": "66720809065a1941109082a4138fc68afeffbd06c35e963b338711417839a58f",
+    "lib/MAX-M10S-00B.step": "301c5c8f39597cb8a20bbfb64c6694d7f0121d89683bef55124958bd5cedb4ba",
+    "lib/QFN50P350X350X100-21N.kicad_mod": "5ec201b9d4cba0e6afd86d2cb90b8339f7f2d1c1fbf5ad96a18bbf597a60803a",
+    "lib/Solar_Notch_Left_1p0x2p0.kicad_mod": "e4757761c887acdb67a1ed9f551f2987b17a088a1ddf6fcb8059682a2c8195d1",
+    "lib/SMD6_LTR-390UV-01_LTO-M.kicad_mod": "79bd36ae3dee2d140d9a91b4a62a5dd50051c4741de1a1863448051967efcaf7",
+    "lib/ERJU02J1R1X.step": "d433ec4025d8cf829356864fc774877aaed40881c6f959b215a6877222d7ecff",
+    "lib/Stratolink_v1p1_R27_R_0805_2012Metric.kicad_mod": "3f55467a61f5b75e9affe2e1c58c1d008796bccce32942a585a39553812902cf",
+    "lib/Stratolink_v1p1_R10_R_0402_1005Metric.kicad_mod": "70aadfe99ebd0f8b99cf0c1c534e5458377ab53791c03cf197555bda169af8fe",
+    "lib/Stratolink_v1p1_C19_C_0402_1005Metric.kicad_mod": "c08da34564f311a1b776a75b5a840a8d3b8338ed728afef4462797bb8f1a7243",
+    "lib/DMF4B5R5G105M3DTA0.kicad_mod": "9ab776792a60db5be6fbd79dbf274512ab5a8a5770dd695b40abc6f241fe076d",
+    "lib/gps.step": "6e8669ce426399a1171bfef1886e155a9c1bdf89aab8e7a59ea81c043f1fba88",
+    "lib/Stratolink_v1p1_C21_C_0603_1608Metric.kicad_mod": "82947e9ca91f2e45e4d22dbdcc285d642c575a44eedd9b554c936c8418e34e72",
+    "lib/Stratolink_v1p1_J20_Tag-Connect_TC2030-IDC-NL_2x03_P1.27mm_Vertical.kicad_mod": "61e7ae51c2fe7d64429dc5fd902070a046985eccceb2f161eaf622e80791371f",
+    "lib/Stratolink_v1p1_U3_XCVR_MAX-M10S-00B.kicad_mod": "eb07df0a8649b6a8e87fe9b896641b67e0836af2616a71d32f0619b014542b5a",
+    "lib/Stratolink_v1p1_C23_C_0402_1005Metric.kicad_mod": "657f018602ad14fef177d5ccf07e14ed553f4674687295e43cbbee6fbd5f235e",
+    "lib/Stratolink_v1p1_R15_R_0402_1005Metric.kicad_mod": "d6a2bb18a4958140492dd74870ebef2f0ee98f08216f07521f8d75b088c5e2a7",
+    "lib/XCVR_MAX-M10S-00B.kicad_mod": "f02c5f6ec6a2cc7e49e6d320e2f713a5cf826c652b7030754832415a9c33bfa7",
+    "lib/2026-03-07_16-25-25.kicad_sym": "9a79848b12d5e661e2846ab59b4aad1bda3c134d4131e5a3be96759850b6e941",
+    "lib/Stratolink_v1p1_Symbols.kicad_sym": "5445aa38794607a1057befdb5a2f01ac1ea4d358a16bc90645849b96dafed883",
+    "lib/Stratolink_v1p1_C7_C_0402_1005Metric.kicad_mod": "1dab1b84bf930a4dc5de7575742d3c5e4ac593f1c00f8680b6074d1cae3183e1",
+    "lib/MAX-M10S-00B.kicad_sym": "7d85f2010cb778a48e2a6499bc5e681a42eb522fda2e2b9bf9ecaa89c28b7c91",
+    "lib/Stratolink_v1p1_R9_R_0402_1005Metric.kicad_mod": "0b7c4c65884a457cceb799017c5d5167566a26265e751ca314326d123e32e239",
+    "lib/INDC1608X90N.kicad_mod": "1e618be7ba948498203845f15ce69e8fe16c605c5cd1fdd2537cfcb0f5849f7d",
+    "lib/LPS4018-223MRC.step": "7247e578712eaab4a5fb90f55f123ce309f8a740e69b9670e4bec61481aa7bae",
+    "lib/MS5611-01BA03.step": "cd4b2c1cc39faba8c3e3c66389228cdf131310b5466cdf22320cf2afd8a0e1b1",
+    "lib/VJ0603A120KXCAP.kicad_sym": "d45b48e1f00f52444dc6e20e8d2447d3dc502248c2a0446e5d44e05e462723e5",
+    "lib/HS230F.kicad_mod": "529df574736c0f6ea13c39468a44ac9dcdd8beb2fa7b52cccbe3fb26bdf8c335",
+    "lib/DMF4B5R5G105M3DTA0.mod": "e81591e3cf7073a690f18031fff9e130b0ced60858ff05f4db9e365ee8b60e45",
+    "lib/Stratolink_v1p1_C20_C_0402_1005Metric.kicad_mod": "225c70d96dbc89caffdb7408a20db1c13ba5bf41fed40596dc86a84da9962785",
+    "lib/Stratolink_v1p1_R16_R_0402_1005Metric.kicad_mod": "06f9e18c8229c122626f08deaec2e27fd6d1653f937d65f42d2fb1dbc36b8a2f",
+    "lib/Stratolink_v1p1_C3_C_0603_1608Metric.kicad_mod": "4364deee2ca9a60b5e04140976b94c70e4c82564a1646c41977514c26d2f145e",
+    "lib/Stratolink_v1p1_L1_IND_LPS4018-223MRC.kicad_mod": "de2f9f1af3b42ceff5a7d6b1a9d47dcfcee940ceaf13e9bb18efdf44c58c6167",
+    "lib/HS230F.lib": "0e787e65a19b6bc279c1cac6f20f8a7cae8f3fe38d1c25a1ac7752dda3ba73ec",
+    "lib/LTR-390UV-01.step": "a4fef81fed3d299892089258ab37ddfefc50b64d2becda37a719e27a0b281e5b",
+    "lib/LIS2DH12TR.step": "7a3d2316fa3f9d01dcb367295c280fd3064e9864f9b25e029afded30548432b8",
+    "lib/T3902.step": "214b395bb75a355bfc5ca2eac498412731dc0a5296af2382d370cf0230bdff1f",
+    "lib/Suspension_PTH_D2p0_OD3p2.kicad_mod": "2f71d16ba89940b2e21f46e35e96a71f7ff660adaaff82485ed805de143c9ca1",
+    "lib/Stratolink_v1p1_C4_C_0402_1005Metric.kicad_mod": "3e76c346e66fa6f26852f553485d4e46c153dea976525f99bf877431c4b6b5c3",
+    "lib/HS230F.kicad_sym": "811489ce5a198a6cd083fdd34451ee26f7f8186efe6d04e532546f51ef57bb93",
+    "lib/DIO_BAS716_115.kicad_mod": "4f89dd17f2854299f0b242c9aca165594044192c924ea13825f08d0b3918d491",
+    "lib/TMP117NAIYBGR.kicad_sym": "1813a62d0d88664390dfc896d9a2cfd39cf37b9b75531db8980191ed2cc3c584",
+    "lib/Stratolink_Wire_48mm_D0p321_Nominal.step": "18aba2561b12ccd7653bac133efc17c7833cc7c5686f563ee8c04ac862789671",
+    "lib/Stratolink_UV.kicad_sym": "16063d37f9584c864a2589881d927f8d866192cf1521cc60e69738a905187230",
+    "lib/XDCR_AS7341-DLGM.kicad_mod": "1b4397d0b1f6b5baa42d874ff37b2096b77d6fdfe65f692b1d3dff3db6a4e2ac",
+    "lib/Stratolink_v1p1_R13_R_0402_1005Metric.kicad_mod": "4c6536173ff914cabc1c5785cb9793a43e87aed0fdcb75fa9afb4d6a50d16a3f",
+    "lib/Stratolink_v1p1_U6_AS7331_OLGA16.kicad_mod": "dd991771e76105bfef10cb046bc9b54a1a0c8cc0c7b19c0338a8981ae8168923",
+    "lib/Stratolink_v1p1_C1_C_0402_1005Metric.kicad_mod": "e0c2a1d756781c77ec8713b6a8fee9099d20d575c3346930102c2234b8e209a9",
+    "lib/Stratolink_LoRa_Wire_PTH_D1p0.kicad_mod": "6da6fa668c4e88a972bc41c73a631a5ce76c48bc84ba5d1b49e229fdcb12ea1a",
+    "lib/DMF4B5R5G105M3DTA0.kicad_sym": "d61a16f42fbe02ebc78f9a2c9a19cbe607187df5f581d0702a63593aec82087f",
+    "lib/Stratolink_v1p1_C15_C_0402_1005Metric.kicad_mod": "47bbcbf140bf70e50fffe3a1be167cc9cf71a35e9f2683fa803f0d5da53dd35e",
+    "lib/RES_ERJU02J1R1X.kicad_mod": "26b19b06d6669428f70c92613ae025bd8d5934c62fb048261c74eafd0ce3a843",
+    "lib/Stratolink_v1p1_R23_R_0402_1005Metric.kicad_mod": "ae02af118486ba8a2fa973a086d6d534baaa3974bb78c3b49c10d51471a88eb3",
+    "lib/LQM18FN100M00D.kicad_sym": "2effabbae1403948eeabacb0d3d9dbdbf7caa0ebb70a2aae9fbcacd4d1885e21",
+    "lib/Stratolink_v1p1_C6_C_0805_2012Metric.kicad_mod": "3fa616303db3b8efea61f1aac12214632b4d89b9ba489d236ffff2d167398f58",
+    "lib/Stratolink_v1p1_R5_R_0402_1005Metric.kicad_mod": "e68590d932a5eec5eb45ed3eb280a5f1397d538b57b72eaeff27c20cd74d6b0b",
+    "lib/ERJU02J1R1X.kicad_sym": "2dbe1f4533020a98c94e65bc71457186153c14c325df09cd224c0426da39ace4",
+    "lib/Stratolink_v1p1_U4_SON125P500X300X100-8N.kicad_mod": "6138b67efb5402a88822516743abb3518b83a1d8fa2ad5b27f07176cf560d80c",
+    "lib/ETQP4M220YFN.step": "c469fcfe7493ad42a7b4612f69a099da50f7e0a51e603c1c81473edc0920dd1f",
+    "lib/MS5611-01BA03.kicad_sym": "cb60c24e00aae0b18e91ee617e19428fc1cf4632063dfd9ddbe9d8af632ea9e3",
+    "lib/BQ25570RGRR.kicad_sym": "77e394cb57ae10efe7eba2d4dfeadae0a59542699f782de5f073fa621408f2fc",
+    "lib/Stratolink_v1p1_R26_R_0402_1005Metric.kicad_mod": "df29b26854ae20219285e08395f5fd3efefa0ec6f61f4e63de62a90cafe05653",
+    "lib/Stratolink_v1p1_C10_C_0402_1005Metric.kicad_mod": "c72d76379193997b4d7fb64e9cf6c0a10a71d8cbc72a93594f878c9f2f4cc2f6",
+    "lib/Stratolink_v1p1_R19_R_0402_1005Metric.kicad_mod": "650dcebbeca5dff51f64a801db898948c5da4647d34f38a798b4d0597f09f86e",
+    "lib/RAK3172-8-SM-NI.kicad_sym": "1676e2db045544d59c3c01dd87685b93ad6ea65d20a492b6a045e085a1b28514",
+    "lib/MIC_T3902.kicad_mod": "1f92d8e049770a9c31db4054acd3362ef7022b6d665846ac2c70d9acf80fb7fe",
+    "lib/ETQP4M220YFN.kicad_sym": "3339cd09a82b3f891d5eaafd736413701fc2a17ebc59ba621a71a132e182a049",
+    "lib/HS230F.mod": "b00437a67fb2634c1c0f50d349e62be917c85b7ffc185c82875fcf2bfa18f6c5",
+    "lib/Stratolink_Wire_82mm_D0p321_Nominal.step": "23e13ed21d9b2f49bb232fbb04ea73eec6f713054e606b75a04a31165e9d4dbf",
+    "lib/Stratolink_v1p1_R12_R_0402_1005Metric.kicad_mod": "26d037a375aad5da7e826c0929db83ab075429470b05eaa40e821143ef61233d",
+    "lib/DMF4B5R5G105M3DTA0.lib": "be9e0cfc73b162b228139b9f046432f40169db6e4762d8b12e0957321f9bfc1c",
+    "lib/SMD6_LTR-390UV-01_LTO.kicad_mod": "9eb6ce599943c3b3a7159015b151f81e85d8390ae426ae314aefcec4cee5144f",
+    "lib/PQFN50P200X200100-12N.kicad_mod": "bb10f8b0b1d0f19ba3a75cf9d0ec96834f28dcf6c5d49ca907dea1d2c66d3589",
+    "lib/WCAP-CSGP_0402.kicad_sym": "31b8edc59adcae9059ce14724e0885f154cd6352c0536ca33a71419ce885b240",
+    "lib/Stratolink_v1p1_C2_C_0603_1608Metric.kicad_mod": "7d614e6c8a8b9741716532aedf53ce22fd2b9a4122e02d21168b10de849d50ae",
+    "lib/LPS4018-223MRC.kicad_sym": "59283d1e7d07f0724ece85c78996f50d5c81b836be4e51065a92117c93ef2f3d",
+    "lib/ProLib_pcs_2026-02-08.elibz": "747bb6051045cdcd8f720ab8816df1be8344a506a3ada6da75b09e35ce2957fe",
+    "lib/RAK3172.kicad_sym": "d3131a6c168b5afdd04ba50f2b449ba380bff7b91078ce1b1212e3a0e22c3749",
+    "lib/TMP117NAIYBGR.step": "81257ef89350fbe4c930c965cd849b3f2ac885f4d30b6f6b1cd6689b145be75e",
+    "lib/4269.dcm": "73b350fb3e67f43221dc332d4aa0b9a12705ca3e654c17ad7c661d1acfc2ad4c",
+    "lib/Stratolink_v1p1_U6_SMD6_LTR-390UV-01_LTO-L.kicad_mod": "abe88a75341b164c627efc692cd4f2e6be63cba8fa0dbb87fcb0beff7491400f",
+    "lib/Stratolink_v1p1_R4_R_0402_1005Metric.kicad_mod": "9f1bff845999d7910c559514d328bba25e6dcbc8f48bf99ceb171818fa7e393b",
+    "lib/4269.kicad_mod": "cb4f61d8466e9c3887e4211dddf0bdef20bdc81bd3461330dc84b52695016f55",
+    "lib/Stratolink_v1p1_C11_C_0402_1005Metric.kicad_mod": "eeb9f74ded8b27a6273dc2a482aefbca8a6fb085d37b7ea683a41608182202e6",
+    "lib/Stratolink_v1p1_R18_R_0402_1005Metric.kicad_mod": "913fdb46bdb551aad3eb0c4b0593dfa0ede23b740874eeb3ad89bec1cbef66c7",
+    "lib/Stratolink_v1p1_C16_C_0603_1608Metric.kicad_mod": "1c423c997347968cfb851db912359db85a1f81c5a26f6372fcc9ac040bdcfc6a",
+    "lib/Stratolink_v1p1_R22_R_0402_1005Metric.kicad_mod": "933ca9c550e1e199b019c38a14103317739024d94b7e672e066441051bb407dc",
+    "lib/Stratolink_v1p1_C14_C_0402_1005Metric.kicad_mod": "1aa0e2090dad99ab6047f44e2bce908f51170e51f98a6b6f58d101239289a406",
+    "lib/mic.elibz": "b68dcc389d65cf5b89763e94db81ee8ee41ad52d68ad39fffea02825559bad17",
+    "lib/XCVR_RAK3172-8-SM-NI.kicad_mod": "341a8de38d3075e7e190495ecbe1faa77f11aef73df7211c85b56581198b6c6a",
+    "lib/Stratolink_Power.kicad_sym": "2428574dbca6d67a258bf56648ea7280215e3747ba961e88c6ec96b1fd2d9b40",
+    "lib/21-0147E.kicad_mod": "d8b8ebc85e44c7bc74c142f7189b65a37cceee2dca0531a18df6523b571999c6",
+    "lib/Stratolink_v1p1_R1_R_0402_1005Metric.kicad_mod": "3dfcd009addff1d7d279bd7834144f69d07c8a550e9897ed9dfa251fc5044f43",
+    "lib/Stratolink_Programming_Right_1x07_P1p00_D0p50_BackTack1p20x0p88.kicad_mod": "5689655367f3e168fe2d7ea8abfae3a6907760e9016c5a4e9014ed7650bd59cd",
+    "lib/Stratolink_Programming_Left_1x07_P1p00_D0p50_BackTack1p20x0p88.kicad_mod": "1638681d81685da85f72231dca59f42171c11cd7c1f480c557e5ced826fdf7ab",
+    "lib/Stratolink_v1p1_U1_QFN50P350X350X100-21N.kicad_mod": "d2bc0bbaeea076a4000dbcc80cf3cf57e36ed463e31f63143e45302852b26458",
+    "lib/AS7341-DLGM.kicad_sym": "abd1d59f41a076196e753c2b658694e77e1c5d9f519ab5672315827ddcd7a5b1",
+    "lib/Stratolink_v1p1_C8_C_0603_1608Metric.kicad_mod": "5bb83b92dbc61de8a608f3bc537606b5d0166d1fdd82a13eaad40d15f1f2d56b",
+    "3d/R_0805_2012Metric.step": "ded342cdb394fb45395227beaaa75cc390613cf2581b29cd6d22c12abd6103b2",
+    "3d/AS7331_OLGA16.wrl": "afdc02ac1a2cd3a2756fab812bc0d14105fdcd7a01981381f25e329c4c64e443",
+    "3d/solar/geometry.json": "6fbebdc0d49e8a2d299d60c59133cf87ff17ec8e6b5bfadfc3c5e2111e4e8981",
+    "3d/solar/zachtek_1044_left_assembly.wrl": "d38d946746754d12ad69b04946b51fe3443e8bee42bf85d54c57bf92362e4047",
+    "3d/solar/generate.py": "d54881036939cdadcbc841402fa829d62c2e80e0fd08c53905b5f359cf592d76",
+    "3d/solar/README.md": "081b8db88a9c95e9b2bdf0a98bf5084ca4dc2a8daac74f54132205c56f8b4a75",
+    "3d/solar/zachtek_1044_right_assembly.wrl": "1d51c705686a98fa6c52a2003d35441c2d42066cf981cdbdb1aa55ca48e3cbb7"
+  },
+  "changed_files": [
+    {
+      "path": "stratolink.kicad_pro",
+      "before": "79a2c0d01611c7ea7054cd9dbc685187b28fb4ac8792468a15d2bba821ac0ea7",
+      "after": "d58c7e480ea727fc2dde90065d4c489dec0b535a4b73994d643b88cfe2e9e449"
+    },
+    {
+      "path": "stratolink.kicad_sch",
+      "before": "5787cc81a517b45469ea6a801b1ce1232aa7ef681b7b7e208ac7de2e7b754335",
+      "after": "a06740b35d07d7b81999f7ace2a7a7ff02e185ca3e46a664630bd4bbd00c54b7"
+    },
+    {
+      "path": "stratolink.kicad_pcb",
+      "before": "8e2f83797dd68195aa71b73fc252fe57e53ccd3683ef5f74739dc4d25d6ce8d5",
+      "after": "9d63500a087ef8d345c2337942106e6704d32ded953846883454bfad718adf6c"
+    },
+    {
+      "path": "stratolink.kicad_dru",
+      "before": "565bbdcb4ddc03de2a7bc3cdc45d57a8acd92d2e53a8eac092e0bd5a04861e0b",
+      "after": "071d900e34c4eb3d3f91003cc0698e261e7fe23beea7107c4db50a1bf60a5136"
+    },
+    {
+      "path": "sym-lib-table",
+      "before": "b91205102beca7d31dbdfb66892bb44e6860b17f870e1605c88d8ac0a0078db3",
+      "after": "6d16fafd9ca5f0074df23d7ad6c75308ece058bd043d1297ce67fa3d25ee519e"
+    },
+    {
+      "path": "lib/Stratolink_v1p1_C5_DMF4B5R5G105M3DTA0.kicad_mod",
+      "before": "0a067083ddf9fc28bffddf3f519b912ce0aa45efa54f98cdb56fe086decf6b77",
+      "after": "e078558f7304757b892e0d2af975feb7ce1cf93106803ab14dca003767d15fd0"
+    },
+    {
+      "path": "lib/Stratolink_v1p1_R21_R_0402_1005Metric.kicad_mod",
+      "before": "d7c3c71345a0d1759e8f0e858bc06c25abb8f4866c0aae02a6d35ed9143e71f4",
+      "after": "4b3d21a82278cb2abcb7243a1c13b56dc34cecba8b2545254651083dd6fcb7ae"
+    },
+    {
+      "path": "lib/Stratolink_v1p1_C17_C_0402_1005Metric.kicad_mod",
+      "before": "e0ee58d4da8cd31eccbccf72c185716af37bc205048f5645695a6496e0db6cc6",
+      "after": "d39eec4d33aaacf712c989875b0d253efefe9de20a8c1aac694a236cd139b0bf"
+    },
+    {
+      "path": "lib/Stratolink_v1p1_U8_SOT-23-5.kicad_mod",
+      "before": "7c8ac3483776d6108607c41437ebb9f09a5b025baacd0789d7bfd5055d65a3ec",
+      "after": "72f10c1c71e218b060fec25aadd0c59e63eec7c1aa92ad3ddedd725639e3a208"
+    },
+    {
+      "path": "lib/Stratolink_v1p1_R2_R_0402_1005Metric.kicad_mod",
+      "before": "f47099f3c54a3d49279f0a8afd814d4d773d48c9643c16191508a6d4035e52f3",
+      "after": "aae5b3b6611758699a482dcb999da62794331bb1038ca222480018d0afa4723e"
+    },
+    {
+      "path": "lib/Solar_Notch_Right_1p0x2p0.kicad_mod",
+      "before": "7bab33c2b68c8be61dad981c21736ac780836b76ddc8884d21ae82cc053f1de9",
+      "after": "938e0d927c9957d44778f1d33facc2827ea2d4ede5b19d07d7021084f818beb5"
+    },
+    {
+      "path": "lib/Stratolink_v1p1_J4_Stratolink_Programming_Right_1x07_P1p00_D0p50_BackTack1p20x0p88.kicad_mod",
+      "before": "ab125b45cb86eda7dfdef8ce9917d41560ad126a906da8efd314e2dad49c039e",
+      "after": "758bbc39f31cbc0714fc725ffbb98913b6201dc4cb043c679e4230b315096bb7"
+    },
+    {
+      "path": "lib/Stratolink_v1p1_C9_C_0402_1005Metric.kicad_mod",
+      "before": "45725e8c7f89b1ced32f35b0c1d265c09632c9417f17aecd90954d81ea238b5b",
+      "after": "4611d00df18c5d74d2851ca4a3991bfbaaa456a87541c4a261daaec02e7cf046"
+    },
+    {
+      "path": "lib/Stratolink_v1p1_R7_R_0402_1005Metric.kicad_mod",
+      "before": "a6579b02a802dff4b2914a12eb4c123d57582ad303946a80849ebeb689463e2c",
+      "after": "85b2f4178913e53fabf922fa684412d75b9d5e0bc4c2873713d9f88ed47dde92"
+    },
+    {
+      "path": "lib/Stratolink_v1p1_C12_C_0402_1005Metric.kicad_mod",
+      "before": "39120e186bb8910f0657c10b8e2464babe7961ea664627f2e526026d03d1b5e9",
+      "after": "1f1e06a0c652933886d38f7fccc49193b45e3f09726a9ca497f1fc5652699140"
+    },
+    {
+      "path": "lib/Stratolink_v1p1_R24_R_0402_1005Metric.kicad_mod",
+      "before": "774584fee1a75f78b19dd9740a8d51b4582dbb9887e1c6c5c29da31a2c06a14b",
+      "after": "e792c57dea25ecf9fcdb9a86fd97577e09827516d41d86a3b2dc4ed07b5707f8"
+    },
+    {
+      "path": "lib/Stratolink_v1p1_U7_PQFN50P200X200100-12N.kicad_mod",
+      "before": "197cb34663451d375a17d262877d159edbd1b59b0805396381d47f0b48c895e9",
+      "after": "352f082a796cf08e231f2968cece1918acc9816074ec26db8c7ae8586039ded1"
+    },
+    {
+      "path": "lib/Stratolink_v1p1_R14_R_0402_1005Metric.kicad_mod",
+      "before": "1c5d3729d2dad816f3302e9b7a3f0c9e6a3fdd133189858a9c53a700dc4d825c",
+      "after": "94a0fe7e65a41f84a40633fcc66f9562c03840ef553a60b0809a48daa671ee98"
+    },
+    {
+      "path": "lib/Stratolink_v1p1_C22_C_0402_1005Metric.kicad_mod",
+      "before": "31604fe6cc737042297ff6b2b5b65677eeb8bfb0013c92896d35590faedbeb53",
+      "after": "e4ce11cf6dc2e5bf752ac69404a037546825ce9476b21141c0bfa15cf41b05bb"
+    },
+    {
+      "path": "lib/Stratolink_v1p1_FB1_C_0402_1005Metric.kicad_mod",
+      "before": "d6b143bfacda9038898b62b30e171b7621d6a29bdaaee9536c23cc7f8c43259f",
+      "after": "d30ed3e773c702368a3f8b3fec7c0c2fccd23be4cddfbf37b8e4b6330ead10cc"
+    },
+    {
+      "path": "lib/Stratolink_v1p1_R8_R_0402_1005Metric.kicad_mod",
+      "before": "16d7f3378a8fded14e2a5dd861b2b723ab4dfdf66196ea20f1e613c6e078d013",
+      "after": "96137fae2b4476d119b4dea2b0e28db41874abc4b7323c7631fcadf9598c3c6e"
+    },
+    {
+      "path": "lib/Stratolink_v1p1_D3_D_SOD-523.kicad_mod",
+      "before": "973fe7e0a62f30cdaa00f1b8f68a13f5c90fcc30a242770ad4776e0011538d64",
+      "after": "12d3ed6cfab8ea82a541b29807498241195f1f47cc6c227e4ebc0af45cef39c8"
+    },
+    {
+      "path": "lib/Stratolink_v1p1_R11_R_0402_1005Metric.kicad_mod",
+      "before": "63e8a9968a57932ea49a05f51a307644023dea34bb6acd9489a2d47563c2a2a5",
+      "after": "f74b44a21b5b0fae443553a569a82603fe479f8ab43222552ec4b668bce9a2b5"
+    },
+    {
+      "path": "lib/Stratolink_v1p1_D1_D_SOD-523.kicad_mod",
+      "before": "59d71a69b04b4cfc37f1218fe25a8a6840f4deab1418aa5fc970eb04b284cc97",
+      "after": "b8bd6d891fd10df2dd234bc9e774be4fabbca8f62ff039bdbde045b621e3d21f"
+    },
+    {
+      "path": "lib/Stratolink_v1p1_R6_R_0402_1005Metric.kicad_mod",
+      "before": "28b3229fcfeac9c853675bbf4e553b020be2db2194129129c35ed386420a2b03",
+      "after": "e52a0d67835b49a4afcc74b1d02f5d4ec9f8e36af32346958e56a3ddab6fa13c"
+    },
+    {
+      "path": "lib/Stratolink_v1p1_R25_R_0402_1005Metric.kicad_mod",
+      "before": "904821e757191fcdf510b23cee785fcd6f4529e69f0e698331d1f6ebbd2c87ba",
+      "after": "7361e857e6839ae17c986b62a2696eeaf019abc089dd988cbcbb4074f118e84a"
+    },
+    {
+      "path": "lib/Stratolink_v1p1_R3_R_0402_1005Metric.kicad_mod",
+      "before": "35657e8b8ae5221e11b11e5bed65438e9c15cb2607b4ab8a2ad7c4d9dd06c0f5",
+      "after": "b2e605d2c1ca7f6ef77f832d3620836b3945d85dfac7e1600dce3e46ffa40814"
+    },
+    {
+      "path": "lib/Stratolink_v1p1_U5_BGA6N40P3X2_148X95X53.kicad_mod",
+      "before": "cbab11c54e843ae4dcd4416f4cc9246532e17dc7d9c385876703c39c1ab234f3",
+      "after": "3256b34e7388c38b8081c07a543c96b1d3b4901d72d3c7038e40fdb4bc4eae60"
+    },
+    {
+      "path": "lib/Stratolink_v1p1_U2_RAK3172.kicad_mod",
+      "before": "77763abe7b78381fc284ebe690a71d9275458382cc278674b979a32816b06d89",
+      "after": "5d30ca8d063ec6e96c760ec0600b5da9550ef9556d79dd463343427bab363ca3"
+    },
+    {
+      "path": "lib/Stratolink_GNSS_Wire_PTH_D1p0.kicad_mod",
+      "before": "3ce5f2f3ca3e850c9f6a108c82058d5ce4b7d4f267c4ef480d9010c1bc913468",
+      "after": "13f1d0c04e83beec958825c7438e3e25f6ed6ae3f2d1328c997ea62967fc92d3"
+    },
+    {
+      "path": "lib/Solar_Notch_Left_1p0x2p0.kicad_mod",
+      "before": "88d0ae34e02b1fadeed1b6f8261f9109735e027cfc9146fd165e487238bd3ebd",
+      "after": "e4757761c887acdb67a1ed9f551f2987b17a088a1ddf6fcb8059682a2c8195d1"
+    },
+    {
+      "path": "lib/Stratolink_v1p1_R27_R_0805_2012Metric.kicad_mod",
+      "before": null,
+      "after": "3f55467a61f5b75e9affe2e1c58c1d008796bccce32942a585a39553812902cf"
+    },
+    {
+      "path": "lib/Stratolink_v1p1_R10_R_0402_1005Metric.kicad_mod",
+      "before": "4866354016df3008db04beebbc26bb45c500c3f3319573e0d487b36dd968c679",
+      "after": "70aadfe99ebd0f8b99cf0c1c534e5458377ab53791c03cf197555bda169af8fe"
+    },
+    {
+      "path": "lib/Stratolink_v1p1_C19_C_0402_1005Metric.kicad_mod",
+      "before": "ff6fe01da7a2e1c5fd49b8e4fed1328a747c04be2edbb84f83380243bad624ab",
+      "after": "c08da34564f311a1b776a75b5a840a8d3b8338ed728afef4462797bb8f1a7243"
+    },
+    {
+      "path": "lib/Stratolink_v1p1_C21_C_0603_1608Metric.kicad_mod",
+      "before": "aa41dc6e1054bfd1bc293f492d79839775cd49906ba5c69b92d7c200363cdc34",
+      "after": "82947e9ca91f2e45e4d22dbdcc285d642c575a44eedd9b554c936c8418e34e72"
+    },
+    {
+      "path": "lib/Stratolink_v1p1_J20_Tag-Connect_TC2030-IDC-NL_2x03_P1.27mm_Vertical.kicad_mod",
+      "before": "3c6930d4d1971af98f64189c86b833e9971249b28c7eaab1aa5032fcf0860357",
+      "after": "61e7ae51c2fe7d64429dc5fd902070a046985eccceb2f161eaf622e80791371f"
+    },
+    {
+      "path": "lib/Stratolink_v1p1_U3_XCVR_MAX-M10S-00B.kicad_mod",
+      "before": "8c407e754570263d992bc8ffad75679297722f79b86e4cac14b7ac9f67b03fb1",
+      "after": "eb07df0a8649b6a8e87fe9b896641b67e0836af2616a71d32f0619b014542b5a"
+    },
+    {
+      "path": "lib/Stratolink_v1p1_C23_C_0402_1005Metric.kicad_mod",
+      "before": null,
+      "after": "657f018602ad14fef177d5ccf07e14ed553f4674687295e43cbbee6fbd5f235e"
+    },
+    {
+      "path": "lib/Stratolink_v1p1_R15_R_0402_1005Metric.kicad_mod",
+      "before": "e462c405d1803b9516c9ed1959e8f96fd15f6cc5e4952b46b6cd2072eb1507f8",
+      "after": "d6a2bb18a4958140492dd74870ebef2f0ee98f08216f07521f8d75b088c5e2a7"
+    },
+    {
+      "path": "lib/Stratolink_v1p1_C7_C_0402_1005Metric.kicad_mod",
+      "before": "52c879b0ea04720720ac7606e18c7794eb8683b6abdf24d8bb69bed3017c8bc7",
+      "after": "1dab1b84bf930a4dc5de7575742d3c5e4ac593f1c00f8680b6074d1cae3183e1"
+    },
+    {
+      "path": "lib/Stratolink_v1p1_R9_R_0402_1005Metric.kicad_mod",
+      "before": "6ab4f46b85a99010115c62ba2f4d9c3f1e50a17f3e1b980ab231732b42701b56",
+      "after": "0b7c4c65884a457cceb799017c5d5167566a26265e751ca314326d123e32e239"
+    },
+    {
+      "path": "lib/INDC1608X90N.kicad_mod",
+      "before": "d3524646ea49e68bd74514a052a0d7db258eaef8e57a8ce70b2523c6b9cb6454",
+      "after": "1e618be7ba948498203845f15ce69e8fe16c605c5cd1fdd2537cfcb0f5849f7d"
+    },
+    {
+      "path": "lib/Stratolink_v1p1_C20_C_0402_1005Metric.kicad_mod",
+      "before": "c7d264089ed6c1fe4e20139fe829f6875d335ef105e77d01e779e7f8612c3041",
+      "after": "225c70d96dbc89caffdb7408a20db1c13ba5bf41fed40596dc86a84da9962785"
+    },
+    {
+      "path": "lib/Stratolink_v1p1_R16_R_0402_1005Metric.kicad_mod",
+      "before": "b6e850e1788e4d2024e8f1f2d0c8081f0281fe14ba4e0c185e3970f2ca019bf1",
+      "after": "06f9e18c8229c122626f08deaec2e27fd6d1653f937d65f42d2fb1dbc36b8a2f"
+    },
+    {
+      "path": "lib/Stratolink_v1p1_C3_C_0603_1608Metric.kicad_mod",
+      "before": "a3545ca81540de0bd78d5a8aff4518e19d240111a8f75fa9337df10dbd93a296",
+      "after": "4364deee2ca9a60b5e04140976b94c70e4c82564a1646c41977514c26d2f145e"
+    },
+    {
+      "path": "lib/Stratolink_v1p1_L1_IND_LPS4018-223MRC.kicad_mod",
+      "before": "0bf973b128a8ebcf17e9fbeadab9da5b06f50d916f11a4392a40740a9aa4ac67",
+      "after": "de2f9f1af3b42ceff5a7d6b1a9d47dcfcee940ceaf13e9bb18efdf44c58c6167"
+    },
+    {
+      "path": "lib/Stratolink_v1p1_C4_C_0402_1005Metric.kicad_mod",
+      "before": "9ca402914a7479d31b1f31d02e248de9ef466794f85f3c4ba94f76c3fa4f1f67",
+      "after": "3e76c346e66fa6f26852f553485d4e46c153dea976525f99bf877431c4b6b5c3"
+    },
+    {
+      "path": "lib/Stratolink_UV.kicad_sym",
+      "before": null,
+      "after": "16063d37f9584c864a2589881d927f8d866192cf1521cc60e69738a905187230"
+    },
+    {
+      "path": "lib/Stratolink_v1p1_R13_R_0402_1005Metric.kicad_mod",
+      "before": "b121b0a70130956e8d2622416a6bd9a5fc9ef3cb97a4cc6e0c653d609446ba52",
+      "after": "4c6536173ff914cabc1c5785cb9793a43e87aed0fdcb75fa9afb4d6a50d16a3f"
+    },
+    {
+      "path": "lib/Stratolink_v1p1_U6_AS7331_OLGA16.kicad_mod",
+      "before": null,
+      "after": "dd991771e76105bfef10cb046bc9b54a1a0c8cc0c7b19c0338a8981ae8168923"
+    },
+    {
+      "path": "lib/Stratolink_v1p1_C1_C_0402_1005Metric.kicad_mod",
+      "before": "05052ff0a7fc15fd54ccbdc362ff53d19d08777391d2c04ac5e8c6a8823251da",
+      "after": "e0c2a1d756781c77ec8713b6a8fee9099d20d575c3346930102c2234b8e209a9"
+    },
+    {
+      "path": "lib/Stratolink_LoRa_Wire_PTH_D1p0.kicad_mod",
+      "before": "9634c73a0eadb59d2ec6e7f6e0a98329c0f0cf281fa7b0f27688cb449698a2d1",
+      "after": "6da6fa668c4e88a972bc41c73a631a5ce76c48bc84ba5d1b49e229fdcb12ea1a"
+    },
+    {
+      "path": "lib/Stratolink_v1p1_C15_C_0402_1005Metric.kicad_mod",
+      "before": "75303a2b44c462e68aa3f555784ea90bf385351ad10d49d4d600320151651ae3",
+      "after": "47bbcbf140bf70e50fffe3a1be167cc9cf71a35e9f2683fa803f0d5da53dd35e"
+    },
+    {
+      "path": "lib/Stratolink_v1p1_R23_R_0402_1005Metric.kicad_mod",
+      "before": "ecebce264211f26a8f039c61124d389dbdf318141cbf86e3c18c6fdd1751ded5",
+      "after": "ae02af118486ba8a2fa973a086d6d534baaa3974bb78c3b49c10d51471a88eb3"
+    },
+    {
+      "path": "lib/Stratolink_v1p1_C6_C_0805_2012Metric.kicad_mod",
+      "before": "5c9d0450801ccce920c359f2ec3214533509d738a42d405fe2aec08b145bbf84",
+      "after": "3fa616303db3b8efea61f1aac12214632b4d89b9ba489d236ffff2d167398f58"
+    },
+    {
+      "path": "lib/Stratolink_v1p1_R5_R_0402_1005Metric.kicad_mod",
+      "before": "2fbbae0d50361cfb9b54ceeb010e7a919bede380beaed1868f676fd91989354f",
+      "after": "e68590d932a5eec5eb45ed3eb280a5f1397d538b57b72eaeff27c20cd74d6b0b"
+    },
+    {
+      "path": "lib/Stratolink_v1p1_U4_SON125P500X300X100-8N.kicad_mod",
+      "before": "36c53ad8acffcda4a4f4c1f2ee81f527125bc902486fe0689423c2da41bd802a",
+      "after": "6138b67efb5402a88822516743abb3518b83a1d8fa2ad5b27f07176cf560d80c"
+    },
+    {
+      "path": "lib/Stratolink_v1p1_R26_R_0402_1005Metric.kicad_mod",
+      "before": "f79e84a0ac88e32a8bdb54ac842ecba3164ce896cd6b18bff079b827609e74f7",
+      "after": "df29b26854ae20219285e08395f5fd3efefa0ec6f61f4e63de62a90cafe05653"
+    },
+    {
+      "path": "lib/Stratolink_v1p1_C10_C_0402_1005Metric.kicad_mod",
+      "before": "728468cc4be07dca64e4eadb63b348b6a88702b51dd3eee328198f6fe4f4bf86",
+      "after": "c72d76379193997b4d7fb64e9cf6c0a10a71d8cbc72a93594f878c9f2f4cc2f6"
+    },
+    {
+      "path": "lib/Stratolink_v1p1_R19_R_0402_1005Metric.kicad_mod",
+      "before": "29af1469229ef90757d7d17f713edeea4b039ac8abfaca41c5f4407121cd319c",
+      "after": "650dcebbeca5dff51f64a801db898948c5da4647d34f38a798b4d0597f09f86e"
+    },
+    {
+      "path": "lib/Stratolink_v1p1_R12_R_0402_1005Metric.kicad_mod",
+      "before": "0ac79f8e659bb62e6753babb5041f4c4ad27672891b6699d7b5637935fefcd38",
+      "after": "26d037a375aad5da7e826c0929db83ab075429470b05eaa40e821143ef61233d"
+    },
+    {
+      "path": "lib/Stratolink_v1p1_C2_C_0603_1608Metric.kicad_mod",
+      "before": "cf38c30dd2386cf6e81da1e0166759948899e2670e0a840ba8f9b46bf68bda7c",
+      "after": "7d614e6c8a8b9741716532aedf53ce22fd2b9a4122e02d21168b10de849d50ae"
+    },
+    {
+      "path": "lib/Stratolink_v1p1_R4_R_0402_1005Metric.kicad_mod",
+      "before": "126d732282e843872f7c3f514653fea792766566c6073a5146febc96f19b31ff",
+      "after": "9f1bff845999d7910c559514d328bba25e6dcbc8f48bf99ceb171818fa7e393b"
+    },
+    {
+      "path": "lib/Stratolink_v1p1_C11_C_0402_1005Metric.kicad_mod",
+      "before": "46cc6a4bd410b84dbddafc6007a654ec4a028c1888798f129c0ad3831a7ce3a3",
+      "after": "eeb9f74ded8b27a6273dc2a482aefbca8a6fb085d37b7ea683a41608182202e6"
+    },
+    {
+      "path": "lib/Stratolink_v1p1_R18_R_0402_1005Metric.kicad_mod",
+      "before": "37f2ad5d7833dd2b0cd1d525f2353e3baa40c88f2d79e5f5d657c950a7afb9dc",
+      "after": "913fdb46bdb551aad3eb0c4b0593dfa0ede23b740874eeb3ad89bec1cbef66c7"
+    },
+    {
+      "path": "lib/Stratolink_v1p1_C16_C_0603_1608Metric.kicad_mod",
+      "before": "2dd5869a363dceffc5c3dae873f90e0a3db9ed5b6f7c74aed4ef1187af266904",
+      "after": "1c423c997347968cfb851db912359db85a1f81c5a26f6372fcc9ac040bdcfc6a"
+    },
+    {
+      "path": "lib/Stratolink_v1p1_R22_R_0402_1005Metric.kicad_mod",
+      "before": "ef5832dc825648a3087cf710061a84a05e780af81565890ba3321ce04b7c4093",
+      "after": "933ca9c550e1e199b019c38a14103317739024d94b7e672e066441051bb407dc"
+    },
+    {
+      "path": "lib/Stratolink_v1p1_C14_C_0402_1005Metric.kicad_mod",
+      "before": "def22de70663201fef0314afc0f9dd1e517e302be64cef8360525d97a16725fe",
+      "after": "1aa0e2090dad99ab6047f44e2bce908f51170e51f98a6b6f58d101239289a406"
+    },
+    {
+      "path": "lib/Stratolink_v1p1_R1_R_0402_1005Metric.kicad_mod",
+      "before": "95534f603dd01cf3d7afa3b7be02ce138ae6442dc35483facfa35ba81a5a3bed",
+      "after": "3dfcd009addff1d7d279bd7834144f69d07c8a550e9897ed9dfa251fc5044f43"
+    },
+    {
+      "path": "lib/Stratolink_Programming_Left_1x07_P1p00_D0p50_BackTack1p20x0p88.kicad_mod",
+      "before": "8522c6287a4f7bd24164e5db3b1da5cf72be14147c29c32b4f823dd2487eda79",
+      "after": "1638681d81685da85f72231dca59f42171c11cd7c1f480c557e5ced826fdf7ab"
+    },
+    {
+      "path": "lib/Stratolink_v1p1_U1_QFN50P350X350X100-21N.kicad_mod",
+      "before": "bad5624dba3236adf4a0116ec84aed589bd213eb2dc880041532fa1855466b73",
+      "after": "d2bc0bbaeea076a4000dbcc80cf3cf57e36ed463e31f63143e45302852b26458"
+    },
+    {
+      "path": "lib/Stratolink_v1p1_C8_C_0603_1608Metric.kicad_mod",
+      "before": "e64f31e796b9519f0474330726d4bc147828b19aef2571d6273b6e95191054c0",
+      "after": "5bb83b92dbc61de8a608f3bc537606b5d0166d1fdd82a13eaad40d15f1f2d56b"
+    },
+    {
+      "path": "3d/R_0805_2012Metric.step",
+      "before": null,
+      "after": "ded342cdb394fb45395227beaaa75cc390613cf2581b29cd6d22c12abd6103b2"
+    },
+    {
+      "path": "3d/AS7331_OLGA16.wrl",
+      "before": null,
+      "after": "afdc02ac1a2cd3a2756fab812bc0d14105fdcd7a01981381f25e329c4c64e443"
+    }
+  ],
+  "protected_unrelated_tracked": 100,
+  "all_protected_files_unchanged": true,
+  "independent_review": "review/candidate-independent-review.json",
+  "finish_proof": "finish/final-saved-refill-proof.json"
+}

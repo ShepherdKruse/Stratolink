@@ -1,0 +1,233 @@
+{
+    "$schema": "https://schemas.kicad.org/drc.v1.json",
+    "coordinate_units": "mm",
+    "date": "2026-10-13T13:02:46",
+    "ignored_checks": [
+        {
+            "description": "Footprint has no courtyard defined",
+            "key": "missing_courtyard"
+        },
+        {
+            "description": "Solder mask aperture bridges items with different nets",
+            "key": "solder_mask_bridge"
+        },
+        {
+            "description": "Track endpoint not centered on via",
+            "key": "track_not_centered_on_via"
+        },
+        {
+            "description": "Tuning profile track geometries",
+            "key": "tuning_profile_track_geometries"
+        },
+        {
+            "description": "Footprint doesn't match symbol's footprint filters",
+            "key": "footprint_filters_mismatch"
+        },
+        {
+            "description": "PTH inside courtyard",
+            "key": "pth_inside_courtyard"
+        },
+        {
+            "description": "NPTH inside courtyard",
+            "key": "npth_inside_courtyard"
+        },
+        {
+            "description": "Footprint component type doesn't match footprint pads",
+            "key": "footprint_type_mismatch"
+        }
+    ],
+    "included_severities": [
+        "error",
+        "warning"
+    ],
+    "kicad_version": "10.0.0",
+    "schematic_parity": [],
+    "source": "stratolink.kicad_pcb",
+    "unconnected_items": [
+        {
+            "description": "Missing connection between items",
+            "items": [
+                {
+                    "description": "Zone [GND] on F.Cu and B.Cu, priority 0",
+                    "pos": {
+                        "x": 53.011,
+                        "y": 29.026164
+                    },
+                    "uuid": "795c4093-4930-4bcb-9c07-8e31d04084fe"
+                },
+                {
+                    "description": "Zone [GND] on F.Cu and B.Cu, priority 0",
+                    "pos": {
+                        "x": 53.011,
+                        "y": 29.026164
+                    },
+                    "uuid": "795c4093-4930-4bcb-9c07-8e31d04084fe"
+                }
+            ],
+            "severity": "error",
+            "type": "unconnected_items"
+        },
+        {
+            "description": "Missing connection between items",
+            "items": [
+                {
+                    "description": "Pad 8 [GND] of U6 on F.Cu",
+                    "pos": {
+                        "x": 75.3,
+                        "y": 37.85
+                    },
+                    "uuid": "876b96a3-c89d-460c-af42-25daf95a0df5"
+                },
+                {
+                    "description": "Track [GND] on F.Cu, length 0.4000 mm",
+                    "pos": {
+                        "x": 74.0,
+                        "y": 38.675
+                    },
+                    "uuid": "9332683f-1491-57e1-8487-8a5c381e3971"
+                }
+            ],
+            "severity": "error",
+            "type": "unconnected_items"
+        }
+    ],
+    "violations": [
+        {
+            "description": "Hole size out of range (board setup constraints min hole 0.3000 mm; actual 0.2000 mm)",
+            "items": [
+                {
+                    "description": "Via [GND] on F.Cu - B.Cu",
+                    "pos": {
+                        "x": 74.025,
+                        "y": 39.1
+                    },
+                    "uuid": "00f3c6f2-8300-5739-bc78-6393fac250e6"
+                }
+            ],
+            "severity": "error",
+            "type": "drill_out_of_range"
+        },
+        {
+            "description": "Via diameter (board setup constraints min diameter 0.5000 mm; actual 0.4000 mm)",
+            "items": [
+                {
+                    "description": "Via [GND] on F.Cu - B.Cu",
+                    "pos": {
+                        "x": 74.025,
+                        "y": 39.1
+                    },
+                    "uuid": "00f3c6f2-8300-5739-bc78-6393fac250e6"
+                }
+            ],
+            "severity": "error",
+            "type": "via_diameter"
+        },
+        {
+            "description": "Via is not connected or connected on only one layer",
+            "items": [
+                {
+                    "description": "Via [GND] on F.Cu - B.Cu",
+                    "pos": {
+                        "x": 74.025,
+                        "y": 39.1
+                    },
+                    "uuid": "00f3c6f2-8300-5739-bc78-6393fac250e6"
+                }
+            ],
+            "severity": "warning",
+            "type": "via_dangling"
+        },
+        {
+            "description": "Silkscreen clipped by solder mask",
+            "items": [
+                {
+                    "description": "PCB text '+' on F.Silkscreen",
+                    "pos": {
+                        "x": 56.2,
+                        "y": 85.0
+                    },
+                    "uuid": "d33ff207-5537-4175-aad0-4a6a2127c38c"
+                },
+                {
+                    "description": "Rectangle on F.Mask",
+                    "pos": {
+                        "x": 52.0,
+                        "y": 28.0
+                    },
+                    "uuid": "19552f78-8bc8-5d58-a252-cce4c7aa3763"
+                }
+            ],
+            "severity": "warning",
+            "type": "silk_over_copper"
+        },
+        {
+            "description": "Silkscreen clipped by solder mask",
+            "items": [
+                {
+                    "description": "PCB text 'GND' on F.Silkscreen",
+                    "pos": {
+                        "x": 57.2,
+                        "y": 55.0
+                    },
+                    "uuid": "70fd784f-4460-4c2f-b1b0-5920dc836f3e"
+                },
+                {
+                    "description": "Rectangle on F.Mask",
+                    "pos": {
+                        "x": 52.0,
+                        "y": 28.0
+                    },
+                    "uuid": "19552f78-8bc8-5d58-a252-cce4c7aa3763"
+                }
+            ],
+            "severity": "warning",
+            "type": "silk_over_copper"
+        },
+        {
+            "description": "Silkscreen clipped by solder mask",
+            "items": [
+                {
+                    "description": "PCB text '+' on F.Silkscreen",
+                    "pos": {
+                        "x": 73.8,
+                        "y": 85.0
+                    },
+                    "uuid": "8a2d562a-cd15-40da-973d-853d9daff557"
+                },
+                {
+                    "description": "Rectangle on F.Mask",
+                    "pos": {
+                        "x": 52.0,
+                        "y": 28.0
+                    },
+                    "uuid": "19552f78-8bc8-5d58-a252-cce4c7aa3763"
+                }
+            ],
+            "severity": "warning",
+            "type": "silk_over_copper"
+        },
+        {
+            "description": "Silkscreen clipped by solder mask",
+            "items": [
+                {
+                    "description": "PCB text 'GND' on F.Silkscreen",
+                    "pos": {
+                        "x": 73.0,
+                        "y": 54.5
+                    },
+                    "uuid": "857ef018-87a1-4fd2-b5a3-b7c725b5a4a9"
+                },
+                {
+                    "description": "Rectangle on F.Mask",
+                    "pos": {
+                        "x": 52.0,
+                        "y": 28.0
+                    },
+                    "uuid": "19552f78-8bc8-5d58-a252-cce4c7aa3763"
+                }
+            ],
+            "severity": "warning",
+            "type": "silk_over_copper"
+        }
+    ]
+}

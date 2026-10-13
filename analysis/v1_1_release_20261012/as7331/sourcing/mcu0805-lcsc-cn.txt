@@ -1,0 +1,772 @@
+- banner:
+  - generic: 您好，请
+  - button "登录"
+  - button "免费注册"
+  - link "我的工作台":
+    - /url: https://member.szlcsc.com/member/workbench.html?spm=sc.it.hd.hy&lcsc_vid=QgReAQVeRwMMBlMFTlYMUwdUEwJcUFECTgILUlICTgcxVlNfRlhfUVBVQ1leVTtW
+    - generic: 我的工作台
+  - link "消息(0)":
+    - /url: https://member.szlcsc.com/member/ms.html?spm=sc.it.hd.xx&lcsc_vid=QgReAQVeRwMMBlMFTlYMUwdUEwJcUFECTgILUlICTgcxVlNfRlhfUVBVQ1leVTtW
+  - link "我的订单":
+    - /url: https://member.szlcsc.com/member/order/list.html?spm=sc.it.hd.dd&lcsc_vid=QgReAQVeRwMMBlMFTlYMUwdUEwJcUFECTgILUlICTgcxVlNfRlhfUVBVQ1leVTtW
+    - generic: 我的订单
+  - link "购物车":
+    - /url: https://cart.szlcsc.com/cart/display.html?spm=sc.it.hd.c1&lcsc_vid=QgReAQVeRwMMBlMFTlYMUwdUEwJcUFECTgILUlICTgcxVlNfRlhfUVBVQ1leVTtW
+    - text: 购物车(
+    - generic: "0"
+    - text: )
+  - link "我的收藏":
+    - /url: https://member.szlcsc.com/member/favorite.html?spm=sc.it.hd.fa&lcsc_vid=QgReAQVeRwMMBlMFTlYMUwdUEwJcUFECTgILUlICTgcxVlNfRlhfUVBVQ1leVTtW
+    - generic: 我的收藏
+  - generic: 联系客服
+  - link "帮助中心":
+    - /url: https://www.szlcsc.com/help/101.html?spm=sc.it.hd.bz&lcsc_vid=QgReAQVeRwMMBlMFTlYMUwdUEwJcUFECTgILUlICTgcxVlNfRlhfUVBVQ1leVTtW
+  - generic: 供应商合作
+  - generic: 嘉立创产业服务群
+  - navigation "嘉立创产业服务群":
+    - list:
+      - link "嘉立创PCB":
+        - /url: https://www.jlc.com/
+      - link "嘉立创FPC":
+        - /url: https://jlc-fpc.com/
+      - link "嘉立创SMT":
+        - /url: https://www.jlc-smt.com/
+      - link "嘉立创FA":
+        - /url: https://www.jlcfa.com/?i=G3&lcsc_vid=QgReAQVeRwMMBlMFTlYMUwdUEwJcUFECTgILUlICTgcxVlNfRlhfUVBVQ1leVTtW
+      - link "嘉立创EDA":
+        - /url: https://lceda.cn/
+      - link "嘉立创社区":
+        - /url: https://www.jlc-bbs.com/
+      - link "机电工坊":
+        - /url: https://www.jlc-jdgf.com/
+  - link "立创商城一站式电子元器件采购商城":
+    - /url: https://www.szlcsc.com/?spm=sc.it.lg&lcsc_vid=QgReAQVeRwMMBlMFTlYMUwdUEwJcUFECTgILUlICTgcxVlNfRlhfUVBVQ1leVTtW
+    - img "嘉立创上市"
+  - generic: 全部商品
+  - textbox "IRF640NPBF"
+  - button "搜索"
+  - button "BOM下单":
+    - generic: BOM下单
+  - link "购物车 0":
+    - /url: https://cart.szlcsc.com/cart/display.html?spm=sc.it.c2&lcsc_vid=QgReAQVeRwMMBlMFTlYMUwdUEwJcUFECTgILUlICTgcxVlNfRlhfUVBVQ1leVTtW
+    - generic: 购物车
+    - generic: "0"
+  - link "立创商城一站式电子元器件采购商城":
+    - /url: https://www.szlcsc.com/?spm=sc.it.hd.lg&lcsc_vid=QgReAQVeRwMMBlMFTlYMUwdUEwJcUFECTgILUlICTgcxVlNfRlhfUVBVQ1leVTtW
+    - img "嘉立创上市"
+  - generic: 全部商品
+  - textbox "IRF640NPBF"
+  - button "搜索"
+  - list:
+    - link "MCP2515T-I/ST":
+      - /url: https://item.szlcsc.com/197346.html?from=kw&spm=sc.it.hd.hk.1&lcsc_vid=QgReAQVeRwMMBlMFTlYMUwdUEwJcUFECTgILUlICTgcxVlNfRlhfUVBVQ1leVTtW
+    - link "XC7Z020-2CLG400I":
+      - /url: https://item.szlcsc.com/594617.html?from=kw&spm=sc.it.hd.hk.2&lcsc_vid=QgReAQVeRwMMBlMFTlYMUwdUEwJcUFECTgILUlICTgcxVlNfRlhfUVBVQ1leVTtW
+    - link "SP485EEN-L/TR":
+      - /url: https://item.szlcsc.com/7327.html?from=kw&spm=sc.it.hd.hk.3&lcsc_vid=QgReAQVeRwMMBlMFTlYMUwdUEwJcUFECTgILUlICTgcxVlNfRlhfUVBVQ1leVTtW
+    - link "折扣":
+      - /url: https://list.szlcsc.com/zk2610860.html?from=kw&spm=sc.it.hd.hk.4&lcsc_vid=QgReAQVeRwMMBlMFTlYMUwdUEwJcUFECTgILUlICTgcxVlNfRlhfUVBVQ1leVTtW
+    - link "新人1分购":
+      - /url: https://activity.szlcsc.com/newuser.html?from=kw&spm=sc.it.hd.hk.5&lcsc_vid=QgReAQVeRwMMBlMFTlYMUwdUEwJcUFECTgILUlICTgcxVlNfRlhfUVBVQ1leVTtW
+    - link "清仓":
+      - /url: https://list.szlcsc.com/clearance.html?from=kw&spm=sc.it.hd.hk.6&lcsc_vid=QgReAQVeRwMMBlMFTlYMUwdUEwJcUFECTgILUlICTgcxVlNfRlhfUVBVQ1leVTtW
+    - link "送采购晶":
+      - /url: https://list.szlcsc.com/zk210479.html?from=kw&spm=sc.it.hd.hk.7&lcsc_vid=QgReAQVeRwMMBlMFTlYMUwdUEwJcUFECTgILUlICTgcxVlNfRlhfUVBVQ1leVTtW
+  - button "BOM下单":
+    - generic: BOM下单
+  - link "购物车 0":
+    - /url: https://cart.szlcsc.com/cart/display.html?spm=sc.it.hd.c2&lcsc_vid=QgReAQVeRwMMBlMFTlYMUwdUEwJcUFECTgILUlICTgcxVlNfRlhfUVBVQ1leVTtW
+    - generic: 购物车
+    - generic: "0"
+  - button "商品分类":
+    - generic: 商品分类
+  - link "领券中心":
+    - /url: https://www.szlcsc.com/huodong.html?from=dh&spm=sc.it.nav.1&lcsc_vid=QgReAQVeRwMMBlMFTlYMUwdUEwJcUFECTgILUlICTgcxVlNfRlhfUVBVQ1leVTtW
+    - generic: 领券中心
+  - link "备货找料":
+    - /url: https://www.szlcsc.com/stock.html?from=dh&spm=sc.it.nav.2&lcsc_vid=QgReAQVeRwMMBlMFTlYMUwdUEwJcUFECTgILUlICTgcxVlNfRlhfUVBVQ1leVTtW
+    - generic: 备货找料
+  - link "立推专区":
+    - /url: https://list.szlcsc.com/lt240782.html?from=dh&spm=sc.it.nav.3&lcsc_vid=QgReAQVeRwMMBlMFTlYMUwdUEwJcUFECTgILUlICTgcxVlNfRlhfUVBVQ1leVTtW
+    - generic: 立推专区
+  - link "爆款推荐":
+    - /url: https://list.szlcsc.com/hot.html?from=dh&spm=sc.it.nav.4&lcsc_vid=QgReAQVeRwMMBlMFTlYMUwdUEwJcUFECTgILUlICTgcxVlNfRlhfUVBVQ1leVTtW
+    - generic: 爆款推荐
+  - link "合作库存":
+    - /url: https://list.szlcsc.com/partner.html?from=dh&spm=sc.it.nav.5&lcsc_vid=QgReAQVeRwMMBlMFTlYMUwdUEwJcUFECTgILUlICTgcxVlNfRlhfUVBVQ1leVTtW
+    - generic: 合作库存
+  - link "PLUS会员":
+    - /url: https://activity.szlcsc.com/plusIndex.html?from=dh&spm=sc.it.nav.6&lcsc_vid=QgReAQVeRwMMBlMFTlYMUwdUEwJcUFECTgILUlICTgcxVlNfRlhfUVBVQ1leVTtW
+    - generic: PLUS会员
+  - link "BOM配单":
+    - /url: https://bom.szlcsc.com/?from=dh&spm=sc.it.nav.7&lcsc_vid=QgReAQVeRwMMBlMFTlYMUwdUEwJcUFECTgILUlICTgcxVlNfRlhfUVBVQ1leVTtW
+    - generic: BOM配单
+  - link "PCB/FPC/SMT":
+    - /url: https://smt.szlcsc.com/?from=dh&spm=sc.it.nav.8&lcsc_vid=QgReAQVeRwMMBlMFTlYMUwdUEwJcUFECTgILUlICTgcxVlNfRlhfUVBVQ1leVTtW
+    - generic: PCB/FPC/SMT
+  - link "工业品":
+    - /url: https://mro.szlcsc.com/?from=dh&spm=sc.it.nav.9&lcsc_vid=QgReAQVeRwMMBlMFTlYMUwdUEwJcUFECTgILUlICTgcxVlNfRlhfUVBVQ1leVTtW
+    - generic: 工业品
+  - link "面板定制":
+    - /url: https://www.szlcmb.com/?from=dh&spm=sc.it.nav.10&lcsc_vid=QgReAQVeRwMMBlMFTlYMUwdUEwJcUFECTgILUlICTgcxVlNfRlhfUVBVQ1leVTtW
+    - generic: 面板定制
+- main:
+  - navigation "面包屑导航":
+    - list:
+      - link "首页":
+        - /url: https://www.szlcsc.com/?spm=sc.it.bc.1&lcsc_vid=QgReAQVeRwMMBlMFTlYMUwdUEwJcUFECTgILUlICTgcxVlNfRlhfUVBVQ1leVTtW
+      - text: ">"
+      - link "贴片电阻":
+        - /url: https://list.szlcsc.com/catalog/439.html?spm=sc.it.bc.2&lcsc_vid=QgReAQVeRwMMBlMFTlYMUwdUEwJcUFECTgILUlICTgcxVlNfRlhfUVBVQ1leVTtW
+      - text: ">"
+      - generic "MCU0805MD3304BP500"
+  - link "查看MCU0805MD3304BP500的PCB引脚图、焊盘图、高清图":
+    - /url: https://item.szlcsc.com/product/jpg_4883673.html?spm=sc.it.pd.img&lcsc_vid=QgReAQVeRwMMBlMFTlYMUwdUEwJcUFECTgILUlICTgcxVlNfRlhfUVBVQ1leVTtW
+    - img "MCU0805MD3304BP500实物图"
+  - link "查看MCU0805MD3304BP500的PCB引脚图":
+    - /url: https://item.szlcsc.com/product/jpg_4883673.html?spm=sc.it.pd.img&lcsc_vid=QgReAQVeRwMMBlMFTlYMUwdUEwJcUFECTgILUlICTgcxVlNfRlhfUVBVQ1leVTtW
+  - link "查看MCU0805MD3304BP500的PCB焊盘图":
+    - /url: https://item.szlcsc.com/product/jpg_4883673.html?spm=sc.it.pd.img&lcsc_vid=QgReAQVeRwMMBlMFTlYMUwdUEwJcUFECTgILUlICTgcxVlNfRlhfUVBVQ1leVTtW
+  - button "切换上一张图片"
+  - list:
+    - img "MCU0805MD3304BP500商品缩略图"
+    - img "MCU0805MD3304BP500商品缩略图"
+    - img "MCU0805MD3304BP500商品缩略图"
+  - button "切换下一张图片"
+  - paragraph: 温馨提醒：图片仅供参考，商品以实物为准
+  - button "收藏":
+    - generic: 收藏
+  - button "对比":
+    - generic: 对比
+  - heading "MCU0805MD3304BP500" [level=1]
+  - paragraph: 薄膜电阻 3.3MΩ ±0.1% 200mW
+  - generic: SMT
+  - generic: 扩展库
+  - link "SMT补贴 嘉立创库存95":
+    - /url: https://www.jlc-smt.com/lcsc/detail/C4313228.html
+    - generic "嘉立创库存95":
+      - generic: SMT补贴
+      - generic: 嘉立创库存95
+  - generic: PCB
+  - generic: 免费打样
+  - generic: 私有库
+  - generic: 下单最高享92折
+  - term: 描述
+  - definition: 适用于对可靠性和稳定性要求较高的现代电子领域,典型应用包括汽车、工业、电信和医疗设备,以及精密测试和测量设备。
+  - term: 品牌名称
+  - definition:
+    - link "VISHAY(威世)":
+      - /url: https://list.szlcsc.com/brand/91.html?spm=sc.it.pd.pp&lcsc_vid=QgReAQVeRwMMBlMFTlYMUwdUEwJcUFECTgILUlICTgcxVlNfRlhfUVBVQ1leVTtW
+  - term: 商品型号
+  - definition: MCU0805MD3304BP500
+  - term: 商品编号
+  - definition: C4313228
+  - term: 商品封装
+  - definition: "0805"
+  - term: 包装方式
+  - definition: 编带
+  - term: 商品毛重
+  - definition: 0.028克(g)
+  - list:
+    - button "打开MCU0805MD3304BP500规格书":
+      - generic: 数据手册
+  - list:
+    - listitem: 商品参数
+    - listitem: 数据手册PDF
+    - listitem: 买了又买
+  - heading "商品参数" [level=2]
+  - button "资料纠错"
+  - button "查看类似商品"
+  - table:
+    - rowgroup:
+      - row "属性 参数值":
+        - columnheader:
+          - checkbox
+        - columnheader "属性"
+        - columnheader "参数值"
+    - rowgroup:
+      - row "商品目录 贴片电阻":
+        - cell:
+          - checkbox [checked] [disabled]:
+        - cell "商品目录"
+        - cell "贴片电阻"
+      - row "电阻类型 薄膜电阻":
+        - cell:
+          - checkbox
+        - cell "电阻类型"
+        - cell "薄膜电阻"
+      - row "阻值 3.3MΩ":
+        - cell:
+          - checkbox
+        - cell "阻值"
+        - cell "3.3MΩ"
+      - row "精度 ±0.1%":
+        - cell:
+          - checkbox
+        - cell "精度"
+        - cell "±0.1%"
+  - table:
+    - rowgroup:
+      - row "属性 参数值":
+        - columnheader:
+          - checkbox
+        - columnheader "属性"
+        - columnheader "参数值"
+    - rowgroup:
+      - row "功率 200mW":
+        - cell:
+          - checkbox
+        - cell "功率"
+        - cell "200mW"
+      - row "温度系数 ±25ppm/℃":
+        - cell:
+          - checkbox
+        - cell "温度系数"
+        - cell "±25ppm/℃"
+      - row "工作温度 -55℃~+155℃":
+        - cell:
+          - checkbox
+        - cell "工作温度"
+        - cell "-55℃~+155℃"
+  - heading "数据手册PDF" [level=2]
+  - link "查看MCU0805MD3304BP500数据手册":
+    - /url: https://item.szlcsc.com/datasheet/MCU0805MD3304BP500/4883673.html?spm=sc.it.pdf.fd&lcsc_vid=QgReAQVeRwMMBlMFTlYMUwdUEwJcUFECTgILUlICTgcxVlNfRlhfUVBVQ1leVTtW
+    - text: 放大查看
+  - link "下载PDF":
+    - /url: https://atta.szlcsc.com/upload/public/pdf/source/20231211/F306B9D6A7595181D115F7EAC2C67B42.pdf?Expires=4070880000&OSSAccessKeyId=LTAIJDIkh7KmGS1H&Signature=l7fFni6I4roo4LqyYido7UWfHn4%3D&response-content-disposition=attachment%3Bfilename%3DC4313228_%25E8%25B4%25B4%25E7%2589%2587%25E7%2594%25B5%25E9%2598%25BB_MCU0805MD3304BP500_%25E8%25A7%2584%25E6%25A0%25BC%25E4%25B9%25A6_WJ798878.PDF
+  - iframe [id="myPdfIframe"]
+  - heading "最新价格" [level=3]
+  - generic: 梯度
+  - generic: 售价
+  - generic: 折合1圆盘
+  - generic: 1+
+  - generic: ￥3.13
+  - generic: 10+
+  - generic: ￥2.43
+  - generic: 30+
+  - generic: ￥2.13
+  - heading "优惠活动" [level=3]
+  - list:
+    - button "运 9元":
+      - generic: 运
+      - generic: 9元
+  - heading "库存总量" [level=3]
+  - generic: (单位：个)
+  - generic: 现货：30
+  - generic: 最快4小时发货
+  - heading "购买数量" [level=3]
+  - generic: (5000个/圆盘，最小起订量 1 个)
+  - spinbutton
+  - combobox:
+    - text: 个
+  - generic: 起订量：1 个
+  - generic: 5000个/圆盘
+  - heading "总价金额：" [level=3]
+  - generic: ￥ 0.00
+  - button "加入购物车"
+  - button "立即购买"
+  - generic: 近期成交
+  - text: 15单
+  - heading "买了又买" [level=2]
+  - list:
+    - img "0603WAF1001T5E"
+    - heading "厚膜电阻 1kΩ ±1% 100mW" [level=3]:
+      - link "厚膜电阻 1kΩ ±1% 100mW":
+        - /url: https://item.szlcsc.com/21904.html?spm=sc.it.itj.1&lcsc_vid=QgReAQVeRwMMBlMFTlYMUwdUEwJcUFECTgILUlICTgcxVlNfRlhfUVBVQ1leVTtW
+    - term: 品牌
+    - definition: UNI-ROYAL(厚声)
+    - term: 封装
+    - definition: "0603"
+    - generic: ￥0.0059
+    - img "0603WAF0000T5E"
+    - heading "厚膜电阻 0Ω ±1% 100mW" [level=3]:
+      - link "厚膜电阻 0Ω ±1% 100mW":
+        - /url: https://item.szlcsc.com/21903.html?spm=sc.it.itj.2&lcsc_vid=QgReAQVeRwMMBlMFTlYMUwdUEwJcUFECTgILUlICTgcxVlNfRlhfUVBVQ1leVTtW
+    - term: 品牌
+    - definition: UNI-ROYAL(厚声)
+    - term: 封装
+    - definition: "0603"
+    - generic: ￥0.0069
+    - img "0603WAF1003T5E"
+    - heading "厚膜电阻 100kΩ ±1% 100mW" [level=3]:
+      - link "厚膜电阻 100kΩ ±1% 100mW":
+        - /url: https://item.szlcsc.com/26546.html?spm=sc.it.itj.3&lcsc_vid=QgReAQVeRwMMBlMFTlYMUwdUEwJcUFECTgILUlICTgcxVlNfRlhfUVBVQ1leVTtW
+    - term: 品牌
+    - definition: UNI-ROYAL(厚声)
+    - term: 封装
+    - definition: "0603"
+    - generic: ￥0.0093
+    - img "CL05B104KO5NNNC"
+    - heading "100nF ±10% 16V" [level=3]:
+      - link "100nF ±10% 16V":
+        - /url: https://item.szlcsc.com/1877.html?spm=sc.it.itj.4&lcsc_vid=QgReAQVeRwMMBlMFTlYMUwdUEwJcUFECTgILUlICTgcxVlNfRlhfUVBVQ1leVTtW
+    - term: 品牌
+    - definition: SAMSUNG(三星)
+    - term: 封装
+    - definition: "0402"
+    - generic: ￥0.014
+    - img "CL10A105KB8NNNC"
+    - heading "1uF ±10% 50V" [level=3]:
+      - link "1uF ±10% 50V":
+        - /url: https://item.szlcsc.com/16531.html?spm=sc.it.itj.5&lcsc_vid=QgReAQVeRwMMBlMFTlYMUwdUEwJcUFECTgILUlICTgcxVlNfRlhfUVBVQ1leVTtW
+    - term: 品牌
+    - definition: SAMSUNG(三星)
+    - term: 封装
+    - definition: "0603"
+    - generic: ￥0.0539
+    - img "CC0603KRX7R9BB104"
+    - heading "100nF ±10% 50V" [level=3]:
+      - link "100nF ±10% 50V":
+        - /url: https://item.szlcsc.com/15331.html?spm=sc.it.itj.6&lcsc_vid=QgReAQVeRwMMBlMFTlYMUwdUEwJcUFECTgILUlICTgcxVlNfRlhfUVBVQ1leVTtW
+    - term: 品牌
+    - definition: YAGEO(国巨)
+    - term: 封装
+    - definition: "0603"
+    - generic: ￥0.0415
+    - img "0402WGF1002TCE"
+    - heading "厚膜电阻 10kΩ ±1% 62.5mW" [level=3]:
+      - link "厚膜电阻 10kΩ ±1% 62.5mW":
+        - /url: https://item.szlcsc.com/26487.html?spm=sc.it.itj.7&lcsc_vid=QgReAQVeRwMMBlMFTlYMUwdUEwJcUFECTgILUlICTgcxVlNfRlhfUVBVQ1leVTtW
+    - term: 品牌
+    - definition: UNI-ROYAL(厚声)
+    - term: 封装
+    - definition: "0402"
+    - generic: ￥0.0101
+    - img "0603WAF1002T5E"
+    - heading "厚膜电阻 10kΩ ±1% 100mW" [level=3]:
+      - link "厚膜电阻 10kΩ ±1% 100mW":
+        - /url: https://item.szlcsc.com/26547.html?spm=sc.it.itj.8&lcsc_vid=QgReAQVeRwMMBlMFTlYMUwdUEwJcUFECTgILUlICTgcxVlNfRlhfUVBVQ1leVTtW
+    - term: 品牌
+    - definition: UNI-ROYAL(厚声)
+    - term: 封装
+    - definition: "0603"
+    - generic: ￥0.0208
+  - heading "精选工业品推荐" [level=2]
+  - list:
+    - img "AT-B778"
+    - heading "ATTEN(安泰信)，手动真空吸笔，AT-B778" [level=3]:
+      - link "ATTEN(安泰信)，手动真空吸笔，AT-B778":
+        - /url: https://item.szlcsc.com/mro/6064710.html?spm=sc.it.mtj.1&lcsc_vid=QgReAQVeRwMMBlMFTlYMUwdUEwJcUFECTgILUlICTgcxVlNfRlhfUVBVQ1leVTtW
+    - term: 品牌
+    - definition: ATTEN(安泰信)
+    - term: 封装
+    - definition: "-"
+    - generic: ￥28.59
+    - img "MS621FE-FL11E"
+    - heading "Seiko(精工) 可充电锂锰纽扣电池 3V 5.5mAh 1个" [level=3]:
+      - link "Seiko(精工) 可充电锂锰纽扣电池 3V 5.5mAh 1个":
+        - /url: https://item.szlcsc.com/mro/82059.html?spm=sc.it.mtj.2&lcsc_vid=QgReAQVeRwMMBlMFTlYMUwdUEwJcUFECTgILUlICTgcxVlNfRlhfUVBVQ1leVTtW
+    - term: 品牌
+    - definition: Seiko(精工)
+    - term: 封装
+    - definition: "-"
+    - generic: ￥2.78
+    - img "BK881"
+    - heading "Bakon(深圳白光)，恒温电烙铁热风枪二合一数显可调温大功率无铅拆焊台，BK881（新老款交替发货）" [level=3]:
+      - link "Bakon(深圳白光)，恒温电烙铁热风枪二合一数显可调温大功率无铅拆焊台，BK881（新老款交替发货）":
+        - /url: https://item.szlcsc.com/mro/3486868.html?spm=sc.it.mtj.3&lcsc_vid=QgReAQVeRwMMBlMFTlYMUwdUEwJcUFECTgILUlICTgcxVlNfRlhfUVBVQ1leVTtW
+    - term: 品牌
+    - definition: Bakon(深圳白光)
+    - term: 封装
+    - definition: "-"
+    - generic: ￥429
+    - img "HF850D-853B"
+    - heading "Bakon(深圳白光)，热风枪拆焊台手柄全系列，拆焊台手柄(联合蓝)，HF850D-853B" [level=3]:
+      - link "Bakon(深圳白光)，热风枪拆焊台手柄全系列，拆焊台手柄(联合蓝)，HF850D-853B":
+        - /url: https://item.szlcsc.com/mro/3486878.html?spm=sc.it.mtj.4&lcsc_vid=QgReAQVeRwMMBlMFTlYMUwdUEwJcUFECTgILUlICTgcxVlNfRlhfUVBVQ1leVTtW
+    - term: 品牌
+    - definition: Bakon(深圳白光)
+    - term: 封装
+    - definition: "-"
+    - generic: ￥60.42
+    - img "UT890C"
+    - heading "优利德 数字式手持万用表 UT890C NCV;三极管测试;二极管测试;火线辨别;真有效值;通断测试" [level=3]:
+      - link "优利德 数字式手持万用表 UT890C NCV;三极管测试;二极管测试;火线辨别;真有效值;通断测试":
+        - /url: https://item.szlcsc.com/mro/5925144.html?spm=sc.it.mtj.5&lcsc_vid=QgReAQVeRwMMBlMFTlYMUwdUEwJcUFECTgILUlICTgcxVlNfRlhfUVBVQ1leVTtW
+    - term: 品牌
+    - definition: 优利德
+    - term: 封装
+    - definition: "-"
+    - generic: ￥121.22
+    - img "Sn99.3Cu0.7 0.8mm 500G"
+    - heading "XHT(兴鸿泰)，无铅焊锡丝，Sn99,3Cu0.7 Ф0.8mm 500G，环保锡线，免洗焊锡丝/锡线,1卷（含松香）" [level=3]:
+      - link "XHT(兴鸿泰)，无铅焊锡丝，Sn99,3Cu0.7 Ф0.8mm 500G，环保锡线，免洗焊锡丝/锡线,1卷（含松香）":
+        - /url: https://item.szlcsc.com/mro/5956285.html?spm=sc.it.mtj.6&lcsc_vid=QgReAQVeRwMMBlMFTlYMUwdUEwJcUFECTgILUlICTgcxVlNfRlhfUVBVQ1leVTtW
+    - term: 品牌
+    - definition: XHT(兴鸿泰)
+    - term: 封装
+    - definition: "-"
+    - generic: ￥240.42
+    - img "CR-2032L/BN"
+    - heading "PANASONIC(松下) 锂锰电池 3V 225mAh 1个" [level=3]:
+      - link "PANASONIC(松下) 锂锰电池 3V 225mAh 1个":
+        - /url: https://item.szlcsc.com/mro/93276.html?spm=sc.it.mtj.7&lcsc_vid=QgReAQVeRwMMBlMFTlYMUwdUEwJcUFECTgILUlICTgcxVlNfRlhfUVBVQ1leVTtW
+    - term: 品牌
+    - definition: PANASONIC(松下)
+    - term: 封装
+    - definition: "-"
+    - generic: ￥1
+    - img "SMTSO3030CTJ"
+    - heading "雄和远景，电路板表贴圆螺母柱，M3Xφ5.56X3+1.53，铜镀锡，编带装" [level=3]:
+      - link "雄和远景，电路板表贴圆螺母柱，M3Xφ5.56X3+1.53，铜镀锡，编带装":
+        - /url: https://item.szlcsc.com/mro/3209268.html?spm=sc.it.mtj.8&lcsc_vid=QgReAQVeRwMMBlMFTlYMUwdUEwJcUFECTgILUlICTgcxVlNfRlhfUVBVQ1leVTtW
+    - term: 品牌
+    - definition: Sinhoo(雄和远景)
+    - term: 封装
+    - definition: "-"
+    - generic: ￥0.314482
+  - tablist:
+    - tab "相似推荐" [selected]
+    - tab "其他推荐"
+  - tabpanel "相似推荐":
+    - list:
+      - link "查看元器件D55342E07B2E50RT1详情":
+        - /url: https://item.szlcsc.com/4883676.html?spm=sc.it.tj.1-1&lcsc_vid=QgReAQVeRwMMBlMFTlYMUwdUEwJcUFECTgILUlICTgcxVlNfRlhfUVBVQ1leVTtW
+        - text: D55342E07B2E50RT1
+      - link "查看元器件WSLP25125L000DEA详情":
+        - /url: https://item.szlcsc.com/4883677.html?spm=sc.it.tj.1-2&lcsc_vid=QgReAQVeRwMMBlMFTlYMUwdUEwJcUFECTgILUlICTgcxVlNfRlhfUVBVQ1leVTtW
+        - text: WSLP25125L000DEA
+      - link "查看元器件D55342E07B4B12RWS详情":
+        - /url: https://item.szlcsc.com/4883684.html?spm=sc.it.tj.1-3&lcsc_vid=QgReAQVeRwMMBlMFTlYMUwdUEwJcUFECTgILUlICTgcxVlNfRlhfUVBVQ1leVTtW
+        - text: D55342E07B4B12RWS
+      - link "查看元器件M55342K11B39D0RT0V详情":
+        - /url: https://item.szlcsc.com/4883686.html?spm=sc.it.tj.1-4&lcsc_vid=QgReAQVeRwMMBlMFTlYMUwdUEwJcUFECTgILUlICTgcxVlNfRlhfUVBVQ1leVTtW
+        - text: M55342K11B39D0RT0V
+      - link "查看元器件CRCW0805270RJNEBC详情":
+        - /url: https://item.szlcsc.com/4883692.html?spm=sc.it.tj.1-5&lcsc_vid=QgReAQVeRwMMBlMFTlYMUwdUEwJcUFECTgILUlICTgcxVlNfRlhfUVBVQ1leVTtW
+        - text: CRCW0805270RJNEBC
+      - link "查看元器件TNPW0805357RBYTA详情":
+        - /url: https://item.szlcsc.com/4883693.html?spm=sc.it.tj.1-6&lcsc_vid=QgReAQVeRwMMBlMFTlYMUwdUEwJcUFECTgILUlICTgcxVlNfRlhfUVBVQ1leVTtW
+        - text: TNPW0805357RBYTA
+      - link "查看元器件D55342H07B121ART5详情":
+        - /url: https://item.szlcsc.com/4883697.html?spm=sc.it.tj.1-7&lcsc_vid=QgReAQVeRwMMBlMFTlYMUwdUEwJcUFECTgILUlICTgcxVlNfRlhfUVBVQ1leVTtW
+        - text: D55342H07B121ART5
+      - link "查看元器件D55342M07B10K0MTSV详情":
+        - /url: https://item.szlcsc.com/4883704.html?spm=sc.it.tj.1-8&lcsc_vid=QgReAQVeRwMMBlMFTlYMUwdUEwJcUFECTgILUlICTgcxVlNfRlhfUVBVQ1leVTtW
+        - text: D55342M07B10K0MTSV
+      - link "查看元器件PHP00603E1140BST1详情":
+        - /url: https://item.szlcsc.com/4883708.html?spm=sc.it.tj.1-9&lcsc_vid=QgReAQVeRwMMBlMFTlYMUwdUEwJcUFECTgILUlICTgcxVlNfRlhfUVBVQ1leVTtW
+        - text: PHP00603E1140BST1
+      - link "查看元器件D55342E07B475DRT0详情":
+        - /url: https://item.szlcsc.com/4883709.html?spm=sc.it.tj.1-10&lcsc_vid=QgReAQVeRwMMBlMFTlYMUwdUEwJcUFECTgILUlICTgcxVlNfRlhfUVBVQ1leVTtW
+        - text: D55342E07B475DRT0
+      - link "查看元器件D55342E07B1B40RWI详情":
+        - /url: https://item.szlcsc.com/4883715.html?spm=sc.it.tj.1-11&lcsc_vid=QgReAQVeRwMMBlMFTlYMUwdUEwJcUFECTgILUlICTgcxVlNfRlhfUVBVQ1leVTtW
+        - text: D55342E07B1B40RWI
+      - link "查看元器件Y112111K0000A9L详情":
+        - /url: https://item.szlcsc.com/4883722.html?spm=sc.it.tj.1-12&lcsc_vid=QgReAQVeRwMMBlMFTlYMUwdUEwJcUFECTgILUlICTgcxVlNfRlhfUVBVQ1leVTtW
+        - text: Y112111K0000A9L
+      - link "查看元器件CRCW251252R3FKEG详情":
+        - /url: https://item.szlcsc.com/4883725.html?spm=sc.it.tj.1-13&lcsc_vid=QgReAQVeRwMMBlMFTlYMUwdUEwJcUFECTgILUlICTgcxVlNfRlhfUVBVQ1leVTtW
+        - text: CRCW251252R3FKEG
+      - link "查看元器件M55342K12B17A4RTS详情":
+        - /url: https://item.szlcsc.com/4883728.html?spm=sc.it.tj.1-14&lcsc_vid=QgReAQVeRwMMBlMFTlYMUwdUEwJcUFECTgILUlICTgcxVlNfRlhfUVBVQ1leVTtW
+        - text: M55342K12B17A4RTS
+      - link "查看元器件RCP1206B33R0GTP详情":
+        - /url: https://item.szlcsc.com/4883729.html?spm=sc.it.tj.1-15&lcsc_vid=QgReAQVeRwMMBlMFTlYMUwdUEwJcUFECTgILUlICTgcxVlNfRlhfUVBVQ1leVTtW
+        - text: RCP1206B33R0GTP
+      - link "查看元器件M55342H12B120DRWS详情":
+        - /url: https://item.szlcsc.com/4883741.html?spm=sc.it.tj.1-16&lcsc_vid=QgReAQVeRwMMBlMFTlYMUwdUEwJcUFECTgILUlICTgcxVlNfRlhfUVBVQ1leVTtW
+        - text: M55342H12B120DRWS
+      - link "查看元器件PLT0805Z1522LBTS详情":
+        - /url: https://item.szlcsc.com/4883745.html?spm=sc.it.tj.1-17&lcsc_vid=QgReAQVeRwMMBlMFTlYMUwdUEwJcUFECTgILUlICTgcxVlNfRlhfUVBVQ1leVTtW
+        - text: PLT0805Z1522LBTS
+      - link "查看元器件D55342K07B1B10SWI详情":
+        - /url: https://item.szlcsc.com/4883746.html?spm=sc.it.tj.1-18&lcsc_vid=QgReAQVeRwMMBlMFTlYMUwdUEwJcUFECTgILUlICTgcxVlNfRlhfUVBVQ1leVTtW
+        - text: D55342K07B1B10SWI
+      - link "查看元器件CRCW08056K19FKTA详情":
+        - /url: https://item.szlcsc.com/4883750.html?spm=sc.it.tj.1-19&lcsc_vid=QgReAQVeRwMMBlMFTlYMUwdUEwJcUFECTgILUlICTgcxVlNfRlhfUVBVQ1leVTtW
+        - text: CRCW08056K19FKTA
+      - link "查看元器件CRCW060313K0FKEC详情":
+        - /url: https://item.szlcsc.com/4883759.html?spm=sc.it.tj.1-20&lcsc_vid=QgReAQVeRwMMBlMFTlYMUwdUEwJcUFECTgILUlICTgcxVlNfRlhfUVBVQ1leVTtW
+        - text: CRCW060313K0FKEC
+      - link "查看元器件CRCW08052R32FKTA详情":
+        - /url: https://item.szlcsc.com/4883764.html?spm=sc.it.tj.1-21&lcsc_vid=QgReAQVeRwMMBlMFTlYMUwdUEwJcUFECTgILUlICTgcxVlNfRlhfUVBVQ1leVTtW
+        - text: CRCW08052R32FKTA
+- contentinfo:
+  - list:
+    - img "海量现货"
+    - paragraph: 海量现货
+    - paragraph: 81万+种现货SKU
+    - paragraph: 品类不断扩充中
+    - img "闪电发货"
+    - paragraph: 闪电发货
+    - paragraph: 科技智能大仓储
+    - paragraph: 最快4小时发货
+    - img "严控渠道"
+    - paragraph: 严控渠道
+    - paragraph: 正品有保障
+    - paragraph: 物料可追溯
+    - img "降低成本"
+    - paragraph: 降低成本
+    - paragraph: 明码标价节省时间
+    - paragraph: 一站式采购元器件
+  - paragraph: 购物指南
+  - list:
+    - link "顾客必读":
+      - /url: https://www.szlcsc.com/help/101.html?spm=sc.it.ft.msg1.1&lcsc_vid=QgReAQVeRwMMBlMFTlYMUwdUEwJcUFECTgILUlICTgcxVlNfRlhfUVBVQ1leVTtW
+    - link "购物流程":
+      - /url: https://www.szlcsc.com/help/102.html?spm=sc.it.ft.msg1.2&lcsc_vid=QgReAQVeRwMMBlMFTlYMUwdUEwJcUFECTgILUlICTgcxVlNfRlhfUVBVQ1leVTtW
+    - link "商品搜索":
+      - /url: https://www.szlcsc.com/help/103.html?spm=sc.it.ft.msg1.3&lcsc_vid=QgReAQVeRwMMBlMFTlYMUwdUEwJcUFECTgILUlICTgcxVlNfRlhfUVBVQ1leVTtW
+    - link "会员等级":
+      - /url: https://www.szlcsc.com/help/104.html?spm=sc.it.ft.msg1.4&lcsc_vid=QgReAQVeRwMMBlMFTlYMUwdUEwJcUFECTgILUlICTgcxVlNfRlhfUVBVQ1leVTtW
+    - link "PLUS会员":
+      - /url: https://www.szlcsc.com/help/106.html?spm=sc.it.ft.msg1.5&lcsc_vid=QgReAQVeRwMMBlMFTlYMUwdUEwJcUFECTgILUlICTgcxVlNfRlhfUVBVQ1leVTtW
+    - link "优惠券使用规则":
+      - /url: https://www.szlcsc.com/help/1012.html?spm=sc.it.ft.msg1.6&lcsc_vid=QgReAQVeRwMMBlMFTlYMUwdUEwJcUFECTgILUlICTgcxVlNfRlhfUVBVQ1leVTtW
+    - link "BOM智能云表":
+      - /url: https://www.szlcsc.com/help/1108.html?spm=sc.it.ft.msg1.7&lcsc_vid=QgReAQVeRwMMBlMFTlYMUwdUEwJcUFECTgILUlICTgcxVlNfRlhfUVBVQ1leVTtW
+  - paragraph: 支付配送
+  - list:
+    - link "在线支付":
+      - /url: https://www.szlcsc.com/help/301.html?spm=sc.it.ft.msg2.1&lcsc_vid=QgReAQVeRwMMBlMFTlYMUwdUEwJcUFECTgILUlICTgcxVlNfRlhfUVBVQ1leVTtW
+    - link "发票须知":
+      - /url: https://www.szlcsc.com/help/302.html?spm=sc.it.ft.msg2.2&lcsc_vid=QgReAQVeRwMMBlMFTlYMUwdUEwJcUFECTgILUlICTgcxVlNfRlhfUVBVQ1leVTtW
+    - link "快递运输":
+      - /url: https://www.szlcsc.com/help/1102.html?spm=sc.it.ft.msg2.3&lcsc_vid=QgReAQVeRwMMBlMFTlYMUwdUEwJcUFECTgILUlICTgcxVlNfRlhfUVBVQ1leVTtW
+    - link "上门自提":
+      - /url: https://www.szlcsc.com/help/1103.html?spm=sc.it.ft.msg2.4&lcsc_vid=QgReAQVeRwMMBlMFTlYMUwdUEwJcUFECTgILUlICTgcxVlNfRlhfUVBVQ1leVTtW
+  - paragraph: 特色服务
+  - list:
+    - link "订货服务":
+      - /url: https://www.szlcsc.com/help/401.html?spm=sc.it.ft.msg3.1&lcsc_vid=QgReAQVeRwMMBlMFTlYMUwdUEwJcUFECTgILUlICTgcxVlNfRlhfUVBVQ1leVTtW
+    - link "海外代购":
+      - /url: https://www.szlcsc.com/help/405.html?spm=sc.it.ft.msg3.2&lcsc_vid=QgReAQVeRwMMBlMFTlYMUwdUEwJcUFECTgILUlICTgcxVlNfRlhfUVBVQ1leVTtW
+    - link "订单跟踪":
+      - /url: https://www.szlcsc.com/help/403.html?spm=sc.it.ft.msg3.3&lcsc_vid=QgReAQVeRwMMBlMFTlYMUwdUEwJcUFECTgILUlICTgcxVlNfRlhfUVBVQ1leVTtW
+    - link "质量保证":
+      - /url: https://www.szlcsc.com/help/404.html?spm=sc.it.ft.msg3.4&lcsc_vid=QgReAQVeRwMMBlMFTlYMUwdUEwJcUFECTgILUlICTgcxVlNfRlhfUVBVQ1leVTtW
+  - paragraph: 售后服务
+  - list:
+    - link "订单出库时长":
+      - /url: https://www.szlcsc.com/help/502.html?spm=sc.it.ft.msg4.1&lcsc_vid=QgReAQVeRwMMBlMFTlYMUwdUEwJcUFECTgILUlICTgcxVlNfRlhfUVBVQ1leVTtW
+    - link "验货/售后":
+      - /url: https://www.szlcsc.com/help/503.html?spm=sc.it.ft.msg4.2&lcsc_vid=QgReAQVeRwMMBlMFTlYMUwdUEwJcUFECTgILUlICTgcxVlNfRlhfUVBVQ1leVTtW
+    - link "服务投诉":
+      - /url: https://www.szlcsc.com/help/501.html?spm=sc.it.ft.msg4.3&lcsc_vid=QgReAQVeRwMMBlMFTlYMUwdUEwJcUFECTgILUlICTgcxVlNfRlhfUVBVQ1leVTtW
+  - paragraph: 特别说明
+  - list:
+    - link "隐私政策":
+      - /url: https://www.szlcsc.com/help/602.html?spm=sc.it.ft.msg5.1&lcsc_vid=QgReAQVeRwMMBlMFTlYMUwdUEwJcUFECTgILUlICTgcxVlNfRlhfUVBVQ1leVTtW
+    - link "规则更新记录":
+      - /url: https://www.szlcsc.com/help/40.html?spm=sc.it.ft.msg5.2&lcsc_vid=QgReAQVeRwMMBlMFTlYMUwdUEwJcUFECTgILUlICTgcxVlNfRlhfUVBVQ1leVTtW
+    - link "用户协议":
+      - /url: https://www.szlcsc.com/help/603.html?spm=sc.it.ft.msg5.3&lcsc_vid=QgReAQVeRwMMBlMFTlYMUwdUEwJcUFECTgILUlICTgcxVlNfRlhfUVBVQ1leVTtW
+    - link "免责声明":
+      - /url: https://www.szlcsc.com/help/604.html?spm=sc.it.ft.msg5.4&lcsc_vid=QgReAQVeRwMMBlMFTlYMUwdUEwJcUFECTgILUlICTgcxVlNfRlhfUVBVQ1leVTtW
+    - link "第三方共享清单":
+      - /url: https://www.szlcsc.com/help/608.html?spm=sc.it.ft.msg5.5&lcsc_vid=QgReAQVeRwMMBlMFTlYMUwdUEwJcUFECTgILUlICTgcxVlNfRlhfUVBVQ1leVTtW
+    - link "AI应用用户须知":
+      - /url: https://www.szlcsc.com/help/1106.html?spm=sc.it.ft.msg5.6&lcsc_vid=QgReAQVeRwMMBlMFTlYMUwdUEwJcUFECTgILUlICTgcxVlNfRlhfUVBVQ1leVTtW
+    - link "第三方服务与关联启动说明":
+      - /url: https://www.szlcsc.com/help/1107.html?spm=sc.it.ft.msg5.7&lcsc_vid=QgReAQVeRwMMBlMFTlYMUwdUEwJcUFECTgILUlICTgcxVlNfRlhfUVBVQ1leVTtW
+  - paragraph: 关于我们
+  - list:
+    - link "关于立创":
+      - /url: https://www.szlcsc.com/about.html?spm=sc.it.ft.msg6.1&lcsc_vid=QgReAQVeRwMMBlMFTlYMUwdUEwJcUFECTgILUlICTgcxVlNfRlhfUVBVQ1leVTtW
+    - link "联系我们":
+      - /url: https://www.szlcsc.com/contact.html?spm=sc.it.ft.msg6.2&lcsc_vid=QgReAQVeRwMMBlMFTlYMUwdUEwJcUFECTgILUlICTgcxVlNfRlhfUVBVQ1leVTtW
+    - link "手机立创":
+      - /url: https://www.szlcsc.com/app.html?spm=sc.it.ft.msg6.3&lcsc_vid=QgReAQVeRwMMBlMFTlYMUwdUEwJcUFECTgILUlICTgcxVlNfRlhfUVBVQ1leVTtW
+  - list:
+    - listitem: 联系我们
+    - listitem: 服务热线：0755-83865666
+    - generic: 企业微信：
+    - button "微信咨询":
+      - generic: 微信咨询
+    - generic: 服务时间：
+    - list:
+      - listitem: 8:30-18:30（工作日）
+      - listitem: 9:00-18:00（节假日）
+  - img "关注立创商城公众号"
+  - paragraph: 关注立创商城公众号
+  - paragraph: 成员网站：
+  - list:
+    - link "立创芯应用":
+      - /url: https://www.szlcsc.com/selection.html?spm=sc.it.ft.cy.1&lcsc_vid=QgReAQVeRwMMBlMFTlYMUwdUEwJcUFECTgILUlICTgcxVlNfRlhfUVBVQ1leVTtW
+    - link "面板定制":
+      - /url: https://dos.szlcsc.com/?spm=sc.it.ft.cy.2&lcsc_vid=QgReAQVeRwMMBlMFTlYMUwdUEwJcUFECTgILUlICTgcxVlNfRlhfUVBVQ1leVTtW
+    - link "立创工业品":
+      - /url: https://mro.szlcsc.com/?spm=sc.it.ft.cy.3&lcsc_vid=QgReAQVeRwMMBlMFTlYMUwdUEwJcUFECTgILUlICTgcxVlNfRlhfUVBVQ1leVTtW
+    - link "嘉立创社区":
+      - /url: https://www.jlc-bbs.com/lcsc
+    - link "3D打印":
+      - /url: https://www.jlc-3dp.cn/?jlcGroup_source=lc
+    - link "嘉立创FPC":
+      - /url: https://www.jlc-fpc.com/?jlcGroup_source=lc
+    - link "嘉立创PCB":
+      - /url: https://www.jlc.com/?jlcGroup_source=lc
+    - link "嘉立创FA":
+      - /url: https://www.jlcfa.com/?jlcGroup_source=lc&spm=sc.it.ft.cy.8&lcsc_vid=QgReAQVeRwMMBlMFTlYMUwdUEwJcUFECTgILUlICTgcxVlNfRlhfUVBVQ1leVTtW
+    - link "立创电子设计大赛":
+      - /url: https://diy.szlcsc.com/
+    - link "立创开源硬件":
+      - /url: https://oshwhub.com/?jlcGroup_source=lc
+    - link "Global Website LCSC":
+      - /url: https://lcsc.com/
+    - link "ZXHPCB":
+      - /url: https://www.zxhgroup.com/?jlcGroup_source=lc
+  - button "展开":
+    - text: 展开
+  - paragraph: 友情链接：
+  - list:
+    - link "PCB打样":
+      - /url: https://smt.szlcsc.com/?spm=sc.it.ft.yq.1&lcsc_vid=QgReAQVeRwMMBlMFTlYMUwdUEwJcUFECTgILUlICTgcxVlNfRlhfUVBVQ1leVTtW
+    - link "IC交易网":
+      - /url: https://www.szlcsc.com/catalog.html?spm=sc.it.ft.yq.2&lcsc_vid=QgReAQVeRwMMBlMFTlYMUwdUEwJcUFECTgILUlICTgcxVlNfRlhfUVBVQ1leVTtW
+    - link "电子元器件品牌大全":
+      - /url: https://www.szlcsc.com/brand.html?spm=sc.it.ft.yq.3&lcsc_vid=QgReAQVeRwMMBlMFTlYMUwdUEwJcUFECTgILUlICTgcxVlNfRlhfUVBVQ1leVTtW
+    - link "中国IC网":
+      - /url: http://www.ic37.com/
+    - link "智能电网":
+      - /url: http://www.chinasmartgrid.com.cn
+    - link "机电设备":
+      - /url: http://www.hlo-trade.com/
+    - link "电子工程网":
+      - /url: http://www.eechina.com/
+    - link "晶振":
+      - /url: https://www.yxc.hk
+    - link "电子技术应用":
+      - /url: http://www.chinaaet.com/
+    - link "21icsearch":
+      - /url: http://www.21icsearch.com
+    - link "电子展":
+      - /url: http://www.cef114.com/
+    - link "液晶屏交易中心":
+      - /url: http://www.panelook.cn
+    - link "中国包装网":
+      - /url: http://www.pack.cn/
+    - link "电子元器件查询":
+      - /url: https://www.findic.com
+    - link "工业品采购":
+      - /url: http://www.ehsy.com
+    - link "IC电子网":
+      - /url: http://www.51dzw.com
+    - link "锂电池":
+      - /url: http://www.juda.cn/
+    - link "集成灶":
+      - /url: http://www.chinakeon.com/
+    - link "中国机床商务网":
+      - /url: http://www.jc35.com/
+    - link "DFRobot开源硬件商城":
+      - /url: http://www.dfrobot.com.cn
+    - link "分析测试百科网":
+      - /url: https://www.antpedia.com/
+    - link "开步睿思":
+      - /url: http://www.resistor.today
+    - link "串联谐振":
+      - /url: http://www.whhuatian.com
+    - link "更多>>":
+      - /url: https://www.szlcsc.com/links.html?spm=sc.it.ft.yq.mr&lcsc_vid=QgReAQVeRwMMBlMFTlYMUwdUEwJcUFECTgILUlICTgcxVlNfRlhfUVBVQ1leVTtW
+  - button "展开":
+    - text: 展开
+  - paragraph: 字母索引：
+  - list:
+    - link "其他":
+      - /url: https://www.szlcsc.com/ic/other.html?spm=sc.it.ft.zm.1&lcsc_vid=QgReAQVeRwMMBlMFTlYMUwdUEwJcUFECTgILUlICTgcxVlNfRlhfUVBVQ1leVTtW
+    - link "A":
+      - /url: https://www.szlcsc.com/ic/A.html?spm=sc.it.ft.zm.2&lcsc_vid=QgReAQVeRwMMBlMFTlYMUwdUEwJcUFECTgILUlICTgcxVlNfRlhfUVBVQ1leVTtW
+    - link "B":
+      - /url: https://www.szlcsc.com/ic/B.html?spm=sc.it.ft.zm.3&lcsc_vid=QgReAQVeRwMMBlMFTlYMUwdUEwJcUFECTgILUlICTgcxVlNfRlhfUVBVQ1leVTtW
+    - link "C":
+      - /url: https://www.szlcsc.com/ic/C.html?spm=sc.it.ft.zm.4&lcsc_vid=QgReAQVeRwMMBlMFTlYMUwdUEwJcUFECTgILUlICTgcxVlNfRlhfUVBVQ1leVTtW
+    - link "D":
+      - /url: https://www.szlcsc.com/ic/D.html?spm=sc.it.ft.zm.5&lcsc_vid=QgReAQVeRwMMBlMFTlYMUwdUEwJcUFECTgILUlICTgcxVlNfRlhfUVBVQ1leVTtW
+    - link "E":
+      - /url: https://www.szlcsc.com/ic/E.html?spm=sc.it.ft.zm.6&lcsc_vid=QgReAQVeRwMMBlMFTlYMUwdUEwJcUFECTgILUlICTgcxVlNfRlhfUVBVQ1leVTtW
+    - link "F":
+      - /url: https://www.szlcsc.com/ic/F.html?spm=sc.it.ft.zm.7&lcsc_vid=QgReAQVeRwMMBlMFTlYMUwdUEwJcUFECTgILUlICTgcxVlNfRlhfUVBVQ1leVTtW
+    - link "G":
+      - /url: https://www.szlcsc.com/ic/G.html?spm=sc.it.ft.zm.8&lcsc_vid=QgReAQVeRwMMBlMFTlYMUwdUEwJcUFECTgILUlICTgcxVlNfRlhfUVBVQ1leVTtW
+    - link "H":
+      - /url: https://www.szlcsc.com/ic/H.html?spm=sc.it.ft.zm.9&lcsc_vid=QgReAQVeRwMMBlMFTlYMUwdUEwJcUFECTgILUlICTgcxVlNfRlhfUVBVQ1leVTtW
+    - link "I":
+      - /url: https://www.szlcsc.com/ic/I.html?spm=sc.it.ft.zm.10&lcsc_vid=QgReAQVeRwMMBlMFTlYMUwdUEwJcUFECTgILUlICTgcxVlNfRlhfUVBVQ1leVTtW
+    - link "J":
+      - /url: https://www.szlcsc.com/ic/J.html?spm=sc.it.ft.zm.11&lcsc_vid=QgReAQVeRwMMBlMFTlYMUwdUEwJcUFECTgILUlICTgcxVlNfRlhfUVBVQ1leVTtW
+    - link "K":
+      - /url: https://www.szlcsc.com/ic/K.html?spm=sc.it.ft.zm.12&lcsc_vid=QgReAQVeRwMMBlMFTlYMUwdUEwJcUFECTgILUlICTgcxVlNfRlhfUVBVQ1leVTtW
+    - link "L":
+      - /url: https://www.szlcsc.com/ic/L.html?spm=sc.it.ft.zm.13&lcsc_vid=QgReAQVeRwMMBlMFTlYMUwdUEwJcUFECTgILUlICTgcxVlNfRlhfUVBVQ1leVTtW
+    - link "M":
+      - /url: https://www.szlcsc.com/ic/M.html?spm=sc.it.ft.zm.14&lcsc_vid=QgReAQVeRwMMBlMFTlYMUwdUEwJcUFECTgILUlICTgcxVlNfRlhfUVBVQ1leVTtW
+    - link "N":
+      - /url: https://www.szlcsc.com/ic/N.html?spm=sc.it.ft.zm.15&lcsc_vid=QgReAQVeRwMMBlMFTlYMUwdUEwJcUFECTgILUlICTgcxVlNfRlhfUVBVQ1leVTtW
+    - link "O":
+      - /url: https://www.szlcsc.com/ic/O.html?spm=sc.it.ft.zm.16&lcsc_vid=QgReAQVeRwMMBlMFTlYMUwdUEwJcUFECTgILUlICTgcxVlNfRlhfUVBVQ1leVTtW
+    - link "P":
+      - /url: https://www.szlcsc.com/ic/P.html?spm=sc.it.ft.zm.17&lcsc_vid=QgReAQVeRwMMBlMFTlYMUwdUEwJcUFECTgILUlICTgcxVlNfRlhfUVBVQ1leVTtW
+    - link "Q":
+      - /url: https://www.szlcsc.com/ic/Q.html?spm=sc.it.ft.zm.18&lcsc_vid=QgReAQVeRwMMBlMFTlYMUwdUEwJcUFECTgILUlICTgcxVlNfRlhfUVBVQ1leVTtW
+    - link "R":
+      - /url: https://www.szlcsc.com/ic/R.html?spm=sc.it.ft.zm.19&lcsc_vid=QgReAQVeRwMMBlMFTlYMUwdUEwJcUFECTgILUlICTgcxVlNfRlhfUVBVQ1leVTtW
+    - link "S":
+      - /url: https://www.szlcsc.com/ic/S.html?spm=sc.it.ft.zm.20&lcsc_vid=QgReAQVeRwMMBlMFTlYMUwdUEwJcUFECTgILUlICTgcxVlNfRlhfUVBVQ1leVTtW
+    - link "T":
+      - /url: https://www.szlcsc.com/ic/T.html?spm=sc.it.ft.zm.21&lcsc_vid=QgReAQVeRwMMBlMFTlYMUwdUEwJcUFECTgILUlICTgcxVlNfRlhfUVBVQ1leVTtW
+    - link "U":
+      - /url: https://www.szlcsc.com/ic/U.html?spm=sc.it.ft.zm.22&lcsc_vid=QgReAQVeRwMMBlMFTlYMUwdUEwJcUFECTgILUlICTgcxVlNfRlhfUVBVQ1leVTtW
+    - link "V":
+      - /url: https://www.szlcsc.com/ic/V.html?spm=sc.it.ft.zm.23&lcsc_vid=QgReAQVeRwMMBlMFTlYMUwdUEwJcUFECTgILUlICTgcxVlNfRlhfUVBVQ1leVTtW
+    - link "W":
+      - /url: https://www.szlcsc.com/ic/W.html?spm=sc.it.ft.zm.24&lcsc_vid=QgReAQVeRwMMBlMFTlYMUwdUEwJcUFECTgILUlICTgcxVlNfRlhfUVBVQ1leVTtW
+    - link "X":
+      - /url: https://www.szlcsc.com/ic/X.html?spm=sc.it.ft.zm.25&lcsc_vid=QgReAQVeRwMMBlMFTlYMUwdUEwJcUFECTgILUlICTgcxVlNfRlhfUVBVQ1leVTtW
+    - link "Y":
+      - /url: https://www.szlcsc.com/ic/Y.html?spm=sc.it.ft.zm.26&lcsc_vid=QgReAQVeRwMMBlMFTlYMUwdUEwJcUFECTgILUlICTgcxVlNfRlhfUVBVQ1leVTtW
+    - link "Z":
+      - /url: https://www.szlcsc.com/ic/Z.html?spm=sc.it.ft.zm.27&lcsc_vid=QgReAQVeRwMMBlMFTlYMUwdUEwJcUFECTgILUlICTgcxVlNfRlhfUVBVQ1leVTtW
+    - link "0":
+      - /url: https://www.szlcsc.com/ic/0.html?spm=sc.it.ft.zm.28&lcsc_vid=QgReAQVeRwMMBlMFTlYMUwdUEwJcUFECTgILUlICTgcxVlNfRlhfUVBVQ1leVTtW
+    - link "1":
+      - /url: https://www.szlcsc.com/ic/1.html?spm=sc.it.ft.zm.29&lcsc_vid=QgReAQVeRwMMBlMFTlYMUwdUEwJcUFECTgILUlICTgcxVlNfRlhfUVBVQ1leVTtW
+    - link "2":
+      - /url: https://www.szlcsc.com/ic/2.html?spm=sc.it.ft.zm.30&lcsc_vid=QgReAQVeRwMMBlMFTlYMUwdUEwJcUFECTgILUlICTgcxVlNfRlhfUVBVQ1leVTtW
+    - link "3":
+      - /url: https://www.szlcsc.com/ic/3.html?spm=sc.it.ft.zm.31&lcsc_vid=QgReAQVeRwMMBlMFTlYMUwdUEwJcUFECTgILUlICTgcxVlNfRlhfUVBVQ1leVTtW
+    - link "4":
+      - /url: https://www.szlcsc.com/ic/4.html?spm=sc.it.ft.zm.32&lcsc_vid=QgReAQVeRwMMBlMFTlYMUwdUEwJcUFECTgILUlICTgcxVlNfRlhfUVBVQ1leVTtW
+    - link "5":
+      - /url: https://www.szlcsc.com/ic/5.html?spm=sc.it.ft.zm.33&lcsc_vid=QgReAQVeRwMMBlMFTlYMUwdUEwJcUFECTgILUlICTgcxVlNfRlhfUVBVQ1leVTtW
+    - link "6":
+      - /url: https://www.szlcsc.com/ic/6.html?spm=sc.it.ft.zm.34&lcsc_vid=QgReAQVeRwMMBlMFTlYMUwdUEwJcUFECTgILUlICTgcxVlNfRlhfUVBVQ1leVTtW
+    - link "7":
+      - /url: https://www.szlcsc.com/ic/7.html?spm=sc.it.ft.zm.35&lcsc_vid=QgReAQVeRwMMBlMFTlYMUwdUEwJcUFECTgILUlICTgcxVlNfRlhfUVBVQ1leVTtW
+    - link "8":
+      - /url: https://www.szlcsc.com/ic/8.html?spm=sc.it.ft.zm.36&lcsc_vid=QgReAQVeRwMMBlMFTlYMUwdUEwJcUFECTgILUlICTgcxVlNfRlhfUVBVQ1leVTtW
+    - link "9":
+      - /url: https://www.szlcsc.com/ic/9.html?spm=sc.it.ft.zm.37&lcsc_vid=QgReAQVeRwMMBlMFTlYMUwdUEwJcUFECTgILUlICTgcxVlNfRlhfUVBVQ1leVTtW
+  - paragraph: © 2026 深圳市立创电子商务有限公司 版权所有
+  - link "粤公网安备 44030402002194":
+    - /url: http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=44030402002194
+  - link "粤ICP备13005967号":
+    - /url: https://beian.miit.gov.cn
+  - link "工商网监":
+    - /url: http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=44030402002194
+  - link "ISO/IEC":
+    - /url: https://static.szlcsc.com/doc/isoiec/last/iso_iec_doc.pdf
+  - paragraph: "|"
+  - img "国徽"
+  - link "营业执照":
+    - /url: https://www.szlcsc.com/businessLicence.html?lcsc_vid=QgReAQVeRwMMBlMFTlYMUwdUEwJcUFECTgILUlICTgcxVlNfRlhfUVBVQ1leVTtW
+- complementary:
+  - list:
+    - paragraph: 客服
+    - button "询价":
+      - paragraph: 询价
+    - paragraph: 芯媒体
+    - paragraph:
+      - text: 手机
+      - text: 查看
+    - paragraph: 反馈
+    - link "问卷":
+      - /url: https://activity.szlcsc.com/survey.html?uuid=AAA236AEB6FA631B74461F352DB76BA1&spm=sc.it.cbl.sur&lcsc_vid=QgReAQVeRwMMBlMFTlYMUwdUEwJcUFECTgILUlICTgcxVlNfRlhfUVBVQ1leVTtW
+      - paragraph: 问卷
+  - list:
+    - paragraph: 收起
+    - paragraph: 置顶
+  - button "展开客服":
+    - generic: 展开客服
+- region "Notifications alt+T"
+- alert

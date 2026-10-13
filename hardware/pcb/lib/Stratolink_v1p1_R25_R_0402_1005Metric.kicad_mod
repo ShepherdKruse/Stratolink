@@ -7,7 +7,7 @@
 	(tags "resistor")
 	(property "Reference" "R25"
 		(at 0 -1.17 0)
-		(layer "F.SilkS")
+		(layer "F.Fab")
 		(hide yes)
 		(uuid "c30b02c6-c0f5-4d1d-b892-2635973b5734")
 		(effects
@@ -52,7 +52,7 @@
 	)
 	(property "KiLib_Generator" "SMD_2terminal_chip_molded"
 		(at 0 0 0)
-		(layer "F.SilkS")
+		(layer "F.Fab")
 		(hide yes)
 		(uuid "e26037d7-47ff-487c-af30-8520f7e7fa9f")
 		(effects

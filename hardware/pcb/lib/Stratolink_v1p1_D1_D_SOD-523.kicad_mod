@@ -7,7 +7,7 @@
 	(tags "Diode SOD523")
 	(property "Reference" "D1"
 		(at -0.000001 -1.300001 180)
-		(layer "F.SilkS")
+		(layer "F.Fab")
 		(hide yes)
 		(uuid "58ce09e9-df48-4785-9613-24dbc6ed3fa6")
 		(effects

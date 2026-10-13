@@ -7,7 +7,7 @@
 	(tags "capacitor")
 	(property "Reference" "C22"
 		(at 0 -1.16 0)
-		(layer "F.SilkS")
+		(layer "F.Fab")
 		(hide yes)
 		(uuid "901bc7b6-7986-424d-86e8-370da3cd2e31")
 		(effects
@@ -52,7 +52,7 @@
 	)
 	(property "KiLib_Generator" "SMD_2terminal_chip_molded"
 		(at 0 0 0)
-		(layer "F.SilkS")
+		(layer "F.Fab")
 		(hide yes)
 		(uuid "54c02e04-352b-43d7-b990-a078097ab295")
 		(effects

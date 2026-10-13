@@ -29,11 +29,5 @@
 
 
 
-# U7 MEMS escape passes U6 pad 6 (SDA) at 0.128 mm actual copper gap.
-# 0.12 mm applies only to this pad/track pair; the process floor remains 0.10 mm.
-# Keeping the existing 0.30 mm drill and 0.25 mm copper-to-hole rule prevents
-# raising this short corridor to 0.15 mm without moving other proven circuitry.
-(rule "U7 escape SCL to U6 SDA pad 6 - 0.12 mm"
-  (layer "F.Cu")
-  (condition "(A.memberOfFootprint('U6') && A.Pad_Number == '6' && B.Type == 'Track' && B.NetName == 'SCL') || (B.memberOfFootprint('U6') && B.Pad_Number == '6' && A.Type == 'Track' && A.NetName == 'SCL')")
-  (constraint clearance (min 0.12mm)))
+
+(rule "U6 AS7331 fine pitch lands" (condition "A.Type == 'Pad' && B.Type == 'Pad' && A.memberOfFootprint('U6') && B.memberOfFootprint('U6')") (constraint clearance (min 0.15mm)))

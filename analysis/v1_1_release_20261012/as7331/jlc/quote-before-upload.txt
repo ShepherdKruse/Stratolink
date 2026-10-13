@@ -1,0 +1,457 @@
+- navigation:
+  - link:
+    - /url: https://jlcpcb.com
+  - generic: 
+  - generic: 
+  - link "":
+    - /url: /shopcart/cart/
+    - generic: 
+  - superscript: "1"
+  - text:    
+  - text: USD
+  - generic: 
+  - text: 
+  - text: My Account
+  - generic: 
+  - text: 
+- main:
+  - main:
+    - paragraph: Select Product
+    - img "standard-pcb-pcba"
+    - paragraph: Standard PCB/PCBA
+    - generic: 
+    - img "advanced-pcb-pcba"
+    - paragraph: Advanced PCB/PCBA
+    - img "smt-stencil"
+    - paragraph: SMT Stencil
+    - img "flexible-heater"
+    - paragraph: Flex Heater
+    - img "mechatronic-parts"
+    - paragraph: Mechatronic Parts
+    - img "3d-printing"
+    - paragraph: 3D Printing
+    - img "cnc-machining"
+    - paragraph: CNC Machining
+    - img "pcb-layout"
+    - paragraph: PCB Layout
+    - img "sheet-metal"
+    - paragraph: Sheet Metal
+    - text: 
+    - button "Next slide":
+      - generic: 
+    - heading "Online PCB Quote" [level=1]
+    - link "Instructions For Ordering>":
+      - /url: https://jlcpcb.com/help/article/Instructions-for-ordering
+    - text: Upload History
+    - generic: 
+    - text: Add gerber file
+    - text: Only accept zip or rar, Max 100 MB,
+    - link "View example >":
+      - /url: https://jlcpcb.com/help/catalog/180-PCB-Files-Preparation
+    - generic: All uploads are secure and confidential.
+    - text: Base Material
+    - generic: 
+    - button "FR-4 FR-4":
+      - img "FR-4"
+      - text: FR-4
+    - button "FR-4 Flex":
+      - img "FR-4"
+      - text: Flex
+    - button "FR-4 Aluminum":
+      - img "FR-4"
+      - text: Aluminum
+    - button "FR-4 Copper Core":
+      - img "FR-4"
+      - text: Copper Core
+    - button "FR-4 Rogers":
+      - img "FR-4"
+      - text: Rogers
+    - button "FR-4 PTFE Teflon":
+      - img "FR-4"
+      - text: PTFE Teflon
+    - button "HDI HDI":
+      - img "HDI"
+      - text: HDI
+    - text: Layers
+    - generic: 
+    - button "1"
+    - button "2"
+    - button "4"
+    - generic: High Precision PCB
+    - button "6":
+      - text: "6"
+    - button "8"
+    - button "10"
+    - button "12"
+    - button "14"
+    - button "16"
+    - textbox "Select": More
+    - text: Dimensions
+    - generic: 
+    - textbox "X": "100"
+    - text: "*"
+    - textbox "Y": "100"
+    - textbox "Select": mm
+    - text: PCB Qty
+    - generic: 
+    - text: "5"
+    - text: Product Type
+    - generic: 
+    - button "Industrial/Consumer electronics"
+    - button "Aerospace"
+    - button "Medical"
+    - generic: 
+    - text: "\"4-Wire Kelvin Test\" options is automatically selected to ensure the board quality for aerospace and medical products."
+    - heading "PCB Specifications" [level=2]
+    - generic: 
+    - text: Different Design
+    - generic: 
+    - button "1"
+    - button "2"
+    - button "3"
+    - button "4"
+    - textbox
+    - text: Delivery Format
+    - generic: 
+    - button "Single PCB"
+    - button "Panel by Customer"
+    - button "Panel by JLCPCB" [disabled]
+    - text: PCB Thickness
+    - generic: 
+    - button "0.4mm"
+    - button "0.6mm"
+    - button "0.8mm"
+    - button "1.0mm"
+    - button "1.2mm"
+    - button "1.6mm"
+    - button "2.0mm"
+    - generic: For 0.4mm thickness PCB, it will be produced in mouse-bites panel.
+    - text: PCB Color
+    - generic: 
+    - button "Green":
+      - generic: Green
+    - button "Purple":
+      - generic: Purple
+    - button "Red" [disabled]:
+      - generic: Red
+    - button "Yellow" [disabled]:
+      - generic: Yellow
+    - button "Blue":
+      - generic: Blue
+    - button "White":
+      - generic: White
+    - button "Black":
+      - generic: Black
+    - text: Silkscreen
+    - generic: 
+    - button "White": White
+    - text: Material Type
+    - generic: 
+    - button "FR4 TG135"
+    - text: Surface Finish
+    - generic: 
+    - button "OSP New":
+      - text: OSP
+      - generic: New
+    - button "HASL(with lead)" [disabled]
+    - button "LeadFree HASL" [disabled]
+    - button "ENIG"
+    - text: Gold Thickness
+    - generic: 
+    - button "1 U\""
+    - button "2 U\""
+    - heading "High-spec Options" [level=2]
+    - generic: 
+    - text: Outer Copper Weight
+    - generic: 
+    - button "1 oz"
+    - button "2 oz" [disabled]
+    - text:      
+    - text: Via Covering
+    - generic: 
+    - button "Tented"
+    - button "Untented"
+    - button "Plugged" [disabled]
+    - button "Epoxy Filled & Capped" [disabled]
+    - button "Copper paste Filled & Capped" [disabled]
+    - generic: Via Plating Method
+    - generic: 
+    - button "Not Specified"
+    - button "Conductive Adhesive"
+    - button "Horizontal Electroless Copper Plating"
+    - text: Min via hole size/diameter
+    - generic: 
+    - button "0.3mm/(0.4/0.45mm)"
+    - button "0.25mm/(0.35/0.4mm)"
+    - button "0.2mm/(0.3/0.35mm)"
+    - button "0.15mm/(0.25/0.3mm)"
+    - button "0.1mm/(0.2/0.25mm)"
+    - text: Board Outline Tolerance
+    - generic: 
+    - button "±0.2mm(Regular)"
+    - button "±0.1mm(Precision)" [disabled]
+    - generic: Confirm Production file
+    - generic: 
+    - button "No"
+    - button "Yes"
+    - text: Mark on PCB
+    - generic: 
+    - button "Remove Mark"
+    - button "2D barcode (Serial Number)"
+    - text: Electrical Test
+    - generic: 
+    - button "Flying Probe Fully Test"
+    - text: Gold Fingers
+    - generic: 
+    - button "No"
+    - button "Yes"
+    - text: Castellated Holes
+    - generic: 
+    - button "No"
+    - button "Yes" [disabled]
+    - generic: Edge Plating
+    - generic: 
+    - button "No"
+    - button "Yes" [disabled]
+    - generic: UL Marking
+    - generic: 
+    - button "No"
+    - button "Yes (Any Position)" [disabled]
+    - button "Yes (Specify Position)" [disabled]
+    - generic: Humidity Indicator Card
+    - generic: 
+    - button "No"
+    - button "Yes" [disabled]
+    - heading "Advanced Options" [level=2]
+    - generic: 
+    - paragraph: 4-Wire Kelvin Test
+    - generic: 
+    - button "No" [disabled]
+    - button "Yes" [disabled]
+    - paragraph: Paper between PCBs
+    - generic: 
+    - button "No"
+    - button "Yes"
+    - paragraph: Appearance Quality
+    - generic: 
+    - button "IPC Class 2 Standard"
+    - button "Superb Quality" [disabled]
+    - text: Silkscreen Technology
+    - generic: 
+    - button "Ink-jet Printing Silkscreen"
+    - button "High-precision Printing Silkscreen"
+    - button "EasyEDA multi-color silkscreen" [disabled]
+    - button "High-definition Exposure Silkscreen" [disabled]
+    - paragraph: Package Box
+    - generic: 
+    - button "With JLCPCB logo"
+    - button "Blank box"
+    - paragraph: Inspection Report
+    - generic: 
+    - button "No"
+    - button "Final Inspection Report"
+    - button "Electrical Test Report"
+    - button "ROHS Test Report"
+    - text: PCB Remark
+    - textbox "Leave a remark for this PCB order if necessary.Other remarks about the PCBA or stencil, please fill in the corresponding areas.": NO SOLDER MASK BOTH SIDES; full-face openings intentional. ENIG, untented vias. Solar notches unplated. Keep panel tabs clear of notch banks/suspension holes. Confirm CAM; no automatic approval.
+    - generic: 194/200
+    - heading "PCB Assembly" [level=2]
+    - link "Assembly cost starting from $0 with coupon>":
+      - /url: https://jlcpcb.com/news/free-assembly-1-6-layer-pcb-discount-8-20-layer-pcba
+      - text: Assembly cost starting from $0 with coupon>
+    - paragraph: Please upload Gerber files before proceeding to PCB Assembly
+    - link "How JLCPCB Assembly works?":
+      - /url: https://jlcpcb.com/pcb-assembly
+    - link "Try Demo >":
+      - /url: https://cart.jlcpcb.com/quote?fromDemo=yes
+    - heading "Stencil" [level=2]
+    - link "Stencil Order Guide>":
+      - /url: https://jlcpcb.com/help/article/instructions-for-stencil-order
+    - generic: Order together with PCB
+    - list:
+      - generic: Charge Details
+      - generic: 
+      - text: Engineering fee
+      - generic: $33.00
+      - text: Via Covering
+      - generic: $0.00
+      - text: Surface Finish
+      - generic: $17.70
+      - text: Board
+      - generic: $4.90
+      - text: 4-Wire Kelvin Test
+      - generic: $17.20
+      - text: Confirm Production file
+      - generic: $1.05
+      - strong: PCB Build Time
+      - generic: 
+      - generic: 3 days
+      - generic: $0.00
+      - text: 24 hours
+      - generic: PCBA Only
+      - generic: $0.00
+    - separator
+    - heading "Calculated Price" [level=2]
+    - strong: $73.85
+    - paragraph:
+      - text: Additional charges may apply for
+      - link "special cases":
+        - /url: https://jlcpcb.com/help/article/In-what-cases-will-there-be-charged-extra?
+    - 'link "Order on JLCONE Desktop: Save $1–$20 Per Order "':
+      - /url: https://jlcone.com/download
+      - generic: "Order on JLCONE Desktop: Save $1–$20 Per Order"
+      - generic: 
+    - button "Next" [disabled]:
+      - generic: Next
+    - heading "Shipping Estimate" [level=2]
+    - generic: $31.44
+    - generic: 
+    - generic "DHL Express (DDP)"
+    - generic "2-4 business days"
+    - text: Weight
+    - generic: 
+    - generic: 0.18kg
+    - text: Coupons
+    - generic: 
+    - generic: Save $30.00
+    - generic: Save $20.00
+    - generic: 
+- contentinfo:
+  - generic: 
+  - text: Online Chat >
+  - generic: Chat with our live agent for fast reply.
+  - generic: "Mon-Fri: 24 hours, Sat: 9am-6pm, GMT+8"
+  - link " Email Us >":
+    - /url: https://jlcpcb.com/help/contact
+    - generic: 
+    - text: Email Us >
+  - text: Contact us at support
+  - generic: 
+  - text: jlcpcb.com
+  - generic: Typically reply within hours.
+  - link " Help Center >":
+    - /url: https://jlcpcb.com/help
+    - generic: 
+    - text: Help Center >
+  - generic: Get instant answers.
+  - generic: 24/7 Available.
+  - generic: PCB Service
+  - link "FR-4 PCBs":
+    - /url: https://jlcpcb.com/pcb-fabrication/fr4-pcb
+  - link "Flexible PCBs":
+    - /url: https://jlcpcb.com/pcb-fabrication/flexible-pcb
+  - link "Metal Core PCBs":
+    - /url: https://jlcpcb.com/pcb-fabrication/metal-core-pcb
+  - link "High-Frequency PCBs":
+    - /url: https://jlcpcb.com/pcb-fabrication/high-frequency-pcb
+  - link "PCBA Service":
+    - /url: https://jlcpcb.com/pcb-assembly
+  - link "PCB Layout":
+    - /url: https://design.jlcpcb.com
+  - link "SMT Stencil":
+    - /url: https://jlcpcb.com/pcb-stencil
+  - link "Flex Heater":
+    - /url: https://flexheater.jlcpcb.com
+  - generic: Support
+  - link "Help Center":
+    - /url: https://jlcpcb.com/help
+  - link "Contact Us":
+    - /url: https://jlcpcb.com/help/contact
+  - link "Community":
+    - /url: https://jlchub.com
+  - link "Shipping Guide":
+    - /url: https://jlcpcb.com/shipping
+  - link "Payment Methods":
+    - /url: https://jlcpcb.com/payments
+  - link "How to Order":
+    - /url: https://jlcpcb.com/help/catalog/11-How-To-Order
+  - link "How to Track":
+    - /url: https://jlcpcb.com/help/article/51-How-to-Track-My-Order
+  - link "After-Sales Service":
+    - /url: https://jlcpcb.com/help/article/How-to-Make-a-Quality-Complaint
+  - link "Blog":
+    - /url: https://jlcpcb.com/blog
+  - generic: Company
+  - link "About Us":
+    - /url: https://jlcpcb.com/about-us
+  - link "Quality Assurance":
+    - /url: https://jlcpcb.com/about-us/quality-control
+  - link "How We Work":
+    - /url: https://jlcpcb.com/about-us/how-it-works
+  - link "Certifications":
+    - /url: https://jlcpcb.com/certifications
+  - link "Security":
+    - /url: https://jlcpcb.com/privacy-security
+  - link "Environment":
+    - /url: https://jlcpcb.com/green-manufacturing
+  - link "JLCAPI":
+    - /url: https://api.jlcpcb.com/
+  - link "News":
+    - /url: https://jlcpcb.com/news
+  - link "Cooperation":
+    - /url: https://jlcpcb.com/cooperation
+  - generic: Electronics
+  - link "EasyEDA":
+    - /url: https://easyeda.com
+  - link "JLCPCB":
+    - /url: https://jlcpcb.com
+  - link "JLCDFM":
+    - /url: https://jlcdfm.com
+  - link "LCSC":
+    - /url: https://www.lcsc.com
+  - link "OSHWLAB":
+    - /url: https://oshwlab.com/
+  - generic: Mechanical
+  - link "JLC3DP":
+    - /url: https://jlc3dp.com
+  - link "JLCCNC":
+    - /url: https://jlccnc.com
+  - link "JLCMC":
+    - /url: https://jlcmc.com
+  - generic: 
+  - generic: Order on JLCONE Desktop, Save $1–$20 Every Time
+  - link " Windows":
+    - /url: https://jlcone.com/download
+    - generic: 
+    - generic: Windows
+  - link " MAC":
+    - /url: https://jlcone.com/download
+    - generic: 
+    - generic: MAC
+  - link " Android":
+    - /url: https://jlcone.com/download#mobile-app
+    - generic: 
+    - generic: Android
+  - link " IOS":
+    - /url: https://jlcone.com/download#mobile-app
+    - generic: 
+    - generic: IOS
+  - generic: CONNECT WITH US
+  - link "":
+    - /url: https://www.facebook.com/jlcpcb
+    - generic: 
+  - link "":
+    - /url: https://twitter.com/jlcpcb
+    - generic: 
+  - link "":
+    - /url: https://www.instagram.com/jlcpcb
+    - generic: 
+  - link "":
+    - /url: https://www.youtube.com/JLCPCB
+    - generic: 
+  - link "":
+    - /url: https://www.linkedin.com/company/jlcpcb
+    - generic: 
+  - link "":
+    - /url: https://www.reddit.com/r/JLCPCBLab/
+    - generic: 
+  - generic: © 2026 JLCPCB.COM All Rights Reserved.
+  - link "Privacy Policy":
+    - /url: https://jlcpcb.com/help/article/Privacy-Policy
+  - link "Terms & Conditions":
+    - /url: https://jlcpcb.com/help/article/Terms-%26-Conditions
+  - link "Cookies Policy":
+    - /url: https://jlcpcb.com/help/article/JLCPCB-Cookie-Notice
+  - link "Do Not Sell or Share My Personal Information":
+    - /url: https://jlcpcb.com/privacy-policy/do-not-sell-or-share-my-personal-information
+- iframe

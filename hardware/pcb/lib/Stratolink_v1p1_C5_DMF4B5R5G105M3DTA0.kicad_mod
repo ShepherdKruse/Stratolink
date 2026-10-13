@@ -7,7 +7,7 @@
 	(tags "Capacitor Polarised")
 	(property "Reference" "C5"
 		(at 0 -2.625 0)
-		(layer "F.SilkS")
+		(layer "F.Fab")
 		(hide yes)
 		(uuid "e7368c01-c4f8-4ae6-91a2-0b365bc36c8e")
 		(effects
@@ -19,7 +19,7 @@
 	)
 	(property "Value" "1F"
 		(at 0 -2.625 0)
-		(layer "F.SilkS")
+		(layer "F.Fab")
 		(hide yes)
 		(uuid "05f1aa90-8566-4f8b-a6a3-4c2da98f3240")
 		(effects

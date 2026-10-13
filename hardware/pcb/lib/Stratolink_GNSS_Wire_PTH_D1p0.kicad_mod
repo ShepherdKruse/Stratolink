@@ -7,7 +7,7 @@
 		(tags "Antenna")
 		(property "Reference" "AE**"
 			(at 7.875 0 90)
-			(layer "F.SilkS")
+			(layer "F.Fab")
 			(hide yes)
 			(uuid "9852e053-e831-4712-86c5-358550f978c4")
 			(effects
@@ -19,7 +19,7 @@
 		)
 		(property "Value" "Enameled Cu wire 48mm (GNSS L1)"
 			(at 7.875 0 90)
-			(layer "F.SilkS")
+			(layer "F.Fab")
 			(hide yes)
 			(uuid "a1ec96ea-82ea-4688-a1ab-4feea82edea5")
 			(effects

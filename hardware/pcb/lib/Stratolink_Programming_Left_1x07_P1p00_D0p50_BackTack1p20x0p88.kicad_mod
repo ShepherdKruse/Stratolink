@@ -7,7 +7,7 @@
 	(tags "Through hole pin header THT 1x07 1.00mm single row")
 	(property "Reference" "REF**"
 		(at 0.000001 -1.559999 0)
-		(layer "F.SilkS")
+		(layer "F.Fab")
 		(hide yes)
 		(uuid "abc19104-178c-4991-86fb-5b79c47d9e12")
 		(effects

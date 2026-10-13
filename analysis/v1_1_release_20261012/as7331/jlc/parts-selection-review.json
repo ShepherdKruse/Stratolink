@@ -1,0 +1,571 @@
+{
+  "status": "PASS",
+  "reviewed_date": "2026-10-13",
+  "selected_rows": 57,
+  "design_assembly_rows": 58,
+  "unselected_design_assembly": [
+    "U6"
+  ],
+  "exact_bom_reference_set": true,
+  "all_mpn_lcsc_and_footprint_matches": true,
+  "cpl_reference_set_and_sides_match": true,
+  "support_circuit_selected": {
+    "C14": {
+      "ref": "C14",
+      "selected": true,
+      "uploaded_comment": "CL05B104KO5NNNC",
+      "uploaded_footprint": "Stratolink_v1p1_C14_C_0402_1005Metric",
+      "matched_mpn": "CL05B104KO5NNNC",
+      "matched_lcsc": "C1525",
+      "side": "top"
+    },
+    "C23": {
+      "ref": "C23",
+      "selected": true,
+      "uploaded_comment": "CL05B104KO5NNNC",
+      "uploaded_footprint": "Stratolink_v1p1_C23_C_0402_1005Metric",
+      "matched_mpn": "CL05B104KO5NNNC",
+      "matched_lcsc": "C1525",
+      "side": "top"
+    },
+    "R27": {
+      "ref": "R27",
+      "selected": true,
+      "uploaded_comment": "MCU0805MD3304BP500",
+      "uploaded_footprint": "Stratolink_v1p1_R27_R_0805_2012Metric",
+      "matched_mpn": "MCU0805MD3304BP500",
+      "matched_lcsc": "C4313228",
+      "side": "top"
+    }
+  },
+  "rows": [
+    {
+      "ref": "C1",
+      "selected": true,
+      "uploaded_comment": "GRM1555C1E103JE01D",
+      "uploaded_footprint": "Stratolink_v1p1_C1_C_0402_1005Metric",
+      "matched_mpn": "GRM1555C1E103JE01D",
+      "matched_lcsc": "C3855387",
+      "side": "bottom"
+    },
+    {
+      "ref": "C10",
+      "selected": true,
+      "uploaded_comment": "CL05B104KO5NNNC",
+      "uploaded_footprint": "Stratolink_v1p1_C10_C_0402_1005Metric",
+      "matched_mpn": "CL05B104KO5NNNC",
+      "matched_lcsc": "C1525",
+      "side": "top"
+    },
+    {
+      "ref": "C11",
+      "selected": true,
+      "uploaded_comment": "CL05B104KO5NNNC",
+      "uploaded_footprint": "Stratolink_v1p1_C11_C_0402_1005Metric",
+      "matched_mpn": "CL05B104KO5NNNC",
+      "matched_lcsc": "C1525",
+      "side": "top"
+    },
+    {
+      "ref": "C12",
+      "selected": true,
+      "uploaded_comment": "CL05B104KO5NNNC",
+      "uploaded_footprint": "Stratolink_v1p1_C12_C_0402_1005Metric",
+      "matched_mpn": "CL05B104KO5NNNC",
+      "matched_lcsc": "C1525",
+      "side": "top"
+    },
+    {
+      "ref": "C14",
+      "selected": true,
+      "uploaded_comment": "CL05B104KO5NNNC",
+      "uploaded_footprint": "Stratolink_v1p1_C14_C_0402_1005Metric",
+      "matched_mpn": "CL05B104KO5NNNC",
+      "matched_lcsc": "C1525",
+      "side": "top"
+    },
+    {
+      "ref": "C15",
+      "selected": true,
+      "uploaded_comment": "CL05B104KO5NNNC",
+      "uploaded_footprint": "Stratolink_v1p1_C15_C_0402_1005Metric",
+      "matched_mpn": "CL05B104KO5NNNC",
+      "matched_lcsc": "C1525",
+      "side": "top"
+    },
+    {
+      "ref": "C16",
+      "selected": true,
+      "uploaded_comment": "CL10A475KP8NNNC",
+      "uploaded_footprint": "Stratolink_v1p1_C16_C_0603_1608Metric",
+      "matched_mpn": "CL10A475KP8NNNC",
+      "matched_lcsc": "C1705",
+      "side": "top"
+    },
+    {
+      "ref": "C17",
+      "selected": true,
+      "uploaded_comment": "CL05B104KO5NNNC",
+      "uploaded_footprint": "Stratolink_v1p1_C17_C_0402_1005Metric",
+      "matched_mpn": "CL05B104KO5NNNC",
+      "matched_lcsc": "C1525",
+      "side": "top"
+    },
+    {
+      "ref": "C19",
+      "selected": true,
+      "uploaded_comment": "CL05B104KO5NNNC",
+      "uploaded_footprint": "Stratolink_v1p1_C19_C_0402_1005Metric",
+      "matched_mpn": "CL05B104KO5NNNC",
+      "matched_lcsc": "C1525",
+      "side": "top"
+    },
+    {
+      "ref": "C2",
+      "selected": true,
+      "uploaded_comment": "CL10A475KP8NNNC",
+      "uploaded_footprint": "Stratolink_v1p1_C2_C_0603_1608Metric",
+      "matched_mpn": "CL10A475KP8NNNC",
+      "matched_lcsc": "C1705",
+      "side": "bottom"
+    },
+    {
+      "ref": "C20",
+      "selected": true,
+      "uploaded_comment": "CL05B104KO5NNNC",
+      "uploaded_footprint": "Stratolink_v1p1_C20_C_0402_1005Metric",
+      "matched_mpn": "CL05B104KO5NNNC",
+      "matched_lcsc": "C1525",
+      "side": "top"
+    },
+    {
+      "ref": "C21",
+      "selected": true,
+      "uploaded_comment": "CL10A106KP8NNNC",
+      "uploaded_footprint": "Stratolink_v1p1_C21_C_0603_1608Metric",
+      "matched_mpn": "CL10A106KP8NNNC",
+      "matched_lcsc": "C19702",
+      "side": "top"
+    },
+    {
+      "ref": "C22",
+      "selected": true,
+      "uploaded_comment": "CL05B104KO5NNNC",
+      "uploaded_footprint": "Stratolink_v1p1_C22_C_0402_1005Metric",
+      "matched_mpn": "CL05B104KO5NNNC",
+      "matched_lcsc": "C1525",
+      "side": "bottom"
+    },
+    {
+      "ref": "C23",
+      "selected": true,
+      "uploaded_comment": "CL05B104KO5NNNC",
+      "uploaded_footprint": "Stratolink_v1p1_C23_C_0402_1005Metric",
+      "matched_mpn": "CL05B104KO5NNNC",
+      "matched_lcsc": "C1525",
+      "side": "top"
+    },
+    {
+      "ref": "C3",
+      "selected": true,
+      "uploaded_comment": "CL10A475KP8NNNC",
+      "uploaded_footprint": "Stratolink_v1p1_C3_C_0603_1608Metric",
+      "matched_mpn": "CL10A475KP8NNNC",
+      "matched_lcsc": "C1705",
+      "side": "bottom"
+    },
+    {
+      "ref": "C4",
+      "selected": true,
+      "uploaded_comment": "CL05B104KO5NNNC",
+      "uploaded_footprint": "Stratolink_v1p1_C4_C_0402_1005Metric",
+      "matched_mpn": "CL05B104KO5NNNC",
+      "matched_lcsc": "C1525",
+      "side": "bottom"
+    },
+    {
+      "ref": "C6",
+      "selected": true,
+      "uploaded_comment": "CL21A226MAYNNNE",
+      "uploaded_footprint": "Stratolink_v1p1_C6_C_0805_2012Metric",
+      "matched_mpn": "CL21A226MAYNNNE",
+      "matched_lcsc": "C602037",
+      "side": "bottom"
+    },
+    {
+      "ref": "C7",
+      "selected": true,
+      "uploaded_comment": "CL05B104KO5NNNC",
+      "uploaded_footprint": "Stratolink_v1p1_C7_C_0402_1005Metric",
+      "matched_mpn": "CL05B104KO5NNNC",
+      "matched_lcsc": "C1525",
+      "side": "top"
+    },
+    {
+      "ref": "C8",
+      "selected": true,
+      "uploaded_comment": "CL10A106KP8NNNC",
+      "uploaded_footprint": "Stratolink_v1p1_C8_C_0603_1608Metric",
+      "matched_mpn": "CL10A106KP8NNNC",
+      "matched_lcsc": "C19702",
+      "side": "top"
+    },
+    {
+      "ref": "C9",
+      "selected": true,
+      "uploaded_comment": "CL05B104KO5NNNC",
+      "uploaded_footprint": "Stratolink_v1p1_C9_C_0402_1005Metric",
+      "matched_mpn": "CL05B104KO5NNNC",
+      "matched_lcsc": "C1525",
+      "side": "top"
+    },
+    {
+      "ref": "D1",
+      "selected": true,
+      "uploaded_comment": "PESD5V0U1BB",
+      "uploaded_footprint": "Stratolink_v1p1_D1_D_SOD-523",
+      "matched_mpn": "PESD5V0U1BB",
+      "matched_lcsc": "C5272735",
+      "side": "top"
+    },
+    {
+      "ref": "D3",
+      "selected": true,
+      "uploaded_comment": "PESD5V0U1BB",
+      "uploaded_footprint": "Stratolink_v1p1_D3_D_SOD-523",
+      "matched_mpn": "PESD5V0U1BB",
+      "matched_lcsc": "C5272735",
+      "side": "top"
+    },
+    {
+      "ref": "FB1",
+      "selected": true,
+      "uploaded_comment": "BLM15AG601SN1D",
+      "uploaded_footprint": "Stratolink_v1p1_FB1_C_0402_1005Metric",
+      "matched_mpn": "BLM15AG601SN1D",
+      "matched_lcsc": "C76884",
+      "side": "top"
+    },
+    {
+      "ref": "L1",
+      "selected": true,
+      "uploaded_comment": "LPS4018-223MRC",
+      "uploaded_footprint": "Stratolink_v1p1_L1_IND_LPS4018-223MRC",
+      "matched_mpn": "LPS4018-223MRC",
+      "matched_lcsc": "C5278935",
+      "side": "bottom"
+    },
+    {
+      "ref": "L2",
+      "selected": true,
+      "uploaded_comment": "PWCWAQ1608F-100KTT",
+      "uploaded_footprint": "INDC1608X90N",
+      "matched_mpn": "PWCWAQ1608F-100KTT",
+      "matched_lcsc": "C436784",
+      "side": "bottom"
+    },
+    {
+      "ref": "R1",
+      "selected": true,
+      "uploaded_comment": "FRC0402F7504TS",
+      "uploaded_footprint": "Stratolink_v1p1_R1_R_0402_1005Metric",
+      "matched_mpn": "FRC0402F7504TS",
+      "matched_lcsc": "C3013187",
+      "side": "bottom"
+    },
+    {
+      "ref": "R10",
+      "selected": true,
+      "uploaded_comment": "RC0402FR-0710KL",
+      "uploaded_footprint": "Stratolink_v1p1_R10_R_0402_1005Metric",
+      "matched_mpn": "RC0402FR-0710KL",
+      "matched_lcsc": "C60490",
+      "side": "top"
+    },
+    {
+      "ref": "R11",
+      "selected": true,
+      "uploaded_comment": "RC0402FR-074K7L",
+      "uploaded_footprint": "Stratolink_v1p1_R11_R_0402_1005Metric",
+      "matched_mpn": "RC0402FR-074K7L",
+      "matched_lcsc": "C105871",
+      "side": "top"
+    },
+    {
+      "ref": "R12",
+      "selected": true,
+      "uploaded_comment": "RC0402FR-074K7L",
+      "uploaded_footprint": "Stratolink_v1p1_R12_R_0402_1005Metric",
+      "matched_mpn": "RC0402FR-074K7L",
+      "matched_lcsc": "C105871",
+      "side": "top"
+    },
+    {
+      "ref": "R13",
+      "selected": true,
+      "uploaded_comment": "RC0402FR-070RL",
+      "uploaded_footprint": "Stratolink_v1p1_R13_R_0402_1005Metric",
+      "matched_mpn": "RC0402FR-070RL",
+      "matched_lcsc": "C106231",
+      "side": "top"
+    },
+    {
+      "ref": "R14",
+      "selected": true,
+      "uploaded_comment": "RC0402FR-070RL",
+      "uploaded_footprint": "Stratolink_v1p1_R14_R_0402_1005Metric",
+      "matched_mpn": "RC0402FR-070RL",
+      "matched_lcsc": "C106231",
+      "side": "top"
+    },
+    {
+      "ref": "R15",
+      "selected": true,
+      "uploaded_comment": "RC0402FR-0733RL",
+      "uploaded_footprint": "Stratolink_v1p1_R15_R_0402_1005Metric",
+      "matched_mpn": "RC0402FR-0733RL",
+      "matched_lcsc": "C138002",
+      "side": "top"
+    },
+    {
+      "ref": "R16",
+      "selected": true,
+      "uploaded_comment": "RC0402FR-0733RL",
+      "uploaded_footprint": "Stratolink_v1p1_R16_R_0402_1005Metric",
+      "matched_mpn": "RC0402FR-0733RL",
+      "matched_lcsc": "C138002",
+      "side": "top"
+    },
+    {
+      "ref": "R18",
+      "selected": true,
+      "uploaded_comment": "RC0402FR-0710KL",
+      "uploaded_footprint": "Stratolink_v1p1_R18_R_0402_1005Metric",
+      "matched_mpn": "RC0402FR-0710KL",
+      "matched_lcsc": "C60490",
+      "side": "top"
+    },
+    {
+      "ref": "R19",
+      "selected": true,
+      "uploaded_comment": "RC0402FR-071ML",
+      "uploaded_footprint": "Stratolink_v1p1_R19_R_0402_1005Metric",
+      "matched_mpn": "RC0402FR-071ML",
+      "matched_lcsc": "C138033",
+      "side": "top"
+    },
+    {
+      "ref": "R2",
+      "selected": true,
+      "uploaded_comment": "CRCW04024M22FKED",
+      "uploaded_footprint": "Stratolink_v1p1_R2_R_0402_1005Metric",
+      "matched_mpn": "CRCW04024M22FKED",
+      "matched_lcsc": "C2091474",
+      "side": "bottom"
+    },
+    {
+      "ref": "R21",
+      "selected": true,
+      "uploaded_comment": "RC0402FR-071ML",
+      "uploaded_footprint": "Stratolink_v1p1_R21_R_0402_1005Metric",
+      "matched_mpn": "RC0402FR-071ML",
+      "matched_lcsc": "C138033",
+      "side": "top"
+    },
+    {
+      "ref": "R22",
+      "selected": true,
+      "uploaded_comment": "RC0402FR-071ML",
+      "uploaded_footprint": "Stratolink_v1p1_R22_R_0402_1005Metric",
+      "matched_mpn": "RC0402FR-071ML",
+      "matched_lcsc": "C138033",
+      "side": "top"
+    },
+    {
+      "ref": "R23",
+      "selected": true,
+      "uploaded_comment": "RC0402FR-071ML",
+      "uploaded_footprint": "Stratolink_v1p1_R23_R_0402_1005Metric",
+      "matched_mpn": "RC0402FR-071ML",
+      "matched_lcsc": "C138033",
+      "side": "top"
+    },
+    {
+      "ref": "R24",
+      "selected": true,
+      "uploaded_comment": "FRC0402F4754TS",
+      "uploaded_footprint": "Stratolink_v1p1_R24_R_0402_1005Metric",
+      "matched_mpn": "FRC0402F4754TS",
+      "matched_lcsc": "C2998153",
+      "side": "bottom"
+    },
+    {
+      "ref": "R25",
+      "selected": true,
+      "uploaded_comment": "FRC0402F4754TS",
+      "uploaded_footprint": "Stratolink_v1p1_R25_R_0402_1005Metric",
+      "matched_mpn": "FRC0402F4754TS",
+      "matched_lcsc": "C2998153",
+      "side": "bottom"
+    },
+    {
+      "ref": "R26",
+      "selected": true,
+      "uploaded_comment": "0402WGF220JTCE",
+      "uploaded_footprint": "Stratolink_v1p1_R26_R_0402_1005Metric",
+      "matched_mpn": "0402WGF220JTCE",
+      "matched_lcsc": "C25092",
+      "side": "bottom"
+    },
+    {
+      "ref": "R27",
+      "selected": true,
+      "uploaded_comment": "MCU0805MD3304BP500",
+      "uploaded_footprint": "Stratolink_v1p1_R27_R_0805_2012Metric",
+      "matched_mpn": "MCU0805MD3304BP500",
+      "matched_lcsc": "C4313228",
+      "side": "top"
+    },
+    {
+      "ref": "R3",
+      "selected": true,
+      "uploaded_comment": "FRC0402F4754TS",
+      "uploaded_footprint": "Stratolink_v1p1_R3_R_0402_1005Metric",
+      "matched_mpn": "FRC0402F4754TS",
+      "matched_lcsc": "C2998153",
+      "side": "bottom"
+    },
+    {
+      "ref": "R4",
+      "selected": true,
+      "uploaded_comment": "RC0402FR-073M65L",
+      "uploaded_footprint": "Stratolink_v1p1_R4_R_0402_1005Metric",
+      "matched_mpn": "RC0402FR-073M65L",
+      "matched_lcsc": "C477700",
+      "side": "bottom"
+    },
+    {
+      "ref": "R5",
+      "selected": true,
+      "uploaded_comment": "GR0402F4M42TAG00",
+      "uploaded_footprint": "Stratolink_v1p1_R5_R_0402_1005Metric",
+      "matched_mpn": "GR0402F4M42TAG00",
+      "matched_lcsc": "C49654874",
+      "side": "bottom"
+    },
+    {
+      "ref": "R6",
+      "selected": true,
+      "uploaded_comment": "0402WGF8254TCE",
+      "uploaded_footprint": "Stratolink_v1p1_R6_R_0402_1005Metric",
+      "matched_mpn": "0402WGF8254TCE",
+      "matched_lcsc": "C423131",
+      "side": "bottom"
+    },
+    {
+      "ref": "R7",
+      "selected": true,
+      "uploaded_comment": "FRC0402F4754TS",
+      "uploaded_footprint": "Stratolink_v1p1_R7_R_0402_1005Metric",
+      "matched_mpn": "FRC0402F4754TS",
+      "matched_lcsc": "C2998153",
+      "side": "bottom"
+    },
+    {
+      "ref": "R8",
+      "selected": true,
+      "uploaded_comment": "RC0402FR-07100KL",
+      "uploaded_footprint": "Stratolink_v1p1_R8_R_0402_1005Metric",
+      "matched_mpn": "RC0402FR-07100KL",
+      "matched_lcsc": "C60491",
+      "side": "bottom"
+    },
+    {
+      "ref": "R9",
+      "selected": true,
+      "uploaded_comment": "RC0402FR-070RL",
+      "uploaded_footprint": "Stratolink_v1p1_R9_R_0402_1005Metric",
+      "matched_mpn": "RC0402FR-070RL",
+      "matched_lcsc": "C106231",
+      "side": "top"
+    },
+    {
+      "ref": "U1",
+      "selected": true,
+      "uploaded_comment": "BQ25570RGRR",
+      "uploaded_footprint": "Stratolink_v1p1_U1_QFN50P350X350X100-21N",
+      "matched_mpn": "BQ25570RGRR",
+      "matched_lcsc": "C506250",
+      "side": "bottom"
+    },
+    {
+      "ref": "U2",
+      "selected": true,
+      "uploaded_comment": "RAK3172-8-SM-NI",
+      "uploaded_footprint": "Stratolink_v1p1_U2_RAK3172",
+      "matched_mpn": "RAK3172-8-SM-NI",
+      "matched_lcsc": "C5452091",
+      "side": "top"
+    },
+    {
+      "ref": "U3",
+      "selected": true,
+      "uploaded_comment": "MAX-M10S-00B",
+      "uploaded_footprint": "Stratolink_v1p1_U3_XCVR_MAX-M10S-00B",
+      "matched_mpn": "MAX-M10S-00B",
+      "matched_lcsc": "C4153167",
+      "side": "top"
+    },
+    {
+      "ref": "U4",
+      "selected": true,
+      "uploaded_comment": "MS561101BA03-50",
+      "uploaded_footprint": "Stratolink_v1p1_U4_SON125P500X300X100-8N",
+      "matched_mpn": "MS561101BA03-50",
+      "matched_lcsc": "C15639",
+      "side": "top"
+    },
+    {
+      "ref": "U5",
+      "selected": true,
+      "uploaded_comment": "TMP117AIYBGR",
+      "uploaded_footprint": "Stratolink_v1p1_U5_BGA6N40P3X2_148X95X53",
+      "matched_mpn": "TMP117AIYBGR",
+      "matched_lcsc": "C2871893",
+      "side": "top"
+    },
+    {
+      "ref": "U7",
+      "selected": true,
+      "uploaded_comment": "LIS2DH12TR",
+      "uploaded_footprint": "Stratolink_v1p1_U7_PQFN50P200X200100-12N",
+      "matched_mpn": "LIS2DH12TR",
+      "matched_lcsc": "C110926",
+      "side": "top"
+    },
+    {
+      "ref": "U8",
+      "selected": true,
+      "uploaded_comment": "TLV8801DBVT",
+      "uploaded_footprint": "Stratolink_v1p1_U8_SOT-23-5",
+      "matched_mpn": "TLV8801DBVT",
+      "matched_lcsc": "C544879",
+      "side": "bottom"
+    }
+  ],
+  "discrepancies": [],
+  "source_sha256": {
+    "analysis/v1_1_release_20261012/as7331/jlc/matched-parts-selection.txt": "a374385fcc199e8b9334be53f388c3d6eab3278a4bb7c230ec7371b0fadf5802",
+    "hardware/gerbers/v1.1-pilot/BOM-stratolink.csv": "55b681ab8d23de3ec711cbc7957fc5375e99b6118513ed9acee47a928077a6cb",
+    "hardware/gerbers/v1.1-pilot/CPL-stratolink.csv": "907ae41e92261e9c436d787050f74c991dade5d6a306c1a75a4d8b11c4c8ea6f",
+    "hardware/gerbers/v1.1-pilot/population-profile.json": "245f06375a0641c170406a4ebb2b491d09127b2a3320e0928d2719deba146569",
+    "hardware/gerbers/v1.1-pilot/assembly-audit.json": "b4bbf34a361ba732e286e369a69ad853e1ac894d52d4f35c69180a081c8c8498",
+    "analysis/v1_1_release_20261012/as7331/jlc/review_parts_selection.py": "4e4353b390bcd747b0adadd3164bad5892f4ff5ec688230bb4e8c6e6213d0abb"
+  },
+  "limitations": [
+    "This verifies the saved matched-parts snapshot, not subsequent live browser state.",
+    "The BOM page exposes placement side but not rotation or coordinates; those need the component-placement view and package verification.",
+    "Part quantities shown by JLC include supplier purchasing overhead; 57 refers to populated designator rows, not purchased units.",
+    "U6 is the sole omission from the 58-part design assembly set; manual/non-assembly items remain governed by the separate assembly exclusions."
+  ]
+}

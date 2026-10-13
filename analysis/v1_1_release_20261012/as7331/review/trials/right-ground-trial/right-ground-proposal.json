@@ -1,0 +1,22 @@
+{
+  "before_sha256": "6833e38d28069a6b7d5f261f8bcf11a4eaf8628fb0464725df73b592a391f46c",
+  "after_sha256": "eceb4603d153f58ce04e62b8599832d339feefa6a8081e8013cf79506b2c7470",
+  "path_mm": [
+    [
+      75.3,
+      37.85
+    ],
+    [
+      75.7,
+      38.25
+    ],
+    [
+      75.7,
+      39.0
+    ]
+  ],
+  "trace_width_mm": 0.15,
+  "via_diameter_mm": 0.5,
+  "via_drill_mm": 0.3,
+  "via_tenting": "both"
+}

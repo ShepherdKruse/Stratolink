@@ -1,0 +1,21 @@
+{
+  "generator_sha256": "5f5490dce5ef8d0a6114935cddda1ab1c8c7cc536c6a8ee42832ec362c7806a8",
+  "positive_fixture": "/Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/as7331/green-mask-trial3/stratolink.kicad_pcb",
+  "positive_mask_regions": {
+    "F": 170,
+    "B": 92
+  },
+  "negative_fixtures_rejected": {
+    "native_full_board_opening": "Native mask opening spans the complete board outline",
+    "polygonized_Gerber_full_board_opening": "Exported mask opening spans the complete board outline on F",
+    "clear_polarity": "Selective-mask clear polarity needs boolean CAM review",
+    "unexpected_flash": "Unsupported selective-mask Gerber operation: X0Y0D03*",
+    "unexpected_arc": "Unsupported selective-mask Gerber operation: G02*",
+    "unclosed_region": "Nested mask region",
+    "solar_pad_covered_in_actual_Gerber": "Solar soldering pad center is covered in actual mask Gerber: J1.1 F",
+    "wrong_mask_color": "Both mask layers must be green",
+    "nonempty_silk_Gerber": "Silkscreen Gerber contains drawn/flashed artwork: stratolink-F_Silkscreen.gto"
+  },
+  "nested_contour_and_oblique_geometry_checked": true,
+  "native_and_Gerber_full_face_regression_both_rejected": true
+}

@@ -4675,7 +4675,7 @@
 		)
 		(embedded_fonts no)
 	)
-)
+(symbol "Stratolink_UV:AS7331_AQFM" (pin_names (offset .5)) (exclude_from_sim no) (in_bom yes) (on_board yes) (property "Reference" "U" (at 0 12.7 0) (effects (font (size 1 1)))) (property "Value" "AS7331-AQFM" (at 0 -12.7 0) (effects (font (size 1 1)))) (property "Manufacturer" "ams OSRAM" (at 0 0 0) (effects (font (size 1 1)) (hide yes))) (property "Manufacturer_Part_Number" "AS7331-AQFM" (at 0 0 0) (effects (font (size 1 1)) (hide yes))) (property "LCSC" "C20482877" (at 0 0 0) (effects (font (size 1 1)) (hide yes))) (property "Supplier Part" "C20482877" (at 0 0 0) (effects (font (size 1 1)) (hide yes))) (property "Supplier" "LCSC" (at 0 0 0) (effects (font (size 1 1)) (hide yes))) (property "Datasheet" "https://look.ams-osram.com/m/1856fd2c69c35605/original/AS7331-Spectral-UVA-B-C-Sensor.pdf" (at 0 0 0) (effects (font (size 1 1)) (hide yes))) (property "Description" "UVA UVB UVC spectral sensor; 0x74, CMD mode, READY NC, -40 to 85 C; ozone research requires calibrated optics" (at 0 0 0) (effects (font (size 1 1)) (hide yes))) (property "Footprint" "lib:Stratolink_v1p1_U6_AS7331_OLGA16" (at 0 0 0) (effects (font (size 1 1)) (hide yes))) (symbol "AS7331_AQFM_0_1" (rectangle (start -10.16 11.43) (end 10.16 -11.43) (stroke (width .254) (type default)) (fill (type background)))) (symbol "AS7331_AQFM_1_1" (pin bidirectional line (at -12.7 10.16 0) (length 2.54) (name "SDA" (effects (font (size 1 1)))) (number "12" (effects (font (size 1 1))))) (pin input line (at -12.7 7.62 0) (length 2.54) (name "SCL" (effects (font (size 1 1)))) (number "13" (effects (font (size 1 1))))) (pin input line (at -12.7 5.08 0) (length 2.54) (name "SYN" (effects (font (size 1 1)))) (number "8" (effects (font (size 1 1))))) (pin input line (at -12.7 2.54 0) (length 2.54) (name "A1" (effects (font (size 1 1)))) (number "7" (effects (font (size 1 1))))) (pin input line (at -12.7 0.0 0) (length 2.54) (name "A0" (effects (font (size 1 1)))) (number "14" (effects (font (size 1 1))))) (pin passive line (at -12.7 -2.539999999999999 0) (length 2.54) (name "REXT" (effects (font (size 1 1)))) (number "4" (effects (font (size 1 1))))) (pin power_in line (at -12.7 -5.08 0) (length 2.54) (name "VDDA" (effects (font (size 1 1)))) (number "3" (effects (font (size 1 1))))) (pin power_in line (at -12.7 -7.620000000000001 0) (length 2.54) (name "VDDD" (effects (font (size 1 1)))) (number "10" (effects (font (size 1 1))))) (pin output line (at 12.7 10.16 180) (length 2.54) (name "READY" (effects (font (size 1 1)))) (number "9" (effects (font (size 1 1))))) (pin power_in line (at 12.7 7.62 180) (length 2.54) (name "VSSA" (effects (font (size 1 1)))) (number "1" (effects (font (size 1 1))))) (pin power_in line (at 12.7 5.08 180) (length 2.54) (name "VSSA" (effects (font (size 1 1)))) (number "2" (effects (font (size 1 1))))) (pin power_in line (at 12.7 2.54 180) (length 2.54) (name "VSSA" (effects (font (size 1 1)))) (number "5" (effects (font (size 1 1))))) (pin power_in line (at 12.7 0.0 180) (length 2.54) (name "VSSA" (effects (font (size 1 1)))) (number "6" (effects (font (size 1 1))))) (pin power_in line (at 12.7 -2.539999999999999 180) (length 2.54) (name "VSSA" (effects (font (size 1 1)))) (number "15" (effects (font (size 1 1))))) (pin power_in line (at 12.7 -5.08 180) (length 2.54) (name "VSSA" (effects (font (size 1 1)))) (number "16" (effects (font (size 1 1))))) (pin power_in line (at 12.7 -7.620000000000001 180) (length 2.54) (name "VSSD" (effects (font (size 1 1)))) (number "11" (effects (font (size 1 1))))))))
 	(junction
 		(at 111.76 120.65)
 		(diameter 0)
@@ -4694,12 +4694,7 @@
 		(color 0 0 0 0)
 		(uuid "08574e6e-05fe-4caf-96b8-a386fa8a51b7")
 	)
-	(junction
-		(at 40.64 137.16)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "0b64b367-b4b3-44b9-944e-c800f22f9bdb")
-	)
+	
 	(junction
 		(at 201.93 125.73)
 		(diameter 0)
@@ -4778,12 +4773,7 @@
 		(color 0 0 0 0)
 		(uuid "56b8c4f0-1276-4044-ba78-65f4f1235a27")
 	)
-	(junction
-		(at 36.83 129.54)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "57f50a7f-bb7a-4a7c-b4a6-d9eb4fa06d15")
-	)
+	
 	(junction
 		(at 196.85 125.73)
 		(diameter 0)
@@ -4821,7 +4811,7 @@
 		(uuid "65a81d38-ccb4-4c27-a558-c1e07a8f45e4")
 	)
 	(junction
-		(at 27.94 129.54)
+		(at 27.94 126.99999999999999)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "6c01e8ad-ad3d-47eb-9af6-822d84b4a1bc")
@@ -4851,7 +4841,7 @@
 		(uuid "76d3c11b-1938-4238-89b3-38bd66f333af")
 	)
 	(junction
-		(at 27.94 137.16)
+		(at 27.94 134.62)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "7e4effe3-ee24-4894-9139-8a027ec79770")
@@ -4928,12 +4918,7 @@
 		(color 0 0 0 0)
 		(uuid "a7662b9d-7774-46e7-88fd-5d57f2790bf6")
 	)
-	(junction
-		(at 36.83 137.16)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "a92edf65-96ba-4d1d-8253-42f80ceb5c9b")
-	)
+	
 	(junction
 		(at 195.58 54.61)
 		(diameter 0)
@@ -5062,16 +5047,7 @@
 		)
 		(uuid "01dd9204-ebc5-41d4-8ce3-d89da8518e53")
 	)
-	(wire
-		(pts
-			(xy 67.31 139.7) (xy 40.64 139.7)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "028cdc33-fd20-49d7-bb91-87847a825e61")
-	)
+	
 	(wire
 		(pts
 			(xy 111.76 22.86) (xy 120.65 22.86)
@@ -5612,16 +5588,7 @@
 		)
 		(uuid "3c3bf965-53ce-4c00-b6c8-7d0573fddcd0")
 	)
-	(wire
-		(pts
-			(xy 36.83 137.16) (xy 40.64 137.16)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "3d38d1d6-6395-4959-b468-0597224e6ade")
-	)
+	
 	(wire
 		(pts
 			(xy 62.23 26.67) (xy 62.23 29.21)
@@ -5872,16 +5839,7 @@
 		)
 		(uuid "5c432176-5f02-4a29-8558-4b7248129212")
 	)
-	(wire
-		(pts
-			(xy 67.31 133.35) (xy 67.31 139.7)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "5e45a7d9-6d3b-4098-bdbb-281cc6bddb0e")
-	)
+	
 	(wire
 		(pts
 			(xy 154.94 118.11) (xy 158.75 118.11)
@@ -5992,16 +5950,7 @@
 		)
 		(uuid "6e1dd05a-dd21-4c2c-9f61-c62370f61bac")
 	)
-	(wire
-		(pts
-			(xy 40.64 130.81) (xy 40.64 129.54)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "71d26e20-f261-4e66-9cbe-da6eb4ca8cb5")
-	)
+	
 	(wire
 		(pts
 			(xy 113.03 168.91) (xy 114.3 168.91)
@@ -6192,16 +6141,7 @@
 		)
 		(uuid "848e31a1-6414-4e74-9423-55e73db3e79d")
 	)
-	(wire
-		(pts
-			(xy 41.91 135.89) (xy 40.64 135.89)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "84c90cc7-489c-4eb2-8403-0dfecca487da")
-	)
+	
 	(wire
 		(pts
 			(xy 195.58 29.21) (xy 200.66 29.21)
@@ -6612,16 +6552,7 @@
 		)
 		(uuid "a36bd553-3938-48a2-aeff-e95617275e8d")
 	)
-	(wire
-		(pts
-			(xy 36.83 129.54) (xy 40.64 129.54)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "a37411c4-3205-4673-be51-acc07a65293e")
-	)
+	
 	(wire
 		(pts
 			(xy 203.2 59.69) (xy 200.66 59.69)
@@ -6642,16 +6573,7 @@
 		)
 		(uuid "a63e5916-9c82-4a36-8033-d97ecea09465")
 	)
-	(wire
-		(pts
-			(xy 27.94 129.54) (xy 36.83 129.54)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "a84ba62f-9d45-41ad-98f5-49eac2e1b193")
-	)
+	
 	(wire
 		(pts
 			(xy 187.96 21.59) (xy 190.5 21.59)
@@ -6702,26 +6624,8 @@
 		)
 		(uuid "acc230da-f644-4eaa-9938-8b685f6588d3")
 	)
-	(wire
-		(pts
-			(xy 41.91 130.81) (xy 40.64 130.81)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "ad9e79b2-e329-4d2c-9894-913a50687255")
-	)
-	(wire
-		(pts
-			(xy 40.64 139.7) (xy 40.64 137.16)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "aeb039e3-ba06-4233-93f4-11dded0be355")
-	)
+	
+	
 	(wire
 		(pts
 			(xy 25.4 73.66) (xy 33.02 73.66)
@@ -6752,16 +6656,7 @@
 		)
 		(uuid "b2240d38-06f6-45e6-ab2b-519fee681a3e")
 	)
-	(wire
-		(pts
-			(xy 27.94 137.16) (xy 36.83 137.16)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "b3dc1b59-3f22-4722-86ed-9e014f68a590")
-	)
+	
 	(wire
 		(pts
 			(xy 76.2 17.78) (xy 76.2 22.86)
@@ -7312,16 +7207,7 @@
 		)
 		(uuid "e1066c23-03a8-4b91-93b1-97a2be1b39e8")
 	)
-	(wire
-		(pts
-			(xy 40.64 135.89) (xy 40.64 137.16)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "e19ee029-5e40-4b4e-9095-4e8b03d45d7a")
-	)
+	
 	(wire
 		(pts
 			(xy 217.17 26.67) (xy 217.17 29.21)
@@ -7622,16 +7508,7 @@
 		)
 		(uuid "fb8b1345-0371-48e7-a309-af58e576c3a3")
 	)
-	(wire
-		(pts
-			(xy 59.69 133.35) (xy 67.31 133.35)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "fbf8d632-b816-4fa9-af42-a116bbe37fc9")
-	)
+	
 	(wire
 		(pts
 			(xy 167.64 110.49) (xy 172.72 110.49)
@@ -7663,7 +7540,7 @@
 		(uuid "fdfb5e09-7a74-4faf-a01f-30cf7af1e213")
 	)
 	(rectangle
-		(start 13.97 123.19)
+		(start 13.97 88.90)
 		(end 76.835 144.78)
 		(stroke
 			(width 0)
@@ -52045,16 +51922,7 @@
 		)
 		(uuid "7cec488a-186d-4472-ad5b-b2763dc21d86")
 	)
-	(text "Spectral\n"
-		(exclude_from_sim no)
-		(at 71.12 126.492 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-		)
-		(uuid "ac1bd5a8-ec0b-48d6-b5b1-1ee0334dad4d")
-	)
+	
 	(text "Voltage\nDividers"
 		(exclude_from_sim no)
 		(at 103.632 149.86 0)
@@ -52428,28 +52296,7 @@
 			)
 		)
 	)
-	(global_label "SCL"
-		(shape input)
-		(at 59.69 135.89 0)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left)
-		)
-		(uuid "61ef22f5-8b87-4c00-8fae-1aa3ea750bf8")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 66.1828 135.89 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-	)
+	
 	(global_label "SWDIO"
 		(shape input)
 		(at 104.14 44.45 180)
@@ -52978,28 +52825,7 @@
 			)
 		)
 	)
-	(global_label "SDA"
-		(shape input)
-		(at 59.69 130.81 0)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left)
-		)
-		(uuid "f830d6ab-c2a5-4c91-9539-c0526da7ba62")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 66.2433 130.81 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-				(hide yes)
-			)
-		)
-	)
+	
 	(global_label "RX"
 		(shape input)
 		(at 97.79 107.95 180)
@@ -57005,7 +56831,7 @@
 )
 	(symbol
 		(lib_id "Stratolink_v1p1_Symbols:Device_C")
-		(at 27.94 133.35 180)
+		(at 27.94 130.81 180.0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -57013,7 +56839,7 @@
 		(dnp no)
 		(uuid "8068c166-194f-4ae9-9272-692877e0af80")
 		(property "Reference" "C16"
-			(at 20.32 133.35 90)
+			(at 20.32 130.81 90.0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -57022,7 +56848,7 @@
 			)
 		)
 		(property "Value" "4.7μF"
-			(at 23.876 133.35 90)
+			(at 23.876 130.81 90.0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -57030,7 +56856,7 @@
 			)
 		)
 		(property "Footprint" "lib:Stratolink_v1p1_C16_C_0603_1608Metric"
-			(at 26.9748 129.54 0)
+			(at 26.9748 127.0 0.0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -57039,7 +56865,7 @@
 			)
 		)
 		(property "Datasheet" "https://www.lcsc.com/product-detail/C1705.html"
-			(at 27.94 133.35 0)
+			(at 27.94 130.81 0.0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -57048,7 +56874,7 @@
 			)
 		)
 		(property "Description" "CL10A475KP8NNNC"
-			(at 27.94 133.35 0)
+			(at 27.94 130.81 0.0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -57071,15 +56897,15 @@
 			)
 		)
 	
- (property "Manufacturer" "Samsung Electro-Mechanics" (at 27.94 133.35 0) (effects (font (size 1.27 1.27)) (hide yes)))
+ (property "Manufacturer" "Samsung Electro-Mechanics" (at 27.94 130.81 0.0) (effects (font (size 1.27 1.27)) (hide yes)))
 
- (property "Manufacturer_Part_Number" "CL10A475KP8NNNC" (at 27.94 133.35 0) (effects (font (size 1.27 1.27)) (hide yes)))
+ (property "Manufacturer_Part_Number" "CL10A475KP8NNNC" (at 27.94 130.81 0.0) (effects (font (size 1.27 1.27)) (hide yes)))
 
- (property "Supplier" "LCSC" (at 27.94 133.35 0) (effects (font (size 1.27 1.27)) (hide yes)))
+ (property "Supplier" "LCSC" (at 27.94 130.81 0.0) (effects (font (size 1.27 1.27)) (hide yes)))
 
- (property "LCSC" "C1705" (at 27.94 133.35 0) (effects (font (size 1.27 1.27)) (hide yes)))
+ (property "LCSC" "C1705" (at 27.94 130.81 0.0) (effects (font (size 1.27 1.27)) (hide yes)))
 
- (property "Supplier Part" "C1705" (at 27.94 133.35 0) (effects (font (size 1.27 1.27)) (hide yes)))
+ (property "Supplier Part" "C1705" (at 27.94 130.81 0.0) (effects (font (size 1.27 1.27)) (hide yes)))
 )
 	(symbol
 		(lib_id "Stratolink_v1p1_Symbols:power_5V")
@@ -58202,84 +58028,7 @@
 
  (property "Supplier Part" "C1525" (at 90.17 45.72 0) (effects (font (size 1.27 1.27)) (hide yes)))
 )
-	(symbol
-		(lib_id "Stratolink_v1p1_Symbols:Device_C")
-		(at 36.83 133.35 180)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "abac15af-0cc4-43ec-b455-db4c6d91438c")
-		(property "Reference" "C14"
-			(at 29.21 133.35 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value" "100nF"
-			(at 32.512 133.35 90)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "lib:Stratolink_v1p1_C14_C_0402_1005Metric"
-			(at 35.8648 129.54 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "https://www.lcsc.com/product-detail/C1525.html"
-			(at 36.83 133.35 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "CL05B104KO5NNNC"
-			(at 36.83 133.35 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "09be2ffb-a532-464a-b735-3417496a13de")
-		)
-		(pin "2"
-			(uuid "f587b140-3048-4d52-b751-e86e567e177b")
-		)
-		(instances
-			(project "stratolink"
-				(path "/4d146a28-be53-49f1-b1c6-484192820e45"
-					(reference "C14")
-					(unit 1)
-				)
-			)
-		)
 	
- (property "Manufacturer" "Samsung Electro-Mechanics" (at 36.83 133.35 0) (effects (font (size 1.27 1.27)) (hide yes)))
-
- (property "Manufacturer_Part_Number" "CL05B104KO5NNNC" (at 36.83 133.35 0) (effects (font (size 1.27 1.27)) (hide yes)))
-
- (property "Supplier" "LCSC" (at 36.83 133.35 0) (effects (font (size 1.27 1.27)) (hide yes)))
-
- (property "LCSC" "C1525" (at 36.83 133.35 0) (effects (font (size 1.27 1.27)) (hide yes)))
-
- (property "Supplier Part" "C1525" (at 36.83 133.35 0) (effects (font (size 1.27 1.27)) (hide yes)))
-)
 	(symbol
 		(lib_id "Stratolink_v1p1_Symbols:RAK3172_RAK3172")
 		(at 110.49 77.47 0)
@@ -59032,7 +58781,7 @@
 	)
 	(symbol
 		(lib_id "Stratolink_v1p1_Symbols:power_GND")
-		(at 27.94 137.16 0)
+		(at 27.94 134.62 0.0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -59040,7 +58789,7 @@
 		(dnp no)
 		(uuid "be6eb54e-b233-4c66-baf7-334afde6b6d9")
 		(property "Reference" "#PWR036"
-			(at 27.94 143.51 0)
+			(at 27.94 140.97 0.0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -59049,7 +58798,7 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 24.892 139.954 0)
+			(at 24.892 137.41400000000002 0.0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -59057,7 +58806,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 27.94 137.16 0)
+			(at 27.94 134.62 0.0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -59066,7 +58815,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 27.94 137.16 0)
+			(at 27.94 134.62 0.0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -59075,7 +58824,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 27.94 137.16 0)
+			(at 27.94 134.62 0.0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -59322,7 +59071,7 @@
 )
 	(symbol
 		(lib_id "Stratolink_v1p1_Symbols:power_5V")
-		(at 27.94 129.54 0)
+		(at 27.94 126.99999999999999 0.0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -59330,7 +59079,7 @@
 		(dnp no)
 		(uuid "c4681363-e1fa-47ce-95a4-ffdcf1fd30eb")
 		(property "Reference" "#PWR035"
-			(at 27.94 133.35 0)
+			(at 27.94 130.81 0.0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -59339,7 +59088,7 @@
 			)
 		)
 		(property "Value" "+3.3V"
-			(at 23.876 127 0)
+			(at 23.876 124.46 0.0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -59347,7 +59096,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 27.94 129.54 0)
+			(at 27.94 126.99999999999999 0.0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -59356,7 +59105,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 27.94 129.54 0)
+			(at 27.94 126.99999999999999 0.0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -59365,7 +59114,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"+5V\""
-			(at 27.94 129.54 0)
+			(at 27.94 126.99999999999999 0.0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -59465,136 +59214,7 @@
 
  (property "Supplier Part" "C423131" (at 234.95 88.9 0) (effects (font (size 1.27 1.27)) (hide yes)))
 )
-	(symbol
-		(lib_id "Stratolink_v1p1_Symbols:ProLib_pcs_2026_02_20_LTR_390UV_01")
-		(at 50.8 133.35 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "c544e489-c714-48ba-b71a-14e87f55c525")
-		(property "Reference" "U6"
-			(at 50.8 124.46 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Value" "LTR-390UV-01"
-			(at 50.8 127 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(property "Footprint" "lib:Stratolink_v1p1_U6_SMD6_LTR-390UV-01_LTO-L"
-			(at 50.8 133.35 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "https://item.szlcsc.com/datasheet/LTR-390UV-01/503413.html"
-			(at 50.8 133.35 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "LTR-390UV-01 ambient light and UVA sensor"
-			(at 50.8 133.35 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Manufacturer Part" "LTR-390UV-01"
-			(at 50.8 133.35 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Manufacturer" "Lite-On"
-			(at 50.8 133.35 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Supplier Part" "C492374"
-			(at 50.8 133.35 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Supplier" "LCSC"
-			(at 50.8 133.35 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "LCSC Part Name" "LTR-390UV-01 停产"
-			(at 50.8 133.35 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "325d29e4-57c2-4784-b2dc-d6579edd8821")
-		)
-		(pin "2"
-			(uuid "981b5584-9585-449f-af05-0a9f542e3017")
-		)
-		(pin "5"
-			(uuid "97fe1358-9111-4cae-ace0-69f4a04c9922")
-		)
-		(pin "6"
-			(uuid "7c622f3c-3e66-4b0e-8742-8f1853796be1")
-		)
-		(pin "3"
-			(uuid "60891eb3-a958-42ed-805e-003008753481")
-		)
-		(pin "4"
-			(uuid "cdaa00d2-7d43-4638-9ee4-45444c09f9b8")
-		)
-		(instances
-			(project ""
-				(path "/4d146a28-be53-49f1-b1c6-484192820e45"
-					(reference "U6")
-					(unit 1)
-				)
-			)
-		)
 	
- (property "Manufacturer_Part_Number" "LTR-390UV-01" (at 50.8 133.35 0) (effects (font (size 1.27 1.27)) (hide yes)))
-
- (property "LCSC" "C492374" (at 50.8 133.35 0) (effects (font (size 1.27 1.27)) (hide yes)))
-)
 	(symbol
 		(lib_id "Stratolink_v1p1_Symbols:Device_C")
 		(at 223.52 24.13 90)
@@ -61655,7 +61275,7 @@
 (no_connect (at 152.4 113.03) (uuid "ca129161-0599-5692-904d-0292789d3628"))
 (no_connect (at 152.4 105.41) (uuid "df8adace-a093-52e9-a39b-2e18ea36c9e6"))
 (no_connect (at 231.14 130.81) (uuid "b7b0c005-e698-5d36-8ea8-d3cb175adfd7"))
-(no_connect (at 41.91 133.35) (uuid "f382408b-231e-5924-8317-58c28ea50e63"))
+
 (no_connect (at 60.96 34.29) (uuid "d6c6d9bf-516e-5255-8468-ca0f105d0665"))
 (no_connect (at 129.54 158.75) (uuid "a6609e69-0eae-5fd4-ba7a-5f0439e4947a"))
 (symbol (lib_id "Stratolink_v1p1_Symbols:PWR_FLAG") (at 199.39 105.41 0) (unit 1)
@@ -61690,4 +61310,207 @@
     (property "Datasheet" "" (at 223.52 36.83 0) (effects (font (size 1.27 1.27)) (hide yes)))
     (pin "1" (uuid "af0c1e9a-a788-5dd2-87c7-5d96cf114363"))
     (instances (project "stratolink" (path "/4d146a28-be53-49f1-b1c6-484192820e45" (reference "#FLG104") (unit 1)))))
+
+(symbol (lib_id "Stratolink_UV:AS7331_AQFM") (at 50.8 107.95 0) (unit 1) (exclude_from_sim no) (in_bom yes) (on_board yes) (dnp no) (uuid "c544e489-c714-48ba-b71a-14e87f55c525") (property "Reference" "U6" (at 50.8 93.95 0) (effects (font (size 1 1)))) (property "Value" "AS7331-AQFM" (at 50.8 121.95 0) (effects (font (size 1 1)))) (property "Manufacturer" "ams OSRAM" (at 50.8 107.95 0) (effects (font (size 1 1)) (hide yes))) (property "Manufacturer_Part_Number" "AS7331-AQFM" (at 50.8 107.95 0) (effects (font (size 1 1)) (hide yes))) (property "LCSC" "C20482877" (at 50.8 107.95 0) (effects (font (size 1 1)) (hide yes))) (property "Supplier Part" "C20482877" (at 50.8 107.95 0) (effects (font (size 1 1)) (hide yes))) (property "Supplier" "LCSC" (at 50.8 107.95 0) (effects (font (size 1 1)) (hide yes))) (property "Datasheet" "https://look.ams-osram.com/m/1856fd2c69c35605/original/AS7331-Spectral-UVA-B-C-Sensor.pdf" (at 50.8 107.95 0) (effects (font (size 1 1)) (hide yes))) (property "Description" "UVA UVB UVC spectral sensor; 0x74, CMD mode, READY NC, -40 to 85 C; ozone research requires calibrated optics" (at 50.8 107.95 0) (effects (font (size 1 1)) (hide yes))) (property "Footprint" "lib:Stratolink_v1p1_U6_AS7331_OLGA16" (at 50.8 107.95 0) (effects (font (size 1 1)) (hide yes))) (pin "1" (uuid "789244ee-dc0c-570f-a0d1-e34ae5a5f450"))(pin "2" (uuid "89aa06e3-fab6-507f-a085-2bc8f12bd81f"))(pin "3" (uuid "e3eb990d-fb6c-56ac-bc0a-b79921206940"))(pin "4" (uuid "5db74071-5a07-5cc4-8854-80831d157082"))(pin "5" (uuid "9756ca38-1227-5f7c-9cdb-007c1f470705"))(pin "6" (uuid "7ff347cf-b5a9-51e6-a4cc-85cc3bc6c003"))(pin "7" (uuid "3d2a3627-7daf-500b-a389-f05b74c71d6a"))(pin "8" (uuid "9ba02b16-20d3-53d9-84b4-a48ec8a3b27c"))(pin "9" (uuid "6ecf0219-a341-52d7-a80f-3d9b16c0da89"))(pin "10" (uuid "812299f7-5101-5e5e-bc42-a03a6f363787"))(pin "11" (uuid "42bcf514-7358-5813-9eb8-591ff93ed624"))(pin "12" (uuid "3ce8151b-15a0-581d-b742-29a8fa71dcdc"))(pin "13" (uuid "fb603ee9-4248-5560-b6ea-8e3d602f0af1"))(pin "14" (uuid "6966e8db-f326-567a-96d4-7dff1dd68b48"))(pin "15" (uuid "13c73cbe-7d59-55a0-b93a-9a7217131847"))(pin "16" (uuid "c865ebc5-f510-52ac-94e5-92adca32d9d1"))(instances (project "stratolink" (path "/4d146a28-be53-49f1-b1c6-484192820e45" (reference "U6") (unit 1)))))
+(wire (pts (xy 38.099999999999994 97.79) (xy 33.019999999999996 97.79)) (stroke (width 0) (type default)) (uuid "4a3eae0f-b0ed-5121-a362-45c11c62bc46"))
+(global_label "SDA" (shape bidirectional) (at 33.019999999999996 97.79 180) (effects (font (size .9 .9)) (justify right)) (uuid "0b7c5daf-c2ea-5dba-94d9-4cc84ec5693f"))
+(wire (pts (xy 38.099999999999994 100.33) (xy 33.019999999999996 100.33)) (stroke (width 0) (type default)) (uuid "18598441-c2d0-5271-863d-60c8ce2ef4e2"))
+(global_label "SCL" (shape bidirectional) (at 33.019999999999996 100.33 180) (effects (font (size .9 .9)) (justify right)) (uuid "7c60b789-7713-5432-9e1f-8b24b7095d90"))
+(wire (pts (xy 38.099999999999994 102.87) (xy 33.019999999999996 102.87)) (stroke (width 0) (type default)) (uuid "9dc6013f-7aa2-5fd7-84bf-c4fc6b04d2aa"))
+(label "GND" (at 33.019999999999996 102.87 0) (effects (font (size .9 .9)) (justify right bottom)) (uuid "b92f1d04-2c8b-5b86-9bf0-1970d677cb05"))
+(wire (pts (xy 38.099999999999994 105.41) (xy 33.019999999999996 105.41)) (stroke (width 0) (type default)) (uuid "6b08d822-3342-5276-8d77-a1dbc80dfbb1"))
+(label "GND" (at 33.019999999999996 105.41 0) (effects (font (size .9 .9)) (justify right bottom)) (uuid "0b3e68d8-f701-5299-859c-d683a8bdc3fc"))
+(wire (pts (xy 38.099999999999994 107.95) (xy 33.019999999999996 107.95)) (stroke (width 0) (type default)) (uuid "ff1dd525-6e05-5182-95c7-15c9245e6251"))
+(label "GND" (at 33.019999999999996 107.95 0) (effects (font (size .9 .9)) (justify right bottom)) (uuid "c3bbb05e-430e-57e3-ae86-dadf8205a878"))
+(wire (pts (xy 38.099999999999994 110.49000000000001) (xy 33.019999999999996 110.49000000000001)) (stroke (width 0) (type default)) (uuid "b1389522-dcdc-5fd3-81ce-be902b3abb27"))
+(label "UV_REXT" (at 33.019999999999996 110.49000000000001 0) (effects (font (size .9 .9)) (justify right bottom)) (uuid "63cea302-db30-5663-a5cd-bb5b1ec25f54"))
+(wire (pts (xy 38.099999999999994 113.03) (xy 33.019999999999996 113.03)) (stroke (width 0) (type default)) (uuid "c105ebf0-88b2-5f30-9651-91a5d4a57d29"))
+(label "+3.3V" (at 33.019999999999996 113.03 0) (effects (font (size .9 .9)) (justify right bottom)) (uuid "de170f13-0cc4-5dd2-8c0e-17c3f3b80e57"))
+(wire (pts (xy 38.099999999999994 115.57000000000001) (xy 33.019999999999996 115.57000000000001)) (stroke (width 0) (type default)) (uuid "9689d4d7-230e-5649-98b0-76d7e2538680"))
+(label "+3.3V" (at 33.019999999999996 115.57000000000001 0) (effects (font (size .9 .9)) (justify right bottom)) (uuid "3e69c768-eb55-5484-b4ef-97fa75ae54e6"))
+(no_connect (at 63.5 97.79) (uuid "705b6613-93df-5a80-a3b1-13efffe47228"))
+(wire (pts (xy 63.5 100.33) (xy 66.04 100.33)) (stroke (width 0) (type default)) (uuid "256bb882-6ef1-5b4c-a3cb-6ccc660c7009"))
+(label "GND" (at 66.04 100.33 0) (effects (font (size .9 .9)) (justify left bottom)) (uuid "5cad7691-5e82-5295-bf26-7ed7a4abd00e"))
+(wire (pts (xy 63.5 102.87) (xy 66.04 102.87)) (stroke (width 0) (type default)) (uuid "ec4c8a22-17b0-505c-b2eb-eaa81ca19ffa"))
+(label "GND" (at 66.04 102.87 0) (effects (font (size .9 .9)) (justify left bottom)) (uuid "c7a6e952-7950-57fe-9f26-02295fd4906f"))
+(wire (pts (xy 63.5 105.41) (xy 66.04 105.41)) (stroke (width 0) (type default)) (uuid "5a203752-ae67-5e66-946b-b6f5c3464710"))
+(label "GND" (at 66.04 105.41 0) (effects (font (size .9 .9)) (justify left bottom)) (uuid "4802eb24-bbdf-5864-a621-3ef1e9924cc0"))
+(wire (pts (xy 63.5 107.95) (xy 66.04 107.95)) (stroke (width 0) (type default)) (uuid "f9581356-bb01-5187-b434-0d2f18ec28b8"))
+(label "GND" (at 66.04 107.95 0) (effects (font (size .9 .9)) (justify left bottom)) (uuid "909a1fa8-c575-53ab-95c5-d4033790e6fa"))
+(wire (pts (xy 63.5 110.49000000000001) (xy 66.04 110.49000000000001)) (stroke (width 0) (type default)) (uuid "f6a34f52-fe6b-53fc-9a61-f308f95b0c5f"))
+(label "GND" (at 66.04 110.49000000000001 0) (effects (font (size .9 .9)) (justify left bottom)) (uuid "cb56d4e8-3f9d-5276-a8d6-2a3ef61f735d"))
+(wire (pts (xy 63.5 113.03) (xy 66.04 113.03)) (stroke (width 0) (type default)) (uuid "57699e6f-1ad3-5452-ad44-93597ee5cf10"))
+(label "GND" (at 66.04 113.03 0) (effects (font (size .9 .9)) (justify left bottom)) (uuid "128be183-103d-579d-8ca5-a8a02535e68c"))
+(wire (pts (xy 63.5 115.57000000000001) (xy 66.04 115.57000000000001)) (stroke (width 0) (type default)) (uuid "f69403d0-35cc-54fb-bc5d-a7d519495773"))
+(label "GND" (at 66.04 115.57000000000001 0) (effects (font (size .9 .9)) (justify left bottom)) (uuid "409b96f9-198e-50b5-820b-747199411ba9"))
+(symbol
+		(lib_id "Stratolink_v1p1_Symbols:Device_C")
+		(at 40.64 130.81 180.0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "abac15af-0cc4-43ec-b455-db4c6d91438c")
+		(property "Reference" "C14"
+			(at 40.64 137.16 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				
+			)
+		)
+		(property "Value" "100nF"
+			(at 36.322 130.81 90.0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "lib:Stratolink_v1p1_C14_C_0402_1005Metric"
+			(at 39.674800000000005 127.0 0.0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C1525.html"
+			(at 40.64 130.81 0.0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "AS7331 VDDA local bypass, 100 nF 0402"
+			(at 40.64 130.81 0.0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "09be2ffb-a532-464a-b735-3417496a13de")
+		)
+		(pin "2"
+			(uuid "f587b140-3048-4d52-b751-e86e567e177b")
+		)
+		(instances
+			(project "stratolink"
+				(path "/4d146a28-be53-49f1-b1c6-484192820e45"
+					(reference "C14")
+					(unit 1)
+				)
+			)
+		)
+	
+ (property "Manufacturer" "Samsung Electro-Mechanics" (at 40.64 130.81 0.0) (effects (font (size 1.27 1.27)) (hide yes)))
+
+ (property "Manufacturer_Part_Number" "CL05B104KO5NNNC" (at 40.64 130.81 0.0) (effects (font (size 1.27 1.27)) (hide yes)))
+
+ (property "Supplier" "LCSC" (at 40.64 130.81 0.0) (effects (font (size 1.27 1.27)) (hide yes)))
+
+ (property "LCSC" "C1525" (at 40.64 130.81 0.0) (effects (font (size 1.27 1.27)) (hide yes)))
+
+ (property "Supplier Part" "C1525" (at 40.64 130.81 0.0) (effects (font (size 1.27 1.27)) (hide yes)))
+)
+(symbol
+		(lib_id "Stratolink_v1p1_Symbols:Device_C")
+		(at 55.88 130.81 180.0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "ec882c15-634f-5006-86b3-f271adb0891f")
+		(property "Reference" "C23"
+			(at 55.88 137.16 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				
+			)
+		)
+		(property "Value" "100nF"
+			(at 51.562000000000005 130.81 90.0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "lib:Stratolink_v1p1_C23_C_0402_1005Metric"
+			(at 54.91480000000001 127.0 0.0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "https://www.lcsc.com/product-detail/C1525.html"
+			(at 55.88 130.81 0.0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "AS7331 VDDD local bypass, 100 nF 0402"
+			(at 55.88 130.81 0.0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "cb0fc4e1-ff1a-5368-9497-3fa620ce0553")
+		)
+		(pin "2"
+			(uuid "a5ec001d-c0f1-53f5-940c-78ca40b5e46a")
+		)
+		(instances
+			(project "stratolink"
+				(path "/4d146a28-be53-49f1-b1c6-484192820e45"
+					(reference "C23")
+					(unit 1)
+				)
+			)
+		)
+	
+ (property "Manufacturer" "Samsung Electro-Mechanics" (at 55.88 130.81 0.0) (effects (font (size 1.27 1.27)) (hide yes)))
+
+ (property "Manufacturer_Part_Number" "CL05B104KO5NNNC" (at 55.88 130.81 0.0) (effects (font (size 1.27 1.27)) (hide yes)))
+
+ (property "Supplier" "LCSC" (at 55.88 130.81 0.0) (effects (font (size 1.27 1.27)) (hide yes)))
+
+ (property "LCSC" "C1525" (at 55.88 130.81 0.0) (effects (font (size 1.27 1.27)) (hide yes)))
+
+ (property "Supplier Part" "C1525" (at 55.88 130.81 0.0) (effects (font (size 1.27 1.27)) (hide yes)))
+)
+(symbol (lib_id "Stratolink_v1p1_Symbols:Device_R_US") (at 68.58 130.81 0.0) (unit 1) (exclude_from_sim no) (in_bom yes) (on_board yes) (dnp no) (uuid "52d9fd5c-25e2-53ce-b76f-5bd9175e94f7") (property "Reference" "R27" (at 72.58 127.81 0.0) (effects (font (size 1 1)))) (property "Value" "3.3MΩ" (at 68.58 137.16 0) (effects (font (size 1 1)))) (property "Footprint" "lib:Stratolink_v1p1_R27_R_0805_2012Metric" (at 68.58 130.81 0.0) (effects (font (size 1 1)) (hide yes))) (property "Datasheet" "https://www.vishay.com/docs/28952/mcr0201at-mca1206at.pdf" (at 68.58 130.81 0.0) (effects (font (size 1 1)) (hide yes))) (property "Description" "3.3 MΩ, ±0.1%, ±25 ppm/K, 0805 precision thin film; AS7331 reference" (at 68.58 130.81 0.0) (effects (font (size 1 1)) (hide yes))) (property "MPN" "MCU0805MD3304BP500" (at 68.58 130.81 0.0) (effects (font (size 1 1)) (hide yes))) (property "LCSC Part #" "C4313228" (at 68.58 130.81 0.0) (effects (font (size 1 1)) (hide yes))) (property "Supplier Part" "C4313228" (at 68.58 130.81 0.0) (effects (font (size 1 1)) (hide yes))) (property "Manufacturer_Part_Number" "MCU0805MD3304BP500" (at 68.58 130.81 0.0) (effects (font (size 1 1)) (hide yes))) (pin "1" (uuid "4d0d0cc7-059e-547a-80d9-ee658fa9b5c7")) (pin "2" (uuid "cf5eba51-5d2b-5501-ac18-ee8dca3226ed")) (instances (project "stratolink" (path "/4d146a28-be53-49f1-b1c6-484192820e45" (reference "R27") (unit 1))))
+ (property "Supplier" "LCSC" (at 68.58 130.81 0) (effects (font (size 1.27 1.27)) (hide yes)))
+
+ (property "LCSC" "C4313228" (at 68.58 130.81 0) (effects (font (size 1.27 1.27)) (hide yes)))
+
+ (property "Manufacturer" "Vishay" (at 68.58 130.81 0) (effects (font (size 1.27 1.27)) (hide yes)))
+)
+(label "+3.3V" (at 40.64 127.0 0) (effects (font (size .9 .9)) (justify left)) (uuid "c28e14e4-7fe4-58fc-b844-8aaac44551e5"))
+(label "GND" (at 40.64 134.62 0) (effects (font (size .9 .9)) (justify left bottom)) (uuid "4ab37723-dfff-5155-ba2c-f6524a12d385"))
+(label "+3.3V" (at 55.88 127.0 0) (effects (font (size .9 .9)) (justify left)) (uuid "a583e470-ce63-50dd-9d54-5640ae884d2d"))
+(label "GND" (at 55.88 134.62 0) (effects (font (size .9 .9)) (justify left bottom)) (uuid "42033989-ddde-58a4-b4bf-f9974d6da743"))
+(label "UV_REXT" (at 68.58 127.0 0) (effects (font (size .9 .9)) (justify left bottom)) (uuid "abe25c24-feef-510d-968a-325ee5ed7abe"))
+(label "GND" (at 68.58 134.62 0) (effects (font (size .9 .9)) (justify left bottom)) (uuid "5b0b2b8a-6884-5e26-a048-98d136955ff4"))
+(text "AS7331: 0x74, polled CMD, SYN=GND, READY unconnected.\nR27: 3.3 MΩ ±0.1%, 25 ppm/K. C14/C23: local analog/digital bypass.\nExperimental UV channels; ozone column needs calibrated optics." (at 15.24 142.5 0) (effects (font (size .85 .85)) (justify left)) (uuid "d9e76eb0-69d7-591e-9fdd-7c20570e91e3"))
 )

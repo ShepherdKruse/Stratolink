@@ -1,18 +1,19 @@
 # v1.1 pilot acceptance record
 
-This is a test procedure, not a completed test report. Use five bare PCBs and
-three assembled pilots before considering the approximately fifteen-payload run.
+This is a test procedure, not a completed test report. Fabricate five PCBs and assemble
+three pilots before considering the approximately fifteen-payload run.
 Record board serial, exact BOM revision, firmware commit, instruments, calibration,
 wire diameter/cuts, panel preparation and assembled mass with each result.
 
 ## Incoming inspection and first power
 
 1. Compare fabrication files and received construction: 0.4 mm, two copper
-   layers, ENIG, no solder mask on either face, untented vias, correct notches,
-   plated suspension holes and enlarged rear header lands. Inspect routing tabs
+   layers, ENIG, green solder mask on both faces, no silkscreen, tented ordinary vias, correct notches,
+   exposed solar soldering lands, plated suspension holes and enlarged rear header lands. Inspect mask registration and routing tabs
    after removal; do not accept damage to solar banks or suspension ligaments.
 2. Before fitting the supercapacitor or panels, inspect sensor orientation,
-   bridges and misplaced parts. Use a current-limited bench source for first
+   bridges and misplaced parts. The AS7331 pilot variant omits U6 only; verify
+   its sixteen pads have no printed paste and C14/C23/R27 are fitted. Use a current-limited bench source for first
    power; start within the harvester's rated input envelope. Record 3.3 V, supply
    current and abnormal heating before enabling GNSS or RF.
 3. Check the full three-terminal capacitor footprint against the actual part.
@@ -52,11 +53,24 @@ wire diameter/cuts, panel preparation and assembled mass with each result.
   distinguish the pressure sensor fallback. Compare with a calibrated reference
   through cold starts and the intended range. Measure solar/conduction bias
   separately from IC die accuracy.
-- U4/U6/U7: check IDs, plausible pressure/UV/acceleration and bus recovery across
+- U4/U7: check IDs, plausible pressure/acceleration and bus recovery across
   power cycles. Check U7's CTRL_REG0 SDO_PU_DISC setting: its grounded address pin
   can otherwise draw internal pull-up current. Record register values.
-- With the no-microphone firmware variant, verify PB3/PB4 remain quiet and acoustic
-  data is explicitly unavailable.
+- Use `stratolink_v1_1_uv_dnp` for the U6-omitted pilots. Verify PB3/PB4 remain
+  quiet, acoustic/UV/lux data are explicitly unavailable, and sensor recovery
+  causes no requests to the omitted UV device. The older v1.1 environment still
+  expects LTR390 and is not the selected pilot population.
+- A later populated AS7331 requires separate bring-up: reviewed 100 µm stencil
+  or qualified local process, correct pin 1, clean unobstructed aperture, 0x74 ID,
+  all three raw channels, saturation/overrun handling, and measured power-down
+  current. Validate a dedicated driver and science telemetry before use; the
+  DNP firmware deliberately supplies no UV measurements. The AS7331 operating
+  range is −40…85°C. Its internal temperature output is not a TMP117 substitute.
+- Before deriving ozone, qualify the actual optics, angular acceptance and
+  visible/infrared rejection; record dark response, gain, exposure, temperature,
+  UTC and position with raw counts. Validate a spectral forward model against
+  independent calibrated observations. Separate UVA/UVB/UVC readings alone do
+  not establish an accurate ozone column above a moving balloon.
 - Compare GNSS acquisition, satellite C/N0 and recovery during actual local RF
   transmissions. Verify firmware airborne configuration independently from PCB
   identity. Retain the selected MAX-M10S until an alternative is justified.

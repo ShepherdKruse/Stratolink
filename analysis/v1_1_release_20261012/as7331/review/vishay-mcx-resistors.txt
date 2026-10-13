@@ -1,0 +1,1044 @@
+                                                                           MCR 0201 AT to MCA 1206 AT
+                  www.vishay.com
+                                                                                                         Vishay Beyschlag
+                            High Stability Thin Film Flat Chip Resistors
+                                                                       FEATURES
+                                                                       • Rated dissipation P70 up to 0.52 W for size 1206
+                                                                       • AEC-Q200 qualified
+                                                                       • Products are PFAS free
+                                                                       • IECQ-CECC approved to EN 140401-801
+                                                                       • Operating temperature up to 175 °C
+                                                                       • Superior temperature cycling robustness
+                                                                       • Superior moisture resistivity, |ΔR/R| < 0.1 %
+                                                                         (85 °C; 85 % RH; 1000 h)
+                                                                       • Superior sulfur resistance verified according
+LINKS TO ADDITIONAL RESOURCES                                            to ASTM B 809 and ANSI/EIA-977
+                                                                       • Material categorization: for definitions of compliance
+   3D 3D                                                                 please see www.vishay.com/doc?99912
+ 3D Models   Product Page    Infographics   Order Samples
+                                                                       APPLICATIONS
+Vishay Automotive Grade MC AT thin film chip resistors                 • Automotive
+are the perfect choice for most fields of modern                       • Industrial equipment with enhanced requirements
+electronics where reliability and stability is of major concern.
+Typical applications include automotive, industrial,                   • Telecommunication
+telecommunication and medical equipment, as well as                    • Medical equipment
+precision test and measuring equipment.
+
+
+ TECHNICAL SPECIFICATIONS
+ DESCRIPTION                                MCR 0201 AT     MCS 0402 AT        MCT 0603 AT       MCU 0805 AT MCA 1206 AT
+ Imperial size                                 0201             0402                0603              0805            1206
+ Metric size code                            RR0603M         RR1005M             RR1608M           RR2012M         RR3216M
+                                                            1 Ω to 1 MΩ;       1 Ω to 2 MΩ;      1 Ω to 7.5 MΩ; 1 Ω to 10 MΩ;
+ Resistance range                  22 Ω to 40 kΩ
+                                                                 0Ω                  0Ω                0Ω              0Ω
+                                      ± 0.5 %;                                ± 1 %; ± 0.5 %;
+ Resistance tolerance                 ± 0.1 %    ± 1 %; ± 0.5 %; ± 0.1 %    ± 0.1 %; ± 0.05 %       ± 1 %; ± 0.5 %; ± 0.1 %
+                                                                         ± 50 ppm/K; ± 25 ppm/K;
+ Temperature coefficient            ± 25 ppm/K ± 50 ppm/K; ± 25 ppm/K; ± 15 ppm/K; ± 10 ppm/K;     ± 50 ppm/K; ± 25 ppm/K;
+                                                 ± 15 ppm/K; ± 10 ppm/K                             ± 15 ppm/K; ± 10 ppm/K
+                                                                                 ± 5 ppm/K
+ Rated dissipation P70 (1)            0.075 W            0.130 W                  0.210 W           0.260 W         0.520 W
+ Rated dissipation, P at               0.25 W            0.33 W                    0.5 W             0.75 W           1W
+ terminal part temperature, ϑt (2)                                           105 °C
+ Operating voltage, Umax. ACRMS/DC      25 V               75 V                    100 V              150 V          200 V
+ Permissible film temperature,
+                                                                             175 °C
+ ϑF max.(1)
+
+ Operating temperature range (3)                                              -55 °C to 175 °C
+ Permissible voltage against
+ ambient (insulation):
+                           1 min; Uins           50 V           75 V                    100 V                200 V          300 V
+ Failure rate: FITobserved                                                     ≤ 0.1 x 10-9/h
+Notes
+(1) Please refer to APPLICATION INFORMATION, see below
+(2) The specified maximum terminal part temperature must not be exceeded; compliance shall be ensured by appropriate thermal management
+    and PCB design at the customer's application level
+(3) Please refer to table MAXIMUM RESISTANCE CHANGE AT RATED DISSIPATION, see below
+
+
+APPLICATION INFORMATION
+When the resistor dissipates power, a temperature rise above the ambient temperature occurs, dependent on the thermal
+resistance of the assembled resistor together with the printed circuit board. The rated dissipation applies only if the permitted
+film temperature is not exceeded.
+Please consider the application note “Thermal Management in Surface-Mounted Resistor Applications”
+(www.vishay.com/doc?28844) for information on the general nature of thermal resistance.
+These resistors do not feature a limited lifetime when operated within the permissible limits. However, resistance value drift
+increasing over operating time may result in exceeding a limit acceptable to the specific application, thereby establishing a
+functional lifetime.
+
+Revision: 28-May-2026                                         1                               Document Number: 28952
+                                  For technical questions, contact: thinfilmchip@vishay.com
+      THIS DOCUMENT IS SUBJECT TO CHANGE WITHOUT NOTICE. THE PRODUCTS DESCRIBED HEREIN AND THIS DOCUMENT
+                     ARE SUBJECT TO SPECIFIC DISCLAIMERS, SET FORTH AT www.vishay.com/doc?91000
+                                                                                  MCR 0201 AT to MCA 1206 AT
+                   www.vishay.com
+                                                                                                                     Vishay Beyschlag
+
+  MAXIMUM RESISTANCE CHANGE AT RATED DISSIPATION
+  OPERATION MODE                                         GENERAL                             POWER                           ADVANCED
+                           MCR 0201 AT                    0.050 W                            0.075 W                               -
+                           MCS 0402 AT                    0.070 W                            0.105 W                           0.130 W
+  Rated
+                           MCT 0603 AT                    0.110 W                            0.170 W                           0.210 W
+  dissipation, P70
+                           MCU 0805 AT                    0.140 W                            0.220 W                           0.260 W
+                           MCA 1206 AT                    0.270 W                            0.420 W                           0.520 W
+  Operating temperature range                         -55 °C to 125 °C                   -55 °C to 155 °C                  -55 °C to 175 °C
+  Permissible film temperature, ϑF max.                    125 °C                             155 °C                            175 °C
+                                                  22 Ω to                            22 Ω to
+                            MCR 0201 AT                               -                                  -                 -                  -
+                                                   40 kΩ                              40 kΩ
+                                                   1 Ω to        > 47 kΩ to           1 Ω to        > 47 kΩ to           1 Ω to       > 47 kΩ to
+                             MCS 0402 AT
+                                                  ≤ 47 kΩ           1 MΩ             ≤ 47 kΩ           1 MΩ             ≤ 47 kΩ          1 MΩ
+                                                   1 Ω to       > 100 kΩ to           1 Ω to       > 100 kΩ to           1 Ω to       > 100 kΩ to
+                             MCT 0603 AT
+  Max. resistance                                ≤ 100 kΩ           2 MΩ            ≤ 100 kΩ           2 MΩ            ≤ 100 kΩ          2 MΩ
+  change at P70 for                                1 Ω to       > 100 kΩ to           1 Ω to       > 100 kΩ to           1 Ω to       > 100 kΩ to
+                            MCU 0805 AT
+  resistance range,                              ≤ 100 kΩ         7.5 MΩ            ≤ 100 kΩ         7.5 MΩ            ≤ 100 kΩ         7.5 MΩ
+  |ΔR/R| after:                                    1 Ω to       > 100 kΩ to           1 Ω to       > 100 kΩ to           1 Ω to       > 100 kΩ to
+                            MCA 1206 AT
+                                                 ≤ 100 kΩ          10 MΩ            ≤ 100 kΩ          10 MΩ            ≤ 100 kΩ         10 MΩ
+
+                                    1000 h       ≤ 0.05 %          ≤ 0.1 %           ≤ 0.1 %          ≤ 0.2 %          ≤ 0.2 %           ≤ 0.5 %
+                                    8000 h        ≤ 0.1 %          ≤ 0.2 %           ≤ 0.2 %          ≤ 0.4 %              -                 -
+                               225 000 h (1)      ≤ 0.3 %          ≤ 0.6 %           ≤ 0.6 %              -                -                 -
+Notes
+• The presented operation modes do not refer to different types of resistors, but actually show examples of different loads, that lead to
+    different film temperatures and different achievable load-life stability (drift) of the resistance value. A suitable low thermal resistance of the
+    circuit board assembly must be safeguarded in order to maintain the film temperature of the resistors within the specified limits. Please
+    consider the application note “Thermal Management in Surface-Mounted Resistor Applications” (www.vishay.com/doc?28844) for
+    information on the general nature of thermal resistance
+(1) Calculated
+
+
+  TEMPERATURE COEFFICIENT AND RESISTANCE RANGE (1)
+  TYPE / SIZE                             TCR                      TOLERANCE                    RESISTANCE                        E-SERIES
+                                                                     ± 0.5 %                     22 Ω to 40 kΩ
+  MCR 0201 AT                         ± 25 ppm/K                                                                                  E24; E192
+                                                                     ± 0.1 %                     22 Ω to 25 kΩ
+                                    ± 50 ppm/K                        ±1%                        1 Ω to 221 kΩ                    E24; E96
+                                    ± 25 ppm/K                       ± 0.5 %                    10 Ω to 221 kΩ                    E24; E192
+                                    ± 25 ppm/K                                                   47 Ω to 1 MΩ
+  MCS 0402 AT
+                                    ± 15 ppm/K                        ± 0.1 %                   47 Ω to 100 kΩ                    E24; E192
+                                    ± 10 ppm/K                                                   47 Ω to 47 kΩ
+                               Jumper (2); Imax. = 0.63 A             ≤ 20 mΩ                         0Ω                              -
+                                    ± 50 ppm/K                         ±1%                       1 Ω to 511 kΩ                    E24; E96
+                                    ± 25 ppm/K                        ± 0.5 %                   10 Ω to 511 kΩ                    E24; E192
+                                    ± 25 ppm/K                                                   47 Ω to 2 MΩ
+                                    ± 15 ppm/K                                                  47 Ω to 221 kΩ
+  MCT 0603 AT                                                         ± 0.1 %
+                                    ± 10 ppm/K                                                  47 Ω to 100 kΩ                    E24; E192
+                                     ± 5 ppm/K                                                 3.9 kΩ to 100 kΩ
+                                     ± 5 ppm/K                        ± 0.05 %                 3.9 kΩ to 100 kΩ
+                                 Jumper (2); Imax. = 1 A              ≤ 20 mΩ                         0Ω                              -
+                                    ± 50 ppm/K                         ±1%                        1 Ω to 1 MΩ                     E24; E96
+                                    ± 25 ppm/K                        ± 0.5 %                    10 Ω to 1 MΩ                     E24; E192
+                                    ± 25 ppm/K                                                  47 Ω to 7.5 MΩ
+  MCU 0805 AT
+                                    ± 15 ppm/K                        ± 0.1 %                   47 Ω to 332 kΩ                    E24; E192
+                                    ± 10 ppm/K                                                  47 Ω to 100 kΩ
+                                Jumper (2); Imax. = 1.5 A             ≤ 20 mΩ                         0Ω                              -
+                                    ± 50 ppm/K                         ±1%                        1 Ω to 1 MΩ                     E24; E96
+                                    ± 25 ppm/K                        ± 0.5 %                    10 Ω to 1 MΩ                     E24; E192
+                                    ± 25 ppm/K                                                  47 Ω to 10 MΩ
+  MCA 1206 AT
+                                    ± 15 ppm/K                        ± 0.1 %                   47 Ω to 511 kΩ                    E24; E192
+                                    ± 10 ppm/K                                                  47 Ω to 100 kΩ
+                                 Jumper (2); Imax. = 2 A            ≤ 20 mΩ                           0Ω                    -
+Notes
+(1) For the approved IECQ-CECC resistance range, including stability class information, please refer to www.vishay.com/doc?28945
+(2) The temperature coefficient of resistance (TCR) is not specified for 0 Ω jumpers
+
+
+Revision: 28-May-2026                                         2                               Document Number: 28952
+                                  For technical questions, contact: thinfilmchip@vishay.com
+      THIS DOCUMENT IS SUBJECT TO CHANGE WITHOUT NOTICE. THE PRODUCTS DESCRIBED HEREIN AND THIS DOCUMENT
+                     ARE SUBJECT TO SPECIFIC DISCLAIMERS, SET FORTH AT www.vishay.com/doc?91000
+                                                                             MCR 0201 AT to MCA 1206 AT
+                  www.vishay.com
+                                                                                                                 Vishay Beyschlag
+
+ PACKAGING
+                                                              PACKAGING                                                      PACKAGING
+ TYPE / SIZE             CODE              QUANTITY                                      WIDTH                 PITCH
+                                                                STYLE                                                        DIMENSIONS
+ MCR 0201 AT,
+                             E0             10 000                                                             2 mm
+ MCS 0402 AT                                                                                                                 Ø 180 mm / 7"
+                                                             Paper tape acc.
+ MCT 0603 AT,                P5              5000             IEC 60286-3,                8 mm
+ MCU 0805 AT              PW                20 000              Type 1a                                        4 mm          Ø 330 mm / 13"
+ MCA 1206 AT                 P5              5000                                                                            Ø 180 mm / 7"
+
+
+
+ PART NUMBER AND PRODUCT DESCRIPTION
+ Part Number: MCT0603MD4641DPW00
+ Part Number: MCT0603MZ0000ZP500
+   M       C      T      0        6    0       3        M       D        4       6         4       1       D        P    W        0       0
+
+
+    TYPE / SIZE          VERSION                 TCR                 RESISTANCE                TOLERANCE       PACKAGING        SPECIAL
+       MCR0201             M = AT           G = ± 5 ppm/K             3 digit value         A = ± 0.05 %            E0        Up to 2 digits
+       MCS0402          (automotive)        F = ± 10 ppm/K          1 digit multiplier      B = ± 0.1 %             P5        00 = standard
+       MCT0603                              E = ± 15 ppm/K                                  D = ± 0.5 %             PW
+       MCU0805                              D = ± 25 ppm/K             Multiplier            F=±1%
+       MCA1206                              C = ± 50 ppm/K             8 = *10-2             Z = jumper
+                                              Z = jumper               9 = *10-1
+                                                                       0 = *100
+                                                                       1 = *101
+                                                                       2 = *102
+                                                                       3 = *103
+                                                                       4 = *104
+                                                                       5 = *105
+ Product Description: MCT 0603-25 0.5 % AT PW 4K64
+ Product Description: MCT 0603 AT P5 0R0
+        MCT               0603                -25                0.5 %                     AT                  PW                4K64
+
+        TYPE              SIZE                TCR             TOLERANCE                  VERSION       PACKAGING             RESISTANCE
+
+        MCR               0201             ± 5 ppm/K            ± 0.05 %          AT = automotive              E0          4K64 = 4.64 kΩ
+        MCS               0402             ± 10 ppm/K           ± 0.1 %                                        P5           0R0 = jumper
+        MCT               0603             ± 15 ppm/K           ± 0.5 %                                        PW
+        MCU               0805             ± 25 ppm/K            ±1%
+        MCA               1206             ± 50 ppm/K
+
+Note
+• Products can be ordered using either the PART NUMBER or PRODUCT DESCRIPTION
+
+
+
+
+Revision: 28-May-2026                                          3                               Document Number: 28952
+                                   For technical questions, contact: thinfilmchip@vishay.com
+       THIS DOCUMENT IS SUBJECT TO CHANGE WITHOUT NOTICE. THE PRODUCTS DESCRIBED HEREIN AND THIS DOCUMENT
+                      ARE SUBJECT TO SPECIFIC DISCLAIMERS, SET FORTH AT www.vishay.com/doc?91000
+                                                                           MCR 0201 AT to MCA 1206 AT
+                 www.vishay.com
+                                                                                                           Vishay Beyschlag
+DESCRIPTION                                                             The products do not contain any of the banned substances
+Production is strictly controlled and follows an extensive              as per IEC 62474, GADSL, or the SVHC list, see
+set of instructions established for reproducibility. A                  www.vishay.com/how/leadfree.
+homogeneous film of special metal alloy is deposited on a               Hence the products fully comply with the following
+high grade ceramic substrate (Al2O3) and conditioned to                 directives:
+achieve the desired temperature coefficient. Specially                  • 2000/53/EC End-of-Life Vehicle Directive (ELV) and
+designed inner contacts are deposited on both sides. A                    Annex II (ELV II)
+special laser is used to achieve the target value by smoothly
+                                                                        • 2011/65/EU Restriction of the Use of Hazardous
+cutting a meander groove in the resistive layer without
+                                                                          Substances      Directive  (RoHS)     with   amendment
+damaging the ceramics. The resistor elements are covered
+                                                                          2015/863/EU
+by a unique protective coating designed for electrical,
+mechanical and climatic protection. The terminations                    • 2012/19/EU Waste Electrical and Electronic Equipment
+receive a final pure matte tin on nickel plating.                         Directive (WEEE)
+The result of the determined production is verified by an               Vishay pursues the elimination of conflict minerals from its
+extensive testing procedure and optical inspection                      supply chain, see the Conflict Minerals Policy at
+performed on 100 % of the individual chip resistors. This               www.vishay.com/doc?49037.
+includes full screening for the elimination of products with
+                                                                        APPROVALS
+potential risk of early field failures (feasible for R ≥ 10 Ω).
+Only accepted products are laid directly into the paper tape            Where applicable, the resistors are approved within the
+in accordance with IEC 60286-3, Type 1a (1).                            IECQ-CECC Quality Assessment System for Electronic
+                                                                        Components to the detail specification EN 140401-801
+ASSEMBLY                                                                which refers to EN 60115-1, EN 60115-8 and the variety of
+The resistors are suitable for processing on automatic SMD              environmental test procedures of the IEC 60068 (1) series.
+assembly systems. They are suitable for automatic                       Conformity is attested by the use of the CECC (5) logo (         )
+soldering using wave, reflow or vapour phase as shown in                as the mark of conformity on the package label.
+IEC 61760-1 (1). The encapsulation is resistant to all                  Vishay     Beyschlag    has   achieved   “Approval     of
+cleaning solvents commonly used in the electronics                      Manufacturer” in accordance with IECQ 03-1. The release
+industry, including alcohols, esters and aqueous solutions.
+                                                                        certificate for “Technology Approval Schedule” in
+The suitability of conformal coatings, potting compounds
+                                                                        accordance with CECC 240001 based on IECQ 03-3-1 is
+and their processes, if applied, shall be qualified by
+                                                                        granted for the Vishay Beyschlag manufacturing process.
+appropriate means to ensure the long-term stability of the
+whole system.                                                           The resistors are qualified according to AEC-Q200.
+The resistors are RoHS-compliant, the pure matte tin plating
+provides     compatibility    with   lead    (Pb)-free     and          RELATED PRODUCTS
+lead-containing soldering processes. Solderability is                   Chip resistor arrays may be used in sensing applications or
+specified for 2 years after production or requalification. The          precision amplifiers where close matching between multiple
+permitted storage time is 20 years. The immunity of the                 resistors is necessary. Please refer to the ACAS AT - Precision
+plating against tin whisker growth has been proven under                datasheet (www.vishay.com/doc?28770).
+extensive testing.                                                      MC AT series is also available with gold termination for
+MATERIALS                                                               conductive gluing: MC ATAU - Precision. Please refer to the
+Vishay acknowledges the following systems for the                       datasheet (www.vishay.com/doc?28877).
+regulation of hazardous substances:                                     For high power and high temperature applications MCW AT
+• IEC 62474, Material Declaration for Products of and for the           wide terminal thin film chip resistors offer extremely high power
+  Electrotechnical Industry, with the list of declarable                ratings and extraordinary temperature cycling robustness.
+  substances given therein (2)                                          Please refer to the datasheets: www.vishay.com/doc?28847
+                                                                        and www.vishay.com/doc?28796.
+• The Global Automotive Declarable Substance List
+  (GADSL) (3)                                                           These wide-terminal products are also available in low-ohmic
+                                                                        values, NCW AT (www.vishay.com/doc?28849).
+• The REACH regulation (1907/2006/EC) and the related list
+  of substances with very high concern (SVHC) (4) for its
+  supply chain
+
+
+Notes
+(1) The quoted IEC standards are also released as EN standards with the same number and identical contents
+(2) The IEC 62474 list of declarable substances is maintained in a dedicated database, which is available at http://std.iec.ch/iec62474
+(3) The Global Automotive Declarable Substance List (GADSL) is maintained by the American Chemistry Council and available at www.gadsl.org
+(4) The SVHC list is maintained by the European Chemical Agency (ECHA) and available at http://echa.europa.eu/candidate-list-table
+(5) For the approved IECQ-CECC resistance range, please refer to www.vishay.com/doc?28945
+
+
+
+Revision: 28-May-2026                                        4                               Document Number: 28952
+                                 For technical questions, contact: thinfilmchip@vishay.com
+     THIS DOCUMENT IS SUBJECT TO CHANGE WITHOUT NOTICE. THE PRODUCTS DESCRIBED HEREIN AND THIS DOCUMENT
+                    ARE SUBJECT TO SPECIFIC DISCLAIMERS, SET FORTH AT www.vishay.com/doc?91000
+                                                                                               MCR 0201 AT to MCA 1206 AT
+                                     www.vishay.com
+                                                                                                                        Vishay Beyschlag
+FUNCTIONAL PERFORMANCE
+
+         PERFORMANCE IN SULFUR-CONTAINING AMBIANCE
+                                                                     HUMID SULFUR VAPOR TEST                         DRY SULFUR TEST
+         TEST NAME
+                                                                             FOS-90                                      FOS-105
+         Reference specification                                               ASTM B 809                                ANSI/EIA-977
+         Test conditions                                                       90 °C ± 2 °C                             105 °C ± 2 °C
+         (temperature, humidity)                                             76 % to 95 % RH                    RH not specified, not applicable
+         Aggressive agent                                                 Sulfur (saturated vapor)                     Sulfur, sublimed
+         Failure criteria in VI under magnification            Silver sulfide growth: length shall be < 50 μm           Not applicable
+         Failure criteria in electrical test                               ≤ (± 1 % R + 0.05 Ω)                      ≤ (± 1 % R + 0.05 Ω)
+         Test duration                                                             1000 h                                     1000 h
+
+                                                                                  Axis Title
+                             0.3                                                                                                            10000
+                                                                                                                        ▬▬▬ MCR 0201 AT
+                                                                                                                        ▬▬▬ MCS 0402 AT
+                                                                                                                        ▬▬▬ MCT 0603 AT
+
+
+
+
+        2nd line
+                                                                                                                        ▬▬▬ MCU 0805 AT
+                                                                                                                        ▬▬▬ MCA 1206 AT
+                             0.2                                                                                                            1000
+
+                                                                                                                                                    1st line
+
+
+
+P - Power Dissipation (W)
+                                                                                                                                                    2nd line
+
+                             0.1                                                                                                            100
+
+
+
+
+                              0                                                                                                             10
+                                       -50                 0                      50        70           100               150
+                                                                       ϑamb - Ambient Temperature (°C)
+
+
+Derating - General Operation
+
+                                                                                  Axis Title
+                             0.6                                                                                                            10000
+                                                                                                                        ▬▬▬ MCR 0201 AT
+                                                                                                                        ▬▬▬ MCS 0402 AT
+                             0.5                                                                                        ▬▬▬ MCT 0603 AT
+                                                                                                                        ▬▬▬ MCU 0805 AT
+
+
+
+
+        2nd line
+                                                                                                                        ▬▬▬ MCA 1206 AT
+                             0.4                                                                                                            1000
+
+                                                                                                                                                    1st line
+
+
+
+P - Power Dissipation (W)
+                             0.3
+                                                                                                                                                    2nd line
+
+                             0.2                                                                                                            100
+
+
+                             0.1
+
+
+                              0                                                                                                             10
+                                       -50                 0                      50        70           100               150
+                                                                       ϑamb - Ambient Temperature (°C)
+
+
+Derating - Power Operation
+
+
+
+
+Revision: 28-May-2026                                                               5                               Document Number: 28952
+                                                        For technical questions, contact: thinfilmchip@vishay.com
+                            THIS DOCUMENT IS SUBJECT TO CHANGE WITHOUT NOTICE. THE PRODUCTS DESCRIBED HEREIN AND THIS DOCUMENT
+                                           ARE SUBJECT TO SPECIFIC DISCLAIMERS, SET FORTH AT www.vishay.com/doc?91000
+                                                                                                            MCR 0201 AT to MCA 1206 AT
+                                                www.vishay.com
+                                                                                                                                           Vishay Beyschlag
+
+                                                                                               Axis Title
+                                      0.6                                                                                                                       10000
+                                                                                                                                        ▬▬▬ MCS 0402 AT
+                                                                                                                                        ▬▬▬ MCT 0603 AT
+                                      0.5                                                                                               ▬▬▬ MCU 0805 AT
+
+
+
+
+        2nd line
+                                                                                                                                        ▬▬▬ MCA 1206 AT
+
+
+                                      0.4                                                                                                                       1000
+
+                                                                                                                                                                        1st line
+
+
+
+P - Power Dissipation (W)
+                                      0.3
+                                                                                                                                                                        2nd line
+
+                                      0.2                                                                                                                       100
+
+
+                                      0.1
+
+
+                                       0                                                                                                                        10
+                                                 -50                  0                        50       70                100                 150      175
+                                                                                   ϑamb - Ambient Temperature (°C)
+
+
+Derating - Advanced Operation
+
+                                                                                               Axis Title
+                                      1.2                                                                                                                       10000
+                                                                                                                                           ▬▬▬ MCR 0201 AT
+                                                                                                                                           ▬▬▬ MCS 0402 AT
+                                      1.0                                                                                                  ▬▬▬ MCT 0603 AT
+
+
+
+
+        2nd line
+                                                                                                                                           ▬▬▬ MCU 0805 AT
+                                                                                                                                           ▬▬▬ MCA 1206 AT
+                                      0.8                                                                                                                       1000
+
+                                                                                                                                                                        1st line
+
+
+
+P - Power Dissipation (W)
+                                      0.6
+                                                                                                                                                                        2nd line
+
+                                      0.4                                                                                                                       100
+
+
+                                      0.2
+
+
+                                       0                                                                                                                        10
+                                                 -50                  0                        50                            105              150      175
+                                                                                  ϑt - Terminal Part Temperature (°C)
+
+
+Derating - Terminal Part Temperature
+
+                                                                                              Axis Title
+                                                                                                                                                                10000
+                                                                                                                                           ▬▬▬ MCR 0201 AT
+                                                                                                                                           ▬▬▬ MCS 0402 AT
+                                      100                                                                                                  ▬▬▬ MCT 0603 AT
+                                                                                                                                           ▬▬▬ MCU 0805 AT
+
+
+
+
+            Pmax. - Pulse Load (W)
+2                                                                                                                                          ▬▬▬ MCA 1206 AT
+                                                                                                                                                                1000
+                                       10
+                                                                                                                                                                        1st line
+                                                                                                                                                                        2nd line
+
+                                        1                                                                                                                       100
+        ˄
+
+
+
+
+                                      0.1
+                                                                                                                                                                 10
+                                        10 μs          100 μs              1 ms                 10 ms                   100 ms        1s                     10 s
+                                                                                          ti - Pulse Duration
+                                                       Maximum pulse load, single pulse; applicable if P → 0 and n ≤ 1000 and Û ≤ Û max.;
+                                                                  for permissible resistance change ± (0.5 % R + 0.05 Ω)
+Single Pulse
+
+
+
+Revision: 28-May-2026                                                                        6                               Document Number: 28952
+                                                                 For technical questions, contact: thinfilmchip@vishay.com
+                                     THIS DOCUMENT IS SUBJECT TO CHANGE WITHOUT NOTICE. THE PRODUCTS DESCRIBED HEREIN AND THIS DOCUMENT
+                                                    ARE SUBJECT TO SPECIFIC DISCLAIMERS, SET FORTH AT www.vishay.com/doc?91000
+                                                                                                                   MCR 0201 AT to MCA 1206 AT
+                                                        www.vishay.com
+                                                                                                                                                        Vishay Beyschlag
+
+                                                                                                     Axis Title
+                                                                                                                                                                               10000
+                                                                                                                                                        ▬▬▬ MCR 0201 AT
+                                                                                                                                                        ▬▬▬ MCS 0402 AT
+
+
+
+
+        Pmax. - Continuous Pulse Load (W)
+2                                            100                                                                                                        ▬▬▬ MCT 0603 AT
+                                                                                                                                                        ▬▬▬ MCU 0805 AT
+                                                                                                                                                        ▬▬▬ MCA 1206 AT
+                                                                                                                                                                               1000
+                                              10
+                                                                                                                                                                                       1st line
+                                                                                                                                                                                       2nd line
+
+                                               1                                                                                                                               100
+
+
+     ˄
+                                             0.1
+                                                                                                                                                                              10
+                                               10 μs          100 μs              1 ms                 10 ms                 100 ms                1s                     10 s
+                                                                                                 ti - Pulse Duration
+                                                                Maximum pulse load, continuous pulse; applicable if P ≤ P (ϑamb) and Û ≤ Û max.;
+                                                                          for permissible resistance change ± (0.5 % R + 0.05 Ω)
+Continuous Pulse
+
+                                                                                                     Axis Title
+                                             1K                                                                                                                                10000
+                                                                                                                                                        ▬▬▬ MCR 0201 AT
+                                                                                                                                                        ▬▬▬ MCS 0402 AT
+                                                                                                                                                        ▬▬▬ MCT 0603 AT
+                                                                                                                                                        ▬▬▬ MCU 0805 AT
+
+
+
+
+        Umax. - Pulse Voltage (V)
+2
+                                                                                                                                                        ▬▬▬ MCA 1206 AT
+                                                                                                                                                                               1000
+
+                                                                                                                                                                                       1st line
+                                             100
+                                                                                                                                                                                       2nd line
+
+                                                                                                                                                                               100
+     ˄
+
+
+
+
+                                              10                                                                                                                              10
+                                               10 μs          100 μs              1 ms                 10 ms                 100 ms                1s                     10 s
+                                                                                                 ti - Pulse Duration
+                                                                Maximum pulse voltage, single and continuous pulses; applicable if P̂ ≤ P̂ max.;
+                                                                         for permissible resistance change ± (0.5 % R + 0.05 Ω)
+Pulse Voltage
+
+                                                                                                     Axis Title
+                                             10K                                                                                                                               10000
+                                                                                                                                      ▬▬▬ MCS 0402 AT
+                                                                                                                                      ▬▬▬ MCT 0603 AT
+                                                                                                                                      ▬▬▬ MCU 0805 AT, MCA 1206 AT
+
+
+
+
+                                             1K                                                                                                                                1000
+    2nd line                                                                                                                                                                           1st line
+                                                                                                                                                                                       2nd line
+Test Voltage (V)                             100                                                                                                                               100
+
+
+
+
+                                              10                                                                                                                               10
+                                                   10              100                     1K                          10K                  100K                          1M
+                                                                                             R - Resistance Value (Ω)
+                                                                  Pulse load rating in accordance with EN 60115-1 clause 4.27; 1.2 μs/50 μs;
+                                                               5 pulses at 12 s intervals; for permissible resistance change ± (0.5 % R + 0.05 Ω)
+1.2/50 Pulse
+
+Revision: 28-May-2026                                                                               7                               Document Number: 28952
+                                                                        For technical questions, contact: thinfilmchip@vishay.com
+                                            THIS DOCUMENT IS SUBJECT TO CHANGE WITHOUT NOTICE. THE PRODUCTS DESCRIBED HEREIN AND THIS DOCUMENT
+                                                           ARE SUBJECT TO SPECIFIC DISCLAIMERS, SET FORTH AT www.vishay.com/doc?91000
+                                                                                                                     MCR 0201 AT to MCA 1206 AT
+                                                        www.vishay.com
+                                                                                                                                                   Vishay Beyschlag
+
+                                                                                                        Axis Title
+                                      10K                                                                                                                                 10000
+                                                                                                                                      ▬▬▬ MCS 0402 AT
+                                                                                                                                      ▬▬▬ MCT 0603 AT
+                                                                                                                                      ▬▬▬ MCU 0805 AT, MCA 1206 AT
+
+
+
+
+                                      1K                                                                                                                                  1000
+    2nd line                                                                                                                                                                      1st line
+                                                                                                                                                                                  2nd line
+Test Voltage (V)                      100                                                                                                                                 100
+
+
+
+
+                                       10                                                                                                                                 10
+                                            10                             100                1K                          10K               100K                     1M
+                                                                                                R - Resistance Value (Ω)
+                                                                     Pulse load rating in accordance with EN 60115-1 clause 4.27; 10 μs/700 μs;
+                                                                10 pulses at 1 minute intervals; for permissible resistance change ± (0.5 % R + 0.05 Ω)
+10/700 Pulse
+
+                                                                                                        Axis Title
+                                       10                                                                                                                                 10000
+                                                  ▬▬▬ MCS 0402 AT
+
+
+
+
+             2nd line
+                                                  ▬▬▬ MCT 0603 AT
+                                                  ▬▬▬ MCU 0805 AT
+                                                  ▬▬▬ MCA 1206 AT
+                                                  ▬▬▬ Multiple curves
+                                        1                                                                                                                                 1000
+
+                                                                                                                                                                                  1st line
+                                                                                                                                                                                  2nd line
+
+
+
+Current Noise Voltage Ratio (μV/V)
+                                      0.1                                                                                                                                 100
+
+
+
+
+                                     0.01                                                                                                                                 10
+                                            1                         10              100                  1K                   10K            100K                  1M
+                                                                                                   Resistance Value (Ω)
+                                                                                            In accordance with IEC 60195
+Current Noise Voltage Ratio
+
+                                                                                                        Axis Title
+                                      2.0                                                                                                                                 10000
+                                                  ▬▬▬   MCT 0603 AT
+                                                  ▬▬▬   MCU 0805 AT
+
+
+
+                                      1.5                                                                                                                                 1000
+
+2nd line                                                                                                                                                                          1st line
+
+ |Z|/R                                                                                                                                                                            2nd line
+
+                                      1.0                                                                                                                                 100
+
+
+
+
+                                      0.5                                                                                                                                 10
+                                            0.1                                                     1                                                 10
+                                                                                                   f - Frequency (GHz)
+                                                                                              |Z|/R for 49.9 chip resistor
+RF-Behavior
+
+
+
+Revision: 28-May-2026                                                                        8                               Document Number: 28952
+                                                                 For technical questions, contact: thinfilmchip@vishay.com
+                                     THIS DOCUMENT IS SUBJECT TO CHANGE WITHOUT NOTICE. THE PRODUCTS DESCRIBED HEREIN AND THIS DOCUMENT
+                                                    ARE SUBJECT TO SPECIFIC DISCLAIMERS, SET FORTH AT www.vishay.com/doc?91000
+                                                                          MCR 0201 AT to MCA 1206 AT
+                 www.vishay.com
+                                                                                                           Vishay Beyschlag
+TESTS AND REQUIREMENTS
+All tests are carried out in accordance with the following             The testing also covers most of the requirements specified
+specifications:                                                        by EIA/ECA-703 and JIS-C-5201-1.
+EN 60115-1, generic specification                                      The tests are carried out under standard atmospheric
+EN 60115-8, sectional specification                                    conditions in accordance with IEC 60068-1, 4.3, whereupon
+                                                                       the following values are applied:
+EN 140401-801, detail specification
+                                                                       Temperature: 15 °C to 35 °C
+IEC 60068-2-xx, test methods
+                                                                       Relative humidity: 25 % to 75 %
+When applicable, the components are approved under the
+IECQ-CECC quality assessment system for electronic                     Air pressure: 86 kPa to 106 kPa (860 mbar to 1060 mbar)
+components.                                                            A climatic category LCT / UCT / 56 is applied, defined by the
+The parameters stated in the Test Procedures and                       lower category temperature (LCT), the upper category
+Requirements table are based on the required tests and                 temperature (UCT), and the duration of exposure in the
+permitted limits of EN 140401-801. The table presents only             damp heat, steady state test (56 days).
+the most important tests, for the full test schedule refer to          The components are mounted for testing on printed circuit
+the documents listed above. However, some additional                   boards in accordance with EN 60115-8, 5.2.2, unless
+tests and a number of improvements against those                       otherwise specified.
+minimum requirements have been included.
+
+
+ TEST PROCEDURES AND REQUIREMENTS
+               IEC 60068-2 (1)                                                                      REQUIREMENTS
+ EN 60115-1                                                                                     PERMISSIBLE CHANGE (ΔR)
+                   TEST                TEST                     PROCEDURE
+  CLAUSE
+                 METHOD                                                                 HIGH ACCURACY          REGULAR ACCURACY
+                                                       Stability for product types:
+                                                                      MCR 0201 AT         22 Ω to 40 kΩ                  -
+                                                                       MCS 0402 AT        1 Ω to ≤ 47 kΩ         > 47 kΩ to 1 MΩ
+                                                                       MCT 0603 AT       1 Ω to ≤ 100 kΩ         > 100 kΩ to 2 MΩ
+                                                                      MCU 0805 AT        1 Ω to ≤ 100 kΩ        > 100 kΩ to 7.5 MΩ
+                                                                      MCA 1206 AT        1 Ω to ≤ 100 kΩ        > 100 kΩ to 10 MΩ
+ 6.1                    -            Resistance                                          ± 1 % R; ± 0.5 % R; ± 0.1 % R; ± 0.05 % R
+                                    Temperature          At (20 / -55 / 20) °C and          ± 50 ppm/K; ± 25 ppm/K; ± 15 ppm/K;
+ 6.2                    -
+                                     coefficient             (20 / 155 / 20) °C                    ± 10 ppm/K; ± 5 ppm/K
+                                                       U = P 70 x R or U = Umax.;
+                                                       whichever is the less severe;
+                                 Endurance at 70 °C:
+                                                           1.5 h on; 0.5 h off;
+                                  general operation
+                                                             70 °C; 1000 h             ± (0.05 % R + 0.01 Ω)   ± (0.10 % R + 0.02 Ω)
+                                       mode
+                                                             70 °C; 8000 h             ± (0.10 % R + 0.02 Ω)   ± (0.20 % R + 0.02 Ω)
+                                                            70 °C; 225 000 h           ± (0.30 % R + 0.02 Ω)   ± (0.60 % R + 0.05 Ω)
+                                                       U = P 70 x R or U = Umax.;
+                                                       whichever is the less severe;
+ 7.1                    -        Endurance at 70 °C:
+                                                           1.5 h on; 0.5 h off;
+                                  power operation
+                                                             70 °C; 1000 h             ± (0.10 % R + 0.01 Ω)   ± (0.20 % R + 0.02 Ω)
+                                       mode
+                                                             70 °C; 8000 h             ± (0.20 % R + 0.02 Ω)   ± (0.40 % R + 0.05 Ω)
+                                                            70 °C; 225 000 h           ± (0.60 % R + 0.05 Ω)
+                                                       U = P 70 x R or U = Umax.;
+                                 Endurance at 70 °C:
+                                                       whichever is the less severe;
+                                 advanced operation
+                                                           1.5 h on; 0.5 h off;
+                                       mode
+                                                             70 °C; 1000 h             ± (0.20 % R + 0.05 Ω)   ± (0.50 % R + 0.05 Ω)
+                                    Endurance at                125 °C; 1000 h         ± (0.05 % R + 0.01 Ω)   ± (0.15 % R + 0.02 Ω)
+ 7.3                    -          upper category               155 °C; 1000 h         ± (0.10 % R + 0.02 Ω)   ± (0.30 % R + 0.02 Ω)
+                                    temperature                 175 °C; 1000 h         ± (0.25 % R + 0.05 Ω)   ± (0.50 % R + 0.05 Ω)
+                                    Damp heat,          (40 ± 2) °C; (93 ± 3) % RH;
+ 10.4             78 (Cab)                                                             ± (0.10 % R + 0.01 Ω)   ± (0.10 % R + 0.02 Ω)
+                                    steady state                  56 days
+                                                               (85 ± 2) °C
+                                 Damp heat, steady
+                                                             (85 ± 5) % RH
+                                 state accelerated:
+ 10.5              67 (Cy)                               U = 0.1 x P 70 x R ;          ± (0.10 % R + 0.05 Ω)   ± (0.50 % R + 0.05 Ω)
+                                 general operation
+                                                         U ≤ 0.3 x Umax.; 1000 h
+                                       mode
+                                                       whichever is the less severe
+
+
+Revision: 28-May-2026                                          9                               Document Number: 28952
+                                   For technical questions, contact: thinfilmchip@vishay.com
+       THIS DOCUMENT IS SUBJECT TO CHANGE WITHOUT NOTICE. THE PRODUCTS DESCRIBED HEREIN AND THIS DOCUMENT
+                      ARE SUBJECT TO SPECIFIC DISCLAIMERS, SET FORTH AT www.vishay.com/doc?91000
+                                                                            MCR 0201 AT to MCA 1206 AT
+                 www.vishay.com
+                                                                                                              Vishay Beyschlag
+
+ TEST PROCEDURES AND REQUIREMENTS
+               IEC 60068-2 (1)                                                                         REQUIREMENTS
+ EN 60115-1                                                                                        PERMISSIBLE CHANGE (ΔR)
+                   TEST                  TEST                     PROCEDURE
+  CLAUSE
+                 METHOD                                                                    HIGH ACCURACY          REGULAR ACCURACY
+                                                          Stability for product types:
+                                                                        MCR 0201 AT          22 Ω to 40 kΩ                     -
+                                                                         MCS 0402 AT         1 Ω to ≤ 47 kΩ           > 47 kΩ to 1 MΩ
+                                                                         MCT 0603 AT        1 Ω to ≤ 100 kΩ          > 100 kΩ to 2 MΩ
+                                                                        MCU 0805 AT         1 Ω to ≤ 100 kΩ         > 100 kΩ to 7.5 MΩ
+                                                                         MCA 1206 AT        1 Ω to ≤ 100 kΩ         > 100 kΩ to 10 MΩ
+                                   Climatic sequence:
+ 10.4
+                                 general operation mode
+ 10.3.4.2          2 (Bb)               Dry heat                  125 °C; 16 h
+                                                            55 °C; 24 h; ≥ 90 % RH;
+ 10.3.4.3         30 (Db)          Damp heat, cyclic
+                                                                    1 cycle
+                                                                                                       ± (0.25 % R + 0.02 Ω)
+ 10.3.4.4          1 (Ab)                 Cold                     -55 °C; 2 h
+ 10.3.4.5          13 (M)           Low air pressure       8.5 kPa; 2 h; (25 ± 10) °C
+                                                             55 °C; 24 h; 90 % RH;
+ 10.3.4.6         30 (Db)          Damp heat, cyclic
+                                                                    5 cycles
+ 10.3.4.7               -               DC load           U=    P 70 x R ≤ Umax.; 1 min
+ -                 1 (Ab)                 Cold                     -55 °C; 2 h                         ± (0.05 % R + 0.01 Ω)
+                                                               30 min at -55 °C and       ± (0.10 % R + 0.01 Ω)
+                                    Rapid change of
+                                                                30 min at 155 °C;                R < 47R:          ± (0.25 % R + 0.02 Ω)
+                                      temperature
+                                                                   1000 cycles            ± (0.25 % R + 0.05 Ω)
+                                                             30 min at -40 °C;
+ 10.1              14 (Na)                                   30 min at 125 °C;
+                                 Extended rapid change    MCS 0402 AT: 3000 cycles                     ± (0.25 % R + 0.05 Ω);
+                                     of temperature       MCT 0603 AT: 2000 cycles                 (≥ 50 % of initial shear force)
+                                                          MCU 0805 AT: 1500 cycles
+                                                          MCA 1206 AT: 1000 cycles
+                                                             U = 2.5 x P 70 x R or
+                                  Short time overload:           U = 2 × Umax.;
+                                                                                                       ± (0.05 % R + 0.01 Ω)
+                                 general operation mode   whichever is the less severe;
+                                                                       5s
+ 8.1                    -
+                                                             U = 2.5 x P 70 x R or
+                                  Short time overload:           U = 2 × Umax.;
+                                                                                          ± (0.1 % R + 0.01 Ω)     ± (0.25 % R + 0.05 Ω)
+                                 power operation mode     whichever is the less severe;
+                                                                       5s
+                                                             U = 10 x P 70 x R or
+                                    Single pulse high
+                                                                 U = 2 x Umax.;
+                                    voltage overload:                                                  ± (0.25 % R + 0.05 Ω)
+                                                          whichever is the less severe;
+                                 general operation mode
+                                                            10 pulses 10 μs/700 μs
+ 8.2                    -
+                                                             U = 10 x P 70 x R or
+                                   Single pulse high
+                                                                 U = 2 x Umax.;
+                                   voltage overload:                                                   ± (0.50 % R + 0.05 Ω)
+                                                          whichever is the less severe;
+                                 power operation mode
+                                                            10 pulses 10 μs/700 μs
+                                                             U = 15 x P 70 x R or
+                                    Periodic electric            U = 2 x Umax.
+                                    overload: general     whichever is the less severe;                ± (0.50 % R + 0.05 Ω)
+                                     operation mode            0.1 s on; 2.5 s off;
+                                                                  1000 cycles
+ 8.4 (2)                -
+                                                             U = 15 x P 70 x R or
+                                    Periodic electric            U = 2 x Umax.
+                                    overload: power       whichever is the less severe;                ± (1.0 % R + 0.05 Ω)
+                                    operation mode             0.1 s on; 2.5 s off;
+                                                                  1000 cycles
+
+
+
+
+Revision: 28-May-2026                                          10                              Document Number: 28952
+                                   For technical questions, contact: thinfilmchip@vishay.com
+       THIS DOCUMENT IS SUBJECT TO CHANGE WITHOUT NOTICE. THE PRODUCTS DESCRIBED HEREIN AND THIS DOCUMENT
+                      ARE SUBJECT TO SPECIFIC DISCLAIMERS, SET FORTH AT www.vishay.com/doc?91000
+                                                                              MCR 0201 AT to MCA 1206 AT
+                 www.vishay.com
+                                                                                                                Vishay Beyschlag
+
+ TEST PROCEDURES AND REQUIREMENTS
+               IEC 60068-2 (1)                                                                           REQUIREMENTS
+ EN 60115-1                                                                                          PERMISSIBLE CHANGE (ΔR)
+                   TEST                  TEST                     PROCEDURE
+  CLAUSE
+                 METHOD                                                                      HIGH ACCURACY          REGULAR ACCURACY
+                                                           Stability for product types:
+                                                                          MCR 0201 AT          22 Ω to 40 kΩ                     -
+                                                                           MCS 0402 AT         1 Ω to ≤ 47 kΩ           > 47 kΩ to 1 MΩ
+                                                                           MCT 0603 AT        1 Ω to ≤ 100 kΩ          > 100 kΩ to 2 MΩ
+                                                                          MCU 0805 AT         1 Ω to ≤ 100 kΩ         > 100 kΩ to 7.5 MΩ
+                                                                          MCA 1206 AT         1 Ω to ≤ 100 kΩ         > 100 kΩ to 10 MΩ
+                                                          IEC 61340-3-1; 3 pos. + 3 neg.;
+                                                           (MIL-STD-883, method 3015)
+                                 Electro static discharge      MCR 0201 AT: 400 V
+ 8.5                    -                                      MCS 0402 AT: 500 V                        ± (0.5 % R + 0.05 Ω)
+                                  (human body model)          MCT 0603 AT: 1000 V
+                                                              MCU 0805 AT: 1500 V
+                                                              MCA 1206 AT: 2000 V
+                                                             Endurance by sweeping;
+                                                                10 Hz to 2000 Hz;
+                                                                                                         ± (0.05 % R + 0.01 Ω)
+ 9.11              6 (Fc)               Vibration                 no resonance;
+                                                                                                           no visible damage
+                                                              amplitude 1.5 mm or
+                                                                ≤ 200 m/s2; 7.5 h
+                                                                Solder bath method;
+                                                                                                     Good tinning (95 % covered);
+                                                            SnPb40; non-activated flux
+                                                                                                         no visible damage
+                                                              (215 ± 3) °C; (3 ± 0.3) s
+ 11.1              58 (Td)            Solderability             Solder bath method;
+                                                             SnAg3Cu0.5 or SnAg3.5;                  Good tinning (95 % covered);
+                                                                 non-activated flux;                     no visible damage
+                                                              (235 ± 3) °C; (2 ± 0.2) s
+                                                                                                                     ± (0.05 % R + 0.01 Ω)
+
+                                                                                                                      R > 221 kΩ in 0402:
+                                     Resistance to             Solder bath method;                                   ± (0.10 % R + 0.01 Ω)
+ 11.2              58 (Td)                                                                  ± (0.05 % R + 0.01 Ω)
+                                     soldering heat          (260 ± 5) °C; (10 ± 1) s (3)                             R > 511 kΩ in 0603:
+                                                                                                                     ± (0.10 % R + 0.01 Ω)
+                                                                                                                    R > 1 MΩ in 0805 / 1206:
+                                                                                                                     ± (0.10 % R + 0.01 Ω)
+                                  Component solvent          Isopropyl alcohol +50 °C;
+ 11.3              45 (XA)                                                                                No visible damage
+                                     resistance                     method 2
+                                                                MCR 0201 AT: 2 N
+                                                                MCS 0402 AT and
+ 9.7              21 (Ue3)          Shear (adhesion)            MCT 0603 AT: 9 N                          No visible damage
+                                                               MCU 0805 AT and
+                                                               MCA 1206 AT: 45 N
+                                                                                                        ± (0.05 % R + 0.01 Ω)
+ 9.8              21 (Ue1)         Substrate bending           Depth 2 mm, 3 times                       no visible damage;
+                                                                                                    no open circuit in bent position
+ 12.2                   -            Voltage proof            URMS = Uins; (60 ± 5) s                 No flashover or breakdown
+                                                                IEC 60695-11-5,
+ 12.4                   -             Flammability                                                       No burning after 30 s
+                                                              needle flame test; 10 s
+Notes
+(1) The quoted IEC standards are also released as EN standards with the same number and identical contents
+(2) Periodic electric overload test for power operation mode not applicable for case size 0201
+(3) For MCR 0201 AT only similar to DIN EN 60115-8 test procedure. Due to the components small size they were fixed by glue previous to
+    testing instead of applying tweezers
+
+
+
+
+Revision: 28-May-2026                                          11                              Document Number: 28952
+                                   For technical questions, contact: thinfilmchip@vishay.com
+       THIS DOCUMENT IS SUBJECT TO CHANGE WITHOUT NOTICE. THE PRODUCTS DESCRIBED HEREIN AND THIS DOCUMENT
+                      ARE SUBJECT TO SPECIFIC DISCLAIMERS, SET FORTH AT www.vishay.com/doc?91000
+                                                                                 MCR 0201 AT to MCA 1206 AT
+                www.vishay.com
+                                                                                                                Vishay Beyschlag
+DIMENSIONS
+
+                                                                  Tt
+
+
+
+                                              W     WT
+
+
+
+                                         H
+
+
+                                                          Tb
+                                                                             L
+
+
+
+ DIMENSIONS AND MASS
+                          H                    L                  W                  WT                Tt                  Tb            MASS
+ TYPE / SIZE
+                        (mm)                 (mm)                (mm)               (mm)             (mm)                 (mm)           (mg)
+ MCR 0201 AT       0.23 ± 0.03          0.6 ± 0.05             0.3 ± 0.05        > 50 % of W      0.12 ± 0.05         0.12 ± 0.05        0.14
+
+ MCS 0402 AT       0.32 ± 0.05          1.0 ± 0.05             0.5 ± 0.05        > 75 % of W   0.2 + 0.1 / - 0.15       0.2 ± 0.1         0.6
+
+ MCT 0603 AT    0.45 + 0.1 / - 0.05     1.55 ± 0.05            0.85 ± 0.1        > 75 % of W   0.3 + 0.15 / - 0.2   0.3 + 0.15 / - 0.2    1.9
+
+ MCU 0805 AT        0.52 ± 0.1           2.0 ± 0.1             1.25 ± 0.15       > 75 % of W    0.4 + 0.1 / - 0.2   0.4 + 0.1 / - 0.2     4.6
+
+ MCA 1206 AT        0.55 ± 0.1        3.2 + 0.1 / - 0.2        1.6 ± 0.15        > 75 % of W      0.5 ± 0.25           0.5 ± 0.25         9.2
+
+
+
+SOLDERING RECOMMENDATIONS
+For recommended solder pad dimensions please refer to www.vishay.com/doc?28950.
+For recommended soldering profiles please refer to www.vishay.com/doc?31090.
+
+
+ REVISION HISTORY
+ REVISION DATE                   DESCRIPTION
+                                 • Update of operating voltage rating for 0402 / 0603
+ 27-Nov-2025
+                                 • Improvement of test requirement
+                                 • Added rated dissipation at terminal part temperature 105 °C
+                                 • Update of material categorization
+ 28-May-2026
+                                 • PFAS-free feature is valid for all products delivered with a date code of “2620” and later
+                                 • Update of ESD voltage rating for 0201
+
+
+
+
+Revision: 28-May-2026                                        12                              Document Number: 28952
+                                 For technical questions, contact: thinfilmchip@vishay.com
+     THIS DOCUMENT IS SUBJECT TO CHANGE WITHOUT NOTICE. THE PRODUCTS DESCRIBED HEREIN AND THIS DOCUMENT
+                    ARE SUBJECT TO SPECIFIC DISCLAIMERS, SET FORTH AT www.vishay.com/doc?91000
+                                                                                       Legal Disclaimer Notice
+                 www.vishay.com
+                                                                                                                             Vishay
+                                                         Disclaimer
+
+ALL PRODUCT, PRODUCT SPECIFICATIONS AND DATA ARE SUBJECT TO CHANGE WITHOUT NOTICE TO IMPROVE
+RELIABILITY, FUNCTION OR DESIGN OR OTHERWISE.
+
+Vishay Intertechnology, Inc., its affiliates, agents, and employees, and all persons acting on its or their behalf (collectively,
+“Vishay”), disclaim any and all liability for any errors, inaccuracies or incompleteness contained in any datasheet or in any other
+disclosure relating to any product.
+
+Vishay makes no warranty, representation or guarantee regarding the suitability of the products for any particular purpose or
+the continuing production of any product. To the maximum extent permitted by applicable law, Vishay disclaims (i) any and all
+liability arising out of the application or use of any product, (ii) any and all liability, including without limitation special,
+consequential or incidental damages, and (iii) any and all implied warranties, including warranties of fitness for particular
+purpose, non-infringement and merchantability.
+
+Statements regarding the suitability of products for certain types of applications are based on Vishay's knowledge of typical
+requirements that are often placed on Vishay products in generic applications. Such statements are not binding statements
+about the suitability of products for a particular application. It is the customer's responsibility to validate that a particular product
+with the properties described in the product specification is suitable for use in a particular application. Parameters provided in
+datasheets and / or specifications may vary in different applications and performance may vary over time. All operating
+parameters, including typical parameters, must be validated for each customer application by the customer's technical experts.
+Product specifications do not expand or otherwise modify Vishay's terms and conditions of purchase, including but not limited
+to the warranty expressed therein.
+
+Hyperlinks included in this datasheet may direct users to third-party websites. These links are provided as a convenience and
+for informational purposes only. Inclusion of these hyperlinks does not constitute an endorsement or an approval by Vishay of
+any of the products, services or opinions of the corporation, organization or individual associated with the third-party website.
+Vishay disclaims any and all liability and bears no responsibility for the accuracy, legality or content of the third-party website
+or for that of subsequent links.
+
+Vishay products are not designed for use in life-saving or life-sustaining applications or any application in which the failure of
+the Vishay product could result in personal injury or death unless specifically qualified in writing by Vishay. Customers using or
+selling Vishay products not expressly indicated for use in such applications do so at their own risk. Please contact authorized
+Vishay personnel to obtain written terms and conditions regarding products designed for such applications.
+
+No license, express or implied, by estoppel or otherwise, to any intellectual property rights is granted by this document or by
+any conduct of Vishay. Product names and markings noted herein may be trademarks of their respective owners.
+
+
+
+
+© 2026 VISHAY INTERTECHNOLOGY, INC. ALL RIGHTS RESERVED
+
+Revision: 01-Jan-2026                                              1                                           Document Number: 91000
+
+     THIS DOCUMENT IS SUBJECT TO CHANGE WITHOUT NOTICE. THE PRODUCTS DESCRIBED HEREIN AND THIS DOCUMENT
+                    ARE SUBJECT TO SPECIFIC DISCLAIMERS, SET FORTH AT www.vishay.com/doc?91000
+

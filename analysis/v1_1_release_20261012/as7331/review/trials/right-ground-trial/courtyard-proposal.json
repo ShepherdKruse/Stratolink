@@ -1,0 +1,18 @@
+{
+  "U5": {
+    "library": "/Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/as7331/candidate/lib/Stratolink_v1p1_U5_BGA6N40P3X2_148X95X53.kicad_mod",
+    "before_library_sha256": "cbab11c54e843ae4dcd4416f4cc9246532e17dc7d9c385876703c39c1ab234f3",
+    "after_library_sha256": "fae01d6879c770c42e3b0ca9774b99401dc0b4e86d10e7c650cf9a0475a88ec5"
+  },
+  "R27": {
+    "library": "/Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/as7331/candidate/lib/Stratolink_v1p1_R27_R_0805_2012Metric.kicad_mod",
+    "before_library_sha256": "8462ec0a93361d4ed05405c39882ef9f9934a21523fcb67f4ee449a07021f250",
+    "after_library_sha256": "a2cb84bb6202ae596a3425dafb13f0694794026b119a69fbd1f8470981d1ad14"
+  },
+  "pcb_before_sha256": "724631d6dc9721bdd872175bfd53d66f5bce0caf7f821688a34a9f98ac348d63",
+  "pcb_after_sha256": "66c77d6ea8f409e9392b78eb12718fb8577d576c3c29096b95f4cc70418e4d54",
+  "r27_y_mm": 34.08,
+  "r27_diagonal_min_pad_clearance_mm": 0.1318376618407358,
+  "u5_max_body_margin_mm": 0.25,
+  "changes": "U5/R27 courtyard metadata and optional explicit R27 position only; routed copy must be rerouted before release."
+}

@@ -1,0 +1,27 @@
+[
+  {
+    "before": "/Users/twarn/Repositories/Stratolink/analysis/v1_1_release_20261012/as7331/review/courtyard-trial",
+    "after": "/Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/as7331/review/courtyard-trial",
+    "pcb_sha256": "937288e2dfe7914137844c12ec8c6d03426b82e7d798944144eea6874a2e4665"
+  },
+  {
+    "before": "/Users/twarn/Repositories/Stratolink/analysis/v1_1_release_20261012/as7331/review/uv-ground-trial",
+    "after": "/Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/as7331/review/uv-ground-trial",
+    "pcb_sha256": "37c16b049082eeeb8d46ed211d288134427492d7815f1b2d7144d60b811b3e25"
+  },
+  {
+    "before": "/Users/twarn/Repositories/Stratolink/analysis/v1_1_release_20261012/as7331/review/uv-ground-combined",
+    "after": "/Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/as7331/review/uv-ground-combined",
+    "pcb_sha256": "6833e38d28069a6b7d5f261f8bcf11a4eaf8628fb0464725df73b592a391f46c"
+  },
+  {
+    "before": "/Users/twarn/Repositories/Stratolink/analysis/v1_1_release_20261012/as7331/review/right-ground-trial",
+    "after": "/Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/as7331/review/right-ground-trial",
+    "pcb_sha256": "324169125f11e03699ea70d6c5d8ca007c9cdd40616cf9535725d5593492cf58"
+  },
+  {
+    "before": "/Users/twarn/Repositories/Stratolink/analysis/v1_1_release_20261012/as7331/review/refill-baseline",
+    "after": "/Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/as7331/review/refill-baseline",
+    "pcb_sha256": "e70eb6e6fdf1a1f536803dd55e3960e525537ba2fd7ff451e11d1f7cd9c7bd5b"
+  }
+]

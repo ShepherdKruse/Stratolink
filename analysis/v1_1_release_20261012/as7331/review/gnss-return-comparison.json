@@ -1,0 +1,65 @@
+{
+  "status": "CHANGED_SAMPLED_GROUND_REVIEW_REQUIRED",
+  "baseline_sha256": "8e2f83797dd68195aa71b73fc252fe57e53ccd3683ef5f74739dc4d25d6ce8d5",
+  "candidate_sha256": "9d63500a087ef8d345c2337942106e6704d32ded953846883454bfad718adf6c",
+  "grid": {
+    "xmin": 59.0,
+    "ymin": 33.0,
+    "step": 0.05,
+    "nx": 100,
+    "ny": 260
+  },
+  "samples": 26000,
+  "lost_count": 0,
+  "gained_count": 8,
+  "lost_points_mm": [],
+  "gained_points_mm": [
+    [
+      62.875,
+      39.125
+    ],
+    [
+      62.925,
+      39.125
+    ],
+    [
+      62.925,
+      39.175
+    ],
+    [
+      62.975,
+      39.175
+    ],
+    [
+      62.925,
+      39.225
+    ],
+    [
+      62.975,
+      39.225
+    ],
+    [
+      62.975,
+      39.275
+    ],
+    [
+      62.975,
+      39.325
+    ]
+  ],
+  "feed_centerline_changes": [
+    {
+      "position": [
+        62.882,
+        39.118
+      ],
+      "before": false,
+      "after": true
+    }
+  ],
+  "limitations": [
+    "50um samples can miss smaller slivers; actual conductor geometry review supplements this.",
+    "Filled back GND zones only. Ground pads/traces may additionally carry return.",
+    "Does not establish RF impedance, antenna matching, or equivalence after adding green mask."
+  ]
+}

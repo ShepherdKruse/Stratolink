@@ -1,0 +1,946 @@
+        Product
+        Document
+
+
+
+
+Published by
+ams OSRAM Group
+Design Guide
+PD001048
+
+
+
+
+AS7331 Sensor
+Details for the Hardware, Software and Optics
+
+
+v2-00 • 2022-Nov-17
+                                                                     Document Feedback    AS7331 Sensor • Hardware, Software and Optics
+                                                                                                                         Content Guide
+
+
+
+
+Content Guide
+
+1         Introduction ................................... 3                    7.3      Dark Current ............................................... 17
+                                                                                7.4      Gain Correction .......................................... 18
+2         Sensor Chip ................................... 4                     7.5      Temperature Compensation ....................... 19
+                                                                                7.6      Spectral Response ..................................... 20
+3         Hardware ........................................ 9                   7.7      Rest Transmission ...................................... 21
+4         Optics ........................................... 11                 8        Sensor Calibrations ..................... 23
+4.1       Limitation of the Angle of Incidence ........... 11
+                                                                                9        Revision Information ................... 25
+4.2       Using the Diffuser ....................................... 13
+5         Evaluation Kit Data Logger......... 14                                10       Additional Documents ................. 26
+
+6         Source Development Kit ............. 15                               11       Legal Information ......................... 27
+
+7         Sensor Corrections ..................... 16
+7.1       Basics ......................................................... 16
+7.2       Basic_Counts ............................................. 17
+
+
+
+
+Design Guidelines • PUBLIC
+PD001048 • v2-00 • 2022-Nov-17                                                                                                                  27 │ 2
+                                                     Document Feedback     AS7331 Sensor • Hardware, Software and Optics
+                                                                                                             Introduction
+
+
+
+
+1              Introduction
+               For developments with the AS7331 UV Sensor, the following design support tools are offered in
+               addition to the chip:
+                      Libraries – All sensor settings and controls can be done with the Chip Library, which is
+                      “integrate and map able” in alternative system levels and in all design steps. Using this library
+                      can be done in all steps without redesigning the sensor software.
+                      Evaluation Kits – These are plug-and-play test kits with pre-defined optical modules and a
+                      simple Windows GUI to realize application-specific tests under customer-defined conditions. It
+                      produces sensitive and accurate tests very quickly with a low effort.
+                      Source Development Kits – These easily show the work with the libraries and allow the test of
+                      customer algorithms based on sensor results without preparation of the sensor control.
+
+               Figure 1:
+               AS7331 Test Systems and Libraries Supporting Steps in the Development
+
+
+
+
+               The following chapters briefly describe the AS7331 sensor, its test and development tools in hardware
+               and software, and gives design tips for the system design of the sensor. It is recommended to use the
+               tools shown in Figure 1.
+
+
+
+
+Design Guidelines • PUBLIC
+PD001048 • v2-00 • 2022-Nov-17                                                                                     27 │ 3
+                                                    Document Feedback     AS7331 Sensor • Hardware, Software and Optics
+                                                                                                           Sensor Chip
+
+
+
+
+2              Sensor Chip
+               The AS7331 is an integrated UV sensor with three separated UV-sensitized channels, an integrated
+               signal conversion, and an I²C transmission and interface. The sensor’s irradiance responsivity can be
+               adjusted by the ADC parameters – Gain, conversion time, and internal clock frequency, which affect
+               the sensitivity, noise, full-scale range, and LSB depending on the selected clock (see Figure 5). The
+               parameter settings apply to all channels and cannot be set separately for individual channels. The
+               AS7331 provides the radiation it detects as ADC results and digital counts or digits. The ADC
+               parameter settings directly affects the counts and their numbers. Counts or digits are without an
+               application-specific unit and must be mapped to absolute units based on calibration processes. Such
+               detailed processes and algorithms can be read in sensor calibration manuals.
+
+               Figure 2 shows the block diagram of the sensor chip. The incident light is split into three spectral
+               channels coated by interference filters for UVA, UVB, and UVC (see Figure 3 and Figure 4). The
+               single photocurrents are converted into digital values. A wide range of configuration options allows the
+               measuring range, measuring time, and accuracy.
+
+               The internal resolution of the AD converter can be varied from 10-bit to 24-bit (depending on the set
+               measuring time). The output of the measurement data is always 16-bit. A prescaler (divider or shifter)
+               affecting each channel allows the scaling/mapping of the data from the respective internal converter.
+               This is of particular advantage if the measuring time is selected to be greater than 216 clock periods for
+               the acquisition, such that it causes an overflow of the result registers. Thus, the prescaler allows
+               access to the higher-order bits of the measurement results from the AD converters. They fulfill the task
+               of a measuring range switchover. The set divider factor acts simultaneously on all three channels.
+
+               Using all the stages of the ADC parameters, gain, conversion time, and clock, defines the sensor
+               dynamic. The AS7331 offers a range of 12 gain steps from 1 to 2048 by a factor of two for each step.
+               The conversion time is controlled internally over a wide range of 15 steps between 125 µs and
+               16384 ms, by a factor of two for each step - depending on the selected clock frequency. With the input
+               pin (SYN), the conversion time can be controlled externally to adapt the measurement of the given
+               environment and time base. With its irradiance, responsivity factor and conversion time, the AS7331
+               supports an overall huge dynamic range up to 3.43E+10 (resolution multiplied by the gain range). It
+               achieves an accuracy of up to nearly 24-bit signal resolution (mapped internally via the shifter to 16-bit
+               I²C), with an irradiance responsivity per count down to 2.7 nW/cm² at 64 ms integration time.
+
+               Programming all the parameters and other settings is done via the integrated 16-bit/400 kHz I²C
+               interface.
+
+               The AS7331 can operate in different modes to measure continuous, one-step, or synchronized modes
+               - where the edges at the external pin (SYN) Start or Start and Stop the measurement. Such modes for
+               measurements must be configured in the configuration mode.
+
+
+
+
+Design Guidelines • PUBLIC
+PD001048 • v2-00 • 2022-Nov-17                                                                                     27 │ 4
+                                               Document Feedback   AS7331 Sensor • Hardware, Software and Optics
+                                                                                                    Sensor Chip
+
+
+
+
+               Figure 2:
+               Block Diagram
+
+
+
+
+               Figure 3:
+               Normalized Spectral Responsivity of the AS7331
+
+
+
+
+Design Guidelines • PUBLIC
+PD001048 • v2-00 • 2022-Nov-17                                                                            27 │ 5
+                                               Document Feedback   AS7331 Sensor • Hardware, Software and Optics
+                                                                                                    Sensor Chip
+
+
+
+
+               Figure 4:
+               Spectral Responsivity of the AS7331
+
+
+
+
+Design Guidelines • PUBLIC
+PD001048 • v2-00 • 2022-Nov-17                                                                            27 │ 6
+                                                    Document Feedback     AS7331 Sensor • Hardware, Software and Optics
+                                                                                                           Sensor Chip
+
+
+
+
+               Figure 5:
+               Relationship Between TINT, Gain, Clock and LSB, FSR Based on Typical Values
+
+
+
+
+               Regarding power consumption, the AS7331 supports different power-saving modes. The standby
+               mode can be used, for example, when single measurements are performed at longer time intervals. In
+               this case, the AS7331 automatically goes into sleep mode with reduced power consumption after the
+               measurement. Then, it can be woken up for the next measurement via an external command.
+               However, the power down mode, allows the sensor chip to be switched off under software control.
+               This reduces the power consumption again compared to the standby mode. However, a longer settling
+               time is required here when switching it back on. At a typical operating voltage of 3.3 V, the sensor has
+               a current consumption of 1.6 mA during measurement.
+
+               For the temperature measurement, an integrated temperature sensor with a maximum resolution of
+               12-bit, with a typical slope of 20 counts/K, is integrated. It measures the temperature of the silicon.
+               However, direct measurement of the ambient temperature in the application is only possible, to a
+               limited extent, since this largely depends on the thermal behavior and the design of the application.
+               The internal temperature sensor can support this.
+
+
+
+
+Design Guidelines • PUBLIC
+PD001048 • v2-00 • 2022-Nov-17                                                                                     27 │ 7
+                                                    Document Feedback    AS7331 Sensor • Hardware, Software and Optics
+                                                                                                          Sensor Chip
+
+
+
+
+               The AS7331 is completed with an internal generation of all reference voltages and bias currents, as
+               well as an internal clock generation. For an accurate and safe sensor operation, the external circuits
+               and their parameters must be observed.
+
+
+
+                Attention
+
+                Please note that all external circuits, parameters, processes, and components in connection with
+                the sensor determine its accuracy and stability during measurement.
+
+
+
+               More details about the external components and their suggested parameters are listed in the
+               datasheet of the sensor.
+
+
+
+
+Design Guidelines • PUBLIC
+PD001048 • v2-00 • 2022-Nov-17                                                                                   27 │ 8
+                                                   Document Feedback     AS7331 Sensor • Hardware, Software and Optics
+                                                                                                             Hardware
+
+
+
+
+3              Hardware
+               The reference design is from the AS7331 EVK Data Logger. In addition to the sensor chip, the Data
+               Logger can contain LEDs and their drivers as possible illumination in the case of reflection
+               measurements. Further components include the power supply, a temperature sensor for monitoring
+               and as a base for temperature correction of the LED, as well as test points on the board for important
+               signals and extensive interfaces, for example, for operation on the FTDI for the standard AS7331
+               EVK.
+
+               The parameters of the external components must be observed in particular to ensure the safe and
+               accurate operation of the sensor (e.g. maximum tolerances and temperature stability requirement of
+               the external resistor, REXT, to generate reference currents on the sensor chip).
+
+               Figure 6 and Figure 7 show the block diagram and schematic of the sensor board.
+
+
+
+                Information
+
+                On the USB stick of the “AS7331 EVK Data Logger”, the complete hardware project with the
+                schematic, layout, and BOM is stored and can be used as a basis for customer-specific designs
+                (see on USB Stick: “…\Documents\Hardware\a001pc1_CSS Evalboard AS7331”).
+
+
+
+               Figure 6:
+               Schematic Block Diagram of the Sensor Board
+
+
+
+
+Design Guidelines • PUBLIC
+PD001048 • v2-00 • 2022-Nov-17                                                                                  27 │ 9
+                                              Document Feedback     AS7331 Sensor • Hardware, Software and Optics
+                                                                                                        Hardware
+
+
+
+
+               Figure 7:
+               Schematic and Interface of the AS7331 Sensor Board
+
+
+
+
+Design Guidelines • PUBLIC
+PD001048 • v2-00 • 2022-Nov-17                                                                            27 │ 10
+                                                      Document Feedback     AS7331 Sensor • Hardware, Software and Optics
+                                                                                                                   Optics
+
+
+
+
+4              Optics
+
+4.1            Limitation of the Angle of Incidence
+               The AS7331 sensor does not contain optical components for adaptation to the geometry and filter of
+               the sensor. These must be adapted in the system design according to the application. Figure 8 shows
+               the housing dimensions and the size of the optical window and the diodes in the sensor.
+
+               Figure 8:
+               Housing Dimensions of the AS7331
+
+
+
+
+               The filters on the diodes are interference filters. These were calculated for a vertical light entry into the
+               filters. This indicates that a 90° light entry deviation in real life means a filtered shift into the short
+               wavelength and a filter deformation to the filters specified in the datasheet [1]. This can lead to a
+               complete filter deformation in the case of larger deviations. Therefore, it is recommended to limit the
+               angle of incidence (AOI) to ±10° deviations from the perpendicular light incidence of 90°. Figure 9
+               shows simulated filter shifts depending on various AOI’s as a typical example.
+
+
+
+
+Design Guidelines • PUBLIC
+PD001048 • v2-00 • 2022-Nov-17                                                                                      27 │ 11
+                                                          Document Feedback     AS7331 Sensor • Hardware, Software and Optics
+                                                                                                                       Optics
+
+
+
+
+               Figure 9:
+               Simulated Variations of AOI (from left to right: 0°, 10°, 20°, 30°, and 45°)
+
+
+
+
+               Such an angle of incidence can be realized easily by an optical hole in front of the sensor - where the
+               AOI is limited by the height and diameter of the hole. The diameter or radius of the hole must be
+               defined based on the maximum size of the diodes on the chip. The height of the hole can be
+               calculated using the ARCTAN function, which gives the height above the sensor to the light entrance.
+
+
+
+                Attention
+
+                Due to its design, the AS7331 package has an opening of 0.345 mm above the filter to the outer
+                package edge (see Figure 8), which must be considered when calculating the AOI.
+
+
+
+               Figure 10:
+               Calculated Heights Based on Different Diameters of the Aperture
+
+                                                                                     (Radius of            Max. HCA =
+                Height of Aperture   Diameter of Aperture       Radius of Aperture
+                                                                                     Aperture + 0.340) L   [arcTan(L/H)*(180/pi)]
+                From Sensor H (mm)   (mm)                       (mm)
+                                                                                     (mm)                  (degree)
+
+                7.9                  1.4 (the original)         0.7                  1.040                 7.49 (8°)
+                9.5                  3.3 (modified)             1.65                 1.990                 11.8 (12°)
+                11.5                 8.0 (modified)             4.0                  4.340                 20.67 (21°)
+                11.5                 12.0 (modified)            6.0                  6.340                 28.86 (29°)
+
+
+
+
+Design Guidelines • PUBLIC
+PD001048 • v2-00 • 2022-Nov-17                                                                                             27 │ 12
+                                                    Document Feedback     AS7331 Sensor • Hardware, Software and Optics
+                                                                                                                 Optics
+
+
+
+
+               Figure 11:
+               Sensor Board with the Aperture and Hole Above the Sensor to Limit the AOI
+
+
+
+
+                Information
+
+                On the USB stick of the AS7331 EVK Data Logger, the project files with the 3D models and sizes
+                are stored and can be used as a basis for customer-specific designs
+                (see on USB Stick: “..\ AS7331_EvalSW_v1-3-0\Additional accessories\Adapter”).
+
+
+
+                Attention
+
+                When making adapters or using accessories in the optical path, note the transmission curve of the
+                materials used, whether it is UV stable, UV transmissive, or non-transmissive - depending on the
+                planned function of the component.
+
+
+
+
+4.2            Using the Diffuser
+               In certain applications, using a diffuser can be helpful to increase the angle of view of the sensor. The
+               diffuser should be placed in front of the optics, which realizes the angle of incidence of the sensor. The
+               diffuser is selected with a thickness, transmission, haze, and half-angle parameter according to the
+               application. Such a diffuser could be fixed on the adapter shown in Figure 11 to increase the Field of
+               View of the sensor by considering the angle of incidence at ±10°.
+
+
+
+
+Design Guidelines • PUBLIC
+PD001048 • v2-00 • 2022-Nov-17                                                                                   27 │ 13
+                                                     Document Feedback     AS7331 Sensor • Hardware, Software and Optics
+                                                                                               Evaluation Kit Data Logger
+
+
+
+
+5              Evaluation Kit Data Logger
+               The AS7331 Evaluation Kit Data Logger should be used for the first tests and feasibilities to verify if
+               the sensor is suitable for the planned application. With plug-and-play hardware and comfortable
+               software on a PC, the working parameters can be tested in a brief time - to find out achievable
+               accuracies under typical conditions that customers can define.
+
+               The EVK Software supports all typical chip parameter settings, simulates all working modes of the
+               sensor in real-time (but under Windows), shows the sensor results in different user interfaces, and
+               allows a post-calculation of the sensor results in other CAD programs such as Excel or MATLAB. The
+               software also supports application-specific corrections and calibrations based on initialization files (for
+               example, mapping the sensor counts into mw/cm² and the UV index).
+
+               Figure 12:
+               AS7331 EVK Hardware
+
+
+
+
+               The AS7331 EVK hardware consists of a sensor board with a plugged optical adapter above the
+               sensor and LEDs (if LEDs are mounted) and an attached interface board. The interface board is
+               connected to the PC via USB, which supplies all the connected hardware with a power supply. The
+               adapter realizes the optical requirements for the used interference filters on the chip and the optical
+               path when using LEDs on the board.
+
+
+
+                Information
+
+                On the USB stick of the AS7331 EVK Data Logger, all projects for the hardware and software are
+                stored and can be used as a basis for customer-specific designs (see the following folders on the
+                USB Stick: “additional accessories”, “hardware”, and “library”).
+
+
+
+
+Design Guidelines • PUBLIC
+PD001048 • v2-00 • 2022-Nov-17                                                                                     27 │ 14
+                                                    Document Feedback    AS7331 Sensor • Hardware, Software and Optics
+                                                                                              Source Development Kit
+
+
+
+
+6              Source Development Kit
+               The programming and control of the AS7331 are done via I²C and register settings depending on the
+               customer target system in the microcontroller, directly via interface card on a PC or something similar.
+               The registers with their contents, timing, the states of the sensor, and possible state machines are
+               included in the datasheet [1].
+
+               To simplify the sensor programming, a Source Development Kit (SDK) is offered (the same AS7331
+               EVK Data Logger hardware can be used), which contains a library for sensor programming and a
+               source code in Python - which shows the work with the library practically and all the steps; from the
+               LIB implementation to the exemplary output of the RAW counts.
+
+               Figure 13:
+               Structure of the AS7331 Source Development Kit
+
+
+
+
+               It is recommended to use such an EVK to get fast and easy results in the feasibility and to use the
+               Chip Library in this step and without register programming. After successful feasibility, the Python
+               script and Libraries can be mapped quickly and easily to the customer target system without a
+               complete redesign on another system level. The SDK and Libraries, as well as the process of mapping
+               to other hardware systems, are described in special manuals for the libraries [4] and SDK [3].
+
+
+
+
+Design Guidelines • PUBLIC
+PD001048 • v2-00 • 2022-Nov-17                                                                                  27 │ 15
+                                                    Document Feedback     AS7331 Sensor • Hardware, Software and Optics
+                                                                                                     Sensor Corrections
+
+
+
+
+7              Sensor Corrections
+
+7.1            Basics
+               Sensor corrections are intended to eliminate production-related deviations between exemplary or
+               external disturbances in the measurement process, which affects the sensor results temporarily or
+               permanently, so that all measurements of all sensors of a series are always identical and have highly
+               accurate results independent of disturbances.
+
+               In principle, deviations and disturbances can come directly from the sensor, the sensor system, or the
+               environment. Sensor-related influences are based on filter properties in the electronics on the chip or
+               from the package. Thus, each stage must be considered separately for possible corrections, i.e. do
+               deviations occur, do they disturb the result, if so by how much, and can the disturbances be corrected,
+               with what effort and result? Therefore, “as good as necessary” and “not as possible” should be
+               corrected. Figure 14 shows examples of possible deviations and disturbances for AS7331 applications
+               and examples of possible corrections.
+
+               Figure 14:
+               Examples of Deviations/Disruptions and Typical Correction Methods
+
+
+                Effect                     Reason                       Impact                 Correction Method
+
+                                           Manufacturing-related
+                Differences in diode       (diodes on the chip,         Deviations of the
+                                                                                               Target balancing
+                sizes.                     shading in the housing       sensor response.
+                                           and the optical path).
+                                           An individual tolerance in   Deviations of the
+                Filter deviations                                                              Target balancing
+                                           manufacturing <1% * λ        sensor response.
+                                           An individual tolerance in   Falsification of       Depends on the
+                Filter rest transmission
+                                           manufacturing <<1%           sensor results.        application.
+                                           An individual tolerance in   Falsification of
+                Sensor dark current                                                            Offset correction
+                                           manufacturing few digits.    sensor results.
+                                           An individual tolerance in
+                                                                        Gain effects in the    Lookup table for
+                Sensor gain error          manufacturing <<1%
+                                                                        result.                balancing.
+                                           from on stage to another.
+                                           In the sensor or other
+                                                                        Temperature effect
+                Temperature effects        system components e.g.                              Curve fitting
+                                                                        in the results.
+                                           light source.
+                                                                                               E.g. backside
+                                                                        Falsification of the
+                Ambient light              A system-related issue.                             compensation as a
+                                                                        sensor results.
+                                                                                               temporary offset
+
+
+
+
+Design Guidelines • PUBLIC
+PD001048 • v2-00 • 2022-Nov-17                                                                                     27 │ 16
+                                                             Document Feedback           AS7331 Sensor • Hardware, Software and Optics
+                                                                                                                    Sensor Corrections
+
+
+
+
+7.2            Basic_Counts
+               The sensor results of the AS7331 are the digits or counts of the individual channels. Their amount
+               depends on the ADC setup for TINT (Integration Time), gain, and divider. In principle, corrections
+               should be made after normalization of the sensor results, which is independent of the ADC setup.
+               Equation 1 shows the normalization of the sensor results to Gain = 1 and TINT = 1 ms, considering
+               the divider.
+
+               Equation 1:
+
+                                         𝑅𝑎𝑤𝐶𝑜𝑢𝑛𝑡𝑠
+               𝐵𝑎𝑠𝑖𝑐𝐶𝑜𝑢𝑛𝑡𝑠 =
+                                 𝐺𝑎𝑖𝑛 × 𝑇𝐼𝑁𝑇 × 𝐷𝑖𝑣𝑖𝑑𝑒𝑟(1)
+
+
+               (1)    If Divider is disabled then division through one. If enabled, then division through value 21+DIV[dec] (register CREG2, section
+                      8.2.4 in the datasheet).
+
+
+
+
+7.3            Dark Current
+               One effect from Figure 14 is dark or ambient light, which can be corrected as an offset. Here, offset
+               refers to all the disturbances constantly shifting the sensor’s measuring range. It is also recommended
+               to measure the disturbance (dark or ambient light) with the sensor, and to subtract the corrected
+               counts later as an offset per channel from the measurements.
+
+               Figure 15 shows the results from dark measurements with different gains without gain correction.
+               From this, it means that these offset measurements should be corrected before use (e.g. gain and
+               temperature) and that the choice of parameters is also essential here to prevent bit errors or
+               measuring noise. The numbers marked in bold (their average) can be used as an offset to
+               compensate for dark currents.
+
+
+
+
+Design Guidelines • PUBLIC
+PD001048 • v2-00 • 2022-Nov-17                                                                                                            27 │ 17
+                                                    Document Feedback    AS7331 Sensor • Hardware, Software and Optics
+                                                                                                    Sensor Corrections
+
+
+
+
+               Figure 15:
+               Results From Dark Measurements with Different Gains (without Gain and temperature
+               correction)
+
+
+
+
+7.4            Gain Correction
+               If disturbances or deviations are directly measurable as typical values in the application, they can be
+               determined in advance and implied as a rule or reference in the correction. This means that the
+               disturbance source is measured under application conditions with the sensor(s) in a way that the
+               ACTUAL values can be compared to the expected TARGET values, and the correction for the
+               sensor(s) can be derived. Examples are gain, dark current, temperature effects, or the deviations of
+               the sensor receivers to each other. Here, the behavior at the targets can be measured and compared
+               to the target values. Then, the results can be implemented into the software for signal correction using
+               lookup tables (LOT) or formulas according to Curve Fitting into linear or polynomial functions. The
+               decision of which form the correction takes place, i.e. using LOT or formula, individual, batch, or
+               product-specific, must be specified and tested in the application.
+
+
+
+
+Design Guidelines • PUBLIC
+PD001048 • v2-00 • 2022-Nov-17                                                                                  27 │ 18
+                                                                Document Feedback            AS7331 Sensor • Hardware, Software and Optics
+                                                                                                                        Sensor Corrections
+
+
+
+
+               Figure 16:
+               Gain Correction Results
+
+                        Sensor Results in Basic_Counts          Normalized at Gain Stage 1                        Correction Factor for each Gain
+                 Gain        Basic A        Basic B     Basic C     GNormA        GNormB        GNormC     Gain         CorrA         CorrB        CorrC
+                    1        0,03320       0,18164     0,10737       1,00000       1,00000       1,00000      1       1,00000       1,00000      1,00000
+                    2        0,06641       0,36392     0,21484       2,00000       2,00349       2,00091      2       1,00000       0,99826      0,99955
+                    4        0,13281       0,72754     0,42666       4,00000       4,00538       3,97362      4       1,00000       0,99866      1,00664
+                    8        0,26563       1,45889     0,85479       8,00000       8,03172       7,96089      8       1,00000       0,99605      1,00491
+                   16        0,52964       2,91226     1,70615      15,95147      16,03306      15,88995     16       1,00304       0,99794      1,00693
+                   32        1,06250       5,84087     3,42085      32,00000      32,15618      31,85948     32       1,00000       0,99514      1,00441
+                   64        2,11650    11,62456      6,80332      63,74412      63,99758       63,36153   64 1,00401 1,00004 1,01008
+                  128        4,24575    23,30420     13,64536     127,87206     128,29839      127,08367    128       1,00100      0,99767      1,00721
+                  256        8,51431    46,63198     27,35347     256,43088     256,72661      254,75171    256       0,99832      0,99717      1,00490
+                  512       17,08623    93,38066     54,94023     514,59706     514,09570      511,67622    512       0,99495      0,99592      1,00063
+                 1024       34,40605   187,33281    110,93691    1036,22941    1031,33763     1033,19145   1024       0,98820      0,99289      0,99110
+                 2048       69,80586   376,70586    225,98125    2102,38824    2073,90753     2104,63665   2048       0,97413      0,98751      0,97309
+
+
+
+
+               Figure 16 shows the results (yellow table) of tests for gain correction, where all the gains (blue) were
+               used in combination with a stable light source - to measure the sensor output depending on alternative
+               gains. The expected behavior with a constant input signal and doubling of the gain would also double
+               the sensor counts. The yellow table shows minor deviations from the expected value from gain to gain.
+               If the sensor results are normalized to a gain (red table), the correction values can be calculated in a
+               LOT, based on this for each channel and gain (green table). It means that using gain = 64 requires a
+               correction for the results of channel A up to channel C, with the factors listed in Figure 16 (green
+               table), gain = 64 {for A 1.00401; for B 1.00004; for C 1.01008}.
+
+
+
+7.5            Temperature Compensation
+               A similar correction to gain is Temperature Compensation. Here, the same test setup can be used by
+               varying the temperature to measure alternative sensor counts depending on the increasing
+               temperature around the sensor system. Figure 17 shows the results of counts vs. temperature for
+               three channels. These could be taken as a LOT for correction, which would then require interpolation
+               in the correction, if necessary. Therefore, the correction values can also be used as a basis for curve
+               fitting. In the green curve are three exemplary results listed as a correction function with the
+               corresponding formula, from linear function to polynomial of the second and third degree (X = the
+               temperature in real-time measured by the temperature sensor, Y = the correction factor for this
+               function). The best result shows a third degree polynomial function with the measurement curve.
+
+
+
+
+Design Guidelines • PUBLIC
+PD001048 • v2-00 • 2022-Nov-17                                                                                                                27 │ 19
+                                                      Document Feedback     AS7331 Sensor • Hardware, Software and Optics
+                                                                                                       Sensor Corrections
+
+
+
+
+               Figure 17:
+               Results for the Temperature Test and Curve Fitting
+
+
+
+
+               Equation 2:
+
+               𝐶𝑜𝑟𝑟𝑒𝑐𝑡𝑒𝑑_𝐶𝑜𝑢𝑛𝑡𝑠
+                             = 𝐶𝑜𝑟𝑟_𝐺𝑎𝑖𝑛(𝐺𝑎𝑖𝑛) × 𝐶𝑜𝑟𝑟_𝑇𝑒𝑚𝑝(𝑇𝑒𝑚𝑝𝑒𝑟𝑎𝑡𝑢𝑟𝑒) × … × 𝐵𝑎𝑠𝑖𝑐_𝐶𝑜𝑢𝑛𝑡𝑠 ± 𝑂𝑓𝑓𝑠𝑒𝑡1 ± ⋯
+
+               If more than one issue must be corrected by correction factors, it can be done systematically by
+               multiplying the correction factors with the Basic_Counts (see Equation 2).
+
+
+
+7.6            Spectral Response
+               Other deviations can directly affect the sensor response as a spectral sum over the wavelengths.
+               These are, for example, the filter deviations of the series (peak, filter shape, FWHM, spectral sum), the
+               size of the diodes on the chip, shadowing by the package, and other effects in the optical path. This
+               leads to slightly different results for sensors in series using the same parameters and measurement
+               setup. This is not acceptable and must be corrected.
+
+               Each channel in the sensor provides integrally, within the filter bandwidth, a sum of counts
+               corresponding to the amount of light transmitted by the filter, converted into current by the diodes, and
+               digitized by the ADC. The resulting counts correspond to the spectral sum of the overlap of all spectral
+               sensitivities. With respect to a constant light source, deviations in the sensor (e.g. filter shift, masking,
+
+
+
+
+Design Guidelines • PUBLIC
+PD001048 • v2-00 • 2022-Nov-17                                                                                      27 │ 20
+                                                    Document Feedback     AS7331 Sensor • Hardware, Software and Optics
+                                                                                                     Sensor Corrections
+
+
+
+
+               etc.) affect the different counts. However, these can be compensated or balanced by measuring
+               standard light sources in a stable setup. This indicates that there are expected TARGET values for all
+               channels measured by a spectrometer and actual values measured by the SENSOR. Dividing the
+               TARGET by the SENSOR will result in the correction values (see Equation 2) for each channel. If this
+               relationship is done separately for each sensor, then this balancing will result in the highest accuracy.
+               Using the correction values from a Golden Device for all sensors is also possible, but affects the
+               accuracy negatively. This balancing process is described in the spectral sensor calibration manual
+               [5, 6], among other procedures. In these manuals, other sensors are used, but the algorithms are
+               identical when using the AS7331.
+
+
+
+7.7            Rest Transmission
+               Each filter on the sensor is characterized by transmittance and rest transmittance. The used
+               interference filters have a tiny rest transmission of <<1% and achieve a blocking of OD3 ~1/1000
+               related to the wavelength. On the other hand, the rest transmission is directly included in the sensor
+               signal as a spectral sum and disruption.
+
+               Figure 18:
+               Typical Sensor Variations of a Sensor LOT for UVA/B/C (y-axis in logarithmic form)
+
+
+
+
+Design Guidelines • PUBLIC
+PD001048 • v2-00 • 2022-Nov-17                                                                                   27 │ 21
+                                                    Document Feedback    AS7331 Sensor • Hardware, Software and Optics
+                                                                                                    Sensor Corrections
+
+
+
+
+               Figure 19:
+               For Sunlight, Spectral Sum in UV is Many Times Smaller Than in VIS/NIR
+
+
+
+
+               As long as such disruptions are tiny (as a spectral sum over the filter wavelengths) or do not change
+               spectrally in the application, they have fewer effects on the accuracy. In such cases, they are to be
+               treated like noise. Alternatively, if the signal of the rest transmission is very large compared to the
+               signal of the transmission (e.g. UV vs. VIS+NIR in the case of the sun), the disruption can overlay the
+               useful sensor signal in transmission. If the disruption signal can still change spectrally in the
+               application, special methods must be taken in the sensor system, for example, blocking the disruption
+               signal by the optical filters.
+
+
+
+
+Design Guidelines • PUBLIC
+PD001048 • v2-00 • 2022-Nov-17                                                                                 27 │ 22
+                                                     Document Feedback     AS7331 Sensor • Hardware, Software and Optics
+                                                                                                     Sensor Calibrations
+
+
+
+
+8              Sensor Calibrations
+               The results of all corrections should be an approximate uniform response from sensors of the same
+               type/LOT (or individual corrected) under the same conditions and free from the effects of external and
+               internal known disturbances – as corrected sensor values. Then, these values can be used to
+               transform and map them into the application and its units.
+
+               A simple method to map the sensor results is a curve fitting based on a relationship between the
+               sensor results and reference values. These reference values can be generated by a spectrometer or
+               alternatives but should represent the true references with high accuracy and stability.
+
+               In Figure 20 are the target spectra of a UV LED measured with a spectrometer at ten alternative levels
+               - to be used for curve fitting.
+
+               Figure 20:
+               Target Spectra of a UV LED – Measured with a Spectrometer in ten Alternative Stages
+
+
+
+
+               Figure 21 shows the sensor results in corrected counts and the reference values from the
+               spectrometer in W/sqm. The curve fitting process should then generate the relationship between the
+               sensor and reference, as a mathematical function or similar, which can later be used in the sensor
+               software to convert the sensor results into the application-specific unit (W/sqm here).
+
+               In Figure 22, are the curve fitting results for the three channels (UVA/B/C) using linear functions. In the
+               functions in the diagrams, “y” stands for the application-specific number in W/sqm, and “x” is for the
+               corrected sensor values of the individual channels.
+
+               In the example (see Figure 20), channels C and A are not inside the LED spectra and are not an
+               interest for the calibration. It means that only the B channel will be used to map sensor counts into the
+               UV radiation in W/sqm. This mapping or calibration can now be used for similar applications with
+               active radiation in the B channel, and it is expected that the more similar the spectrum of the
+
+
+
+
+Design Guidelines • PUBLIC
+PD001048 • v2-00 • 2022-Nov-17                                                                                    27 │ 23
+                                                    Document Feedback       AS7331 Sensor • Hardware, Software and Optics
+                                                                                                      Sensor Calibrations
+
+
+
+
+               application is to the calibration, the more accurate the result will be. Other target LEDs must be
+               selected for mapping the A and C channels.
+
+               Figure 21:
+               Measured Sensor Results and Reference Values from the Spectrometer
+
+                LED Driver in                                                   Ref A in      Ref B in      Ref C in
+                                 Sensor A      Sensor B        Sensor C
+                %                                                               W/sqm         W/sqm         W/sqm
+
+                10               2.0504E-06    1.0395E-05      1.3351E-06       2.8680E-03    2.7771E-02    5.6854E-03
+                20               4.3869E-06    2.0361E-05      2.3365E-06       5.7381E-03    5.3948E-02    1.1966E-02
+                30               6.4373E-06    3.0231E-05      3.6716E-06       8.4340E-03    7.9865E-02    1.7392E-02
+                40               9.1076E-06    4.1771E-05      5.4359E-06       1.1587E-02    1.1042E-01    2.3948E-02
+                50               1.1158E-05    5.3501E-05      6.5804E-06       1.4364E-02    1.4232E-01    3.0520E-02
+                60               1.3542E-05    6.7186E-05      8.2970E-06       1.7648E-02    1.7793E-01    3.8713E-02
+                70               1.6165E-05    8.1635E-05      1.0157E-05       2.0489E-02    2.1506E-01    4.6241E-02
+                80               1.9073E-05    9.7847E-05      1.2398E-05       2.4357E-02    2.5707E-01    5.5726E-02
+                90               2.1362E-05    1.1463E-04      1.4114E-05       2.7450E-02    2.9913E-01    6.6680E-02
+                100              2.4366E-05    1.3337E-04      1.6832E-05       3.1021E-02    3.4511E-01    7.6067E-02
+
+
+
+               Figure 22:
+               Curve Fitting Results for UVA/B/C
+
+
+
+
+Design Guidelines • PUBLIC
+PD001048 • v2-00 • 2022-Nov-17                                                                                      27 │ 24
+                                                             Document Feedback         AS7331 Sensor • Hardware, Software and Optics
+                                                                                                                 Revision Information
+
+
+
+
+9              Revision Information
+
+                   Changes from previous version to current revision v2-00                                                Page
+
+                   Figure 3, Figure 6, Figure 7 & Figure 18 changed for B3 samples, Figure 4 added.                       5, 9, 10, 21, & 6
+
+               ●        Page and figure numbers for the previous version may differ from page and figure numbers in the current revision.
+               ●        Correction of typographical errors is not explicitly mentioned.
+
+
+
+
+Design Guidelines • PUBLIC
+PD001048 • v2-00 • 2022-Nov-17                                                                                                        27 │ 25
+                                                   Document Feedback    AS7331 Sensor • Hardware, Software and Optics
+                                                                                                Additional Documents
+
+
+
+
+10             Additional Documents
+               The following list includes a selection of available documents with more technical details for the
+               AS7331 Sensor and AS7331 Evaluation Kit. This list is not fixed and it is constantly changing. Ask us
+               for new details.
+
+
+
+                For further information, please refer to the following documents:
+
+                1.     ams-OSRAM AG, AS7331 Spectral UVA/B/C Sensor (DS001047), Datasheet.
+                2.     ams-OSRAM AG, AS7331 EVK Logger (UG001037), User Guide.
+                3.     ams-OSRAM AG, AS733x SDK Quick Start Guide.
+                4.     ams-OSRAM AG, AS733x Chip Library, API Documentation.
+                5.     ams-OSRAM AG, AS7343 Spectral Sensor Calibration (AN001038), Application Note.
+                6.     ams-OSRAM AG, AS7341 Eval Kit Spectral Balance and Calibration (QG000139), Quick
+                       Start Guide.
+
+
+
+
+Design Guidelines • PUBLIC
+PD001048 • v2-00 • 2022-Nov-17                                                                                27 │ 26
+                                                              Document Feedback          AS7331 Sensor • Hardware, Software and Optics
+                                                                                                                     Legal Information
+
+
+
+
+11             Legal Information
+               Copyrights & Disclaimer
+               Copyright ams-OSRAM AG, Tobelbader Strasse 30, 8141 Premstaetten, Austria-Europe. Trademarks Registered. All rights
+               reserved. The material herein may not be reproduced, adapted, merged, translated, stored, or used without the prior written
+               consent of the copyright owner.
+               Information in this document is believed to be accurate and reliable. However, ams-OSRAM AG does not give any
+               representations or warranties, expressed or implied, as to the accuracy or completeness of such information and shall have no
+               liability for the consequences of use of such information.
+               Applications that are described herein are for illustrative purposes only. ams-OSRAM AG makes no representation or warranty
+               that such applications will be appropriate for the specified use without further testing or modification. ams-OSRAM AG takes no
+               responsibility for the design, operation and testing of the applications and end-products as well as assistance with the
+               applications or end-product designs when using ams-OSRAM AG products. ams-OSRAM AG is not liable for the suitability and
+               fit of ams-OSRAM AG products in applications and end-products planned.
+               ams-OSRAM AG shall not be liable to recipient or any third party for any damages, including but not limited to personal injury,
+               property damage, loss of profits, loss of use, interruption of business or indirect, special, incidental or consequential damages,
+               of any kind, in connection with or arising out of the furnishing, performance or use of the technical data or applications described
+               herein. No obligation or liability to recipient or any third party shall arise or flow out of ams-OSRAM AG rendering of technical or
+               other services.
+               ams-OSRAM AG reserves the right to change information in this document at any time and without notice.
+
+
+               RoHS Compliant & ams Green Statement
+               RoHS Compliant: The term RoHS compliant means that ams-OSRAM AG products fully comply with current RoHS directives.
+               Our semiconductor products do not contain any chemicals for all 6 substance categories plus additional 4 substance categories
+               (per amendment EU 2015/863), including the requirement that lead not exceed 0.1% by weight in homogeneous materials.
+               Where designed to be soldered at high temperatures, RoHS compliant products are suitable for use in specified lead-free
+               processes.
+               ams Green (RoHS compliant and no Sb/Br/Cl): ams Green defines that in addition to RoHS compliance, our products are free
+               of Bromine (Br) and Antimony (Sb) based flame retardants (Br or Sb do not exceed 0.1% by weight in homogeneous material)
+               and do not contain Chlorine (Cl not exceed 0.1% by weight in homogeneous material).
+               Important Information: The information provided in this statement represents ams-OSRAM AG knowledge and belief as of the
+               date that it is provided. ams-OSRAM AG bases its knowledge and belief on information provided by third parties, and makes no
+               representation or warranty as to the accuracy of such information. Efforts are underway to better integrate information from third
+               parties. ams-OSRAM AG has taken and continues to take reasonable steps to provide representative and accurate information
+               but may not have conducted destructive testing or chemical analysis on incoming materials and chemicals. ams-OSRAM AG
+               and ams-OSRAM AG suppliers consider certain information to be proprietary, and thus CAS numbers and other limited
+               information may not be available for release.
+
+
+                Headquarters                                    Please visit our website at www.ams.com
+                ams-OSRAM AG                                    Buy our products or get free samples online at www.ams.com/Products
+                Tobelbader Strasse 30                           Technical Support is available at www.ams.com/Technical-Support
+                8141 Premstaetten                               Provide feedback about this document at www.ams.com/Document-Feedback
+                Austria, Europe                                 For sales offices, distributors and representatives go to www.ams.com/Contact
+                Tel: +43 (0) 3136 500 0                         For further information and requests, e-mail us at ams_sales@ams.com
+
+
+
+
+Design Guidelines • PUBLIC
+PD001048 • v2-00 • 2022-Nov-17                                                                                                           27 │ 27
+

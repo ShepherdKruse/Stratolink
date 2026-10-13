@@ -7,7 +7,7 @@
 		(tags "Antenna")
 		(property "Reference" "AE**"
 			(at 7.875 0 90)
-			(layer "F.SilkS")
+			(layer "F.Fab")
 			(hide yes)
 			(uuid "ec86b66a-9f12-4199-833b-6b3e8047e805")
 			(effects
@@ -19,7 +19,7 @@
 		)
 		(property "Value" "Enameled Cu wire 82mm (915MHz reference)"
 			(at 7.875 0 90)
-			(layer "F.SilkS")
+			(layer "F.Fab")
 			(hide yes)
 			(uuid "5d32c2d6-3a9d-4619-9d37-9edb8882f931")
 			(effects

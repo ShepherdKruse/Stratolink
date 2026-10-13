@@ -1,0 +1,18 @@
+{
+  "canonical_pcb_sha256": "9d63500a087ef8d345c2337942106e6704d32ded953846883454bfad718adf6c",
+  "manifest_sha256": "4bcf43f2b06c63de17595a4e501104f16c15d2557de24f85ef7bb041851cab81",
+  "archive_sha256": "6fd6f81550d8a30e163028bc88d30aad88fad6c8391e8dbdbe215322d3bef4e0",
+  "archive_all_entries_identical_to_manifested_artwork": true,
+  "archive_entry_count": 12,
+  "regenerated_green_finish_proof_identical": true,
+  "mask_geometry_identical_to_independently_verified_pre_promotion_export": true,
+  "C14_C23_R27_all_fitted": true,
+  "package_verification_sha256": "4776e668ac46e15df1c4e7aec7c42d564d28c85be882d8ede0d91fc3a8328e20",
+  "package_mask_verification_sha256": "8f7de8404ae2c2a93da886a46ef442299e33c8ec53a3037b80d3bd236a903b7c",
+  "output_manifest_hashes_count": 37,
+  "source_manifest_hashes_count": 166,
+  "BOM_sha256": "55b681ab8d23de3ec711cbc7957fc5375e99b6118513ed9acee47a928077a6cb",
+  "CPL_sha256": "907ae41e92261e9c436d787050f74c991dade5d6a306c1a75a4d8b11c4c8ea6f",
+  "finish_proof_sha256": "668a4d1bb810db087a8bfb482cd3082ba144f4ee1e365bc262a29ae7101f8856",
+  "stencil_proof_sha256": "10c26d618beb68ca7a74996226ba398583872f944ce6dd3a4ea0e809a16f1379"
+}

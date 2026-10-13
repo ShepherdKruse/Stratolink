@@ -6,4 +6,5 @@
 (lib (name "Stratolink_Power")(type "KiCad")(uri "${KIPRJMOD}/lib/Stratolink_Power.kicad_sym")(options "")(descr "v1.1 active capacitor balance symbols"))
 
 (lib (name "Stratolink_v1p1_Symbols")(type "KiCad")(uri "${KIPRJMOD}/lib/Stratolink_v1p1_Symbols.kicad_sym")(options "")(descr "Frozen embedded v1.1 symbols; datasheet-derived electrical types"))
+ (lib (name "Stratolink_UV")(type "KiCad")(uri "${KIPRJMOD}/lib/Stratolink_UV.kicad_sym")(options "")(descr "AS7331 datasheet-v4-00 verified symbol"))
 )

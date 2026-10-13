@@ -1,0 +1,371 @@
+- banner:
+  - text: 
+  - img "DigiKey - Electronic Components Distributor"
+  - 'searchbox "Enter keyword or part #"'
+  - button "Search":  
+  - button " Upload a List"
+  - link "Account":
+    - /url: https://www.digikey.com/MyDK/Login?site=US&lang=en&returnurl=https%3A%2F%2Fwww.digikey.com%2Fen%2Fproducts%2Fdetail%2Fvishay%2FMCU0805MD3304BP500%2F15792276
+    - generic: Login or
+    - generic: REGISTER 
+  - text: 
+  - link "Edit Settings":
+    - /url: "#"
+    - img "Edit Settings"
+  - link "Shopping Cart":
+    - /url: /ordering/shoppingcart?lang=en
+    - text:  0 item(s) 
+- generic: "ATTENTION: Due to high order volume, orders may require an additional business day to process."
+- text: 
+- list:
+  - link "Products ":
+    - /url: /en/products
+  - text:                 
+  - link "Manufacturers ":
+    - /url: /en/supplier-centers
+  - text:                
+  - generic: Resources 
+  - text:    
+  - link "Request a Quote":
+    - /url: /en/mylists/
+- link "Tariff Resource Updates":
+  - /url: /en/resources/tariff-resources
+- text:  
+- navigation:
+  - list:
+    - link "Product Index":
+      - /url: /en/products
+    - link "Resistors":
+      - /url: /en/products/category/resistors/2
+    - link "Chip Resistor - Surface Mount":
+      - /url: /en/products/filter/chip-resistor-surface-mount/52
+    - paragraph: Vishay MCU0805MD3304BP500
+- checkbox "Dark Mode"
+- generic: Dark Mode
+- button "Share":
+  - generic: Share
+  - text: 
+- main:
+  - img "3.3 MOhms ±0.1% 0.26W Chip Resistor 0805 (2012 Metric) Anti-Sulfur, Automotive AEC-Q200, Moisture Resistant Thin Film"
+  - generic: Image shown is a representation only. Exact specifications should be obtained from the product data sheet.
+  - table:
+    - rowgroup:
+      - row "MCU0805MD3304BP500":
+        - columnheader "MCU0805MD3304BP500":
+          - heading "MCU0805MD3304BP500" [level=1]
+    - rowgroup:
+      - row "DigiKey Part Number 749-MCU0805MD3304BP500TR-ND - Tape & Reel (TR) 749-MCU0805MD3304BP500CT-ND - Cut Tape (CT)":
+        - cell "DigiKey Part Number":
+          - generic: DigiKey Part Number
+        - cell "749-MCU0805MD3304BP500TR-ND - Tape & Reel (TR) 749-MCU0805MD3304BP500CT-ND - Cut Tape (CT)":
+          - generic: 749-MCU0805MD3304BP500TR-ND - Tape & Reel (TR)
+          - generic: 749-MCU0805MD3304BP500CT-ND - Cut Tape (CT)
+      - row "Manufacturer Vishay":
+        - cell "Manufacturer":
+          - generic: Manufacturer
+        - cell "Vishay":
+          - link "Vishay":
+            - /url: /en/supplier-centers/vishay
+      - row "Manufacturer Product Number MCU0805MD3304BP500":
+        - cell "Manufacturer Product Number":
+          - generic: Manufacturer Product Number
+        - cell "MCU0805MD3304BP500":
+          - generic: MCU0805MD3304BP500
+      - row "Description RES 3.3M OHM 0.1% 1/8W 0805":
+        - cell "Description":
+          - generic: Description
+        - cell "RES 3.3M OHM 0.1% 1/8W 0805":
+          - generic: RES 3.3M OHM 0.1% 1/8W 0805
+      - row "Manufacturer Standard Lead Time 43 Weeks":
+        - cell "Manufacturer Standard Lead Time":
+          - generic: Manufacturer Standard Lead Time
+        - cell "43 Weeks":
+          - generic: 43 Weeks
+      - row "Customer Reference":
+        - cell "Customer Reference":
+          - generic: Customer Reference
+        - cell:
+          - textbox
+      - row "Detailed Description 3.3 MOhms ±0.1% 0.26W Chip Resistor 0805 (2012 Metric) Anti-Sulfur, Automotive AEC-Q200, Moisture Resistant Thin Film":
+        - cell "Detailed Description":
+          - generic: Detailed Description
+        - cell "3.3 MOhms ±0.1% 0.26W Chip Resistor 0805 (2012 Metric) Anti-Sulfur, Automotive AEC-Q200, Moisture Resistant Thin Film":
+          - generic: 3.3 MOhms ±0.1% 0.26W Chip Resistor 0805 (2012 Metric) Anti-Sulfur, Automotive AEC-Q200, Moisture Resistant Thin Film
+      - row "Datasheet Datasheet":
+        - cell "Datasheet":
+          - generic: Datasheet
+        - cell "Datasheet":
+          - link "Datasheet":
+            - /url: https://www.vishay.com/docs/28952/mcr0201at-mca1206at.pdf
+            - text: Datasheet
+  - generic: Product Attributes
+  - checkbox
+  - generic: Filter Similar Products
+  - checkbox
+  - generic: Show Empty Attributes
+  - table:
+    - rowgroup:
+      - row "Category Resistors Chip Resistor - Surface Mount Features Anti-Sulfur, Automotive AEC-Q200, Moisture Resistant":
+        - cell "Category Resistors Chip Resistor - Surface Mount":
+          - generic: Category
+          - link "Resistors":
+            - /url: /en/products/category/resistors/2
+          - link "Chip Resistor - Surface Mount":
+            - /url: /en/products/filter/chip-resistor-surface-mount/52
+        - cell "Features Anti-Sulfur, Automotive AEC-Q200, Moisture Resistant":
+          - generic: Features
+          - generic: Anti-Sulfur, Automotive AEC-Q200, Moisture Resistant
+      - row "Mfr Vishay Temperature Coefficient ±25ppm/°C":
+        - cell "Mfr Vishay":
+          - generic: Mfr
+          - link "Vishay":
+            - /url: /en/products/filter/chip-resistor-surface-mount/vishay/52?s=N4IgjCBcoLQdIDGUBmBDANgZwKYBoQA3AOygBcAnAV3xAHsoBtEAdgBYBOEAXQIAcyUEAGVKAS2IBzEAF85QA
+        - cell "Temperature Coefficient ±25ppm/°C":
+          - generic: Temperature Coefficient
+          - generic: ±25ppm/°C
+      - row "Series MCU AT - Precision Operating Temperature -55°C ~ 155°C":
+        - cell "Series MCU AT - Precision":
+          - generic: Series
+          - link "MCU AT - Precision":
+            - /url: /en/products/result?s=N4IgjCBcoLQCxVAYygMwIYBsDOBTANCAG4B2aWehA9lANogBsATEwJwCsIAuoQA4AuUECAC%2bYoA
+        - cell "Operating Temperature -55°C ~ 155°C":
+          - generic: Operating Temperature
+          - generic: "-55°C ~ 155°C"
+      - row "Packaging Tape & Reel (TR) Help Cut Tape (CT) Help Package / Case 0805 (2012 Metric)":
+        - cell "Packaging Tape & Reel (TR) Help Cut Tape (CT) Help":
+          - generic: Packaging
+          - text: Tape & Reel (TR)
+          - button "Help":
+          - text: Cut Tape (CT)
+          - button "Help":
+        - cell "Package / Case 0805 (2012 Metric)":
+          - generic: Package / Case
+          - generic: 0805 (2012 Metric)
+      - row "Part Status Active Supplier Device Package 0805":
+        - cell "Part Status Active":
+          - generic: Part Status
+          - generic: Active
+        - cell "Supplier Device Package 0805":
+          - generic: Supplier Device Package
+          - link "0805":
+            - /url: /en/products/filter/chip-resistor-surface-mount/0805/52?s=N4IgjCBcpgTAnBaIDGUBmBDANgZwKYA0IAbgHZQAuATgK5EgD2UA2iAMzzuwAcIAusQAOlKCADKNAJZkA5iAC%2bSoA
+      - row "Resistance 3.3 MOhms Size / Dimension 0.079\" L x 0.049\" W (2.00mm x 1.25mm)":
+        - cell "Resistance 3.3 MOhms":
+          - generic: Resistance
+          - link "3.3 MOhms":
+            - /url: /en/products/filter/chip-resistor-surface-mount/3-3-mohms/52?s=N4IgjCBcoEwAwA4CsVQGMoDMCGAbAzgKYA0IAbgHZQAuATgK4kgD2UA2iAMwB0nABAFkA8gAsAtvhABdUgAdqUEAFUKAS2pDMAwtnz1ahEAF8TQA
+        - cell "Size / Dimension 0.079\" L x 0.049\" W (2.00mm x 1.25mm)":
+          - generic: Size / Dimension
+          - generic: 0.079" L x 0.049" W (2.00mm x 1.25mm)
+      - row "Tolerance ±0.1% Height - Seated (Max) 0.024\" (0.62mm)":
+        - cell "Tolerance ±0.1%":
+          - generic: Tolerance
+          - link "±0.1%":
+            - /url: /en/products/filter/chip-resistor-surface-mount/0-1/52?s=N4IgjCBcoMxaBjKAzAhgGwM4FMA0IA3AOygBcAnAVzxAHsoBtEAdhggF18AHUqEAZQoBLIgHMQAXylA
+        - cell "Height - Seated (Max) 0.024\" (0.62mm)":
+          - generic: Height - Seated (Max)
+          - generic: 0.024" (0.62mm)
+      - row "Power (Watts) 0.26W Number of Terminations 2":
+        - cell "Power (Watts) 0.26W":
+          - generic: Power (Watts)
+          - link "0.26W":
+            - /url: /en/products/filter/chip-resistor-surface-mount/0-26w/52?s=N4IgjCBcoExaBjKAzAhgGwM4FMA0IA3AOygBcAnAVzxAHsoBtcANgA4ZWQBdfAB1KggAyhQCWRAOYgAvrKA
+        - cell "Number of Terminations 2":
+          - generic: Number of Terminations
+          - generic: "2"
+      - row "Composition Thin Film Base Product Number MCU0805":
+        - cell "Composition Thin Film":
+          - generic: Composition
+          - link "Thin Film":
+            - /url: /en/products/filter/chip-resistor-surface-mount/thin-film/52?s=N4IgjCBcpg7ALFUBjKAzAhgGwM4FMAaEANwDsoAXAJwFdCQB7KAbRHjDgDZOQBdIgA4UoIAMrUAlqQDmIAL4KgA
+        - cell "Base Product Number MCU0805":
+          - generic: Base Product Number
+          - link "MCU0805":
+            - /url: /en/products/base-product/vishay/749/MCU0805/666564
+  - generic: Report Product Information Error
+  - generic: Documents & Media
+  - table:
+    - rowgroup:
+      - row "Datasheets MCx0402,0603,0805,1206 AT (M)":
+        - cell "Datasheets MCx0402,0603,0805,1206 AT (M)":
+          - generic: Datasheets
+          - link "MCx0402,0603,0805,1206 AT (M)":
+            - /url: https://www.vishay.com/docs/28952/mcr0201at-mca1206at.pdf
+  - generic: Environmental & Export Classifications
+  - table:
+    - rowgroup:
+      - row "RoHS Status ROHS3 Compliant ECCN EAR99":
+        - cell "RoHS Status ROHS3 Compliant":
+          - generic: RoHS Status
+          - generic: ROHS3 Compliant
+        - cell "ECCN EAR99":
+          - generic: ECCN
+          - generic: EAR99
+      - row "Moisture Sensitivity Level (MSL) 1 (Unlimited) HTSUS 8533.21.0030":
+        - cell "Moisture Sensitivity Level (MSL) 1 (Unlimited)":
+          - generic: Moisture Sensitivity Level (MSL)
+          - generic: 1 (Unlimited)
+        - cell "HTSUS 8533.21.0030":
+          - generic: HTSUS
+          - generic: 8533.21.0030
+      - row "REACH Status REACH Unaffected":
+        - cell "REACH Status REACH Unaffected":
+          - generic: REACH Status
+          - generic: REACH Unaffected
+  - generic: Product Questions and Answers
+  - generic: Additional Resources
+  - table:
+    - rowgroup:
+      - row "Part Number Alias 749-MCU0805MD3304BP500CT 749-MCU0805MD3304BP500TR":
+        - cell "Part Number Alias 749-MCU0805MD3304BP500CT 749-MCU0805MD3304BP500TR":
+          - generic: Part Number Alias
+          - generic: 749-MCU0805MD3304BP500CT
+          - generic: 749-MCU0805MD3304BP500TR
+      - row "Manufacturer Standard Package 5,000 Help":
+        - cell "Manufacturer Standard Package 5,000 Help":
+          - generic: Manufacturer Standard Package
+          - text: 5,000
+          - button "Help":
+  - generic: "In-Stock: 8,311"
+  - generic: Check for Additional Incoming Stock
+  - generic: Quantity
+  - textbox
+  - button "Add to Cart"
+  - button "Add to List"
+  - generic: All prices are in USD
+  - generic: Cut Tape (CT)
+  - table:
+    - rowgroup:
+      - row "Quantity Unit Price Ext Price":
+        - columnheader "Quantity"
+        - columnheader "Unit Price"
+        - columnheader "Ext Price"
+    - rowgroup:
+      - row "1 $0.31000 $0.31":
+        - cell "1":
+          - generic: "1"
+        - cell "$0.31000"
+        - cell "$0.31"
+      - row "10 $0.26000 $2.60":
+        - cell "10":
+          - generic: "10"
+        - cell "$0.26000"
+        - cell "$2.60"
+      - row "50 $0.22800 $11.40":
+        - cell "50":
+          - generic: "50"
+        - cell "$0.22800"
+        - cell "$11.40"
+      - row "100 $0.21550 $21.55":
+        - cell "100":
+          - generic: "100"
+        - cell "$0.21550"
+        - cell "$21.55"
+      - row "500 $0.19014 $95.07":
+        - cell "500":
+          - generic: "500"
+        - cell "$0.19014"
+        - cell "$95.07"
+    - rowgroup:
+      - row
+  - generic: Tape & Reel (TR)
+  - table:
+    - rowgroup:
+      - row "Quantity Unit Price Ext Price":
+        - columnheader "Quantity"
+        - columnheader "Unit Price"
+        - columnheader "Ext Price"
+    - rowgroup:
+      - row "5,000 $0.16291 $814.55":
+        - cell "5,000":
+          - generic: 5,000
+        - cell "$0.16291"
+        - cell "$814.55"
+      - row "15,000 $0.15325 $2,298.75":
+        - cell "15,000":
+          - generic: 15,000
+        - cell "$0.15325"
+        - cell "$2,298.75"
+    - rowgroup:
+      - row
+  - button "Help":
+    - text: Manufacturers Standard Package
+  - generic: "Tariff Status: Tariff may apply if shipping to the United States. Tariff costs are calculated and will be displayed in the shopping cart."
+- text:          Email us  
+- generic:  Need Help?
+- generic:  Feedback
+- generic: Get the latest tech insights
+- textbox "Enter your email"
+- button "Subscribe"
+- text: 
+- checkbox "I agree to receive marketing emails from DigiKey. I understand that I can withdraw consent at any time. Please review our Privacy Notice."
+- text: I agree to receive marketing emails from DigiKey. I understand that I can withdraw consent at any time. Please review our
+- link "Privacy Notice":
+  - /url: /en/help/Privacy
+- text: .
+- text: 
+- heading "Subscribe" [level=4]
+- link "Facebook":
+  - /url: https://www.facebook.com/digikey.electronics
+  - img "Facebook"
+- link "X":
+  - /url: https://www.x.com/digikey
+  - img "X"
+- link "YouTube":
+  - /url: https://www.youtube.com/@digikey
+  - img "YouTube"
+- link "Instagram":
+  - /url: https://www.instagram.com/digikey/
+  - img "Instagram"
+- link "LinkedIn":
+  - /url: https://www.linkedin.com/company/digikey
+  - img "LinkedIn"
+- link "Download on the App Store":
+  - /url: https://itunes.apple.com/us/app/digikey/id352075219?mt=8
+  - img "Download on the App Store"
+- link "Get it on Google Play":
+  - /url: https://play.google.com/store/apps/details?id=com.digikey.mobile
+  - img "Get it on Google Play"
+- heading "Information" [level=4]
+- link "About DigiKey":
+  - /url: /en/resources/about-digikey
+- link "Careers":
+  - /url: /en/resources/human-resources/careers
+- link "Newsroom":
+  - /url: /en/newsroom
+- link "Sell on DigiKey.com":
+  - /url: /en/resources/sell-on-dk
+- link "Site map":
+  - /url: /en/help/site-map
+- link "Tariff information":
+  - /url: /en/resources/tariff-resources
+- heading "Contact and support" [level=4]
+- link "Contact us":
+  - /url: javascript:dk.modal("#helpModal").show()
+- link "Help and support":
+  - /url: /en/help-support
+- link "Order status":
+  - /url: /orderhistory/guest/orderstatus
+- link "Returns and order issues":
+  - /url: /mydigikey/returns
+- link "Shipping rates/options":
+  - /url: /en/help-support/delivery-information/delivery-time-and-cost
+- link "Terms & Conditions":
+  - /url: /en/terms-and-conditions
+- link "Privacy Notice":
+  - /url: /en/help/Privacy
+- link "Trade Compliance":
+  - /url: /en/help/trade-compliance-program
+- link "Accessibility Statement":
+  - /url: /en/help-support/fraud-and-security/accessibility-statement
+- text: Cookie Settings
+- link "Do Not Sell / Do Not Share My Personal Information":
+  - /url: /en/help/optoutsaleshare
+- generic: "Local Support: 701 Brooks Avenue South, Thief River Falls, MN 56701 USA"
+- generic: Copyright © 1995-2026, DigiKey.
+- generic: All Rights Reserved.
+- link:
+  - /url: /en/help/authorized-distributor
+- link:
+  - /url: /en/help/authorized-distributor
+- alert

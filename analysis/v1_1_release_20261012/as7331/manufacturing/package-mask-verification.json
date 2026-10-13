@@ -1,0 +1,234 @@
+{
+  "pcb_sha256": "9d63500a087ef8d345c2337942106e6704d32ded953846883454bfad718adf6c",
+  "artwork": "hardware/gerbers/v1.1-pilot/gerbers",
+  "mask_files": {
+    "F": {
+      "sha256": "11cc8573f7bd7bd9a42deb10484521fbd38757eeb092e6c387cf8a756cac8dbe",
+      "regions": 184
+    },
+    "B": {
+      "sha256": "3678e60381599c7c90f03ea154854383ced6021b0897fec283e8f4884e5c9daf",
+      "regions": 92
+    }
+  },
+  "solar_pad_window_tests": [
+    {
+      "ref": "J1",
+      "pad": "1",
+      "face": "F",
+      "center_mm": [
+        75.2,
+        85.0
+      ],
+      "inside_opening": true,
+      "nearest_opening_boundary_mm": 0.6966288729029215
+    },
+    {
+      "ref": "J1",
+      "pad": "1",
+      "face": "B",
+      "center_mm": [
+        75.2,
+        85.0
+      ],
+      "inside_opening": true,
+      "nearest_opening_boundary_mm": 0.6966288729029215
+    },
+    {
+      "ref": "J1",
+      "pad": "2",
+      "face": "F",
+      "center_mm": [
+        75.4255,
+        53.44
+      ],
+      "inside_opening": true,
+      "nearest_opening_boundary_mm": 0.3399999999999963
+    },
+    {
+      "ref": "J1",
+      "pad": "2",
+      "face": "B",
+      "center_mm": [
+        75.4255,
+        53.44
+      ],
+      "inside_opening": true,
+      "nearest_opening_boundary_mm": 0.3399999999999963
+    },
+    {
+      "ref": "J2",
+      "pad": "1",
+      "face": "F",
+      "center_mm": [
+        54.8,
+        85.0
+      ],
+      "inside_opening": true,
+      "nearest_opening_boundary_mm": 0.6966288729029165
+    },
+    {
+      "ref": "J2",
+      "pad": "1",
+      "face": "B",
+      "center_mm": [
+        54.8,
+        85.0
+      ],
+      "inside_opening": true,
+      "nearest_opening_boundary_mm": 0.6966288729029165
+    },
+    {
+      "ref": "J2",
+      "pad": "2",
+      "face": "F",
+      "center_mm": [
+        54.5665,
+        53.44
+      ],
+      "inside_opening": true,
+      "nearest_opening_boundary_mm": 0.3399999999999963
+    },
+    {
+      "ref": "J2",
+      "pad": "2",
+      "face": "B",
+      "center_mm": [
+        54.5665,
+        53.44
+      ],
+      "inside_opening": true,
+      "nearest_opening_boundary_mm": 0.3399999999999963
+    }
+  ],
+  "U1_thermal_hole_component_side_window_tests": [
+    {
+      "face": "B",
+      "center_mm": [
+        66.415998,
+        37.814999
+      ],
+      "inside_opening": true,
+      "nearest_opening_boundary_mm": 0.3299999999999983
+    },
+    {
+      "face": "B",
+      "center_mm": [
+        67.190998,
+        37.039999
+      ],
+      "inside_opening": true,
+      "nearest_opening_boundary_mm": 0.3299999999999983
+    },
+    {
+      "face": "B",
+      "center_mm": [
+        67.190998,
+        37.814999
+      ],
+      "inside_opening": true,
+      "nearest_opening_boundary_mm": 1.1049999999999898
+    },
+    {
+      "face": "B",
+      "center_mm": [
+        67.190998,
+        38.589999
+      ],
+      "inside_opening": true,
+      "nearest_opening_boundary_mm": 0.3299999999999983
+    },
+    {
+      "face": "B",
+      "center_mm": [
+        67.965998,
+        37.814999
+      ],
+      "inside_opening": true,
+      "nearest_opening_boundary_mm": 0.3299999999999983
+    }
+  ],
+  "under_U6_vias": [
+    {
+      "uuid": "0aa17cc0-147a-5bf6-8813-7fe3c47353db",
+      "net": "GND",
+      "center_mm": [
+        73.025,
+        35.1
+      ],
+      "drill_radius_mm": 0.15,
+      "annulus_radii_mm": {
+        "F": 0.25,
+        "B": 0.25
+      },
+      "faces": {
+        "F": {
+          "inside_opening": false,
+          "nearest_opening_boundary_mm": 0.39051248379533055,
+          "mask_coverage_beyond_annulus_mm": 0.14051248379533055
+        },
+        "B": {
+          "inside_opening": false,
+          "nearest_opening_boundary_mm": 1.069925091651282,
+          "mask_coverage_beyond_annulus_mm": 0.8199250916512819
+        }
+      },
+      "both_hole_discs_and_annuli_clear_of_mask_openings": true
+    },
+    {
+      "uuid": "3fcd3c9e-7799-5a08-9f7b-9fb708bd9814",
+      "net": "+3.3V",
+      "center_mm": [
+        74.025,
+        36.85
+      ],
+      "drill_radius_mm": 0.15,
+      "annulus_radii_mm": {
+        "F": 0.25,
+        "B": 0.25
+      },
+      "faces": {
+        "F": {
+          "inside_opening": false,
+          "nearest_opening_boundary_mm": 0.6500000000000057,
+          "mask_coverage_beyond_annulus_mm": 0.4000000000000057
+        },
+        "B": {
+          "inside_opening": false,
+          "nearest_opening_boundary_mm": 2.308016778535425,
+          "mask_coverage_beyond_annulus_mm": 2.058016778535425
+        }
+      },
+      "both_hole_discs_and_annuli_clear_of_mask_openings": true
+    },
+    {
+      "uuid": "64ae0245-c864-5a89-937f-95f0ac7d31ff",
+      "net": "SCL",
+      "center_mm": [
+        73.8,
+        38.05
+      ],
+      "drill_radius_mm": 0.15,
+      "annulus_radii_mm": {
+        "F": 0.25,
+        "B": 0.25
+      },
+      "faces": {
+        "F": {
+          "inside_opening": false,
+          "nearest_opening_boundary_mm": 0.4257346591481571,
+          "mask_coverage_beyond_annulus_mm": 0.1757346591481571
+        },
+        "B": {
+          "inside_opening": false,
+          "nearest_opening_boundary_mm": 2.1249567910910563,
+          "mask_coverage_beyond_annulus_mm": 1.8749567910910563
+        }
+      },
+      "both_hole_discs_and_annuli_clear_of_mask_openings": true
+    }
+  ],
+  "under_U6_selection": "Copper annulus intersects maximum 2.7 x 3.75 mm body envelope",
+  "silkscreen_artwork_empty": true,
+  "limitation": "Nominal supplied Gerber geometry only; tent integrity and supplier registration require CAM/manufacturing inspection."
+}

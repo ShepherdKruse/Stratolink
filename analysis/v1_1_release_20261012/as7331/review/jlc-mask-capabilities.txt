@@ -1,0 +1,84 @@
+URL: https://jlcpcb.com/capabilities/pcb-capabilities
+Read: 2026-10-13
+
+Features	Capability	Description	Patterns
+Soldermask Expansion
+	
+1:1
+	
+
+LDI equipment upgraded in June 2025. Pad size:soldermask opening can be 1:1(Previous production file will be followed in Reorder).
+
+Keep at least 0.09 mm clearance between soldermask openings and neighboring traces.
+
+	
+
+
+Soldermask bridge
+	
+0.10mm
+	
+
+1oz:
+
+Min. pad spacing: 0.10 mm (green, red, yellow, blue, purple)
+
+Min. pad spacing: 0.13 mm (black, white)
+
+2oz:
+
+Min. pad spacing: 0.20 mm (any color)
+
+	
+
+
+Plugged vias
+	
+Filled with soldermask
+	
+
+Vias are filled with soldermask for an opaque finish.
+Click for detailed explanation
+
+① Filled vias must not have soldermask openings on either side
+
+② Filled vias should have ≥ 0.35 mm clearance from other soldermask openings (e.g. pads)
+
+③ Filled vias must be no wider than 0.5 mm diameter
+
+	
+
+
+JLCPCB Via-in-Pad Process
+	
+
+Epoxy Filled & Capped
+
+Copper paste Filled&Capped
+
+	
+
+Vias are filled with epoxy resin or copper paste and then plated over to achieve an opaque and smooth finish.
+Click for detailed explanation
+
+① Vias are filled and plated over. Choose copper paste filling for applications requiring high thermal conductivity.
+
+② This process is the default for 6-layer and above multilayer boards.
+
+③ Compatible with via diameters from 0.15 to 0.55 mm.
+
+	
+
+
+Solder mask dielectric constant
+	
+3.8
+	
+	
+
+
+Solder mask ink thickness
+	
+≥ 10μm
+	
+	

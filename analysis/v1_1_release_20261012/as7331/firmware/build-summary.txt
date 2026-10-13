@@ -1,0 +1,9 @@
+RAM:   [=         ]  11.6% (used 7624 bytes from 65536 bytes)
+Flash: [=====     ]  54.8% (used 141384 bytes from 258048 bytes)
+========================= [SUCCESS] Took 5.86 seconds =========================
+RAM:   [=         ]  11.6% (used 7608 bytes from 65536 bytes)
+Flash: [=====     ]  54.5% (used 140584 bytes from 258048 bytes)
+========================= [SUCCESS] Took 16.40 seconds =========================
+stratolink_v1_1         SUCCESS   00:00:05.857
+stratolink_v1_1_uv_dnp  SUCCESS   00:00:16.400
+========================= 2 succeeded in 00:00:22.257 =========================

@@ -1,0 +1,295 @@
+- banner:
+  - generic: 24-hour PCB production. Fast Delivery to United States.
+  - link " Coupons":
+    - /url: https://jlcpcb.com/coupon-center
+    - generic: 
+    - text: Coupons
+  - link " Download APP":
+    - /url: https://jlcone.com/download
+    - generic: 
+    - text: Download APP
+  - text:    
+  - text: USD
+  - generic: 
+- navigation:
+  - text: 
+  - link "JLCPCB logo":
+    - /url: https://jlcpcb.com
+    - generic: 
+    - generic: JLCPCB
+  - text: 
+  - generic: 
+  - text: Products
+  - link "Capabilities":
+    - /url: https://jlcpcb.com/capabilities/pcb-capabilities
+  - text:   
+  - text: Support
+  - generic: 
+  - text: About Us
+  - generic: 
+  - generic: 
+  - link "":
+    - /url: https://cart.jlcpcb.com/shopcart/cart
+    - generic: 
+  - superscript: "2"
+  - link "Order Now":
+    - /url: https://cart.jlcpcb.com/quote?spm=Jlcpcb.Homepage.1006&spm=Jlcpcb.Homepage.1006
+  - text: 
+  - text: My Account
+  - generic: 
+  - text: 
+- main:
+  - generic: SHOPPING CART
+  - list:
+    - listitem: All (2)
+    - listitem: JLCPCB (2)
+    - listitem: JLC3DP (0)
+    - listitem: JLCCNC (0)
+    - listitem: JLCMC (0)
+    - listitem: Flex Heater (0)
+  - textbox "Search"
+  - button "":
+    - generic: 
+  - checkbox
+  - generic: Item
+  - generic: Qty
+  - generic: Build Time
+  - generic: Price
+  - generic: 
+  - checkbox
+  - generic: JLCPCB (PCB/PCBA/Stencil)
+  - checkbox
+  - generic: fabrication-review_Y24
+  - generic: PCB prototype:Y24-2680969A
+  - generic: Green, 0.4 Thickness, ENIG
+  - text: "Customer #:"
+  - generic: 
+  - text: Product Details
+  - generic: Edit Order
+  - generic: "5"
+  - text: 3 days
+  - paragraph
+  - generic: $70.63
+  - text: 
+  - generic: 
+  - img "no-image"
+  - generic: fabrication-review_Y24
+  - generic: "Standard PCBA: SMT026101364685-2680969A"
+  - generic: Assemble Both Sides
+  - text: "Customer #:"
+  - generic: 
+  - generic: Product Details
+  - generic: "3"
+  - paragraph: 3 - 4 days
+  - paragraph
+  - generic: $261.84
+  - text: "[C423131,C18548052] out of stock. Please go"
+  - link "“Select Parts” page to find alternatives.":
+    - /url: javascript:void(0);
+  - checkbox [disabled]
+  - generic: GERBER-stratolink(Reorder)_Y22
+  - generic: PCB prototype:Y22-2680969A
+  - generic: Green, 0.4 Thickness, ENIG
+  - text: "Customer #:"
+  - generic: 
+  - text: Product Details
+  - generic: Edit Order
+  - generic: "15"
+  - text: 24 hours
+  - paragraph
+  - generic: $58.80
+  - text: 
+  - generic: 
+  - img "no-image"
+  - generic: GERBER-stratolink(Reorder)_Y22
+  - generic: "Standard PCBA: SMT026100564676-2680969A"
+  - generic: Assemble Both Sides
+  - text: "Customer #:"
+  - generic: 
+  - generic: Product Details
+  - generic: "15"
+  - paragraph: 3 - 4 days
+  - paragraph
+  - generic: $678.24
+  - strong: Recommended Deals For You
+  - generic: 
+  - generic: Refresh
+  - generic: 
+  - img "Hex Socket Screw - Full/Partial Thread, Standard Type (DIN 912/GB/T 70.1)"
+  - strong: Hex Socket Screw - Full/Partial Thread, Standard Type (DIN 912/GB/T 70.1)
+  - text: From
+  - strong: $0.0588
+  - button "Order Now"
+  - img "Split Aluminum Box - Flange, W190 x H72 x L150mm"
+  - strong: Split Aluminum Box - Flange, W190 x H72 x L150mm
+  - text: From
+  - strong: $8.3875
+  - button "Order Now"
+  - img "SMT Stencil Printer"
+  - strong: SMT Stencil Printer
+  - button "Order Now"
+  - generic: SUMMARY
+  - generic: Merchandise Total
+  - generic: $0.00
+  - generic: Shipping Estimated
+  - generic: "--"
+  - generic: Subtotal
+  - generic: $0.00
+  - text: Est. shipping date
+  - generic: 
+  - generic: "--"
+  - generic: Order won't be shipped until all items are ready.
+  - generic: Weight
+  - generic: 
+  - generic: 0kg
+  - 'link "Order on JLCONE Desktop: Save $1–$20 Per Order "':
+    - /url: https://jlcone.com/download
+    - generic: "Order on JLCONE Desktop: Save $1–$20 Per Order"
+    - generic: 
+  - button "Secure Checkout"
+  - link " Add new item":
+    - /url: https://cart.jlcpcb.com/quote?spm=Jlcpcb.Partcart.1003
+    - generic: 
+    - generic: Add new item
+  - generic: Payment method may vary by country.
+  - generic: SSL ENCRYPTED PAYMENT
+- contentinfo:
+  - generic: 
+  - text: Online Chat >
+  - generic: Chat with our live agent for fast reply.
+  - generic: "Mon-Fri: 24 hours, Sat: 9am-6pm, GMT+8"
+  - link " Email Us >":
+    - /url: https://jlcpcb.com/help/contact
+    - generic: 
+    - text: Email Us >
+  - text: Contact us at support
+  - generic: 
+  - text: jlcpcb.com
+  - generic: Typically reply within hours.
+  - link " Help Center >":
+    - /url: https://jlcpcb.com/help
+    - generic: 
+    - text: Help Center >
+  - generic: Get instant answers.
+  - generic: 24/7 Available.
+  - generic: PCB Service
+  - link "FR-4 PCBs":
+    - /url: https://jlcpcb.com/pcb-fabrication/fr4-pcb
+  - link "Flexible PCBs":
+    - /url: https://jlcpcb.com/pcb-fabrication/flexible-pcb
+  - link "Metal Core PCBs":
+    - /url: https://jlcpcb.com/pcb-fabrication/metal-core-pcb
+  - link "High-Frequency PCBs":
+    - /url: https://jlcpcb.com/pcb-fabrication/high-frequency-pcb
+  - link "PCBA Service":
+    - /url: https://jlcpcb.com/pcb-assembly
+  - link "PCB Layout":
+    - /url: https://design.jlcpcb.com
+  - link "SMT Stencil":
+    - /url: https://jlcpcb.com/pcb-stencil
+  - link "Flex Heater":
+    - /url: https://flexheater.jlcpcb.com
+  - generic: Support
+  - link "Help Center":
+    - /url: https://jlcpcb.com/help
+  - link "Contact Us":
+    - /url: https://jlcpcb.com/help/contact
+  - link "Community":
+    - /url: https://jlchub.com
+  - link "Shipping Guide":
+    - /url: https://jlcpcb.com/shipping
+  - link "Payment Methods":
+    - /url: https://jlcpcb.com/payments
+  - link "How to Order":
+    - /url: https://jlcpcb.com/help/catalog/11-How-To-Order
+  - link "How to Track":
+    - /url: https://jlcpcb.com/help/article/51-How-to-Track-My-Order
+  - link "After-Sales Service":
+    - /url: https://jlcpcb.com/help/article/How-to-Make-a-Quality-Complaint
+  - link "Blog":
+    - /url: https://jlcpcb.com/blog
+  - generic: Company
+  - link "About Us":
+    - /url: https://jlcpcb.com/about-us
+  - link "Quality Assurance":
+    - /url: https://jlcpcb.com/about-us/quality-control
+  - link "How We Work":
+    - /url: https://jlcpcb.com/about-us/how-it-works
+  - link "Certifications":
+    - /url: https://jlcpcb.com/certifications
+  - link "Security":
+    - /url: https://jlcpcb.com/privacy-security
+  - link "Environment":
+    - /url: https://jlcpcb.com/green-manufacturing
+  - link "JLCAPI":
+    - /url: https://api.jlcpcb.com/
+  - link "News":
+    - /url: https://jlcpcb.com/news
+  - link "Cooperation":
+    - /url: https://jlcpcb.com/cooperation
+  - generic: Electronics
+  - link "EasyEDA":
+    - /url: https://easyeda.com
+  - link "JLCPCB":
+    - /url: https://jlcpcb.com
+  - link "JLCDFM":
+    - /url: https://jlcdfm.com
+  - link "LCSC":
+    - /url: https://www.lcsc.com
+  - link "OSHWLAB":
+    - /url: https://oshwlab.com/
+  - generic: Mechanical
+  - link "JLC3DP":
+    - /url: https://jlc3dp.com
+  - link "JLCCNC":
+    - /url: https://jlccnc.com
+  - link "JLCMC":
+    - /url: https://jlcmc.com
+  - generic: 
+  - generic: Order on JLCONE Desktop, Save $1–$20 Every Time
+  - link " Windows":
+    - /url: https://jlcone.com/download
+    - generic: 
+    - generic: Windows
+  - link " MAC":
+    - /url: https://jlcone.com/download
+    - generic: 
+    - generic: MAC
+  - link " Android":
+    - /url: https://jlcone.com/download#mobile-app
+    - generic: 
+    - generic: Android
+  - link " IOS":
+    - /url: https://jlcone.com/download#mobile-app
+    - generic: 
+    - generic: IOS
+  - generic: CONNECT WITH US
+  - link "":
+    - /url: https://www.facebook.com/jlcpcb
+    - generic: 
+  - link "":
+    - /url: https://twitter.com/jlcpcb
+    - generic: 
+  - link "":
+    - /url: https://www.instagram.com/jlcpcb
+    - generic: 
+  - link "":
+    - /url: https://www.youtube.com/JLCPCB
+    - generic: 
+  - link "":
+    - /url: https://www.linkedin.com/company/jlcpcb
+    - generic: 
+  - link "":
+    - /url: https://www.reddit.com/r/JLCPCBLab/
+    - generic: 
+  - generic: © 2026 JLCPCB.COM All Rights Reserved.
+  - link "Privacy Policy":
+    - /url: https://jlcpcb.com/help/article/Privacy-Policy
+  - link "Terms & Conditions":
+    - /url: https://jlcpcb.com/help/article/Terms-%26-Conditions
+  - link "Cookies Policy":
+    - /url: https://jlcpcb.com/help/article/JLCPCB-Cookie-Notice
+  - link "Do Not Sell or Share My Personal Information":
+    - /url: https://jlcpcb.com/privacy-policy/do-not-sell-or-share-my-personal-information
+- iframe
+- text: 

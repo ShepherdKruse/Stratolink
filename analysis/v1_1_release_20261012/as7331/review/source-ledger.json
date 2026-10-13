@@ -1,0 +1,53 @@
+[
+  {
+    "file": "as7331-datasheet-v4-00.pdf",
+    "source": "https://look.ams-osram.com/m/1856fd2c69c35605/original/AS7331-Spectral-UVA-B-C-Sensor.pdf",
+    "revision": "DS001047 v4-00 2023-03-24",
+    "sha256": "60c13168a4012c1642277b8d8f9557e6f835c3b9efbfd7cc086be25c5a4c670a",
+    "bytes": 2336519,
+    "reviewed": "2026-10-13",
+    "note": "Exact cached primary copy, same bytes as analysis/redesign_20261010/sensors/sources/as7331.pdf"
+  },
+  {
+    "file": "design-guidelines.pdf",
+    "source": "https://look.ams-osram.com/m/45d5dfb4a22ecb04/original/AS7331_Design_Guidelines_PD001048_2-00.pdf",
+    "revision": "PD001048 v2-00 2022-11-17",
+    "sha256": "696232312b72589f8da2966e2114304804f629ff5469ada80ab920b5dcaf8bf1",
+    "bytes": 2192873,
+    "reviewed": "2026-10-13",
+    "note": "Root opened in-app Browser. Downloaded public already-observed PDF for local analysis with root authorization."
+  },
+  {
+    "file": "vishay-mcx-resistors.pdf",
+    "source": "https://www.vishay.com/docs/28952/mcr0201at-mca1206at.pdf",
+    "revision": "Doc28952 Revision28-May-2026",
+    "sha256": "93d89bc38bff0bdd4cb39f5eef98029a16d42e45c99b66f830392478b070ecc6",
+    "bytes": 192657,
+    "reviewed": "2026-10-13",
+    "note": "Root opened in-app Browser. Downloaded public already-observed PDF for local analysis with root authorization."
+  },
+  {
+    "file": "jlc-mask-capabilities.txt",
+    "source": "https://jlcpcb.com/capabilities/pcb-capabilities",
+    "sha256": "75b6b8b401fac74f6859b727e0f657b96359835cc744e100d8f1dd3e5fa78566",
+    "bytes": 1464,
+    "reviewed": "2026-10-13",
+    "note": "Rendered primary page text read using in-app Browser; not a downloaded HTML source."
+  },
+  {
+    "file": "jlc-mask-design-guide.txt",
+    "source": "https://jlcpcb.com/blog/basic-design-of-solder-mask",
+    "sha256": "fe518e8747e7da8a2ea76b8f5d4ca508fae59aef9cdaa69028150b3903eaf929",
+    "bytes": 10457,
+    "reviewed": "2026-10-13",
+    "note": "Rendered primary page text read using in-app Browser; not a downloaded HTML source."
+  },
+  {
+    "file": "jlc-stencil-capabilities.txt",
+    "source": "https://jlcpcb.com/capabilities/pcb-stencil-manufacturing",
+    "sha256": "23d66dfc4b4e5fc165172da219f5d13f84f4f60879e0521cfd7342f923e2721e",
+    "bytes": 3923,
+    "reviewed": "2026-10-13",
+    "note": "Rendered primary capability and opened thickness-FAQ text, in-app Browser."
+  }
+]

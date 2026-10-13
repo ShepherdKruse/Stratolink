@@ -1,0 +1,83 @@
+{
+    "$schema": "https://schemas.kicad.org/erc.v1.json",
+    "coordinate_units": "mm",
+    "date": "2026-10-13T12:39:37",
+    "ignored_checks": [
+        {
+            "description": "Global label only appears once in the schematic",
+            "key": "single_global_label"
+        },
+        {
+            "description": "Four connection points are joined together",
+            "key": "four_way_junction"
+        },
+        {
+            "description": "SPICE model issue",
+            "key": "simulation_model_issue"
+        },
+        {
+            "description": "Assigned footprint doesn't match footprint filters",
+            "key": "footprint_filter"
+        }
+    ],
+    "included_severities": [
+        "error",
+        "warning"
+    ],
+    "kicad_version": "10.0.0",
+    "sheets": [
+        {
+            "path": "/",
+            "uuid_path": "/4d146a28-be53-49f1-b1c6-484192820e45",
+            "violations": [
+                {
+                    "description": "Local and global labels have same name",
+                    "items": [
+                        {
+                            "description": "Global Label 'SDA'",
+                            "pos": {
+                                "x": 1.6383,
+                                "y": 0.4445
+                            },
+                            "uuid": "0cf7fcc6-7a66-43f3-8f6a-874087d9f2e1"
+                        },
+                        {
+                            "description": "Label 'SDA'",
+                            "pos": {
+                                "x": 0.3302,
+                                "y": 0.9779
+                            },
+                            "uuid": "0b7c5daf-c2ea-5dba-94d9-4cc84ec5693f"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "same_local_global_label"
+                },
+                {
+                    "description": "Local and global labels have same name",
+                    "items": [
+                        {
+                            "description": "Global Label 'SCL'",
+                            "pos": {
+                                "x": 1.6637,
+                                "y": 1.0795
+                            },
+                            "uuid": "15d33e0a-97d1-43b3-95eb-3cc0238a5cdf"
+                        },
+                        {
+                            "description": "Label 'SCL'",
+                            "pos": {
+                                "x": 0.3302,
+                                "y": 1.0033
+                            },
+                            "uuid": "7c60b789-7713-5432-9e1f-8b24b7095d90"
+                        }
+                    ],
+                    "severity": "warning",
+                    "type": "same_local_global_label"
+                }
+            ]
+        }
+    ],
+    "source": "stratolink.kicad_sch"
+}

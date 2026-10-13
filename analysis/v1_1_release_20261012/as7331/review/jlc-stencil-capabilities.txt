@@ -1,0 +1,220 @@
+URL: https://jlcpcb.com/capabilities/pcb-stencil-manufacturing
+Read: 2026-10-13
+
+SMT Stencil Manufacturing Capabilities
+JLCPCB's custom SMT stencil manufacturing covers laser-cut solder paste stencils, SMD glue stencils, framed, frameless, and step stencils, with electropolishing and nano-coating available.
+Get Instant Quote
+Rigid PCB Capabilities
+Flex PCB Capabilities
+PCBA Capabilities
+Stencil Capabilities
+PCB Layout Capabilities
+Flexible Heaters Capabilities
+SMT Stencil Specifications
+Feature	Capabilities
+Stencil Types
+	
+
+Framework & Non-Framework
+
+
+
+Stencil Material
+	
+
+304 HTA stainless steel
+
+
+
+Minimum Aperture Size
+	
+
+>0.08mm
+
+
+
+Cutting Tolerance
+	
+
+±0.003mm
+
+
+
+Cutting Technology
+	
+
+Precision Laser Cutting
+
+
+
+Manufacturing Capabilities
+	
+
+Over 30 laser cutting machines in operation
+
+
+
+Stencil File Formats
+	
+
+Gerber files (with solder paste layers), DXF
+
+
+
+Thickness
+	
+
+Select by JLCPCB
+
+Our engineers will select an appropriate thickness based on your design from the standard thickness.
+
+Select by customer
+
+If you wish to specify the thickness by yourself, please select 'Select by Customer'.
+
+Standard thickness ( no extra cost): 0.10 mm, 0.12 mm, 0.15 mm, 0.18 mm, 0.20 mm.
+
+Special thickness (with extra cost): 0.03mm, 0.04mm, 0.05mm,0.06mm,0.08mm,0.25mm,0.3mm,0.4mm,0.5mm.
+
+
+
+Dimensions
+	
+
+Non-Framework：
+
+Standard size: 280x380mm- 700 × 600 mm
+
+Custom size: You can customize any dimensions within 650*580mm.
+
+Note: Any non-standard sizes, for example, 1:1 as PCB, need to choose custom size and input specific size.
+
+Framework：
+
+Minimum: 400*300(Valid Area 240mm*140mm)
+
+Square Max: 736 × 736 mm (Valid Area: 500 × 500 mm)
+
+Rectangular Max: 1500 × 500 mm (Valid Area: 1300 × 320 mm)
+
+Note:
+
+Valid Area is where the appertures can be open
+
+
+
+Nano-Coating
+	
+
+Available for all types of stencils
+
+
+
+Step Stencil
+	
+
+Only available for stencils with framework
+
+
+
+Ultrasonic-Resistant Adhesive
+	
+
+Only available for stencils with framework
+
+
+
+Stencil Side
+	
+
+4 options:
+
+1.Top Only
+
+2.Bottom Only
+
+3.Top + Bottom (On Single Stencil)
+
+4.Top + Bottom (On Separate Stencils)
+
+Learn more on the quote page.
+
+
+Stencil Process Type
+	
+
+2 options:
+
+1.Solder Paste Stencil
+
+2.Red Glue Stencil
+
+Learn more on the quote page.
+
+
+Polishing Process
+	
+
+3 Options:
+
+1.Sanding
+
+2.Etching Polish
+
+3.Electropolishing ( Ideal for ICs ≤ 0.5 mm pitch and BGA packages)
+
+Learn more on the quote page.
+
+
+Fiducials
+	
+
+3 options:
+
+1.No Fiducial
+
+2.Etched Through
+
+3.Etched Half Into
+
+Learn more on the quote page.
+
+
+Stencil Package
+	
+
+Non-framework:
+
+≤250×250 mm: Packed in a plastic bag with an air-shipping box.
+
+>250×250 mm: Packed in a cardboard box and clamped with wooden boards.
+
+Framework:
+
+Packed in a box, then clamped with wooden boards
+
+
+
+Build Time
+	
+
+Fastest build time: 12 hours
+
+Note: The final build time may vary based on the selected stencil specifications and order confirmation time.
+
+
+
+Stencil Delivery
+	
+
+If you order a stencil together with PCBs, stencil size within 280mm × 280mm can be shipped together with the PCBs.
+
+However, if you choose express shipping (e.g., DHL, FedEx), stencil size exceeding 280mm × 280mm will be shipped separately.
+
+FAQs about SMT Stencil Capabilities
+What stencil thicknesses does JLCPCB offer?
+Can I put multiple PCB designs on a single SMT stencil?
+How do I order an SMT stencil without ordering a PCB?
+Does JLCPCB modify my Gerber file when cutting the stencil?
+How do I choose the right stencil thickness for my PCB?
+You have two options. Option 1: Select the thickness yourself based on your component pitch and standoff height (commonly 0.10–0.12 mm for fine-pitch BGA/QFN; 0.15–0.18 mm for general SMT; 0.20 mm+ for boards with large connectors or power components). Option 2: Let JLCPCB engineers select the appropriate thickness for you based on your Gerber file features. Either option appears as a configuration choice on the ordering page.

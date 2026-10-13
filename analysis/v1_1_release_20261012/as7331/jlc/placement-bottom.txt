@@ -1,0 +1,416 @@
+- text: 
+- banner:
+  - generic: 24-hour PCB production. Fast Delivery to United States.
+  - link " Coupons":
+    - /url: https://jlcpcb.com/coupon-center
+    - generic: 
+    - text: Coupons
+  - link " Download APP":
+    - /url: https://jlcone.com/download
+    - generic: 
+    - text: Download APP
+  - text:     
+  - text: USD
+  - generic: 
+- navigation:
+  - text: 
+  - link "JLCPCB logo":
+    - /url: https://jlcpcb.com
+    - generic: 
+    - generic: JLCPCB
+  - text: 
+  - generic: 
+  - text: Products
+  - link "Capabilities":
+    - /url: https://jlcpcb.com/capabilities/pcb-capabilities
+  - text:   
+  - text: Support
+  - generic: 
+  - text: About Us
+  - generic: 
+  - generic: 
+  - link "":
+    - /url: https://cart.jlcpcb.com/shopcart/cart
+    - generic: 
+  - superscript: "1"
+  - link "Order Now":
+    - /url: https://cart.jlcpcb.com/quote?spm=Jlcpcb.Homepage.1006&spm=Jlcpcb.Homepage.1006
+  - text: 
+  - text: My Account
+  - generic: 
+  - text: 
+- main:
+  - generic: fabrication-review
+  - generic: Automatically saved, last updated on 13 October, 13:32
+  - tablist:
+    - tab "PCB":
+      - generic: PCB
+    - tab "Bill of Materials":
+      - generic: Bill of Materials
+    - tab "Component Placements" [selected]:
+      - generic: Component Placements
+    - tab "Quote & Order":
+      - generic: Quote & Order
+  - text:                                                                            
+  - tabpanel "Component Placements":
+    - list:
+      - textbox: "90"
+      - generic: °
+    - generic: 3D
+    - generic: 2D
+    - generic: 3D
+    - generic: Simplify Model
+    - generic: Top
+    - generic: Bottom
+    - checkbox
+    - generic: Select all top parts
+    - checkbox
+    - generic: Select all bottom parts
+    - generic "Up"
+    - generic "Down"
+    - generic "Left"
+    - generic "Right"
+    - table:
+      - rowgroup:
+        - 'row "Bottom Designator JLCPCB Part # Comment Footprint"':
+          - columnheader "Bottom Designator":
+            - generic: Bottom Designator
+          - 'columnheader "JLCPCB Part #"':
+            - generic: "JLCPCB Part #"
+          - columnheader "Comment":
+            - generic: Comment
+          - columnheader "Footprint":
+            - generic: Footprint
+    - table:
+      - rowgroup:
+        - row "C1 C3855387 GRM1555C1E103JE01D Stratolink_v1p1_C1_C_0402_1005Metric":
+          - cell "C1":
+            - generic: C1
+          - cell "C3855387":
+            - generic: C3855387
+          - cell "GRM1555C1E103JE01D":
+            - generic: GRM1555C1E103JE01D
+          - cell "Stratolink_v1p1_C1_C_0402_1005Metric":
+            - generic: Stratolink_v1p1_C1_C_0402_1005Metric
+        - row "C2 C1705 CL10A475KP8NNNC Stratolink_v1p1_C2_C_0603_1608Metric":
+          - cell "C2":
+            - generic: C2
+          - cell "C1705":
+            - generic: C1705
+          - cell "CL10A475KP8NNNC":
+            - generic: CL10A475KP8NNNC
+          - cell "Stratolink_v1p1_C2_C_0603_1608Metric":
+            - generic: Stratolink_v1p1_C2_C_0603_1608Metric
+        - row "C3 C1705 CL10A475KP8NNNC Stratolink_v1p1_C3_C_0603_1608Metric":
+          - cell "C3":
+            - generic: C3
+          - cell "C1705":
+            - generic: C1705
+          - cell "CL10A475KP8NNNC":
+            - generic: CL10A475KP8NNNC
+          - cell "Stratolink_v1p1_C3_C_0603_1608Metric":
+            - generic: Stratolink_v1p1_C3_C_0603_1608Metric
+        - row "C4 C1525 CL05B104KO5NNNC Stratolink_v1p1_C4_C_0402_1005Metric":
+          - cell "C4":
+            - generic: C4
+          - cell "C1525":
+            - generic: C1525
+          - cell "CL05B104KO5NNNC":
+            - generic: CL05B104KO5NNNC
+          - cell "Stratolink_v1p1_C4_C_0402_1005Metric":
+            - generic: Stratolink_v1p1_C4_C_0402_1005Metric
+        - row "C22 C1525 CL05B104KO5NNNC Stratolink_v1p1_C22_C_0402_1005Metric":
+          - cell "C22":
+            - generic: C22
+          - cell "C1525":
+            - generic: C1525
+          - cell "CL05B104KO5NNNC":
+            - generic: CL05B104KO5NNNC
+          - cell "Stratolink_v1p1_C22_C_0402_1005Metric":
+            - generic: Stratolink_v1p1_C22_C_0402_1005Metric
+        - row "C6 C602037 CL21A226MAYNNNE Stratolink_v1p1_C6_C_0805_2012Metric":
+          - cell "C6":
+            - generic: C6
+          - cell "C602037":
+            - generic: C602037
+          - cell "CL21A226MAYNNNE":
+            - generic: CL21A226MAYNNNE
+          - cell "Stratolink_v1p1_C6_C_0805_2012Metric":
+            - generic: Stratolink_v1p1_C6_C_0805_2012Metric
+        - row "L1 C5278935 LPS4018-223MRC Stratolink_v1p1_L1_IND_LPS4018-223MRC":
+          - cell "L1":
+            - generic: L1
+          - cell "C5278935":
+            - generic: C5278935
+          - cell "LPS4018-223MRC":
+            - generic: LPS4018-223MRC
+          - cell "Stratolink_v1p1_L1_IND_LPS4018-223MRC":
+            - generic: Stratolink_v1p1_L1_IND_LPS4018-223MRC
+        - row "L2 C436784 PWCWAQ1608F-100KTT INDC1608X90N":
+          - cell "L2":
+            - generic: L2
+          - cell "C436784":
+            - generic: C436784
+          - cell "PWCWAQ1608F-100KTT":
+            - generic: PWCWAQ1608F-100KTT
+          - cell "INDC1608X90N":
+            - generic: INDC1608X90N
+        - row "R1 C3013187 FRC0402F7504TS Stratolink_v1p1_R1_R_0402_1005Metric":
+          - cell "R1":
+            - generic: R1
+          - cell "C3013187":
+            - generic: C3013187
+          - cell "FRC0402F7504TS":
+            - generic: FRC0402F7504TS
+          - cell "Stratolink_v1p1_R1_R_0402_1005Metric":
+            - generic: Stratolink_v1p1_R1_R_0402_1005Metric
+        - row "R2 C2091474 CRCW04024M22FKED Stratolink_v1p1_R2_R_0402_1005Metric":
+          - cell "R2":
+            - generic: R2
+          - cell "C2091474":
+            - generic: C2091474
+          - cell "CRCW04024M22FKED":
+            - generic: CRCW04024M22FKED
+          - cell "Stratolink_v1p1_R2_R_0402_1005Metric":
+            - generic: Stratolink_v1p1_R2_R_0402_1005Metric
+        - row "R3 C2998153 FRC0402F4754TS Stratolink_v1p1_R3_R_0402_1005Metric":
+          - cell "R3":
+            - generic: R3
+          - cell "C2998153":
+            - generic: C2998153
+          - cell "FRC0402F4754TS":
+            - generic: FRC0402F4754TS
+          - cell "Stratolink_v1p1_R3_R_0402_1005Metric":
+            - generic: Stratolink_v1p1_R3_R_0402_1005Metric
+        - row "R7 C2998153 FRC0402F4754TS Stratolink_v1p1_R7_R_0402_1005Metric":
+          - cell "R7":
+            - generic: R7
+          - cell "C2998153":
+            - generic: C2998153
+          - cell "FRC0402F4754TS":
+            - generic: FRC0402F4754TS
+          - cell "Stratolink_v1p1_R7_R_0402_1005Metric":
+            - generic: Stratolink_v1p1_R7_R_0402_1005Metric
+        - row "R24 C2998153 FRC0402F4754TS Stratolink_v1p1_R24_R_0402_1005Metric":
+          - cell "R24":
+            - generic: R24
+          - cell "C2998153":
+            - generic: C2998153
+          - cell "FRC0402F4754TS":
+            - generic: FRC0402F4754TS
+          - cell "Stratolink_v1p1_R24_R_0402_1005Metric":
+            - generic: Stratolink_v1p1_R24_R_0402_1005Metric
+        - row "R25 C2998153 FRC0402F4754TS Stratolink_v1p1_R25_R_0402_1005Metric":
+          - cell "R25":
+            - generic: R25
+          - cell "C2998153":
+            - generic: C2998153
+          - cell "FRC0402F4754TS":
+            - generic: FRC0402F4754TS
+          - cell "Stratolink_v1p1_R25_R_0402_1005Metric":
+            - generic: Stratolink_v1p1_R25_R_0402_1005Metric
+        - row "R4 C477700 RC0402FR-073M65L Stratolink_v1p1_R4_R_0402_1005Metric":
+          - cell "R4":
+            - generic: R4
+          - cell "C477700":
+            - generic: C477700
+          - cell "RC0402FR-073M65L":
+            - generic: RC0402FR-073M65L
+          - cell "Stratolink_v1p1_R4_R_0402_1005Metric":
+            - generic: Stratolink_v1p1_R4_R_0402_1005Metric
+        - row "R5 C49654874 GR0402F4M42TAG00 Stratolink_v1p1_R5_R_0402_1005Metric":
+          - cell "R5":
+            - generic: R5
+          - cell "C49654874":
+            - generic: C49654874
+          - cell "GR0402F4M42TAG00":
+            - generic: GR0402F4M42TAG00
+          - cell "Stratolink_v1p1_R5_R_0402_1005Metric":
+            - generic: Stratolink_v1p1_R5_R_0402_1005Metric
+        - row "R6 C423131 0402WGF8254TCE Stratolink_v1p1_R6_R_0402_1005Metric":
+          - cell "R6":
+            - generic: R6
+          - cell "C423131":
+            - generic: C423131
+          - cell "0402WGF8254TCE":
+            - generic: 0402WGF8254TCE
+          - cell "Stratolink_v1p1_R6_R_0402_1005Metric":
+            - generic: Stratolink_v1p1_R6_R_0402_1005Metric
+        - row "R8 C60491 RC0402FR-07100KL Stratolink_v1p1_R8_R_0402_1005Metric":
+          - cell "R8":
+            - generic: R8
+          - cell "C60491":
+            - generic: C60491
+          - cell "RC0402FR-07100KL":
+            - generic: RC0402FR-07100KL
+          - cell "Stratolink_v1p1_R8_R_0402_1005Metric":
+            - generic: Stratolink_v1p1_R8_R_0402_1005Metric
+        - row "R26 C25092 0402WGF220JTCE Stratolink_v1p1_R26_R_0402_1005Metric":
+          - cell "R26":
+            - generic: R26
+          - cell "C25092":
+            - generic: C25092
+          - cell "0402WGF220JTCE":
+            - generic: 0402WGF220JTCE
+          - cell "Stratolink_v1p1_R26_R_0402_1005Metric":
+            - generic: Stratolink_v1p1_R26_R_0402_1005Metric
+        - row "U1 C506250 BQ25570RGRR Stratolink_v1p1_U1_QFN50P350X350X100-21N":
+          - cell "U1":
+            - generic: U1
+          - cell "C506250":
+            - generic: C506250
+          - cell "BQ25570RGRR":
+            - generic: BQ25570RGRR
+          - cell "Stratolink_v1p1_U1_QFN50P350X350X100-21N":
+            - generic: Stratolink_v1p1_U1_QFN50P350X350X100-21N
+        - row "U8 C544879 TLV8801DBVT Stratolink_v1p1_U8_SOT-23-5":
+          - cell "U8":
+            - generic: U8
+          - cell "C544879":
+            - generic: C544879
+          - cell "TLV8801DBVT":
+            - generic: TLV8801DBVT
+          - cell "Stratolink_v1p1_U8_SOT-23-5":
+            - generic: Stratolink_v1p1_U8_SOT-23-5
+    - button "Next"
+    - text: 
+- contentinfo:
+  - generic: 
+  - text: Online Chat >
+  - generic: Chat with our live agent for fast reply.
+  - generic: "Mon-Fri: 24 hours, Sat: 9am-6pm, GMT+8"
+  - link " Email Us >":
+    - /url: https://jlcpcb.com/help/contact
+    - generic: 
+    - text: Email Us >
+  - text: Contact us at support
+  - generic: 
+  - text: jlcpcb.com
+  - generic: Typically reply within hours.
+  - link " Help Center >":
+    - /url: https://jlcpcb.com/help
+    - generic: 
+    - text: Help Center >
+  - generic: Get instant answers.
+  - generic: 24/7 Available.
+  - generic: PCB Service
+  - link "FR-4 PCBs":
+    - /url: https://jlcpcb.com/pcb-fabrication/fr4-pcb
+  - link "Flexible PCBs":
+    - /url: https://jlcpcb.com/pcb-fabrication/flexible-pcb
+  - link "Metal Core PCBs":
+    - /url: https://jlcpcb.com/pcb-fabrication/metal-core-pcb
+  - link "High-Frequency PCBs":
+    - /url: https://jlcpcb.com/pcb-fabrication/high-frequency-pcb
+  - link "PCBA Service":
+    - /url: https://jlcpcb.com/pcb-assembly
+  - link "PCB Layout":
+    - /url: https://design.jlcpcb.com
+  - link "SMT Stencil":
+    - /url: https://jlcpcb.com/pcb-stencil
+  - link "Flex Heater":
+    - /url: https://flexheater.jlcpcb.com
+  - generic: Support
+  - link "Help Center":
+    - /url: https://jlcpcb.com/help
+  - link "Contact Us":
+    - /url: https://jlcpcb.com/help/contact
+  - link "Community":
+    - /url: https://jlchub.com
+  - link "Shipping Guide":
+    - /url: https://jlcpcb.com/shipping
+  - link "Payment Methods":
+    - /url: https://jlcpcb.com/payments
+  - link "How to Order":
+    - /url: https://jlcpcb.com/help/catalog/11-How-To-Order
+  - link "How to Track":
+    - /url: https://jlcpcb.com/help/article/51-How-to-Track-My-Order
+  - link "After-Sales Service":
+    - /url: https://jlcpcb.com/help/article/How-to-Make-a-Quality-Complaint
+  - link "Blog":
+    - /url: https://jlcpcb.com/blog
+  - generic: Company
+  - link "About Us":
+    - /url: https://jlcpcb.com/about-us
+  - link "Quality Assurance":
+    - /url: https://jlcpcb.com/about-us/quality-control
+  - link "How We Work":
+    - /url: https://jlcpcb.com/about-us/how-it-works
+  - link "Certifications":
+    - /url: https://jlcpcb.com/certifications
+  - link "Security":
+    - /url: https://jlcpcb.com/privacy-security
+  - link "Environment":
+    - /url: https://jlcpcb.com/green-manufacturing
+  - link "JLCAPI":
+    - /url: https://api.jlcpcb.com/
+  - link "News":
+    - /url: https://jlcpcb.com/news
+  - link "Cooperation":
+    - /url: https://jlcpcb.com/cooperation
+  - generic: Electronics
+  - link "EasyEDA":
+    - /url: https://easyeda.com
+  - link "JLCPCB":
+    - /url: https://jlcpcb.com
+  - link "JLCDFM":
+    - /url: https://jlcdfm.com
+  - link "LCSC":
+    - /url: https://www.lcsc.com
+  - link "OSHWLAB":
+    - /url: https://oshwlab.com/
+  - generic: Mechanical
+  - link "JLC3DP":
+    - /url: https://jlc3dp.com
+  - link "JLCCNC":
+    - /url: https://jlccnc.com
+  - link "JLCMC":
+    - /url: https://jlcmc.com
+  - generic: 
+  - generic: Order on JLCONE Desktop, Save $1–$20 Every Time
+  - link " Windows":
+    - /url: https://jlcone.com/download
+    - generic: 
+    - generic: Windows
+  - link " MAC":
+    - /url: https://jlcone.com/download
+    - generic: 
+    - generic: MAC
+  - link " Android":
+    - /url: https://jlcone.com/download#mobile-app
+    - generic: 
+    - generic: Android
+  - link " IOS":
+    - /url: https://jlcone.com/download#mobile-app
+    - generic: 
+    - generic: IOS
+  - generic: CONNECT WITH US
+  - link "":
+    - /url: https://www.facebook.com/jlcpcb
+    - generic: 
+  - link "":
+    - /url: https://twitter.com/jlcpcb
+    - generic: 
+  - link "":
+    - /url: https://www.instagram.com/jlcpcb
+    - generic: 
+  - link "":
+    - /url: https://www.youtube.com/JLCPCB
+    - generic: 
+  - link "":
+    - /url: https://www.linkedin.com/company/jlcpcb
+    - generic: 
+  - link "":
+    - /url: https://www.reddit.com/r/JLCPCBLab/
+    - generic: 
+  - generic: © 2026 JLCPCB.COM All Rights Reserved.
+  - link "Privacy Policy":
+    - /url: https://jlcpcb.com/help/article/Privacy-Policy
+  - link "Terms & Conditions":
+    - /url: https://jlcpcb.com/help/article/Terms-%26-Conditions
+  - link "Cookies Policy":
+    - /url: https://jlcpcb.com/help/article/JLCPCB-Cookie-Notice
+  - link "Do Not Sell or Share My Personal Information":
+    - /url: https://jlcpcb.com/privacy-policy/do-not-sell-or-share-my-personal-information
+- iframe
+- text: 

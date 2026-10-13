@@ -1,0 +1,73 @@
+{
+  "generator_sha256": "5f5490dce5ef8d0a6114935cddda1ab1c8c7cc536c6a8ee42832ec362c7806a8",
+  "passed_case_count": 34,
+  "passed_cases": [
+    "no_profile_preserves_full_population",
+    "omit_U6_preserves_every_other_row",
+    "inputs_unchanged",
+    "wrong_MPN",
+    "wrong_LCSC",
+    "missing_identity",
+    "numeric_identity",
+    "blank_reason",
+    "missing_reason",
+    "extra_identity_field",
+    "blank_name",
+    "non_string_name",
+    "empty_omit",
+    "array_omit",
+    "extra_top_level_field",
+    "unknown_reference",
+    "lowercase_reference",
+    "whitespace_reference",
+    "stale_profile_for_legacy_U6",
+    "stale_profile_U6_removed_or_native_DNP",
+    "remove_every_assembly_reference",
+    "explicit_null_profile",
+    "empty_object_profile",
+    "array_profile",
+    "boolean_profile",
+    "string_profile",
+    "malformed_json",
+    "duplicate_top_name",
+    "duplicate_top_omit",
+    "duplicate_U6_reference",
+    "duplicate_MPN",
+    "duplicate_LCSC",
+    "duplicate_reason",
+    "valid_profile_round_trip_and_hash_preserved"
+  ],
+  "package": {
+    "package": "/Users/twarn/Repositories/Stratolink/hardware/gerbers/v1.1-pilot",
+    "stencil": {
+      "package": "/Users/twarn/Repositories/Stratolink/hardware/gerbers/v1.1-pilot",
+      "changed_U6_pad_paste_flags": 16,
+      "whole_native_PCB_exact_except_U6_paste": true,
+      "paste": {
+        "stratolink-F_Paste.gtp": {
+          "full_U6_apertures": 16,
+          "pilot_U6_apertures": 0,
+          "retained_artwork_commands": 1986,
+          "all_retained_paste_artwork_identical": true
+        },
+        "stratolink-B_Paste.gbp": {
+          "full_U6_apertures": 0,
+          "pilot_U6_apertures": 0,
+          "retained_artwork_commands": 160,
+          "all_retained_paste_artwork_identical": true
+        }
+      },
+      "pilot_ZIP_paste_bytes_verified": true
+    },
+    "assembly_count": 57,
+    "design_assembly_count": 58,
+    "only_omitted_reference": "U6",
+    "approved_mpn": "AS7331-AQFM",
+    "approved_lcsc": "C20482877",
+    "all_retained_assembly_BOM_CPL_fields_match": true,
+    "source_hash_count": 166,
+    "output_hash_count": 37,
+    "all_source_output_evidence_hashes_valid": true,
+    "population_profile_byte_copy_valid": true
+  }
+}

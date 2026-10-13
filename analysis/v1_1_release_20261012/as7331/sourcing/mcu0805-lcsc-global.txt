@@ -1,0 +1,520 @@
+- banner:
+  - link "lcsc notice":
+    - /url: https://www.lcsc.com/electronica
+    - img "lcsc notice"
+  - button "Close notification":
+  - link "Hot-Selling Page":
+    - /url: https://www.lcsc.com/flashSale?isHot=1
+    - text: Hot-Selling
+  - link "Get Coupons Here":
+    - /url: https://www.lcsc.com/coupons?source=lcsc
+    - generic: Coupons
+    - generic: $20
+  - link "Get API Here":
+    - /url: https://www.lcsc.com/agent
+    - text: API
+  - generic: Language
+  - generic: Help
+  - link "Contact Us":
+    - /url: https://www.lcsc.com/service/question
+  - link "LCSC Electronics home":
+    - /url: https://www.lcsc.com/
+    - img "LCSC Electronics logo"
+    - img "LCSC Electronics svg logo"
+  - textbox "search input":
+    - /placeholder: ROQANG
+  - button "search button":
+  - link "TI":
+    - /url: https://www.lcsc.com/brand-detail/100.html?s_z=t_b_TI
+  - link "Broadcom":
+    - /url: https://www.lcsc.com/brand-detail/738.html?s_z=t_b_Broadcom
+  - link "EVERLIGHT":
+    - /url: https://www.lcsc.com/brand-detail/138.html?s_z=t_b_EVERLIGHT
+  - link "JSCJ":
+    - /url: https://www.lcsc.com/brand-detail/64.html?s_z=t_b_JSCJ
+  - link "UMW":
+    - /url: https://www.lcsc.com/brand-detail/11853.html?s_z=t_b_UMW
+  - link "BOURNS":
+    - /url: https://www.lcsc.com/brand-detail/377.html?s_z=t_b_BOURNS
+  - link "SILICON LABS":
+    - /url: https://www.lcsc.com/brand-detail/197.html?s_z=t_b_SILICON%2520LABS
+  - link "Amphenol":
+    - /url: https://www.lcsc.com/brand-detail/815.html?s_z=t_b_Amphenol
+  - link "HRE":
+    - /url: https://www.lcsc.com/brand-detail/13390.html?s_z=t_b_HRE
+  - link "Samples Offer":
+    - /url: https://www.lcsc.com/samples
+  - generic: Upload a BOM
+  - button "twarner491":
+    - generic "twarner491"
+  - button "The current currency is USD, click to change to other currencies":
+    - generic: USD
+  - link "Cart":
+    - /url: https://www.lcsc.com/cart
+    - generic: Cart
+- navigation:
+  - link "Catalog Page":
+    - /url: https://www.lcsc.com/products
+    - generic: Catalog
+    - img "All Products icon"
+  - link "Products Page":
+    - /url: https://www.lcsc.com/products
+    - generic: Products
+  - link "Manufacturers Page":
+    - /url: https://www.lcsc.com/supplier
+    - generic: Manufacturers
+  - link "RFQ/BOM Page":
+    - /url: https://www.lcsc.com/inquiry
+    - generic: RFQ/BOM
+  - link "Deals Page":
+    - /url: https://www.lcsc.com/flashSale
+    - generic: Deals
+  - link "Custom Cables Page":
+    - /url: https://lcsccable.com
+    - generic: Custom Cables
+  - button "Solutions":
+    - generic: Solutions
+  - button "Resources":
+    - generic: Resources
+- main:
+  - navigation "Breadcrumb":
+    - list:
+      - link "Home":
+        - /url: https://www.lcsc.com/
+      - text: /
+      - link "Products":
+        - /url: https://www.lcsc.com/products
+      - text: /
+      - link "Passives":
+        - /url: https://www.lcsc.com/category/30.html
+      - text: /
+      - link "Resistors":
+        - /url: https://www.lcsc.com/category/501.html
+      - text: /
+      - link "Chip Resistor - Surface Mount":
+        - /url: https://www.lcsc.com/category/1199.html
+      - text: /
+      - listitem: VISHAY MCU0805MD3304BP500
+  - button "Add to Favourites":
+    - generic: Favorites
+  - link "View MCU0805MD3304BP500 product images":
+    - /url: https://www.lcsc.com/product-image/C4313228.html?whichImg=0
+    - img "VISHAY MCU0805MD3304BP500 product image"
+  - button "Previous image"
+  - list:
+    - img "MCU0805MD3304BP500 thumbnail 1"
+    - img "MCU0805MD3304BP500 thumbnail 2"
+    - img "MCU0805MD3304BP500 thumbnail 3"
+    - generic: Pinout
+    - generic: Footprint
+  - button "Next image"
+  - generic: Images for reference only
+  - generic: EDA Models
+  - button "Open the EasyEDA Model":
+    - generic: EasyEDA
+  - button "Copy button":
+  - heading "VISHAY MCU0805MD3304BP500" [level=1]:
+    - text: VISHAY MCU0805MD3304BP500
+  - table:
+    - rowgroup:
+      - row "Manufacturer VISHAY":
+        - cell "Manufacturer"
+        - cell "VISHAY":
+          - link "VISHAY":
+            - /url: https://www.lcsc.com/brand-detail/91.html
+      - row "MPN MCU0805MD3304BP500":
+        - cell "MPN"
+        - cell "MCU0805MD3304BP500":
+          - generic: MCU0805MD3304BP500
+      - 'row "LCSC Part # C4313228"':
+        - 'cell "LCSC Part #"'
+        - cell "C4313228":
+          - generic: C4313228
+      - row "Packaging 0805":
+        - cell "Packaging"
+        - cell "0805":
+          - generic: "0805"
+      - 'row "Customer # caret-down"':
+        - 'cell "Customer #"'
+        - cell "caret-down":
+          - textbox "Customer Number"
+          - img "caret-down":
+      - row "Key Attributes RES 3.3MΩ ±0.1% 200mW 0805":
+        - cell "Key Attributes"
+        - cell "RES 3.3MΩ ±0.1% 200mW 0805":
+          - generic: RES 3.3MΩ ±0.1% 200mW 0805
+      - row "Datasheet pdf icon VISHAY MCU0805MD3304BP500":
+        - cell "Datasheet"
+        - cell "pdf icon VISHAY MCU0805MD3304BP500":
+          - link "pdf icon VISHAY MCU0805MD3304BP500":
+            - /url: https://www.lcsc.com/datasheet/C4313228.pdf
+            - img "pdf icon"
+            - generic: VISHAY MCU0805MD3304BP500
+      - row "RoHS Compliance 2 documents available":
+        - cell "RoHS Compliance"
+        - cell "2 documents available":
+          - button "2 documents available"
+  - heading "Products Specifications" [level=2]
+  - button "All"
+  - checkbox
+  - table:
+    - rowgroup:
+      - row "Type Description":
+        - columnheader "Type"
+        - columnheader "Description"
+        - columnheader
+    - rowgroup:
+      - row "Category Passives/Resistors/Chip Resistor - Surface Mount":
+        - cell "Category"
+        - cell "Passives/Resistors/Chip Resistor - Surface Mount":
+          - link "Passives/Resistors/Chip Resistor - Surface Mount":
+            - /url: https://www.lcsc.com/category/1199.html
+        - cell:
+          - checkbox [checked] [disabled]
+      - row "Manufacturer VISHAY":
+        - cell "Manufacturer"
+        - cell "VISHAY":
+          - link "VISHAY":
+            - /url: https://www.lcsc.com/brand-detail/91.html
+        - cell:
+          - checkbox
+      - row "Packaging 0805":
+        - cell "Packaging"
+        - cell "0805"
+        - cell:
+          - checkbox
+      - row "Resistance 3.3MΩ":
+        - cell "Resistance"
+        - cell "3.3MΩ"
+        - cell:
+          - checkbox
+      - row "Power(Watts) 200mW":
+        - cell "Power(Watts)"
+        - cell "200mW"
+        - cell:
+          - checkbox
+  - table:
+    - rowgroup:
+      - row "Type Description":
+        - columnheader "Type"
+        - columnheader "Description"
+        - columnheader
+    - rowgroup:
+      - row "Type Thin Film Resistor":
+        - cell "Type"
+        - cell "Thin Film Resistor"
+        - cell:
+          - checkbox
+      - row "Temperature Coefficient ±25ppm/℃":
+        - cell "Temperature Coefficient"
+        - cell "±25ppm/℃"
+        - cell:
+          - checkbox
+      - row "Tolerance ±0.1%":
+        - cell "Tolerance"
+        - cell "±0.1%"
+        - cell:
+          - checkbox
+      - row "Operating Temperature -55℃~+155℃":
+        - cell "Operating Temperature"
+        - cell "-55℃~+155℃"
+        - cell:
+          - checkbox
+  - button "Help & Feedback"
+  - link "Show similar products (939763) >":
+    - /url: https://www.lcsc.com/category/1199.html
+  - generic: Every Order Guarantee
+  - generic: 100% Authentic · 30-Day Return or Replacement
+  - generic: "In-Stock: 30"
+  - generic: 30 In stock, ships now
+  - generic: "Minimum: 1"
+  - generic: "Multiple: 1"
+  - generic: "Sales Unit: Piece"
+  - textbox: "1"
+  - img "Cut Tape"
+  - generic: Cut Tape
+  - img "LCSC-Reel"
+  - generic: LCSC-Reel
+  - generic: $3
+  - generic: Packaging
+  - generic: Qty
+  - generic: Unit Price
+  - generic: Total Amount
+  - generic: Cut Tape
+  - generic: "1"
+  - generic: $ 0.5135
+  - generic: $ 0.51
+  - generic: $ 0.51
+  - button "Add to Cart":
+    - generic: Add to Cart
+  - generic: Add to BOM List
+  - table:
+    - rowgroup:
+      - row "Qty Unit Price Total Amount":
+        - columnheader "Qty"
+        - columnheader "Unit Price"
+        - columnheader "Total Amount"
+    - rowgroup:
+      - row "1+ $ 0.5135 $ 0.51":
+        - button "1+"
+        - cell "$ 0.5135":
+          - generic: $ 0.5135
+        - cell "$ 0.51"
+      - row "10+ $ 0.3987 $ 3.99":
+        - button "10+"
+        - cell "$ 0.3987":
+          - generic: $ 0.3987
+        - cell "$ 3.99"
+      - row "30+ $ 0.3495 $ 10.49":
+        - button "30+"
+        - cell "$ 0.3495":
+          - generic: $ 0.3495
+        - cell "$ 10.49"
+      - row "100+ $ 0.2871 $ 28.71":
+        - button "100+"
+        - cell "$ 0.2871":
+          - generic: $ 0.2871
+        - cell "$ 28.71"
+      - row "500+ $ 0.2609 $ 130.45":
+        - button "500+"
+        - cell "$ 0.2609":
+          - generic: $ 0.2609
+        - cell "$ 130.45"
+      - row "1,000+ $ 0.2428 $ 242.80":
+        - button "1,000+"
+        - cell "$ 0.2428":
+          - generic: $ 0.2428
+        - cell "$ 242.80"
+      - row "Standard Packaging 5000/Full Reel":
+        - cell "Standard Packaging 5000/Full Reel":
+          - generic: Standard Packaging
+          - generic: 5000/Full Reel
+  - generic: Better price for more quantity?
+  - textbox "Enter Qty"
+  - generic: $
+  - textbox "Target Price"
+  - button "Get Quote"
+  - heading "Datasheet" [level=2]
+  - link "Fullscreen":
+    - /url: https://www.lcsc.com/datasheet/C4313228.pdf
+  - img "pdf icon"
+  - text: Download
+  - iframe [id="myPdfIframe"]
+  - heading "C4313228 EasyEDA Library" [level=2]
+  - img "This image shows the pinout diagram of MCU0805MD3304BP500"
+  - img "This image shows the footprint diagram of MCU0805MD3304BP500"
+  - heading "Compliance & Export Codes" [level=2]
+  - table:
+    - rowgroup:
+      - row "Type Details":
+        - columnheader "Type"
+        - columnheader "Details"
+    - rowgroup:
+      - row "RoHS ROHS3 Compliant":
+        - cell "RoHS"
+        - cell "ROHS3 Compliant"
+      - row "ECCN EAR99":
+        - cell "ECCN"
+        - cell "EAR99"
+      - row "CNHTS 8533211000":
+        - cell "CNHTS"
+        - cell "8533211000"
+      - row "USHTS 8533210020":
+        - cell "USHTS"
+        - cell "8533210020"
+      - row "TARIC 8533210000":
+        - cell "TARIC"
+        - cell "8533210000"
+  - table:
+    - rowgroup:
+      - row "Type Details":
+        - columnheader "Type"
+        - columnheader "Details"
+    - rowgroup:
+      - row "CAHTS 8533210000":
+        - cell "CAHTS"
+        - cell "8533210000"
+      - row "BRHTS 85332110":
+        - cell "BRHTS"
+        - cell "85332110"
+      - row "INHTS 85332111":
+        - cell "INHTS"
+        - cell "85332111"
+      - row "MXHTS 8533.21.01":
+        - cell "MXHTS"
+        - cell "8533.21.01"
+      - row:
+        - cell
+        - cell
+- contentinfo:
+  - generic "about Information": Information
+  - list:
+    - link "Go to About LCSC Page":
+      - /url: https://www.lcsc.com/about/company
+      - text: About LCSC
+    - link "Go to Contact Us Page":
+      - /url: https://www.lcsc.com/service/question
+      - text: Contact Us
+    - link "Go to LCSC Seller Page":
+      - /url: https://www.lcsc.com/about/supplier
+      - text: LCSC Seller
+    - link "Go to Quality Assurance Page":
+      - /url: https://assets.lcsc.com/datasheet/szlcsc/Download-ISO9001-Certification.pdf
+      - text: Quality Assurance
+    - link "Go to Terms and Conditions Page":
+      - /url: https://www.lcsc.com/help/terms-and-conditions
+      - text: Terms and Conditions
+    - link "Go to Privacy Policy Page":
+      - /url: https://www.lcsc.com/help/privacy
+      - text: Privacy Policy
+    - link "Go to Cookie Notice Page":
+      - /url: https://www.lcsc.com/help-center/lcsc-information/cookie-notice
+      - text: Cookie Notice
+    - link "Go to Blog Page":
+      - /url: https://www.lcsc.com/blog
+      - text: Blog
+  - generic "about Tools": Tools
+  - list:
+    - link "Go to BOM Tool/RFQ Page":
+      - /url: https://www.lcsc.com/bom
+      - text: BOM Tool/RFQ
+    - link "Go to API Page":
+      - /url: https://www.lcsc.com/agent
+      - text: API
+    - link "Go to LCSC Calculator Hub Page":
+      - /url: https://www.lcsc.com/tools
+      - text: LCSC Calculator Hub
+    - link "Go to Cross Reference Page":
+      - /url: https://www.lcsc.com/tools/cross-reference
+      - text: Cross Reference
+  - generic "about Customer Service": Customer Service
+  - list:
+    - link "Go to Track Order Page":
+      - /url: https://www.lcsc.com/personalCenter/order/list
+      - text: Track Order
+    - link "Go to Return Policy Page":
+      - /url: https://www.lcsc.com/help-center/return-refund
+      - text: Return Policy
+    - link "Go to How to Checkout Page":
+      - /url: https://www.lcsc.com/help-center/ordering-quotation/order-and-checkout
+      - text: How to Checkout
+    - link "Go to Orders & Payment Terms Page":
+      - /url: https://www.lcsc.com/help-center/payment-invoice/payment-methods
+      - text: Orders & Payment Terms
+    - link "Go to International Shipping Page":
+      - /url: https://www.lcsc.com/help-center/shipping-delivering
+      - text: International Shipping
+    - button "Feedback"
+    - link "Go to FAQ Page":
+      - /url: https://www.lcsc.com/help-center
+      - text: FAQ
+    - link "Go to Help Center Page":
+      - /url: https://www.lcsc.com/help-center
+      - text: Help Center
+  - generic "about Electronic Components": Electronic Components
+  - list:
+    - link "Go to EasyEDA Page":
+      - /url: https://easyeda.com
+      - text: EasyEDA
+    - link "Go to JLCPCB Page":
+      - /url: https://jlcpcb.com
+      - text: JLCPCB
+    - link "Go to LCSC Page":
+      - /url: https://www.lcsc.com/
+      - text: LCSC
+    - link "Go to CUSTOM CABLES Page":
+      - /url: https://lcsccable.com
+      - text: CUSTOM CABLES
+    - link "Go to FRONT PANELS Page":
+      - /url: https://www.lcsc.com/front-panel
+      - text: FRONT PANELS
+  - generic "about Connect With Us": Connect With Us
+  - generic: "Customer Service:"
+  - text: 0086-755-83210457
+  - generic: "Logistics Dept.:"
+  - text: 0086-755-83233027
+  - generic: "Email:"
+  - link "support@lcsc.com":
+    - /url: mailto:support@lcsc.com
+  - generic: 9:30 am - 12 am, 1:30 pm - 10 pm
+  - generic: Monday - Friday, UTC/GMT +8
+  - generic: "Current Time: Wed, Oct 14, 02:34:55 GMT+8"
+  - generic: Follow Us
+  - link "LCSC Electronics official instagram":
+    - /url: https://www.instagram.com/lcscelectronics
+  - link "LCSC Electronics official facebook":
+    - /url: https://www.facebook.com/lcsc.electronics
+  - link "LCSC Electronics official linkedIn":
+    - /url: https://www.linkedin.com/company/lcsc-electronics
+  - link "LCSC Electronics official twitter":
+    - /url: https://x.com/lcscelectronics
+  - link "LCSC Electronics official youtube":
+    - /url: https://www.youtube.com/c/LCSCElectronics
+  - link "PCI DSS certified":
+    - /url: /payment/PCI.pdf
+    - img "PCI DSS certified"
+  - link "trustlogo about lcsc.com":
+    - /url: https://www.trustlogo.com/ttb_searcher/trustlogo?v_querytype=W&v_shortname=CL1&v_search=https://www.lcsc.com&x=6&y=5
+    - img "SSL encrypted payment icon"
+  - text: Encrypted
+  - text: Payment
+  - img "paypal logo"
+  - img "visa logo"
+  - img "master logo"
+  - img "amex logo"
+  - img "jcb logo"
+  - img "Diners Club logo"
+  - img "dhl logo"
+  - img "fedex logo"
+  - img "singgapore post logo"
+  - img "ems logo"
+  - img "sf express logo"
+  - link "Go to Terms & Conditions Page":
+    - /url: https://www.lcsc.com/help/terms-and-conditions
+    - text: Terms & Conditions
+  - text: "|"
+  - link "Go to Privacy Notice Page":
+    - /url: https://www.lcsc.com/help/privacy
+    - text: Privacy Notice
+  - text: "| Cookie Settings |"
+  - link "Go to Do Not Sell or Share My Personal Information Page":
+    - /url: https://www.lcsc.com/help/do-not-sell
+    - text: Do Not Sell / Do Not Share My Personal Information
+  - generic: © 2025 LCSC.COM All Rights Reserved.
+  - link "about 粤ICP备17041818号":
+    - /url: http://beian.miit.gov.cn
+    - text: 粤ICP备17041818号
+  - link "about ISO/IEC":
+    - /url: https://static.lcsc.com/feassets/pc/file/251202/ISO-IEC%20Certificate.pdf
+    - text: ISO/IEC
+- complementary:
+  - link "Contact us":
+    - /url: https://www.lcsc.com/service/question
+- text: LCSC uses cookies and similar technology to improve site performance, enhance security, personal content and ads, and understand how you interact with our services. This information is shared with third-party service providers. Learn more in our
+- link "Cookie Policy":
+  - /url: https://www.lcsc.com/help-center/lcsc-information/cookie-notice
+- text: .
+- button "Cookie Settings":
+  - generic: Cookie Settings
+- button "Reject All":
+  - generic: Reject All
+- button "Accept All Cookies":
+  - generic: Accept All Cookies
+- button "Close cookie notice":
+- alert
+- dialog:
+  - generic: We've updated our Terms
+  - generic: We are committed to maintaining transparency and keeping your personal data safe. We have updated our Privacy Policy. Please take a moment to review the Privacy Policy for details of the changes. You may also choose whether to receive marketing communications from us. Your choice is entirely voluntary, and choosing not to consent to marketing communications will not affect your access to or use of our website or core services.
+  - checkbox "I agree to the updated Privacy Policy*"
+  - text: I agree to the updated
+  - link "Privacy Policy":
+    - /url: https://www.lcsc.com/help/privacy?hideAgreementUpdate=1
+  - text: "*"
+  - checkbox "I agree to the updated Marketing Policy"
+  - text: I agree to the updated
+  - link "Marketing Policy":
+    - /url: https://www.lcsc.com/help/marketing-consulting-agreement?hideAgreementUpdate=1
+  - button "Decline" [disabled]:
+    - generic: Decline
+  - button "Accept & Continue" [disabled]:
+    - generic: Accept & Continue

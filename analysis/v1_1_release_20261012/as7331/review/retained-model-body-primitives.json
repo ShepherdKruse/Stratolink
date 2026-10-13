@@ -1,0 +1,14 @@
+{
+  "status": "PASS",
+  "baseline_git_revision": "60c805e",
+  "baseline_source_sha256": "8e2f83797dd68195aa71b73fc252fe57e53ccd3683ef5f74739dc4d25d6ce8d5",
+  "candidate": "/Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/as7331/final-green-filled/stratolink.kicad_pcb",
+  "candidate_source_sha256": "9d63500a087ef8d345c2337942106e6704d32ded953846883454bfad718adf6c",
+  "retained_component_count": 65,
+  "checked": {
+    "models": 60,
+    "body_graphics": 236,
+    "custom_pad_primitives": 2
+  },
+  "differences": []
+}

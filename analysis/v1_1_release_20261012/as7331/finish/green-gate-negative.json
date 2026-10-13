@@ -1,0 +1,7 @@
+{
+  "generator_sha256": "05efbfab940a8235da58a6991b80424b2eec1d0e4ea7fb68da9da61f9ce01415",
+  "negative_fixture": "Original full-board F.Mask rectangle restored on green-finish trial3",
+  "accepted": true,
+  "error": null,
+  "artifacts": "/Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/as7331/green-gate-negative1"
+}

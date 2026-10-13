@@ -1,0 +1,66 @@
+{
+  "status": "PASS",
+  "remaining_erc_exclusions": [
+    [
+      "pin_to_pin|533400|1600200|d24f236f-77e7-440c-9378-f49a6d546306|944d0dde-0354-5fbe-8d7f-fd73f10709be|/4d146a28-be53-49f1-b1c6-484192820e45|/4d146a28-be53-49f1-b1c6-484192820e45|/4d146a28-be53-49f1-b1c6-484192820e45",
+      "TMP117 ALERT is intentionally unavailable and grounded. TI TMP117 datasheet section 8.2.1 explicitly permits grounding ALERT when unused. Open-drain pin type retained; this exact marker is contention with the external GND PWR_FLAG, not a driven-high circuit."
+    ],
+    [
+      "pin_to_pin|254000|419100|82711c1e-7163-4ccd-9fb6-5a60e20408e1|944d0dde-0354-5fbe-8d7f-fd73f10709be|/4d146a28-be53-49f1-b1c6-484192820e45|/4d146a28-be53-49f1-b1c6-484192820e45|/4d146a28-be53-49f1-b1c6-484192820e45",
+      "LIS2DH12 SDO/SA0 is grounded to select I2C address 0x18 with CS high, as specified in ST datasheet section 6.1.1. Bidirectional type retained for its SPI role. Only this exact GND PWR_FLAG marker is excluded. Firmware follow-up: disable internal SDO pull-up using CTRL_REG0 SDO_PU_DISC while preserving required other bits."
+    ]
+  ],
+  "removed_erc_exclusion": [
+    "pin_to_pin|596900|1333500|97fe1358-9111-4cae-ace0-69f4a04c9922|944d0dde-0354-5fbe-8d7f-fd73f10709be|/4d146a28-be53-49f1-b1c6-484192820e45|/4d146a28-be53-49f1-b1c6-484192820e45|/4d146a28-be53-49f1-b1c6-484192820e45",
+    "LTR-390UV INT is an unused open-drain output tied to GND, with no pull-up or driven-high source on the output. Electrical inference: its sink cannot contend with GND; LiteOn identifies open-drain operation but an explicit recommendation to ground was not located. Interrupt functionality is unavailable; keep LS_INT_EN disabled. Only this exact GND PWR_FLAG marker is excluded."
+  ],
+  "green_finish_project_changes": {
+    "solder_mask_bridge": "error",
+    "solder_mask_to_copper_clearance": 0.09
+  },
+  "all_other_project_fields_identical": true,
+  "retained_rules": [
+    "J3 one millimetre pitch pad spacing",
+    "J4 one millimetre pitch pad spacing",
+    "JLC component lead hole annulus",
+    "JLC component lead hole to foreign copper",
+    "R23 pads beside VSTOR",
+    "U7 fine pitch lands"
+  ],
+  "removed_rule": [
+    "rule",
+    "U7 escape SCL to U6 SDA pad 6 - 0.12 mm",
+    [
+      "layer",
+      "F.Cu"
+    ],
+    [
+      "condition",
+      "(A.memberOfFootprint('U6') && A.Pad_Number == '6' && B.Type == 'Track' && B.NetName == 'SCL') || (B.memberOfFootprint('U6') && B.Pad_Number == '6' && A.Type == 'Track' && A.NetName == 'SCL')"
+    ],
+    [
+      "constraint",
+      "clearance",
+      [
+        "min",
+        "0.12mm"
+      ]
+    ]
+  ],
+  "added_rule": [
+    "rule",
+    "U6 AS7331 fine pitch lands",
+    [
+      "condition",
+      "A.Type == 'Pad' && B.Type == 'Pad' && A.memberOfFootprint('U6') && B.memberOfFootprint('U6')"
+    ],
+    [
+      "constraint",
+      "clearance",
+      [
+        "min",
+        "0.15mm"
+      ]
+    ]
+  ]
+}

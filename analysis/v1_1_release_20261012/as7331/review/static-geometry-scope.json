@@ -1,0 +1,9 @@
+{
+  "status": "PASS",
+  "baseline_sha256": "8e2f83797dd68195aa71b73fc252fe57e53ccd3683ef5f74739dc4d25d6ce8d5",
+  "candidate_sha256": "fdf54d973c3a7e75bdd574e9e05b083a9677dac9c9ef3fa1f300f9a7fad928f5",
+  "unchanged_board_graphics": 32,
+  "unchanged_zone_definitions": 4,
+  "unchanged_setup_and_general": true,
+  "note": "Raw board-level primitives and zone policy match; filled polygons intentionally excluded. Component-local graphics are reviewed separately."
+}

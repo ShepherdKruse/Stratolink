@@ -1,0 +1,28 @@
+{
+  "candidate_snapshot_sha256": "99f5b947a5eaef91c9474974dd417eac16904e2b2c8f8a138405b5a7cba1f73c",
+  "normalized_fixture_sha256": "37d935f461ce8c01975d45bcbfabba317991235739b465721864396ba069c0cd",
+  "changed_U6_pad_paste_flags": 16,
+  "whole_native_PCB_exact_except_U6_paste": true,
+  "paste": {
+    "F_Paste.gtp": {
+      "full_U6_apertures": 16,
+      "pilot_U6_apertures": 0,
+      "retained_artwork_commands": 1986,
+      "all_retained_paste_artwork_identical": true
+    },
+    "B_Paste.gbp": {
+      "full_U6_apertures": 0,
+      "pilot_U6_apertures": 0,
+      "retained_artwork_commands": 160,
+      "all_retained_paste_artwork_identical": true
+    }
+  },
+  "negative_cases_rejected": [
+    "missing_reference",
+    "empty_omission",
+    "already_suppressed_noop",
+    "explicit_footprint_paste_graphic"
+  ],
+  "source_hash_preserved": true,
+  "generator_sha256": "681dc14d210f626ee28f79636eb6da690cfe2abbf45891f4038bdecfd5ee7ea9"
+}

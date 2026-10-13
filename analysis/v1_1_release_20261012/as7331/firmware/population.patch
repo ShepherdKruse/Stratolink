@@ -1,0 +1,56 @@
+--- a/firmware/platformio.ini
++++ b/firmware/platformio.ini
+@@ -82,6 +82,17 @@
+     -D STRATOLINK_MIC_PRESENT=0
+     -D STRATOLINK_HW_V1_1=1
+ 
++; The final AS7331-layout v1.1 pilots omit U6 pending supply. This is the
++; selected build for that assembly variant; the earlier stratolink_v1_1
++; target above still expects LTR390 on its earlier six-pad layout.
++; Never use this DNP target with AS7331 fitted: its power-state containment
++; and multiband driver are not implemented by the legacy LTR390 interface.
++[env:stratolink_v1_1_uv_dnp]
++extends = env:stratolink_v1_1
++build_flags =
++    ${env:stratolink_v1_1.build_flags}
++    -D STRATOLINK_UV_SENSOR=0
++
+ ; Bench-soak build: identical flight firmware, but the Meshtastic-relay solar
+ ; gate is relaxed to 0 mV so the relay engages indoors on a PSU (no real sun)
+ ; for the long TTN+Meshtastic soak.  FLIGHT uses env:stratolink (3000 mV gate).
+--- a/firmware/src/sensor_ltr390.cpp
++++ b/firmware/src/sensor_ltr390.cpp
+@@ -1,4 +1,25 @@
+ #include "sensor_ltr390.h"
++
++/* Population is explicit in the AS7331-layout pilot build. Keep the default
++ * legacy driver for the flown v1 and earlier LTR390-layout v1.1 boards.
++ * 0 = no optical IC populated; 1 = LTR390. AS7331 needs its own driver and
++ * power-state containment, so no other value may silently use either path. */
++#ifndef STRATOLINK_UV_SENSOR
++#define STRATOLINK_UV_SENSOR 1
++#endif
++
++#if STRATOLINK_UV_SENSOR == 0
++
++/* Intentional DNP is an initialized, quiescent population. No sensor is
++ * enabled or probed, including after shared-I2C recovery. Failed reads leave
++ * the caller's freshly initialized telemetry sentinels untouched. */
++bool sensor_ltr390_init(void) { return true; }
++bool sensor_ltr390_quiesce(void) { return true; }
++bool sensor_ltr390_read_uv_index(uint8_t*) { return false; }
++bool sensor_ltr390_read_ambient_lux(uint16_t*) { return false; }
++
++#elif STRATOLINK_UV_SENSOR == 1
++
+ #include "ltr390_conversion.h"
+ #include "stratolink_pins.h"
+ #include <Wire.h>
+@@ -209,3 +230,7 @@
+     *lux = ltr390_lux_from_raw_1x_18bit(raw);
+     return true;
+ }
++
++#else
++#error "Unsupported UV population: AS7331 needs a dedicated validated driver"
++#endif /* STRATOLINK_UV_SENSOR */

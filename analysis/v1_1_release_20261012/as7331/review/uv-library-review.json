@@ -1,0 +1,76 @@
+{
+  "status": "PASS",
+  "source_hashes": {
+    "Stratolink_UV.kicad_sym": "16063d37f9584c864a2589881d927f8d866192cf1521cc60e69738a905187230",
+    "Stratolink_v1p1_U6_AS7331_OLGA16.kicad_mod": "dd991771e76105bfef10cb046bc9b54a1a0c8cc0c7b19c0338a8981ae8168923",
+    "stratolink.kicad_pcb": "9d63500a087ef8d345c2337942106e6704d32ded953846883454bfad718adf6c"
+  },
+  "symbol_primary_pin_semantics": {
+    "12": {
+      "name": "SDA",
+      "type": "bidirectional"
+    },
+    "13": {
+      "name": "SCL",
+      "type": "input"
+    },
+    "8": {
+      "name": "SYN",
+      "type": "input"
+    },
+    "7": {
+      "name": "A1",
+      "type": "input"
+    },
+    "14": {
+      "name": "A0",
+      "type": "input"
+    },
+    "4": {
+      "name": "REXT",
+      "type": "passive"
+    },
+    "3": {
+      "name": "VDDA",
+      "type": "power_in"
+    },
+    "10": {
+      "name": "VDDD",
+      "type": "power_in"
+    },
+    "9": {
+      "name": "READY",
+      "type": "output"
+    },
+    "1": {
+      "name": "VSSA",
+      "type": "power_in"
+    },
+    "2": {
+      "name": "VSSA",
+      "type": "power_in"
+    },
+    "5": {
+      "name": "VSSA",
+      "type": "power_in"
+    },
+    "6": {
+      "name": "VSSA",
+      "type": "power_in"
+    },
+    "15": {
+      "name": "VSSA",
+      "type": "power_in"
+    },
+    "16": {
+      "name": "VSSA",
+      "type": "power_in"
+    },
+    "11": {
+      "name": "VSSD",
+      "type": "power_in"
+    }
+  },
+  "board_and_library_pad_geometry_match": true,
+  "footprint_pad_count": 16
+}

@@ -1,0 +1,14 @@
+{
+  "build_green_mask.py": "be085cfea3b732acdb6501b133a596c6eaec71c0802b6a6c43863e8fdcea471a",
+  "verify_green_mask.py": "b37a43b1c22ff85b28ddbd06c04fc4843385f4868f85fd150a55da27aa5ff73a",
+  "normalize_finish.py": "227daba680e7409ee54460c2f9ce3f46cb09fce045b70915864d8b41ff86c6a9",
+  "refill_finish.py": "bfb81319041f7381cc0dab4635d753b5fefe47919231dc63f340ef0e21b0d7f5",
+  "verify_mask_artwork.py": "fd929bbcb3d7a257cae18e10b1b5077b7ce5a3c4e71dc854e32b78dfe215c76e",
+  "final-raw-patch.json": "392ced0272b0c1648906e4b8e4d24448e5566ed1c90d16ab396953c95a8f14b0",
+  "final-raw-verification.json": "4dfe888c9073dabb90f09e305a503bf8d3de1286ef401cc6e0f50b4d2baad671",
+  "final-normalization-proof.json": "20727b035cc62117adf746071179a6a046a7efb621ee03d04b20d39d9fc8fd49",
+  "final-saved-refill-proof.json": "68457074cc0732dfae71f5369620672492366b6e016d86abb0d0620488d5bfa4",
+  "final-saved-refill-drc.json": "da3016860ffc9b13520ac788fee1c78dbb515b986e878de0b539c1c42aeaf8b8",
+  "final-artwork-verification.json": "458a57597cdb88456c16166795b56b4c68fb56c363b466551c00798a42cd22e8",
+  "final-green-gate.json": "3c5559cc288f174c66ce843f1bbea56df9bd863432eb27fb73d2956a39694ee7"
+}
