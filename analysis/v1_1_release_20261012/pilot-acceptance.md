@@ -98,6 +98,9 @@ wire diameter/cuts, panel preparation and assembled mass with each result.
   charging states. Record converter activity with the observations. A calculated
   feed impedance or an antenna match measurement alone does not demonstrate
   improved reception or immunity to local interference.
+  Follow the [complete-assembly GNSS comparison](../v1_1_top_gnss_20261014/reception-test.md)
+  for matched satellite/elevation bins, satellites actually used, dilution of
+  precision and fix continuity. More visible satellites alone is not acceptance.
 - Compare orientation-dependent telemetry and supported receive/relay modes with
   the final panel/wire assembly. Record the regional LoRa cut (82 mm at 915 MHz,
   86 mm at 868 MHz or documented 83 mm compromise) and 48 mm GNSS starting cut
@@ -113,6 +116,9 @@ wire diameter/cuts, panel preparation and assembled mass with each result.
   diameter and apex geometry. Compare corner flex and rim wear with v1 under the
   same measured loads, including uneven and out-of-plane loading on sacrificial
   samples. Do not turn a finite-element plot into an asserted breaking load.
+  Check the upward GNSS wire against both bridle legs through expected sway and
+  stretch. A clear top-view drawing does not prove three-dimensional separation;
+  record the string's depth relative to the wire and allow for motion.
 - Repeat electrical and joint checks after representative handling and thermal
   cycles. The retained capacitor is rated −40 to +70°C; operation outside that
   range requires separate evidence. Altitude alone does not establish component

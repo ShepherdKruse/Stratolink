@@ -1,0 +1,12 @@
+# Whole-payload GNSS comparison
+
+Purpose: compare the top-feed v1.1 assembly against a working original board. CAD clearance, satellite count and receiver-reported accuracy are not a measurement of true position error.
+
+1. Record PCB hash, receiver firmware/configuration, enabled constellations, elevation mask, wire diameter and exposed length from feed, bend, panel wiring, capacitor and suspension. Use the same working flight settings on both boards. Confirm fresh receiver epochs; repeated cached positions from the earlier firmware fault must not enter the comparison.
+2. Fit the actual panels and suspension. Test outside with a clear sky, both payloads upright, sufficiently separated to avoid mutual antenna loading. Compare simultaneously where possible, then swap locations to separate fixture/environment effects. Record weather and nearby objects.
+3. Log receiver UTC, per-satellite constellation/ID, C/N0, elevation, azimuth and used-in-solution flags. Also record fix type/validity, number used, PDOP/HDOP/VDOP, hAcc/vAcc, acquisition time, interruptions and receiver rail voltage. Use a suitable GNSS reference or known static location to assess actual error; hAcc/vAcc are estimates, not ground truth. Do not enable new high-volume output in flight without reviewing bus/power costs.
+4. Compare shared satellites in matching epochs and elevation bins. Inspect azimuth dependence while rotating the complete payload through known orientations. Keep panels attached; a bare-board comparison alone misses the user's assembly constraint. Record whether the wire brushes the suspension or flexes toward a panel.
+5. Repeat radio-quiet and representative LoRa-transmit conditions, with converter/charging activity recorded. Repeat acquisition from the same declared reset/start state. Keep the test source within the harvester's permitted envelope. Check the filtered GNSS supply directly; C10/FB1 remain separate findings.
+6. Review differences against run-to-run scatter. Do not accept an apparent improvement solely because one sample sees more satellites or a model has a shorter feed. Define any numerical acceptance threshold from baseline repeatability and the mission's required position/time accuracy before committing to a larger batch.
+
+No performance measurements have been made by this document. It extends the existing [pilot acceptance procedure](../v1_1_release_20261012/pilot-acceptance.md).

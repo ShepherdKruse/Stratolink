@@ -1,0 +1,13 @@
+{
+  "recorded_at": "2026-10-14T15:15:32.191767-07:00",
+  "canonical_commit": "d689b09c5e33bcf2e397647753158843e5b43b6a",
+  "baseline_source": {
+    "stratolink.kicad_pcb": "8df85b3e4bdd546ec174bb9d7b9ee9d795d55d486a68e1e853aaf1b871f863d3",
+    "stratolink.kicad_sch": "a06740b35d07d7b81999f7ace2a7a7ff02e185ca3e46a664630bd4bbd00c54b7",
+    "stratolink.kicad_pro": "bf9f15d84333a0bf807aae42c27547ff4fccc275059965beaab0290773bdbdda",
+    "stratolink.kicad_dru": "071d900e34c4eb3d3f91003cc0698e261e7fe23beea7107c4db50a1bf60a5136"
+  },
+  "strict_project_sha256": "915d9f9c4bc8c1eb0866031bf765ff08dc41a7b5bea4fb158ca26c1032ef93cd",
+  "user_constraint": "Optimize GNSS reception and sky coverage including side solar panels. Use a top-mounted upward straight wire as the v1.1 baseline, allowing a nearby top location that gives a better feed and assembly fit; do not retain the left horizontal exit solely to simplify PCB routing.",
+  "limits": "Top location and upward wire direction are separate variables. No best reception claim follows from placement or satellite count alone."
+}

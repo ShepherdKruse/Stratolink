@@ -1,0 +1,32 @@
+{
+  "read_at": "2026-10-14T15:19:20.473435-07:00",
+  "sources": [
+    {
+      "url": "https://www.u-blox.com/en/use-case/tech/antennas",
+      "method": "in-app browser DOM; full reading capture retained in local scratch, not redistributed",
+      "date": "2023-08-11"
+    },
+    {
+      "url": "https://content.u-blox.com/sites/default/files/products/documents/GNSS-Antennas_AppNote_%28UBX-15030289%29.pdf",
+      "document": "UBX-15030289 R03",
+      "date": "2019-10-16",
+      "method": "in-app browser PDF navigation, text extraction fallback via web tool",
+      "sections": [
+        "2.3",
+        "3.3",
+        "4",
+        "5"
+      ]
+    },
+    {
+      "url": "https://its.ntia.gov/umbraco/surface/download/publication?reportNumber=NIJ-202-00.pdf",
+      "document": "NIJ Antenna System Guide",
+      "method": "web PDF extraction",
+      "sections": [
+        "4.2",
+        "4.3"
+      ]
+    }
+  ],
+  "excluded": "Search-engine AI summaries are not sources."
+}
