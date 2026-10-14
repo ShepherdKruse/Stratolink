@@ -24,7 +24,9 @@
 .fleet-layout[data-loading="true"] .dashboard-footer,
 .fleet-layout[data-loading="true"] .fleet-map { visibility: hidden; }
 .fleet-cards { padding: 14px var(--dashboard-gutter) 24px; overflow-y: auto; min-height: 0; }
-.dashboard-detail-content { --telemetry-gutter: 0px; flex: 1; min-height: 0; margin: 0 var(--dashboard-gutter) 14px; overflow-y: auto; background: var(--t-panel); }
+/* 6px of the gutter sits inside the scroller (padding, not margin) so the
+ * metric tiles' hover/selected wash can reach past the text unclipped. */
+.dashboard-detail-content { --telemetry-gutter: 0px; flex: 1; min-height: 0; margin: 0 calc(var(--dashboard-gutter) - 6px) 14px; padding-inline: 6px; overflow-y: auto; background: var(--t-panel); }
 .dashboard-detail-content .dashboard-device-title { margin-inline: 0; }
 .dashboard-detail-content .detail-owner { padding-inline: 0; }
 .dashboard-footer { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; margin-top: auto; flex-shrink: 0; padding: 14px var(--dashboard-gutter) 18px; font: 12px/1.4 Helvetica, Arial, sans-serif; letter-spacing: .02em; color: var(--t-text-3); }

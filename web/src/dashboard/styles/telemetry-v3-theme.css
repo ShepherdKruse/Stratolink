@@ -173,11 +173,13 @@
 .detail-status-text { min-width: 0; overflow: hidden; text-overflow: ellipsis; }
 .detail-status-time { flex: none; white-space: pre; }
 
-/* Tappable reading: charts its history in the trend slot. The negative margin
- * lets the hover/selected wash extend past the text without shifting layout. */
-.tlm-metric { appearance: none; border: 0; background: transparent; font: inherit; color: inherit; text-align: left; padding: 5px 6px; margin: -5px -6px; border-radius: 6px; cursor: pointer; transition: background-color 120ms ease; }
-.tlm-metric:hover { background: var(--t-panel-2); }
-.tlm-metric[aria-pressed="true"] { background: var(--t-accent-soft); }
+/* Tappable reading: charts its history in the trend slot. The hover/selected
+ * wash is background + a same-colour shadow spread, so it reaches past the
+ * text without shifting layout or widening the panel's scroll area (negative
+ * margins did, nudging the panel into a sideways scroll). */
+.tlm-metric { --wash: transparent; appearance: none; border: 0; padding: 0; font: inherit; color: inherit; text-align: left; border-radius: 1px; cursor: pointer; background: var(--wash); box-shadow: 0 0 0 6px var(--wash); transition: background-color 120ms ease, box-shadow 120ms ease; }
+.tlm-metric:hover { --wash: var(--t-panel-2); }
+.tlm-metric[aria-pressed="true"] { --wash: var(--t-accent-soft); }
 .tlm-metric:focus-visible, .tlm-chart-reset:focus-visible { outline: 2px solid var(--t-accent); outline-offset: 1px; }
 .tlm-chart-reset { appearance: none; border: 0; background: transparent; padding: 0 2px; font-size: 10px; line-height: 1; color: var(--t-text-3); cursor: pointer; }
 .tlm-chart-reset:hover { color: var(--t-text); }
