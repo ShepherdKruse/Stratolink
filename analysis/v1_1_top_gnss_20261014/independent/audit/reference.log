@@ -1,0 +1,61 @@
+{
+  "pcb_sha256": "88f82c85d2d47b4aea2e7d7d2827c4a92c339788cc0d9c880dd6342ee0440c0a",
+  "geometry_sha256": "e62a4f5d8a47ab6d63ea0ae53b1d1147ad94a0b2e07af8ed9f58747f3a143dc3",
+  "whole_layer_extraction_check": {
+    "F.Cu": {
+      "missing_area_beyond_5um_mm2": 0.0,
+      "extra_area_beyond_5um_mm2": 0.0,
+      "raw_symmetric_difference_mm2": 0.46613295108191194
+    },
+    "B.Cu": {
+      "missing_area_beyond_5um_mm2": 0.0,
+      "extra_area_beyond_5um_mm2": 0.0,
+      "raw_symmetric_difference_mm2": 0.4290425212824759
+    }
+  },
+  "front_rf_item_counts": {
+    "PCB_ARC": 8,
+    "PCB_TRACK": 9,
+    "pad": 3
+  },
+  "trace_centerline_length_mm": 16.96331878752859,
+  "native_trace_length_sum_mm": 16.963388438949114,
+  "centerline_missing_rear_GND_mm": 0.900500000000001,
+  "centerline_missing_rear_GND_outside_antenna_transition_mm": 0.0005000000000023874,
+  "receiver_ground_pads_share_return_network": true,
+  "all_corridor_ground_connected_to_receiver": true,
+  "limits": [
+    "Native copper polygons include plated-pad/via drill interiors; physical drilling is separately recorded by the extractor. The antenna PTH and its clearance transition are reported independently rather than counted as a continuous reference plane.",
+    "Polygon approximation tolerance is 2 um per native item, with a 5 um reconciliation tolerance against the whole-layer converter. Tiny boundary discrepancies are not guaranteed manufacturing margins.",
+    "Transverse front-ground sampling has at most 25 um spacing along each actual trace/arc. Pad/ESD/antenna transitions are reported separately. It cannot rule out an unsampled narrower interruption or establish a continuous guard from graph connectivity alone.",
+    "A connected finite return and full projected reference do not establish 50 ohm impedance, return-current distribution, antenna matching, noise isolation or RF performance."
+  ]
+}
+{
+  "trace_outside_pad_transitions": {
+    "sample_count": 561,
+    "left": {
+      "no_ground_within_1_5mm_count": 0,
+      "maximum_first_ground_gap_mm": 0.1754317833533348,
+      "minimum_first_ground_width_mm": 1.3245682166466672
+    },
+    "right": {
+      "no_ground_within_1_5mm_count": 0,
+      "maximum_first_ground_gap_mm": 0.16723007032295653,
+      "minimum_first_ground_width_mm": 0.19899999999999807
+    }
+  },
+  "pad_transitions": {
+    "sample_count": 122,
+    "left": {
+      "no_ground_within_1_5mm_count": 0,
+      "maximum_first_ground_gap_mm": 0.6754999999999924,
+      "minimum_first_ground_width_mm": 0.8245000000000076
+    },
+    "right": {
+      "no_ground_within_1_5mm_count": 0,
+      "maximum_first_ground_gap_mm": 0.6754999999999995,
+      "minimum_first_ground_width_mm": 0.8245000000000005
+    }
+  }
+}

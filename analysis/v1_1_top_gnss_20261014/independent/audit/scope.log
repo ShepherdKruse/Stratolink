@@ -1,0 +1,86 @@
+{
+  "before_sha256": "8df85b3e4bdd546ec174bb9d7b9ee9d795d55d486a68e1e853aaf1b871f863d3",
+  "after_sha256": "88f82c85d2d47b4aea2e7d7d2827c4a92c339788cc0d9c880dd6342ee0440c0a",
+  "declared_changed_poses": [
+    {
+      "ref": "AE2",
+      "before": {
+        "x_mm": 55.3,
+        "y_mm": 47.85,
+        "angle_deg": 180.0,
+        "layer": "F.Cu"
+      },
+      "after": {
+        "x_mm": 62.882,
+        "y_mm": 33.218,
+        "angle_deg": 90.0,
+        "layer": "F.Cu"
+      }
+    },
+    {
+      "ref": "D3",
+      "before": {
+        "x_mm": 58.0,
+        "y_mm": 45.05,
+        "angle_deg": 270.0,
+        "layer": "F.Cu"
+      },
+      "after": {
+        "x_mm": 58.8,
+        "y_mm": 42.0,
+        "angle_deg": 0.0,
+        "layer": "F.Cu"
+      }
+    },
+    {
+      "ref": "L1",
+      "before": {
+        "x_mm": 60.103,
+        "y_mm": 38.1865,
+        "angle_deg": 90.0,
+        "layer": "B.Cu"
+      },
+      "after": {
+        "x_mm": 60.603,
+        "y_mm": 38.1865,
+        "angle_deg": 90.0,
+        "layer": "B.Cu"
+      }
+    }
+  ],
+  "declared_exact_node_edits": [],
+  "all_other_footprints_exactly_unchanged_except_declared_node_edits": 65,
+  "physical_pad_uuid_net_local_shape_and_transform_checks": 259,
+  "logical_pad_connectivity_checks": 250,
+  "native_opens": [
+    0,
+    0
+  ],
+  "board_setup_net_outline_primitives_unchanged": true,
+  "source_bytes_unchanged": true,
+  "limitation": "Rigid pad geometry and logical connectivity are not physical collision, RF performance, thermal or assembly qualification; review complementary mechanical and RF reports."
+}
+03:47:05 PM: Debug: Adding duplicate image handler for 'PNG file'
+03:47:05 PM: Debug: Adding duplicate image handler for 'JPEG file'
+03:47:05 PM: Debug: Adding duplicate image handler for 'TIFF file'
+03:47:05 PM: Debug: Adding duplicate image handler for 'GIF file'
+03:47:05 PM: Debug: Adding duplicate image handler for 'PNM file'
+03:47:05 PM: Debug: Adding duplicate image handler for 'PCX file'
+03:47:05 PM: Debug: Adding duplicate image handler for 'IFF file'
+03:47:05 PM: Debug: Adding duplicate image handler for 'Windows icon file'
+03:47:05 PM: Debug: Adding duplicate image handler for 'Windows cursor file'
+03:47:05 PM: Debug: Adding duplicate image handler for 'Windows animated cursor file'
+03:47:05 PM: Debug: Adding duplicate image handler for 'TGA file'
+03:47:05 PM: Debug: Adding duplicate image handler for 'XPM file'
+03:47:05 PM: Debug: Adding duplicate image handler for 'PNG file'
+03:47:05 PM: Debug: Adding duplicate image handler for 'JPEG file'
+03:47:05 PM: Debug: Adding duplicate image handler for 'TIFF file'
+03:47:05 PM: Debug: Adding duplicate image handler for 'GIF file'
+03:47:05 PM: Debug: Adding duplicate image handler for 'PNM file'
+03:47:05 PM: Debug: Adding duplicate image handler for 'PCX file'
+03:47:05 PM: Debug: Adding duplicate image handler for 'IFF file'
+03:47:05 PM: Debug: Adding duplicate image handler for 'Windows icon file'
+03:47:05 PM: Debug: Adding duplicate image handler for 'Windows cursor file'
+03:47:05 PM: Debug: Adding duplicate image handler for 'Windows animated cursor file'
+03:47:05 PM: Debug: Adding duplicate image handler for 'TGA file'
+03:47:05 PM: Debug: Adding duplicate image handler for 'XPM file'
