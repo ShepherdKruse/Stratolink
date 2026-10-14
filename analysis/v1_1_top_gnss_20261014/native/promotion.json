@@ -1,0 +1,11 @@
+{
+  "previous_pcb_sha256": "8df85b3e4bdd546ec174bb9d7b9ee9d795d55d486a68e1e853aaf1b871f863d3",
+  "pcb_sha256": "88f82c85d2d47b4aea2e7d7d2827c4a92c339788cc0d9c880dd6342ee0440c0a",
+  "local_project_preserved_sha256": "bf9f15d84333a0bf807aae42c27547ff4fccc275059965beaab0290773bdbdda",
+  "strict_project_sha256": "915d9f9c4bc8c1eb0866031bf765ff08dc41a7b5bea4fb158ca26c1032ef93cd",
+  "changed_native_files": [
+    "hardware/pcb/stratolink.kicad_pcb"
+  ],
+  "verification": "Root fresh strict native DRC/ERC and inspected renders; independent pad/net, ground/reference, thermals and bounded copper-screen checks accepted before promotion.",
+  "editor": "Disk file updated; open editor must reload. No GUI unsaved state was discarded."
+}

@@ -1,0 +1,83 @@
+{
+  "pcb_sha256": "88f82c85d2d47b4aea2e7d7d2827c4a92c339788cc0d9c880dd6342ee0440c0a",
+  "schematic_sha256": "a06740b35d07d7b81999f7ace2a7a7ff02e185ca3e46a664630bd4bbd00c54b7",
+  "strict_project_sha256": "915d9f9c4bc8c1eb0866031bf765ff08dc41a7b5bea4fb158ca26c1032ef93cd",
+  "rules_sha256": "071d900e34c4eb3d3f91003cc0698e261e7fe23beea7107c4db50a1bf60a5136",
+  "native_drc": {
+    "violations": 0,
+    "opens": 0,
+    "schematic_parity": 0,
+    "exclusions": [],
+    "ignored_checks": [
+      {
+        "description": "Footprint has no courtyard defined",
+        "key": "missing_courtyard"
+      },
+      {
+        "description": "Track endpoint not centered on via",
+        "key": "track_not_centered_on_via"
+      },
+      {
+        "description": "Tuning profile track geometries",
+        "key": "tuning_profile_track_geometries"
+      },
+      {
+        "description": "Footprint doesn't match symbol's footprint filters",
+        "key": "footprint_filters_mismatch"
+      },
+      {
+        "description": "PTH inside courtyard",
+        "key": "pth_inside_courtyard"
+      },
+      {
+        "description": "NPTH inside courtyard",
+        "key": "npth_inside_courtyard"
+      },
+      {
+        "description": "Footprint component type doesn't match footprint pads",
+        "key": "footprint_type_mismatch"
+      }
+    ]
+  },
+  "native_erc": {
+    "unexcluded": 0,
+    "documented_exclusions": [
+      [
+        "pin_to_pin|533400|1600200|d24f236f-77e7-440c-9378-f49a6d546306|944d0dde-0354-5fbe-8d7f-fd73f10709be|/4d146a28-be53-49f1-b1c6-484192820e45|/4d146a28-be53-49f1-b1c6-484192820e45|/4d146a28-be53-49f1-b1c6-484192820e45",
+        "TMP117 ALERT is intentionally unavailable and grounded. TI TMP117 datasheet section 8.2.1 explicitly permits grounding ALERT when unused. Open-drain pin type retained; this exact marker is contention with the external GND PWR_FLAG, not a driven-high circuit."
+      ],
+      [
+        "pin_to_pin|254000|419100|82711c1e-7163-4ccd-9fb6-5a60e20408e1|944d0dde-0354-5fbe-8d7f-fd73f10709be|/4d146a28-be53-49f1-b1c6-484192820e45|/4d146a28-be53-49f1-b1c6-484192820e45|/4d146a28-be53-49f1-b1c6-484192820e45",
+        "LIS2DH12 SDO/SA0 is grounded to select I2C address 0x18 with CS high, as specified in ST datasheet section 6.1.1. Bidirectional type retained for its SPI role. Only this exact GND PWR_FLAG marker is excluded. Firmware follow-up: disable internal SDO pull-up using CTRL_REG0 SDO_PU_DISC while preserving required other bits."
+      ]
+    ],
+    "ignored_checks": [
+      {
+        "description": "Global label only appears once in the schematic",
+        "key": "single_global_label"
+      },
+      {
+        "description": "Four connection points are joined together",
+        "key": "four_way_junction"
+      },
+      {
+        "description": "SPICE model issue",
+        "key": "simulation_model_issue"
+      },
+      {
+        "description": "Assigned footprint doesn't match footprint filters",
+        "key": "footprint_filter"
+      }
+    ]
+  },
+  "evidence": {
+    "root-drc.json": "4a818d00c56971e2baadeed61073a6e217c4a68e57efc886a3d0ea9f4896f874",
+    "root-erc.json": "91025817246d6e61348f69a751f625f77a8fe7c29ff590a9b5e31759b5ce221c",
+    "visual/assembly.png": "bb72a1935cd5dd976efe9091b05e109e09b87d5b531e7995edc3377e3e78a572",
+    "visual/bottom.png": "c0621df2ffdc17f29fdf36275b902dba7c74d03964dc972a1578bcbe166c76c8",
+    "visual/top.png": "d9945afe6d9e1b3672b43dcfd4c8780117ffb5c82ba14b34f32b2a16e8a85c5c"
+  },
+  "visual_review": "Root inspected native top, rear and angled assembly renders. Original top GNSS hole and upward 48 mm wire, rounded feed, intact shifted copper branding, side solar mounts, green mask, absent silk and retained flat rear capacitor are visible. Full CAD includes U6; pilots omit U6. Close views crop antenna wires and panels; assembly view crops the lower LoRa wire.",
+  "limits": "Nominal 3D geometry and native checks do not qualify actual solder/placement tolerances, thin-board strength, RF impedance or flight behavior.",
+  "source_unchanged_after_checks": true
+}
