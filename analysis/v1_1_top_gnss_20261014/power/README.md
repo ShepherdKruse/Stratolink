@@ -1,0 +1,30 @@
+# Power review of the restored top GNSS layout
+
+The final layout preserves the converter topology and local input-capacitor connections. L1 moves **0.5 mm right on the rear**, shortening its terminal routing. Removing the redundant left solar branch increases the modeled supply resistance by about **38.7 mΩ**, or **7.75 mV at an illustrative 200 mA**. This is a small DC penalty, not an EMI qualification. The changed balancer crossings and the assembled power circuit still need the normal bench checks.
+
+This report binds to PCB SHA256 `88f82c85d2d47b4aea2e7d7d2827c4a92c339788cc0d9c880dd6342ee0440c0a`, compared with the previous left-exit PCB `8df85b3e4bdd546ec174bb9d7b9ee9d795d55d486a68e1e853aaf1b871f863d3`. The reviewer did not author the functional top-RF/power rerouting. The reviewer subsequently authored the three local copper fillets, source-zone fleck exclusions and thermal-preserving zone trim recorded in the [cleanup ledger](../fabrication/cleanup-ledger.json). No canonical CAD or Git changes were made by this reviewer.
+
+Native pads identify L1.2 as **+SOLAR**, L1.1 as **LBOOST**, C2.1 as **+SOLAR**, C2.2 as **GND**, and U1.2 as **VIN_DC/+SOLAR**. The retained source path now feeds C2 from the upper/right branch. Both C2-to-L1 and C2-to-VIN connections remain. U1, U8, C2/C3/C4/C6, L2, C22, R24/R25/R26 and C5 retain their exact footprints, poses and fields. L1 remains the same Coilcraft LPS4018-223MRC, with unchanged pad shapes/nets. Native DRC reports zero violations, opens and schematic-parity issues.
+
+| Local power geometry | Before | Final |
+|---|---:|---:|
+| L1 rear center X | 60.103 mm | 60.603 mm |
+| LBOOST routed centerline | 6.9668 mm | 6.4668 mm |
+| LBOOST trace width | 0.35 mm | 0.35 mm |
+| LBOOST centerline outside its same-net pads | 5.2533 mm | 5.2305 mm |
+| C2-to-L1 terminal-center route | 4.5759 mm | 4.0759 mm |
+| Projected local loop surrogate | 13.4368 mm² | 11.6718 mm² |
+
+Only the LBOOST terminal segment ending at L1 changes: track `e8c3e310-f44f-4eb9-9b74-4cd2b048ffe8` retains its start `(61.0885,39.9515)` and 0.35 mm width; its endpoint moves from X60.103 to X60.603. Most centerline shortening is inside the large custom land, so it does not establish a proportional improvement in noise or inductance. The loop surrogate follows the actual input/switch centerlines, a straight winding projection and a straight U1/C2 ground closure. It is a geometric comparison, not the physical winding/current loop or a field simulation. C2-to-VIN copper and all LBUCK tracks remain exact.
+
+The final L1 courtyard has no other component-courtyard overlap. Its nearest relevant custom-land gaps are 0.839 mm to C2.GND, 0.892 mm to C2.+SOLAR and 0.756 mm from its input land to R25.GND. Those are copper-envelope distances, not solder-placement tolerances. The same component, body model and terminal pattern are retained.
+
+The source-resistance model uses actual 0.25/0.5 mm track widths, nominal **35 µm copper**, and `R = ρL/(wt)` with `ρ20 = 1.724×10⁻⁸ Ω·m`. Between the shared junction `(54.781,58.032)` and the old L1 input center, the left/right paths were 47.33/72.90 mΩ in parallel. Including the old local path to C2 gives **34.10 mΩ**. The final 60.557 mm upper/right route to C2 gives **72.82 mΩ**. The difference is **38.73 mΩ**, adding 3.87/7.75 mV at conditional 100/200 mA. A simple 0.00393/K copper coefficient gives 9.72 mV at 200 mA and 85°C. These currents are not measured panel outputs. Pad spreading, solder, vias, copper-thickness variation and current crowding are excluded; common connector-to-junction resistance remains additional. [Source calculation and route UUIDs](source-resistance.json)
+
+The C2.GND and U1 ground pad remain connected within the local rear neighborhood. Their existing **0.25 mm rear return route remains exact**: U1.1 `(65.540999,38.814998)` through `(65.315857,38.814998)` and `(64.358855,39.772)` to `(63.951,39.772)` inside C2.GND. This 1.9864 mm path remains even after removing the incidental west-side fill. The thermal-preserving trim keeps C1/C2/R2 outside the new solid RF-zone envelope, preserving their inherited 0.5 mm thermal neighborhoods; R25.GND stays intentionally solid for RF reference. In the bounded C2/U1 window, rear ground decreases from 9.509 to 7.112 mm² and front ground from 13.541 to 9.206 mm². The meaningful front loss is along the new quiet balancer descent corridor, not the U1 thermal-via array. Ground area alone does not determine loop impedance. The independent whole-board connectivity/reference review is required alongside this local geometry check. [Ground comparison](ground-review.json)
+
+The balancer topology, high-impedance half-voltage reference and local supply bypass are preserved. Final SC_BAL_OUT and VBAT front descents each cross the rear LBOOST strip by **0.0525 mm²** in projection. Previously SC_BAL_OUT overlapped 0.1669 mm² of the switch land, while VBAT did not overlap it. SC_HALF_REF has zero projected switch overlap before and after. This is a bounded coupling change, not proof of a fault or of negligible noise. Verify stable midpoint regulation and power rails during cold start, GNSS acquisition and radio bursts on the assembled pilot. [Balancer geometry](balancer-review.json)
+
+TI's [BQ25570 layout guidance, §10.1](https://www.ti.com/lit/ds/symlink/bq25570.pdf) supports keeping the high-frequency power loops short and the capacitors local. Existing capacitor DC-bias/effective-capacitance questions remain in the [prior power review](../../v1_1_peer_review_20261014/power/README.md); this routing change does not resolve them or justify deleting C8/C21.
+
+Reproduction: run `snapshot.py PCB OUTPUT.json` using KiCad's bundled Python, then run `review_power_delta.py`, `quantify_loop.py`, `source_resistance.py`, `balancer_check.py` and `check_local_ground.py` with `analysis/.venv/bin/python`, each accepting `--baseline baseline.json --candidate final-native.json --output REPORT.json`. Inputs retain complete native geometry and source hashes. Scripts are read-only with respect to CAD.

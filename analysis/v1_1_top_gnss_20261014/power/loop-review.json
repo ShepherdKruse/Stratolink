@@ -1,0 +1,137 @@
+{
+  "before": {
+    "sha256": "8df85b3e4bdd546ec174bb9d7b9ee9d795d55d486a68e1e853aaf1b871f863d3",
+    "L1_center_mm": [
+      60.103,
+      38.1865
+    ],
+    "LBOOST_centerline_mm": 6.966752072574521,
+    "LBOOST_widths_mm": [
+      0.35
+    ],
+    "LBOOST_trace_resistance_ohm": 0.009804637202545693,
+    "LBOOST_centerline_outside_pads_mm": 5.253264907854785,
+    "C2_to_L1_pad_center_routed_length_mm": 4.575852485596851,
+    "projected_local_loop_surrogate_area_mm2": 13.436753543999998,
+    "projected_loop_vertices_mm": [
+      [
+        63.873,
+        38.367
+      ],
+      [
+        62.952,
+        38.367
+      ],
+      [
+        61.0065,
+        36.4215
+      ],
+      [
+        60.103,
+        36.4215
+      ],
+      [
+        60.103,
+        39.9515
+      ],
+      [
+        61.0885,
+        39.9515
+      ],
+      [
+        61.906,
+        40.769
+      ],
+      [
+        64.367,
+        40.769
+      ],
+      [
+        65.671,
+        39.465
+      ],
+      [
+        66.191,
+        39.465
+      ],
+      [
+        65.540999,
+        38.814998
+      ],
+      [
+        63.873,
+        39.917
+      ]
+    ]
+  },
+  "after": {
+    "sha256": "88f82c85d2d47b4aea2e7d7d2827c4a92c339788cc0d9c880dd6342ee0440c0a",
+    "L1_center_mm": [
+      60.603,
+      38.1865
+    ],
+    "LBOOST_centerline_mm": 6.466752072574521,
+    "LBOOST_widths_mm": [
+      0.35
+    ],
+    "LBOOST_trace_resistance_ohm": 0.009100963733157939,
+    "LBOOST_centerline_outside_pads_mm": 5.2305148237561125,
+    "C2_to_L1_pad_center_routed_length_mm": 4.075852485596851,
+    "projected_local_loop_surrogate_area_mm2": 11.671753543999998,
+    "projected_loop_vertices_mm": [
+      [
+        63.873,
+        38.367
+      ],
+      [
+        62.952,
+        38.367
+      ],
+      [
+        61.0065,
+        36.4215
+      ],
+      [
+        60.603,
+        36.4215
+      ],
+      [
+        60.603,
+        39.9515
+      ],
+      [
+        61.0885,
+        39.9515
+      ],
+      [
+        61.906,
+        40.769
+      ],
+      [
+        64.367,
+        40.769
+      ],
+      [
+        65.671,
+        39.465
+      ],
+      [
+        66.191,
+        39.465
+      ],
+      [
+        65.540999,
+        38.814998
+      ],
+      [
+        63.873,
+        39.917
+      ]
+    ]
+  },
+  "notes": [
+    "The projected loop polygon uses actual routed +SOLAR and LBOOST centerlines, straight terminal-to-terminal winding projection, and straight U1/C2 ground/chip closure. It is a geometric comparison only, not measured magnetic loop area, inductance, or EMI simulation.",
+    "Actual current spreads in wide custom L1 pads, the inductor winding, the chip and ground fill. Exposed centerline metric excludes same-net pad polygons.",
+    "C2-to-VIN local trace geometry and all LBUCK tracks are exact unchanged; C2/U1/GND-pad placements are unchanged."
+  ]
+}

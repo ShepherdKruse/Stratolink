@@ -1,0 +1,38 @@
+{
+  "source_sha256": "7e401900a78b7d88c4e688fdbe58039308113fc0308e5125366d0a98c592a502",
+  "expected_final_sha256": "88f82c85d2d47b4aea2e7d7d2827c4a92c339788cc0d9c880dd6342ee0440c0a",
+  "actual_final_sha256": "88f82c85d2d47b4aea2e7d7d2827c4a92c339788cc0d9c880dd6342ee0440c0a",
+  "exact_reproduction": true,
+  "source_bytes_unchanged": true,
+  "drc_counts": {
+    "violations": 0,
+    "unconnected_items": 0,
+    "schematic_parity": 0
+  },
+  "commands": [
+    [
+      "/Applications/KiCad/KiCad.app/Contents/Frameworks/Python.framework/Versions/3.9/bin/python3.9",
+      "/Users/twarn/Repositories/Stratolink/analysis/v1_1_top_gnss_20261014/fabrication/apply_cleanup.py",
+      "--pcb",
+      "/Users/twarn/Repositories/ai-working/scratch/stratolink-top-gnss-20261014/cleanup-portable-reproduction/stratolink.kicad_pcb",
+      "--plan",
+      "/Users/twarn/Repositories/Stratolink/analysis/v1_1_top_gnss_20261014/fabrication/cleanup-plan.json",
+      "--ledger",
+      "/Users/twarn/Repositories/ai-working/scratch/stratolink-top-gnss-20261014/cleanup-portable-reproduction/cleanup-ledger.json"
+    ],
+    [
+      "/Applications/KiCad/KiCad.app/Contents/MacOS/kicad-cli",
+      "pcb",
+      "drc",
+      "--refill-zones",
+      "--save-board",
+      "--schematic-parity",
+      "--severity-all",
+      "--format",
+      "json",
+      "--output",
+      "/Users/twarn/Repositories/ai-working/scratch/stratolink-top-gnss-20261014/cleanup-portable-reproduction/drc.json",
+      "/Users/twarn/Repositories/ai-working/scratch/stratolink-top-gnss-20261014/cleanup-portable-reproduction/stratolink.kicad_pcb"
+    ]
+  ]
+}

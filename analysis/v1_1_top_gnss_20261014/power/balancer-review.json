@@ -1,0 +1,487 @@
+{
+  "snapshots": [
+    {
+      "sha256": "8df85b3e4bdd546ec174bb9d7b9ee9d795d55d486a68e1e853aaf1b871f863d3",
+      "opposite_face_switch_overlap": [
+        {
+          "net": "/SC_BAL_OUT",
+          "projected_overlap_mm2": 0.16691478900071133,
+          "bounds_mm": [
+            60.824999999999996,
+            39.21162559108106,
+            60.975,
+            40.3975
+          ]
+        },
+        {
+          "net": "/VBAT",
+          "projected_overlap_mm2": 0.0,
+          "bounds_mm": null
+        },
+        {
+          "net": "/SC_HALF_REF",
+          "projected_overlap_mm2": 0.0,
+          "bounds_mm": null
+        }
+      ],
+      "local_feedback_route_length_mm": 7.574839273758898,
+      "local_feedback_route_tracks": [
+        {
+          "uuid": "049f1ec2-6d90-583e-80e0-1dbad83ea012",
+          "kind": "PCB_TRACK",
+          "net": "/SC_BAL_OUT",
+          "layer": "B.Cu",
+          "start": [
+            56.65,
+            36.5
+          ],
+          "end": [
+            57.5,
+            35.65
+          ],
+          "width": 0.15,
+          "length": 1.2020815280171309
+        },
+        {
+          "uuid": "06083373-b5b1-5808-a562-89b6babb1ab2",
+          "kind": "PCB_TRACK",
+          "net": "/SC_BAL_OUT",
+          "layer": "B.Cu",
+          "start": [
+            54.5125,
+            37.05
+          ],
+          "end": [
+            54.5,
+            37.05
+          ],
+          "width": 0.15,
+          "length": 0.0125
+        },
+        {
+          "uuid": "106120aa-98f7-5cda-afda-e030bb1c570c",
+          "kind": "PCB_TRACK",
+          "net": "/SC_BAL_OUT",
+          "layer": "B.Cu",
+          "start": [
+            54.55,
+            37.0
+          ],
+          "end": [
+            54.7,
+            37.0
+          ],
+          "width": 0.15,
+          "length": 0.15
+        },
+        {
+          "uuid": "155b1f6c-0367-51e4-8946-24940734ef4e",
+          "kind": "PCB_TRACK",
+          "net": "/SC_BAL_OUT",
+          "layer": "B.Cu",
+          "start": [
+            55.15,
+            36.7
+          ],
+          "end": [
+            55.85,
+            36.7
+          ],
+          "width": 0.15,
+          "length": 0.7
+        },
+        {
+          "uuid": "4a0c28a3-f761-5f60-9d0d-5f7e4be25a65",
+          "kind": "PCB_TRACK",
+          "net": "/SC_BAL_OUT",
+          "layer": "B.Cu",
+          "start": [
+            55.85,
+            36.7
+          ],
+          "end": [
+            56.0,
+            36.55
+          ],
+          "width": 0.15,
+          "length": 0.21213203435596428
+        },
+        {
+          "uuid": "4bb66fb7-8480-5071-80f9-c4d8ee812d09",
+          "kind": "PCB_TRACK",
+          "net": "/SC_BAL_OUT",
+          "layer": "B.Cu",
+          "start": [
+            56.8,
+            35.15
+          ],
+          "end": [
+            56.7875,
+            35.15
+          ],
+          "width": 0.15,
+          "length": 0.0125
+        },
+        {
+          "uuid": "53d3804a-0309-5a8c-b9c0-bcbda69523ea",
+          "kind": "PCB_TRACK",
+          "net": "/SC_BAL_OUT",
+          "layer": "B.Cu",
+          "start": [
+            55.2,
+            36.65
+          ],
+          "end": [
+            55.25,
+            36.6
+          ],
+          "width": 0.15,
+          "length": 0.07071067811865477
+        },
+        {
+          "uuid": "5840af72-87f5-5279-99cb-0f1d26a98d06",
+          "kind": "PCB_TRACK",
+          "net": "/SC_BAL_OUT",
+          "layer": "B.Cu",
+          "start": [
+            56.75,
+            35.15
+          ],
+          "end": [
+            56.8,
+            35.15
+          ],
+          "width": 0.15,
+          "length": 0.05
+        },
+        {
+          "uuid": "7439a54f-a7dc-542e-a889-c7c2abab39f7",
+          "kind": "PCB_TRACK",
+          "net": "/SC_BAL_OUT",
+          "layer": "B.Cu",
+          "start": [
+            56.7875,
+            35.15
+          ],
+          "end": [
+            57.5,
+            35.65
+          ],
+          "width": 0.35,
+          "length": 0.8704345179276842
+        },
+        {
+          "uuid": "82a3f0e5-8d9f-5c51-a719-1a0f3c436af0",
+          "kind": "PCB_TRACK",
+          "net": "/SC_BAL_OUT",
+          "layer": "B.Cu",
+          "start": [
+            54.5,
+            37.05
+          ],
+          "end": [
+            54.55,
+            37.0
+          ],
+          "width": 0.15,
+          "length": 0.07071067811865477
+        },
+        {
+          "uuid": "85e4818b-7c2e-51aa-90c2-d23a52db4ae1",
+          "kind": "PCB_TRACK",
+          "net": "/SC_BAL_OUT",
+          "layer": "B.Cu",
+          "start": [
+            54.7,
+            37.0
+          ],
+          "end": [
+            55.05,
+            36.65
+          ],
+          "width": 0.15,
+          "length": 0.4949747468305833
+        },
+        {
+          "uuid": "9a069672-6ffd-5cc2-8d2b-5b570d1ac436",
+          "kind": "PCB_TRACK",
+          "net": "/SC_BAL_OUT",
+          "layer": "B.Cu",
+          "start": [
+            56.0,
+            36.55
+          ],
+          "end": [
+            56.05,
+            36.55
+          ],
+          "width": 0.15,
+          "length": 0.05
+        },
+        {
+          "uuid": "a6b73d96-5fc4-5068-9240-70f3b3935da4",
+          "kind": "PCB_TRACK",
+          "net": "/SC_BAL_OUT",
+          "layer": "B.Cu",
+          "start": [
+            54.5125,
+            37.05
+          ],
+          "end": [
+            54.5,
+            37.05
+          ],
+          "width": 0.15,
+          "length": 0.0125
+        },
+        {
+          "uuid": "ab1c0754-8494-5f60-b6b9-304d2573794a",
+          "kind": "PCB_TRACK",
+          "net": "/SC_BAL_OUT",
+          "layer": "B.Cu",
+          "start": [
+            56.05,
+            36.55
+          ],
+          "end": [
+            56.1,
+            36.5
+          ],
+          "width": 0.15,
+          "length": 0.07071067811865477
+        },
+        {
+          "uuid": "ae1895cc-4ad6-56b6-a036-5b23628d39ad",
+          "kind": "PCB_TRACK",
+          "net": "/SC_BAL_OUT",
+          "layer": "B.Cu",
+          "start": [
+            54.5,
+            37.05
+          ],
+          "end": [
+            54.8,
+            37.05
+          ],
+          "width": 0.15,
+          "length": 0.3
+        },
+        {
+          "uuid": "bb6406a3-d2c4-5483-adaf-42b53c04f6f3",
+          "kind": "PCB_TRACK",
+          "net": "/SC_BAL_OUT",
+          "layer": "B.Cu",
+          "start": [
+            56.1,
+            36.5
+          ],
+          "end": [
+            56.65,
+            36.5
+          ],
+          "width": 0.15,
+          "length": 0.55
+        },
+        {
+          "uuid": "bc847b07-195f-5856-9f28-c2adcc83291e",
+          "kind": "PCB_TRACK",
+          "net": "/SC_BAL_OUT",
+          "layer": "B.Cu",
+          "start": [
+            55.3,
+            36.6
+          ],
+          "end": [
+            56.75,
+            35.15
+          ],
+          "width": 0.15,
+          "length": 2.050609665440988
+        },
+        {
+          "uuid": "d6c23cb0-9200-59f0-8f5f-20c619a4bb54",
+          "kind": "PCB_TRACK",
+          "net": "/SC_BAL_OUT",
+          "layer": "B.Cu",
+          "start": [
+            54.8,
+            37.05
+          ],
+          "end": [
+            55.15,
+            36.7
+          ],
+          "width": 0.15,
+          "length": 0.4949747468305833
+        },
+        {
+          "uuid": "df402761-a015-55cb-846f-6cf90bd4747c",
+          "kind": "PCB_TRACK",
+          "net": "/SC_BAL_OUT",
+          "layer": "B.Cu",
+          "start": [
+            55.25,
+            36.6
+          ],
+          "end": [
+            55.3,
+            36.6
+          ],
+          "width": 0.15,
+          "length": 0.05
+        },
+        {
+          "uuid": "e299e300-b992-54a5-b522-d3d3721e3db5",
+          "kind": "PCB_TRACK",
+          "net": "/SC_BAL_OUT",
+          "layer": "B.Cu",
+          "start": [
+            55.05,
+            36.65
+          ],
+          "end": [
+            55.2,
+            36.65
+          ],
+          "width": 0.15,
+          "length": 0.15
+        }
+      ]
+    },
+    {
+      "sha256": "88f82c85d2d47b4aea2e7d7d2827c4a92c339788cc0d9c880dd6342ee0440c0a",
+      "opposite_face_switch_overlap": [
+        {
+          "net": "/SC_BAL_OUT",
+          "projected_overlap_mm2": 0.052500000000001136,
+          "bounds_mm": [
+            63.875,
+            40.594,
+            64.025,
+            40.943999999999996
+          ]
+        },
+        {
+          "net": "/VBAT",
+          "projected_overlap_mm2": 0.052500000000001136,
+          "bounds_mm": [
+            63.324999999999996,
+            40.594,
+            63.475,
+            40.943999999999996
+          ]
+        },
+        {
+          "net": "/SC_HALF_REF",
+          "projected_overlap_mm2": 0.0,
+          "bounds_mm": null
+        }
+      ],
+      "local_feedback_route_length_mm": 3.834020322591862,
+      "local_feedback_route_tracks": [
+        {
+          "uuid": "1f1f229b-7fb6-5ae1-8a6d-1b8478bf3591",
+          "kind": "PCB_TRACK",
+          "net": "/SC_BAL_OUT",
+          "layer": "B.Cu",
+          "start": [
+            55.25,
+            37.05
+          ],
+          "end": [
+            55.9,
+            36.4
+          ],
+          "width": 0.15,
+          "length": 0.9192388155425119
+        },
+        {
+          "uuid": "38686676-bb51-572b-b0e2-eadc906e1035",
+          "kind": "PCB_TRACK",
+          "net": "/SC_BAL_OUT",
+          "layer": "B.Cu",
+          "start": [
+            56.7875,
+            35.15
+          ],
+          "end": [
+            56.9,
+            35.15
+          ],
+          "width": 0.15,
+          "length": 0.1125
+        },
+        {
+          "uuid": "778bc744-35a3-5d3d-8aba-dd7ec54323d2",
+          "kind": "PCB_TRACK",
+          "net": "/SC_BAL_OUT",
+          "layer": "B.Cu",
+          "start": [
+            56.65,
+            36.4
+          ],
+          "end": [
+            56.9,
+            35.95
+          ],
+          "width": 0.15,
+          "length": 0.51478150704935
+        },
+        {
+          "uuid": "864d146b-b969-56e6-97fa-5acb3b398f78",
+          "kind": "PCB_TRACK",
+          "net": "/SC_BAL_OUT",
+          "layer": "B.Cu",
+          "start": [
+            56.9,
+            35.15
+          ],
+          "end": [
+            56.9,
+            35.95
+          ],
+          "width": 0.15,
+          "length": 0.8
+        },
+        {
+          "uuid": "c23aa9ce-9e88-5cab-8887-0a9435556961",
+          "kind": "PCB_TRACK",
+          "net": "/SC_BAL_OUT",
+          "layer": "B.Cu",
+          "start": [
+            54.5125,
+            37.05
+          ],
+          "end": [
+            55.25,
+            37.05
+          ],
+          "width": 0.15,
+          "length": 0.7375
+        },
+        {
+          "uuid": "d119d182-a0e0-5326-92bd-c2f7692a76da",
+          "kind": "PCB_TRACK",
+          "net": "/SC_BAL_OUT",
+          "layer": "B.Cu",
+          "start": [
+            55.9,
+            36.4
+          ],
+          "end": [
+            56.65,
+            36.4
+          ],
+          "width": 0.15,
+          "length": 0.75
+        }
+      ],
+      "C22_positive_to_U8_VBAT_path_mm": 1.577661710970113
+    }
+  ],
+  "notes": [
+    "Projected trace-to-switch copper overlap is geometry, not a coupling simulation. Includes customL1 switch land and U1switchpad; circles/arcs approximated finely.",
+    "Balancer output andVBAT are lowerimpedance thanSC_HALF_REF; lattershowsno suchcrossing. Newoverlapdoesnotprovefunctionalnoise butshouldremainexplicitinbenchvalidation.",
+    "Nativefullnetconnectivity and localfeedbackpinconnection mustindependentlypass."
+  ]
+}

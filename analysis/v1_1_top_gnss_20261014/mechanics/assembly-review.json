@@ -1,0 +1,1616 @@
+{
+  "pcb_sha256": "88f82c85d2d47b4aea2e7d7d2827c4a92c339788cc0d9c880dd6342ee0440c0a",
+  "native_source": "/Users/twarn/Repositories/Stratolink/analysis/v1_1_top_gnss_20261014/mechanics/final-native.json",
+  "solar_source": "/Users/twarn/Repositories/Stratolink/hardware/pcb/3d/solar/generate.py",
+  "solar_source_sha256": "d54881036939cdadcbc841402fa829d62c2e80e0fd08c53905b5f359cf592d76",
+  "review_type": "Nominal static mechanics only; routing and RF performance reviewed separately",
+  "summary": {
+    "selected_top": {
+      "land_center_mm": [
+        62.882,
+        33.218
+      ],
+      "wire_centerline_start_mm": [
+        63.082,
+        33.218,
+        0.45
+      ],
+      "wire_centerline_end_mm": [
+        63.082,
+        -14.781999999999996,
+        0.45
+      ],
+      "conservative_solar_gap_mm": 21.576490689835605,
+      "conservative_terminal_metal_gap_mm": 22.20487534337396,
+      "conservative_cell_finger_gap_mm": 24.505377548751433,
+      "conservative_positive_copper_lead_gap_mm": 52.033068191321966,
+      "hole_edge_ligament_mm": 3.3210000000000046,
+      "copper_land_to_outline_mm": 3.0710000000000046,
+      "projected_wire_to_H1_annulus_mm": 5.656500000000002,
+      "AE2_land_to_H1_annulus_mm": 5.015786991218249,
+      "symmetric_bridle_crossing_fraction": 0.7948772907512598,
+      "symmetric_bridle_max_height_for_XY_crossing_mm": 58.53356303087498
+    },
+    "original_top": {
+      "land_center_mm": [
+        62.882,
+        33.218
+      ],
+      "wire_centerline_start_mm": [
+        63.082,
+        33.218,
+        0.45
+      ],
+      "wire_centerline_end_mm": [
+        63.082,
+        -14.782,
+        0.45
+      ],
+      "conservative_solar_gap_mm": 21.576490689835605,
+      "conservative_terminal_metal_gap_mm": 22.20487534337396,
+      "conservative_cell_finger_gap_mm": 24.505377548751433,
+      "conservative_positive_copper_lead_gap_mm": 52.033068191321966,
+      "hole_edge_ligament_mm": 3.3210000000000046,
+      "copper_land_to_outline_mm": 3.0710000000000046,
+      "projected_wire_to_H1_annulus_mm": 5.656500000000002,
+      "AE2_land_to_H1_annulus_mm": 5.015786991218249,
+      "symmetric_bridle_crossing_fraction": 0.7948772907512598,
+      "symmetric_bridle_max_height_for_XY_crossing_mm": 58.53356303087498
+    },
+    "rejected_left": {
+      "land_center_mm": [
+        55.3,
+        47.85
+      ],
+      "wire_centerline_start_mm": [
+        55.3,
+        47.65,
+        0.45
+      ],
+      "wire_centerline_end_mm": [
+        7.3,
+        47.65,
+        0.45
+      ],
+      "conservative_solar_gap_mm": 5.495028268871087,
+      "conservative_terminal_metal_gap_mm": 6.189500000000002,
+      "conservative_cell_finger_gap_mm": 6.2025,
+      "conservative_positive_copper_lead_gap_mm": 35.111347494053156,
+      "hole_edge_ligament_mm": 1.4833618283019543,
+      "copper_land_to_outline_mm": 1.2333618283019543,
+      "projected_wire_to_H1_annulus_mm": 14.148687597108783,
+      "AE2_land_to_H1_annulus_mm": 13.759135606853649
+    }
+  },
+  "bridle_scenarios": {
+    "selected_top": [
+      {
+        "apex_height_mm": 20,
+        "projected_centerline_gap_mm": 0.0,
+        "intersections_xy_mm": [
+          [
+            63.082,
+            15.847454184974806
+          ]
+        ]
+      },
+      {
+        "apex_height_mm": 30,
+        "projected_centerline_gap_mm": 0.0,
+        "intersections_xy_mm": [
+          [
+            63.082,
+            7.898681277462209
+          ]
+        ]
+      },
+      {
+        "apex_height_mm": 40,
+        "projected_centerline_gap_mm": 0.0,
+        "intersections_xy_mm": [
+          [
+            63.082,
+            -0.050091630050389316
+          ]
+        ]
+      },
+      {
+        "apex_height_mm": 50,
+        "projected_centerline_gap_mm": 0.0,
+        "intersections_xy_mm": [
+          [
+            63.082,
+            -7.998864537562987
+          ]
+        ]
+      },
+      {
+        "apex_height_mm": 60,
+        "projected_centerline_gap_mm": 0.17912290828543104,
+        "intersections_xy_mm": []
+      },
+      {
+        "apex_height_mm": 80,
+        "projected_centerline_gap_mm": 1.9768059249861785,
+        "intersections_xy_mm": []
+      },
+      {
+        "apex_height_mm": 100,
+        "projected_centerline_gap_mm": 3.062263332238597,
+        "intersections_xy_mm": []
+      },
+      {
+        "apex_height_mm": 120,
+        "projected_centerline_gap_mm": 3.7877043728625197,
+        "intersections_xy_mm": []
+      },
+      {
+        "apex_height_mm": 150,
+        "projected_centerline_gap_mm": 4.513985038098661,
+        "intersections_xy_mm": []
+      }
+    ],
+    "original_top": [
+      {
+        "apex_height_mm": 20,
+        "projected_centerline_gap_mm": 0.0,
+        "intersections_xy_mm": [
+          [
+            63.082,
+            15.847454184974806
+          ]
+        ]
+      },
+      {
+        "apex_height_mm": 30,
+        "projected_centerline_gap_mm": 0.0,
+        "intersections_xy_mm": [
+          [
+            63.082,
+            7.898681277462209
+          ]
+        ]
+      },
+      {
+        "apex_height_mm": 40,
+        "projected_centerline_gap_mm": 0.0,
+        "intersections_xy_mm": [
+          [
+            63.082,
+            -0.050091630050389316
+          ]
+        ]
+      },
+      {
+        "apex_height_mm": 50,
+        "projected_centerline_gap_mm": 0.0,
+        "intersections_xy_mm": [
+          [
+            63.082,
+            -7.998864537562987
+          ]
+        ]
+      },
+      {
+        "apex_height_mm": 60,
+        "projected_centerline_gap_mm": 0.17912290828543104,
+        "intersections_xy_mm": []
+      },
+      {
+        "apex_height_mm": 80,
+        "projected_centerline_gap_mm": 1.9768059249861785,
+        "intersections_xy_mm": []
+      },
+      {
+        "apex_height_mm": 100,
+        "projected_centerline_gap_mm": 3.062263332238597,
+        "intersections_xy_mm": []
+      },
+      {
+        "apex_height_mm": 120,
+        "projected_centerline_gap_mm": 3.7877043728625197,
+        "intersections_xy_mm": []
+      },
+      {
+        "apex_height_mm": 150,
+        "projected_centerline_gap_mm": 4.513985038098661,
+        "intersections_xy_mm": []
+      }
+    ],
+    "rejected_left": [
+      {
+        "apex_height_mm": 20,
+        "projected_centerline_gap_mm": 15.909187597108783,
+        "intersections_xy_mm": []
+      },
+      {
+        "apex_height_mm": 30,
+        "projected_centerline_gap_mm": 15.909187597108783,
+        "intersections_xy_mm": []
+      },
+      {
+        "apex_height_mm": 40,
+        "projected_centerline_gap_mm": 15.909187597108783,
+        "intersections_xy_mm": []
+      },
+      {
+        "apex_height_mm": 50,
+        "projected_centerline_gap_mm": 15.909187597108783,
+        "intersections_xy_mm": []
+      },
+      {
+        "apex_height_mm": 60,
+        "projected_centerline_gap_mm": 15.909187597108783,
+        "intersections_xy_mm": []
+      },
+      {
+        "apex_height_mm": 80,
+        "projected_centerline_gap_mm": 15.909187597108783,
+        "intersections_xy_mm": []
+      },
+      {
+        "apex_height_mm": 100,
+        "projected_centerline_gap_mm": 15.909187597108783,
+        "intersections_xy_mm": []
+      },
+      {
+        "apex_height_mm": 120,
+        "projected_centerline_gap_mm": 15.909187597108783,
+        "intersections_xy_mm": []
+      },
+      {
+        "apex_height_mm": 150,
+        "projected_centerline_gap_mm": 15.909187597108783,
+        "intersections_xy_mm": []
+      }
+    ]
+  },
+  "solar_mesh_parts": [
+    {
+      "ref": "J2",
+      "name": "polymer laminate",
+      "material": "film",
+      "bounds_mm": [
+        -33.691115106180526,
+        54.028,
+        -37.5,
+        54.8165,
+        80.36394884340318,
+        37.5
+      ],
+      "conservative_surface_gap_mm": {
+        "selected_top": 22.23089545115489,
+        "original_top": 22.23089545115489,
+        "rejected_left": 6.2175
+      }
+    },
+    {
+      "ref": "J2",
+      "name": "cosmetic cell finger 1",
+      "material": "cell",
+      "bounds_mm": [
+        -29.583056927576187,
+        54.013,
+        -36.7,
+        49.8165,
+        77.35105792310593,
+        -33.15
+      ],
+      "conservative_surface_gap_mm": {
+        "selected_top": 41.52121679825581,
+        "original_top": 41.52121679825581,
+        "rejected_left": 34.036689489781175
+      }
+    },
+    {
+      "ref": "J2",
+      "name": "cosmetic cell finger 2",
+      "material": "cell",
+      "bounds_mm": [
+        -29.583056927576187,
+        54.013,
+        -33.03,
+        49.8165,
+        77.35105792310593,
+        -29.48
+      ],
+      "conservative_surface_gap_mm": {
+        "selected_top": 38.62365159894567,
+        "original_top": 38.62365159894567,
+        "rejected_left": 30.438399800483023
+      }
+    },
+    {
+      "ref": "J2",
+      "name": "cosmetic cell finger 3",
+      "material": "cell",
+      "bounds_mm": [
+        -29.583056927576187,
+        54.013,
+        -29.360000000000003,
+        49.8165,
+        77.35105792310593,
+        -25.810000000000002
+      ],
+      "conservative_surface_gap_mm": {
+        "selected_top": 35.867171521345924,
+        "original_top": 35.867171521345924,
+        "rejected_left": 26.859406902134214
+      }
+    },
+    {
+      "ref": "J2",
+      "name": "cosmetic cell finger 4",
+      "material": "cell",
+      "bounds_mm": [
+        -29.583056927576187,
+        54.013,
+        -25.69,
+        49.8165,
+        77.35105792310593,
+        -22.14
+      ],
+      "conservative_surface_gap_mm": {
+        "selected_top": 33.286676491446926,
+        "original_top": 33.286676491446926,
+        "rejected_left": 23.30854064933205
+      }
+    },
+    {
+      "ref": "J2",
+      "name": "cosmetic cell finger 5",
+      "material": "cell",
+      "bounds_mm": [
+        -29.583056927576187,
+        54.013,
+        -22.020000000000003,
+        49.8165,
+        77.35105792310593,
+        -18.75
+      ],
+      "conservative_surface_gap_mm": {
+        "selected_top": 31.09722728862417,
+        "original_top": 31.09722728862417,
+        "rejected_left": 20.066407054713036
+      }
+    },
+    {
+      "ref": "J2",
+      "name": "cosmetic cell finger 6",
+      "material": "cell",
+      "bounds_mm": [
+        -29.583056927576187,
+        54.013,
+        -18.35,
+        49.8165,
+        77.35105792310593,
+        -14.8
+      ],
+      "conservative_surface_gap_mm": {
+        "selected_top": 28.838948533549736,
+        "original_top": 28.838948533549736,
+        "rejected_left": 16.36373278097958
+      }
+    },
+    {
+      "ref": "J2",
+      "name": "cosmetic cell finger 7",
+      "material": "cell",
+      "bounds_mm": [
+        -29.583056927576187,
+        54.013,
+        -14.68,
+        49.8165,
+        77.35105792310593,
+        -11.129999999999999
+      ],
+      "conservative_surface_gap_mm": {
+        "selected_top": 27.088388330535615,
+        "original_top": 27.088388330535615,
+        "rejected_left": 13.05253027318109
+      }
+    },
+    {
+      "ref": "J2",
+      "name": "cosmetic cell finger 8",
+      "material": "cell",
+      "bounds_mm": [
+        -29.583056927576187,
+        54.013,
+        -11.009999999999998,
+        49.8165,
+        77.35105792310593,
+        -7.459999999999998
+      ],
+      "conservative_surface_gap_mm": {
+        "selected_top": 25.742658402982443,
+        "original_top": 25.742658402982443,
+        "rejected_left": 9.991143660018801
+      }
+    },
+    {
+      "ref": "J2",
+      "name": "cosmetic cell finger 9",
+      "material": "cell",
+      "bounds_mm": [
+        -29.583056927576187,
+        54.013,
+        -7.34,
+        49.8165,
+        77.35105792310593,
+        -3.7899999999999996
+      ],
+      "conservative_surface_gap_mm": {
+        "selected_top": 24.867147017848083,
+        "original_top": 24.867147017848083,
+        "rejected_left": 7.485765035950558
+      }
+    },
+    {
+      "ref": "J2",
+      "name": "cosmetic cell finger 10",
+      "material": "cell",
+      "bounds_mm": [
+        -29.583056927576187,
+        54.013,
+        -3.6700000000000017,
+        49.8165,
+        77.35105792310593,
+        -0.40000000000000135
+      ],
+      "conservative_surface_gap_mm": {
+        "selected_top": 24.520018942072507,
+        "original_top": 24.520018942072507,
+        "rejected_left": 6.259022490029924
+      }
+    },
+    {
+      "ref": "J2",
+      "name": "cosmetic cell finger 11",
+      "material": "cell",
+      "bounds_mm": [
+        -29.583056927576187,
+        54.013,
+        0.0,
+        49.8165,
+        77.35105792310593,
+        3.5500000000000003
+      ],
+      "conservative_surface_gap_mm": {
+        "selected_top": 24.505377548751433,
+        "original_top": 24.505377548751433,
+        "rejected_left": 6.2025
+      }
+    },
+    {
+      "ref": "J2",
+      "name": "cosmetic cell finger 12",
+      "material": "cell",
+      "bounds_mm": [
+        -29.583056927576187,
+        54.013,
+        3.6700000000000017,
+        49.8165,
+        77.35105792310593,
+        7.2200000000000015
+      ],
+      "conservative_surface_gap_mm": {
+        "selected_top": 24.714666637632803,
+        "original_top": 24.714666637632803,
+        "rejected_left": 6.97085113425219
+      }
+    },
+    {
+      "ref": "J2",
+      "name": "cosmetic cell finger 13",
+      "material": "cell",
+      "bounds_mm": [
+        -29.583056927576187,
+        54.013,
+        7.340000000000003,
+        49.8165,
+        77.35105792310593,
+        10.890000000000004
+      ],
+      "conservative_surface_gap_mm": {
+        "selected_top": 25.44960767743861,
+        "original_top": 25.44960767743861,
+        "rejected_left": 9.218192286241191
+      }
+    },
+    {
+      "ref": "J2",
+      "name": "cosmetic cell finger 14",
+      "material": "cell",
+      "bounds_mm": [
+        -29.583056927576187,
+        54.013,
+        11.009999999999998,
+        49.8165,
+        77.35105792310593,
+        14.559999999999999
+      ],
+      "conservative_surface_gap_mm": {
+        "selected_top": 26.6708084893376,
+        "original_top": 26.6708084893376,
+        "rejected_left": 12.16838352609432
+      }
+    },
+    {
+      "ref": "J2",
+      "name": "cosmetic cell finger 15",
+      "material": "cell",
+      "bounds_mm": [
+        -29.583056927576187,
+        54.013,
+        14.680000000000007,
+        49.8165,
+        77.35105792310593,
+        17.95000000000001
+      ],
+      "conservative_surface_gap_mm": {
+        "selected_top": 28.315778114423594,
+        "original_top": 28.315778114423594,
+        "rejected_left": 15.427337213674006
+      }
+    },
+    {
+      "ref": "J2",
+      "name": "cosmetic cell finger 16",
+      "material": "cell",
+      "bounds_mm": [
+        -29.583056927576187,
+        54.013,
+        18.349999999999994,
+        49.8165,
+        77.35105792310593,
+        21.899999999999995
+      ],
+      "conservative_surface_gap_mm": {
+        "selected_top": 30.315974783839415,
+        "original_top": 30.315974783839415,
+        "rejected_left": 18.83680952003467
+      }
+    },
+    {
+      "ref": "J2",
+      "name": "cosmetic cell finger 17",
+      "material": "cell",
+      "bounds_mm": [
+        -29.583056927576187,
+        54.013,
+        22.020000000000003,
+        49.8165,
+        77.35105792310593,
+        25.570000000000004
+      ],
+      "conservative_surface_gap_mm": {
+        "selected_top": 32.6064103708299,
+        "original_top": 32.6064103708299,
+        "rejected_left": 22.328445484392997
+      }
+    },
+    {
+      "ref": "J2",
+      "name": "cosmetic cell finger 18",
+      "material": "cell",
+      "bounds_mm": [
+        -29.583056927576187,
+        54.013,
+        25.690000000000005,
+        49.8165,
+        77.35105792310593,
+        29.240000000000006
+      ],
+      "conservative_surface_gap_mm": {
+        "selected_top": 35.13061949556149,
+        "original_top": 35.13061949556149,
+        "rejected_left": 25.869201669439093
+      }
+    },
+    {
+      "ref": "J2",
+      "name": "cosmetic cell finger 19",
+      "material": "cell",
+      "bounds_mm": [
+        -29.583056927576187,
+        54.013,
+        29.36,
+        49.8165,
+        77.35105792310593,
+        32.910000000000004
+      ],
+      "conservative_surface_gap_mm": {
+        "selected_top": 37.84204748368851,
+        "original_top": 37.84204748368851,
+        "rejected_left": 29.441457181916196
+      }
+    },
+    {
+      "ref": "J2",
+      "name": "cosmetic cell finger 20",
+      "material": "cell",
+      "bounds_mm": [
+        -29.583056927576187,
+        54.013,
+        33.03,
+        49.8165,
+        77.35105792310593,
+        36.300000000000004
+      ],
+      "conservative_surface_gap_mm": {
+        "selected_top": 40.70344395123897,
+        "original_top": 40.70344395123897,
+        "rejected_left": 33.03504441487592
+      }
+    },
+    {
+      "ref": "J2",
+      "name": "inner NEGATIVE terminal",
+      "material": "bus",
+      "bounds_mm": [
+        49.8165,
+        54.0,
+        -37.5,
+        54.8165,
+        54.0,
+        37.5
+      ],
+      "conservative_surface_gap_mm": {
+        "selected_top": 22.20487534337396,
+        "original_top": 22.20487534337396,
+        "rejected_left": 6.189500000000002
+      }
+    },
+    {
+      "ref": "J2",
+      "name": "outer POSITIVE terminal",
+      "material": "bus",
+      "bounds_mm": [
+        -33.70741662920177,
+        77.34022479631952,
+        -37.5,
+        -29.590243259326776,
+        80.17857399602332,
+        37.5
+      ],
+      "conservative_surface_gap_mm": {
+        "selected_top": 102.47923592957451,
+        "original_top": 102.47923592957451,
+        "rejected_left": 47.19348078502262
+      }
+    },
+    {
+      "ref": "J2",
+      "name": "polarity minus",
+      "material": "mark",
+      "bounds_mm": [
+        52.9865,
+        53.818,
+        8.0,
+        53.2465,
+        54.078,
+        10.0
+      ],
+      "conservative_surface_gap_mm": {
+        "selected_top": 23.924770841920846,
+        "original_top": 23.924770841920846,
+        "rejected_left": 9.588690940790931
+      }
+    },
+    {
+      "ref": "J2",
+      "name": "polarity minus",
+      "material": "mark",
+      "bounds_mm": [
+        -32.64276497147332,
+        79.13905442649437,
+        8.0,
+        -32.38276497147333,
+        79.39905442649437,
+        10.0
+      ],
+      "conservative_surface_gap_mm": {
+        "selected_top": 106.08716688254788,
+        "original_top": 106.08716688254788,
+        "rejected_left": 51.11098598685522
+      }
+    },
+    {
+      "ref": "J2",
+      "name": "polarity plus",
+      "material": "mark",
+      "bounds_mm": [
+        -33.40496440904307,
+        78.59170533285373,
+        8.87,
+        -31.616467119442554,
+        79.95225854348467,
+        9.13
+      ],
+      "conservative_surface_gap_mm": {
+        "selected_top": 105.28395846811978,
+        "original_top": 105.28395846811978,
+        "rejected_left": 50.38734605337848
+      }
+    },
+    {
+      "ref": "J2",
+      "name": "ground solder fillet rear",
+      "material": "solder",
+      "bounds_mm": [
+        53.5665,
+        53.3,
+        -0.8,
+        54.7665,
+        54.0,
+        -0.2
+      ],
+      "conservative_surface_gap_mm": {
+        "selected_top": 21.584769928193577,
+        "original_top": 21.584769928193577,
+        "rejected_left": 5.526766478722444
+      }
+    },
+    {
+      "ref": "J2",
+      "name": "ground solder fillet front",
+      "material": "solder",
+      "bounds_mm": [
+        53.5665,
+        53.3,
+        0.2,
+        54.7665,
+        54.0,
+        0.8
+      ],
+      "conservative_surface_gap_mm": {
+        "selected_top": 21.576490689835605,
+        "original_top": 21.576490689835605,
+        "rejected_left": 5.495028268871087
+      }
+    },
+    {
+      "ref": "J2",
+      "name": "positive copper lead",
+      "material": "wire",
+      "bounds_mm": [
+        -35.27533671858226,
+        78.29657234499292,
+        -0.8,
+        55.05,
+        85.25,
+        1.2499838962602534
+      ],
+      "conservative_surface_gap_mm": {
+        "selected_top": 52.033068191321966,
+        "original_top": 52.033068191321966,
+        "rejected_left": 35.111347494053156
+      }
+    },
+    {
+      "ref": "J2",
+      "name": "positive red insulation",
+      "material": "red",
+      "bounds_mm": [
+        -33.927866596895605,
+        81.24556824957486,
+        -0.349977186977906,
+        54.86258772091034,
+        85.35,
+        1.3499774547643546
+      ],
+      "conservative_surface_gap_mm": {
+        "selected_top": 51.95920025096078,
+        "original_top": 51.95920025096078,
+        "rejected_left": 35.011347495266776
+      }
+    },
+    {
+      "ref": "J2",
+      "name": "panel positive solder",
+      "material": "solder",
+      "bounds_mm": [
+        -32.227236738814305,
+        78.10061104708356,
+        -0.65,
+        -31.427236738814294,
+        78.90061104708356,
+        0.65
+      ],
+      "conservative_surface_gap_mm": {
+        "selected_top": 104.59908184868453,
+        "original_top": 104.59908184868453,
+        "rejected_left": 49.270385765665374
+      }
+    },
+    {
+      "ref": "J2",
+      "name": "positive PTH solder",
+      "material": "solder",
+      "bounds_mm": [
+        54.22,
+        84.42,
+        -0.43000000000000005,
+        55.379229556267546,
+        85.58,
+        -0.10999999999999999
+      ],
+      "conservative_surface_gap_mm": {
+        "selected_top": 51.70504390665673,
+        "original_top": 51.70504390665673,
+        "rejected_left": 36.61654854933305
+      }
+    },
+    {
+      "ref": "J2",
+      "name": "positive PTH solder",
+      "material": "solder",
+      "bounds_mm": [
+        54.22,
+        84.42,
+        0.10999999999999999,
+        55.379229556267546,
+        85.58,
+        0.43000000000000005
+      ],
+      "conservative_surface_gap_mm": {
+        "selected_top": 51.70035850362812,
+        "original_top": 51.70035850362812,
+        "rejected_left": 36.60994057391753
+      }
+    },
+    {
+      "ref": "J1",
+      "name": "polymer laminate",
+      "material": "film",
+      "bounds_mm": [
+        75.1755,
+        54.028,
+        -37.5,
+        163.68311510618054,
+        80.36394884340318,
+        37.5
+      ],
+      "conservative_surface_gap_mm": {
+        "selected_top": 23.90833549841994,
+        "original_top": 23.90833549841994,
+        "rejected_left": 20.713272640565005
+      }
+    },
+    {
+      "ref": "J1",
+      "name": "cosmetic cell finger 1",
+      "material": "cell",
+      "bounds_mm": [
+        80.1755,
+        54.013,
+        -36.7,
+        159.57505692757618,
+        77.35105792310593,
+        -33.15
+      ],
+      "conservative_surface_gap_mm": {
+        "selected_top": 42.89272017282796,
+        "original_top": 42.89272017282796,
+        "rejected_left": 42.12706636707769
+      }
+    },
+    {
+      "ref": "J1",
+      "name": "cosmetic cell finger 2",
+      "material": "cell",
+      "bounds_mm": [
+        80.1755,
+        54.013,
+        -33.03,
+        159.57505692757618,
+        77.35105792310593,
+        -29.48
+      ],
+      "conservative_surface_gap_mm": {
+        "selected_top": 40.09399872063991,
+        "original_top": 40.09399872063991,
+        "rejected_left": 39.27404284317241
+      }
+    },
+    {
+      "ref": "J1",
+      "name": "cosmetic cell finger 3",
+      "material": "cell",
+      "bounds_mm": [
+        80.1755,
+        54.013,
+        -29.360000000000003,
+        159.57505692757618,
+        77.35105792310593,
+        -25.810000000000002
+      ],
+      "conservative_surface_gap_mm": {
+        "selected_top": 37.445448562029384,
+        "original_top": 37.445448562029384,
+        "rejected_left": 36.56640933430147
+      }
+    },
+    {
+      "ref": "J1",
+      "name": "cosmetic cell finger 4",
+      "material": "cell",
+      "bounds_mm": [
+        80.1755,
+        54.013,
+        -25.69,
+        159.57505692757618,
+        77.35105792310593,
+        -22.14
+      ],
+      "conservative_surface_gap_mm": {
+        "selected_top": 34.981040479182184,
+        "original_top": 34.981040479182184,
+        "rejected_left": 34.03871591571947
+      }
+    },
+    {
+      "ref": "J1",
+      "name": "cosmetic cell finger 5",
+      "material": "cell",
+      "bounds_mm": [
+        80.1755,
+        54.013,
+        -22.020000000000003,
+        159.57505692757618,
+        77.35105792310593,
+        -18.75
+      ],
+      "conservative_surface_gap_mm": {
+        "selected_top": 32.90397893510496,
+        "original_top": 32.90397893510496,
+        "rejected_left": 31.900664502400723
+      }
+    },
+    {
+      "ref": "J1",
+      "name": "cosmetic cell finger 6",
+      "material": "cell",
+      "bounds_mm": [
+        80.1755,
+        54.013,
+        -18.35,
+        159.57505692757618,
+        77.35105792310593,
+        -14.8
+      ],
+      "conservative_surface_gap_mm": {
+        "selected_top": 30.77786238798039,
+        "original_top": 30.77786238798039,
+        "rejected_left": 29.70320320723805
+      }
+    },
+    {
+      "ref": "J1",
+      "name": "cosmetic cell finger 7",
+      "material": "cell",
+      "bounds_mm": [
+        80.1755,
+        54.013,
+        -14.68,
+        159.57505692757618,
+        77.35105792310593,
+        -11.129999999999999
+      ],
+      "conservative_surface_gap_mm": {
+        "selected_top": 29.143359255224382,
+        "original_top": 29.143359255224382,
+        "rejected_left": 28.00640734266011
+      }
+    },
+    {
+      "ref": "J1",
+      "name": "cosmetic cell finger 8",
+      "material": "cell",
+      "bounds_mm": [
+        80.1755,
+        54.013,
+        -11.009999999999998,
+        159.57505692757618,
+        77.35105792310593,
+        -7.459999999999998
+      ],
+      "conservative_surface_gap_mm": {
+        "selected_top": 27.896368450523834,
+        "original_top": 27.896368450523834,
+        "rejected_left": 26.706698760756584
+      }
+    },
+    {
+      "ref": "J1",
+      "name": "cosmetic cell finger 9",
+      "material": "cell",
+      "bounds_mm": [
+        80.1755,
+        54.013,
+        -7.34,
+        159.57505692757618,
+        77.35105792310593,
+        -3.7899999999999996
+      ],
+      "conservative_surface_gap_mm": {
+        "selected_top": 27.090139758545114,
+        "original_top": 27.090139758545114,
+        "rejected_left": 25.86364012508387
+      }
+    },
+    {
+      "ref": "J1",
+      "name": "cosmetic cell finger 10",
+      "material": "cell",
+      "bounds_mm": [
+        80.1755,
+        54.013,
+        -3.6700000000000017,
+        159.57505692757618,
+        77.35105792310593,
+        -0.40000000000000135
+      ],
+      "conservative_surface_gap_mm": {
+        "selected_top": 26.771679028998,
+        "original_top": 26.771679028998,
+        "rejected_left": 25.529980128833717
+      }
+    },
+    {
+      "ref": "J1",
+      "name": "cosmetic cell finger 11",
+      "material": "cell",
+      "bounds_mm": [
+        80.1755,
+        54.013,
+        0.0,
+        159.57505692757618,
+        77.35105792310593,
+        3.5500000000000003
+      ],
+      "conservative_surface_gap_mm": {
+        "selected_top": 26.758262364752206,
+        "original_top": 26.758262364752206,
+        "rejected_left": 25.51591464944045
+      }
+    },
+    {
+      "ref": "J1",
+      "name": "cosmetic cell finger 12",
+      "material": "cell",
+      "bounds_mm": [
+        80.1755,
+        54.013,
+        3.6700000000000017,
+        159.57505692757618,
+        77.35105792310593,
+        7.2200000000000015
+      ],
+      "conservative_surface_gap_mm": {
+        "selected_top": 26.950165193794117,
+        "original_top": 26.950165193794117,
+        "rejected_left": 25.7170321321412
+      }
+    },
+    {
+      "ref": "J1",
+      "name": "cosmetic cell finger 13",
+      "material": "cell",
+      "bounds_mm": [
+        80.1755,
+        54.013,
+        7.340000000000003,
+        159.57505692757618,
+        77.35105792310593,
+        10.890000000000004
+      ],
+      "conservative_surface_gap_mm": {
+        "selected_top": 27.62604111705881,
+        "original_top": 27.62604111705881,
+        "rejected_left": 26.42427702088171
+      }
+    },
+    {
+      "ref": "J1",
+      "name": "cosmetic cell finger 14",
+      "material": "cell",
+      "bounds_mm": [
+        80.1755,
+        54.013,
+        11.009999999999998,
+        159.57505692757618,
+        77.35105792310593,
+        14.559999999999999
+      ],
+      "conservative_surface_gap_mm": {
+        "selected_top": 28.755470799023847,
+        "original_top": 28.755470799023847,
+        "rejected_left": 27.602638677930493
+      }
+    },
+    {
+      "ref": "J1",
+      "name": "cosmetic cell finger 15",
+      "material": "cell",
+      "bounds_mm": [
+        80.1755,
+        54.013,
+        14.680000000000007,
+        159.57505692757618,
+        77.35105792310593,
+        17.95000000000001
+      ],
+      "conservative_surface_gap_mm": {
+        "selected_top": 30.28802487806265,
+        "original_top": 30.28802487806265,
+        "rejected_left": 29.195439250005276
+      }
+    },
+    {
+      "ref": "J1",
+      "name": "cosmetic cell finger 16",
+      "material": "cell",
+      "bounds_mm": [
+        80.1755,
+        54.013,
+        18.349999999999994,
+        159.57505692757618,
+        77.35105792310593,
+        21.899999999999995
+      ],
+      "conservative_surface_gap_mm": {
+        "selected_top": 32.166420163387045,
+        "original_top": 32.166420163387045,
+        "rejected_left": 31.13947235222421
+      }
+    },
+    {
+      "ref": "J1",
+      "name": "cosmetic cell finger 17",
+      "material": "cell",
+      "bounds_mm": [
+        80.1755,
+        54.013,
+        22.020000000000003,
+        159.57505692757618,
+        77.35105792310593,
+        25.570000000000004
+      ],
+      "conservative_surface_gap_mm": {
+        "selected_top": 34.334204916117194,
+        "original_top": 34.334204916117194,
+        "rejected_left": 33.37370894027471
+      }
+    },
+    {
+      "ref": "J1",
+      "name": "cosmetic cell finger 18",
+      "material": "cell",
+      "bounds_mm": [
+        80.1755,
+        54.013,
+        25.690000000000005,
+        159.57505692757618,
+        77.35105792310593,
+        29.240000000000006
+      ],
+      "conservative_surface_gap_mm": {
+        "selected_top": 36.740412824075236,
+        "original_top": 36.740412824075236,
+        "rejected_left": 35.84416454849983
+      }
+    },
+    {
+      "ref": "J1",
+      "name": "cosmetic cell finger 19",
+      "material": "cell",
+      "bounds_mm": [
+        80.1755,
+        54.013,
+        29.36,
+        159.57505692757618,
+        77.35105792310593,
+        32.910000000000004
+      ],
+      "conservative_surface_gap_mm": {
+        "selected_top": 39.34149826907494,
+        "original_top": 39.34149826907494,
+        "rejected_left": 38.50558810378934
+      }
+    },
+    {
+      "ref": "J1",
+      "name": "cosmetic cell finger 20",
+      "material": "cell",
+      "bounds_mm": [
+        80.1755,
+        54.013,
+        33.03,
+        159.57505692757618,
+        77.35105792310593,
+        36.300000000000004
+      ],
+      "conservative_surface_gap_mm": {
+        "selected_top": 42.10149435958979,
+        "original_top": 42.10149435958979,
+        "rejected_left": 41.321238985365596
+      }
+    },
+    {
+      "ref": "J1",
+      "name": "inner NEGATIVE terminal",
+      "material": "bus",
+      "bounds_mm": [
+        75.1755,
+        54.0,
+        -37.5,
+        80.1755,
+        54.0,
+        37.5
+      ],
+      "conservative_surface_gap_mm": {
+        "selected_top": 23.884130715608837,
+        "original_top": 23.884130715608837,
+        "rejected_left": 20.704734248625158
+      }
+    },
+    {
+      "ref": "J1",
+      "name": "outer POSITIVE terminal",
+      "material": "bus",
+      "bounds_mm": [
+        159.5822432593268,
+        77.34022479631952,
+        -37.5,
+        163.69941662920178,
+        80.17857399602332,
+        37.5
+      ],
+      "conservative_surface_gap_mm": {
+        "selected_top": 105.94825397480737,
+        "original_top": 105.94825397480737,
+        "rejected_left": 108.26595298843542
+      }
+    },
+    {
+      "ref": "J1",
+      "name": "polarity minus",
+      "material": "mark",
+      "bounds_mm": [
+        76.74549999999999,
+        53.818,
+        8.0,
+        77.0055,
+        54.078,
+        10.0
+      ],
+      "conservative_surface_gap_mm": {
+        "selected_top": 25.734520438854315,
+        "original_top": 25.734520438854315,
+        "rejected_left": 23.429955319136354
+      }
+    },
+    {
+      "ref": "J1",
+      "name": "polarity minus",
+      "material": "mark",
+      "bounds_mm": [
+        162.37476497147333,
+        79.13905442649437,
+        8.0,
+        162.63476497147332,
+        79.39905442649437,
+        10.0
+      ],
+      "conservative_surface_gap_mm": {
+        "selected_top": 109.54014669290962,
+        "original_top": 109.54014669290962,
+        "rejected_left": 111.73854479204581
+      }
+    },
+    {
+      "ref": "J1",
+      "name": "polarity plus",
+      "material": "mark",
+      "bounds_mm": [
+        161.60846711944254,
+        78.59170533285373,
+        8.87,
+        163.39696440904305,
+        79.95225854348467,
+        9.13
+      ],
+      "conservative_surface_gap_mm": {
+        "selected_top": 108.73520852598855,
+        "original_top": 108.73520852598855,
+        "rejected_left": 110.94849366303322
+      }
+    },
+    {
+      "ref": "J1",
+      "name": "ground solder fillet rear",
+      "material": "solder",
+      "bounds_mm": [
+        75.2255,
+        53.3,
+        -0.8,
+        76.4255,
+        54.0,
+        -0.2
+      ],
+      "conservative_surface_gap_mm": {
+        "selected_top": 23.316591307272283,
+        "original_top": 23.316591307272283,
+        "rejected_left": 20.560758413764354
+      }
+    },
+    {
+      "ref": "J1",
+      "name": "ground solder fillet front",
+      "material": "solder",
+      "bounds_mm": [
+        75.2255,
+        53.3,
+        0.2,
+        76.4255,
+        54.0,
+        0.8
+      ],
+      "conservative_surface_gap_mm": {
+        "selected_top": 23.30892300632889,
+        "original_top": 23.30892300632889,
+        "rejected_left": 20.552069861077115
+      }
+    },
+    {
+      "ref": "J1",
+      "name": "positive copper lead",
+      "material": "wire",
+      "bounds_mm": [
+        74.95,
+        78.29657234499292,
+        -0.8,
+        165.26733671858227,
+        85.25,
+        1.2499838933274332
+      ],
+      "conservative_surface_gap_mm": {
+        "selected_top": 52.77743732474307,
+        "original_top": 52.77743732474307,
+        "rejected_left": 41.910673403721695
+      }
+    },
+    {
+      "ref": "J1",
+      "name": "positive red insulation",
+      "material": "red",
+      "bounds_mm": [
+        75.13741227908966,
+        81.24556829789799,
+        -0.3499771828131941,
+        163.91986785448324,
+        85.35,
+        1.3499774506584066
+      ],
+      "conservative_surface_gap_mm": {
+        "selected_top": 52.71547142606461,
+        "original_top": 52.71547142606461,
+        "rejected_left": 41.91622310074673
+      }
+    },
+    {
+      "ref": "J1",
+      "name": "panel positive solder",
+      "material": "solder",
+      "bounds_mm": [
+        161.41923673881428,
+        78.10061104708356,
+        -0.65,
+        162.2192367388143,
+        78.90061104708356,
+        0.65
+      ],
+      "conservative_surface_gap_mm": {
+        "selected_top": 108.06702225467903,
+        "original_top": 108.06702225467903,
+        "rejected_left": 110.34800221124677
+      }
+    },
+    {
+      "ref": "J1",
+      "name": "positive PTH solder",
+      "material": "solder",
+      "bounds_mm": [
+        74.62,
+        84.42,
+        -0.43000000000000005,
+        75.77922955626755,
+        85.58,
+        -0.10999999999999999
+      ],
+      "conservative_surface_gap_mm": {
+        "selected_top": 52.44578232086015,
+        "original_top": 52.44578232086015,
+        "rejected_left": 41.589056055717414
+      }
+    },
+    {
+      "ref": "J1",
+      "name": "positive PTH solder",
+      "material": "solder",
+      "bounds_mm": [
+        74.62,
+        84.42,
+        0.10999999999999999,
+        75.77922955626755,
+        85.58,
+        0.43000000000000005
+      ],
+      "conservative_surface_gap_mm": {
+        "selected_top": 52.441162897878456,
+        "original_top": 52.441162897878456,
+        "rejected_left": 41.58323522876805
+      }
+    }
+  ],
+  "C5": {
+    "pose": {
+      "at": [
+        66.675,
+        64.707
+      ],
+      "angle": 180.0,
+      "layer": "B.Cu",
+      "fab_boxes": [
+        [
+          59.625,
+          49.657,
+          59.725,
+          79.757
+        ],
+        [
+          59.625,
+          79.657,
+          73.725,
+          79.757
+        ],
+        [
+          59.625,
+          49.657,
+          73.725,
+          49.757
+        ],
+        [
+          73.625,
+          49.657,
+          73.725,
+          79.757
+        ]
+      ]
+    },
+    "maximum_case_bounds_mm": [
+      59.425,
+      49.456999999999994,
+      73.925,
+      79.957
+    ],
+    "maximum_case_to_outline_mm": 0.7479289999999992,
+    "maximum_case_to_near_rear_lands": [
+      {
+        "ref": "J4",
+        "pin": "1",
+        "gap_mm": 0.8860000000000099,
+        "overlap_mm2": 0.0
+      },
+      {
+        "ref": "J4",
+        "pin": "2",
+        "gap_mm": 0.8860000000000099,
+        "overlap_mm2": 0.0
+      },
+      {
+        "ref": "J4",
+        "pin": "3",
+        "gap_mm": 0.8860000000000099,
+        "overlap_mm2": 0.0
+      },
+      {
+        "ref": "J4",
+        "pin": "4",
+        "gap_mm": 0.8860000000000099,
+        "overlap_mm2": 0.0
+      },
+      {
+        "ref": "J4",
+        "pin": "5",
+        "gap_mm": 0.8860000000000099,
+        "overlap_mm2": 0.0
+      },
+      {
+        "ref": "J4",
+        "pin": "6",
+        "gap_mm": 0.8860000000000099,
+        "overlap_mm2": 0.0
+      },
+      {
+        "ref": "J4",
+        "pin": "7",
+        "gap_mm": 0.8860000000000099,
+        "overlap_mm2": 0.0
+      },
+      {
+        "ref": "J1",
+        "pin": "2",
+        "gap_mm": 0.45050000000000523,
+        "overlap_mm2": 0.0
+      }
+    ]
+  },
+  "L1_pose": {
+    "at": [
+      60.603,
+      38.1865
+    ],
+    "angle": 90.0,
+    "layer": "B.Cu",
+    "fab_boxes": [
+      [
+        58.5895,
+        36.173,
+        62.6165,
+        36.3
+      ],
+      [
+        58.5895,
+        36.173,
+        58.7165,
+        40.2
+      ],
+      [
+        62.4895,
+        36.173,
+        62.6165,
+        40.2
+      ],
+      [
+        58.5895,
+        40.073,
+        62.6165,
+        40.2
+      ],
+      [
+        60.403,
+        40.7365,
+        60.803,
+        41.1365
+      ]
+    ]
+  },
+  "U8_pose": {
+    "at": [
+      55.65,
+      36.1
+    ],
+    "angle": 0.0,
+    "layer": "B.Cu",
+    "fab_boxes": [
+      [
+        54.8,
+        34.6,
+        56.5,
+        37.6
+      ]
+    ]
+  },
+  "limitations": [
+    "Solar meshes are photo-derived nominal assembly geometry, not measured production tolerances.",
+    "Gap is exact segment-to-triangle distance minus nominal wire radius, a conservative capsule-envelope screen, not a qualified physical minimum.",
+    "Wire .321mm diameter and .25mm front-surface centerline elevation are unmeasured; model bottom is .0895mm above board.",
+    "Projected bridle intersection is conditional on symmetric taut triangle; actual string diameter, depth, apex, knots and motion are unknown.",
+    "At an XY crossing, depth separation must exceed .1605mm plus half string diameter plus dynamic allowance.",
+    "Neither greater solar separation nor upward orientation proves best sky coverage, antenna impedance/pattern, or GNSS sensitivity.",
+    "Final top pose restores the original flown feed location and upward48mm radiator; no remote side-feed/upwire workaround is used."
+  ]
+}

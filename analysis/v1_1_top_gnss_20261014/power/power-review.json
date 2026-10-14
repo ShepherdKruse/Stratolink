@@ -1,0 +1,978 @@
+{
+  "baseline_sha256": "8df85b3e4bdd546ec174bb9d7b9ee9d795d55d486a68e1e853aaf1b871f863d3",
+  "candidate_sha256": "88f82c85d2d47b4aea2e7d7d2827c4a92c339788cc0d9c880dd6342ee0440c0a",
+  "checks": {
+    "U1": true,
+    "U8": true,
+    "C2": true,
+    "C3": true,
+    "C4": true,
+    "C6": true,
+    "L2": true,
+    "C22": true,
+    "R24": true,
+    "R25": true,
+    "R26": true,
+    "C5": true,
+    "L1_pad_sizes_and_nets_exact": true
+  },
+  "L1_before": {
+    "at": [
+      60.103,
+      38.1865
+    ],
+    "angle": 90.0,
+    "layer": "B.Cu",
+    "fp": "Stratolink_v1p1_L1_IND_LPS4018-223MRC",
+    "value": "22\u00b5H",
+    "fields": {
+      "Reference": "L1",
+      "Value": "22\u00b5H",
+      "Datasheet": "https://www.lcsc.com/product-detail/C5278935.html",
+      "Description": "LPS4018-223MRC",
+      "Manufacturer": "Coilcraft",
+      "LCSC": "C5278935",
+      "Manufacturer_Part_Number": "LPS4018-223MRC",
+      "Supplier Part": "C5278935",
+      "Supplier": "LCSC"
+    },
+    "courtyard": [
+      {
+        "uuid": "8ef3f5e1-98ae-45c6-98b0-cffc9777c64a",
+        "start": [
+          57.903,
+          35.7365
+        ],
+        "end": [
+          62.303,
+          35.7365
+        ],
+        "width": 0.05,
+        "shape": 0
+      },
+      {
+        "uuid": "82343983-dad1-472e-b4f8-10bb2b950c3e",
+        "start": [
+          57.903,
+          40.6365
+        ],
+        "end": [
+          57.903,
+          35.7365
+        ],
+        "width": 0.05,
+        "shape": 0
+      },
+      {
+        "uuid": "1c8ca4b9-f2cc-4cdd-b481-0573210113d8",
+        "start": [
+          62.303,
+          35.7365
+        ],
+        "end": [
+          62.303,
+          40.6365
+        ],
+        "width": 0.05,
+        "shape": 0
+      },
+      {
+        "uuid": "c4d0d3f5-ee82-4707-86a5-222066111be8",
+        "start": [
+          62.303,
+          40.6365
+        ],
+        "end": [
+          57.903,
+          40.6365
+        ],
+        "width": 0.05,
+        "shape": 0
+      }
+    ],
+    "fab": [
+      {
+        "uuid": "5431ed1c-d493-4221-98de-910a8f4dee6c",
+        "start": [
+          58.153,
+          36.2365
+        ],
+        "end": [
+          62.053,
+          36.2365
+        ],
+        "width": 0.127,
+        "shape": 0
+      },
+      {
+        "uuid": "c11b021c-6853-4d08-b93a-ad8a16f4421c",
+        "start": [
+          58.153,
+          40.1365
+        ],
+        "end": [
+          58.153,
+          36.2365
+        ],
+        "width": 0.127,
+        "shape": 0
+      },
+      {
+        "uuid": "4bcbe9ca-ede1-4e99-a81e-7e5339613b4c",
+        "start": [
+          62.053,
+          36.2365
+        ],
+        "end": [
+          62.053,
+          40.1365
+        ],
+        "width": 0.127,
+        "shape": 0
+      },
+      {
+        "uuid": "4ec41bd8-08fb-48c7-ac01-0107bdfbcec0",
+        "start": [
+          62.053,
+          40.1365
+        ],
+        "end": [
+          58.153,
+          40.1365
+        ],
+        "width": 0.127,
+        "shape": 0
+      },
+      {
+        "uuid": "b684e56c-fd9f-4f3d-991a-3b3a878c165f",
+        "start": [
+          60.103,
+          40.9365
+        ],
+        "end": [
+          60.103,
+          40.8365
+        ],
+        "width": 0.2,
+        "shape": 3
+      }
+    ]
+  },
+  "L1_after": {
+    "at": [
+      60.603,
+      38.1865
+    ],
+    "angle": 90.0,
+    "layer": "B.Cu",
+    "fp": "Stratolink_v1p1_L1_IND_LPS4018-223MRC",
+    "value": "22\u00b5H",
+    "fields": {
+      "Reference": "L1",
+      "Value": "22\u00b5H",
+      "Datasheet": "https://www.lcsc.com/product-detail/C5278935.html",
+      "Description": "LPS4018-223MRC",
+      "Manufacturer": "Coilcraft",
+      "LCSC": "C5278935",
+      "Manufacturer_Part_Number": "LPS4018-223MRC",
+      "Supplier Part": "C5278935",
+      "Supplier": "LCSC"
+    },
+    "courtyard": [
+      {
+        "uuid": "8ef3f5e1-98ae-45c6-98b0-cffc9777c64a",
+        "start": [
+          58.403,
+          35.7365
+        ],
+        "end": [
+          62.803,
+          35.7365
+        ],
+        "width": 0.05,
+        "shape": 0
+      },
+      {
+        "uuid": "82343983-dad1-472e-b4f8-10bb2b950c3e",
+        "start": [
+          58.403,
+          40.6365
+        ],
+        "end": [
+          58.403,
+          35.7365
+        ],
+        "width": 0.05,
+        "shape": 0
+      },
+      {
+        "uuid": "1c8ca4b9-f2cc-4cdd-b481-0573210113d8",
+        "start": [
+          62.803,
+          35.7365
+        ],
+        "end": [
+          62.803,
+          40.6365
+        ],
+        "width": 0.05,
+        "shape": 0
+      },
+      {
+        "uuid": "c4d0d3f5-ee82-4707-86a5-222066111be8",
+        "start": [
+          62.803,
+          40.6365
+        ],
+        "end": [
+          58.403,
+          40.6365
+        ],
+        "width": 0.05,
+        "shape": 0
+      }
+    ],
+    "fab": [
+      {
+        "uuid": "5431ed1c-d493-4221-98de-910a8f4dee6c",
+        "start": [
+          58.653,
+          36.2365
+        ],
+        "end": [
+          62.553,
+          36.2365
+        ],
+        "width": 0.127,
+        "shape": 0
+      },
+      {
+        "uuid": "c11b021c-6853-4d08-b93a-ad8a16f4421c",
+        "start": [
+          58.653,
+          40.1365
+        ],
+        "end": [
+          58.653,
+          36.2365
+        ],
+        "width": 0.127,
+        "shape": 0
+      },
+      {
+        "uuid": "4bcbe9ca-ede1-4e99-a81e-7e5339613b4c",
+        "start": [
+          62.553,
+          36.2365
+        ],
+        "end": [
+          62.553,
+          40.1365
+        ],
+        "width": 0.127,
+        "shape": 0
+      },
+      {
+        "uuid": "4ec41bd8-08fb-48c7-ac01-0107bdfbcec0",
+        "start": [
+          62.553,
+          40.1365
+        ],
+        "end": [
+          58.653,
+          40.1365
+        ],
+        "width": 0.127,
+        "shape": 0
+      },
+      {
+        "uuid": "b684e56c-fd9f-4f3d-991a-3b3a878c165f",
+        "start": [
+          60.603,
+          40.9365
+        ],
+        "end": [
+          60.603,
+          40.8365
+        ],
+        "width": 0.2,
+        "shape": 3
+      }
+    ]
+  },
+  "net_track_deltas": {
+    "+SOLAR": {
+      "before_total_track_length_mm": 172.4761905387971,
+      "after_total_track_length_mm": 143.40998927110877,
+      "before_total_trace_R_ohm": 0.2808403222976256,
+      "after_total_trace_R_ohm": 0.2324497837344858,
+      "removed": [
+        {
+          "uuid": "17d6f993-3d9b-46b3-ad58-a9fc892fc874",
+          "kind": "PCB_TRACK",
+          "net": "+SOLAR",
+          "layer": "B.Cu",
+          "start": [
+            55.95,
+            56.5
+          ],
+          "end": [
+            54.148,
+            56.5
+          ],
+          "width": 0.25,
+          "length": 1.802
+        },
+        {
+          "uuid": "30f9387b-6101-4b58-90b6-f944cba6fad5",
+          "kind": "PCB_TRACK",
+          "net": "+SOLAR",
+          "layer": "B.Cu",
+          "start": [
+            54.148,
+            52.45
+          ],
+          "end": [
+            55.95,
+            52.45
+          ],
+          "width": 0.25,
+          "length": 1.802
+        },
+        {
+          "uuid": "565c06b7-9582-44f0-a88c-af66fec0f3f0",
+          "kind": "PCB_TRACK",
+          "net": "+SOLAR",
+          "layer": "B.Cu",
+          "start": [
+            54.148,
+            41.448875
+          ],
+          "end": [
+            59.175375,
+            36.4215
+          ],
+          "width": 0.5,
+          "length": 7.10978190813544
+        },
+        {
+          "uuid": "68ff3b5b-3b97-492d-98f3-727c63925442",
+          "kind": "PCB_TRACK",
+          "net": "+SOLAR",
+          "layer": "B.Cu",
+          "start": [
+            62.521,
+            31.671
+          ],
+          "end": [
+            60.103,
+            34.089
+          ],
+          "width": 0.5,
+          "length": 3.4195683938181443
+        },
+        {
+          "uuid": "7ede80ea-e043-4f1d-be89-fb1d451eb73a",
+          "kind": "PCB_TRACK",
+          "net": "+SOLAR",
+          "layer": "B.Cu",
+          "start": [
+            59.175375,
+            36.4215
+          ],
+          "end": [
+            60.103,
+            36.4215
+          ],
+          "width": 0.5,
+          "length": 0.927625
+        },
+        {
+          "uuid": "80a79207-0d2b-4ce4-b70b-78970d12fa25",
+          "kind": "PCB_TRACK",
+          "net": "+SOLAR",
+          "layer": "B.Cu",
+          "start": [
+            70.827057,
+            31.671
+          ],
+          "end": [
+            62.521,
+            31.671
+          ],
+          "width": 0.5,
+          "length": 8.306057
+        },
+        {
+          "uuid": "a8b5072c-ca58-4971-bd14-97364fc1e043",
+          "kind": "PCB_TRACK",
+          "net": "+SOLAR",
+          "layer": "B.Cu",
+          "start": [
+            54.148,
+            56.5
+          ],
+          "end": [
+            54.148,
+            57.399
+          ],
+          "width": 0.25,
+          "length": 0.899
+        },
+        {
+          "uuid": "b31eff8a-b884-49df-8e32-245c0db06289",
+          "kind": "PCB_TRACK",
+          "net": "+SOLAR",
+          "layer": "B.Cu",
+          "start": [
+            54.148,
+            41.448875
+          ],
+          "end": [
+            54.148,
+            52.45
+          ],
+          "width": 0.25,
+          "length": 11.001125
+        },
+        {
+          "uuid": "b55f0878-fc10-4082-90bc-7707c4d2c0bc",
+          "kind": "PCB_TRACK",
+          "net": "+SOLAR",
+          "layer": "B.Cu",
+          "start": [
+            55.95,
+            52.45
+          ],
+          "end": [
+            55.95,
+            56.5
+          ],
+          "width": 0.25,
+          "length": 4.05
+        },
+        {
+          "uuid": "e9bec5b4-88da-45ea-9fa2-1d1c291498d9",
+          "kind": "PCB_TRACK",
+          "net": "+SOLAR",
+          "layer": "B.Cu",
+          "start": [
+            60.103,
+            34.089
+          ],
+          "end": [
+            60.103,
+            36.4215
+          ],
+          "width": 0.5,
+          "length": 2.3325
+        },
+        {
+          "uuid": "f5275c5f-c7b1-49db-bf4a-4d1022d5e45f",
+          "kind": "PCB_TRACK",
+          "net": "+SOLAR",
+          "layer": "B.Cu",
+          "start": [
+            54.781,
+            58.032
+          ],
+          "end": [
+            54.148,
+            57.399
+          ],
+          "width": 0.5,
+          "length": 0.8951971849821692
+        }
+      ],
+      "added": [
+        {
+          "uuid": "0b0aee2c-bd7d-50d3-8f9c-551679163c67",
+          "kind": "PCB_TRACK",
+          "net": "+SOLAR",
+          "layer": "B.Cu",
+          "start": [
+            63.4,
+            35.412132
+          ],
+          "end": [
+            63.4,
+            38.217
+          ],
+          "width": 0.5,
+          "length": 2.804868
+        },
+        {
+          "uuid": "16fb1424-7edd-5d8d-9994-301996d654b0",
+          "kind": "PCB_TRACK",
+          "net": "+SOLAR",
+          "layer": "B.Cu",
+          "start": [
+            63.55,
+            38.367
+          ],
+          "end": [
+            63.873,
+            38.367
+          ],
+          "width": 0.5,
+          "length": 0.323
+        },
+        {
+          "uuid": "910475a9-8b8c-515c-8c1f-8b65685bd968",
+          "kind": "PCB_TRACK",
+          "net": "+SOLAR",
+          "layer": "B.Cu",
+          "start": [
+            64.05,
+            31.983132
+          ],
+          "end": [
+            64.05,
+            34.637868
+          ],
+          "width": 0.5,
+          "length": 2.654736
+        },
+        {
+          "uuid": "a69af598-f323-59ef-9541-4f713c3cb1b9",
+          "kind": "PCB_TRACK",
+          "net": "+SOLAR",
+          "layer": "B.Cu",
+          "start": [
+            64.006066,
+            34.743934
+          ],
+          "end": [
+            63.443934,
+            35.306066
+          ],
+          "width": 0.5,
+          "length": 0.7949746982439128
+        },
+        {
+          "uuid": "a7963d2f-4dfe-5cab-aeaa-9421aa5eef73",
+          "kind": "PCB_TRACK",
+          "net": "+SOLAR",
+          "layer": "B.Cu",
+          "start": [
+            64.256066,
+            31.714934
+          ],
+          "end": [
+            64.093934,
+            31.877066
+          ],
+          "width": 0.5,
+          "length": 0.22928927329467466
+        },
+        {
+          "uuid": "e6354d2e-e8ee-529f-b13d-233d9ba40ba3",
+          "kind": "PCB_TRACK",
+          "net": "+SOLAR",
+          "layer": "B.Cu",
+          "start": [
+            70.827057,
+            31.671
+          ],
+          "end": [
+            64.362132,
+            31.671
+          ],
+          "width": 0.5,
+          "length": 6.464925
+        },
+        {
+          "uuid": "21c90aa6-0241-576e-9e4f-06d3b0d6a984",
+          "kind": "PCB_ARC",
+          "net": "+SOLAR",
+          "layer": "B.Cu",
+          "start": [
+            64.05,
+            34.637868
+          ],
+          "end": [
+            64.006066,
+            34.743934
+          ],
+          "width": 0.5,
+          "length": 0.11781909635583038,
+          "mid": [
+            64.038582,
+            34.69527
+          ]
+        },
+        {
+          "uuid": "7c09a78f-40ab-5ca1-94da-3e908f24c247",
+          "kind": "PCB_ARC",
+          "net": "+SOLAR",
+          "layer": "B.Cu",
+          "start": [
+            64.362132,
+            31.671
+          ],
+          "end": [
+            64.256066,
+            31.714934
+          ],
+          "width": 0.5,
+          "length": 0.11781909635583038,
+          "mid": [
+            64.30473,
+            31.682418
+          ]
+        },
+        {
+          "uuid": "99a3e4dd-2721-56b0-96cb-8e4661165152",
+          "kind": "PCB_ARC",
+          "net": "+SOLAR",
+          "layer": "B.Cu",
+          "start": [
+            63.443934,
+            35.306066
+          ],
+          "end": [
+            63.4,
+            35.412132
+          ],
+          "width": 0.5,
+          "length": 0.11780130298896896,
+          "mid": [
+            63.411418,
+            35.35473
+          ]
+        },
+        {
+          "uuid": "ba79e2bb-1935-5ce1-841f-310b3092969b",
+          "kind": "PCB_ARC",
+          "net": "+SOLAR",
+          "layer": "B.Cu",
+          "start": [
+            64.093934,
+            31.877066
+          ],
+          "end": [
+            64.05,
+            31.983132
+          ],
+          "width": 0.5,
+          "length": 0.11780130298896896,
+          "mid": [
+            64.061418,
+            31.92573
+          ]
+        },
+        {
+          "uuid": "d7c12550-c996-5f76-a7b5-e9a86d90d9ef",
+          "kind": "PCB_ARC",
+          "net": "+SOLAR",
+          "layer": "B.Cu",
+          "start": [
+            63.4,
+            38.217
+          ],
+          "end": [
+            63.55,
+            38.367
+          ],
+          "width": 0.5,
+          "length": 0.23561944901923448,
+          "mid": [
+            63.443934,
+            38.323066
+          ]
+        }
+      ],
+      "changed": [
+        {
+          "before": {
+            "uuid": "16996adf-2b9d-461d-afd5-d303b8979fe9",
+            "kind": "PCB_TRACK",
+            "net": "+SOLAR",
+            "layer": "B.Cu",
+            "start": [
+              61.0065,
+              36.4215
+            ],
+            "end": [
+              60.103,
+              36.4215
+            ],
+            "width": 0.25,
+            "length": 0.9035
+          },
+          "after": {
+            "uuid": "16996adf-2b9d-461d-afd5-d303b8979fe9",
+            "kind": "PCB_TRACK",
+            "net": "+SOLAR",
+            "layer": "B.Cu",
+            "start": [
+              61.0065,
+              36.4215
+            ],
+            "end": [
+              60.603,
+              36.4215
+            ],
+            "width": 0.25,
+            "length": 0.4035
+          }
+        }
+      ]
+    },
+    "Net-(U1-LBOOST)": {
+      "before_total_track_length_mm": 6.966752072574521,
+      "after_total_track_length_mm": 6.466752072574521,
+      "before_total_trace_R_ohm": 0.009804637202545695,
+      "after_total_trace_R_ohm": 0.009100963733157939,
+      "removed": [],
+      "added": [],
+      "changed": [
+        {
+          "before": {
+            "uuid": "e8c3e310-f44f-4eb9-9b74-4cd2b048ffe8",
+            "kind": "PCB_TRACK",
+            "net": "Net-(U1-LBOOST)",
+            "layer": "B.Cu",
+            "start": [
+              61.0885,
+              39.9515
+            ],
+            "end": [
+              60.103,
+              39.9515
+            ],
+            "width": 0.35,
+            "length": 0.9855
+          },
+          "after": {
+            "uuid": "e8c3e310-f44f-4eb9-9b74-4cd2b048ffe8",
+            "kind": "PCB_TRACK",
+            "net": "Net-(U1-LBOOST)",
+            "layer": "B.Cu",
+            "start": [
+              61.0885,
+              39.9515
+            ],
+            "end": [
+              60.603,
+              39.9515
+            ],
+            "width": 0.35,
+            "length": 0.4855
+          }
+        }
+      ]
+    },
+    "Net-(U1-LBUCK)": {
+      "before_total_track_length_mm": 2.2653610326785665,
+      "after_total_track_length_mm": 2.2653610326785665,
+      "before_total_trace_R_ohm": 0.004463408480386112,
+      "after_total_trace_R_ohm": 0.004463408480386112,
+      "removed": [],
+      "added": [],
+      "changed": []
+    }
+  },
+  "supply_paths_before": {
+    "C2_to_L1": {
+      "resistance_ohm": 0.003617791820096561,
+      "track_length_mm": 3.672352485596857,
+      "track_UUIDs": [
+        "881c3bd5-3b8d-45f1-a0f3-1d2b65e64483",
+        "4a782519-b8a6-485a-8d8d-3d03d1dcec90"
+      ]
+    },
+    "C2_to_VIN": {
+      "resistance_ohm": 0.0032930896857909613,
+      "track_length_mm": 1.671376725676967,
+      "track_UUIDs": [
+        "aa917031-8f8b-48d1-a4eb-9cfb30e388f0",
+        "626ed02d-3c1c-48e8-b358-2f4e2a419f67",
+        "15fdafb2-aed7-4034-90cd-347272730e35"
+      ]
+    },
+    "J2_to_L1": {
+      "resistance_ohm": 0.10255206053769575,
+      "track_length_mm": 56.05182421621297,
+      "track_UUIDs": [
+        "c420e767-883b-4162-80e1-2e4aeeab58f9",
+        "c50a32e6-a604-4d22-9f9e-4e8b50ee4361",
+        "0078ab10-a713-4287-a67f-d1f34f26d425",
+        "c3bd2d04-d137-461d-b0f2-46161b3136c2",
+        "bfcb3bc5-78ec-4f17-ac11-3ba013b9b1bb",
+        "6c059d03-7da2-42b7-8a27-f51688773177",
+        "8fe8f781-4123-481c-9753-636ebf4cfb5c",
+        "3f781e82-4a6f-48cf-9149-826ed6ece56a",
+        "3400a57e-70bb-47bb-8e45-001701087079",
+        "f5f5acc5-5061-4302-91ad-695f34ba436d",
+        "6b91b759-f6e0-45a1-b7d2-db7749d01f4e",
+        "f5275c5f-c7b1-49db-bf4a-4d1022d5e45f",
+        "a8b5072c-ca58-4971-bd14-97364fc1e043",
+        "17d6f993-3d9b-46b3-ad58-a9fc892fc874",
+        "b55f0878-fc10-4082-90bc-7707c4d2c0bc",
+        "30f9387b-6101-4b58-90b6-f944cba6fad5",
+        "b31eff8a-b884-49df-8e32-245c0db06289",
+        "565c06b7-9582-44f0-a88c-af66fec0f3f0"
+      ]
+    },
+    "J1_to_L1": {
+      "resistance_ohm": 0.14405167961249568,
+      "track_length_mm": 77.11456591600992,
+      "track_UUIDs": [
+        "70674abf-9f51-4067-9312-e18d2b6c3111",
+        "5795708b-693b-4acc-b29d-fd39aea4c19c",
+        "6a0c7fab-1a6e-425d-ab0f-f1d884cdf44b",
+        "c420e767-883b-4162-80e1-2e4aeeab58f9",
+        "c50a32e6-a604-4d22-9f9e-4e8b50ee4361",
+        "0078ab10-a713-4287-a67f-d1f34f26d425",
+        "c3bd2d04-d137-461d-b0f2-46161b3136c2",
+        "bfcb3bc5-78ec-4f17-ac11-3ba013b9b1bb",
+        "6c059d03-7da2-42b7-8a27-f51688773177",
+        "8fe8f781-4123-481c-9753-636ebf4cfb5c",
+        "3f781e82-4a6f-48cf-9149-826ed6ece56a",
+        "3400a57e-70bb-47bb-8e45-001701087079",
+        "f5f5acc5-5061-4302-91ad-695f34ba436d",
+        "6b91b759-f6e0-45a1-b7d2-db7749d01f4e",
+        "f5275c5f-c7b1-49db-bf4a-4d1022d5e45f",
+        "a8b5072c-ca58-4971-bd14-97364fc1e043",
+        "17d6f993-3d9b-46b3-ad58-a9fc892fc874",
+        "b55f0878-fc10-4082-90bc-7707c4d2c0bc",
+        "30f9387b-6101-4b58-90b6-f944cba6fad5",
+        "b31eff8a-b884-49df-8e32-245c0db06289",
+        "565c06b7-9582-44f0-a88c-af66fec0f3f0"
+      ]
+    }
+  },
+  "supply_paths_after": {
+    "C2_to_L1": {
+      "resistance_ohm": 0.003617791820096561,
+      "track_length_mm": 3.672352485596857,
+      "track_UUIDs": [
+        "881c3bd5-3b8d-45f1-a0f3-1d2b65e64483",
+        "4a782519-b8a6-485a-8d8d-3d03d1dcec90"
+      ]
+    },
+    "C2_to_VIN": {
+      "resistance_ohm": 0.0032930896857909613,
+      "track_length_mm": 1.671376725676967,
+      "track_UUIDs": [
+        "aa917031-8f8b-48d1-a4eb-9cfb30e388f0",
+        "626ed02d-3c1c-48e8-b358-2f4e2a419f67",
+        "15fdafb2-aed7-4034-90cd-347272730e35"
+      ]
+    },
+    "J2_to_L1": {
+      "resistance_ohm": 0.13202959764056085,
+      "track_length_mm": 92.16335771818596,
+      "track_UUIDs": [
+        "c420e767-883b-4162-80e1-2e4aeeab58f9",
+        "c50a32e6-a604-4d22-9f9e-4e8b50ee4361",
+        "0078ab10-a713-4287-a67f-d1f34f26d425",
+        "c3bd2d04-d137-461d-b0f2-46161b3136c2",
+        "bfcb3bc5-78ec-4f17-ac11-3ba013b9b1bb",
+        "6c059d03-7da2-42b7-8a27-f51688773177",
+        "8fe8f781-4123-481c-9753-636ebf4cfb5c",
+        "3f781e82-4a6f-48cf-9149-826ed6ece56a",
+        "3400a57e-70bb-47bb-8e45-001701087079",
+        "f5f5acc5-5061-4302-91ad-695f34ba436d",
+        "6b91b759-f6e0-45a1-b7d2-db7749d01f4e",
+        "a5b0839c-5bfb-43b2-a29a-48c4c031bf5c",
+        "e6286b18-9fb3-4dfc-99c7-c483ef48e4fb",
+        "3424f6d4-5223-4a2a-8770-c24a6ffe624c",
+        "56004dce-07ad-4209-98a6-20e90a1941c9",
+        "ffe6ae7c-a43b-4d49-abd3-c775702f4a7b",
+        "c03da636-45b1-47c5-a92a-f89046ef2d5e",
+        "52e753db-ed30-40b3-a0b2-39a58c97fe5b",
+        "8babebbc-ed81-422c-994b-2fd471ced06d",
+        "472981b2-6ce8-4bd8-bea2-501cb6a2ef42",
+        "514aa496-b0fc-44c5-952f-3f0f5babf25a",
+        "6f7a3288-1717-4614-8266-d03210fa3040",
+        "a8a43235-c812-4233-ad08-a0015c03f8d0",
+        "e6354d2e-e8ee-529f-b13d-233d9ba40ba3",
+        "7c09a78f-40ab-5ca1-94da-3e908f24c247",
+        "a7963d2f-4dfe-5cab-aeaa-9421aa5eef73",
+        "ba79e2bb-1935-5ce1-841f-310b3092969b",
+        "910475a9-8b8c-515c-8c1f-8b65685bd968",
+        "21c90aa6-0241-576e-9e4f-06d3b0d6a984",
+        "a69af598-f323-59ef-9541-4f713c3cb1b9",
+        "99a3e4dd-2721-56b0-96cb-8e4661165152",
+        "0b0aee2c-bd7d-50d3-8f9c-551679163c67",
+        "881c3bd5-3b8d-45f1-a0f3-1d2b65e64483",
+        "4a782519-b8a6-485a-8d8d-3d03d1dcec90"
+      ]
+    },
+    "J1_to_L1": {
+      "resistance_ohm": 0.17352921671536076,
+      "track_length_mm": 113.22609941798291,
+      "track_UUIDs": [
+        "70674abf-9f51-4067-9312-e18d2b6c3111",
+        "5795708b-693b-4acc-b29d-fd39aea4c19c",
+        "6a0c7fab-1a6e-425d-ab0f-f1d884cdf44b",
+        "c420e767-883b-4162-80e1-2e4aeeab58f9",
+        "c50a32e6-a604-4d22-9f9e-4e8b50ee4361",
+        "0078ab10-a713-4287-a67f-d1f34f26d425",
+        "c3bd2d04-d137-461d-b0f2-46161b3136c2",
+        "bfcb3bc5-78ec-4f17-ac11-3ba013b9b1bb",
+        "6c059d03-7da2-42b7-8a27-f51688773177",
+        "8fe8f781-4123-481c-9753-636ebf4cfb5c",
+        "3f781e82-4a6f-48cf-9149-826ed6ece56a",
+        "3400a57e-70bb-47bb-8e45-001701087079",
+        "f5f5acc5-5061-4302-91ad-695f34ba436d",
+        "6b91b759-f6e0-45a1-b7d2-db7749d01f4e",
+        "a5b0839c-5bfb-43b2-a29a-48c4c031bf5c",
+        "e6286b18-9fb3-4dfc-99c7-c483ef48e4fb",
+        "3424f6d4-5223-4a2a-8770-c24a6ffe624c",
+        "56004dce-07ad-4209-98a6-20e90a1941c9",
+        "ffe6ae7c-a43b-4d49-abd3-c775702f4a7b",
+        "c03da636-45b1-47c5-a92a-f89046ef2d5e",
+        "52e753db-ed30-40b3-a0b2-39a58c97fe5b",
+        "8babebbc-ed81-422c-994b-2fd471ced06d",
+        "472981b2-6ce8-4bd8-bea2-501cb6a2ef42",
+        "514aa496-b0fc-44c5-952f-3f0f5babf25a",
+        "6f7a3288-1717-4614-8266-d03210fa3040",
+        "a8a43235-c812-4233-ad08-a0015c03f8d0",
+        "e6354d2e-e8ee-529f-b13d-233d9ba40ba3",
+        "7c09a78f-40ab-5ca1-94da-3e908f24c247",
+        "a7963d2f-4dfe-5cab-aeaa-9421aa5eef73",
+        "ba79e2bb-1935-5ce1-841f-310b3092969b",
+        "910475a9-8b8c-515c-8c1f-8b65685bd968",
+        "21c90aa6-0241-576e-9e4f-06d3b0d6a984",
+        "a69af598-f323-59ef-9541-4f713c3cb1b9",
+        "99a3e4dd-2721-56b0-96cb-8e4661165152",
+        "0b0aee2c-bd7d-50d3-8f9c-551679163c67",
+        "881c3bd5-3b8d-45f1-a0f3-1d2b65e64483",
+        "4a782519-b8a6-485a-8d8d-3d03d1dcec90"
+      ]
+    }
+  },
+  "L1_nearby_pads": [
+    {
+      "L1pin": "1",
+      "other_ref": "C2",
+      "other_pin": "1",
+      "net": "+SOLAR",
+      "copper_gap_mm": 0.8923137698371585
+    },
+    {
+      "L1pin": "1",
+      "other_ref": "C2",
+      "other_pin": "2",
+      "net": "GND",
+      "copper_gap_mm": 0.8390000000000057
+    },
+    {
+      "L1pin": "2",
+      "other_ref": "R25",
+      "other_pin": "2",
+      "net": "GND",
+      "copper_gap_mm": 0.7554999999999977
+    }
+  ],
+  "notes": [
+    "TrackR uses20\u00b0C35\u00b5m nominalCu;viaR/padspreading/temperature excluded.",
+    "Whole-net summed resistance is NOT a source equivalent resistance; path results are distinguished.",
+    "Zero-R pad-contact links omit pad-spreading resistance and avoid attributing center-to-land travel to a trace.",
+    "Endpoint graph is a centerline screen, not a substitute for exact native copper connectivity.",
+    "Native DRC and actual GND return/reference must be reviewed alongside these values."
+  ]
+}

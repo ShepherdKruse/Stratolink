@@ -1,0 +1,236 @@
+{
+  "pcb_sha256": "7e401900a78b7d88c4e688fdbe58039308113fc0308e5125366d0a98c592a502",
+  "components": [
+    {
+      "layer": "F.Cu",
+      "area_mm2": 4.143679999996547e-05,
+      "bounds_mm": [
+        59.8755,
+        44.413091,
+        59.88113,
+        44.441403
+      ],
+      "area_within_1mm_of_rf_mm2": 4.1436799999965464e-05,
+      "source_items": [
+        {
+          "kind": "zone",
+          "uuid": "ff68431e-1a69-589a-8846-12ef7f8f1c25",
+          "net": "GND",
+          "ref": null,
+          "pin": null,
+          "intersection_mm2": 4.1436799999965464e-05
+        }
+      ]
+    },
+    {
+      "layer": "F.Cu",
+      "area_mm2": 4.141832400000024e-05,
+      "bounds_mm": [
+        59.891543,
+        44.466543,
+        59.907578,
+        44.49054
+      ],
+      "area_within_1mm_of_rf_mm2": 4.141832400000024e-05,
+      "source_items": [
+        {
+          "kind": "zone",
+          "uuid": "ff68431e-1a69-589a-8846-12ef7f8f1c25",
+          "net": "GND",
+          "ref": null,
+          "pin": null,
+          "intersection_mm2": 4.141832400000024e-05
+        }
+      ]
+    },
+    {
+      "layer": "B.Cu",
+      "area_mm2": 4.0598144500004884e-05,
+      "bounds_mm": [
+        57.199867,
+        44.300292,
+        57.21488,
+        44.324647
+      ],
+      "area_within_1mm_of_rf_mm2": 0.0,
+      "source_items": [
+        {
+          "kind": "zone",
+          "uuid": "5e2db696-2b79-5298-991f-602d4bec098c",
+          "net": "GND",
+          "ref": null,
+          "pin": null,
+          "intersection_mm2": 4.059814450000488e-05
+        }
+      ]
+    },
+    {
+      "layer": "B.Cu",
+      "area_mm2": 4.3511849500020164e-05,
+      "bounds_mm": [
+        58.709569,
+        44.226531,
+        58.726063,
+        44.250836
+      ],
+      "area_within_1mm_of_rf_mm2": 4.3511849500020164e-05,
+      "source_items": [
+        {
+          "kind": "zone",
+          "uuid": "5e2db696-2b79-5298-991f-602d4bec098c",
+          "net": "GND",
+          "ref": null,
+          "pin": null,
+          "intersection_mm2": 4.3511849500020164e-05
+        }
+      ]
+    },
+    {
+      "layer": "B.Cu",
+      "area_mm2": 0.00011831856949994318,
+      "bounds_mm": [
+        58.651972,
+        44.374298,
+        58.659563,
+        44.41562
+      ],
+      "area_within_1mm_of_rf_mm2": 0.00011831856949994318,
+      "source_items": [
+        {
+          "kind": "zone",
+          "uuid": "5e2db696-2b79-5298-991f-602d4bec098c",
+          "net": "GND",
+          "ref": null,
+          "pin": null,
+          "intersection_mm2": 0.00011831856949994318
+        }
+      ]
+    },
+    {
+      "layer": "B.Cu",
+      "area_mm2": 4.144385250001777e-05,
+      "bounds_mm": [
+        58.659829,
+        44.437834,
+        58.670671,
+        44.464591
+      ],
+      "area_within_1mm_of_rf_mm2": 4.1443852500017765e-05,
+      "source_items": [
+        {
+          "kind": "zone",
+          "uuid": "5e2db696-2b79-5298-991f-602d4bec098c",
+          "net": "GND",
+          "ref": null,
+          "pin": null,
+          "intersection_mm2": 4.1443852500017765e-05
+        }
+      ]
+    },
+    {
+      "layer": "B.Cu",
+      "area_mm2": 4.1624456500038644e-05,
+      "bounds_mm": [
+        57.934339,
+        45.122431,
+        57.962274,
+        45.129973
+      ],
+      "area_within_1mm_of_rf_mm2": 0.0,
+      "source_items": [
+        {
+          "kind": "zone",
+          "uuid": "5e2db696-2b79-5298-991f-602d4bec098c",
+          "net": "GND",
+          "ref": null,
+          "pin": null,
+          "intersection_mm2": 4.162445650003865e-05
+        }
+      ]
+    },
+    {
+      "layer": "B.Cu",
+      "area_mm2": 1.1179999991188319e-09,
+      "bounds_mm": [
+        57.839231,
+        45.165646,
+        57.839723,
+        45.16571
+      ],
+      "area_within_1mm_of_rf_mm2": 0.0,
+      "source_items": [
+        {
+          "kind": "zone",
+          "uuid": "5e2db696-2b79-5298-991f-602d4bec098c",
+          "net": "GND",
+          "ref": null,
+          "pin": null,
+          "intersection_mm2": 1.1179999991188314e-09
+        }
+      ]
+    },
+    {
+      "layer": "B.Cu",
+      "area_mm2": 1.6649999988045937e-10,
+      "bounds_mm": [
+        58.521812,
+        45.262555,
+        58.522132,
+        45.262842
+      ],
+      "area_within_1mm_of_rf_mm2": 1.6649999988045689e-10,
+      "source_items": [
+        {
+          "kind": "zone",
+          "uuid": "5e2db696-2b79-5298-991f-602d4bec098c",
+          "net": "GND",
+          "ref": null,
+          "pin": null,
+          "intersection_mm2": 1.6649999988045689e-10
+        }
+      ]
+    },
+    {
+      "layer": "B.Cu",
+      "area_mm2": 8.874999993057486e-10,
+      "bounds_mm": [
+        58.521461,
+        45.262866,
+        58.521786,
+        45.263149
+      ],
+      "area_within_1mm_of_rf_mm2": 8.874999993057511e-10,
+      "source_items": [
+        {
+          "kind": "zone",
+          "uuid": "5e2db696-2b79-5298-991f-602d4bec098c",
+          "net": "GND",
+          "ref": null,
+          "pin": null,
+          "intersection_mm2": 8.874999993057511e-10
+        }
+      ]
+    },
+    {
+      "layer": "B.Cu",
+      "area_mm2": 2.1405000014335026e-09,
+      "bounds_mm": [
+        58.262158,
+        45.290872,
+        58.272093,
+        45.297268
+      ],
+      "area_within_1mm_of_rf_mm2": 0.0,
+      "source_items": [
+        {
+          "kind": "zone",
+          "uuid": "5e2db696-2b79-5298-991f-602d4bec098c",
+          "net": "GND",
+          "ref": null,
+          "pin": null,
+          "intersection_mm2": 2.1405000014343496e-09
+        }
+      ]
+    }
+  ]
+}

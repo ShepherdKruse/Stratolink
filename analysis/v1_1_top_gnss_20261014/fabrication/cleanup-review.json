@@ -1,0 +1,557 @@
+{
+  "source_sha256": "7e401900a78b7d88c4e688fdbe58039308113fc0308e5125366d0a98c592a502",
+  "final_sha256": "88f82c85d2d47b4aea2e7d7d2827c4a92c339788cc0d9c880dd6342ee0440c0a",
+  "layers": {
+    "F.Cu": {
+      "added_area_mm2": 0.00490155290169739,
+      "removed_area_mm2": 8.286665369745412e-05,
+      "delta_outside_bounded_regions_mm2": 0.0,
+      "outside_delta_submicron_tessellation": [],
+      "tiny_copper_components_sub_10nm": [],
+      "small_empty_components_sub_10nm": [
+        {
+          "area_mm2": 2.1674000022277234e-08,
+          "bounds_mm": [
+            57.0,
+            30.021674,
+            57.021674,
+            30.074
+          ],
+          "maximum_inscribed_diameter_mm": 7.619306567657621e-07
+        },
+        {
+          "area_mm2": 2.167399994527927e-08,
+          "bounds_mm": [
+            57.021674,
+            30.0,
+            57.074,
+            30.021674
+          ],
+          "maximum_inscribed_diameter_mm": 7.619306540466478e-07
+        }
+      ]
+    },
+    "B.Cu": {
+      "added_area_mm2": 0.01905317012018957,
+      "removed_area_mm2": 8.079467960261173,
+      "delta_outside_bounded_regions_mm2": 6.520435113017375e-07,
+      "outside_delta_submicron_tessellation": [
+        {
+          "area_mm2": 1.1850800007333698e-07,
+          "bounds_mm": [
+            53.661663,
+            30.757237,
+            53.758879,
+            30.973241
+          ],
+          "maximum_inscribed_diameter_mm": 1.020888944593289e-06
+        },
+        {
+          "area_mm2": 1.3437523943697414e-10,
+          "bounds_mm": [
+            53.6563729329149,
+            30.980153,
+            53.658799,
+            30.986550906378532
+          ],
+          "maximum_inscribed_diameter_mm": 3.80040231541187e-08
+        },
+        {
+          "area_mm2": 1.0387522991074784e-10,
+          "bounds_mm": [
+            53.656142,
+            30.986550906378532,
+            53.6563729329149,
+            30.987159
+          ],
+          "maximum_inscribed_diameter_mm": 3.189843522900625e-07
+        },
+        {
+          "area_mm2": 1.19749095280143e-08,
+          "bounds_mm": [
+            57.95459336591644,
+            32.72679578863881,
+            57.97255169099923,
+            32.73716438199847
+          ],
+          "maximum_inscribed_diameter_mm": 8.499874058497049e-07
+        },
+        {
+          "area_mm2": 2.8970514989561102e-08,
+          "bounds_mm": [
+            57.97255169099923,
+            32.73716438199847,
+            58.045913,
+            32.77952
+          ],
+          "maximum_inscribed_diameter_mm": 5.908502857701756e-07
+        },
+        {
+          "area_mm2": 2.143499957302957e-09,
+          "bounds_mm": [
+            53.814632,
+            35.576441,
+            53.841668,
+            35.58764
+          ],
+          "maximum_inscribed_diameter_mm": 1.4328423198977006e-07
+        },
+        {
+          "area_mm2": 2.1690001425793068e-09,
+          "bounds_mm": [
+            57.386527,
+            36.609716,
+            57.472765,
+            36.647794
+          ],
+          "maximum_inscribed_diameter_mm": 4.533589457019239e-08
+        },
+        {
+          "area_mm2": 3.900000429481361e-10,
+          "bounds_mm": [
+            57.562679,
+            37.269991,
+            57.597585,
+            37.349044
+          ],
+          "maximum_inscribed_diameter_mm": 7.737492367960123e-09
+        },
+        {
+          "area_mm2": 1.3426499847811623e-08,
+          "bounds_mm": [
+            58.4925,
+            37.436499,
+            58.504333,
+            37.495999
+          ],
+          "maximum_inscribed_diameter_mm": 4.479841556886254e-07
+        },
+        {
+          "area_mm2": 1.751999929680676e-09,
+          "bounds_mm": [
+            54.414632,
+            37.526441,
+            54.441668,
+            37.53764
+          ],
+          "maximum_inscribed_diameter_mm": 1.133416404076533e-07
+        },
+        {
+          "area_mm2": 8.553499861216111e-09,
+          "bounds_mm": [
+            58.50694,
+            39.892376,
+            58.539926,
+            39.942469
+          ],
+          "maximum_inscribed_diameter_mm": 2.7880240808331187e-07
+        },
+        {
+          "area_mm2": 8.019553279767208e-10,
+          "bounds_mm": [
+            57.655661,
+            41.838287,
+            57.6689160860489,
+            41.8718461140371
+          ],
+          "maximum_inscribed_diameter_mm": 4.2835136807947747e-08
+        },
+        {
+          "area_mm2": 1.7395527749697437e-10,
+          "bounds_mm": [
+            57.6689160860489,
+            41.8718461140371,
+            57.670937,
+            41.876962
+          ],
+          "maximum_inscribed_diameter_mm": 6.198150230845493e-08
+        },
+        {
+          "area_mm2": 5.040260470021005e-10,
+          "bounds_mm": [
+            58.672418,
+            43.147767,
+            58.675118676793375,
+            43.15415571801331
+          ],
+          "maximum_inscribed_diameter_mm": 1.4406969168016183e-07
+        },
+        {
+          "area_mm2": 4.297999953661001e-09,
+          "bounds_mm": [
+            58.675292,
+            43.154566,
+            58.6953,
+            43.201906
+          ],
+          "maximum_inscribed_diameter_mm": 2.0967498556385398e-07
+        },
+        {
+          "area_mm2": 1.0517999923206526e-08,
+          "bounds_mm": [
+            55.827046,
+            44.225508,
+            55.843558,
+            44.261511
+          ],
+          "maximum_inscribed_diameter_mm": 5.316292063272108e-07
+        },
+        {
+          "area_mm2": 2.8345168258402654e-10,
+          "bounds_mm": [
+            55.862465,
+            44.307928,
+            55.86356900866699,
+            44.3106858932325
+          ],
+          "maximum_inscribed_diameter_mm": 2.447417266721545e-07
+        },
+        {
+          "area_mm2": 5.998451698432895e-09,
+          "bounds_mm": [
+            55.86356900866699,
+            44.3106858932325,
+            55.876222,
+            44.342344
+          ],
+          "maximum_inscribed_diameter_mm": 3.47944169209531e-07
+        },
+        {
+          "area_mm2": 1.065000008073204e-08,
+          "bounds_mm": [
+            55.876362,
+            44.342698,
+            55.889119,
+            44.37516
+          ],
+          "maximum_inscribed_diameter_mm": 6.090433769859913e-07
+        },
+        {
+          "area_mm2": 4.08499993393368e-10,
+          "bounds_mm": [
+            56.621505,
+            45.134179,
+            56.623648,
+            45.135198
+          ],
+          "maximum_inscribed_diameter_mm": 4.5969376032751285e-07
+        },
+        {
+          "area_mm2": 2.938489998253091e-07,
+          "bounds_mm": [
+            59.548523,
+            37.022,
+            60.139895,
+            37.555011
+          ],
+          "maximum_inscribed_diameter_mm": 1.4855452126739296e-06
+        },
+        {
+          "area_mm2": 1.3105913926217492e-08,
+          "bounds_mm": [
+            59.433,
+            38.771,
+            59.48587961621243,
+            38.78134261621243
+          ],
+          "maximum_inscribed_diameter_mm": 4.815957271109779e-07
+        },
+        {
+          "area_mm2": 1.4348140743677718e-09,
+          "bounds_mm": [
+            59.48587961621243,
+            38.78134261621243,
+            59.4915747999999,
+            38.78245659999998
+          ],
+          "maximum_inscribed_diameter_mm": 3.023461638498493e-07
+        },
+        {
+          "area_mm2": 4.344999154307777e-10,
+          "bounds_mm": [
+            59.498563,
+            38.785296,
+            59.548523,
+            38.817989
+          ],
+          "maximum_inscribed_diameter_mm": 1.2987994531125447e-08
+        },
+        {
+          "area_mm2": 3.030100013869802e-08,
+          "bounds_mm": [
+            61.645534,
+            40.968862,
+            61.706137,
+            41.029464
+          ],
+          "maximum_inscribed_diameter_mm": 7.070694790527722e-07
+        },
+        {
+          "area_mm2": 1.90649997319681e-08,
+          "bounds_mm": [
+            61.706138,
+            41.029465,
+            61.780362,
+            41.072318
+          ],
+          "maximum_inscribed_diameter_mm": 3.687907537085667e-07
+        },
+        {
+          "area_mm2": 5.4758430919639835e-09,
+          "bounds_mm": [
+            61.780365,
+            41.072319,
+            61.81289778763166,
+            41.08103601695705
+          ],
+          "maximum_inscribed_diameter_mm": 3.204937262581461e-07
+        },
+        {
+          "area_mm2": 2.689708976260256e-09,
+          "bounds_mm": [
+            61.81289778763166,
+            41.08103601695705,
+            61.82175026789899,
+            41.083408
+          ],
+          "maximum_inscribed_diameter_mm": 5.84982250128049e-07
+        },
+        {
+          "area_mm2": 6.6375000107456145e-09,
+          "bounds_mm": [
+            60.7295,
+            41.788501,
+            60.732269,
+            41.81238
+          ],
+          "maximum_inscribed_diameter_mm": 4.858625648946948e-07
+        },
+        {
+          "area_mm2": 1.346810465656645e-10,
+          "bounds_mm": [
+            61.685198863172715,
+            41.837354,
+            61.686396,
+            41.84024390997098
+          ],
+          "maximum_inscribed_diameter_mm": 8.515997609382131e-08
+        },
+        {
+          "area_mm2": 1.0456681055044469e-08,
+          "bounds_mm": [
+            61.676132,
+            41.84024390997098,
+            61.685198863172715,
+            41.862134
+          ],
+          "maximum_inscribed_diameter_mm": 8.767817530950863e-07
+        },
+        {
+          "area_mm2": 3.5077728262025815e-10,
+          "bounds_mm": [
+            58.8550102923908,
+            42.705398,
+            58.855802,
+            42.706893229153444
+          ],
+          "maximum_inscribed_diameter_mm": 4.139573515215594e-07
+        },
+        {
+          "area_mm2": 9.49777284873595e-10,
+          "bounds_mm": [
+            58.853387,
+            42.706893229153444,
+            58.8550102923908,
+            42.709959
+          ],
+          "maximum_inscribed_diameter_mm": 5.467103871442067e-07
+        },
+        {
+          "area_mm2": 2.3933015648320826e-10,
+          "bounds_mm": [
+            59.241014,
+            43.52578,
+            59.241356607013,
+            43.53387764662141
+          ],
+          "maximum_inscribed_diameter_mm": 5.853293664757371e-08
+        },
+        {
+          "area_mm2": 1.440830169044256e-09,
+          "bounds_mm": [
+            59.241356607013,
+            43.53387764662141,
+            59.241665,
+            43.541153
+          ],
+          "maximum_inscribed_diameter_mm": 3.940671315345315e-07
+        },
+        {
+          "area_mm2": 9.38053415196552e-09,
+          "bounds_mm": [
+            75.800952,
+            35.583528,
+            75.83925485571854,
+            35.64085216356093
+          ],
+          "maximum_inscribed_diameter_mm": 2.6846895515721275e-07
+        },
+        {
+          "area_mm2": 1.17895338198708e-08,
+          "bounds_mm": [
+            75.83925485571854,
+            35.64085216356093,
+            75.88308,
+            35.706441
+          ],
+          "maximum_inscribed_diameter_mm": 2.8800221832707006e-07
+        },
+        {
+          "area_mm2": 9.718999921394055e-09,
+          "bounds_mm": [
+            69.226924,
+            37.418932,
+            69.271983,
+            37.437596
+          ],
+          "maximum_inscribed_diameter_mm": 4.1426939125490687e-07
+        },
+        {
+          "area_mm2": 4.221354488838022e-10,
+          "bounds_mm": [
+            65.19999999999999,
+            38.72661,
+            65.227469,
+            38.75407900000001
+          ],
+          "maximum_inscribed_diameter_mm": 1.0866587297219002e-08
+        },
+        {
+          "area_mm2": 9.033999867594271e-09,
+          "bounds_mm": [
+            66.270276,
+            40.206557,
+            66.285063,
+            40.242258
+          ],
+          "maximum_inscribed_diameter_mm": 4.5007074110084774e-07
+        },
+        {
+          "area_mm2": 5.846250245996015e-10,
+          "bounds_mm": [
+            69.601333,
+            40.405361,
+            69.61090108864528,
+            40.40932387445534
+          ],
+          "maximum_inscribed_diameter_mm": 1.1245061144926442e-07
+        },
+        {
+          "area_mm2": 1.2001251220544973e-09,
+          "bounds_mm": [
+            69.61090108864528,
+            40.40932387445534,
+            69.628368,
+            40.416559
+          ],
+          "maximum_inscribed_diameter_mm": 1.2469394985388456e-07
+        },
+        {
+          "area_mm2": 1.5565000339841048e-09,
+          "bounds_mm": [
+            70.245361,
+            40.519333,
+            70.256559,
+            40.546368
+          ],
+          "maximum_inscribed_diameter_mm": 1.4933226657021283e-07
+        }
+      ],
+      "tiny_copper_components_sub_10nm": [
+        {
+          "area_mm2": 9.17899995430422e-09,
+          "bounds_mm": [
+            58.864493,
+            44.170708,
+            58.888935,
+            44.1752
+          ],
+          "maximum_inscribed_diameter_mm": 7.35665164976705e-07
+        },
+        {
+          "area_mm2": 1.1179999991188319e-09,
+          "bounds_mm": [
+            57.839231,
+            45.165646,
+            57.839723,
+            45.16571
+          ],
+          "maximum_inscribed_diameter_mm": 4.505468891343181e-06
+        },
+        {
+          "area_mm2": 1.6649999988045689e-10,
+          "bounds_mm": [
+            58.521812,
+            45.262555,
+            58.522132,
+            45.262842
+          ],
+          "maximum_inscribed_diameter_mm": 7.743426086581423e-07
+        },
+        {
+          "area_mm2": 8.874999993057486e-10,
+          "bounds_mm": [
+            58.521461,
+            45.262866,
+            58.521786,
+            45.263149
+          ],
+          "maximum_inscribed_diameter_mm": 4.116878342716648e-06
+        },
+        {
+          "area_mm2": 2.1405000014343496e-09,
+          "bounds_mm": [
+            58.262158,
+            45.290872,
+            58.272093,
+            45.297268
+          ],
+          "maximum_inscribed_diameter_mm": 3.5682658749133994e-07
+        }
+      ],
+      "small_empty_components_sub_10nm": [
+        {
+          "area_mm2": 1.289999994019034e-10,
+          "bounds_mm": [
+            58.521448,
+            45.262915,
+            58.521736,
+            45.263161
+          ],
+          "maximum_inscribed_diameter_mm": 6.809670065826581e-07
+        },
+        {
+          "area_mm2": 2.1674000022277234e-08,
+          "bounds_mm": [
+            57.0,
+            30.021674,
+            57.021674,
+            30.074
+          ],
+          "maximum_inscribed_diameter_mm": 7.619306567657621e-07
+        },
+        {
+          "area_mm2": 2.167399994527927e-08,
+          "bounds_mm": [
+            57.021674,
+            30.0,
+            57.074,
+            30.021674
+          ],
+          "maximum_inscribed_diameter_mm": 7.619306540466478e-07
+        }
+      ]
+    }
+  },
+  "assessment": "All four substantive acute gaps and seven real disconnected source-fill fragments removed. Remaining tiny components and enclosed seams have maximum inscribed width below10nm, far below the 100um fabrication feature screen; these are polygon-intersection artifacts, not accepted manufactured features. Explicit region checks catch broad accidental fill changes."
+}

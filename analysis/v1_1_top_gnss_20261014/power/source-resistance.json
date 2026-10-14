@@ -1,0 +1,117 @@
+{
+  "baseline_sha256": "8df85b3e4bdd546ec174bb9d7b9ee9d795d55d486a68e1e853aaf1b871f863d3",
+  "candidate_sha256": "88f82c85d2d47b4aea2e7d7d2827c4a92c339788cc0d9c880dd6342ee0440c0a",
+  "rho20_ohm_m": 1.724e-08,
+  "nominal_copper_thickness_um": 35,
+  "start_mm": [
+    54.781,
+    58.032
+  ],
+  "C2_end_mm": [
+    63.873,
+    38.367
+  ],
+  "old_left": {
+    "length_mm": 28.48672909311761,
+    "resistance_ohm_20C": 0.047327104260876995,
+    "track_uuids": [
+      "f5275c5f-c7b1-49db-bf4a-4d1022d5e45f",
+      "a8b5072c-ca58-4971-bd14-97364fc1e043",
+      "17d6f993-3d9b-46b3-ad58-a9fc892fc874",
+      "b55f0878-fc10-4082-90bc-7707c4d2c0bc",
+      "30f9387b-6101-4b58-90b6-f944cba6fad5",
+      "b31eff8a-b884-49df-8e32-245c0db06289",
+      "565c06b7-9582-44f0-a88c-af66fec0f3f0",
+      "7ede80ea-e043-4f1d-be89-fb1d451eb73a"
+    ],
+    "widths_mm": [
+      0.25,
+      0.5
+    ]
+  },
+  "old_right": {
+    "length_mm": 60.63637673308372,
+    "resistance_ohm_20C": 0.07290161780597078,
+    "track_uuids": [
+      "a5b0839c-5bfb-43b2-a29a-48c4c031bf5c",
+      "e6286b18-9fb3-4dfc-99c7-c483ef48e4fb",
+      "3424f6d4-5223-4a2a-8770-c24a6ffe624c",
+      "56004dce-07ad-4209-98a6-20e90a1941c9",
+      "ffe6ae7c-a43b-4d49-abd3-c775702f4a7b",
+      "c03da636-45b1-47c5-a92a-f89046ef2d5e",
+      "52e753db-ed30-40b3-a0b2-39a58c97fe5b",
+      "8babebbc-ed81-422c-994b-2fd471ced06d",
+      "472981b2-6ce8-4bd8-bea2-501cb6a2ef42",
+      "514aa496-b0fc-44c5-952f-3f0f5babf25a",
+      "6f7a3288-1717-4614-8266-d03210fa3040",
+      "a8a43235-c812-4233-ad08-a0015c03f8d0",
+      "80a79207-0d2b-4ce4-b70b-78970d12fa25",
+      "68ff3b5b-3b97-492d-98f3-727c63925442",
+      "e9bec5b4-88da-45ea-9fa2-1d1c291498d9"
+    ],
+    "widths_mm": [
+      0.25,
+      0.5
+    ]
+  },
+  "old_parallel_ohm": 0.02869715661430257,
+  "old_local_L1_to_C2": {
+    "length_mm": 4.575852485596856,
+    "resistance_ohm_20C": 0.005397944962953703,
+    "track_uuids": [
+      "16996adf-2b9d-461d-afd5-d303b8979fe9",
+      "4a782519-b8a6-485a-8d8d-3d03d1dcec90",
+      "881c3bd5-3b8d-45f1-a0f3-1d2b65e64483"
+    ],
+    "widths_mm": [
+      0.25,
+      0.5
+    ]
+  },
+  "old_junction_to_C2_ohm": 0.03409510157725627,
+  "new_junction_to_C2": {
+    "length_mm": 60.556904558513,
+    "resistance_ohm_20C": 0.07282332636085079,
+    "track_uuids": [
+      "a5b0839c-5bfb-43b2-a29a-48c4c031bf5c",
+      "e6286b18-9fb3-4dfc-99c7-c483ef48e4fb",
+      "3424f6d4-5223-4a2a-8770-c24a6ffe624c",
+      "56004dce-07ad-4209-98a6-20e90a1941c9",
+      "ffe6ae7c-a43b-4d49-abd3-c775702f4a7b",
+      "c03da636-45b1-47c5-a92a-f89046ef2d5e",
+      "52e753db-ed30-40b3-a0b2-39a58c97fe5b",
+      "8babebbc-ed81-422c-994b-2fd471ced06d",
+      "472981b2-6ce8-4bd8-bea2-501cb6a2ef42",
+      "514aa496-b0fc-44c5-952f-3f0f5babf25a",
+      "6f7a3288-1717-4614-8266-d03210fa3040",
+      "a8a43235-c812-4233-ad08-a0015c03f8d0",
+      "e6354d2e-e8ee-529f-b13d-233d9ba40ba3",
+      "7c09a78f-40ab-5ca1-94da-3e908f24c247",
+      "a7963d2f-4dfe-5cab-aeaa-9421aa5eef73",
+      "ba79e2bb-1935-5ce1-841f-310b3092969b",
+      "910475a9-8b8c-515c-8c1f-8b65685bd968",
+      "21c90aa6-0241-576e-9e4f-06d3b0d6a984",
+      "a69af598-f323-59ef-9541-4f713c3cb1b9",
+      "99a3e4dd-2721-56b0-96cb-8e4661165152",
+      "0b0aee2c-bd7d-50d3-8f9c-551679163c67",
+      "d7c12550-c996-5f76-a7b5-e9a86d90d9ef",
+      "16fb1424-7edd-5d8d-9994-301996d654b0"
+    ],
+    "widths_mm": [
+      0.25,
+      0.5
+    ]
+  },
+  "delta_ohm": 0.038728224783594514,
+  "conditional_voltage_drop_increase_mV": {
+    "100": 3.8728224783594514,
+    "200": 7.745644956718903
+  },
+  "conditional_200mA_delta_mV_at85C": 9.724269960912746,
+  "limitations": [
+    "100/200mA are conditional current screens, not measured panel output.",
+    "Uses actual path lengths and widths; excludes via, solder and pad-spreading resistance, current crowding and copper-thickness tolerance.",
+    "Common connector-to-junction paths add resistance in both versions.",
+    "Centerline branches terminating inside large same-net L1 pads make this an approximate circuit model, not an exact resistance extraction."
+  ]
+}

@@ -1,0 +1,100 @@
+{
+  "baseline_sha256": "8df85b3e4bdd546ec174bb9d7b9ee9d795d55d486a68e1e853aaf1b871f863d3",
+  "candidate_sha256": "88f82c85d2d47b4aea2e7d7d2827c4a92c339788cc0d9c880dd6342ee0440c0a",
+  "region_bounds_mm": [
+    62.7,
+    35.6,
+    69.3,
+    40.5
+  ],
+  "explicit_C2_U1_return": {
+    "unchanged": true,
+    "width_mm": 0.25,
+    "route_length_to_inside_C2_land_mm": 1.9864022076181767,
+    "tracks": [
+      {
+        "uuid": "ce6c318c-cb5b-4e36-8507-e30e6495c991",
+        "kind": "PCB_TRACK",
+        "net": "GND",
+        "layer": "B.Cu",
+        "start": [
+          65.540999,
+          38.814998
+        ],
+        "end": [
+          65.315857,
+          38.814998
+        ],
+        "width": 0.25,
+        "length": 0.225142
+      },
+      {
+        "uuid": "50dc6e87-7f34-4e01-90ba-2af8618be1cb",
+        "kind": "PCB_TRACK",
+        "net": "GND",
+        "layer": "B.Cu",
+        "start": [
+          65.315857,
+          38.814998
+        ],
+        "end": [
+          64.358855,
+          39.772
+        ],
+        "width": 0.25,
+        "length": 1.3534052076181766
+      },
+      {
+        "uuid": "800617c5-f9f4-4d9c-a616-ccb5a0a44862",
+        "kind": "PCB_TRACK",
+        "net": "GND",
+        "layer": "B.Cu",
+        "start": [
+          64.358855,
+          39.772
+        ],
+        "end": [
+          63.951,
+          39.772
+        ],
+        "width": 0.25,
+        "length": 0.407855
+      }
+    ],
+    "note": "The retained eastward0.25mm route joins U1.1 directly into the C2.GND land; loss of incidental west fill does not remove this local return."
+  },
+  "layers": [
+    {
+      "C2_GND_and_U1_pin1_connected_within_region": false,
+      "layer": "F.Cu",
+      "before_area_mm2": 13.541307967832243,
+      "after_area_mm2": 9.20565432546945,
+      "added_ground_mm2": 5.606608510788893e-16,
+      "removed_ground_mm2": 4.335653642362795,
+      "removed_bounds_mm": [
+        63.1745,
+        35.6,
+        67.721321,
+        40.5
+      ]
+    },
+    {
+      "C2_GND_and_U1_pin1_connected_within_region": true,
+      "layer": "B.Cu",
+      "before_area_mm2": 9.508685968983052,
+      "after_area_mm2": 7.111815703822654,
+      "added_ground_mm2": 0.0,
+      "removed_ground_mm2": 2.3968702651603957,
+      "removed_bounds_mm": [
+        62.7,
+        35.6,
+        64.16401,
+        40.0935
+      ]
+    }
+  ],
+  "notes": [
+    "Exact native pad/zone polygons and densely approximated track strokes in a bounded C2/U1 neighborhood; this checks geometry, not current-density or inductance.",
+    "Ground fills can differ slightly after global native refill. Native connected-island proof remains authoritative."
+  ]
+}

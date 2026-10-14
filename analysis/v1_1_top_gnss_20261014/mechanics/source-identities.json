@@ -1,0 +1,27 @@
+{
+  "pcb_sha256": "88f82c85d2d47b4aea2e7d7d2827c4a92c339788cc0d9c880dd6342ee0440c0a",
+  "sources": [
+    {
+      "path": "hardware/pcb/3d/solar/generate.py",
+      "sha256": "d54881036939cdadcbc841402fa829d62c2e80e0fd08c53905b5f359cf592d76",
+      "bytes": 9479
+    },
+    {
+      "path": "hardware/pcb/lib/Stratolink_Wire_48mm_D0p321_Nominal.step",
+      "sha256": "18aba2561b12ccd7653bac133efc17c7833cc7c5686f563ee8c04ac862789671",
+      "bytes": 22624
+    },
+    {
+      "path": "hardware/pcb/lib/cap.step",
+      "sha256": "9b8d6e2646bd53de6c21345928a71feafc695fd88a254725b14f7a7108f9681d",
+      "bytes": 55077
+    },
+    {
+      "sha256": "1b2ca70b626671820c43068ce3fca1959fa01a393b34ef76319275ade68e4607",
+      "bytes": 1262563,
+      "url": "https://cap-xx-assets.s3.eu-west-2.amazonaws.com/CAP_XX_DMF_1_F_Datasheet_V1_9_c35f3f99e6.pdf",
+      "cached_path_at_review": "analysis/redesign_20261010/energy/sources/capxx_dmf_v1_9.pdf",
+      "cache_in_published_checkout": false
+    }
+  ]
+}
