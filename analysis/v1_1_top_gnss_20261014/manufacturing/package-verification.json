@@ -1,0 +1,37 @@
+{
+  "package": "/Users/twarn/Repositories/ai-working/worktrees/Stratolink/hardware-v1.1-review/hardware/gerbers/v1.1-pilot",
+  "stencil": {
+    "package": "/Users/twarn/Repositories/ai-working/worktrees/Stratolink/hardware-v1.1-review/hardware/gerbers/v1.1-pilot",
+    "changed_U6_pad_paste_flags": 16,
+    "whole_native_PCB_exact_except_U6_paste": true,
+    "paste": {
+      "stratolink-F_Paste.gtp": {
+        "full_U6_apertures": 16,
+        "pilot_U6_apertures": 0,
+        "retained_artwork_commands": 1986,
+        "all_retained_paste_artwork_identical": true
+      },
+      "stratolink-B_Paste.gbp": {
+        "full_U6_apertures": 0,
+        "pilot_U6_apertures": 0,
+        "retained_artwork_commands": 160,
+        "all_retained_paste_artwork_identical": true
+      }
+    },
+    "pilot_ZIP_paste_bytes_verified": true
+  },
+  "assembly_count": 57,
+  "design_assembly_count": 58,
+  "only_omitted_reference": "U6",
+  "approved_mpn": "AS7331-AQFM",
+  "approved_lcsc": "C20482877",
+  "all_retained_assembly_BOM_CPL_fields_match": true,
+  "source_hash_count": 166,
+  "output_hash_count": 37,
+  "all_source_output_evidence_hashes_valid": true,
+  "population_profile_byte_copy_valid": true,
+  "pcb_sha256": "88f82c85d2d47b4aea2e7d7d2827c4a92c339788cc0d9c880dd6342ee0440c0a",
+  "package_manifest_sha256": "b58dc038ed91997c8f471726572870b2a8bbedd23a2b5dee350c5dfd7597be97",
+  "checker_sha256": "ac2e4d41fbc463089968a32b31ca129bd8aee464091ba3383af912d878f561a7",
+  "temporary_editor_companions_absent": true
+}

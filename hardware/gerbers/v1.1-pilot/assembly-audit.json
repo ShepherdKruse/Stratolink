@@ -888,26 +888,26 @@
       "mpn": "PESD5V0U1BB",
       "lcsc": "C5272735",
       "native_anchor_mm": [
-        58.0,
-        45.05
+        58.8,
+        42.0
       ],
       "smd_pad_center_mm": [
-        58.0,
-        45.05
+        58.8,
+        42.0
       ],
       "smd_pad_bounds_mm": [
-        57.65,
-        44.049999,
-        58.35,
-        46.050001
+        57.799999,
+        41.65,
+        59.800001,
+        42.35
       ],
       "center_mm": [
-        58.0,
-        45.05
+        58.8,
+        42.0
       ],
       "placement_method": "Placement-side SMD copper pad bounding center; excludes TH pads and all text/graphics/models",
-      "native_angle_deg": -90.0,
-      "rotation_deg": 270.0,
+      "native_angle_deg": 0.0,
+      "rotation_deg": 0.0,
       "side": "top",
       "prior_cpl": {
         "Designator": "D3",
@@ -919,8 +919,8 @@
         "Layer": "top"
       },
       "delta_from_prior_mm": [
-        -2.3059999999999974,
-        -7.658999999999999
+        -1.5060000000000002,
+        -4.609000000000002
       ],
       "new_part": false
     },
@@ -974,21 +974,21 @@
       "mpn": "LPS4018-223MRC",
       "lcsc": "C5278935",
       "native_anchor_mm": [
-        60.103,
+        60.603,
         38.1865
       ],
       "smd_pad_center_mm": [
-        60.103,
+        60.603,
         38.1865
       ],
       "smd_pad_bounds_mm": [
-        58.153,
+        58.653,
         35.9815,
-        62.053,
+        62.553,
         40.3915
       ],
       "center_mm": [
-        60.103,
+        60.603,
         38.1865
       ],
       "placement_method": "Placement-side SMD copper pad bounding center; excludes TH pads and all text/graphics/models",
@@ -1005,7 +1005,7 @@
         "Layer": "bottom"
       },
       "delta_from_prior_mm": [
-        0.0,
+        0.5,
         0.0
       ],
       "new_part": false
@@ -3264,26 +3264,26 @@
       "mpn": "PESD5V0U1BB",
       "lcsc": "C5272735",
       "native_anchor_mm": [
-        58.0,
-        45.05
+        58.8,
+        42.0
       ],
       "smd_pad_center_mm": [
-        58.0,
-        45.05
+        58.8,
+        42.0
       ],
       "smd_pad_bounds_mm": [
-        57.65,
-        44.049999,
-        58.35,
-        46.050001
+        57.799999,
+        41.65,
+        59.800001,
+        42.35
       ],
       "center_mm": [
-        58.0,
-        45.05
+        58.8,
+        42.0
       ],
       "placement_method": "Placement-side SMD copper pad bounding center; excludes TH pads and all text/graphics/models",
-      "native_angle_deg": -90.0,
-      "rotation_deg": 270.0,
+      "native_angle_deg": 0.0,
+      "rotation_deg": 0.0,
       "side": "top",
       "prior_cpl": {
         "Designator": "D3",
@@ -3295,8 +3295,8 @@
         "Layer": "top"
       },
       "delta_from_prior_mm": [
-        -2.3059999999999974,
-        -7.658999999999999
+        -1.5060000000000002,
+        -4.609000000000002
       ],
       "new_part": false
     },
@@ -3350,21 +3350,21 @@
       "mpn": "LPS4018-223MRC",
       "lcsc": "C5278935",
       "native_anchor_mm": [
-        60.103,
+        60.603,
         38.1865
       ],
       "smd_pad_center_mm": [
-        60.103,
+        60.603,
         38.1865
       ],
       "smd_pad_bounds_mm": [
-        58.153,
+        58.653,
         35.9815,
-        62.053,
+        62.553,
         40.3915
       ],
       "center_mm": [
-        60.103,
+        60.603,
         38.1865
       ],
       "placement_method": "Placement-side SMD copper pad bounding center; excludes TH pads and all text/graphics/models",
@@ -3381,7 +3381,7 @@
         "Layer": "bottom"
       },
       "delta_from_prior_mm": [
-        0.0,
+        0.5,
         0.0
       ],
       "new_part": false

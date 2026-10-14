@@ -1,7 +1,7 @@
 # Manufacturing review package for engineering review
 
 Source: `/Users/twarn/Repositories/ai-working/worktrees/Stratolink/hardware-v1.1-review/hardware/pcb`
-PCB SHA-256: `8df85b3e4bdd546ec174bb9d7b9ee9d795d55d486a68e1e853aaf1b871f863d3`
+PCB SHA-256: `88f82c85d2d47b4aea2e7d7d2827c4a92c339788cc0d9c880dd6342ee0440c0a`
 
 57 assembly references; BOM and CPL populations match. Explicit manual/DNP exclusions are in `assembly-audit.json`. Original native KiCad position CSV and netlist are under `native/`.
 
