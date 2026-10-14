@@ -1,0 +1,88 @@
+{
+  "source_sha256": "af2493b5d5b4dc69ebc14f53b6f3a411a9ae36181dd7fdfbcb8efffde4a0f8c8",
+  "pcb_sha256": "d5d889fc440c2c84d147571fb6013afd6188e01dbcbfebc2344ed8a588e68215",
+  "changes": [
+    {
+      "action": "native_text_to_copper_outlines",
+      "text_uuid": "c73a59a2-31c0-4945-990c-2704a1c497e5",
+      "text": "PICO MAINBOARD V1.1",
+      "source_layer_before": "F.Cu",
+      "source_layer_after": "F.Fab",
+      "glyph_uuids": [
+        "355021d1-b740-5710-b99a-207496a2fb44",
+        "00118785-583f-56d0-b889-37a138f48c0f",
+        "f53b610c-3c70-55c0-b2c6-0a7fe6aa01bf",
+        "b20a4d99-780d-5bae-8e0c-8dbb0ed7c10f",
+        "786ec525-d469-5bde-b048-62cf74f91447",
+        "d84d25e0-8c19-5ac1-b68f-b72bfb628da2",
+        "1627bd65-4fcc-573b-866e-f971d73e169a",
+        "e280d05b-1b8f-5ee9-95bd-73c30b9b0d36",
+        "e16534b4-8d8b-5753-a977-16359242b024",
+        "fb307a11-fedd-58b6-abc6-abe7b96153be",
+        "6b1669c4-826d-5cde-a308-501c4d321e79",
+        "a8c303e4-f973-5a0b-b870-b7e5ec3a174c",
+        "c41d4967-7142-577d-803d-0d4220407806",
+        "9e315b06-b177-572c-aee1-d8136ffe1341",
+        "7e9f3dde-91c9-550c-be80-8eef283cbe94",
+        "0c02dd91-eede-5854-8aaa-e6851adb9071",
+        "33ee5474-8d26-5577-a1fa-0ad937009320"
+      ],
+      "fillet_uuids": [
+        "d54b8dbf-9fb2-557a-bc86-07f5785ef742",
+        "5c93ec1e-6553-5745-bd64-be0cad309361",
+        "db65c08c-a757-5cf1-a661-5fd71a0c2686",
+        "fe5d9550-a726-545a-b5ea-9c69e877ec18",
+        "bd6a490f-c2e6-528a-bd2c-e676658e072c",
+        "b31f8f0d-a988-5fc8-b84b-5aa966fffc99",
+        "c77b5ab2-5e5c-5ea7-af9e-cf9ddb594de4",
+        "bb8882e9-d371-504b-90e2-447f3c78a5fd"
+      ],
+      "group_uuid": "a5286410-457d-5990-8d67-f5a7b8f79291"
+    },
+    {
+      "action": "native_text_to_copper_outlines",
+      "text_uuid": "5e350471-61a4-4077-9186-34d0a4e791c3",
+      "text": "STRATOLINK.ORG",
+      "source_layer_before": "F.Cu",
+      "source_layer_after": "F.Fab",
+      "glyph_uuids": [
+        "8b83c91a-8411-58a1-9d82-1d7722e155d9",
+        "9c703688-7649-588e-9660-9e44852d062f",
+        "fe7bd94b-230b-5dfa-9826-a453c2e72fd9",
+        "d839bbac-f501-5088-9617-51a49ffd1bd0",
+        "4700e66d-03b3-5912-be79-c434c5ae8c28",
+        "92a77f34-92ce-5fce-bc4b-4b6c020debfd",
+        "a429225e-0b78-5f7b-afb9-5c30c9667af6",
+        "692ad13b-d9ee-576a-acf3-fed0f865ef9f",
+        "a7925dcf-15e8-55d1-adc4-65e6418e9281",
+        "c3dd1985-2f2d-552f-9b1a-a7b0565e21b1",
+        "2cedc605-f074-5eb8-89db-364aff43d9b1",
+        "3ebf59bf-d2e8-5e9c-8568-599edce8aaf7",
+        "b2320f1f-37a8-5064-8ca7-dabefd385d23",
+        "70ca4416-7637-5b24-a102-01a5fae3f8ca"
+      ],
+      "fillet_uuids": [
+        "e6998137-2895-5f64-ae72-c587ac46000e",
+        "e5fb34d5-1165-5530-b54b-9fd088b3e5cb",
+        "42c49ebf-a621-5288-944e-45db6955bdaa",
+        "69f47a16-b0c2-52c9-b6a4-d050582ffc63"
+      ],
+      "group_uuid": "c26fca5e-9d54-5000-b255-8453826b7e30"
+    },
+    {
+      "action": "add_track",
+      "uuid": "8dd727f3-5cc5-5f06-8558-46e5c8c1602b",
+      "net": "GND",
+      "layer": "B.Cu",
+      "start_mm": [
+        64.17,
+        32.865
+      ],
+      "end_mm": [
+        64.38,
+        32.867
+      ],
+      "width_mm": 0.15
+    }
+  ]
+}

@@ -1,0 +1,43 @@
+{
+  "status": "CANDIDATE, root has promotion authority",
+  "source_commit": "e6f5200208cf433aa2baf0dcad80d9d9ef26cd25",
+  "source_pcb_sha256": "9d63500a087ef8d345c2337942106e6704d32ded953846883454bfad718adf6c",
+  "candidate_path": "/Users/twarn/Repositories/ai-working/scratch/stratolink-peer-review-20261014/fabrication/copper-final4/stratolink.kicad_pcb",
+  "candidate_pcb_sha256": "4fcdb39b8cc7936295f64ae9f5e1acd4acd01e144cd21e9076f681c23c0e2b54",
+  "strict_project_sha256": "915d9f9c4bc8c1eb0866031bf765ff08dc41a7b5bea4fb158ca26c1032ef93cd",
+  "checks": {
+    "native_drc_violations": 0,
+    "native_opens": 0,
+    "native_schematic_parity_issues": 0,
+    "geometry_screen_all_categories_both_faces": 0
+  },
+  "durable_project_delta_from_published": {
+    "min_groove_width": 0.1,
+    "min_connection": 0.1,
+    "rule_severities.copper_sliver": "error",
+    "rule_severities.connection_width": "error"
+  },
+  "scope": {
+    "added_tracks": 6,
+    "existing_track_width_changes": 1,
+    "moved_vias": 0,
+    "moved_footprints": 0,
+    "removed_logo_polygons": 3,
+    "added_fillet_polygons": 42,
+    "added_logo_hole_fill_polygons": 1,
+    "converted_text_objects": 2,
+    "copper_glyph_polygons": 31,
+    "groups": 2
+  },
+  "limitations": [
+    "Geometric manufacturability screening is not an etchant-process simulation or factory CAM approval.",
+    "Native RF centerline and switching loops unchanged; tiny local same-net fillets added at inherited RF V joins. RF redesign remains a separate task."
+  ],
+  "exact_logo_delta_mm2": {
+    "added": 0.004664499254999907,
+    "removed": 0.01104249337500002
+  },
+  "rejected_prototypes": {
+    "copper-final3": "Rejected before promotion: raw-hole selector picked enclosing GND clearance cavity. Rebuilt final4 from untouched4fc14170intermediate with target-area and bounds assertions."
+  }
+}

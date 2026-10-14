@@ -1,0 +1,1234 @@
+{
+  "method": "Native full-copper unions, saved fills. Arc tessellation suppressed by2um simplification plus0.075mm adjacent-edge requirement. Acute gap<60deg, coppertip<30deg. Small enclosed empty region<0.02mm2 and maximuminscribeddiameter<0.10mm. These thresholds locate candidates, not supplier guarantees.",
+  "current": {
+    "source_sha256": "9d63500a087ef8d345c2337942106e6704d32ded953846883454bfad718adf6c",
+    "layers": {
+      "F.Cu": {
+        "copper_component_count": 153,
+        "acute_gap_candidates": [
+          {
+            "at_mm": [
+              56.793025,
+              35.620142
+            ],
+            "gap_angle_deg": 36.869997772971686,
+            "edge_support_mm": [
+              0.5428653598720373,
+              0.5428650436434432
+            ],
+            "near_same_kind_flown_feature_within_0p1mm": true
+          },
+          {
+            "at_mm": [
+              56.504119,
+              38.153475
+            ],
+            "gap_angle_deg": 36.869822734222225,
+            "edge_support_mm": [
+              0.24186554192773863,
+              0.24186585815488368
+            ],
+            "near_same_kind_flown_feature_within_0p1mm": true
+          },
+          {
+            "at_mm": [
+              55.115181,
+              38.852934
+            ],
+            "gap_angle_deg": 45.33253514650232,
+            "edge_support_mm": [
+              0.4049965635866577,
+              0.6416882941771663
+            ],
+            "near_same_kind_flown_feature_within_0p1mm": true
+          },
+          {
+            "at_mm": [
+              55.007236,
+              39.900553
+            ],
+            "gap_angle_deg": 29.8696006019797,
+            "edge_support_mm": [
+              0.8745725296537741,
+              0.7322164179434966
+            ],
+            "near_same_kind_flown_feature_within_0p1mm": true
+          },
+          {
+            "at_mm": [
+              55.442402,
+              39.479125
+            ],
+            "gap_angle_deg": 29.75684258460913,
+            "edge_support_mm": [
+              0.8745725296537705,
+              0.7175830000000047
+            ],
+            "near_same_kind_flown_feature_within_0p1mm": true
+          },
+          {
+            "at_mm": [
+              56.753811,
+              40.118475
+            ],
+            "gap_angle_deg": 29.744881296942395,
+            "edge_support_mm": [
+              0.5614636918492621,
+              0.45523800000000136
+            ],
+            "near_same_kind_flown_feature_within_0p1mm": true
+          },
+          {
+            "at_mm": [
+              56.543335,
+              40.388475
+            ],
+            "gap_angle_deg": 29.744881296942395,
+            "edge_support_mm": [
+              0.5614636918492621,
+              0.45523800000000136
+            ],
+            "near_same_kind_flown_feature_within_0p1mm": true
+          },
+          {
+            "at_mm": [
+              56.504119,
+              41.253474
+            ],
+            "gap_angle_deg": 36.869822734222225,
+            "edge_support_mm": [
+              0.24186554192773638,
+              0.24186585815488593
+            ],
+            "near_same_kind_flown_feature_within_0p1mm": true
+          },
+          {
+            "at_mm": [
+              56.591565,
+              41.785141
+            ],
+            "gap_angle_deg": 25.01700048640788,
+            "edge_support_mm": [
+              0.4070079999999976,
+              0.2587735238388959
+            ],
+            "near_same_kind_flown_feature_within_0p1mm": true
+          },
+          {
+            "at_mm": [
+              56.591566,
+              42.121808
+            ],
+            "gap_angle_deg": 25.016893478099917,
+            "edge_support_mm": [
+              0.2587721947698426,
+              0.4070070000000001
+            ],
+            "near_same_kind_flown_feature_within_0p1mm": true
+          },
+          {
+            "at_mm": [
+              56.644866,
+              41.953475
+            ],
+            "gap_angle_deg": 50.03387926398415,
+            "edge_support_mm": [
+              0.41247837485376454,
+              0.41247879773995577
+            ],
+            "near_same_kind_flown_feature_within_0p1mm": true
+          },
+          {
+            "at_mm": [
+              54.961989,
+              43.737458
+            ],
+            "gap_angle_deg": 36.8699403916072,
+            "edge_support_mm": [
+              0.4238666379251785,
+              0.4238663216970616
+            ],
+            "near_same_kind_flown_feature_within_0p1mm": true
+          },
+          {
+            "at_mm": [
+              57.023223,
+              68.300001
+            ],
+            "gap_angle_deg": 44.99999999999915,
+            "edge_support_mm": [
+              0.37322400000000044,
+              0.6675116298672203
+            ],
+            "near_same_kind_flown_feature_within_0p1mm": true
+          },
+          {
+            "at_mm": [
+              53.775,
+              77.096776
+            ],
+            "gap_angle_deg": 45.00000000000051,
+            "edge_support_mm": [
+              0.5670996385116108,
+              1.0014469999999989
+            ],
+            "near_same_kind_flown_feature_within_0p1mm": false
+          },
+          {
+            "at_mm": [
+              62.507,
+              34.12333
+            ],
+            "gap_angle_deg": 45.000000000000114,
+            "edge_support_mm": [
+              9.473752999999995,
+              2.0468775558498815
+            ],
+            "near_same_kind_flown_feature_within_0p1mm": true
+          },
+          {
+            "at_mm": [
+              56.198222,
+              65.433998
+            ],
+            "gap_angle_deg": 45.0,
+            "edge_support_mm": [
+              0.2550069999999991,
+              0.43726917663151155
+            ],
+            "near_same_kind_flown_feature_within_0p1mm": false
+          },
+          {
+            "at_mm": [
+              56.058143,
+              64.940367
+            ],
+            "gap_angle_deg": 28.79875409907467,
+            "edge_support_mm": [
+              0.07607200027605414,
+              0.604552256283946
+            ],
+            "near_same_kind_flown_feature_within_0p1mm": false
+          },
+          {
+            "at_mm": [
+              56.485626,
+              65.36785
+            ],
+            "gap_angle_deg": 28.800083401104473,
+            "edge_support_mm": [
+              0.604552256283946,
+              0.07606732211009165
+            ],
+            "near_same_kind_flown_feature_within_0p1mm": false
+          },
+          {
+            "at_mm": [
+              68.888,
+              35.2317
+            ],
+            "gap_angle_deg": 44.99999999999929,
+            "edge_support_mm": [
+              0.8188310668275817,
+              1.4112830000000045
+            ],
+            "near_same_kind_flown_feature_within_0p1mm": false
+          },
+          {
+            "at_mm": [
+              66.894552,
+              37.939999
+            ],
+            "gap_angle_deg": 45.00000000000236,
+            "edge_support_mm": [
+              0.08282400000000223,
+              0.242461258414612
+            ],
+            "near_same_kind_flown_feature_within_0p1mm": false
+          },
+          {
+            "at_mm": [
+              67.065998,
+              38.111445
+            ],
+            "gap_angle_deg": 44.99999999999764,
+            "edge_support_mm": [
+              0.242461258414612,
+              0.08282500000000681
+            ],
+            "near_same_kind_flown_feature_within_0p1mm": false
+          },
+          {
+            "at_mm": [
+              67.315998,
+              38.111445
+            ],
+            "gap_angle_deg": 45.0,
+            "edge_support_mm": [
+              0.08282500000000681,
+              0.24246125841462204
+            ],
+            "near_same_kind_flown_feature_within_0p1mm": false
+          },
+          {
+            "at_mm": [
+              67.487444,
+              37.939999
+            ],
+            "gap_angle_deg": 45.0,
+            "edge_support_mm": [
+              0.24246125841462204,
+              0.08282400000000223
+            ],
+            "near_same_kind_flown_feature_within_0p1mm": false
+          },
+          {
+            "at_mm": [
+              67.487444,
+              37.689999
+            ],
+            "gap_angle_deg": 45.0,
+            "edge_support_mm": [
+              0.08282400000000223,
+              0.24246125841462204
+            ],
+            "near_same_kind_flown_feature_within_0p1mm": false
+          },
+          {
+            "at_mm": [
+              67.315998,
+              37.518553
+            ],
+            "gap_angle_deg": 45.0,
+            "edge_support_mm": [
+              0.24246125841462204,
+              0.08282400000000223
+            ],
+            "near_same_kind_flown_feature_within_0p1mm": false
+          },
+          {
+            "at_mm": [
+              67.065998,
+              37.518551
+            ],
+            "gap_angle_deg": 45.0,
+            "edge_support_mm": [
+              0.08282599999999718,
+              0.24246408684173965
+            ],
+            "near_same_kind_flown_feature_within_0p1mm": false
+          },
+          {
+            "at_mm": [
+              66.89455,
+              37.689999
+            ],
+            "gap_angle_deg": 45.0,
+            "edge_support_mm": [
+              0.24246408684173965,
+              0.08282600000001139
+            ],
+            "near_same_kind_flown_feature_within_0p1mm": false
+          },
+          {
+            "at_mm": [
+              67.840998,
+              37.336446
+            ],
+            "gap_angle_deg": 44.99999999999932,
+            "edge_support_mm": [
+              0.41924078213838156,
+              0.5928960000000032
+            ],
+            "near_same_kind_flown_feature_within_0p1mm": true
+          },
+          {
+            "at_mm": [
+              67.840998,
+              36.74355
+            ],
+            "gap_angle_deg": 45.0,
+            "edge_support_mm": [
+              0.5928960000000032,
+              0.4192407821383765
+            ],
+            "near_same_kind_flown_feature_within_0p1mm": true
+          },
+          {
+            "at_mm": [
+              66.540998,
+              37.336444
+            ],
+            "gap_angle_deg": 44.99999999999932,
+            "edge_support_mm": [
+              0.36266599999999727,
+              0.4248552099809962
+            ],
+            "near_same_kind_flown_feature_within_0p1mm": true
+          },
+          {
+            "at_mm": [
+              67.413043,
+              36.320179
+            ],
+            "gap_angle_deg": 56.51290878087666,
+            "edge_support_mm": [
+              0.43901997302400825,
+              0.15121335139795544
+            ],
+            "near_same_kind_flown_feature_within_0p1mm": false
+          },
+          {
+            "at_mm": [
+              69.386999,
+              52.587223
+            ],
+            "gap_angle_deg": 45.0,
+            "edge_support_mm": [
+              0.282842712474623,
+              0.12322400000000044
+            ],
+            "near_same_kind_flown_feature_within_0p1mm": true
+          },
+          {
+            "at_mm": [
+              59.4527,
+              63.905
+            ],
+            "gap_angle_deg": 45.0,
+            "edge_support_mm": [
+              1.4264465096876264,
+              0.11229999999999762
+            ],
+            "near_same_kind_flown_feature_within_0p1mm": true
+          },
+          {
+            "at_mm": [
+              69.15933,
+              82.47
+            ],
+            "gap_angle_deg": 44.99999999999943,
+            "edge_support_mm": [
+              1.0395148505952174,
+              1.0134770000000088
+            ],
+            "near_same_kind_flown_feature_within_0p1mm": true
+          },
+          {
+            "at_mm": [
+              73.8245,
+              35.6
+            ],
+            "gap_angle_deg": 0.28647651027844745,
+            "edge_support_mm": [
+              0.10000124999218903,
+              0.14786900000000003
+            ],
+            "near_same_kind_flown_feature_within_0p1mm": false
+          },
+          {
+            "at_mm": [
+              74.575,
+              35.981066
+            ],
+            "gap_angle_deg": 45.20207965403685,
+            "edge_support_mm": [
+              0.14142135623730648,
+              0.4085685411739386
+            ],
+            "near_same_kind_flown_feature_within_0p1mm": false
+          }
+        ],
+        "sharp_tip_candidates": [],
+        "small_enclosed_gap_candidates": [
+          {
+            "area_mm2": 0.004664499254999905,
+            "maximum_inscribed_diameter_mm": 0.054507614911848315,
+            "bounds_mm": [
+              62.615369,
+              56.927501,
+              62.72333,
+              56.987102
+            ],
+            "at_mm": [
+              62.667746295806786,
+              56.9584205
+            ],
+            "near_same_kind_flown_feature_within_0p1mm": true
+          },
+          {
+            "area_mm2": 0.010128684838499743,
+            "maximum_inscribed_diameter_mm": 0.0530384002782061,
+            "bounds_mm": [
+              66.894552,
+              37.939999,
+              67.065998,
+              38.111445
+            ],
+            "at_mm": [
+              67.01967375,
+              38.025743
+            ],
+            "near_same_kind_flown_feature_within_0p1mm": false
+          },
+          {
+            "area_mm2": 0.01012868483849974,
+            "maximum_inscribed_diameter_mm": 0.05303840027821616,
+            "bounds_mm": [
+              67.315998,
+              37.939999,
+              67.487444,
+              38.111445
+            ],
+            "at_mm": [
+              67.36232225,
+              38.025743
+            ],
+            "near_same_kind_flown_feature_within_0p1mm": false
+          },
+          {
+            "area_mm2": 0.010128677891999711,
+            "maximum_inscribed_diameter_mm": 0.05303840027821616,
+            "bounds_mm": [
+              67.315998,
+              37.518553,
+              67.487444,
+              37.689999
+            ],
+            "at_mm": [
+              67.36232199999999,
+              37.604254499999996
+            ],
+            "near_same_kind_flown_feature_within_0p1mm": false
+          },
+          {
+            "area_mm2": 0.010129020786000064,
+            "maximum_inscribed_diameter_mm": 0.05303901899665818,
+            "bounds_mm": [
+              66.89455,
+              37.518551,
+              67.065998,
+              37.689999
+            ],
+            "at_mm": [
+              67.01967300000001,
+              37.604254499999996
+            ],
+            "near_same_kind_flown_feature_within_0p1mm": false
+          },
+          {
+            "area_mm2": 0.0019281464110006332,
+            "maximum_inscribed_diameter_mm": 0.00940691546093256,
+            "bounds_mm": [
+              70.088201,
+              62.795199,
+              70.266576,
+              62.973574
+            ],
+            "at_mm": [
+              70.20359225,
+              62.8648345
+            ],
+            "near_same_kind_flown_feature_within_0p1mm": true
+          },
+          {
+            "area_mm2": 0.01812178708600129,
+            "maximum_inscribed_diameter_mm": 0.04749999999998522,
+            "bounds_mm": [
+              70.368671,
+              62.045472,
+              70.4185,
+              62.598904
+            ],
+            "at_mm": [
+              70.39474999999999,
+              62.325
+            ],
+            "near_same_kind_flown_feature_within_0p1mm": true
+          }
+        ],
+        "tiny_copper_components": [
+          {
+            "area_mm2": 0.008711144969999985,
+            "bounds_mm": [
+              61.110766,
+              56.352155,
+              61.241533,
+              56.436996
+            ],
+            "at_mm": [
+              61.17465965908627,
+              56.3949815
+            ],
+            "near_same_kind_flown_feature_within_0p1mm": true
+          },
+          {
+            "area_mm2": 0.0013622527595000314,
+            "bounds_mm": [
+              60.590481,
+              56.800002,
+              60.629036,
+              56.852095
+            ],
+            "at_mm": [
+              60.6084370853564,
+              56.826466999999994
+            ],
+            "near_same_kind_flown_feature_within_0p1mm": true
+          },
+          {
+            "area_mm2": 0.0009690956455000038,
+            "bounds_mm": [
+              60.379833,
+              56.891416,
+              60.417726,
+              56.92966
+            ],
+            "at_mm": [
+              60.399171229116845,
+              56.910407500000005
+            ],
+            "near_same_kind_flown_feature_within_0p1mm": true
+          }
+        ]
+      },
+      "B.Cu": {
+        "copper_component_count": 72,
+        "acute_gap_candidates": [
+          {
+            "at_mm": [
+              57.206066,
+              36.75
+            ],
+            "gap_angle_deg": 45.0,
+            "edge_support_mm": [
+              1.7324116139070433,
+              0.0939339999999973
+            ],
+            "near_same_kind_flown_feature_within_0p1mm": false
+          },
+          {
+            "at_mm": [
+              56.543934,
+              37.35
+            ],
+            "gap_angle_deg": 45.18998280369098,
+            "edge_support_mm": [
+              0.43460860168662185,
+              0.26893400000000156
+            ],
+            "near_same_kind_flown_feature_within_0p1mm": false
+          },
+          {
+            "at_mm": [
+              55.381066,
+              36.625
+            ],
+            "gap_angle_deg": 44.99999999999983,
+            "edge_support_mm": [
+              1.6617009357883876,
+              0.4378680000000017
+            ],
+            "near_same_kind_flown_feature_within_0p1mm": false
+          },
+          {
+            "at_mm": [
+              64.389365,
+              32.867156
+            ],
+            "gap_angle_deg": 45.626093337464795,
+            "edge_support_mm": [
+              0.6648352307008099,
+              0.21855904616373473
+            ],
+            "near_same_kind_flown_feature_within_0p1mm": true
+          },
+          {
+            "at_mm": [
+              56.296263,
+              33.275
+            ],
+            "gap_angle_deg": 44.99826751797008,
+            "edge_support_mm": [
+              0.09354032769880634,
+              1.9537369999999967
+            ],
+            "near_same_kind_flown_feature_within_0p1mm": false
+          },
+          {
+            "at_mm": [
+              54.743934,
+              38.05
+            ],
+            "gap_angle_deg": 45.0,
+            "edge_support_mm": [
+              0.4027240000000063,
+              0.5303300858899106
+            ],
+            "near_same_kind_flown_feature_within_0p1mm": false
+          },
+          {
+            "at_mm": [
+              74.828486,
+              81.176281
+            ],
+            "gap_angle_deg": 0.04380542872229398,
+            "edge_support_mm": [
+              0.6573193927232059,
+              0.6548065266015678
+            ],
+            "near_same_kind_flown_feature_within_0p1mm": true
+          },
+          {
+            "at_mm": [
+              54.814998,
+              75.77058
+            ],
+            "gap_angle_deg": 45.00008265821177,
+            "edge_support_mm": [
+              0.16907299999999736,
+              0.4901416719816786
+            ],
+            "near_same_kind_flown_feature_within_0p1mm": false
+          },
+          {
+            "at_mm": [
+              55.161581,
+              75.423998
+            ],
+            "gap_angle_deg": 44.999917341788205,
+            "edge_support_mm": [
+              0.4901416719816786,
+              0.07719900000000024
+            ],
+            "near_same_kind_flown_feature_within_0p1mm": true
+          },
+          {
+            "at_mm": [
+              71.387,
+              41.552914
+            ],
+            "gap_angle_deg": 44.9999353891771,
+            "edge_support_mm": [
+              0.7979139999999987,
+              0.6270502727413547
+            ],
+            "near_same_kind_flown_feature_within_0p1mm": false
+          },
+          {
+            "at_mm": [
+              73.431934,
+              42.238
+            ],
+            "gap_angle_deg": 45.000000000000966,
+            "edge_support_mm": [
+              0.5199339999999921,
+              0.29693817905078507
+            ],
+            "near_same_kind_flown_feature_within_0p1mm": false
+          }
+        ],
+        "sharp_tip_candidates": [],
+        "small_enclosed_gap_candidates": [
+          {
+            "area_mm2": 0.00032724983500410346,
+            "maximum_inscribed_diameter_mm": 0.0004992173875033252,
+            "bounds_mm": [
+              74.828486,
+              80.711486,
+              75.293281,
+              81.176281
+            ],
+            "at_mm": [
+              75.06441749999999,
+              80.9407025
+            ],
+            "near_same_kind_flown_feature_within_0p1mm": true
+          },
+          {
+            "area_mm2": 0.0015302065205001572,
+            "maximum_inscribed_diameter_mm": 0.03178325657166018,
+            "bounds_mm": [
+              71.199593,
+              41.685,
+              71.254914,
+              41.740321
+            ],
+            "at_mm": [
+              71.21342325,
+              41.7126605
+            ],
+            "near_same_kind_flown_feature_within_0p1mm": false
+          }
+        ],
+        "tiny_copper_components": []
+      }
+    }
+  },
+  "flown": {
+    "source_sha256": "2924cfa59d48c1446488d715834e84ea634516e622ed59915fb72521e9595190",
+    "layers": {
+      "F.Cu": {
+        "copper_component_count": 147,
+        "acute_gap_candidates": [
+          {
+            "at_mm": [
+              55.115181,
+              38.852934
+            ],
+            "gap_angle_deg": 45.33253514650232,
+            "edge_support_mm": [
+              0.4049965635866577,
+              0.6416882941771663
+            ]
+          },
+          {
+            "at_mm": [
+              55.007236,
+              39.900553
+            ],
+            "gap_angle_deg": 29.8696006019797,
+            "edge_support_mm": [
+              0.8745725296537741,
+              0.7322164179434966
+            ]
+          },
+          {
+            "at_mm": [
+              55.442402,
+              39.479125
+            ],
+            "gap_angle_deg": 29.75684258460913,
+            "edge_support_mm": [
+              0.8745725296537705,
+              0.7175830000000047
+            ]
+          },
+          {
+            "at_mm": [
+              56.591565,
+              41.785141
+            ],
+            "gap_angle_deg": 25.01700048640788,
+            "edge_support_mm": [
+              0.4070079999999976,
+              0.2587735238388959
+            ]
+          },
+          {
+            "at_mm": [
+              56.591566,
+              42.121808
+            ],
+            "gap_angle_deg": 25.016893478099917,
+            "edge_support_mm": [
+              0.2587721947698426,
+              0.4070070000000001
+            ]
+          },
+          {
+            "at_mm": [
+              56.644866,
+              41.953475
+            ],
+            "gap_angle_deg": 50.03387926398415,
+            "edge_support_mm": [
+              0.41247837485376454,
+              0.41247879773995577
+            ]
+          },
+          {
+            "at_mm": [
+              54.961989,
+              43.737458
+            ],
+            "gap_angle_deg": 36.8699403916072,
+            "edge_support_mm": [
+              0.4238666379251785,
+              0.4238663216970616
+            ]
+          },
+          {
+            "at_mm": [
+              57.023223,
+              68.300001
+            ],
+            "gap_angle_deg": 44.99999999999915,
+            "edge_support_mm": [
+              0.37322400000000044,
+              0.6675116298672203
+            ]
+          },
+          {
+            "at_mm": [
+              56.793025,
+              35.620142
+            ],
+            "gap_angle_deg": 36.869997772971686,
+            "edge_support_mm": [
+              0.5428653598720373,
+              0.5428650436434432
+            ]
+          },
+          {
+            "at_mm": [
+              56.504119,
+              38.153475
+            ],
+            "gap_angle_deg": 36.869822734222225,
+            "edge_support_mm": [
+              0.24186554192773863,
+              0.24186585815488368
+            ]
+          },
+          {
+            "at_mm": [
+              56.753811,
+              40.118475
+            ],
+            "gap_angle_deg": 29.744881296942395,
+            "edge_support_mm": [
+              0.5614636918492621,
+              0.45523800000000136
+            ]
+          },
+          {
+            "at_mm": [
+              56.543335,
+              40.388475
+            ],
+            "gap_angle_deg": 29.744881296942395,
+            "edge_support_mm": [
+              0.5614636918492621,
+              0.45523800000000136
+            ]
+          },
+          {
+            "at_mm": [
+              56.504119,
+              41.253474
+            ],
+            "gap_angle_deg": 36.869822734222225,
+            "edge_support_mm": [
+              0.24186554192773638,
+              0.24186585815488593
+            ]
+          },
+          {
+            "at_mm": [
+              66.540998,
+              37.336446
+            ],
+            "gap_angle_deg": 44.999999999999204,
+            "edge_support_mm": [
+              0.3626679999999993,
+              0.7424621202458729
+            ]
+          },
+          {
+            "at_mm": [
+              67.840998,
+              37.336446
+            ],
+            "gap_angle_deg": 44.99990336268684,
+            "edge_support_mm": [
+              0.41924007503219846,
+              0.5928950000000057
+            ]
+          },
+          {
+            "at_mm": [
+              67.840998,
+              36.743551
+            ],
+            "gap_angle_deg": 45.0,
+            "edge_support_mm": [
+              0.5928950000000057,
+              0.4192393679248177
+            ]
+          },
+          {
+            "at_mm": [
+              62.507,
+              34.12333
+            ],
+            "gap_angle_deg": 45.000000000000114,
+            "edge_support_mm": [
+              9.473752999999995,
+              2.0468775558498815
+            ]
+          },
+          {
+            "at_mm": [
+              59.4527,
+              63.905
+            ],
+            "gap_angle_deg": 45.0,
+            "edge_support_mm": [
+              1.4264465096876264,
+              0.11229999999999762
+            ]
+          },
+          {
+            "at_mm": [
+              70.371,
+              62.596757
+            ],
+            "gap_angle_deg": 19.285797215029447,
+            "edge_support_mm": [
+              0.5276409999999956,
+              0.09800156849765017
+            ]
+          },
+          {
+            "at_mm": [
+              69.386999,
+              52.587223
+            ],
+            "gap_angle_deg": 45.0,
+            "edge_support_mm": [
+              0.282842712474623,
+              0.12322400000000044
+            ]
+          },
+          {
+            "at_mm": [
+              69.15933,
+              82.47
+            ],
+            "gap_angle_deg": 44.99999999999943,
+            "edge_support_mm": [
+              1.0395148505952174,
+              1.0134770000000088
+            ]
+          }
+        ],
+        "sharp_tip_candidates": [],
+        "small_enclosed_gap_candidates": [
+          {
+            "area_mm2": 0.0012506000719999417,
+            "maximum_inscribed_diameter_mm": 0.02873310727682677,
+            "bounds_mm": [
+              55.873488,
+              54.641,
+              55.9235,
+              54.691012
+            ],
+            "at_mm": [
+              55.910996999999995,
+              54.666005999999996
+            ]
+          },
+          {
+            "area_mm2": 0.004664499254999905,
+            "maximum_inscribed_diameter_mm": 0.054507614911848315,
+            "bounds_mm": [
+              62.615369,
+              56.927501,
+              62.72333,
+              56.987102
+            ],
+            "at_mm": [
+              62.667746295806786,
+              56.9584205
+            ]
+          },
+          {
+            "area_mm2": 0.011438896873999755,
+            "maximum_inscribed_diameter_mm": 0.0716605312500036,
+            "bounds_mm": [
+              58.556,
+              46.008209,
+              58.78974,
+              46.089
+            ],
+            "at_mm": [
+              58.605276999999994,
+              46.0324105
+            ]
+          },
+          {
+            "area_mm2": 0.0020844936305006523,
+            "maximum_inscribed_diameter_mm": 0.009406641510130025,
+            "bounds_mm": [
+              70.084471,
+              62.791471,
+              70.270304,
+              62.977304
+            ],
+            "at_mm": [
+              70.1773875,
+              62.891039
+            ]
+          },
+          {
+            "area_mm2": 0.018236126117501725,
+            "maximum_inscribed_diameter_mm": 0.05223968357913241,
+            "bounds_mm": [
+              70.368823,
+              62.047023,
+              70.423565,
+              62.596757
+            ],
+            "at_mm": [
+              70.3922335,
+              62.235372999999996
+            ]
+          }
+        ],
+        "tiny_copper_components": [
+          {
+            "area_mm2": 0.008711144969999985,
+            "bounds_mm": [
+              61.110766,
+              56.352155,
+              61.241533,
+              56.436996
+            ],
+            "at_mm": [
+              61.17465965908627,
+              56.3949815
+            ]
+          },
+          {
+            "area_mm2": 0.0013622527595000314,
+            "bounds_mm": [
+              60.590481,
+              56.800002,
+              60.629036,
+              56.852095
+            ],
+            "at_mm": [
+              60.6084370853564,
+              56.826466999999994
+            ]
+          },
+          {
+            "area_mm2": 0.0009690956455000038,
+            "bounds_mm": [
+              60.379833,
+              56.891416,
+              60.417726,
+              56.92966
+            ],
+            "at_mm": [
+              60.399171229116845,
+              56.910407500000005
+            ]
+          }
+        ]
+      },
+      "B.Cu": {
+        "copper_component_count": 59,
+        "acute_gap_candidates": [
+          {
+            "at_mm": [
+              64.389365,
+              32.867156
+            ],
+            "gap_angle_deg": 45.626007908529374,
+            "edge_support_mm": [
+              0.6648352307008099,
+              0.21465280949710677
+            ]
+          },
+          {
+            "at_mm": [
+              74.28,
+              57.371446
+            ],
+            "gap_angle_deg": 45.00000000000023,
+            "edge_support_mm": [
+              1.284421284259184,
+              2.0328930000000014
+            ]
+          },
+          {
+            "at_mm": [
+              74.333,
+              59.631554
+            ],
+            "gap_angle_deg": 45.00013908666921,
+            "edge_support_mm": [
+              0.28896999999999906,
+              0.2912876887631888
+            ]
+          },
+          {
+            "at_mm": [
+              73.979446,
+              59.278
+            ],
+            "gap_angle_deg": 44.99985887912865,
+            "edge_support_mm": [
+              0.2870888886965103,
+              0.28781800000000146
+            ]
+          },
+          {
+            "at_mm": [
+              55.265396,
+              75.603024
+            ],
+            "gap_angle_deg": 15.000177945966954,
+            "edge_support_mm": [
+              0.135870977213677,
+              0.6755705258527801
+            ]
+          },
+          {
+            "at_mm": [
+              74.828486,
+              81.176281
+            ],
+            "gap_angle_deg": 0.04380542872229398,
+            "edge_support_mm": [
+              0.6573193927232059,
+              0.6548065266015678
+            ]
+          },
+          {
+            "at_mm": [
+              54.694998,
+              75.89058
+            ],
+            "gap_angle_deg": 45.00006139940885,
+            "edge_support_mm": [
+              0.37437099999999646,
+              0.6598472994663253
+            ]
+          },
+          {
+            "at_mm": [
+              55.161581,
+              75.423998
+            ],
+            "gap_angle_deg": 44.99993860059115,
+            "edge_support_mm": [
+              0.6598472994663253,
+              0.37437099999999646
+            ]
+          }
+        ],
+        "sharp_tip_candidates": [],
+        "small_enclosed_gap_candidates": [
+          {
+            "area_mm2": 0.00032724983500410346,
+            "maximum_inscribed_diameter_mm": 0.0004992173875033252,
+            "bounds_mm": [
+              74.828486,
+              80.711486,
+              75.293281,
+              81.176281
+            ],
+            "at_mm": [
+              75.06441749999999,
+              80.9407025
+            ]
+          }
+        ],
+        "tiny_copper_components": []
+      }
+    }
+  }
+}

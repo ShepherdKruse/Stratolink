@@ -1,0 +1,19 @@
+{
+  "source_sha256": "2f12b98f59d08db96cfae1357172e7dab6f9d48829e89f5193c5a9b967644159",
+  "layers": {
+    "F.Cu": {
+      "copper_component_count": 146,
+      "acute_gap_candidates": [],
+      "sharp_tip_candidates": [],
+      "small_enclosed_gap_candidates": [],
+      "tiny_copper_components": []
+    },
+    "B.Cu": {
+      "copper_component_count": 72,
+      "acute_gap_candidates": [],
+      "sharp_tip_candidates": [],
+      "small_enclosed_gap_candidates": [],
+      "tiny_copper_components": []
+    }
+  }
+}

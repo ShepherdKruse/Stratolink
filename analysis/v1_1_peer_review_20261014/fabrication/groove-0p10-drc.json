@@ -1,0 +1,92 @@
+{
+    "$schema": "https://schemas.kicad.org/drc.v1.json",
+    "coordinate_units": "mm",
+    "date": "2026-10-14T11:22:18",
+    "ignored_checks": [
+        {
+            "description": "Footprint has no courtyard defined",
+            "key": "missing_courtyard"
+        },
+        {
+            "description": "Track endpoint not centered on via",
+            "key": "track_not_centered_on_via"
+        },
+        {
+            "description": "Tuning profile track geometries",
+            "key": "tuning_profile_track_geometries"
+        },
+        {
+            "description": "Footprint doesn't match symbol's footprint filters",
+            "key": "footprint_filters_mismatch"
+        },
+        {
+            "description": "PTH inside courtyard",
+            "key": "pth_inside_courtyard"
+        },
+        {
+            "description": "NPTH inside courtyard",
+            "key": "npth_inside_courtyard"
+        },
+        {
+            "description": "Footprint component type doesn't match footprint pads",
+            "key": "footprint_type_mismatch"
+        }
+    ],
+    "included_severities": [
+        "error",
+        "warning",
+        "exclusion"
+    ],
+    "kicad_version": "10.0.0",
+    "schematic_parity": [],
+    "source": "stratolink.kicad_pcb",
+    "unconnected_items": [],
+    "violations": [
+        {
+            "description": "Copper connection too narrow (board setup constraints minimum connection width 0.1000 mm; actual 0.0196 mm) (B.Cu)",
+            "items": [
+                {
+                    "description": "Via [/SC_BAL_OUT] on F.Cu - B.Cu",
+                    "pos": {
+                        "x": 57.5,
+                        "y": 35.65
+                    },
+                    "uuid": "f23dbd92-7640-5675-b144-db6a113413b6"
+                },
+                {
+                    "description": "Pad 4 [/SC_BAL_OUT] of U8 on B.Cu",
+                    "pos": {
+                        "x": 56.7875,
+                        "y": 35.15
+                    },
+                    "uuid": "d1495eac-07d0-4e3d-a1d1-ae345d16df1f"
+                }
+            ],
+            "severity": "warning",
+            "type": "connection_width"
+        },
+        {
+            "description": "Copper connection too narrow (board setup constraints minimum connection width 0.1000 mm; actual 0.0624 mm) (F.Cu)",
+            "items": [
+                {
+                    "description": "Track [GND] on F.Cu, length 0.5699 mm",
+                    "pos": {
+                        "x": 70.246,
+                        "y": 62.069116
+                    },
+                    "uuid": "48dbc723-237e-4141-b823-a1fbcb039f44"
+                },
+                {
+                    "description": "Track [GND] on F.Cu, length 0.8784 mm",
+                    "pos": {
+                        "x": 69.624884,
+                        "y": 61.448
+                    },
+                    "uuid": "61ce6d8f-1e69-4865-bb4b-17cb8e7974ca"
+                }
+            ],
+            "severity": "warning",
+            "type": "connection_width"
+        }
+    ]
+}

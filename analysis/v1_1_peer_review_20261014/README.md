@@ -39,7 +39,17 @@ The power review also identified a distant GNSS bypass capacitor, C10, and a fer
 
 ## Fabrication and routing style
 
-Match the earlier board's smooth routing and avoid sharp junctions, narrow copper remnants and tiny enclosed etching gaps. Review the actual copper after zone fill, including pad/trace unions, rather than only the trace centerlines. A 0.10 mm minimum connection/groove diagnostic found two narrow contacts that were invisible to the former zero-valued connection/groove thresholds. Local repairs and an independent geometry review are in progress. JLC's [layout guidance](https://jlcpcb.com/features/layout) explicitly lists acute-angle etching traps, small annular rings and mask slivers as fabrication concerns.
+The copper cleanup is promoted to `hardware/pcb`. PCB SHA-256: `4fcdb39b8cc7936295f64ae9f5e1acd4acd01e144cd21e9076f681c23c0e2b54`. The schematic is unchanged. The strict published project is `915d9f9c4bc8c1eb0866031bf765ff08dc41a7b5bea4fb158ca26c1032ef93cd`; it now enforces 0.10 mm minimum connection/groove widths with error severity.
+
+- Widen the U8 pad/via landing and close the narrow ground connection.
+- Close the tiny U1, output-rail and ground pockets; widen the U6 ground bridge from 0.15 to 0.20 mm.
+- Round the identified electrical junctions with small same-net copper fillets, retaining the original track centerlines and arcs.
+- Remove three microscopic logo specks and fill only its tiny internal hole.
+- Round the two copper labels using their native rendered outlines. Editable originals remain on F.Fab, grouped with the copper; no silkscreen is added.
+
+All 68 footprints, 259 physical pads, 250 logical pad connections, vias and the board outline are preserved. Six short conductors are added and one existing width changes. Native strict DRC, open-connection and schematic-parity checks are zero; ERC has zero unexcluded findings. The independent full-copper screen reports zero candidates under its explicit thresholds on both faces. [Scope and proof](fabrication/final-independent.json), [independent geometry review](fabrication/copper-final4-independent-review.json), [before/after views](fabrication/candidate/before-after.pdf), [change ledgers and reproduction](fabrication/candidate/README.md).
+
+The screen includes the actual filled copper and artwork, rather than only trace centerlines. It does not certify every etching process or replace supplier CAM review. JLC's [layout guidance](https://jlcpcb.com/features/layout) explicitly lists acute-angle etching traps, small annular rings and mask slivers as fabrication concerns. Small fillets also touch the inherited RF bends; this cleanup does not resolve the RF placement issue described above.
 
 ## Evidence and reproducibility
 

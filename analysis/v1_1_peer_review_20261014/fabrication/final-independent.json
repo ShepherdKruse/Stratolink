@@ -1,0 +1,135 @@
+{
+  "before_sha256": "9d63500a087ef8d345c2337942106e6704d32ded953846883454bfad718adf6c",
+  "after_sha256": "4fcdb39b8cc7936295f64ae9f5e1acd4acd01e144cd21e9076f681c23c0e2b54",
+  "footprints_unchanged": 68,
+  "physical_pads_checked": 259,
+  "logical_pads_checked": 250,
+  "native_opens": [
+    0,
+    0
+  ],
+  "invariant_types": [
+    "general",
+    "setup",
+    "net",
+    "gr_line",
+    "gr_arc",
+    "gr_rect"
+  ],
+  "allowed_copper_polygon_changes": [
+    "00118785-583f-56d0-b889-37a138f48c0f",
+    "0a17cce9-6841-5b8e-8bd1-81760c954003",
+    "0c02dd91-eede-5854-8aaa-e6851adb9071",
+    "0c984686-78b1-4acf-8689-2d60d8705e9d",
+    "0fdca917-2159-58a6-bc05-cd541a5d02d3",
+    "1627bd65-4fcc-573b-866e-f971d73e169a",
+    "1abc2760-5b1e-5581-a277-c48e8d450a3e",
+    "1ad5d460-5953-52e6-83c5-7fcec10a8d6f",
+    "2942aea6-5341-5399-b0ee-b23317da7750",
+    "2ae05bbd-7421-5ec9-910f-e4c3b8c52848",
+    "2b98a6d5-df5a-586c-bf2e-66c32711cd7a",
+    "2cedc605-f074-5eb8-89db-364aff43d9b1",
+    "33ee5474-8d26-5577-a1fa-0ad937009320",
+    "355021d1-b740-5710-b99a-207496a2fb44",
+    "3b9f629f-ed73-529f-8a63-993bf90bd096",
+    "3c95cad3-ca03-5965-af59-abb251433d50",
+    "3ebf59bf-d2e8-5e9c-8568-599edce8aaf7",
+    "42c49ebf-a621-5288-944e-45db6955bdaa",
+    "4700e66d-03b3-5912-be79-c434c5ae8c28",
+    "492cb035-b25a-577b-bec5-65856d9d75e9",
+    "5393d1f8-465d-59fe-9bc8-ca8da1debf95",
+    "54f73d27-71e0-5ac4-b2a0-a29decaa0086",
+    "59a0671a-f542-4be7-b381-4ddca1c9e65a",
+    "5c93ec1e-6553-5745-bd64-be0cad309361",
+    "68c999a4-e604-58ae-8452-3eb891fb59eb",
+    "692ad13b-d9ee-576a-acf3-fed0f865ef9f",
+    "69f47a16-b0c2-52c9-b6a4-d050582ffc63",
+    "6aa2190e-8680-5278-acb8-9b80f5868c02",
+    "6b1669c4-826d-5cde-a308-501c4d321e79",
+    "70ca4416-7637-5b24-a102-01a5fae3f8ca",
+    "76056523-0834-5682-a64d-20db23fccd3d",
+    "76ec1cac-c724-561a-ad91-2360c48bbbdf",
+    "786ec525-d469-5bde-b048-62cf74f91447",
+    "7bf3f1f8-d0e0-5482-a927-eb1181f32bb5",
+    "7e9f3dde-91c9-550c-be80-8eef283cbe94",
+    "871f2f67-e553-5e6f-b8f0-3db2c52f9123",
+    "8b83c91a-8411-58a1-9d82-1d7722e155d9",
+    "92a77f34-92ce-5fce-bc4b-4b6c020debfd",
+    "9454b239-0a59-53e7-b4ee-e9d8c9f655fe",
+    "94d18732-51fb-57b8-8f09-219d0252c1e2",
+    "9c703688-7649-588e-9660-9e44852d062f",
+    "9e315b06-b177-572c-aee1-d8136ffe1341",
+    "9e9d9521-875b-5ec0-9947-bf6f6cd89ee1",
+    "a429225e-0b78-5f7b-afb9-5c30c9667af6",
+    "a7925dcf-15e8-55d1-adc4-65e6418e9281",
+    "a816fba7-da64-4618-830a-b8a7043e1513",
+    "a8c303e4-f973-5a0b-b870-b7e5ec3a174c",
+    "ab7467a5-4717-5ad3-a131-6e910725f392",
+    "ad6b8f8f-63ef-5aaf-b3b4-68152a43c6f9",
+    "b20a4d99-780d-5bae-8e0c-8dbb0ed7c10f",
+    "b2320f1f-37a8-5064-8ca7-dabefd385d23",
+    "b31f8f0d-a988-5fc8-b84b-5aa966fffc99",
+    "bb8882e9-d371-504b-90e2-447f3c78a5fd",
+    "bd6a490f-c2e6-528a-bd2c-e676658e072c",
+    "bf093dfe-de64-57fe-85d0-859fb44b6259",
+    "c21b405b-0de6-5d4b-aa5d-a6bf51cce21d",
+    "c34aacd6-f61d-59cc-9ea4-95701f9fc776",
+    "c3dd1985-2f2d-552f-9b1a-a7b0565e21b1",
+    "c41d4967-7142-577d-803d-0d4220407806",
+    "c77b5ab2-5e5c-5ea7-af9e-cf9ddb594de4",
+    "c9b08fc8-6876-55e2-896b-483294065da4",
+    "cc60625e-f92e-5fc7-9004-2b69a3b8219d",
+    "cec9dc7b-9a6d-517d-b84d-651ded74ebcc",
+    "d54b8dbf-9fb2-557a-bc86-07f5785ef742",
+    "d7a2fe75-d1b4-5eee-b579-c711be65ca87",
+    "d839bbac-f501-5088-9617-51a49ffd1bd0",
+    "d84d25e0-8c19-5ac1-b68f-b72bfb628da2",
+    "db65c08c-a757-5cf1-a661-5fd71a0c2686",
+    "e16534b4-8d8b-5753-a977-16359242b024",
+    "e280d05b-1b8f-5ee9-95bd-73c30b9b0d36",
+    "e54ec3eb-ce35-52c3-82a0-35f0953cae7e",
+    "e5fb34d5-1165-5530-b54b-9fd088b3e5cb",
+    "e6998137-2895-5f64-ae72-c587ac46000e",
+    "f53b610c-3c70-55c0-b2c6-0a7fe6aa01bf",
+    "fb307a11-fedd-58b6-abc6-abe7b96153be",
+    "fe5d9550-a726-545a-b5ea-9c69e877ec18",
+    "fe7bd94b-230b-5dfa-9826-a453c2e72fd9"
+  ],
+  "text_retained_on_fab_layer": [
+    "5e350471-61a4-4077-9186-34d0a4e791c3",
+    "c73a59a2-31c0-4945-990c-2704a1c497e5"
+  ],
+  "delta": {
+    "segment": {
+      "removed": [],
+      "added": [
+        "14040533-26f4-5f51-a95d-bbec0ded4c5e",
+        "1b4edc58-1c82-5462-aa03-c148ce5a8c0c",
+        "4fd6911c-f8e7-54b5-89e2-da9ca9f926fe",
+        "7439a54f-a7dc-542e-a889-c7c2abab39f7",
+        "8dd727f3-5cc5-5f06-8558-46e5c8c1602b",
+        "a7684986-db01-519f-b602-d986ccd29a78"
+      ],
+      "changed": [
+        "f950083f-9c44-5581-b006-dd929a7699ef"
+      ]
+    },
+    "arc": {
+      "removed": [],
+      "added": [],
+      "changed": []
+    },
+    "via": {
+      "removed": [],
+      "added": [],
+      "changed": []
+    },
+    "zone": {
+      "removed": [],
+      "added": [],
+      "changed": [
+        "795c4093-4930-4bcb-9c07-8e31d04084fe"
+      ]
+    }
+  }
+}

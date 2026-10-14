@@ -1,0 +1,201 @@
+{
+  "source_sha256": "9d63500a087ef8d345c2337942106e6704d32ded953846883454bfad718adf6c",
+  "candidate_sha256": "4fcdb39b8cc7936295f64ae9f5e1acd4acd01e144cd21e9076f681c23c0e2b54",
+  "layers": {
+    "F.Cu": {
+      "copper_added_mm2": 1.720015065672627,
+      "copper_removed_mm2": 0.012276124821679037,
+      "largest_additions": [
+        {
+          "area_mm2": 0.3439888528287651,
+          "bounds_mm": [
+            54.143076,
+            34.252197,
+            55.27106334486954,
+            39.9700284377105
+          ]
+        },
+        {
+          "area_mm2": 0.22245319486534726,
+          "bounds_mm": [
+            55.59504938244629,
+            33.216309,
+            56.974703647743084,
+            34.251197
+          ]
+        },
+        {
+          "area_mm2": 0.15131876794495056,
+          "bounds_mm": [
+            55.04559536809816,
+            45.758307,
+            56.434724846805466,
+            47.271195
+          ]
+        },
+        {
+          "area_mm2": 0.1429105788391226,
+          "bounds_mm": [
+            54.143076,
+            46.2625076091645,
+            54.84712832446809,
+            47.271195
+          ]
+        },
+        {
+          "area_mm2": 0.1240628296131366,
+          "bounds_mm": [
+            57.379439,
+            40.9706960505716,
+            57.798283,
+            44.254466
+          ]
+        },
+        {
+          "area_mm2": 0.08781169411784827,
+          "bounds_mm": [
+            54.143076,
+            39.98798851267056,
+            54.261865,
+            43.7351201364073
+          ]
+        },
+        {
+          "area_mm2": 0.08024222706989177,
+          "bounds_mm": [
+            57.022441886924206,
+            33.216309,
+            57.71891850000003,
+            34.92834337500001
+          ]
+        },
+        {
+          "area_mm2": 0.04621881284633678,
+          "bounds_mm": [
+            54.143076,
+            43.769395057851256,
+            54.260562,
+            46.24720176047897
+          ]
+        }
+      ]
+    },
+    "B.Cu": {
+      "copper_added_mm2": 0.15211699567191758,
+      "copper_removed_mm2": 2.2654491197902132e-07,
+      "largest_additions": [
+        {
+          "area_mm2": 0.04931287295840887,
+          "bounds_mm": [
+            56.910348,
+            35.38171065478523,
+            57.455248,
+            35.691723
+          ]
+        },
+        {
+          "area_mm2": 0.02941701777349926,
+          "bounds_mm": [
+            54.814998,
+            75.423998,
+            55.161581,
+            75.77058
+          ]
+        },
+        {
+          "area_mm2": 0.01944218683044915,
+          "bounds_mm": [
+            64.096305,
+            32.840335239193024,
+            64.389365,
+            32.99323064877594
+          ]
+        },
+        {
+          "area_mm2": 0.011740718607625569,
+          "bounds_mm": [
+            56.296263,
+            33.131970929078406,
+            56.539717,
+            33.275
+          ]
+        },
+        {
+          "area_mm2": 0.006975097561500255,
+          "bounds_mm": [
+            56.246967,
+            37.35,
+            56.543934,
+            37.646967
+          ]
+        },
+        {
+          "area_mm2": 0.006974771343000305,
+          "bounds_mm": [
+            55.381066,
+            36.48636600000008,
+            55.577124,
+            36.625
+          ]
+        },
+        {
+          "area_mm2": 0.006974767032001054,
+          "bounds_mm": [
+            54.368934,
+            37.675,
+            54.743934,
+            38.05
+          ]
+        },
+        {
+          "area_mm2": 0.006974763762000216,
+          "bounds_mm": [
+            73.221967,
+            42.028033,
+            73.431934,
+            42.238
+          ]
+        }
+      ]
+    }
+  },
+  "logo_window": {
+    "bounds_mm": [
+      58.5,
+      55.1,
+      63.3,
+      60.1
+    ],
+    "added_mm2": 0.004664499254999907,
+    "removed_mm2": 0.01104249337500002
+  },
+  "all_original_68_footprints_and_vias_and_setup_unchanged": true,
+  "drc_counts": {
+    "ignored_checks": 7,
+    "included_severities": 3,
+    "schematic_parity": 0,
+    "unconnected_items": 0,
+    "violations": 0
+  },
+  "screen_counts": {
+    "F.Cu": {
+      "acute_gap_candidates": 0,
+      "sharp_tip_candidates": 0,
+      "small_enclosed_gap_candidates": 0,
+      "tiny_copper_components": 0
+    },
+    "B.Cu": {
+      "acute_gap_candidates": 0,
+      "sharp_tip_candidates": 0,
+      "small_enclosed_gap_candidates": 0,
+      "tiny_copper_components": 0
+    }
+  },
+  "evidence_sha256": {
+    "copper-final4-geometry.json": "1ad78cf4a49aed272e852362d0f5318c6803baba71e11d90cfdea4916b247b22",
+    "copper-final4-screen.json": "fd93540a4413faeb82f3f07250bf63daaac32bf5c90ee77dc7c91d243efa1a70",
+    "copper-final4-scope.json": "047091589d738eb11b4f109f68145648cb80922332c52a72b0b9a1f6ac78f6fb",
+    "copper-final4-independent-drc.json": "8020bb5201746da72fc1577503ea062038d7b2b8e9bd40b7b3814ac8338f90e7"
+  },
+  "interpretation": "Pass under explicitly stated native0.10mm groove/connection and geometric angle/size screening thresholds. Does not guarantee every possible etchant/process condition. Native supplied geometry only; final assembly artifact/export must be reverified after subsequent RF edits."
+}

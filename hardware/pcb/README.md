@@ -4,6 +4,8 @@ Current status, 14 October 2026: **hold fabrication pending the GNSS layout revi
 
 Open [stratolink.kicad_pro](stratolink.kicad_pro) in KiCad 10. The canonical project lives in `hardware/pcb` on `alpha/hardware-v1.1`; Git retains the flown v1. Keep `lib/`, `3d/`, `sym-lib-table` and `fp-lib-table` together. Board-specific footprints preserve reviewed local geometry; avoid blanket stock-library replacement.
 
+The 14 October copper cleanup is applied: widened contacts, closed tiny gaps, rounded junctions and cleaned microscopic artwork details. It retains all placements and electrical connections. Current PCB hash is `4fcdb39b8cc7936295f64ae9f5e1acd4acd01e144cd21e9076f681c23c0e2b54`; current strict project hash is `915d9f9c4bc8c1eb0866031bf765ff08dc41a7b5bea4fb158ca26c1032ef93cd`. See [changes and checks](../../analysis/v1_1_peer_review_20261014/README.md). The package and supplier records below still describe the earlier checkpoint. The two rounded copper labels retain editable originals on F.Fab; move each label as its group.
+
 The approved pilot design keeps the **0.40 mm, two-layer board, ENIG, green solder mask on both faces, no silkscreen, and tented ordinary vias**, one radio, the existing GNSS/pressure/IMU parts and the flat rear capacitor. Selective mask openings expose soldering lands; stencil paste is separate. The plan is **five fabricated boards, three assembled**, followed by physical qualification before a larger batch.
 
 ## Approved UV circuit and pilot population
@@ -48,7 +50,9 @@ Rules use a **0.10 mm copper process floor, 0.15 mm general clearance target and
 
 Final native DRC: **0 violations, 0 open connections, 0 schematic mismatches**. Final ERC, including raw findings and the two narrow exclusions: **0 unexcluded errors or warnings; two documented exclusions retained**. Independent connectivity/geometry evidence: **[independent review](../../analysis/v1_1_release_20261012/as7331/review/README.md)**. These results identify the exact promoted files listed below.
 
-| Canonical file | Final SHA-256 |
+The following hashes identify the earlier AS7331 checkpoint and its supplier package, not the later copper cleanup.
+
+| File at AS7331 checkpoint | SHA-256 |
 |---|---|
 | PCB | `9d63500a087ef8d345c2337942106e6704d32ded953846883454bfad718adf6c` |
 | Schematic | `a06740b35d07d7b81999f7ace2a7a7ff02e185ca3e46a664630bd4bbd00c54b7` |

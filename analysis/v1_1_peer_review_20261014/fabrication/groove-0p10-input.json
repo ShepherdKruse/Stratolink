@@ -1,0 +1,23 @@
+{
+  "scratch": "/Users/twarn/Repositories/ai-working/scratch/stratolink-peer-review-20261014/fabrication/groove-0p10",
+  "pcb_sha256": "9d63500a087ef8d345c2337942106e6704d32ded953846883454bfad718adf6c",
+  "rules_source_git": "e6f5200208cf433aa2baf0dcad80d9d9ef26cd25",
+  "rules_before": {
+    "min_groove_width": 0.0,
+    "min_connection": 0.0,
+    "solder_mask_to_copper_clearance": 0.09
+  },
+  "rules_after": {
+    "min_groove_width": 0.1,
+    "min_connection": 0.1,
+    "solder_mask_to_copper_clearance": 0.09
+  },
+  "severity": {
+    "copper_sliver": "warning",
+    "connection_width": "warning",
+    "solder_mask_bridge": "error",
+    "track_angle": "error"
+  },
+  "canonical_sources_unchanged": true,
+  "operation": "Read-only native DRC on saved fills; no refill or source save"
+}

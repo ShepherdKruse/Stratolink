@@ -1,0 +1,10 @@
+{
+  "time": "2026-10-14T11:46:07.247977",
+  "canonical_pcb_sha256": "4fcdb39b8cc7936295f64ae9f5e1acd4acd01e144cd21e9076f681c23c0e2b54",
+  "published_project_sha256": "915d9f9c4bc8c1eb0866031bf765ff08dc41a7b5bea4fb158ca26c1032ef93cd",
+  "local_project_sha256": "bf9f15d84333a0bf807aae42c27547ff4fccc275059965beaab0290773bdbdda",
+  "schematic_sha256": "a06740b35d07d7b81999f7ace2a7a7ff02e185ca3e46a664630bd4bbd00c54b7",
+  "preserved_local_project_overrides": true,
+  "candidate": "/Users/twarn/Repositories/ai-working/scratch/stratolink-peer-review-20261014/fabrication/copper-final4",
+  "manufacturing_status": "hold; saved Y24 cart and previous package describe earlier CAD"
+}

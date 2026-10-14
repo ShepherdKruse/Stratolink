@@ -2,6 +2,8 @@
 
 **14 October 2026: hold fabrication pending the GNSS layout review.** The saved JLC Y24 cart and the final-review hashes below describe the previous checkpoint. See the [peer review](../v1_1_peer_review_20261014/README.md) for the confirmed RF issue, copper cleanup and the reasons for retaining the pull-ups, SWD mapping and bulk capacitors.
 
+The copper cleanup is now applied in `hardware/pcb`: widened U8/ground contacts, filled tiny electrical pockets, rounded sharp junctions, widened U6 ground bridge, and cleaned microscopic logo/lettering details. All component placements, pads, vias and electrical connections are retained. Current PCB hash: `4fcdb39b8cc7936295f64ae9f5e1acd4acd01e144cd21e9076f681c23c0e2b54`. [Before/after review](../v1_1_peer_review_20261014/fabrication/candidate/before-after.pdf).
+
 Review `hardware/pcb/stratolink.kicad_pro` on `alpha/hardware-v1.1`. Final PCB: `9d63500a087ef8d345c2337942106e6704d32ded953846883454bfad718adf6c`; schematic: `a06740b35d07d7b81999f7ace2a7a7ff02e185ca3e46a664630bd4bbd00c54b7`; checkpoint: `working tree on alpha/hardware-v1.1; exact source hashes identify this revision`. Flown comparison `f0fe2a0` has the same PCB bytes as `9bdd19ec`. Final DRC/ERC: **0 violations, 0 open connections, 0 schematic mismatches / 0 unexcluded errors or warnings; two documented exclusions retained**.
 
 - **Fix temperature sensor U5:** correct TMP117AIYBGR C2871893 ball map and local routing. **A1 SDA, A2 SCL, B1 3.3 V, B2/C1 GND, C2 grounded unused ALERT**; address 0x48. U5/C12 placement stays fixed. Verify this directly on the pilots; pressure fallback is not proof of the fix.
