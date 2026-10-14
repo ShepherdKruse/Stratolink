@@ -46,9 +46,25 @@ wire diameter/cuts, panel preparation and assembled mass with each result.
   dawn startup and simultaneous GNSS-start/RF supply sag. Compare with the same
   known-good v1 configuration. Record actual duration and temperature; do not
   extrapolate a short steady-state sample into a certified night endurance.
+- Measure the filtered supply at U3 pins 6/7/8, using a short ground connection,
+  during acquisition, charging and LoRa transmissions. Record minimum voltage,
+  ripple, recovery and upstream 3.3 V at the same time. Check against the exact
+  module's supply limits. C10 is distant from these pins, and FB1's maximum DCR
+  exceeds the receiver integration guide's series-resistance recommendation;
+  nominal rail voltage alone does not close those findings. Retain C8/C21 while
+  establishing this baseline.
 
 ## Sensors and radio
 
+- Measure SDA and SCL 30% to 70% rise times at the far devices with a
+  low-capacitance probe; record probe loading, bus speed, rail voltage and VOL.
+  Use the 300 ns limit required by MAX-M10S and AS7331 even at 100 kHz. Repeat
+  after U6 is populated. Keep the existing 4.7 kΩ pull-ups until measurement
+  justifies a change; two 10 kΩ resistors in parallel do not improve this margin.
+- Use J20 for SWD with its verified cable mapping. A passive receive-only UART
+  monitor is suitable for observing J4, but another transmitter on J4.5 can
+  contend with GPS TX through R15. Isolate that transmitter path before active
+  injection. R9 straps BOOT0 to ground; do not drive J4.6 high while R9 is fitted.
 - U5: prove address 0x48 ACK, expected device ID and direct temperature reads;
   distinguish the pressure sensor fallback. Compare with a calibrated reference
   through cold starts and the intended range. Measure solar/conduction bias
@@ -74,6 +90,14 @@ wire diameter/cuts, panel preparation and assembled mass with each result.
 - Compare GNSS acquisition, satellite C/N0 and recovery during actual local RF
   transmissions. Verify firmware airborne configuration independently from PCB
   identity. Retain the selected MAX-M10S until an alternative is justified.
+- For the revised feed, compare v1 and v1.1 with the same firmware configuration,
+  recorded wire dimensions, panel assembly, orientation and nearby environment.
+  Use simultaneous observations or alternate boards and positions to reduce
+  changing-sky bias. Log C/N0 by satellite, fix availability, acquisition/recovery
+  times and supply voltage with radio quiet and transmitting, across representative
+  charging states. Record converter activity with the observations. A calculated
+  feed impedance or an antenna match measurement alone does not demonstrate
+  improved reception or immunity to local interference.
 - Compare orientation-dependent telemetry and supported receive/relay modes with
   the final panel/wire assembly. Record the regional LoRa cut (82 mm at 915 MHz,
   86 mm at 868 MHz or documented 83 mm compromise) and 48 mm GNSS starting cut
