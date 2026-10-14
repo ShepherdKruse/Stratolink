@@ -31,7 +31,7 @@ def main():
     spec = importlib.util.spec_from_file_location("peer_evidence", peer_path)
     peer = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(peer)
-    result = peer.verify(root=root)
+    result = peer.verify(root=root, manifest="analysis/v1_1_top_gnss_20261014/review-evidence-manifest.json")
     print("PASS: current peer-review source and evidence bindings match: " + json.dumps(result, sort_keys=True))
 
 

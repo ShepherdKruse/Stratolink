@@ -91,6 +91,41 @@
       "original": "d689b09c5e33bcf2e397647753158843e5b43b6a",
       "review_branch": "64aec9ab1a10761cec2310fd9c2dd33782d5dc0a",
       "subject": "Regenerate pilot exports and bind final review evidence"
+    },
+    {
+      "original": "8d72bf140fc71d526affe455ecd5b9d3b165e1aa",
+      "review_branch": "eff06d0243b3ab39af15a41a5af1507366dcaf23",
+      "subject": "Define top GNSS placement and assembled reception comparison"
+    },
+    {
+      "original": "648434208947d04fb9bb5bcee1484c2eed8f4f84",
+      "review_branch": "e4e5d0a887f199c012681e0c9463f524e2bcf52c",
+      "subject": "Restore upward GNSS antenna and route feed around boost switching copper"
+    },
+    {
+      "original": "c46c0bd25c94aae91cd8e774403645cae41fd98d",
+      "review_branch": "4469df4ffa769632ee763f82f6f6c9d3bb28c1f3",
+      "subject": "Record reproducible copper cleanup and top antenna power and assembly checks"
+    },
+    {
+      "original": "8b0507e29bae88bd13c391b765d7e60b35252f74",
+      "review_branch": "ca832144146b9251d8d54853c4fdab165c9cd434",
+      "subject": "Regenerate pilot manufacturing files for upward GNSS layout"
+    },
+    {
+      "original": "a6fa6d2d0a5f8b8d4b3da023e89818604a40ef7c",
+      "review_branch": "5fc9e17dbc572b8cca1632f269deee61451f15d0",
+      "subject": "Publish independent top GNSS review and update hardware assembly guidance"
+    },
+    {
+      "original": "13e1c5d938155b0a56168069e94c0f871cc88484",
+      "review_branch": "62d1edc15e9028b9628eb06681fc9cd33be09c6e",
+      "subject": "Include native extraction logs required by the independent evidence manifest"
+    },
+    {
+      "original": "848bd77c2358457c5286c5094c6e5aa1f3c2be26",
+      "review_branch": "4a0fc1b9a5b24775126e57f7b4fdb6e36397f876",
+      "subject": "Bind final top GNSS review evidence to manufacturing sources"
     }
   ]
 }
