@@ -1,0 +1,11 @@
+{
+  "status": "PASS",
+  "all_10uF_refs": [
+    "C8",
+    "C21"
+  ],
+  "selected_capacitor_native_and_fresh_schematic_nets_match": true,
+  "canonical_pcb_and_schematic_unchanged": true,
+  "local_readme_links_exist": true,
+  "interpretation": "Analysis only; no bench qualification and no capacitor replacement approved"
+}

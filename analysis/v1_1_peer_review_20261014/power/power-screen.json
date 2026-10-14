@@ -1,0 +1,77 @@
+{
+  "warning": "A charge-balance illustration, not closed-loop simulation or guaranteed capacitance. Sums ignore ESR/ESL/traces/feedback and do not prove locally available capacitance. Small bypass capacitors are omitted from sums. Temperature, aging and AC-amplitude effects are not multiplied into a false guaranteed bound.",
+  "source_pcb_sha256": "9d63500a087ef8d345c2337942106e6704d32ded953846883454bfad718adf6c",
+  "scenarios": {
+    "retained": {
+      "refs": [
+        "C6",
+        "C8",
+        "C21",
+        "C16"
+      ],
+      "nominal_uF": 46.7,
+      "typical_25C_3p3V_sum_uF": 24.815020706829447,
+      "illustrative_low_initial_tolerance_screen_uF": 20.94781321775055,
+      "droop_V_100mA_10us": 0.040298173103066805,
+      "droop_V_100mA_100us": 0.40298173103066803
+    },
+    "omit_C21": {
+      "refs": [
+        "C6",
+        "C8",
+        "C16"
+      ],
+      "nominal_uF": 36.7,
+      "typical_25C_3p3V_sum_uF": 20.386189619388936,
+      "illustrative_low_initial_tolerance_screen_uF": 16.961865239054088,
+      "droop_V_100mA_10us": 0.0490528155908507,
+      "droop_V_100mA_100us": 0.49052815590850696
+    },
+    "omit_C8_and_C21": {
+      "refs": [
+        "C6",
+        "C16"
+      ],
+      "nominal_uF": 26.7,
+      "typical_25C_3p3V_sum_uF": 15.957358531948424,
+      "illustrative_low_initial_tolerance_screen_uF": 12.97591726035763,
+      "droop_V_100mA_10us": 0.0626670133404528,
+      "droop_V_100mA_100us": 0.6266701334045279
+    },
+    "C6_only": {
+      "refs": [
+        "C6"
+      ],
+      "nominal_uF": 22,
+      "typical_25C_3p3V_sum_uF": 13.857054183959535,
+      "illustrative_low_initial_tolerance_screen_uF": 11.085643347167629,
+      "droop_V_100mA_10us": 0.07216541024697493,
+      "droop_V_100mA_100us": 0.7216541024697493
+    }
+  },
+  "straight_line_pad_center_distances_mm_not_trace_lengths": {
+    "C8.2 to U2.24": 3.701811131865732,
+    "C7.2 to U2.24": 2.4146935271377656,
+    "C21.2 to C6.2": 5.43722148013156,
+    "C10.1 to U3.8": 12.266909929888707,
+    "C6.2 to U1.14": 2.444649512304373,
+    "C3.1 to U1.19": 2.602235385202496,
+    "C2.1 to U1.2": 1.6688073561705745,
+    "C4.1 to U1.19": 1.267170097502301
+  },
+  "package_body_only": {
+    "0603_each_mm": [
+      1.6,
+      0.8,
+      0.8
+    ],
+    "0402_candidate_each_mm": [
+      1,
+      0.5,
+      0.5
+    ],
+    "pair_nominal_body_area_saved_mm2": 1.5600000000000005,
+    "pair_nominal_body_volume_saved_mm3": 1.5480000000000005,
+    "mass_not_specified_or_measured": true
+  }
+}

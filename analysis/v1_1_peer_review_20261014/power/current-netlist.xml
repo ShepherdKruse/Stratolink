@@ -1,0 +1,3332 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<export version="E">
+  <design>
+    <source>/Users/twarn/Repositories/Stratolink/hardware/pcb/stratolink.kicad_sch</source>
+    <date>2026-10-14T11:12:04</date>
+    <tool>Eeschema 10.0.0</tool>
+    <sheet number="1" name="/" tstamps="/">
+      <title_block>
+        <title>PICO Mainboard v1.1</title>
+        <company>            Global pico-balloon telemetry system.</company>
+        <rev>1.1</rev>
+        <date>2026-10-12</date>
+        <source>stratolink.kicad_sch</source>
+        <comment number="1" value="             Stratolink"/>
+        <comment number="2" value=""/>
+        <comment number="3" value=""/>
+        <comment number="4" value=""/>
+        <comment number="5" value=""/>
+        <comment number="6" value=""/>
+        <comment number="7" value=""/>
+        <comment number="8" value=""/>
+        <comment number="9" value=""/>
+      </title_block>
+    </sheet>
+  </design>
+  <components>
+    <comp ref="AE1">
+      <value>Enameled Cu wire 82mm (915MHz reference)</value>
+      <footprint>lib:Stratolink_LoRa_Wire_PTH_D1p0</footprint>
+      <datasheet>https://stratolink.org/docs/hardware#antennas-and-suspension</datasheet>
+      <description>Hand-formed enamelled copper wire; 82 mm from feed for 915 MHz, 83 mm compromise or 86 mm for 868 MHz; diameter not yet measured</description>
+      <fields>
+        <field name="Footprint">lib:Stratolink_LoRa_Wire_PTH_D1p0</field>
+        <field name="Datasheet">https://stratolink.org/docs/hardware#antennas-and-suspension</field>
+        <field name="Description">Hand-formed enamelled copper wire; 82 mm from feed for 915 MHz, 83 mm compromise or 86 mm for 868 MHz; diameter not yet measured</field>
+      </fields>
+      <libsource lib="Stratolink_v1p1_Symbols" part="Device_Antenna" description="Antenna"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="stratolink.kicad_sch"/>
+      <property name="ki_keywords" value="antenna"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>01f3e0e6-3706-428a-92f1-d68046eb4cb5</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="AE2">
+      <value>Enameled Cu wire 48mm (GNSS L1)</value>
+      <footprint>lib:Stratolink_GNSS_Wire_PTH_D1p0</footprint>
+      <datasheet>https://stratolink.org/docs/hardware#antennas-and-suspension</datasheet>
+      <description>Hand-formed enamelled copper wire; 48 mm from feed for GNSS L1; diameter not yet measured</description>
+      <fields>
+        <field name="Footprint">lib:Stratolink_GNSS_Wire_PTH_D1p0</field>
+        <field name="Datasheet">https://stratolink.org/docs/hardware#antennas-and-suspension</field>
+        <field name="Description">Hand-formed enamelled copper wire; 48 mm from feed for GNSS L1; diameter not yet measured</field>
+      </fields>
+      <libsource lib="Stratolink_v1p1_Symbols" part="Device_Antenna" description="Antenna"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="stratolink.kicad_sch"/>
+      <property name="ki_keywords" value="antenna"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>7f00fa5a-6632-466d-a8b8-57023b93508e</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="C1">
+      <value>10nF</value>
+      <footprint>lib:Stratolink_v1p1_C1_C_0402_1005Metric</footprint>
+      <datasheet>https://www.lcsc.com/product-detail/C3855387.html</datasheet>
+      <description>GRM1555C1E103JE01D</description>
+      <fields>
+        <field name="Manufacturer">Murata</field>
+        <field name="Manufacturer_Part_Number">GRM1555C1E103JE01D</field>
+        <field name="Supplier">LCSC</field>
+        <field name="LCSC">C3855387</field>
+        <field name="Supplier Part">C3855387</field>
+        <field name="Footprint">lib:Stratolink_v1p1_C1_C_0402_1005Metric</field>
+        <field name="Datasheet">https://www.lcsc.com/product-detail/C3855387.html</field>
+        <field name="Description">GRM1555C1E103JE01D</field>
+      </fields>
+      <libsource lib="Stratolink_v1p1_Symbols" part="Device_C" description="DMF4B5R5G105M3DTA0 1 F 5.5 V supercapacitor; CAD pads 1=positive, 2=negative, 3=isolated balance; manual backside assembly"/>
+      <property name="Manufacturer" value="Murata"/>
+      <property name="Manufacturer_Part_Number" value="GRM1555C1E103JE01D"/>
+      <property name="Supplier" value="LCSC"/>
+      <property name="LCSC" value="C3855387"/>
+      <property name="Supplier Part" value="C3855387"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="stratolink.kicad_sch"/>
+      <property name="ki_keywords" value="cap capacitor"/>
+      <property name="ki_fp_filters" value="C_*"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>eb06aa1e-fea6-4d0d-ac0a-2bd6cbd0b452</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="C2">
+      <value>4.7μF</value>
+      <footprint>lib:Stratolink_v1p1_C2_C_0603_1608Metric</footprint>
+      <datasheet>https://www.lcsc.com/product-detail/C1705.html</datasheet>
+      <description>CL10A475KP8NNNC</description>
+      <fields>
+        <field name="Manufacturer">Samsung Electro-Mechanics</field>
+        <field name="Manufacturer_Part_Number">CL10A475KP8NNNC</field>
+        <field name="Supplier">LCSC</field>
+        <field name="LCSC">C1705</field>
+        <field name="Supplier Part">C1705</field>
+        <field name="Footprint">lib:Stratolink_v1p1_C2_C_0603_1608Metric</field>
+        <field name="Datasheet">https://www.lcsc.com/product-detail/C1705.html</field>
+        <field name="Description">CL10A475KP8NNNC</field>
+      </fields>
+      <libsource lib="Stratolink_v1p1_Symbols" part="Device_C" description="DMF4B5R5G105M3DTA0 1 F 5.5 V supercapacitor; CAD pads 1=positive, 2=negative, 3=isolated balance; manual backside assembly"/>
+      <property name="Manufacturer" value="Samsung Electro-Mechanics"/>
+      <property name="Manufacturer_Part_Number" value="CL10A475KP8NNNC"/>
+      <property name="Supplier" value="LCSC"/>
+      <property name="LCSC" value="C1705"/>
+      <property name="Supplier Part" value="C1705"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="stratolink.kicad_sch"/>
+      <property name="ki_keywords" value="cap capacitor"/>
+      <property name="ki_fp_filters" value="C_*"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>c1f23a3f-96c0-4a7b-a463-c5283284bb71</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="C3">
+      <value>4.7μF</value>
+      <footprint>lib:Stratolink_v1p1_C3_C_0603_1608Metric</footprint>
+      <datasheet>https://www.lcsc.com/product-detail/C1705.html</datasheet>
+      <description>CL10A475KP8NNNC</description>
+      <fields>
+        <field name="Manufacturer">Samsung Electro-Mechanics</field>
+        <field name="Manufacturer_Part_Number">CL10A475KP8NNNC</field>
+        <field name="Supplier">LCSC</field>
+        <field name="LCSC">C1705</field>
+        <field name="Supplier Part">C1705</field>
+        <field name="Footprint">lib:Stratolink_v1p1_C3_C_0603_1608Metric</field>
+        <field name="Datasheet">https://www.lcsc.com/product-detail/C1705.html</field>
+        <field name="Description">CL10A475KP8NNNC</field>
+      </fields>
+      <libsource lib="Stratolink_v1p1_Symbols" part="Device_C" description="DMF4B5R5G105M3DTA0 1 F 5.5 V supercapacitor; CAD pads 1=positive, 2=negative, 3=isolated balance; manual backside assembly"/>
+      <property name="Manufacturer" value="Samsung Electro-Mechanics"/>
+      <property name="Manufacturer_Part_Number" value="CL10A475KP8NNNC"/>
+      <property name="Supplier" value="LCSC"/>
+      <property name="LCSC" value="C1705"/>
+      <property name="Supplier Part" value="C1705"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="stratolink.kicad_sch"/>
+      <property name="ki_keywords" value="cap capacitor"/>
+      <property name="ki_fp_filters" value="C_*"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>ee6c9fc5-b4ce-4250-8c5a-e3bb56e04153</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="C4">
+      <value>100nF</value>
+      <footprint>lib:Stratolink_v1p1_C4_C_0402_1005Metric</footprint>
+      <datasheet>https://www.lcsc.com/product-detail/C1525.html</datasheet>
+      <description>CL05B104KO5NNNC</description>
+      <fields>
+        <field name="Manufacturer">Samsung Electro-Mechanics</field>
+        <field name="Manufacturer_Part_Number">CL05B104KO5NNNC</field>
+        <field name="Supplier">LCSC</field>
+        <field name="LCSC">C1525</field>
+        <field name="Supplier Part">C1525</field>
+        <field name="Footprint">lib:Stratolink_v1p1_C4_C_0402_1005Metric</field>
+        <field name="Datasheet">https://www.lcsc.com/product-detail/C1525.html</field>
+        <field name="Description">CL05B104KO5NNNC</field>
+      </fields>
+      <libsource lib="Stratolink_v1p1_Symbols" part="Device_C" description="DMF4B5R5G105M3DTA0 1 F 5.5 V supercapacitor; CAD pads 1=positive, 2=negative, 3=isolated balance; manual backside assembly"/>
+      <property name="Manufacturer" value="Samsung Electro-Mechanics"/>
+      <property name="Manufacturer_Part_Number" value="CL05B104KO5NNNC"/>
+      <property name="Supplier" value="LCSC"/>
+      <property name="LCSC" value="C1525"/>
+      <property name="Supplier Part" value="C1525"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="stratolink.kicad_sch"/>
+      <property name="ki_keywords" value="cap capacitor"/>
+      <property name="ki_fp_filters" value="C_*"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>c7b808be-600b-41a0-8a09-4d4c2c78652b</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="C5">
+      <value>1F</value>
+      <footprint>lib:Stratolink_v1p1_C5_DMF4B5R5G105M3DTA0</footprint>
+      <description>DMF4B5R5G105M3DTA0; 1 F dual-cell capacitor, pad 1 positive, pad 2 negative, pad 3 midpoint; hand-install after reflow and cleaning</description>
+      <fields>
+        <field name="Manufacturer">CAP-XX / legacy Murata</field>
+        <field name="Manufacturer_Part_Number">DMF4B5R5G105M3DTA0</field>
+        <field name="Assembly_Note">Preserve proven outer polarity. Center pad 3 connects to SC_MID through R26 and the active balancer. Hand-install after board cleaning; no normal reflow.</field>
+        <field name="Footprint">lib:Stratolink_v1p1_C5_DMF4B5R5G105M3DTA0</field>
+        <field name="Datasheet"/>
+        <field name="Description">DMF4B5R5G105M3DTA0; 1 F dual-cell capacitor, pad 1 positive, pad 2 negative, pad 3 midpoint; hand-install after reflow and cleaning</field>
+      </fields>
+      <libsource lib="Stratolink_v1p1_Symbols" part="Stratolink_Power_DMF4B5R5G105M3DTA0_3T" description="CAP-XX DMF dual cell; placed pin1 positive, pin2 negative, pin3 midpoint; hand-install"/>
+      <property name="Manufacturer" value="CAP-XX / legacy Murata"/>
+      <property name="Manufacturer_Part_Number" value="DMF4B5R5G105M3DTA0"/>
+      <property name="Assembly_Note" value="Preserve proven outer polarity. Center pad 3 connects to SC_MID through R26 and the active balancer. Hand-install after board cleaning; no normal reflow."/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="stratolink.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>4bc45da9-a541-47e3-b96e-485d85f9240a</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="3"/>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="C6">
+      <value>22µF</value>
+      <footprint>lib:Stratolink_v1p1_C6_C_0805_2012Metric</footprint>
+      <datasheet>https://www.lcsc.com/product-detail/C602037.html</datasheet>
+      <description>CL21A226MAYNNNE</description>
+      <fields>
+        <field name="Manufacturer">Samsung Electro-Mechanics</field>
+        <field name="Manufacturer_Part_Number">CL21A226MAYNNNE</field>
+        <field name="Supplier">LCSC</field>
+        <field name="LCSC">C602037</field>
+        <field name="Supplier Part">C602037</field>
+        <field name="Footprint">lib:Stratolink_v1p1_C6_C_0805_2012Metric</field>
+        <field name="Datasheet">https://www.lcsc.com/product-detail/C602037.html</field>
+        <field name="Description">CL21A226MAYNNNE</field>
+      </fields>
+      <libsource lib="Stratolink_v1p1_Symbols" part="Device_C" description="DMF4B5R5G105M3DTA0 1 F 5.5 V supercapacitor; CAD pads 1=positive, 2=negative, 3=isolated balance; manual backside assembly"/>
+      <property name="Manufacturer" value="Samsung Electro-Mechanics"/>
+      <property name="Manufacturer_Part_Number" value="CL21A226MAYNNNE"/>
+      <property name="Supplier" value="LCSC"/>
+      <property name="LCSC" value="C602037"/>
+      <property name="Supplier Part" value="C602037"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="stratolink.kicad_sch"/>
+      <property name="ki_keywords" value="cap capacitor"/>
+      <property name="ki_fp_filters" value="C_*"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>bb373c2f-df03-404e-974b-97d827720e6b</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="C7">
+      <value>100nF</value>
+      <footprint>lib:Stratolink_v1p1_C7_C_0402_1005Metric</footprint>
+      <datasheet>https://www.lcsc.com/product-detail/C1525.html</datasheet>
+      <description>CL05B104KO5NNNC</description>
+      <fields>
+        <field name="Manufacturer">Samsung Electro-Mechanics</field>
+        <field name="Manufacturer_Part_Number">CL05B104KO5NNNC</field>
+        <field name="Supplier">LCSC</field>
+        <field name="LCSC">C1525</field>
+        <field name="Supplier Part">C1525</field>
+        <field name="Footprint">lib:Stratolink_v1p1_C7_C_0402_1005Metric</field>
+        <field name="Datasheet">https://www.lcsc.com/product-detail/C1525.html</field>
+        <field name="Description">CL05B104KO5NNNC</field>
+      </fields>
+      <libsource lib="Stratolink_v1p1_Symbols" part="Device_C" description="DMF4B5R5G105M3DTA0 1 F 5.5 V supercapacitor; CAD pads 1=positive, 2=negative, 3=isolated balance; manual backside assembly"/>
+      <property name="Manufacturer" value="Samsung Electro-Mechanics"/>
+      <property name="Manufacturer_Part_Number" value="CL05B104KO5NNNC"/>
+      <property name="Supplier" value="LCSC"/>
+      <property name="LCSC" value="C1525"/>
+      <property name="Supplier Part" value="C1525"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="stratolink.kicad_sch"/>
+      <property name="ki_keywords" value="cap capacitor"/>
+      <property name="ki_fp_filters" value="C_*"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>9afd659a-0ec4-4d95-bbfa-477a6652fea6</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="C8">
+      <value>10μF</value>
+      <footprint>lib:Stratolink_v1p1_C8_C_0603_1608Metric</footprint>
+      <datasheet>https://www.lcsc.com/product-detail/C19702.html</datasheet>
+      <description>CL10A106KP8NNNC</description>
+      <fields>
+        <field name="Manufacturer">Samsung Electro-Mechanics</field>
+        <field name="Manufacturer_Part_Number">CL10A106KP8NNNC</field>
+        <field name="Supplier">LCSC</field>
+        <field name="LCSC">C19702</field>
+        <field name="Supplier Part">C19702</field>
+        <field name="Footprint">lib:Stratolink_v1p1_C8_C_0603_1608Metric</field>
+        <field name="Datasheet">https://www.lcsc.com/product-detail/C19702.html</field>
+        <field name="Description">CL10A106KP8NNNC</field>
+      </fields>
+      <libsource lib="Stratolink_v1p1_Symbols" part="Device_C" description="DMF4B5R5G105M3DTA0 1 F 5.5 V supercapacitor; CAD pads 1=positive, 2=negative, 3=isolated balance; manual backside assembly"/>
+      <property name="Manufacturer" value="Samsung Electro-Mechanics"/>
+      <property name="Manufacturer_Part_Number" value="CL10A106KP8NNNC"/>
+      <property name="Supplier" value="LCSC"/>
+      <property name="LCSC" value="C19702"/>
+      <property name="Supplier Part" value="C19702"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="stratolink.kicad_sch"/>
+      <property name="ki_keywords" value="cap capacitor"/>
+      <property name="ki_fp_filters" value="C_*"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>93e06182-b431-44ef-b7ec-34ecd5d05442</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="C9">
+      <value>100nF</value>
+      <footprint>lib:Stratolink_v1p1_C9_C_0402_1005Metric</footprint>
+      <datasheet>https://www.lcsc.com/product-detail/C1525.html</datasheet>
+      <description>CL05B104KO5NNNC</description>
+      <fields>
+        <field name="Manufacturer">Samsung Electro-Mechanics</field>
+        <field name="Manufacturer_Part_Number">CL05B104KO5NNNC</field>
+        <field name="Supplier">LCSC</field>
+        <field name="LCSC">C1525</field>
+        <field name="Supplier Part">C1525</field>
+        <field name="Footprint">lib:Stratolink_v1p1_C9_C_0402_1005Metric</field>
+        <field name="Datasheet">https://www.lcsc.com/product-detail/C1525.html</field>
+        <field name="Description">CL05B104KO5NNNC</field>
+      </fields>
+      <libsource lib="Stratolink_v1p1_Symbols" part="Device_C" description="DMF4B5R5G105M3DTA0 1 F 5.5 V supercapacitor; CAD pads 1=positive, 2=negative, 3=isolated balance; manual backside assembly"/>
+      <property name="Manufacturer" value="Samsung Electro-Mechanics"/>
+      <property name="Manufacturer_Part_Number" value="CL05B104KO5NNNC"/>
+      <property name="Supplier" value="LCSC"/>
+      <property name="LCSC" value="C1525"/>
+      <property name="Supplier Part" value="C1525"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="stratolink.kicad_sch"/>
+      <property name="ki_keywords" value="cap capacitor"/>
+      <property name="ki_fp_filters" value="C_*"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>a99eacb0-cf28-4027-bef3-2f625f2efd6f</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="C10">
+      <value>100nF</value>
+      <footprint>lib:Stratolink_v1p1_C10_C_0402_1005Metric</footprint>
+      <datasheet>https://www.lcsc.com/product-detail/C1525.html</datasheet>
+      <description>CL05B104KO5NNNC</description>
+      <fields>
+        <field name="Manufacturer">Samsung Electro-Mechanics</field>
+        <field name="Manufacturer_Part_Number">CL05B104KO5NNNC</field>
+        <field name="Supplier">LCSC</field>
+        <field name="LCSC">C1525</field>
+        <field name="Supplier Part">C1525</field>
+        <field name="Footprint">lib:Stratolink_v1p1_C10_C_0402_1005Metric</field>
+        <field name="Datasheet">https://www.lcsc.com/product-detail/C1525.html</field>
+        <field name="Description">CL05B104KO5NNNC</field>
+      </fields>
+      <libsource lib="Stratolink_v1p1_Symbols" part="Device_C" description="DMF4B5R5G105M3DTA0 1 F 5.5 V supercapacitor; CAD pads 1=positive, 2=negative, 3=isolated balance; manual backside assembly"/>
+      <property name="Manufacturer" value="Samsung Electro-Mechanics"/>
+      <property name="Manufacturer_Part_Number" value="CL05B104KO5NNNC"/>
+      <property name="Supplier" value="LCSC"/>
+      <property name="LCSC" value="C1525"/>
+      <property name="Supplier Part" value="C1525"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="stratolink.kicad_sch"/>
+      <property name="ki_keywords" value="cap capacitor"/>
+      <property name="ki_fp_filters" value="C_*"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>72528ee3-85e0-40c2-9176-620ca99249ea</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="C11">
+      <value>100nF</value>
+      <footprint>lib:Stratolink_v1p1_C11_C_0402_1005Metric</footprint>
+      <datasheet>https://www.lcsc.com/product-detail/C1525.html</datasheet>
+      <description>CL05B104KO5NNNC</description>
+      <fields>
+        <field name="Manufacturer">Samsung Electro-Mechanics</field>
+        <field name="Manufacturer_Part_Number">CL05B104KO5NNNC</field>
+        <field name="Supplier">LCSC</field>
+        <field name="LCSC">C1525</field>
+        <field name="Supplier Part">C1525</field>
+        <field name="Footprint">lib:Stratolink_v1p1_C11_C_0402_1005Metric</field>
+        <field name="Datasheet">https://www.lcsc.com/product-detail/C1525.html</field>
+        <field name="Description">CL05B104KO5NNNC</field>
+      </fields>
+      <libsource lib="Stratolink_v1p1_Symbols" part="Device_C" description="DMF4B5R5G105M3DTA0 1 F 5.5 V supercapacitor; CAD pads 1=positive, 2=negative, 3=isolated balance; manual backside assembly"/>
+      <property name="Manufacturer" value="Samsung Electro-Mechanics"/>
+      <property name="Manufacturer_Part_Number" value="CL05B104KO5NNNC"/>
+      <property name="Supplier" value="LCSC"/>
+      <property name="LCSC" value="C1525"/>
+      <property name="Supplier Part" value="C1525"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="stratolink.kicad_sch"/>
+      <property name="ki_keywords" value="cap capacitor"/>
+      <property name="ki_fp_filters" value="C_*"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>6706bfe2-965d-4e59-b383-4867b57b402b</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="C12">
+      <value>100nF</value>
+      <footprint>lib:Stratolink_v1p1_C12_C_0402_1005Metric</footprint>
+      <datasheet>https://www.lcsc.com/product-detail/C1525.html</datasheet>
+      <description>CL05B104KO5NNNC</description>
+      <fields>
+        <field name="Manufacturer">Samsung Electro-Mechanics</field>
+        <field name="Manufacturer_Part_Number">CL05B104KO5NNNC</field>
+        <field name="Supplier">LCSC</field>
+        <field name="LCSC">C1525</field>
+        <field name="Supplier Part">C1525</field>
+        <field name="Footprint">lib:Stratolink_v1p1_C12_C_0402_1005Metric</field>
+        <field name="Datasheet">https://www.lcsc.com/product-detail/C1525.html</field>
+        <field name="Description">CL05B104KO5NNNC</field>
+      </fields>
+      <libsource lib="Stratolink_v1p1_Symbols" part="Device_C" description="DMF4B5R5G105M3DTA0 1 F 5.5 V supercapacitor; CAD pads 1=positive, 2=negative, 3=isolated balance; manual backside assembly"/>
+      <property name="Manufacturer" value="Samsung Electro-Mechanics"/>
+      <property name="Manufacturer_Part_Number" value="CL05B104KO5NNNC"/>
+      <property name="Supplier" value="LCSC"/>
+      <property name="LCSC" value="C1525"/>
+      <property name="Supplier Part" value="C1525"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="stratolink.kicad_sch"/>
+      <property name="ki_keywords" value="cap capacitor"/>
+      <property name="ki_fp_filters" value="C_*"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>779ee2bc-880f-44e6-af66-0d32ab334bcf</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="C14">
+      <value>100nF</value>
+      <footprint>lib:Stratolink_v1p1_C14_C_0402_1005Metric</footprint>
+      <datasheet>https://www.lcsc.com/product-detail/C1525.html</datasheet>
+      <description>AS7331 VDDA local bypass, 100 nF 0402</description>
+      <fields>
+        <field name="Manufacturer">Samsung Electro-Mechanics</field>
+        <field name="Manufacturer_Part_Number">CL05B104KO5NNNC</field>
+        <field name="Supplier">LCSC</field>
+        <field name="LCSC">C1525</field>
+        <field name="Supplier Part">C1525</field>
+        <field name="Footprint">lib:Stratolink_v1p1_C14_C_0402_1005Metric</field>
+        <field name="Datasheet">https://www.lcsc.com/product-detail/C1525.html</field>
+        <field name="Description">AS7331 VDDA local bypass, 100 nF 0402</field>
+      </fields>
+      <libsource lib="Stratolink_v1p1_Symbols" part="Device_C" description="DMF4B5R5G105M3DTA0 1 F 5.5 V supercapacitor; CAD pads 1=positive, 2=negative, 3=isolated balance; manual backside assembly"/>
+      <property name="Manufacturer" value="Samsung Electro-Mechanics"/>
+      <property name="Manufacturer_Part_Number" value="CL05B104KO5NNNC"/>
+      <property name="Supplier" value="LCSC"/>
+      <property name="LCSC" value="C1525"/>
+      <property name="Supplier Part" value="C1525"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="stratolink.kicad_sch"/>
+      <property name="ki_keywords" value="cap capacitor"/>
+      <property name="ki_fp_filters" value="C_*"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>abac15af-0cc4-43ec-b455-db4c6d91438c</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="C15">
+      <value>100nF</value>
+      <footprint>lib:Stratolink_v1p1_C15_C_0402_1005Metric</footprint>
+      <datasheet>https://www.lcsc.com/product-detail/C1525.html</datasheet>
+      <description>CL05B104KO5NNNC</description>
+      <fields>
+        <field name="Manufacturer">Samsung Electro-Mechanics</field>
+        <field name="Manufacturer_Part_Number">CL05B104KO5NNNC</field>
+        <field name="Supplier">LCSC</field>
+        <field name="LCSC">C1525</field>
+        <field name="Supplier Part">C1525</field>
+        <field name="Footprint">lib:Stratolink_v1p1_C15_C_0402_1005Metric</field>
+        <field name="Datasheet">https://www.lcsc.com/product-detail/C1525.html</field>
+        <field name="Description">CL05B104KO5NNNC</field>
+      </fields>
+      <libsource lib="Stratolink_v1p1_Symbols" part="Device_C" description="DMF4B5R5G105M3DTA0 1 F 5.5 V supercapacitor; CAD pads 1=positive, 2=negative, 3=isolated balance; manual backside assembly"/>
+      <property name="Manufacturer" value="Samsung Electro-Mechanics"/>
+      <property name="Manufacturer_Part_Number" value="CL05B104KO5NNNC"/>
+      <property name="Supplier" value="LCSC"/>
+      <property name="LCSC" value="C1525"/>
+      <property name="Supplier Part" value="C1525"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="stratolink.kicad_sch"/>
+      <property name="ki_keywords" value="cap capacitor"/>
+      <property name="ki_fp_filters" value="C_*"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>f3f0b050-e956-4fe1-8c4e-c346b9b6f52e</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="C16">
+      <value>4.7μF</value>
+      <footprint>lib:Stratolink_v1p1_C16_C_0603_1608Metric</footprint>
+      <datasheet>https://www.lcsc.com/product-detail/C1705.html</datasheet>
+      <description>CL10A475KP8NNNC</description>
+      <fields>
+        <field name="Manufacturer">Samsung Electro-Mechanics</field>
+        <field name="Manufacturer_Part_Number">CL10A475KP8NNNC</field>
+        <field name="Supplier">LCSC</field>
+        <field name="LCSC">C1705</field>
+        <field name="Supplier Part">C1705</field>
+        <field name="Footprint">lib:Stratolink_v1p1_C16_C_0603_1608Metric</field>
+        <field name="Datasheet">https://www.lcsc.com/product-detail/C1705.html</field>
+        <field name="Description">CL10A475KP8NNNC</field>
+      </fields>
+      <libsource lib="Stratolink_v1p1_Symbols" part="Device_C" description="DMF4B5R5G105M3DTA0 1 F 5.5 V supercapacitor; CAD pads 1=positive, 2=negative, 3=isolated balance; manual backside assembly"/>
+      <property name="Manufacturer" value="Samsung Electro-Mechanics"/>
+      <property name="Manufacturer_Part_Number" value="CL10A475KP8NNNC"/>
+      <property name="Supplier" value="LCSC"/>
+      <property name="LCSC" value="C1705"/>
+      <property name="Supplier Part" value="C1705"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="stratolink.kicad_sch"/>
+      <property name="ki_keywords" value="cap capacitor"/>
+      <property name="ki_fp_filters" value="C_*"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>8068c166-194f-4ae9-9272-692877e0af80</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="C17">
+      <value>100nF</value>
+      <footprint>lib:Stratolink_v1p1_C17_C_0402_1005Metric</footprint>
+      <datasheet>https://www.lcsc.com/product-detail/C1525.html</datasheet>
+      <description>CL05B104KO5NNNC</description>
+      <fields>
+        <field name="Manufacturer">Samsung Electro-Mechanics</field>
+        <field name="Manufacturer_Part_Number">CL05B104KO5NNNC</field>
+        <field name="Supplier">LCSC</field>
+        <field name="LCSC">C1525</field>
+        <field name="Supplier Part">C1525</field>
+        <field name="Footprint">lib:Stratolink_v1p1_C17_C_0402_1005Metric</field>
+        <field name="Datasheet">https://www.lcsc.com/product-detail/C1525.html</field>
+        <field name="Description">CL05B104KO5NNNC</field>
+      </fields>
+      <libsource lib="Stratolink_v1p1_Symbols" part="Device_C" description="DMF4B5R5G105M3DTA0 1 F 5.5 V supercapacitor; CAD pads 1=positive, 2=negative, 3=isolated balance; manual backside assembly"/>
+      <property name="Manufacturer" value="Samsung Electro-Mechanics"/>
+      <property name="Manufacturer_Part_Number" value="CL05B104KO5NNNC"/>
+      <property name="Supplier" value="LCSC"/>
+      <property name="LCSC" value="C1525"/>
+      <property name="Supplier Part" value="C1525"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="stratolink.kicad_sch"/>
+      <property name="ki_keywords" value="cap capacitor"/>
+      <property name="ki_fp_filters" value="C_*"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>528dd1cf-4b0e-4666-b7d6-3c93fafbe8b4</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="C19">
+      <value>100nF</value>
+      <footprint>lib:Stratolink_v1p1_C19_C_0402_1005Metric</footprint>
+      <datasheet>https://www.lcsc.com/product-detail/C1525.html</datasheet>
+      <description>CL05B104KO5NNNC</description>
+      <fields>
+        <field name="Manufacturer">Samsung Electro-Mechanics</field>
+        <field name="Manufacturer_Part_Number">CL05B104KO5NNNC</field>
+        <field name="Supplier">LCSC</field>
+        <field name="LCSC">C1525</field>
+        <field name="Supplier Part">C1525</field>
+        <field name="Footprint">lib:Stratolink_v1p1_C19_C_0402_1005Metric</field>
+        <field name="Datasheet">https://www.lcsc.com/product-detail/C1525.html</field>
+        <field name="Description">CL05B104KO5NNNC</field>
+      </fields>
+      <libsource lib="Stratolink_v1p1_Symbols" part="Device_C" description="DMF4B5R5G105M3DTA0 1 F 5.5 V supercapacitor; CAD pads 1=positive, 2=negative, 3=isolated balance; manual backside assembly"/>
+      <property name="Manufacturer" value="Samsung Electro-Mechanics"/>
+      <property name="Manufacturer_Part_Number" value="CL05B104KO5NNNC"/>
+      <property name="Supplier" value="LCSC"/>
+      <property name="LCSC" value="C1525"/>
+      <property name="Supplier Part" value="C1525"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="stratolink.kicad_sch"/>
+      <property name="ki_keywords" value="cap capacitor"/>
+      <property name="ki_fp_filters" value="C_*"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>149a9a54-219a-4b2d-900c-14ec353f0e78</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="C20">
+      <value>100nF</value>
+      <footprint>lib:Stratolink_v1p1_C20_C_0402_1005Metric</footprint>
+      <datasheet>https://www.lcsc.com/product-detail/C1525.html</datasheet>
+      <description>CL05B104KO5NNNC</description>
+      <fields>
+        <field name="Manufacturer">Samsung Electro-Mechanics</field>
+        <field name="Manufacturer_Part_Number">CL05B104KO5NNNC</field>
+        <field name="Supplier">LCSC</field>
+        <field name="LCSC">C1525</field>
+        <field name="Supplier Part">C1525</field>
+        <field name="Footprint">lib:Stratolink_v1p1_C20_C_0402_1005Metric</field>
+        <field name="Datasheet">https://www.lcsc.com/product-detail/C1525.html</field>
+        <field name="Description">CL05B104KO5NNNC</field>
+      </fields>
+      <libsource lib="Stratolink_v1p1_Symbols" part="Device_C" description="DMF4B5R5G105M3DTA0 1 F 5.5 V supercapacitor; CAD pads 1=positive, 2=negative, 3=isolated balance; manual backside assembly"/>
+      <property name="Manufacturer" value="Samsung Electro-Mechanics"/>
+      <property name="Manufacturer_Part_Number" value="CL05B104KO5NNNC"/>
+      <property name="Supplier" value="LCSC"/>
+      <property name="LCSC" value="C1525"/>
+      <property name="Supplier Part" value="C1525"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="stratolink.kicad_sch"/>
+      <property name="ki_keywords" value="cap capacitor"/>
+      <property name="ki_fp_filters" value="C_*"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>14725232-db0c-4e27-9cb6-041a5b52a1d6</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="C21">
+      <value>10μF</value>
+      <footprint>lib:Stratolink_v1p1_C21_C_0603_1608Metric</footprint>
+      <datasheet>https://www.lcsc.com/product-detail/C19702.html</datasheet>
+      <description>CL10A106KP8NNNC</description>
+      <fields>
+        <field name="Manufacturer">Samsung Electro-Mechanics</field>
+        <field name="Manufacturer_Part_Number">CL10A106KP8NNNC</field>
+        <field name="Supplier">LCSC</field>
+        <field name="LCSC">C19702</field>
+        <field name="Supplier Part">C19702</field>
+        <field name="Footprint">lib:Stratolink_v1p1_C21_C_0603_1608Metric</field>
+        <field name="Datasheet">https://www.lcsc.com/product-detail/C19702.html</field>
+        <field name="Description">CL10A106KP8NNNC</field>
+      </fields>
+      <libsource lib="Stratolink_v1p1_Symbols" part="Device_C" description="DMF4B5R5G105M3DTA0 1 F 5.5 V supercapacitor; CAD pads 1=positive, 2=negative, 3=isolated balance; manual backside assembly"/>
+      <property name="Manufacturer" value="Samsung Electro-Mechanics"/>
+      <property name="Manufacturer_Part_Number" value="CL10A106KP8NNNC"/>
+      <property name="Supplier" value="LCSC"/>
+      <property name="LCSC" value="C19702"/>
+      <property name="Supplier Part" value="C19702"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="stratolink.kicad_sch"/>
+      <property name="ki_keywords" value="cap capacitor"/>
+      <property name="ki_fp_filters" value="C_*"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>a2b649cd-5f87-40c6-a913-8d9235936927</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="C22">
+      <value>100nF</value>
+      <footprint>lib:Stratolink_v1p1_C22_C_0402_1005Metric</footprint>
+      <description>Active midpoint balancer pilot</description>
+      <fields>
+        <field name="MPN">CL05B104KO5NNNC</field>
+        <field name="LCSC Part #">C1525</field>
+        <field name="Supplier Part">C1525</field>
+        <field name="Manufacturer_Part_Number">CL05B104KO5NNNC</field>
+        <field name="Footprint">lib:Stratolink_v1p1_C22_C_0402_1005Metric</field>
+        <field name="Datasheet"/>
+        <field name="Description">Active midpoint balancer pilot</field>
+      </fields>
+      <libsource lib="Stratolink_v1p1_Symbols" part="Device_C" description="DMF4B5R5G105M3DTA0 1 F 5.5 V supercapacitor; CAD pads 1=positive, 2=negative, 3=isolated balance; manual backside assembly"/>
+      <property name="MPN" value="CL05B104KO5NNNC"/>
+      <property name="LCSC Part #" value="C1525"/>
+      <property name="Supplier Part" value="C1525"/>
+      <property name="Manufacturer_Part_Number" value="CL05B104KO5NNNC"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="stratolink.kicad_sch"/>
+      <property name="ki_keywords" value="cap capacitor"/>
+      <property name="ki_fp_filters" value="C_*"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>0457256a-7e29-54b3-a08f-85f815917fd9</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="C23">
+      <value>100nF</value>
+      <footprint>lib:Stratolink_v1p1_C23_C_0402_1005Metric</footprint>
+      <datasheet>https://www.lcsc.com/product-detail/C1525.html</datasheet>
+      <description>AS7331 VDDD local bypass, 100 nF 0402</description>
+      <fields>
+        <field name="Manufacturer">Samsung Electro-Mechanics</field>
+        <field name="Manufacturer_Part_Number">CL05B104KO5NNNC</field>
+        <field name="Supplier">LCSC</field>
+        <field name="LCSC">C1525</field>
+        <field name="Supplier Part">C1525</field>
+        <field name="Footprint">lib:Stratolink_v1p1_C23_C_0402_1005Metric</field>
+        <field name="Datasheet">https://www.lcsc.com/product-detail/C1525.html</field>
+        <field name="Description">AS7331 VDDD local bypass, 100 nF 0402</field>
+      </fields>
+      <libsource lib="Stratolink_v1p1_Symbols" part="Device_C" description="DMF4B5R5G105M3DTA0 1 F 5.5 V supercapacitor; CAD pads 1=positive, 2=negative, 3=isolated balance; manual backside assembly"/>
+      <property name="Manufacturer" value="Samsung Electro-Mechanics"/>
+      <property name="Manufacturer_Part_Number" value="CL05B104KO5NNNC"/>
+      <property name="Supplier" value="LCSC"/>
+      <property name="LCSC" value="C1525"/>
+      <property name="Supplier Part" value="C1525"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="stratolink.kicad_sch"/>
+      <property name="ki_keywords" value="cap capacitor"/>
+      <property name="ki_fp_filters" value="C_*"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>ec882c15-634f-5006-86b3-f271adb0891f</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="D1">
+      <value>PESD5V0U1BB</value>
+      <footprint>lib:Stratolink_v1p1_D1_D_SOD-523</footprint>
+      <datasheet>https://uploadcdn.oneyac.com/attachments/files/brand_pdf/leiditech/3D/92/PESD5V0U1BB.pdf</datasheet>
+      <description>Bidirectional 5 V low-capacitance ESD TVS, SOD-523; nominal 0.5 pF; PESD5V0U1BB</description>
+      <fields>
+        <field name="Manufacturer">Leiditech</field>
+        <field name="Manufacturer_Part_Number">PESD5V0U1BB</field>
+        <field name="Supplier">LCSC</field>
+        <field name="LCSC">C5272735</field>
+        <field name="Supplier Part">C5272735</field>
+        <field name="Footprint">lib:Stratolink_v1p1_D1_D_SOD-523</field>
+        <field name="Datasheet">https://uploadcdn.oneyac.com/attachments/files/brand_pdf/leiditech/3D/92/PESD5V0U1BB.pdf</field>
+        <field name="Description">Bidirectional 5 V low-capacitance ESD TVS, SOD-523; nominal 0.5 pF; PESD5V0U1BB</field>
+      </fields>
+      <libsource lib="Stratolink_v1p1_Symbols" part="Stratolink_Release_PESD5V0U1BB" description="Bidirectional 5 V low-capacitance ESD TVS, SOD-523; nominal 0.5 pF; PESD5V0U1BB"/>
+      <property name="Manufacturer" value="Leiditech"/>
+      <property name="Manufacturer_Part_Number" value="PESD5V0U1BB"/>
+      <property name="Supplier" value="LCSC"/>
+      <property name="LCSC" value="C5272735"/>
+      <property name="Supplier Part" value="C5272735"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="stratolink.kicad_sch"/>
+      <property name="ki_keywords" value="diode TVS ESD"/>
+      <property name="ki_fp_filters" value="*SOD-523*"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>35614f0c-0752-4f9f-961d-aa0e8618167f</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="D3">
+      <value>PESD5V0U1BB</value>
+      <footprint>lib:Stratolink_v1p1_D3_D_SOD-523</footprint>
+      <datasheet>https://uploadcdn.oneyac.com/attachments/files/brand_pdf/leiditech/3D/92/PESD5V0U1BB.pdf</datasheet>
+      <description>Bidirectional 5 V low-capacitance ESD TVS, SOD-523; nominal 0.5 pF; PESD5V0U1BB</description>
+      <fields>
+        <field name="Manufacturer">Leiditech</field>
+        <field name="Manufacturer_Part_Number">PESD5V0U1BB</field>
+        <field name="Supplier">LCSC</field>
+        <field name="LCSC">C5272735</field>
+        <field name="Supplier Part">C5272735</field>
+        <field name="Footprint">lib:Stratolink_v1p1_D3_D_SOD-523</field>
+        <field name="Datasheet">https://uploadcdn.oneyac.com/attachments/files/brand_pdf/leiditech/3D/92/PESD5V0U1BB.pdf</field>
+        <field name="Description">Bidirectional 5 V low-capacitance ESD TVS, SOD-523; nominal 0.5 pF; PESD5V0U1BB</field>
+      </fields>
+      <libsource lib="Stratolink_v1p1_Symbols" part="Stratolink_Release_PESD5V0U1BB" description="Bidirectional 5 V low-capacitance ESD TVS, SOD-523; nominal 0.5 pF; PESD5V0U1BB"/>
+      <property name="Manufacturer" value="Leiditech"/>
+      <property name="Manufacturer_Part_Number" value="PESD5V0U1BB"/>
+      <property name="Supplier" value="LCSC"/>
+      <property name="LCSC" value="C5272735"/>
+      <property name="Supplier Part" value="C5272735"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="stratolink.kicad_sch"/>
+      <property name="ki_keywords" value="diode TVS ESD"/>
+      <property name="ki_fp_filters" value="*SOD-523*"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>dff613be-ff89-4cc2-853b-d7d76bda1bd5</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="FB1">
+      <value>BLM15AG601SN1D</value>
+      <footprint>lib:Stratolink_v1p1_FB1_C_0402_1005Metric</footprint>
+      <datasheet>https://www.lcsc.com/product-detail/C76884.html</datasheet>
+      <description>BLM15AG601SN1D</description>
+      <fields>
+        <field name="Manufacturer">Murata</field>
+        <field name="Manufacturer_Part_Number">BLM15AG601SN1D</field>
+        <field name="Supplier">LCSC</field>
+        <field name="LCSC">C76884</field>
+        <field name="Supplier Part">C76884</field>
+        <field name="Footprint">lib:Stratolink_v1p1_FB1_C_0402_1005Metric</field>
+        <field name="Datasheet">https://www.lcsc.com/product-detail/C76884.html</field>
+        <field name="Description">BLM15AG601SN1D</field>
+      </fields>
+      <libsource lib="Stratolink_v1p1_Symbols" part="Device_FerriteBead_Small" description="Ferrite bead, small symbol"/>
+      <property name="Manufacturer" value="Murata"/>
+      <property name="Manufacturer_Part_Number" value="BLM15AG601SN1D"/>
+      <property name="Supplier" value="LCSC"/>
+      <property name="LCSC" value="C76884"/>
+      <property name="Supplier Part" value="C76884"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="stratolink.kicad_sch"/>
+      <property name="ki_keywords" value="L ferrite bead inductor filter"/>
+      <property name="ki_fp_filters" value="Inductor_* L_* *Ferrite*"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>0305c98a-0cfa-4b89-afc9-fa962cd41060</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="J1">
+      <value>Solar panel direct solder</value>
+      <footprint>lib:Solar_Notch_Right_1p0x2p0</footprint>
+      <fields>
+        <field name="Footprint">lib:Solar_Notch_Right_1p0x2p0</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="Stratolink_v1p1_Symbols" part="fab_Conn_Header_JST_PH_1x02_P2mm_Vertical_SMD" description="Male JST PH 2 pin connector"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="stratolink.kicad_sch"/>
+      <property name="exclude_from_bom"/>
+      <property name="ki_keywords" value="male header JST PH"/>
+      <property name="ki_fp_filters" value="*Header*JST*PH*"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>5b862f3e-eacd-4a04-8cd1-e5cafbe9ab8c</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="J2">
+      <value>Solar panel direct solder</value>
+      <footprint>lib:Solar_Notch_Left_1p0x2p0</footprint>
+      <fields>
+        <field name="Footprint">lib:Solar_Notch_Left_1p0x2p0</field>
+        <field name="Datasheet"/>
+        <field name="Description"/>
+      </fields>
+      <libsource lib="Stratolink_v1p1_Symbols" part="fab_Conn_Header_JST_PH_1x02_P2mm_Vertical_SMD" description="Male JST PH 2 pin connector"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="stratolink.kicad_sch"/>
+      <property name="exclude_from_bom"/>
+      <property name="ki_keywords" value="male header JST PH"/>
+      <property name="ki_fp_filters" value="*Header*JST*PH*"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>e97c7a43-b503-475f-98cb-b96a9a5ae6ed</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="J3">
+      <value>Programming_1x07_P1.00mm_D0.50mm</value>
+      <footprint>lib:Stratolink_Programming_Left_1x07_P1p00_D0p50_BackTack1p20x0p88</footprint>
+      <description>Programming/wire pads: 7 positions, 1.00 mm pitch, 0.50 mm holes; 0.88 mm front lands and 1.20 x 0.88 mm inward-extended back tack lands.</description>
+      <fields>
+        <field name="Footprint">lib:Stratolink_Programming_Left_1x07_P1p00_D0p50_BackTack1p20x0p88</field>
+        <field name="Datasheet"/>
+        <field name="Description">Programming/wire pads: 7 positions, 1.00 mm pitch, 0.50 mm holes; 0.88 mm front lands and 1.20 x 0.88 mm inward-extended back tack lands.</field>
+      </fields>
+      <libsource lib="Stratolink_v1p1_Symbols" part="fab_Conn_PinHeader_1x07_P2_54mm_Vertical_THT_D1mm" description="Connector Header Through Hole 7 positions 0.100&quot; (2.54mm)"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="stratolink.kicad_sch"/>
+      <property name="ki_keywords" value="connector"/>
+      <property name="ki_fp_filters" value="*PinHeader*1x07*"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>bbd819f9-cd82-40ce-a0bf-669a0c4936fa</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+            <pin num="3"/>
+            <pin num="4"/>
+            <pin num="5"/>
+            <pin num="6"/>
+            <pin num="7"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="J4">
+      <value>Programming_1x07_P1.00mm_D0.50mm</value>
+      <footprint>lib:Stratolink_v1p1_J4_Stratolink_Programming_Right_1x07_P1p00_D0p50_BackTack1p20x0p88</footprint>
+      <description>Programming/wire pads: 7 positions, 1.00 mm pitch, 0.50 mm holes; 0.88 mm front lands and 1.20 x 0.88 mm inward-extended back tack lands.</description>
+      <fields>
+        <field name="Footprint">lib:Stratolink_v1p1_J4_Stratolink_Programming_Right_1x07_P1p00_D0p50_BackTack1p20x0p88</field>
+        <field name="Datasheet"/>
+        <field name="Description">Programming/wire pads: 7 positions, 1.00 mm pitch, 0.50 mm holes; 0.88 mm front lands and 1.20 x 0.88 mm inward-extended back tack lands.</field>
+      </fields>
+      <libsource lib="Stratolink_v1p1_Symbols" part="fab_Conn_PinHeader_1x07_P2_54mm_Vertical_THT_D1mm" description="Connector Header Through Hole 7 positions 0.100&quot; (2.54mm)"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="stratolink.kicad_sch"/>
+      <property name="ki_keywords" value="connector"/>
+      <property name="ki_fp_filters" value="*PinHeader*1x07*"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>28bf207b-2684-4a81-96b2-e527eebfaf15</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+            <pin num="3"/>
+            <pin num="4"/>
+            <pin num="5"/>
+            <pin num="6"/>
+            <pin num="7"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="J20">
+      <value>Conn_ARM_SWD_TagConnect_TC2030-NL</value>
+      <footprint>lib:Stratolink_v1p1_J20_Tag-Connect_TC2030-IDC-NL_2x03_P1.27mm_Vertical</footprint>
+      <datasheet>https://www.tag-connect.com/wp-content/uploads/bsk-pdf-manager/TC2030-CTX_1.pdf</datasheet>
+      <description>Tag-Connect ARM Cortex SWD JTAG connector, 6 pin, no legs</description>
+      <fields>
+        <field name="Footprint">lib:Stratolink_v1p1_J20_Tag-Connect_TC2030-IDC-NL_2x03_P1.27mm_Vertical</field>
+        <field name="Datasheet">https://www.tag-connect.com/wp-content/uploads/bsk-pdf-manager/TC2030-CTX_1.pdf</field>
+        <field name="Description">Tag-Connect ARM Cortex SWD JTAG connector, 6 pin, no legs</field>
+      </fields>
+      <libsource lib="Stratolink_v1p1_Symbols" part="Connector_Conn_ARM_SWD_TagConnect_TC2030_NL" description="Tag-Connect ARM Cortex SWD JTAG connector, 6 pin, no legs"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="stratolink.kicad_sch"/>
+      <property name="exclude_from_bom"/>
+      <property name="ki_keywords" value="Cortex Debug Connector ARM SWD JTAG"/>
+      <property name="ki_fp_filters" value="*TC2030*"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>989673b5-e785-4e78-b577-2432ea1fbd32</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="5"/>
+            <pin num="3"/>
+            <pin num="4"/>
+            <pin num="2"/>
+            <pin num="6"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="L1">
+      <value>22µH</value>
+      <footprint>lib:Stratolink_v1p1_L1_IND_LPS4018-223MRC</footprint>
+      <datasheet>https://www.lcsc.com/product-detail/C5278935.html</datasheet>
+      <description>LPS4018-223MRC</description>
+      <fields>
+        <field name="Manufacturer">Coilcraft</field>
+        <field name="LCSC">C5278935</field>
+        <field name="Manufacturer_Part_Number">LPS4018-223MRC</field>
+        <field name="Supplier Part">C5278935</field>
+        <field name="Supplier">LCSC</field>
+        <field name="Footprint">lib:Stratolink_v1p1_L1_IND_LPS4018-223MRC</field>
+        <field name="Datasheet">https://www.lcsc.com/product-detail/C5278935.html</field>
+        <field name="Description">LPS4018-223MRC</field>
+      </fields>
+      <libsource lib="Stratolink_v1p1_Symbols" part="Device_L" description="Inductor"/>
+      <property name="Manufacturer" value="Coilcraft"/>
+      <property name="LCSC" value="C5278935"/>
+      <property name="Manufacturer_Part_Number" value="LPS4018-223MRC"/>
+      <property name="Supplier Part" value="C5278935"/>
+      <property name="Supplier" value="LCSC"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="stratolink.kicad_sch"/>
+      <property name="ki_keywords" value="inductor choke coil reactor magnetic"/>
+      <property name="ki_fp_filters" value="Choke_* *Coil* Inductor_* L_*"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>5475c5c2-a59d-48ee-9ee1-6637ef303763</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="L2">
+      <value>10µH</value>
+      <footprint>lib:INDC1608X90N</footprint>
+      <datasheet>https://www.lcsc.com/product-detail/C436784.html?s_z=n_C436784%2520</datasheet>
+      <description>PROD Tech PWCWAQ1608F-100KTT</description>
+      <fields>
+        <field name="Manufacturer">PROD Tech</field>
+        <field name="LCSC">C436784</field>
+        <field name="Manufacturer_Part_Number">PWCWAQ1608F-100KTT</field>
+        <field name="Supplier Part">C436784</field>
+        <field name="Supplier">LCSC</field>
+        <field name="Footprint">lib:INDC1608X90N</field>
+        <field name="Datasheet">https://www.lcsc.com/product-detail/C436784.html?s_z=n_C436784%2520</field>
+        <field name="Description">PROD Tech PWCWAQ1608F-100KTT</field>
+      </fields>
+      <libsource lib="Stratolink_v1p1_Symbols" part="Device_L" description="Inductor"/>
+      <property name="Manufacturer" value="PROD Tech"/>
+      <property name="LCSC" value="C436784"/>
+      <property name="Manufacturer_Part_Number" value="PWCWAQ1608F-100KTT"/>
+      <property name="Supplier Part" value="C436784"/>
+      <property name="Supplier" value="LCSC"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="stratolink.kicad_sch"/>
+      <property name="ki_keywords" value="inductor choke coil reactor magnetic"/>
+      <property name="ki_fp_filters" value="Choke_* *Coil* Inductor_* L_*"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>1eed07a9-bbc9-4b19-9d91-8cb2a53221ec</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="R1">
+      <value>7.50MΩ</value>
+      <footprint>lib:Stratolink_v1p1_R1_R_0402_1005Metric</footprint>
+      <datasheet>https://www.lcsc.com/product-detail/C3013187.html</datasheet>
+      <description>FRC0402F7504TS; 7.50 MΩ, 1%, 100 ppm/°C charge-ceiling resistor</description>
+      <fields>
+        <field name="Manufacturer">FOJAN</field>
+        <field name="Manufacturer_Part_Number">FRC0402F7504TS</field>
+        <field name="Supplier">LCSC</field>
+        <field name="LCSC">C3013187</field>
+        <field name="Supplier Part">C3013187</field>
+        <field name="MPN">FRC0402F7504TS</field>
+        <field name="LCSC Part #">C3013187</field>
+        <field name="Footprint">lib:Stratolink_v1p1_R1_R_0402_1005Metric</field>
+        <field name="Datasheet">https://www.lcsc.com/product-detail/C3013187.html</field>
+        <field name="Description">FRC0402F7504TS; 7.50 MΩ, 1%, 100 ppm/°C charge-ceiling resistor</field>
+      </fields>
+      <libsource lib="Stratolink_v1p1_Symbols" part="Device_R_US" description="Resistor, US symbol"/>
+      <property name="Manufacturer" value="FOJAN"/>
+      <property name="Manufacturer_Part_Number" value="FRC0402F7504TS"/>
+      <property name="Supplier" value="LCSC"/>
+      <property name="LCSC" value="C3013187"/>
+      <property name="Supplier Part" value="C3013187"/>
+      <property name="MPN" value="FRC0402F7504TS"/>
+      <property name="LCSC Part #" value="C3013187"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="stratolink.kicad_sch"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <property name="ki_fp_filters" value="R_*"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>e8e2c0ce-b856-4a0c-b119-fdc249b82e36</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="R2">
+      <value>4.22MΩ</value>
+      <footprint>lib:Stratolink_v1p1_R2_R_0402_1005Metric</footprint>
+      <datasheet>https://www.lcsc.com/product-detail/C2091474.html</datasheet>
+      <description>CRCW04024M22FKED</description>
+      <fields>
+        <field name="Manufacturer">Vishay</field>
+        <field name="Manufacturer_Part_Number">CRCW04024M22FKED</field>
+        <field name="Supplier">LCSC</field>
+        <field name="LCSC">C2091474</field>
+        <field name="Supplier Part">C2091474</field>
+        <field name="Footprint">lib:Stratolink_v1p1_R2_R_0402_1005Metric</field>
+        <field name="Datasheet">https://www.lcsc.com/product-detail/C2091474.html</field>
+        <field name="Description">CRCW04024M22FKED</field>
+      </fields>
+      <libsource lib="Stratolink_v1p1_Symbols" part="Device_R_US" description="Resistor, US symbol"/>
+      <property name="Manufacturer" value="Vishay"/>
+      <property name="Manufacturer_Part_Number" value="CRCW04024M22FKED"/>
+      <property name="Supplier" value="LCSC"/>
+      <property name="LCSC" value="C2091474"/>
+      <property name="Supplier Part" value="C2091474"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="stratolink.kicad_sch"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <property name="ki_fp_filters" value="R_*"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>6da34062-6e89-4530-99be-f852e0f30c84</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="R3">
+      <value>4.75MΩ</value>
+      <footprint>lib:Stratolink_v1p1_R3_R_0402_1005Metric</footprint>
+      <datasheet>https://www.lcsc.com/product-detail/C2998153.html</datasheet>
+      <description>FRC0402F4754TS</description>
+      <fields>
+        <field name="LCSC">C2998153</field>
+        <field name="Manufacturer_Part_Number">FRC0402F4754TS</field>
+        <field name="Supplier Part">C2998153</field>
+        <field name="Supplier">LCSC</field>
+        <field name="Footprint">lib:Stratolink_v1p1_R3_R_0402_1005Metric</field>
+        <field name="Datasheet">https://www.lcsc.com/product-detail/C2998153.html</field>
+        <field name="Description">FRC0402F4754TS</field>
+      </fields>
+      <libsource lib="Stratolink_v1p1_Symbols" part="Device_R_US" description="Resistor, US symbol"/>
+      <property name="LCSC" value="C2998153"/>
+      <property name="Manufacturer_Part_Number" value="FRC0402F4754TS"/>
+      <property name="Supplier Part" value="C2998153"/>
+      <property name="Supplier" value="LCSC"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="stratolink.kicad_sch"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <property name="ki_fp_filters" value="R_*"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>e91a2a42-a8cc-4d92-a749-63ce4c2abfb8</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="R4">
+      <value>3.65MΩ</value>
+      <footprint>lib:Stratolink_v1p1_R4_R_0402_1005Metric</footprint>
+      <datasheet>https://yageogroup.com/content/datasheet/asset/file/PYU-RC_GROUP_51_ROHS_L</datasheet>
+      <description>3.65 MΩ, ±1%, ±100 ppm/°C, 0402, 62.5 mW, 50 V thick-film resistor</description>
+      <fields>
+        <field name="Manufacturer">YAGEO</field>
+        <field name="Manufacturer_Part_Number">RC0402FR-073M65L</field>
+        <field name="Supplier">LCSC</field>
+        <field name="LCSC">C477700</field>
+        <field name="Supplier Part">C477700</field>
+        <field name="Footprint">lib:Stratolink_v1p1_R4_R_0402_1005Metric</field>
+        <field name="Datasheet">https://yageogroup.com/content/datasheet/asset/file/PYU-RC_GROUP_51_ROHS_L</field>
+        <field name="Description">3.65 MΩ, ±1%, ±100 ppm/°C, 0402, 62.5 mW, 50 V thick-film resistor</field>
+      </fields>
+      <libsource lib="Stratolink_v1p1_Symbols" part="Device_R_US" description="Resistor, US symbol"/>
+      <property name="Manufacturer" value="YAGEO"/>
+      <property name="Manufacturer_Part_Number" value="RC0402FR-073M65L"/>
+      <property name="Supplier" value="LCSC"/>
+      <property name="LCSC" value="C477700"/>
+      <property name="Supplier Part" value="C477700"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="stratolink.kicad_sch"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <property name="ki_fp_filters" value="R_*"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>894aff4e-f7f2-4f70-8638-6efdd16a1676</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="R5">
+      <value>4.42MΩ</value>
+      <footprint>lib:Stratolink_v1p1_R5_R_0402_1005Metric</footprint>
+      <datasheet>https://www.lcsc.com/product-detail/C49654874.html</datasheet>
+      <description>GR0402F4M42TAG00</description>
+      <fields>
+        <field name="LCSC">C49654874</field>
+        <field name="Manufacturer_Part_Number">GR0402F4M42TAG00</field>
+        <field name="Supplier Part">C49654874</field>
+        <field name="Supplier">LCSC</field>
+        <field name="Footprint">lib:Stratolink_v1p1_R5_R_0402_1005Metric</field>
+        <field name="Datasheet">https://www.lcsc.com/product-detail/C49654874.html</field>
+        <field name="Description">GR0402F4M42TAG00</field>
+      </fields>
+      <libsource lib="Stratolink_v1p1_Symbols" part="Device_R_US" description="Resistor, US symbol"/>
+      <property name="LCSC" value="C49654874"/>
+      <property name="Manufacturer_Part_Number" value="GR0402F4M42TAG00"/>
+      <property name="Supplier Part" value="C49654874"/>
+      <property name="Supplier" value="LCSC"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="stratolink.kicad_sch"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <property name="ki_fp_filters" value="R_*"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>2a425e4f-c0f8-4229-a55b-3b189c647cd3</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="R6">
+      <value>8.25MΩ</value>
+      <footprint>lib:Stratolink_v1p1_R6_R_0402_1005Metric</footprint>
+      <datasheet>https://www.lcsc.com/product-detail/C423131.html</datasheet>
+      <description>0402WGF8254TCE</description>
+      <fields>
+        <field name="Manufacturer">UNI-ROYAL</field>
+        <field name="Manufacturer_Part_Number">0402WGF8254TCE</field>
+        <field name="Supplier">LCSC</field>
+        <field name="LCSC">C423131</field>
+        <field name="Supplier Part">C423131</field>
+        <field name="Footprint">lib:Stratolink_v1p1_R6_R_0402_1005Metric</field>
+        <field name="Datasheet">https://www.lcsc.com/product-detail/C423131.html</field>
+        <field name="Description">0402WGF8254TCE</field>
+      </fields>
+      <libsource lib="Stratolink_v1p1_Symbols" part="Device_R_US" description="Resistor, US symbol"/>
+      <property name="Manufacturer" value="UNI-ROYAL"/>
+      <property name="Manufacturer_Part_Number" value="0402WGF8254TCE"/>
+      <property name="Supplier" value="LCSC"/>
+      <property name="LCSC" value="C423131"/>
+      <property name="Supplier Part" value="C423131"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="stratolink.kicad_sch"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <property name="ki_fp_filters" value="R_*"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>c4cb4d48-1a2b-4f47-a341-10ec4ad46a1b</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="R7">
+      <value>4.75MΩ</value>
+      <footprint>lib:Stratolink_v1p1_R7_R_0402_1005Metric</footprint>
+      <datasheet>https://www.lcsc.com/product-detail/C2998153.html</datasheet>
+      <description>FRC0402F4754TS</description>
+      <fields>
+        <field name="LCSC">C2998153</field>
+        <field name="Manufacturer_Part_Number">FRC0402F4754TS</field>
+        <field name="Supplier Part">C2998153</field>
+        <field name="Supplier">LCSC</field>
+        <field name="Footprint">lib:Stratolink_v1p1_R7_R_0402_1005Metric</field>
+        <field name="Datasheet">https://www.lcsc.com/product-detail/C2998153.html</field>
+        <field name="Description">FRC0402F4754TS</field>
+      </fields>
+      <libsource lib="Stratolink_v1p1_Symbols" part="Device_R_US" description="Resistor, US symbol"/>
+      <property name="LCSC" value="C2998153"/>
+      <property name="Manufacturer_Part_Number" value="FRC0402F4754TS"/>
+      <property name="Supplier Part" value="C2998153"/>
+      <property name="Supplier" value="LCSC"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="stratolink.kicad_sch"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <property name="ki_fp_filters" value="R_*"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>df9f2997-e122-46ff-aafb-1d8496546402</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="R8">
+      <value>100kΩ</value>
+      <footprint>lib:Stratolink_v1p1_R8_R_0402_1005Metric</footprint>
+      <datasheet>https://www.lcsc.com/product-detail/C60491.html</datasheet>
+      <description>RC0402FR-07100KL</description>
+      <fields>
+        <field name="Manufacturer">Yageo</field>
+        <field name="Manufacturer_Part_Number">RC0402FR-07100KL</field>
+        <field name="Supplier">LCSC</field>
+        <field name="LCSC">C60491</field>
+        <field name="Supplier Part">C60491</field>
+        <field name="Footprint">lib:Stratolink_v1p1_R8_R_0402_1005Metric</field>
+        <field name="Datasheet">https://www.lcsc.com/product-detail/C60491.html</field>
+        <field name="Description">RC0402FR-07100KL</field>
+      </fields>
+      <libsource lib="Stratolink_v1p1_Symbols" part="Device_R_US" description="Resistor, US symbol"/>
+      <property name="Manufacturer" value="Yageo"/>
+      <property name="Manufacturer_Part_Number" value="RC0402FR-07100KL"/>
+      <property name="Supplier" value="LCSC"/>
+      <property name="LCSC" value="C60491"/>
+      <property name="Supplier Part" value="C60491"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="stratolink.kicad_sch"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <property name="ki_fp_filters" value="R_*"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>d95e2959-43b9-4194-9861-d822aeb66a67</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="R9">
+      <value>0Ω</value>
+      <footprint>lib:Stratolink_v1p1_R9_R_0402_1005Metric</footprint>
+      <datasheet>https://www.lcsc.com/product-detail/C106231.html</datasheet>
+      <description>RC0402FR-070RL</description>
+      <fields>
+        <field name="Manufacturer">Yageo</field>
+        <field name="Manufacturer_Part_Number">RC0402FR-070RL</field>
+        <field name="Supplier">LCSC</field>
+        <field name="LCSC">C106231</field>
+        <field name="Supplier Part">C106231</field>
+        <field name="Footprint">lib:Stratolink_v1p1_R9_R_0402_1005Metric</field>
+        <field name="Datasheet">https://www.lcsc.com/product-detail/C106231.html</field>
+        <field name="Description">RC0402FR-070RL</field>
+      </fields>
+      <libsource lib="Stratolink_v1p1_Symbols" part="Device_R_US" description="Resistor, US symbol"/>
+      <property name="Manufacturer" value="Yageo"/>
+      <property name="Manufacturer_Part_Number" value="RC0402FR-070RL"/>
+      <property name="Supplier" value="LCSC"/>
+      <property name="LCSC" value="C106231"/>
+      <property name="Supplier Part" value="C106231"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="stratolink.kicad_sch"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <property name="ki_fp_filters" value="R_*"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>e4e80dbc-5113-4928-a51b-fdbb694f350b</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="R10">
+      <value>10kΩ</value>
+      <footprint>lib:Stratolink_v1p1_R10_R_0402_1005Metric</footprint>
+      <datasheet>https://www.lcsc.com/product-detail/C60490.html</datasheet>
+      <description>RC0402FR-0710KL</description>
+      <fields>
+        <field name="Manufacturer">Yageo</field>
+        <field name="Manufacturer_Part_Number">RC0402FR-0710KL</field>
+        <field name="Supplier">LCSC</field>
+        <field name="LCSC">C60490</field>
+        <field name="Supplier Part">C60490</field>
+        <field name="Footprint">lib:Stratolink_v1p1_R10_R_0402_1005Metric</field>
+        <field name="Datasheet">https://www.lcsc.com/product-detail/C60490.html</field>
+        <field name="Description">RC0402FR-0710KL</field>
+      </fields>
+      <libsource lib="Stratolink_v1p1_Symbols" part="Device_R_US" description="Resistor, US symbol"/>
+      <property name="Manufacturer" value="Yageo"/>
+      <property name="Manufacturer_Part_Number" value="RC0402FR-0710KL"/>
+      <property name="Supplier" value="LCSC"/>
+      <property name="LCSC" value="C60490"/>
+      <property name="Supplier Part" value="C60490"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="stratolink.kicad_sch"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <property name="ki_fp_filters" value="R_*"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>e04f1255-41de-4df2-9e98-6f8c817b8a97</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="R11">
+      <value>4.7kΩ</value>
+      <footprint>lib:Stratolink_v1p1_R11_R_0402_1005Metric</footprint>
+      <datasheet>https://www.lcsc.com/product-detail/C105871.html</datasheet>
+      <description>RC0402FR-074K7L</description>
+      <fields>
+        <field name="Manufacturer">Yageo</field>
+        <field name="Manufacturer_Part_Number">RC0402FR-074K7L</field>
+        <field name="Supplier">LCSC</field>
+        <field name="LCSC">C105871</field>
+        <field name="Supplier Part">C105871</field>
+        <field name="Footprint">lib:Stratolink_v1p1_R11_R_0402_1005Metric</field>
+        <field name="Datasheet">https://www.lcsc.com/product-detail/C105871.html</field>
+        <field name="Description">RC0402FR-074K7L</field>
+      </fields>
+      <libsource lib="Stratolink_v1p1_Symbols" part="Device_R_US" description="Resistor, US symbol"/>
+      <property name="Manufacturer" value="Yageo"/>
+      <property name="Manufacturer_Part_Number" value="RC0402FR-074K7L"/>
+      <property name="Supplier" value="LCSC"/>
+      <property name="LCSC" value="C105871"/>
+      <property name="Supplier Part" value="C105871"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="stratolink.kicad_sch"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <property name="ki_fp_filters" value="R_*"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>fc24b18f-ea55-404d-9f6f-4cf2960498cc</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="R12">
+      <value>4.7kΩ</value>
+      <footprint>lib:Stratolink_v1p1_R12_R_0402_1005Metric</footprint>
+      <datasheet>https://www.lcsc.com/product-detail/C105871.html</datasheet>
+      <description>RC0402FR-074K7L</description>
+      <fields>
+        <field name="Manufacturer">Yageo</field>
+        <field name="Manufacturer_Part_Number">RC0402FR-074K7L</field>
+        <field name="Supplier">LCSC</field>
+        <field name="LCSC">C105871</field>
+        <field name="Supplier Part">C105871</field>
+        <field name="Footprint">lib:Stratolink_v1p1_R12_R_0402_1005Metric</field>
+        <field name="Datasheet">https://www.lcsc.com/product-detail/C105871.html</field>
+        <field name="Description">RC0402FR-074K7L</field>
+      </fields>
+      <libsource lib="Stratolink_v1p1_Symbols" part="Device_R_US" description="Resistor, US symbol"/>
+      <property name="Manufacturer" value="Yageo"/>
+      <property name="Manufacturer_Part_Number" value="RC0402FR-074K7L"/>
+      <property name="Supplier" value="LCSC"/>
+      <property name="LCSC" value="C105871"/>
+      <property name="Supplier Part" value="C105871"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="stratolink.kicad_sch"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <property name="ki_fp_filters" value="R_*"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>9387eeae-c3c7-476e-b1ab-d6be93dfc618</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="R13">
+      <value>0Ω</value>
+      <footprint>lib:Stratolink_v1p1_R13_R_0402_1005Metric</footprint>
+      <datasheet>https://www.lcsc.com/product-detail/C106231.html</datasheet>
+      <description>RC0402FR-070RL</description>
+      <fields>
+        <field name="Manufacturer">Yageo</field>
+        <field name="Manufacturer_Part_Number">RC0402FR-070RL</field>
+        <field name="Supplier">LCSC</field>
+        <field name="LCSC">C106231</field>
+        <field name="Supplier Part">C106231</field>
+        <field name="Footprint">lib:Stratolink_v1p1_R13_R_0402_1005Metric</field>
+        <field name="Datasheet">https://www.lcsc.com/product-detail/C106231.html</field>
+        <field name="Description">RC0402FR-070RL</field>
+      </fields>
+      <libsource lib="Stratolink_v1p1_Symbols" part="Device_R_US" description="Resistor, US symbol"/>
+      <property name="Manufacturer" value="Yageo"/>
+      <property name="Manufacturer_Part_Number" value="RC0402FR-070RL"/>
+      <property name="Supplier" value="LCSC"/>
+      <property name="LCSC" value="C106231"/>
+      <property name="Supplier Part" value="C106231"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="stratolink.kicad_sch"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <property name="ki_fp_filters" value="R_*"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>91e2e531-69d6-4c0a-9f64-d7abdadc2ce8</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="R14">
+      <value>0Ω</value>
+      <footprint>lib:Stratolink_v1p1_R14_R_0402_1005Metric</footprint>
+      <datasheet>https://www.lcsc.com/product-detail/C106231.html</datasheet>
+      <description>RC0402FR-070RL</description>
+      <fields>
+        <field name="Manufacturer">Yageo</field>
+        <field name="Manufacturer_Part_Number">RC0402FR-070RL</field>
+        <field name="Supplier">LCSC</field>
+        <field name="LCSC">C106231</field>
+        <field name="Supplier Part">C106231</field>
+        <field name="Footprint">lib:Stratolink_v1p1_R14_R_0402_1005Metric</field>
+        <field name="Datasheet">https://www.lcsc.com/product-detail/C106231.html</field>
+        <field name="Description">RC0402FR-070RL</field>
+      </fields>
+      <libsource lib="Stratolink_v1p1_Symbols" part="Device_R_US" description="Resistor, US symbol"/>
+      <property name="Manufacturer" value="Yageo"/>
+      <property name="Manufacturer_Part_Number" value="RC0402FR-070RL"/>
+      <property name="Supplier" value="LCSC"/>
+      <property name="LCSC" value="C106231"/>
+      <property name="Supplier Part" value="C106231"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="stratolink.kicad_sch"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <property name="ki_fp_filters" value="R_*"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>b34050ff-5573-4c4f-a8f9-30cfbb1adce5</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="R15">
+      <value>33Ω</value>
+      <footprint>lib:Stratolink_v1p1_R15_R_0402_1005Metric</footprint>
+      <datasheet>https://www.lcsc.com/product-detail/C138002.html</datasheet>
+      <description>RC0402FR-0733RL</description>
+      <fields>
+        <field name="Manufacturer">Yageo</field>
+        <field name="Manufacturer_Part_Number">RC0402FR-0733RL</field>
+        <field name="Supplier">LCSC</field>
+        <field name="LCSC">C138002</field>
+        <field name="Supplier Part">C138002</field>
+        <field name="Footprint">lib:Stratolink_v1p1_R15_R_0402_1005Metric</field>
+        <field name="Datasheet">https://www.lcsc.com/product-detail/C138002.html</field>
+        <field name="Description">RC0402FR-0733RL</field>
+      </fields>
+      <libsource lib="Stratolink_v1p1_Symbols" part="Device_R_US" description="Resistor, US symbol"/>
+      <property name="Manufacturer" value="Yageo"/>
+      <property name="Manufacturer_Part_Number" value="RC0402FR-0733RL"/>
+      <property name="Supplier" value="LCSC"/>
+      <property name="LCSC" value="C138002"/>
+      <property name="Supplier Part" value="C138002"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="stratolink.kicad_sch"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <property name="ki_fp_filters" value="R_*"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>7da2b058-7365-42d4-ba77-85fe95ebe7eb</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="R16">
+      <value>33Ω</value>
+      <footprint>lib:Stratolink_v1p1_R16_R_0402_1005Metric</footprint>
+      <datasheet>https://www.lcsc.com/product-detail/C138002.html</datasheet>
+      <description>RC0402FR-0733RL</description>
+      <fields>
+        <field name="Manufacturer">Yageo</field>
+        <field name="Manufacturer_Part_Number">RC0402FR-0733RL</field>
+        <field name="Supplier">LCSC</field>
+        <field name="LCSC">C138002</field>
+        <field name="Supplier Part">C138002</field>
+        <field name="Footprint">lib:Stratolink_v1p1_R16_R_0402_1005Metric</field>
+        <field name="Datasheet">https://www.lcsc.com/product-detail/C138002.html</field>
+        <field name="Description">RC0402FR-0733RL</field>
+      </fields>
+      <libsource lib="Stratolink_v1p1_Symbols" part="Device_R_US" description="Resistor, US symbol"/>
+      <property name="Manufacturer" value="Yageo"/>
+      <property name="Manufacturer_Part_Number" value="RC0402FR-0733RL"/>
+      <property name="Supplier" value="LCSC"/>
+      <property name="LCSC" value="C138002"/>
+      <property name="Supplier Part" value="C138002"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="stratolink.kicad_sch"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <property name="ki_fp_filters" value="R_*"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>a59040c9-d680-49e3-9629-9ea261bd2a20</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="R18">
+      <value>10kΩ</value>
+      <footprint>lib:Stratolink_v1p1_R18_R_0402_1005Metric</footprint>
+      <datasheet>https://www.lcsc.com/product-detail/C60490.html</datasheet>
+      <description>RC0402FR-0710KL</description>
+      <fields>
+        <field name="Manufacturer">Yageo</field>
+        <field name="Manufacturer_Part_Number">RC0402FR-0710KL</field>
+        <field name="Supplier">LCSC</field>
+        <field name="LCSC">C60490</field>
+        <field name="Supplier Part">C60490</field>
+        <field name="Footprint">lib:Stratolink_v1p1_R18_R_0402_1005Metric</field>
+        <field name="Datasheet">https://www.lcsc.com/product-detail/C60490.html</field>
+        <field name="Description">RC0402FR-0710KL</field>
+      </fields>
+      <libsource lib="Stratolink_v1p1_Symbols" part="Device_R_US" description="Resistor, US symbol"/>
+      <property name="Manufacturer" value="Yageo"/>
+      <property name="Manufacturer_Part_Number" value="RC0402FR-0710KL"/>
+      <property name="Supplier" value="LCSC"/>
+      <property name="LCSC" value="C60490"/>
+      <property name="Supplier Part" value="C60490"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="stratolink.kicad_sch"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <property name="ki_fp_filters" value="R_*"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>7faad56c-6f3d-441b-a82d-aa0f5b96b24a</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="R19">
+      <value>1MΩ</value>
+      <footprint>lib:Stratolink_v1p1_R19_R_0402_1005Metric</footprint>
+      <datasheet>https://www.lcsc.com/product-detail/C138033.html</datasheet>
+      <description>RC0402FR-071ML</description>
+      <fields>
+        <field name="Manufacturer">Yageo</field>
+        <field name="Manufacturer_Part_Number">RC0402FR-071ML</field>
+        <field name="Supplier">LCSC</field>
+        <field name="LCSC">C138033</field>
+        <field name="Supplier Part">C138033</field>
+        <field name="Footprint">lib:Stratolink_v1p1_R19_R_0402_1005Metric</field>
+        <field name="Datasheet">https://www.lcsc.com/product-detail/C138033.html</field>
+        <field name="Description">RC0402FR-071ML</field>
+      </fields>
+      <libsource lib="Stratolink_v1p1_Symbols" part="Device_R_US" description="Resistor, US symbol"/>
+      <property name="Manufacturer" value="Yageo"/>
+      <property name="Manufacturer_Part_Number" value="RC0402FR-071ML"/>
+      <property name="Supplier" value="LCSC"/>
+      <property name="LCSC" value="C138033"/>
+      <property name="Supplier Part" value="C138033"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="stratolink.kicad_sch"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <property name="ki_fp_filters" value="R_*"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>712b2919-7191-4eca-9784-5247e5fa3b2e</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="R21">
+      <value>1MΩ</value>
+      <footprint>lib:Stratolink_v1p1_R21_R_0402_1005Metric</footprint>
+      <datasheet>https://www.lcsc.com/product-detail/C138033.html</datasheet>
+      <description>RC0402FR-071ML</description>
+      <fields>
+        <field name="Manufacturer">Yageo</field>
+        <field name="Manufacturer_Part_Number">RC0402FR-071ML</field>
+        <field name="Supplier">LCSC</field>
+        <field name="LCSC">C138033</field>
+        <field name="Supplier Part">C138033</field>
+        <field name="Footprint">lib:Stratolink_v1p1_R21_R_0402_1005Metric</field>
+        <field name="Datasheet">https://www.lcsc.com/product-detail/C138033.html</field>
+        <field name="Description">RC0402FR-071ML</field>
+      </fields>
+      <libsource lib="Stratolink_v1p1_Symbols" part="Device_R_US" description="Resistor, US symbol"/>
+      <property name="Manufacturer" value="Yageo"/>
+      <property name="Manufacturer_Part_Number" value="RC0402FR-071ML"/>
+      <property name="Supplier" value="LCSC"/>
+      <property name="LCSC" value="C138033"/>
+      <property name="Supplier Part" value="C138033"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="stratolink.kicad_sch"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <property name="ki_fp_filters" value="R_*"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>01d85024-2a20-4efd-9e7f-f5b26bda1a53</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="R22">
+      <value>1MΩ</value>
+      <footprint>lib:Stratolink_v1p1_R22_R_0402_1005Metric</footprint>
+      <datasheet>https://www.lcsc.com/product-detail/C138033.html</datasheet>
+      <description>RC0402FR-071ML</description>
+      <fields>
+        <field name="Manufacturer">Yageo</field>
+        <field name="Manufacturer_Part_Number">RC0402FR-071ML</field>
+        <field name="Supplier">LCSC</field>
+        <field name="LCSC">C138033</field>
+        <field name="Supplier Part">C138033</field>
+        <field name="Footprint">lib:Stratolink_v1p1_R22_R_0402_1005Metric</field>
+        <field name="Datasheet">https://www.lcsc.com/product-detail/C138033.html</field>
+        <field name="Description">RC0402FR-071ML</field>
+      </fields>
+      <libsource lib="Stratolink_v1p1_Symbols" part="Device_R_US" description="Resistor, US symbol"/>
+      <property name="Manufacturer" value="Yageo"/>
+      <property name="Manufacturer_Part_Number" value="RC0402FR-071ML"/>
+      <property name="Supplier" value="LCSC"/>
+      <property name="LCSC" value="C138033"/>
+      <property name="Supplier Part" value="C138033"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="stratolink.kicad_sch"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <property name="ki_fp_filters" value="R_*"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>bf6d4e84-3073-4b40-8b7d-9f9a3ad08a24</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="R23">
+      <value>1MΩ</value>
+      <footprint>lib:Stratolink_v1p1_R23_R_0402_1005Metric</footprint>
+      <datasheet>https://www.lcsc.com/product-detail/C138033.html</datasheet>
+      <description>RC0402FR-071ML</description>
+      <fields>
+        <field name="Manufacturer">Yageo</field>
+        <field name="Manufacturer_Part_Number">RC0402FR-071ML</field>
+        <field name="Supplier">LCSC</field>
+        <field name="LCSC">C138033</field>
+        <field name="Supplier Part">C138033</field>
+        <field name="Footprint">lib:Stratolink_v1p1_R23_R_0402_1005Metric</field>
+        <field name="Datasheet">https://www.lcsc.com/product-detail/C138033.html</field>
+        <field name="Description">RC0402FR-071ML</field>
+      </fields>
+      <libsource lib="Stratolink_v1p1_Symbols" part="Device_R_US" description="Resistor, US symbol"/>
+      <property name="Manufacturer" value="Yageo"/>
+      <property name="Manufacturer_Part_Number" value="RC0402FR-071ML"/>
+      <property name="Supplier" value="LCSC"/>
+      <property name="LCSC" value="C138033"/>
+      <property name="Supplier Part" value="C138033"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="stratolink.kicad_sch"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <property name="ki_fp_filters" value="R_*"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>965e67ab-e8d9-496c-9202-ea301f40f199</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="R24">
+      <value>4.75MΩ</value>
+      <footprint>lib:Stratolink_v1p1_R24_R_0402_1005Metric</footprint>
+      <description>Active midpoint balancer pilot</description>
+      <fields>
+        <field name="MPN">FRC0402F4754TS</field>
+        <field name="LCSC Part #">C2998153</field>
+        <field name="Supplier Part">C2998153</field>
+        <field name="Manufacturer_Part_Number">FRC0402F4754TS</field>
+        <field name="Footprint">lib:Stratolink_v1p1_R24_R_0402_1005Metric</field>
+        <field name="Datasheet"/>
+        <field name="Description">Active midpoint balancer pilot</field>
+      </fields>
+      <libsource lib="Stratolink_v1p1_Symbols" part="Device_R_US" description="Resistor, US symbol"/>
+      <property name="MPN" value="FRC0402F4754TS"/>
+      <property name="LCSC Part #" value="C2998153"/>
+      <property name="Supplier Part" value="C2998153"/>
+      <property name="Manufacturer_Part_Number" value="FRC0402F4754TS"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="stratolink.kicad_sch"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <property name="ki_fp_filters" value="R_*"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>c09c0a0e-cba8-562e-b648-500c761d4e09</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="R25">
+      <value>4.75MΩ</value>
+      <footprint>lib:Stratolink_v1p1_R25_R_0402_1005Metric</footprint>
+      <description>Active midpoint balancer pilot</description>
+      <fields>
+        <field name="MPN">FRC0402F4754TS</field>
+        <field name="LCSC Part #">C2998153</field>
+        <field name="Supplier Part">C2998153</field>
+        <field name="Manufacturer_Part_Number">FRC0402F4754TS</field>
+        <field name="Footprint">lib:Stratolink_v1p1_R25_R_0402_1005Metric</field>
+        <field name="Datasheet"/>
+        <field name="Description">Active midpoint balancer pilot</field>
+      </fields>
+      <libsource lib="Stratolink_v1p1_Symbols" part="Device_R_US" description="Resistor, US symbol"/>
+      <property name="MPN" value="FRC0402F4754TS"/>
+      <property name="LCSC Part #" value="C2998153"/>
+      <property name="Supplier Part" value="C2998153"/>
+      <property name="Manufacturer_Part_Number" value="FRC0402F4754TS"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="stratolink.kicad_sch"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <property name="ki_fp_filters" value="R_*"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>6f3fa491-e84d-5965-a08f-35942afcfec8</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="R26">
+      <value>22Ω</value>
+      <footprint>lib:Stratolink_v1p1_R26_R_0402_1005Metric</footprint>
+      <description>Active midpoint balancer pilot</description>
+      <fields>
+        <field name="MPN">0402WGF220JTCE</field>
+        <field name="LCSC Part #">C25092</field>
+        <field name="Supplier Part">C25092</field>
+        <field name="Manufacturer_Part_Number">0402WGF220JTCE</field>
+        <field name="Footprint">lib:Stratolink_v1p1_R26_R_0402_1005Metric</field>
+        <field name="Datasheet"/>
+        <field name="Description">Active midpoint balancer pilot</field>
+      </fields>
+      <libsource lib="Stratolink_v1p1_Symbols" part="Device_R_US" description="Resistor, US symbol"/>
+      <property name="MPN" value="0402WGF220JTCE"/>
+      <property name="LCSC Part #" value="C25092"/>
+      <property name="Supplier Part" value="C25092"/>
+      <property name="Manufacturer_Part_Number" value="0402WGF220JTCE"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="stratolink.kicad_sch"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <property name="ki_fp_filters" value="R_*"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>1ca366c8-e6ea-5f76-98da-2d5e64faee8e</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="R27">
+      <value>3.3MΩ</value>
+      <footprint>lib:Stratolink_v1p1_R27_R_0805_2012Metric</footprint>
+      <datasheet>https://www.vishay.com/docs/28952/mcr0201at-mca1206at.pdf</datasheet>
+      <description>3.3 MΩ, ±0.1%, ±25 ppm/K, 0805 precision thin film; AS7331 reference</description>
+      <fields>
+        <field name="MPN">MCU0805MD3304BP500</field>
+        <field name="LCSC Part #">C4313228</field>
+        <field name="Supplier Part">C4313228</field>
+        <field name="Manufacturer_Part_Number">MCU0805MD3304BP500</field>
+        <field name="Supplier">LCSC</field>
+        <field name="LCSC">C4313228</field>
+        <field name="Manufacturer">Vishay</field>
+        <field name="Footprint">lib:Stratolink_v1p1_R27_R_0805_2012Metric</field>
+        <field name="Datasheet">https://www.vishay.com/docs/28952/mcr0201at-mca1206at.pdf</field>
+        <field name="Description">3.3 MΩ, ±0.1%, ±25 ppm/K, 0805 precision thin film; AS7331 reference</field>
+      </fields>
+      <libsource lib="Stratolink_v1p1_Symbols" part="Device_R_US" description="Resistor, US symbol"/>
+      <property name="MPN" value="MCU0805MD3304BP500"/>
+      <property name="LCSC Part #" value="C4313228"/>
+      <property name="Supplier Part" value="C4313228"/>
+      <property name="Manufacturer_Part_Number" value="MCU0805MD3304BP500"/>
+      <property name="Supplier" value="LCSC"/>
+      <property name="LCSC" value="C4313228"/>
+      <property name="Manufacturer" value="Vishay"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="stratolink.kicad_sch"/>
+      <property name="ki_keywords" value="R res resistor"/>
+      <property name="ki_fp_filters" value="R_*"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>52d9fd5c-25e2-53ce-b76f-5bd9175e94f7</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="U1">
+      <value>BQ25570RGRR</value>
+      <footprint>lib:Stratolink_v1p1_U1_QFN50P350X350X100-21N</footprint>
+      <datasheet>https://www.ti.com/cn/lit/gpn/bq25570</datasheet>
+      <description>BQ25570 energy-harvesting boost charger and buck converter; RGR VQFN-20 plus exposed ground pad</description>
+      <fields>
+        <field name="Manufacturer Part">BQ25570RGRR</field>
+        <field name="Manufacturer">Texas Instruments</field>
+        <field name="Supplier Part">C506250</field>
+        <field name="Supplier">LCSC</field>
+        <field name="LCSC Part Name">适用于能量收集器供电应用的微功率升压充电器与降压转换器</field>
+        <field name="Manufacturer_Part_Number">BQ25570RGRR</field>
+        <field name="LCSC">C506250</field>
+        <field name="Footprint">lib:Stratolink_v1p1_U1_QFN50P350X350X100-21N</field>
+        <field name="Datasheet">https://www.ti.com/cn/lit/gpn/bq25570</field>
+        <field name="Description">BQ25570 energy-harvesting boost charger and buck converter; RGR VQFN-20 plus exposed ground pad</field>
+      </fields>
+      <libsource lib="Stratolink_v1p1_Symbols" part="ProLib_pcs_2026_01_31_BQ25570RGRR" description="BQ25570 energy-harvesting boost charger and buck converter; RGR VQFN-20 plus exposed ground pad"/>
+      <property name="Manufacturer Part" value="BQ25570RGRR"/>
+      <property name="Manufacturer" value="Texas Instruments"/>
+      <property name="Supplier Part" value="C506250"/>
+      <property name="Supplier" value="LCSC"/>
+      <property name="LCSC Part Name" value="适用于能量收集器供电应用的微功率升压充电器与降压转换器"/>
+      <property name="Manufacturer_Part_Number" value="BQ25570RGRR"/>
+      <property name="LCSC" value="C506250"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="stratolink.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>65640bc6-1f78-4db5-a138-a7b1480e5e11</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+            <pin num="3"/>
+            <pin num="4"/>
+            <pin num="5"/>
+            <pin num="21"/>
+            <pin num="20"/>
+            <pin num="6"/>
+            <pin num="19"/>
+            <pin num="7"/>
+            <pin num="18"/>
+            <pin num="8"/>
+            <pin num="17"/>
+            <pin num="9"/>
+            <pin num="16"/>
+            <pin num="10"/>
+            <pin num="15"/>
+            <pin num="14"/>
+            <pin num="13"/>
+            <pin num="12"/>
+            <pin num="11"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="U2">
+      <value>RAK3172-8-SM-NI</value>
+      <footprint>lib:Stratolink_v1p1_U2_RAK3172</footprint>
+      <datasheet>https://docs.rakwireless.com/product-categories/wisduo/rak3172-module/datasheet/</datasheet>
+      <description>RAK3172 STM32WLE5CC, 32-pad, high-band regional-label variant, no TCXO, no IPEX; antenna on RF pad 12</description>
+      <fields>
+        <field name="MF">Shenzhen RAKwireless Technology Co.,Ltd.</field>
+        <field name="PACKAGE">Package</field>
+        <field name="PRICE">None</field>
+        <field name="Package">Package</field>
+        <field name="Check_prices">https://www.snapeda.com/parts/RAK3172/Shenzhen+RAKwireless+Technology+Co.%252CLtd./view-part/?ref=eda</field>
+        <field name="SnapEDA_Link">https://www.snapeda.com/parts/RAK3172/Shenzhen+RAKwireless+Technology+Co.%252CLtd./view-part/?ref=snap</field>
+        <field name="Price">None</field>
+        <field name="SNAPEDA_LINK">https://www.snapeda.com/parts/RAK3172/Shenzhen+RAKwireless+Technology+Co.%252CLtd./view-part/?ref=snap</field>
+        <field name="MP">RAK3172-8-SM-NI</field>
+        <field name="Description_1">RAK3172 STM32WLE5CC, 32-pad, high-band regional-label variant, no TCXO, no IPEX; antenna on RF pad 12</field>
+        <field name="Availability"/>
+        <field name="AVAILABILITY"/>
+        <field name="CHECK_PRICES">https://www.snapeda.com/parts/RAK3172/Shenzhen+RAKwireless+Technology+Co.%252CLtd./view-part/?ref=eda</field>
+        <field name="Manufacturer">RAKwireless</field>
+        <field name="Manufacturer_Part_Number">RAK3172-8-SM-NI</field>
+        <field name="Supplier">LCSC</field>
+        <field name="LCSC">C5452091</field>
+        <field name="Supplier Part">C5452091</field>
+        <field name="Footprint">lib:Stratolink_v1p1_U2_RAK3172</field>
+        <field name="Datasheet">https://docs.rakwireless.com/product-categories/wisduo/rak3172-module/datasheet/</field>
+        <field name="Description">RAK3172 STM32WLE5CC, 32-pad, high-band regional-label variant, no TCXO, no IPEX; antenna on RF pad 12</field>
+      </fields>
+      <libsource lib="Stratolink_v1p1_Symbols" part="RAK3172_RAK3172" description="RAK3172 STM32WLE5CC, 32-pad, high-band regional-label variant, no TCXO, no IPEX; antenna on RF pad 12"/>
+      <property name="MF" value="Shenzhen RAKwireless Technology Co.,Ltd."/>
+      <property name="PACKAGE" value="Package"/>
+      <property name="PRICE" value="None"/>
+      <property name="Package" value="Package"/>
+      <property name="Check_prices" value="https://www.snapeda.com/parts/RAK3172/Shenzhen+RAKwireless+Technology+Co.%252CLtd./view-part/?ref=eda"/>
+      <property name="SnapEDA_Link" value="https://www.snapeda.com/parts/RAK3172/Shenzhen+RAKwireless+Technology+Co.%252CLtd./view-part/?ref=snap"/>
+      <property name="Price" value="None"/>
+      <property name="SNAPEDA_LINK" value="https://www.snapeda.com/parts/RAK3172/Shenzhen+RAKwireless+Technology+Co.%252CLtd./view-part/?ref=snap"/>
+      <property name="MP" value="RAK3172-8-SM-NI"/>
+      <property name="Description_1" value="RAK3172 STM32WLE5CC, 32-pad, high-band regional-label variant, no TCXO, no IPEX; antenna on RF pad 12"/>
+      <property name="Availability" value=""/>
+      <property name="AVAILABILITY" value=""/>
+      <property name="CHECK_PRICES" value="https://www.snapeda.com/parts/RAK3172/Shenzhen+RAKwireless+Technology+Co.%252CLtd./view-part/?ref=eda"/>
+      <property name="Manufacturer" value="RAKwireless"/>
+      <property name="Manufacturer_Part_Number" value="RAK3172-8-SM-NI"/>
+      <property name="Supplier" value="LCSC"/>
+      <property name="LCSC" value="C5452091"/>
+      <property name="Supplier Part" value="C5452091"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="stratolink.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>b0992b32-25bb-417d-8d22-d980e2a9f3bc</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="22"/>
+            <pin num="7"/>
+            <pin num="8"/>
+            <pin num="32"/>
+            <pin num="31"/>
+            <pin num="26"/>
+            <pin num="25"/>
+            <pin num="3"/>
+            <pin num="5"/>
+            <pin num="4"/>
+            <pin num="30"/>
+            <pin num="27"/>
+            <pin num="17"/>
+            <pin num="18"/>
+            <pin num="23"/>
+            <pin num="11"/>
+            <pin num="28"/>
+            <pin num="24"/>
+            <pin num="21"/>
+            <pin num="12"/>
+            <pin num="10"/>
+            <pin num="9"/>
+            <pin num="16"/>
+            <pin num="15"/>
+            <pin num="14"/>
+            <pin num="13"/>
+            <pin num="1"/>
+            <pin num="2"/>
+            <pin num="29"/>
+            <pin num="6"/>
+            <pin num="19"/>
+            <pin num="20"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="U3">
+      <value>MAX-M10S-00B</value>
+      <footprint>lib:Stratolink_v1p1_U3_XCVR_MAX-M10S-00B</footprint>
+      <datasheet>https://item.szlcsc.com/datasheet/MAX-M10S-00B/4722633.html</datasheet>
+      <description>MAX-M10S-00B GNSS receiver module</description>
+      <fields>
+        <field name="Manufacturer Part">MAX-M10S-00B</field>
+        <field name="Manufacturer">u-blox</field>
+        <field name="Supplier Part">C4153167</field>
+        <field name="Supplier">LCSC</field>
+        <field name="LCSC Part Name">MAX-M10S-00B</field>
+        <field name="Manufacturer_Part_Number">MAX-M10S-00B</field>
+        <field name="LCSC">C4153167</field>
+        <field name="Footprint">lib:Stratolink_v1p1_U3_XCVR_MAX-M10S-00B</field>
+        <field name="Datasheet">https://item.szlcsc.com/datasheet/MAX-M10S-00B/4722633.html</field>
+        <field name="Description">MAX-M10S-00B GNSS receiver module</field>
+      </fields>
+      <libsource lib="Stratolink_v1p1_Symbols" part="ProLib_pcs_2026_02_08_MAX_M10S_00B" description="MAX-M10S-00B GNSS receiver module"/>
+      <property name="Manufacturer Part" value="MAX-M10S-00B"/>
+      <property name="Manufacturer" value="u-blox"/>
+      <property name="Supplier Part" value="C4153167"/>
+      <property name="Supplier" value="LCSC"/>
+      <property name="LCSC Part Name" value="MAX-M10S-00B"/>
+      <property name="Manufacturer_Part_Number" value="MAX-M10S-00B"/>
+      <property name="LCSC" value="C4153167"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="stratolink.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>108da017-77b8-4751-b039-aa5a0b657fa8</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+            <pin num="3"/>
+            <pin num="4"/>
+            <pin num="5"/>
+            <pin num="6"/>
+            <pin num="7"/>
+            <pin num="8"/>
+            <pin num="9"/>
+            <pin num="18"/>
+            <pin num="17"/>
+            <pin num="16"/>
+            <pin num="15"/>
+            <pin num="14"/>
+            <pin num="13"/>
+            <pin num="12"/>
+            <pin num="11"/>
+            <pin num="10"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="U4">
+      <value>MS561101BA03-50</value>
+      <footprint>lib:Stratolink_v1p1_U4_SON125P500X300X100-8N</footprint>
+      <datasheet>https://item.szlcsc.com/datasheet/MS561101BA03-50/16320.html</datasheet>
+      <description>MS561101BA03-50 digital pressure and temperature sensor</description>
+      <fields>
+        <field name="Manufacturer Part">MS561101BA03-50</field>
+        <field name="Manufacturer">TE Connectivity</field>
+        <field name="Supplier Part">C15639</field>
+        <field name="Supplier">LCSC</field>
+        <field name="LCSC Part Name">MS561101BA03-50</field>
+        <field name="Manufacturer_Part_Number">MS561101BA03-50</field>
+        <field name="LCSC">C15639</field>
+        <field name="Footprint">lib:Stratolink_v1p1_U4_SON125P500X300X100-8N</field>
+        <field name="Datasheet">https://item.szlcsc.com/datasheet/MS561101BA03-50/16320.html</field>
+        <field name="Description">MS561101BA03-50 digital pressure and temperature sensor</field>
+      </fields>
+      <libsource lib="Stratolink_v1p1_Symbols" part="pressure_MS561101BA03_50" description="MS561101BA03-50 digital pressure and temperature sensor"/>
+      <property name="Manufacturer Part" value="MS561101BA03-50"/>
+      <property name="Manufacturer" value="TE Connectivity"/>
+      <property name="Supplier Part" value="C15639"/>
+      <property name="Supplier" value="LCSC"/>
+      <property name="LCSC Part Name" value="MS561101BA03-50"/>
+      <property name="Manufacturer_Part_Number" value="MS561101BA03-50"/>
+      <property name="LCSC" value="C15639"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="stratolink.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>7f50806b-c3d7-4939-8361-4da354990fe2</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="1"/>
+            <pin num="2"/>
+            <pin num="3"/>
+            <pin num="4"/>
+            <pin num="8"/>
+            <pin num="7"/>
+            <pin num="6"/>
+            <pin num="5"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="U5">
+      <value>TMP117AIYBGR</value>
+      <footprint>lib:Stratolink_v1p1_U5_BGA6N40P3X2_148X95X53</footprint>
+      <datasheet>https://www.ti.com/lit/ds/symlink/tmp117.pdf</datasheet>
+      <description>TMP117 precision digital temperature sensor, YBG DSBGA-6; max +/-0.2 C at -40 to 100 C, +/-0.25 C at -55 to 125 C under TI test conditions</description>
+      <fields>
+        <field name="MF">Texas Instruments</field>
+        <field name="MAXIMUM_PACKAGE_HEIGHT">0.531mm</field>
+        <field name="Package">DSBGA-6 Texas Instruments</field>
+        <field name="Price">None</field>
+        <field name="Check_prices">https://www.snapeda.com/parts/TMP117NAIYBGR/Texas+Instruments/view-part/?ref=eda</field>
+        <field name="STANDARD">Manufacturer Recommendations</field>
+        <field name="PARTREV">D</field>
+        <field name="SnapEDA_Link">https://www.snapeda.com/parts/TMP117NAIYBGR/Texas+Instruments/view-part/?ref=snap</field>
+        <field name="SNAPEDA_PACKAGE_ID">103200</field>
+        <field name="MP">TMP117AIYBGR</field>
+        <field name="Description_1">TMP117 precision digital temperature sensor, YBG DSBGA-6; max +/-0.2 C at -40 to 100 C, +/-0.25 C at -55 to 125 C under TI test conditions</field>
+        <field name="Availability">In Stock</field>
+        <field name="MANUFACTURER">Texas Instruments</field>
+        <field name="Manufacturer">Texas Instruments</field>
+        <field name="Manufacturer_Part_Number">TMP117AIYBGR</field>
+        <field name="Supplier">LCSC</field>
+        <field name="Assembly_Note">TMP117AIYBGR C2871893: same exact orderable as flown v1; corrected YBG ball map retained. N-grade metadata in earlier CAD was inaccurate.</field>
+        <field name="LCSC">C2871893</field>
+        <field name="Supplier Part">C2871893</field>
+        <field name="Footprint">lib:Stratolink_v1p1_U5_BGA6N40P3X2_148X95X53</field>
+        <field name="Datasheet">https://www.ti.com/lit/ds/symlink/tmp117.pdf</field>
+        <field name="Description">TMP117 precision digital temperature sensor, YBG DSBGA-6; max +/-0.2 C at -40 to 100 C, +/-0.25 C at -55 to 125 C under TI test conditions</field>
+      </fields>
+      <libsource lib="Stratolink_v1p1_Symbols" part="Stratolink_Release_TMP117AIYBGR" description="TMP117 precision digital temperature sensor, YBG DSBGA-6; max +/-0.2 C at -40 to 100 C, +/-0.25 C at -55 to 125 C under TI test conditions"/>
+      <property name="MF" value="Texas Instruments"/>
+      <property name="MAXIMUM_PACKAGE_HEIGHT" value="0.531mm"/>
+      <property name="Package" value="DSBGA-6 Texas Instruments"/>
+      <property name="Price" value="None"/>
+      <property name="Check_prices" value="https://www.snapeda.com/parts/TMP117NAIYBGR/Texas+Instruments/view-part/?ref=eda"/>
+      <property name="STANDARD" value="Manufacturer Recommendations"/>
+      <property name="PARTREV" value="D"/>
+      <property name="SnapEDA_Link" value="https://www.snapeda.com/parts/TMP117NAIYBGR/Texas+Instruments/view-part/?ref=snap"/>
+      <property name="SNAPEDA_PACKAGE_ID" value="103200"/>
+      <property name="MP" value="TMP117AIYBGR"/>
+      <property name="Description_1" value="TMP117 precision digital temperature sensor, YBG DSBGA-6; max +/-0.2 C at -40 to 100 C, +/-0.25 C at -55 to 125 C under TI test conditions"/>
+      <property name="Availability" value="In Stock"/>
+      <property name="MANUFACTURER" value="Texas Instruments"/>
+      <property name="Manufacturer" value="Texas Instruments"/>
+      <property name="Manufacturer_Part_Number" value="TMP117AIYBGR"/>
+      <property name="Supplier" value="LCSC"/>
+      <property name="Assembly_Note" value="TMP117AIYBGR C2871893: same exact orderable as flown v1; corrected YBG ball map retained. N-grade metadata in earlier CAD was inaccurate."/>
+      <property name="LCSC" value="C2871893"/>
+      <property name="Supplier Part" value="C2871893"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="stratolink.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>e4097a48-a84d-4fd1-a88a-ddbeb095c1ca</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="C1"/>
+            <pin num="A2"/>
+            <pin num="A1"/>
+            <pin num="B1"/>
+            <pin num="C2"/>
+            <pin num="B2"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="U6">
+      <value>AS7331-AQFM</value>
+      <footprint>lib:Stratolink_v1p1_U6_AS7331_OLGA16</footprint>
+      <datasheet>https://look.ams-osram.com/m/1856fd2c69c35605/original/AS7331-Spectral-UVA-B-C-Sensor.pdf</datasheet>
+      <description>UVA UVB UVC spectral sensor; 0x74, CMD mode, READY NC, -40 to 85 C; ozone research requires calibrated optics</description>
+      <fields>
+        <field name="Manufacturer">ams OSRAM</field>
+        <field name="Manufacturer_Part_Number">AS7331-AQFM</field>
+        <field name="LCSC">C20482877</field>
+        <field name="Supplier Part">C20482877</field>
+        <field name="Supplier">LCSC</field>
+        <field name="Footprint">lib:Stratolink_v1p1_U6_AS7331_OLGA16</field>
+        <field name="Datasheet">https://look.ams-osram.com/m/1856fd2c69c35605/original/AS7331-Spectral-UVA-B-C-Sensor.pdf</field>
+        <field name="Description">UVA UVB UVC spectral sensor; 0x74, CMD mode, READY NC, -40 to 85 C; ozone research requires calibrated optics</field>
+      </fields>
+      <libsource lib="Stratolink_UV" part="AS7331_AQFM" description="UVA UVB UVC spectral sensor; 0x74, CMD mode, READY NC, -40 to 85 C; ozone research requires calibrated optics"/>
+      <property name="Manufacturer" value="ams OSRAM"/>
+      <property name="Manufacturer_Part_Number" value="AS7331-AQFM"/>
+      <property name="LCSC" value="C20482877"/>
+      <property name="Supplier Part" value="C20482877"/>
+      <property name="Supplier" value="LCSC"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="stratolink.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>c544e489-c714-48ba-b71a-14e87f55c525</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="12"/>
+            <pin num="13"/>
+            <pin num="8"/>
+            <pin num="7"/>
+            <pin num="14"/>
+            <pin num="4"/>
+            <pin num="3"/>
+            <pin num="10"/>
+            <pin num="9"/>
+            <pin num="1"/>
+            <pin num="2"/>
+            <pin num="5"/>
+            <pin num="6"/>
+            <pin num="15"/>
+            <pin num="16"/>
+            <pin num="11"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="U7">
+      <value>LIS2DH12TR</value>
+      <footprint>lib:Stratolink_v1p1_U7_PQFN50P200X200100-12N</footprint>
+      <description>LIS2DH12TR three-axis low-power accelerometer</description>
+      <fields>
+        <field name="MF">STMicroelectronics</field>
+        <field name="PACKAGE">LGA-12 STMicroelectronics</field>
+        <field name="PRICE">0.87 USD</field>
+        <field name="Package">LGA-12 STMicroelectronics</field>
+        <field name="Check_prices">https://www.snapeda.com/parts/LIS2DH12TR/STMicroelectronics/view-part/?ref=eda</field>
+        <field name="Price">None</field>
+        <field name="SnapEDA_Link">https://www.snapeda.com/parts/LIS2DH12TR/STMicroelectronics/view-part/?ref=snap</field>
+        <field name="MP">LIS2DH12TR</field>
+        <field name="Availability">In Stock</field>
+        <field name="AVAILABILITY">Good</field>
+        <field name="Description_1">LIS2DH12TR three-axis low-power accelerometer</field>
+        <field name="Manufacturer">STMicroelectronics</field>
+        <field name="Manufacturer_Part_Number">LIS2DH12TR</field>
+        <field name="Supplier">LCSC</field>
+        <field name="LCSC">C110926</field>
+        <field name="Supplier Part">C110926</field>
+        <field name="Footprint">lib:Stratolink_v1p1_U7_PQFN50P200X200100-12N</field>
+        <field name="Datasheet"/>
+        <field name="Description">LIS2DH12TR three-axis low-power accelerometer</field>
+      </fields>
+      <libsource lib="Stratolink_v1p1_Symbols" part="LIS2DH12TR_LIS2DH12TR" description="LIS2DH12TR three-axis low-power accelerometer"/>
+      <property name="MF" value="STMicroelectronics"/>
+      <property name="PACKAGE" value="LGA-12 STMicroelectronics"/>
+      <property name="PRICE" value="0.87 USD"/>
+      <property name="Package" value="LGA-12 STMicroelectronics"/>
+      <property name="Check_prices" value="https://www.snapeda.com/parts/LIS2DH12TR/STMicroelectronics/view-part/?ref=eda"/>
+      <property name="Price" value="None"/>
+      <property name="SnapEDA_Link" value="https://www.snapeda.com/parts/LIS2DH12TR/STMicroelectronics/view-part/?ref=snap"/>
+      <property name="MP" value="LIS2DH12TR"/>
+      <property name="Availability" value="In Stock"/>
+      <property name="AVAILABILITY" value="Good"/>
+      <property name="Description_1" value="LIS2DH12TR three-axis low-power accelerometer"/>
+      <property name="Manufacturer" value="STMicroelectronics"/>
+      <property name="Manufacturer_Part_Number" value="LIS2DH12TR"/>
+      <property name="Supplier" value="LCSC"/>
+      <property name="LCSC" value="C110926"/>
+      <property name="Supplier Part" value="C110926"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="stratolink.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>e2377f4c-39f3-4561-a208-ea062c0bb53d</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="2"/>
+            <pin num="1"/>
+            <pin num="4"/>
+            <pin num="3"/>
+            <pin num="9"/>
+            <pin num="10"/>
+            <pin num="12"/>
+            <pin num="11"/>
+            <pin num="5"/>
+            <pin num="6"/>
+            <pin num="7"/>
+            <pin num="8"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+    <comp ref="U8">
+      <value>TLV8801DBVT</value>
+      <footprint>lib:Stratolink_v1p1_U8_SOT-23-5</footprint>
+      <datasheet>https://www.ti.com/lit/ds/symlink/tlv8801.pdf</datasheet>
+      <description>Active midpoint balancer pilot</description>
+      <fields>
+        <field name="MPN">TLV8801DBVT</field>
+        <field name="LCSC Part #">C544879</field>
+        <field name="Supplier Part">C544879</field>
+        <field name="Manufacturer_Part_Number">TLV8801DBVT</field>
+        <field name="Footprint">lib:Stratolink_v1p1_U8_SOT-23-5</field>
+        <field name="Datasheet">https://www.ti.com/lit/ds/symlink/tlv8801.pdf</field>
+        <field name="Description">Active midpoint balancer pilot</field>
+      </fields>
+      <libsource lib="Stratolink_v1p1_Symbols" part="Stratolink_Power_TLV8801DBVT" description="450nA typical nanopower amplifier; CAP-XX midpoint follower"/>
+      <property name="MPN" value="TLV8801DBVT"/>
+      <property name="LCSC Part #" value="C544879"/>
+      <property name="Supplier Part" value="C544879"/>
+      <property name="Manufacturer_Part_Number" value="TLV8801DBVT"/>
+      <property name="Sheetname" value=""/>
+      <property name="Sheetfile" value="stratolink.kicad_sch"/>
+      <sheetpath names="/" tstamps="/"/>
+      <tstamps>b5362f62-2d7c-536e-b8a4-f234e7de4645</tstamps>
+      <units>
+        <unit name="A">
+          <pins>
+            <pin num="3"/>
+            <pin num="4"/>
+            <pin num="5"/>
+            <pin num="2"/>
+            <pin num="1"/>
+          </pins>
+        </unit>
+      </units>
+    </comp>
+  </components>
+  <libparts>
+    <libpart lib="Stratolink_UV" part="AS7331_AQFM">
+      <description>UVA UVB UVC spectral sensor; 0x74, CMD mode, READY NC, -40 to 85 C; ozone research requires calibrated optics</description>
+      <docs>https://look.ams-osram.com/m/1856fd2c69c35605/original/AS7331-Spectral-UVA-B-C-Sensor.pdf</docs>
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">AS7331-AQFM</field>
+        <field name="Footprint">lib:Stratolink_v1p1_U6_AS7331_OLGA16</field>
+        <field name="Datasheet">https://look.ams-osram.com/m/1856fd2c69c35605/original/AS7331-Spectral-UVA-B-C-Sensor.pdf</field>
+        <field name="Description">UVA UVB UVC spectral sensor; 0x74, CMD mode, READY NC, -40 to 85 C; ozone research requires calibrated optics</field>
+        <field name="Manufacturer">ams OSRAM</field>
+        <field name="Manufacturer_Part_Number">AS7331-AQFM</field>
+        <field name="LCSC">C20482877</field>
+        <field name="Supplier Part">C20482877</field>
+        <field name="Supplier">LCSC</field>
+      </fields>
+      <pins>
+        <pin num="1" name="VSSA" type="power_in"/>
+        <pin num="2" name="VSSA" type="power_in"/>
+        <pin num="3" name="VDDA" type="power_in"/>
+        <pin num="4" name="REXT" type="passive"/>
+        <pin num="5" name="VSSA" type="power_in"/>
+        <pin num="6" name="VSSA" type="power_in"/>
+        <pin num="7" name="A1" type="input"/>
+        <pin num="8" name="SYN" type="input"/>
+        <pin num="9" name="READY" type="output"/>
+        <pin num="10" name="VDDD" type="power_in"/>
+        <pin num="11" name="VSSD" type="power_in"/>
+        <pin num="12" name="SDA" type="bidirectional"/>
+        <pin num="13" name="SCL" type="input"/>
+        <pin num="14" name="A0" type="input"/>
+        <pin num="15" name="VSSA" type="power_in"/>
+        <pin num="16" name="VSSA" type="power_in"/>
+      </pins>
+    </libpart>
+    <libpart lib="Stratolink_v1p1_Symbols" part="Connector_Conn_ARM_SWD_TagConnect_TC2030_NL">
+      <description>Tag-Connect ARM Cortex SWD JTAG connector, 6 pin, no legs</description>
+      <docs>https://www.tag-connect.com/wp-content/uploads/bsk-pdf-manager/TC2030-CTX_1.pdf</docs>
+      <footprints>
+        <fp>*TC2030*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">J</field>
+        <field name="Value">Conn_ARM_SWD_TagConnect_TC2030-NL</field>
+        <field name="Footprint">Connector:Tag-Connect_TC2030-IDC-NL_2x03_P1.27mm_Vertical</field>
+        <field name="Datasheet">https://www.tag-connect.com/wp-content/uploads/bsk-pdf-manager/TC2030-CTX_1.pdf</field>
+        <field name="Description">Tag-Connect ARM Cortex SWD JTAG connector, 6 pin, no legs</field>
+      </fields>
+      <pins>
+        <pin num="1" name="VCC" type="power_in"/>
+        <pin num="2" name="SWDIO" type="bidirectional"/>
+        <pin num="3" name="~{RESET}" type="open_collector"/>
+        <pin num="4" name="SWCLK" type="output"/>
+        <pin num="5" name="GND" type="power_in"/>
+        <pin num="6" name="SWO" type="input"/>
+      </pins>
+    </libpart>
+    <libpart lib="Stratolink_v1p1_Symbols" part="Device_Antenna">
+      <description>Antenna</description>
+      <fields>
+        <field name="Reference">AE</field>
+        <field name="Value">Antenna</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description">Antenna</field>
+      </fields>
+      <pins>
+        <pin num="1" name="A" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="Stratolink_v1p1_Symbols" part="Device_C">
+      <description>DMF4B5R5G105M3DTA0 1 F 5.5 V supercapacitor; CAD pads 1=positive, 2=negative, 3=isolated balance; manual backside assembly</description>
+      <footprints>
+        <fp>C_*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">C</field>
+        <field name="Value">C</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description">DMF4B5R5G105M3DTA0 1 F 5.5 V supercapacitor; CAD pads 1=positive, 2=negative, 3=isolated balance; manual backside assembly</field>
+      </fields>
+      <pins>
+        <pin num="1" name="" type="passive"/>
+        <pin num="2" name="" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="Stratolink_v1p1_Symbols" part="Device_FerriteBead_Small">
+      <description>Ferrite bead, small symbol</description>
+      <footprints>
+        <fp>Inductor_*</fp>
+        <fp>L_*</fp>
+        <fp>*Ferrite*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">FB</field>
+        <field name="Value">FerriteBead_Small</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description">Ferrite bead, small symbol</field>
+      </fields>
+      <pins>
+        <pin num="1" name="" type="passive"/>
+        <pin num="2" name="" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="Stratolink_v1p1_Symbols" part="Device_L">
+      <description>Inductor</description>
+      <footprints>
+        <fp>Choke_*</fp>
+        <fp>*Coil*</fp>
+        <fp>Inductor_*</fp>
+        <fp>L_*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">L</field>
+        <field name="Value">L</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description">Inductor</field>
+      </fields>
+      <pins>
+        <pin num="1" name="1" type="passive"/>
+        <pin num="2" name="2" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="Stratolink_v1p1_Symbols" part="Device_R_US">
+      <description>Resistor, US symbol</description>
+      <footprints>
+        <fp>R_*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">R</field>
+        <field name="Value">R_US</field>
+        <field name="Footprint"/>
+        <field name="Datasheet"/>
+        <field name="Description">Resistor, US symbol</field>
+      </fields>
+      <pins>
+        <pin num="1" name="" type="passive"/>
+        <pin num="2" name="" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="Stratolink_v1p1_Symbols" part="LIS2DH12TR_LIS2DH12TR">
+      <description>LIS2DH12TR three-axis low-power accelerometer</description>
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">LIS2DH12TR</field>
+        <field name="Footprint">LIS2DH12TR:PQFN50P200X200100-12N</field>
+        <field name="Datasheet"/>
+        <field name="Description">LIS2DH12TR three-axis low-power accelerometer</field>
+        <field name="MF">STMicroelectronics</field>
+        <field name="PACKAGE">LGA-12 STMicroelectronics</field>
+        <field name="PRICE">0.87 USD</field>
+        <field name="Package">LGA-12 STMicroelectronics</field>
+        <field name="Check_prices">https://www.snapeda.com/parts/LIS2DH12TR/STMicroelectronics/view-part/?ref=eda</field>
+        <field name="Price">None</field>
+        <field name="SnapEDA_Link">https://www.snapeda.com/parts/LIS2DH12TR/STMicroelectronics/view-part/?ref=snap</field>
+        <field name="MP">LIS2DH12TR</field>
+        <field name="Availability">In Stock</field>
+        <field name="AVAILABILITY">Good</field>
+        <field name="Description_1">LIS2DH12TR three-axis low-power accelerometer</field>
+      </fields>
+      <pins>
+        <pin num="1" name="SCL/SPC" type="bidirectional"/>
+        <pin num="2" name="CS" type="input"/>
+        <pin num="3" name="SDO/SAO" type="bidirectional"/>
+        <pin num="4" name="SDA/SDI/SDO" type="bidirectional"/>
+        <pin num="5" name="RES" type="power_in"/>
+        <pin num="6" name="GND" type="power_in"/>
+        <pin num="7" name="GND" type="power_in"/>
+        <pin num="8" name="GND" type="power_in"/>
+        <pin num="9" name="VDD" type="power_in"/>
+        <pin num="10" name="VDD_IO" type="power_in"/>
+        <pin num="11" name="INT2" type="output"/>
+        <pin num="12" name="INT1" type="output"/>
+      </pins>
+    </libpart>
+    <libpart lib="Stratolink_v1p1_Symbols" part="ProLib_pcs_2026_01_31_BQ25570RGRR">
+      <description>BQ25570 energy-harvesting boost charger and buck converter; RGR VQFN-20 plus exposed ground pad</description>
+      <docs>https://www.ti.com/cn/lit/gpn/bq25570</docs>
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value"/>
+        <field name="Footprint">ProLib_pcs_2026-01-31:VQFN-20_L3.5-W3.5-P0.50-BL-EP2.0</field>
+        <field name="Datasheet">https://www.ti.com/cn/lit/gpn/bq25570</field>
+        <field name="Description">BQ25570 energy-harvesting boost charger and buck converter; RGR VQFN-20 plus exposed ground pad</field>
+        <field name="Manufacturer Part">BQ25570RGRR</field>
+        <field name="Manufacturer">TI(德州仪器)</field>
+        <field name="Supplier Part">C506250</field>
+        <field name="Supplier">LCSC</field>
+        <field name="LCSC Part Name">适用于能量收集器供电应用的微功率升压充电器与降压转换器</field>
+      </fields>
+      <pins>
+        <pin num="1" name="VSS" type="power_in"/>
+        <pin num="2" name="VIN_DC" type="power_in"/>
+        <pin num="3" name="VOC_SAMP" type="input"/>
+        <pin num="4" name="VREF_SAMP" type="input"/>
+        <pin num="5" name="EN#" type="input"/>
+        <pin num="6" name="VOUT_EN" type="input"/>
+        <pin num="7" name="VBAT_OV" type="input"/>
+        <pin num="8" name="VRDIV" type="power_out"/>
+        <pin num="9" name="NC" type="input"/>
+        <pin num="10" name="OK_HYST" type="input"/>
+        <pin num="11" name="OK_PROG" type="input"/>
+        <pin num="12" name="VOUT_SET" type="input"/>
+        <pin num="13" name="VBAT_OK" type="output"/>
+        <pin num="14" name="VOUT" type="power_out"/>
+        <pin num="15" name="VSS" type="power_in"/>
+        <pin num="16" name="LBUCK" type="bidirectional"/>
+        <pin num="17" name="NC" type="input"/>
+        <pin num="18" name="VBAT" type="power_in"/>
+        <pin num="19" name="VSTOR" type="power_out"/>
+        <pin num="20" name="LBOOST" type="bidirectional"/>
+        <pin num="21" name="EP" type="power_in"/>
+      </pins>
+    </libpart>
+    <libpart lib="Stratolink_v1p1_Symbols" part="ProLib_pcs_2026_02_08_MAX_M10S_00B">
+      <description>MAX-M10S-00B GNSS receiver module</description>
+      <docs>https://item.szlcsc.com/datasheet/MAX-M10S-00B/4722633.html</docs>
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value"/>
+        <field name="Footprint">ProLib_pcs_2026-02-08:SMD-18_L10.1-W9.7-P1.10-TL_SKG09F</field>
+        <field name="Datasheet">https://item.szlcsc.com/datasheet/MAX-M10S-00B/4722633.html</field>
+        <field name="Description">MAX-M10S-00B GNSS receiver module</field>
+        <field name="Manufacturer Part">MAX-M10S-00B</field>
+        <field name="Manufacturer">U-BLOX</field>
+        <field name="Supplier Part">C4153167</field>
+        <field name="Supplier">LCSC</field>
+        <field name="LCSC Part Name">MAX-M10S-00B</field>
+      </fields>
+      <pins>
+        <pin num="1" name="GND" type="power_in"/>
+        <pin num="2" name="TXD" type="output"/>
+        <pin num="3" name="RXD" type="input"/>
+        <pin num="4" name="TIMEPULSE" type="output"/>
+        <pin num="5" name="EXTINT" type="input"/>
+        <pin num="6" name="V_BCKP" type="power_in"/>
+        <pin num="7" name="V_IO" type="power_in"/>
+        <pin num="8" name="VCC" type="power_in"/>
+        <pin num="9" name="RESET_N" type="input"/>
+        <pin num="10" name="GND" type="power_in"/>
+        <pin num="11" name="RF_IN" type="input"/>
+        <pin num="12" name="GND" type="power_in"/>
+        <pin num="13" name="LNA_EN" type="output"/>
+        <pin num="14" name="VCC_RF" type="power_out"/>
+        <pin num="15" name="VIO_SEL" type="input"/>
+        <pin num="16" name="SDA" type="bidirectional"/>
+        <pin num="17" name="SCL" type="input"/>
+        <pin num="18" name="SAFEBOOT_N" type="input"/>
+      </pins>
+    </libpart>
+    <libpart lib="Stratolink_v1p1_Symbols" part="RAK3172_RAK3172">
+      <description>RAK3172 STM32WLE5CC, 32-pad, high-band regional-label variant, no TCXO, no IPEX; antenna on RF pad 12</description>
+      <docs>https://docs.rakwireless.com/product-categories/wisduo/rak3172-module/datasheet/</docs>
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">RAK3172</field>
+        <field name="Footprint">RAK3172:RAK3172</field>
+        <field name="Datasheet">https://docs.rakwireless.com/product-categories/wisduo/rak3172-module/datasheet/</field>
+        <field name="Description">RAK3172 STM32WLE5CC, 32-pad, high-band regional-label variant, no TCXO, no IPEX; antenna on RF pad 12</field>
+        <field name="MF">Shenzhen RAKwireless Technology Co.,Ltd.</field>
+        <field name="PACKAGE">Package</field>
+        <field name="PRICE">None</field>
+        <field name="Package">Package</field>
+        <field name="Check_prices">https://www.snapeda.com/parts/RAK3172/Shenzhen+RAKwireless+Technology+Co.%252CLtd./view-part/?ref=eda</field>
+        <field name="SnapEDA_Link">https://www.snapeda.com/parts/RAK3172/Shenzhen+RAKwireless+Technology+Co.%252CLtd./view-part/?ref=snap</field>
+        <field name="Price">None</field>
+        <field name="SNAPEDA_LINK">https://www.snapeda.com/parts/RAK3172/Shenzhen+RAKwireless+Technology+Co.%252CLtd./view-part/?ref=snap</field>
+        <field name="MP">RAK3172</field>
+        <field name="Description_1">RAK3172 STM32WLE5CC, 32-pad, high-band regional-label variant, no TCXO, no IPEX; antenna on RF pad 12</field>
+        <field name="Availability"/>
+        <field name="AVAILABILITY"/>
+        <field name="CHECK_PRICES">https://www.snapeda.com/parts/RAK3172/Shenzhen+RAKwireless+Technology+Co.%252CLtd./view-part/?ref=eda</field>
+      </fields>
+      <pins>
+        <pin num="1" name="UART2_RX/PA3" type="bidirectional"/>
+        <pin num="2" name="UART2_TX/PA2" type="bidirectional"/>
+        <pin num="3" name="PA15/ADC5" type="bidirectional"/>
+        <pin num="4" name="UART1_TX/PB6" type="bidirectional"/>
+        <pin num="5" name="UART1_RX/PB7" type="bidirectional"/>
+        <pin num="6" name="PA1" type="bidirectional"/>
+        <pin num="7" name="SWDIO/PA13" type="bidirectional"/>
+        <pin num="8" name="SWCLK/PA14" type="bidirectional"/>
+        <pin num="9" name="SCL/PA12" type="bidirectional"/>
+        <pin num="10" name="SDA/PA11" type="bidirectional"/>
+        <pin num="11" name="GND" type="power_in"/>
+        <pin num="12" name="RF" type="output"/>
+        <pin num="13" name="MOSI/PA7" type="bidirectional"/>
+        <pin num="14" name="MISO/PA6" type="bidirectional"/>
+        <pin num="15" name="SCK/PA5" type="bidirectional"/>
+        <pin num="16" name="SS/PA4" type="bidirectional"/>
+        <pin num="17" name="GND" type="power_in"/>
+        <pin num="18" name="GND" type="power_in"/>
+        <pin num="19" name="PA8" type="bidirectional"/>
+        <pin num="20" name="PA9" type="bidirectional"/>
+        <pin num="21" name="BOOT0" type="input"/>
+        <pin num="22" name="RST" type="input"/>
+        <pin num="23" name="GND" type="power_in"/>
+        <pin num="24" name="VCC" type="power_in"/>
+        <pin num="25" name="PA10/ADC4" type="bidirectional"/>
+        <pin num="26" name="PB2/ADC3" type="bidirectional"/>
+        <pin num="27" name="PB12" type="bidirectional"/>
+        <pin num="28" name="GND" type="power_in"/>
+        <pin num="29" name="PA0" type="bidirectional"/>
+        <pin num="30" name="PB5" type="bidirectional"/>
+        <pin num="31" name="PB4/ADC2" type="bidirectional"/>
+        <pin num="32" name="PB3/ADC1" type="bidirectional"/>
+      </pins>
+    </libpart>
+    <libpart lib="Stratolink_v1p1_Symbols" part="Stratolink_Power_DMF4B5R5G105M3DTA0_3T">
+      <description>CAP-XX DMF dual cell; placed pin1 positive, pin2 negative, pin3 midpoint; hand-install</description>
+      <docs>https://www.cap-xx.com</docs>
+      <fields>
+        <field name="Reference">C</field>
+        <field name="Value">1F</field>
+        <field name="Footprint">lib:DMF4B5R5G105M3DTA0</field>
+        <field name="Datasheet">https://www.cap-xx.com</field>
+        <field name="Description">CAP-XX DMF dual cell; placed pin1 positive, pin2 negative, pin3 midpoint; hand-install</field>
+      </fields>
+      <pins>
+        <pin num="1" name="+" type="passive"/>
+        <pin num="2" name="-" type="passive"/>
+        <pin num="3" name="MID" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="Stratolink_v1p1_Symbols" part="Stratolink_Power_TLV8801DBVT">
+      <description>450nA typical nanopower amplifier; CAP-XX midpoint follower</description>
+      <docs>https://www.ti.com/lit/ds/symlink/tlv8801.pdf</docs>
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">TLV8801DBVT</field>
+        <field name="Footprint">Package_TO_SOT_SMD:SOT-23-5</field>
+        <field name="Datasheet">https://www.ti.com/lit/ds/symlink/tlv8801.pdf</field>
+        <field name="Description">450nA typical nanopower amplifier; CAP-XX midpoint follower</field>
+      </fields>
+      <pins>
+        <pin num="1" name="OUT" type="output"/>
+        <pin num="2" name="V-" type="power_in"/>
+        <pin num="3" name="+" type="input"/>
+        <pin num="4" name="-" type="input"/>
+        <pin num="5" name="V+" type="power_in"/>
+      </pins>
+    </libpart>
+    <libpart lib="Stratolink_v1p1_Symbols" part="Stratolink_Release_PESD5V0U1BB">
+      <description>Bidirectional 5 V low-capacitance ESD TVS, SOD-523; nominal 0.5 pF; PESD5V0U1BB</description>
+      <docs>https://uploadcdn.oneyac.com/attachments/files/brand_pdf/leiditech/3D/92/PESD5V0U1BB.pdf</docs>
+      <footprints>
+        <fp>*SOD-523*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">D</field>
+        <field name="Value">PESD5V0U1BB</field>
+        <field name="Footprint">Diode_SMD:D_SOD-923</field>
+        <field name="Datasheet">https://uploadcdn.oneyac.com/attachments/files/brand_pdf/leiditech/3D/92/PESD5V0U1BB.pdf</field>
+        <field name="Description">Bidirectional 5 V low-capacitance ESD TVS, SOD-523; nominal 0.5 pF; PESD5V0U1BB</field>
+      </fields>
+      <pins>
+        <pin num="1" name="A1" type="passive"/>
+        <pin num="2" name="A2" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="Stratolink_v1p1_Symbols" part="Stratolink_Release_TMP117AIYBGR">
+      <description>TMP117 precision digital temperature sensor, YBG DSBGA-6; max +/-0.2 C at -40 to 100 C, +/-0.25 C at -55 to 125 C under TI test conditions</description>
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value">TMP117AIYBGR</field>
+        <field name="Footprint">lib:BGA6N40P3X2_148X95X53</field>
+        <field name="Datasheet"/>
+        <field name="Description">TMP117 precision digital temperature sensor, YBG DSBGA-6; max +/-0.2 C at -40 to 100 C, +/-0.25 C at -55 to 125 C under TI test conditions</field>
+        <field name="MF">Texas Instruments</field>
+        <field name="MAXIMUM_PACKAGE_HEIGHT">0.531mm</field>
+        <field name="Package">DSBGA-6 Texas Instruments</field>
+        <field name="Price">None</field>
+        <field name="Check_prices">https://www.snapeda.com/parts/TMP117AIYBGR/Texas+Instruments/view-part/?ref=eda</field>
+        <field name="STANDARD">Manufacturer Recommendations</field>
+        <field name="PARTREV">D</field>
+        <field name="SnapEDA_Link">https://www.snapeda.com/parts/TMP117AIYBGR/Texas+Instruments/view-part/?ref=snap</field>
+        <field name="SNAPEDA_PACKAGE_ID">103200</field>
+        <field name="MP">TMP117AIYBGR</field>
+        <field name="Description_1">TMP117 precision digital temperature sensor, YBG DSBGA-6; max +/-0.2 C at -40 to 100 C, +/-0.25 C at -55 to 125 C under TI test conditions</field>
+        <field name="Availability">In Stock</field>
+        <field name="MANUFACTURER">Texas Instruments</field>
+      </fields>
+      <pins>
+        <pin num="A1" name="SDA" type="bidirectional"/>
+        <pin num="A2" name="SCL" type="input"/>
+        <pin num="B1" name="V+" type="power_in"/>
+        <pin num="B2" name="GND" type="power_in"/>
+        <pin num="C1" name="ADD0" type="input"/>
+        <pin num="C2" name="ALERT" type="open_collector"/>
+      </pins>
+    </libpart>
+    <libpart lib="Stratolink_v1p1_Symbols" part="fab_Conn_Header_JST_PH_1x02_P2mm_Vertical_SMD">
+      <description>Male JST PH 2 pin connector</description>
+      <docs>https://www.jst-mfg.com/product/pdf/eng/ePH.pdf</docs>
+      <footprints>
+        <fp>*Header*JST*PH*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">J</field>
+        <field name="Value">Conn_Header_JST_PH_1x02_P2mm_Vertical_SMD</field>
+        <field name="Footprint">fab:Header_JST_PH_1x02_P2mm_Vertical_SMD</field>
+        <field name="Datasheet">https://www.jst-mfg.com/product/pdf/eng/ePH.pdf</field>
+        <field name="Description">Male JST PH 2 pin connector</field>
+      </fields>
+      <pins>
+        <pin num="1" name="" type="passive"/>
+        <pin num="2" name="" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="Stratolink_v1p1_Symbols" part="fab_Conn_PinHeader_1x07_P2_54mm_Vertical_THT_D1mm">
+      <description>Connector Header Through Hole 7 positions 0.100" (2.54mm)</description>
+      <footprints>
+        <fp>*PinHeader*1x07*</fp>
+      </footprints>
+      <fields>
+        <field name="Reference">J</field>
+        <field name="Value">Conn_PinHeader_1x07_P2.54mm_Vertical_THT_D1mm</field>
+        <field name="Footprint">fab:PinHeader_1x07_P2.54mm_Vertical_THT_D1mm</field>
+        <field name="Datasheet"/>
+        <field name="Description">Connector Header Through Hole 7 positions 0.100" (2.54mm)</field>
+      </fields>
+      <pins>
+        <pin num="1" name="Pin_1" type="passive"/>
+        <pin num="2" name="Pin_2" type="passive"/>
+        <pin num="3" name="Pin_3" type="passive"/>
+        <pin num="4" name="Pin_4" type="passive"/>
+        <pin num="5" name="Pin_5" type="passive"/>
+        <pin num="6" name="Pin_6" type="passive"/>
+        <pin num="7" name="Pin_7" type="passive"/>
+      </pins>
+    </libpart>
+    <libpart lib="Stratolink_v1p1_Symbols" part="pressure_MS561101BA03_50">
+      <description>MS561101BA03-50 digital pressure and temperature sensor</description>
+      <docs>https://item.szlcsc.com/datasheet/MS561101BA03-50/16320.html</docs>
+      <fields>
+        <field name="Reference">U</field>
+        <field name="Value"/>
+        <field name="Footprint">pressure:SENSORS-SMD_MS5611-01BA03</field>
+        <field name="Datasheet">https://item.szlcsc.com/datasheet/MS561101BA03-50/16320.html</field>
+        <field name="Description">MS561101BA03-50 digital pressure and temperature sensor</field>
+        <field name="Manufacturer Part">MS561101BA03-50</field>
+        <field name="Manufacturer">TE Connectivity(泰科电子)</field>
+        <field name="Supplier Part">C15639</field>
+        <field name="Supplier">LCSC</field>
+        <field name="LCSC Part Name">MS561101BA03-50</field>
+      </fields>
+      <pins>
+        <pin num="1" name="VDD" type="power_in"/>
+        <pin num="2" name="PS" type="input"/>
+        <pin num="3" name="GND" type="power_in"/>
+        <pin num="4" name="CSB" type="input"/>
+        <pin num="5" name="CSB" type="input"/>
+        <pin num="6" name="SDO" type="output"/>
+        <pin num="7" name="SDI/SDA" type="bidirectional"/>
+        <pin num="8" name="SCLK" type="input"/>
+      </pins>
+    </libpart>
+  </libparts>
+  <libraries>
+    <library logical="Stratolink_UV">
+      <uri>${KIPRJMOD}/lib/Stratolink_UV.kicad_sym</uri>
+    </library>
+    <library logical="Stratolink_v1p1_Symbols">
+      <uri>${KIPRJMOD}/lib/Stratolink_v1p1_Symbols.kicad_sym</uri>
+    </library>
+  </libraries>
+  <nets>
+    <net code="1" name="+3.3V" class="Default">
+      <node ref="C11" pin="2" pintype="passive"/>
+      <node ref="C12" pin="2" pintype="passive"/>
+      <node ref="C14" pin="2" pintype="passive"/>
+      <node ref="C16" pin="2" pintype="passive"/>
+      <node ref="C19" pin="2" pintype="passive"/>
+      <node ref="C20" pin="2" pintype="passive"/>
+      <node ref="C21" pin="2" pintype="passive"/>
+      <node ref="C23" pin="2" pintype="passive"/>
+      <node ref="C6" pin="2" pintype="passive"/>
+      <node ref="C7" pin="2" pintype="passive"/>
+      <node ref="C8" pin="2" pintype="passive"/>
+      <node ref="FB1" pin="2" pintype="passive"/>
+      <node ref="J20" pin="1" pinfunction="VCC_1" pintype="power_in"/>
+      <node ref="J4" pin="7" pinfunction="Pin_7_7" pintype="passive"/>
+      <node ref="L2" pin="2" pinfunction="2_2" pintype="passive"/>
+      <node ref="R10" pin="1" pintype="passive"/>
+      <node ref="R11" pin="1" pintype="passive"/>
+      <node ref="R12" pin="1" pintype="passive"/>
+      <node ref="U1" pin="14" pinfunction="VOUT_14" pintype="power_out"/>
+      <node ref="U2" pin="24" pinfunction="VCC_24" pintype="power_in"/>
+      <node ref="U4" pin="1" pinfunction="VDD_1" pintype="power_in"/>
+      <node ref="U4" pin="2" pinfunction="PS_2" pintype="input"/>
+      <node ref="U4" pin="4" pinfunction="CSB_4" pintype="input"/>
+      <node ref="U4" pin="5" pinfunction="CSB_5" pintype="input"/>
+      <node ref="U5" pin="B1" pinfunction="V+_B1" pintype="power_in"/>
+      <node ref="U6" pin="10" pinfunction="VDDD_10" pintype="power_in"/>
+      <node ref="U6" pin="3" pinfunction="VDDA_3" pintype="power_in"/>
+      <node ref="U7" pin="10" pinfunction="VDD_IO_10" pintype="power_in"/>
+      <node ref="U7" pin="2" pinfunction="CS_2" pintype="input"/>
+      <node ref="U7" pin="9" pinfunction="VDD_9" pintype="power_in"/>
+    </net>
+    <net code="2" name="+SOLAR" class="Default">
+      <node ref="C2" pin="1" pintype="passive"/>
+      <node ref="J1" pin="1" pintype="passive"/>
+      <node ref="J2" pin="1" pintype="passive"/>
+      <node ref="L1" pin="2" pinfunction="2_2" pintype="passive"/>
+      <node ref="R19" pin="1" pintype="passive"/>
+      <node ref="U1" pin="2" pinfunction="VIN_DC_2" pintype="power_in"/>
+    </net>
+    <net code="3" name="/SC_BAL_OUT" class="Default">
+      <node ref="R26" pin="1" pintype="passive"/>
+      <node ref="U8" pin="1" pinfunction="OUT_1" pintype="output"/>
+      <node ref="U8" pin="4" pinfunction="-_4" pintype="input"/>
+    </net>
+    <net code="4" name="/SC_HALF_REF" class="Default">
+      <node ref="R24" pin="2" pintype="passive"/>
+      <node ref="R25" pin="1" pintype="passive"/>
+      <node ref="U8" pin="3" pinfunction="+_3" pintype="input"/>
+    </net>
+    <net code="5" name="/SC_MID" class="Default">
+      <node ref="C5" pin="3" pinfunction="MID_3" pintype="passive"/>
+      <node ref="R26" pin="2" pintype="passive"/>
+    </net>
+    <net code="6" name="/UV_REXT" class="Default">
+      <node ref="R27" pin="1" pintype="passive"/>
+      <node ref="U6" pin="4" pinfunction="REXT_4" pintype="passive"/>
+    </net>
+    <net code="7" name="/VBAT" class="Default">
+      <node ref="C22" pin="1" pintype="passive"/>
+      <node ref="C5" pin="1" pinfunction="+_1" pintype="passive"/>
+      <node ref="R24" pin="1" pintype="passive"/>
+      <node ref="U1" pin="18" pinfunction="VBAT_18" pintype="power_in"/>
+      <node ref="U8" pin="5" pinfunction="V+_5" pintype="power_in"/>
+    </net>
+    <net code="8" name="BOOT0" class="Default">
+      <node ref="J4" pin="6" pinfunction="Pin_6_6" pintype="passive"/>
+      <node ref="R9" pin="2" pintype="passive"/>
+      <node ref="U2" pin="21" pinfunction="BOOT0_21" pintype="input"/>
+    </net>
+    <net code="9" name="GND" class="Default">
+      <node ref="C1" pin="1" pintype="passive"/>
+      <node ref="C10" pin="2" pintype="passive"/>
+      <node ref="C11" pin="1" pintype="passive"/>
+      <node ref="C12" pin="1" pintype="passive"/>
+      <node ref="C14" pin="1" pintype="passive"/>
+      <node ref="C15" pin="1" pintype="passive"/>
+      <node ref="C16" pin="1" pintype="passive"/>
+      <node ref="C17" pin="1" pintype="passive"/>
+      <node ref="C19" pin="1" pintype="passive"/>
+      <node ref="C2" pin="2" pintype="passive"/>
+      <node ref="C20" pin="1" pintype="passive"/>
+      <node ref="C21" pin="1" pintype="passive"/>
+      <node ref="C22" pin="2" pintype="passive"/>
+      <node ref="C23" pin="1" pintype="passive"/>
+      <node ref="C3" pin="2" pintype="passive"/>
+      <node ref="C4" pin="2" pintype="passive"/>
+      <node ref="C5" pin="2" pinfunction="-_2" pintype="passive"/>
+      <node ref="C6" pin="1" pintype="passive"/>
+      <node ref="C7" pin="1" pintype="passive"/>
+      <node ref="C8" pin="1" pintype="passive"/>
+      <node ref="C9" pin="1" pintype="passive"/>
+      <node ref="D1" pin="1" pinfunction="A1_1" pintype="passive"/>
+      <node ref="D3" pin="1" pinfunction="A1_1" pintype="passive"/>
+      <node ref="J1" pin="2" pintype="passive"/>
+      <node ref="J2" pin="2" pintype="passive"/>
+      <node ref="J20" pin="5" pinfunction="GND_5" pintype="power_in"/>
+      <node ref="J3" pin="2" pinfunction="Pin_2_2" pintype="passive"/>
+      <node ref="J3" pin="4" pinfunction="Pin_4_4" pintype="passive"/>
+      <node ref="J3" pin="5" pinfunction="Pin_5_5" pintype="passive"/>
+      <node ref="J3" pin="7" pinfunction="Pin_7_7" pintype="passive"/>
+      <node ref="J4" pin="1" pinfunction="Pin_1_1" pintype="passive"/>
+      <node ref="J4" pin="3" pinfunction="Pin_3_3" pintype="passive"/>
+      <node ref="R2" pin="2" pintype="passive"/>
+      <node ref="R21" pin="2" pintype="passive"/>
+      <node ref="R23" pin="2" pintype="passive"/>
+      <node ref="R25" pin="2" pintype="passive"/>
+      <node ref="R27" pin="2" pintype="passive"/>
+      <node ref="R5" pin="2" pintype="passive"/>
+      <node ref="R7" pin="2" pintype="passive"/>
+      <node ref="R9" pin="1" pintype="passive"/>
+      <node ref="U1" pin="1" pinfunction="VSS_1" pintype="power_in"/>
+      <node ref="U1" pin="15" pinfunction="VSS_15" pintype="power_in"/>
+      <node ref="U1" pin="17" pinfunction="NC_17" pintype="input"/>
+      <node ref="U1" pin="21" pinfunction="EP_21" pintype="power_in"/>
+      <node ref="U1" pin="5" pinfunction="EN#_5" pintype="input"/>
+      <node ref="U1" pin="9" pinfunction="NC_9" pintype="input"/>
+      <node ref="U2" pin="11" pinfunction="GND_11" pintype="power_in"/>
+      <node ref="U2" pin="17" pinfunction="GND_17" pintype="power_in"/>
+      <node ref="U2" pin="18" pinfunction="GND_18" pintype="power_in"/>
+      <node ref="U2" pin="23" pinfunction="GND_23" pintype="power_in"/>
+      <node ref="U2" pin="28" pinfunction="GND_28" pintype="power_in"/>
+      <node ref="U3" pin="1" pinfunction="GND_1" pintype="power_in"/>
+      <node ref="U3" pin="10" pinfunction="GND_10" pintype="power_in"/>
+      <node ref="U3" pin="12" pinfunction="GND_12" pintype="power_in"/>
+      <node ref="U3" pin="5" pinfunction="EXTINT_5" pintype="input"/>
+      <node ref="U4" pin="3" pinfunction="GND_3" pintype="power_in"/>
+      <node ref="U5" pin="B2" pinfunction="GND_B2" pintype="power_in"/>
+      <node ref="U5" pin="C1" pinfunction="ADD0_C1" pintype="input"/>
+      <node ref="U5" pin="C2" pinfunction="ALERT_C2" pintype="open_collector"/>
+      <node ref="U6" pin="1" pinfunction="VSSA_1" pintype="power_in"/>
+      <node ref="U6" pin="11" pinfunction="VSSD_11" pintype="power_in"/>
+      <node ref="U6" pin="14" pinfunction="A0_14" pintype="input"/>
+      <node ref="U6" pin="15" pinfunction="VSSA_15" pintype="power_in"/>
+      <node ref="U6" pin="16" pinfunction="VSSA_16" pintype="power_in"/>
+      <node ref="U6" pin="2" pinfunction="VSSA_2" pintype="power_in"/>
+      <node ref="U6" pin="5" pinfunction="VSSA_5" pintype="power_in"/>
+      <node ref="U6" pin="6" pinfunction="VSSA_6" pintype="power_in"/>
+      <node ref="U6" pin="7" pinfunction="A1_7" pintype="input"/>
+      <node ref="U6" pin="8" pinfunction="SYN_8" pintype="input"/>
+      <node ref="U7" pin="3" pinfunction="SDO/SAO_3" pintype="bidirectional"/>
+      <node ref="U7" pin="5" pinfunction="RES_5" pintype="power_in"/>
+      <node ref="U7" pin="6" pinfunction="GND_6" pintype="power_in"/>
+      <node ref="U7" pin="7" pinfunction="GND_7" pintype="power_in"/>
+      <node ref="U7" pin="8" pinfunction="GND_8" pintype="power_in"/>
+      <node ref="U8" pin="2" pinfunction="V-_2" pintype="power_in"/>
+    </net>
+    <net code="10" name="Net-(AE1-A)" class="Default">
+      <node ref="AE1" pin="1" pinfunction="A_1" pintype="passive"/>
+      <node ref="D1" pin="2" pinfunction="A2_2" pintype="passive"/>
+      <node ref="U2" pin="12" pinfunction="RF_12" pintype="output"/>
+    </net>
+    <net code="11" name="Net-(AE2-A)" class="Default">
+      <node ref="AE2" pin="1" pinfunction="A_1" pintype="passive"/>
+      <node ref="D3" pin="2" pinfunction="A2_2" pintype="passive"/>
+      <node ref="U3" pin="11" pinfunction="RF_IN_11" pintype="input"/>
+    </net>
+    <net code="12" name="Net-(U1-LBOOST)" class="Default">
+      <node ref="L1" pin="1" pinfunction="1_1" pintype="passive"/>
+      <node ref="U1" pin="20" pinfunction="LBOOST_20" pintype="bidirectional"/>
+    </net>
+    <net code="13" name="Net-(U1-LBUCK)" class="Default">
+      <node ref="L2" pin="1" pinfunction="1_1" pintype="passive"/>
+      <node ref="U1" pin="16" pinfunction="LBUCK_16" pintype="bidirectional"/>
+    </net>
+    <net code="14" name="Net-(U1-OK_HYST)" class="Default">
+      <node ref="R3" pin="1" pintype="passive"/>
+      <node ref="R4" pin="2" pintype="passive"/>
+      <node ref="U1" pin="10" pinfunction="OK_HYST_10" pintype="input"/>
+    </net>
+    <net code="15" name="Net-(U1-OK_PROG)" class="Default">
+      <node ref="R3" pin="2" pintype="passive"/>
+      <node ref="R5" pin="1" pintype="passive"/>
+      <node ref="U1" pin="11" pinfunction="OK_PROG_11" pintype="input"/>
+    </net>
+    <net code="16" name="Net-(U1-VBAT_OK)" class="Default">
+      <node ref="R8" pin="1" pintype="passive"/>
+      <node ref="U1" pin="13" pinfunction="VBAT_OK_13" pintype="output"/>
+    </net>
+    <net code="17" name="Net-(U1-VBAT_OV)" class="Default">
+      <node ref="R1" pin="2" pintype="passive"/>
+      <node ref="R2" pin="1" pintype="passive"/>
+      <node ref="U1" pin="7" pinfunction="VBAT_OV_7" pintype="input"/>
+    </net>
+    <net code="18" name="Net-(U1-VOUT_SET)" class="Default">
+      <node ref="R6" pin="2" pintype="passive"/>
+      <node ref="R7" pin="1" pintype="passive"/>
+      <node ref="U1" pin="12" pinfunction="VOUT_SET_12" pintype="input"/>
+    </net>
+    <net code="19" name="Net-(U1-VRDIV)" class="Default">
+      <node ref="R1" pin="1" pintype="passive"/>
+      <node ref="R4" pin="1" pintype="passive"/>
+      <node ref="R6" pin="1" pintype="passive"/>
+      <node ref="U1" pin="8" pinfunction="VRDIV_8" pintype="power_out"/>
+    </net>
+    <net code="20" name="Net-(U1-VREF_SAMP)" class="Default">
+      <node ref="C1" pin="2" pintype="passive"/>
+      <node ref="U1" pin="4" pinfunction="VREF_SAMP_4" pintype="input"/>
+    </net>
+    <net code="21" name="Net-(U3-RXD)" class="Default">
+      <node ref="R16" pin="2" pintype="passive"/>
+      <node ref="U3" pin="3" pinfunction="RXD_3" pintype="input"/>
+    </net>
+    <net code="22" name="Net-(U3-SCL)" class="Default">
+      <node ref="R13" pin="1" pintype="passive"/>
+      <node ref="U3" pin="17" pinfunction="SCL_17" pintype="input"/>
+    </net>
+    <net code="23" name="Net-(U3-SDA)" class="Default">
+      <node ref="R14" pin="1" pintype="passive"/>
+      <node ref="U3" pin="16" pinfunction="SDA_16" pintype="bidirectional"/>
+    </net>
+    <net code="24" name="Net-(U3-TXD)" class="Default">
+      <node ref="R15" pin="2" pintype="passive"/>
+      <node ref="U3" pin="2" pinfunction="TXD_2" pintype="output"/>
+    </net>
+    <net code="25" name="Net-(U3-VCC)" class="Default">
+      <node ref="C10" pin="1" pintype="passive"/>
+      <node ref="FB1" pin="1" pintype="passive"/>
+      <node ref="R18" pin="1" pintype="passive"/>
+      <node ref="U3" pin="6" pinfunction="V_BCKP_6" pintype="power_in"/>
+      <node ref="U3" pin="7" pinfunction="V_IO_7" pintype="power_in"/>
+      <node ref="U3" pin="8" pinfunction="VCC_8" pintype="power_in"/>
+    </net>
+    <net code="26" name="PA1" class="Default">
+      <node ref="J3" pin="1" pinfunction="Pin_1_1" pintype="passive"/>
+      <node ref="U2" pin="6" pinfunction="PA1_6" pintype="bidirectional"/>
+    </net>
+    <net code="27" name="PA8" class="Default">
+      <node ref="U2" pin="19" pinfunction="PA8_19" pintype="bidirectional"/>
+      <node ref="U7" pin="12" pinfunction="INT1_12" pintype="output"/>
+    </net>
+    <net code="28" name="PA9" class="Default">
+      <node ref="J3" pin="3" pinfunction="Pin_3_3" pintype="passive"/>
+      <node ref="U2" pin="20" pinfunction="PA9_20" pintype="bidirectional"/>
+    </net>
+    <net code="29" name="PA10" class="Default">
+      <node ref="C17" pin="2" pintype="passive"/>
+      <node ref="R22" pin="2" pintype="passive"/>
+      <node ref="R23" pin="1" pintype="passive"/>
+      <node ref="U2" pin="25" pinfunction="PA10/ADC4_25" pintype="bidirectional"/>
+    </net>
+    <net code="30" name="PA15" class="Default">
+      <node ref="C15" pin="2" pintype="passive"/>
+      <node ref="R19" pin="2" pintype="passive"/>
+      <node ref="R21" pin="1" pintype="passive"/>
+      <node ref="U2" pin="3" pinfunction="PA15/ADC5_3" pintype="bidirectional"/>
+    </net>
+    <net code="31" name="PB2" class="Default">
+      <node ref="J3" pin="6" pinfunction="Pin_6_6" pintype="passive"/>
+      <node ref="U2" pin="26" pinfunction="PB2/ADC3_26" pintype="bidirectional"/>
+    </net>
+    <net code="32" name="PB5" class="Default">
+      <node ref="R8" pin="2" pintype="passive"/>
+      <node ref="U2" pin="30" pinfunction="PB5_30" pintype="bidirectional"/>
+    </net>
+    <net code="33" name="RST" class="Default">
+      <node ref="C9" pin="2" pintype="passive"/>
+      <node ref="J20" pin="3" pinfunction="~{RESET}_3" pintype="open_collector"/>
+      <node ref="R10" pin="2" pintype="passive"/>
+      <node ref="U2" pin="22" pinfunction="RST_22" pintype="input"/>
+    </net>
+    <net code="34" name="RSTN" class="Default">
+      <node ref="R18" pin="2" pintype="passive"/>
+      <node ref="U2" pin="29" pinfunction="PA0_29" pintype="bidirectional"/>
+      <node ref="U3" pin="9" pinfunction="RESET_N_9" pintype="input"/>
+    </net>
+    <net code="35" name="RX" class="Default">
+      <node ref="J4" pin="5" pinfunction="Pin_5_5" pintype="passive"/>
+      <node ref="R15" pin="1" pintype="passive"/>
+      <node ref="U2" pin="5" pinfunction="UART1_RX/PB7_5" pintype="bidirectional"/>
+    </net>
+    <net code="36" name="SCL" class="Default">
+      <node ref="R12" pin="2" pintype="passive"/>
+      <node ref="R13" pin="2" pintype="passive"/>
+      <node ref="U2" pin="9" pinfunction="SCL/PA12_9" pintype="bidirectional"/>
+      <node ref="U4" pin="8" pinfunction="SCLK_8" pintype="input"/>
+      <node ref="U5" pin="A2" pinfunction="SCL_A2" pintype="input"/>
+      <node ref="U6" pin="13" pinfunction="SCL_13" pintype="input"/>
+      <node ref="U7" pin="1" pinfunction="SCL/SPC_1" pintype="bidirectional"/>
+    </net>
+    <net code="37" name="SDA" class="Default">
+      <node ref="R11" pin="2" pintype="passive"/>
+      <node ref="R14" pin="2" pintype="passive"/>
+      <node ref="U2" pin="10" pinfunction="SDA/PA11_10" pintype="bidirectional"/>
+      <node ref="U4" pin="7" pinfunction="SDI/SDA_7" pintype="bidirectional"/>
+      <node ref="U5" pin="A1" pinfunction="SDA_A1" pintype="bidirectional"/>
+      <node ref="U6" pin="12" pinfunction="SDA_12" pintype="bidirectional"/>
+      <node ref="U7" pin="4" pinfunction="SDA/SDI/SDO_4" pintype="bidirectional"/>
+    </net>
+    <net code="38" name="SWCLK" class="Default">
+      <node ref="J20" pin="4" pinfunction="SWCLK_4" pintype="output"/>
+      <node ref="U2" pin="8" pinfunction="SWCLK/PA14_8" pintype="bidirectional"/>
+    </net>
+    <net code="39" name="SWDIO" class="Default">
+      <node ref="J20" pin="2" pinfunction="SWDIO_2" pintype="bidirectional"/>
+      <node ref="U2" pin="7" pinfunction="SWDIO/PA13_7" pintype="bidirectional"/>
+    </net>
+    <net code="40" name="TX" class="Default">
+      <node ref="J4" pin="4" pinfunction="Pin_4_4" pintype="passive"/>
+      <node ref="R16" pin="1" pintype="passive"/>
+      <node ref="U2" pin="4" pinfunction="UART1_TX/PB6_4" pintype="bidirectional"/>
+    </net>
+    <net code="41" name="VSTOR" class="Default">
+      <node ref="C3" pin="1" pintype="passive"/>
+      <node ref="C4" pin="1" pintype="passive"/>
+      <node ref="J4" pin="2" pinfunction="Pin_2_2" pintype="passive"/>
+      <node ref="R22" pin="1" pintype="passive"/>
+      <node ref="U1" pin="19" pinfunction="VSTOR_19" pintype="power_out"/>
+      <node ref="U1" pin="3" pinfunction="VOC_SAMP_3" pintype="input"/>
+      <node ref="U1" pin="6" pinfunction="VOUT_EN_6" pintype="input"/>
+    </net>
+    <net code="42" name="unconnected-(J20-SWO-Pad6)" class="Default">
+      <node ref="J20" pin="6" pinfunction="SWO_6" pintype="input+no_connect"/>
+    </net>
+    <net code="43" name="unconnected-(U2-MISO/PA6-Pad14)" class="Default">
+      <node ref="U2" pin="14" pinfunction="MISO/PA6_14" pintype="bidirectional+no_connect"/>
+    </net>
+    <net code="44" name="unconnected-(U2-MOSI/PA7-Pad13)" class="Default">
+      <node ref="U2" pin="13" pinfunction="MOSI/PA7_13" pintype="bidirectional+no_connect"/>
+    </net>
+    <net code="45" name="unconnected-(U2-PB3/ADC1-Pad32)" class="Default">
+      <node ref="U2" pin="32" pinfunction="PB3/ADC1_32" pintype="bidirectional+no_connect"/>
+    </net>
+    <net code="46" name="unconnected-(U2-PB4/ADC2-Pad31)" class="Default">
+      <node ref="U2" pin="31" pinfunction="PB4/ADC2_31" pintype="bidirectional+no_connect"/>
+    </net>
+    <net code="47" name="unconnected-(U2-PB12-Pad27)" class="Default">
+      <node ref="U2" pin="27" pinfunction="PB12_27" pintype="bidirectional+no_connect"/>
+    </net>
+    <net code="48" name="unconnected-(U2-SCK/PA5-Pad15)" class="Default">
+      <node ref="U2" pin="15" pinfunction="SCK/PA5_15" pintype="bidirectional+no_connect"/>
+    </net>
+    <net code="49" name="unconnected-(U2-SS/PA4-Pad16)" class="Default">
+      <node ref="U2" pin="16" pinfunction="SS/PA4_16" pintype="bidirectional+no_connect"/>
+    </net>
+    <net code="50" name="unconnected-(U2-UART2_RX/PA3-Pad1)" class="Default">
+      <node ref="U2" pin="1" pinfunction="UART2_RX/PA3_1" pintype="bidirectional+no_connect"/>
+    </net>
+    <net code="51" name="unconnected-(U2-UART2_TX/PA2-Pad2)" class="Default">
+      <node ref="U2" pin="2" pinfunction="UART2_TX/PA2_2" pintype="bidirectional+no_connect"/>
+    </net>
+    <net code="52" name="unconnected-(U3-LNA_EN-Pad13)" class="Default">
+      <node ref="U3" pin="13" pinfunction="LNA_EN_13" pintype="output+no_connect"/>
+    </net>
+    <net code="53" name="unconnected-(U3-SAFEBOOT_N-Pad18)" class="Default">
+      <node ref="U3" pin="18" pinfunction="SAFEBOOT_N_18" pintype="input+no_connect"/>
+    </net>
+    <net code="54" name="unconnected-(U3-TIMEPULSE-Pad4)" class="Default">
+      <node ref="U3" pin="4" pinfunction="TIMEPULSE_4" pintype="output+no_connect"/>
+    </net>
+    <net code="55" name="unconnected-(U3-VCC_RF-Pad14)" class="Default">
+      <node ref="U3" pin="14" pinfunction="VCC_RF_14" pintype="power_out+no_connect"/>
+    </net>
+    <net code="56" name="unconnected-(U3-VIO_SEL-Pad15)" class="Default">
+      <node ref="U3" pin="15" pinfunction="VIO_SEL_15" pintype="input+no_connect"/>
+    </net>
+    <net code="57" name="unconnected-(U4-SDO-Pad6)" class="Default">
+      <node ref="U4" pin="6" pinfunction="SDO_6" pintype="output+no_connect"/>
+    </net>
+    <net code="58" name="unconnected-(U6-READY-Pad9)" class="Default">
+      <node ref="U6" pin="9" pinfunction="READY_9" pintype="output+no_connect"/>
+    </net>
+    <net code="59" name="unconnected-(U7-INT2-Pad11)" class="Default">
+      <node ref="U7" pin="11" pinfunction="INT2_11" pintype="output+no_connect"/>
+    </net>
+  </nets>
+</export>

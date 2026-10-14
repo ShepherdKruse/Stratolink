@@ -1,0 +1,25 @@
+{
+  "checked_at_utc": "2026-10-14T18:17:46.814812+00:00",
+  "pcb_sha256": "9d63500a087ef8d345c2337942106e6704d32ded953846883454bfad718adf6c",
+  "flown_repository_revision": "9bdd19ec707455271f48f5a5d8be352fc696cf9c",
+  "flown_pcb_sha256": "2924cfa59d48c1446488d715834e84ea634516e622ed59915fb72521e9595190",
+  "programming_I2C_UART_module_pin_map": {
+    "7": "SWDIO",
+    "8": "SWCLK",
+    "21": "BOOT0",
+    "22": "RST",
+    "4": "TX",
+    "5": "RX",
+    "9": "SCL",
+    "10": "SDA"
+  },
+  "all_selected_module_pins_equal_flown": true,
+  "all_J3_J4_J20_and_R9_through_R16_pad_net_assignments_equal_flown": true,
+  "fresh_schematic_netlist_equals_manifested_assembly_netlist": true,
+  "selected_native_PCB_pad_nets_equal_fresh_schematic": true,
+  "confirmed_0ohm_BOOT0_ground_strap": true,
+  "confirmed4p7k_external_pullup_each_line": true,
+  "saved_pilot_U6_absent": true,
+  "board_or_firmware_writes": false,
+  "limits": "Read-only CAD/source comparison; no physical fixture or electrical waveform measurement."
+}

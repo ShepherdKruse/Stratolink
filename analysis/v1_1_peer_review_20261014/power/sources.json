@@ -1,0 +1,81 @@
+{
+  "retrieved_date": "2026-10-14",
+  "browser_note": "In-app browser reported unavailable and empty browser list; primary web lookup and cached primary PDFs used. No external browser used.",
+  "sources": [
+    {
+      "file": "analysis/v1_1_peer_review_20261014/power/sources/CL05A106MQ5NUN.html",
+      "url": "https://product.samsungsem.com/mlcc/CL05A106MQ5NUN.do",
+      "sha256": "dff894d1dfe301551a16743973bb1ea6e88d56d36e154153eed81039011b3bfb"
+    },
+    {
+      "file": "analysis/v1_1_peer_review_20261014/power/sources/CL10A106KA8NRN.html",
+      "url": "https://product.samsungsem.com/mlcc/CL10A106KA8NRN.do",
+      "sha256": "245e4bd1ebd24db4f22c446e030fe3545db2d1864b270d62fe2c3712efe53ec8"
+    },
+    {
+      "file": "analysis/v1_1_peer_review_20261014/power/sources/CL10A106KO8NQN.html",
+      "url": "https://product.samsungsem.com/mlcc/CL10A106KO8NQN.do",
+      "sha256": "08eaaad4a33102ac72f13bb4a732bc8f1e7d4f7d60490c1ad0fefc0032ded3de"
+    },
+    {
+      "file": "analysis/v1_1_peer_review_20261014/power/sources/CL10A106KP8NNN.html",
+      "url": "https://product.samsungsem.com/mlcc/CL10A106KP8NNN.do",
+      "sha256": "04454ef0d1190dd521dfb42036b8628d1275c35f65cdd3a395442ef9e5544fea"
+    },
+    {
+      "file": "analysis/v1_1_peer_review_20261014/power/sources/CL10A226MP8NUN.html",
+      "url": "https://product.samsungsem.com/mlcc/CL10A226MP8NUN.do",
+      "sha256": "665d8e8b0a3c9776e78d0621b7f907ef0d5e2816172c9b73e746fb51eb2df742"
+    },
+    {
+      "file": "analysis/v1_1_peer_review_20261014/power/sources/CL10A475KP8NNN.html",
+      "url": "https://product.samsungsem.com/mlcc/CL10A475KP8NNN.do",
+      "sha256": "c39f288f6ac79ab8d6bffa9d93aff7053da8128725e0e1e6b4ad86d469f3d1cb"
+    },
+    {
+      "file": "analysis/v1_1_peer_review_20261014/power/sources/CL21A226MAYNNN.html",
+      "url": "https://product.samsungsem.com/mlcc/CL21A226MAYNNN.do",
+      "sha256": "9b1999df119cc87ac79efb96bc8659dae992891d01462f0aa8498b1c6c5bd3dd"
+    },
+    {
+      "file": "analysis/v1_1_peer_review_20261014/power/sources/CL21A476MPYNNN.html",
+      "url": "https://product.samsungsem.com/mlcc/CL21A476MPYNNN.do",
+      "sha256": "eb90364a5c4604b87850474e54fbde39389d6f45ecc3ff1eb9428a36868782ea"
+    },
+    {
+      "file": "analysis/v1_1_peer_review_20261014/power/sources/rak3272s-schematic.png",
+      "url": "https://images.docs.rakwireless.com/wisduo/rak3272s-breakout-board/datasheet/rak3272s-schematic.png",
+      "sha256": "40cb7c5015120a1c8622314d0c9ab990e18591353c6757bb831c88fd0ce3cec0"
+    },
+    {
+      "file": "/Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/power/sources/bq25570.pdf",
+      "url": "https://www.ti.com/lit/ds/symlink/bq25570.pdf",
+      "sha256": "3caec3945eab27823d07532c39a862bb8f90927019dd8c3811836bedad6b33b7",
+      "provenance": "Existing local primary-source PDF, read without alteration"
+    },
+    {
+      "file": "/Users/twarn/Repositories/ai-working/scratch/stratolink-release-20261012/power/sources/sluuaa7.pdf",
+      "url": "https://www.ti.com/lit/pdf/SLUUAA7",
+      "sha256": "60aac1d0cad5e571feac7949f882b25a8eaaad814b190cbec333e7c0b5bb8d2e",
+      "provenance": "Existing local primary-source PDF, read without alteration"
+    },
+    {
+      "file": "analysis/redesign_20261010/metrology/sources/MAX-M10S.pdf",
+      "url": "https://content.u-blox.com/sites/default/files/MAX-M10S_DataSheet_UBX-20035208.pdf",
+      "sha256": "e36d9c8585809c0dc486804d2634c66cd1888ad71af0f28ce0b830ffa8df6bec",
+      "provenance": "Existing local primary-source PDF, read without alteration"
+    },
+    {
+      "file": "analysis/redesign_20261010/metrology/sources/MAX-M10S-integration.pdf",
+      "url": "https://content.u-blox.com/sites/default/files/MAX-M10S_IntegrationManual_UBX-20053088.pdf",
+      "sha256": "5a7510ef84f7e2757c57e362a25e3c16bcf8c80af5a4f70790c2e51032dbcd13",
+      "provenance": "Existing local primary-source PDF, read without alteration"
+    }
+  ],
+  "uncached_primary_sources": [
+    "https://docs.rakwireless.com/product-categories/wisduo/rak3172-module/datasheet/",
+    "https://www.murata.com/en-us/products/productdetail?partno=BLM15AG601SN1%23",
+    "https://www.murata.com/products/productdata/8796740059166/ENFA0018.pdf?1641439816000="
+  ],
+  "murata_pdf_retrieval_note": "Primary search extraction provided table; direct PDF download returned403. Do not claim a locally downloaded or visually reviewed copy."
+}

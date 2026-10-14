@@ -1,0 +1,132 @@
+{
+  "before_sha256": "9d63500a087ef8d345c2337942106e6704d32ded953846883454bfad718adf6c",
+  "after_sha256": "4fc14170fc8452f4b4fd7ec097bfb0bcdde89e63024ddc5af3e52abfd173d9ea",
+  "protected_rf_switch_geometry_exact": {
+    "Net-(AE2-A)": true,
+    "Net-(AE1-A)": true,
+    "Net-(U1-LBOOST)": true,
+    "Net-(U1-LBUCK)": true
+  },
+  "footprint_summaries_identical": true,
+  "added_copper": [
+    {
+      "kind": "PCB_TRACK",
+      "uuid": "14040533-26f4-5f51-a95d-bbec0ded4c5e",
+      "net": "+3.3V",
+      "layer": "B.Cu",
+      "start": [
+        71.15,
+        41.65
+      ],
+      "end": [
+        71.25,
+        41.75
+      ],
+      "width": 0.15
+    },
+    {
+      "kind": "PCB_TRACK",
+      "uuid": "1b4edc58-1c82-5462-aa03-c148ce5a8c0c",
+      "net": "GND",
+      "layer": "F.Cu",
+      "start": [
+        67.440998,
+        37.564999
+      ],
+      "end": [
+        66.940998,
+        38.064999
+      ],
+      "width": 0.25
+    },
+    {
+      "kind": "PCB_TRACK",
+      "uuid": "7439a54f-a7dc-542e-a889-c7c2abab39f7",
+      "net": "/SC_BAL_OUT",
+      "layer": "B.Cu",
+      "start": [
+        56.7875,
+        35.15
+      ],
+      "end": [
+        57.5,
+        35.65
+      ],
+      "width": 0.35
+    },
+    {
+      "kind": "PCB_TRACK",
+      "uuid": "4fd6911c-f8e7-54b5-89e2-da9ca9f926fe",
+      "net": "GND",
+      "layer": "F.Cu",
+      "start": [
+        66.940998,
+        37.564999
+      ],
+      "end": [
+        67.440998,
+        38.064999
+      ],
+      "width": 0.25
+    },
+    {
+      "kind": "PCB_TRACK",
+      "uuid": "a7684986-db01-519f-b602-d986ccd29a78",
+      "net": "GND",
+      "layer": "F.Cu",
+      "start": [
+        70.3,
+        62.05
+      ],
+      "end": [
+        70.3,
+        62.7
+      ],
+      "width": 0.25
+    }
+  ],
+  "changed_copper": [
+    {
+      "before": {
+        "kind": "PCB_TRACK",
+        "uuid": "f950083f-9c44-5581-b006-dd929a7699ef",
+        "net": "GND",
+        "layer": "F.Cu",
+        "start": [
+          73.5,
+          35.525
+        ],
+        "end": [
+          74.0,
+          35.525
+        ],
+        "width": 0.15
+      },
+      "after": {
+        "kind": "PCB_TRACK",
+        "uuid": "f950083f-9c44-5581-b006-dd929a7699ef",
+        "net": "GND",
+        "layer": "F.Cu",
+        "start": [
+          73.5,
+          35.525
+        ],
+        "end": [
+          74.0,
+          35.525
+        ],
+        "width": 0.2
+      }
+    }
+  ],
+  "saved_ground_projection_changes": {
+    "Net-(AE2-A)": {
+      "lost_ground_mm2": 0.0,
+      "gained_ground_mm2": 0.0
+    },
+    "Net-(AE1-A)": {
+      "lost_ground_mm2": 0.0,
+      "gained_ground_mm2": 0.0
+    }
+  }
+}

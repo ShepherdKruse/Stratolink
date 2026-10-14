@@ -1,0 +1,146 @@
+{
+  "status": "Rejected exploratory path screen, no native candidate created",
+  "source_pcb_sha256": "9d63500a087ef8d345c2337942106e6704d32ded953846883454bfad718adf6c",
+  "source_geometry_sha256": "3717056fc910d3dc3c0f7e31abf3c0bf4663cca39a98680a9841843898df841c",
+  "width_mm": 0.75,
+  "route_length_mm": 19.068644479812832,
+  "path": [
+    [
+      60.787001,
+      45.114001
+    ],
+    [
+      59.5,
+      45.114001
+    ],
+    [
+      58.1,
+      43.714001
+    ],
+    [
+      58.1,
+      41.2
+    ],
+    [
+      56.6,
+      39.7
+    ],
+    [
+      56.6,
+      35.4
+    ],
+    [
+      57.3,
+      34.7
+    ],
+    [
+      59.3,
+      34.7
+    ],
+    [
+      62.882,
+      33.218
+    ]
+  ],
+  "baseline_rear_GND_centerline_gap_mm": 15.754592371385554,
+  "baseline_rear_GND_trace_strip_coverage_fraction": 0.14274713473651635,
+  "nearby_rear_pads": [
+    {
+      "ref": "C5",
+      "pin": "1",
+      "net": "/VBAT",
+      "center_mm": [
+        61.375,
+        46.207
+      ],
+      "projected_edge_clearance_mm": 0.0,
+      "projected_overlap_mm2": 0.7170393157415098,
+      "centerline_over_copper_mm": 0.6620009999999965
+    },
+    {
+      "ref": "R25",
+      "pin": "1",
+      "net": "/SC_HALF_REF",
+      "center_mm": [
+        58.14,
+        34.9
+      ],
+      "projected_edge_clearance_mm": 0.0,
+      "projected_overlap_mm2": 0.25979296670400176,
+      "centerline_over_copper_mm": 0.5399999999999991
+    },
+    {
+      "ref": "R25",
+      "pin": "2",
+      "net": "GND",
+      "center_mm": [
+        59.16,
+        34.9
+      ],
+      "projected_edge_clearance_mm": 0.0,
+      "projected_overlap_mm2": 0.25875762374682126,
+      "centerline_over_copper_mm": 0.5342503293427898
+    },
+    {
+      "ref": "R24",
+      "pin": "1",
+      "net": "/VBAT",
+      "center_mm": [
+        57.91,
+        33.9
+      ],
+      "projected_edge_clearance_mm": 0.10500000000000398,
+      "projected_overlap_mm2": 0.0,
+      "centerline_over_copper_mm": 0.0
+    },
+    {
+      "ref": "R24",
+      "pin": "2",
+      "net": "/SC_HALF_REF",
+      "center_mm": [
+        56.89,
+        33.9
+      ],
+      "projected_edge_clearance_mm": 0.16395556898274205,
+      "projected_overlap_mm2": 0.0,
+      "centerline_over_copper_mm": 0.0
+    },
+    {
+      "ref": "U8",
+      "pin": "4",
+      "net": "/SC_BAL_OUT",
+      "center_mm": [
+        56.7875,
+        35.15
+      ],
+      "projected_edge_clearance_mm": 0.0,
+      "projected_overlap_mm2": 0.5809074975033459,
+      "centerline_over_copper_mm": 0.8278169168131242
+    },
+    {
+      "ref": "U8",
+      "pin": "5",
+      "net": "/VBAT",
+      "center_mm": [
+        56.7875,
+        37.05
+      ],
+      "projected_edge_clearance_mm": 0.0,
+      "projected_overlap_mm2": 0.4497979216555031,
+      "centerline_over_copper_mm": 0.5999989999990518
+    },
+    {
+      "ref": "C22",
+      "pin": "1",
+      "net": "/VBAT",
+      "center_mm": [
+        56.08,
+        38.3
+      ],
+      "projected_edge_clearance_mm": 0.0,
+      "projected_overlap_mm2": 0.07556889912747251,
+      "centerline_over_copper_mm": 0.0
+    }
+  ],
+  "limit": "Projection against unchanged saved baseline fills only. Proposed SC_MID hop and ground-via removal are not instantiated; no complete final reference-plane, impedance or noise simulation."
+}

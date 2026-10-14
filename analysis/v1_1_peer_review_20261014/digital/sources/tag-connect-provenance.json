@@ -1,0 +1,13 @@
+{
+  "source_url": "https://www.tag-connect.com/wp-content/uploads/bsk-pdf-manager/TC2030-CTX_1.pdf",
+  "verified_date": "2026-10-14",
+  "verification": "Root agent read official PDF via source fallback after in-app-browser PDF rendered blank; communicated pin-table lines27-32. This subagent did not independently download this PDF.",
+  "pin_mapping": {
+    "1": "VCC/reference",
+    "2": "SWDIO/TMS",
+    "3": "nRESET",
+    "4": "SWCLK/TCK",
+    "5": "GND / GNDDetect",
+    "6": "SWO/TDO"
+  }
+}

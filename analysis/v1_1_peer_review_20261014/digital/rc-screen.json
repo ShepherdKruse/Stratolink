@@ -1,0 +1,243 @@
+{
+  "pcb_sha256": "9d63500a087ef8d345c2337942106e6704d32ded953846883454bfad718adf6c",
+  "model": "t30-70 = ln(0.7/0.3)*R*C = 0.8472978604 R C",
+  "conditional_assumptions": {
+    "distributed_trace_C_pF_per_mm": [
+      0.04,
+      0.2
+    ],
+    "TMP117_pin_C_pF_typical_not_max": 4,
+    "each_other_device_pin_C_pF_assumed": [
+      3,
+      10
+    ],
+    "pad_via_module_fringe_extra_pF_assumed": [
+      5,
+      15
+    ],
+    "external_cable_probe_C_pF": 0,
+    "full_connected_IC_count": 6,
+    "pilot_connected_IC_count": 5,
+    "C_bounds_are_assumed_engineering_screen_not_guaranteed_measured_limits": true
+  },
+  "plane_only_microstrip_reference": {
+    "0.1": {
+      "er_assumed": 4.2,
+      "height_mm": 0.31,
+      "estimated_Z0_ohm": 102.11560299616553,
+      "estimated_C_pF_per_mm": 0.05523122710734375
+    },
+    "0.15": {
+      "er_assumed": 4.2,
+      "height_mm": 0.31,
+      "estimated_Z0_ohm": 91.15152904267528,
+      "estimated_C_pF_per_mm": 0.06247907561455904
+    },
+    "0.25": {
+      "er_assumed": 4.2,
+      "height_mm": 0.31,
+      "estimated_Z0_ohm": 75.86536304674652,
+      "estimated_C_pF_per_mm": 0.07617378656913765
+    }
+  },
+  "pullups_ohm": {
+    "existing_4p7k_external_only": 4700,
+    "existing_with_GPS_8k_min": 2960.6299212598424,
+    "existing_with_GPS_18k_typ": 3726.872246696035,
+    "existing_with_GPS_40k_max": 4205.816554809843,
+    "replace_with_two_10k_per_line": 5000,
+    "two10k_with_GPS18k": 3913.043478260869,
+    "single10k_per_line": 10000
+  },
+  "bus": {
+    "SDA": {
+      "main_routed_mm": 87.27703366698927,
+      "GNSS_branch_after_0ohm_mm": 7.825524255643524,
+      "all_copper_route_mm": 95.1025579226328,
+      "via_count": 4,
+      "trace_widths_mm": [
+        0.15,
+        0.25
+      ],
+      "conditional_C_full_pF": [
+        27.80410231690531,
+        88.02051158452656
+      ],
+      "conditional_C_pilot_pF": [
+        24.80410231690531,
+        78.02051158452656
+      ],
+      "rise_ns_full": {
+        "existing_4p7k_external_only": [
+          110.72427509457357,
+          350.52407833805523
+        ],
+        "existing_with_GPS_8k_min": [
+          69.74757486272351,
+          220.8025690318458
+        ],
+        "existing_with_GPS_18k_typ": [
+          87.79898465649005,
+          277.94860837378826
+        ],
+        "existing_with_GPS_40k_max": [
+          99.08212536427166,
+          313.66807904971387
+        ],
+        "replace_with_two_10k_per_line": [
+          117.79178201550381,
+          372.89795567878207
+        ],
+        "two10k_with_GPS18k": [
+          92.18487288169862,
+          291.8331827051338
+        ],
+        "single10k_per_line": [
+          235.58356403100763,
+          745.7959113575641
+        ]
+      },
+      "rise_ns_pilot": {
+        "existing_4p7k_external_only": [
+          98.77737526311401,
+          310.70107889985667
+        ],
+        "existing_with_GPS_8k_min": [
+          62.22196866967811,
+          195.7172150550278
+        ],
+        "existing_with_GPS_18k_typ": [
+          78.32567201480406,
+          246.37089956816823
+        ],
+        "existing_with_GPS_40k_max": [
+          88.39138726005729,
+          278.0322853689992
+        ],
+        "replace_with_two_10k_per_line": [
+          105.08231410969574,
+          330.53306265942194
+        ],
+        "two10k_with_GPS18k": [
+          82.23833278150103,
+          258.6780490378085
+        ],
+        "single10k_per_line": [
+          210.1646282193915,
+          661.0661253188439
+        ]
+      }
+    },
+    "SCL": {
+      "main_routed_mm": 99.07144595132296,
+      "GNSS_branch_after_0ohm_mm": 7.842680170362511,
+      "all_copper_route_mm": 106.91412612168547,
+      "via_count": 9,
+      "trace_widths_mm": [
+        0.1,
+        0.15,
+        0.25
+      ],
+      "conditional_C_full_pF": [
+        28.276565044867418,
+        90.3828252243371
+      ],
+      "conditional_C_pilot_pF": [
+        25.276565044867418,
+        80.3828252243371
+      ],
+      "rise_ns_full": {
+        "existing_4p7k_external_only": [
+          112.60576338959406,
+          359.93151981315765
+        ],
+        "existing_with_GPS_8k_min": [
+          70.93276433990177,
+          226.72851641773707
+        ],
+        "existing_with_GPS_18k_typ": [
+          89.29091370099968,
+          285.4082535963364
+        ],
+        "existing_with_GPS_40k_max": [
+          100.76578379382019,
+          322.08637119745646
+        ],
+        "replace_with_two_10k_per_line": [
+          119.79336530807878,
+          382.90587214165697
+        ],
+        "two10k_with_GPS18k": [
+          93.75132937153991,
+          299.66546515434027
+        ],
+        "single10k_per_line": [
+          239.58673061615755,
+          765.8117442833139
+        ]
+      },
+      "rise_ns_pilot": {
+        "existing_4p7k_external_only": [
+          100.65886355813448,
+          320.108520374959
+        ],
+        "existing_with_GPS_8k_min": [
+          63.40715814685637,
+          201.64316244091907
+        ],
+        "existing_with_GPS_18k_typ": [
+          79.81760105931367,
+          253.83054479071637
+        ],
+        "existing_with_GPS_40k_max": [
+          90.0750456896058,
+          286.4505775167419
+        ],
+        "replace_with_two_10k_per_line": [
+          107.08389740227071,
+          340.5409791222968
+        ],
+        "two10k_with_GPS18k": [
+          83.8047892713423,
+          266.5103314870149
+        ],
+        "single10k_per_line": [
+          214.16779480454142,
+          681.0819582445936
+        ]
+      }
+    }
+  },
+  "capacitance_limits_pF": {
+    "existing_4p7k_external_only": {
+      "at_300ns": 75.33335113684012,
+      "at_1000ns_standard_mode_comparison_only": 251.11117045613375
+    },
+    "existing_with_GPS_8k_min": {
+      "at_300ns": 119.5916949297337,
+      "at_1000ns_standard_mode_comparison_only": 398.63898309911235
+    },
+    "existing_with_GPS_18k_typ": {
+      "at_300ns": 95.00372615590395,
+      "at_1000ns_standard_mode_comparison_only": 316.67908718634646
+    },
+    "existing_with_GPS_40k_max": {
+      "at_300ns": 84.18501989541883,
+      "at_1000ns_standard_mode_comparison_only": 280.6167329847295
+    },
+    "replace_with_two_10k_per_line": {
+      "at_300ns": 70.81335006862972,
+      "at_1000ns_standard_mode_comparison_only": 236.04450022876574
+    },
+    "two10k_with_GPS18k": {
+      "at_300ns": 90.48372508769353,
+      "at_1000ns_standard_mode_comparison_only": 301.61241695897843
+    },
+    "single10k_per_line": {
+      "at_300ns": 35.40667503431486,
+      "at_1000ns_standard_mode_comparison_only": 118.02225011438287
+    }
+  },
+  "static_sink_current_mA_at_3p3_and_Vol0p4_GPS8k_plus4p7k": 0.9795212765957447,
+  "pulse_edge_warning": "Clock100kHz does not relax MAX-M10S/AS7331 published300ns edge requirement; probeactual30-70rise atfarloads."
+}

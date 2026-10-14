@@ -1,0 +1,814 @@
+{
+  "source_sha256": "9d63500a087ef8d345c2337942106e6704d32ded953846883454bfad718adf6c",
+  "original_main_analytic_length_mm": 13.439242465768096,
+  "west_screen_length_mm": 19.068644479812832,
+  "length_increase_percent": 41.88779262211932,
+  "west_screen_points_mm": [
+    [
+      60.787001,
+      45.114001
+    ],
+    [
+      59.5,
+      45.114001
+    ],
+    [
+      58.1,
+      43.714001
+    ],
+    [
+      58.1,
+      41.2
+    ],
+    [
+      56.6,
+      39.7
+    ],
+    [
+      56.6,
+      35.4
+    ],
+    [
+      57.3,
+      34.7
+    ],
+    [
+      59.3,
+      34.7
+    ],
+    [
+      62.882,
+      33.218
+    ]
+  ],
+  "main_route_uuids": [
+    "10e62ef9-ab31-4e56-96c7-83eee259c020",
+    "15d0258b-77c0-4984-944c-6ad003ad2de0",
+    "1c9d5e81-4466-4304-8b8e-6d253c736885",
+    "f5f4dd5c-b62e-4228-99e1-d2e95bc0b778"
+  ],
+  "interpretation": "Rejected exploratory polyline only. No native candidate, refill, DRC, impedance simulation, or CAD edit. Existing saved rear ground screen is not a prediction of refill after rerouting.",
+  "routes": {
+    "original": {
+      "centerline_length_mm_approximated": 13.439235996825653,
+      "centerline_above_saved_rear_gnd_mm": 5.426262298028632,
+      "centerline_without_saved_rear_gnd_mm": 8.012973698797023,
+      "copper_projection_area_mm2": 10.522051341304005,
+      "copper_projection_above_saved_rear_gnd_mm2": 3.841915493725356,
+      "switch_projection_edge_distance_mm": {
+        "Net-(U1-LBOOST)": 0.0,
+        "Net-(U1-LBUCK)": 4.808996999999998
+      },
+      "opposite_layer_non_ground_overlaps": [
+        {
+          "net": "Net-(AE2-A)",
+          "kind": "pad",
+          "ref": "AE2",
+          "pin": "1",
+          "uuid": "ea905b28-8305-405a-81ea-939d803338f6",
+          "projected_overlap_mm2": 0.7601203170600009,
+          "centerline_overlap_length_mm": 0.75
+        },
+        {
+          "net": "/VBAT",
+          "kind": "pad",
+          "ref": "C5",
+          "pin": "1",
+          "uuid": "360f7f4a-e111-4736-a983-3a4a1e15da29",
+          "projected_overlap_mm2": 1.6816451426194146,
+          "centerline_overlap_length_mm": 2.1416216736306932
+        },
+        {
+          "net": "+SOLAR",
+          "kind": "PCB_TRACK",
+          "ref": null,
+          "pin": null,
+          "uuid": "4a782519-b8a6-485a-8d8d-3d03d1dcec90",
+          "projected_overlap_mm2": 0.4131536252308705,
+          "centerline_overlap_length_mm": 0.6645273391039979
+        },
+        {
+          "net": "+SOLAR",
+          "kind": "PCB_TRACK",
+          "ref": null,
+          "pin": null,
+          "uuid": "881c3bd5-3b8d-45f1-a0f3-1d2b65e64483",
+          "projected_overlap_mm2": 0.25099157364599944,
+          "centerline_overlap_length_mm": 0.4819484113956847
+        },
+        {
+          "net": "/VBAT",
+          "kind": "PCB_TRACK",
+          "ref": null,
+          "pin": null,
+          "uuid": "ca4dd144-66af-43ac-8788-94f13488f846",
+          "projected_overlap_mm2": 1.1556388695715074,
+          "centerline_overlap_length_mm": 1.966216351233769
+        },
+        {
+          "net": "Net-(U1-LBOOST)",
+          "kind": "PCB_TRACK",
+          "ref": null,
+          "pin": null,
+          "uuid": "5f3a3f28-02d5-406a-8b7a-fb4d88ddac92",
+          "projected_overlap_mm2": 0.26250000000000107,
+          "centerline_overlap_length_mm": 0.3500000000000014
+        }
+      ]
+    },
+    "west_rejected": {
+      "centerline_length_mm_approximated": 19.068644479812832,
+      "centerline_above_saved_rear_gnd_mm": 3.3140521084272776,
+      "centerline_without_saved_rear_gnd_mm": 15.754592371385554,
+      "copper_projection_area_mm2": 14.723472188388378,
+      "copper_projection_above_saved_rear_gnd_mm2": 2.101733468265227,
+      "switch_projection_edge_distance_mm": {
+        "Net-(U1-LBOOST)": 0.6181526873799394,
+        "Net-(U1-LBUCK)": 7.530500507422566
+      },
+      "opposite_layer_non_ground_overlaps": [
+        {
+          "net": "Net-(AE2-A)",
+          "kind": "pad",
+          "ref": "AE2",
+          "pin": "1",
+          "uuid": "ea905b28-8305-405a-81ea-939d803338f6",
+          "projected_overlap_mm2": 0.7590537126621645,
+          "centerline_overlap_length_mm": 0.7499998948229885
+        },
+        {
+          "net": "/VBAT",
+          "kind": "pad",
+          "ref": "C5",
+          "pin": "1",
+          "uuid": "360f7f4a-e111-4736-a983-3a4a1e15da29",
+          "projected_overlap_mm2": 0.7170393157415098,
+          "centerline_overlap_length_mm": 0.6620009999999965
+        },
+        {
+          "net": "/SC_HALF_REF",
+          "kind": "pad",
+          "ref": "R25",
+          "pin": "1",
+          "uuid": "9e31df24-a5c1-486b-af3f-b71188863e1a",
+          "projected_overlap_mm2": 0.25979296670400176,
+          "centerline_overlap_length_mm": 0.5399999999999991
+        },
+        {
+          "net": "/SC_BAL_OUT",
+          "kind": "pad",
+          "ref": "U8",
+          "pin": "4",
+          "uuid": "d1495eac-07d0-4e3d-a1d1-ae345d16df1f",
+          "projected_overlap_mm2": 0.5809074975033459,
+          "centerline_overlap_length_mm": 0.8278169168131242
+        },
+        {
+          "net": "/VBAT",
+          "kind": "pad",
+          "ref": "U8",
+          "pin": "5",
+          "uuid": "6282804e-bf78-430c-9bd5-bed3a413c856",
+          "projected_overlap_mm2": 0.4497979216555031,
+          "centerline_overlap_length_mm": 0.5999989999990518
+        },
+        {
+          "net": "/VBAT",
+          "kind": "pad",
+          "ref": "C22",
+          "pin": "1",
+          "uuid": "45397d0d-b8ca-47c5-adca-16f5a11d6afa",
+          "projected_overlap_mm2": 0.07556889912747251,
+          "centerline_overlap_length_mm": 0.0
+        },
+        {
+          "net": "+SOLAR",
+          "kind": "PCB_TRACK",
+          "ref": null,
+          "pin": null,
+          "uuid": "565c06b7-9582-44f0-a88c-af66fec0f3f0",
+          "projected_overlap_mm2": 0.5303158602228641,
+          "centerline_overlap_length_mm": 0.7071080000000052
+        },
+        {
+          "net": "+SOLAR",
+          "kind": "PCB_TRACK",
+          "ref": null,
+          "pin": null,
+          "uuid": "68ff3b5b-3b97-492d-98f3-727c63925442",
+          "projected_overlap_mm2": 0.2584534783997619,
+          "centerline_overlap_length_mm": 0.0
+        },
+        {
+          "net": "+SOLAR",
+          "kind": "PCB_TRACK",
+          "ref": null,
+          "pin": null,
+          "uuid": "e9bec5b4-88da-45ea-9fa2-1d1c291498d9",
+          "projected_overlap_mm2": 0.3988641774636788,
+          "centerline_overlap_length_mm": 0.5411046419974466
+        },
+        {
+          "net": "/VBAT",
+          "kind": "PCB_TRACK",
+          "ref": null,
+          "pin": null,
+          "uuid": "27b62b2e-145f-5a58-afc7-5933b4095cf8",
+          "projected_overlap_mm2": 0.02317606252407545,
+          "centerline_overlap_length_mm": 0.0
+        },
+        {
+          "net": "/VBAT",
+          "kind": "PCB_TRACK",
+          "ref": null,
+          "pin": null,
+          "uuid": "2e54ce89-29fe-5584-b444-aeaa2a347d35",
+          "projected_overlap_mm2": 0.007743150589388024,
+          "centerline_overlap_length_mm": 0.0
+        },
+        {
+          "net": "/VBAT",
+          "kind": "PCB_TRACK",
+          "ref": null,
+          "pin": null,
+          "uuid": "30fb0dd5-baef-5ffa-87bb-4dea513d04d0",
+          "projected_overlap_mm2": 0.017658945242611388,
+          "centerline_overlap_length_mm": 0.0
+        },
+        {
+          "net": "/VBAT",
+          "kind": "PCB_TRACK",
+          "ref": null,
+          "pin": null,
+          "uuid": "56644210-8cb3-5d2b-aede-5391b0f6a62a",
+          "projected_overlap_mm2": 0.01977709583199997,
+          "centerline_overlap_length_mm": 0.0
+        },
+        {
+          "net": "/VBAT",
+          "kind": "PCB_TRACK",
+          "ref": null,
+          "pin": null,
+          "uuid": "92d8c52b-0931-56da-b2e8-afcfb11ba22b",
+          "projected_overlap_mm2": 0.035201047915999636,
+          "centerline_overlap_length_mm": 0.0
+        },
+        {
+          "net": "/VBAT",
+          "kind": "PCB_TRACK",
+          "ref": null,
+          "pin": null,
+          "uuid": "9f625e67-ae0b-557b-be9f-9c65709b4f69",
+          "projected_overlap_mm2": 0.00533272612037734,
+          "centerline_overlap_length_mm": 0.0
+        },
+        {
+          "net": "/VBAT",
+          "kind": "PCB_TRACK",
+          "ref": null,
+          "pin": null,
+          "uuid": "a914aa81-484f-5cc0-95c1-d95341e7e5c2",
+          "projected_overlap_mm2": 0.0460741918495001,
+          "centerline_overlap_length_mm": 0.0
+        },
+        {
+          "net": "/VBAT",
+          "kind": "PCB_TRACK",
+          "ref": null,
+          "pin": null,
+          "uuid": "bab1eeff-38ea-5c9e-8be5-030286ffe6f2",
+          "projected_overlap_mm2": 0.0479020958319997,
+          "centerline_overlap_length_mm": 0.0
+        },
+        {
+          "net": "/VBAT",
+          "kind": "PCB_TRACK",
+          "ref": null,
+          "pin": null,
+          "uuid": "c0d3824d-8348-5420-9c1a-4d465910bbd0",
+          "projected_overlap_mm2": 0.01977709583199997,
+          "centerline_overlap_length_mm": 0.0
+        },
+        {
+          "net": "/VBAT",
+          "kind": "PCB_TRACK",
+          "ref": null,
+          "pin": null,
+          "uuid": "cbf87e11-5f35-571f-98d8-07187465eaee",
+          "projected_overlap_mm2": 0.014254394146229402,
+          "centerline_overlap_length_mm": 0.0
+        },
+        {
+          "net": "/VBAT",
+          "kind": "PCB_TRACK",
+          "ref": null,
+          "pin": null,
+          "uuid": "d62e86f5-792e-58d5-a169-0ff9d87c4561",
+          "projected_overlap_mm2": 0.04040209583200128,
+          "centerline_overlap_length_mm": 0.0
+        },
+        {
+          "net": "/VBAT",
+          "kind": "PCB_TRACK",
+          "ref": null,
+          "pin": null,
+          "uuid": "d9cda284-c5a9-5e80-84b6-add80e3d0623",
+          "projected_overlap_mm2": 0.09520104791599973,
+          "centerline_overlap_length_mm": 0.14999999999999858
+        },
+        {
+          "net": "/VBAT",
+          "kind": "PCB_TRACK",
+          "ref": null,
+          "pin": null,
+          "uuid": "dfdcc5a1-a9c1-597d-aa31-5103a97eeceb",
+          "projected_overlap_mm2": 0.04607417075199949,
+          "centerline_overlap_length_mm": 0.0
+        },
+        {
+          "net": "/VBAT",
+          "kind": "PCB_TRACK",
+          "ref": null,
+          "pin": null,
+          "uuid": "e463afd0-b511-528f-bbc9-d08a6f44f50c",
+          "projected_overlap_mm2": 0.01977709583199997,
+          "centerline_overlap_length_mm": 0.0
+        },
+        {
+          "net": "/VBAT",
+          "kind": "PCB_TRACK",
+          "ref": null,
+          "pin": null,
+          "uuid": "efbcee0e-99fe-5267-8f05-0542ce1a114d",
+          "projected_overlap_mm2": 0.02850876260149966,
+          "centerline_overlap_length_mm": 0.0
+        },
+        {
+          "net": "/VBAT",
+          "kind": "PCB_TRACK",
+          "ref": null,
+          "pin": null,
+          "uuid": "efc084a0-5523-5b33-8bfa-c9781ee34996",
+          "projected_overlap_mm2": 0.11336153008599845,
+          "centerline_overlap_length_mm": 0.21213199999999688
+        },
+        {
+          "net": "/SC_BAL_OUT",
+          "kind": "PCB_TRACK",
+          "ref": null,
+          "pin": null,
+          "uuid": "049f1ec2-6d90-583e-80e0-1dbad83ea012",
+          "projected_overlap_mm2": 0.07789397075199928,
+          "centerline_overlap_length_mm": 0.11213200000000256
+        },
+        {
+          "net": "/SC_BAL_OUT",
+          "kind": "PCB_TRACK",
+          "ref": null,
+          "pin": null,
+          "uuid": "4bb66fb7-8480-5071-80f9-c4d8ee812d09",
+          "projected_overlap_mm2": 0.019777095832000286,
+          "centerline_overlap_length_mm": 0.13724530968567594
+        },
+        {
+          "net": "/SC_BAL_OUT",
+          "kind": "PCB_TRACK",
+          "ref": null,
+          "pin": null,
+          "uuid": "5840af72-87f5-5279-99cb-0f1d26a98d06",
+          "projected_overlap_mm2": 0.025402095832000097,
+          "centerline_overlap_length_mm": 0.13724530968567594
+        },
+        {
+          "net": "/SC_BAL_OUT",
+          "kind": "PCB_TRACK",
+          "ref": null,
+          "pin": null,
+          "uuid": "bb6406a3-d2c4-5483-adaf-42b53c04f6f3",
+          "projected_overlap_mm2": 0.07270104791600249,
+          "centerline_overlap_length_mm": 0.15000000000000568
+        },
+        {
+          "net": "/SC_BAL_OUT",
+          "kind": "PCB_TRACK",
+          "ref": null,
+          "pin": null,
+          "uuid": "bc847b07-195f-5856-9f28-c2adcc83291e",
+          "projected_overlap_mm2": 0.12032039184949767,
+          "centerline_overlap_length_mm": 0.31418236966813506
+        },
+        {
+          "net": "/SC_HALF_REF",
+          "kind": "PCB_TRACK",
+          "ref": null,
+          "pin": null,
+          "uuid": "222fab50-b697-51b9-85bc-5159a2a7bc54",
+          "projected_overlap_mm2": 0.019402095832000622,
+          "centerline_overlap_length_mm": 0.0
+        },
+        {
+          "net": "/SC_HALF_REF",
+          "kind": "PCB_TRACK",
+          "ref": null,
+          "pin": null,
+          "uuid": "37ceaf24-32ac-575c-ab4d-98efd93e8024",
+          "projected_overlap_mm2": 0.025402095832000437,
+          "centerline_overlap_length_mm": 0.0
+        },
+        {
+          "net": "/SC_HALF_REF",
+          "kind": "PCB_TRACK",
+          "ref": null,
+          "pin": null,
+          "uuid": "387d335b-5ac3-5823-864a-c856d7e746cf",
+          "projected_overlap_mm2": 0.02850876260150029,
+          "centerline_overlap_length_mm": 0.0
+        },
+        {
+          "net": "/SC_HALF_REF",
+          "kind": "PCB_TRACK",
+          "ref": null,
+          "pin": null,
+          "uuid": "3f38c618-f0cf-588e-8898-89bc9c746923",
+          "projected_overlap_mm2": 0.025402095832000097,
+          "centerline_overlap_length_mm": 0.0
+        },
+        {
+          "net": "/SC_HALF_REF",
+          "kind": "PCB_TRACK",
+          "ref": null,
+          "pin": null,
+          "uuid": "49ce989a-71a5-5df7-acd9-f7960ad76b42",
+          "projected_overlap_mm2": 0.025402095831999375,
+          "centerline_overlap_length_mm": 0.0
+        },
+        {
+          "net": "/SC_HALF_REF",
+          "kind": "PCB_TRACK",
+          "ref": null,
+          "pin": null,
+          "uuid": "5b5db6b4-01e0-53c9-b36b-5114faf77456",
+          "projected_overlap_mm2": 0.028508762601499996,
+          "centerline_overlap_length_mm": 0.1810660000000084
+        },
+        {
+          "net": "/SC_HALF_REF",
+          "kind": "PCB_TRACK",
+          "ref": null,
+          "pin": null,
+          "uuid": "61901f1d-2440-596c-9d97-7fc233cbe62d",
+          "projected_overlap_mm2": 0.025402095831999785,
+          "centerline_overlap_length_mm": 0.20000000000000284
+        },
+        {
+          "net": "/SC_HALF_REF",
+          "kind": "PCB_TRACK",
+          "ref": null,
+          "pin": null,
+          "uuid": "6d2df767-2b75-5949-87d6-a897f4579522",
+          "projected_overlap_mm2": 0.028508762601499513,
+          "centerline_overlap_length_mm": 0.0
+        },
+        {
+          "net": "/SC_HALF_REF",
+          "kind": "PCB_TRACK",
+          "ref": null,
+          "pin": null,
+          "uuid": "9d7ebe9a-f231-5cfc-a38f-2ecd1778a91f",
+          "projected_overlap_mm2": 0.025402095832000104,
+          "centerline_overlap_length_mm": 0.16213200000000683
+        },
+        {
+          "net": "/SC_HALF_REF",
+          "kind": "PCB_TRACK",
+          "ref": null,
+          "pin": null,
+          "uuid": "9f4f4ea5-1657-589a-a7d8-4822ad2bf0db",
+          "projected_overlap_mm2": 0.028508762601500773,
+          "centerline_overlap_length_mm": 0.11213200000000967
+        },
+        {
+          "net": "/SC_HALF_REF",
+          "kind": "PCB_TRACK",
+          "ref": null,
+          "pin": null,
+          "uuid": "ef89485f-b290-541c-95de-2850ca4adb13",
+          "projected_overlap_mm2": 0.08827229305758973,
+          "centerline_overlap_length_mm": 0.18106599999999418
+        }
+      ]
+    }
+  },
+  "existing_gnd_vias_interfering_with_west_screen": [
+    {
+      "kind": "PCB_VIA",
+      "uuid": "12a5d360-3138-494f-90e5-356849e7db4e",
+      "net": "GND",
+      "layer": "F.Cu",
+      "polygons": [
+        {
+          "shell": [
+            [
+              58.925,
+              41.678453
+            ],
+            [
+              58.913472,
+              41.620493
+            ],
+            [
+              58.890857,
+              41.565897
+            ],
+            [
+              58.858026,
+              41.516761
+            ],
+            [
+              58.816239,
+              41.474974
+            ],
+            [
+              58.767103,
+              41.442143
+            ],
+            [
+              58.712507,
+              41.419528
+            ],
+            [
+              58.654547,
+              41.408
+            ],
+            [
+              58.595453,
+              41.408
+            ],
+            [
+              58.537493,
+              41.419528
+            ],
+            [
+              58.482897,
+              41.442143
+            ],
+            [
+              58.433761,
+              41.474974
+            ],
+            [
+              58.391974,
+              41.516761
+            ],
+            [
+              58.359143,
+              41.565897
+            ],
+            [
+              58.336528,
+              41.620493
+            ],
+            [
+              58.325,
+              41.678453
+            ],
+            [
+              58.325,
+              41.737547
+            ],
+            [
+              58.336528,
+              41.795507
+            ],
+            [
+              58.359143,
+              41.850103
+            ],
+            [
+              58.391974,
+              41.899239
+            ],
+            [
+              58.433761,
+              41.941026
+            ],
+            [
+              58.482897,
+              41.973857
+            ],
+            [
+              58.537493,
+              41.996472
+            ],
+            [
+              58.595453,
+              42.008
+            ],
+            [
+              58.654547,
+              42.008
+            ],
+            [
+              58.712507,
+              41.996472
+            ],
+            [
+              58.767103,
+              41.973857
+            ],
+            [
+              58.816239,
+              41.941026
+            ],
+            [
+              58.858026,
+              41.899239
+            ],
+            [
+              58.890857,
+              41.850103
+            ],
+            [
+              58.913472,
+              41.795507
+            ],
+            [
+              58.925,
+              41.737547
+            ],
+            [
+              58.925,
+              41.678453
+            ]
+          ],
+          "holes": []
+        }
+      ],
+      "start": [
+        58.625,
+        41.708
+      ],
+      "end": [
+        58.625,
+        41.708
+      ],
+      "width": 0.6,
+      "drill": 0.3
+    },
+    {
+      "kind": "PCB_VIA",
+      "uuid": "de4a166e-d8f9-4212-bf08-3b1693e3c8b7",
+      "net": "GND",
+      "layer": "F.Cu",
+      "polygons": [
+        {
+          "shell": [
+            [
+              57.932,
+              40.650453
+            ],
+            [
+              57.920472,
+              40.592493
+            ],
+            [
+              57.897857,
+              40.537897
+            ],
+            [
+              57.865026,
+              40.488761
+            ],
+            [
+              57.823239,
+              40.446974
+            ],
+            [
+              57.774103,
+              40.414143
+            ],
+            [
+              57.719507,
+              40.391528
+            ],
+            [
+              57.661547,
+              40.38
+            ],
+            [
+              57.602453,
+              40.38
+            ],
+            [
+              57.544493,
+              40.391528
+            ],
+            [
+              57.489897,
+              40.414143
+            ],
+            [
+              57.440761,
+              40.446974
+            ],
+            [
+              57.398974,
+              40.488761
+            ],
+            [
+              57.366143,
+              40.537897
+            ],
+            [
+              57.343528,
+              40.592493
+            ],
+            [
+              57.332,
+              40.650453
+            ],
+            [
+              57.332,
+              40.709547
+            ],
+            [
+              57.343528,
+              40.767507
+            ],
+            [
+              57.366143,
+              40.822103
+            ],
+            [
+              57.398974,
+              40.871239
+            ],
+            [
+              57.440761,
+              40.913026
+            ],
+            [
+              57.489897,
+              40.945857
+            ],
+            [
+              57.544493,
+              40.968472
+            ],
+            [
+              57.602453,
+              40.98
+            ],
+            [
+              57.661547,
+              40.98
+            ],
+            [
+              57.719507,
+              40.968472
+            ],
+            [
+              57.774103,
+              40.945857
+            ],
+            [
+              57.823239,
+              40.913026
+            ],
+            [
+              57.865026,
+              40.871239
+            ],
+            [
+              57.897857,
+              40.822103
+            ],
+            [
+              57.920472,
+              40.767507
+            ],
+            [
+              57.932,
+              40.709547
+            ],
+            [
+              57.932,
+              40.650453
+            ]
+          ],
+          "holes": []
+        }
+      ],
+      "start": [
+        57.632,
+        40.68
+      ],
+      "end": [
+        57.632,
+        40.68
+      ],
+      "width": 0.6,
+      "drill": 0.3
+    }
+  ]
+}

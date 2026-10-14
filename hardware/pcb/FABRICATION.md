@@ -1,6 +1,6 @@
 # v1.1 pilot fabrication and assembly intent
 
-Final promotion/review: **promoted to the canonical hardware folder / native and independent electrical/geometry checks passed; factory CAM and physical qualification pending**. Planned quantity is **five PCBs, three assembled**. Final JLC selection: **57/57 pilot designators selected with exact MPN/LCSC matches**. Cart status/link: **saved and verified in JLC cart; unpaid / [JLC cart](https://cart.jlcpcb.com/shopcart/cart)**. A reviewed cart draft is authorized; checkout/payment is not.
+Current status, 14 October 2026: **hold fabrication pending the GNSS layout review**. The [peer review](../../analysis/v1_1_peer_review_20261014/README.md) confirmed a feed crossing over LBOOST and incomplete RF ground reference. The saved [JLC Y24 cart](https://cart.jlcpcb.com/shopcart/cart) contains the earlier revision. Its selection and preview records below are historical; a source change needs matching exports and renewed supplier review. Planned quantity remains **five PCBs, three assembled**. A reviewed cart draft is authorized; checkout/payment is not.
 
 ## Board construction and finish
 

@@ -1,6 +1,6 @@
 # Stratolink hardware — v1.1 pilot
 
-Canonical status: **promoted to the canonical hardware folder**. Final native/independent review: **native and independent electrical/geometry checks passed; factory CAM and physical qualification pending**. JLC cart status: **saved and verified in JLC cart; unpaid**. Payment is not authorized.
+Current status, 14 October 2026: **hold fabrication pending the GNSS layout review**. The peer review confirmed that the GNSS feed crosses the converter's LBOOST trace and lacks a continuous ground reference. The saved JLC Y24 cart contains the earlier revision and has not been updated. See the [peer review and copper cleanup](../../analysis/v1_1_peer_review_20261014/README.md). Earlier native checks below remain evidence for their stated hashes, not RF qualification. Payment is not authorized.
 
 Open [stratolink.kicad_pro](stratolink.kicad_pro) in KiCad 10. The canonical project lives in `hardware/pcb` on `alpha/hardware-v1.1`; Git retains the flown v1. Keep `lib/`, `3d/`, `sym-lib-table` and `fp-lib-table` together. Board-specific footprints preserve reviewed local geometry; avoid blanket stock-library replacement.
 
@@ -41,6 +41,8 @@ R1 is **7.50 MΩ FRC0402F7504TS C3013187**, with R2 at 4.22 MΩ, giving a nomina
 The [power review](../../analysis/v1_1_release_20261012/power/README.md) records tolerance assumptions and startup/stability limits. Charge plateau, individual cell voltages, cold behavior, leakage and balancing stability require measurement. **Panel cold Voc/current and BQ25570 input-voltage/input-power bounds remain unresolved.** Neither the panel label nor existing telemetry establishes those operating limits. C5 is hand-fitted after reflow and cleaning, following its secondary soldering process.
 
 ## Rules, evidence and supplier state
+
+The [digital review](../../analysis/v1_1_peer_review_20261014/digital/README.md) confirms the standard RAK3172 SWD mapping and explains the J4 UART taps. Use a receive-only adapter for passive UART observation; an adapter transmitter can contend with the GPS transmitter. R9 straps BOOT0 to ground. Keep the 4.7 kΩ I²C pull-ups pending a measured 300 ns rise-time check. The [power review](../../analysis/v1_1_peer_review_20261014/power/README.md) supports retaining C8/C21 and identifies GNSS bypass placement and bead resistance for follow-up.
 
 Rules use a **0.10 mm copper process floor, 0.15 mm general clearance target and 0.20 mm ordinary routed-edge minimum**, with named fine-pitch/contact constraints. Clearance, edge, annular and solder-mask checks are enabled. The mask screen targets a 0.10 mm minimum web and 0.09 mm opening-to-foreign-copper clearance; supplied apertures require supplier confirmation. The obsolete LTR390/U7 corridor rule is removed with the old U6 geometry. The intended ERC exclusions are now **two**: U5 grounded ALERT and U7 SA0; old U6 grounded INT is gone and AS7331 READY is explicitly NC. All native silkscreen artwork is removed. Solar polarity symbols are copper features with matching mask openings.
 

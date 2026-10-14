@@ -1,0 +1,1034 @@
+                                                                               
+MAX-M10S
+Standard precision GNSS module
+Professional grade
+Data sheet
+
+
+
+
+Abstract
+This data sheet describes the MAX-M10S module, an ultra-low-power GNSS receiver for high-
+performance asset-tracking applications.
+
+
+
+
+UBX-20035208 - R08
+C1-Public                                                                   www.u-blox.com
+                                                                                                    MAX-M10S - Data sheet
+
+
+
+
+Document information
+ Title                                          MAX-M10S
+ Subtitle                                       Standard precision GNSS module
+ Document type                                  Data sheet
+ Document number                                UBX-20035208
+ Revision and date                              R08                                                      30-Jan-2026
+ Disclosure restriction                         C1-Public
+
+
+ Product status        Corresponding content status
+ Functional sample     Draft                               For functional testing. Revised and supplementary data will be published
+                                                           later.
+
+ In development /      Objective speciﬁcation              Target values. Revised and supplementary data will be published later.
+ prototype
+
+ Engineering sample    Advance information                 Data based on early testing. Revised and supplementary data will be
+                                                           published later.
+
+ Initial production    Early production information        Data from product veriﬁcation. Revised and supplementary data may be
+                                                           published later.
+
+ Mass production /     Production information              Document contains the ﬁnal product speciﬁcation.
+ Not recommended
+ for new designs* /
+ End of life
+
+* In the not recommended for new designs (NRND) status, the product is still in production, but it is not recommended for
+  new designs. For the latest product statuses, see the product website or contact u-blox.
+
+
+This document applies to the following products:
+
+ Product name          Type number                     FW version              IN/PCN reference            Product status
+ MAX-M10S              MAX-M10S-00B-01                 ROM SPG 5.10            UBXDOC-963802114-           Mass production
+                                                                               12186
+
+ MAX-M10S              MAX-M10S-00B1-01                ROM SPG 5.10            UBXDOC-304424225-           Initial production
+                                                                               20651
+
+
+
+
+u-blox or third parties may hold intellectual property rights in the products, names, logos and designs included in this
+document. Copying, reproduction, or modiﬁcation of this document or any part thereof is only permitted with the express
+written permission of u-blox. Disclosure to third parties is permitted for clearly public documents only.
+The information contained herein is provided "as is" and u-blox assumes no liability for its use. No warranty, either express
+or implied, is given, including but not limited to, with respect to the accuracy, correctness, reliability and ﬁtness for a
+particular purpose of the information. This document may be revised by u-blox at any time without notice. For the most recent
+documents and product statuses, visit www.u-blox.com.
+Copyright © 2026, u-blox AG.
+
+
+
+
+UBX-20035208 - R08                                    Document information                                               Page 2 of 24
+C1-Public
+                                                                                                                               MAX-M10S - Data sheet
+
+
+
+
+Contents
+Document information............................................................................................................ 2
+Contents.......................................................................................................................................3
+1 Functional description......................................................................................................... 4
+    1.1 Overview.................................................................................................................................................... 4
+    1.2 Performance............................................................................................................................................. 4
+    1.3 Supported GNSS constellations.......................................................................................................... 5
+    1.4 Supported protocols............................................................................................................................... 6
+    1.5 Firmware features................................................................................................................................... 6
+2 Block diagram......................................................................................................................... 8
+3 Pin deﬁnition........................................................................................................................... 9
+    3.1 Pin assignment........................................................................................................................................ 9
+    3.2 Pin state..................................................................................................................................................10
+4 Electrical speciﬁcations.................................................................................................... 11
+    4.1 Absolute maximum ratings................................................................................................................ 11
+    4.2 Operating conditions............................................................................................................................11
+    4.3 Indicative power requirements...........................................................................................................12
+5 Communication interfaces...............................................................................................14
+    5.1 UART........................................................................................................................................................14
+    5.2 I2C............................................................................................................................................................ 14
+    5.3 Default interface settings...................................................................................................................16
+6 Mechanical speciﬁcations................................................................................................ 17
+7 Qualiﬁcations and approvals........................................................................................... 18
+8 Product handling................................................................................................................. 19
+    8.1 Packaging............................................................................................................................................... 19
+       8.1.1 Reels................................................................................................................................................19
+       8.1.2 Tapes...............................................................................................................................................19
+    8.2 Soldering................................................................................................................................................. 19
+9 Product marking and ordering information................................................................ 20
+    9.1 Product marking....................................................................................................................................20
+    9.2 Product identiﬁers................................................................................................................................ 20
+    9.3 Ordering codes...................................................................................................................................... 21
+Related documents................................................................................................................ 22
+Revision history....................................................................................................................... 23
+Contact.......................................................................................................................................24
+
+
+
+
+UBX-20035208 - R08                                                           Contents                                                                   Page 3 of 24
+C1-Public
+                                                                                              MAX-M10S - Data sheet
+
+
+
+
+1 Functional description
+1.1 Overview
+MAX-M10S module features the u-blox M10 standard precision GNSS platform and provides
+exceptional sensitivity and acquisition time for all L1 GNSS signals.
+The M10 platform supports concurrent reception of four GNSSs (GPS, GLONASS, Galileo, and
+BeiDou). The high number of visible satellites enables the receiver to select the best signals. This
+maximizes the position availability, in particular under challenging conditions such as in deep urban
+canyons.
+u-blox Super-Signal (Super-S) technology oﬀers great RF sensitivity and can improve the dynamic
+position accuracy with small antennas or in non-line-of-sight scenarios.
+The extremely low power consumption of 25 mW in continuous tracking mode allows great power
+autonomy for all battery-operated devices, such as asset trackers, without compromising on GNSS
+performance.
+For maximum sensitivity in passive antenna designs, MAX-M10S integrates an LNA followed by a
+SAW ﬁlter in the RF path.
+MAX-M10S oﬀers backwards pin-to-pin compatibility with products from the previous u-blox
+generations, which saves the designer's eﬀort and reduces costs when upgrading designs to the
+advanced low-power u-blox M10 GNSS technology.
+
+1.2 Performance
+Parameter                                      Speciﬁcation                        Value
+Receiver type                                                                      u-blox M10 receiver
+Accuracy of time pulse signal                  RMS                                 30 ns
+                                               99%                                 60 ns
+Frequency of time pulse signal                                                     Default 1PPS (0.25 Hz to 10 MHz
+                                                                                   conﬁgurable)
+
+Operational limits1                            Dynamics                            ≤4g
+
+                                               Altitude                            80,000 m
+                                               Velocity                            500 m/s
+
+Velocity accuracy   2                                                              0.05 m/s
+
+Dynamic heading accuracy 2                                                         0.3 deg
+
+Table 1: MAX-M10S speciﬁcations
+
+                                                                                 GPS+GAL                   GPS+GAL
+                                                                    GPS+GAL                    GPS+GAL
+Parameter                                                 GPS+GAL                +BDS B1I                  +BDS B1C
+                                                                    +GLO                       +BDS B1C
+                                                                                 (default)                 +GLO
+Max navigation          Default                           10 Hz     6 Hz         3 Hz          8 Hz        4 Hz
+update rate 3                              4              20 Hz     16 Hz        12 Hz         16 Hz       10 Hz
+                        High performance
+
+
+
+1   Assuming Airborne 4 g platform.
+2   50% at 30 m/s for dynamic operation.
+3   Minimum 98% ﬁx rate under typical conditions.
+4   Conﬁguration required.
+
+
+
+UBX-20035208 - R08                                    1 Functional description                               Page 4 of 24
+C1-Public
+                                                                                               MAX-M10S - Data sheet
+
+
+
+
+                                                                                   GPS+GAL                 GPS+GAL
+                                                                  GPS+GAL                       GPS+GAL
+ Parameter                                         GPS+GAL                         +BDS B1I                +BDS B1C
+                                                                  +GLO                          +BDS B1C
+                                                                                   (default)               +GLO
+                            5, 6                   1.5 m          1.5 m            1.5 m        1.5 m      1.5 m
+ Position accuracy (CEP)
+ Time To First Fix     Cold start                  28 s           23 s             27 s         28 s       23 s
+ (TTFF) 5, 7, 8        Hot start                   1s             1s               1s           1s         1s
+
+                       AssistNow Online   9        1s             1s               1s           1s         1s
+
+                       AssistNow Oﬄine 10          2s             2s               3s           2s         2s
+
+                       AssistNow Autonomous 11 3 s                4s               4s           4s         4s
+
+ Sensitivity
+               12      Tracking and navigation     –167 dBm       –167 dBm         –167 dBm     –167 dBm   –167 dBm
+                       Reacquisition               –160 dBm       –160 dBm         –160 dBm     –160 dBm   –160 dBm
+                       Cold Start                  –148 dBm       –148 dBm         –148 dBm     –148 dBm   –148 dBm
+
+                       Hot start   7               –159 dBm       –159 dBm         –159 dBm     –159 dBm   –159 dBm
+
+ Table 2: MAX-M10S typical performance in multi-constellation GNSS modes.
+
+ Parameter                                         GPS            GLONASS          BDS B1I      GALILEO    BDS B1C
+ Max navigation        Default                     18 Hz          18 Hz            18 Hz        18 Hz      18 Hz
+ update rate 3                                     25 Hz          25 Hz            25 Hz        25 Hz      25 Hz
+                       High performance 4
+                           5, 6                    1.5 m          4m               2m           3m         2m
+ Position accuracy (CEP)
+ Time To First Fix     Cold start                  29 s           27 s             30 s         41 s       56 s
+ (TTFF) 5, 7, 8        Hot start                   1s             1s               1s           1s         1s
+
+                       AssistNow Online   9        1s             1s               1s           5s         N/A
+
+ Sensitivity
+               12      Tracking and navigation     –167 dBm       –166 dBm         –160 dBm     –161 dBm   –163 dBm
+                       Reacquisition               –160 dBm       –158 dBm         –158 dBm     –154 dBm   –156 dBm
+                       Cold Start                  –148 dBm       –147 dBm         –146 dBm     –141 dBm   –136 dBm
+
+                       Hot start 7                 –159 dBm       –159 dBm         –159 dBm     –155 dBm   –157 dBm
+
+ Table 3: MAX-M10S typical performance in single-GNSS modes
+
+
+ 1.3 Supported GNSS constellations
+ MAX-M10S is a concurrent GNSS receiver that can receive and track multiple GNSS systems.
+ To achieve lower power consumption, the receiver can be conﬁgured for a subset of GNSS
+ constellations.
+ The default conﬁguration on MAX-M10S is concurrent reception of GPS, Galileo, and BeiDou B1I with
+ QZSS and SBAS enabled.
+ The following GNSS and their signals are supported:
+
+
+
+
+5    GPS is always in combination with SBAS and QZSS.
+6    CEP, 50%, 24 hours static, –130 dBm, > 6 SVs for each GNSS system.
+7    Commanded starts.
+8    All satellites at –130 dBm. Measured at room temperature.
+9    Dependent on the speed and latency of the aiding data connection, commanded starts.
+10   Using seven days old AssistNow Oﬄine data. External memory may be required.
+11   Using two days old orbital predicted data. External memory may be required.
+12   Demonstrated with a good external LNA. Measured at room temperature.
+
+
+
+ UBX-20035208 - R08                                1 Functional description                                 Page 5 of 24
+ C1-Public
+                                                                                             MAX-M10S - Data sheet
+
+
+
+
+ System                                                   Signals
+
+ GPS / QZSS                                               L1C/A (1575.42 MHz)
+
+ Galileo                                                  E1-B/C (1575.42 MHz)
+
+ GLONASS                                                  L1OF (1602 MHz + k*562.5 kHz, k = -7,..., 5, 6)
+
+ BeiDou13                                                 B1I (1561.098 MHz), B1C (1575.42 MHz)
+
+ Table 4: Supported GNSS and signals on MAX-M10S
+
+ The following GNSS assistance services are supported:
+ Service                                                  Support
+
+ AssistNow Live Orbits                                    GPS L1C/A, Galileo E1, QZSS L1C/A, GLONASS L1OF, BeiDou B1I
+
+ AssistNow Predictive Orbits                              GPS L1C/A, Galileo E1 , GLONASS L1OF
+
+ AssistNow Autonomous                                     GPS L1C/A, Galileo E1, GLONASS L1OF, QZSS L1C/A, BeiDou B1I
+
+ Table 5: Supported Assisted GNSS (A-GNSS) services
+
+ The following augmentation systems are supported:
+ System                                                   Support
+
+ SBAS                                                     EGNOS, GAGAN, MSAS, WAAS, KASS, and SouthPAN
+
+ QZSS                                                     L1S (SLAS)
+
+ Table 6: Supported augmentation systems
+
+       The SBAS and QZSS augmentation systems can be enabled only if GPS operation is also
+       enabled.
+
+ 1.4 Supported protocols
+ MAX-M10S supports the following interface protocols:
+ Protocol                                                 Type
+ UBX                                                      Input/output, binary, u-blox proprietary
+ NMEA versions 2.1, 2.3, 4.0, 4.10 and 4.11 (default)     Input/output, ASCII
+ Table 7: Supported protocols
+
+
+ 1.5 Firmware features
+ Feature                             Description
+
+ Antenna supervisor  14              Antenna supervisor for active antenna control and short detection
+
+ CloudLocate GNSS                    Extends the life of energy-constrained IoT applications. Small payload messages
+                                     supported.
+ Assisted GNSS                       AssistNow Live Orbits, AssistNow Predictive Orbits, and AssistNow Autonomous
+ Backup modes                        Hardware backup mode and software standby mode
+ Power save modes                    On/oﬀ, cyclic tracking
+ Super-S                             Improved accuracy with small antennas
+ Galileo return link messages        Galileo search and rescue (SAR) return link messages (RLM) via Galileo satellite signal
+
+
+13   BeiDou B1I cannot be enabled simultaneously with BeiDou B1C or GLONASS L1OF.
+14   External components required, some pins need to be reconﬁgured.
+
+
+
+ UBX-20035208 - R08                                1 Functional description                                     Page 6 of 24
+ C1-Public
+                                                                                   MAX-M10S - Data sheet
+
+
+
+
+Feature                      Description
+Data batching                Stores position/velocity/time information over up to 10 min in RAM without host
+                             interaction
+Odometer                     Measures traveled distance with support for diﬀerent user proﬁles
+Table 8: Firmware features
+
+Feature                      Description
+Anti-jamming                 RF interference and jamming detection and reporting
+Anti-spooﬁng                 Spooﬁng detection and reporting
+Conﬁguration lockdown        Receiver conﬁguration can be locked by command
+Message integrity            All messages can be cryptographically signed
+Secure boot                  Only signed ﬁrmware images are executed
+Table 9: Security features
+
+
+
+
+UBX-20035208 - R08                         1 Functional description                                  Page 7 of 24
+C1-Public
+                                                     MAX-M10S - Data sheet
+
+
+
+
+2 Block diagram
+
+
+
+
+Figure 1: MAX-M10S block diagram
+
+
+
+
+UBX-20035208 - R08                 2 Block diagram               Page 8 of 24
+C1-Public
+                                                                                                 MAX-M10S - Data sheet
+
+
+
+
+ 3 Pin deﬁnition
+ 3.1 Pin assignment
+
+
+
+
+ Figure 2: MAX-M10S pin assignment
+
+ Pin no.     Name              PIO no.    I/O      Description
+ 1           GND               -          -        Connect to GND
+ 2           TXD               1          O        UART TX. Leave open if not used.
+ 3           RXD               0          I        UART RX. Leave open if not used.
+ 4           TIMEPULSE         4          O        Time pulse signal (shared with SAFEBOOT_N pin)15
+ 5           EXTINT            5          I        External interrupt. Leave open if not used.
+ 6           V_BCKP            -          I        Backup voltage supply
+ 7           V_IO              -          I        IO voltage supply
+ 8           VCC               -          I        Main voltage supply
+ 9           RESET_N           -          I        System reset (active low). Has to be low for at least 1 ms to trigger a reset.
+ 10          GND               -          -        Connect to GND
+ 11          RF_IN             -          I        GNSS signal input
+ 12          GND               -          -        Connect to GND
+ 13          LNA_EN            -          O        On/Oﬀ external LNA or active antenna
+ 14          VCC_RF            -          O        Output voltage RF section
+ 15          VIO_SEL           -          I        Voltage selector for V_IO supply. Connect to GND for 1.8 V supply, or leave
+                                                   open for 3.3 V supply.
+ 16          SDA               2          I/O      I2C data. Leave open if not used
+ 17          SCL               3          I        I2C clock. Leave open if not used.
+ 18          SAFEBOOT_N        -          I        Safeboot mode (active low). Leave open if not used.15
+ Table 10: MAX-M10S pin assignment
+
+
+
+15   The receiver enters safeboot mode if this pin is low at start up. The SAFEBOOT_N pin is internally connected to
+     TIMEPULSE pin through a 1 kΩ series resistor.
+
+
+
+ UBX-20035208 - R08                                     3 Pin deﬁnition                                             Page 9 of 24
+ C1-Public
+                                                                                      MAX-M10S - Data sheet
+
+
+
+
+3.2 Pin state
+Table 11 deﬁnes the state of the PIOs and RESET_N pins in diﬀerent modes. The functions of the
+PIOs are as deﬁned in the default conﬁguration.
+PIO no. Pin no.     Default function     Continuous mode            Software standby mode Safe boot mode
+0           3       RXD                  Input pull-up              Input pull-up         Input pull-up
+1           2       TXD                  Output                     Input pull-up         Output
+2           16      SDA                  Input pull-up              Input pull-up         Input pull-up
+3           17      SCL                  Input pull-up              Input pull-up         Input pull-up
+            18      SAFEBOOT_N           Output                     Input pull-up         Output (low)
+    15
+4
+            4       TIMEPULSE            Output                     Input pull-up         Output (low)
+5           5       EXTINT               Input pull-up              Input pull-up         Input pull-up
+7           13      LNA_EN               Output (high)              Input pull-down       Input pull-up
+-           9       RESET_N              Input pull-up              Input pull-up         Input pull-up
+Table 11: Pin state
+
+         In reset mode (RESET_N = low), all PIOs are conﬁgured as input pull-up.
+         In hardware backup mode (VCC = 0 V and V_IO = 0 V), PIOs must not be driven.
+
+
+
+
+UBX-20035208 - R08                                3 Pin deﬁnition                                     Page 10 of 24
+C1-Public
+                                                                                                      MAX-M10S - Data sheet
+
+
+
+
+ 4 Electrical speciﬁcations
+ 4.1 Absolute maximum ratings
+        CAUTION. Risk of device damage. Exceeding the absolute maximum ratings may aﬀect the
+        lifetime and reliability of the device or permanently damage it. Do not exceed the absolute
+        maximum ratings.
+        This product is not protected against overvoltage or reversed voltages. Use appropriate
+        protection to avoid device damage from voltage spikes exceeding the speciﬁed boundaries.
+ Symbol                Parameter                                                          Min               Max             Unit
+ VCC                   Main supply voltage                                                –0.3              3.6             V
+ V_IO                  IO supply voltage, VIO_SEL = GND                                   –0.3              VCC + 0.3       V
+                                                                                                            (max 1.98)
+                       IO supply voltage, VIO_SEL = open                                  –0.3              VCC + 0.3       V
+                                                                                                            (max 3.6)
+
+                       Voltage ramp on V_IO 16                                            25                35000           µs/V
+
+ V_BCKP                Backup supply voltage                                              –0.3              3.6             V
+ V_PIO                 Input voltage on RESET_N and digital pins                          –0.3              V_IO + 0.3      V
+                       VIO_SEL = GND                                                                        (max 1.98)
+
+                       Input voltage on RESET_N and digital pins                          –0.3              V_IO + 0.3      V
+                       VIO_SEL = open                                                                       (max 3.6)
+
+ I_PIO                 Max source / sink current, digital pins 17                         –10               10              mA
+
+ ICC_RF                Max source current, VCC_RF                                                           250             mA
+ V_DCrﬁn               DC voltage at RF_IN                                                –5.5              +5.5            V
+ Prﬁn                  RF input power at RF_IN   18                                                         0               dBm
+
+ Tamb                  Ambient temperature                                                –40               +85             °C
+ Ts                    Storage temperature                                                –40               +85             °C
+ Table 12: Absolute maximum ratings
+
+
+ 4.2 Operating conditions
+ Table 13 shows the general operating conditions. Table 14 shows the electrical parameters for
+ digital I/O.
+        The V_IO voltage range is selected with the VIO_SEL pin.
+        For designs with 1.8 V supply at V_IO and V_BCKP supplied, switch oﬀ the V_IO supply 100 ms
+        before VCC when transitioning to the hardware backup mode. Alternatively, put the receiver to
+        software standby mode by sending the UBX-RXM-PMREQ message before switching oﬀ V_IO
+        and VCC. For designs with 3 V supplies, both supplies can be switched oﬀ simultaneously.
+        Alternatively, switch oﬀ V_IO before VCC.
+ Symbol             Parameter                                                      Min           Typical        Max         Unit
+ VCC                Main supply voltage                                            1.76          1.8, 3.3       3.6         V
+
+
+
+
+16   Exceeding the voltage ramp speed may permanently damage the device.
+17   The SAFEBOOT_N pin has an internal 1 kΩ series resistor.
+18   Test conditions: source impedance = 50 Ω, continuous wave.
+
+
+
+ UBX-20035208 - R08                                   4 Electrical speciﬁcations                                         Page 11 of 24
+ C1-Public
+                                                                                                         MAX-M10S - Data sheet
+
+
+
+
+ Symbol              Parameter                                                      Min           Typical     Max        Unit
+ V_IO                IO supply voltage, VIO_SEL = GND                               1.76          1.8         VCC (max   V
+                                                                                                              1.98)
+                     IO supply voltage, VIO_SEL = open                              2.7           3.3         VCC (max   V
+                                                                                                              3.6)
+ V_BCKP              Supply voltage, backup domain                                  1.65                      3.6        V
+ V_IOSWITCH          V_IO voltage threshold to switch an internal supply for                      1.45                   V
+                     the backup domain from V_IO to V_BCKP
+ VCC_RF              VCC_RF output voltage                                                        VCC - 0.1              V
+ ICC_RF              VCC_RF output current                                                                    50         mA
+
+ Zin19               Input impedance at RF_IN                                                     50                     Ω
+
+ NFtot               Receiver chain noise ﬁgure                                                   1.5                    dB
+
+ Ext_gain   20       External gain at RF_IN, low gain mode (default)                                          30         dB
+
+                     External gain at RF_IN, bypass mode                            10            25          40         dB
+ Topr                Operating temperature                                          -40                       +85        °C
+ Table 13: General operating conditions
+
+ Symbol                 Parameter                                                   Min           Typical     Max        Unit
+ Ileak                  Leakage current input pins     21                                         25                     nA
+
+ Vin                    Input pin voltage range                                     0                         V_IO       V
+ Vil                    Low-level input voltage                                                               0.63       V
+ Vih                    High-level input voltage                                    0.68 x V_IO                          V
+ Vol                    Low-level output voltage, Iout = -2 mA 22                                             0.4        V
+
+ Voh                    High-level output voltage, Iout = 2 mA 22                   V_IO - 0.4                           V
+
+ Rpu, IO                Pull-up resistance, Digital IO 23. VIO_SEL = GND            6             17          72         kΩ
+
+ Rpu, IO                Pull-up resistance, Digital IO 23 . VIO_SEL = open          8             18          40         kΩ
+
+ Rpd, IO                Pull-down resistance, Digital IO                            21            80          180        kΩ
+ Rpu, SAFEBOOT_N        Pull-up resistance, SAFEBOOT_N       24                     6             17          72         kΩ
+
+ Rpu, RESET_N           Pull-up resistance, RESET_N                                 7             10          13         kΩ
+ Table 14: Digital IO
+
+
+ 4.3 Indicative power requirements
+ This section provides examples of typical current requirements. They are characterized on samples
+ using a cold start command. The actual power requirements may vary depending on the ﬁrmware
+ version used, the external circuitry, the number of satellites tracked, the signal strength, the type
+ and time of start, duration, internal LNA gain mode, and the test conditions.
+ All values in Table 15, Table 16, and Table 17 have been measured at 25 °C ambient temperature with
+ the default conﬁguration unless otherwise stated. SBAS and QZSS are active in all measurements.
+
+
+19   The RF_IN input integrates a built-in DC block.
+20   The internal LNA gain is conﬁgurable.
+21   Vin = V_IO, at room temperature.
+22   TIMEPULSE (PIO4) has 4 mA current drive/sink capability.
+23   TXD, RXD, TIMEPULSE, EXTINT, SCL, SDA, and LNA_EN.
+24   The SAFEBOOT_N pin has an additional 1 kΩ series resistor.
+
+
+
+ UBX-20035208 - R08                                    4 Electrical speciﬁcations                                    Page 12 of 24
+ C1-Public
+                                                                                                MAX-M10S - Data sheet
+
+
+
+
+ Table 15 shows indicative current consumption for VCC and V_IO with a 3.0 V supply.
+ Symbol                Conditions                  GPS        GPS+GAL GPS+GAL GPS+GAL GPS+GAL GPS+GAL Unit
+ (Parameter)                                                          +GLO    +BDS B1I +BDS B1C +BDS B1C
+                                                                              (default)         +GLO
+
+                       Acquisition 27              8          10            12        11.5           11     13           mA
+
+                       Tracking
+ IVCC 25, 26                                       7.5        8             9         9.5            8.5    10           mA
+                       (Continuous mode)
+ (Current at VCC)
+                       Tracking
+                                                   4.5        5             5         5              -      -            mA
+                       (Power save mode) 28
+                       Acquisition and Tracking
+                                                   2.1        2.2           2.3       2.3            2.2    2.3          mA
+                       (Continuous mode)
+ IV_IO 25
+ (Current at V_IO)     Tracking
+                                                   2          2             2         2              -      -            mA
+                       (Power save mode) 28
+ Table 15: Typical currents for 3.0 V supply at VCC and V_IO
+
+ Table 16 shows indicative current consumption for VCC and V_IO with a 1.8 V supply.
+ Symbol                Conditions                  GPS        GPS+GAL GPS+GAL GPS+GAL GPS+GAL GPS+GAL Unit
+ (Parameter)                                                          +GLO    +BDS B1I +BDS B1C +BDS B1C
+                                                                              (default)         +GLO
+
+                       Acquisition 27              10.5       15.5          17.5      16.5           16     18.5         mA
+
+                       Tracking
+ IVCC 25, 26                                       9.5        11            12.5      13             11.5   14           mA
+                       (Continuous mode)
+ (Current at VCC)
+                       Tracking
+                                                   5.5        6.0           6.5       6.5            -      -            mA
+                       (Power save mode) 28
+                       Acquisition and Tracking
+                                                   2.1        2.1           2.2       2.2            2.1    2.2          mA
+                       (Continuous mode)
+ IV_IO 25
+ (Current at V_IO)     Tracking
+                                                   2          2             2         2              -      -            mA
+                       (Power save mode) 28
+ Table 16: Typical currents for 1.8 V supply at VCC and V_IO
+
+         The inrush current can go up to 100 mA at startup. Ensure that the external power supply is
+         able to deliver up to 100 mA.
+ Table 17 shows current consumption for the backup modes.
+ Symbol          Parameter                                        Conditions                                    Typ.     Unit
+
+ IV_BCKP    29   Total current in hardware backup mode            V_BCKP = 3.3 V, V_IO = VCC = 0 V              28       µA
+
+                                                                  V_IO = 1.8 V                                  37       µA
+ IV_IO           V_IO current in software standby mode
+                                                                  V_IO = 3.3 V                                  46       µA
+ IVCC            VCC current in software standby mode             VCC = 3.3 V                                   120      nA
+ Table 17: Backup currents
+
+         Extreme operating temperatures can signiﬁcantly impact the speciﬁed values. If an application
+         operates near the min or max temperature limits, ensure the speciﬁed values are not exceeded.
+
+25   1 Hz navigation update rate.
+26   Internal LNA set to low gain. Simulated signal using power levels of -130 dBm.
+27   Average current from start-up until the ﬁrst ﬁx.
+28   Cyclic tracking operation. BeiDou B1C is not supported in this mode.
+29   IV_BCKP current in normal operation (V_BCKP = 3.3 V, V_IO = VCC = 3.3V) is ~3 µA.
+
+
+
+ UBX-20035208 - R08                                 4 Electrical speciﬁcations                                    Page 13 of 24
+ C1-Public
+                                                                                              MAX-M10S - Data sheet
+
+
+
+
+ 5 Communication interfaces
+ The receiver supports communication over the UART and I2C interfaces.
+ All the inputs have an internal pull-up resistor in normal operation and can be left open if not used.
+ The voltage level at the PIO pins is related to the V_IO supply voltage.
+
+ 5.1 UART
+ The UART interface supports conﬁgurable baud rates. Hardware ﬂow control is not supported. UART
+ speciﬁcations are described in Table 18.
+ Symbol           Parameter                                          Min                  Max                       Unit
+ Ru               Baud rate                                          9600                 921600                    bit/s
+ ΔTx              Tx baud rate accuracy                              -1%                  +1%                       -
+ ΔRx              Rx baud rate tolerance                             -2.5%                +2.5%                     -
+ Table 18: UART speciﬁcations
+
+
+ 5.2 I2C
+ An I2C interface is available for communication with an external host CPU in the I2C Fast-mode.
+ Backwards compatibility with the Standard-mode I2C bus operation is not supported. The interface
+ can be operated only in the peripheral mode with a maximum clock frequency of 400 kHz30.
+ The interface can make use of clock stretching by holding the SCL line LOW to pause a transaction.
+ In this case, the bit transfer rate is reduced. The maximum clock stretching time is 20 ms.
+
+
+
+
+30   External pull-up resistors may be needed to achieve 400 kbit/s communication speed, as the internal pull-up resistance
+     can be very large.
+
+
+
+ UBX-20035208 - R08                              5 Communication interfaces                                    Page 14 of 24
+ C1-Public
+                                                                                                   MAX-M10S - Data sheet
+
+
+
+
+ Figure 3: I2C peripheral speciﬁcation
+
+                                                                     I2C Fast-mode
+ Symbol            Parameter                                         Min                  Max                       Unit
+ fSCL              SCL clock frequency                               0                    400                       kHz
+ tHD;STA           Hold time (repeated) START condition              0.6                  -                         µs
+ tLOW              Low period of the SCL clock                       1.3                  -                         µs
+ tHIGH             High period of the SCL clock                      0.6                  -                         µs
+ tSU;STA           Setup time for a repeated START condition         0.6                  -                         µs
+ tHD;DAT           Data hold time                                    0 31                 - 32                      µs
+
+ tSU;DAT           Data setup time                                   100                                            ns
+ tr                Rise time of both SDA and SCL signals             -                    300 (for C = 400pF)       ns
+ tf                Fall time of both SDA and SCL signals             -                    300 (for C = 400pF)       ns
+ tSU;STO           Setup time for STOP condition                     0.6                  -                         µs
+ tBUF              Bus-free time between a STOP and START            1.3                  -                         µs
+                   condition
+ tVD;DAT           Data valid time                                   -                    0.9 32                    µs
+
+ tVD;ACK           Data valid acknowledge time                       -                    0.9 32                    µs
+
+ VnL               Noise margin at the low level                     0.1 V_IO             -                         V
+
+
+
+
+31    External device must provide a hold time of at least one transition time (max 300 ns) for the SDA signal (with respect to
+      the min Vih of the SCL signal) to bridge the undeﬁned region of the falling edge of SCL.
+32    The maximum tHD;DAT must be less than the maximum tVD;DAT or tVD;ACK with a maximum of 0.9 µs by a transition time.
+      This maximum must only be met if the device does not stretch the LOW period (tLOW) of the SCL signal. If the clock
+      stretches the SCL, the data must be valid by the set-up time before it releases the clock.
+
+
+
+ UBX-20035208 - R08                                5 Communication interfaces                                     Page 15 of 24
+ C1-Public
+                                                                                            MAX-M10S - Data sheet
+
+
+
+
+                                                                      I2C Fast-mode
+ Symbol           Parameter                                           Min             Max                     Unit
+ VnH              Noise margin at the high level                      0.2 V_IO        -                       V
+ Table 19: MAX-M10S I2C peripheral timing and speciﬁcations
+
+
+ 5.3 Default interface settings
+ Interface             Settings
+ UART                  •   9600 baud, 8 bits, no parity bit, 1 stop bit.
+                       •   Input messages: NMEA and UBX
+                       •   Output messages: NMEA GGA, GLL, GSA, GSV33, RMC, VTG and TXT
+ I2C                   •   7-bit I2C address (0x42).
+                       •   Input messages: NMEA and UBX
+                       •   Output messages: NMEA GGA, GLL, GSA, GSV33, RMC, VTG and TXT
+ Table 20: Default interface settings
+
+
+
+
+33   In the default conﬁguration, the NMEA-GSV messages are sent at 5-second intervals to avoid overﬂow in the TX buﬀer.
+
+
+
+ UBX-20035208 - R08                                5 Communication interfaces                               Page 16 of 24
+ C1-Public
+                                                                        MAX-M10S - Data sheet
+
+
+
+
+6 Mechanical speciﬁcations
+
+
+
+
+Figure 4: MAX-M10S mechanical drawing
+
+Symbol                     Min (mm)                     Typical (mm)    Max (mm)
+A                          10.0                         10.1            10.7
+B                          9.6                          9.7             9.8
+C                          2.2                          2.5             2.7
+D                          0.55                         0.65            0.95
+E                          1.0                          1.1             1.2
+F                          -                            0.76            -
+G                          0.3                          0.4             0.5
+H                          0.9                          1.0             1.1
+K                          0.6                          0.7             0.8
+M                          0.7                          0.8             0.9
+P                          0.0                          0.3             0.6
+Weight                                                  0.5 g
+Table 21: MAX-M10S mechanical dimensions
+
+    The mechanical picture of the de-paneling residual tab (P) is an approximate representation,
+    shape and position may vary.
+    Take the size of the de-paneling residual tabs into account when designing the component
+    keepout area.
+    The width (K) applies to all four corner pins.
+    The pitch (E) applies to all pins.
+
+
+
+UBX-20035208 - R08                         6 Mechanical speciﬁcations                Page 17 of 24
+C1-Public
+                                                                                                MAX-M10S - Data sheet
+
+
+
+
+ 7 Qualiﬁcations and approvals
+ Type                                           Description
+ Quality and reliability
+ Product qualiﬁcation                           Qualiﬁed according to u-blox qualiﬁcation policy, based on a subset of AEC-
+                                                Q104
+ Manufacturing                                  Manufactured at IATF 16949 certiﬁed sites
+ Environmental
+ RoHS compliance                                Yes
+
+ Moisture sensitivity level (MSL) 34, 35        4
+
+ Type approvals
+ European RED certiﬁcation (CE)                 Declaration of Conformity (DoC) is available on the u-blox website.
+ UK conformity assessment (UKCA)                Yes
+ Table 22: Qualiﬁcations and approvals
+
+
+
+
+34   For MSL standard see IPC/JEDEC J-STD-020 and J-STD-033 [5].
+35   For more information regarding moisture sensitivity levels, labeling, storage, and drying, see the Product packaging
+     reference guide [4].
+
+
+
+ UBX-20035208 - R08                              7 Qualiﬁcations and approvals                                   Page 18 of 24
+ C1-Public
+                                                                        MAX-M10S - Data sheet
+
+
+
+
+8 Product handling
+8.1 Packaging
+The MAX-M10S modules are delivered as hermetically sealed, reeled tapes to enable eﬃcient
+production, production lot set-up and tear-down. For more information, see the Product packaging
+reference guide [4].
+
+8.1.1 Reels
+MAX-M10S-00B modules are deliverable in quantities of 500 pieces, and MAX-M10S-00B1 in
+quantities of 1000 pieces on a reel. They are shipped on reel types B1 and A3 respectively, as
+speciﬁed in the Product packaging reference guide [4].
+
+8.1.2 Tapes
+Figure 5 shows the feed direction, orientation and dimensions of the MAX-M10S modules on the
+tape (measurements in mm).
+
+
+
+
+Figure 5: Tape speciﬁcation
+
+
+8.2 Soldering
+Reﬂow soldering is described in the IPC/JEDEC J-STD-020 standard [5].
+
+
+
+
+UBX-20035208 - R08                      8 Product handling                           Page 19 of 24
+C1-Public
+                                                                                          MAX-M10S - Data sheet
+
+
+
+
+9 Product marking and ordering information
+This section provides information about product marking and ordering.
+
+9.1 Product marking
+The product marking provides information on MAX-M10S and its revision, as in Figure 6. For a
+description of the product marking, see Table 23
+
+
+
+
+Figure 6: Example of MAX-M10S product marking
+
+Code                     Meaning                              Example
+PPP                      Form factor                          MAX
+TGG                      Platform                             M10 = u-blox M10
+V                        Variant                              S = Standard precision, ROM, TCXO, LNA, and SAW ﬁlter
+NN                       Major product version                00, 01, 02, ...
+Q                        Product grade                        A = Automotive, B = Professional
+(R)                      Production site                      No character = global variant, 1 = regional variant
+XX                       Revision                             Hardware and ﬁrmware versions
+Table 23: Description of product marking
+
+
+9.2 Product identiﬁers
+The MAX-M10S marking features three product identiﬁers: product name, ordering code and type
+number. The product name identiﬁes all u-blox products, independent of packaging and product
+grade, and it is used in documentation such as this data sheet. The ordering code includes the major
+product version and product grade, while the type number additionally includes the hardware and
+ﬁrmware versions.
+Table 24 describes the three diﬀerent product identiﬁers used in the MAX-M10S module product
+marking.
+Identiﬁer                Format                               Example
+Product name             PPP-TGGV                             MAX-M10S
+Ordering code            PPP-TGGV-NNQ                         MAX-M10S-00B
+                         PPP-TGGV-NNQ(R)                      MAX-M10S-00B1
+
+
+
+
+UBX-20035208 - R08                               9 Product marking and                                     Page 20 of 24
+C1-Public                                         ordering information
+                                                                                  MAX-M10S - Data sheet
+
+
+
+
+Identiﬁer                Format                            Example
+Type number              PPP-TGGV-NNQ-XX                   MAX-M10S-00B-01
+                         PPP-TGGV-NNQ(R)-XX                MAX-M10S-00B1-01
+Table 24: Product identiﬁers
+
+
+9.3 Ordering codes
+Ordering code                      Product                             Remark
+MAX-M10S-00B                       u-blox M10 GNSS receiver module,    Global variant
+                                   professional grade
+MAX-M10S-00B1                      u-blox M10 GNSS receiver module,    Regional variant
+                                   professional grade
+Table 25: Product ordering codes
+
+u-blox provides information on product changes aﬀecting the form factor, size or function of the
+product. For the Product change notiﬁcations (PCNs), see our website at: https://www.u-blox.com/
+en/product-resources.
+
+
+
+
+UBX-20035208 - R08                            9 Product marking and                          Page 21 of 24
+C1-Public                                      ordering information
+                                                                           MAX-M10S - Data sheet
+
+
+
+
+Related documents
+[1]     MAX-M10S Integration manual, UBX-20053088
+[2]     u-blox M10 SPG 5.10 Interface description, UBX-21035062
+[3]     u-blox M10 SPG 5.10 Release notes, UBX-22001426
+[4]     Product packaging reference guide, UBX-14001652
+[5]     Joint IPC/JEDEC standard, www.jedec.org
+      For regular updates to u-blox documentation and to receive product change notiﬁcations please
+      register on our homepage https://www.u-blox.com.
+
+
+
+
+UBX-20035208 - R08                         Related documents                            Page 22 of 24
+C1-Public
+                                                                                       MAX-M10S - Data sheet
+
+
+
+
+Revision history
+Revision    Date          Status / comments
+R01         21-Dec-2020   Objective speciﬁcation
+R02         20-Apr-2021   Advance information. Updated Firmware features, Pin assignment, Absolute maximum
+                          ratings, Operating conditions, Indicative power requirements, and Product labeling. Minor
+                          revision.
+R03         28-Jun-2022   New product type number for MAX-M10S-00B-01 with ROM SPG 5.10 ﬁrmware.
+                          Updated Document information, Pin deﬁnition, Performance ﬁgures and Indicative power
+                          requirements with new GNSS conﬁgurations. Updated Electrical speciﬁcations, Operating
+                          conditions, and Absolute maximum ratings.
+                          Added conﬁguration lock and power save modes features, maximum I2C clock stretching
+                          time, MSL speciﬁcation and Reliability tests and approvals.
+R04         16-May-2023   Updated maximum navigation update rate in section Performance, ICC_RF in section
+                          Absolute maximum ratings, VCC and V_IO supply timing requirements in Operating
+                          conditions, and section Mechanical speciﬁcations. Added 1 Hz navigation update rate
+                          footnote in section Indicative power requirements.
+R05         28-Mar-2024   Mass production
+                          Updated sections
+                          •   Supported GNSS constellations: Supported Assisted GNSS (A-GNSS) services
+                          •   Pin assignment
+                          •   Pin state
+                          •   Absolute maximum ratings: V_IO for VIO_SEL = GND
+                          •   Communication interfaces
+                          •   Mechanical speciﬁcations: module weight
+                          •   Qualiﬁcations and approvals
+                          Change in document structure
+                          •   Moisture sensitivity level (MSL) included in chapter Qualiﬁcations and approvals
+R06         08-Apr-2024   Added section
+                          •   Product handling: Soldering
+                          Updated sections
+                          •   Qualiﬁcations and approvals
+R07         29-Oct-2025   Added section
+                          •   Product handling: Packaging
+                          Updated sections
+                          •   Document information: added regional variant (MAX-M10S-00B1)
+                          •   Product handling: updated tape speciﬁcation ﬁgure with pin 1, sprocket hole and feed
+                              direction markings
+                          •   Product marking and ordering information: updated MAX-M10S product marking ﬁgure
+                              and description table, product identiﬁers and ordering codes
+R08         30-Jan-2026   Updated sections
+                          •   Document information: Updated product status of regional variant (MAX-M10S-00B1)
+                              to initial production.
+                          •   Supported GNSS constellations: correction in documentation - removed BDSBAS from
+                              supported augmentation systems.
+                          •   Firmware features: Assisted GNSS. Legacy AssistNow services Online and Oﬄine are
+                              replaced with the corresponding new services Live Orbits and Predictive Orbits.
+
+
+
+
+UBX-20035208 - R08                              Revision history                                        Page 23 of 24
+C1-Public
+                                                                        MAX-M10S - Data sheet
+
+
+
+
+Contact
+u-blox AG
+Address:         Zürcherstrasse 68
+                 8800 Thalwil
+                 Switzerland
+For further support and contact information, visit us at www.u-blox.com/support.
+
+
+
+
+UBX-20035208 - R08                                                                 Page 24 of 24
+C1-Public
+

@@ -1,0 +1,470 @@
+Source: https://docs.rakwireless.com/product-categories/wisduo/rak3172-module/datasheet/
+Accessed: 2026-10-14
+
+No downloads
+Skip to main content
+Getting Started
+Development
+Tools
+Device OS
+Solutions
+Resources
+Support & Troubleshooting
+Store
+Search
+⌘
+K
+
+Home
+
+RAK3172
+Buy from store
+Product Overview
+Quick Start Guide
+AT Command Manual
+Low Level Development
+Datasheet
+Deprecated AT Command Manual
+Choose which documents to download
+
+RAK3172
+
+Select All
+Product Overview
+Quick Start Guide
+AT Command Manual
+Low Level Development
+Datasheet
+Deprecated AT Command Manual
+Proceed
+Close
+PRODUCT CATEGORIES
+...
+RAK3172 MODULE
+DATASHEET
+
+Download
+
+RAK3172 WisDuo LoRaWAN Module Datasheet
+Overview​ 
+Description​ 
+
+The RAK3172 is a low-power, long-range transceiver module based on the STM32WLE5CC (RAK3172 and RAK3172-T) or STM32WLE5JCI6 (RAK3172-F) chip. It offers an easy-to-use, compact, and low-power solution for long-range wireless data applications. This module complies with Class A, B, and C of the LoRaWAN 1.0.3 specifications. It can effortlessly connect to various LoRaWAN server platforms, including TheThingsNetwork (TTN), Chirpstack, Actility, etc. Additionally, it supports LoRa Point-to-Point (P2P) communication mode, enabling the rapid implementation of customized long-range LoRa networks.
+
+You can configure the module's mode and operation using AT commands via a UART interface. RAK3172 also offers low-power features, making it well-suited for battery-powered applications.
+
+INFO
+
+There are three versions of the RAK3172 available:
+RAK3172 - Base model, using STM32WLE5 with an oscillator, suitable for standard temperature range
+RAK3172-T - Extended temperature module, using STM32WLE5 with a temperature controlled oscillator. This version is available in different variants, see RAK3172-T Variants.
+RAK3172-F - Provides an additional 512 kB external flash and uses the STM32WLE5 with a temperature-controlled oscillator
+
+RAK3172-T VARIANTS
+
+There are 8 variants of the RAK3172 with TCXO. The difference is the accuracy of the TCXO and the antenna interface.
+The difference is visible on the label of the module as a "(Tx)" marking after "RAK3172". Below table shows the different variants of the RAK3172-T and the corresponding label.
+
+SKU	PN	Model	Marking	TCXO accuracy	Antenna interface	Frequency	Label
+305054	RAK3172-T-8-SM-NI	RAK3172-T	(TP)	With ±2.5ppm TCXO	No IPEX	8XX MHz for RU864/IN865/EU868	
+306051	RAK3172-T-9-SM-NI	RAK3172-T	(TP)	With ±2.5ppm TCXO	No IPEX	9XX MHz for US915/AU915/KR920/AS923	
+305055	RAK3172-T-8-SM-I	RAK3172-T	(TI)	With ±2.5ppm TCXO	With IPEX	8XX MHz for RU864/IN865/EU868	
+306052	RAK3172-T-9-SM-I	RAK3172-T	(TI)	With ±2.5ppm TCXO	With IPEX	9XX MHz for US915/AU915/KR920/AS923	
+305058	RAK3172-TE-8-SM-NI	RAK3172-T	(TEP)	With ±0.5ppm TCXO	No IPEX	8XX MHz for RU864/IN865/EU868	
+306055	RAK3172-TE-9-SM-NI	RAK3172-T	(TEP)	With ±0.5ppm TCXO	No IPEX	9XX MHz for US915/AU915/KR920/AS923	
+305057	RAK3172-TE-8-SM-I	RAK3172-T	(TEI)	With ±0.5ppm TCXO	With IPEX	8XX MHz for RU864/IN865/EU868	
+306054	RAK3172-TE-9-SM-I	RAK3172-T	(TEI)	With ±0.5ppm TCXO	With IPEX	9XX MHz for US915/AU915/KR920/AS923	
+Features​ 
+Based on STM32WLE5CC (RAK3172 and RAK3172-T) or STM32WLE5JCI6 (RAK3172-F)
+LoRaWAN 1.0.3 specification compliant
+Supported bands: EU433, CN470, IN865, EU868, AU915, US915, KR920, RU864, and AS923-1/2/3/4
+LoRaWAN activation via OTAA/ABP
+LoRa Point-to-Point (P2P) communication
+Custom firmware using Arduino via RUI3 API
+Easy to use AT command set via UART interface
+Long-range - greater than 15 km with optimized antenna
+ARM Cortex-M4 32-bit
+256 kbytes flash memory with ECC
+64 kbytes RAM
+512 kbytes external flash memory (only RAK3172-F)
+Ultra-Low Power Consumption of 1.69 μA in sleep mode (RAK3172 and RAK3172-T)
+Ultra-Low Power Consumption of 2.2 μA in sleep mode (RAK3172-F)
+Supply Voltage RAK3172 and RAK3172-T: 2.0 V ~ 3.6 V
+Supply Voltage RAK3172-F: 2.3 V ~ 3.6 V
+Temperature Range:
+RAK3172: -20° C ~ 85° C
+RAK3172-T: -40° C ~ 85° C
+RAK3172-F: -40° C ~ 85° C
+NOTE
+
+There are two certification variants available for the RAK3172 Module: (1) with the CE & UKCA Certification Mark and (2) with FCC, IC, & RCM Certification Mark.
+
+If you need a LoRa module with BLE 5.0 capability, you can check out the RAK11720 . The RAK11720 is pin-to-pin compatible with the RAK3172 and has additional pins for ground and a BLE RF antenna port.
+
+WARNING
+
+Temperature ratings:
+RAK3172 is -20° C to 85° C
+RAK3172-T is -40° C to 85° C
+RAK3172-F is -40° C to 85° C
+
+
+Specifications​ 
+
+This section covers the hardware and software specifications of the RAK3172. Also, it includes the block diagram and an updated firmware link for the RAK3172 WisDuo Module.
+
+Overview​ 
+Block Diagram​ 
+Figure 1: RAK3172 System Block Diagram
+Hardware​ 
+Electrical Characteristics​ 
+Operating Voltage​ 
+Feature	Minimum	Typical	Maximum	Unit
+VCC	2.0	3.3	3.6	Volts (V)
+Operating Current​ 
+Feature	Condition	Minimum	Typical	Maximum	Unit
+Operating Current	TX Mode	87 (@ 20 dBm 868 Mhz)			mA
+	RX Mode	5.22			mA
+Sleep Current​ 
+Feature	Condition	Minimum (2.1 V)	Typical (3.3 V)	Maximum	Unit
+Current Consumption	EU868	-	1.69	-	μA
+	US915	-	1.69	-	μA
+	CN470	-	1.69	-	μA
+NOTE
+
+For the reference application schematic of RAK3172 with minimum components requirements, refer to the RAK3272S Breakout Board Datasheet. 
+
+The hardware specification discusses the interfaces, pinouts, and their corresponding functions and diagrams. It also covers the parameters of both RAK3172 modules in terms of RF, electrical, mechanical, and operating characteristics.
+
+Interfaces​ 
+Module	Interfaces
+RAK3172	UART2/LPUART1, UART1
+Sub-GHz SPI interface​ 
+
+A dedicated internal SPI interface called SUBGHZSPI is used to communicate with the RF subsystem of the STM32WLE5CCU6.
+
+Pin Definitions RAK3172, RAK3172-T and RAK3172-F​ 
+
+The RAK3172, RAK3172-T and RAK3172-F are sharing the same module size and pin out. The difference is that the RAK3172-F is exposing more GPIO pins.
+
+WARNING
+
+When using RF pin for antenna and not the IPEX connector variant, there are design considerations to make sure optimum RF performance.
+
+RF traces must be away from interference (switching nodes of DC-DC supplies, high current/voltage pulses from controllers of inductive loads like motors, signal generators, etc.).
+RF traces must have 50 Ohm impedance. It is advisable to use impedance simulation software tools to achieve this requirement.
+If using an external antenna connector, place it close to the RF pin.
+Ground plane optimization is critical for certain antenna types, such as monopoles.
+GND traces used for RF path return must be directly connected to the GND plane and not treated as thermal reliefs.
+It is recommended that RF traces be routed in a curve rather than at a sharp 90 degrees.
+
+In addition, with a commitment to making IoT easy, RAK offers a dedicated service for Antenna RF Design  which includes PCB design, tuning, matching, and RF testing.
+
+Pin Definition RAK3172 and RAK3172-T​ 
+
+RAK3172 and RAK3172-T
+
+Figure 2: Board Pinout for RAK3172 and RAK3172-T
+Pin No.	Name	Type	Description
+1	PA3/UART2_RX	I	Reserved - UART2/LPUART1 Interface (AT Commands and FW Update)
+2	PA2/UART2_TX	O	Reserved - UART2/LPUART1 Interface (AT Commands and FW Update)
+3	PA15/PIN_A4	I/O	GPIO and ADC
+4	PB6/UART1_TX	O	UART1 Interface
+5	PB7/UART1_RX	I	UART1 Interface
+6	PA1	I/O	GPIO only
+7	PA13/SWDIO		Reserved - SWD debug pin (SWDIO)
+8	PA14/SWCLK		Reserved - SWD debug pin (SWCLK)
+9	PA12/I2C_SCL	I/O	GPIO and I2C (SCL)
+10	PA11/I2C_SDA	I/O	GPIO and I2C (SDA)
+11	GND		Ground connections
+12	RF		RF Port (only available on RAK3172 No-IPEX connector variant)
+13	PA7/SPI1_MOSI	I/O	GPIO and SPI (MOSI)
+14	PA6/SPI1_MISO	I/O	GPIO and SPI (MISO)
+15	PA5/SPI1_CLK	I/O	GPIO and SPI (CLK)
+16	PA4/SPI1_NSS	I/O	GPIO and SPI (NSS)
+17	GND		Ground connections
+18	GND		Ground connections
+19	PA8	I/O	GPIO only
+20	PA9	I/O	GPIO only
+21	BOOT0		Boot0 mode enable pin - high active
+22	RST		MCU Reset (NRST)
+23	GND		Ground connections
+24	VDD		VDD - Voltage Supply
+25	PA10/PIN_A3	I/O	GPIO and ADC
+26	PB2/PIN_A2	I/O	GPIO and ADC
+27	PB12	I/O	10 kΩ internally pulled-up for high freq variant or pulled-down for low freq variant
+28	GND		Ground connections
+29	PA0	I/O	GPIO only
+30	PB5	I/O	GPIO only
+31	PB4/PIN_A1	I/O	GPIO and ADC
+32	PB3/PIN_A0	I/O	GPIO and ADC
+Pin Definition RAK3172-F​ 
+Figure 3: Board Pinout for RAK3172-F
+
+RAK3172-F
+
+Pin No.	Name	Type	Description
+1	PA3/UART2_RX	I	Reserved - UART2/LPUART1 Interface (AT Commands and FW Update)
+2	PA2/UART2_TX	O	Reserved - UART2/LPUART1 Interface (AT Commands and FW Update)
+3	PA15/PIN_A4	I/O	GPIO and ADC
+4	PB6/UART1_TX	O	UART1 Interface
+5	PB7/UART1_RX	I	UART1 Interface
+6	PA1	I/O	GPIO only
+7	PA13/SWDIO		Reserved - SWD debug pin (SWDIO)
+8	PA14/SWCLK		Reserved - SWD debug pin (SWCLK)
+9	PA12/I2C_SCL	I/O	GPIO and I2C (SCL)
+10	PA11/I2C_SDA	I/O	GPIO and I2C (SDA)
+11	GND		Ground connections
+12	RF		RF Port (only available on RAK3172 No-IPEX connector variant)
+13	PB11	I/O	GPIO only
+14	PB13	I/O	GPIO only
+15	PA7/SPI1_MOSI	I/O	GPIO and SPI (MOSI)
+16	PA6/SPI1_MISO	I/O	GPIO and SPI (MISO)
+17	PA5/SPI1_CLK	I/O	GPIO and SPI (CLK)
+18	PA4/SPI1_NSS	I/O	GPIO and SPI (NSS)
+19	PB14	IO	GPIO only
+20	GND		Ground connections
+21	GND		Ground connections
+22	PA8	I/O	GPIO only
+23	PB1	I/O	GPIO only
+24	PC6	I/O	GPIO only
+25	PC5	I/O	GPIO only
+26	PC4	I/O	GPIO only
+27	PA9	I/O	GPIO only
+28	BOOT0		Boot0 mode enable pin - high active
+29	RST		MCU Reset (NRST)
+30	GND		Ground connections
+31	VDD		VDD - Voltage Supply
+32	PB15	I/O	GPIO only
+33	PA10/PIN_A3	I/O	GPIO and ADC
+34	PB2/PIN_A2	I/O	GPIO and ADC
+35	PB12	I/O	10 kΩ internally pulled-up for high freq variant or pulled-down for low freq variant
+36	GND		Ground connections
+37	PA0	I/O	GPIO only
+38	PB5	I/O	GPIO only
+39	PB4/PIN_A1	I/O	GPIO and ADC
+40	PB3/PIN_A0	I/O	GPIO and ADC
+RF Characteristics​ 
+
+The RAK3172 supports two different frequency variations: RAK3172(L) Low Radio Frequency and RAK3172(H) High Radio Frequency.
+
+NOTE
+
+Performance test and evaluation of RAK3172-T (with TCXO), can be found on the RAK3172-T TCXO Verification Report 
+
+Operating Frequencies​ 
+Module	Region	Frequency
+RAK3172(L)	Europe	EU433
+China	CN470
+RAK3172(H)	Europe	EU868
+North America	US915
+Australia	AU915
+Korea	KR920
+Asia	AS923-1/2/3/4
+India	IN865
+Russia	RU864
+Electrical Characteristics​ 
+Operating Voltage​ 
+
+RAK3172 and RAK3172-T
+
+Feature	Minimum	Typical	Maximum	Unit
+VCC	2.0	3.3	3.6	Volts (V)
+
+RAK3172-F
+
+Feature	Minimum	Typical	Maximum	Unit
+VCC	2.3	3.3	3.6	Volts (V)
+Operating Current​ 
+Feature	Condition	Minimum	Typical	Maximum	Unit
+Operating Current	TX Mode	87 (@ 20 dBm 868 Mhz)			mA
+	RX Mode	5.22			mA
+Sleep Current​ 
+
+RAK3172 and RAK3172-T
+
+Feature	Condition	Minimum (2.1 V)	Typical (3.3 V)	Maximum	Unit
+Current Consumption	EU868	-	1.69	-	μA
+	US915	-	1.69	-	μA
+	CN470	-	1.69	-	μA
+
+RAK3172-F
+
+Feature	Condition	Minimum (2.1 V)	Typical (3.3 V)	Maximum	Unit
+Current Consumption	EU868	-	2.2	-	μA
+	US915	-	2.2	-	μA
+	CN470	-	2.2	-	μA
+NOTE
+
+For the reference application schematic of RAK3172 with minimum components requirements, refer to the RAK3272S Breakout Board Datasheet. 
+
+Mechanical Characteristics​ 
+Module Dimensions​ 
+Figure 4: RAK3172 and RAK3172-T Physical Dimension
+Figure 5: RAK3172-F Physical Dimension
+Layout Recommendation​ 
+Figure 6: RAK3172 and RAK3172-T Layout
+Figure 7: RAK3172-F Layout
+Environmental Characteristics​ 
+Operating Temperature​ 
+Module	Minimum	Typical	Maximum	Unit
+RAK3172	-20	25	85	° C
+RAK3172-T	-40	25	85	° C
+RAK3172-F	-40	25	85	° C
+Storage Temperature​ 
+Feature	Minimum	Typical	Maximum	Unit
+Storage Temperature	-40		85	° C
+Recommended Reflow Profile​ 
+Figure 8: Reflow Profile for RAK3172
+
+Standard conditions for reflow soldering:
+
+Pre-heating Ramp (A) (Initial temperature: 150° C): 1~2.5° C/sec
+Soaking Time (T2) (150~180° C): 60~100 sec
+Peak Temperature (G): 230~250° C
+Reflow Time (T3) (> 220° C): 30~60 sec
+Ramp-up Rate (B): 0~2.5° C/sec
+Ramp-down Rate (C): 1~3° C/sec
+Software​ 
+
+Download the latest RAK3172 WisDuo LoRaWAN Module firmware provided below. The RAK3172(L) and RAK3172(H) use the same firmware, and it will automatically detect the variant of the module being used.
+
+The bin file contains only the application code. You will need the RAK DFU Tool to upload this file to the module.
+
+The hex file contains both the bootloader and the application code. You need to use STM32CubeProgrammer to upload  this.
+
+WARNING
+
+Uploading the .hex file via STM32CubeProgrammer will erase all configured data on the device.
+
+RAK3172 uses UART2 serial pins to upload the latest firmware.
+
+NOTE
+
+RAK3172 should automatically go to BOOT mode when the firmware is uploaded via RAK DFU Tool or WisToolBox.
+
+If BOOT mode is not initiated, you can manually send AT+BOOT command to start bootloader mode.
+
+Firmware​ 
+WARNING
+
+Make sure to flash the correct firmware!
+For RAK3172 use firmware RAK3172-E_latest. This version will not work with RAK3172-T or RAK3172-F
+For RAK3172-T use firmware RAK3172-T_latest. This version will not work with the RAK3172 or the RAK3172-F
+For RAK3172-F use firmware RAK3172-F_latest. This version will not work with the RAK3172 or the RAK3172-T
+
+Model	Version	Source
+RAK3172 (.bin)	RUI3 Application Code only (default baudrate = 115200)	Download 
+RAK3172 (.hex)	RUI3 Bootloader and Application Code(default baudrate = 115200)	Download 
+RAK3172-T (.bin)	RUI3 Application Code only(default baudrate = 115200)	Download 
+RAK3172-T (.hex)	RUI3 Bootloader and Application Code (default baudrate = 115200)	Download 
+RAK3172-F (.bin)	RUI3 Application Code only(default baudrate = 115200)	Download 
+RAK3172-F (.hex)	RUI3 Bootloader and Application Code (default baudrate = 115200)	Download 
+RAK3172 (OLD)	DEPRECATED V1.0.4 (default baudrate = 9600)	Download 
+WARNING
+
+There are RAK3172 devices loaded with old firmware versions which are not based on RUI3 (RAKwireless Unified Interface V3). These devices have v1.0.4 and below.
+
+If the host microcontroller code is based on this old firmware, refer to the RAK3172 AT Command migration guide  that explains in detail the few differences between the two AT commands set.
+
+Models and Bundles​ 
+Ordering Information​ 
+P/N	Model	TCXO	Antenna Interface	Frequency	SKU
+RAK3172-8-SM-NI	RAK3172	Without TCXO	No IPEX	8XX MHz for RU864/IN865/EU868	305044 
+RAK3172-9-SM-NI	RAK3172	Without TCXO	No IPEX	9XX MHz for US915/AU915/KR920/AS923	306041 
+RAK3172-9-SM-NI	RAK3172	Without TCXO	No IPEX	AS923-1 Japan	309044 
+RAK3172-43-SM-NI	RAK3172	Without TCXO	No IPEX	EU433	301026 
+RAK3172-47-SM-NI	RAK3172	Without TCXO	No IPEX	CN470	302033 
+RAK3172-T-8-SM-NI	RAK3172-T	With ±2.5 ppm TCXO	No IPEX	8XX MHz for RU864/IN865/EU868	305054 
+RAK3172-T-9-SM-NI	RAK3172-T	With ±2.5 ppm TCXO	No IPEX	9XX MHz for US915/AU915/KR920/AS923	306051 
+RAK3172-T-9-SM-NI	RAK3172-T	With ±2.5 ppm TCXO	No IPEX	AS923-1 Japan	309054 
+RAK3172-T-43-SM-NI	RAK3172-T	With ±2.5 ppm TCXO	No IPEX	EU433	301029 
+RAK3172-T-47-SM-NI	RAK3172-T	With ±2.5 ppm TCXO	No IPEX	CN470	302037 
+RAK3172-TE-8-SM-NI	RAK3172-TE	With ±0.5 ppm TCXO	No IPEX	8XX MHz for RU864/IN865/EU868	305058 
+RAK3172-TE-9-SM-NI	RAK3172-TE	With ±0.5 ppm TCXO	No IPEX	9XX MHz for US915/AU915/KR920/AS923	306055 
+RAK3172-TE-9-SM-NI	RAK3172-TE	With ±0.5 ppm TCXO	No IPEX	AS923-1 Japan	309057 
+RAK3172-TE-43-SM-NI	RAK3172-TE	With ±0.5 ppm TCXO	No IPEX	EU433	-
+RAK3172-TE-47-SM-NI	RAK3172-TE	With ±0.5 ppm TCXO	No IPEX	CN470	-
+RAK3172-F-8-SM-NI	RAK3172-F	With ±2.5 ppm TCXO	No IPEX	8XX MHz for RU864/IN865/EU868	-
+RAK3172-F-9-SM-NI	RAK3172-F	With ±2.5 ppm TCXO	No IPEX	9XX MHz for US915/AU915/KR920/AS923	-
+RAK3172-F-9-SM-NI	RAK3172-F	With ±2.5 ppm TCXO	No IPEX	AS923-1 Japan	-
+RAK3172-F-43-SM-NI	RAK3172-F	With ±2.5 ppm TCXO	No IPEX	EU433	-
+RAK3172-F-47-SM-NI	RAK3172-F	With ±2.5 ppm TCXO	No IPEX	CN470	-
+RAK3172-8-SM-I	RAK3172	Without TCXO	With IPEX	8XX MHz for RU864/IN865/EU868	305045 
+RAK3172-9-SM-I	RAK3172	Without TCXO	With IPEX	9XX MHz for US915/AU915/KR920/AS923	306042 
+RAK3172-9-SM-I	RAK3172	Without TCXO	With IPEX	AS923-1 Japan	309045 
+RAK3172-43-SM-I	RAK3172	Without TCXO	With IPEX	EU433	301025 
+RAK3172-47-SM-I	RAK3172	Without TCXO	With IPEX	CN470	302032 
+RAK3172-T-8-SM-I	RAK3172-T	With ±2.5 ppm TCXO	With IPEX	8XX MHz for RU864/IN865/EU868	305055 
+RAK3172-T-9-SM-I	RAK3172-T	With ±2.5 ppm TCXO	With IPEX	9XX MHz for US915/AU915/KR920/AS923	306052 
+RAK3172-T-9-SM-I	RAK3172-T	With ±2.5 ppm TCXO	With IPEX	AS923-1 Japan	309055 
+RAK3172-T-43-SM-I	RAK3172-T	With ±2.5 ppm TCXO	With IPEX	EU433	301030 
+RAK3172-T-47-SM-I	RAK3172-T	With ±2.5 ppm TCXO	With IPEX	CN470	302038 
+RAK3172-TE-8-SM-I	RAK3172-TE	With ±0.5 ppm TCXO	With IPEX	8XX MHz for RU864/IN865/EU868	305057 
+RAK3172-TE-9-SM-I	RAK3172-TE	With ±0.5 ppm TCXO	With IPEX	9XX MHz for US915/AU915/KR920/AS923	306054 
+RAK3172-TE-9-SM-I	RAK3172-TE	With ±0.5 ppm TCXO	With IPEX	AS923-1 Japan	309056 
+RAK3172-TE-43-SM-I	RAK3172-TE	With ±0.5 ppm TCXO	With IPEX	EU433	-
+RAK3172-TE-47-SM-I	RAK3172-TE	With ±0.5 ppm TCXO	With IPEX	CN470	-
+RAK3172-F-8-SM-I	RAK3172-F	With ±2.5 ppm TCXO	With IPEX	8XX MHz for RU864/IN865/EU868	-
+RAK3172-F-9-SM-I	RAK3172-F	With ±2.5 ppm TCXO	With IPEX	9XX MHz for US915/AU915/KR920/AS923	-
+RAK3172-F-9-SM-I	RAK3172-F	With ±2.5 ppm TCXO	With IPEX	AS923-1 Japan	-
+RAK3172-F-43-SM-I	RAK3172-F	With ±2.5 ppm TCXO	With IPEX	EU433	-
+RAK3172-F-47-SM-I	RAK3172-F	With ±2.5 ppm TCXO	With IPEX	CN470	-
+Certification​ 
+NOTE
+
+For CE and FCC certifications we provide an AT command guide.
+You can find it in our RUI3 documentation  or get it from our Download Center .
+
+Home
+Low Level Development
+Deprecated AT Command Manual
+Overview
+Description
+Features
+Specifications
+Overview
+Block Diagram
+Hardware
+Electrical Characteristics
+Operating Voltage
+Operating Current
+Sleep Current
+Interfaces
+Sub-GHz SPI interface
+Pin Definitions RAK3172, RAK3172-T and RAK3172-F
+Pin Definition RAK3172 and RAK3172-T
+Pin Definition RAK3172-F
+RF Characteristics
+Operating Frequencies
+Electrical Characteristics
+Operating Voltage
+Operating Current
+Sleep Current
+Mechanical Characteristics
+Module Dimensions
+Layout Recommendation
+Environmental Characteristics
+Operating Temperature
+Storage Temperature
+Recommended Reflow Profile
+Software
+Firmware
+Models and Bundles
+Ordering Information
+Certification
+
+LoRa® is a registered trademark or service mark of Semtech Corporation or its affiliates. LoRaWAN® is a licensed mark.
+
+Copyright © 2014-2026 RAKwireless Technology Limited. All rights reserved.
+
+Facebook
+Twitter
+Instagram
+LinkedIn
+Youtube
+Pinterest
+TikTok
+Github
+Hackster
+Discord

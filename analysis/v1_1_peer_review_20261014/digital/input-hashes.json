@@ -1,0 +1,21 @@
+{
+  "hardware/pcb/stratolink.kicad_pcb": "9d63500a087ef8d345c2337942106e6704d32ded953846883454bfad718adf6c",
+  "hardware/pcb/stratolink.kicad_sch": "a06740b35d07d7b81999f7ace2a7a7ff02e185ca3e46a664630bd4bbd00c54b7",
+  "hardware/pcb/stratolink.kicad_pro": "79a2c0d01611c7ea7054cd9dbc685187b28fb4ac8792468a15d2bba821ac0ea7",
+  "hardware/pcb/stratolink.kicad_dru": "071d900e34c4eb3d3f91003cc0698e261e7fe23beea7107c4db50a1bf60a5136",
+  "firmware/platformio.ini": "9be154182da5852419edc5a0e6bd32fba80065ffc60959f1ebae40e4317cdc60",
+  "firmware/boards/stratolink.json": "8da364b37f1723e13fb5439c4d46b83545a9d1662269069364ddaea455b73820",
+  "firmware/include/stratolink_pins.h": "0ef610402ffa401fcd502c6385fdc443bd9fc5c40eb50e1069ada46a82cd4820",
+  "firmware/include/config.h": "1d77fe7fb4529119c8ff9f923b82fc6a4eb4fa9ab851121fd53106bfdcab41a2",
+  "firmware/src/sensors.cpp": "e3a0d5d144e088c170122e0ffe80f61c05b575150d08e71483f1ff242b45e0ea",
+  "firmware/src/gps_ublox.cpp": "0a9ff7eb7747308b24cfb48244e729b84e21e5fb0cce76323f22101674de5989",
+  "firmware/src/main.cpp": "28be00778998f57ae67ad4b9f54dbb6ee93c3ce0c75d0f3bce79ee5fac7012f4",
+  "firmware/src/sensor_ltr390.cpp": "efe5673fa07b53493230a388b987a95d6ec8104414e4f26dd33b96d04787e184",
+  "analysis/v1_1_peer_review_20261014/sources/rak3172-datasheet.txt": "fdb5c6cb1b1220d5eaed0f530ab740df6de8e2c05174ec033d490159aaa85968",
+  "analysis/redesign_20261010/metrology/sources/MAX-M10S.pdf": "e36d9c8585809c0dc486804d2634c66cd1888ad71af0f28ce0b830ffa8df6bec",
+  "analysis/redesign_20261010/metrology/sources/MAX-M10S-integration.pdf": "5a7510ef84f7e2757c57e362a25e3c16bcf8c80af5a4f70790c2e51032dbcd13",
+  "analysis/v1_1_layout_20261012/pcb_audit/sources/tmp117.pdf": "afe974873c80a7a4e1d342e9044e71c6f905caf4f04c1f0ea0df5c6ba35f980e",
+  "analysis/v1_1_release_20261012/as7331/review/as7331-datasheet-v4-00.pdf": "60c13168a4012c1642277b8d8f9557e6f835c3b9efbfd7cc086be25c5a4c670a",
+  "/Users/twarn/.platformio/packages/framework-arduinoststm32/libraries/Wire/src/Wire.cpp": "6ad33e3142d98695d9d120d1d6dea17a9a0fbd7ded9ac9ac50883065504acaa8",
+  "/Users/twarn/.platformio/packages/framework-arduinoststm32/variants/STM32WLxx/WL54CCU_WL55CCU_WLE4C(8-B-C)U_WLE5C(8-B-C)U/variant_RAK3172_MODULE.h": "a5ae38625f2ae4dcb300f901aad145cf8a417eb77c3ee5897a0dd700355f28bf"
+}

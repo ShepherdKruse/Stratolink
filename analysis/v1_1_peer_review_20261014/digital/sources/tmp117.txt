@@ -1,0 +1,2706 @@
+                                                                                                                                                                                                                TMP117
+                                                                                                                                   SNOSD82D – JUNE 2018 – REVISED SEPTEMBER 2022
+
+                TMP117 High-Accuracy, Low-Power, Digital Temperature Sensor
+                        With SMBus™- and I2C-Compatible Interface
+
+1 Features                                                                                              3 Description
+•   TMP117 high-accuracy temperature sensor                                                             The TMP117 is a high-precision digital temperature
+    – ±0.1 °C (maximum) from –20 °C to 50 °C                                                            sensor. It is designed to meet ASTM E1112
+    – ±0.15 °C (maximum) from –40 °C to 70 °C                                                           and ISO 80601 requirements for electronic patient
+    – ±0.2 °C (maximum) from –40 °C to 100 °C                                                           thermometers. The TMP117 provides a 16-bit
+    – ±0.25 °C (maximum) from –55 °C to 125 °C                                                          temperature result with a resolution of 0.0078 °C
+    – ±0.3 °C (maximum) from –55 °C to 150 °C                                                           and an accuracy of up to ±0.1 °C across the
+•   Operating temperature range: –55 °C to 150 °C                                                       temperature range of –20 °C to 50 °C with no
+•   Low power consumption:                                                                              calibration. The TMP117 has in interface that is
+    – 3.5-μA, 1-Hz conversion cycle                                                                     I2C- and SMBus™-compatible, programmable alert
+    – 150-nA shutdown current                                                                           functionality, and the device can support up to four
+•   Supply range:                                                                                       devices on a single bus. Integrated EEPROM is
+    – 1.7 V to 5.5 V from –55 °C to 70 °C                                                               included for device programming with an additional
+    – 1.8 V to 5.5 V from –55 °C to 150 °C                                                              48-bits memory available for general use.
+•   16-bit resolution: 0.0078°C (1 LSB)                                                                 The low power consumption of the TMP117 minimizes
+•   Programmable temperature alert limits                                                               the impact of self-heating on measurement accuracy.
+•   Selectable averaging                                                                                The TMP117 operates from 1.7 V to 5.5 V and
+•   Digital offset for system correction                                                                typically consumes 3.5 μA.
+•   General-purpose EEPROM: 48 bits
+•   NIST traceability                                                                                   For non-medical applications, the TMP117 can serve
+•   SMBus™, I2C interface compatibility                                                                 as a single chip digital alternative to a Platinum RTD.
+•   Medical grade: meets ASTM E1112 and ISO                                                             The TMP117 has an accuracy comparable to a Class
+    80601-2-56                                                                                          AA RTD, while only using a fraction of the power
+•   RTDs replacement: PT100, PT500, PT1000                                                              of the power typically needed for a PT100 RTD.
+                                                                                                        The TMP117 simplifies the design effort by removing
+2 Applications                                                                                          many of the complexities of RTDs such as precision
+•   Electronic thermometers                                                                             references, matched traces, complicated algorithms,
+•   Wireless environmental sensors                                                                      and calibration.
+•   Thermostats                                                                                         The TMP117 units are 100% tested on a production
+•   Automotive test equipment                                                                           setup that is NIST traceable and verified with
+•   Wearable fitness and activity monitors                                                              equipment that is calibrated to ISO/IEC 17025
+•   Cold chain asset tracking                                                                           accredited standards.
+•   Gas meters and heat meters
+•   Temperature transmitters                                                                                                                         Device Information(1)
+                                                                                                              PART NUMBER                                             PACKAGE                         BODY SIZE (NOM)
+                                                                                                                                                           WSON (6)                                  2.00 mm × 2.00 mm
+                                                                                                        TMP117
+                                                                                                                                                           DSBGA (6)                                 1.53 mm × 1.00 mm
+
+                                                                                                        (1)    For all available packages, see the package option
+                                                                                                               addendum at the end of the data sheet.
+                                          0.5                                                                                                     0.5
+                                                     WCSP Average        Class AA RTD                                                                      Average             Class AA RTD
+                                          0.4        TMP117 Min/Max                                                                               0.4      TMP117 Min/Max
+                                          0.3                                                                                                     0.3
+
+
+
+
+                 Temperature Error (qC)                                                                                  Temperature Error (qC)
+                                          0.2                                                                                                     0.2
+                                          0.1                                                                                                     0.1
+                                            0                                                                                                       0
+                                          -0.1                                                                                                    -0.1
+                                          -0.2                                                                                                    -0.2
+                                          -0.3                                                                                                    -0.3
+                                          -0.4                                                                                                    -0.4
+                                          -0.5                                                                                                    -0.5
+                                              -55   -30   -5    20    45      70    95   120   145                                                   -55   -30   -5   20    45      70    95   120   145
+                                                                 Temperature (qC)                Accu                                                                  Temperature (qC)                Accu
+
+
+
+               YBG Temperature Accuracy                                                                               DRV Temperature Accuracy
+
+
+
+     An IMPORTANT NOTICE at the end of this data sheet addresses availability, warranty, changes, use in safety-critical applications,
+     intellectual property matters and other important disclaimers. PRODUCTION DATA.
+TMP117
+SNOSD82D – JUNE 2018 – REVISED SEPTEMBER 2022                                                                                                                    www.ti.com
+
+
+                                                                        Table of Contents
+1 Features............................................................................1     7.4 Device Functional Modes..........................................14
+2 Applications..................................................................... 1       7.5 Programming............................................................ 18
+3 Description.......................................................................1       7.6 Register Map.............................................................25
+4 Revision History.............................................................. 2        8 Application and Implementation.................................. 33
+5 Pin Configuration and Functions...................................4                       8.1 Application Information............................................. 33
+6 Specifications.................................................................. 5        8.2 Typical Application.................................................... 33
+  6.1 Absolute Maximum Ratings ....................................... 5                  9 Power Supply Recommendations................................35
+  6.2 ESD Ratings .............................................................. 5        10 Layout...........................................................................36
+  6.3 Recommended Operating Conditions ........................5                            10.1 Layout Guidelines................................................... 36
+  6.4 Thermal Information ...................................................5              10.2 Layout Examples.................................................... 37
+  6.5 Electrical Characteristics ............................................6            11 Device and Documentation Support..........................39
+  6.6 Switching Characteristics ...........................................7                11.1 Documentation Support.......................................... 39
+  6.7 Two-Wire Interface Timing ......................................... 7                 11.2 Receiving Notification of Documentation Updates.. 39
+  6.8 Timing Diagram...........................................................8            11.3 Support Resources................................................. 39
+  6.9 Typical Characteristics................................................ 8             11.4 Trademarks............................................................. 39
+7 Detailed Description...................................................... 11             11.5 Electrostatic Discharge Caution.............................. 39
+  7.1 Overview................................................................... 11        11.6 Glossary.................................................................. 39
+  7.2 Functional Block Diagrams....................................... 11                 12 Mechanical, Packaging, and Orderable
+  7.3 Feature Description...................................................12              Information.................................................................... 39
+
+
+
+4 Revision History
+NOTE: Page numbers for previous revisions may differ from page numbers in the current version.
+Changes from Revision C (April 2021) to Revision D (September 2022)                                                                Page
+• Changed device numbers in the Bus Overview section................................................................................... 20
+
+Changes from Revision B (March 2019) to Revision C (April 2021)                                                                                       Page
+• Updated the numbering format for tables, figures, and cross-references throughout the document..................1
+• Changed minimum supply rating to 1.7 V for restricted temperature range....................................................... 1
+• Updated minimum supply voltage in Description................................................................................................1
+• Added 1.7 V supply rating for in Recommended Operating Conditions............................................................. 5
+• Updated Long term stability and drift conditions from 300 hrs to 1000 hrs.........................................................6
+• Corrected ALERT Pin Output Voltage vs Pin Sink Current labels...................................................................... 8
+• Added I2C behavior notes................................................................................................................................ 20
+• Updated Power Supply Recommendations to reflect new 1.7 V supply rating.................................................35
+• Updated documentation links........................................................................................................................... 39
+
+Changes from Revision A (October 2018) to Revision B (March 2019)                                                                                     Page
+• Moved the medical grade specs and RTD replacement information to the Features section ........................... 1
+• Changed application bullets................................................................................................................................1
+• Added YBG (DSBGA) package information....................................................................................................... 1
+• Added YBG package accuracy image................................................................................................................ 1
+• Changed accuracy image to indicate DRV package.......................................................................................... 1
+• Changed TJ(MAX) from 150 °C to 155 °C..........................................................................................................5
+• Added YBG package thermal information.......................................................................................................... 5
+• Added YBG package temperature accuracy chart............................................................................................. 8
+• Changed conversion cycle timing diagram....................................................................................................... 14
+• Changed one-shot timing diagram with AVG[1:0] = 00.....................................................................................15
+• Changed alert mode timing diagram.................................................................................................................16
+• Changed therm mode timing diagram.............................................................................................................. 17
+• Changed write word command timing diagram................................................................................................ 22
+• Changed read word command timing diagram.................................................................................................22
+• Changed SMBus alert timing diagram.............................................................................................................. 22
+
+2       Submit Document Feedback                                                                                           Copyright © 2022 Texas Instruments Incorporated
+
+                                                                      Product Folder Links: TMP117
+                                                                                                                                              TMP117
+www.ti.com                                                                                       SNOSD82D – JUNE 2018 – REVISED SEPTEMBER 2022
+
+•    Changed general-call reset command timing diagram..................................................................................... 22
+•    Updated the formatting in the Register Map section.........................................................................................25
+•    Added return links to the register descriptions..................................................................................................25
+•    Fixed access type code location and descriptions............................................................................................25
+•    Changed typical connections diagram..............................................................................................................33
+•    Added YBG package layout example............................................................................................................... 37
+
+Changes from Revision * (June 2018) to Revision A (October 2018)                                                                     Page
+• Changed device status from Advanced Information to Production Data ........................................................... 1
+• Changed shutdown current from: 250 nA to: 150 nA .........................................................................................1
+
+
+
+
+Copyright © 2022 Texas Instruments Incorporated                                                                     Submit Document Feedback               3
+                                                            Product Folder Links: TMP117
+TMP117
+SNOSD82D – JUNE 2018 – REVISED SEPTEMBER 2022                                                                                   www.ti.com
+
+
+5 Pin Configuration and Functions
+                                                                                                   1            2
+
+
+                   SCL      1             6   SDA
+                                                                                       A          SDA          SCL
+                  GND       2   Thermal   5   V+
+                                  Pad
+                ALERT       3             4   ADD0
+                                                                                       B           V+          GND
+         Figure 5-1. DRV Package 6-Pin WSON Top View
+
+
+                                                                                       C          ADD0        ALERT
+
+
+
+                                                                                                              Not to scale
+
+                                                                        Figure 5-2. YBG Package 6-Pin DSBGA Top View
+
+                                                    Table 5-1. Pin Functions
+                      PIN
+                                              TYPE                                         DESCRIPTION
+    NAME          WSON          DSBGA
+    ADD0             4            C1            I        Address select. Connect to GND, V+, SDA, or SCL.
+                                                         Over temperature alert or data-ready signal. This open-drain output requires a
+    ALERT            3            C2            O
+                                                         pullup resistor.
+    GND              2               B2         —        Ground
+    SCL              1               A2         I        Serial clock
+    SDA              6               A1       I/O        Serial data input and open-drain output. Requires a pullup resistor.
+    V+               5               B1         I        Supply voltage
+
+
+
+
+4         Submit Document Feedback                                                               Copyright © 2022 Texas Instruments Incorporated
+
+                                                     Product Folder Links: TMP117
+                                                                                                                                       TMP117
+www.ti.com                                                                                   SNOSD82D – JUNE 2018 – REVISED SEPTEMBER 2022
+
+
+6 Specifications
+6.1 Absolute Maximum Ratings
+Over free-air temperature range unless otherwise noted(1)
+                                                                                                              MIN             MAX     UNIT
+ Supply voltage              V+                                                                               –0.3               6      V
+ Voltage at                  SCL, SDA, ALERT and ADD0                                                         –0.3               6      V
+ Operating junction temperature, TJ                                                                            –55             155     °C
+ Storage temperature, Tstg                                                                                     –65             155     °C
+
+(1)     Stresses beyond those listed under Absolute Maximum Ratings may cause permanent damage to the device. These are stress
+        ratings only, which do not imply functional operation of the device at these or any other conditions beyond those indicated under
+        Recommended Operating Conditions. Exposure to absolute-maximum-rated conditions for extended periods may affect device
+        reliability.
+
+6.2 ESD Ratings
+                                                                                                                        VALUE          UNIT
+                                              Human-body model (HBM), per ANSI/ESDA/JEDEC JS-001(1)                      ±2000
+ V(ESD)       Electrostatic discharge         Charged-device model (CDM), per JEDEC specification JESD22-                               V
+                                                                                                                         ±1000
+                                              C101(2)
+
+(1)     JEDEC document JEP155 states that 500-V HBM allows safe manufacturing with a standard ESD control process.
+(2)     JEDEC document JEP157 states that 250-V CDM allows safe manufacturing with a standard ESD control process.
+
+6.3 Recommended Operating Conditions
+                                                                                                MIN           NOM              MAX    UNIT
+ V+          Supply voltage, TA = -55 °C to 150 °C                                               1.8            3.3             5.5     V
+ V+          Supply voltage, TA = -55 °C to 70 °C                                                1.7                            5.5     V
+ VI/O        SCL, SDA, ALERT and ADD0                                                              0                            5.5     V
+ TA          Operating free-air temperature                                                      –55                           150      °C
+
+
+6.4 Thermal Information
+                                                                                                           TMP117
+                                    THERMAL METRIC(1)                                         YBG (DSBGA)        DRV (WSON)           UNIT
+                                                                                                  6 PINS              6 PINS
+ RθJA            Junction-to-ambient thermal resistance                                           133.2                70.7           °C/W
+ RθJC(top)       Junction-to-case (top) thermal resistance                                          1.0                82.3           °C/W
+ RθJC(bot)       Junction-to-case (bottom) thermal resistance                                      N/A                 11.7           °C/W
+ RθJB            Junction-to-board thermal resistance                                              40.9                35.4           °C/W
+ ψJT             Junction-to-top characterization parameter                                         0.1                2.2            °C/W
+ ψJB             Junction-to-board characterization parameter                                      40.7                35.3           °C/W
+ MT              Thermal Mass                                                                       0.8                5.1            mJ/°C
+
+(1)     For more information about traditional and new thermal metrics, see the IC Package Thermal Metrics application report, SPRA953.
+
+
+
+
+Copyright © 2022 Texas Instruments Incorporated                                                               Submit Document Feedback          5
+                                                          Product Folder Links: TMP117
+TMP117
+SNOSD82D – JUNE 2018 – REVISED SEPTEMBER 2022                                                                                            www.ti.com
+
+6.5 Electrical Characteristics
+Over free-air temperature range and V+ = 1.7 V to 5.5 V for TA = -55 °C to 70 °C, or V+ = 1.8 V to 5.5 V for TA = -55 °C to
+150 °C (unless otherwise noted); Typical specifications are at TA = 25 °C and V+ = 3.3 V (unless otherwise noted)
+                   PARAMETER                                       TEST CONDITIONS                           MIN        TYP          MAX     UNIT
+    TEMPERATURE TO DIGITAL CONVERTER
+                                                 -20 °C to 50 °C                                             -0.1      ±0.05           0.1
+                                                 -40 °C to 70 °C                                            -0.15      ±0.05         0.15
+                                       TMP117    -40 °C to 100 °C                                            -0.2       ±0.1           0.2
+                                                 -55 °C to 125 °C           8 averages                      -0.25       ±0.1         0.25
+                                                                            1-Hz conversion cycle
+                                                 -55 °C to 150 °C                                            -0.3       ±0.1           0.3
+                                                                            Thermal Pad unsoldered
+               Temperature
+                                                 25 °C to 50 °C             (DRV Package)                    -0.1      ±0.05           0.1     °C
+               accuracy
+                                                                            I2C Input voltages: VIL ≤
+                                       TMP117M   0°C to 70 °C                                               -0.15      ±0.05         0.15
+                                                                            0.05 * V+, VIH ≥ 0.95 *
+                                                 0 °C to 85 °C              V+                               -0.2       ±0.1           0.2
+                                                 -40 °C to 100 °C                                            -0.2       ±0.1           0.2
+                                       TMP117N   -55 °C to 125 °C                                           -0.25       ±0.1         0.25
+                                                 -55 °C to 150 °C                                            -0.3       ±0.1           0.3
+               DC power supply sensitivity       One-shot mode, 8 Averages                                                  6                m°C/V
+               Temperature resolution (LSB)                                                                           7.8125                  m°C
+                                                 V+ = 3.3 V
+               Repeatability(1)                  8 averages                                                               ±1                  LSB
+                                                 1-Hz conversion cycle
+               Long-term stability and drift     1000 hours at 150 °C(2)                                               ±0.03                   °C
+               Temperature cycling and
+                                                 8 Averages                                                               ±2                  LSB
+               hysteresis(3)
+               Conversion time                   One-shot mode                                                 13       15.5         17.5      ms
+    DIGITAL INPUT/OUTPUT
+               Input capacitance                                                                                            4                  pF
+    VIH        Input logic high level            SCL, SDA                                               0.7 * (V+)                             V
+    VIL        Input logic low level             SCL, SDA                                                                       0.3 * (V+)     V
+    IIN        Input leakage current                                                                         -0.1                      0.1     μA
+               SDA and ALERT output
+    VOL                                          IOL = -3 mA                                                    0                      0.4     V
+               logic low level
+    POWER SUPPLY
+    IQ_ACTIV
+               Quiescent current during active
+    E                                          Active Conversion, serial bus inactive                                    135          220      μA
+               conversion
+
+                                                 Duty cycle 1 Hz, averaging mode off, serial bus
+                                                                                                                          3.5            5
+                                                 inactive. TA = 25 °C
+                                                 Duty cycle 1 Hz, 8 averaging mode on, serial bus
+    IQ         Quiescent current                                                                                          16           22      μA
+                                                 inactive. TA = 25 °C
+                                                 Duty cycle 1 Hz, averaging mode off, serial bus
+                                                                                                                          15
+                                                 active, SCL frequency = 400 kHz
+                                                 Serial bus inactive. SCL, SDA, and ADD0 = V+. TA
+    ISB        Standby current(4)                                                                                       1.25           3.1     μA
+                                                 = 25 °C
+                                                 Serial bus inactive, SCL, SDA, and ADD0 = V+. TA
+               Shutdown current                                                                                         0.15           0.5     μA
+                                                 = 25 °C
+                                                 Serial bus inactive, SCL, SDA and ADD0 = V+, TA
+    ISD        Shutdown current                                                                                                          5     μA
+                                                 = 150 °C
+                                                 Serial bus active, SCL frequency = 400 kHz, ADD0
+               Shutdown current                                                                                           17                   μA
+                                                 = V+
+               EEPROM write quiescent
+    IEE                                          ADC conversion off; serial bus inactive                                 240                   μA
+               current
+
+
+6         Submit Document Feedback                                                                        Copyright © 2022 Texas Instruments Incorporated
+
+                                                               Product Folder Links: TMP117
+                                                                                                                                            TMP117
+www.ti.com                                                                                   SNOSD82D – JUNE 2018 – REVISED SEPTEMBER 2022
+
+Over free-air temperature range and V+ = 1.7 V to 5.5 V for TA = -55 °C to 70 °C, or V+ = 1.8 V to 5.5 V for TA = -55 °C to
+150 °C (unless otherwise noted); Typical specifications are at TA = 25 °C and V+ = 3.3 V (unless otherwise noted)
+                 PARAMETER                                         TEST CONDITIONS                        MIN        TYP             MAX    UNIT
+             Power-on-reset threshold
+ VPOR                                             Supply rising                                                          1.6                    V
+             voltage
+             Brownout detect                      Supply falling                                                         1.1                    V
+ tRESET      Reset Time                           Time required by device to reset                                       1.5                    ms
+
+(1)      Repeatability is the ability to reproduce a reading when the measured temperature is applied consecutively, under the same conditions.
+(2)      Long term stability is determined using accelerated operational life testing at a junction temperature of 150°C.
+(3)      Hysteresis is defined as the ability to reproduce a temperature reading as the temperature varies from room → hot
+         →room→cold→room. The temperatures used for this test are -40°C, 25°C, and 150°C.
+(4)      Quiescent current between conversions
+
+6.6 Switching Characteristics
+Over free-air temperature range and V+ = 1.7 V to 5.5 V for TA = -55 °C to 70 °C, or V+ = 1.8 V to 5.5 V for TA = -55 °C to
+150 °C (unless otherwise noted); Typical specifications are at TA = 25 °C and V+ = 3.3 V (unless otherwise noted)
+                     PARAMETER                                     TEST CONDITIONS                 MIN            TYP            MAX       UNIT
+ EEPROM
+ Programming time                                                                                                   7                       ms
+ Number of writes                                                                                 1,000         50,000                     Times
+ Data retention time                                                                                 10           100                      Years
+
+
+6.7 Two-Wire Interface Timing
+Over free-air temperature range and V+ = 1.7 V to 5.5 V for TA = -55 °C to 70 °C, or V+ = 1.8 V to 5.5 V for TA = -55 °C to
+150 °C (unless otherwise noted)
+                                                                                                     FAST-MODE
+                                                                                                                                       UNIT
+                                                                                                       MIN                 MAX
+ fSCL                SCL operating frequency                                                               1                   400     KHz
+ tBUF                Bus free time between STOP and START conditions                                  1300                                 ns
+                     Hold time after repeated START condition.
+ tHD;STA                                                                                               600                                 ns
+                     After this period, the first clock is generated(1)
+ tSU;STA             Repeated START condition setup time                                               600                                 ns
+ tSU;STO             STOP condition setup time                                                         600                                 ns
+ tHD;DAT             Data hold time                                                                        0                               ns
+ tVD;DAT             Data valid time(2)                                                                                        0.9         µs
+ tSU;DAT             Data setup time                                                                   100                                 ns
+ tLOW                SCL clock low period                                                             1300                                 ns
+ tHIGH               SCL clock high period                                                             600                                 ns
+                                                                                                      20 ×
+ tF – SDA            Data fall time                                                                                            300         ns
+                                                                                                  (V+ /5.5)
+ tF, tR – SCL        Clock fall and rise time                                                                                  300         ns
+ tR                  Rise time for SCL ≤ 100 kHz                                                                           1000            ns
+                     Serial bus timeout (SDA bus released if there is no clock)                           20                    40         ms
+
+(1)      The maximum tHD;DAT could be 0.9 µs for Fast-Mode, and is less than the maximum tVD;DAT by a transition time.
+(2)      tVD;DATA = time for data signal from SCL "LOW" to SDA output ("HIGH" to "LOW", depending on which is worse).
+
+
+
+
+Copyright © 2022 Texas Instruments Incorporated                                                                 Submit Document Feedback             7
+                                                              Product Folder Links: TMP117
+TMP117
+SNOSD82D – JUNE 2018 – REVISED SEPTEMBER 2022                                                                                                                                                                  www.ti.com
+
+6.8 Timing Diagram
+                                                                           tLOW                  tF
+                                                                             tR                                    tHIGH
+                                       VIH
+                              SCL
+                                       VIL
+                                                                            tHD;STA                   tHD;DAT                                                             tSU;STA           tSU;STO
+                                                       tBUF                                           tVD;DAT                                        tSU;DAT
+                                       VIH
+                             SDA
+                                       VIL
+                                                   P          S                                                                                                  S                                           P
+
+                                                                                  Figure 6-1. Two-Wire Timing Diagram
+
+6.9 Typical Characteristics
+at TA = 25°C, V+ = 3.3 V, and measurement taken in oil bath (unless otherwise noted)
+
+                               0.5                                                                                                            0.5
+                                             Average               TMP117 Min/Max                                                                          Average                  TMP117 Min/Max
+                               0.4           Average r3V                                                                                      0.4          Average r3V
+                               0.3                                                                                                            0.3
+
+
+
+
+    Temperature Error (qC)                                                                                           Temperature Error (qC)
+                               0.2                                                                                                            0.2
+                               0.1                                                                                                            0.1
+                                0                                                                                                               0
+                              -0.1                                                                                                            -0.1
+                              -0.2                                                                                                            -0.2
+                              -0.3                                                                                                            -0.3
+                              -0.4                                                                                                            -0.4
+                              -0.5                                                                                                            -0.5
+                                 -55         -30       -5     20    45      70        95     120       145                                        -55     -30    -5         20    45      70      95     120     145
+                                                               Temperature (qC)                                                                                              Temperature (qC)                        WCSP
+                                                                                                            Accu
+
+                                              1-Hz conversion cycle, 8 averages mode                                                                       1-Hz conversion cycle, 8 averages mode
+    Figure 6-2. DRV Package Temperature Error vs Temperature                                                        Figure 6-3. YBG Package Temperature Error vs Temperature
+                               70                                                                                                             70
+                                                                                           TA = -40 qC                                                                                   V+ = 1.8 V, St. Dev = 0.89
+                               50                                                          TA = 25 qC                                         60                                         V+ = 3.3 V, St. Dev = 1.01
+                                                                                           TA = 125 qC                                                                                   V+ = 5.5 V, St. Dev = 1.05
+
+
+
+
+    Temperature Error (mqC)
+                               30                                                                                                             50
+
+
+
+
+                                                                                                                      Population (%)
+                               10                                                                                                             40
+
+                              -10                                                                                                             30
+
+                              -30                                                                                                             20
+
+                              -50                                                                                                             10
+
+                              -70                                                                                                              0
+                                 1.8         2.3       2.8     3.3     3.8      4.3        4.8        5.3                                            -4     -3       -2      -1      0       1    2      3       4
+                                                              Supply Voltage (V)                            TMP1
+                                                                                                            Temp                                                          Data Distribution (LSB)                     Data
+                                 Figure 6-4. Temperature Error vs Supply Voltage                                   Figure 6-5. Data Reading Distribution Over Supply Voltage (No
+                                                                                                                                            Averaging)
+
+
+
+
+8                             Submit Document Feedback                                                                                                                      Copyright © 2022 Texas Instruments Incorporated
+
+                                                                                             Product Folder Links: TMP117
+                                                                                                                                                                                                                                                         TMP117
+www.ti.com                                                                                                                                                                                             SNOSD82D – JUNE 2018 – REVISED SEPTEMBER 2022
+
+
+6.9 Typical Characteristics (continued)
+at TA = 25°C, V+ = 3.3 V, and measurement taken in oil bath (unless otherwise noted)
+
+                          70                                                                                                                                                                25
+                                                                             T = -50 qC, St. Dev = 0.88
+                          60                                                 T = 25 qC, St. Dev = 0.92
+                                                                             T = 100 qC, St. Dev = 1.06                                                                                     20
+
+                          50
+
+
+                                                                                                                                                                           Population (%)
+                                                                                                                                                                                            15
+
+
+
+
+    Population (%)
+                          40
+                                                                                                                                                                                            10
+                          30
+                                                                                                                                                                                             5
+                          20
+
+                          10                                                                                                                                                                 0
+                                                                                                                                                                                                 -70 -60 -50 -40 -30 -20 -10 0 10 20 30 40 50 60 70
+                                                                                                                                                                                                                  Temperature Error ((mqC)          temp
+                           0
+                                  -4         -3         -2      -1      0       1    2         3         4                                                                 TA = 25 °C. V+ = 3.3 V. One-shot mode with averaging = 8.
+                                                             Data Distribution (LSB)                          Data
+                                                                                                                                                                            Figure 6-7. Typical Temperature Distribution Error
+    Figure 6-6. Data Reading Distribution Over Temperature (No
+                       Averaging, V+ = 3.3 V)
+                          10                                                                                                                                              10
+                                                                                               V+ = 1.8 V                                                                                                                                       V+ = 1.8 V
+                           9                                                                   V+ = 3.3 V                                                                  9                                                                    V+ = 3.3 V
+                           8                                                                   V+ = 5.5 V                                                                  8                                                                    V+ = 5.5 V
+
+                           7                                                                                                                                               7
+
+
+
+
+    Current (PA)                                                                                                     Current (PA)
+                           6                                                                                                                                               6
+                           5                                                                                                                                               5
+                           4                                                                                                                                               4
+                           3                                                                                                                                               3
+                           2                                                                                                                                               2
+                           1                                                                                                                                               1
+                           0                                                                                                                                               0
+                           -75         -50        -25        0      25    50      75     100       125       150                                                           -75                   -50    -25     0      25    50      75   100      125       150
+                                                                 Temperature (qC)                            TMP1
+                                                                                                              Curr
+                                                                                                                                                                                                                    Temperature (qC)                          Curr
+
+                                                              Serial bus inactive                                                                                                                                Serial bus inactive
+                           Figure 6-8. Quiescent Current in Shutdown Mode                                                                                                               Figure 6-9. Quiescent Current in Standby Mode
+
+
+
+
+                                                                                                                           Active Conversion Time Change Percentage (%)
+                          70
+                                                                                             f = 1 MHz                                                                      8
+                                                                                             f = 400 kHz                                                                                                                                        V+ = 1.8 V
+                          60                                                                                                                                                6                                                                   V+ = 3.3 V
+                                                                                             f = 100 kHz
+                                                                                                                                                                                                                                                V+ = 5.5 V
+                          50                                                                                                                                                4
+
+
+
+
+    Supply Current (PA)
+                                                                                                                                                                            2
+                          40
+                                                                                                                                                                            0
+                          30
+                                                                                                                                                                          -2
+                          20
+                                                                                                                                                                          -4
+                          10
+                                                                                                                                                                          -6
+
+                           0                                                                                                                                              -8
+                            1.5         2          2.5            3     3.5      4     4.5         5         5.5                                                           -75                   -50    -25     0      25    50      75   100     125    150
+                                                                 Supply Voltage (V)                           Supp
+                                                                                                                                                                                                                    Temperature (qC)                     TMP1
+                                                                                                                                                                                                                                                          cont
+
+                                                                 SCL pin clocked                                                                                                                       Normalized to 25°C and V+ = 3.3 V
+                           Figure 6-10. Quiescent Current in Shutdown Mode                                                                                                Figure 6-11. Active Conversion Time vs Temperature
+
+
+
+
+Copyright © 2022 Texas Instruments Incorporated                                                                                                                                                                             Submit Document Feedback                 9
+                                                                                                Product Folder Links: TMP117
+TMP117
+SNOSD82D – JUNE 2018 – REVISED SEPTEMBER 2022                                                                                                                                  www.ti.com
+
+6.9 Typical Characteristics (continued)
+at TA = 25°C, V+ = 3.3 V, and measurement taken in oil bath (unless otherwise noted)
+
+                 1                                                                                                  800
+                          V+ = 1.8 V                                                                                                                                  V+ = 5.5 V
+                                                                                                                                                                      V+ = 4.4 V
+                          V+ = 2.0 V
+                                                                                                                                                                      V+ = 3.3 V
+                0.8       V+ = 3.3 V                                                                                                                                  V+ = 2.0 V
+                                                                                                                    600
+                          V+ = 5.5 V
+
+
+
+
+                                                                                              Supply Current (PA)
+                0.6
+
+     VOUT (V)
+                                                                                                                    400
+
+
+
+                0.4
+                                                                                                                    200
+
+
+                0.2
+                                                                                                                      0
+                                                                                                                          0   10   20   30     40     50   60   70   80   90   100
+                                                                                                                                                VIN / V+ (%)                       ICC_
+                 0
+                      0   3   6        9   12      15     18   21   24     27   30                                            Input voltage of SCL, SDA, or ADD0 pin
+                                                IOUT (mA)                        Aler
+                                                                                                          Figure 6-13. Supply Current vs Input Cell Voltage
+     Figure 6-12. ALERT Pin Output Voltage vs Pin Sink Current
+
+
+
+
+10              Submit Document Feedback                                                                                                     Copyright © 2022 Texas Instruments Incorporated
+
+                                                                         Product Folder Links: TMP117
+                                                                                                                                                   TMP117
+www.ti.com                                                                                           SNOSD82D – JUNE 2018 – REVISED SEPTEMBER 2022
+
+
+7 Detailed Description
+7.1 Overview
+The TMP117 is a digital output temperature sensor designed for thermal-management and thermal-protection
+applications. The TMP117 is two-wire, SMBus, and I2C interface-compatible. The device is specified over an
+ambient air operating temperature range of –55 °C to 150 °C. Figure 7-1 shows a block diagram of the TMP117.
+7.2 Functional Block Diagrams
+                                                                               V+
+
+
+
+
+           ADD0
+            SCL
+                                                    Serial         Register
+            SDA                                   Interface         Bank
+
+
+
+                                                                                                                                           ALERT
+                                                                  EEPROM
+
+
+
+                                                                                    Oscillator       Control
+                                                                                                      Logic
+
+                                  Internal
+                                  Thermal
+                                  BJT
+
+
+                                                    Temperature
+                                                      Sensor                   ADC
+                                                      Circuitry
+
+
+
+
+                                                                              GND           Copyright © 2017, Texas Instruments Incorporated
+
+                                                       Figure 7-1. Internal Block Diagram
+
+
+
+
+Copyright © 2022 Texas Instruments Incorporated                                                                         Submit Document Feedback        11
+                                                              Product Folder Links: TMP117
+TMP117
+SNOSD82D – JUNE 2018 – REVISED SEPTEMBER 2022                                                                  www.ti.com
+
+7.3 Feature Description
+7.3.1 Power Up
+After the supply voltage reaches within the operating range, the device requires 1.5 ms to power up before
+conversions can begin. The device can be programmed to start up in shutdown mode as well. See the EEPROM
+Programming section for more information. The temperature register reads –256 °C before the first conversion.
+7.3.2 Averaging
+Users can configure the device to report the average of multiple temperature conversions with the AVG[1:0]
+bits to reduce noise in the conversion results. When the TMP117 is configured to perform averaging with AVG
+set to 01, the device executes the configured number of conversions to eight. The device accumulates those
+conversion results and reports the average of all the collected results at the end of the process. As shown in the
+noise histograms of Figure 6-6 and Figure 6-7, the temperature result output has a repeatability of approximately
+±3 LSBs when there is no averaging and ±1 LSB when the device is configured to perform eight averages.
+Figure 7-2 shows the total conversion cycle time trade-off when using the averaging mode to achieve this
+improvement in noise performance. Averaging will increase the average active current consumption due to
+increasing the active conversion time in a conversion cycle. For example a single active conversion typically
+takes 15.5 ms, so if the device is configured to report an average of eight conversions, then the active
+conversion time is 124 ms (15.5 ms × 8). Use Equation 1 to factor in this increase in active conversion time
+to accurately calculate the average current consumption of the device. The average current consumption of the
+device can be decreased by increasing the amount of time the device spends in standby period as compared
+to active conversion. Under the factory EEPROM settings, the device is configured to report an average of eight
+conversions with a conversion cycle time of 1 second by default.
+Averaging can be used in both the continuous conversion mode and the one-shot mode.
+                                                  1 Second
+                                      124 ms
+                                      8 Conv
+
+         8 Averages, 1-Hz CC
+                                                            Standby
+                                        15.5 ms
+
+
+    I2C Temperature or
+Configuration Register Read
+
+
+
+
+             Data_Ready Flag
+
+                                       Figure 7-2. Averaging Timing Diagram
+
+
+
+
+12    Submit Document Feedback                                                  Copyright © 2022 Texas Instruments Incorporated
+
+                                                Product Folder Links: TMP117
+                                                                                                                          TMP117
+www.ti.com                                                                            SNOSD82D – JUNE 2018 – REVISED SEPTEMBER 2022
+
+
+7.3.3 Temperature Result and Limits
+At the end of every conversion, the device updates the temperature register with the conversion result. The data
+in the result register is in two's complement format, has a data width of 16 bits and a resolution of 7.8125 m°C.
+Table 7-1 shows multiple examples of possible binary data that can be read from the temperature result register
+and the corresponding hexadecimal and temperature equivalents.
+The TMP117 also has alert status flags and alert pin functionality that use the temperature limits stored in the
+low limit register and high limit register. The same data format used for the temperature result register is used for
+data written to the high and low limit registers.
+                                              Table 7-1. 16-Bit Temperature Data Format
+                                                                   TEMPERATURE REGISTER VALUE
+        TEMPERATURE                                                  (0.0078125 °C RESOLUTION)
+            (°C)
+                                                          BINARY                                           HEX
+              –256                                  1000 0000 0000 0000                                    8000
+               –25                                   1111 0011 1000 0000                                   F380
+             –0.1250                                 1111 1111 1111 0000                                   FFF0
+           –0.0078125                                1111 1111 1111 1111                                   FFFF
+                0                                   0000 0000 0000 0000                                    0000
+           0.0078125                                0000 0000 0000 0001                                    0001
+             0.1250                                 0000 0000 0001 0000                                    0010
+                1                                   0000 0000 1000 0000                                    0080
+                25                                  0000 1100 1000 0000                                    0C80
+               100                                  0011 0010 0000 0000                                    3200
+            255.9921                                 0111 1111 1111 1111                                   7FFF
+
+
+
+
+Copyright © 2022 Texas Instruments Incorporated                                                      Submit Document Feedback     13
+                                                       Product Folder Links: TMP117
+TMP117
+SNOSD82D – JUNE 2018 – REVISED SEPTEMBER 2022                                                                                        www.ti.com
+
+7.4 Device Functional Modes
+The TMP117 can be configured to operate in various conversion modes by using the MOD[1:0] bits. These
+modes provide flexibility to operate the device in the most power efficient way necessary for the intended
+application.
+7.4.1 Continuous Conversion Mode
+When the MOD[1:0] bits are set to 00 or 10 in the configuration register, the device operates in continuous
+conversion mode. The device continuously performs temperature conversions in this mode, as shown in Figure
+7-3, and updates the temperature result register at the end of every active conversion. The user can read the
+configuration register or the temperature result register to clear the Data_Ready flag. Therefore, the Data_Ready
+flag can be used to determine when the conversion completes so that an external controller can synchronize
+reading the result register with conversion result updates. The user can set the DR/nAlert_EN bit in the
+configuration register to monitor the state of the Data_Ready flag on the ALERT pin.
+Every conversion cycle consists of an active conversion period followed by a standby period. The device
+typically consumes 135 µA during active conversion and only 1.25 µA during the low-power standby period.
+Figure 7-3 shows a current consumption profile of a conversion cycle while in continuous current mode. The
+duration of the active conversion period and standby period can be configured using the CONV[2:0] and
+AVG[1:0] bits in the configuration register, thereby allowing the average current consumption of the device to
+be optimized based on the application requirements. Changing the conversion cycle period also affects the
+temperature result update rate because the temperature result register is updated at the end of every active
+conversion.
+Use Equation 1 to calculate the average current consumption of the device in continuous conversion mode.
+
+     (Active Current Consumption u Active Conversion Time) + (Standby Current Consumption u Standby Time)
+                                             Conversion Cycle Time                                        (1)
+                                              Start of conversion
+
+                                                             tStandby timet
+                              Active conversion time
+                             (Affected by averaging)
+
+
+
+
+                                                        Conversion Cycle time Conversion Cycle time
+
+                                    Figure 7-3. Conversion Cycle Timing Diagram
+
+7.4.2 Shutdown Mode (SD)
+When the MOD[1:0] bits are set to 01 in the configuration register, the device instantly aborts the currently
+running conversion and enters a low-power shutdown mode. In this mode, the device powers down all active
+circuitry and can be used in conjunction with the OS mode to perform temperature conversions. Engineers
+can use the TMP117 for battery-operated systems and other low-power consumption applications because the
+device typically only consumes 250 nA in SD mode.
+
+
+
+
+14    Submit Document Feedback                                                                        Copyright © 2022 Texas Instruments Incorporated
+
+                                                       Product Folder Links: TMP117
+                                                                                                                                 TMP117
+www.ti.com                                                                                   SNOSD82D – JUNE 2018 – REVISED SEPTEMBER 2022
+
+
+7.4.3 One-Shot Mode (OS)
+When MOD[1:0] bits are set to 11 in the configuration register, the TMP117 will run a temperature conversion
+referred to as a one-shot conversion. After the device completes a one-shot conversion, the device goes to the
+low-power shutdown mode. A one-shot conversion cycle, unlike the continuous conversion mode, only consists
+of the active conversion time and no standby period. Thus, the duration of a one-shot conversion is only affected
+by the AVG bit settings. The CONV bits do not affect the duration of a one-shot conversion. Figure 7-4 shows a
+timing diagram for this mode with an AVG setting of 00. At the end of a one-shot conversion, the Data_Ready
+and ALERT flag in the configuration register is set. The Data_Ready flag can be used to determine when the
+conversion completes. The user can perform an I2C read on the configuration register or temperature result
+register to clear the Data_Ready flag. The user can also set the DR/nAlert_EN bit in the configuration register to
+monitor the state of the Data_Ready flag on the ALERT pin.
+One-shot mode cannot be programmed to a default start-up mode. If the EEPROM is programmed to be in
+one-shot mode on start-up, it will default to shutdown mode instead.
+                                                     Start of conversion
+
+                                                                           tShutdownt
+                                     Active conversion time
+                                    (Affected by averaging)
+
+
+
+
+                                     I2C Command
+                                   Figure 7-4. One-Shot Timing Diagram With AVG[1:0] = 00
+
+7.4.4 Therm and Alert Modes
+The built-in therm and alert functions of the TMP117 can alert the user if the temperature has crossed a certain
+temperature limit or if the device is within a certain temperature range. At the end of every conversion, including
+averaging, the TMP117 compares the converted temperature result to the values stored in the low limit register
+and high limit register. The device then either sets or clears the corresponding status flags in the configuration
+register, as described in this section.
+
+
+
+
+Copyright © 2022 Texas Instruments Incorporated                                                             Submit Document Feedback     15
+                                                              Product Folder Links: TMP117
+TMP117
+SNOSD82D – JUNE 2018 – REVISED SEPTEMBER 2022                                                                    www.ti.com
+
+7.4.4.1 Alert Mode
+When the T/nA bit in the configuration register is set to 0, the device is in alert mode. In this mode, the device
+compares the conversion result at the end of every conversion with the values in the low limit register and high
+limit register. If the temperature result exceeds the value in the high limit register, the HIGH_Alert status flag in
+the configuration register is set. On the other hand, if the temperature result is lower than the value in the low
+limit register, the LOW_Alert status flag in the configuration register is set. As shown in Figure 7-5, the user can
+run an I2C read from the configuration register to clear the status flags in alert mode.
+When a user configures the device in alert mode, it affects the behavior of the ALERT pin. The device asserts
+the ALERT pin in this mode when either the HIGH_Alert or the LOW_Alert status flag is set, as shown in Figure
+7-5. The user can either run an I2C read of the configuration register (which also clears the status flags) or run
+an SMBus alert response command (see the SMBus Alert Function section) to deassert the ALERT pin. The
+polarity of the ALERT pin can be changed by using the POL bit setting in the configuration register.
+This mode effectively makes the device behave like a window limit detector. Thus this mode can be used in
+applications where detecting if the temperature goes outside of the specified range is necessary.
+
+
+                                                                                                      High temperature limit
+
+
+              Temperature
+
+
+                                                                                                      Low temperature limit
+
+
+
+
+Temperature conversions
+
+     HIGH_Alert Status Flag
+
+
+     LOW_Alert Status Flag
+
+
+       ALERT pin (POL = 0)
+
+
+                  I2C Read
+
+
+     SMBus Alert Command
+
+
+                                       Figure 7-5. Alert Mode Timing Diagram
+
+
+
+
+16       Submit Document Feedback                                                 Copyright © 2022 Texas Instruments Incorporated
+
+                                                Product Folder Links: TMP117
+                                                                                                                              TMP117
+www.ti.com                                                                               SNOSD82D – JUNE 2018 – REVISED SEPTEMBER 2022
+
+
+7.4.4.2 Therm Mode
+When the T/nA bit in the configuration register is set to 1 the device is in therm mode. In this mode, the device
+compares the conversion result at the end of every conversion with the values in the low limit register and high
+limit register and sets the HIGH_Alert status flag in the configuration register if the temperature exceeds the
+value in the high limit register. When set, the device clears the HIGH_Alert status flag if the conversion result
+goes below the value in the low limit register. Thus, the difference between the high and low limits effectively
+acts like a hysteresis. In this mode, the LOW_Alert status flag is disabled and always reads 0. Unlike the alert
+mode, I2C reads of the configuration register do not affect the status bits. The HIGH_Alert status flag is only set
+or cleared at the end of conversions based on the value of the temperature result compared to the high and low
+limits.
+As in alert mode, configuring the device in therm mode also affects the behavior of the ALERT pin. In this mode,
+the device asserts the ALERT pin if the HIGH_Alert status flag is set and deasserts the ALERT pin when the
+HIGH_Alert status flag is cleared. In therm mode, the ALERT pin cannot be cleared by performing an I2C read
+of the configuration register or by performing an SMBus alert response command. As in alert mode, the polarity
+of the active state of the ALERT pin can be changed if the user adjusts the POL bit setting in the configuration
+register.
+Thus, this mode effectively makes the device behave like a high-limit threshold detector. This mode can be used
+in applications where detecting if the temperature has gone above a desired threshold is necessary. Figure 7-6
+shows a timing diagram of this mode.
+
+
+                                                                                                                 High temperature limit
+
+
+              Temperature
+
+
+                                                                                                                 Low temperature limit
+
+
+
+
+Temperature conversions
+
+  HIGH_Alert Status Flag
+
+
+     ALERT pin (POL = 0)
+
+
+                  I2C Read
+
+
+                                                  Figure 7-6. Therm Mode Timing Diagram
+
+
+
+
+Copyright © 2022 Texas Instruments Incorporated                                                         Submit Document Feedback         17
+                                                          Product Folder Links: TMP117
+TMP117
+SNOSD82D – JUNE 2018 – REVISED SEPTEMBER 2022                                                                 www.ti.com
+
+7.5 Programming
+7.5.1 EEPROM Programming
+7.5.1.1 EEPROM Overview
+The device has a user-programmable EEPROM that can be used for two purposes:
+• Storing power-on reset (POR) values of the high limit register, low limit register, conversion cycle time,
+  averaging mode, conversion mode (continuous or shutdown mode), alert function mode (alert or therm
+  mode), and alert polarity
+• Storing four 16-bit locations for general-purpose use. See the EEPROM[4:1] registers for more information.
+On reset, the device goes through a POR sequence that loads the values programmed in the EEPROM into
+the respective register map locations. This process takes approximately 1.5 ms. When the power-up sequence
+is complete, the device starts operating in accordance to the configuration parameters that are loaded from
+the EEPROM. Any I2C writes performed during this initial POR period to the limit registers or the configuration
+register are ignored. I2C read transactions can still be performed with the device during the power-up period.
+While the POR sequence is being executed, the EEPROM_Busy status flag in the EEPROM unlock register is
+set.
+During production, the EEPROM in the TMP117 is programmed with reset values as shown in Table 7-3. The
+Programming the EEPROM section describes how to change these values. A unique ID is also programmed in
+the general-purpose EEPROM locations during production. This unique ID is used to support NIST traceability.
+The TMP117 units are 100% tested on a production setup that is NIST traceable and verified with equipment
+that is calibrated to ISO/IEC 17025 accredited standards. Only reprogram the general-purpose EEPROM[4:1]
+locations if NIST traceability is not desired.
+7.5.1.2 Programming the EEPROM
+To prevent accidental programming, the EEPROM is locked by default. When locked, any I2C writes to the
+register map locations are performed only on the volatile registers and not on the EEPROM.
+Figure 7-7 shows a flow chart describing the EEPROM programming sequence. To program the EEPROM, first
+unlock the EEPROM by setting the EUN bit in the EEPROM unlock register. After the EEPROM is unlocked,
+any subsequent I2C writes to the register map locations program a corresponding non-volatile memory location
+in the EEPROM. Programming a single location typically takes 7 ms to complete and consumes 230 µA. Do
+not perform any I2C writes until programming is complete. During programming, the EEPROM_busy flag is
+set. Read this flag to monitor if the programming is complete. After programming the desired data, issue a
+general-call reset command to trigger a software reset. The programmed data from the EEPROM are then
+loaded to the corresponding register map locations as part of the reset sequence. This command also clears the
+EUN bit and automatically locks the EEPROM to prevent any further accidental programming. Avoid using the
+device to perform temperature conversions when the EEPROM is unlocked.
+
+
+
+
+18    Submit Document Feedback                                                 Copyright © 2022 Texas Instruments Incorporated
+
+                                                Product Folder Links: TMP117
+                                                                                                                                                           TMP117
+www.ti.com                                                                                                             SNOSD82D – JUNE 2018 – REVISED SEPTEMBER 2022
+
+
+                                                                                      Start
+
+
+
+
+                                                                           Set Bit 15 of the EEPROM
+                                                                          Unlock Register to 1 to Unlock
+
+
+
+
+                                                                        Write Desired Data to the Register
+
+
+
+
+                                                                                    Wait 7 ms
+
+
+
+
+                                                                                                 EEPROM_Busy = 1
+                                                                                                 (Still Programming)
+
+
+
+
+                                                                            Read Back EEPROM_Busy
+
+
+
+
+                                                  Programming Process
+                                                                             From EEPROM Unlock
+                                                                                    Register
+
+
+
+
+                                                                                                 EEPROM_Busy = 0
+                                                                                              (Programming Complete)
+
+
+
+
+                                                                            Program Another Location?
+                                                                                                             Yes
+
+
+
+
+                                                                                          No
+
+
+
+
+                                                                                General-Call Reset
+
+
+
+
+                                                                        Read Programed Registers to Verify
+
+
+
+
+                                                                                       End
+
+
+                                            Figure 7-7. EEPROM Programming Sequence
+
+
+
+
+Copyright © 2022 Texas Instruments Incorporated                                                                                       Submit Document Feedback     19
+                                                                              Product Folder Links: TMP117
+TMP117
+SNOSD82D – JUNE 2018 – REVISED SEPTEMBER 2022                                                                        www.ti.com
+
+7.5.2 Pointer Register
+Figure 7-8 shows the internal register structure of the TMP117. The 8-bit pointer register of the device is used to
+address a given data register. The reset value is 00.
+
+                                                       Pointer
+                                                       Register
+
+
+
+
+                                          Temperature
+                                            Register
+
+
+                                                                                SCL
+                                          Configuration
+                                            Register
+                                                                     I/O
+                                                                   Control
+                                                                  Interface
+                                             TLOW
+                                            Register
+                                                                                SDA
+
+
+                                             THIGH
+                                            Register
+
+
+
+
+                                         EEPROM1 to 4
+
+
+
+                                       Figure 7-8. Internal Register Structures
+
+7.5.3 I2C and SMBus Interface
+7.5.3.1 Serial Interface
+The TMP117 operates as a slave device only on the two-wire, SMBus and I2C interface-compatible bus.
+Connections to the bus are made through the open-drain I/O lines and the SDA and SCL pins. The SDA and
+SCL pins feature integrated spike-suppression filters and Schmitt triggers to minimize the effects of input spikes
+and bus noise. The device supports the transmission protocol for fast (1 kHz to 400 kHz) mode. Register bytes
+are sent with the most significant byte first, followed by the least significant byte.
+7.5.3.1.1 Bus Overview
+The device that initiates the transfer is called a master, and the devices controlled by the master are slaves. The
+bus must be controlled by a master device that generates the serial clock (SCL), controls the bus access, and
+generates the START and STOP conditions.
+To address a specific device, a START condition is initiated, indicated by pulling the data line (SDA) from a high-
+to low-logic level when the SCL pin is high. All slaves on the bus shift in the slave address byte on the rising
+edge of the clock, and the last bit indicates whether a read or write operation is intended. During the ninth clock
+pulse, the addressed slave generates an acknowledge and pulls the SDA pin low to respond to the master.
+A data transfer is then initiated and sent over eight clock pulses followed by an acknowledge bit. During the data
+transfer, the SDA pin must remain stable when the SCL pin is high because any change in the SDA pin when the
+SCL pin is high is interpreted as a START or STOP signal.
+When all data are transferred, the master generates a repeated START condition or a STOP condition.
+•    TMP117 will ignore any I2C traffic until a START condition is observed
+•    TMP117 I2C state machine resets every time it sees a STOP condition
+•    TMP117 must not be connected to an I2C bus during active communication.
+
+
+
+
+20    Submit Document Feedback                                                        Copyright © 2022 Texas Instruments Incorporated
+
+                                                 Product Folder Links: TMP117
+                                                                                                                          TMP117
+www.ti.com                                                                           SNOSD82D – JUNE 2018 – REVISED SEPTEMBER 2022
+
+
+7.5.3.1.2 Serial Bus Address
+To communicate with the TMP117, the master must first address slave devices through an address byte. The
+address byte has seven address bits and a read-write (R/W) bit that indicates the intent of executing a read or
+write operation.
+The TMP117 features an address pin to allow up to four devices to be addressed on a single bus. Table 7-2
+describes the pin logic levels used to properly connect up to four devices. x represents the read-write (R/ W) bit.
+                                            Table 7-2. Address Pin and Slave Addresses
+                     DEVICE TWO-WIRE ADDRESS                                           ADD0 PIN CONNECTION
+                                 1001000x                                                      Ground
+                                 1001001x                                                        V+
+                                 1001010x                                                       SDA
+                                 1001011x                                                       SCL
+
+
+7.5.3.1.3 Writing and Reading Operation
+The user can write a register address to the pointer register to access a particular register on the TMP117. The
+value for the pointer register is the first byte transferred after the slave address byte with the R/ W bit low. Every
+write operation to the TMP117 requires a value for the pointer register.
+When reading from the TMP117, the last value stored in the pointer register by a write operation is used to
+determine which register is read during a read operation. To change the register pointer for a read operation,
+a new value must be written to the pointer register. The user can issue an address byte with the R/ W bit low,
+followed by the pointer register byte to write a new value for the pointer register. No additional data is required.
+The master can then generate a START condition and send the slave address byte with the R/ W bit high to
+initiate the read command. See Figure 7-10 for details of this sequence. If repeated reads from the same register
+are desired, it is not necessary to send the pointer register bytes continuously because the TMP117 retains the
+pointer register value until the value is changed by the next write operation.
+Register bytes are sent with the most significant byte first, followed by the least significant byte.
+7.5.3.1.4 Slave Mode Operations
+The TMP117 can operate as a slave receiver or slave transmitter. As a slave device, the TMP117 never drives
+the SCL line.
+7.5.3.1.4.1 Slave Receiver Mode
+The first byte transmitted by the master is the slave address with the R/W bit low. The TMP117 then
+acknowledges reception of a valid address. The next byte transmitted by the master is the pointer register. The
+TMP117 then acknowledges reception of the pointer register byte. The next byte(s) are written to the register
+addressed by the pointer register. The TMP117 acknowledges reception of each data byte. The master can
+terminate data transfer by generating a START or STOP condition.
+7.5.3.1.4.2 Slave Transmitter Mode
+The first byte transmitted by the master is the slave address with the R/W bit high. The slave acknowledges
+reception of a valid slave address. The next byte is transmitted by the slave and is the most significant byte
+of the register indicated by the pointer register. The master acknowledges reception of the data byte. The next
+byte transmitted by the slave is the least significant byte. The master acknowledges reception of the data byte.
+The master can terminate data transfer by generating a not-acknowledge on reception of any data byte or by
+generating a START or STOP condition.
+7.5.3.1.5 SMBus Alert Function
+The TMP117 supports the SMBus alert function. When the ALERT pin is connected to an SMBus alert signal
+and a master senses that an alert condition is present, the master can send out an SMBus ALERT command
+(0001 1001) to the bus. If the ALERT pin is active, the device acknowledges the SMBus ALERT command
+and responds by returning the slave address on the SDA line. The eighth bit (LSB) of the slave address byte
+indicates if the alert condition is caused by the temperature exceeding T(HIGH) or falling below T (LOW). The LSB is
+Copyright © 2022 Texas Instruments Incorporated                                                       Submit Document Feedback   21
+                                                      Product Folder Links: TMP117
+TMP117
+SNOSD82D – JUNE 2018 – REVISED SEPTEMBER 2022                                                                                                                               www.ti.com
+
+high if the temperature is greater than T(HIGH), or low if the temperature is less than T(LOW). See Figure 7-11 for
+details of this sequence.
+If multiple devices on the bus respond to the SMBus ALERT command, arbitration during the slave address
+portion of the SMBus ALERT command determines which device clears the alert status of that device. The
+device with the lowest two-wire address wins the arbitration. If the TMP117 wins the arbitration, the TMP117
+ALERT pin becomes inactive at the completion of the SMBus ALERT command. If the TMP117 loses the
+arbitration, the TMP117 ALERT pin remains active.
+7.5.3.1.6 General-Call Reset Function
+The TMP117 responds to a two-wire, general-call address (0000 000) if the eighth bit is 0. The device
+acknowledges the general-call address and responds to commands in the second byte. If the second byte
+is 0000 0110, the TMP117 internal registers are reset to power-up values.
+7.5.3.1.7 Timeout Function
+The TMP117 resets the serial interface if the SCL line is held low by the master or the SDA line is held low by
+the TMP117 for 35 ms (typical) between a START and STOP condition. The TMP117 releases the SDA line if the
+SCL pin is pulled low and waits for a START condition from the host controller. To avoid activating the timeout
+function, maintain a communication speed of at least 1 kHz for the SCL operating frequency.
+7.5.3.1.8 Timing Diagrams
+The TMP117 is two-wire, SMBus and I2C interface-compatible. Figure 7-9 to Figure 7-12 show the various
+operations with the TMP117. Bus definitions are:
+Bus Idle: Both SDA and SCL lines remain high.
+Start Data Transfer: A change in the state of the SDA line from high to low when the SCL line is high defines a
+START condition. Each data transfer is initiated with a START condition.
+Stop Data Transfer: A change in the state of the SDA line from low to high when the SCL line is high defines a
+STOP condition. Each data transfer is terminated with a repeated START or STOP condition.
+Data Transfer: The number of data bytes transferred between a START and a STOP condition is not limited and
+is determined by the master device.
+Acknowledge: Each receiving device, when addressed, is obliged to generate an acknowledge bit. A device
+that acknowledges must pull down the SDA line during the acknowledge clock pulse in such a way that the
+SDA line is stable low during the high period of the acknowledge clock pulse. The user must take setup and
+hold times into account. On a master receive, the termination of the data transfer can be signaled by the master
+generating a not-acknowledge (1) on the last byte transmitted by the slave.
+         Master controls SDA line
+
+         Slave controls SDA line
+
+
+
+                   Slave Address                                            Register Pointer (N)           Data to Register N MSB                  Data to Register N LSB
+
+
+
+     S   A6   A5    A4   A3   A2   A1   A0    0    A    0    0   0      0    P3   P2   P1   P0     A   D15 D14 D13 D12 D11 D10 D9 D8    A     D7 D6 D5 D4 D3 D2 D1 D0           A    P
+
+
+
+START                                        R/W            Must be 0                                                                                                               STOP
+
+
+
+                                   ACK from Slave                                 ACK from Slave                           ACK from Slave                          ACK from Slave
+
+
+                                                       Figure 7-9. Write Word Command Timing Diagram
+
+
+
+
+22        Submit Document Feedback                                                                                                     Copyright © 2022 Texas Instruments Incorporated
+
+                                                                                  Product Folder Links: TMP117
+                                                                                                                                                                    TMP117
+www.ti.com                                                                                                         SNOSD82D – JUNE 2018 – REVISED SEPTEMBER 2022
+
+        Master controls SDA line
+
+
+        Slave controls SDA line
+
+
+
+                 Slave Address                                                   Register Pointer (N)                         Slave Address
+
+
+
+   S   A6   A5    A4   A3   A2    A1   A0    0    A          0       0   0   0    P3    P2   P1   P0    A        RS A6   A5    A4    A3    A2   A1   A0    1    A
+
+
+
+START                                       R/W                  Must be 0                                  Re-START                                      R/W
+
+
+
+                                  ACK from Slave                                        ACK from Slave                                          ACK from Slave
+
+
+
+
+                                       Data from Register N MSB                              Data from Register N LSB
+
+
+
+                                 D15 D14 D13 D12 D11 D10 D9 D8               A          D7 D6 D5 D4 D3 D2 D1 D0 NA                   P
+
+
+
+                                                                                                                                    STOP
+
+
+
+                                                          ACK from Master                                   NACK from Master
+
+                                                 Figure 7-10. Read Word Command Timing Diagram
+
+                                 Master controls SDA line
+
+
+                                 Slave controls SDA line
+
+
+                                       SMBus Alert Response
+                                           Command                                                     TMP117 I2C Address
+
+
+
+                       S     0         0    0      1     1       0       0   1      A             1     0    0     1     0     A1    A0 Stat NA            P
+
+
+
+                   START                                                                                                                   Status     STOP
+
+
+                                                                 ACK from Slave                                          NACK from Master
+
+                                                       Figure 7-11. SMBus ALERT Timing Diagram
+
+
+
+
+Copyright © 2022 Texas Instruments Incorporated                                                                                           Submit Document Feedback       23
+                                                                         Product Folder Links: TMP117
+TMP117
+SNOSD82D – JUNE 2018 – REVISED SEPTEMBER 2022                                                                              www.ti.com
+
+                      Master controls SDA line
+
+                      Slave controls SDA line
+
+
+
+                              General Call Address                              Reset command
+
+
+
+                 S    0   0      0   0   0   0       0   0   A         0    0   0   0   0    1    1    0     A    P
+
+
+
+              START                                                                                              STOP
+
+
+
+                                             ACK from Slave                                 ACK from Slave
+
+                              Figure 7-12. General-Call Reset Command Timing Diagram
+
+
+
+
+24    Submit Document Feedback                                                              Copyright © 2022 Texas Instruments Incorporated
+
+                                                     Product Folder Links: TMP117
+                                                                                                                                      TMP117
+www.ti.com                                                                                       SNOSD82D – JUNE 2018 – REVISED SEPTEMBER 2022
+
+
+7.6 Register Map
+                                                       Table 7-3. TMP117 Register Map
+      ADDRESS           TYPE        RESET                 ACRONYM                              REGISTER NAME                     SECTION
+        00h               R         8000h         Temp_Result                   Temperature result register                         Go
+        01h             R/W        0220h(1)       Configuration                 Configuration register                              Go
+        02h             R/W        6000h(1)       THigh_Limit                   Temperature high limit register                     Go
+        03h             R/W        8000h(1)       TLow_Limit                    Temperature low limit register                      Go
+        04h             R/W         0000h         EEPROM_UL                     EEPROM unlock register                              Go
+        05h             R/W         xxxxh(1)      EEPROM1                       EEPROM1 register                                    Go
+        06h             R/W         xxxxh(1)      EEPROM2                       EEPROM2 register                                    Go
+        07h             R/W        0000h(1)       Temp_Offset                   Temperature offset register                         Go
+        08h             R/W         xxxxh(1)      EEPROM3                       EEPROM3 register                                    Go
+        0Fh               R          0117h        Device_ID                     Device ID register                                  Go
+
+(1)    This value is stored in Electrically-Erasable, Programmable Read-Only Memory (EEPROM) during device manufacturing. The device
+       reset value can be changed by writing the relevant code in the EEPROM cells (see the EEPROM Overview section).
+
+                                                   Table 7-4. TMP117 Access Type Codes
+                                       Access Type         Code              Description
+                                       Read Type
+                                       R                   R                 Read
+                                       RC                  R                 Read
+                                                           C                 to Clear
+                                       Write Type
+                                       W                   W                 Write
+                                       Reset or Default Value
+                                       -n                                    Value after reset or the default
+                                                                             value
+
+
+
+
+Copyright © 2022 Texas Instruments Incorporated                                                                   Submit Document Feedback   25
+                                                               Product Folder Links: TMP117
+TMP117
+SNOSD82D – JUNE 2018 – REVISED SEPTEMBER 2022                                                                                  www.ti.com
+
+7.6.1 Register Descriptions
+
+7.6.2 Temperature Register (address = 00h) [default reset = 8000h]
+This register is a 16-bit, read-only register that stores the output of the most recent conversion. One LSB
+equals 7.8125 m°C. Data are represented in binary two's complement format. Following a reset, the temperature
+register reads –256 °C until the first conversion, including averaging, is complete. See the Power Up section for
+more information.
+Return to Register Map.
+                                            Figure 7-13. Temperature Register
+        15               14           13                12               11               10                   9                  8
+       T15               T14          T13               T12             T11               T10                 T9                 T8
+       R-1               R-0          R-0               R-0             R-0               R-0                R-0                R-0
+
+           7              6            5                 4               3                 2                   1                  0
+        T7               T6           T5                T4              T3                T2                  T1                 T0
+       R-0               R-0          R-0               R-0             R-0               R-0                R-0                R-0
+
+                                  Table 7-5. Temperature Register Field Descriptions
+     BIT       FIELD                            TYPE         RESET    DESCRIPTION
+     15:0      T[15:0]                          R            8000h    16-bit, read-only register that stores the most recent
+                                                                      temperature conversion results.
+
+
+
+
+26     Submit Document Feedback                                                                 Copyright © 2022 Texas Instruments Incorporated
+
+                                                    Product Folder Links: TMP117
+                                                                                                                                              TMP117
+www.ti.com                                                                                      SNOSD82D – JUNE 2018 – REVISED SEPTEMBER 2022
+
+7.6.3 Configuration Register (address = 01h) [factory default reset = 0220h]
+Return to Register Map.
+                                                      Figure 7-14. Configuration Register
+          15                 14               13                   12              11                 10                  9                  8
+    HIGH_Alert          LOW_Alert        Data_Ready        EEPROM_Busy          MOD1(2)            MOD0(1)           CONV2(1)           CONV1(1)
+          R-0               R-0               R-0                 R-0            R/W-0              R/W-0              R/W-1              R/W-0
+
+           7                 6                    5                4                3                  2                  1                  0
+    CONV0(1)               AVG1(1)         AVG0(1)               T/nA(1)         POL(1)           DR/Alert(1)        Soft_Reset             —
+      R/W-0                R/W-0            R/W-1                R/W-0           R/W-0              R/W-0                R-0                R-0
+
+                                       Table 7-6. Configuration Register Field Descriptions
+     BIT        FIELD                                     TYPE          RESET   DESCRIPTION
+      15        HIGH_Alert                                R             0       High Alert flag:
+                                                                                1: Set when the conversion result is higher than the high limit
+                                                                                0: Cleared on read of configuration register
+                                                                                Therm mode:
+                                                                                1: Set when the conversion result is higher than the therm limit
+                                                                                0: Cleared when the conversion result is lower than the
+                                                                                hysteresis
+      14        LOW_Alert                                 R             0       Low Alert flag:
+                                                                                1: Set when the conversion result is lower than the low limit
+                                                                                0: Cleared when the configuration register is read
+                                                                                Therm mode: Always set to 0
+      13        Data_Ready                                R             0       Data ready flag.
+                                                                                This flag indicates that the conversion is complete and the
+                                                                                temperature register can be read. Every time the temperature
+                                                                                register or configuration register is read, this bit is cleared. This
+                                                                                bit is set at the end of the conversion when the temperature
+                                                                                register is updated. Data ready can be monitored on the ALERT
+                                                                                pin by setting bit 2 of the configuration register.
+      12        EEPROM_Busy                               R             0       EEPROM busy flag.
+                                                                                The value of the flag indicates that the EEPROM is busy during
+                                                                                programming or power-up.
+    11:10       MOD[1:0]                                  R/W           0       Set conversion mode.
+                                                                                00: Continuous conversion (CC)
+                                                                                01: Shutdown (SD)
+                                                                                10: Continuous conversion (CC), Same as 00 (reads back = 00)
+                                                                                11: One-shot conversion (OS)
+     9:7        CONV[2:0]                                 R/W           100     Conversion cycle bit.
+                                                                                See Table 7-7 for the standby time between conversions.
+     6:5        AVG[1:0]                                  R/W           01      Conversion averaging modes. Determines the number of
+                                                                                conversion results that are collected and averaged before
+                                                                                updating the temperature register. The average is an
+                                                                                accumulated average and not a running average.
+                                                                                00: No averaging
+                                                                                01: 8 Averaged conversions
+                                                                                10: 32 averaged conversions
+                                                                                11: 64 averaged conversions
+      4         T/nA                                      R/W           0       Therm/alert mode select.
+                                                                                1: Therm mode
+                                                                                0: Alert mode
+      3         POL                                       R/W           0       ALERT pin polarity bit.
+                                                                                1: Active high
+                                                                                0: Active low
+      2         DR/Alert                                  R/W           0       ALERT pin select bit.
+                                                                                1: ALERT pin reflects the status of the data ready flag
+                                                                                0: ALERT pin reflects the status of the alert flags
+
+
+
+
+Copyright © 2022 Texas Instruments Incorporated                                                                    Submit Document Feedback             27
+                                                              Product Folder Links: TMP117
+TMP117
+SNOSD82D – JUNE 2018 – REVISED SEPTEMBER 2022                                                                                       www.ti.com
+
+                            Table 7-6. Configuration Register Field Descriptions (continued)
+      BIT      FIELD                              TYPE       RESET        DESCRIPTION
+      1        Soft_Reset                         R/W        0            Software reset bit.
+                                                                          When set to 1 it triggers software reset with a duration of 2 ms
+                                                                          This bit will always read back 0
+      0        —                                  R          0            Not used
+
+(1)    These bits can be stored in EEPROM. The factory setting for this register is 0220.
+(2)    The MOD1 bit cannot be stored in EEPROM. The device can only be programmed to start up in shutdown mode or continuous
+       conversion mode.
+
+                                      Table 7-7. Conversion Cycle Time in CC Mode
+            CONV[2:0]             AVG[1:0] = 00              AVG[1:0] = 01                 AVG[1:0] = 10                AVG[1:0] = 11
+              000                   15.5 ms                      125 ms                       500 ms                          1s
+              001                    125 ms                      125 ms                       500 ms                          1s
+              010                    250 ms                      250 ms                       500 ms                          1s
+               011                   500 ms                      500 ms                       500 ms                          1s
+              100                      1s                         1s                             1s                           1s
+              101                      4s                         4s                             4s                           4s
+               110                     8s                         8s                             8s                           8s
+               111                    16 s                        16 s                          16 s                         16 s
+
+
+If the time to complete the conversions needed for a given averaging setting is higher than the conversion setting
+cycle time, there will be no stand by time in the conversion cycle.
+
+
+
+
+28     Submit Document Feedback                                                                    Copyright © 2022 Texas Instruments Incorporated
+
+                                                      Product Folder Links: TMP117
+                                                                                                                                          TMP117
+www.ti.com                                                                                   SNOSD82D – JUNE 2018 – REVISED SEPTEMBER 2022
+
+7.6.4 High Limit Register (address = 02h) [Factory default reset = 6000h]
+This register is a 16-bit, read/write register that stores the high limit for comparison with the temperature result.
+One LSB equals 7.8125 m°C. The range of the register is ±256 °C. Negative numbers are represented in binary
+two's complement format. Following power-up or a general-call reset, the high-limit register is loaded with the
+stored value from the EEPROM. The factory default reset value is 6000h.
+Return to Register Map.
+                                                      Figure 7-15. High Limit Register
+        15                 14                 13                12              11                 10                 9                  8
+        H15                H14               H13               H12             H11                H10                H9                 H8
+      R/W-0              R/W-1              R/W-1              R/W-0          R/W-0              R/W-0             R/W-0              R/W-0
+
+           7                6                     5              4               3                 2                  1                  0
+        H7                 H6                 H5                H4              H3                 H2                H1                 H0
+      R/W-0              R/W-0              R/W-0              R/W-0          R/W-0              R/W-0             R/W-0              R/W-0
+
+                                         Table 7-8. High Limit Register Field Descriptions
+     BIT       FIELD                                    TYPE         RESET   DESCRIPTION
+     15:0      H[15:0]                                  R/W          6000h   16-bit, read/write register that stores the high limit for comparison
+                                                                             with the temperature result.
+
+
+
+7.6.5 Low Limit Register (address = 03h) [Factory default reset = 8000h]
+This register is configured as a 16-bit, read/write register that stores the low limit for comparison with the
+temperature result. One LSB equals 7.8125 m°C. The range of the register is ±256 °C. Negative numbers
+are represented in binary two's complement format. The data format is the same as the temperature register.
+Following power-up or reset, the low-limit register is loaded with the stored value from the EEPROM. The factory
+default reset value is 8000h.
+Return to Register Map.
+                                                      Figure 7-16. Low Limit Register
+        15                 14                 13                12              11                 10                 9                  8
+        L15                L14                L13               L12             L11               L10                L9                 L8
+      R/W-1              R/W-0              R/W-0              R/W-0          R/W-0              R/W-0             R/W-0              R/W-0
+
+           7                6                     5              4               3                 2                  1                  0
+        L7                 L6                 L5                L4              L3                 L2                L1                 L0
+      R/W-0              R/W-0              R/W-0              R/W-0          R/W-0              R/W-0             R/W-0              R/W-0
+
+                                          Table 7-9. Low Limit Register Field Descriptions
+     BIT       FIELD                                   TYPE          RESET    DESCRIPTION
+     15:0      L[15:0]                                 R/W           8000h    16-bit, read/write register that stores the low limit for comparison
+                                                                              with the temperature result.
+
+
+
+
+Copyright © 2022 Texas Instruments Incorporated                                                                 Submit Document Feedback             29
+                                                          Product Folder Links: TMP117
+TMP117
+SNOSD82D – JUNE 2018 – REVISED SEPTEMBER 2022                                                                                 www.ti.com
+
+7.6.6 EEPROM Unlock Register (address = 04h) [reset = 0000h]
+Return to Register Map.
+                                            Figure 7-17. EEPROM Unlock Register
+          15              14           13               12               11               10                  9                  8
+       EUN           EEPROM_Busy        —               —                —                —                  —                  —
+      R/W-0               R-0          R-0              R-0             R-0              R-0                R-0                R-0
+
+           7              6             5                4               3                2                   1                  0
+          —               —             —               —                —                —                  —                  —
+       R-0                R-0          R-0              R-0             R-0              R-0                R-0                R-0
+
+                                 Table 7-10. EEPROM Unlock Register Field Descriptions
+     BIT       FIELD                            TYPE         RESET    DESCRIPTION
+     15        EUN                              R/W          0        EEPROM unlock.
+                                                                      0: EEPROM is locked for programming: writes to all EEPROM
+                                                                      addresses (such as configuration, limits, and EEPROM locations
+                                                                      1-4) are written to registers in digital logic and are not
+                                                                      programmed in the EEPROM
+                                                                      1: EEPROM unlocked for programming: any writes to
+                                                                      programmable registers program the respective location in the
+                                                                      EEPROM
+     14        EEPROM_Busy                      R            0        EEPROM busy. This flag is the mirror of the EEPROM busy flag
+                                                                      (bit 12) in the configuration register.
+                                                                      0: Indicates that the EEPROM is ready, which means that the
+                                                                      EEPROM has finished the last transaction and is ready to
+                                                                      accept new commands
+                                                                      1: Indicates that the EEPROM is busy, which means that the
+                                                                      EEPROM is currently completing a programming operation or
+                                                                      performing power-up on reset load
+     13:0      —                                R            0        Not used
+
+
+
+7.6.7 EEPROM1 Register (address = 05h) [reset = XXXXh]
+The EEPROM1 register is a 16-bit register that be used as a scratch pad by the customer to store general-
+purpose data. This register has a corresponding EEPROM location. Writes to this address when the EEPROM is
+locked write data into the register and not to the EEPROM. Writes to this register when the EEPROM is unlocked
+causes the corresponding EEPROM location to be programmed. See the Programming the EEPROM section
+for more information. EEPROM[4:1] are preprogrammed during manufacturing with the unique ID that can be
+overwritten. To support NIST traceability do not delete or reprogram the EEPROM[1] register.
+Return to Register Map.
+                                              Figure 7-18. EEPROM1 Register
+          15              14           13               12               11               10                  9                  8
+       D15               D14           D13             D12              D11              D10                 D9                 D8
+      R/W-x              R/W-x        R/W-x            R/W-x           R/W-x            R/W-x              R/W-x              R/W-x
+
+           7              6             5                4               3                2                   1                  0
+        D7                D6           D5               D4              D3               D2                  D1                 D0
+      R/W-x              R/W-x        R/W-x            R/W-x           R/W-x            R/W-x              R/W-x              R/W-x
+
+                                    Table 7-11. EEPROM1 Register Field Descriptions
+     BIT       FIELD                            TYPE         RESET    DESCRIPTION
+     15:0      D[15:0]                          R/W          xxxxh    This 16-bit register can be used as a scratch pad. To support
+                                                                      NIST traceability do not delete or re-program this register.
+
+
+
+
+30     Submit Document Feedback                                                                Copyright © 2022 Texas Instruments Incorporated
+
+                                                    Product Folder Links: TMP117
+                                                                                                                                    TMP117
+www.ti.com                                                                                 SNOSD82D – JUNE 2018 – REVISED SEPTEMBER 2022
+
+7.6.8 EEPROM2 Register (address = 06h) [reset = 0000h]
+This register function the same as the EEPROM1 register.
+Return to Register Map.
+                                                      Figure 7-19. EEPROM2 Register
+        15                 14                 13                12             11                10                9                8
+        D15                D14               D13               D12            D11               D10               D9               D8
+      R/W-x              R/W-x              R/W-x              R/W-x         R/W-x             R/W-x             R/W-x            R/W-x
+
+           7                6                     5              4             3                 2                 1                0
+        D7                 D6                 D5                D4             D3               D2                D1               D0
+      R/W-x              R/W-x              R/W-x              R/W-x         R/W-x             R/W-x             R/W-x            R/W-x
+
+                                        Table 7-12. EEPROM2 Register Field Descriptions
+     BIT       FIELD                                    TYPE         RESET   DESCRIPTION
+     15:0      D[15:0]                                  R/W          xxxxh   This 16-bit register can be used as a scratch pad.
+
+
+
+7.6.9 Temperature Offset Register (address = 07h) [reset = 0000h]
+This 16-bit register is to be used as a user-defined temperature offset register during system calibration. The
+offset will be added to the temperature result after linearization. It has a same resolution of 7.8125 m°C and
+same range of ±256 °C as the temperature result register. The data format is the same as the temperature
+register. If the added result is out of boundary, then the temperature result will show as the maximum or
+minimum value.
+Return to Register Map.
+                                                  Figure 7-20. Temperature Offset Register
+        15                 14                 13                12             11                10                9                8
+        D15                D14               D13               D12            D11               D10               D9               D8
+      R/W-0              R/W-0              R/W-0              R/W-0         R/W-0             R/W-0            R/W-0             R/W-0
+
+           7                6                     5              4             3                 2                 1                0
+        D7                 D6                 D5                D4             D3               D2                D1               D0
+      R/W-0              R/W-0              R/W-0              R/W-0         R/W-0             R/W-0            R/W-0             R/W-0
+
+                                  Table 7-13. Temperature Offset Register Field Descriptions
+     BIT       FIELD                                    TYPE         RESET   DESCRIPTION
+     15:0      D[15:0]                                  R/W          0       Temperature offset data from system calibration.
+
+
+
+
+Copyright © 2022 Texas Instruments Incorporated                                                              Submit Document Feedback     31
+                                                          Product Folder Links: TMP117
+TMP117
+SNOSD82D – JUNE 2018 – REVISED SEPTEMBER 2022                                                                                   www.ti.com
+
+7.6.10 EEPROM3 Register (address = 08h) [reset = xxxxh]
+This register function is the same as the EEPROM1 register. To support NIST traceability, do not delete or
+reprogram the EEPROM[1] register.
+Return to Register Map.
+                                             Figure 7-21. EEPROM3 Register
+        15                  14        13                12               11               10                    9                  8
+       D15                 D14        D13              D12              D11              D10                   D9                 D8
+       R/W-x               R/W-x     R/W-x             R/W-x           R/W-x            R/W-x                R/W-x              R/W-x
+
+           7                6          5                 4               3                 2                    1                  0
+        D7                  D6        D5                D4              D3                D2                   D1                 D0
+       R/W-x               R/W-x     R/W-x             R/W-x           R/W-x            R/W-x                R/W-x              R/W-x
+
+                                   Table 7-14. EEPROM3 Register Field Descriptions
+     BIT       FIELD                            TYPE         RESET    DESCRIPTION
+     15:0      D[15:0]                          R/W          xxxxh    This 16-bit register is used as a scratch pad. To support NIST
+                                                                      traceability, do not delete or re-program this register.
+
+
+
+7.6.11 Device ID Register (address = 0Fh) [reset = 0117h]
+This read-only register indicates the device ID.
+Return to Register Map.
+                                             Figure 7-22. Device ID Register
+        15                  14        13                12               11               10                    9                  8
+       Rev3                Rev2      Rev1              Rev0            DID11            DID10                 DID9               DID8
+        R-x                 R-x       R-x               R-x             R-0              R-0                  R-0                R-1
+
+           7                6          5                 4               3                 2                    1                  0
+       DID7                DID6      DID5              DID4            DID3              DID2                 DID1               DID0
+        R-0                 R-0       R-0               R-1             R-0              R-1                  R-1                R-1
+
+                                   Table 7-15. Device ID Register Field Descriptions
+     BIT       FIELD                            TYPE         RESET    DESCRIPTION
+     15:12     Rev[3:0]                         R            0h       Indicates the revision number.
+     11:0      DID[11:0]                        R            117h     Indicates the device ID.
+
+
+
+
+32     Submit Document Feedback                                                                  Copyright © 2022 Texas Instruments Incorporated
+
+                                                    Product Folder Links: TMP117
+                                                                                                                         TMP117
+www.ti.com                                                                           SNOSD82D – JUNE 2018 – REVISED SEPTEMBER 2022
+
+
+8 Application and Implementation
+                                                                 Note
+       Information in the following applications sections is not part of the TI component specification,
+       and TI does not warrant its accuracy or completeness. TI’s customers are responsible for
+       determining suitability of components for their purposes, as well as validating and testing their design
+       implementation to confirm system functionality.
+
+8.1 Application Information
+The TMP117 is used to measure the temperature of the board location where the device is mounted. The
+programmable address options allow up to four locations on the board to be monitored on a single serial bus.
+For more information, refer to the related Considerations for Measuring Ambient Air Temperature (SNOA966),
+Replacing resistance temperature detectors with the TMP116 temp sensor (SNOA969), and Temperature
+sensors: PCB guidelines for surface mount devices (SNOA967) application reports on ti.com.
+8.2 Typical Application
+                                                                                                1.7 V to 5.5 V
+
+
+                                                       5k       5k       5k                 VDD
+                                                                                      SCL
+                       2-wire interface I2C or                                        SDA
+                         SMBus compatible                                                          TMP117
+                              controller                                              ALERT
+                                                                                      ADD0
+                                                                                            GND
+
+
+
+                                                  Figure 8-1. Typical Connections
+
+8.2.1 Design Requirements
+The TMP117 operates only as a slave device and communicates with the host through the I2C-compatible serial
+interface. SCL is the input pin, SDA is a bidirectional pin, and ALERT is the output. The TMP117 requires a
+pullup resistor on the SDA, and ALERT pins. The recommended value for the pullup resistors is 5 kΩ. In some
+applications, the pullup resistor can be lower or higher than 5 kΩ. A 0.1-µF bypass capacitor is recommended
+to be connected between V+ and GND. An SCL pullup resistor is required if the system microprocessor SCL pin
+is open-drain. Use a ceramic capacitor type with a temperature rating that matches the operating range of the
+application, and place the capacitor as close as possible to the V+ pin of the TMP117. The ADD0 pin can be
+connected directly to GND, V+, SDA and SCL for address selection of four possible unique slave ID addresses.
+Table 7-1 explains the addressing scheme. The ALERT output pin can be connected to a microcontroller
+interrupt that triggers an event that occurred when the temperature limit exceeds the programmable value in
+registers 02h and 03h. The ALERT pin can be left floating or connected to ground when not in use.
+
+
+
+
+Copyright © 2022 Texas Instruments Incorporated                                                     Submit Document Feedback     33
+                                                      Product Folder Links: TMP117
+TMP117
+SNOSD82D – JUNE 2018 – REVISED SEPTEMBER 2022                                                                   www.ti.com
+
+8.2.2 Detailed Design Procedure
+8.2.2.1 Noise and Averaging
+The device temperature sampling distribution (with averaging disabled) covers an area of approximately six
+neighboring codes. The noise area of the six codes remains the same at full supply and full temperature
+range with a standard deviation of approximately 1 LSB. The device provides an averaging tool for 1, 8, 32,
+or 64 conversions. As shown in Figure 6-7, the 8-sample averaging reduces the internal noise distribution to
+a theoretical minimum of 2 LSB. This averaging means that if the system temperature slowly changes and the
+supply voltage is stable, then the 8-sample averaging can be enough to neutralize the device noise and provide
+stable temperature readings. However, if the system environment is noisy (such as when measuring air flow
+temperatures, power supply fluctuations, intensive communication on a serial bus, and so forth), then higher
+averaging numbers are recommended to be used.
+8.2.2.2 Self-Heating Effect (SHE)
+During ADC conversion, some power is dissipated that heats the device despite the small power consumption
+of the TMP117. Consider the self-heating effect (SHE) for certain precise measurements. Figure 8-2 shows the
+device SHE in still air at 25 °C after the supply is switched on. The device package is soldered to the 11-mm
+× 20-mm × 1.1-mm size coupon board. The board is placed horizontally, with the device on top. The TMP117
+is in continuous conversion mode with 64 sampling averaging and zero conversion cycle time. There is no
+digital bus activity aside from reading temperature data one time each second. As shown in Figure 8-2, the SHE
+stabilization time in still air is greater when the device dissipates more power.
+The SHE drift is strongly proportional to the device dissipated power. The SHE drift is also proportional to the
+device temperature because the consumption current with the same supply voltage increases with temperature.
+Figure 8-3 shows the SHE drifts versus temperature and dissipated power at 25 °C for the same coupon board
+and the same conditions described previously.
+To estimate the SHE for similar size boards, calculate the device consumption power for 25 °C and use the
+corresponding power line shown in Figure 8-3. For example, in CC mode without DC at a 3.3-V supply at 25 °C,
+the device dissipates 410 µWt. So self-heating in still air is approximately 40 m°C for the described condition and
+rises to 52 m°C at 150 °C.
+The following methods can reduce the SHE:
+• System calibration removes not only the self-heating error and power-supply rejection ratio (PSRR) effect
+  but also compensates the temperature shift caused by the thermal resistance between the device and the
+  measured object.
+• If practical, use the device one-shot mode. If continuous conversion is needed, use the conversion cycle
+  mode with significant standby time. For example, in most cases an 8-sample averaging (125 ms) with a
+  1-second conversion cycle provides enough time for the device to cool down to the environment temperature
+  and removes the SHE.
+• Use the minimal acceptable power supply voltage.
+• Use a printed-circuit board (PCB) layout that provides minimal thermal resistance to the device.
+• Avoid using small-value pullup resistors on the SDA and ALERT pins. Instead, use pullup resistors larger
+  than 2 kΩ.
+• Ensure that the SCL and SDA signal levels remain below 10% or above 90% of the device supply voltage.
+• Avoid heavy bypass traffic on the data line. Communication to other devices on the same data line increases
+  the supply current even if the device is in SD mode.
+• Use the highest available communication speed.
+8.2.2.3 Synchronized Temperature Measurements
+When four temperature measurements are needed in four different places simultaneously, triggering a reset
+is recommended. In this method, four devices are programed with control registers set to CC mode with a
+conversion cycle time of 16 s. All four devices are connected to same two-wire bus with four different bus
+addresses. The bus general-call reset command is issued by the master. This command triggers all devices
+to reset (which takes approximately 1.5 ms) and triggers a simultaneous temperature sampling according to
+configuration registers setting. The master has 16 seconds to read data from the devices.
+
+34    Submit Document Feedback                                                   Copyright © 2022 Texas Instruments Incorporated
+
+                                                Product Folder Links: TMP117
+                                                                                                                                                                                TMP117
+www.ti.com                                                                                                                        SNOSD82D – JUNE 2018 – REVISED SEPTEMBER 2022
+
+
+8.2.3 Application Curves
+
+                               70                                                                                     90
+
+                                                                                                                      80
+                               60
+
+
+
+
+     Temperature Change (mC)
+                                                                                                                      70
+                               50
+
+
+
+
+                                                                                                  Self-Heating (mC)
+                                                                                                                      60
+                               40                                                                                     50
+
+                               30                                                                                     40
+
+                                                                                                                      30
+                               20
+                                                                                                                      20
+                               10                            1.9 V        4V       5.5 V                                                  700 uWt         500 uWt         370 uWt
+                                                                                                                      10
+                                                             3V           5V                                                              630 uWt         410 uWt         225 uWt
+                                0                                                                                     0
+                                    0   10   20   30    40    50     60    70     80       90                         -50   -25     0    25      50    75    100    125   150   175
+                                                       Time (Sec)                                                                             Temperature (qC)
+  Figure 8-2. Self-Heating in Still Air vs. Temperature Figure 8-3. Self-Heating in Still Air vs. Temperature
+                 and Dissipated Power                              and Dissipated Power at 25°C
+
+
+9 Power Supply Recommendations
+The TMP117 operates on a power-supply range from 1.7 V to 5.5 V. A power-supply bypass capacitor
+is required, which must be placed as close to the supply and ground pins of the device as possible. A
+recommended value for this supply bypass capacitor is 100 nF. Applications with noisy or high-impedance power
+supplies may require additional decoupling capacitors to reject power-supply noise.
+The package thermal pad is not connected to the device ground and should be left unsoldered for best
+measurement accuracy. If the thermal pad is soldered, it must be left floating or grounded.
+
+
+
+
+Copyright © 2022 Texas Instruments Incorporated                                                                                                      Submit Document Feedback         35
+                                                                                Product Folder Links: TMP117
+TMP117
+SNOSD82D – JUNE 2018 – REVISED SEPTEMBER 2022                                                                   www.ti.com
+
+
+10 Layout
+10.1 Layout Guidelines
+                                                           Note
+      To achieve a high precision temperature reading for a rigid PCB, do not solder down the thermal pad.
+      For a flexible PCB, the user can solder the thermal pad to increase board level reliability. If thermal
+      pad is soldered it should be connected to the ground or left floating.
+
+For more information on board layout, refer to the related Precise temperature measurements with TMP116 and
+TMP117 (SNOA986) and Wearable temperature-sensing layout considerations optimized for thermal response
+(SNIA021) application reports on ti.com.
+Place the power-supply bypass capacitor as close as possible to the supply and ground pins. The recommended
+value of this bypass capacitor is 0.1 μF. In some cases, the pullup resistor can be the heat source, therefore,
+maintain some distance between the resistor and the device.
+Mount the TMP117 on the PCB pad to provide the minimum thermal resistance to the measured object surface
+or to the surrounding air. The recommended PCB layout minimizes the device self-heating effect, reduces the
+time delay as temperature changes, and minimizes the temperature offset between the device and the object.
+1. Soldering the TMP117 thermal pad to the PCB minimizes the thermal resistance to the PCB, reduces
+   the response time as temperature changes and minimizes the temperature offset between the device and
+   measured object. Simultaneously the soldering of the thermal pad will, however, introduce mechanical stress
+   that can be a source of additional measurement error. For cases when system calibration is not planned,
+   TI recommends not soldering the thermal pad to the PCB. Due to the small thermal mass of the device,
+   not soldering the thermal pad will have a minimal impact on the described characteristics. Manual device
+   soldering to the PCB creates additional mechanical stress on the package, therefore to prevent precision
+   degradation a standard PCB reflow oven process is highly recommended.
+2. If the device is used to measure solid surface temperature:
+   • Use PCB with minimal thickness.
+   • Prevent PCB bending which can create a mechanical stress to package.
+   • Cover bottom of the PCB with copper plane.
+   • Remove bottom solder mask and cover exposed copper with gold layer if possible.
+   • Use thermal conductive paste between PCB and object surface.
+   • If PCB has unused internal layers, extend these layers under the sensor.
+   • Minimize amount of copper wires on top of the board.
+   • To minimize temperature “leakage” to surrounding air locate sensor in place with minimal air movement.
+        Horizontal surfaces are preferable.
+   • To minimize temperature offset due to “leakage” to surrounding air cover sensor with thermo isolating
+        foam, tape or at least cover with a stain.
+3. If the device is used to measure moving air temperature:
+   • Because moving air temperature usually has a lot of fluctuations the PCB increased thermal mass
+        reduces measurement noise.
+   • Design PCB soldering pads bigger than usual, especially package corner pads.
+   • Use a PCB with thicker copper layers if possible.
+   • Cover both side of unused board space with copper layer.
+   • Place PCB vertically along air flow.
+4. If the device is used to measure still air temperature:
+   • Miniaturize the board to reduce thermal mass. Smaller thermal mass results in faster thermal response.
+   • Place two copper planes of equal size to the top and bottom of the exposed pad.
+   • Remove the top solder mask.
+   • To prevent oxidation, cover any exposed copper with solder paste.
+   • Thermal isolation is required to avoid thermal coupling from heat source components through the PCB.
+   • Avoid running the copper plane underneath the temperature sensor.
+
+
+36    Submit Document Feedback                                                   Copyright © 2022 Texas Instruments Incorporated
+
+                                                Product Folder Links: TMP117
+                                                                                                                              TMP117
+www.ti.com                                                                               SNOSD82D – JUNE 2018 – REVISED SEPTEMBER 2022
+
+      •   Maximize the air gap between the sensor and the surrounding copper areas (anti-etch), especially when
+          close to the heat source.
+      •   Create a PCB cutout between sensor and other circuits. Leave a narrow channel away from heat source
+          components as a routing bridge into the island.
+      •   If the heat source is top side, avoid running traces on top; instead, route all signals on the bottom side.
+      •   Place the board vertically to improve air flow and to reduce dust collection.
+10.2 Layout Examples
+                                                                                                 Via to Power Plane
+                                                                                                 Via to Ground Plane
+                                                                                                 Via to Internal Layer
+                                      5k          5k   5k                                        Internal Layer Trace
+                                                                                                 Top/Bottom Layer Trace
+          MCU INT
+
+          I2C Bus
+
+                                                        SCL                                               SDA
+                                                                1                                    6
+                                                                                                                         0.1 µF
+                                                                               Exposed
+                                                        GND                    Thermal                    V+
+                                                                2                                    5
+                                                                                 Pad
+
+                                                       ALERT                                              ADD0
+                                                                3                                    4
+
+
+
+
+                                             Figure 10-1. DRV Layout Recommendation
+
+
+
+
+Copyright © 2022 Texas Instruments Incorporated                                                          Submit Document Feedback    37
+                                                         Product Folder Links: TMP117
+TMP117
+SNOSD82D – JUNE 2018 – REVISED SEPTEMBER 2022                                                                     www.ti.com
+
+
+                                                                                      WCSP Ball
+
+                                                                                     Via to Power Plane
+                                                                                     Via to Ground Plane
+                                                                                     Via to Internal Layer
+                                 5k      5k        5k
+                                                                                     Internal Layer Trace
+                                                                                     Top/Bottom Layer Trace
+          MCU INT
+                                                           TMP117xYBG
+          I2C Bus                                            Top View
+
+
+                                                             SDA            SCL
+
+
+
+
+                                                             V+             GND
+
+
+                                         0.1 µF
+
+                                                            ADD0           ALERT
+
+
+
+
+                                      Figure 10-2. YBG Layout Recommendation
+
+
+
+
+38    Submit Document Feedback                                                     Copyright © 2022 Texas Instruments Incorporated
+
+                                                  Product Folder Links: TMP117
+                                                                                                                                   TMP117
+www.ti.com                                                                                SNOSD82D – JUNE 2018 – REVISED SEPTEMBER 2022
+
+
+11 Device and Documentation Support
+11.1 Documentation Support
+11.1.1 Related Documentation
+For related documentation see the following:
+• TMPx75 temperature sensor with I2C and SMBus interface in industry standard LM75 form factor and pinout
+   (SBOS288)
+• TMP275 ±0.5°C temperature sensor with I2C and SMBus interface in industry standard LM75 form factor and
+   pinout (SBOS363)
+• Design Considerations for Measuring Ambient Air Temperature (SNOA966)
+• Replacing resistance temperature detectors with the TMP116 temp sensor (SNOA969)
+• Temperature sensors: PCB guidelines for surface mount devices (SNOA967)
+• Precise temperature measurements with TMP116 and TMP117 (SNOA986)
+• Wearable temperature-sensing layout considerations optimized for thermal response (SNIA021)
+11.2 Receiving Notification of Documentation Updates
+To receive notification of documentation updates, navigate to the device product folder on ti.com. Click on
+Subscribe to updates to register and receive a weekly digest of any product information that has changed. For
+change details, review the revision history included in any revised document.
+11.3 Support Resources
+TI E2E™ support forums are an engineer's go-to source for fast, verified answers and design help — straight
+from the experts. Search existing answers or ask your own question to get the quick design help you need.
+Linked content is provided "AS IS" by the respective contributors. They do not constitute TI specifications and do
+not necessarily reflect TI's views; see TI's Terms of Use.
+11.4 Trademarks
+SMBus™ is a trademark of Intel Corporation.
+TI E2E™ is a trademark of Texas Instruments.
+All trademarks are the property of their respective owners.
+11.5 Electrostatic Discharge Caution
+                    This integrated circuit can be damaged by ESD. Texas Instruments recommends that all integrated circuits be handled
+                    with appropriate precautions. Failure to observe proper handling and installation procedures can cause damage.
+                    ESD damage can range from subtle performance degradation to complete device failure. Precision integrated circuits may
+                    be more susceptible to damage because very small parametric changes could cause the device not to meet its published
+                    specifications.
+
+
+11.6 Glossary
+ TI Glossary             This glossary lists and explains terms, acronyms, and definitions.
+
+12 Mechanical, Packaging, and Orderable Information
+The following pages include mechanical, packaging, and orderable information. This information is the most
+current data available for the designated devices. This data is subject to change without notice and revision of
+this document. For browser-based versions of this data sheet, refer to the left-hand navigation.
+
+
+
+
+Copyright © 2022 Texas Instruments Incorporated                                                            Submit Document Feedback          39
+                                                        Product Folder Links: TMP117
+TMP117
+SNOSD82D – JUNE 2018 – REVISED SEPTEMBER 2022                                                                                                               www.ti.com
+
+                                                                                                                         PACKAGE OUTLINE
+           DRV0006B                                                            SCALE 5.500
+                                                                                                                     WSON - 0.8 mm max height
+                                                                                                                         PLASTIC SMALL OUTLINE - NO LEAD
+
+
+
+
+                                                                  2.1                            A
+                                              B
+                                                                  1.9
+
+
+
+
+                           PIN 1 INDEX AREA
+                                                                                                 2.1
+                                                                                                 1.9
+
+
+
+
+                                       0.8 MAX                                                              C
+
+                                                                                                                SEATING PLANE
+
+                                                                                                                0.08 C
+
+                                                                                                                                            (0.2) TYP
+                                                                1 0.1                                                        0.05
+                                     EXPOSED                                                                                 0.00
+                                  THERMAL PAD
+
+                                                  3
+                                                                                             4
+
+
+                                      2X
+                                                                     7
+                                      1.3                                                         1.6 0.1
+
+
+
+                                                                                             6
+                                                  1
+                                  4X 0.65
+                                                                                                            0.35
+                                                                                                       6X
+                                          PIN 1 ID                       0.3                                0.25
+                                                                    6X
+                                       (OPTIONAL)                        0.2                                  0.1    C A B
+                                                                                                              0.05    C
+
+
+                                                                                                                                          4223922/A 09/2017
+
+          NOTES:
+
+          1. All linear dimensions are in millimeters. Any dimensions in parenthesis are for reference only. Dimensioning and tolerancing
+             per ASME Y14.5M.
+          2. This drawing is subject to change without notice.
+
+
+
+
+                                                                               www.ti.com
+
+
+
+
+40    Submit Document Feedback                                                                                               Copyright © 2022 Texas Instruments Incorporated
+
+                                                             Product Folder Links: TMP117
+                                                                                                                                                    TMP117
+www.ti.com                                                                                              SNOSD82D – JUNE 2018 – REVISED SEPTEMBER 2022
+
+                                                                                               EXAMPLE BOARD LAYOUT
+             DRV0006B                                                                                    WSON - 0.8 mm max height
+                                                                                                                 PLASTIC SMALL OUTLINE - NO LEAD
+
+
+
+
+                                           6X (0.45)
+
+                                                       1
+
+                                            6X (0.3)                                                     6
+
+
+
+                                                                                                             SYMM
+
+
+
+                                          4X (0.65)
+
+                                                                                                         4
+                                                       3
+
+                                    (R0.05) TYP                              SYMM
+
+
+                                                                             (1.95)
+
+
+                                                               LAND PATTERN EXAMPLE
+                                                                  EXPOSED METAL SHOWN
+                                                                        SCALE:25X
+
+
+
+
+                                                           0.07 MAX                                              0.07 MIN
+                                                           ALL AROUND                                            ALL AROUND
+
+                                 EXPOSED                                                                                      EXPOSED
+                                   METAL                                                                                      METAL
+
+
+                                  SOLDER MASK                      METAL                METAL UNDER                        SOLDER MASK
+                                  OPENING                                               SOLDER MASK                        OPENING
+                                              NON SOLDER MASK
+                                                  DEFINED                                                    SOLDER MASK
+                                                (PREFERRED)                                                    DEFINED
+
+
+                                                                     SOLDER MASK DETAILS
+
+
+                                                                                                                                4223922/A 09/2017
+
+            NOTES: (continued)
+
+            3. For more information, see Texas Instruments literature number SLUA271 (www.ti.com/lit/slua271).
+
+
+
+
+                                                                                www.ti.com
+
+
+
+
+Copyright © 2022 Texas Instruments Incorporated                                                                             Submit Document Feedback     41
+                                                               Product Folder Links: TMP117
+TMP117
+SNOSD82D – JUNE 2018 – REVISED SEPTEMBER 2022                                                                                                 www.ti.com
+
+                                                                                         EXAMPLE STENCIL DESIGN
+          DRV0006B                                                                                 WSON - 0.8 mm max height
+                                                                                                         PLASTIC SMALL OUTLINE - NO LEAD
+
+
+
+
+                                                       6X (0.45)           SYMM
+
+                                                   1
+
+                                        6X (0.3)                                                          6
+
+
+
+
+                                                                                                              SYMM
+
+
+
+                                      4X (0.65)
+
+
+                                                                                                          4
+                                                   3
+
+                                 (R0.05) TYP
+
+
+                                                                           (1.95)
+
+
+
+                                                                   SOLDER PASTE EXAMPLE
+                                                               BASED ON 0.125 mm THICK STENCIL
+                                                                          SCALE:30X
+
+
+
+
+                                                                                                                            4223922/A 09/2017
+          NOTES: (continued)
+
+          4. Laser cutting apertures with trapezoidal walls and rounded corners may offer better paste release. IPC-7525 may have alternate
+             design recommendations.
+
+
+
+
+                                                                           www.ti.com
+
+
+
+
+42    Submit Document Feedback                                                                                Copyright © 2022 Texas Instruments Incorporated
+
+                                                               Product Folder Links: TMP117
+                                                                                                                                                           TMP117
+www.ti.com                                                                                                      SNOSD82D – JUNE 2018 – REVISED SEPTEMBER 2022
+
+
+                                                                                                                    PACKAGE OUTLINE
+             YBG0006-C01                                                    SCALE 13.000
+                                                                                                            DSBGA - 0.531 mm max height
+                                                                                                                              DIE SIZE BALL GRID ARRAY
+
+
+
+                                                            B                    E                      A
+
+
+
+
+                                                      BALL A1
+                                                     CORNER
+
+
+                                                                                                        D
+
+
+
+
+                                               0.531 MAX                                                    C
+
+
+                                                                                                                  SEATING PLANE
+                                                     0.22                                                       0.05 C
+                                                     0.16
+
+                                                                           0.4
+                                                                           TYP
+
+
+
+                                                                C
+
+
+
+                                                  0.8
+                                                  TYP                                               SYMM        D: Max = 1.518 mm, Min = 1.458 mm
+                                                                  B
+                                                                                                                 E: Max = 0.98 mm, Min = 0.92 mm
+                                                        0.4 TYP
+
+
+                                                                  A
+
+
+                                                        0.27
+                                                  6X                   1                     2
+                                                        0.23               SYMM
+                                             0.015     C A B
+
+
+                                                                                                                                       4226656/B 03/2021
+
+             NOTES:
+
+             1. All linear dimensions are in millimeters. Any dimensions in parenthesis are for reference only. Dimensioning and tolerancing
+                per ASME Y14.5M.
+             2. This drawing is subject to change without notice.
+
+
+
+
+                                                                                           www.ti.com
+
+
+
+
+Copyright © 2022 Texas Instruments Incorporated                                                                                    Submit Document Feedback     43
+                                                                  Product Folder Links: TMP117
+TMP117
+SNOSD82D – JUNE 2018 – REVISED SEPTEMBER 2022                                                                                                   www.ti.com
+
+                                                                                           EXAMPLE BOARD LAYOUT
+          YBG0006-C01                                                                         DSBGA - 0.531 mm max height
+                                                                                                                     DIE SIZE BALL GRID ARRAY
+
+
+
+
+                                                                           (0.4) TYP
+
+                                                  6X ( 0.23)
+                                                                       1               2
+
+
+                                                                 A
+
+                                                    (0.4) TYP
+
+                                                                                           SYMM
+                                                                 B
+
+
+
+
+                                                                 C
+
+
+                                                                            SYMM
+
+
+                                                                LAND PATTERN EXAMPLE
+                                                                 EXPOSED METAL SHOWN
+                                                                      SCALE: 50X
+
+
+
+
+                                                           0.05 MAX                0.05 MIN                     METAL UNDER
+                             ( 0.23)                                                                            SOLDER MASK
+                              METAL
+
+
+                                                         EXPOSED                                                ( 0.23)
+                      SOLDER MASK                                                 EXPOSED                       SOLDER MASK
+                          OPENING                        METAL                      METAL                       OPENING
+                                                                                              SOLDER MASK
+                                       NON-SOLDER MASK                                          DEFINED
+                                           DEFINED
+                                         (PREFERRED)
+                                                                SOLDER MASK DETAILS
+                                                                      NOT TO SCALE
+
+                                                                                                                             4226656/B 03/2021
+
+          NOTES: (continued)
+
+          3. Final dimensions may vary due to manufacturing tolerance considerations and also routing constraints.
+             See Texas Instruments Literature No. SNVA009 (www.ti.com/lit/snva009).
+
+
+
+
+                                                                            www.ti.com
+
+
+
+
+44    Submit Document Feedback                                                                                Copyright © 2022 Texas Instruments Incorporated
+
+                                                           Product Folder Links: TMP117
+                                                                                                                                                 TMP117
+www.ti.com                                                                                             SNOSD82D – JUNE 2018 – REVISED SEPTEMBER 2022
+
+                                                                                               EXAMPLE STENCIL DESIGN
+             YBG0006-C01                                                                          DSBGA - 0.531 mm max height
+                                                                                                                     DIE SIZE BALL GRID ARRAY
+
+
+
+
+                                                                               (0.4) TYP
+
+                                                    6X ( 0.25)                                        (R0.05) TYP
+
+                                                                           1               2
+
+
+                                                                   A
+
+                                                      (0.4) TYP
+
+                                                                                                SYMM
+                                                                    B
+
+                                                        METAL
+                                                          TYP
+
+
+                                                                   C
+
+
+                                                                                SYMM
+
+
+                                                                  SOLDER PASTE EXAMPLE
+                                                                  BASED ON 0.1 mm THICK STENCIL
+                                                                           SCALE: 50X
+
+
+
+
+                                                                                                                             4226656/B 03/2021
+
+            NOTES: (continued)
+
+             4. Laser cutting apertures with trapezoidal walls and rounded corners may offer better paste release.
+
+
+
+
+                                                                                www.ti.com
+
+
+
+
+Copyright © 2022 Texas Instruments Incorporated                                                                          Submit Document Feedback     45
+                                                               Product Folder Links: TMP117
+                                                                                                                                                                    PACKAGE OPTION ADDENDUM
+
+       www.ti.com                                                                                                                                                                                                   30-Sep-2026
+
+
+
+
+PACKAGING INFORMATION
+
+       Orderable part number          Status     Material type      Package | Pins     Package qty | Carrier       RoHS             Lead finish/             MSL rating/             Op temp (°C)               Part marking
+                                        (1)            (2)                                                            (3)           Ball material            Peak reflow                                              (6)
+                                                                                                                                          (4)                      (5)
+
+          TMP117AIDRVR                Active      Production       WSON (DRV) | 6       3000 | LARGE T&R             Yes               NIPDAU            Level-1-260C-UNLIM            -55 to 150                   T117
+         TMP117AIDRVR.A               Active      Production       WSON (DRV) | 6       3000 | LARGE T&R             Yes               NIPDAU            Level-1-260C-UNLIM            -55 to 150                   T117
+         TMP117AIDRVRG4               Active      Production       WSON (DRV) | 6       3000 | LARGE T&R             Yes               NIPDAU            Level-1-260C-UNLIM            -55 to 150                   T117
+        TMP117AIDRVRG4.A              Active      Production       WSON (DRV) | 6       3000 | LARGE T&R             Yes               NIPDAU            Level-1-260C-UNLIM            -55 to 150                   T117
+          TMP117AIYBGR                Active      Production       DSBGA (YBG) | 6      3000 | LARGE T&R             Yes              SNAGCU             Level-1-260C-UNLIM            -55 to 150                     E7
+         TMP117AIYBGR.A               Active      Production       DSBGA (YBG) | 6      3000 | LARGE T&R             Yes              SNAGCU             Level-1-260C-UNLIM            -55 to 150                     E7
+           TMP117AIYBGT              Obsolete     Production       DSBGA (YBG) | 6                -                   -                 Call TI                 Call TI                -55 to 150                     E7
+         TMP117MAIDRVR                Active      Production       WSON (DRV) | 6       3000 | LARGE T&R             Yes            NIPDAU | SN          Level-1-260C-UNLIM              0 to 85                    117M
+        TMP117MAIDRVR.A               Active      Production       WSON (DRV) | 6       3000 | LARGE T&R             Yes               NIPDAU            Level-1-260C-UNLIM              0 to 85                    117M
+         TMP117MAIYBGR                Active      Production       DSBGA (YBG) | 6      3000 | LARGE T&R             Yes              SNAGCU             Level-1-260C-UNLIM              0 to 85                     EQ
+        TMP117MAIYBGR.A               Active      Production       DSBGA (YBG) | 6      3000 | LARGE T&R             Yes              SNAGCU             Level-1-260C-UNLIM              0 to 85                     EQ
+          TMP117MAIYBGT              Obsolete     Production       DSBGA (YBG) | 6                -                   -                 Call TI                 Call TI                  0 to 85                     EQ
+          TMP117NAIDRVR               Active      Production       WSON (DRV) | 6       3000 | LARGE T&R             Yes                  SN             Level-1-260C-UNLIM            -55 to 150                   117N
+        TMP117NAIDRVR.A               Active      Production       WSON (DRV) | 6       3000 | LARGE T&R             Yes                  SN             Level-1-260C-UNLIM            -55 to 150                   117N
+          TMP117NAIYBGR               Active      Production       DSBGA (YBG) | 6      3000 | LARGE T&R             Yes              SNAGCU             Level-1-260C-UNLIM            -55 to 150                     ER
+        TMP117NAIYBGR.A               Active      Production       DSBGA (YBG) | 6      3000 | LARGE T&R             Yes              SNAGCU             Level-1-260C-UNLIM            -55 to 150                     ER
+          TMP117NAIYBGT              Obsolete     Production       DSBGA (YBG) | 6                -                   -                 Call TI                 Call TI                -55 to 150                     ER
+
+(1)
+      Status: For more details on status, see our product life cycle.
+
+(2)
+   Material type: When designated, preproduction parts are prototypes/experimental devices, and are not yet approved or released for full production. Testing and final process, including without limitation quality assurance,
+reliability performance testing, and/or process qualification, may not yet be complete, and this item is subject to further changes or possible discontinuation. If available for ordering, purchases will be subject to an additional
+waiver at checkout, and are intended for early internal evaluation purposes only. These items are sold without warranties of any kind.
+
+(3)
+      RoHS values: Yes, No, RoHS Exempt. See the TI RoHS Statement for additional information and value definition.
+
+(4)
+   Lead finish/Ball material: Parts may have multiple material finish options. Finish options are separated by a vertical ruled line. Lead finish/Ball material values may wrap to two lines if the finish value exceeds the maximum
+column width.
+
+(5)
+  MSL rating/Peak reflow: The moisture sensitivity level ratings and peak solder (reflow) temperatures. In the event that a part has multiple moisture sensitivity ratings, only the lowest level per JEDEC standards is shown.
+Refer to the shipping label for the actual reflow temperature that will be used to mount the part to the printed circuit board.
+
+
+                                                                                                         Addendum-Page 1
+                                                                                                                                                                      PACKAGE OPTION ADDENDUM
+
+       www.ti.com                                                                                                                                                                                                30-Sep-2026
+
+
+
+
+(6)
+      Part marking: There may be an additional marking, which relates to the logo, the lot trace code information, or the environmental category of the part.
+
+Multiple part markings will be inside parentheses. Only one part marking contained in parentheses and separated by a "~" will appear on a part. If a line is indented then it is a continuation of the previous line and the two
+combined represent the entire part marking for that device.
+
+Important Information and Disclaimer:The information provided on this page represents TI's knowledge and belief as of the date that it is provided. TI bases its knowledge and belief on information provided by third parties, and
+makes no representation or warranty as to the accuracy of such information. Efforts are underway to better integrate information from third parties. TI has taken and continues to take reasonable steps to provide representative
+and accurate information but may not have conducted destructive testing or chemical analysis on incoming materials and chemicals. TI and TI suppliers consider certain information to be proprietary, and thus CAS numbers
+and other limited information may not be available for release.
+
+In no event shall TI's liability arising out of such information exceed the total purchase price of the TI part(s) at issue in this document sold by TI to Customer on an annual basis.
+
+
+
+
+                                                                                                          Addendum-Page 2
+                                                                              PACKAGE MATERIALS INFORMATION
+
+www.ti.com                                                                                                                                         3-Sep-2026
+
+
+
+TAPE AND REEL INFORMATION
+
+       REEL DIMENSIONS                                                                     TAPE DIMENSIONS
+                                                                                      K0         P1
+
+
+
+                                                                                                                        B0 W
+                                        Reel
+                                      Diameter
+                                                                                   Cavity             A0
+                                                               A0   Dimension designed to accommodate the component width
+                                                               B0   Dimension designed to accommodate the component length
+                                                               K0   Dimension designed to accommodate the component thickness
+                                                               W    Overall width of the carrier tape
+                                                               P1   Pitch between successive cavity centers
+
+
+                                       Reel Width (W1)
+                              QUADRANT ASSIGNMENTS FOR PIN 1 ORIENTATION IN TAPE
+
+                                                                                                       Sprocket Holes
+
+
+                                                 Q1       Q2          Q1    Q2
+
+                                                 Q3       Q4          Q3    Q4                    User Direction of Feed
+
+
+
+                                                           Pocket Quadrants
+
+
+*All dimensions are nominal
+             Device           Package Package Pins             SPQ       Reel   Reel   A0                     B0         K0     P1     W     Pin1
+                               Type Drawing                            Diameter Width (mm)                   (mm)       (mm)   (mm)   (mm) Quadrant
+                                                                         (mm) W1 (mm)
+     TMP117AIDRVR             WSON      DRV           6        3000        178.0           8.4        2.3     2.3       1.15   4.0    8.0     Q2
+   TMP117AIDRVRG4             WSON      DRV           6        3000        180.0           8.4        2.3     2.3       1.15   4.0    8.0     Q2
+     TMP117AIYBGR             DSBGA     YBG           6        3000        180.0           8.4        1.04   1.58       0.59   2.0    8.0     Q1
+    TMP117MAIDRVR             WSON      DRV           6        3000        180.0           8.4        2.3     2.3       1.15   4.0    8.0     Q2
+    TMP117MAIYBGR             DSBGA     YBG           6        3000        180.0           8.4        1.04   1.58       0.59   2.0    8.0     Q1
+    TMP117NAIDRVR             WSON      DRV           6        3000        180.0           8.4        2.3     2.3       1.15   4.0    8.0     Q2
+    TMP117NAIYBGR             DSBGA     YBG           6        3000        180.0           8.4        1.04   1.58       0.59   2.0    8.0     Q1
+
+
+
+
+                                                                     Pack Materials-Page 1
+                                                                PACKAGE MATERIALS INFORMATION
+
+www.ti.com                                                                                                              3-Sep-2026
+
+
+
+ TAPE AND REEL BOX DIMENSIONS
+
+
+
+
+                                                               Width (mm)
+                                                                              H
+
+
+
+
+                      W                                   L
+
+
+
+
+*All dimensions are nominal
+             Device           Package Type   Package Drawing   Pins         SPQ    Length (mm)   Width (mm)   Height (mm)
+     TMP117AIDRVR                WSON             DRV           6           3000      208.0        191.0         35.0
+    TMP117AIDRVRG4               WSON             DRV           6           3000      210.0        185.0         35.0
+     TMP117AIYBGR               DSBGA             YBG           6           3000      182.0        182.0         20.0
+    TMP117MAIDRVR                WSON             DRV           6           3000      210.0        185.0         35.0
+    TMP117MAIYBGR               DSBGA             YBG           6           3000      182.0        182.0         20.0
+    TMP117NAIDRVR                WSON             DRV           6           3000      210.0        185.0         35.0
+    TMP117NAIYBGR               DSBGA             YBG           6           3000      182.0        182.0         20.0
+
+
+
+
+                                                        Pack Materials-Page 2
+                                         IMPORTANT NOTICE AND DISCLAIMER
+TI PROVIDES TECHNICAL AND RELIABILITY DATA (INCLUDING DATASHEETS), DESIGN RESOURCES (INCLUDING REFERENCE
+DESIGNS), APPLICATION OR OTHER DESIGN ADVICE, WEB TOOLS, SAFETY INFORMATION, AND OTHER RESOURCES “AS IS”
+AND WITH ALL FAULTS, AND DISCLAIMS ALL WARRANTIES, EXPRESS AND IMPLIED, INCLUDING WITHOUT LIMITATION ANY
+IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE OR NON-INFRINGEMENT OF THIRD
+PARTY INTELLECTUAL PROPERTY RIGHTS.
+These resources are intended for skilled developers designing with TI products. You are solely responsible for (1) selecting the appropriate
+TI products for your application, (2) designing, validating and testing your application, and (3) ensuring your application meets applicable
+standards, and any other safety, security, regulatory or other requirements.
+These resources are subject to change without notice. TI grants you permission to use these resources only for development of an
+application that uses the TI products described in the resource. Other reproduction and display of these resources is prohibited. No license
+is granted to any other TI intellectual property right or to any third party intellectual property right. TI disclaims responsibility for, and you fully
+indemnify TI and its representatives against any claims, damages, costs, losses, and liabilities arising out of your use of these resources.
+TI’s products are provided subject to TI’s Terms of Sale, TI’s General Quality Guidelines, or other applicable terms available either on
+ti.com or provided in conjunction with such TI products. TI’s provision of these resources does not expand or otherwise alter TI’s applicable
+warranties or warranty disclaimers for TI products. Unless TI explicitly designates a product as custom or customer-specified, TI products
+are standard, catalog, general purpose devices.
+TI objects to and rejects any additional or different terms you may propose.
+IMPORTANT NOTICE
+
+                                                Copyright © 2026, Texas Instruments Incorporated
+                                                                Last updated 10/2025
+

@@ -1,0 +1,43 @@
+{
+  "before_sha256": "9d63500a087ef8d345c2337942106e6704d32ded953846883454bfad718adf6c",
+  "after_sha256": "9d63500a087ef8d345c2337942106e6704d32ded953846883454bfad718adf6c",
+  "footprints_unchanged": 68,
+  "physical_pads_checked": 259,
+  "logical_pads_checked": 250,
+  "native_opens": [
+    0,
+    0
+  ],
+  "invariant_types": [
+    "general",
+    "setup",
+    "net",
+    "gr_line",
+    "gr_arc",
+    "gr_rect",
+    "gr_poly",
+    "gr_text"
+  ],
+  "delta": {
+    "segment": {
+      "removed": [],
+      "added": [],
+      "changed": []
+    },
+    "arc": {
+      "removed": [],
+      "added": [],
+      "changed": []
+    },
+    "via": {
+      "removed": [],
+      "added": [],
+      "changed": []
+    },
+    "zone": {
+      "removed": [],
+      "added": [],
+      "changed": []
+    }
+  }
+}

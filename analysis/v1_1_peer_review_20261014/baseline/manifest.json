@@ -1,0 +1,11 @@
+{
+  "time": "2026-10-14T11:11:44.932281",
+  "branch": "alpha/hardware-v1.1",
+  "head": "8ce5f5e7682ed8ec7d2be17bb5f5e7327b24eca6",
+  "files": {
+    "hardware/pcb/stratolink.kicad_pcb": "9d63500a087ef8d345c2337942106e6704d32ded953846883454bfad718adf6c",
+    "hardware/pcb/stratolink.kicad_sch": "a06740b35d07d7b81999f7ace2a7a7ff02e185ca3e46a664630bd4bbd00c54b7",
+    "hardware/pcb/stratolink.kicad_pro": "79a2c0d01611c7ea7054cd9dbc685187b28fb4ac8792468a15d2bba821ac0ea7",
+    "hardware/pcb/stratolink.kicad_dru": "071d900e34c4eb3d3f91003cc0698e261e7fe23beea7107c4db50a1bf60a5136"
+  }
+}

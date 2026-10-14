@@ -1,8 +1,17 @@
 # Stratolink v1.1 and v2 checklist
 
-Updated 2026-10-13. Final canonical status: **promoted to the canonical hardware folder**. The canonical project remains `hardware/pcb` on `alpha/hardware-v1.1`. Plan **five PCBs / three assembled pilots**, then physical qualification before roughly fifteen payloads. A reviewed cart draft is authorized; checkout/payment is not. Cart status: **saved and verified in JLC cart; unpaid**.
+Updated 2026-10-14. **Hold fabrication pending the GNSS layout review.** The canonical project remains `hardware/pcb` on `alpha/hardware-v1.1`. Plan **five PCBs / three assembled pilots**, then physical qualification before roughly fifteen payloads. The saved JLC Y24 cart contains the earlier revision. A reviewed cart draft is authorized; checkout/payment is not.
 
 The design keeps the 0.4 mm ENIG board with green solder mask, no silkscreen and tented ordinary vias, one radio, precision temperature, existing GNSS/pressure/IMU and flat capacitor. **AS7331 is selected for U6; the initial pilot omits only U6 and fits C14/C23/R27.** Both antennas are straight enameled wire. Science is intended for measured daytime solar surplus; night means hibernation without radio/GNSS operation. Hardware does not physically isolate every GNSS supply, so real night current remains a measurement item.
+
+## Peer review follow-up
+
+- [ ] **Correct the GNSS feed and reference together.** Remove the LBOOST crossing; resolve the C5 positive-land overlap beneath RF_IN, nearby return paths and local bypass placement. A longer west detour was rejected. Include both copper layers, artwork and rear assembly clearance in the placement review.
+- [ ] **Complete copper cleanup and stricter fabrication checks.** Remove narrow contacts and tiny etching pockets, preserve the earlier smooth routing style, and enable nonzero connection/groove limits. Check native connectivity, schematic parity, mask clearance and filled copper before promoting the revision.
+- [x] **Verify the digital feedback against the actual module.** SWD mapping matches the standard 32-pad RAK3172 and flown board. Keep 4.7 kΩ pull-ups; two 10 kΩ in parallel would be weaker. UART TX/RX do not need length matching. Document external-transmitter contention and the BOOT0 ground strap. [Evidence](../../analysis/v1_1_peer_review_20261014/digital/README.md).
+- [x] **Review both 10 µF capacitors.** Retain C8/C21. The exact parts lose substantial capacitance under bias; removing them has no demonstrated benefit. [Evidence](../../analysis/v1_1_peer_review_20261014/power/README.md).
+- [ ] **Measure bus and supply margins.** Check I²C 30–70% rise time against 300 ns at the far devices, and scope GNSS supply at startup/radio activity. Review C10 placement and FB1 maximum DCR before approving a substitute.
+- [ ] **Refresh the manufacturing package and JLC review after the final layout.** The existing cart does not follow CAD changes automatically. Keep the current order hold until the chosen revision and supplier files agree.
 
 ## Earlier v1.1 design work retained
 
