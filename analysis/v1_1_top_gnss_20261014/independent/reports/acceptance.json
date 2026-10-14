@@ -1,0 +1,23 @@
+{
+  "pcb_sha256": "88f82c85d2d47b4aea2e7d7d2827c4a92c339788cc0d9c880dd6342ee0440c0a",
+  "before_pcb_sha256": "8df85b3e4bdd546ec174bb9d7b9ee9d795d55d486a68e1e853aaf1b871f863d3",
+  "accepted_for_canonical_promotion": true,
+  "native_pad_count": 259,
+  "logical_pad_connection_checks": 250,
+  "scope_and_connectivity_checks_pass": true,
+  "project_library_exact_match_count": 158,
+  "raw_screen_retained_without_rewriting": true,
+  "raw_screen_flag_count": 10,
+  "all_raw_screen_flags_have_explicit_numeric_disposition": true,
+  "maximum_residual_inscribed_diameter_nm": 4.505845869636633,
+  "no_substantive_geometry_blocker_at_reviewed_thresholds": true,
+  "thermal_and_rf_reference_checks_pass": true,
+  "limitations": [
+    "This accepts the scoped CAD change; native DRC/ERC and manufacturer output verification are separate parent checks.",
+    "RF conductor length is16.963388 mm; ground-backed geometry and finite lateral guards do not qualify impedance, antenna tuning, GNSS sensitivity or assembly performance.",
+    "The raw pipeline summary remains false only because its deliberately strict zero-raw-flag condition includes10 sub-10 nm numerical contour remnants. See exact dispositions and primitive provenance."
+  ],
+  "strict_project_sha256": "915d9f9c4bc8c1eb0866031bf765ff08dc41a7b5bea4fb158ca26c1032ef93cd",
+  "canonical_project_sha256": "bf9f15d84333a0bf807aae42c27547ff4fccc275059965beaab0290773bdbdda",
+  "project_comparison_scope": "157 native schematic/rule/library/model files plus the explicit strict review project. Canonical user project settings are preserved separately and are not falsely claimed equal to the strict project."
+}

@@ -1,0 +1,20 @@
+{
+  "AE2": {
+    "x_mm": 62.882,
+    "y_mm": 33.218,
+    "angle_deg": 90,
+    "layer": "F.Cu"
+  },
+  "L1": {
+    "x_mm": 60.603,
+    "y_mm": 38.1865,
+    "angle_deg": 90,
+    "layer": "B.Cu"
+  },
+  "D3": {
+    "x_mm": 58.8,
+    "y_mm": 42,
+    "angle_deg": 0,
+    "layer": "F.Cu"
+  }
+}

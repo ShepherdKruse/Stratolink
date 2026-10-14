@@ -1,0 +1,9 @@
+{
+  "pcb_sha256": "88f82c85d2d47b4aea2e7d7d2827c4a92c339788cc0d9c880dd6342ee0440c0a",
+  "comparison_manifest_sha256": "495dfcddecbcf3d58a380090f5b01b93079d24c2683b3f853daeede87e3c7fab",
+  "verified_project_and_library_files": 158,
+  "failures": [],
+  "passed": true,
+  "explicit_project_override": "/Users/twarn/Repositories/Stratolink/analysis/v1_1_top_gnss_20261014/independent/inputs/strict-project.kicad_pro",
+  "project_at_board_directory_sha256": "bf9f15d84333a0bf807aae42c27547ff4fccc275059965beaab0290773bdbdda"
+}

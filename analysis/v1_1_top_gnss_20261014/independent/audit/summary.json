@@ -1,0 +1,152 @@
+{
+  "before_pcb_sha256": "8df85b3e4bdd546ec174bb9d7b9ee9d795d55d486a68e1e853aaf1b871f863d3",
+  "pcb_sha256": "88f82c85d2d47b4aea2e7d7d2827c4a92c339788cc0d9c880dd6342ee0440c0a",
+  "checks": {
+    "exact_declared_pad_and_pose_scope": true,
+    "expected_259_physical_pads": true,
+    "expected_250_logical_connections": true,
+    "native_zero_opens": true,
+    "changed_route_nets_declared": true,
+    "no_screened_etch_candidates": false,
+    "all_net_assigned_graphics_have_positive_contact": true,
+    "all_net_assigned_graphics_reach_same_net_pad": true,
+    "sampled_nonpad_front_ground_on_both_sides": true,
+    "no_foreign_copper_under_feed_outside_transition": true,
+    "rear_GND_covers_feed_outside_transition_with_5um_polygon_tolerance": true,
+    "receiver_ground_network_connected": true,
+    "nearby_ground_network_connected": true
+  },
+  "all_listed_checks_pass": false,
+  "etch_screen_counts": {
+    "F.Cu": {
+      "acute_gap_candidates": 0,
+      "sharp_tip_candidates": 0,
+      "small_enclosed_gap_candidates": 2,
+      "tiny_copper_components": 0
+    },
+    "B.Cu": {
+      "acute_gap_candidates": 0,
+      "sharp_tip_candidates": 0,
+      "small_enclosed_gap_candidates": 3,
+      "tiny_copper_components": 5
+    }
+  },
+  "lateral_ground_summary": {
+    "trace_outside_pad_transitions": {
+      "sample_count": 561,
+      "left": {
+        "no_ground_within_1_5mm_count": 0,
+        "maximum_first_ground_gap_mm": 0.1754317833533348,
+        "minimum_first_ground_width_mm": 1.3245682166466672
+      },
+      "right": {
+        "no_ground_within_1_5mm_count": 0,
+        "maximum_first_ground_gap_mm": 0.16723007032295653,
+        "minimum_first_ground_width_mm": 0.19899999999999807
+      }
+    },
+    "pad_transitions": {
+      "sample_count": 122,
+      "left": {
+        "no_ground_within_1_5mm_count": 0,
+        "maximum_first_ground_gap_mm": 0.6754999999999924,
+        "minimum_first_ground_width_mm": 0.8245000000000076
+      },
+      "right": {
+        "no_ground_within_1_5mm_count": 0,
+        "maximum_first_ground_gap_mm": 0.6754999999999995,
+        "minimum_first_ground_width_mm": 0.8245000000000005
+      }
+    }
+  },
+  "bus_route_lengths": [
+    {
+      "bus": "SCL",
+      "included_nets": [
+        "SCL",
+        "Net-(U3-SCL)"
+      ],
+      "before_mm": 106.88186520608508,
+      "after_mm": 106.88186520608508,
+      "delta_mm": 0.0
+    },
+    {
+      "bus": "SDA",
+      "included_nets": [
+        "SDA",
+        "Net-(U3-SDA)"
+      ],
+      "before_mm": 95.10255792263277,
+      "after_mm": 95.10255792263277,
+      "delta_mm": 0.0
+    }
+  ],
+  "source_bytes_unchanged": true,
+  "reproduction_commands": [
+    [
+      "/Applications/KiCad/KiCad.app/Contents/Frameworks/Python.framework/Versions/3.9/bin/python3.9",
+      "/Users/twarn/Repositories/Stratolink/analysis/v1_1_peer_review_20261014/digital/verify_rf_scope.py",
+      "--before",
+      "/Users/twarn/Repositories/ai-working/scratch/stratolink-peer-review-20261014/rf-copper-final/stratolink.kicad_pcb",
+      "--after",
+      "/Users/twarn/Repositories/ai-working/scratch/stratolink-top-gnss-20261014/copper-cleanup/stratolink.kicad_pcb",
+      "--expected-poses",
+      "/Users/twarn/Repositories/ai-working/scratch/stratolink-top-gnss-20261014/independent/original-top-declarations/poses.json",
+      "--expected-edits",
+      "/Users/twarn/Repositories/ai-working/scratch/stratolink-top-gnss-20261014/independent/original-top-declarations/edits.json",
+      "--report",
+      "/Users/twarn/Repositories/ai-working/scratch/stratolink-top-gnss-20261014/independent/final-88f82-audit/scope.json"
+    ],
+    [
+      "/Applications/KiCad/KiCad.app/Contents/Frameworks/Python.framework/Versions/3.9/bin/python3.9",
+      "/Users/twarn/Repositories/Stratolink/analysis/v1_1_peer_review_20261014/digital/extract_rf_reference.py",
+      "--pcb",
+      "/Users/twarn/Repositories/ai-working/scratch/stratolink-peer-review-20261014/rf-copper-final/stratolink.kicad_pcb",
+      "--output",
+      "/Users/twarn/Repositories/ai-working/scratch/stratolink-top-gnss-20261014/independent/final-88f82-audit/before-reference-geometry.json"
+    ],
+    [
+      "/Applications/KiCad/KiCad.app/Contents/Frameworks/Python.framework/Versions/3.9/bin/python3.9",
+      "/Users/twarn/Repositories/Stratolink/analysis/v1_1_peer_review_20261014/digital/extract_rf_reference.py",
+      "--pcb",
+      "/Users/twarn/Repositories/ai-working/scratch/stratolink-top-gnss-20261014/copper-cleanup/stratolink.kicad_pcb",
+      "--output",
+      "/Users/twarn/Repositories/ai-working/scratch/stratolink-top-gnss-20261014/independent/final-88f82-audit/after-reference-geometry.json"
+    ],
+    [
+      "/Users/twarn/Repositories/Stratolink/analysis/.venv/bin/python",
+      "/Users/twarn/Repositories/Stratolink/analysis/v1_1_peer_review_20261014/digital/check_rf_reference.py",
+      "--geometry",
+      "/Users/twarn/Repositories/ai-working/scratch/stratolink-top-gnss-20261014/independent/final-88f82-audit/after-reference-geometry.json",
+      "--output",
+      "/Users/twarn/Repositories/ai-working/scratch/stratolink-top-gnss-20261014/independent/final-88f82-audit/reference.json"
+    ],
+    [
+      "/Applications/KiCad/KiCad.app/Contents/Frameworks/Python.framework/Versions/3.9/bin/python3.9",
+      "/Users/twarn/Repositories/ai-working/scratch/stratolink-top-gnss-20261014/independent/extract_full_union.py",
+      "--repo",
+      "/Users/twarn/Repositories/Stratolink",
+      "--pcb",
+      "/Users/twarn/Repositories/ai-working/scratch/stratolink-top-gnss-20261014/copper-cleanup/stratolink.kicad_pcb",
+      "--output",
+      "/Users/twarn/Repositories/ai-working/scratch/stratolink-top-gnss-20261014/independent/final-88f82-audit/candidate-geometry.json"
+    ]
+  ],
+  "tool_and_declaration_hashes": {
+    "/Users/twarn/Repositories/ai-working/scratch/stratolink-top-gnss-20261014/independent/audit_candidate.py": "870a69d61846fd29b368b5410ac57e486e298f790095f3c4630f54e8108f88b2",
+    "/Users/twarn/Repositories/ai-working/scratch/stratolink-top-gnss-20261014/independent/extract_full_union.py": "8d28a358e6476a859fd5416e24db6a85aeff8192f9fcf2637bc596775a88682d",
+    "/Users/twarn/Repositories/Stratolink/analysis/v1_1_peer_review_20261014/digital/verify_rf_scope.py": "9008608fdce81b0c5f994b2fc6c65fd402f5d845bfda29839614e8c05cc82c9e",
+    "/Users/twarn/Repositories/Stratolink/analysis/v1_1_peer_review_20261014/digital/extract_rf_reference.py": "d0e3da278774574be5a10168c302e0bd3a45f48b2934256721f7276df85ad4f9",
+    "/Users/twarn/Repositories/Stratolink/analysis/v1_1_peer_review_20261014/digital/check_rf_reference.py": "1eb07714979980f68f5d1bfc4b3fd30dd24e6890c61cb35f2ab2aa4cfae420c3",
+    "/Users/twarn/Repositories/Stratolink/analysis/v1_1_peer_review_20261014/fabrication/extract_geometry.py": "51c340939618b9f4a85c52fc4fb179094cf58c0692859f8d290268da828831bf",
+    "/Users/twarn/Repositories/Stratolink/analysis/v1_1_peer_review_20261014/fabrication/screen_geometry.py": "c845189bf4dbb08ecb5080f7446fbcdcca3fa2bc709f4e7065c0a7de735bfe42",
+    "/Users/twarn/Repositories/ai-working/scratch/stratolink-top-gnss-20261014/independent/original-top-declarations/poses.json": "a53f849a15217bfb91cbdc62317e936d17629e9d4650e57c7209df892dc46163",
+    "/Users/twarn/Repositories/ai-working/scratch/stratolink-top-gnss-20261014/independent/original-top-declarations/edits.json": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570"
+  },
+  "limitations": [
+    "No CAD writes or zone refill performed. Results refer to saved candidate geometry.",
+    "Native DRC/ERC and the exact project/rule configuration are separately verified by the parent review.",
+    "Lateral reference metrics are reported, not reduced to an unsupported uniform-impedance claim.",
+    "Etch-screen thresholds are inherited from the documented full-copper screen, not supplier process guarantees."
+  ]
+}

@@ -1,0 +1,105 @@
+{
+  "before_pcb_sha256": "8df85b3e4bdd546ec174bb9d7b9ee9d795d55d486a68e1e853aaf1b871f863d3",
+  "pcb_sha256": "88f82c85d2d47b4aea2e7d7d2827c4a92c339788cc0d9c880dd6342ee0440c0a",
+  "plan_sha256": "4758e781ab3ee1f7c35dc0049d822fb464a3cf9cdd32e48378d7bd4632920a75",
+  "exact_group_moves_mm": {
+    "Copper label: PICO MAINBOARD V1.1": [
+      -0.6,
+      0
+    ],
+    "Copper label: STRATOLINK.ORG": [
+      -0.4,
+      0
+    ]
+  },
+  "exact_assembly_text_edits": {
+    "ecb571e0-09e7-56ca-854e-59e33d06c31e": {
+      "before": "GNSS: 48 mm straight wire LEFT from feed; tune assembled payload",
+      "after": "GNSS: 48 mm straight wire UP from top feed; tune assembled payload"
+    }
+  },
+  "rigidly_translated_graphics": 45,
+  "unchanged_other_drawing_count": 59,
+  "all_other_unnetted_artwork_unchanged": true,
+  "group_membership_unchanged": true,
+  "net_assigned_copper_changes_for_separate_review": [
+    {
+      "uuid": "2ae05bbd-7421-5ec9-910f-e4c3b8c52848",
+      "before_net": "GND",
+      "after_net": "+SOLAR",
+      "before_layer": "B.Cu",
+      "after_layer": "B.Cu"
+    },
+    {
+      "uuid": "4bc15156-7468-59fc-b95b-51738104d45c",
+      "before_net": null,
+      "after_net": "GND",
+      "before_layer": null,
+      "after_layer": "F.Cu"
+    },
+    {
+      "uuid": "5393d1f8-465d-59fe-9bc8-ca8da1debf95",
+      "before_net": "/VBAT",
+      "after_net": null,
+      "before_layer": "B.Cu",
+      "after_layer": null
+    },
+    {
+      "uuid": "6641ea5c-2b5c-5274-a8f3-20e297bb8aac",
+      "before_net": "GND",
+      "after_net": "+SOLAR",
+      "before_layer": "B.Cu",
+      "after_layer": "B.Cu"
+    },
+    {
+      "uuid": "871f2f67-e553-5e6f-b8f0-3db2c52f9123",
+      "before_net": "/VBAT",
+      "after_net": null,
+      "before_layer": "B.Cu",
+      "after_layer": null
+    },
+    {
+      "uuid": "b06fa1c7-9ffe-5d54-bf73-526a1879e6e1",
+      "before_net": null,
+      "after_net": "Net-(U1-LBOOST)",
+      "before_layer": null,
+      "after_layer": "B.Cu"
+    },
+    {
+      "uuid": "ba3c6216-d0e7-57d1-9ac2-8d5e7f39cb29",
+      "before_net": "Net-(AE2-A)",
+      "after_net": null,
+      "before_layer": "F.Cu",
+      "after_layer": null
+    },
+    {
+      "uuid": "bf093dfe-de64-57fe-85d0-859fb44b6259",
+      "before_net": "GND",
+      "after_net": "+SOLAR",
+      "before_layer": "B.Cu",
+      "after_layer": "B.Cu"
+    },
+    {
+      "uuid": "cec9dc7b-9a6d-517d-b84d-651ded74ebcc",
+      "before_net": "/SC_BAL_OUT",
+      "after_net": null,
+      "before_layer": "B.Cu",
+      "after_layer": null
+    },
+    {
+      "uuid": "dbbe1236-0e83-55c9-b1ba-1552f4ffd4c8",
+      "before_net": null,
+      "after_net": "+SOLAR",
+      "before_layer": null,
+      "after_layer": "B.Cu"
+    },
+    {
+      "uuid": "f5107420-9f61-54b6-889e-abad2b9900fe",
+      "before_net": "GND",
+      "after_net": null,
+      "before_layer": "F.Cu",
+      "after_layer": null
+    }
+  ],
+  "source_bytes_unchanged": true
+}

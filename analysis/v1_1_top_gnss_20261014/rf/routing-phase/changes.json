@@ -1,0 +1,2388 @@
+{
+  "source_sha256": "8df85b3e4bdd546ec174bb9d7b9ee9d795d55d486a68e1e853aaf1b871f863d3",
+  "changes": [
+    {
+      "action": "move",
+      "ref": "AE2",
+      "before": [
+        55.3,
+        47.85
+      ],
+      "after": [
+        62.882,
+        33.218
+      ],
+      "before_angle": 180.0,
+      "after_angle": 90
+    },
+    {
+      "action": "move",
+      "ref": "L1",
+      "before": [
+        60.103,
+        38.1865
+      ],
+      "after": [
+        60.603,
+        38.1865
+      ],
+      "before_angle": 90.0,
+      "after_angle": 90.0
+    },
+    {
+      "action": "move",
+      "ref": "D3",
+      "before": [
+        58.0,
+        45.05
+      ],
+      "after": [
+        58.8,
+        42.0
+      ],
+      "before_angle": -90.0,
+      "after_angle": 0
+    },
+    {
+      "action": "remove",
+      "uuid": "d4db4626-2f36-5f70-9f4f-c2358bdf416c",
+      "net": "GND"
+    },
+    {
+      "action": "remove",
+      "uuid": "fb7eb050-21d7-5f6b-8973-11ae09210fab",
+      "net": "GND"
+    },
+    {
+      "action": "remove",
+      "uuid": "0171febf-a614-57e3-8385-aa0b95d5d8ff",
+      "net": "GND"
+    },
+    {
+      "action": "remove",
+      "uuid": "0bfcd2d0-e08c-4898-b421-bf19060d510f",
+      "net": "GND"
+    },
+    {
+      "action": "remove",
+      "uuid": "839c7715-480e-4339-a257-030433660756",
+      "net": "GND"
+    },
+    {
+      "action": "remove",
+      "uuid": "cb09c440-db10-5717-8a62-d14623df26b2",
+      "net": "GND"
+    },
+    {
+      "action": "remove",
+      "uuid": "1dad97a1-d2d0-5c74-9948-b124ce28c8dc",
+      "net": "GND"
+    },
+    {
+      "action": "remove",
+      "uuid": "aaab34f8-380c-55ba-a911-c0477b0c3e76",
+      "net": "GND"
+    },
+    {
+      "action": "remove",
+      "uuid": "71ea73c2-7d71-5ceb-8317-7731a65808a8",
+      "net": "Net-(AE2-A)"
+    },
+    {
+      "action": "remove",
+      "uuid": "740ac384-10f4-5041-b815-3217c9c18283",
+      "net": "Net-(AE2-A)"
+    },
+    {
+      "action": "remove",
+      "uuid": "777eea7c-048b-531a-ab44-0903cc915bf7",
+      "net": "Net-(AE2-A)"
+    },
+    {
+      "action": "remove",
+      "uuid": "88427094-8f27-5415-9f1a-2189734cd052",
+      "net": "Net-(AE2-A)"
+    },
+    {
+      "action": "remove",
+      "uuid": "3d2c4bde-575f-5b17-b738-6358d3a39e0b",
+      "net": "Net-(AE2-A)"
+    },
+    {
+      "action": "remove",
+      "uuid": "5f05befe-7cac-565d-8c54-90c9a969a02f",
+      "net": "Net-(AE2-A)"
+    },
+    {
+      "action": "remove",
+      "uuid": "6cca3da4-99ec-5662-8f67-ef01c12b9095",
+      "net": "Net-(AE2-A)"
+    },
+    {
+      "action": "remove",
+      "uuid": "17d6f993-3d9b-46b3-ad58-a9fc892fc874",
+      "net": "+SOLAR"
+    },
+    {
+      "action": "remove",
+      "uuid": "30f9387b-6101-4b58-90b6-f944cba6fad5",
+      "net": "+SOLAR"
+    },
+    {
+      "action": "remove",
+      "uuid": "565c06b7-9582-44f0-a88c-af66fec0f3f0",
+      "net": "+SOLAR"
+    },
+    {
+      "action": "remove",
+      "uuid": "68ff3b5b-3b97-492d-98f3-727c63925442",
+      "net": "+SOLAR"
+    },
+    {
+      "action": "remove",
+      "uuid": "7ede80ea-e043-4f1d-be89-fb1d451eb73a",
+      "net": "+SOLAR"
+    },
+    {
+      "action": "remove",
+      "uuid": "80a79207-0d2b-4ce4-b70b-78970d12fa25",
+      "net": "+SOLAR"
+    },
+    {
+      "action": "remove",
+      "uuid": "a8b5072c-ca58-4971-bd14-97364fc1e043",
+      "net": "+SOLAR"
+    },
+    {
+      "action": "remove",
+      "uuid": "b31eff8a-b884-49df-8e32-245c0db06289",
+      "net": "+SOLAR"
+    },
+    {
+      "action": "remove",
+      "uuid": "b55f0878-fc10-4082-90bc-7707c4d2c0bc",
+      "net": "+SOLAR"
+    },
+    {
+      "action": "remove",
+      "uuid": "e9bec5b4-88da-45ea-9fa2-1d1c291498d9",
+      "net": "+SOLAR"
+    },
+    {
+      "action": "remove",
+      "uuid": "f5275c5f-c7b1-49db-bf4a-4d1022d5e45f",
+      "net": "+SOLAR"
+    },
+    {
+      "action": "remove",
+      "uuid": "1aff4895-f78b-57bb-955f-0f935c27bc30",
+      "net": "/VBAT"
+    },
+    {
+      "action": "remove",
+      "uuid": "73a23e5a-fa7c-5183-b966-b3562595c45c",
+      "net": "/VBAT"
+    },
+    {
+      "action": "remove",
+      "uuid": "87acfd1f-88c6-5c67-97ab-c66a97e1b21f",
+      "net": "/VBAT"
+    },
+    {
+      "action": "remove",
+      "uuid": "02126ee7-5638-54e7-b934-561c1dc97761",
+      "net": "/VBAT"
+    },
+    {
+      "action": "remove",
+      "uuid": "0a5811e3-c6bd-53b4-b0b8-eb6ed66d3749",
+      "net": "/VBAT"
+    },
+    {
+      "action": "remove",
+      "uuid": "0c98de14-2e2d-5291-8a77-0e828e338fb7",
+      "net": "/VBAT"
+    },
+    {
+      "action": "remove",
+      "uuid": "1debb3c9-a417-5287-a1fa-6c7c65fe53fc",
+      "net": "/VBAT"
+    },
+    {
+      "action": "remove",
+      "uuid": "262d3024-d9d2-5a90-8132-7852dc02e804",
+      "net": "/VBAT"
+    },
+    {
+      "action": "remove",
+      "uuid": "26d2aea5-82f6-5b9c-87f8-369423e25a75",
+      "net": "/VBAT"
+    },
+    {
+      "action": "remove",
+      "uuid": "27b62b2e-145f-5a58-afc7-5933b4095cf8",
+      "net": "/VBAT"
+    },
+    {
+      "action": "remove",
+      "uuid": "2e54ce89-29fe-5584-b444-aeaa2a347d35",
+      "net": "/VBAT"
+    },
+    {
+      "action": "remove",
+      "uuid": "30fb0dd5-baef-5ffa-87bb-4dea513d04d0",
+      "net": "/VBAT"
+    },
+    {
+      "action": "remove",
+      "uuid": "35fbfb3b-b62c-5c00-b0e6-fe88660fe356",
+      "net": "/VBAT"
+    },
+    {
+      "action": "remove",
+      "uuid": "3aec9b44-8b31-5530-8a59-f3d01c8c4719",
+      "net": "/VBAT"
+    },
+    {
+      "action": "remove",
+      "uuid": "3e413ca9-bea7-51de-94ef-5c46830b631d",
+      "net": "/VBAT"
+    },
+    {
+      "action": "remove",
+      "uuid": "41273cd7-f660-5069-b39d-10f5094d9441",
+      "net": "/VBAT"
+    },
+    {
+      "action": "remove",
+      "uuid": "43f181f6-8aa8-5b1d-987c-6e67e18ff852",
+      "net": "/VBAT"
+    },
+    {
+      "action": "remove",
+      "uuid": "4a21b4d5-4688-5b54-ab2a-9b1490f20b34",
+      "net": "/VBAT"
+    },
+    {
+      "action": "remove",
+      "uuid": "56644210-8cb3-5d2b-aede-5391b0f6a62a",
+      "net": "/VBAT"
+    },
+    {
+      "action": "remove",
+      "uuid": "57742132-9e2e-5f4f-a31a-39a233edbc54",
+      "net": "/VBAT"
+    },
+    {
+      "action": "remove",
+      "uuid": "5805a356-10dd-54b9-a899-e2fa937e021a",
+      "net": "/VBAT"
+    },
+    {
+      "action": "remove",
+      "uuid": "5ba3436a-58d3-5657-b282-3bb5d15c9dec",
+      "net": "/VBAT"
+    },
+    {
+      "action": "remove",
+      "uuid": "5efcac67-d2f5-5d3e-bd20-3f5ab96ef272",
+      "net": "/VBAT"
+    },
+    {
+      "action": "remove",
+      "uuid": "65652bb0-477a-5eb6-a5e6-4d81e6076b75",
+      "net": "/VBAT"
+    },
+    {
+      "action": "remove",
+      "uuid": "7e76aa94-0b14-57ea-ae79-a39b931ebe50",
+      "net": "/VBAT"
+    },
+    {
+      "action": "remove",
+      "uuid": "8acf55d3-ee1b-50fb-949f-e7684386e8aa",
+      "net": "/VBAT"
+    },
+    {
+      "action": "remove",
+      "uuid": "8cdcee5e-77d5-53ac-a25a-26f164213b2d",
+      "net": "/VBAT"
+    },
+    {
+      "action": "remove",
+      "uuid": "92d8c52b-0931-56da-b2e8-afcfb11ba22b",
+      "net": "/VBAT"
+    },
+    {
+      "action": "remove",
+      "uuid": "98e63a09-1f2d-5d9e-8602-85b828231b42",
+      "net": "/VBAT"
+    },
+    {
+      "action": "remove",
+      "uuid": "9f625e67-ae0b-557b-be9f-9c65709b4f69",
+      "net": "/VBAT"
+    },
+    {
+      "action": "remove",
+      "uuid": "a914aa81-484f-5cc0-95c1-d95341e7e5c2",
+      "net": "/VBAT"
+    },
+    {
+      "action": "remove",
+      "uuid": "b42b9fa5-7c89-53c5-b976-1276601c26aa",
+      "net": "/VBAT"
+    },
+    {
+      "action": "remove",
+      "uuid": "bab1eeff-38ea-5c9e-8be5-030286ffe6f2",
+      "net": "/VBAT"
+    },
+    {
+      "action": "remove",
+      "uuid": "be871ded-7b01-5798-b666-f8bf3996fa7e",
+      "net": "/VBAT"
+    },
+    {
+      "action": "remove",
+      "uuid": "c0d3824d-8348-5420-9c1a-4d465910bbd0",
+      "net": "/VBAT"
+    },
+    {
+      "action": "remove",
+      "uuid": "c2f51cce-17a2-5b43-a3f5-e6e56436700c",
+      "net": "/VBAT"
+    },
+    {
+      "action": "remove",
+      "uuid": "c789a052-9c53-5c10-b0d2-34e273f006ed",
+      "net": "/VBAT"
+    },
+    {
+      "action": "remove",
+      "uuid": "cbf87e11-5f35-571f-98d8-07187465eaee",
+      "net": "/VBAT"
+    },
+    {
+      "action": "remove",
+      "uuid": "d2de99fa-c501-57a8-b649-ce0f85ff4cce",
+      "net": "/VBAT"
+    },
+    {
+      "action": "remove",
+      "uuid": "d62e86f5-792e-58d5-a169-0ff9d87c4561",
+      "net": "/VBAT"
+    },
+    {
+      "action": "remove",
+      "uuid": "d9cda284-c5a9-5e80-84b6-add80e3d0623",
+      "net": "/VBAT"
+    },
+    {
+      "action": "remove",
+      "uuid": "dfdcc5a1-a9c1-597d-aa31-5103a97eeceb",
+      "net": "/VBAT"
+    },
+    {
+      "action": "remove",
+      "uuid": "e37e874d-4fd5-59e4-a6a9-aa858d425d37",
+      "net": "/VBAT"
+    },
+    {
+      "action": "remove",
+      "uuid": "e463afd0-b511-528f-bbc9-d08a6f44f50c",
+      "net": "/VBAT"
+    },
+    {
+      "action": "remove",
+      "uuid": "efbcee0e-99fe-5267-8f05-0542ce1a114d",
+      "net": "/VBAT"
+    },
+    {
+      "action": "remove",
+      "uuid": "efc084a0-5523-5b33-8bfa-c9781ee34996",
+      "net": "/VBAT"
+    },
+    {
+      "action": "remove",
+      "uuid": "fbc92e6d-f173-53d9-8dde-058f37240ea0",
+      "net": "/VBAT"
+    },
+    {
+      "action": "remove",
+      "uuid": "fa2c5987-ea4c-5d82-998d-41569e6ff548",
+      "net": "/VBAT"
+    },
+    {
+      "action": "remove",
+      "uuid": "4c7bb563-ed86-50cb-ae90-0e3310545a40",
+      "net": "/SC_BAL_OUT"
+    },
+    {
+      "action": "remove",
+      "uuid": "5bacaf99-2cfa-5026-bf84-8b1aacb91464",
+      "net": "/SC_BAL_OUT"
+    },
+    {
+      "action": "remove",
+      "uuid": "5ddc1d90-3f88-5395-9508-29d7167676e6",
+      "net": "/SC_BAL_OUT"
+    },
+    {
+      "action": "remove",
+      "uuid": "7ee114a8-039b-54ef-90fa-e208480d2ded",
+      "net": "/SC_BAL_OUT"
+    },
+    {
+      "action": "remove",
+      "uuid": "923f4811-aaee-57a2-8dcd-2c1b1dabfc6f",
+      "net": "/SC_BAL_OUT"
+    },
+    {
+      "action": "remove",
+      "uuid": "938ff0b5-5a42-5103-8fbd-815b91721022",
+      "net": "/SC_BAL_OUT"
+    },
+    {
+      "action": "remove",
+      "uuid": "d41502f0-31b9-5239-bc6f-940c6f403256",
+      "net": "/SC_BAL_OUT"
+    },
+    {
+      "action": "remove",
+      "uuid": "ff22f9b4-7738-5f07-a581-f123e1aeed54",
+      "net": "/SC_BAL_OUT"
+    },
+    {
+      "action": "remove",
+      "uuid": "dd9adc7d-9ce8-5b5f-8514-ce94e87194fa",
+      "net": "/SC_BAL_OUT"
+    },
+    {
+      "action": "remove",
+      "uuid": "f23dbd92-7640-5675-b144-db6a113413b6",
+      "net": "/SC_BAL_OUT"
+    },
+    {
+      "action": "remove",
+      "uuid": "049f1ec2-6d90-583e-80e0-1dbad83ea012",
+      "net": "/SC_BAL_OUT"
+    },
+    {
+      "action": "remove",
+      "uuid": "06083373-b5b1-5808-a562-89b6babb1ab2",
+      "net": "/SC_BAL_OUT"
+    },
+    {
+      "action": "remove",
+      "uuid": "063cbb31-eec8-5b15-85e6-14461fe4c785",
+      "net": "/SC_BAL_OUT"
+    },
+    {
+      "action": "remove",
+      "uuid": "098df22a-046d-55ad-b80f-44c02640bd24",
+      "net": "/SC_BAL_OUT"
+    },
+    {
+      "action": "remove",
+      "uuid": "106120aa-98f7-5cda-afda-e030bb1c570c",
+      "net": "/SC_BAL_OUT"
+    },
+    {
+      "action": "remove",
+      "uuid": "155b1f6c-0367-51e4-8946-24940734ef4e",
+      "net": "/SC_BAL_OUT"
+    },
+    {
+      "action": "remove",
+      "uuid": "2319d4d5-5bfe-58f9-91b9-4bad49b97522",
+      "net": "/SC_BAL_OUT"
+    },
+    {
+      "action": "remove",
+      "uuid": "23a9ce83-cd09-59ac-9df2-507b16220a75",
+      "net": "/SC_BAL_OUT"
+    },
+    {
+      "action": "remove",
+      "uuid": "24564953-f4b9-5dc3-ae8a-d2415f53d097",
+      "net": "/SC_BAL_OUT"
+    },
+    {
+      "action": "remove",
+      "uuid": "445dd30b-5595-55eb-a833-bf9908f19caf",
+      "net": "/SC_BAL_OUT"
+    },
+    {
+      "action": "remove",
+      "uuid": "4622f2fb-0de3-521b-9646-8b971aef6803",
+      "net": "/SC_BAL_OUT"
+    },
+    {
+      "action": "remove",
+      "uuid": "4a0c28a3-f761-5f60-9d0d-5f7e4be25a65",
+      "net": "/SC_BAL_OUT"
+    },
+    {
+      "action": "remove",
+      "uuid": "4bb66fb7-8480-5071-80f9-c4d8ee812d09",
+      "net": "/SC_BAL_OUT"
+    },
+    {
+      "action": "remove",
+      "uuid": "53d3804a-0309-5a8c-b9c0-bcbda69523ea",
+      "net": "/SC_BAL_OUT"
+    },
+    {
+      "action": "remove",
+      "uuid": "54cdaa43-dc63-5634-9019-0d203437c246",
+      "net": "/SC_BAL_OUT"
+    },
+    {
+      "action": "remove",
+      "uuid": "5840af72-87f5-5279-99cb-0f1d26a98d06",
+      "net": "/SC_BAL_OUT"
+    },
+    {
+      "action": "remove",
+      "uuid": "5fdc8908-8f86-561e-b92a-eeebda825e45",
+      "net": "/SC_BAL_OUT"
+    },
+    {
+      "action": "remove",
+      "uuid": "60b95587-a174-5c9b-bbb7-7808146aba8a",
+      "net": "/SC_BAL_OUT"
+    },
+    {
+      "action": "remove",
+      "uuid": "62f97388-f2c3-54b3-bfff-8983ca8bea9f",
+      "net": "/SC_BAL_OUT"
+    },
+    {
+      "action": "remove",
+      "uuid": "7439a54f-a7dc-542e-a889-c7c2abab39f7",
+      "net": "/SC_BAL_OUT"
+    },
+    {
+      "action": "remove",
+      "uuid": "82a3f0e5-8d9f-5c51-a719-1a0f3c436af0",
+      "net": "/SC_BAL_OUT"
+    },
+    {
+      "action": "remove",
+      "uuid": "85e4818b-7c2e-51aa-90c2-d23a52db4ae1",
+      "net": "/SC_BAL_OUT"
+    },
+    {
+      "action": "remove",
+      "uuid": "9a069672-6ffd-5cc2-8d2b-5b570d1ac436",
+      "net": "/SC_BAL_OUT"
+    },
+    {
+      "action": "remove",
+      "uuid": "a6b73d96-5fc4-5068-9240-70f3b3935da4",
+      "net": "/SC_BAL_OUT"
+    },
+    {
+      "action": "remove",
+      "uuid": "a90b4905-383f-547a-82d1-dd872b16445d",
+      "net": "/SC_BAL_OUT"
+    },
+    {
+      "action": "remove",
+      "uuid": "ab1c0754-8494-5f60-b6b9-304d2573794a",
+      "net": "/SC_BAL_OUT"
+    },
+    {
+      "action": "remove",
+      "uuid": "ae1895cc-4ad6-56b6-a036-5b23628d39ad",
+      "net": "/SC_BAL_OUT"
+    },
+    {
+      "action": "remove",
+      "uuid": "bb6406a3-d2c4-5483-adaf-42b53c04f6f3",
+      "net": "/SC_BAL_OUT"
+    },
+    {
+      "action": "remove",
+      "uuid": "bc847b07-195f-5856-9f28-c2adcc83291e",
+      "net": "/SC_BAL_OUT"
+    },
+    {
+      "action": "remove",
+      "uuid": "d6c23cb0-9200-59f0-8f5f-20c619a4bb54",
+      "net": "/SC_BAL_OUT"
+    },
+    {
+      "action": "remove",
+      "uuid": "df402761-a015-55cb-846f-6cf90bd4747c",
+      "net": "/SC_BAL_OUT"
+    },
+    {
+      "action": "remove",
+      "uuid": "e299e300-b992-54a5-b522-d3d3721e3db5",
+      "net": "/SC_BAL_OUT"
+    },
+    {
+      "action": "remove",
+      "uuid": "e4ddfb1f-00a4-5b59-9ac2-e9297577adc0",
+      "net": "/SC_BAL_OUT"
+    },
+    {
+      "action": "remove",
+      "uuid": "e8b454e0-9ab7-5ef4-b13d-54d5f67d1f09",
+      "net": "/SC_BAL_OUT"
+    },
+    {
+      "action": "remove",
+      "uuid": "025e778a-9eb4-4dc9-b548-e9352664b148",
+      "net": "GND"
+    },
+    {
+      "action": "remove",
+      "uuid": "74c8c306-2b30-4648-890d-33cc6250e934",
+      "net": "GND"
+    },
+    {
+      "action": "remove",
+      "uuid": "74d5af21-16b6-4d42-a19a-2869c6730ef9",
+      "net": "GND"
+    },
+    {
+      "action": "remove",
+      "uuid": "7d19371f-b442-4cc7-90d2-109eb81b8831",
+      "net": "GND"
+    },
+    {
+      "action": "remove",
+      "uuid": "8596c57b-3a96-44cf-a676-d38ccaef1053",
+      "net": "GND"
+    },
+    {
+      "action": "remove",
+      "uuid": "8b581ef7-053c-42a0-b06f-844c189292f3",
+      "net": "GND"
+    },
+    {
+      "action": "remove",
+      "uuid": "9c0017e8-cf41-4358-a960-ae1c3f003926",
+      "net": "GND"
+    },
+    {
+      "action": "remove",
+      "uuid": "d7f4b9b2-2047-4150-a61f-c58dac0a25fc",
+      "net": "GND"
+    },
+    {
+      "action": "remove",
+      "uuid": "da78c286-763d-4c08-a516-f5745d1e5dd9",
+      "net": "GND"
+    },
+    {
+      "action": "remove",
+      "uuid": "ed5f67c8-3552-454f-9529-35b6fe329c10",
+      "net": "GND"
+    },
+    {
+      "action": "remove",
+      "uuid": "1819afe9-bd05-43d8-a271-633693b4bedb",
+      "net": "GND"
+    },
+    {
+      "action": "remove",
+      "uuid": "37afa236-74ce-472b-9693-ad420388b7b1",
+      "net": "GND"
+    },
+    {
+      "action": "remove",
+      "uuid": "56cc68d0-4695-4ea1-83ad-7cba0430de38",
+      "net": "GND"
+    },
+    {
+      "action": "remove",
+      "uuid": "96d0f8c5-cacd-4704-ae1f-fcf30fdd0cd6",
+      "net": "GND"
+    },
+    {
+      "action": "remove",
+      "uuid": "cc1ebe29-cc66-48db-9b8d-f992f6eaeb26",
+      "net": "GND"
+    },
+    {
+      "action": "remove",
+      "uuid": "2e4b2772-843a-4aa2-ac6f-1edad189e562",
+      "net": "GND"
+    },
+    {
+      "action": "remove",
+      "uuid": "5eb68679-9f84-409e-92a6-c5d5f1bdd2a5",
+      "net": "GND"
+    },
+    {
+      "action": "remove",
+      "uuid": "8dd727f3-5cc5-5f06-8558-46e5c8c1602b",
+      "net": "GND"
+    },
+    {
+      "action": "remove",
+      "uuid": "a34a08fd-10bb-4b4f-b177-137f34dc4faf",
+      "net": "GND"
+    },
+    {
+      "action": "remove",
+      "uuid": "c6b4c200-0c9f-41d0-94be-2447f37e183d",
+      "net": "GND"
+    },
+    {
+      "action": "remove",
+      "uuid": "ba3c6216-d0e7-57d1-9ac2-8d5e7f39cb29",
+      "net": "Net-(AE2-A)"
+    },
+    {
+      "action": "remove",
+      "uuid": "f5107420-9f61-54b6-889e-abad2b9900fe",
+      "net": "GND"
+    },
+    {
+      "action": "remove",
+      "uuid": "5393d1f8-465d-59fe-9bc8-ca8da1debf95",
+      "net": "/VBAT"
+    },
+    {
+      "action": "remove",
+      "uuid": "cec9dc7b-9a6d-517d-b84d-651ded74ebcc",
+      "net": "/SC_BAL_OUT"
+    },
+    {
+      "action": "remove",
+      "uuid": "871f2f67-e553-5e6f-b8f0-3db2c52f9123",
+      "net": "/VBAT"
+    },
+    {
+      "action": "terminal_endpoint_shift",
+      "uuid": "16996adf-2b9d-461d-afd5-d303b8979fe9",
+      "endpoint": "GetEnd",
+      "before": [
+        60.103,
+        36.4215
+      ],
+      "after": [
+        60.603,
+        36.4215
+      ]
+    },
+    {
+      "action": "terminal_endpoint_shift",
+      "uuid": "e8c3e310-f44f-4eb9-9b74-4cd2b048ffe8",
+      "endpoint": "GetEnd",
+      "before": [
+        60.103,
+        39.9515
+      ],
+      "after": [
+        60.603,
+        39.9515
+      ]
+    },
+    {
+      "action": "move_group",
+      "name": "Copper label: PICO MAINBOARD V1.1",
+      "delta": [
+        -0.6,
+        0
+      ]
+    },
+    {
+      "action": "move_group",
+      "name": "Copper label: STRATOLINK.ORG",
+      "delta": [
+        -0.4,
+        0
+      ]
+    },
+    {
+      "action": "track",
+      "uuid": "e6354d2e-e8ee-529f-b13d-233d9ba40ba3",
+      "net": "+SOLAR",
+      "points": [
+        [
+          70.827057,
+          31.671
+        ],
+        [
+          64.36213203435597,
+          31.671
+        ]
+      ],
+      "width": 0.5,
+      "layer": "B.Cu"
+    },
+    {
+      "action": "arc",
+      "uuid": "7c09a78f-40ab-5ca1-94da-3e908f24c247",
+      "net": "+SOLAR",
+      "start": [
+        64.36213203435597,
+        31.671
+      ],
+      "mid": [
+        64.3047295195012,
+        31.682418070123305
+      ],
+      "end": [
+        64.25606601717799,
+        31.714933982822018
+      ],
+      "width": 0.5,
+      "layer": "B.Cu"
+    },
+    {
+      "action": "track",
+      "uuid": "a7963d2f-4dfe-5cab-aeaa-9421aa5eef73",
+      "net": "+SOLAR",
+      "points": [
+        [
+          64.25606601717799,
+          31.714933982822018
+        ],
+        [
+          64.09393398282201,
+          31.87706601717798
+        ]
+      ],
+      "width": 0.5,
+      "layer": "B.Cu"
+    },
+    {
+      "action": "arc",
+      "uuid": "ba79e2bb-1935-5ce1-841f-310b3092969b",
+      "net": "+SOLAR",
+      "start": [
+        64.09393398282201,
+        31.87706601717798
+      ],
+      "mid": [
+        64.06141807012331,
+        31.9257295195012
+      ],
+      "end": [
+        64.05,
+        31.983132034355965
+      ],
+      "width": 0.5,
+      "layer": "B.Cu"
+    },
+    {
+      "action": "track",
+      "uuid": "910475a9-8b8c-515c-8c1f-8b65685bd968",
+      "net": "+SOLAR",
+      "points": [
+        [
+          64.05,
+          31.983132034355965
+        ],
+        [
+          64.05,
+          34.63786796564404
+        ]
+      ],
+      "width": 0.5,
+      "layer": "B.Cu"
+    },
+    {
+      "action": "arc",
+      "uuid": "21c90aa6-0241-576e-9e4f-06d3b0d6a984",
+      "net": "+SOLAR",
+      "start": [
+        64.05,
+        34.63786796564404
+      ],
+      "mid": [
+        64.03858192987668,
+        34.6952704804988
+      ],
+      "end": [
+        64.00606601717799,
+        34.74393398282202
+      ],
+      "width": 0.5,
+      "layer": "B.Cu"
+    },
+    {
+      "action": "track",
+      "uuid": "a69af598-f323-59ef-9541-4f713c3cb1b9",
+      "net": "+SOLAR",
+      "points": [
+        [
+          64.00606601717799,
+          34.74393398282202
+        ],
+        [
+          63.44393398282202,
+          35.30606601717798
+        ]
+      ],
+      "width": 0.5,
+      "layer": "B.Cu"
+    },
+    {
+      "action": "arc",
+      "uuid": "99a3e4dd-2721-56b0-96cb-8e4661165152",
+      "net": "+SOLAR",
+      "start": [
+        63.44393398282202,
+        35.30606601717798
+      ],
+      "mid": [
+        63.411418070123304,
+        35.354729519501205
+      ],
+      "end": [
+        63.4,
+        35.41213203435596
+      ],
+      "width": 0.5,
+      "layer": "B.Cu"
+    },
+    {
+      "action": "track",
+      "uuid": "0b0aee2c-bd7d-50d3-8f9c-551679163c67",
+      "net": "+SOLAR",
+      "points": [
+        [
+          63.4,
+          35.41213203435596
+        ],
+        [
+          63.4,
+          38.217
+        ]
+      ],
+      "width": 0.5,
+      "layer": "B.Cu"
+    },
+    {
+      "action": "arc",
+      "uuid": "d7c12550-c996-5f76-a7b5-e9a86d90d9ef",
+      "net": "+SOLAR",
+      "start": [
+        63.4,
+        38.217
+      ],
+      "mid": [
+        63.44393398282202,
+        38.32306601717798
+      ],
+      "end": [
+        63.55,
+        38.367
+      ],
+      "width": 0.5,
+      "layer": "B.Cu"
+    },
+    {
+      "action": "track",
+      "uuid": "16fb1424-7edd-5d8d-9994-301996d654b0",
+      "net": "+SOLAR",
+      "points": [
+        [
+          63.55,
+          38.367
+        ],
+        [
+          63.873,
+          38.367
+        ]
+      ],
+      "width": 0.5,
+      "layer": "B.Cu"
+    },
+    {
+      "action": "track",
+      "uuid": "c7226484-9bb4-5f16-bee4-00dcd20d3327",
+      "net": "Net-(AE2-A)",
+      "points": [
+        [
+          60.787001,
+          45.114001
+        ],
+        [
+          60.14497495185567,
+          45.114001
+        ]
+      ],
+      "width": 0.45,
+      "layer": "F.Cu"
+    },
+    {
+      "action": "arc",
+      "uuid": "dd3dc6cc-ddc9-565a-b35b-e6090e71f85c",
+      "net": "Net-(AE2-A)",
+      "start": [
+        60.14497495185567,
+        45.114001
+      ],
+      "mid": [
+        60.011035588849154,
+        45.08735876940938
+      ],
+      "end": [
+        59.89748733095338,
+        45.01148812592804
+      ],
+      "width": 0.45,
+      "layer": "F.Cu"
+    },
+    {
+      "action": "track",
+      "uuid": "b95e5d30-7814-58c4-b5d1-4fe13421ca5a",
+      "net": "Net-(AE2-A)",
+      "points": [
+        [
+          59.89748733095338,
+          45.01148812592804
+        ],
+        [
+          59.6025123790977,
+          44.71651258412246
+        ]
+      ],
+      "width": 0.45,
+      "layer": "F.Cu"
+    },
+    {
+      "action": "arc",
+      "uuid": "2a59afa8-7ef2-5eef-af45-890bb8bb6460",
+      "net": "Net-(AE2-A)",
+      "start": [
+        59.6025123790977,
+        44.71651258412246
+      ],
+      "mid": [
+        59.52664209665156,
+        44.60296449784343
+      ],
+      "end": [
+        59.5,
+        44.46902545819442
+      ],
+      "width": 0.45,
+      "layer": "F.Cu"
+    },
+    {
+      "action": "track",
+      "uuid": "e6f4e964-b17b-5784-91e4-ec70899d5a30",
+      "net": "Net-(AE2-A)",
+      "points": [
+        [
+          59.5,
+          44.46902545819442
+        ],
+        [
+          59.5,
+          41.394974746830584
+        ]
+      ],
+      "width": 0.45,
+      "layer": "F.Cu"
+    },
+    {
+      "action": "arc",
+      "uuid": "9098862f-3eac-5f58-8a70-a4efc6fac1ff",
+      "net": "Net-(AE2-A)",
+      "start": [
+        59.5,
+        41.394974746830584
+      ],
+      "mid": [
+        59.47335783637895,
+        41.2610355455028
+      ],
+      "end": [
+        59.397487373415295,
+        41.147487373415295
+      ],
+      "width": 0.45,
+      "layer": "F.Cu"
+    },
+    {
+      "action": "track",
+      "uuid": "569a38f1-b81b-54ff-a32f-2e8e66d1d6c6",
+      "net": "Net-(AE2-A)",
+      "points": [
+        [
+          59.397487373415295,
+          41.147487373415295
+        ],
+        [
+          58.352512626584705,
+          40.102512626584705
+        ]
+      ],
+      "width": 0.45,
+      "layer": "F.Cu"
+    },
+    {
+      "action": "arc",
+      "uuid": "e94fbe83-2f9a-5745-a55f-05b4018e634f",
+      "net": "Net-(AE2-A)",
+      "start": [
+        58.352512626584705,
+        40.102512626584705
+      ],
+      "mid": [
+        58.27664216362105,
+        39.9889644544972
+      ],
+      "end": [
+        58.25,
+        39.855025253169416
+      ],
+      "width": 0.45,
+      "layer": "F.Cu"
+    },
+    {
+      "action": "track",
+      "uuid": "1a979e07-4526-5847-b828-5f05a3b67477",
+      "net": "Net-(AE2-A)",
+      "points": [
+        [
+          58.25,
+          39.855025253169416
+        ],
+        [
+          58.25,
+          36.09497474683059
+        ]
+      ],
+      "width": 0.45,
+      "layer": "F.Cu"
+    },
+    {
+      "action": "arc",
+      "uuid": "743a4544-8994-599d-afa8-cfa09dade2cf",
+      "net": "Net-(AE2-A)",
+      "start": [
+        58.25,
+        36.09497474683059
+      ],
+      "mid": [
+        58.27664216362105,
+        35.9610355455028
+      ],
+      "end": [
+        58.352512626584705,
+        35.8474873734153
+      ],
+      "width": 0.45,
+      "layer": "F.Cu"
+    },
+    {
+      "action": "track",
+      "uuid": "922a5d92-cea5-5129-96e9-ba18611e3662",
+      "net": "Net-(AE2-A)",
+      "points": [
+        [
+          58.352512626584705,
+          35.8474873734153
+        ],
+        [
+          58.797487373415294,
+          35.4025126265847
+        ]
+      ],
+      "width": 0.45,
+      "layer": "F.Cu"
+    },
+    {
+      "action": "arc",
+      "uuid": "e17e124e-fb5e-5f63-91de-d0a125b3681d",
+      "net": "Net-(AE2-A)",
+      "start": [
+        58.797487373415294,
+        35.4025126265847
+      ],
+      "mid": [
+        58.87335783637895,
+        35.2889644544972
+      ],
+      "end": [
+        58.9,
+        35.15502525316941
+      ],
+      "width": 0.45,
+      "layer": "F.Cu"
+    },
+    {
+      "action": "track",
+      "uuid": "09469b40-1425-5192-a996-29d295162e45",
+      "net": "Net-(AE2-A)",
+      "points": [
+        [
+          58.9,
+          35.15502525316941
+        ],
+        [
+          58.9,
+          34.34497474683059
+        ]
+      ],
+      "width": 0.45,
+      "layer": "F.Cu"
+    },
+    {
+      "action": "arc",
+      "uuid": "8a56ff9e-75be-56fa-83c9-98c6c2205fa9",
+      "net": "Net-(AE2-A)",
+      "start": [
+        58.9,
+        34.34497474683059
+      ],
+      "mid": [
+        58.92664216362105,
+        34.2110355455028
+      ],
+      "end": [
+        59.0025126265847,
+        34.0974873734153
+      ],
+      "width": 0.45,
+      "layer": "F.Cu"
+    },
+    {
+      "action": "track",
+      "uuid": "f90070d0-575f-500b-a306-2b8c869871e3",
+      "net": "Net-(AE2-A)",
+      "points": [
+        [
+          59.0025126265847,
+          34.0974873734153
+        ],
+        [
+          59.77948737341529,
+          33.32051262658471
+        ]
+      ],
+      "width": 0.45,
+      "layer": "F.Cu"
+    },
+    {
+      "action": "arc",
+      "uuid": "0ad3c096-e338-5833-9462-af867f6fb113",
+      "net": "Net-(AE2-A)",
+      "start": [
+        59.77948737341529,
+        33.32051262658471
+      ],
+      "mid": [
+        59.8930355455028,
+        33.24464216362105
+      ],
+      "end": [
+        60.02697474683058,
+        33.218
+      ],
+      "width": 0.45,
+      "layer": "F.Cu"
+    },
+    {
+      "action": "track",
+      "uuid": "f340ead4-c170-540d-934c-9c4073d61d17",
+      "net": "Net-(AE2-A)",
+      "points": [
+        [
+          60.02697474683058,
+          33.218
+        ],
+        [
+          62.882,
+          33.218
+        ]
+      ],
+      "width": 0.45,
+      "layer": "F.Cu"
+    },
+    {
+      "action": "track",
+      "uuid": "c23aa9ce-9e88-5cab-8887-0a9435556961",
+      "net": "/SC_BAL_OUT",
+      "points": [
+        [
+          54.5125,
+          37.05
+        ],
+        [
+          55.25,
+          37.05
+        ]
+      ],
+      "width": 0.15,
+      "layer": "B.Cu"
+    },
+    {
+      "action": "track",
+      "uuid": "1f1f229b-7fb6-5ae1-8a6d-1b8478bf3591",
+      "net": "/SC_BAL_OUT",
+      "points": [
+        [
+          55.25,
+          37.05
+        ],
+        [
+          55.9,
+          36.4
+        ]
+      ],
+      "width": 0.15,
+      "layer": "B.Cu"
+    },
+    {
+      "action": "track",
+      "uuid": "d119d182-a0e0-5326-92bd-c2f7692a76da",
+      "net": "/SC_BAL_OUT",
+      "points": [
+        [
+          55.9,
+          36.4
+        ],
+        [
+          56.65,
+          36.4
+        ]
+      ],
+      "width": 0.15,
+      "layer": "B.Cu"
+    },
+    {
+      "action": "track",
+      "uuid": "778bc744-35a3-5d3d-8aba-dd7ec54323d2",
+      "net": "/SC_BAL_OUT",
+      "points": [
+        [
+          56.65,
+          36.4
+        ],
+        [
+          56.9,
+          35.95
+        ]
+      ],
+      "width": 0.15,
+      "layer": "B.Cu"
+    },
+    {
+      "action": "track",
+      "uuid": "38686676-bb51-572b-b0e2-eadc906e1035",
+      "net": "/SC_BAL_OUT",
+      "points": [
+        [
+          56.7875,
+          35.15
+        ],
+        [
+          56.9,
+          35.15
+        ]
+      ],
+      "width": 0.15,
+      "layer": "B.Cu"
+    },
+    {
+      "action": "track",
+      "uuid": "864d146b-b969-56e6-97fa-5acb3b398f78",
+      "net": "/SC_BAL_OUT",
+      "points": [
+        [
+          56.9,
+          35.15
+        ],
+        [
+          56.9,
+          35.95
+        ]
+      ],
+      "width": 0.15,
+      "layer": "B.Cu"
+    },
+    {
+      "action": "via",
+      "uuid": "29240c26-ac2e-5634-999b-bf8d1823718f",
+      "at": [
+        56.9,
+        35.95
+      ],
+      "net": "/SC_BAL_OUT"
+    },
+    {
+      "action": "track",
+      "uuid": "d430f0a1-1d20-536f-a1d6-df98d23a5e80",
+      "net": "/SC_BAL_OUT",
+      "points": [
+        [
+          56.9,
+          35.95
+        ],
+        [
+          56.9,
+          33.36213203435596
+        ]
+      ],
+      "width": 0.15,
+      "layer": "F.Cu"
+    },
+    {
+      "action": "arc",
+      "uuid": "7c12bade-5179-576b-9118-fc92cce78b81",
+      "net": "/SC_BAL_OUT",
+      "start": [
+        56.9,
+        33.36213203435596
+      ],
+      "mid": [
+        56.911418070123304,
+        33.3047295195012
+      ],
+      "end": [
+        56.94393398282202,
+        33.25606601717798
+      ],
+      "width": 0.15,
+      "layer": "F.Cu"
+    },
+    {
+      "action": "track",
+      "uuid": "8128ea0d-1b5e-5df8-b42f-30e10a9d6598",
+      "net": "/SC_BAL_OUT",
+      "points": [
+        [
+          56.94393398282202,
+          33.25606601717798
+        ],
+        [
+          57.656066017177984,
+          32.54393398282202
+        ]
+      ],
+      "width": 0.15,
+      "layer": "F.Cu"
+    },
+    {
+      "action": "arc",
+      "uuid": "85a6fe42-d34c-5874-9eb6-ec622b2fc58a",
+      "net": "/SC_BAL_OUT",
+      "start": [
+        57.656066017177984,
+        32.54393398282202
+      ],
+      "mid": [
+        57.6885819298767,
+        32.495270480498796
+      ],
+      "end": [
+        57.7,
+        32.43786796564404
+      ],
+      "width": 0.15,
+      "layer": "F.Cu"
+    },
+    {
+      "action": "track",
+      "uuid": "879a7e9e-9a6d-59a7-8239-bea502a374a3",
+      "net": "/SC_BAL_OUT",
+      "points": [
+        [
+          57.7,
+          32.43786796564404
+        ],
+        [
+          57.7,
+          31.062132034355965
+        ]
+      ],
+      "width": 0.15,
+      "layer": "F.Cu"
+    },
+    {
+      "action": "arc",
+      "uuid": "4eb6f312-148b-5882-ae32-32bd33139994",
+      "net": "/SC_BAL_OUT",
+      "start": [
+        57.7,
+        31.062132034355965
+      ],
+      "mid": [
+        57.71141807012331,
+        31.0047295195012
+      ],
+      "end": [
+        57.74393398282202,
+        30.95606601717798
+      ],
+      "width": 0.15,
+      "layer": "F.Cu"
+    },
+    {
+      "action": "track",
+      "uuid": "e0cd1247-95bf-5154-8a2f-5a20451d64b1",
+      "net": "/SC_BAL_OUT",
+      "points": [
+        [
+          57.74393398282202,
+          30.95606601717798
+        ],
+        [
+          57.95606601717798,
+          30.743933982822018
+        ]
+      ],
+      "width": 0.15,
+      "layer": "F.Cu"
+    },
+    {
+      "action": "arc",
+      "uuid": "1cd4c5d7-800c-5924-aacb-0aa2827aa9db",
+      "net": "/SC_BAL_OUT",
+      "start": [
+        57.95606601717798,
+        30.743933982822018
+      ],
+      "mid": [
+        58.004729519501204,
+        30.711418070123308
+      ],
+      "end": [
+        58.06213203435596,
+        30.7
+      ],
+      "width": 0.15,
+      "layer": "F.Cu"
+    },
+    {
+      "action": "track",
+      "uuid": "9a525ad4-52ef-5923-901e-783a67c18150",
+      "net": "/SC_BAL_OUT",
+      "points": [
+        [
+          58.06213203435596,
+          30.7
+        ],
+        [
+          63.93786796564404,
+          30.7
+        ]
+      ],
+      "width": 0.15,
+      "layer": "F.Cu"
+    },
+    {
+      "action": "arc",
+      "uuid": "d8dbd6e3-3181-512c-9329-83e1f4ed643e",
+      "net": "/SC_BAL_OUT",
+      "start": [
+        63.93786796564404,
+        30.7
+      ],
+      "mid": [
+        63.995270480498796,
+        30.711418070123308
+      ],
+      "end": [
+        64.04393398282201,
+        30.743933982822018
+      ],
+      "width": 0.15,
+      "layer": "F.Cu"
+    },
+    {
+      "action": "track",
+      "uuid": "12d1de59-daef-5be5-800f-3513d6c88819",
+      "net": "/SC_BAL_OUT",
+      "points": [
+        [
+          64.04393398282201,
+          30.743933982822018
+        ],
+        [
+          64.25606601717799,
+          30.95606601717798
+        ]
+      ],
+      "width": 0.15,
+      "layer": "F.Cu"
+    },
+    {
+      "action": "arc",
+      "uuid": "614c377a-6b78-55ee-8b37-2037c3a2b720",
+      "net": "/SC_BAL_OUT",
+      "start": [
+        64.25606601717799,
+        30.95606601717798
+      ],
+      "mid": [
+        64.28858192987668,
+        31.0047295195012
+      ],
+      "end": [
+        64.3,
+        31.062132034355965
+      ],
+      "width": 0.15,
+      "layer": "F.Cu"
+    },
+    {
+      "action": "track",
+      "uuid": "5a44174c-638d-5dcc-b6cf-d7a1553e9ca7",
+      "net": "/SC_BAL_OUT",
+      "points": [
+        [
+          64.3,
+          31.062132034355965
+        ],
+        [
+          64.3,
+          34.43786796564404
+        ]
+      ],
+      "width": 0.15,
+      "layer": "F.Cu"
+    },
+    {
+      "action": "arc",
+      "uuid": "89830e46-7d4f-5c74-9edd-afea59e1788a",
+      "net": "/SC_BAL_OUT",
+      "start": [
+        64.3,
+        34.43786796564404
+      ],
+      "mid": [
+        64.28858192987668,
+        34.495270480498796
+      ],
+      "end": [
+        64.25606601717799,
+        34.54393398282202
+      ],
+      "width": 0.15,
+      "layer": "F.Cu"
+    },
+    {
+      "action": "track",
+      "uuid": "7c25ec46-b5d5-588a-b9ec-3033477c16f2",
+      "net": "/SC_BAL_OUT",
+      "points": [
+        [
+          64.25606601717799,
+          34.54393398282202
+        ],
+        [
+          63.99393398282202,
+          34.80606601717798
+        ]
+      ],
+      "width": 0.15,
+      "layer": "F.Cu"
+    },
+    {
+      "action": "arc",
+      "uuid": "76882a10-336d-5575-aa30-4345722982c4",
+      "net": "/SC_BAL_OUT",
+      "start": [
+        63.99393398282202,
+        34.80606601717798
+      ],
+      "mid": [
+        63.96141807012331,
+        34.854729519501205
+      ],
+      "end": [
+        63.95,
+        34.91213203435596
+      ],
+      "width": 0.15,
+      "layer": "F.Cu"
+    },
+    {
+      "action": "track",
+      "uuid": "f500c96d-cbfa-5725-b9b3-3569bd23bca9",
+      "net": "/SC_BAL_OUT",
+      "points": [
+        [
+          63.95,
+          34.91213203435596
+        ],
+        [
+          63.95,
+          41.5
+        ]
+      ],
+      "width": 0.15,
+      "layer": "F.Cu"
+    },
+    {
+      "action": "via",
+      "uuid": "38df4418-4794-541e-b32f-8df868278be6",
+      "at": [
+        63.95,
+        41.5
+      ],
+      "net": "/SC_BAL_OUT"
+    },
+    {
+      "action": "track",
+      "uuid": "b14ac3d7-2d59-5d21-bfd7-173f11d1838b",
+      "net": "/SC_BAL_OUT",
+      "points": [
+        [
+          63.95,
+          41.5
+        ],
+        [
+          61.76124635456964,
+          41.5
+        ]
+      ],
+      "width": 0.15,
+      "layer": "B.Cu"
+    },
+    {
+      "action": "arc",
+      "uuid": "cac4168b-18c8-58b5-9681-6e631685a3b4",
+      "net": "/SC_BAL_OUT",
+      "start": [
+        61.76124635456964,
+        41.5
+      ],
+      "mid": [
+        61.70454445372278,
+        41.51112993684615
+      ],
+      "end": [
+        61.65625706721569,
+        41.54286807412863
+      ],
+      "width": 0.15,
+      "layer": "B.Cu"
+    },
+    {
+      "action": "track",
+      "uuid": "33bc13ae-7821-5c05-9451-ae9d47141a56",
+      "net": "/SC_BAL_OUT",
+      "points": [
+        [
+          61.65625706721569,
+          41.54286807412863
+        ],
+        [
+          61.2,
+          41.99
+        ]
+      ],
+      "width": 0.15,
+      "layer": "B.Cu"
+    },
+    {
+      "action": "track",
+      "uuid": "2627f95b-2273-58b4-aa49-0a426bb1c22a",
+      "net": "/VBAT",
+      "points": [
+        [
+          56.7875,
+          37.05
+        ],
+        [
+          57.2,
+          37.6
+        ]
+      ],
+      "width": 0.15,
+      "layer": "B.Cu"
+    },
+    {
+      "action": "via",
+      "uuid": "2642bbfe-0af6-5bf4-9ea4-7cba22e0068e",
+      "at": [
+        57.2,
+        37.6
+      ],
+      "net": "/VBAT"
+    },
+    {
+      "action": "track",
+      "uuid": "6e4c016d-cb99-5bb9-ad79-2dffe9f58793",
+      "net": "/VBAT",
+      "points": [
+        [
+          57.2,
+          37.6
+        ],
+        [
+          57.406066017177984,
+          37.39393398282202
+        ]
+      ],
+      "width": 0.15,
+      "layer": "F.Cu"
+    },
+    {
+      "action": "arc",
+      "uuid": "81421da5-f777-562e-81b3-fd7a67d8a35d",
+      "net": "/VBAT",
+      "start": [
+        57.406066017177984,
+        37.39393398282202
+      ],
+      "mid": [
+        57.4385819298767,
+        37.3452704804988
+      ],
+      "end": [
+        57.45,
+        37.28786796564404
+      ],
+      "width": 0.15,
+      "layer": "F.Cu"
+    },
+    {
+      "action": "track",
+      "uuid": "a5c26b80-9e0e-5e47-9755-251a343d499a",
+      "net": "/VBAT",
+      "points": [
+        [
+          57.45,
+          37.28786796564404
+        ],
+        [
+          57.45,
+          33.262132034355965
+        ]
+      ],
+      "width": 0.15,
+      "layer": "F.Cu"
+    },
+    {
+      "action": "arc",
+      "uuid": "243c2cf9-1e56-5af3-9e43-9be6287a0590",
+      "net": "/VBAT",
+      "start": [
+        57.45,
+        33.262132034355965
+      ],
+      "mid": [
+        57.46141807012331,
+        33.20472951950121
+      ],
+      "end": [
+        57.49393398282202,
+        33.156066017177984
+      ],
+      "width": 0.15,
+      "layer": "F.Cu"
+    },
+    {
+      "action": "track",
+      "uuid": "7c30dc8a-84a4-5b98-a725-66c1944765ef",
+      "net": "/VBAT",
+      "points": [
+        [
+          57.49393398282202,
+          33.156066017177984
+        ],
+        [
+          58.05606601717798,
+          32.593933982822016
+        ]
+      ],
+      "width": 0.15,
+      "layer": "F.Cu"
+    },
+    {
+      "action": "arc",
+      "uuid": "ed5078d3-bb08-5680-ae71-a4f2ed2ca421",
+      "net": "/VBAT",
+      "start": [
+        58.05606601717798,
+        32.593933982822016
+      ],
+      "mid": [
+        58.088581929876696,
+        32.54527048049879
+      ],
+      "end": [
+        58.1,
+        32.487867965644035
+      ],
+      "width": 0.15,
+      "layer": "F.Cu"
+    },
+    {
+      "action": "track",
+      "uuid": "31f06bdb-8579-57b8-bd62-b30c9a88f619",
+      "net": "/VBAT",
+      "points": [
+        [
+          58.1,
+          32.487867965644035
+        ],
+        [
+          58.1,
+          31.5454163456598
+        ]
+      ],
+      "width": 0.15,
+      "layer": "F.Cu"
+    },
+    {
+      "action": "arc",
+      "uuid": "63cd12f0-12d1-5ccf-abde-e279780c042a",
+      "net": "/VBAT",
+      "start": [
+        58.1,
+        31.5454163456598
+      ],
+      "mid": [
+        58.10643619602664,
+        31.501948723356534
+      ],
+      "end": [
+        58.12519245584932,
+        31.462211316226014
+      ],
+      "width": 0.15,
+      "layer": "F.Cu"
+    },
+    {
+      "action": "track",
+      "uuid": "dce485b4-d784-54a4-a1a8-ec94cad90346",
+      "net": "/VBAT",
+      "points": [
+        [
+          58.12519245584932,
+          31.462211316226014
+        ],
+        [
+          58.25547001962252,
+          31.266794970566217
+        ]
+      ],
+      "width": 0.15,
+      "layer": "F.Cu"
+    },
+    {
+      "action": "arc",
+      "uuid": "0155d5d0-ae15-5ac3-abb4-94f22deaa9c8",
+      "net": "/VBAT",
+      "start": [
+        58.25547001962252,
+        31.266794970566217
+      ],
+      "mid": [
+        58.309498874943394,
+        31.21774881018481
+      ],
+      "end": [
+        58.3802775637732,
+        31.2
+      ],
+      "width": 0.15,
+      "layer": "F.Cu"
+    },
+    {
+      "action": "track",
+      "uuid": "173e9ec8-4cc2-5faf-974f-c71c17666485",
+      "net": "/VBAT",
+      "points": [
+        [
+          58.3802775637732,
+          31.2
+        ],
+        [
+          63.63786796564404,
+          31.2
+        ]
+      ],
+      "width": 0.15,
+      "layer": "F.Cu"
+    },
+    {
+      "action": "arc",
+      "uuid": "d7f81ccf-1df5-5ecd-bcee-69653d242db0",
+      "net": "/VBAT",
+      "start": [
+        63.63786796564404,
+        31.2
+      ],
+      "mid": [
+        63.6952704804988,
+        31.211418070123308
+      ],
+      "end": [
+        63.74393398282202,
+        31.243933982822018
+      ],
+      "width": 0.15,
+      "layer": "F.Cu"
+    },
+    {
+      "action": "track",
+      "uuid": "fa3c4f2b-0d56-5e18-8cea-a04ca28ebe54",
+      "net": "/VBAT",
+      "points": [
+        [
+          63.74393398282202,
+          31.243933982822018
+        ],
+        [
+          63.95606601717798,
+          31.45606601717798
+        ]
+      ],
+      "width": 0.15,
+      "layer": "F.Cu"
+    },
+    {
+      "action": "arc",
+      "uuid": "d325ef80-9440-56dd-9457-07905d471191",
+      "net": "/VBAT",
+      "start": [
+        63.95606601717798,
+        31.45606601717798
+      ],
+      "mid": [
+        63.988581929876695,
+        31.5047295195012
+      ],
+      "end": [
+        64.0,
+        31.562132034355965
+      ],
+      "width": 0.15,
+      "layer": "F.Cu"
+    },
+    {
+      "action": "track",
+      "uuid": "9067f56b-25b4-5d10-b43b-7575f32d7f75",
+      "net": "/VBAT",
+      "points": [
+        [
+          64.0,
+          31.562132034355965
+        ],
+        [
+          64.0,
+          34.13786796564404
+        ]
+      ],
+      "width": 0.15,
+      "layer": "F.Cu"
+    },
+    {
+      "action": "arc",
+      "uuid": "c7d5be9a-ae3a-5706-814f-ecc9b18b1be3",
+      "net": "/VBAT",
+      "start": [
+        64.0,
+        34.13786796564404
+      ],
+      "mid": [
+        63.988581929876695,
+        34.1952704804988
+      ],
+      "end": [
+        63.95606601717798,
+        34.24393398282202
+      ],
+      "width": 0.15,
+      "layer": "F.Cu"
+    },
+    {
+      "action": "track",
+      "uuid": "351710f2-d05f-5f2d-9db4-d35ad9ab4014",
+      "net": "/VBAT",
+      "points": [
+        [
+          63.95606601717798,
+          34.24393398282202
+        ],
+        [
+          63.44393398282202,
+          34.75606601717798
+        ]
+      ],
+      "width": 0.15,
+      "layer": "F.Cu"
+    },
+    {
+      "action": "arc",
+      "uuid": "6329b36f-5fd3-5671-98b8-7115e6d4da5f",
+      "net": "/VBAT",
+      "start": [
+        63.44393398282202,
+        34.75606601717798
+      ],
+      "mid": [
+        63.411418070123304,
+        34.8047295195012
+      ],
+      "end": [
+        63.4,
+        34.86213203435596
+      ],
+      "width": 0.15,
+      "layer": "F.Cu"
+    },
+    {
+      "action": "track",
+      "uuid": "74e8c43f-bbbd-5db8-9b6f-5afa4478ad23",
+      "net": "/VBAT",
+      "points": [
+        [
+          63.4,
+          34.86213203435596
+        ],
+        [
+          63.4,
+          42.843431457505076
+        ]
+      ],
+      "width": 0.15,
+      "layer": "F.Cu"
+    },
+    {
+      "action": "arc",
+      "uuid": "2f1308ca-6a84-54a8-b033-977758a03cf5",
+      "net": "/VBAT",
+      "start": [
+        63.4,
+        42.843431457505076
+      ],
+      "mid": [
+        63.41039566129896,
+        42.89569397610013
+      ],
+      "end": [
+        63.44,
+        42.94
+      ],
+      "width": 0.15,
+      "layer": "F.Cu"
+    },
+    {
+      "action": "track",
+      "uuid": "1b26feed-dd3f-56f5-820d-0327e36ac3d4",
+      "net": "/VBAT",
+      "points": [
+        [
+          63.44,
+          42.94
+        ],
+        [
+          63.471715728752535,
+          42.971715728752535
+        ]
+      ],
+      "width": 0.15,
+      "layer": "F.Cu"
+    },
+    {
+      "action": "arc",
+      "uuid": "fff64cb2-c13f-5299-a5f8-d6788587ccc5",
+      "net": "/VBAT",
+      "start": [
+        63.471715728752535,
+        42.971715728752535
+      ],
+      "mid": [
+        63.492649157400585,
+        43.00304481869955
+      ],
+      "end": [
+        63.5,
+        43.04
+      ],
+      "width": 0.15,
+      "layer": "F.Cu"
+    },
+    {
+      "action": "track",
+      "uuid": "bf07118b-c3cb-5afc-ba77-91b44b7e1009",
+      "net": "/VBAT",
+      "points": [
+        [
+          63.5,
+          43.04
+        ],
+        [
+          63.5,
+          43.1
+        ]
+      ],
+      "width": 0.15,
+      "layer": "F.Cu"
+    },
+    {
+      "action": "via",
+      "uuid": "236a6c8b-bae4-55be-a7da-168d0fa3b215",
+      "at": [
+        57.8,
+        33.1
+      ],
+      "net": "/VBAT"
+    },
+    {
+      "action": "track",
+      "uuid": "41242529-0104-54c4-893b-f96b9f0e3d67",
+      "net": "/VBAT",
+      "points": [
+        [
+          57.45,
+          33.2
+        ],
+        [
+          57.8,
+          33.1
+        ]
+      ],
+      "width": 0.15,
+      "layer": "F.Cu"
+    },
+    {
+      "action": "track",
+      "uuid": "496edd0d-fec4-5d63-8f80-18347febdedf",
+      "net": "/VBAT",
+      "points": [
+        [
+          57.8,
+          33.1
+        ],
+        [
+          57.91,
+          33.9
+        ]
+      ],
+      "width": 0.15,
+      "layer": "B.Cu"
+    },
+    {
+      "action": "track",
+      "uuid": "b3b5f089-31c4-5d49-9355-a9ddc18e45f0",
+      "net": "/VBAT",
+      "points": [
+        [
+          56.7875,
+          37.05
+        ],
+        [
+          56.7875,
+          37.7
+        ]
+      ],
+      "width": 0.15,
+      "layer": "B.Cu"
+    },
+    {
+      "action": "track",
+      "uuid": "bfd2b503-f186-5a61-9f74-5e63da7bce34",
+      "net": "/VBAT",
+      "points": [
+        [
+          56.7875,
+          37.7
+        ],
+        [
+          56.08,
+          38.3
+        ]
+      ],
+      "width": 0.15,
+      "layer": "B.Cu"
+    },
+    {
+      "action": "via",
+      "uuid": "785012c8-3a47-5718-9f68-a769bc7c93f3",
+      "at": [
+        63.5,
+        43.1
+      ],
+      "net": "/VBAT"
+    },
+    {
+      "action": "track",
+      "uuid": "333fa0cd-cf93-5097-9e4b-2f3f795b83eb",
+      "net": "/VBAT",
+      "points": [
+        [
+          63.5,
+          43.1
+        ],
+        [
+          63.497,
+          43.574
+        ]
+      ],
+      "width": 0.15,
+      "layer": "B.Cu"
+    },
+    {
+      "action": "track",
+      "uuid": "461b135f-2f40-5ed5-880f-67158a63c2f5",
+      "net": "GND",
+      "points": [
+        [
+          58.1,
+          42.0
+        ],
+        [
+          58.0,
+          41.9
+        ]
+      ],
+      "width": 0.25,
+      "layer": "F.Cu"
+    },
+    {
+      "action": "track",
+      "uuid": "ea5dd58c-75c3-539c-a45a-41dec6cf337c",
+      "net": "GND",
+      "points": [
+        [
+          58.0,
+          41.9
+        ],
+        [
+          58.0,
+          41.3
+        ]
+      ],
+      "width": 0.25,
+      "layer": "F.Cu"
+    },
+    {
+      "action": "via",
+      "uuid": "6454edec-3476-51d7-bec5-d98afbec7049",
+      "at": [
+        58.0,
+        41.3
+      ],
+      "net": "GND"
+    },
+    {
+      "action": "via",
+      "uuid": "f2251694-9bef-5519-9d7d-e37a84c291ba",
+      "at": [
+        58.7,
+        32.7
+      ],
+      "net": "GND"
+    },
+    {
+      "action": "zone",
+      "uuid": "aca35934-c331-58f8-b7a3-ada93c7a7087",
+      "layer": "F.Cu"
+    },
+    {
+      "action": "zone",
+      "uuid": "b060d665-6e67-589e-a64a-b45127609817",
+      "layer": "B.Cu"
+    }
+  ]
+}

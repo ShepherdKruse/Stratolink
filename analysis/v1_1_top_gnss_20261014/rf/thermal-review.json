@@ -1,0 +1,73 @@
+{
+  "final_pcb_sha256": "88f82c85d2d47b4aea2e7d7d2827c4a92c339788cc0d9c880dd6342ee0440c0a",
+  "source_pcb_hashes": [
+    "8df85b3e4bdd546ec174bb9d7b9ee9d795d55d486a68e1e853aaf1b871f863d3",
+    "7e401900a78b7d88c4e688fdbe58039308113fc0308e5125366d0a98c592a502",
+    "88f82c85d2d47b4aea2e7d7d2827c4a92c339788cc0d9c880dd6342ee0440c0a"
+  ],
+  "evidence_hashes": {
+    "/Users/twarn/Repositories/ai-working/scratch/stratolink-peer-review-20261014/rf-final-geometry.json": "24f7b0b357b552a447af7b9b49c0bead8c00ae27fc9884657d3efb57232d260b",
+    "/Users/twarn/Repositories/ai-working/scratch/stratolink-top-gnss-20261014/rf-author/original-geometry.json": "54887c36b88f39e54bfd20df2a224c0fe19b68ea0f78c8b23e49f01cad3634b9",
+    "/Users/twarn/Repositories/ai-working/scratch/stratolink-top-gnss-20261014/rf-author/final-88f82-geometry.json": "5cdf720212cd467bd3b85ea800746de045c3756eae807a78a7e21d726c890cb6",
+    "/Users/twarn/Repositories/ai-working/scratch/stratolink-top-gnss-20261014/rf-author/final-88f82-source/cleanup-ledger.json": "434b0b93cdc5a72b3c62ef697389aff9dd9a9cbf8d77c3eb4bccb52cddbcb82c"
+  },
+  "pads": [
+    {
+      "ref": "C1",
+      "pin": "1",
+      "pad_geometry_exact": true,
+      "ground_fraction_in_50um_ring": {
+        "left_feed_baseline": 0.4369414579787302,
+        "routing_pretrim": 0.7816532160257159,
+        "final": 0.23523755686497902
+      },
+      "final_solid_zone_overlap_with_pad_and_0p5mm_halo_mm2": 0.0,
+      "final_solid_zone_distance_to_pad_mm": 1.5119999999999933,
+      "disposition": "New solid zone excludes full inherited 0.5 mm thermal neighborhood; retained routed ground connections remain"
+    },
+    {
+      "ref": "C2",
+      "pin": "2",
+      "pad_geometry_exact": true,
+      "ground_fraction_in_50um_ring": {
+        "left_feed_baseline": 0.20871053744051932,
+        "routing_pretrim": 1.0,
+        "final": 0.08605363053106393
+      },
+      "final_solid_zone_overlap_with_pad_and_0p5mm_halo_mm2": 0.0,
+      "final_solid_zone_distance_to_pad_mm": 0.7980000000000019,
+      "disposition": "New solid zone excludes full inherited 0.5 mm thermal neighborhood; retained routed ground connections remain"
+    },
+    {
+      "ref": "R2",
+      "pin": "2",
+      "pad_geometry_exact": true,
+      "ground_fraction_in_50um_ring": {
+        "left_feed_baseline": 0.26184783401792905,
+        "routing_pretrim": 0.10901284140446064,
+        "final": 0.10901284140446064
+      },
+      "final_solid_zone_overlap_with_pad_and_0p5mm_halo_mm2": 0.0,
+      "final_solid_zone_distance_to_pad_mm": 1.0879426300260528,
+      "disposition": "New solid zone excludes full inherited 0.5 mm thermal neighborhood; retained routed ground connections remain"
+    },
+    {
+      "ref": "R25",
+      "pin": "2",
+      "pad_geometry_exact": true,
+      "ground_fraction_in_50um_ring": {
+        "left_feed_baseline": 0.06954321065841577,
+        "routing_pretrim": 1.0000000000000004,
+        "final": 1.0000000000000004
+      },
+      "final_solid_zone_overlap_with_pad_and_0p5mm_halo_mm2": 2.1828888031966547,
+      "final_solid_zone_distance_to_pad_mm": 0.0,
+      "disposition": "Intentionally solid for rear RF reference"
+    }
+  ],
+  "limits": [
+    "50 micrometre ring fraction describes actual saved copper immediately outside the unchanged pad; it is not a thermal resistance or reflow simulation.",
+    "Reference-zone trimming restores inherited thermal policy. The entire surrounding ground fill need not match the older left-feed layout, because supply routing and the inductor position intentionally changed.",
+    "Pad and zone connection metadata are independently proven exact in cleanup-scope-review.json."
+  ]
+}

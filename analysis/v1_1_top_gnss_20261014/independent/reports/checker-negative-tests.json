@@ -1,0 +1,21 @@
+{
+  "script_sha256": "36d694db5227a344ed11d2dcd35c7b73dd4b73d84b280a4a91c79a6fa409c37a",
+  "cases": [
+    {
+      "case": "wrong_source_hash",
+      "rejected": true,
+      "last_error": "AssertionError"
+    },
+    {
+      "case": "solid_zone_within_thermal_halo",
+      "rejected": true,
+      "last_error": "AssertionError"
+    },
+    {
+      "case": "unapproved_inherited_to_solid_pad",
+      "rejected": true,
+      "last_error": "AssertionError: [{'ref': 'U3', 'pin': '10', 'layer': 'F.Cu', 'zone_uuid': 'aca35934-c331-58f8-b7a3-ada93c7a7087', 'overlap_mm2': 1.260000000000008, 'pad_footprint_override': 2}, {'ref': 'U3', 'pin': '12', 'layer': 'F.Cu', 'zone_uuid': 'aca35934-c331-58f8-b7a3-ada93c7a7087', 'overlap_mm2': 1.0547999999999957, 'pad_footprint_override': 2}, {'ref': 'H1', 'pin': '1', 'layer': 'F.Cu', 'zone_uuid': 'aca35934-c331-58f8-b7a3-ada93c7a7087', 'overlap_mm2': 0.3183798286292753, 'pad_footprint_override': 2}, {'ref': 'H1', 'pin': '1', 'layer': 'B.Cu', 'zone_uuid': 'b060d665-6e67-589e-a64a-b45127609817', 'overlap_mm2': 0.3183798286292753, 'pad_footprint_override': 2}, {'ref': 'D3', 'pin': '1', 'layer': 'F.Cu', 'zone_uuid': 'aca35934-c331-58f8-b7a3-ada93c7a7087', 'overlap_mm2': 0.4013313788579997, 'pad_footprint_override': -1}, {'ref': 'R25', 'pin': '2', 'layer': 'B.Cu', 'zone_uuid': 'b060d665-6e67-589e-a64a-b45127609817', 'overlap_mm2': 0.33058593340799924, 'pad_footprint_override': -1}]"
+    }
+  ],
+  "all_negative_cases_rejected": true
+}

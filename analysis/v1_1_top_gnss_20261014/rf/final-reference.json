@@ -1,0 +1,75 @@
+{
+  "pcb_sha256": "88f82c85d2d47b4aea2e7d7d2827c4a92c339788cc0d9c880dd6342ee0440c0a",
+  "source": "/Users/twarn/Repositories/ai-working/scratch/stratolink-top-gnss-20261014/rf-author/final-88f82-source/stratolink.kicad_pcb",
+  "geometry_source": "/Users/twarn/Repositories/ai-working/scratch/stratolink-top-gnss-20261014/rf-author/final-88f82-geometry.json",
+  "analytic_main_length_mm": 16.963390881219826,
+  "original_main_length_mm": 13.439242465768096,
+  "length_change_percent": 26.222820403964732,
+  "route_uuids": [
+    "09469b40-1425-5192-a996-29d295162e45",
+    "1a979e07-4526-5847-b828-5f05a3b67477",
+    "569a38f1-b81b-54ff-a32f-2e8e66d1d6c6",
+    "922a5d92-cea5-5129-96e9-ba18611e3662",
+    "b95e5d30-7814-58c4-b5d1-4fe13421ca5a",
+    "c7226484-9bb4-5f16-bee4-00dcd20d3327",
+    "e6f4e964-b17b-5784-91e4-ec70899d5a30",
+    "f340ead4-c170-540d-934c-9c4073d61d17",
+    "f90070d0-575f-500b-a306-2b8c869871e3",
+    "0ad3c096-e338-5833-9462-af867f6fb113",
+    "2a59afa8-7ef2-5eef-af45-890bb8bb6460",
+    "743a4544-8994-599d-afa8-cfa09dade2cf",
+    "8a56ff9e-75be-56fa-83c9-98c6c2205fa9",
+    "9098862f-3eac-5f58-8a70-a4efc6fac1ff",
+    "dd3dc6cc-ddc9-565a-b35b-e6090e71f85c",
+    "e17e124e-fb5e-5f63-91de-d0a125b3681d",
+    "e94fbe83-2f9a-5745-a55f-05b4018e634f"
+  ],
+  "terminal_exclusion_radius_mm": 0.9,
+  "screened_centerline_length_mm": 16.06338945393269,
+  "screened_centerline_without_rear_ground_mm": 0.0005000000000023874,
+  "screened_trace_area_mm2": 7.3148140825572865,
+  "screened_trace_without_rear_ground_area_mm2": 0.0007936213515081136,
+  "projection_tolerance_mm": 0.005,
+  "screened_trace_without_rear_ground_beyond_tolerance_mm2": 0.0,
+  "screened_centerline_without_rear_ground_beyond_tolerance_mm": 0.0,
+  "receiver_launch_area_mm2": 1.4399999999999984,
+  "receiver_launch_without_rear_ground_area_mm2": 0.0,
+  "opposite_layer_non_ground_overlaps": [],
+  "switch_projection_edge_distance_mm": {
+    "Net-(U1-LBOOST)": 0.16711195981138227,
+    "Net-(U1-LBUCK)": 7.678836681522274
+  },
+  "graphics_included": true,
+  "excluded_copper_text": [
+    {
+      "uuid": "d33ff207-5537-4175-aad0-4a6a2127c38c",
+      "ref": null,
+      "layer": "F.Cu",
+      "kind": "PCB_TEXT"
+    },
+    {
+      "uuid": "70fd784f-4460-4c2f-b1b0-5920dc836f3e",
+      "ref": null,
+      "layer": "F.Cu",
+      "kind": "PCB_TEXT"
+    },
+    {
+      "uuid": "857ef018-87a1-4fd2-b5a3-b7c725b5a4a9",
+      "ref": null,
+      "layer": "F.Cu",
+      "kind": "PCB_TEXT"
+    },
+    {
+      "uuid": "8a2d562a-cd15-40da-973d-853d9daff557",
+      "ref": null,
+      "layer": "F.Cu",
+      "kind": "PCB_TEXT"
+    }
+  ],
+  "limitations": [
+    "Direct projection tests actual saved fills. It does not prove return-current distribution, impedance, antenna match, or EMI performance.",
+    "The 0.9 mm antenna-terminal exclusion includes the 0.75 mm-radius plated pad and its 0.15 mm ground clearance.",
+    "Board copper text is listed separately; native DRC includes it, and the four solar polarity marks are outside the RF region.",
+    "Native copper contours request <=2 um polygon error. Analytical route length uses native arc coordinates."
+  ]
+}

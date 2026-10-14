@@ -1,0 +1,103 @@
+{
+  "audit_script_sha256": "870a69d61846fd29b368b5410ac57e486e298f790095f3c4630f54e8108f88b2",
+  "fixture_count": 6,
+  "all_passed": true,
+  "cases": {
+    "anchored_graphic": [
+      {
+        "uuid": "g",
+        "net": "GND",
+        "layer": "F.Cu",
+        "same_net_overlap_mm2": 0.25,
+        "positive_area_contact": true,
+        "every_physical_component_reaches_same_net_pad": true,
+        "pad_anchors_by_component": [
+          [
+            "U3.10"
+          ]
+        ]
+      }
+    ],
+    "mutually_touching_orphans": [
+      {
+        "uuid": "g1",
+        "net": "GND",
+        "layer": "F.Cu",
+        "same_net_overlap_mm2": 0.25,
+        "positive_area_contact": true,
+        "every_physical_component_reaches_same_net_pad": false,
+        "pad_anchors_by_component": [
+          []
+        ]
+      },
+      {
+        "uuid": "g2",
+        "net": "GND",
+        "layer": "F.Cu",
+        "same_net_overlap_mm2": 0.25,
+        "positive_area_contact": true,
+        "every_physical_component_reaches_same_net_pad": false,
+        "pad_anchors_by_component": [
+          []
+        ]
+      }
+    ],
+    "overlapping_layers_without_via": [
+      {
+        "uuid": "front",
+        "net": "GND",
+        "layer": "F.Cu",
+        "same_net_overlap_mm2": 0.0,
+        "positive_area_contact": false,
+        "every_physical_component_reaches_same_net_pad": false,
+        "pad_anchors_by_component": [
+          []
+        ]
+      }
+    ],
+    "plated_via_to_back_pad": [
+      {
+        "uuid": "front",
+        "net": "GND",
+        "layer": "F.Cu",
+        "same_net_overlap_mm2": 0.09000000000000002,
+        "positive_area_contact": true,
+        "every_physical_component_reaches_same_net_pad": true,
+        "pad_anchors_by_component": [
+          [
+            "U8.2"
+          ]
+        ]
+      }
+    ],
+    "one_sided_via_record": [
+      {
+        "uuid": "front",
+        "net": "GND",
+        "layer": "F.Cu",
+        "same_net_overlap_mm2": 0.09000000000000002,
+        "positive_area_contact": true,
+        "every_physical_component_reaches_same_net_pad": false,
+        "pad_anchors_by_component": [
+          []
+        ]
+      }
+    ],
+    "partly_anchored_multipart_graphic": [
+      {
+        "uuid": "multi",
+        "net": "GND",
+        "layer": "F.Cu",
+        "same_net_overlap_mm2": 0.25,
+        "positive_area_contact": true,
+        "every_physical_component_reaches_same_net_pad": false,
+        "pad_anchors_by_component": [
+          [
+            "U3.10"
+          ],
+          []
+        ]
+      }
+    ]
+  }
+}

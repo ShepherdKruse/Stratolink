@@ -1,0 +1,19 @@
+{
+  "source_sha256": "8df85b3e4bdd546ec174bb9d7b9ee9d795d55d486a68e1e853aaf1b871f863d3",
+  "moves": {
+    "Copper label: PICO MAINBOARD V1.1": [
+      -0.6,
+      0
+    ],
+    "Copper label: STRATOLINK.ORG": [
+      -0.4,
+      0
+    ]
+  },
+  "text_changes": {
+    "ecb571e0-09e7-56ca-854e-59e33d06c31e": {
+      "before": "GNSS: 48 mm straight wire LEFT from feed; tune assembled payload",
+      "after": "GNSS: 48 mm straight wire UP from top feed; tune assembled payload"
+    }
+  }
+}

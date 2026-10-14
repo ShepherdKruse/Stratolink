@@ -1,0 +1,16 @@
+{
+  "status": "Author routing and final cleanup-scope accepted; RF measurements remain required",
+  "final_pcb_sha256": "88f82c85d2d47b4aea2e7d7d2827c4a92c339788cc0d9c880dd6342ee0440c0a",
+  "routing_phase_pcb_sha256": "7e401900a78b7d88c4e688fdbe58039308113fc0308e5125366d0a98c592a502",
+  "files": {
+    "analysis/v1_1_top_gnss_20261014/rf/build_top_feed.py": "f9b0adccdf0273194bd8a76259e449f4ad0f2328065208e81a44fe6b8d6e7a57",
+    "analysis/v1_1_top_gnss_20261014/rf/review_cleanup_scope.py": "0937b57f80a4f59507c8ce1b130e51ea83c33fff0fabdfea1070c26735bbc385",
+    "analysis/v1_1_top_gnss_20261014/rf/review_thermals.py": "6a35bdc1064f034d6258868ff81294b73411466f2a75eda6368b81d78a001f36",
+    "analysis/v1_1_top_gnss_20261014/rf/cleanup-scope-review.json": "b2eba97ffd483e98eaa0ddbfbfcd2826dd8d46f3c7eaba683e990509aaf8c430",
+    "analysis/v1_1_top_gnss_20261014/rf/final-reference.json": "5269ca7a3538b87b767870ad2b5b2a7b4585426374094abc50094430c19ba05c",
+    "analysis/v1_1_top_gnss_20261014/rf/thermal-review.json": "53254ab8298b2f44da9076a3976896874abd6ebb9cbb0443676c536c3bd26fa2",
+    "analysis/v1_1_top_gnss_20261014/fabrication/cleanup-ledger.json": "434b0b93cdc5a72b3c62ef697389aff9dd9a9cbf8d77c3eb4bccb52cddbcb82c",
+    "analysis/v1_1_top_gnss_20261014/fabrication/drc.json": "22c66013fd60a021215320276513f74aecde3286bc79b371c05f13e841701de4",
+    "analysis/v1_1_top_gnss_20261014/rf/top-feed-review.md": "744e7d4e4da03767eea34c18155841cd9f5651e9a530ee2c528521950fe79668"
+  }
+}

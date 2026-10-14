@@ -1,0 +1,18 @@
+{
+  "pcb_sha256": "88f82c85d2d47b4aea2e7d7d2827c4a92c339788cc0d9c880dd6342ee0440c0a",
+  "files": {
+    "after-reference-extraction.log": "bcd4b925b24a7eef177a3c88b0304f2e1d0410b7cde5b56cda160d49089c932b",
+    "after-reference-geometry.json": "e62a4f5d8a47ab6d63ea0ae53b1d1147ad94a0b2e07af8ed9f58747f3a143dc3",
+    "before-reference-extraction.log": "2d661cf216c2dc6ae7ea66597f54e0869163effa36b6d16aae16d9d8f461ff65",
+    "before-reference-geometry.json": "e6106d7591b53524aee69566ccd6155ac440e985e495a3ac740f8fd92eac7c68",
+    "candidate-geometry.json": "fdc4f6bc50fa12b8fd9255169c6e0bf4e10b9353310fb32076b79aa0e9390e07",
+    "etch-screen.json": "d0109e41ed8c7ec843a21736f7fe40f2f4cd3c872c209f974c1bb28363274b32",
+    "full-union-extraction.log": "795a8d66a02442a31397202a1ed723e8da4cd28362c868118b333451eadca4de",
+    "reference.json": "2cf7556499eff6a0a426c225eb216dfad70bbedac9ead8ecc8100f889152d454",
+    "reference.log": "bd065fcf8f8aa0ced0efacbfb8f89041b94465284271049a8d37c5be9d3ba5f6",
+    "routing-and-graphics.json": "b2172328790d92db01752202657b42290bbad64fe97f678931a6c9b73ee4f227",
+    "scope.json": "bd12fd3fbe2aaf9a3f16aed0d49999d54f932d8434afb1ed60d01b0e7768c1c8",
+    "scope.log": "09670508afe7af6be85064315b3b93c3749eabd3f529872a8c06b789d90250d2",
+    "summary.json": "dd52b21a7aee4d6d3d66cd91c659500a76bc72f0e62fef844b3f27fdec128516"
+  }
+}

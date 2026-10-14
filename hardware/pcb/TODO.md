@@ -6,14 +6,14 @@ The design keeps the 0.4 mm ENIG board with green solder mask, no silkscreen and
 
 ## Peer review follow-up
 
-- [x] **Correct the GNSS feed and reference together.** Move AE2/D3 and shift C5 1.8 mm right; remove the LBOOST crossing and positive-land overlap under RF_IN. Add connected local grounds and a finite front guard. Final PCB `8df85b3e` passes independent pad/net/ground/copper checks. [Review](../../analysis/v1_1_peer_review_20261014/rf/left-feed-review.md).
+- [x] **Restore the upward GNSS antenna and reference its feed.** AE2 returns to the original top position; L1 moves 0.50 mm right and D3 moves beside the new feed. Preserve the previous C5 shift. Remove the direct switch-node crossing, retain connected front grounds and rear reference, restore neighboring thermals and clean fill fragments/acute junctions. Final PCB `88f82c85` passes native and independent checks. [Review](../../analysis/v1_1_top_gnss_20261014/README.md).
 - [ ] **Resolve the separate GNSS supply follow-up.** Review remote C10 bypass placement and FB1 maximum DCR against u-blox guidance. Measure actual receiver rail transients before changing parts or attributing flight faults.
 - [x] **Complete copper cleanup and stricter fabrication checks.** Widen narrow contacts, close tiny pockets, round electrical junctions and clean microscopic artwork details. Enforce 0.10 mm connection/groove limits. Strict native checks and independent filled-copper/scope checks pass for PCB `4fcdb39b`. [Changes and proof](../../analysis/v1_1_peer_review_20261014/fabrication/candidate/README.md). This is not factory CAM approval.
 - [x] **Verify the digital feedback against the actual module.** SWD mapping matches the standard 32-pad RAK3172 and flown board. Keep 4.7 kΩ pull-ups; two 10 kΩ in parallel would be weaker. UART TX/RX do not need length matching. Document external-transmitter contention and the BOOT0 ground strap. [Evidence](../../analysis/v1_1_peer_review_20261014/digital/README.md).
 - [x] **Review both 10 µF capacitors.** Retain C8/C21. The exact parts lose substantial capacitance under bias; removing them has no demonstrated benefit. [Evidence](../../analysis/v1_1_peer_review_20261014/power/README.md).
 - [ ] **Measure bus and supply margins.** Check I²C 30–70% rise time against 300 ns at the far devices, and scope GNSS supply at startup/radio activity. Review C10 placement and FB1 maximum DCR before approving a substitute.
-- [x] **Refresh matching manufacturing exports and verify their population/stencil.** Final source `8df85b3e`; 57 pilot references, only U6 omitted and its 16 paste apertures removed. Native and portable package checks are linked in the peer review.
-- [ ] **Reimport and review the current package in JLC.** The saved Y24 cart is stale. Check D3 relocation, retained IC rotations, source hashes, both-side assembly and factory CAM before ordering.
+- [x] **Refresh matching manufacturing exports and verify their population/stencil.** Final source `88f82c85`; 57 pilot references, only U6 omitted and its 16 paste apertures removed. Native and portable package checks are linked in the peer review.
+- [ ] **Reimport and review the current package in JLC.** The saved Y24 cart is stale. Check D3/L1 relocation, retained IC rotations, source hashes, both-side assembly and factory CAM before ordering.
 
 ## Earlier v1.1 design work retained
 
@@ -51,7 +51,7 @@ Follow the [pilot acceptance procedure](../../analysis/v1_1_release_20261012/pil
 - [ ] **Verify dark endurance and sunrise recovery.** Use actual temperature and final assembly without debugger power. Measure residual GNSS current, brownout/reset and data recovery; nominal capacitor energy is not an all-night reserve.
 - [ ] **Verify sensors and the pilot firmware.** Prove direct TMP117 ACK/ID/readings at 0x48 against a temperature reference. Confirm pressure, IMU, GNSS and unavailable UV/lux/acoustic reporting. Pressure fallback does not establish TMP117 operation. DNP firmware must issue no optical probes.
 - [ ] **Qualify mounts and bridle.** Measure panel terminal thickness/wettable area, wire gauge, string material/diameter, apex height and total mass. Compare flex, rim wear and security with v1 under measured loads and cold/handling cycles; use sacrificial samples for uneven/out-of-plane loading.
-- [ ] **Compare installed RF and GNSS behavior.** Record regional wire cut, exit and whole-payload geometry; compare orientation-dependent links, C/N₀, fix recovery and LoRa interference against v1. The new UV circuit warrants a matched full-assembly comparison even on DNP pilots. VNA match alone is insufficient.
+- [ ] **Compare installed RF and GNSS behavior.** Record regional wire cut, exit and whole-payload geometry; compare orientation-dependent links, C/N₀, fix recovery and LoRa interference against v1. The new UV circuit warrants a matched full-assembly comparison even on DNP pilots. VNA match alone is insufficient. Follow the [matched whole-payload GNSS comparison](../../analysis/v1_1_top_gnss_20261014/reception-test.md); a top wire and higher satellite count do not by themselves prove better accuracy.
 - [ ] **Accept the three pilots before a larger batch.** Review failures, rework, measured margins and sustainable component supply before ordering approximately fifteen.
 
 ## Deferred v1.1 experiments and supply work

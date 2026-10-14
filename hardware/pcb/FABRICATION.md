@@ -1,6 +1,6 @@
 # v1.1 pilot fabrication and assembly intent
 
-Current status, 14 October 2026: **engineering review of the corrected GNSS layout**. Current PCB: `8df85b3e4bdd546ec174bb9d7b9ee9d795d55d486a68e1e853aaf1b871f863d3`. The [peer review](../../analysis/v1_1_peer_review_20261014/README.md) documents the short ground-referenced feed and copper cleanup. Use the matching offline package linked below. The saved JLC Y24 cart contains the earlier revision and needs new uploads and placement review. Planned quantity is **five PCBs, three assembled**; no checkout or payment has been made.
+Current status, 14 October 2026: **engineering review of the corrected GNSS layout**. Current PCB: `88f82c85d2d47b4aea2e7d7d2827c4a92c339788cc0d9c880dd6342ee0440c0a`. The [top GNSS review](../../analysis/v1_1_top_gnss_20261014/README.md) documents the upward antenna, ground-referenced feed and copper cleanup. Use the matching offline package linked below. The saved JLC Y24 cart contains the earlier revision and needs new uploads and placement review. Planned quantity is **five PCBs, three assembled**; no checkout or payment has been made.
 
 ## Board construction and finish
 
@@ -43,13 +43,13 @@ JLC's generic **White silkscreen** field remains in the saved product details. T
 
 **J3/J4 programming wires:** **1.00 mm pitch, 0.50 mm holes, 0.88 mm front lands, 1.20 × 0.88 mm rear lands**, rear offset 0.12 mm inward. Solder temporary wires from the enlarged rear side. Preserve pin 1 and avoid bridging the approximately 0.12 mm adjacent-land gap. These are PTH contacts, **not castellated edge connectors**, and are excluded from automatic placement.
 
-**AE1/AE2 antennas:** AE2 now sits at (55.3, 47.85) mm with its GNSS wire exiting left, below the solar assembly. D3 is at (58.0, 45.05) mm, native 270°. The nominal 3D bend/standoff is not a measured assembly tolerance. Use straight enameled copper wire, enamel removed only at the joint. [Published starting cuts](https://stratolink.org/docs/hardware#antennas-and-suspension), measured from the feed, are **82 mm at 915 MHz, 86 mm at 868 MHz, 83 mm compromise, 48 mm GNSS L1**. The models use 82/48 mm. Record actual diameter, cut and solder exit; evaluate the completed RF/GNSS assembly. No spring or chip antenna is being ordered.
+**AE1/AE2 antennas:** AE2 returns to (62.882, 33.218) mm, native 90°, with its 48 mm GNSS wire upward from the top. D3 is at (58.8, 42.0) mm, native 0°; L1 shifts 0.50 mm right to (60.603, 38.1865) mm. Keep the wire clear of the bridle through its full motion. The model gives at least 21.58 mm separation from the solar geometry. This gap and the displayed bend/standoff are nominal assumptions, not measured assembly tolerances. Use straight enameled copper wire, enamel removed only at the joint. [Published starting cuts](https://stratolink.org/docs/hardware#antennas-and-suspension), measured from the feed, are **82 mm at 915 MHz, 86 mm at 868 MHz, 83 mm compromise, 48 mm GNSS L1**. The models use 82/48 mm. Record actual diameter, cut and solder exit; evaluate the completed RF/GNSS assembly. No spring or chip antenna is being ordered.
 
 **H1/H2 suspension:** **2.00 mm plated holes / 3.20 mm GND rings**, unchanged centers. Pass the actual thin stretchy line through both to form the triangular bridle. Check corner loading and rim wear physically. J20 remains an unsoldered Tag-Connect interface.
 
 ## Final record and physical qualification
 
-Current strict DRC: **0 violations, 0 open connections, 0 schematic mismatches**. ERC: **0 unexcluded findings**, with the two documented U5 ALERT / U7 SA0 exclusions. [Current native and independent evidence](../../analysis/v1_1_peer_review_20261014/README.md). Counts remain **58 full-design / 57 pilot references**, **30 pilot part groups**, **11 exclusions**.
+Current strict DRC: **0 violations, 0 open connections, 0 schematic mismatches**. ERC: **0 unexcluded findings**, with the two documented U5 ALERT / U7 SA0 exclusions. [Current native and independent evidence](../../analysis/v1_1_top_gnss_20261014/README.md). Counts remain **58 full-design / 57 pilot references**, **30 pilot part groups**, **11 exclusions**.
 
 The [package manifest](../gerbers/v1.1-pilot/manifest.json) pins the source and all output hashes. Use its [BOM](../gerbers/v1.1-pilot/BOM-stratolink.csv), [CPL](../gerbers/v1.1-pilot/CPL-stratolink.csv) and [fabrication ZIP](../gerbers/v1.1-pilot/fabrication-review.zip) together. Run `python3 hardware/pcb/verify_review_package.py` from the published review checkout to verify the package and current review evidence.
 

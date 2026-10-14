@@ -1,0 +1,483 @@
+{
+  "pcb_sha256": "88f82c85d2d47b4aea2e7d7d2827c4a92c339788cc0d9c880dd6342ee0440c0a",
+  "input_hashes": {
+    "geometry": "fdc4f6bc50fa12b8fd9255169c6e0bf4e10b9353310fb32076b79aa0e9390e07",
+    "reference_geometry": "e62a4f5d8a47ab6d63ea0ae53b1d1147ad94a0b2e07af8ed9f58747f3a143dc3",
+    "zones": "873827ba9778e62229bcac1567021e8c795c28c8a8e5a6ced5d178c7a30e3765",
+    "screen": "d0109e41ed8c7ec843a21736f7fe40f2f4cd3c872c209f974c1bb28363274b32",
+    "reference": "2cf7556499eff6a0a426c225eb216dfad70bbedac9ead8ecc8100f889152d454"
+  },
+  "raw_candidates_preserved": true,
+  "residual_feature_count": 10,
+  "maximum_residual_inscribed_diameter_nm": 4.505845869636633,
+  "residual_feature_dispositions": [
+    {
+      "layer": "F.Cu",
+      "kind": "small_enclosed_gap_candidates",
+      "bounds_mm": [
+        57.0,
+        30.021674,
+        57.021674,
+        30.074
+      ],
+      "area_mm2": 2.1674000022277234e-08,
+      "refined_maximum_inscribed_diameter_mm": 7.619306567657621e-07,
+      "refinement_tolerance_mm": 1e-09,
+      "empty_after_5nm_inward_offset": true,
+      "adjacent_or_overlapping_native_primitives": [
+        {
+          "kind": "zone",
+          "uuid": "aca35934-c331-58f8-b7a3-ada93c7a7087",
+          "net": "GND",
+          "ref": null,
+          "pin": null,
+          "overlap_area_mm2": 0.0,
+          "distance_mm": 0.0
+        },
+        {
+          "kind": "zone",
+          "uuid": "795c4093-4930-4bcb-9c07-8e31d04084fe",
+          "net": "GND",
+          "ref": null,
+          "pin": null,
+          "overlap_area_mm2": 0.0,
+          "distance_mm": 0.0
+        }
+      ],
+      "disposition": "Sub-10 nm polygon contour remnant; retained in raw report. Not counted as fabricated isolated copper or an etch pocket."
+    },
+    {
+      "layer": "F.Cu",
+      "kind": "small_enclosed_gap_candidates",
+      "bounds_mm": [
+        57.021674,
+        30.0,
+        57.074,
+        30.021674
+      ],
+      "area_mm2": 2.167399994527927e-08,
+      "refined_maximum_inscribed_diameter_mm": 7.619306540466478e-07,
+      "refinement_tolerance_mm": 1e-09,
+      "empty_after_5nm_inward_offset": true,
+      "adjacent_or_overlapping_native_primitives": [
+        {
+          "kind": "zone",
+          "uuid": "aca35934-c331-58f8-b7a3-ada93c7a7087",
+          "net": "GND",
+          "ref": null,
+          "pin": null,
+          "overlap_area_mm2": 0.0,
+          "distance_mm": 0.0
+        },
+        {
+          "kind": "zone",
+          "uuid": "795c4093-4930-4bcb-9c07-8e31d04084fe",
+          "net": "GND",
+          "ref": null,
+          "pin": null,
+          "overlap_area_mm2": 0.0,
+          "distance_mm": 0.0
+        }
+      ],
+      "disposition": "Sub-10 nm polygon contour remnant; retained in raw report. Not counted as fabricated isolated copper or an etch pocket."
+    },
+    {
+      "layer": "B.Cu",
+      "kind": "small_enclosed_gap_candidates",
+      "bounds_mm": [
+        58.521448,
+        45.262915,
+        58.521736,
+        45.263161
+      ],
+      "area_mm2": 1.289999994019034e-10,
+      "refined_maximum_inscribed_diameter_mm": 6.811236237181098e-07,
+      "refinement_tolerance_mm": 1e-09,
+      "empty_after_5nm_inward_offset": true,
+      "adjacent_or_overlapping_native_primitives": [
+        {
+          "kind": "zone",
+          "uuid": "5e2db696-2b79-5298-991f-602d4bec098c",
+          "net": "GND",
+          "ref": null,
+          "pin": null,
+          "overlap_area_mm2": 0.0,
+          "distance_mm": 0.0
+        },
+        {
+          "kind": "zone",
+          "uuid": "b060d665-6e67-589e-a64a-b45127609817",
+          "net": "GND",
+          "ref": null,
+          "pin": null,
+          "overlap_area_mm2": 0.0,
+          "distance_mm": 0.0
+        }
+      ],
+      "disposition": "Sub-10 nm polygon contour remnant; retained in raw report. Not counted as fabricated isolated copper or an etch pocket."
+    },
+    {
+      "layer": "B.Cu",
+      "kind": "small_enclosed_gap_candidates",
+      "bounds_mm": [
+        57.0,
+        30.021674,
+        57.021674,
+        30.074
+      ],
+      "area_mm2": 2.1674000022277234e-08,
+      "refined_maximum_inscribed_diameter_mm": 7.619306567657621e-07,
+      "refinement_tolerance_mm": 1e-09,
+      "empty_after_5nm_inward_offset": true,
+      "adjacent_or_overlapping_native_primitives": [
+        {
+          "kind": "zone",
+          "uuid": "795c4093-4930-4bcb-9c07-8e31d04084fe",
+          "net": "GND",
+          "ref": null,
+          "pin": null,
+          "overlap_area_mm2": 0.0,
+          "distance_mm": 0.0
+        },
+        {
+          "kind": "zone",
+          "uuid": "b060d665-6e67-589e-a64a-b45127609817",
+          "net": "GND",
+          "ref": null,
+          "pin": null,
+          "overlap_area_mm2": 0.0,
+          "distance_mm": 0.0
+        }
+      ],
+      "disposition": "Sub-10 nm polygon contour remnant; retained in raw report. Not counted as fabricated isolated copper or an etch pocket."
+    },
+    {
+      "layer": "B.Cu",
+      "kind": "small_enclosed_gap_candidates",
+      "bounds_mm": [
+        57.021674,
+        30.0,
+        57.074,
+        30.021674
+      ],
+      "area_mm2": 2.167399994527927e-08,
+      "refined_maximum_inscribed_diameter_mm": 7.619306540466478e-07,
+      "refinement_tolerance_mm": 1e-09,
+      "empty_after_5nm_inward_offset": true,
+      "adjacent_or_overlapping_native_primitives": [
+        {
+          "kind": "zone",
+          "uuid": "795c4093-4930-4bcb-9c07-8e31d04084fe",
+          "net": "GND",
+          "ref": null,
+          "pin": null,
+          "overlap_area_mm2": 0.0,
+          "distance_mm": 0.0
+        },
+        {
+          "kind": "zone",
+          "uuid": "b060d665-6e67-589e-a64a-b45127609817",
+          "net": "GND",
+          "ref": null,
+          "pin": null,
+          "overlap_area_mm2": 0.0,
+          "distance_mm": 0.0
+        }
+      ],
+      "disposition": "Sub-10 nm polygon contour remnant; retained in raw report. Not counted as fabricated isolated copper or an etch pocket."
+    },
+    {
+      "layer": "B.Cu",
+      "kind": "tiny_copper_components",
+      "bounds_mm": [
+        58.864493,
+        44.170708,
+        58.888935,
+        44.1752
+      ],
+      "area_mm2": 9.17899995430422e-09,
+      "refined_maximum_inscribed_diameter_mm": 7.35665164976705e-07,
+      "refinement_tolerance_mm": 1e-09,
+      "empty_after_5nm_inward_offset": true,
+      "adjacent_or_overlapping_native_primitives": [
+        {
+          "kind": "zone",
+          "uuid": "5e2db696-2b79-5298-991f-602d4bec098c",
+          "net": "GND",
+          "ref": null,
+          "pin": null,
+          "overlap_area_mm2": 9.17899995430332e-09,
+          "distance_mm": 0.0
+        },
+        {
+          "kind": "zone",
+          "uuid": "b060d665-6e67-589e-a64a-b45127609817",
+          "net": "GND",
+          "ref": null,
+          "pin": null,
+          "overlap_area_mm2": 0.0,
+          "distance_mm": 0.0
+        }
+      ],
+      "disposition": "Sub-10 nm polygon contour remnant; retained in raw report. Not counted as fabricated isolated copper or an etch pocket."
+    },
+    {
+      "layer": "B.Cu",
+      "kind": "tiny_copper_components",
+      "bounds_mm": [
+        57.839231,
+        45.165646,
+        57.839723,
+        45.16571
+      ],
+      "area_mm2": 1.1179999991188314e-09,
+      "refined_maximum_inscribed_diameter_mm": 4.505845869636633e-06,
+      "refinement_tolerance_mm": 1e-09,
+      "empty_after_5nm_inward_offset": true,
+      "adjacent_or_overlapping_native_primitives": [
+        {
+          "kind": "zone",
+          "uuid": "5e2db696-2b79-5298-991f-602d4bec098c",
+          "net": "GND",
+          "ref": null,
+          "pin": null,
+          "overlap_area_mm2": 1.1179999991188319e-09,
+          "distance_mm": 0.0
+        },
+        {
+          "kind": "zone",
+          "uuid": "b060d665-6e67-589e-a64a-b45127609817",
+          "net": "GND",
+          "ref": null,
+          "pin": null,
+          "overlap_area_mm2": 0.0,
+          "distance_mm": 0.0
+        }
+      ],
+      "disposition": "Sub-10 nm polygon contour remnant; retained in raw report. Not counted as fabricated isolated copper or an etch pocket."
+    },
+    {
+      "layer": "B.Cu",
+      "kind": "tiny_copper_components",
+      "bounds_mm": [
+        58.521812,
+        45.262555,
+        58.522132,
+        45.262842
+      ],
+      "area_mm2": 1.6649999988045937e-10,
+      "refined_maximum_inscribed_diameter_mm": 7.746259252961153e-07,
+      "refinement_tolerance_mm": 1e-09,
+      "empty_after_5nm_inward_offset": true,
+      "adjacent_or_overlapping_native_primitives": [
+        {
+          "kind": "zone",
+          "uuid": "5e2db696-2b79-5298-991f-602d4bec098c",
+          "net": "GND",
+          "ref": null,
+          "pin": null,
+          "overlap_area_mm2": 1.6649999988045689e-10,
+          "distance_mm": 0.0
+        },
+        {
+          "kind": "zone",
+          "uuid": "b060d665-6e67-589e-a64a-b45127609817",
+          "net": "GND",
+          "ref": null,
+          "pin": null,
+          "overlap_area_mm2": 0.0,
+          "distance_mm": 0.0
+        }
+      ],
+      "disposition": "Sub-10 nm polygon contour remnant; retained in raw report. Not counted as fabricated isolated copper or an etch pocket."
+    },
+    {
+      "layer": "B.Cu",
+      "kind": "tiny_copper_components",
+      "bounds_mm": [
+        58.521461,
+        45.262866,
+        58.521786,
+        45.263149
+      ],
+      "area_mm2": 8.874999993057486e-10,
+      "refined_maximum_inscribed_diameter_mm": 4.118100127942612e-06,
+      "refinement_tolerance_mm": 1e-09,
+      "empty_after_5nm_inward_offset": true,
+      "adjacent_or_overlapping_native_primitives": [
+        {
+          "kind": "zone",
+          "uuid": "5e2db696-2b79-5298-991f-602d4bec098c",
+          "net": "GND",
+          "ref": null,
+          "pin": null,
+          "overlap_area_mm2": 8.874999993057486e-10,
+          "distance_mm": 0.0
+        },
+        {
+          "kind": "zone",
+          "uuid": "b060d665-6e67-589e-a64a-b45127609817",
+          "net": "GND",
+          "ref": null,
+          "pin": null,
+          "overlap_area_mm2": 0.0,
+          "distance_mm": 0.0
+        }
+      ],
+      "disposition": "Sub-10 nm polygon contour remnant; retained in raw report. Not counted as fabricated isolated copper or an etch pocket."
+    },
+    {
+      "layer": "B.Cu",
+      "kind": "tiny_copper_components",
+      "bounds_mm": [
+        58.262158,
+        45.290872,
+        58.272093,
+        45.297268
+      ],
+      "area_mm2": 2.1405000014351966e-09,
+      "refined_maximum_inscribed_diameter_mm": 3.603723675904707e-07,
+      "refinement_tolerance_mm": 1e-09,
+      "empty_after_5nm_inward_offset": true,
+      "adjacent_or_overlapping_native_primitives": [
+        {
+          "kind": "zone",
+          "uuid": "5e2db696-2b79-5298-991f-602d4bec098c",
+          "net": "GND",
+          "ref": null,
+          "pin": null,
+          "overlap_area_mm2": 2.1405000014343496e-09,
+          "distance_mm": 0.0
+        },
+        {
+          "kind": "zone",
+          "uuid": "b060d665-6e67-589e-a64a-b45127609817",
+          "net": "GND",
+          "ref": null,
+          "pin": null,
+          "overlap_area_mm2": 0.0,
+          "distance_mm": 0.0
+        }
+      ],
+      "disposition": "Sub-10 nm polygon contour remnant; retained in raw report. Not counted as fabricated isolated copper or an etch pocket."
+    }
+  ],
+  "no_substantive_etch_candidates_at_declared_thresholds": true,
+  "thermal_reliefs": [
+    {
+      "ref": "C2",
+      "pin": "2",
+      "pad_bounds_mm": [
+        63.398,
+        39.467,
+        64.348,
+        40.367
+      ],
+      "pad_to_new_solid_zone_mm": 0.7980000000000019,
+      "solid_zone_overlap_with_0_5mm_halo_mm2": 0.0,
+      "saved_total_copper_void_in_thermal_ring_mm2": 1.815539381144038,
+      "saved_same_net_ground_in_thermal_ring_mm2": 0.1460185388799146,
+      "pad_override": -1
+    },
+    {
+      "ref": "C1",
+      "pin": "1",
+      "pad_bounds_mm": [
+        64.112,
+        35.761,
+        64.732,
+        36.321
+      ],
+      "pad_to_new_solid_zone_mm": 1.5119999999999933,
+      "solid_zone_overlap_with_0_5mm_halo_mm2": 0.0,
+      "saved_total_copper_void_in_thermal_ring_mm2": 1.4703918590530807,
+      "saved_same_net_ground_in_thermal_ring_mm2": 0.30442321624372465,
+      "pad_override": -1
+    },
+    {
+      "ref": "R2",
+      "pin": "2",
+      "pad_bounds_mm": [
+        64.527,
+        34.452002,
+        65.167,
+        34.992002
+      ],
+      "pad_to_new_solid_zone_mm": 1.0879426300260528,
+      "solid_zone_overlap_with_0_5mm_halo_mm2": 0.0,
+      "saved_total_copper_void_in_thermal_ring_mm2": 1.290897633932413,
+      "saved_same_net_ground_in_thermal_ring_mm2": 0.15386311020830298,
+      "pad_override": -1
+    }
+  ],
+  "new_solid_zone_pad_intersections": [
+    {
+      "ref": "U3",
+      "pin": "10",
+      "layer": "F.Cu",
+      "zone_uuid": "aca35934-c331-58f8-b7a3-ada93c7a7087",
+      "overlap_mm2": 1.260000000000008,
+      "pad_footprint_override": 2
+    },
+    {
+      "ref": "U3",
+      "pin": "12",
+      "layer": "F.Cu",
+      "zone_uuid": "aca35934-c331-58f8-b7a3-ada93c7a7087",
+      "overlap_mm2": 1.0547999999999957,
+      "pad_footprint_override": 2
+    },
+    {
+      "ref": "H1",
+      "pin": "1",
+      "layer": "F.Cu",
+      "zone_uuid": "aca35934-c331-58f8-b7a3-ada93c7a7087",
+      "overlap_mm2": 0.3183798286292753,
+      "pad_footprint_override": 2
+    },
+    {
+      "ref": "H1",
+      "pin": "1",
+      "layer": "B.Cu",
+      "zone_uuid": "b060d665-6e67-589e-a64a-b45127609817",
+      "overlap_mm2": 0.3183798286292753,
+      "pad_footprint_override": 2
+    },
+    {
+      "ref": "D3",
+      "pin": "1",
+      "layer": "F.Cu",
+      "zone_uuid": "aca35934-c331-58f8-b7a3-ada93c7a7087",
+      "overlap_mm2": 0.4013313788579997,
+      "pad_footprint_override": 2
+    },
+    {
+      "ref": "R25",
+      "pin": "2",
+      "layer": "B.Cu",
+      "zone_uuid": "b060d665-6e67-589e-a64a-b45127609817",
+      "overlap_mm2": 0.33058593340799924,
+      "pad_footprint_override": -1
+    }
+  ],
+  "main_zone_thermal_gap_mm": 0.5,
+  "rf_antenna_transition": {
+    "rear_missing_trace_outside_pad_bounds_mm": [
+      61.9865,
+      32.993,
+      62.165831811435794,
+      33.443
+    ],
+    "rear_missing_trace_outside_pad_area_mm2": 0.06666032474629331,
+    "entire_missing_transition_contained_within_pad_plus_0_15mm": true,
+    "foreign_copper_overlap_entire_RF_net": [],
+    "antenna_rear_land_is_same_RF_net": true
+  },
+  "all_checks_pass": true,
+  "limits": [
+    "The feature screen is a bounded CAD geometry screen, not an etchant-process guarantee.",
+    "Numerical residual diameters are below 10 nm and far below 2 um polygon extraction approximation; the raw contour records are retained.",
+    "Antenna through-hole and its 0.15 mm copper-clearance transition intentionally lack a rear ground plane. The RF line beyond this transition is evaluated separately.",
+    "Local solid-zone coverage changes R25.2 to solid intentionally. C1/C2/R2 preserve inherited 0.5 mm thermal neighborhoods and actual empty sectors in saved copper."
+  ]
+}
