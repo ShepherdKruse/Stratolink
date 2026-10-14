@@ -1,6 +1,7 @@
 """Verify the published v1.1 files against the existing review manifests."""
 
 import hashlib
+import importlib.util
 import json
 from pathlib import Path
 
@@ -26,6 +27,12 @@ def main():
     if failures:
         raise SystemExit("Hash verification failed:\n" + "\n".join(failures))
     print(f"PASS: {len(checks)} CAD, manufacturing and review evidence hashes match.")
+    peer_path = root / "analysis/v1_1_peer_review_20261014/verify_peer_evidence.py"
+    spec = importlib.util.spec_from_file_location("peer_evidence", peer_path)
+    peer = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(peer)
+    result = peer.verify(root=root)
+    print("PASS: current peer-review source and evidence bindings match: " + json.dumps(result, sort_keys=True))
 
 
 if __name__ == "__main__":

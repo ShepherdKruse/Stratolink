@@ -66,6 +66,31 @@
       "original": "8ce5f5e7682ed8ec7d2be17bb5f5e7327b24eca6",
       "review_branch": "dc677aea5b3e47fdee35480c22ecf43064ae5a03",
       "subject": "Complete AS7331 v1.1 layout and green-mask pilot package"
+    },
+    {
+      "original": "cc764003a4a95a8b1f67b818b10877691e3d4db7",
+      "review_branch": "2fa2270e628701add683fb3f7555ecd89a505309",
+      "subject": "Review RF layout, digital interfaces and supply margins"
+    },
+    {
+      "original": "9cf1948cb092cd92acf9f4b5e8197b13f276843d",
+      "review_branch": "c5ede364d3ee02e0d98031dcf9014b668ec4492b",
+      "subject": "Round copper junctions and close fabrication pockets"
+    },
+    {
+      "original": "2438134ff30a6e3e727fbd3ef13a8e9958fff241",
+      "review_branch": "c5727ab57f908216deca62d967bbde8eaa462462",
+      "subject": "Add bus and GNSS measurements to pilot acceptance"
+    },
+    {
+      "original": "eda304bcdc8d1b8801f57ff7c90e755b6ca70081",
+      "review_branch": "d6dc7d33e3deec207e5beff815a12fe2f69ccabb",
+      "subject": "Move GNSS feed clear of switching copper and restore ground reference"
+    },
+    {
+      "original": "d689b09c5e33bcf2e397647753158843e5b43b6a",
+      "review_branch": "64aec9ab1a10761cec2310fd9c2dd33782d5dc0a",
+      "subject": "Regenerate pilot exports and bind final review evidence"
     }
   ]
 }
