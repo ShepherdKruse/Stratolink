@@ -1,0 +1,291 @@
+{
+  "source_sha256": "9d63500a087ef8d345c2337942106e6704d32ded953846883454bfad718adf6c",
+  "pose_input_sha256": "7e87c8b1ee23a27c541240c0872445790853ab874042865bafa08f4cbbf6c8e1",
+  "pose_mm": [
+    59.45,
+    39.8
+  ],
+  "rotation_deg": 90,
+  "nominal_envelope_mm": [
+    54.4,
+    34.95,
+    64.8,
+    44.65
+  ],
+  "conservative_core_max_envelope_mm": [
+    54.1,
+    34.9,
+    64.8,
+    44.7
+  ],
+  "conservative_core_plus_variable_tab_envelope_mm": [
+    54.1,
+    34.9,
+    65.4,
+    44.7
+  ],
+  "maximum_envelope_assumption": "Amax10.7 core centered on pad-row center; Bmax9.8; add Pmax0.6 beyond +x edge after90deg rotation, allowing tab location anywhere on that edge. Not a claim all maxima occur together.",
+  "holes": [
+    {
+      "ref": "H1",
+      "center_mm": [
+        55.665,
+        31.745
+      ],
+      "copper_bounds_mm": [
+        54.065,
+        30.145,
+        57.265,
+        33.345
+      ],
+      "drill_diameter_mm": 2.0,
+      "max_body_tab_to_ring_mm": 1.5549999999999997,
+      "max_body_tab_to_drill_mm": 2.154999999999994
+    },
+    {
+      "ref": "H2",
+      "center_mm": [
+        74.327,
+        31.745
+      ],
+      "copper_bounds_mm": [
+        72.727,
+        30.145,
+        75.927,
+        33.345
+      ],
+      "drill_diameter_mm": 2.0,
+      "max_body_tab_to_ring_mm": 7.866207334238017,
+      "max_body_tab_to_drill_mm": 8.469255901136096
+    }
+  ],
+  "nearby_front_pads": [
+    {
+      "ref": "C16",
+      "pin": "1",
+      "net": "GND",
+      "uuid": "6f502ed1-bb14-48d2-a6a8-5bd144d8b208",
+      "maxbody_tab_gap_mm": 0.18199999999998795,
+      "maxbody_tab_overlap_mm2": 0.0,
+      "core_gap_mm": 0.7819999999999965
+    },
+    {
+      "ref": "C16",
+      "pin": "2",
+      "net": "+3.3V",
+      "uuid": "b7ec550a-21f8-4612-b635-fb6033460ee0",
+      "maxbody_tab_gap_mm": 0.18199999999998795,
+      "maxbody_tab_overlap_mm2": 0.0,
+      "core_gap_mm": 0.7819999999999965
+    }
+  ],
+  "U1_front_thermal_vias": [
+    {
+      "uuid": "67b09878-6cd8-4d5e-a5ef-dcc0e9b29c30",
+      "at_mm": [
+        66.415998,
+        37.814999
+      ],
+      "tab_envelope_copper_gap_mm": 0.7659979999999962
+    },
+    {
+      "uuid": "9f072398-92c6-41bb-97ec-02f8f95d342a",
+      "at_mm": [
+        67.190998,
+        37.039999
+      ],
+      "tab_envelope_copper_gap_mm": 1.5409979999999877
+    },
+    {
+      "uuid": "719471d0-f962-4593-b47e-b2f632eefa5d",
+      "at_mm": [
+        67.190998,
+        37.814999
+      ],
+      "tab_envelope_copper_gap_mm": 1.5409979999999877
+    },
+    {
+      "uuid": "55059a9c-4e0c-4a90-9a82-421cc61a6ab1",
+      "at_mm": [
+        67.190998,
+        38.589999
+      ],
+      "tab_envelope_copper_gap_mm": 1.5409979999999877
+    },
+    {
+      "uuid": "857bfa7b-03e5-4c18-9929-7b458507fe22",
+      "at_mm": [
+        67.965998,
+        37.814999
+      ],
+      "tab_envelope_copper_gap_mm": 2.3159979999999933
+    }
+  ],
+  "baseline_rear_copper_projected_beneath_core_by_net_mm2": {
+    "/VBAT": 4.742751879435122,
+    "/SC_MID": 1.097429723615274,
+    "/SC_BAL_OUT": 2.856098132217095,
+    "/SC_HALF_REF": 0.7507550281446491,
+    "GND": 7.204425011568889,
+    "+SOLAR": 10.266248848551314,
+    "Net-(U1-VREF_SAMP)": 0.34453760825432633,
+    "Net-(U1-LBOOST)": 5.7244831826077185,
+    "VSTOR": 0.13822803971099817
+  },
+  "baseline_rear_pad_projections": [
+    {
+      "ref": "C5",
+      "pin": "1",
+      "net": "/VBAT",
+      "uuid": "360f7f4a-e111-4736-a983-3a4a1e15da29",
+      "projected_area_mm2": 0.6075000000000053
+    },
+    {
+      "ref": "C5",
+      "pin": "3",
+      "net": "/SC_MID",
+      "uuid": "a3b5ef59-5238-4d92-95c8-02036eea35e3",
+      "projected_area_mm2": 0.2879550000000013
+    },
+    {
+      "ref": "R26",
+      "pin": "1",
+      "net": "/SC_BAL_OUT",
+      "uuid": "f5957a54-ea34-4974-8255-ea218272c963",
+      "projected_area_mm2": 0.33058593340800013
+    },
+    {
+      "ref": "R26",
+      "pin": "2",
+      "net": "/SC_MID",
+      "uuid": "03582ab9-fe32-4442-af25-b11911dd0a01",
+      "projected_area_mm2": 0.3305859334080001
+    },
+    {
+      "ref": "R25",
+      "pin": "1",
+      "net": "/SC_HALF_REF",
+      "uuid": "9e31df24-a5c1-486b-af3f-b71188863e1a",
+      "projected_area_mm2": 0.16529296670400045
+    },
+    {
+      "ref": "R25",
+      "pin": "2",
+      "net": "GND",
+      "uuid": "93433c6c-35e9-45d2-91b9-5115d10d23f5",
+      "projected_area_mm2": 0.16529296670400004
+    },
+    {
+      "ref": "U8",
+      "pin": "1",
+      "net": "/SC_BAL_OUT",
+      "uuid": "364c531a-5cdd-4070-ad30-2890cbf72dfd",
+      "projected_area_mm2": 0.6356649644286059
+    },
+    {
+      "ref": "U8",
+      "pin": "2",
+      "net": "GND",
+      "uuid": "6a402d88-edf9-42b9-ba1a-a8e9de4b4feb",
+      "projected_area_mm2": 0.6356649644286059
+    },
+    {
+      "ref": "U8",
+      "pin": "3",
+      "net": "/SC_HALF_REF",
+      "uuid": "6f87d3bd-1987-44f0-b92d-52a539a668ae",
+      "projected_area_mm2": 0.5854620614406485
+    },
+    {
+      "ref": "U8",
+      "pin": "4",
+      "net": "/SC_BAL_OUT",
+      "uuid": "d1495eac-07d0-4e3d-a1d1-ae345d16df1f",
+      "projected_area_mm2": 0.7171746539315037
+    },
+    {
+      "ref": "U8",
+      "pin": "5",
+      "net": "/VBAT",
+      "uuid": "6282804e-bf78-430c-9bd5-bed3a413c856",
+      "projected_area_mm2": 0.7763307538580017
+    },
+    {
+      "ref": "C2",
+      "pin": "1",
+      "net": "+SOLAR",
+      "uuid": "3fdfd275-cdd9-4ea2-a07b-85e69934a405",
+      "projected_area_mm2": 0.8123428418339996
+    },
+    {
+      "ref": "C2",
+      "pin": "2",
+      "net": "GND",
+      "uuid": "59bf6d7e-d1a8-46c9-b722-c30624ed53c0",
+      "projected_area_mm2": 0.8123428418339963
+    },
+    {
+      "ref": "C1",
+      "pin": "1",
+      "net": "GND",
+      "uuid": "9b7bc7e2-ec08-4af8-bc43-b972713b3b57",
+      "projected_area_mm2": 0.33093750825399965
+    },
+    {
+      "ref": "C1",
+      "pin": "2",
+      "net": "Net-(U1-VREF_SAMP)",
+      "uuid": "3105f15e-79af-408e-8985-f9c6d5255c5c",
+      "projected_area_mm2": 0.33093750825400103
+    },
+    {
+      "ref": "R2",
+      "pin": "2",
+      "net": "GND",
+      "uuid": "11633062-476e-48e2-b2a6-5a28aab24c78",
+      "projected_area_mm2": 0.021421101158915136
+    },
+    {
+      "ref": "C3",
+      "pin": "2",
+      "net": "GND",
+      "uuid": "b4fae5f4-200e-4155-b01b-f96e0c44c6cb",
+      "projected_area_mm2": 0.11619139467735548
+    },
+    {
+      "ref": "L1",
+      "pin": "1",
+      "net": "Net-(U1-LBOOST)",
+      "uuid": "8c647bd0-c17e-4b70-a46c-36f824b8421c",
+      "projected_area_mm2": 4.446822436830497
+    },
+    {
+      "ref": "L1",
+      "pin": "2",
+      "net": "+SOLAR",
+      "uuid": "07dfd33f-293d-4492-9f02-dbf9001ae8dc",
+      "projected_area_mm2": 4.446822436830507
+    },
+    {
+      "ref": "C22",
+      "pin": "1",
+      "net": "/VBAT",
+      "uuid": "45397d0d-b8ca-47c5-adca-16f5a11d6afa",
+      "projected_area_mm2": 0.3309375082540008
+    },
+    {
+      "ref": "C22",
+      "pin": "2",
+      "net": "GND",
+      "uuid": "519df799-91f5-424b-84b4-5e7e95f760fc",
+      "projected_area_mm2": 0.3309375082539995
+    }
+  ],
+  "baseline_rear_ground_area_fraction_under_core": 0.21985896736684654,
+  "limitations": [
+    "This is an in-memory prospective pose, not a routed board or assembly approval.",
+    "Opposite-face projected overlap is not a mechanical collision; it identifies potential coupling and heat sources.",
+    "No suspension-line diameter, knot dimensions, electrical emissions, actual receiver shield effectiveness, or production tab distribution were measured.",
+    "Ground coverage uses saved baseline copper and must be recomputed on the final routed/refilled candidate."
+  ]
+}

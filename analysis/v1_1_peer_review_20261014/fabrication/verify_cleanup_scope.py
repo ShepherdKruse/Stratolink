@@ -6,8 +6,8 @@ import pcbnew,wx
 ROOT=Path(__file__).resolve().parents[3];H=Path(__file__).resolve().parent
 sys.path.insert(0,str(ROOT/'analysis/v1_1_solar_attachments_20261012/review'))
 import check_solar_attachments as a
-args=argparse.ArgumentParser();args.add_argument('--candidate',type=Path,required=True);args.add_argument('--name',required=True);args=args.parse_args()
-paths=[ROOT/'hardware/pcb/stratolink.kicad_pcb',args.candidate];raws=[p.read_bytes()for p in paths];trees=[a.parse(raw.decode())for raw in raws];app=wx.App(False);boards=[pcbnew.LoadBoard(str(p))for p in paths]
+args=argparse.ArgumentParser();args.add_argument('--before',type=Path,default=ROOT/'hardware/pcb/stratolink.kicad_pcb',help='Explicit pre-cleanup snapshot; required for reproducing historical review after promotion');args.add_argument('--candidate',type=Path,required=True);args.add_argument('--name',required=True);args=args.parse_args()
+paths=[args.before,args.candidate];raws=[p.read_bytes()for p in paths];trees=[a.parse(raw.decode())for raw in raws];app=wx.App(False);boards=[pcbnew.LoadBoard(str(p))for p in paths]
 sha=lambda b:hashlib.sha256(b).hexdigest()
 for kind in ['footprint','setup','general','net','gr_line','gr_arc','gr_rect','via']:
  assert a.nodes(trees[0],kind)==a.nodes(trees[1],kind),('Unapproved invariant difference',kind)

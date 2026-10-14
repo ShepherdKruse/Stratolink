@@ -81,7 +81,7 @@
 		(embedded_fonts no)
 		(model "${KIPRJMOD}/lib/Stratolink_Wire_48mm_D0p321_Nominal.step"
 			(offset
-				(xyz 0 -0.2 0.15)
+				(xyz 0 -0.2 0.25)
 			)
 			(scale
 				(xyz 1 1 1)

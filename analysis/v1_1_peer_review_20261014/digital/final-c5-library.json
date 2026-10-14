@@ -1,0 +1,31 @@
+{
+  "pcb_sha256": "8df85b3e4bdd546ec174bb9d7b9ee9d795d55d486a68e1e853aaf1b871f863d3",
+  "before_library_sha256": "e078558f7304757b892e0d2af975feb7ce1cf93106803ab14dca003767d15fd0",
+  "after_library_sha256": "646dade38b88828cd093a3e62ffb1a639cc93cf4c6285359c0ae51a1ba6a6d93",
+  "exact_text_updates": {
+    "Assembly_Note": {
+      "before": "Back view: negative left, balance center, positive right. Balance is intentionally unconnected; no pin-order refresh from old library.",
+      "after": "Preserve proven outer polarity. Center pad 3 connects to SC_MID through R26 and the active balancer. Hand-install after board cleaning; no normal reflow."
+    },
+    "Description": {
+      "before": "DMF4B5R5G105M3DTA0 1 F 5.5 V supercapacitor; CAD pads 1=positive, 2=negative, 3=isolated balance; manual backside assembly",
+      "after": "DMF4B5R5G105M3DTA0; 1 F dual-cell capacitor, pad 1 positive, pad 2 negative, pad 3 midpoint; hand-install after reflow and cleaning"
+    }
+  },
+  "only_other_library_changes": "Four original courtyard line geometries; all other source nodes identical",
+  "courtyard_uuids": [
+    "2136d50d-e38e-4c1c-bb15-8bc93ba83913",
+    "30d45e65-08b6-45f7-8c67-3e8daa682804",
+    "b5d37c5e-1865-474d-9ef2-acca1de6a446",
+    "e71d0a9b-bf77-4095-a17e-5c02fbc85554"
+  ],
+  "library_courtyard_bounds_mm": [
+    -7.375,
+    -20.375,
+    7.375,
+    15.375
+  ],
+  "board_courtyard_matches_y_mirrored_library": true,
+  "source_bytes_unchanged": true,
+  "limit": "The 0.125 mm courtyard allowance around the maximum case/terminal envelope is an assembly envelope, not qualification of hand placement, soldering, flight flex or manufacturer tolerance."
+}

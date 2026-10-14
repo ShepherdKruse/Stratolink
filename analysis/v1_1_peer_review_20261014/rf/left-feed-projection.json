@@ -1,0 +1,65 @@
+{
+  "pcb_sha256": "8df85b3e4bdd546ec174bb9d7b9ee9d795d55d486a68e1e853aaf1b871f863d3",
+  "source": "/Users/twarn/Repositories/ai-working/scratch/stratolink-peer-review-20261014/rf-copper-final/stratolink.kicad_pcb",
+  "geometry_source": "/Users/twarn/Repositories/ai-working/scratch/stratolink-peer-review-20261014/rf-final-geometry.json",
+  "analytic_main_length_mm": 6.575108861576872,
+  "original_main_length_mm": 13.439242465768096,
+  "length_change_percent": -51.07530146639792,
+  "route_uuids": [
+    "71ea73c2-7d71-5ceb-8317-7731a65808a8",
+    "740ac384-10f4-5041-b815-3217c9c18283",
+    "777eea7c-048b-531a-ab44-0903cc915bf7",
+    "88427094-8f27-5415-9f1a-2189734cd052",
+    "3d2c4bde-575f-5b17-b738-6358d3a39e0b",
+    "5f05befe-7cac-565d-8c54-90c9a969a02f",
+    "6cca3da4-99ec-5662-8f67-ef01c12b9095"
+  ],
+  "terminal_exclusion_radius_mm": 0.9,
+  "screened_centerline_length_mm": 5.675108326341968,
+  "screened_centerline_without_rear_ground_mm": 0.0004997787342845771,
+  "screened_trace_area_mm2": 2.6462990865754628,
+  "screened_trace_without_rear_ground_area_mm2": 0.0007935378366313368,
+  "projection_tolerance_mm": 0.005,
+  "screened_trace_without_rear_ground_beyond_tolerance_mm2": 0.0,
+  "screened_centerline_without_rear_ground_beyond_tolerance_mm": 0.0,
+  "receiver_launch_area_mm2": 1.4399999999999984,
+  "receiver_launch_without_rear_ground_area_mm2": 0.0,
+  "opposite_layer_non_ground_overlaps": [],
+  "switch_projection_edge_distance_mm": {
+    "Net-(U1-LBOOST)": 4.086566876111702,
+    "Net-(U1-LBUCK)": 8.622727980812096
+  },
+  "graphics_included": true,
+  "excluded_copper_text": [
+    {
+      "uuid": "d33ff207-5537-4175-aad0-4a6a2127c38c",
+      "ref": null,
+      "layer": "F.Cu",
+      "kind": "PCB_TEXT"
+    },
+    {
+      "uuid": "70fd784f-4460-4c2f-b1b0-5920dc836f3e",
+      "ref": null,
+      "layer": "F.Cu",
+      "kind": "PCB_TEXT"
+    },
+    {
+      "uuid": "857ef018-87a1-4fd2-b5a3-b7c725b5a4a9",
+      "ref": null,
+      "layer": "F.Cu",
+      "kind": "PCB_TEXT"
+    },
+    {
+      "uuid": "8a2d562a-cd15-40da-973d-853d9daff557",
+      "ref": null,
+      "layer": "F.Cu",
+      "kind": "PCB_TEXT"
+    }
+  ],
+  "limitations": [
+    "Direct projection tests actual saved fills. It does not prove return-current distribution, impedance, antenna match, or EMI performance.",
+    "The 0.9 mm antenna-terminal exclusion includes the 0.75 mm-radius plated pad and its 0.15 mm ground clearance.",
+    "Board copper text is listed separately; native DRC includes it, and the four solar polarity marks are outside the RF region.",
+    "Native copper contours request <=2 um polygon error. Analytical route length uses native arc coordinates."
+  ]
+}

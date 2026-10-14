@@ -1,0 +1,24 @@
+{
+  "before_sha256": "af8b32d61756642c1f63b12c7220c10bc17c62dec1fed5c53bf5796f92ab08ec",
+  "after_sha256": "59281186661dd4e39e0b0b927537d40ca198d615cfc7228ba4d79f1c3f2fdc79",
+  "plan_sha256": "5a9ca1b0e289db9025fd31696a64123c637872ebd310a80c668c0a01655efb0f",
+  "exact_group_moves_mm": {
+    "Copper label: STRATOLINK.ORG": [
+      0,
+      -0.55
+    ],
+    "Copper label: PICO MAINBOARD V1.1": [
+      0,
+      -0.22
+    ]
+  },
+  "rigidly_translated_graphics": 45,
+  "all_other_original_graphics_unchanged": true,
+  "only_added_geometry": [
+    "Exact planned F.Cu GND guard polygon",
+    "0.5/0.3 mm GND stitch at [55.45,46.65]"
+  ],
+  "stitch_has_no_front_or_back_mask_aperture_by_native_layer_flags": true,
+  "original_tracks_pads_footprints_and_zone_definitions_unchanged": true,
+  "source_bytes_unchanged": true
+}

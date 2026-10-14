@@ -1,0 +1,4 @@
+#!/usr/bin/env python3
+from pathlib import Path
+import pcbnew,wx,hashlib,json,uuid,sys
+p=Path(sys.argv[1]);source=hashlib.sha256(p.read_bytes()).hexdigest();assert source=='a1707712a64916ac7c9e3fc8f2d881aa2088f546da0de76285260903a59e0ee0';app=wx.App(False);b=pcbnew.LoadBoard(str(p));t=pcbnew.PCB_TRACK(b);t.SetNet(b.FindNet('GND'));t.SetLayer(pcbnew.B_Cu);t.SetWidth(150000);t.SetStart(pcbnew.VECTOR2I(69500000,48400000));t.SetEnd(pcbnew.VECTOR2I(69700000,48400000));b.Add(t);old=t.m_Uuid.AsString();new=str(uuid.uuid5(uuid.NAMESPACE_URL,'stratolink-rf-ground-seam-20261014'));pcbnew.SaveBoard(str(p),b);s=p.read_text();s=s.replace(old,new);p.write_text(s);(p.parent/'seam-ledger.json').write_text(json.dumps(dict(source_sha256=source,uuid=new,net='GND',layer='B.Cu',width_mm=.15,start=[69.5,48.4],end=[69.7,48.4],reason='Explicit same-net overlap closes submicron near-coincident boundary seam at69.553309,48.456909 after polygon refill.'),indent=2)+'\n')

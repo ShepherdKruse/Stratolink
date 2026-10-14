@@ -1,0 +1,15 @@
+{
+  "pcb_sha256": "8df85b3e4bdd546ec174bb9d7b9ee9d795d55d486a68e1e853aaf1b871f863d3",
+  "library_relative_path": "hardware/pcb/lib/Stratolink_GNSS_Wire_PTH_D1p0.kicad_mod",
+  "before_library_sha256": "13f1d0c04e83beec958825c7438e3e25f6ed6ae3f2d1328c997ea62967fc92d3",
+  "after_library_sha256": "9eb58e689e25b7efa13b567d55948e9dcdf8753ac868c4e46c0c355a844791a6",
+  "only_library_change": {
+    "model_offset_z_mm": [
+      0.15,
+      0.25
+    ]
+  },
+  "placed_model_matches_active_library": true,
+  "model_path_scale_rotation_and_all_other_library_nodes_unchanged": true,
+  "limit": "This nominal model offset is assembly visualization, not a measured wire bend or standoff. Copper pad geometry and the 48 mm radiator model are unchanged."
+}

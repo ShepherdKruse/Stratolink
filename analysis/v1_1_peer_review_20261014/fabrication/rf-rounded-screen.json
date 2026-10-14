@@ -1,0 +1,102 @@
+{
+  "source_sha256": "f468e92d6e18d155152d32e86b62cfa1d14476895edeba18ea1d0277c582c76a",
+  "layers": {
+    "F.Cu": {
+      "copper_component_count": 149,
+      "acute_gap_candidates": [
+        {
+          "at_mm": [
+            59.887001,
+            45.381197
+          ],
+          "gap_angle_deg": 44.99999999999952,
+          "edge_support_mm": [
+            0.13280400000000014,
+            0.6015908930843273
+          ]
+        }
+      ],
+      "sharp_tip_candidates": [],
+      "small_enclosed_gap_candidates": [],
+      "tiny_copper_components": []
+    },
+    "B.Cu": {
+      "copper_component_count": 72,
+      "acute_gap_candidates": [
+        {
+          "at_mm": [
+            64.19244,
+            33.064081
+          ],
+          "gap_angle_deg": 45.12760785151144,
+          "edge_support_mm": [
+            0.12386730526656756,
+            0.10019066693558941
+          ]
+        },
+        {
+          "at_mm": [
+            63.068984,
+            43.649
+          ],
+          "gap_angle_deg": 50.62545869410917,
+          "edge_support_mm": [
+            0.09413653022073994,
+            3.3093840000000014
+          ]
+        },
+        {
+          "at_mm": [
+            69.737143,
+            47.957
+          ],
+          "gap_angle_deg": 41.81678976884933,
+          "edge_support_mm": [
+            0.6276347044834287,
+            0.812143000000006
+          ]
+        },
+        {
+          "at_mm": [
+            69.925,
+            48.124381
+          ],
+          "gap_angle_deg": 48.18307363673213,
+          "edge_support_mm": [
+            0.3326190000000011,
+            0.49886414384078387
+          ]
+        },
+        {
+          "at_mm": [
+            69.553207,
+            48.457
+          ],
+          "gap_angle_deg": 41.81692636326787,
+          "edge_support_mm": [
+            0.49886414384078387,
+            0.3717929999999967
+          ]
+        }
+      ],
+      "sharp_tip_candidates": [],
+      "small_enclosed_gap_candidates": [
+        {
+          "area_mm2": 0.0070373746394998445,
+          "maximum_inscribed_diameter_mm": 0.07145733550217684,
+          "bounds_mm": [
+            64.192165,
+            32.940214,
+            64.285203,
+            33.064081
+          ],
+          "at_mm": [
+            64.21011217884303,
+            33.028658500000006
+          ]
+        }
+      ],
+      "tiny_copper_components": []
+    }
+  }
+}

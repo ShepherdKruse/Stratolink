@@ -1,0 +1,490 @@
+Source: https://qucs.sourceforge.net/tech/node86.html
+Retrieved: 2026-10-14
+
+- text: "Next:"
+- link "Coplanar waveguide open":
+  - /url: node87.html
+- text: "Up:"
+- link "Coplanar components":
+  - /url: node85.html
+- text: "Previous:"
+- link "Coplanar components":
+  - /url: node85.html
+- paragraph
+- strong: Subsections
+- list:
+  - link "Definition":
+    - /url: node86.html#SECTION001311000000000000000
+  - link "Quasi-static analysis by conformal mappings":
+    - /url: node86.html#SECTION001312000000000000000
+  - link "Effects of metalization thickness":
+    - /url: node86.html#SECTION001313000000000000000
+  - link "Effects of dispersion":
+    - /url: node86.html#SECTION001314000000000000000
+  - link "Evaluation of losses":
+    - /url: node86.html#SECTION001315000000000000000
+  - link "S- and Y-parameters of the single coplanar line":
+    - /url: node86.html#SECTION001316000000000000000
+- separator
+- heading "Coplanar waveguides (CPW)" [level=1]
+- paragraph
+- heading "Definition" [level=2]
+- paragraph: "A coplanar line is a structure in which all the conductors supporting wave propagation are located on the same plane, i.e. generally the top of a dielectric substrate. There exist two main types of coplanar lines: the first, called coplanar waveguide (CPW), that we will study here, is composed of a median metallic strip separated by two narrow slits from a infinite ground plane, as may be seen on the figure below."
+- paragraph
+- 'table "Figure 12.1: coplanar waveguide line"':
+  - caption:
+    - strong: "Figure 12.1:"
+    - text: coplanar waveguide line
+  - rowgroup:
+    - 'row "\\includegraphics[width=0.9\\linewidth]{cpline}"':
+      - 'cell "\\includegraphics[width=0.9\\linewidth]{cpline}"':
+        - 'img "\\includegraphics[width=0.9\\linewidth]{cpline}"'
+- paragraph:
+  - text: The characteristic dimensions of a CPW are the central strip width
+  - img "$ W$"
+  - text: and the width of the slots
+  - img "$ s$"
+  - text: . The structure is obviously symmetrical along a vertical plane running in the middle of the central strip.
+- paragraph
+- paragraph
+- 'img "\\includegraphics[width=0.5\\linewidth]{cpscheme}"'
+- paragraph: The other coplanar line, called a coplanar slot (CPS) is the complementary of that topology, consisting of two strips running side by side.
+- paragraph
+- heading "Quasi-static analysis by conformal mappings" [level=2]
+- paragraph:
+  - text: A CPW can be quasi-statically analysed by the use of conformal mappings. Briefly speaking, it consists in transforming the geometry of the PCB into another conformation, whose properties make the computations straightforward. The interested reader can consult the pp. 886 - 910 of [
+  - link "48":
+    - /url: node103.html#Collin
+  - text: "] which has a correct coverage of both the theoretical and applied methods. The French reader interested in the mathematical arcanes involved is referred to the second chapter of ["
+  - link "49":
+    - /url: node103.html#Mir
+  - text: "] (which may be out of print nowadays), for an extensive review of all the theoretical framework. The following analysis is mainly borrowed from ["
+  - link "39":
+    - /url: node103.html#Gupta1
+  - text: "], pp. 375 et seq. with additions from ["
+  - link "48":
+    - /url: node103.html#Collin
+  - text: "]."
+- paragraph
+- paragraph:
+  - text: The CPW of negligible thickness located on top of an infinitely deep substrate, as shown on the left of the figure below, can be mapped into a parallel plate capacitor filled with dielectric
+  - img "$ ABCD$"
+  - text: "using the conformal function:"
+- paragraph
+- table:
+  - rowgroup:
+    - 'row "$\\displaystyle w = \\int_{z_0}^{z} \\dfrac{dz}{\\sqrt{(z-W/2)(z-W/2-s)}}.$ (12.1)"':
+      - 'cell "$\\displaystyle w = \\int_{z_0}^{z} \\dfrac{dz}{\\sqrt{(z-W/2)(z-W/2-s)}}.$"':
+        - 'img "$\\displaystyle w = \\int_{z_0}^{z} \\dfrac{dz}{\\sqrt{(z-W/2)(z-W/2-s)}}.$"'
+      - cell "(12.1)"
+- paragraph
+- paragraph
+- paragraph
+- 'img "\\includegraphics[width=0.7\\linewidth]{cpconform}"'
+- paragraph:
+  - text: To further simplify the analysis, the original dielectric boundary is assumed to constitute a magnetic wall, so that
+  - img "$ BC$"
+  - text: and
+  - img "$ AD$"
+  - text: "become magnetic walls too and there is no resulting fringing field in the resulting capacitor. With that assumption, the capacitance per unit length is merely the sum of the top (air filled) and bottom (dielectric filled) partial capacitances. The latter is given by:"
+- paragraph
+- table:
+  - rowgroup:
+    - 'row "$\\displaystyle C_d = 2\\cdot \\varepsilon_0\\cdot \\varepsilon_r\\cdot \\dfrac{K(k_1)}{K''(k_1)}$ (12.2)"':
+      - 'cell "$\\displaystyle C_d = 2\\cdot \\varepsilon_0\\cdot \\varepsilon_r\\cdot \\dfrac{K(k_1)}{K''(k_1)}$"':
+        - 'img "$\\displaystyle C_d = 2\\cdot \\varepsilon_0\\cdot \\varepsilon_r\\cdot \\dfrac{K(k_1)}{K''(k_1)}$"'
+      - cell "(12.2)"
+- paragraph
+- paragraph: "while the former is:"
+- paragraph
+- table:
+  - rowgroup:
+    - 'row "$\\displaystyle C_a = 2\\cdot \\varepsilon_0\\cdot \\dfrac{K(k_1)}{K''(k_1)}$ (12.3)"':
+      - 'cell "$\\displaystyle C_a = 2\\cdot \\varepsilon_0\\cdot \\dfrac{K(k_1)}{K''(k_1)}$"':
+        - 'img "$\\displaystyle C_a = 2\\cdot \\varepsilon_0\\cdot \\dfrac{K(k_1)}{K''(k_1)}$"'
+      - cell "(12.3)"
+- paragraph
+- paragraph:
+  - text: In both formulae
+  - img "$ K(k)$"
+  - text: and
+  - img "$ K'(k)$"
+  - text: represent the complete elliptic integral of the first kind and its complement, and
+  - 'img "$ k_1= \\tfrac{W}{W+2s}$"'
+  - text: . While the separate evaluation of
+  - img "$ K$"
+  - text: and
+  - img "$ K'$"
+  - text: is more or less tricky, the
+  - img "$ K/K'$"
+  - text: "ratio lets itself compute efficiently through the following formulae:"
+- paragraph
+- table:
+  - rowgroup:
+    - 'row "$\\displaystyle \\dfrac{K(k)}{K''(k)} = \\dfrac{\\pi}{\\ln\\left(2\\tfrac{1+\\sqrt{k''}}{1... ...t{k''}}\\right)} \\;\\;\\;\\; \\textrm{ for } \\;\\;\\;\\; 0 \\le k \\le \\dfrac{1}{\\sqrt{2}}$ (12.4)"':
+      - 'cell "$\\displaystyle \\dfrac{K(k)}{K''(k)} = \\dfrac{\\pi}{\\ln\\left(2\\tfrac{1+\\sqrt{k''}}{1... ...t{k''}}\\right)} \\;\\;\\;\\; \\textrm{ for } \\;\\;\\;\\; 0 \\le k \\le \\dfrac{1}{\\sqrt{2}}$"':
+        - 'img "$\\displaystyle \\dfrac{K(k)}{K''(k)} = \\dfrac{\\pi}{\\ln\\left(2\\tfrac{1+\\sqrt{k''}}{1... ...t{k''}}\\right)} \\;\\;\\;\\; \\textrm{ for } \\;\\;\\;\\; 0 \\le k \\le \\dfrac{1}{\\sqrt{2}}$"'
+      - cell "(12.4)"
+- paragraph
+- paragraph
+- table:
+  - rowgroup:
+    - 'row "$\\displaystyle \\dfrac{K(k)}{K''(k)} = \\dfrac{\\ln\\left(2\\tfrac{1+\\sqrt{k}}{1-\\sqrt{k}}\\right)}{\\pi} \\;\\;\\;\\; \\textrm{ for } \\;\\;\\;\\; \\dfrac{1}{\\sqrt{2}} \\le k \\le 1$ (12.5)"':
+      - 'cell "$\\displaystyle \\dfrac{K(k)}{K''(k)} = \\dfrac{\\ln\\left(2\\tfrac{1+\\sqrt{k}}{1-\\sqrt{k}}\\right)}{\\pi} \\;\\;\\;\\; \\textrm{ for } \\;\\;\\;\\; \\dfrac{1}{\\sqrt{2}} \\le k \\le 1$"':
+        - 'img "$\\displaystyle \\dfrac{K(k)}{K''(k)} = \\dfrac{\\ln\\left(2\\tfrac{1+\\sqrt{k}}{1-\\sqrt{k}}\\right)}{\\pi} \\;\\;\\;\\; \\textrm{ for } \\;\\;\\;\\; \\dfrac{1}{\\sqrt{2}} \\le k \\le 1$"'
+      - cell "(12.5)"
+- paragraph
+- paragraph:
+  - text: with
+  - img "$ k'$"
+  - text: "being the complementary modulus:"
+  - 'img "$ k''=\\sqrt{1-k^2}$"'
+  - text: . While [
+  - link "48":
+    - /url: node103.html#Collin
+  - text: "] states that the accuracy of the above formulae is close to"
+  - 'img "$ 10^{-5}$"'
+  - text: ", ["
+  - link "39":
+    - /url: node103.html#Gupta1
+  - text: "] claims it to be"
+  - 'img "$ 3\\cdot10^{-6}$"'
+  - text: . It can be considered as exact for any practical purposes.
+- paragraph
+- paragraph:
+  - text: The total line capacitance is thus the sum of
+  - img "$ C_d$"
+  - text: and
+  - img "$ C_a$"
+  - text: ". The effective permittivity is therefore:"
+- paragraph
+- table:
+  - rowgroup:
+    - 'row "$\\displaystyle \\varepsilon_{re} = \\dfrac{\\varepsilon_r+1}{2}$ (12.6)"':
+      - 'cell "$\\displaystyle \\varepsilon_{re} = \\dfrac{\\varepsilon_r+1}{2}$"':
+        - 'img "$\\displaystyle \\varepsilon_{re} = \\dfrac{\\varepsilon_r+1}{2}$"'
+      - cell "(12.6)"
+- paragraph
+- paragraph: "and the impedance:"
+- paragraph
+- table:
+  - rowgroup:
+    - 'row "$\\displaystyle Z=\\dfrac{30\\pi}{\\sqrt{\\varepsilon_{re}}}\\cdot\\dfrac{K''(k_1)}{K(k_1)}$ (12.7)"':
+      - 'cell "$\\displaystyle Z=\\dfrac{30\\pi}{\\sqrt{\\varepsilon_{re}}}\\cdot\\dfrac{K''(k_1)}{K(k_1)}$"':
+        - 'img "$\\displaystyle Z=\\dfrac{30\\pi}{\\sqrt{\\varepsilon_{re}}}\\cdot\\dfrac{K''(k_1)}{K(k_1)}$"'
+      - cell "(12.7)"
+- paragraph
+- paragraph
+- 'table "Figure 12.2: characteristic impedance as approximated by eq. ( 12.7 ) for $ \\varepsilon _{r}$ = $ 1.0$ (air), $ 3.78$ (quartz) and $ 9.5$ (alumina)"':
+  - caption:
+    - strong: "Figure 12.2:"
+    - text: characteristic impedance as approximated by eq. (
+    - link "12.7":
+      - /url: "#eq:CoplanarZL"
+    - text: ) for
+    - 'img "$ \\varepsilon _{r}$"'
+    - text: =
+    - img "$ 1.0$"
+    - text: (air),
+    - img "$ 3.78$"
+    - text: (quartz) and
+    - img "$ 9.5$"
+    - text: (alumina)
+  - rowgroup:
+    - 'row "\\includegraphics[width=0.95\\linewidth]{coplanarzl}"':
+      - 'cell "\\includegraphics[width=0.95\\linewidth]{coplanarzl}"':
+        - 'img "\\includegraphics[width=0.95\\linewidth]{coplanarzl}"'
+- paragraph:
+  - text: In practical cases, the substrate has a finite thickness
+  - img "$ h$"
+  - text: ". To carry out the analysis of this conformation, a preliminary conformal mapping transforms the finite thickness dielectric into an infinite thickness one. Only the effective permittivity is altered; it becomes:"
+- paragraph
+- table:
+  - rowgroup:
+    - 'row "$\\displaystyle \\varepsilon_{re}=1+\\dfrac{\\varepsilon_r-1}{2}\\cdot\\dfrac{K(k_2)}{K''(k_2)}\\cdot\\dfrac{K''(k_1)}{K(k_1)}$ (12.8)"':
+      - 'cell "$\\displaystyle \\varepsilon_{re}=1+\\dfrac{\\varepsilon_r-1}{2}\\cdot\\dfrac{K(k_2)}{K''(k_2)}\\cdot\\dfrac{K''(k_1)}{K(k_1)}$"':
+        - 'img "$\\displaystyle \\varepsilon_{re}=1+\\dfrac{\\varepsilon_r-1}{2}\\cdot\\dfrac{K(k_2)}{K''(k_2)}\\cdot\\dfrac{K''(k_1)}{K(k_1)}$"'
+      - cell "(12.8)"
+- paragraph
+- paragraph:
+  - text: where
+  - img "$ k_1$"
+  - text: is given above and
+- paragraph
+- table:
+  - rowgroup:
+    - 'row "$\\displaystyle k_2=\\dfrac{\\sinh\\left(\\dfrac{\\pi W}{4h}\\right)}{\\sinh\\left(\\dfrac{\\pi\\cdot\\left(W+2s\\right)}{4h}\\right)}.$ (12.9)"':
+      - 'cell "$\\displaystyle k_2=\\dfrac{\\sinh\\left(\\dfrac{\\pi W}{4h}\\right)}{\\sinh\\left(\\dfrac{\\pi\\cdot\\left(W+2s\\right)}{4h}\\right)}.$"':
+        - 'img "$\\displaystyle k_2=\\dfrac{\\sinh\\left(\\dfrac{\\pi W}{4h}\\right)}{\\sinh\\left(\\dfrac{\\pi\\cdot\\left(W+2s\\right)}{4h}\\right)}.$"'
+      - cell "(12.9)"
+- paragraph
+- paragraph: "Finally, let us consider a CPW over a finite thickness dielectric backed by an infinite ground plane. In this case, the quasi-TEM wave is an hybrid between microstrip and true CPW mode. The equations then become:"
+- paragraph
+- table:
+  - rowgroup:
+    - 'row "$\\displaystyle \\varepsilon_{re} =1 + q\\cdot\\left(\\varepsilon_r - 1\\right)$ (12.10)"':
+      - 'cell "$\\displaystyle \\varepsilon_{re} =1 + q\\cdot\\left(\\varepsilon_r - 1\\right)$"':
+        - 'img "$\\displaystyle \\varepsilon_{re} =1 + q\\cdot\\left(\\varepsilon_r - 1\\right)$"'
+      - cell "(12.10)"
+- paragraph
+- paragraph:
+  - text: where
+  - img "$ q$"
+  - text: ", called filling factor is given by:"
+- paragraph
+- table:
+  - rowgroup:
+    - 'row "$\\displaystyle q = \\dfrac{\\dfrac{K(k_3)}{K''(k_3)}}{\\dfrac{K(k_1)}{K''(k_1)}+\\dfrac{K(k_3)}{K''(k_3)}}$ (12.11)"':
+      - 'cell "$\\displaystyle q = \\dfrac{\\dfrac{K(k_3)}{K''(k_3)}}{\\dfrac{K(k_1)}{K''(k_1)}+\\dfrac{K(k_3)}{K''(k_3)}}$"':
+        - 'img "$\\displaystyle q = \\dfrac{\\dfrac{K(k_3)}{K''(k_3)}}{\\dfrac{K(k_1)}{K''(k_1)}+\\dfrac{K(k_3)}{K''(k_3)}}$"'
+      - cell "(12.11)"
+- paragraph
+- paragraph: and
+- paragraph
+- table:
+  - rowgroup:
+    - 'row "$\\displaystyle k_3 = \\dfrac{\\tanh\\left(\\dfrac{\\pi W}{4h}\\right)}{\\tanh\\left(\\dfrac{\\pi\\cdot\\left(W+2s\\right)}{4h}\\right)}$ (12.12)"':
+      - 'cell "$\\displaystyle k_3 = \\dfrac{\\tanh\\left(\\dfrac{\\pi W}{4h}\\right)}{\\tanh\\left(\\dfrac{\\pi\\cdot\\left(W+2s\\right)}{4h}\\right)}$"':
+        - 'img "$\\displaystyle k_3 = \\dfrac{\\tanh\\left(\\dfrac{\\pi W}{4h}\\right)}{\\tanh\\left(\\dfrac{\\pi\\cdot\\left(W+2s\\right)}{4h}\\right)}$"'
+      - cell "(12.12)"
+- paragraph
+- paragraph: "The impedance of this line amounts to:"
+- paragraph
+- table:
+  - rowgroup:
+    - 'row "$\\displaystyle Z=\\dfrac{60\\pi}{\\sqrt{\\varepsilon_{re}}}\\cdot\\dfrac{1}{\\dfrac{K(k_1)}{K''(k_1)}+\\dfrac{K(k_3)}{K''(k_3)}}$ (12.13)"':
+      - 'cell "$\\displaystyle Z=\\dfrac{60\\pi}{\\sqrt{\\varepsilon_{re}}}\\cdot\\dfrac{1}{\\dfrac{K(k_1)}{K''(k_1)}+\\dfrac{K(k_3)}{K''(k_3)}}$"':
+        - 'img "$\\displaystyle Z=\\dfrac{60\\pi}{\\sqrt{\\varepsilon_{re}}}\\cdot\\dfrac{1}{\\dfrac{K(k_1)}{K''(k_1)}+\\dfrac{K(k_3)}{K''(k_3)}}$"'
+      - cell "(12.13)"
+- paragraph
+- paragraph
+- heading "Effects of metalization thickness" [level=2]
+- paragraph:
+  - text: In most practical cases, the strips are very thin, yet their thickness cannot be entirely neglected. A first order correction to take into account the non-zero thickness of the conductor is given by [
+  - link "39":
+    - /url: node103.html#Gupta1
+  - text: "]:"
+- paragraph
+- table:
+  - rowgroup:
+    - row "$\\displaystyle s_e = s - \\Delta$ (12.14)":
+      - cell "$\\displaystyle s_e = s - \\Delta$":
+        - img "$\\displaystyle s_e = s - \\Delta$"
+      - cell "(12.14)"
+- paragraph
+- paragraph: and
+- paragraph
+- table:
+  - rowgroup:
+    - row "$\\displaystyle W_e = W + \\Delta$ (12.15)":
+      - cell "$\\displaystyle W_e = W + \\Delta$":
+        - img "$\\displaystyle W_e = W + \\Delta$"
+      - cell "(12.15)"
+- paragraph
+- paragraph: where
+- paragraph
+- table:
+  - rowgroup:
+    - 'row "$\\displaystyle \\Delta = \\dfrac{1.25t}{\\pi}\\cdot\\left(1 + \\ln\\left(\\dfrac{4 \\pi W}{t}\\right)\\right)$ (12.16)"':
+      - 'cell "$\\displaystyle \\Delta = \\dfrac{1.25t}{\\pi}\\cdot\\left(1 + \\ln\\left(\\dfrac{4 \\pi W}{t}\\right)\\right)$"':
+        - 'img "$\\displaystyle \\Delta = \\dfrac{1.25t}{\\pi}\\cdot\\left(1 + \\ln\\left(\\dfrac{4 \\pi W}{t}\\right)\\right)$"'
+      - cell "(12.16)"
+- paragraph
+- paragraph:
+  - text: In the computation of the impedance, both the
+  - img "$ k_1$"
+  - text: and the effective dielectric constant are affected, wherefore
+  - img "$ k_1$"
+  - text: "must be substituted by an ``effective'' modulus"
+  - img "$ k_e$"
+  - text: ", with:"
+- paragraph
+- table:
+  - rowgroup:
+    - 'row "$\\displaystyle k_e = \\dfrac {W_e}{W_e + 2 s_e} \\approx k_1 + \\left(1 - k_1^2\\right)\\cdot \\dfrac{\\Delta}{2s}$ (12.17)"':
+      - 'cell "$\\displaystyle k_e = \\dfrac {W_e}{W_e + 2 s_e} \\approx k_1 + \\left(1 - k_1^2\\right)\\cdot \\dfrac{\\Delta}{2s}$"':
+        - 'img "$\\displaystyle k_e = \\dfrac {W_e}{W_e + 2 s_e} \\approx k_1 + \\left(1 - k_1^2\\right)\\cdot \\dfrac{\\Delta}{2s}$"'
+      - cell "(12.17)"
+- paragraph
+- paragraph: and
+- paragraph
+- table:
+  - rowgroup:
+    - 'row "$\\displaystyle \\varepsilon_{re}^{t} = \\varepsilon_{re} - \\dfrac{0.7\\cdot\\left(\\v... ...} - 1\\right)\\cdot\\dfrac{t}{s}}{\\dfrac{K(k_1)}{K''(k_1)} + 0.7\\cdot \\dfrac{t}{s}}$ (12.18)"':
+      - 'cell "$\\displaystyle \\varepsilon_{re}^{t} = \\varepsilon_{re} - \\dfrac{0.7\\cdot\\left(\\v... ...} - 1\\right)\\cdot\\dfrac{t}{s}}{\\dfrac{K(k_1)}{K''(k_1)} + 0.7\\cdot \\dfrac{t}{s}}$"':
+        - 'img "$\\displaystyle \\varepsilon_{re}^{t} = \\varepsilon_{re} - \\dfrac{0.7\\cdot\\left(\\v... ...} - 1\\right)\\cdot\\dfrac{t}{s}}{\\dfrac{K(k_1)}{K''(k_1)} + 0.7\\cdot \\dfrac{t}{s}}$"'
+      - cell "(12.18)"
+- paragraph
+- paragraph
+- heading "Effects of dispersion" [level=2]
+- paragraph:
+  - text: The effects of dispersion in CPW are similar to those encountered in the microstrip lines, though the net effect on impedance is somewhat different. [
+  - link "39":
+    - /url: node103.html#Gupta1
+  - text: "] gives a closed form expression to compute"
+  - 'img "$ \\varepsilon_{re}(f)$"'
+  - text: "from its quasi-static value:"
+- paragraph
+- table:
+  - rowgroup:
+    - 'row "$\\displaystyle \\sqrt{\\varepsilon_{re}(f)}=\\sqrt{\\varepsilon_{re}(0)} + \\dfrac{\\s... ...r} - \\sqrt{\\varepsilon_{re}(0)}}{1+G\\cdot\\left(\\dfrac{f}{f_{TE}}\\right)^{-1.8}}$ (12.19)"':
+      - 'cell "$\\displaystyle \\sqrt{\\varepsilon_{re}(f)}=\\sqrt{\\varepsilon_{re}(0)} + \\dfrac{\\s... ...r} - \\sqrt{\\varepsilon_{re}(0)}}{1+G\\cdot\\left(\\dfrac{f}{f_{TE}}\\right)^{-1.8}}$"':
+        - 'img "$\\displaystyle \\sqrt{\\varepsilon_{re}(f)}=\\sqrt{\\varepsilon_{re}(0)} + \\dfrac{\\s... ...r} - \\sqrt{\\varepsilon_{re}(0)}}{1+G\\cdot\\left(\\dfrac{f}{f_{TE}}\\right)^{-1.8}}$"'
+      - cell "(12.19)"
+- paragraph
+- paragraph: "where:"
+- paragraph
+- table:
+  - rowgroup:
+    - 'row "$\\displaystyle G$ $\\displaystyle = e^{u\\cdot \\ln\\left(\\tfrac{W}{s}\\right)+v}$ (12.20)"':
+      - cell "$\\displaystyle G$":
+        - img "$\\displaystyle G$"
+      - 'cell "$\\displaystyle = e^{u\\cdot \\ln\\left(\\tfrac{W}{s}\\right)+v}$"':
+        - 'img "$\\displaystyle = e^{u\\cdot \\ln\\left(\\tfrac{W}{s}\\right)+v}$"'
+      - cell "(12.20)"
+    - row "$\\displaystyle u$ $\\displaystyle = 0.54 - 0.64p + 0.015p^2$ (12.21)":
+      - cell "$\\displaystyle u$":
+        - img "$\\displaystyle u$"
+      - cell "$\\displaystyle = 0.54 - 0.64p + 0.015p^2$":
+        - img "$\\displaystyle = 0.54 - 0.64p + 0.015p^2$"
+      - cell "(12.21)"
+    - row "$\\displaystyle v$ $\\displaystyle = 0.43-0.86p+0.54p^2$ (12.22)":
+      - cell "$\\displaystyle v$":
+        - img "$\\displaystyle v$"
+      - cell "$\\displaystyle = 0.43-0.86p+0.54p^2$":
+        - img "$\\displaystyle = 0.43-0.86p+0.54p^2$"
+      - cell "(12.22)"
+    - 'row "$\\displaystyle p$ $\\displaystyle = \\ln\\left(\\tfrac{W}{h}\\right)$ (12.23)"':
+      - cell "$\\displaystyle p$":
+        - img "$\\displaystyle p$"
+      - 'cell "$\\displaystyle = \\ln\\left(\\tfrac{W}{h}\\right)$"':
+        - 'img "$\\displaystyle = \\ln\\left(\\tfrac{W}{h}\\right)$"'
+      - cell "(12.23)"
+- paragraph
+- paragraph:
+  - text: and
+  - 'img "$ f_{TE}$"'
+  - text: is the cut-off frequency of the
+  - 'img "$ {TE}_{0}$"'
+  - text: "mode, defined by:"
+- paragraph
+- table:
+  - rowgroup:
+    - 'row "$\\displaystyle f_{TE} = \\dfrac{c}{4h\\cdot\\sqrt{\\varepsilon_r - 1}}.$ (12.24)"':
+      - 'cell "$\\displaystyle f_{TE} = \\dfrac{c}{4h\\cdot\\sqrt{\\varepsilon_r - 1}}.$"':
+        - 'img "$\\displaystyle f_{TE} = \\dfrac{c}{4h\\cdot\\sqrt{\\varepsilon_r - 1}}.$"'
+      - cell "(12.24)"
+- paragraph
+- paragraph:
+  - text: This dispersion expression was first reported by [
+  - link "50":
+    - /url: node103.html#Frankel
+  - text: "] and has been reused and extended in ["
+  - link "51":
+    - /url: node103.html#Gevorgian
+  - text: "]. The accuracy of this expression is claimed to be better than 5% for"
+  - img "$ 0.1 \\le W/h \\le 5$"
+  - text: ","
+  - img "$ 0.1 \\le W/s \\le 5$"
+  - text: ","
+  - img "$ 1.5 \\le \\varepsilon_r \\le 50$"
+  - text: and
+  - 'img "$ 0 \\le f/f_{TE} \\le 10$"'
+  - text: .
+- paragraph
+- heading "Evaluation of losses" [level=2]
+- paragraph:
+  - text: "As for microstrip lines, the losses in CPW results of at least two factors: a dielectric loss"
+  - img "$ \\alpha_d$"
+  - text: and conductor losses
+  - 'img "$ \\alpha_c^{CW}$"'
+  - text: . The dielectric loss
+  - img "$ \\alpha_d$"
+  - text: is identical to the microstrip case, see eq. (
+  - link "11.79":
+    - /url: node75.html#eq:alpha_d
+  - text: ) on page
+  - link "[*]":
+    - /url: node75.html#eq:alpha_d
+    - img "[*]"
+  - text: .
+- paragraph
+- paragraph:
+  - text: The
+  - 'img "$ \\alpha_c^{CW}$"'
+  - text: "part of the losses is more complex to evaluate. As a general rule, it might be written:"
+- paragraph
+- table:
+  - rowgroup:
+    - 'row "$\\displaystyle \\alpha_c^{CW} = 0.023\\cdot \\dfrac{R_s}{Z_{0cp}}\\left[\\dfrac{\\part... ...W} - \\dfrac{\\partial Z^a_{0cp}}{\\partial t}\\right] \\textrm{ in dB/unit length }$ (12.25)"':
+      - 'cell "$\\displaystyle \\alpha_c^{CW} = 0.023\\cdot \\dfrac{R_s}{Z_{0cp}}\\left[\\dfrac{\\part... ...W} - \\dfrac{\\partial Z^a_{0cp}}{\\partial t}\\right] \\textrm{ in dB/unit length }$"':
+        - 'img "$\\displaystyle \\alpha_c^{CW} = 0.023\\cdot \\dfrac{R_s}{Z_{0cp}}\\left[\\dfrac{\\part... ...W} - \\dfrac{\\partial Z^a_{0cp}}{\\partial t}\\right] \\textrm{ in dB/unit length }$"'
+      - cell "(12.25)"
+- paragraph
+- paragraph:
+  - text: where
+  - 'img "$ Z^a_{0cp}$"'
+  - text: stands for the impedance of the coplanar waveguide with air as dielectric and
+  - img "$ R_s$"
+  - text: is the surface resistivity of the conductors (see eq. (
+  - link "11.81":
+    - /url: node75.html#eq:HandJRs
+  - text: ) on page
+  - link "[*]":
+    - /url: node75.html#eq:HandJRs
+    - img "[*]"
+  - text: ).
+- paragraph
+- paragraph:
+  - text: Through a direct approach evaluating the losses by conformal mapping of the current density, one obtains [
+  - link "39":
+    - /url: node103.html#Gupta1
+  - text: "], first reported in ["
+  - link "52":
+    - /url: node103.html#Owyang
+  - text: "] and finally applied to coplanar lines by ["
+  - link "53":
+    - /url: node103.html#Ghione1
+  - text: "]:"
+- paragraph
+- table:
+  - rowgroup:
+    - 'row "\\begin{displaymath}\\begin{split}\\alpha_c^{CW} = &\\; \\dfrac{R_s\\cdot \\sqrt{\\varep... ...k_1\\right)}{t\\cdot\\left(1+k_1\\right)}\\right]\\right) \\end{split}\\end{displaymath} (12.26)"':
+      - 'cell "\\begin{displaymath}\\begin{split}\\alpha_c^{CW} = &\\; \\dfrac{R_s\\cdot \\sqrt{\\varep... ...k_1\\right)}{t\\cdot\\left(1+k_1\\right)}\\right]\\right) \\end{split}\\end{displaymath}"':
+        - 'img "\\begin{displaymath}\\begin{split}\\alpha_c^{CW} = &\\; \\dfrac{R_s\\cdot \\sqrt{\\varep... ...k_1\\right)}{t\\cdot\\left(1+k_1\\right)}\\right]\\right) \\end{split}\\end{displaymath}"'
+      - cell "(12.26)"
+- paragraph
+- paragraph:
+  - text: In the formula above,
+  - img "$ a = W/2, b = s + W/2$"
+  - text: and it is assumed that
+  - img "$ t~>~3 \\delta, t \\ll W$"
+  - text: and
+  - img "$ t \\ll s$"
+  - text: .
+- paragraph
+- heading "S- and Y-parameters of the single coplanar line" [level=2]
+- paragraph:
+  - text: The computation of the coplanar waveguide lines S- and Y-parameters is equal to all transmission lines (see section section
+  - link "9.20":
+    - /url: node61.html#sec:tl_yparameter
+  - text: on page
+  - link "[*]":
+    - /url: node61.html#sec:tl_yparameter
+    - img "[*]"
+  - text: ).
+- paragraph
+- separator
+- text: "Next:"
+- link "Coplanar waveguide open":
+  - /url: node87.html
+- text: "Up:"
+- link "Coplanar components":
+  - /url: node85.html
+- text: "Previous:"
+- link "Coplanar components":
+  - /url: node85.html
+- text: This document was generated by Stefan Jahn on 2007-12-30 using
+- link "latex2html":
+  - /url: http://www.latex2html.org
+- text: .

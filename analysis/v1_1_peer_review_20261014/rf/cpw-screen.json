@@ -1,0 +1,431 @@
+{
+  "status": "conditional design screen; not manufacturer-qualified impedance",
+  "source_urls": [
+    "https://qucs.sourceforge.net/tech/node86.html",
+    "https://scikit-rf.readthedocs.io/en/latest/_modules/skrf/media/cpw.html"
+  ],
+  "nominal": {
+    "core_mm": 0.31,
+    "cad_declared_er": 4.5,
+    "copper_mm": 0.035
+  },
+  "rows": [
+    {
+      "width_mm": 0.3,
+      "gap_mm": 0.15,
+      "zero_thickness_ohm": 61.49323132509128,
+      "first_order_35um_ohm": 58.55866840322792
+    },
+    {
+      "width_mm": 0.3,
+      "gap_mm": 0.2,
+      "zero_thickness_ohm": 64.50477539430221,
+      "first_order_35um_ohm": 62.40394261906597
+    },
+    {
+      "width_mm": 0.3,
+      "gap_mm": 0.25,
+      "zero_thickness_ohm": 66.59153766258974,
+      "first_order_35um_ohm": 64.92345812601778
+    },
+    {
+      "width_mm": 0.3,
+      "gap_mm": 0.3,
+      "zero_thickness_ohm": 68.10292152562646,
+      "first_order_35um_ohm": 66.69889963248706
+    },
+    {
+      "width_mm": 0.4,
+      "gap_mm": 0.15,
+      "zero_thickness_ohm": 53.85232552865048,
+      "first_order_35um_ohm": 51.34817815427252
+    },
+    {
+      "width_mm": 0.4,
+      "gap_mm": 0.2,
+      "zero_thickness_ohm": 56.25997127161619,
+      "first_order_35um_ohm": 54.56363449608262
+    },
+    {
+      "width_mm": 0.4,
+      "gap_mm": 0.25,
+      "zero_thickness_ohm": 57.93328436047871,
+      "first_order_35um_ohm": 56.646936661862945
+    },
+    {
+      "width_mm": 0.4,
+      "gap_mm": 0.3,
+      "zero_thickness_ohm": 59.15168239282302,
+      "first_order_35um_ohm": 58.11184486069476
+    },
+    {
+      "width_mm": 0.45,
+      "gap_mm": 0.15,
+      "zero_thickness_ohm": 50.81038776008012,
+      "first_order_35um_ohm": 48.48262620439063
+    },
+    {
+      "width_mm": 0.45,
+      "gap_mm": 0.2,
+      "zero_thickness_ohm": 52.984813551114456,
+      "first_order_35um_ohm": 51.444330709890316
+    },
+    {
+      "width_mm": 0.45,
+      "gap_mm": 0.25,
+      "zero_thickness_ohm": 54.49762409684575,
+      "first_order_35um_ohm": 53.352194787873366
+    },
+    {
+      "width_mm": 0.45,
+      "gap_mm": 0.3,
+      "zero_thickness_ohm": 55.60148032116874,
+      "first_order_35um_ohm": 54.691880871765605
+    },
+    {
+      "width_mm": 0.5,
+      "gap_mm": 0.15,
+      "zero_thickness_ohm": 48.138387007669,
+      "first_order_35um_ohm": 45.967981802312025
+    },
+    {
+      "width_mm": 0.5,
+      "gap_mm": 0.2,
+      "zero_thickness_ohm": 50.113351190103515,
+      "first_order_35um_ohm": 48.70744512491765
+    },
+    {
+      "width_mm": 0.5,
+      "gap_mm": 0.25,
+      "zero_thickness_ohm": 51.48854612789215,
+      "first_order_35um_ohm": 50.461982817193075
+    },
+    {
+      "width_mm": 0.5,
+      "gap_mm": 0.3,
+      "zero_thickness_ohm": 52.493821049312736,
+      "first_order_35um_ohm": 51.692124518494026
+    },
+    {
+      "width_mm": 0.6,
+      "gap_mm": 0.15,
+      "zero_thickness_ohm": 43.639558910075245,
+      "first_order_35um_ohm": 41.738543607522466
+    },
+    {
+      "width_mm": 0.6,
+      "gap_mm": 0.2,
+      "zero_thickness_ohm": 45.29289931197959,
+      "first_order_35um_ohm": 44.10832432004987
+    },
+    {
+      "width_mm": 0.6,
+      "gap_mm": 0.25,
+      "zero_thickness_ohm": 46.44555262699255,
+      "first_order_35um_ohm": 45.60881755052418
+    },
+    {
+      "width_mm": 0.6,
+      "gap_mm": 0.3,
+      "zero_thickness_ohm": 47.290659912407854,
+      "first_order_35um_ohm": 46.657343553726484
+    },
+    {
+      "width_mm": 0.75,
+      "gap_mm": 0.15,
+      "zero_thickness_ohm": 38.386571210608615,
+      "first_order_35um_ohm": 36.804664422805196
+    },
+    {
+      "width_mm": 0.75,
+      "gap_mm": 0.2,
+      "zero_thickness_ohm": 39.691475037008786,
+      "first_order_35um_ohm": 38.75548138110232
+    },
+    {
+      "width_mm": 0.75,
+      "gap_mm": 0.25,
+      "zero_thickness_ohm": 40.6021941954157,
+      "first_order_35um_ohm": 39.97028952731636
+    },
+    {
+      "width_mm": 0.75,
+      "gap_mm": 0.3,
+      "zero_thickness_ohm": 41.27209582228978,
+      "first_order_35um_ohm": 40.81464715502421
+    }
+  ],
+  "sensitivity": {
+    "nominal_width_mm": 0.45,
+    "nominal_gap_mm": 0.15,
+    "ranges_are_assumed_not_supplier_tolerances": true,
+    "minimum_ohm": 41.111426448893326,
+    "maximum_ohm": 56.38853783895071,
+    "corners": [
+      {
+        "width_mm": 0.425,
+        "gap_mm": 0.125,
+        "core_mm": 0.279,
+        "er": 4.0,
+        "copper_mm": 0.025,
+        "impedance_ohm": 49.36716727208533
+      },
+      {
+        "width_mm": 0.425,
+        "gap_mm": 0.125,
+        "core_mm": 0.279,
+        "er": 4.0,
+        "copper_mm": 0.045,
+        "impedance_ohm": 46.86496077675997
+      },
+      {
+        "width_mm": 0.425,
+        "gap_mm": 0.125,
+        "core_mm": 0.279,
+        "er": 4.8,
+        "copper_mm": 0.025,
+        "impedance_ohm": 45.81477793110873
+      },
+      {
+        "width_mm": 0.425,
+        "gap_mm": 0.125,
+        "core_mm": 0.279,
+        "er": 4.8,
+        "copper_mm": 0.045,
+        "impedance_ohm": 43.615544985395495
+      },
+      {
+        "width_mm": 0.425,
+        "gap_mm": 0.125,
+        "core_mm": 0.341,
+        "er": 4.0,
+        "copper_mm": 0.025,
+        "impedance_ohm": 52.28677112575644
+      },
+      {
+        "width_mm": 0.425,
+        "gap_mm": 0.125,
+        "core_mm": 0.341,
+        "er": 4.0,
+        "copper_mm": 0.045,
+        "impedance_ohm": 49.429379249505644
+      },
+      {
+        "width_mm": 0.425,
+        "gap_mm": 0.125,
+        "core_mm": 0.341,
+        "er": 4.8,
+        "copper_mm": 0.025,
+        "impedance_ohm": 48.57417656556022
+      },
+      {
+        "width_mm": 0.425,
+        "gap_mm": 0.125,
+        "core_mm": 0.341,
+        "er": 4.8,
+        "copper_mm": 0.045,
+        "impedance_ohm": 46.05057014183555
+      },
+      {
+        "width_mm": 0.425,
+        "gap_mm": 0.175,
+        "core_mm": 0.279,
+        "er": 4.0,
+        "copper_mm": 0.025,
+        "impedance_ohm": 52.75196568242593
+      },
+      {
+        "width_mm": 0.425,
+        "gap_mm": 0.175,
+        "core_mm": 0.279,
+        "er": 4.0,
+        "copper_mm": 0.045,
+        "impedance_ohm": 51.608636751451144
+      },
+      {
+        "width_mm": 0.425,
+        "gap_mm": 0.175,
+        "core_mm": 0.279,
+        "er": 4.8,
+        "copper_mm": 0.025,
+        "impedance_ohm": 48.88356292053248
+      },
+      {
+        "width_mm": 0.425,
+        "gap_mm": 0.175,
+        "core_mm": 0.279,
+        "er": 4.8,
+        "copper_mm": 0.045,
+        "impedance_ohm": 47.932601193228194
+      },
+      {
+        "width_mm": 0.425,
+        "gap_mm": 0.175,
+        "core_mm": 0.341,
+        "er": 4.0,
+        "copper_mm": 0.025,
+        "impedance_ohm": 56.38853783895071
+      },
+      {
+        "width_mm": 0.425,
+        "gap_mm": 0.175,
+        "core_mm": 0.341,
+        "er": 4.0,
+        "copper_mm": 0.045,
+        "impedance_ohm": 55.00317722758477
+      },
+      {
+        "width_mm": 0.425,
+        "gap_mm": 0.175,
+        "core_mm": 0.341,
+        "er": 4.8,
+        "copper_mm": 0.025,
+        "impedance_ohm": 52.310714235700424
+      },
+      {
+        "width_mm": 0.425,
+        "gap_mm": 0.175,
+        "core_mm": 0.341,
+        "er": 4.8,
+        "copper_mm": 0.045,
+        "impedance_ohm": 51.142545364551474
+      },
+      {
+        "width_mm": 0.475,
+        "gap_mm": 0.125,
+        "core_mm": 0.279,
+        "er": 4.0,
+        "copper_mm": 0.025,
+        "impedance_ohm": 46.67073028412531
+      },
+      {
+        "width_mm": 0.475,
+        "gap_mm": 0.125,
+        "core_mm": 0.279,
+        "er": 4.0,
+        "copper_mm": 0.045,
+        "impedance_ohm": 44.20104952010286
+      },
+      {
+        "width_mm": 0.475,
+        "gap_mm": 0.125,
+        "core_mm": 0.279,
+        "er": 4.8,
+        "copper_mm": 0.025,
+        "impedance_ohm": 43.289795970197204
+      },
+      {
+        "width_mm": 0.475,
+        "gap_mm": 0.125,
+        "core_mm": 0.279,
+        "er": 4.8,
+        "copper_mm": 0.045,
+        "impedance_ohm": 41.111426448893326
+      },
+      {
+        "width_mm": 0.475,
+        "gap_mm": 0.125,
+        "core_mm": 0.341,
+        "er": 4.0,
+        "copper_mm": 0.025,
+        "impedance_ohm": 49.672267850959344
+      },
+      {
+        "width_mm": 0.475,
+        "gap_mm": 0.125,
+        "core_mm": 0.341,
+        "er": 4.0,
+        "copper_mm": 0.045,
+        "impedance_ohm": 46.82659853798086
+      },
+      {
+        "width_mm": 0.475,
+        "gap_mm": 0.125,
+        "core_mm": 0.341,
+        "er": 4.8,
+        "copper_mm": 0.025,
+        "impedance_ohm": 46.123532105460534
+      },
+      {
+        "width_mm": 0.475,
+        "gap_mm": 0.125,
+        "core_mm": 0.341,
+        "er": 4.8,
+        "copper_mm": 0.045,
+        "impedance_ohm": 43.601499258100596
+      },
+      {
+        "width_mm": 0.475,
+        "gap_mm": 0.175,
+        "core_mm": 0.279,
+        "er": 4.0,
+        "copper_mm": 0.025,
+        "impedance_ohm": 49.76699694025417
+      },
+      {
+        "width_mm": 0.475,
+        "gap_mm": 0.175,
+        "core_mm": 0.279,
+        "er": 4.0,
+        "copper_mm": 0.045,
+        "impedance_ohm": 48.679506517692076
+      },
+      {
+        "width_mm": 0.475,
+        "gap_mm": 0.175,
+        "core_mm": 0.279,
+        "er": 4.8,
+        "copper_mm": 0.025,
+        "impedance_ohm": 46.0947447719264
+      },
+      {
+        "width_mm": 0.475,
+        "gap_mm": 0.175,
+        "core_mm": 0.279,
+        "er": 4.8,
+        "copper_mm": 0.045,
+        "impedance_ohm": 45.186545839290844
+      },
+      {
+        "width_mm": 0.475,
+        "gap_mm": 0.175,
+        "core_mm": 0.341,
+        "er": 4.0,
+        "copper_mm": 0.025,
+        "impedance_ohm": 53.4591857415978
+      },
+      {
+        "width_mm": 0.475,
+        "gap_mm": 0.175,
+        "core_mm": 0.341,
+        "er": 4.0,
+        "copper_mm": 0.045,
+        "impedance_ohm": 52.126126236556615
+      },
+      {
+        "width_mm": 0.475,
+        "gap_mm": 0.175,
+        "core_mm": 0.341,
+        "er": 4.8,
+        "copper_mm": 0.025,
+        "impedance_ohm": 49.57066391460581
+      },
+      {
+        "width_mm": 0.475,
+        "gap_mm": 0.175,
+        "core_mm": 0.341,
+        "er": 4.8,
+        "copper_mm": 0.045,
+        "impedance_ohm": 48.44194924597251
+      }
+    ]
+  },
+  "limitations": [
+    "Infinite coplanar grounds and continuous opposite plane assumed.",
+    "Finite conductor correction is first order; the source itself qualifies retaining k3 unchanged.",
+    "No solder-mask dielectric, copper roughness, dispersion, loss or pad/via/ESD discontinuity model.",
+    "No real stackup tolerance or laminate permittivity has been qualified.",
+    "Does not predict antenna match, module noise, coupling or C/N0.",
+    "Cannot assign a uniform impedance to the existing interrupted-reference feed."
+  ]
+}

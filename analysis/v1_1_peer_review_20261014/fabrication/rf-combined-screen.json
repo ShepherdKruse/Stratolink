@@ -1,0 +1,102 @@
+{
+  "source_sha256": "af8b32d61756642c1f63b12c7220c10bc17c62dec1fed5c53bf5796f92ab08ec",
+  "layers": {
+    "F.Cu": {
+      "copper_component_count": 149,
+      "acute_gap_candidates": [
+        {
+          "at_mm": [
+            59.887001,
+            45.381197
+          ],
+          "gap_angle_deg": 44.99999999999952,
+          "edge_support_mm": [
+            0.13280400000000014,
+            0.6015908930843273
+          ]
+        }
+      ],
+      "sharp_tip_candidates": [],
+      "small_enclosed_gap_candidates": [],
+      "tiny_copper_components": []
+    },
+    "B.Cu": {
+      "copper_component_count": 73,
+      "acute_gap_candidates": [
+        {
+          "at_mm": [
+            64.19244,
+            33.064081
+          ],
+          "gap_angle_deg": 45.12760785151144,
+          "edge_support_mm": [
+            0.12386730526656756,
+            0.10019066693558941
+          ]
+        },
+        {
+          "at_mm": [
+            63.068446,
+            43.649
+          ],
+          "gap_angle_deg": 45.0,
+          "edge_support_mm": [
+            0.09931031899052387,
+            3.343446
+          ]
+        },
+        {
+          "at_mm": [
+            69.737142,
+            47.957
+          ],
+          "gap_angle_deg": 41.816850635555994,
+          "edge_support_mm": [
+            0.6276339592031356,
+            0.8121420000000086
+          ]
+        },
+        {
+          "at_mm": [
+            69.925,
+            48.12438
+          ],
+          "gap_angle_deg": 48.18298803970532,
+          "edge_support_mm": [
+            0.3326199999999986,
+            0.4988648105940091
+          ]
+        },
+        {
+          "at_mm": [
+            69.553207,
+            48.457
+          ],
+          "gap_angle_deg": 41.81701196029468,
+          "edge_support_mm": [
+            0.4988648105940091,
+            0.3717929999999967
+          ]
+        }
+      ],
+      "sharp_tip_candidates": [],
+      "small_enclosed_gap_candidates": [
+        {
+          "area_mm2": 0.0070373746394998445,
+          "maximum_inscribed_diameter_mm": 0.07145733550217684,
+          "bounds_mm": [
+            64.192165,
+            32.940214,
+            64.285203,
+            33.064081
+          ],
+          "at_mm": [
+            64.21011217884303,
+            33.028658500000006
+          ]
+        }
+      ],
+      "tiny_copper_components": []
+    }
+  }
+}

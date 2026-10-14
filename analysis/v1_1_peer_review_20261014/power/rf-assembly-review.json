@@ -1,0 +1,1001 @@
+{
+  "source_sha256": "8df85b3e4bdd546ec174bb9d7b9ee9d795d55d486a68e1e853aaf1b871f863d3",
+  "C5_center_mm": [
+    66.675,
+    64.707
+  ],
+  "C5_max_case_bounds_mm": [
+    59.425,
+    49.456999999999994,
+    73.925,
+    79.957
+  ],
+  "C5_case_inside_board": true,
+  "C5_case_to_outline_mm": 0.7479289999999992,
+  "C5_case_to_rear_pads": [
+    {
+      "ref": "J4",
+      "pin": "1",
+      "net": "GND",
+      "max_case_gap_mm": 0.8860000000000099,
+      "projected_overlap_mm2": 0.0
+    },
+    {
+      "ref": "J4",
+      "pin": "2",
+      "net": "VSTOR",
+      "max_case_gap_mm": 0.8860000000000099,
+      "projected_overlap_mm2": 0.0
+    },
+    {
+      "ref": "J4",
+      "pin": "3",
+      "net": "GND",
+      "max_case_gap_mm": 0.8860000000000099,
+      "projected_overlap_mm2": 0.0
+    },
+    {
+      "ref": "J4",
+      "pin": "4",
+      "net": "TX",
+      "max_case_gap_mm": 0.8860000000000099,
+      "projected_overlap_mm2": 0.0
+    },
+    {
+      "ref": "J4",
+      "pin": "5",
+      "net": "RX",
+      "max_case_gap_mm": 0.8860000000000099,
+      "projected_overlap_mm2": 0.0
+    },
+    {
+      "ref": "J4",
+      "pin": "6",
+      "net": "BOOT0",
+      "max_case_gap_mm": 0.8860000000000099,
+      "projected_overlap_mm2": 0.0
+    },
+    {
+      "ref": "J4",
+      "pin": "7",
+      "net": "+3.3V",
+      "max_case_gap_mm": 0.8860000000000099,
+      "projected_overlap_mm2": 0.0
+    },
+    {
+      "ref": "J1",
+      "pin": "2",
+      "net": "GND",
+      "max_case_gap_mm": 0.45050000000000523,
+      "projected_overlap_mm2": 0.0
+    }
+  ],
+  "C5_max_case_to_lower_AE1_courtyard_y_mm": 1.4960000000000093,
+  "AE2_origin_mm": [
+    55.3,
+    47.85
+  ],
+  "AE2_hole_diameter_mm": 1,
+  "AE2_land_diameter_mm": 1.5,
+  "AE2_annular_ring_mm": 0.25,
+  "AE2_hole_edge_to_outline_ligament_mm": 1.4833618283019543,
+  "AE2_land_to_outline_mm": 1.2333610006997318,
+  "AE2_solder_screen": [
+    {
+      "ref": "C10",
+      "pin": "1",
+      "land_to_AE2_land_mm": 1.9460007185949137,
+      "assumed_R1p25_solder_envelope_gap_mm": 1.4460008403421614
+    },
+    {
+      "ref": "C10",
+      "pin": "2",
+      "land_to_AE2_land_mm": 2.0919279539729247,
+      "assumed_R1p25_solder_envelope_gap_mm": 1.5922581040449177
+    },
+    {
+      "ref": "D3",
+      "pin": "1",
+      "land_to_AE2_land_mm": 3.278150335960813,
+      "assumed_R1p25_solder_envelope_gap_mm": 2.779052832491156
+    },
+    {
+      "ref": "D3",
+      "pin": "2",
+      "land_to_AE2_land_mm": 2.2689321828371147,
+      "assumed_R1p25_solder_envelope_gap_mm": 1.7695495609890237
+    },
+    {
+      "ref": "FB1",
+      "pin": "1",
+      "land_to_AE2_land_mm": 1.6765395588676124,
+      "assumed_R1p25_solder_envelope_gap_mm": 1.1769494139781753
+    },
+    {
+      "ref": "FB1",
+      "pin": "2",
+      "land_to_AE2_land_mm": 2.587789412085149,
+      "assumed_R1p25_solder_envelope_gap_mm": 2.0881549297126716
+    }
+  ],
+  "GNSS_wire_nominal_centerline_start_mm": [
+    55.3,
+    47.65,
+    0.45
+  ],
+  "GNSS_wire_nominal_centerline_end_mm": [
+    7.299999999999997,
+    47.65,
+    0.45
+  ],
+  "GNSS_wire_model_radius_mm": 0.1605,
+  "GNSS_wire_model_to_board_top_z_mm": 0.08949999999999997,
+  "GNSS_wire_to_solar_assembly_y_lower_bound_mm": 5.489499999999999,
+  "GNSS_wire_to_upward_bridle_y_lower_bound_mm": 15.744499999999997,
+  "solar_mesh_parts": [
+    {
+      "ref": "J2",
+      "name": "polymer laminate",
+      "bounds": [
+        -33.691115106180526,
+        54.028,
+        -37.5,
+        54.8165,
+        80.36394884340318,
+        37.5
+      ],
+      "wire_y_gap_lower_bound_mm": 6.2175
+    },
+    {
+      "ref": "J2",
+      "name": "cosmetic cell finger 1",
+      "bounds": [
+        -29.583056927576187,
+        54.013,
+        -36.7,
+        49.8165,
+        77.35105792310593,
+        -33.15
+      ],
+      "wire_y_gap_lower_bound_mm": 6.2025
+    },
+    {
+      "ref": "J2",
+      "name": "cosmetic cell finger 2",
+      "bounds": [
+        -29.583056927576187,
+        54.013,
+        -33.03,
+        49.8165,
+        77.35105792310593,
+        -29.48
+      ],
+      "wire_y_gap_lower_bound_mm": 6.2025
+    },
+    {
+      "ref": "J2",
+      "name": "cosmetic cell finger 3",
+      "bounds": [
+        -29.583056927576187,
+        54.013,
+        -29.360000000000003,
+        49.8165,
+        77.35105792310593,
+        -25.810000000000002
+      ],
+      "wire_y_gap_lower_bound_mm": 6.2025
+    },
+    {
+      "ref": "J2",
+      "name": "cosmetic cell finger 4",
+      "bounds": [
+        -29.583056927576187,
+        54.013,
+        -25.69,
+        49.8165,
+        77.35105792310593,
+        -22.14
+      ],
+      "wire_y_gap_lower_bound_mm": 6.2025
+    },
+    {
+      "ref": "J2",
+      "name": "cosmetic cell finger 5",
+      "bounds": [
+        -29.583056927576187,
+        54.013,
+        -22.020000000000003,
+        49.8165,
+        77.35105792310593,
+        -18.75
+      ],
+      "wire_y_gap_lower_bound_mm": 6.2025
+    },
+    {
+      "ref": "J2",
+      "name": "cosmetic cell finger 6",
+      "bounds": [
+        -29.583056927576187,
+        54.013,
+        -18.35,
+        49.8165,
+        77.35105792310593,
+        -14.8
+      ],
+      "wire_y_gap_lower_bound_mm": 6.2025
+    },
+    {
+      "ref": "J2",
+      "name": "cosmetic cell finger 7",
+      "bounds": [
+        -29.583056927576187,
+        54.013,
+        -14.68,
+        49.8165,
+        77.35105792310593,
+        -11.129999999999999
+      ],
+      "wire_y_gap_lower_bound_mm": 6.2025
+    },
+    {
+      "ref": "J2",
+      "name": "cosmetic cell finger 8",
+      "bounds": [
+        -29.583056927576187,
+        54.013,
+        -11.009999999999998,
+        49.8165,
+        77.35105792310593,
+        -7.459999999999998
+      ],
+      "wire_y_gap_lower_bound_mm": 6.2025
+    },
+    {
+      "ref": "J2",
+      "name": "cosmetic cell finger 9",
+      "bounds": [
+        -29.583056927576187,
+        54.013,
+        -7.34,
+        49.8165,
+        77.35105792310593,
+        -3.7899999999999996
+      ],
+      "wire_y_gap_lower_bound_mm": 6.2025
+    },
+    {
+      "ref": "J2",
+      "name": "cosmetic cell finger 10",
+      "bounds": [
+        -29.583056927576187,
+        54.013,
+        -3.6700000000000017,
+        49.8165,
+        77.35105792310593,
+        -0.40000000000000135
+      ],
+      "wire_y_gap_lower_bound_mm": 6.2025
+    },
+    {
+      "ref": "J2",
+      "name": "cosmetic cell finger 11",
+      "bounds": [
+        -29.583056927576187,
+        54.013,
+        0.0,
+        49.8165,
+        77.35105792310593,
+        3.5500000000000003
+      ],
+      "wire_y_gap_lower_bound_mm": 6.2025
+    },
+    {
+      "ref": "J2",
+      "name": "cosmetic cell finger 12",
+      "bounds": [
+        -29.583056927576187,
+        54.013,
+        3.6700000000000017,
+        49.8165,
+        77.35105792310593,
+        7.2200000000000015
+      ],
+      "wire_y_gap_lower_bound_mm": 6.2025
+    },
+    {
+      "ref": "J2",
+      "name": "cosmetic cell finger 13",
+      "bounds": [
+        -29.583056927576187,
+        54.013,
+        7.340000000000003,
+        49.8165,
+        77.35105792310593,
+        10.890000000000004
+      ],
+      "wire_y_gap_lower_bound_mm": 6.2025
+    },
+    {
+      "ref": "J2",
+      "name": "cosmetic cell finger 14",
+      "bounds": [
+        -29.583056927576187,
+        54.013,
+        11.009999999999998,
+        49.8165,
+        77.35105792310593,
+        14.559999999999999
+      ],
+      "wire_y_gap_lower_bound_mm": 6.2025
+    },
+    {
+      "ref": "J2",
+      "name": "cosmetic cell finger 15",
+      "bounds": [
+        -29.583056927576187,
+        54.013,
+        14.680000000000007,
+        49.8165,
+        77.35105792310593,
+        17.95000000000001
+      ],
+      "wire_y_gap_lower_bound_mm": 6.2025
+    },
+    {
+      "ref": "J2",
+      "name": "cosmetic cell finger 16",
+      "bounds": [
+        -29.583056927576187,
+        54.013,
+        18.349999999999994,
+        49.8165,
+        77.35105792310593,
+        21.899999999999995
+      ],
+      "wire_y_gap_lower_bound_mm": 6.2025
+    },
+    {
+      "ref": "J2",
+      "name": "cosmetic cell finger 17",
+      "bounds": [
+        -29.583056927576187,
+        54.013,
+        22.020000000000003,
+        49.8165,
+        77.35105792310593,
+        25.570000000000004
+      ],
+      "wire_y_gap_lower_bound_mm": 6.2025
+    },
+    {
+      "ref": "J2",
+      "name": "cosmetic cell finger 18",
+      "bounds": [
+        -29.583056927576187,
+        54.013,
+        25.690000000000005,
+        49.8165,
+        77.35105792310593,
+        29.240000000000006
+      ],
+      "wire_y_gap_lower_bound_mm": 6.2025
+    },
+    {
+      "ref": "J2",
+      "name": "cosmetic cell finger 19",
+      "bounds": [
+        -29.583056927576187,
+        54.013,
+        29.36,
+        49.8165,
+        77.35105792310593,
+        32.910000000000004
+      ],
+      "wire_y_gap_lower_bound_mm": 6.2025
+    },
+    {
+      "ref": "J2",
+      "name": "cosmetic cell finger 20",
+      "bounds": [
+        -29.583056927576187,
+        54.013,
+        33.03,
+        49.8165,
+        77.35105792310593,
+        36.300000000000004
+      ],
+      "wire_y_gap_lower_bound_mm": 6.2025
+    },
+    {
+      "ref": "J2",
+      "name": "inner NEGATIVE terminal",
+      "bounds": [
+        49.8165,
+        54.0,
+        -37.5,
+        54.8165,
+        54.0,
+        37.5
+      ],
+      "wire_y_gap_lower_bound_mm": 6.189500000000002
+    },
+    {
+      "ref": "J2",
+      "name": "outer POSITIVE terminal",
+      "bounds": [
+        -33.70741662920177,
+        77.34022479631952,
+        -37.5,
+        -29.590243259326776,
+        80.17857399602332,
+        37.5
+      ],
+      "wire_y_gap_lower_bound_mm": 29.52972479631952
+    },
+    {
+      "ref": "J2",
+      "name": "polarity minus",
+      "bounds": [
+        52.9865,
+        53.818,
+        8.0,
+        53.2465,
+        54.078,
+        10.0
+      ],
+      "wire_y_gap_lower_bound_mm": 6.007499999999999
+    },
+    {
+      "ref": "J2",
+      "name": "polarity minus",
+      "bounds": [
+        -32.64276497147332,
+        79.13905442649437,
+        8.0,
+        -32.38276497147333,
+        79.39905442649437,
+        10.0
+      ],
+      "wire_y_gap_lower_bound_mm": 31.32855442649437
+    },
+    {
+      "ref": "J2",
+      "name": "polarity plus",
+      "bounds": [
+        -33.40496440904307,
+        78.59170533285373,
+        8.87,
+        -31.616467119442554,
+        79.95225854348467,
+        9.13
+      ],
+      "wire_y_gap_lower_bound_mm": 30.781205332853737
+    },
+    {
+      "ref": "J2",
+      "name": "ground solder fillet rear",
+      "bounds": [
+        53.5665,
+        53.3,
+        -0.8,
+        54.7665,
+        54.0,
+        -0.2
+      ],
+      "wire_y_gap_lower_bound_mm": 5.489499999999999
+    },
+    {
+      "ref": "J2",
+      "name": "ground solder fillet front",
+      "bounds": [
+        53.5665,
+        53.3,
+        0.2,
+        54.7665,
+        54.0,
+        0.8
+      ],
+      "wire_y_gap_lower_bound_mm": 5.489499999999999
+    },
+    {
+      "ref": "J2",
+      "name": "positive copper lead",
+      "bounds": [
+        -35.27533671858226,
+        78.29657234499292,
+        -0.8,
+        55.05,
+        85.25,
+        1.2499838962602534
+      ],
+      "wire_y_gap_lower_bound_mm": 30.486072344992927
+    },
+    {
+      "ref": "J2",
+      "name": "positive red insulation",
+      "bounds": [
+        -33.927866596895605,
+        81.24556824957486,
+        -0.349977186977906,
+        54.86258772091034,
+        85.35,
+        1.3499774547643546
+      ],
+      "wire_y_gap_lower_bound_mm": 33.43506824957486
+    },
+    {
+      "ref": "J2",
+      "name": "panel positive solder",
+      "bounds": [
+        -32.227236738814305,
+        78.10061104708356,
+        -0.65,
+        -31.427236738814294,
+        78.90061104708356,
+        0.65
+      ],
+      "wire_y_gap_lower_bound_mm": 30.290111047083563
+    },
+    {
+      "ref": "J2",
+      "name": "positive PTH solder",
+      "bounds": [
+        54.22,
+        84.42,
+        -0.43000000000000005,
+        55.379229556267546,
+        85.58,
+        -0.10999999999999999
+      ],
+      "wire_y_gap_lower_bound_mm": 36.609500000000004
+    },
+    {
+      "ref": "J2",
+      "name": "positive PTH solder",
+      "bounds": [
+        54.22,
+        84.42,
+        0.10999999999999999,
+        55.379229556267546,
+        85.58,
+        0.43000000000000005
+      ],
+      "wire_y_gap_lower_bound_mm": 36.609500000000004
+    },
+    {
+      "ref": "J1",
+      "name": "polymer laminate",
+      "bounds": [
+        75.1755,
+        54.028,
+        -37.5,
+        163.68311510618054,
+        80.36394884340318,
+        37.5
+      ],
+      "wire_y_gap_lower_bound_mm": 6.2175
+    },
+    {
+      "ref": "J1",
+      "name": "cosmetic cell finger 1",
+      "bounds": [
+        80.1755,
+        54.013,
+        -36.7,
+        159.57505692757618,
+        77.35105792310593,
+        -33.15
+      ],
+      "wire_y_gap_lower_bound_mm": 6.2025
+    },
+    {
+      "ref": "J1",
+      "name": "cosmetic cell finger 2",
+      "bounds": [
+        80.1755,
+        54.013,
+        -33.03,
+        159.57505692757618,
+        77.35105792310593,
+        -29.48
+      ],
+      "wire_y_gap_lower_bound_mm": 6.2025
+    },
+    {
+      "ref": "J1",
+      "name": "cosmetic cell finger 3",
+      "bounds": [
+        80.1755,
+        54.013,
+        -29.360000000000003,
+        159.57505692757618,
+        77.35105792310593,
+        -25.810000000000002
+      ],
+      "wire_y_gap_lower_bound_mm": 6.2025
+    },
+    {
+      "ref": "J1",
+      "name": "cosmetic cell finger 4",
+      "bounds": [
+        80.1755,
+        54.013,
+        -25.69,
+        159.57505692757618,
+        77.35105792310593,
+        -22.14
+      ],
+      "wire_y_gap_lower_bound_mm": 6.2025
+    },
+    {
+      "ref": "J1",
+      "name": "cosmetic cell finger 5",
+      "bounds": [
+        80.1755,
+        54.013,
+        -22.020000000000003,
+        159.57505692757618,
+        77.35105792310593,
+        -18.75
+      ],
+      "wire_y_gap_lower_bound_mm": 6.2025
+    },
+    {
+      "ref": "J1",
+      "name": "cosmetic cell finger 6",
+      "bounds": [
+        80.1755,
+        54.013,
+        -18.35,
+        159.57505692757618,
+        77.35105792310593,
+        -14.8
+      ],
+      "wire_y_gap_lower_bound_mm": 6.2025
+    },
+    {
+      "ref": "J1",
+      "name": "cosmetic cell finger 7",
+      "bounds": [
+        80.1755,
+        54.013,
+        -14.68,
+        159.57505692757618,
+        77.35105792310593,
+        -11.129999999999999
+      ],
+      "wire_y_gap_lower_bound_mm": 6.2025
+    },
+    {
+      "ref": "J1",
+      "name": "cosmetic cell finger 8",
+      "bounds": [
+        80.1755,
+        54.013,
+        -11.009999999999998,
+        159.57505692757618,
+        77.35105792310593,
+        -7.459999999999998
+      ],
+      "wire_y_gap_lower_bound_mm": 6.2025
+    },
+    {
+      "ref": "J1",
+      "name": "cosmetic cell finger 9",
+      "bounds": [
+        80.1755,
+        54.013,
+        -7.34,
+        159.57505692757618,
+        77.35105792310593,
+        -3.7899999999999996
+      ],
+      "wire_y_gap_lower_bound_mm": 6.2025
+    },
+    {
+      "ref": "J1",
+      "name": "cosmetic cell finger 10",
+      "bounds": [
+        80.1755,
+        54.013,
+        -3.6700000000000017,
+        159.57505692757618,
+        77.35105792310593,
+        -0.40000000000000135
+      ],
+      "wire_y_gap_lower_bound_mm": 6.2025
+    },
+    {
+      "ref": "J1",
+      "name": "cosmetic cell finger 11",
+      "bounds": [
+        80.1755,
+        54.013,
+        0.0,
+        159.57505692757618,
+        77.35105792310593,
+        3.5500000000000003
+      ],
+      "wire_y_gap_lower_bound_mm": 6.2025
+    },
+    {
+      "ref": "J1",
+      "name": "cosmetic cell finger 12",
+      "bounds": [
+        80.1755,
+        54.013,
+        3.6700000000000017,
+        159.57505692757618,
+        77.35105792310593,
+        7.2200000000000015
+      ],
+      "wire_y_gap_lower_bound_mm": 6.2025
+    },
+    {
+      "ref": "J1",
+      "name": "cosmetic cell finger 13",
+      "bounds": [
+        80.1755,
+        54.013,
+        7.340000000000003,
+        159.57505692757618,
+        77.35105792310593,
+        10.890000000000004
+      ],
+      "wire_y_gap_lower_bound_mm": 6.2025
+    },
+    {
+      "ref": "J1",
+      "name": "cosmetic cell finger 14",
+      "bounds": [
+        80.1755,
+        54.013,
+        11.009999999999998,
+        159.57505692757618,
+        77.35105792310593,
+        14.559999999999999
+      ],
+      "wire_y_gap_lower_bound_mm": 6.2025
+    },
+    {
+      "ref": "J1",
+      "name": "cosmetic cell finger 15",
+      "bounds": [
+        80.1755,
+        54.013,
+        14.680000000000007,
+        159.57505692757618,
+        77.35105792310593,
+        17.95000000000001
+      ],
+      "wire_y_gap_lower_bound_mm": 6.2025
+    },
+    {
+      "ref": "J1",
+      "name": "cosmetic cell finger 16",
+      "bounds": [
+        80.1755,
+        54.013,
+        18.349999999999994,
+        159.57505692757618,
+        77.35105792310593,
+        21.899999999999995
+      ],
+      "wire_y_gap_lower_bound_mm": 6.2025
+    },
+    {
+      "ref": "J1",
+      "name": "cosmetic cell finger 17",
+      "bounds": [
+        80.1755,
+        54.013,
+        22.020000000000003,
+        159.57505692757618,
+        77.35105792310593,
+        25.570000000000004
+      ],
+      "wire_y_gap_lower_bound_mm": 6.2025
+    },
+    {
+      "ref": "J1",
+      "name": "cosmetic cell finger 18",
+      "bounds": [
+        80.1755,
+        54.013,
+        25.690000000000005,
+        159.57505692757618,
+        77.35105792310593,
+        29.240000000000006
+      ],
+      "wire_y_gap_lower_bound_mm": 6.2025
+    },
+    {
+      "ref": "J1",
+      "name": "cosmetic cell finger 19",
+      "bounds": [
+        80.1755,
+        54.013,
+        29.36,
+        159.57505692757618,
+        77.35105792310593,
+        32.910000000000004
+      ],
+      "wire_y_gap_lower_bound_mm": 6.2025
+    },
+    {
+      "ref": "J1",
+      "name": "cosmetic cell finger 20",
+      "bounds": [
+        80.1755,
+        54.013,
+        33.03,
+        159.57505692757618,
+        77.35105792310593,
+        36.300000000000004
+      ],
+      "wire_y_gap_lower_bound_mm": 6.2025
+    },
+    {
+      "ref": "J1",
+      "name": "inner NEGATIVE terminal",
+      "bounds": [
+        75.1755,
+        54.0,
+        -37.5,
+        80.1755,
+        54.0,
+        37.5
+      ],
+      "wire_y_gap_lower_bound_mm": 6.189500000000002
+    },
+    {
+      "ref": "J1",
+      "name": "outer POSITIVE terminal",
+      "bounds": [
+        159.5822432593268,
+        77.34022479631952,
+        -37.5,
+        163.69941662920178,
+        80.17857399602332,
+        37.5
+      ],
+      "wire_y_gap_lower_bound_mm": 29.52972479631952
+    },
+    {
+      "ref": "J1",
+      "name": "polarity minus",
+      "bounds": [
+        76.74549999999999,
+        53.818,
+        8.0,
+        77.0055,
+        54.078,
+        10.0
+      ],
+      "wire_y_gap_lower_bound_mm": 6.007499999999999
+    },
+    {
+      "ref": "J1",
+      "name": "polarity minus",
+      "bounds": [
+        162.37476497147333,
+        79.13905442649437,
+        8.0,
+        162.63476497147332,
+        79.39905442649437,
+        10.0
+      ],
+      "wire_y_gap_lower_bound_mm": 31.32855442649437
+    },
+    {
+      "ref": "J1",
+      "name": "polarity plus",
+      "bounds": [
+        161.60846711944254,
+        78.59170533285373,
+        8.87,
+        163.39696440904305,
+        79.95225854348467,
+        9.13
+      ],
+      "wire_y_gap_lower_bound_mm": 30.781205332853737
+    },
+    {
+      "ref": "J1",
+      "name": "ground solder fillet rear",
+      "bounds": [
+        75.2255,
+        53.3,
+        -0.8,
+        76.4255,
+        54.0,
+        -0.2
+      ],
+      "wire_y_gap_lower_bound_mm": 5.489499999999999
+    },
+    {
+      "ref": "J1",
+      "name": "ground solder fillet front",
+      "bounds": [
+        75.2255,
+        53.3,
+        0.2,
+        76.4255,
+        54.0,
+        0.8
+      ],
+      "wire_y_gap_lower_bound_mm": 5.489499999999999
+    },
+    {
+      "ref": "J1",
+      "name": "positive copper lead",
+      "bounds": [
+        74.95,
+        78.29657234499292,
+        -0.8,
+        165.26733671858227,
+        85.25,
+        1.2499838933274332
+      ],
+      "wire_y_gap_lower_bound_mm": 30.486072344992927
+    },
+    {
+      "ref": "J1",
+      "name": "positive red insulation",
+      "bounds": [
+        75.13741227908966,
+        81.24556829789799,
+        -0.3499771828131941,
+        163.91986785448324,
+        85.35,
+        1.3499774506584066
+      ],
+      "wire_y_gap_lower_bound_mm": 33.43506829789799
+    },
+    {
+      "ref": "J1",
+      "name": "panel positive solder",
+      "bounds": [
+        161.41923673881428,
+        78.10061104708356,
+        -0.65,
+        162.2192367388143,
+        78.90061104708356,
+        0.65
+      ],
+      "wire_y_gap_lower_bound_mm": 30.290111047083563
+    },
+    {
+      "ref": "J1",
+      "name": "positive PTH solder",
+      "bounds": [
+        74.62,
+        84.42,
+        -0.43000000000000005,
+        75.77922955626755,
+        85.58,
+        -0.10999999999999999
+      ],
+      "wire_y_gap_lower_bound_mm": 36.609500000000004
+    },
+    {
+      "ref": "J1",
+      "name": "positive PTH solder",
+      "bounds": [
+        74.62,
+        84.42,
+        0.10999999999999999,
+        75.77922955626755,
+        85.58,
+        0.43000000000000005
+      ],
+      "wire_y_gap_lower_bound_mm": 36.609500000000004
+    }
+  ],
+  "limitations": [
+    "Manufacturer body tolerance is included; additional hand placement, solder bulges and capacitor case insulation/standoff are unqualified.",
+    "AE2 R1.25 mm solder envelope is a chosen assembly allowance, not a measured fillet. Nominal .321 mm wire diameter and .25 mm model offset are unmeasured.",
+    "Static mesh gaps do not bound flexible-panel motion, loose suspension loops, knots or wire deflection.",
+    "Hole ligament geometry is not a pull/bend qualification for the .4 mm PCB; avoid using the 48 mm wire as a lever during assembly."
+  ]
+}

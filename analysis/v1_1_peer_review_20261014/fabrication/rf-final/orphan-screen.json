@@ -1,0 +1,487 @@
+{
+  "source_sha256": "8df85b3e4bdd546ec174bb9d7b9ee9d795d55d486a68e1e853aaf1b871f863d3",
+  "orphans": [],
+  "records": [
+    {
+      "uuid": "c9b08fc8-6876-55e2-896b-483294065da4",
+      "net": "GND",
+      "layer": "F.Cu",
+      "distance_to_same_net_pad_track_or_fill_mm": 0.0,
+      "area_mm2": 0.009417904864000359,
+      "bounds": [
+        70.073203,
+        62.799167,
+        70.267204,
+        62.988501
+      ]
+    },
+    {
+      "uuid": "560f9804-9bd9-5007-a2da-4d12c60ce247",
+      "net": "GND",
+      "layer": "F.Cu",
+      "distance_to_same_net_pad_track_or_fill_mm": 0.0,
+      "area_mm2": 0.016713291957499186,
+      "bounds": [
+        57.54242,
+        44.954132,
+        57.608,
+        45.256513
+      ]
+    },
+    {
+      "uuid": "1ad5d460-5953-52e6-83c5-7fcec10a8d6f",
+      "net": "GND",
+      "layer": "F.Cu",
+      "distance_to_same_net_pad_track_or_fill_mm": 0.0,
+      "area_mm2": 0.041178674068999783,
+      "bounds": [
+        56.043144,
+        64.925455,
+        56.431015,
+        65.273488
+      ]
+    },
+    {
+      "uuid": "9454b239-0a59-53e7-b4ee-e9d8c9f655fe",
+      "net": "GND",
+      "layer": "F.Cu",
+      "distance_to_same_net_pad_track_or_fill_mm": 0.0,
+      "area_mm2": 0.04116789555300104,
+      "bounds": [
+        56.152429,
+        64.995106,
+        56.500539,
+        65.382784
+      ]
+    },
+    {
+      "uuid": "7bf3f1f8-d0e0-5482-a927-eb1181f32bb5",
+      "net": "+3.3V",
+      "layer": "F.Cu",
+      "distance_to_same_net_pad_track_or_fill_mm": 0.0,
+      "area_mm2": 0.008790375449999737,
+      "bounds": [
+        59.437701,
+        63.78092,
+        59.572383,
+        63.919998
+      ]
+    },
+    {
+      "uuid": "ba3c6216-d0e7-57d1-9ac2-8d5e7f39cb29",
+      "net": "Net-(AE2-A)",
+      "layer": "F.Cu",
+      "distance_to_same_net_pad_track_or_fill_mm": 0.0,
+      "area_mm2": 0.014594616231999136,
+      "bounds": [
+        59.553804,
+        45.366197,
+        59.902001,
+        45.709992
+      ]
+    },
+    {
+      "uuid": "76056523-0834-5682-a64d-20db23fccd3d",
+      "net": "GND",
+      "layer": "F.Cu",
+      "distance_to_same_net_pad_track_or_fill_mm": 0.0,
+      "area_mm2": 0.009627669918499199,
+      "bounds": [
+        69.258067,
+        52.462689,
+        69.401997,
+        52.602222
+      ]
+    },
+    {
+      "uuid": "3b9f629f-ed73-529f-8a63-993bf90bd096",
+      "net": "GND",
+      "layer": "F.Cu",
+      "distance_to_same_net_pad_track_or_fill_mm": 0.0,
+      "area_mm2": 0.009518487232000996,
+      "bounds": [
+        67.243627,
+        36.274999,
+        67.428044,
+        36.433807
+      ]
+    },
+    {
+      "uuid": "ad6b8f8f-63ef-5aaf-b3b4-68152a43c6f9",
+      "net": "+3.3V",
+      "layer": "F.Cu",
+      "distance_to_same_net_pad_track_or_fill_mm": 0.0,
+      "area_mm2": 0.05354712096849816,
+      "bounds": [
+        74.535767,
+        35.966066,
+        74.69,
+        36.44096
+      ]
+    },
+    {
+      "uuid": "68c999a4-e604-58ae-8452-3eb891fb59eb",
+      "net": "GND",
+      "layer": "F.Cu",
+      "distance_to_same_net_pad_track_or_fill_mm": 0.0,
+      "area_mm2": 0.013014510673001377,
+      "bounds": [
+        56.002164,
+        65.290965,
+        56.213222,
+        65.448998
+      ]
+    },
+    {
+      "uuid": "3c95cad3-ca03-5965-af59-abb251433d50",
+      "net": "GND",
+      "layer": "F.Cu",
+      "distance_to_same_net_pad_track_or_fill_mm": 0.0,
+      "area_mm2": 0.013014510672999515,
+      "bounds": [
+        66.525998,
+        37.140386,
+        66.684031,
+        37.351444
+      ]
+    },
+    {
+      "uuid": "76ec1cac-c724-561a-ad91-2360c48bbbdf",
+      "net": "GND",
+      "layer": "F.Cu",
+      "distance_to_same_net_pad_track_or_fill_mm": 0.0,
+      "area_mm2": 0.013014559233998937,
+      "bounds": [
+        67.697965,
+        37.140388,
+        67.855998,
+        37.351446
+      ]
+    },
+    {
+      "uuid": "2942aea6-5341-5399-b0ee-b23317da7750",
+      "net": "+3.3V",
+      "layer": "F.Cu",
+      "distance_to_same_net_pad_track_or_fill_mm": 0.0,
+      "area_mm2": 0.013014559233999695,
+      "bounds": [
+        68.873,
+        35.216701,
+        69.031033,
+        35.427759
+      ]
+    },
+    {
+      "uuid": "2b98a6d5-df5a-586c-bf2e-66c32711cd7a",
+      "net": "Net-(AE1-A)",
+      "layer": "F.Cu",
+      "distance_to_same_net_pad_track_or_fill_mm": 0.0,
+      "area_mm2": 0.013014538852998142,
+      "bounds": [
+        69.14433,
+        82.326967,
+        69.355388,
+        82.485
+      ]
+    },
+    {
+      "uuid": "492cb035-b25a-577b-bec5-65856d9d75e9",
+      "net": "+SOLAR",
+      "layer": "F.Cu",
+      "distance_to_same_net_pad_track_or_fill_mm": 0.0,
+      "area_mm2": 0.013014856917500118,
+      "bounds": [
+        53.76,
+        77.081776,
+        53.918033,
+        77.292834
+      ]
+    },
+    {
+      "uuid": "94d18732-51fb-57b8-8f09-219d0252c1e2",
+      "net": "PA10",
+      "layer": "F.Cu",
+      "distance_to_same_net_pad_track_or_fill_mm": 0.0,
+      "area_mm2": 0.01301475919383583,
+      "bounds": [
+        56.827164,
+        68.156968,
+        57.038222,
+        68.315001
+      ]
+    },
+    {
+      "uuid": "0a17cce9-6841-5b8e-8bd1-81760c954003",
+      "net": "GND",
+      "layer": "F.Cu",
+      "distance_to_same_net_pad_track_or_fill_mm": 0.0,
+      "area_mm2": 0.013014827172500297,
+      "bounds": [
+        67.697965,
+        36.72855,
+        67.855998,
+        36.939608
+      ]
+    },
+    {
+      "uuid": "0fdca917-2159-58a6-bc05-cd541a5d02d3",
+      "net": "GND",
+      "layer": "F.Cu",
+      "distance_to_same_net_pad_track_or_fill_mm": 0.0,
+      "area_mm2": 0.006620618621499907,
+      "bounds": [
+        73.8095,
+        35.61,
+        73.917847,
+        35.798015
+      ]
+    },
+    {
+      "uuid": "f5107420-9f61-54b6-889e-abad2b9900fe",
+      "net": "GND",
+      "layer": "F.Cu",
+      "distance_to_same_net_pad_track_or_fill_mm": 0.0,
+      "area_mm2": 1.2014426775419937,
+      "bounds": [
+        55.300008,
+        44.2,
+        58.15,
+        46.978231
+      ]
+    },
+    {
+      "uuid": "2ae05bbd-7421-5ec9-910f-e4c3b8c52848",
+      "net": "GND",
+      "layer": "B.Cu",
+      "distance_to_same_net_pad_track_or_fill_mm": 0.0,
+      "area_mm2": 0.006798740292499331,
+      "bounds": [
+        64.211072,
+        32.865208,
+        64.389366,
+        32.993236
+      ]
+    },
+    {
+      "uuid": "bf093dfe-de64-57fe-85d0-859fb44b6259",
+      "net": "GND",
+      "layer": "B.Cu",
+      "distance_to_same_net_pad_track_or_fill_mm": 0.0,
+      "area_mm2": 0.005955799395501334,
+      "bounds": [
+        64.196081,
+        32.850209,
+        64.4043,
+        33.008236
+      ]
+    },
+    {
+      "uuid": "c34aacd6-f61d-59cc-9ea4-95701f9fc776",
+      "net": "GND",
+      "layer": "B.Cu",
+      "distance_to_same_net_pad_track_or_fill_mm": 0.0,
+      "area_mm2": 0.0207490392885009,
+      "bounds": [
+        74.813486,
+        80.696486,
+        75.308282,
+        81.191209
+      ]
+    },
+    {
+      "uuid": "6641ea5c-2b5c-5274-a8f3-20e297bb8aac",
+      "net": "GND",
+      "layer": "B.Cu",
+      "distance_to_same_net_pad_track_or_fill_mm": 0.0,
+      "area_mm2": 0.010234855556500425,
+      "bounds": [
+        64.184165,
+        32.932214,
+        64.293179,
+        33.072081
+      ]
+    },
+    {
+      "uuid": "c21b405b-0de6-5d4b-aa5d-a6bf51cce21d",
+      "net": "GND",
+      "layer": "B.Cu",
+      "distance_to_same_net_pad_track_or_fill_mm": 0.0,
+      "area_mm2": 0.014425922287499404,
+      "bounds": [
+        74.813486,
+        80.843085,
+        75.162027,
+        81.191209
+      ]
+    },
+    {
+      "uuid": "5393d1f8-465d-59fe-9bc8-ca8da1debf95",
+      "net": "/VBAT",
+      "layer": "B.Cu",
+      "distance_to_same_net_pad_track_or_fill_mm": 0.0,
+      "area_mm2": 0.010398814375499976,
+      "bounds": [
+        57.191066,
+        36.618501,
+        57.356868,
+        36.76923
+      ]
+    },
+    {
+      "uuid": "cc60625e-f92e-5fc7-9004-2b69a3b8219d",
+      "net": "GND",
+      "layer": "B.Cu",
+      "distance_to_same_net_pad_track_or_fill_mm": 0.0,
+      "area_mm2": 0.042899323253499724,
+      "bounds": [
+        54.799998,
+        75.408998,
+        55.148107,
+        75.78558
+      ]
+    },
+    {
+      "uuid": "a2e9fb56-8f6e-589f-b34d-2a5e1cb17c38",
+      "net": "GND",
+      "layer": "B.Cu",
+      "distance_to_same_net_pad_track_or_fill_mm": 0.0,
+      "area_mm2": 0.01176456673650002,
+      "bounds": [
+        69.785022,
+        48.109418,
+        69.94,
+        48.307104
+      ]
+    },
+    {
+      "uuid": "9e9d9521-875b-5ec0-9947-bf6f6cd89ee1",
+      "net": "GND",
+      "layer": "B.Cu",
+      "distance_to_same_net_pad_track_or_fill_mm": 0.0,
+      "area_mm2": 0.04290082082550131,
+      "bounds": [
+        54.799998,
+        75.408998,
+        55.176581,
+        75.757195
+      ]
+    },
+    {
+      "uuid": "35c9bc93-0bf6-55a5-9711-616febff7040",
+      "net": "/VBAT",
+      "layer": "B.Cu",
+      "distance_to_same_net_pad_track_or_fill_mm": 0.0,
+      "area_mm2": 0.009236865800000023,
+      "bounds": [
+        62.905072,
+        43.634,
+        63.083446,
+        43.773044
+      ]
+    },
+    {
+      "uuid": "1abc2760-5b1e-5581-a277-c48e8d450a3e",
+      "net": "GND",
+      "layer": "B.Cu",
+      "distance_to_same_net_pad_track_or_fill_mm": 0.0,
+      "area_mm2": 0.01301451013649986,
+      "bounds": [
+        54.547876,
+        37.906967,
+        54.758934,
+        38.065
+      ]
+    },
+    {
+      "uuid": "cec9dc7b-9a6d-517d-b84d-651ded74ebcc",
+      "net": "/SC_BAL_OUT",
+      "layer": "B.Cu",
+      "distance_to_same_net_pad_track_or_fill_mm": 0.0,
+      "area_mm2": 0.01301455097450065,
+      "bounds": [
+        55.366066,
+        36.481967,
+        55.577124,
+        36.64
+      ]
+    },
+    {
+      "uuid": "2da5f92b-6ee4-5623-a500-3e07c7288e53",
+      "net": "GND",
+      "layer": "B.Cu",
+      "distance_to_same_net_pad_track_or_fill_mm": 0.0,
+      "area_mm2": 0.014466249768499874,
+      "bounds": [
+        69.525832,
+        47.942,
+        69.752137,
+        48.102879
+      ]
+    },
+    {
+      "uuid": "c5adbc39-6e6d-5d5d-b140-fe61c79e5261",
+      "net": "GND",
+      "layer": "B.Cu",
+      "distance_to_same_net_pad_track_or_fill_mm": 0.0,
+      "area_mm2": 0.014466160689499743,
+      "bounds": [
+        69.538212,
+        48.311121,
+        69.764518,
+        48.472
+      ]
+    },
+    {
+      "uuid": "e54ec3eb-ce35-52c3-82a0-35f0953cae7e",
+      "net": "+3.3V",
+      "layer": "B.Cu",
+      "distance_to_same_net_pad_track_or_fill_mm": 0.0,
+      "area_mm2": 0.013014510673000418,
+      "bounds": [
+        71.372,
+        41.356856,
+        71.530033,
+        41.567914
+      ]
+    },
+    {
+      "uuid": "ab7467a5-4717-5ad3-a131-6e910725f392",
+      "net": "SCL",
+      "layer": "B.Cu",
+      "distance_to_same_net_pad_track_or_fill_mm": 0.0,
+      "area_mm2": 0.013014508820000825,
+      "bounds": [
+        73.235876,
+        42.094967,
+        73.446934,
+        42.253
+      ]
+    },
+    {
+      "uuid": "871f2f67-e553-5e6f-b8f0-3db2c52f9123",
+      "net": "/VBAT",
+      "layer": "B.Cu",
+      "distance_to_same_net_pad_track_or_fill_mm": 0.0,
+      "area_mm2": 0.013014814664499755,
+      "bounds": [
+        56.347876,
+        37.335,
+        56.558934,
+        37.493033
+      ]
+    },
+    {
+      "uuid": "54f73d27-71e0-5ac4-b2a0-a29decaa0086",
+      "net": "GND",
+      "layer": "B.Cu",
+      "distance_to_same_net_pad_track_or_fill_mm": 0.0,
+      "area_mm2": 0.02218239012000063,
+      "bounds": [
+        56.281263,
+        33.066777,
+        56.677403,
+        33.29
+      ]
+    }
+  ]
+}

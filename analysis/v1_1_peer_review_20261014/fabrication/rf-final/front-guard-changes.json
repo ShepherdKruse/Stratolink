@@ -1,0 +1,31 @@
+[
+  {
+    "action": "move_group",
+    "name": "Copper label: PICO MAINBOARD V1.1",
+    "delta": [
+      0,
+      -0.22
+    ]
+  },
+  {
+    "action": "move_group",
+    "name": "Copper label: STRATOLINK.ORG",
+    "delta": [
+      0,
+      -0.55
+    ]
+  },
+  {
+    "action": "ground_guard",
+    "uuid": "f5107420-9f61-54b6-889e-abad2b9900fe",
+    "net": "GND"
+  },
+  {
+    "action": "ground_via",
+    "uuid": "cb09c440-db10-5717-8a62-d14623df26b2",
+    "at": [
+      55.45,
+      46.65
+    ]
+  }
+]

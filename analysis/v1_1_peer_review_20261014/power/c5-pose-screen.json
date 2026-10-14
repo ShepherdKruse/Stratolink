@@ -1,0 +1,365 @@
+{
+  "status": "Prospective geometry only; final candidate must be independently checked",
+  "source_pcb_sha256": "9d63500a087ef8d345c2337942106e6704d32ded953846883454bfad718adf6c",
+  "source_dimensions": "CAP-XX DMF4B5R5G105M3DTA0 Rev1.9 p2, visually verified:30\u00b10.5mm\u00d714\u00b10.5mm,4.0mmmaxthickness,34.5mmmaxtotalincludingtabs. Fixedcasecenterdatum and symmetric\u00b10.25mm envelope assumed; no extra placement/solder allowance.",
+  "variants": [
+    {
+      "dx_mm": 0,
+      "dy_mm": 0,
+      "maximum_case_bounds_mm": [
+        57.625,
+        49.457,
+        72.125,
+        79.957
+      ],
+      "inside_outline": true,
+      "case_to_outline_mm": 2.305928999999999,
+      "near_rear_pads": [],
+      "case_to_AE1_courtyard_inboard_y_margin_mm": 1.4960000000000093,
+      "C5_positive_land_top_y_mm": 44.457,
+      "C5_positive_land_to_U3_RF_pad_Y_gap_mm": -1.0570000000000022
+    },
+    {
+      "dx_mm": 2.3,
+      "dy_mm": 0,
+      "maximum_case_bounds_mm": [
+        59.925,
+        49.457,
+        74.425,
+        79.957
+      ],
+      "inside_outline": true,
+      "case_to_outline_mm": 0.24792899999999918,
+      "near_rear_pads": [
+        {
+          "ref": "J1",
+          "pin": "2",
+          "net": "GND",
+          "gap_mm": 0.0,
+          "overlap_mm2": 0.03365999999999643
+        },
+        {
+          "ref": "J4",
+          "pin": "1",
+          "net": "GND",
+          "gap_mm": 0.3860000000000099,
+          "overlap_mm2": 0.0
+        },
+        {
+          "ref": "J4",
+          "pin": "2",
+          "net": "VSTOR",
+          "gap_mm": 0.3860000000000099,
+          "overlap_mm2": 0.0
+        },
+        {
+          "ref": "J4",
+          "pin": "3",
+          "net": "GND",
+          "gap_mm": 0.3860000000000099,
+          "overlap_mm2": 0.0
+        },
+        {
+          "ref": "J4",
+          "pin": "4",
+          "net": "TX",
+          "gap_mm": 0.3860000000000099,
+          "overlap_mm2": 0.0
+        },
+        {
+          "ref": "J4",
+          "pin": "5",
+          "net": "RX",
+          "gap_mm": 0.3860000000000099,
+          "overlap_mm2": 0.0
+        },
+        {
+          "ref": "J4",
+          "pin": "6",
+          "net": "BOOT0",
+          "gap_mm": 0.3860000000000099,
+          "overlap_mm2": 0.0
+        },
+        {
+          "ref": "J4",
+          "pin": "7",
+          "net": "+3.3V",
+          "gap_mm": 0.3860000000000099,
+          "overlap_mm2": 0.0
+        }
+      ],
+      "case_to_AE1_courtyard_inboard_y_margin_mm": 1.4960000000000093,
+      "C5_positive_land_top_y_mm": 44.457,
+      "C5_positive_land_to_U3_RF_pad_Y_gap_mm": -1.0570000000000022
+    },
+    {
+      "dx_mm": 2,
+      "dy_mm": 0,
+      "maximum_case_bounds_mm": [
+        59.625,
+        49.457,
+        74.125,
+        79.957
+      ],
+      "inside_outline": true,
+      "case_to_outline_mm": 0.5479289999999963,
+      "near_rear_pads": [
+        {
+          "ref": "J1",
+          "pin": "2",
+          "net": "GND",
+          "gap_mm": 0.2505000000000024,
+          "overlap_mm2": 0.0
+        },
+        {
+          "ref": "J4",
+          "pin": "1",
+          "net": "GND",
+          "gap_mm": 0.6860000000000072,
+          "overlap_mm2": 0.0
+        },
+        {
+          "ref": "J4",
+          "pin": "2",
+          "net": "VSTOR",
+          "gap_mm": 0.6860000000000072,
+          "overlap_mm2": 0.0
+        },
+        {
+          "ref": "J4",
+          "pin": "3",
+          "net": "GND",
+          "gap_mm": 0.6860000000000072,
+          "overlap_mm2": 0.0
+        },
+        {
+          "ref": "J4",
+          "pin": "4",
+          "net": "TX",
+          "gap_mm": 0.6860000000000072,
+          "overlap_mm2": 0.0
+        },
+        {
+          "ref": "J4",
+          "pin": "5",
+          "net": "RX",
+          "gap_mm": 0.6860000000000072,
+          "overlap_mm2": 0.0
+        },
+        {
+          "ref": "J4",
+          "pin": "6",
+          "net": "BOOT0",
+          "gap_mm": 0.6860000000000072,
+          "overlap_mm2": 0.0
+        },
+        {
+          "ref": "J4",
+          "pin": "7",
+          "net": "+3.3V",
+          "gap_mm": 0.6860000000000072,
+          "overlap_mm2": 0.0
+        }
+      ],
+      "case_to_AE1_courtyard_inboard_y_margin_mm": 1.4960000000000093,
+      "C5_positive_land_top_y_mm": 44.457,
+      "C5_positive_land_to_U3_RF_pad_Y_gap_mm": -1.0570000000000022
+    },
+    {
+      "dx_mm": 1.8,
+      "dy_mm": 0,
+      "maximum_case_bounds_mm": [
+        59.425,
+        49.457,
+        73.925,
+        79.957
+      ],
+      "inside_outline": true,
+      "case_to_outline_mm": 0.7479289999999993,
+      "near_rear_pads": [
+        {
+          "ref": "J1",
+          "pin": "2",
+          "net": "GND",
+          "gap_mm": 0.45050000000000523,
+          "overlap_mm2": 0.0
+        },
+        {
+          "ref": "J4",
+          "pin": "1",
+          "net": "GND",
+          "gap_mm": 0.8860000000000099,
+          "overlap_mm2": 0.0
+        },
+        {
+          "ref": "J4",
+          "pin": "2",
+          "net": "VSTOR",
+          "gap_mm": 0.8860000000000099,
+          "overlap_mm2": 0.0
+        },
+        {
+          "ref": "J4",
+          "pin": "3",
+          "net": "GND",
+          "gap_mm": 0.8860000000000099,
+          "overlap_mm2": 0.0
+        },
+        {
+          "ref": "J4",
+          "pin": "4",
+          "net": "TX",
+          "gap_mm": 0.8860000000000099,
+          "overlap_mm2": 0.0
+        },
+        {
+          "ref": "J4",
+          "pin": "5",
+          "net": "RX",
+          "gap_mm": 0.8860000000000099,
+          "overlap_mm2": 0.0
+        },
+        {
+          "ref": "J4",
+          "pin": "6",
+          "net": "BOOT0",
+          "gap_mm": 0.8860000000000099,
+          "overlap_mm2": 0.0
+        },
+        {
+          "ref": "J4",
+          "pin": "7",
+          "net": "+3.3V",
+          "gap_mm": 0.8860000000000099,
+          "overlap_mm2": 0.0
+        }
+      ],
+      "case_to_AE1_courtyard_inboard_y_margin_mm": 1.4960000000000093,
+      "C5_positive_land_top_y_mm": 44.457,
+      "C5_positive_land_to_U3_RF_pad_Y_gap_mm": -1.0570000000000022
+    },
+    {
+      "dx_mm": 0,
+      "dy_mm": 1.2,
+      "maximum_case_bounds_mm": [
+        57.625,
+        50.657000000000004,
+        72.125,
+        81.157
+      ],
+      "inside_outline": true,
+      "case_to_outline_mm": 2.305928999999999,
+      "near_rear_pads": [
+        {
+          "ref": "AE1",
+          "pin": "1",
+          "net": "Net-(AE1-A)",
+          "gap_mm": 0.7960000000000065,
+          "overlap_mm2": 0.0
+        }
+      ],
+      "case_to_AE1_courtyard_inboard_y_margin_mm": 0.2960000000000065,
+      "C5_positive_land_top_y_mm": 45.657000000000004,
+      "C5_positive_land_to_U3_RF_pad_Y_gap_mm": 0.14300000000000068
+    },
+    {
+      "dx_mm": 0,
+      "dy_mm": 1.25,
+      "maximum_case_bounds_mm": [
+        57.625,
+        50.707,
+        72.125,
+        81.207
+      ],
+      "inside_outline": true,
+      "case_to_outline_mm": 2.305928999999999,
+      "near_rear_pads": [
+        {
+          "ref": "AE1",
+          "pin": "1",
+          "net": "Net-(AE1-A)",
+          "gap_mm": 0.7460000000000093,
+          "overlap_mm2": 0.0
+        },
+        {
+          "ref": "J20",
+          "pin": "",
+          "net": "",
+          "gap_mm": 0.9697000000000031,
+          "overlap_mm2": 0.0
+        }
+      ],
+      "case_to_AE1_courtyard_inboard_y_margin_mm": 0.24600000000000932,
+      "C5_positive_land_top_y_mm": 45.707,
+      "C5_positive_land_to_U3_RF_pad_Y_gap_mm": 0.19299999999999784
+    },
+    {
+      "dx_mm": 0,
+      "dy_mm": 1.4,
+      "maximum_case_bounds_mm": [
+        57.625,
+        50.857,
+        72.125,
+        81.357
+      ],
+      "inside_outline": true,
+      "case_to_outline_mm": 2.305928999999999,
+      "near_rear_pads": [
+        {
+          "ref": "AE1",
+          "pin": "1",
+          "net": "Net-(AE1-A)",
+          "gap_mm": 0.5960000000000036,
+          "overlap_mm2": 0.0
+        },
+        {
+          "ref": "J20",
+          "pin": "",
+          "net": "",
+          "gap_mm": 0.8196999999999974,
+          "overlap_mm2": 0.0
+        }
+      ],
+      "case_to_AE1_courtyard_inboard_y_margin_mm": 0.09600000000000364,
+      "C5_positive_land_top_y_mm": 45.857,
+      "C5_positive_land_to_U3_RF_pad_Y_gap_mm": 0.3429999999999964
+    },
+    {
+      "dx_mm": 0,
+      "dy_mm": 1.8,
+      "maximum_case_bounds_mm": [
+        57.625,
+        51.257,
+        72.125,
+        81.75699999999999
+      ],
+      "inside_outline": true,
+      "case_to_outline_mm": 2.305928999999999,
+      "near_rear_pads": [
+        {
+          "ref": "AE1",
+          "pin": "1",
+          "net": "Net-(AE1-A)",
+          "gap_mm": 0.19600000000001216,
+          "overlap_mm2": 0.0
+        },
+        {
+          "ref": "J20",
+          "pin": "",
+          "net": "",
+          "gap_mm": 0.41970000000000596,
+          "overlap_mm2": 0.0
+        }
+      ],
+      "case_to_AE1_courtyard_inboard_y_margin_mm": -0.30399999999998784,
+      "C5_positive_land_top_y_mm": 46.257,
+      "C5_positive_land_to_U3_RF_pad_Y_gap_mm": 0.742999999999995
+    }
+  ],
+  "constraints": [
+    "A positive2Dgap is not a solder-access or retention qualification.",
+    "Case insulation and actual standoff are unspecified by these projections.",
+    "AE1courtyard is a reserved solder/wire envelope, not measured solid material.",
+    "IncreasingXretainslowerantenna/Yaccess; increasingYmovescaseclosertolowerantennaassembly."
+  ]
+}

@@ -1,0 +1,4656 @@
+{
+  "pcb_sha256": "8df85b3e4bdd546ec174bb9d7b9ee9d795d55d486a68e1e853aaf1b871f863d3",
+  "geometry_sha256": "e6106d7591b53524aee69566ccd6155ac440e985e495a3ac740f8fd92eac7c68",
+  "whole_layer_extraction_check": {
+    "F.Cu": {
+      "missing_area_beyond_5um_mm2": 0.0,
+      "extra_area_beyond_5um_mm2": 0.0,
+      "raw_symmetric_difference_mm2": 0.4638461275884122
+    },
+    "B.Cu": {
+      "missing_area_beyond_5um_mm2": 0.0,
+      "extra_area_beyond_5um_mm2": 0.0,
+      "raw_symmetric_difference_mm2": 0.4436427957657305
+    }
+  },
+  "front_rf_item_counts": {
+    "PCB_ARC": 3,
+    "PCB_TRACK": 4,
+    "board_graphic": 1,
+    "pad": 3
+  },
+  "trace_centerline_length_mm": 6.5750818263308455,
+  "native_trace_length_sum_mm": 6.575114754980726,
+  "centerline_missing_rear_GND_mm": 0.9004997787342879,
+  "centerline_missing_rear_GND_outside_antenna_transition_mm": 0.0004999002009580754,
+  "projection": {
+    "full_front_RF_net": {
+      "area_mm2": 5.524065665024673,
+      "rear_GND_fraction": 0.6671636283415388,
+      "rear_GND_missing_mm2": 1.838609972749897,
+      "rear_GND_missing_beyond_5um_mm2": 1.836333221167422,
+      "opposite_non_GND_overlap_mm2": 1.7696729295159972,
+      "opposite_non_GND_items": [
+        {
+          "kind": "pad",
+          "uuid": "ea905b28-8305-405a-81ea-939d803338f6",
+          "net": "Net-(AE2-A)",
+          "ref": "AE2",
+          "pin": "1",
+          "overlap_mm2": 1.7696729295159972
+        }
+      ]
+    },
+    "trace_and_fillets": {
+      "area_mm2": 3.127013868542142,
+      "rear_GND_fraction": 0.8460165704260866,
+      "rear_GND_missing_mm2": 0.48150831980330067,
+      "rear_GND_missing_beyond_5um_mm2": 0.4792315682208286,
+      "opposite_non_GND_overlap_mm2": 0.41257127656940074,
+      "opposite_non_GND_items": [
+        {
+          "kind": "pad",
+          "uuid": "ea905b28-8305-405a-81ea-939d803338f6",
+          "net": "Net-(AE2-A)",
+          "ref": "AE2",
+          "pin": "1",
+          "overlap_mm2": 0.41257127656940074
+        }
+      ]
+    },
+    "trace_outside_antenna_pad": {
+      "area_mm2": 2.7144425919727317,
+      "rear_GND_fraction": 0.9746036098027047,
+      "rear_GND_missing_mm2": 0.06893704323389921,
+      "rear_GND_missing_beyond_5um_mm2": 0.06666029165142448,
+      "opposite_non_GND_overlap_mm2": 0.0,
+      "opposite_non_GND_items": []
+    },
+    "trace_beyond_antenna_pad_and_0_15mm_transition": {
+      "area_mm2": 2.6460160938968844,
+      "rear_GND_fraction": 0.9997882062428479,
+      "rear_GND_missing_mm2": 0.0005604096900125695,
+      "rear_GND_missing_beyond_5um_mm2": 0.0,
+      "opposite_non_GND_overlap_mm2": 0.0,
+      "opposite_non_GND_items": []
+    },
+    "pad_AE2.1": {
+      "area_mm2": 1.769672929515998,
+      "rear_GND_fraction": 0.0,
+      "rear_GND_missing_mm2": 1.7696729295159983,
+      "rear_GND_missing_beyond_5um_mm2": 1.7696729295159983,
+      "opposite_non_GND_overlap_mm2": 1.7696729295159983,
+      "opposite_non_GND_items": [
+        {
+          "kind": "pad",
+          "uuid": "ea905b28-8305-405a-81ea-939d803338f6",
+          "net": "Net-(AE2-A)",
+          "ref": "AE2",
+          "pin": "1",
+          "overlap_mm2": 1.7696729295159983
+        }
+      ]
+    },
+    "pad_U3.11": {
+      "area_mm2": 1.4399999999999984,
+      "rear_GND_fraction": 1.0,
+      "rear_GND_missing_mm2": 0.0,
+      "rear_GND_missing_beyond_5um_mm2": 0.0,
+      "opposite_non_GND_overlap_mm2": 0.0,
+      "opposite_non_GND_items": []
+    },
+    "pad_D3.2": {
+      "area_mm2": 0.4013313788579998,
+      "rear_GND_fraction": 0.9999999999999999,
+      "rear_GND_missing_mm2": 0.0,
+      "rear_GND_missing_beyond_5um_mm2": 0.0,
+      "opposite_non_GND_overlap_mm2": 0.0,
+      "opposite_non_GND_items": []
+    }
+  },
+  "return_components_in_1mm_corridor": [
+    {
+      "layer": "F.Cu",
+      "component": 0,
+      "area_in_1mm_corridor_mm2": 5.6575720711856015,
+      "connected_to_receiver_ground_via_saved_copper_and_plated_ground": true
+    },
+    {
+      "layer": "F.Cu",
+      "component": 5,
+      "area_in_1mm_corridor_mm2": 4.6561347677050495,
+      "connected_to_receiver_ground_via_saved_copper_and_plated_ground": true
+    },
+    {
+      "layer": "B.Cu",
+      "component": 32,
+      "area_in_1mm_corridor_mm2": 16.470552684705293,
+      "connected_to_receiver_ground_via_saved_copper_and_plated_ground": true
+    }
+  ],
+  "lateral_front_ground": {
+    "maximum_sample_pitch_mm": 0.025,
+    "ray_extent_from_trace_edge_mm": 1.5,
+    "pad_transition_buffer_mm": 0.15,
+    "summary": {
+      "trace_outside_pad_transitions": {
+        "sample_count": 144,
+        "left": {
+          "no_ground_within_1_5mm_count": 0,
+          "maximum_first_ground_gap_mm": 0.39636091986380173,
+          "minimum_first_ground_width_mm": 0.6354320844872007
+        },
+        "right": {
+          "no_ground_within_1_5mm_count": 0,
+          "maximum_first_ground_gap_mm": 0.16697062938849255,
+          "minimum_first_ground_width_mm": 0.2999995946988381
+        }
+      },
+      "pad_transitions": {
+        "sample_count": 121,
+        "left": {
+          "no_ground_within_1_5mm_count": 2,
+          "maximum_first_ground_gap_mm": 0.7413055310417425,
+          "minimum_first_ground_width_mm": 0
+        },
+        "right": {
+          "no_ground_within_1_5mm_count": 0,
+          "maximum_first_ground_gap_mm": 0.6754997787342919,
+          "minimum_first_ground_width_mm": 0.35284628381208366
+        }
+      }
+    },
+    "samples": [
+      {
+        "track_uuid": "71ea73c2-7d71-5ceb-8317-7731a65808a8",
+        "xy_mm": [
+          59.31113248,
+          45.63886752
+        ],
+        "pad_transition": [],
+        "left": {
+          "first_ground_gap_mm": 0.15049986376096827,
+          "first_ground_width_within_1_5mm_ray_mm": 1.2149706421403281
+        },
+        "right": {
+          "first_ground_gap_mm": 0.16252204756107091,
+          "first_ground_width_within_1_5mm_ray_mm": 1.337477952438931
+        }
+      },
+      {
+        "track_uuid": "71ea73c2-7d71-5ceb-8317-7731a65808a8",
+        "xy_mm": [
+          59.32837144,
+          45.62162856
+        ],
+        "pad_transition": [],
+        "left": {
+          "first_ground_gap_mm": 0.1504997718749221,
+          "first_ground_width_within_1_5mm_ray_mm": 1.2393503050595818
+        },
+        "right": {
+          "first_ground_gap_mm": 0.1524236338947215,
+          "first_ground_width_within_1_5mm_ray_mm": 1.3475763661052804
+        }
+      },
+      {
+        "track_uuid": "71ea73c2-7d71-5ceb-8317-7731a65808a8",
+        "xy_mm": [
+          59.3456104,
+          45.6043896
+        ],
+        "pad_transition": [],
+        "left": {
+          "first_ground_gap_mm": 0.15049956251296548,
+          "first_ground_width_within_1_5mm_ray_mm": 1.263730085454746
+        },
+        "right": {
+          "first_ground_gap_mm": 0.15049986376096325,
+          "first_ground_width_within_1_5mm_ray_mm": 1.3495001362390386
+        }
+      },
+      {
+        "track_uuid": "71ea73c2-7d71-5ceb-8317-7731a65808a8",
+        "xy_mm": [
+          59.36284936,
+          45.58715064
+        ],
+        "pad_transition": [],
+        "left": {
+          "first_ground_gap_mm": 0.15049935315101892,
+          "first_ground_width_within_1_5mm_ray_mm": 1.2881098658499002
+        },
+        "right": {
+          "first_ground_gap_mm": 0.15049986376096325,
+          "first_ground_width_within_1_5mm_ray_mm": 1.3495001362390386
+        }
+      },
+      {
+        "track_uuid": "71ea73c2-7d71-5ceb-8317-7731a65808a8",
+        "xy_mm": [
+          59.38008832,
+          45.56991168
+        ],
+        "pad_transition": [],
+        "left": {
+          "first_ground_gap_mm": 0.1506964096906011,
+          "first_ground_width_within_1_5mm_ray_mm": 1.3122923803435256
+        },
+        "right": {
+          "first_ground_gap_mm": 0.15049986376096325,
+          "first_ground_width_within_1_5mm_ray_mm": 1.3495001362390386
+        }
+      },
+      {
+        "track_uuid": "71ea73c2-7d71-5ceb-8317-7731a65808a8",
+        "xy_mm": [
+          59.39732728,
+          45.55267272
+        ],
+        "pad_transition": [],
+        "left": {
+          "first_ground_gap_mm": 0.15482520549612983,
+          "first_ground_width_within_1_5mm_ray_mm": 1.3325431555712046
+        },
+        "right": {
+          "first_ground_gap_mm": 0.15049986376096325,
+          "first_ground_width_within_1_5mm_ray_mm": 1.3495001362390386
+        }
+      },
+      {
+        "track_uuid": "71ea73c2-7d71-5ceb-8317-7731a65808a8",
+        "xy_mm": [
+          59.41456624,
+          45.53543376
+        ],
+        "pad_transition": [],
+        "left": {
+          "first_ground_gap_mm": 0.1554995723304087,
+          "first_ground_width_within_1_5mm_ray_mm": 1.3445004276695933
+        },
+        "right": {
+          "first_ground_gap_mm": 0.15049986376096325,
+          "first_ground_width_within_1_5mm_ray_mm": 1.3495001362390386
+        }
+      },
+      {
+        "track_uuid": "71ea73c2-7d71-5ceb-8317-7731a65808a8",
+        "xy_mm": [
+          59.4318052,
+          45.518194799999996
+        ],
+        "pad_transition": [],
+        "left": {
+          "first_ground_gap_mm": 0.15549930081980134,
+          "first_ground_width_within_1_5mm_ray_mm": 1.3445006991802007
+        },
+        "right": {
+          "first_ground_gap_mm": 0.15049986376096325,
+          "first_ground_width_within_1_5mm_ray_mm": 1.3495001362390386
+        }
+      },
+      {
+        "track_uuid": "71ea73c2-7d71-5ceb-8317-7731a65808a8",
+        "xy_mm": [
+          59.44904416,
+          45.500955839999996
+        ],
+        "pad_transition": [],
+        "left": {
+          "first_ground_gap_mm": 0.15549902930919396,
+          "first_ground_width_within_1_5mm_ray_mm": 1.344500970690808
+        },
+        "right": {
+          "first_ground_gap_mm": 0.15049986376096325,
+          "first_ground_width_within_1_5mm_ray_mm": 1.3495001362390386
+        }
+      },
+      {
+        "track_uuid": "71ea73c2-7d71-5ceb-8317-7731a65808a8",
+        "xy_mm": [
+          59.46628312,
+          45.483716879999996
+        ],
+        "pad_transition": [],
+        "left": {
+          "first_ground_gap_mm": 0.15549875779858657,
+          "first_ground_width_within_1_5mm_ray_mm": 1.3445012422014155
+        },
+        "right": {
+          "first_ground_gap_mm": 0.15049986376096325,
+          "first_ground_width_within_1_5mm_ray_mm": 1.3495001362390386
+        }
+      },
+      {
+        "track_uuid": "71ea73c2-7d71-5ceb-8317-7731a65808a8",
+        "xy_mm": [
+          59.48352208,
+          45.466477919999996
+        ],
+        "pad_transition": [],
+        "left": {
+          "first_ground_gap_mm": 0.15549848628796917,
+          "first_ground_width_within_1_5mm_ray_mm": 1.3445015137120329
+        },
+        "right": {
+          "first_ground_gap_mm": 0.15049986376096325,
+          "first_ground_width_within_1_5mm_ray_mm": 1.3495001362390386
+        }
+      },
+      {
+        "track_uuid": "71ea73c2-7d71-5ceb-8317-7731a65808a8",
+        "xy_mm": [
+          59.50076104,
+          45.449238959999995
+        ],
+        "pad_transition": [],
+        "left": {
+          "first_ground_gap_mm": 0.15549821477736178,
+          "first_ground_width_within_1_5mm_ray_mm": 1.3445017852226402
+        },
+        "right": {
+          "first_ground_gap_mm": 0.15049986376096325,
+          "first_ground_width_within_1_5mm_ray_mm": 1.3495001362390386
+        }
+      },
+      {
+        "track_uuid": "71ea73c2-7d71-5ceb-8317-7731a65808a8",
+        "xy_mm": [
+          59.518,
+          45.432
+        ],
+        "pad_transition": [],
+        "left": {
+          "first_ground_gap_mm": 0.15549794326675442,
+          "first_ground_width_within_1_5mm_ray_mm": 1.3445020567332475
+        },
+        "right": {
+          "first_ground_gap_mm": 0.15049986376096325,
+          "first_ground_width_within_1_5mm_ray_mm": 1.3495001362390386
+        }
+      },
+      {
+        "track_uuid": "71ea73c2-7d71-5ceb-8317-7731a65808a8",
+        "xy_mm": [
+          59.535238959999994,
+          45.41476104
+        ],
+        "pad_transition": [],
+        "left": {
+          "first_ground_gap_mm": 0.15634324303948008,
+          "first_ground_width_within_1_5mm_ray_mm": 1.343656756960522
+        },
+        "right": {
+          "first_ground_gap_mm": 0.15049986376096325,
+          "first_ground_width_within_1_5mm_ray_mm": 1.3495001362390386
+        }
+      },
+      {
+        "track_uuid": "71ea73c2-7d71-5ceb-8317-7731a65808a8",
+        "xy_mm": [
+          59.552477919999994,
+          45.39752208
+        ],
+        "pad_transition": [],
+        "left": {
+          "first_ground_gap_mm": 0.16644146371452104,
+          "first_ground_width_within_1_5mm_ray_mm": 1.333558536285481
+        },
+        "right": {
+          "first_ground_gap_mm": 0.15049986376095822,
+          "first_ground_width_within_1_5mm_ray_mm": 1.3495001362390437
+        }
+      },
+      {
+        "track_uuid": "71ea73c2-7d71-5ceb-8317-7731a65808a8",
+        "xy_mm": [
+          59.569716879999994,
+          45.38028312
+        ],
+        "pad_transition": [],
+        "left": {
+          "first_ground_gap_mm": 0.1765396843897328,
+          "first_ground_width_within_1_5mm_ray_mm": 1.3234603156102691
+        },
+        "right": {
+          "first_ground_gap_mm": 0.15049986376096325,
+          "first_ground_width_within_1_5mm_ray_mm": 1.3495001362390386
+        }
+      },
+      {
+        "track_uuid": "71ea73c2-7d71-5ceb-8317-7731a65808a8",
+        "xy_mm": [
+          59.586955839999995,
+          45.36304416
+        ],
+        "pad_transition": [],
+        "left": {
+          "first_ground_gap_mm": 0.20839541940999964,
+          "first_ground_width_within_1_5mm_ray_mm": 1.2916045805900023
+        },
+        "right": {
+          "first_ground_gap_mm": 0.15049986376096325,
+          "first_ground_width_within_1_5mm_ray_mm": 1.3495001362390386
+        }
+      },
+      {
+        "track_uuid": "71ea73c2-7d71-5ceb-8317-7731a65808a8",
+        "xy_mm": [
+          59.604194799999995,
+          45.3458052
+        ],
+        "pad_transition": [],
+        "left": {
+          "first_ground_gap_mm": 0.2257039226313482,
+          "first_ground_width_within_1_5mm_ray_mm": 1.2742960773686538
+        },
+        "right": {
+          "first_ground_gap_mm": 0.15049986376096325,
+          "first_ground_width_within_1_5mm_ray_mm": 1.3495001362390386
+        }
+      },
+      {
+        "track_uuid": "71ea73c2-7d71-5ceb-8317-7731a65808a8",
+        "xy_mm": [
+          59.621433759999995,
+          45.32856624
+        ],
+        "pad_transition": [],
+        "left": {
+          "first_ground_gap_mm": 0.2500834936645559,
+          "first_ground_width_within_1_5mm_ray_mm": 1.249916506335446
+        },
+        "right": {
+          "first_ground_gap_mm": 0.15049986376096325,
+          "first_ground_width_within_1_5mm_ray_mm": 1.3495001362390386
+        }
+      },
+      {
+        "track_uuid": "71ea73c2-7d71-5ceb-8317-7731a65808a8",
+        "xy_mm": [
+          59.638672719999995,
+          45.31132728
+        ],
+        "pad_transition": [],
+        "left": {
+          "first_ground_gap_mm": 0.2744630646977635,
+          "first_ground_width_within_1_5mm_ray_mm": 1.2255369353022385
+        },
+        "right": {
+          "first_ground_gap_mm": 0.15049986376096325,
+          "first_ground_width_within_1_5mm_ray_mm": 1.3495001362390386
+        }
+      },
+      {
+        "track_uuid": "71ea73c2-7d71-5ceb-8317-7731a65808a8",
+        "xy_mm": [
+          59.655911679999996,
+          45.29408832
+        ],
+        "pad_transition": [],
+        "left": {
+          "first_ground_gap_mm": 0.29884263573097114,
+          "first_ground_width_within_1_5mm_ray_mm": 1.2011573642690307
+        },
+        "right": {
+          "first_ground_gap_mm": 0.15049986376096325,
+          "first_ground_width_within_1_5mm_ray_mm": 1.3495001362390386
+        }
+      },
+      {
+        "track_uuid": "71ea73c2-7d71-5ceb-8317-7731a65808a8",
+        "xy_mm": [
+          59.673150639999996,
+          45.27684936
+        ],
+        "pad_transition": [],
+        "left": {
+          "first_ground_gap_mm": 0.3232222067641788,
+          "first_ground_width_within_1_5mm_ray_mm": 1.1767777932358232
+        },
+        "right": {
+          "first_ground_gap_mm": 0.15049986376096325,
+          "first_ground_width_within_1_5mm_ray_mm": 1.3495001362390386
+        }
+      },
+      {
+        "track_uuid": "71ea73c2-7d71-5ceb-8317-7731a65808a8",
+        "xy_mm": [
+          59.690389599999996,
+          45.2596104
+        ],
+        "pad_transition": [],
+        "left": {
+          "first_ground_gap_mm": 0.34760177779738644,
+          "first_ground_width_within_1_5mm_ray_mm": 1.1523982222026157
+        },
+        "right": {
+          "first_ground_gap_mm": 0.15049986376096325,
+          "first_ground_width_within_1_5mm_ray_mm": 1.3495001362390386
+        }
+      },
+      {
+        "track_uuid": "71ea73c2-7d71-5ceb-8317-7731a65808a8",
+        "xy_mm": [
+          59.707628559999996,
+          45.24237144
+        ],
+        "pad_transition": [],
+        "left": {
+          "first_ground_gap_mm": 0.3719813488305941,
+          "first_ground_width_within_1_5mm_ray_mm": 1.128018651169408
+        },
+        "right": {
+          "first_ground_gap_mm": 0.15049986376096325,
+          "first_ground_width_within_1_5mm_ray_mm": 1.3495001362390386
+        }
+      },
+      {
+        "track_uuid": "71ea73c2-7d71-5ceb-8317-7731a65808a8",
+        "xy_mm": [
+          59.72486752,
+          45.22513248
+        ],
+        "pad_transition": [],
+        "left": {
+          "first_ground_gap_mm": 0.39636091986380173,
+          "first_ground_width_within_1_5mm_ray_mm": 1.1036390801362002
+        },
+        "right": {
+          "first_ground_gap_mm": 0.15049986376096325,
+          "first_ground_width_within_1_5mm_ray_mm": 1.3495001362390386
+        }
+      },
+      {
+        "track_uuid": "740ac384-10f4-5041-b815-3217c9c18283",
+        "xy_mm": [
+          59.99318751515152,
+          45.11400001515151
+        ],
+        "pad_transition": [
+          "U3.11"
+        ],
+        "left": {
+          "first_ground_gap_mm": 0.325500984848917,
+          "first_ground_width_within_1_5mm_ray_mm": 1.098999000000845
+        },
+        "right": {
+          "first_ground_gap_mm": 0.32549901515193547,
+          "first_ground_width_within_1_5mm_ray_mm": 1.1745009848480608
+        }
+      },
+      {
+        "track_uuid": "740ac384-10f4-5041-b815-3217c9c18283",
+        "xy_mm": [
+          60.01761254545455,
+          45.114000045454546
+        ],
+        "pad_transition": [
+          "U3.11"
+        ],
+        "left": {
+          "first_ground_gap_mm": 0.32550095454588224,
+          "first_ground_width_within_1_5mm_ray_mm": 1.098999000000845
+        },
+        "right": {
+          "first_ground_gap_mm": 0.3254990454549702,
+          "first_ground_width_within_1_5mm_ray_mm": 1.1745009545450331
+        }
+      },
+      {
+        "track_uuid": "740ac384-10f4-5041-b815-3217c9c18283",
+        "xy_mm": [
+          60.042037575757575,
+          45.11400007575757
+        ],
+        "pad_transition": [
+          "U3.11"
+        ],
+        "left": {
+          "first_ground_gap_mm": 0.3255009242428546,
+          "first_ground_width_within_1_5mm_ray_mm": 1.098999000000845
+        },
+        "right": {
+          "first_ground_gap_mm": 0.32549907575799786,
+          "first_ground_width_within_1_5mm_ray_mm": 1.1745009242420055
+        }
+      },
+      {
+        "track_uuid": "740ac384-10f4-5041-b815-3217c9c18283",
+        "xy_mm": [
+          60.066462606060604,
+          45.1140001060606
+        ],
+        "pad_transition": [
+          "U3.11"
+        ],
+        "left": {
+          "first_ground_gap_mm": 0.32550089393982695,
+          "first_ground_width_within_1_5mm_ray_mm": 1.098999000000845
+        },
+        "right": {
+          "first_ground_gap_mm": 0.3254991060610255,
+          "first_ground_width_within_1_5mm_ray_mm": 1.1745008939389778
+        }
+      },
+      {
+        "track_uuid": "740ac384-10f4-5041-b815-3217c9c18283",
+        "xy_mm": [
+          60.09088763636364,
+          45.114000136363636
+        ],
+        "pad_transition": [
+          "U3.11"
+        ],
+        "left": {
+          "first_ground_gap_mm": 0.3255008636367922,
+          "first_ground_width_within_1_5mm_ray_mm": 1.098999000000845
+        },
+        "right": {
+          "first_ground_gap_mm": 0.32549913636406025,
+          "first_ground_width_within_1_5mm_ray_mm": 1.174500863635936
+        }
+      },
+      {
+        "track_uuid": "740ac384-10f4-5041-b815-3217c9c18283",
+        "xy_mm": [
+          60.11531266666667,
+          45.11400016666666
+        ],
+        "pad_transition": [
+          "U3.11"
+        ],
+        "left": {
+          "first_ground_gap_mm": 0.32550083333376456,
+          "first_ground_width_within_1_5mm_ray_mm": 1.098999000000845
+        },
+        "right": {
+          "first_ground_gap_mm": 0.3254991666670879,
+          "first_ground_width_within_1_5mm_ray_mm": 1.1745008333329083
+        }
+      },
+      {
+        "track_uuid": "740ac384-10f4-5041-b815-3217c9c18283",
+        "xy_mm": [
+          60.139737696969696,
+          45.1140001969697
+        ],
+        "pad_transition": [
+          "U3.11"
+        ],
+        "left": {
+          "first_ground_gap_mm": 0.3255008030307298,
+          "first_ground_width_within_1_5mm_ray_mm": 1.098999000000845
+        },
+        "right": {
+          "first_ground_gap_mm": 0.32549919697012264,
+          "first_ground_width_within_1_5mm_ray_mm": 1.1745008030298807
+        }
+      },
+      {
+        "track_uuid": "740ac384-10f4-5041-b815-3217c9c18283",
+        "xy_mm": [
+          60.164162727272725,
+          45.114000227272726
+        ],
+        "pad_transition": [
+          "U3.11"
+        ],
+        "left": {
+          "first_ground_gap_mm": 0.32550077272770217,
+          "first_ground_width_within_1_5mm_ray_mm": 1.098999000000845
+        },
+        "right": {
+          "first_ground_gap_mm": 0.3254992272731503,
+          "first_ground_width_within_1_5mm_ray_mm": 1.174500772726853
+        }
+      },
+      {
+        "track_uuid": "740ac384-10f4-5041-b815-3217c9c18283",
+        "xy_mm": [
+          60.18858775757576,
+          45.11400025757575
+        ],
+        "pad_transition": [
+          "U3.11"
+        ],
+        "left": {
+          "first_ground_gap_mm": 0.3255007424246745,
+          "first_ground_width_within_1_5mm_ray_mm": 1.098999000000845
+        },
+        "right": {
+          "first_ground_gap_mm": 0.3254992575761779,
+          "first_ground_width_within_1_5mm_ray_mm": 1.1745007424238254
+        }
+      },
+      {
+        "track_uuid": "740ac384-10f4-5041-b815-3217c9c18283",
+        "xy_mm": [
+          60.21301278787879,
+          45.11400028787879
+        ],
+        "pad_transition": [
+          "U3.11"
+        ],
+        "left": {
+          "first_ground_gap_mm": 0.3255007121216398,
+          "first_ground_width_within_1_5mm_ray_mm": 1.098999000000845
+        },
+        "right": {
+          "first_ground_gap_mm": 0.3254992878792127,
+          "first_ground_width_within_1_5mm_ray_mm": 1.1745007121207836
+        }
+      },
+      {
+        "track_uuid": "740ac384-10f4-5041-b815-3217c9c18283",
+        "xy_mm": [
+          60.23743781818182,
+          45.114000318181816
+        ],
+        "pad_transition": [
+          "U3.11"
+        ],
+        "left": {
+          "first_ground_gap_mm": 0.32550068181861214,
+          "first_ground_width_within_1_5mm_ray_mm": 1.098999000000845
+        },
+        "right": {
+          "first_ground_gap_mm": 0.3254993181822403,
+          "first_ground_width_within_1_5mm_ray_mm": 1.174500681817756
+        }
+      },
+      {
+        "track_uuid": "740ac384-10f4-5041-b815-3217c9c18283",
+        "xy_mm": [
+          60.261862848484846,
+          45.11400034848485
+        ],
+        "pad_transition": [
+          "U3.11"
+        ],
+        "left": {
+          "first_ground_gap_mm": 0.3255006515155774,
+          "first_ground_width_within_1_5mm_ray_mm": 1.098999000000845
+        },
+        "right": {
+          "first_ground_gap_mm": 0.32549934848527506,
+          "first_ground_width_within_1_5mm_ray_mm": 1.1745006515147283
+        }
+      },
+      {
+        "track_uuid": "740ac384-10f4-5041-b815-3217c9c18283",
+        "xy_mm": [
+          60.28628787878788,
+          45.11400037878788
+        ],
+        "pad_transition": [
+          "U3.11"
+        ],
+        "left": {
+          "first_ground_gap_mm": 0.32550062121254975,
+          "first_ground_width_within_1_5mm_ray_mm": 1.098999000000845
+        },
+        "right": {
+          "first_ground_gap_mm": 0.3254993787883027,
+          "first_ground_width_within_1_5mm_ray_mm": 1.1745006212117006
+        }
+      },
+      {
+        "track_uuid": "740ac384-10f4-5041-b815-3217c9c18283",
+        "xy_mm": [
+          60.31071290909091,
+          45.114000409090906
+        ],
+        "pad_transition": [
+          "U3.11"
+        ],
+        "left": {
+          "first_ground_gap_mm": 0.3255005909095221,
+          "first_ground_width_within_1_5mm_ray_mm": 1.098999000000845
+        },
+        "right": {
+          "first_ground_gap_mm": 0.32549940909133035,
+          "first_ground_width_within_1_5mm_ray_mm": 1.174500590908673
+        }
+      },
+      {
+        "track_uuid": "740ac384-10f4-5041-b815-3217c9c18283",
+        "xy_mm": [
+          60.33513793939394,
+          45.11400043939394
+        ],
+        "pad_transition": [
+          "U3.11"
+        ],
+        "left": {
+          "first_ground_gap_mm": 0.32550056060648735,
+          "first_ground_width_within_1_5mm_ray_mm": 1.098999000000845
+        },
+        "right": {
+          "first_ground_gap_mm": 0.3254994393943651,
+          "first_ground_width_within_1_5mm_ray_mm": 1.1745005606056311
+        }
+      },
+      {
+        "track_uuid": "740ac384-10f4-5041-b815-3217c9c18283",
+        "xy_mm": [
+          60.35956296969697,
+          45.11400046969697
+        ],
+        "pad_transition": [
+          "U3.11"
+        ],
+        "left": {
+          "first_ground_gap_mm": 0.3255005303034597,
+          "first_ground_width_within_1_5mm_ray_mm": 1.098999000000845
+        },
+        "right": {
+          "first_ground_gap_mm": 0.32549946969739274,
+          "first_ground_width_within_1_5mm_ray_mm": 1.1745005303026035
+        }
+      },
+      {
+        "track_uuid": "740ac384-10f4-5041-b815-3217c9c18283",
+        "xy_mm": [
+          60.383988,
+          45.1140005
+        ],
+        "pad_transition": [
+          "U3.11"
+        ],
+        "left": {
+          "first_ground_gap_mm": 0.32550050000042496,
+          "first_ground_width_within_1_5mm_ray_mm": 1.098999000000845
+        },
+        "right": {
+          "first_ground_gap_mm": 0.3254995000004275,
+          "first_ground_width_within_1_5mm_ray_mm": 1.1745004999995758
+        }
+      },
+      {
+        "track_uuid": "740ac384-10f4-5041-b815-3217c9c18283",
+        "xy_mm": [
+          60.40841303030303,
+          45.11400053030303
+        ],
+        "pad_transition": [
+          "U3.11"
+        ],
+        "left": {
+          "first_ground_gap_mm": 0.3255004696973973,
+          "first_ground_width_within_1_5mm_ray_mm": 1.098999000000845
+        },
+        "right": {
+          "first_ground_gap_mm": 0.32549953030345513,
+          "first_ground_width_within_1_5mm_ray_mm": 1.1745004696965482
+        }
+      },
+      {
+        "track_uuid": "740ac384-10f4-5041-b815-3217c9c18283",
+        "xy_mm": [
+          60.43283806060606,
+          45.11400056060606
+        ],
+        "pad_transition": [
+          "U3.11"
+        ],
+        "left": {
+          "first_ground_gap_mm": 0.3255004393943697,
+          "first_ground_width_within_1_5mm_ray_mm": 1.098999000000845
+        },
+        "right": {
+          "first_ground_gap_mm": 0.3254995606064828,
+          "first_ground_width_within_1_5mm_ray_mm": 1.1745004393935206
+        }
+      },
+      {
+        "track_uuid": "740ac384-10f4-5041-b815-3217c9c18283",
+        "xy_mm": [
+          60.45726309090909,
+          45.11400059090909
+        ],
+        "pad_transition": [
+          "U3.11"
+        ],
+        "left": {
+          "first_ground_gap_mm": 0.32550040909133493,
+          "first_ground_width_within_1_5mm_ray_mm": 1.098999000000845
+        },
+        "right": {
+          "first_ground_gap_mm": 0.3254995909095175,
+          "first_ground_width_within_1_5mm_ray_mm": 1.1745004090904787
+        }
+      },
+      {
+        "track_uuid": "740ac384-10f4-5041-b815-3217c9c18283",
+        "xy_mm": [
+          60.481688121212116,
+          45.11400062121212
+        ],
+        "pad_transition": [
+          "U3.11"
+        ],
+        "left": {
+          "first_ground_gap_mm": 0.3255003787883073,
+          "first_ground_width_within_1_5mm_ray_mm": 1.098999000000845
+        },
+        "right": {
+          "first_ground_gap_mm": 0.32549962121254516,
+          "first_ground_width_within_1_5mm_ray_mm": 1.174500378787451
+        }
+      },
+      {
+        "track_uuid": "740ac384-10f4-5041-b815-3217c9c18283",
+        "xy_mm": [
+          60.50611315151515,
+          45.11400065151515
+        ],
+        "pad_transition": [
+          "U3.11"
+        ],
+        "left": {
+          "first_ground_gap_mm": 0.32550034848527964,
+          "first_ground_width_within_1_5mm_ray_mm": 1.098999000000845
+        },
+        "right": {
+          "first_ground_gap_mm": 0.3254996515155728,
+          "first_ground_width_within_1_5mm_ray_mm": 1.1745003484844234
+        }
+      },
+      {
+        "track_uuid": "740ac384-10f4-5041-b815-3217c9c18283",
+        "xy_mm": [
+          60.53053818181818,
+          45.11400068181818
+        ],
+        "pad_transition": [
+          "U3.11"
+        ],
+        "left": {
+          "first_ground_gap_mm": 0.3255003181822449,
+          "first_ground_width_within_1_5mm_ray_mm": 1.098999000000845
+        },
+        "right": {
+          "first_ground_gap_mm": 0.32549968181860756,
+          "first_ground_width_within_1_5mm_ray_mm": 1.1745003181813958
+        }
+      },
+      {
+        "track_uuid": "740ac384-10f4-5041-b815-3217c9c18283",
+        "xy_mm": [
+          60.55496321212121,
+          45.11400071212121
+        ],
+        "pad_transition": [
+          "U3.11"
+        ],
+        "left": {
+          "first_ground_gap_mm": 0.32550028787921725,
+          "first_ground_width_within_1_5mm_ray_mm": 1.098999000000845
+        },
+        "right": {
+          "first_ground_gap_mm": 0.3254997121216352,
+          "first_ground_width_within_1_5mm_ray_mm": 1.1745002878783681
+        }
+      },
+      {
+        "track_uuid": "740ac384-10f4-5041-b815-3217c9c18283",
+        "xy_mm": [
+          60.57938824242424,
+          45.114000742424246
+        ],
+        "pad_transition": [
+          "U3.11"
+        ],
+        "left": {
+          "first_ground_gap_mm": 0.3255002575761825,
+          "first_ground_width_within_1_5mm_ray_mm": 1.098999000000845
+        },
+        "right": {
+          "first_ground_gap_mm": 0.32549974242466995,
+          "first_ground_width_within_1_5mm_ray_mm": 1.1745002575753263
+        }
+      },
+      {
+        "track_uuid": "740ac384-10f4-5041-b815-3217c9c18283",
+        "xy_mm": [
+          60.60381327272727,
+          45.11400077272727
+        ],
+        "pad_transition": [
+          "U3.11"
+        ],
+        "left": {
+          "first_ground_gap_mm": 0.32550022727315486,
+          "first_ground_width_within_1_5mm_ray_mm": 1.098999000000845
+        },
+        "right": {
+          "first_ground_gap_mm": 0.3254997727276976,
+          "first_ground_width_within_1_5mm_ray_mm": 1.1745002272722986
+        }
+      },
+      {
+        "track_uuid": "740ac384-10f4-5041-b815-3217c9c18283",
+        "xy_mm": [
+          60.6282383030303,
+          45.1140008030303
+        ],
+        "pad_transition": [
+          "U3.11"
+        ],
+        "left": {
+          "first_ground_gap_mm": 0.3255001969701272,
+          "first_ground_width_within_1_5mm_ray_mm": 1.098999000000845
+        },
+        "right": {
+          "first_ground_gap_mm": 0.32549980303072523,
+          "first_ground_width_within_1_5mm_ray_mm": 1.174500196969271
+        }
+      },
+      {
+        "track_uuid": "740ac384-10f4-5041-b815-3217c9c18283",
+        "xy_mm": [
+          60.65266333333333,
+          45.114000833333336
+        ],
+        "pad_transition": [
+          "U3.11"
+        ],
+        "left": {
+          "first_ground_gap_mm": 0.32550016666709247,
+          "first_ground_width_within_1_5mm_ray_mm": 1.098999000000845
+        },
+        "right": {
+          "first_ground_gap_mm": 0.32549983333376,
+          "first_ground_width_within_1_5mm_ray_mm": 1.1745001666662434
+        }
+      },
+      {
+        "track_uuid": "740ac384-10f4-5041-b815-3217c9c18283",
+        "xy_mm": [
+          60.67708836363636,
+          45.11400086363636
+        ],
+        "pad_transition": [
+          "U3.11"
+        ],
+        "left": {
+          "first_ground_gap_mm": 0.32550013636406483,
+          "first_ground_width_within_1_5mm_ray_mm": 1.098999000000845
+        },
+        "right": {
+          "first_ground_gap_mm": 0.3254998636367876,
+          "first_ground_width_within_1_5mm_ray_mm": 1.1745001363632157
+        }
+      },
+      {
+        "track_uuid": "740ac384-10f4-5041-b815-3217c9c18283",
+        "xy_mm": [
+          60.70151339393939,
+          45.1140008939394
+        ],
+        "pad_transition": [
+          "U3.11"
+        ],
+        "left": {
+          "first_ground_gap_mm": 0.3255001060610301,
+          "first_ground_width_within_1_5mm_ray_mm": 1.098999000000845
+        },
+        "right": {
+          "first_ground_gap_mm": 0.32549989393982237,
+          "first_ground_width_within_1_5mm_ray_mm": 1.1745001060601739
+        }
+      },
+      {
+        "track_uuid": "740ac384-10f4-5041-b815-3217c9c18283",
+        "xy_mm": [
+          60.72593842424242,
+          45.114000924242426
+        ],
+        "pad_transition": [
+          "U3.11"
+        ],
+        "left": {
+          "first_ground_gap_mm": 0.32550007575800244,
+          "first_ground_width_within_1_5mm_ray_mm": 1.098999000000845
+        },
+        "right": {
+          "first_ground_gap_mm": 0.32549992424285,
+          "first_ground_width_within_1_5mm_ray_mm": 1.1745000757571462
+        }
+      },
+      {
+        "track_uuid": "740ac384-10f4-5041-b815-3217c9c18283",
+        "xy_mm": [
+          60.75036345454545,
+          45.11400095454545
+        ],
+        "pad_transition": [
+          "U3.11"
+        ],
+        "left": {
+          "first_ground_gap_mm": 0.3255000454549748,
+          "first_ground_width_within_1_5mm_ray_mm": 1.098999000000845
+        },
+        "right": {
+          "first_ground_gap_mm": 0.32549995454587766,
+          "first_ground_width_within_1_5mm_ray_mm": 1.1745000454541186
+        }
+      },
+      {
+        "track_uuid": "740ac384-10f4-5041-b815-3217c9c18283",
+        "xy_mm": [
+          60.77478848484848,
+          45.11400098484849
+        ],
+        "pad_transition": [
+          "U3.11"
+        ],
+        "left": {
+          "first_ground_gap_mm": 0.32550001515194005,
+          "first_ground_width_within_1_5mm_ray_mm": 1.098999000000845
+        },
+        "right": {
+          "first_ground_gap_mm": 0.3254999848489124,
+          "first_ground_width_within_1_5mm_ray_mm": 1.174500015151091
+        }
+      },
+      {
+        "track_uuid": "777eea7c-048b-531a-ab44-0903cc915bf7",
+        "xy_mm": [
+          57.55735245901639,
+          45.75
+        ],
+        "pad_transition": [
+          "D3.2"
+        ],
+        "left": {
+          "first_ground_gap_mm": 0.16722145994720705,
+          "first_ground_width_within_1_5mm_ray_mm": 1.2792785400527933
+        },
+        "right": {
+          "first_ground_gap_mm": 0.15050000000000097,
+          "first_ground_width_within_1_5mm_ray_mm": 0.7939844590163858
+        }
+      },
+      {
+        "track_uuid": "777eea7c-048b-531a-ab44-0903cc915bf7",
+        "xy_mm": [
+          57.582107377049184,
+          45.75
+        ],
+        "pad_transition": [
+          "D3.2"
+        ],
+        "left": {
+          "first_ground_gap_mm": 0.16034409299630425,
+          "first_ground_width_within_1_5mm_ray_mm": 1.286155907003696
+        },
+        "right": {
+          "first_ground_gap_mm": 0.15556554137835832,
+          "first_ground_width_within_1_5mm_ray_mm": 0.8136738356708193
+        }
+      },
+      {
+        "track_uuid": "777eea7c-048b-531a-ab44-0903cc915bf7",
+        "xy_mm": [
+          57.60686229508197,
+          45.75
+        ],
+        "pad_transition": [
+          "D3.2"
+        ],
+        "left": {
+          "first_ground_gap_mm": 0.17059801631452132,
+          "first_ground_width_within_1_5mm_ray_mm": 1.275901983685479
+        },
+        "right": {
+          "first_ground_gap_mm": 0.16581929846742582,
+          "first_ground_width_within_1_5mm_ray_mm": 1.3341807015325742
+        }
+      },
+      {
+        "track_uuid": "777eea7c-048b-531a-ab44-0903cc915bf7",
+        "xy_mm": [
+          57.63161721311476,
+          45.75
+        ],
+        "pad_transition": [
+          "D3.2"
+        ],
+        "left": {
+          "first_ground_gap_mm": 0.17914192954379615,
+          "first_ground_width_within_1_5mm_ray_mm": 1.2673580704562042
+        },
+        "right": {
+          "first_ground_gap_mm": 0.17914038991695236,
+          "first_ground_width_within_1_5mm_ray_mm": 1.3208596100830476
+        }
+      },
+      {
+        "track_uuid": "777eea7c-048b-531a-ab44-0903cc915bf7",
+        "xy_mm": [
+          57.65637213114754,
+          45.75
+        ],
+        "pad_transition": [
+          "D3.2"
+        ],
+        "left": {
+          "first_ground_gap_mm": 0.19007225652737247,
+          "first_ground_width_within_1_5mm_ray_mm": 1.2564277434726279
+        },
+        "right": {
+          "first_ground_gap_mm": 0.1900708232545938,
+          "first_ground_width_within_1_5mm_ray_mm": 1.3099291767454062
+        }
+      },
+      {
+        "track_uuid": "777eea7c-048b-531a-ab44-0903cc915bf7",
+        "xy_mm": [
+          57.681127049180326,
+          45.75
+        ],
+        "pad_transition": [
+          "D3.2"
+        ],
+        "left": {
+          "first_ground_gap_mm": 0.2010025835109417,
+          "first_ground_width_within_1_5mm_ray_mm": 1.2454974164890587
+        },
+        "right": {
+          "first_ground_gap_mm": 0.20100125659223522,
+          "first_ground_width_within_1_5mm_ray_mm": 1.2989987434077648
+        }
+      },
+      {
+        "track_uuid": "777eea7c-048b-531a-ab44-0903cc915bf7",
+        "xy_mm": [
+          57.70588196721312,
+          45.75
+        ],
+        "pad_transition": [
+          "D3.2"
+        ],
+        "left": {
+          "first_ground_gap_mm": 0.211932910494518,
+          "first_ground_width_within_1_5mm_ray_mm": 1.2345670895054823
+        },
+        "right": {
+          "first_ground_gap_mm": 0.21193168992988376,
+          "first_ground_width_within_1_5mm_ray_mm": 1.2880683100701162
+        }
+      },
+      {
+        "track_uuid": "777eea7c-048b-531a-ab44-0903cc915bf7",
+        "xy_mm": [
+          57.7306368852459,
+          45.75
+        ],
+        "pad_transition": [
+          "D3.2"
+        ],
+        "left": {
+          "first_ground_gap_mm": 0.22265884428447436,
+          "first_ground_width_within_1_5mm_ray_mm": 1.223841155715526
+        },
+        "right": {
+          "first_ground_gap_mm": 0.22265736403321057,
+          "first_ground_width_within_1_5mm_ray_mm": 1.2773426359667894
+        }
+      },
+      {
+        "track_uuid": "777eea7c-048b-531a-ab44-0903cc915bf7",
+        "xy_mm": [
+          57.75539180327869,
+          45.75
+        ],
+        "pad_transition": [
+          "D3.2"
+        ],
+        "left": {
+          "first_ground_gap_mm": 0.22550099947562074,
+          "first_ground_width_within_1_5mm_ray_mm": 1.2209990005243796
+        },
+        "right": {
+          "first_ground_gap_mm": 0.22549899999999923,
+          "first_ground_width_within_1_5mm_ray_mm": 1.2745010000000008
+        }
+      },
+      {
+        "track_uuid": "777eea7c-048b-531a-ab44-0903cc915bf7",
+        "xy_mm": [
+          57.780146721311475,
+          45.75
+        ],
+        "pad_transition": [
+          "D3.2"
+        ],
+        "left": {
+          "first_ground_gap_mm": 0.22550094892742578,
+          "first_ground_width_within_1_5mm_ray_mm": 1.2209990510725746
+        },
+        "right": {
+          "first_ground_gap_mm": 0.22549899999999923,
+          "first_ground_width_within_1_5mm_ray_mm": 1.2745010000000008
+        }
+      },
+      {
+        "track_uuid": "777eea7c-048b-531a-ab44-0903cc915bf7",
+        "xy_mm": [
+          57.804901639344266,
+          45.75
+        ],
+        "pad_transition": [
+          "D3.2"
+        ],
+        "left": {
+          "first_ground_gap_mm": 0.22550089837923082,
+          "first_ground_width_within_1_5mm_ray_mm": 1.2209991016207695
+        },
+        "right": {
+          "first_ground_gap_mm": 0.22549899999999923,
+          "first_ground_width_within_1_5mm_ray_mm": 1.2745010000000008
+        }
+      },
+      {
+        "track_uuid": "777eea7c-048b-531a-ab44-0903cc915bf7",
+        "xy_mm": [
+          57.82965655737705,
+          45.75
+        ],
+        "pad_transition": [
+          "D3.2"
+        ],
+        "left": {
+          "first_ground_gap_mm": 0.22550084783102875,
+          "first_ground_width_within_1_5mm_ray_mm": 1.2209991521689716
+        },
+        "right": {
+          "first_ground_gap_mm": 0.22549899999999923,
+          "first_ground_width_within_1_5mm_ray_mm": 1.2745010000000008
+        }
+      },
+      {
+        "track_uuid": "777eea7c-048b-531a-ab44-0903cc915bf7",
+        "xy_mm": [
+          57.85441147540984,
+          45.75
+        ],
+        "pad_transition": [
+          "D3.2"
+        ],
+        "left": {
+          "first_ground_gap_mm": 0.2255007972828338,
+          "first_ground_width_within_1_5mm_ray_mm": 1.2209992027171666
+        },
+        "right": {
+          "first_ground_gap_mm": 0.22549899999999923,
+          "first_ground_width_within_1_5mm_ray_mm": 1.2745010000000008
+        }
+      },
+      {
+        "track_uuid": "777eea7c-048b-531a-ab44-0903cc915bf7",
+        "xy_mm": [
+          57.879166393442624,
+          45.75
+        ],
+        "pad_transition": [
+          "D3.2"
+        ],
+        "left": {
+          "first_ground_gap_mm": 0.22550074673463882,
+          "first_ground_width_within_1_5mm_ray_mm": 1.2209992532653615
+        },
+        "right": {
+          "first_ground_gap_mm": 0.22549899999999923,
+          "first_ground_width_within_1_5mm_ray_mm": 1.2745010000000008
+        }
+      },
+      {
+        "track_uuid": "777eea7c-048b-531a-ab44-0903cc915bf7",
+        "xy_mm": [
+          57.90392131147541,
+          45.75
+        ],
+        "pad_transition": [
+          "D3.2"
+        ],
+        "left": {
+          "first_ground_gap_mm": 0.22550069618643676,
+          "first_ground_width_within_1_5mm_ray_mm": 1.211098705661243
+        },
+        "right": {
+          "first_ground_gap_mm": 0.22549899999999923,
+          "first_ground_width_within_1_5mm_ray_mm": 1.2745010000000008
+        }
+      },
+      {
+        "track_uuid": "777eea7c-048b-531a-ab44-0903cc915bf7",
+        "xy_mm": [
+          57.9286762295082,
+          45.75
+        ],
+        "pad_transition": [
+          "D3.2"
+        ],
+        "left": {
+          "first_ground_gap_mm": 0.2255006456382418,
+          "first_ground_width_within_1_5mm_ray_mm": 1.2008449991203705
+        },
+        "right": {
+          "first_ground_gap_mm": 0.22549899999999923,
+          "first_ground_width_within_1_5mm_ray_mm": 1.2745010000000008
+        }
+      },
+      {
+        "track_uuid": "777eea7c-048b-531a-ab44-0903cc915bf7",
+        "xy_mm": [
+          57.95343114754098,
+          45.75
+        ],
+        "pad_transition": [
+          "D3.2"
+        ],
+        "left": {
+          "first_ground_gap_mm": 0.22550059509004683,
+          "first_ground_width_within_1_5mm_ray_mm": 1.1782386818422594
+        },
+        "right": {
+          "first_ground_gap_mm": 0.22549899999999923,
+          "first_ground_width_within_1_5mm_ray_mm": 1.2745010000000008
+        }
+      },
+      {
+        "track_uuid": "777eea7c-048b-531a-ab44-0903cc915bf7",
+        "xy_mm": [
+          57.97818606557377,
+          45.75
+        ],
+        "pad_transition": [
+          "D3.2"
+        ],
+        "left": {
+          "first_ground_gap_mm": 0.22550054454184476,
+          "first_ground_width_within_1_5mm_ray_mm": 1.1586229422007008
+        },
+        "right": {
+          "first_ground_gap_mm": 0.22549899999999923,
+          "first_ground_width_within_1_5mm_ray_mm": 1.2745010000000008
+        }
+      },
+      {
+        "track_uuid": "777eea7c-048b-531a-ab44-0903cc915bf7",
+        "xy_mm": [
+          58.00294098360656,
+          45.75
+        ],
+        "pad_transition": [
+          "D3.2"
+        ],
+        "left": {
+          "first_ground_gap_mm": 0.2255004939936498,
+          "first_ground_width_within_1_5mm_ray_mm": 1.147692728609492
+        },
+        "right": {
+          "first_ground_gap_mm": 0.22549899999999923,
+          "first_ground_width_within_1_5mm_ray_mm": 1.2745010000000008
+        }
+      },
+      {
+        "track_uuid": "777eea7c-048b-531a-ab44-0903cc915bf7",
+        "xy_mm": [
+          58.02769590163935,
+          45.75
+        ],
+        "pad_transition": [
+          "D3.2"
+        ],
+        "left": {
+          "first_ground_gap_mm": 0.22550044344545483,
+          "first_ground_width_within_1_5mm_ray_mm": 1.1367625150182832
+        },
+        "right": {
+          "first_ground_gap_mm": 0.22549899999999923,
+          "first_ground_width_within_1_5mm_ray_mm": 1.2745010000000008
+        }
+      },
+      {
+        "track_uuid": "777eea7c-048b-531a-ab44-0903cc915bf7",
+        "xy_mm": [
+          58.05245081967213,
+          45.75
+        ],
+        "pad_transition": [
+          "D3.2"
+        ],
+        "left": {
+          "first_ground_gap_mm": 0.22550039289725277,
+          "first_ground_width_within_1_5mm_ray_mm": 1.1258323014270886
+        },
+        "right": {
+          "first_ground_gap_mm": 0.22549899999999923,
+          "first_ground_width_within_1_5mm_ray_mm": 1.2745010000000008
+        }
+      },
+      {
+        "track_uuid": "777eea7c-048b-531a-ab44-0903cc915bf7",
+        "xy_mm": [
+          58.07720573770492,
+          45.75
+        ],
+        "pad_transition": [
+          "D3.2"
+        ],
+        "left": {
+          "first_ground_gap_mm": 0.2255003423490578,
+          "first_ground_width_within_1_5mm_ray_mm": 1.11778833866898
+        },
+        "right": {
+          "first_ground_gap_mm": 0.22549899999999923,
+          "first_ground_width_within_1_5mm_ray_mm": 1.2745010000000008
+        }
+      },
+      {
+        "track_uuid": "777eea7c-048b-531a-ab44-0903cc915bf7",
+        "xy_mm": [
+          58.101960655737706,
+          45.75
+        ],
+        "pad_transition": [
+          "D3.2"
+        ],
+        "left": {
+          "first_ground_gap_mm": 0.22550029180086284,
+          "first_ground_width_within_1_5mm_ray_mm": 1.1159997081991335
+        },
+        "right": {
+          "first_ground_gap_mm": 0.22549899999999923,
+          "first_ground_width_within_1_5mm_ray_mm": 1.2745010000000008
+        }
+      },
+      {
+        "track_uuid": "777eea7c-048b-531a-ab44-0903cc915bf7",
+        "xy_mm": [
+          58.12671557377049,
+          45.75
+        ],
+        "pad_transition": [
+          "D3.2"
+        ],
+        "left": {
+          "first_ground_gap_mm": 0.22550024125266077,
+          "first_ground_width_within_1_5mm_ray_mm": 1.1159997587473356
+        },
+        "right": {
+          "first_ground_gap_mm": 0.22549899999999923,
+          "first_ground_width_within_1_5mm_ray_mm": 1.2745010000000008
+        }
+      },
+      {
+        "track_uuid": "777eea7c-048b-531a-ab44-0903cc915bf7",
+        "xy_mm": [
+          58.15147049180328,
+          45.75
+        ],
+        "pad_transition": [
+          "D3.2"
+        ],
+        "left": {
+          "first_ground_gap_mm": 0.2255001907044658,
+          "first_ground_width_within_1_5mm_ray_mm": 1.1159998092955306
+        },
+        "right": {
+          "first_ground_gap_mm": 0.22549899999999923,
+          "first_ground_width_within_1_5mm_ray_mm": 1.2745010000000008
+        }
+      },
+      {
+        "track_uuid": "777eea7c-048b-531a-ab44-0903cc915bf7",
+        "xy_mm": [
+          58.176225409836064,
+          45.75
+        ],
+        "pad_transition": [
+          "D3.2"
+        ],
+        "left": {
+          "first_ground_gap_mm": 0.22550014015627085,
+          "first_ground_width_within_1_5mm_ray_mm": 1.1159998598437255
+        },
+        "right": {
+          "first_ground_gap_mm": 0.22549899999999923,
+          "first_ground_width_within_1_5mm_ray_mm": 1.2745010000000008
+        }
+      },
+      {
+        "track_uuid": "777eea7c-048b-531a-ab44-0903cc915bf7",
+        "xy_mm": [
+          58.200980327868855,
+          45.75
+        ],
+        "pad_transition": [
+          "D3.2"
+        ],
+        "left": {
+          "first_ground_gap_mm": 0.22550008960806878,
+          "first_ground_width_within_1_5mm_ray_mm": 1.1159999103919276
+        },
+        "right": {
+          "first_ground_gap_mm": 0.22549899999999923,
+          "first_ground_width_within_1_5mm_ray_mm": 1.2745010000000008
+        }
+      },
+      {
+        "track_uuid": "777eea7c-048b-531a-ab44-0903cc915bf7",
+        "xy_mm": [
+          58.22573524590164,
+          45.75
+        ],
+        "pad_transition": [
+          "D3.2"
+        ],
+        "left": {
+          "first_ground_gap_mm": 0.2255000390598738,
+          "first_ground_width_within_1_5mm_ray_mm": 1.1159999609401225
+        },
+        "right": {
+          "first_ground_gap_mm": 0.22549899999999923,
+          "first_ground_width_within_1_5mm_ray_mm": 1.2745010000000008
+        }
+      },
+      {
+        "track_uuid": "777eea7c-048b-531a-ab44-0903cc915bf7",
+        "xy_mm": [
+          58.25049016393443,
+          45.75
+        ],
+        "pad_transition": [
+          "D3.2"
+        ],
+        "left": {
+          "first_ground_gap_mm": 0.2248475288850642,
+          "first_ground_width_within_1_5mm_ray_mm": 1.1166524711149322
+        },
+        "right": {
+          "first_ground_gap_mm": 0.22484659906353954,
+          "first_ground_width_within_1_5mm_ray_mm": 1.2751534009364605
+        }
+      },
+      {
+        "track_uuid": "777eea7c-048b-531a-ab44-0903cc915bf7",
+        "xy_mm": [
+          58.27524508196721,
+          45.75
+        ],
+        "pad_transition": [
+          "D3.2"
+        ],
+        "left": {
+          "first_ground_gap_mm": 0.22026610405754354,
+          "first_ground_width_within_1_5mm_ray_mm": 1.1212338959424528
+        },
+        "right": {
+          "first_ground_gap_mm": 0.2202641042003748,
+          "first_ground_width_within_1_5mm_ray_mm": 1.2797358957996252
+        }
+      },
+      {
+        "track_uuid": "777eea7c-048b-531a-ab44-0903cc915bf7",
+        "xy_mm": [
+          58.300000000000004,
+          45.75
+        ],
+        "pad_transition": [
+          "D3.2"
+        ],
+        "left": {
+          "first_ground_gap_mm": 0.20933577707396722,
+          "first_ground_width_within_1_5mm_ray_mm": 1.1321642229260291
+        },
+        "right": {
+          "first_ground_gap_mm": 0.20933377788978902,
+          "first_ground_width_within_1_5mm_ray_mm": 1.290666222110211
+        }
+      },
+      {
+        "track_uuid": "777eea7c-048b-531a-ab44-0903cc915bf7",
+        "xy_mm": [
+          58.32475491803279,
+          45.75
+        ],
+        "pad_transition": [
+          "D3.2"
+        ],
+        "left": {
+          "first_ground_gap_mm": 0.1984054500903909,
+          "first_ground_width_within_1_5mm_ray_mm": 1.1430945499096055
+        },
+        "right": {
+          "first_ground_gap_mm": 0.19840345157920325,
+          "first_ground_width_within_1_5mm_ray_mm": 1.3015965484207968
+        }
+      },
+      {
+        "track_uuid": "777eea7c-048b-531a-ab44-0903cc915bf7",
+        "xy_mm": [
+          58.34950983606557,
+          45.75
+        ],
+        "pad_transition": [
+          "D3.2"
+        ],
+        "left": {
+          "first_ground_gap_mm": 0.18747512310681458,
+          "first_ground_width_within_1_5mm_ray_mm": 1.1540248768931818
+        },
+        "right": {
+          "first_ground_gap_mm": 0.18747312442347663,
+          "first_ground_width_within_1_5mm_ray_mm": 1.3125268755765234
+        }
+      },
+      {
+        "track_uuid": "777eea7c-048b-531a-ab44-0903cc915bf7",
+        "xy_mm": [
+          58.37426475409836,
+          45.75
+        ],
+        "pad_transition": [
+          "D3.2"
+        ],
+        "left": {
+          "first_ground_gap_mm": 0.17570724590163422,
+          "first_ground_width_within_1_5mm_ray_mm": 1.1657927540983621
+        },
+        "right": {
+          "first_ground_gap_mm": 0.17570524590163927,
+          "first_ground_width_within_1_5mm_ray_mm": 1.3242947540983607
+        }
+      },
+      {
+        "track_uuid": "777eea7c-048b-531a-ab44-0903cc915bf7",
+        "xy_mm": [
+          58.399019672131146,
+          45.75
+        ],
+        "pad_transition": [
+          "D3.2"
+        ],
+        "left": {
+          "first_ground_gap_mm": 0.16338375190592558,
+          "first_ground_width_within_1_5mm_ray_mm": 1.1781162480940708
+        },
+        "right": {
+          "first_ground_gap_mm": 0.16338292348410732,
+          "first_ground_width_within_1_5mm_ray_mm": 1.3366170765158927
+        }
+      },
+      {
+        "track_uuid": "777eea7c-048b-531a-ab44-0903cc915bf7",
+        "xy_mm": [
+          58.42377459016394,
+          45.75
+        ],
+        "pad_transition": [
+          "D3.2"
+        ],
+        "left": {
+          "first_ground_gap_mm": 0.15312999481685807,
+          "first_ground_width_within_1_5mm_ray_mm": 1.1883700051831383
+        },
+        "right": {
+          "first_ground_gap_mm": 0.15312916639503982,
+          "first_ground_width_within_1_5mm_ray_mm": 1.3468708336049602
+        }
+      },
+      {
+        "track_uuid": "777eea7c-048b-531a-ab44-0903cc915bf7",
+        "xy_mm": [
+          58.44852950819672,
+          45.75
+        ],
+        "pad_transition": [
+          "D3.2"
+        ],
+        "left": {
+          "first_ground_gap_mm": 0.15050000000000097,
+          "first_ground_width_within_1_5mm_ray_mm": 1.1909999999999954
+        },
+        "right": {
+          "first_ground_gap_mm": 0.15050000000000097,
+          "first_ground_width_within_1_5mm_ray_mm": 1.349499999999999
+        }
+      },
+      {
+        "track_uuid": "777eea7c-048b-531a-ab44-0903cc915bf7",
+        "xy_mm": [
+          58.47328442622951,
+          45.75
+        ],
+        "pad_transition": [
+          "D3.2"
+        ],
+        "left": {
+          "first_ground_gap_mm": 0.15050000000000097,
+          "first_ground_width_within_1_5mm_ray_mm": 1.1909999999999954
+        },
+        "right": {
+          "first_ground_gap_mm": 0.15050000000000097,
+          "first_ground_width_within_1_5mm_ray_mm": 1.349499999999999
+        }
+      },
+      {
+        "track_uuid": "777eea7c-048b-531a-ab44-0903cc915bf7",
+        "xy_mm": [
+          58.498039344262295,
+          45.75
+        ],
+        "pad_transition": [
+          "D3.2"
+        ],
+        "left": {
+          "first_ground_gap_mm": 0.15050000000000097,
+          "first_ground_width_within_1_5mm_ray_mm": 1.1909999999999954
+        },
+        "right": {
+          "first_ground_gap_mm": 0.15050000000000097,
+          "first_ground_width_within_1_5mm_ray_mm": 1.349499999999999
+        }
+      },
+      {
+        "track_uuid": "777eea7c-048b-531a-ab44-0903cc915bf7",
+        "xy_mm": [
+          58.52279426229508,
+          45.75
+        ],
+        "pad_transition": [],
+        "left": {
+          "first_ground_gap_mm": 0.15050000000000097,
+          "first_ground_width_within_1_5mm_ray_mm": 1.1913968671305142
+        },
+        "right": {
+          "first_ground_gap_mm": 0.15050000000000097,
+          "first_ground_width_within_1_5mm_ray_mm": 1.349499999999999
+        }
+      },
+      {
+        "track_uuid": "777eea7c-048b-531a-ab44-0903cc915bf7",
+        "xy_mm": [
+          58.54754918032787,
+          45.75
+        ],
+        "pad_transition": [],
+        "left": {
+          "first_ground_gap_mm": 0.15050000000000097,
+          "first_ground_width_within_1_5mm_ray_mm": 1.1955343547899773
+        },
+        "right": {
+          "first_ground_gap_mm": 0.15050000000000097,
+          "first_ground_width_within_1_5mm_ray_mm": 1.349499999999999
+        }
+      },
+      {
+        "track_uuid": "777eea7c-048b-531a-ab44-0903cc915bf7",
+        "xy_mm": [
+          58.572304098360654,
+          45.75
+        ],
+        "pad_transition": [],
+        "left": {
+          "first_ground_gap_mm": 0.15050000000000097,
+          "first_ground_width_within_1_5mm_ray_mm": 1.2064646998106099
+        },
+        "right": {
+          "first_ground_gap_mm": 0.15050000000000097,
+          "first_ground_width_within_1_5mm_ray_mm": 1.349499999999999
+        }
+      },
+      {
+        "track_uuid": "777eea7c-048b-531a-ab44-0903cc915bf7",
+        "xy_mm": [
+          58.597059016393445,
+          45.75
+        ],
+        "pad_transition": [],
+        "left": {
+          "first_ground_gap_mm": 0.15050000000000097,
+          "first_ground_width_within_1_5mm_ray_mm": 1.2173950448312496
+        },
+        "right": {
+          "first_ground_gap_mm": 0.15050000000000097,
+          "first_ground_width_within_1_5mm_ray_mm": 1.349499999999999
+        }
+      },
+      {
+        "track_uuid": "777eea7c-048b-531a-ab44-0903cc915bf7",
+        "xy_mm": [
+          58.62181393442623,
+          45.75
+        ],
+        "pad_transition": [],
+        "left": {
+          "first_ground_gap_mm": 0.15050000000000097,
+          "first_ground_width_within_1_5mm_ray_mm": 1.2283253898518822
+        },
+        "right": {
+          "first_ground_gap_mm": 0.15050000000000097,
+          "first_ground_width_within_1_5mm_ray_mm": 1.349499999999999
+        }
+      },
+      {
+        "track_uuid": "777eea7c-048b-531a-ab44-0903cc915bf7",
+        "xy_mm": [
+          58.64656885245902,
+          45.75
+        ],
+        "pad_transition": [],
+        "left": {
+          "first_ground_gap_mm": 0.15050000000000097,
+          "first_ground_width_within_1_5mm_ray_mm": 1.2412398524590174
+        },
+        "right": {
+          "first_ground_gap_mm": 0.15050000000000097,
+          "first_ground_width_within_1_5mm_ray_mm": 1.349499999999999
+        }
+      },
+      {
+        "track_uuid": "777eea7c-048b-531a-ab44-0903cc915bf7",
+        "xy_mm": [
+          58.6713237704918,
+          45.75
+        ],
+        "pad_transition": [],
+        "left": {
+          "first_ground_gap_mm": 0.15050000000000097,
+          "first_ground_width_within_1_5mm_ray_mm": 1.265994770491801
+        },
+        "right": {
+          "first_ground_gap_mm": 0.15050000000000097,
+          "first_ground_width_within_1_5mm_ray_mm": 1.349499999999999
+        }
+      },
+      {
+        "track_uuid": "777eea7c-048b-531a-ab44-0903cc915bf7",
+        "xy_mm": [
+          58.696078688524594,
+          45.75
+        ],
+        "pad_transition": [],
+        "left": {
+          "first_ground_gap_mm": 0.15050000000000097,
+          "first_ground_width_within_1_5mm_ray_mm": 1.290749688524592
+        },
+        "right": {
+          "first_ground_gap_mm": 0.15050000000000097,
+          "first_ground_width_within_1_5mm_ray_mm": 1.349499999999999
+        }
+      },
+      {
+        "track_uuid": "777eea7c-048b-531a-ab44-0903cc915bf7",
+        "xy_mm": [
+          58.72083360655738,
+          45.75
+        ],
+        "pad_transition": [],
+        "left": {
+          "first_ground_gap_mm": 0.15050000000000097,
+          "first_ground_width_within_1_5mm_ray_mm": 1.3167954578381398
+        },
+        "right": {
+          "first_ground_gap_mm": 0.15050000000000097,
+          "first_ground_width_within_1_5mm_ray_mm": 1.349499999999999
+        }
+      },
+      {
+        "track_uuid": "777eea7c-048b-531a-ab44-0903cc915bf7",
+        "xy_mm": [
+          58.74558852459016,
+          45.75
+        ],
+        "pad_transition": [],
+        "left": {
+          "first_ground_gap_mm": 0.15050000000000097,
+          "first_ground_width_within_1_5mm_ray_mm": 1.349499999999999
+        },
+        "right": {
+          "first_ground_gap_mm": 0.15050000000000097,
+          "first_ground_width_within_1_5mm_ray_mm": 1.349499999999999
+        }
+      },
+      {
+        "track_uuid": "777eea7c-048b-531a-ab44-0903cc915bf7",
+        "xy_mm": [
+          58.77034344262295,
+          45.75
+        ],
+        "pad_transition": [],
+        "left": {
+          "first_ground_gap_mm": 0.15050000000000097,
+          "first_ground_width_within_1_5mm_ray_mm": 1.349499999999999
+        },
+        "right": {
+          "first_ground_gap_mm": 0.15050000000000097,
+          "first_ground_width_within_1_5mm_ray_mm": 1.349499999999999
+        }
+      },
+      {
+        "track_uuid": "777eea7c-048b-531a-ab44-0903cc915bf7",
+        "xy_mm": [
+          58.795098360655736,
+          45.75
+        ],
+        "pad_transition": [],
+        "left": {
+          "first_ground_gap_mm": 0.15050000000000097,
+          "first_ground_width_within_1_5mm_ray_mm": 1.349499999999999
+        },
+        "right": {
+          "first_ground_gap_mm": 0.15050000000000097,
+          "first_ground_width_within_1_5mm_ray_mm": 1.349499999999999
+        }
+      },
+      {
+        "track_uuid": "777eea7c-048b-531a-ab44-0903cc915bf7",
+        "xy_mm": [
+          58.81985327868853,
+          45.75
+        ],
+        "pad_transition": [],
+        "left": {
+          "first_ground_gap_mm": 0.15050000000000097,
+          "first_ground_width_within_1_5mm_ray_mm": 1.349499999999999
+        },
+        "right": {
+          "first_ground_gap_mm": 0.15050000000000097,
+          "first_ground_width_within_1_5mm_ray_mm": 1.349499999999999
+        }
+      },
+      {
+        "track_uuid": "777eea7c-048b-531a-ab44-0903cc915bf7",
+        "xy_mm": [
+          58.84460819672131,
+          45.75
+        ],
+        "pad_transition": [],
+        "left": {
+          "first_ground_gap_mm": 0.15050000000000097,
+          "first_ground_width_within_1_5mm_ray_mm": 1.349499999999999
+        },
+        "right": {
+          "first_ground_gap_mm": 0.15050000000000097,
+          "first_ground_width_within_1_5mm_ray_mm": 1.349499999999999
+        }
+      },
+      {
+        "track_uuid": "777eea7c-048b-531a-ab44-0903cc915bf7",
+        "xy_mm": [
+          58.8693631147541,
+          45.75
+        ],
+        "pad_transition": [],
+        "left": {
+          "first_ground_gap_mm": 0.15050000000000097,
+          "first_ground_width_within_1_5mm_ray_mm": 1.349499999999999
+        },
+        "right": {
+          "first_ground_gap_mm": 0.15050000000000097,
+          "first_ground_width_within_1_5mm_ray_mm": 1.349499999999999
+        }
+      },
+      {
+        "track_uuid": "777eea7c-048b-531a-ab44-0903cc915bf7",
+        "xy_mm": [
+          58.894118032786885,
+          45.75
+        ],
+        "pad_transition": [],
+        "left": {
+          "first_ground_gap_mm": 0.15050000000000097,
+          "first_ground_width_within_1_5mm_ray_mm": 1.349499999999999
+        },
+        "right": {
+          "first_ground_gap_mm": 0.15050000000000097,
+          "first_ground_width_within_1_5mm_ray_mm": 1.349499999999999
+        }
+      },
+      {
+        "track_uuid": "777eea7c-048b-531a-ab44-0903cc915bf7",
+        "xy_mm": [
+          58.918872950819676,
+          45.75
+        ],
+        "pad_transition": [],
+        "left": {
+          "first_ground_gap_mm": 0.15050000000000097,
+          "first_ground_width_within_1_5mm_ray_mm": 1.349499999999999
+        },
+        "right": {
+          "first_ground_gap_mm": 0.15050000000000097,
+          "first_ground_width_within_1_5mm_ray_mm": 1.349499999999999
+        }
+      },
+      {
+        "track_uuid": "777eea7c-048b-531a-ab44-0903cc915bf7",
+        "xy_mm": [
+          58.94362786885246,
+          45.75
+        ],
+        "pad_transition": [],
+        "left": {
+          "first_ground_gap_mm": 0.15050000000000097,
+          "first_ground_width_within_1_5mm_ray_mm": 1.349499999999999
+        },
+        "right": {
+          "first_ground_gap_mm": 0.15050000000000097,
+          "first_ground_width_within_1_5mm_ray_mm": 1.349499999999999
+        }
+      },
+      {
+        "track_uuid": "777eea7c-048b-531a-ab44-0903cc915bf7",
+        "xy_mm": [
+          58.96838278688524,
+          45.75
+        ],
+        "pad_transition": [],
+        "left": {
+          "first_ground_gap_mm": 0.15050000000000097,
+          "first_ground_width_within_1_5mm_ray_mm": 1.349499999999999
+        },
+        "right": {
+          "first_ground_gap_mm": 0.15050000000000097,
+          "first_ground_width_within_1_5mm_ray_mm": 1.349499999999999
+        }
+      },
+      {
+        "track_uuid": "777eea7c-048b-531a-ab44-0903cc915bf7",
+        "xy_mm": [
+          58.993137704918034,
+          45.75
+        ],
+        "pad_transition": [],
+        "left": {
+          "first_ground_gap_mm": 0.15050000000000097,
+          "first_ground_width_within_1_5mm_ray_mm": 1.349499999999999
+        },
+        "right": {
+          "first_ground_gap_mm": 0.15050000000000097,
+          "first_ground_width_within_1_5mm_ray_mm": 1.349499999999999
+        }
+      },
+      {
+        "track_uuid": "777eea7c-048b-531a-ab44-0903cc915bf7",
+        "xy_mm": [
+          59.01789262295082,
+          45.75
+        ],
+        "pad_transition": [],
+        "left": {
+          "first_ground_gap_mm": 0.15050000000000097,
+          "first_ground_width_within_1_5mm_ray_mm": 1.349499999999999
+        },
+        "right": {
+          "first_ground_gap_mm": 0.15219065275075394,
+          "first_ground_width_within_1_5mm_ray_mm": 1.347809347249246
+        }
+      },
+      {
+        "track_uuid": "777eea7c-048b-531a-ab44-0903cc915bf7",
+        "xy_mm": [
+          59.04264754098361,
+          45.75
+        ],
+        "pad_transition": [],
+        "left": {
+          "first_ground_gap_mm": 0.15050000000000097,
+          "first_ground_width_within_1_5mm_ray_mm": 1.349499999999999
+        },
+        "right": {
+          "first_ground_gap_mm": 0.16244440983982855,
+          "first_ground_width_within_1_5mm_ray_mm": 1.3375555901601714
+        }
+      },
+      {
+        "track_uuid": "88427094-8f27-5415-9f1a-2189734cd052",
+        "xy_mm": [
+          55.308838438053094,
+          47.841161561946905
+        ],
+        "pad_transition": [
+          "AE2.1"
+        ],
+        "left": {
+          "first_ground_gap_mm": 0.6754993188310288,
+          "first_ground_width_within_1_5mm_ray_mm": 0.2021086361352855
+        },
+        "right": {
+          "first_ground_gap_mm": 0.6754997787342919,
+          "first_ground_width_within_1_5mm_ray_mm": 0.8245002212657101
+        }
+      },
+      {
+        "track_uuid": "88427094-8f27-5415-9f1a-2189734cd052",
+        "xy_mm": [
+          55.32651531415929,
+          47.82348468584071
+        ],
+        "pad_transition": [
+          "AE2.1"
+        ],
+        "left": {
+          "first_ground_gap_mm": 0.6754992052137122,
+          "first_ground_width_within_1_5mm_ray_mm": 0.17710987182283422
+        },
+        "right": {
+          "first_ground_gap_mm": 0.6754997787342919,
+          "first_ground_width_within_1_5mm_ray_mm": 0.8245002212657101
+        }
+      },
+      {
+        "track_uuid": "88427094-8f27-5415-9f1a-2189734cd052",
+        "xy_mm": [
+          55.34419219026548,
+          47.80580780973452
+        ],
+        "pad_transition": [
+          "AE2.1"
+        ],
+        "left": {
+          "first_ground_gap_mm": 0.6754990915963957,
+          "first_ground_width_within_1_5mm_ray_mm": 0.16198265328048322
+        },
+        "right": {
+          "first_ground_gap_mm": 0.6754997787342919,
+          "first_ground_width_within_1_5mm_ray_mm": 0.8245002212657101
+        }
+      },
+      {
+        "track_uuid": "88427094-8f27-5415-9f1a-2189734cd052",
+        "xy_mm": [
+          55.36186906637168,
+          47.78813093362832
+        ],
+        "pad_transition": [
+          "AE2.1"
+        ],
+        "left": {
+          "first_ground_gap_mm": 0.6840343718473211,
+          "first_ground_width_within_1_5mm_ray_mm": 0.1390140660556709
+        },
+        "right": {
+          "first_ground_gap_mm": 0.6754997787342919,
+          "first_ground_width_within_1_5mm_ray_mm": 0.8245002212657101
+        }
+      },
+      {
+        "track_uuid": "88427094-8f27-5415-9f1a-2189734cd052",
+        "xy_mm": [
+          55.379545942477876,
+          47.77045405752212
+        ],
+        "pad_transition": [
+          "AE2.1"
+        ],
+        "left": {
+          "first_ground_gap_mm": 0.6943896743329616,
+          "first_ground_width_within_1_5mm_ray_mm": 0.11259008983880947
+        },
+        "right": {
+          "first_ground_gap_mm": 0.6707659001072638,
+          "first_ground_width_within_1_5mm_ray_mm": 0.6180847459378319
+        }
+      },
+      {
+        "track_uuid": "88427094-8f27-5415-9f1a-2189734cd052",
+        "xy_mm": [
+          55.39722281858407,
+          47.75277718141593
+        ],
+        "pad_transition": [
+          "AE2.1"
+        ],
+        "left": {
+          "first_ground_gap_mm": 0.7413055310417425,
+          "first_ground_width_within_1_5mm_ray_mm": 0.016385944687452803
+        },
+        "right": {
+          "first_ground_gap_mm": 0.6657933551969675,
+          "first_ground_width_within_1_5mm_ray_mm": 0.5980584129183604
+        }
+      },
+      {
+        "track_uuid": "88427094-8f27-5415-9f1a-2189734cd052",
+        "xy_mm": [
+          55.41489969469026,
+          47.735100305309736
+        ],
+        "pad_transition": [
+          "AE2.1"
+        ],
+        "left": {
+          "first_ground_gap_mm": null,
+          "first_ground_width_within_1_5mm_ray_mm": 0
+        },
+        "right": {
+          "first_ground_gap_mm": 0.6608208102866712,
+          "first_ground_width_within_1_5mm_ray_mm": 0.5780320798988886
+        }
+      },
+      {
+        "track_uuid": "88427094-8f27-5415-9f1a-2189734cd052",
+        "xy_mm": [
+          55.432576570796456,
+          47.71742342920354
+        ],
+        "pad_transition": [
+          "AE2.1"
+        ],
+        "left": {
+          "first_ground_gap_mm": null,
+          "first_ground_width_within_1_5mm_ray_mm": 0
+        },
+        "right": {
+          "first_ground_gap_mm": 0.655848265376375,
+          "first_ground_width_within_1_5mm_ray_mm": 0.558005746879417
+        }
+      },
+      {
+        "track_uuid": "88427094-8f27-5415-9f1a-2189734cd052",
+        "xy_mm": [
+          55.45025344690265,
+          47.69974655309735
+        ],
+        "pad_transition": [
+          "AE2.1"
+        ],
+        "left": {
+          "first_ground_gap_mm": 0.7044919919113153,
+          "first_ground_width_within_1_5mm_ray_mm": 0.014878684806537978
+        },
+        "right": {
+          "first_ground_gap_mm": 0.6508757204660787,
+          "first_ground_width_within_1_5mm_ray_mm": 0.5379794138599454
+        }
+      },
+      {
+        "track_uuid": "88427094-8f27-5415-9f1a-2189734cd052",
+        "xy_mm": [
+          55.467930323008844,
+          47.682069676991155
+        ],
+        "pad_transition": [
+          "AE2.1"
+        ],
+        "left": {
+          "first_ground_gap_mm": 0.6557662227817656,
+          "first_ground_width_within_1_5mm_ray_mm": 0.11114453922493628
+        },
+        "right": {
+          "first_ground_gap_mm": 0.6459031755557825,
+          "first_ground_width_within_1_5mm_ray_mm": 0.5179530808404738
+        }
+      },
+      {
+        "track_uuid": "88427094-8f27-5415-9f1a-2189734cd052",
+        "xy_mm": [
+          55.485607199115044,
+          47.664392800884954
+        ],
+        "pad_transition": [
+          "AE2.1"
+        ],
+        "left": {
+          "first_ground_gap_mm": 0.6409468975968552,
+          "first_ground_width_within_1_5mm_ray_mm": 0.13631880503557003
+        },
+        "right": {
+          "first_ground_gap_mm": 0.6409306306454862,
+          "first_ground_width_within_1_5mm_ray_mm": 0.4979267478209922
+        }
+      },
+      {
+        "track_uuid": "88427094-8f27-5415-9f1a-2189734cd052",
+        "xy_mm": [
+          55.50328407522124,
+          47.64671592477876
+        ],
+        "pad_transition": [
+          "AE2.1"
+        ],
+        "left": {
+          "first_ground_gap_mm": 0.6306133871488818,
+          "first_ground_width_within_1_5mm_ray_mm": 0.15531808370785183
+        },
+        "right": {
+          "first_ground_gap_mm": 0.630614543508422,
+          "first_ground_width_within_1_5mm_ray_mm": 0.48324395702828826
+        }
+      },
+      {
+        "track_uuid": "88427094-8f27-5415-9f1a-2189734cd052",
+        "xy_mm": [
+          55.52096095132743,
+          47.62903904867257
+        ],
+        "pad_transition": [
+          "AE2.1"
+        ],
+        "left": {
+          "first_ground_gap_mm": 0.6202584010801709,
+          "first_ground_width_within_1_5mm_ray_mm": 0.16567305553869283
+        },
+        "right": {
+          "first_ground_gap_mm": 0.620259542102837,
+          "first_ground_width_within_1_5mm_ray_mm": 0.4686000805041055
+        }
+      },
+      {
+        "track_uuid": "88427094-8f27-5415-9f1a-2189734cd052",
+        "xy_mm": [
+          55.538637827433625,
+          47.61136217256637
+        ],
+        "pad_transition": [
+          "AE2.1"
+        ],
+        "left": {
+          "first_ground_gap_mm": 0.60990341501145,
+          "first_ground_width_within_1_5mm_ray_mm": 0.17602802736953416
+        },
+        "right": {
+          "first_ground_gap_mm": 0.6099045406972621,
+          "first_ground_width_within_1_5mm_ray_mm": 0.4539562039799123
+        }
+      },
+      {
+        "track_uuid": "88427094-8f27-5415-9f1a-2189734cd052",
+        "xy_mm": [
+          55.55631470353982,
+          47.59368529646018
+        ],
+        "pad_transition": [
+          "AE2.1"
+        ],
+        "left": {
+          "first_ground_gap_mm": 0.5995484289427391,
+          "first_ground_width_within_1_5mm_ray_mm": 0.18638299920036516
+        },
+        "right": {
+          "first_ground_gap_mm": 0.599549539291677,
+          "first_ground_width_within_1_5mm_ray_mm": 0.43931232745572957
+        }
+      },
+      {
+        "track_uuid": "88427094-8f27-5415-9f1a-2189734cd052",
+        "xy_mm": [
+          55.57399157964601,
+          47.576008420353986
+        ],
+        "pad_transition": [
+          "AE2.1"
+        ],
+        "left": {
+          "first_ground_gap_mm": 0.5891934428740182,
+          "first_ground_width_within_1_5mm_ray_mm": 0.19673797103121649
+        },
+        "right": {
+          "first_ground_gap_mm": 0.589194537886102,
+          "first_ground_width_within_1_5mm_ray_mm": 0.4246684509315365
+        }
+      },
+      {
+        "track_uuid": "88427094-8f27-5415-9f1a-2189734cd052",
+        "xy_mm": [
+          55.591668455752206,
+          47.55833154424779
+        ],
+        "pad_transition": [
+          "AE2.1"
+        ],
+        "left": {
+          "first_ground_gap_mm": 0.5788384568053073,
+          "first_ground_width_within_1_5mm_ray_mm": 0.2070929428620475
+        },
+        "right": {
+          "first_ground_gap_mm": 0.578839536480517,
+          "first_ground_width_within_1_5mm_ray_mm": 0.4100245744073536
+        }
+      },
+      {
+        "track_uuid": "88427094-8f27-5415-9f1a-2189734cd052",
+        "xy_mm": [
+          55.60934533185841,
+          47.54065466814159
+        ],
+        "pad_transition": [
+          "AE2.1"
+        ],
+        "left": {
+          "first_ground_gap_mm": 0.5657067471894247,
+          "first_ground_width_within_1_5mm_ray_mm": 0.22022463824005034
+        },
+        "right": {
+          "first_ground_gap_mm": 0.5657078618275135,
+          "first_ground_width_within_1_5mm_ray_mm": 0.39815737113057914
+        }
+      },
+      {
+        "track_uuid": "88427094-8f27-5415-9f1a-2189734cd052",
+        "xy_mm": [
+          55.6270222079646,
+          47.5229777920354
+        ],
+        "pad_transition": [
+          "AE2.1"
+        ],
+        "left": {
+          "first_ground_gap_mm": 0.5490030751474156,
+          "first_ground_width_within_1_5mm_ray_mm": 0.23692829604418975
+        },
+        "right": {
+          "first_ground_gap_mm": 0.5490040265811711,
+          "first_ground_width_within_1_5mm_ray_mm": 0.3898623284471536
+        }
+      },
+      {
+        "track_uuid": "88427094-8f27-5415-9f1a-2189734cd052",
+        "xy_mm": [
+          55.644699084070794,
+          47.505300915929205
+        ],
+        "pad_transition": [
+          "AE2.1"
+        ],
+        "left": {
+          "first_ground_gap_mm": 0.5322994031054066,
+          "first_ground_width_within_1_5mm_ray_mm": 0.25363195384831905
+        },
+        "right": {
+          "first_ground_gap_mm": 0.5323001913348288,
+          "first_ground_width_within_1_5mm_ray_mm": 0.3815672857637281
+        }
+      },
+      {
+        "track_uuid": "88427094-8f27-5415-9f1a-2189734cd052",
+        "xy_mm": [
+          55.66237596017699,
+          47.48762403982301
+        ],
+        "pad_transition": [
+          "AE2.1"
+        ],
+        "left": {
+          "first_ground_gap_mm": 0.5155957310633974,
+          "first_ground_width_within_1_5mm_ray_mm": 0.27033561165244835
+        },
+        "right": {
+          "first_ground_gap_mm": 0.5155963560884762,
+          "first_ground_width_within_1_5mm_ray_mm": 0.3732722430803128
+        }
+      },
+      {
+        "track_uuid": "88427094-8f27-5415-9f1a-2189734cd052",
+        "xy_mm": [
+          55.68005283628318,
+          47.46994716371682
+        ],
+        "pad_transition": [
+          "AE2.1"
+        ],
+        "left": {
+          "first_ground_gap_mm": 0.4988920590213983,
+          "first_ground_width_within_1_5mm_ray_mm": 0.28703926945657776
+        },
+        "right": {
+          "first_ground_gap_mm": 0.4988924928157674,
+          "first_ground_width_within_1_5mm_ray_mm": 0.36497722842325353
+        }
+      },
+      {
+        "track_uuid": "88427094-8f27-5415-9f1a-2189734cd052",
+        "xy_mm": [
+          55.697729712389375,
+          47.452270287610624
+        ],
+        "pad_transition": [
+          "AE2.1"
+        ],
+        "left": {
+          "first_ground_gap_mm": 0.48218838697938937,
+          "first_ground_width_within_1_5mm_ray_mm": 0.30374292726070684
+        },
+        "right": {
+          "first_ground_gap_mm": 0.4821885241534185,
+          "first_ground_width_within_1_5mm_ray_mm": 0.3566823191558346
+        }
+      },
+      {
+        "track_uuid": "88427094-8f27-5415-9f1a-2189734cd052",
+        "xy_mm": [
+          55.715406588495576,
+          47.43459341150442
+        ],
+        "pad_transition": [
+          "AE2.1"
+        ],
+        "left": {
+          "first_ground_gap_mm": 0.4610256815673913,
+          "first_ground_width_within_1_5mm_ray_mm": 0.3249056184348251
+        },
+        "right": {
+          "first_ground_gap_mm": 0.4610256815673913,
+          "first_ground_width_within_1_5mm_ray_mm": 0.3528462838120838
+        }
+      },
+      {
+        "track_uuid": "88427094-8f27-5415-9f1a-2189734cd052",
+        "xy_mm": [
+          55.73308346460177,
+          47.41691653539823
+        ],
+        "pad_transition": [
+          "AE2.1"
+        ],
+        "left": {
+          "first_ground_gap_mm": 0.4360268036376234,
+          "first_ground_width_within_1_5mm_ray_mm": 0.34990448212672337
+        },
+        "right": {
+          "first_ground_gap_mm": 0.4360268036376234,
+          "first_ground_width_within_1_5mm_ray_mm": 0.3528462838120839
+        }
+      },
+      {
+        "track_uuid": "88427094-8f27-5415-9f1a-2189734cd052",
+        "xy_mm": [
+          55.75076034070796,
+          47.399239659292036
+        ],
+        "pad_transition": [
+          "AE2.1"
+        ],
+        "left": {
+          "first_ground_gap_mm": 0.41102792570785546,
+          "first_ground_width_within_1_5mm_ray_mm": 0.37490334581861157
+        },
+        "right": {
+          "first_ground_gap_mm": 0.41102792570785546,
+          "first_ground_width_within_1_5mm_ray_mm": 0.352846283812084
+        }
+      },
+      {
+        "track_uuid": "88427094-8f27-5415-9f1a-2189734cd052",
+        "xy_mm": [
+          55.768437216814156,
+          47.38156278318584
+        ],
+        "pad_transition": [
+          "AE2.1"
+        ],
+        "left": {
+          "first_ground_gap_mm": 0.3860290477780876,
+          "first_ground_width_within_1_5mm_ray_mm": 0.39990220951049954
+        },
+        "right": {
+          "first_ground_gap_mm": 0.3860290477780876,
+          "first_ground_width_within_1_5mm_ray_mm": 0.35284628381208366
+        }
+      },
+      {
+        "track_uuid": "88427094-8f27-5415-9f1a-2189734cd052",
+        "xy_mm": [
+          55.78611409292035,
+          47.36388590707965
+        ],
+        "pad_transition": [
+          "AE2.1"
+        ],
+        "left": {
+          "first_ground_gap_mm": 0.3610301698483196,
+          "first_ground_width_within_1_5mm_ray_mm": 0.4249010732023979
+        },
+        "right": {
+          "first_ground_gap_mm": 0.3610301698483196,
+          "first_ground_width_within_1_5mm_ray_mm": 0.3528462838120838
+        }
+      },
+      {
+        "track_uuid": "88427094-8f27-5415-9f1a-2189734cd052",
+        "xy_mm": [
+          55.803790969026544,
+          47.346209030973455
+        ],
+        "pad_transition": [
+          "AE2.1"
+        ],
+        "left": {
+          "first_ground_gap_mm": 0.32957320183139743,
+          "first_ground_width_within_1_5mm_ray_mm": 0.4563580269814403
+        },
+        "right": {
+          "first_ground_gap_mm": 0.32957360534872654,
+          "first_ground_width_within_1_5mm_ray_mm": 0.35930397038190903
+        }
+      },
+      {
+        "track_uuid": "88427094-8f27-5415-9f1a-2189734cd052",
+        "xy_mm": [
+          55.82146784513274,
+          47.32853215486726
+        ],
+        "pad_transition": [
+          "AE2.1"
+        ],
+        "left": {
+          "first_ground_gap_mm": 0.2921596381445728,
+          "first_ground_width_within_1_5mm_ray_mm": 0.49377157643038505
+        },
+        "right": {
+          "first_ground_gap_mm": 0.29216068238099197,
+          "first_ground_width_within_1_5mm_ray_mm": 0.37171801541987554
+        }
+      },
+      {
+        "track_uuid": "88427094-8f27-5415-9f1a-2189734cd052",
+        "xy_mm": [
+          55.83914472123894,
+          47.31085527876106
+        ],
+        "pad_transition": [
+          "AE2.1"
+        ],
+        "left": {
+          "first_ground_gap_mm": 0.2547460744577381,
+          "first_ground_width_within_1_5mm_ray_mm": 0.5311851258793501
+        },
+        "right": {
+          "first_ground_gap_mm": 0.25474727542207276,
+          "first_ground_width_within_1_5mm_ray_mm": 0.42413985767320483
+        }
+      },
+      {
+        "track_uuid": "88427094-8f27-5415-9f1a-2189734cd052",
+        "xy_mm": [
+          55.85682159734513,
+          47.29317840265487
+        ],
+        "pad_transition": [
+          "AE2.1"
+        ],
+        "left": {
+          "first_ground_gap_mm": 0.21733251077091345,
+          "first_ground_width_within_1_5mm_ray_mm": 0.568598675328295
+        },
+        "right": {
+          "first_ground_gap_mm": 0.2173338684631635,
+          "first_ground_width_within_1_5mm_ray_mm": 0.48655214256188195
+        }
+      },
+      {
+        "track_uuid": "88427094-8f27-5415-9f1a-2189734cd052",
+        "xy_mm": [
+          55.874498473451325,
+          47.27550152654867
+        ],
+        "pad_transition": [
+          "AE2.1"
+        ],
+        "left": {
+          "first_ground_gap_mm": 0.18395170891083504,
+          "first_ground_width_within_1_5mm_ray_mm": 0.6019794629504935
+        },
+        "right": {
+          "first_ground_gap_mm": 0.17787992936120045,
+          "first_ground_width_within_1_5mm_ray_mm": 0.5452861572927178
+        }
+      },
+      {
+        "track_uuid": "88427094-8f27-5415-9f1a-2189734cd052",
+        "xy_mm": [
+          55.89217534955752,
+          47.25782465044248
+        ],
+        "pad_transition": [
+          "AE2.1"
+        ],
+        "left": {
+          "first_ground_gap_mm": 0.1589528309810671,
+          "first_ground_width_within_1_5mm_ray_mm": 0.6269783266423918
+        },
+        "right": {
+          "first_ground_gap_mm": 0.1633992945217018,
+          "first_ground_width_within_1_5mm_ray_mm": 0.5761435470369359
+        }
+      },
+      {
+        "track_uuid": "88427094-8f27-5415-9f1a-2189734cd052",
+        "xy_mm": [
+          55.90985222566371,
+          47.240147774336286
+        ],
+        "pad_transition": [
+          "AE2.1"
+        ],
+        "left": {
+          "first_ground_gap_mm": 0.15171928363353968,
+          "first_ground_width_within_1_5mm_ray_mm": 0.6342118597520394
+        },
+        "right": {
+          "first_ground_gap_mm": 0.15304435389597848,
+          "first_ground_width_within_1_5mm_ray_mm": 0.5968533007700852
+        }
+      },
+      {
+        "track_uuid": "88427094-8f27-5415-9f1a-2189734cd052",
+        "xy_mm": [
+          55.927529101769906,
+          47.22247089823009
+        ],
+        "pad_transition": [
+          "AE2.1"
+        ],
+        "left": {
+          "first_ground_gap_mm": 0.15049845655418698,
+          "first_ground_width_within_1_5mm_ray_mm": 0.6354326725935124
+        },
+        "right": {
+          "first_ground_gap_mm": 0.15050127797452711,
+          "first_ground_width_within_1_5mm_ray_mm": 0.6085051055588597
+        }
+      },
+      {
+        "track_uuid": "88427094-8f27-5415-9f1a-2189734cd052",
+        "xy_mm": [
+          55.9452059778761,
+          47.2047940221239
+        ],
+        "pad_transition": [],
+        "left": {
+          "first_ground_gap_mm": 0.1504984658405629,
+          "first_ground_width_within_1_5mm_ray_mm": 0.6354326490692668
+        },
+        "right": {
+          "first_ground_gap_mm": 0.1501941585131219,
+          "first_ground_width_within_1_5mm_ray_mm": 0.6137849174209973
+        }
+      },
+      {
+        "track_uuid": "88427094-8f27-5415-9f1a-2189734cd052",
+        "xy_mm": [
+          55.9628828539823,
+          47.1871171460177
+        ],
+        "pad_transition": [],
+        "left": {
+          "first_ground_gap_mm": 0.15049847512693879,
+          "first_ground_width_within_1_5mm_ray_mm": 0.635432625545011
+        },
+        "right": {
+          "first_ground_gap_mm": 0.1499999392666705,
+          "first_ground_width_within_1_5mm_ray_mm": 0.617462611894837
+        }
+      },
+      {
+        "track_uuid": "88427094-8f27-5415-9f1a-2189734cd052",
+        "xy_mm": [
+          55.980559730088494,
+          47.169440269911505
+        ],
+        "pad_transition": [],
+        "left": {
+          "first_ground_gap_mm": 0.1504984844133147,
+          "first_ground_width_within_1_5mm_ray_mm": 0.6354326020207552
+        },
+        "right": {
+          "first_ground_gap_mm": 0.1499999392666705,
+          "first_ground_width_within_1_5mm_ray_mm": 0.617462611894837
+        }
+      },
+      {
+        "track_uuid": "88427094-8f27-5415-9f1a-2189734cd052",
+        "xy_mm": [
+          55.99823660619469,
+          47.15176339380531
+        ],
+        "pad_transition": [],
+        "left": {
+          "first_ground_gap_mm": 0.15049849369969062,
+          "first_ground_width_within_1_5mm_ray_mm": 0.6354325784964997
+        },
+        "right": {
+          "first_ground_gap_mm": 0.14999993926666544,
+          "first_ground_width_within_1_5mm_ray_mm": 0.6158238071942878
+        }
+      },
+      {
+        "track_uuid": "88427094-8f27-5415-9f1a-2189734cd052",
+        "xy_mm": [
+          56.01591348230088,
+          47.13408651769912
+        ],
+        "pad_transition": [],
+        "left": {
+          "first_ground_gap_mm": 0.1504985029860665,
+          "first_ground_width_within_1_5mm_ray_mm": 0.635432554972254
+        },
+        "right": {
+          "first_ground_gap_mm": 0.1499999392666705,
+          "first_ground_width_within_1_5mm_ray_mm": 0.6108511147935505
+        }
+      },
+      {
+        "track_uuid": "88427094-8f27-5415-9f1a-2189734cd052",
+        "xy_mm": [
+          56.033590358407075,
+          47.116409641592924
+        ],
+        "pad_transition": [],
+        "left": {
+          "first_ground_gap_mm": 0.15049851227244243,
+          "first_ground_width_within_1_5mm_ray_mm": 0.6354325314479985
+        },
+        "right": {
+          "first_ground_gap_mm": 0.1499999392666705,
+          "first_ground_width_within_1_5mm_ray_mm": 0.60373893802304
+        }
+      },
+      {
+        "track_uuid": "88427094-8f27-5415-9f1a-2189734cd052",
+        "xy_mm": [
+          56.05126723451327,
+          47.09873276548673
+        ],
+        "pad_transition": [],
+        "left": {
+          "first_ground_gap_mm": 0.15049852155881832,
+          "first_ground_width_within_1_5mm_ray_mm": 0.6354325079237426
+        },
+        "right": {
+          "first_ground_gap_mm": 0.14999993926666544,
+          "first_ground_width_within_1_5mm_ray_mm": 0.5933841249156189
+        }
+      },
+      {
+        "track_uuid": "88427094-8f27-5415-9f1a-2189734cd052",
+        "xy_mm": [
+          56.06894411061947,
+          47.08105588938053
+        ],
+        "pad_transition": [],
+        "left": {
+          "first_ground_gap_mm": 0.15049853084519424,
+          "first_ground_width_within_1_5mm_ray_mm": 0.6354324843994972
+        },
+        "right": {
+          "first_ground_gap_mm": 0.14999993926666544,
+          "first_ground_width_within_1_5mm_ray_mm": 0.5793626315245199
+        }
+      },
+      {
+        "track_uuid": "88427094-8f27-5415-9f1a-2189734cd052",
+        "xy_mm": [
+          56.08662098672566,
+          47.063379013274336
+        ],
+        "pad_transition": [],
+        "left": {
+          "first_ground_gap_mm": 0.15049854013157013,
+          "first_ground_width_within_1_5mm_ray_mm": 0.6354324608752414
+        },
+        "right": {
+          "first_ground_gap_mm": 0.1499999392666705,
+          "first_ground_width_within_1_5mm_ray_mm": 0.562658722001173
+        }
+      },
+      {
+        "track_uuid": "88427094-8f27-5415-9f1a-2189734cd052",
+        "xy_mm": [
+          56.10429786283186,
+          47.04570213716814
+        ],
+        "pad_transition": [],
+        "left": {
+          "first_ground_gap_mm": 0.15049854941794605,
+          "first_ground_width_within_1_5mm_ray_mm": 0.6354324373509858
+        },
+        "right": {
+          "first_ground_gap_mm": 0.14999993926666544,
+          "first_ground_width_within_1_5mm_ray_mm": 0.5381607803698198
+        }
+      },
+      {
+        "track_uuid": "88427094-8f27-5415-9f1a-2189734cd052",
+        "xy_mm": [
+          56.12197473893805,
+          47.02802526106195
+        ],
+        "pad_transition": [],
+        "left": {
+          "first_ground_gap_mm": 0.15049855870432197,
+          "first_ground_width_within_1_5mm_ray_mm": 0.63543241382674
+        },
+        "right": {
+          "first_ground_gap_mm": 0.14999993926666544,
+          "first_ground_width_within_1_5mm_ray_mm": 0.5063755826123738
+        }
+      },
+      {
+        "track_uuid": "88427094-8f27-5415-9f1a-2189734cd052",
+        "xy_mm": [
+          56.139651615044244,
+          47.010348384955755
+        ],
+        "pad_transition": [],
+        "left": {
+          "first_ground_gap_mm": 0.15049856799069786,
+          "first_ground_width_within_1_5mm_ray_mm": 0.6354323903024844
+        },
+        "right": {
+          "first_ground_gap_mm": 0.1499999392666705,
+          "first_ground_width_within_1_5mm_ray_mm": 0.4585882834801392
+        }
+      },
+      {
+        "track_uuid": "88427094-8f27-5415-9f1a-2189734cd052",
+        "xy_mm": [
+          56.15732849115044,
+          46.99267150884956
+        ],
+        "pad_transition": [],
+        "left": {
+          "first_ground_gap_mm": 0.15049857727707378,
+          "first_ground_width_within_1_5mm_ray_mm": 0.6354323667782287
+        },
+        "right": {
+          "first_ground_gap_mm": 0.14999993926666544,
+          "first_ground_width_within_1_5mm_ray_mm": 0.29999995141333
+        }
+      },
+      {
+        "track_uuid": "88427094-8f27-5415-9f1a-2189734cd052",
+        "xy_mm": [
+          56.17500536725663,
+          46.97499463274337
+        ],
+        "pad_transition": [],
+        "left": {
+          "first_ground_gap_mm": 0.15049858656344967,
+          "first_ground_width_within_1_5mm_ray_mm": 0.6354323432539832
+        },
+        "right": {
+          "first_ground_gap_mm": 0.14999993926666544,
+          "first_ground_width_within_1_5mm_ray_mm": 0.29999995141333
+        }
+      },
+      {
+        "track_uuid": "88427094-8f27-5415-9f1a-2189734cd052",
+        "xy_mm": [
+          56.19268224336283,
+          46.95731775663717
+        ],
+        "pad_transition": [],
+        "left": {
+          "first_ground_gap_mm": 0.15049859584982558,
+          "first_ground_width_within_1_5mm_ray_mm": 0.6354323197297274
+        },
+        "right": {
+          "first_ground_gap_mm": 0.1499999392666705,
+          "first_ground_width_within_1_5mm_ray_mm": 0.299999951413325
+        }
+      },
+      {
+        "track_uuid": "88427094-8f27-5415-9f1a-2189734cd052",
+        "xy_mm": [
+          56.210359119469025,
+          46.93964088053097
+        ],
+        "pad_transition": [],
+        "left": {
+          "first_ground_gap_mm": 0.15049860513620147,
+          "first_ground_width_within_1_5mm_ray_mm": 0.6354322962054717
+        },
+        "right": {
+          "first_ground_gap_mm": 0.14999993926666544,
+          "first_ground_width_within_1_5mm_ray_mm": 0.29999995141333
+        }
+      },
+      {
+        "track_uuid": "88427094-8f27-5415-9f1a-2189734cd052",
+        "xy_mm": [
+          56.22803599557522,
+          46.92196400442478
+        ],
+        "pad_transition": [],
+        "left": {
+          "first_ground_gap_mm": 0.1504986144225774,
+          "first_ground_width_within_1_5mm_ray_mm": 0.6354322726812262
+        },
+        "right": {
+          "first_ground_gap_mm": 0.1499999392666705,
+          "first_ground_width_within_1_5mm_ray_mm": 0.299999951413325
+        }
+      },
+      {
+        "track_uuid": "88427094-8f27-5415-9f1a-2189734cd052",
+        "xy_mm": [
+          56.24571287168141,
+          46.904287128318586
+        ],
+        "pad_transition": [],
+        "left": {
+          "first_ground_gap_mm": 0.1504986237089533,
+          "first_ground_width_within_1_5mm_ray_mm": 0.6354322491569705
+        },
+        "right": {
+          "first_ground_gap_mm": 0.14999993926666044,
+          "first_ground_width_within_1_5mm_ray_mm": 0.299999951413335
+        }
+      },
+      {
+        "track_uuid": "88427094-8f27-5415-9f1a-2189734cd052",
+        "xy_mm": [
+          56.263389747787606,
+          46.88661025221239
+        ],
+        "pad_transition": [],
+        "left": {
+          "first_ground_gap_mm": 0.1504986329953292,
+          "first_ground_width_within_1_5mm_ray_mm": 0.6354322256327147
+        },
+        "right": {
+          "first_ground_gap_mm": 0.14999993926666544,
+          "first_ground_width_within_1_5mm_ray_mm": 0.29999995141333
+        }
+      },
+      {
+        "track_uuid": "88427094-8f27-5415-9f1a-2189734cd052",
+        "xy_mm": [
+          56.2810666238938,
+          46.8689333761062
+        ],
+        "pad_transition": [],
+        "left": {
+          "first_ground_gap_mm": 0.15049864228170512,
+          "first_ground_width_within_1_5mm_ray_mm": 0.6354322021084691
+        },
+        "right": {
+          "first_ground_gap_mm": 0.1499999392666705,
+          "first_ground_width_within_1_5mm_ray_mm": 0.299999951413325
+        }
+      },
+      {
+        "track_uuid": "88427094-8f27-5415-9f1a-2189734cd052",
+        "xy_mm": [
+          56.29874349999999,
+          46.851256500000005
+        ],
+        "pad_transition": [],
+        "left": {
+          "first_ground_gap_mm": 0.15049865156808104,
+          "first_ground_width_within_1_5mm_ray_mm": 0.6354321785842133
+        },
+        "right": {
+          "first_ground_gap_mm": 0.14999993926666544,
+          "first_ground_width_within_1_5mm_ray_mm": 0.29999995141333
+        }
+      },
+      {
+        "track_uuid": "88427094-8f27-5415-9f1a-2189734cd052",
+        "xy_mm": [
+          56.316420376106194,
+          46.833579623893804
+        ],
+        "pad_transition": [],
+        "left": {
+          "first_ground_gap_mm": 0.15049866085445693,
+          "first_ground_width_within_1_5mm_ray_mm": 0.6354321550599576
+        },
+        "right": {
+          "first_ground_gap_mm": 0.14999993926666544,
+          "first_ground_width_within_1_5mm_ray_mm": 0.29999995141333
+        }
+      },
+      {
+        "track_uuid": "88427094-8f27-5415-9f1a-2189734cd052",
+        "xy_mm": [
+          56.33409725221239,
+          46.81590274778761
+        ],
+        "pad_transition": [],
+        "left": {
+          "first_ground_gap_mm": 0.15049867014083282,
+          "first_ground_width_within_1_5mm_ray_mm": 0.6354321315357121
+        },
+        "right": {
+          "first_ground_gap_mm": 0.14999993926666544,
+          "first_ground_width_within_1_5mm_ray_mm": 0.29999995141333
+        }
+      },
+      {
+        "track_uuid": "88427094-8f27-5415-9f1a-2189734cd052",
+        "xy_mm": [
+          56.35177412831858,
+          46.79822587168142
+        ],
+        "pad_transition": [],
+        "left": {
+          "first_ground_gap_mm": 0.15049867942720874,
+          "first_ground_width_within_1_5mm_ray_mm": 0.6354321080114564
+        },
+        "right": {
+          "first_ground_gap_mm": 0.1499999392666705,
+          "first_ground_width_within_1_5mm_ray_mm": 0.299999951413325
+        }
+      },
+      {
+        "track_uuid": "88427094-8f27-5415-9f1a-2189734cd052",
+        "xy_mm": [
+          56.369451004424775,
+          46.780548995575224
+        ],
+        "pad_transition": [],
+        "left": {
+          "first_ground_gap_mm": 0.15049868871358466,
+          "first_ground_width_within_1_5mm_ray_mm": 0.6354320844872007
+        },
+        "right": {
+          "first_ground_gap_mm": 0.14999993926666544,
+          "first_ground_width_within_1_5mm_ray_mm": 0.29999995141333
+        }
+      },
+      {
+        "track_uuid": "88427094-8f27-5415-9f1a-2189734cd052",
+        "xy_mm": [
+          56.38712788053097,
+          46.76287211946903
+        ],
+        "pad_transition": [],
+        "left": {
+          "first_ground_gap_mm": 0.15049869799996055,
+          "first_ground_width_within_1_5mm_ray_mm": 0.6387770574830388
+        },
+        "right": {
+          "first_ground_gap_mm": 0.1499999392666705,
+          "first_ground_width_within_1_5mm_ray_mm": 0.299999951413325
+        }
+      },
+      {
+        "track_uuid": "88427094-8f27-5415-9f1a-2189734cd052",
+        "xy_mm": [
+          56.40480475663716,
+          46.745195243362836
+        ],
+        "pad_transition": [],
+        "left": {
+          "first_ground_gap_mm": 0.15049870728633646,
+          "first_ground_width_within_1_5mm_ray_mm": 0.6454757865762901
+        },
+        "right": {
+          "first_ground_gap_mm": 0.1499999392666705,
+          "first_ground_width_within_1_5mm_ray_mm": 0.299999951413325
+        }
+      },
+      {
+        "track_uuid": "88427094-8f27-5415-9f1a-2189734cd052",
+        "xy_mm": [
+          56.42248163274336,
+          46.727518367256636
+        ],
+        "pad_transition": [],
+        "left": {
+          "first_ground_gap_mm": 0.15049871657270733,
+          "first_ground_width_within_1_5mm_ray_mm": 0.6521735884364671
+        },
+        "right": {
+          "first_ground_gap_mm": 0.14999993926666044,
+          "first_ground_width_within_1_5mm_ray_mm": 0.29999995141333
+        }
+      },
+      {
+        "track_uuid": "88427094-8f27-5415-9f1a-2189734cd052",
+        "xy_mm": [
+          56.44015850884956,
+          46.70984149115044
+        ],
+        "pad_transition": [],
+        "left": {
+          "first_ground_gap_mm": 0.1504987258590883,
+          "first_ground_width_within_1_5mm_ray_mm": 0.6603233194854601
+        },
+        "right": {
+          "first_ground_gap_mm": 0.1499999392666705,
+          "first_ground_width_within_1_5mm_ray_mm": 0.299999951413325
+        }
+      },
+      {
+        "track_uuid": "88427094-8f27-5415-9f1a-2189734cd052",
+        "xy_mm": [
+          56.45783538495575,
+          46.69216461504425
+        ],
+        "pad_transition": [],
+        "left": {
+          "first_ground_gap_mm": 0.15049873514546416,
+          "first_ground_width_within_1_5mm_ray_mm": 0.6747564574575592
+        },
+        "right": {
+          "first_ground_gap_mm": 0.14999993926666544,
+          "first_ground_width_within_1_5mm_ray_mm": 0.29999995141333
+        }
+      },
+      {
+        "track_uuid": "88427094-8f27-5415-9f1a-2189734cd052",
+        "xy_mm": [
+          56.475512261061944,
+          46.674487738938055
+        ],
+        "pad_transition": [],
+        "left": {
+          "first_ground_gap_mm": 0.15049874443184008,
+          "first_ground_width_within_1_5mm_ray_mm": 0.6891895954296581
+        },
+        "right": {
+          "first_ground_gap_mm": 0.14999993926666544,
+          "first_ground_width_within_1_5mm_ray_mm": 0.29999995141333
+        }
+      },
+      {
+        "track_uuid": "88427094-8f27-5415-9f1a-2189734cd052",
+        "xy_mm": [
+          56.49318913716814,
+          46.65681086283186
+        ],
+        "pad_transition": [],
+        "left": {
+          "first_ground_gap_mm": 0.150498753718216,
+          "first_ground_width_within_1_5mm_ray_mm": 0.7059335808507837
+        },
+        "right": {
+          "first_ground_gap_mm": 0.1499999392666705,
+          "first_ground_width_within_1_5mm_ray_mm": 0.299999951413325
+        }
+      },
+      {
+        "track_uuid": "88427094-8f27-5415-9f1a-2189734cd052",
+        "xy_mm": [
+          56.51086601327433,
+          46.63913398672567
+        ],
+        "pad_transition": [],
+        "left": {
+          "first_ground_gap_mm": 0.1504987630045919,
+          "first_ground_width_within_1_5mm_ray_mm": 0.7309324494941758
+        },
+        "right": {
+          "first_ground_gap_mm": 0.14999993926666044,
+          "first_ground_width_within_1_5mm_ray_mm": 0.299999951413335
+        }
+      },
+      {
+        "track_uuid": "88427094-8f27-5415-9f1a-2189734cd052",
+        "xy_mm": [
+          56.528542889380525,
+          46.621457110619474
+        ],
+        "pad_transition": [],
+        "left": {
+          "first_ground_gap_mm": 0.1504987722909678,
+          "first_ground_width_within_1_5mm_ray_mm": 0.7559313181375678
+        },
+        "right": {
+          "first_ground_gap_mm": 0.14999993926666544,
+          "first_ground_width_within_1_5mm_ray_mm": 0.29999995141333
+        }
+      },
+      {
+        "track_uuid": "88427094-8f27-5415-9f1a-2189734cd052",
+        "xy_mm": [
+          56.546219765486725,
+          46.60378023451327
+        ],
+        "pad_transition": [],
+        "left": {
+          "first_ground_gap_mm": 0.15049878157734373,
+          "first_ground_width_within_1_5mm_ray_mm": 0.7809316009945387
+        },
+        "right": {
+          "first_ground_gap_mm": 0.1499999392666705,
+          "first_ground_width_within_1_5mm_ray_mm": 0.299999951413325
+        }
+      },
+      {
+        "track_uuid": "88427094-8f27-5415-9f1a-2189734cd052",
+        "xy_mm": [
+          56.56389664159292,
+          46.58610335840708
+        ],
+        "pad_transition": [],
+        "left": {
+          "first_ground_gap_mm": 0.15049879086371964,
+          "first_ground_width_within_1_5mm_ray_mm": 0.8059304696379307
+        },
+        "right": {
+          "first_ground_gap_mm": 0.1499999392666705,
+          "first_ground_width_within_1_5mm_ray_mm": 0.299999951413325
+        }
+      },
+      {
+        "track_uuid": "88427094-8f27-5415-9f1a-2189734cd052",
+        "xy_mm": [
+          56.58157351769911,
+          46.568426482300886
+        ],
+        "pad_transition": [],
+        "left": {
+          "first_ground_gap_mm": 0.15049880015009554,
+          "first_ground_width_within_1_5mm_ray_mm": 0.8309293382813226
+        },
+        "right": {
+          "first_ground_gap_mm": 0.14999993926666544,
+          "first_ground_width_within_1_5mm_ray_mm": 0.29999995141333
+        }
+      },
+      {
+        "track_uuid": "88427094-8f27-5415-9f1a-2189734cd052",
+        "xy_mm": [
+          56.599250393805306,
+          46.55074960619469
+        ],
+        "pad_transition": [],
+        "left": {
+          "first_ground_gap_mm": 0.15049880943647143,
+          "first_ground_width_within_1_5mm_ray_mm": 0.8559282069247149
+        },
+        "right": {
+          "first_ground_gap_mm": 0.14999993926666544,
+          "first_ground_width_within_1_5mm_ray_mm": 0.29999995141333
+        }
+      },
+      {
+        "track_uuid": "88427094-8f27-5415-9f1a-2189734cd052",
+        "xy_mm": [
+          56.6169272699115,
+          46.5330727300885
+        ],
+        "pad_transition": [],
+        "left": {
+          "first_ground_gap_mm": 0.15049881872284734,
+          "first_ground_width_within_1_5mm_ray_mm": 0.8809270755681069
+        },
+        "right": {
+          "first_ground_gap_mm": 0.14999993926666544,
+          "first_ground_width_within_1_5mm_ray_mm": 0.29999995141333
+        }
+      },
+      {
+        "track_uuid": "88427094-8f27-5415-9f1a-2189734cd052",
+        "xy_mm": [
+          56.63460414601769,
+          46.515395853982305
+        ],
+        "pad_transition": [],
+        "left": {
+          "first_ground_gap_mm": 0.15049882800922323,
+          "first_ground_width_within_1_5mm_ray_mm": 0.9059259442114989
+        },
+        "right": {
+          "first_ground_gap_mm": 0.14999993926666544,
+          "first_ground_width_within_1_5mm_ray_mm": 0.29999995141333
+        }
+      },
+      {
+        "track_uuid": "88427094-8f27-5415-9f1a-2189734cd052",
+        "xy_mm": [
+          56.652281022123894,
+          46.497718977876104
+        ],
+        "pad_transition": [],
+        "left": {
+          "first_ground_gap_mm": 0.15049883729559915,
+          "first_ground_width_within_1_5mm_ray_mm": 0.9309248128549008
+        },
+        "right": {
+          "first_ground_gap_mm": 0.1499999392666705,
+          "first_ground_width_within_1_5mm_ray_mm": 0.299999951413325
+        }
+      },
+      {
+        "track_uuid": "88427094-8f27-5415-9f1a-2189734cd052",
+        "xy_mm": [
+          56.66995789823009,
+          46.48004210176991
+        ],
+        "pad_transition": [],
+        "left": {
+          "first_ground_gap_mm": 0.15049884658197507,
+          "first_ground_width_within_1_5mm_ray_mm": 0.9559236814982927
+        },
+        "right": {
+          "first_ground_gap_mm": 0.14999993926666544,
+          "first_ground_width_within_1_5mm_ray_mm": 0.29999995141333
+        }
+      },
+      {
+        "track_uuid": "88427094-8f27-5415-9f1a-2189734cd052",
+        "xy_mm": [
+          56.68763477433628,
+          46.46236522566372
+        ],
+        "pad_transition": [],
+        "left": {
+          "first_ground_gap_mm": 0.150498855868351,
+          "first_ground_width_within_1_5mm_ray_mm": 0.9809225501416848
+        },
+        "right": {
+          "first_ground_gap_mm": 0.1499999392666705,
+          "first_ground_width_within_1_5mm_ray_mm": 0.299999951413325
+        }
+      },
+      {
+        "track_uuid": "88427094-8f27-5415-9f1a-2189734cd052",
+        "xy_mm": [
+          56.705311650442475,
+          46.444688349557524
+        ],
+        "pad_transition": [],
+        "left": {
+          "first_ground_gap_mm": 0.15049886515472688,
+          "first_ground_width_within_1_5mm_ray_mm": 1.0059214187850767
+        },
+        "right": {
+          "first_ground_gap_mm": 0.1499999392666705,
+          "first_ground_width_within_1_5mm_ray_mm": 0.299999951413325
+        }
+      },
+      {
+        "track_uuid": "88427094-8f27-5415-9f1a-2189734cd052",
+        "xy_mm": [
+          56.72298852654867,
+          46.42701147345133
+        ],
+        "pad_transition": [],
+        "left": {
+          "first_ground_gap_mm": 0.1504988744411028,
+          "first_ground_width_within_1_5mm_ray_mm": 1.0309202874284686
+        },
+        "right": {
+          "first_ground_gap_mm": 0.14999993926666544,
+          "first_ground_width_within_1_5mm_ray_mm": 0.29999995141333
+        }
+      },
+      {
+        "track_uuid": "88427094-8f27-5415-9f1a-2189734cd052",
+        "xy_mm": [
+          56.74066540265486,
+          46.409334597345136
+        ],
+        "pad_transition": [],
+        "left": {
+          "first_ground_gap_mm": 0.1504988837274787,
+          "first_ground_width_within_1_5mm_ray_mm": 1.0559191560718606
+        },
+        "right": {
+          "first_ground_gap_mm": 0.1499999392666705,
+          "first_ground_width_within_1_5mm_ray_mm": 0.299999951413325
+        }
+      },
+      {
+        "track_uuid": "88427094-8f27-5415-9f1a-2189734cd052",
+        "xy_mm": [
+          56.758342278761056,
+          46.39165772123894
+        ],
+        "pad_transition": [],
+        "left": {
+          "first_ground_gap_mm": 0.15049889301385458,
+          "first_ground_width_within_1_5mm_ray_mm": 1.0809180247152528
+        },
+        "right": {
+          "first_ground_gap_mm": 0.1499999392666705,
+          "first_ground_width_within_1_5mm_ray_mm": 0.299999951413325
+        }
+      },
+      {
+        "track_uuid": "88427094-8f27-5415-9f1a-2189734cd052",
+        "xy_mm": [
+          56.77601915486726,
+          46.37398084513274
+        ],
+        "pad_transition": [],
+        "left": {
+          "first_ground_gap_mm": 0.1504989023002255,
+          "first_ground_width_within_1_5mm_ray_mm": 1.1059168933594035
+        },
+        "right": {
+          "first_ground_gap_mm": 0.14999993926666044,
+          "first_ground_width_within_1_5mm_ray_mm": 0.29999995141333
+        }
+      },
+      {
+        "track_uuid": "88427094-8f27-5415-9f1a-2189734cd052",
+        "xy_mm": [
+          56.79369603097345,
+          46.35630396902655
+        ],
+        "pad_transition": [],
+        "left": {
+          "first_ground_gap_mm": 0.15049891158660642,
+          "first_ground_width_within_1_5mm_ray_mm": 1.130915762002047
+        },
+        "right": {
+          "first_ground_gap_mm": 0.14999993926666544,
+          "first_ground_width_within_1_5mm_ray_mm": 0.29999995141333
+        }
+      },
+      {
+        "track_uuid": "88427094-8f27-5415-9f1a-2189734cd052",
+        "xy_mm": [
+          56.811372907079644,
+          46.338627092920355
+        ],
+        "pad_transition": [],
+        "left": {
+          "first_ground_gap_mm": 0.15049892087298233,
+          "first_ground_width_within_1_5mm_ray_mm": 1.1500217179686285
+        },
+        "right": {
+          "first_ground_gap_mm": 0.1499999392666705,
+          "first_ground_width_within_1_5mm_ray_mm": 0.299999951413325
+        }
+      },
+      {
+        "track_uuid": "88427094-8f27-5415-9f1a-2189734cd052",
+        "xy_mm": [
+          56.82904978318584,
+          46.32095021681416
+        ],
+        "pad_transition": [],
+        "left": {
+          "first_ground_gap_mm": 0.15049893015935822,
+          "first_ground_width_within_1_5mm_ray_mm": 1.160376649307976
+        },
+        "right": {
+          "first_ground_gap_mm": 0.14999993926666544,
+          "first_ground_width_within_1_5mm_ray_mm": 0.29999995141333
+        }
+      },
+      {
+        "track_uuid": "88427094-8f27-5415-9f1a-2189734cd052",
+        "xy_mm": [
+          56.84672665929203,
+          46.30327334070797
+        ],
+        "pad_transition": [],
+        "left": {
+          "first_ground_gap_mm": 0.15049893944573414,
+          "first_ground_width_within_1_5mm_ray_mm": 1.167528866849147
+        },
+        "right": {
+          "first_ground_gap_mm": 0.14999993926666544,
+          "first_ground_width_within_1_5mm_ray_mm": 0.29999995141333
+        }
+      },
+      {
+        "track_uuid": "88427094-8f27-5415-9f1a-2189734cd052",
+        "xy_mm": [
+          56.864403535398225,
+          46.285596464601774
+        ],
+        "pad_transition": [],
+        "left": {
+          "first_ground_gap_mm": 0.15049894873211003,
+          "first_ground_width_within_1_5mm_ray_mm": 1.1675285164069218
+        },
+        "right": {
+          "first_ground_gap_mm": 0.14999993926666544,
+          "first_ground_width_within_1_5mm_ray_mm": 0.29999995141333
+        }
+      },
+      {
+        "track_uuid": "88427094-8f27-5415-9f1a-2189734cd052",
+        "xy_mm": [
+          56.88208041150442,
+          46.26791958849558
+        ],
+        "pad_transition": [],
+        "left": {
+          "first_ground_gap_mm": 0.15049895801848592,
+          "first_ground_width_within_1_5mm_ray_mm": 1.1698196846653859
+        },
+        "right": {
+          "first_ground_gap_mm": 0.14999993926666544,
+          "first_ground_width_within_1_5mm_ray_mm": 0.29999995141333
+        }
+      },
+      {
+        "track_uuid": "88427094-8f27-5415-9f1a-2189734cd052",
+        "xy_mm": [
+          56.89975728761062,
+          46.25024271238938
+        ],
+        "pad_transition": [],
+        "left": {
+          "first_ground_gap_mm": 0.15049896730486184,
+          "first_ground_width_within_1_5mm_ray_mm": 1.1795043908285416
+        },
+        "right": {
+          "first_ground_gap_mm": 0.1499999392666705,
+          "first_ground_width_within_1_5mm_ray_mm": 0.299999951413325
+        }
+      },
+      {
+        "track_uuid": "88427094-8f27-5415-9f1a-2189734cd052",
+        "xy_mm": [
+          56.91743416371681,
+          46.232565836283186
+        ],
+        "pad_transition": [],
+        "left": {
+          "first_ground_gap_mm": 0.1504989765912478,
+          "first_ground_width_within_1_5mm_ray_mm": 1.1891890969916774
+        },
+        "right": {
+          "first_ground_gap_mm": 0.14999993926666544,
+          "first_ground_width_within_1_5mm_ray_mm": 0.29999995141333
+        }
+      },
+      {
+        "track_uuid": "88427094-8f27-5415-9f1a-2189734cd052",
+        "xy_mm": [
+          56.935111039823006,
+          46.21488896017699
+        ],
+        "pad_transition": [],
+        "left": {
+          "first_ground_gap_mm": 0.1504989858776237,
+          "first_ground_width_within_1_5mm_ray_mm": 1.198873803154823
+        },
+        "right": {
+          "first_ground_gap_mm": 0.14999993926666544,
+          "first_ground_width_within_1_5mm_ray_mm": 0.29999995141333
+        }
+      },
+      {
+        "track_uuid": "88427094-8f27-5415-9f1a-2189734cd052",
+        "xy_mm": [
+          56.9527879159292,
+          46.1972120840708
+        ],
+        "pad_transition": [],
+        "left": {
+          "first_ground_gap_mm": 0.15049899516399962,
+          "first_ground_width_within_1_5mm_ray_mm": 1.2104338374721306
+        },
+        "right": {
+          "first_ground_gap_mm": 0.1499999392666705,
+          "first_ground_width_within_1_5mm_ray_mm": 0.299999951413325
+        }
+      },
+      {
+        "track_uuid": "88427094-8f27-5415-9f1a-2189734cd052",
+        "xy_mm": [
+          56.97046479203539,
+          46.179535207964605
+        ],
+        "pad_transition": [],
+        "left": {
+          "first_ground_gap_mm": 0.15049900445037553,
+          "first_ground_width_within_1_5mm_ray_mm": 1.2324120243867867
+        },
+        "right": {
+          "first_ground_gap_mm": 0.1499999392666705,
+          "first_ground_width_within_1_5mm_ray_mm": 0.299999951413325
+        }
+      },
+      {
+        "track_uuid": "88427094-8f27-5415-9f1a-2189734cd052",
+        "xy_mm": [
+          56.98814166814159,
+          46.16185833185841
+        ],
+        "pad_transition": [],
+        "left": {
+          "first_ground_gap_mm": 0.15049901373675142,
+          "first_ground_width_within_1_5mm_ray_mm": 1.2574108930301784
+        },
+        "right": {
+          "first_ground_gap_mm": 0.1499999392666705,
+          "first_ground_width_within_1_5mm_ray_mm": 0.299999951413325
+        }
+      },
+      {
+        "track_uuid": "88427094-8f27-5415-9f1a-2189734cd052",
+        "xy_mm": [
+          57.00581854424779,
+          46.14418145575221
+        ],
+        "pad_transition": [],
+        "left": {
+          "first_ground_gap_mm": 0.15049902302312232,
+          "first_ground_width_within_1_5mm_ray_mm": 1.2824097616744146
+        },
+        "right": {
+          "first_ground_gap_mm": 0.14999993926666044,
+          "first_ground_width_within_1_5mm_ray_mm": 0.29999995141333
+        }
+      },
+      {
+        "track_uuid": "88427094-8f27-5415-9f1a-2189734cd052",
+        "xy_mm": [
+          57.02349542035398,
+          46.12650457964602
+        ],
+        "pad_transition": [],
+        "left": {
+          "first_ground_gap_mm": 0.15049903230950323,
+          "first_ground_width_within_1_5mm_ray_mm": 1.3074086303169723
+        },
+        "right": {
+          "first_ground_gap_mm": 0.1499999392666705,
+          "first_ground_width_within_1_5mm_ray_mm": 0.299999951413325
+        }
+      },
+      {
+        "track_uuid": "88427094-8f27-5415-9f1a-2189734cd052",
+        "xy_mm": [
+          57.041172296460175,
+          46.10882770353982
+        ],
+        "pad_transition": [],
+        "left": {
+          "first_ground_gap_mm": 0.15049904159587915,
+          "first_ground_width_within_1_5mm_ray_mm": 1.3324074989603645
+        },
+        "right": {
+          "first_ground_gap_mm": 0.1499999392666705,
+          "first_ground_width_within_1_5mm_ray_mm": 0.299999951413325
+        }
+      },
+      {
+        "track_uuid": "88427094-8f27-5415-9f1a-2189734cd052",
+        "xy_mm": [
+          57.05884917256637,
+          46.09115082743363
+        ],
+        "pad_transition": [],
+        "left": {
+          "first_ground_gap_mm": 0.15049905088225504,
+          "first_ground_width_within_1_5mm_ray_mm": 1.349500949117747
+        },
+        "right": {
+          "first_ground_gap_mm": 0.14999993926666544,
+          "first_ground_width_within_1_5mm_ray_mm": 0.29999995141333
+        }
+      },
+      {
+        "track_uuid": "88427094-8f27-5415-9f1a-2189734cd052",
+        "xy_mm": [
+          57.07652604867256,
+          46.073473951327436
+        ],
+        "pad_transition": [],
+        "left": {
+          "first_ground_gap_mm": 0.15049906016863096,
+          "first_ground_width_within_1_5mm_ray_mm": 1.349500939831371
+        },
+        "right": {
+          "first_ground_gap_mm": 0.1499999392666705,
+          "first_ground_width_within_1_5mm_ray_mm": 0.299999951413325
+        }
+      },
+      {
+        "track_uuid": "88427094-8f27-5415-9f1a-2189734cd052",
+        "xy_mm": [
+          57.094202924778756,
+          46.05579707522124
+        ],
+        "pad_transition": [],
+        "left": {
+          "first_ground_gap_mm": 0.15049906945500688,
+          "first_ground_width_within_1_5mm_ray_mm": 1.3495009305449952
+        },
+        "right": {
+          "first_ground_gap_mm": 0.14999993926666544,
+          "first_ground_width_within_1_5mm_ray_mm": 0.29999995141333
+        }
+      },
+      {
+        "track_uuid": "88427094-8f27-5415-9f1a-2189734cd052",
+        "xy_mm": [
+          57.11187980088495,
+          46.03812019911505
+        ],
+        "pad_transition": [],
+        "left": {
+          "first_ground_gap_mm": 0.15049907874137777,
+          "first_ground_width_within_1_5mm_ray_mm": 1.3495009212586242
+        },
+        "right": {
+          "first_ground_gap_mm": 0.14999993926666044,
+          "first_ground_width_within_1_5mm_ray_mm": 0.29999995141333
+        }
+      },
+      {
+        "track_uuid": "88427094-8f27-5415-9f1a-2189734cd052",
+        "xy_mm": [
+          57.12955667699115,
+          46.02044332300885
+        ],
+        "pad_transition": [],
+        "left": {
+          "first_ground_gap_mm": 0.15049908802775366,
+          "first_ground_width_within_1_5mm_ray_mm": 1.3495009119722483
+        },
+        "right": {
+          "first_ground_gap_mm": 0.14999993926666044,
+          "first_ground_width_within_1_5mm_ray_mm": 0.29999995141333
+        }
+      },
+      {
+        "track_uuid": "88427094-8f27-5415-9f1a-2189734cd052",
+        "xy_mm": [
+          57.147233553097344,
+          46.002766446902655
+        ],
+        "pad_transition": [],
+        "left": {
+          "first_ground_gap_mm": 0.1504990973141346,
+          "first_ground_width_within_1_5mm_ray_mm": 1.3495009026858673
+        },
+        "right": {
+          "first_ground_gap_mm": 0.14999993926666544,
+          "first_ground_width_within_1_5mm_ray_mm": 0.29999995141333
+        }
+      },
+      {
+        "track_uuid": "88427094-8f27-5415-9f1a-2189734cd052",
+        "xy_mm": [
+          57.16491042920354,
+          45.98508957079646
+        ],
+        "pad_transition": [],
+        "left": {
+          "first_ground_gap_mm": 0.1504991066005105,
+          "first_ground_width_within_1_5mm_ray_mm": 1.3495008933994914
+        },
+        "right": {
+          "first_ground_gap_mm": 0.1499999392666705,
+          "first_ground_width_within_1_5mm_ray_mm": 0.299999951413325
+        }
+      },
+      {
+        "track_uuid": "88427094-8f27-5415-9f1a-2189734cd052",
+        "xy_mm": [
+          57.18258730530973,
+          45.96741269469027
+        ],
+        "pad_transition": [],
+        "left": {
+          "first_ground_gap_mm": 0.1504991158868864,
+          "first_ground_width_within_1_5mm_ray_mm": 1.3495008841131155
+        },
+        "right": {
+          "first_ground_gap_mm": 0.14999993926666544,
+          "first_ground_width_within_1_5mm_ray_mm": 0.29999995141333
+        }
+      },
+      {
+        "track_uuid": "88427094-8f27-5415-9f1a-2189734cd052",
+        "xy_mm": [
+          57.200264181415925,
+          45.949735818584074
+        ],
+        "pad_transition": [],
+        "left": {
+          "first_ground_gap_mm": 0.1504991251732623,
+          "first_ground_width_within_1_5mm_ray_mm": 1.3495008748267396
+        },
+        "right": {
+          "first_ground_gap_mm": 0.14999993926666544,
+          "first_ground_width_within_1_5mm_ray_mm": 0.29999995141333
+        }
+      },
+      {
+        "track_uuid": "88427094-8f27-5415-9f1a-2189734cd052",
+        "xy_mm": [
+          57.21794105752212,
+          45.93205894247788
+        ],
+        "pad_transition": [],
+        "left": {
+          "first_ground_gap_mm": 0.15049913445963822,
+          "first_ground_width_within_1_5mm_ray_mm": 1.3495008655403637
+        },
+        "right": {
+          "first_ground_gap_mm": 0.1499999392666705,
+          "first_ground_width_within_1_5mm_ray_mm": 0.299999951413325
+        }
+      },
+      {
+        "track_uuid": "88427094-8f27-5415-9f1a-2189734cd052",
+        "xy_mm": [
+          57.23561793362832,
+          45.91438206637169
+        ],
+        "pad_transition": [],
+        "left": {
+          "first_ground_gap_mm": 0.15049914374600407,
+          "first_ground_width_within_1_5mm_ray_mm": 1.3495008562539978
+        },
+        "right": {
+          "first_ground_gap_mm": 0.1499999392666705,
+          "first_ground_width_within_1_5mm_ray_mm": 0.299999951413325
+        }
+      },
+      {
+        "track_uuid": "88427094-8f27-5415-9f1a-2189734cd052",
+        "xy_mm": [
+          57.25329480973451,
+          45.896705190265486
+        ],
+        "pad_transition": [],
+        "left": {
+          "first_ground_gap_mm": 0.15049915303239003,
+          "first_ground_width_within_1_5mm_ray_mm": 1.349500846967612
+        },
+        "right": {
+          "first_ground_gap_mm": 0.14999993926666544,
+          "first_ground_width_within_1_5mm_ray_mm": 0.29999995141333
+        }
+      },
+      {
+        "track_uuid": "88427094-8f27-5415-9f1a-2189734cd052",
+        "xy_mm": [
+          57.270971685840706,
+          45.87902831415929
+        ],
+        "pad_transition": [],
+        "left": {
+          "first_ground_gap_mm": 0.156815718967274,
+          "first_ground_width_within_1_5mm_ray_mm": 1.343184281032728
+        },
+        "right": {
+          "first_ground_gap_mm": 0.1499999392666705,
+          "first_ground_width_within_1_5mm_ray_mm": 0.299999951413325
+        }
+      },
+      {
+        "track_uuid": "88427094-8f27-5415-9f1a-2189734cd052",
+        "xy_mm": [
+          57.2886485619469,
+          45.8613514380531
+        ],
+        "pad_transition": [],
+        "left": {
+          "first_ground_gap_mm": 0.16717093946381192,
+          "first_ground_width_within_1_5mm_ray_mm": 1.33282906053619
+        },
+        "right": {
+          "first_ground_gap_mm": 0.1499999392666705,
+          "first_ground_width_within_1_5mm_ray_mm": 0.299999951413325
+        }
+      },
+      {
+        "track_uuid": "3d2c4bde-575f-5b17-b738-6358d3a39e0b",
+        "xy_mm": [
+          59.06751626115161,
+          45.749749704624634
+        ],
+        "pad_transition": [],
+        "left": {
+          "first_ground_gap_mm": 0.15098799246606584,
+          "first_ground_width_within_1_5mm_ray_mm": 1.349012007533935
+        },
+        "right": {
+          "first_ground_gap_mm": 0.16697054582443413,
+          "first_ground_width_within_1_5mm_ray_mm": 1.3330294541755665
+        }
+      },
+      {
+        "track_uuid": "3d2c4bde-575f-5b17-b738-6358d3a39e0b",
+        "xy_mm": [
+          59.092436329503784,
+          45.7479742330105
+        ],
+        "pad_transition": [],
+        "left": {
+          "first_ground_gap_mm": 0.15341630944682155,
+          "first_ground_width_within_1_5mm_ray_mm": 1.3465836905531772
+        },
+        "right": {
+          "first_ground_gap_mm": 0.16596013655280403,
+          "first_ground_width_within_1_5mm_ray_mm": 1.3340398634471946
+        }
+      },
+      {
+        "track_uuid": "3d2c4bde-575f-5b17-b738-6358d3a39e0b",
+        "xy_mm": [
+          59.11716305640777,
+          45.744407578523706
+        ],
+        "pad_transition": [],
+        "left": {
+          "first_ground_gap_mm": 0.15064848114294793,
+          "first_ground_width_within_1_5mm_ray_mm": 1.3493515188570502
+        },
+        "right": {
+          "first_ground_gap_mm": 0.16523461167976478,
+          "first_ground_width_within_1_5mm_ray_mm": 1.3347653883202333
+        }
+      },
+      {
+        "track_uuid": "3d2c4bde-575f-5b17-b738-6358d3a39e0b",
+        "xy_mm": [
+          59.14157978841675,
+          45.739116990999754
+        ],
+        "pad_transition": [],
+        "left": {
+          "first_ground_gap_mm": 0.151553466783191,
+          "first_ground_width_within_1_5mm_ray_mm": 1.348446533216806
+        },
+        "right": {
+          "first_ground_gap_mm": 0.16472131559990993,
+          "first_ground_width_within_1_5mm_ray_mm": 1.3352786844000872
+        }
+      },
+      {
+        "track_uuid": "3d2c4bde-575f-5b17-b738-6358d3a39e0b",
+        "xy_mm": [
+          59.16554435625813,
+          45.73205664777319
+        ],
+        "pad_transition": [],
+        "left": {
+          "first_ground_gap_mm": 0.1523933108097439,
+          "first_ground_width_within_1_5mm_ray_mm": 1.3476066891902554
+        },
+        "right": {
+          "first_ground_gap_mm": 0.16440366954921654,
+          "first_ground_width_within_1_5mm_ray_mm": 1.3355963304507827
+        }
+      },
+      {
+        "track_uuid": "3d2c4bde-575f-5b17-b738-6358d3a39e0b",
+        "xy_mm": [
+          59.188964572783036,
+          45.72335776274647
+        ],
+        "pad_transition": [],
+        "left": {
+          "first_ground_gap_mm": 0.150499627105835,
+          "first_ground_width_within_1_5mm_ray_mm": 1.0552780386049738
+        },
+        "right": {
+          "first_ground_gap_mm": 0.1643308530357371,
+          "first_ground_width_within_1_5mm_ray_mm": 1.3356691469642605
+        }
+      },
+      {
+        "track_uuid": "3d2c4bde-575f-5b17-b738-6358d3a39e0b",
+        "xy_mm": [
+          59.211676199119296,
+          45.71294819157642
+        ],
+        "pad_transition": [],
+        "left": {
+          "first_ground_gap_mm": 0.15239325693088349,
+          "first_ground_width_within_1_5mm_ray_mm": 0.8632915125447367
+        },
+        "right": {
+          "first_ground_gap_mm": 0.16440368502559882,
+          "first_ground_width_within_1_5mm_ray_mm": 1.3355963149744032
+        }
+      },
+      {
+        "track_uuid": "3d2c4bde-575f-5b17-b738-6358d3a39e0b",
+        "xy_mm": [
+          59.2336141147322,
+          45.70099508248874
+        ],
+        "pad_transition": [],
+        "left": {
+          "first_ground_gap_mm": 0.15155349203008092,
+          "first_ground_width_within_1_5mm_ray_mm": 0.8605633527692673
+        },
+        "right": {
+          "first_ground_gap_mm": 0.16472134587180623,
+          "first_ground_width_within_1_5mm_ray_mm": 1.3352786541281931
+        }
+      },
+      {
+        "track_uuid": "3d2c4bde-575f-5b17-b738-6358d3a39e0b",
+        "xy_mm": [
+          59.25462035120176,
+          45.68747083952539
+        ],
+        "pad_transition": [],
+        "left": {
+          "first_ground_gap_mm": 0.1506484567992738,
+          "first_ground_width_within_1_5mm_ray_mm": 0.9344826222492606
+        },
+        "right": {
+          "first_ground_gap_mm": 0.16523465863119133,
+          "first_ground_width_within_1_5mm_ray_mm": 1.334765341368808
+        }
+      },
+      {
+        "track_uuid": "3d2c4bde-575f-5b17-b738-6358d3a39e0b",
+        "xy_mm": [
+          59.27462678129315,
+          45.67250839311409
+        ],
+        "pad_transition": [],
+        "left": {
+          "first_ground_gap_mm": 0.15341623532005477,
+          "first_ground_width_within_1_5mm_ray_mm": 1.0226273698312107
+        },
+        "right": {
+          "first_ground_gap_mm": 0.1659602003241256,
+          "first_ground_width_within_1_5mm_ray_mm": 1.3340397996758773
+        }
+      },
+      {
+        "track_uuid": "3d2c4bde-575f-5b17-b738-6358d3a39e0b",
+        "xy_mm": [
+          59.293503365775784,
+          45.656142676985574
+        ],
+        "pad_transition": [],
+        "left": {
+          "first_ground_gap_mm": 0.15098783581661682,
+          "first_ground_width_within_1_5mm_ray_mm": 1.1372115263740283
+        },
+        "right": {
+          "first_ground_gap_mm": 0.16697062938849255,
+          "first_ground_width_within_1_5mm_ray_mm": 1.3330293706115066
+        }
+      },
+      {
+        "track_uuid": "5f05befe-7cac-565d-8c54-90c9a969a02f",
+        "xy_mm": [
+          57.306496634224,
+          45.84385732301408
+        ],
+        "pad_transition": [],
+        "left": {
+          "first_ground_gap_mm": 0.1716815116354052,
+          "first_ground_width_within_1_5mm_ray_mm": 1.3283184883645942
+        },
+        "right": {
+          "first_ground_gap_mm": 0.15002392474798706,
+          "first_ground_width_within_1_5mm_ray_mm": 0.30000001917397245
+        }
+      },
+      {
+        "track_uuid": "5f05befe-7cac-565d-8c54-90c9a969a02f",
+        "xy_mm": [
+          57.32537321870629,
+          45.82749160688488
+        ],
+        "pad_transition": [],
+        "left": {
+          "first_ground_gap_mm": 0.17055999868912666,
+          "first_ground_width_within_1_5mm_ray_mm": 1.3294400013108745
+        },
+        "right": {
+          "first_ground_gap_mm": 0.15001755117320073,
+          "first_ground_width_within_1_5mm_ray_mm": 0.2999995946988381
+        }
+      },
+      {
+        "track_uuid": "5f05befe-7cac-565d-8c54-90c9a969a02f",
+        "xy_mm": [
+          57.34537964879744,
+          45.81252916047297
+        ],
+        "pad_transition": [],
+        "left": {
+          "first_ground_gap_mm": 0.16975162703037916,
+          "first_ground_width_within_1_5mm_ray_mm": 1.3302483729696195
+        },
+        "right": {
+          "first_ground_gap_mm": 0.15003218041370792,
+          "first_ground_width_within_1_5mm_ray_mm": 0.30000012754269645
+        }
+      },
+      {
+        "track_uuid": "5f05befe-7cac-565d-8c54-90c9a969a02f",
+        "xy_mm": [
+          57.36638588526688,
+          45.79900491750908
+        ],
+        "pad_transition": [],
+        "left": {
+          "first_ground_gap_mm": 0.16918023129852205,
+          "first_ground_width_within_1_5mm_ray_mm": 1.3308197687014773
+        },
+        "right": {
+          "first_ground_gap_mm": 0.15000489032607414,
+          "first_ground_width_within_1_5mm_ray_mm": 0.2999999599827671
+        }
+      },
+      {
+        "track_uuid": "5f05befe-7cac-565d-8c54-90c9a969a02f",
+        "xy_mm": [
+          57.388323800879746,
+          45.787051808420955
+        ],
+        "pad_transition": [],
+        "left": {
+          "first_ground_gap_mm": 0.16882853242401796,
+          "first_ground_width_within_1_5mm_ray_mm": 1.3167325986848055
+        },
+        "right": {
+          "first_ground_gap_mm": 0.15003131206148557,
+          "first_ground_width_within_1_5mm_ray_mm": 0.30000011311587677
+        }
+      },
+      {
+        "track_uuid": "5f05befe-7cac-565d-8c54-90c9a969a02f",
+        "xy_mm": [
+          57.411035427216035,
+          45.776642237250556
+        ],
+        "pad_transition": [],
+        "left": {
+          "first_ground_gap_mm": 0.16874432112171484,
+          "first_ground_width_within_1_5mm_ray_mm": 1.2834316001875044
+        },
+        "right": {
+          "first_ground_gap_mm": 0.14999854081011035,
+          "first_ground_width_within_1_5mm_ray_mm": 0.30000044169868834
+        }
+      },
+      {
+        "track_uuid": "5f05befe-7cac-565d-8c54-90c9a969a02f",
+        "xy_mm": [
+          57.434455643741046,
+          45.76794335222359
+        ],
+        "pad_transition": [],
+        "left": {
+          "first_ground_gap_mm": 0.1688284535513079,
+          "first_ground_width_within_1_5mm_ray_mm": 1.290479839695303
+        },
+        "right": {
+          "first_ground_gap_mm": 0.15003085969357172,
+          "first_ground_width_within_1_5mm_ray_mm": 0.3000003094082155
+        }
+      },
+      {
+        "track_uuid": "5f05befe-7cac-565d-8c54-90c9a969a02f",
+        "xy_mm": [
+          57.45842021158258,
+          45.7608830089969
+        ],
+        "pad_transition": [],
+        "left": {
+          "first_ground_gap_mm": 0.16918007653893533,
+          "first_ground_width_within_1_5mm_ray_mm": 1.3187930964760795
+        },
+        "right": {
+          "first_ground_gap_mm": 0.15000928849211015,
+          "first_ground_width_within_1_5mm_ray_mm": 0.46713988236643
+        }
+      },
+      {
+        "track_uuid": "5f05befe-7cac-565d-8c54-90c9a969a02f",
+        "xy_mm": [
+          57.48283694359174,
+          45.75559242147293
+        ],
+        "pad_transition": [],
+        "left": {
+          "first_ground_gap_mm": 0.16975138725612895,
+          "first_ground_width_within_1_5mm_ray_mm": 1.2979959773931462
+        },
+        "right": {
+          "first_ground_gap_mm": 0.15002771240309704,
+          "first_ground_width_within_1_5mm_ray_mm": 0.5724952344595107
+        }
+      },
+      {
+        "track_uuid": "5f05befe-7cac-565d-8c54-90c9a969a02f",
+        "xy_mm": [
+          57.50756367049593,
+          45.75202576698624
+        ],
+        "pad_transition": [
+          "D3.2"
+        ],
+        "left": {
+          "first_ground_gap_mm": 0.17055967266815952,
+          "first_ground_width_within_1_5mm_ray_mm": 1.283552021860307
+        },
+        "right": {
+          "first_ground_gap_mm": 0.15341638695161175,
+          "first_ground_width_within_1_5mm_ray_mm": 0.6401749772760911
+        }
+      },
+      {
+        "track_uuid": "5f05befe-7cac-565d-8c54-90c9a969a02f",
+        "xy_mm": [
+          57.53248373884829,
+          45.75025029537234
+        ],
+        "pad_transition": [
+          "D3.2"
+        ],
+        "left": {
+          "first_ground_gap_mm": 0.17168108470588275,
+          "first_ground_width_within_1_5mm_ray_mm": 1.2756258411594932
+        },
+        "right": {
+          "first_ground_gap_mm": 0.15098799246287248,
+          "first_ground_width_within_1_5mm_ray_mm": 0.7302478431754633
+        }
+      },
+      {
+        "track_uuid": "6cca3da4-99ec-5662-8f67-ef01c12b9095",
+        "xy_mm": [
+          59.742496634224246,
+          45.20785732301453
+        ],
+        "pad_transition": [
+          "U3.11"
+        ],
+        "left": {
+          "first_ground_gap_mm": 0.399001762030103,
+          "first_ground_width_within_1_5mm_ray_mm": 1.100998237969897
+        },
+        "right": {
+          "first_ground_gap_mm": 0.15098783581681302,
+          "first_ground_width_within_1_5mm_ray_mm": 1.349012164183187
+        }
+      },
+      {
+        "track_uuid": "6cca3da4-99ec-5662-8f67-ef01c12b9095",
+        "xy_mm": [
+          59.76137321870693,
+          45.19149160688621
+        ],
+        "pad_transition": [
+          "U3.11"
+        ],
+        "left": {
+          "first_ground_gap_mm": 0.382435273756267,
+          "first_ground_width_within_1_5mm_ray_mm": 1.1175647262437312
+        },
+        "right": {
+          "first_ground_gap_mm": 0.153417057376473,
+          "first_ground_width_within_1_5mm_ray_mm": 1.3465829426235252
+        }
+      },
+      {
+        "track_uuid": "6cca3da4-99ec-5662-8f67-ef01c12b9095",
+        "xy_mm": [
+          59.781379648798364,
+          45.17652916047514
+        ],
+        "pad_transition": [
+          "U3.11"
+        ],
+        "left": {
+          "first_ground_gap_mm": 0.36913545296129907,
+          "first_ground_width_within_1_5mm_ray_mm": 1.1308645470387022
+        },
+        "right": {
+          "first_ground_gap_mm": 0.15064917557519616,
+          "first_ground_width_within_1_5mm_ray_mm": 1.3493508244248051
+        }
+      },
+      {
+        "track_uuid": "6cca3da4-99ec-5662-8f67-ef01c12b9095",
+        "xy_mm": [
+          59.80238588526797,
+          45.163004917512026
+        ],
+        "pad_transition": [
+          "U3.11"
+        ],
+        "left": {
+          "first_ground_gap_mm": 0.3581094859806884,
+          "first_ground_width_within_1_5mm_ray_mm": 1.14189051401931
+        },
+        "right": {
+          "first_ground_gap_mm": 0.15155411132931854,
+          "first_ground_width_within_1_5mm_ray_mm": 1.3484458886706798
+        }
+      },
+      {
+        "track_uuid": "6cca3da4-99ec-5662-8f67-ef01c12b9095",
+        "xy_mm": [
+          59.8243238008809,
+          45.1510518084246
+        ],
+        "pad_transition": [
+          "U3.11"
+        ],
+        "left": {
+          "first_ground_gap_mm": 0.3492503961449969,
+          "first_ground_width_within_1_5mm_ray_mm": 1.1507496038550047
+        },
+        "right": {
+          "first_ground_gap_mm": 0.1523936727484058,
+          "first_ground_width_within_1_5mm_ray_mm": 1.3476063272515957
+        }
+      },
+      {
+        "track_uuid": "6cca3da4-99ec-5662-8f67-ef01c12b9095",
+        "xy_mm": [
+          59.84703542721717,
+          45.14064223725482
+        ],
+        "pad_transition": [
+          "U3.11"
+        ],
+        "left": {
+          "first_ground_gap_mm": 0.3420207310900342,
+          "first_ground_width_within_1_5mm_ray_mm": 1.1579792689099677
+        },
+        "right": {
+          "first_ground_gap_mm": 0.15319522263138133,
+          "first_ground_width_within_1_5mm_ray_mm": 1.3468047773686207
+        }
+      },
+      {
+        "track_uuid": "6cca3da4-99ec-5662-8f67-ef01c12b9095",
+        "xy_mm": [
+          59.87045564374208,
+          45.13194335222838
+        ],
+        "pad_transition": [
+          "U3.11"
+        ],
+        "left": {
+          "first_ground_gap_mm": 0.3362372234334322,
+          "first_ground_width_within_1_5mm_ray_mm": 1.1581828744681322
+        },
+        "right": {
+          "first_ground_gap_mm": 0.19947287137275962,
+          "first_ground_width_within_1_5mm_ray_mm": 1.3005271286272375
+        }
+      },
+      {
+        "track_uuid": "6cca3da4-99ec-5662-8f67-ef01c12b9095",
+        "xy_mm": [
+          59.89442021158345,
+          45.12488300900212
+        ],
+        "pad_transition": [
+          "U3.11"
+        ],
+        "left": {
+          "first_ground_gap_mm": 0.33192396614897646,
+          "first_ground_width_within_1_5mm_ray_mm": 1.1342447658980257
+        },
+        "right": {
+          "first_ground_gap_mm": 0.29241577686747466,
+          "first_ground_width_within_1_5mm_ray_mm": 1.2075842231325233
+        }
+      },
+      {
+        "track_uuid": "6cca3da4-99ec-5662-8f67-ef01c12b9095",
+        "xy_mm": [
+          59.9188369435924,
+          45.11959242147848
+        ],
+        "pad_transition": [
+          "U3.11"
+        ],
+        "left": {
+          "first_ground_gap_mm": 0.32868771482574394,
+          "first_ground_width_within_1_5mm_ray_mm": 1.116705203204541
+        },
+        "right": {
+          "first_ground_gap_mm": 0.3262747133180797,
+          "first_ground_width_within_1_5mm_ray_mm": 1.1737252866819223
+        }
+      },
+      {
+        "track_uuid": "6cca3da4-99ec-5662-8f67-ef01c12b9095",
+        "xy_mm": [
+          59.94356367049633,
+          45.11602576699201
+        ],
+        "pad_transition": [
+          "U3.11"
+        ],
+        "left": {
+          "first_ground_gap_mm": 0.3266414447679172,
+          "first_ground_width_within_1_5mm_ray_mm": 1.1053432491994781
+        },
+        "right": {
+          "first_ground_gap_mm": 0.33071435570927066,
+          "first_ground_width_within_1_5mm_ray_mm": 1.1692856442907318
+        }
+      },
+      {
+        "track_uuid": "6cca3da4-99ec-5662-8f67-ef01c12b9095",
+        "xy_mm": [
+          59.968483738848434,
+          45.11425029537821
+        ],
+        "pad_transition": [
+          "U3.11"
+        ],
+        "left": {
+          "first_ground_gap_mm": 0.3255987894886632,
+          "first_ground_width_within_1_5mm_ray_mm": 1.0996942193198413
+        },
+        "right": {
+          "first_ground_gap_mm": 0.3260976956502189,
+          "first_ground_width_within_1_5mm_ray_mm": 1.1739023043497787
+        }
+      }
+    ]
+  },
+  "receiver_ground_pads_share_return_network": true,
+  "all_corridor_ground_connected_to_receiver": true,
+  "limits": [
+    "Native copper polygons include plated-pad/via drill interiors; physical drilling is separately recorded by the extractor. The antenna PTH and its clearance transition are reported independently rather than counted as a continuous reference plane.",
+    "Polygon approximation tolerance is 2 um per native item, with a 5 um reconciliation tolerance against the whole-layer converter. Tiny boundary discrepancies are not guaranteed manufacturing margins.",
+    "Transverse front-ground sampling has at most 25 um spacing along each actual trace/arc. Pad/ESD/antenna transitions are reported separately. It cannot rule out an unsampled narrower interruption or establish a continuous guard from graph connectivity alone.",
+    "A connected finite return and full projected reference do not establish 50 ohm impedance, return-current distribution, antenna matching, noise isolation or RF performance."
+  ]
+}

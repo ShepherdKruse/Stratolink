@@ -1,0 +1,55 @@
+{
+  "before_pcb_sha256": "4fcdb39b8cc7936295f64ae9f5e1acd4acd01e144cd21e9076f681c23c0e2b54",
+  "pcb_sha256": "8df85b3e4bdd546ec174bb9d7b9ee9d795d55d486a68e1e853aaf1b871f863d3",
+  "geometry_sha256": "e6106d7591b53524aee69566ccd6155ac440e985e495a3ac740f8fd92eac7c68",
+  "nets": {
+    "SCL": {
+      "before_mm": 99.07144595132291,
+      "after_mm": 99.03918503572257,
+      "delta_mm": -0.03226091560034661
+    },
+    "Net-(U3-SCL)": {
+      "before_mm": 7.842680170362511,
+      "after_mm": 7.842680170362511,
+      "delta_mm": 0.0
+    },
+    "SDA": {
+      "before_mm": 87.27703366698924,
+      "after_mm": 87.27703366698924,
+      "delta_mm": 0.0
+    },
+    "Net-(U3-SDA)": {
+      "before_mm": 7.825524255643524,
+      "after_mm": 7.825524255643524,
+      "delta_mm": 0.0
+    },
+    "+3.3V": {
+      "before_mm": 152.8703145102195,
+      "after_mm": 151.89529190735192,
+      "delta_mm": -0.9750226028675684
+    },
+    "/VBAT": {
+      "before_mm": 26.96788182594875,
+      "after_mm": 28.878404898474102,
+      "delta_mm": 1.9105230725253506
+    },
+    "/SC_MID": {
+      "before_mm": 22.135488722866757,
+      "after_mm": 15.54390064528175,
+      "delta_mm": -6.591588077585007
+    }
+  },
+  "combined_I2C": {
+    "SCL": {
+      "before_mm": 106.91412612168543,
+      "after_mm": 106.88186520608508,
+      "delta_mm": -0.03226091560034661
+    },
+    "SDA": {
+      "before_mm": 95.10255792263277,
+      "after_mm": 95.10255792263277,
+      "delta_mm": 0.0
+    }
+  },
+  "method": "Native straight/arc centerline lengths, excluding vias, summed across the zero-ohm GNSS branch. These are geometric trace lengths, not measured capacitance; pad/IC/assembly/probe capacitances and ground geometry remain separate."
+}

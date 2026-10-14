@@ -1,0 +1,74 @@
+{
+  "center_mm": [
+    59.45,
+    39.75
+  ],
+  "rotation_degrees": 90,
+  "RF_IN_mm": [
+    62.749999,
+    35.000001
+  ],
+  "body_bounds": [
+    54.4,
+    34.9,
+    64.8,
+    44.6
+  ],
+  "court_bounds": [
+    54.155,
+    33.255,
+    65.045,
+    46.245000000000005
+  ],
+  "body_collisions": [
+    {
+      "ref": "D3",
+      "overlap_mm2": 3.461100000000004
+    }
+  ],
+  "courtyard_collisions": [
+    {
+      "ref": "AE2",
+      "overlap_mm2": 3.0079199999999897
+    },
+    {
+      "ref": "H1",
+      "overlap_mm2": 0.48098198093586747
+    },
+    {
+      "ref": "D3",
+      "overlap_mm2": 3.461100000000004
+    }
+  ],
+  "front_pad_collisions": [
+    {
+      "ref": "AE2",
+      "pin": "1",
+      "net": "Net-(AE2-A)",
+      "min_gap": 0.13200099999999537
+    }
+  ],
+  "front_artwork": [
+    {
+      "uuid": "c73a59a2-31c0-4945-990c-2704a1c497e5",
+      "kind": "PCB_TEXT",
+      "bounds": [
+        56.230338,
+        33.719809,
+        57.0668,
+        45.253807
+      ]
+    },
+    {
+      "uuid": "5e350471-61a4-4077-9186-34d0a4e791c3",
+      "kind": "PCB_TEXT",
+      "bounds": [
+        54.646552,
+        34.755697,
+        55.803241,
+        46.767703
+      ]
+    }
+  ],
+  "rear_reference_obstacles": []
+}

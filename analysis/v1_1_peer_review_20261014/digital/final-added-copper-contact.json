@@ -1,0 +1,63 @@
+{
+  "before_pcb_sha256": "4fcdb39b8cc7936295f64ae9f5e1acd4acd01e144cd21e9076f681c23c0e2b54",
+  "pcb_sha256": "8df85b3e4bdd546ec174bb9d7b9ee9d795d55d486a68e1e853aaf1b871f863d3",
+  "changed_track_via_nets": [
+    "+3.3V",
+    "/SC_MID",
+    "/VBAT",
+    "GND",
+    "Net-(AE2-A)",
+    "SCL"
+  ],
+  "added_net_assigned_graphics_with_positive_same_net_copper_contact": [
+    {
+      "uuid": "560f9804-9bd9-5007-a2da-4d12c60ce247",
+      "net": "GND",
+      "layer": "F.Cu",
+      "same_net_overlap_mm2": 0.005301200307988658
+    },
+    {
+      "uuid": "ba3c6216-d0e7-57d1-9ac2-8d5e7f39cb29",
+      "net": "Net-(AE2-A)",
+      "layer": "F.Cu",
+      "same_net_overlap_mm2": 0.009180980239999319
+    },
+    {
+      "uuid": "f5107420-9f61-54b6-889e-abad2b9900fe",
+      "net": "GND",
+      "layer": "F.Cu",
+      "same_net_overlap_mm2": 0.4189418078429179
+    },
+    {
+      "uuid": "6641ea5c-2b5c-5274-a8f3-20e297bb8aac",
+      "net": "GND",
+      "layer": "B.Cu",
+      "same_net_overlap_mm2": 0.003197578018918335
+    },
+    {
+      "uuid": "a2e9fb56-8f6e-589f-b34d-2a5e1cb17c38",
+      "net": "GND",
+      "layer": "B.Cu",
+      "same_net_overlap_mm2": 0.005632927271617306
+    },
+    {
+      "uuid": "35c9bc93-0bf6-55a5-9711-616febff7040",
+      "net": "/VBAT",
+      "layer": "B.Cu",
+      "same_net_overlap_mm2": 0.004850377205509911
+    },
+    {
+      "uuid": "2da5f92b-6ee4-5623-a500-3e07c7288e53",
+      "net": "GND",
+      "layer": "B.Cu",
+      "same_net_overlap_mm2": 0.0065022423071565486
+    },
+    {
+      "uuid": "c5adbc39-6e6d-5d5d-b140-fe61c79e5261",
+      "net": "GND",
+      "layer": "B.Cu",
+      "same_net_overlap_mm2": 0.014465582028807735
+    }
+  ],
+  "note": "Contact is checked against the actual same-layer saved native copper union excluding the graphic itself. This rules out unattached filler polygons; native pad-connectivity and DRC checks are separate."
+}

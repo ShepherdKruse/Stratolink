@@ -1,0 +1,978 @@
+{
+  "status": "Prospective pose; final native candidate not yet supplied",
+  "source_sha256": "9d63500a087ef8d345c2337942106e6704d32ded953846883454bfad718adf6c",
+  "proposed_C5_translation_mm": [
+    2.3,
+    0
+  ],
+  "nominal_C5_case_envelope_mm": [
+    60.175,
+    49.707,
+    74.175,
+    79.707
+  ],
+  "maximum_C5_case_envelope_mm": [
+    59.925,
+    49.457,
+    74.425,
+    79.957
+  ],
+  "C5_primary_dimensions": "CAP-XX DMF4B5R5G105M3DTA0 v1.9 Table3:30\u00b10.5 by14\u00b10.5mm, thicknessmax4.0mm; no added placement allowance.",
+  "maximum_case_inside_outline": true,
+  "maximum_case_to_outline_boundary_mm": 0.24792899999999918,
+  "rear_pad_near_maximum_case": [
+    {
+      "ref": "J4",
+      "pin": "1",
+      "net": "GND",
+      "uuid": "0650b567-d648-499e-addc-ea01fac7e599",
+      "body_max_to_pad_gap_mm": 0.3860000000000099,
+      "body_max_pad_projection_overlap_mm2": 0.0
+    },
+    {
+      "ref": "J4",
+      "pin": "2",
+      "net": "VSTOR",
+      "uuid": "629d6933-e9b3-4c38-91d2-f812960f1e71",
+      "body_max_to_pad_gap_mm": 0.3860000000000099,
+      "body_max_pad_projection_overlap_mm2": 0.0
+    },
+    {
+      "ref": "J4",
+      "pin": "3",
+      "net": "GND",
+      "uuid": "f9e130ac-ed56-4de6-bfc1-3bdceea6e0d0",
+      "body_max_to_pad_gap_mm": 0.3860000000000099,
+      "body_max_pad_projection_overlap_mm2": 0.0
+    },
+    {
+      "ref": "J4",
+      "pin": "4",
+      "net": "TX",
+      "uuid": "2e3cbf76-3be2-4c68-b1f2-89d83f085094",
+      "body_max_to_pad_gap_mm": 0.3860000000000099,
+      "body_max_pad_projection_overlap_mm2": 0.0
+    },
+    {
+      "ref": "J4",
+      "pin": "5",
+      "net": "RX",
+      "uuid": "a826af09-b85c-4bd8-b045-8d9597e30e2c",
+      "body_max_to_pad_gap_mm": 0.3860000000000099,
+      "body_max_pad_projection_overlap_mm2": 0.0
+    },
+    {
+      "ref": "J4",
+      "pin": "6",
+      "net": "BOOT0",
+      "uuid": "95f0f8e9-8450-493a-82c2-f13fc3380988",
+      "body_max_to_pad_gap_mm": 0.3860000000000099,
+      "body_max_pad_projection_overlap_mm2": 0.0
+    },
+    {
+      "ref": "J4",
+      "pin": "7",
+      "net": "+3.3V",
+      "uuid": "bee2e1f1-6523-4de0-88bd-204f2713e431",
+      "body_max_to_pad_gap_mm": 0.3860000000000099,
+      "body_max_pad_projection_overlap_mm2": 0.0
+    },
+    {
+      "ref": "J1",
+      "pin": "2",
+      "net": "GND",
+      "uuid": "52ad0009-1e4c-4a4c-b588-58e056a1ae8c",
+      "body_max_to_pad_gap_mm": 0.0,
+      "body_max_pad_projection_overlap_mm2": 0.03365999999999643
+    }
+  ],
+  "GNSS_wire_start_xy_mm": [
+    55.3,
+    45.114
+  ],
+  "GNSS_wire_end_xy_mm": [
+    7.3,
+    45.114
+  ],
+  "nominal_wire_diameter_mm": 0.321,
+  "minimum_wire_to_modeled_solar_assembly_y_separation_mm": 8.0255,
+  "solar_parts": [
+    {
+      "side": "left",
+      "part": "polymer laminate",
+      "bounds_mm": [
+        -33.691115106180526,
+        54.028,
+        -37.5,
+        54.8165,
+        80.36394884340318,
+        37.5
+      ],
+      "wire_to_part_y_separation_lower_bound_mm": 8.7535
+    },
+    {
+      "side": "left",
+      "part": "cosmetic cell finger 1",
+      "bounds_mm": [
+        -29.583056927576187,
+        54.013,
+        -36.7,
+        49.8165,
+        77.35105792310593,
+        -33.15
+      ],
+      "wire_to_part_y_separation_lower_bound_mm": 8.7385
+    },
+    {
+      "side": "left",
+      "part": "cosmetic cell finger 2",
+      "bounds_mm": [
+        -29.583056927576187,
+        54.013,
+        -33.03,
+        49.8165,
+        77.35105792310593,
+        -29.48
+      ],
+      "wire_to_part_y_separation_lower_bound_mm": 8.7385
+    },
+    {
+      "side": "left",
+      "part": "cosmetic cell finger 3",
+      "bounds_mm": [
+        -29.583056927576187,
+        54.013,
+        -29.360000000000003,
+        49.8165,
+        77.35105792310593,
+        -25.810000000000002
+      ],
+      "wire_to_part_y_separation_lower_bound_mm": 8.7385
+    },
+    {
+      "side": "left",
+      "part": "cosmetic cell finger 4",
+      "bounds_mm": [
+        -29.583056927576187,
+        54.013,
+        -25.69,
+        49.8165,
+        77.35105792310593,
+        -22.14
+      ],
+      "wire_to_part_y_separation_lower_bound_mm": 8.7385
+    },
+    {
+      "side": "left",
+      "part": "cosmetic cell finger 5",
+      "bounds_mm": [
+        -29.583056927576187,
+        54.013,
+        -22.020000000000003,
+        49.8165,
+        77.35105792310593,
+        -18.75
+      ],
+      "wire_to_part_y_separation_lower_bound_mm": 8.7385
+    },
+    {
+      "side": "left",
+      "part": "cosmetic cell finger 6",
+      "bounds_mm": [
+        -29.583056927576187,
+        54.013,
+        -18.35,
+        49.8165,
+        77.35105792310593,
+        -14.8
+      ],
+      "wire_to_part_y_separation_lower_bound_mm": 8.7385
+    },
+    {
+      "side": "left",
+      "part": "cosmetic cell finger 7",
+      "bounds_mm": [
+        -29.583056927576187,
+        54.013,
+        -14.68,
+        49.8165,
+        77.35105792310593,
+        -11.129999999999999
+      ],
+      "wire_to_part_y_separation_lower_bound_mm": 8.7385
+    },
+    {
+      "side": "left",
+      "part": "cosmetic cell finger 8",
+      "bounds_mm": [
+        -29.583056927576187,
+        54.013,
+        -11.009999999999998,
+        49.8165,
+        77.35105792310593,
+        -7.459999999999998
+      ],
+      "wire_to_part_y_separation_lower_bound_mm": 8.7385
+    },
+    {
+      "side": "left",
+      "part": "cosmetic cell finger 9",
+      "bounds_mm": [
+        -29.583056927576187,
+        54.013,
+        -7.34,
+        49.8165,
+        77.35105792310593,
+        -3.7899999999999996
+      ],
+      "wire_to_part_y_separation_lower_bound_mm": 8.7385
+    },
+    {
+      "side": "left",
+      "part": "cosmetic cell finger 10",
+      "bounds_mm": [
+        -29.583056927576187,
+        54.013,
+        -3.6700000000000017,
+        49.8165,
+        77.35105792310593,
+        -0.40000000000000135
+      ],
+      "wire_to_part_y_separation_lower_bound_mm": 8.7385
+    },
+    {
+      "side": "left",
+      "part": "cosmetic cell finger 11",
+      "bounds_mm": [
+        -29.583056927576187,
+        54.013,
+        0.0,
+        49.8165,
+        77.35105792310593,
+        3.5500000000000003
+      ],
+      "wire_to_part_y_separation_lower_bound_mm": 8.7385
+    },
+    {
+      "side": "left",
+      "part": "cosmetic cell finger 12",
+      "bounds_mm": [
+        -29.583056927576187,
+        54.013,
+        3.6700000000000017,
+        49.8165,
+        77.35105792310593,
+        7.2200000000000015
+      ],
+      "wire_to_part_y_separation_lower_bound_mm": 8.7385
+    },
+    {
+      "side": "left",
+      "part": "cosmetic cell finger 13",
+      "bounds_mm": [
+        -29.583056927576187,
+        54.013,
+        7.340000000000003,
+        49.8165,
+        77.35105792310593,
+        10.890000000000004
+      ],
+      "wire_to_part_y_separation_lower_bound_mm": 8.7385
+    },
+    {
+      "side": "left",
+      "part": "cosmetic cell finger 14",
+      "bounds_mm": [
+        -29.583056927576187,
+        54.013,
+        11.009999999999998,
+        49.8165,
+        77.35105792310593,
+        14.559999999999999
+      ],
+      "wire_to_part_y_separation_lower_bound_mm": 8.7385
+    },
+    {
+      "side": "left",
+      "part": "cosmetic cell finger 15",
+      "bounds_mm": [
+        -29.583056927576187,
+        54.013,
+        14.680000000000007,
+        49.8165,
+        77.35105792310593,
+        17.95000000000001
+      ],
+      "wire_to_part_y_separation_lower_bound_mm": 8.7385
+    },
+    {
+      "side": "left",
+      "part": "cosmetic cell finger 16",
+      "bounds_mm": [
+        -29.583056927576187,
+        54.013,
+        18.349999999999994,
+        49.8165,
+        77.35105792310593,
+        21.899999999999995
+      ],
+      "wire_to_part_y_separation_lower_bound_mm": 8.7385
+    },
+    {
+      "side": "left",
+      "part": "cosmetic cell finger 17",
+      "bounds_mm": [
+        -29.583056927576187,
+        54.013,
+        22.020000000000003,
+        49.8165,
+        77.35105792310593,
+        25.570000000000004
+      ],
+      "wire_to_part_y_separation_lower_bound_mm": 8.7385
+    },
+    {
+      "side": "left",
+      "part": "cosmetic cell finger 18",
+      "bounds_mm": [
+        -29.583056927576187,
+        54.013,
+        25.690000000000005,
+        49.8165,
+        77.35105792310593,
+        29.240000000000006
+      ],
+      "wire_to_part_y_separation_lower_bound_mm": 8.7385
+    },
+    {
+      "side": "left",
+      "part": "cosmetic cell finger 19",
+      "bounds_mm": [
+        -29.583056927576187,
+        54.013,
+        29.36,
+        49.8165,
+        77.35105792310593,
+        32.910000000000004
+      ],
+      "wire_to_part_y_separation_lower_bound_mm": 8.7385
+    },
+    {
+      "side": "left",
+      "part": "cosmetic cell finger 20",
+      "bounds_mm": [
+        -29.583056927576187,
+        54.013,
+        33.03,
+        49.8165,
+        77.35105792310593,
+        36.300000000000004
+      ],
+      "wire_to_part_y_separation_lower_bound_mm": 8.7385
+    },
+    {
+      "side": "left",
+      "part": "inner NEGATIVE terminal",
+      "bounds_mm": [
+        49.8165,
+        54.0,
+        -37.5,
+        54.8165,
+        54.0,
+        37.5
+      ],
+      "wire_to_part_y_separation_lower_bound_mm": 8.725500000000002
+    },
+    {
+      "side": "left",
+      "part": "outer POSITIVE terminal",
+      "bounds_mm": [
+        -33.70741662920177,
+        77.34022479631952,
+        -37.5,
+        -29.590243259326776,
+        80.17857399602332,
+        37.5
+      ],
+      "wire_to_part_y_separation_lower_bound_mm": 32.06572479631952
+    },
+    {
+      "side": "left",
+      "part": "polarity minus",
+      "bounds_mm": [
+        52.9865,
+        53.818,
+        8.0,
+        53.2465,
+        54.078,
+        10.0
+      ],
+      "wire_to_part_y_separation_lower_bound_mm": 8.5435
+    },
+    {
+      "side": "left",
+      "part": "polarity minus",
+      "bounds_mm": [
+        -32.64276497147332,
+        79.13905442649437,
+        8.0,
+        -32.38276497147333,
+        79.39905442649437,
+        10.0
+      ],
+      "wire_to_part_y_separation_lower_bound_mm": 33.86455442649437
+    },
+    {
+      "side": "left",
+      "part": "polarity plus",
+      "bounds_mm": [
+        -33.40496440904307,
+        78.59170533285373,
+        8.87,
+        -31.616467119442554,
+        79.95225854348467,
+        9.13
+      ],
+      "wire_to_part_y_separation_lower_bound_mm": 33.31720533285374
+    },
+    {
+      "side": "left",
+      "part": "ground solder fillet rear",
+      "bounds_mm": [
+        53.5665,
+        53.3,
+        -0.8,
+        54.7665,
+        54.0,
+        -0.2
+      ],
+      "wire_to_part_y_separation_lower_bound_mm": 8.0255
+    },
+    {
+      "side": "left",
+      "part": "ground solder fillet front",
+      "bounds_mm": [
+        53.5665,
+        53.3,
+        0.2,
+        54.7665,
+        54.0,
+        0.8
+      ],
+      "wire_to_part_y_separation_lower_bound_mm": 8.0255
+    },
+    {
+      "side": "left",
+      "part": "positive copper lead",
+      "bounds_mm": [
+        -35.27533671858226,
+        78.29657234499292,
+        -0.8,
+        55.05,
+        85.25,
+        1.2499838962602534
+      ],
+      "wire_to_part_y_separation_lower_bound_mm": 33.02207234499293
+    },
+    {
+      "side": "left",
+      "part": "positive red insulation",
+      "bounds_mm": [
+        -33.927866596895605,
+        81.24556824957486,
+        -0.349977186977906,
+        54.86258772091034,
+        85.35,
+        1.3499774547643546
+      ],
+      "wire_to_part_y_separation_lower_bound_mm": 35.97106824957486
+    },
+    {
+      "side": "left",
+      "part": "panel positive solder",
+      "bounds_mm": [
+        -32.227236738814305,
+        78.10061104708356,
+        -0.65,
+        -31.427236738814294,
+        78.90061104708356,
+        0.65
+      ],
+      "wire_to_part_y_separation_lower_bound_mm": 32.826111047083565
+    },
+    {
+      "side": "left",
+      "part": "positive PTH solder",
+      "bounds_mm": [
+        54.22,
+        84.42,
+        -0.43000000000000005,
+        55.379229556267546,
+        85.58,
+        -0.10999999999999999
+      ],
+      "wire_to_part_y_separation_lower_bound_mm": 39.145500000000006
+    },
+    {
+      "side": "left",
+      "part": "positive PTH solder",
+      "bounds_mm": [
+        54.22,
+        84.42,
+        0.10999999999999999,
+        55.379229556267546,
+        85.58,
+        0.43000000000000005
+      ],
+      "wire_to_part_y_separation_lower_bound_mm": 39.145500000000006
+    },
+    {
+      "side": "right",
+      "part": "polymer laminate",
+      "bounds_mm": [
+        75.1755,
+        54.028,
+        -37.5,
+        163.68311510618054,
+        80.36394884340318,
+        37.5
+      ],
+      "wire_to_part_y_separation_lower_bound_mm": 8.7535
+    },
+    {
+      "side": "right",
+      "part": "cosmetic cell finger 1",
+      "bounds_mm": [
+        80.1755,
+        54.013,
+        -36.7,
+        159.57505692757618,
+        77.35105792310593,
+        -33.15
+      ],
+      "wire_to_part_y_separation_lower_bound_mm": 8.7385
+    },
+    {
+      "side": "right",
+      "part": "cosmetic cell finger 2",
+      "bounds_mm": [
+        80.1755,
+        54.013,
+        -33.03,
+        159.57505692757618,
+        77.35105792310593,
+        -29.48
+      ],
+      "wire_to_part_y_separation_lower_bound_mm": 8.7385
+    },
+    {
+      "side": "right",
+      "part": "cosmetic cell finger 3",
+      "bounds_mm": [
+        80.1755,
+        54.013,
+        -29.360000000000003,
+        159.57505692757618,
+        77.35105792310593,
+        -25.810000000000002
+      ],
+      "wire_to_part_y_separation_lower_bound_mm": 8.7385
+    },
+    {
+      "side": "right",
+      "part": "cosmetic cell finger 4",
+      "bounds_mm": [
+        80.1755,
+        54.013,
+        -25.69,
+        159.57505692757618,
+        77.35105792310593,
+        -22.14
+      ],
+      "wire_to_part_y_separation_lower_bound_mm": 8.7385
+    },
+    {
+      "side": "right",
+      "part": "cosmetic cell finger 5",
+      "bounds_mm": [
+        80.1755,
+        54.013,
+        -22.020000000000003,
+        159.57505692757618,
+        77.35105792310593,
+        -18.75
+      ],
+      "wire_to_part_y_separation_lower_bound_mm": 8.7385
+    },
+    {
+      "side": "right",
+      "part": "cosmetic cell finger 6",
+      "bounds_mm": [
+        80.1755,
+        54.013,
+        -18.35,
+        159.57505692757618,
+        77.35105792310593,
+        -14.8
+      ],
+      "wire_to_part_y_separation_lower_bound_mm": 8.7385
+    },
+    {
+      "side": "right",
+      "part": "cosmetic cell finger 7",
+      "bounds_mm": [
+        80.1755,
+        54.013,
+        -14.68,
+        159.57505692757618,
+        77.35105792310593,
+        -11.129999999999999
+      ],
+      "wire_to_part_y_separation_lower_bound_mm": 8.7385
+    },
+    {
+      "side": "right",
+      "part": "cosmetic cell finger 8",
+      "bounds_mm": [
+        80.1755,
+        54.013,
+        -11.009999999999998,
+        159.57505692757618,
+        77.35105792310593,
+        -7.459999999999998
+      ],
+      "wire_to_part_y_separation_lower_bound_mm": 8.7385
+    },
+    {
+      "side": "right",
+      "part": "cosmetic cell finger 9",
+      "bounds_mm": [
+        80.1755,
+        54.013,
+        -7.34,
+        159.57505692757618,
+        77.35105792310593,
+        -3.7899999999999996
+      ],
+      "wire_to_part_y_separation_lower_bound_mm": 8.7385
+    },
+    {
+      "side": "right",
+      "part": "cosmetic cell finger 10",
+      "bounds_mm": [
+        80.1755,
+        54.013,
+        -3.6700000000000017,
+        159.57505692757618,
+        77.35105792310593,
+        -0.40000000000000135
+      ],
+      "wire_to_part_y_separation_lower_bound_mm": 8.7385
+    },
+    {
+      "side": "right",
+      "part": "cosmetic cell finger 11",
+      "bounds_mm": [
+        80.1755,
+        54.013,
+        0.0,
+        159.57505692757618,
+        77.35105792310593,
+        3.5500000000000003
+      ],
+      "wire_to_part_y_separation_lower_bound_mm": 8.7385
+    },
+    {
+      "side": "right",
+      "part": "cosmetic cell finger 12",
+      "bounds_mm": [
+        80.1755,
+        54.013,
+        3.6700000000000017,
+        159.57505692757618,
+        77.35105792310593,
+        7.2200000000000015
+      ],
+      "wire_to_part_y_separation_lower_bound_mm": 8.7385
+    },
+    {
+      "side": "right",
+      "part": "cosmetic cell finger 13",
+      "bounds_mm": [
+        80.1755,
+        54.013,
+        7.340000000000003,
+        159.57505692757618,
+        77.35105792310593,
+        10.890000000000004
+      ],
+      "wire_to_part_y_separation_lower_bound_mm": 8.7385
+    },
+    {
+      "side": "right",
+      "part": "cosmetic cell finger 14",
+      "bounds_mm": [
+        80.1755,
+        54.013,
+        11.009999999999998,
+        159.57505692757618,
+        77.35105792310593,
+        14.559999999999999
+      ],
+      "wire_to_part_y_separation_lower_bound_mm": 8.7385
+    },
+    {
+      "side": "right",
+      "part": "cosmetic cell finger 15",
+      "bounds_mm": [
+        80.1755,
+        54.013,
+        14.680000000000007,
+        159.57505692757618,
+        77.35105792310593,
+        17.95000000000001
+      ],
+      "wire_to_part_y_separation_lower_bound_mm": 8.7385
+    },
+    {
+      "side": "right",
+      "part": "cosmetic cell finger 16",
+      "bounds_mm": [
+        80.1755,
+        54.013,
+        18.349999999999994,
+        159.57505692757618,
+        77.35105792310593,
+        21.899999999999995
+      ],
+      "wire_to_part_y_separation_lower_bound_mm": 8.7385
+    },
+    {
+      "side": "right",
+      "part": "cosmetic cell finger 17",
+      "bounds_mm": [
+        80.1755,
+        54.013,
+        22.020000000000003,
+        159.57505692757618,
+        77.35105792310593,
+        25.570000000000004
+      ],
+      "wire_to_part_y_separation_lower_bound_mm": 8.7385
+    },
+    {
+      "side": "right",
+      "part": "cosmetic cell finger 18",
+      "bounds_mm": [
+        80.1755,
+        54.013,
+        25.690000000000005,
+        159.57505692757618,
+        77.35105792310593,
+        29.240000000000006
+      ],
+      "wire_to_part_y_separation_lower_bound_mm": 8.7385
+    },
+    {
+      "side": "right",
+      "part": "cosmetic cell finger 19",
+      "bounds_mm": [
+        80.1755,
+        54.013,
+        29.36,
+        159.57505692757618,
+        77.35105792310593,
+        32.910000000000004
+      ],
+      "wire_to_part_y_separation_lower_bound_mm": 8.7385
+    },
+    {
+      "side": "right",
+      "part": "cosmetic cell finger 20",
+      "bounds_mm": [
+        80.1755,
+        54.013,
+        33.03,
+        159.57505692757618,
+        77.35105792310593,
+        36.300000000000004
+      ],
+      "wire_to_part_y_separation_lower_bound_mm": 8.7385
+    },
+    {
+      "side": "right",
+      "part": "inner NEGATIVE terminal",
+      "bounds_mm": [
+        75.1755,
+        54.0,
+        -37.5,
+        80.1755,
+        54.0,
+        37.5
+      ],
+      "wire_to_part_y_separation_lower_bound_mm": 8.725500000000002
+    },
+    {
+      "side": "right",
+      "part": "outer POSITIVE terminal",
+      "bounds_mm": [
+        159.5822432593268,
+        77.34022479631952,
+        -37.5,
+        163.69941662920178,
+        80.17857399602332,
+        37.5
+      ],
+      "wire_to_part_y_separation_lower_bound_mm": 32.06572479631952
+    },
+    {
+      "side": "right",
+      "part": "polarity minus",
+      "bounds_mm": [
+        76.74549999999999,
+        53.818,
+        8.0,
+        77.0055,
+        54.078,
+        10.0
+      ],
+      "wire_to_part_y_separation_lower_bound_mm": 8.5435
+    },
+    {
+      "side": "right",
+      "part": "polarity minus",
+      "bounds_mm": [
+        162.37476497147333,
+        79.13905442649437,
+        8.0,
+        162.63476497147332,
+        79.39905442649437,
+        10.0
+      ],
+      "wire_to_part_y_separation_lower_bound_mm": 33.86455442649437
+    },
+    {
+      "side": "right",
+      "part": "polarity plus",
+      "bounds_mm": [
+        161.60846711944254,
+        78.59170533285373,
+        8.87,
+        163.39696440904305,
+        79.95225854348467,
+        9.13
+      ],
+      "wire_to_part_y_separation_lower_bound_mm": 33.31720533285374
+    },
+    {
+      "side": "right",
+      "part": "ground solder fillet rear",
+      "bounds_mm": [
+        75.2255,
+        53.3,
+        -0.8,
+        76.4255,
+        54.0,
+        -0.2
+      ],
+      "wire_to_part_y_separation_lower_bound_mm": 8.0255
+    },
+    {
+      "side": "right",
+      "part": "ground solder fillet front",
+      "bounds_mm": [
+        75.2255,
+        53.3,
+        0.2,
+        76.4255,
+        54.0,
+        0.8
+      ],
+      "wire_to_part_y_separation_lower_bound_mm": 8.0255
+    },
+    {
+      "side": "right",
+      "part": "positive copper lead",
+      "bounds_mm": [
+        74.95,
+        78.29657234499292,
+        -0.8,
+        165.26733671858227,
+        85.25,
+        1.2499838933274332
+      ],
+      "wire_to_part_y_separation_lower_bound_mm": 33.02207234499293
+    },
+    {
+      "side": "right",
+      "part": "positive red insulation",
+      "bounds_mm": [
+        75.13741227908966,
+        81.24556829789799,
+        -0.3499771828131941,
+        163.91986785448324,
+        85.35,
+        1.3499774506584066
+      ],
+      "wire_to_part_y_separation_lower_bound_mm": 35.97106829789799
+    },
+    {
+      "side": "right",
+      "part": "panel positive solder",
+      "bounds_mm": [
+        161.41923673881428,
+        78.10061104708356,
+        -0.65,
+        162.2192367388143,
+        78.90061104708356,
+        0.65
+      ],
+      "wire_to_part_y_separation_lower_bound_mm": 32.826111047083565
+    },
+    {
+      "side": "right",
+      "part": "positive PTH solder",
+      "bounds_mm": [
+        74.62,
+        84.42,
+        -0.43000000000000005,
+        75.77922955626755,
+        85.58,
+        -0.10999999999999999
+      ],
+      "wire_to_part_y_separation_lower_bound_mm": 39.145500000000006
+    },
+    {
+      "side": "right",
+      "part": "positive PTH solder",
+      "bounds_mm": [
+        74.62,
+        84.42,
+        0.10999999999999999,
+        75.77922955626755,
+        85.58,
+        0.43000000000000005
+      ],
+      "wire_to_part_y_separation_lower_bound_mm": 39.145500000000006
+    }
+  ],
+  "suspension_hole_centers_mm": {
+    "H1": [
+      55.665,
+      31.745
+    ],
+    "H2": [
+      74.327,
+      31.745
+    ]
+  },
+  "wire_to_upward_bridle_y_separation_mm": 13.208499999999995,
+  "limitations": [
+    "Static nominal assembly geometry only; does not bound panel flutter, wire deflection, loose string or knot envelope.",
+    "Solar envelope is photograph-scaled, film thickness/bend radius/menisci are unqualified modeling choices.",
+    "The antenna wire diameter has not been physically measured.",
+    "Closer parallel proximity to a conductive solar panel changes antenna loading; geometric clearance is not proof of RF performance.",
+    "The C5 case may project over exposed GND bank copper without physical panel contact; body insulation/standoff and solder-buildup must be verified before treating this as an assembly pass.",
+    "No CAD was changed."
+  ]
+}

@@ -1,0 +1,12 @@
+[
+  {
+    "field": "Description",
+    "before": "DMF4B5R5G105M3DTA0 1 F 5.5 V supercapacitor; CAD pads 1=positive, 2=negative, 3=isolated balance; manual backside assembly",
+    "after": "DMF4B5R5G105M3DTA0; 1 F dual-cell capacitor, pad 1 positive, pad 2 negative, pad 3 midpoint; hand-install after reflow and cleaning"
+  },
+  {
+    "field": "Assembly_Note",
+    "before": "Preserve proven outer polarity. Center pad 3 connects to SC_MID through R26 and the active balancer. Hand-install after board cleaning; no normal reflow.",
+    "after": "Preserve proven outer polarity. Center pad 3 connects to SC_MID through R26 and the active balancer. Hand-install after board cleaning; no normal reflow."
+  }
+]

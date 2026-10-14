@@ -1,6 +1,8 @@
-# RF peer review — 2026-10-14
+# RF peer review, 2026-10-14
 
-**Verdict: the GNSS RF/power placement needs a coordinated revision before claiming a properly referenced RF feed. The exploratory west detour is rejected. No CAD or Git files were changed by this review.** Adding more ground vias alone cannot repair the occupied opposite-layer reference under the feed. The LoRa feed does not cross either converter switch node.
+**Initial audit verdict: the GNSS RF/power placement needed a coordinated revision before claiming a properly referenced RF feed. The exploratory west detour was rejected. This initial audit made no CAD or Git changes.**
+
+A subsequent isolated, bounded placement revision is described in [left-feed-review.md](left-feed-review.md). Its current review status and eventual frozen hashes are authoritative for that candidate; the source measurements below remain historical evidence against the original AS7331 board. Adding more ground vias alone cannot repair the occupied opposite-layer reference under the feed. The LoRa feed does not cross either converter switch node.
 
 ## Evidence boundary
 

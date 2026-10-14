@@ -1,0 +1,21 @@
+{
+  "promoted_at": "2026-10-14T12:27:25.622813-07:00",
+  "changed_files": {
+    "stratolink.kicad_pcb": {
+      "before_sha256": "4fcdb39b8cc7936295f64ae9f5e1acd4acd01e144cd21e9076f681c23c0e2b54",
+      "after_sha256": "8df85b3e4bdd546ec174bb9d7b9ee9d795d55d486a68e1e853aaf1b871f863d3"
+    },
+    "lib/Stratolink_v1p1_C5_DMF4B5R5G105M3DTA0.kicad_mod": {
+      "before_sha256": "e078558f7304757b892e0d2af975feb7ce1cf93106803ab14dca003767d15fd0",
+      "after_sha256": "646dade38b88828cd093a3e62ffb1a639cc93cf4c6285359c0ae51a1ba6a6d93"
+    },
+    "lib/Stratolink_GNSS_Wire_PTH_D1p0.kicad_mod": {
+      "before_sha256": "13f1d0c04e83beec958825c7438e3e25f6ed6ae3f2d1328c997ea62967fc92d3",
+      "after_sha256": "9eb58e689e25b7efa13b567d55948e9dcdf8753ac868c4e46c0c355a844791a6"
+    }
+  },
+  "pcb_sha256": "8df85b3e4bdd546ec174bb9d7b9ee9d795d55d486a68e1e853aaf1b871f863d3",
+  "local_project_preserved_sha256": "bf9f15d84333a0bf807aae42c27547ff4fccc275059965beaab0290773bdbdda",
+  "strict_project_sha256": "915d9f9c4bc8c1eb0866031bf765ff08dc41a7b5bea4fb158ca26c1032ef93cd",
+  "scope": "PCB and two local footprint files only; schematic, rules and local editor project overrides preserved."
+}

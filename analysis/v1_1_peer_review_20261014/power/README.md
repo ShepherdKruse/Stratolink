@@ -68,7 +68,7 @@ The fitted **BLM15AG601SN1D** bead has **0.52 Ω maximum initial DCR**, 600 Ω a
 
 **Recommended follow-up:** move/retain a bypass at the U3 supply-pin side, assess a lower-DCR same-size bead with noise measurements, and capture supply directly at U3 during startup and radio TX. Do not blindly remove the filter or move C21 across it: doing so changes filter damping, inrush and the upstream rail. The direct Murata PDF download was blocked; its primary indexed table and the existing exact supplier record independently agree on 0.52 Ω. No visually inspected local Murata PDF is claimed.
 
-The existing LBOOST trace crossing beneath GNSS RF is handled by the separate RF review. Keeping the power components and switching loops fixed while rerouting RF around the switch region is preferable to a long switch-node detour. Moving L1 entirely to the right of the existing RF feed would require a wider power-placement redesign, not a simple harmless slide.
+The existing LBOOST trace crossing beneath GNSS RF is handled by the separate RF review. The initial west-side RF detour was rejected because it lengthens the feed and worsens other return-path conflicts. Moving L1 entirely to the right of the existing RF feed would require a wider power-placement redesign. A separate GNSS placement study is in progress; this power review does not approve that layout or alter the switching loops.
 
 ## Physical tests that settle the decisions
 

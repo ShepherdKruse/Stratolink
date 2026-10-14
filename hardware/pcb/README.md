@@ -1,10 +1,12 @@
-# Stratolink hardware — v1.1 pilot
+# Stratolink hardware v1.1 pilot
 
-Current status, 14 October 2026: **hold fabrication pending the GNSS layout review**. The peer review confirmed that the GNSS feed crosses the converter's LBOOST trace and lacks a continuous ground reference. The saved JLC Y24 cart contains the earlier revision and has not been updated. See the [peer review and copper cleanup](../../analysis/v1_1_peer_review_20261014/README.md). Earlier native checks below remain evidence for their stated hashes, not RF qualification. Payment is not authorized.
+Current status, 14 October 2026: **updated for engineering review**. The GNSS feed no longer crosses LBOOST or the capacitor's positive land. Rounded routing, filled-copper screening, strict DRC/ERC and independent connectivity checks pass. See the [peer review](../../analysis/v1_1_peer_review_20261014/README.md) and [manual change list](../../analysis/v1_1_release_20261012/manual-review-changes.md). The saved JLC Y24 cart is an older revision; upload and review matching exports before ordering.
 
 Open [stratolink.kicad_pro](stratolink.kicad_pro) in KiCad 10. The canonical project lives in `hardware/pcb` on `alpha/hardware-v1.1`; Git retains the flown v1. Keep `lib/`, `3d/`, `sym-lib-table` and `fp-lib-table` together. Board-specific footprints preserve reviewed local geometry; avoid blanket stock-library replacement.
 
-The 14 October copper cleanup is applied: widened contacts, closed tiny gaps, rounded junctions and cleaned microscopic artwork details. It retains all placements and electrical connections. Current PCB hash is `4fcdb39b8cc7936295f64ae9f5e1acd4acd01e144cd21e9076f681c23c0e2b54`; current strict project hash is `915d9f9c4bc8c1eb0866031bf765ff08dc41a7b5bea4fb158ca26c1032ef93cd`. See [changes and checks](../../analysis/v1_1_peer_review_20261014/README.md). The package and supplier records below still describe the earlier checkpoint. The two rounded copper labels retain editable originals on F.Fab; move each label as its group.
+The 14 October changes widen narrow contacts, close tiny pockets and round junctions while retaining the existing routing style. AE2 moves left to (55.3, 47.85) mm with its 48 mm wire exiting left; D3 moves to (58.0, 45.05) mm, and the flat rear C5 shifts 1.8 mm right. The GNSS feed is 6.575 mm long, with local ground on both faces and a stitched front guard. Local C5, supply and SCL routes are reconciled. Copper label groups move up 0.55/0.22 mm; their editable originals remain on F.Fab. Move each label as a group.
+
+Current PCB SHA-256 is `8df85b3e4bdd546ec174bb9d7b9ee9d795d55d486a68e1e853aaf1b871f863d3`. The strict published project is `915d9f9c4bc8c1eb0866031bf765ff08dc41a7b5bea4fb158ca26c1032ef93cd`. Pre-existing local editor mask-rule overrides are preserved separately; the review branch and manufacturing checks use the strict project. The circuit, board outline and pad nets are unchanged by this RF revision. [Placement, mechanical margins and limits](../../analysis/v1_1_peer_review_20261014/power/RF-MECHANICAL-REVIEW.md).
 
 The approved pilot design keeps the **0.40 mm, two-layer board, ENIG, green solder mask on both faces, no silkscreen, and tented ordinary vias**, one radio, the existing GNSS/pressure/IMU parts and the flat rear capacitor. Selective mask openings expose soldering lands; stencil paste is separate. The plan is **five fabricated boards, three assembled**, followed by physical qualification before a larger batch.
 
@@ -38,7 +40,7 @@ The [solar 3D models](3d/solar/README.md) show photo-scaled 94 × 75 mm panels, 
 
 ## Power and storage
 
-R1 is **7.50 MΩ FRC0402F7504TS C3013187**, with R2 at 4.22 MΩ, giving a nominal **5.041 V** charge ceiling. The flat C5 remains: **pad 1 positive, pad 2 negative, pad 3 SC_MID**. The upper-left rear balancing circuit uses **U8 TLV8801, R24/R25 4.75 MΩ, R26 22 Ω, C22 100 nF**. Feedback joins the amplifier output to its inverting input **before R26**; R26 connects to the capacitor midpoint. The circuit runs from the capacitor stack. The required VSTOR ADC branch is rerouted. D3.1/J4.1 retain local 0.25 mm thermal gap/bridge widths and a two-spoke minimum.
+R1 is **7.50 MΩ FRC0402F7504TS C3013187**, with R2 at 4.22 MΩ, giving a nominal **5.041 V** charge ceiling. The flat C5 remains: **pad 1 positive, pad 2 negative, pad 3 SC_MID**. The upper-left rear balancing circuit uses **U8 TLV8801, R24/R25 4.75 MΩ, R26 22 Ω, C22 100 nF**. Feedback joins the amplifier output to its inverting input **before R26**; R26 connects to the capacitor midpoint. The circuit runs from the capacitor stack. The required VSTOR ADC branch is rerouted. J4.1 retains its 0.25 mm thermal gap/bridge and two-spoke minimum. D3.1 and U3.10/U3.12 now connect solidly to local GND.
 
 The [power review](../../analysis/v1_1_release_20261012/power/README.md) records tolerance assumptions and startup/stability limits. Charge plateau, individual cell voltages, cold behavior, leakage and balancing stability require measurement. **Panel cold Voc/current and BQ25570 input-voltage/input-power bounds remain unresolved.** Neither the panel label nor existing telemetry establishes those operating limits. C5 is hand-fitted after reflow and cleaning, following its secondary soldering process.
 
@@ -48,26 +50,22 @@ The [digital review](../../analysis/v1_1_peer_review_20261014/digital/README.md)
 
 Rules use a **0.10 mm copper process floor, 0.15 mm general clearance target and 0.20 mm ordinary routed-edge minimum**, with named fine-pitch/contact constraints. Clearance, edge, annular and solder-mask checks are enabled. The mask screen targets a 0.10 mm minimum web and 0.09 mm opening-to-foreign-copper clearance; supplied apertures require supplier confirmation. The obsolete LTR390/U7 corridor rule is removed with the old U6 geometry. The intended ERC exclusions are now **two**: U5 grounded ALERT and U7 SA0; old U6 grounded INT is gone and AS7331 READY is explicitly NC. All native silkscreen artwork is removed. Solar polarity symbols are copper features with matching mask openings.
 
-Final native DRC: **0 violations, 0 open connections, 0 schematic mismatches**. Final ERC, including raw findings and the two narrow exclusions: **0 unexcluded errors or warnings; two documented exclusions retained**. Independent connectivity/geometry evidence: **[independent review](../../analysis/v1_1_release_20261012/as7331/review/README.md)**. These results identify the exact promoted files listed below.
+The current [native checks](../../analysis/v1_1_peer_review_20261014/rf/final/root-review.json) report **0 DRC violations, 0 open connections, 0 schematic mismatches and 0 unexcluded ERC findings**. Two documented ERC exclusions remain. Independent review checks all 259 physical pads and 250 logical connections, actual ground fills, artwork and the two updated libraries. The full-copper screen reports no candidates under its stated angle, pocket and island thresholds. These checks do not establish a production impedance tolerance or measured RF improvement.
 
-The following hashes identify the earlier AS7331 checkpoint and its supplier package, not the later copper cleanup.
-
-| File at AS7331 checkpoint | SHA-256 |
+| Current source | SHA-256 |
 |---|---|
-| PCB | `9d63500a087ef8d345c2337942106e6704d32ded953846883454bfad718adf6c` |
+| PCB | `8df85b3e4bdd546ec174bb9d7b9ee9d795d55d486a68e1e853aaf1b871f863d3` |
 | Schematic | `a06740b35d07d7b81999f7ace2a7a7ff02e185ca3e46a664630bd4bbd00c54b7` |
-| Project | `d58c7e480ea727fc2dde90065d4c489dec0b535a4b73994d643b88cfe2e9e449` |
+| Strict project | `915d9f9c4bc8c1eb0866031bf765ff08dc41a7b5bea4fb158ca26c1032ef93cd` |
 | Rules | `071d900e34c4eb3d3f91003cc0698e261e7fe23beea7107c4db50a1bf60a5136` |
 
 The [manufacturing package](../gerbers/v1.1-pilot/README.md) has **58 complete-design / 57 pilot assembly references**, **30 distinct pilot part groups**, and **11 exclusions**. Its [manifest](../gerbers/v1.1-pilot/manifest.json) records **166 source inputs and 37 outputs**. Independent pilot-vs-full comparison verified that only U6 is omitted, its 16 stencil apertures are suppressed, and all retained BOM/CPL rows and artwork match.
 
 The retained supplier rotation profile specifies **U1 90°, U2 90°, U4 270°, U7 0°, U8 90°**; U3 remains 180° and U5 0°. These are CPL conventions, not footprint-rotation changes. U2's pin 1 is lower-left and its twelve-pad edge is at the bottom in the supplier top view. U4's black circle is the pressure port; use the separate pin-1 marker. U6 is absent from the pilot CPL; future U6 placement requires its own actual supplier-model review. [Rotation evidence](../../analysis/v1_1_release_20261012/jlc/supplier-rotation-profile.json).
 
-The reviewed draft is saved in the [JLC cart](https://cart.jlcpcb.com/shopcart/cart) as **fabrication-review_Y24**: PCB **Y24-2680969A**, PCBA **SMT026101364685-2680969A**. It contains **five PCBs / three assembled**, Standard assembly on both sides. All 57 pilot designators match the exact MPN/LCSC entries; top and bottom previews were reviewed, including C14/C23/R27 and relocated C21, with U6 absent and no browser rotation changes. The current draft is **US$332.47** (**US$70.63 PCB + US$261.84 assembly**), excluding shipping, tax and any changes from advanced-remark review.
+The **older** JLC draft remains **fabrication-review_Y24**, PCB **Y24-2680969A**, PCBA **SMT026101364685-2680969A**. Its saved price and placement previews apply only to the earlier AS7331 checkpoint. **It does not contain the current RF/copper changes.** Reimport the current package and review both sides, especially relocated D3, before approving fabrication. The old Y22 fifteen-board draft is untouched. No checkout or payment was made.
 
-Saved settings are green 0.40 mm FR4, 1 oz copper and ENIG with 1 µin gold. The supplier rail envelope is **71.36 × 71.30 mm**; the actual PCB outline remains **23.36 × 57.30 mm**. Production-file and parts-placement confirmation are enabled, with manual approval and no automatic changes. Factory CAM, rail/tab placement and physical qualification remain pending. [Saved supplier evidence](../../analysis/v1_1_release_20261012/as7331/jlc/README.md).
-
-The old **Y22 fifteen-board draft** was left untouched; the cart's out-of-stock warning belongs to that older item, not Y24. **No checkout or payment was made.** See [FABRICATION.md](FABRICATION.md) and the [pilot acceptance procedure](../../analysis/v1_1_release_20261012/pilot-acceptance.md).
+Requested construction remains green 0.40 mm FR4, 1 oz copper and ENIG, with no silkscreen. Planned quantity is five PCBs, three assembled. Factory CAM, rail/tab placement, thin-board handling and physical pilot qualification remain pending. Historical supplier evidence is in the [saved cart record](../../analysis/v1_1_release_20261012/as7331/jlc/README.md). See [FABRICATION.md](FABRICATION.md) and the [pilot acceptance procedure](../../analysis/v1_1_release_20261012/pilot-acceptance.md).
 
 - [v1.1 / v2 checklist](TODO.md)
 - [Manual KiCad review list](../../analysis/v1_1_release_20261012/manual-review-changes.md)

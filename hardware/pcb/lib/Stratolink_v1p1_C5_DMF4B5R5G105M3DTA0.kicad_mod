@@ -41,7 +41,7 @@
 			)
 		)
 	)
-	(property "Description" "DMF4B5R5G105M3DTA0 1 F 5.5 V supercapacitor; CAD pads 1=positive, 2=negative, 3=isolated balance; manual backside assembly"
+	(property "Description" "DMF4B5R5G105M3DTA0; 1 F dual-cell capacitor, pad 1 positive, pad 2 negative, pad 3 midpoint; hand-install after reflow and cleaning"
 		(at 0 0 0)
 		(layer "F.Fab")
 		(hide yes)
@@ -79,7 +79,7 @@
 			(justify mirror)
 		)
 	)
-	(property "Assembly_Note" "Back view: negative left, balance center, positive right. Balance is intentionally unconnected; no pin-order refresh from old library."
+	(property "Assembly_Note" "Preserve proven outer polarity. Center pad 3 connects to SC_MID through R26 and the active balancer. Hand-install after board cleaning; no normal reflow."
 		(at 0 0 0)
 		(layer "B.Fab")
 		(hide yes)
@@ -98,8 +98,8 @@
 	(attr smd)
 	(duplicate_pad_numbers_are_jumpers no)
 	(fp_line
-		(start -8 -21.25)
-		(end -8 16)
+		(start -7.375 -20.375)
+		(end -7.375 15.375)
 		(stroke
 			(width 0.1)
 			(type solid)
@@ -108,8 +108,8 @@
 		(uuid "2136d50d-e38e-4c1c-bb15-8bc93ba83913")
 	)
 	(fp_line
-		(start -8 16)
-		(end 8 16)
+		(start -7.375 15.375)
+		(end 7.375 15.375)
 		(stroke
 			(width 0.1)
 			(type solid)
@@ -118,8 +118,8 @@
 		(uuid "30d45e65-08b6-45f7-8c67-3e8daa682804")
 	)
 	(fp_line
-		(start 8 -21.25)
-		(end -8 -21.25)
+		(start 7.375 -20.375)
+		(end -7.375 -20.375)
 		(stroke
 			(width 0.1)
 			(type solid)
@@ -128,8 +128,8 @@
 		(uuid "e71d0a9b-bf77-4095-a17e-5c02fbc85554")
 	)
 	(fp_line
-		(start 8 16)
-		(end 8 -21.25)
+		(start 7.375 15.375)
+		(end 7.375 -20.375)
 		(stroke
 			(width 0.1)
 			(type solid)

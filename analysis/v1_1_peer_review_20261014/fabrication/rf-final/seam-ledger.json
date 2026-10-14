@@ -1,0 +1,16 @@
+{
+  "source_sha256": "a1707712a64916ac7c9e3fc8f2d881aa2088f546da0de76285260903a59e0ee0",
+  "uuid": "34d67da5-4387-5888-b57d-b6a42f34ed9c",
+  "net": "GND",
+  "layer": "B.Cu",
+  "width_mm": 0.15,
+  "start": [
+    69.5,
+    48.4
+  ],
+  "end": [
+    69.7,
+    48.4
+  ],
+  "reason": "Explicit same-net overlap closes submicron near-coincident boundary seam at69.553309,48.456909 after polygon refill."
+}
