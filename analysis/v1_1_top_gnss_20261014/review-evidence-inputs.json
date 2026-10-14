@@ -1,0 +1,429 @@
+{
+  "review_evidence": [
+    "analysis/v1_1_peer_review_20261014/digital/antenna_left_mechanics.py",
+    "analysis/v1_1_peer_review_20261014/digital/check_guard_scope.py",
+    "analysis/v1_1_peer_review_20261014/digital/check_rf_reference.py",
+    "analysis/v1_1_peer_review_20261014/digital/extract_layout.py",
+    "analysis/v1_1_peer_review_20261014/digital/extract_rf_reference.py",
+    "analysis/v1_1_peer_review_20261014/digital/gnss_placement_review.py",
+    "analysis/v1_1_peer_review_20261014/digital/model.py",
+    "analysis/v1_1_peer_review_20261014/digital/rf_detour_screen.py",
+    "analysis/v1_1_peer_review_20261014/digital/verify_c5_library.py",
+    "analysis/v1_1_peer_review_20261014/digital/verify_rf_scope.py",
+    "analysis/v1_1_peer_review_20261014/fabrication/apply_fillets.py",
+    "analysis/v1_1_peer_review_20261014/fabrication/apply_rf_fillets.py",
+    "analysis/v1_1_peer_review_20261014/fabrication/classify_all.py",
+    "analysis/v1_1_peer_review_20261014/fabrication/classify_geometry.py",
+    "analysis/v1_1_peer_review_20261014/fabrication/convert_text_and_seam.py",
+    "analysis/v1_1_peer_review_20261014/fabrication/extract_artwork.py",
+    "analysis/v1_1_peer_review_20261014/fabrication/extract_geometry.py",
+    "analysis/v1_1_peer_review_20261014/fabrication/fix_copper.py",
+    "analysis/v1_1_peer_review_20261014/fabrication/fix_rf_library_metadata.py",
+    "analysis/v1_1_peer_review_20261014/fabrication/fix_rf_seam.py",
+    "analysis/v1_1_peer_review_20261014/fabrication/plan_fillets.py",
+    "analysis/v1_1_peer_review_20261014/fabrication/plan_rf_fillets.py",
+    "analysis/v1_1_peer_review_20261014/fabrication/plot_cleanup.py",
+    "analysis/v1_1_peer_review_20261014/fabrication/plot_details.py",
+    "analysis/v1_1_peer_review_20261014/fabrication/reproduce_cleanup.py",
+    "analysis/v1_1_peer_review_20261014/fabrication/reproduce_rf_cleanup.py",
+    "analysis/v1_1_peer_review_20261014/fabrication/rf_round_routes.py",
+    "analysis/v1_1_peer_review_20261014/fabrication/screen_geometry.py",
+    "analysis/v1_1_peer_review_20261014/fabrication/verify_cleanup_scope.py",
+    "analysis/v1_1_peer_review_20261014/freeze_peer_evidence.py",
+    "analysis/v1_1_peer_review_20261014/manufacturing/verify_package.py",
+    "analysis/v1_1_peer_review_20261014/power/analyze_cap_curves.py",
+    "analysis/v1_1_peer_review_20261014/power/c5_pose_screen.py",
+    "analysis/v1_1_peer_review_20261014/power/check_rf_power.py",
+    "analysis/v1_1_peer_review_20261014/power/model_power.py",
+    "analysis/v1_1_peer_review_20261014/power/review_assembly.py",
+    "analysis/v1_1_peer_review_20261014/power/snapshot_assembly.py",
+    "analysis/v1_1_peer_review_20261014/power/snapshot_power.py",
+    "analysis/v1_1_peer_review_20261014/rf/analyze_left_feed.py",
+    "analysis/v1_1_peer_review_20261014/rf/apply_front_guard.py",
+    "analysis/v1_1_peer_review_20261014/rf/build_left_feed.py",
+    "analysis/v1_1_peer_review_20261014/rf/compare_routes.py",
+    "analysis/v1_1_peer_review_20261014/rf/cpw_screen.py",
+    "analysis/v1_1_peer_review_20261014/rf/extract_rf.py",
+    "analysis/v1_1_peer_review_20261014/rf/placement_native.py",
+    "analysis/v1_1_peer_review_20261014/rf/plan_front_guard.py",
+    "analysis/v1_1_peer_review_20261014/rf/plot_rf.py",
+    "analysis/v1_1_peer_review_20261014/rf/route_c5.py",
+    "analysis/v1_1_peer_review_20261014/rf/route_screen.py",
+    "analysis/v1_1_peer_review_20261014/test_peer_evidence.py",
+    "analysis/v1_1_peer_review_20261014/verify_layout.py",
+    "analysis/v1_1_peer_review_20261014/verify_peer_evidence.py",
+    "analysis/v1_1_release_20261012/as7331/manufacturing/test_population.py",
+    "analysis/v1_1_release_20261012/as7331/manufacturing/test_stencil.py",
+    "analysis/v1_1_release_20261012/manual-review-changes.md",
+    "analysis/v1_1_release_20261012/manufacturing/generate.py",
+    "analysis/v1_1_release_20261012/pilot-acceptance.md",
+    "analysis/v1_1_top_gnss_20261014/README.md",
+    "analysis/v1_1_top_gnss_20261014/baseline.json",
+    "analysis/v1_1_top_gnss_20261014/fabrication/README.md",
+    "analysis/v1_1_top_gnss_20261014/fabrication/apply_cleanup.py",
+    "analysis/v1_1_top_gnss_20261014/fabrication/cleanup-ledger.json",
+    "analysis/v1_1_top_gnss_20261014/fabrication/cleanup-plan.json",
+    "analysis/v1_1_top_gnss_20261014/fabrication/cleanup-review.json",
+    "analysis/v1_1_top_gnss_20261014/fabrication/drc.json",
+    "analysis/v1_1_top_gnss_20261014/fabrication/extract_and_screen.py",
+    "analysis/v1_1_top_gnss_20261014/fabrication/final-geometry.json",
+    "analysis/v1_1_top_gnss_20261014/fabrication/final-screen.json",
+    "analysis/v1_1_top_gnss_20261014/fabrication/plan_cleanup.py",
+    "analysis/v1_1_top_gnss_20261014/fabrication/portability-reproduction.json",
+    "analysis/v1_1_top_gnss_20261014/fabrication/reproduce_cleanup.py",
+    "analysis/v1_1_top_gnss_20261014/fabrication/reproduction.json",
+    "analysis/v1_1_top_gnss_20261014/fabrication/source-flecks.json",
+    "analysis/v1_1_top_gnss_20261014/fabrication/source-geometry.json",
+    "analysis/v1_1_top_gnss_20261014/fabrication/source-items.json",
+    "analysis/v1_1_top_gnss_20261014/fabrication/source-screen.json",
+    "analysis/v1_1_top_gnss_20261014/fabrication/verify_cleanup.py",
+    "analysis/v1_1_top_gnss_20261014/independent/README.md",
+    "analysis/v1_1_top_gnss_20261014/independent/audit/after-reference-extraction.log",
+    "analysis/v1_1_top_gnss_20261014/independent/audit/after-reference-geometry.json",
+    "analysis/v1_1_top_gnss_20261014/independent/audit/before-reference-extraction.log",
+    "analysis/v1_1_top_gnss_20261014/independent/audit/before-reference-geometry.json",
+    "analysis/v1_1_top_gnss_20261014/independent/audit/candidate-geometry.json",
+    "analysis/v1_1_top_gnss_20261014/independent/audit/etch-screen.json",
+    "analysis/v1_1_top_gnss_20261014/independent/audit/evidence-hashes.json",
+    "analysis/v1_1_top_gnss_20261014/independent/audit/full-union-extraction.log",
+    "analysis/v1_1_top_gnss_20261014/independent/audit/reference.json",
+    "analysis/v1_1_top_gnss_20261014/independent/audit/reference.log",
+    "analysis/v1_1_top_gnss_20261014/independent/audit/routing-and-graphics.json",
+    "analysis/v1_1_top_gnss_20261014/independent/audit/scope.json",
+    "analysis/v1_1_top_gnss_20261014/independent/audit/scope.log",
+    "analysis/v1_1_top_gnss_20261014/independent/audit/summary.json",
+    "analysis/v1_1_top_gnss_20261014/independent/audit_candidate.py",
+    "analysis/v1_1_top_gnss_20261014/independent/check_artwork_moves.py",
+    "analysis/v1_1_top_gnss_20261014/independent/check_final_geometry.py",
+    "analysis/v1_1_top_gnss_20261014/independent/compare_cleanup_copper.py",
+    "analysis/v1_1_top_gnss_20261014/independent/compare_project_files.py",
+    "analysis/v1_1_top_gnss_20261014/independent/connected_guard_report.py",
+    "analysis/v1_1_top_gnss_20261014/independent/declarations/artwork.json",
+    "analysis/v1_1_top_gnss_20261014/independent/declarations/edits.json",
+    "analysis/v1_1_top_gnss_20261014/independent/declarations/poses.json",
+    "analysis/v1_1_top_gnss_20261014/independent/extract_full_union.py",
+    "analysis/v1_1_top_gnss_20261014/independent/extract_zone_settings.py",
+    "analysis/v1_1_top_gnss_20261014/independent/inputs/before-8df85.kicad_pcb",
+    "analysis/v1_1_top_gnss_20261014/independent/inputs/pre-cleanup-geometry.json",
+    "analysis/v1_1_top_gnss_20261014/independent/inputs/strict-project.kicad_pro",
+    "analysis/v1_1_top_gnss_20261014/independent/manifest.json",
+    "analysis/v1_1_top_gnss_20261014/independent/reports/acceptance.json",
+    "analysis/v1_1_top_gnss_20261014/independent/reports/artwork.json",
+    "analysis/v1_1_top_gnss_20261014/independent/reports/canonical-strict-project-verification.json",
+    "analysis/v1_1_top_gnss_20261014/independent/reports/checker-negative-tests.json",
+    "analysis/v1_1_top_gnss_20261014/independent/reports/cleanup-copper-delta.json",
+    "analysis/v1_1_top_gnss_20261014/independent/reports/connected-guard.json",
+    "analysis/v1_1_top_gnss_20261014/independent/reports/geometry-disposition.json",
+    "analysis/v1_1_top_gnss_20261014/independent/reports/graphic-anchor-tests.json",
+    "analysis/v1_1_top_gnss_20261014/independent/reports/portable-reproduction.json",
+    "analysis/v1_1_top_gnss_20261014/independent/reports/project-library.json",
+    "analysis/v1_1_top_gnss_20261014/independent/reports/strict-portable-reproduction.json",
+    "analysis/v1_1_top_gnss_20261014/independent/reports/strict-project-verification.json",
+    "analysis/v1_1_top_gnss_20261014/independent/reports/zone-settings.json",
+    "analysis/v1_1_top_gnss_20261014/independent/reproduce.py",
+    "analysis/v1_1_top_gnss_20261014/independent/verify_evidence.py",
+    "analysis/v1_1_top_gnss_20261014/independent/verify_project_files_manifest.py",
+    "analysis/v1_1_top_gnss_20261014/manufacturing/package-verification.json",
+    "analysis/v1_1_top_gnss_20261014/manufacturing/verify_package.py",
+    "analysis/v1_1_top_gnss_20261014/mechanics/README.md",
+    "analysis/v1_1_top_gnss_20261014/mechanics/assembly-projection.png",
+    "analysis/v1_1_top_gnss_20261014/mechanics/assembly-review.json",
+    "analysis/v1_1_top_gnss_20261014/mechanics/final-native.json",
+    "analysis/v1_1_top_gnss_20261014/mechanics/geometry_distances.py",
+    "analysis/v1_1_top_gnss_20261014/mechanics/review_top_assembly.py",
+    "analysis/v1_1_top_gnss_20261014/mechanics/source-identities.json",
+    "analysis/v1_1_top_gnss_20261014/native/promotion.json",
+    "analysis/v1_1_top_gnss_20261014/native/root-drc.json",
+    "analysis/v1_1_top_gnss_20261014/native/root-erc.json",
+    "analysis/v1_1_top_gnss_20261014/native/root-review.json",
+    "analysis/v1_1_top_gnss_20261014/native/visual/assembly.png",
+    "analysis/v1_1_top_gnss_20261014/native/visual/bottom.png",
+    "analysis/v1_1_top_gnss_20261014/native/visual/top.png",
+    "analysis/v1_1_top_gnss_20261014/orientation.md",
+    "analysis/v1_1_top_gnss_20261014/power/README.md",
+    "analysis/v1_1_top_gnss_20261014/power/balancer-review.json",
+    "analysis/v1_1_top_gnss_20261014/power/balancer_check.py",
+    "analysis/v1_1_top_gnss_20261014/power/baseline.json",
+    "analysis/v1_1_top_gnss_20261014/power/check_local_ground.py",
+    "analysis/v1_1_top_gnss_20261014/power/final-native.json",
+    "analysis/v1_1_top_gnss_20261014/power/ground-review.json",
+    "analysis/v1_1_top_gnss_20261014/power/loop-review.json",
+    "analysis/v1_1_top_gnss_20261014/power/power-review.json",
+    "analysis/v1_1_top_gnss_20261014/power/quantify_loop.py",
+    "analysis/v1_1_top_gnss_20261014/power/review_power_delta.py",
+    "analysis/v1_1_top_gnss_20261014/power/snapshot.py",
+    "analysis/v1_1_top_gnss_20261014/power/source-resistance.json",
+    "analysis/v1_1_top_gnss_20261014/power/source_resistance.py",
+    "analysis/v1_1_top_gnss_20261014/power/track_geometry.py",
+    "analysis/v1_1_top_gnss_20261014/reception-test.md",
+    "analysis/v1_1_top_gnss_20261014/rf/author-review.json",
+    "analysis/v1_1_top_gnss_20261014/rf/build_top_feed.py",
+    "analysis/v1_1_top_gnss_20261014/rf/cleanup-scope-review.json",
+    "analysis/v1_1_top_gnss_20261014/rf/final-reference.json",
+    "analysis/v1_1_top_gnss_20261014/rf/review_cleanup_scope.py",
+    "analysis/v1_1_top_gnss_20261014/rf/review_thermals.py",
+    "analysis/v1_1_top_gnss_20261014/rf/routing-phase/changes.json",
+    "analysis/v1_1_top_gnss_20261014/rf/routing-phase/drc.json",
+    "analysis/v1_1_top_gnss_20261014/rf/routing-phase/reference.json",
+    "analysis/v1_1_top_gnss_20261014/rf/routing-phase/reproduction.json",
+    "analysis/v1_1_top_gnss_20261014/rf/thermal-review.json",
+    "analysis/v1_1_top_gnss_20261014/rf/top-feed-review.md",
+    "analysis/v1_1_top_gnss_20261014/sources/provenance.json",
+    "hardware/pcb/FABRICATION.md",
+    "hardware/pcb/README.md",
+    "hardware/pcb/TODO.md"
+  ],
+  "bindings": [
+    {
+      "evidence": "analysis/v1_1_top_gnss_20261014/fabrication/cleanup-ledger.json",
+      "pointer": "/final_sha256",
+      "source": "hardware/pcb/stratolink.kicad_pcb"
+    },
+    {
+      "evidence": "analysis/v1_1_top_gnss_20261014/fabrication/cleanup-review.json",
+      "pointer": "/final_sha256",
+      "source": "hardware/pcb/stratolink.kicad_pcb"
+    },
+    {
+      "evidence": "analysis/v1_1_top_gnss_20261014/fabrication/final-geometry.json",
+      "pointer": "/sha256",
+      "source": "hardware/pcb/stratolink.kicad_pcb"
+    },
+    {
+      "evidence": "analysis/v1_1_top_gnss_20261014/fabrication/final-screen.json",
+      "pointer": "/source_sha256",
+      "source": "hardware/pcb/stratolink.kicad_pcb"
+    },
+    {
+      "evidence": "analysis/v1_1_top_gnss_20261014/fabrication/portability-reproduction.json",
+      "pointer": "/expected_final_sha256",
+      "source": "hardware/pcb/stratolink.kicad_pcb"
+    },
+    {
+      "evidence": "analysis/v1_1_top_gnss_20261014/fabrication/portability-reproduction.json",
+      "pointer": "/actual_final_sha256",
+      "source": "hardware/pcb/stratolink.kicad_pcb"
+    },
+    {
+      "evidence": "analysis/v1_1_top_gnss_20261014/fabrication/reproduction.json",
+      "pointer": "/expected_final_sha256",
+      "source": "hardware/pcb/stratolink.kicad_pcb"
+    },
+    {
+      "evidence": "analysis/v1_1_top_gnss_20261014/fabrication/reproduction.json",
+      "pointer": "/actual_final_sha256",
+      "source": "hardware/pcb/stratolink.kicad_pcb"
+    },
+    {
+      "evidence": "analysis/v1_1_top_gnss_20261014/independent/audit/after-reference-geometry.json",
+      "pointer": "/pcb_sha256",
+      "source": "hardware/pcb/stratolink.kicad_pcb"
+    },
+    {
+      "evidence": "analysis/v1_1_top_gnss_20261014/independent/audit/candidate-geometry.json",
+      "pointer": "/sha256",
+      "source": "hardware/pcb/stratolink.kicad_pcb"
+    },
+    {
+      "evidence": "analysis/v1_1_top_gnss_20261014/independent/audit/etch-screen.json",
+      "pointer": "/source_sha256",
+      "source": "hardware/pcb/stratolink.kicad_pcb"
+    },
+    {
+      "evidence": "analysis/v1_1_top_gnss_20261014/independent/audit/evidence-hashes.json",
+      "pointer": "/pcb_sha256",
+      "source": "hardware/pcb/stratolink.kicad_pcb"
+    },
+    {
+      "evidence": "analysis/v1_1_top_gnss_20261014/independent/audit/reference.json",
+      "pointer": "/pcb_sha256",
+      "source": "hardware/pcb/stratolink.kicad_pcb"
+    },
+    {
+      "evidence": "analysis/v1_1_top_gnss_20261014/independent/audit/routing-and-graphics.json",
+      "pointer": "/pcb_sha256",
+      "source": "hardware/pcb/stratolink.kicad_pcb"
+    },
+    {
+      "evidence": "analysis/v1_1_top_gnss_20261014/independent/audit/scope.json",
+      "pointer": "/after_sha256",
+      "source": "hardware/pcb/stratolink.kicad_pcb"
+    },
+    {
+      "evidence": "analysis/v1_1_top_gnss_20261014/independent/audit/summary.json",
+      "pointer": "/pcb_sha256",
+      "source": "hardware/pcb/stratolink.kicad_pcb"
+    },
+    {
+      "evidence": "analysis/v1_1_top_gnss_20261014/independent/manifest.json",
+      "pointer": "/pcb_sha256",
+      "source": "hardware/pcb/stratolink.kicad_pcb"
+    },
+    {
+      "evidence": "analysis/v1_1_top_gnss_20261014/independent/reports/acceptance.json",
+      "pointer": "/pcb_sha256",
+      "source": "hardware/pcb/stratolink.kicad_pcb"
+    },
+    {
+      "evidence": "analysis/v1_1_top_gnss_20261014/independent/reports/artwork.json",
+      "pointer": "/pcb_sha256",
+      "source": "hardware/pcb/stratolink.kicad_pcb"
+    },
+    {
+      "evidence": "analysis/v1_1_top_gnss_20261014/independent/reports/canonical-strict-project-verification.json",
+      "pointer": "/pcb_sha256",
+      "source": "hardware/pcb/stratolink.kicad_pcb"
+    },
+    {
+      "evidence": "analysis/v1_1_top_gnss_20261014/independent/reports/cleanup-copper-delta.json",
+      "pointer": "/pcb_sha256",
+      "source": "hardware/pcb/stratolink.kicad_pcb"
+    },
+    {
+      "evidence": "analysis/v1_1_top_gnss_20261014/independent/reports/connected-guard.json",
+      "pointer": "/pcb_sha256",
+      "source": "hardware/pcb/stratolink.kicad_pcb"
+    },
+    {
+      "evidence": "analysis/v1_1_top_gnss_20261014/independent/reports/geometry-disposition.json",
+      "pointer": "/pcb_sha256",
+      "source": "hardware/pcb/stratolink.kicad_pcb"
+    },
+    {
+      "evidence": "analysis/v1_1_top_gnss_20261014/independent/reports/portable-reproduction.json",
+      "pointer": "/pcb_sha256",
+      "source": "hardware/pcb/stratolink.kicad_pcb"
+    },
+    {
+      "evidence": "analysis/v1_1_top_gnss_20261014/independent/reports/portable-reproduction.json",
+      "pointer": "/commands/0/11",
+      "source": "hardware/pcb/stratolink.kicad_pcb"
+    },
+    {
+      "evidence": "analysis/v1_1_top_gnss_20261014/independent/reports/project-library.json",
+      "pointer": "/pcb_sha256",
+      "source": "hardware/pcb/stratolink.kicad_pcb"
+    },
+    {
+      "evidence": "analysis/v1_1_top_gnss_20261014/independent/reports/strict-portable-reproduction.json",
+      "pointer": "/pcb_sha256",
+      "source": "hardware/pcb/stratolink.kicad_pcb"
+    },
+    {
+      "evidence": "analysis/v1_1_top_gnss_20261014/independent/reports/strict-portable-reproduction.json",
+      "pointer": "/commands/0/11",
+      "source": "hardware/pcb/stratolink.kicad_pcb"
+    },
+    {
+      "evidence": "analysis/v1_1_top_gnss_20261014/independent/reports/strict-project-verification.json",
+      "pointer": "/pcb_sha256",
+      "source": "hardware/pcb/stratolink.kicad_pcb"
+    },
+    {
+      "evidence": "analysis/v1_1_top_gnss_20261014/independent/reports/zone-settings.json",
+      "pointer": "/pcb_sha256",
+      "source": "hardware/pcb/stratolink.kicad_pcb"
+    },
+    {
+      "evidence": "analysis/v1_1_top_gnss_20261014/manufacturing/package-verification.json",
+      "pointer": "/pcb_sha256",
+      "source": "hardware/pcb/stratolink.kicad_pcb"
+    },
+    {
+      "evidence": "analysis/v1_1_top_gnss_20261014/mechanics/assembly-review.json",
+      "pointer": "/pcb_sha256",
+      "source": "hardware/pcb/stratolink.kicad_pcb"
+    },
+    {
+      "evidence": "analysis/v1_1_top_gnss_20261014/mechanics/final-native.json",
+      "pointer": "/sha256",
+      "source": "hardware/pcb/stratolink.kicad_pcb"
+    },
+    {
+      "evidence": "analysis/v1_1_top_gnss_20261014/mechanics/source-identities.json",
+      "pointer": "/pcb_sha256",
+      "source": "hardware/pcb/stratolink.kicad_pcb"
+    },
+    {
+      "evidence": "analysis/v1_1_top_gnss_20261014/native/promotion.json",
+      "pointer": "/pcb_sha256",
+      "source": "hardware/pcb/stratolink.kicad_pcb"
+    },
+    {
+      "evidence": "analysis/v1_1_top_gnss_20261014/native/root-review.json",
+      "pointer": "/pcb_sha256",
+      "source": "hardware/pcb/stratolink.kicad_pcb"
+    },
+    {
+      "evidence": "analysis/v1_1_top_gnss_20261014/power/balancer-review.json",
+      "pointer": "/snapshots/1/sha256",
+      "source": "hardware/pcb/stratolink.kicad_pcb"
+    },
+    {
+      "evidence": "analysis/v1_1_top_gnss_20261014/power/final-native.json",
+      "pointer": "/sha256",
+      "source": "hardware/pcb/stratolink.kicad_pcb"
+    },
+    {
+      "evidence": "analysis/v1_1_top_gnss_20261014/power/ground-review.json",
+      "pointer": "/candidate_sha256",
+      "source": "hardware/pcb/stratolink.kicad_pcb"
+    },
+    {
+      "evidence": "analysis/v1_1_top_gnss_20261014/power/loop-review.json",
+      "pointer": "/after/sha256",
+      "source": "hardware/pcb/stratolink.kicad_pcb"
+    },
+    {
+      "evidence": "analysis/v1_1_top_gnss_20261014/power/power-review.json",
+      "pointer": "/candidate_sha256",
+      "source": "hardware/pcb/stratolink.kicad_pcb"
+    },
+    {
+      "evidence": "analysis/v1_1_top_gnss_20261014/power/source-resistance.json",
+      "pointer": "/candidate_sha256",
+      "source": "hardware/pcb/stratolink.kicad_pcb"
+    },
+    {
+      "evidence": "analysis/v1_1_top_gnss_20261014/rf/author-review.json",
+      "pointer": "/final_pcb_sha256",
+      "source": "hardware/pcb/stratolink.kicad_pcb"
+    },
+    {
+      "evidence": "analysis/v1_1_top_gnss_20261014/rf/cleanup-scope-review.json",
+      "pointer": "/after_pcb_sha256",
+      "source": "hardware/pcb/stratolink.kicad_pcb"
+    },
+    {
+      "evidence": "analysis/v1_1_top_gnss_20261014/rf/final-reference.json",
+      "pointer": "/pcb_sha256",
+      "source": "hardware/pcb/stratolink.kicad_pcb"
+    },
+    {
+      "evidence": "analysis/v1_1_top_gnss_20261014/rf/thermal-review.json",
+      "pointer": "/final_pcb_sha256",
+      "source": "hardware/pcb/stratolink.kicad_pcb"
+    },
+    {
+      "evidence": "analysis/v1_1_top_gnss_20261014/rf/thermal-review.json",
+      "pointer": "/source_pcb_hashes/2",
+      "source": "hardware/pcb/stratolink.kicad_pcb"
+    },
+    {
+      "evidence": "analysis/v1_1_top_gnss_20261014/native/root-review.json",
+      "pointer": "/schematic_sha256",
+      "source": "hardware/pcb/stratolink.kicad_sch"
+    },
+    {
+      "evidence": "analysis/v1_1_top_gnss_20261014/native/root-review.json",
+      "pointer": "/strict_project_sha256",
+      "source": "hardware/pcb/stratolink.kicad_pro"
+    },
+    {
+      "evidence": "analysis/v1_1_top_gnss_20261014/native/root-review.json",
+      "pointer": "/rules_sha256",
+      "source": "hardware/pcb/stratolink.kicad_dru"
+    }
+  ],
+  "scope": "Final PCB 88f82c85: upward original-top GNSS antenna, rounded feed west of L1, preserved pad nets and declared three placement changes. Strict native DRC/opens/parity zero; ERC zero unexcluded with two documented exclusions and enumerated unchanged generic ignored checks. Independent physical-pad/logical-net, whole-copper anchoring, actual RF-reference, connected finite-guard, thermal-neighborhood and bounded etch review passes; raw numerical remnants explicitly quantified. Power and mechanical screens are nominal geometry/models. Export has 57 pilot refs and omits only U6 and its 16 paste apertures. These checks do not establish factory CAM acceptance, assembly/thermal qualification, uniform 50 ohm impedance or measured GNSS improvement. Earlier routing-phase/source reports retain their historical hashes; they are not current-layout evidence. Saved JLC Y24 cart remains stale."
+}
