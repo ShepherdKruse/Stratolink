@@ -12,7 +12,7 @@ The design keeps the 0.4 mm ENIG board with green solder mask, no silkscreen and
 - [x] **Verify the digital feedback against the actual module.** SWD mapping matches the standard 32-pad RAK3172 and flown board. Keep 4.7 kΩ pull-ups; two 10 kΩ in parallel would be weaker. UART TX/RX do not need length matching. Document external-transmitter contention and the BOOT0 ground strap. [Evidence](../../analysis/v1_1_peer_review_20261014/digital/README.md).
 - [x] **Review both 10 µF capacitors.** Retain C8/C21. The exact parts lose substantial capacitance under bias; removing them has no demonstrated benefit. [Evidence](../../analysis/v1_1_peer_review_20261014/power/README.md).
 - [ ] **Measure bus and supply margins.** Check I²C 30–70% rise time against 300 ns at the far devices, and scope GNSS supply at startup/radio activity. Review C10 placement and FB1 maximum DCR before approving a substitute.
-- [ ] **Refresh matching manufacturing exports and verify their population/stencil.**
+- [x] **Refresh matching manufacturing exports and verify their population/stencil.** Final source `8df85b3e`; 57 pilot references, only U6 omitted and its 16 paste apertures removed. Native and portable package checks are linked in the peer review.
 - [ ] **Reimport and review the current package in JLC.** The saved Y24 cart is stale. Check D3 relocation, retained IC rotations, source hashes, both-side assembly and factory CAM before ordering.
 
 ## Earlier v1.1 design work retained

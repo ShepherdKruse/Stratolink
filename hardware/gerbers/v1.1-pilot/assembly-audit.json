@@ -888,26 +888,26 @@
       "mpn": "PESD5V0U1BB",
       "lcsc": "C5272735",
       "native_anchor_mm": [
-        60.306,
-        37.391
+        58.0,
+        45.05
       ],
       "smd_pad_center_mm": [
-        60.306,
-        37.391
+        58.0,
+        45.05
       ],
       "smd_pad_bounds_mm": [
-        59.956,
-        36.390999,
-        60.656,
-        38.391001
+        57.65,
+        44.049999,
+        58.35,
+        46.050001
       ],
       "center_mm": [
-        60.306,
-        37.391
+        58.0,
+        45.05
       ],
       "placement_method": "Placement-side SMD copper pad bounding center; excludes TH pads and all text/graphics/models",
-      "native_angle_deg": 90.0,
-      "rotation_deg": 90.0,
+      "native_angle_deg": -90.0,
+      "rotation_deg": 270.0,
       "side": "top",
       "prior_cpl": {
         "Designator": "D3",
@@ -919,8 +919,8 @@
         "Layer": "top"
       },
       "delta_from_prior_mm": [
-        0.0,
-        0.0
+        -2.3059999999999974,
+        -7.658999999999999
       ],
       "new_part": false
     },
@@ -3264,26 +3264,26 @@
       "mpn": "PESD5V0U1BB",
       "lcsc": "C5272735",
       "native_anchor_mm": [
-        60.306,
-        37.391
+        58.0,
+        45.05
       ],
       "smd_pad_center_mm": [
-        60.306,
-        37.391
+        58.0,
+        45.05
       ],
       "smd_pad_bounds_mm": [
-        59.956,
-        36.390999,
-        60.656,
-        38.391001
+        57.65,
+        44.049999,
+        58.35,
+        46.050001
       ],
       "center_mm": [
-        60.306,
-        37.391
+        58.0,
+        45.05
       ],
       "placement_method": "Placement-side SMD copper pad bounding center; excludes TH pads and all text/graphics/models",
-      "native_angle_deg": 90.0,
-      "rotation_deg": 90.0,
+      "native_angle_deg": -90.0,
+      "rotation_deg": 270.0,
       "side": "top",
       "prior_cpl": {
         "Designator": "D3",
@@ -3295,8 +3295,8 @@
         "Layer": "top"
       },
       "delta_from_prior_mm": [
-        0.0,
-        0.0
+        -2.3059999999999974,
+        -7.658999999999999
       ],
       "new_part": false
     },
@@ -4900,7 +4900,7 @@
   ],
   "supplier_rotation_profile": {
     "baseline_provenance": "Historical equality reproduces the repository v1 production INPUT CPL. It is not evidence of verified JLC post-CAM placement or supplier-model rotation.",
-    "profile_path": "/Users/twarn/Repositories/Stratolink/analysis/v1_1_release_20261012/jlc/supplier-rotation-profile.json",
+    "profile_path": "/Users/twarn/Repositories/ai-working/worktrees/Stratolink/hardware-v1.1-review/analysis/v1_1_release_20261012/jlc/supplier-rotation-profile.json",
     "profile_sha256": "fadbcae4bb6bb6776a3fd9e3c1fd35073b85bbad71c441b43b1361ddf2aa00ea",
     "overrides": [
       {

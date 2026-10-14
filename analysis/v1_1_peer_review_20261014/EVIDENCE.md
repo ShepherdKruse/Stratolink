@@ -2,7 +2,7 @@
 
 `verify_peer_evidence.py` supplements `hardware/pcb/verify_review_package.py`. It verifies repository-relative source and evidence hashes and checks that selected JSON findings explicitly identify the current PCB. It neither reruns KiCad nor establishes RF or flight performance. The existing package verifier still checks manufacturing outputs and historical AS7331 evidence.
 
-The final peer manifest must be frozen after the final RF candidate, review reports and manufacturing package agree. No final manifest is created by the tests or by running the verifier.
+The final peer manifest pins the accepted RF source, review reports and matching manufacturing package. It is created explicitly after those agree. Tests and the verifier never regenerate it. Historical and rejected trial files remain evidence only for their stated source hashes; explicit bindings identify the accepted final reports.
 
 Create an input JSON containing these three fields:
 

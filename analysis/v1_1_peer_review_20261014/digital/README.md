@@ -93,3 +93,7 @@ UART here is two asynchronous single-ended signals. **TX and RX do not need leng
 - Native extraction and calculations are reproducible with `extract_layout.py` under KiCad's Python and `model.py` under Python 3. Input hashes are in `input-hashes.json`.
 
 The independent browser runtime was unavailable for this agent; the fresh RAK capture and Tag-Connect verification were obtained by the root agent's working browser/source session. No live board waveform, actual cable, raw-MCU ROM boot configuration, or guaranteed total bus capacitance was measured here. The populated-AS7331 driver is still unimplemented; the selected pilot environment deliberately omits UV transactions rather than probing the new device with the legacy LTR390 driver.
+
+## Final routing check, 14 October
+
+The accepted RF/C5 revision preserves every physical pad net and all 250 logical pad connections. The combined SCL length changes from 106.9141 to 106.8819 mm; SDA remains 95.1026 mm. This negligible length change does not replace the required 300 ns rise-time measurement. See [scope](final-rf-scope.json), [route lengths](final-route-lengths.json) and [actual ground reference](final-rf-reference.json), all bound to PCB `8df85b3e4bdd546ec174bb9d7b9ee9d795d55d486a68e1e853aaf1b871f863d3`.

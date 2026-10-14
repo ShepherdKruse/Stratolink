@@ -3,7 +3,7 @@ Ref,Val,Package,PosX,PosY,Rot,Side
 "C2","4.7μF","Stratolink_v1p1_C2_C_0603_1608Metric",63.873000,-39.142000,-90.000000,bottom
 "C3","4.7μF","Stratolink_v1p1_C3_C_0603_1608Metric",65.880998,-42.066998,180.000000,bottom
 "C4","100nF","Stratolink_v1p1_C4_C_0402_1005Metric",65.975000,-40.709998,180.000000,bottom
-"C5","1F","Stratolink_v1p1_C5_DMF4B5R5G105M3DTA0",64.875000,-64.707000,180.000000,bottom
+"C5","1F","Stratolink_v1p1_C5_DMF4B5R5G105M3DTA0",66.675000,-64.707000,180.000000,bottom
 "C6","22µF","Stratolink_v1p1_C6_C_0805_2012Metric",70.956000,-38.591000,-90.000000,bottom
 "C22","100nF","Stratolink_v1p1_C22_C_0402_1005Metric",55.600000,-38.300000,180.000000,bottom
 "L1","22µH","Stratolink_v1p1_L1_IND_LPS4018-223MRC",60.103000,-38.186500,90.000000,bottom
@@ -22,7 +22,7 @@ Ref,Val,Package,PosX,PosY,Rot,Side
 "U1","BQ25570RGRR","Stratolink_v1p1_U1_QFN50P350X350X100-21N",67.190998,-37.814999,0.000000,bottom
 "U8","TLV8801DBVT","Stratolink_v1p1_U8_SOT-23-5",55.650000,-36.100000,0.000000,bottom
 "AE1","Enameled Cu wire 82mm (915MHz reference)","Stratolink_LoRa_Wire_PTH_D1p0",68.396000,-82.703000,-90.000000,top
-"AE2","Enameled Cu wire 48mm (GNSS L1)","Stratolink_GNSS_Wire_PTH_D1p0",62.882000,-33.218000,90.000000,top
+"AE2","Enameled Cu wire 48mm (GNSS L1)","Stratolink_GNSS_Wire_PTH_D1p0",55.300000,-47.850000,180.000000,top
 "C7","100nF","Stratolink_v1p1_C7_C_0402_1005Metric",58.477000,-62.720001,180.000000,top
 "C8","10μF","Stratolink_v1p1_C8_C_0603_1608Metric",58.467002,-61.430999,180.000000,top
 "C9","100nF","Stratolink_v1p1_C9_C_0402_1005Metric",62.938002,-62.698999,180.000000,top
@@ -38,7 +38,7 @@ Ref,Val,Package,PosX,PosY,Rot,Side
 "C21","10μF","Stratolink_v1p1_C21_C_0603_1608Metric",69.362000,-34.647000,180.000000,top
 "C23","100nF","Stratolink_v1p1_C23_C_0402_1005Metric",75.200000,-39.800000,0.000000,top
 "D1","PESD5V0U1BB","Stratolink_v1p1_D1_D_SOD-523",71.058000,-82.813000,180.000000,top
-"D3","PESD5V0U1BB","Stratolink_v1p1_D3_D_SOD-523",60.306000,-37.391000,90.000000,top
+"D3","PESD5V0U1BB","Stratolink_v1p1_D3_D_SOD-523",58.000000,-45.050000,-90.000000,top
 "FB1","BLM15AG601SN1D","Stratolink_v1p1_FB1_C_0402_1005Metric",56.414000,-50.858000,-90.000000,top
 "J3","Programming_1x07_P1.00mm_D0.50mm","Stratolink_Programming_Left_1x07_P1p00_D0p50_BackTack1p20x0p88",54.444998,-69.173998,0.000000,top
 "J4","Programming_1x07_P1.00mm_D0.50mm","Stratolink_v1p1_J4_Stratolink_Programming_Right_1x07_P1p00_D0p50_BackTack1p20x0p88",75.531000,-69.158000,0.000000,top
