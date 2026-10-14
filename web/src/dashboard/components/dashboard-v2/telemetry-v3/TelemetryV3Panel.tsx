@@ -8,6 +8,7 @@ import {
     faMoon,
     faSolarPanel,
     faSun,
+    faXmark,
 } from '@fortawesome/free-solid-svg-icons';
 import { fmt, type TelemetryRow } from '@/components/dashboard-v2/atoms';
 import type { DeviceSummary } from '@/components/dashboard-v2/useTelemetry';
@@ -104,12 +105,34 @@ function ConnectionStatus({ connected, archived, recordedAt }: { connected: bool
     );
 }
 
+/* Four readings per row. Columns size to their content and share the spare
+ * width between them, so a wide value (e.g. "53,474 lux") claims room from
+ * narrow neighbours instead of spilling into the next column. */
+const METRIC_ROW: React.CSSProperties = {
+    display: 'grid', gridTemplateColumns: 'repeat(4, auto)', justifyContent: 'space-between', columnGap: 8, padding: '14px 0',
+};
+
+/** "1,626" below 10k lux, "53.5k" / "112k" above — full sun needs no finer
+ * grain, and the short form keeps the four-up row from overflowing. */
+function fmtLux(lux: number): string {
+    if (lux < 10_000) return Math.round(lux).toLocaleString('en-US');
+    return `${(lux / 1000).toFixed(lux < 100_000 ? 1 : 0)}k`;
+}
+
 /** A single key metric, shown plainly (no box): small label over a big value,
- * optionally preceded by a small icon. */
-function Metric({ label, value, unit, icon }: { label: string; value: React.ReactNode; unit?: string; icon?: React.ReactNode }) {
+ * optionally preceded by a small icon. With `onSelect` it is a toggle that
+ * charts the metric's history in the panel's trend slot. */
+function Metric({ label, value, unit, icon, active = false, onSelect }: {
+    label: string; value: React.ReactNode; unit?: string; icon?: React.ReactNode;
+    active?: boolean; onSelect?: () => void;
+}) {
+    const Tag = onSelect ? 'button' : 'div';
     return (
-        <div style={{ minWidth: 0 }}>
-            <div className="eyebrow" style={{ color: 'var(--t-text-3)', marginBottom: 5, fontSize: 9, whiteSpace: 'nowrap' }}>
+        <Tag
+            {...(onSelect ? { type: 'button' as const, className: 'tlm-metric', 'aria-pressed': active, onClick: onSelect } : {})}
+            style={{ minWidth: 0 }}
+        >
+            <div className="eyebrow" style={{ color: active ? 'var(--t-accent)' : 'var(--t-text-3)', marginBottom: 5, fontSize: 9, whiteSpace: 'nowrap' }}>
                 {label}
             </div>
             <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
@@ -121,9 +144,16 @@ function Metric({ label, value, unit, icon }: { label: string; value: React.Reac
                     {unit && <span className="mono" style={{ fontSize: 11, color: 'var(--t-text-3)' }}>{unit}</span>}
                 </div>
             </div>
-        </div>
+        </Tag>
     );
 }
+
+/** Readings the trend slot can chart; temperature is the default. */
+type ChartKey = 'temp' | 'batt' | 'solar' | 'lux' | 'tilt' | 'gw' | 'sats' | 'rssi' | 'snr';
+const CHART_TITLES: Record<ChartKey, string> = {
+    temp: 'Temperature', batt: 'Storage', solar: 'Solar', lux: 'Ambient', tilt: 'Orientation',
+    gw: 'Gateways', sats: 'GPS sats', rssi: 'RSSI', snr: 'SNR',
+};
 
 /** Sun (warming with brightness) by day, moon at night — relates lux to phase. */
 function DaylightIcon({ lux }: { lux: number }) {
@@ -149,7 +179,7 @@ function SolarIcon({ color }: { color: string }) {
 function TiltIcon({ deg, color }: { deg: number; color: string }) {
     const d = Math.max(-80, Math.min(80, deg));
     return (
-        <FontAwesomeIcon icon={faArrowUp} style={{ width: 14, height: 14, color, flexShrink: 0, transform: `rotate(${d}deg)`, transformOrigin: 'center bottom' }} aria-hidden />
+        <FontAwesomeIcon icon={faArrowUp} style={{ width: 14, height: 14, color, flexShrink: 0, transform: `rotate(${d}deg)` }} aria-hidden />
     );
 }
 
@@ -191,6 +221,24 @@ export default function TelemetryV3Panel({ device, devices, onSelect, scrubRow, 
     const tilt = payloadAttitude?.tiltDeg ?? null;
     const tiltReliable = payloadAttitude?.reliable ?? false;
     const tiltCol = tilt == null || !tiltReliable ? 'var(--t-text-3)' : tilt < 15 ? 'var(--t-nominal)' : tilt < 35 ? 'var(--t-warn)' : 'var(--t-critical)';
+
+    /* Tapping a reading charts its history in the trend slot below altitude;
+     * tapping it again (or the slot's ×) returns to temperature. */
+    const [chartKey, setChartKey] = useState<ChartKey>('temp');
+    const toggleChart = (key: ChartKey) => setChartKey(current => (current === key ? 'temp' : key));
+    const tiltSeries = useMemo(() => rows.map(r => computePayloadAttitude(r.ax, r.ay, r.az)?.tiltDeg ?? null), [rows]);
+    const chart = ({
+        temp: { series: flight.temp, value: row?.temp ?? null, fmtFn: (v: number) => tlmFmt.d1(v), unit: '°C' },
+        batt: { series: flight.batt, value: batt ?? null, fmtFn: (v: number) => tlmFmt.d2(v), unit: 'V' },
+        solar: { series: flight.solar, value: solar ?? null, fmtFn: (v: number) => tlmFmt.d2(v), unit: 'V' },
+        lux: { series: flight.lux, value: lux, fmtFn: fmtLux, unit: 'lux' },
+        tilt: { series: tiltSeries, value: tilt, fmtFn: (v: number) => `${Math.round(v)}°`, unit: '' },
+        gw: { series: flight.gw, value: gwNow, fmtFn: (v: number) => tlmFmt.int(v), unit: '' },
+        sats: { series: flight.sats, value: row?.sats ?? null, fmtFn: (v: number) => tlmFmt.int(v), unit: '' },
+        rssi: { series: flight.rssi, value: rssi ?? null, fmtFn: (v: number) => tlmFmt.int(v), unit: 'dBm' },
+        snr: { series: flight.snr, value: snr ?? null, fmtFn: (v: number) => tlmFmt.d1(v), unit: 'dB' },
+    } satisfies Record<ChartKey, { series: (number | null)[]; value: number | null; fmtFn: (v: number) => string; unit: string }>)[chartKey];
+    const select = (key: ChartKey) => ({ active: chartKey === key, onSelect: () => toggleChart(key) });
 
 
     const altStatus: StatusLevel =
@@ -295,15 +343,20 @@ export default function TelemetryV3Panel({ device, devices, onSelect, scrubRow, 
                 <Divider />
                 <div style={{ padding: '13px 0' }}>
                     <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 8 }}>
-                        <span className="eyebrow" style={{ color: 'var(--t-text-2)' }}>
-                            Temperature
+                        <span className="eyebrow" style={{ color: 'var(--t-text-2)', display: 'flex', alignItems: 'center', gap: 6 }}>
+                            {CHART_TITLES[chartKey]}
+                            {chartKey !== 'temp' && (
+                                <button type="button" className="tlm-chart-reset" onClick={() => setChartKey('temp')} aria-label="Show temperature" title="Show temperature">
+                                    <FontAwesomeIcon icon={faXmark} aria-hidden />
+                                </button>
+                            )}
                         </span>
                         <span className="disp mono" style={{ fontSize: 22, fontWeight: 600 }}>
-                            {row?.temp != null ? tlmFmt.d1(row.temp) : '-'}
-                            {row?.temp != null && <span className="mono" style={{ fontSize: 11, fontWeight: 500, color: 'var(--t-text-3)', marginLeft: 3 }}>°C</span>}
+                            {chart.value != null ? chart.fmtFn(chart.value) : '-'}
+                            {chart.value != null && chart.unit && <span className="mono" style={{ fontSize: 11, fontWeight: 500, color: 'var(--t-text-3)', marginLeft: 3 }}>{chart.unit}</span>}
                         </span>
                     </div>
-                    <LineTrend series={flight.temp} times={flight.times} status="nominal" fmtFn={(v) => tlmFmt.d1(v)} unit="°C" height={44} scrubT={scrubRow?.t ?? null} onPickTime={onPickTime} />
+                    <LineTrend key={chartKey} series={chart.series} times={flight.times} status="nominal" fmtFn={chart.fmtFn} unit={chart.unit} height={44} scrubT={scrubRow?.t ?? null} onPickTime={onPickTime} />
                 </div>
             </Group>
 
@@ -312,27 +365,31 @@ export default function TelemetryV3Panel({ device, devices, onSelect, scrubRow, 
                 title="Power & sun"
                 gkey="power"
             >
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '0 10px', padding: '14px 0' }}>
+                <div style={METRIC_ROW}>
                     <Metric
                         label="Storage"
+                        {...select('batt')}
                         value={batt != null ? tlmFmt.d2(batt) : '-'}
                         unit={batt != null ? 'V' : undefined}
                         icon={batt != null ? <FontAwesomeIcon icon={faBolt} style={{ width: 11, height: 13, color: 'var(--t-text-3)' }} aria-hidden /> : undefined}
                     />
                     <Metric
                         label="Solar"
+                        {...select('solar')}
                         value={solar != null ? tlmFmt.d2(solar) : '-'}
                         unit={solar != null ? 'V' : undefined}
                         icon={solar != null ? <SolarIcon color={solar >= 1 ? '#C9922E' : 'var(--t-text-3)'} /> : undefined}
                     />
                     <Metric
                         label="Ambient"
-                        value={lux != null ? Math.round(lux).toLocaleString('en-US') : '-'}
+                        {...select('lux')}
+                        value={lux != null ? fmtLux(lux) : '-'}
                         unit={lux != null ? 'lux' : undefined}
                         icon={lux != null ? <DaylightIcon lux={lux} /> : undefined}
                     />
                     <Metric
                         label="Orientation"
+                        {...select('tilt')}
                         value={tilt != null ? `${Math.round(tilt)}°` : '-'}
                         icon={tilt != null ? <TiltIcon deg={tilt} color={tiltCol} /> : undefined}
                     />
@@ -344,11 +401,11 @@ export default function TelemetryV3Panel({ device, devices, onSelect, scrubRow, 
                 title="Link"
                 gkey="link"
             >
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '0 12px', padding: '14px 0' }}>
-                    <Metric label="Gateways" value={gwNow != null ? `${gwNow}` : '-'} unit={gwVisible != null ? `/ ${gwVisible}` : undefined} />
-                    <Metric label="GPS sats" value={row?.sats != null ? `${row.sats}` : '-'} />
-                    <Metric label="RSSI" value={rssi != null ? tlmFmt.int(rssi) : '-'} unit={rssi != null ? 'dBm' : undefined} />
-                    <Metric label="SNR" value={snr != null ? tlmFmt.d1(snr) : '-'} unit={snr != null ? 'dB' : undefined} />
+                <div style={METRIC_ROW}>
+                    <Metric label="Gateways" {...select('gw')} value={gwNow != null ? `${gwNow}` : '-'} unit={gwVisible != null ? `/ ${gwVisible}` : undefined} />
+                    <Metric label="GPS sats" {...select('sats')} value={row?.sats != null ? `${row.sats}` : '-'} />
+                    <Metric label="RSSI" {...select('rssi')} value={rssi != null ? tlmFmt.int(rssi) : '-'} unit={rssi != null ? 'dBm' : undefined} />
+                    <Metric label="SNR" {...select('snr')} value={snr != null ? tlmFmt.d1(snr) : '-'} unit={snr != null ? 'dB' : undefined} />
                 </div>
             </Group>
 
