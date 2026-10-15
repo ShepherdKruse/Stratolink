@@ -38,15 +38,15 @@
       <a href="/blog" aria-current="page">blog</a>
       <a href="mailto:contact@stratolink.org">contact</a>
     </nav>
-    <details class="mobile-nav">
-      <summary aria-label="Navigation menu"><img class="menu-open-icon" src="/assets/icons/bars.svg" alt="" width="17" height="17"><img class="menu-close-icon" src="/assets/icons/close.svg" alt="" width="17" height="17"></summary>
-      <nav aria-label="Mobile navigation">
+    <div class="home-menu">
+      <button class="home-menu-toggle" type="button" aria-label="Open navigation" aria-expanded="false" aria-controls="home-menu-links"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M2 4h16"/><path d="M2 10h16"/><path d="M2 16h16"/></svg></button>
+      <nav id="home-menu-links" aria-label="Mobile navigation" inert>
         <a href="/dashboard">dashboard</a>
         <a href="/docs">docs</a>
         <a href="/blog" aria-current="page">blog</a>
         <a href="mailto:contact@stratolink.org">contact</a>
       </nav>
-    </details>
+    </div>
   </header>
   <main id="main" class="blog-main" tabindex="-1">
     <h1 class="sr-only">Blog</h1>

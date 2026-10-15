@@ -191,7 +191,6 @@ function blogLink(event) {
 }
 document.addEventListener('click', event => {
   const link = blogLink(event);
-  if (link) document.querySelector('.mobile-nav')?.removeAttribute('open');
   if (!link || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
   if (link.getAttribute('href') === '/blog' && !document.querySelector('[data-post]')) return;
   event.preventDefault();
