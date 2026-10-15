@@ -29,3 +29,9 @@
 @media (prefers-reduced-motion: reduce) {
   .home-menu-backdrop, :is(.site-header, .blog-header) .home-menu nav, :is(.site-header, .blog-header) .home-menu nav a, .home-menu-toggle path, .home-menu-toggle svg { transition: none !important; }
 }
+
+@media (hover: hover) and (pointer: fine) {
+  .home-nav a, .desktop-nav a { transition: transform 220ms cubic-bezier(.22,1,.36,1); }
+  .home-nav a:hover, .desktop-nav a:hover { transform: scale(.96); }
+}
+@media (prefers-reduced-motion: reduce) { .home-nav a, .desktop-nav a { transition: none; } }
