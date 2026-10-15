@@ -6,7 +6,7 @@ export const windPathArticle = {
   slug: 'drawing-the-path-between-packets',
   title: 'Drawing the path between packets',
   category: 'Dev log',
-  excerpt: 'Stratolink 3 flew for twelve days and reported where it was for about one of them. How the dashboard fills in the rest from the wind, and what I changed to make that line trustworthy.',
+  excerpt: 'Stratolink 3 went quiet over New Mexico and turned up over Spain eight days later. Why neither a straight line nor the winds alone can fill in that gap, and how the dashboard does it by working from both ends.',
   published: '2026-10',
   publishedLabel: 'October 2026',
   author: { name: 'Caleb Kruse', github: 'https://github.com/clkruse' },

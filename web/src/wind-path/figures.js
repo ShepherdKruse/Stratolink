@@ -294,7 +294,7 @@ async function replay(host, signal) {
   observeChartSize(host, () => { width = host.clientWidth - 32; map.resize(width); sizeCanvas(strip, sctx, width, 30); draw(); }, signal);
 }
 
-/* ── 2. riding the tube ────────────────────────────────────────────────────── */
+/* ── 5. riding the tube ────────────────────────────────────────────────────── */
 async function tube(host, signal) {
   const [meta, buffer, coast, flight, cloud, fmeta, fbuf, obuf] = await Promise.all([load('tube.json'), load('tube.bin'), load('coast-atlantic.json'), load('flight.json'), clouds(), load('filters.json'), load('filters.bin'), load('tube-outer.bin')]);
   if (signal.aborted) return;
@@ -408,7 +408,7 @@ async function tube(host, signal) {
   observeChartSize(host, () => { map.resize(host.clientWidth - 32); draw(); }, signal);
 }
 
-/* ── 2b. what the box resolves ─────────────────────────────────────────────── */
+/* ── 5b. what the box resolves ─────────────────────────────────────────────── */
 async function resolution(host, signal) {
   const [meta, pbuf] = await Promise.all([load('tube.json'), load('tube-patch.bin')]);
   if (signal.aborted) return;
@@ -469,16 +469,98 @@ async function resolution(host, signal) {
   }, signal);
 }
 
+/* ── 2. the straight line and the winds alone ──────────────────────────────── */
+/* Points along the great circle from a to b, [lat, lon] at fraction f. */
+function greatCircle(a, b) {
+  const v = ([lat, lon]) => [Math.cos(lat * rad) * Math.cos(lon * rad), Math.cos(lat * rad) * Math.sin(lon * rad), Math.sin(lat * rad)];
+  const p = v(a), q = v(b), om = Math.acos(clamp(p[0] * q[0] + p[1] * q[1] + p[2] * q[2], -1, 1));
+  return f => {
+    const wa = Math.sin((1 - f) * om) / Math.sin(om), wb = Math.sin(f * om) / Math.sin(om), x = p.map((c, i) => wa * c + wb * q[i]);
+    return [Math.asin(x[2]) / rad, Math.atan2(x[1], x[0]) / rad];
+  };
+}
+async function plain(host, signal) {
+  const [cloud, fo, coast, wind] = await Promise.all([clouds(), load('forecast-only.json'), load('coast-atlantic.json'), windField()]);
+  if (signal.aborted) return;
+  const p = cloud.posterior, { steps, hours, hoursPerStep, tA } = p, A = p.drawn[0], B = p.drawn[steps - 1], nominal = fo.nominal;
+  const along = greatCircle(A, B), distance = km(A[0], A[1], B[0], B[1]), speed = distance * 1000 / (hours * 3600);
+  const straight = Array.from({ length: 121 }, (_, k) => along(k / 120));
+  const miss = fo.nominalToB;
+  /* the straight line's heading against the wind along it, sampled every half hour */
+  const against = [];
+  for (let hr = .25; hr < hours; hr += .5) {
+    const f = hr / hours, q = along(f), r = along(Math.min(1, f + 1e-3));
+    const heading = Math.atan2((r[1] - q[1]) * Math.cos(q[0] * rad), r[0] - q[0]), [u, v] = wind.at(tA + hr * 3600000, q[0], q[1]);
+    against.push(Math.abs(((heading - Math.atan2(u, v)) / rad + 540) % 360 - 180));
+  }
+  const intoWind = against.filter(a => a > 90).length / against.length;
+  host.innerHTML = `${heading('A straight line, and the winds alone', `the ${fmt(hours)}-hour gap`)}
+    <div class="fleet-metrics contact-metrics"><span><b>${fmt(distance)} km</b>between the two fixes</span><span><b>${fmt(speed, 1)} m/s</b>to cover it in a straight line</span><span><b>${fmt(miss)} km</b>where the winds alone miss Spain</span></div>
+    <div class="chart-legend">${key('Straight line', GRAY)}${key('Riding the GFS winds, no randomness', INK)}${key('The fixes', INK, 'dot')}${windKey()}</div>
+    <div class="fleet-map-stage"></div>
+    ${footer('NOAA GFS at the hour shown')}
+    ${slider('Gap hour', hours, .5, 'Hours into the gap')}
+    <output class="chart-readout"></output>`;
+  const map = createMap(GAP_VIEW, `The eight-day gap from New Mexico to Spain: a straight line between the two fixes, which often runs across or against the wind, and the path the GFS winds alone take from New Mexico, which ends ${fmt(miss)} km from the fix in Spain. Space plays, arrow keys step.`);
+  host.querySelector('.fleet-map-stage').prepend(map.canvas);
+  const input = host.querySelector('input'), output = host.querySelector('.fleet-time output'), read = host.querySelector('.chart-readout'), date = host.querySelector('.fleet-date');
+  let h = 0;
+  function draw() {
+    if (!map.width) return;
+    const done = h >= hours - .5, hour = done ? hours : h, f = hour / hours, s = Math.min(hour / hoursPerStep, steps - 1), tMs = tA + hour * 3600000;
+    const k = Math.min(Math.floor(s), steps - 1), t = s - k, n1 = nominal[Math.min(steps - 1, k + 1)], n0 = nominal[k], w = [lerp(n0[0], n1[0], t), lerp(n0[1], n1[1], t)];
+    const q = along(f);
+    map.base(coast);
+    wind.draw(map, tMs, { alpha: .26 });
+    map.line(straight, { color: GRAY, width: 1.4, dash: [5, 4], alpha: .45 });
+    map.line([...straight.slice(0, Math.floor(f * 120) + 1), q], { color: GRAY, width: 2 });
+    map.line([...nominal.slice(0, k + 1), w], { color: INK, width: 2.2 });
+    if (done) {
+      const e = nominal[steps - 1];
+      map.line([e, B], { color: RED, width: 1.6, dash: [3, 3] });
+      const [x0, y0] = map.point(e[0], e[1]), [x1, y1] = map.point(B[0], B[1]);
+      const ctx = map.ctx, label = `${fmt(miss)} km`, lx = Math.min(x0, x1) - 8, ly = (y0 + y1) / 2 + 4;
+      ctx.font = '600 12px Helvetica, Arial, sans-serif'; ctx.textAlign = 'right'; ctx.lineJoin = 'round';
+      ctx.strokeStyle = PAPER; ctx.lineWidth = 4; ctx.strokeText(label, lx, ly); ctx.fillStyle = RED; ctx.fillText(label, lx, ly);
+    }
+    map.dot(q[0], q[1], 4, GRAY, CREAM, 1.2);
+    map.dot(w[0], w[1], 4.5, INK, CREAM, 1.2);
+    map.dot(A[0], A[1], 5, CREAM, INK, 1.6); map.dot(B[0], B[1], 5, CREAM, INK, 1.6);
+    map.label(A[0], A[1], 'May 19, 22:28', 9, 14); map.label(B[0], B[1], 'May 28, 07:38', -9, -10);
+    input.value = hour; output.textContent = fmt(hour); date.textContent = utc(tMs);
+    if (done) read.textContent = `the winds alone carry the balloon up the jet, around a loop near the Azores and toward Iberia, then end ${fmt(miss)} km from where it was; the straight line ends on the fix but heads into the wind ${fmt(intoWind * 100)}% of the way`;
+    else {
+      const [u, v] = wind.at(tMs, q[0], q[1]), r = along(Math.min(1, f + 1e-3));
+      const dir = toward((r[1] - q[1]) * Math.cos(q[0] * rad), r[0] - q[0]);
+      read.textContent = `hour ${fmt(hour)}: the straight line moves ${fmt(speed, 1)} m/s toward the ${dir}; the wind under it blows ${fmt(Math.hypot(u, v))} m/s toward the ${toward(u, v)}`;
+    }
+  }
+  const play = player(host, signal, dt => { h += dt * .013; if (h > hours + 55) h = 0; draw(); });
+  bindSlider(input, play, value => { h = value; draw(); });
+  keys(map.canvas, play, dir => { h = clamp(Math.min(h, hours) + dir * 6, 0, hours); draw(); });
+  observeChartSize(host, () => { map.resize(host.clientWidth - 32); draw(); }, signal);
+}
+
 /* ── 3. forecasting versus bridging ────────────────────────────────────────── */
+/* With data-mode="forecast" the figure shows only the forward cloud, with the plain
+ * wind path through it; otherwise both clouds, with tabs to show either. */
 async function compare(host, signal) {
   const [cloud, fo, fbuf, coast, wind] = await Promise.all([clouds(), load('forecast-only.json'), load('forecast-only.bin'), load('coast-atlantic.json'), windField()]);
   if (signal.aborted) return;
-  const p = cloud.posterior, { n, steps, hours, hoursPerStep, tA } = p, fpos = new Int16Array(fbuf);
+  const p = cloud.posterior, { n, steps, hours, hoursPerStep, tA } = p, fpos = new Int16Array(fbuf), only = host.dataset.mode === 'forecast';
   const fat = (i, s) => {
     const a = Math.floor(s), b = Math.min(steps - 1, a + 1), t = s - a, ia = (i * steps + a) * 2, ib = (i * steps + b) * 2;
     return [(fpos[ia] + (fpos[ib] - fpos[ia]) * t) / 100, (fpos[ia + 1] + (fpos[ib + 1] - fpos[ia + 1]) * t) / 100];
   };
-  host.innerHTML = `${heading('Forecasting versus bridging', `${fmt(hours)} hours, the same particles and winds`)}
+  host.innerHTML = only
+    ? `${heading('A little noise, a huge spread', `${fo.n} particles, ${fmt(hours)} hours`)}
+    <div class="fleet-metrics contact-metrics"><span><b data-f>…</b>holds 90% of the particles</span><span><b data-h>…</b>hours into the gap</span></div>
+    <div class="chart-legend">${key('Particles from New Mexico, with small errors', GRAY, 'dot')}${key('The winds alone', INK)}${key('The fixes', INK, 'dot')}${windKey()}</div>
+    <div class="fleet-map-stage"></div>
+    ${footer('NOAA GFS at the hour shown')}
+    ${slider('Gap hour', hours, .5, 'Hours into the gap')}
+    <output class="chart-readout"></output>`
+    : `${heading('Forecasting versus bridging', `${fmt(hours)} hours, the same particles and winds`)}
     <div class="capture-tabs" role="group" aria-label="Show"><button type="button" data-show="both" aria-pressed="true">Both</button><button type="button" data-show="forecast" aria-pressed="false">Forecast from New Mexico</button><button type="button" data-show="bridge" aria-pressed="false">Bridge between the fixes</button></div>
     <div class="fleet-metrics contact-metrics"><span><b data-f>…</b>forecast: holds 90% of its particles</span><span><b data-b>…</b>bridge: holds 90% of its particles</span><span><b data-h>…</b>hours into the gap</span></div>
     <div class="chart-legend">${key('Forecast, knowing only the start', GRAY, 'dot')}${key('Bridge, knowing both ends', BLUE, 'dot')}${key('The fixes', INK, 'dot')}${windKey()}</div>
@@ -486,11 +568,13 @@ async function compare(host, signal) {
     ${footer('NOAA GFS at the hour shown')}
     ${slider('Gap hour', hours, .5, 'Hours into the gap')}
     <output class="chart-readout"></output>`;
-  const map = createMap(WIDE_VIEW, 'Two clouds of particles over the eight-day gap: one forecast forward from New Mexico that spreads across the Atlantic, and the bridge that also knows the fix in Spain. Space plays, arrow keys step.');
+  const map = createMap(WIDE_VIEW, only
+    ? `Particles run forward from New Mexico for eight days with small errors in heading, speed and height, spreading across the Atlantic, Europe and North Africa. Space plays, arrow keys step.`
+    : 'Two clouds of particles over the eight-day gap: one forecast forward from New Mexico that spreads across the Atlantic, and the bridge that also knows the fix in Spain. Space plays, arrow keys step.');
   host.querySelector('.fleet-map-stage').prepend(map.canvas);
   const input = host.querySelector('input'), output = host.querySelector('.fleet-time output'), read = host.querySelector('.chart-readout'), date = host.querySelector('.fleet-date');
   const A = p.drawn[0], B = p.drawn[steps - 1];
-  let h = 0, show = 'both';
+  let h = 0, show = only ? 'forecast' : 'both';
   function draw() {
     if (!map.width) return;
     const hour = Math.min(h, hours), s = hour / hoursPerStep, si = clamp(Math.round(s), 0, steps - 1), tMs = tA + hour * 3600000;
@@ -498,15 +582,24 @@ async function compare(host, signal) {
     wind.draw(map, tMs, { alpha: .14 });
     if (show !== 'bridge') for (let i = 0; i < fo.n; i++) { const q = fat(i, s); map.dot(q[0], q[1], 2.3, GRAY, null, 1, .85); }
     if (show !== 'forecast') for (let i = 0; i < n; i++) { const q = p.at(i, s); map.dot(q[0], q[1], 2.3, BLUE, null, 1, .9); }
+    if (only) {
+      const k = Math.min(Math.floor(s), steps - 1), t = s - k, a = fo.nominal[k], b = fo.nominal[Math.min(steps - 1, k + 1)];
+      map.line([...fo.nominal.slice(0, k + 1), [lerp(a[0], b[0], t), lerp(a[1], b[1], t)]], { color: INK, width: 2 });
+    }
     map.dot(A[0], A[1], 5, CREAM, INK, 1.6); map.dot(B[0], B[1], 5, CREAM, INK, 1.6);
     map.label(A[0], A[1], 'May 19', 9, 14); map.label(B[0], B[1], 'May 28', -9, 14);
     host.querySelector('[data-f]').textContent = `${fmt(fo.stats[si].r90)} km`;
-    host.querySelector('[data-b]').textContent = `${fmt(p.stats[si].r90)} km`;
+    if (!only) host.querySelector('[data-b]').textContent = `${fmt(p.stats[si].r90)} km`;
     host.querySelector('[data-h]').textContent = fmt(hour);
     input.value = hour; output.textContent = fmt(hour); date.textContent = utc(tMs);
-    read.textContent = hour >= hours - .5
-      ? `at the end the forecast’s particles are a median ${fmt(fo.endToB.median)} km from where the balloon was, and ${fmt(fo.endToB.within300 * 100, 1)}% are within 300 km; every bridge ends on the fix`
-      : 'the forecast only knows where the balloon started; the bridge also knows where it was 201 hours later';
+    const end = hour >= hours - .5;
+    read.textContent = only
+      ? end
+        ? `after ${fmt(hours)} hours the particles are a median ${fmt(fo.endToB.median)} km from where the balloon was, and ${fmt(fo.endToB.within300 * 100, 1)}% are within 300 km of it`
+        : 'each particle rides the same winds with small errors of its own in heading, speed and height; the errors are small, the spread is not'
+      : end
+        ? `at the end the forecast’s particles are a median ${fmt(fo.endToB.median)} km from where the balloon was, and ${fmt(fo.endToB.within300 * 100, 1)}% are within 300 km; every bridge ends on the fix`
+        : 'the forecast only knows where the balloon started; the bridge also knows where it was 201 hours later';
   }
   host.querySelectorAll('[data-show]').forEach(button => button.onclick = () => {
     show = button.dataset.show;
@@ -566,7 +659,7 @@ async function meeting(host, signal) {
   observeChartSize(host, () => { map.resize(host.clientWidth - 32); draw(); }, signal);
 }
 
-/* ── 5. how sure the line is ───────────────────────────────────────────────── */
+/* ── 6. how sure the line is ───────────────────────────────────────────────── */
 async function line(host, signal) {
   const [cloud, coast] = await Promise.all([clouds(), load('coast-atlantic.json')]);
   if (signal.aborted) return;
@@ -615,7 +708,7 @@ async function line(host, signal) {
   observeChartSize(host, () => { map.resize(host.clientWidth - 32); draw(); }, signal);
 }
 
-/* ── 6. where it goes next ─────────────────────────────────────────────────── */
+/* ── 7. where it goes next ─────────────────────────────────────────────────── */
 async function forecast(host, signal) {
   const [f, buffer, coast] = await Promise.all([load('forecast.json'), load('forecast.bin'), load('/assets/payload-dev-log/coastlines.json')]);
   if (signal.aborted) return;
@@ -685,7 +778,7 @@ async function forecast(host, signal) {
   observeChartSize(host, () => { width = host.clientWidth - 32; map.resize(width); draw(); }, signal);
 }
 
-const figures = { replay, tube, resolution, compare, meeting, line, forecast };
+const figures = { replay, plain, tube, resolution, compare, meeting, line, forecast };
 
 export function mountFigures(root, signal) {
   const observer = new IntersectionObserver(entries => {
