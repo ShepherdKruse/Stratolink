@@ -1,0 +1,31 @@
+.home-menu, .home-menu-backdrop { display: none; }
+@media (min-width: 1024px) {
+  .site-header .home-nav { font-size: 16px; }
+  .site-header .home-nav { gap: 40px; }
+}
+@media (max-width: 700px) {
+  :is(.site-header, .blog-header) > a { position: relative; z-index: 2; }
+  :is(.site-header, .blog-header) > a img { width: 108px; }
+  .site-header .home-nav { display: none; }
+  .home-menu { display: block; margin-left: auto; }
+  .home-menu-toggle { position: relative; z-index: 2; display: grid; place-items: center; width: 44px; height: 44px; margin-right: -2px; padding: 0; border: 0; background: transparent; color: inherit; cursor: pointer; -webkit-tap-highlight-color: transparent; }
+  .home-menu-toggle:focus-visible { outline: 2px solid currentColor; outline-offset: 2px; }
+  .home-menu-toggle svg { width: 17px; height: 17px; overflow: visible; transition: transform 150ms ease; }
+  .home-menu-toggle:active svg { transform: scale(.94); }
+  .home-menu-toggle path { stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; transform-origin: 10px 10px; transition: transform 280ms cubic-bezier(.32,.72,0,1), opacity 160ms ease; }
+  .home-menu-toggle[aria-expanded="true"] path:nth-child(1) { transform: translateY(6px) rotate(45deg); transform-origin: 10px 4px; }
+  .home-menu-toggle[aria-expanded="true"] path:nth-child(2) { opacity: 0; transform: scaleX(.4); }
+  .home-menu-toggle[aria-expanded="true"] path:nth-child(3) { transform: translateY(-6px) rotate(-45deg); transform-origin: 10px 16px; }
+  .home-menu-backdrop { display: block; position: fixed; inset: 0; z-index: 29; background: var(--paper); visibility: hidden; opacity: 0; transform: translateY(-12px); pointer-events: none; transition: opacity 220ms ease, transform 280ms cubic-bezier(.32,.72,0,1), visibility 0s 280ms; }
+  .home-menu-open .home-menu-backdrop { visibility: visible; opacity: 1; transform: none; transition-delay: 0s; pointer-events: auto; }
+  :is(.site-header, .blog-header) .home-menu nav { position: absolute; inset: 0 0 auto; height: 100dvh; overflow-y: auto; overscroll-behavior: contain; display: flex; flex-direction: column; justify-content: safe center; align-items: flex-start; gap: 12px; padding: max(100px, env(safe-area-inset-top)) var(--gutter) max(80px, env(safe-area-inset-bottom)); visibility: hidden; pointer-events: none; transition: visibility 0s 220ms; }
+  :is(.site-header, .blog-header) .home-menu nav a { font-size: clamp(40px, 10vw, 60px); font-weight: 400; letter-spacing: -.045em; line-height: 1.15; padding: 6px 0; opacity: 0; transform: translateY(14px); pointer-events: none; transition: opacity 160ms ease, transform 220ms cubic-bezier(.32,.72,0,1); }
+  .home-menu-open :is(.site-header, .blog-header) .home-menu nav { visibility: visible; pointer-events: auto; transition-delay: 0s; }
+  .home-menu-open :is(.site-header, .blog-header) .home-menu nav a { opacity: 1; transform: none; pointer-events: auto; transition-duration: 260ms; }
+  .home-menu-open :is(.site-header, .blog-header) .home-menu nav a:nth-child(2) { transition-delay: 30ms; }
+  .home-menu-open :is(.site-header, .blog-header) .home-menu nav a:nth-child(3) { transition-delay: 60ms; }
+  .home-menu-open :is(.site-header, .blog-header) .home-menu nav a:nth-child(4) { transition-delay: 90ms; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .home-menu-backdrop, :is(.site-header, .blog-header) .home-menu nav, :is(.site-header, .blog-header) .home-menu nav a, .home-menu-toggle path, .home-menu-toggle svg { transition: none !important; }
+}

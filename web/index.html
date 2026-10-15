@@ -40,8 +40,24 @@
   <script type="module" src="/src/main.js"></script>
 </head>
 <body>
+  <div class="home-menu-backdrop" aria-hidden="true"></div>
   <header class="site-header">
     <a href="/" aria-label="Stratolink home"><img src="/assets/stratolink-wordmark.svg" alt="stratolink" width="7581" height="1510"></a>
+    <nav class="home-nav" aria-label="Main navigation">
+      <a href="/dashboard">dashboard</a>
+      <a href="/docs">docs</a>
+      <a href="/blog">blog</a>
+      <a href="mailto:contact@stratolink.org">contact</a>
+    </nav>
+    <div class="home-menu">
+      <button class="home-menu-toggle" type="button" aria-label="Open navigation" aria-expanded="false" aria-controls="home-menu-links"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M2 4h16"/><path d="M2 10h16"/><path d="M2 16h16"/></svg></button>
+      <nav id="home-menu-links" aria-label="Mobile navigation" inert>
+        <a href="/dashboard">dashboard</a>
+        <a href="/docs">docs</a>
+        <a href="/blog">blog</a>
+        <a href="mailto:contact@stratolink.org">contact</a>
+      </nav>
+    </div>
   </header>
   <main>
     <section class="launch" data-pending aria-label="Stratolink balloon launch over San Francisco">

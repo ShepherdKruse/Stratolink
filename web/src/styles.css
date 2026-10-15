@@ -1,3 +1,4 @@
+@import './mobile-menu.css';
 @import './page-transitions.css';
 
 :root {
@@ -27,12 +28,22 @@ img, svg, canvas { display: block; }
   z-index: 30;
   display: flex;
   align-items: center;
+  justify-content: space-between;
+  gap: 24px;
   height: var(--header-height);
   padding-inline: var(--gutter);
+  color: #fff;
   mix-blend-mode: difference;
+  pointer-events: none;
 }
 
-.site-header img { width: 130px; height: auto; }
+.site-header > a, .site-header nav a, .home-menu-toggle { pointer-events: auto; }
+.site-header > a { flex-shrink: 0; }
+.site-header > a img { width: 130px; height: auto; }
+.site-header nav { color: #fff; font-size: 14px; letter-spacing: .02em; }
+.site-header nav a { padding-block: 6px; }
+.home-nav { display: flex; align-items: center; gap: clamp(20px, 2.7vw, 44px); }
+
 .launch { height: 400lvh; }
 .launch-viewport {
   position: sticky;

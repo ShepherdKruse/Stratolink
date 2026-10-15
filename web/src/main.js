@@ -1,3 +1,4 @@
+import { initHomeMenu } from './home-menu.js';
 const launch = document.querySelector('.launch');
 const viewport = document.querySelector('.launch-viewport');
 const foreground = document.querySelector('.foreground-layer');
@@ -8,6 +9,7 @@ const storyWindow = document.querySelector('.story-window');
 const storyItems = [...document.querySelectorAll('.essay-body > p, .essay-body > section')];
 const footer = document.querySelector('.site-footer');
 const header = document.querySelector('.site-header');
+const menu = initHomeMenu(header);
 const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
 // Dev diagnostics: ?perf shows a scroll-smoothness overlay; ?perf&static also freezes the scene script.
 const perfFlags = new URLSearchParams(location.search);
@@ -25,6 +27,7 @@ let frame;
 let firstReveal = true;
 let docTop = { launch: 0, footer: 0 };
 let footerHeight = 0;
+let headerHeight = 0;
 
 // Setting an identical style value still triggers style recalculation; skip it.
 const setStyle = (element, property, value) => {
@@ -62,6 +65,7 @@ function measureScene() {
   // Document-space positions, so per-frame updates need no layout reads.
   docTop = { launch: launch.getBoundingClientRect().top + scrollY, footer: footer.getBoundingClientRect().top + scrollY };
   footerHeight = footer.offsetHeight;
+  headerHeight = header.offsetHeight;
   if (cssScroll) writeSceneProgram();
   updateScene();
 }
@@ -93,7 +97,7 @@ function writeSceneProgram() {
 @keyframes sl-warmth { ${stops(12, x => `opacity: ${smooth(x).toFixed(4)}`)} }
 @keyframes sl-cloud { ${stops(24, x => { const edge = cloudEdge + height * 1.12 * smooth(x); return `--cloud-fade-start: ${px(edge)}; --cloud-fade-end: ${px(edge + cloudFeather)}`; })} }
 @keyframes sl-footer { ${stops(12, x => `opacity: ${smooth(x).toFixed(4)}; transform: translateY(${px(32 * (1 - smooth(x)))})`)} }
-@keyframes sl-header { ${stops(12, x => `transform: translateY(${px(-80 * smooth(x))})`)} }
+@keyframes sl-header { ${stops(12, x => `transform: translateY(${px(-headerHeight * smooth(x))})`)} }
 .foreground-layer { animation: sl-city linear both; ${timeline} ${range(0, cityEnd)} }
 .balloon-layer { animation: sl-balloon linear both; ${timeline} ${range(0, duration)} }
 .story { animation: sl-story linear both; ${timeline} ${range(readingStart, duration)} }
@@ -153,9 +157,12 @@ function updateScene() {
     setVar(footer, '--reveal', String(smooth(clamp((innerHeight - footerTop) / Math.min(height * .5, footerHeight)))));
   }
 
-  if (!cssScroll) {
-    const footerHeaderExit = smooth(clamp((height - footerTop) / Math.min(height * .4, footerHeight)));
-    setStyle(header, 'transform', `translateY(${-80 * footerHeaderExit}px)`);
+  const footerHeaderExit = smooth(clamp((height - footerTop) / Math.min(height * .4, footerHeight)));
+  const headerHidden = footerHeaderExit === 1;
+  if (header.inert !== headerHidden) header.inert = headerHidden;
+  if (footerHeaderExit > 0 && menu.isOpen) menu.close();
+  if (!cssScroll || reducedMotion.matches) {
+    setStyle(header, 'transform', `translateY(${-headerHeight * footerHeaderExit}px)`);
   }
   frame = null;
   if (perfMode) (window.__scenePerf ??= { ms: [] }).ms.push(performance.now() - perfStart);
