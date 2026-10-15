@@ -1,0 +1,14 @@
+/* Figure chrome specific to "Drawing the path between packets"; the shared chart
+   styles come from /payload-dev-log/article.css. */
+.packet-strip { display: block; width: 100%; height: 30px; margin-top: 12px; border-radius: 4px; cursor: crosshair; }
+.interactive-chart .fleet-play { padding: 0 14px; width: auto; }
+.chart-key .key-dot { width: 9px; height: 9px; border-radius: 50%; }
+.chart-key .key-diamond { width: 9px; height: 9px; transform: rotate(45deg); border-radius: 1px; }
+.spread-chart { display: block; max-width: 100%; margin-top: 14px; }
+.fleet-map-stage .fleet-map { display: block; }
+.pipeline { display: block; width: 100%; height: auto; }
+
+.tube-inset { display: flex; flex-wrap: wrap; gap: 16px; margin: 14px 0 4px; }
+.tube-inset figure { margin: 0; }
+.tube-inset canvas { display: block; border-radius: 6px; }
+.tube-inset figcaption { margin-top: 6px; font-size: 12px; color: #62675e; }

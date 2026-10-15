@@ -8,6 +8,10 @@ let currentOrigin = history.state?.blogOrigin || (document.querySelector('.post-
 let animateHistory = true;
 let currentPath = location.pathname;
 let articleCleanup;
+const articleModules = {
+  'payload-dev-log': () => import('./payload-dev-log/article.js'),
+  'wind-path': () => import('./wind-path/article.js'),
+};
 let fallbackCleanup;
 history.scrollRestoration = 'manual';
 
@@ -23,8 +27,8 @@ async function prepareArticle(page) {
     }
     return style;
   }));
-  const module = page.querySelector('[data-interactive-article]')
-    ? await import('./payload-dev-log/article.js') : null;
+  const article = page.querySelector('[data-interactive-article]')?.dataset.interactiveArticle;
+  const module = article ? await articleModules[article]?.() : null;
   return main => {
     document.querySelectorAll('link[data-article-style]').forEach(style => { style.media = styles.includes(style) ? 'all' : 'not all'; });
     return module?.mountArticle(main);
