@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="820" viewBox="0 0 800 820">
+<rect width="800" height="820" fill="white"/>
+<g font-family="Arial,sans-serif" fill="#102833">
+<text x="40" y="42" font-size="25">U6 AS7331 physical placement target</text>
+<text x="40" y="73" font-size="17">Component side viewed from above. Board top is up.</text>
+<rect x="244" y="160" width="312" height="438" rx="5" fill="#e7ebed" stroke="#102833" stroke-width="2"/>
+<rect x="343" y="322" width="114" height="114" fill="#84c7d4" stroke="#102833"/>
+<rect x="469.0" y="546.9999999999995" width="42" height="42" fill="#ef9b29" stroke="#102833"/>
+<text x="490.0" y="572.9999999999995" text-anchor="middle" font-size="16">1</text>
+<rect x="409.0" y="546.9999999999995" width="42" height="42" fill="#a5b8bf" stroke="#102833"/>
+<text x="430.0" y="572.9999999999995" text-anchor="middle" font-size="16">2</text>
+<rect x="349.0" y="546.9999999999995" width="42" height="42" fill="#a5b8bf" stroke="#102833"/>
+<text x="370.0" y="572.9999999999995" text-anchor="middle" font-size="16">3</text>
+<rect x="289.0" y="546.9999999999995" width="42" height="42" fill="#a5b8bf" stroke="#102833"/>
+<text x="310.0" y="572.9999999999995" text-anchor="middle" font-size="16">4</text>
+<rect x="253.00000000000034" y="448.0" width="42" height="42" fill="#a5b8bf" stroke="#102833"/>
+<text x="274.00000000000034" y="474.0" text-anchor="middle" font-size="16">5</text>
+<rect x="253.00000000000034" y="388.0" width="42" height="42" fill="#a5b8bf" stroke="#102833"/>
+<text x="274.00000000000034" y="414.0" text-anchor="middle" font-size="16">6</text>
+<rect x="253.00000000000034" y="328.0" width="42" height="42" fill="#a5b8bf" stroke="#102833"/>
+<text x="274.00000000000034" y="354.0" text-anchor="middle" font-size="16">7</text>
+<rect x="253.00000000000034" y="268.0" width="42" height="42" fill="#a5b8bf" stroke="#102833"/>
+<text x="274.00000000000034" y="294.0" text-anchor="middle" font-size="16">8</text>
+<rect x="289.0" y="168.99999999999966" width="42" height="42" fill="#a5b8bf" stroke="#102833"/>
+<text x="310.0" y="194.99999999999966" text-anchor="middle" font-size="16">9</text>
+<rect x="349.0" y="168.99999999999966" width="42" height="42" fill="#a5b8bf" stroke="#102833"/>
+<text x="370.0" y="194.99999999999966" text-anchor="middle" font-size="16">10</text>
+<rect x="409.0" y="168.99999999999966" width="42" height="42" fill="#a5b8bf" stroke="#102833"/>
+<text x="430.0" y="194.99999999999966" text-anchor="middle" font-size="16">11</text>
+<rect x="469.0" y="168.99999999999966" width="42" height="42" fill="#a5b8bf" stroke="#102833"/>
+<text x="490.0" y="194.99999999999966" text-anchor="middle" font-size="16">12</text>
+<rect x="504.99999999999966" y="268.0" width="42" height="42" fill="#a5b8bf" stroke="#102833"/>
+<text x="525.9999999999997" y="294.0" text-anchor="middle" font-size="16">13</text>
+<rect x="504.99999999999966" y="328.0" width="42" height="42" fill="#a5b8bf" stroke="#102833"/>
+<text x="525.9999999999997" y="354.0" text-anchor="middle" font-size="16">14</text>
+<rect x="504.99999999999966" y="388.0" width="42" height="42" fill="#a5b8bf" stroke="#102833"/>
+<text x="525.9999999999997" y="414.0" text-anchor="middle" font-size="16">15</text>
+<rect x="504.99999999999966" y="448.0" width="42" height="42" fill="#a5b8bf" stroke="#102833"/>
+<text x="525.9999999999997" y="474.0" text-anchor="middle" font-size="16">16</text>
+<circle cx="514" cy="553" r="9" fill="#bc5b00"/>
+<text x="40" y="646" font-size="19">Pin 1 / package dot: lower-right. Do not mirror.</text>
+<text x="40" y="679" font-size="17">Center: PCB (74.250, 37.490) mm; CPL (74.250, -37.490) mm</text>
+<text x="40" y="708" font-size="17">Pin 1: PCB (75.000, 39.065) mm; CPL (75.000, -39.065) mm</text>
+<text x="40" y="737" font-size="17">Native and exported rotation: 180 degrees, top side.</text>
+<text x="40" y="766" font-size="17">JLC must map its library rotation to this physical target.</text>
+<text x="40" y="795" font-size="14">Nominal body 2.60 x 3.65 mm; 16 lands; no center exposed pad.</text>
+</g></svg>

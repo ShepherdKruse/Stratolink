@@ -1,0 +1,21 @@
+Observed 2026-10-16 in saved Y26 edit form.
+{
+  "checkboxes": [
+    {
+      "checked": true,
+      "label": "Do not confirm automatically"
+    }
+  ],
+  "options": [
+    {
+      "option": "Confirm Production file\nNoYes",
+      "value": "Yes"
+    },
+    {
+      "option": "Confirm Parts Placement\nNo Yes",
+      "value": "Yes"
+    }
+  ]
+}
+Dialog text: To avoid production delays, please confirm within 48 hours when the production file is ready. Otherwise, your order will be automatically confirmed and put into production directly.
+The Do not confirm automatically checkbox is checked.

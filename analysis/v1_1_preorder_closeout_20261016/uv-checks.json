@@ -1,0 +1,367 @@
+{
+  "status": "PASS",
+  "source_hashes": {
+    "stratolink.kicad_pcb": "e02bf87186fc86b90569b6ea25041a34c7d2e32ef39b951847956cc2d2eb0f13",
+    "stratolink.kicad_sch": "092ddb3451545cc6f7d7d64d8c02c933e89a40acb6897d865e3a8936d54e21fb",
+    "stratolink.kicad_pro": "c9be5b22927d7fe889188023e69f6e774e808aa79d4ea13eb1b2ddc348ffe2f9",
+    "lib/Stratolink_UV.kicad_sym": "16063d37f9584c864a2589881d927f8d866192cf1521cc60e69738a905187230",
+    "lib/Stratolink_v1p1_U6_AS7331_OLGA16.kicad_mod": "dd991771e76105bfef10cb046bc9b54a1a0c8cc0c7b19c0338a8981ae8168923",
+    "3d/AS7331_OLGA16.wrl": "afdc02ac1a2cd3a2756fab812bc0d14105fdcd7a01981381f25e329c4c64e443"
+  },
+  "primary_datasheet_sha256": "60c13168a4012c1642277b8d8f9557e6f835c3b9efbfd7cc086be25c5a4c670a",
+  "sixteen_primary_pin_and_land_checks": {
+    "1": {
+      "function": "VSSA",
+      "net": "GND",
+      "local_mm": [
+        -0.75,
+        -1.575
+      ],
+      "pcb_mm": [
+        75.0,
+        39.065
+      ],
+      "cpl_axes_mm": [
+        75.0,
+        -39.065
+      ]
+    },
+    "2": {
+      "function": "VSSA",
+      "net": "GND",
+      "local_mm": [
+        -0.25,
+        -1.575
+      ],
+      "pcb_mm": [
+        74.5,
+        39.065
+      ],
+      "cpl_axes_mm": [
+        74.5,
+        -39.065
+      ]
+    },
+    "3": {
+      "function": "VDDA",
+      "net": "+3.3V",
+      "local_mm": [
+        0.25,
+        -1.575
+      ],
+      "pcb_mm": [
+        74.0,
+        39.065
+      ],
+      "cpl_axes_mm": [
+        74.0,
+        -39.065
+      ]
+    },
+    "4": {
+      "function": "REXT",
+      "net": "/UV_REXT",
+      "local_mm": [
+        0.75,
+        -1.575
+      ],
+      "pcb_mm": [
+        73.5,
+        39.065
+      ],
+      "cpl_axes_mm": [
+        73.5,
+        -39.065
+      ]
+    },
+    "5": {
+      "function": "VSSA",
+      "net": "GND",
+      "local_mm": [
+        1.05,
+        -0.75
+      ],
+      "pcb_mm": [
+        73.2,
+        38.24
+      ],
+      "cpl_axes_mm": [
+        73.2,
+        -38.24
+      ]
+    },
+    "6": {
+      "function": "VSSA",
+      "net": "GND",
+      "local_mm": [
+        1.05,
+        -0.25
+      ],
+      "pcb_mm": [
+        73.2,
+        37.74
+      ],
+      "cpl_axes_mm": [
+        73.2,
+        -37.74
+      ]
+    },
+    "7": {
+      "function": "A1",
+      "net": "GND",
+      "local_mm": [
+        1.05,
+        0.25
+      ],
+      "pcb_mm": [
+        73.2,
+        37.24
+      ],
+      "cpl_axes_mm": [
+        73.2,
+        -37.24
+      ]
+    },
+    "8": {
+      "function": "SYN",
+      "net": "GND",
+      "local_mm": [
+        1.05,
+        0.75
+      ],
+      "pcb_mm": [
+        73.2,
+        36.74
+      ],
+      "cpl_axes_mm": [
+        73.2,
+        -36.74
+      ]
+    },
+    "9": {
+      "function": "READY",
+      "net": "unconnected-(U6-READY-Pad9)",
+      "local_mm": [
+        0.75,
+        1.575
+      ],
+      "pcb_mm": [
+        73.5,
+        35.915
+      ],
+      "cpl_axes_mm": [
+        73.5,
+        -35.915
+      ]
+    },
+    "10": {
+      "function": "VDDD",
+      "net": "+3.3V",
+      "local_mm": [
+        0.25,
+        1.575
+      ],
+      "pcb_mm": [
+        74.0,
+        35.915
+      ],
+      "cpl_axes_mm": [
+        74.0,
+        -35.915
+      ]
+    },
+    "11": {
+      "function": "VSSD",
+      "net": "GND",
+      "local_mm": [
+        -0.25,
+        1.575
+      ],
+      "pcb_mm": [
+        74.5,
+        35.915
+      ],
+      "cpl_axes_mm": [
+        74.5,
+        -35.915
+      ]
+    },
+    "12": {
+      "function": "SDA",
+      "net": "SDA",
+      "local_mm": [
+        -0.75,
+        1.575
+      ],
+      "pcb_mm": [
+        75.0,
+        35.915
+      ],
+      "cpl_axes_mm": [
+        75.0,
+        -35.915
+      ]
+    },
+    "13": {
+      "function": "SCL",
+      "net": "SCL",
+      "local_mm": [
+        -1.05,
+        0.75
+      ],
+      "pcb_mm": [
+        75.3,
+        36.74
+      ],
+      "cpl_axes_mm": [
+        75.3,
+        -36.74
+      ]
+    },
+    "14": {
+      "function": "A0",
+      "net": "GND",
+      "local_mm": [
+        -1.05,
+        0.25
+      ],
+      "pcb_mm": [
+        75.3,
+        37.24
+      ],
+      "cpl_axes_mm": [
+        75.3,
+        -37.24
+      ]
+    },
+    "15": {
+      "function": "VSSA",
+      "net": "GND",
+      "local_mm": [
+        -1.05,
+        -0.25
+      ],
+      "pcb_mm": [
+        75.3,
+        37.74
+      ],
+      "cpl_axes_mm": [
+        75.3,
+        -37.74
+      ]
+    },
+    "16": {
+      "function": "VSSA",
+      "net": "GND",
+      "local_mm": [
+        -1.05,
+        -0.75
+      ],
+      "pcb_mm": [
+        75.3,
+        38.24
+      ],
+      "cpl_axes_mm": [
+        75.3,
+        -38.24
+      ]
+    }
+  },
+  "support": {
+    "C14": {
+      "value": "100nF",
+      "mpn": "CL05B104KO5NNNC",
+      "lcsc": "C1525",
+      "nets": {
+        "1": "GND",
+        "2": "+3.3V"
+      },
+      "pcb_mm": [
+        73.94,
+        34.85
+      ],
+      "layer": "F.Cu"
+    },
+    "C23": {
+      "value": "100nF",
+      "mpn": "CL05B104KO5NNNC",
+      "lcsc": "C1525",
+      "nets": {
+        "1": "GND",
+        "2": "+3.3V"
+      },
+      "pcb_mm": [
+        74.83,
+        40.42
+      ],
+      "layer": "F.Cu"
+    },
+    "R27": {
+      "value": "3.3M\u03a9",
+      "mpn": "MCU0805MD3304BP500",
+      "lcsc": "C4313228",
+      "nets": {
+        "1": "/UV_REXT",
+        "2": "GND"
+      },
+      "pcb_mm": [
+        72.28,
+        40.83
+      ],
+      "layer": "F.Cu"
+    }
+  },
+  "local_bypass_distance": {
+    "3": {
+      "capacitor": "C23",
+      "pad_center_distance_mm": 1.3995,
+      "scope": "straight-line geometry, not loop impedance"
+    },
+    "10": {
+      "capacitor": "C14",
+      "pad_center_distance_mm": 1.1941,
+      "scope": "straight-line geometry, not loop impedance"
+    }
+  },
+  "pullups": {
+    "R11": {
+      "ohms": 4700,
+      "signal": "SDA",
+      "supply": "+3.3V"
+    },
+    "R12": {
+      "ohms": 4700,
+      "signal": "SCL",
+      "supply": "+3.3V"
+    }
+  },
+  "cpl": {
+    "Designator": "U6",
+    "Mid X": "74.250000",
+    "Mid Y": "-37.490000",
+    "Layer": "top",
+    "Rotation": "180.000000"
+  },
+  "physical_pin1": "lower-right in top view; PCB (75.000,39.065), CPL axes (75.000,-39.065) mm",
+  "supplier_rotation_calibration": "physical orientation fully specified; supplier library convention not provided",
+  "full_population_references": 58,
+  "full_U6_paste_apertures": 16,
+  "vias_intersecting_maximum_U6_body": [
+    {
+      "uuid": "f0981fa8-cf85-4ac4-9f82-407039577e29",
+      "pcb_mm": [
+        72.771,
+        39.243
+      ],
+      "net": "GND",
+      "diameter_mm": 0.6,
+      "drill_mm": 0.3,
+      "front_tented": true,
+      "back_tented": true,
+      "body_overlap_mm": 0.171
+    }
+  ],
+  "aperture_area_to_wall_ratio_100um": 0.75,
+  "aperture_area_to_wall_ratio_120um": 0.625,
+  "native_files_unchanged": true
+}

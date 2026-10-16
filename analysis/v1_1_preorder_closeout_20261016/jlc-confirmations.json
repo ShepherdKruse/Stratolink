@@ -1,0 +1,18 @@
+{
+  "checkboxes": [
+    {
+      "checked": true,
+      "label": "Do not confirm automatically"
+    }
+  ],
+  "options": [
+    {
+      "option": "Confirm Production file\nNoYes",
+      "value": "Yes"
+    },
+    {
+      "option": "Confirm Parts Placement\nNo Yes",
+      "value": "Yes"
+    }
+  ]
+}
