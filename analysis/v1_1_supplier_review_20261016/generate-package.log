@@ -1,0 +1,90 @@
+07:58:12 AM: Debug: Adding duplicate image handler for 'PNG file'
+07:58:12 AM: Debug: Adding duplicate image handler for 'JPEG file'
+07:58:12 AM: Debug: Adding duplicate image handler for 'TIFF file'
+07:58:12 AM: Debug: Adding duplicate image handler for 'GIF file'
+07:58:12 AM: Debug: Adding duplicate image handler for 'PNM file'
+07:58:12 AM: Debug: Adding duplicate image handler for 'PCX file'
+07:58:12 AM: Debug: Adding duplicate image handler for 'IFF file'
+07:58:12 AM: Debug: Adding duplicate image handler for 'Windows icon file'
+07:58:12 AM: Debug: Adding duplicate image handler for 'Windows cursor file'
+07:58:12 AM: Debug: Adding duplicate image handler for 'Windows animated cursor file'
+07:58:12 AM: Debug: Adding duplicate image handler for 'TGA file'
+07:58:12 AM: Debug: Adding duplicate image handler for 'XPM file'
+07:58:12 AM: Debug: Adding duplicate image handler for 'PNG file'
+07:58:12 AM: Debug: Adding duplicate image handler for 'JPEG file'
+07:58:12 AM: Debug: Adding duplicate image handler for 'TIFF file'
+07:58:12 AM: Debug: Adding duplicate image handler for 'GIF file'
+07:58:12 AM: Debug: Adding duplicate image handler for 'PNM file'
+07:58:12 AM: Debug: Adding duplicate image handler for 'PCX file'
+07:58:12 AM: Debug: Adding duplicate image handler for 'IFF file'
+07:58:12 AM: Debug: Adding duplicate image handler for 'Windows icon file'
+07:58:12 AM: Debug: Adding duplicate image handler for 'Windows cursor file'
+07:58:12 AM: Debug: Adding duplicate image handler for 'Windows animated cursor file'
+07:58:12 AM: Debug: Adding duplicate image handler for 'TGA file'
+07:58:12 AM: Debug: Adding duplicate image handler for 'XPM file'
+07:58:13 AM: Debug: Adding duplicate image handler for 'PNG file'
+07:58:13 AM: Debug: Adding duplicate image handler for 'JPEG file'
+07:58:13 AM: Debug: Adding duplicate image handler for 'TIFF file'
+07:58:13 AM: Debug: Adding duplicate image handler for 'GIF file'
+07:58:13 AM: Debug: Adding duplicate image handler for 'PNM file'
+07:58:13 AM: Debug: Adding duplicate image handler for 'PCX file'
+07:58:13 AM: Debug: Adding duplicate image handler for 'IFF file'
+07:58:13 AM: Debug: Adding duplicate image handler for 'Windows icon file'
+07:58:13 AM: Debug: Adding duplicate image handler for 'Windows cursor file'
+07:58:13 AM: Debug: Adding duplicate image handler for 'Windows animated cursor file'
+07:58:13 AM: Debug: Adding duplicate image handler for 'TGA file'
+07:58:13 AM: Debug: Adding duplicate image handler for 'XPM file'
+{
+  "output": "/Users/twarn/Repositories/Stratolink/hardware/gerbers/v1.1-pilot-supplier-20261016",
+  "pcb_sha256": "25b201eb09c6746a22d1c3be42f7d4023319dd6fa5e3e587dc8cf42d97bb4d7f",
+  "assembly_count": 57,
+  "exclusions": [
+    {
+      "ref": "AE1",
+      "reason": "manual assembly / no purchased placement"
+    },
+    {
+      "ref": "AE2",
+      "reason": "manual assembly / no purchased placement"
+    },
+    {
+      "ref": "C5",
+      "reason": "manual assembly / no purchased placement"
+    },
+    {
+      "ref": "H1",
+      "reason": "mechanical board-only feature"
+    },
+    {
+      "ref": "H2",
+      "reason": "mechanical board-only feature"
+    },
+    {
+      "ref": "J1",
+      "reason": "manual assembly / no purchased placement"
+    },
+    {
+      "ref": "J2",
+      "reason": "manual assembly / no purchased placement"
+    },
+    {
+      "ref": "J3",
+      "reason": "manual assembly / no purchased placement"
+    },
+    {
+      "ref": "J4",
+      "reason": "manual assembly / no purchased placement"
+    },
+    {
+      "ref": "J20",
+      "reason": "manual assembly / no purchased placement"
+    },
+    {
+      "ref": "U6",
+      "reason": "Assembly variant DNP: User-approved initial pilot omission because the exact sensor has no JLC inventory. Populate R27/C14/C23; use stratolink_v1_1_uv_dnp firmware. Later U6 population requires its own driver, optical qualification and assembly orientation review.",
+      "mpn": "AS7331-AQFM",
+      "lcsc": "C20482877"
+    }
+  ],
+  "source_unchanged": true
+}

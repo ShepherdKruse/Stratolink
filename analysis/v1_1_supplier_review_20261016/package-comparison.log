@@ -1,0 +1,40 @@
+{
+  "pcb_sha256": "25b201eb09c6746a22d1c3be42f7d4023319dd6fa5e3e587dc8cf42d97bb4d7f",
+  "schematic_sha256": "c772c2a0edff4d6f7616afb0988fc95c2cbb8c2d3572c1429fc0f3718f69e921",
+  "old_package": "/Users/twarn/Repositories/Stratolink/hardware/gerbers/v1.1-pilot",
+  "new_package": "/Users/twarn/Repositories/Stratolink/hardware/gerbers/v1.1-pilot-supplier-20261016",
+  "old_manifest_sha256": "bcc2571bfdc804e6a9dfb09669960967b42bb3188495c094fc539065c7725538",
+  "new_manifest_sha256": "58f6b271612645eee0a7e32a996dce4e63b2fe7ef8eb292749b16f16228b7e86",
+  "new_fabrication_zip_sha256": "a756b32d7d72c206e7a1406b1cd9a343a0d6dbbd2529b9e65543a03723fb808f",
+  "bom_sha256": "55b681ab8d23de3ec711cbc7957fc5375e99b6118513ed9acee47a928077a6cb",
+  "old_cpl_sha256": "bc35d68dcf8d80f05098ff822155f5f8e560cac0e1e6f120e70e3f256fac7adb",
+  "new_cpl_sha256": "bf3bb3cf5d633fe95922b7a415dff4278c8bb8fd261d1d737c2401d201be1b00",
+  "profile_sha256": "ebf75780eb9b6e93579abe539e69e0881a1cfff8c17023f80d8a1eb68811205c",
+  "checker_sha256": "ee7c25a26f7dc6849fa5a60eb625d3c562b10c60cc0fd60217490c56bc50c613",
+  "source_files_identical_and_unchanged": 166,
+  "frozen_pilot_and_engineer_manufacturing_evidence_unchanged": true,
+  "bom_byte_identical": true,
+  "native_positions_byte_identical": true,
+  "netlist_identical_except_export_timestamp": true,
+  "stencil_pcb_byte_identical": true,
+  "all_zip_members_match_export_files": true,
+  "only_placement_change": {
+    "ref": "U8",
+    "before": {
+      "Designator": "U8",
+      "Mid X": "56.572500",
+      "Mid Y": "-49.220000",
+      "Layer": "top",
+      "Rotation": "180.000000"
+    },
+    "after": {
+      "Designator": "U8",
+      "Mid X": "56.572500",
+      "Mid Y": "-49.220000",
+      "Layer": "top",
+      "Rotation": "90.000000"
+    }
+  },
+  "other_placement_rows_unchanged": 56,
+  "supplier_reimport_status": "Pending fresh preview verification; this comparison does not certify supplier model orientation or factory CAM."
+}
