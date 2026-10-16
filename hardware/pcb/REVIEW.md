@@ -4,6 +4,7 @@ Open [stratolink.kicad_pro](stratolink.kicad_pro) in KiCad 10. Current PCB SHA-2
 
 This revision adopts the engineer-rerouted board. The circuit is unchanged. Local repairs remove two shorts, reconnect two ground sections, correct mask clearances and two copper pockets, and move only C5 by 1.30 mm to restore ground beneath the GNSS input. All other 67 footprint poses are retained from the supplied board. The upward GNSS antenna, side solar mounts and rear capacitor remain.
 
+- [Pre-order closeout and the single current supplier wait](../../analysis/v1_1_preorder_closeout_20261016/README.md)
 - [Final adversarial sweep and current source proofs](../../analysis/v1_1_final_sweep_20261016/README.md)
 - [Engineer reroute and earlier bounded fixes](../../analysis/v1_1_engineer_review_20261015/README.md)
 - [KiCad project and parts library downloads](../downloads/README.md)
