@@ -1,0 +1,148 @@
+{
+  "source_pcb_sha256": "e02bf87186fc86b90569b6ea25041a34c7d2e32ef39b951847956cc2d2eb0f13",
+  "stencil_pcb_sha256": "e9a9a383742fee8d843ae1e4f8ba0b3d3e747ad3e1389dba950969d425760fa6",
+  "omitted_refs": [
+    "U6"
+  ],
+  "pad_changes": [
+    {
+      "ref": "U6",
+      "pad": "1",
+      "uuid": "76f1c186-9d18-4153-b84f-55e5f84398ac",
+      "removed_layers": [
+        "F.Paste"
+      ]
+    },
+    {
+      "ref": "U6",
+      "pad": "2",
+      "uuid": "e65d6643-78a6-442a-95a4-f7ca4accbf8a",
+      "removed_layers": [
+        "F.Paste"
+      ]
+    },
+    {
+      "ref": "U6",
+      "pad": "3",
+      "uuid": "18fa0cf8-6c9a-4f08-b1bf-0238c7c02511",
+      "removed_layers": [
+        "F.Paste"
+      ]
+    },
+    {
+      "ref": "U6",
+      "pad": "4",
+      "uuid": "503b4090-792c-43f4-84df-9e1c4cf71f7d",
+      "removed_layers": [
+        "F.Paste"
+      ]
+    },
+    {
+      "ref": "U6",
+      "pad": "5",
+      "uuid": "6af08cc7-acb6-4bd8-8307-8ffb316166e9",
+      "removed_layers": [
+        "F.Paste"
+      ]
+    },
+    {
+      "ref": "U6",
+      "pad": "6",
+      "uuid": "a137cbbb-4a45-45ef-a279-36dd669ea8ed",
+      "removed_layers": [
+        "F.Paste"
+      ]
+    },
+    {
+      "ref": "U6",
+      "pad": "7",
+      "uuid": "bd072072-a5ba-455e-b516-2cd829d11ab6",
+      "removed_layers": [
+        "F.Paste"
+      ]
+    },
+    {
+      "ref": "U6",
+      "pad": "8",
+      "uuid": "876b96a3-c89d-460c-af42-25daf95a0df5",
+      "removed_layers": [
+        "F.Paste"
+      ]
+    },
+    {
+      "ref": "U6",
+      "pad": "9",
+      "uuid": "d23bed2f-6315-49c0-b4b0-bbc212abc345",
+      "removed_layers": [
+        "F.Paste"
+      ]
+    },
+    {
+      "ref": "U6",
+      "pad": "10",
+      "uuid": "64c9bdab-ff3d-4f8d-b11c-9550143e5a49",
+      "removed_layers": [
+        "F.Paste"
+      ]
+    },
+    {
+      "ref": "U6",
+      "pad": "11",
+      "uuid": "c4872bd7-1c78-4dfc-b1ce-0742b034aa01",
+      "removed_layers": [
+        "F.Paste"
+      ]
+    },
+    {
+      "ref": "U6",
+      "pad": "12",
+      "uuid": "707810ba-488a-413b-8e43-a846e56f954d",
+      "removed_layers": [
+        "F.Paste"
+      ]
+    },
+    {
+      "ref": "U6",
+      "pad": "13",
+      "uuid": "592b415e-703e-4653-b963-630413668ffa",
+      "removed_layers": [
+        "F.Paste"
+      ]
+    },
+    {
+      "ref": "U6",
+      "pad": "14",
+      "uuid": "2743bb75-7ed8-4ced-8887-11cfc8592fee",
+      "removed_layers": [
+        "F.Paste"
+      ]
+    },
+    {
+      "ref": "U6",
+      "pad": "15",
+      "uuid": "bd30358b-0615-4e11-adfc-292cbf315169",
+      "removed_layers": [
+        "F.Paste"
+      ]
+    },
+    {
+      "ref": "U6",
+      "pad": "16",
+      "uuid": "9ea48ec5-a718-4842-85d3-2ae579c07827",
+      "removed_layers": [
+        "F.Paste"
+      ]
+    }
+  ],
+  "intent": "Export-only paste-layer removal; complete native design remains unchanged",
+  "paste_files": {
+    "stratolink-F_Paste.gtp": {
+      "full_design_sha256": "18d6a65b9a1c329dda4c27a54fb058937245dea81b4efb29e0a3525be2332fc9",
+      "pilot_sha256": "31c6626d523752b57a2cf9b815f6b78ed85e8f5b9af0882ce705d1f744b71898"
+    },
+    "stratolink-B_Paste.gbp": {
+      "full_design_sha256": "420d6b66501b12f7e669eea2806e054633ace893ea6c471d792ee420146beecc",
+      "pilot_sha256": "420d6b66501b12f7e669eea2806e054633ace893ea6c471d792ee420146beecc"
+    }
+  }
+}

@@ -1,9 +1,9 @@
 {
-  "pcb_sha256": "25b201eb09c6746a22d1c3be42f7d4023319dd6fa5e3e587dc8cf42d97bb4d7f",
+  "pcb_sha256": "e02bf87186fc86b90569b6ea25041a34c7d2e32ef39b951847956cc2d2eb0f13",
   "archives": [
     {
       "archive": "stratolink-v1.1-kicad.zip",
-      "sha256": "7b0dc2f143d12ad13dcc4974cb06ab68bc9c048f948591d97a21eea11b080872",
+      "sha256": "3ccc73d0b7c706cfd4fdd5c3b29f024c935306be8ce62c3e0d0c6e4fa57780a7",
       "loaded_footprint_instances": 68,
       "missing": [],
       "resolved_models": [
@@ -326,7 +326,7 @@
     },
     {
       "archive": "stratolink-v1.1-libraries.zip",
-      "sha256": "3d5ea6c550dc62c43b2f3d7ad7609ce494a7c569a12dfabea573265961fef289",
+      "sha256": "d8f2bf6d8aa67aca32657a4071c285e959193b245a5b15831a66d1ced3f48718",
       "loaded_footprint_instances": 68,
       "missing": [],
       "resolved_models": [

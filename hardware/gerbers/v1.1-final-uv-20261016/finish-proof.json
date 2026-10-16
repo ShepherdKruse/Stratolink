@@ -1,0 +1,110 @@
+{
+  "finish": "green solder mask / ENIG / no silkscreen",
+  "mask_stackup": [
+    {
+      "Type": "SolderMask",
+      "Color": "Green",
+      "Thickness": 0.01,
+      "Name": "Top Solder Mask"
+    },
+    {
+      "Type": "SolderMask",
+      "Color": "Green",
+      "Thickness": 0.01,
+      "Name": "Bottom Solder Mask"
+    }
+  ],
+  "board_thickness_mm": 0.4,
+  "native_silkscreen_items": 0,
+  "limitation": "Native/export intent gate; separate aperture geometry, DRC and supplier CAM review required",
+  "F": {
+    "mask_file": "stratolink-F_Mask.gts",
+    "sha256": "072da5799afb02dc0fb50f697974248d3c03878683441b10fe4d28859850c4ed",
+    "has_selective_openings": true,
+    "polygon_regions": 197,
+    "full_board_opening_rejected": true
+  },
+  "B": {
+    "mask_file": "stratolink-B_Mask.gbs",
+    "sha256": "88ee533bbb8856132f8a69888d9e87ff6a37d51992ea5cc5425206c2e78c9a5d",
+    "has_selective_openings": true,
+    "polygon_regions": 79,
+    "full_board_opening_rejected": true
+  },
+  "solar_soldering_pads_open": [
+    {
+      "ref": "J1",
+      "pad": "1",
+      "net": "+SOLAR",
+      "center_mm": [
+        75.2,
+        85.0
+      ],
+      "gerber_center_open_on_faces": [
+        "F",
+        "B"
+      ]
+    },
+    {
+      "ref": "J1",
+      "pad": "2",
+      "net": "GND",
+      "center_mm": [
+        75.4255,
+        53.44
+      ],
+      "gerber_center_open_on_faces": [
+        "F"
+      ]
+    },
+    {
+      "ref": "J1",
+      "pad": "2",
+      "net": "GND",
+      "center_mm": [
+        75.4255,
+        53.44
+      ],
+      "gerber_center_open_on_faces": [
+        "B"
+      ]
+    },
+    {
+      "ref": "J2",
+      "pad": "1",
+      "net": "+SOLAR",
+      "center_mm": [
+        54.8,
+        85.0
+      ],
+      "gerber_center_open_on_faces": [
+        "F",
+        "B"
+      ]
+    },
+    {
+      "ref": "J2",
+      "pad": "2",
+      "net": "GND",
+      "center_mm": [
+        54.5665,
+        53.44
+      ],
+      "gerber_center_open_on_faces": [
+        "F"
+      ]
+    },
+    {
+      "ref": "J2",
+      "pad": "2",
+      "net": "GND",
+      "center_mm": [
+        54.5665,
+        53.44
+      ],
+      "gerber_center_open_on_faces": [
+        "B"
+      ]
+    }
+  ]
+}

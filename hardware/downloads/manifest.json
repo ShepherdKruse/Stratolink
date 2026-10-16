@@ -9,7 +9,7 @@
         "stratolink-v1.1/3d/solar/geometry.json": "6fbebdc0d49e8a2d299d60c59133cf87ff17ec8e6b5bfadfc3c5e2111e4e8981",
         "stratolink-v1.1/3d/solar/zachtek_1044_left_assembly.wrl": "d38d946746754d12ad69b04946b51fe3443e8bee42bf85d54c57bf92362e4047",
         "stratolink-v1.1/3d/solar/zachtek_1044_right_assembly.wrl": "1d51c705686a98fa6c52a2003d35441c2d42066cf981cdbdb1aa55ca48e3cbb7",
-        "stratolink-v1.1/OPEN-ME.txt": "3c0f301fd54c54c918716fe7ecae68cdce00c97a0ddd613a84e52ef444970190",
+        "stratolink-v1.1/OPEN-ME.txt": "deff07871a188391693e0df7cd5e613dbf1dd4cd2e0edbc76edf6b76df56e466",
         "stratolink-v1.1/fp-lib-table": "705f05b5554f11949b16433700d994932665490bb4f91064f20890cc1c65326a",
         "stratolink-v1.1/lib/2026-03-07_16-25-25.kicad_sym": "9a79848b12d5e661e2846ab59b4aad1bda3c134d4131e5a3be96759850b6e941",
         "stratolink-v1.1/lib/21-0147E.kicad_mod": "d8b8ebc85e44c7bc74c142f7189b65a37cceee2dca0531a18df6523b571999c6",
@@ -165,12 +165,12 @@
         "stratolink-v1.1/lib/mic.elibz": "b68dcc389d65cf5b89763e94db81ee8ee41ad52d68ad39fffea02825559bad17",
         "stratolink-v1.1/lib/pressure.elibz": "f997158b9182f3cfcc305b2efa452300f2fe3103462d244a90f23c209db269b5",
         "stratolink-v1.1/stratolink.kicad_dru": "071d900e34c4eb3d3f91003cc0698e261e7fe23beea7107c4db50a1bf60a5136",
-        "stratolink-v1.1/stratolink.kicad_pcb": "25b201eb09c6746a22d1c3be42f7d4023319dd6fa5e3e587dc8cf42d97bb4d7f",
-        "stratolink-v1.1/stratolink.kicad_pro": "915d9f9c4bc8c1eb0866031bf765ff08dc41a7b5bea4fb158ca26c1032ef93cd",
-        "stratolink-v1.1/stratolink.kicad_sch": "c772c2a0edff4d6f7616afb0988fc95c2cbb8c2d3572c1429fc0f3718f69e921",
+        "stratolink-v1.1/stratolink.kicad_pcb": "e02bf87186fc86b90569b6ea25041a34c7d2e32ef39b951847956cc2d2eb0f13",
+        "stratolink-v1.1/stratolink.kicad_pro": "c9be5b22927d7fe889188023e69f6e774e808aa79d4ea13eb1b2ddc348ffe2f9",
+        "stratolink-v1.1/stratolink.kicad_sch": "092ddb3451545cc6f7d7d64d8c02c933e89a40acb6897d865e3a8936d54e21fb",
         "stratolink-v1.1/sym-lib-table": "6d16fafd9ca5f0074df23d7ad6c75308ece058bd043d1297ce67fa3d25ee519e"
       },
-      "sha256": "7b0dc2f143d12ad13dcc4974cb06ab68bc9c048f948591d97a21eea11b080872"
+      "sha256": "3ccc73d0b7c706cfd4fdd5c3b29f024c935306be8ce62c3e0d0c6e4fa57780a7"
     },
     "stratolink-v1.1-libraries.zip": {
       "members": {
@@ -181,7 +181,7 @@
         "3d/solar/geometry.json": "6fbebdc0d49e8a2d299d60c59133cf87ff17ec8e6b5bfadfc3c5e2111e4e8981",
         "3d/solar/zachtek_1044_left_assembly.wrl": "d38d946746754d12ad69b04946b51fe3443e8bee42bf85d54c57bf92362e4047",
         "3d/solar/zachtek_1044_right_assembly.wrl": "1d51c705686a98fa6c52a2003d35441c2d42066cf981cdbdb1aa55ca48e3cbb7",
-        "OPEN-ME.txt": "3c0f301fd54c54c918716fe7ecae68cdce00c97a0ddd613a84e52ef444970190",
+        "OPEN-ME.txt": "deff07871a188391693e0df7cd5e613dbf1dd4cd2e0edbc76edf6b76df56e466",
         "fp-lib-table": "705f05b5554f11949b16433700d994932665490bb4f91064f20890cc1c65326a",
         "lib/2026-03-07_16-25-25.kicad_sym": "9a79848b12d5e661e2846ab59b4aad1bda3c134d4131e5a3be96759850b6e941",
         "lib/21-0147E.kicad_mod": "d8b8ebc85e44c7bc74c142f7189b65a37cceee2dca0531a18df6523b571999c6",
@@ -338,11 +338,11 @@
         "lib/pressure.elibz": "f997158b9182f3cfcc305b2efa452300f2fe3103462d244a90f23c209db269b5",
         "sym-lib-table": "6d16fafd9ca5f0074df23d7ad6c75308ece058bd043d1297ce67fa3d25ee519e"
       },
-      "sha256": "3d5ea6c550dc62c43b2f3d7ad7609ce494a7c569a12dfabea573265961fef289"
+      "sha256": "d8f2bf6d8aa67aca32657a4071c285e959193b245a5b15831a66d1ced3f48718"
     }
   },
   "board_revision": "v1.1 engineering review",
-  "pcb_sha256": "25b201eb09c6746a22d1c3be42f7d4023319dd6fa5e3e587dc8cf42d97bb4d7f",
+  "pcb_sha256": "e02bf87186fc86b90569b6ea25041a34c7d2e32ef39b951847956cc2d2eb0f13",
   "source_files": {
     "3d/AS7331_OLGA16.wrl": "afdc02ac1a2cd3a2756fab812bc0d14105fdcd7a01981381f25e329c4c64e443",
     "3d/R_0805_2012Metric.step": "ded342cdb394fb45395227beaaa75cc390613cf2581b29cd6d22c12abd6103b2",
@@ -506,11 +506,11 @@
     "lib/mic.elibz": "b68dcc389d65cf5b89763e94db81ee8ee41ad52d68ad39fffea02825559bad17",
     "lib/pressure.elibz": "f997158b9182f3cfcc305b2efa452300f2fe3103462d244a90f23c209db269b5",
     "stratolink.kicad_dru": "071d900e34c4eb3d3f91003cc0698e261e7fe23beea7107c4db50a1bf60a5136",
-    "stratolink.kicad_pcb": "25b201eb09c6746a22d1c3be42f7d4023319dd6fa5e3e587dc8cf42d97bb4d7f",
-    "stratolink.kicad_pro": "915d9f9c4bc8c1eb0866031bf765ff08dc41a7b5bea4fb158ca26c1032ef93cd",
-    "stratolink.kicad_sch": "c772c2a0edff4d6f7616afb0988fc95c2cbb8c2d3572c1429fc0f3718f69e921",
+    "stratolink.kicad_pcb": "e02bf87186fc86b90569b6ea25041a34c7d2e32ef39b951847956cc2d2eb0f13",
+    "stratolink.kicad_pro": "c9be5b22927d7fe889188023e69f6e774e808aa79d4ea13eb1b2ddc348ffe2f9",
+    "stratolink.kicad_sch": "092ddb3451545cc6f7d7d64d8c02c933e89a40acb6897d865e3a8936d54e21fb",
     "sym-lib-table": "6d16fafd9ca5f0074df23d7ad6c75308ece058bd043d1297ce67fa3d25ee519e"
   },
-  "source_manifest": "hardware/gerbers/v1.1-pilot/manifest.json",
-  "source_manifest_sha256": "bcc2571bfdc804e6a9dfb09669960967b42bb3188495c094fc539065c7725538"
+  "source_manifest": "hardware/gerbers/v1.1-final-20261016/manifest.json",
+  "source_manifest_sha256": "7db411487e0990009cac0dafecb3919b457ae46b456a0f15340e024d80c30610"
 }

@@ -1,0 +1,29 @@
+Drill report for stratolink.kicad_pcb
+Created on 2026-10-16T14:50:48
+
+Copper Layer Stackup:
+    =============================================================
+    L1 :  F.Cu                      front
+    L2 :  B.Cu                      back
+
+
+Drill file 'stratolink-PTH.drl' contains
+    plated through holes:
+    =============================================================
+    T1  0.300mm  0.0118"  (151 holes))
+    T2  0.300mm  0.0118"  (5 holes))
+    T3  0.500mm  0.0197"  (14 holes))
+    T4  0.700mm  0.0276"  (2 holes))
+    T5  0.750mm  0.0295"  (4 holes))
+    T6  1.000mm  0.0394"  (2 holes))
+    T7  2.000mm  0.0787"  (2 holes))
+
+    Total plated holes count 180
+
+
+Drill file 'stratolink-NPTH.drl' contains
+    unplated through holes:
+    =============================================================
+    T1  0.991mm  0.0390"  (3 holes))
+
+    Total unplated holes count 3
