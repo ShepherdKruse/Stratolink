@@ -1,0 +1,245 @@
+- text: 
+- banner:
+  - generic: 24-hour PCB production. Fast Delivery to United States.
+  - link " Coupons":
+    - /url: https://jlcpcb.com/coupon-center
+    - generic: 
+    - text: Coupons
+  - link " Download APP":
+    - /url: https://jlcone.com/download
+    - generic: 
+    - text: Download APP
+  - text:     
+  - text: USD
+  - generic: 
+- navigation:
+  - generic: 
+  - link "JLCPCB logo":
+    - /url: https://jlcpcb.com
+    - generic: 
+    - generic: JLCPCB
+  - text:       
+  - generic: 
+  - link "":
+    - /url: https://cart.jlcpcb.com/shopcart/cart
+    - generic: 
+  - superscript: "1"
+  - link "Order Now":
+    - /url: https://cart.jlcpcb.com/quote?spm=Jlcpcb.Homepage.1006&spm=Jlcpcb.Homepage.1006
+  - text: 
+  - text: My Account
+  - generic: 
+  - text: 
+- main:
+  - generic: fabrication-review
+  - generic: Automatically saved, last updated on 16 October, 08:00
+  - tablist:
+    - tab "PCB":
+      - generic: PCB
+    - tab "Bill of Materials":
+      - generic: Bill of Materials
+    - tab "Component Placements":
+      - generic: Component Placements
+    - tab "Quote & Order" [selected]:
+      - generic: Quote & Order
+  - text:                                                                              
+  - tabpanel "Quote & Order":
+    - strong: Charge Details
+    - strong: PCB Price
+    - text: $70.63
+    - generic: "Engineering fee:"
+    - generic: $33.00
+    - generic: "Via Covering:"
+    - generic: $0.00
+    - generic: "Surface Finish:"
+    - generic: $17.20
+    - generic: "Board:"
+    - generic: $2.50
+    - generic: "4-Wire Kelvin Test:"
+    - generic: $16.88
+    - generic: "Confirm Production file:"
+    - generic: $1.05
+    - strong: Standard PCBA Price
+    - text: $262.00
+    - generic: "Setup Fee:"
+    - generic: $51.50
+    - generic: "Stencil:"
+    - generic: $16.54
+    - generic: "Panel:"
+    - generic: $0.00
+    - generic: "Large Size:"
+    - generic: $0.00
+    - generic: "Components(30 items):"
+    - generic: $117.92
+    - text: "Feeders Loading fee:"
+    - generic: 
+    - generic: $46.50
+    - text: SMT Assembly
+    - generic: 
+    - generic: $2.15
+    - generic: "Confirm Parts Placement:"
+    - generic: $0.45
+    - text: PCB assembly fixture
+    - generic: 
+    - generic: $16.54
+    - text: X-Ray Inspection
+    - generic: 
+    - generic: $9.90
+    - generic: "Packaging fee:"
+    - generic: $0.50
+    - strong: "Advanced Options:"
+    - text: (The cost of the options below is not included in the ‘Total Price’. The final charge will be determined and paid after review.)
+    - generic: "Assembly remark:"
+    - generic: Quote after review
+    - strong: "Build Time:"
+    - generic: 
+    - generic: "PCB:"
+    - generic: 24 hours
+    - generic: $0.00
+    - generic: "Assembly:"
+    - radio "3 - 4 days" [checked]:
+      - generic: 3 - 4 days
+    - generic: $0.00
+    - radio "2 - 3 days":
+      - generic: 2 - 3 days
+    - generic: $49.63
+    - strong: "Total Price:"
+    - strong: $332.63
+    - text: Cost of some advanced options excluded
+    - generic: 
+    - text: Weight
+    - generic: 
+    - generic: 350.07g
+    - text: Product Description
+    - generic: 
+    - textbox "Select": Reserch\Education\DIY\Entertainment / Development Board - HS Code 847330
+    - generic: 
+    - generic: Remark
+    - generic: 
+    - text:  
+    - button "SAVE TO CART"
+    - paragraph:
+      - text: By placing your order, you agree to
+      - link "the Terms and Conditions of JLCPCB assembly Service.":
+        - /url: https://jlcpcb.com/help/article/Terms-and-Conditions-of-JLCPCB-Assembly-Service
+      - text: .
+    - text: 
+    - text:  
+- contentinfo:
+  - text:    
+  - tablist:
+    - tab "PCB Service ":
+      - button "PCB Service ":
+        - generic: PCB Service
+        - generic: 
+        - text: 
+    - tab "Support ":
+      - button "Support ":
+        - generic: Support
+        - generic: 
+        - text: 
+    - tab "Company ":
+      - button "Company ":
+        - generic: Company
+        - generic: 
+        - text: 
+    - tab "Electronics ":
+      - button "Electronics ":
+        - generic: Electronics
+        - generic: 
+        - text: 
+    - tab "Mechanical ":
+      - button "Mechanical ":
+        - generic: Mechanical
+        - generic: 
+        - text: 
+  - generic: 
+  - generic: Order on JLCONE Desktop, Save $1–$20 Every Time
+  - link " Windows":
+    - /url: https://jlcone.com/download
+    - generic: 
+    - generic: Windows
+  - link " MAC":
+    - /url: https://jlcone.com/download
+    - generic: 
+    - generic: MAC
+  - link " Android":
+    - /url: https://jlcone.com/download#mobile-app
+    - generic: 
+    - generic: Android
+  - link " IOS":
+    - /url: https://jlcone.com/download#mobile-app
+    - generic: 
+    - generic: IOS
+  - generic: CONNECT WITH US
+  - link "":
+    - /url: https://www.facebook.com/jlcpcb
+    - generic: 
+  - link "":
+    - /url: https://twitter.com/jlcpcb
+    - generic: 
+  - link "":
+    - /url: https://www.instagram.com/jlcpcb
+    - generic: 
+  - link "":
+    - /url: https://www.youtube.com/JLCPCB
+    - generic: 
+  - link "":
+    - /url: https://www.linkedin.com/company/jlcpcb
+    - generic: 
+  - link "":
+    - /url: https://www.reddit.com/r/JLCPCBLab/
+    - generic: 
+  - text:      
+  - generic: © 2026 JLCPCB.COM All Rights Reserved.
+  - link "Privacy Policy":
+    - /url: https://jlcpcb.com/help/article/Privacy-Policy
+  - link "Terms & Conditions":
+    - /url: https://jlcpcb.com/help/article/Terms-%26-Conditions
+  - link "Cookies Policy":
+    - /url: https://jlcpcb.com/help/article/JLCPCB-Cookie-Notice
+  - link "Do Not Sell or Share My Personal Information":
+    - /url: https://jlcpcb.com/privacy-policy/do-not-sell-or-share-my-personal-information
+- iframe
+- text: 
+- menu:
+  - list:
+    - menuitem "Sensor\\Controller\\Precision Instrument ":
+      - generic: Sensor\Controller\Precision Instrument
+      - generic: 
+    - menuitem "Office Appliance and Accessories ":
+      - generic: Office Appliance and Accessories
+      - generic: 
+    - menuitem "Audio and Video Appliance ":
+      - generic: Audio and Video Appliance
+      - generic: 
+    - menuitem "Smart Product and Accessories ":
+      - generic: Smart Product and Accessories
+      - generic: 
+    - menuitem "Reserch\\Education\\DIY\\Entertainment " [expanded]:
+      - generic: Reserch\Education\DIY\Entertainment
+      - generic: 
+    - menuitem "Household Appliance ":
+      - generic: Household Appliance
+      - generic: 
+    - menuitem "Others ":
+      - generic: Others
+      - generic: 
+    - menuitem "musical instruments ":
+      - generic: musical instruments
+      - generic: 
+- menu:
+  - list:
+    - menuitem "DIY Hobby Circuit Board - HS Code 902300":
+      - generic: DIY Hobby Circuit Board - HS Code 902300
+    - menuitem " Development Board - HS Code 847330" [active]:
+      - generic: 
+      - generic: Development Board - HS Code 847330
+    - menuitem "Programmable Controller - HS Code 853890":
+      - generic: Programmable Controller - HS Code 853890
+    - menuitem "Robot - HS Code 847990":
+      - generic: Robot - HS Code 847990
+    - menuitem "Video/TV Game Player - HS Code 950450":
+      - generic: Video/TV Game Player - HS Code 950450
+    - menuitem "Others":
+      - generic: Others

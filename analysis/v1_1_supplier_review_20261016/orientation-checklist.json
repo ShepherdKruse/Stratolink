@@ -1,0 +1,921 @@
+{
+  "pcb_sha256": "25b201eb09c6746a22d1c3be42f7d4023319dd6fa5e3e587dc8cf42d97bb4d7f",
+  "cpl_sha256": "bc35d68dcf8d80f05098ff822155f5f8e560cac0e1e6f120e70e3f256fac7adb",
+  "bom_sha256": "55b681ab8d23de3ec711cbc7957fc5375e99b6118513ed9acee47a928077a6cb",
+  "native_snapshot_sha256": "a0b1a96a359946282bd05e5b6a92c631f2af3459eba34955576f29fd5b17dd4c",
+  "status": "Candidate checklist from native source and draft CPL. Supplier preview not yet reviewed.",
+  "population_count": 57,
+  "side_counts": {
+    "bottom": 16,
+    "top": 41
+  },
+  "view_convention": "North-up component-side view. Top = native X right and Y down. Bottom = mirrored X, Y remains down; use physical suspension end as north.",
+  "critical_parts": [
+    {
+      "ref": "U1",
+      "value": "BQ25570RGRR",
+      "native_pose_mm": [
+        67.190998,
+        37.814999
+      ],
+      "native_angle_deg": 180.0,
+      "native_side": "B.Cu",
+      "cpl": {
+        "Designator": "U1",
+        "Mid X": "67.190998",
+        "Mid Y": "-37.814999",
+        "Layer": "bottom",
+        "Rotation": "270.000000"
+      },
+      "bom": {
+        "Comment": "BQ25570RGRR",
+        "Designator": "U1",
+        "Footprint": "Stratolink_v1p1_U1_QFN50P350X350X100-21N",
+        "LCSC Part #": "C506250"
+      },
+      "pads": [
+        {
+          "pin": "1",
+          "at_mm": [
+            68.840997,
+            36.815
+          ],
+          "net": "GND"
+        }
+      ]
+    },
+    {
+      "ref": "U2",
+      "value": "RAK3172-8-SM-NI",
+      "native_pose_mm": [
+        72.715,
+        64.66
+      ],
+      "native_angle_deg": 180.0,
+      "native_side": "F.Cu",
+      "cpl": {
+        "Designator": "U2",
+        "Mid X": "64.950000",
+        "Mid Y": "-72.205000",
+        "Layer": "top",
+        "Rotation": "90.000000"
+      },
+      "bom": {
+        "Comment": "RAK3172-8-SM-NI",
+        "Designator": "U2",
+        "Footprint": "Stratolink_v1p1_U2_RAK3172",
+        "LCSC Part #": "C5452091"
+      },
+      "pads": [
+        {
+          "pin": "1",
+          "at_mm": [
+            59.215,
+            79.605
+          ],
+          "net": "unconnected-(U2-UART2_RX{slash}PA3-Pad1)"
+        }
+      ]
+    },
+    {
+      "ref": "U3",
+      "value": "MAX-M10S-00B",
+      "native_pose_mm": [
+        66.23,
+        48.4
+      ],
+      "native_angle_deg": 180.0,
+      "native_side": "F.Cu",
+      "cpl": {
+        "Designator": "U3",
+        "Mid X": "66.230000",
+        "Mid Y": "-48.400000",
+        "Layer": "top",
+        "Rotation": "180.000000"
+      },
+      "bom": {
+        "Comment": "MAX-M10S-00B",
+        "Designator": "U3",
+        "Footprint": "Stratolink_v1p1_U3_XCVR_MAX-M10S-00B",
+        "LCSC Part #": "C4153167"
+      },
+      "pads": [
+        {
+          "pin": "1",
+          "at_mm": [
+            70.979999,
+            52.799999
+          ],
+          "net": "GND"
+        }
+      ]
+    },
+    {
+      "ref": "U4",
+      "value": "MS561101BA03-50",
+      "native_pose_mm": [
+        71.023,
+        58.808
+      ],
+      "native_angle_deg": 0.0,
+      "native_side": "F.Cu",
+      "cpl": {
+        "Designator": "U4",
+        "Mid X": "71.023000",
+        "Mid Y": "-58.808000",
+        "Layer": "top",
+        "Rotation": "270.000000"
+      },
+      "bom": {
+        "Comment": "MS561101BA03-50",
+        "Designator": "U4",
+        "Footprint": "Stratolink_v1p1_U4_SON125P500X300X100-8N",
+        "LCSC Part #": "C15639"
+      },
+      "pads": [
+        {
+          "pin": "1",
+          "at_mm": [
+            69.823,
+            56.933
+          ],
+          "net": "+3.3V"
+        }
+      ]
+    },
+    {
+      "ref": "U5",
+      "value": "TMP117AIYBGR",
+      "native_pose_mm": [
+        64.5,
+        41.43
+      ],
+      "native_angle_deg": 180.0,
+      "native_side": "F.Cu",
+      "cpl": {
+        "Designator": "U5",
+        "Mid X": "64.500000",
+        "Mid Y": "-41.430000",
+        "Layer": "top",
+        "Rotation": "180.000000"
+      },
+      "bom": {
+        "Comment": "TMP117AIYBGR",
+        "Designator": "U5",
+        "Footprint": "Stratolink_v1p1_U5_BGA6N40P3X2_148X95X53",
+        "LCSC Part #": "C2871893"
+      },
+      "pads": [
+        {
+          "pin": "A1",
+          "at_mm": [
+            64.7,
+            41.83
+          ],
+          "net": "SDA"
+        },
+        {
+          "pin": "A2",
+          "at_mm": [
+            64.3,
+            41.83
+          ],
+          "net": "SCL"
+        },
+        {
+          "pin": "B1",
+          "at_mm": [
+            64.7,
+            41.43
+          ],
+          "net": "+3.3V"
+        },
+        {
+          "pin": "B2",
+          "at_mm": [
+            64.3,
+            41.43
+          ],
+          "net": "GND"
+        },
+        {
+          "pin": "C1",
+          "at_mm": [
+            64.7,
+            41.03
+          ],
+          "net": "GND"
+        },
+        {
+          "pin": "C2",
+          "at_mm": [
+            64.3,
+            41.03
+          ],
+          "net": "GND"
+        }
+      ]
+    },
+    {
+      "ref": "U7",
+      "value": "LIS2DH12TR",
+      "native_pose_mm": [
+        70.548,
+        37.807
+      ],
+      "native_angle_deg": 90.0,
+      "native_side": "F.Cu",
+      "cpl": {
+        "Designator": "U7",
+        "Mid X": "70.548000",
+        "Mid Y": "-37.807000",
+        "Layer": "top",
+        "Rotation": "0.000000"
+      },
+      "bom": {
+        "Comment": "LIS2DH12TR",
+        "Designator": "U7",
+        "Footprint": "Stratolink_v1p1_U7_PQFN50P200X200100-12N",
+        "LCSC Part #": "C110926"
+      },
+      "pads": [
+        {
+          "pin": "1",
+          "at_mm": [
+            69.798,
+            38.571999
+          ],
+          "net": "SCL"
+        }
+      ]
+    },
+    {
+      "ref": "U8",
+      "value": "TLV8801DBVT",
+      "native_pose_mm": [
+        56.5725,
+        49.22
+      ],
+      "native_angle_deg": 180.0,
+      "native_side": "F.Cu",
+      "cpl": {
+        "Designator": "U8",
+        "Mid X": "56.572500",
+        "Mid Y": "-49.220000",
+        "Layer": "top",
+        "Rotation": "180.000000"
+      },
+      "bom": {
+        "Comment": "TLV8801DBVT",
+        "Designator": "U8",
+        "Footprint": "Stratolink_v1p1_U8_SOT-23-5",
+        "LCSC Part #": "C544879"
+      },
+      "pads": [
+        {
+          "pin": "1",
+          "at_mm": [
+            57.71,
+            50.17
+          ],
+          "net": "/SC_BAL_OUT"
+        },
+        {
+          "pin": "2",
+          "at_mm": [
+            57.71,
+            49.22
+          ],
+          "net": "GND"
+        },
+        {
+          "pin": "3",
+          "at_mm": [
+            57.71,
+            48.27
+          ],
+          "net": "/SC_HALF_REF"
+        },
+        {
+          "pin": "4",
+          "at_mm": [
+            55.435,
+            48.27
+          ],
+          "net": "/SC_BAL_OUT"
+        },
+        {
+          "pin": "5",
+          "at_mm": [
+            55.435,
+            50.17
+          ],
+          "net": "/VBAT"
+        }
+      ]
+    },
+    {
+      "ref": "D1",
+      "value": "PESD5V0U1BB",
+      "native_pose_mm": [
+        70.96,
+        81.91
+      ],
+      "native_angle_deg": 180.0,
+      "native_side": "F.Cu",
+      "cpl": {
+        "Designator": "D1",
+        "Mid X": "70.960000",
+        "Mid Y": "-81.910000",
+        "Layer": "top",
+        "Rotation": "180.000000"
+      },
+      "bom": {
+        "Comment": "PESD5V0U1BB",
+        "Designator": "D1",
+        "Footprint": "Stratolink_v1p1_D1_D_SOD-523",
+        "LCSC Part #": "C5272735"
+      },
+      "pads": [
+        {
+          "pin": "1",
+          "at_mm": [
+            71.660001,
+            81.91
+          ],
+          "net": "GND"
+        },
+        {
+          "pin": "2",
+          "at_mm": [
+            70.259999,
+            81.91
+          ],
+          "net": "Net-(AE1-A)"
+        }
+      ]
+    },
+    {
+      "ref": "D3",
+      "value": "PESD5V0U1BB",
+      "native_pose_mm": [
+        61.96,
+        37.38
+      ],
+      "native_angle_deg": 90.0,
+      "native_side": "F.Cu",
+      "cpl": {
+        "Designator": "D3",
+        "Mid X": "61.960000",
+        "Mid Y": "-37.380000",
+        "Layer": "top",
+        "Rotation": "90.000000"
+      },
+      "bom": {
+        "Comment": "PESD5V0U1BB",
+        "Designator": "D3",
+        "Footprint": "Stratolink_v1p1_D3_D_SOD-523",
+        "LCSC Part #": "C5272735"
+      },
+      "pads": [
+        {
+          "pin": "1",
+          "at_mm": [
+            61.96,
+            38.080001
+          ],
+          "net": "GND"
+        },
+        {
+          "pin": "2",
+          "at_mm": [
+            61.96,
+            36.679999
+          ],
+          "net": "Net-(AE2-A)"
+        }
+      ]
+    },
+    {
+      "ref": "L1",
+      "value": "22\u00b5H",
+      "native_pose_mm": [
+        69.32,
+        33.32
+      ],
+      "native_angle_deg": 0.0,
+      "native_side": "B.Cu",
+      "cpl": {
+        "Designator": "L1",
+        "Mid X": "69.320000",
+        "Mid Y": "-33.320000",
+        "Layer": "bottom",
+        "Rotation": "180.000000"
+      },
+      "bom": {
+        "Comment": "LPS4018-223MRC",
+        "Designator": "L1",
+        "Footprint": "Stratolink_v1p1_L1_IND_LPS4018-223MRC",
+        "LCSC Part #": "C5278935"
+      },
+      "pads": [
+        {
+          "pin": "1",
+          "at_mm": [
+            67.555,
+            33.32
+          ],
+          "net": "Net-(U1-LBOOST)"
+        },
+        {
+          "pin": "2",
+          "at_mm": [
+            71.085,
+            33.32
+          ],
+          "net": "+SOLAR"
+        }
+      ]
+    },
+    {
+      "ref": "L2",
+      "value": "10\u00b5H",
+      "native_pose_mm": [
+        64.45,
+        34.84
+      ],
+      "native_angle_deg": 180.0,
+      "native_side": "B.Cu",
+      "cpl": {
+        "Designator": "L2",
+        "Mid X": "64.450000",
+        "Mid Y": "-34.840000",
+        "Layer": "bottom",
+        "Rotation": "0.000000"
+      },
+      "bom": {
+        "Comment": "PWCWAQ1608F-100KTT",
+        "Designator": "L2",
+        "Footprint": "INDC1608X90N",
+        "LCSC Part #": "C436784"
+      },
+      "pads": [
+        {
+          "pin": "1",
+          "at_mm": [
+            65.23,
+            34.84
+          ],
+          "net": "Net-(U1-LBUCK)"
+        },
+        {
+          "pin": "2",
+          "at_mm": [
+            63.67,
+            34.84
+          ],
+          "net": "+3.3V"
+        }
+      ]
+    },
+    {
+      "ref": "C5",
+      "value": "1F",
+      "native_pose_mm": [
+        64.875,
+        66.007
+      ],
+      "native_angle_deg": 180.0,
+      "native_side": "B.Cu",
+      "cpl": null,
+      "bom": null,
+      "pads": [
+        {
+          "pin": "1",
+          "at_mm": [
+            61.375,
+            47.507
+          ],
+          "net": "/VBAT"
+        },
+        {
+          "pin": "2",
+          "at_mm": [
+            68.375,
+            47.507
+          ],
+          "net": "GND"
+        },
+        {
+          "pin": "3",
+          "at_mm": [
+            64.865,
+            47.507
+          ],
+          "net": "/SC_MID"
+        }
+      ]
+    }
+  ],
+  "all_cpl_rows": [
+    {
+      "Designator": "C1",
+      "Mid X": "70.690000",
+      "Mid Y": "-39.500000",
+      "Layer": "bottom",
+      "Rotation": "0.000000"
+    },
+    {
+      "Designator": "C2",
+      "Mid X": "72.770000",
+      "Mid Y": "-35.580000",
+      "Layer": "bottom",
+      "Rotation": "270.000000"
+    },
+    {
+      "Designator": "C3",
+      "Mid X": "71.260000",
+      "Mid Y": "-38.240000",
+      "Layer": "bottom",
+      "Rotation": "180.000000"
+    },
+    {
+      "Designator": "C4",
+      "Mid X": "70.690000",
+      "Mid Y": "-36.980000",
+      "Layer": "bottom",
+      "Rotation": "180.000000"
+    },
+    {
+      "Designator": "C6",
+      "Mid X": "64.220000",
+      "Mid Y": "-33.080000",
+      "Layer": "bottom",
+      "Rotation": "0.000000"
+    },
+    {
+      "Designator": "C7",
+      "Mid X": "59.000000",
+      "Mid Y": "-62.720000",
+      "Layer": "top",
+      "Rotation": "0.000000"
+    },
+    {
+      "Designator": "C8",
+      "Mid X": "58.420000",
+      "Mid Y": "-61.440000",
+      "Layer": "top",
+      "Rotation": "0.000000"
+    },
+    {
+      "Designator": "C9",
+      "Mid X": "60.540000",
+      "Mid Y": "-62.200000",
+      "Layer": "top",
+      "Rotation": "270.000000"
+    },
+    {
+      "Designator": "C10",
+      "Mid X": "73.550000",
+      "Mid Y": "-45.890000",
+      "Layer": "top",
+      "Rotation": "90.000000"
+    },
+    {
+      "Designator": "C11",
+      "Mid X": "68.212000",
+      "Mid Y": "-58.003000",
+      "Layer": "top",
+      "Rotation": "90.000000"
+    },
+    {
+      "Designator": "C12",
+      "Mid X": "65.710000",
+      "Mid Y": "-41.021000",
+      "Layer": "top",
+      "Rotation": "270.000000"
+    },
+    {
+      "Designator": "C14",
+      "Mid X": "73.940000",
+      "Mid Y": "-34.850000",
+      "Layer": "top",
+      "Rotation": "180.000000"
+    },
+    {
+      "Designator": "C15",
+      "Mid X": "56.709998",
+      "Mid Y": "-78.400998",
+      "Layer": "top",
+      "Rotation": "0.000000"
+    },
+    {
+      "Designator": "C16",
+      "Mid X": "71.950000",
+      "Mid Y": "-34.975000",
+      "Layer": "top",
+      "Rotation": "90.000000"
+    },
+    {
+      "Designator": "C17",
+      "Mid X": "55.113000",
+      "Mid Y": "-67.702999",
+      "Layer": "top",
+      "Rotation": "0.000000"
+    },
+    {
+      "Designator": "C19",
+      "Mid X": "70.227001",
+      "Mid Y": "-35.953000",
+      "Layer": "top",
+      "Rotation": "180.000000"
+    },
+    {
+      "Designator": "C20",
+      "Mid X": "68.703000",
+      "Mid Y": "-37.400000",
+      "Layer": "top",
+      "Rotation": "90.000000"
+    },
+    {
+      "Designator": "C21",
+      "Mid X": "69.362000",
+      "Mid Y": "-34.647000",
+      "Layer": "top",
+      "Rotation": "180.000000"
+    },
+    {
+      "Designator": "C22",
+      "Mid X": "55.530000",
+      "Mid Y": "-51.460000",
+      "Layer": "top",
+      "Rotation": "0.000000"
+    },
+    {
+      "Designator": "C23",
+      "Mid X": "74.830000",
+      "Mid Y": "-40.420000",
+      "Layer": "top",
+      "Rotation": "180.000000"
+    },
+    {
+      "Designator": "D1",
+      "Mid X": "70.960000",
+      "Mid Y": "-81.910000",
+      "Layer": "top",
+      "Rotation": "180.000000"
+    },
+    {
+      "Designator": "D3",
+      "Mid X": "61.960000",
+      "Mid Y": "-37.380000",
+      "Layer": "top",
+      "Rotation": "90.000000"
+    },
+    {
+      "Designator": "FB1",
+      "Mid X": "73.990000",
+      "Mid Y": "-47.330000",
+      "Layer": "top",
+      "Rotation": "0.000000"
+    },
+    {
+      "Designator": "L1",
+      "Mid X": "69.320000",
+      "Mid Y": "-33.320000",
+      "Layer": "bottom",
+      "Rotation": "180.000000"
+    },
+    {
+      "Designator": "L2",
+      "Mid X": "64.450000",
+      "Mid Y": "-34.840000",
+      "Layer": "bottom",
+      "Rotation": "0.000000"
+    },
+    {
+      "Designator": "R1",
+      "Mid X": "67.050000",
+      "Mid Y": "-41.169999",
+      "Layer": "bottom",
+      "Rotation": "90.000000"
+    },
+    {
+      "Designator": "R2",
+      "Mid X": "68.050000",
+      "Mid Y": "-41.169999",
+      "Layer": "bottom",
+      "Rotation": "270.000000"
+    },
+    {
+      "Designator": "R3",
+      "Mid X": "63.790000",
+      "Mid Y": "-40.910000",
+      "Layer": "bottom",
+      "Rotation": "180.000000"
+    },
+    {
+      "Designator": "R4",
+      "Mid X": "65.900000",
+      "Mid Y": "-40.970200",
+      "Layer": "bottom",
+      "Rotation": "90.000000"
+    },
+    {
+      "Designator": "R5",
+      "Mid X": "63.809999",
+      "Mid Y": "-39.880000",
+      "Layer": "bottom",
+      "Rotation": "0.000000"
+    },
+    {
+      "Designator": "R6",
+      "Mid X": "63.800000",
+      "Mid Y": "-38.860000",
+      "Layer": "bottom",
+      "Rotation": "180.000000"
+    },
+    {
+      "Designator": "R7",
+      "Mid X": "63.800000",
+      "Mid Y": "-37.870000",
+      "Layer": "bottom",
+      "Rotation": "0.000000"
+    },
+    {
+      "Designator": "R8",
+      "Mid X": "63.800000",
+      "Mid Y": "-36.890000",
+      "Layer": "bottom",
+      "Rotation": "0.000000"
+    },
+    {
+      "Designator": "R9",
+      "Mid X": "62.940000",
+      "Mid Y": "-62.200000",
+      "Layer": "top",
+      "Rotation": "270.000000"
+    },
+    {
+      "Designator": "R10",
+      "Mid X": "61.760000",
+      "Mid Y": "-62.170000",
+      "Layer": "top",
+      "Rotation": "270.000000"
+    },
+    {
+      "Designator": "R11",
+      "Mid X": "68.950000",
+      "Mid Y": "-42.190000",
+      "Layer": "top",
+      "Rotation": "180.000000"
+    },
+    {
+      "Designator": "R12",
+      "Mid X": "66.700000",
+      "Mid Y": "-41.060000",
+      "Layer": "top",
+      "Rotation": "270.000000"
+    },
+    {
+      "Designator": "R13",
+      "Mid X": "59.250000",
+      "Mid Y": "-53.390000",
+      "Layer": "top",
+      "Rotation": "270.000000"
+    },
+    {
+      "Designator": "R14",
+      "Mid X": "58.010000",
+      "Mid Y": "-53.370000",
+      "Layer": "top",
+      "Rotation": "270.000000"
+    },
+    {
+      "Designator": "R15",
+      "Mid X": "74.540000",
+      "Mid Y": "-58.330000",
+      "Layer": "top",
+      "Rotation": "90.000000"
+    },
+    {
+      "Designator": "R16",
+      "Mid X": "75.675000",
+      "Mid Y": "-58.318000",
+      "Layer": "top",
+      "Rotation": "90.000000"
+    },
+    {
+      "Designator": "R18",
+      "Mid X": "73.580000",
+      "Mid Y": "-43.969999",
+      "Layer": "top",
+      "Rotation": "90.000000"
+    },
+    {
+      "Designator": "R19",
+      "Mid X": "56.679999",
+      "Mid Y": "-80.650000",
+      "Layer": "top",
+      "Rotation": "0.000000"
+    },
+    {
+      "Designator": "R21",
+      "Mid X": "56.698999",
+      "Mid Y": "-79.546999",
+      "Layer": "top",
+      "Rotation": "180.000000"
+    },
+    {
+      "Designator": "R22",
+      "Mid X": "55.550000",
+      "Mid Y": "-66.230000",
+      "Layer": "top",
+      "Rotation": "270.000000"
+    },
+    {
+      "Designator": "R23",
+      "Mid X": "54.540000",
+      "Mid Y": "-66.230000",
+      "Layer": "top",
+      "Rotation": "90.000000"
+    },
+    {
+      "Designator": "R24",
+      "Mid X": "55.590000",
+      "Mid Y": "-46.960000",
+      "Layer": "top",
+      "Rotation": "0.000000"
+    },
+    {
+      "Designator": "R25",
+      "Mid X": "57.490000",
+      "Mid Y": "-46.940000",
+      "Layer": "top",
+      "Rotation": "0.000000"
+    },
+    {
+      "Designator": "R26",
+      "Mid X": "57.510000",
+      "Mid Y": "-51.440000",
+      "Layer": "top",
+      "Rotation": "180.000000"
+    },
+    {
+      "Designator": "R27",
+      "Mid X": "72.280000",
+      "Mid Y": "-40.830000",
+      "Layer": "top",
+      "Rotation": "180.000000"
+    },
+    {
+      "Designator": "U1",
+      "Mid X": "67.190998",
+      "Mid Y": "-37.814999",
+      "Layer": "bottom",
+      "Rotation": "270.000000"
+    },
+    {
+      "Designator": "U2",
+      "Mid X": "64.950000",
+      "Mid Y": "-72.205000",
+      "Layer": "top",
+      "Rotation": "90.000000"
+    },
+    {
+      "Designator": "U3",
+      "Mid X": "66.230000",
+      "Mid Y": "-48.400000",
+      "Layer": "top",
+      "Rotation": "180.000000"
+    },
+    {
+      "Designator": "U4",
+      "Mid X": "71.023000",
+      "Mid Y": "-58.808000",
+      "Layer": "top",
+      "Rotation": "270.000000"
+    },
+    {
+      "Designator": "U5",
+      "Mid X": "64.500000",
+      "Mid Y": "-41.430000",
+      "Layer": "top",
+      "Rotation": "180.000000"
+    },
+    {
+      "Designator": "U7",
+      "Mid X": "70.548000",
+      "Mid Y": "-37.807000",
+      "Layer": "top",
+      "Rotation": "0.000000"
+    },
+    {
+      "Designator": "U8",
+      "Mid X": "56.572500",
+      "Mid Y": "-49.220000",
+      "Layer": "top",
+      "Rotation": "180.000000"
+    }
+  ]
+}

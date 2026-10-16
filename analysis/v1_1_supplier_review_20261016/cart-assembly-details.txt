@@ -1,0 +1,30 @@
+Product Detail
+PCBA Parameters
+Bill of Material
+Part Placement
+PCBA Type	Standard
+Assembly Side	Both Sides
+PCBA Qty	3
+Edge Rails/Fiducials	Added by JLCPCB
+Confirm Parts Placement	Yes
+Bake Components	No
+Photo Confirmation	No
+Board Cleaning	No
+Conformal Coating (cleaning included)	No
+Packaging	Antistatic bubble film
+Special stencil	No
+Depanel boards & edge rail before delivery	No
+Solder Paste	High temp.
+Flying Probe Test	No
+Nitrogen reflow soldering	No
+Function test	No
+Assembly remark	Yes
+Remark: v1.1 PCB25b201eb, 3 assembled pilots. U6 AS7331 DNP only; fit C14/C23/R27. Use supplied pilot paste: no paste on 16 U6 lands. C5, antennas and solar parts are hand-fitted after reflow. Preserve via tenting. Review 100um stencil for TMP117/U7; do not apply a second global paste reduction. U1 rotated; U8 now FRONT. Confirm all pin-1 orientations against current CPL. Manual placement approval, no automatic changes. Keep rails/tabs clear of solar banks and suspension holes.
+
+File provided as	Complete File, just proceed with my own files
+Panel Format	1 * 1
+Build Time	3 - 4 days
+Stencil Storage	No
+Fixture Storage	No
+Gross Weight	0.03 kg
+Product Description	jlcpcb_missing_text/jlcpcb_missing_text

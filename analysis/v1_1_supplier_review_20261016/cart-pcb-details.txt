@@ -1,0 +1,116 @@
+Product Detail
+
+Gerber file:
+fabrication-review_Y25
+
+Build Time:
+24 hours (PCBA Only)
+
+Base Material:
+FR-4
+
+Layers:
+2
+
+Dimension:
+71.36 mm* 71.3 mm
+
+PCB Qty:
+5
+
+Product Type:
+Aerospace
+
+Different Design:
+1
+
+Delivery Format:
+Single PCB
+
+PCB Thickness:
+0.4mm
+
+Specify Stackup:
+no
+
+PCB Color:
+Green
+
+Silkscreen:
+White
+
+Material Type:
+FR4 TG135
+
+Via Covering:
+Tented
+
+Surface Finish:
+ENIG
+Gold Thickness: 1 U"
+
+Deburring/Edge rounding:
+No
+
+Outer Copper Weight:
+1 oz
+
+Gold Fingers:
+No
+
+Remark:
+v1.1 25b201eb. GREEN MASK, NO SILK. Keep mask/tenting. Solar notches UNPLATED. CAM check fine-pitch lands, mask/copper details. Keep tabs clear of solar banks/suspension holes. Manual approval.
+
+Electrical Test:
+Flying Probe Fully Test
+
+Castellated Holes:
+no
+
+Edge Plating:
+No
+
+Mark on PCB:
+Remove Mark
+
+Min via hole size/diameter:
+0.3mm/(0.4/0.45mm)
+
+Via Plating Method:
+Not Specified
+
+4-Wire Kelvin Test:
+Yes
+
+Paper between PCBs:
+No
+
+Appearance Quality:
+IPC Class 2 Standard
+
+Confirm Production file:
+Yes 
+
+Silkscreen Technology:
+Ink-jet Printing Silkscreen
+
+Package Box:
+With JLCPCB logo
+
+Inspection Report:
+No
+
+Board Outline Tolerance:
+±0.2mm(Regular)
+
+Impedance Test Report:
+No
+
+UL Marking:
+No
+
+Shortage Preference:
+Require Full Quantity
+
+Gross Weight:
+0.14kg

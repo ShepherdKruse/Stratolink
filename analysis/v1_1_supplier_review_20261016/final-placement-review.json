@@ -1,0 +1,136 @@
+{
+  "pcb_sha256": "25b201eb09c6746a22d1c3be42f7d4023319dd6fa5e3e587dc8cf42d97bb4d7f",
+  "corrected_cpl_file": "hardware/gerbers/v1.1-pilot-supplier-20261016/CPL-stratolink.csv",
+  "corrected_cpl_sha256": "bf3bb3cf5d633fe95922b7a415dff4278c8bb8fd261d1d737c2401d201be1b00",
+  "prior_cpl_sha256": "bc35d68dcf8d80f05098ff822155f5f8e560cac0e1e6f120e70e3f256fac7adb",
+  "CPL_only_change": [
+    {
+      "ref": "U8",
+      "field": "Rotation",
+      "before": "180.000000",
+      "after": "90.000000"
+    }
+  ],
+  "population_count": 57,
+  "side_counts": {
+    "bottom": 16,
+    "top": 41
+  },
+  "correction_provenance": "Root reports fresh numeric import of corrected CPL90. Read-only reviewer independently checked the saved corrected U8 image, compared both local CPL files and preserved-source pin maps.",
+  "reviews": [
+    {
+      "ref": "U1",
+      "image": "analysis/v1_1_supplier_review_20261016/u1-bottom-close.png",
+      "image_sha256": "085d5e801eed392f557157fff2a94c1da908fe3f32328175bba2d62ae2597313",
+      "status": "orientation consistent",
+      "observation": "Bottom face selected. Black body index and external purple index at upper-left. Body centered in perimeter land ring; matches current pin1 GND at (68.841,36.815) under north-up mirrored bottom view."
+    },
+    {
+      "ref": "U5",
+      "image": "analysis/v1_1_supplier_review_20261016/u5-top-close.png",
+      "image_sha256": "3626e9ad79af881ec6fcc23f4f6aad7bf973e25e151cd5149ccf00ff1fd5bcbc",
+      "status": "orientation consistent",
+      "observation": "Top face selected. Light body index and external purple index at lower-right, matching A1 SDA at (64.700,41.830). Hidden ball net order comes from native/source evidence, not visible solder joints."
+    },
+    {
+      "ref": "U7",
+      "image": "analysis/v1_1_supplier_review_20261016/u7-top-close.png",
+      "image_sha256": "64e28f374740cf9da6222ec37ccd9552132c15eba69a123940f98fe890833d59",
+      "status": "orientation consistent",
+      "observation": "Top face selected. Light body index and external purple index lower-left, matching pad1 SCL at (69.798,38.572)."
+    },
+    {
+      "ref": "U4",
+      "image": "analysis/v1_1_supplier_review_20261016/u4-top-close.png",
+      "image_sha256": "98274f18c56566a6e04312494185c466bc476917ef98a697df333ed2d36930ab",
+      "status": "orientation consistent",
+      "observation": "Top face selected. External purple index upper-left, vertical long body axis and aligned left/right land columns. Dark below-center circle is the pressure port, not pin1."
+    },
+    {
+      "ref": "U8",
+      "image": "analysis/v1_1_supplier_review_20261016/u8-corrected-close.png",
+      "image_sha256": "7b38cb10bc8674e38bd58cf7287c21e05134b8abb34fbaa8c78562d21abd5549",
+      "status": "orientation consistent after corrected numeric reimport",
+      "observation": "Top face selected. Vertical body has three leads on the right, two on the left. Purple pin1 marker lower-right. Each of five lead depictions overlaps its intended land. This agrees with native1 lower-right OUT,2 right-center GND,3 upper-right +IN,4 upper-left -IN,5 lower-left VBAT."
+    },
+    {
+      "ref": "U2",
+      "image": "analysis/v1_1_supplier_review_20261016/u2-top-close.png",
+      "image_sha256": "3f07ecd9293fec8f7150337d5fadb8d35dcb9841e157519f45fc5b01bf9735f9",
+      "status": "orientation consistent",
+      "observation": "Top face selected. Purple pin1 indicator lower-left and twelve-pad lower edge match native numbered lands. The supplier outline/body aligns with the module perimeter; the white cutout is at lower-right."
+    },
+    {
+      "ref": "U3",
+      "image": "analysis/v1_1_supplier_review_20261016/u3-top-close.png",
+      "image_sha256": "379adef9b827f1dc39fbdc264eb947be5b6036a0a2992f824dadee0fbd37511a",
+      "status": "orientation consistent",
+      "observation": "Top face selected. Black package index lower-right, matching native pad1 GND. Visible right-side leads align with their lands. Left and lower body edges partly outside this closeup; earlier overall view supplies context."
+    },
+    {
+      "ref": "D1",
+      "image": "analysis/v1_1_supplier_review_20261016/d1-top-close.png",
+      "image_sha256": "011552fdfcdddcb6bf78a0b0d4cac3ff3e4b31fa7cf6a6b92547f707a761b85c",
+      "status": "placeholder-limited",
+      "observation": "Checkerboard placeholder centered between horizontal lands. Actual part body/lead geometry absent, so no independent physical body orientation acceptance. Native/CPL retained180; this PESD5V0U1BB is bidirectional."
+    },
+    {
+      "ref": "D3",
+      "image": "analysis/v1_1_supplier_review_20261016/d3-top-close.png",
+      "image_sha256": "e1b5f16cae28681783b31787fd0a6146925decc1dea3b497e2092a104798958e",
+      "status": "placeholder-limited",
+      "observation": "Checkerboard placeholder centered between vertical lands. Actual part body/lead geometry absent, so no independent physical body orientation acceptance. Native/CPL retained90; this PESD5V0U1BB is bidirectional."
+    },
+    {
+      "ref": "bottom population",
+      "image": "analysis/v1_1_supplier_review_20261016/bottom-population.png",
+      "image_sha256": "3a8480e171be05b2c052793504f6827ee57b4db93ddfc07a69cdd120d4ad4f56",
+      "status": "population placement consistent at preview scale",
+      "observation": "All16 expected bottom placements visible: U1,L1,L2,C1,C2,C3,C4,C6,R1-R8. U1 is the only bottom IC. Passive orientations/locations agree at overview scale; L2 is a checkerboard placeholder."
+    },
+    {
+      "ref": "L1/L2",
+      "image": "analysis/v1_1_supplier_review_20261016/bottom-power-close.png",
+      "image_sha256": "5f14eb127ffe622db794ccc2fd1f368be324751a7a7caebfe0cc2f93d147503b",
+      "status": "L1 body aligned; L2 placeholder-limited",
+      "observation": "L1 body fits its native two-land envelope in the bottom view. L2 checkerboard is centered between horizontal lands; actual L2 body geometry is absent. Nonpolar inductor placeholders do not prove package-body clearance."
+    }
+  ],
+  "accepted_IC_supplier_angles": {
+    "U1": {
+      "side": "bottom",
+      "angle_deg": 270.0
+    },
+    "U2": {
+      "side": "top",
+      "angle_deg": 90.0
+    },
+    "U3": {
+      "side": "top",
+      "angle_deg": 180.0
+    },
+    "U4": {
+      "side": "top",
+      "angle_deg": 270.0
+    },
+    "U5": {
+      "side": "top",
+      "angle_deg": 180.0
+    },
+    "U7": {
+      "side": "top",
+      "angle_deg": 0.0
+    },
+    "U8": {
+      "side": "top",
+      "angle_deg": 90.0
+    }
+  },
+  "status": "Seven populated IC orientations agree with current native numbered-pad maps at supplier-preview level. U8 correction accepted.",
+  "remaining_limits": [
+    "D1/D3/L2 supplier placeholders do not expose actual body/lead geometry. Native placements, exact MPN identities and factory assembly/CAM review remain necessary.",
+    "Hidden ball and underside terminal numbering derives from native footprints and manufacturer evidence, not visible solder joints.",
+    "This is not factory CAM, stock reservation, solder-joint qualification, RF qualification, or purchase approval.",
+    "Unchanged IC screenshots were reviewed with initial import; local CPL comparison proves U8 rotation was the only row-field change in corrected import."
+  ]
+}

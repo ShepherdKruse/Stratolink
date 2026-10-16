@@ -1,0 +1,1395 @@
+[
+  {
+    "cells": [
+      "",
+      "C1",
+      "GRM1555C1E103JE01D",
+      "Stratolink_v1p1_C1_C_0402_1005Metric",
+      "GRM1555C1E103JE01D\nC3855387\n10nF 25V C0G ±5% 0402 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS",
+      "7",
+      "3",
+      "1",
+      "0",
+      "/",
+      "3",
+      "JLCPCB",
+      "Extended",
+      "$0.5383",
+      ""
+    ],
+    "checks": [
+      {
+        "checked": true,
+        "disabled": false
+      }
+    ]
+  },
+  {
+    "cells": [],
+    "checks": []
+  },
+  {
+    "cells": [
+      "3",
+      "1",
+      "0",
+      "/",
+      "3"
+    ],
+    "checks": []
+  },
+  {
+    "cells": [
+      "",
+      "C2",
+      "CL10A475KP8NNNC",
+      "Stratolink_v1p1_C2_C_0603_1608Metric",
+      "CL10A475KP8NNNC\nC1705\n10V 4.7uF X5R ±10% 0603 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS",
+      "0",
+      "JLCPCB",
+      "Extended",
+      "",
+      ""
+    ],
+    "checks": [
+      {
+        "checked": false,
+        "disabled": false
+      }
+    ]
+  },
+  {
+    "cells": [
+      "",
+      "C3",
+      "CL10A475KP8NNNC",
+      "Stratolink_v1p1_C3_C_0603_1608Metric",
+      "CL10A475KP8NNNC\nC1705\n10V 4.7uF X5R ±10% 0603 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS",
+      ""
+    ],
+    "checks": [
+      {
+        "checked": false,
+        "disabled": false
+      }
+    ]
+  },
+  {
+    "cells": [
+      "C16",
+      "",
+      "CL10A475KP8NNNC",
+      "Stratolink_v1p1_C16_C_0603_1608Metric",
+      "CL10A475KP8NNNC\nC1705\n10V 4.7uF X5R ±10% 0603 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS",
+      ""
+    ],
+    "checks": [
+      {
+        "checked": false,
+        "disabled": false
+      }
+    ]
+  },
+  {
+    "cells": [
+      "",
+      "C4",
+      "CL05B104KO5NNNC",
+      "Stratolink_v1p1_C4_C_0402_1005Metric",
+      "CL05B104KO5NNNC\nC1525\n100nF 16V X7R ±10% 0402 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS",
+      "0",
+      "JLCPCB",
+      "Basic",
+      "",
+      ""
+    ],
+    "checks": [
+      {
+        "checked": false,
+        "disabled": false
+      }
+    ]
+  },
+  {
+    "cells": [
+      "C7",
+      "",
+      "CL05B104KO5NNNC",
+      "Stratolink_v1p1_C7_C_0402_1005Metric",
+      "CL05B104KO5NNNC\nC1525\n100nF 16V X7R ±10% 0402 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS",
+      ""
+    ],
+    "checks": [
+      {
+        "checked": false,
+        "disabled": false
+      }
+    ]
+  },
+  {
+    "cells": [
+      "C9",
+      "",
+      "CL05B104KO5NNNC",
+      "Stratolink_v1p1_C9_C_0402_1005Metric",
+      "CL05B104KO5NNNC\nC1525\n100nF 16V X7R ±10% 0402 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS",
+      ""
+    ],
+    "checks": [
+      {
+        "checked": false,
+        "disabled": false
+      }
+    ]
+  },
+  {
+    "cells": [
+      "C10",
+      "",
+      "CL05B104KO5NNNC",
+      "Stratolink_v1p1_C10_C_0402_1005Metric",
+      "CL05B104KO5NNNC\nC1525\n100nF 16V X7R ±10% 0402 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS",
+      ""
+    ],
+    "checks": [
+      {
+        "checked": false,
+        "disabled": false
+      }
+    ]
+  },
+  {
+    "cells": [
+      "C11",
+      "",
+      "CL05B104KO5NNNC",
+      "Stratolink_v1p1_C11_C_0402_1005Metric",
+      "CL05B104KO5NNNC\nC1525\n100nF 16V X7R ±10% 0402 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS",
+      ""
+    ],
+    "checks": [
+      {
+        "checked": false,
+        "disabled": false
+      }
+    ]
+  },
+  {
+    "cells": [
+      "C12",
+      "",
+      "CL05B104KO5NNNC",
+      "Stratolink_v1p1_C12_C_0402_1005Metric",
+      "CL05B104KO5NNNC\nC1525\n100nF 16V X7R ±10% 0402 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS",
+      ""
+    ],
+    "checks": [
+      {
+        "checked": false,
+        "disabled": false
+      }
+    ]
+  },
+  {
+    "cells": [
+      "C14",
+      "",
+      "CL05B104KO5NNNC",
+      "Stratolink_v1p1_C14_C_0402_1005Metric",
+      "CL05B104KO5NNNC\nC1525\n100nF 16V X7R ±10% 0402 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS",
+      ""
+    ],
+    "checks": [
+      {
+        "checked": false,
+        "disabled": false
+      }
+    ]
+  },
+  {
+    "cells": [
+      "C15",
+      "",
+      "CL05B104KO5NNNC",
+      "Stratolink_v1p1_C15_C_0402_1005Metric",
+      "CL05B104KO5NNNC\nC1525\n100nF 16V X7R ±10% 0402 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS",
+      ""
+    ],
+    "checks": [
+      {
+        "checked": false,
+        "disabled": false
+      }
+    ]
+  },
+  {
+    "cells": [
+      "C17",
+      "",
+      "CL05B104KO5NNNC",
+      "Stratolink_v1p1_C17_C_0402_1005Metric",
+      "CL05B104KO5NNNC\nC1525\n100nF 16V X7R ±10% 0402 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS",
+      ""
+    ],
+    "checks": [
+      {
+        "checked": false,
+        "disabled": false
+      }
+    ]
+  },
+  {
+    "cells": [
+      "C19",
+      "",
+      "CL05B104KO5NNNC",
+      "Stratolink_v1p1_C19_C_0402_1005Metric",
+      "CL05B104KO5NNNC\nC1525\n100nF 16V X7R ±10% 0402 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS",
+      ""
+    ],
+    "checks": [
+      {
+        "checked": false,
+        "disabled": false
+      }
+    ]
+  },
+  {
+    "cells": [
+      "C20",
+      "",
+      "CL05B104KO5NNNC",
+      "Stratolink_v1p1_C20_C_0402_1005Metric",
+      "CL05B104KO5NNNC\nC1525\n100nF 16V X7R ±10% 0402 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS",
+      ""
+    ],
+    "checks": [
+      {
+        "checked": false,
+        "disabled": false
+      }
+    ]
+  },
+  {
+    "cells": [
+      "C22",
+      "",
+      "CL05B104KO5NNNC",
+      "Stratolink_v1p1_C22_C_0402_1005Metric",
+      "CL05B104KO5NNNC\nC1525\n100nF 16V X7R ±10% 0402 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS",
+      ""
+    ],
+    "checks": [
+      {
+        "checked": false,
+        "disabled": false
+      }
+    ]
+  },
+  {
+    "cells": [
+      "C23",
+      "",
+      "CL05B104KO5NNNC",
+      "Stratolink_v1p1_C23_C_0402_1005Metric",
+      "CL05B104KO5NNNC\nC1525\n100nF 16V X7R ±10% 0402 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS",
+      ""
+    ],
+    "checks": [
+      {
+        "checked": false,
+        "disabled": false
+      }
+    ]
+  },
+  {
+    "cells": [
+      "",
+      "C6",
+      "CL21A226MAYNNNE",
+      "Stratolink_v1p1_C6_C_0805_2012Metric",
+      "CL21A226MAYNNNE\nC602037\n22uF 25V X5R ±20% 0805 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS",
+      "20",
+      "3",
+      "1",
+      "0",
+      "/",
+      "3",
+      "JLCPCB",
+      "Extended",
+      "$3.1260",
+      ""
+    ],
+    "checks": [
+      {
+        "checked": true,
+        "disabled": false
+      }
+    ]
+  },
+  {
+    "cells": [],
+    "checks": []
+  },
+  {
+    "cells": [
+      "3",
+      "1",
+      "0",
+      "/",
+      "3"
+    ],
+    "checks": []
+  },
+  {
+    "cells": [
+      "C8",
+      "",
+      "CL10A106KP8NNNC",
+      "Stratolink_v1p1_C8_C_0603_1608Metric",
+      "CL10A106KP8NNNC\nC19702\n10V 10uF X5R ±10% 0603 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS",
+      "0",
+      "JLCPCB",
+      "Basic",
+      "",
+      ""
+    ],
+    "checks": [
+      {
+        "checked": false,
+        "disabled": false
+      }
+    ]
+  },
+  {
+    "cells": [
+      "C21",
+      "",
+      "CL10A106KP8NNNC",
+      "Stratolink_v1p1_C21_C_0603_1608Metric",
+      "CL10A106KP8NNNC\nC19702\n10V 10uF X5R ±10% 0603 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS",
+      ""
+    ],
+    "checks": [
+      {
+        "checked": false,
+        "disabled": false
+      }
+    ]
+  },
+  {
+    "cells": [
+      "D1",
+      "",
+      "PESD5V0U1BB",
+      "Stratolink_v1p1_D1_D_SOD-523",
+      "PESD5V0U1BB\nC5272735\n0.5pF 18V 1uA 200W@8/20us 5V 6V ESD IEC 61000-4-2、IEC 61000-4-5、IEC 61000-4-4 SOD-523 ESD and Surge Protection (TVS/ESD) ROHS",
+      "0",
+      "JLCPCB",
+      "Extended",
+      "",
+      ""
+    ],
+    "checks": [
+      {
+        "checked": false,
+        "disabled": false
+      }
+    ]
+  },
+  {
+    "cells": [
+      "D3",
+      "",
+      "PESD5V0U1BB",
+      "Stratolink_v1p1_D3_D_SOD-523",
+      "PESD5V0U1BB\nC5272735\n0.5pF 18V 1uA 200W@8/20us 5V 6V ESD IEC 61000-4-2、IEC 61000-4-5、IEC 61000-4-4 SOD-523 ESD and Surge Protection (TVS/ESD) ROHS",
+      ""
+    ],
+    "checks": [
+      {
+        "checked": false,
+        "disabled": false
+      }
+    ]
+  },
+  {
+    "cells": [
+      "FB1",
+      "",
+      "BLM15AG601SN1D",
+      "Stratolink_v1p1_FB1_C_0402_1005Metric",
+      "BLM15AG601SN1D\nC76884\n-55℃~+125℃ 1 300mA 520mΩ 600Ω@100MHz ±25% 0402 Ferrite Beads ROHS",
+      "20",
+      "3",
+      "1",
+      "0",
+      "/",
+      "3",
+      "JLCPCB",
+      "Extended",
+      "$0.1800",
+      ""
+    ],
+    "checks": [
+      {
+        "checked": true,
+        "disabled": false
+      }
+    ]
+  },
+  {
+    "cells": [],
+    "checks": []
+  },
+  {
+    "cells": [
+      "3",
+      "1",
+      "0",
+      "/",
+      "3"
+    ],
+    "checks": []
+  },
+  {
+    "cells": [
+      "",
+      "L1",
+      "LPS4018-223MRC",
+      "Stratolink_v1p1_L1_IND_LPS4018-223MRC",
+      "LPS4018-223MRC\nC5278935\n22uH 360mΩ 650mA 740mA Magnetic Shielded Inductor ±20% SMD,3.9x3.9mm Power Inductors ROHS",
+      "3",
+      "3",
+      "1",
+      "0",
+      "/",
+      "3",
+      "JLCPCB",
+      "Extended",
+      "$3.5826",
+      ""
+    ],
+    "checks": [
+      {
+        "checked": true,
+        "disabled": false
+      }
+    ]
+  },
+  {
+    "cells": [],
+    "checks": []
+  },
+  {
+    "cells": [
+      "3",
+      "1",
+      "0",
+      "/",
+      "3"
+    ],
+    "checks": []
+  },
+  {
+    "cells": [
+      "",
+      "L2",
+      "PWCWAQ1608F-100KTT",
+      "INDC1608X90N",
+      "PWCWAQ1608F-100KTT\nC436784\n10uH 2.405Ω 280mA 280mA 35MHz Wire-wound chip inductor ±10% 0603 Inductors (SMD) ROHS",
+      "7",
+      "3",
+      "1",
+      "0",
+      "/",
+      "3",
+      "JLCPCB",
+      "Extended",
+      "$0.3920",
+      ""
+    ],
+    "checks": [
+      {
+        "checked": true,
+        "disabled": false
+      }
+    ]
+  },
+  {
+    "cells": [],
+    "checks": []
+  },
+  {
+    "cells": [
+      "3",
+      "1",
+      "0",
+      "/",
+      "3"
+    ],
+    "checks": []
+  },
+  {
+    "cells": [
+      "",
+      "R1",
+      "FRC0402F7504TS",
+      "Stratolink_v1p1_R1_R_0402_1005Metric",
+      "FRC0402F7504TS\nC3013187\n-55℃~+155℃ 50V 62.5mW 7.5MΩ Thick Film Resistor ±1% ±100ppm/℃ 0402 Chip Resistor - Surface Mount ROHS",
+      "20",
+      "3",
+      "1",
+      "0",
+      "/",
+      "3",
+      "JLCPCB",
+      "Extended",
+      "$0.0200",
+      ""
+    ],
+    "checks": [
+      {
+        "checked": true,
+        "disabled": false
+      }
+    ]
+  },
+  {
+    "cells": [],
+    "checks": []
+  },
+  {
+    "cells": [
+      "3",
+      "1",
+      "0",
+      "/",
+      "3"
+    ],
+    "checks": []
+  },
+  {
+    "cells": [
+      "",
+      "R2",
+      "CRCW04024M22FKED",
+      "Stratolink_v1p1_R2_R_0402_1005Metric",
+      "CRCW04024M22FKED\nC2091474\n-55℃~+155℃ 4.22MΩ 50V 62.5mW Thick Film Resistor ±1% ±100ppm/℃ 0402 Chip Resistor - Surface Mount ROHS",
+      "20",
+      "3",
+      "1",
+      "0",
+      "/",
+      "3",
+      "JLCPCB",
+      "Extended",
+      "$0.5000",
+      ""
+    ],
+    "checks": [
+      {
+        "checked": true,
+        "disabled": false
+      }
+    ]
+  },
+  {
+    "cells": [],
+    "checks": []
+  },
+  {
+    "cells": [
+      "3",
+      "1",
+      "0",
+      "/",
+      "3"
+    ],
+    "checks": []
+  },
+  {
+    "cells": [
+      "",
+      "R3",
+      "FRC0402F4754TS",
+      "Stratolink_v1p1_R3_R_0402_1005Metric",
+      "FRC0402F4754TS\nC2998153\n-55℃~+155℃ 4.75MΩ 50V 62.5mW Thick Film Resistor ±1% ±100ppm/℃ 0402 Chip Resistor - Surface Mount ROHS",
+      "0",
+      "JLCPCB",
+      "Extended",
+      "",
+      ""
+    ],
+    "checks": [
+      {
+        "checked": false,
+        "disabled": false
+      }
+    ]
+  },
+  {
+    "cells": [
+      "",
+      "R7",
+      "FRC0402F4754TS",
+      "Stratolink_v1p1_R7_R_0402_1005Metric",
+      "FRC0402F4754TS\nC2998153\n-55℃~+155℃ 4.75MΩ 50V 62.5mW Thick Film Resistor ±1% ±100ppm/℃ 0402 Chip Resistor - Surface Mount ROHS",
+      ""
+    ],
+    "checks": [
+      {
+        "checked": false,
+        "disabled": false
+      }
+    ]
+  },
+  {
+    "cells": [
+      "R24",
+      "",
+      "FRC0402F4754TS",
+      "Stratolink_v1p1_R24_R_0402_1005Metric",
+      "FRC0402F4754TS\nC2998153\n-55℃~+155℃ 4.75MΩ 50V 62.5mW Thick Film Resistor ±1% ±100ppm/℃ 0402 Chip Resistor - Surface Mount ROHS",
+      ""
+    ],
+    "checks": [
+      {
+        "checked": false,
+        "disabled": false
+      }
+    ]
+  },
+  {
+    "cells": [
+      "R25",
+      "",
+      "FRC0402F4754TS",
+      "Stratolink_v1p1_R25_R_0402_1005Metric",
+      "FRC0402F4754TS\nC2998153\n-55℃~+155℃ 4.75MΩ 50V 62.5mW Thick Film Resistor ±1% ±100ppm/℃ 0402 Chip Resistor - Surface Mount ROHS",
+      ""
+    ],
+    "checks": [
+      {
+        "checked": false,
+        "disabled": false
+      }
+    ]
+  },
+  {
+    "cells": [
+      "",
+      "R4",
+      "RC0402FR-073M65L",
+      "Stratolink_v1p1_R4_R_0402_1005Metric",
+      "RC0402FR-073M65L\nC477700\n-55℃~+155℃ 3.65MΩ 50V 62.5mW Thick Film Resistor ±1% ±100ppm/℃ 0402 Chip Resistor - Surface Mount ROHS",
+      "20",
+      "3",
+      "1",
+      "0",
+      "/",
+      "3",
+      "JLCPCB",
+      "Extended",
+      "$0.0440",
+      ""
+    ],
+    "checks": [
+      {
+        "checked": true,
+        "disabled": false
+      }
+    ]
+  },
+  {
+    "cells": [],
+    "checks": []
+  },
+  {
+    "cells": [
+      "3",
+      "1",
+      "0",
+      "/",
+      "3"
+    ],
+    "checks": []
+  },
+  {
+    "cells": [
+      "",
+      "R5",
+      "GR0402F4M42TAG00",
+      "Stratolink_v1p1_R5_R_0402_1005Metric",
+      "GR0402F4M42TAG00\nC49654874\n-55℃~+155℃ 4.42MΩ 50V 62.5mW Thick Film Resistor ±1% ±100ppm/℃ 0402 Chip Resistor - Surface Mount ROHS",
+      "20",
+      "3",
+      "1",
+      "0",
+      "/",
+      "3",
+      "JLCPCB",
+      "Extended",
+      "$0.0180",
+      ""
+    ],
+    "checks": [
+      {
+        "checked": true,
+        "disabled": false
+      }
+    ]
+  },
+  {
+    "cells": [],
+    "checks": []
+  },
+  {
+    "cells": [
+      "3",
+      "1",
+      "0",
+      "/",
+      "3"
+    ],
+    "checks": []
+  },
+  {
+    "cells": [
+      "",
+      "R6",
+      "0402WGF8254TCE",
+      "Stratolink_v1p1_R6_R_0402_1005Metric",
+      "0402WGF8254TCE\nC423131\n-55℃~+155℃ 50V 62.5mW 8.25MΩ Thick Film Resistor ±1% ±100ppm/℃ 0402 Chip Resistor - Surface Mount ROHS",
+      "20",
+      "3",
+      "1",
+      "0",
+      "/",
+      "3",
+      "JLCPCB",
+      "Extended",
+      "$0.0120",
+      ""
+    ],
+    "checks": [
+      {
+        "checked": true,
+        "disabled": false
+      }
+    ]
+  },
+  {
+    "cells": [],
+    "checks": []
+  },
+  {
+    "cells": [
+      "3",
+      "1",
+      "0",
+      "/",
+      "3"
+    ],
+    "checks": []
+  },
+  {
+    "cells": [
+      "",
+      "R8",
+      "RC0402FR-07100KL",
+      "Stratolink_v1p1_R8_R_0402_1005Metric",
+      "RC0402FR-07100KL\nC60491\n-55℃~+155℃ 100kΩ 50V 62.5mW Thick Film Resistor ±1% ±100ppm/℃ 0402 Chip Resistor - Surface Mount ROHS",
+      "20",
+      "3",
+      "1",
+      "0",
+      "/",
+      "3",
+      "JLCPCB",
+      "Extended",
+      "$0.0460",
+      ""
+    ],
+    "checks": [
+      {
+        "checked": true,
+        "disabled": false
+      }
+    ]
+  },
+  {
+    "cells": [],
+    "checks": []
+  },
+  {
+    "cells": [
+      "3",
+      "1",
+      "0",
+      "/",
+      "3"
+    ],
+    "checks": []
+  },
+  {
+    "cells": [
+      "R9",
+      "",
+      "RC0402FR-070RL",
+      "Stratolink_v1p1_R9_R_0402_1005Metric",
+      "RC0402FR-070RL\nC106231\n-55℃~+155℃ 0Ω 50V 62.5mW Thick Film Resistor ±1% 0402 Chip Resistor - Surface Mount ROHS",
+      "0",
+      "JLCPCB",
+      "Extended",
+      "",
+      ""
+    ],
+    "checks": [
+      {
+        "checked": false,
+        "disabled": false
+      }
+    ]
+  },
+  {
+    "cells": [
+      "R13",
+      "",
+      "RC0402FR-070RL",
+      "Stratolink_v1p1_R13_R_0402_1005Metric",
+      "RC0402FR-070RL\nC106231\n-55℃~+155℃ 0Ω 50V 62.5mW Thick Film Resistor ±1% 0402 Chip Resistor - Surface Mount ROHS",
+      ""
+    ],
+    "checks": [
+      {
+        "checked": false,
+        "disabled": false
+      }
+    ]
+  },
+  {
+    "cells": [
+      "R14",
+      "",
+      "RC0402FR-070RL",
+      "Stratolink_v1p1_R14_R_0402_1005Metric",
+      "RC0402FR-070RL\nC106231\n-55℃~+155℃ 0Ω 50V 62.5mW Thick Film Resistor ±1% 0402 Chip Resistor - Surface Mount ROHS",
+      ""
+    ],
+    "checks": [
+      {
+        "checked": false,
+        "disabled": false
+      }
+    ]
+  },
+  {
+    "cells": [
+      "R10",
+      "",
+      "RC0402FR-0710KL",
+      "Stratolink_v1p1_R10_R_0402_1005Metric",
+      "RC0402FR-0710KL\nC60490\n-55℃~+155℃ 10kΩ 50V 62.5mW Thick Film Resistor ±1% ±100ppm/℃ 0402 Chip Resistor - Surface Mount ROHS",
+      "0",
+      "JLCPCB",
+      "Extended",
+      "",
+      ""
+    ],
+    "checks": [
+      {
+        "checked": false,
+        "disabled": false
+      }
+    ]
+  },
+  {
+    "cells": [
+      "R18",
+      "",
+      "RC0402FR-0710KL",
+      "Stratolink_v1p1_R18_R_0402_1005Metric",
+      "RC0402FR-0710KL\nC60490\n-55℃~+155℃ 10kΩ 50V 62.5mW Thick Film Resistor ±1% ±100ppm/℃ 0402 Chip Resistor - Surface Mount ROHS",
+      ""
+    ],
+    "checks": [
+      {
+        "checked": false,
+        "disabled": false
+      }
+    ]
+  },
+  {
+    "cells": [
+      "R11",
+      "",
+      "RC0402FR-074K7L",
+      "Stratolink_v1p1_R11_R_0402_1005Metric",
+      "RC0402FR-074K7L\nC105871\n-55℃~+155℃ 4.7kΩ 50V 62.5mW Thick Film Resistor ±1% ±100ppm/℃ 0402 Chip Resistor - Surface Mount ROHS",
+      "0",
+      "JLCPCB",
+      "Extended",
+      "",
+      ""
+    ],
+    "checks": [
+      {
+        "checked": false,
+        "disabled": false
+      }
+    ]
+  },
+  {
+    "cells": [
+      "R12",
+      "",
+      "RC0402FR-074K7L",
+      "Stratolink_v1p1_R12_R_0402_1005Metric",
+      "RC0402FR-074K7L\nC105871\n-55℃~+155℃ 4.7kΩ 50V 62.5mW Thick Film Resistor ±1% ±100ppm/℃ 0402 Chip Resistor - Surface Mount ROHS",
+      ""
+    ],
+    "checks": [
+      {
+        "checked": false,
+        "disabled": false
+      }
+    ]
+  },
+  {
+    "cells": [
+      "R15",
+      "",
+      "RC0402FR-0733RL",
+      "Stratolink_v1p1_R15_R_0402_1005Metric",
+      "RC0402FR-0733RL\nC138002\n-55℃~+155℃ 33Ω 50V 62.5mW Thick Film Resistor ±1% ±100ppm/℃ 0402 Chip Resistor - Surface Mount ROHS",
+      "0",
+      "JLCPCB",
+      "Extended",
+      "",
+      ""
+    ],
+    "checks": [
+      {
+        "checked": false,
+        "disabled": false
+      }
+    ]
+  },
+  {
+    "cells": [
+      "R16",
+      "",
+      "RC0402FR-0733RL",
+      "Stratolink_v1p1_R16_R_0402_1005Metric",
+      "RC0402FR-0733RL\nC138002\n-55℃~+155℃ 33Ω 50V 62.5mW Thick Film Resistor ±1% ±100ppm/℃ 0402 Chip Resistor - Surface Mount ROHS",
+      ""
+    ],
+    "checks": [
+      {
+        "checked": false,
+        "disabled": false
+      }
+    ]
+  },
+  {
+    "cells": [
+      "R19",
+      "",
+      "RC0402FR-071ML",
+      "Stratolink_v1p1_R19_R_0402_1005Metric",
+      "RC0402FR-071ML\nC138033\n-55℃~+155℃ 1MΩ 50V 62.5mW Thick Film Resistor ±1% ±100ppm/℃ 0402 Chip Resistor - Surface Mount ROHS",
+      "0",
+      "JLCPCB",
+      "Extended",
+      "",
+      ""
+    ],
+    "checks": [
+      {
+        "checked": false,
+        "disabled": false
+      }
+    ]
+  },
+  {
+    "cells": [
+      "R21",
+      "",
+      "RC0402FR-071ML",
+      "Stratolink_v1p1_R21_R_0402_1005Metric",
+      "RC0402FR-071ML\nC138033\n-55℃~+155℃ 1MΩ 50V 62.5mW Thick Film Resistor ±1% ±100ppm/℃ 0402 Chip Resistor - Surface Mount ROHS",
+      ""
+    ],
+    "checks": [
+      {
+        "checked": false,
+        "disabled": false
+      }
+    ]
+  },
+  {
+    "cells": [
+      "R22",
+      "",
+      "RC0402FR-071ML",
+      "Stratolink_v1p1_R22_R_0402_1005Metric",
+      "RC0402FR-071ML\nC138033\n-55℃~+155℃ 1MΩ 50V 62.5mW Thick Film Resistor ±1% ±100ppm/℃ 0402 Chip Resistor - Surface Mount ROHS",
+      ""
+    ],
+    "checks": [
+      {
+        "checked": false,
+        "disabled": false
+      }
+    ]
+  },
+  {
+    "cells": [
+      "R23",
+      "",
+      "RC0402FR-071ML",
+      "Stratolink_v1p1_R23_R_0402_1005Metric",
+      "RC0402FR-071ML\nC138033\n-55℃~+155℃ 1MΩ 50V 62.5mW Thick Film Resistor ±1% ±100ppm/℃ 0402 Chip Resistor - Surface Mount ROHS",
+      ""
+    ],
+    "checks": [
+      {
+        "checked": false,
+        "disabled": false
+      }
+    ]
+  },
+  {
+    "cells": [
+      "R26",
+      "",
+      "0402WGF220JTCE",
+      "Stratolink_v1p1_R26_R_0402_1005Metric",
+      "0402WGF220JTCE\nC25092\n-55℃~+155℃ 22Ω 50V 62.5mW Thick Film Resistor ±1% ±100ppm/℃ 0402 Chip Resistor - Surface Mount ROHS",
+      "20",
+      "3",
+      "1",
+      "0",
+      "/",
+      "3",
+      "JLCPCB",
+      "Basic",
+      "$0.0300",
+      ""
+    ],
+    "checks": [
+      {
+        "checked": true,
+        "disabled": false
+      }
+    ]
+  },
+  {
+    "cells": [],
+    "checks": []
+  },
+  {
+    "cells": [
+      "3",
+      "1",
+      "0",
+      "/",
+      "3"
+    ],
+    "checks": []
+  },
+  {
+    "cells": [
+      "R27",
+      "",
+      "MCU0805MD3304BP500",
+      "Stratolink_v1p1_R27_R_0805_2012Metric",
+      "MCU0805MD3304BP500\nC4313228\n-55℃~+155℃ 200mW 3.3MΩ Thin Film Resistor ±0.1% ±25ppm/℃ 0805 Chip Resistor - Surface Mount ROHS",
+      "5",
+      "3",
+      "1",
+      "0",
+      "/",
+      "3",
+      "JLCPCB",
+      "Extended",
+      "$2.5535",
+      ""
+    ],
+    "checks": [
+      {
+        "checked": true,
+        "disabled": false
+      }
+    ]
+  },
+  {
+    "cells": [],
+    "checks": []
+  },
+  {
+    "cells": [
+      "3",
+      "1",
+      "0",
+      "/",
+      "3"
+    ],
+    "checks": []
+  },
+  {
+    "cells": [
+      "",
+      "U1",
+      "BQ25570RGRR",
+      "Stratolink_v1p1_U1_QFN50P350X350X100-21N",
+      "BQ25570RGRR\nC506250\n-40℃~+125℃ 1.95V 285mA 2V~5.5V 488nA Charging IC、Protection IC Not supported Supercapacitor、Lithium Battery VQFN-20-EP(3.5x3.5) Battery Management ROHS",
+      "3",
+      "3",
+      "1",
+      "0",
+      "/",
+      "3",
+      "JLCPCB",
+      "Extended",
+      "$17.5068",
+      ""
+    ],
+    "checks": [
+      {
+        "checked": true,
+        "disabled": false
+      }
+    ]
+  },
+  {
+    "cells": [],
+    "checks": []
+  },
+  {
+    "cells": [
+      "3",
+      "1",
+      "0",
+      "/",
+      "3"
+    ],
+    "checks": []
+  },
+  {
+    "cells": [
+      "U2",
+      "",
+      "RAK3172-8-SM-NI",
+      "Stratolink_v1p1_U2_RAK3172",
+      "RAK3172-8-SM-NI\nC5452091\n-40℃~+85℃ 15km 2V~3.6V 5.22mA 87mA IPEX interface LoRa SPI、UART、ADC、GPIO、I2C SMD,15.5x15mm LoRa Modules ROHS",
+      "3",
+      "3",
+      "1",
+      "0",
+      "/",
+      "3",
+      "JLCPCB",
+      "Extended",
+      "$23.7372",
+      ""
+    ],
+    "checks": [
+      {
+        "checked": true,
+        "disabled": false
+      }
+    ]
+  },
+  {
+    "cells": [],
+    "checks": []
+  },
+  {
+    "cells": [
+      "3",
+      "1",
+      "0",
+      "/",
+      "3"
+    ],
+    "checks": []
+  },
+  {
+    "cells": [
+      "U3",
+      "",
+      "MAX-M10S-00B",
+      "Stratolink_v1p1_U3_XCVR_MAX-M10S-00B",
+      "MAX-M10S-00B\nC4153167\nLCC-18(9.7x10.1) GNSS Modules ROHS",
+      "3",
+      "3",
+      "1",
+      "0",
+      "/",
+      "3",
+      "JLCPCB",
+      "Extended",
+      "$32.5275",
+      ""
+    ],
+    "checks": [
+      {
+        "checked": true,
+        "disabled": false
+      }
+    ]
+  },
+  {
+    "cells": [],
+    "checks": []
+  },
+  {
+    "cells": [
+      "3",
+      "1",
+      "0",
+      "/",
+      "3"
+    ],
+    "checks": []
+  },
+  {
+    "cells": [
+      "U4",
+      "",
+      "MS561101BA03-50",
+      "Stratolink_v1p1_U4_SON125P500X300X100-8N",
+      "MS561101BA03-50\nC15639 \n-40℃~+85℃ 1.8V~3.6V 140nA 150pa 1Kpa~1.2bar 8.22ms I2C、SPI Integrated ADC and digital interface、On-chip calibration and non-volatile storage、Standby mode、On-chip temperature output Yes QFN-8(3x5) Pressure Sensors ROHS",
+      "0",
+      "JLCPCB",
+      "Extended",
+      "",
+      ""
+    ],
+    "checks": [
+      {
+        "checked": false,
+        "disabled": false
+      }
+    ]
+  },
+  {
+    "cells": [
+      "U5",
+      "",
+      "TMP117AIYBGR",
+      "Stratolink_v1p1_U5_BGA6N40P3X2_148X95X53",
+      "TMP117AIYBGR\nC2871893\n-55℃~+150℃ 1.8V~5.5V 15.5ms 16bit 3.1uA I2C、SMBus ±0.1℃ DSBGA-6 Temperature Sensors ROHS",
+      "3",
+      "3",
+      "1",
+      "0",
+      "/",
+      "3",
+      "JLCPCB",
+      "Extended",
+      "$6.9795",
+      ""
+    ],
+    "checks": [
+      {
+        "checked": true,
+        "disabled": false
+      }
+    ]
+  },
+  {
+    "cells": [],
+    "checks": []
+  },
+  {
+    "cells": [
+      "3",
+      "1",
+      "0",
+      "/",
+      "3"
+    ],
+    "checks": []
+  },
+  {
+    "cells": [
+      "U7",
+      "",
+      "LIS2DH12TR",
+      "Stratolink_v1p1_U7_PQFN50P200X200100-12N",
+      "LIS2DH12TR\nC110926\n-40℃~+85℃ 0.2KB 1.71V~3.6V 500nA 8bit、10bit、12bit Accelerometer Motion event detection SPI、I2C X,Y,Z ±16g LGA-12(2x2) Accelerometers ROHS",
+      "3",
+      "3",
+      "1",
+      "0",
+      "/",
+      "3",
+      "JLCPCB",
+      "Extended",
+      "$2.7900",
+      ""
+    ],
+    "checks": [
+      {
+        "checked": true,
+        "disabled": false
+      }
+    ]
+  },
+  {
+    "cells": [],
+    "checks": []
+  },
+  {
+    "cells": [
+      "3",
+      "1",
+      "0",
+      "/",
+      "3"
+    ],
+    "checks": []
+  },
+  {
+    "cells": [
+      "U8",
+      "",
+      "TLV8801DBVT",
+      "Stratolink_v1p1_U8_SOT-23-5",
+      "TLV8801DBVT\nC544879\n-40℃~+125℃ 0.1pA 0.1pA 1 1.5V/ms 1.7V~5.5V 1uV/℃ 340nV/√Hz@100Hz 4.5mV 450nA 87dB Built-in compensation、EMI filtering/RF suppression Rail-to-rail output SOT-23-5 Operational Amplifier ROHS",
+      "3",
+      "3",
+      "1",
+      "0",
+      "/",
+      "3",
+      "JLCPCB",
+      "Extended",
+      "$1.0524",
+      ""
+    ],
+    "checks": [
+      {
+        "checked": true,
+        "disabled": false
+      }
+    ]
+  },
+  {
+    "cells": [],
+    "checks": []
+  },
+  {
+    "cells": [
+      "3",
+      "1",
+      "0",
+      "/",
+      "3"
+    ],
+    "checks": []
+  }
+]

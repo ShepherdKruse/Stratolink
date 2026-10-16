@@ -1,0 +1,140 @@
+- text: 
+- banner:
+  - generic: 24-hour PCB production. Fast Delivery to United States.
+  - link " Coupons":
+    - /url: https://jlcpcb.com/coupon-center
+    - generic: 
+    - text: Coupons
+  - link " Download APP":
+    - /url: https://jlcone.com/download
+    - generic: 
+    - text: Download APP
+  - text:     
+  - text: USD
+  - generic: 
+- navigation:
+  - generic: 
+  - link "JLCPCB logo":
+    - /url: https://jlcpcb.com
+    - generic: 
+    - generic: JLCPCB
+  - text:       
+  - generic: 
+  - link "":
+    - /url: https://cart.jlcpcb.com/shopcart/cart
+    - generic: 
+  - superscript: "1"
+  - link "Order Now":
+    - /url: https://cart.jlcpcb.com/quote?spm=Jlcpcb.Homepage.1006&spm=Jlcpcb.Homepage.1006
+  - text: 
+  - text: My Account
+  - generic: 
+  - text: 
+- main:
+  - generic: fabrication-review
+  - generic: Automatically saved, last updated on 16 October, 07:51
+  - tablist:
+    - tab "PCB" [selected]:
+      - generic: PCB
+    - tab "Bill of Materials":
+      - generic: Bill of Materials
+    - tab "Component Placements":
+      - generic: Component Placements
+    - tab "Quote & Order":
+      - generic: Quote & Order
+  - tabpanel "PCB":
+    - radiogroup:
+      - radio "Top" [checked]:
+        - radio "Top" [checked]
+        - generic: Top
+      - radio "Bottom":
+        - radio "Bottom"
+        - generic: Bottom
+    - link "Change PCB specifications":
+      - /url: https://cart.jlcpcb.com/quote?pcbFileNo=89a2a2e5334349ba8fe0234665c7bbcd&back=true
+      - text: Change PCB specifications
+    - list:
+      - strong: "PCBA Type:"
+      - text: Standard
+      - strong: "Assembly Side:"
+      - text: Both Sides
+      - strong: "PCBA Qty:"
+      - text: "3"
+      - button "Next"
+- contentinfo:
+  - text:    
+  - tablist:
+    - tab "PCB Service ":
+      - button "PCB Service ":
+        - generic: PCB Service
+        - generic: 
+        - text: 
+    - tab "Support ":
+      - button "Support ":
+        - generic: Support
+        - generic: 
+        - text: 
+    - tab "Company ":
+      - button "Company ":
+        - generic: Company
+        - generic: 
+        - text: 
+    - tab "Electronics ":
+      - button "Electronics ":
+        - generic: Electronics
+        - generic: 
+        - text: 
+    - tab "Mechanical ":
+      - button "Mechanical ":
+        - generic: Mechanical
+        - generic: 
+        - text: 
+  - generic: 
+  - generic: Order on JLCONE Desktop, Save $1–$20 Every Time
+  - link " Windows":
+    - /url: https://jlcone.com/download
+    - generic: 
+    - generic: Windows
+  - link " MAC":
+    - /url: https://jlcone.com/download
+    - generic: 
+    - generic: MAC
+  - link " Android":
+    - /url: https://jlcone.com/download#mobile-app
+    - generic: 
+    - generic: Android
+  - link " IOS":
+    - /url: https://jlcone.com/download#mobile-app
+    - generic: 
+    - generic: IOS
+  - generic: CONNECT WITH US
+  - link "":
+    - /url: https://www.facebook.com/jlcpcb
+    - generic: 
+  - link "":
+    - /url: https://twitter.com/jlcpcb
+    - generic: 
+  - link "":
+    - /url: https://www.instagram.com/jlcpcb
+    - generic: 
+  - link "":
+    - /url: https://www.youtube.com/JLCPCB
+    - generic: 
+  - link "":
+    - /url: https://www.linkedin.com/company/jlcpcb
+    - generic: 
+  - link "":
+    - /url: https://www.reddit.com/r/JLCPCBLab/
+    - generic: 
+  - text:      
+  - generic: © 2026 JLCPCB.COM All Rights Reserved.
+  - link "Privacy Policy":
+    - /url: https://jlcpcb.com/help/article/Privacy-Policy
+  - link "Terms & Conditions":
+    - /url: https://jlcpcb.com/help/article/Terms-%26-Conditions
+  - link "Cookies Policy":
+    - /url: https://jlcpcb.com/help/article/JLCPCB-Cookie-Notice
+  - link "Do Not Sell or Share My Personal Information":
+    - /url: https://jlcpcb.com/privacy-policy/do-not-sell-or-share-my-personal-information
+- iframe
+- text: 
