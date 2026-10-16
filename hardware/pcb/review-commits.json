@@ -181,6 +181,21 @@
       "original": "74e9df91ad4f8d3d5dabd7d530cdee92c86b5c0b",
       "review_branch": "265191c597d976c5d770d72c5e35e3e8ad1cdabc",
       "subject": "Preserve exact supplier CSV bytes for hash verification"
+    },
+    {
+      "original": "46264ef8c3dbd631a6a95a7dcf233961819d79c7",
+      "review_branch": "eb713d052f0eeb4278cd625697c5cb2882051cf4",
+      "subject": "Preserve final schematic cleanup with reviewed v1.1 geometry and rules"
+    },
+    {
+      "original": "b7401e13ca0ba3265175067ed29c44595f6f7b1e",
+      "review_branch": "4ef2640a4d5b678fd72b8e971b8040256fffd536",
+      "subject": "Export final v1.1 UV population variants and refresh KiCad downloads"
+    },
+    {
+      "original": "10098ea9f1d8e7e3eaf745a2fc0dbc45a050d189",
+      "review_branch": "495716f4f336c94a16e2be892cff1933d7cc4d95",
+      "subject": "Record final adversarial sweep and JLC Y26 sourcing decision"
     }
   ]
 }
