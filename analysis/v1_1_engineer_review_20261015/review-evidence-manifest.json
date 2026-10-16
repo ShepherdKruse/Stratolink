@@ -1,0 +1,756 @@
+{
+  "bindings": [
+    {
+      "evidence": "analysis/v1_1_engineer_review_20261015/native/root-review.json",
+      "pointer": "/pcb_sha256",
+      "source": "hardware/pcb/stratolink.kicad_pcb"
+    },
+    {
+      "evidence": "analysis/v1_1_engineer_review_20261015/connectivity/summary.json",
+      "pointer": "/pcb_sha256",
+      "source": "hardware/pcb/stratolink.kicad_pcb"
+    },
+    {
+      "evidence": "analysis/v1_1_engineer_review_20261015/connectivity/final-copper.json",
+      "pointer": "/pcb_sha256",
+      "source": "hardware/pcb/stratolink.kicad_pcb"
+    },
+    {
+      "evidence": "analysis/v1_1_engineer_review_20261015/connectivity/final-physical-copper.json",
+      "pointer": "/pcb_sha256",
+      "source": "hardware/pcb/stratolink.kicad_pcb"
+    },
+    {
+      "evidence": "analysis/v1_1_engineer_review_20261015/connectivity/right-minus-ground.json",
+      "pointer": "/pcb_sha256",
+      "source": "hardware/pcb/stratolink.kicad_pcb"
+    },
+    {
+      "evidence": "analysis/v1_1_engineer_review_20261015/fabrication/summary.json",
+      "pointer": "/pcb_sha256",
+      "source": "hardware/pcb/stratolink.kicad_pcb"
+    },
+    {
+      "evidence": "analysis/v1_1_engineer_review_20261015/fabrication/classified-screen.json",
+      "pointer": "/pcb_sha256",
+      "source": "hardware/pcb/stratolink.kicad_pcb"
+    },
+    {
+      "evidence": "analysis/v1_1_engineer_review_20261015/fabrication/local-copper-scope.json",
+      "pointer": "/pcb_sha256",
+      "source": "hardware/pcb/stratolink.kicad_pcb"
+    },
+    {
+      "evidence": "analysis/v1_1_engineer_review_20261015/mechanics/plotted-mask-review.json",
+      "pointer": "/pcb_sha256",
+      "source": "hardware/pcb/stratolink.kicad_pcb"
+    },
+    {
+      "evidence": "analysis/v1_1_engineer_review_20261015/mechanics/assembly-review.json",
+      "pointer": "/pcb_sha256",
+      "source": "hardware/pcb/stratolink.kicad_pcb"
+    },
+    {
+      "evidence": "analysis/v1_1_engineer_review_20261015/mechanics/render-review.json",
+      "pointer": "/pcb_sha256",
+      "source": "hardware/pcb/stratolink.kicad_pcb"
+    },
+    {
+      "evidence": "analysis/v1_1_engineer_review_20261015/mechanics/library-pad-comparison.json",
+      "pointer": "/pcb_sha256",
+      "source": "hardware/pcb/stratolink.kicad_pcb"
+    },
+    {
+      "evidence": "analysis/v1_1_engineer_review_20261015/mechanics/model-transform-comparison.json",
+      "pointer": "/pcb_sha256",
+      "source": "hardware/pcb/stratolink.kicad_pcb"
+    },
+    {
+      "evidence": "analysis/v1_1_engineer_review_20261015/mechanics/library-source-identities.json",
+      "pointer": "/pcb_sha256",
+      "source": "hardware/pcb/stratolink.kicad_pcb"
+    },
+    {
+      "evidence": "analysis/v1_1_engineer_review_20261015/rf-power/source-identities.json",
+      "pointer": "/pcb_sha256",
+      "source": "hardware/pcb/stratolink.kicad_pcb"
+    },
+    {
+      "evidence": "analysis/v1_1_engineer_review_20261015/rf-power/rf-power-review.json",
+      "pointer": "/pcb_sha256",
+      "source": "hardware/pcb/stratolink.kicad_pcb"
+    },
+    {
+      "evidence": "analysis/v1_1_engineer_review_20261015/rf-power/ground-review.json",
+      "pointer": "/pcb_sha256",
+      "source": "hardware/pcb/stratolink.kicad_pcb"
+    },
+    {
+      "evidence": "analysis/v1_1_engineer_review_20261015/rf-power/power-continuity.json",
+      "pointer": "/pcb_sha256",
+      "source": "hardware/pcb/stratolink.kicad_pcb"
+    },
+    {
+      "evidence": "analysis/v1_1_engineer_review_20261015/manufacturing/package-verification.json",
+      "pointer": "/pcb_sha256",
+      "source": "hardware/pcb/stratolink.kicad_pcb"
+    },
+    {
+      "evidence": "analysis/v1_1_engineer_review_20261015/mechanics/final-native.json",
+      "pointer": "/sha256",
+      "source": "hardware/pcb/stratolink.kicad_pcb"
+    },
+    {
+      "evidence": "analysis/v1_1_engineer_review_20261015/native/root-review.json",
+      "pointer": "/schematic_sha256",
+      "source": "hardware/pcb/stratolink.kicad_sch"
+    },
+    {
+      "evidence": "analysis/v1_1_engineer_review_20261015/native/root-review.json",
+      "pointer": "/strict_project_sha256",
+      "source": "hardware/pcb/stratolink.kicad_pro"
+    },
+    {
+      "evidence": "analysis/v1_1_engineer_review_20261015/native/root-review.json",
+      "pointer": "/rules_sha256",
+      "source": "hardware/pcb/stratolink.kicad_dru"
+    },
+    {
+      "evidence": "analysis/v1_1_engineer_review_20261015/mechanics/library-source-identities.json",
+      "pointer": "/library_inputs/lib~1INDC1608X90N.kicad_mod",
+      "source": "hardware/pcb/lib/INDC1608X90N.kicad_mod"
+    },
+    {
+      "evidence": "analysis/v1_1_engineer_review_20261015/mechanics/library-source-identities.json",
+      "pointer": "/library_inputs/lib~1Solar_Notch_Left_1p0x2p0.kicad_mod",
+      "source": "hardware/pcb/lib/Solar_Notch_Left_1p0x2p0.kicad_mod"
+    },
+    {
+      "evidence": "analysis/v1_1_engineer_review_20261015/mechanics/library-source-identities.json",
+      "pointer": "/library_inputs/lib~1Solar_Notch_Right_1p0x2p0.kicad_mod",
+      "source": "hardware/pcb/lib/Solar_Notch_Right_1p0x2p0.kicad_mod"
+    },
+    {
+      "evidence": "analysis/v1_1_engineer_review_20261015/mechanics/library-source-identities.json",
+      "pointer": "/library_inputs/lib~1Stratolink_GNSS_Wire_PTH_D1p0.kicad_mod",
+      "source": "hardware/pcb/lib/Stratolink_GNSS_Wire_PTH_D1p0.kicad_mod"
+    },
+    {
+      "evidence": "analysis/v1_1_engineer_review_20261015/mechanics/library-source-identities.json",
+      "pointer": "/library_inputs/lib~1Stratolink_LoRa_Wire_PTH_D1p0.kicad_mod",
+      "source": "hardware/pcb/lib/Stratolink_LoRa_Wire_PTH_D1p0.kicad_mod"
+    },
+    {
+      "evidence": "analysis/v1_1_engineer_review_20261015/mechanics/library-source-identities.json",
+      "pointer": "/library_inputs/lib~1Stratolink_Programming_Left_1x07_P1p00_D0p50_BackTack1p20x0p88.kicad_mod",
+      "source": "hardware/pcb/lib/Stratolink_Programming_Left_1x07_P1p00_D0p50_BackTack1p20x0p88.kicad_mod"
+    },
+    {
+      "evidence": "analysis/v1_1_engineer_review_20261015/mechanics/library-source-identities.json",
+      "pointer": "/library_inputs/lib~1Stratolink_v1p1_C10_C_0402_1005Metric.kicad_mod",
+      "source": "hardware/pcb/lib/Stratolink_v1p1_C10_C_0402_1005Metric.kicad_mod"
+    },
+    {
+      "evidence": "analysis/v1_1_engineer_review_20261015/mechanics/library-source-identities.json",
+      "pointer": "/library_inputs/lib~1Stratolink_v1p1_C11_C_0402_1005Metric.kicad_mod",
+      "source": "hardware/pcb/lib/Stratolink_v1p1_C11_C_0402_1005Metric.kicad_mod"
+    },
+    {
+      "evidence": "analysis/v1_1_engineer_review_20261015/mechanics/library-source-identities.json",
+      "pointer": "/library_inputs/lib~1Stratolink_v1p1_C12_C_0402_1005Metric.kicad_mod",
+      "source": "hardware/pcb/lib/Stratolink_v1p1_C12_C_0402_1005Metric.kicad_mod"
+    },
+    {
+      "evidence": "analysis/v1_1_engineer_review_20261015/mechanics/library-source-identities.json",
+      "pointer": "/library_inputs/lib~1Stratolink_v1p1_C14_C_0402_1005Metric.kicad_mod",
+      "source": "hardware/pcb/lib/Stratolink_v1p1_C14_C_0402_1005Metric.kicad_mod"
+    },
+    {
+      "evidence": "analysis/v1_1_engineer_review_20261015/mechanics/library-source-identities.json",
+      "pointer": "/library_inputs/lib~1Stratolink_v1p1_C15_C_0402_1005Metric.kicad_mod",
+      "source": "hardware/pcb/lib/Stratolink_v1p1_C15_C_0402_1005Metric.kicad_mod"
+    },
+    {
+      "evidence": "analysis/v1_1_engineer_review_20261015/mechanics/library-source-identities.json",
+      "pointer": "/library_inputs/lib~1Stratolink_v1p1_C16_C_0603_1608Metric.kicad_mod",
+      "source": "hardware/pcb/lib/Stratolink_v1p1_C16_C_0603_1608Metric.kicad_mod"
+    },
+    {
+      "evidence": "analysis/v1_1_engineer_review_20261015/mechanics/library-source-identities.json",
+      "pointer": "/library_inputs/lib~1Stratolink_v1p1_C17_C_0402_1005Metric.kicad_mod",
+      "source": "hardware/pcb/lib/Stratolink_v1p1_C17_C_0402_1005Metric.kicad_mod"
+    },
+    {
+      "evidence": "analysis/v1_1_engineer_review_20261015/mechanics/library-source-identities.json",
+      "pointer": "/library_inputs/lib~1Stratolink_v1p1_C19_C_0402_1005Metric.kicad_mod",
+      "source": "hardware/pcb/lib/Stratolink_v1p1_C19_C_0402_1005Metric.kicad_mod"
+    },
+    {
+      "evidence": "analysis/v1_1_engineer_review_20261015/mechanics/library-source-identities.json",
+      "pointer": "/library_inputs/lib~1Stratolink_v1p1_C1_C_0402_1005Metric.kicad_mod",
+      "source": "hardware/pcb/lib/Stratolink_v1p1_C1_C_0402_1005Metric.kicad_mod"
+    },
+    {
+      "evidence": "analysis/v1_1_engineer_review_20261015/mechanics/library-source-identities.json",
+      "pointer": "/library_inputs/lib~1Stratolink_v1p1_C20_C_0402_1005Metric.kicad_mod",
+      "source": "hardware/pcb/lib/Stratolink_v1p1_C20_C_0402_1005Metric.kicad_mod"
+    },
+    {
+      "evidence": "analysis/v1_1_engineer_review_20261015/mechanics/library-source-identities.json",
+      "pointer": "/library_inputs/lib~1Stratolink_v1p1_C21_C_0603_1608Metric.kicad_mod",
+      "source": "hardware/pcb/lib/Stratolink_v1p1_C21_C_0603_1608Metric.kicad_mod"
+    },
+    {
+      "evidence": "analysis/v1_1_engineer_review_20261015/mechanics/library-source-identities.json",
+      "pointer": "/library_inputs/lib~1Stratolink_v1p1_C22_C_0402_1005Metric.kicad_mod",
+      "source": "hardware/pcb/lib/Stratolink_v1p1_C22_C_0402_1005Metric.kicad_mod"
+    },
+    {
+      "evidence": "analysis/v1_1_engineer_review_20261015/mechanics/library-source-identities.json",
+      "pointer": "/library_inputs/lib~1Stratolink_v1p1_C23_C_0402_1005Metric.kicad_mod",
+      "source": "hardware/pcb/lib/Stratolink_v1p1_C23_C_0402_1005Metric.kicad_mod"
+    },
+    {
+      "evidence": "analysis/v1_1_engineer_review_20261015/mechanics/library-source-identities.json",
+      "pointer": "/library_inputs/lib~1Stratolink_v1p1_C2_C_0603_1608Metric.kicad_mod",
+      "source": "hardware/pcb/lib/Stratolink_v1p1_C2_C_0603_1608Metric.kicad_mod"
+    },
+    {
+      "evidence": "analysis/v1_1_engineer_review_20261015/mechanics/library-source-identities.json",
+      "pointer": "/library_inputs/lib~1Stratolink_v1p1_C3_C_0603_1608Metric.kicad_mod",
+      "source": "hardware/pcb/lib/Stratolink_v1p1_C3_C_0603_1608Metric.kicad_mod"
+    },
+    {
+      "evidence": "analysis/v1_1_engineer_review_20261015/mechanics/library-source-identities.json",
+      "pointer": "/library_inputs/lib~1Stratolink_v1p1_C4_C_0402_1005Metric.kicad_mod",
+      "source": "hardware/pcb/lib/Stratolink_v1p1_C4_C_0402_1005Metric.kicad_mod"
+    },
+    {
+      "evidence": "analysis/v1_1_engineer_review_20261015/mechanics/library-source-identities.json",
+      "pointer": "/library_inputs/lib~1Stratolink_v1p1_C5_DMF4B5R5G105M3DTA0.kicad_mod",
+      "source": "hardware/pcb/lib/Stratolink_v1p1_C5_DMF4B5R5G105M3DTA0.kicad_mod"
+    },
+    {
+      "evidence": "analysis/v1_1_engineer_review_20261015/mechanics/library-source-identities.json",
+      "pointer": "/library_inputs/lib~1Stratolink_v1p1_C6_C_0805_2012Metric.kicad_mod",
+      "source": "hardware/pcb/lib/Stratolink_v1p1_C6_C_0805_2012Metric.kicad_mod"
+    },
+    {
+      "evidence": "analysis/v1_1_engineer_review_20261015/mechanics/library-source-identities.json",
+      "pointer": "/library_inputs/lib~1Stratolink_v1p1_C7_C_0402_1005Metric.kicad_mod",
+      "source": "hardware/pcb/lib/Stratolink_v1p1_C7_C_0402_1005Metric.kicad_mod"
+    },
+    {
+      "evidence": "analysis/v1_1_engineer_review_20261015/mechanics/library-source-identities.json",
+      "pointer": "/library_inputs/lib~1Stratolink_v1p1_C8_C_0603_1608Metric.kicad_mod",
+      "source": "hardware/pcb/lib/Stratolink_v1p1_C8_C_0603_1608Metric.kicad_mod"
+    },
+    {
+      "evidence": "analysis/v1_1_engineer_review_20261015/mechanics/library-source-identities.json",
+      "pointer": "/library_inputs/lib~1Stratolink_v1p1_C9_C_0402_1005Metric.kicad_mod",
+      "source": "hardware/pcb/lib/Stratolink_v1p1_C9_C_0402_1005Metric.kicad_mod"
+    },
+    {
+      "evidence": "analysis/v1_1_engineer_review_20261015/mechanics/library-source-identities.json",
+      "pointer": "/library_inputs/lib~1Stratolink_v1p1_D1_D_SOD-523.kicad_mod",
+      "source": "hardware/pcb/lib/Stratolink_v1p1_D1_D_SOD-523.kicad_mod"
+    },
+    {
+      "evidence": "analysis/v1_1_engineer_review_20261015/mechanics/library-source-identities.json",
+      "pointer": "/library_inputs/lib~1Stratolink_v1p1_D3_D_SOD-523.kicad_mod",
+      "source": "hardware/pcb/lib/Stratolink_v1p1_D3_D_SOD-523.kicad_mod"
+    },
+    {
+      "evidence": "analysis/v1_1_engineer_review_20261015/mechanics/library-source-identities.json",
+      "pointer": "/library_inputs/lib~1Stratolink_v1p1_FB1_C_0402_1005Metric.kicad_mod",
+      "source": "hardware/pcb/lib/Stratolink_v1p1_FB1_C_0402_1005Metric.kicad_mod"
+    },
+    {
+      "evidence": "analysis/v1_1_engineer_review_20261015/mechanics/library-source-identities.json",
+      "pointer": "/library_inputs/lib~1Stratolink_v1p1_J20_Tag-Connect_TC2030-IDC-NL_2x03_P1.27mm_Vertical.kicad_mod",
+      "source": "hardware/pcb/lib/Stratolink_v1p1_J20_Tag-Connect_TC2030-IDC-NL_2x03_P1.27mm_Vertical.kicad_mod"
+    },
+    {
+      "evidence": "analysis/v1_1_engineer_review_20261015/mechanics/library-source-identities.json",
+      "pointer": "/library_inputs/lib~1Stratolink_v1p1_J4_Stratolink_Programming_Right_1x07_P1p00_D0p50_BackTack1p20x0p88.kicad_mod",
+      "source": "hardware/pcb/lib/Stratolink_v1p1_J4_Stratolink_Programming_Right_1x07_P1p00_D0p50_BackTack1p20x0p88.kicad_mod"
+    },
+    {
+      "evidence": "analysis/v1_1_engineer_review_20261015/mechanics/library-source-identities.json",
+      "pointer": "/library_inputs/lib~1Stratolink_v1p1_L1_IND_LPS4018-223MRC.kicad_mod",
+      "source": "hardware/pcb/lib/Stratolink_v1p1_L1_IND_LPS4018-223MRC.kicad_mod"
+    },
+    {
+      "evidence": "analysis/v1_1_engineer_review_20261015/mechanics/library-source-identities.json",
+      "pointer": "/library_inputs/lib~1Stratolink_v1p1_R10_R_0402_1005Metric.kicad_mod",
+      "source": "hardware/pcb/lib/Stratolink_v1p1_R10_R_0402_1005Metric.kicad_mod"
+    },
+    {
+      "evidence": "analysis/v1_1_engineer_review_20261015/mechanics/library-source-identities.json",
+      "pointer": "/library_inputs/lib~1Stratolink_v1p1_R11_R_0402_1005Metric.kicad_mod",
+      "source": "hardware/pcb/lib/Stratolink_v1p1_R11_R_0402_1005Metric.kicad_mod"
+    },
+    {
+      "evidence": "analysis/v1_1_engineer_review_20261015/mechanics/library-source-identities.json",
+      "pointer": "/library_inputs/lib~1Stratolink_v1p1_R12_R_0402_1005Metric.kicad_mod",
+      "source": "hardware/pcb/lib/Stratolink_v1p1_R12_R_0402_1005Metric.kicad_mod"
+    },
+    {
+      "evidence": "analysis/v1_1_engineer_review_20261015/mechanics/library-source-identities.json",
+      "pointer": "/library_inputs/lib~1Stratolink_v1p1_R13_R_0402_1005Metric.kicad_mod",
+      "source": "hardware/pcb/lib/Stratolink_v1p1_R13_R_0402_1005Metric.kicad_mod"
+    },
+    {
+      "evidence": "analysis/v1_1_engineer_review_20261015/mechanics/library-source-identities.json",
+      "pointer": "/library_inputs/lib~1Stratolink_v1p1_R14_R_0402_1005Metric.kicad_mod",
+      "source": "hardware/pcb/lib/Stratolink_v1p1_R14_R_0402_1005Metric.kicad_mod"
+    },
+    {
+      "evidence": "analysis/v1_1_engineer_review_20261015/mechanics/library-source-identities.json",
+      "pointer": "/library_inputs/lib~1Stratolink_v1p1_R15_R_0402_1005Metric.kicad_mod",
+      "source": "hardware/pcb/lib/Stratolink_v1p1_R15_R_0402_1005Metric.kicad_mod"
+    },
+    {
+      "evidence": "analysis/v1_1_engineer_review_20261015/mechanics/library-source-identities.json",
+      "pointer": "/library_inputs/lib~1Stratolink_v1p1_R16_R_0402_1005Metric.kicad_mod",
+      "source": "hardware/pcb/lib/Stratolink_v1p1_R16_R_0402_1005Metric.kicad_mod"
+    },
+    {
+      "evidence": "analysis/v1_1_engineer_review_20261015/mechanics/library-source-identities.json",
+      "pointer": "/library_inputs/lib~1Stratolink_v1p1_R18_R_0402_1005Metric.kicad_mod",
+      "source": "hardware/pcb/lib/Stratolink_v1p1_R18_R_0402_1005Metric.kicad_mod"
+    },
+    {
+      "evidence": "analysis/v1_1_engineer_review_20261015/mechanics/library-source-identities.json",
+      "pointer": "/library_inputs/lib~1Stratolink_v1p1_R19_R_0402_1005Metric.kicad_mod",
+      "source": "hardware/pcb/lib/Stratolink_v1p1_R19_R_0402_1005Metric.kicad_mod"
+    },
+    {
+      "evidence": "analysis/v1_1_engineer_review_20261015/mechanics/library-source-identities.json",
+      "pointer": "/library_inputs/lib~1Stratolink_v1p1_R1_R_0402_1005Metric.kicad_mod",
+      "source": "hardware/pcb/lib/Stratolink_v1p1_R1_R_0402_1005Metric.kicad_mod"
+    },
+    {
+      "evidence": "analysis/v1_1_engineer_review_20261015/mechanics/library-source-identities.json",
+      "pointer": "/library_inputs/lib~1Stratolink_v1p1_R21_R_0402_1005Metric.kicad_mod",
+      "source": "hardware/pcb/lib/Stratolink_v1p1_R21_R_0402_1005Metric.kicad_mod"
+    },
+    {
+      "evidence": "analysis/v1_1_engineer_review_20261015/mechanics/library-source-identities.json",
+      "pointer": "/library_inputs/lib~1Stratolink_v1p1_R22_R_0402_1005Metric.kicad_mod",
+      "source": "hardware/pcb/lib/Stratolink_v1p1_R22_R_0402_1005Metric.kicad_mod"
+    },
+    {
+      "evidence": "analysis/v1_1_engineer_review_20261015/mechanics/library-source-identities.json",
+      "pointer": "/library_inputs/lib~1Stratolink_v1p1_R23_R_0402_1005Metric.kicad_mod",
+      "source": "hardware/pcb/lib/Stratolink_v1p1_R23_R_0402_1005Metric.kicad_mod"
+    },
+    {
+      "evidence": "analysis/v1_1_engineer_review_20261015/mechanics/library-source-identities.json",
+      "pointer": "/library_inputs/lib~1Stratolink_v1p1_R24_R_0402_1005Metric.kicad_mod",
+      "source": "hardware/pcb/lib/Stratolink_v1p1_R24_R_0402_1005Metric.kicad_mod"
+    },
+    {
+      "evidence": "analysis/v1_1_engineer_review_20261015/mechanics/library-source-identities.json",
+      "pointer": "/library_inputs/lib~1Stratolink_v1p1_R25_R_0402_1005Metric.kicad_mod",
+      "source": "hardware/pcb/lib/Stratolink_v1p1_R25_R_0402_1005Metric.kicad_mod"
+    },
+    {
+      "evidence": "analysis/v1_1_engineer_review_20261015/mechanics/library-source-identities.json",
+      "pointer": "/library_inputs/lib~1Stratolink_v1p1_R26_R_0402_1005Metric.kicad_mod",
+      "source": "hardware/pcb/lib/Stratolink_v1p1_R26_R_0402_1005Metric.kicad_mod"
+    },
+    {
+      "evidence": "analysis/v1_1_engineer_review_20261015/mechanics/library-source-identities.json",
+      "pointer": "/library_inputs/lib~1Stratolink_v1p1_R27_R_0805_2012Metric.kicad_mod",
+      "source": "hardware/pcb/lib/Stratolink_v1p1_R27_R_0805_2012Metric.kicad_mod"
+    },
+    {
+      "evidence": "analysis/v1_1_engineer_review_20261015/mechanics/library-source-identities.json",
+      "pointer": "/library_inputs/lib~1Stratolink_v1p1_R2_R_0402_1005Metric.kicad_mod",
+      "source": "hardware/pcb/lib/Stratolink_v1p1_R2_R_0402_1005Metric.kicad_mod"
+    },
+    {
+      "evidence": "analysis/v1_1_engineer_review_20261015/mechanics/library-source-identities.json",
+      "pointer": "/library_inputs/lib~1Stratolink_v1p1_R3_R_0402_1005Metric.kicad_mod",
+      "source": "hardware/pcb/lib/Stratolink_v1p1_R3_R_0402_1005Metric.kicad_mod"
+    },
+    {
+      "evidence": "analysis/v1_1_engineer_review_20261015/mechanics/library-source-identities.json",
+      "pointer": "/library_inputs/lib~1Stratolink_v1p1_R4_R_0402_1005Metric.kicad_mod",
+      "source": "hardware/pcb/lib/Stratolink_v1p1_R4_R_0402_1005Metric.kicad_mod"
+    },
+    {
+      "evidence": "analysis/v1_1_engineer_review_20261015/mechanics/library-source-identities.json",
+      "pointer": "/library_inputs/lib~1Stratolink_v1p1_R5_R_0402_1005Metric.kicad_mod",
+      "source": "hardware/pcb/lib/Stratolink_v1p1_R5_R_0402_1005Metric.kicad_mod"
+    },
+    {
+      "evidence": "analysis/v1_1_engineer_review_20261015/mechanics/library-source-identities.json",
+      "pointer": "/library_inputs/lib~1Stratolink_v1p1_R6_R_0402_1005Metric.kicad_mod",
+      "source": "hardware/pcb/lib/Stratolink_v1p1_R6_R_0402_1005Metric.kicad_mod"
+    },
+    {
+      "evidence": "analysis/v1_1_engineer_review_20261015/mechanics/library-source-identities.json",
+      "pointer": "/library_inputs/lib~1Stratolink_v1p1_R7_R_0402_1005Metric.kicad_mod",
+      "source": "hardware/pcb/lib/Stratolink_v1p1_R7_R_0402_1005Metric.kicad_mod"
+    },
+    {
+      "evidence": "analysis/v1_1_engineer_review_20261015/mechanics/library-source-identities.json",
+      "pointer": "/library_inputs/lib~1Stratolink_v1p1_R8_R_0402_1005Metric.kicad_mod",
+      "source": "hardware/pcb/lib/Stratolink_v1p1_R8_R_0402_1005Metric.kicad_mod"
+    },
+    {
+      "evidence": "analysis/v1_1_engineer_review_20261015/mechanics/library-source-identities.json",
+      "pointer": "/library_inputs/lib~1Stratolink_v1p1_R9_R_0402_1005Metric.kicad_mod",
+      "source": "hardware/pcb/lib/Stratolink_v1p1_R9_R_0402_1005Metric.kicad_mod"
+    },
+    {
+      "evidence": "analysis/v1_1_engineer_review_20261015/mechanics/library-source-identities.json",
+      "pointer": "/library_inputs/lib~1Stratolink_v1p1_U1_QFN50P350X350X100-21N.kicad_mod",
+      "source": "hardware/pcb/lib/Stratolink_v1p1_U1_QFN50P350X350X100-21N.kicad_mod"
+    },
+    {
+      "evidence": "analysis/v1_1_engineer_review_20261015/mechanics/library-source-identities.json",
+      "pointer": "/library_inputs/lib~1Stratolink_v1p1_U2_RAK3172.kicad_mod",
+      "source": "hardware/pcb/lib/Stratolink_v1p1_U2_RAK3172.kicad_mod"
+    },
+    {
+      "evidence": "analysis/v1_1_engineer_review_20261015/mechanics/library-source-identities.json",
+      "pointer": "/library_inputs/lib~1Stratolink_v1p1_U3_XCVR_MAX-M10S-00B.kicad_mod",
+      "source": "hardware/pcb/lib/Stratolink_v1p1_U3_XCVR_MAX-M10S-00B.kicad_mod"
+    },
+    {
+      "evidence": "analysis/v1_1_engineer_review_20261015/mechanics/library-source-identities.json",
+      "pointer": "/library_inputs/lib~1Stratolink_v1p1_U4_SON125P500X300X100-8N.kicad_mod",
+      "source": "hardware/pcb/lib/Stratolink_v1p1_U4_SON125P500X300X100-8N.kicad_mod"
+    },
+    {
+      "evidence": "analysis/v1_1_engineer_review_20261015/mechanics/library-source-identities.json",
+      "pointer": "/library_inputs/lib~1Stratolink_v1p1_U5_BGA6N40P3X2_148X95X53.kicad_mod",
+      "source": "hardware/pcb/lib/Stratolink_v1p1_U5_BGA6N40P3X2_148X95X53.kicad_mod"
+    },
+    {
+      "evidence": "analysis/v1_1_engineer_review_20261015/mechanics/library-source-identities.json",
+      "pointer": "/library_inputs/lib~1Stratolink_v1p1_U6_AS7331_OLGA16.kicad_mod",
+      "source": "hardware/pcb/lib/Stratolink_v1p1_U6_AS7331_OLGA16.kicad_mod"
+    },
+    {
+      "evidence": "analysis/v1_1_engineer_review_20261015/mechanics/library-source-identities.json",
+      "pointer": "/library_inputs/lib~1Stratolink_v1p1_U7_PQFN50P200X200100-12N.kicad_mod",
+      "source": "hardware/pcb/lib/Stratolink_v1p1_U7_PQFN50P200X200100-12N.kicad_mod"
+    },
+    {
+      "evidence": "analysis/v1_1_engineer_review_20261015/mechanics/library-source-identities.json",
+      "pointer": "/library_inputs/lib~1Stratolink_v1p1_U8_SOT-23-5.kicad_mod",
+      "source": "hardware/pcb/lib/Stratolink_v1p1_U8_SOT-23-5.kicad_mod"
+    },
+    {
+      "evidence": "analysis/v1_1_engineer_review_20261015/mechanics/library-source-identities.json",
+      "pointer": "/library_inputs/lib~1Suspension_PTH_D2p0_OD3p2.kicad_mod",
+      "source": "hardware/pcb/lib/Suspension_PTH_D2p0_OD3p2.kicad_mod"
+    }
+  ],
+  "review_evidence": {
+    "analysis/v1_1_engineer_review_20261015/.gitattributes": "78e182c1786bc84ac435e2fe8ac30086b5c25f6a4f71348a663506a84b3917a6",
+    "analysis/v1_1_engineer_review_20261015/README.md": "74ed0da364d4cc8128f0ec6d13adeadfac86f2a7449f690249cbd0db10140e4e",
+    "analysis/v1_1_engineer_review_20261015/connectivity/README.md": "e1f4ec37f3b6368b3f0de6b4af055edcbe6b1663700e119674d88c908cab7524",
+    "analysis/v1_1_engineer_review_20261015/connectivity/baseline.xml": "b7003819fbaf9cc11b30179dd20a0753c254a084e7c8752ec6acf2465685bb11",
+    "analysis/v1_1_engineer_review_20261015/connectivity/check_mask_ground.py": "2529374693a23c68cb51c8955eb9f42c14cac3605c97adef6c7fdd9427b7b9d0",
+    "analysis/v1_1_engineer_review_20261015/connectivity/compare.py": "b5bca37d2daaebeeba7c6a1d512f789dd46085697111dcb8fd2c674156d718f7",
+    "analysis/v1_1_engineer_review_20261015/connectivity/extract_mask_text.py": "c4bbe7fd85d49d4079c93135d10e7b29aa52485779272c7b7fdc15f3a6ef29dc",
+    "analysis/v1_1_engineer_review_20261015/connectivity/final-comparison.json": "4239029dca3e0f2934bb7d09f9f9e75adc92ff3ece85e1b934345c5c25c632a8",
+    "analysis/v1_1_engineer_review_20261015/connectivity/final-comparison.log": "545e64449a1dc1cb5e6dad3075fddda8b4d79818b65d98fa939853babeaca414",
+    "analysis/v1_1_engineer_review_20261015/connectivity/final-copper.json": "4089b5ffa1ab6f2e93246a462e31aab1d395f9b2657f01fb08ab12c2798cf435",
+    "analysis/v1_1_engineer_review_20261015/connectivity/final-copper.log": "de71dda849324b2b9306660ad1ecd767ebd23c247cc68a72572e59ac9c860924",
+    "analysis/v1_1_engineer_review_20261015/connectivity/final-mask-texts.json": "9d14733cf1e5b87d970cbd1a8c8482a3efd4ec7c0c1a5f1f2860623d2a85a503",
+    "analysis/v1_1_engineer_review_20261015/connectivity/final-mask-texts.log": "85aed81db01cce6cdf7b16fd467543fb003a2fec2bfbdb80741922dcbdd530f4",
+    "analysis/v1_1_engineer_review_20261015/connectivity/final-netlist.log": "ec9ebc0cf6445211ee8ef8fb728c0d0bc838de73e42ec34e7bc1135fda5397c2",
+    "analysis/v1_1_engineer_review_20261015/connectivity/final-physical-copper.json": "f8ca397b67a3e9187e0709af07d15ce68c8961713897356be27ee96972bdd577",
+    "analysis/v1_1_engineer_review_20261015/connectivity/final-physical-copper.log": "3ce657c15bb3926f742735248be017b6bfb0eff6688e9800ff1b2422af6d23bf",
+    "analysis/v1_1_engineer_review_20261015/connectivity/final.xml": "a699e190dc4ccb682fade84b7311aaaf9daae7ccf844bff32777846d82a318cb",
+    "analysis/v1_1_engineer_review_20261015/connectivity/incoming-comparison.json": "9521157ae263c244d1ff61b2b3a4ee7cb4976125d3c7be79e59de3f01e5c1e55",
+    "analysis/v1_1_engineer_review_20261015/connectivity/incoming-physical-copper.json": "ed31c3e53745405914b7ce3ab580dc38e5aa1f5f303d177639abc076be74b792",
+    "analysis/v1_1_engineer_review_20261015/connectivity/incoming-summary.json": "83787473f6e003edb658475e77a2c320d9c66ebb0e13d7b1a2f6110c8333ba71",
+    "analysis/v1_1_engineer_review_20261015/connectivity/incoming.xml": "da32b6b885bd5bc2e2394a5ba644c7f2d719051a69e9e726cba745358c51b6a2",
+    "analysis/v1_1_engineer_review_20261015/connectivity/physical_copper.py": "4bc0e063d70097a0557138ed42af8ffedbbf86c23eb827e0de8391403b38a5d3",
+    "analysis/v1_1_engineer_review_20261015/connectivity/repair-scope.json": "3b28a55e8fcd1ef2b5a4e755ff33c8bdb11f0e2032dd9e6b661853682e5f3259",
+    "analysis/v1_1_engineer_review_20261015/connectivity/repair-scope.log": "f388fd3962fe876d591910b2af539ca1f2b5fa309a736153461eb7056a2bdf1b",
+    "analysis/v1_1_engineer_review_20261015/connectivity/right-minus-ground.json": "7e7084c2b6e706e701220b631c925f880fd5e54ecc2d22bec89734add9c157e1",
+    "analysis/v1_1_engineer_review_20261015/connectivity/summary.json": "d041e0f7081638d364f1cffb83f3f3827f7630ab055785d05d18996aba1a4806",
+    "analysis/v1_1_engineer_review_20261015/fabrication/README.md": "342090f8023570ed73e7b710564e953e62f63c6d727c4aaf2c17a1e057c590a3",
+    "analysis/v1_1_engineer_review_20261015/fabrication/classification.log": "38cc0ff14189d6abded1561316236beaa6fe3262a3ea755d18e50c4372c9f7b3",
+    "analysis/v1_1_engineer_review_20261015/fabrication/classified-screen.json": "f58d2218dc25abfd47135c16ccf7dede3ac15b658a4e7d0a0c23ddf890bc8ce3",
+    "analysis/v1_1_engineer_review_20261015/fabrication/classify_screen.py": "b94744edd6f77bc970e7ceae67fdfecec66504af94a667311039875f3fac1294",
+    "analysis/v1_1_engineer_review_20261015/fabrication/electrical-wedge-closeups.png": "7af6c664fd59ebca4261a7359ed12bfae707802377df6a593474a01918dce218",
+    "analysis/v1_1_engineer_review_20261015/fabrication/electrical-wedges.csv": "7043a4c1d9008ffdd6ea6a64dc4087f9b3d19fccd23e868ea49fea016cc6e464",
+    "analysis/v1_1_engineer_review_20261015/fabrication/extract_geometry.py": "1ee8e5c21c4100c26980f9bfdda892f7415016fa484fb8873df836584272600b",
+    "analysis/v1_1_engineer_review_20261015/fabrication/final-extraction.log": "6a961b9f8d8cf49217782c43fd90b5618ea322cd38596cd99029ade5e5d4012a",
+    "analysis/v1_1_engineer_review_20261015/fabrication/final-geometry.json": "4990a11048eea030eb374f31981fb2c04e158e900de24519b1cc0f2370b18ee5",
+    "analysis/v1_1_engineer_review_20261015/fabrication/final-screen.json": "4cfb607dfdedd15fd9b707a19ab8b444094e83b23f7baf2251164ba198bb095b",
+    "analysis/v1_1_engineer_review_20261015/fabrication/local-copper-drc.json": "a7c051f8cee42cc3cd3578e7fe45fbd116cf66c79a23d579af1f50e7d64d544a",
+    "analysis/v1_1_engineer_review_20261015/fabrication/local-copper-ledger.json": "a7136ccd5dfda021ff227b8fb22301e2be780b2536c168dd9137aaea5760798b",
+    "analysis/v1_1_engineer_review_20261015/fabrication/local-copper-scope.json": "953cc329aaf13a5b6488b2782ec0a741283a27bef5c507fad1bc686761ffb468",
+    "analysis/v1_1_engineer_review_20261015/fabrication/repair_local_copper.py": "31c955fff569a6a723df98441aa0d3d21bdf8cbbfba0f1e8ab48e11ee3f12fda",
+    "analysis/v1_1_engineer_review_20261015/fabrication/review_wedges.py": "72a4b955afb2d6e560bb2ffc935c5f35d180670cb1fec508eec74c7e38f0962a",
+    "analysis/v1_1_engineer_review_20261015/fabrication/screen_geometry.py": "2b5ad7c240676b0df83003767c9eaecf3f62fbb4029598c0a79e50a66be74aad",
+    "analysis/v1_1_engineer_review_20261015/fabrication/summary.json": "fdcd26cc233f07e416a5dd36c505797e5d7d1f68cf2132b9ddcf608c7e98d938",
+    "analysis/v1_1_engineer_review_20261015/fabrication/wedge-review.json": "3de5c687a59fbcbd7a2a7ade994b6bcce68951a175cf6988f9b7a25a24193810",
+    "analysis/v1_1_engineer_review_20261015/intake/.gitattributes": "cf5e5e7861c0f70856f7c5346dd511df3a0af0725d83ecd3e0740c576b6d029a",
+    "analysis/v1_1_engineer_review_20261015/intake/intake.json": "9ee0f9e9e4fa4106ca0ff8bd1c525da5cc06188a7193d3534ac4b0a3b1dd4545",
+    "analysis/v1_1_engineer_review_20261015/intake/project-settings-diff.json": "4cb61951fdbf468be3a634770a782ecd6ba0f1a305ed1ebe22cccd2eb32bcd4d",
+    "analysis/v1_1_engineer_review_20261015/intake/stratolink.kicad_dru": "071d900e34c4eb3d3f91003cc0698e261e7fe23beea7107c4db50a1bf60a5136",
+    "analysis/v1_1_engineer_review_20261015/intake/stratolink.kicad_pcb": "9428ded14dd46a084b5576b85987093bf20139053cdad33eb35cf222d1db2703",
+    "analysis/v1_1_engineer_review_20261015/intake/stratolink.kicad_pro": "98679f4e454e27ca9d130a0d88f3157745f3c9bf752b34d7b02d2c256f151c1d",
+    "analysis/v1_1_engineer_review_20261015/intake/stratolink.kicad_sch": "5885b9ab63f49c70a0f9b4b4ed8f49996c338abe09d1e8dfefc5187706d632e5",
+    "analysis/v1_1_engineer_review_20261015/intake/strict-drc.json": "0c0d8e8e02a8784820c0bb187afc196118c820084f896ceb7242acb119643bf5",
+    "analysis/v1_1_engineer_review_20261015/intake/strict-erc.json": "61319c62504b7d624457ca71c6bd8b8c622b5fc65657210b70f81db6a548ac81",
+    "analysis/v1_1_engineer_review_20261015/manufacturing/package-verification.json": "7b662f39636902b276760269d5e96b42d533e443abd7cd76124318bf66f6354e",
+    "analysis/v1_1_engineer_review_20261015/manufacturing/rotation-review.md": "7b5415e5056009d17b974b48280d6037c39b263cfd1ce9ac60ad491439f392cb",
+    "analysis/v1_1_engineer_review_20261015/manufacturing/supplier-rotation-profile.json": "c0651e2ddb05bac476b9d3fa501fc072327033e747e3b72805b8948914965d79",
+    "analysis/v1_1_engineer_review_20261015/manufacturing/verify_package.py": "ac2e4d41fbc463089968a32b31ca129bd8aee464091ba3383af912d878f561a7",
+    "analysis/v1_1_engineer_review_20261015/mechanics/README.md": "5c2d4bb36f8e4984d4eccc27df06bc5d9292d1c2c0de4dc344a249ae195be363",
+    "analysis/v1_1_engineer_review_20261015/mechanics/antenna-model-mesh-review.json": "29036ca2c5885e0e7b1f91085420841c5cf38874a26a9e5af223033dfabe75b8",
+    "analysis/v1_1_engineer_review_20261015/mechanics/antenna-models.glb": "2c0b637bc940327b88ae348625075411cac6ce7192b89ea137d6cd976eaa5957",
+    "analysis/v1_1_engineer_review_20261015/mechanics/assembly-review.json": "a949e24ab01a2c525987d67c8091eff5257553608e956d7ee415fd34fea8164b",
+    "analysis/v1_1_engineer_review_20261015/mechanics/check_assembly.py": "d2d435abf5688b65a39f8cc4ea330aea9979b5b4492bceaffea33fef34fc326a",
+    "analysis/v1_1_engineer_review_20261015/mechanics/check_model_mesh.py": "6786775c7c8a4d2fc106094203ead44134a6e2c7d848eb4eadd383621efddfad",
+    "analysis/v1_1_engineer_review_20261015/mechanics/check_plotted_mask.py": "cf2af9c003f766717172d43fda9f3c375e613dd9af5a98b9ae29d36505f44694",
+    "analysis/v1_1_engineer_review_20261015/mechanics/compare_libraries.py": "449b51898e9d0ae501ee9cc8abdc232297b6bc503926ec2c9f4a090c60027c81",
+    "analysis/v1_1_engineer_review_20261015/mechanics/compare_model_transforms.py": "9a9cd02c298dbd4563c8da1d6be17af4fae3585901c40ef7f495687c95f53d59",
+    "analysis/v1_1_engineer_review_20261015/mechanics/extract_mask_audit.py": "e641075e47f491608828bb14a7808a9ef36af765545306e49d345ba2712d2683",
+    "analysis/v1_1_engineer_review_20261015/mechanics/final-native.json": "70c56d060a0acf11d5376c50c7ee20f52a024b69b6b2e99881cf2df843942149",
+    "analysis/v1_1_engineer_review_20261015/mechanics/library-model-sync-applied.json": "fd6d6a79fec69381a6787f5bf53b2e83ca19cac51dbbbdb66c52e16374bf564a",
+    "analysis/v1_1_engineer_review_20261015/mechanics/library-pad-comparison.json": "6bba74c0f535f6d0bf4216cf2097fc6f1c816f0d5441f0d6b6722d80dfebc71a",
+    "analysis/v1_1_engineer_review_20261015/mechanics/library-source-identities.json": "2f42e4e356621c1ede702c930e06a6e81754064d497db90faae72d08bb450505",
+    "analysis/v1_1_engineer_review_20261015/mechanics/model-transform-comparison.json": "3c261d4ae443c4ca7198efd67628908389226b85745678cef11e04e9d535eb80",
+    "analysis/v1_1_engineer_review_20261015/mechanics/models-pads.json": "a0b1a96a359946282bd05e5b6a92c631f2af3459eba34955576f29fd5b17dd4c",
+    "analysis/v1_1_engineer_review_20261015/mechanics/native_audit.py": "6aa7dff894b44d7ee0525783b4c74f76431e94e3944717fa8c7c9e133db4a4d2",
+    "analysis/v1_1_engineer_review_20261015/mechanics/patch_u1_mask.py": "eacba27b8f481e9871cdbcd3f8335fa8f25616a68460b3fcc6568e27ce1aa702",
+    "analysis/v1_1_engineer_review_20261015/mechanics/plotted-mask-review.json": "5b33a85422ea07bd06aa63384a46c240baeb125f90d0dcf20d35b881e734ee70",
+    "analysis/v1_1_engineer_review_20261015/mechanics/render-review.json": "686ddb8e42bb148bf313cb5385d4763dfebe1d18e862c593a29236834689a0a0",
+    "analysis/v1_1_engineer_review_20261015/mechanics/sync_library_models.py": "52d620fa8959d933dce296261de2a58dcad34cb2f8f5ac76935100695ed007f0",
+    "analysis/v1_1_engineer_review_20261015/mechanics/visual/assembly.png": "b27b6f12ed8836d9e70198a1eaf7e14d7141f7d0efd8854b667734b5e9dc6570",
+    "analysis/v1_1_engineer_review_20261015/mechanics/visual/bottom.png": "e0288f40b695580febbbbfcd534f3a2966a944b0853128bb887426ee2f122d18",
+    "analysis/v1_1_engineer_review_20261015/mechanics/visual/top.png": "15343dae6b7f7fc3a7732f242fc0bb6ca219e1994f455efe98c8f50265523cb2",
+    "analysis/v1_1_engineer_review_20261015/native/c5-ledger.json": "518b0b070d4b615c8c87a4e4ced58467d3eb271d901f9bd90f4a3cdde1ef99bb",
+    "analysis/v1_1_engineer_review_20261015/native/drc-final.json": "409a954ec201c7c11a9ac58d8a672517a7f0c4b7e658222b06969eebff9af065",
+    "analysis/v1_1_engineer_review_20261015/native/erc-final.json": "cf0a4f660ddb78168be8138844ecce6b1ddd0b04904e61cdc46b6dcae7383900",
+    "analysis/v1_1_engineer_review_20261015/native/library-model-sync-applied.json": "fd6d6a79fec69381a6787f5bf53b2e83ca19cac51dbbbdb66c52e16374bf564a",
+    "analysis/v1_1_engineer_review_20261015/native/metadata-ledger.json": "93c286aae65bd4bc289498bb1485beff7a87b7730119c765d270bfb384a884e5",
+    "analysis/v1_1_engineer_review_20261015/native/repair-ledger.json": "94d3d052074c525cdbe5821cb78b5df922653745104c9da1a1c68b922dc3a4b9",
+    "analysis/v1_1_engineer_review_20261015/native/repair-local-ledger.json": "252a752bc64f0e517df9c2cecdb748d864dcb7d5f7699eece906fdd5a3525d64",
+    "analysis/v1_1_engineer_review_20261015/native/root-review.json": "aa2f5a6656404a056845b3c75bcb259453f886c30390d431d6ed660f7dbdf920",
+    "analysis/v1_1_engineer_review_20261015/native/u1-mask-ledger.json": "ef8f3e59fc9f6e2038d0a6b99b50ebd5ffc70fb862311b9f4646ca1263004789",
+    "analysis/v1_1_engineer_review_20261015/patch_c5.py": "009fea5b0448b500683f0bbcb6927ace15459743a5a17f14589b8342f78cdf28",
+    "analysis/v1_1_engineer_review_20261015/patch_u1_mask.py": "b1bf0df79db6e8bb12bc568e16b2ca8ba61ff6fe05ce9c1d6ca644a46a3acbbc",
+    "analysis/v1_1_engineer_review_20261015/repair.py": "1cd07042bcac1b3f6192d3ec8a579b1bad0211cad345cd61348923714ca5cd91",
+    "analysis/v1_1_engineer_review_20261015/repair_local.py": "92a5e1be62aa15973880952fe70fe415571a30bcebab8a1b6f5277807c3f0547",
+    "analysis/v1_1_engineer_review_20261015/review-evidence-inputs.json": "205b7bf3befcfbc62796722b0955e26804c19e0000e074b22dcfcb8ae238aa30",
+    "analysis/v1_1_engineer_review_20261015/rf-power/README.md": "aea2f5a167792a3ec3f91a7be74351aec8d640f5649d34acbfeaf4f7c504fb67",
+    "analysis/v1_1_engineer_review_20261015/rf-power/analyze.py": "28bbb2dda0c8fe7f1f790c7699486596319f6b6fdc8947e01c34a6ba83aeff19",
+    "analysis/v1_1_engineer_review_20261015/rf-power/check_ground.py": "ffcbce89c98205232fcd9a455b43ac5a33b3de0a3eff14c97685178e34339680",
+    "analysis/v1_1_engineer_review_20261015/rf-power/compare_power.py": "d3900035b73efd1daf6ae4b4da1fb3dacc33e02a402aebfba024bfee4d478749",
+    "analysis/v1_1_engineer_review_20261015/rf-power/ground-review.json": "996eeb48218749efb689ee5cacdf248e77181fe81bf0effb0d3d6bdc1044acf8",
+    "analysis/v1_1_engineer_review_20261015/rf-power/lower.png": "64c026e4594ea061e04088b792ea79ab9dd4f304d5bd344561fa4ca4bd8bb802",
+    "analysis/v1_1_engineer_review_20261015/rf-power/native-copper.json": "acf4be83f9a7473fd1f9f3b711d156fbe802080c0a9fbfab7228ed5513a6728c",
+    "analysis/v1_1_engineer_review_20261015/rf-power/native-layout.json": "e11e54e6e088542a74664836c82df9a6ebbab1df50f208eaa5b29e7de6f9bd1d",
+    "analysis/v1_1_engineer_review_20261015/rf-power/power-continuity.json": "9a8e55a1d0dc845bafcf3b372b7632532b6217c7ad19bc87e6e07638e9a07a17",
+    "analysis/v1_1_engineer_review_20261015/rf-power/rf-launch.png": "a3d640d97a2cae8d23712572bbab6bcdc1dfecefe07348211c8b5f1237235ce5",
+    "analysis/v1_1_engineer_review_20261015/rf-power/rf-power-review.json": "29a79781c7ae8762d398bdbf03e96a48375584d54db85ce3dc45deaefa57c58a",
+    "analysis/v1_1_engineer_review_20261015/rf-power/rf-reference.json": "7893e2f56ed9c5d7be1aa2435e805ce38ee7851dd94b7addb82fe7a93d0bbcba",
+    "analysis/v1_1_engineer_review_20261015/rf-power/source-identities.json": "3d4e1a07cf86c35f47dc10bd29c34001221915a32d5ac895ee3d4587d8c56e05",
+    "analysis/v1_1_engineer_review_20261015/rf-power/upper.png": "bf4e5f7c53e5b06bcf11bcf73b90df4aeddd662ecb6ec63185cdeb5b9abd0562",
+    "analysis/v1_1_engineer_review_20261015/sources/jlc-capabilities.txt": "0e62e80027a9d3a97abcb81c69904790f1c8d8f3bc3b45e9782ce17ab222cafe",
+    "analysis/v1_1_engineer_review_20261015/sources/qfnd242e.pdf": "50eac5bb33c603f91d3691423ceae87e4596f4d72e984f85b55cd50070ce870a",
+    "analysis/v1_1_engineer_review_20261015/sources/qfnd242e.txt": "3db3ca41b88b8be4209a62f52ea61e83d4810447e0898ae46637c9420bc4eb38",
+    "analysis/v1_1_engineer_review_20261015/sync_metadata.py": "48267321319b1a9832e14de2d5b3f471ac1f57ef2a36c38becefdadaa56958db",
+    "analysis/v1_1_peer_review_20261014/digital/check_rf_reference.py": "1eb07714979980f68f5d1bfc4b3fd30dd24e6890c61cb35f2ab2aa4cfae420c3",
+    "analysis/v1_1_peer_review_20261014/digital/extract_rf_reference.py": "d0e3da278774574be5a10168c302e0bd3a45f48b2934256721f7276df85ad4f9",
+    "analysis/v1_1_peer_review_20261014/freeze_peer_evidence.py": "fed09f4b60ced55025b23c3aea43038a3ea719ad9834926ce289ce5b68b2a05b",
+    "analysis/v1_1_peer_review_20261014/rf/cpw-screen.json": "fd4d293d4abb00afe7e7191ea4699b3acddbc4d49d9180610bf9dd276895a66d",
+    "analysis/v1_1_peer_review_20261014/rf/cpw_screen.py": "78ec3733f1a79cfd1761e44f49484764b741b10b401a2a1824c8ea506f3a4414",
+    "analysis/v1_1_peer_review_20261014/verify_peer_evidence.py": "5925423b6d14429e9ff8d8396b29dba279457bae998ec0d46e2cb165ac0ef4cf",
+    "analysis/v1_1_solar_attachments_20261012/materials/extract_native.py": "10993f989f01950e87e3f414b1230339f06b4507ee72354f129977c257e27246",
+    "analysis/v1_1_top_gnss_20261014/power/snapshot.py": "56a52c69e6b5aee2db2c43d9be85787bd172dc67cb06a11748936862173afcb1",
+    "hardware/downloads/README.md": "a9288da396fba39fe883ef2ffed7c45b07b41ac56218ec1f3568e9512d4c12a5",
+    "hardware/downloads/build.py": "c92b835d2fe66edfde4c88e456ddec5b8f90e86ace721c1f8c722ac9ca2af3ba",
+    "hardware/downloads/manifest.json": "813ccfc9ad5c9ad09570bd8038136c6eaf10f8f74e2b9a8dda78d11857201481",
+    "hardware/downloads/verification.json": "e8286ef7b462a02ebb7bd8939779ed3e832281f7d59e4df2c999baaa37066105",
+    "hardware/downloads/verify.py": "010a91e96652a907afd11cc82625aa081f69721bf29cce3bbfac48609a4a1c38",
+    "hardware/gerbers/v1.1-pilot/manifest.json": "bcc2571bfdc804e6a9dfb09669960967b42bb3188495c094fc539065c7725538",
+    "hardware/pcb/FABRICATION.md": "58178e3b3453c7cca4d4fd355b81a429ccd3011886683a6da261c51609288975",
+    "hardware/pcb/README.md": "740cd794358e569bfebf71356ed3f585726ea9e8a0fc04e827c2f4896fd37736",
+    "hardware/pcb/TODO.md": "505f5b15df14b992708f58d5467ccb9bdfbe93a3fb8f03b4024024e5fabef095"
+  },
+  "reviewed_sources": {
+    "hardware/pcb/3d/AS7331_OLGA16.wrl": "afdc02ac1a2cd3a2756fab812bc0d14105fdcd7a01981381f25e329c4c64e443",
+    "hardware/pcb/3d/R_0805_2012Metric.step": "ded342cdb394fb45395227beaaa75cc390613cf2581b29cd6d22c12abd6103b2",
+    "hardware/pcb/3d/solar/README.md": "081b8db88a9c95e9b2bdf0a98bf5084ca4dc2a8daac74f54132205c56f8b4a75",
+    "hardware/pcb/3d/solar/generate.py": "d54881036939cdadcbc841402fa829d62c2e80e0fd08c53905b5f359cf592d76",
+    "hardware/pcb/3d/solar/geometry.json": "6fbebdc0d49e8a2d299d60c59133cf87ff17ec8e6b5bfadfc3c5e2111e4e8981",
+    "hardware/pcb/3d/solar/zachtek_1044_left_assembly.wrl": "d38d946746754d12ad69b04946b51fe3443e8bee42bf85d54c57bf92362e4047",
+    "hardware/pcb/3d/solar/zachtek_1044_right_assembly.wrl": "1d51c705686a98fa6c52a2003d35441c2d42066cf981cdbdb1aa55ca48e3cbb7",
+    "hardware/pcb/fp-lib-table": "705f05b5554f11949b16433700d994932665490bb4f91064f20890cc1c65326a",
+    "hardware/pcb/lib/2026-03-07_16-25-25.kicad_sym": "9a79848b12d5e661e2846ab59b4aad1bda3c134d4131e5a3be96759850b6e941",
+    "hardware/pcb/lib/21-0147E.kicad_mod": "d8b8ebc85e44c7bc74c142f7189b65a37cceee2dca0531a18df6523b571999c6",
+    "hardware/pcb/lib/2450AT18A100E.kicad_sym": "4c17902873bf049dc499b066ca46e5f8567d9f7ec55a279e6c95f9d77e77e216",
+    "hardware/pcb/lib/2450AT18A100E.step": "d43e57d1a06eba29f10d1314d9db70ceafebe1f09b87a1e90ed9cef2db17ef8f",
+    "hardware/pcb/lib/4269.dcm": "73b350fb3e67f43221dc332d4aa0b9a12705ca3e654c17ad7c661d1acfc2ad4c",
+    "hardware/pcb/lib/4269.kicad_mod": "cb4f61d8466e9c3887e4211dddf0bdef20bdc81bd3461330dc84b52695016f55",
+    "hardware/pcb/lib/4269.kicad_sym": "f0e9b92024b3432c2b649a67c9f84c447718e0242492599e15ea3466bb878b3e",
+    "hardware/pcb/lib/4269.lib": "58d76bbc2fcbc31959c51fae1595e652f6171e5514844a8db3aee920c3dfdafa",
+    "hardware/pcb/lib/4269.mod": "aa41a0486dba1a6c58b3fd0229508855e14a54984435d008a773d8d2f6a4539e",
+    "hardware/pcb/lib/ANTC3216X140N.kicad_mod": "d0221f8bc21133d5619d205506f4b229491024d0a722a624e2f6abc3556cef2d",
+    "hardware/pcb/lib/AS7341-DLGM.kicad_sym": "abd1d59f41a076196e753c2b658694e77e1c5d9f519ab5672315827ddcd7a5b1",
+    "hardware/pcb/lib/AS7341-DLGM.step": "1f352ebe8c6c561d7bc090dc46eeaea65bc11fb485c887abe0d5c4540a20af73",
+    "hardware/pcb/lib/BGA6N40P3X2_148X95X53.kicad_mod": "0343aab55d5eff37c147587bba94596d8ce865012486045a074422f1746be496",
+    "hardware/pcb/lib/BQ25570RGRR.kicad_sym": "77e394cb57ae10efe7eba2d4dfeadae0a59542699f782de5f073fa621408f2fc",
+    "hardware/pcb/lib/BQ25570RGRR.step": "ede46d7189939d1295bbef027083521561cd1b231e93c2eee3e4c0f7d4af1db6",
+    "hardware/pcb/lib/CAPC1608X97N.kicad_mod": "c64240ccabb5bdcb0ec44734a0e45b0524794a53a2ddc9ccf530c0fa0bb1c66a",
+    "hardware/pcb/lib/DIO_BAS716_115.kicad_mod": "4f89dd17f2854299f0b242c9aca165594044192c924ea13825f08d0b3918d491",
+    "hardware/pcb/lib/DMF4B5R5G105M3DTA0.dcm": "7771c5de96b7d58a3825eba9dde0c83c8e30830e7e83952c7f62bba7e1c90193",
+    "hardware/pcb/lib/DMF4B5R5G105M3DTA0.kicad_mod": "9ab776792a60db5be6fbd79dbf274512ab5a8a5770dd695b40abc6f241fe076d",
+    "hardware/pcb/lib/DMF4B5R5G105M3DTA0.kicad_sym": "d61a16f42fbe02ebc78f9a2c9a19cbe607187df5f581d0702a63593aec82087f",
+    "hardware/pcb/lib/DMF4B5R5G105M3DTA0.lib": "be9e0cfc73b162b228139b9f046432f40169db6e4762d8b12e0957321f9bfc1c",
+    "hardware/pcb/lib/DMF4B5R5G105M3DTA0.mod": "e81591e3cf7073a690f18031fff9e130b0ced60858ff05f4db9e365ee8b60e45",
+    "hardware/pcb/lib/ERJU02J1R1X.kicad_sym": "2dbe1f4533020a98c94e65bc71457186153c14c325df09cd224c0426da39ace4",
+    "hardware/pcb/lib/ERJU02J1R1X.step": "d433ec4025d8cf829356864fc774877aaed40881c6f959b215a6877222d7ecff",
+    "hardware/pcb/lib/ETQP4M220YFN.kicad_sym": "3339cd09a82b3f891d5eaafd736413701fc2a17ebc59ba621a71a132e182a049",
+    "hardware/pcb/lib/ETQP4M220YFN.step": "c469fcfe7493ad42a7b4612f69a099da50f7e0a51e603c1c81473edc0920dd1f",
+    "hardware/pcb/lib/HS230F.dcm": "d5bc8c398180a49b9505dd7e2e86168fea4a594f80b85e32ec90f897c259db53",
+    "hardware/pcb/lib/HS230F.kicad_mod": "529df574736c0f6ea13c39468a44ac9dcdd8beb2fa7b52cccbe3fb26bdf8c335",
+    "hardware/pcb/lib/HS230F.kicad_sym": "811489ce5a198a6cd083fdd34451ee26f7f8186efe6d04e532546f51ef57bb93",
+    "hardware/pcb/lib/HS230F.lib": "0e787e65a19b6bc279c1cac6f20f8a7cae8f3fe38d1c25a1ac7752dda3ba73ec",
+    "hardware/pcb/lib/HS230F.mod": "b00437a67fb2634c1c0f50d349e62be917c85b7ffc185c82875fcf2bfa18f6c5",
+    "hardware/pcb/lib/INDC1608X90N.kicad_mod": "6d215daabd7ffc005ca94c636f6d2d0a638b00155279858bf8d32641a889ba8c",
+    "hardware/pcb/lib/IND_ETQP4M220YFN.kicad_mod": "381c6ee593f271568ce97449e3b8fb3a7e4dd50952df8fc548a95016239eb20d",
+    "hardware/pcb/lib/IND_LPS4018-223MRC.kicad_mod": "3e3f2c1ed2dfa4f3bde9f43c162a180655e7aab82d20204c3028568b7e224990",
+    "hardware/pcb/lib/LIS2DH12TR.kicad_sym": "07cac9985ca5d4bc6006008b39953cbf4b8e74acf952136da5d5bdd5024ab7e6",
+    "hardware/pcb/lib/LIS2DH12TR.step": "7a3d2316fa3f9d01dcb367295c280fd3064e9864f9b25e029afded30548432b8",
+    "hardware/pcb/lib/LPS4018-223MRC.kicad_sym": "59283d1e7d07f0724ece85c78996f50d5c81b836be4e51065a92117c93ef2f3d",
+    "hardware/pcb/lib/LPS4018-223MRC.step": "7247e578712eaab4a5fb90f55f123ce309f8a740e69b9670e4bec61481aa7bae",
+    "hardware/pcb/lib/LQM18FN100M00D.kicad_sym": "2effabbae1403948eeabacb0d3d9dbdbf7caa0ebb70a2aae9fbcacd4d1885e21",
+    "hardware/pcb/lib/LTR-390UV-01.step": "a4fef81fed3d299892089258ab37ddfefc50b64d2becda37a719e27a0b281e5b",
+    "hardware/pcb/lib/MAX-M10S-00B.kicad_sym": "7d85f2010cb778a48e2a6499bc5e681a42eb522fda2e2b9bf9ecaa89c28b7c91",
+    "hardware/pcb/lib/MAX-M10S-00B.step": "301c5c8f39597cb8a20bbfb64c6694d7f0121d89683bef55124958bd5cedb4ba",
+    "hardware/pcb/lib/MIC_T3902.kicad_mod": "1f92d8e049770a9c31db4054acd3362ef7022b6d665846ac2c70d9acf80fb7fe",
+    "hardware/pcb/lib/MLZ1608N100LT000.STEP": "d88f2217137cb303be8f3132cc776b88fdd02209cd154ab4fcafeefcddbb6694",
+    "hardware/pcb/lib/MS5611-01BA03.kicad_sym": "cb60c24e00aae0b18e91ee617e19428fc1cf4632063dfd9ddbe9d8af632ea9e3",
+    "hardware/pcb/lib/MS5611-01BA03.step": "cd4b2c1cc39faba8c3e3c66389228cdf131310b5466cdf22320cf2afd8a0e1b1",
+    "hardware/pcb/lib/PQFN50P200X200100-12N.kicad_mod": "bb10f8b0b1d0f19ba3a75cf9d0ec96834f28dcf6c5d49ca907dea1d2c66d3589",
+    "hardware/pcb/lib/ProLib_pcs_2026-01-31.elibz": "b39d8afe7e58ced1e372f83b98208b0438065880c48f102c74aeb31f84e6a646",
+    "hardware/pcb/lib/ProLib_pcs_2026-02-08.elibz": "747bb6051045cdcd8f720ab8816df1be8344a506a3ada6da75b09e35ce2957fe",
+    "hardware/pcb/lib/ProLib_pcs_2026-02-20.elibz": "83e43f38e2643ffd9d1e9a98b2e0225a04bb00dc9836cc085aff3f680889cd4b",
+    "hardware/pcb/lib/QFN50P350X350X100-21N.kicad_mod": "5ec201b9d4cba0e6afd86d2cb90b8339f7f2d1c1fbf5ad96a18bbf597a60803a",
+    "hardware/pcb/lib/RAK3172-8-SM-NI.kicad_sym": "1676e2db045544d59c3c01dd87685b93ad6ea65d20a492b6a045e085a1b28514",
+    "hardware/pcb/lib/RAK3172.kicad_mod": "e0fb3166a9bf8e865c94a07c957d91591d3ef2e9c97ee19c43a5abb001891e38",
+    "hardware/pcb/lib/RAK3172.kicad_sym": "d3131a6c168b5afdd04ba50f2b449ba380bff7b91078ce1b1212e3a0e22c3749",
+    "hardware/pcb/lib/RAK3172.step": "bd2bcd47540d611e57228d51c62f372b2393128c693611845697f020a94097f8",
+    "hardware/pcb/lib/RES_ERJU02J1R1X.kicad_mod": "26b19b06d6669428f70c92613ae025bd8d5934c62fb048261c74eafd0ce3a843",
+    "hardware/pcb/lib/SMD6_LTR-390UV-01_LTO-L.kicad_mod": "b8677d8c4594e4ec7bb875d3a08238e65363fce7788c853f45e6066d19a3781c",
+    "hardware/pcb/lib/SMD6_LTR-390UV-01_LTO-M.kicad_mod": "79bd36ae3dee2d140d9a91b4a62a5dd50051c4741de1a1863448051967efcaf7",
+    "hardware/pcb/lib/SMD6_LTR-390UV-01_LTO.kicad_mod": "9eb6ce599943c3b3a7159015b151f81e85d8390ae426ae314aefcec4cee5144f",
+    "hardware/pcb/lib/SON125P500X300X100-8N.kicad_mod": "ff2187465b1d4d695f51a19a0caa8cff843adb139aaff8052e203bd8a8719968",
+    "hardware/pcb/lib/Solar_Notch_Left_1p0x2p0.kicad_mod": "e4757761c887acdb67a1ed9f551f2987b17a088a1ddf6fcb8059682a2c8195d1",
+    "hardware/pcb/lib/Solar_Notch_Right_1p0x2p0.kicad_mod": "938e0d927c9957d44778f1d33facc2827ea2d4ede5b19d07d7021084f818beb5",
+    "hardware/pcb/lib/Stratolink_GNSS_Wire_PTH_D1p0.kicad_mod": "13f1d0c04e83beec958825c7438e3e25f6ed6ae3f2d1328c997ea62967fc92d3",
+    "hardware/pcb/lib/Stratolink_Header_Left_1x07_P1p00_D0p50_Pad0p88.kicad_mod": "678dfa4fbca321b1cf794539159747abaac8fc57909300c9c2ec8808c0c6612a",
+    "hardware/pcb/lib/Stratolink_Header_Right_1x07_P1p00_D0p50_Pad0p88.kicad_mod": "55179df22f92d771234badd935817eae5e4d93c912e265e6e9e7bf03b432046c",
+    "hardware/pcb/lib/Stratolink_LoRa_Wire_PTH_D1p0.kicad_mod": "6da6fa668c4e88a972bc41c73a631a5ce76c48bc84ba5d1b49e229fdcb12ea1a",
+    "hardware/pcb/lib/Stratolink_Power.kicad_sym": "2428574dbca6d67a258bf56648ea7280215e3747ba961e88c6ec96b1fd2d9b40",
+    "hardware/pcb/lib/Stratolink_Programming_Left_1x07_P1p00_D0p50_BackTack1p20x0p88.kicad_mod": "1638681d81685da85f72231dca59f42171c11cd7c1f480c557e5ced826fdf7ab",
+    "hardware/pcb/lib/Stratolink_Programming_Right_1x07_P1p00_D0p50_BackTack1p20x0p88.kicad_mod": "5689655367f3e168fe2d7ea8abfae3a6907760e9016c5a4e9014ed7650bd59cd",
+    "hardware/pcb/lib/Stratolink_Release.kicad_sym": "aa1c6dbc240d945f26dd51b42bb3c4607b8c826c380acaada870ea9c416069a1",
+    "hardware/pcb/lib/Stratolink_UV.kicad_sym": "16063d37f9584c864a2589881d927f8d866192cf1521cc60e69738a905187230",
+    "hardware/pcb/lib/Stratolink_Wire_48mm_D0p321_Nominal.step": "18aba2561b12ccd7653bac133efc17c7833cc7c5686f563ee8c04ac862789671",
+    "hardware/pcb/lib/Stratolink_Wire_82mm_D0p321_Nominal.step": "23e13ed21d9b2f49bb232fbb04ea73eec6f713054e606b75a04a31165e9d4dbf",
+    "hardware/pcb/lib/Stratolink_v1p1_C10_C_0402_1005Metric.kicad_mod": "c72d76379193997b4d7fb64e9cf6c0a10a71d8cbc72a93594f878c9f2f4cc2f6",
+    "hardware/pcb/lib/Stratolink_v1p1_C11_C_0402_1005Metric.kicad_mod": "eeb9f74ded8b27a6273dc2a482aefbca8a6fb085d37b7ea683a41608182202e6",
+    "hardware/pcb/lib/Stratolink_v1p1_C12_C_0402_1005Metric.kicad_mod": "1f1e06a0c652933886d38f7fccc49193b45e3f09726a9ca497f1fc5652699140",
+    "hardware/pcb/lib/Stratolink_v1p1_C14_C_0402_1005Metric.kicad_mod": "1aa0e2090dad99ab6047f44e2bce908f51170e51f98a6b6f58d101239289a406",
+    "hardware/pcb/lib/Stratolink_v1p1_C15_C_0402_1005Metric.kicad_mod": "47bbcbf140bf70e50fffe3a1be167cc9cf71a35e9f2683fa803f0d5da53dd35e",
+    "hardware/pcb/lib/Stratolink_v1p1_C16_C_0603_1608Metric.kicad_mod": "1c423c997347968cfb851db912359db85a1f81c5a26f6372fcc9ac040bdcfc6a",
+    "hardware/pcb/lib/Stratolink_v1p1_C17_C_0402_1005Metric.kicad_mod": "d39eec4d33aaacf712c989875b0d253efefe9de20a8c1aac694a236cd139b0bf",
+    "hardware/pcb/lib/Stratolink_v1p1_C19_C_0402_1005Metric.kicad_mod": "c08da34564f311a1b776a75b5a840a8d3b8338ed728afef4462797bb8f1a7243",
+    "hardware/pcb/lib/Stratolink_v1p1_C1_C_0402_1005Metric.kicad_mod": "e0c2a1d756781c77ec8713b6a8fee9099d20d575c3346930102c2234b8e209a9",
+    "hardware/pcb/lib/Stratolink_v1p1_C20_C_0402_1005Metric.kicad_mod": "225c70d96dbc89caffdb7408a20db1c13ba5bf41fed40596dc86a84da9962785",
+    "hardware/pcb/lib/Stratolink_v1p1_C21_C_0603_1608Metric.kicad_mod": "82947e9ca91f2e45e4d22dbdcc285d642c575a44eedd9b554c936c8418e34e72",
+    "hardware/pcb/lib/Stratolink_v1p1_C22_C_0402_1005Metric.kicad_mod": "e4ce11cf6dc2e5bf752ac69404a037546825ce9476b21141c0bfa15cf41b05bb",
+    "hardware/pcb/lib/Stratolink_v1p1_C23_C_0402_1005Metric.kicad_mod": "657f018602ad14fef177d5ccf07e14ed553f4674687295e43cbbee6fbd5f235e",
+    "hardware/pcb/lib/Stratolink_v1p1_C2_C_0603_1608Metric.kicad_mod": "7d614e6c8a8b9741716532aedf53ce22fd2b9a4122e02d21168b10de849d50ae",
+    "hardware/pcb/lib/Stratolink_v1p1_C3_C_0603_1608Metric.kicad_mod": "4364deee2ca9a60b5e04140976b94c70e4c82564a1646c41977514c26d2f145e",
+    "hardware/pcb/lib/Stratolink_v1p1_C4_C_0402_1005Metric.kicad_mod": "3e76c346e66fa6f26852f553485d4e46c153dea976525f99bf877431c4b6b5c3",
+    "hardware/pcb/lib/Stratolink_v1p1_C5_DMF4B5R5G105M3DTA0.kicad_mod": "32b95c9c471a82c674d07737509beef7a359762d5e0784de4c6866712c8adcea",
+    "hardware/pcb/lib/Stratolink_v1p1_C6_C_0805_2012Metric.kicad_mod": "3fa616303db3b8efea61f1aac12214632b4d89b9ba489d236ffff2d167398f58",
+    "hardware/pcb/lib/Stratolink_v1p1_C7_C_0402_1005Metric.kicad_mod": "1dab1b84bf930a4dc5de7575742d3c5e4ac593f1c00f8680b6074d1cae3183e1",
+    "hardware/pcb/lib/Stratolink_v1p1_C8_C_0603_1608Metric.kicad_mod": "5bb83b92dbc61de8a608f3bc537606b5d0166d1fdd82a13eaad40d15f1f2d56b",
+    "hardware/pcb/lib/Stratolink_v1p1_C9_C_0402_1005Metric.kicad_mod": "4611d00df18c5d74d2851ca4a3991bfbaaa456a87541c4a261daaec02e7cf046",
+    "hardware/pcb/lib/Stratolink_v1p1_D1_D_SOD-523.kicad_mod": "b8bd6d891fd10df2dd234bc9e774be4fabbca8f62ff039bdbde045b621e3d21f",
+    "hardware/pcb/lib/Stratolink_v1p1_D3_D_SOD-523.kicad_mod": "12d3ed6cfab8ea82a541b29807498241195f1f47cc6c227e4ebc0af45cef39c8",
+    "hardware/pcb/lib/Stratolink_v1p1_FB1_C_0402_1005Metric.kicad_mod": "d30ed3e773c702368a3f8b3fec7c0c2fccd23be4cddfbf37b8e4b6330ead10cc",
+    "hardware/pcb/lib/Stratolink_v1p1_J20_Tag-Connect_TC2030-IDC-NL_2x03_P1.27mm_Vertical.kicad_mod": "61e7ae51c2fe7d64429dc5fd902070a046985eccceb2f161eaf622e80791371f",
+    "hardware/pcb/lib/Stratolink_v1p1_J4_Stratolink_Programming_Right_1x07_P1p00_D0p50_BackTack1p20x0p88.kicad_mod": "758bbc39f31cbc0714fc725ffbb98913b6201dc4cb043c679e4230b315096bb7",
+    "hardware/pcb/lib/Stratolink_v1p1_L1_IND_LPS4018-223MRC.kicad_mod": "de2f9f1af3b42ceff5a7d6b1a9d47dcfcee940ceaf13e9bb18efdf44c58c6167",
+    "hardware/pcb/lib/Stratolink_v1p1_R10_R_0402_1005Metric.kicad_mod": "70aadfe99ebd0f8b99cf0c1c534e5458377ab53791c03cf197555bda169af8fe",
+    "hardware/pcb/lib/Stratolink_v1p1_R11_R_0402_1005Metric.kicad_mod": "f74b44a21b5b0fae443553a569a82603fe479f8ab43222552ec4b668bce9a2b5",
+    "hardware/pcb/lib/Stratolink_v1p1_R12_R_0402_1005Metric.kicad_mod": "26d037a375aad5da7e826c0929db83ab075429470b05eaa40e821143ef61233d",
+    "hardware/pcb/lib/Stratolink_v1p1_R13_R_0402_1005Metric.kicad_mod": "4c6536173ff914cabc1c5785cb9793a43e87aed0fdcb75fa9afb4d6a50d16a3f",
+    "hardware/pcb/lib/Stratolink_v1p1_R14_R_0402_1005Metric.kicad_mod": "94a0fe7e65a41f84a40633fcc66f9562c03840ef553a60b0809a48daa671ee98",
+    "hardware/pcb/lib/Stratolink_v1p1_R15_R_0402_1005Metric.kicad_mod": "d6a2bb18a4958140492dd74870ebef2f0ee98f08216f07521f8d75b088c5e2a7",
+    "hardware/pcb/lib/Stratolink_v1p1_R16_R_0402_1005Metric.kicad_mod": "06f9e18c8229c122626f08deaec2e27fd6d1653f937d65f42d2fb1dbc36b8a2f",
+    "hardware/pcb/lib/Stratolink_v1p1_R18_R_0402_1005Metric.kicad_mod": "913fdb46bdb551aad3eb0c4b0593dfa0ede23b740874eeb3ad89bec1cbef66c7",
+    "hardware/pcb/lib/Stratolink_v1p1_R19_R_0402_1005Metric.kicad_mod": "650dcebbeca5dff51f64a801db898948c5da4647d34f38a798b4d0597f09f86e",
+    "hardware/pcb/lib/Stratolink_v1p1_R1_R_0402_1005Metric.kicad_mod": "3dfcd009addff1d7d279bd7834144f69d07c8a550e9897ed9dfa251fc5044f43",
+    "hardware/pcb/lib/Stratolink_v1p1_R21_R_0402_1005Metric.kicad_mod": "4b3d21a82278cb2abcb7243a1c13b56dc34cecba8b2545254651083dd6fcb7ae",
+    "hardware/pcb/lib/Stratolink_v1p1_R22_R_0402_1005Metric.kicad_mod": "933ca9c550e1e199b019c38a14103317739024d94b7e672e066441051bb407dc",
+    "hardware/pcb/lib/Stratolink_v1p1_R23_R_0402_1005Metric.kicad_mod": "ae02af118486ba8a2fa973a086d6d534baaa3974bb78c3b49c10d51471a88eb3",
+    "hardware/pcb/lib/Stratolink_v1p1_R24_R_0402_1005Metric.kicad_mod": "e792c57dea25ecf9fcdb9a86fd97577e09827516d41d86a3b2dc4ed07b5707f8",
+    "hardware/pcb/lib/Stratolink_v1p1_R25_R_0402_1005Metric.kicad_mod": "7361e857e6839ae17c986b62a2696eeaf019abc089dd988cbcbb4074f118e84a",
+    "hardware/pcb/lib/Stratolink_v1p1_R26_R_0402_1005Metric.kicad_mod": "df29b26854ae20219285e08395f5fd3efefa0ec6f61f4e63de62a90cafe05653",
+    "hardware/pcb/lib/Stratolink_v1p1_R27_R_0805_2012Metric.kicad_mod": "3f55467a61f5b75e9affe2e1c58c1d008796bccce32942a585a39553812902cf",
+    "hardware/pcb/lib/Stratolink_v1p1_R2_R_0402_1005Metric.kicad_mod": "aae5b3b6611758699a482dcb999da62794331bb1038ca222480018d0afa4723e",
+    "hardware/pcb/lib/Stratolink_v1p1_R3_R_0402_1005Metric.kicad_mod": "b2e605d2c1ca7f6ef77f832d3620836b3945d85dfac7e1600dce3e46ffa40814",
+    "hardware/pcb/lib/Stratolink_v1p1_R4_R_0402_1005Metric.kicad_mod": "9f1bff845999d7910c559514d328bba25e6dcbc8f48bf99ceb171818fa7e393b",
+    "hardware/pcb/lib/Stratolink_v1p1_R5_R_0402_1005Metric.kicad_mod": "e68590d932a5eec5eb45ed3eb280a5f1397d538b57b72eaeff27c20cd74d6b0b",
+    "hardware/pcb/lib/Stratolink_v1p1_R6_R_0402_1005Metric.kicad_mod": "e52a0d67835b49a4afcc74b1d02f5d4ec9f8e36af32346958e56a3ddab6fa13c",
+    "hardware/pcb/lib/Stratolink_v1p1_R7_R_0402_1005Metric.kicad_mod": "85b2f4178913e53fabf922fa684412d75b9d5e0bc4c2873713d9f88ed47dde92",
+    "hardware/pcb/lib/Stratolink_v1p1_R8_R_0402_1005Metric.kicad_mod": "96137fae2b4476d119b4dea2b0e28db41874abc4b7323c7631fcadf9598c3c6e",
+    "hardware/pcb/lib/Stratolink_v1p1_R9_R_0402_1005Metric.kicad_mod": "0b7c4c65884a457cceb799017c5d5167566a26265e751ca314326d123e32e239",
+    "hardware/pcb/lib/Stratolink_v1p1_Symbols.kicad_sym": "5445aa38794607a1057befdb5a2f01ac1ea4d358a16bc90645849b96dafed883",
+    "hardware/pcb/lib/Stratolink_v1p1_U1_QFN50P350X350X100-21N.kicad_mod": "ded7e3fc862627e08535a996393cc58e5af4ee655bb5bef399fc6beed484b5a5",
+    "hardware/pcb/lib/Stratolink_v1p1_U2_RAK3172.kicad_mod": "5d30ca8d063ec6e96c760ec0600b5da9550ef9556d79dd463343427bab363ca3",
+    "hardware/pcb/lib/Stratolink_v1p1_U3_XCVR_MAX-M10S-00B.kicad_mod": "eb07df0a8649b6a8e87fe9b896641b67e0836af2616a71d32f0619b014542b5a",
+    "hardware/pcb/lib/Stratolink_v1p1_U4_SON125P500X300X100-8N.kicad_mod": "08910ed0f51496e7accd36750bdd4d4dad5ac7344989a2f4b3d2db0e6e778f09",
+    "hardware/pcb/lib/Stratolink_v1p1_U5_BGA6N40P3X2_148X95X53.kicad_mod": "3256b34e7388c38b8081c07a543c96b1d3b4901d72d3c7038e40fdb4bc4eae60",
+    "hardware/pcb/lib/Stratolink_v1p1_U6_AS7331_OLGA16.kicad_mod": "dd991771e76105bfef10cb046bc9b54a1a0c8cc0c7b19c0338a8981ae8168923",
+    "hardware/pcb/lib/Stratolink_v1p1_U6_SMD6_LTR-390UV-01_LTO-L.kicad_mod": "abe88a75341b164c627efc692cd4f2e6be63cba8fa0dbb87fcb0beff7491400f",
+    "hardware/pcb/lib/Stratolink_v1p1_U7_PQFN50P200X200100-12N.kicad_mod": "352f082a796cf08e231f2968cece1918acc9816074ec26db8c7ae8586039ded1",
+    "hardware/pcb/lib/Stratolink_v1p1_U8_SOT-23-5.kicad_mod": "72f10c1c71e218b060fec25aadd0c59e63eec7c1aa92ad3ddedd725639e3a208",
+    "hardware/pcb/lib/Suspension_PTH_D2p0_OD3p2.kicad_mod": "2f71d16ba89940b2e21f46e35e96a71f7ff660adaaff82485ed805de143c9ca1",
+    "hardware/pcb/lib/T3902.kicad_sym": "66720809065a1941109082a4138fc68afeffbd06c35e963b338711417839a58f",
+    "hardware/pcb/lib/T3902.step": "214b395bb75a355bfc5ca2eac498412731dc0a5296af2382d370cf0230bdff1f",
+    "hardware/pcb/lib/TMP117NAIYBGR.kicad_sym": "1813a62d0d88664390dfc896d9a2cfd39cf37b9b75531db8980191ed2cc3c584",
+    "hardware/pcb/lib/TMP117NAIYBGR.step": "81257ef89350fbe4c930c965cd849b3f2ac885f4d30b6f6b1cd6689b145be75e",
+    "hardware/pcb/lib/VJ0603A120KXCAP.kicad_sym": "d45b48e1f00f52444dc6e20e8d2447d3dc502248c2a0446e5d44e05e462723e5",
+    "hardware/pcb/lib/VJ0603A120KXCAP.step": "7a5b19a23d2c80df52915b51adc3299ae78793909f41dc21e6b48f6bc339e4a6",
+    "hardware/pcb/lib/WCAP-CSGP_0402.kicad_mod": "44a8f032ed80387f92ffe395290a6e9accf150b77ca161ccd4edf91706f98ce9",
+    "hardware/pcb/lib/WCAP-CSGP_0402.kicad_sym": "31b8edc59adcae9059ce14724e0885f154cd6352c0536ca33a71419ce885b240",
+    "hardware/pcb/lib/WCAP-CSGP_0402.step": "fd544e31c602d8a01d21cae2c49140ea114544f70a54ec4d3b1f2d3c186ac29f",
+    "hardware/pcb/lib/XCVR_MAX-M10S-00B.kicad_mod": "f02c5f6ec6a2cc7e49e6d320e2f713a5cf826c652b7030754832415a9c33bfa7",
+    "hardware/pcb/lib/XCVR_RAK3172-8-SM-NI.kicad_mod": "341a8de38d3075e7e190495ecbe1faa77f11aef73df7211c85b56581198b6c6a",
+    "hardware/pcb/lib/XDCR_AS7341-DLGM.kicad_mod": "1b4397d0b1f6b5baa42d874ff37b2096b77d6fdfe65f692b1d3dff3db6a4e2ac",
+    "hardware/pcb/lib/cap.step": "9b8d6e2646bd53de6c21345928a71feafc695fd88a254725b14f7a7108f9681d",
+    "hardware/pcb/lib/gps.step": "6e8669ce426399a1171bfef1886e155a9c1bdf89aab8e7a59ea81c043f1fba88",
+    "hardware/pcb/lib/lora.step": "4685127e7fd516ea0e08ba7f8a8c5711f626351b480a13ade89925b33fdad9b5",
+    "hardware/pcb/lib/mic.elibz": "b68dcc389d65cf5b89763e94db81ee8ee41ad52d68ad39fffea02825559bad17",
+    "hardware/pcb/lib/pressure.elibz": "f997158b9182f3cfcc305b2efa452300f2fe3103462d244a90f23c209db269b5",
+    "hardware/pcb/stratolink.kicad_dru": "071d900e34c4eb3d3f91003cc0698e261e7fe23beea7107c4db50a1bf60a5136",
+    "hardware/pcb/stratolink.kicad_pcb": "25b201eb09c6746a22d1c3be42f7d4023319dd6fa5e3e587dc8cf42d97bb4d7f",
+    "hardware/pcb/stratolink.kicad_pro": "915d9f9c4bc8c1eb0866031bf765ff08dc41a7b5bea4fb158ca26c1032ef93cd",
+    "hardware/pcb/stratolink.kicad_sch": "c772c2a0edff4d6f7616afb0988fc95c2cbb8c2d3572c1429fc0f3718f69e921",
+    "hardware/pcb/sym-lib-table": "6d16fafd9ca5f0074df23d7ad6c75308ece058bd043d1297ce67fa3d25ee519e"
+  },
+  "schema": "stratolink-peer-review-evidence-v1",
+  "scope": "Final engineer reroute25b201eb with unchanged circuit and bounded repairs; strict native DRC/ERC, independent connectivity/copper/mask/RF/mechanical checks, model/library validation, pilot exports and downloads. Includes explicitly labeled incoming and intermediate evidence. No current JLC placement approval or factory CAM, controlled-impedance qualification, mechanical load rating, thermal qualification or flight acceptance."
+}
