@@ -239,7 +239,7 @@
 		(size 1.31 0.53)
 		(layers "F.Cu" "F.Mask" "F.Paste")
 		(roundrect_rratio 0.25)
-		(solder_mask_margin 0.102)
+		(solder_mask_margin 0.05)
 		(uuid "e34f9250-14f8-433d-9925-ef13b8bd5822")
 	)
 	(pad "2" smd roundrect
@@ -247,7 +247,7 @@
 		(size 1.31 0.53)
 		(layers "F.Cu" "F.Mask" "F.Paste")
 		(roundrect_rratio 0.25)
-		(solder_mask_margin 0.102)
+		(solder_mask_margin 0.05)
 		(uuid "b10f1365-ceeb-4223-9747-77353522858d")
 	)
 	(pad "3" smd roundrect
@@ -255,7 +255,7 @@
 		(size 1.31 0.53)
 		(layers "F.Cu" "F.Mask" "F.Paste")
 		(roundrect_rratio 0.25)
-		(solder_mask_margin 0.102)
+		(solder_mask_margin 0.05)
 		(uuid "3ef951e2-9623-436a-88d0-b66384723f51")
 	)
 	(pad "4" smd roundrect
@@ -263,7 +263,7 @@
 		(size 1.31 0.53)
 		(layers "F.Cu" "F.Mask" "F.Paste")
 		(roundrect_rratio 0.25)
-		(solder_mask_margin 0.102)
+		(solder_mask_margin 0.05)
 		(uuid "506d28df-acef-4e0a-967d-53a42d8aa7cc")
 	)
 	(pad "5" smd roundrect
@@ -271,7 +271,7 @@
 		(size 1.31 0.53)
 		(layers "F.Cu" "F.Mask" "F.Paste")
 		(roundrect_rratio 0.25)
-		(solder_mask_margin 0.102)
+		(solder_mask_margin 0.05)
 		(uuid "d3f9cfc2-d5f3-4dc9-b047-29e798063b5d")
 	)
 	(pad "6" smd roundrect
@@ -279,7 +279,7 @@
 		(size 1.31 0.53)
 		(layers "F.Cu" "F.Mask" "F.Paste")
 		(roundrect_rratio 0.25)
-		(solder_mask_margin 0.102)
+		(solder_mask_margin 0.05)
 		(uuid "f54db55d-abbf-4911-a448-20e80c8bc3bc")
 	)
 	(pad "7" smd roundrect
@@ -287,7 +287,7 @@
 		(size 1.31 0.53)
 		(layers "F.Cu" "F.Mask" "F.Paste")
 		(roundrect_rratio 0.25)
-		(solder_mask_margin 0.102)
+		(solder_mask_margin 0.05)
 		(uuid "3f8f516a-59e5-411e-820e-f384cb157be5")
 	)
 	(pad "8" smd roundrect
@@ -295,7 +295,7 @@
 		(size 1.31 0.53)
 		(layers "F.Cu" "F.Mask" "F.Paste")
 		(roundrect_rratio 0.25)
-		(solder_mask_margin 0.102)
+		(solder_mask_margin 0.05)
 		(uuid "534a8d75-120f-41fd-8919-a856ba902896")
 	)
 	(zone
