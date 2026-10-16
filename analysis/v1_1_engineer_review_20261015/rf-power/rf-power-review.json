@@ -1,0 +1,157 @@
+{
+  "pcb_sha256": "25b201eb09c6746a22d1c3be42f7d4023319dd6fa5e3e587dc8cf42d97bb4d7f",
+  "switch_nodes": {
+    "LBOOST": {
+      "net": "Net-(U1-LBOOST)",
+      "area_mm2": 6.6915762112535075,
+      "bounds_mm": [
+        67.111,
+        31.344527,
+        68.71,
+        36.484527
+      ],
+      "opposite_face_non_ground": [
+        {
+          "net": "+3.3V",
+          "kind": "pad",
+          "uuid": "67ed8ff6-4e79-41a6-a684-fc8e8f654612",
+          "ref": "C21",
+          "pin": "2",
+          "overlap_mm2": 0.523021297916737,
+          "bounds_mm": [
+            68.137,
+            34.17200024348437,
+            68.71,
+            35.122
+          ]
+        },
+        {
+          "net": "+3.3V",
+          "kind": "PCB_TRACK",
+          "uuid": "5a65629d-dee4-42ed-8350-e9e1c98be640",
+          "overlap_mm2": 0.21639337525500504,
+          "bounds_mm": [
+            68.07,
+            35.614,
+            68.653,
+            36.014
+          ]
+        },
+        {
+          "net": "+3.3V",
+          "kind": "zone",
+          "uuid": "afe2ba25-e3ff-4140-b775-a9403fd7d136",
+          "overlap_mm2": 1.976392585987465,
+          "bounds_mm": [
+            68.09,
+            32.85999900000001,
+            68.71,
+            36.484527
+          ]
+        }
+      ]
+    },
+    "LBUCK": {
+      "net": "Net-(U1-LBUCK)",
+      "area_mm2": 2.0018379679620044,
+      "bounds_mm": [
+        64.77,
+        34.36,
+        66.37,
+        36.5
+      ],
+      "opposite_face_non_ground": [
+        {
+          "net": "+3.3V",
+          "kind": "PCB_TRACK",
+          "uuid": "5a65629d-dee4-42ed-8350-e9e1c98be640",
+          "overlap_mm2": 0.09359337525500243,
+          "bounds_mm": [
+            66.094,
+            35.614,
+            66.37,
+            36.014
+          ]
+        },
+        {
+          "net": "+3.3V",
+          "kind": "PCB_TRACK",
+          "uuid": "edf9bbcd-5a02-4f53-9cab-b08aa8084c9a",
+          "overlap_mm2": 0.22361753589426175,
+          "bounds_mm": [
+            65.8325785,
+            35.614,
+            66.37,
+            36.390843000000004
+          ]
+        }
+      ]
+    }
+  },
+  "RF": {
+    "AE2": {
+      "whole_net_centerline_length_mm": 18.04269727561274,
+      "missing_rear_reference_centerline_mm_beyond_antenna_0_15mm_buffer_and_5um_tolerance": 0.0,
+      "missing_reference_wkt": "LINESTRING EMPTY",
+      "foreign_rear_projection": [],
+      "minimum_copper_edge_to_LBOOST_mm": 5.0230997411791485,
+      "minimum_copper_edge_to_LBUCK_mm": 2.6252780268979468
+    },
+    "AE1": {
+      "whole_net_centerline_length_mm": 4.5243938223025255,
+      "missing_rear_reference_centerline_mm_beyond_antenna_0_15mm_buffer_and_5um_tolerance": 0.0,
+      "missing_reference_wkt": "LINESTRING EMPTY",
+      "foreign_rear_projection": [],
+      "minimum_copper_edge_to_LBOOST_mm": 42.250010434657035,
+      "minimum_copper_edge_to_LBUCK_mm": 42.354352110969764
+    }
+  },
+  "bypass": {
+    "C10.1-U3.8": {
+      "pad_center_distance_mm": 2.866670089145589,
+      "a_net": "Net-(U3-VCC)",
+      "b_net": "Net-(U3-VCC)"
+    },
+    "C10.2-U3.5": {
+      "pad_center_distance_mm": 3.94271555910403,
+      "a_net": "GND",
+      "b_net": "GND"
+    },
+    "C22.1-U8.5": {
+      "pad_center_distance_mm": 1.3462262068463835,
+      "a_net": "/VBAT",
+      "b_net": "/VBAT"
+    },
+    "C7.2-U2.24": {
+      "pad_center_distance_mm": 2.1017730610130174,
+      "a_net": "+3.3V",
+      "b_net": "+3.3V"
+    },
+    "C8.2-U2.24": {
+      "pad_center_distance_mm": 3.365059434839162,
+      "a_net": "+3.3V",
+      "b_net": "+3.3V"
+    }
+  },
+  "balancer": {
+    "/SC_HALF_REF": {
+      "switch_overlap_mm2": 0.0,
+      "track_length_mm": 2.5206601717798214
+    },
+    "/SC_BAL_OUT": {
+      "switch_overlap_mm2": 0.0,
+      "track_length_mm": 4.703513344459706
+    },
+    "/VBAT": {
+      "switch_overlap_mm2": 0.0,
+      "track_length_mm": 9.203610024378486
+    }
+  },
+  "rf_projection_pass": true,
+  "limits": [
+    "Native saved fills from the final root-refilled board; read-only extraction, no CAD modification by this final checker.",
+    "Pad center distances do not determine bypass inductance.",
+    "Projected overlaps and clearance are not RF/noise performance or impedance qualification.",
+    "Foreign-net names resolved from present native pins and all filled zones included; no fixed old switch-track assumptions."
+  ]
+}

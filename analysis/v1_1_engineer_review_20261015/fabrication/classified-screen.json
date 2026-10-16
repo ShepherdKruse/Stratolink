@@ -1,0 +1,1096 @@
+{
+  "pcb_sha256": "25b201eb09c6746a22d1c3be42f7d4023319dd6fa5e3e587dc8cf42d97bb4d7f",
+  "features": [
+    {
+      "layer": "F.Cu",
+      "kind": "acute_gap_candidates",
+      "feature": {
+        "at_mm": [
+          54.439025,
+          35.977342
+        ],
+        "gap_angle_deg": 37.12764481707745,
+        "edge_support_mm": [
+          0.5555474996694724,
+          0.5555471813086655
+        ]
+      },
+      "near_items": [
+        {
+          "kind": "board_graphic",
+          "uuid": "c73a59a2-31c0-4945-990c-2704a1c497e5",
+          "net": "",
+          "layer": "F.Cu",
+          "distance_mm": 0.0
+        }
+      ]
+    },
+    {
+      "layer": "F.Cu",
+      "kind": "acute_gap_candidates",
+      "feature": {
+        "at_mm": [
+          54.150119,
+          38.510675
+        ],
+        "gap_angle_deg": 36.869822734221145,
+        "edge_support_mm": [
+          0.24186554192774537,
+          0.24186585815489042
+        ]
+      },
+      "near_items": [
+        {
+          "kind": "board_graphic",
+          "uuid": "c73a59a2-31c0-4945-990c-2704a1c497e5",
+          "net": "",
+          "layer": "F.Cu",
+          "distance_mm": 0.0
+        }
+      ]
+    },
+    {
+      "layer": "F.Cu",
+      "kind": "acute_gap_candidates",
+      "feature": {
+        "at_mm": [
+          55.591036,
+          38.895553
+        ],
+        "gap_angle_deg": 29.869600601979272,
+        "edge_support_mm": [
+          0.8745725296537705,
+          0.7322164179434895
+        ]
+      },
+      "near_items": [
+        {
+          "kind": "board_graphic",
+          "uuid": "5e350471-61a4-4077-9186-34d0a4e791c3",
+          "net": "",
+          "layer": "F.Cu",
+          "distance_mm": 0.0
+        }
+      ]
+    },
+    {
+      "layer": "F.Cu",
+      "kind": "acute_gap_candidates",
+      "feature": {
+        "at_mm": [
+          56.026202,
+          38.474125
+        ],
+        "gap_angle_deg": 29.75684258460913,
+        "edge_support_mm": [
+          0.8745725296537705,
+          0.7175829999999976
+        ]
+      },
+      "near_items": [
+        {
+          "kind": "board_graphic",
+          "uuid": "5e350471-61a4-4077-9186-34d0a4e791c3",
+          "net": "",
+          "layer": "F.Cu",
+          "distance_mm": 0.0
+        }
+      ]
+    },
+    {
+      "layer": "F.Cu",
+      "kind": "acute_gap_candidates",
+      "feature": {
+        "at_mm": [
+          54.189335,
+          40.745675
+        ],
+        "gap_angle_deg": 30.022438302177534,
+        "edge_support_mm": [
+          0.5741464852143554,
+          0.46792066695327944
+        ]
+      },
+      "near_items": [
+        {
+          "kind": "board_graphic",
+          "uuid": "c73a59a2-31c0-4945-990c-2704a1c497e5",
+          "net": "",
+          "layer": "F.Cu",
+          "distance_mm": 0.0
+        }
+      ]
+    },
+    {
+      "layer": "F.Cu",
+      "kind": "acute_gap_candidates",
+      "feature": {
+        "at_mm": [
+          54.399811,
+          40.475675
+        ],
+        "gap_angle_deg": 29.86950102317752,
+        "edge_support_mm": [
+          0.5741464852143554,
+          0.45523800000000136
+        ]
+      },
+      "near_items": [
+        {
+          "kind": "board_graphic",
+          "uuid": "c73a59a2-31c0-4945-990c-2704a1c497e5",
+          "net": "",
+          "layer": "F.Cu",
+          "distance_mm": 0.0
+        }
+      ]
+    },
+    {
+      "layer": "F.Cu",
+      "kind": "acute_gap_candidates",
+      "feature": {
+        "at_mm": [
+          54.150119,
+          41.610674
+        ],
+        "gap_angle_deg": 36.869822734221145,
+        "edge_support_mm": [
+          0.24186554192774537,
+          0.24186585815489042
+        ]
+      },
+      "near_items": [
+        {
+          "kind": "board_graphic",
+          "uuid": "c73a59a2-31c0-4945-990c-2704a1c497e5",
+          "net": "",
+          "layer": "F.Cu",
+          "distance_mm": 0.0
+        }
+      ]
+    },
+    {
+      "layer": "F.Cu",
+      "kind": "acute_gap_candidates",
+      "feature": {
+        "at_mm": [
+          54.237565,
+          42.142341
+        ],
+        "gap_angle_deg": 25.26988616721232,
+        "edge_support_mm": [
+          0.41969085851612786,
+          0.2658127882439127
+        ]
+      },
+      "near_items": [
+        {
+          "kind": "board_graphic",
+          "uuid": "c73a59a2-31c0-4945-990c-2704a1c497e5",
+          "net": "",
+          "layer": "F.Cu",
+          "distance_mm": 0.0
+        }
+      ]
+    },
+    {
+      "layer": "F.Cu",
+      "kind": "acute_gap_candidates",
+      "feature": {
+        "at_mm": [
+          54.237566,
+          42.479008
+        ],
+        "gap_angle_deg": 25.269874245176908,
+        "edge_support_mm": [
+          0.26581055290751593,
+          0.4196898585205516
+        ]
+      },
+      "near_items": [
+        {
+          "kind": "board_graphic",
+          "uuid": "c73a59a2-31c0-4945-990c-2704a1c497e5",
+          "net": "",
+          "layer": "F.Cu",
+          "distance_mm": 0.0
+        }
+      ]
+    },
+    {
+      "layer": "F.Cu",
+      "kind": "acute_gap_candidates",
+      "feature": {
+        "at_mm": [
+          54.290866,
+          42.310675
+        ],
+        "gap_angle_deg": 50.370665991950005,
+        "edge_support_mm": [
+          0.4251613376260806,
+          0.4251617631737357
+        ]
+      },
+      "near_items": [
+        {
+          "kind": "board_graphic",
+          "uuid": "c73a59a2-31c0-4945-990c-2704a1c497e5",
+          "net": "",
+          "layer": "F.Cu",
+          "distance_mm": 0.0
+        }
+      ]
+    },
+    {
+      "layer": "F.Cu",
+      "kind": "acute_gap_candidates",
+      "feature": {
+        "at_mm": [
+          55.698981,
+          37.847934
+        ],
+        "gap_angle_deg": 45.33253514650232,
+        "edge_support_mm": [
+          0.4049965635866577,
+          0.6416882941771663
+        ]
+      },
+      "near_items": [
+        {
+          "kind": "board_graphic",
+          "uuid": "5e350471-61a4-4077-9186-34d0a4e791c3",
+          "net": "",
+          "layer": "F.Cu",
+          "distance_mm": 0.0
+        }
+      ]
+    },
+    {
+      "layer": "F.Cu",
+      "kind": "acute_gap_candidates",
+      "feature": {
+        "at_mm": [
+          59.730001,
+          34.069329
+        ],
+        "gap_angle_deg": 44.99990892882312,
+        "edge_support_mm": [
+          2.011318570037571,
+          9.436978000011917
+        ]
+      },
+      "near_items": [
+        {
+          "kind": "PCB_TRACK",
+          "uuid": "3cf15725-cbf8-4019-9c6c-be44cb4bab51",
+          "net": "Net-(AE2-A)",
+          "layer": "F.Cu",
+          "start": [
+            59.355001,
+            33.163999
+          ],
+          "end": [
+            59.355001,
+            43.436574
+          ],
+          "width_mm": 0.75,
+          "length_mm": 10.272575,
+          "distance_mm": 0.0
+        },
+        {
+          "kind": "PCB_TRACK",
+          "uuid": "41a55abc-55e4-416c-9c04-42eb81e3a179",
+          "net": "Net-(AE2-A)",
+          "layer": "F.Cu",
+          "start": [
+            59.355001,
+            33.163999
+          ],
+          "end": [
+            61.367214,
+            35.176212
+          ],
+          "width_mm": 0.75,
+          "length_mm": 2.8456989149834526,
+          "distance_mm": 5.019562268460976e-15
+        }
+      ]
+    },
+    {
+      "layer": "F.Cu",
+      "kind": "acute_gap_candidates",
+      "feature": {
+        "at_mm": [
+          55.545789,
+          42.732458
+        ],
+        "gap_angle_deg": 36.869940391606576,
+        "edge_support_mm": [
+          0.4238666379251875,
+          0.4238663216970661
+        ]
+      },
+      "near_items": [
+        {
+          "kind": "board_graphic",
+          "uuid": "5e350471-61a4-4077-9186-34d0a4e791c3",
+          "net": "",
+          "layer": "F.Cu",
+          "distance_mm": 0.0
+        }
+      ]
+    },
+    {
+      "layer": "F.Cu",
+      "kind": "acute_gap_candidates",
+      "feature": {
+        "at_mm": [
+          57.528578,
+          47.97
+        ],
+        "gap_angle_deg": 45.0,
+        "edge_support_mm": [
+          0.3310780000000051,
+          0.8758069028284745
+        ]
+      },
+      "near_items": [
+        {
+          "kind": "pad",
+          "uuid": "6f87d3bd-1987-44f0-b92d-52a539a668ae",
+          "net": "/SC_HALF_REF",
+          "layer": "F.Cu",
+          "ref": "U8",
+          "pin": "3",
+          "at": [
+            57.71,
+            48.27
+          ],
+          "distance_mm": 6.722143729369489e-07
+        },
+        {
+          "kind": "PCB_TRACK",
+          "uuid": "3ef9a5f7-e05c-467a-b3c1-40ee47c33314",
+          "net": "/SC_HALF_REF",
+          "layer": "F.Cu",
+          "start": [
+            56.98,
+            47.28
+          ],
+          "end": [
+            57.71,
+            48.01
+          ],
+          "width_mm": 0.2,
+          "length_mm": 1.0323759005323594,
+          "distance_mm": 0.0
+        }
+      ]
+    },
+    {
+      "layer": "F.Cu",
+      "kind": "acute_gap_candidates",
+      "feature": {
+        "at_mm": [
+          61.437132,
+          63.905
+        ],
+        "gap_angle_deg": 45.0,
+        "edge_support_mm": [
+          0.6066042801629385,
+          0.12786799999999943
+        ]
+      },
+      "near_items": [
+        {
+          "kind": "pad",
+          "uuid": "a80b9ec6-902f-441e-b369-13658560184c",
+          "net": "RST",
+          "layer": "F.Cu",
+          "ref": "U2",
+          "pin": "22",
+          "at": [
+            61.215,
+            64.805
+          ],
+          "distance_mm": 0.0
+        },
+        {
+          "kind": "PCB_TRACK",
+          "uuid": "2d47c4ae-eda2-4646-ba22-90c32e7e19e3",
+          "net": "RST",
+          "layer": "F.Cu",
+          "start": [
+            61.76,
+            63.37
+          ],
+          "end": [
+            61.215,
+            63.915
+          ],
+          "width_mm": 0.3,
+          "length_mm": 0.7707463914933369,
+          "distance_mm": 0.0
+        }
+      ]
+    },
+    {
+      "layer": "F.Cu",
+      "kind": "acute_gap_candidates",
+      "feature": {
+        "at_mm": [
+          67.861422,
+          41.56
+        ],
+        "gap_angle_deg": 45.05687240296959,
+        "edge_support_mm": [
+          1.9380879520315852,
+          0.4953686053082012
+        ]
+      },
+      "near_items": [
+        {
+          "kind": "PCB_TRACK",
+          "uuid": "08e40b1f-b525-4b7d-a35d-fceb04f0b4b1",
+          "net": "SDA",
+          "layer": "F.Cu",
+          "start": [
+            68.19,
+            42.03
+          ],
+          "end": [
+            67.71,
+            41.55
+          ],
+          "width_mm": 0.2,
+          "length_mm": 0.6788225099390857,
+          "distance_mm": 1.3188886359304864e-07
+        },
+        {
+          "kind": "PCB_TRACK",
+          "uuid": "0d9ed415-00a3-464a-b21b-eb3f0a98c2ed",
+          "net": "SDA",
+          "layer": "F.Cu",
+          "start": [
+            69.78,
+            41.46
+          ],
+          "end": [
+            67.8,
+            41.46
+          ],
+          "width_mm": 0.2,
+          "length_mm": 1.98,
+          "distance_mm": 0.0
+        },
+        {
+          "kind": "PCB_TRACK",
+          "uuid": "600ed2f2-c677-4c0a-96df-57790af1cc48",
+          "net": "SDA",
+          "layer": "F.Cu",
+          "start": [
+            67.8,
+            41.46
+          ],
+          "end": [
+            67.71,
+            41.55
+          ],
+          "width_mm": 0.2,
+          "length_mm": 0.12727922061357858,
+          "distance_mm": 0.01414213562373458
+        }
+      ]
+    },
+    {
+      "layer": "F.Cu",
+      "kind": "acute_gap_candidates",
+      "feature": {
+        "at_mm": [
+          67.1,
+          59.394213
+        ],
+        "gap_angle_deg": 44.99999999999986,
+        "edge_support_mm": [
+          0.8357869999999963,
+          1.9921022361520422
+        ]
+      },
+      "near_items": [
+        {
+          "kind": "PCB_TRACK",
+          "uuid": "4c4034d3-16ec-47f3-8165-bad9f14f9717",
+          "net": "+3.3V",
+          "layer": "F.Cu",
+          "start": [
+            65.491371,
+            60.72
+          ],
+          "end": [
+            67.3,
+            58.911371
+          ],
+          "width_mm": 0.4,
+          "length_mm": 2.5577876611012886,
+          "distance_mm": 0.0
+        },
+        {
+          "kind": "PCB_TRACK",
+          "uuid": "bda987ba-9c98-4669-96b3-fcc4cd222d45",
+          "net": "+3.3V",
+          "layer": "F.Cu",
+          "start": [
+            67.3,
+            58.911371
+          ],
+          "end": [
+            67.3,
+            60.23
+          ],
+          "width_mm": 0.4,
+          "length_mm": 1.318629,
+          "distance_mm": 0.0
+        }
+      ]
+    },
+    {
+      "layer": "F.Cu",
+      "kind": "acute_gap_candidates",
+      "feature": {
+        "at_mm": [
+          62.387132,
+          63.905
+        ],
+        "gap_angle_deg": 45.077242776272755,
+        "edge_support_mm": [
+          0.9514526366908618,
+          0.1778669999999991
+        ]
+      },
+      "near_items": [
+        {
+          "kind": "pad",
+          "uuid": "ea60aba1-1cce-4301-b0b8-129a95a19759",
+          "net": "BOOT0",
+          "layer": "F.Cu",
+          "ref": "U2",
+          "pin": "21",
+          "at": [
+            62.214999,
+            64.805
+          ],
+          "distance_mm": 0.0
+        },
+        {
+          "kind": "PCB_TRACK",
+          "uuid": "2f109070-86b2-40ce-a468-e56709c481dd",
+          "net": "BOOT0",
+          "layer": "F.Cu",
+          "start": [
+            62.214999,
+            63.865001
+          ],
+          "end": [
+            62.94,
+            63.14
+          ],
+          "width_mm": 0.3,
+          "length_mm": 1.0253062469340564,
+          "distance_mm": 5.21328192526712e-16
+        },
+        {
+          "kind": "PCB_TRACK",
+          "uuid": "ae16776b-7f66-4d9d-a9b6-98f8aa62e7a5",
+          "net": "BOOT0",
+          "layer": "F.Cu",
+          "start": [
+            62.214999,
+            64.805
+          ],
+          "end": [
+            62.214999,
+            63.865001
+          ],
+          "width_mm": 0.3,
+          "length_mm": 0.939999,
+          "distance_mm": 0.02213300000000373
+        }
+      ]
+    },
+    {
+      "layer": "F.Cu",
+      "kind": "acute_gap_candidates",
+      "feature": {
+        "at_mm": [
+          72.7,
+          34.382132
+        ],
+        "gap_angle_deg": 45.0,
+        "edge_support_mm": [
+          0.6788225099390912,
+          0.36912000000000234
+        ]
+      },
+      "near_items": [
+        {
+          "kind": "PCB_TRACK",
+          "uuid": "082d65ab-7ee4-406f-97c4-de9ea4bd88e7",
+          "net": "+3.3V",
+          "layer": "F.Cu",
+          "start": [
+            73.38,
+            34.85
+          ],
+          "end": [
+            72.73,
+            34.2
+          ],
+          "width_mm": 0.3,
+          "length_mm": 0.9192388155425119,
+          "distance_mm": 0.0
+        },
+        {
+          "kind": "zone",
+          "uuid": "afe2ba25-e3ff-4140-b775-a9403fd7d136",
+          "net": "+3.3V",
+          "layer": "F.Cu",
+          "distance_mm": 0.0
+        }
+      ]
+    },
+    {
+      "layer": "F.Cu",
+      "kind": "acute_gap_candidates",
+      "feature": {
+        "at_mm": [
+          73.404632,
+          40.13
+        ],
+        "gap_angle_deg": 47.21171947433143,
+        "edge_support_mm": [
+          0.30445247943973147,
+          0.08952992579577976
+        ]
+      },
+      "near_items": [
+        {
+          "kind": "pad",
+          "uuid": "41e4ca1e-26fe-45cf-8192-5187e19dcce9",
+          "net": "/UV_REXT",
+          "layer": "F.Cu",
+          "ref": "R27",
+          "pin": "1",
+          "at": [
+            73.1925,
+            40.83
+          ],
+          "distance_mm": 0.0
+        },
+        {
+          "kind": "PCB_TRACK",
+          "uuid": "7fd92283-106c-4a30-9700-d924250524bf",
+          "net": "/UV_REXT",
+          "layer": "F.Cu",
+          "start": [
+            73.5,
+            39.8225
+          ],
+          "end": [
+            73.1925,
+            40.13
+          ],
+          "width_mm": 0.3,
+          "length_mm": 0.43487067042972677,
+          "distance_mm": 1.8138343481759683e-15
+        }
+      ]
+    },
+    {
+      "layer": "F.Cu",
+      "kind": "small_enclosed_gap_candidates",
+      "feature": {
+        "area_mm2": 0.002500188180499955,
+        "maximum_inscribed_diameter_mm": 0.03990741561088227,
+        "bounds_mm": [
+          62.424278,
+          56.759412,
+          62.50332,
+          56.80305
+        ],
+        "at_mm": [
+          62.462624703441804,
+          56.78205
+        ]
+      },
+      "near_items": [
+        {
+          "kind": "board_graphic",
+          "uuid": "dc93c9db-484c-4e1c-a1ca-4b3276ec4827",
+          "net": "",
+          "layer": "F.Cu",
+          "distance_mm": 0.017361674274832845
+        }
+      ]
+    },
+    {
+      "layer": "F.Cu",
+      "kind": "small_enclosed_gap_candidates",
+      "feature": {
+        "area_mm2": 0.014238601359000052,
+        "maximum_inscribed_diameter_mm": 0.06422402785275429,
+        "bounds_mm": [
+          62.185171,
+          56.721253,
+          62.380523,
+          56.954529
+        ],
+        "at_mm": [
+          62.2996937234244,
+          56.837915499999994
+        ]
+      },
+      "near_items": [
+        {
+          "kind": "board_graphic",
+          "uuid": "dc93c9db-484c-4e1c-a1ca-4b3276ec4827",
+          "net": "",
+          "layer": "F.Cu",
+          "distance_mm": 0.02317337173133338
+        }
+      ]
+    },
+    {
+      "layer": "F.Cu",
+      "kind": "tiny_copper_components",
+      "feature": {
+        "area_mm2": 0.0007301580524999982,
+        "bounds_mm": [
+          60.941824,
+          56.666071,
+          60.970049,
+          56.704212
+        ],
+        "at_mm": [
+          60.95496942840886,
+          56.685443
+        ]
+      },
+      "near_items": [
+        {
+          "kind": "board_graphic",
+          "uuid": "0c984686-78b1-4acf-8689-2d60d8705e9d",
+          "net": "",
+          "layer": "F.Cu",
+          "distance_mm": 0.0
+        }
+      ]
+    },
+    {
+      "layer": "F.Cu",
+      "kind": "tiny_copper_components",
+      "feature": {
+        "area_mm2": 0.0005194343459999598,
+        "bounds_mm": [
+          60.787604,
+          56.732998,
+          60.815346,
+          56.760999
+        ],
+        "at_mm": [
+          60.80176092234371,
+          56.746903
+        ]
+      },
+      "near_items": [
+        {
+          "kind": "board_graphic",
+          "uuid": "59a0671a-f542-4be7-b381-4ddca1c9e65a",
+          "net": "",
+          "layer": "F.Cu",
+          "distance_mm": 0.0
+        },
+        {
+          "kind": "board_graphic",
+          "uuid": "dc93c9db-484c-4e1c-a1ca-4b3276ec4827",
+          "net": "",
+          "layer": "F.Cu",
+          "distance_mm": 0.02297880269347495
+        }
+      ]
+    },
+    {
+      "layer": "F.Cu",
+      "kind": "tiny_copper_components",
+      "feature": {
+        "area_mm2": 0.005817373079000098,
+        "bounds_mm": [
+          60.400379,
+          57.14812,
+          60.582774,
+          57.243444
+        ],
+        "at_mm": [
+          60.50201496905633,
+          57.196222
+        ]
+      },
+      "near_items": [
+        {
+          "kind": "board_graphic",
+          "uuid": "6d8e1e75-2c20-41bf-8a80-fbf3e0499670",
+          "net": "",
+          "layer": "F.Cu",
+          "distance_mm": 0.0
+        }
+      ]
+    },
+    {
+      "layer": "F.Cu",
+      "kind": "tiny_copper_components",
+      "feature": {
+        "area_mm2": 0.004669031409999948,
+        "bounds_mm": [
+          61.322733,
+          56.338199,
+          61.418469,
+          56.400308
+        ],
+        "at_mm": [
+          61.3695110047486,
+          56.369547
+        ]
+      },
+      "near_items": [
+        {
+          "kind": "board_graphic",
+          "uuid": "a816fba7-da64-4618-830a-b8a7043e1513",
+          "net": "",
+          "layer": "F.Cu",
+          "distance_mm": 0.0
+        }
+      ]
+    },
+    {
+      "layer": "F.Cu",
+      "kind": "tiny_copper_components",
+      "feature": {
+        "area_mm2": 0.009639132644499912,
+        "bounds_mm": [
+          61.501492,
+          56.514378,
+          61.646886,
+          56.675197
+        ],
+        "at_mm": [
+          61.56951721537862,
+          56.596227
+        ]
+      },
+      "near_items": [
+        {
+          "kind": "board_graphic",
+          "uuid": "c49da04e-b8a3-4ebc-8084-8e0d661d27e1",
+          "net": "",
+          "layer": "F.Cu",
+          "distance_mm": 0.0
+        }
+      ]
+    },
+    {
+      "layer": "B.Cu",
+      "kind": "acute_gap_candidates",
+      "feature": {
+        "at_mm": [
+          62.478422,
+          29.797
+        ],
+        "gap_angle_deg": 45.00000000000051,
+        "edge_support_mm": [
+          8.452155999999995,
+          0.27304786934161945
+        ]
+      },
+      "near_items": [
+        {
+          "kind": "PCB_TRACK",
+          "uuid": "7b0c35fa-a635-4112-a41c-6c0bfb2283b7",
+          "net": "VSTOR",
+          "layer": "B.Cu",
+          "start": [
+            62.237,
+            29.697
+          ],
+          "end": [
+            62.8,
+            30.26
+          ],
+          "width_mm": 0.2,
+          "length_mm": 0.7962022356160525,
+          "distance_mm": 0.0
+        },
+        {
+          "kind": "PCB_TRACK",
+          "uuid": "98ea4de5-be56-4e32-82da-43cd09ae4f22",
+          "net": "VSTOR",
+          "layer": "B.Cu",
+          "start": [
+            70.972,
+            29.697
+          ],
+          "end": [
+            60.99,
+            29.697
+          ],
+          "width_mm": 0.2,
+          "length_mm": 9.982,
+          "distance_mm": 0.0
+        }
+      ]
+    },
+    {
+      "layer": "B.Cu",
+      "kind": "acute_gap_candidates",
+      "feature": {
+        "at_mm": [
+          65.8296,
+          63.976795
+        ],
+        "gap_angle_deg": 45.00000000000051,
+        "edge_support_mm": [
+          0.5672636872848439,
+          4.421382999999999
+        ]
+      },
+      "near_items": [
+        {
+          "kind": "PCB_TRACK",
+          "uuid": "8a3c1fbf-e7b9-417f-af2d-fc9132fcb3c4",
+          "net": "SDA",
+          "layer": "B.Cu",
+          "start": [
+            66.301426,
+            64.3072
+          ],
+          "end": [
+            65.7774,
+            63.783174
+          ],
+          "width_mm": 0.2,
+          "length_mm": 0.7410846762361235,
+          "distance_mm": 0.0
+        },
+        {
+          "kind": "PCB_TRACK",
+          "uuid": "aab10b0e-71b9-4d02-8465-a8960a90686d",
+          "net": "SDA",
+          "layer": "B.Cu",
+          "start": [
+            65.7296,
+            68.4396
+          ],
+          "end": [
+            65.7296,
+            57.792425
+          ],
+          "width_mm": 0.2,
+          "length_mm": 10.647175,
+          "distance_mm": 0.0
+        }
+      ]
+    },
+    {
+      "layer": "B.Cu",
+      "kind": "acute_gap_candidates",
+      "feature": {
+        "at_mm": [
+          71.525,
+          34.108008
+        ],
+        "gap_angle_deg": 44.999999999999716,
+        "edge_support_mm": [
+          1.0889444430272825,
+          0.6069920000000053
+        ]
+      },
+      "near_items": [
+        {
+          "kind": "pad",
+          "uuid": "07dfd33f-293d-4492-9f02-dbf9001ae8dc",
+          "net": "+SOLAR",
+          "layer": "B.Cu",
+          "ref": "L1",
+          "pin": "2",
+          "at": [
+            71.085,
+            33.32
+          ],
+          "distance_mm": 0.0
+        },
+        {
+          "kind": "PCB_TRACK",
+          "uuid": "1672ba16-99bb-49ca-9585-e689cab390bb",
+          "net": "+SOLAR",
+          "layer": "B.Cu",
+          "start": [
+            72.77,
+            34.805
+          ],
+          "end": [
+            71.285,
+            33.32
+          ],
+          "width_mm": 0.775,
+          "length_mm": 2.100107140124046,
+          "distance_mm": 0.0
+        }
+      ]
+    },
+    {
+      "layer": "B.Cu",
+      "kind": "acute_gap_candidates",
+      "feature": {
+        "at_mm": [
+          70.617868,
+          35.27
+        ],
+        "gap_angle_deg": 45.04530134435609,
+        "edge_support_mm": [
+          1.6232044286647955,
+          0.5478680000000082
+        ]
+      },
+      "near_items": [
+        {
+          "kind": "pad",
+          "uuid": "07dfd33f-293d-4492-9f02-dbf9001ae8dc",
+          "net": "+SOLAR",
+          "layer": "B.Cu",
+          "ref": "L1",
+          "pin": "2",
+          "at": [
+            71.085,
+            33.32
+          ],
+          "distance_mm": 0.0
+        },
+        {
+          "kind": "PCB_TRACK",
+          "uuid": "59f56b85-79d6-4fa5-a321-83138da340a4",
+          "net": "+SOLAR",
+          "layer": "B.Cu",
+          "start": [
+            69.59,
+            36.51
+          ],
+          "end": [
+            71.3,
+            34.8
+          ],
+          "width_mm": 0.3,
+          "length_mm": 2.4183051916579927,
+          "distance_mm": 0.0
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,122 @@
+{
+  "input_sha256": "1966ade1672756ab5a0b50b5a834f0841fec22fe8421c9f19aa97c6c10cde12e",
+  "output_sha256": "bf0be2ce819fd00b3837d82cbcd8efab95369e1aafc4fe01be8dbd71081745c0",
+  "changes": [
+    {
+      "action": "move_footprint",
+      "ref": "C5",
+      "uuid": "1625c2a2-112b-4328-9591-9b9be88f549e",
+      "before_mm": [
+        64.875,
+        64.707
+      ],
+      "after_mm": [
+        64.875,
+        66.007
+      ],
+      "rotation_deg": 180.0,
+      "layer": "B.Cu",
+      "pad_before": {
+        "1": {
+          "at": [
+            61.375,
+            46.207
+          ],
+          "net": "/VBAT",
+          "size": [
+            2.5,
+            3.5
+          ]
+        },
+        "2": {
+          "at": [
+            68.375,
+            46.207
+          ],
+          "net": "GND",
+          "size": [
+            2.5,
+            3.5
+          ]
+        },
+        "3": {
+          "at": [
+            64.865,
+            46.207
+          ],
+          "net": "/SC_MID",
+          "size": [
+            2.5,
+            3.5
+          ]
+        }
+      },
+      "pad_after": {
+        "1": {
+          "at": [
+            61.375,
+            47.507
+          ],
+          "net": "/VBAT",
+          "size": [
+            2.5,
+            3.5
+          ]
+        },
+        "2": {
+          "at": [
+            68.375,
+            47.507
+          ],
+          "net": "GND",
+          "size": [
+            2.5,
+            3.5
+          ]
+        },
+        "3": {
+          "at": [
+            64.865,
+            47.507
+          ],
+          "net": "/SC_MID",
+          "size": [
+            2.5,
+            3.5
+          ]
+        }
+      },
+      "reason": "Remove live storage-positive rear land from underneath GNSS RF launch; retain flat case and all three terminal lands. Existing terminal track endpoints remain within translated3.5mm-tall lands, so no signal route changes are required."
+    },
+    {
+      "action": "move_ground_stitch",
+      "uuid": "4f4e11d8-24e1-49be-8ad6-88fe1aebc139",
+      "before_mm": [
+        63.5,
+        49.53
+      ],
+      "after_mm": [
+        63.5,
+        49.85
+      ],
+      "diameter_mm": 0.6,
+      "drill_mm": 0.3,
+      "reason": "Clear translated C5 terminal land while retaining the local plated ground connection."
+    },
+    {
+      "action": "move_ground_stitch",
+      "uuid": "eb85d24f-882e-4a58-bce7-b5d77ac2077c",
+      "before_mm": [
+        59.69,
+        48.895
+      ],
+      "after_mm": [
+        59.6,
+        48.895
+      ],
+      "diameter_mm": 0.6,
+      "drill_mm": 0.3,
+      "reason": "Clear translated C5 terminal land while retaining the local plated ground connection."
+    }
+  ]
+}

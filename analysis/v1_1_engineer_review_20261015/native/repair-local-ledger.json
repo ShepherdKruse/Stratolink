@@ -1,0 +1,46 @@
+{
+  "input_sha256": "04a2cbc8ff605106bdb45b7ee59dae6f91e6b2d529e8a45cc63e408c2a26ee23",
+  "output_sha256": "a7835331739036ae939567fb76858ca62385c313cceb8de60c56c94235bcd3d1",
+  "changes": [
+    {
+      "ref": "U4",
+      "action": "pad_mask_expansion_0p05",
+      "reason": "Preserve copper routing; retain >=0.09 mm mask-to-foreign-copper gap"
+    },
+    {
+      "ref": "L2",
+      "action": "pad_mask_expansion_0p05",
+      "reason": "Preserve copper routing; retain >=0.09 mm mask-to-foreign-copper gap"
+    },
+    {
+      "uuid": "73cd9d1c-ba43-4a38-9019-8ccb1813a23d",
+      "action": "add_ground_stitch",
+      "at": [
+        64.25,
+        32.2
+      ],
+      "reason": "Connect U1/C6/C20 ground group to main ground"
+    },
+    {
+      "uuid": "f954dff9-4ad5-4f1c-b210-537ad56aea41",
+      "action": "remove_unconnected_fill_islands"
+    },
+    {
+      "uuid": "09c941a2-a889-457b-ae85-cdf2c8c21c0d",
+      "action": "remove_unconnected_fill_islands"
+    },
+    {
+      "uuid": "517aa68d-ce15-590c-89c7-5c81211a9ef5",
+      "action": "move_right_minus_mask",
+      "before": [
+        73,
+        54.5
+      ],
+      "after": [
+        74.2,
+        54.5
+      ],
+      "reason": "Keep solder mask opening away from GNSS TXD"
+    }
+  ]
+}

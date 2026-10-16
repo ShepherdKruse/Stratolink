@@ -1,0 +1,52 @@
+{
+  "pcb_sha256": "25b201eb09c6746a22d1c3be42f7d4023319dd6fa5e3e587dc8cf42d97bb4d7f",
+  "schematic_sha256": "c772c2a0edff4d6f7616afb0988fc95c2cbb8c2d3572c1429fc0f3718f69e921",
+  "baseline_pcb_sha256": "88f82c85d2d47b4aea2e7d7d2827c4a92c339788cc0d9c880dd6342ee0440c0a",
+  "incoming_pcb_sha256": "9428ded14dd46a084b5576b85987093bf20139053cdad33eb35cf222d1db2703",
+  "checks": {
+    "schematic_247_nodes_same_net_and_pin_role": true,
+    "all_66_component_definitions_unchanged": true,
+    "exported_library_part_definitions_unchanged": true,
+    "68_footprints_and259_physical_pads_preserved": true,
+    "250_reference_pin_net_mappings_preserved": true,
+    "native_zero_opens": true,
+    "all_pads_reach_all_intended_same_net_pads": true,
+    "no_unexplained_schematic_pcb_mapping_discrepancy": true,
+    "no_foreign_net_envelope_overlap": true,
+    "no_disconnected_assigned_net_pad_clusters": true,
+    "no_unanchored_assigned_net_copper": true,
+    "right_minus_fully_exposes_connected_ground": true,
+    "source_bytes_unchanged": true
+  },
+  "all_listed_checks_pass": true,
+  "net_name_count": 59,
+  "unanchored_assigned_net_component_count": 0,
+  "pose_changes_from_engineer_input": [
+    {
+      "key": "C5",
+      "before": {
+        "x_mm": 64.875,
+        "y_mm": 64.707,
+        "angle_deg": 180.0,
+        "layer": "B.Cu"
+      },
+      "after": {
+        "x_mm": 64.875,
+        "y_mm": 66.007,
+        "angle_deg": 180.0,
+        "layer": "B.Cu"
+      }
+    }
+  ],
+  "right_minus_xy_mm": [
+    74.3,
+    55.0
+  ],
+  "right_minus_ground_edge_margin_mm": 0.08074930656561728,
+  "right_minus_foreign_net_spacing_mm": 0.23942900000000122,
+  "limitations": [
+    "This checks electrical identity and nominal saved copper connectivity, not measured RF behavior or production tolerances.",
+    "Zero unanchored assigned-net copper does not include intentionally unnetted decorative copper lettering/logo. Fabrication review lists5 tiny decorative components and2 decorative gaps.",
+    "Native strict DRC/ERC, geometry-screen disposition and supplier CAM approval are separate evidence."
+  ]
+}

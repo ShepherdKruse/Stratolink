@@ -1,0 +1,16 @@
+{
+  "library_mask_updates": [
+    "U4",
+    "L2"
+  ],
+  "library_courtyard_update": "C5, match incoming larger envelope",
+  "schematic_excluded_from_position": [
+    "J1",
+    "J20",
+    "J2"
+  ],
+  "right_minus_final_mm": [
+    74.3,
+    55
+  ]
+}

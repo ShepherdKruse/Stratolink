@@ -1,0 +1,240 @@
+                                                                                                       PACKAGE OUTLINE
+ RGR0020A                                                                                             VQFN - 1 mm max height
+                                                                                                       PLASTIC QUAD FLATPACK - NO LEAD
+
+
+
+
+                                                             3.65
+                                            B                                           A
+                                                             3.35
+
+
+
+                     PIN 1 INDEX AREA
+
+
+
+                                                                                       3.65
+                                                                                       3.35
+
+
+
+
+                                                                                                                     SIDE WALL
+                                                                                                                 METAL THICKNESS
+                                1.0                                                                                     DIM A
+                                0.8                                                                             OPTION 1     OPTION 2
+                                                                                              C                   0.1          0.2
+
+
+                                                                                                     SEATING PLANE
+                                     0.05                                                           0.08 C
+                                     0.00
+
+
+                                                            2X 2
+                                                            SYMM                                                         (DIM A) TYP
+                                                    6                       10
+                            EXPOSED
+                         THERMAL PAD
+                                                5                                 11
+
+
+
+                                        SYMM                    21
+                              2X 2                                                          2.05 0.1
+
+
+                                  16X 0.5
+                                                1
+                                                                                  15
+
+                                  PIN 1 ID           20                    16                       0.30
+                                                                                              20X
+                                                                                                    0.18
+                                                                     0.5                             0.1     C A B
+                                                               20X
+                                                                     0.3
+                                                                                                     0.05
+
+
+
+                                                                                                                         4219031/B 04/2022
+
+NOTES:
+
+1. All linear dimensions are in millimeters. Any dimensions in parenthesis are for reference only. Dimensioning and tolerancing
+   per ASME Y14.5M.
+2. This drawing is subject to change without notice.
+3. The package thermal pad must be soldered to the printed circuit board for thermal and mechanical performance.
+
+
+
+
+                                                                     www.ti.com
+                                                                                        EXAMPLE BOARD LAYOUT
+ RGR0020A                                                                                             VQFN - 1 mm max height
+                                                                                                       PLASTIC QUAD FLATPACK - NO LEAD
+
+
+
+
+                                                                     (2.05)
+
+                                                                    SYMM
+
+
+                                                   20                                       16    SEE SOLDER MASK
+                                                                                                  DETAIL
+
+
+                          20X (0.6)
+
+                                                                                                         15
+                       20X (0.24)     1
+
+
+                                                                                                                   (2.05)
+                          16X (0.5)                                       21                                  SYMM
+                                                                                                                            (3.3)
+
+                    (0.775)
+
+
+
+                                      5
+                                                                                                         11
+                     (R0.05) TYP
+
+                   ( 0.2) TYP
+                           VIA
+                                                      6                                10
+                                               (0.775)
+
+                                                                     (3.3)
+
+                                                      LAND PATTERN EXAMPLE
+                                                          EXPOSED METAL SHOWN
+                                                               SCALE: 20X
+
+
+
+
+                                                                                          0.07 MIN
+                         0.07 MAX                                                     ALL AROUND
+                     ALL AROUND
+                                                                                                                     METAL UNDER
+                                                          METAL EDGE                                                 SOLDER MASK
+
+
+                EXPOSED METAL
+                                                          SOLDER MASK              EXPOSED                           SOLDER MASK
+                                                          OPENING                    METAL                           OPENING
+
+
+                                    NON SOLDER MASK
+                                        DEFINED                                             SOLDER MASK DEFINED
+                                      (PREFERRED)
+
+                                                          SOLDER MASK DETAILS
+                                                                                                                             4219031/B 04/2022
+NOTES: (continued)
+
+4. This package is designed to be soldered to a thermal pad on the board. For more information, see Texas Instruments literature
+   number SLUA271 (www.ti.com/lit/slua271).
+5. Vias are optional depending on application, refer to device data sheet. If any vias are implemented, refer to their locations shown
+   on this view. It is recommended that vias under paste be filled, plugged or tented.
+
+
+
+
+                                                                        www.ti.com
+                                                                                    EXAMPLE STENCIL DESIGN
+ RGR0020A                                                                                        VQFN - 1 mm max height
+                                                                                                 PLASTIC QUAD FLATPACK - NO LEAD
+
+
+
+
+                                                                                    (0.56) TYP
+
+
+                                                  20                                16
+
+
+                       20X (0.6)
+
+
+
+                      20X (0.24)   1                                                              15
+
+
+
+
+                     16X (0.5)                                                                         (0.56) TYP
+                                                                    21
+            SYMM                                                                                                    (3.3)
+
+
+
+                                                                                                   4X (0.92)
+                   (R0.05) TYP
+                                   5
+                                                                                                  11
+
+
+
+
+                                                  6                                      10
+                                                                        4X (0.92)
+                                                               SYMM
+
+
+                                                                (3.3)
+
+
+
+                                                  SOLDER PASTE EXAMPLE
+                                                BASED ON 0.125 MM THICK STENCIL
+                                                          SCALE: 20X
+
+                                                     EXPOSED PAD 21
+                                   81% PRINTED SOLDER COVERAGE BY AREA UNDER PACKAGE
+
+
+
+
+                                                                                                                      4219031/B 04/2022
+
+NOTES: (continued)
+
+6. Laser cutting apertures with trapezoidal walls and rounded corners may offer better paste release. IPC-7525 may have alternate
+  design recommendations.
+
+
+
+
+                                                                  www.ti.com
+                                       IMPORTANT NOTICE AND DISCLAIMER
+TI PROVIDES TECHNICAL AND RELIABILITY DATA (INCLUDING DATA SHEETS), DESIGN RESOURCES (INCLUDING REFERENCE
+DESIGNS), APPLICATION OR OTHER DESIGN ADVICE, WEB TOOLS, SAFETY INFORMATION, AND OTHER RESOURCES “AS IS”
+AND WITH ALL FAULTS, AND DISCLAIMS ALL WARRANTIES, EXPRESS AND IMPLIED, INCLUDING WITHOUT LIMITATION ANY
+IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE OR NON-INFRINGEMENT OF THIRD
+PARTY INTELLECTUAL PROPERTY RIGHTS.
+These resources are intended for skilled developers designing with TI products. You are solely responsible for (1) selecting the appropriate
+TI products for your application, (2) designing, validating and testing your application, and (3) ensuring your application meets applicable
+standards, and any other safety, security, regulatory or other requirements.
+These resources are subject to change without notice. TI grants you permission to use these resources only for development of an
+application that uses the TI products described in the resource. Other reproduction and display of these resources is prohibited. No license
+is granted to any other TI intellectual property right or to any third party intellectual property right. TI disclaims responsibility for, and you
+will fully indemnify TI and its representatives against, any claims, damages, costs, losses, and liabilities arising out of your use of these
+resources.
+TI’s products are provided subject to TI’s Terms of Sale or other applicable terms available either on ti.com or provided in conjunction with
+such TI products. TI’s provision of these resources does not expand or otherwise alter TI’s applicable warranties or warranty disclaimers for
+TI products.
+TI objects to and rejects any additional or different terms you may have proposed. IMPORTANT NOTICE
+
+                             Mailing Address: Texas Instruments, Post Office Box 655303, Dallas, Texas 75265
+                                            Copyright © 2022, Texas Instruments Incorporated
+

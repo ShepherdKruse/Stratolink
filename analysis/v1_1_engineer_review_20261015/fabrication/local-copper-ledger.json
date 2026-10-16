@@ -1,0 +1,119 @@
+{
+  "uv_corner": {
+    "zone_uuid": "442a117e-a323-4a64-825c-b874c2426d48",
+    "before_outline_mm": [
+      [
+        74.97,
+        37.07
+      ],
+      [
+        75.57,
+        37.07
+      ],
+      [
+        75.57,
+        38.72
+      ],
+      [
+        75.18,
+        38.72
+      ],
+      [
+        75.18,
+        39.25
+      ],
+      [
+        74.32,
+        39.25
+      ],
+      [
+        74.32,
+        38.72
+      ],
+      [
+        73,
+        38.72
+      ],
+      [
+        73,
+        36.51
+      ],
+      [
+        74.97,
+        36.51
+      ]
+    ],
+    "after_outline_mm": [
+      [
+        74.97,
+        37.07
+      ],
+      [
+        75.57,
+        37.07
+      ],
+      [
+        75.57,
+        39.25
+      ],
+      [
+        74.32,
+        39.25
+      ],
+      [
+        74.32,
+        38.72
+      ],
+      [
+        73,
+        38.72
+      ],
+      [
+        73,
+        36.51
+      ],
+      [
+        74.97,
+        36.51
+      ]
+    ],
+    "nominal_outline_added_area_mm2": 0.20670000000000002,
+    "reason": "Fill the small enclosed non-copper void created where the UV GND zone meets the main GND fill at its concave corner. Native refill determines actual final copper; no signal route changes."
+  },
+  "l1_tail": {
+    "track_uuid": "59f56b85-79d6-4fa5-a321-83138da340a4",
+    "start_mm": [
+      69.59,
+      36.51
+    ],
+    "before_end_mm": [
+      71.895,
+      34.205
+    ],
+    "after_end_mm": [
+      71.3,
+      34.8
+    ],
+    "width_mm": 0.3,
+    "removed_stub_uuids": [
+      "a95ef473-602c-4498-b8da-af0e3a9c76e0",
+      "18d2448d-ccf2-4af7-8ca3-9489ea76f57a"
+    ],
+    "shortened_tail_removed_centerline_mm": 0.8414570696119915,
+    "deleted_loop_segments_mm": [
+      0.275,
+      0.848528137423857
+    ],
+    "total_removed_centerline_mm": 1.9649852070358484,
+    "reason": "Shorten the diagonal tail to terminate in L1.2 and remove its two redundant loop segments, opening the enclosed triangular etch pocket. The retained trace follows the same centerline; the footprint is unchanged."
+  },
+  "before_pcb_sha256": "2d053c2743dad1d834eb1a661f202d727ce1ae8c6000656aaaaa282769c000ab",
+  "after_unfilled_pcb_sha256": "3ded36c0eadb4e444eab8c4cae51d527309458814974c497c08c3e0f762da561",
+  "pcb_sha256": "25b201eb09c6746a22d1c3be42f7d4023319dd6fa5e3e587dc8cf42d97bb4d7f",
+  "one_pass_reproduction_matches_staged_candidate": true,
+  "drc_counts": {
+    "violations": 0,
+    "unconnected_items": 0,
+    "schematic_parity": 0
+  }
+}

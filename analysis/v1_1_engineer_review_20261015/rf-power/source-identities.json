@@ -1,0 +1,69 @@
+{
+  "pcb_sha256": "25b201eb09c6746a22d1c3be42f7d4023319dd6fa5e3e587dc8cf42d97bb4d7f",
+  "incoming_pcb_sha256": "9428ded14dd46a084b5576b85987093bf20139053cdad33eb35cf222d1db2703",
+  "method": "Read-only native saved-copper/layout extraction, full copper projection, plated-ground graph, and bounded power continuity comparison. No source save/refill performed by final extraction.",
+  "outputs": {
+    "analysis/v1_1_engineer_review_20261015/rf-power/README.md": {
+      "sha256": "aea2f5a167792a3ec3f91a7be74351aec8d640f5649d34acbfeaf4f7c504fb67",
+      "bytes": 7620
+    },
+    "analysis/v1_1_engineer_review_20261015/rf-power/analyze.py": {
+      "sha256": "28bbb2dda0c8fe7f1f790c7699486596319f6b6fdc8947e01c34a6ba83aeff19",
+      "bytes": 5402
+    },
+    "analysis/v1_1_engineer_review_20261015/rf-power/check_ground.py": {
+      "sha256": "ffcbce89c98205232fcd9a455b43ac5a33b3de0a3eff14c97685178e34339680",
+      "bytes": 4290
+    },
+    "analysis/v1_1_engineer_review_20261015/rf-power/compare_power.py": {
+      "sha256": "d3900035b73efd1daf6ae4b4da1fb3dacc33e02a402aebfba024bfee4d478749",
+      "bytes": 3753
+    },
+    "analysis/v1_1_engineer_review_20261015/rf-power/ground-review.json": {
+      "sha256": "996eeb48218749efb689ee5cacdf248e77181fe81bf0effb0d3d6bdc1044acf8",
+      "bytes": 21316
+    },
+    "analysis/v1_1_engineer_review_20261015/rf-power/lower.png": {
+      "sha256": "64c026e4594ea061e04088b792ea79ab9dd4f304d5bd344561fa4ca4bd8bb802",
+      "bytes": 139198
+    },
+    "analysis/v1_1_engineer_review_20261015/rf-power/native-copper.json": {
+      "sha256": "acf4be83f9a7473fd1f9f3b711d156fbe802080c0a9fbfab7228ed5513a6728c",
+      "bytes": 2074316
+    },
+    "analysis/v1_1_engineer_review_20261015/rf-power/native-layout.json": {
+      "sha256": "e11e54e6e088542a74664836c82df9a6ebbab1df50f208eaa5b29e7de6f9bd1d",
+      "bytes": 2603368
+    },
+    "analysis/v1_1_engineer_review_20261015/rf-power/power-continuity.json": {
+      "sha256": "9a8e55a1d0dc845bafcf3b372b7632532b6217c7ad19bc87e6e07638e9a07a17",
+      "bytes": 3303
+    },
+    "analysis/v1_1_engineer_review_20261015/rf-power/rf-launch.png": {
+      "sha256": "a3d640d97a2cae8d23712572bbab6bcdc1dfecefe07348211c8b5f1237235ce5",
+      "bytes": 64245
+    },
+    "analysis/v1_1_engineer_review_20261015/rf-power/rf-power-review.json": {
+      "sha256": "29a79781c7ae8762d398bdbf03e96a48375584d54db85ce3dc45deaefa57c58a",
+      "bytes": 4359
+    },
+    "analysis/v1_1_engineer_review_20261015/rf-power/rf-reference.json": {
+      "sha256": "7893e2f56ed9c5d7be1aa2435e805ce38ee7851dd94b7addb82fe7a93d0bbcba",
+      "bytes": 370693
+    },
+    "analysis/v1_1_engineer_review_20261015/rf-power/upper.png": {
+      "sha256": "bf4e5f7c53e5b06bcf11bcf73b90df4aeddd662ecb6ec63185cdeb5b9abd0562",
+      "bytes": 167272
+    }
+  },
+  "dependencies": {
+    "analysis/v1_1_peer_review_20261014/digital/extract_rf_reference.py": "d0e3da278774574be5a10168c302e0bd3a45f48b2934256721f7276df85ad4f9",
+    "analysis/v1_1_peer_review_20261014/digital/check_rf_reference.py": "1eb07714979980f68f5d1bfc4b3fd30dd24e6890c61cb35f2ab2aa4cfae420c3",
+    "analysis/v1_1_solar_attachments_20261012/materials/extract_native.py": "10993f989f01950e87e3f414b1230339f06b4507ee72354f129977c257e27246",
+    "analysis/v1_1_top_gnss_20261014/power/snapshot.py": "56a52c69e6b5aee2db2c43d9be85787bd172dc67cb06a11748936862173afcb1",
+    "analysis/v1_1_peer_review_20261014/rf/cpw_screen.py": "78ec3733f1a79cfd1761e44f49484764b741b10b401a2a1824c8ea506f3a4414",
+    "analysis/v1_1_peer_review_20261014/rf/cpw-screen.json": "fd4d293d4abb00afe7e7191ea4699b3acddbc4d49d9180610bf9dd276895a66d",
+    "analysis/v1_1_engineer_review_20261015/intake/stratolink.kicad_pcb": "9428ded14dd46a084b5576b85987093bf20139053cdad33eb35cf222d1db2703"
+  },
+  "limits": "RF impedance, noise, reception, cold operation, capacitor balancing and mechanical assembly remain pilot measurements; these are geometric/connectivity checks."
+}

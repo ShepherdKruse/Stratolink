@@ -1,0 +1,24 @@
+{
+  "pcb_sha256": "25b201eb09c6746a22d1c3be42f7d4023319dd6fa5e3e587dc8cf42d97bb4d7f",
+  "mask_glyph_uuid": "517aa68d-ce15-590c-89c7-5c81211a9ef5",
+  "text": "-",
+  "xy_mm": [
+    74.3,
+    55.0
+  ],
+  "aperture_bounds_mm": [
+    74.009429,
+    54.98076,
+    74.590572,
+    55.10476
+  ],
+  "aperture_area_mm2": 0.06891903336400103,
+  "uncovered_by_ground_area_mm2": 0.0,
+  "foreign_net_overlap_area_mm2": 0.0,
+  "minimum_foreign_net_distance_mm": 0.23942900000000122,
+  "minimum_ground_edge_distance_mm": 0.08074930656561728,
+  "ground_pad_bearing_component_count": 1,
+  "front_unanchored_ground_pieces": [],
+  "pass": true,
+  "method": "Full native text aperture against saved front copper. Graph verifies GND connectivity with plated layer joins. No source modification."
+}

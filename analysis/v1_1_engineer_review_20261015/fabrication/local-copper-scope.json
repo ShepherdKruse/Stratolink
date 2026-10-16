@@ -1,0 +1,138 @@
+{
+  "before_pcb_sha256": "2d053c2743dad1d834eb1a661f202d727ce1ae8c6000656aaaaa282769c000ab",
+  "pcb_sha256": "25b201eb09c6746a22d1c3be42f7d4023319dd6fa5e3e587dc8cf42d97bb4d7f",
+  "all_other_source_nodes_exactly_unchanged": true,
+  "changed_zone_outline_uuid": "442a117e-a323-4a64-825c-b874c2426d48",
+  "track_deltas": [
+    {
+      "uuid": "18d2448d-ccf2-4af7-8ca3-9489ea76f57a",
+      "before": [
+        "segment",
+        [
+          "start",
+          "72.17",
+          "34.205"
+        ],
+        [
+          "end",
+          "72.77",
+          "34.805"
+        ],
+        [
+          "width",
+          "0.3"
+        ],
+        [
+          "layer",
+          "B.Cu"
+        ],
+        [
+          "net",
+          "+SOLAR"
+        ],
+        [
+          "uuid",
+          "18d2448d-ccf2-4af7-8ca3-9489ea76f57a"
+        ]
+      ],
+      "after": null
+    },
+    {
+      "uuid": "59f56b85-79d6-4fa5-a321-83138da340a4",
+      "before": [
+        "segment",
+        [
+          "start",
+          "69.59",
+          "36.51"
+        ],
+        [
+          "end",
+          "71.895",
+          "34.205"
+        ],
+        [
+          "width",
+          "0.3"
+        ],
+        [
+          "layer",
+          "B.Cu"
+        ],
+        [
+          "net",
+          "+SOLAR"
+        ],
+        [
+          "uuid",
+          "59f56b85-79d6-4fa5-a321-83138da340a4"
+        ]
+      ],
+      "after": [
+        "segment",
+        [
+          "start",
+          "69.59",
+          "36.51"
+        ],
+        [
+          "end",
+          "71.3",
+          "34.8"
+        ],
+        [
+          "width",
+          "0.3"
+        ],
+        [
+          "layer",
+          "B.Cu"
+        ],
+        [
+          "net",
+          "+SOLAR"
+        ],
+        [
+          "uuid",
+          "59f56b85-79d6-4fa5-a321-83138da340a4"
+        ]
+      ]
+    },
+    {
+      "uuid": "a95ef473-602c-4498-b8da-af0e3a9c76e0",
+      "before": [
+        "segment",
+        [
+          "start",
+          "71.895",
+          "34.205"
+        ],
+        [
+          "end",
+          "72.17",
+          "34.205"
+        ],
+        [
+          "width",
+          "0.3"
+        ],
+        [
+          "layer",
+          "B.Cu"
+        ],
+        [
+          "net",
+          "+SOLAR"
+        ],
+        [
+          "uuid",
+          "a95ef473-602c-4498-b8da-af0e3a9c76e0"
+        ]
+      ],
+      "after": null
+    }
+  ],
+  "strict_native_drc_violations": 0,
+  "strict_native_unconnected_items": 0,
+  "strict_native_schematic_parity": 0
+}

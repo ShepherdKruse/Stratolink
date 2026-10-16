@@ -1,0 +1,30 @@
+{
+  "pcb_sha256": "25b201eb09c6746a22d1c3be42f7d4023319dd6fa5e3e587dc8cf42d97bb4d7f",
+  "strict_native_drc_violations": 0,
+  "strict_native_unconnected_items": 0,
+  "strict_native_schematic_parity": 0,
+  "screen_counts": {
+    "F.Cu": {
+      "acute_gap_candidates": 20,
+      "sharp_tip_candidates": 0,
+      "small_enclosed_gap_candidates": 2,
+      "tiny_copper_components": 5
+    },
+    "B.Cu": {
+      "acute_gap_candidates": 4,
+      "sharp_tip_candidates": 0,
+      "small_enclosed_gap_candidates": 0,
+      "tiny_copper_components": 0
+    }
+  },
+  "electrical_open_wedge_count": 12,
+  "electrical_wedges_reaching_board_edge": 11,
+  "electrical_wedges_reaching_large_enclosed_clearance_region": 1,
+  "remaining_tiny_enclosed_electrical_gap_count": 0,
+  "unanchored_assigned_net_copper_components": 0,
+  "tiny_unnetted_decorative_components": 5,
+  "small_unnetted_decorative_enclosed_gaps": 2,
+  "copper_tip_candidates": 0,
+  "supplier_CAM_review_outstanding": true,
+  "disposition": "The two enclosed electrical etch pockets were corrected with one zone-outline edit and one redundant L1 loop cleanup. Twelve electrical reentrant wedge terminations remain in the engineer routing. Profiles show each opens wider than 0.10 mm by 0.125 mm from the apex and connects to a larger clearance region. This is measured geometry, not a blanket acid-trap-free or supplier-manufacturing qualification. Decorative microdetail also requires CAM review."
+}

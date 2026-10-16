@@ -1,0 +1,1114 @@
+{
+  "pcb_sha256": "25b201eb09c6746a22d1c3be42f7d4023319dd6fa5e3e587dc8cf42d97bb4d7f",
+  "whole_board": {
+    "converter": {
+      "bounds_mm": [
+        50,
+        28,
+        78,
+        87
+      ],
+      "ground_pads": [
+        {
+          "ref": "C20",
+          "pin": "1",
+          "at": [
+            68.703,
+            37.88
+          ],
+          "layer": "F.Cu",
+          "component_ids": [
+            12
+          ]
+        },
+        {
+          "ref": "C2",
+          "pin": "2",
+          "at": [
+            72.77,
+            36.355
+          ],
+          "layer": "B.Cu",
+          "component_ids": [
+            12
+          ]
+        },
+        {
+          "ref": "C4",
+          "pin": "2",
+          "at": [
+            71.17,
+            36.98
+          ],
+          "layer": "B.Cu",
+          "component_ids": [
+            12
+          ]
+        },
+        {
+          "ref": "U1",
+          "pin": "1",
+          "at": [
+            68.840997,
+            36.815
+          ],
+          "layer": "B.Cu",
+          "component_ids": [
+            12
+          ]
+        },
+        {
+          "ref": "U1",
+          "pin": "5",
+          "at": [
+            68.840999,
+            38.814997
+          ],
+          "layer": "B.Cu",
+          "component_ids": [
+            12
+          ]
+        },
+        {
+          "ref": "U1",
+          "pin": "9",
+          "at": [
+            66.690998,
+            39.464998
+          ],
+          "layer": "B.Cu",
+          "component_ids": [
+            12
+          ]
+        },
+        {
+          "ref": "U1",
+          "pin": "15",
+          "at": [
+            65.540997,
+            36.815001
+          ],
+          "layer": "B.Cu",
+          "component_ids": [
+            12
+          ]
+        },
+        {
+          "ref": "U1",
+          "pin": "17",
+          "at": [
+            66.690997,
+            36.164998
+          ],
+          "layer": "B.Cu",
+          "component_ids": [
+            12
+          ]
+        },
+        {
+          "ref": "U1",
+          "pin": "21",
+          "at": [
+            67.965998,
+            37.814999
+          ],
+          "layer": "F.Cu",
+          "component_ids": [
+            12
+          ]
+        },
+        {
+          "ref": "U1",
+          "pin": "21",
+          "at": [
+            67.965998,
+            37.814999
+          ],
+          "layer": "B.Cu",
+          "component_ids": [
+            12
+          ]
+        },
+        {
+          "ref": "U1",
+          "pin": "21",
+          "at": [
+            67.190998,
+            38.589999
+          ],
+          "layer": "F.Cu",
+          "component_ids": [
+            12
+          ]
+        },
+        {
+          "ref": "U1",
+          "pin": "21",
+          "at": [
+            67.190998,
+            38.589999
+          ],
+          "layer": "B.Cu",
+          "component_ids": [
+            12
+          ]
+        },
+        {
+          "ref": "U1",
+          "pin": "21",
+          "at": [
+            67.190998,
+            37.814999
+          ],
+          "layer": "F.Cu",
+          "component_ids": [
+            12
+          ]
+        },
+        {
+          "ref": "U1",
+          "pin": "21",
+          "at": [
+            67.190998,
+            37.814999
+          ],
+          "layer": "B.Cu",
+          "component_ids": [
+            12
+          ]
+        },
+        {
+          "ref": "U1",
+          "pin": "21",
+          "at": [
+            67.190998,
+            37.814999
+          ],
+          "layer": "B.Cu",
+          "component_ids": [
+            12
+          ]
+        },
+        {
+          "ref": "U1",
+          "pin": "21",
+          "at": [
+            67.190998,
+            37.039999
+          ],
+          "layer": "F.Cu",
+          "component_ids": [
+            12
+          ]
+        },
+        {
+          "ref": "U1",
+          "pin": "21",
+          "at": [
+            67.190998,
+            37.039999
+          ],
+          "layer": "B.Cu",
+          "component_ids": [
+            12
+          ]
+        },
+        {
+          "ref": "U1",
+          "pin": "21",
+          "at": [
+            66.415998,
+            37.814999
+          ],
+          "layer": "F.Cu",
+          "component_ids": [
+            12
+          ]
+        },
+        {
+          "ref": "U1",
+          "pin": "21",
+          "at": [
+            66.415998,
+            37.814999
+          ],
+          "layer": "B.Cu",
+          "component_ids": [
+            12
+          ]
+        },
+        {
+          "ref": "C6",
+          "pin": "1",
+          "at": [
+            65.169998,
+            33.08
+          ],
+          "layer": "B.Cu",
+          "component_ids": [
+            12
+          ]
+        },
+        {
+          "ref": "C3",
+          "pin": "2",
+          "at": [
+            72.035,
+            38.24
+          ],
+          "layer": "B.Cu",
+          "component_ids": [
+            12
+          ]
+        }
+      ],
+      "all_listed_pads_share_ground": true
+    },
+    "GNSS": {
+      "bounds_mm": [
+        50,
+        28,
+        78,
+        87
+      ],
+      "ground_pads": [
+        {
+          "ref": "C10",
+          "pin": "2",
+          "at": [
+            73.55,
+            45.41
+          ],
+          "layer": "F.Cu",
+          "component_ids": [
+            12
+          ]
+        },
+        {
+          "ref": "U3",
+          "pin": "1",
+          "at": [
+            70.979999,
+            52.799999
+          ],
+          "layer": "F.Cu",
+          "component_ids": [
+            12
+          ]
+        },
+        {
+          "ref": "U3",
+          "pin": "5",
+          "at": [
+            70.98,
+            48.400001
+          ],
+          "layer": "F.Cu",
+          "component_ids": [
+            12
+          ]
+        },
+        {
+          "ref": "U3",
+          "pin": "10",
+          "at": [
+            61.480001,
+            44.000001
+          ],
+          "layer": "F.Cu",
+          "component_ids": [
+            12
+          ]
+        },
+        {
+          "ref": "U3",
+          "pin": "12",
+          "at": [
+            61.48,
+            46.2
+          ],
+          "layer": "F.Cu",
+          "component_ids": [
+            12
+          ]
+        }
+      ],
+      "all_listed_pads_share_ground": true
+    },
+    "balancer": {
+      "bounds_mm": [
+        50,
+        28,
+        78,
+        87
+      ],
+      "ground_pads": [
+        {
+          "ref": "R25",
+          "pin": "2",
+          "at": [
+            58.0,
+            46.94
+          ],
+          "layer": "F.Cu",
+          "component_ids": [
+            12
+          ]
+        },
+        {
+          "ref": "U8",
+          "pin": "2",
+          "at": [
+            57.71,
+            49.22
+          ],
+          "layer": "F.Cu",
+          "component_ids": [
+            12
+          ]
+        },
+        {
+          "ref": "C22",
+          "pin": "2",
+          "at": [
+            56.01,
+            51.46
+          ],
+          "layer": "F.Cu",
+          "component_ids": [
+            12
+          ]
+        }
+      ],
+      "all_listed_pads_share_ground": true
+    },
+    "radio": {
+      "bounds_mm": [
+        50,
+        28,
+        78,
+        87
+      ],
+      "ground_pads": [
+        {
+          "ref": "U2",
+          "pin": "11",
+          "at": [
+            69.215002,
+            79.605001
+          ],
+          "layer": "F.Cu",
+          "component_ids": [
+            12
+          ]
+        },
+        {
+          "ref": "U2",
+          "pin": "17",
+          "at": [
+            70.215,
+            64.804999
+          ],
+          "layer": "F.Cu",
+          "component_ids": [
+            12
+          ]
+        },
+        {
+          "ref": "U2",
+          "pin": "18",
+          "at": [
+            69.215,
+            64.805001
+          ],
+          "layer": "F.Cu",
+          "component_ids": [
+            12
+          ]
+        },
+        {
+          "ref": "U2",
+          "pin": "23",
+          "at": [
+            60.215,
+            64.805
+          ],
+          "layer": "F.Cu",
+          "component_ids": [
+            12
+          ]
+        },
+        {
+          "ref": "U2",
+          "pin": "28",
+          "at": [
+            57.549999,
+            71.650001
+          ],
+          "layer": "F.Cu",
+          "component_ids": [
+            12
+          ]
+        },
+        {
+          "ref": "C8",
+          "pin": "1",
+          "at": [
+            57.645,
+            61.44
+          ],
+          "layer": "F.Cu",
+          "component_ids": [
+            12
+          ]
+        },
+        {
+          "ref": "C7",
+          "pin": "1",
+          "at": [
+            58.52,
+            62.72
+          ],
+          "layer": "F.Cu",
+          "component_ids": [
+            12
+          ]
+        }
+      ],
+      "all_listed_pads_share_ground": true
+    },
+    "pressure": {
+      "bounds_mm": [
+        50,
+        28,
+        78,
+        87
+      ],
+      "ground_pads": [
+        {
+          "ref": "U4",
+          "pin": "3",
+          "at": [
+            69.823,
+            59.433
+          ],
+          "layer": "F.Cu",
+          "component_ids": [
+            12
+          ]
+        },
+        {
+          "ref": "C11",
+          "pin": "1",
+          "at": [
+            68.212,
+            58.483
+          ],
+          "layer": "F.Cu",
+          "component_ids": [
+            12
+          ]
+        }
+      ],
+      "all_listed_pads_share_ground": true
+    }
+  },
+  "bounded_converter_windows": {
+    "43.5": {
+      "bounds_mm": [
+        62,
+        29,
+        77,
+        43.5
+      ],
+      "ground_pads": [
+        {
+          "ref": "C20",
+          "pin": "1",
+          "at": [
+            68.703,
+            37.88
+          ],
+          "layer": "F.Cu",
+          "component_ids": [
+            0
+          ]
+        },
+        {
+          "ref": "C2",
+          "pin": "2",
+          "at": [
+            72.77,
+            36.355
+          ],
+          "layer": "B.Cu",
+          "component_ids": [
+            5
+          ]
+        },
+        {
+          "ref": "C4",
+          "pin": "2",
+          "at": [
+            71.17,
+            36.98
+          ],
+          "layer": "B.Cu",
+          "component_ids": [
+            5
+          ]
+        },
+        {
+          "ref": "U1",
+          "pin": "1",
+          "at": [
+            68.840997,
+            36.815
+          ],
+          "layer": "B.Cu",
+          "component_ids": [
+            0
+          ]
+        },
+        {
+          "ref": "U1",
+          "pin": "5",
+          "at": [
+            68.840999,
+            38.814997
+          ],
+          "layer": "B.Cu",
+          "component_ids": [
+            0
+          ]
+        },
+        {
+          "ref": "U1",
+          "pin": "9",
+          "at": [
+            66.690998,
+            39.464998
+          ],
+          "layer": "B.Cu",
+          "component_ids": [
+            0
+          ]
+        },
+        {
+          "ref": "U1",
+          "pin": "15",
+          "at": [
+            65.540997,
+            36.815001
+          ],
+          "layer": "B.Cu",
+          "component_ids": [
+            0
+          ]
+        },
+        {
+          "ref": "U1",
+          "pin": "17",
+          "at": [
+            66.690997,
+            36.164998
+          ],
+          "layer": "B.Cu",
+          "component_ids": [
+            0
+          ]
+        },
+        {
+          "ref": "U1",
+          "pin": "21",
+          "at": [
+            67.965998,
+            37.814999
+          ],
+          "layer": "F.Cu",
+          "component_ids": [
+            0
+          ]
+        },
+        {
+          "ref": "U1",
+          "pin": "21",
+          "at": [
+            67.965998,
+            37.814999
+          ],
+          "layer": "B.Cu",
+          "component_ids": [
+            0
+          ]
+        },
+        {
+          "ref": "U1",
+          "pin": "21",
+          "at": [
+            67.190998,
+            38.589999
+          ],
+          "layer": "F.Cu",
+          "component_ids": [
+            0
+          ]
+        },
+        {
+          "ref": "U1",
+          "pin": "21",
+          "at": [
+            67.190998,
+            38.589999
+          ],
+          "layer": "B.Cu",
+          "component_ids": [
+            0
+          ]
+        },
+        {
+          "ref": "U1",
+          "pin": "21",
+          "at": [
+            67.190998,
+            37.814999
+          ],
+          "layer": "F.Cu",
+          "component_ids": [
+            0
+          ]
+        },
+        {
+          "ref": "U1",
+          "pin": "21",
+          "at": [
+            67.190998,
+            37.814999
+          ],
+          "layer": "B.Cu",
+          "component_ids": [
+            0
+          ]
+        },
+        {
+          "ref": "U1",
+          "pin": "21",
+          "at": [
+            67.190998,
+            37.814999
+          ],
+          "layer": "B.Cu",
+          "component_ids": [
+            0
+          ]
+        },
+        {
+          "ref": "U1",
+          "pin": "21",
+          "at": [
+            67.190998,
+            37.039999
+          ],
+          "layer": "F.Cu",
+          "component_ids": [
+            0
+          ]
+        },
+        {
+          "ref": "U1",
+          "pin": "21",
+          "at": [
+            67.190998,
+            37.039999
+          ],
+          "layer": "B.Cu",
+          "component_ids": [
+            0
+          ]
+        },
+        {
+          "ref": "U1",
+          "pin": "21",
+          "at": [
+            66.415998,
+            37.814999
+          ],
+          "layer": "F.Cu",
+          "component_ids": [
+            0
+          ]
+        },
+        {
+          "ref": "U1",
+          "pin": "21",
+          "at": [
+            66.415998,
+            37.814999
+          ],
+          "layer": "B.Cu",
+          "component_ids": [
+            0
+          ]
+        },
+        {
+          "ref": "C6",
+          "pin": "1",
+          "at": [
+            65.169998,
+            33.08
+          ],
+          "layer": "B.Cu",
+          "component_ids": [
+            0
+          ]
+        },
+        {
+          "ref": "C3",
+          "pin": "2",
+          "at": [
+            72.035,
+            38.24
+          ],
+          "layer": "B.Cu",
+          "component_ids": [
+            5
+          ]
+        }
+      ],
+      "all_listed_pads_share_ground": false
+    },
+    "46": {
+      "bounds_mm": [
+        62,
+        29,
+        77,
+        46
+      ],
+      "ground_pads": [
+        {
+          "ref": "C20",
+          "pin": "1",
+          "at": [
+            68.703,
+            37.88
+          ],
+          "layer": "F.Cu",
+          "component_ids": [
+            6
+          ]
+        },
+        {
+          "ref": "C2",
+          "pin": "2",
+          "at": [
+            72.77,
+            36.355
+          ],
+          "layer": "B.Cu",
+          "component_ids": [
+            6
+          ]
+        },
+        {
+          "ref": "C4",
+          "pin": "2",
+          "at": [
+            71.17,
+            36.98
+          ],
+          "layer": "B.Cu",
+          "component_ids": [
+            6
+          ]
+        },
+        {
+          "ref": "U1",
+          "pin": "1",
+          "at": [
+            68.840997,
+            36.815
+          ],
+          "layer": "B.Cu",
+          "component_ids": [
+            6
+          ]
+        },
+        {
+          "ref": "U1",
+          "pin": "5",
+          "at": [
+            68.840999,
+            38.814997
+          ],
+          "layer": "B.Cu",
+          "component_ids": [
+            6
+          ]
+        },
+        {
+          "ref": "U1",
+          "pin": "9",
+          "at": [
+            66.690998,
+            39.464998
+          ],
+          "layer": "B.Cu",
+          "component_ids": [
+            6
+          ]
+        },
+        {
+          "ref": "U1",
+          "pin": "15",
+          "at": [
+            65.540997,
+            36.815001
+          ],
+          "layer": "B.Cu",
+          "component_ids": [
+            6
+          ]
+        },
+        {
+          "ref": "U1",
+          "pin": "17",
+          "at": [
+            66.690997,
+            36.164998
+          ],
+          "layer": "B.Cu",
+          "component_ids": [
+            6
+          ]
+        },
+        {
+          "ref": "U1",
+          "pin": "21",
+          "at": [
+            67.965998,
+            37.814999
+          ],
+          "layer": "F.Cu",
+          "component_ids": [
+            6
+          ]
+        },
+        {
+          "ref": "U1",
+          "pin": "21",
+          "at": [
+            67.965998,
+            37.814999
+          ],
+          "layer": "B.Cu",
+          "component_ids": [
+            6
+          ]
+        },
+        {
+          "ref": "U1",
+          "pin": "21",
+          "at": [
+            67.190998,
+            38.589999
+          ],
+          "layer": "F.Cu",
+          "component_ids": [
+            6
+          ]
+        },
+        {
+          "ref": "U1",
+          "pin": "21",
+          "at": [
+            67.190998,
+            38.589999
+          ],
+          "layer": "B.Cu",
+          "component_ids": [
+            6
+          ]
+        },
+        {
+          "ref": "U1",
+          "pin": "21",
+          "at": [
+            67.190998,
+            37.814999
+          ],
+          "layer": "F.Cu",
+          "component_ids": [
+            6
+          ]
+        },
+        {
+          "ref": "U1",
+          "pin": "21",
+          "at": [
+            67.190998,
+            37.814999
+          ],
+          "layer": "B.Cu",
+          "component_ids": [
+            6
+          ]
+        },
+        {
+          "ref": "U1",
+          "pin": "21",
+          "at": [
+            67.190998,
+            37.814999
+          ],
+          "layer": "B.Cu",
+          "component_ids": [
+            6
+          ]
+        },
+        {
+          "ref": "U1",
+          "pin": "21",
+          "at": [
+            67.190998,
+            37.039999
+          ],
+          "layer": "F.Cu",
+          "component_ids": [
+            6
+          ]
+        },
+        {
+          "ref": "U1",
+          "pin": "21",
+          "at": [
+            67.190998,
+            37.039999
+          ],
+          "layer": "B.Cu",
+          "component_ids": [
+            6
+          ]
+        },
+        {
+          "ref": "U1",
+          "pin": "21",
+          "at": [
+            66.415998,
+            37.814999
+          ],
+          "layer": "F.Cu",
+          "component_ids": [
+            6
+          ]
+        },
+        {
+          "ref": "U1",
+          "pin": "21",
+          "at": [
+            66.415998,
+            37.814999
+          ],
+          "layer": "B.Cu",
+          "component_ids": [
+            6
+          ]
+        },
+        {
+          "ref": "C6",
+          "pin": "1",
+          "at": [
+            65.169998,
+            33.08
+          ],
+          "layer": "B.Cu",
+          "component_ids": [
+            6
+          ]
+        },
+        {
+          "ref": "C3",
+          "pin": "2",
+          "at": [
+            72.035,
+            38.24
+          ],
+          "layer": "B.Cu",
+          "component_ids": [
+            6
+          ]
+        }
+      ],
+      "all_listed_pads_share_ground": true
+    }
+  },
+  "repair_stitches": [
+    {
+      "uuid": "73cd9d1c-ba43-4a38-9019-8ccb1813a23d",
+      "at_mm": [
+        64.25,
+        32.2
+      ],
+      "net": "GND",
+      "diameter_mm": 0.6,
+      "drill_mm": 0.3,
+      "annular_ring_contact_mm2": {
+        "F.Cu": 0.21297734127601048,
+        "B.Cu": 0.21297734127601048
+      },
+      "ground_contact_on_both_faces": true
+    },
+    {
+      "uuid": "3610167c-7677-4211-a7ea-9cfa1a418e5a",
+      "at_mm": [
+        68.75,
+        59.95
+      ],
+      "net": "GND",
+      "diameter_mm": 0.6,
+      "drill_mm": 0.3,
+      "annular_ring_contact_mm2": {
+        "F.Cu": 0.21297734127601087,
+        "B.Cu": 0.21297734127601087
+      },
+      "ground_contact_on_both_faces": true
+    },
+    {
+      "uuid": "4f4e11d8-24e1-49be-8ad6-88fe1aebc139",
+      "at_mm": [
+        63.5,
+        49.85
+      ],
+      "net": "GND",
+      "diameter_mm": 0.6,
+      "drill_mm": 0.3,
+      "annular_ring_contact_mm2": {
+        "F.Cu": 0.2129773412760114,
+        "B.Cu": 0.2129773412760114
+      },
+      "ground_contact_on_both_faces": true
+    },
+    {
+      "uuid": "eb85d24f-882e-4a58-bce7-b5d77ac2077c",
+      "at_mm": [
+        59.6,
+        48.895
+      ],
+      "net": "GND",
+      "diameter_mm": 0.6,
+      "drill_mm": 0.3,
+      "annular_ring_contact_mm2": {
+        "F.Cu": 0.21297734127601273,
+        "B.Cu": 0.21297734127601273
+      },
+      "ground_contact_on_both_faces": true
+    }
+  ],
+  "pass": true,
+  "limits": [
+    "Whole-board finite copper connectivity is not minimum loop inductance, return-current distribution or measured rail stability.",
+    "Bounded rectangles are geometric screens: failing a small window is not an electrical open when the full-board path is connected.",
+    "Converter grounds reconnect within the larger reported window; this does not assert that every available return current travels along that path.",
+    "Plated contacts are joined only through the same native pad/via UUID on both faces; coincident copper on separate layers does not itself connect.",
+    "Native polygons approximate boundaries at2um; no buffer used to invent connections."
+  ]
+}

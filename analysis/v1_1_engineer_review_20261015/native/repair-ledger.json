@@ -1,0 +1,196 @@
+{
+  "input_sha256": "e4d3fe8fc1786631cb50b8134651e246701b0e6f1c749bc002251e38cf8d6b13",
+  "output_sha256": "04a2cbc8ff605106bdb45b7ee59dae6f91e6b2d529e8a45cc63e408c2a26ee23",
+  "changes": [
+    {
+      "uuid": "1d57c0b4-a7e4-49d1-a01f-ff4858a853ef",
+      "action": "move_via",
+      "before": [
+        62.23,
+        69.215
+      ],
+      "after": [
+        62.25,
+        69.75
+      ],
+      "reason": "Clear PA1 short"
+    },
+    {
+      "uuid": "fc05659b-7975-428e-9843-c981acda714c",
+      "action": "move_via",
+      "before": [
+        62.23,
+        67.945
+      ],
+      "after": [
+        62.25,
+        67.55
+      ],
+      "reason": "Clear PA9 short"
+    },
+    {
+      "uuid": "93406d38-7a25-4ac1-816e-8668a9931c76",
+      "action": "move_via",
+      "before": [
+        54.61,
+        33.655
+      ],
+      "after": [
+        54.6,
+        33.6
+      ],
+      "reason": "Clear copper legend"
+    },
+    {
+      "uuid": "765944d6-e3f8-4d5f-b6aa-59b692eb0145",
+      "action": "move_via",
+      "before": [
+        62.36,
+        30.82
+      ],
+      "after": [
+        62.28,
+        30.82
+      ],
+      "reason": "Clear VSTOR via"
+    },
+    {
+      "uuid": "9995804e-9dd0-447a-8b48-98c72382f0d4",
+      "action": "adjust_via_approach",
+      "before": [
+        [
+          63.801,
+          30.82
+        ],
+        [
+          62.36,
+          30.82
+        ]
+      ],
+      "after": [
+        [
+          63.801,
+          30.82
+        ],
+        [
+          62.28,
+          30.82
+        ]
+      ]
+    },
+    {
+      "uuid": "4bb3e988-fb4a-42c0-a382-95c54a3c3553",
+      "action": "adjust_via_approach",
+      "before": [
+        [
+          61.8,
+          30.26
+        ],
+        [
+          62.36,
+          30.82
+        ]
+      ],
+      "after": [
+        [
+          61.72,
+          30.26
+        ],
+        [
+          62.28,
+          30.82
+        ]
+      ]
+    },
+    {
+      "uuid": "ef34b86d-2919-4d1f-bd70-e01aa36508f9",
+      "action": "adjust_via_approach",
+      "before": [
+        [
+          58.31,
+          30.26
+        ],
+        [
+          61.8,
+          30.26
+        ]
+      ],
+      "after": [
+        [
+          58.31,
+          30.26
+        ],
+        [
+          61.72,
+          30.26
+        ]
+      ]
+    },
+    {
+      "uuid": "a970a386-981e-406c-a7f5-fce956817c45",
+      "action": "delete_redundant_item",
+      "reason": "Entire copper is contained in retained GNSS vertical trace"
+    },
+    {
+      "uuid": "d6ac3fd9-9dbd-4382-9f6b-eb971d13ee72",
+      "action": "delete_redundant_item",
+      "reason": "Unused rear via connection; retain both front supply traces into their supply zone"
+    },
+    {
+      "ref": "C22",
+      "action": "restore_schematic_uuid_path",
+      "path": "/4d146a28-be53-49f1-b1c6-484192820e45/0457256a-7e29-54b3-a08f-85f815917fd9"
+    },
+    {
+      "ref": "C23",
+      "action": "restore_schematic_uuid_path",
+      "path": "/4d146a28-be53-49f1-b1c6-484192820e45/ec882c15-634f-5006-86b3-f271adb0891f"
+    },
+    {
+      "ref": "R24",
+      "action": "restore_schematic_uuid_path",
+      "path": "/4d146a28-be53-49f1-b1c6-484192820e45/c09c0a0e-cba8-562e-b648-500c761d4e09"
+    },
+    {
+      "ref": "R25",
+      "action": "restore_schematic_uuid_path",
+      "path": "/4d146a28-be53-49f1-b1c6-484192820e45/6f3fa491-e84d-5965-a08f-35942afcfec8"
+    },
+    {
+      "ref": "R26",
+      "action": "restore_schematic_uuid_path",
+      "path": "/4d146a28-be53-49f1-b1c6-484192820e45/1ca366c8-e6ea-5f76-98da-2d5e64faee8e"
+    },
+    {
+      "ref": "R27",
+      "action": "restore_schematic_uuid_path",
+      "path": "/4d146a28-be53-49f1-b1c6-484192820e45/52d9fd5c-25e2-53ce-b76f-5bd9175e94f7"
+    },
+    {
+      "ref": "U8",
+      "action": "restore_schematic_uuid_path",
+      "path": "/4d146a28-be53-49f1-b1c6-484192820e45/b5362f62-2d7c-536e-b8a4-f234e7de4645"
+    },
+    {
+      "ref": "J1",
+      "action": "restore_manual_assembly_attributes"
+    },
+    {
+      "ref": "J2",
+      "action": "restore_manual_assembly_attributes"
+    },
+    {
+      "ref": "J20",
+      "action": "restore_manual_assembly_attributes"
+    },
+    {
+      "uuid": "3610167c-7677-4211-a7ea-9cfa1a418e5a",
+      "action": "add_ground_stitch",
+      "at": [
+        68.75,
+        59.95
+      ],
+      "reason": "Join U4/C11 ground island"
+    }
+  ]
+}

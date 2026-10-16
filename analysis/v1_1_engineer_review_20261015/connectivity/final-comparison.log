@@ -1,0 +1,492 @@
+10:11:20 PM: Debug: Adding duplicate image handler for 'PNG file'
+10:11:20 PM: Debug: Adding duplicate image handler for 'JPEG file'
+10:11:20 PM: Debug: Adding duplicate image handler for 'TIFF file'
+10:11:20 PM: Debug: Adding duplicate image handler for 'GIF file'
+10:11:20 PM: Debug: Adding duplicate image handler for 'PNM file'
+10:11:20 PM: Debug: Adding duplicate image handler for 'PCX file'
+10:11:20 PM: Debug: Adding duplicate image handler for 'IFF file'
+10:11:20 PM: Debug: Adding duplicate image handler for 'Windows icon file'
+10:11:20 PM: Debug: Adding duplicate image handler for 'Windows cursor file'
+10:11:20 PM: Debug: Adding duplicate image handler for 'Windows animated cursor file'
+10:11:20 PM: Debug: Adding duplicate image handler for 'TGA file'
+10:11:20 PM: Debug: Adding duplicate image handler for 'XPM file'
+10:11:20 PM: Debug: Adding duplicate image handler for 'PNG file'
+10:11:20 PM: Debug: Adding duplicate image handler for 'JPEG file'
+10:11:20 PM: Debug: Adding duplicate image handler for 'TIFF file'
+10:11:20 PM: Debug: Adding duplicate image handler for 'GIF file'
+10:11:20 PM: Debug: Adding duplicate image handler for 'PNM file'
+10:11:20 PM: Debug: Adding duplicate image handler for 'PCX file'
+10:11:20 PM: Debug: Adding duplicate image handler for 'IFF file'
+10:11:20 PM: Debug: Adding duplicate image handler for 'Windows icon file'
+10:11:20 PM: Debug: Adding duplicate image handler for 'Windows cursor file'
+10:11:20 PM: Debug: Adding duplicate image handler for 'Windows animated cursor file'
+10:11:20 PM: Debug: Adding duplicate image handler for 'TGA file'
+10:11:20 PM: Debug: Adding duplicate image handler for 'XPM file'
+{
+  "schematic_node_counts": [
+    247,
+    247
+  ],
+  "node_changes": 0,
+  "component_changes": 0,
+  "top_categories": {
+    "embedded_fonts": {
+      "before_count": 0,
+      "after_count": 1,
+      "order_only": false
+    },
+    "generator_version": {
+      "before_count": 1,
+      "after_count": 1,
+      "order_only": false
+    },
+    "global_label": {
+      "before_count": 45,
+      "after_count": 45,
+      "order_only": false
+    },
+    "junction": {
+      "before_count": 60,
+      "after_count": 58,
+      "order_only": false
+    },
+    "label": {
+      "before_count": 30,
+      "after_count": 30,
+      "order_only": false
+    },
+    "lib_symbols": {
+      "before_count": 1,
+      "after_count": 1,
+      "order_only": false
+    },
+    "no_connect": {
+      "before_count": 18,
+      "after_count": 18,
+      "order_only": true
+    },
+    "rectangle": {
+      "before_count": 12,
+      "after_count": 12,
+      "order_only": false
+    },
+    "symbol": {
+      "before_count": 117,
+      "after_count": 117,
+      "order_only": false
+    },
+    "text": {
+      "before_count": 13,
+      "after_count": 13,
+      "order_only": false
+    },
+    "version": {
+      "before_count": 1,
+      "after_count": 1,
+      "order_only": false
+    },
+    "wire": {
+      "before_count": 274,
+      "after_count": 274,
+      "order_only": false
+    }
+  },
+  "pcb_counts": [
+    [
+      68,
+      68
+    ],
+    [
+      259,
+      259
+    ],
+    [
+      250,
+      250
+    ]
+  ],
+  "metadata_changes": 59,
+  "pad_changes": 33,
+  "net_changes": 0,
+  "physical": [
+    {
+      "side": "before",
+      "opens": 0,
+      "bad_pads": 0
+    },
+    {
+      "side": "after",
+      "opens": 0,
+      "bad_pads": 0
+    }
+  ],
+  "parity": [
+    {
+      "side": "before",
+      "pad_mapping_mismatches": [
+        {
+          "ref_pin": [
+            "U2",
+            "1"
+          ],
+          "schematic": [
+            "unconnected-(U2-UART2_RX/PA3-Pad1)",
+            "bidirectional+no_connect",
+            "UART2_RX/PA3_1"
+          ],
+          "pcb_names": [
+            "unconnected-(U2-UART2_RX{slash}PA3-Pad1)"
+          ]
+        },
+        {
+          "ref_pin": [
+            "U2",
+            "2"
+          ],
+          "schematic": [
+            "unconnected-(U2-UART2_TX/PA2-Pad2)",
+            "bidirectional+no_connect",
+            "UART2_TX/PA2_2"
+          ],
+          "pcb_names": [
+            "unconnected-(U2-UART2_TX{slash}PA2-Pad2)"
+          ]
+        },
+        {
+          "ref_pin": [
+            "U2",
+            "13"
+          ],
+          "schematic": [
+            "unconnected-(U2-MOSI/PA7-Pad13)",
+            "bidirectional+no_connect",
+            "MOSI/PA7_13"
+          ],
+          "pcb_names": [
+            "unconnected-(U2-MOSI{slash}PA7-Pad13)"
+          ]
+        },
+        {
+          "ref_pin": [
+            "U2",
+            "14"
+          ],
+          "schematic": [
+            "unconnected-(U2-MISO/PA6-Pad14)",
+            "bidirectional+no_connect",
+            "MISO/PA6_14"
+          ],
+          "pcb_names": [
+            "unconnected-(U2-MISO{slash}PA6-Pad14)"
+          ]
+        },
+        {
+          "ref_pin": [
+            "U2",
+            "15"
+          ],
+          "schematic": [
+            "unconnected-(U2-SCK/PA5-Pad15)",
+            "bidirectional+no_connect",
+            "SCK/PA5_15"
+          ],
+          "pcb_names": [
+            "unconnected-(U2-SCK{slash}PA5-Pad15)"
+          ]
+        },
+        {
+          "ref_pin": [
+            "U2",
+            "16"
+          ],
+          "schematic": [
+            "unconnected-(U2-SS/PA4-Pad16)",
+            "bidirectional+no_connect",
+            "SS/PA4_16"
+          ],
+          "pcb_names": [
+            "unconnected-(U2-SS{slash}PA4-Pad16)"
+          ]
+        },
+        {
+          "ref_pin": [
+            "U2",
+            "31"
+          ],
+          "schematic": [
+            "unconnected-(U2-PB4/ADC2-Pad31)",
+            "bidirectional+no_connect",
+            "PB4/ADC2_31"
+          ],
+          "pcb_names": [
+            "unconnected-(U2-PB4{slash}ADC2-Pad31)"
+          ]
+        },
+        {
+          "ref_pin": [
+            "U2",
+            "32"
+          ],
+          "schematic": [
+            "unconnected-(U2-PB3/ADC1-Pad32)",
+            "bidirectional+no_connect",
+            "PB3/ADC1_32"
+          ],
+          "pcb_names": [
+            "unconnected-(U2-PB3{slash}ADC1-Pad32)"
+          ]
+        },
+        {
+          "ref_pin": [
+            "H2",
+            "1"
+          ],
+          "schematic": null,
+          "pcb_names": [
+            "GND"
+          ]
+        },
+        {
+          "ref_pin": [
+            "H1",
+            "1"
+          ],
+          "schematic": null,
+          "pcb_names": [
+            "GND"
+          ]
+        }
+      ],
+      "schematic_pins_missing_board_pad": [],
+      "net_escape_equivalents": [
+        [
+          "U2",
+          "1"
+        ],
+        [
+          "U2",
+          "2"
+        ],
+        [
+          "U2",
+          "13"
+        ],
+        [
+          "U2",
+          "14"
+        ],
+        [
+          "U2",
+          "15"
+        ],
+        [
+          "U2",
+          "16"
+        ],
+        [
+          "U2",
+          "31"
+        ],
+        [
+          "U2",
+          "32"
+        ]
+      ],
+      "board_only_suspension_pads": [
+        [
+          "H2",
+          "1"
+        ],
+        [
+          "H1",
+          "1"
+        ]
+      ],
+      "unexplained_pad_mapping_mismatches": []
+    },
+    {
+      "side": "after",
+      "pad_mapping_mismatches": [
+        {
+          "ref_pin": [
+            "U2",
+            "1"
+          ],
+          "schematic": [
+            "unconnected-(U2-UART2_RX/PA3-Pad1)",
+            "bidirectional+no_connect",
+            "UART2_RX/PA3_1"
+          ],
+          "pcb_names": [
+            "unconnected-(U2-UART2_RX{slash}PA3-Pad1)"
+          ]
+        },
+        {
+          "ref_pin": [
+            "U2",
+            "2"
+          ],
+          "schematic": [
+            "unconnected-(U2-UART2_TX/PA2-Pad2)",
+            "bidirectional+no_connect",
+            "UART2_TX/PA2_2"
+          ],
+          "pcb_names": [
+            "unconnected-(U2-UART2_TX{slash}PA2-Pad2)"
+          ]
+        },
+        {
+          "ref_pin": [
+            "U2",
+            "13"
+          ],
+          "schematic": [
+            "unconnected-(U2-MOSI/PA7-Pad13)",
+            "bidirectional+no_connect",
+            "MOSI/PA7_13"
+          ],
+          "pcb_names": [
+            "unconnected-(U2-MOSI{slash}PA7-Pad13)"
+          ]
+        },
+        {
+          "ref_pin": [
+            "U2",
+            "14"
+          ],
+          "schematic": [
+            "unconnected-(U2-MISO/PA6-Pad14)",
+            "bidirectional+no_connect",
+            "MISO/PA6_14"
+          ],
+          "pcb_names": [
+            "unconnected-(U2-MISO{slash}PA6-Pad14)"
+          ]
+        },
+        {
+          "ref_pin": [
+            "U2",
+            "15"
+          ],
+          "schematic": [
+            "unconnected-(U2-SCK/PA5-Pad15)",
+            "bidirectional+no_connect",
+            "SCK/PA5_15"
+          ],
+          "pcb_names": [
+            "unconnected-(U2-SCK{slash}PA5-Pad15)"
+          ]
+        },
+        {
+          "ref_pin": [
+            "U2",
+            "16"
+          ],
+          "schematic": [
+            "unconnected-(U2-SS/PA4-Pad16)",
+            "bidirectional+no_connect",
+            "SS/PA4_16"
+          ],
+          "pcb_names": [
+            "unconnected-(U2-SS{slash}PA4-Pad16)"
+          ]
+        },
+        {
+          "ref_pin": [
+            "U2",
+            "31"
+          ],
+          "schematic": [
+            "unconnected-(U2-PB4/ADC2-Pad31)",
+            "bidirectional+no_connect",
+            "PB4/ADC2_31"
+          ],
+          "pcb_names": [
+            "unconnected-(U2-PB4{slash}ADC2-Pad31)"
+          ]
+        },
+        {
+          "ref_pin": [
+            "U2",
+            "32"
+          ],
+          "schematic": [
+            "unconnected-(U2-PB3/ADC1-Pad32)",
+            "bidirectional+no_connect",
+            "PB3/ADC1_32"
+          ],
+          "pcb_names": [
+            "unconnected-(U2-PB3{slash}ADC1-Pad32)"
+          ]
+        },
+        {
+          "ref_pin": [
+            "H2",
+            "1"
+          ],
+          "schematic": null,
+          "pcb_names": [
+            "GND"
+          ]
+        },
+        {
+          "ref_pin": [
+            "H1",
+            "1"
+          ],
+          "schematic": null,
+          "pcb_names": [
+            "GND"
+          ]
+        }
+      ],
+      "schematic_pins_missing_board_pad": [],
+      "net_escape_equivalents": [
+        [
+          "U2",
+          "1"
+        ],
+        [
+          "U2",
+          "2"
+        ],
+        [
+          "U2",
+          "13"
+        ],
+        [
+          "U2",
+          "14"
+        ],
+        [
+          "U2",
+          "15"
+        ],
+        [
+          "U2",
+          "16"
+        ],
+        [
+          "U2",
+          "31"
+        ],
+        [
+          "U2",
+          "32"
+        ]
+      ],
+      "board_only_suspension_pads": [
+        [
+          "H2",
+          "1"
+        ],
+        [
+          "H1",
+          "1"
+        ]
+      ],
+      "unexplained_pad_mapping_mismatches": []
+    }
+  ],
+  "source_bytes_unchanged": true
+}

@@ -1,0 +1,96 @@
+{
+  "pcb_sha256": "25b201eb09c6746a22d1c3be42f7d4023319dd6fa5e3e587dc8cf42d97bb4d7f",
+  "renderer": "KiCad CLI 10.0.0 native raytracer, high preset",
+  "images": [
+    {
+      "file": "visual/top.png",
+      "sha256": "15343dae6b7f7fc3a7732f242fc0bb6ca219e1994f455efe98c8f50265523cb2",
+      "actual_png_pixels": [
+        1376,
+        1768
+      ],
+      "renderer_args": [
+        "pcb",
+        "render",
+        "--width",
+        "1400",
+        "--height",
+        "1800",
+        "--side",
+        "top",
+        "--quality",
+        "high",
+        "--zoom",
+        "0.78",
+        "--rotate",
+        "0,0,0",
+        "--output",
+        "/Users/twarn/Repositories/Stratolink/analysis/v1_1_engineer_review_20261015/mechanics/visual/top.png",
+        "/Users/twarn/Repositories/ai-working/scratch/stratolink-engineer-review-20261015/candidate/stratolink.kicad_pcb"
+      ],
+      "visually_inspected": true,
+      "framing": "Complete board outline; long antenna and panels extend outside close view."
+    },
+    {
+      "file": "visual/bottom.png",
+      "sha256": "e0288f40b695580febbbbfcd534f3a2966a944b0853128bb887426ee2f122d18",
+      "actual_png_pixels": [
+        1376,
+        1768
+      ],
+      "renderer_args": [
+        "pcb",
+        "render",
+        "--width",
+        "1400",
+        "--height",
+        "1800",
+        "--side",
+        "bottom",
+        "--quality",
+        "high",
+        "--zoom",
+        "0.78",
+        "--rotate",
+        "0,0,0",
+        "--output",
+        "/Users/twarn/Repositories/Stratolink/analysis/v1_1_engineer_review_20261015/mechanics/visual/bottom.png",
+        "/Users/twarn/Repositories/ai-working/scratch/stratolink-engineer-review-20261015/candidate/stratolink.kicad_pcb"
+      ],
+      "visually_inspected": true,
+      "framing": "Complete board outline; long antenna and panels extend outside close view."
+    },
+    {
+      "file": "visual/assembly.png",
+      "sha256": "b27b6f12ed8836d9e70198a1eaf7e14d7141f7d0efd8854b667734b5e9dc6570",
+      "actual_png_pixels": [
+        1768,
+        1768
+      ],
+      "renderer_args": [
+        "pcb",
+        "render",
+        "--width",
+        "1800",
+        "--height",
+        "1800",
+        "--side",
+        "top",
+        "--quality",
+        "high",
+        "--zoom",
+        "0.24",
+        "--rotate",
+        "20,0,0",
+        "--output",
+        "/Users/twarn/Repositories/Stratolink/analysis/v1_1_engineer_review_20261015/mechanics/visual/assembly.png",
+        "/Users/twarn/Repositories/ai-working/scratch/stratolink-engineer-review-20261015/candidate/stratolink.kicad_pcb"
+      ],
+      "visually_inspected": true,
+      "framing": "Complete assembly, both panel ends and both antenna tips visible."
+    }
+  ],
+  "population": "Full native design shown including U6; initial pilot omits U6 only.",
+  "processing": "Native output retained without post-processing. Actual PNG dimensions recorded independently of requested viewport dimensions.",
+  "limits": "Nominal component models and provisional solar bend/film/wire assumptions. Renders are assembly aids, not measured collision envelopes or supplier placement previews."
+}

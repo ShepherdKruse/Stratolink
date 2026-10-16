@@ -1,0 +1,221 @@
+{
+  "baseline_pcb_sha256": "88f82c85d2d47b4aea2e7d7d2827c4a92c339788cc0d9c880dd6342ee0440c0a",
+  "incoming_pcb_sha256": "9428ded14dd46a084b5576b85987093bf20139053cdad33eb35cf222d1db2703",
+  "baseline_schematic_sha256": "a06740b35d07d7b81999f7ace2a7a7ff02e185ca3e46a664630bd4bbd00c54b7",
+  "incoming_schematic_sha256": "5885b9ab63f49c70a0f9b4b4ed8f49996c338abe09d1e8dfefc5187706d632e5",
+  "schematic_node_count": 247,
+  "schematic_component_count": 66,
+  "net_name_count": 59,
+  "node_role_net_changes": 0,
+  "component_metadata_changes": 0,
+  "exported_library_part_changes": 0,
+  "physical_pads": 259,
+  "logical_pad_pairs": 250,
+  "footprint_count": 68,
+  "pad_to_net_changes": 0,
+  "physical_pad_shape_size_drill_net_changes": 0,
+  "changed_footprint_pose_count": 52,
+  "flipped_refs": [
+    "C22",
+    "R24",
+    "R25",
+    "R26",
+    "U8"
+  ],
+  "lost_schematic_path_refs": [
+    "C22",
+    "C23",
+    "R24",
+    "R25",
+    "R26",
+    "R27",
+    "U8"
+  ],
+  "removed_exclude_from_position_refs": [
+    "J1",
+    "J2",
+    "J20"
+  ],
+  "pad_fabrication_rule_changes": [
+    {
+      "ref": "D3",
+      "pad_uuid": "390842f8-d9d4-4229-8ca4-a68fac8e12f8",
+      "before_rules": [
+        "pad",
+        "1",
+        "smd",
+        "roundrect",
+        [
+          "size",
+          "0.6",
+          "0.7"
+        ],
+        [
+          "roundrect_rratio",
+          "0.25"
+        ],
+        [
+          "zone_connect",
+          "2"
+        ],
+        [
+          "thermal_bridge_width",
+          "0.25"
+        ],
+        [
+          "thermal_gap",
+          "0.25"
+        ]
+      ],
+      "after_rules": [
+        "pad",
+        "1",
+        "smd",
+        "roundrect",
+        [
+          "size",
+          "0.6",
+          "0.7"
+        ],
+        [
+          "roundrect_rratio",
+          "0.25"
+        ],
+        [
+          "thermal_bridge_width",
+          "0.25"
+        ],
+        [
+          "thermal_gap",
+          "0.25"
+        ]
+      ]
+    },
+    {
+      "ref": "U3",
+      "pad_uuid": "496d740e-5d2d-41c8-9fd2-364e089583a9",
+      "before_rules": [
+        "pad",
+        "12",
+        "smd",
+        "rect",
+        [
+          "size",
+          "1.8",
+          "0.8"
+        ],
+        [
+          "solder_mask_margin",
+          "0"
+        ],
+        [
+          "zone_connect",
+          "2"
+        ]
+      ],
+      "after_rules": [
+        "pad",
+        "12",
+        "smd",
+        "rect",
+        [
+          "size",
+          "1.8",
+          "0.8"
+        ],
+        [
+          "solder_mask_margin",
+          "0"
+        ]
+      ]
+    },
+    {
+      "ref": "U3",
+      "pad_uuid": "9038f9c0-0b91-4aa7-93db-f912de0c02d0",
+      "before_rules": [
+        "pad",
+        "10",
+        "smd",
+        "rect",
+        [
+          "size",
+          "1.8",
+          "0.7"
+        ],
+        [
+          "solder_mask_margin",
+          "0"
+        ],
+        [
+          "zone_connect",
+          "2"
+        ]
+      ],
+      "after_rules": [
+        "pad",
+        "10",
+        "smd",
+        "rect",
+        [
+          "size",
+          "1.8",
+          "0.7"
+        ],
+        [
+          "solder_mask_margin",
+          "0"
+        ]
+      ]
+    }
+  ],
+  "native_saved_opens": 2,
+  "foreign_net_copper_overlaps": [
+    {
+      "layer": "B.Cu",
+      "nets": [
+        "GND",
+        "PA1"
+      ],
+      "area_mm2": 0.11674054943542618,
+      "bounds_mm": [
+        61.93,
+        69.073998,
+        62.53,
+        69.273998
+      ]
+    },
+    {
+      "layer": "B.Cu",
+      "nets": [
+        "GND",
+        "PA9"
+      ],
+      "area_mm2": 0.0852710538904961,
+      "bounds_mm": [
+        61.944631784068434,
+        68.04,
+        62.51536821593157,
+        68.24
+      ]
+    }
+  ],
+  "disconnected_ground_components": [
+    [
+      "C20.1",
+      "C6.1",
+      "U1.1",
+      "U1.15",
+      "U1.17",
+      "U1.21",
+      "U1.5",
+      "U1.9"
+    ],
+    [
+      "C11.1",
+      "U4.3"
+    ]
+  ],
+  "real_orphan_ground_fill_count": 9,
+  "source_bytes_unchanged": true,
+  "status": "Incoming review found repairable opens/shorts and metadata issues; not manufacturing-ready before final candidate recheck."
+}

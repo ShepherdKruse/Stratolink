@@ -1,0 +1,954 @@
+{
+  "pcb_sha256": "25b201eb09c6746a22d1c3be42f7d4023319dd6fa5e3e587dc8cf42d97bb4d7f",
+  "features": [
+    {
+      "id": 1,
+      "layer": "F.Cu",
+      "at_mm": [
+        59.730001,
+        34.069329
+      ],
+      "nets": [
+        "Net-(AE2-A)"
+      ],
+      "gap_angle_deg": 44.99990892882312,
+      "adjacent_edge_support_mm": [
+        2.011318570037571,
+        9.436978000011917
+      ],
+      "ideal_straight_wedge_depth_below_0p10mm_width_mm": 0.12071094946241383,
+      "measured_bisector_width_samples": [
+        {
+          "depth_mm": 0.025,
+          "open_width_mm": 0.02071067811867288,
+          "center_is_empty": true
+        },
+        {
+          "depth_mm": 0.05,
+          "open_width_mm": 0.04142135623733919,
+          "center_is_empty": true
+        },
+        {
+          "depth_mm": 0.075,
+          "open_width_mm": 0.06213203435601207,
+          "center_is_empty": true
+        },
+        {
+          "depth_mm": 0.1,
+          "open_width_mm": 0.08284271247467838,
+          "center_is_empty": true
+        },
+        {
+          "depth_mm": 0.125,
+          "open_width_mm": 0.10355339059335127,
+          "center_is_empty": true
+        },
+        {
+          "depth_mm": 0.15,
+          "open_width_mm": 0.12426406871202142,
+          "center_is_empty": true
+        },
+        {
+          "depth_mm": 0.2,
+          "open_width_mm": 0.16568542494936062,
+          "center_is_empty": true
+        },
+        {
+          "depth_mm": 0.25,
+          "open_width_mm": 0.2071067811866971,
+          "center_is_empty": true
+        },
+        {
+          "depth_mm": 0.3,
+          "open_width_mm": 0.24852813742404284,
+          "center_is_empty": true
+        },
+        {
+          "depth_mm": 0.5,
+          "open_width_mm": 0.41421356237340073,
+          "center_is_empty": true
+        }
+      ],
+      "empty_component_area_mm2": 6.126322106663009,
+      "empty_component_bounds_mm": [
+        58.4795,
+        32.2295,
+        62.530501,
+        45.650501
+      ],
+      "empty_component_reaches_board_edge": false,
+      "standalone_small_enclosed_pocket": false,
+      "classification": "Acute reentrant copper boundary. The gap joins the reported larger clearance region; small-angle geometry alone does not establish an etch defect or adequate process margin. Supplier CAM review remains required."
+    },
+    {
+      "id": 2,
+      "layer": "F.Cu",
+      "at_mm": [
+        57.528578,
+        47.97
+      ],
+      "nets": [
+        "/SC_HALF_REF"
+      ],
+      "gap_angle_deg": 45.0,
+      "adjacent_edge_support_mm": [
+        0.3310780000000051,
+        0.8758069028284745
+      ],
+      "ideal_straight_wedge_depth_below_0p10mm_width_mm": 0.12071067811865474,
+      "measured_bisector_width_samples": [
+        {
+          "depth_mm": 0.025,
+          "open_width_mm": 0.020710678118653042,
+          "center_is_empty": true
+        },
+        {
+          "depth_mm": 0.05,
+          "open_width_mm": 0.04142135623731152,
+          "center_is_empty": true
+        },
+        {
+          "depth_mm": 0.075,
+          "open_width_mm": 0.06213203435596456,
+          "center_is_empty": true
+        },
+        {
+          "depth_mm": 0.1,
+          "open_width_mm": 0.08284271247462033,
+          "center_is_empty": true
+        },
+        {
+          "depth_mm": 0.125,
+          "open_width_mm": 0.10355339059327608,
+          "center_is_empty": true
+        },
+        {
+          "depth_mm": 0.15,
+          "open_width_mm": 0.12426406871192912,
+          "center_is_empty": true
+        },
+        {
+          "depth_mm": 0.2,
+          "open_width_mm": 0.16568542494924066,
+          "center_is_empty": true
+        },
+        {
+          "depth_mm": 0.25,
+          "open_width_mm": 0.2071067811865456,
+          "center_is_empty": true
+        },
+        {
+          "depth_mm": 0.3,
+          "open_width_mm": 0.24852813742385713,
+          "center_is_empty": true
+        },
+        {
+          "depth_mm": 0.5,
+          "open_width_mm": 0.23725303653338628,
+          "center_is_empty": true
+        }
+      ],
+      "empty_component_area_mm2": 290.90104273551117,
+      "empty_component_bounds_mm": [
+        53.316,
+        29.39,
+        76.68,
+        86.695
+      ],
+      "empty_component_reaches_board_edge": true,
+      "standalone_small_enclosed_pocket": false,
+      "classification": "Acute reentrant copper boundary. The gap joins the reported larger clearance region; small-angle geometry alone does not establish an etch defect or adequate process margin. Supplier CAM review remains required."
+    },
+    {
+      "id": 3,
+      "layer": "F.Cu",
+      "at_mm": [
+        61.437132,
+        63.905
+      ],
+      "nets": [
+        "RST"
+      ],
+      "gap_angle_deg": 45.0,
+      "adjacent_edge_support_mm": [
+        0.6066042801629385,
+        0.12786799999999943
+      ],
+      "ideal_straight_wedge_depth_below_0p10mm_width_mm": 0.12071067811865474,
+      "measured_bisector_width_samples": [
+        {
+          "depth_mm": 0.025,
+          "open_width_mm": 0.020710678118653042,
+          "center_is_empty": true
+        },
+        {
+          "depth_mm": 0.05,
+          "open_width_mm": 0.04142135623731152,
+          "center_is_empty": true
+        },
+        {
+          "depth_mm": 0.075,
+          "open_width_mm": 0.06213203435596456,
+          "center_is_empty": true
+        },
+        {
+          "depth_mm": 0.1,
+          "open_width_mm": 0.08284271247462033,
+          "center_is_empty": true
+        },
+        {
+          "depth_mm": 0.125,
+          "open_width_mm": 0.8680703521855127,
+          "center_is_empty": true
+        },
+        {
+          "depth_mm": 0.15,
+          "open_width_mm": 0.8180703521855233,
+          "center_is_empty": true
+        },
+        {
+          "depth_mm": 0.2,
+          "open_width_mm": 0.7180703521855053,
+          "center_is_empty": true
+        },
+        {
+          "depth_mm": 0.25,
+          "open_width_mm": 0.6180703521855229,
+          "center_is_empty": true
+        },
+        {
+          "depth_mm": 0.3,
+          "open_width_mm": 0.518070352185518,
+          "center_is_empty": true
+        },
+        {
+          "depth_mm": 0.5,
+          "open_width_mm": 0.41421356237309503,
+          "center_is_empty": true
+        }
+      ],
+      "empty_component_area_mm2": 290.90104273551117,
+      "empty_component_bounds_mm": [
+        53.316,
+        29.39,
+        76.68,
+        86.695
+      ],
+      "empty_component_reaches_board_edge": true,
+      "standalone_small_enclosed_pocket": false,
+      "classification": "Acute reentrant copper boundary. The gap joins the reported larger clearance region; small-angle geometry alone does not establish an etch defect or adequate process margin. Supplier CAM review remains required."
+    },
+    {
+      "id": 4,
+      "layer": "F.Cu",
+      "at_mm": [
+        67.861422,
+        41.56
+      ],
+      "nets": [
+        "SDA"
+      ],
+      "gap_angle_deg": 45.05687240296959,
+      "adjacent_edge_support_mm": [
+        1.9380879520315852,
+        0.4953686053082012
+      ],
+      "ideal_straight_wedge_depth_below_0p10mm_width_mm": 0.12054143165048938,
+      "measured_bisector_width_samples": [
+        {
+          "depth_mm": 0.025,
+          "open_width_mm": 0.020710725886831854,
+          "center_is_empty": true
+        },
+        {
+          "depth_mm": 0.05,
+          "open_width_mm": 0.04142145177365714,
+          "center_is_empty": true
+        },
+        {
+          "depth_mm": 0.075,
+          "open_width_mm": 0.062132177660489,
+          "center_is_empty": true
+        },
+        {
+          "depth_mm": 0.1,
+          "open_width_mm": 0.08284290354731542,
+          "center_is_empty": true
+        },
+        {
+          "depth_mm": 0.125,
+          "open_width_mm": 0.10355362943414614,
+          "center_is_empty": true
+        },
+        {
+          "depth_mm": 0.15,
+          "open_width_mm": 0.124264355320978,
+          "center_is_empty": true
+        },
+        {
+          "depth_mm": 0.2,
+          "open_width_mm": 0.16568580709463515,
+          "center_is_empty": true
+        },
+        {
+          "depth_mm": 0.25,
+          "open_width_mm": 0.20710725886828027,
+          "center_is_empty": true
+        },
+        {
+          "depth_mm": 0.3,
+          "open_width_mm": 0.24852871064193743,
+          "center_is_empty": true
+        },
+        {
+          "depth_mm": 0.5,
+          "open_width_mm": 0.3401012744121848,
+          "center_is_empty": true
+        }
+      ],
+      "empty_component_area_mm2": 290.90104273551117,
+      "empty_component_bounds_mm": [
+        53.316,
+        29.39,
+        76.68,
+        86.695
+      ],
+      "empty_component_reaches_board_edge": true,
+      "standalone_small_enclosed_pocket": false,
+      "classification": "Acute reentrant copper boundary. The gap joins the reported larger clearance region; small-angle geometry alone does not establish an etch defect or adequate process margin. Supplier CAM review remains required."
+    },
+    {
+      "id": 5,
+      "layer": "F.Cu",
+      "at_mm": [
+        67.1,
+        59.394213
+      ],
+      "nets": [
+        "+3.3V"
+      ],
+      "gap_angle_deg": 44.99999999999986,
+      "adjacent_edge_support_mm": [
+        0.8357869999999963,
+        1.9921022361520422
+      ],
+      "ideal_straight_wedge_depth_below_0p10mm_width_mm": 0.12071067811865518,
+      "measured_bisector_width_samples": [
+        {
+          "depth_mm": 0.025,
+          "open_width_mm": 0.020710678118646478,
+          "center_is_empty": true
+        },
+        {
+          "depth_mm": 0.05,
+          "open_width_mm": 0.041421356237308804,
+          "center_is_empty": true
+        },
+        {
+          "depth_mm": 0.075,
+          "open_width_mm": 0.062132034355957995,
+          "center_is_empty": true
+        },
+        {
+          "depth_mm": 0.1,
+          "open_width_mm": 0.08284271247462033,
+          "center_is_empty": true
+        },
+        {
+          "depth_mm": 0.125,
+          "open_width_mm": 0.10355339059326951,
+          "center_is_empty": true
+        },
+        {
+          "depth_mm": 0.15,
+          "open_width_mm": 0.12426406871193184,
+          "center_is_empty": true
+        },
+        {
+          "depth_mm": 0.2,
+          "open_width_mm": 0.16568542494924066,
+          "center_is_empty": true
+        },
+        {
+          "depth_mm": 0.25,
+          "open_width_mm": 0.20710678118653902,
+          "center_is_empty": true
+        },
+        {
+          "depth_mm": 0.3,
+          "open_width_mm": 0.24852813742386368,
+          "center_is_empty": true
+        },
+        {
+          "depth_mm": 0.5,
+          "open_width_mm": 0.4142135623731043,
+          "center_is_empty": true
+        }
+      ],
+      "empty_component_area_mm2": 290.90104273551117,
+      "empty_component_bounds_mm": [
+        53.316,
+        29.39,
+        76.68,
+        86.695
+      ],
+      "empty_component_reaches_board_edge": true,
+      "standalone_small_enclosed_pocket": false,
+      "classification": "Acute reentrant copper boundary. The gap joins the reported larger clearance region; small-angle geometry alone does not establish an etch defect or adequate process margin. Supplier CAM review remains required."
+    },
+    {
+      "id": 6,
+      "layer": "F.Cu",
+      "at_mm": [
+        62.387132,
+        63.905
+      ],
+      "nets": [
+        "BOOT0"
+      ],
+      "gap_angle_deg": 45.077242776272755,
+      "adjacent_edge_support_mm": [
+        0.9514526366908618,
+        0.1778669999999991
+      ],
+      "ideal_straight_wedge_depth_below_0p10mm_width_mm": 0.12048090997208341,
+      "measured_bisector_width_samples": [
+        {
+          "depth_mm": 0.025,
+          "open_width_mm": 0.02071068914354455,
+          "center_is_empty": true
+        },
+        {
+          "depth_mm": 0.05,
+          "open_width_mm": 0.04142137828709021,
+          "center_is_empty": true
+        },
+        {
+          "depth_mm": 0.075,
+          "open_width_mm": 0.062132067430634756,
+          "center_is_empty": true
+        },
+        {
+          "depth_mm": 0.1,
+          "open_width_mm": 0.08284275657418314,
+          "center_is_empty": true
+        },
+        {
+          "depth_mm": 0.125,
+          "open_width_mm": 0.10355344571772496,
+          "center_is_empty": true
+        },
+        {
+          "depth_mm": 0.15,
+          "open_width_mm": 0.12426413486126951,
+          "center_is_empty": true
+        },
+        {
+          "depth_mm": 0.2,
+          "open_width_mm": 0.8474618990596094,
+          "center_is_empty": true
+        },
+        {
+          "depth_mm": 0.25,
+          "open_width_mm": 0.7476521920930748,
+          "center_is_empty": true
+        },
+        {
+          "depth_mm": 0.3,
+          "open_width_mm": 0.6478424851265401,
+          "center_is_empty": true
+        },
+        {
+          "depth_mm": 0.5,
+          "open_width_mm": 0.4142137828709053,
+          "center_is_empty": true
+        }
+      ],
+      "empty_component_area_mm2": 290.90104273551117,
+      "empty_component_bounds_mm": [
+        53.316,
+        29.39,
+        76.68,
+        86.695
+      ],
+      "empty_component_reaches_board_edge": true,
+      "standalone_small_enclosed_pocket": false,
+      "classification": "Acute reentrant copper boundary. The gap joins the reported larger clearance region; small-angle geometry alone does not establish an etch defect or adequate process margin. Supplier CAM review remains required."
+    },
+    {
+      "id": 7,
+      "layer": "F.Cu",
+      "at_mm": [
+        72.7,
+        34.382132
+      ],
+      "nets": [
+        "+3.3V"
+      ],
+      "gap_angle_deg": 45.0,
+      "adjacent_edge_support_mm": [
+        0.6788225099390912,
+        0.36912000000000234
+      ],
+      "ideal_straight_wedge_depth_below_0p10mm_width_mm": 0.12071067811865474,
+      "measured_bisector_width_samples": [
+        {
+          "depth_mm": 0.025,
+          "open_width_mm": 0.020710678118646478,
+          "center_is_empty": true
+        },
+        {
+          "depth_mm": 0.05,
+          "open_width_mm": 0.041421356237308804,
+          "center_is_empty": true
+        },
+        {
+          "depth_mm": 0.075,
+          "open_width_mm": 0.062132034355957995,
+          "center_is_empty": true
+        },
+        {
+          "depth_mm": 0.1,
+          "open_width_mm": 0.08284271247462033,
+          "center_is_empty": true
+        },
+        {
+          "depth_mm": 0.125,
+          "open_width_mm": 0.10355339059326951,
+          "center_is_empty": true
+        },
+        {
+          "depth_mm": 0.15,
+          "open_width_mm": 0.12426406871193184,
+          "center_is_empty": true
+        },
+        {
+          "depth_mm": 0.2,
+          "open_width_mm": 0.16568542494924066,
+          "center_is_empty": true
+        },
+        {
+          "depth_mm": 0.25,
+          "open_width_mm": 0.20710678118653902,
+          "center_is_empty": true
+        },
+        {
+          "depth_mm": 0.3,
+          "open_width_mm": 0.24852813742386368,
+          "center_is_empty": true
+        },
+        {
+          "depth_mm": 0.5,
+          "open_width_mm": 0.22465861482484914,
+          "center_is_empty": true
+        }
+      ],
+      "empty_component_area_mm2": 290.90104273551117,
+      "empty_component_bounds_mm": [
+        53.316,
+        29.39,
+        76.68,
+        86.695
+      ],
+      "empty_component_reaches_board_edge": true,
+      "standalone_small_enclosed_pocket": false,
+      "classification": "Acute reentrant copper boundary. The gap joins the reported larger clearance region; small-angle geometry alone does not establish an etch defect or adequate process margin. Supplier CAM review remains required."
+    },
+    {
+      "id": 8,
+      "layer": "F.Cu",
+      "at_mm": [
+        73.404632,
+        40.13
+      ],
+      "nets": [
+        "/UV_REXT"
+      ],
+      "gap_angle_deg": 47.21171947433143,
+      "adjacent_edge_support_mm": [
+        0.30445247943973147,
+        0.08952992579577976
+      ],
+      "ideal_straight_wedge_depth_below_0p10mm_width_mm": 0.1144135814611313,
+      "measured_bisector_width_samples": [
+        {
+          "depth_mm": 0.025,
+          "open_width_mm": 0.02071620096480218,
+          "center_is_empty": true
+        },
+        {
+          "depth_mm": 0.05,
+          "open_width_mm": 0.04173144080378308,
+          "center_is_empty": true
+        },
+        {
+          "depth_mm": 0.075,
+          "open_width_mm": 0.06479815535889198,
+          "center_is_empty": true
+        },
+        {
+          "depth_mm": 0.1,
+          "open_width_mm": 0.09300194306814179,
+          "center_is_empty": true
+        },
+        {
+          "depth_mm": 0.125,
+          "open_width_mm": 0.12321866369327379,
+          "center_is_empty": true
+        },
+        {
+          "depth_mm": 0.15,
+          "open_width_mm": 0.1629320593892886,
+          "center_is_empty": true
+        },
+        {
+          "depth_mm": 0.2,
+          "open_width_mm": 0.30097252986573453,
+          "center_is_empty": true
+        },
+        {
+          "depth_mm": 0.25,
+          "open_width_mm": 1.3637013070720776,
+          "center_is_empty": true
+        },
+        {
+          "depth_mm": 0.3,
+          "open_width_mm": 1.2682019875725032,
+          "center_is_empty": true
+        },
+        {
+          "depth_mm": 0.5,
+          "open_width_mm": 0.5966857674216043,
+          "center_is_empty": true
+        }
+      ],
+      "empty_component_area_mm2": 290.90104273551117,
+      "empty_component_bounds_mm": [
+        53.316,
+        29.39,
+        76.68,
+        86.695
+      ],
+      "empty_component_reaches_board_edge": true,
+      "standalone_small_enclosed_pocket": false,
+      "classification": "Acute reentrant copper boundary. The gap joins the reported larger clearance region; small-angle geometry alone does not establish an etch defect or adequate process margin. Supplier CAM review remains required."
+    },
+    {
+      "id": 9,
+      "layer": "B.Cu",
+      "at_mm": [
+        62.478422,
+        29.797
+      ],
+      "nets": [
+        "VSTOR"
+      ],
+      "gap_angle_deg": 45.00000000000051,
+      "adjacent_edge_support_mm": [
+        8.452155999999995,
+        0.27304786934161945
+      ],
+      "ideal_straight_wedge_depth_below_0p10mm_width_mm": 0.12071067811865324,
+      "measured_bisector_width_samples": [
+        {
+          "depth_mm": 0.025,
+          "open_width_mm": 0.02071067811864976,
+          "center_is_empty": true
+        },
+        {
+          "depth_mm": 0.05,
+          "open_width_mm": 0.04142135623731152,
+          "center_is_empty": true
+        },
+        {
+          "depth_mm": 0.075,
+          "open_width_mm": 0.06213203435596456,
+          "center_is_empty": true
+        },
+        {
+          "depth_mm": 0.1,
+          "open_width_mm": 0.08284271247461976,
+          "center_is_empty": true
+        },
+        {
+          "depth_mm": 0.125,
+          "open_width_mm": 0.10355339059327608,
+          "center_is_empty": true
+        },
+        {
+          "depth_mm": 0.15,
+          "open_width_mm": 0.12426406871192912,
+          "center_is_empty": true
+        },
+        {
+          "depth_mm": 0.2,
+          "open_width_mm": 0.16568542494924066,
+          "center_is_empty": true
+        },
+        {
+          "depth_mm": 0.25,
+          "open_width_mm": 0.20710678118654888,
+          "center_is_empty": true
+        },
+        {
+          "depth_mm": 0.3,
+          "open_width_mm": 0.18633983734558965,
+          "center_is_empty": true
+        },
+        {
+          "depth_mm": 0.5,
+          "open_width_mm": 0.21324536544282435,
+          "center_is_empty": true
+        }
+      ],
+      "empty_component_area_mm2": 239.8742785881625,
+      "empty_component_bounds_mm": [
+        53.316,
+        29.39,
+        76.68,
+        86.695
+      ],
+      "empty_component_reaches_board_edge": true,
+      "standalone_small_enclosed_pocket": false,
+      "classification": "Acute reentrant copper boundary. The gap joins the reported larger clearance region; small-angle geometry alone does not establish an etch defect or adequate process margin. Supplier CAM review remains required."
+    },
+    {
+      "id": 10,
+      "layer": "B.Cu",
+      "at_mm": [
+        65.8296,
+        63.976795
+      ],
+      "nets": [
+        "SDA"
+      ],
+      "gap_angle_deg": 45.00000000000051,
+      "adjacent_edge_support_mm": [
+        0.5672636872848439,
+        4.421382999999999
+      ],
+      "ideal_straight_wedge_depth_below_0p10mm_width_mm": 0.12071067811865324,
+      "measured_bisector_width_samples": [
+        {
+          "depth_mm": 0.025,
+          "open_width_mm": 0.020710678118649194,
+          "center_is_empty": true
+        },
+        {
+          "depth_mm": 0.05,
+          "open_width_mm": 0.04142135623731152,
+          "center_is_empty": true
+        },
+        {
+          "depth_mm": 0.075,
+          "open_width_mm": 0.062132034355957995,
+          "center_is_empty": true
+        },
+        {
+          "depth_mm": 0.1,
+          "open_width_mm": 0.08284271247462303,
+          "center_is_empty": true
+        },
+        {
+          "depth_mm": 0.125,
+          "open_width_mm": 0.10355339059326951,
+          "center_is_empty": true
+        },
+        {
+          "depth_mm": 0.15,
+          "open_width_mm": 0.12426406871191599,
+          "center_is_empty": true
+        },
+        {
+          "depth_mm": 0.2,
+          "open_width_mm": 0.16568542494924066,
+          "center_is_empty": true
+        },
+        {
+          "depth_mm": 0.25,
+          "open_width_mm": 0.20710678118653902,
+          "center_is_empty": true
+        },
+        {
+          "depth_mm": 0.3,
+          "open_width_mm": 0.2485281374238451,
+          "center_is_empty": true
+        },
+        {
+          "depth_mm": 0.5,
+          "open_width_mm": 0.4142135623731043,
+          "center_is_empty": true
+        }
+      ],
+      "empty_component_area_mm2": 239.8742785881625,
+      "empty_component_bounds_mm": [
+        53.316,
+        29.39,
+        76.68,
+        86.695
+      ],
+      "empty_component_reaches_board_edge": true,
+      "standalone_small_enclosed_pocket": false,
+      "classification": "Acute reentrant copper boundary. The gap joins the reported larger clearance region; small-angle geometry alone does not establish an etch defect or adequate process margin. Supplier CAM review remains required."
+    },
+    {
+      "id": 11,
+      "layer": "B.Cu",
+      "at_mm": [
+        71.525,
+        34.108008
+      ],
+      "nets": [
+        "+SOLAR"
+      ],
+      "gap_angle_deg": 44.999999999999716,
+      "adjacent_edge_support_mm": [
+        1.0889444430272825,
+        0.6069920000000053
+      ],
+      "ideal_straight_wedge_depth_below_0p10mm_width_mm": 0.12071067811865561,
+      "measured_bisector_width_samples": [
+        {
+          "depth_mm": 0.025,
+          "open_width_mm": 0.020710678118646478,
+          "center_is_empty": true
+        },
+        {
+          "depth_mm": 0.05,
+          "open_width_mm": 0.041421356237308804,
+          "center_is_empty": true
+        },
+        {
+          "depth_mm": 0.075,
+          "open_width_mm": 0.062132034355957995,
+          "center_is_empty": true
+        },
+        {
+          "depth_mm": 0.1,
+          "open_width_mm": 0.08284271247462033,
+          "center_is_empty": true
+        },
+        {
+          "depth_mm": 0.125,
+          "open_width_mm": 0.10355339059326951,
+          "center_is_empty": true
+        },
+        {
+          "depth_mm": 0.15,
+          "open_width_mm": 0.12426406871193184,
+          "center_is_empty": true
+        },
+        {
+          "depth_mm": 0.2,
+          "open_width_mm": 0.16568542494924066,
+          "center_is_empty": true
+        },
+        {
+          "depth_mm": 0.25,
+          "open_width_mm": 0.20710678118653902,
+          "center_is_empty": true
+        },
+        {
+          "depth_mm": 0.3,
+          "open_width_mm": 0.24852813742386096,
+          "center_is_empty": true
+        },
+        {
+          "depth_mm": 0.5,
+          "open_width_mm": 0.4142135623730912,
+          "center_is_empty": true
+        }
+      ],
+      "empty_component_area_mm2": 239.8742785881625,
+      "empty_component_bounds_mm": [
+        53.316,
+        29.39,
+        76.68,
+        86.695
+      ],
+      "empty_component_reaches_board_edge": true,
+      "standalone_small_enclosed_pocket": false,
+      "classification": "Acute reentrant copper boundary. The gap joins the reported larger clearance region; small-angle geometry alone does not establish an etch defect or adequate process margin. Supplier CAM review remains required."
+    },
+    {
+      "id": 12,
+      "layer": "B.Cu",
+      "at_mm": [
+        70.617868,
+        35.27
+      ],
+      "nets": [
+        "+SOLAR"
+      ],
+      "gap_angle_deg": 45.04530134435609,
+      "adjacent_edge_support_mm": [
+        1.6232044286647955,
+        0.5478680000000082
+      ],
+      "ideal_straight_wedge_depth_below_0p10mm_width_mm": 0.12057583311125956,
+      "measured_bisector_width_samples": [
+        {
+          "depth_mm": 0.025,
+          "open_width_mm": 0.02071068191076118,
+          "center_is_empty": true
+        },
+        {
+          "depth_mm": 0.05,
+          "open_width_mm": 0.041421363821528924,
+          "center_is_empty": true
+        },
+        {
+          "depth_mm": 0.075,
+          "open_width_mm": 0.06213204573228465,
+          "center_is_empty": true
+        },
+        {
+          "depth_mm": 0.1,
+          "open_width_mm": 0.08284272764304584,
+          "center_is_empty": true
+        },
+        {
+          "depth_mm": 0.125,
+          "open_width_mm": 0.10355340955381245,
+          "center_is_empty": true
+        },
+        {
+          "depth_mm": 0.15,
+          "open_width_mm": 0.1242640914645682,
+          "center_is_empty": true
+        },
+        {
+          "depth_mm": 0.2,
+          "open_width_mm": 0.16568545528609713,
+          "center_is_empty": true
+        },
+        {
+          "depth_mm": 0.25,
+          "open_width_mm": 0.2071068191076206,
+          "center_is_empty": true
+        },
+        {
+          "depth_mm": 0.3,
+          "open_width_mm": 0.24852818292914294,
+          "center_is_empty": true
+        },
+        {
+          "depth_mm": 0.5,
+          "open_width_mm": 0.41421363821524004,
+          "center_is_empty": true
+        }
+      ],
+      "empty_component_area_mm2": 239.8742785881625,
+      "empty_component_bounds_mm": [
+        53.316,
+        29.39,
+        76.68,
+        86.695
+      ],
+      "empty_component_reaches_board_edge": true,
+      "standalone_small_enclosed_pocket": false,
+      "classification": "Acute reentrant copper boundary. The gap joins the reported larger clearance region; small-angle geometry alone does not establish an etch defect or adequate process margin. Supplier CAM review remains required."
+    }
+  ],
+  "method": "Actual filled full-copper unions, requested 2 \u00b5m polygon approximation. Boundary vertex supports from 2 \u00b5m simplified polygons; width samples intersect unsimplified copper complement along the local wedge bisector. 0.10 mm is a screening reference, not a universal etch-process qualification. Numeric distances are nominal geometry, not production tolerance guarantees."
+}

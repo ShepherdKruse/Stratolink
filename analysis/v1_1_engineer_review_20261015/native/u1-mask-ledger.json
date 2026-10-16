@@ -1,0 +1,418 @@
+{
+  "removed_mask_polygon_uuids": [
+    "11a248ec-c2de-4e09-85a8-923ce96d02d7",
+    "7ca5b0ba-84fe-4594-ba76-4338fd8fddcc",
+    "5cc05450-4b76-4492-9145-77ca0031a82b",
+    "03cc4226-bc00-4aeb-997e-f6be518ba9dd",
+    "2e7edb27-6d5e-4e78-a81d-eaac26efeef0",
+    "30542f77-b0ba-46f8-aabd-9bb5baf49cc7",
+    "6fdb390f-dd84-4d15-bdab-3e14be99a852",
+    "c718bf82-bd4e-43d5-b19b-250a71855fd0",
+    "114f488d-6712-47ab-a419-ff61c75fe86c",
+    "d40f4c01-0a24-4e1d-8612-46c7b76604d1",
+    "ee0f48d8-09e4-44e0-9f0c-fedf1e347853",
+    "171921b1-860f-41ce-8ca8-d20ce3065f18",
+    "bbdbdc8e-dfa4-42d9-bf9a-4625c98db344",
+    "377be965-cefe-4be2-927b-0ee4bc677650",
+    "c4d2ab9d-cf78-4373-bf29-0205801a951f",
+    "6edc8777-462c-4739-a1d9-df54e71ec9de",
+    "d71ca470-1e91-4c00-81e6-57c47d023181",
+    "21885ea6-c812-48dc-af46-f6f810d292cb",
+    "f1b87f6f-a1c3-460b-b172-b987150cdabb",
+    "fef95a98-7020-47c3-8a15-3967e98085ae"
+  ],
+  "perimeter_pad_before": [
+    {
+      "pin": "1",
+      "before_layers": [
+        "B.Cu",
+        "B.Paste"
+      ],
+      "before_clearance": null,
+      "before_mask_margin": null
+    },
+    {
+      "pin": "2",
+      "before_layers": [
+        "B.Cu",
+        "B.Paste"
+      ],
+      "before_clearance": null,
+      "before_mask_margin": null
+    },
+    {
+      "pin": "3",
+      "before_layers": [
+        "B.Cu",
+        "B.Paste"
+      ],
+      "before_clearance": null,
+      "before_mask_margin": null
+    },
+    {
+      "pin": "4",
+      "before_layers": [
+        "B.Cu",
+        "B.Paste"
+      ],
+      "before_clearance": null,
+      "before_mask_margin": null
+    },
+    {
+      "pin": "5",
+      "before_layers": [
+        "B.Cu",
+        "B.Paste"
+      ],
+      "before_clearance": null,
+      "before_mask_margin": null
+    },
+    {
+      "pin": "6",
+      "before_layers": [
+        "B.Cu",
+        "B.Paste"
+      ],
+      "before_clearance": null,
+      "before_mask_margin": null
+    },
+    {
+      "pin": "7",
+      "before_layers": [
+        "B.Cu",
+        "B.Paste"
+      ],
+      "before_clearance": null,
+      "before_mask_margin": null
+    },
+    {
+      "pin": "8",
+      "before_layers": [
+        "B.Cu",
+        "B.Paste"
+      ],
+      "before_clearance": null,
+      "before_mask_margin": null
+    },
+    {
+      "pin": "9",
+      "before_layers": [
+        "B.Cu",
+        "B.Paste"
+      ],
+      "before_clearance": null,
+      "before_mask_margin": null
+    },
+    {
+      "pin": "10",
+      "before_layers": [
+        "B.Cu",
+        "B.Paste"
+      ],
+      "before_clearance": null,
+      "before_mask_margin": null
+    },
+    {
+      "pin": "11",
+      "before_layers": [
+        "B.Cu",
+        "B.Paste"
+      ],
+      "before_clearance": null,
+      "before_mask_margin": null
+    },
+    {
+      "pin": "12",
+      "before_layers": [
+        "B.Cu",
+        "B.Paste"
+      ],
+      "before_clearance": null,
+      "before_mask_margin": null
+    },
+    {
+      "pin": "13",
+      "before_layers": [
+        "B.Cu",
+        "B.Paste"
+      ],
+      "before_clearance": null,
+      "before_mask_margin": null
+    },
+    {
+      "pin": "14",
+      "before_layers": [
+        "B.Cu",
+        "B.Paste"
+      ],
+      "before_clearance": null,
+      "before_mask_margin": null
+    },
+    {
+      "pin": "15",
+      "before_layers": [
+        "B.Cu",
+        "B.Paste"
+      ],
+      "before_clearance": null,
+      "before_mask_margin": null
+    },
+    {
+      "pin": "16",
+      "before_layers": [
+        "B.Cu",
+        "B.Paste"
+      ],
+      "before_clearance": null,
+      "before_mask_margin": null
+    },
+    {
+      "pin": "17",
+      "before_layers": [
+        "B.Cu",
+        "B.Paste"
+      ],
+      "before_clearance": null,
+      "before_mask_margin": null
+    },
+    {
+      "pin": "18",
+      "before_layers": [
+        "B.Cu",
+        "B.Paste"
+      ],
+      "before_clearance": null,
+      "before_mask_margin": null
+    },
+    {
+      "pin": "19",
+      "before_layers": [
+        "B.Cu",
+        "B.Paste"
+      ],
+      "before_clearance": null,
+      "before_mask_margin": null
+    },
+    {
+      "pin": "20",
+      "before_layers": [
+        "B.Cu",
+        "B.Paste"
+      ],
+      "before_clearance": null,
+      "before_mask_margin": null
+    }
+  ],
+  "new_mask_margin_mm": 0.04,
+  "local_copper_clearance": "unchanged",
+  "preserved": "Copper shape/position/nets/clearances, paste, EP masks and pad21 thermal holes; no routing changes",
+  "library": {
+    "removed_mask_polygon_uuids": [
+      "fef95a98-7020-47c3-8a15-3967e98085ae",
+      "21885ea6-c812-48dc-af46-f6f810d292cb",
+      "f1b87f6f-a1c3-460b-b172-b987150cdabb",
+      "6edc8777-462c-4739-a1d9-df54e71ec9de",
+      "d71ca470-1e91-4c00-81e6-57c47d023181",
+      "377be965-cefe-4be2-927b-0ee4bc677650",
+      "c4d2ab9d-cf78-4373-bf29-0205801a951f",
+      "bbdbdc8e-dfa4-42d9-bf9a-4625c98db344",
+      "171921b1-860f-41ce-8ca8-d20ce3065f18",
+      "ee0f48d8-09e4-44e0-9f0c-fedf1e347853",
+      "d40f4c01-0a24-4e1d-8612-46c7b76604d1",
+      "c718bf82-bd4e-43d5-b19b-250a71855fd0",
+      "114f488d-6712-47ab-a419-ff61c75fe86c",
+      "6fdb390f-dd84-4d15-bdab-3e14be99a852",
+      "30542f77-b0ba-46f8-aabd-9bb5baf49cc7",
+      "2e7edb27-6d5e-4e78-a81d-eaac26efeef0",
+      "11a248ec-c2de-4e09-85a8-923ce96d02d7",
+      "7ca5b0ba-84fe-4594-ba76-4338fd8fddcc",
+      "5cc05450-4b76-4492-9145-77ca0031a82b",
+      "03cc4226-bc00-4aeb-997e-f6be518ba9dd"
+    ],
+    "perimeter_pad_before": [
+      {
+        "pin": "1",
+        "before_layers": [
+          "F.Cu",
+          "F.Paste"
+        ],
+        "before_clearance": null,
+        "before_mask_margin": null
+      },
+      {
+        "pin": "2",
+        "before_layers": [
+          "F.Cu",
+          "F.Paste"
+        ],
+        "before_clearance": null,
+        "before_mask_margin": null
+      },
+      {
+        "pin": "3",
+        "before_layers": [
+          "F.Cu",
+          "F.Paste"
+        ],
+        "before_clearance": null,
+        "before_mask_margin": null
+      },
+      {
+        "pin": "4",
+        "before_layers": [
+          "F.Cu",
+          "F.Paste"
+        ],
+        "before_clearance": null,
+        "before_mask_margin": null
+      },
+      {
+        "pin": "5",
+        "before_layers": [
+          "F.Cu",
+          "F.Paste"
+        ],
+        "before_clearance": null,
+        "before_mask_margin": null
+      },
+      {
+        "pin": "6",
+        "before_layers": [
+          "F.Cu",
+          "F.Paste"
+        ],
+        "before_clearance": null,
+        "before_mask_margin": null
+      },
+      {
+        "pin": "7",
+        "before_layers": [
+          "F.Cu",
+          "F.Paste"
+        ],
+        "before_clearance": null,
+        "before_mask_margin": null
+      },
+      {
+        "pin": "8",
+        "before_layers": [
+          "F.Cu",
+          "F.Paste"
+        ],
+        "before_clearance": null,
+        "before_mask_margin": null
+      },
+      {
+        "pin": "9",
+        "before_layers": [
+          "F.Cu",
+          "F.Paste"
+        ],
+        "before_clearance": null,
+        "before_mask_margin": null
+      },
+      {
+        "pin": "10",
+        "before_layers": [
+          "F.Cu",
+          "F.Paste"
+        ],
+        "before_clearance": null,
+        "before_mask_margin": null
+      },
+      {
+        "pin": "11",
+        "before_layers": [
+          "F.Cu",
+          "F.Paste"
+        ],
+        "before_clearance": null,
+        "before_mask_margin": null
+      },
+      {
+        "pin": "12",
+        "before_layers": [
+          "F.Cu",
+          "F.Paste"
+        ],
+        "before_clearance": null,
+        "before_mask_margin": null
+      },
+      {
+        "pin": "13",
+        "before_layers": [
+          "F.Cu",
+          "F.Paste"
+        ],
+        "before_clearance": null,
+        "before_mask_margin": null
+      },
+      {
+        "pin": "14",
+        "before_layers": [
+          "F.Cu",
+          "F.Paste"
+        ],
+        "before_clearance": null,
+        "before_mask_margin": null
+      },
+      {
+        "pin": "15",
+        "before_layers": [
+          "F.Cu",
+          "F.Paste"
+        ],
+        "before_clearance": null,
+        "before_mask_margin": null
+      },
+      {
+        "pin": "16",
+        "before_layers": [
+          "F.Cu",
+          "F.Paste"
+        ],
+        "before_clearance": null,
+        "before_mask_margin": null
+      },
+      {
+        "pin": "17",
+        "before_layers": [
+          "F.Cu",
+          "F.Paste"
+        ],
+        "before_clearance": null,
+        "before_mask_margin": null
+      },
+      {
+        "pin": "18",
+        "before_layers": [
+          "F.Cu",
+          "F.Paste"
+        ],
+        "before_clearance": null,
+        "before_mask_margin": null
+      },
+      {
+        "pin": "19",
+        "before_layers": [
+          "F.Cu",
+          "F.Paste"
+        ],
+        "before_clearance": null,
+        "before_mask_margin": null
+      },
+      {
+        "pin": "20",
+        "before_layers": [
+          "F.Cu",
+          "F.Paste"
+        ],
+        "before_clearance": null,
+        "before_mask_margin": null
+      }
+    ],
+    "new_mask_margin_mm": 0.04,
+    "local_copper_clearance": "unchanged",
+    "preserved": "Copper shape/position/nets/clearances, paste, EP masks and pad21 thermal holes; no routing changes"
+  }
+}
