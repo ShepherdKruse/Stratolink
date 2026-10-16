@@ -1,0 +1,3 @@
+# Preserve the exact bytes received from the engineer, including CRLF.
+*.kicad_pcb -text
+*.kicad_sch -text
