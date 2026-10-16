@@ -166,6 +166,21 @@
       "original": "0027af4e2c6d9142c7ee323a42818a121f2c471c",
       "review_branch": "9eb340cc9a5abf7484e131dd59c732981ee4f0c7",
       "subject": "Bind final reroute evidence to the pilot source and exports"
+    },
+    {
+      "original": "d7c7bc9f16a0be1ebddb2a5064d69188403ee14c",
+      "review_branch": "c30011eac319bfa4bcbef3ccbe46034d2564d56b",
+      "subject": "Correct supplier U8 rotation for the rerouted v1.1 pilot"
+    },
+    {
+      "original": "c362c02c806b13bc2699f0e303831bb15f490956",
+      "review_branch": "ecbb1455180efe7d1198a0aed761dba48700f26c",
+      "subject": "Record verified JLC Y25 cart and placement evidence"
+    },
+    {
+      "original": "74e9df91ad4f8d3d5dabd7d530cdee92c86b5c0b",
+      "review_branch": "265191c597d976c5d770d72c5e35e3e8ad1cdabc",
+      "subject": "Preserve exact supplier CSV bytes for hash verification"
     }
   ]
 }
