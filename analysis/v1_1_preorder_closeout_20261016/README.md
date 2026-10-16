@@ -17,7 +17,7 @@ This closes the ambiguous wording in the previous final response. There is no ou
 
 The inquiry was sent **by email**, from Teddy's personal Gmail account to **support@jlcpcb.com**. The subject is **AS7331 sourcing cost and lead time for three-board PCBA draft**. The thread contains the original request and the Y26 identifier update. It is not a sourcing request submitted through the JLC website. The personal inbox was checked during this closeout; no supplier reply was present at that check.
 
-The expected answer should settle availability, exact orderable, required spares, all incremental charges and earliest dispatch. The supplier-facing UV review specifies the exact orientation and process constraints so those can be addressed with that same inquiry. If JLC selects AQFT instead of AQFM, record its exact identity in the BOM; the manufacturer documents the same electrical device/package with a different reel quantity.
+The expected answer should settle availability, exact orderable, required spares, all incremental charges and earliest dispatch. A [supplement was sent in the same email thread](inquiry-supplement.md) with the completed UV review, exact orientation, populated files and process constraints, so those can be addressed in the same sourcing response. If JLC selects AQFT instead of AQFM, record its exact identity in the BOM; the manufacturer documents the same electrical device/package with a different reel quantity.
 
 ## What happens after that answer
 

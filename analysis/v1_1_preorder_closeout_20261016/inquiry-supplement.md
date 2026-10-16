@@ -1,4 +1,6 @@
-# Prepared supplier supplement
+# Supplier supplement sent
+
+Sent in the existing sourcing email thread on 16 October 2026. The Gmail service returned SENT. No purchase or order was submitted.
 
 Subject: Re: AS7331 sourcing cost and lead time for three-board PCBA draft
 
