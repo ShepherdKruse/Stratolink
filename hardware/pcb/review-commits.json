@@ -196,6 +196,16 @@
       "original": "10098ea9f1d8e7e3eaf745a2fc0dbc45a050d189",
       "review_branch": "495716f4f336c94a16e2be892cff1933d7cc4d95",
       "subject": "Record final adversarial sweep and JLC Y26 sourcing decision"
+    },
+    {
+      "original": "c9f71e724f8f17c8d75201269aebecba68793f6a",
+      "review_branch": "3684611a9be23f5c16b2936ff9f5c78676f2e180",
+      "subject": "Close pre-order UV review and distinguish factory and pilot acceptance"
+    },
+    {
+      "original": "0415076fc88d78458ff03db1994970b3088b6fc0",
+      "review_branch": "0e23706b050040a9d8813a4e70bee6c40087ba81",
+      "subject": "Record UV assembly supplement sent with completed sourcing review"
     }
   ]
 }
