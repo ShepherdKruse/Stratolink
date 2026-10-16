@@ -126,6 +126,11 @@
       "original": "848bd77c2358457c5286c5094c6e5aa1f3c2be26",
       "review_branch": "4a0fc1b9a5b24775126e57f7b4fdb6e36397f876",
       "subject": "Bind final top GNSS review evidence to manufacturing sources"
+    },
+    {
+      "original": "cd6f3844f5324d82cbfdb1b5bebac8a101b0e676",
+      "review_branch": "a349d487419ae3f48c504ea39ce9a2be6339d3e2",
+      "subject": "Package v1.1 KiCad project and parts libraries for download"
     }
   ]
 }

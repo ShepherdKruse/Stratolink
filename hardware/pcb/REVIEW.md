@@ -2,6 +2,7 @@
 
 Open [stratolink.kicad_pro](stratolink.kicad_pro) in KiCad 10. The schematic, board, project-local libraries and 3D models are included. Current PCB SHA-256: `88f82c85d2d47b4aea2e7d7d2827c4a92c339788cc0d9c880dd6342ee0440c0a`.
 
+- [Download the complete KiCad project or parts library](../downloads/README.md)
 - [Changes from the flown board](../../analysis/v1_1_release_20261012/manual-review-changes.md)
 - [Latest peer review and decisions](../../analysis/v1_1_top_gnss_20261014/README.md)
 - [GNSS feed, reference and placement](../../analysis/v1_1_top_gnss_20261014/rf/top-feed-review.md)
