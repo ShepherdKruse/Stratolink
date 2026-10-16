@@ -1,13 +1,13 @@
 # v1.1 KiCad downloads
 
-Use KiCad 10. These files match the upward GNSS antenna revision on the `review/hardware-v1.1` branch.
+Use KiCad 10. These files match the engineer-rerouted revision on the `review/hardware-v1.1` branch.
 
 - [Complete KiCad project ZIP](stratolink-v1.1-kicad.zip?raw=true): board, schematic, strict project/rules, project libraries and custom 3D models. Extract everything and open `stratolink-v1.1/stratolink.kicad_pro`.
 - [Parts library ZIP](stratolink-v1.1-libraries.zip?raw=true): `lib/`, `3d/`, `fp-lib-table` and `sym-lib-table`. Extract these beside the matching `.kicad_pro`, `.kicad_sch` and `.kicad_pcb` files. This ZIP does not replace the board or schematic.
 - [Browse the footprint and symbol files](../pcb/lib/).
 - [Pilot assembly BOM and placement files](../gerbers/v1.1-pilot/README.md).
 
-The library includes the added **R24, R25, R26, R27, C22, C23 and U8** footprints, plus the other project footprints and symbols. All 68 board footprint instances load through KiCad's native footprint reader. Six standard 3D model paths use KiCad 10's installed model library; missing standard models affect the preview, not footprint loading.
+The library includes the added **R24, R25, R26, R27, C22, C23 and U8** footprints, plus the other project footprints and symbols. All 68 board footprint instances load through KiCad's native footprint reader, and all 63 model attachments resolve with the standard KiCad model library installed. Six standard 3D model paths use KiCad 10's installed model library; missing standard models affect the preview, not footprint loading.
 
 ## If KiCad says a footprint was not found
 
@@ -23,7 +23,7 @@ The complete project already contains the routed v1.1 board. Updating a blank or
 
 ## Revision and verification
 
-PCB SHA-256: `88f82c85d2d47b4aea2e7d7d2827c4a92c339788cc0d9c880dd6342ee0440c0a`.
+PCB SHA-256: `25b201eb09c6746a22d1c3be42f7d4023319dd6fa5e3e587dc8cf42d97bb4d7f`.
 
 [manifest.json](manifest.json) records the source and ZIP-member hashes. [Fresh extraction checks](verification.json) confirm all 68 footprint instances, including the seven reported missing parts, load from both bundles. The archives use the strict published project settings. User-specific editor files, backups and caches are excluded. U6 is present in CAD; the initial pilot assembly omits U6 only. These remain engineering review files; see [fabrication notes](../pcb/FABRICATION.md) before ordering.
 

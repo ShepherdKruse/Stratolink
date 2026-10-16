@@ -19,16 +19,16 @@
   "limitation": "Native/export intent gate; separate aperture geometry, DRC and supplier CAM review required",
   "F": {
     "mask_file": "stratolink-F_Mask.gts",
-    "sha256": "e1e9f00eb1f5693057565d06f9c6fba1d239188a7bb23ee818b3a771898e69c5",
+    "sha256": "ced385dbe56213e41e3d19fd21fffbc009b92bfe38b904dcba8516ce7fe114ad",
     "has_selective_openings": true,
-    "polygon_regions": 184,
+    "polygon_regions": 197,
     "full_board_opening_rejected": true
   },
   "B": {
     "mask_file": "stratolink-B_Mask.gbs",
-    "sha256": "d751c1a9d8cd8c9e798e503bd658844ffd4883fee547f5ebb4bf14698d5ef4d5",
+    "sha256": "49a7ef286cdecaf93ae57c6622c8751a2472c7f9b0e6d7559315e483173a37a6",
     "has_selective_openings": true,
-    "polygon_regions": 92,
+    "polygon_regions": 79,
     "full_board_opening_rejected": true
   },
   "solar_soldering_pads_open": [

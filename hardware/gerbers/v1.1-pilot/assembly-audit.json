@@ -7,26 +7,26 @@
       "mpn": "GRM1555C1E103JE01D",
       "lcsc": "C3855387",
       "native_anchor_mm": [
-        64.422,
-        36.521
+        70.69,
+        39.5
       ],
       "smd_pad_center_mm": [
-        64.422,
-        36.521
+        70.69,
+        39.5
       ],
       "smd_pad_bounds_mm": [
-        64.112,
-        35.761,
-        64.732,
-        37.281
+        69.93,
+        39.19,
+        71.45,
+        39.81
       ],
       "center_mm": [
-        64.422,
-        36.521
+        70.69,
+        39.5
       ],
       "placement_method": "Placement-side SMD copper pad bounding center; excludes TH pads and all text/graphics/models",
-      "native_angle_deg": -90.0,
-      "rotation_deg": 270.0,
+      "native_angle_deg": 180.0,
+      "rotation_deg": 0.0,
       "side": "bottom",
       "prior_cpl": {
         "Designator": "C1",
@@ -38,8 +38,8 @@
         "Layer": "bottom"
       },
       "delta_from_prior_mm": [
-        0.0,
-        0.0
+        6.268000000000001,
+        -2.978999999999999
       ],
       "new_part": false
     },
@@ -50,22 +50,22 @@
       "mpn": "CL10A475KP8NNNC",
       "lcsc": "C1705",
       "native_anchor_mm": [
-        63.873,
-        39.142
+        72.77,
+        35.58
       ],
       "smd_pad_center_mm": [
-        63.873,
-        39.142
+        72.77,
+        35.58
       ],
       "smd_pad_bounds_mm": [
-        63.398,
-        37.917,
-        64.348,
-        40.367
+        72.295,
+        34.355,
+        73.245,
+        36.805
       ],
       "center_mm": [
-        63.873,
-        39.142
+        72.77,
+        35.58
       ],
       "placement_method": "Placement-side SMD copper pad bounding center; excludes TH pads and all text/graphics/models",
       "native_angle_deg": -90.0,
@@ -81,8 +81,8 @@
         "Layer": "bottom"
       },
       "delta_from_prior_mm": [
-        0.0,
-        0.0
+        8.896999999999998,
+        3.5620000000000047
       ],
       "new_part": false
     },
@@ -93,26 +93,26 @@
       "mpn": "CL10A475KP8NNNC",
       "lcsc": "C1705",
       "native_anchor_mm": [
-        65.880998,
-        42.066998
+        71.26,
+        38.24
       ],
       "smd_pad_center_mm": [
-        65.880998,
-        42.066998
+        71.26,
+        38.24
       ],
       "smd_pad_bounds_mm": [
-        64.655998,
-        41.591998,
-        67.105998,
-        42.541998
+        70.035,
+        37.765,
+        72.485,
+        38.715
       ],
       "center_mm": [
-        65.880998,
-        42.066998
+        71.26,
+        38.24
       ],
       "placement_method": "Placement-side SMD copper pad bounding center; excludes TH pads and all text/graphics/models",
-      "native_angle_deg": 180.0,
-      "rotation_deg": 0.0,
+      "native_angle_deg": 0.0,
+      "rotation_deg": 180.0,
       "side": "bottom",
       "prior_cpl": {
         "Designator": "C3",
@@ -124,8 +124,8 @@
         "Layer": "bottom"
       },
       "delta_from_prior_mm": [
-        0.0,
-        0.0
+        5.379002,
+        3.826997999999996
       ],
       "new_part": false
     },
@@ -136,26 +136,26 @@
       "mpn": "CL05B104KO5NNNC",
       "lcsc": "C1525",
       "native_anchor_mm": [
-        65.975,
-        40.709998
+        70.69,
+        36.98
       ],
       "smd_pad_center_mm": [
-        65.975,
-        40.709998
+        70.69,
+        36.98
       ],
       "smd_pad_bounds_mm": [
-        65.215,
-        40.399998,
-        66.735,
-        41.019998
+        69.93,
+        36.67,
+        71.45,
+        37.29
       ],
       "center_mm": [
-        65.975,
-        40.709998
+        70.69,
+        36.98
       ],
       "placement_method": "Placement-side SMD copper pad bounding center; excludes TH pads and all text/graphics/models",
-      "native_angle_deg": 180.0,
-      "rotation_deg": 0.0,
+      "native_angle_deg": 0.0,
+      "rotation_deg": 180.0,
       "side": "bottom",
       "prior_cpl": {
         "Designator": "C4",
@@ -167,8 +167,8 @@
         "Layer": "bottom"
       },
       "delta_from_prior_mm": [
-        0.0,
-        0.0
+        4.715000000000003,
+        3.729998000000002
       ],
       "new_part": false
     },
@@ -179,26 +179,26 @@
       "mpn": "CL21A226MAYNNNE",
       "lcsc": "C602037",
       "native_anchor_mm": [
-        70.956,
-        38.591
+        64.22,
+        33.08
       ],
       "smd_pad_center_mm": [
-        70.956,
-        38.591
+        64.22,
+        33.08
       ],
       "smd_pad_bounds_mm": [
-        70.231,
-        37.141002,
-        71.681,
-        40.040998
+        62.770002,
+        32.355,
+        65.669998,
+        33.805
       ],
       "center_mm": [
-        70.956,
-        38.591
+        64.22,
+        33.08
       ],
       "placement_method": "Placement-side SMD copper pad bounding center; excludes TH pads and all text/graphics/models",
-      "native_angle_deg": -90.0,
-      "rotation_deg": 270.0,
+      "native_angle_deg": 180.0,
+      "rotation_deg": 0.0,
       "side": "bottom",
       "prior_cpl": {
         "Designator": "C6",
@@ -210,8 +210,8 @@
         "Layer": "bottom"
       },
       "delta_from_prior_mm": [
-        0.0,
-        0.0
+        -6.736000000000004,
+        5.511000000000003
       ],
       "new_part": false
     },
@@ -222,26 +222,26 @@
       "mpn": "CL05B104KO5NNNC",
       "lcsc": "C1525",
       "native_anchor_mm": [
-        58.477,
-        62.720001
+        59.0,
+        62.72
       ],
       "smd_pad_center_mm": [
-        58.477,
-        62.720001
+        59.0,
+        62.72
       ],
       "smd_pad_bounds_mm": [
-        57.717,
-        62.410001,
-        59.237,
-        63.030001
+        58.24,
+        62.41,
+        59.76,
+        63.03
       ],
       "center_mm": [
-        58.477,
-        62.720001
+        59.0,
+        62.72
       ],
       "placement_method": "Placement-side SMD copper pad bounding center; excludes TH pads and all text/graphics/models",
-      "native_angle_deg": 180.0,
-      "rotation_deg": 180.0,
+      "native_angle_deg": 0.0,
+      "rotation_deg": 0.0,
       "side": "top",
       "prior_cpl": {
         "Designator": "C7",
@@ -253,8 +253,8 @@
         "Layer": "top"
       },
       "delta_from_prior_mm": [
-        0.0,
-        0.0
+        0.5230000000000032,
+        1.00000000458067e-06
       ],
       "new_part": false
     },
@@ -265,26 +265,26 @@
       "mpn": "CL10A106KP8NNNC",
       "lcsc": "C19702",
       "native_anchor_mm": [
-        58.467002,
-        61.430999
+        58.42,
+        61.44
       ],
       "smd_pad_center_mm": [
-        58.467002,
-        61.430999
+        58.42,
+        61.44
       ],
       "smd_pad_bounds_mm": [
-        57.242002,
-        60.955999,
-        59.692002,
-        61.905999
+        57.195,
+        60.965,
+        59.645,
+        61.915
       ],
       "center_mm": [
-        58.467002,
-        61.430999
+        58.42,
+        61.44
       ],
       "placement_method": "Placement-side SMD copper pad bounding center; excludes TH pads and all text/graphics/models",
-      "native_angle_deg": 180.0,
-      "rotation_deg": 180.0,
+      "native_angle_deg": 0.0,
+      "rotation_deg": 0.0,
       "side": "top",
       "prior_cpl": {
         "Designator": "C8",
@@ -296,8 +296,8 @@
         "Layer": "top"
       },
       "delta_from_prior_mm": [
-        0.0,
-        0.0
+        -0.0470019999999991,
+        -0.009000999999997816
       ],
       "new_part": false
     },
@@ -308,26 +308,26 @@
       "mpn": "CL05B104KO5NNNC",
       "lcsc": "C1525",
       "native_anchor_mm": [
-        62.938002,
-        62.698999
+        60.54,
+        62.2
       ],
       "smd_pad_center_mm": [
-        62.938002,
-        62.698999
+        60.54,
+        62.2
       ],
       "smd_pad_bounds_mm": [
-        62.178002,
-        62.388999,
-        63.698002,
-        63.008999
+        60.23,
+        61.44,
+        60.85,
+        62.96
       ],
       "center_mm": [
-        62.938002,
-        62.698999
+        60.54,
+        62.2
       ],
       "placement_method": "Placement-side SMD copper pad bounding center; excludes TH pads and all text/graphics/models",
-      "native_angle_deg": 180.0,
-      "rotation_deg": 180.0,
+      "native_angle_deg": -90.0,
+      "rotation_deg": 270.0,
       "side": "top",
       "prior_cpl": {
         "Designator": "C9",
@@ -339,8 +339,8 @@
         "Layer": "top"
       },
       "delta_from_prior_mm": [
-        0.0,
-        0.0
+        -2.398001999999998,
+        0.49899899999999775
       ],
       "new_part": false
     },
@@ -351,22 +351,22 @@
       "mpn": "CL05B104KO5NNNC",
       "lcsc": "C1525",
       "native_anchor_mm": [
-        58.306,
-        47.267
+        73.55,
+        45.89
       ],
       "smd_pad_center_mm": [
-        58.306,
-        47.267
+        73.55,
+        45.89
       ],
       "smd_pad_bounds_mm": [
-        57.996,
-        46.507,
-        58.616,
-        48.027
+        73.24,
+        45.13,
+        73.86,
+        46.65
       ],
       "center_mm": [
-        58.306,
-        47.267
+        73.55,
+        45.89
       ],
       "placement_method": "Placement-side SMD copper pad bounding center; excludes TH pads and all text/graphics/models",
       "native_angle_deg": 90.0,
@@ -382,8 +382,8 @@
         "Layer": "top"
       },
       "delta_from_prior_mm": [
-        0.0,
-        0.0
+        15.244,
+        1.3770000000000024
       ],
       "new_part": false
     },
@@ -437,22 +437,22 @@
       "mpn": "CL05B104KO5NNNC",
       "lcsc": "C1525",
       "native_anchor_mm": [
-        71.156,
-        41.622
+        65.71,
+        41.021
       ],
       "smd_pad_center_mm": [
-        71.156,
-        41.622
+        65.71,
+        41.021
       ],
       "smd_pad_bounds_mm": [
-        70.846,
-        40.862,
-        71.466,
-        42.382
+        65.4,
+        40.261,
+        66.02,
+        41.781
       ],
       "center_mm": [
-        71.156,
-        41.622
+        65.71,
+        41.021
       ],
       "placement_method": "Placement-side SMD copper pad bounding center; excludes TH pads and all text/graphics/models",
       "native_angle_deg": -90.0,
@@ -468,8 +468,8 @@
         "Layer": "top"
       },
       "delta_from_prior_mm": [
-        0.0,
-        0.0
+        -5.446000000000012,
+        0.6009999999999991
       ],
       "new_part": false
     },
@@ -480,26 +480,26 @@
       "mpn": "CL05B104KO5NNNC",
       "lcsc": "C1525",
       "native_anchor_mm": [
-        74.3,
-        34.5
+        73.94,
+        34.85
       ],
       "smd_pad_center_mm": [
-        74.3,
-        34.5
+        73.94,
+        34.85
       ],
       "smd_pad_bounds_mm": [
-        73.54,
-        34.19,
-        75.06,
-        34.81
+        73.18,
+        34.54,
+        74.7,
+        35.16
       ],
       "center_mm": [
-        74.3,
-        34.5
+        73.94,
+        34.85
       ],
       "placement_method": "Placement-side SMD copper pad bounding center; excludes TH pads and all text/graphics/models",
-      "native_angle_deg": 0.0,
-      "rotation_deg": 0.0,
+      "native_angle_deg": 180.0,
+      "rotation_deg": 180.0,
       "side": "top",
       "prior_cpl": {
         "Designator": "C14",
@@ -511,8 +511,8 @@
         "Layer": "top"
       },
       "delta_from_prior_mm": [
-        6.986999999999995,
-        5.7109999999999985
+        6.626999999999995,
+        5.360999999999997
       ],
       "new_part": false
     },
@@ -523,22 +523,22 @@
       "mpn": "CL05B104KO5NNNC",
       "lcsc": "C1525",
       "native_anchor_mm": [
-        55.647999,
-        81.063998
+        56.709998,
+        78.400998
       ],
       "smd_pad_center_mm": [
-        55.647999,
-        81.063998
+        56.709998,
+        78.400998
       ],
       "smd_pad_bounds_mm": [
-        54.887999,
-        80.753998,
-        56.407999,
-        81.373998
+        55.949998,
+        78.090998,
+        57.469998,
+        78.710998
       ],
       "center_mm": [
-        55.647999,
-        81.063998
+        56.709998,
+        78.400998
       ],
       "placement_method": "Placement-side SMD copper pad bounding center; excludes TH pads and all text/graphics/models",
       "native_angle_deg": 0.0,
@@ -554,8 +554,8 @@
         "Layer": "top"
       },
       "delta_from_prior_mm": [
-        0.0,
-        0.0
+        1.0619990000000001,
+        2.6629999999999967
       ],
       "new_part": false
     },
@@ -566,22 +566,22 @@
       "mpn": "CL10A475KP8NNNC",
       "lcsc": "C1705",
       "native_anchor_mm": [
-        66.057,
-        40.324
+        71.95,
+        34.975
       ],
       "smd_pad_center_mm": [
-        66.057,
-        40.324
+        71.95,
+        34.975
       ],
       "smd_pad_bounds_mm": [
-        65.582,
-        39.099,
-        66.532,
-        41.549
+        71.475,
+        33.75,
+        72.425,
+        36.2
       ],
       "center_mm": [
-        66.057,
-        40.324
+        71.95,
+        34.975
       ],
       "placement_method": "Placement-side SMD copper pad bounding center; excludes TH pads and all text/graphics/models",
       "native_angle_deg": 90.0,
@@ -597,8 +597,8 @@
         "Layer": "top"
       },
       "delta_from_prior_mm": [
-        0.0,
-        0.0
+        5.893000000000001,
+        5.348999999999997
       ],
       "new_part": false
     },
@@ -781,27 +781,27 @@
       "mpn": "CL05B104KO5NNNC",
       "lcsc": "C1525",
       "native_anchor_mm": [
-        55.6,
-        38.3
+        55.53,
+        51.46
       ],
       "smd_pad_center_mm": [
-        55.6,
-        38.3
+        55.53,
+        51.46
       ],
       "smd_pad_bounds_mm": [
-        54.84,
-        37.99,
-        56.36,
-        38.61
+        54.77,
+        51.15,
+        56.29,
+        51.77
       ],
       "center_mm": [
-        55.6,
-        38.3
+        55.53,
+        51.46
       ],
       "placement_method": "Placement-side SMD copper pad bounding center; excludes TH pads and all text/graphics/models",
-      "native_angle_deg": 180.0,
+      "native_angle_deg": 0.0,
       "rotation_deg": 0.0,
-      "side": "bottom",
+      "side": "top",
       "prior_cpl": null,
       "delta_from_prior_mm": null,
       "new_part": true
@@ -813,26 +813,26 @@
       "mpn": "CL05B104KO5NNNC",
       "lcsc": "C1525",
       "native_anchor_mm": [
-        75.2,
-        39.8
+        74.83,
+        40.42
       ],
       "smd_pad_center_mm": [
-        75.2,
-        39.8
+        74.83,
+        40.42
       ],
       "smd_pad_bounds_mm": [
-        74.44,
-        39.49,
-        75.96,
-        40.11
+        74.07,
+        40.11,
+        75.59,
+        40.73
       ],
       "center_mm": [
-        75.2,
-        39.8
+        74.83,
+        40.42
       ],
       "placement_method": "Placement-side SMD copper pad bounding center; excludes TH pads and all text/graphics/models",
-      "native_angle_deg": 0.0,
-      "rotation_deg": 0.0,
+      "native_angle_deg": 180.0,
+      "rotation_deg": 180.0,
       "side": "top",
       "prior_cpl": null,
       "delta_from_prior_mm": null,
@@ -845,22 +845,22 @@
       "mpn": "PESD5V0U1BB",
       "lcsc": "C5272735",
       "native_anchor_mm": [
-        71.058,
-        82.813
+        70.96,
+        81.91
       ],
       "smd_pad_center_mm": [
-        71.058,
-        82.813
+        70.96,
+        81.91
       ],
       "smd_pad_bounds_mm": [
-        70.057999,
-        82.463,
-        72.058001,
-        83.163
+        69.959999,
+        81.56,
+        71.960001,
+        82.26
       ],
       "center_mm": [
-        71.058,
-        82.813
+        70.96,
+        81.91
       ],
       "placement_method": "Placement-side SMD copper pad bounding center; excludes TH pads and all text/graphics/models",
       "native_angle_deg": 180.0,
@@ -876,8 +876,8 @@
         "Layer": "top"
       },
       "delta_from_prior_mm": [
-        0.0,
-        0.0
+        -0.09800000000001319,
+        0.9030000000000058
       ],
       "new_part": false
     },
@@ -888,26 +888,26 @@
       "mpn": "PESD5V0U1BB",
       "lcsc": "C5272735",
       "native_anchor_mm": [
-        58.8,
-        42.0
+        61.96,
+        37.38
       ],
       "smd_pad_center_mm": [
-        58.8,
-        42.0
+        61.96,
+        37.38
       ],
       "smd_pad_bounds_mm": [
-        57.799999,
-        41.65,
-        59.800001,
-        42.35
+        61.61,
+        36.379999,
+        62.31,
+        38.380001
       ],
       "center_mm": [
-        58.8,
-        42.0
+        61.96,
+        37.38
       ],
       "placement_method": "Placement-side SMD copper pad bounding center; excludes TH pads and all text/graphics/models",
-      "native_angle_deg": 0.0,
-      "rotation_deg": 0.0,
+      "native_angle_deg": 90.0,
+      "rotation_deg": 90.0,
       "side": "top",
       "prior_cpl": {
         "Designator": "D3",
@@ -919,8 +919,8 @@
         "Layer": "top"
       },
       "delta_from_prior_mm": [
-        -1.5060000000000002,
-        -4.609000000000002
+        1.6540000000000035,
+        0.01099999999999568
       ],
       "new_part": false
     },
@@ -931,26 +931,26 @@
       "mpn": "BLM15AG601SN1D",
       "lcsc": "C76884",
       "native_anchor_mm": [
-        56.414,
-        50.858
+        73.99,
+        47.33
       ],
       "smd_pad_center_mm": [
-        56.414,
-        50.858
+        73.99,
+        47.33
       ],
       "smd_pad_bounds_mm": [
-        56.104,
-        50.098,
-        56.724,
-        51.618
+        73.23,
+        47.02,
+        74.75,
+        47.64
       ],
       "center_mm": [
-        56.414,
-        50.858
+        73.99,
+        47.33
       ],
       "placement_method": "Placement-side SMD copper pad bounding center; excludes TH pads and all text/graphics/models",
-      "native_angle_deg": -90.0,
-      "rotation_deg": 270.0,
+      "native_angle_deg": 0.0,
+      "rotation_deg": 0.0,
       "side": "top",
       "prior_cpl": {
         "Designator": "FB1",
@@ -962,8 +962,8 @@
         "Layer": "top"
       },
       "delta_from_prior_mm": [
-        0.0,
-        0.0
+        17.575999999999993,
+        3.5279999999999987
       ],
       "new_part": false
     },
@@ -974,26 +974,26 @@
       "mpn": "LPS4018-223MRC",
       "lcsc": "C5278935",
       "native_anchor_mm": [
-        60.603,
-        38.1865
+        69.32,
+        33.32
       ],
       "smd_pad_center_mm": [
-        60.603,
-        38.1865
+        69.32,
+        33.32
       ],
       "smd_pad_bounds_mm": [
-        58.653,
-        35.9815,
-        62.553,
-        40.3915
+        67.115,
+        31.37,
+        71.525,
+        35.27
       ],
       "center_mm": [
-        60.603,
-        38.1865
+        69.32,
+        33.32
       ],
       "placement_method": "Placement-side SMD copper pad bounding center; excludes TH pads and all text/graphics/models",
-      "native_angle_deg": 90.0,
-      "rotation_deg": 90.0,
+      "native_angle_deg": 0.0,
+      "rotation_deg": 180.0,
       "side": "bottom",
       "prior_cpl": {
         "Designator": "L1",
@@ -1005,8 +1005,8 @@
         "Layer": "bottom"
       },
       "delta_from_prior_mm": [
-        0.5,
-        0.0
+        9.216999999999992,
+        4.866500000000002
       ],
       "new_part": false
     },
@@ -1017,26 +1017,26 @@
       "mpn": "PWCWAQ1608F-100KTT",
       "lcsc": "C436784",
       "native_anchor_mm": [
-        70.172,
-        41.22
+        64.45,
+        34.84
       ],
       "smd_pad_center_mm": [
-        70.172,
-        41.22
+        64.45,
+        34.84
       ],
       "smd_pad_bounds_mm": [
-        68.957,
-        40.755,
-        71.387,
-        41.685
+        63.235,
+        34.375,
+        65.665,
+        35.305
       ],
       "center_mm": [
-        70.172,
-        41.22
+        64.45,
+        34.84
       ],
       "placement_method": "Placement-side SMD copper pad bounding center; excludes TH pads and all text/graphics/models",
-      "native_angle_deg": 0.0,
-      "rotation_deg": 180.0,
+      "native_angle_deg": 180.0,
+      "rotation_deg": 0.0,
       "side": "bottom",
       "prior_cpl": {
         "Designator": "L2",
@@ -1048,8 +1048,8 @@
         "Layer": "bottom"
       },
       "delta_from_prior_mm": [
-        0.0,
-        0.0
+        -5.721999999999994,
+        6.3799999999999955
       ],
       "new_part": false
     },
@@ -1060,26 +1060,26 @@
       "mpn": "FRC0402F7504TS",
       "lcsc": "C3013187",
       "native_anchor_mm": [
-        65.934,
-        34.206
+        67.05,
+        41.169999
       ],
       "smd_pad_center_mm": [
-        65.934,
-        34.206
+        67.05,
+        41.169999
       ],
       "smd_pad_bounds_mm": [
-        65.614,
-        33.425999,
-        66.254,
-        34.986001
+        66.73,
+        40.389998,
+        67.37,
+        41.95
       ],
       "center_mm": [
-        65.934,
-        34.206
+        67.05,
+        41.169999
       ],
       "placement_method": "Placement-side SMD copper pad bounding center; excludes TH pads and all text/graphics/models",
-      "native_angle_deg": -90.0,
-      "rotation_deg": 270.0,
+      "native_angle_deg": 90.0,
+      "rotation_deg": 90.0,
       "side": "bottom",
       "prior_cpl": {
         "Designator": "R1",
@@ -1091,8 +1091,8 @@
         "Layer": "bottom"
       },
       "delta_from_prior_mm": [
-        0.0,
-        0.0
+        1.1159999999999997,
+        -6.963998999999994
       ],
       "new_part": false
     },
@@ -1103,22 +1103,22 @@
       "mpn": "CRCW04024M22FKED",
       "lcsc": "C2091474",
       "native_anchor_mm": [
-        64.847,
-        34.212001
+        68.05,
+        41.169999
       ],
       "smd_pad_center_mm": [
-        64.847,
-        34.212001
+        68.05,
+        41.169999
       ],
       "smd_pad_bounds_mm": [
-        64.527,
-        33.432,
-        65.167,
-        34.992002
+        67.73,
+        40.389998,
+        68.37,
+        41.95
       ],
       "center_mm": [
-        64.847,
-        34.212001
+        68.05,
+        41.169999
       ],
       "placement_method": "Placement-side SMD copper pad bounding center; excludes TH pads and all text/graphics/models",
       "native_angle_deg": -90.0,
@@ -1134,8 +1134,8 @@
         "Layer": "bottom"
       },
       "delta_from_prior_mm": [
-        0.0,
-        0.0
+        3.203000000000003,
+        -6.957997999999996
       ],
       "new_part": false
     },
@@ -1146,26 +1146,26 @@
       "mpn": "FRC0402F4754TS",
       "lcsc": "C2998153",
       "native_anchor_mm": [
-        68.354,
-        34.198
+        63.79,
+        40.91
       ],
       "smd_pad_center_mm": [
-        68.354,
-        34.198
+        63.79,
+        40.91
       ],
       "smd_pad_bounds_mm": [
-        68.034,
-        33.417999,
-        68.674,
-        34.978001
+        63.009999,
+        40.59,
+        64.570001,
+        41.23
       ],
       "center_mm": [
-        68.354,
-        34.198
+        63.79,
+        40.91
       ],
       "placement_method": "Placement-side SMD copper pad bounding center; excludes TH pads and all text/graphics/models",
-      "native_angle_deg": -90.0,
-      "rotation_deg": 270.0,
+      "native_angle_deg": 0.0,
+      "rotation_deg": 180.0,
       "side": "bottom",
       "prior_cpl": {
         "Designator": "R3",
@@ -1177,8 +1177,8 @@
         "Layer": "bottom"
       },
       "delta_from_prior_mm": [
-        0.0,
-        0.0
+        -4.564,
+        -6.711999999999996
       ],
       "new_part": false
     },
@@ -1189,22 +1189,22 @@
       "mpn": "RC0402FR-073M65L",
       "lcsc": "C477700",
       "native_anchor_mm": [
-        67.023,
-        34.213001
+        65.9,
+        40.9702
       ],
       "smd_pad_center_mm": [
-        67.023,
-        34.213001
+        65.9,
+        40.9702
       ],
       "smd_pad_bounds_mm": [
-        66.703,
-        33.433,
-        67.343,
-        34.993002
+        65.58,
+        40.190199,
+        66.22,
+        41.750201
       ],
       "center_mm": [
-        67.023,
-        34.213001
+        65.9,
+        40.9702
       ],
       "placement_method": "Placement-side SMD copper pad bounding center; excludes TH pads and all text/graphics/models",
       "native_angle_deg": 90.0,
@@ -1220,8 +1220,8 @@
         "Layer": "bottom"
       },
       "delta_from_prior_mm": [
-        0.0,
-        0.0
+        -1.1229999999999905,
+        -6.757199
       ],
       "new_part": false
     },
@@ -1232,26 +1232,26 @@
       "mpn": "GR0402F4M42TAG00",
       "lcsc": "C49654874",
       "native_anchor_mm": [
-        69.447,
-        34.198
+        63.809999,
+        39.88
       ],
       "smd_pad_center_mm": [
-        69.447,
-        34.198
+        63.809999,
+        39.88
       ],
       "smd_pad_bounds_mm": [
-        69.127,
-        33.417999,
-        69.767,
-        34.978001
+        63.029998,
+        39.56,
+        64.59,
+        40.2
       ],
       "center_mm": [
-        69.447,
-        34.198
+        63.809999,
+        39.88
       ],
       "placement_method": "Placement-side SMD copper pad bounding center; excludes TH pads and all text/graphics/models",
-      "native_angle_deg": 90.0,
-      "rotation_deg": 90.0,
+      "native_angle_deg": 180.0,
+      "rotation_deg": 0.0,
       "side": "bottom",
       "prior_cpl": {
         "Designator": "R5",
@@ -1263,8 +1263,8 @@
         "Layer": "bottom"
       },
       "delta_from_prior_mm": [
-        0.0,
-        0.0
+        -5.637001000000005,
+        -5.682000000000002
       ],
       "new_part": false
     },
@@ -1275,26 +1275,26 @@
       "mpn": "0402WGF8254TCE",
       "lcsc": "C423131",
       "native_anchor_mm": [
-        70.557,
-        34.194
+        63.8,
+        38.86
       ],
       "smd_pad_center_mm": [
-        70.557,
-        34.194
+        63.8,
+        38.86
       ],
       "smd_pad_bounds_mm": [
-        70.237,
-        33.413999,
-        70.877,
-        34.974001
+        63.019999,
+        38.54,
+        64.580001,
+        39.18
       ],
       "center_mm": [
-        70.557,
-        34.194
+        63.8,
+        38.86
       ],
       "placement_method": "Placement-side SMD copper pad bounding center; excludes TH pads and all text/graphics/models",
-      "native_angle_deg": -90.0,
-      "rotation_deg": 270.0,
+      "native_angle_deg": 0.0,
+      "rotation_deg": 180.0,
       "side": "bottom",
       "prior_cpl": {
         "Designator": "R6",
@@ -1306,8 +1306,8 @@
         "Layer": "bottom"
       },
       "delta_from_prior_mm": [
-        0.0,
-        0.0
+        -6.757000000000005,
+        -4.665999999999997
       ],
       "new_part": false
     },
@@ -1318,26 +1318,26 @@
       "mpn": "FRC0402F4754TS",
       "lcsc": "C2998153",
       "native_anchor_mm": [
-        71.67,
-        34.175
+        63.8,
+        37.87
       ],
       "smd_pad_center_mm": [
-        71.67,
-        34.175
+        63.8,
+        37.87
       ],
       "smd_pad_bounds_mm": [
-        71.35,
-        33.394999,
-        71.99,
-        34.955001
+        63.019999,
+        37.55,
+        64.580001,
+        38.19
       ],
       "center_mm": [
-        71.67,
-        34.175
+        63.8,
+        37.87
       ],
       "placement_method": "Placement-side SMD copper pad bounding center; excludes TH pads and all text/graphics/models",
-      "native_angle_deg": 90.0,
-      "rotation_deg": 90.0,
+      "native_angle_deg": 180.0,
+      "rotation_deg": 0.0,
       "side": "bottom",
       "prior_cpl": {
         "Designator": "R7",
@@ -1349,8 +1349,8 @@
         "Layer": "bottom"
       },
       "delta_from_prior_mm": [
-        0.0,
-        0.0
+        -7.8700000000000045,
+        -3.6950000000000003
       ],
       "new_part": false
     },
@@ -1361,26 +1361,26 @@
       "mpn": "RC0402FR-07100KL",
       "lcsc": "C60491",
       "native_anchor_mm": [
-        70.97,
-        36.276
+        63.8,
+        36.89
       ],
       "smd_pad_center_mm": [
-        70.97,
-        36.276
+        63.8,
+        36.89
       ],
       "smd_pad_bounds_mm": [
-        70.189999,
-        35.956,
-        71.750001,
-        36.596
+        63.019999,
+        36.57,
+        64.580001,
+        37.21
       ],
       "center_mm": [
-        70.97,
-        36.276
+        63.8,
+        36.89
       ],
       "placement_method": "Placement-side SMD copper pad bounding center; excludes TH pads and all text/graphics/models",
-      "native_angle_deg": 0.0,
-      "rotation_deg": 180.0,
+      "native_angle_deg": 180.0,
+      "rotation_deg": 0.0,
       "side": "bottom",
       "prior_cpl": {
         "Designator": "R8",
@@ -1392,8 +1392,8 @@
         "Layer": "bottom"
       },
       "delta_from_prior_mm": [
-        0.0,
-        0.0
+        -7.170000000000002,
+        -0.6139999999999972
       ],
       "new_part": false
     },
@@ -1404,22 +1404,22 @@
       "mpn": "RC0402FR-070RL",
       "lcsc": "C106231",
       "native_anchor_mm": [
-        64.666999,
-        62.062001
+        62.94,
+        62.2
       ],
       "smd_pad_center_mm": [
-        64.666999,
-        62.062001
+        62.94,
+        62.2
       ],
       "smd_pad_bounds_mm": [
-        64.346999,
-        61.282,
-        64.986999,
-        62.842002
+        62.62,
+        61.419999,
+        63.26,
+        62.980001
       ],
       "center_mm": [
-        64.666999,
-        62.062001
+        62.94,
+        62.2
       ],
       "placement_method": "Placement-side SMD copper pad bounding center; excludes TH pads and all text/graphics/models",
       "native_angle_deg": -90.0,
@@ -1435,8 +1435,8 @@
         "Layer": "top"
       },
       "delta_from_prior_mm": [
-        0.0,
-        0.0
+        -1.7269990000000064,
+        -0.13799900000000065
       ],
       "new_part": false
     },
@@ -1447,22 +1447,22 @@
       "mpn": "RC0402FR-0710KL",
       "lcsc": "C60490",
       "native_anchor_mm": [
-        61.198,
-        62.074001
+        61.76,
+        62.17
       ],
       "smd_pad_center_mm": [
-        61.198,
-        62.074001
+        61.76,
+        62.17
       ],
       "smd_pad_bounds_mm": [
-        60.878,
-        61.294,
-        61.518,
-        62.854002
+        61.44,
+        61.389999,
+        62.08,
+        62.950001
       ],
       "center_mm": [
-        61.198,
-        62.074001
+        61.76,
+        62.17
       ],
       "placement_method": "Placement-side SMD copper pad bounding center; excludes TH pads and all text/graphics/models",
       "native_angle_deg": -90.0,
@@ -1478,8 +1478,8 @@
         "Layer": "top"
       },
       "delta_from_prior_mm": [
-        0.0,
-        0.0
+        0.5619999999999976,
+        -0.09599899999999906
       ],
       "new_part": false
     },
@@ -1490,22 +1490,22 @@
       "mpn": "RC0402FR-074K7L",
       "lcsc": "C105871",
       "native_anchor_mm": [
-        74.648001,
-        79.004996
+        68.95,
+        42.19
       ],
       "smd_pad_center_mm": [
-        74.648001,
-        79.004996
+        68.95,
+        42.19
       ],
       "smd_pad_bounds_mm": [
-        73.868,
-        78.684996,
-        75.428002,
-        79.324996
+        68.169999,
+        41.87,
+        69.730001,
+        42.51
       ],
       "center_mm": [
-        74.648001,
-        79.004996
+        68.95,
+        42.19
       ],
       "placement_method": "Placement-side SMD copper pad bounding center; excludes TH pads and all text/graphics/models",
       "native_angle_deg": 180.0,
@@ -1521,8 +1521,8 @@
         "Layer": "top"
       },
       "delta_from_prior_mm": [
-        0.0,
-        0.0
+        -5.698000999999991,
+        36.81499600000001
       ],
       "new_part": false
     },
@@ -1533,26 +1533,26 @@
       "mpn": "RC0402FR-074K7L",
       "lcsc": "C105871",
       "native_anchor_mm": [
-        74.642,
-        77.899
+        66.7,
+        41.06
       ],
       "smd_pad_center_mm": [
-        74.642,
-        77.899
+        66.7,
+        41.06
       ],
       "smd_pad_bounds_mm": [
-        73.861999,
-        77.579,
-        75.422001,
-        78.219
+        66.38,
+        40.279999,
+        67.02,
+        41.840001
       ],
       "center_mm": [
-        74.642,
-        77.899
+        66.7,
+        41.06
       ],
       "placement_method": "Placement-side SMD copper pad bounding center; excludes TH pads and all text/graphics/models",
-      "native_angle_deg": 180.0,
-      "rotation_deg": 180.0,
+      "native_angle_deg": -90.0,
+      "rotation_deg": 270.0,
       "side": "top",
       "prior_cpl": {
         "Designator": "R12",
@@ -1564,8 +1564,8 @@
         "Layer": "top"
       },
       "delta_from_prior_mm": [
-        0.0,
-        0.0
+        -7.941999999999993,
+        36.839
       ],
       "new_part": false
     },
@@ -1576,26 +1576,26 @@
       "mpn": "RC0402FR-070RL",
       "lcsc": "C106231",
       "native_anchor_mm": [
-        67.552,
-        55.547
+        59.25,
+        53.39
       ],
       "smd_pad_center_mm": [
-        67.552,
-        55.547
+        59.25,
+        53.39
       ],
       "smd_pad_bounds_mm": [
-        66.771999,
-        55.227,
-        68.332001,
-        55.867
+        58.93,
+        52.609999,
+        59.57,
+        54.170001
       ],
       "center_mm": [
-        67.552,
-        55.547
+        59.25,
+        53.39
       ],
       "placement_method": "Placement-side SMD copper pad bounding center; excludes TH pads and all text/graphics/models",
-      "native_angle_deg": 0.0,
-      "rotation_deg": 0.0,
+      "native_angle_deg": -90.0,
+      "rotation_deg": 270.0,
       "side": "top",
       "prior_cpl": {
         "Designator": "R13",
@@ -1607,8 +1607,8 @@
         "Layer": "top"
       },
       "delta_from_prior_mm": [
-        0.0,
-        0.0
+        -8.302000000000007,
+        2.1569999999999965
       ],
       "new_part": false
     },
@@ -1619,26 +1619,26 @@
       "mpn": "RC0402FR-070RL",
       "lcsc": "C106231",
       "native_anchor_mm": [
-        67.550999,
-        54.408
+        58.01,
+        53.37
       ],
       "smd_pad_center_mm": [
-        67.550999,
-        54.408
+        58.01,
+        53.37
       ],
       "smd_pad_bounds_mm": [
-        66.770998,
-        54.088,
-        68.331,
-        54.728
+        57.69,
+        52.589999,
+        58.33,
+        54.150001
       ],
       "center_mm": [
-        67.550999,
-        54.408
+        58.01,
+        53.37
       ],
       "placement_method": "Placement-side SMD copper pad bounding center; excludes TH pads and all text/graphics/models",
-      "native_angle_deg": 0.0,
-      "rotation_deg": 0.0,
+      "native_angle_deg": -90.0,
+      "rotation_deg": 270.0,
       "side": "top",
       "prior_cpl": {
         "Designator": "R14",
@@ -1650,8 +1650,8 @@
         "Layer": "top"
       },
       "delta_from_prior_mm": [
-        0.0,
-        0.0
+        -9.540999000000006,
+        1.0380000000000038
       ],
       "new_part": false
     },
@@ -1662,26 +1662,26 @@
       "mpn": "RC0402FR-0733RL",
       "lcsc": "C138002",
       "native_anchor_mm": [
-        73.578,
-        51.71
+        74.54,
+        58.33
       ],
       "smd_pad_center_mm": [
-        73.578,
-        51.71
+        74.54,
+        58.33
       ],
       "smd_pad_bounds_mm": [
-        72.797999,
-        51.39,
-        74.358001,
-        52.03
+        74.22,
+        57.549999,
+        74.86,
+        59.110001
       ],
       "center_mm": [
-        73.578,
-        51.71
+        74.54,
+        58.33
       ],
       "placement_method": "Placement-side SMD copper pad bounding center; excludes TH pads and all text/graphics/models",
-      "native_angle_deg": 180.0,
-      "rotation_deg": 180.0,
+      "native_angle_deg": 90.0,
+      "rotation_deg": 90.0,
       "side": "top",
       "prior_cpl": {
         "Designator": "R15",
@@ -1693,8 +1693,8 @@
         "Layer": "top"
       },
       "delta_from_prior_mm": [
-        0.0,
-        0.0
+        0.9620000000000033,
+        -6.619999999999997
       ],
       "new_part": false
     },
@@ -1705,26 +1705,26 @@
       "mpn": "RC0402FR-0733RL",
       "lcsc": "C138002",
       "native_anchor_mm": [
-        73.566,
-        50.575
+        75.675,
+        58.318
       ],
       "smd_pad_center_mm": [
-        73.566,
-        50.575
+        75.675,
+        58.318
       ],
       "smd_pad_bounds_mm": [
-        72.785999,
-        50.255,
-        74.346001,
-        50.895
+        75.355,
+        57.537999,
+        75.995,
+        59.098001
       ],
       "center_mm": [
-        73.566,
-        50.575
+        75.675,
+        58.318
       ],
       "placement_method": "Placement-side SMD copper pad bounding center; excludes TH pads and all text/graphics/models",
-      "native_angle_deg": 180.0,
-      "rotation_deg": 180.0,
+      "native_angle_deg": 90.0,
+      "rotation_deg": 90.0,
       "side": "top",
       "prior_cpl": {
         "Designator": "R16",
@@ -1736,8 +1736,8 @@
         "Layer": "top"
       },
       "delta_from_prior_mm": [
-        0.0,
-        0.0
+        2.1089999999999947,
+        -7.742999999999995
       ],
       "new_part": false
     },
@@ -1748,22 +1748,22 @@
       "mpn": "RC0402FR-0710KL",
       "lcsc": "C60490",
       "native_anchor_mm": [
-        73.583,
-        44.545
+        73.58,
+        43.969999
       ],
       "smd_pad_center_mm": [
-        73.583,
-        44.545
+        73.58,
+        43.969999
       ],
       "smd_pad_bounds_mm": [
-        73.263,
-        43.764999,
-        73.903,
-        45.325001
+        73.26,
+        43.189998,
+        73.9,
+        44.75
       ],
       "center_mm": [
-        73.583,
-        44.545
+        73.58,
+        43.969999
       ],
       "placement_method": "Placement-side SMD copper pad bounding center; excludes TH pads and all text/graphics/models",
       "native_angle_deg": 90.0,
@@ -1779,8 +1779,8 @@
         "Layer": "top"
       },
       "delta_from_prior_mm": [
-        0.0,
-        0.0
+        -0.0030000000000001137,
+        0.5750010000000003
       ],
       "new_part": false
     },
@@ -1791,22 +1791,22 @@
       "mpn": "RC0402FR-071ML",
       "lcsc": "C138033",
       "native_anchor_mm": [
-        55.618,
-        83.313
+        56.679999,
+        80.65
       ],
       "smd_pad_center_mm": [
-        55.618,
-        83.313
+        56.679999,
+        80.65
       ],
       "smd_pad_bounds_mm": [
-        54.837999,
-        82.993,
-        56.398001,
-        83.633
+        55.899998,
+        80.33,
+        57.46,
+        80.97
       ],
       "center_mm": [
-        55.618,
-        83.313
+        56.679999,
+        80.65
       ],
       "placement_method": "Placement-side SMD copper pad bounding center; excludes TH pads and all text/graphics/models",
       "native_angle_deg": 0.0,
@@ -1822,8 +1822,8 @@
         "Layer": "top"
       },
       "delta_from_prior_mm": [
-        0.0,
-        0.0
+        1.0619990000000001,
+        2.6629999999999967
       ],
       "new_part": false
     },
@@ -1834,22 +1834,22 @@
       "mpn": "RC0402FR-071ML",
       "lcsc": "C138033",
       "native_anchor_mm": [
-        55.637,
-        82.209999
+        56.698999,
+        79.546999
       ],
       "smd_pad_center_mm": [
-        55.637,
-        82.209999
+        56.698999,
+        79.546999
       ],
       "smd_pad_bounds_mm": [
-        54.856999,
-        81.889999,
-        56.417001,
-        82.529999
+        55.918998,
+        79.226999,
+        57.479,
+        79.866999
       ],
       "center_mm": [
-        55.637,
-        82.209999
+        56.698999,
+        79.546999
       ],
       "placement_method": "Placement-side SMD copper pad bounding center; excludes TH pads and all text/graphics/models",
       "native_angle_deg": 180.0,
@@ -1865,8 +1865,8 @@
         "Layer": "top"
       },
       "delta_from_prior_mm": [
-        0.0,
-        0.0
+        1.0619990000000001,
+        2.6629999999999967
       ],
       "new_part": false
     },
@@ -1877,22 +1877,22 @@
       "mpn": "RC0402FR-071ML",
       "lcsc": "C138033",
       "native_anchor_mm": [
-        54.573,
-        66.188999
+        55.55,
+        66.23
       ],
       "smd_pad_center_mm": [
-        54.573,
-        66.188999
+        55.55,
+        66.23
       ],
       "smd_pad_bounds_mm": [
-        54.253,
-        65.408998,
-        54.893,
-        66.969
+        55.23,
+        65.449999,
+        55.87,
+        67.010001
       ],
       "center_mm": [
-        54.573,
-        66.188999
+        55.55,
+        66.23
       ],
       "placement_method": "Placement-side SMD copper pad bounding center; excludes TH pads and all text/graphics/models",
       "native_angle_deg": -90.0,
@@ -1908,8 +1908,8 @@
         "Layer": "top"
       },
       "delta_from_prior_mm": [
-        0.0,
-        0.0
+        0.9769999999999968,
+        -0.0410010000000085
       ],
       "new_part": false
     },
@@ -1920,22 +1920,22 @@
       "mpn": "RC0402FR-071ML",
       "lcsc": "C138033",
       "native_anchor_mm": [
-        55.692,
-        66.193999
+        54.54,
+        66.23
       ],
       "smd_pad_center_mm": [
-        55.692,
-        66.193999
+        54.54,
+        66.23
       ],
       "smd_pad_bounds_mm": [
-        55.372,
-        65.413998,
-        56.012,
-        66.974
+        54.22,
+        65.449999,
+        54.86,
+        67.010001
       ],
       "center_mm": [
-        55.692,
-        66.193999
+        54.54,
+        66.23
       ],
       "placement_method": "Placement-side SMD copper pad bounding center; excludes TH pads and all text/graphics/models",
       "native_angle_deg": 90.0,
@@ -1951,8 +1951,8 @@
         "Layer": "top"
       },
       "delta_from_prior_mm": [
-        0.0,
-        0.0
+        -1.152000000000001,
+        -0.03600099999999884
       ],
       "new_part": false
     },
@@ -1963,27 +1963,27 @@
       "mpn": "FRC0402F4754TS",
       "lcsc": "C2998153",
       "native_anchor_mm": [
-        57.4,
-        33.9
+        55.59,
+        46.96
       ],
       "smd_pad_center_mm": [
-        57.4,
-        33.9
+        55.59,
+        46.96
       ],
       "smd_pad_bounds_mm": [
-        56.62,
-        33.58,
-        58.18,
-        34.22
+        54.81,
+        46.64,
+        56.37,
+        47.28
       ],
       "center_mm": [
-        57.4,
-        33.9
+        55.59,
+        46.96
       ],
       "placement_method": "Placement-side SMD copper pad bounding center; excludes TH pads and all text/graphics/models",
-      "native_angle_deg": 180.0,
+      "native_angle_deg": 0.0,
       "rotation_deg": 0.0,
-      "side": "bottom",
+      "side": "top",
       "prior_cpl": null,
       "delta_from_prior_mm": null,
       "new_part": true
@@ -1995,27 +1995,27 @@
       "mpn": "FRC0402F4754TS",
       "lcsc": "C2998153",
       "native_anchor_mm": [
-        58.65,
-        34.9
+        57.49,
+        46.94
       ],
       "smd_pad_center_mm": [
-        58.65,
-        34.9
+        57.49,
+        46.94
       ],
       "smd_pad_bounds_mm": [
-        57.87,
-        34.58,
-        59.43,
-        35.22
+        56.71,
+        46.62,
+        58.27,
+        47.26
       ],
       "center_mm": [
-        58.65,
-        34.9
+        57.49,
+        46.94
       ],
       "placement_method": "Placement-side SMD copper pad bounding center; excludes TH pads and all text/graphics/models",
       "native_angle_deg": 0.0,
-      "rotation_deg": 180.0,
-      "side": "bottom",
+      "rotation_deg": 0.0,
+      "side": "top",
       "prior_cpl": null,
       "delta_from_prior_mm": null,
       "new_part": true
@@ -2027,27 +2027,27 @@
       "mpn": "0402WGF220JTCE",
       "lcsc": "C25092",
       "native_anchor_mm": [
-        61.2,
-        42.5
+        57.51,
+        51.44
       ],
       "smd_pad_center_mm": [
-        61.2,
-        42.5
+        57.51,
+        51.44
       ],
       "smd_pad_bounds_mm": [
-        60.88,
-        41.72,
-        61.52,
-        43.28
+        56.73,
+        51.12,
+        58.29,
+        51.76
       ],
       "center_mm": [
-        61.2,
-        42.5
+        57.51,
+        51.44
       ],
       "placement_method": "Placement-side SMD copper pad bounding center; excludes TH pads and all text/graphics/models",
-      "native_angle_deg": -90.0,
-      "rotation_deg": 270.0,
-      "side": "bottom",
+      "native_angle_deg": 180.0,
+      "rotation_deg": 180.0,
+      "side": "top",
       "prior_cpl": null,
       "delta_from_prior_mm": null,
       "new_part": true
@@ -2059,26 +2059,26 @@
       "mpn": "MCU0805MD3304BP500",
       "lcsc": "C4313228",
       "native_anchor_mm": [
-        71.9,
-        34.08
+        72.28,
+        40.83
       ],
       "smd_pad_center_mm": [
-        71.9,
-        34.08
+        72.28,
+        40.83
       ],
       "smd_pad_bounds_mm": [
-        71.2,
-        32.655,
-        72.6,
-        35.505
+        70.855,
+        40.13,
+        73.705,
+        41.53
       ],
       "center_mm": [
-        71.9,
-        34.08
+        72.28,
+        40.83
       ],
       "placement_method": "Placement-side SMD copper pad bounding center; excludes TH pads and all text/graphics/models",
-      "native_angle_deg": 90.0,
-      "rotation_deg": 90.0,
+      "native_angle_deg": 180.0,
+      "rotation_deg": 180.0,
       "side": "top",
       "prior_cpl": null,
       "delta_from_prior_mm": null,
@@ -2109,8 +2109,8 @@
         37.814999
       ],
       "placement_method": "Placement-side SMD copper pad bounding center; excludes TH pads and all text/graphics/models",
-      "native_angle_deg": 0.0,
-      "rotation_deg": 90.0,
+      "native_angle_deg": 180.0,
+      "rotation_deg": 270.0,
       "side": "bottom",
       "prior_cpl": {
         "Designator": "U1",
@@ -2177,22 +2177,22 @@
       "mpn": "MAX-M10S-00B",
       "lcsc": "C4153167",
       "native_anchor_mm": [
-        65.537,
-        48.414
+        66.23,
+        48.4
       ],
       "smd_pad_center_mm": [
-        65.537,
-        48.414
+        66.23,
+        48.4
       ],
       "smd_pad_bounds_mm": [
-        59.886999,
-        43.664001,
-        71.187001,
-        53.163999
+        60.579999,
+        43.650001,
+        71.880001,
+        53.149999
       ],
       "center_mm": [
-        65.537,
-        48.414
+        66.23,
+        48.4
       ],
       "placement_method": "Placement-side SMD copper pad bounding center; excludes TH pads and all text/graphics/models",
       "native_angle_deg": 180.0,
@@ -2208,8 +2208,8 @@
         "Layer": "top"
       },
       "delta_from_prior_mm": [
-        0.0,
-        0.0
+        0.6929999999999978,
+        0.014000000000002899
       ],
       "new_part": false
     },
@@ -2263,26 +2263,26 @@
       "mpn": "TMP117AIYBGR",
       "lcsc": "C2871893",
       "native_anchor_mm": [
-        73.148,
-        40.864
+        64.5,
+        41.43
       ],
       "smd_pad_center_mm": [
-        73.148,
-        40.864
+        64.5,
+        41.43
       ],
       "smd_pad_bounds_mm": [
-        72.833,
-        40.349,
-        73.463,
-        41.379
+        64.185,
+        40.915,
+        64.815,
+        41.945
       ],
       "center_mm": [
-        73.148,
-        40.864
+        64.5,
+        41.43
       ],
       "placement_method": "Placement-side SMD copper pad bounding center; excludes TH pads and all text/graphics/models",
-      "native_angle_deg": 0.0,
-      "rotation_deg": 0.0,
+      "native_angle_deg": 180.0,
+      "rotation_deg": 180.0,
       "side": "top",
       "prior_cpl": {
         "Designator": "U5",
@@ -2294,8 +2294,8 @@
         "Layer": "top"
       },
       "delta_from_prior_mm": [
-        0.0,
-        0.0
+        -8.647999999999996,
+        -0.5660000000000025
       ],
       "new_part": false
     },
@@ -2349,27 +2349,27 @@
       "mpn": "TLV8801DBVT",
       "lcsc": "C544879",
       "native_anchor_mm": [
-        55.65,
-        36.1
+        56.5725,
+        49.22
       ],
       "smd_pad_center_mm": [
-        55.65,
-        36.1
+        56.5725,
+        49.22
       ],
       "smd_pad_bounds_mm": [
-        53.85,
-        34.85,
-        57.45,
-        37.35
+        54.7725,
+        47.97,
+        58.3725,
+        50.47
       ],
       "center_mm": [
-        55.65,
-        36.1
+        56.5725,
+        49.22
       ],
       "placement_method": "Placement-side SMD copper pad bounding center; excludes TH pads and all text/graphics/models",
-      "native_angle_deg": 0.0,
-      "rotation_deg": 90.0,
-      "side": "bottom",
+      "native_angle_deg": 180.0,
+      "rotation_deg": 180.0,
+      "side": "top",
       "prior_cpl": null,
       "delta_from_prior_mm": null,
       "new_part": true
@@ -2383,26 +2383,26 @@
       "mpn": "GRM1555C1E103JE01D",
       "lcsc": "C3855387",
       "native_anchor_mm": [
-        64.422,
-        36.521
+        70.69,
+        39.5
       ],
       "smd_pad_center_mm": [
-        64.422,
-        36.521
+        70.69,
+        39.5
       ],
       "smd_pad_bounds_mm": [
-        64.112,
-        35.761,
-        64.732,
-        37.281
+        69.93,
+        39.19,
+        71.45,
+        39.81
       ],
       "center_mm": [
-        64.422,
-        36.521
+        70.69,
+        39.5
       ],
       "placement_method": "Placement-side SMD copper pad bounding center; excludes TH pads and all text/graphics/models",
-      "native_angle_deg": -90.0,
-      "rotation_deg": 270.0,
+      "native_angle_deg": 180.0,
+      "rotation_deg": 0.0,
       "side": "bottom",
       "prior_cpl": {
         "Designator": "C1",
@@ -2414,8 +2414,8 @@
         "Layer": "bottom"
       },
       "delta_from_prior_mm": [
-        0.0,
-        0.0
+        6.268000000000001,
+        -2.978999999999999
       ],
       "new_part": false
     },
@@ -2426,22 +2426,22 @@
       "mpn": "CL10A475KP8NNNC",
       "lcsc": "C1705",
       "native_anchor_mm": [
-        63.873,
-        39.142
+        72.77,
+        35.58
       ],
       "smd_pad_center_mm": [
-        63.873,
-        39.142
+        72.77,
+        35.58
       ],
       "smd_pad_bounds_mm": [
-        63.398,
-        37.917,
-        64.348,
-        40.367
+        72.295,
+        34.355,
+        73.245,
+        36.805
       ],
       "center_mm": [
-        63.873,
-        39.142
+        72.77,
+        35.58
       ],
       "placement_method": "Placement-side SMD copper pad bounding center; excludes TH pads and all text/graphics/models",
       "native_angle_deg": -90.0,
@@ -2457,8 +2457,8 @@
         "Layer": "bottom"
       },
       "delta_from_prior_mm": [
-        0.0,
-        0.0
+        8.896999999999998,
+        3.5620000000000047
       ],
       "new_part": false
     },
@@ -2469,26 +2469,26 @@
       "mpn": "CL10A475KP8NNNC",
       "lcsc": "C1705",
       "native_anchor_mm": [
-        65.880998,
-        42.066998
+        71.26,
+        38.24
       ],
       "smd_pad_center_mm": [
-        65.880998,
-        42.066998
+        71.26,
+        38.24
       ],
       "smd_pad_bounds_mm": [
-        64.655998,
-        41.591998,
-        67.105998,
-        42.541998
+        70.035,
+        37.765,
+        72.485,
+        38.715
       ],
       "center_mm": [
-        65.880998,
-        42.066998
+        71.26,
+        38.24
       ],
       "placement_method": "Placement-side SMD copper pad bounding center; excludes TH pads and all text/graphics/models",
-      "native_angle_deg": 180.0,
-      "rotation_deg": 0.0,
+      "native_angle_deg": 0.0,
+      "rotation_deg": 180.0,
       "side": "bottom",
       "prior_cpl": {
         "Designator": "C3",
@@ -2500,8 +2500,8 @@
         "Layer": "bottom"
       },
       "delta_from_prior_mm": [
-        0.0,
-        0.0
+        5.379002,
+        3.826997999999996
       ],
       "new_part": false
     },
@@ -2512,26 +2512,26 @@
       "mpn": "CL05B104KO5NNNC",
       "lcsc": "C1525",
       "native_anchor_mm": [
-        65.975,
-        40.709998
+        70.69,
+        36.98
       ],
       "smd_pad_center_mm": [
-        65.975,
-        40.709998
+        70.69,
+        36.98
       ],
       "smd_pad_bounds_mm": [
-        65.215,
-        40.399998,
-        66.735,
-        41.019998
+        69.93,
+        36.67,
+        71.45,
+        37.29
       ],
       "center_mm": [
-        65.975,
-        40.709998
+        70.69,
+        36.98
       ],
       "placement_method": "Placement-side SMD copper pad bounding center; excludes TH pads and all text/graphics/models",
-      "native_angle_deg": 180.0,
-      "rotation_deg": 0.0,
+      "native_angle_deg": 0.0,
+      "rotation_deg": 180.0,
       "side": "bottom",
       "prior_cpl": {
         "Designator": "C4",
@@ -2543,8 +2543,8 @@
         "Layer": "bottom"
       },
       "delta_from_prior_mm": [
-        0.0,
-        0.0
+        4.715000000000003,
+        3.729998000000002
       ],
       "new_part": false
     },
@@ -2555,26 +2555,26 @@
       "mpn": "CL21A226MAYNNNE",
       "lcsc": "C602037",
       "native_anchor_mm": [
-        70.956,
-        38.591
+        64.22,
+        33.08
       ],
       "smd_pad_center_mm": [
-        70.956,
-        38.591
+        64.22,
+        33.08
       ],
       "smd_pad_bounds_mm": [
-        70.231,
-        37.141002,
-        71.681,
-        40.040998
+        62.770002,
+        32.355,
+        65.669998,
+        33.805
       ],
       "center_mm": [
-        70.956,
-        38.591
+        64.22,
+        33.08
       ],
       "placement_method": "Placement-side SMD copper pad bounding center; excludes TH pads and all text/graphics/models",
-      "native_angle_deg": -90.0,
-      "rotation_deg": 270.0,
+      "native_angle_deg": 180.0,
+      "rotation_deg": 0.0,
       "side": "bottom",
       "prior_cpl": {
         "Designator": "C6",
@@ -2586,8 +2586,8 @@
         "Layer": "bottom"
       },
       "delta_from_prior_mm": [
-        0.0,
-        0.0
+        -6.736000000000004,
+        5.511000000000003
       ],
       "new_part": false
     },
@@ -2598,26 +2598,26 @@
       "mpn": "CL05B104KO5NNNC",
       "lcsc": "C1525",
       "native_anchor_mm": [
-        58.477,
-        62.720001
+        59.0,
+        62.72
       ],
       "smd_pad_center_mm": [
-        58.477,
-        62.720001
+        59.0,
+        62.72
       ],
       "smd_pad_bounds_mm": [
-        57.717,
-        62.410001,
-        59.237,
-        63.030001
+        58.24,
+        62.41,
+        59.76,
+        63.03
       ],
       "center_mm": [
-        58.477,
-        62.720001
+        59.0,
+        62.72
       ],
       "placement_method": "Placement-side SMD copper pad bounding center; excludes TH pads and all text/graphics/models",
-      "native_angle_deg": 180.0,
-      "rotation_deg": 180.0,
+      "native_angle_deg": 0.0,
+      "rotation_deg": 0.0,
       "side": "top",
       "prior_cpl": {
         "Designator": "C7",
@@ -2629,8 +2629,8 @@
         "Layer": "top"
       },
       "delta_from_prior_mm": [
-        0.0,
-        0.0
+        0.5230000000000032,
+        1.00000000458067e-06
       ],
       "new_part": false
     },
@@ -2641,26 +2641,26 @@
       "mpn": "CL10A106KP8NNNC",
       "lcsc": "C19702",
       "native_anchor_mm": [
-        58.467002,
-        61.430999
+        58.42,
+        61.44
       ],
       "smd_pad_center_mm": [
-        58.467002,
-        61.430999
+        58.42,
+        61.44
       ],
       "smd_pad_bounds_mm": [
-        57.242002,
-        60.955999,
-        59.692002,
-        61.905999
+        57.195,
+        60.965,
+        59.645,
+        61.915
       ],
       "center_mm": [
-        58.467002,
-        61.430999
+        58.42,
+        61.44
       ],
       "placement_method": "Placement-side SMD copper pad bounding center; excludes TH pads and all text/graphics/models",
-      "native_angle_deg": 180.0,
-      "rotation_deg": 180.0,
+      "native_angle_deg": 0.0,
+      "rotation_deg": 0.0,
       "side": "top",
       "prior_cpl": {
         "Designator": "C8",
@@ -2672,8 +2672,8 @@
         "Layer": "top"
       },
       "delta_from_prior_mm": [
-        0.0,
-        0.0
+        -0.0470019999999991,
+        -0.009000999999997816
       ],
       "new_part": false
     },
@@ -2684,26 +2684,26 @@
       "mpn": "CL05B104KO5NNNC",
       "lcsc": "C1525",
       "native_anchor_mm": [
-        62.938002,
-        62.698999
+        60.54,
+        62.2
       ],
       "smd_pad_center_mm": [
-        62.938002,
-        62.698999
+        60.54,
+        62.2
       ],
       "smd_pad_bounds_mm": [
-        62.178002,
-        62.388999,
-        63.698002,
-        63.008999
+        60.23,
+        61.44,
+        60.85,
+        62.96
       ],
       "center_mm": [
-        62.938002,
-        62.698999
+        60.54,
+        62.2
       ],
       "placement_method": "Placement-side SMD copper pad bounding center; excludes TH pads and all text/graphics/models",
-      "native_angle_deg": 180.0,
-      "rotation_deg": 180.0,
+      "native_angle_deg": -90.0,
+      "rotation_deg": 270.0,
       "side": "top",
       "prior_cpl": {
         "Designator": "C9",
@@ -2715,8 +2715,8 @@
         "Layer": "top"
       },
       "delta_from_prior_mm": [
-        0.0,
-        0.0
+        -2.398001999999998,
+        0.49899899999999775
       ],
       "new_part": false
     },
@@ -2727,22 +2727,22 @@
       "mpn": "CL05B104KO5NNNC",
       "lcsc": "C1525",
       "native_anchor_mm": [
-        58.306,
-        47.267
+        73.55,
+        45.89
       ],
       "smd_pad_center_mm": [
-        58.306,
-        47.267
+        73.55,
+        45.89
       ],
       "smd_pad_bounds_mm": [
-        57.996,
-        46.507,
-        58.616,
-        48.027
+        73.24,
+        45.13,
+        73.86,
+        46.65
       ],
       "center_mm": [
-        58.306,
-        47.267
+        73.55,
+        45.89
       ],
       "placement_method": "Placement-side SMD copper pad bounding center; excludes TH pads and all text/graphics/models",
       "native_angle_deg": 90.0,
@@ -2758,8 +2758,8 @@
         "Layer": "top"
       },
       "delta_from_prior_mm": [
-        0.0,
-        0.0
+        15.244,
+        1.3770000000000024
       ],
       "new_part": false
     },
@@ -2813,22 +2813,22 @@
       "mpn": "CL05B104KO5NNNC",
       "lcsc": "C1525",
       "native_anchor_mm": [
-        71.156,
-        41.622
+        65.71,
+        41.021
       ],
       "smd_pad_center_mm": [
-        71.156,
-        41.622
+        65.71,
+        41.021
       ],
       "smd_pad_bounds_mm": [
-        70.846,
-        40.862,
-        71.466,
-        42.382
+        65.4,
+        40.261,
+        66.02,
+        41.781
       ],
       "center_mm": [
-        71.156,
-        41.622
+        65.71,
+        41.021
       ],
       "placement_method": "Placement-side SMD copper pad bounding center; excludes TH pads and all text/graphics/models",
       "native_angle_deg": -90.0,
@@ -2844,8 +2844,8 @@
         "Layer": "top"
       },
       "delta_from_prior_mm": [
-        0.0,
-        0.0
+        -5.446000000000012,
+        0.6009999999999991
       ],
       "new_part": false
     },
@@ -2856,26 +2856,26 @@
       "mpn": "CL05B104KO5NNNC",
       "lcsc": "C1525",
       "native_anchor_mm": [
-        74.3,
-        34.5
+        73.94,
+        34.85
       ],
       "smd_pad_center_mm": [
-        74.3,
-        34.5
+        73.94,
+        34.85
       ],
       "smd_pad_bounds_mm": [
-        73.54,
-        34.19,
-        75.06,
-        34.81
+        73.18,
+        34.54,
+        74.7,
+        35.16
       ],
       "center_mm": [
-        74.3,
-        34.5
+        73.94,
+        34.85
       ],
       "placement_method": "Placement-side SMD copper pad bounding center; excludes TH pads and all text/graphics/models",
-      "native_angle_deg": 0.0,
-      "rotation_deg": 0.0,
+      "native_angle_deg": 180.0,
+      "rotation_deg": 180.0,
       "side": "top",
       "prior_cpl": {
         "Designator": "C14",
@@ -2887,8 +2887,8 @@
         "Layer": "top"
       },
       "delta_from_prior_mm": [
-        6.986999999999995,
-        5.7109999999999985
+        6.626999999999995,
+        5.360999999999997
       ],
       "new_part": false
     },
@@ -2899,22 +2899,22 @@
       "mpn": "CL05B104KO5NNNC",
       "lcsc": "C1525",
       "native_anchor_mm": [
-        55.647999,
-        81.063998
+        56.709998,
+        78.400998
       ],
       "smd_pad_center_mm": [
-        55.647999,
-        81.063998
+        56.709998,
+        78.400998
       ],
       "smd_pad_bounds_mm": [
-        54.887999,
-        80.753998,
-        56.407999,
-        81.373998
+        55.949998,
+        78.090998,
+        57.469998,
+        78.710998
       ],
       "center_mm": [
-        55.647999,
-        81.063998
+        56.709998,
+        78.400998
       ],
       "placement_method": "Placement-side SMD copper pad bounding center; excludes TH pads and all text/graphics/models",
       "native_angle_deg": 0.0,
@@ -2930,8 +2930,8 @@
         "Layer": "top"
       },
       "delta_from_prior_mm": [
-        0.0,
-        0.0
+        1.0619990000000001,
+        2.6629999999999967
       ],
       "new_part": false
     },
@@ -2942,22 +2942,22 @@
       "mpn": "CL10A475KP8NNNC",
       "lcsc": "C1705",
       "native_anchor_mm": [
-        66.057,
-        40.324
+        71.95,
+        34.975
       ],
       "smd_pad_center_mm": [
-        66.057,
-        40.324
+        71.95,
+        34.975
       ],
       "smd_pad_bounds_mm": [
-        65.582,
-        39.099,
-        66.532,
-        41.549
+        71.475,
+        33.75,
+        72.425,
+        36.2
       ],
       "center_mm": [
-        66.057,
-        40.324
+        71.95,
+        34.975
       ],
       "placement_method": "Placement-side SMD copper pad bounding center; excludes TH pads and all text/graphics/models",
       "native_angle_deg": 90.0,
@@ -2973,8 +2973,8 @@
         "Layer": "top"
       },
       "delta_from_prior_mm": [
-        0.0,
-        0.0
+        5.893000000000001,
+        5.348999999999997
       ],
       "new_part": false
     },
@@ -3157,27 +3157,27 @@
       "mpn": "CL05B104KO5NNNC",
       "lcsc": "C1525",
       "native_anchor_mm": [
-        55.6,
-        38.3
+        55.53,
+        51.46
       ],
       "smd_pad_center_mm": [
-        55.6,
-        38.3
+        55.53,
+        51.46
       ],
       "smd_pad_bounds_mm": [
-        54.84,
-        37.99,
-        56.36,
-        38.61
+        54.77,
+        51.15,
+        56.29,
+        51.77
       ],
       "center_mm": [
-        55.6,
-        38.3
+        55.53,
+        51.46
       ],
       "placement_method": "Placement-side SMD copper pad bounding center; excludes TH pads and all text/graphics/models",
-      "native_angle_deg": 180.0,
+      "native_angle_deg": 0.0,
       "rotation_deg": 0.0,
-      "side": "bottom",
+      "side": "top",
       "prior_cpl": null,
       "delta_from_prior_mm": null,
       "new_part": true
@@ -3189,26 +3189,26 @@
       "mpn": "CL05B104KO5NNNC",
       "lcsc": "C1525",
       "native_anchor_mm": [
-        75.2,
-        39.8
+        74.83,
+        40.42
       ],
       "smd_pad_center_mm": [
-        75.2,
-        39.8
+        74.83,
+        40.42
       ],
       "smd_pad_bounds_mm": [
-        74.44,
-        39.49,
-        75.96,
-        40.11
+        74.07,
+        40.11,
+        75.59,
+        40.73
       ],
       "center_mm": [
-        75.2,
-        39.8
+        74.83,
+        40.42
       ],
       "placement_method": "Placement-side SMD copper pad bounding center; excludes TH pads and all text/graphics/models",
-      "native_angle_deg": 0.0,
-      "rotation_deg": 0.0,
+      "native_angle_deg": 180.0,
+      "rotation_deg": 180.0,
       "side": "top",
       "prior_cpl": null,
       "delta_from_prior_mm": null,
@@ -3221,22 +3221,22 @@
       "mpn": "PESD5V0U1BB",
       "lcsc": "C5272735",
       "native_anchor_mm": [
-        71.058,
-        82.813
+        70.96,
+        81.91
       ],
       "smd_pad_center_mm": [
-        71.058,
-        82.813
+        70.96,
+        81.91
       ],
       "smd_pad_bounds_mm": [
-        70.057999,
-        82.463,
-        72.058001,
-        83.163
+        69.959999,
+        81.56,
+        71.960001,
+        82.26
       ],
       "center_mm": [
-        71.058,
-        82.813
+        70.96,
+        81.91
       ],
       "placement_method": "Placement-side SMD copper pad bounding center; excludes TH pads and all text/graphics/models",
       "native_angle_deg": 180.0,
@@ -3252,8 +3252,8 @@
         "Layer": "top"
       },
       "delta_from_prior_mm": [
-        0.0,
-        0.0
+        -0.09800000000001319,
+        0.9030000000000058
       ],
       "new_part": false
     },
@@ -3264,26 +3264,26 @@
       "mpn": "PESD5V0U1BB",
       "lcsc": "C5272735",
       "native_anchor_mm": [
-        58.8,
-        42.0
+        61.96,
+        37.38
       ],
       "smd_pad_center_mm": [
-        58.8,
-        42.0
+        61.96,
+        37.38
       ],
       "smd_pad_bounds_mm": [
-        57.799999,
-        41.65,
-        59.800001,
-        42.35
+        61.61,
+        36.379999,
+        62.31,
+        38.380001
       ],
       "center_mm": [
-        58.8,
-        42.0
+        61.96,
+        37.38
       ],
       "placement_method": "Placement-side SMD copper pad bounding center; excludes TH pads and all text/graphics/models",
-      "native_angle_deg": 0.0,
-      "rotation_deg": 0.0,
+      "native_angle_deg": 90.0,
+      "rotation_deg": 90.0,
       "side": "top",
       "prior_cpl": {
         "Designator": "D3",
@@ -3295,8 +3295,8 @@
         "Layer": "top"
       },
       "delta_from_prior_mm": [
-        -1.5060000000000002,
-        -4.609000000000002
+        1.6540000000000035,
+        0.01099999999999568
       ],
       "new_part": false
     },
@@ -3307,26 +3307,26 @@
       "mpn": "BLM15AG601SN1D",
       "lcsc": "C76884",
       "native_anchor_mm": [
-        56.414,
-        50.858
+        73.99,
+        47.33
       ],
       "smd_pad_center_mm": [
-        56.414,
-        50.858
+        73.99,
+        47.33
       ],
       "smd_pad_bounds_mm": [
-        56.104,
-        50.098,
-        56.724,
-        51.618
+        73.23,
+        47.02,
+        74.75,
+        47.64
       ],
       "center_mm": [
-        56.414,
-        50.858
+        73.99,
+        47.33
       ],
       "placement_method": "Placement-side SMD copper pad bounding center; excludes TH pads and all text/graphics/models",
-      "native_angle_deg": -90.0,
-      "rotation_deg": 270.0,
+      "native_angle_deg": 0.0,
+      "rotation_deg": 0.0,
       "side": "top",
       "prior_cpl": {
         "Designator": "FB1",
@@ -3338,8 +3338,8 @@
         "Layer": "top"
       },
       "delta_from_prior_mm": [
-        0.0,
-        0.0
+        17.575999999999993,
+        3.5279999999999987
       ],
       "new_part": false
     },
@@ -3350,26 +3350,26 @@
       "mpn": "LPS4018-223MRC",
       "lcsc": "C5278935",
       "native_anchor_mm": [
-        60.603,
-        38.1865
+        69.32,
+        33.32
       ],
       "smd_pad_center_mm": [
-        60.603,
-        38.1865
+        69.32,
+        33.32
       ],
       "smd_pad_bounds_mm": [
-        58.653,
-        35.9815,
-        62.553,
-        40.3915
+        67.115,
+        31.37,
+        71.525,
+        35.27
       ],
       "center_mm": [
-        60.603,
-        38.1865
+        69.32,
+        33.32
       ],
       "placement_method": "Placement-side SMD copper pad bounding center; excludes TH pads and all text/graphics/models",
-      "native_angle_deg": 90.0,
-      "rotation_deg": 90.0,
+      "native_angle_deg": 0.0,
+      "rotation_deg": 180.0,
       "side": "bottom",
       "prior_cpl": {
         "Designator": "L1",
@@ -3381,8 +3381,8 @@
         "Layer": "bottom"
       },
       "delta_from_prior_mm": [
-        0.5,
-        0.0
+        9.216999999999992,
+        4.866500000000002
       ],
       "new_part": false
     },
@@ -3393,26 +3393,26 @@
       "mpn": "PWCWAQ1608F-100KTT",
       "lcsc": "C436784",
       "native_anchor_mm": [
-        70.172,
-        41.22
+        64.45,
+        34.84
       ],
       "smd_pad_center_mm": [
-        70.172,
-        41.22
+        64.45,
+        34.84
       ],
       "smd_pad_bounds_mm": [
-        68.957,
-        40.755,
-        71.387,
-        41.685
+        63.235,
+        34.375,
+        65.665,
+        35.305
       ],
       "center_mm": [
-        70.172,
-        41.22
+        64.45,
+        34.84
       ],
       "placement_method": "Placement-side SMD copper pad bounding center; excludes TH pads and all text/graphics/models",
-      "native_angle_deg": 0.0,
-      "rotation_deg": 180.0,
+      "native_angle_deg": 180.0,
+      "rotation_deg": 0.0,
       "side": "bottom",
       "prior_cpl": {
         "Designator": "L2",
@@ -3424,8 +3424,8 @@
         "Layer": "bottom"
       },
       "delta_from_prior_mm": [
-        0.0,
-        0.0
+        -5.721999999999994,
+        6.3799999999999955
       ],
       "new_part": false
     },
@@ -3436,26 +3436,26 @@
       "mpn": "FRC0402F7504TS",
       "lcsc": "C3013187",
       "native_anchor_mm": [
-        65.934,
-        34.206
+        67.05,
+        41.169999
       ],
       "smd_pad_center_mm": [
-        65.934,
-        34.206
+        67.05,
+        41.169999
       ],
       "smd_pad_bounds_mm": [
-        65.614,
-        33.425999,
-        66.254,
-        34.986001
+        66.73,
+        40.389998,
+        67.37,
+        41.95
       ],
       "center_mm": [
-        65.934,
-        34.206
+        67.05,
+        41.169999
       ],
       "placement_method": "Placement-side SMD copper pad bounding center; excludes TH pads and all text/graphics/models",
-      "native_angle_deg": -90.0,
-      "rotation_deg": 270.0,
+      "native_angle_deg": 90.0,
+      "rotation_deg": 90.0,
       "side": "bottom",
       "prior_cpl": {
         "Designator": "R1",
@@ -3467,8 +3467,8 @@
         "Layer": "bottom"
       },
       "delta_from_prior_mm": [
-        0.0,
-        0.0
+        1.1159999999999997,
+        -6.963998999999994
       ],
       "new_part": false
     },
@@ -3479,22 +3479,22 @@
       "mpn": "CRCW04024M22FKED",
       "lcsc": "C2091474",
       "native_anchor_mm": [
-        64.847,
-        34.212001
+        68.05,
+        41.169999
       ],
       "smd_pad_center_mm": [
-        64.847,
-        34.212001
+        68.05,
+        41.169999
       ],
       "smd_pad_bounds_mm": [
-        64.527,
-        33.432,
-        65.167,
-        34.992002
+        67.73,
+        40.389998,
+        68.37,
+        41.95
       ],
       "center_mm": [
-        64.847,
-        34.212001
+        68.05,
+        41.169999
       ],
       "placement_method": "Placement-side SMD copper pad bounding center; excludes TH pads and all text/graphics/models",
       "native_angle_deg": -90.0,
@@ -3510,8 +3510,8 @@
         "Layer": "bottom"
       },
       "delta_from_prior_mm": [
-        0.0,
-        0.0
+        3.203000000000003,
+        -6.957997999999996
       ],
       "new_part": false
     },
@@ -3522,26 +3522,26 @@
       "mpn": "FRC0402F4754TS",
       "lcsc": "C2998153",
       "native_anchor_mm": [
-        68.354,
-        34.198
+        63.79,
+        40.91
       ],
       "smd_pad_center_mm": [
-        68.354,
-        34.198
+        63.79,
+        40.91
       ],
       "smd_pad_bounds_mm": [
-        68.034,
-        33.417999,
-        68.674,
-        34.978001
+        63.009999,
+        40.59,
+        64.570001,
+        41.23
       ],
       "center_mm": [
-        68.354,
-        34.198
+        63.79,
+        40.91
       ],
       "placement_method": "Placement-side SMD copper pad bounding center; excludes TH pads and all text/graphics/models",
-      "native_angle_deg": -90.0,
-      "rotation_deg": 270.0,
+      "native_angle_deg": 0.0,
+      "rotation_deg": 180.0,
       "side": "bottom",
       "prior_cpl": {
         "Designator": "R3",
@@ -3553,8 +3553,8 @@
         "Layer": "bottom"
       },
       "delta_from_prior_mm": [
-        0.0,
-        0.0
+        -4.564,
+        -6.711999999999996
       ],
       "new_part": false
     },
@@ -3565,22 +3565,22 @@
       "mpn": "RC0402FR-073M65L",
       "lcsc": "C477700",
       "native_anchor_mm": [
-        67.023,
-        34.213001
+        65.9,
+        40.9702
       ],
       "smd_pad_center_mm": [
-        67.023,
-        34.213001
+        65.9,
+        40.9702
       ],
       "smd_pad_bounds_mm": [
-        66.703,
-        33.433,
-        67.343,
-        34.993002
+        65.58,
+        40.190199,
+        66.22,
+        41.750201
       ],
       "center_mm": [
-        67.023,
-        34.213001
+        65.9,
+        40.9702
       ],
       "placement_method": "Placement-side SMD copper pad bounding center; excludes TH pads and all text/graphics/models",
       "native_angle_deg": 90.0,
@@ -3596,8 +3596,8 @@
         "Layer": "bottom"
       },
       "delta_from_prior_mm": [
-        0.0,
-        0.0
+        -1.1229999999999905,
+        -6.757199
       ],
       "new_part": false
     },
@@ -3608,26 +3608,26 @@
       "mpn": "GR0402F4M42TAG00",
       "lcsc": "C49654874",
       "native_anchor_mm": [
-        69.447,
-        34.198
+        63.809999,
+        39.88
       ],
       "smd_pad_center_mm": [
-        69.447,
-        34.198
+        63.809999,
+        39.88
       ],
       "smd_pad_bounds_mm": [
-        69.127,
-        33.417999,
-        69.767,
-        34.978001
+        63.029998,
+        39.56,
+        64.59,
+        40.2
       ],
       "center_mm": [
-        69.447,
-        34.198
+        63.809999,
+        39.88
       ],
       "placement_method": "Placement-side SMD copper pad bounding center; excludes TH pads and all text/graphics/models",
-      "native_angle_deg": 90.0,
-      "rotation_deg": 90.0,
+      "native_angle_deg": 180.0,
+      "rotation_deg": 0.0,
       "side": "bottom",
       "prior_cpl": {
         "Designator": "R5",
@@ -3639,8 +3639,8 @@
         "Layer": "bottom"
       },
       "delta_from_prior_mm": [
-        0.0,
-        0.0
+        -5.637001000000005,
+        -5.682000000000002
       ],
       "new_part": false
     },
@@ -3651,26 +3651,26 @@
       "mpn": "0402WGF8254TCE",
       "lcsc": "C423131",
       "native_anchor_mm": [
-        70.557,
-        34.194
+        63.8,
+        38.86
       ],
       "smd_pad_center_mm": [
-        70.557,
-        34.194
+        63.8,
+        38.86
       ],
       "smd_pad_bounds_mm": [
-        70.237,
-        33.413999,
-        70.877,
-        34.974001
+        63.019999,
+        38.54,
+        64.580001,
+        39.18
       ],
       "center_mm": [
-        70.557,
-        34.194
+        63.8,
+        38.86
       ],
       "placement_method": "Placement-side SMD copper pad bounding center; excludes TH pads and all text/graphics/models",
-      "native_angle_deg": -90.0,
-      "rotation_deg": 270.0,
+      "native_angle_deg": 0.0,
+      "rotation_deg": 180.0,
       "side": "bottom",
       "prior_cpl": {
         "Designator": "R6",
@@ -3682,8 +3682,8 @@
         "Layer": "bottom"
       },
       "delta_from_prior_mm": [
-        0.0,
-        0.0
+        -6.757000000000005,
+        -4.665999999999997
       ],
       "new_part": false
     },
@@ -3694,26 +3694,26 @@
       "mpn": "FRC0402F4754TS",
       "lcsc": "C2998153",
       "native_anchor_mm": [
-        71.67,
-        34.175
+        63.8,
+        37.87
       ],
       "smd_pad_center_mm": [
-        71.67,
-        34.175
+        63.8,
+        37.87
       ],
       "smd_pad_bounds_mm": [
-        71.35,
-        33.394999,
-        71.99,
-        34.955001
+        63.019999,
+        37.55,
+        64.580001,
+        38.19
       ],
       "center_mm": [
-        71.67,
-        34.175
+        63.8,
+        37.87
       ],
       "placement_method": "Placement-side SMD copper pad bounding center; excludes TH pads and all text/graphics/models",
-      "native_angle_deg": 90.0,
-      "rotation_deg": 90.0,
+      "native_angle_deg": 180.0,
+      "rotation_deg": 0.0,
       "side": "bottom",
       "prior_cpl": {
         "Designator": "R7",
@@ -3725,8 +3725,8 @@
         "Layer": "bottom"
       },
       "delta_from_prior_mm": [
-        0.0,
-        0.0
+        -7.8700000000000045,
+        -3.6950000000000003
       ],
       "new_part": false
     },
@@ -3737,26 +3737,26 @@
       "mpn": "RC0402FR-07100KL",
       "lcsc": "C60491",
       "native_anchor_mm": [
-        70.97,
-        36.276
+        63.8,
+        36.89
       ],
       "smd_pad_center_mm": [
-        70.97,
-        36.276
+        63.8,
+        36.89
       ],
       "smd_pad_bounds_mm": [
-        70.189999,
-        35.956,
-        71.750001,
-        36.596
+        63.019999,
+        36.57,
+        64.580001,
+        37.21
       ],
       "center_mm": [
-        70.97,
-        36.276
+        63.8,
+        36.89
       ],
       "placement_method": "Placement-side SMD copper pad bounding center; excludes TH pads and all text/graphics/models",
-      "native_angle_deg": 0.0,
-      "rotation_deg": 180.0,
+      "native_angle_deg": 180.0,
+      "rotation_deg": 0.0,
       "side": "bottom",
       "prior_cpl": {
         "Designator": "R8",
@@ -3768,8 +3768,8 @@
         "Layer": "bottom"
       },
       "delta_from_prior_mm": [
-        0.0,
-        0.0
+        -7.170000000000002,
+        -0.6139999999999972
       ],
       "new_part": false
     },
@@ -3780,22 +3780,22 @@
       "mpn": "RC0402FR-070RL",
       "lcsc": "C106231",
       "native_anchor_mm": [
-        64.666999,
-        62.062001
+        62.94,
+        62.2
       ],
       "smd_pad_center_mm": [
-        64.666999,
-        62.062001
+        62.94,
+        62.2
       ],
       "smd_pad_bounds_mm": [
-        64.346999,
-        61.282,
-        64.986999,
-        62.842002
+        62.62,
+        61.419999,
+        63.26,
+        62.980001
       ],
       "center_mm": [
-        64.666999,
-        62.062001
+        62.94,
+        62.2
       ],
       "placement_method": "Placement-side SMD copper pad bounding center; excludes TH pads and all text/graphics/models",
       "native_angle_deg": -90.0,
@@ -3811,8 +3811,8 @@
         "Layer": "top"
       },
       "delta_from_prior_mm": [
-        0.0,
-        0.0
+        -1.7269990000000064,
+        -0.13799900000000065
       ],
       "new_part": false
     },
@@ -3823,22 +3823,22 @@
       "mpn": "RC0402FR-0710KL",
       "lcsc": "C60490",
       "native_anchor_mm": [
-        61.198,
-        62.074001
+        61.76,
+        62.17
       ],
       "smd_pad_center_mm": [
-        61.198,
-        62.074001
+        61.76,
+        62.17
       ],
       "smd_pad_bounds_mm": [
-        60.878,
-        61.294,
-        61.518,
-        62.854002
+        61.44,
+        61.389999,
+        62.08,
+        62.950001
       ],
       "center_mm": [
-        61.198,
-        62.074001
+        61.76,
+        62.17
       ],
       "placement_method": "Placement-side SMD copper pad bounding center; excludes TH pads and all text/graphics/models",
       "native_angle_deg": -90.0,
@@ -3854,8 +3854,8 @@
         "Layer": "top"
       },
       "delta_from_prior_mm": [
-        0.0,
-        0.0
+        0.5619999999999976,
+        -0.09599899999999906
       ],
       "new_part": false
     },
@@ -3866,22 +3866,22 @@
       "mpn": "RC0402FR-074K7L",
       "lcsc": "C105871",
       "native_anchor_mm": [
-        74.648001,
-        79.004996
+        68.95,
+        42.19
       ],
       "smd_pad_center_mm": [
-        74.648001,
-        79.004996
+        68.95,
+        42.19
       ],
       "smd_pad_bounds_mm": [
-        73.868,
-        78.684996,
-        75.428002,
-        79.324996
+        68.169999,
+        41.87,
+        69.730001,
+        42.51
       ],
       "center_mm": [
-        74.648001,
-        79.004996
+        68.95,
+        42.19
       ],
       "placement_method": "Placement-side SMD copper pad bounding center; excludes TH pads and all text/graphics/models",
       "native_angle_deg": 180.0,
@@ -3897,8 +3897,8 @@
         "Layer": "top"
       },
       "delta_from_prior_mm": [
-        0.0,
-        0.0
+        -5.698000999999991,
+        36.81499600000001
       ],
       "new_part": false
     },
@@ -3909,26 +3909,26 @@
       "mpn": "RC0402FR-074K7L",
       "lcsc": "C105871",
       "native_anchor_mm": [
-        74.642,
-        77.899
+        66.7,
+        41.06
       ],
       "smd_pad_center_mm": [
-        74.642,
-        77.899
+        66.7,
+        41.06
       ],
       "smd_pad_bounds_mm": [
-        73.861999,
-        77.579,
-        75.422001,
-        78.219
+        66.38,
+        40.279999,
+        67.02,
+        41.840001
       ],
       "center_mm": [
-        74.642,
-        77.899
+        66.7,
+        41.06
       ],
       "placement_method": "Placement-side SMD copper pad bounding center; excludes TH pads and all text/graphics/models",
-      "native_angle_deg": 180.0,
-      "rotation_deg": 180.0,
+      "native_angle_deg": -90.0,
+      "rotation_deg": 270.0,
       "side": "top",
       "prior_cpl": {
         "Designator": "R12",
@@ -3940,8 +3940,8 @@
         "Layer": "top"
       },
       "delta_from_prior_mm": [
-        0.0,
-        0.0
+        -7.941999999999993,
+        36.839
       ],
       "new_part": false
     },
@@ -3952,26 +3952,26 @@
       "mpn": "RC0402FR-070RL",
       "lcsc": "C106231",
       "native_anchor_mm": [
-        67.552,
-        55.547
+        59.25,
+        53.39
       ],
       "smd_pad_center_mm": [
-        67.552,
-        55.547
+        59.25,
+        53.39
       ],
       "smd_pad_bounds_mm": [
-        66.771999,
-        55.227,
-        68.332001,
-        55.867
+        58.93,
+        52.609999,
+        59.57,
+        54.170001
       ],
       "center_mm": [
-        67.552,
-        55.547
+        59.25,
+        53.39
       ],
       "placement_method": "Placement-side SMD copper pad bounding center; excludes TH pads and all text/graphics/models",
-      "native_angle_deg": 0.0,
-      "rotation_deg": 0.0,
+      "native_angle_deg": -90.0,
+      "rotation_deg": 270.0,
       "side": "top",
       "prior_cpl": {
         "Designator": "R13",
@@ -3983,8 +3983,8 @@
         "Layer": "top"
       },
       "delta_from_prior_mm": [
-        0.0,
-        0.0
+        -8.302000000000007,
+        2.1569999999999965
       ],
       "new_part": false
     },
@@ -3995,26 +3995,26 @@
       "mpn": "RC0402FR-070RL",
       "lcsc": "C106231",
       "native_anchor_mm": [
-        67.550999,
-        54.408
+        58.01,
+        53.37
       ],
       "smd_pad_center_mm": [
-        67.550999,
-        54.408
+        58.01,
+        53.37
       ],
       "smd_pad_bounds_mm": [
-        66.770998,
-        54.088,
-        68.331,
-        54.728
+        57.69,
+        52.589999,
+        58.33,
+        54.150001
       ],
       "center_mm": [
-        67.550999,
-        54.408
+        58.01,
+        53.37
       ],
       "placement_method": "Placement-side SMD copper pad bounding center; excludes TH pads and all text/graphics/models",
-      "native_angle_deg": 0.0,
-      "rotation_deg": 0.0,
+      "native_angle_deg": -90.0,
+      "rotation_deg": 270.0,
       "side": "top",
       "prior_cpl": {
         "Designator": "R14",
@@ -4026,8 +4026,8 @@
         "Layer": "top"
       },
       "delta_from_prior_mm": [
-        0.0,
-        0.0
+        -9.540999000000006,
+        1.0380000000000038
       ],
       "new_part": false
     },
@@ -4038,26 +4038,26 @@
       "mpn": "RC0402FR-0733RL",
       "lcsc": "C138002",
       "native_anchor_mm": [
-        73.578,
-        51.71
+        74.54,
+        58.33
       ],
       "smd_pad_center_mm": [
-        73.578,
-        51.71
+        74.54,
+        58.33
       ],
       "smd_pad_bounds_mm": [
-        72.797999,
-        51.39,
-        74.358001,
-        52.03
+        74.22,
+        57.549999,
+        74.86,
+        59.110001
       ],
       "center_mm": [
-        73.578,
-        51.71
+        74.54,
+        58.33
       ],
       "placement_method": "Placement-side SMD copper pad bounding center; excludes TH pads and all text/graphics/models",
-      "native_angle_deg": 180.0,
-      "rotation_deg": 180.0,
+      "native_angle_deg": 90.0,
+      "rotation_deg": 90.0,
       "side": "top",
       "prior_cpl": {
         "Designator": "R15",
@@ -4069,8 +4069,8 @@
         "Layer": "top"
       },
       "delta_from_prior_mm": [
-        0.0,
-        0.0
+        0.9620000000000033,
+        -6.619999999999997
       ],
       "new_part": false
     },
@@ -4081,26 +4081,26 @@
       "mpn": "RC0402FR-0733RL",
       "lcsc": "C138002",
       "native_anchor_mm": [
-        73.566,
-        50.575
+        75.675,
+        58.318
       ],
       "smd_pad_center_mm": [
-        73.566,
-        50.575
+        75.675,
+        58.318
       ],
       "smd_pad_bounds_mm": [
-        72.785999,
-        50.255,
-        74.346001,
-        50.895
+        75.355,
+        57.537999,
+        75.995,
+        59.098001
       ],
       "center_mm": [
-        73.566,
-        50.575
+        75.675,
+        58.318
       ],
       "placement_method": "Placement-side SMD copper pad bounding center; excludes TH pads and all text/graphics/models",
-      "native_angle_deg": 180.0,
-      "rotation_deg": 180.0,
+      "native_angle_deg": 90.0,
+      "rotation_deg": 90.0,
       "side": "top",
       "prior_cpl": {
         "Designator": "R16",
@@ -4112,8 +4112,8 @@
         "Layer": "top"
       },
       "delta_from_prior_mm": [
-        0.0,
-        0.0
+        2.1089999999999947,
+        -7.742999999999995
       ],
       "new_part": false
     },
@@ -4124,22 +4124,22 @@
       "mpn": "RC0402FR-0710KL",
       "lcsc": "C60490",
       "native_anchor_mm": [
-        73.583,
-        44.545
+        73.58,
+        43.969999
       ],
       "smd_pad_center_mm": [
-        73.583,
-        44.545
+        73.58,
+        43.969999
       ],
       "smd_pad_bounds_mm": [
-        73.263,
-        43.764999,
-        73.903,
-        45.325001
+        73.26,
+        43.189998,
+        73.9,
+        44.75
       ],
       "center_mm": [
-        73.583,
-        44.545
+        73.58,
+        43.969999
       ],
       "placement_method": "Placement-side SMD copper pad bounding center; excludes TH pads and all text/graphics/models",
       "native_angle_deg": 90.0,
@@ -4155,8 +4155,8 @@
         "Layer": "top"
       },
       "delta_from_prior_mm": [
-        0.0,
-        0.0
+        -0.0030000000000001137,
+        0.5750010000000003
       ],
       "new_part": false
     },
@@ -4167,22 +4167,22 @@
       "mpn": "RC0402FR-071ML",
       "lcsc": "C138033",
       "native_anchor_mm": [
-        55.618,
-        83.313
+        56.679999,
+        80.65
       ],
       "smd_pad_center_mm": [
-        55.618,
-        83.313
+        56.679999,
+        80.65
       ],
       "smd_pad_bounds_mm": [
-        54.837999,
-        82.993,
-        56.398001,
-        83.633
+        55.899998,
+        80.33,
+        57.46,
+        80.97
       ],
       "center_mm": [
-        55.618,
-        83.313
+        56.679999,
+        80.65
       ],
       "placement_method": "Placement-side SMD copper pad bounding center; excludes TH pads and all text/graphics/models",
       "native_angle_deg": 0.0,
@@ -4198,8 +4198,8 @@
         "Layer": "top"
       },
       "delta_from_prior_mm": [
-        0.0,
-        0.0
+        1.0619990000000001,
+        2.6629999999999967
       ],
       "new_part": false
     },
@@ -4210,22 +4210,22 @@
       "mpn": "RC0402FR-071ML",
       "lcsc": "C138033",
       "native_anchor_mm": [
-        55.637,
-        82.209999
+        56.698999,
+        79.546999
       ],
       "smd_pad_center_mm": [
-        55.637,
-        82.209999
+        56.698999,
+        79.546999
       ],
       "smd_pad_bounds_mm": [
-        54.856999,
-        81.889999,
-        56.417001,
-        82.529999
+        55.918998,
+        79.226999,
+        57.479,
+        79.866999
       ],
       "center_mm": [
-        55.637,
-        82.209999
+        56.698999,
+        79.546999
       ],
       "placement_method": "Placement-side SMD copper pad bounding center; excludes TH pads and all text/graphics/models",
       "native_angle_deg": 180.0,
@@ -4241,8 +4241,8 @@
         "Layer": "top"
       },
       "delta_from_prior_mm": [
-        0.0,
-        0.0
+        1.0619990000000001,
+        2.6629999999999967
       ],
       "new_part": false
     },
@@ -4253,22 +4253,22 @@
       "mpn": "RC0402FR-071ML",
       "lcsc": "C138033",
       "native_anchor_mm": [
-        54.573,
-        66.188999
+        55.55,
+        66.23
       ],
       "smd_pad_center_mm": [
-        54.573,
-        66.188999
+        55.55,
+        66.23
       ],
       "smd_pad_bounds_mm": [
-        54.253,
-        65.408998,
-        54.893,
-        66.969
+        55.23,
+        65.449999,
+        55.87,
+        67.010001
       ],
       "center_mm": [
-        54.573,
-        66.188999
+        55.55,
+        66.23
       ],
       "placement_method": "Placement-side SMD copper pad bounding center; excludes TH pads and all text/graphics/models",
       "native_angle_deg": -90.0,
@@ -4284,8 +4284,8 @@
         "Layer": "top"
       },
       "delta_from_prior_mm": [
-        0.0,
-        0.0
+        0.9769999999999968,
+        -0.0410010000000085
       ],
       "new_part": false
     },
@@ -4296,22 +4296,22 @@
       "mpn": "RC0402FR-071ML",
       "lcsc": "C138033",
       "native_anchor_mm": [
-        55.692,
-        66.193999
+        54.54,
+        66.23
       ],
       "smd_pad_center_mm": [
-        55.692,
-        66.193999
+        54.54,
+        66.23
       ],
       "smd_pad_bounds_mm": [
-        55.372,
-        65.413998,
-        56.012,
-        66.974
+        54.22,
+        65.449999,
+        54.86,
+        67.010001
       ],
       "center_mm": [
-        55.692,
-        66.193999
+        54.54,
+        66.23
       ],
       "placement_method": "Placement-side SMD copper pad bounding center; excludes TH pads and all text/graphics/models",
       "native_angle_deg": 90.0,
@@ -4327,8 +4327,8 @@
         "Layer": "top"
       },
       "delta_from_prior_mm": [
-        0.0,
-        0.0
+        -1.152000000000001,
+        -0.03600099999999884
       ],
       "new_part": false
     },
@@ -4339,27 +4339,27 @@
       "mpn": "FRC0402F4754TS",
       "lcsc": "C2998153",
       "native_anchor_mm": [
-        57.4,
-        33.9
+        55.59,
+        46.96
       ],
       "smd_pad_center_mm": [
-        57.4,
-        33.9
+        55.59,
+        46.96
       ],
       "smd_pad_bounds_mm": [
-        56.62,
-        33.58,
-        58.18,
-        34.22
+        54.81,
+        46.64,
+        56.37,
+        47.28
       ],
       "center_mm": [
-        57.4,
-        33.9
+        55.59,
+        46.96
       ],
       "placement_method": "Placement-side SMD copper pad bounding center; excludes TH pads and all text/graphics/models",
-      "native_angle_deg": 180.0,
+      "native_angle_deg": 0.0,
       "rotation_deg": 0.0,
-      "side": "bottom",
+      "side": "top",
       "prior_cpl": null,
       "delta_from_prior_mm": null,
       "new_part": true
@@ -4371,27 +4371,27 @@
       "mpn": "FRC0402F4754TS",
       "lcsc": "C2998153",
       "native_anchor_mm": [
-        58.65,
-        34.9
+        57.49,
+        46.94
       ],
       "smd_pad_center_mm": [
-        58.65,
-        34.9
+        57.49,
+        46.94
       ],
       "smd_pad_bounds_mm": [
-        57.87,
-        34.58,
-        59.43,
-        35.22
+        56.71,
+        46.62,
+        58.27,
+        47.26
       ],
       "center_mm": [
-        58.65,
-        34.9
+        57.49,
+        46.94
       ],
       "placement_method": "Placement-side SMD copper pad bounding center; excludes TH pads and all text/graphics/models",
       "native_angle_deg": 0.0,
-      "rotation_deg": 180.0,
-      "side": "bottom",
+      "rotation_deg": 0.0,
+      "side": "top",
       "prior_cpl": null,
       "delta_from_prior_mm": null,
       "new_part": true
@@ -4403,27 +4403,27 @@
       "mpn": "0402WGF220JTCE",
       "lcsc": "C25092",
       "native_anchor_mm": [
-        61.2,
-        42.5
+        57.51,
+        51.44
       ],
       "smd_pad_center_mm": [
-        61.2,
-        42.5
+        57.51,
+        51.44
       ],
       "smd_pad_bounds_mm": [
-        60.88,
-        41.72,
-        61.52,
-        43.28
+        56.73,
+        51.12,
+        58.29,
+        51.76
       ],
       "center_mm": [
-        61.2,
-        42.5
+        57.51,
+        51.44
       ],
       "placement_method": "Placement-side SMD copper pad bounding center; excludes TH pads and all text/graphics/models",
-      "native_angle_deg": -90.0,
-      "rotation_deg": 270.0,
-      "side": "bottom",
+      "native_angle_deg": 180.0,
+      "rotation_deg": 180.0,
+      "side": "top",
       "prior_cpl": null,
       "delta_from_prior_mm": null,
       "new_part": true
@@ -4435,26 +4435,26 @@
       "mpn": "MCU0805MD3304BP500",
       "lcsc": "C4313228",
       "native_anchor_mm": [
-        71.9,
-        34.08
+        72.28,
+        40.83
       ],
       "smd_pad_center_mm": [
-        71.9,
-        34.08
+        72.28,
+        40.83
       ],
       "smd_pad_bounds_mm": [
-        71.2,
-        32.655,
-        72.6,
-        35.505
+        70.855,
+        40.13,
+        73.705,
+        41.53
       ],
       "center_mm": [
-        71.9,
-        34.08
+        72.28,
+        40.83
       ],
       "placement_method": "Placement-side SMD copper pad bounding center; excludes TH pads and all text/graphics/models",
-      "native_angle_deg": 90.0,
-      "rotation_deg": 90.0,
+      "native_angle_deg": 180.0,
+      "rotation_deg": 180.0,
       "side": "top",
       "prior_cpl": null,
       "delta_from_prior_mm": null,
@@ -4485,8 +4485,8 @@
         37.814999
       ],
       "placement_method": "Placement-side SMD copper pad bounding center; excludes TH pads and all text/graphics/models",
-      "native_angle_deg": 0.0,
-      "rotation_deg": 90.0,
+      "native_angle_deg": 180.0,
+      "rotation_deg": 270.0,
       "side": "bottom",
       "prior_cpl": {
         "Designator": "U1",
@@ -4553,22 +4553,22 @@
       "mpn": "MAX-M10S-00B",
       "lcsc": "C4153167",
       "native_anchor_mm": [
-        65.537,
-        48.414
+        66.23,
+        48.4
       ],
       "smd_pad_center_mm": [
-        65.537,
-        48.414
+        66.23,
+        48.4
       ],
       "smd_pad_bounds_mm": [
-        59.886999,
-        43.664001,
-        71.187001,
-        53.163999
+        60.579999,
+        43.650001,
+        71.880001,
+        53.149999
       ],
       "center_mm": [
-        65.537,
-        48.414
+        66.23,
+        48.4
       ],
       "placement_method": "Placement-side SMD copper pad bounding center; excludes TH pads and all text/graphics/models",
       "native_angle_deg": 180.0,
@@ -4584,8 +4584,8 @@
         "Layer": "top"
       },
       "delta_from_prior_mm": [
-        0.0,
-        0.0
+        0.6929999999999978,
+        0.014000000000002899
       ],
       "new_part": false
     },
@@ -4639,26 +4639,26 @@
       "mpn": "TMP117AIYBGR",
       "lcsc": "C2871893",
       "native_anchor_mm": [
-        73.148,
-        40.864
+        64.5,
+        41.43
       ],
       "smd_pad_center_mm": [
-        73.148,
-        40.864
+        64.5,
+        41.43
       ],
       "smd_pad_bounds_mm": [
-        72.833,
-        40.349,
-        73.463,
-        41.379
+        64.185,
+        40.915,
+        64.815,
+        41.945
       ],
       "center_mm": [
-        73.148,
-        40.864
+        64.5,
+        41.43
       ],
       "placement_method": "Placement-side SMD copper pad bounding center; excludes TH pads and all text/graphics/models",
-      "native_angle_deg": 0.0,
-      "rotation_deg": 0.0,
+      "native_angle_deg": 180.0,
+      "rotation_deg": 180.0,
       "side": "top",
       "prior_cpl": {
         "Designator": "U5",
@@ -4670,8 +4670,8 @@
         "Layer": "top"
       },
       "delta_from_prior_mm": [
-        0.0,
-        0.0
+        -8.647999999999996,
+        -0.5660000000000025
       ],
       "new_part": false
     },
@@ -4683,25 +4683,25 @@
       "lcsc": "C20482877",
       "native_anchor_mm": [
         74.25,
-        37.1
+        37.49
       ],
       "smd_pad_center_mm": [
         74.25,
-        37.1
+        37.49
       ],
       "smd_pad_bounds_mm": [
         73.025,
-        35.35,
+        35.74,
         75.475,
-        38.85
+        39.24
       ],
       "center_mm": [
         74.25,
-        37.1
+        37.49
       ],
       "placement_method": "Placement-side SMD copper pad bounding center; excludes TH pads and all text/graphics/models",
-      "native_angle_deg": 0.0,
-      "rotation_deg": 0.0,
+      "native_angle_deg": 180.0,
+      "rotation_deg": 180.0,
       "side": "top",
       "prior_cpl": {
         "Designator": "U6",
@@ -4714,7 +4714,7 @@
       },
       "delta_from_prior_mm": [
         5.152000000000001,
-        3.5060000000000002
+        3.1159999999999997
       ],
       "new_part": false
     },
@@ -4768,27 +4768,27 @@
       "mpn": "TLV8801DBVT",
       "lcsc": "C544879",
       "native_anchor_mm": [
-        55.65,
-        36.1
+        56.5725,
+        49.22
       ],
       "smd_pad_center_mm": [
-        55.65,
-        36.1
+        56.5725,
+        49.22
       ],
       "smd_pad_bounds_mm": [
-        53.85,
-        34.85,
-        57.45,
-        37.35
+        54.7725,
+        47.97,
+        58.3725,
+        50.47
       ],
       "center_mm": [
-        55.65,
-        36.1
+        56.5725,
+        49.22
       ],
       "placement_method": "Placement-side SMD copper pad bounding center; excludes TH pads and all text/graphics/models",
-      "native_angle_deg": 0.0,
-      "rotation_deg": 90.0,
-      "side": "bottom",
+      "native_angle_deg": 180.0,
+      "rotation_deg": 180.0,
+      "side": "top",
       "prior_cpl": null,
       "delta_from_prior_mm": null,
       "new_part": true
@@ -4900,13 +4900,13 @@
   ],
   "supplier_rotation_profile": {
     "baseline_provenance": "Historical equality reproduces the repository v1 production INPUT CPL. It is not evidence of verified JLC post-CAM placement or supplier-model rotation.",
-    "profile_path": "/Users/twarn/Repositories/ai-working/worktrees/Stratolink/hardware-v1.1-review/analysis/v1_1_release_20261012/jlc/supplier-rotation-profile.json",
-    "profile_sha256": "fadbcae4bb6bb6776a3fd9e3c1fd35073b85bbad71c441b43b1361ddf2aa00ea",
+    "profile_path": "/Users/twarn/Repositories/ai-working/worktrees/Stratolink/hardware-v1.1-review/analysis/v1_1_engineer_review_20261015/manufacturing/supplier-rotation-profile.json",
+    "profile_sha256": "c0651e2ddb05bac476b9d3fa501fc072327033e747e3b72805b8948914965d79",
     "overrides": [
       {
         "ref": "U1",
-        "base_rotation_deg": 180.0,
-        "override_rotation_deg": 90.0,
+        "base_rotation_deg": 0.0,
+        "override_rotation_deg": 270.0,
         "mpn": "BQ25570RGRR",
         "lcsc": "C506250",
         "side": "bottom",
@@ -4914,8 +4914,8 @@
           67.190998,
           37.814999
         ],
-        "evidence": "analysis/v1_1_release_20261012/jlc/probe-u1-90-crop.png; analysis/v1_1_release_20261012/power/placement-u1-u3-u4-review.md",
-        "reason": "Reimported CPL90 gives lower-right pin1 in north-up bottom view, matching numbered pads and TI package drawing.",
+        "evidence": "analysis/v1_1_engineer_review_20261015/manufacturing/rotation-review.md; analysis/v1_1_release_20261012/jlc/probe-u1-90-crop.png",
+        "reason": "Draft derived from the previously checked bottom-side90degree supplier angle plus the native180degree rotation. Current supplier preview is pending; not production approval.",
         "baseline_provenance": "Historical equality reproduces the repository v1 production INPUT CPL. It is not evidence of verified JLC post-CAM placement or supplier-model rotation."
       },
       {
@@ -4961,21 +4961,6 @@
         ],
         "evidence": "analysis/v1_1_release_20261012/jlc/probe-u7-0-crop.png; analysis/v1_1_release_20261012/identities/supplier-placement-review.md",
         "reason": "Reimported CPL0 gives lower-left body index in top view, matching native numbered lands and manufacturer package mapping.",
-        "baseline_provenance": "Historical equality reproduces the repository v1 production INPUT CPL. It is not evidence of verified JLC post-CAM placement or supplier-model rotation."
-      },
-      {
-        "ref": "U8",
-        "base_rotation_deg": 180.0,
-        "override_rotation_deg": 90.0,
-        "mpn": "TLV8801DBVT",
-        "lcsc": "C544879",
-        "side": "bottom",
-        "center_mm": [
-          55.65,
-          36.1
-        ],
-        "evidence": "analysis/v1_1_release_20261012/jlc/probe-u8-90-crop.png; analysis/v1_1_release_20261012/identities/supplier-placement-review.md",
-        "reason": "Reimported CPL90 gives three leads right, two left, pin1 lower-right in bottom view, matching native SOT-23-5 lands.",
         "baseline_provenance": "Historical equality reproduces the repository v1 production INPUT CPL. It is not evidence of verified JLC post-CAM placement or supplier-model rotation."
       }
     ],

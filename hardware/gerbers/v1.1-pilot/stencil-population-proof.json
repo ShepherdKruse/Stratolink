@@ -1,6 +1,6 @@
 {
-  "source_pcb_sha256": "88f82c85d2d47b4aea2e7d7d2827c4a92c339788cc0d9c880dd6342ee0440c0a",
-  "stencil_pcb_sha256": "adae9d2725fef60a772c360fe142e07dd673e3245ab43ee865a11c8315276458",
+  "source_pcb_sha256": "25b201eb09c6746a22d1c3be42f7d4023319dd6fa5e3e587dc8cf42d97bb4d7f",
+  "stencil_pcb_sha256": "0656570a3af1fe8a446271a6c216083fd690b2fcf1b00fa57091f81ae5b49e7c",
   "omitted_refs": [
     "U6"
   ],
@@ -137,12 +137,12 @@
   "intent": "Export-only paste-layer removal; complete native design remains unchanged",
   "paste_files": {
     "stratolink-F_Paste.gtp": {
-      "full_design_sha256": "02f11f924b34f37e033fb9899d5f2fff59270e4f48a5bc9d263894b779cfba82",
-      "pilot_sha256": "3bee76262163826b314427da97283bf9572a232fe00e9065f0aba7197442d361"
+      "full_design_sha256": "b28c3a011f5cfe955121f1814cfd7324a7e3b10b936399fc59dd0102a54c682f",
+      "pilot_sha256": "f48e4c6c30268e4f5b74ed69b8631edadbad77a596bdb7d5a0263f1086c48cb0"
     },
     "stratolink-B_Paste.gbp": {
-      "full_design_sha256": "928d291cb79adc94d9483df9a43099412bdacba54f35ed16660af191fb23c632",
-      "pilot_sha256": "8368d5f5237bd705b05781213540511517effd4f3312591d20fbb5fa837ba84a"
+      "full_design_sha256": "313902ee9508810b7b35b3358904d3642f7deceabc5dc0bf7e4e675eefe5a51c",
+      "pilot_sha256": "3b7b353d8d4f1db0a213e9cacf81464b9bc1bcc7a0f2d018fd0e2a9f29b3baf3"
     }
   }
 }

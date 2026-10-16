@@ -1,4 +1,3 @@
-Warning: schematic has annotation errors, please use the schematic editor to fix them
 Fontconfig warning: "/opt/homebrew/etc/fonts/conf.d/48-guessfamily.conf", line 19: invalid attribute 'xsi:nil'
 Fontconfig warning: "/opt/homebrew/etc/fonts/conf.d/48-guessfamily.conf", line 20: invalid constant used : 
 Fontconfig warning: "/opt/homebrew/etc/fonts/conf.d/48-guessfamily.conf", line 23: invalid constant used : monospace

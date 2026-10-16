@@ -2,7 +2,7 @@
 <export version="E">
   <design>
     <source>/Users/twarn/Repositories/ai-working/worktrees/Stratolink/hardware-v1.1-review/hardware/pcb/stratolink.kicad_sch</source>
-    <date>2026-10-14T15:52:20</date>
+    <date>2026-10-15T22:13:50</date>
     <tool>Eeschema 10.0.0</tool>
     <sheet number="1" name="/" tstamps="/">
       <title_block>
@@ -939,6 +939,7 @@
       <property name="Sheetname" value=""/>
       <property name="Sheetfile" value="stratolink.kicad_sch"/>
       <property name="exclude_from_bom"/>
+      <property name="exclude_from_pos_files"/>
       <property name="ki_keywords" value="male header JST PH"/>
       <property name="ki_fp_filters" value="*Header*JST*PH*"/>
       <sheetpath names="/" tstamps="/"/>
@@ -964,6 +965,7 @@
       <property name="Sheetname" value=""/>
       <property name="Sheetfile" value="stratolink.kicad_sch"/>
       <property name="exclude_from_bom"/>
+      <property name="exclude_from_pos_files"/>
       <property name="ki_keywords" value="male header JST PH"/>
       <property name="ki_fp_filters" value="*Header*JST*PH*"/>
       <sheetpath names="/" tstamps="/"/>
@@ -1051,6 +1053,7 @@
       <property name="Sheetname" value=""/>
       <property name="Sheetfile" value="stratolink.kicad_sch"/>
       <property name="exclude_from_bom"/>
+      <property name="exclude_from_pos_files"/>
       <property name="ki_keywords" value="Cortex Debug Connector ARM SWD JTAG"/>
       <property name="ki_fp_filters" value="*TC2030*"/>
       <sheetpath names="/" tstamps="/"/>
