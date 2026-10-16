@@ -1,0 +1,266 @@
+24
+SMT
+Attach
+CLOSED
+Expired
+Completed
+Used
+24-hour PCB production. Fast Delivery to United States.
+ Coupons
+ Download APP
+USD 
+JLCPCB
+Download JLCONE
+1
+Order Now
+My Account 
+Order
+Projects
+Parts
+Payments
+Add-On
+Setting
+Messages
+16
+Global Parts Sourcing
+Global SourcingPart Request History
+Cart (2)
+Digikey
+Mouser
+Verical
+Arrow
+Future
+Avnet
+RS Components
+Element
+Onlinecomponents
+Rutronik
+TME
+CoreStaff
+TTI
+Chip1stop
+Sager
+Element14_UK
+Powell
+Texas Instruments
+447AS733-1
+GLENAIR
+Datasheet
+CONNECTOR BACKSHELL
+Distributor	Distributor Part #	ECCN	MOQ	Pkg	Stock	
+Est. Attrition 
+	Min assembly Qty	Lead Time 	Unit Price	
+Digikey
+	
+3937-447AS733-1-ND
+	
+EAR99
+	
+1
+	
+Bulk
+	
+32
+	
+	
+	
+8-14 business days
+	
+1+ $3696.4586
+10+ $3622.5254 
+	
+										
+										
+Add
+Ext. Price:$36225.25
+AS7331 EVALKIT 0V2
+AMS OSRAM AG
+Datasheet
+EVAL BOARD FOR AS7331
+Distributor	Distributor Part #	ECCN	MOQ	Pkg	Stock	
+Est. Attrition 
+	Min assembly Qty	Lead Time 	Unit Price	
+Digikey
+	
+4991-AS7331EVALKIT0V2-ND
+	
+EAR99
+	
+1
+	
+Box
+	
+3
+	
+	
+	
+8-14 business days
+	
+1+ $413.6940
+	
+										
+										
+Add
+Ext. Price:$4136.94
+AS7331-EVK
+AMS OSRAM
+Datasheet
+ams OSRAM AS7331评估套件 评估套件, 紫外线（UV）传感器, AS7331芯片, 用于AS7331
+Distributor	Distributor Part #	ECCN	MOQ	Pkg	Stock	
+Est. Attrition 
+	Min assembly Qty	Lead Time 	Unit Price	
+RS Components
+	
+AS7331-EVK
+	
+EAR99
+	
+1
+	
+EA
+	
+2
+	
+	
+	
+8-16 business days
+	
+1+ $481.9128
+	
+
+Mouser
+	
+985-AS7331-EVK
+	
+EAR99
+	
+1
+	
+	
+1
+	
+	
+	
+10-20 business days
+	
+1+ $485.3665
+	
+										
+										
+Add
+Ext. Price:$4819.13
+
+										
+Add
+Ext. Price:$4853.66
+447AS733-1
+GLENAIR
+Datasheet
+CONNECTOR BACKSHELL
+Distributor	Distributor Part #	ECCN	MOQ	Pkg	Stock	
+Est. Attrition 
+	Min assembly Qty	Lead Time 	Unit Price	
+Digikey
+	
+3937-447AS733-1-ND
+	
+EAR99
+	
+1
+	
+Bulk
+	
+32
+	
+	
+	
+8-14 business days
+	
+1+ $3696.4586
+10+ $3622.5254 
+	
+										
+										
+Add
+Ext. Price:$36225.25
+AS7331 EVALKIT 0V2
+AMS OSRAM AG
+Datasheet
+EVAL BOARD FOR AS7331
+Distributor	Distributor Part #	ECCN	MOQ	Pkg	Stock	
+Est. Attrition 
+	Min assembly Qty	Lead Time 	Unit Price	
+Digikey
+	
+4991-AS7331EVALKIT0V2-ND
+	
+EAR99
+	
+1
+	
+Box
+	
+3
+	
+	
+	
+8-14 business days
+	
+1+ $413.6940
+	
+										
+										
+Add
+Ext. Price:$4136.94
+AS7331-EVK
+AMS OSRAM
+Datasheet
+ams OSRAM AS7331评估套件 评估套件, 紫外线（UV）传感器, AS7331芯片, 用于AS7331
+Distributor	Distributor Part #	ECCN	MOQ	Pkg	Stock	
+Est. Attrition 
+	Min assembly Qty	Lead Time 	Unit Price	
+RS Components
+	
+AS7331-EVK
+	
+EAR99
+	
+1
+	
+EA
+	
+2
+	
+	
+	
+8-16 business days
+	
+1+ $481.9128
+	
+
+Mouser
+	
+985-AS7331-EVK
+	
+EAR99
+	
+1
+	
+	
+1
+	
+	
+	
+10-20 business days
+	
+1+ $485.3665
+	
+										
+										
+Add
+Ext. Price:$4819.13
+
+										
+Add
+Ext. Price:$4853.66
+ Welcome back, may I help you? Chat Now

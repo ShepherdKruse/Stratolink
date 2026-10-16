@@ -1,0 +1,19 @@
+{
+  "reviewed_on": "2026-10-16",
+  "scope": "Read-only AS7331 external procurement and assembly readiness; no sourcing request or purchase submitted.",
+  "reviewed_board_sha256": "25b201eb09c6746a22d1c3be42f7d4023319dd6fa5e3e587dc8cf42d97bb4d7f",
+  "files": {
+    "README.md": "c456c842107396b356137709966faf52f9e0a3a02592b60a536e16e1f61955c7",
+    "ams-as7331-ordering.txt": "2111449654df959c75e33132b753fe0020131e9a7e77373f1a03701eb21cfbdc",
+    "assembly-readiness.md": "e9ef8982be6193af2c0f9f388d2b91352bf277dcaefcece779a5fc2dc1535c74",
+    "digikey-aqfm.txt": "7891aa8d514a93660db390b05bceab85bc0be67de728700a72fd9fe1cfa2c030",
+    "digikey-aqft.txt": "f1eed2e0e85e3b0cfb82fcb7d31bac5d3135a5fd4e292970086cc3f4fbc09e2d",
+    "jlc-consignment-guide.txt": "bb066be3a610b9e72125c67c1b19657c01929eea750d012e2c02f828f1af62df",
+    "jlc-consignment-terms.txt": "d76cbe4b63d859eb0a39b9d0820b6a793fbf6ae188d42458c8031be13c9f73f9",
+    "jlc-global-AS7331-AQFM.txt": "e5807db474dd7e1fd68ff6ba61866ae8e90a7fbba5991868fa0ad2119f471a83",
+    "jlc-global-AS7331-AQFT.txt": "e5807db474dd7e1fd68ff6ba61866ae8e90a7fbba5991868fa0ad2119f471a83",
+    "jlc-global-AS7331.txt": "978049b6979dc632264d17293066a3583e4531605e668b7f5e87da1c3fab1ee5",
+    "jlc-global-guide.txt": "b26256fafc164acc3338f901c7d426377cbd9ab52d686cca39a10f6e0d79f162",
+    "jlc-inquiry-draft.md": "2f373545c5ee618421fc93c7921c4ae630053ec6bcb382b8ba13396d51ff8652"
+  }
+}

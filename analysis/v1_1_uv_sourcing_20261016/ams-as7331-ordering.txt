@@ -1,0 +1,158 @@
+Products
+Applications
+Innovation
+Newsroom
+Careers
+Support & Services
+About us
+PRODUCTS
+SENSOR SOLUTIONS
+AMBIENT LIGHT, COLOR, SPECTRAL & PROXIMITY SENSORS
+AMS AS7331 SPECTRAL UV SENSOR
+Explore our product portfolio
+Select product
+ams AS7331 Spectral UV Sensor
+ 
+Description
+The AS7331 is a low-power, low noise integrated UV sensor. The three separated UVA, UVB and UVC channels convert optical radiation signals via UV optimized photodiodes to a digital result and realize a continuous or triggered measurement. The irradiance responsivity can be adjusted via Gain, conversion time and internal clock frequency to effect sensitivity, full scale range and LSB. The by the AS7331 detected amount of radiation in the set Gain and conversion time configuration will be provided as digital counts by the AS7331. The AS7331 offers a range of 12 Gain steps by a factor of two for each step. The conversion time is internally controlled over a wide range of 15 steps by a factor of two for each step. With the input pin (SYN), the conversion time can be externally controlled to adapt the measurement to the given environment and time base.
+With its irradiance responsivity factor and conversion time, the AS7331 supports an overall huge dynamic range up to 3.43E+10 (resolution multiplied by gain range). It achieves an accuracy of up to 24-bit signal resolution (internal via I²C and shifter 16-bit), with an irradiance responsivity per count down to 2.38 nW/cm² at 64 ms integration time. Via an integrated divider, the 16-bit I²C output can be adjusted to the significant bits of interest.
+Datasheet
+Select & order
+Contact us
+Support
+Replacement Products
+ams TSL2585 light sensor with UVA detection
+TSL2585 is a mini size ambient light sensor with UVA and light flicker detection, comes in a very low-profile and small footprint L2.0mm x W1.0mm x H0.35mm 6-pin OLGA package, perfectly fits wearable and mobile phone applications which are usually very space and height constrained.The high sensitivity enables the device to work behind a low transmissivity covering glass providing an accurate ALS detection. In addition, TSL2585 has a special edge-located photodiode placement which allows for a narrow bezel design down to 0.4mm width when the device is placed very close to the product edge. Fulfilling requirements of today's industrial design of designing bezel-less products for a good looking appearance.
+Details and Datasheet
+ams TCS3448 Spectral Color Sensor
+The TCS3448 is a 14-channel highly versatile, multi-purpose spectral light sensor. It is optimized to sense spectral components of ambient light in the visible range. Such spectral information is used for camera enhancement (CCT, AWB, exposure time). The spectral response is defined by individual channels covering approximately 380 nm to 1000 nm with 11 channels centered in the visible spectrum (VIS), plus one near-infrared (NIR) and a clear channel. Applications can be assisted to allow classification of ambient light and an integrated flicker detection channel that can automatically flag ambient light flicker at 50/60 Hz as well as buffer data for externally calculating other flicker frequencies. TCS3448 integrates high-precision optical interference filters directly deposited on photodiodes which are embedded in CMOS silicon. A built-in aperture controls the light entering the sensor array to increase accuracy. A programmable digital GPIO and LED driver enable light source and trigger/sync control. Device control and spectral data access is implemented through a serial I²C 1.2 V/1.8 V interface. The device is available in an ultra-low profile package with dimensions of 3.1 mm x 2 mm x 1 mm.
+Details and Datasheet
+Details
+Features
+Interference filter technology
+3 channel UVA/B/C sensing
+High dynamic range, adjustable to the application conditions
+Class leading sensitivity
+Broad conversion range
+Extended temperature range
+Benefits
+No filter aging or drifts over lifetime and temperature
+Separated UVA/B/C radiation detection incl. daylight (VIS+NIR) blocking
+Sensor settings adjustable from low to bright radiation conditions
+Fast or high accurate radiation and fluorescence detection possible
+Usability in harsh environments
+Parameters
+Function
+spectral sensing
+Supply voltage
+3.3 V
+min.
+2.7 V
+max.
+3.6 V
+Interface
+input
+I²C slave (400kHz)
+output
+I²C slave (400kHz)
+Operating ambient temperature
+min.
+-40 °C
+max.
+85 °C
+Integrated diffuser
+No
+Package
+OLGA
+Package dimension
+l
+3.65 mm
+w
+2.6 mm
+h
+1.09 mm
+Input/Output Voltage
+VDD
+Application fields
+Industrial
+UV-C disinfection & treatment
+Robotics
+Home & building automation
+Material processing
+Lighting
+Agriculture & horticulture
+Ordering information
+Product Type	Description	Ordering code
+AS7331-AQFM	OLGA16 Tape & Reel 1000 pcs/reel	Q65114A3064	
+Pre-production
+Buy now
+
+AS7331-AQFT	OLGA16 Tape & Reel 5000 pcs/ree	Q65114A3065	
+Pre-production
+Request product
+Downloads
+Save All Files
+31 files · approx. 227 MB · the download may take longer
+Datasheets
+AS7331 Spectral UVA/B/C Sensor · Datasheet · PDF · en_US
+AS7331 Spectral UVA/B/C Sensor
+Datasheet
+EN
+DE
+CN
+JP
+Technical documents
+Environmental documents
+Images
+Software
+Related boards, kits & accessories
+ams AS7331_EVM_SE Evaluation kit
+The AS7331 Evluation Kit enables initial sensor measurements with the AS7331 spectral UV-sensor. The AS7331 EVK hardware is split in two parts, the sensorboard with an I2C interface and a communication board with USB output where the sensorboard is connected to. Additional to this the EVK provides a comfortable GUI which enables the access to all sensor settings. Furthermore measurements can be recorded and exported via csv file for further analysises. Also a source development kit (SDK) is included in the EVK. This SDK provides prepared libraries and sample codes to support comfortable firmware design-ins.
+Details and Datasheet
+Product selector
+Find the right product.
+Product selector
+More ambient light, color,  spectral & proximity sensors
+
+Industry's broadest portfolio of high-performance and high-sensitivity digital discrete and integrated module optical sensors including ambient light sensors, RGB and XYZ color sensors, and spectral sensors.
+
+Explore more ambient light, color,  spectral & proximity sensors
+Join our Newsletter
+Subscribe
+
+ams-OSRAM AG
+Tobelbader Straße 30
+8141 Premstaetten
+Austria
+
+Phone: +43 3136 500-0
+ 
+
+About ams OSRAM
+
+Newsroom
+Investor relations
+Sustainability
+Locations & distribution
+Careers
+Accessibility
+
+Support
+
+Product Selector
+Download center
+Tools
+Customer queries
+Technical support
+Partner network
+Whistleblowing
+
+© 2026 ams-OSRAM AG. All rights reserved.
+
+Privacy policy
+Terms of use
+Terms of trade
+Imprint
+Cookie policy
+AI Policy
+粤ICP备10066670号

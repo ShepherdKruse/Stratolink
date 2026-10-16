@@ -1,0 +1,291 @@
+		
+Upload a List
+Login or
+REGISTER
+0 item(s)
+ATTENTION: Due to high order volume, orders may require an additional business day to process.
+Products
+ 
+Manufacturers
+ 
+Resources
+ 
+Request a Quote
+Tariff Resource Updates
+Product Index
+Sensors, Transducers
+Optical Sensors
+Ambient Light, IR, UV Sensors
+
+ams OSRAM AG AS7331-AQFM OLGA16 LF T&R
+
+Dark Mode
+Share
+Image shown is a representation only. Exact specifications should be obtained from the product data sheet.
+AS7331-AQFM OLGA16 LF T&R
+
+
+DigiKey Part Number
+	
+4991-AS7331_MOLGA16LFT&RDPTR-ND - Tape & Reel (TR)
+4991-AS7331_MOLGA16LFT&RDPCT-ND - Cut Tape (CT)
+4991-AS7331_MOLGA16LFT&RDPDKR-ND - Digi-Reel®
+
+
+Manufacturer
+	
+ams OSRAM AG
+
+
+Manufacturer Product Number
+	
+AS7331-AQFM OLGA16 LF T&R
+
+
+Description
+	
+SENSOR OPT 260-360NM UV 16 TFLGA
+
+
+Manufacturer Standard Lead Time
+	
+48 Weeks
+
+
+Customer Reference
+	
+
+
+Detailed Description
+	
+Optical Sensor Ultraviolet (UV) 260nm ~ 360nm I2C 16-TFLGA Module
+
+
+Datasheet
+	 Datasheet
+Product Attributes
+Filter Similar Products
+Show Empty Attributes
+Category
+Sensors, Transducers
+Optical Sensors
+Ambient Light, IR, UV Sensors
+Output Type
+I2C
+Manufacturer
+ams OSRAM AG
+Voltage - Supply
+2.7V ~ 3.6V
+Packaging
+Tape & Reel (TR)
+Cut Tape (CT)
+Digi-Reel®
+Operating Temperature
+-40°C ~ 105°C
+Part Status
+Active
+Mounting Type
+Surface Mount
+Type
+Ultraviolet (UV)
+Package / Case
+16-TFLGA Module
+Wavelength
+260nm ~ 360nm
+Supplier Device Package
+16-OLGA (2.6x3.6)
+Report Product Information Error
+Documents & Media
+Datasheets
+AS7331~
+PCN Design/Specification
+Substrate supplier change 30/JUN/2025
+PCN Assembly/Origin
+Substrate supplier change at Assembly partners 28/FEB/2025
+Environmental & Export Classifications
+RoHS Status
+ROHS3 Compliant
+ECCN
+EAR99
+Moisture Sensitivity Level (MSL)
+3 (168 Hours)
+HTSUS
+8542.39.0070
+REACH Status
+REACH Unaffected
+Product Questions and Answers
+Additional Resources
+Part Number Alias
+Q65114A3064
+961-AS7331_MOLGA16LFT&RDPTR-ND
+514120005
+4991-AS7331_MOLGA16LFT&RDPDKR
+961-AS7331_MOLGA16LFT&RDPDKR
+4991-AS7331_MOLGA16LFT&RDPTR
+4991-AS7331-AQFMOLGA16LFT&RTR-ND
+4991-AS7331-AQFMOLGA16LFT&RTR
+961-AS7331_MOLGA16LFT&RDPTR
+AS7331_M OLGA16 LF T&RDP
+4991-AS7331_MOLGA16LFT&RDPCT
+961-AS7331_MOLGA16LFT&RDPDKR-ND
+961-AS7331_MOLGA16LFT&RDPCT-ND
+AS7331-AQFM
+961-AS7331_MOLGA16LFT&RDPCT
+Manufacturer Standard Package
+1,000
+In-Stock: 0
+1,000 expected in stock on 09-Nov-2026
+Request Stock Notification
+QUANTITY
+Add to Cart
+Add to List
+All prices are in USD
+Cut Tape (CT) & Digi-Reel®
+QUANTITY
+UNIT PRICE	EXT PRICE
+
+1
+$9.16000	$9.16
+
+5
+$8.27800	$41.39
+
+10
+$7.95000	$79.50
+
+25
+$7.55840	$188.96
+
+50
+$7.29080	$364.54
+
+100
+$7.04560	$704.56
+
+500
+$6.58052	$3,290.26
+
+* All Digi-Reel orders will add a $7.00 reeling fee.
+Tape & Reel (TR)
+QUANTITY
+UNIT PRICE	EXT PRICE
+
+1,000
+$6.36742	$6,367.42
+
+Manufacturers Standard Package
+You May Also Be Interested InSee All
+10 Items
+
+23517
+
+QWIIC UV SENSOR AS7331
+
+SparkFun Electronics
+
+$27.50000
+Details
+
+GUVA-S12SD
+
+SENSOR PHOTODIODE 2SMD
+
+Genicom Co., Ltd.
+
+$6.59000
+Details
+
+1918
+
+ANALOG UV SENSOR BREAKOUT
+
+Adafruit Industries LLC
+
+$6.50000
+Details
+
+AS7331_T OLGA16 LF T&RDP
+
+SENSOR OPT 260-360NM UV 16 TFLGA
+
+ams OSRAM AG
+
+$9.16000
+Details
+
+AS7331 EVALKIT 0V2
+
+EVAL BOARD FOR AS7331
+
+ams OSRAM AG
+
+$321.07000
+Details
+
+AS7341-DLGT
+
+SENSOR OPT AMBIENT 8 TFLGA
+
+ams OSRAM AG
+
+$8.42000
+Details
+
+LTR-329ALS-01
+
+SENSOR OPT AMBIENT 4 VDFN
+
+Lite-On Inc.
+
+$0.57000
+Details
+
+AS7341-DLGM
+
+COLOR SENSOR I2C 16-B 8-TFLGA
+
+ams OSRAM AG
+
+$8.02000
+Details
+
+6476
+
+ADAFRUIT AS7331 UV / UVA / UVB /
+
+Adafruit Industries LLC
+
+$22.50000
+Details
+
+SEN-23220
+
+QWIIC SPECTRAL SENSOR AS7343
+
+SparkFun Electronics
+
+$21.95000
+Details
+ Need Help?  Feedback
+Get the latest tech insights
+I agree to receive marketing emails from DigiKey. I understand that I can withdraw consent at any time. Please review our Privacy Notice.
+SUBSCRIBE
+    
+ 
+INFORMATION
+About DigiKey
+Careers
+Newsroom
+Sell on DigiKey.com
+Site map
+Tariff information
+CONTACT AND SUPPORT
+Contact us
+Help and support
+Order status
+Returns and order issues
+Shipping rates/options
+Terms & Conditions Privacy Notice Trade Compliance Accessibility Statement Cookie Settings Do Not Sell / Do Not Share My Personal Information
+Local Support: 701 Brooks Avenue South, Thief River Falls, MN 56701 USA
+Copyright © 1995-2026, DigiKey.
+All Rights Reserved.

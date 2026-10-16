@@ -1,0 +1,155 @@
+24
+SMT
+24-hour PCB production. Fast Delivery to United States.
+ Coupons
+ Download APP
+USD 
+JLCPCB
+Products
+Capabilities
+Support 
+About Us 
+1
+Order Now
+My Account
+Help Center
+Help Center
+PCBA Parts Sourcing
+Consignment Parts Terms & Conditions
+Consignment Parts Terms & Conditions
+
+ Last updated on Sep 08, 2026
+
+1. For same parts, when placing PCBA orders, consign parts can only be used together with global sourcing parts, instead of JLCPCB parts.
+
+For same JLCPCB part number, parts pre-ordered from Global Sourcing can only be chosen together with the parts consigned by the customer when making a PCBA order.
+
+Parts pre-ordered from JLCPCB can only be used together with JLCPCB's publicly existing stock and cannot be used together with global sourcing parts or consignment parts.
+
+2. Loose components can be accepted; however, an additional handling fee will apply. Please note that damaged components may pose soldering or assembly risks. If the customer still requests us to receive and use such components, JLCPCB will not accept quality complaints or assume responsibility for any issues caused by the condition of the components.
+
+3. Each item should have an additional quantity of components for attrition or minimum assembly requirement during assembly. JLCPCB cannot guarantee all of your order will be built if there is no sufficient quantity.
+
+4. Batteries, ultracapacitors, materials from ECCN catalogue and non-machinable materials will not be processed and will be returned to customers or discarded by default.
+
+5. Materials must be within their expiration dates throughout time of manufacturing.
+
+6. JLCPCB is not responsible for any loss and damage of components during the shipment.
+
+7. Components shall be returned to the sending address as they are not claimed for over 7days. Only SF is available in returning them and the receiver shall pay the shipment.
+
+8. There is no inventory cost for consigned parts, but if you need to pick up those consigned parts. Freight and customs clearance issues need to be handled by customers. At the same time, if same components exists on global sourcing part , they need to be picked up together.
+
+9. Since the consigned components come from customers and we are only responsible for the assembly service, the cost of consigned components themselves will not be shown in invoices. Only the cost of assembly service for these components will be shown in the invoices.
+
+10. Consigned components will not be tested regarding quality or function before or after PCBA production. JLCPCB is not responsible for any inevitable PCBA quality issues due to the quality problems of consigned components.
+
+11. JLCPCB will return the parts that could't pass checking after shipping to us if requested. We suggest transportation insurance for important parts whatever returning or consign part to us . JLCPCB is not responsible for the parcel lost or damage during returning and consigning.
+
+12. Since there is no purchase record with JLCPCB, if the actual component quantity is inconsistent with the ordered as customer applied for , JLCPCB will directly stock according to the actual quantity received. Customer can check parts manger to check the inventory changes record through jlcpcb.com.
+
+13. Unassembled consigned parts cannot be shipped with PCBs regarding customs clearance issue, including accessories, like washer, nut, screw, etc. according to Custom regulation.
+
+Additional Charges
+
+1. How do we charge for separated components/loose and bulk compoments?
+
+
+Separate Components/Bulk Components Refer To:
+
+1.Parts that are large and difficult to process.
+
+2.Parts that are not on tape/reel and may be individual.
+
+These components cannot be directly loaded onto the Pick and Place (P&P) machines for assembly and will require manual handling before processing.
+
+Separate Components Fee:
+
+Standard Fee: $0.142 per piece.
+
+Manual Service Fee:
+
+Components with 5 pins or fewer: $0.017 per pin, multiplied by the number of pins.
+
+Components with more than 5 pins: Maximum $0.078 per component.
+
+With Extra Accessories (e.g., washer and nut): $0.078 per piece, if assembly as a combination is required.
+
+Please note that these additional fees will apply to orders involving such components.
+
+2. About baking compoments
+
+To help avoid possible deformation and false soldering, for instance, moisture-sensitive LEDs, Modules ect. we will suggest customer to bake the parts around 48hours after parts arrival on our warehouse.
+
+Baking fee: usd$8 for 48hours,  there will be an additional charge of usd$0.017/pcs if quantity between 500pcs and 20000pcs.
+
+3. About additional charge for oversea consigned parts
+
+The service cost will be 70USD/50 items service fee+ 15USD handling fee.  For example, 85 USD for 1-50 part numbers. 155 USD for 51-100 part numbers.
+
+By the way, all taxes and duties should be borne by the customer in Customs clearance for consigned component.
+
+Was this article helpful?
+
+Yes
+No
+Online Chat >
+Chat with our live agent for fast reply.
+Mon-Fri: 24 hours, Sat: 9am-6pm, GMT+8
+Email Us >
+Contact us at supportjlcpcb.com
+Typically reply within hours.
+Help Center >
+Get instant answers.
+24/7 Available.
+Products
+FR-4 PCBs
+Flexible PCBs
+Metal Core PCBs
+High-Frequency PCBs
+PCBA Service
+PCB Layout
+SMT Stencil
+Flex Heater
+Support
+Help Center
+Contact Us
+Community
+Shipping & Delivery
+Payment Methods
+How to Order
+How to Track
+After-Sales Service
+Blog
+Company
+About Us
+Quality Assurance
+How We Work
+Certifications
+Security
+Environment
+JLCAPI
+News
+Cooperation
+Electronics
+EasyEDA
+JLCPCB
+JLCDFM
+LCSC
+OSHWLAB
+Mechanical
+JLC3DP
+JLCCNC
+JLCMC
+Order on JLCONE Desktop, Save $1–$20 Every Time
+Windows
+MAC
+Android
+IOS
+CONNECT WITH US
+© 2026 JLCPCB.COM All Rights Reserved.
+Privacy Policy
+Terms & Conditions
+Cookies Policy
+Do Not Sell or Share My Personal Information
+ Welcome back, may I help you? Chat Now

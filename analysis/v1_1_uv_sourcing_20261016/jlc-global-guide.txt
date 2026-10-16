@@ -1,0 +1,173 @@
+24
+SMT
+ Coupons
+ Download APP
+Ship to
+JLCPCB
+Products
+Capabilities
+Support 
+About Us 
+Order Now
+Sign In
+Help Center
+Help Center
+PCBA Parts Sourcing
+How to use JLCPCB Global Sourcing Parts Service?
+How to use JLCPCB Global Sourcing Parts Service?
+
+ Last updated on Sep 08, 2026
+
+Why JLCPCB provides Global Sourcing Parts Service?
+
+JLCPCB has a large selection of components in stock for PCB assembly orders. In case the parts suddenly run out of stock when PCB assembly is needed, we provide the pre-order parts service based on the JLCPCB parts library. If the JLCPCB parts library still can't fulfill your PCBA order to get all parts assembled on your boards, now we launch the global sourcing service that sources and stocks parts from global distributors. Please note the parts pre-ordering service or global sourcing service is only for PCB assembly orders, the parts won't be shipped separately to you.
+
+What's the Global Sourcing Parts Service?
+
+JLCPCB's global sourcing service on its self-developed and one-stop platform provides a better customer experience and connects with quality-assured component suppliers from all over the world. Before sourcing, customers should clearly comprehend the rules of global sourcing service, and enjoy JLCPCB's global sourcing service after checking the Terms & Conditions.
+
+Global Sourcing Parts Order Terms & Conditions
+
+Notes on Global Sourcing Parts Orders
+
+1. Global sourcing parts orders cannot be canceled or returned once it's been paid.
+
+2. Global sourcing parts need to be reviewed. If the part doesn't support assembly, this part will be canceled and the refund will be issued within 1-7 days.
+
+3. Parts may be purchased by different batches, and we can't promise parts purchased from the same production batch. The production batch will be within 5 years.
+
+4. If a customer doesn't fulfill the supplement, even the parts arrived in our warehouse, you are unable to use them.
+
+5. If in customer's own stock, there are some components that are not needed anymore for customer's future order, we are sorry that refunds does not supported, customer are sincerely suggested to evaluate their project planning before parts ordering.
+
+6. Due to the complicated procurement process, there will be a slight difference in the price of components compared to oversea platforms, please understand.
+
+Notes on using global sourcing parts for assembly
+
+1. JLCPCB will help customers store their global sourcing parts, the parts are only used for assembly service, there is no inventory cost when using those parts for assembly orders.
+
+Please note in principle global sourcing parts are not available for pickup. Inventory cost and pickup service fee will be charged if pickup is insisted on. Learn more
+
+2. Please consider the minimum assembly quantity and attrition quantity during the PCB assembly process.
+
+3. Global sourcing parts can be chosen at the same time together with components provided by customers when placing a PCBA order. Parts from JLCPCB parts library can be chosen at the same time together with pre-order parts when placing a PCBA order.
+
+Note: The rule applies to the same part of a single order. For different parts within the same order, customers have the option to choose global sourcing parts and pre-order parts simultaneously.
+
+4. Only when the global sourcing parts arrive in the JLCPCB warehouse, you can use them for PCB assembly orders.
+
+5. If customers purchase several kinds of parts together, it is possible that some parts cannot be purchased for some reason, in which case we will refund the cost of the parts that we fail to purchase to the customers, while the other parts successfully purchased will not be canceled or refunded.
+
+Additional Charges
+
+1. No shipping charge for global sourcing parts, but for large volume orders, when the weight or size of package exceed the maximum limits, you may need to pay the extra shipping cost.
+
+2. Some components (such as relays, band-pass filters, attenuators, modules, cables, etc.) may require an additional 3% -30% fees for customs duty. Switches, fuses, gas discharge tubes, connectors, batteries, etc. require commodity inspection and 3C certification fees. The commodity inspection fee is $20 for each kind of part; the 3C certification fee will be shared equally of all kinds of parts. If there is only one kind of part, the fee is $20.
+
+3. How do we charge for separated components?
+
+Separate components are those that are not on tape/reel and may be individual. These components cannot be loaded onto the P&P (Pick and Place) machines for assembly, requiring manual service prior to production. Please note that an extra fee will be charged for orders involving these components.
+
+Charge detail:
+
+Components with 5 pins or fewer: $0.017 per pin multiplied by the number of pins
+
+Components with more than 5 pins: Maximum $0.078 per component.
+
+How to order parts via Global Sourcing Parts service
+
+1. Sign in to your account, and visit the " Parts Manager " page. Click " Order Parts " and you will see the " Global Sourcing Parts " entrance.
+
+2. Click " Global Sourcing Parts " , then search parts by the MFR Part number.
+
+3. You can select different global parts suppliers and check the available parts from different suppliers.
+
+4. When ordering the global sourcing parts, choose the part you need; fill in the quantity; click the " Add " button, then the part will be added to the cart.
+
+(If the part is in JLCPCB part library, we recommend you buy from JLCPCB, as JLCPCB has a large selection of components in stock. For non-stock parts, JLCPCB will give priority to buy from local authorized distributors, which can reduce cost and lead time.)
+
+5. Go to the " Cart " page, you will see the JLCPCB library parts and global sourcing parts are listed separately as they need to be paid separately. Select the global souring parts, then click " Secure Checkout ".
+
+6. In the "Checkout " page, first check your contact email address. We will send the order status to your registered email address by default, but you can change it when you need.
+
+7. Fill in your  billing address and click "Submit Order ".
+
+Please note that those parts are only used for your PCB assembly orders, they will be shipped to JLCPCB warehouse for assembly, they won't be taken out or shipped separately to you.
+
+8. Please complete the payment within one hour, or the order will be cancelled automatically because the parts' inventory may change each second. Also you need to check and agree with the global sourcing service Terms & Conditions before you pay.
+
+9. After you pay the order, you can check the status of the ordered parts in the " Parts Order History" page.
+
+Order Status：
+
+Awaiting payment - Please pay within one hour or the order will be canceled
+
+Reviewing - Review will be completed in 1-3 business days
+
+Purchasing - You can check the lead time when you order the parts. Normally it's 9-20 business days. The tracking number will be shown when the order shipped from the suppliers.
+
+Complete - When your parts arrive at our warehouse, the order is completed. Please note If you don't fulfill the supplement, even the parts arrived in our warehouse, you are unable to use them.
+
+Canceled - Your order may be canceled when the part is not supported for assembly.
+
+10. When your parts arrive in JLCPCB warehouse, you can see the parts list in your own parts lib, and you can check the inventory changes here.
+
+Online Chat >
+Chat with our live agent for fast reply.
+Mon-Fri: 24 hours, Sat: 9am-6pm, GMT+8
+Email Us >
+Contact us at supportjlcpcb.com
+Typically reply within hours.
+Help Center >
+Get instant answers.
+24/7 Available.
+Products
+FR-4 PCBs
+Flexible PCBs
+Metal Core PCBs
+High-Frequency PCBs
+PCBA Service
+PCB Layout
+SMT Stencil
+Flex Heater
+Support
+Help Center
+Contact Us
+Community
+Shipping & Delivery
+Payment Methods
+How to Order
+How to Track
+After-Sales Service
+Blog
+Company
+About Us
+Quality Assurance
+How We Work
+Certifications
+Security
+Environment
+JLCAPI
+News
+Cooperation
+Electronics
+EasyEDA
+JLCPCB
+JLCDFM
+LCSC
+OSHWLAB
+Mechanical
+JLC3DP
+JLCCNC
+JLCMC
+Order on JLCONE Desktop, Save $1–$20 Every Time
+Windows
+MAC
+Android
+IOS
+CONNECT WITH US
+© 2026 JLCPCB.COM All Rights Reserved.
+Privacy Policy
+Terms & Conditions
+Cookies Policy
+Do Not Sell or Share My Personal Information

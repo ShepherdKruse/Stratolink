@@ -1,0 +1,287 @@
+24
+SMT
+24-hour PCB production. Fast Delivery to United States.
+ Coupons
+ Download APP
+USD 
+JLCPCB
+Products
+Capabilities
+Support 
+About Us 
+1
+Order Now
+My Account
+Help Center
+Help Center
+PCBA Parts Sourcing
+Overseas Component Consignment User Guide
+Overseas Component Consignment User Guide
+
+ Last updated on Sep 08, 2026
+
+ 
+Compliance Guidelines for Overseas Component Sales
+Important Notes
+
+When overseas customers send components to JLCPCB, the actual shipping origin must be clearly identified and classified as either:
+
+From within Mainland China
+From outside Mainland China (including Hong Kong, Macao, and Taiwan)
+
+Because different import and customs-clearance procedures apply, the required shipping method and destination address also differ. Shippers must carefully select and complete the correct option.
+
+If the shipper selects an incorrect option when completing the shipping information, JLCPCB will reject the shipment. Any costs incurred as a result shall be borne solely by the shipper, and JLCPCB shall not be liable for any such costs.
+
+This section sets out the shipping compliance requirements for component consignments originating outside Mainland China.
+
+1. Selecting the Correct Shipping Mode
+
+A. If the components are actually being shipped from within Mainland China to JLCPCB, choose “Mainland China)”.
+
+B. If the components are being shipped from outside Mainland China (including Hong Kong, Macao, and Taiwan) to JLCPCB, you must select “Outside Mainland China.”
+
+2. Shipping Components from Outside Mainland China
+
+Because these shipments involve import-compliance and customs-clearance requirements, selecting “Outside Mainland China” constitutes the shipper’s (component seller’s) consent to sell the components to JLCPCB at market price. JLCPCB, in turn, undertakes that such components can only be resold back to the original component seller.
+
+Please refer to the figure below to download the Sample Contract for the Compliant Sale and Purchase of Components Shipped from Overseas.
+
+2.1 Registering Components for Consignment to JLCPCB
+2.1.1 Packaging Requirements and Address Information
+
+A. After selecting “Outside Mainland China,” the system will display the required packaging instructions. Please package the components strictly according to these instructions.
+
+B. The system will also display the shipping address — this is JLCPCB’s Hong Kong warehouse address. The sender must ship to this exact address. Shipments sent to an incorrect address may be refused by JLCPCB.
+
+2.1.2 Entering Shipping Logistics Information
+
+A. Select the logistics company you intend to use for shipping the components.
+
+B. Enter the tracking number for your shipment. (Important: the shipment must be approved by JLCPCB before dispatch; otherwise, if approval is not granted, the parcel may be returned.)
+
+C. Provide the contact person’s name and phone number accurately so that JLCPCB can reach you promptly if any issues arise.
+
+2.1.3 Entering Component Sales Information
+
+The shipper must provide the following information as prompted on the page:
+
+A. Unit selling price
+
+B. Manufacturer
+
+C. Description of goods
+
+D. Application
+
+E. Country of origin
+
+F. Unit weight (g)
+
+G. HS code
+
+Note
+
+Fields marked with an asterisk ∗∗ are mandatory and must be completed. Fields without an asterisk are optional.
+
+To protect the interests of both parties and ensure that the declared transaction price is consistent with prevailing market prices, the component seller must provide supporting purchase records or other valid pricing documentation to substantiate the declared selling price.
+To sell components to JLCPCB, the seller must review and agree to the Components Sale and Purchase Agreement by selecting the corresponding checkbox.
+
+2.2 Submitting for Review
+
+After submitting for review, the component seller can check the approval status of their submission under “Consigned Parts Shipments.”
+
+The main status stages are:
+
+Reviewing Price – Pending price review
+Awaiting Confirmation – Waiting for customer confirmation
+Awaiting Payment – Pending payment
+In Transit – Shipment on the way
+Received – Shipment received by JLCPCB
+Checked – Components inspected
+In Warehouse – Components stocked in the warehouse
+Order Cancelled
+2.2.1 Component Sales Price Review
+
+Once the seller has submitted the review request, JLCPCB will review the registered sales price within two (2) business days. JLCPCB verifies, via third-party platforms, whether the sales price registered by the seller aligns with prevailing market conditions.
+
+If the price is consistent with market conditions, JLCPCB approves it, and the status changes to “Awaiting Payment.”
+If the registered price clearly does not align with current market conditions, JLCPCB will not approve it. In this case, the status will change to “Confirm Price”.
+
+2.2.2 Component Sales Price – Pending Customer Confirmation
+
+If JLCPCB determines that the submitted sales price does not comply with prevailing market conditions, the component seller will receive an email notification from JLCPCB and will also see a “Confirm Price” prompt within “Consigned Parts Shipments.”
+
+By clicking “Confirm Price,” a dialog box will pop up displaying both the customer’s originally entered price and the revised price requiring adjustment.
+
+2.2.3 Resubmission of Component Sales Price for Review
+
+After the component seller re-submits the adjusted sales price, JLCPCB will review it again. If approved, the process moves to the next step. If not approved, the procedure described in 2.2.2 repeats.
+
+2.3 Import Duty & Tax Deposit & Handling Fee for Component Sales
+
+Once the component seller’s price has passed review, the status changes to “Awaiting Payment” and a “Pay” button appears, prompting the seller to pay the required pre-deposit and handling fee.
+
+Clicking “Pay” displays an itemized cost breakdown.
+
+Why does JLCPCB require a deposit and service fee before purchasing components?
+
+Because overseas-shipped components must ultimately be imported into Mainland China for processing, the import process triggers customs duties, import VAT, and related handling fees.
+
+All overseas component shipments are declared to Chinese Customs by JLCPCB as the import agent. JLCPCB must pay the applicable import duties and VAT to Customs in advance, hence the need to collect these amounts upfront from the component seller.
+
+Import Duties & VAT: Treated as a refundable deposit. After the components are used in a JLCPCB PCBA order, the deposit is refunded to the component seller.
+
+Read more: Guide to Import VAT Refund for Consigned Components Shipped to JLCPCB
+
+Import Handling Service Fee: Non-refundable. This covers JLCPCB’s actual processing costs.
+
+Fee calculation formulas:
+
+Import Duty = Declared Value × Applicable Import Duty Rate (rate provided by JLCPCB after review, based on actual customs tariff).
+
+Import VAT = (Declared Value + Import Duty) × 13%.
+
+Handling Service Fee = Declared Value × 2%.
+
+Minimum charge per shipment: USD 10.
+If 2% of the declared value is less than USD 10, USD 10 will be charged.
+2.4 Shipment of Components
+
+Once payment is completed, the status changes to “In Transit,” and the component seller may begin shipping the components to the JLCPCB-designated address in Hong Kong.
+
+If the originally entered courier tracking number is incorrect, the seller must click “Edit” to update the shipping method and enter the correct tracking number.
+
+2.5 Quantity Verification of Components
+
+After the seller ships the components to the designated Hong Kong address and they arrive at JLCPCB’s Hong Kong warehouse, JLCPCB will verify the received items against the seller’s declared shipping information.
+
+If any discrepancies are found between the actual items and the declared data, JLCPCB will notify the seller by email and through the system interface. As shown below, a “Quantity Discrepancy” prompt will appear.
+
+By clicking “Quantity Discrepancy,” a pop-up window will display detailed variance data (see illustration below).
+
+The seller must carefully review the discrepancy details. For any questions, they may contact JLCPCB’s online customer service or email us at support@jlcpcb.com. Once the seller confirms JLCPCB’s updated information is correct, they should click “Confirm.”
+
+2.6 Refund or Additional Payment of Pre-Deposit & Handling Fee
+
+After the seller confirms the quantity:
+
+If a refund is required, JLCPCB will automatically initiate a refund link.
+If an additional payment is required, the seller will receive an email, and a “Supplement” button will appear in the system.
+
+By clicking “Supplement,” the seller is redirected to a payment page to pay the outstanding amount.
+
+2.7 Formation of the Component Sales Contract
+
+If the quantities are correct and no refund or additional payment of the pre-deposit is required, then upon quantity confirmation, the Component Sales Contract is deemed established and can be downloaded.
+
+If additional payment is required, the contract is formed once the seller has completed the supplemental payment, at which point the official Component Sales Contract can be downloaded.
+
+Details of the Component Sale and Purchase Agreement are as follows:
+
+Receipt Invoice Details：
+
+3. Canceling a Shipping Order
+
+While in the Reviewing / Awaiting Confirmation / Awaiting Payment status, the component seller may cancel a shipping order at any time through the system interface.
+
+Orders that have already been paid, customers are not supported to canceled the orders on their own via the website. Sellers should therefore carefully verify shipment details before paying the pre-deposit.
+
+Storage and Retrieval
+1. Storage
+
+Components registered for sale to JLCPCB through the online portal will be stored free of charge for up to three (3) years.
+
+Within the free-storage period, the component seller must place PCBA orders to use the registered components. If the components are not fully used within this period, they will be deemed abandoned by the seller. JLCPCB will not return any unused components or refund any corresponding deposits or payments. JLCPCB also bears no obligation to pay for unused components.
+
+2. Retrieval Handling Fee
+
+During the valid storage period, if the seller wishes to retrieve components, they must submit a retrieval request to JLCPCB at least seven (7) days in advance.
+
+Once approved, JLCPCB will charge a handling fee equal to 30% of the component value, with a minimum charge of USD 30.
+
+3. Retrieval & Shipping Methods
+
+JLCPCB offers two retrieval options:
+
+The seller arranges its designated freight forwarder to pick up the components; or
+SF Express (freight collect) to a mainland China address.
+
+For delivery to addresses outside of mainland China (including Hong Kong, Macao, and Taiwan), the seller must collect the components from the pick-up address provided by JLCPCB. All freight charges are the seller’s responsibility. JLCPCB will not handle customs clearance for these shipments. Inventory records will be updated upon dispatch.
+
+Important Note
+
+When using international couriers to ship to an overseas address, if the shipment value is CNY 5,000 or above, formal export customs clearance is required. The seller must arrange and pay for export clearance or split the shipment into multiple parcels valued below CNY 5,000 each. JLCPCB accepts no responsibility for any issues arising during the export process.
+
+If shipments are split, please note that some destination countries may levy import duties on multiple parcels addressed to the same recipient. Sellers should take this into consideration when choosing the shipping method.
+
+Was this article helpful?
+
+Yes
+No
+Table of Contents
+Compliance Guidelines for Overseas Component Sales
+1. Selecting the Correct Shipping Mode
+2. Shipping Components from Outside Mainland China
+3. Canceling a Shipping Order
+Storage and Retrieval
+Online Chat >
+Chat with our live agent for fast reply.
+Mon-Fri: 24 hours, Sat: 9am-6pm, GMT+8
+Email Us >
+Contact us at supportjlcpcb.com
+Typically reply within hours.
+Help Center >
+Get instant answers.
+24/7 Available.
+Products
+FR-4 PCBs
+Flexible PCBs
+Metal Core PCBs
+High-Frequency PCBs
+PCBA Service
+PCB Layout
+SMT Stencil
+Flex Heater
+Support
+Help Center
+Contact Us
+Community
+Shipping & Delivery
+Payment Methods
+How to Order
+How to Track
+After-Sales Service
+Blog
+Company
+About Us
+Quality Assurance
+How We Work
+Certifications
+Security
+Environment
+JLCAPI
+News
+Cooperation
+Electronics
+EasyEDA
+JLCPCB
+JLCDFM
+LCSC
+OSHWLAB
+Mechanical
+JLC3DP
+JLCCNC
+JLCMC
+Order on JLCONE Desktop, Save $1–$20 Every Time
+Windows
+MAC
+Android
+IOS
+CONNECT WITH US
+© 2026 JLCPCB.COM All Rights Reserved.
+Privacy Policy
+Terms & Conditions
+Cookies Policy
+Do Not Sell or Share My Personal Information
+ Welcome back, may I help you? Chat Now
