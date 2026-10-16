@@ -1,0 +1,77 @@
+{
+  "pcb_sha256": "88f82c85d2d47b4aea2e7d7d2827c4a92c339788cc0d9c880dd6342ee0440c0a",
+  "archives": [
+    {
+      "archive": "stratolink-v1.1-kicad.zip",
+      "sha256": "c3e474b347e3e4221347a806ff04784d00566d3da718e7246a206484ed22b610",
+      "loaded_footprint_instances": 68,
+      "missing": [],
+      "reported_missing_parts": {
+        "R27": {
+          "footprint": "Stratolink_v1p1_R27_R_0805_2012Metric",
+          "loaded": true
+        },
+        "C22": {
+          "footprint": "Stratolink_v1p1_C22_C_0402_1005Metric",
+          "loaded": true
+        },
+        "R25": {
+          "footprint": "Stratolink_v1p1_R25_R_0402_1005Metric",
+          "loaded": true
+        },
+        "C23": {
+          "footprint": "Stratolink_v1p1_C23_C_0402_1005Metric",
+          "loaded": true
+        },
+        "R26": {
+          "footprint": "Stratolink_v1p1_R26_R_0402_1005Metric",
+          "loaded": true
+        },
+        "R24": {
+          "footprint": "Stratolink_v1p1_R24_R_0402_1005Metric",
+          "loaded": true
+        },
+        "U8": {
+          "footprint": "Stratolink_v1p1_U8_SOT-23-5",
+          "loaded": true
+        }
+      }
+    },
+    {
+      "archive": "stratolink-v1.1-libraries.zip",
+      "sha256": "5b7c5643acc83464923cde9776c73615f7aad03428730716cf4184ee1fc81205",
+      "loaded_footprint_instances": 68,
+      "missing": [],
+      "reported_missing_parts": {
+        "R27": {
+          "footprint": "Stratolink_v1p1_R27_R_0805_2012Metric",
+          "loaded": true
+        },
+        "C22": {
+          "footprint": "Stratolink_v1p1_C22_C_0402_1005Metric",
+          "loaded": true
+        },
+        "R25": {
+          "footprint": "Stratolink_v1p1_R25_R_0402_1005Metric",
+          "loaded": true
+        },
+        "C23": {
+          "footprint": "Stratolink_v1p1_C23_C_0402_1005Metric",
+          "loaded": true
+        },
+        "R26": {
+          "footprint": "Stratolink_v1p1_R26_R_0402_1005Metric",
+          "loaded": true
+        },
+        "R24": {
+          "footprint": "Stratolink_v1p1_R24_R_0402_1005Metric",
+          "loaded": true
+        },
+        "U8": {
+          "footprint": "Stratolink_v1p1_U8_SOT-23-5",
+          "loaded": true
+        }
+      }
+    }
+  ]
+}

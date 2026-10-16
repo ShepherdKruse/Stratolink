@@ -2,6 +2,14 @@
 
 KiCad source files for the Stratolink payload. Follow [hardware setup](https://stratolink.org/docs/hardware) for parts, assembly, and programming.
 
+## v1.1 downloads
+
+- [Complete KiCad project and parts library downloads](downloads/README.md)
+- [Current v1.1 board and fabrication notes](pcb/README.md)
+- [Pilot assembly BOM and placement files](gerbers/v1.1-pilot/README.md)
+
+Download and extract the complete project, or copy the library bundle beside the matching KiCad files. The bundles include the added R24–R27, C22/C23 and U8 footprints.
+
 ## Files
 
 - [pcb/stratolink.kicad_pro](pcb/stratolink.kicad_pro): KiCad project.
