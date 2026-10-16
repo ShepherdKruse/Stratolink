@@ -1,0 +1,95 @@
+{
+  "pcb_sha256": "e02bf87186fc86b90569b6ea25041a34c7d2e32ef39b951847956cc2d2eb0f13",
+  "renderer": "KiCad CLI 10.0.0 native raytracer, high preset",
+  "images": [
+    {
+      "file": "visual/top.png",
+      "sha256": "4e16bcf5a284bb0a5914ac089093904fccf6b64b2ed92dbb2e087205979663a8",
+      "actual_png_pixels": [
+        1376,
+        1768
+      ],
+      "renderer_args": [
+        "pcb",
+        "render",
+        "--width",
+        "1400",
+        "--height",
+        "1800",
+        "--side",
+        "top",
+        "--quality",
+        "high",
+        "--zoom",
+        "0.78",
+        "--rotate",
+        "0,0,0",
+        "--output",
+        "/Users/twarn/Repositories/Stratolink/analysis/v1_1_final_sweep_20261016/mechanical/visual/top.png",
+        "/Users/twarn/Repositories/Stratolink/hardware/pcb/stratolink.kicad_pcb"
+      ],
+      "visually_inspected": true,
+      "framing": "Whole board visible. Panel ends and long wire tips extend beyond the close view."
+    },
+    {
+      "file": "visual/bottom.png",
+      "sha256": "e71dd4d850673126f40e8177dee52393564db5f26c0c5a2a9601881fe910155e",
+      "actual_png_pixels": [
+        1376,
+        1768
+      ],
+      "renderer_args": [
+        "pcb",
+        "render",
+        "--width",
+        "1400",
+        "--height",
+        "1800",
+        "--side",
+        "bottom",
+        "--quality",
+        "high",
+        "--zoom",
+        "0.78",
+        "--rotate",
+        "0,0,0",
+        "--output",
+        "/Users/twarn/Repositories/Stratolink/analysis/v1_1_final_sweep_20261016/mechanical/visual/bottom.png",
+        "/Users/twarn/Repositories/Stratolink/hardware/pcb/stratolink.kicad_pcb"
+      ],
+      "visually_inspected": true,
+      "framing": "Whole board visible. Panel ends and long wire tips extend beyond the close view."
+    },
+    {
+      "file": "visual/assembly.png",
+      "sha256": "b8365cb67f89a8fa1e24701683d24a3afc1708a6f6a593b5d76f068322d84ebd",
+      "actual_png_pixels": [
+        1768,
+        1768
+      ],
+      "renderer_args": [
+        "pcb",
+        "render",
+        "--width",
+        "1800",
+        "--height",
+        "1800",
+        "--side",
+        "top",
+        "--quality",
+        "high",
+        "--zoom",
+        "0.24",
+        "--rotate",
+        "20,0,0",
+        "--output",
+        "/Users/twarn/Repositories/Stratolink/analysis/v1_1_final_sweep_20261016/mechanical/visual/assembly.png",
+        "/Users/twarn/Repositories/Stratolink/hardware/pcb/stratolink.kicad_pcb"
+      ],
+      "visually_inspected": true,
+      "framing": "Full assembly with both antenna tips and both outer panel ends visible."
+    }
+  ],
+  "population": "Full native design including U6. Y25 pilot population omits U6.",
+  "limits": "Nominal components and provisional solar bend, film, wire and solder assumptions. Native images are assembly aids, not production collision or supplier-placement qualification."
+}

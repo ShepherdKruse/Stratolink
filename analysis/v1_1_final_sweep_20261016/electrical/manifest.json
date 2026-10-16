@@ -1,0 +1,33 @@
+{
+  "source_hashes": {
+    "stratolink.kicad_pcb": "e02bf87186fc86b90569b6ea25041a34c7d2e32ef39b951847956cc2d2eb0f13",
+    "stratolink.kicad_sch": "092ddb3451545cc6f7d7d64d8c02c933e89a40acb6897d865e3a8936d54e21fb",
+    "stratolink.kicad_pro": "c9be5b22927d7fe889188023e69f6e774e808aa79d4ea13eb1b2ddc348ffe2f9",
+    "stratolink.kicad_dru": "071d900e34c4eb3d3f91003cc0698e261e7fe23beea7107c4db50a1bf60a5136"
+  },
+  "evidence": {
+    "analysis/v1_1_final_sweep_20261016/electrical/README.md": "5915ec7583eec07165fc0c299afcb4ffb4c61582d989c42d49f0e65771369f64",
+    "analysis/v1_1_final_sweep_20261016/electrical/capture.json": "0fd3982e0d9d06950ee619f33b78e926d5ca6cbfd7eb60fb2b6a5c48c7084f6d",
+    "analysis/v1_1_final_sweep_20261016/electrical/capture.py": "3a077d91bc957af28d68a4aad8fd62a215ae9389d1429daed5d13e01500c80ff",
+    "analysis/v1_1_final_sweep_20261016/electrical/commands.json": "9db2730795aab61f59c386348f8f1b9a41edecc1eeb39c02759857342a5b2091",
+    "analysis/v1_1_final_sweep_20261016/electrical/current-strict-drc.json": "e5c71d609564749c304f635b6dc0e30323f0a71699f28268ea39180faf0afcd1",
+    "analysis/v1_1_final_sweep_20261016/electrical/current-strict-erc.json": "0ec5cb52c0f3f11c98f875edd4d0a88d944a69b53963d1f2678144f315c02995",
+    "analysis/v1_1_final_sweep_20261016/electrical/current.xml": "43799e98fe1ff77708c3569074869ddcb94b10c0adf8f6ada60a741be25f9c99",
+    "analysis/v1_1_final_sweep_20261016/electrical/focused-net-check.json": "2fa219e567e11ed63c65df250038f65875f7960bd5e0cb87a072afe6afd78345",
+    "analysis/v1_1_final_sweep_20261016/electrical/frozen-drc.json": "014401236e97eb120674fd02bbca78392c18031c1f6b8f659dec7896ae636028",
+    "analysis/v1_1_final_sweep_20261016/electrical/frozen-erc.json": "0ec5cb52c0f3f11c98f875edd4d0a88d944a69b53963d1f2678144f315c02995",
+    "analysis/v1_1_final_sweep_20261016/electrical/frozen.xml": "6e02c3750e743eb5589ae5e3cd5b7d7c7c6c0dab8503c01e871a1a8735c012dc",
+    "analysis/v1_1_final_sweep_20261016/electrical/live-comparison.json": "135ce45790bb428f86cf02dcb3ede43cd347e647890743456345410423559aec",
+    "analysis/v1_1_final_sweep_20261016/electrical/project-diff.json": "28a209daf1a7df19a1781c82f20c7219b55877cd0b65fad81e6ce5d9aa3d3f62",
+    "analysis/v1_1_final_sweep_20261016/electrical/repaired-capture.json": "88ca7677240139d8a459c0bf45acfe3febef307b35c2a1a99f8bc07ff57cae1f",
+    "analysis/v1_1_final_sweep_20261016/electrical/repaired-comparison.json": "bb7af87a80e1ece3db5ac6db570bdb5b0a7e0723ff9b1c3702f528f4c07e6164",
+    "analysis/v1_1_final_sweep_20261016/electrical/repaired-copper.json": "66a8e951855099d8b7fd6e75b8a8009605b1d51924e3501741267c13fe2f637d",
+    "analysis/v1_1_final_sweep_20261016/electrical/repaired-physical-copper.json": "44d9debd69e430f1eb2813a263f54b15d314bc4548d5d86f71d3b950b187decd",
+    "analysis/v1_1_final_sweep_20261016/electrical/repaired-strict-drc.json": "fce66fef869a0832fd1c103c0c21c0504d09b32ab8c5a66c1228c1786a6616fe",
+    "analysis/v1_1_final_sweep_20261016/electrical/repaired-strict-erc.json": "007a0676fe5c42b871754fede0f271e9014a867fafb1a71048afbbdc9e871903",
+    "analysis/v1_1_final_sweep_20261016/electrical/repaired.xml": "71da234c4b39faedc88442fd2db81dfa8a6255925ff59c39dce91e549574cdac",
+    "analysis/v1_1_final_sweep_20261016/electrical/review_semantics.py": "cc4985bc16f2a458dd8678512db70c0ec6f153af8d6438216490ac316e375c08",
+    "analysis/v1_1_final_sweep_20261016/electrical/source-scope.json": "06edb6a9f239091f567a924458bbcf41f0f716b0991ca33ee50d14cfb442dd65",
+    "analysis/v1_1_final_sweep_20261016/electrical/summary.json": "8ab213b9101f3a0363259706895a42272207adfff22c5970db80e7e6884813ad"
+  }
+}

@@ -1,0 +1,67 @@
+{
+  "pcb_sha256": "e02bf87186fc86b90569b6ea25041a34c7d2e32ef39b951847956cc2d2eb0f13",
+  "glb_sha256": "ded8f8776c7f6e948b90c9798428821e3c021d26eb203ff8779f8574b5a4c2a3",
+  "models": [
+    {
+      "ref": "AE2",
+      "local_mesh_bounds_mm": [
+        0.0,
+        -0.1604999997653067,
+        -0.1604999997653067,
+        0.3209999995306134,
+        48.00000041723251,
+        2.0000000949949026
+      ],
+      "global_bounds_mm": [
+        59.25900000046939,
+        -1.4550000949949022,
+        -14.870000417232493,
+        59.58000000000002,
+        0.7054999997653173,
+        33.290499999765316
+      ],
+      "wire_axis_board_XY_mm": [
+        [
+          59.419500000000006,
+          33.13000000000001
+        ],
+        [
+          59.41950000000002,
+          -14.86999999999998
+        ]
+      ],
+      "modeled_straight_segment_mm": 48
+    },
+    {
+      "ref": "AE1",
+      "local_mesh_bounds_mm": [
+        -1.4210855390181384e-14,
+        -0.1604999997653067,
+        -0.1604999997653067,
+        0.3209999995306134,
+        82.0000022649765,
+        2.0000000949949026
+      ],
+      "global_bounds_mm": [
+        68.396,
+        -1.6050000949949026,
+        82.5425000002347,
+        68.71699999953063,
+        0.5554999997653066,
+        164.7030022649765
+      ],
+      "wire_axis_board_XY_mm": [
+        [
+          68.55649999999999,
+          82.703
+        ],
+        [
+          68.55650000000001,
+          164.70299999999997
+        ]
+      ],
+      "modeled_straight_segment_mm": 82
+    }
+  ],
+  "method": "Native KiCad/OCC GLB export of AE1/AE2 STEP geometry; parsed FLOAT VEC3 positions and actual node quaternion transforms. Two-millimeter solder-tail bends retained. Model dimensions remain nominal assembly aids, not measured wire diameter."
+}

@@ -1,0 +1,284 @@
+24
+SMT
+1
+USD 
+My Account 
+
+Select Product
+
+Standard PCB/PCBA
+
+Advanced PCB/PCBA
+
+SMT Stencil
+
+Flex Heater
+
+Mechatronic Parts
+
+3D Printing
+
+CNC Machining
+
+PCB Layout
+
+Sheet Metal
+
+Online PCB Quote
+ Re-Upload
+ Gerber Viewer
+Detected 2 layer board of 57.3x23.36mm(2.256x0.92 inches).
+Base Material
+FR-4
+Flex
+Aluminum
+Copper Core
+Rogers
+PTFE Teflon
+HDI
+Layers
+124
+High Precision PCB
+6 
+8
+10
+12
+14
+16
+Dimensions
+ *  
+PCB Qty
+5
+Product Type
+Industrial/Consumer electronicsAerospaceMedical
+"4-Wire Kelvin Test" options is automatically selected to ensure the board quality for aerospace and medical products.
+PCB Specifications
+Different Design
+1 234 
+Delivery Format
+Single PCB Panel by Customer Panel by JLCPCB
+PCB Thickness
+0.4mm0.6mm0.8mm1.0mm1.2mm1.6mm2.0mm
+For 0.4mm thickness PCB, it will be produced in mouse-bites panel.
+PCB Color
+Green
+ 
+Purple
+ 
+Red
+ 
+Yellow
+ 
+Blue
+ 
+White
+ 
+Black
+Silkscreen
+White
+Material Type
+FR4 TG135
+Surface Finish
+OSP
+New
+ HASL(with lead) LeadFree HASL ENIG
+Gold Thickness
+1 U"2 U"
+High-spec Options
+Outer Copper Weight
+1 oz2 oz
+Via Covering
+TentedUntentedPluggedEpoxy Filled & CappedCopper paste Filled & Capped
+Via Plating Method
+Not SpecifiedConductive AdhesiveHorizontal Electroless Copper Plating
+Min via hole size/diameter
+0.3mm/(0.4/0.45mm)0.25mm/(0.35/0.4mm)0.2mm/(0.3/0.35mm)0.15mm/(0.25/0.3mm)0.1mm/(0.2/0.25mm)
+Board Outline Tolerance
+±0.2mm(Regular)±0.1mm(Precision)
+Confirm Production file
+NoYes
+Mark on PCB
+Remove Mark2D barcode (Serial Number)
+Electrical Test
+Flying Probe Fully Test
+Gold Fingers
+No Yes
+Castellated Holes
+No Yes
+Edge Plating
+NoYes
+UL Marking
+NoYes (Any Position)Yes (Specify Position)
+Humidity Indicator Card
+NoYes
+Advanced Options
+
+4-Wire Kelvin Test
+
+NoYes
+
+Paper between PCBs
+
+NoYes
+
+Appearance Quality
+
+IPC Class 2 StandardSuperb Quality
+Silkscreen Technology
+Ink-jet Printing SilkscreenHigh-precision Printing SilkscreenEasyEDA multi-color silkscreenHigh-definition Exposure Silkscreen
+
+Package Box
+
+With JLCPCB logoBlank box
+
+Inspection Report
+
+NoFinal Inspection ReportElectrical Test ReportROHS Test Report
+PCB Remark 
+PCB Assembly
+ Assembly cost starting from $0 with coupon>
+ Assemble top side
+ Assemble bottom side
+PCBA Type
+Economic Standard What's the difference?
+Assembly Side
+Top Side Bottom Side Both Sides
+PCBA Qty
+5  Qty from 2 to 5
+Edge Rails/Fiducials
+Added by JLCPCB Added by Customer
+The board size is modified to be 71.36mm*71.3mm as for Standard PCBA each side should be longer than 70mm and the edge rails should be added. Learn More>
+Avoid manual work:
+Select Depaneling Service to remove edge rails.
+Confirm Parts Placement
+No Yes
+Stencil Storage
+No Yes
+Fixture Storage
+No Yes
+Parts Selection
+By Customer (Self-Service) By JLCPCB (Manual Match)
+Advanced Options
+Bake Components
+Photo Confirmation
+Board Cleaning
+Conformal Coating (cleaning included)
+Packaging
+Special stencil
+Depanel boards & edge rail before delivery
+Solder Paste
+Flying Probe Test
+Nitrogen reflow soldering
+Function test
+Assembly remark
+v1.1 PCB25b201eb, 3 assembled pilots. U6 AS7331 DNP only; fit C14/C23/R27. Use supplied pilot paste: no paste on 16 U6 lands. C5, antennas and solar parts are hand-fitted after reflow. Preserve via tenting. Review 100um stencil for TMP117/U7; do not apply a second global paste reduction. U1 rotated; U8 now FRONT. Confirm all pin-1 orientations against current CPL. Manual placement approval, no automatic changes. Keep rails/tabs clear of solar banks and suspension holes.
+Edit
+
+I agree to the Terms and Conditions of JLCPCB assembly Service .
+
+Stencil
+Stencil Order Guide>
+Order together with PCB
+Charge Details
+Engineering fee
+$33.00
+Via Covering
+$0.00
+Surface Finish
+$17.20
+Board
+$2.50
+4-Wire Kelvin Test
+$16.88
+Confirm Production file
+$1.05
+Standard PCBA Price
+Components
+-
+Feeders Loading fee 
+-
+SMT Assembly
+-
+Hand-soldering labor fee
+-
+Manual Assembly 
+-
+PCB Build Time 
+ 3 days
+$0.00
+ 24 hours PCBA Only
+$0.00
+Calculated Price
+$70.63
+
+Additional charges may apply for special cases
+
+Order on JLCONE Desktop: Save $1–$20 Per Order
+NEXT
+Shipping Estimate
+$31.59
+DHL Express (DDP)
+2-4 business days
+Weight 
+0.15kg
+Coupons 
+Save $30.00Save $20.00 
+Online Chat >
+Chat with our live agent for fast reply.
+Mon-Fri: 24 hours, Sat: 9am-6pm, GMT+8
+Email Us >
+Contact us at supportjlcpcb.com
+Typically reply within hours.
+Help Center >
+Get instant answers.
+24/7 Available.
+PCB Service
+FR-4 PCBs
+Flexible PCBs
+Metal Core PCBs
+High-Frequency PCBs
+PCBA Service
+PCB Layout
+SMT Stencil
+Flex Heater
+Support
+Help Center
+Contact Us
+Community
+Shipping Guide
+Payment Methods
+How to Order
+How to Track
+After-Sales Service
+Blog
+Company
+About Us
+Quality Assurance
+How We Work
+Certifications
+Security
+Environment
+JLCAPI
+News
+Cooperation
+Electronics
+EasyEDA
+JLCPCB
+JLCDFM
+LCSC
+OSHWLAB
+Mechanical
+JLC3DP
+JLCCNC
+JLCMC
+Order on JLCONE Desktop, Save $1–$20 Every Time
+Windows
+MAC
+Android
+IOS
+CONNECT WITH US
+© 2026 JLCPCB.COM All Rights Reserved.
+Privacy Policy
+Terms & Conditions
+Cookies Policy
+Do Not Sell or Share My Personal Information

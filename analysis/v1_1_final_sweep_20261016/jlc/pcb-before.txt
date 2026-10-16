@@ -1,0 +1,249 @@
+24
+SMT
+24-hour PCB production. Fast Delivery to United States.
+ Coupons
+ Download APP
+USD 
+JLCPCB
+Products
+Capabilities
+Support 
+About Us 
+1
+Order Now
+My Account 
+SHOPPING CART
+All (1)
+JLCPCB (1)
+JLC3DP (0)
+JLCCNC (0)
+JLCMC (0)
+Flex Heater (0)
+Item
+Qty
+Build Time
+Price
+JLCPCB (PCB/PCBA/Stencil)
+fabrication-review_Y25
+PCB prototype:Y25-2680969A
+Green, 0.4 Thickness, ENIG
+Customer #: 
+Product Details  Edit Order
+5
+24 hours
+
+$70.63
+ 
+fabrication-review_Y25
+Standard PCBA: SMT026101663307-2680969A
+Assemble Both Sides
+Customer #: 
+Product Details  
+3
+
+3 - 4 days
+
+$262.00
+Recommended Deals For You
+Refresh
+Hex Socket Screw - Full/Partial Thread, Standard Type (DIN 912/GB/T 70.1)
+From $0.0103
+Order Now
+Split Aluminum Box - Flange, W190 x H72 x L150mm
+From $8.3875
+Order Now
+SMT Stencil Printer
+Order Now
+SUMMARY
+Merchandise Total
+$0.00
+Shipping Estimated
+--
+Subtotal
+$0.00
+Est. shipping date 
+--
+Order won't be shipped until all items are ready.
+Weight
+0kg
+Order on JLCONE Desktop: Save $1–$20 Per Order
+Secure Checkout
+Add new item
+Payment method may vary by country.
+SSL ENCRYPTED PAYMENT
+Online Chat >
+Chat with our live agent for fast reply.
+Mon-Fri: 24 hours, Sat: 9am-6pm, GMT+8
+Email Us >
+Contact us at supportjlcpcb.com
+Typically reply within hours.
+Help Center >
+Get instant answers.
+24/7 Available.
+PCB Service
+FR-4 PCBs
+Flexible PCBs
+Metal Core PCBs
+High-Frequency PCBs
+PCBA Service
+PCB Layout
+SMT Stencil
+Flex Heater
+Support
+Help Center
+Contact Us
+Community
+Shipping Guide
+Payment Methods
+How to Order
+How to Track
+After-Sales Service
+Blog
+Company
+About Us
+Quality Assurance
+How We Work
+Certifications
+Security
+Environment
+JLCAPI
+News
+Cooperation
+Electronics
+EasyEDA
+JLCPCB
+JLCDFM
+LCSC
+OSHWLAB
+Mechanical
+JLC3DP
+JLCCNC
+JLCMC
+Order on JLCONE Desktop, Save $1–$20 Every Time
+Windows
+MAC
+Android
+IOS
+CONNECT WITH US
+© 2026 JLCPCB.COM All Rights Reserved.
+Privacy Policy
+Terms & Conditions
+Cookies Policy
+Do Not Sell or Share My Personal Information
+
+Product Detail
+
+Gerber file:
+fabrication-review_Y25
+
+Build Time:
+24 hours (PCBA Only)
+
+Base Material:
+FR-4
+
+Layers:
+2
+
+Dimension:
+71.36 mm* 71.3 mm
+
+PCB Qty:
+5
+
+Product Type:
+Aerospace
+
+Different Design:
+1
+
+Delivery Format:
+Single PCB
+
+PCB Thickness:
+0.4mm
+
+Specify Stackup:
+no
+
+PCB Color:
+Green
+
+Silkscreen:
+White
+
+Material Type:
+FR4 TG135
+
+Via Covering:
+Tented
+
+Surface Finish:
+ENIG
+Gold Thickness: 1 U"
+
+Deburring/Edge rounding:
+No
+
+Outer Copper Weight:
+1 oz
+
+Gold Fingers:
+No
+
+Remark:
+v1.1 25b201eb. GREEN MASK, NO SILK. Keep mask/tenting. Solar notches UNPLATED. CAM check fine-pitch lands, mask/copper details. Keep tabs clear of solar banks/suspension holes. Manual approval.
+
+Electrical Test:
+Flying Probe Fully Test
+
+Castellated Holes:
+no
+
+Edge Plating:
+No
+
+Mark on PCB:
+Remove Mark
+
+Min via hole size/diameter:
+0.3mm/(0.4/0.45mm)
+
+Via Plating Method:
+Not Specified
+
+4-Wire Kelvin Test:
+Yes
+
+Paper between PCBs:
+No
+
+Appearance Quality:
+IPC Class 2 Standard
+
+Confirm Production file:
+Yes 
+
+Silkscreen Technology:
+Ink-jet Printing Silkscreen
+
+Package Box:
+With JLCPCB logo
+
+Inspection Report:
+No
+
+Board Outline Tolerance:
+±0.2mm(Regular)
+
+Impedance Test Report:
+No
+
+UL Marking:
+No
+
+Shortage Preference:
+Require Full Quantity
+
+Gross Weight:
+0.14kg

@@ -1,0 +1,36 @@
+{
+  "pcb_sha256": "e02bf87186fc86b90569b6ea25041a34c7d2e32ef39b951847956cc2d2eb0f13",
+  "comparison": "All exact Gerber content except TF.CreationDate and G04 Created by KiCad timestamp lines. No aperture, coordinate, attribute, draw or flash commands removed.",
+  "files": [
+    {
+      "file": "stratolink-F_Mask.gts",
+      "live_sha256": "b6b81791fa37f5e4da6f122727d8277be6a9c466f56705a3bdb7ab75a95b6c51",
+      "Y25_sha256": "825dd61dca4d39acb67690769a35e4e4095cedc926a6386ea585db7621ce3b79",
+      "equal_except_creation_timestamps": true
+    },
+    {
+      "file": "stratolink-B_Mask.gbs",
+      "live_sha256": "151c7b817955fa758b2b76746d1c8751b037a9815b094b20c6fb61ffabd13b0b",
+      "Y25_sha256": "82c716f9d74514853b56de723c987fea90e841d294d164ea658862b16d2e89f1",
+      "equal_except_creation_timestamps": true
+    },
+    {
+      "file": "stratolink-F_Silkscreen.gto",
+      "live_sha256": "ac63704a288aa182ebba673033b98cfe12ec6851e86208eeae13b398deb3a8a6",
+      "Y25_sha256": "3ab8f78a624d56836e988493fd5045740e104b9aa3d19b23100d6914be4f09dc",
+      "equal_except_creation_timestamps": true
+    },
+    {
+      "file": "stratolink-B_Silkscreen.gbo",
+      "live_sha256": "9b563ff3a0cee26cd3f06389d606041431dec098e6dec7ef757e96469ce92437",
+      "Y25_sha256": "85940d1d46a30a9082f9432776262611e93b55f5c61e437c70e8510716c7785a",
+      "equal_except_creation_timestamps": true
+    },
+    {
+      "file": "stratolink-Edge_Cuts.gm1",
+      "live_sha256": "21e47f6f28d5643f88920cb9a60520a5ebfb1bc75224b765992f764ad559029b",
+      "Y25_sha256": "00d52f23a71885ea5782fe715febc8fab332f50c71430974efe9fc4729f6ba3f",
+      "equal_except_creation_timestamps": true
+    }
+  ]
+}

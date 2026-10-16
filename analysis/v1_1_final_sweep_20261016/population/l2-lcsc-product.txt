@@ -1,0 +1,182 @@
+Hot-Selling
+Coupons
+$20
+API
+Language
+Help
+Contact Us
+TIInfineon/CYPRESSKEMETBoschRENESAS
+Samples Offer
+Upload a BOM
+twarner491
+USD
+Cart
+Catalog
+Products
+Manufacturers
+RFQ/BOM
+Deals
+Custom Cables
+Solutions
+Resources
+Home
+Products
+Passives
+Inductors, Coils, Chokes
+Fixed Inductors
+PROD Tech PWCWAQ1608F-100KTT
+Favorites
+5% OFF
+Pinout
+Footprint
+Images for reference only
+EDA Models
+EasyEDA
+PROD Tech PWCWAQ1608F-100KTT
+Manufacturer	
+PROD TechAsian Brands
+
+MPN	
+PWCWAQ1608F-100KTT
+
+LCSC Part #	
+C436784
+
+Packaging	
+0603
+
+Customer #	
+
+Key Attributes	
+FIXED IND 10uH 280mA 2.405Ω 0603
+
+Datasheet	
+PROD Tech PWCWAQ1608F-100KTT
+Products Specifications
+All
+Type	Description	
+Category	Passives/Inductors, Coils, Chokes/Fixed Inductors	
+
+Manufacturer	PROD Tech	
+
+Packaging	0603	
+
+Current Rating	280mA	
+
+Inductance	10uH	
+
+Tolerance	±10%	
+Type	Description	
+Frequency - Self Resonant	35MHz	
+
+Current - Saturation(Isat)	280mA	
+
+DC Resistance(DCR)	2.405Ω	
+
+Type	Wire-wound chip inductor	
+
+Q @ Frequency	-	
+Help & Feedback
+Show similar products (158027) >
+Every Order Guarantee
+100% Authentic · 30-Day Return or Replacement
+In-Stock: 8,080
+8,080 In stock, ships now
+Minimum: 10
+Multiple: 10
+Sales Unit: Piece
+Cut Tape
+LCSC-Reel
+$3
+Packaging
+Qty
+Unit Price
+Total Amount
+Cut Tape
+10
+$ 0.0538
+$ 0.57
+$ 0.54
+$ 0.54
+Add to Cart
+Add to BOM List
+Qty	Unit Price	Total Amount
+10+	$ 0.0566$ 0.0538	$ 0.54
+100+	$ 0.05$ 0.0475	$ 4.75
+300+	$ 0.0467$ 0.0444	$ 13.32
+1,000+	$ 0.0442$ 0.0420	$ 42.00
+4,000+	$ 0.0397$ 0.0378	$ 151.20
+8,000+	$ 0.0387$ 0.0368	$ 294.40
+
+Standard Packaging
+4000/Full Reel
+Better price for more quantity?
+$
+Get Quote
+Datasheet
+Fullscreen
+Download
+Compliance & Export Codes
+Type	Details
+ECCN	
+CNHTS	8504500000
+USHTS	8504508000
+TARIC	8504500010
+Type	Details
+CAHTS	8504500000
+BRHTS	85045000
+INHTS	85045010
+MXHTS	8504.50.01
+Information
+About LCSC
+Contact Us
+LCSC Seller
+Quality Assurance
+Terms and Conditions
+Privacy Policy
+Cookie Notice
+Blog
+Tools
+BOM Tool/RFQ
+API
+LCSC Calculator Hub
+Cross Reference
+Customer Service
+Track Order
+Return Policy
+How to Checkout
+Orders & Payment Terms
+International Shipping
+Feedback
+FAQ
+Help Center
+Electronic Components
+EasyEDA
+JLCPCB
+LCSC
+CUSTOM CABLES
+FRONT PANELS
+Connect With Us
+Customer Service: 0086-755-83210457
+Logistics Dept.: 0086-755-83233027
+Email: support@lcsc.com
+9:30 am - 12 am, 1:30 pm - 10 pm
+Monday - Friday, UTC/GMT +8
+Current Time: Sat, Oct 17, 05:48:45 GMT+8
+Follow Us
+Encrypted
+Payment
+Terms & Conditions | Privacy Notice | Cookie Settings | Do Not Sell / Do Not Share My Personal Information
+© 2025 LCSC.COM All Rights Reserved.
+粤ICP备17041818号 ISO/IEC
+LCSC uses cookies and similar technology to improve site performance, enhance security, personal content and ads, and understand how you interact with our services. This information is shared with third-party service providers. Learn more in our Cookie Policy.
+Cookie Settings
+Reject All
+Accept All Cookies
+
+We've updated our Terms
+We are committed to maintaining transparency and keeping your personal data safe. We have updated our Privacy Policy. Please take a moment to review the Privacy Policy for details of the changes. You may also choose whether to receive marketing communications from us. Your choice is entirely voluntary, and choosing not to consent to marketing communications will not affect your access to or use of our website or core services.
+I agree to the updated Privacy Policy*
+I agree to the updated Marketing Policy
+Decline
+Accept & Continue

@@ -1,0 +1,147 @@
+[
+  {
+    "path": "/board/design_settings/rule_severities/solder_mask_bridge",
+    "before": "error",
+    "after": "ignore"
+  },
+  {
+    "path": "/board/design_settings/rules/solder_mask_to_copper_clearance",
+    "before": 0.09,
+    "after": 0.0
+  },
+  {
+    "path": "/erc/erc_exclusions",
+    "before": [
+      [
+        "pin_to_pin|533400|1600200|d24f236f-77e7-440c-9378-f49a6d546306|944d0dde-0354-5fbe-8d7f-fd73f10709be|/4d146a28-be53-49f1-b1c6-484192820e45|/4d146a28-be53-49f1-b1c6-484192820e45|/4d146a28-be53-49f1-b1c6-484192820e45",
+        "TMP117 ALERT is intentionally unavailable and grounded. TI TMP117 datasheet section 8.2.1 explicitly permits grounding ALERT when unused. Open-drain pin type retained; this exact marker is contention with the external GND PWR_FLAG, not a driven-high circuit."
+      ],
+      [
+        "pin_to_pin|254000|419100|82711c1e-7163-4ccd-9fb6-5a60e20408e1|944d0dde-0354-5fbe-8d7f-fd73f10709be|/4d146a28-be53-49f1-b1c6-484192820e45|/4d146a28-be53-49f1-b1c6-484192820e45|/4d146a28-be53-49f1-b1c6-484192820e45",
+        "LIS2DH12 SDO/SA0 is grounded to select I2C address 0x18 with CS high, as specified in ST datasheet section 6.1.1. Bidirectional type retained for its SPI role. Only this exact GND PWR_FLAG marker is excluded. Firmware follow-up: disable internal SDO pull-up using CTRL_REG0 SDO_PU_DISC while preserving required other bits."
+      ]
+    ],
+    "after": [
+      [
+        "pin_to_pin|254000|419100|82711c1e-7163-4ccd-9fb6-5a60e20408e1|944d0dde-0354-5fbe-8d7f-fd73f10709be|/4d146a28-be53-49f1-b1c6-484192820e45|/4d146a28-be53-49f1-b1c6-484192820e45|/4d146a28-be53-49f1-b1c6-484192820e45",
+        "LIS2DH12 SDO/SA0 is grounded to select I2C address 0x18 with CS high, as specified in ST datasheet section 6.1.1. Bidirectional type retained for its SPI role. Only this exact GND PWR_FLAG marker is excluded. Firmware follow-up: disable internal SDO pull-up using CTRL_REG0 SDO_PU_DISC while preserving required other bits."
+      ],
+      [
+        "pin_to_pin|533400|1600200|d24f236f-77e7-440c-9378-f49a6d546306|944d0dde-0354-5fbe-8d7f-fd73f10709be|/4d146a28-be53-49f1-b1c6-484192820e45|/4d146a28-be53-49f1-b1c6-484192820e45|/4d146a28-be53-49f1-b1c6-484192820e45",
+        "TMP117 ALERT is intentionally unavailable and grounded. TI TMP117 datasheet section 8.2.1 explicitly permits grounding ALERT when unused. Open-drain pin type retained; this exact marker is contention with the external GND PWR_FLAG, not a driven-high circuit."
+      ],
+      [
+        "pin_to_pin|596900|1333500|97fe1358-9111-4cae-ace0-69f4a04c9922|944d0dde-0354-5fbe-8d7f-fd73f10709be|/4d146a28-be53-49f1-b1c6-484192820e45|/4d146a28-be53-49f1-b1c6-484192820e45|/4d146a28-be53-49f1-b1c6-484192820e45",
+        "LTR-390UV INT is an unused open-drain output tied to GND, with no pull-up or driven-high source on the output. Electrical inference: its sink cannot contend with GND; LiteOn identifies open-drain operation but an explicit recommendation to ground was not located. Interrupt functionality is unavailable; keep LS_INT_EN disabled. Only this exact GND PWR_FLAG marker is excluded."
+      ]
+    ]
+  },
+  {
+    "path": "/erc/rule_severities/field_name_whitespace",
+    "before": null,
+    "after": "warning"
+  },
+  {
+    "path": "/erc/rule_severities/footprint_filter",
+    "before": null,
+    "after": "ignore"
+  },
+  {
+    "path": "/erc/rule_severities/footprint_link_issues",
+    "before": null,
+    "after": "warning"
+  },
+  {
+    "path": "/erc/rule_severities/four_way_junction",
+    "before": null,
+    "after": "ignore"
+  },
+  {
+    "path": "/erc/rule_severities/ground_pin_not_ground",
+    "before": null,
+    "after": "warning"
+  },
+  {
+    "path": "/erc/rule_severities/isolated_pin_label",
+    "before": null,
+    "after": "warning"
+  },
+  {
+    "path": "/erc/rule_severities/label_multiple_wires",
+    "before": null,
+    "after": "warning"
+  },
+  {
+    "path": "/erc/rule_severities/lib_symbol_mismatch",
+    "before": null,
+    "after": "warning"
+  },
+  {
+    "path": "/erc/rule_severities/same_local_global_label",
+    "before": null,
+    "after": "warning"
+  },
+  {
+    "path": "/erc/rule_severities/similar_label_and_power",
+    "before": null,
+    "after": "warning"
+  },
+  {
+    "path": "/erc/rule_severities/similar_power",
+    "before": null,
+    "after": "warning"
+  },
+  {
+    "path": "/erc/rule_severities/single_global_label",
+    "before": null,
+    "after": "ignore"
+  },
+  {
+    "path": "/erc/rule_severities/stacked_pin_name",
+    "before": null,
+    "after": "warning"
+  },
+  {
+    "path": "/erc/rule_severities/unconnected_wire_endpoint",
+    "before": null,
+    "after": "warning"
+  },
+  {
+    "path": "/erc/rule_severities/undefined_netclass",
+    "before": null,
+    "after": "error"
+  },
+  {
+    "path": "/schematic/annotation",
+    "before": null,
+    "after": {
+      "method": 0,
+      "sort_order": 0
+    }
+  },
+  {
+    "path": "/schematic/bom_settings/include_excluded_from_bom",
+    "before": null,
+    "after": false
+  },
+  {
+    "path": "/schematic/drawing/hop_over_size_choice",
+    "before": null,
+    "after": 0
+  },
+  {
+    "path": "/schematic/reuse_designators",
+    "before": null,
+    "after": true
+  },
+  {
+    "path": "/schematic/used_designators",
+    "before": null,
+    "after": ""
+  },
+  {
+    "path": "/schematic/variants",
+    "before": null,
+    "after": []
+  }
+]

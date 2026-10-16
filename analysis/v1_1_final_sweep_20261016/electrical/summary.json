@@ -1,0 +1,75 @@
+{
+  "status": "PASS on repaired source; captured initial source failed VSTOR continuity",
+  "source_hashes": {
+    "stratolink.kicad_pcb": "e02bf87186fc86b90569b6ea25041a34c7d2e32ef39b951847956cc2d2eb0f13",
+    "stratolink.kicad_sch": "092ddb3451545cc6f7d7d64d8c02c933e89a40acb6897d865e3a8936d54e21fb",
+    "stratolink.kicad_pro": "c9be5b22927d7fe889188023e69f6e774e808aa79d4ea13eb1b2ddc348ffe2f9",
+    "stratolink.kicad_dru": "071d900e34c4eb3d3f91003cc0698e261e7fe23beea7107c4db50a1bf60a5136"
+  },
+  "frozen_pcb_sha256": "25b201eb09c6746a22d1c3be42f7d4023319dd6fa5e3e587dc8cf42d97bb4d7f",
+  "captured_broken_pcb_sha256": "01bc0ba752b88678f9ee01fbc2c173c7eaedded96f983bcd0f6df5ea971c95e3",
+  "strict_rules_project_sha256": "915d9f9c4bc8c1eb0866031bf765ff08dc41a7b5bea4fb158ca26c1032ef93cd",
+  "native_KiCad_version": "10.0.0",
+  "native_DRC_violations": 0,
+  "native_open_connections": 0,
+  "native_schematic_parity_findings": 0,
+  "ERC_unexcluded_findings": 0,
+  "ERC_documented_exclusions": 2,
+  "schematic_component_count": 66,
+  "schematic_named_net_count": 59,
+  "schematic_pin_net_role_count": 247,
+  "PCB_footprint_count": 68,
+  "PCB_physical_pad_count": 259,
+  "logical_netlist_and_component_library_definitions_unchanged": true,
+  "PCB_poses_pad_geometry_and_net_assignments_unchanged": true,
+  "full_native_polygon_foreign_net_overlaps": 0,
+  "full_native_polygon_disconnected_pad_nets": 0,
+  "unanchored_assigned_net_copper_components": 0,
+  "focused_pin_assignment_checks": 84,
+  "TMP117_ball_map_correct": true,
+  "repaired_source_equals_frozen_except_five_Fab_field_visibility_changes": true,
+  "only_repair_to_captured_live_PCB": "Restore VSTOR segment 56e63bbd-ec8b-4f4e-ad43-a47451d11e0e from (55.4, 52.1234) to (56.78, 53.5034), B.Cu, 0.2 mm width",
+  "only_project_repairs": [
+    "solder_mask_bridge: ignore -> error",
+    "solder_mask_to_copper_clearance:0 ->0.09mm",
+    "Remove obsolete LTR390 ERC exclusion; preserve both current legitimate exclusions and other settings"
+  ],
+  "source_files_unchanged_after_checks": 166,
+  "refill_save_reproduces_final_PCB_hash": true,
+  "prior_failure_effect": "R22.1 isolated from VSTOR, disconnecting the upper resistor of the PA10 voltage-sense divider. Main VSTOR rail and active midpoint-balancer VBAT supply remained connected.",
+  "limits": [
+    "Seven documented DRC categories remain ignored by the authoritative project; they are listed in capture.json and native reports.",
+    "Two specific U5/U7 ERC exclusions are retained and explicitly included in the reported output.",
+    "No assigned-net orphan copper is not a statement about unnetted decorative logo fragments.",
+    "DC connectivity and native DRC do not certify RF performance, I2C edge timing, thermal behavior, balancer dynamic stability or supplier CAM."
+  ],
+  "restored_segment_native": [
+    "segment",
+    [
+      "start",
+      "55.4",
+      "52.1234"
+    ],
+    [
+      "end",
+      "56.78",
+      "53.5034"
+    ],
+    [
+      "width",
+      "0.2"
+    ],
+    [
+      "layer",
+      "B.Cu"
+    ],
+    [
+      "net",
+      "VSTOR"
+    ],
+    [
+      "uuid",
+      "56e63bbd-ec8b-4f4e-ad43-a47451d11e0e"
+    ]
+  ]
+}

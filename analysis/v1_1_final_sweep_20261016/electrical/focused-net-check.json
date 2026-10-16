@@ -1,0 +1,803 @@
+{
+  "pcb_sha256": "e02bf87186fc86b90569b6ea25041a34c7d2e32ef39b951847956cc2d2eb0f13",
+  "schematic_sha256": "092ddb3451545cc6f7d7d64d8c02c933e89a40acb6897d865e3a8936d54e21fb",
+  "netlist_sha256": "71da234c4b39faedc88442fd2db81dfa8a6255925ff59c39dce91e549574cdac",
+  "status": "PASS",
+  "groups": {
+    "TMP117": [
+      {
+        "ref": "U5",
+        "pin": "A1",
+        "net": "SDA",
+        "function": "SDA_A1",
+        "type": "bidirectional",
+        "same_net_schematic_pads_all_physically_connected": true
+      },
+      {
+        "ref": "U5",
+        "pin": "A2",
+        "net": "SCL",
+        "function": "SCL_A2",
+        "type": "input",
+        "same_net_schematic_pads_all_physically_connected": true
+      },
+      {
+        "ref": "U5",
+        "pin": "B1",
+        "net": "+3.3V",
+        "function": "V+_B1",
+        "type": "power_in",
+        "same_net_schematic_pads_all_physically_connected": true
+      },
+      {
+        "ref": "U5",
+        "pin": "B2",
+        "net": "GND",
+        "function": "GND_B2",
+        "type": "power_in",
+        "same_net_schematic_pads_all_physically_connected": true
+      },
+      {
+        "ref": "U5",
+        "pin": "C1",
+        "net": "GND",
+        "function": "ADD0_C1",
+        "type": "input",
+        "same_net_schematic_pads_all_physically_connected": true
+      },
+      {
+        "ref": "U5",
+        "pin": "C2",
+        "net": "GND",
+        "function": "ALERT_C2",
+        "type": "open_collector",
+        "same_net_schematic_pads_all_physically_connected": true
+      }
+    ],
+    "storage_and_ADC": [
+      {
+        "ref": "U1",
+        "pin": "19",
+        "net": "VSTOR",
+        "function": "VSTOR_19",
+        "type": "power_out",
+        "same_net_schematic_pads_all_physically_connected": true
+      },
+      {
+        "ref": "U1",
+        "pin": "3",
+        "net": "VSTOR",
+        "function": "VOC_SAMP_3",
+        "type": "input",
+        "same_net_schematic_pads_all_physically_connected": true
+      },
+      {
+        "ref": "U1",
+        "pin": "6",
+        "net": "VSTOR",
+        "function": "VOUT_EN_6",
+        "type": "input",
+        "same_net_schematic_pads_all_physically_connected": true
+      },
+      {
+        "ref": "C3",
+        "pin": "1",
+        "net": "VSTOR",
+        "function": null,
+        "type": "passive",
+        "same_net_schematic_pads_all_physically_connected": true
+      },
+      {
+        "ref": "C4",
+        "pin": "1",
+        "net": "VSTOR",
+        "function": null,
+        "type": "passive",
+        "same_net_schematic_pads_all_physically_connected": true
+      },
+      {
+        "ref": "R22",
+        "pin": "1",
+        "net": "VSTOR",
+        "function": null,
+        "type": "passive",
+        "same_net_schematic_pads_all_physically_connected": true
+      },
+      {
+        "ref": "J4",
+        "pin": "2",
+        "net": "VSTOR",
+        "function": "Pin_2_2",
+        "type": "passive",
+        "same_net_schematic_pads_all_physically_connected": true
+      },
+      {
+        "ref": "R22",
+        "pin": "2",
+        "net": "PA10",
+        "function": null,
+        "type": "passive",
+        "same_net_schematic_pads_all_physically_connected": true
+      },
+      {
+        "ref": "R23",
+        "pin": "1",
+        "net": "PA10",
+        "function": null,
+        "type": "passive",
+        "same_net_schematic_pads_all_physically_connected": true
+      },
+      {
+        "ref": "R23",
+        "pin": "2",
+        "net": "GND",
+        "function": null,
+        "type": "passive",
+        "same_net_schematic_pads_all_physically_connected": true
+      },
+      {
+        "ref": "U2",
+        "pin": "25",
+        "net": "PA10",
+        "function": "PA10/ADC4_25",
+        "type": "bidirectional",
+        "same_net_schematic_pads_all_physically_connected": true
+      }
+    ],
+    "balancer": [
+      {
+        "ref": "U8",
+        "pin": "1",
+        "net": "/SC_BAL_OUT",
+        "function": "OUT_1",
+        "type": "output",
+        "same_net_schematic_pads_all_physically_connected": true
+      },
+      {
+        "ref": "U8",
+        "pin": "2",
+        "net": "GND",
+        "function": "V-_2",
+        "type": "power_in",
+        "same_net_schematic_pads_all_physically_connected": true
+      },
+      {
+        "ref": "U8",
+        "pin": "3",
+        "net": "/SC_HALF_REF",
+        "function": "+_3",
+        "type": "input",
+        "same_net_schematic_pads_all_physically_connected": true
+      },
+      {
+        "ref": "U8",
+        "pin": "4",
+        "net": "/SC_BAL_OUT",
+        "function": "-_4",
+        "type": "input",
+        "same_net_schematic_pads_all_physically_connected": true
+      },
+      {
+        "ref": "U8",
+        "pin": "5",
+        "net": "/VBAT",
+        "function": "V+_5",
+        "type": "power_in",
+        "same_net_schematic_pads_all_physically_connected": true
+      },
+      {
+        "ref": "R24",
+        "pin": "1",
+        "net": "/VBAT",
+        "function": null,
+        "type": "passive",
+        "same_net_schematic_pads_all_physically_connected": true
+      },
+      {
+        "ref": "R24",
+        "pin": "2",
+        "net": "/SC_HALF_REF",
+        "function": null,
+        "type": "passive",
+        "same_net_schematic_pads_all_physically_connected": true
+      },
+      {
+        "ref": "R25",
+        "pin": "1",
+        "net": "/SC_HALF_REF",
+        "function": null,
+        "type": "passive",
+        "same_net_schematic_pads_all_physically_connected": true
+      },
+      {
+        "ref": "R25",
+        "pin": "2",
+        "net": "GND",
+        "function": null,
+        "type": "passive",
+        "same_net_schematic_pads_all_physically_connected": true
+      },
+      {
+        "ref": "R26",
+        "pin": "1",
+        "net": "/SC_BAL_OUT",
+        "function": null,
+        "type": "passive",
+        "same_net_schematic_pads_all_physically_connected": true
+      },
+      {
+        "ref": "R26",
+        "pin": "2",
+        "net": "/SC_MID",
+        "function": null,
+        "type": "passive",
+        "same_net_schematic_pads_all_physically_connected": true
+      },
+      {
+        "ref": "C22",
+        "pin": "1",
+        "net": "/VBAT",
+        "function": null,
+        "type": "passive",
+        "same_net_schematic_pads_all_physically_connected": true
+      },
+      {
+        "ref": "C22",
+        "pin": "2",
+        "net": "GND",
+        "function": null,
+        "type": "passive",
+        "same_net_schematic_pads_all_physically_connected": true
+      },
+      {
+        "ref": "C5",
+        "pin": "1",
+        "net": "/VBAT",
+        "function": "+_1",
+        "type": "passive",
+        "same_net_schematic_pads_all_physically_connected": true
+      },
+      {
+        "ref": "C5",
+        "pin": "2",
+        "net": "GND",
+        "function": "-_2",
+        "type": "passive",
+        "same_net_schematic_pads_all_physically_connected": true
+      },
+      {
+        "ref": "C5",
+        "pin": "3",
+        "net": "/SC_MID",
+        "function": "MID_3",
+        "type": "passive",
+        "same_net_schematic_pads_all_physically_connected": true
+      },
+      {
+        "ref": "U1",
+        "pin": "18",
+        "net": "/VBAT",
+        "function": "VBAT_18",
+        "type": "power_in",
+        "same_net_schematic_pads_all_physically_connected": true
+      }
+    ],
+    "SWD_programming": [
+      {
+        "ref": "U2",
+        "pin": "7",
+        "net": "SWDIO",
+        "function": "SWDIO/PA13_7",
+        "type": "bidirectional",
+        "same_net_schematic_pads_all_physically_connected": true
+      },
+      {
+        "ref": "J20",
+        "pin": "2",
+        "net": "SWDIO",
+        "function": "SWDIO_2",
+        "type": "bidirectional",
+        "same_net_schematic_pads_all_physically_connected": true
+      },
+      {
+        "ref": "U2",
+        "pin": "8",
+        "net": "SWCLK",
+        "function": "SWCLK/PA14_8",
+        "type": "bidirectional",
+        "same_net_schematic_pads_all_physically_connected": true
+      },
+      {
+        "ref": "J20",
+        "pin": "4",
+        "net": "SWCLK",
+        "function": "SWCLK_4",
+        "type": "output",
+        "same_net_schematic_pads_all_physically_connected": true
+      },
+      {
+        "ref": "U2",
+        "pin": "22",
+        "net": "RST",
+        "function": "RST_22",
+        "type": "input",
+        "same_net_schematic_pads_all_physically_connected": true
+      },
+      {
+        "ref": "J20",
+        "pin": "3",
+        "net": "RST",
+        "function": "~{RESET}_3",
+        "type": "open_collector",
+        "same_net_schematic_pads_all_physically_connected": true
+      },
+      {
+        "ref": "J20",
+        "pin": "1",
+        "net": "+3.3V",
+        "function": "VCC_1",
+        "type": "power_in",
+        "same_net_schematic_pads_all_physically_connected": true
+      },
+      {
+        "ref": "J20",
+        "pin": "5",
+        "net": "GND",
+        "function": "GND_5",
+        "type": "power_in",
+        "same_net_schematic_pads_all_physically_connected": true
+      },
+      {
+        "ref": "U2",
+        "pin": "21",
+        "net": "BOOT0",
+        "function": "BOOT0_21",
+        "type": "input",
+        "same_net_schematic_pads_all_physically_connected": true
+      },
+      {
+        "ref": "J4",
+        "pin": "6",
+        "net": "BOOT0",
+        "function": "Pin_6_6",
+        "type": "passive",
+        "same_net_schematic_pads_all_physically_connected": true
+      },
+      {
+        "ref": "R9",
+        "pin": "2",
+        "net": "BOOT0",
+        "function": null,
+        "type": "passive",
+        "same_net_schematic_pads_all_physically_connected": true
+      },
+      {
+        "ref": "R9",
+        "pin": "1",
+        "net": "GND",
+        "function": null,
+        "type": "passive",
+        "same_net_schematic_pads_all_physically_connected": true
+      }
+    ],
+    "I2C": [
+      {
+        "ref": "U2",
+        "pin": "10",
+        "net": "SDA",
+        "function": "SDA/PA11_10",
+        "type": "bidirectional",
+        "same_net_schematic_pads_all_physically_connected": true
+      },
+      {
+        "ref": "U2",
+        "pin": "9",
+        "net": "SCL",
+        "function": "SCL/PA12_9",
+        "type": "bidirectional",
+        "same_net_schematic_pads_all_physically_connected": true
+      },
+      {
+        "ref": "U4",
+        "pin": "7",
+        "net": "SDA",
+        "function": "SDI/SDA_7",
+        "type": "bidirectional",
+        "same_net_schematic_pads_all_physically_connected": true
+      },
+      {
+        "ref": "U4",
+        "pin": "8",
+        "net": "SCL",
+        "function": "SCLK_8",
+        "type": "input",
+        "same_net_schematic_pads_all_physically_connected": true
+      },
+      {
+        "ref": "U5",
+        "pin": "A1",
+        "net": "SDA",
+        "function": "SDA_A1",
+        "type": "bidirectional",
+        "same_net_schematic_pads_all_physically_connected": true
+      },
+      {
+        "ref": "U5",
+        "pin": "A2",
+        "net": "SCL",
+        "function": "SCL_A2",
+        "type": "input",
+        "same_net_schematic_pads_all_physically_connected": true
+      },
+      {
+        "ref": "U6",
+        "pin": "12",
+        "net": "SDA",
+        "function": "SDA_12",
+        "type": "bidirectional",
+        "same_net_schematic_pads_all_physically_connected": true
+      },
+      {
+        "ref": "U6",
+        "pin": "13",
+        "net": "SCL",
+        "function": "SCL_13",
+        "type": "input",
+        "same_net_schematic_pads_all_physically_connected": true
+      },
+      {
+        "ref": "U7",
+        "pin": "4",
+        "net": "SDA",
+        "function": "SDA/SDI/SDO_4",
+        "type": "bidirectional",
+        "same_net_schematic_pads_all_physically_connected": true
+      },
+      {
+        "ref": "U7",
+        "pin": "1",
+        "net": "SCL",
+        "function": "SCL/SPC_1",
+        "type": "bidirectional",
+        "same_net_schematic_pads_all_physically_connected": true
+      },
+      {
+        "ref": "R11",
+        "pin": "1",
+        "net": "+3.3V",
+        "function": null,
+        "type": "passive",
+        "same_net_schematic_pads_all_physically_connected": true
+      },
+      {
+        "ref": "R11",
+        "pin": "2",
+        "net": "SDA",
+        "function": null,
+        "type": "passive",
+        "same_net_schematic_pads_all_physically_connected": true
+      },
+      {
+        "ref": "R12",
+        "pin": "1",
+        "net": "+3.3V",
+        "function": null,
+        "type": "passive",
+        "same_net_schematic_pads_all_physically_connected": true
+      },
+      {
+        "ref": "R12",
+        "pin": "2",
+        "net": "SCL",
+        "function": null,
+        "type": "passive",
+        "same_net_schematic_pads_all_physically_connected": true
+      },
+      {
+        "ref": "R13",
+        "pin": "2",
+        "net": "SCL",
+        "function": null,
+        "type": "passive",
+        "same_net_schematic_pads_all_physically_connected": true
+      },
+      {
+        "ref": "R14",
+        "pin": "2",
+        "net": "SDA",
+        "function": null,
+        "type": "passive",
+        "same_net_schematic_pads_all_physically_connected": true
+      },
+      {
+        "ref": "R13",
+        "pin": "1",
+        "net": "Net-(U3-SCL)",
+        "function": null,
+        "type": "passive",
+        "same_net_schematic_pads_all_physically_connected": true
+      },
+      {
+        "ref": "R14",
+        "pin": "1",
+        "net": "Net-(U3-SDA)",
+        "function": null,
+        "type": "passive",
+        "same_net_schematic_pads_all_physically_connected": true
+      },
+      {
+        "ref": "U3",
+        "pin": "17",
+        "net": "Net-(U3-SCL)",
+        "function": "SCL_17",
+        "type": "input",
+        "same_net_schematic_pads_all_physically_connected": true
+      },
+      {
+        "ref": "U3",
+        "pin": "16",
+        "net": "Net-(U3-SDA)",
+        "function": "SDA_16",
+        "type": "bidirectional",
+        "same_net_schematic_pads_all_physically_connected": true
+      }
+    ],
+    "GNSS_UART": [
+      {
+        "ref": "U2",
+        "pin": "4",
+        "net": "TX",
+        "function": "UART1_TX/PB6_4",
+        "type": "bidirectional",
+        "same_net_schematic_pads_all_physically_connected": true
+      },
+      {
+        "ref": "U2",
+        "pin": "5",
+        "net": "RX",
+        "function": "UART1_RX/PB7_5",
+        "type": "bidirectional",
+        "same_net_schematic_pads_all_physically_connected": true
+      },
+      {
+        "ref": "J4",
+        "pin": "4",
+        "net": "TX",
+        "function": "Pin_4_4",
+        "type": "passive",
+        "same_net_schematic_pads_all_physically_connected": true
+      },
+      {
+        "ref": "J4",
+        "pin": "5",
+        "net": "RX",
+        "function": "Pin_5_5",
+        "type": "passive",
+        "same_net_schematic_pads_all_physically_connected": true
+      },
+      {
+        "ref": "R16",
+        "pin": "1",
+        "net": "TX",
+        "function": null,
+        "type": "passive",
+        "same_net_schematic_pads_all_physically_connected": true
+      },
+      {
+        "ref": "R16",
+        "pin": "2",
+        "net": "Net-(U3-RXD)",
+        "function": null,
+        "type": "passive",
+        "same_net_schematic_pads_all_physically_connected": true
+      },
+      {
+        "ref": "U3",
+        "pin": "3",
+        "net": "Net-(U3-RXD)",
+        "function": "RXD_3",
+        "type": "input",
+        "same_net_schematic_pads_all_physically_connected": true
+      },
+      {
+        "ref": "R15",
+        "pin": "1",
+        "net": "RX",
+        "function": null,
+        "type": "passive",
+        "same_net_schematic_pads_all_physically_connected": true
+      },
+      {
+        "ref": "R15",
+        "pin": "2",
+        "net": "Net-(U3-TXD)",
+        "function": null,
+        "type": "passive",
+        "same_net_schematic_pads_all_physically_connected": true
+      },
+      {
+        "ref": "U3",
+        "pin": "2",
+        "net": "Net-(U3-TXD)",
+        "function": "TXD_2",
+        "type": "output",
+        "same_net_schematic_pads_all_physically_connected": true
+      }
+    ],
+    "RF_feeds": [
+      {
+        "ref": "AE1",
+        "pin": "1",
+        "net": "Net-(AE1-A)",
+        "function": "A_1",
+        "type": "passive",
+        "same_net_schematic_pads_all_physically_connected": true
+      },
+      {
+        "ref": "U2",
+        "pin": "12",
+        "net": "Net-(AE1-A)",
+        "function": "RF_12",
+        "type": "output",
+        "same_net_schematic_pads_all_physically_connected": true
+      },
+      {
+        "ref": "D1",
+        "pin": "2",
+        "net": "Net-(AE1-A)",
+        "function": "A2_2",
+        "type": "passive",
+        "same_net_schematic_pads_all_physically_connected": true
+      },
+      {
+        "ref": "AE2",
+        "pin": "1",
+        "net": "Net-(AE2-A)",
+        "function": "A_1",
+        "type": "passive",
+        "same_net_schematic_pads_all_physically_connected": true
+      },
+      {
+        "ref": "U3",
+        "pin": "11",
+        "net": "Net-(AE2-A)",
+        "function": "RF_IN_11",
+        "type": "input",
+        "same_net_schematic_pads_all_physically_connected": true
+      },
+      {
+        "ref": "D3",
+        "pin": "2",
+        "net": "Net-(AE2-A)",
+        "function": "A2_2",
+        "type": "passive",
+        "same_net_schematic_pads_all_physically_connected": true
+      },
+      {
+        "ref": "D1",
+        "pin": "1",
+        "net": "GND",
+        "function": "A1_1",
+        "type": "passive",
+        "same_net_schematic_pads_all_physically_connected": true
+      },
+      {
+        "ref": "D3",
+        "pin": "1",
+        "net": "GND",
+        "function": "A1_1",
+        "type": "passive",
+        "same_net_schematic_pads_all_physically_connected": true
+      }
+    ]
+  },
+  "selected_values": {
+    "U5": "TMP117AIYBGR",
+    "U2": "RAK3172-8-SM-NI",
+    "U8": "TLV8801DBVT",
+    "R22": "1M\u03a9",
+    "R23": "1M\u03a9",
+    "R24": "4.75M\u03a9",
+    "R25": "4.75M\u03a9",
+    "R26": "22\u03a9",
+    "C22": "100nF",
+    "R11": "4.7k\u03a9",
+    "R12": "4.7k\u03a9",
+    "R13": "0\u03a9",
+    "R14": "0\u03a9",
+    "R15": "33\u03a9",
+    "R16": "33\u03a9",
+    "R9": "0\u03a9"
+  },
+  "TMP117_manufacturer_top_view_ball_map": [
+    {
+      "ball": "A1",
+      "manufacturer_function": "SDA",
+      "net": "SDA",
+      "local_xy_mm": [
+        -0.2,
+        -0.4
+      ],
+      "absolute_xy_mm": [
+        64.7,
+        41.83
+      ]
+    },
+    {
+      "ball": "A2",
+      "manufacturer_function": "SCL",
+      "net": "SCL",
+      "local_xy_mm": [
+        0.2,
+        -0.4
+      ],
+      "absolute_xy_mm": [
+        64.3,
+        41.83
+      ]
+    },
+    {
+      "ball": "B1",
+      "manufacturer_function": "V+",
+      "net": "+3.3V",
+      "local_xy_mm": [
+        -0.2,
+        0.0
+      ],
+      "absolute_xy_mm": [
+        64.7,
+        41.43
+      ]
+    },
+    {
+      "ball": "B2",
+      "manufacturer_function": "GND",
+      "net": "GND",
+      "local_xy_mm": [
+        0.2,
+        0.0
+      ],
+      "absolute_xy_mm": [
+        64.3,
+        41.43
+      ]
+    },
+    {
+      "ball": "C1",
+      "manufacturer_function": "ADD0",
+      "net": "GND",
+      "local_xy_mm": [
+        -0.2,
+        0.4
+      ],
+      "absolute_xy_mm": [
+        64.7,
+        41.03
+      ]
+    },
+    {
+      "ball": "C2",
+      "manufacturer_function": "ALERT",
+      "net": "GND",
+      "local_xy_mm": [
+        0.2,
+        0.4
+      ],
+      "absolute_xy_mm": [
+        64.3,
+        41.03
+      ]
+    }
+  ],
+  "reference_sources": {
+    "analysis/v1_1_peer_review_20261014/digital/sources/tmp117.txt": "a2fd553c09c938532f9d098877e490d8c149cef30fd98e4c4ffab66b82410792",
+    "analysis/v1_1_peer_review_20261014/sources/rak3172-datasheet.txt": "fdb5c6cb1b1220d5eaed0f530ab740df6de8e2c05174ec033d490159aaa85968",
+    "analysis/v1_1_release_20261012/identities/review_balance_native.py": "bb33b8c6ec56e3b99d97f1f73f7eca27d6bc088ecd9cdcc496549131aa16afaa"
+  },
+  "reference_scope": "Manufacturer TMP117 and standard RAK3172 pin tables plus previously reviewed balancer topology. Full logical equality to the frozen design is independently recorded in repaired-comparison.json.",
+  "limits": [
+    "DC/native connectivity does not certify I2C rise time, RF impedance/sensitivity or balancer dynamic stability.",
+    "BOOT0 remains hard-strapped to GND through R9=0 ohm; use J20 SWD. J4 UART shares the active GNSS transmitter path.",
+    "U6 exists in the complete schematic/PCB but remains intentionally DNP in the pilot assembly population."
+  ]
+}

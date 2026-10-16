@@ -1,0 +1,121 @@
+{
+  "source_sha256": {
+    "live/stratolink.kicad_pcb": "e02bf87186fc86b90569b6ea25041a34c7d2e32ef39b951847956cc2d2eb0f13",
+    "frozen/stratolink.kicad_pcb": "25b201eb09c6746a22d1c3be42f7d4023319dd6fa5e3e587dc8cf42d97bb4d7f",
+    "live/stratolink.kicad_sch": "092ddb3451545cc6f7d7d64d8c02c933e89a40acb6897d865e3a8936d54e21fb",
+    "frozen/stratolink.kicad_sch": "c772c2a0edff4d6f7616afb0988fc95c2cbb8c2d3572c1429fc0f3718f69e921",
+    "live/stratolink.kicad_pro": "c9be5b22927d7fe889188023e69f6e774e808aa79d4ea13eb1b2ddc348ffe2f9",
+    "frozen/stratolink.kicad_pro": "915d9f9c4bc8c1eb0866031bf765ff08dc41a7b5bea4fb158ca26c1032ef93cd",
+    "live/stratolink.kicad_dru": "071d900e34c4eb3d3f91003cc0698e261e7fe23beea7107c4db50a1bf60a5136",
+    "frozen/stratolink.kicad_dru": "071d900e34c4eb3d3f91003cc0698e261e7fe23beea7107c4db50a1bf60a5136"
+  },
+  "actual_resistors_Mohm": {
+    "R1": 7.5,
+    "R2": 4.22,
+    "R3": 4.75,
+    "R4": 3.65,
+    "R5": 4.42,
+    "R6": 8.25,
+    "R7": 4.75,
+    "R24": 4.75,
+    "R25": 4.75
+  },
+  "thresholds": {
+    "charge": {
+      "room_screen": {
+        "nominal_V": 5.040710900473933,
+        "minimum_V": 4.877298728356248,
+        "maximum_V": 5.207994312796209
+      },
+      "independent_100ppm_TCR_65K_screen": {
+        "nominal_V": 5.040710900473933,
+        "minimum_V": 4.837277085565755,
+        "maximum_V": 5.251916835258564
+      }
+    },
+    "buck": {
+      "room_screen": {
+        "nominal_V": 3.311578947368421,
+        "minimum_V": 3.204564252214695,
+        "maximum_V": 3.4211157894736837
+      },
+      "independent_100ppm_TCR_65K_screen": {
+        "nominal_V": 3.311578947368421,
+        "minimum_V": 3.1784898008696474,
+        "maximum_V": 3.4497316981431942
+      }
+    },
+    "VBAT_OK_falling": {
+      "room_screen": {
+        "nominal_V": 2.510339366515837,
+        "minimum_V": 2.4348982706867974,
+        "maximum_V": 2.5873410256410256
+      },
+      "independent_100ppm_TCR_65K_screen": {
+        "nominal_V": 2.510339366515837,
+        "minimum_V": 2.4187648603351546,
+        "maximum_V": 2.6050469474662226
+      }
+    },
+    "VBAT_OK_rising": {
+      "room_screen": {
+        "nominal_V": 3.5095475113122174,
+        "minimum_V": 3.394731678688231,
+        "maximum_V": 3.6271230769230765
+      },
+      "independent_100ppm_TCR_65K_screen": {
+        "nominal_V": 3.5095475113122174,
+        "minimum_V": 3.3662010161716425,
+        "maximum_V": 3.658434601835004
+      }
+    }
+  },
+  "balancer": {
+    "feedback_before_R26_confirmed_in_audit": true,
+    "screened_high_cell_V": 2.6737839153628125,
+    "margin_to_2p75_V": 0.07621608463718754,
+    "initial_52percent_split_high_cell_V": 2.7309967543344533,
+    "typical_IC_plus_screened_divider_uA": 1.012070987763746,
+    "offset_assumption_V": 0.0045,
+    "offset_limit_temperature_C": 25,
+    "common_mode_valid_half_stack_above_V": 1.8,
+    "supply_rated_V": [
+      1.7,
+      5.5
+    ],
+    "nominal_energy_J_at_1F_to_2p51V": 9.554333191078367
+  },
+  "L2_conditional_current_screen": {
+    "TI_cycle_limit_max_mA": 205,
+    "TI_test_VSTOR_V": [
+      2.4,
+      5.5
+    ],
+    "TI_test_VOUT_upper_exclusive_V": 3.3,
+    "TI_25percent_margin_threshold_mA": 256.25,
+    "manufacturer_Isat_typ_mA_at_25C": 280,
+    "manufacturer_Irms_typ_mA_at_25C": 280,
+    "typical_rating_margin_mA": 23.75,
+    "guaranteed_current_margin_established": false,
+    "DCR_max_ohm_at_25C": 2.405,
+    "illustrative_100mA_DC_copper_loss_mW": 24.05,
+    "note": "Typical inductor currents are not guaranteed cold limits; actual 3.3116 V set point exceeds the stated <3.3 V current-limit test interval. DC copper loss is not switching loss."
+  },
+  "solar_screen": {
+    "two_parallel_nameplates_W": 0.48,
+    "TI_recommended_input_W": 0.4,
+    "TI_absolute_peak_input_W": 0.51,
+    "TI_recommended_VIN_V": 5.1,
+    "TI_absolute_VIN_V": 5.5,
+    "MPPT_fraction": 0.8,
+    "charge_low_corner_minus_400mV_headroom_V": 4.437277085565754,
+    "safe_cold_Voc_or_available_power_demonstrated": false,
+    "note": "The panel label does not define guaranteed Voc/Isc, and MPPT open-circuit sampling is not an input clamp."
+  },
+  "limitations": [
+    "1% resistors and 100ppm/K independent drift are screening assumptions, not the TI guarantee conditioned on 0.1% resistors.",
+    "No transient, ripple, low-temperature electrochemistry or unpowered op-amp simulation is represented.",
+    "The balancer offset limit is a 25C figure, not a guaranteed cold maximum.",
+    "Stored energy is not runtime or night endurance."
+  ]
+}

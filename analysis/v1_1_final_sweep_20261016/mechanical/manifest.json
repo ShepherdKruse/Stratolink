@@ -1,0 +1,37 @@
+{
+  "pcb_sha256": "e02bf87186fc86b90569b6ea25041a34c7d2e32ef39b951847956cc2d2eb0f13",
+  "project_sha256": "c9be5b22927d7fe889188023e69f6e774e808aa79d4ea13eb1b2ddc348ffe2f9",
+  "schematic_sha256": "092ddb3451545cc6f7d7d64d8c02c933e89a40acb6897d865e3a8936d54e21fb",
+  "read_only": true,
+  "dependency_sha256": {
+    "analysis/v1_1_engineer_review_20261015/mechanics/native_audit.py": "6aa7dff894b44d7ee0525783b4c74f76431e94e3944717fa8c7c9e133db4a4d2",
+    "analysis/v1_1_engineer_review_20261015/mechanics/compare_libraries.py": "449b51898e9d0ae501ee9cc8abdc232297b6bc503926ec2c9f4a090c60027c81",
+    "analysis/v1_1_engineer_review_20261015/mechanics/compare_model_transforms.py": "9a9cd02c298dbd4563c8da1d6be17af4fae3585901c40ef7f495687c95f53d59",
+    "analysis/v1_1_engineer_review_20261015/mechanics/check_assembly.py": "d2d435abf5688b65a39f8cc4ea330aea9979b5b4492bceaffea33fef34fc326a",
+    "analysis/v1_1_engineer_review_20261015/mechanics/extract_mask_audit.py": "e641075e47f491608828bb14a7808a9ef36af765545306e49d345ba2712d2683",
+    "analysis/v1_1_engineer_review_20261015/mechanics/check_plotted_mask.py": "cf2af9c003f766717172d43fda9f3c375e613dd9af5a98b9ae29d36505f44694",
+    "analysis/v1_1_engineer_review_20261015/mechanics/check_model_mesh.py": "6786775c7c8a4d2fc106094203ead44134a6e2c7d848eb4eadd383621efddfad",
+    "analysis/v1_1_peer_review_20261014/power/snapshot_assembly.py": "416cd4c8b7aabb7b903289c0300023cf8d70f5434c9b173d5e4469aacbabbd64",
+    "analysis/v1_1_top_gnss_20261014/mechanics/geometry_distances.py": "d5cb2916277ce8db92a59f17b82e490c5d377c9e120891ae83e38bd7736c4683",
+    "hardware/pcb/3d/solar/generate.py": "d54881036939cdadcbc841402fa829d62c2e80e0fd08c53905b5f359cf592d76"
+  },
+  "artifacts": {
+    "README.md": "8d28a7c47cf2d12d46cc37adda70761a6d5c84b8139df9f9ab7218e76ef08b82",
+    "Y25-artwork-comparison.json": "7fa2b0fd35f9699ad21771b6e742499d84627c73366f3b43dde3df1ae3a12893",
+    "antenna-model-mesh-review.json": "a1e53dc7c9233529d5adc055583650e723cf2bc5d06d856726d0cc288097997e",
+    "antenna-models.glb": "ded8f8776c7f6e948b90c9798428821e3c021d26eb203ff8779f8574b5a4c2a3",
+    "assembly-review.json": "46eda5049dad132e396c76353c3a4cd6487c5031faafe1555a494bc246e23bd1",
+    "geometry-review.json": "d1b625e827faab4f7dfd6bb77aa9d73ffe2bf824e0f1abbc605d1b941e77762e",
+    "library-pad-comparison.json": "4cf4037518d9800dd654b80d59cde30294fbf9a78252d7744a084d773686cfb6",
+    "model-transform-comparison.json": "ba111c10e9df9ca5a48d1a59e23dd46c4e6e0bae2b408f3f44091a4a5c6eab8d",
+    "models-pads.json": "2bd9daf5f4f5423e01cb4b0ce4bc0b8e9ed1edd5679e57e9724b7830a4070790",
+    "native-assembly.json": "4ee51bb66a98b2c3a9564acedba04d6e83fd8088a6a405f4e72985efc3e089e2",
+    "plotted-mask-review.json": "cdd9f54350948dfa4c7c12b1acfb92bfca4d26e0366c1efbf62f909e7ea84ed9",
+    "render-review.json": "d9fff7aa872a8d50ce766fc8eacefeae079b89a2459fde12b6b2e0f9882b8873",
+    "review_geometry.py": "4e327d4ead1ceb9a99a0aa2b00a04847ce4dfc5094d38ca3351a68b3d974559a",
+    "source-comparison.json": "2d06fe670c2f33bc08d5c10d1130e36a45a724eb65c14820aad2d761c8f0c802",
+    "visual/assembly.png": "b8365cb67f89a8fa1e24701683d24a3afc1708a6f6a593b5d76f068322d84ebd",
+    "visual/bottom.png": "e71dd4d850673126f40e8177dee52393564db5f26c0c5a2a9601881fe910155e",
+    "visual/top.png": "4e16bcf5a284bb0a5914ac089093904fccf6b64b2ed92dbb2e087205979663a8"
+  }
+}

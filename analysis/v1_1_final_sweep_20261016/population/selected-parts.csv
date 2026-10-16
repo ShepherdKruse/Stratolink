@@ -1,0 +1,31 @@
+References,MPN,LCSC,Quantity per PCB,Schematic values,Supplier description
+R26,0402WGF220JTCE,C25092,1,22Ω,-55℃~+155℃ 22Ω 50V 62.5mW Thick Film Resistor ±1% ±100ppm/℃ 0402 Chip Resistor - Surface Mount ROHS
+R6,0402WGF8254TCE,C423131,1,8.25MΩ,-55℃~+155℃ 50V 62.5mW 8.25MΩ Thick Film Resistor ±1% ±100ppm/℃ 0402 Chip Resistor - Surface Mount ROHS
+FB1,BLM15AG601SN1D,C76884,1,BLM15AG601SN1D,-55℃~+125℃ 1 300mA 520mΩ 600Ω@100MHz ±25% 0402 Ferrite Beads ROHS
+U1,BQ25570RGRR,C506250,1,BQ25570RGRR,-40℃~+125℃ 1.95V 285mA 2V~5.5V 488nA Charging IC、Protection IC Not supported Supercapacitor、Lithium Battery VQFN-20-EP(3.5x3.5) Battery Management ROHS
+"C4,C7,C9,C10,C11,C12,C14,C15,C17,C19,C20,C22,C23",CL05B104KO5NNNC,C1525,13,100nF,100nF 16V X7R ±10% 0402 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS
+"C8,C21",CL10A106KP8NNNC,C19702,2,10μF,10V 10uF X5R ±10% 0603 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS
+"C2,C3,C16",CL10A475KP8NNNC,C1705,3,4.7μF,10V 4.7uF X5R ±10% 0603 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS
+C6,CL21A226MAYNNNE,C602037,1,22µF,22uF 25V X5R ±20% 0805 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS
+R2,CRCW04024M22FKED,C2091474,1,4.22MΩ,-55℃~+155℃ 4.22MΩ 50V 62.5mW Thick Film Resistor ±1% ±100ppm/℃ 0402 Chip Resistor - Surface Mount ROHS
+"R3,R7,R24,R25",FRC0402F4754TS,C2998153,4,4.75MΩ,-55℃~+155℃ 4.75MΩ 50V 62.5mW Thick Film Resistor ±1% ±100ppm/℃ 0402 Chip Resistor - Surface Mount ROHS
+R1,FRC0402F7504TS,C3013187,1,7.50MΩ,-55℃~+155℃ 50V 62.5mW 7.5MΩ Thick Film Resistor ±1% ±100ppm/℃ 0402 Chip Resistor - Surface Mount ROHS
+R5,GR0402F4M42TAG00,C49654874,1,4.42MΩ,-55℃~+155℃ 4.42MΩ 50V 62.5mW Thick Film Resistor ±1% ±100ppm/℃ 0402 Chip Resistor - Surface Mount ROHS
+C1,GRM1555C1E103JE01D,C3855387,1,10nF,10nF 25V C0G ±5% 0402 Multilayer Ceramic Capacitors MLCC - SMD/SMT ROHS
+U7,LIS2DH12TR,C110926,1,LIS2DH12TR,"-40℃~+85℃ 0.2KB 1.71V~3.6V 500nA 8bit、10bit、12bit Accelerometer Motion event detection SPI、I2C X,Y,Z ±16g LGA-12(2x2) Accelerometers ROHS"
+L1,LPS4018-223MRC,C5278935,1,22µH,"22uH 360mΩ 650mA 740mA Magnetic Shielded Inductor ±20% SMD,3.9x3.9mm Power Inductors ROHS"
+U3,MAX-M10S-00B,C4153167,1,MAX-M10S-00B,LCC-18(9.7x10.1) GNSS Modules ROHS
+R27,MCU0805MD3304BP500,C4313228,1,3.3MΩ,-55℃~+155℃ 200mW 3.3MΩ Thin Film Resistor ±0.1% ±25ppm/℃ 0805 Chip Resistor - Surface Mount ROHS
+U4,MS561101BA03-50,C15639,1,MS561101BA03-50,-40℃~+85℃ 1.8V~3.6V 140nA 150pa 1Kpa~1.2bar 8.22ms I2C、SPI Integrated ADC and digital interface、On-chip calibration and non-volatile storage、Standby mode、On-chip temperature output Yes QFN-8(3x5) Pressure Sensors ROHS
+"D1,D3",PESD5V0U1BB,C5272735,2,PESD5V0U1BB,0.5pF 18V 1uA 200W@8/20us 5V 6V ESD IEC 61000-4-2、IEC 61000-4-5、IEC 61000-4-4 SOD-523 ESD and Surge Protection (TVS/ESD) ROHS
+L2,PWCWAQ1608F-100KTT,C436784,1,10µH,10uH 2.405Ω 280mA 280mA 35MHz Wire-wound chip inductor ±10% 0603 Inductors (SMD) ROHS
+U2,RAK3172-8-SM-NI,C5452091,1,RAK3172-8-SM-NI,"-40℃~+85℃ 15km 2V~3.6V 5.22mA 87mA IPEX interface LoRa SPI、UART、ADC、GPIO、I2C SMD,15.5x15mm LoRa Modules ROHS"
+"R9,R13,R14",RC0402FR-070RL,C106231,3,0Ω,-55℃~+155℃ 0Ω 50V 62.5mW Thick Film Resistor ±1% 0402 Chip Resistor - Surface Mount ROHS
+R8,RC0402FR-07100KL,C60491,1,100kΩ,-55℃~+155℃ 100kΩ 50V 62.5mW Thick Film Resistor ±1% ±100ppm/℃ 0402 Chip Resistor - Surface Mount ROHS
+"R10,R18",RC0402FR-0710KL,C60490,2,10kΩ,-55℃~+155℃ 10kΩ 50V 62.5mW Thick Film Resistor ±1% ±100ppm/℃ 0402 Chip Resistor - Surface Mount ROHS
+"R19,R21,R22,R23",RC0402FR-071ML,C138033,4,1MΩ,-55℃~+155℃ 1MΩ 50V 62.5mW Thick Film Resistor ±1% ±100ppm/℃ 0402 Chip Resistor - Surface Mount ROHS
+"R15,R16",RC0402FR-0733RL,C138002,2,33Ω,-55℃~+155℃ 33Ω 50V 62.5mW Thick Film Resistor ±1% ±100ppm/℃ 0402 Chip Resistor - Surface Mount ROHS
+R4,RC0402FR-073M65L,C477700,1,3.65MΩ,-55℃~+155℃ 3.65MΩ 50V 62.5mW Thick Film Resistor ±1% ±100ppm/℃ 0402 Chip Resistor - Surface Mount ROHS
+"R11,R12",RC0402FR-074K7L,C105871,2,4.7kΩ,-55℃~+155℃ 4.7kΩ 50V 62.5mW Thick Film Resistor ±1% ±100ppm/℃ 0402 Chip Resistor - Surface Mount ROHS
+U8,TLV8801DBVT,C544879,1,TLV8801DBVT,-40℃~+125℃ 0.1pA 0.1pA 1 1.5V/ms 1.7V~5.5V 1uV/℃ 340nV/√Hz@100Hz 4.5mV 450nA 87dB Built-in compensation、EMI filtering/RF suppression Rail-to-rail output SOT-23-5 Operational Amplifier ROHS
+U5,TMP117AIYBGR,C2871893,1,TMP117AIYBGR,-55℃~+150℃ 1.8V~5.5V 15.5ms 16bit 3.1uA I2C、SMBus ±0.1℃ DSBGA-6 Temperature Sensors ROHS

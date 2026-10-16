@@ -1,6 +1,6 @@
 # v1.1 pilot fabrication and assembly intent
 
-Current status, 15 October 2026: **engineer reroute under final manufacturing review**. The schematic circuit is unchanged. The [current review](../../analysis/v1_1_engineer_review_20261015/README.md) records the bounded fixes, checks and source identities. Use matching files from the [package manifest](../gerbers/v1.1-pilot/manifest.json). The saved JLC Y24 item is stale; supplier sign-in, reimport, fresh placement previews and factory CAM are pending. Planned quantity is **five PCBs, three assembled**. No checkout or payment has been made.
+Current status, 16 October 2026: **reviewed pilot draft ready for the user's ordering decision**. The [final sweep](../../analysis/v1_1_final_sweep_20261016/README.md) records fresh native checks, a restored voltage-sense trace and exact source identities. Use matching files from the [current package manifest](../gerbers/v1.1-final-20261016/manifest.json). Saved JLC **Y26** has five PCBs and three assemblies, with U6 omitted while JLC quotes sourcing. Factory CAM and manual production-file/placement approval remain pending. No checkout or payment has been made.
 
 ## Construction
 
@@ -15,19 +15,19 @@ U1 uses native +0.04 mm perimeter mask expansion, preserving its copper, paste, 
 
 The native design includes **AS7331-AQFM C20482877** at U6. Initial automated assembly **omits U6 only**. Populate **C14/C23, CL05B104KO5NNNC C1525, 100 nF**, and **R27, MCU0805MD3304BP500 C4313228, 3.3 MΩ ±0.1% ±25 ppm/K**. Do not substitute an ordinary 100 ppm/K resistor.
 
-The pilot front paste removes **exactly 16 U6 pad apertures**. All other front paste and all rear paste remain. Full-design paste is archived separately under `native/full-design-paste/`; the stencil-only derived PCB and plots are under `native/stencil/`. [Stencil proof](../gerbers/v1.1-pilot/stencil-population-proof.json). This pilot stencil is unsuitable for a later populated UV build.
+The pilot front paste removes **exactly 16 U6 pad apertures**. All other front paste and all rear paste remain. Full-design paste is archived separately under `native/full-design-paste/`; the stencil-only derived PCB and plots are under `native/stencil/`. [Stencil proof](../gerbers/v1.1-final-20261016/stencil-population-proof.json). This pilot stencil is unsuitable for a later populated UV build.
 
 U7's twelve apertures are **81% of copper-land area**, or 90% linear dimensions. Do not reduce them again. A **100 µm stencil** is the working reference, within ST's 90–150 µm recommendation; confirm paste, stencil and double-sided handling. Future AS7331 population requires separately reviewed stencil/process, actual supplier-model pin-1 orientation, MSL3 handling and sensor reflow/cleaning limits. Keep the optical aperture free of solder, flux, coatings, glue and tape. [UV assembly requirements](../../analysis/v1_1_release_20261012/as7331/review/requirements.md).
 
 ## Part identities and placement review
 
-Use exact MPN/LCSC identities from the generated [BOM](../gerbers/v1.1-pilot/BOM-stratolink.csv), with its matching [CPL](../gerbers/v1.1-pilot/CPL-stratolink.csv). The package has **58 full-design / 57 pilot automatic-assembly references**, **30 pilot groups** and **11 manual/DNP exclusions**. U5 is TMP117AIYBGR C2871893; U2 is RAK3172-8-SM-NI C5452091. R4 is RC0402FR-073M65L C477700; D1/D3 are PESD5V0U1BB C5272735.
+Use exact MPN/LCSC identities from the generated [BOM](../gerbers/v1.1-final-20261016/BOM-stratolink.csv), with its matching [CPL](../gerbers/v1.1-final-20261016/CPL-stratolink.csv). The package has **58 full-design / 57 pilot automatic-assembly references**, **30 pilot groups** and **11 manual/DNP exclusions**. U5 is TMP117AIYBGR C2871893; U2 is RAK3172-8-SM-NI C5452091. R4 is RC0402FR-073M65L C477700; D1/D3 are PESD5V0U1BB C5272735.
 
 Power identities: R1 **FRC0402F7504TS C3013187**, U8 **TLV8801DBVT C544879**, R24/R25 **FRC0402F4754TS C2998153**, R26 **0402WGF220JTCE C25092**, C22 **CL05B104KO5NNNC C1525**. Preserve U8 feedback before R26 and the C5 midpoint connection. U8 is now on **F.Cu at native 180°**, replacing the earlier rear placement.
 
-**The current supplier rotation profile is a draft.** U1 and U5 rotated 180° in the reroute; U8 changed face. Draft CPL values **U1 270°, U5 180°, front U8 180°** require fresh supplier preview. U2/U4/U7 retain their native poses, but review all assembled parts after reimport. Native footprint angles and supplier CPL angles use different conventions. U4's black circle is its pressure port, not its pin-1 marker. U6 has no pilot CPL row; its new native 180° orientation requires a separate supplier check before a populated build.
+**The populated IC supplier orientations have been reviewed.** Current CPL values include **U1 270°, U5 180° and front U8 90°**. U8's supplier angle differs from its native 180° orientation: the preview shows three leads right and pin 1 lower-right. The [supplier review](SUPPLIER_REVIEW.md) and [final parts sweep](../../analysis/v1_1_final_sweep_20261016/population/README.md) cover all seven populated ICs and 57 unique selected references. U4's black circle is its pressure port, not its pin-1 marker. U6 has no pilot CPL row; its supplier rotation requires a separate preview before a populated build.
 
-Historical Y24 MPN matches and placement screenshots apply only to its earlier source. Do not treat them as verification of this board. J1/J2/J20 lost their prior exclude-position attribute in the incoming file; the final PCB and schematic restore it, and the generator retains explicit manual exclusions. The intended order remains **Standard PCBA, both sides, five PCBs / three assembled, green 0.40 mm FR4, 1 oz copper, ENIG**. Supplier rail/tab placement, final panel envelope, gold finish and handling need renewed confirmation.
+The intended order is **Standard PCBA, both sides, five PCBs / three assembled, green 0.40 mm FR4, 1 oz copper, ENIG, no silkscreen**. The saved rail envelope is 71.36 × 71.30 mm. JLC must still accept rail/tab positions, mask registration, stencil and thin-board handling. J1/J2/J20 and the other manual parts are excluded from automatic assembly.
 
 ## Manual assembly after reflow and cleaning
 
@@ -45,9 +45,11 @@ The nominal GNSS wire clears the solar model by **20.54 mm**. Its model includes
 
 ## Release record and physical acceptance
 
-Use the [current engineering review](../../analysis/v1_1_engineer_review_20261015/README.md) for strict native checks, connectivity, filled-copper review and final source identities. Use the [package manifest](../gerbers/v1.1-pilot/manifest.json), BOM, CPL and [fabrication ZIP](../gerbers/v1.1-pilot/fabrication-review.zip) together. Run `python3 hardware/pcb/verify_review_package.py` from the review checkout to verify the matching package.
+Use the [final review](../../analysis/v1_1_final_sweep_20261016/README.md), [package manifest](../gerbers/v1.1-final-20261016/manifest.json), BOM, CPL and [fabrication ZIP](../gerbers/v1.1-final-20261016/fabrication-review.zip) together. Run `python3 analysis/v1_1_final_sweep_20261016/verify.py` and `python3 hardware/downloads/build.py --check` from a matching checkout. These verify recorded evidence; factory CAM and physical measurements remain separate.
 
-The saved JLC cart item **fabrication-review_Y24**, PCB **Y24-2680969A** / PCBA **SMT026101364685-2680969A**, remains an earlier revision. Fresh upload and both-side placement review are required before approving fabrication. Preserve manual production-file and parts-placement confirmation. No checkout or payment was made; the older Y22 draft is untouched. [Historical supplier record](../../analysis/v1_1_release_20261012/as7331/jlc/README.md).
+The saved JLC item is **fabrication-review_Y26**, PCB **Y26-2680969A** / PCBA **SMT026101664930-2680969A**. Its uploaded fabrication geometry and corrected CPL match the final package. Preserve manual production-file and placement confirmation and keep automatic placement approval disabled. [Current supplier record](SUPPLIER_REVIEW.md).
+
+A [populated-UV variant](../gerbers/v1.1-final-uv-20261016/README.md) is prepared from the same source, with U6 and its sixteen paste apertures restored. It is conditional on exact part sourcing, a fresh U6 supplier orientation check and the AS7331 assembly requirements. Do not combine that BOM with the UV-omitted stencil.
 
 Use **`stratolink_v1_1_uv_dnp`** firmware while U6 is absent. Verify TMP117 ACK/ID/readings, unavailable UV/lux/acoustic reporting, pressure/IMU/GNSS, radio transients, solar joint and bridle security. Measure charge plateau, both cell voltages, midpoint stability, cold leakage/ESR, dark current and sunrise recovery. **Cold panel Voc/I–V and harvester input-voltage/input-power limits remain unresolved physical bounds.** A later AS7331 build also needs a validated driver, controlled optics, raw data and calibration before an ozone claim.
 

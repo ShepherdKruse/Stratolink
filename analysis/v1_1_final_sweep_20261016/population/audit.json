@@ -1,0 +1,108 @@
+{
+  "source_sha256": {
+    "live/stratolink.kicad_pcb": "e02bf87186fc86b90569b6ea25041a34c7d2e32ef39b951847956cc2d2eb0f13",
+    "frozen/stratolink.kicad_pcb": "25b201eb09c6746a22d1c3be42f7d4023319dd6fa5e3e587dc8cf42d97bb4d7f",
+    "live/stratolink.kicad_sch": "092ddb3451545cc6f7d7d64d8c02c933e89a40acb6897d865e3a8936d54e21fb",
+    "frozen/stratolink.kicad_sch": "c772c2a0edff4d6f7616afb0988fc95c2cbb8c2d3572c1429fc0f3718f69e921",
+    "live/stratolink.kicad_pro": "c9be5b22927d7fe889188023e69f6e774e808aa79d4ea13eb1b2ddc348ffe2f9",
+    "frozen/stratolink.kicad_pro": "915d9f9c4bc8c1eb0866031bf765ff08dc41a7b5bea4fb158ca26c1032ef93cd",
+    "live/stratolink.kicad_dru": "071d900e34c4eb3d3f91003cc0698e261e7fe23beea7107c4db50a1bf60a5136",
+    "frozen/stratolink.kicad_dru": "071d900e34c4eb3d3f91003cc0698e261e7fe23beea7107c4db50a1bf60a5136"
+  },
+  "supplier_package_manifest_sha256": "58f6b271612645eee0a7e32a996dce4e63b2fe7ef8eb292749b16f16228b7e86",
+  "parts_identity_checks_pass": true,
+  "assembly_references": 57,
+  "unique_MPN_LCSC_groups": 30,
+  "sides": {
+    "bottom": 16,
+    "top": 41
+  },
+  "sole_automatic_DNP": "U6",
+  "retained_UV_support": [
+    "C14",
+    "C23",
+    "R27"
+  ],
+  "manual_or_mechanical_exclusions": [
+    "AE1",
+    "AE2",
+    "C5",
+    "H1",
+    "H2",
+    "J1",
+    "J2",
+    "J20",
+    "J3",
+    "J4"
+  ],
+  "all_fitted_live_schematic_PCB_BOM_supplier_MPN_LCSC_footprint_value_side_match": true,
+  "power_topology_expected_pairs": 30,
+  "power_values": {
+    "R1": "7.50M\u03a9",
+    "R2": "4.22M\u03a9",
+    "R3": "4.75M\u03a9",
+    "R4": "3.65M\u03a9",
+    "R5": "4.42M\u03a9",
+    "R6": "8.25M\u03a9",
+    "R7": "4.75M\u03a9",
+    "R24": "4.75M\u03a9",
+    "R25": "4.75M\u03a9",
+    "R26": "22\u03a9",
+    "C2": "4.7\u03bcF",
+    "C3": "4.7\u03bcF",
+    "C6": "22\u00b5F",
+    "C8": "10\u03bcF",
+    "C21": "10\u03bcF",
+    "C22": "100nF",
+    "C5": "1F",
+    "L1": "22\u00b5H",
+    "L2": "10\u00b5H"
+  },
+  "IC_supplier_rotations": {
+    "U1": {
+      "side": "bottom",
+      "CPL_degrees": 270
+    },
+    "U2": {
+      "side": "top",
+      "CPL_degrees": 90
+    },
+    "U3": {
+      "side": "top",
+      "CPL_degrees": 180
+    },
+    "U4": {
+      "side": "top",
+      "CPL_degrees": 270
+    },
+    "U5": {
+      "side": "top",
+      "CPL_degrees": 180
+    },
+    "U7": {
+      "side": "top",
+      "CPL_degrees": 0
+    },
+    "U8": {
+      "side": "top",
+      "CPL_degrees": 90
+    }
+  },
+  "live_vs_frozen": {
+    "footprint_pose_identity_changes": {},
+    "physical_pads_identical": true,
+    "track_delta": {
+      "removed": [],
+      "added": [],
+      "changed": []
+    },
+    "GND_and_SOLAR_filled_polygons_identical": true,
+    "copper_graphics_identical": true
+  },
+  "limits": [
+    "Matching selected identity is not lot qualification.",
+    "Pin-net membership is not physical copper continuity.",
+    "Supplier screenshot orientation is recorded separately; this script does not infer orientation from pixels.",
+    "All component ratings and conditional power/RF screens require the accompanying review."
+  ]
+}

@@ -1,0 +1,8 @@
+{
+  "foreign_net_overlaps": [],
+  "pcb_sha256": "e02bf87186fc86b90569b6ea25041a34c7d2e32ef39b951847956cc2d2eb0f13",
+  "net_count": 59,
+  "disconnected_pad_net_names": [],
+  "orphan_component_count": 0,
+  "method": "Native saved copper exported at 2 um polygon tolerance. Graph connects layers only through identical physical plated pad/via UUID. Positive-area overlap threshold 1e-8 mm2. No refill. Pad/via land envelopes include the drill area; overlap areas are screening metrics, not plated metal areas. Tiny isolated results require checking approximation and source geometry before classification as manufacturing defects."
+}

@@ -1,0 +1,27 @@
+02:51:12 PM: Debug: Adding duplicate image handler for 'PNG file'
+02:51:12 PM: Debug: Adding duplicate image handler for 'JPEG file'
+02:51:12 PM: Debug: Adding duplicate image handler for 'TIFF file'
+02:51:12 PM: Debug: Adding duplicate image handler for 'GIF file'
+02:51:12 PM: Debug: Adding duplicate image handler for 'PNM file'
+02:51:12 PM: Debug: Adding duplicate image handler for 'PCX file'
+02:51:12 PM: Debug: Adding duplicate image handler for 'IFF file'
+02:51:12 PM: Debug: Adding duplicate image handler for 'Windows icon file'
+02:51:12 PM: Debug: Adding duplicate image handler for 'Windows cursor file'
+02:51:12 PM: Debug: Adding duplicate image handler for 'Windows animated cursor file'
+02:51:12 PM: Debug: Adding duplicate image handler for 'TGA file'
+02:51:12 PM: Debug: Adding duplicate image handler for 'XPM file'
+{
+  "source_scope": "PASS",
+  "field_visibility_changes": 5,
+  "focused_groups": [
+    "TMP117",
+    "storage_and_ADC",
+    "balancer",
+    "SWD_programming",
+    "I2C",
+    "GNSS_UART",
+    "RF_feeds"
+  ],
+  "focused_pin_assignments": 84,
+  "pcb_sha256": "e02bf87186fc86b90569b6ea25041a34c7d2e32ef39b951847956cc2d2eb0f13"
+}

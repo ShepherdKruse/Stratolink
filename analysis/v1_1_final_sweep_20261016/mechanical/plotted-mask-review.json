@@ -1,0 +1,516 @@
+{
+  "pcb_sha256": "e02bf87186fc86b90569b6ea25041a34c7d2e32ef39b951847956cc2d2eb0f13",
+  "mask_gerber_sha256": {
+    "F": "b6b81791fa37f5e4da6f122727d8277be6a9c466f56705a3bdb7ab75a95b6c51",
+    "B": "151c7b817955fa758b2b76746d1c8751b037a9815b094b20c6fb61ffabd13b0b"
+  },
+  "all30_target_lands_fully_exposed": true,
+  "all_target_mask_foreign_gaps_at_least009mm": true,
+  "all_target_mask_webs_at_least010mm": true,
+  "summary": {
+    "U1": {
+      "pad_count": 20,
+      "minimum_opening_to_foreign_copper_mm": 0.10999999999999942,
+      "minimum_mask_web_mm": 0.17999799999999763,
+      "minimum_opening_to_own_copper_edge_mm": 0.038533837067703317
+    },
+    "U4": {
+      "pad_count": 8,
+      "minimum_opening_to_foreign_copper_mm": 0.10050000000000381,
+      "minimum_mask_web_mm": 0.5966341006010196,
+      "minimum_opening_to_own_copper_edge_mm": 0.04639356478560903
+    },
+    "L2": {
+      "pad_count": 2,
+      "minimum_opening_to_foreign_copper_mm": 0.10000000000000142,
+      "minimum_mask_web_mm": 0.5200000000000031,
+      "minimum_opening_to_own_copper_edge_mm": 0.04903899090779188
+    }
+  },
+  "pads": [
+    {
+      "ref": "U4",
+      "pin": "1",
+      "net": "+3.3V",
+      "face": "F",
+      "fully_exposed": true,
+      "opening_minimum_copper_edge_clearance_mm": 0.046393564785614995,
+      "opening_to_foreign_copper_mm": 1.040000015067852,
+      "nearest_foreign": {
+        "ref": "U4",
+        "pin": "8",
+        "net": "SCL",
+        "uuid": "534a8d75-120f-41fd-8919-a856ba902896",
+        "face": "F"
+      },
+      "minimum_web_to_other_aperture_mm": 0.6200000000000045
+    },
+    {
+      "ref": "U4",
+      "pin": "2",
+      "net": "+3.3V",
+      "face": "F",
+      "fully_exposed": true,
+      "opening_minimum_copper_edge_clearance_mm": 0.046393564785614995,
+      "opening_to_foreign_copper_mm": 0.13679955469234906,
+      "nearest_foreign": {
+        "ref": "zone",
+        "net": "GND",
+        "uuid": "f954dff9-4ad5-4f1c-b210-537ad56aea41",
+        "face": "F"
+      },
+      "minimum_web_to_other_aperture_mm": 0.5966341006010196
+    },
+    {
+      "ref": "U4",
+      "pin": "3",
+      "net": "GND",
+      "face": "F",
+      "fully_exposed": true,
+      "opening_minimum_copper_edge_clearance_mm": 0.046393564785614995,
+      "opening_to_foreign_copper_mm": 0.6700000039105004,
+      "nearest_foreign": {
+        "ref": "U4",
+        "pin": "2",
+        "net": "+3.3V",
+        "uuid": "b10f1365-ceeb-4223-9747-77353522858d",
+        "face": "F"
+      },
+      "minimum_web_to_other_aperture_mm": 0.6200000000000045
+    },
+    {
+      "ref": "U4",
+      "pin": "4",
+      "net": "+3.3V",
+      "face": "F",
+      "fully_exposed": true,
+      "opening_minimum_copper_edge_clearance_mm": 0.046393564785614995,
+      "opening_to_foreign_copper_mm": 0.10050000000000381,
+      "nearest_foreign": {
+        "ref": "zone",
+        "net": "GND",
+        "uuid": "f954dff9-4ad5-4f1c-b210-537ad56aea41",
+        "face": "F"
+      },
+      "minimum_web_to_other_aperture_mm": 0.6200000000000045
+    },
+    {
+      "ref": "U4",
+      "pin": "5",
+      "net": "+3.3V",
+      "face": "F",
+      "fully_exposed": true,
+      "opening_minimum_copper_edge_clearance_mm": 0.04639356478560903,
+      "opening_to_foreign_copper_mm": 0.10050000000000381,
+      "nearest_foreign": {
+        "ref": "zone",
+        "net": "GND",
+        "uuid": "f954dff9-4ad5-4f1c-b210-537ad56aea41",
+        "face": "F"
+      },
+      "minimum_web_to_other_aperture_mm": 0.6200000000000045
+    },
+    {
+      "ref": "U4",
+      "pin": "6",
+      "net": "unconnected-(U4-SDO-Pad6)",
+      "face": "F",
+      "fully_exposed": true,
+      "opening_minimum_copper_edge_clearance_mm": 0.04639356478560903,
+      "opening_to_foreign_copper_mm": 0.24200000000000446,
+      "nearest_foreign": {
+        "ref": "PCB_TRACK",
+        "net": "SDA",
+        "uuid": "3e81f04a-21fc-46f9-ac06-eb28928adcf3",
+        "face": "F"
+      },
+      "minimum_web_to_other_aperture_mm": 0.6200000000000045
+    },
+    {
+      "ref": "U4",
+      "pin": "7",
+      "net": "SDA",
+      "face": "F",
+      "fully_exposed": true,
+      "opening_minimum_copper_edge_clearance_mm": 0.04639356478560903,
+      "opening_to_foreign_copper_mm": 0.6419999999999959,
+      "nearest_foreign": {
+        "ref": "PCB_TRACK",
+        "net": "SCL",
+        "uuid": "66778223-9d58-4464-b85a-6b3c3b288353",
+        "face": "F"
+      },
+      "minimum_web_to_other_aperture_mm": 0.6200000000000045
+    },
+    {
+      "ref": "U4",
+      "pin": "8",
+      "net": "SCL",
+      "face": "F",
+      "fully_exposed": true,
+      "opening_minimum_copper_edge_clearance_mm": 0.04639356478560903,
+      "opening_to_foreign_copper_mm": 0.37951070148015764,
+      "nearest_foreign": {
+        "ref": "PCB_VIA",
+        "net": "+3.3V",
+        "uuid": "2a82abcb-77aa-4070-8eff-8a322e506ca5",
+        "face": "F"
+      },
+      "minimum_web_to_other_aperture_mm": 0.6200000000000045
+    },
+    {
+      "ref": "L2",
+      "pin": "1",
+      "net": "Net-(U1-LBUCK)",
+      "face": "B",
+      "fully_exposed": true,
+      "opening_minimum_copper_edge_clearance_mm": 0.04903899090779188,
+      "opening_to_foreign_copper_mm": 0.10000000000000142,
+      "nearest_foreign": {
+        "ref": "PCB_TRACK",
+        "net": "GND",
+        "uuid": "49f7bd78-e39f-43a1-9bcd-c50cfcc36868",
+        "face": "B"
+      },
+      "minimum_web_to_other_aperture_mm": 0.5200000000000031
+    },
+    {
+      "ref": "L2",
+      "pin": "2",
+      "net": "+3.3V",
+      "face": "B",
+      "fully_exposed": true,
+      "opening_minimum_copper_edge_clearance_mm": 0.04903899090779188,
+      "opening_to_foreign_copper_mm": 0.22499999999999434,
+      "nearest_foreign": {
+        "ref": "PCB_TRACK",
+        "net": "GND",
+        "uuid": "8c121a12-ff21-47a6-b7d2-ff94f126aa8a",
+        "face": "B"
+      },
+      "minimum_web_to_other_aperture_mm": 0.5200000000000031
+    },
+    {
+      "ref": "U1",
+      "pin": "1",
+      "net": "GND",
+      "face": "B",
+      "fully_exposed": true,
+      "opening_minimum_copper_edge_clearance_mm": 0.03853383706771725,
+      "opening_to_foreign_copper_mm": 0.11063534119801213,
+      "nearest_foreign": {
+        "ref": "PCB_TRACK",
+        "net": "+SOLAR",
+        "uuid": "4c60b4cf-81f6-4c2f-86b1-3a42931fb471",
+        "face": "B"
+      },
+      "minimum_web_to_other_aperture_mm": 0.17999799999999763
+    },
+    {
+      "ref": "U1",
+      "pin": "2",
+      "net": "+SOLAR",
+      "face": "B",
+      "fully_exposed": true,
+      "opening_minimum_copper_edge_clearance_mm": 0.03853383706771091,
+      "opening_to_foreign_copper_mm": 0.11049999999998762,
+      "nearest_foreign": {
+        "ref": "zone",
+        "net": "GND",
+        "uuid": "09c941a2-a889-457b-ae85-cdf2c8c21c0d",
+        "face": "B"
+      },
+      "minimum_web_to_other_aperture_mm": 0.17999799999999763
+    },
+    {
+      "ref": "U1",
+      "pin": "3",
+      "net": "VSTOR",
+      "face": "B",
+      "fully_exposed": true,
+      "opening_minimum_copper_edge_clearance_mm": 0.03853383706771103,
+      "opening_to_foreign_copper_mm": 0.11050000000000182,
+      "nearest_foreign": {
+        "ref": "zone",
+        "net": "GND",
+        "uuid": "09c941a2-a889-457b-ae85-cdf2c8c21c0d",
+        "face": "B"
+      },
+      "minimum_web_to_other_aperture_mm": 0.17999999999999972
+    },
+    {
+      "ref": "U1",
+      "pin": "4",
+      "net": "Net-(U1-VREF_SAMP)",
+      "face": "B",
+      "fully_exposed": true,
+      "opening_minimum_copper_edge_clearance_mm": 0.03853383706771103,
+      "opening_to_foreign_copper_mm": 0.11049903153206832,
+      "nearest_foreign": {
+        "ref": "zone",
+        "net": "GND",
+        "uuid": "09c941a2-a889-457b-ae85-cdf2c8c21c0d",
+        "face": "B"
+      },
+      "minimum_web_to_other_aperture_mm": 0.17999800000000477
+    },
+    {
+      "ref": "U1",
+      "pin": "5",
+      "net": "GND",
+      "face": "B",
+      "fully_exposed": true,
+      "opening_minimum_copper_edge_clearance_mm": 0.03853383706771091,
+      "opening_to_foreign_copper_mm": 0.10999999999999942,
+      "nearest_foreign": {
+        "ref": "PCB_VIA",
+        "net": "PA8",
+        "uuid": "1b7548f4-cf65-460a-8e58-f97c4b207e5a",
+        "face": "B"
+      },
+      "minimum_web_to_other_aperture_mm": 0.17999800000000477
+    },
+    {
+      "ref": "U1",
+      "pin": "6",
+      "net": "VSTOR",
+      "face": "B",
+      "fully_exposed": true,
+      "opening_minimum_copper_edge_clearance_mm": 0.03853383706771103,
+      "opening_to_foreign_copper_mm": 0.11049999999999473,
+      "nearest_foreign": {
+        "ref": "zone",
+        "net": "GND",
+        "uuid": "09c941a2-a889-457b-ae85-cdf2c8c21c0d",
+        "face": "B"
+      },
+      "minimum_web_to_other_aperture_mm": 0.17999799999999763
+    },
+    {
+      "ref": "U1",
+      "pin": "7",
+      "net": "Net-(U1-VBAT_OV)",
+      "face": "B",
+      "fully_exposed": true,
+      "opening_minimum_copper_edge_clearance_mm": 0.03853383706771091,
+      "opening_to_foreign_copper_mm": 0.11050000000000182,
+      "nearest_foreign": {
+        "ref": "zone",
+        "net": "GND",
+        "uuid": "09c941a2-a889-457b-ae85-cdf2c8c21c0d",
+        "face": "B"
+      },
+      "minimum_web_to_other_aperture_mm": 0.17999799999999763
+    },
+    {
+      "ref": "U1",
+      "pin": "8",
+      "net": "Net-(U1-VRDIV)",
+      "face": "B",
+      "fully_exposed": true,
+      "opening_minimum_copper_edge_clearance_mm": 0.03853383706771103,
+      "opening_to_foreign_copper_mm": 0.1105000000000018,
+      "nearest_foreign": {
+        "ref": "zone",
+        "net": "GND",
+        "uuid": "09c941a2-a889-457b-ae85-cdf2c8c21c0d",
+        "face": "B"
+      },
+      "minimum_web_to_other_aperture_mm": 0.1799999999999926
+    },
+    {
+      "ref": "U1",
+      "pin": "9",
+      "net": "GND",
+      "face": "B",
+      "fully_exposed": true,
+      "opening_minimum_copper_edge_clearance_mm": 0.03853383706771103,
+      "opening_to_foreign_copper_mm": 0.21999800236692,
+      "nearest_foreign": {
+        "ref": "U1",
+        "pin": "10",
+        "net": "Net-(U1-OK_HYST)",
+        "uuid": "4558d2ea-8f58-4d52-81e1-b49e9f11f421",
+        "face": "B"
+      },
+      "minimum_web_to_other_aperture_mm": 0.17999799999999763
+    },
+    {
+      "ref": "U1",
+      "pin": "10",
+      "net": "Net-(U1-OK_HYST)",
+      "face": "B",
+      "fully_exposed": true,
+      "opening_minimum_copper_edge_clearance_mm": 0.038533837067703317,
+      "opening_to_foreign_copper_mm": 0.11049903153206832,
+      "nearest_foreign": {
+        "ref": "zone",
+        "net": "GND",
+        "uuid": "09c941a2-a889-457b-ae85-cdf2c8c21c0d",
+        "face": "B"
+      },
+      "minimum_web_to_other_aperture_mm": 0.17999799999999763
+    },
+    {
+      "ref": "U1",
+      "pin": "11",
+      "net": "Net-(U1-OK_PROG)",
+      "face": "B",
+      "fully_exposed": true,
+      "opening_minimum_copper_edge_clearance_mm": 0.03853383706771725,
+      "opening_to_foreign_copper_mm": 0.11049900000000433,
+      "nearest_foreign": {
+        "ref": "zone",
+        "net": "GND",
+        "uuid": "09c941a2-a889-457b-ae85-cdf2c8c21c0d",
+        "face": "B"
+      },
+      "minimum_web_to_other_aperture_mm": 0.17999799999999763
+    },
+    {
+      "ref": "U1",
+      "pin": "12",
+      "net": "Net-(U1-VOUT_SET)",
+      "face": "B",
+      "fully_exposed": true,
+      "opening_minimum_copper_edge_clearance_mm": 0.038533837067703317,
+      "opening_to_foreign_copper_mm": 0.11049908527276273,
+      "nearest_foreign": {
+        "ref": "zone",
+        "net": "GND",
+        "uuid": "09c941a2-a889-457b-ae85-cdf2c8c21c0d",
+        "face": "B"
+      },
+      "minimum_web_to_other_aperture_mm": 0.17999799999999763
+    },
+    {
+      "ref": "U1",
+      "pin": "13",
+      "net": "Net-(U1-VBAT_OK)",
+      "face": "B",
+      "fully_exposed": true,
+      "opening_minimum_copper_edge_clearance_mm": 0.03853383706771103,
+      "opening_to_foreign_copper_mm": 0.11049908527274972,
+      "nearest_foreign": {
+        "ref": "zone",
+        "net": "GND",
+        "uuid": "09c941a2-a889-457b-ae85-cdf2c8c21c0d",
+        "face": "B"
+      },
+      "minimum_web_to_other_aperture_mm": 0.17999999999999972
+    },
+    {
+      "ref": "U1",
+      "pin": "14",
+      "net": "+3.3V",
+      "face": "B",
+      "fully_exposed": true,
+      "opening_minimum_copper_edge_clearance_mm": 0.03853383706771103,
+      "opening_to_foreign_copper_mm": 0.11049908527276271,
+      "nearest_foreign": {
+        "ref": "zone",
+        "net": "GND",
+        "uuid": "09c941a2-a889-457b-ae85-cdf2c8c21c0d",
+        "face": "B"
+      },
+      "minimum_web_to_other_aperture_mm": 0.17999799999999763
+    },
+    {
+      "ref": "U1",
+      "pin": "15",
+      "net": "GND",
+      "face": "B",
+      "fully_exposed": true,
+      "opening_minimum_copper_edge_clearance_mm": 0.038533837067703317,
+      "opening_to_foreign_copper_mm": 0.1409969999999987,
+      "nearest_foreign": {
+        "ref": "PCB_TRACK",
+        "net": "+3.3V",
+        "uuid": "438fc5da-5518-48c6-b586-a39228e159c9",
+        "face": "B"
+      },
+      "minimum_web_to_other_aperture_mm": 0.17999799999999763
+    },
+    {
+      "ref": "U1",
+      "pin": "16",
+      "net": "Net-(U1-LBUCK)",
+      "face": "B",
+      "fully_exposed": true,
+      "opening_minimum_copper_edge_clearance_mm": 0.03853383706771103,
+      "opening_to_foreign_copper_mm": 0.150500000000001,
+      "nearest_foreign": {
+        "ref": "zone",
+        "net": "GND",
+        "uuid": "09c941a2-a889-457b-ae85-cdf2c8c21c0d",
+        "face": "B"
+      },
+      "minimum_web_to_other_aperture_mm": 0.17999799999999763
+    },
+    {
+      "ref": "U1",
+      "pin": "17",
+      "net": "GND",
+      "face": "B",
+      "fully_exposed": true,
+      "opening_minimum_copper_edge_clearance_mm": 0.03853383706771091,
+      "opening_to_foreign_copper_mm": 0.16099699999999473,
+      "nearest_foreign": {
+        "ref": "zone",
+        "net": "Net-(U1-LBUCK)",
+        "uuid": "a299da91-4b24-48a0-a192-69221720da2e",
+        "face": "B"
+      },
+      "minimum_web_to_other_aperture_mm": 0.17999799999999763
+    },
+    {
+      "ref": "U1",
+      "pin": "18",
+      "net": "/VBAT",
+      "face": "B",
+      "fully_exposed": true,
+      "opening_minimum_copper_edge_clearance_mm": 0.03853383706771103,
+      "opening_to_foreign_copper_mm": 0.11049908527276271,
+      "nearest_foreign": {
+        "ref": "zone",
+        "net": "GND",
+        "uuid": "09c941a2-a889-457b-ae85-cdf2c8c21c0d",
+        "face": "B"
+      },
+      "minimum_web_to_other_aperture_mm": 0.1799999999999926
+    },
+    {
+      "ref": "U1",
+      "pin": "19",
+      "net": "VSTOR",
+      "face": "B",
+      "fully_exposed": true,
+      "opening_minimum_copper_edge_clearance_mm": 0.03853383706771103,
+      "opening_to_foreign_copper_mm": 0.11049908527275562,
+      "nearest_foreign": {
+        "ref": "zone",
+        "net": "GND",
+        "uuid": "09c941a2-a889-457b-ae85-cdf2c8c21c0d",
+        "face": "B"
+      },
+      "minimum_web_to_other_aperture_mm": 0.17999799999999763
+    },
+    {
+      "ref": "U1",
+      "pin": "20",
+      "net": "Net-(U1-LBOOST)",
+      "face": "B",
+      "fully_exposed": true,
+      "opening_minimum_copper_edge_clearance_mm": 0.03853383706771649,
+      "opening_to_foreign_copper_mm": 0.1193680950234707,
+      "nearest_foreign": {
+        "ref": "zone",
+        "net": "GND",
+        "uuid": "09c941a2-a889-457b-ae85-cdf2c8c21c0d",
+        "face": "B"
+      },
+      "minimum_web_to_other_aperture_mm": 0.17999799999999763
+    }
+  ],
+  "limits": "Native plotted geometry; KiCad polygon tessellation affects rounded-edge distances by micrometers. JLC registration, mask tent integrity and factory CAM remain unqualified. The check is scoped to U1 perimeter, U4 and L2, not a claim that every board aperture uses this generic mask rule."
+}

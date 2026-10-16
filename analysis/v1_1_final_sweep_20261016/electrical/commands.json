@@ -1,0 +1,50 @@
+{
+  "note": "Commands ran on captured scratch copies. ERC includes exclusions, so exit code 5 reflects the two documented excluded pin conflicts. Current DRC exit 5 reflects the repaired VSTOR open.",
+  "commands": [
+    {
+      "name": "frozen-drc",
+      "command": "/Applications/KiCad/KiCad.app/Contents/MacOS/kicad-cli pcb drc --format json --all-track-errors --schematic-parity --severity-all --exit-code-violations --refill-zones --output /Users/twarn/Repositories/Stratolink/analysis/v1_1_final_sweep_20261016/electrical/frozen-drc.json /Users/twarn/Repositories/ai-working/scratch/stratolink-final-sweep-20261016/electrical/frozen/stratolink.kicad_pcb",
+      "expected_exit_code": 0
+    },
+    {
+      "name": "current-drc",
+      "command": "/Applications/KiCad/KiCad.app/Contents/MacOS/kicad-cli pcb drc --format json --all-track-errors --schematic-parity --severity-all --exit-code-violations --refill-zones --save-board --output /Users/twarn/Repositories/Stratolink/analysis/v1_1_final_sweep_20261016/electrical/current-strict-drc.json /Users/twarn/Repositories/ai-working/scratch/stratolink-final-sweep-20261016/electrical/current-strict/stratolink.kicad_pcb",
+      "expected_exit_code": 5
+    },
+    {
+      "name": "frozen-erc",
+      "command": "/Applications/KiCad/KiCad.app/Contents/MacOS/kicad-cli sch erc --format json --severity-all --exit-code-violations --output /Users/twarn/Repositories/Stratolink/analysis/v1_1_final_sweep_20261016/electrical/frozen-erc.json /Users/twarn/Repositories/ai-working/scratch/stratolink-final-sweep-20261016/electrical/frozen/stratolink.kicad_sch",
+      "expected_exit_code": 5
+    },
+    {
+      "name": "current-erc",
+      "command": "/Applications/KiCad/KiCad.app/Contents/MacOS/kicad-cli sch erc --format json --severity-all --exit-code-violations --output /Users/twarn/Repositories/Stratolink/analysis/v1_1_final_sweep_20261016/electrical/current-strict-erc.json /Users/twarn/Repositories/ai-working/scratch/stratolink-final-sweep-20261016/electrical/current-strict/stratolink.kicad_sch",
+      "expected_exit_code": 5
+    },
+    {
+      "name": "frozen-netlist",
+      "command": "/Applications/KiCad/KiCad.app/Contents/MacOS/kicad-cli sch export netlist --format kicadxml --output /Users/twarn/Repositories/Stratolink/analysis/v1_1_final_sweep_20261016/electrical/frozen.xml /Users/twarn/Repositories/ai-working/scratch/stratolink-final-sweep-20261016/electrical/frozen/stratolink.kicad_sch",
+      "expected_exit_code": 0
+    },
+    {
+      "name": "current-netlist",
+      "command": "/Applications/KiCad/KiCad.app/Contents/MacOS/kicad-cli sch export netlist --format kicadxml --output /Users/twarn/Repositories/Stratolink/analysis/v1_1_final_sweep_20261016/electrical/current.xml /Users/twarn/Repositories/ai-working/scratch/stratolink-final-sweep-20261016/electrical/current-strict/stratolink.kicad_sch",
+      "expected_exit_code": 0
+    },
+    {
+      "name": "repaired-drc",
+      "command": "/Applications/KiCad/KiCad.app/Contents/MacOS/kicad-cli pcb drc --format json --all-track-errors --schematic-parity --severity-all --exit-code-violations --refill-zones --save-board --output /Users/twarn/Repositories/Stratolink/analysis/v1_1_final_sweep_20261016/electrical/repaired-strict-drc.json /Users/twarn/Repositories/ai-working/scratch/stratolink-final-sweep-20261016/electrical/repaired-strict/stratolink.kicad_pcb",
+      "expected_exit_code": 0
+    },
+    {
+      "name": "repaired-erc",
+      "command": "/Applications/KiCad/KiCad.app/Contents/MacOS/kicad-cli sch erc --format json --severity-all --exit-code-violations --output /Users/twarn/Repositories/Stratolink/analysis/v1_1_final_sweep_20261016/electrical/repaired-strict-erc.json /Users/twarn/Repositories/ai-working/scratch/stratolink-final-sweep-20261016/electrical/repaired-strict/stratolink.kicad_sch",
+      "expected_exit_code": 5
+    },
+    {
+      "name": "repaired-netlist",
+      "command": "/Applications/KiCad/KiCad.app/Contents/MacOS/kicad-cli sch export netlist --format kicadxml --output /Users/twarn/Repositories/Stratolink/analysis/v1_1_final_sweep_20261016/electrical/repaired.xml /Users/twarn/Repositories/ai-working/scratch/stratolink-final-sweep-20261016/electrical/repaired-strict/stratolink.kicad_sch",
+      "expected_exit_code": 0
+    }
+  ]
+}
