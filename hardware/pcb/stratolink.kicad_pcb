@@ -2094,6 +2094,7 @@
 		(property "Value" "22Ω"
 			(at 0 1.17 0)
 			(layer "F.Fab")
+			(hide yes)
 			(uuid "eb877147-135c-4dde-aa76-0a5c69fa8db6")
 			(effects
 				(font
@@ -5445,6 +5446,7 @@
 		(property "Value" "4.75MΩ"
 			(at 0 1.17 0)
 			(layer "F.Fab")
+			(hide yes)
 			(uuid "2df25d5a-a40f-4f38-b352-ffeda5d8fcc8")
 			(effects
 				(font
@@ -5627,6 +5629,7 @@
 		(property "Value" "4.75MΩ"
 			(at 0 1.17 0)
 			(layer "F.Fab")
+			(hide yes)
 			(uuid "5d6f7c73-42c1-412c-a840-3e59e5bc375d")
 			(effects
 				(font
@@ -6821,6 +6824,7 @@
 		(property "Value" "TLV8801DBVT"
 			(at 0 2.4 0)
 			(layer "F.Fab")
+			(hide yes)
 			(uuid "b3bab94b-3685-4d0a-8bd7-1fb061a72ed8")
 			(effects
 				(font
@@ -13420,6 +13424,7 @@
 		(property "Value" "100nF"
 			(at 0 1.16 0)
 			(layer "F.Fab")
+			(hide yes)
 			(uuid "37ff9092-4889-4e9f-832e-84ef59a495d3")
 			(effects
 				(font

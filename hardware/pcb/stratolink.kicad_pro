@@ -247,12 +247,12 @@
   "erc": {
     "erc_exclusions": [
       [
-        "pin_to_pin|533400|1600200|d24f236f-77e7-440c-9378-f49a6d546306|944d0dde-0354-5fbe-8d7f-fd73f10709be|/4d146a28-be53-49f1-b1c6-484192820e45|/4d146a28-be53-49f1-b1c6-484192820e45|/4d146a28-be53-49f1-b1c6-484192820e45",
-        "TMP117 ALERT is intentionally unavailable and grounded. TI TMP117 datasheet section 8.2.1 explicitly permits grounding ALERT when unused. Open-drain pin type retained; this exact marker is contention with the external GND PWR_FLAG, not a driven-high circuit."
-      ],
-      [
         "pin_to_pin|254000|419100|82711c1e-7163-4ccd-9fb6-5a60e20408e1|944d0dde-0354-5fbe-8d7f-fd73f10709be|/4d146a28-be53-49f1-b1c6-484192820e45|/4d146a28-be53-49f1-b1c6-484192820e45|/4d146a28-be53-49f1-b1c6-484192820e45",
         "LIS2DH12 SDO/SA0 is grounded to select I2C address 0x18 with CS high, as specified in ST datasheet section 6.1.1. Bidirectional type retained for its SPI role. Only this exact GND PWR_FLAG marker is excluded. Firmware follow-up: disable internal SDO pull-up using CTRL_REG0 SDO_PU_DISC while preserving required other bits."
+      ],
+      [
+        "pin_to_pin|533400|1600200|d24f236f-77e7-440c-9378-f49a6d546306|944d0dde-0354-5fbe-8d7f-fd73f10709be|/4d146a28-be53-49f1-b1c6-484192820e45|/4d146a28-be53-49f1-b1c6-484192820e45|/4d146a28-be53-49f1-b1c6-484192820e45",
+        "TMP117 ALERT is intentionally unavailable and grounded. TI TMP117 datasheet section 8.2.1 explicitly permits grounding ALERT when unused. Open-drain pin type retained; this exact marker is contention with the external GND PWR_FLAG, not a driven-high circuit."
       ]
     ],
     "meta": {
@@ -440,10 +440,18 @@
       "duplicate_sheet_names": "error",
       "endpoint_off_grid": "warning",
       "extra_units": "error",
+      "field_name_whitespace": "warning",
+      "footprint_filter": "ignore",
+      "footprint_link_issues": "warning",
+      "four_way_junction": "ignore",
       "global_label_dangling": "warning",
+      "ground_pin_not_ground": "warning",
       "hier_label_mismatch": "error",
+      "isolated_pin_label": "warning",
       "label_dangling": "error",
+      "label_multiple_wires": "warning",
       "lib_symbol_issues": "warning",
+      "lib_symbol_mismatch": "warning",
       "missing_bidi_pin": "warning",
       "missing_input_pin": "warning",
       "missing_power_pin": "error",
@@ -456,9 +464,16 @@
       "pin_not_driven": "error",
       "pin_to_pin": "warning",
       "power_pin_not_driven": "error",
+      "same_local_global_label": "warning",
+      "similar_label_and_power": "warning",
       "similar_labels": "warning",
+      "similar_power": "warning",
       "simulation_model_issue": "ignore",
+      "single_global_label": "ignore",
+      "stacked_pin_name": "warning",
       "unannotated": "error",
+      "unconnected_wire_endpoint": "warning",
+      "undefined_netclass": "error",
       "unit_value_mismatch": "error",
       "unresolved_variable": "error",
       "wire_dangling": "error"
@@ -517,6 +532,10 @@
   },
   "schematic": {
     "annotate_start_num": 0,
+    "annotation": {
+      "method": 0,
+      "sort_order": 0
+    },
     "bom_export_filename": "",
     "bom_fmt_presets": [],
     "bom_fmt_settings": {
@@ -571,6 +590,7 @@
       ],
       "filter_string": "",
       "group_symbols": true,
+      "include_excluded_from_bom": false,
       "name": "Grouped By Value",
       "sort_asc": true,
       "sort_field": "Reference"
@@ -583,6 +603,7 @@
       "default_line_thickness": 6.0,
       "default_text_size": 50.0,
       "field_names": [],
+      "hop_over_size_choice": 0,
       "intersheets_ref_own_page": false,
       "intersheets_ref_prefix": "",
       "intersheets_ref_short": false,
@@ -606,6 +627,7 @@
     "net_format_name": "",
     "page_layout_descr_file": "",
     "plot_directory": "",
+    "reuse_designators": true,
     "spice_current_sheet_as_root": false,
     "spice_external_command": "spice \"%I\"",
     "spice_model_current_sheet_as_root": true,
@@ -620,7 +642,9 @@
         "name": "stratolink",
         "uuid": "00000000-0000-0000-0000-000000000000"
       }
-    ]
+    ],
+    "used_designators": "",
+    "variants": []
   },
   "sheets": [
     [

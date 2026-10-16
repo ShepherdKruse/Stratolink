@@ -5977,6 +5977,18 @@
 		(uuid "a112ed38-fee5-433c-b1ca-9ecc65b0a4b2")
 	)
 	(rectangle
+		(start 13.97 177.8)
+		(end 100.33 208.28)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(fill
+			(type none)
+		)
+		(uuid "a2970380-c03d-436a-a04b-2687de61a674")
+	)
+	(rectangle
 		(start 187.325 86.995)
 		(end 217.805 113.665)
 		(stroke
@@ -6058,6 +6070,16 @@
 		)
 		(uuid "0020b649-82ec-404f-84c3-05b15e703ff6")
 	)
+	(text "Active \nCap Bal"
+		(exclude_from_sim no)
+		(at 19.05 181.61 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+		)
+		(uuid "01316201-4a57-49d2-a9e2-fc765283a137")
+	)
 	(text "Prog"
 		(exclude_from_sim no)
 		(at 138.938 149.606 0)
@@ -6138,17 +6160,6 @@
 		)
 		(uuid "7cec488a-186d-4472-ad5b-b2763dc21d86")
 	)
-	(text "CAP-XX active cell balancing (Fig. 7); hand-install C5 after cleaning.\nFeedback is before R26. Pilot: verify startup and capacitive-load stability."
-		(exclude_from_sim no)
-		(at 15 213 0)
-		(effects
-			(font
-				(size 1 1)
-			)
-			(justify left)
-		)
-		(uuid "85064e4c-5fbe-5d87-b96f-9f3242f6c1cc")
-	)
 	(text "Voltage\nDividers"
 		(exclude_from_sim no)
 		(at 103.632 149.86 0)
@@ -6159,17 +6170,6 @@
 			(justify right)
 		)
 		(uuid "c0216b57-fd23-49ba-aaff-00cee1f470f7")
-	)
-	(text "AS7331: 0x74, polled CMD, SYN=GND, READY unconnected.\nR27: 3.3 MΩ ±0.1%, 25 ppm/K. C14/C23: local analog/digital bypass.\nExperimental UV channels; ozone column needs calibrated optics."
-		(exclude_from_sim no)
-		(at 15.24 142.5 0)
-		(effects
-			(font
-				(size 0.85 0.85)
-			)
-			(justify left)
-		)
-		(uuid "d9e76eb0-69d7-591e-9fdd-7c20570e91e3")
 	)
 	(text "Accelerometer"
 		(exclude_from_sim no)
@@ -6320,7 +6320,7 @@
 		(uuid "6f8045d8-4a2a-4121-b82b-a540227b981d")
 	)
 	(junction
-		(at 25.4 187.96)
+		(at 25.4 190.5)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "7232911e-95f3-5883-b3ab-83f8a6d535ba")
@@ -6512,7 +6512,7 @@
 		(uuid "e1e894c4-4475-4b40-8443-3e6462a5bc89")
 	)
 	(junction
-		(at 64.77 190.5)
+		(at 64.77 193.04)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "e25c1d13-9e45-50da-81ee-f9d1a92863c1")
@@ -6673,7 +6673,7 @@
 	)
 	(wire
 		(pts
-			(xy 58.42 190.5) (xy 64.77 190.5)
+			(xy 58.42 193.04) (xy 64.77 193.04)
 		)
 		(stroke
 			(width 0)
@@ -7223,7 +7223,7 @@
 	)
 	(wire
 		(pts
-			(xy 64.77 186.69) (xy 72.39 186.69)
+			(xy 64.77 189.23) (xy 72.39 189.23)
 		)
 		(stroke
 			(width 0)
@@ -7483,7 +7483,7 @@
 	)
 	(wire
 		(pts
-			(xy 39.37 200.66) (xy 39.37 193.04)
+			(xy 39.37 203.2) (xy 39.37 195.58)
 		)
 		(stroke
 			(width 0)
@@ -8143,7 +8143,7 @@
 	)
 	(wire
 		(pts
-			(xy 25.4 187.96) (xy 25.4 195.58)
+			(xy 25.4 190.5) (xy 25.4 198.12)
 		)
 		(stroke
 			(width 0)
@@ -8213,7 +8213,7 @@
 	)
 	(wire
 		(pts
-			(xy 64.77 190.5) (xy 64.77 186.69)
+			(xy 64.77 193.04) (xy 64.77 189.23)
 		)
 		(stroke
 			(width 0)
@@ -8253,7 +8253,7 @@
 	)
 	(wire
 		(pts
-			(xy 64.77 200.66) (xy 39.37 200.66)
+			(xy 64.77 203.2) (xy 39.37 203.2)
 		)
 		(stroke
 			(width 0)
@@ -8443,7 +8443,7 @@
 	)
 	(wire
 		(pts
-			(xy 64.77 190.5) (xy 64.77 200.66)
+			(xy 64.77 193.04) (xy 64.77 203.2)
 		)
 		(stroke
 			(width 0)
@@ -8683,7 +8683,7 @@
 	)
 	(wire
 		(pts
-			(xy 25.4 187.96) (xy 43.18 187.96)
+			(xy 25.4 190.5) (xy 43.18 190.5)
 		)
 		(stroke
 			(width 0)
@@ -8693,7 +8693,7 @@
 	)
 	(wire
 		(pts
-			(xy 39.37 193.04) (xy 43.18 193.04)
+			(xy 39.37 195.58) (xy 43.18 195.58)
 		)
 		(stroke
 			(width 0)
@@ -53491,7 +53491,7 @@
 		)
 	)
 	(label "GND"
-		(at 50.8 198.12 0)
+		(at 50.8 200.66 0)
 		(effects
 			(font
 				(size 0.9 0.9)
@@ -53531,7 +53531,7 @@
 		(uuid "28960830-7d27-59e7-8403-17e07f7e572e")
 	)
 	(label "SC_HALF_REF"
-		(at 25.4 187.96 0)
+		(at 25.4 190.5 0)
 		(effects
 			(font
 				(size 0.9 0.9)
@@ -53561,7 +53561,7 @@
 		(uuid "409b96f9-198e-50b5-820b-747199411ba9")
 	)
 	(label "GND"
-		(at 88.9 194.31 0)
+		(at 88.9 196.85 0)
 		(effects
 			(font
 				(size 0.9 0.9)
@@ -53601,7 +53601,7 @@
 		(uuid "4ab37723-dfff-5155-ba2c-f6524a12d385")
 	)
 	(label "VBAT"
-		(at 88.9 186.69 0)
+		(at 88.9 189.23 0)
 		(effects
 			(font
 				(size 0.9 0.9)
@@ -53611,7 +53611,7 @@
 		(uuid "4bcb262e-e795-5e44-833e-416c0203ca4d")
 	)
 	(label "SC_BAL_OUT"
-		(at 58.42 190.5 0)
+		(at 58.42 193.04 0)
 		(effects
 			(font
 				(size 0.9 0.9)
@@ -53651,7 +53651,7 @@
 		(uuid "63cea302-db30-5663-a5cd-bb5b1ec25f54")
 	)
 	(label "VBAT"
-		(at 50.8 182.88 0)
+		(at 50.8 185.42 0)
 		(effects
 			(font
 				(size 0.9 0.9)
@@ -53701,7 +53701,7 @@
 		(uuid "ad456143-dbdc-5a96-bbd7-de04cac5b2c0")
 	)
 	(label "SC_MID"
-		(at 72.39 194.31 0)
+		(at 72.39 196.85 0)
 		(effects
 			(font
 				(size 0.9 0.9)
@@ -53771,7 +53771,7 @@
 		(uuid "de170f13-0cc4-5dd2-8c0e-17c3f3b80e57")
 	)
 	(label "VBAT"
-		(at 25.4 180.34 0)
+		(at 25.4 182.88 0)
 		(effects
 			(font
 				(size 0.9 0.9)
@@ -53781,7 +53781,7 @@
 		(uuid "df16b33c-10ad-541b-ac78-2ad96e37f006")
 	)
 	(label "GND"
-		(at 25.4 203.2 0)
+		(at 25.4 205.74 0)
 		(effects
 			(font
 				(size 0.9 0.9)
@@ -55378,7 +55378,7 @@
 	)
 	(symbol
 		(lib_id "Stratolink_v1p1_Symbols:Device_C")
-		(at 88.9 190.5 0)
+		(at 88.9 193.04 0)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -55388,7 +55388,7 @@
 		(dnp no)
 		(uuid "0457256a-7e29-54b3-a08f-85f815917fd9")
 		(property "Reference" "C22"
-			(at 92.9 187.5 0)
+			(at 92.9 190.04 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -55398,7 +55398,7 @@
 			)
 		)
 		(property "Value" "100nF"
-			(at 95.9 191.5 0)
+			(at 95.9 194.04 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -55408,7 +55408,7 @@
 			)
 		)
 		(property "Footprint" "lib:Stratolink_v1p1_C22_C_0402_1005Metric"
-			(at 88.9 190.5 0)
+			(at 88.9 193.04 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -55419,7 +55419,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 88.9 190.5 0)
+			(at 88.9 193.04 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -55430,7 +55430,7 @@
 			)
 		)
 		(property "Description" "Active midpoint balancer pilot"
-			(at 88.9 190.5 0)
+			(at 88.9 193.04 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -55441,7 +55441,7 @@
 			)
 		)
 		(property "MPN" "CL05B104KO5NNNC"
-			(at 88.9 190.5 0)
+			(at 88.9 193.04 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -55452,7 +55452,7 @@
 			)
 		)
 		(property "LCSC Part #" "C1525"
-			(at 88.9 190.5 0)
+			(at 88.9 193.04 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -55463,7 +55463,7 @@
 			)
 		)
 		(property "Supplier Part" "C1525"
-			(at 88.9 190.5 0)
+			(at 88.9 193.04 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -55474,7 +55474,7 @@
 			)
 		)
 		(property "Manufacturer_Part_Number" "CL05B104KO5NNNC"
-			(at 88.9 190.5 0)
+			(at 88.9 193.04 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -56439,7 +56439,7 @@
 	)
 	(symbol
 		(lib_id "Stratolink_v1p1_Symbols:Device_R_US")
-		(at 72.39 190.5 0)
+		(at 72.39 193.04 0)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -56449,7 +56449,7 @@
 		(dnp no)
 		(uuid "1ca366c8-e6ea-5f76-98da-2d5e64faee8e")
 		(property "Reference" "R26"
-			(at 76.39 187.5 0)
+			(at 76.39 190.04 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -56459,7 +56459,7 @@
 			)
 		)
 		(property "Value" "22Ω"
-			(at 79.39 191.5 0)
+			(at 79.39 194.04 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -56469,7 +56469,7 @@
 			)
 		)
 		(property "Footprint" "lib:Stratolink_v1p1_R26_R_0402_1005Metric"
-			(at 72.39 190.5 0)
+			(at 72.39 193.04 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -56480,7 +56480,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 72.39 190.5 0)
+			(at 72.39 193.04 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -56491,7 +56491,7 @@
 			)
 		)
 		(property "Description" "Active midpoint balancer pilot"
-			(at 72.39 190.5 0)
+			(at 72.39 193.04 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -56502,7 +56502,7 @@
 			)
 		)
 		(property "MPN" "0402WGF220JTCE"
-			(at 72.39 190.5 0)
+			(at 72.39 193.04 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -56513,7 +56513,7 @@
 			)
 		)
 		(property "LCSC Part #" "C25092"
-			(at 72.39 190.5 0)
+			(at 72.39 193.04 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -56524,7 +56524,7 @@
 			)
 		)
 		(property "Supplier Part" "C25092"
-			(at 72.39 190.5 0)
+			(at 72.39 193.04 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -56535,7 +56535,7 @@
 			)
 		)
 		(property "Manufacturer_Part_Number" "0402WGF220JTCE"
-			(at 72.39 190.5 0)
+			(at 72.39 193.04 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -59327,7 +59327,7 @@
 	)
 	(symbol
 		(lib_id "Stratolink_v1p1_Symbols:Device_R_US")
-		(at 25.4 199.39 0)
+		(at 25.4 201.93 0)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -59337,7 +59337,7 @@
 		(dnp no)
 		(uuid "6f3fa491-e84d-5965-a08f-35942afcfec8")
 		(property "Reference" "R25"
-			(at 29.4 196.39 0)
+			(at 29.4 198.93 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -59347,7 +59347,7 @@
 			)
 		)
 		(property "Value" "4.75MΩ"
-			(at 32.4 200.39 0)
+			(at 32.4 202.93 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -59357,7 +59357,7 @@
 			)
 		)
 		(property "Footprint" "lib:Stratolink_v1p1_R25_R_0402_1005Metric"
-			(at 25.4 199.39 0)
+			(at 25.4 201.93 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -59368,7 +59368,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 25.4 199.39 0)
+			(at 25.4 201.93 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -59379,7 +59379,7 @@
 			)
 		)
 		(property "Description" "Active midpoint balancer pilot"
-			(at 25.4 199.39 0)
+			(at 25.4 201.93 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -59390,7 +59390,7 @@
 			)
 		)
 		(property "MPN" "FRC0402F4754TS"
-			(at 25.4 199.39 0)
+			(at 25.4 201.93 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -59401,7 +59401,7 @@
 			)
 		)
 		(property "LCSC Part #" "C2998153"
-			(at 25.4 199.39 0)
+			(at 25.4 201.93 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -59412,7 +59412,7 @@
 			)
 		)
 		(property "Supplier Part" "C2998153"
-			(at 25.4 199.39 0)
+			(at 25.4 201.93 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -59423,7 +59423,7 @@
 			)
 		)
 		(property "Manufacturer_Part_Number" "FRC0402F4754TS"
-			(at 25.4 199.39 0)
+			(at 25.4 201.93 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -63501,7 +63501,7 @@
 	)
 	(symbol
 		(lib_id "Stratolink_v1p1_Symbols:Stratolink_Power_TLV8801DBVT")
-		(at 50.8 190.5 0)
+		(at 50.8 193.04 0)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -63511,7 +63511,7 @@
 		(dnp no)
 		(uuid "b5362f62-2d7c-536e-b8a4-f234e7de4645")
 		(property "Reference" "U8"
-			(at 52.07 185.42 0)
+			(at 52.07 187.96 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -63521,7 +63521,8 @@
 			)
 		)
 		(property "Value" "TLV8801DBVT"
-			(at 50.8 208.28 0)
+			(at 50.8 210.82 0)
+			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -63531,7 +63532,7 @@
 			)
 		)
 		(property "Footprint" "lib:Stratolink_v1p1_U8_SOT-23-5"
-			(at 50.8 190.5 0)
+			(at 50.8 193.04 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -63542,7 +63543,7 @@
 			)
 		)
 		(property "Datasheet" "https://www.ti.com/lit/ds/symlink/tlv8801.pdf"
-			(at 50.8 190.5 0)
+			(at 50.8 193.04 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -63553,7 +63554,7 @@
 			)
 		)
 		(property "Description" "Active midpoint balancer pilot"
-			(at 50.8 190.5 0)
+			(at 50.8 193.04 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -63564,7 +63565,7 @@
 			)
 		)
 		(property "MPN" "TLV8801DBVT"
-			(at 50.8 190.5 0)
+			(at 50.8 193.04 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -63575,7 +63576,7 @@
 			)
 		)
 		(property "LCSC Part #" "C544879"
-			(at 50.8 190.5 0)
+			(at 50.8 193.04 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -63586,7 +63587,7 @@
 			)
 		)
 		(property "Supplier Part" "C544879"
-			(at 50.8 190.5 0)
+			(at 50.8 193.04 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -63597,7 +63598,7 @@
 			)
 		)
 		(property "Manufacturer_Part_Number" "TLV8801DBVT"
-			(at 50.8 190.5 0)
+			(at 50.8 193.04 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -64310,7 +64311,7 @@
 	)
 	(symbol
 		(lib_id "Stratolink_v1p1_Symbols:Device_R_US")
-		(at 25.4 184.15 0)
+		(at 25.4 186.69 0)
 		(unit 1)
 		(body_style 1)
 		(exclude_from_sim no)
@@ -64320,7 +64321,7 @@
 		(dnp no)
 		(uuid "c09c0a0e-cba8-562e-b648-500c761d4e09")
 		(property "Reference" "R24"
-			(at 29.4 181.15 0)
+			(at 29.4 183.69 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -64330,7 +64331,7 @@
 			)
 		)
 		(property "Value" "4.75MΩ"
-			(at 32.4 185.15 0)
+			(at 32.4 187.69 0)
 			(show_name no)
 			(do_not_autoplace no)
 			(effects
@@ -64340,7 +64341,7 @@
 			)
 		)
 		(property "Footprint" "lib:Stratolink_v1p1_R24_R_0402_1005Metric"
-			(at 25.4 184.15 0)
+			(at 25.4 186.69 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -64351,7 +64352,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 25.4 184.15 0)
+			(at 25.4 186.69 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -64362,7 +64363,7 @@
 			)
 		)
 		(property "Description" "Active midpoint balancer pilot"
-			(at 25.4 184.15 0)
+			(at 25.4 186.69 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -64373,7 +64374,7 @@
 			)
 		)
 		(property "MPN" "FRC0402F4754TS"
-			(at 25.4 184.15 0)
+			(at 25.4 186.69 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -64384,7 +64385,7 @@
 			)
 		)
 		(property "LCSC Part #" "C2998153"
-			(at 25.4 184.15 0)
+			(at 25.4 186.69 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -64395,7 +64396,7 @@
 			)
 		)
 		(property "Supplier Part" "C2998153"
-			(at 25.4 184.15 0)
+			(at 25.4 186.69 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
@@ -64406,7 +64407,7 @@
 			)
 		)
 		(property "Manufacturer_Part_Number" "FRC0402F4754TS"
-			(at 25.4 184.15 0)
+			(at 25.4 186.69 0)
 			(hide yes)
 			(show_name no)
 			(do_not_autoplace no)
