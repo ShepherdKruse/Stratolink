@@ -131,6 +131,41 @@
       "original": "cd6f3844f5324d82cbfdb1b5bebac8a101b0e676",
       "review_branch": "a349d487419ae3f48c504ea39ce9a2be6339d3e2",
       "subject": "Package v1.1 KiCad project and parts libraries for download"
+    },
+    {
+      "original": "906847e4655faa66a75b71af1f61177794cee2d7",
+      "review_branch": "10c5c7f507444191de34d46262d5a6ef045db3b9",
+      "subject": "Record engineer reroute and strict initial hardware checks"
+    },
+    {
+      "original": "b6157cfcd0e4d2440c0f64b0bb3bd5abcaae8bbf",
+      "review_branch": "8cbb7f1009d5fb49d63288cb68f78c7a25baea7e",
+      "subject": "Adopt engineer reroute with local continuity and mask repairs"
+    },
+    {
+      "original": "8ba8786d463d8ab7370269710be006de3ab7dd80",
+      "review_branch": "189050d97f1717c036f5caf7597c62096d02c9a0",
+      "subject": "Record rerouted assembly orientation draft for fresh supplier review"
+    },
+    {
+      "original": "5b37d5800f2429fddb260e919fa9ab081a20882a",
+      "review_branch": "4c587b5f46356c6ccdf6874d0026ac21327af3e3",
+      "subject": "Verify footprints and models from fresh KiCad download bundles"
+    },
+    {
+      "original": "de1557b6ae24e494523ea0b058817158dc958528",
+      "review_branch": "ecd72f8c228cf341d518cca826c145ccfa9faeb1",
+      "subject": "Rebuild pilot manufacturing and KiCad downloads from engineer review"
+    },
+    {
+      "original": "7a9edeb2e0579967186db840a299fce055ea36d6",
+      "review_branch": "b4577b00e9b0bdae1b9d747cddfb2de13b13b0f4",
+      "subject": "Document final reroute checks, local repairs and assembly review"
+    },
+    {
+      "original": "0027af4e2c6d9142c7ee323a42818a121f2c471c",
+      "review_branch": "9eb340cc9a5abf7484e131dd59c732981ee4f0c7",
+      "subject": "Bind final reroute evidence to the pilot source and exports"
     }
   ]
 }
